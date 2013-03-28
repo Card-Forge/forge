@@ -29,33 +29,7 @@ import forge.gui.GuiDialog;
  * The Class CostPayLife.
  */
 public class CostDamage extends CostPart {
-    private int lastPaidAmount = 0;
 
-    /**
-     * Gets the last paid amount.
-     * 
-     * @return the last paid amount
-     */
-    public final int getLastPaidAmount() {
-        return this.lastPaidAmount;
-    }
-
-    /**
-     * Sets the last paid amount.
-     * 
-     * @param paidAmount
-     *            the new last paid amount
-     */
-    public final void setLastPaidAmount(final int paidAmount) {
-        this.lastPaidAmount = paidAmount;
-    }
-
-    /**
-     * Instantiates a new cost pay life.
-     * 
-     * @param amount
-     *            the amount
-     */
     public CostDamage(final String amount) {
         this.setAmount(amount);
     }
@@ -91,8 +65,8 @@ public class CostDamage extends CostPart {
      * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final void payAI(final AIPlayer ai, final SpellAbility ability, final Card source, final CostPayment payment, final GameState game) {
-        ability.getActivatingPlayer().addDamage(this.getLastPaidAmount(), source);
+    public final void payAI(final PaymentDecision decision, final AIPlayer ai, SpellAbility ability, Card source) {
+        ability.getActivatingPlayer().addDamage(decision.c, source);
     }
 
     /*
@@ -139,21 +113,19 @@ public class CostDamage extends CostPart {
      * , forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final boolean decideAIPayment(final AIPlayer ai, final SpellAbility ability, final Card source, final CostPayment payment) {
+    public final PaymentDecision decideAIPayment(final AIPlayer ai, final SpellAbility ability, final Card source) {
         Integer c = this.convertAmount();
 
         if (c == null) {
             final String sVar = ability.getSVar(this.getAmount());
             // Generalize this
             if (sVar.equals("XChoice")) {
-                return false;
+                return null; // cannot pay
             } else {
                 c = AbilityUtils.calculateAmount(source, this.getAmount(), ability);
             }
         }
 
-        // activator.payLife(c, null);
-        this.setLastPaidAmount(c);
-        return true;
+        return new PaymentDecision(c);
     }
 }

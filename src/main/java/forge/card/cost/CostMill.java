@@ -17,12 +17,9 @@
  */
 package forge.card.cost;
 
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import forge.Card;
-import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.spellability.SpellAbility;
 import forge.game.GameState;
@@ -47,6 +44,14 @@ public class CostMill extends CostPartWithList {
      */
     public CostMill(final String amount) {
         this.setAmount(amount);
+    }
+
+    /* (non-Javadoc)
+     * @see forge.card.cost.CostPartWithList#getHashForList()
+     */
+    @Override
+    public String getHashForList() {
+        return "Milled";
     }
 
     /*
@@ -78,50 +83,6 @@ public class CostMill extends CostPartWithList {
      * (non-Javadoc)
      * 
      * @see
-     * forge.card.cost.CostPart#decideAIPayment(forge.card.spellability.SpellAbility
-     * , forge.Card, forge.card.cost.Cost_Payment)
-     */
-    @Override
-    public final boolean decideAIPayment(final AIPlayer ai, final SpellAbility ability, final Card source, final CostPayment payment) {
-        this.resetList();
-
-        Integer c = this.convertAmount();
-        if (c == null) {
-            final String sVar = ability.getSVar(this.getAmount());
-            // Generalize this
-            if (sVar.equals("XChoice")) {
-                return false;
-            }
-
-            c = AbilityUtils.calculateAmount(source, this.getAmount(), ability);
-        }
-
-        this.setList(new ArrayList<Card>(ai.getCardsIn(ZoneType.Library, c)));
-
-        if ((this.getList() == null) || (this.getList().size() < c)) {
-            return false;
-        }
-
-        return true;
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see forge.card.cost.CostPart#payAI(forge.card.spellability.SpellAbility,
-     * forge.Card, forge.card.cost.Cost_Payment)
-     */
-    @Override
-    public final void payAI(final AIPlayer ai, final SpellAbility ability, final Card source, final CostPayment payment, final GameState game) {
-        for (final Card c : this.getList()) {
-            Singletons.getModel().getGame().getAction().moveToGraveyard(c);
-        }
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
      * forge.card.cost.CostPart#payHuman(forge.card.spellability.SpellAbility,
      * forge.Card, forge.card.cost.Cost_Payment)
      */
@@ -143,21 +104,13 @@ public class CostMill extends CostPartWithList {
         }
         final List<Card> list = activator.getCardsIn(ZoneType.Library, c);
 
-        if ((list == null) || (list.size() > c)) {
-            // I don't believe this is possible
-            return false;
-        }
-
         final StringBuilder sb = new StringBuilder();
         sb.append("Mill ").append(c).append(" cards from your library?");
 
         if ( false == GuiDialog.confirm(source, sb.toString()) )
             return false;
-        
-        this.resetList();
-        final Iterator<Card> itr = list.iterator();
-        while (itr.hasNext()) {
-            final Card card = itr.next();
+
+        for(final Card card : list) { // this list is a copy, no exception expected
             executePayment(ability, card);
         }
         return true;
@@ -193,17 +146,27 @@ public class CostMill extends CostPartWithList {
      * @see forge.card.cost.CostPartWithList#executePayment(forge.card.spellability.SpellAbility, forge.Card)
      */
     @Override
-    public void executePayment(SpellAbility ability, Card targetCard) {
-        this.addToList(targetCard);
+    protected void doPayment(SpellAbility ability, Card targetCard) {
         ability.getActivatingPlayer().getGame().getAction().moveToGraveyard(targetCard);
     }
 
     /* (non-Javadoc)
-     * @see forge.card.cost.CostPartWithList#getHashForList()
+     * @see forge.card.cost.CostPart#decideAIPayment(forge.game.player.AIPlayer, forge.card.spellability.SpellAbility, forge.Card)
      */
     @Override
-    public String getHashForList() {
-        return "Milled";
+    public PaymentDecision decideAIPayment(AIPlayer ai, SpellAbility ability, Card source) {
+        Integer c = this.convertAmount();
+        if (c == null) {
+            final String sVar = ability.getSVar(this.getAmount());
+            // Generalize this
+            if (sVar.equals("XChoice")) {
+                return null;
+            }
+    
+            c = AbilityUtils.calculateAmount(source, this.getAmount(), ability);
+        }
+    
+        List<Card> topLib = ai.getCardsIn(ZoneType.Library, c);
+        return topLib.size() < c ? null : new PaymentDecision(topLib);
     }
-
 }

@@ -76,17 +76,6 @@ public class CostUntap extends CostPart {
     /*
      * (non-Javadoc)
      * 
-     * @see forge.card.cost.CostPart#payAI(forge.card.spellability.SpellAbility,
-     * forge.Card, forge.card.cost.Cost_Payment)
-     */
-    @Override
-    public final void payAI(final AIPlayer ai, final SpellAbility ability, final Card source, final CostPayment payment, final GameState game) {
-        source.untap();
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
      * @see
      * forge.card.cost.CostPart#payHuman(forge.card.spellability.SpellAbility,
      * forge.Card, forge.card.cost.Cost_Payment)
@@ -101,15 +90,19 @@ public class CostUntap extends CostPart {
         return true;
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * forge.card.cost.CostPart#decideAIPayment(forge.card.spellability.SpellAbility
-     * , forge.Card, forge.card.cost.Cost_Payment)
+    /* (non-Javadoc)
+     * @see forge.card.cost.CostPart#decideAIPayment(forge.game.player.AIPlayer, forge.card.spellability.SpellAbility, forge.Card)
      */
     @Override
-    public final boolean decideAIPayment(final AIPlayer ai, final SpellAbility ability, final Card source, final CostPayment payment) {
-        return true;
+    public PaymentDecision decideAIPayment(AIPlayer ai, SpellAbility ability, Card source) {
+        return new PaymentDecision(0);
+    }
+
+    /* (non-Javadoc)
+     * @see forge.card.cost.CostPart#payAI(forge.card.cost.PaymentDecision, forge.game.player.AIPlayer, forge.card.spellability.SpellAbility, forge.Card)
+     */
+    @Override
+    public void payAI(PaymentDecision decision, AIPlayer ai, SpellAbility ability, Card source) {
+        source.untap();
     }
 }

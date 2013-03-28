@@ -21,11 +21,11 @@ public class FThreads {
     
     private FThreads() { } // no instances supposed
     
-    private final static ExecutorService threadPool = Executors.newCachedThreadPool();
-    private static ExecutorService getCachedPool() { return threadPool; }
-    private final static ScheduledExecutorService scheduledPool = Executors.newScheduledThreadPool(1);
+    private final static ExecutorService cachedPool = Executors.newCachedThreadPool();
+    private static ExecutorService getCachedPool() { return cachedPool; }
+    private final static ScheduledExecutorService scheduledPool = Executors.newScheduledThreadPool(2);
     private static ScheduledExecutorService getScheduledPool() { return scheduledPool; }
-    
+
     // This pool is designed to parallel CPU or IO intensive tasks like parse cards or download images, assuming a load factor of 0.5
     public final static ExecutorService getComputingPool(float loadFactor) {
         return Executors.newFixedThreadPool((int)(Runtime.getRuntime().availableProcessors() / (1-loadFactor)));

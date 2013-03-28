@@ -17,13 +17,13 @@
  */
 package forge.card.cost;
 
-import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
-import java.util.Set;
-
 import forge.Card;
 import forge.CardUtil;
 import forge.card.spellability.SpellAbility;
+import forge.game.player.AIPlayer;
 
 /**
  * The Class CostPartWithList.
@@ -31,7 +31,7 @@ import forge.card.spellability.SpellAbility;
 public abstract class CostPartWithList extends CostPart {
 
     /** The list. */
-    private Set<Card> list = new HashSet<Card>(); 
+    private final List<Card> list = new ArrayList<Card>(); 
     // set is here because executePayment() adds card to list, while ai's decide payment does the same thing.
     // set allows to avoid duplication
 
@@ -40,19 +40,8 @@ public abstract class CostPartWithList extends CostPart {
      * 
      * @return the list
      */
-    public final Set<Card> getList() {
+    public final List<Card> getList() {
         return this.list;
-    }
-
-    /**
-     * Sets the list.
-     * 
-     * @param setList
-     *            the new list
-     */
-    public final void setList(final List<Card> setList) {
-        this.list.clear();
-        list.addAll(setList);
     }
 
     /**
@@ -62,13 +51,7 @@ public abstract class CostPartWithList extends CostPart {
         this.list.clear();
     }
 
-    /**
-     * Adds the to list.
-     * 
-     * @param c
-     *            the c
-     */
-    public final void addToList(final Card c) {
+    protected final void addToList(final Card c) {
         this.list.add(c);
     }
 
@@ -105,14 +88,33 @@ public abstract class CostPartWithList extends CostPart {
      */
     public CostPartWithList(final String amount, final String type, final String description) {
         super(amount, type, description);
-        this.resetList();
     }
-    
-    public abstract void executePayment(SpellAbility ability, Card targetCard);
+
+    public final boolean executePayment(SpellAbility ability, Card targetCard) {
+        addToList(targetCard);
+        doPayment(ability, targetCard);
+        return true;
+    }
+
+    // always returns true, made this to inline with return
+    public final boolean executePayment(SpellAbility ability, Collection<Card> targetCards) {
+        for(Card c: targetCards)
+            executePayment(ability, c);
+        return true;
+    }
+
+    protected abstract void doPayment(SpellAbility ability, Card targetCard);
 
     /**
      * TODO: Write javadoc for this method.
      * @return
      */
     public abstract String getHashForList();
+    
+    @Override
+    public void payAI(PaymentDecision decision, AIPlayer ai, SpellAbility ability, Card source) {
+        executePayment(ability, decision.cards);
+        reportPaidCardsTo(ability);
+    }
+
 }

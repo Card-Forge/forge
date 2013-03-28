@@ -19,6 +19,7 @@ package forge.gui;
 
 import java.util.Observable;
 import java.util.Observer;
+import java.util.concurrent.atomic.AtomicReference;
 
 import forge.Card;
 import forge.FThreads;
@@ -39,7 +40,7 @@ import forge.game.player.Player;
 public class InputProxy implements Observer {
 
     /** The input. */
-    private Input input;
+    private AtomicReference<Input> input = new AtomicReference<Input>();
     private MatchController match = null;
 
     public void setMatch(MatchController matchController) {
@@ -48,7 +49,7 @@ public class InputProxy implements Observer {
     
     @Override
     public final synchronized void update(final Observable observable, final Object obj) {
-        this.input = null;
+        this.input.set(null);
         final GameState game = match.getCurrentGame();
         final PhaseHandler ph = game.getPhaseHandler();
         
@@ -68,7 +69,7 @@ public class InputProxy implements Observer {
         //System.out.printf(" input is %s \t stack = %s%n", nextInput == null ? "null" : nextInput.getClass().getSimpleName(), match.getInput().printInputStack());
         
         if (nextInput != null) {
-            this.input = nextInput;
+            this.input.set(nextInput);
             FThreads.invokeInEDT(new Runnable() { @Override public void run() { nextInput.showMessage(); } });
         } else if (!ph.isPlayerPriorityAllowed()) {
             ph.getPriorityPlayer().getController().passPriority();
@@ -80,8 +81,9 @@ public class InputProxy implements Observer {
      * </p>
      */
     public final void selectButtonOK() {
-        if ( null == input ) return;
-        input.selectButtonOK();
+        Input inp = getInput();
+        if ( null != inp )
+            inp.selectButtonOK();
     }
 
     /**
@@ -90,8 +92,9 @@ public class InputProxy implements Observer {
      * </p>
      */
     public final void selectButtonCancel() {
-        if ( null == input ) return;
-        input.selectButtonCancel();
+        Input inp = getInput();
+        if ( null != inp )
+            inp.selectButtonCancel();
     }
 
     /**
@@ -103,8 +106,9 @@ public class InputProxy implements Observer {
      *            a {@link forge.game.player.Player} object.
      */
     public final void selectPlayer(final Player player) {
-        if ( null == input ) return;
-        input.selectPlayer(player);
+        Input inp = getInput();
+        if ( null != inp )
+            inp.selectPlayer(player);
     }
 
     /**
@@ -118,19 +122,20 @@ public class InputProxy implements Observer {
      *            a {@link forge.game.zone.PlayerZone} object.
      */
     public final void selectCard(final Card card) {
-        if ( null == input ) return;
-        input.selectCard(card);
+        Input inp = getInput();
+        if ( null != inp )
+            inp.selectCard(card);
     }
 
     /** {@inheritDoc} */
     @Override
     public final String toString() {
-        if ( null == input ) return "(null)"; 
-        return this.input.toString();
+        Input inp = getInput();
+        return null == inp ? "(null)" : inp.toString();
     }
 
     /** @return {@link forge.gui.InputProxy.InputBase} */
     public Input getInput() {
-        return this.input;
+        return this.input.get();
     }
 }

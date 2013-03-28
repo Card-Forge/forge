@@ -183,6 +183,7 @@ public class CostRemoveCounter extends CostPartWithList {
 
     private final CounterType counter;
     private int lastPaidAmount = 0;
+    private int cntCounters = 1;
     private ZoneType zone;
 
     /**
@@ -320,14 +321,11 @@ public class CostRemoveCounter extends CostPartWithList {
         return true;
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see forge.card.cost.CostPart#payAI(forge.card.spellability.SpellAbility,
-     * forge.Card, forge.card.cost.Cost_Payment)
+    /* (non-Javadoc)
+     * @see forge.card.cost.CostPartWithList#payAI(forge.card.cost.PaymentDecision, forge.game.player.AIPlayer, forge.card.spellability.SpellAbility, forge.Card)
      */
     @Override
-    public final void payAI(final AIPlayer ai, final SpellAbility ability, final Card source, final CostPayment payment, final GameState game) {
+    public void payAI(PaymentDecision decision, AIPlayer ai, SpellAbility ability, Card source) {
         final String amount = this.getAmount();
         Integer c = this.convertAmount();
         if (c == null) {
@@ -339,10 +337,10 @@ public class CostRemoveCounter extends CostPartWithList {
         }
 
         if (this.payCostFromSource()) {
-            source.subtractCounter(this.counter, c);
+            executePayment(ability, source);
         } else {
-            for (final Card card : this.getList()) {
-                card.subtractCounter(this.counter, c);
+            for (final Card card : decision.cards) {
+                executePayment(ability, card);
             }
         }
         source.setSVar("CostCountersRemoved", "Number$" + Integer.toString(c));
@@ -361,69 +359,66 @@ public class CostRemoveCounter extends CostPartWithList {
         final Card source = ability.getSourceCard();
         Integer c = this.convertAmount();
         int maxCounters = 0;
-
-        if (!this.payCostFromSource()) {
-            if (c == null) {
-                final String sVar = ability.getSVar(amount);
-                // Generalize this
-                if (sVar.equals("XChoice")) {
-                    c = CostUtil.chooseXValue(source, ability, maxCounters);
-                } else {
-                    c = AbilityUtils.calculateAmount(source, amount, ability);
-                }
+        
+        if (amount.equals("All"))
+            cntCounters = maxCounters;
+        else if (c == null) {
+            final String sVar = ability.getSVar(amount);
+            if (sVar.equals("XChoice")) {
+                cntCounters = CostUtil.chooseXValue(source, ability, maxCounters);
+            } else {
+                cntCounters = AbilityUtils.calculateAmount(source, amount, ability);
             }
+        } else cntCounters = c;
 
+        
+        
+        if (!this.payCostFromSource()) {
             final InputPayment inp;
             if (this.getZone().equals(ZoneType.Battlefield)) {
-                inp = new InputPayCostRemoveCounterType(c, ability, this.getType(), this);
+                inp = new InputPayCostRemoveCounterType(cntCounters, ability, this.getType(), this);
             } else {
-                inp = new InputPayCostRemoveCounterFrom(this, this.getType(), ability, c);
+                inp = new InputPayCostRemoveCounterFrom(this, this.getType(), ability, cntCounters);
             }
             FThreads.setInputAndWait(inp);
+            if( inp.isPaid() ) source.setSVar("CostCountersRemoved", "Number$" + Integer.toString(c));
             return inp.isPaid();
         }
 
         maxCounters = source.getCounters(this.counter);
-        if (amount.equals("All")) {
-            c = maxCounters;
-        } else {
-            if (c == null) {
-                final String sVar = ability.getSVar(amount);
-                // Generalize this
-                if (sVar.equals("XChoice")) {
-                    c = CostUtil.chooseXValue(source, ability, maxCounters);
-                } else {
-                    c = AbilityUtils.calculateAmount(source, amount, ability);
-                }
-            }
-        }
-
         if (maxCounters < c) return false;
             
-        
-        this.addToList(source);
         source.setSVar("CostCountersRemoved", "Number$" + Integer.toString(c));
-        executePayment(ability, source, c);
+        executePayment(ability, source);
         return true;
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * forge.card.cost.CostPart#decideAIPayment(forge.card.spellability.SpellAbility
-     * , forge.Card, forge.card.cost.Cost_Payment)
+    @Override
+    protected void doPayment(SpellAbility ability, Card targetCard){
+        targetCard.subtractCounter(this.getCounter(), cntCounters);
+    }
+    
+    /* (non-Javadoc)
+     * @see forge.card.cost.CostPartWithList#getHashForList()
      */
     @Override
-    public final boolean decideAIPayment(final AIPlayer ai, final SpellAbility ability, final Card source, final CostPayment payment) {
+    public String getHashForList() {
+        return "CounterRemove";
+    }
+
+    /* (non-Javadoc)
+     * @see forge.card.cost.CostPart#decideAIPayment(forge.game.player.AIPlayer, forge.card.spellability.SpellAbility, forge.Card)
+     */
+    @Override
+    public PaymentDecision decideAIPayment(AIPlayer ai, SpellAbility ability, Card source) {
         final String amount = this.getAmount();
         Integer c = this.convertAmount();
-
-
+    
+    
         if (c == null) {
             final String sVar = ability.getSVar(amount);
             if (sVar.equals("XChoice")) {
-                return false;
+                return null;
             }
             if (amount.equals("All")) {
                 c = source.getCounters(this.counter);
@@ -431,43 +426,22 @@ public class CostRemoveCounter extends CostPartWithList {
                 c = AbilityUtils.calculateAmount(source, amount, ability);
             }
         }
-
+    
         if (!this.payCostFromSource()) {
-            this.getList().clear();
             final List<Card> typeList =
                     CardLists.getValidCards(ai.getCardsIn(this.getZone()), this.getType().split(";"), ai, source);
             for (Card card : typeList) {
                 if (card.getCounters(this.getCounter()) >= c) {
-                    this.addToList(card);
-                    return true;
+                    return new PaymentDecision(card);
                 }
             }
-            return false;
-        }
+            return null;
+        } 
+        
         if (c > source.getCounters(this.getCounter())) {
             System.out.println("Not enough " + this.counter + " on " + source.getName());
-            return false;
+            return null;
         }
-        return true;
-    }
-
-    /* (non-Javadoc)
-     * @see forge.card.cost.CostPartWithList#executePayment(forge.card.spellability.SpellAbility, forge.Card)
-     */
-    @Override
-    public void executePayment(SpellAbility ability, Card targetCard) {
-        executePayment(ability, targetCard, 1);
-    }
-
-    public void executePayment(SpellAbility ability, Card targetCard, int n) {
-        addToList(targetCard);
-        targetCard.subtractCounter(getCounter(), n);
-    }
-    /* (non-Javadoc)
-     * @see forge.card.cost.CostPartWithList#getHashForList()
-     */
-    @Override
-    public String getHashForList() {
-        return "CounterRemove";
+        return new PaymentDecision(source);
     }
 }

@@ -33,26 +33,6 @@ import forge.gui.GuiChoose;
  */
 public class CostGainLife extends CostPart {
     private final int cntPlayers; // MAX_VALUE means ALL/EACH PLAYERS
-    private int lastPaidAmount = 0;
-
-    /**
-     * Gets the last paid amount.
-     * 
-     * @return the last paid amount
-     */
-    public final int getLastPaidAmount() {
-        return this.lastPaidAmount;
-    }
-
-    /**
-     * Sets the last paid amount.
-     * 
-     * @param paidAmount
-     *            the new last paid amount
-     */
-    public final void setLastPaidAmount(final int paidAmount) {
-        this.lastPaidAmount = paidAmount;
-    }
 
     /**
      * Instantiates a new cost gain life.
@@ -109,7 +89,7 @@ public class CostGainLife extends CostPart {
             }
         }
 
-        return cntPlayers < Integer.MAX_VALUE ? cntAbleToGainLife >= cntPlayers : cntAbleToGainLife == possibleTargets.size();
+        return cntAbleToGainLife >= cntPlayers || cntPlayers == Integer.MAX_VALUE && cntAbleToGainLife == possibleTargets.size();
     }
 
     /*
@@ -119,12 +99,12 @@ public class CostGainLife extends CostPart {
      * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final void payAI(final AIPlayer ai, final SpellAbility ability, final Card source, final CostPayment payment, final GameState game) {
+    public final void payAI(final PaymentDecision decision, final AIPlayer ai, SpellAbility ability, Card source) {
         int playersLeft = cntPlayers;
-        for (final Player opp : getPotentialTargets(game, ai, source)) {
+        for (final Player opp : getPotentialTargets(ai.getGame(), ai, source)) {
             if (opp.canGainLife() && playersLeft > 0) {
                 playersLeft--;
-                opp.gainLife(this.getLastPaidAmount(), null);
+                opp.gainLife(decision.c, null);
             }
         }
     }
@@ -190,15 +170,13 @@ public class CostGainLife extends CostPart {
      * , forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final boolean decideAIPayment(final AIPlayer ai, final SpellAbility ability, final Card source, final CostPayment payment) {
-
-
+    public final PaymentDecision decideAIPayment(final AIPlayer ai, final SpellAbility ability, final Card source) {
         Integer c = this.convertAmount();
         if (c == null) {
             final String sVar = ability.getSVar(this.getAmount());
             // Generalize this
             if (sVar.equals("XChoice")) {
-                return false;
+                return null;
             } else {
                 c = AbilityUtils.calculateAmount(source, this.getAmount(), ability);
             }
@@ -212,9 +190,9 @@ public class CostGainLife extends CostPart {
         }
 
         if (oppsThatCanGainLife.size() == 0) {
-            return false;
+            return null;
         }
-        this.setLastPaidAmount(c);
-        return true;
+
+        return new PaymentDecision(c);
     }
 }

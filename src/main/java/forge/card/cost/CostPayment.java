@@ -18,8 +18,9 @@
 package forge.card.cost;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-
+import java.util.Map;
 import forge.Card;
 import forge.card.spellability.SpellAbility;
 import forge.game.GameState;
@@ -181,15 +182,17 @@ public class CostPayment {
             parts.add(new CostPartMana("0", 0, false));
         }
 
+        Map<Class<? extends CostPart>, PaymentDecision> decisions = new HashMap<Class<? extends CostPart>, PaymentDecision>();
+        
         // Set all of the decisions before attempting to pay anything
         for (final CostPart part : parts) {
-            if (!part.decideAIPayment(ai, this.ability, source, this)) {
-                return false;
-            }
+            PaymentDecision decision = part.decideAIPayment(ai, this.ability, source);
+            if ( null == decision ) return false;
+            decisions.put(part.getClass(), decision);
         }
 
         for (final CostPart part : parts) {
-            part.payAI(ai, this.ability, this.ability.getSourceCard(), this, game);
+            part.payAI(decisions.get(part.getClass()), ai, this.ability, this.ability.getSourceCard());
         }
         return true;
     }

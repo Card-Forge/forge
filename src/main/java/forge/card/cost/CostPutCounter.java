@@ -217,16 +217,14 @@ public class CostPutCounter extends CostPartWithList {
      * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final void payAI(final AIPlayer ai, final SpellAbility ability, final Card source, final CostPayment payment, final GameState game) {
+    public void payAI(PaymentDecision decision, AIPlayer ai, SpellAbility ability, Card source) {
         Integer c = getNumberOfCounters(ability);
 
         if (this.payCostFromSource()) {
             executePayment(ability, source, c);
         } else {
             // Put counter on chosen card
-            for (final Card card : this.getList()) {
-                executePayment(ability, card);
-            }
+            executePayment(ability, decision.cards);
         }
     }
 
@@ -260,49 +258,50 @@ public class CostPutCounter extends CostPartWithList {
         return c;
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * forge.card.cost.CostPart#decideAIPayment(forge.card.spellability.SpellAbility
-     * , forge.Card, forge.card.cost.Cost_Payment)
-     */
-    @Override
-    public final boolean decideAIPayment(final AIPlayer ai, final SpellAbility ability, final Card source, final CostPayment payment) {
-        this.resetList();
-        if (this.payCostFromSource()) {
-            this.addToList(source);
-            return true;
-        } else {
-            final List<Card> typeList = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), this.getType().split(";"), ai, source);
-
-            Card card = null;
-            if (this.getType().equals("Creature.YouCtrl")) {
-                card = ComputerUtilCard.getWorstCreatureAI(typeList);
-            } else {
-                card = ComputerUtilCard.getWorstPermanentAI(typeList, false, false, false, false);
-            }
-            this.addToList(card);
-        }
-        return true;
-    }
-
     /* (non-Javadoc)
      * @see forge.card.cost.CostPartWithList#executePayment(forge.card.spellability.SpellAbility, forge.Card)
      */
     @Override
-    public void executePayment(SpellAbility ability, Card targetCard){
-        executePayment(ability, targetCard, 1);
+    protected void doPayment(SpellAbility ability, Card targetCard){
+        targetCard.addCounter(this.getCounter(), 1, false);
     }
     
-    public void executePayment(SpellAbility ability, Card targetCard, int c) {
-        targetCard.addCounter(this.getCounter(), c, false);
-        this.addToList(targetCard);
+    protected void executePayment(SpellAbility ability, Card targetCard, int c) {
+        CounterType counterType = this.getCounter();
+        if( c > 1 ) {
+            Integer oldValue = targetCard.getCounters().get(counterType);
+            int newValue = c + (oldValue == null ? 0 : oldValue.intValue()) - 1;
+            targetCard.getCounters().put(counterType, Integer.valueOf(newValue));
+        }
+        // added c - 1 without firing triggers, the last counter added should fire trigger.
+        executePayment(ability, targetCard);
     }
 
 
     @Override
     public String getHashForList() {
         return "CounterPut";
+    }
+
+    /* (non-Javadoc)
+     * @see forge.card.cost.CostPart#decideAIPayment(forge.game.player.AIPlayer, forge.card.spellability.SpellAbility, forge.Card)
+     */
+    @Override
+    public PaymentDecision decideAIPayment(AIPlayer ai, SpellAbility ability, Card source) {
+
+        if (this.payCostFromSource()) {
+            return new PaymentDecision(source);
+
+        }
+
+        final List<Card> typeList = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), this.getType().split(";"), ai, source);
+
+        Card card = null;
+        if (this.getType().equals("Creature.YouCtrl")) {
+            card = ComputerUtilCard.getWorstCreatureAI(typeList);
+        } else {
+            card = ComputerUtilCard.getWorstPermanentAI(typeList, false, false, false, false);
+        }
+        return new PaymentDecision(card);
     }
 }

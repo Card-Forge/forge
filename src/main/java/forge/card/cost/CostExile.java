@@ -508,28 +508,6 @@ public class CostExile extends CostPartWithList {
     /*
      * (non-Javadoc)
      * 
-     * @see forge.card.cost.CostPart#payAI(forge.card.spellability.SpellAbility,
-     * forge.Card, forge.card.cost.Cost_Payment)
-     */
-    @Override
-    public final void payAI(final AIPlayer ai, final SpellAbility ability, final Card source, final CostPayment payment, final GameState game) {
-        for (final Card c : this.getList()) {
-            Singletons.getModel().getGame().getAction().exile(c);
-            if (this.from.equals(ZoneType.Stack)) {
-                ArrayList<SpellAbility> spells = c.getSpellAbilities();
-                for (SpellAbility spell : spells) {
-                    if (c.isInZone(ZoneType.Exile)) {
-                        final SpellAbilityStackInstance si = Singletons.getModel().getGame().getStack().getInstanceFromSpellAbility(spell);
-                        Singletons.getModel().getGame().getStack().remove(si);
-                    }
-                }
-            }
-        }
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
      * @see
      * forge.card.cost.CostPart#payHuman(forge.card.spellability.SpellAbility,
      * forge.Card, forge.card.cost.Cost_Payment)
@@ -597,51 +575,7 @@ public class CostExile extends CostPartWithList {
 
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * forge.card.cost.CostPart#decideAIPayment(forge.card.spellability.SpellAbility
-     * , forge.Card, forge.card.cost.Cost_Payment)
-     */
-    @Override
-    public final boolean decideAIPayment(final AIPlayer ai, final SpellAbility ability, final Card source, final CostPayment payment) {
-        this.resetList();
-        if (this.payCostFromSource()) {
-            this.getList().add(source);
-        } else if (this.getType().equals("All")) {
-            this.setList(new ArrayList<Card>(ability.getActivatingPlayer().getCardsIn(this.getFrom())));
-        } else {
-            Integer c = this.convertAmount();
-            if (c == null) {
-                final String sVar = ability.getSVar(this.getAmount());
-                // Generalize this
-                if (sVar.equals("XChoice")) {
-                    return false;
-                }
-
-                if (sVar.equals("YChoice")) {
-                        return false;
-                }
-
-                c = AbilityUtils.calculateAmount(source, this.getAmount(), ability);
-            }
-
-            if (this.from.equals(ZoneType.Library)) {
-                this.setList(ai.getCardsIn(ZoneType.Library, c));
-            } else if (this.sameZone) {
-              // TODO Determine exile from same zone for AI
-              return false;
-            } else {
-                this.setList(ComputerUtil.chooseExileFrom(ai, this.getFrom(), this.getType(), source,
-                        ability.getTargetCard(), c));
-            }
-            if ((this.getList() == null) || (this.getList().size() < c)) {
-                return false;
-            }
-        }
-        return true;
-    }
+    
 
     // Inputs
 
@@ -683,8 +617,7 @@ public class CostExile extends CostPartWithList {
      * @see forge.card.cost.CostPartWithList#executePayment(forge.card.spellability.SpellAbility, forge.Card)
      */
     @Override
-    public void executePayment(SpellAbility ability, Card targetCard) {
-        addToList(targetCard);
+    protected void doPayment(SpellAbility ability, Card targetCard) {
         ability.getActivatingPlayer().getGame().getAction().exile(targetCard);
     }
 
@@ -695,5 +628,58 @@ public class CostExile extends CostPartWithList {
     public String getHashForList() {
         // TODO Auto-generated method stub
         return "Exiled";
+    }
+
+    /* (non-Javadoc)
+     * @see forge.card.cost.CostPart#decideAIPayment(forge.game.player.AIPlayer, forge.card.spellability.SpellAbility, forge.Card)
+     */
+    @Override
+    public PaymentDecision decideAIPayment(AIPlayer ai, SpellAbility ability, Card source) {
+        if (this.payCostFromSource()) {
+            return new PaymentDecision(source);
+        } 
+
+        if (this.getType().equals("All")) {
+            return new PaymentDecision(new ArrayList<Card>(ai.getCardsIn(this.getFrom())));
+        }
+        
+        
+        Integer c = this.convertAmount();
+        if (c == null) {
+            final String sVar = ability.getSVar(this.getAmount());
+            // Generalize this
+            if (sVar.equals("XChoice") || sVar.equals("YChoice")) {
+                return null;
+            }
+            c = AbilityUtils.calculateAmount(source, this.getAmount(), ability);
+        }
+
+        if (this.from.equals(ZoneType.Library)) {
+            return new PaymentDecision(ai.getCardsIn(ZoneType.Library, c));
+        } else if (this.sameZone) {
+            // TODO Determine exile from same zone for AI
+            return null;
+        } else {
+            return new PaymentDecision(ComputerUtil.chooseExileFrom(ai, this.getFrom(), this.getType(), source, ability.getTargetCard(), c));
+        }
+    }
+
+    /* (non-Javadoc)
+     * @see forge.card.cost.CostPart#payAI(forge.card.cost.PaymentDecision, forge.game.player.AIPlayer, forge.card.spellability.SpellAbility, forge.Card)
+     */
+    @Override
+    public void payAI(PaymentDecision decision, AIPlayer ai, SpellAbility ability, Card source) {
+        for (final Card c : decision.cards) {
+            executePayment(ability, c);
+            if (this.from.equals(ZoneType.Stack)) {
+                ArrayList<SpellAbility> spells = c.getSpellAbilities();
+                for (SpellAbility spell : spells) {
+                    if (c.isInZone(ZoneType.Exile)) {
+                        final SpellAbilityStackInstance si = ai.getGame().getStack().getInstanceFromSpellAbility(spell);
+                        ai.getGame().getStack().remove(si);
+                    }
+                }
+            }
+        }
     }
 }

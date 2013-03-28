@@ -49,6 +49,7 @@ public class CostUntapType extends CostPartWithList {
         private final CostUntapType untapType;
         private static final long serialVersionUID = -7151144318287088542L;
         private int nUntapped = 0;
+        private final SpellAbility sa;
 
 
         /**
@@ -56,13 +57,15 @@ public class CostUntapType extends CostPartWithList {
          * @param nCards
          * @param cardList
          * @param untapType
+         * @param ability 
          * @param sa
          * @param payment
          */
-        public InputPayCostUntapY(int nCards, List<Card> cardList, CostUntapType untapType) {
+        public InputPayCostUntapY(int nCards, List<Card> cardList, CostUntapType untapType, SpellAbility ability) {
             this.nCards = nCards;
             this.cardList = cardList;
             this.untapType = untapType;
+            this.sa = ability;
         }
 
         @Override
@@ -81,14 +84,12 @@ public class CostUntapType extends CostPartWithList {
         }
 
 
-
         @Override
         public void selectCard(final Card card) {
             Zone zone = Singletons.getModel().getGame().getZoneOf(card);
             if (zone.is(ZoneType.Battlefield) && cardList.contains(card) && card.isTapped()) {
                 // send in List<Card> for Typing
-                card.untap();
-                untapType.addToList(card);
+                untapType.executePayment(sa, card);
                 cardList.remove(card);
 
                 this.nUntapped++;
@@ -154,17 +155,6 @@ public class CostUntapType extends CostPartWithList {
 
         return sb.toString();
     }
-
-    /**
-     * Adds the card to untapped list.
-     * 
-     * @param c
-     *            the card
-     */
-    public final void addToUntappedList(final Card c) {
-        this.getList().add(c);
-    }
-
     /*
      * (non-Javadoc)
      * 
@@ -208,19 +198,6 @@ public class CostUntapType extends CostPartWithList {
     /*
      * (non-Javadoc)
      * 
-     * @see forge.card.cost.CostPart#payAI(forge.card.spellability.SpellAbility,
-     * forge.Card, forge.card.cost.Cost_Payment)
-     */
-    @Override
-    public final void payAI(final AIPlayer ai, final SpellAbility ability, final Card source, final CostPayment payment, final GameState game) {
-        for (final Card c : this.getList()) {
-            c.untap();
-        }
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
      * @see
      * forge.card.cost.CostPart#payHuman(forge.card.spellability.SpellAbility,
      * forge.Card, forge.card.cost.Cost_Payment)
@@ -246,21 +223,33 @@ public class CostUntapType extends CostPartWithList {
                 c = AbilityUtils.calculateAmount(source, amount, ability);
             }
         }
-        InputPayment inp = new InputPayCostUntapY(c, typeList, this);
+        InputPayment inp = new InputPayCostUntapY(c, typeList, this, ability);
         FThreads.setInputAndWait(inp);
         return inp.isPaid();
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * forge.card.cost.CostPart#decideAIPayment(forge.card.spellability.SpellAbility
-     * , forge.Card, forge.card.cost.Cost_Payment)
+    /* (non-Javadoc)
+     * @see forge.card.cost.CostPartWithList#executePayment(forge.card.spellability.SpellAbility, forge.Card)
      */
     @Override
-    public final boolean decideAIPayment(final AIPlayer ai, final SpellAbility ability, final Card source, final CostPayment payment) {
-        final boolean untap = payment.getCost().hasUntapCost();
+    protected void doPayment(SpellAbility ability, Card targetCard) {
+        targetCard.untap();
+    }
+
+    /* (non-Javadoc)
+     * @see forge.card.cost.CostPartWithList#getHashForList()
+     */
+    @Override
+    public String getHashForList() {
+        return "Untapped";
+    }
+
+    /* (non-Javadoc)
+     * @see forge.card.cost.CostPart#decideAIPayment(forge.game.player.AIPlayer, forge.card.spellability.SpellAbility, forge.Card)
+     */
+    @Override
+    public PaymentDecision decideAIPayment(AIPlayer ai, SpellAbility ability, Card source) {
+        boolean untap = false; // payment.getCost().hasUntapCost(); 
         final String amount = this.getAmount();
         Integer c = this.convertAmount();
         if (c == null) {
@@ -278,32 +267,15 @@ public class CostUntapType extends CostPartWithList {
                 c = AbilityUtils.calculateAmount(source, amount, ability);
             }
         }
-
-        this.setList(ComputerUtil.chooseUntapType(ai, this.getType(), source, untap, c));
-
-        if (this.getList() == null) {
+    
+        List<Card> list = ComputerUtil.chooseUntapType(ai, this.getType(), source, untap, c);
+    
+        if (list == null) {
             System.out.println("Couldn't find a valid card to untap for: " + source.getName());
-            return false;
+            return null;
         }
-
-        return true;
-    }
-
-    /* (non-Javadoc)
-     * @see forge.card.cost.CostPartWithList#executePayment(forge.card.spellability.SpellAbility, forge.Card)
-     */
-    @Override
-    public void executePayment(SpellAbility ability, Card targetCard) {
-        addToList(targetCard);
-        targetCard.untap();
-    }
-
-    /* (non-Javadoc)
-     * @see forge.card.cost.CostPartWithList#getHashForList()
-     */
-    @Override
-    public String getHashForList() {
-        return "Untapped";
+    
+        return new PaymentDecision(list);
     }
 
     // Inputs

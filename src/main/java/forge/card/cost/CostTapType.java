@@ -100,6 +100,8 @@ public class CostTapType extends CostPartWithList {
         }
     }
 
+    private final boolean canTapSource;
+
     /**
      * Instantiates a new cost tap type.
      * 
@@ -110,8 +112,9 @@ public class CostTapType extends CostPartWithList {
      * @param description
      *            the description
      */
-    public CostTapType(final String amount, final String type, final String description) {
+    public CostTapType(final String amount, final String type, final String description, boolean costHasTapSource) {
         super(amount, type, description);
+        canTapSource  = !costHasTapSource;
     }
 
     @Override
@@ -190,19 +193,6 @@ public class CostTapType extends CostPartWithList {
     /*
      * (non-Javadoc)
      * 
-     * @see forge.card.cost.CostPart#payAI(forge.card.spellability.SpellAbility,
-     * forge.Card, forge.card.cost.Cost_Payment)
-     */
-    @Override
-    public final void payAI(final AIPlayer ai, final SpellAbility ability, final Card source, final CostPayment payment, final GameState game) {
-        for (final Card c : this.getList()) {
-            c.tap();
-        }
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
      * @see
      * forge.card.cost.CostPart#payHuman(forge.card.spellability.SpellAbility,
      * forge.Card, forge.card.cost.Cost_Payment)
@@ -229,16 +219,11 @@ public class CostTapType extends CostPartWithList {
         return inp.isPaid();
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * forge.card.cost.CostPart#decideAIPayment(forge.card.spellability.SpellAbility
-     * , forge.Card, forge.card.cost.Cost_Payment)
+    /* (non-Javadoc)
+     * @see forge.card.cost.CostPart#decideAIPayment(forge.game.player.AIPlayer, forge.card.spellability.SpellAbility, forge.Card)
      */
     @Override
-    public final boolean decideAIPayment(final AIPlayer ai, final SpellAbility ability, final Card source, final CostPayment payment) {
-        final boolean tap = payment.getCost().hasTapCost();
+    public PaymentDecision decideAIPayment(AIPlayer ai, SpellAbility ability, Card source) {
         final String amount = this.getAmount();
         Integer c = this.convertAmount();
         if (c == null) {
@@ -254,22 +239,22 @@ public class CostTapType extends CostPartWithList {
             }
         }
 
-        this.setList(ComputerUtil.chooseTapType(ai, this.getType(), source, tap, c));
+        List<Card> totap = ComputerUtil.chooseTapType(ai, this.getType(), source, !canTapSource, c);
 
-        if (this.getList() == null) {
+
+        if (totap == null) {
             System.out.println("Couldn't find a valid card to tap for: " + source.getName());
-            return false;
+            return null;
         }
 
-        return true;
+        return new PaymentDecision(totap);
     }
 
     /* (non-Javadoc)
      * @see forge.card.cost.CostPartWithList#executePayment(forge.card.spellability.SpellAbility, forge.Card)
      */
     @Override
-    public void executePayment(SpellAbility ability, Card targetCard) {
-        addToList(targetCard);
+    protected void doPayment(SpellAbility ability, Card targetCard) {
         targetCard.tap();
     }
 

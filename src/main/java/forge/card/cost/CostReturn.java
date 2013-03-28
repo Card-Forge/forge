@@ -114,19 +114,6 @@ public class CostReturn extends CostPartWithList {
     /*
      * (non-Javadoc)
      * 
-     * @see forge.card.cost.CostPart#payAI(forge.card.spellability.SpellAbility,
-     * forge.Card, forge.card.cost.Cost_Payment)
-     */
-    @Override
-    public final void payAI(final AIPlayer ai, final SpellAbility ability, final Card source, final CostPayment payment, final GameState game) {
-        for (final Card c : this.getList()) {
-            executePayment(ability, c);
-        }
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
      * @see
      * forge.card.cost.CostPart#payHuman(forge.card.spellability.SpellAbility,
      * forge.Card, forge.card.cost.Cost_Payment)
@@ -180,30 +167,24 @@ public class CostReturn extends CostPartWithList {
      * , forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final boolean decideAIPayment(final AIPlayer ai, final SpellAbility ability, final Card source, final CostPayment payment) {
-        this.resetList();
-        if (this.payCostFromSource()) {
-            this.getList().add(source);
-        } else {
-            Integer c = this.convertAmount();
-            if (c == null) {
-                c = AbilityUtils.calculateAmount(source, this.getAmount(), ability);
-            }
-
-            this.setList(ComputerUtil.chooseReturnType(ai, this.getType(), source, ability.getTargetCard(), c));
-            if (this.getList().isEmpty()) {
-                return false;
-            }
+    public final PaymentDecision decideAIPayment(final AIPlayer ai, final SpellAbility ability, final Card source) {
+        if (this.payCostFromSource())
+            return new PaymentDecision(source);
+        
+        Integer c = this.convertAmount();
+        if (c == null) {
+            c = AbilityUtils.calculateAmount(source, this.getAmount(), ability);
         }
-        return true;
+
+        List<Card> res = ComputerUtil.chooseReturnType(ai, this.getType(), source, ability.getTargetCard(), c);
+        return res.isEmpty() ? null : new PaymentDecision(res);
     }
 
     /* (non-Javadoc)
      * @see forge.card.cost.CostPartWithList#executePayment(forge.card.spellability.SpellAbility, forge.Card)
      */
     @Override
-    public void executePayment(SpellAbility ability, Card targetCard) {
-        addToList(targetCard);
+    protected void doPayment(SpellAbility ability, Card targetCard) {
         ability.getActivatingPlayer().getGame().getAction().moveToHand(targetCard);
     }
 
@@ -213,6 +194,16 @@ public class CostReturn extends CostPartWithList {
     @Override
     public String getHashForList() {
         return "Returned";
+    }
+
+    /* (non-Javadoc)
+     * @see forge.card.cost.CostPart#payAI(forge.card.cost.PaymentDecision, forge.game.player.AIPlayer, forge.card.spellability.SpellAbility, forge.Card)
+     */
+    @Override
+    public void payAI(PaymentDecision decision, AIPlayer ai, SpellAbility ability, Card source) {
+        for (final Card c : decision.cards) {
+            executePayment(ability, c);
+        }
     }
 
     // Inputs

@@ -31,7 +31,6 @@ import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
-import forge.gui.GuiChoose;
 import forge.view.ButtonUtil;
 
 /**
@@ -172,56 +171,37 @@ public class CostReveal extends CostPartWithList {
         return true;
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * forge.card.cost.CostPart#decideAIPayment(forge.card.spellability.SpellAbility
-     * , forge.Card, forge.card.cost.Cost_Payment)
+    /* (non-Javadoc)
+     * @see forge.card.cost.CostPart#decideAIPayment(forge.game.player.AIPlayer, forge.card.spellability.SpellAbility, forge.Card)
      */
     @Override
-    public final boolean decideAIPayment(final AIPlayer ai, final SpellAbility ability, final Card source, final CostPayment payment) {
+    public PaymentDecision decideAIPayment(AIPlayer ai, SpellAbility ability, Card source) {
+
         final String type = this.getType();
         List<Card> hand = new ArrayList<Card>(ai.getCardsIn(ZoneType.Hand));
-        this.resetList();
 
         if (this.payCostFromSource()) {
             if (!hand.contains(source)) {
-                return false;
+                return null;
             }
-
-            this.getList().add(source);
-        } else if (this.getType().equals("Hand")) {
-            this.setList(new ArrayList<Card>(ai.getCardsIn(ZoneType.Hand)));
-            return true;
-        } else {
-            hand = CardLists.getValidCards(hand, type.split(";"), ai, source);
-            Integer c = this.convertAmount();
-            if (c == null) {
-                final String sVar = ability.getSVar(this.getAmount());
-                if (sVar.equals("XChoice")) {
-                    c = hand.size();
-                } else {
-                    c = AbilityUtils.calculateAmount(source, this.getAmount(), ability);
-                }
-            }
-
-            this.setList(ai.getAi().getCardsToDiscard(c, type.split(";"), ability));
+            return new PaymentDecision(source);
         }
-        return this.getList() != null;
-    }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see forge.card.cost.CostPart#payAI(forge.card.spellability.SpellAbility,
-     * forge.Card, forge.card.cost.Cost_Payment)
-     */
-    @Override
-    public final void payAI(final AIPlayer ai, final SpellAbility ability, final Card source, final CostPayment payment, final GameState game) {
-        GuiChoose.oneOrNone("Revealed cards:", this.getList());
-        for(Card c: getList()) // should not throw concurrent modification here - no items should be added.
-            executePayment(ability, c);
+        if (this.getType().equals("Hand"))
+            return new PaymentDecision(new ArrayList<Card>(ai.getCardsIn(ZoneType.Hand)));
+
+        hand = CardLists.getValidCards(hand, type.split(";"), ai, source);
+        Integer c = this.convertAmount();
+        if (c == null) {
+            final String sVar = ability.getSVar(this.getAmount());
+            if (sVar.equals("XChoice")) {
+                c = hand.size();
+            } else {
+                c = AbilityUtils.calculateAmount(source, this.getAmount(), ability);
+            }
+        }
+
+        return new PaymentDecision(ai.getAi().getCardsToDiscard(c, type.split(";"), ability));
     }
 
     /*
@@ -236,7 +216,6 @@ public class CostReveal extends CostPartWithList {
         final Player activator = ability.getActivatingPlayer();
         final Card source = ability.getSourceCard();
         final String amount = this.getAmount();
-        this.resetList();
 
         if (this.payCostFromSource()) {
             executePayment(ability, source);
@@ -304,8 +283,7 @@ public class CostReveal extends CostPartWithList {
      * @see forge.card.cost.CostPartWithList#executePayment(forge.card.spellability.SpellAbility, forge.Card)
      */
     @Override
-    public void executePayment(SpellAbility ability, Card targetCard) {
-        addToList(targetCard);
+    protected void doPayment(SpellAbility ability, Card targetCard) {
         // write code to actually reveal card
     }
 

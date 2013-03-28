@@ -28,9 +28,13 @@ import forge.CardLists;
 import forge.CardPredicates;
 import forge.CardPredicates.Presets;
 import forge.CounterType;
+import forge.FThreads;
 import forge.GameEntity;
 import forge.Singletons;
 import forge.control.input.InputBase;
+import forge.control.input.InputSelectCards;
+import forge.control.input.InputSelectCardsFromList;
+import forge.control.input.InputSyncronizedBase;
 import forge.game.GameState;
 import forge.game.ai.ComputerUtilCard;
 import forge.game.player.Player;
@@ -106,20 +110,28 @@ public class Untap extends Phase {
         return true;
     }
 
+
+    public static final Predicate<Card> CANUNTAP = new Predicate<Card>() {
+        @Override
+        public boolean apply(Card c) {
+            return Untap.canUntap(c);
+        }
+    };
+    
     /**
      * <p>
      * doUntap.
      * </p>
      */
     private void doUntap() {
-        final Player player = Singletons.getModel().getGame().getPhaseHandler().getPlayerTurn();
-        final Predicate<Card> tappedCanUntap = Predicates.and(Presets.TAPPED, Presets.CANUNTAP);
+        final Player player = game.getPhaseHandler().getPlayerTurn();
+        final Predicate<Card> tappedCanUntap = Predicates.and(Presets.TAPPED, CANUNTAP);
 
         List<Card> list = new ArrayList<Card>(player.getCardsIn(ZoneType.Battlefield));
 
         List<Card> bounceList = CardLists.getKeyword(list, "During your next untap step, as you untap your permanents, return CARDNAME to its owner's hand.");
         for (final Card c : bounceList) {
-            Singletons.getModel().getGame().getAction().moveToHand(c);
+            game.getAction().moveToHand(c);
         }
 
         list = CardLists.filter(list, new Predicate<Card>() {
@@ -128,16 +140,13 @@ public class Untap extends Phase {
                 if (!Untap.canUntap(c)) {
                     return false;
                 }
-                if (Untap.canOnlyUntapOneLand() && c.isLand()) {
+                if (canOnlyUntapOneLand() && c.isLand()) {
                     return false;
                 }
-                if (c.isArtifact() 
-                        && (Singletons.getModel().getGame().isCardInPlay("Damping Field") || Singletons.getModel().getGame().isCardInPlay("Imi Statue"))) {
+                if (c.isArtifact() && (game.isCardInPlay("Damping Field") || game.isCardInPlay("Imi Statue"))) {
                     return false;
                 }
-                if (c.isCreature() 
-                        && (Singletons.getModel().getGame().isCardInPlay("Smoke") || Singletons.getModel().getGame().isCardInPlay("Stoic Angel") 
-                                || Singletons.getModel().getGame().isCardInPlay("Intruder Alarm"))) {
+                if (c.isCreature() && (game.isCardInPlay("Smoke") || game.isCardInPlay("Stoic Angel") || game.isCardInPlay("Intruder Alarm"))) {
                     return false;
                 }
                 return true;
@@ -181,7 +190,7 @@ public class Untap extends Phase {
                         }
                     }
                 }
-            } else if ((c.getCounters(CounterType.WIND) > 0) && Singletons.getModel().getGame().isCardInPlay("Freyalise's Winds")) {
+            } else if ((c.getCounters(CounterType.WIND) > 0) && game.isCardInPlay("Freyalise's Winds")) {
                 // remove a WIND counter instead of untapping
                 c.subtractCounter(CounterType.WIND, 1);
             } else {
@@ -190,7 +199,7 @@ public class Untap extends Phase {
         }
 
         // other players untapping during your untap phase
-        final List<Card> cardsWithKW = CardLists.getKeyword(Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield),
+        final List<Card> cardsWithKW = CardLists.getKeyword(game.getCardsIn(ZoneType.Battlefield),
                 "CARDNAME untaps during each other player's untap step.");
         final List<Player> otherPlayers = player.getOpponents();
         otherPlayers.addAll(player.getAllies());
@@ -200,123 +209,49 @@ public class Untap extends Phase {
         }
         // end other players untapping during your untap phase
 
-        if (Untap.canOnlyUntapOneLand()) {
-            if (player.isComputer()) {
-                // search for lands the computer has and only untap 1
-                List<Card> landList = player.getLandsInPlay();
-
-                landList = CardLists.filter(landList, tappedCanUntap);
-                if (landList.size() > 0) {
+        if (canOnlyUntapOneLand()) {
+            final List<Card> landList = CardLists.filter(player.getLandsInPlay(), tappedCanUntap);
+            
+            if (!landList.isEmpty()) {
+                if (player.isComputer()) {
+                    // search for lands the computer has and only untap 1
                     landList.get(0).untap();
-                }
-            } else {
-                final InputBase target = new InputBase() {
-                    private static final long serialVersionUID = 6653677835629939465L;
-
-                    @Override
-                    public void showMessage() {
-                        CMatchUI.SINGLETON_INSTANCE.showMessage("Select one tapped land to untap");
-                        ButtonUtil.enableOnlyCancel();
-                    }
-
-                    @Override
-                    public void selectButtonCancel() {
-                        this.stop();
-                    }
-
-                    @Override
-                    public void selectCard(final Card c) {
-                        Zone zone = Singletons.getModel().getGame().getZoneOf(c);
-                        if (c.isLand() && zone.is(ZoneType.Battlefield) && c.isTapped() && Untap.canUntap(c)) {
-                            c.untap();
-                            this.stop();
-                        }
-                    } // selectCard()
-                }; // Input
-                List<Card> landList = player.getLandsInPlay();
-                landList = CardLists.filter(landList, tappedCanUntap);
-                if (landList.size() > 0) {
-                    Singletons.getModel().getMatch().getInput().setInput(target);
+                } else {
+                    final InputSelectCards target = new InputSelectCardsFromList(1,1, landList);
+                    target.setMessage("Select one tapped land to untap");
+                    FThreads.setInputAndWait(target);
+                    if( !target.hasCancelled() && !target.getSelected().isEmpty())
+                        target.getSelected().get(0).untap();
                 }
             }
         }
-        if (Singletons.getModel().getGame().isCardInPlay("Damping Field") || Singletons.getModel().getGame().isCardInPlay("Imi Statue")) {
-            final Player turnOwner = Singletons.getModel().getGame().getPhaseHandler().getPlayerTurn();
-            if (turnOwner.isComputer()) {
-                List<Card> artList = new ArrayList<Card>(turnOwner.getCardsIn(ZoneType.Battlefield));
-                artList = CardLists.filter(artList, Presets.ARTIFACTS);
-                artList = CardLists.filter(artList, tappedCanUntap);
-                if (artList.size() > 0) {
+        if (game.isCardInPlay("Damping Field") || game.isCardInPlay("Imi Statue")) {
+            final Player turnOwner = game.getPhaseHandler().getPlayerTurn();
+            final List<Card> artList = CardLists.filter(turnOwner.getCardsIn(ZoneType.Battlefield), Presets.ARTIFACTS, tappedCanUntap);
+            
+            if (!artList.isEmpty()) {
+                if (turnOwner.isComputer()) {
                     ComputerUtilCard.getBestArtifactAI(artList).untap();
-                }
-            } else {
-                final InputBase target = new InputBase() {
-                    private static final long serialVersionUID = 5555427219659889707L;
-
-                    @Override
-                    public void showMessage() {
-                        CMatchUI.SINGLETON_INSTANCE.showMessage("Select one tapped artifact to untap");
-                        ButtonUtil.enableOnlyCancel();
-                    }
-
-                    @Override
-                    public void selectButtonCancel() {
-                        this.stop();
-                    }
-
-                    @Override
-                    public void selectCard(final Card c) {
-                        Zone zone = Singletons.getModel().getGame().getZoneOf(c);
-                        if (c.isArtifact() && zone.is(ZoneType.Battlefield) && c.getController().isHuman()
-                                && Untap.canUntap(c)) {
-                            c.untap();
-                            this.stop();
-                        }
-                    } // selectCard()
-                }; // Input
-                List<Card> artList = new ArrayList<Card>(turnOwner.getCardsIn(ZoneType.Battlefield));
-                artList = CardLists.filter(artList, Presets.ARTIFACTS);
-                artList = CardLists.filter(artList, tappedCanUntap);
-                if (artList.size() > 0) {
-                    Singletons.getModel().getMatch().getInput().setInput(target);
+                } else {
+                    final InputSelectCards target = new InputSelectCardsFromList(1,1, artList);
+                    target.setMessage("Select one tapped artifact to untap");
+                    FThreads.setInputAndWait(target);
+                    if( !target.hasCancelled() && !target.getSelected().isEmpty())
+                        target.getSelected().get(0).untap();
                 }
             }
         }
-        if ((Singletons.getModel().getGame().isCardInPlay("Smoke") || Singletons.getModel().getGame().isCardInPlay("Stoic Angel"))) {
-            if (player.isComputer()) {
-                List<Card> creatures = player.getCreaturesInPlay();
-                creatures = CardLists.filter(creatures, tappedCanUntap);
-                if (creatures.size() > 0) {
+        if ((game.isCardInPlay("Smoke") || game.isCardInPlay("Stoic Angel"))) {
+            final List<Card> creatures = CardLists.filter(player.getCreaturesInPlay(), tappedCanUntap);
+            if (!creatures.isEmpty()) {
+                if (player.isComputer()) {
                     creatures.get(0).untap();
-                }
-            } else {
-                final InputBase target = new InputBase() {
-                    private static final long serialVersionUID = 5555427219659889707L;
-
-                    @Override
-                    public void showMessage() {
-                        CMatchUI.SINGLETON_INSTANCE.showMessage("Select one creature to untap");
-                        ButtonUtil.enableOnlyCancel();
-                    }
-
-                    @Override
-                    public void selectButtonCancel() {
-                        this.stop();
-                    }
-
-                    @Override
-                    public void selectCard(final Card c) {
-                        Zone zone = Singletons.getModel().getGame().getZoneOf(c);
-                        if (c.isCreature() && zone.is(ZoneType.Battlefield) && c.getController().isHuman()
-                                && Untap.canUntap(c)) {
-                            c.untap();
-                            this.stop();
-                        }
-                    } // selectCard()
-                }; // Input
-                final List<Card> creatures = CardLists.filter(player.getCreaturesInPlay(), tappedCanUntap);
-                if (creatures.size() > 0) {
-                    Singletons.getModel().getMatch().getInput().setInput(target);
+                } else {
+                    final InputSelectCards target = new InputSelectCardsFromList(1, 1, creatures);
+                    target.setMessage("Select one creature to untap");
+                    FThreads.setInputAndWait(target);
+                    if( !target.hasCancelled() && !target.getSelected().isEmpty())
+                        target.getSelected().get(0).untap();
                 }
             }
         }
@@ -334,11 +269,10 @@ public class Untap extends Phase {
         game.getStack().chooseOrderOfSimultaneousStackEntryAll();
     } // end doUntap
 
-    private static boolean canOnlyUntapOneLand() {
+    private boolean canOnlyUntapOneLand() {
         // Winter Orb was given errata so it no longer matters if it's tapped or
         // not
-        if (Singletons.getModel().getGame().isCardInPlay("Winter Orb")
-                || Singletons.getModel().getGame().getPhaseHandler().getPlayerTurn().isCardInPlay("Mungha Wurm")) {
+        if (game.isCardInPlay("Winter Orb") || game.getPhaseHandler().getPlayerTurn().isCardInPlay("Mungha Wurm")) {
             return true;
         }
 

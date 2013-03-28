@@ -28,17 +28,8 @@ import forge.game.player.Player;
  * The Class CostPart.
  */
 public abstract class CostPart {
-
-    /** The optional. */
-    // private boolean optional = false;
-
-    /** The amount. */
     private String amount = "1";
-
-    /** The type. */
     private final String type;
-
-    /** The type description. */
     private final String typeDescription;
 
     /**
@@ -171,7 +162,7 @@ public abstract class CostPart {
      *            {@link forge.card.cost.CostPayment}
      * @return true, if successful
      */
-    public abstract boolean decideAIPayment(final AIPlayer ai, SpellAbility ability, Card source, CostPayment payment);
+    public abstract PaymentDecision decideAIPayment(final AIPlayer ai, SpellAbility ability, Card source);
 
     /**
      * Pay ai.
@@ -186,7 +177,7 @@ public abstract class CostPart {
      *            {@link forge.card.cost.CostPayment}
      * @param game
      */
-    public abstract void payAI(final AIPlayer ai, SpellAbility ability, Card source, CostPayment payment, GameState game);
+    public abstract void payAI(final PaymentDecision decision, final AIPlayer ai, SpellAbility ability, Card source);
 
     /**
      * Pay human.

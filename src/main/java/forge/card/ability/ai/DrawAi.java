@@ -28,6 +28,7 @@ import forge.card.ability.SpellAbilityAi;
 import forge.card.cost.Cost;
 import forge.card.cost.CostDiscard;
 import forge.card.cost.CostPart;
+import forge.card.cost.PaymentDecision;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
@@ -70,8 +71,10 @@ public class DrawAi extends SpellAbilityAi {
                 for (final CostPart part : abCost.getCostParts()) {
                     if (part instanceof CostDiscard) {
                         CostDiscard cd = (CostDiscard) part;
-                        cd.decideAIPayment((AIPlayer) ai, sa, sa.getSourceCard(), null);
-                        for (Card discard : cd.getList()) {
+                        PaymentDecision decision = cd.decideAIPayment((AIPlayer) ai, sa, sa.getSourceCard());
+                        if ( null == decision )
+                            return false;
+                        for (Card discard : decision.cards) {
                             if (!ComputerUtil.isWorseThanDraw(ai, discard)) {
                                 return false;
                             }

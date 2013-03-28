@@ -8993,7 +8993,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         if (getController() == null) {
             return false;
         }
-        return getController().getCardsIn(ZoneType.Battlefield).contains(this);
+        return getController().getZone(ZoneType.Battlefield).contains(this);
     }
 
     public void onCleanupPhase(final Player turn) {

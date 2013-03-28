@@ -33,6 +33,7 @@ import forge.game.GameState;
 import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
+import forge.util.Aggregates;
 
 /**
  * The Class CostDiscard.
@@ -148,19 +149,6 @@ public class CostDiscard extends CostPartWithList {
     /*
      * (non-Javadoc)
      * 
-     * @see forge.card.cost.CostPart#payAI(forge.card.spellability.SpellAbility,
-     * forge.Card, forge.card.cost.Cost_Payment)
-     */
-    @Override
-    public final void payAI(final AIPlayer ai, final SpellAbility ability, final Card source, final CostPayment payment, final GameState game) {
-        for (final Card c : this.getList()) {
-            executePayment(ability, c);
-        }
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
      * @see
      * forge.card.cost.CostPart#payHuman(forge.card.spellability.SpellAbility,
      * forge.Card, forge.card.cost.Cost_Payment)
@@ -172,149 +160,131 @@ public class CostDiscard extends CostPartWithList {
         List<Card> handList = new ArrayList<Card>(activator.getCardsIn(ZoneType.Hand));
         String discardType = this.getType();
         final String amount = this.getAmount();
-        this.resetList();
 
         if (this.payCostFromSource()) {
-            if (!handList.contains(source)) {
-                return false;
-            }
-            executePayment(ability, source);
-            return true;
-            //this.addToList(source);
-        } else if (discardType.equals("Hand")) {
-            this.setList(handList);
-            activator.discardHand(ability);
-            return true;
-        } else if (discardType.equals("LastDrawn")) {
+            return handList.contains(source) && executePayment(ability, source);
+        } 
+
+        if (discardType.equals("Hand")) {
+            return executePayment(ability, handList);
+        } 
+
+        if (discardType.equals("LastDrawn")) {
             final Card lastDrawn = activator.getLastDrawnCard();
-            if (!handList.contains(lastDrawn)) {
-                return false;
+            return handList.contains(lastDrawn) && executePayment(ability, lastDrawn);
+        } 
+
+        Integer c = this.convertAmount();
+
+        if (discardType.equals("Random")) {
+            if (c == null) {
+                final String sVar = ability.getSVar(amount);
+                // Generalize this
+                if (sVar.equals("XChoice")) {
+                    c = CostUtil.chooseXValue(source, ability,  handList.size());
+                } else {
+                    c = AbilityUtils.calculateAmount(source, amount, ability);
+                }
             }
-            executePayment(ability, lastDrawn);
-            return true;
+
+            return executePayment(ability, Aggregates.random(handList, c));
+            
         } else {
-            Integer c = this.convertAmount();
-
-            if (discardType.equals("Random")) {
-                if (c == null) {
-                    final String sVar = ability.getSVar(amount);
-                    // Generalize this
-                    if (sVar.equals("XChoice")) {
-                        c = CostUtil.chooseXValue(source, ability,  handList.size());
-                    } else {
-                        c = AbilityUtils.calculateAmount(source, amount, ability);
-                    }
-                }
-
-                this.setList(activator.discardRandom(c, ability));
-                return true;
-            } else {
-                String type = new String(discardType);
-                boolean sameName = false;
-                if (type.contains("+WithSameName")) {
-                    sameName = true;
-                    type = type.replace("+WithSameName", "");
-                }
-                final String[] validType = type.split(";");
-                handList = CardLists.getValidCards(handList, validType, activator, ability.getSourceCard());
-                final List<Card> landList2 = handList;
-                if (sameName) {
-                    handList = CardLists.filter(handList, new Predicate<Card>() {
-                        @Override
-                        public boolean apply(final Card c) {
-                            for (Card card : landList2) {
-                                if (!card.equals(c) && card.getName().equals(c.getName())) {
-                                    return true;
-                                }
-                            }
-                            return false;
-                        }
-                    });
-                }
-
-                if (c == null) {
-                    final String sVar = ability.getSVar(amount);
-                    // Generalize this
-                    if (sVar.equals("XChoice")) {
-                        c = CostUtil.chooseXValue(source, ability, handList.size());
-                    } else {
-                        c = AbilityUtils.calculateAmount(source, amount, ability);
-                    }
-                }
-
-                InputSelectCards inp = new InputSelectCardsFromList(c, c, handList);
-                inp.setMessage("Select %d more " + getDescriptiveType() + " to discard.");
-                //InputPayment inp = new InputPayCostDiscard(ability, handList, this, c, discardType);
-                FThreads.setInputAndWait(inp);
-                if( inp.hasCancelled() || inp.getSelected().size() != c)
-                    return false;
-                for(Card crd : inp.getSelected())
-                    executePayment(ability, crd);
-                return true;
+            String type = new String(discardType);
+            boolean sameName = false;
+            if (type.contains("+WithSameName")) {
+                sameName = true;
+                type = type.replace("+WithSameName", "");
             }
+            final String[] validType = type.split(";");
+            handList = CardLists.getValidCards(handList, validType, activator, ability.getSourceCard());
+            final List<Card> landList2 = handList;
+            if (sameName) {
+                handList = CardLists.filter(handList, new Predicate<Card>() {
+                    @Override
+                    public boolean apply(final Card c) {
+                        for (Card card : landList2) {
+                            if (!card.equals(c) && card.getName().equals(c.getName())) {
+                                return true;
+                            }
+                        }
+                        return false;
+                    }
+                });
+            }
+
+            if (c == null) {
+                final String sVar = ability.getSVar(amount);
+                // Generalize this
+                if (sVar.equals("XChoice")) {
+                    c = CostUtil.chooseXValue(source, ability, handList.size());
+                } else {
+                    c = AbilityUtils.calculateAmount(source, amount, ability);
+                }
+            }
+
+            InputSelectCards inp = new InputSelectCardsFromList(c, c, handList);
+            inp.setMessage("Select %d more " + getDescriptiveType() + " to discard.");
+            //InputPayment inp = new InputPayCostDiscard(ability, handList, this, c, discardType);
+            FThreads.setInputAndWait(inp);
+            if( inp.hasCancelled() || inp.getSelected().size() != c)
+                return false;
+            
+            return executePayment(ability, inp.getSelected());
         }
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * forge.card.cost.CostPart#decideAIPayment(forge.card.spellability.SpellAbility
-     * , forge.Card, forge.card.cost.Cost_Payment)
+    /* (non-Javadoc)
+     * @see forge.card.cost.CostPart#decideAIPayment(forge.game.player.AIPlayer, forge.card.spellability.SpellAbility, forge.Card)
      */
     @Override
-    public final boolean decideAIPayment(final AIPlayer ai, final SpellAbility ability, final Card source, final CostPayment payment) {
+    public PaymentDecision decideAIPayment(AIPlayer ai, SpellAbility ability, Card source) {
         final String type = this.getType();
 
         final List<Card> hand = ai.getCardsIn(ZoneType.Hand);
-        this.resetList();
         if (type.equals("LastDrawn")) {
             if (!hand.contains(ai.getLastDrawnCard())) {
-                return false;
+                return null;
             }
-            this.addToList(ai.getLastDrawnCard());
+            return new PaymentDecision(ai.getLastDrawnCard());
         }
 
         else if (this.payCostFromSource()) {
             if (!hand.contains(source)) {
-                return false;
+                return null;
             }
 
-            this.addToList(source);
+            return new PaymentDecision(source);
         }
 
         else if (type.equals("Hand")) {
-            this.getList().addAll(hand);
+            return new PaymentDecision(hand);
         }
 
-        else {
-            if (type.contains("WithSameName")) {
-                return false;
-            }
-            Integer c = this.convertAmount();
-            if (c == null) {
-                final String sVar = ability.getSVar(this.getAmount());
-                if (sVar.equals("XChoice")) {
-                    return false;
-                }
-                c = AbilityUtils.calculateAmount(source, this.getAmount(), ability);
-            }
-
-            if (type.equals("Random")) {
-                this.setList(CardLists.getRandomSubList(hand, c));
-            } else {
-                this.setList(ai.getAi().getCardsToDiscard(c, type.split(";"), ability));
-            }
+        if (type.contains("WithSameName")) {
+            return null;
         }
-        return this.getList() != null;
+        Integer c = this.convertAmount();
+        if (c == null) {
+            final String sVar = ability.getSVar(this.getAmount());
+            if (sVar.equals("XChoice")) {
+                return null;
+            }
+            c = AbilityUtils.calculateAmount(source, this.getAmount(), ability);
+        }
+
+        if (type.equals("Random")) {
+            return new PaymentDecision(CardLists.getRandomSubList(hand, c));
+        } else {
+            return new PaymentDecision(ai.getAi().getCardsToDiscard(c, type.split(";"), ability));
+        }
     }
 
     /* (non-Javadoc)
      * @see forge.card.cost.CostPartWithList#executePayment(forge.card.spellability.SpellAbility, forge.Card)
      */
     @Override
-    public void executePayment(SpellAbility ability, Card targetCard) {
-        this.addToList(targetCard);
+    protected void doPayment(SpellAbility ability, Card targetCard) {
         targetCard.getController().discard(targetCard, ability);
     }
 
@@ -324,6 +294,14 @@ public class CostDiscard extends CostPartWithList {
     @Override
     public String getHashForList() {
         return "Discarded";
+    }
+
+    /* (non-Javadoc)
+     * @see forge.card.cost.CostPart#payAI(forge.card.cost.PaymentDecision, forge.game.player.AIPlayer, forge.card.spellability.SpellAbility, forge.Card)
+     */
+    @Override
+    public void payAI(PaymentDecision decision, AIPlayer ai, SpellAbility ability, Card source) {
+        executePayment(ability, decision.cards);
     }
 
     // Inputs
