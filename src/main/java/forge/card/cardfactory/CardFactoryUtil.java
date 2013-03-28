@@ -63,7 +63,6 @@ import forge.card.spellability.Target;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerHandler;
 import forge.card.trigger.TriggerType;
-import forge.control.input.Input;
 import forge.control.input.InputBase;
 import forge.control.input.InputSelectCards;
 import forge.game.GameState;
@@ -2293,55 +2292,6 @@ public class CardFactoryUtil {
         }
 
         return tot;
-    }
-
-    /**
-     * <p>
-     * inputUntapUpToNType.
-     * </p>
-     * 
-     * @param n
-     *            a int.
-     * @param type
-     *            a {@link java.lang.String} object.
-     * @return a {@link forge.control.input.InputBase} object.
-     */
-    public static Input inputUntapUpToNType(final int n, final String type) {
-        final Input untap = new InputBase() {
-            private static final long serialVersionUID = -2167059918040912025L;
-
-            private final int stop = n;
-            private int count = 0;
-            private List<Card> choices = new ArrayList<Card>();;
-
-            @Override
-            public void showMessage() {
-                final StringBuilder sb = new StringBuilder();
-                sb.append("Select a ").append(type).append(" to untap");
-                CMatchUI.SINGLETON_INSTANCE.showMessage(sb.toString());
-                ButtonUtil.enableOnlyCancel();
-            }
-
-            @Override
-            public void selectButtonCancel() {
-                this.stop();
-            }
-
-            @Override
-            public void selectCard(final Card card) {
-                Zone zone = Singletons.getModel().getGame().getZoneOf(card);
-                if (card.isType(type) && zone.is(ZoneType.Battlefield) && !choices.contains(card)) {
-                    card.untap();
-                    choices.add(card);
-                    this.count++;
-                    if (this.count == this.stop) {
-                        this.stop();
-                    }
-                }
-            } // selectCard()
-        };
-
-        return untap;
     }
 
     /**
