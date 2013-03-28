@@ -21,7 +21,6 @@ import forge.Singletons;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostBeingPaid;
 import forge.card.spellability.SpellAbility;
-import forge.game.GameState;
 import forge.game.player.Player;
 import forge.view.ButtonUtil;
 
@@ -47,9 +46,6 @@ public class InputPayManaExecuteCommands extends InputPayManaBase implements Inp
     private boolean bPaid = false;
     public boolean isPaid() { return bPaid; }
 
-    // only used for X costs:
-    private boolean showOnlyOKButton = false;
-
 
     /**
      * <p>
@@ -65,30 +61,13 @@ public class InputPayManaExecuteCommands extends InputPayManaBase implements Inp
      * @param unpaidCommand2
      *            a {@link forge.Command} object.
      */
-    public InputPayManaExecuteCommands(final GameState game, final String prompt, final ManaCost manaCost2) {
-        this(game, prompt, manaCost2, false);
-    }
-
-    /**
-     * <p>
-     * Constructor for Input_PayManaCost_Ability.
-     * </p>
-     * 
-     * @param prompt
-     *            a {@link java.lang.String} object.
-     * @param manaCost2
-     *            a {@link java.lang.String} object.
-     * @param paidCommand2
-     *            a {@link forge.Command} object.
-     * @param unpaidCommand2
-     *            a {@link forge.Command} object.
-     * @param showOKButton
-     *            a boolean.
-     */
-    public InputPayManaExecuteCommands(final GameState game, final String prompt, final ManaCost manaCost2, final boolean showOKButton) {
-        super(game, new SpellAbility(null) {
+    public InputPayManaExecuteCommands(final Player p, final String prompt, final ManaCost manaCost2) {
+        super(p.getGame(), new SpellAbility(null) {
             @Override
             public void resolve() {}
+            
+            @Override 
+            public Player getActivatingPlayer() { return p; }
 
             @Override
             public boolean canPlay() { return false; }
@@ -98,7 +77,7 @@ public class InputPayManaExecuteCommands extends InputPayManaBase implements Inp
         this.message = prompt;
 
         this.manaCost = new ManaCostBeingPaid(this.originalManaCost);
-        this.showOnlyOKButton = showOKButton;
+
     }
 
     /**
@@ -148,20 +127,12 @@ public class InputPayManaExecuteCommands extends InputPayManaBase implements Inp
 
     /** {@inheritDoc} */
     @Override
-    public final void selectButtonOK() {
-        if (this.showOnlyOKButton) {
-            bPaid = false;
-            this.stop();
-        }
-    }
+    public final void selectButtonOK() {}
 
     /** {@inheritDoc} */
     @Override
     public final void showMessage() {
         ButtonUtil.enableOnlyCancel();
-        if (this.showOnlyOKButton) {
-            ButtonUtil.enableOnlyOk();
-        }
         final StringBuilder msg = new StringBuilder(this.message + "Pay Mana Cost: " + this.manaCost);
         if (this.phyLifeToLose > 0) {
             msg.append(" (");

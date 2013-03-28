@@ -47,6 +47,8 @@ import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerType;
 import forge.control.input.InputBase;
 import forge.control.input.InputPayManaExecuteCommands;
+import forge.control.input.InputPayManaX;
+import forge.control.input.InputSynchronized;
 import forge.game.GameActionUtil;
 import forge.game.GameState;
 import forge.game.ai.ComputerUtil;
@@ -390,23 +392,9 @@ public class MagicStack extends MyObservable {
                 final int xCost = sa.getXManaCost();
                 Player player = sp.getSourceCard().getController();
                 if (player.isHuman()) {
-                    final Runnable payNextX = new Runnable() {
-                        @Override
-                        public void run() {
-                            
-                            final Card crd = sa.getSourceCard();
-                            
-                            String message = "Pay X cost for " + crd.getName() + " (X=" + crd.getXManaCostPaid() + ")\r\n";
-                            InputPayManaExecuteCommands inp = new InputPayManaExecuteCommands(game, message, ManaCost.get(xCost), true); 
-                            FThreads.setInputAndWait(inp);
-                            if ( inp.isPaid() ) {
-                                crd.addXManaCostPaid(1);
-                                this.run();
-                            } else
-                                MagicStack.this.push(sa);
-                        }
-                    };
-                    payNextX.run();
+                    InputSynchronized inp = new InputPayManaX(game, sa, xCost, true);
+                    FThreads.setInputAndWait(inp);
+                    MagicStack.this.push(sa);
                 } else {
                     // computer
                     final int neededDamage = CardFactoryUtil.getNeededXDamage(sa);
@@ -436,7 +424,7 @@ public class MagicStack extends MyObservable {
                     }
                 };
 
-                Player activating = sp.getActivatingPlayer();
+                final Player activating = sp.getActivatingPlayer();
 
                 if (activating.isHuman()) {
                     sa.getSourceCard().addMultiKickerMagnitude(-1);
@@ -446,15 +434,14 @@ public class MagicStack extends MyObservable {
                             abilityIncreaseMultikicker.resolve();
                             int mkMagnitude = sa.getSourceCard().getMultiKickerMagnitude();
                             String prompt = String.format("Multikicker for %s\r\nTimes Kicked: %d\r\n", sa.getSourceCard(), mkMagnitude );
-                            InputPayManaExecuteCommands toSet = new InputPayManaExecuteCommands(game, prompt, sp.getMultiKickerManaCost());
+                            InputPayManaExecuteCommands toSet = new InputPayManaExecuteCommands(activating, prompt, sp.getMultiKickerManaCost());
                             FThreads.setInputAndWait(toSet);
                             if ( toSet.isPaid() ) { 
                                 this.run();
                             } else 
                                 MagicStack.this.push(sa);
-
                         }
-                    };                    
+                    };
                     paidCommand.run();
                 } else {
                     // computer
@@ -480,7 +467,7 @@ public class MagicStack extends MyObservable {
                 };
 
  
-                Player controller = sp.getSourceCard().getController();
+                final Player controller = sp.getSourceCard().getController();
                 if (controller.isHuman()) {
                     sa.getSourceCard().addReplicateMagnitude(-1);
                     final Runnable addMagnitude = new Runnable() {
@@ -488,7 +475,7 @@ public class MagicStack extends MyObservable {
                         public void run() {
                             ability.resolve();
                             String prompt = String.format("Replicate for %s\r\nTimes Replicated: %d\r\n", sa.getSourceCard(), sa.getSourceCard().getReplicateMagnitude());
-                            InputPayManaExecuteCommands toSet = new InputPayManaExecuteCommands(game, prompt, sp.getReplicateManaCost());
+                            InputPayManaExecuteCommands toSet = new InputPayManaExecuteCommands(controller, prompt, sp.getReplicateManaCost());
                             FThreads.setInputAndWait(toSet);
                             if ( toSet.isPaid() ) { 
                                 this.run();

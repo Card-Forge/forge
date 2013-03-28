@@ -1,7 +1,6 @@
 package forge.control.input;
 
 import forge.Card;
-import forge.card.cost.CostPartMana;
 import forge.card.mana.ManaCostBeingPaid;
 import forge.card.spellability.SpellAbility;
 import forge.game.GameState;
@@ -13,19 +12,20 @@ public class InputPayManaX extends InputPayManaBase {
     private final String colorX;
     private final String strX;
     private String colorsPaid;
-    private final CostPartMana costMana;
+    private final boolean xCanBe0;
 
 
-    public InputPayManaX(final GameState game, final SpellAbility sa0, final CostPartMana costMana0)
+    public InputPayManaX(final GameState game, final SpellAbility sa0, final int amountX, final boolean xCanBe0)
     {
         super(game, sa0);
 
         xPaid = 0;
         colorX =  saPaidFor.hasParam("XColor") ? saPaidFor.getParam("XColor") : "";
         colorsPaid = saPaidFor.getSourceCard().getColorsPaid();
-        costMana = costMana0;
-        strX = Integer.toString(costMana.getXMana());
+
+        strX = Integer.toString(amountX);
         manaCost = new ManaCostBeingPaid(strX);
+        this.xCanBe0 = xCanBe0; 
     }
 
     /* (non-Javadoc)
@@ -35,7 +35,7 @@ public class InputPayManaX extends InputPayManaBase {
     public boolean isPaid() {
         //return !( xPaid == 0 && !costMana.canXbe0() || this.colorX.equals("") && !this.manaCost.toString().equals(strX) );
         // return !( xPaid == 0 && !costMana.canXbe0()) && !(this.colorX.equals("") && !this.manaCost.toString().equals(strX));
-        return ( xPaid > 0 || costMana.canXbe0()) && (!this.colorX.equals("") || this.manaCost.toString().equals(strX));
+        return ( xPaid > 0 || xCanBe0) && (!this.colorX.equals("") || this.manaCost.toString().equals(strX));
     }
     
     @Override
@@ -51,7 +51,7 @@ public class InputPayManaX extends InputPayManaBase {
         StringBuilder msg = new StringBuilder("Pay X Mana Cost for ");
         msg.append(saPaidFor.getSourceCard().getName()).append("\n").append(this.xPaid);
         msg.append(" Paid so far.");
-        if (!costMana.canXbe0()) {
+        if (!xCanBe0) {
             msg.append(" X Can't be 0.");
         }
 

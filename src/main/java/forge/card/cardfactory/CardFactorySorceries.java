@@ -462,7 +462,7 @@ public class CardFactorySorceries {
                     game.getAction().moveToPlay(newArtifact[0]);
                 } else {
                     final int diffCost = newCMC - baseCMC;
-                    InputPayManaExecuteCommands inp = new InputPayManaExecuteCommands(game, "Pay difference in artifacts CMC", ManaCost.get(diffCost));
+                    InputPayManaExecuteCommands inp = new InputPayManaExecuteCommands(p, "Pay difference in artifacts CMC", ManaCost.get(diffCost));
                     FThreads.setInputAndWait(inp);
                     if ( inp.isPaid() )
                         game.getAction().moveToPlay(newArtifact[0]);

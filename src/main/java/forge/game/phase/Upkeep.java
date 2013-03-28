@@ -275,7 +275,7 @@ public class Upkeep extends Phase {
                         public void resolve() {
                             final boolean isUpkeepPaid;
                             if (controller.isHuman()) {
-                                InputPayManaExecuteCommands inp = new InputPayManaExecuteCommands(game, sb, upkeepCost);
+                                InputPayManaExecuteCommands inp = new InputPayManaExecuteCommands(controller, sb, upkeepCost);
                                 FThreads.setInputAndWait(inp);
                                 isUpkeepPaid = inp.isPaid();
                             } else { // computer
@@ -360,7 +360,7 @@ public class Upkeep extends Phase {
                         public void resolve() {
                             boolean isUpkeepPaid = false;
                             if (controller.isHuman()) {
-                                InputPayManaExecuteCommands inp = new InputPayManaExecuteCommands(game, sb, upkeepCost);
+                                InputPayManaExecuteCommands inp = new InputPayManaExecuteCommands(controller, sb, upkeepCost);
                                 FThreads.setInputAndWait(inp);
                                 isUpkeepPaid = inp.isPaid();
                             } else { // computers
@@ -602,7 +602,7 @@ public class Upkeep extends Phase {
                     @Override
                     public void resolve() {
                         if (game.getZoneOf(c).is(ZoneType.Battlefield)) {
-                            InputPayManaExecuteCommands inp = new InputPayManaExecuteCommands(game, "Pay Demonic Hordes upkeep cost", cost.getManaCost() /*, true */);
+                            InputPayManaExecuteCommands inp = new InputPayManaExecuteCommands(cp, "Pay Demonic Hordes upkeep cost", cost.getManaCost() /*, true */);
                             FThreads.setInputAndWait(inp);
                             if ( !inp.isPaid() ) 
                                 unpaidHordesAb.resolve();

@@ -585,7 +585,7 @@ public final class GameActionUtil {
         if (!(costPart instanceof CostPartMana ))
             throw new RuntimeException("GameActionUtil.payCostDuringAbilityResolve - The remaining payment type is not Mana.");
 
-        InputPayment toSet = new InputPayManaExecuteCommands(game, source + "\r\n", ability.getManaCost());
+        InputPayment toSet = new InputPayManaExecuteCommands(p, source + "\r\n", ability.getManaCost());
         FThreads.setInputAndWait(toSet);
         return toSet.isPaid();
     }

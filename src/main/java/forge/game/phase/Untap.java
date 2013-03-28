@@ -31,18 +31,13 @@ import forge.CounterType;
 import forge.FThreads;
 import forge.GameEntity;
 import forge.Singletons;
-import forge.control.input.InputBase;
 import forge.control.input.InputSelectCards;
 import forge.control.input.InputSelectCardsFromList;
-import forge.control.input.InputSyncronizedBase;
 import forge.game.GameState;
 import forge.game.ai.ComputerUtilCard;
 import forge.game.player.Player;
-import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiDialog;
-import forge.gui.match.CMatchUI;
-import forge.view.ButtonUtil;
 
 /**
  * <p>
@@ -245,7 +240,7 @@ public class Untap extends Phase {
             final List<Card> creatures = CardLists.filter(player.getCreaturesInPlay(), tappedCanUntap);
             if (!creatures.isEmpty()) {
                 if (player.isComputer()) {
-                    creatures.get(0).untap();
+                    ComputerUtilCard.getBestCreatureAI(creatures).untap();
                 } else {
                     final InputSelectCards target = new InputSelectCardsFromList(1, 1, creatures);
                     target.setMessage("Select one creature to untap");

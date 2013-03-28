@@ -75,7 +75,7 @@ public class CostPartMana extends CostPart {
      * 
      * @return the x mana
      */
-    public final int getXMana() {
+    public final int getAmountOfX() {
         return this.amountX;
     }
 
@@ -85,7 +85,7 @@ public class CostPartMana extends CostPart {
      * @param xCost
      *            the new x mana
      */
-    public final void setXMana(final int xCost) {
+    public final void setAmountOfX(final int xCost) {
         this.amountX = xCost;
     }
 
@@ -210,7 +210,7 @@ public class CostPartMana extends CostPart {
             // if X cost is a defined value, other than xPaid
             if (!ability.getSVar("X").equals("Count$xPaid")) {
                 // this currently only works for things about Targeted object
-                manaToAdd = AbilityUtils.calculateAmount(source, "X", ability) * this.getXMana();
+                manaToAdd = AbilityUtils.calculateAmount(source, "X", ability) * this.getAmountOfX();
             }
         }
         
@@ -221,9 +221,9 @@ public class CostPartMana extends CostPart {
             if(!inpPayment.isPaid())
                 return false;
         } 
-        if (this.getXMana() > 0) {
+        if (this.getAmountOfX() > 0) {
             source.setXManaCostPaid(0);
-            InputPayment inpPayment = new InputPayManaX(game, ability, this);
+            InputPayment inpPayment = new InputPayManaX(game, ability, this.getAmountOfX(), this.canXbe0());
             FThreads.setInputAndWait(inpPayment);
             if(!inpPayment.isPaid())
                 return false;

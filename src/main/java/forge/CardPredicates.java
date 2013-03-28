@@ -25,7 +25,6 @@ import com.google.common.collect.Iterables;
 
 import forge.card.spellability.SpellAbility;
 import forge.game.phase.CombatUtil;
-import forge.game.phase.Untap;
 import forge.game.player.Player;
 import forge.util.PredicateString;
 
@@ -168,12 +167,6 @@ public final class CardPredicates {
             }
         };
 
-        public static final Predicate<Card> CANUNTAP = new Predicate<Card>() {
-            @Override
-            public boolean apply(Card c) {
-                return Untap.canUntap(c);
-            }
-        };
         /**
          * a Predicate<Card> to get all cards that are untapped.
          */

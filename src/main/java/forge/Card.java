@@ -956,14 +956,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         return this.sunburstValue;
     }
 
-    /**
-     * <p>
-     * Setter for the field <code>colorsPaid</code>.
-     * </p>
-     * 
-     * @param s
-     *            a String
-     */
+    // TODO: Append colors instead of replacing
     public final void setColorsPaid(final String s) {
         this.colorsPaid = s;
     }
