@@ -306,6 +306,7 @@ public class ImportDialog {
         private final String       _srcDir;
         private final Runnable     _onAnalyzerDone;
         private final boolean      _isMigration;
+        private final FLabel       _unknownDeckLabel;
         private final JComboBox    _unknownDeckCombo;
         private final FCheckBox    _moveCheckbox;
         private final FCheckBox    _overwriteCheckbox;
@@ -348,7 +349,8 @@ public class ImportDialog {
             _unknownDeckCombo.addActionListener(new ActionListener() {
                 @Override public void actionPerformed(ActionEvent arg0) { _updateUI(); }
             });
-            unknownDeckPanel.add(new FLabel.Builder().text("Treat unknown decks as:").build());
+            _unknownDeckLabel = new FLabel.Builder().text("Treat unknown decks as:").build();
+            unknownDeckPanel.add(_unknownDeckLabel);
             unknownDeckPanel.add(_unknownDeckCombo);
             knownDeckPanel.add(unknownDeckPanel, "span");
             cbPanel.add(knownDeckPanel, "aligny top");
@@ -561,6 +563,22 @@ public class ImportDialog {
                     _btnStart.removeActionListener(a);
                 }
                 
+                // deselect and disable all options that have 0 operations associated with
+                // them to highlight the important options
+                for (Pair<FCheckBox, ? extends Map<File, File>> p : _selections.values()) {
+                    FCheckBox cb = p.getLeft();
+                    if (0 == p.getRight().size()) {
+                        cb.removeChangeListener(_stateChangedListener);
+                        cb.setSelected(false);
+                        cb.setEnabled(false);
+                    }
+                }
+                
+                if (0 == _selections.get(OpType.UNKNOWN_DECK).getRight().size()) {
+                    _unknownDeckLabel.setEnabled(false);
+                    _unknownDeckCombo.setEnabled(false);
+                }
+
                 // set up the start button to start the prepared import on click
                 _btnStart.addActionListener(new ActionListener() {
                     @Override public void actionPerformed(ActionEvent arg0) {
@@ -569,10 +587,15 @@ public class ImportDialog {
                         if (_isMigration) {
                             // assemble a list of selections that need to be selected to complete a full migration
                             List<String> unselectedButShouldBe = new ArrayList<String>();
-                            for (Pair<FCheckBox, ? extends Map<File, File>> entry : _selections.values()) {
+                            for (Map.Entry<OpType, Pair<FCheckBox, ? extends Map<File, File>>> entry : _selections.entrySet()) {
+                                if (OpType.POSSIBLE_SET_CARD_PIC == entry.getKey()) {
+                                    continue;
+                                }
+                                
                                 // add name to list if checkbox is unselected, but contains operations
-                                FCheckBox cb = entry.getLeft();
-                                if (!cb.isSelected() && 0 < entry.getRight().size()) {
+                                Pair<FCheckBox, ? extends Map<File, File>> p = entry.getValue();
+                                FCheckBox cb = p.getLeft();
+                                if (!cb.isSelected() && 0 < p.getRight().size()) {
                                     unselectedButShouldBe.add(cb.getName());
                                 }
                             }
