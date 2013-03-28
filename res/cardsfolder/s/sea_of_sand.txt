@@ -1,0 +1,16 @@
+Name:Sea of Sand
+ManaCost:no cost
+Types:Plane Rabiah
+R:Event$ Draw | ActiveZones$ Command | ValidPlayer$ Player | ReplaceWith$ RevealedDraw | Description$ Players reveal each card they draw.
+SVar:RevealedDraw:AB$ Draw | Cost$ 0 | Defined$ ReplacedPlayer | NumCards$ 1 | SubAbility$ TrigReveal | RememberDrawn$ True
+SVar:TrigReveal:DB$ Reveal | Defined$ ReplacedPlayer | RevealValid$ Card.IsRemembered | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+T:Mode$ Drawn | ValidCard$ Card.Land | TriggerZones$ Command | Execute$ TrigGain | TriggerDescription$ Whenever a player draws a land card, that player gains 3 life.
+SVar:TrigGain:AB$ GainLife | Cost$ 0 | Defined$ TriggeredCardController | LifeAmount$ 3
+T:Mode$ Drawn | ValidCard$ Card.nonLand | TriggerZones$ Command | Execute$ TrigLose | TriggerDescription$ Whenever a player draws a nonland card, that player loses 3 life.
+SVar:TrigLose:AB$ LoseLife | Cost$ 0 | Defined$ TriggeredCardController | LifeAmount$ 3
+T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever you roll Chaos, put target permanent on top of its owner's library.
+SVar:RolledChaos:AB$ ChangeZone | Cost$ 0 | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | Origin$ Battlefield | Destination $ Library | LibraryPosition$ 0
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sea_of_sand.jpg
+Oracle:Players reveal each card they draw.\nWhenever a player draws a land card, that player gains 3 life.\nWhenever a player draws a nonland card, that player loses 3 life.\nWhenever you roll {C}, put target permanent on top of its owner's library.
+SetInfo:HOP Common

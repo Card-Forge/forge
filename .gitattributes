@@ -9145,6 +9145,7 @@ res/cardsfolder/s/sea_gate_loremaster.txt svneol=native#text/plain
 res/cardsfolder/s/sea_gate_oracle.txt svneol=native#text/plain
 res/cardsfolder/s/sea_kings_blessing.txt svneol=native#text/plain
 res/cardsfolder/s/sea_monster.txt svneol=native#text/plain
+res/cardsfolder/s/sea_of_sand.txt -text
 res/cardsfolder/s/sea_scryer.txt svneol=native#text/plain
 res/cardsfolder/s/sea_serpent.txt svneol=native#text/plain
 res/cardsfolder/s/sea_snidd.txt -text

@@ -20,6 +20,7 @@ package forge.card.replacement;
 import java.util.Map;
 
 import forge.Card;
+import forge.card.spellability.SpellAbility;
 
 /** 
  * TODO: Write javadoc for this type.
@@ -66,4 +67,11 @@ public class ReplaceDraw extends ReplacementEffect {
         return res;
     }
 
+    /* (non-Javadoc)
+     * @see forge.card.replacement.ReplacementEffect#setReplacingObjects(java.util.HashMap, forge.card.spellability.SpellAbility)
+     */
+    @Override
+    public void setReplacingObjects(Map<String, Object> runParams, SpellAbility sa) {
+        sa.setReplacingObject("Player", runParams.get("Affected"));
+    }
 }
