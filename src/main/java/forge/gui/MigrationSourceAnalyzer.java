@@ -49,6 +49,7 @@ public class MigrationSourceAnalyzer {
         UNKNOWN_DECK,
         DEFAULT_CARD_PIC,
         SET_CARD_PIC,
+        POSSIBLE_SET_CARD_PIC,
         TOKEN_PIC,
         QUEST_PIC,
         GAUNTLET_DATA,
@@ -421,9 +422,17 @@ public class MigrationSourceAnalyzer {
                 if (_nameUpdates.containsKey(filename)) {
                     filename = _nameUpdates.get(filename);
                 }
-                return validFilenames.containsKey(filename) ? validFilenames.get(filename) : null;
+                if (validFilenames.containsKey(filename)) {
+                    return validFilenames.get(filename); 
+                } else if (StringUtils.endsWithIgnoreCase(filename, ".jpg")
+                        || StringUtils.endsWithIgnoreCase(filename, ".png")) {
+                    return filename;
+                }
+                return null;
             }
-            @Override public OpType getOpType(String filename) { return OpType.SET_CARD_PIC; }
+            @Override public OpType getOpType(String filename) {
+                return validFilenames.containsKey(filename) ? OpType.SET_CARD_PIC : OpType.POSSIBLE_SET_CARD_PIC;
+            }
         });
     }
 

@@ -370,7 +370,14 @@ public class DialogMigrateProfile {
             _addSelectionWidget(cachePanel, OpType.SET_CARD_PIC,     "Set-specific card pics");
             _addSelectionWidget(cachePanel, OpType.TOKEN_PIC,        "Card token pics");
             _addSelectionWidget(cachePanel, OpType.QUEST_PIC,        "Quest-related pics");
-            _addSelectionWidget(cachePanel, OpType.DB_FILE,          "Database files");
+            _addSelectionWidget(cachePanel, OpType.DB_FILE,          "Database files", true, null, "wrap");
+            
+            _addSelectionWidget(cachePanel, OpType.POSSIBLE_SET_CARD_PIC,
+                    "Import possible set pics from as-yet unsupported cards", false, 
+                    "<html>Picture files that are not recognized as belonging to any known card.<br>" +
+                    "It could be that these pictures belong to cards that are not yet supported<br>" +
+                    "by Forge.  If you know this to be the case and want the pictures imported for<br>" +
+                    "future use, select this option.<html>", "span");
             cbPanel.add(cachePanel, "aligny top");
             _selectionPanel.add(cbPanel, "center");
             
@@ -378,10 +385,12 @@ public class DialogMigrateProfile {
             JPanel ioOptionPanel = new JPanel(new MigLayout("insets 0, gap 10"));
             ioOptionPanel.setOpaque(false);
             _moveCheckbox = new FCheckBox("Remove source files after copy");
+            _moveCheckbox.setToolTipText("Move files into the data directories instead of just copying them");
             _moveCheckbox.setSelected(isMigration);
             _moveCheckbox.addChangeListener(_stateChangedListener);
             ioOptionPanel.add(_moveCheckbox);
             _overwriteCheckbox = new FCheckBox("Overwrite files in destination");
+            _overwriteCheckbox.setToolTipText("Overwrite existing data with the imported data");
             _overwriteCheckbox.addChangeListener(_stateChangedListener);
             ioOptionPanel.add(_overwriteCheckbox);
             _selectionPanel.add(ioOptionPanel);
@@ -418,16 +427,22 @@ public class DialogMigrateProfile {
         }
         
         private void _addSelectionWidget(JPanel parent, OpType type, String name) {
+            _addSelectionWidget(parent, type, name, true, null, null);
+        }
+        
+        private void _addSelectionWidget(JPanel parent, OpType type, String name, boolean selected,
+                String tooltip, String constraints) {
             FCheckBox cb = new FCheckBox();
             cb.setName(name);
-            cb.setSelected(true);
+            cb.setSelected(selected);
+            cb.setToolTipText(tooltip);
             cb.addChangeListener(_stateChangedListener);
             
             // use a skip list map instead of a regular hashmap so that the files are sorted
             // alphabetically in the logs.  note that this is a concurrent data structure
             // since it will be modified and read simultaneously by different threads
             _selections.put(type, Pair.of(cb, new ConcurrentSkipListMap<File, File>()));
-            parent.add(cb);
+            parent.add(cb, constraints);
         }
         
         // must be called from GUI event loop thread
@@ -691,10 +706,13 @@ public class DialogMigrateProfile {
             
             while (true) {
                 synchronized (this) {
+                    // can't check _stop in the while condition since we have to do it in a synchronized block
                     if (_stop) { break; }
-                    while (lastUpdateCallCnt == _updateCallCnt) {
+                    
+                    // if we're stopped while looping here, run through the update one last time
+                    // before returning
+                    while (lastUpdateCallCnt == _updateCallCnt && !_stop) {
                         wait();
-                        if (_stop) { break; }
                     }
                     
                     // safely copy synchronized data to local values that we will use for this runthrough
