@@ -1273,6 +1273,7 @@ res/cardsfolder/b/breath_of_fury.txt -text
 res/cardsfolder/b/breath_of_life.txt svneol=native#text/plain
 res/cardsfolder/b/breath_of_malfegor.txt svneol=native#text/plain
 res/cardsfolder/b/breathstealer.txt svneol=native#text/plain
+res/cardsfolder/b/breathstealers_crypt.txt -text
 res/cardsfolder/b/breeding_pit.txt svneol=native#text/plain
 res/cardsfolder/b/breeding_pool.txt svneol=native#text/plain
 res/cardsfolder/b/breezekeeper.txt -text
