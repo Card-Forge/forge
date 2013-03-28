@@ -27,6 +27,7 @@ import forge.game.event.SetTappedEvent;
 import forge.game.event.ShuffleEvent;
 import forge.game.event.SpellResolvedEvent;
 import forge.game.event.TokenCreatedEvent;
+import forge.game.player.PlayerType;
 
 /** 
  * This class is in charge of converting any forge.game.event.Event to a SoundEffectType.
@@ -80,7 +81,7 @@ public class EventVisualizer {
             return getSoundEffectForTapState(((SetTappedEvent) evt).Tapped);
         }
         if (evt instanceof DuelOutcomeEvent) {
-            return getSoundEffectForDuelOutcome(((DuelOutcomeEvent) evt).humanWonTheDuel);
+            return getSoundEffectForDuelOutcome(((DuelOutcomeEvent) evt).winner.getType() == PlayerType.HUMAN);
         }
 
         return fromMap;

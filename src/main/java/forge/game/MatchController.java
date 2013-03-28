@@ -94,15 +94,18 @@ public class MatchController {
         result.setTurnsPlayed(game.getPhaseHandler().getTurn());
         gamesPlayed.add(result);
 
+        // Play the win/lose sound
+        game.getEvents().post(new DuelOutcomeEvent(result.getWinner()));
+        game.getGameLog().add("Final", result.getWinner() + " won", 0);
+
         // add result entries to the game log
         LobbyPlayer human = Singletons.getControl().getPlayer().getLobbyPlayer();
         String title = result.isWinner(human) ? "You Win" : "You Lost";
-        game.getGameLog().add("Final", title, 0);
-        
+
         List<String> outcomes = new ArrayList<String>();
         for (Entry<LobbyPlayer, PlayerStatistics> p : result) {
-            String outcome = String.format("%s %s", p.getKey().equals(human) ? "You have" : p.getKey().getName() + " has",
-                    p.getValue().getOutcome().toString());
+            String whoHas = p.getKey().equals(human) ? "You have" : p.getKey().getName() + " has";
+            String outcome = String.format("%s %s", whoHas, p.getValue().getOutcome().toString());
             outcomes.add(outcome);
             game.getGameLog().add("Final", outcome, 0);
         }
@@ -117,9 +120,6 @@ public class MatchController {
         v.setTitle(title);
         v.setOutcomes(outcomes);
         v.setStatsSummary(statsSummary);
-        
-        // Play the win/lose sound
-        game.getEvents().post(new DuelOutcomeEvent(result.isWinner(human)));
     }
     
 
