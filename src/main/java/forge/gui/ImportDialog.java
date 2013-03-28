@@ -58,7 +58,7 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import forge.Command;
 import forge.error.BugReporter;
-import forge.gui.MigrationSourceAnalyzer.OpType;
+import forge.gui.ImportSourceAnalyzer.OpType;
 import forge.gui.toolbox.FButton;
 import forge.gui.toolbox.FCheckBox;
 import forge.gui.toolbox.FLabel;
@@ -75,7 +75,7 @@ import forge.properties.NewConstants;
  * into the correct locations in the user and cache directories.  There is a lot of I/O and data
  * processing done in this class, so most operations are asynchronous.
  */
-public class DialogMigrateProfile {
+public class ImportDialog {
     private final FButton _btnStart;
     private final FButton _btnCancel;
     private final FLabel  _btnChooseDir;
@@ -86,7 +86,7 @@ public class DialogMigrateProfile {
     private volatile boolean _cancel;
     
     @SuppressWarnings("serial")
-    public DialogMigrateProfile(String forcedSrcDir, final Runnable onDialogClose) {
+    public ImportDialog(String forcedSrcDir, final Runnable onDialogClose) {
         _topPanel = new FPanel(new MigLayout("insets dialog, gap 0, center, wrap, fill"));
         _topPanel.setOpaque(false);
         _topPanel.setBackgroundTexture(FSkin.getIcon(FSkin.Backgrounds.BG_TEXTURE));
@@ -476,7 +476,7 @@ public class DialogMigrateProfile {
                     selections.put(entry.getKey(), entry.getValue().getRight());
                 }
                 
-                MigrationSourceAnalyzer.AnalysisCallback cb = new MigrationSourceAnalyzer.AnalysisCallback() {
+                ImportSourceAnalyzer.AnalysisCallback cb = new ImportSourceAnalyzer.AnalysisCallback() {
                     @Override
                     public boolean checkCancel() { return _cancel; }
                     
@@ -487,7 +487,7 @@ public class DialogMigrateProfile {
                     }
                 };
                 
-                final MigrationSourceAnalyzer msa = new MigrationSourceAnalyzer(_srcDir, cb);
+                final ImportSourceAnalyzer msa = new ImportSourceAnalyzer(_srcDir, cb);
                 final int numFilesToAnalyze = msa.getNumFilesToAnalyze();
                 
                 // update only once every half-second so we're not flooding the UI with updates

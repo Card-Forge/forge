@@ -39,7 +39,7 @@ import forge.item.IPaperCard;
 import forge.properties.NewConstants;
 import forge.util.FileUtil;
 
-public class MigrationSourceAnalyzer {
+public class ImportSourceAnalyzer {
     public static enum OpType {
         CONSTRUCTED_DECK,
         DRAFT_DECK,
@@ -69,7 +69,7 @@ public class MigrationSourceAnalyzer {
     
     private int _numFilesAnalyzed;
     
-    public MigrationSourceAnalyzer(String source, AnalysisCallback cb) {
+    public ImportSourceAnalyzer(String source, AnalysisCallback cb) {
         _source = new File(source);
         _cb     = cb;
 
