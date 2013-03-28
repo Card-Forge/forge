@@ -41,6 +41,7 @@ import forge.card.spellability.SpellAbility;
 import forge.control.input.InputBase;
 import forge.control.input.InputPayManaExecuteCommands;
 import forge.control.input.InputSelectCards;
+import forge.control.input.InputSelectCardsFromList;
 import forge.game.GameActionUtil;
 import forge.game.GameState;
 import forge.game.ai.ComputerUtil;
@@ -504,9 +505,12 @@ public class Upkeep extends Phase {
                         CardLists.sortByPowerAsc(creatures);
                         final int power = creatures.get(0).getNetAttack();
                         if (player.isHuman()) {
-                            Singletons.getModel().getMatch().getInput().setInput(
-                                    CardFactoryUtil.inputDestroyNoRegeneration(this.getLowestPowerList(creatures),
-                                            "Select creature with power: " + power + " to sacrifice."));
+                            InputSelectCards inp = new InputSelectCardsFromList(1,1,this.getLowestPowerList(creatures));
+                            inp.setMessage("Select creature with power: " + power + " to sacrifice.");
+                            FThreads.setInputAndWait(inp);
+                            if(!inp.hasCancelled())
+                                game.getAction().destroyNoRegeneration(inp.getSelected().get(0));
+
                         } else { // computer
                             final Card compyTarget = this.getCompyCardToDestroy(creatures);
                             game.getAction().destroyNoRegeneration(compyTarget);

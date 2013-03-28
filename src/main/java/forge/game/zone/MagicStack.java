@@ -45,9 +45,10 @@ import forge.card.spellability.TargetChoices;
 import forge.card.spellability.TargetSelection;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerType;
-import forge.control.input.InputBase;
 import forge.control.input.InputPayManaExecuteCommands;
 import forge.control.input.InputPayManaX;
+import forge.control.input.InputSelectCards;
+import forge.control.input.InputSelectCardsFromList;
 import forge.control.input.InputSynchronized;
 import forge.game.GameActionUtil;
 import forge.game.GameState;
@@ -61,9 +62,7 @@ import forge.game.player.Player;
 import forge.gui.GuiChoose;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.SDisplayUtil;
-import forge.gui.match.CMatchUI;
 import forge.util.MyObservable;
-import forge.view.ButtonUtil;
 
 /**
  * <p>
@@ -717,44 +716,19 @@ public class MagicStack extends MyObservable {
                     i--;
                 }
             }
-            if (creats.size() != 0) {
+            if (!creats.isEmpty()) {
                 haunterDiesWork.setDescription("");
 
-                final InputBase target = new InputBase() {
-                    private static final long serialVersionUID = 1981791992623774490L;
-
-                    @Override
-                    public void showMessage() {
-                        CMatchUI.SINGLETON_INSTANCE.showMessage("Choose target creature to haunt.");
-                        ButtonUtil.disableAll();
-                    }
-
-                    @Override
-                    public void selectCard(final Card c) {
-                        Zone zone = Singletons.getModel().getGame().getZoneOf(c);
-                        if (!zone.is(ZoneType.Battlefield) || !c.isCreature()) {
-                            return;
-                        }
-                        if (c.canBeTargetedBy(haunterDiesWork)) {
-                            haunterDiesWork.setTargetCard(c);
-                            MagicStack.this.add(haunterDiesWork);
-                            this.stop();
-                        } else {
-                            CMatchUI.SINGLETON_INSTANCE.showMessage("Cannot target this card (Shroud? Protection?).");
-                        }
-                    }
-                };
-
                 if (source.getController().isHuman()) {
-                    Singletons.getModel().getMatch().getInput().setInput(target);
+                    final InputSelectCards targetHaunted = new InputSelectCardsFromList(1,1, creats);
+                    targetHaunted.setMessage("Choose target creature to haunt.");
+                    FThreads.setInputAndWait(targetHaunted);
+                    haunterDiesWork.setTargetCard(targetHaunted.getSelected().get(0));
+                    MagicStack.this.add(haunterDiesWork);
                 } else {
                     // AI choosing what to haunt
                     final List<Card> oppCreats = CardLists.filterControlledBy(creats, source.getController().getOpponents());
-                    if (oppCreats.size() != 0) {
-                        haunterDiesWork.setTargetCard(ComputerUtilCard.getWorstCreatureAI(oppCreats));
-                    } else {
-                        haunterDiesWork.setTargetCard(ComputerUtilCard.getWorstCreatureAI(creats));
-                    }
+                    haunterDiesWork.setTargetCard(ComputerUtilCard.getWorstCreatureAI(oppCreats.isEmpty() ? creats : oppCreats));
                     this.add(haunterDiesWork);
                 }
             }

@@ -90,37 +90,6 @@ import forge.view.ButtonUtil;
  * @version $Id$
  */
 public class CardFactoryUtil {
-    /**
-     * <p>
-     * inputDestroyNoRegeneration.
-     * </p>
-     * 
-     * @param choices
-     *            a {@link forge.CardList} object.
-     * @param message
-     *            a {@link java.lang.String} object.
-     * @return a {@link forge.control.input.InputBase} object.
-     */
-    public static InputBase inputDestroyNoRegeneration(final List<Card> choices, final String message) {
-        final InputBase target = new InputBase() {
-            private static final long serialVersionUID = -6637588517573573232L;
-
-            @Override
-            public void showMessage() {
-                CMatchUI.SINGLETON_INSTANCE.showMessage(message);
-                ButtonUtil.disableAll();
-            }
-
-            @Override
-            public void selectCard(final Card card) {
-                if (choices.contains(card)) {
-                    Singletons.getModel().getGame().getAction().destroyNoRegeneration(card);
-                    this.stop();
-                }
-            }
-        };
-        return target;
-    } // inputDestroyNoRegeneration()
 
     /**
      * <p>
