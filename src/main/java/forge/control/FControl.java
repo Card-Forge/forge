@@ -112,7 +112,12 @@ public enum FControl {
                 Singletons.getView().getFrame().setDefaultCloseOperation(
                         WindowConstants.DO_NOTHING_ON_CLOSE);
 
-                CDock.SINGLETON_INSTANCE.concede();
+                if (!Singletons.getModel().getGame().isGameOver())
+                    CDock.SINGLETON_INSTANCE.concede();
+                else {
+                    Singletons.getControl().changeState(FControl.Screens.HOME_SCREEN);
+                    SOverlayUtils.hideOverlay();
+                }
             }
         };
 
