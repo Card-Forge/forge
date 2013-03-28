@@ -5755,6 +5755,7 @@ res/cardsfolder/k/kodamas_might.txt -text
 res/cardsfolder/k/kodamas_reach.txt svneol=native#text/plain
 res/cardsfolder/k/kokusho_the_evening_star.txt svneol=native#text/plain
 res/cardsfolder/k/konda_lord_of_eiganjo.txt svneol=native#text/plain
+res/cardsfolder/k/kondas_banner.txt -text
 res/cardsfolder/k/kondas_hatamoto.txt svneol=native#text/plain
 res/cardsfolder/k/kongming_sleeping_dragon.txt svneol=native#text/plain
 res/cardsfolder/k/kongmings_contraptions.txt -text
@@ -7301,6 +7302,7 @@ res/cardsfolder/n/nurturer_initiate.txt svneol=native#text/plain
 res/cardsfolder/n/nurturing_licid.txt -text
 res/cardsfolder/n/nut_collector.txt svneol=native#text/plain
 res/cardsfolder/n/nyxathid.txt svneol=native#text/plain
+res/cardsfolder/o/o_naginata.txt -text
 res/cardsfolder/o/oak_street_innkeeper.txt -text
 res/cardsfolder/o/oaken_brawler.txt svneol=native#text/plain
 res/cardsfolder/o/oakenform.txt svneol=native#text/plain

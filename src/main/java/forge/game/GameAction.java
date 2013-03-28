@@ -957,13 +957,12 @@ public class GameAction {
 
                 if (c.isEquipping()) {
                     final Card equippedCreature = c.getEquipping().get(0);
-                    if (!equippedCreature.isCreature() || !equippedCreature.isInPlay()) {
+                    if (!equippedCreature.isCreature() || !equippedCreature.isInPlay()
+                            || !equippedCreature.canBeEquippedBy(c)) {
                         c.unEquipCard(equippedCreature);
                         checkAgain = true;
                     }
-
-                    // make sure any equipment that has become a creature stops
-                    // equipping
+                    // make sure any equipment that has become a creature stops equipping
                     if (c.isCreature()) {
                         c.unEquipCard(equippedCreature);
                         checkAgain = true;
