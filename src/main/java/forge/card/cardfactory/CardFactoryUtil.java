@@ -587,52 +587,6 @@ public class CardFactoryUtil {
 
     /**
      * <p>
-     * modularInput.
-     * </p>
-     * 
-     * @param ability
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @param card
-     *            a {@link forge.Card} object.
-     * @return a {@link forge.control.input.InputBase} object.
-     */
-    public static InputBase modularInput(final SpellAbility ability, final Card card) {
-        final InputBase modularInput = new InputBase() {
-
-            private static final long serialVersionUID = 2322926875771867901L;
-
-            @Override
-            public void showMessage() {
-                CMatchUI.SINGLETON_INSTANCE.showMessage("Select target artifact creature");
-                ButtonUtil.enableOnlyCancel();
-            }
-
-            @Override
-            public void selectButtonCancel() {
-                this.stop();
-            }
-
-            @Override
-            public void selectCard(final Card card2) {
-                Zone zone = Singletons.getModel().getGame().getZoneOf(card2);
-                if (card2.isCreature() && card2.isArtifact() && zone.is(ZoneType.Battlefield)
-                        && card.canBeTargetedBy(ability)) {
-                    ability.setTargetCard(card2);
-                    final StringBuilder sb = new StringBuilder();
-                    sb.append("Put ").append(card.getCounters(CounterType.P1P1));
-                    sb.append(" +1/+1 counter/s from ").append(card);
-                    sb.append(" on ").append(card2);
-                    ability.setStackDescription(sb.toString());
-                    Singletons.getModel().getGame().getStack().add(ability);
-                    this.stop();
-                }
-            }
-        };
-        return modularInput;
-    }
-
-    /**
-     * <p>
      * getNumberOfManaSymbolsControlledByColor.
      * </p>
      * 
@@ -3652,7 +3606,22 @@ public class CardFactoryUtil {
                                 }
                             }
                         } else {
-                            Singletons.getModel().getMatch().getInput().setInput(CardFactoryUtil.modularInput(ability, card));
+                            InputSelectCards inp = new InputSelectCards(1,1) {
+                                private static final long serialVersionUID = -7895723996302990127L;
+
+                                @Override
+                                protected boolean isValidChoice(Card card2) {
+                                    return card2.isCreature() && card2.isArtifact() && card.isInPlay() && card.canBeTargetedBy(ability);
+                                }
+                            };
+                            FThreads.setInputAndWait(inp);
+                            if( !inp.hasCancelled() ) {
+                                Card card2 = inp.getSelected().get(0);
+                                ability.setTargetCard(card2);
+                                String desc = String.format("Put %d +1/+1 counter/s from %s on %s", card.getCounters(CounterType.P1P1), card, card2);
+                                ability.setStackDescription(desc);
+                                Singletons.getModel().getGame().getStack().add(ability);
+                            }
                         }
                     }
                 });
