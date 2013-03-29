@@ -93,6 +93,7 @@ public class DiscardEffect extends RevealEffectBase {
 
         for (final Player p : getTargetPlayers(sa)) {
             if ((tgt == null) || p.canBeTargetedBy(sa)) {
+                final int numCardsInHand = p.getCardsIn(ZoneType.Hand).size(); 
                 if (mode.equals("Defined")) {
                     final List<Card> toDiscard = AbilityUtils.getDefinedCards(source, sa.getParam("DefinedCards"), sa);
                     for (final Card c : toDiscard) {
@@ -155,7 +156,8 @@ public class DiscardEffect extends RevealEffectBase {
                         }
                     }
                 } else if (mode.equals("TgtChoose") && sa.hasParam("UnlessType")) {
-                    p.discardUnless(numCards, sa.getParam("UnlessType"), sa);
+                    if( numCardsInHand > 0 )
+                        p.discardUnless(Math.min(numCards, numCardsInHand), sa.getParam("UnlessType"), sa);
                 } else if (mode.equals("RevealDiscardAll")) {
                     // Reveal
                     final List<Card> dPHand = p.getCardsIn(ZoneType.Hand);

@@ -219,8 +219,7 @@ public class CardFactoryCreatures {
                     target.addDamage(c.getNetAttack(), c);
                 }
 
-                if (target.getController().isHuman()) { // Human choose
-                                                        // spread damage
+                if (target.getController().isHuman()) { // Human choose spread damage
                     for (int x = 0; x < target.getNetAttack(); x++) {
                         Singletons.getModel().getMatch().getInput().setInput(
                                 CardFactoryUtil.masterOfTheWildHuntInputTargetCreature(this, wolves, new Command() {
