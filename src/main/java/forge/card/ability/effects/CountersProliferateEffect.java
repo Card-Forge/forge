@@ -1,27 +1,100 @@
 package forge.card.ability.effects;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
 
 import com.google.common.base.Predicate;
-import com.google.common.collect.Lists;
-
 import forge.Card;
 import forge.CardLists;
 import forge.CounterType;
+import forge.FThreads;
+import forge.GameEntity;
 import forge.Singletons;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
-import forge.control.input.InputBase;
+import forge.control.input.InputSelectManyBase;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
-import forge.gui.match.CMatchUI;
-import forge.view.ButtonUtil;
 
 public class CountersProliferateEffect extends SpellAbilityEffect {
+    /** 
+     * TODO: Write javadoc for this type.
+     *
+     */
+    public static final class InputProliferate extends InputSelectManyBase<GameEntity> {
+        private static final long serialVersionUID = -1779224307654698954L;
+        private Map<GameEntity, CounterType> chosenCounters = new HashMap<GameEntity, CounterType>();
+
+        public InputProliferate() {
+            super(1, Integer.MAX_VALUE);
+        }
+
+        @Override
+        protected String getMessage() {
+            StringBuilder sb = new StringBuilder("Choose permanents and/or players with counters on them to add one more counter of that type.");
+            sb.append("\n\nYou've selected so far:\n");
+            if( selected.isEmpty()) 
+                sb.append("(none)");
+            else 
+                for(GameEntity ge : selected ) {
+                    if( ge instanceof Player )
+                        sb.append("* A poison counter to player ").append(ge).append("\n");
+                    else
+                        sb.append("* ").append(ge).append(" -> ").append(chosenCounters.get(ge)).append("counter\n");
+                }
+            
+            return sb.toString();
+        }
+
+        @Override
+        public void selectCard(final Card card) {
+            if( !selectEntity(card) )
+                return;
+            
+            if( selected.contains(card) ) {
+                final List<CounterType> choices = new ArrayList<CounterType>();
+                for (final CounterType ct : CounterType.values()) {
+                    if (card.getCounters(ct) > 0) {
+                        choices.add(ct);
+                    }
+                }
+                
+                CounterType toAdd = choices.size() == 1 ? choices.get(0) : GuiChoose.one("Select counter type", choices);
+                chosenCounters.put(card, toAdd);
+            }
+            
+            refresh();
+        }
+
+        @Override
+        public void selectPlayer(final Player player) {
+            if( !selectEntity(player) )
+                return;
+            refresh();
+        }
+
+        @Override
+        protected boolean isValidChoice(GameEntity choice) {
+            if (choice instanceof Player)
+                return ((Player) choice).getPoisonCounters() > 0 && !choice.hasKeyword("You can't get poison counters");
+            
+            if (choice instanceof Card)
+                return ((Card) choice).hasCounters();
+            
+            return false;
+        }
+        
+        public CounterType getCounterFor(GameEntity ge) {
+            return chosenCounters.get(ge);
+        }
+    }
+
+
     @Override
     protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
@@ -36,65 +109,22 @@ public class CountersProliferateEffect extends SpellAbilityEffect {
     public void resolve(SpellAbility sa) {
         Player controller = sa.getSourceCard().getController();
         if (controller.isHuman()) {
-            resolveHuman(sa);
+            InputProliferate inp = new InputProliferate();
+            inp.setCancelAllowed(true);
+            FThreads.setInputAndWait(inp);
+            if ( inp.hasCancelled() )
+                return;
+            
+            for(GameEntity ge: inp.getSelected()) {
+                if( ge instanceof Player )
+                    ((Player) ge).addPoisonCounters(1, sa.getSourceCard());
+                else if( ge instanceof Card)
+                    ((Card) ge).addCounter(inp.getCounterFor(ge), 1, true);
+            }
         } else {
             resolveAI(controller, sa);
         }
     }
-
-    private static void resolveHuman(final SpellAbility sa) {
-        final List<Card> unchosen = Lists.newArrayList(Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield));
-        final List<Player> players = new ArrayList<Player>(Singletons.getModel().getGame().getPlayers());
-        Singletons.getModel().getMatch().getInput().setInput(new InputBase() {
-            private static final long serialVersionUID = -1779224307654698954L;
-
-            @Override
-            public void showMessage() {
-                ButtonUtil.enableOnlyOk();
-                CMatchUI.SINGLETON_INSTANCE.showMessage("Proliferate: Choose permanents and/or players");
-            }
-
-            @Override
-            public void selectButtonOK() {
-                // Hacky intermittent solution to triggers that look for
-                // counters being put on. They used
-                // to wait for another priority passing after proliferate
-                // finished.
-                Singletons.getModel().getGame().getStack().chooseOrderOfSimultaneousStackEntryAll();
-                this.stop();
-            }
-
-            @Override
-            public void selectCard(final Card card) {
-                if (!unchosen.contains(card)) {
-                    return;
-                }
-                unchosen.remove(card);
-                final ArrayList<String> choices = new ArrayList<String>();
-                for (final CounterType c1 : CounterType.values()) {
-                    if (card.getCounters(c1) != 0) {
-                        choices.add(c1.getName());
-                    }
-                }
-                if (choices.size() > 0) {
-                    card.addCounter(CounterType.getType((choices.size() == 1 ? choices.get(0) : GuiChoose.one(
-                    "Select counter type", choices).toString())), 1, true);
-                }
-            }
-
-            @Override
-            public void selectPlayer(final Player player) {
-                if (players.indexOf(player) >= 0) {
-
-                    players.remove(player); // no second selection
-                    if (player.getPoisonCounters() > 0) {
-                        player.addPoisonCounters(1, sa.getSourceCard());
-                    }
-                }
-            }
-        });
-    }
-
 
     private static void resolveAI(final Player ai, final SpellAbility sa) {
         final List<Player> allies = ai.getAllies();

@@ -3,8 +3,8 @@ package forge.control.input;
 import java.util.ArrayList;
 import java.util.List;
 
+import forge.Card;
 import forge.GameEntity;
-import forge.gui.match.CMatchUI;
 import forge.view.ButtonUtil;
 
 public abstract class InputSelectManyBase<T extends GameEntity> extends InputSyncronizedBase implements InputSelectMany<T> {
@@ -31,10 +31,17 @@ public abstract class InputSelectManyBase<T extends GameEntity> extends InputSyn
         this.max = max;
     }
 
+    protected void refresh() {
+        if (hasAllTargets()) {
+            selectButtonOK();
+        } else {
+            this.showMessage();
+        }
+    }
+    
     @Override
     public final void showMessage() {
-        String msgToShow = getMessage();
-        CMatchUI.SINGLETON_INSTANCE.showMessage(msgToShow);
+        showMessage(getMessage());
 
         boolean canCancel = (min == 0 && selected.isEmpty()) || allowCancel;
         boolean canOk = hasEnoughTargets();
@@ -95,30 +102,40 @@ public abstract class InputSelectManyBase<T extends GameEntity> extends InputSyn
     // might re-define later
     protected boolean hasEnoughTargets() { return selected.size() >= min; }
     protected boolean hasAllTargets() { return selected.size() >= max; }
-    protected void onSelectStateChanged(T c, boolean newState) {} // Select card inputs may highlight selected cards with this method
 
-    protected void selectEntity(T c) {
+    protected boolean selectEntity(T c) {
         if (!isValidChoice(c)) {
-            return;
+            return false;
         }
         
         if ( selected.contains(c)  ) {
             if ( allowUnselect ) { 
                 this.selected.remove(c);
                 onSelectStateChanged(c, false);
-            }
+            } else 
+                return false;
         } else {
             this.selected.add(c);
             onSelectStateChanged(c, true);
         }
-
-        if (hasAllTargets()) {
-            selectButtonOK();
-        } else {
-            this.showMessage();
-        }
+        return true;
     }
 
+
+    protected void onSelectStateChanged(T c, boolean newState) {
+        if( c instanceof Card )
+            ((Card)c).setUsedToPay(newState); // UI supports card highlighting though this abstraction-breaking mechanism
+    } 
+
+
+    protected void afterStop() {
+        for(T c : selected)
+            if( c instanceof Card)
+                ((Card)c).setUsedToPay(false);
+
+        super.afterStop(); // It's ultimatelly important to keep call to super class!
+    
+   }
 
 
 
