@@ -324,7 +324,6 @@ public class PlayerControllerHuman extends PlayerController {
 
         int max = minDiscard == 0 ? Integer.MAX_VALUE : minDiscard;
         InputSelectCards inp = new InputSelectCardsFromList(minDiscard, max, valid);
-        inp.setCancelWithSelectedAllowed(false);
         inp.setMessage("Discard %d cards");
         FThreads.setInputAndWait(inp);
         return inp.getSelected();

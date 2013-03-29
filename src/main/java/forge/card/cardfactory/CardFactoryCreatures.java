@@ -512,7 +512,7 @@ public class CardFactoryCreatures {
                         }
                     }; // Input
 
-                    target.setCancelWithSelectedAllowed(true);
+                    target.setCancelAllowed(true);
                     FThreads.setInputAndWait(target);
                     if(!target.hasCancelled()) {
                         for (final Card sac : target.getSelected()) {

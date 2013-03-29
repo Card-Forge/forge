@@ -16,7 +16,7 @@ public abstract class InputSelectManyBase<T extends GameEntity> extends InputSyn
     protected final int min;
     protected final int max;
     public boolean allowUnselect = false;
-    private boolean allowCancelWithNotEmptyList = false;
+    private boolean allowCancel = false;
     
     private String message = "Source-Card-Name - Select %d more card(s)";
 
@@ -36,7 +36,7 @@ public abstract class InputSelectManyBase<T extends GameEntity> extends InputSyn
         String msgToShow = getMessage();
         CMatchUI.SINGLETON_INSTANCE.showMessage(msgToShow);
 
-        boolean canCancel = (min == 0 && selected.isEmpty()) || isCancelWithSelectedAllowed();
+        boolean canCancel = (min == 0 && selected.isEmpty()) || allowCancel;
         boolean canOk = hasEnoughTargets();
 
         if (canOk && canCancel) {
@@ -125,6 +125,5 @@ public abstract class InputSelectManyBase<T extends GameEntity> extends InputSyn
     public final boolean isUnselectAllowed() { return allowUnselect; }
     public final void setUnselectAllowed(boolean allow) { this.allowUnselect = allow; }
 
-    public final boolean isCancelWithSelectedAllowed() { return allowCancelWithNotEmptyList; }
-    public final void setCancelWithSelectedAllowed(boolean allow) { this.allowCancelWithNotEmptyList = allow ; }
+    public final void setCancelAllowed(boolean allow) { this.allowCancel = allow ; }
 }

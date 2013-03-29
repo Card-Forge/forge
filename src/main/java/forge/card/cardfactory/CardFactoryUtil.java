@@ -3571,8 +3571,9 @@ public class CardFactoryUtil {
                                 card2 = ComputerUtilCard.getBestCreatureAI(aiChoices);
                             }
                         } else {
-                            InputSelectCards inp = new InputSelectCardsFromList(0, 1, choices);
-                            inp.setMessage("Select target artifact creature to put +1/+1 counter on it");
+                            InputSelectCards inp = new InputSelectCardsFromList(1, 1, choices);
+                            inp.setCancelAllowed(true);
+                            inp.setMessage("Select target artifact creature to give it +1/+1 counters from the dead " + card);
                             FThreads.setInputAndWait(inp);
                             if( !inp.hasCancelled() ) {
                                 card2 = inp.getSelected().get(0);

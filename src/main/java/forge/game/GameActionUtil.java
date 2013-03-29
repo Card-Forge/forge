@@ -531,7 +531,7 @@ public final class GameActionUtil {
                 
                 InputSelectCards inp = new InputSelectCardsFromList(amount, amount, choiceList);
                 inp.setMessage("Select %d card(s) to return to hand");
-                inp.setCancelWithSelectedAllowed(true);
+                inp.setCancelAllowed(true);
                 
                 FThreads.setInputAndWait(inp);
                 if( inp.hasCancelled() || inp.getSelected().size() != amount)
@@ -550,7 +550,7 @@ public final class GameActionUtil {
 
                 InputSelectCards inp = new InputSelectCardsFromList(amount, amount, choiceList);
                 inp.setMessage("Select %d card(s) to discard");
-                inp.setCancelWithSelectedAllowed(true);
+                inp.setCancelAllowed(true);
                 
                 FThreads.setInputAndWait(inp);
                 if( inp.hasCancelled() || inp.getSelected().size() != amount)
