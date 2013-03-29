@@ -26,6 +26,7 @@ import forge.FThreads;
 import forge.control.input.Input;
 import forge.game.GameState;
 import forge.game.MatchController;
+import forge.game.ai.AiInput;
 import forge.game.phase.PhaseHandler;
 import forge.game.player.Player;
 
@@ -70,7 +71,11 @@ public class InputProxy implements Observer {
         
         if (nextInput != null) {
             this.input.set(nextInput);
-            FThreads.invokeInEDT(new Runnable() { @Override public void run() { nextInput.showMessage(); } });
+            Runnable showMessage = new Runnable() { @Override public void run() { nextInput.showMessage(); } };
+//            if( nextInput instanceof AiInput )
+//                FThreads.invokeInNewThread(showMessage, true);
+//            else
+                FThreads.invokeInEDT(showMessage);
         } else if (!ph.isPlayerPriorityAllowed()) {
             ph.getPriorityPlayer().getController().passPriority();
         }

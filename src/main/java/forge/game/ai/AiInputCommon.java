@@ -28,7 +28,7 @@ import forge.control.input.InputBase;
  * @author Forge
  * @version $Id$
  */
-public class AiInputCommon extends InputBase {
+public class AiInputCommon extends InputBase implements AiInput {
     /** Constant <code>serialVersionUID=-3091338639571662216L</code>. */
     private static final long serialVersionUID = -3091338639571662216L;
 
