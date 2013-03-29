@@ -65,6 +65,7 @@ import forge.card.trigger.TriggerHandler;
 import forge.card.trigger.TriggerType;
 import forge.control.input.InputBase;
 import forge.control.input.InputSelectCards;
+import forge.control.input.InputSelectCardsFromList;
 import forge.game.GameState;
 import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilCard;
@@ -3555,42 +3556,33 @@ public class CardFactoryUtil {
 
                     @Override
                     public void execute() {
+                        final Player modularPlayer =  card.getController();
+                        final List<Card> choices = Lists.newArrayList();
+                        for(Card c : modularPlayer.getGame().getCardsIn(ZoneType.Battlefield)) {
+                            if( c.isCreature() && c.isArtifact() && c.canBeTargetedBy(ability))
+                                choices.add(c);
+                        }
+
+                        Card card2 = null;
                         // Target as Modular is Destroyed
-                        if (card.getController().isComputer()) {
-                            List<Card> choices =
-                                    CardLists.filter(card.getController().getCardsIn(ZoneType.Battlefield), new Predicate<Card>() {
-                                @Override
-                                public boolean apply(final Card c) {
-                                    return c.isCreature() && c.isArtifact();
-                                }
-                            });
-                            if (choices.size() != 0) {
-                                ability.setTargetCard(ComputerUtilCard.getBestCreatureAI(choices));
-
-                                if (ability.getTargetCard() != null) {
-                                    ability.setStackDescription("Put " + card.getCounters(CounterType.P1P1)
-                                            + " +1/+1 counter/s from " + card + " on " + ability.getTargetCard());
-                                    Singletons.getModel().getGame().getStack().addSimultaneousStackEntry(ability);
-
-                                }
+                        if (modularPlayer.isComputer()) {
+                            final List<Card> aiChoices = CardLists.filterControlledBy(choices, modularPlayer);
+                            if (!aiChoices.isEmpty()) {
+                                card2 = ComputerUtilCard.getBestCreatureAI(aiChoices);
                             }
                         } else {
-                            InputSelectCards inp = new InputSelectCards(1,1) {
-                                private static final long serialVersionUID = -7895723996302990127L;
-
-                                @Override
-                                protected boolean isValidChoice(Card card2) {
-                                    return card2.isCreature() && card2.isArtifact() && card.isInPlay() && card.canBeTargetedBy(ability);
-                                }
-                            };
+                            InputSelectCards inp = new InputSelectCardsFromList(0, 1, choices);
+                            inp.setMessage("Select target artifact creature to put +1/+1 counter on it");
                             FThreads.setInputAndWait(inp);
                             if( !inp.hasCancelled() ) {
-                                Card card2 = inp.getSelected().get(0);
-                                ability.setTargetCard(card2);
-                                String desc = String.format("Put %d +1/+1 counter/s from %s on %s", card.getCounters(CounterType.P1P1), card, card2);
-                                ability.setStackDescription(desc);
-                                Singletons.getModel().getGame().getStack().add(ability);
+                                card2 = inp.getSelected().get(0);
                             }
+                        }
+                        ability.setTargetCard(card2);
+                        if ( null != card2 ) {
+                            String desc = String.format("Put %d +1/+1 counter/s from %s on %s", card.getCounters(CounterType.P1P1), card, card2);
+                            ability.setStackDescription(desc);
+                            modularPlayer.getGame().getStack().addSimultaneousStackEntry(ability);
                         }
                     }
                 });

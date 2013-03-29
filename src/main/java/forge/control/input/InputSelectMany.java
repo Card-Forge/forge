@@ -6,7 +6,7 @@ import java.util.List;
  * TODO: Write javadoc for this type.
  *
  */
-public interface InputSelectList<T> extends InputSynchronized { 
+public interface InputSelectMany<T> extends InputSynchronized { 
     boolean hasCancelled();
     List<T> getSelected();
 }

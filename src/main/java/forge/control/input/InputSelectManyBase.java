@@ -7,7 +7,7 @@ import forge.GameEntity;
 import forge.gui.match.CMatchUI;
 import forge.view.ButtonUtil;
 
-public abstract class InputSelectListBase<T extends GameEntity> extends InputSyncronizedBase implements InputSelectList<T> {
+public abstract class InputSelectManyBase<T extends GameEntity> extends InputSyncronizedBase implements InputSelectMany<T> {
 
     private static final long serialVersionUID = -2305549394512889450L;
 
@@ -22,7 +22,7 @@ public abstract class InputSelectListBase<T extends GameEntity> extends InputSyn
 
 
 
-    protected InputSelectListBase(int min, int max) {
+    protected InputSelectManyBase(int min, int max) {
         selected = new ArrayList<T>();
         if (min > max) {
             throw new IllegalArgumentException("Min must not be greater than Max");
@@ -82,10 +82,6 @@ public abstract class InputSelectListBase<T extends GameEntity> extends InputSyn
 
     @Override
     public final void selectButtonOK() {
-        // should check here if it still gets into an infinite loop
-        // if an ability is put on stack before this input is stopped;
-        // if it does, uncomment the 5 lines below, use them as method body
-
         this.stop();
     }
 

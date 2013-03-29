@@ -91,7 +91,7 @@ public class TargetSelection {
             sb.append("\n");
             sb.append(tgt.getVTSelection());
 
-            CMatchUI.SINGLETON_INSTANCE.showMessage(sb.toString());
+            showMessage(sb.toString());
 
             // If reached Minimum targets, enable OK button
             if (!tgt.isMinTargetsChosen(sa.getSourceCard(), sa) || tgt.isDividedAsYouChoose()) {

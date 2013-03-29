@@ -13832,8 +13832,8 @@ src/main/java/forge/control/input/InputPayManaX.java -text
 src/main/java/forge/control/input/InputPayment.java -text
 src/main/java/forge/control/input/InputSelectCards.java -text
 src/main/java/forge/control/input/InputSelectCardsFromList.java -text
-src/main/java/forge/control/input/InputSelectList.java -text
-src/main/java/forge/control/input/InputSelectListBase.java -text
+src/main/java/forge/control/input/InputSelectMany.java -text
+src/main/java/forge/control/input/InputSelectManyBase.java -text
 src/main/java/forge/control/input/InputSynchronized.java -text
 src/main/java/forge/control/input/InputSyncronizedBase.java -text
 src/main/java/forge/control/input/package-info.java svneol=native#text/plain
