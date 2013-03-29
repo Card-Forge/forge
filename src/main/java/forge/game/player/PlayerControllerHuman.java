@@ -1,6 +1,7 @@
 package forge.game.player;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -278,7 +279,7 @@ public class PlayerControllerHuman extends PlayerController {
      * @see forge.game.player.PlayerController#reveal(java.lang.String, java.util.List, forge.game.zone.ZoneType, forge.game.player.Player)
      */
     @Override
-    public void reveal(String string, List<Card> cards, ZoneType zone, Player owner) {
+    public void reveal(String string, Collection<Card> cards, ZoneType zone, Player owner) {
         String message = string;
         if ( StringUtils.isBlank(message) ) 
             message = String.format("Looking at %s's %s", owner, zone);

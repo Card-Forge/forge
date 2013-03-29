@@ -91,19 +91,27 @@ public abstract class CostPartWithList extends CostPart {
     }
 
     public final boolean executePayment(SpellAbility ability, Card targetCard) {
-        addToList(targetCard);
+        this.list.add(targetCard);
         doPayment(ability, targetCard);
         return true;
     }
 
     // always returns true, made this to inline with return
     public final boolean executePayment(SpellAbility ability, Collection<Card> targetCards) {
+        if(canPayListAtOnce()) { // This is used by reveal. Without it when opponent would reveal hand, you'll get N message boxes. 
+            this.list.addAll(targetCards);
+            doListPayment(ability, targetCards);
+            return true;
+        }
         for(Card c: targetCards)
             executePayment(ability, c);
         return true;
     }
 
     protected abstract void doPayment(SpellAbility ability, Card targetCard);
+    // Overload these two only together, set to true and perform payment on list
+    protected boolean canPayListAtOnce() { return false; }
+    protected void doListPayment(SpellAbility ability, Collection<Card> targetCards) { };
 
     /**
      * TODO: Write javadoc for this method.

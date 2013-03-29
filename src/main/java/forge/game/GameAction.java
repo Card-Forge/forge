@@ -18,6 +18,7 @@
 package forge.game;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -1393,6 +1394,18 @@ public class GameAction {
         }
         return true;
     } // sacrificeDestroy()
+
+    /**
+     * TODO: Write javadoc for this method.
+     * @param targetCard
+     * @param activatingPlayer
+     */
+    public void reveal(Collection<Card> cards, Player cardOwner) {
+        for(Player p : game.getPlayers()) {
+            if ( cardOwner == p) continue;
+            p.getController().reveal(cardOwner + " reveals card", cards, ZoneType.Hand, cardOwner);
+        }
+    }
 
     /**
      * <p>

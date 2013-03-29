@@ -18,107 +18,28 @@
 package forge.card.cost;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+
+import com.google.common.collect.Lists;
+
 import forge.Card;
 import forge.CardLists;
 import forge.FThreads;
-import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.spellability.SpellAbility;
-import forge.control.input.InputPayment;
+import forge.control.input.InputSelectCards;
+import forge.control.input.InputSelectCardsFromList;
 import forge.game.GameState;
 import forge.game.player.AIPlayer;
 import forge.game.player.Player;
-import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
-import forge.view.ButtonUtil;
 
 /**
  * The Class CostReveal.
  */
 public class CostReveal extends CostPartWithList {
     // Reveal<Num/Type/TypeDescription>
-
-    /** 
-     * TODO: Write javadoc for this type.
-     *
-     */
-    public static final class InputPayReveal extends InputPayCostBase {
-        private final CostReveal part;
-        private final String discType;
-        private final List<Card> handList;
-        private final SpellAbility sa;
-        private final int nNeeded;
-        private static final long serialVersionUID = -329993322080934435L;
-        private int nReveal = 0;
-
-
-        /**
-         * TODO: Write javadoc for Constructor.
-         * @param part
-         * @param discType
-         * @param handList
-         * @param sa
-         * @param payment
-         * @param nNeeded
-         */
-        public InputPayReveal(CostReveal part, String discType, List<Card> handList, SpellAbility sa, int nNeeded) {
-            this.part = part;
-            this.discType = discType;
-            this.handList = handList;
-            this.sa = sa;
-            this.nNeeded = nNeeded;
-        }
-
-        @Override
-        public void showMessage() {
-            if (nNeeded == 0) {
-                this.done();
-            }
-
-            /*if (handList.size() + this.nReveal < nNeeded) {
-                this.stop();
-            }*/
-            final StringBuilder type = new StringBuilder("");
-            if (!discType.equals("Card")) {
-                type.append(" ").append(discType);
-            }
-            final StringBuilder sb = new StringBuilder();
-            sb.append("Select a ");
-            sb.append(part.getDescriptiveType());
-            sb.append(" to reveal.");
-            if (nNeeded > 1) {
-                sb.append(" You have ");
-                sb.append(nNeeded - this.nReveal);
-                sb.append(" remaining.");
-            }
-            showMessage(sb.toString());
-            ButtonUtil.enableOnlyCancel();
-        }
-
-        @Override
-        public void selectCard(final Card card) {
-            Zone zone = Singletons.getModel().getGame().getZoneOf(card);
-            if (zone.is(ZoneType.Hand) && handList.contains(card)) {
-                // send in List<Card> for Typing
-                handList.remove(card);
-                part.executePayment(sa, card);
-                this.nReveal++;
-
-                // in case no more cards in hand
-                if (this.nReveal == nNeeded) {
-                    this.done();
-                } else if (sa.getActivatingPlayer().getZone(ZoneType.Hand).size() == 0) {
-                    // really
-                    // shouldn't
-                    // happen
-                    this.cancel();
-                } else {
-                    this.showMessage();
-                }
-            }
-        }
-    }
 
     /**
      * Instantiates a new cost reveal.
@@ -239,10 +160,13 @@ public class CostReveal extends CostPartWithList {
                 }
             }
             if ( num == 0 ) return true;
-
-            InputPayment inp = new InputPayReveal(this, this.getType(), handList, ability, num);
+            InputSelectCards inp = new InputSelectCardsFromList(num, num, handList);
+            inp.setMessage("Select %d more " + getDescriptiveType() + " card(s) to reveal.");
             FThreads.setInputAndWait(inp);
-            return inp.isPaid();
+            if ( inp.hasCancelled() )
+                return false;
+
+            return executePayment(ability, inp.getSelected());
         }
     }
 
@@ -284,9 +208,16 @@ public class CostReveal extends CostPartWithList {
      */
     @Override
     protected void doPayment(SpellAbility ability, Card targetCard) {
-        // write code to actually reveal card
+        ability.getActivatingPlayer().getGame().getAction().reveal(Lists.newArrayList(targetCard), ability.getActivatingPlayer());
     }
 
+    
+    @Override protected boolean canPayListAtOnce() { return true; }
+    @Override
+    protected void doListPayment(SpellAbility ability, Collection<Card> targetCards) {
+        ability.getActivatingPlayer().getGame().getAction().reveal(targetCards, ability.getActivatingPlayer());
+    }    
+    
     /* (non-Javadoc)
      * @see forge.card.cost.CostPartWithList#getHashForList()
      */
