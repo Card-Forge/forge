@@ -601,6 +601,7 @@ res/cardsfolder/a/auriok_edgewright.txt svneol=native#text/plain
 res/cardsfolder/a/auriok_glaivemaster.txt svneol=native#text/plain
 res/cardsfolder/a/auriok_replica.txt -text
 res/cardsfolder/a/auriok_salvagers.txt svneol=native#text/plain
+res/cardsfolder/a/auriok_siege_sled.txt -text
 res/cardsfolder/a/auriok_steelshaper.txt -text
 res/cardsfolder/a/auriok_sunchaser.txt svneol=native#text/plain
 res/cardsfolder/a/auriok_survivors.txt -text
@@ -1369,6 +1370,7 @@ res/cardsfolder/b/burning_oil.txt -text
 res/cardsfolder/b/burning_palm_efreet.txt -text
 res/cardsfolder/b/burning_sands.txt -text
 res/cardsfolder/b/burning_shield_askari.txt svneol=native#text/plain
+res/cardsfolder/b/burning_tree_bloodscale.txt -text
 res/cardsfolder/b/burning_tree_shaman.txt -text
 res/cardsfolder/b/burning_vengeance.txt -text
 res/cardsfolder/b/burning_wish.txt -text
