@@ -12478,7 +12478,6 @@ res/lists/quest-pet-shop-icons.txt svneol=native#text/plain
 res/lists/quest-pet-token-images.txt svneol=native#text/plain
 res/lists/token-images.txt svneol=native#text/plain
 res/lists/tournamentpack-images.txt svneol=native#text/plain
-res/quest/all-prices.txt svneol=native#text/plain
 res/quest/bazaar/ape_pet_l1.txt -text
 res/quest/bazaar/ape_pet_l2.txt -text
 res/quest/bazaar/ape_pet_l3.txt -text
