@@ -24,10 +24,12 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import javax.swing.JScrollPane;
 
 import forge.Card;
+import forge.FThreads;
 import forge.view.arcane.util.Animation;
 import forge.view.arcane.util.CardPanelMouseListener;
 
@@ -497,7 +499,27 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
      * @param newList
      *            an array of {@link forge.Card} objects.
      */
+    private final AtomicBoolean wantRedraw = new AtomicBoolean(false);
     public void setupPlayZone() {
+        boolean wasSet = wantRedraw.getAndSet(true);
+        if(wasSet) return;
+        FThreads.invokeInEDT(new Runnable() {
+            @Override
+            public void run() {
+                try { // user won't notice, but the requests coming in that interval won't trigger re-draw
+                    Thread.sleep(20);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } 
+                wantRedraw.set(false);
+                final List<Card> modelshot = new ArrayList<Card>(model); // I am afraid of ConcurrentModificationExceptions
+                setupPlayZone(modelshot);
+            }
+        });
+    }
+    
+    
+    public void setupPlayZone(final List<Card> model) {
         List<Card> oldCards, toDelete;
         oldCards = new ArrayList<Card>();
         for (final CardPanel cpa : getCardPanels()) {

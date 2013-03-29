@@ -19,20 +19,18 @@ package forge.card.cost;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.swing.JOptionPane;
-
 import forge.Card;
 import forge.CardLists;
-import forge.Singletons;
+import forge.FThreads;
 import forge.card.ability.AbilityUtils;
 import forge.card.spellability.SpellAbility;
-import forge.control.input.Input;
+import forge.control.input.InputPayment;
 import forge.game.GameState;
 import forge.game.ai.ComputerUtil;
 import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
+import forge.gui.GuiDialog;
 import forge.gui.match.CMatchUI;
 import forge.view.ButtonUtil;
 
@@ -40,6 +38,70 @@ import forge.view.ButtonUtil;
  * The Class CostSacrifice.
  */
 public class CostSacrifice extends CostPartWithList {
+
+    /** 
+     * TODO: Write javadoc for this type.
+     *
+     */
+    public static final class InputPayCostSacrificeFromList extends InputPayCostBase {
+        private final CostSacrifice part;
+        private final SpellAbility sa;
+        private final int nNeeded;
+        private final List<Card> typeList;
+        private static final long serialVersionUID = 2685832214519141903L;
+        private int nSacrifices = 0;
+
+        /**
+         * TODO: Write javadoc for Constructor.
+         * @param part
+         * @param sa
+         * @param nNeeded
+         * @param payment
+         * @param typeList
+         */
+        public InputPayCostSacrificeFromList(CostSacrifice part, SpellAbility sa, int nNeeded, List<Card> typeList) {
+            this.part = part;
+            this.sa = sa;
+            this.nNeeded = nNeeded;
+            this.typeList = typeList;
+        }
+
+        @Override
+        public void showMessage() {
+            if (nNeeded == 0) {
+                this.done();
+            }
+
+            final StringBuilder msg = new StringBuilder("Sacrifice ");
+            final int nLeft = nNeeded - this.nSacrifices;
+            msg.append(nLeft).append(" ");
+            msg.append(part.getDescriptiveType());
+            if (nLeft > 1) {
+                msg.append("s");
+            }
+
+            CMatchUI.SINGLETON_INSTANCE.showMessage(msg.toString());
+            ButtonUtil.enableOnlyCancel();
+        }
+
+        @Override
+        public void selectCard(final Card card) {
+            if (typeList.contains(card)) {
+                this.nSacrifices++;
+                part.executePayment(sa, card);
+                typeList.remove(card);
+                // in case nothing else to sacrifice
+                if (this.nSacrifices == nNeeded) {
+                    this.done();
+                } else if (typeList.isEmpty()) {
+                    // happen
+                    this.cancel();
+                } else {
+                    this.showMessage();
+                }
+            }
+        }
+    }
 
     /**
      * Instantiates a new cost sacrifice.
@@ -125,27 +187,14 @@ public class CostSacrifice extends CostPartWithList {
     /*
      * (non-Javadoc)
      * 
-     * @see forge.card.cost.CostPart#payAI(forge.card.spellability.SpellAbility,
-     * forge.Card, forge.card.cost.Cost_Payment)
-     */
-    @Override
-    public final void payAI(final AIPlayer ai, final SpellAbility ability, final Card source, final CostPayment payment, final GameState game) {
-        this.addListToHash(ability, "Sacrificed");
-        for (final Card c : this.getList()) {
-            Singletons.getModel().getGame().getAction().sacrifice(c, ability);
-        }
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
      * @see
      * forge.card.cost.CostPart#payHuman(forge.card.spellability.SpellAbility,
      * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final boolean payHuman(final SpellAbility ability, final Card source, final CostPayment payment, final GameState game) {
+    public final boolean payHuman(final SpellAbility ability, final GameState game) {
         final String amount = this.getAmount();
+        final Card source = ability.getSourceCard();
         final String type = this.getType();
         final Player activator = ability.getActivatingPlayer();
         List<Card> list = new ArrayList<Card>(activator.getCardsIn(ZoneType.Battlefield));
@@ -155,223 +204,76 @@ public class CostSacrifice extends CostPartWithList {
         }
 
         if (this.payCostFromSource()) {
-            final Input inp = CostSacrifice.sacrificeThis(ability, payment, this);
-            Singletons.getModel().getMatch().getInput().setInputInterrupt(inp);
+            if (source.getController() == ability.getActivatingPlayer() && source.isInPlay()) {
+                return GuiDialog.confirm(source, source.getName() + " - Sacrifice?") && executePayment(ability, source);
+
+            }
         } else if (amount.equals("All")) {
-            this.setList(list);
-            CostSacrifice.sacrificeAll(ability, payment, this, list);
-            //this.addListToHash(ability, "Sacrificed");
-            return true;
+            return executePayment(ability, list);
         } else {
             Integer c = this.convertAmount();
             if (c == null) {
-                final String sVar = ability.getSVar(amount);
                 // Generalize this
-                if (sVar.equals("XChoice")) {
+                if (ability.getSVar(amount).equals("XChoice")) {
                     c = CostUtil.chooseXValue(source, ability, list.size());
                 } else {
                     c = AbilityUtils.calculateAmount(source, amount, ability);
                 }
             }
             if (0 == c.intValue()) {
-                payment.setPaidManaPart(this);
                 return true;
             }
-            final Input inp = CostSacrifice.sacrificeFromList(ability, payment, this, list, c);
-            Singletons.getModel().getMatch().getInput().setInputInterrupt(inp);
+            InputPayment inp = new InputPayCostSacrificeFromList(this, ability, c, list);
+            FThreads.setInputAndWait(inp);
+            return inp.isPaid();
         }
-
         return false;
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * forge.card.cost.CostPart#decideAIPayment(forge.card.spellability.SpellAbility
-     * , forge.Card, forge.card.cost.Cost_Payment)
+    @Override
+    protected void doPayment(SpellAbility ability, Card targetCard) {
+        ability.getActivatingPlayer().getGame().getAction().sacrifice(targetCard, ability);
+    }
+
+    /* (non-Javadoc)
+     * @see forge.card.cost.CostPartWithList#getHashForList()
      */
     @Override
-    public final boolean decideAIPayment(final AIPlayer ai, final SpellAbility ability, final Card source, final CostPayment payment) {
-        this.resetList();
-        final Player activator = ability.getActivatingPlayer();
+    public String getHashForList() {
+        return "Sacrificed";
+    }
+
+    /* (non-Javadoc)
+     * @see forge.card.cost.CostPart#decideAIPayment(forge.game.player.AIPlayer, forge.card.spellability.SpellAbility, forge.Card)
+     */
+    @Override
+    public PaymentDecision decideAIPayment(AIPlayer ai, SpellAbility ability, Card source) {
+
         if (this.payCostFromSource()) {
-            this.getList().add(source);
-        } else if (this.getAmount().equals("All")) {
+            return new PaymentDecision(source);
+        } 
+        if (this.getAmount().equals("All")) {
             /*List<Card> typeList = new ArrayList<Card>(activator.getCardsIn(ZoneType.Battlefield));
             typeList = CardLists.getValidCards(typeList, this.getType().split(";"), activator, source);
             if (activator.hasKeyword("You can't sacrifice creatures to cast spells or activate abilities.")) {
                 typeList = CardLists.getNotType(typeList, "Creature");
             }*/
             // Does the AI want to use Sacrifice All?
-            return false;
-        } else {
-            Integer c = this.convertAmount();
-            if (c == null) {
-                if (ability.getSVar(this.getAmount()).equals("XChoice")) {
-                    return false;
-                }
-
-                c = AbilityUtils.calculateAmount(source, this.getAmount(), ability);
-            }
-            this.setList(ComputerUtil.chooseSacrificeType(activator, this.getType(), source, ability.getTargetCard(), c));
-            if (this.getList() == null) {
-                return false;
-            }
+            return null;
         }
-        return true;
+
+        Integer c = this.convertAmount();
+        if (c == null) {
+            if (ability.getSVar(this.getAmount()).equals("XChoice")) {
+                return null;
+            }
+
+            c = AbilityUtils.calculateAmount(source, this.getAmount(), ability);
+        }
+        List<Card> list = ComputerUtil.chooseSacrificeType(ai, this.getType(), source, ability.getTargetCard(), c);
+        return new PaymentDecision(list);
     }
 
     // Inputs
 
-    /**
-     * <p>
-     * sacrificeAllType.
-     * </p>
-     * 
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @param payment
-     *            a {@link forge.card.cost.CostPayment} object.
-     * @param part
-     *            TODO
-     * @param typeList
-     *            TODO
-     */
-    public static void sacrificeAll(final SpellAbility sa, final CostPayment payment, final CostPart part,
-            final List<Card> typeList) {
-        // TODO Ask First
-        for (final Card card : typeList) {
-            payment.getAbility().addCostToHashList(card, "Sacrificed");
-            Singletons.getModel().getGame().getAction().sacrifice(card, sa);
-        }
-
-        payment.setPaidManaPart(part);
-    }
-
-    /**
-     * <p>
-     * sacrificeFromList.
-     * </p>
-     * 
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @param payment
-     *            a {@link forge.card.cost.CostPayment} object.
-     * @param part
-     *            TODO
-     * @param typeList
-     *            TODO
-     * @param nNeeded
-     *            the n needed
-     * @return a {@link forge.control.input.Input} object.
-     */
-    public static Input sacrificeFromList(final SpellAbility sa, final CostPayment payment, final CostSacrifice part,
-            final List<Card> typeList, final int nNeeded) {
-        final Input target = new Input() {
-            private static final long serialVersionUID = 2685832214519141903L;
-            private int nSacrifices = 0;
-
-            @Override
-            public void showMessage() {
-                if (nNeeded == 0) {
-                    this.done();
-                }
-
-                final StringBuilder msg = new StringBuilder("Sacrifice ");
-                final int nLeft = nNeeded - this.nSacrifices;
-                msg.append(nLeft).append(" ");
-                msg.append(part.getDescriptiveType());
-                if (nLeft > 1) {
-                    msg.append("s");
-                }
-
-                CMatchUI.SINGLETON_INSTANCE.showMessage(msg.toString());
-                ButtonUtil.enableOnlyCancel();
-            }
-
-            @Override
-            public void selectButtonCancel() {
-                this.cancel();
-            }
-
-            @Override
-            public void selectCard(final Card card) {
-                if (typeList.contains(card)) {
-                    this.nSacrifices++;
-                    part.addToList(card);
-                    Singletons.getModel().getGame().getAction().sacrifice(card, sa);
-                    typeList.remove(card);
-                    // in case nothing else to sacrifice
-                    if (this.nSacrifices == nNeeded) {
-                        this.done();
-                    } else if (typeList.size() == 0) {
-                        // happen
-                        this.cancel();
-                    } else {
-                        this.showMessage();
-                    }
-                }
-            }
-
-            public void done() {
-                this.stop();
-                part.addListToHash(sa, "Sacrificed");
-                payment.paidCost(part);
-            }
-
-            public void cancel() {
-                this.stop();
-
-                payment.cancelCost();
-            }
-        };
-
-        return target;
-    } // sacrificeType()
-
-    /**
-     * <p>
-     * sacrificeThis.
-     * </p>
-     * 
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @param payment
-     *            a {@link forge.card.cost.CostPayment} object.
-     * @param part
-     *            TODO
-     * @return a {@link forge.control.input.Input} object.
-     */
-    public static Input sacrificeThis(final SpellAbility sa, final CostPayment payment, final CostSacrifice part) {
-        final Input target = new Input() {
-            private static final long serialVersionUID = 2685832214519141903L;
-
-            @Override
-            public void showMessage() {
-                final Card card = sa.getSourceCard();
-                if (card.getController().isHuman() && card.isInPlay()) {
-                    final StringBuilder sb = new StringBuilder();
-                    sb.append(card.getName());
-                    sb.append(" - Sacrifice?");
-                    final Object[] possibleValues = { "Yes", "No" };
-                    final Object choice = JOptionPane.showOptionDialog(null, sb.toString(), card.getName() + " - Cost",
-                            JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, possibleValues,
-                            possibleValues[0]);
-                    if (choice.equals(0)) {
-                        part.addToList(card);
-                        part.addListToHash(sa, "Sacrificed");
-                        Singletons.getModel().getGame().getAction().sacrifice(card, sa);
-                        this.stop();
-                        payment.paidCost(part);
-                    } else {
-                        this.stop();
-                        payment.cancelCost();
-                    }
-                }
-            }
-        };
-
-        return target;
-    } // input_sacrifice()
 }

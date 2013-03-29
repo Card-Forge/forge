@@ -21,16 +21,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import com.google.common.base.Predicate;
 
 import forge.Card;
 import forge.CardLists;
 import forge.CardPredicates;
+import forge.FThreads;
 import forge.CardPredicates.Presets;
-import forge.Command;
 import forge.CounterType;
-import forge.Singletons;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.mana.ManaCost;
@@ -39,8 +37,9 @@ import forge.card.spellability.Ability;
 import forge.card.spellability.AbilityManaPart;
 import forge.card.spellability.AbilityStatic;
 import forge.card.spellability.SpellAbility;
-import forge.control.input.Input;
-import forge.control.input.InputSelectManyCards;
+import forge.control.input.InputPayManaExecuteCommands;
+import forge.control.input.InputSelectCards;
+import forge.control.input.InputSelectCardsFromList;
 import forge.game.GameActionUtil;
 import forge.game.GameState;
 import forge.game.ai.ComputerUtil;
@@ -51,12 +50,9 @@ import forge.game.ai.ComputerUtilMana;
 import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
-import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 import forge.gui.GuiDialog;
-import forge.gui.match.CMatchUI;
-import forge.view.ButtonUtil;
 
 /**
  * <p>
@@ -174,18 +170,6 @@ public class Upkeep extends Phase {
         for (int i = 0; i < list.size(); i++) {
             final Card c = list.get(i);
             if (c.hasStartOfKeyword("(Echo unpaid)")) {
-
-                final Command paidCommand = Command.BLANK;
-
-                final Command unpaidCommand = new Command() {
-                    private static final long serialVersionUID = -7354791599039157375L;
-
-                    @Override
-                    public void execute() {
-                        game.getAction().sacrifice(c, null);
-                    }
-                };
-
                 final Ability blankAbility = Upkeep.BlankAbility(c, c.getEchoCost());
 
                 final StringBuilder sb = new StringBuilder();
@@ -198,7 +182,9 @@ public class Upkeep extends Phase {
                         Player controller = c.getController();
                         if (controller.isHuman()) {
                             Cost cost = new Cost(c, c.getEchoCost().trim(), true);
-                            GameActionUtil.payCostDuringAbilityResolve(controller, blankAbility, cost, paidCommand, unpaidCommand, null, game);
+                            if ( !GameActionUtil.payCostDuringAbilityResolve(controller, blankAbility, cost, null, game) )
+                                game.getAction().sacrifice(c, null);;
+
                         } else { // computer
                             if (ComputerUtilCost.canPayCost(blankAbility, controller)) {
                                 ComputerUtil.playNoStack((AIPlayer)controller, blankAbility, game);
@@ -279,44 +265,34 @@ public class Upkeep extends Phase {
                     final String[] k = ability.split(" pay ");
                     final ManaCost upkeepCost = new ManaCost(new ManaCostParser(k[1]));
 
-                    final Command unpaidCommand = new Command() {
-                        private static final long serialVersionUID = 8942537892273123542L;
-
-                        @Override
-                        public void execute() {
-                            if (c.getName().equals("Cosmic Horror")) {
-                                controller.addDamage(7, c);
-                            }
-                            game.getAction().destroy(c);
-                        }
-                    };
-
-                    final Command paidCommand = Command.BLANK;
-
-                    final Ability aiPaid = Upkeep.BlankAbility(c, upkeepCost.toString());
-
-                    final StringBuilder sb = new StringBuilder();
-                    sb.append("Upkeep for ").append(c).append("\n");
+                    final String sb = "Upkeep for " + c;
                     final Ability upkeepAbility = new Ability(c, ManaCost.ZERO) {
                         @Override
                         public void resolve() {
+                            final boolean isUpkeepPaid;
                             if (controller.isHuman()) {
-                                GameActionUtil.payManaDuringAbilityResolve(sb.toString(), upkeepCost, paidCommand, unpaidCommand);
+                                InputPayManaExecuteCommands inp = new InputPayManaExecuteCommands(controller, sb, upkeepCost);
+                                FThreads.setInputAndWait(inp);
+                                isUpkeepPaid = inp.isPaid();
                             } else { // computer
-                                if (ComputerUtilCost.canPayCost(aiPaid, controller) && !c.hasKeyword("Indestructible")) {
+                                Ability aiPaid = Upkeep.BlankAbility(c, upkeepCost.toString());
+                                isUpkeepPaid = ComputerUtilCost.canPayCost(aiPaid, controller) && !c.hasKeyword("Indestructible"); 
+                                if (isUpkeepPaid) {
                                     ComputerUtil.playNoStack((AIPlayer)controller, aiPaid, game);
-                                } else {
-                                    if (c.getName().equals("Cosmic Horror")) {
-                                        controller.addDamage(7, c);
-                                    }
-                                    game.getAction().destroy(c);
                                 }
                             }
+                            if( !isUpkeepPaid ) {
+                                if (c.getName().equals("Cosmic Horror")) {
+                                    controller.addDamage(7, c);
+                                }
+                                game.getAction().destroy(c);
+                            }
+                            
                         }
                     };
                     upkeepAbility.setActivatingPlayer(controller);
-                    upkeepAbility.setStackDescription(sb.toString());
-                    upkeepAbility.setDescription(sb.toString());
+                    upkeepAbility.setStackDescription(sb);
+                    upkeepAbility.setDescription(sb);
 
                     game.getStack().addSimultaneousStackEntry(upkeepAbility);
                 } // destroy
@@ -341,18 +317,6 @@ public class Upkeep extends Phase {
                     }
 
                     final String upkeepCost = cost;
-
-                    final Command unpaidCommand = new Command() {
-                        private static final long serialVersionUID = 5612348769167529102L;
-
-                        @Override
-                        public void execute() {
-                            game.getAction().sacrifice(c, null);
-                        }
-                    };
-
-                    final Command paidCommand = Command.BLANK;
-
                     final Ability blankAbility = Upkeep.BlankAbility(c, upkeepCost);
                     blankAbility.setActivatingPlayer(controller);
 
@@ -360,11 +324,11 @@ public class Upkeep extends Phase {
                         @Override
                         public void resolve() {
                             if (controller.isHuman()) {
-                                GameActionUtil.payCostDuringAbilityResolve(controller, blankAbility, blankAbility.getPayCosts(),
-                                        paidCommand, unpaidCommand, this, game);
+                                if ( !GameActionUtil.payCostDuringAbilityResolve(controller, blankAbility, blankAbility.getPayCosts(), this, game))
+                                    game.getAction().sacrifice(c, null);
                             } else { // computer
                                 if (ComputerUtilCost.shouldPayCost(controller, c, upkeepCost) && ComputerUtilCost.canPayCost(blankAbility, controller)) {
-                                    ComputerUtil.playNoStack((AIPlayer)controller, blankAbility, game);
+                                    ComputerUtil.playNoStack((AIPlayer)controller, blankAbility, game); // this makes AI pay
                                 } else {
                                     game.getAction().sacrifice(c, null);
                                 }
@@ -386,33 +350,24 @@ public class Upkeep extends Phase {
                     final String[] l = k[1].split(" pay ");
                     final ManaCost upkeepCost = new ManaCost(new ManaCostParser(l[1]));
 
-                    final Command unpaidCommand = new Command() {
-                        private static final long serialVersionUID = 1238166187561501928L;
-
-                        @Override
-                        public void execute() {
-                            controller.addDamage(upkeepDamage, c);
-                        }
-                    };
-
-                    final Command paidCommand = Command.BLANK;
-
-                    final Ability aiPaid = Upkeep.BlankAbility(c, upkeepCost.toString());
-
-                    final StringBuilder sb = new StringBuilder();
-                    sb.append("Damage upkeep for ").append(c).append("\n");
+                    final String sb = "Damage upkeep for " + c;
                     final Ability upkeepAbility = new Ability(c, ManaCost.ZERO) {
                         @Override
                         public void resolve() {
+                            boolean isUpkeepPaid = false;
                             if (controller.isHuman()) {
-                                GameActionUtil.payManaDuringAbilityResolve(sb.toString(), upkeepCost, paidCommand, unpaidCommand);
+                                InputPayManaExecuteCommands inp = new InputPayManaExecuteCommands(controller, sb, upkeepCost);
+                                FThreads.setInputAndWait(inp);
+                                isUpkeepPaid = inp.isPaid();
                             } else { // computers
-                                if (ComputerUtilCost.canPayCost(aiPaid, controller)
-                                        && (ComputerUtilCombat.predictDamageTo(controller, upkeepDamage, c, false) > 0)) {
+                                final Ability aiPaid = Upkeep.BlankAbility(c, upkeepCost.toString());
+                                if (ComputerUtilCost.canPayCost(aiPaid, controller) && ComputerUtilCombat.predictDamageTo(controller, upkeepDamage, c, false) > 0) {
                                     ComputerUtil.playNoStack((AIPlayer)controller, aiPaid, game);
-                                } else {
-                                    controller.addDamage(upkeepDamage, c);
+                                    isUpkeepPaid = true;
                                 }
+                            }
+                            if (!isUpkeepPaid) {
+                                controller.addDamage(upkeepDamage, c);
                             }
                         }
                     };
@@ -478,27 +433,20 @@ public class Upkeep extends Phase {
                 @Override
                 public void resolve() {
                     final List<Card> targets = CardLists.getTargetableCards(abyssGetTargets, this);
-                    final Input chooseArt = new InputSelectManyCards(1, 1) {
-                        private static final long serialVersionUID = 4820011040853968644L;
-
-                        @Override
-                        public String getMessage() {
-                            return abyss.getName() + " - Select one nonartifact creature to destroy";
-                        }
-
-                        @Override
-                        protected boolean isValidChoice(Card choice) {
-                            return choice.isCreature() && !choice.isArtifact() && canTarget(choice) && choice.getController() == player;
-                        };
-
-                        @Override
-                        protected Input onDone() {
-                            game.getAction().destroyNoRegeneration(selected.get(0));
-                            return null;
-                        }
-                    };
                     if (player.isHuman() && targets.size() > 0) {
-                        Singletons.getModel().getMatch().getInput().setInput(chooseArt); // Input
+                        final InputSelectCards chooseArt = new InputSelectCards(1, 1) {
+                            private static final long serialVersionUID = 4820011040853968644L;
+                            @Override
+                            protected boolean isValidChoice(Card choice) {
+                                return choice.isCreature() && !choice.isArtifact() && canTarget(choice) && choice.getController() == player;
+                            };
+                        };
+                        chooseArt.setMessage(abyss.getName() + " - Select one nonartifact creature to destroy");
+                        FThreads.setInputAndWait(chooseArt); // Input
+                        if (!chooseArt.hasCancelled()) {
+                            game.getAction().destroyNoRegeneration(chooseArt.getSelected().get(0));
+                        }
+                        
                     } else { // computer
 
                         final List<Card> indestruct = CardLists.getKeyword(targets, "Indestructible");
@@ -552,9 +500,12 @@ public class Upkeep extends Phase {
                         CardLists.sortByPowerAsc(creatures);
                         final int power = creatures.get(0).getNetAttack();
                         if (player.isHuman()) {
-                            Singletons.getModel().getMatch().getInput().setInput(
-                                    CardFactoryUtil.inputDestroyNoRegeneration(this.getLowestPowerList(creatures),
-                                            "Select creature with power: " + power + " to sacrifice."));
+                            InputSelectCards inp = new InputSelectCardsFromList(1,1,this.getLowestPowerList(creatures));
+                            inp.setMessage("Select creature with power: " + power + " to sacrifice.");
+                            FThreads.setInputAndWait(inp);
+                            if(!inp.hasCancelled())
+                                game.getAction().destroyNoRegeneration(inp.getSelected().get(0));
+
                         } else { // computer
                             final Card compyTarget = this.getCompyCardToDestroy(creatures);
                             game.getAction().destroyNoRegeneration(compyTarget);
@@ -617,9 +568,7 @@ public class Upkeep extends Phase {
         final Player player = game.getPhaseHandler().getPlayerTurn();
         final List<Card> cards = player.getCardsIn(ZoneType.Battlefield, "Demonic Hordes");
 
-        for (int i = 0; i < cards.size(); i++) {
-
-            final Card c = cards.get(i);
+        for (final Card c : cards) {
 
             final Ability cost = new Ability(c, new ManaCost(new ManaCostParser("B B B"))) {
                 @Override
@@ -627,7 +576,7 @@ public class Upkeep extends Phase {
                 }
             }; // end cost ability
 
-            final Ability noPay = new Ability(c, ManaCost.ZERO) {
+            final Ability unpaidHordesAb = new Ability(c, ManaCost.ZERO) {
                 @Override
                 public void resolve() {
                     final List<Card> playerLand = player.getLandsInPlay();
@@ -648,36 +597,24 @@ public class Upkeep extends Phase {
 
             final Player cp = c.getController();
             if (cp.isHuman()) {
-                final String question = "Pay Demonic Hordes upkeep cost?";
-                if (GuiDialog.confirm(c, question)) {
-                    final Ability pay = new Ability(c, ManaCost.ZERO) {
-                        @Override
-                        public void resolve() {
-                            if (game.getZoneOf(c).is(ZoneType.Battlefield)) {
-                                final StringBuilder coststring = new StringBuilder();
-                                coststring.append("Pay cost for ").append(c).append("\r\n");
-                                GameActionUtil.payManaDuringAbilityResolve(coststring.toString(), cost.getManaCost(),
-                                        Command.BLANK, Command.BLANK);
-                            }
-                        } // end resolve()
-                    }; // end pay ability
-                    pay.setStackDescription("Demonic Hordes - Upkeep Cost");
-                    pay.setDescription("Demonic Hordes - Upkeep Cost");
+                final Ability pay = new Ability(c, ManaCost.ZERO) {
+                    @Override
+                    public void resolve() {
+                        if (game.getZoneOf(c).is(ZoneType.Battlefield)) {
+                            InputPayManaExecuteCommands inp = new InputPayManaExecuteCommands(cp, "Pay Demonic Hordes upkeep cost", cost.getManaCost() /*, true */);
+                            FThreads.setInputAndWait(inp);
+                            if ( !inp.isPaid() ) 
+                                unpaidHordesAb.resolve();
+                        }
+                    } // end resolve()
+                }; // end pay ability
+                pay.setStackDescription("Demonic Hordes - Upkeep Cost");
+                pay.setDescription("Demonic Hordes - Upkeep Cost");
 
-                    game.getStack().addSimultaneousStackEntry(pay);
-
-                } // end choice
-                else {
-                    final StringBuilder sb = new StringBuilder();
-                    sb.append(c.getName()).append(" - is tapped and you must sacrifice a land of opponent's choice");
-                    noPay.setStackDescription(sb.toString());
-
-                    game.getStack().addSimultaneousStackEntry(noPay);
-
-                }
+                game.getStack().addSimultaneousStackEntry(pay);
             } // end human
             else { // computer
-                noPay.setActivatingPlayer(cp);
+                unpaidHordesAb.setActivatingPlayer(cp);
                 if (ComputerUtilCost.canPayCost(cost, (AIPlayer) cp)) {
                     final Ability computerPay = new Ability(c, ManaCost.ZERO) {
                         @Override
@@ -689,8 +626,8 @@ public class Upkeep extends Phase {
 
                     game.getStack().addSimultaneousStackEntry(computerPay);
                 } else {
-                    noPay.setStackDescription("Demonic Hordes - Upkeep Cost");
-                    game.getStack().addSimultaneousStackEntry(noPay);
+                    unpaidHordesAb.setStackDescription("Demonic Hordes - Upkeep Cost");
+                    game.getStack().addSimultaneousStackEntry(unpaidHordesAb);
 
                 }
             } // end computer
@@ -1027,15 +964,14 @@ public class Upkeep extends Phase {
                 @Override
                 public void resolve() {
                     final int num = source.getCounters(CounterType.FADE);
-                    final List<Card> list = CardLists.filter(player.getCardsIn(ZoneType.Battlefield), new Predicate<Card>() {
-                        @Override
-                        public boolean apply(final Card c) {
-                            return (c.isArtifact() || c.isLand() || c.isCreature()) && c.isUntapped();
-                        }
-                    });
+                    final List<Card> list = new ArrayList<Card>();
+                    for( Card c : player.getCardsIn(ZoneType.Battlefield)) {
+                        if ((c.isArtifact() || c.isLand() || c.isCreature()) && c.isUntapped())
+                            list.add(c);
+                    }
 
-                    for (int i = 0; i < num; i++) {
-                        if (player.isComputer()) {
+                    if (player.isComputer()) {
+                        for (int i = 0; i < num; i++) {
                             Card toTap = ComputerUtilCard.getWorstPermanentAI(list, false, false, false, false);
                             // try to find non creature cards without tap abilities
                             List<Card> betterList = CardLists.filter(list, new Predicate<Card>() {
@@ -1060,39 +996,19 @@ public class Upkeep extends Phase {
                                 toTap.tap();
                                 list.remove(toTap);
                             }
-                        } else {
-                            Singletons.getModel().getMatch().getInput().setInput(new Input() {
-                                private static final long serialVersionUID = 5313424586016061612L;
-
-                                @Override
-                                public void showMessage() {
-                                    if (list.isEmpty()) {
-                                        this.stop();
-                                        return;
-                                    }
-                                    String message = String.format("%s - Select %d untapped artifact(s), creature(s), or land(s) you control", source.getName(), num);
-                                    CMatchUI.SINGLETON_INSTANCE.showMessage(message);
-                                    ButtonUtil.disableAll();
-                                }
-
-                                @Override
-                                public void selectCard(final Card card) {
-                                    Zone zone = game.getZoneOf(card);
-                                    if (zone.is(ZoneType.Battlefield, player) && list.contains(card)) {
-                                        card.tap();
-                                        list.remove(card);
-                                        this.stop();
-                                    }
-                                }
-                            });
                         }
+                    } else {
+                        InputSelectCards inp = new InputSelectCardsFromList(num, num, list);
+                        inp.setMessage(source.getName() + " - Select %d untapped artifact(s), creature(s), or land(s) you control");
+                        FThreads.setInputAndWait(inp);
+                        for(Card crd : inp.getSelected())
+                            crd.tap();
                     }
                 }
             };
-            ability.setStackDescription(source.getName() + " - " + player
-                    + " taps X artifacts, creatures or lands he or she controls.");
-            ability.setDescription(source.getName() + " - " + player
-                    + " taps X artifacts, creatures or lands he or she controls.");
+            String message = source.getName() + " - " + player + " taps X artifacts, creatures or lands he or she controls.";
+            ability.setStackDescription(message);
+            ability.setDescription(message);
             ability.setActivatingPlayer(source.getController());
 
             game.getStack().addSimultaneousStackEntry(ability);

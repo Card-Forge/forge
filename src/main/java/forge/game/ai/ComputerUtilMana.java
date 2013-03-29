@@ -185,7 +185,7 @@ public class ComputerUtilMana {
                 if (!test) {
                     // Pay additional costs
                     if (ma.getPayCosts() != null) {
-                        final CostPayment pay = new CostPayment(ma.getPayCosts(), ma, game);
+                        final CostPayment pay = new CostPayment(ma.getPayCosts(), ma);
                         if (!pay.payComputerCosts((AIPlayer)ai, game)) {
                             continue;
                         }

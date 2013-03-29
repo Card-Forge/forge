@@ -1,0 +1,15 @@
+Name:Auriok Siege Sled
+ManaCost:6
+Types:Artifact Creature Juggernaut
+PT:3/5
+A:AB$ Pump | Cost$ 1 | ValidTgts$ Creature.Artifact | TgtPrompt$ Select target artifact creature that can't block this creature this turn | IsCurse$ True | RememberObjects$ Targeted | SubAbility$ DBCantblock | StackDescription$ None | SpellDescription$ Target artifact creature can't block CARDNAME this turn.
+SVar:DBCantblock:DB$ Effect | Name$ Auriok Siege Sled Effect | RememberObjects$ Targeted | StaticAbilities$ STCantBlock | ImprintCards$ Self
+SVar:STCantBlock:Mode$ Continuous | Affected$ Card.IsImprinted | EffectZone$ Command | AddHiddenKeyword$ CantBeBlockedBy Creature.IsRemembered | Description$ Auriok Siege Sled can't be blocked by target artifact creature.
+T:Mode$ Phase | Phase$ Cleanup | TriggerZones$ Battlefield | Execute$ DBCleanup | Static$ True
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ DBCleanup | Static$ True
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+A:AB$ MustBlock | Cost$ 1 | ValidTgts$ Creature.Artifact | TgtPrompt$ Select target artifact creature to block this creature | SpellDescription$ Target artifact creature blocks CARDNAME this turn if able.
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/auriok_siege_sled.jpg
+Oracle:{1}: Target artifact creature blocks Auriok Siege Sled this turn if able.\n{1}: Target artifact creature can't block Auriok Siege Sled this turn.
+SetInfo:DST Uncommon

@@ -25,12 +25,6 @@ The Mac OS application version:
 
 We have packaged the Forge BETA version as a Mac OS application. You can double click the Forge.app icon to launch the forge application on your Apple computer running Mac OS. This application will automatically increase the java heap space memory for you as it launches. This version does not require the forge.command file and it does not need to start the Terminal application as part of the start up process.
 
-You can move a copy of your pictures and decks over to the "Forge.app" application. Right click or control click on the Forge.app icon. Select "Show Package Contents" from the contextual menu. A Finder window will open and will display a folder named Contents. Navigate to the folder:
-
-/Contents/Resources/Java/res/
-
-Your decks can be placed in the decks folder, your pics can be placed in the pics folder, etc.
-
 If you update your OS to Apple OSX 10.8 Mountain Lion and try to launch a new version of forge that you will likely get a dialog which states "File is damaged and cannot be opened. Please move to trash." 
 
 Mountain Lion comes with a new Gatekeeper feature and this is probably blocking your ability to launch this newer version of forge. Visit the link below and follow the instructions. They are fairly long and detailed.
@@ -543,6 +537,23 @@ Gatecrash Guild Sealed game mode:
 Gatecrash Guild Sealed game mode has been added. To use it, start a new Sealed Mode Game, select "Block / Set" and "Gatecrash Guild Sealed". Select the first (default) configuration in the "Choose Set Combination" dialog, and when asked to pick your boosters, choose the guild you want twice (once for the guild-specific booster, and then for the extra promo cards). 
 
 The following cards are not included in the guild boosters of this game mode because they are not currently implemented in Forge: Bane Alley Broker, Bioshift, Killing Glare, Simic Manipulator.
+
+
+New User Preferences:
+---------------------
+The display of clones and copied cards is now a matter of user preference. A user to now choose whether a clone/copied card should use its native artwork or the artwork of the card being cloned. So if Infinite Reflection is played and the "Clones use original card art" preference is checked, the cards that become copies of the enchanted card will still use their own art whereas by default they would all use the card art from the enchanted card.
+
+
+Flippable Cards:
+----------------
+
+Flippable cards -- cards that have an alternate card printed upside-down at the bottom -- will now flip their appearance on the battlefield when in a flipped state.  They are now also flippable in the card viewer by clicking on the card image, just like double-sided "transform" cards have been.  When flipped this way, the details of the flipped side can be examined in the Card Details oracle text.
+
+
+High Quality Booster Pictures:
+------------------------------
+
+Forge will now download high quality booster pictures. If you are interested in these high quality booster pictures, then you should delete the pictures that are found in your <cacheDir>/pics/boosters/ directory. Then download the new pictures by using the Home View -> Game Settings -> Content Downloaders -> Download Quest Images button.
 
 
 Our Lawyers Made Us Do This:

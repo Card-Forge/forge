@@ -18,13 +18,11 @@
 package forge.control.input;
 
 import forge.Card;
-import forge.Singletons;
 import forge.card.mana.ManaCostBeingPaid;
 import forge.card.spellability.SpellAbility;
 import forge.game.GameState;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
-import forge.gui.match.CMatchUI;
 import forge.view.ButtonUtil;
 
 //pays the cost of a card played from the player's hand
@@ -35,61 +33,21 @@ public class InputPayManaSimple extends InputPayManaBase {
     /** Constant <code>serialVersionUID=3467312982164195091L</code>. */
     private static final long serialVersionUID = 3467312982164195091L;
 
-    private boolean skipStack;
-    private final SpellAbility spell;
     private final Card originalCard;
     private final String originalManaCost;
 
-    /**
-     * <p>
-     * Constructor for Input_PayManaCost.
-     * </p>
-     * 
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @param noStack
-     *            a boolean.
-     */
-    public InputPayManaSimple(final GameState game, final SpellAbility sa, final boolean noStack) {
-        this(game, sa, game.getActionPlay().getSpellCostChange(sa, new ManaCostBeingPaid(sa.getManaCost())));
-        this.skipStack = noStack;
-    }
-
-    /**
-     * <p>
-     * Constructor for Input_PayManaCost.
-     * </p>
-     * 
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     */
-    public InputPayManaSimple(final GameState game, final SpellAbility sa) {
-        this(game, sa, new ManaCostBeingPaid(sa.getManaCost()));
-    }
-
-    /**
-     * <p>
-     * Constructor for Input_PayManaCost.
-     * </p>
-     * 
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * 
-     * @param manaCostToPay
-     *            a {@link forge.card.mana.ManaCostBeingPaid} object.
-     */
     public InputPayManaSimple(final GameState game, final SpellAbility sa, final ManaCostBeingPaid manaCostToPay) {
-        super(game);
+        super(game, sa);
         this.originalManaCost = manaCostToPay.toString(); // Change
         this.originalCard = sa.getSourceCard();
-        this.spell = sa;
 
         if (sa.getSourceCard().isCopiedSpell() && sa.isSpell()) {
             this.manaCost = new ManaCostBeingPaid("0");
-            game.getStack().add(this.spell);
+            game.getStack().add(this.saPaidFor);
         } else {
             this.manaCost = manaCostToPay;
         }
+        
     }
 
     /**
@@ -102,24 +60,9 @@ public class InputPayManaSimple extends InputPayManaBase {
         this.phyLifeToLose = 0;
     }
 
-    /** {@inheritDoc} */
-    @Override
-    public final void selectCard(final Card card) {
-        // this is a hack, to prevent lands being able to use mana to pay their
-        // own abilities from cards like
-        // Kher Keep, Pendelhaven, Blinkmoth Nexus, and Mikokoro, Center of the
-        // Sea, ....
-
-        this.manaCost = activateManaAbility(this.spell, card, this.manaCost);
-
-        // only show message if this is the active input
-        if (Singletons.getModel().getMatch().getInput().getInput() == this) {
-            this.showMessage();
-        }
-
+    protected void onManaAbilityPaid() {
         if (this.manaCost.isPaid()) {
             this.originalCard.setSunburstValue(this.manaCost.getSunburst());
-            this.done();
         }
     }
 
@@ -142,59 +85,32 @@ public class InputPayManaSimple extends InputPayManaBase {
      * done.
      * </p>
      */
-    private void done() {
+    @Override
+    protected void done() {
         if (this.phyLifeToLose > 0) {
             whoPays.payLife(this.phyLifeToLose, this.originalCard);
         }
-        if (this.spell.getSourceCard().isCopiedSpell()) {
-            Singletons.getModel().getMatch().getInput().resetInput();
-        } else {
-            whoPays.getManaPool().clearManaPaid(this.spell, false);
+        if (!this.saPaidFor.getSourceCard().isCopiedSpell()) {
+            whoPays.getManaPool().clearManaPaid(this.saPaidFor, false);
             this.resetManaCost();
 
-            if (this.spell.isSpell()) {
-                this.spell.setSourceCard(game.getAction().moveToStack(this.originalCard));
+            if (this.saPaidFor.isSpell()) {
+                this.saPaidFor.setSourceCard(game.getAction().moveToStack(this.originalCard));
             }
 
-            if (this.skipStack) {
-                this.spell.resolve();
-            } else {
-                game.getStack().add(this.spell);
-            }
-            Singletons.getModel().getMatch().getInput().resetInput();
-
-            // If this is a spell with convoke, re-tap all creatures used for
-            // it.
-            // This is done to make sure Taps triggers go off at the right time
-            // (i.e. AFTER cost payment, they are tapped previously as well so
-            // that
-            // any mana tapabilities can't be used in payment as well as being
-            // tapped for convoke)
-
-            if (this.spell.getTappedForConvoke() != null) {
-                for (final Card c : this.spell.getTappedForConvoke()) {
-                    c.setTapped(false);
-                    c.tap();
-                }
-                this.spell.clearTappedForConvoke();
-            }
+            handleConvokedCards(false);
         }
+
+        stop();
     }
 
     /** {@inheritDoc} */
     @Override
     public final void selectButtonCancel() {
-        // If this is a spell with convoke, untap all creatures used for it.
-        if (this.spell.getTappedForConvoke() != null) {
-            for (final Card c : this.spell.getTappedForConvoke()) {
-                c.setTapped(false);
-            }
-            this.spell.clearTappedForConvoke();
-        }
-
+        handleConvokedCards(true);
         this.resetManaCost();
 
-        whoPays.getManaPool().refundManaPaid(this.spell, true);
+        whoPays.getManaPool().refundManaPaid(this.saPaidFor, true);
         whoPays.getZone(ZoneType.Battlefield).updateObservers(); // DO
 
         this.stop();
@@ -216,32 +132,12 @@ public class InputPayManaSimple extends InputPayManaBase {
             msg.append("\n(Click on your life total to pay life for phyrexian mana.)");
         }
 
-        CMatchUI.SINGLETON_INSTANCE.showMessage(msg.toString());
+        // has its own variant of checkIfPaid
+        showMessage(msg.toString());
         if (this.manaCost.isPaid() && !new ManaCostBeingPaid(this.originalManaCost).isPaid()) {
             this.originalCard.setSunburstValue(this.manaCost.getSunburst());
             this.done();
         }
 
-    }
-
-    /* (non-Javadoc)
-     * @see forge.control.input.InputMana#selectManaPool(String)
-     */
-    @Override
-    public void selectManaPool(String color) {
-        this.manaCost = InputPayManaBase.activateManaAbility(color, this.spell, this.manaCost);
-
-        // only show message if this is the active input
-        if (Singletons.getModel().getMatch().getInput().getInput() == this) {
-            this.showMessage();
-        }
-
-        if (this.manaCost.isPaid()) {
-            this.originalCard.setSunburstValue(this.manaCost.getSunburst());
-            this.done();
-        }
-    }
-
-    @Override public void isClassUpdated() {
     }
 }

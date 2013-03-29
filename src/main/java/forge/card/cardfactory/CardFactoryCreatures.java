@@ -29,6 +29,7 @@ import com.google.common.collect.Iterables;
 import forge.Card;
 import forge.CardLists;
 import forge.CardPredicates;
+import forge.FThreads;
 import forge.CardPredicates.Presets;
 import forge.Command;
 import forge.CounterType;
@@ -44,8 +45,8 @@ import forge.card.spellability.SpellPermanent;
 import forge.card.spellability.Target;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerHandler;
-import forge.control.input.Input;
-import forge.control.input.InputSelectManyCards;
+import forge.control.input.InputSelectCards;
+import forge.control.input.InputSelectCardsFromList;
 import forge.game.ai.ComputerUtilCard;
 import forge.game.ai.ComputerUtilCombat;
 import forge.game.event.TokenCreatedEvent;
@@ -206,11 +207,7 @@ public class CardFactoryCreatures {
 
                 final Card target = this.getTargetCard();
 
-                if (wolves.size() == 0) {
-                    return;
-                }
-
-                if (!(target.canBeTargetedBy(this) && target.isInPlay())) {
+                if (wolves.isEmpty() || !target.canBeTargetedBy(this)) {
                     return;
                 }
 
@@ -219,19 +216,13 @@ public class CardFactoryCreatures {
                     target.addDamage(c.getNetAttack(), c);
                 }
 
-                if (target.getController().isHuman()) { // Human choose
-                                                        // spread damage
-                    for (int x = 0; x < target.getNetAttack(); x++) {
-                        Singletons.getModel().getMatch().getInput().setInput(
-                                CardFactoryUtil.masterOfTheWildHuntInputTargetCreature(this, wolves, new Command() {
-                                    private static final long serialVersionUID = -328305150127775L;
-
-                                    @Override
-                                    public void execute() {
-                                        getTargetCard().addDamage(1, target);
-                                        Singletons.getModel().getGame().getAction().checkStateEffects();
-                                    }
-                                }));
+                if (target.getController().isHuman()) { // Human choose spread damage
+                    final int netAttack = target.getNetAttack();
+                    for (int x = 0; x < netAttack; x++) {
+                        InputSelectCards inp = new InputSelectCardsFromList(1,1,wolves);
+                        inp.setMessage("Select target wolf to damage for " + getSourceCard());
+                        FThreads.setInputAndWait(inp);
+                        inp.getSelected().get(0).addDamage(1, target);
                     }
                 } else { // AI Choose spread Damage
                     final List<Card> damageableWolves = CardLists.filter(wolves, new Predicate<Card>() {
@@ -293,6 +284,7 @@ public class CardFactoryCreatures {
                         }
                     }
                 }
+                target.getController().getGame().getAction().checkStateEffects();
             } // resolve()
 
             @Override
@@ -477,61 +469,51 @@ public class CardFactoryCreatures {
     private static void getCard_PhyrexianDreadnought(final Card card, final String cardName) {
         final Player player = card.getController();
 
-        final Input target = new InputSelectManyCards(0, Integer.MAX_VALUE) {
-            private static final long serialVersionUID = 2698036349873486664L;
-
-            @Override
-            public String getMessage() {
-                String toDisplay = cardName + " - Select any number of creatures to sacrifice.  ";
-                toDisplay += "Currently, (" + selected.size() + ") selected with a total power of: "
-                        + getTotalPower();
-                toDisplay += "  Click OK when Done.";
-                return toDisplay;
-            }
-
-            @Override
-            protected boolean canCancelWithSomethingSelected() {
-                return true;
-            }
-
-            @Override
-            protected Input onCancel() {
-                Singletons.getModel().getGame().getAction().sacrifice(card, null);
-                return null;
-            }
-
-            @Override
-            protected boolean isValidChoice(Card c) {
-                Zone zone = Singletons.getModel().getGame().getZoneOf(c);
-                return c.isCreature() && zone.is(ZoneType.Battlefield, player);
-            } // selectCard()
-
-            @Override
-            protected Input onDone() {
-                for (final Card sac : selected) {
-                    Singletons.getModel().getGame().getAction().sacrifice(sac, null);
-                }
-                return null;
-            }
-
-            @Override
-            protected boolean hasEnoughTargets() {
-                return getTotalPower() >= 12;
-            };
-
-            private int getTotalPower() {
-                int sum = 0;
-                for (final Card c : selected) {
-                    sum += c.getNetAttack();
-                }
-                return sum;
-            }
-        }; // Input
-
         final Ability sacOrSac = new Ability(card, ManaCost.NO_COST) {
             @Override
             public void resolve() {
                 if (player.isHuman()) {
+                    final InputSelectCards target = new InputSelectCards(0, Integer.MAX_VALUE) {
+                        private static final long serialVersionUID = 2698036349873486664L;
+
+                        @Override
+                        public String getMessage() {
+                            String toDisplay = cardName + " - Select any number of creatures to sacrifice.  ";
+                            toDisplay += "Currently, (" + selected.size() + ") selected with a total power of: " + getTotalPower();
+                            toDisplay += "  Click OK when Done.";
+                            return toDisplay;
+                        }
+
+                        @Override
+                        protected boolean isValidChoice(Card c) {
+                            Zone zone = Singletons.getModel().getGame().getZoneOf(c);
+                            return c.isCreature() && zone.is(ZoneType.Battlefield, player);
+                        } // selectCard()
+
+                        @Override
+                        protected boolean hasEnoughTargets() {
+                            return getTotalPower() >= 12;
+                        };
+
+                        private int getTotalPower() {
+                            int sum = 0;
+                            for (final Card c : selected) {
+                                sum += c.getNetAttack();
+                            }
+                            return sum;
+                        }
+                    }; // Input
+
+                    target.setCancelAllowed(true);
+                    FThreads.setInputAndWait(target);
+                    if(!target.hasCancelled()) {
+                        for (final Card sac : target.getSelected()) {
+                            Singletons.getModel().getGame().getAction().sacrifice(sac, null);
+                        }
+                    } else {
+                        Singletons.getModel().getGame().getAction().sacrifice(card, null);
+                    }
+                    
                     Singletons.getModel().getMatch().getInput().setInput(target);
                 }
             } // end resolve

@@ -5,10 +5,6 @@ T:Mode$ SpellCast | OptionalDecider$ TriggeredPlayer | TriggerZones$ Command | E
 SVar:LifeSummer:AB$ GainLife | Cost$ 0 | Defined$ TriggeredPlayer | LifeAmount$ 2
 T:Mode$ PlanarDice | Result$ Chaos | OptionalDecider$ You | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever you roll Chaos, you may gain 10 life.
 SVar:RolledChaos:AB$ GainLife | Cost$ 0 | LifeAmount$ 10 | Defined$ You
-T:Mode$ PlanarDice | Result$ Planeswalk | TriggerZones$ Command | Execute$ RolledWalk | Secondary$ True | TriggerDescription$ Whenever you roll Planeswalk, put this card on the bottom of its owner's planar deck face down, then move the top card of your planar deck off that planar deck and turn it face up.
-SVar:RolledWalk:AB$ Planeswalk | Cost$ 0
-A:AB$ RollPlanarDice | Cost$ X | SorcerySpeed$ True | ActivationZone$ Command | SpellDescription$ Roll the planar dice.
-SVar:X:Count$RolledThisTurn
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fields_of_summer.jpg
 Oracle:Whenever a player casts a spell, that player may gain 2 life.\nWhenever you roll {C}, you may gain 10 life.
 SetInfo:HOP Common

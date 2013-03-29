@@ -89,48 +89,21 @@ public class CostUnattach extends CostPartWithList {
     /*
      * (non-Javadoc)
      * 
-     * @see forge.card.cost.CostPart#payAI(forge.card.spellability.SpellAbility,
-     * forge.Card, forge.card.cost.Cost_Payment)
-     */
-    @Override
-    public final void payAI(final AIPlayer ai, final SpellAbility ability, final Card source, final CostPayment payment, final GameState game) {
-        Card cardToUnattach = findCardToUnattach(source, (Player) ai, ability);
-        if (cardToUnattach == null) {
-            // We really shouldn't be able to get here if there's nothing to unattach
-            return;
-        }
-
-        Card equippingCard = cardToUnattach.getEquipping().get(0);
-        cardToUnattach.unEquipCard(equippingCard);
-        this.addToList(cardToUnattach);
-        this.addListToHash(ability, "Unattached");
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
      * @see
      * forge.card.cost.CostPart#payHuman(forge.card.spellability.SpellAbility,
      * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final boolean payHuman(final SpellAbility ability, final Card source, final CostPayment payment, final GameState game) {
-        this.resetList();
+    public final boolean payHuman(final SpellAbility ability, final GameState game) {
+        final Card source = ability.getSourceCard(); 
         Player activator = ability.getActivatingPlayer();
         Card cardToUnattach = findCardToUnattach(source, activator, ability);
         if (cardToUnattach != null && GuiDialog.confirm(source, String.format("Unattach %s?", cardToUnattach.toString()))) {
-            Card equippingCard = cardToUnattach.getEquipping().get(0);
-            cardToUnattach.unEquipCard(equippingCard);
-            this.addToList(cardToUnattach);
-            this.addListToHash(ability, "Unattached");
-            payment.setPaidManaPart(this);
+            executePayment(ability, cardToUnattach);
+            return true;
         } else {
-            payment.setCancel(true);
-            payment.getRequirements().finishPaying();
             return false;
         }
-
-        return true;
     }
 
     private Card findCardToUnattach(final Card source, Player activator, SpellAbility ability) {
@@ -153,16 +126,29 @@ public class CostUnattach extends CostPartWithList {
         return null;
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * forge.card.cost.CostPart#decideAIPayment(forge.card.spellability.SpellAbility
-     * , forge.Card, forge.card.cost.Cost_Payment)
+    /* (non-Javadoc)
+     * @see forge.card.cost.CostPartWithList#executePayment(forge.card.spellability.SpellAbility, forge.Card)
      */
     @Override
-    public final boolean decideAIPayment(final AIPlayer ai, final SpellAbility ability, final Card source, final CostPayment payment) {
-        this.resetList();
-        return true;
+    protected void doPayment(SpellAbility ability, Card targetCard) {
+        targetCard.unEquipCard(targetCard.getEquipping().get(0));
+    }
+
+    @Override
+    public String getHashForList() {
+        return "Unattached";
+    }
+
+    /* (non-Javadoc)
+     * @see forge.card.cost.CostPart#decideAIPayment(forge.game.player.AIPlayer, forge.card.spellability.SpellAbility, forge.Card)
+     */
+    @Override
+    public PaymentDecision decideAIPayment(AIPlayer ai, SpellAbility ability, Card source) {
+        Card cardToUnattach = findCardToUnattach(source, (Player) ai, ability);
+        if (cardToUnattach == null) {
+            // We really shouldn't be able to get here if there's nothing to unattach
+            return null;
+        }
+        return new PaymentDecision(cardToUnattach.getEquippingCard());
     }
 }

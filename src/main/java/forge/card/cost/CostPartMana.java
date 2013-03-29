@@ -20,12 +20,12 @@ package forge.card.cost;
 import com.google.common.base.Strings;
 
 import forge.Card;
-import forge.Singletons;
+import forge.FThreads;
 import forge.card.ability.AbilityUtils;
 import forge.card.spellability.SpellAbility;
-import forge.control.input.Input;
 import forge.control.input.InputPayManaOfCostPayment;
 import forge.control.input.InputPayManaX;
+import forge.control.input.InputPayment;
 import forge.game.GameState;
 import forge.game.ai.ComputerUtilMana;
 import forge.game.player.AIPlayer;
@@ -75,7 +75,7 @@ public class CostPartMana extends CostPart {
      * 
      * @return the x mana
      */
-    public final int getXMana() {
+    public final int getAmountOfX() {
         return this.amountX;
     }
 
@@ -85,7 +85,7 @@ public class CostPartMana extends CostPart {
      * @param xCost
      *            the new x mana
      */
-    public final void setXMana(final int xCost) {
+    public final void setAmountOfX(final int xCost) {
         this.amountX = xCost;
     }
 
@@ -111,8 +111,8 @@ public class CostPartMana extends CostPart {
     /**
      * @return the xCantBe0
      */
-    public boolean isxCantBe0() {
-        return xCantBe0;
+    public boolean canXbe0() {
+        return !xCantBe0;
     }
 
     /**
@@ -187,14 +187,11 @@ public class CostPartMana extends CostPart {
         return true;
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see forge.card.cost.CostPart#payAI(forge.card.spellability.SpellAbility,
-     * forge.Card, forge.card.cost.Cost_Payment)
+    /* (non-Javadoc)
+     * @see forge.card.cost.CostPart#payAI(forge.card.cost.PaymentDecision, forge.game.player.AIPlayer, forge.card.spellability.SpellAbility, forge.Card)
      */
     @Override
-    public final void payAI(final AIPlayer ai, final SpellAbility ability, final Card source, final CostPayment payment, final GameState game) {
+    public void payAI(PaymentDecision decision, AIPlayer ai, SpellAbility ability, Card source) {
         ComputerUtilMana.payManaCost(ai, ability);
     }
 
@@ -206,40 +203,41 @@ public class CostPartMana extends CostPart {
      * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final boolean payHuman(final SpellAbility ability, final Card source, final CostPayment payment, final GameState game) {
+    public final boolean payHuman(final SpellAbility ability, final GameState game) {
+        final Card source = ability.getSourceCard();
         int manaToAdd = 0;
         if (!this.hasNoXManaCost()) {
             // if X cost is a defined value, other than xPaid
             if (!ability.getSVar("X").equals("Count$xPaid")) {
                 // this currently only works for things about Targeted object
-                manaToAdd = AbilityUtils.calculateAmount(source, "X", ability) * this.getXMana();
+                manaToAdd = AbilityUtils.calculateAmount(source, "X", ability) * this.getAmountOfX();
             }
         }
-        if (!this.getManaToPay().equals("0") || (manaToAdd > 0)) {
-            final Input inp = new InputPayManaOfCostPayment(game, this, ability, payment, manaToAdd);
-            Singletons.getModel().getMatch().getInput().setInputInterrupt(inp);
-        } else if (this.getXMana() > 0) {
-            final Input inp = new InputPayManaX(game, ability, payment, this);
-            Singletons.getModel().getMatch().getInput().setInputInterrupt(inp);
-        } else {
-            payment.paidCost(this);
-        }
+        
 
-        // We return false here because the Inputs set above should recall
-        // payment.payCosts()
-        return false;
+        if (!"0".equals(this.getManaToPay()) || manaToAdd > 0) {
+            InputPayment inpPayment = new InputPayManaOfCostPayment(game, this, ability, manaToAdd);
+            FThreads.setInputAndWait(inpPayment);
+            if(!inpPayment.isPaid())
+                return false;
+        } 
+        if (this.getAmountOfX() > 0) {
+            source.setXManaCostPaid(0);
+            InputPayment inpPayment = new InputPayManaX(game, ability, this.getAmountOfX(), this.canXbe0());
+            FThreads.setInputAndWait(inpPayment);
+            if(!inpPayment.isPaid())
+                return false;
+        }
+        return true;
+
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * forge.card.cost.CostPart#decideAIPayment(forge.card.spellability.SpellAbility
-     * , forge.Card, forge.card.cost.Cost_Payment)
+    /* (non-Javadoc)
+     * @see forge.card.cost.CostPart#decideAIPayment(forge.game.player.AIPlayer, forge.card.spellability.SpellAbility, forge.Card)
      */
     @Override
-    public final boolean decideAIPayment(final AIPlayer ai, final SpellAbility ability, final Card source, final CostPayment payment) {
-        return true;
+    public PaymentDecision decideAIPayment(AIPlayer ai, SpellAbility ability, Card source) {
+        return new PaymentDecision(0);
     }
 
     // Inputs

@@ -42,7 +42,7 @@ import forge.view.ButtonUtil;
  * @author Forge
  * @version $Id$
  */
-public class InputBlock extends Input {
+public class InputBlock extends InputBase {
     /** Constant <code>serialVersionUID=6120743598368928128L</code>. */
     private static final long serialVersionUID = 6120743598368928128L;
 
@@ -144,11 +144,4 @@ public class InputBlock extends Input {
 
         this.showMessage();
     } // selectCard()
-
-    /* (non-Javadoc)
-     * @see forge.control.input.Input#isClassUpdated()
-     */
-    @Override
-    public void isClassUpdated() {
-    }
 }

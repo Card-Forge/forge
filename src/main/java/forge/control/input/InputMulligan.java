@@ -49,7 +49,7 @@ import forge.view.ButtonUtil;
   * @author Forge
   * @version $Id$
   */
-public class InputMulligan extends Input {
+public class InputMulligan extends InputBase {
     /** Constant <code>serialVersionUID=-8112954303001155622L</code>. */
     private static final long serialVersionUID = -8112954303001155622L;
 
@@ -174,7 +174,6 @@ public class InputMulligan extends Input {
 
         game.setMulliganned(true);
         Singletons.getModel().getMatch().getInput().clearInput();
-        Singletons.getModel().getMatch().getInput().resetInput();
     }
 
     @Override
@@ -191,9 +190,5 @@ public class InputMulligan extends Input {
         } else {
             SDisplayUtil.remind(VMessage.SINGLETON_INSTANCE);
         }
-    }
-
-    @Override
-    public void isClassUpdated() {
     }
 }

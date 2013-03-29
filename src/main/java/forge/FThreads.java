@@ -3,26 +3,29 @@ package forge;
 import java.lang.reflect.InvocationTargetException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 import javax.swing.SwingUtilities;
 
-import forge.control.input.InputLockUI;
+import forge.control.input.InputSynchronized;
 
 /** 
  * TODO: Write javadoc for this type.
  *
  */
 public class FThreads {
-
     static { 
         System.out.printf("(FThreads static ctor): Running on a machine with %d cpu core(s)%n", Runtime.getRuntime().availableProcessors() );
     }
     
-    private final static ExecutorService threadPool = Executors.newCachedThreadPool();
-    public static ExecutorService getCachedPool() {
-        return threadPool;
-    }
+    private FThreads() { } // no instances supposed
     
+    private final static ExecutorService cachedPool = Executors.newCachedThreadPool();
+    private static ExecutorService getCachedPool() { return cachedPool; }
+    private final static ScheduledExecutorService scheduledPool = Executors.newScheduledThreadPool(2);
+    private static ScheduledExecutorService getScheduledPool() { return scheduledPool; }
+
     // This pool is designed to parallel CPU or IO intensive tasks like parse cards or download images, assuming a load factor of 0.5
     public final static ExecutorService getComputingPool(float loadFactor) {
         return Executors.newFixedThreadPool((int)(Runtime.getRuntime().availableProcessors() / (1-loadFactor)));
@@ -83,27 +86,42 @@ public class FThreads {
     }
     
     
-    public static void invokeInNewThread(Runnable proc) {
-        invokeInNewThread(proc, false);
+    public static void invokeInNewThread(Runnable toRun) {
+        getCachedPool().execute(toRun);
     }
     
-    private final static InputLockUI inpuptLock = new InputLockUI();
     public static void invokeInNewThread(final Runnable proc, boolean lockUI) {
         Runnable toRun = proc;
         if( lockUI ) {
             // checkEDT("FThreads.invokeInNewthread", true)
-            Singletons.getModel().getMatch().getInput().setInput(inpuptLock);
+            Singletons.getModel().getMatch().getInput().lock();
             toRun = new Runnable() {
                 @Override
                 public void run() {
                     proc.run();
-                    // may try special unlock method here
-                    Singletons.getModel().getMatch().getInput().resetInput();
+                    Singletons.getModel().getMatch().getInput().unlock();
                 }
             };
         }
-        
-        getCachedPool().execute(toRun);
+        invokeInNewThread(toRun);
+    }
+    
+    public static void setInputAndWait(InputSynchronized input) {
+        Singletons.getModel().getMatch().getInput().setInput(input);
+        input.awaitLatchRelease();
     }
 
+    /**
+     * TODO: Write javadoc for this method.
+     * @return
+     */
+    public static boolean isEDT() {
+        return SwingUtilities.isEventDispatchThread();
+    }
+
+
+    public static void delay(int milliseconds, Runnable inputUpdater) {
+        getScheduledPool().schedule(inputUpdater, milliseconds, TimeUnit.MILLISECONDS);
+    }
+   
 }

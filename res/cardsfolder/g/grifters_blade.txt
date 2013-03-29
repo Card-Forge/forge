@@ -1,0 +1,12 @@
+Name:Grifter's Blade
+ManaCost:3
+Types:Artifact Equipment
+K:Equip 1
+K:Flash
+K:ETBReplacement:Other:ChooseC
+SVar:ChooseC:DB$ ChooseCard | Defined$ You | Choices$ Creature.YouCtrl+CanBeEquippedBy | Amount$ 1 | Mandatory$ True | SubAbility$ DBAttach | SpellDescription$ As CARDNAME enters the battlefield, choose a creature you control it could be attached to. If you do, it enters the battlefield attached to that creature.
+SVar:DBAttach:DB$ Attach | Object$ Self | Defined$ ChosenCard
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 1 | AddToughness$ 1 | Description$ Equipped creature gets +1/+1.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/grifters_blade.jpg
+Oracle:Flash\nAs Grifter's Blade enters the battlefield, choose a creature you control it could be attached to. If you do, it enters the battlefield attached to that creature.\nEquipped creature gets +1/+1.\nEquip {1}
+SetInfo:RAV Uncommon

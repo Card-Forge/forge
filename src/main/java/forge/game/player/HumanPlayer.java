@@ -17,8 +17,13 @@
  */
 package forge.game.player;
 
-import forge.Singletons;
+import java.util.List;
+
+import forge.Card;
+import forge.FThreads;
 import forge.card.spellability.SpellAbility;
+import forge.control.input.InputSelectCards;
+import forge.control.input.InputSelectCardsFromList;
 import forge.game.GameState;
 import forge.game.zone.ZoneType;
 
@@ -32,17 +37,26 @@ public class HumanPlayer extends Player {
 
     /** {@inheritDoc} */
     @Override
-    public final void discard(final int num, final SpellAbility sa) {
-        Singletons.getModel().getMatch().getInput().setInput(PlayerUtil.inputDiscard(num, sa));
-    }
-
-    /** {@inheritDoc} */
-    @Override
     public final void discardUnless(final int num, final String uType, final SpellAbility sa) {
-        if (this.getCardsIn(ZoneType.Hand).size() > 0) {
-            Singletons.getModel().getMatch().getInput().setInput(PlayerUtil.inputDiscardNumUnless(num, uType, sa));
-        }
-    }
+        final List<Card> hand = getCardsIn(ZoneType.Hand);
+        final InputSelectCards target = new InputSelectCardsFromList(num, num, hand) {
+            private static final long serialVersionUID = -5774108410928795591L;
+
+            @Override
+            protected boolean hasAllTargets() {
+                for(Card c : selected) {
+                    if (c.isType(uType))
+                        return true;
+                }
+                return super.hasAllTargets();
+            }
+        };
+        target.setMessage("Select %d cards to discard, unless you discard a " + uType + ".");
+        FThreads.setInputAndWait(target);
+        for(Card c : target.getSelected())
+            c.getController().discard(c, sa);
+    } // input_discardNumUnless
+    
 
     @Override
     public PlayerType getType() {

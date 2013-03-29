@@ -1,6 +1,7 @@
 package forge.game.player;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -184,7 +185,7 @@ public class PlayerControllerAi extends PlayerController {
      * @see forge.game.player.PlayerController#reveal(java.lang.String, java.util.List)
      */
     @Override
-    public void reveal(String string, List<Card> cards, ZoneType zone, Player owner) {
+    public void reveal(String string, Collection<Card> cards, ZoneType zone, Player owner) {
         // We don't know how to reveal cards to AI
     }
 

@@ -254,6 +254,10 @@ public class CardLists {
         return Lists.newArrayList(Iterables.filter(cardList, filt));
     }
 
+    public static List<Card> filter(Iterable<Card> cardList, Predicate<Card> f1, Predicate<Card> f2) {
+        return Lists.newArrayList(Iterables.filter(Iterables.filter(cardList, f1), f2));
+    }    
+    
     public static List<Card> createCardList(Card c) {
         List<Card> res = new ArrayList<Card>();
         res.add(c);

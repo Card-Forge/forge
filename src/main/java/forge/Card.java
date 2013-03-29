@@ -956,14 +956,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         return this.sunburstValue;
     }
 
-    /**
-     * <p>
-     * Setter for the field <code>colorsPaid</code>.
-     * </p>
-     * 
-     * @param s
-     *            a String
-     */
+    // TODO: Append colors instead of replacing
     public final void setColorsPaid(final String s) {
         this.colorsPaid = s;
     }
@@ -2190,7 +2183,8 @@ public class Card extends GameEntity implements Comparable<Card> {
             if (keyword.startsWith("Permanents don't untap during their controllers' untap steps")
                     || keyword.startsWith("PreventAllDamageBy")
                     || keyword.startsWith("CantBlock")
-                    || keyword.startsWith("CantBeBlockedBy")) {
+                    || keyword.startsWith("CantBeBlockedBy")
+                    || keyword.startsWith("CantEquip")) {
                 continue;
             }
             if (keyword.startsWith("CostChange")) {
@@ -3700,6 +3694,17 @@ public class Card extends GameEntity implements Comparable<Card> {
             Singletons.getModel().getGame().getGameLog().add("ResolveStack", "Trying to equip " + c.getName()
             + " but it can't be equipped.", 2);
             return;
+        }
+        if (this.hasStartOfKeyword("CantEquip")) {
+            final int keywordPosition = this.getKeywordPosition("CantEquip");
+            final String parse = this.getKeyword().get(keywordPosition).toString();
+            final String[] k = parse.split(" ", 2);
+            final String[] restrictions = k[1].split(",");
+            if (c.isValid(restrictions, this.getController(), this)) {
+                Singletons.getModel().getGame().getGameLog().add("ResolveStack", "Trying to equip " + c.getName()
+                        + " but it can't be equipped.", 2);
+                return;
+            }
         }
         if (this.isEquipping()) {
             this.unEquipCard(this.getEquipping().get(0));
@@ -6433,6 +6438,10 @@ public class Card extends GameEntity implements Comparable<Card> {
                     return false;
                 }
             }
+        } else if (property.startsWith("CanBeEquippedBy")) {
+            if (!this.canBeEquippedBy(source)) {
+                return false;
+            }
         } else if (property.startsWith("Equipped")) {
             if (!this.equipping.contains(source)) {
                 return false;
@@ -6529,6 +6538,11 @@ public class Card extends GameEntity implements Comparable<Card> {
                             return false;
                         }
                     }
+                } else if (restriction.equals("Equipped")) {
+                    if (!source.isEquipment() || !source.isEquipping()
+                            || !this.sharesColorWith(source.getEquippingCard())) {
+                        return false;
+                    }
                 } else if (restriction.equals("MostProminentColor")) {
                     for (final String color : CardUtil.getColors(this)) {
                         if (CardFactoryUtil.isMostProminentColor(Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield), color)) {
@@ -6594,6 +6608,11 @@ public class Card extends GameEntity implements Comparable<Card> {
                             }
                         }
                     }
+                } if (restriction.equals("Equipped")) {
+                    if (source.isEquipping() && this.sharesCreatureTypeWith(source.getEquippingCard())) {
+                        return true;
+                    }
+                    return false;
                 } if (restriction.equals("Remembered")) {
                     for (final Object rem : source.getRemembered()) {
                         if (rem instanceof Card) {
@@ -6643,6 +6662,18 @@ public class Card extends GameEntity implements Comparable<Card> {
                             if (this.sharesCardTypeWith(card)) {
                                 return true;
                             }
+                        }
+                    }
+                    return false;
+                } else if (restriction.equals("EachTopLibrary")) {
+                    final List<Card> list = new ArrayList<Card>();
+                    for (Player p : Singletons.getModel().getGame().getPlayers()) {
+                        final Card top = p.getCardsIn(ZoneType.Library).get(0);
+                        list.add(top);
+                    }
+                    for (Card c : list) {
+                        if (this.sharesCardTypeWith(c)) {
+                            return true;
                         }
                     }
                     return false;
@@ -8837,6 +8868,31 @@ public class Card extends GameEntity implements Comparable<Card> {
         }
         return true;
     }
+    
+    /**
+     * canBeEquippedBy.
+     * 
+     * @param equip
+     *            a Card
+     * @return a boolean
+     */
+    public final boolean canBeEquippedBy(final Card equip) {
+        if (equip.hasStartOfKeyword("CantEquip")) {
+            final int keywordPosition = equip.getKeywordPosition("CantEquip");
+            final String parse = equip.getKeyword().get(keywordPosition).toString();
+            final String[] k = parse.split(" ", 2);
+            final String[] restrictions = k[1].split(",");
+            if (this.isValid(restrictions, equip.getController(), equip)) {
+                return false;
+            }
+        }
+        if (this.hasProtectionFrom(equip)
+            || this.hasKeyword("CARDNAME can't be equipped.")
+            || !this.isValid("Creature.YouCtrl", equip.getController(), equip)) {
+            return false;
+        }
+        return true;
+    }
 
     /**
      * Gets the replacement effects.
@@ -8930,7 +8986,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         if (getController() == null) {
             return false;
         }
-        return getController().getCardsIn(ZoneType.Battlefield).contains(this);
+        return getController().getZone(ZoneType.Battlefield).contains(this);
     }
 
     public void onCleanupPhase(final Player turn) {

@@ -145,7 +145,7 @@ public class CostUtil {
                 CostPartMana newCostMana = cost2.getCostMana();
                 if (newCostMana != null) {
                     ManaCostBeingPaid oldManaCost = new ManaCostBeingPaid(part.toString());
-                    newCostMana.setXMana(oldManaCost.getXcounter() + newCostMana.getXMana());
+                    newCostMana.setAmountOfX(oldManaCost.getXcounter() + newCostMana.getAmountOfX());
                     oldManaCost.combineManaCost(newCostMana.toString());
                     newCostMana.setMana(oldManaCost.toString(false));
                 } else {

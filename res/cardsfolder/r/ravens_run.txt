@@ -7,10 +7,6 @@ SVar:RolledChaos1:AB$ PutCounter | Cost$ 0 | ValidTgts$ Creature | CounterType$ 
 SVar:RolledChaos2:DB$ PutCounter | ValidTgts$ Creature.IsNotRemembered | CounterType$ M1M1 | CounterNum$ 2 | RememberTargets$ True | SubAbility$ RolledChaos3
 SVar:RolledChaos3:DB$ PutCounter | ValidTgts$ Creature.IsNotRemembered | CounterType$ M1M1 | CounterNum$ 3 | SubAbility$ RolledChaosCleanup
 SVar:RolledChaosCleanup:DB$ Cleanup | ClearRemembered$ True
-T:Mode$ PlanarDice | Result$ Planeswalk | TriggerZones$ Command | Execute$ RolledWalk | Secondary$ True | TriggerDescription$ Whenever you roll Planeswalk, put this card on the bottom of its owner's planar deck face down, then move the top card of your planar deck off that planar deck and turn it face up.
-SVar:RolledWalk:AB$ Planeswalk | Cost$ 0
-A:AB$ RollPlanarDice | Cost$ X | SorcerySpeed$ True | ActivationZone$ Command | SpellDescription$ Roll the planar dice.
-SVar:X:Count$RolledThisTurn
 SVar:Picture:http://www.cardforge.org/fpics/lq_planes_promos/ravens_run.jpg
 Oracle:All creatures have wither. (They deal damage to creatures in the form of -1/-1 counters.)\nWhenever you roll {C}, put a -1/-1 counter on target creature, two -1/-1 counters on another target creature, and three -1/-1 counters on a third target creature.
 SetInfo:HOP Common

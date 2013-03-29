@@ -24,7 +24,6 @@ import java.awt.event.MouseEvent;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowFocusListener;
 import java.util.AbstractList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
@@ -84,10 +83,6 @@ public class ListChooser<T> {
     private JOptionPane optionPane;
     private Action ok, cancel;
 
-    public ListChooser(final String title, final int minChoices, final int maxChoices, final T[] list) {
-        this(title, minChoices, maxChoices, Arrays.asList(list));
-    }
-    
     public ListChooser(final String title, final int minChoices, final int maxChoices, final Collection<T> list) {
         this.title = title;
         this.minChoices = minChoices;
@@ -125,7 +120,7 @@ public class ListChooser<T> {
     }
 
     /** @return boolean */
-    public synchronized boolean show() {
+    public boolean show() {
         return show(list.get(0));
     }
 
@@ -135,7 +130,7 @@ public class ListChooser<T> {
      * @param index0 index to select when shown
      * @return a boolean.
      */
-    public synchronized boolean show(T item) {
+    public boolean show(T item) {
         if (this.called) {
             throw new IllegalStateException("Already shown");
         }

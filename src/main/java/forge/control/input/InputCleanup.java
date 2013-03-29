@@ -18,6 +18,7 @@
 package forge.control.input;
 
 import forge.Card;
+import forge.FThreads;
 import forge.Singletons;
 import forge.game.GameState;
 import forge.game.player.Player;
@@ -34,7 +35,7 @@ import forge.view.ButtonUtil;
  * @author Forge
  * @version $Id$
  */
-public class InputCleanup extends Input {
+public class InputCleanup extends InputBase {
     /** Constant <code>serialVersionUID=-4164275418971547948L</code>. */
     private static final long serialVersionUID = -4164275418971547948L;
     private final GameState game;
@@ -74,26 +75,15 @@ public class InputCleanup extends Input {
     /** {@inheritDoc} */
     @Override
     public final void selectCard(final Card card) {
-        Zone zone = Singletons.getModel().getGame().getZoneOf(card);
-        if (zone.is(ZoneType.Hand, Singletons.getControl().getPlayer())) {
-            card.getController().discard(card, null);
-            if (Singletons.getModel().getGame().getStack().size() == 0) {
-                this.showMessage();
+        Zone zone = game.getZoneOf(card);
+        if (!zone.is(ZoneType.Hand, Singletons.getControl().getPlayer())) 
+            return;
+            
+        FThreads.invokeInNewThread(new Runnable() {
+            @Override
+            public void run() {
+                card.getController().discard(card, null);
             }
-        }
-    } // selectCard()
-
-    /**
-     * <p>
-     * AI_CleanupDiscard.
-     * </p>
-     */
-
-
-    /* (non-Javadoc)
-     * @see forge.control.input.Input#isClassUpdated()
-     */
-    @Override
-    public void isClassUpdated() {
+        }, true);
     }
 }

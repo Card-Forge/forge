@@ -1,4 +1,4 @@
-Forge Beta: 03-##-2013 ver 1.3.11
+Forge Beta: 04-##-2013 ver 1.3.12
 
 
 12### cards in total.
@@ -9,7 +9,7 @@ Release Notes
 -------------
 
 - User data migration -
-User data, like decks, saved gauntlets, and card pictures, is now stored in separate directories from the program data.  When this version of Forge is first run, it will scan the program directory for all user data and automatically migrate all the files to their new homes.  There are three defined user data directores: userDir, cacheDir, and cardPicsDir, and their locations depend on the standard paths for your operating system:
+User data files, like decks, saved gauntlets, and card pictures, are now stored in new directories separate from the program data.  When this version of Forge is first run, it will scan the program directory for all user data and automatically migrate the files to their new homes.  There are three defined user data directores: userDir, cacheDir, and cardPicsDir, and their locations depend on the standard paths for your operating system:
 
     Windows:
         userDir=%APPDATA%/Forge/
@@ -22,6 +22,11 @@ User data, like decks, saved gauntlets, and card pictures, is now stored in sepa
         cacheDir=$HOME/.cache/forge/
 
 cardPicsDir is defined as <cacheDir>/pics/cards/ by default.  If you wish to use a non-default directory, please see the forge.profile.preferences.example file located in the Forge installation directory root.  You can use this file to, for example, share the card pics directory with another program, such as Magic Workstation.
+
+If you are using the Mac OS X version of Forge then you will find the forge.profile.preferences.example file by right clicking or control clicking on the Forge.app icon. Select "Show Package Contents" from the contextual menu. A Finder window will open and will display a folder named Contents. Navigate to the folder:
+    /Contents/Resources/Java/
+and you will find the file named forge.profile.preferences.example.
+
 
 For reference, here is the full list of moved directories and files:
 
@@ -39,53 +44,27 @@ forge.log         <userDir>/forge.log
 - New Import Data dialog -
 The Import Pictures dialog, accessed via the Content Downloaders submenu, has received an overhaul and has been reincarnated as the Import Data dialog.  You may recognize it from the automatic data migration procedure if you had any data to migrate when this version was first started.  Instead of just importing pictures from a previous version of Forge, it can now import any kind of Forge data whatsoever.  If you have a directory full of deck files, you can use the Import Data dialog to copy or move them to the appropriate directory.  If you have just downloaded a torrent of high-quality pics for a particular set, use the Import Data dialog to get them to the proper place.  The dialog give you a full listing of all file copy/move operations, so you can see what will happen before you click 'Start Import'.
 
-
-- New User Preferences -
-The display of clones and copied cards is now a matter of user preference. A user to now choose whether a clone/copied card should use its native artwork or the artwork of the card being cloned. So if Infinite Reflection is played and the "Clones use original card art" preference is checked, the cards that become copies of the enchanted card will still use their own art whereas by default they would all use the card art from the enchanted card.
-
-
-- Flippable Cards -
-Flippable cards -- cards that have an alternate card printed upside-down at the bottom -- will now flip their appearance on the battlefield when in a flipped state.  They are now also flippable in the card viewer by clicking on the card image, just like double-sided "transform" cards have been.  When flipped this way, the details of the flipped side can be examined in the Card Details oracle text.
-
-
-- High Quality Booster Pictures -
-Forge will now download high quality booster pictures. If you are interested in these high quality booster pictures, then you should delete the pictures that are found in your <cacheDir>/pics/boosters/ directory. Then download the new pictures by using the Home View -> Game Settings -> Content Downloaders -> Download Quest Images button.
+An importer option was added for including pictures in set-specific card directories that don't map to any currently known card.  This handles the case where people have collected complete sets of pics in anticipation of when Forge supports them.
 
 
 ---------
 New Cards
 ---------
 
-Noggin Whack
-Scythe Specter
-Sasaya, Orochi Ascendant
-Loxodon Peacekeeper
-Phyrexian Grimoire
-Purging Scythe
-Noxious Vapors
-Perplex
-Null Chamber
-Overabundance
-Reign of Terror
-Vexing Sphinx
-Wand of Denial
-Yavimaya Dryad
-Thieves' Auction
-Infinite Reflection
-Laccolith Rig
-Paroxysm
-Essence Leak
-Mistform Warchief
-Whipkeeper
-Sanctum Guardian
+Konda's Banner
+O-Naginata
+Grifter's Blade
+Breathstealer's Crypt
+Moonlight Bargain
+Auriok Siege Sled
+Burning-Tree Bloodscale
 
 
 ----------
 New Planes
 ----------
 
-Bant
-Turri Island
+Sea of Sand
 
 
 ------------

@@ -19,11 +19,14 @@ package forge.card.spellability;
 
 import java.util.ArrayList;
 
+import org.apache.commons.lang3.StringUtils;
+
 import forge.Card;
 import forge.CardCharacteristicName;
 import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.cost.CostPayment;
+import forge.game.GameState;
 import forge.game.zone.Zone;
 
 /**
@@ -44,88 +47,48 @@ public class SpellAbilityRequirements {
     private Zone fromZone = null;
     private Integer zonePosition = null;
 
-    /**
-     * <p>
-     * Setter for the field <code>skipStack</code>.
-     * </p>
-     * 
-     * @param bSkip
-     *            a boolean.
-     */
+ 
     public final void setSkipStack(final boolean bSkip) {
         this.skipStack = bSkip;
     }
-
-    /**
-     * <p>
-     * setFree.
-     * </p>
-     * 
-     * @param bFree
-     *            a boolean.
-     */
+ 
     public final void setFree(final boolean bFree) {
         this.isFree = bFree;
     }
 
 
-
-    /**
-     * <p>
-     * Constructor for SpellAbility_Requirements.
-     * </p>
-     * 
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @param ts
-     *            a {@link forge.card.spellability.TargetSelection} object.
-     * @param cp
-     *            a {@link forge.card.cost.CostPayment} object.
-     */
     public SpellAbilityRequirements(final SpellAbility sa, final TargetSelection ts, final CostPayment cp) {
         this.ability = sa;
         this.select = ts;
         this.payment = cp;
     }
 
-    /**
-     * <p>
-     * fillRequirements.
-     * </p>
-     */
     public final void fillRequirements() {
         this.fillRequirements(false);
     }
 
-    /**
-     * <p>
-     * fillRequirements.
-     * </p>
-     * 
-     * @param skipTargeting
-     *            a boolean.
-     */
     public final void fillRequirements(final boolean skipTargeting) {
+        final GameState game = Singletons.getModel().getGame();
+        
         if ((this.ability instanceof Spell) && !this.bCasting) {
             // remove from hand
             this.bCasting = true;
             if (!this.ability.getSourceCard().isCopiedSpell()) {
                 final Card c = this.ability.getSourceCard();
 
-                this.fromZone = Singletons.getModel().getGame().getZoneOf(c);
+                this.fromZone = game.getZoneOf(c);
                 this.zonePosition = this.fromZone.getPosition(c);
-                this.ability.setSourceCard(Singletons.getModel().getGame().getAction().moveToStack(c));
+                this.ability.setSourceCard(game.getAction().moveToStack(c));
             }
         }
 
-        // freeze Stack. No abilities should go onto the stack while I'm filling
-        // requirements.
-        Singletons.getModel().getGame().getStack().freezeStack();
+        // freeze Stack. No abilities should go onto the stack while I'm filling requirements.
+        game.getStack().freezeStack();
 
         // Announce things like how many times you want to Multikick or the value of X
-        if (!this.ability.announceRequirements()) {
+        if (!this.announceRequirements()) {
             this.select.setCancel(true);
-            this.finishedTargeting();
+            rollbackAbility();
             return;
         }
 
@@ -134,128 +97,105 @@ public class SpellAbilityRequirements {
         // (or trigger case where its already targeted)
         if (!skipTargeting && (this.select.doesTarget() || (this.ability.getSubAbility() != null))) {
             this.select.setRequirements(this);
-            this.select.resetTargets();
+            this.select.clearTargets();
             this.select.chooseTargets();
-        } else {
-            this.needPayment();
+            if (this.select.isCanceled()) {
+                rollbackAbility();
+                return;
+            }
         }
-    }
-
-    /**
-     * <p>
-     * finishedTargeting.
-     * </p>
-     */
-    public final void finishedTargeting() {
-        if (this.select.isCanceled()) {
-            // cancel ability during target choosing
-            final Card c = this.ability.getSourceCard();
-
-            // split cards transform back to full form if targeting is canceled
-            if (c.isSplitCard()) {
-                c.setState(CardCharacteristicName.Original);
-            }
-
-            if (this.bCasting && !c.isCopiedSpell()) { // and not a copy
-                // add back to where it came from
-                Singletons.getModel().getGame().getAction().moveTo(this.fromZone, c, this.zonePosition);
-            }
-
-            this.select.resetTargets();
-            Singletons.getModel().getGame().getStack().removeFromFrozenStack(this.ability);
+        
+        // Payment
+        boolean paymentMade = this.isFree;
+        
+        if (!paymentMade) {
+            this.payment.changeCost();
+            paymentMade = this.payment.payCost(game);
+        } 
+    
+        if (!paymentMade) {
+            rollbackAbility();
             return;
-        } else {
-            this.needPayment();
         }
-    }
-
-    /**
-     * <p>
-     * needPayment.
-     * </p>
-     */
-    public final void needPayment() {
-        if (!this.isFree) {
-            this.startPaying();
-        } else {
-            this.finishPaying();
-        }
-    }
-
-    /**
-     * <p>
-     * startPaying.
-     * </p>
-     */
-    public final void startPaying() {
-        this.payment.setRequirements(this);
-        this.payment.changeCost();
-        this.payment.payCost();
-    }
-
-    /**
-     * <p>
-     * finishPaying.
-     * </p>
-     */
-    public final void finishPaying() {
-        if (this.payment.isCanceled()) {
-            final Card c = this.ability.getSourceCard();
-
-            // split cards transform back to full form if mana cost is not paid
-            if (c.isSplitCard()) {
-                c.setState(CardCharacteristicName.Original);
-            }
-
-            if (this.bCasting && !c.isCopiedSpell()) { // and not a copy
-                // add back to Previous Zone
-                Singletons.getModel().getGame().getAction().moveTo(this.fromZone, c, this.zonePosition);
-            }
-
-            if (this.select != null) {
-                this.select.resetTargets();
-            }
-
-            this.ability.resetOnceResolved();
-            this.payment.cancelPayment();
-            Singletons.getModel().getGame().getStack().clearFrozen();
-        }
-        else if (this.isFree || this.payment.isAllPaid()) {
+        
+        else if (this.isFree || this.payment.isFullyPaid()) {
             if (this.skipStack) {
                 AbilityUtils.resolve(this.ability, false);
             } else {
-                this.addAbilityToStack();
-            }
 
-            this.select.resetTargets();
-            Singletons.getModel().getGame().getAction().checkStateEffects();
+                this.enusureAbilityHasDescription(this.ability);
+                this.ability.getActivatingPlayer().getManaPool().clearManaPaid(this.ability, false);
+                game.getStack().addAndUnfreeze(this.ability);
+            }
+    
+            // Warning about this - resolution may come in another thread, and it would still need its targets
+            this.select.clearTargets();
+            game.getAction().checkStateEffects();
         }
     }
 
-    /**
-     * <p>
-     * addAbilityToStack.
-     * </p>
-     */
-    public final void addAbilityToStack() {
-        // For older abilities that don't setStackDescription set it here
-        if (this.ability.getStackDescription().equals("")) {
-            final StringBuilder sb = new StringBuilder();
-            sb.append(this.ability.getSourceCard().getName());
-            if (this.ability.getTarget() != null) {
-                final ArrayList<Object> targets = this.ability.getTarget().getTargets();
-                if (targets.size() > 0) {
-                    sb.append(" - Targeting ");
-                    for (final Object o : targets) {
-                        sb.append(o.toString()).append(" ");
-                    }
-                }
-            }
+    private void rollbackAbility() { 
+        // cancel ability during target choosing
+        final Card c = this.ability.getSourceCard();
 
-            this.ability.setStackDescription(sb.toString());
+        // split cards transform back to full form if targeting is canceled
+        if (c.isSplitCard()) {
+            c.setState(CardCharacteristicName.Original);
         }
 
-        this.ability.getActivatingPlayer().getManaPool().clearManaPaid(this.ability, false);
-        Singletons.getModel().getGame().getStack().addAndUnfreeze(this.ability);
+        if (this.bCasting && !c.isCopiedSpell()) { // and not a copy
+            // add back to where it came from
+            Singletons.getModel().getGame().getAction().moveTo(this.fromZone, c, this.zonePosition);
+        }
+
+        if (this.select != null) {
+            this.select.clearTargets();
+        }
+
+        this.ability.resetOnceResolved();
+        this.payment.refundPayment();
+        Singletons.getModel().getGame().getStack().clearFrozen();
+        // Singletons.getModel().getGame().getStack().removeFromFrozenStack(this.ability);
+    }
+    
+
+    public boolean announceRequirements() {
+        // Announcing Requirements like Choosing X or Multikicker
+        // SA Params as comma delimited list
+        String announce = ability.getParam("Announce");
+        if (announce != null) {
+            for(String aVar : announce.split(",")) {
+                String value = ability.getActivatingPlayer().getController().announceRequirements(ability, aVar);
+                 if (value == null || !StringUtils.isNumeric(value)) { 
+                     return false;
+                 } else if (ability.getPayCosts().getCostMana() != null && !ability.getPayCosts().getCostMana().canXbe0() 
+                         && Integer.parseInt(value) == 0) {
+                     return false;
+                 }
+                 ability.setSVar(aVar, "Number$" + value);
+                 ability.getSourceCard().setSVar(aVar, "Number$" + value);
+            }
+        }
+        return true;
+    }
+
+    private void enusureAbilityHasDescription(SpellAbility ability) {
+        if (!StringUtils.isBlank(ability.getStackDescription())) 
+            return;
+            
+        // For older abilities that don't setStackDescription set it here
+        final StringBuilder sb = new StringBuilder();
+        sb.append(ability.getSourceCard().getName());
+        if (ability.getTarget() != null) {
+            final ArrayList<Object> targets = ability.getTarget().getTargets();
+            if (targets.size() > 0) {
+                sb.append(" - Targeting ");
+                for (final Object o : targets) {
+                    sb.append(o.toString()).append(" ");
+                }
+            }
+        }
+
+        ability.setStackDescription(sb.toString());
     }
 }

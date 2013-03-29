@@ -7,12 +7,13 @@ import org.apache.commons.lang3.StringUtils;
 import forge.Card;
 import forge.CardLists;
 import forge.CardPredicates.Presets;
-import forge.Singletons;
+import forge.FThreads;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
-import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
+import forge.control.input.InputSelectCards;
+import forge.control.input.InputSelectCardsFromList;
 import forge.game.ai.ComputerUtilCard;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
@@ -77,12 +78,16 @@ public class UntapEffect extends SpellAbilityEffect {
         final List<Player> definedPlayers = AbilityUtils.getDefinedPlayers(sa.getSourceCard(), sa.getParam("Defined"), sa);
 
         for (final Player p : definedPlayers) {
+            List<Card> list = CardLists.getType(p.getCardsIn(ZoneType.Battlefield), valid);
+            list = CardLists.filter(list, Presets.TAPPED);
+            
             if (p.isHuman()) {
-                Singletons.getModel().getMatch().getInput().setInput(CardFactoryUtil.inputUntapUpToNType(num, valid));
+                InputSelectCards sc = new InputSelectCardsFromList(0, num, list);
+                FThreads.setInputAndWait(sc);
+                if( !sc.hasCancelled() )
+                    for( Card c : sc.getSelected() ) 
+                        c.untap();
             } else {
-                List<Card> list = p.getCardsIn(ZoneType.Battlefield);
-                list = CardLists.getType(list, valid);
-                list = CardLists.filter(list, Presets.TAPPED);
 
                 int count = 0;
                 while ((list.size() != 0) && (count < num)) {

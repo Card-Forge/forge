@@ -1,9 +1,11 @@
 package forge.game.event;
 
-public class DuelOutcomeEvent extends Event {
-    public final boolean humanWonTheDuel;
+import forge.game.player.LobbyPlayer;
 
-    public DuelOutcomeEvent(boolean humanWon) {
-        humanWonTheDuel = humanWon;
+public class DuelOutcomeEvent extends Event {
+    public final LobbyPlayer winner;
+
+    public DuelOutcomeEvent(LobbyPlayer winner) {
+        this.winner = winner;
     }
 }

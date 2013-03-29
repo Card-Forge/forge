@@ -41,6 +41,8 @@ public class ManaCostBeingPaid {
     private int cntX = 0;
     private final ArrayList<String> manaNeededToAvoidNegativeEffect = new ArrayList<String>();
     private final ArrayList<String> manaPaidToAvoidNegativeEffect = new ArrayList<String>();
+    
+    private final ManaCost originalCost;
 
     // manaCost can be like "0", "3", "G", "GW", "10", "3 GW", "10 GW"
     // or "split hybrid mana" like "2/G 2/G", "2/B 2/B 2/B"
@@ -59,6 +61,7 @@ public class ManaCostBeingPaid {
     }
 
     public ManaCostBeingPaid(ManaCost manaCost) {
+        originalCost = manaCost;
         if ( null == manaCost )
             return;
 
@@ -644,5 +647,9 @@ public class ManaCostBeingPaid {
      */
     public final ArrayList<String> getManaPaidToAvoidNegativeEffect() {
         return this.manaPaidToAvoidNegativeEffect;
+    }
+
+    public ManaCost getStartingCost() {
+        return originalCost;
     }
 }

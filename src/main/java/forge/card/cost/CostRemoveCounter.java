@@ -19,14 +19,13 @@ package forge.card.cost;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import forge.Card;
 import forge.CardLists;
 import forge.CounterType;
-import forge.Singletons;
+import forge.FThreads;
 import forge.card.ability.AbilityUtils;
 import forge.card.spellability.SpellAbility;
-import forge.control.input.Input;
+import forge.control.input.InputPayment;
 import forge.game.GameState;
 import forge.game.player.AIPlayer;
 import forge.game.player.Player;
@@ -46,8 +45,145 @@ public class CostRemoveCounter extends CostPartWithList {
     // Counter is tough),
     // Quillspike, Rift Elemental, Sage of Fables, Spike Rogue
 
+    /** 
+     * TODO: Write javadoc for this type.
+     *
+     */
+    public static final class InputPayCostRemoveCounterType extends InputPayCostBase {
+        private final int nNeeded;
+        private final SpellAbility sa;
+        private final String type;
+        private final CostRemoveCounter costRemoveCounter;
+        private static final long serialVersionUID = 2685832214519141903L;
+        private List<Card> typeList;
+        private int nRemove = 0;
+
+        /**
+         * TODO: Write javadoc for Constructor.
+         * @param payment
+         * @param nNeeded
+         * @param sa
+         * @param type
+         * @param costRemoveCounter
+         */
+        public InputPayCostRemoveCounterType(int nNeeded, SpellAbility sa, String type, CostRemoveCounter costRemoveCounter) {
+            this.nNeeded = nNeeded;
+            this.sa = sa;
+            this.type = type;
+            this.costRemoveCounter = costRemoveCounter;
+        }
+
+        @Override
+        public void showMessage() {
+            if ((nNeeded == 0) || (nNeeded == this.nRemove)) {
+                this.done();
+            }
+
+            final StringBuilder msg = new StringBuilder("Remove ");
+            final int nLeft = nNeeded - this.nRemove;
+            msg.append(nLeft).append(" ");
+            msg.append(costRemoveCounter.getCounter().getName()).append(" counters from ");
+            msg.append(costRemoveCounter.getDescriptiveType());
+
+            this.typeList = CardLists.getValidCards(sa.getActivatingPlayer().getCardsIn(costRemoveCounter.getZone()), type.split(";"), sa.getActivatingPlayer(), sa.getSourceCard());
+            
+            // TODO Tabulate typelist vs nNeeded to see if there are enough counters to remove
+            
+            CMatchUI.SINGLETON_INSTANCE.showMessage(msg.toString());
+            ButtonUtil.enableOnlyCancel();
+        }
+
+        @Override
+        public void selectCard(final Card card) {
+            if (this.typeList.contains(card)) {
+                if (card.getCounters(costRemoveCounter.getCounter()) > 0) {
+                    this.nRemove++;
+                    costRemoveCounter.executePayment(sa, card);
+
+                    if (nNeeded == this.nRemove) {
+                        this.done();
+                    } else {
+                        this.showMessage();
+                    }
+                }
+            }
+        }
+    }
+
+    /** 
+     * TODO: Write javadoc for this type.
+     *
+     */
+    public static final class InputPayCostRemoveCounterFrom extends InputPayCostBase {
+        private final CostRemoveCounter costRemoveCounter;
+        private final String type;
+        private final SpellAbility sa;
+        private final int nNeeded;
+        private static final long serialVersionUID = 734256837615635021L;
+        private List<Card> typeList;
+        private int nRemove = 0;
+
+        /**
+         * TODO: Write javadoc for Constructor.
+         * @param costRemoveCounter
+         * @param type
+         * @param sa
+         * @param nNeeded
+         * @param payment
+         */
+        public InputPayCostRemoveCounterFrom(CostRemoveCounter costRemoveCounter, String type, SpellAbility sa, int nNeeded) {
+
+            this.costRemoveCounter = costRemoveCounter;
+            this.type = type;
+            this.sa = sa;
+            this.nNeeded = nNeeded;
+            
+        }
+
+        @Override
+        public void showMessage() {
+            if (nNeeded == 0) {
+                this.done();
+            }
+
+            this.typeList = new ArrayList<Card>(sa.getActivatingPlayer().getCardsIn(costRemoveCounter.getZone()));
+            this.typeList = CardLists.getValidCards(this.typeList, type.split(";"), sa.getActivatingPlayer(), sa.getSourceCard());
+
+            for (int i = 0; i < nNeeded; i++) {
+                if (this.typeList.isEmpty()) {
+                    this.cancel();
+                }
+
+                final Card o = GuiChoose.oneOrNone("Remove counter(s) from a card in " + costRemoveCounter.getZone(), this.typeList);
+
+                if (o != null) {
+                    final Card card = o;
+
+                    if (card.getCounters(costRemoveCounter.getCounter()) > 0) {
+                        this.nRemove++;
+                        costRemoveCounter.executePayment(sa, card);
+
+                        if (card.getCounters(costRemoveCounter.getCounter()) == 0) {
+                            this.typeList.remove(card);
+                        }
+
+                        if (nNeeded == this.nRemove) {
+                            this.done();
+                        } else {
+                            this.showMessage();
+                        }
+                    }
+                } else {
+                    this.cancel();
+                    break;
+                }
+            }
+        }
+    }
+
     private final CounterType counter;
     private int lastPaidAmount = 0;
+    private int cntCounters = 1;
     private ZoneType zone;
 
     /**
@@ -185,14 +321,11 @@ public class CostRemoveCounter extends CostPartWithList {
         return true;
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see forge.card.cost.CostPart#payAI(forge.card.spellability.SpellAbility,
-     * forge.Card, forge.card.cost.Cost_Payment)
+    /* (non-Javadoc)
+     * @see forge.card.cost.CostPartWithList#payAI(forge.card.cost.PaymentDecision, forge.game.player.AIPlayer, forge.card.spellability.SpellAbility, forge.Card)
      */
     @Override
-    public final void payAI(final AIPlayer ai, final SpellAbility ability, final Card source, final CostPayment payment, final GameState game) {
+    public void payAI(PaymentDecision decision, AIPlayer ai, SpellAbility ability, Card source) {
         final String amount = this.getAmount();
         Integer c = this.convertAmount();
         if (c == null) {
@@ -204,10 +337,10 @@ public class CostRemoveCounter extends CostPartWithList {
         }
 
         if (this.payCostFromSource()) {
-            source.subtractCounter(this.counter, c);
+            executePayment(ability, source);
         } else {
-            for (final Card card : this.getList()) {
-                card.subtractCounter(this.counter, c);
+            for (final Card card : decision.cards) {
+                executePayment(ability, card);
             }
         }
         source.setSVar("CostCountersRemoved", "Number$" + Integer.toString(c));
@@ -221,79 +354,71 @@ public class CostRemoveCounter extends CostPartWithList {
      * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final boolean payHuman(final SpellAbility ability, final Card source, final CostPayment payment, final GameState game) {
+    public final boolean payHuman(final SpellAbility ability, final GameState game) {
         final String amount = this.getAmount();
+        final Card source = ability.getSourceCard();
         Integer c = this.convertAmount();
         int maxCounters = 0;
+        
+        if (amount.equals("All"))
+            cntCounters = maxCounters;
+        else if (c == null) {
+            final String sVar = ability.getSVar(amount);
+            if (sVar.equals("XChoice")) {
+                cntCounters = CostUtil.chooseXValue(source, ability, maxCounters);
+            } else {
+                cntCounters = AbilityUtils.calculateAmount(source, amount, ability);
+            }
+        } else cntCounters = c;
 
+        
+        
         if (!this.payCostFromSource()) {
-            if (c == null) {
-                final String sVar = ability.getSVar(amount);
-                // Generalize this
-                if (sVar.equals("XChoice")) {
-                    c = CostUtil.chooseXValue(source, ability, maxCounters);
-                } else {
-                    c = AbilityUtils.calculateAmount(source, amount, ability);
-                }
-            }
-
+            final InputPayment inp;
             if (this.getZone().equals(ZoneType.Battlefield)) {
-                final Input inp = CostRemoveCounter.removeCounterType(ability, this.getType(), payment, this, c);
-                Singletons.getModel().getMatch().getInput().setInputInterrupt(inp);
+                inp = new InputPayCostRemoveCounterType(cntCounters, ability, this.getType(), this);
+            } else {
+                inp = new InputPayCostRemoveCounterFrom(this, this.getType(), ability, cntCounters);
             }
-            else {
-                final Input inp = CostRemoveCounter.removeCounterTypeFrom(ability, this.getType(), payment, this, c);
-                Singletons.getModel().getMatch().getInput().setInputInterrupt(inp);
-            }
-            return false;
+            FThreads.setInputAndWait(inp);
+            if( inp.isPaid() ) source.setSVar("CostCountersRemoved", "Number$" + Integer.toString(c));
+            return inp.isPaid();
         }
 
         maxCounters = source.getCounters(this.counter);
-        if (amount.equals("All")) {
-            c = maxCounters;
-        } else {
-            if (c == null) {
-                final String sVar = ability.getSVar(amount);
-                // Generalize this
-                if (sVar.equals("XChoice")) {
-                    c = CostUtil.chooseXValue(source, ability, maxCounters);
-                } else {
-                    c = AbilityUtils.calculateAmount(source, amount, ability);
-                }
-            }
-        }
-
-        if (maxCounters >= c) {
-            this.addToList(source);
-            source.setSVar("CostCountersRemoved", "Number$" + Integer.toString(c));
-            source.subtractCounter(this.counter, c);
-            this.setLastPaidAmount(c);
-            payment.setPaidManaPart(this);
-        } else {
-            payment.setCancel(true);
-            payment.getRequirements().finishPaying();
-            return false;
-        }
+        if (maxCounters < c) return false;
+            
+        source.setSVar("CostCountersRemoved", "Number$" + Integer.toString(c));
+        executePayment(ability, source);
         return true;
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * forge.card.cost.CostPart#decideAIPayment(forge.card.spellability.SpellAbility
-     * , forge.Card, forge.card.cost.Cost_Payment)
+    @Override
+    protected void doPayment(SpellAbility ability, Card targetCard){
+        targetCard.subtractCounter(this.getCounter(), cntCounters);
+    }
+    
+    /* (non-Javadoc)
+     * @see forge.card.cost.CostPartWithList#getHashForList()
      */
     @Override
-    public final boolean decideAIPayment(final AIPlayer ai, final SpellAbility ability, final Card source, final CostPayment payment) {
+    public String getHashForList() {
+        return "CounterRemove";
+    }
+
+    /* (non-Javadoc)
+     * @see forge.card.cost.CostPart#decideAIPayment(forge.game.player.AIPlayer, forge.card.spellability.SpellAbility, forge.Card)
+     */
+    @Override
+    public PaymentDecision decideAIPayment(AIPlayer ai, SpellAbility ability, Card source) {
         final String amount = this.getAmount();
         Integer c = this.convertAmount();
-
-
+    
+    
         if (c == null) {
             final String sVar = ability.getSVar(amount);
             if (sVar.equals("XChoice")) {
-                return false;
+                return null;
             }
             if (amount.equals("All")) {
                 c = source.getCounters(this.counter);
@@ -301,191 +426,22 @@ public class CostRemoveCounter extends CostPartWithList {
                 c = AbilityUtils.calculateAmount(source, amount, ability);
             }
         }
-
+    
         if (!this.payCostFromSource()) {
-            this.getList().clear();
             final List<Card> typeList =
                     CardLists.getValidCards(ai.getCardsIn(this.getZone()), this.getType().split(";"), ai, source);
             for (Card card : typeList) {
                 if (card.getCounters(this.getCounter()) >= c) {
-                    this.addToList(card);
-                    return true;
+                    return new PaymentDecision(card);
                 }
             }
-            return false;
-        }
+            return null;
+        } 
+        
         if (c > source.getCounters(this.getCounter())) {
             System.out.println("Not enough " + this.counter + " on " + source.getName());
-            return false;
+            return null;
         }
-        return true;
-    }
-
-    /**
-     * <p>
-     * returnType.
-     * </p>
-     * 
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @param type
-     *            a {@link java.lang.String} object.
-     * @param payment
-     *            a {@link forge.card.cost.CostPayment} object.
-     * @param costRemoveCounter
-     *            TODO
-     * @param nNeeded
-     *            the n needed
-     * @return a {@link forge.control.input.Input} object.
-     */
-    public static Input removeCounterType(final SpellAbility sa, final String type, final CostPayment payment,
-            final CostRemoveCounter costRemoveCounter, final int nNeeded) {
-        final Input target = new Input() {
-            private static final long serialVersionUID = 2685832214519141903L;
-            private List<Card> typeList;
-            private int nRemove = 0;
-
-            @Override
-            public void showMessage() {
-                if ((nNeeded == 0) || (nNeeded == this.nRemove)) {
-                    this.done();
-                }
-
-                final StringBuilder msg = new StringBuilder("Remove ");
-                final int nLeft = nNeeded - this.nRemove;
-                msg.append(nLeft).append(" ");
-                msg.append(costRemoveCounter.getCounter().getName()).append(" counters from ");
-                msg.append(costRemoveCounter.getDescriptiveType());
-
-                this.typeList = CardLists.getValidCards(sa.getActivatingPlayer().getCardsIn(costRemoveCounter.getZone()), type.split(";"), sa.getActivatingPlayer(), sa.getSourceCard());
-                
-                // TODO Tabulate typelist vs nNeeded to see if there are enough counters to remove
-                
-                CMatchUI.SINGLETON_INSTANCE.showMessage(msg.toString());
-                ButtonUtil.enableOnlyCancel();
-            }
-
-            @Override
-            public void selectButtonCancel() {
-                this.cancel();
-            }
-
-            @Override
-            public void selectCard(final Card card) {
-                if (this.typeList.contains(card)) {
-                    if (card.getCounters(costRemoveCounter.getCounter()) > 0) {
-                        this.nRemove++;
-                        costRemoveCounter.addToList(card);
-                        card.subtractCounter(costRemoveCounter.getCounter(), 1);
-
-                        if (nNeeded == this.nRemove) {
-                            this.done();
-                        } else {
-                            this.showMessage();
-                        }
-                    }
-                }
-            }
-
-            public void done() {
-                this.stop();
-                costRemoveCounter.addListToHash(sa, "CounterRemove");
-                payment.paidCost(costRemoveCounter);
-            }
-
-            public void cancel() {
-                this.stop();
-                costRemoveCounter.addListToHash(sa, "CounterRemove");
-                payment.cancelCost(costRemoveCounter);
-            }
-        };
-
-        return target;
-    }
-
-    /**
-     * <p>
-     * returnType.
-     * </p>
-     * 
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @param type
-     *            a {@link java.lang.String} object.
-     * @param payment
-     *            a {@link forge.card.cost.CostPayment} object.
-     * @param costRemoveCounter
-     *            TODO
-     * @param nNeeded
-     *            the n needed
-     * @return a {@link forge.control.input.Input} object.
-     */
-    public static Input removeCounterTypeFrom(final SpellAbility sa, final String type, final CostPayment payment,
-            final CostRemoveCounter costRemoveCounter, final int nNeeded) {
-        final Input target = new Input() {
-            private static final long serialVersionUID = 734256837615635021L;
-            private List<Card> typeList;
-            private int nRemove = 0;
-
-            @Override
-            public void showMessage() {
-                if (nNeeded == 0) {
-                    this.done();
-                }
-
-                this.typeList = new ArrayList<Card>(sa.getActivatingPlayer().getCardsIn(costRemoveCounter.getZone()));
-                this.typeList = CardLists.getValidCards(this.typeList, type.split(";"), sa.getActivatingPlayer(), sa.getSourceCard());
-
-                for (int i = 0; i < nNeeded; i++) {
-                    if (this.typeList.size() == 0) {
-                        this.cancel();
-                    }
-
-                    final Card o = GuiChoose
-                            .oneOrNone("Remove counter(s) from a card in " + costRemoveCounter.getZone(), this.typeList);
-
-                    if (o != null) {
-                        final Card card = o;
-
-                        if (card.getCounters(costRemoveCounter.getCounter()) > 0) {
-                            this.nRemove++;
-                            costRemoveCounter.addToList(card);
-                            card.subtractCounter(costRemoveCounter.getCounter(), 1);
-
-                            if (card.getCounters(costRemoveCounter.getCounter()) == 0) {
-                                this.typeList.remove(card);
-                            }
-
-                            if (nNeeded == this.nRemove) {
-                                this.done();
-                            } else {
-                                this.showMessage();
-                            }
-                        }
-                    } else {
-                        this.cancel();
-                        break;
-                    }
-                }
-            }
-
-            @Override
-            public void selectButtonCancel() {
-                this.cancel();
-            }
-
-            public void done() {
-                this.stop();
-                costRemoveCounter.addListToHash(sa, "CounterRemove");
-                payment.paidCost(costRemoveCounter);
-            }
-
-            public void cancel() {
-                this.stop();
-                costRemoveCounter.addListToHash(sa, "CounterRemove");
-                payment.cancelCost();
-            }
-        };
-        return target;
+        return new PaymentDecision(source);
     }
 }

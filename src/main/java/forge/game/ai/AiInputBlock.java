@@ -3,7 +3,8 @@ package forge.game.ai;
 import java.util.List;
 
 import forge.Card;
-import forge.control.input.Input;
+import forge.Singletons;
+import forge.control.input.InputBase;
 import forge.game.GameState;
 import forge.game.phase.CombatUtil;
 import forge.game.player.Player;
@@ -12,7 +13,7 @@ import forge.game.player.Player;
  * TODO: Write javadoc for this type.
  *
  */
-public class AiInputBlock extends Input {
+public class AiInputBlock extends InputBase {
 
     private final GameState game;
     /**
@@ -38,6 +39,7 @@ public class AiInputBlock extends Input {
         CombatUtil.orderMultipleCombatants(game.getCombat());
         game.getPhaseHandler().setPlayersPriorityPermission(false);
         
-        stop();
+        // was not added to stack, so will be replaced by plain update
+        Singletons.getModel().getMatch().getInput().updateObservers();
     }
 }

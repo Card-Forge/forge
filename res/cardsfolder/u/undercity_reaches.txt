@@ -6,10 +6,6 @@ SVar:TrigDraw:AB$ Draw | Cost$ 0 | Defined$ TriggeredSourceController | NumCards
 T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever you roll Chaos, you have no maximum hand size for the rest of the game.
 SVar:RolledChaos:AB$ Effect | Cost$ 0 | Effect | Name$ Undercity Reaches Effect | StaticAbilities$ STHandSize | Duration$ Permanent
 SVar:STHandSize:Mode$ Continuous | EffectZone$ Command | Affected$ You | SetMaxHandSize$ Unlimited | Description$ You have no maximum hand size.
-T:Mode$ PlanarDice | Result$ Planeswalk | TriggerZones$ Command | Execute$ RolledWalk | Secondary$ True | TriggerDescription$ Whenever you roll Planeswalk, put this card on the bottom of its owner's planar deck face down, then move the top card of your planar deck off that planar deck and turn it face up.
-SVar:RolledWalk:AB$ Planeswalk | Cost$ 0
-A:AB$ RollPlanarDice | Cost$ X | SorcerySpeed$ True | ActivationZone$ Command | SpellDescription$ Roll the planar dice.
-SVar:X:Count$RolledThisTurn
 SVar:Picture:http://www.wizards.com/global/images/magic/general/undercity_reaches.jpg
 Oracle:Whenever a creature deals combat damage to a player, its controller may draw a card.\nWhenever you roll {C}, you have no maximum hand size for the rest of the game.
 SetInfo:HOP Common

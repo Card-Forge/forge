@@ -18,11 +18,12 @@
 package forge.card.cost;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
-
 import forge.Card;
 import forge.CardUtil;
 import forge.card.spellability.SpellAbility;
+import forge.game.player.AIPlayer;
 
 /**
  * The Class CostPartWithList.
@@ -30,7 +31,9 @@ import forge.card.spellability.SpellAbility;
 public abstract class CostPartWithList extends CostPart {
 
     /** The list. */
-    private List<Card> list = null;
+    private final List<Card> list = new ArrayList<Card>(); 
+    // set is here because executePayment() adds card to list, while ai's decide payment does the same thing.
+    // set allows to avoid duplication
 
     /**
      * Gets the list.
@@ -42,33 +45,14 @@ public abstract class CostPartWithList extends CostPart {
     }
 
     /**
-     * Sets the list.
-     * 
-     * @param setList
-     *            the new list
-     */
-    public final void setList(final List<Card> setList) {
-        this.list = setList;
-    }
-
-    /**
      * Reset list.
      */
     public final void resetList() {
-        this.setList(new ArrayList<Card>());
+        this.list.clear();
     }
 
-    /**
-     * Adds the to list.
-     * 
-     * @param c
-     *            the c
-     */
-    public final void addToList(final Card c) {
-        if (this.getList() == null) {
-            this.resetList();
-        }
-        this.getList().add(c);
+    protected final void addToList(final Card c) {
+        this.list.add(c);
     }
 
     /**
@@ -79,10 +63,10 @@ public abstract class CostPartWithList extends CostPart {
      * @param hash
      *            the hash
      */
-    public final void addListToHash(final SpellAbility sa, final String hash) {
-        for (final Card card : this.getList()) {
-            Card copy = CardUtil.getLKICopy(card);
-            sa.addCostToHashList(copy, hash);
+    public final void reportPaidCardsTo(final SpellAbility sa) {
+        final String paymentMethod = getHashForList();
+        for (final Card card : this.list) {
+            sa.addCostToHashList(CardUtil.getLKICopy(card), paymentMethod);
         }
     }
 
@@ -91,7 +75,7 @@ public abstract class CostPartWithList extends CostPart {
      */
     public CostPartWithList() {
     }
-
+    
     /**
      * Instantiates a new cost part with list.
      * 
@@ -104,6 +88,41 @@ public abstract class CostPartWithList extends CostPart {
      */
     public CostPartWithList(final String amount, final String type, final String description) {
         super(amount, type, description);
-        this.resetList();
     }
+
+    public final boolean executePayment(SpellAbility ability, Card targetCard) {
+        this.list.add(targetCard);
+        doPayment(ability, targetCard);
+        return true;
+    }
+
+    // always returns true, made this to inline with return
+    public final boolean executePayment(SpellAbility ability, Collection<Card> targetCards) {
+        if(canPayListAtOnce()) { // This is used by reveal. Without it when opponent would reveal hand, you'll get N message boxes. 
+            this.list.addAll(targetCards);
+            doListPayment(ability, targetCards);
+            return true;
+        }
+        for(Card c: targetCards)
+            executePayment(ability, c);
+        return true;
+    }
+
+    protected abstract void doPayment(SpellAbility ability, Card targetCard);
+    // Overload these two only together, set to true and perform payment on list
+    protected boolean canPayListAtOnce() { return false; }
+    protected void doListPayment(SpellAbility ability, Collection<Card> targetCards) { };
+
+    /**
+     * TODO: Write javadoc for this method.
+     * @return
+     */
+    public abstract String getHashForList();
+    
+    @Override
+    public void payAI(PaymentDecision decision, AIPlayer ai, SpellAbility ability, Card source) {
+        executePayment(ability, decision.cards);
+        reportPaidCardsTo(ability);
+    }
+
 }

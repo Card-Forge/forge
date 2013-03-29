@@ -1,5 +1,6 @@
 package forge.game.player;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -105,7 +106,7 @@ public abstract class PlayerController {
     public abstract List<Card> orderAttackers(Card blocker, List<Card> attackers);
 
     /** Shows the card to this player*/
-    public abstract void reveal(String string, List<Card> cards, ZoneType zone, Player owner);
+    public abstract void reveal(String string, Collection<Card> cards, ZoneType zone, Player owner);
     public abstract ImmutablePair<List<Card>, List<Card>> arrangeForScry(List<Card> topN);
     public abstract boolean willPutCardOnTop(Card c);
     

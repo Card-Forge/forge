@@ -1,14 +1,12 @@
 package forge.control.input;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
-
 import forge.Card;
 import forge.CardUtil;
 import forge.Constant;
+import forge.FThreads;
 import forge.Singletons;
 import forge.card.MagicColor;
 import forge.card.ability.ApiType;
@@ -18,13 +16,16 @@ import forge.card.spellability.AbilityManaPart;
 import forge.card.spellability.SpellAbility;
 import forge.game.GameState;
 import forge.game.player.Player;
+import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
+import forge.gui.framework.SDisplayUtil;
+import forge.gui.match.views.VMessage;
 
 /** 
  * TODO: Write javadoc for this type.
  *
  */
-public abstract class InputPayManaBase extends Input {
+public abstract class InputPayManaBase extends InputSyncronizedBase implements InputPayment {
 
     private static final long serialVersionUID = -9133423708688480255L;
 
@@ -33,19 +34,30 @@ public abstract class InputPayManaBase extends Input {
     protected final Player whoPays;
     protected final GameState game;
     protected ManaCostBeingPaid manaCost;
+    protected final SpellAbility saPaidFor;
     
-    protected InputPayManaBase(final GameState game) {
+    boolean bPaid = false;
+    
+    protected InputPayManaBase(final GameState game, SpellAbility saToPayFor) {
         this.game = game;
-        this.whoPays = Singletons.getControl().getPlayer();
+        this.whoPays = saToPayFor.getActivatingPlayer();
+        this.saPaidFor = saToPayFor;
     }
     
-    /**
-     * <p>
-     * selectManaPool.
-     * </p>
-     * @param color a String that represents the Color the mana is coming from
-     */
-    public abstract void selectManaPool(String color);
+    /** {@inheritDoc} */
+    @Override
+    public void selectCard(final Card card) {
+        if (card.getManaAbility().isEmpty() || card.isInZone(ZoneType.Hand)) {
+            SDisplayUtil.remind(VMessage.SINGLETON_INSTANCE);
+            return;
+        }
+        // only tap card if the mana is needed
+        activateManaAbility(card, this.manaCost);
+    }
+    
+    public void selectManaPool(String color) {
+        useManaFromPool(color, this.manaCost);
+    }
 
     /**
      * <p>
@@ -103,7 +115,7 @@ public abstract class InputPayManaBase extends Input {
      * 
      * @return ManaCost the amount of mana remaining to be paid after the mana is activated
      */
-    protected static ManaCostBeingPaid activateManaAbility(String color, final SpellAbility saBeingPaidFor, ManaCostBeingPaid manaCost) {
+    protected void useManaFromPool(String color, ManaCostBeingPaid manaCost) {
         ManaPool mp = Singletons.getControl().getPlayer().getManaPool();
     
         // Convert Color to short String
@@ -111,8 +123,11 @@ public abstract class InputPayManaBase extends Input {
         if (!color.equalsIgnoreCase("Colorless")) {
             manaStr = CardUtil.getShortColor(color);
         }
+        
+        this.manaCost = mp.payManaFromPool(saPaidFor, manaCost, manaStr); 
     
-        return mp.payManaFromPool(saBeingPaidFor, manaCost, manaStr);
+        onManaAbilityPlayed(null);
+        showMessage();
     }
 
     /**
@@ -128,10 +143,10 @@ public abstract class InputPayManaBase extends Input {
      *            a {@link forge.card.mana.ManaCostBeingPaid} object.
      * @return a {@link forge.card.mana.ManaCostBeingPaid} object.
      */
-    protected ManaCostBeingPaid activateManaAbility(final SpellAbility sa, final Card card, ManaCostBeingPaid manaCost) {
+    protected void activateManaAbility(final Card card, ManaCostBeingPaid manaCost) {
         // make sure computer's lands aren't selected
         if (card.getController() != whoPays) {
-            return manaCost;
+            return;
         }
         
     
@@ -170,7 +185,7 @@ public abstract class InputPayManaBase extends Input {
                 continue;
             } else if (ma.isAbility() && ma.getRestrictions().isInstantSpeed()) {
                 continue;
-            } else if (!m.meetsManaRestrictions(sa)) {
+            } else if (!m.meetsManaRestrictions(saPaidFor)) {
                 continue;
             }
     
@@ -185,16 +200,16 @@ public abstract class InputPayManaBase extends Input {
             }
         }
         if (abilities.isEmpty()) {
-            return manaCost;
+            return;
         }
     
         // Store some information about color costs to help with any mana choices
         String colorsNeeded = colorRequired.toString();
         if ("1".equals(colorsNeeded)) {  // only colorless left
-            if (sa.getSourceCard() != null
-                    && !sa.getSourceCard().getSVar("ManaNeededToAvoidNegativeEffect").equals("")) {
+            if (saPaidFor.getSourceCard() != null
+                    && !saPaidFor.getSourceCard().getSVar("ManaNeededToAvoidNegativeEffect").equals("")) {
                 colorsNeeded = "";
-                String[] negEffects = sa.getSourceCard().getSVar("ManaNeededToAvoidNegativeEffect").split(",");
+                String[] negEffects = saPaidFor.getSourceCard().getSVar("ManaNeededToAvoidNegativeEffect").split(",");
                 for (String negColor : negEffects) {
                     // convert long color strings to short color strings
                     if (negColor.length() > 1) {
@@ -216,8 +231,8 @@ public abstract class InputPayManaBase extends Input {
     
         // If the card has sunburst or any other ability that tracks mana spent,
         // skip express Mana choice
-        if (sa.getSourceCard() != null
-                && sa.getSourceCard().hasKeyword("Sunburst") && sa.isSpell()) {
+        if (saPaidFor.getSourceCard() != null
+                && saPaidFor.getSourceCard().hasKeyword("Sunburst") && saPaidFor.isSpell()) {
             colorsNeeded = "WUBRG";
             skipExpress = true;
         }
@@ -255,7 +270,7 @@ public abstract class InputPayManaBase extends Input {
                 }
             }
     
-            if ((colorMatches.size() == 0)) {
+            if (colorMatches.isEmpty()) {
                 // can only match colorless just grab the first and move on.
                 choice = false;
             } else if (colorMatches.size() < abilities.size()) {
@@ -264,15 +279,7 @@ public abstract class InputPayManaBase extends Input {
             }
         }
     
-        SpellAbility chosen = abilities.get(0);
-        if ((1 < abilities.size()) && choice) {
-            final Map<String, SpellAbility> ability = new HashMap<String, SpellAbility>();
-            for (final SpellAbility am : abilities) {
-                ability.put(am.toString(), am);
-            }
-            chosen = GuiChoose.one("Choose mana ability", abilities);
-        }
-        
+        final SpellAbility chosen = abilities.size() > 1 && choice ? GuiChoose.one("Choose mana ability", abilities) : abilities.get(0);
         SpellAbility subchosen = chosen;
         while(subchosen.getManaPart() == null)
         {
@@ -282,14 +289,53 @@ public abstract class InputPayManaBase extends Input {
         // save off color needed for use by any mana and reflected mana
         subchosen.getManaPart().setExpressChoice(colorsNeeded);
         
-        Player p = chosen.getActivatingPlayer();
-        Singletons.getModel().getGame().getActionPlay().playSpellAbility(chosen, p);
-    
-        manaCost = p.getManaPool().payManaFromAbility(sa, manaCost, chosen);
-    
-        //AllZone.getHumanPlayer().getZone(ZoneType.Battlefield).updateObservers();
-        // DO NOT REMOVE THIS, otherwise the cards don't always tap (copied)
-        return manaCost;
-    
+        // System.out.println("Chosen sa=" + chosen + " of " + chosen.getSourceCard() + " to pay mana");
+        Runnable proc = new Runnable() {
+            @Override
+            public void run() {
+                final Player p = chosen.getActivatingPlayer();
+                p.getGame().getActionPlay().playSpellAbility(chosen, p);
+                onManaAbilityPlayed(chosen); 
+            }
+        };
+        FThreads.invokeInNewThread(proc, true);
+        // EDT that removes lockUI from input stack will call our showMessage() method
     }
+    
+    public void onManaAbilityPlayed(final SpellAbility saPaymentSrc) { 
+        if ( saPaymentSrc != null) // null comes when they've paid from pool
+            this.manaCost = whoPays.getManaPool().payManaFromAbility(saPaidFor, manaCost, saPaymentSrc);
+
+        onManaAbilityPaid();
+        if ( saPaymentSrc != null )
+            whoPays.getZone(ZoneType.Battlefield).updateObservers();
+    }
+    
+    protected final void checkIfAlredyPaid() {
+        if (manaCost.isPaid()) {
+            bPaid = true;
+            done();
+        }
+    }
+    
+    protected void onManaAbilityPaid() {} // some inputs overload it
+    protected abstract void done();
+
+    @Override
+    public String toString() {
+        return String.format("PayManaBase %s (out of %s)", manaCost.toString(), manaCost.getStartingCost() );
+    }
+
+    protected void handleConvokedCards(boolean isCancelled) {
+        if (saPaidFor.getTappedForConvoke() != null) {
+            for (final Card c : saPaidFor.getTappedForConvoke()) {
+                c.setTapped(false);
+                if (!isCancelled)
+                    c.tap(); // that will tap cards with all the triggers, it's no good to call this from EDT
+            }
+            saPaidFor.clearTappedForConvoke();
+        }
+    }
+    
+    public boolean isPaid() { return bPaid; }
 }

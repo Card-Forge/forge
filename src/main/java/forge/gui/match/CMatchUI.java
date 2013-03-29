@@ -23,8 +23,8 @@ import java.util.List;
 import java.util.Map;
 
 import javax.swing.ImageIcon;
-
 import forge.Card;
+import forge.FThreads;
 import forge.GameEntity;
 import forge.ImageCache;
 import forge.Singletons;
@@ -56,12 +56,12 @@ public enum CMatchUI {
 
     private ImageIcon getPlayerAvatar(final Player p, final int defaultIndex) {
         LobbyPlayer lp = p.getLobbyPlayer();
-        ImageIcon ret = ImageCache.getIcon(lp);
-        if (null == ret) {
-            int iAvatar = lp.getAvatarIndex();
-            return new ImageIcon(FSkin.getAvatars().get(iAvatar >= 0 ? iAvatar : defaultIndex));
+        if (null != lp.getIconImageKey()) {
+            return ImageCache.getIcon(lp);
         }
-        return ret;
+        
+        int avatarIdx = lp.getAvatarIndex();
+        return new ImageIcon(FSkin.getAvatars().get(0 <= avatarIdx ? avatarIdx : defaultIndex));
     }
 
 
@@ -181,7 +181,8 @@ public enum CMatchUI {
      * @param blockers &emsp; {@link forge.CardList}
      * @param damage &emsp; int
      */
-    public Map<Card, Integer> getDamageToAssign(final Card attacker, final List<Card> blockers, final int damage, GameEntity defender) {
+    @SuppressWarnings("unchecked")
+    public Map<Card, Integer> getDamageToAssign(final Card attacker, final List<Card> blockers, final int damage, final GameEntity defender) {
         if (damage <= 0) {
             return new HashMap<Card, Integer>();
         }
@@ -194,8 +195,15 @@ public enum CMatchUI {
             return res;
         }
 
-        VAssignDamage v = new VAssignDamage(attacker, blockers, damage, defender);
-        return v.getDamageMap();
+        final Object[] result = { null }; // how else can I extract a value from EDT thread?
+        FThreads.invokeInEDTAndWait(new Runnable() {
+            @Override
+            public void run() {
+                // TODO Auto-generated method stub
+                VAssignDamage v = new VAssignDamage(attacker, blockers, damage, defender);
+                result[0] = v.getDamageMap();
+            }});
+        return (Map<Card, Integer>)result[0];
     }
 
     /**

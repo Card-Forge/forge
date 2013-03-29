@@ -39,6 +39,7 @@ import forge.CardPredicates.Presets;
 import forge.CardUtil;
 import forge.Constant.Preferences;
 import forge.CounterType;
+import forge.FThreads;
 import forge.GameEntity;
 import forge.Singletons;
 import forge.card.ability.AbilityFactory;
@@ -73,7 +74,6 @@ import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 import forge.gui.GuiDialog;
 import forge.properties.ForgePreferences.FPref;
-import forge.util.Aggregates;
 import forge.util.MyRandom;
 
 /**
@@ -1392,6 +1392,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
             final HashMap<String, Object> runParams = new HashMap<String, Object>();
             runParams.put("Card", c);
             runParams.put("Number", this.numDrawnThisTurn);
+            runParams.put("Player", this);
             game.getTriggerHandler().runTrigger(TriggerType.Drawn, runParams, false);
         }
         // lose:
@@ -1586,43 +1587,14 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
      * discard.
      * </p>
      * 
-     * @param num
-     *            a int.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @param duringResolution
-     *            a boolean.
-     * @return a {@link forge.CardList} object.
-     */
-    public abstract void discard(final int num, final SpellAbility sa);
-
-    /**
-     * <p>
-     * discard.
-     * </p>
-     * 
      * @param c
      *            a {@link forge.Card} object.
      * @param sa
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a {@link forge.CardList} object.
      */
-    public final List<Card> discard(final Card c, final SpellAbility sa) {
-        this.doDiscard(c, sa);
-        return CardLists.createCardList(c);
-    }
-
-    /**
-     * <p>
-     * doDiscard.
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.Card} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     */
-    protected final void doDiscard(final Card c, final SpellAbility sa) {
+    public final boolean discard(final Card c, final SpellAbility sa) {
+        FThreads.checkEDT("Player.doDiscard", false);
         // TODO: This line should be moved inside CostPayment somehow
         /*if (sa != null) {
             sa.addCostToHashList(c, "Discarded");
@@ -1637,7 +1609,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
         repRunParams.put("Affected", this);
 
         if (game.getReplacementHandler().run(repRunParams) != ReplacementResult.NotReplaced) {
-            return;
+            return false;
         }
 
         game.getAction().discardMadness(c, this);
@@ -1665,66 +1637,9 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
         runParams.put("Card", c);
         runParams.put("Cause", cause);
         game.getTriggerHandler().runTrigger(TriggerType.Discarded, runParams, false);
+        return true;
 
     } // end doDiscard
-
-    /**
-     * <p>
-     * discardHand.
-     * </p>
-     * 
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @return the card list
-     */
-    public final List<Card> discardHand(final SpellAbility sa) {
-        final List<Card> list = new ArrayList<Card>(this.getCardsIn(ZoneType.Hand));
-        this.discardRandom(list.size(), sa);
-        return list;
-    }
-
-
-    /**
-     * <p>
-     * discardRandom.
-     * </p>
-     * 
-     * @param num
-     *            a int.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @return a List<Card> of cards discarded
-     */
-    public final List<Card> discardRandom(final int num, final SpellAbility sa) {
-        return this.discardRandom(num, sa, "Card");
-    }
-
-    /**
-     * <p>
-     * discardRandom.
-     * </p>
-     * 
-     * @param num
-     *            a int.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @param valid
-     *            a valid expression
-     * @return a List<Card> of cards discarded
-     */
-    public final List<Card> discardRandom(final int num, final SpellAbility sa, final String valid) {
-        final List<Card> discarded = new ArrayList<Card>();
-        for (int i = 0; i < num; i++) {
-            final List<Card> list =
-                    CardLists.getValidCards(this.getCardsIn(ZoneType.Hand), valid, sa.getSourceCard().getController(), sa.getSourceCard());
-            if (list.size() != 0) {
-                final Card disc = Aggregates.random(list);
-                discarded.add(disc);
-                this.doDiscard(disc, sa);
-            }
-        }
-        return discarded;
-    }
 
     /**
      * <p>
@@ -1845,6 +1760,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
      *            a {@link forge.Card} object.
      */
     public final void playLand(final Card land) {
+        FThreads.checkEDT("Player.playSpellAbility", false);
         if (this.canPlayLand(land)) {
             land.setController(this, 0);
             game.getAction().moveTo(this.getZone(ZoneType.Battlefield), land);
@@ -2487,7 +2403,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
         } else if (property.startsWith("withMore")) {
             final String cardType = property.split("sThan")[0].substring(8);
             final List<Card> oppList = CardLists.filter(this.getCardsIn(ZoneType.Battlefield), CardPredicates.isType(cardType));
-            final List<Card> yourList = CardLists.filter(source.getController().getCardsIn(ZoneType.Battlefield), CardPredicates.isType(cardType));
+            final List<Card> yourList = CardLists.filter(sourceController.getCardsIn(ZoneType.Battlefield), CardPredicates.isType(cardType));
             if (oppList.size() <= yourList.size()) {
                 return false;
             }

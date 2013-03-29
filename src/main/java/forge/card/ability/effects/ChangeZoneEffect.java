@@ -21,6 +21,7 @@ import forge.card.spellability.SpellAbilityStackInstance;
 import forge.card.spellability.Target;
 import forge.card.trigger.TriggerType;
 import forge.game.ai.ComputerUtilCard;
+import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
@@ -523,7 +524,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             if (decider == null) {
                 decider = player;
             }
-            if (decider.isComputer()) {
+            if (decider instanceof AIPlayer) {
                 ChangeZoneAi.hiddenOriginResolveAI(decider, sa, player);
             } else {
                 changeHiddenOriginResolveHuman(sa, player);
@@ -547,11 +548,12 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         final Card card = sa.getSourceCard();
         final List<Card> movedCards = new ArrayList<Card>();
         final boolean defined = sa.hasParam("Defined");
+        final boolean optional = sa.hasParam("Optional");
 
         final Target tgt = sa.getTarget();
         if (tgt != null) {
             final ArrayList<Player> players = tgt.getTargetPlayers();
-            player = players.get(0);
+            player = player != null ? player : players.get(0);
             if (players.contains(player) && !player.canBeTargetedBy(sa)) {
                 return;
             }
@@ -594,6 +596,10 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
 
         int changeNum = sa.hasParam("ChangeNum") ? AbilityUtils.calculateAmount(card, sa.getParam("ChangeNum"),
                 sa) : 1;
+
+        if (optional && !GuiDialog.confirm(card, "Search " + origin + "?")) {
+            return;
+        }
 
         List<Card> fetchList;
         if (defined) {

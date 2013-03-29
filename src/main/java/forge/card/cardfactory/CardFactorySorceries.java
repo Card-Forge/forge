@@ -30,19 +30,22 @@ import com.google.common.collect.Iterables;
 import forge.Card;
 import forge.CardLists;
 import forge.CardPredicates;
+import forge.FThreads;
 import forge.CardPredicates.Presets;
-import forge.Command;
 import forge.Constant;
 import forge.Singletons;
 import forge.card.CardType;
 import forge.card.cost.Cost;
+import forge.card.mana.ManaCost;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.control.input.InputPayManaExecuteCommands;
+import forge.control.input.InputSelectCards;
+import forge.control.input.InputSelectCardsFromList;
 import forge.game.GameState;
 import forge.game.ai.ComputerUtil;
+import forge.game.player.AIPlayer;
 import forge.game.player.Player;
-import forge.game.player.PlayerUtil;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 import forge.util.Aggregates;
@@ -268,23 +271,41 @@ public class CardFactorySorceries {
                     Singletons.getModel().getGame().getAction().sacrifice(l.get(i), card);
                 }
             } else {
-                Singletons.getModel().getMatch().getInput().setInput(PlayerUtil.inputSacrificePermanents(sac, "Land"));
+                final List<Card> list = CardLists.getType(p.getCardsIn(ZoneType.Battlefield), "Land");
+
+                InputSelectCards inp = new InputSelectCardsFromList(sac, sac, list);
+                inp.setMessage("Select %d more land(s) to sacrifice");
+                FThreads.setInputAndWait(inp);
+                for( Card crd : inp.getSelected() )
+                    p.getGame().getAction().sacrifice(crd, card);
             }
         }
     }
 
-    private static final void balanceHands(Spell card) {
+    private static final void balanceHands(Spell spell) {
         int min = Integer.MAX_VALUE;
         for (Player p : Singletons.getModel().getGame().getPlayers()) {
             min = Math.min(min, p.getZone(ZoneType.Hand).size());
         }
 
         for (Player p : Singletons.getModel().getGame().getPlayers()) {
-            int sac = p.getCardsIn(ZoneType.Hand).size() - min;
+            List<Card> hand = p.getCardsIn(ZoneType.Hand);
+            int sac = hand.size() - min;
             if (sac == 0) {
                 continue;
             }
-            p.discard(sac, card);
+            if (p.isHuman()) {
+                InputSelectCards sc = new InputSelectCardsFromList(sac, sac, hand);
+                sc.setMessage("Select %d more card(s) to discard");
+                FThreads.setInputAndWait(sc);
+                for( Card c : sc.getSelected())
+                    p.discard(c, spell);
+            } else {
+                final List<Card> toDiscard = ((AIPlayer)p).getAi().getCardsToDiscard(sac, (String[])null, spell);
+                for (int i = 0; i < toDiscard.size(); i++) {
+                    p.discard(toDiscard.get(i), spell);
+                }
+            }
         }
     }
 
@@ -312,14 +333,20 @@ public class CardFactorySorceries {
                 CardLists.sortByCmcDesc(c);
                 Collections.reverse(c);
                 for (int i = 0; i < sac; i++) {
-                    Singletons.getModel().getGame().getAction().sacrifice(c.get(i), card);
+                    p.getGame().getAction().sacrifice(c.get(i), card);
                 }
             } else {
-                Singletons.getModel().getMatch().getInput().setInput(PlayerUtil.inputSacrificePermanents(sac, "Creature"));
+                final List<Card> list = CardLists.getType(p.getCardsIn(ZoneType.Battlefield), "Creature");
+                InputSelectCards inp = new InputSelectCardsFromList(sac, sac, list);
+                inp.setMessage("Select %d more creature(s) to sacrifice");
+                FThreads.setInputAndWait(inp);
+                for( Card crd : inp.getSelected() )
+                    p.getGame().getAction().sacrifice(crd, card);
+
             }
         }
     }
-
+    
     private static final SpellAbility getBalance(final Card card) {
         return new Spell(card) {
             private static final long serialVersionUID = -5941893280103164961L;
@@ -460,22 +487,13 @@ public class CardFactorySorceries {
                 if (newCMC <= baseCMC) {
                     game.getAction().moveToPlay(newArtifact[0]);
                 } else {
-                    final String diffCost = String.valueOf(newCMC - baseCMC);
-                    Singletons.getModel().getMatch().getInput().setInput(new InputPayManaExecuteCommands(game, "Pay difference in artifacts CMC",  diffCost, new Command() {
-                        private static final long serialVersionUID = -8729850321341068049L;
-
-                        @Override
-                        public void execute() {
-                            Singletons.getModel().getGame().getAction().moveToPlay(newArtifact[0]);
-                        }
-                    }, new Command() {
-                        private static final long serialVersionUID = -246036834856971935L;
-
-                        @Override
-                        public void execute() {
-                            Singletons.getModel().getGame().getAction().moveToGraveyard(newArtifact[0]);
-                        }
-                    }));
+                    final int diffCost = newCMC - baseCMC;
+                    InputPayManaExecuteCommands inp = new InputPayManaExecuteCommands(p, "Pay difference in artifacts CMC", ManaCost.get(diffCost));
+                    FThreads.setInputAndWait(inp);
+                    if ( inp.isPaid() )
+                        game.getAction().moveToPlay(newArtifact[0]);
+                    else
+                        game.getAction().moveToGraveyard(newArtifact[0]);
                 }
 
                 // finally, shuffle library

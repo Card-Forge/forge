@@ -27,11 +27,14 @@ import forge.CardCharacteristicName;
 import forge.CardColor;
 import forge.CardUtil;
 import forge.Color;
+import forge.Command;
+import forge.CounterType;
 import forge.ImageCache;
 import forge.card.CardCharacteristics;
 import forge.card.CardRules;
 import forge.card.CardSplitType;
 import forge.card.ICardFace;
+import forge.card.ability.AbilityFactory;
 import forge.card.cost.Cost;
 import forge.card.mana.ManaCost;
 import forge.card.replacement.ReplacementHandler;
@@ -40,6 +43,7 @@ import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellPermanent;
 import forge.card.spellability.Target;
+import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerHandler;
 import forge.game.player.Player;
 import forge.item.CardDb;
@@ -296,20 +300,56 @@ public class CardFactory {
         if (card.isCreature()) {
             CardFactoryCreatures.buildCard(card, cardName);
         } else if (card.isPlaneswalker()) {
-            CardFactoryPlaneswalkers.buildCard(card);
+            buildPlaneswalkerAbilities(card);
         } else if (card.isLand()) {
             CardFactoryLands.buildCard(card, cardName);
         } else if (card.isSorcery()) {
             CardFactorySorceries.buildCard(card, cardName);
         } else if (card.isArtifact()) {
             CardFactoryArtifacts.buildCard(card, cardName);
+        } else if (card.isType("Plane")) {
+            buildPlaneAbilities(card);
         }
 
         CardFactoryUtil.setupKeywordedAbilities(card);
     } // getCard2
 
+    private static void buildPlaneAbilities(Card card) {
+        StringBuilder triggerSB = new StringBuilder();
+        triggerSB.append("Mode$ PlanarDice | Result$ Planeswalk | TriggerZones$ Command | Execute$ RolledWalk | ");
+        triggerSB.append("Secondary$ True | TriggerDescription$ Whenever you roll Planeswalk, put this card on the ");
+        triggerSB.append("bottom of its owner's planar deck face down, then move the top card of your planar deck off ");
+        triggerSB.append("that planar deck and turn it face up");
 
-    
+        StringBuilder saSB = new StringBuilder();
+        saSB.append("AB$ RollPlanarDice | Cost$ X | SorcerySpeed$ True | AnyPlayer$ True | ActivationZone$ Command | ");
+        saSB.append("SpellDescription$ Roll the planar dice. X is equal to the amount of times the planar die has been rolled this turn.");        
+
+        card.setSVar("RolledWalk", "DB$ Planeswalk | Cost$ 0");
+        Trigger planesWalkTrigger = TriggerHandler.parseTrigger(triggerSB.toString(), card, true);
+        card.addTrigger(planesWalkTrigger);
+
+        card.setSVar("X", "Count$RolledThisTurn");
+        SpellAbility planarRoll = AbilityFactory.getAbility(saSB.toString(), card);
+        card.addSpellAbility(planarRoll);
+    }
+
+    private static void buildPlaneswalkerAbilities(Card card) {
+        if (card.getBaseLoyalty() > 0) {
+            Command cmd = CardFactoryUtil.entersBattleFieldWithCounters(card, CounterType.LOYALTY, card.getBaseLoyalty());
+            card.addComesIntoPlayCommand(cmd);
+        }
+
+        //Planeswalker damage redirection
+        card.addReplacementEffect(ReplacementHandler.parseReplacement("Event$ DamageDone | ActiveZones$ Battlefield | IsCombat$ False | ValidSource$ Card.YouDontCtrl"
+                + " | ValidTarget$ You | Optional$ True | OptionalDecider$ Opponent | ReplaceWith$ DamagePW | Secondary$ True"
+                + " | AICheckSVar$ DamagePWAI | AISVarCompare$ GT4 | Description$ Redirect damage to " + card.toString(), card));
+        card.setSVar("DamagePW", "AB$DealDamage | Cost$ 0 | Defined$ Self | NumDmg$ DamagePWX | DamageSource$ ReplacedSource | References$ DamagePWX,DamagePWAI");
+        card.setSVar("DamagePWX", "ReplaceCount$DamageAmount");
+        card.setSVar("DamagePWAI", "ReplaceCount$DamageAmount/NMinus.DamagePWY");
+        card.setSVar("DamagePWY", "Count$YourLifeTotal");
+    }
+
     private static Card readCard(final CardRules rules) {
 
         final Card card = new Card();

@@ -145,13 +145,22 @@ public class Cost {
         
         StringBuilder manaParts = new StringBuilder();
         String[] parts = TextUtil.splitWithParenthesis(parse, ' ', '<', '>');
+        
+        // make this before parse so that classes that need it get data in their constructor
+        for(String part : parts) {
+            if ( part.equals("T") || part.equals("Tap") )
+                this.tapCost = true;
+            if ( part.equals("Q") || part.equals("Untap") )
+                this.untapCost = true;
+        }
+        
         for(String part : parts) {
             if( "XCantBe0".equals(part) )
                 xCantBe0 = true;
             else if ( "X".equals(part) )
                 amountX++;
             else {
-                CostPart cp = parseCostPart(part);
+                CostPart cp = parseCostPart(part, tapCost, untapCost);
                 if ( null != cp )
                     this.costParts.add(cp);
                 else
@@ -175,28 +184,26 @@ public class Cost {
             if( cp instanceof CostUntap ) {
                 costParts.remove(iCp);
                 costParts.add(0, cp);
-                untapCost = true;
             }
             if( cp instanceof CostTap ) {
                 costParts.remove(iCp);
                 costParts.add(0, cp);
-                tapCost = true;
             }
         }
     }
 
-    private static CostPart parseCostPart(String parse) {
+    private static CostPart parseCostPart(String parse, boolean tapCost, boolean untapCost) {
 
         if(parse.startsWith("tapXType<")) {
             final String[] splitStr = abCostParse(parse, 3);
             final String description = splitStr.length > 2 ? splitStr[2] : null;
-            return new CostTapType(splitStr[0], splitStr[1], description);
+            return new CostTapType(splitStr[0], splitStr[1], description, tapCost);
         }
     
         if(parse.startsWith("untapYType<")) {
             final String[] splitStr = abCostParse(parse, 3);
             final String description = splitStr.length > 2 ? splitStr[2] : null;
-            return new CostUntapType(splitStr[0], splitStr[1], description);
+            return new CostUntapType(splitStr[0], splitStr[1], description, untapCost);
         }
     
         if(parse.startsWith("SubCounter<")) {
@@ -337,9 +344,9 @@ public class Cost {
      * @return an array of {@link java.lang.String} objects.
      */
     private static String[] abCostParse(final String parse, final int numParse) {
-        final int startPos = parse.indexOf("<");
+        final int startPos = 1 + parse.indexOf("<");
         final int endPos = parse.indexOf(">", startPos);
-        String str = parse.substring(startPos + 1, endPos);
+        String str = parse.substring(startPos, endPos);
 
         final String[] splitStr = str.split("/", numParse);
         return splitStr;

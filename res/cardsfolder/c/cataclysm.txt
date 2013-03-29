@@ -1,15 +1,12 @@
 Name:Cataclysm
 ManaCost:2 W W
 Types:Sorcery
-A:SP$ ChooseCard | Cost$ 2 W W | Defined$ You | Amount$ 1 | Choices$ Artifact.YouCtrl | ChoiceTitle$ Choose an artifact | SubAbility$ ChooseCrtrYou | RememberChosen$ True | SpellDescription$ Each player chooses from the permanents he or she controls an artifact, a creature, an enchantment, and a land, then sacrifices the rest.
-SVar:ChooseCrtrYou:DB$ ChooseCard | Defined$ You | Amount$ 1 | Choices$ Creature.YouCtrl | ChoiceTitle$ Choose a creature | SubAbility$ ChooseEnchYou | RememberChosen$ True
-SVar:ChooseEnchYou:DB$ ChooseCard | Defined$ You | Amount$ 1 | Choices$ Enchantment.YouCtrl | ChoiceTitle$ Choose an enchantment | SubAbility$ ChooseLandYou | RememberChosen$ True
-SVar:ChooseLandYou:DB$ ChooseCard | Defined$ You | Amount$ 1 | Choices$ Land.YouCtrl | ChoiceTitle$ Choose a land | SubAbility$ ChooseArtfOpp | RememberChosen$ True
-SVar:ChooseArtfOpp:DB$ ChooseCard | Defined$ Opponent | Amount$ 1 | Choices$ Artifact.YouDontCtrl | SubAbility$ ChooseCrtrOpp | RememberChosen$ True
-SVar:ChooseCrtrOpp:DB$ ChooseCard | Defined$ Opponent | Amount$ 1 | Choices$ Creature.YouDontCtrl | SubAbility$ ChooseEnchOpp | RememberChosen$ True
-SVar:ChooseEnchOpp:DB$ ChooseCard | Defined$ Opponent | Amount$ 1 | Choices$ Enchantment.YouDontCtrl | SubAbility$ ChooseLandOpp | RememberChosen$ True
-SVar:ChooseLandOpp:DB$ ChooseCard | Defined$ Opponent | Amount$ 1 | Choices$ Land.YouDontCtrl | SubAbility$ SacAllArtf | RememberChosen$ True
-SVar:SacAllArtf:DB$SacrificeAll | ValidCards$ Permanent.IsNotRemembered | SubAbility$ DBCleanup
+A:SP$ RepeatEach | Cost$ 2 W W | RepeatPlayers$ Player | RepeatSubAbility$ ChooseArtf | SubAbility$ SacAllOthers | SpellDescription$ Each player chooses from the permanents he or she controls an artifact, a creature, an enchantment, and a land, then sacrifices the rest.
+SVar:ChooseArtf:DB$ ChooseCard | Defined$ Remembered | Amount$ 1 | Choices$ Artifact.RememberedPlayerCtrl | ChoiceTitle$ Choose an artifact to keep | SubAbility$ ChooseCrtr | RememberChosen$ True
+SVar:ChooseCrtr:DB$ ChooseCard | Defined$ Remembered | Amount$ 1 | Choices$ Creature.RememberedPlayerCtrl | ChoiceTitle$ Choose a creature to keep | SubAbility$ ChooseEnch | RememberChosen$ True
+SVar:ChooseEnch:DB$ ChooseCard | Defined$ Remembered | Amount$ 1 | Choices$ Enchantment.RememberedPlayerCtrl | ChoiceTitle$ Choose an enchantment to keep | SubAbility$ ChooseLand | RememberChosen$ True
+SVar:ChooseLand:DB$ ChooseCard | Defined$ Remembered | Amount$ 1 | Choices$ Land.RememberedPlayerCtrl | ChoiceTitle$ Choose a land to keep | RememberChosen$ True
+SVar:SacAllOthers:DB$ SacrificeAll | ValidCards$ Permanent.IsNotRemembered | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cataclysm.jpg

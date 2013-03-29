@@ -38,6 +38,7 @@ import forge.CardUtil;
 import forge.Command;
 import forge.Constant;
 import forge.CounterType;
+import forge.FThreads;
 import forge.GameEntity;
 import forge.Singletons;
 import forge.card.ability.AbilityFactory;
@@ -62,8 +63,9 @@ import forge.card.spellability.Target;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerHandler;
 import forge.card.trigger.TriggerType;
-import forge.control.input.Input;
-import forge.control.input.InputSelectManyCards;
+import forge.control.input.InputBase;
+import forge.control.input.InputSelectCards;
+import forge.control.input.InputSelectCardsFromList;
 import forge.game.GameState;
 import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilCard;
@@ -89,37 +91,6 @@ import forge.view.ButtonUtil;
  * @version $Id$
  */
 public class CardFactoryUtil {
-    /**
-     * <p>
-     * inputDestroyNoRegeneration.
-     * </p>
-     * 
-     * @param choices
-     *            a {@link forge.CardList} object.
-     * @param message
-     *            a {@link java.lang.String} object.
-     * @return a {@link forge.control.input.Input} object.
-     */
-    public static Input inputDestroyNoRegeneration(final List<Card> choices, final String message) {
-        final Input target = new Input() {
-            private static final long serialVersionUID = -6637588517573573232L;
-
-            @Override
-            public void showMessage() {
-                CMatchUI.SINGLETON_INSTANCE.showMessage(message);
-                ButtonUtil.disableAll();
-            }
-
-            @Override
-            public void selectCard(final Card card) {
-                if (choices.contains(card)) {
-                    Singletons.getModel().getGame().getAction().destroyNoRegeneration(card);
-                    this.stop();
-                }
-            }
-        };
-        return target;
-    } // inputDestroyNoRegeneration()
 
     /**
      * <p>
@@ -537,98 +508,6 @@ public class CardFactoryUtil {
     public static Command vanishing(final Card sourceCard, final int power) {
         return entersBattleFieldWithCounters(sourceCard, CounterType.TIME, power);
     } // vanishing
-
-    /**
-     * <p>
-     * masterOfTheWildHuntInputTargetCreature.
-     * </p>
-     * 
-     * @param spell
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @param choices
-     *            a {@link forge.CardList} object.
-     * @param paid
-     *            a {@link forge.Command} object.
-     * @return a {@link forge.control.input.Input} object.
-     */
-    public static Input masterOfTheWildHuntInputTargetCreature(final SpellAbility spell, final List<Card> choices,
-            final Command paid) {
-        final Input target = new Input() {
-            private static final long serialVersionUID = -1779224307654698954L;
-
-            @Override
-            public void showMessage() {
-                final StringBuilder sb = new StringBuilder();
-                sb.append("Select target wolf to damage for ").append(spell.getSourceCard());
-                CMatchUI.SINGLETON_INSTANCE.showMessage(sb.toString());
-                ButtonUtil.enableOnlyCancel();
-            }
-
-            @Override
-            public void selectButtonCancel() {
-                this.stop();
-            }
-
-            @Override
-            public void selectCard(final Card card) {
-                if (choices.size() == 0) {
-                    this.stop();
-                }
-                if (choices.contains(card)) {
-                    spell.setTargetCard(card);
-                    paid.execute();
-                    this.stop();
-                }
-            } // selectCard()
-        };
-        return target;
-    } // masterOfTheWildHuntInputTargetCreature()
-
-    /**
-     * <p>
-     * modularInput.
-     * </p>
-     * 
-     * @param ability
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @param card
-     *            a {@link forge.Card} object.
-     * @return a {@link forge.control.input.Input} object.
-     */
-    public static Input modularInput(final SpellAbility ability, final Card card) {
-        final Input modularInput = new Input() {
-
-            private static final long serialVersionUID = 2322926875771867901L;
-
-            @Override
-            public void showMessage() {
-                CMatchUI.SINGLETON_INSTANCE.showMessage("Select target artifact creature");
-                ButtonUtil.enableOnlyCancel();
-            }
-
-            @Override
-            public void selectButtonCancel() {
-                this.stop();
-            }
-
-            @Override
-            public void selectCard(final Card card2) {
-                Zone zone = Singletons.getModel().getGame().getZoneOf(card2);
-                if (card2.isCreature() && card2.isArtifact() && zone.is(ZoneType.Battlefield)
-                        && card.canBeTargetedBy(ability)) {
-                    ability.setTargetCard(card2);
-                    final StringBuilder sb = new StringBuilder();
-                    sb.append("Put ").append(card.getCounters(CounterType.P1P1));
-                    sb.append(" +1/+1 counter/s from ").append(card);
-                    sb.append(" on ").append(card2);
-                    ability.setStackDescription(sb.toString());
-                    Singletons.getModel().getGame().getStack().add(ability);
-                    this.stop();
-                }
-            }
-        };
-        return modularInput;
-    }
 
     /**
      * <p>
@@ -2295,55 +2174,6 @@ public class CardFactoryUtil {
 
     /**
      * <p>
-     * inputUntapUpToNType.
-     * </p>
-     * 
-     * @param n
-     *            a int.
-     * @param type
-     *            a {@link java.lang.String} object.
-     * @return a {@link forge.control.input.Input} object.
-     */
-    public static Input inputUntapUpToNType(final int n, final String type) {
-        final Input untap = new Input() {
-            private static final long serialVersionUID = -2167059918040912025L;
-
-            private final int stop = n;
-            private int count = 0;
-            private List<Card> choices = new ArrayList<Card>();;
-
-            @Override
-            public void showMessage() {
-                final StringBuilder sb = new StringBuilder();
-                sb.append("Select a ").append(type).append(" to untap");
-                CMatchUI.SINGLETON_INSTANCE.showMessage(sb.toString());
-                ButtonUtil.enableOnlyCancel();
-            }
-
-            @Override
-            public void selectButtonCancel() {
-                this.stop();
-            }
-
-            @Override
-            public void selectCard(final Card card) {
-                Zone zone = Singletons.getModel().getGame().getZoneOf(card);
-                if (card.isType(type) && zone.is(ZoneType.Battlefield) && !choices.contains(card)) {
-                    card.untap();
-                    choices.add(card);
-                    this.count++;
-                    if (this.count == this.stop) {
-                        this.stop();
-                    }
-                }
-            } // selectCard()
-        };
-
-        return untap;
-    }
-
-    /**
-     * <p>
      * isMostProminentColor.
      * </p>
      * 
@@ -3151,27 +2981,6 @@ public class CardFactoryUtil {
         };
         haunterDiesWork.setDescription(hauntDescription);
 
-        final InputSelectManyCards target = new InputSelectManyCards(1, 1) {
-            private static final long serialVersionUID = 1981791992623774490L;
-
-            @Override
-            protected Input onDone() {
-                haunterDiesWork.setTargetCard(selected.get(0));
-                Singletons.getModel().getGame().getStack().add(haunterDiesWork);
-                return null;
-            }
-
-            @Override
-            protected boolean isValidChoice(Card c) {
-                Zone zone = Singletons.getModel().getGame().getZoneOf(c);
-                if (!zone.is(ZoneType.Battlefield) || !c.isCreature()) {
-                    return false;
-                }
-                return c.canBeTargetedBy(haunterDiesWork);
-            }
-        };
-        target.setMessage("Choose target creature to haunt.");
-
         final Ability haunterDiesSetup = new Ability(card, ManaCost.ZERO) {
             @Override
             public void resolve() {
@@ -3189,7 +2998,25 @@ public class CardFactoryUtil {
                 // need to do it this way because I don't know quite how to
                 // make TriggerHandler respect BeforePayMana.
                 if (card.getController().isHuman()) {
-                    Singletons.getModel().getMatch().getInput().setInput(target);
+                    
+                    final InputSelectCards target = new InputSelectCards(1, 1) {
+                        private static final long serialVersionUID = 1981791992623774490L;
+                        @Override
+                        protected boolean isValidChoice(Card c) {
+                            Zone zone = Singletons.getModel().getGame().getZoneOf(c);
+                            if (!zone.is(ZoneType.Battlefield) || !c.isCreature()) {
+                                return false;
+                            }
+                            return c.canBeTargetedBy(haunterDiesWork);
+                        }
+                    };
+                    target.setMessage("Choose target creature to haunt.");
+                    
+                    FThreads.setInputAndWait(target);
+                    if (!target.hasCancelled()) {
+                        haunterDiesWork.setTargetCard(target.getSelected().get(0));
+                        Singletons.getModel().getGame().getStack().add(haunterDiesWork);
+                    }
                 } else {
                     // AI choosing what to haunt
                     final List<Card> oppCreats = CardLists.filterControlledBy(creats, card.getController().getOpponent());
@@ -3683,27 +3510,34 @@ public class CardFactoryUtil {
 
                     @Override
                     public void execute() {
+                        final Player modularPlayer =  card.getController();
+                        final List<Card> choices = Lists.newArrayList();
+                        for(Card c : modularPlayer.getGame().getCardsIn(ZoneType.Battlefield)) {
+                            if( c.isCreature() && c.isArtifact() && c.canBeTargetedBy(ability))
+                                choices.add(c);
+                        }
+
+                        Card card2 = null;
                         // Target as Modular is Destroyed
-                        if (card.getController().isComputer()) {
-                            List<Card> choices =
-                                    CardLists.filter(card.getController().getCardsIn(ZoneType.Battlefield), new Predicate<Card>() {
-                                @Override
-                                public boolean apply(final Card c) {
-                                    return c.isCreature() && c.isArtifact();
-                                }
-                            });
-                            if (choices.size() != 0) {
-                                ability.setTargetCard(ComputerUtilCard.getBestCreatureAI(choices));
-
-                                if (ability.getTargetCard() != null) {
-                                    ability.setStackDescription("Put " + card.getCounters(CounterType.P1P1)
-                                            + " +1/+1 counter/s from " + card + " on " + ability.getTargetCard());
-                                    Singletons.getModel().getGame().getStack().addSimultaneousStackEntry(ability);
-
-                                }
+                        if (modularPlayer.isComputer()) {
+                            final List<Card> aiChoices = CardLists.filterControlledBy(choices, modularPlayer);
+                            if (!aiChoices.isEmpty()) {
+                                card2 = ComputerUtilCard.getBestCreatureAI(aiChoices);
                             }
                         } else {
-                            Singletons.getModel().getMatch().getInput().setInput(CardFactoryUtil.modularInput(ability, card));
+                            InputSelectCards inp = new InputSelectCardsFromList(1, 1, choices);
+                            inp.setCancelAllowed(true);
+                            inp.setMessage("Select target artifact creature to give it +1/+1 counters from the dead " + card);
+                            FThreads.setInputAndWait(inp);
+                            if( !inp.hasCancelled() ) {
+                                card2 = inp.getSelected().get(0);
+                            }
+                        }
+                        ability.setTargetCard(card2);
+                        if ( null != card2 ) {
+                            String desc = String.format("Put %d +1/+1 counter/s from %s on %s", card.getCounters(CounterType.P1P1), card, card2);
+                            ability.setStackDescription(desc);
+                            modularPlayer.getGame().getStack().addSimultaneousStackEntry(ability);
                         }
                     }
                 });
