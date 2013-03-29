@@ -29,7 +29,6 @@ import forge.CardPredicates;
 import forge.FThreads;
 import forge.CardPredicates.Presets;
 import forge.CounterType;
-import forge.Singletons;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.mana.ManaCost;
@@ -38,7 +37,6 @@ import forge.card.spellability.Ability;
 import forge.card.spellability.AbilityManaPart;
 import forge.card.spellability.AbilityStatic;
 import forge.card.spellability.SpellAbility;
-import forge.control.input.InputBase;
 import forge.control.input.InputPayManaExecuteCommands;
 import forge.control.input.InputSelectCards;
 import forge.control.input.InputSelectCardsFromList;
@@ -52,12 +50,9 @@ import forge.game.ai.ComputerUtilMana;
 import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
-import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 import forge.gui.GuiDialog;
-import forge.gui.match.CMatchUI;
-import forge.view.ButtonUtil;
 
 /**
  * <p>
@@ -969,15 +964,14 @@ public class Upkeep extends Phase {
                 @Override
                 public void resolve() {
                     final int num = source.getCounters(CounterType.FADE);
-                    final List<Card> list = CardLists.filter(player.getCardsIn(ZoneType.Battlefield), new Predicate<Card>() {
-                        @Override
-                        public boolean apply(final Card c) {
-                            return (c.isArtifact() || c.isLand() || c.isCreature()) && c.isUntapped();
-                        }
-                    });
+                    final List<Card> list = new ArrayList<Card>();
+                    for( Card c : player.getCardsIn(ZoneType.Battlefield)) {
+                        if ((c.isArtifact() || c.isLand() || c.isCreature()) && c.isUntapped())
+                            list.add(c);
+                    }
 
-                    for (int i = 0; i < num; i++) {
-                        if (player.isComputer()) {
+                    if (player.isComputer()) {
+                        for (int i = 0; i < num; i++) {
                             Card toTap = ComputerUtilCard.getWorstPermanentAI(list, false, false, false, false);
                             // try to find non creature cards without tap abilities
                             List<Card> betterList = CardLists.filter(list, new Predicate<Card>() {
@@ -1002,39 +996,19 @@ public class Upkeep extends Phase {
                                 toTap.tap();
                                 list.remove(toTap);
                             }
-                        } else {
-                            Singletons.getModel().getMatch().getInput().setInput(new InputBase() {
-                                private static final long serialVersionUID = 5313424586016061612L;
-
-                                @Override
-                                public void showMessage() {
-                                    if (list.isEmpty()) {
-                                        this.stop();
-                                        return;
-                                    }
-                                    String message = String.format("%s - Select %d untapped artifact(s), creature(s), or land(s) you control", source.getName(), num);
-                                    CMatchUI.SINGLETON_INSTANCE.showMessage(message);
-                                    ButtonUtil.disableAll();
-                                }
-
-                                @Override
-                                public void selectCard(final Card card) {
-                                    Zone zone = game.getZoneOf(card);
-                                    if (zone.is(ZoneType.Battlefield, player) && list.contains(card)) {
-                                        card.tap();
-                                        list.remove(card);
-                                        this.stop();
-                                    }
-                                }
-                            });
                         }
+                    } else {
+                        InputSelectCards inp = new InputSelectCardsFromList(num, num, list);
+                        inp.setMessage(source.getName() + " - Select %d untapped artifact(s), creature(s), or land(s) you control");
+                        FThreads.setInputAndWait(inp);
+                        for(Card crd : inp.getSelected())
+                            crd.tap();
                     }
                 }
             };
-            ability.setStackDescription(source.getName() + " - " + player
-                    + " taps X artifacts, creatures or lands he or she controls.");
-            ability.setDescription(source.getName() + " - " + player
-                    + " taps X artifacts, creatures or lands he or she controls.");
+            String message = source.getName() + " - " + player + " taps X artifacts, creatures or lands he or she controls.";
+            ability.setStackDescription(message);
+            ability.setDescription(message);
             ability.setActivatingPlayer(source.getController());
 
             game.getStack().addSimultaneousStackEntry(ability);

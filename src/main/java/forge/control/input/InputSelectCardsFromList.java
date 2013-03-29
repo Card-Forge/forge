@@ -10,7 +10,7 @@ public class InputSelectCardsFromList extends InputSelectCards {
     private final List<Card> validChoices;
 
     public InputSelectCardsFromList(int min, int max, List<Card> validCards) {
-        super(min, max);
+        super(min, Math.min(max, validCards.size())); // to avoid hangs
         this.validChoices = validCards;
     }
     
