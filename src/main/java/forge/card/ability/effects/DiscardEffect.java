@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
+import org.testng.collections.Lists;
 
 import forge.Card;
 import forge.CardLists;
@@ -13,6 +14,7 @@ import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
+import forge.util.Aggregates;
 
 public class DiscardEffect extends RevealEffectBase {
     @Override
@@ -94,7 +96,9 @@ public class DiscardEffect extends RevealEffectBase {
                 if (mode.equals("Defined")) {
                     final List<Card> toDiscard = AbilityUtils.getDefinedCards(source, sa.getParam("DefinedCards"), sa);
                     for (final Card c : toDiscard) {
-                        discarded.addAll(p.discard(c, sa));
+                        boolean hasDiscarded = p.discard(c, sa);
+                        if(hasDiscarded)
+                            discarded.add(c);
                     }
                     if (sa.hasParam("RememberDiscarded")) {
                         for (final Card c : discarded) {
@@ -105,11 +109,11 @@ public class DiscardEffect extends RevealEffectBase {
                 }
 
                 if (mode.equals("Hand")) {
-                    final List<Card> list = p.discardHand(sa);
-                    if (sa.hasParam("RememberDiscarded")) {
-                        for (final Card c : list) {
+                    boolean shouldRemember = sa.hasParam("RememberDiscarded");
+                    for(Card c : Lists.newArrayList(p.getCardsIn(ZoneType.Hand))) { // without copying will get concurrent modification exception
+                        boolean hasDiscarded = p.discard(c, sa);
+                        if( hasDiscarded && shouldRemember )
                             source.addRemembered(c);
-                        }
                     }
                     continue;
                 }
@@ -137,10 +141,18 @@ public class DiscardEffect extends RevealEffectBase {
                     String message = "Would you like to discard " + numCards + " random card(s)?";
                     boolean runDiscard = !sa.hasParam("Optional") || p.getController().confirmAction(sa, mode, message);
 
-
                     if (runDiscard) {
                         final String valid = sa.hasParam("DiscardValid") ? sa.getParam("DiscardValid") : "Card";
-                        discarded.addAll(p.discardRandom(numCards, sa, valid));
+                        final List<Card> list = CardLists.getValidCards(p.getCardsIn(ZoneType.Hand), valid, sa.getSourceCard().getController(), sa.getSourceCard());
+                        for (int i = 0; i < numCards; i++) {
+                            if (list.isEmpty())
+                                break;
+                                
+                            final Card disc = Aggregates.random(list);
+                            if ( p.discard(disc, sa) ) 
+                                discarded.add(disc);
+                            list.remove(disc);
+                        }
                     }
                 } else if (mode.equals("TgtChoose") && sa.hasParam("UnlessType")) {
                     p.discardUnless(numCards, sa.getParam("UnlessType"), sa);

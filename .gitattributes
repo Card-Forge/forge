@@ -13955,7 +13955,6 @@ src/main/java/forge/game/player/PlayerControllerHuman.java -text
 src/main/java/forge/game/player/PlayerOutcome.java -text
 src/main/java/forge/game/player/PlayerStatistics.java -text
 src/main/java/forge/game/player/PlayerType.java svneol=native#text/plain
-src/main/java/forge/game/player/PlayerUtil.java svneol=native#text/plain
 src/main/java/forge/game/player/package-info.java svneol=native#text/plain
 src/main/java/forge/game/zone/IZone.java svneol=native#text/plain
 src/main/java/forge/game/zone/MagicStack.java svneol=native#text/plain

@@ -39,14 +39,20 @@ import forge.card.cost.Cost;
 import forge.card.mana.ManaCost;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
+import forge.control.input.Input;
+import forge.control.input.InputBase;
 import forge.control.input.InputPayManaExecuteCommands;
+import forge.control.input.InputSelectCards;
+import forge.control.input.InputSelectCardsFromList;
 import forge.game.GameState;
 import forge.game.ai.ComputerUtil;
+import forge.game.player.AIPlayer;
 import forge.game.player.Player;
-import forge.game.player.PlayerUtil;
+import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 import forge.util.Aggregates;
+import forge.view.ButtonUtil;
 
 /**
  * <p>
@@ -269,23 +275,37 @@ public class CardFactorySorceries {
                     Singletons.getModel().getGame().getAction().sacrifice(l.get(i), card);
                 }
             } else {
-                Singletons.getModel().getMatch().getInput().setInput(PlayerUtil.inputSacrificePermanents(sac, "Land"));
+                final List<Card> list = CardLists.getType(p.getCardsIn(ZoneType.Battlefield), "Land");
+                Input inp = inputSacrificePermanentsFromList(sac, list, "Select a land to sacrifice");
+                Singletons.getModel().getMatch().getInput().setInput(inp);
             }
         }
     }
 
-    private static final void balanceHands(Spell card) {
+    private static final void balanceHands(Spell spell) {
         int min = Integer.MAX_VALUE;
         for (Player p : Singletons.getModel().getGame().getPlayers()) {
             min = Math.min(min, p.getZone(ZoneType.Hand).size());
         }
 
         for (Player p : Singletons.getModel().getGame().getPlayers()) {
-            int sac = p.getCardsIn(ZoneType.Hand).size() - min;
+            List<Card> hand = p.getCardsIn(ZoneType.Hand);
+            int sac = hand.size() - min;
             if (sac == 0) {
                 continue;
             }
-            p.discard(sac, card);
+            if (p.isHuman()) {
+                InputSelectCards sc = new InputSelectCardsFromList(sac, sac, hand);
+                sc.setMessage("Select %d more card(s) to discard");
+                FThreads.setInputAndWait(sc);
+                for( Card c : sc.getSelected())
+                    p.discard(c, spell);
+            } else {
+                final List<Card> toDiscard = ((AIPlayer)p).getAi().getCardsToDiscard(sac, (String[])null, spell);
+                for (int i = 0; i < toDiscard.size(); i++) {
+                    p.discard(toDiscard.get(i), spell);
+                }
+            }
         }
     }
 
@@ -316,10 +336,50 @@ public class CardFactorySorceries {
                     Singletons.getModel().getGame().getAction().sacrifice(c.get(i), card);
                 }
             } else {
-                Singletons.getModel().getMatch().getInput().setInput(PlayerUtil.inputSacrificePermanents(sac, "Creature"));
+                final List<Card> list = CardLists.getType(p.getCardsIn(ZoneType.Battlefield), "Creature");
+                Input inp = inputSacrificePermanentsFromList(sac, list, "Select a creature to sacrifice");
+                Singletons.getModel().getMatch().getInput().setInput(inp);
             }
         }
     }
+    
+    private static Input inputSacrificePermanentsFromList(final int nCards, final List<Card> list, final String message) {
+        final Input target = new InputBase() {
+            private static final long serialVersionUID = 1981791992623774490L;
+            private int n = 0;
+
+            @Override
+            public void showMessage() {
+                // in case no more {type}s in play
+                if ((this.n == nCards) || (list.size() == 0)) {
+                    this.stop();
+                    return;
+                }
+
+                showMessage(message + " (" + (nCards - this.n) + " left)");
+                ButtonUtil.disableAll();
+            }
+
+            @Override
+            public void selectCard(final Card card) {
+                Zone zone = Singletons.getModel().getGame().getZoneOf(card);
+                if (zone.equals(Singletons.getControl().getPlayer().getZone(ZoneType.Battlefield)) && list.contains(card)) {
+                    Singletons.getModel().getGame().getAction().sacrifice(card, null);
+                    this.n++;
+                    list.remove(card);
+
+                    // in case no more {type}s in play
+                    if ((this.n == nCards) || (list.size() == 0)) {
+                        this.stop();
+                        return;
+                    } else {
+                        this.showMessage();
+                    }
+                }
+            }
+        };
+        return target;
+    } 
 
     private static final SpellAbility getBalance(final Card card) {
         return new Spell(card) {

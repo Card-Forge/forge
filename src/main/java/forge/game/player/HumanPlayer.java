@@ -17,10 +17,16 @@
  */
 package forge.game.player;
 
+import forge.Card;
 import forge.Singletons;
 import forge.card.spellability.SpellAbility;
+import forge.control.input.Input;
+import forge.control.input.InputBase;
 import forge.game.GameState;
+import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
+import forge.gui.match.CMatchUI;
+import forge.view.ButtonUtil;
 
 public class HumanPlayer extends Player {
     private PlayerControllerHuman controller;
@@ -32,17 +38,57 @@ public class HumanPlayer extends Player {
 
     /** {@inheritDoc} */
     @Override
-    public final void discard(final int num, final SpellAbility sa) {
-        Singletons.getModel().getMatch().getInput().setInput(PlayerUtil.inputDiscard(num, sa));
-    }
-
-    /** {@inheritDoc} */
-    @Override
     public final void discardUnless(final int num, final String uType, final SpellAbility sa) {
         if (this.getCardsIn(ZoneType.Hand).size() > 0) {
-            Singletons.getModel().getMatch().getInput().setInput(PlayerUtil.inputDiscardNumUnless(num, uType, sa));
+            Singletons.getModel().getMatch().getInput().setInput(inputDiscardNumUnless(num, uType, sa));
         }
     }
+    
+    private static Input inputDiscardNumUnless(final int nCards, final String uType, final SpellAbility sa) {
+        final SpellAbility sp = sa;
+        final Input target = new InputBase() {
+            private static final long serialVersionUID = 8822292413831640944L;
+
+            private int n = 0;
+
+            @Override
+            public void showMessage() {
+                if (Singletons.getControl().getPlayer().getZone(ZoneType.Hand).size() == 0) {
+                    this.stop();
+                }
+                CMatchUI.SINGLETON_INSTANCE.showMessage(
+                        "Select " + (nCards - this.n) + " cards to discard, unless you discard a " + uType + ".");
+                ButtonUtil.disableAll();
+            }
+
+            @Override
+            public void selectButtonCancel() {
+                this.stop();
+            }
+
+            @Override
+            public void selectCard(final Card card) {
+                Zone zone = Singletons.getModel().getGame().getZoneOf(card);
+                if (zone.is(ZoneType.Hand)) {
+                    card.getController().discard(card, sp);
+                    this.n++;
+
+                    if (card.isType(uType.toString())) {
+                        this.stop();
+                    } else {
+                        if ((this.n == nCards) || (Singletons.getControl().getPlayer().getZone(ZoneType.Hand).size() == 0)) {
+                            this.stop();
+                        } else {
+                            this.showMessage();
+                        }
+                    }
+                }
+            }
+        };
+
+        return target;
+    } // input_discardNumUnless
+    
 
     @Override
     public PlayerType getType() {
