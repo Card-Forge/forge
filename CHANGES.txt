@@ -44,6 +44,8 @@ forge.log         <userDir>/forge.log
 - New Import Data dialog -
 The Import Pictures dialog, accessed via the Content Downloaders submenu, has received an overhaul and has been reincarnated as the Import Data dialog.  You may recognize it from the automatic data migration procedure if you had any data to migrate when this version was first started.  Instead of just importing pictures from a previous version of Forge, it can now import any kind of Forge data whatsoever.  If you have a directory full of deck files, you can use the Import Data dialog to copy or move them to the appropriate directory.  If you have just downloaded a torrent of high-quality pics for a particular set, use the Import Data dialog to get them to the proper place.  The dialog give you a full listing of all file copy/move operations, so you can see what will happen before you click 'Start Import'.
 
+An importer option was added for including pictures in set-specific card directories that don't map to any currently known card.  This handles the case where people have collected complete sets of pics in anticipation of when Forge supports them.
+
 
 ---------
 New Cards
@@ -52,6 +54,8 @@ New Cards
 Konda's Banner
 O-Naginata
 Grifter's Blade
+Breathstealer's Crypt
+Moonlight Bargain
 
 
 ----------
