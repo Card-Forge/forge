@@ -46,6 +46,7 @@ import forge.card.spellability.Target;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerHandler;
 import forge.control.input.InputSelectCards;
+import forge.control.input.InputSelectCardsFromList;
 import forge.game.ai.ComputerUtilCard;
 import forge.game.ai.ComputerUtilCombat;
 import forge.game.event.TokenCreatedEvent;
@@ -206,11 +207,7 @@ public class CardFactoryCreatures {
 
                 final Card target = this.getTargetCard();
 
-                if (wolves.size() == 0) {
-                    return;
-                }
-
-                if (!(target.canBeTargetedBy(this) && target.isInPlay())) {
+                if (wolves.isEmpty() || !target.canBeTargetedBy(this)) {
                     return;
                 }
 
@@ -220,17 +217,12 @@ public class CardFactoryCreatures {
                 }
 
                 if (target.getController().isHuman()) { // Human choose spread damage
-                    for (int x = 0; x < target.getNetAttack(); x++) {
-                        Singletons.getModel().getMatch().getInput().setInput(
-                                CardFactoryUtil.masterOfTheWildHuntInputTargetCreature(this, wolves, new Command() {
-                                    private static final long serialVersionUID = -328305150127775L;
-
-                                    @Override
-                                    public void execute() {
-                                        getTargetCard().addDamage(1, target);
-                                        Singletons.getModel().getGame().getAction().checkStateEffects();
-                                    }
-                                }));
+                    final int netAttack = target.getNetAttack();
+                    for (int x = 0; x < netAttack; x++) {
+                        InputSelectCards inp = new InputSelectCardsFromList(1,1,wolves);
+                        inp.setMessage("Select target wolf to damage for " + getSourceCard());
+                        FThreads.setInputAndWait(inp);
+                        inp.getSelected().get(0).addDamage(1, target);
                     }
                 } else { // AI Choose spread Damage
                     final List<Card> damageableWolves = CardLists.filter(wolves, new Predicate<Card>() {
@@ -292,6 +284,7 @@ public class CardFactoryCreatures {
                         }
                     }
                 }
+                target.getController().getGame().getAction().checkStateEffects();
             } // resolve()
 
             @Override

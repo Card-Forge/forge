@@ -38,7 +38,6 @@ public class HumanPlayer extends Player {
     /** {@inheritDoc} */
     @Override
     public final void discardUnless(final int num, final String uType, final SpellAbility sa) {
-        final SpellAbility sp = sa;
         final List<Card> hand = getCardsIn(ZoneType.Hand);
         final InputSelectCards target = new InputSelectCardsFromList(num, num, hand) {
             private static final long serialVersionUID = -5774108410928795591L;
@@ -55,7 +54,7 @@ public class HumanPlayer extends Player {
         target.setMessage("Select %d cards to discard, unless you discard a " + uType + ".");
         FThreads.setInputAndWait(target);
         for(Card c : target.getSelected())
-            c.getController().discard(c, sp);
+            c.getController().discard(c, sa);
     } // input_discardNumUnless
     
 

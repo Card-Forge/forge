@@ -511,52 +511,6 @@ public class CardFactoryUtil {
 
     /**
      * <p>
-     * masterOfTheWildHuntInputTargetCreature.
-     * </p>
-     * 
-     * @param spell
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @param choices
-     *            a {@link forge.CardList} object.
-     * @param paid
-     *            a {@link forge.Command} object.
-     * @return a {@link forge.control.input.InputBase} object.
-     */
-    public static InputBase masterOfTheWildHuntInputTargetCreature(final SpellAbility spell, final List<Card> choices,
-            final Command paid) {
-        final InputBase target = new InputBase() {
-            private static final long serialVersionUID = -1779224307654698954L;
-
-            @Override
-            public void showMessage() {
-                final StringBuilder sb = new StringBuilder();
-                sb.append("Select target wolf to damage for ").append(spell.getSourceCard());
-                CMatchUI.SINGLETON_INSTANCE.showMessage(sb.toString());
-                ButtonUtil.enableOnlyCancel();
-            }
-
-            @Override
-            public void selectButtonCancel() {
-                this.stop();
-            }
-
-            @Override
-            public void selectCard(final Card card) {
-                if (choices.size() == 0) {
-                    this.stop();
-                }
-                if (choices.contains(card)) {
-                    spell.setTargetCard(card);
-                    paid.execute();
-                    this.stop();
-                }
-            } // selectCard()
-        };
-        return target;
-    } // masterOfTheWildHuntInputTargetCreature()
-
-    /**
-     * <p>
      * getNumberOfManaSymbolsControlledByColor.
      * </p>
      * 
