@@ -236,8 +236,12 @@ public enum CMatchUI {
     }
 
     public void setCard(final Card c) {
+        setCard(c, false);
+    }
+    
+    public void setCard(final Card c, final boolean showFlipped ) {
         CDetail.SINGLETON_INSTANCE.showCard(c);
-        CPicture.SINGLETON_INSTANCE.showCard(c);
+        CPicture.SINGLETON_INSTANCE.showCard(c, showFlipped);
     }
 
     public void setCard(final InventoryItem c) {

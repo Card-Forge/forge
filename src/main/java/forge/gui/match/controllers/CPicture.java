@@ -22,6 +22,7 @@ import java.awt.event.MouseEvent;
 import forge.Card;
 import forge.CardCharacteristicName;
 import forge.Command;
+import forge.Singletons;
 import forge.gui.framework.ICDoc;
 import forge.gui.match.views.VPicture;
 import forge.item.IPaperCard;
@@ -38,6 +39,7 @@ public enum CPicture implements ICDoc {
     private Card currentCard = null;
     private boolean flipped = false;
     private boolean canFlip = false;
+    private boolean cameFaceDown = false; 
 
     /**
      * Shows card details and/or picture in sidebar cardview tabber.
@@ -45,18 +47,22 @@ public enum CPicture implements ICDoc {
      * @param c
      *            &emsp; Card object
      */
-    public void showCard(final Card c) {
-        canFlip = c != null && (c.isDoubleFaced() || c.isFlipCard());
+    public void showCard(final Card c, boolean showFlipped) {
+        cameFaceDown = c.isFaceDown() && c.canBeShownTo(Singletons.getControl().getPlayer());
+        canFlip = c != null && (c.isDoubleFaced() || c.isFlipCard() || cameFaceDown);
         currentCard = c;
         flipped = canFlip && (c.getCurState() == CardCharacteristicName.Transformed ||
-                              c.getCurState() == CardCharacteristicName.Flipped); 
+                              c.getCurState() == CardCharacteristicName.Flipped || c.getCurState() == CardCharacteristicName.FaceDown); 
         VPicture.SINGLETON_INSTANCE.getLblFlipcard().setVisible(canFlip);
         VPicture.SINGLETON_INSTANCE.getPnlPicture().setCard(c);
+        
+        if ( showFlipped && canFlip )
+            flipCard();
     }
 
     public void showCard(final InventoryItem item) {
         if (item instanceof IPaperCard) {
-            showCard(((IPaperCard)item).getMatchingForgeCard());
+            showCard(((IPaperCard)item).getMatchingForgeCard(), false);
             return;
         }
         
@@ -101,6 +107,8 @@ public enum CPicture implements ICDoc {
                 newState = CardCharacteristicName.Transformed;
             } else if (currentCard.isFlipCard()) {
                 newState = CardCharacteristicName.Flipped;
+            } else if ( cameFaceDown ) { 
+                newState = CardCharacteristicName.FaceDown;
             } else {
                 // if this is hit, then then showCard has been modified to handle additional types, but
                 // this function is missing an else if statement above

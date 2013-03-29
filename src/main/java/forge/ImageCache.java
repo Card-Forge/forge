@@ -99,29 +99,21 @@ public class ImageCache {
     }
     
     /**
-     * retrieve an image from the cache.  returns a default image if the image is not found in the cache
+     * retrieve an image from the cache.  returns null if the image is not found in the cache
      * and cannot be loaded from disk.  pass -1 for width and/or height to avoid resizing in that dimension.
      */
     public static BufferedImage getImage(Card card, int width, int height) {
-        return getImage(card, width, height, false);
-    }
-
-    /**
-     * retrieve an image from the cache.  returns a default image if the image is not found in the cache
-     * and cannot be loaded from disk.  pass -1 for width and/or height to avoid resizing in that dimension.
-     */
-    public static BufferedImage getImage(Card card, int width, int height, boolean ignoreFaceDown) {
         final String key;
-        if (!card.canBeShownTo(Singletons.getControl().getPlayer()) || (!ignoreFaceDown && card.isFaceDown())) {
+        if (!card.canBeShownTo(Singletons.getControl().getPlayer()) || card.isFaceDown()) {
             key = TOKEN_PREFIX + NewConstants.CACHE_MORPH_IMAGE_FILE;
         } else {
-            key = ignoreFaceDown ? card.getImageKey(CardCharacteristicName.Original) : card.getImageKey();
+            key = card.getImageKey();
         }
         return scaleImage(key, width, height, true);
     }
 
     /**
-     * retrieve an image from the cache.  returns a default image if the image is not found in the cache
+     * retrieve an image from the cache.  returns null if the image is not found in the cache
      * and cannot be loaded from disk.  pass -1 for width and/or height to avoid resizing in that dimension.
      */
     public static BufferedImage getImage(InventoryItem ii, int width, int height) {

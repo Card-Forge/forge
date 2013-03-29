@@ -86,9 +86,9 @@ public final class CardPicturePanel extends JPanel {
         if (displayed instanceof InventoryItem) {
             image = ImageCache.getImage((InventoryItem)this.displayed, this.getWidth() - i.left - i.right, this.getHeight()
                     - i.top - i.bottom);
-        } else if (displayed instanceof Card) {
-            image = ImageCache.getImage((Card)this.displayed,
-                    this.getWidth() - i.left - i.right - 2, this.getHeight() - i.top - i.bottom - 2, true);
+        } else if ( displayed instanceof Card ) {
+            image = ImageCache.getImage((Card)this.displayed, this.getWidth() - i.left - i.right - 2, this.getHeight() - i.top
+                    - i.bottom - 2);
         }
 
         if (image != this.currentImage) {

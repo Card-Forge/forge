@@ -8426,14 +8426,6 @@ public class Card extends GameEntity implements Comparable<Card> {
     public final String getImageKey() {
         return this.getCharacteristics().getImageKey();
     }
-    
-    public final String getImageKey(CardCharacteristicName state) {
-        CardCharacteristics characteristics = characteristicsMap.get(state);
-        if (null == characteristics) {
-            return null;
-        }
-        return characteristics.getImageKey();
-    }
 
     /**
      * <p>

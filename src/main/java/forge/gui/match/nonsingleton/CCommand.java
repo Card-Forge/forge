@@ -17,6 +17,7 @@
  */
 package forge.gui.match.nonsingleton;
 
+import java.awt.Event;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -99,9 +100,10 @@ public class CCommand implements ICDoc {
 
     /** */
     private void cardoverAction(MouseEvent e) {
+        boolean isShiftDown = (e.getModifiers() & Event.SHIFT_MASK) != 0;
         final Card c = CCommand.this.view.getTabletop().getHoveredCard(e);
         if (c != null) {
-            CMatchUI.SINGLETON_INSTANCE.setCard(c);
+            CMatchUI.SINGLETON_INSTANCE.setCard(c, isShiftDown);
         }
     }
 
