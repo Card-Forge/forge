@@ -4,7 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
-import org.testng.collections.Lists;
+
+import com.google.common.collect.Lists;
 
 import forge.Card;
 import forge.CardLists;
