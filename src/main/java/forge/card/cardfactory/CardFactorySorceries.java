@@ -39,8 +39,6 @@ import forge.card.cost.Cost;
 import forge.card.mana.ManaCost;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
-import forge.control.input.Input;
-import forge.control.input.InputBase;
 import forge.control.input.InputPayManaExecuteCommands;
 import forge.control.input.InputSelectCards;
 import forge.control.input.InputSelectCardsFromList;
@@ -48,11 +46,9 @@ import forge.game.GameState;
 import forge.game.ai.ComputerUtil;
 import forge.game.player.AIPlayer;
 import forge.game.player.Player;
-import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 import forge.util.Aggregates;
-import forge.view.ButtonUtil;
 
 /**
  * <p>
@@ -276,8 +272,12 @@ public class CardFactorySorceries {
                 }
             } else {
                 final List<Card> list = CardLists.getType(p.getCardsIn(ZoneType.Battlefield), "Land");
-                Input inp = inputSacrificePermanentsFromList(sac, list, "Select a land to sacrifice");
-                Singletons.getModel().getMatch().getInput().setInput(inp);
+
+                InputSelectCards inp = new InputSelectCardsFromList(sac, sac, list);
+                inp.setMessage("Select %d more land(s) to sacrifice");
+                FThreads.setInputAndWait(inp);
+                for( Card crd : inp.getSelected() )
+                    p.getGame().getAction().sacrifice(crd, card);
             }
         }
     }
@@ -333,54 +333,20 @@ public class CardFactorySorceries {
                 CardLists.sortByCmcDesc(c);
                 Collections.reverse(c);
                 for (int i = 0; i < sac; i++) {
-                    Singletons.getModel().getGame().getAction().sacrifice(c.get(i), card);
+                    p.getGame().getAction().sacrifice(c.get(i), card);
                 }
             } else {
                 final List<Card> list = CardLists.getType(p.getCardsIn(ZoneType.Battlefield), "Creature");
-                Input inp = inputSacrificePermanentsFromList(sac, list, "Select a creature to sacrifice");
-                Singletons.getModel().getMatch().getInput().setInput(inp);
+                InputSelectCards inp = new InputSelectCardsFromList(sac, sac, list);
+                inp.setMessage("Select %d more creature(s) to sacrifice");
+                FThreads.setInputAndWait(inp);
+                for( Card crd : inp.getSelected() )
+                    p.getGame().getAction().sacrifice(crd, card);
+
             }
         }
     }
     
-    private static Input inputSacrificePermanentsFromList(final int nCards, final List<Card> list, final String message) {
-        final Input target = new InputBase() {
-            private static final long serialVersionUID = 1981791992623774490L;
-            private int n = 0;
-
-            @Override
-            public void showMessage() {
-                // in case no more {type}s in play
-                if ((this.n == nCards) || (list.size() == 0)) {
-                    this.stop();
-                    return;
-                }
-
-                showMessage(message + " (" + (nCards - this.n) + " left)");
-                ButtonUtil.disableAll();
-            }
-
-            @Override
-            public void selectCard(final Card card) {
-                Zone zone = Singletons.getModel().getGame().getZoneOf(card);
-                if (zone.equals(Singletons.getControl().getPlayer().getZone(ZoneType.Battlefield)) && list.contains(card)) {
-                    Singletons.getModel().getGame().getAction().sacrifice(card, null);
-                    this.n++;
-                    list.remove(card);
-
-                    // in case no more {type}s in play
-                    if ((this.n == nCards) || (list.size() == 0)) {
-                        this.stop();
-                        return;
-                    } else {
-                        this.showMessage();
-                    }
-                }
-            }
-        };
-        return target;
-    } 
-
     private static final SpellAbility getBalance(final Card card) {
         return new Spell(card) {
             private static final long serialVersionUID = -5941893280103164961L;
