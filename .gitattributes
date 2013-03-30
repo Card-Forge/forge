@@ -9946,6 +9946,7 @@ res/cardsfolder/s/soul_tithe.txt -text
 res/cardsfolder/s/soul_warden.txt svneol=native#text/plain
 res/cardsfolder/s/soulblast.txt -text
 res/cardsfolder/s/soulbound_guardians.txt svneol=native#text/plain
+res/cardsfolder/s/soulbright_flamekin.txt -text
 res/cardsfolder/s/soulcage_fiend.txt -text
 res/cardsfolder/s/soulcatcher.txt svneol=native#text/plain
 res/cardsfolder/s/soulcatchers_aerie.txt svneol=native#text/plain

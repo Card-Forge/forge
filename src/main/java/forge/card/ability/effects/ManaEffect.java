@@ -18,6 +18,7 @@ import forge.game.ai.ComputerUtilCard;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
+import forge.gui.GuiDialog;
 
 public class ManaEffect extends SpellAbilityEffect {
 
@@ -37,7 +38,13 @@ public class ManaEffect extends SpellAbilityEffect {
 
         final List<Player> tgtPlayers = getTargetPlayers(sa);
         final Target tgt = sa.getTarget();
+        final boolean optional = sa.hasParam("Optional");
 
+        if (optional) {
+            if (!GuiDialog.confirm(sa.getSourceCard(), "Do you want to add mana to your mana pool?")) {
+                return;
+            }
+        }
         if (abMana.isComboMana()) {
             for (Player p : tgtPlayers) {
                 int amount = sa.hasParam("Amount") ? AbilityUtils.calculateAmount(card, sa.getParam("Amount"), sa) : 1;
