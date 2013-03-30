@@ -47,6 +47,10 @@ The Import Pictures dialog, accessed via the Content Downloaders submenu, has re
 An importer option was added for including pictures in set-specific card directories that don't map to any currently known card.  This handles the case where people have collected complete sets of pics in anticipation of when Forge supports them.
 
 
+- Flip, Transform and Morph cards -
+When you mouse over a flip, transform or Morph (controlled by you) card in battlefield, you may hold SHIFT to see other state of that card at the side panel that displays card picture and details.
+
+
 ---------
 New Cards
 ---------
@@ -58,6 +62,8 @@ Breathstealer's Crypt
 Moonlight Bargain
 Auriok Siege Sled
 Burning-Tree Bloodscale
+Soulbright Flamekin
+Koskun Falls
 
 
 ----------
