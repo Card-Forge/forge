@@ -51,6 +51,7 @@ import forge.card.cost.CostPutCounter;
 import forge.card.cost.CostRemoveCounter;
 import forge.card.cost.CostReturn;
 import forge.card.cost.CostSacrifice;
+import forge.card.cost.CostTapType;
 import forge.card.cost.CostUtil;
 import forge.card.mana.ManaCost;
 import forge.card.spellability.Ability;
@@ -558,6 +559,31 @@ public final class GameActionUtil {
 
                 CostPartWithList cpl = (CostPartWithList)part;
                 for(Card c : inp.getSelected()) {
+                    cpl.executePayment(sourceAbility, c);
+                }
+                cpl.reportPaidCardsTo(sourceAbility);
+            }
+            
+            else if (part instanceof CostTapType) {
+                List<Card> choiceList = CardLists.getValidCards(p.getCardsIn(ZoneType.Battlefield), part.getType().split(";"), p, source);
+                choiceList = CardLists.filter(choiceList, Presets.UNTAPPED);
+                int amount = getAmountFromPartX(part, source, sourceAbility);
+                
+                if (choiceList.size() < amount) {
+                    // unable to pay (not enough cards)
+                    return false;
+                }
+
+                InputSelectCards inp = new InputSelectCardsFromList(amount, amount, choiceList);
+                inp.setMessage("Select %d card(s) to tap");
+                inp.setCancelAllowed(true);
+                
+                FThreads.setInputAndWait(inp);
+                if (inp.hasCancelled() || inp.getSelected().size() != amount)
+                    return false;
+
+                CostPartWithList cpl = (CostPartWithList)part;
+                for (Card c : inp.getSelected()) {
                     cpl.executePayment(sourceAbility, c);
                 }
                 cpl.reportPaidCardsTo(sourceAbility);
