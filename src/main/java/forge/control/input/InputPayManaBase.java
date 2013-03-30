@@ -7,7 +7,6 @@ import forge.Card;
 import forge.CardUtil;
 import forge.Constant;
 import forge.FThreads;
-import forge.Singletons;
 import forge.card.MagicColor;
 import forge.card.ability.ApiType;
 import forge.card.mana.ManaCostBeingPaid;
@@ -116,7 +115,7 @@ public abstract class InputPayManaBase extends InputSyncronizedBase implements I
      * @return ManaCost the amount of mana remaining to be paid after the mana is activated
      */
     protected void useManaFromPool(String color, ManaCostBeingPaid manaCost) {
-        ManaPool mp = Singletons.getControl().getPlayer().getManaPool();
+        ManaPool mp = whoPays.getManaPool();
     
         // Convert Color to short String
         String manaStr = "1";

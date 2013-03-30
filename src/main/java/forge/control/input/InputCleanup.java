@@ -19,12 +19,10 @@ package forge.control.input;
 
 import forge.Card;
 import forge.FThreads;
-import forge.Singletons;
 import forge.game.GameState;
 import forge.game.player.Player;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
-import forge.gui.match.CMatchUI;
 import forge.view.ButtonUtil;
 
 /**
@@ -39,6 +37,8 @@ public class InputCleanup extends InputBase {
     /** Constant <code>serialVersionUID=-4164275418971547948L</code>. */
     private static final long serialVersionUID = -4164275418971547948L;
     private final GameState game;
+    final Player activePlayer;
+    final Player turnOwner;
     
     /**
      * TODO: Write javadoc for Constructor.
@@ -47,19 +47,20 @@ public class InputCleanup extends InputBase {
     public InputCleanup(GameState game) {
         super();
         this.game = game;
+        activePlayer = game.getPhaseHandler().getPriorityPlayer();
+        turnOwner = game.getPhaseHandler().getPlayerTurn();
     }
 
     /** {@inheritDoc} */
     @Override
     public final void showMessage() {
-        final Player active = game.getPhaseHandler().getPriorityPlayer();
-        final Player turnOwner = game.getPhaseHandler().getPlayerTurn();
 
-        final int n = active.getCardsIn(ZoneType.Hand).size();
-        final int max = active.getMaxHandSize();
+
+        final int n = activePlayer.getCardsIn(ZoneType.Hand).size();
+        final int max = activePlayer.getMaxHandSize();
         // goes to the next phase
-        if (active.isUnlimitedHandSize() || n <= max || n <= 0 || active != turnOwner) {
-            active.getController().passPriority();
+        if (activePlayer.isUnlimitedHandSize() || n <= max || n <= 0 || activePlayer != turnOwner) {
+            activePlayer.getController().passPriority();
             return;
         }
         ButtonUtil.disableAll();
@@ -69,20 +70,20 @@ public class InputCleanup extends InputBase {
         final StringBuffer sb = new StringBuffer();
         sb.append("Cleanup Phase: You can only have a maximum of ").append(max);
         sb.append(" cards, you currently have ").append(n).append(" cards in your hand - select a card to discard");
-        CMatchUI.SINGLETON_INSTANCE.showMessage(sb.toString());
+        showMessage(sb.toString());
     }
 
     /** {@inheritDoc} */
     @Override
     public final void selectCard(final Card card) {
         Zone zone = game.getZoneOf(card);
-        if (!zone.is(ZoneType.Hand, Singletons.getControl().getPlayer())) 
+        if (!zone.is(ZoneType.Hand, turnOwner))
             return;
             
         FThreads.invokeInNewThread(new Runnable() {
             @Override
             public void run() {
-                card.getController().discard(card, null);
+                turnOwner.discard(card, null);
             }
         }, true);
     }
