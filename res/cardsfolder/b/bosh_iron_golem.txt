@@ -1,5 +1,6 @@
 Name:Bosh, Iron Golem
 ManaCost:8
+ColorIdentity:Red
 Types:Legendary Artifact Creature Golem
 PT:6/7
 K:Trample

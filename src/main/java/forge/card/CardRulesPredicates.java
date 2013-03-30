@@ -455,6 +455,9 @@ public final class CardRulesPredicates {
         /** The Constant isCreature. */
         public static final Predicate<CardRules> IS_CREATURE = CardRulesPredicates
                 .coreType(true, CardCoreType.Creature);
+        
+        public static final Predicate<CardRules> IS_LEGENDARY = CardRulesPredicates
+                .superType(true, CardSuperType.Legendary);
 
         /** The Constant isArtifact. */
         public static final Predicate<CardRules> IS_ARTIFACT = CardRulesPredicates

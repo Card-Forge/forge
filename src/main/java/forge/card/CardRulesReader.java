@@ -138,6 +138,12 @@ public class CardRulesReader {
                     ColorSet newCol = ColorSet.fromNames(value.split(","));
                     this.faces[this.curFace].setColor(newCol);
                 }
+                else if ("ColorIdentity".equals(key)) {
+                    // This is forge.card.CardColor not forge.CardColor.
+                    // Why do we have two classes with the same name?
+                    ColorSet newCol = ColorSet.fromNames(value.split(","));
+                    this.faces[this.curFace].setColorIdentity(newCol);
+                }
                 break;
 
             case 'D':

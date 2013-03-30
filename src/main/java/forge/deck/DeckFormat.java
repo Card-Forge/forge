@@ -17,6 +17,7 @@
  */
 package forge.deck;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map.Entry;
@@ -25,6 +26,7 @@ import org.apache.commons.lang.math.IntRange;
 
 import forge.Singletons;
 import forge.card.CardCoreType;
+import forge.card.ColorSet;
 import forge.item.CardDb;
 import forge.item.CardPrinted;
 import forge.item.IPaperCard;
@@ -137,18 +139,47 @@ public enum DeckFormat {
                 if (null == cmd || cmd.isEmpty()) {
                     return "is missing a commander";
                 }
-                if (!cmd.get(0).getRules().getType().isLegendary()) {
+                if (!cmd.get(0).getRules().getType().isLegendary()
+                    || !cmd.get(0).getRules().getType().isCreature()) {
                     return "has a commander that is not a legendary creature";
                 }
                 
-                //TODO:Enforce color identity
+                ColorSet cmdCI = cmd.get(0).getRules().getColorIdentity();
+                List<CardPrinted> erroneousCI = new ArrayList<CardPrinted>();
+                
+                for(Entry<CardPrinted, Integer> cp : deck.get(DeckSection.Main)) {
+                    if(!cp.getKey().getRules().getColorIdentity().hasNoColorsExcept(cmdCI.getColor()))
+                    {
+                        erroneousCI.add(cp.getKey());
+                    }
+                }
+                for(Entry<CardPrinted, Integer> cp : deck.get(DeckSection.Sideboard)) {
+                    if(!cp.getKey().getRules().getColorIdentity().hasNoColorsExcept(cmdCI.getColor()))
+                    {
+                        erroneousCI.add(cp.getKey());
+                    }
+                }
+                
+                if(erroneousCI.size() > 0)
+                {
+                    StringBuilder sb = new StringBuilder("contains the cards " + System.lineSeparator());
+                    
+                    for(CardPrinted cp : erroneousCI)
+                    {
+                        sb.append(cp.getName() + ", " + System.lineSeparator());
+                    }
+                    
+                    sb.append(" that do not match the commanders color identity.");
+                    
+                    return sb.toString();
+                }
                 
                 break;
 
             case Planechase: //Must contain at least 10 planes/phenomenons, but max 2 phenomenons. Singleton.
                 final CardPool planes = deck.get(DeckSection.Planes);
                 if (planes == null || planes.countAll() < 10) {
-                    return "should gave at least 10 planes";
+                    return "should have at least 10 planes";
                 }
                 int phenoms = 0;
                 for (Entry<CardPrinted, Integer> cp : planes) {

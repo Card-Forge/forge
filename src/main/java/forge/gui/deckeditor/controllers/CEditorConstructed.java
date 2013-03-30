@@ -68,6 +68,7 @@ public final class CEditorConstructed extends ACEditorBase<CardPrinted, Deck> {
     private final ItemPoolView<CardPrinted> avatarPool;
     private final ItemPoolView<CardPrinted> planePool;
     private final ItemPoolView<CardPrinted> schemePool;
+    private final ItemPoolView<CardPrinted> commanderPool;
     
     //=========== Constructor
     /**
@@ -89,7 +90,8 @@ public final class CEditorConstructed extends ACEditorBase<CardPrinted, Deck> {
         avatarPool = ItemPool.createFrom(CardDb.variants().getAllCards(Predicates.compose(CardRulesPredicates.Presets.IS_VANGUARD, CardPrinted.FN_GET_RULES)),CardPrinted.class);
         planePool = ItemPool.createFrom(CardDb.variants().getAllCards(Predicates.compose(CardRulesPredicates.Presets.IS_PLANE_OR_PHENOMENON, CardPrinted.FN_GET_RULES)),CardPrinted.class);
         schemePool = ItemPool.createFrom(CardDb.variants().getAllCards(Predicates.compose(CardRulesPredicates.Presets.IS_SCHEME, CardPrinted.FN_GET_RULES)),CardPrinted.class);
-
+        commanderPool = ItemPool.createFrom(CardDb.instance().getAllCards(Predicates.compose(Predicates.and(CardRulesPredicates.Presets.IS_CREATURE,CardRulesPredicates.Presets.IS_LEGENDARY), CardPrinted.FN_GET_RULES)),CardPrinted.class);
+        
         boolean wantUnique = SEditorIO.getPref(EditorPreference.display_unique_only);
 
         final EditorTableView<CardPrinted> tblCatalog = new EditorTableView<CardPrinted>(wantUnique, CardPrinted.class);
@@ -274,6 +276,15 @@ public final class CEditorConstructed extends ACEditorBase<CardPrinted, Deck> {
                 this.getTableDeck().setDeck(this.controller.getModel().getOrCreate(DeckSection.Schemes));
                 showOptions = false;
                 title = "Scheme";
+                tabtext = "Card Catalog";
+                break;
+            case Commander:
+                lstCatalogCols.remove(SColumnUtil.getColumn(ColumnName.CAT_QUANTITY));
+                this.getTableCatalog().setAvailableColumns(lstCatalogCols);
+                this.getTableCatalog().setDeck(commanderPool,true);
+                this.getTableDeck().setDeck(this.controller.getModel().getOrCreate(DeckSection.Commander));
+                showOptions = false;
+                title = "Commander";
                 tabtext = "Card Catalog";
                 break;
         }

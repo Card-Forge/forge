@@ -177,4 +177,17 @@ public final class CardRules implements ICardCharacteristics {
     public final List<String> getAbilities() {
         return null;
     }
+    
+    @Override
+    public ColorSet getColorIdentity() {
+        if(this.otherPart != null)
+        {
+            return ColorSet.fromMask(mainPart.getColorIdentity().getColor() | otherPart.getColorIdentity().getColor());
+        }
+        else
+        {
+            return mainPart.getColorIdentity();
+        }
+        
+    }
 }
