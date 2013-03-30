@@ -162,14 +162,12 @@ public enum DeckFormat {
                 
                 if(erroneousCI.size() > 0)
                 {
-                    StringBuilder sb = new StringBuilder("contains the cards " + System.lineSeparator());
+                    StringBuilder sb = new StringBuilder("contains card that do not match the commanders color identity:");
                     
                     for(CardPrinted cp : erroneousCI)
                     {
-                        sb.append(cp.getName() + ", " + System.lineSeparator());
+                        sb.append("\n").append(cp.getName());
                     }
-                    
-                    sb.append(" that do not match the commanders color identity.");
                     
                     return sb.toString();
                 }
