@@ -113,8 +113,10 @@ public class CostUntapType extends CostPartWithList {
      * forge.Card, forge.Player, forge.card.cost.Cost)
      */
     @Override
-    public final boolean canPay(final SpellAbility ability, final Card source, final Player activator, final Cost cost, final GameState game) {
-        List<Card> typeList = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
+    public final boolean canPay(final SpellAbility ability) {
+        final Player activator = ability.getActivatingPlayer();
+        final Card source = ability.getSourceCard();
+        List<Card> typeList = activator.getGame().getCardsIn(ZoneType.Battlefield);
 
         typeList = CardLists.getValidCards(typeList, this.getType().split(";"), activator, source);
 

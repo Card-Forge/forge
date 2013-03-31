@@ -69,6 +69,8 @@ public abstract class CostPartWithList extends CostPart {
             sa.addCostToHashList(CardUtil.getLKICopy(card), paymentMethod);
         }
     }
+    
+    // public abstract List<Card> getValidCards();  
 
     /**
      * Instantiates a new cost part with list.

@@ -66,7 +66,10 @@ public class CostReveal extends CostPartWithList {
      * forge.Card, forge.Player, forge.card.cost.Cost)
      */
     @Override
-    public final boolean canPay(final SpellAbility ability, final Card source, final Player activator, final Cost cost, final GameState game) {
+    public final boolean canPay(final SpellAbility ability) {
+        final Player activator = ability.getActivatingPlayer();
+        final Card source = ability.getSourceCard();
+        
         List<Card> handList = new ArrayList<Card>(activator.getCardsIn(ZoneType.Hand));
         final String type = this.getType();
         final Integer amount = this.convertAmount();

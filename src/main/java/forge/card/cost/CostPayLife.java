@@ -72,8 +72,9 @@ public class CostPayLife extends CostPart {
      * forge.Card, forge.Player, forge.card.cost.Cost)
      */
     @Override
-    public final boolean canPay(final SpellAbility ability, final Card source, final Player activator, final Cost cost, final GameState game) {
+    public final boolean canPay(final SpellAbility ability) {
         final Integer amount = this.convertAmount();
+        Player activator = ability.getActivatingPlayer();
         if ((amount != null) && !activator.canPayLife(amount)) {
             return false;
         }

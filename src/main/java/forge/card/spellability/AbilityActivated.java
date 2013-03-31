@@ -82,7 +82,7 @@ public abstract class AbilityActivated extends SpellAbility implements java.io.S
     /** {@inheritDoc} */
     @Override
     public boolean canPlay() {
-        final GameState game = Singletons.getModel().getGame();
+        final GameState game = getActivatingPlayer().getGame();
         if (game.getStack().isSplitSecondOnStack() && !this.isManaAbility()) {
             return false;
         }
@@ -90,7 +90,7 @@ public abstract class AbilityActivated extends SpellAbility implements java.io.S
         final Card c = this.getSourceCard();
 
         // CantBeActivated static abilities
-        for (final Card ca : Singletons.getModel().getGame().getCardsIn(ZoneType.listValueOf("Battlefield,Command"))) {
+        for (final Card ca : game.getCardsIn(ZoneType.listValueOf("Battlefield,Command"))) {
             final ArrayList<StaticAbility> staticAbilities = ca.getStaticAbilities();
             for (final StaticAbility stAb : staticAbilities) {
                 if (stAb.applyAbility("CantBeActivated", c, this)) {
@@ -104,7 +104,7 @@ public abstract class AbilityActivated extends SpellAbility implements java.io.S
         }
 
         if (this.isCycling()
-                && Singletons.getModel().getGame().getStaticEffects().getGlobalRuleChange(GlobalRuleChange.noCycling)) {
+                && game.getStaticEffects().getGlobalRuleChange(GlobalRuleChange.noCycling)) {
             return false;
         }
 
@@ -112,7 +112,7 @@ public abstract class AbilityActivated extends SpellAbility implements java.io.S
             return false;
         }
 
-        return CostPayment.canPayAdditionalCosts(game, this.getPayCosts(), this);
+        return CostPayment.canPayAdditionalCosts(this.getPayCosts(), this);
     }
 
     /* (non-Javadoc)

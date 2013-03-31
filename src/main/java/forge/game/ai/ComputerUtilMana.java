@@ -27,7 +27,6 @@ import forge.card.spellability.AbilityManaPart;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.game.GameActionUtil;
-import forge.game.GameState;
 import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
@@ -58,8 +57,6 @@ public class ComputerUtilMana {
      */
     public static boolean payManaCost(final SpellAbility sa, final Player ai, final boolean test, final int extraMana, boolean checkPlayable) {
         ManaCostBeingPaid cost = ComputerUtilMana.calculateManaCost(sa, test, extraMana);
-    
-        final GameState game = Singletons.getModel().getGame();
         final ManaPool manapool = ai.getManaPool();
     
         cost = manapool.payManaFromPool(sa, cost);
@@ -109,7 +106,7 @@ public class ComputerUtilMana {
                 ma.setActivatingPlayer(ai);
                 // if the AI can't pay the additional costs skip the mana ability
                 if (ma.getPayCosts() != null && checkPlayable) {
-                    if (!ComputerUtilCost.canPayAdditionalCosts(ma, ai, game)) {
+                    if (!ComputerUtilCost.canPayAdditionalCosts(ma, ai)) {
                         continue;
                     }
                 } else if (sourceCard.isTapped() && checkPlayable) {
@@ -186,7 +183,7 @@ public class ComputerUtilMana {
                     // Pay additional costs
                     if (ma.getPayCosts() != null) {
                         final CostPayment pay = new CostPayment(ma.getPayCosts(), ma);
-                        if (!pay.payComputerCosts((AIPlayer)ai, game)) {
+                        if (!pay.payComputerCosts((AIPlayer)ai, ai.getGame())) {
                             continue;
                         }
                     } else {
@@ -458,7 +455,6 @@ public class ComputerUtilMana {
 
     //This method is currently used by AI to estimate human's available mana
     private static List<Card> getAvailableMana(final Player ai, final boolean checkPlayable) {
-        final GameState game = Singletons.getModel().getGame();
         final List<Card> list = ai.getCardsIn(ZoneType.Battlefield);
         list.addAll(ai.getCardsIn(ZoneType.Hand));
         final List<Card> manaSources = CardLists.filter(list, new Predicate<Card>() {
@@ -523,7 +519,7 @@ public class ComputerUtilMana {
                 // ability
                 m.setActivatingPlayer(ai);
                 if (cost != null) {
-                    if (!ComputerUtilCost.canPayAdditionalCosts(m, ai, game)) {
+                    if (!ComputerUtilCost.canPayAdditionalCosts(m, ai)) {
                         continue;
                     }
                 }

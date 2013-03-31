@@ -70,7 +70,6 @@ import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 import forge.gui.GuiDialog;
-import forge.gui.GuiUtils;
 import forge.sound.SoundEffectType;
 
 
@@ -401,8 +400,10 @@ public final class GameActionUtil {
      *            a {@link forge.Command} object.
      * @param sourceAbility TODO
      */
-    public static boolean payCostDuringAbilityResolve(final Player p, final SpellAbility ability, final Cost cost, SpellAbility sourceAbility, final GameState game) {
+    public static boolean payCostDuringAbilityResolve(final SpellAbility ability, final Cost cost, SpellAbility sourceAbility, final GameState game) {
+        
         // Only human player pays this way
+        final Player p = ability.getActivatingPlayer();
         final Card source = ability.getSourceCard();
         final List<CostPart> parts =  cost.getCostParts();
         ArrayList<CostPart> remainingParts =  new ArrayList<CostPart>(cost.getCostParts());
@@ -464,7 +465,7 @@ public final class GameActionUtil {
                 int amount = getAmountFromPartX(part, source, sourceAbility);
                 String plural = amount > 1 ? "s" : "";
                 
-                if (!part.canPay(sourceAbility, source, p, cost, game))
+                if (!part.canPay(sourceAbility))
                     return false;
 
                 if ( false == GuiDialog.confirm(source, "Do you want to remove " + amount + " " + counterType.getName() + " counter" + plural + " from " + source + "?"))

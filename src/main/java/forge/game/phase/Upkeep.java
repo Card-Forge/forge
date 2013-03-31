@@ -171,6 +171,7 @@ public class Upkeep extends Phase {
             final Card c = list.get(i);
             if (c.hasStartOfKeyword("(Echo unpaid)")) {
                 final Ability blankAbility = Upkeep.BlankAbility(c, c.getEchoCost());
+                blankAbility.setActivatingPlayer(c.getController());
 
                 final StringBuilder sb = new StringBuilder();
                 sb.append("Echo for ").append(c).append("\n");
@@ -182,7 +183,7 @@ public class Upkeep extends Phase {
                         Player controller = c.getController();
                         if (controller.isHuman()) {
                             Cost cost = new Cost(c, c.getEchoCost().trim(), true);
-                            if ( !GameActionUtil.payCostDuringAbilityResolve(controller, blankAbility, cost, null, game) )
+                            if ( !GameActionUtil.payCostDuringAbilityResolve(blankAbility, cost, null, game) )
                                 game.getAction().sacrifice(c, null);;
 
                         } else { // computer
@@ -324,7 +325,7 @@ public class Upkeep extends Phase {
                         @Override
                         public void resolve() {
                             if (controller.isHuman()) {
-                                if ( !GameActionUtil.payCostDuringAbilityResolve(controller, blankAbility, blankAbility.getPayCosts(), this, game))
+                                if ( !GameActionUtil.payCostDuringAbilityResolve(blankAbility, blankAbility.getPayCosts(), this, game))
                                     game.getAction().sacrifice(c, null);
                             } else { // computer
                                 if (ComputerUtilCost.shouldPayCost(controller, c, upkeepCost) && ComputerUtilCost.canPayCost(blankAbility, controller)) {

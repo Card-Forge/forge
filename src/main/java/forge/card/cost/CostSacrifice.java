@@ -150,7 +150,10 @@ public class CostSacrifice extends CostPartWithList {
      * forge.Card, forge.Player, forge.card.cost.Cost)
      */
     @Override
-    public final boolean canPay(final SpellAbility ability, final Card source, final Player activator, final Cost cost, final GameState game) {
+    public final boolean canPay(final SpellAbility ability) {
+        final Player activator = ability.getActivatingPlayer();
+        final Card source = ability.getSourceCard();
+        
         // You can always sac all
         if (!this.payCostFromSource()) {
             // If the sacrificed type is dependant on an annoucement, can't necesarily rule out the CanPlay call

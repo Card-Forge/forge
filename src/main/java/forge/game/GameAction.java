@@ -508,7 +508,7 @@ public class GameAction {
                 return null;
             }
         };
-
+        abRecover.setActivatingPlayer(recoverable.getController());
         final StringBuilder sb = new StringBuilder();
         sb.append("Recover ").append(recoverable).append("\n");
 
@@ -518,7 +518,7 @@ public class GameAction {
                 Player p = recoverable.getController();
 
                 if (p.isHuman()) {
-                    if ( GameActionUtil.payCostDuringAbilityResolve(p, abRecover, abRecover.getPayCosts(), null, game) )
+                    if ( GameActionUtil.payCostDuringAbilityResolve(abRecover, abRecover.getPayCosts(), null, game) )
                         moveToHand(recoverable);
                     else
                         exile(recoverable);

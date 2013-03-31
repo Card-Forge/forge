@@ -8,7 +8,6 @@ import org.apache.commons.lang3.StringUtils;
 import forge.Card;
 import forge.CardLists;
 import forge.CounterType;
-import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.cost.Cost;
 import forge.card.cost.CostDamage;
@@ -21,7 +20,6 @@ import forge.card.cost.CostRemoveCounter;
 import forge.card.cost.CostSacrifice;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
-import forge.game.GameState;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
@@ -338,8 +336,6 @@ public class ComputerUtilCost {
      * @return a boolean.
      */
     public static boolean canPayCost(final SpellAbility sa, final Player player) {
-    
-        final GameState game = Singletons.getModel().getGame();
         // Check for stuff like Nether Void
         int extraManaNeeded = 0;
         if (sa instanceof Spell) {
@@ -361,7 +357,7 @@ public class ComputerUtilCost {
             return false;
         }
     
-        return ComputerUtilCost.canPayAdditionalCosts(sa, player, game);
+        return ComputerUtilCost.canPayAdditionalCosts(sa, player);
     } // canPayCost()
 
     /**
@@ -375,7 +371,7 @@ public class ComputerUtilCost {
      *            a {@link forge.game.player.Player} object.
      * @return a boolean.
      */
-    public static boolean canPayAdditionalCosts(final SpellAbility sa, final Player player, final GameState game) {
+    public static boolean canPayAdditionalCosts(final SpellAbility sa, final Player player) {
         if (sa.getActivatingPlayer() == null) {
             final StringBuilder sb = new StringBuilder();
             sb.append(sa.getSourceCard());
@@ -383,7 +379,7 @@ public class ComputerUtilCost {
             System.out.println(sb.toString());
             sa.setActivatingPlayer(player);
         }
-        return CostPayment.canPayAdditionalCosts(game, sa.getPayCosts(), sa);
+        return CostPayment.canPayAdditionalCosts(sa.getPayCosts(), sa);
     }
 
 }

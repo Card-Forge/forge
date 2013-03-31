@@ -62,7 +62,9 @@ public class CostMill extends CostPartWithList {
      * forge.Card, forge.Player, forge.card.cost.Cost)
      */
     @Override
-    public final boolean canPay(final SpellAbility ability, final Card source, final Player activator, final Cost cost, final GameState game) {
+    public final boolean canPay(final SpellAbility ability) {
+        final Player activator = ability.getActivatingPlayer();
+        final Card source = ability.getSourceCard();
         final PlayerZone zone = activator.getZone(ZoneType.Library);
 
         Integer i = this.convertAmount();

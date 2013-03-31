@@ -22,7 +22,6 @@ import forge.Card;
 import forge.card.spellability.SpellAbility;
 import forge.game.GameState;
 import forge.game.player.AIPlayer;
-import forge.game.player.Player;
 
 /**
  * The Class CostPart.
@@ -147,7 +146,7 @@ public abstract class CostPart {
      * @param game
      * @return true, if successful
      */
-    public abstract boolean canPay(SpellAbility ability, Card source, Player activator, Cost cost, GameState game);
+    public abstract boolean canPay(SpellAbility ability);
 
     /**
      * Decide ai payment.

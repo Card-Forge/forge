@@ -77,7 +77,7 @@ public class CostPayment {
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
-    public static boolean canPayAdditionalCosts(final GameState game, final Cost cost, final SpellAbility ability) {
+    public static boolean canPayAdditionalCosts(final Cost cost, final SpellAbility ability) {
         if (cost == null) {
             return true;
         }
@@ -90,7 +90,7 @@ public class CostPayment {
         }
 
         for (final CostPart part : cost.getCostParts()) {
-            if (!part.canPay(ability, card, activator, cost, game)) {
+            if (!part.canPay(ability)) {
                 return false;
             }
         }

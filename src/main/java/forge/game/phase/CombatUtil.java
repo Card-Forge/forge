@@ -1152,7 +1152,7 @@ public class CombatUtil {
 
             ability.setActivatingPlayer(c.getController());
             if (c.getController().isHuman()) {
-                if ( GameActionUtil.payCostDuringAbilityResolve(c.getController(), ability, attackCost, null, game) ) {
+                if ( GameActionUtil.payCostDuringAbilityResolve(ability, attackCost, null, game) ) {
                     if (!crd.hasKeyword("Vigilance")) { crd.tap(); }
                 } else {
                     game.getCombat().removeFromCombat(crd);

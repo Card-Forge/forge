@@ -29,7 +29,6 @@ import forge.control.input.InputPayment;
 import forge.game.GameState;
 import forge.game.ai.ComputerUtilMana;
 import forge.game.player.AIPlayer;
-import forge.game.player.Player;
 
 /**
  * The mana component of any spell or ability cost
@@ -181,7 +180,7 @@ public class CostPartMana extends CostPart {
      * forge.Card, forge.Player, forge.card.cost.Cost)
      */
     @Override
-    public final boolean canPay(final SpellAbility ability, final Card source, final Player activator, final Cost cost, final GameState game) {
+    public final boolean canPay(final SpellAbility ability) {
         // For now, this will always return true. But this should probably be
         // checked at some point
         return true;

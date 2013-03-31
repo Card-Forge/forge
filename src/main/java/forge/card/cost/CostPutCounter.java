@@ -189,7 +189,9 @@ public class CostPutCounter extends CostPartWithList {
      * forge.Card, forge.Player, forge.card.cost.Cost)
      */
     @Override
-    public final boolean canPay(final SpellAbility ability, final Card source, final Player activator, final Cost cost, final GameState game) {
+    public final boolean canPay(final SpellAbility ability) {
+        final Player activator = ability.getActivatingPlayer();
+        final Card source = ability.getSourceCard();
         if (this.payCostFromSource()) {
             if (source.hasKeyword("CARDNAME can't have counters placed on it.")) {
                 return false;

@@ -57,10 +57,10 @@ public class CostGainLife extends CostPart {
         return sb.toString();
     }
     
-    private List<Player> getPotentialTargets(final GameState game, final Player payer, final Card source)
+    private List<Player> getPotentialTargets(final Player payer, final Card source)
     {
         List<Player> res = new ArrayList<Player>();
-        for(Player p : game.getPlayers())
+        for(Player p : payer.getGame().getPlayers())
         {
             if(p.isValid(getType(), payer, source))
                 res.add(p);
@@ -76,12 +76,12 @@ public class CostGainLife extends CostPart {
      * forge.Card, forge.Player, forge.card.cost.Cost)
      */
     @Override
-    public final boolean canPay(final SpellAbility ability, final Card source, final Player activator, final Cost cost, final GameState game) {
+    public final boolean canPay(final SpellAbility ability) {
         final Integer amount = this.convertAmount();
         if ( amount == null ) return false;
 
         int cntAbleToGainLife = 0;
-        List<Player> possibleTargets = getPotentialTargets(game, activator, source);
+        List<Player> possibleTargets = getPotentialTargets(ability.getActivatingPlayer(), ability.getSourceCard());
 
         for (final Player opp : possibleTargets) {
             if (opp.canGainLife()) {
@@ -101,7 +101,7 @@ public class CostGainLife extends CostPart {
     @Override
     public final void payAI(final PaymentDecision decision, final AIPlayer ai, SpellAbility ability, Card source) {
         int playersLeft = cntPlayers;
-        for (final Player opp : getPotentialTargets(ai.getGame(), ai, source)) {
+        for (final Player opp : getPotentialTargets(ai, source)) {
             if (opp.canGainLife() && playersLeft > 0) {
                 playersLeft--;
                 opp.gainLife(decision.c, null);
@@ -135,7 +135,7 @@ public class CostGainLife extends CostPart {
         }
 
         final List<Player> oppsThatCanGainLife = new ArrayList<Player>();
-        for (final Player opp : getPotentialTargets(game, activator, source)) {
+        for (final Player opp : getPotentialTargets(activator, source)) {
             if (opp.canGainLife()) {
                 oppsThatCanGainLife.add(opp);
             }

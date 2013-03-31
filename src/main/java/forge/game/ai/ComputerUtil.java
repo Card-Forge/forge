@@ -254,7 +254,7 @@ public class ComputerUtil {
         final SpellAbility newSA = sa.copyWithNoManaCost();
         newSA.setActivatingPlayer(ai);
 
-        if (!ComputerUtilCost.canPayAdditionalCosts(newSA, ai, game)) {
+        if (!ComputerUtilCost.canPayAdditionalCosts(newSA, ai)) {
             return;
         }
 

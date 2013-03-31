@@ -1102,7 +1102,7 @@ public class AbilityUtils {
                 }
             } else {
                 // if it's paid by the AI already the human can pay, but it won't change anything
-                paid |= GameActionUtil.payCostDuringAbilityResolve(payer, ability, cost, sa, game);
+                paid |= GameActionUtil.payCostDuringAbilityResolve(ability, cost, sa, game);
             }
         }
 
