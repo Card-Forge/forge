@@ -467,7 +467,14 @@ public class AiController {
 
     // This is for playing spells regularly (no Cascade/Ripple etc.)
     private boolean canPlayAndPayFor(final SpellAbility sa) {
-        return sa.canPlay() && sa.canPlayAI() && ComputerUtilCost.canPayCost(sa, player);
+        boolean canPlay = sa.canPlay();
+        if (!canPlay) 
+            return false;
+        //System.out.printf("Ai thinks of %s @ %s >>> ", sa, sa.getActivatingPlayer().getGame().getPhaseHandler().debugPrintState());
+        boolean aiWouldPlay = sa.canPlayAI();
+        boolean canPay = ComputerUtilCost.canPayCost(sa, player);
+        //System.out.printf("wouldPlay: %s, canPay: %s%n", aiWouldPlay, canPay);
+        return aiWouldPlay && canPay;
     }
     
     // not sure "playing biggest spell" matters?
@@ -534,12 +541,12 @@ public class AiController {
         if ((uTypes != null) && (sa != null)) {
             hand = CardLists.getValidCards(hand, uTypes, sa.getActivatingPlayer(), sa.getSourceCard());
         }
-        return getCardsToDiscard(numDiscard, hand, sa);
+        return getCardsToDiscard(numDiscard, numDiscard, hand, sa);
     }
     
-    public List<Card> getCardsToDiscard(final int numDiscard, final List<Card> validCards, final SpellAbility sa) {
+    public List<Card> getCardsToDiscard(final int min, final int max, final List<Card> validCards, final SpellAbility sa) {
         
-        if (validCards.size() < numDiscard) {
+        if (validCards.size() < min) {
             return null;
         }
 
@@ -551,7 +558,7 @@ public class AiController {
         }
     
         // look for good discards
-        while (count < numDiscard) {
+        while (count < min) {
             Card prefCard = null;
             if (sa != null && sa.getActivatingPlayer() != null && sa.getActivatingPlayer().isOpponentOf(player)) {
                 for (Card c : validCards) {
@@ -574,7 +581,7 @@ public class AiController {
             }
         }
     
-        final int discardsLeft = numDiscard - count;
+        final int discardsLeft = min - count;
     
         // choose rest
         for (int i = 0; i < discardsLeft; i++) {
@@ -778,9 +785,11 @@ public class AiController {
                         
                         if (!player.isUnlimitedHandSize()) {
                             int max = Math.min(player.getZone(ZoneType.Hand).size(), size - player.getMaxHandSize());
-                            final List<Card> toDiscard = player.getAi().getCardsToDiscard(max, (String[])null, null);
-                            for (int i = 0; i < toDiscard.size(); i++) {
-                                player.discard(toDiscard.get(i), null);
+                            if( max > 0) {
+                                final List<Card> toDiscard = player.getAi().getCardsToDiscard(max, (String[])null, null);
+                                for (int i = 0; i < toDiscard.size(); i++) {
+                                    player.discard(toDiscard.get(i), null);
+                                }
                             }
                             game.getStack().chooseOrderOfSimultaneousStackEntryAll();
                         }

@@ -113,7 +113,7 @@ public abstract class PlayerController {
     public abstract boolean willPutCardOnTop(Card c);
     
     /** p = target player, validCards - possible discards, min cards to discard */
-    public abstract List<Card> chooseCardsToDiscardFrom(Player p, SpellAbility sa, List<Card> validCards, int min);
+    public abstract List<Card> chooseCardsToDiscardFrom(Player playerDiscard, SpellAbility sa, List<Card> validCards, int min, int max);
     public abstract Card chooseCardToDredge(List<Card> dredgers);
 
     public abstract void playMiracle(SpellAbility miracle, Card card);

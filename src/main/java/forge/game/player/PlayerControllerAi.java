@@ -220,12 +220,12 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public List<Card> chooseCardsToDiscardFrom(Player p, SpellAbility sa, List<Card> validCards, int min) {
+    public List<Card> chooseCardsToDiscardFrom(Player p, SpellAbility sa, List<Card> validCards, int min, int max) {
         boolean isTargetFriendly = !p.isOpponentOf(getPlayer());
         
         return isTargetFriendly
-               ? ComputerUtil.getCardsToDiscardFromFriend(player, p, sa, validCards, min)
-               : ComputerUtil.getCardsToDiscardFromOpponent(player, p, sa, validCards, min);
+               ? ComputerUtil.getCardsToDiscardFromFriend(player, p, sa, validCards, min, max)
+               : ComputerUtil.getCardsToDiscardFromOpponent(player, p, sa, validCards, min, max);
     }
 
     @Override

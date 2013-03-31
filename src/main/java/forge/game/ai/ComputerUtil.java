@@ -1217,7 +1217,7 @@ public class ComputerUtil {
      * @param min
      * @return
      */
-    public static List<Card> getCardsToDiscardFromOpponent(AIPlayer chooser, Player discarder, SpellAbility sa, List<Card> validCards, int min) {
+    public static List<Card> getCardsToDiscardFromOpponent(AIPlayer chooser, Player discarder, SpellAbility sa, List<Card> validCards, int min, int max) {
         List<Card> goodChoices = CardLists.filter(validCards, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
@@ -1258,11 +1258,11 @@ public class ComputerUtil {
      * @param min
      * @return
      */
-    public static List<Card> getCardsToDiscardFromFriend(AIPlayer aiChooser, Player p, SpellAbility sa, List<Card> validCards, int min) {
+    public static List<Card> getCardsToDiscardFromFriend(AIPlayer aiChooser, Player p, SpellAbility sa, List<Card> validCards, int min, int max) {
         if (p instanceof AIPlayer) { // ask that ai player what he would like to discard
-            return ((AIPlayer) p).getAi().getCardsToDiscard(min, validCards, sa);
+            return ((AIPlayer) p).getAi().getCardsToDiscard(min, max, validCards, sa);
         } 
         // no special options for human or remote friends
-        return getCardsToDiscardFromOpponent(aiChooser, p, sa, validCards, min);
+        return getCardsToDiscardFromOpponent(aiChooser, p, sa, validCards, min, max);
     }
 }

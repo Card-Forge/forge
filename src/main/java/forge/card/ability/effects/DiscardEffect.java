@@ -201,12 +201,12 @@ public class DiscardEffect extends RevealEffectBase {
                     }
 
                     if (mode.startsWith("Reveal") && p != chooser)
-                        chooser.getController().reveal("Revealed " + p + " hand", dPHand, ZoneType.Hand, p);
+                        chooser.getGame().getAction().reveal(dPHand, p);
                     
-                    int minDiscardAmount = sa.hasParam("AnyNumber") || sa.hasParam("Optional") ? 0 : numCards;
-                    int max = Math.min(validCards.size(), minDiscardAmount);
+                    int min = sa.hasParam("AnyNumber") || sa.hasParam("Optional") ? 0 : numCards;
+                    int max = Math.min(validCards.size(), numCards);
 
-                    List<Card> toBeDiscarded = validCards.isEmpty() ? CardLists.emptyList : chooser.getController().chooseCardsToDiscardFrom(p, sa, validCards, max);
+                    List<Card> toBeDiscarded = validCards.isEmpty() ? CardLists.emptyList : chooser.getController().chooseCardsToDiscardFrom(p, sa, validCards, min, max);
 
                     if (mode.startsWith("Reveal") ) {
                         p.getController().reveal(chooser + " has chosen", toBeDiscarded, ZoneType.Hand, p);
