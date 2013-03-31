@@ -391,7 +391,7 @@ public class MagicStack extends MyObservable {
                 final int xCost = sa.getXManaCost();
                 Player player = sp.getSourceCard().getController();
                 if (player.isHuman()) {
-                    InputSynchronized inp = new InputPayManaX(game, sa, xCost, true);
+                    InputSynchronized inp = new InputPayManaX(sa, xCost, true);
                     FThreads.setInputAndWait(inp);
                     MagicStack.this.push(sa);
                 } else {

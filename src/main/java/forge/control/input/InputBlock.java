@@ -23,7 +23,6 @@ import java.util.List;
 
 import forge.Card;
 import forge.Singletons;
-import forge.control.FControl;
 import forge.game.GameState;
 import forge.game.phase.CombatUtil;
 import forge.game.player.Player;
@@ -48,14 +47,13 @@ public class InputBlock extends InputBase {
 
     private Card currentAttacker = null;
     private final HashMap<Card, List<Card>> allBlocking = new HashMap<Card, List<Card>>();
-    private final Player defender;
 
     /**
      * TODO: Write javadoc for Constructor.
      * @param priority
      */
-    public InputBlock(Player priority) {
-        defender = priority;
+    public InputBlock(Player human) {
+        super(human);
     }
 
     /**
@@ -98,14 +96,14 @@ public class InputBlock extends InputBase {
     @Override
     public final void selectButtonOK() {
         final GameState game = Singletons.getModel().getGame();
-        if (CombatUtil.finishedMandatoryBlocks(game.getCombat(), defender)) {
+        if (CombatUtil.finishedMandatoryBlocks(game.getCombat(), player)) {
             // Done blocking
             ButtonUtil.reset();
             CombatUtil.orderMultipleCombatants(game.getCombat());
             currentAttacker = null;
             allBlocking.clear();
 
-            FControl.SINGLETON_INSTANCE.getPlayer().getController().passPriority();
+            passPriority();
         }
     }
 
@@ -121,8 +119,8 @@ public class InputBlock extends InputBase {
         } else {
             Zone zone = Singletons.getModel().getGame().getZoneOf(card);
             // Make sure this card is valid to even be a blocker
-            if (this.currentAttacker != null && card.isCreature() && card.getController().equals(defender)
-                    && zone.is(ZoneType.Battlefield, defender)) {
+            if (this.currentAttacker != null && card.isCreature() && card.getController().equals(player)
+                    && zone.is(ZoneType.Battlefield, player)) {
                 // Create a new blockedBy list if it doesn't exist
                 if (!this.allBlocking.containsKey(card)) {
                     this.allBlocking.put(card, new ArrayList<Card>());

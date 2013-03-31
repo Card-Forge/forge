@@ -43,6 +43,7 @@ public class AiInputCommon extends InputBase implements AiInput {
      *            a {@link forge.game.player.Computer} object.
      */
     public AiInputCommon(final AiController iComputer) {
+        super(iComputer.getPlayer());
         this.computer = iComputer;
     }
 

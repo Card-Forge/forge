@@ -19,6 +19,7 @@ package forge.control.input;
 
 import java.util.Stack;
 
+import forge.Singletons;
 import forge.game.GameState;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
@@ -115,38 +116,37 @@ public class InputControl extends MyObservable implements java.io.Serializable {
      */
     public final Input getActualInput(GameState game) {
         if ( !game.hasMulliganned() )
-            return new InputMulligan();
+            return new InputMulligan(Singletons.getModel().getMatch(), Singletons.getControl().getPlayer());
 
         final PhaseHandler handler = game.getPhaseHandler();
         final PhaseType phase = handler.getPhase();
         final Player playerTurn = handler.getPlayerTurn();
         final Player priority = handler.getPriorityPlayer();
-        final MagicStack stack = game.getStack();
+        if (priority == null) 
+            throw new RuntimeException("No player has priority!");
+        PlayerController pc = priority.getController();
 
-        
-        // TODO this resolving portion needs more work, but fixes Death Cloud
-        // issues
+
+
         if (!this.inputStack.isEmpty()) { // incoming input to Control
             return this.inputStack.peek();
         }
 
-        // If the Phase we're in doesn't allow for Priority, return null to move
-        // to next phase
+
+        
+        // If the Phase we're in doesn't allow for Priority, move to next phase
         if (!handler.isPlayerPriorityAllowed()) {
-            return null;
+            return pc.getAutoPassPriorityInput();
         }
 
-        if (priority == null)
-            return null;
-        PlayerController pc = priority.getController();
-        
         // Special Inputs needed for the following phases:
+        final MagicStack stack = game.getStack();
         switch (phase) {
             case COMBAT_DECLARE_ATTACKERS:
                 stack.freezeStack();
                 if (playerTurn.isHuman() && !playerTurn.getController().mayAutoPass(phase)) {
                     game.getCombat().initiatePossibleDefenders(playerTurn.getOpponents());
-                    return new InputAttack(game);
+                    return new InputAttack(playerTurn);
                 }
                 break;
 
@@ -158,8 +158,7 @@ public class InputControl extends MyObservable implements java.io.Serializable {
                 }
 
                 // noone attacks you
-                pc.passPriority();
-                return null;
+                return pc.getAutoPassPriorityInput();
 
             case CLEANUP:
                 // discard
@@ -176,10 +175,9 @@ public class InputControl extends MyObservable implements java.io.Serializable {
         // Special phases handled above, everything else is handled simply by
         // priority
 
-        boolean prioritySkip = pc.mayAutoPass(phase) || pc.isUiSetToSkipPhase(playerTurn, phase);
-        if (game.getStack().isEmpty() && prioritySkip) {
-            pc.passPriority();
-            return null;
+        boolean maySkipPriority = pc.mayAutoPass(phase) || pc.isUiSetToSkipPhase(playerTurn, phase);
+        if (game.getStack().isEmpty() && maySkipPriority) {
+            return pc.getAutoPassPriorityInput();
         } else
             pc.autoPassCancel(); // probably cancel, since something has happened
 

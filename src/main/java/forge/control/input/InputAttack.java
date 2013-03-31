@@ -47,8 +47,9 @@ public class InputAttack extends InputBase {
     private static final long serialVersionUID = 7849903731842214245L;
 
     private final GameState game;
-    public InputAttack(GameState game0) {
-        game = game0;
+    public InputAttack(Player human) {
+        super(human);
+        game = human.getGame();
     }
     
     

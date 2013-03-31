@@ -223,7 +223,7 @@ public class CostPartMana extends CostPart {
         } 
         if (this.getAmountOfX() > 0) {
             source.setXManaCostPaid(0);
-            InputPayment inpPayment = new InputPayManaX(game, ability, this.getAmountOfX(), this.canXbe0());
+            InputPayment inpPayment = new InputPayManaX(ability, this.getAmountOfX(), this.canXbe0());
             FThreads.setInputAndWait(inpPayment);
             if(!inpPayment.isPaid())
                 return false;

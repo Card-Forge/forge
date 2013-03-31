@@ -13,6 +13,7 @@ import forge.GameEntity;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.control.input.Input;
+import forge.control.input.InputAutoPassPriority;
 import forge.deck.Deck;
 import forge.game.GameState;
 import forge.game.GameType;
@@ -36,6 +37,7 @@ public class PlayerControllerAi extends PlayerController {
     private Input defaultInput;
     private Input blockInput;
     private Input cleanupInput;
+    private Input autoPassPriorityInput;
     
     private final AiController brains;
     private final AIPlayer player;
@@ -52,9 +54,9 @@ public class PlayerControllerAi extends PlayerController {
         brains = new AiController(p, game); 
         
         defaultInput = new AiInputCommon(brains);
-        blockInput = new AiInputBlock(game, getPlayer());
+        blockInput = new AiInputBlock(getPlayer());
         cleanupInput = getDefaultInput();
-        
+        autoPassPriorityInput = new InputAutoPassPriority(getPlayer());
     }
 
     /**
@@ -73,6 +75,11 @@ public class PlayerControllerAi extends PlayerController {
     /** Input to use when player has to declare blockers */
     public Input getBlockInput() {
         return blockInput;
+    }
+
+    @Override
+    public Input getAutoPassPriorityInput() {
+        return autoPassPriorityInput;
     }
 
     /**

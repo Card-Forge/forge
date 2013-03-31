@@ -62,7 +62,7 @@ public class InputPayManaExecuteCommands extends InputPayManaBase implements Inp
      *            a {@link forge.Command} object.
      */
     public InputPayManaExecuteCommands(final Player p, final String prompt, final ManaCost manaCost2) {
-        super(p.getGame(), new SpellAbility(null) {
+        super(new SpellAbility(null) {
             @Override
             public void resolve() {}
             
@@ -90,8 +90,8 @@ public class InputPayManaExecuteCommands extends InputPayManaBase implements Inp
     }
 
     @Override
-    public void selectPlayer(final Player player) {
-        if (player == whoPays) {
+    public void selectPlayer(final Player selectedPlayer) {
+        if (player == selectedPlayer) {
             if (player.canPayLife(this.phyLifeToLose + 2) && manaCost.payPhyrexian()) {
                 this.phyLifeToLose += 2;
             }

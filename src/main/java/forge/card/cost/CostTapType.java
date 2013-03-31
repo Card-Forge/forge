@@ -23,82 +23,20 @@ import forge.Card;
 import forge.CardLists;
 import forge.CardPredicates.Presets;
 import forge.FThreads;
-import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.spellability.SpellAbility;
-import forge.control.input.InputPayment;
+import forge.control.input.InputSelectCards;
+import forge.control.input.InputSelectCardsFromList;
 import forge.game.GameState;
 import forge.game.ai.ComputerUtil;
 import forge.game.player.AIPlayer;
 import forge.game.player.Player;
-import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
-import forge.view.ButtonUtil;
 
 /**
  * The Class CostTapType.
  */
 public class CostTapType extends CostPartWithList {
-
-    /** 
-     * TODO: Write javadoc for this type.
-     *
-     */
-    public static final class InputPayCostTapType extends InputPayCostBase {
-        private final CostTapType tapType;
-        private final int nCards;
-        private final List<Card> cardList;
-        private static final long serialVersionUID = 6438988130447851042L;
-        private int nTapped = 0;
-
-        /**
-         * TODO: Write javadoc for Constructor.
-         * @param sa
-         * @param tapType
-         * @param nCards
-         * @param cardList
-         * @param payment
-         */
-        public InputPayCostTapType(CostTapType tapType, int nCards, List<Card> cardList) {
-            this.tapType = tapType;
-            this.nCards = nCards;
-            this.cardList = cardList;
-        }
-
-        @Override
-        public void showMessage() {
-
-            final int left = nCards - this.nTapped;
-            showMessage("Select a " + tapType.getDescription() + " to tap (" + left + " left)");
-            ButtonUtil.enableOnlyCancel();
-            if (nCards == 0) {
-                this.done();
-            }
-        }
-
-
-
-        @Override
-        public void selectCard(final Card card) {
-            Zone zone = Singletons.getModel().getGame().getZoneOf(card);
-            if (zone.is(ZoneType.Battlefield) && cardList.contains(card) && card.isUntapped()) {
-                // send in List<Card> for Typing
-                tapType.executePayment(null, card);
-                cardList.remove(card);
-
-                this.nTapped++;
-
-                if (this.nTapped == nCards) {
-                    this.done();
-                } else if (cardList.size() == 0) {
-                    // happen
-                    this.cancel();
-                } else {
-                    this.showMessage();
-                }
-            }
-        }
-    }
 
     private final boolean canTapSource;
 
@@ -214,9 +152,15 @@ public class CostTapType extends CostPartWithList {
                 c = AbilityUtils.calculateAmount(source, amount, ability);
             }
         }
-        InputPayment inp = new InputPayCostTapType(this, c, typeList);
+        
+        
+        InputSelectCards inp = new InputSelectCardsFromList(c, c, typeList);
+        inp.setMessage("Select a " + getDescription() + " to tap (%d left)");
         FThreads.setInputAndWait(inp);
-        return inp.isPaid();
+        if ( inp.hasCancelled() )
+            return false;
+
+        return executePayment(ability, inp.getSelected());
     }
 
     /* (non-Javadoc)

@@ -24,12 +24,13 @@ import com.google.common.collect.Iterables;
 
 import forge.Card;
 import forge.CardPredicates;
-import forge.Singletons;
+import forge.FThreads;
 import forge.card.ability.AbilityFactory;
 import forge.card.spellability.SpellAbility;
 import forge.game.GameAction;
 import forge.game.GameState;
 import forge.game.GameType;
+import forge.game.MatchController;
 import forge.game.ai.ComputerUtil;
 import forge.game.player.AIPlayer;
 import forge.game.player.Player;
@@ -52,22 +53,28 @@ import forge.view.ButtonUtil;
 public class InputMulligan extends InputBase {
     /** Constant <code>serialVersionUID=-8112954303001155622L</code>. */
     private static final long serialVersionUID = -8112954303001155622L;
-
+    
+    private final MatchController match;
+    
+    public InputMulligan(MatchController match0, Player humanPlayer) {
+        super(humanPlayer);
+        match = match0;
+    }
+    
     /** {@inheritDoc} */
     @Override
     public final void showMessage() {
         ButtonUtil.setButtonText("No", "Yes");
         ButtonUtil.enableAllFocusOk();
 
-        GameState game = Singletons.getModel().getGame();
+        GameState game = match.getCurrentGame();
         Player startingPlayer = game.getPhaseHandler().getPlayerTurn();
-        Player localPlayer = Singletons.getControl().getPlayer();
 
         StringBuilder sb = new StringBuilder();
         sb.append(startingPlayer.getName()).append(" is going first. ");
 
-        if (!startingPlayer.equals(localPlayer)) {
-            sb.append("You are going ").append(game.getOrdinalPosition(localPlayer, startingPlayer)).append(". ");
+        if (!startingPlayer.equals(player)) {
+            sb.append("You are going ").append(game.getOrdinalPosition(player, startingPlayer)).append(". ");
         }
 
         sb.append("Do you want to Mulligan?");
@@ -83,10 +90,9 @@ public class InputMulligan extends InputBase {
     /** {@inheritDoc} */
     @Override
     public final void selectButtonCancel() {
-        final Player humanPlayer = Singletons.getControl().getPlayer();
-        humanPlayer.doMulligan();
+        player.doMulligan();
 
-        if (humanPlayer.getCardsIn(ZoneType.Hand).isEmpty()) {
+        if (player.getCardsIn(ZoneType.Hand).isEmpty()) {
             this.end();
         } else {
             ButtonUtil.enableAllFocusOk();
@@ -94,9 +100,9 @@ public class InputMulligan extends InputBase {
     }
 
     final void end() {
-        GameState game = Singletons.getModel().getGame();
 
         // Computer mulligan
+        final GameState game = match.getCurrentGame();
         for (Player p : game.getPlayers()) {
             if (!(p instanceof AIPlayer)) {
                 continue;
@@ -173,17 +179,22 @@ public class InputMulligan extends InputBase {
         SDisplayUtil.showTab(nextField);
 
         game.setMulliganned(true);
-        Singletons.getModel().getMatch().getInput().clearInput();
+        FThreads.invokeInNewThread( new Runnable() {
+            @Override
+            public void run() {
+                match.getInput().clearInput();
+            }
+        });
     }
 
     @Override
     public void selectCard(Card c0) {
-        Zone z0 = Singletons.getModel().getGame().getZoneOf(c0);
+        Zone z0 = match.getCurrentGame().getZoneOf(c0);
         if (c0.getName().equals("Serum Powder") && z0.is(ZoneType.Hand)) {
             if (GuiDialog.confirm(c0, "Use " + c0.getName() + "'s ability?")) {
                 List<Card> hand = new ArrayList<Card>(c0.getController().getCardsIn(ZoneType.Hand));
                 for (Card c : hand) {
-                    Singletons.getModel().getGame().getAction().exile(c);
+                    match.getCurrentGame().getAction().exile(c);
                 }
                 c0.getController().drawCards(hand.size());
             }

@@ -29,13 +29,15 @@ public abstract class PlayerController {
     
     private PhaseType autoPassUntil = null;
 
-
     public PlayerController(GameState game0) {
         game = game0;
+
     }
+    
     public abstract Input getDefaultInput();
     public abstract Input getBlockInput();
     public abstract Input getCleanupInput();
+    public abstract Input getAutoPassPriorityInput();
 
 
     /**

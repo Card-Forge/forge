@@ -5,6 +5,7 @@ import java.util.List;
 
 import forge.Card;
 import forge.GameEntity;
+import forge.Singletons;
 import forge.view.ButtonUtil;
 
 public abstract class InputSelectManyBase<T extends GameEntity> extends InputSyncronizedBase implements InputSelectMany<T> {
@@ -23,6 +24,7 @@ public abstract class InputSelectManyBase<T extends GameEntity> extends InputSyn
 
 
     protected InputSelectManyBase(int min, int max) {
+        super(Singletons.getControl().getPlayer());
         selected = new ArrayList<T>();
         if (min > max) {
             throw new IllegalArgumentException("Min must not be greater than Max");

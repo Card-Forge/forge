@@ -26,7 +26,6 @@ import forge.FThreads;
 import forge.control.input.Input;
 import forge.game.GameState;
 import forge.game.MatchController;
-import forge.game.ai.AiInput;
 import forge.game.phase.PhaseHandler;
 import forge.game.player.Player;
 
@@ -50,35 +49,37 @@ public class InputProxy implements Observer {
     
     @Override
     public final synchronized void update(final Observable observable, final Object obj) {
-        this.input.set(null);
         final GameState game = match.getCurrentGame();
         final PhaseHandler ph = game.getPhaseHandler();
+        //System.out.printf("%s > InputProxy.update() =>%n", FThreads.debugGetCurrThreadId());
         
-        //System.out.print((FThreads.isEDT() ? "EDT > " : "TRD > ") + ph.debugPrintState());
         if ( match.getInput().isEmpty() && ph.hasPhaseEffects()) {
-            //System.out.println(" handle begin phase");
-            FThreads.invokeInNewThread(new Runnable() { 
-                @Override public void run() { 
+            Runnable rPhase = new Runnable() {
+                @Override
+                public void run() {
+                    //System.out.printf("\t%s > handle begin phase during %s%n", FThreads.debugGetCurrThreadId(), ph.debugPrintState());
                     ph.handleBeginPhase();
-                    update(observable, obj); 
-                } 
-            }, true);
+                    update(null, null); 
+                }
+            };
+            FThreads.invokeInNewThread(rPhase);
             return;
         }
         
         final Input nextInput = match.getInput().getActualInput(game);
-        //System.out.printf(" input is %s \t stack = %s%n", nextInput == null ? "null" : nextInput.getClass().getSimpleName(), match.getInput().printInputStack());
-        
-        if (nextInput != null) {
-            this.input.set(nextInput);
-            Runnable showMessage = new Runnable() { @Override public void run() { nextInput.showMessage(); } };
+        //System.out.printf("\tinput is %s during %s, \tstack = %s%n", nextInput == null ? "null" : nextInput.getClass().getSimpleName(), ph.debugPrintState(), match.getInput().printInputStack());
+
+        this.input.set(nextInput);
+        Runnable showMessage = new Runnable() {
+            @Override public void run() { 
+                //System.out.printf("%s > showMessage @ %s during %s%n", FThreads.debugGetCurrThreadId(), nextInput.getClass().getSimpleName(), ph.debugPrintState());
+                nextInput.showMessage(); 
+            }
+        };
 //            if( nextInput instanceof AiInput )
 //                FThreads.invokeInNewThread(showMessage, true);
 //            else
-                FThreads.invokeInEDT(showMessage);
-        } else if (!ph.isPlayerPriorityAllowed()) {
-            ph.getPriorityPlayer().getController().passPriority();
-        }
+        FThreads.invokeInEDT(showMessage);
     }
     /**
      * <p>

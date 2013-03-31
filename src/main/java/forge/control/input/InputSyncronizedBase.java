@@ -4,13 +4,15 @@ import java.util.concurrent.CountDownLatch;
 
 import forge.FThreads;
 import forge.error.BugReporter;
+import forge.game.player.Player;
 
 public abstract class InputSyncronizedBase extends InputBase implements InputSynchronized { 
     private static final long serialVersionUID = 8756177361251703052L;
     
     private final CountDownLatch cdlDone;
     
-    public InputSyncronizedBase() {
+    public InputSyncronizedBase(Player player) {
+        super(player);
         cdlDone = new CountDownLatch(1);
     }
     

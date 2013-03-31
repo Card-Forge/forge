@@ -12,7 +12,7 @@ import forge.view.ButtonUtil;
 public class InputPayManaOfCostPayment extends InputPayManaBase {
 
     public InputPayManaOfCostPayment(final GameState game, CostPartMana costMana, SpellAbility spellAbility, int toAdd) {
-        super(game, spellAbility);
+        super(spellAbility);
         manaCost = new ManaCostBeingPaid(costMana.getManaToPay());
         manaCost.increaseColorlessMana(toAdd);
     }
@@ -21,8 +21,8 @@ public class InputPayManaOfCostPayment extends InputPayManaBase {
     private int phyLifeToLose = 0;
 
     @Override
-    public void selectPlayer(final Player player) {
-        if (player == whoPays) {
+    public void selectPlayer(final Player selectedPlayer) {
+        if (player == selectedPlayer) {
             if (player.canPayLife(this.phyLifeToLose + 2) && manaCost.payPhyrexian()) {
                 this.phyLifeToLose += 2;
             }

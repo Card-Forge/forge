@@ -71,6 +71,7 @@ public class TargetSelection {
          * @param mandatory
          */
         public InputSelectTargets(TargetSelection select, List<Card> choices, ArrayList<Object> alreadyTargeted, boolean targeted, Target tgt, SpellAbility sa, boolean mandatory) {
+            super(sa.getActivatingPlayer());
             this.select = select;
             this.choices = choices;
             this.alreadyTargeted = alreadyTargeted;

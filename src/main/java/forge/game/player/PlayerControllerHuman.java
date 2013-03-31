@@ -16,6 +16,7 @@ import forge.FThreads;
 import forge.GameEntity;
 import forge.card.spellability.SpellAbility;
 import forge.control.input.Input;
+import forge.control.input.InputAutoPassPriority;
 import forge.control.input.InputBlock;
 import forge.control.input.InputCleanup;
 import forge.control.input.InputPassPriority;
@@ -45,8 +46,9 @@ public class PlayerControllerHuman extends PlayerController {
     private final Input defaultInput;
     private final Input blockInput;
     private final Input cleanupInput;
+    private final Input autoPassPriorityInput;
     private final HumanPlayer player;
-    
+
     public final Input getDefaultInput() {
         return defaultInput;
     }
@@ -55,9 +57,10 @@ public class PlayerControllerHuman extends PlayerController {
         super(game0);
         player = p;
         
-        defaultInput = new InputPassPriority();
+        defaultInput = new InputPassPriority(player);
         blockInput = new InputBlock(getPlayer());
-        cleanupInput = new InputCleanup(game);
+        cleanupInput = new InputCleanup(getPlayer());
+        autoPassPriorityInput = new InputAutoPassPriority(getPlayer());
     }
 
 	@Override
@@ -81,6 +84,11 @@ public class PlayerControllerHuman extends PlayerController {
     /** Input to use when player has to declare blockers */
     public Input getBlockInput() {
         return blockInput;
+    }
+
+    @Override
+    public Input getAutoPassPriorityInput() {
+        return autoPassPriorityInput;
     }
 
     /**

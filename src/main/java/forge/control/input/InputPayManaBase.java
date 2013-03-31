@@ -30,16 +30,15 @@ public abstract class InputPayManaBase extends InputSyncronizedBase implements I
 
     protected int phyLifeToLose = 0;
     
-    protected final Player whoPays;
     protected final GameState game;
     protected ManaCostBeingPaid manaCost;
     protected final SpellAbility saPaidFor;
     
     boolean bPaid = false;
     
-    protected InputPayManaBase(final GameState game, SpellAbility saToPayFor) {
-        this.game = game;
-        this.whoPays = saToPayFor.getActivatingPlayer();
+    protected InputPayManaBase(SpellAbility saToPayFor) {
+        super(saToPayFor.getActivatingPlayer());
+        this.game = player.getGame();
         this.saPaidFor = saToPayFor;
     }
     
@@ -115,7 +114,7 @@ public abstract class InputPayManaBase extends InputSyncronizedBase implements I
      * @return ManaCost the amount of mana remaining to be paid after the mana is activated
      */
     protected void useManaFromPool(String color, ManaCostBeingPaid manaCost) {
-        ManaPool mp = whoPays.getManaPool();
+        ManaPool mp = player.getManaPool();
     
         // Convert Color to short String
         String manaStr = "1";
@@ -144,7 +143,7 @@ public abstract class InputPayManaBase extends InputSyncronizedBase implements I
      */
     protected void activateManaAbility(final Card card, ManaCostBeingPaid manaCost) {
         // make sure computer's lands aren't selected
-        if (card.getController() != whoPays) {
+        if (card.getController() != player) {
             return;
         }
         
@@ -168,7 +167,7 @@ public abstract class InputPayManaBase extends InputSyncronizedBase implements I
         // you can't remove unneeded abilities inside a for(am:abilities) loop :(
     
         for (SpellAbility ma : card.getManaAbility()) {
-            ma.setActivatingPlayer(whoPays);
+            ma.setActivatingPlayer(player);
             AbilityManaPart m = null;
             SpellAbility tail = ma;
             while(m == null && tail != null)
@@ -303,11 +302,11 @@ public abstract class InputPayManaBase extends InputSyncronizedBase implements I
     
     public void onManaAbilityPlayed(final SpellAbility saPaymentSrc) { 
         if ( saPaymentSrc != null) // null comes when they've paid from pool
-            this.manaCost = whoPays.getManaPool().payManaFromAbility(saPaidFor, manaCost, saPaymentSrc);
+            this.manaCost = player.getManaPool().payManaFromAbility(saPaidFor, manaCost, saPaymentSrc);
 
         onManaAbilityPaid();
         if ( saPaymentSrc != null )
-            whoPays.getZone(ZoneType.Battlefield).updateObservers();
+            player.getZone(ZoneType.Battlefield).updateObservers();
     }
     
     protected final void checkIfAlredyPaid() {

@@ -1,5 +1,6 @@
 package forge.card.cost;
 
+import forge.Singletons;
 import forge.control.input.InputPayment;
 import forge.control.input.InputSyncronizedBase;
 
@@ -8,6 +9,14 @@ import forge.control.input.InputSyncronizedBase;
  *
  */
 abstract class InputPayCostBase extends InputSyncronizedBase implements InputPayment { 
+    /**
+     * TODO: Write javadoc for Constructor.
+     * @param player
+     */
+    public InputPayCostBase() {
+        super(Singletons.getControl().getPlayer());
+    }
+
     private static final long serialVersionUID = -2967434867139585579L;
     boolean bPaid = false;
     
