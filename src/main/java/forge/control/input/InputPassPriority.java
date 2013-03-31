@@ -75,7 +75,6 @@ public class InputPassPriority extends InputBase {
     /** {@inheritDoc} */
     @Override
     public final void selectButtonOK() {
-        ButtonUtil.disableAll();
         passPriority(); 
     }
 
