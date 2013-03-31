@@ -149,9 +149,9 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public String announceRequirements(SpellAbility ability, String announce) {
+    public Integer announceRequirements(SpellAbility ability, String announce, boolean allowZero) {
         // For now, these "announcements" are made within the AI classes of the appropriate SA effects
-        return null;
+        return null; // return incorrect value to indicate that
     }
 
     @Override

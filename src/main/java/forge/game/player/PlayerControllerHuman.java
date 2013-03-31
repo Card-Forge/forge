@@ -211,12 +211,11 @@ public class PlayerControllerHuman extends PlayerController {
      * @see forge.game.player.PlayerController#announceRequirements(java.lang.String)
      */
     @Override
-    public String announceRequirements(SpellAbility ability, String announce) {
-        StringBuilder sb = new StringBuilder(ability.getSourceCard().getName());
-        sb.append(" - How much will you announce for ");
-        sb.append(announce);
-        sb.append("?");
-        return JOptionPane.showInputDialog(sb.toString());
+    public Integer announceRequirements(SpellAbility ability, String announce, boolean canChooseZero) {
+        List<Integer> options = new ArrayList<Integer>();
+        for(int i = canChooseZero ? 0 : 1; i < 100; i++)
+            options.add(Integer.valueOf(i));
+        return GuiChoose.oneOrNone(String.format("%s - How much will you announce for %s?", ability.getSourceCard().getName(), announce), options);
     }
 
     /* (non-Javadoc)

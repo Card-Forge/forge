@@ -214,9 +214,9 @@ public class TargetSelection {
         }
     }
 
-    private Target target = null;
-    private SpellAbility ability = null;
-    private Card card = null;
+    private final Target target;
+    private final SpellAbility ability;
+
     private TargetSelection subSelection = null;
 
     /**
@@ -249,7 +249,7 @@ public class TargetSelection {
      * @return a {@link forge.Card} object.
      */
     public final Card getCard() {
-        return this.card;
+        return this.ability.getSourceCard();
     }
 
     private SpellAbilityRequirements req = null;
@@ -314,7 +314,6 @@ public class TargetSelection {
     public TargetSelection(final Target tgt, final SpellAbility sa) {
         this.target = tgt;
         this.ability = sa;
-        this.card = sa.getSourceCard();
     }
 
     /**
@@ -352,14 +351,14 @@ public class TargetSelection {
      */
     public final boolean chooseTargets() {
         // if not enough targets chosen, reset and cancel Ability
-        if (this.bCancel || (this.bTargetingDone && !this.target.isMinTargetsChosen(this.card, this.ability))) {
+        if (this.bCancel || (this.bTargetingDone && !this.target.isMinTargetsChosen(this.getCard(), this.ability))) {
             this.bCancel = true;
             return false;
         } 
 
         if (!this.doesTarget() 
-                || this.bTargetingDone && this.target.isMinTargetsChosen(this.card, this.ability)
-                || this.target.isMaxTargetsChosen(this.card, this.ability)
+                || this.bTargetingDone && this.target.isMinTargetsChosen(this.getCard(), this.ability)
+                || this.target.isMaxTargetsChosen(this.getCard(), this.ability)
                 || this.target.isDividedAsYouChoose() && this.target.getStillToDivide() == 0) {
             final AbilitySub abSub = this.ability.getSubAbility();
 
@@ -375,7 +374,7 @@ public class TargetSelection {
             }
         }
 
-        if (!this.target.hasCandidates(this.ability, true) && !this.target.isMinTargetsChosen(this.card, this.ability)) {
+        if (!this.target.hasCandidates(this.ability, true) && !this.target.isMinTargetsChosen(this.getCard(), this.ability)) {
             // Cancel ability if there aren't any valid Candidates
             this.bCancel = true;
             return false;
@@ -505,7 +504,7 @@ public class TargetSelection {
         }
         // If the cards must have a specific controller
         if (tgt.getDefinedController() != null) {
-            List<Player> pl = AbilityUtils.getDefinedPlayers(card, tgt.getDefinedController(), this.ability);
+            List<Player> pl = AbilityUtils.getDefinedPlayers(getCard(), tgt.getDefinedController(), this.ability);
             if (pl != null && !pl.isEmpty()) {
                 Player controller = pl.get(0);
                 choices = CardLists.filterControlledBy(choices, controller);

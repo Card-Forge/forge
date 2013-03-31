@@ -221,11 +221,17 @@ public class CostPartMana extends CostPart {
                 return false;
         } 
         if (this.getAmountOfX() > 0) {
-            source.setXManaCostPaid(0);
-            InputPayment inpPayment = new InputPayManaX(ability, this.getAmountOfX(), this.canXbe0());
-            FThreads.setInputAndWait(inpPayment);
-            if(!inpPayment.isPaid())
-                return false;
+            if( !"X".equals(ability.getParam("Announce")) ) {
+                source.setXManaCostPaid(0);
+                InputPayment inpPayment = new InputPayManaX(ability, this.getAmountOfX(), this.canXbe0());
+                FThreads.setInputAndWait(inpPayment);
+                if(!inpPayment.isPaid())
+                    return false;
+            } else {
+                String xVar = ability.getSVar("X");
+                String xVal = xVar.split("\\$")[1];
+                source.setXManaCostPaid(Integer.parseInt(xVal));
+            }
         }
         return true;
 

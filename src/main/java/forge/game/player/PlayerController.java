@@ -94,7 +94,7 @@ public abstract class PlayerController {
 
     public abstract Map<Card, Integer> assignCombatDamage(Card attacker, List<Card> blockers, int damageDealt, GameEntity defender);
 
-    public abstract String announceRequirements(SpellAbility ability, String announce);
+    public abstract Integer announceRequirements(SpellAbility ability, String announce, boolean allowZero);
 
     public abstract List<Card> choosePermanentsToSacrifice(List<Card> validTargets, int amount, SpellAbility sa, boolean destroy, boolean isOptional);
 

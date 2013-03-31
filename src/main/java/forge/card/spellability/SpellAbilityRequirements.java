@@ -165,15 +165,11 @@ public class SpellAbilityRequirements {
         String announce = ability.getParam("Announce");
         if (announce != null) {
             for(String aVar : announce.split(",")) {
-                String value = ability.getActivatingPlayer().getController().announceRequirements(ability, aVar);
-                 if (value == null || !StringUtils.isNumeric(value)) { 
-                     return false;
-                 } else if (ability.getPayCosts().getCostMana() != null && !ability.getPayCosts().getCostMana().canXbe0() 
-                         && Integer.parseInt(value) == 0) {
-                     return false;
-                 }
-                 ability.setSVar(aVar, "Number$" + value);
-                 ability.getSourceCard().setSVar(aVar, "Number$" + value);
+                Integer value = ability.getActivatingPlayer().getController().announceRequirements(ability, aVar, ability.getPayCosts().getCostMana().canXbe0());
+                if ( null == value )
+                    return false;
+                ability.setSVar(aVar, "Number$" + value);
+                ability.getSourceCard().setSVar(aVar, "Number$" + value);
             }
         }
         return true;
