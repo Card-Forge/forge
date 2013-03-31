@@ -402,6 +402,7 @@ public final class GameActionUtil {
      * @param sourceAbility TODO
      */
     public static boolean payCostDuringAbilityResolve(final Player p, final SpellAbility ability, final Cost cost, SpellAbility sourceAbility, final GameState game) {
+        // Only human player pays this way
         final Card source = ability.getSourceCard();
         final List<CostPart> parts =  cost.getCostParts();
         ArrayList<CostPart> remainingParts =  new ArrayList<CostPart>(cost.getCostParts());
@@ -502,98 +503,39 @@ public final class GameActionUtil {
             }
 
             else if (part instanceof CostSacrifice) {
-                CostSacrifice sacCost = (CostSacrifice) part;
-                String valid = sacCost.getType();
-                int amount = Integer.parseInt(sacCost.getAmount());
-                List<Card> list = AbilityUtils.filterListByType(p.getCardsIn(ZoneType.Battlefield), valid, ability);
-
-                if (list.size() < amount) {
-                    // unable to pay (not enough cards)
-                    return false;
-                }
-
-                GuiUtils.clearPanelSelections();
-                GuiUtils.setPanelSelection(source);
-
-                List<Card> toSac = p.getController().choosePermanentsToSacrifice(list, amount, ability, false, true);
-                if ( toSac.size() != amount )
-                    return false;
-
-                CostPartWithList cpl = (CostPartWithList)part;
-                for(Card c : toSac) {
-                    cpl.executePayment(sourceAbility, c);
-                }
-                cpl.reportPaidCardsTo(sourceAbility);
+                int amount = Integer.parseInt(((CostSacrifice)part).getAmount());
+                List<Card> list = CardLists.getValidCards(p.getCardsIn(ZoneType.Battlefield), part.getType().split(";"), p, source);
+                boolean hasPaid = payCostPart(sourceAbility, (CostPartWithList)part, amount, list, "sacrifice");
+                if(!hasPaid) return false;
             }
             
             else if (part instanceof CostReturn) {
-                List<Card> choiceList = CardLists.getValidCards(p.getCardsIn(ZoneType.Battlefield), part.getType().split(";"), p, source);
+                List<Card> list = CardLists.getValidCards(p.getCardsIn(ZoneType.Battlefield), part.getType().split(";"), p, source);
                 int amount = getAmountFromPartX(part, source, sourceAbility);
-                
-                InputSelectCards inp = new InputSelectCardsFromList(amount, amount, choiceList);
-                inp.setMessage("Select %d card(s) to return to hand");
-                inp.setCancelAllowed(true);
-                
-                FThreads.setInputAndWait(inp);
-                if( inp.hasCancelled() || inp.getSelected().size() != amount)
-                    return false;
-
-                CostPartWithList cpl = (CostPartWithList)part;
-                for(Card c : inp.getSelected()) {
-                    cpl.executePayment(sourceAbility, c);
-                }
-                cpl.reportPaidCardsTo(sourceAbility);
+                boolean hasPaid = payCostPart(sourceAbility, (CostPartWithList)part, amount, list, "return to hand");
+                if(!hasPaid) return false;
             }
 
             else if (part instanceof CostDiscard) {
-                List<Card> choiceList = CardLists.getValidCards(p.getCardsIn(ZoneType.Hand), part.getType().split(";"), p, source);
+                List<Card> list = CardLists.getValidCards(p.getCardsIn(ZoneType.Hand), part.getType().split(";"), p, source);
                 int amount = getAmountFromPartX(part, source, sourceAbility);
-
-                InputSelectCards inp = new InputSelectCardsFromList(amount, amount, choiceList);
-                inp.setMessage("Select %d card(s) to discard");
-                inp.setCancelAllowed(true);
-                
-                FThreads.setInputAndWait(inp);
-                if( inp.hasCancelled() || inp.getSelected().size() != amount)
-                    return false;
-
-                CostPartWithList cpl = (CostPartWithList)part;
-                for(Card c : inp.getSelected()) {
-                    cpl.executePayment(sourceAbility, c);
-                }
-                cpl.reportPaidCardsTo(sourceAbility);
+                boolean hasPaid = payCostPart(sourceAbility, (CostPartWithList)part, amount, list, "discard");
+                if(!hasPaid) return false;
             }
             
             else if (part instanceof CostTapType) {
-                List<Card> choiceList = CardLists.getValidCards(p.getCardsIn(ZoneType.Battlefield), part.getType().split(";"), p, source);
-                choiceList = CardLists.filter(choiceList, Presets.UNTAPPED);
+                List<Card> list = CardLists.getValidCards(p.getCardsIn(ZoneType.Battlefield), part.getType().split(";"), p, source);
+                list = CardLists.filter(list, Presets.UNTAPPED);
                 int amount = getAmountFromPartX(part, source, sourceAbility);
-                
-                if (choiceList.size() < amount) {
-                    // unable to pay (not enough cards)
-                    return false;
-                }
-
-                InputSelectCards inp = new InputSelectCardsFromList(amount, amount, choiceList);
-                inp.setMessage("Select %d card(s) to tap");
-                inp.setCancelAllowed(true);
-                
-                FThreads.setInputAndWait(inp);
-                if (inp.hasCancelled() || inp.getSelected().size() != amount)
-                    return false;
-
-                CostPartWithList cpl = (CostPartWithList)part;
-                for (Card c : inp.getSelected()) {
-                    cpl.executePayment(sourceAbility, c);
-                }
-                cpl.reportPaidCardsTo(sourceAbility);
+                boolean hasPaid = payCostPart(sourceAbility, (CostPartWithList)part, amount, list, "tap");
+                if(!hasPaid) return false;
             }
             
             else if (part instanceof CostPartMana ) {
                 if (!((CostPartMana) part).getManaToPay().equals("0")) // non-zero costs require input
                     mayRemovePart = false; 
             } else
-                throw new RuntimeException("GameActionUtil.payCostDuringAbilityResolve - An unhandled type of cost has ocurred: " + part.getClass());
+                throw new RuntimeException("GameActionUtil.payCostDuringAbilityResolve - An unhandled type of cost was met: " + part.getClass());
 
             if( mayRemovePart )
                 remainingParts.remove(part);
@@ -614,6 +556,24 @@ public final class GameActionUtil {
         InputPayment toSet = new InputPayManaExecuteCommands(p, source + "\r\n", ability.getManaCost());
         FThreads.setInputAndWait(toSet);
         return toSet.isPaid();
+    }
+
+    private static boolean payCostPart(SpellAbility sourceAbility, CostPartWithList cpl, int amount, List<Card> list, String actionName) {
+        if (list.size() < amount) return false;                     // unable to pay (not enough cards)
+
+        InputSelectCards inp = new InputSelectCardsFromList(amount, amount, list);
+        inp.setMessage("Select %d " + cpl.getDescriptiveType() + " card(s) to " + actionName);
+        inp.setCancelAllowed(true);
+        
+        FThreads.setInputAndWait(inp);
+        if( inp.hasCancelled() || inp.getSelected().size() != amount)
+            return false;
+
+        for(Card c : inp.getSelected()) {
+            cpl.executePayment(sourceAbility, c);
+        }
+        cpl.reportPaidCardsTo(sourceAbility);
+        return true;
     }
 
     // not restricted to combat damage, not restricted to dealing damage to
