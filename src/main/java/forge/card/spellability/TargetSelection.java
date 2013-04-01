@@ -106,7 +106,7 @@ public class TargetSelection {
 
     public final boolean chooseTargets() {
         Target tgt = getTgt();
-        final boolean canTarget = doesTarget();
+        final boolean canTarget = tgt == null ? false : doesTarget();
         final int minTargets = canTarget ? tgt.getMinTargets(getCard(), ability) : 0;
         final int maxTargets = canTarget ? tgt.getMaxTargets(getCard(), ability) : 0;
         final int numTargeted = canTarget ? tgt.getNumTargeted() : 0;
