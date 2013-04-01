@@ -608,62 +608,6 @@ public class CardFactoryCreatures {
         card.addSpellAbility(discard);
     }
 
-    private static void getCard_DuctCrawler(final Card card, final String cardName) {
-        final String theCost;
-        if (cardName.equals("Duct Crawler")) {
-            theCost = "1 R";
-        } else if (cardName.equals("Shrewd Hatchling")) {
-            theCost = "UR";
-        } else { // if (cardName.equals("Spin Engine") ||
-                 // cardName.equals("Screeching Griffin")) {
-            theCost = "R";
-        }
-
-        class DuctCrawlerAbility extends AbilityActivated {
-            private static final long serialVersionUID = 7914250202245863157L;
-
-            public DuctCrawlerAbility(final Card ca, final Cost co, Target t) {
-                super(ca, co, t);
-            }
-
-            @Override
-            public AbilityActivated getCopy() {
-                return new DuctCrawlerAbility(getSourceCard(),
-                        getPayCosts(), new Target(getTarget()));
-            }
-
-            @Override
-            public void resolve() {
-                final StringBuilder keywordBuilder = new StringBuilder("HIDDEN CARDNAME can't block ");
-                keywordBuilder.append(this.getSourceCard().toString());
-
-                final StringBuilder abilityBuilder = new StringBuilder("AB$Pump | Cost$ ");
-                abilityBuilder.append(theCost);
-                abilityBuilder.append(" | ValidTgts$ Creature | TgtPrompt$ Select target creature | IsCurse$ True | KW$ ");
-                abilityBuilder.append(keywordBuilder.toString());
-                abilityBuilder.append(" | SpellDescription$ Target creature can't block CARDNAME this turn.");
-                final SpellAbility myAb = AbilityFactory.getAbility(abilityBuilder.toString(), card);
-
-                myAb.getTarget().setTargetChoices(this.getChosenTarget().getTargetChoices());
-                myAb.resolve();
-            }
-
-            @Override
-            public String getStackDescription() {
-                return this.getSourceCard().toString() + " - Target creature can't block "
-                        + this.getSourceCard().getName() + " this turn.";
-            }
-
-            @Override
-            public String getDescription() {
-                return theCost + ": Target creature can't block CARDNAME this turn.";
-            }
-        }
-        final SpellAbility finalAb = new DuctCrawlerAbility(card, new Cost(card, theCost, true), new Target(card,
-                "Select target creature.", "Creature"));
-
-        card.addSpellAbility(finalAb);
-    }
 
 //    // This is a hardcoded card template
 //
@@ -688,9 +632,6 @@ public class CardFactoryCreatures {
             getCard_PhyrexianDreadnought(card, cardName);
         } else if (cardName.equals("Nebuchadnezzar")) {
             getCard_Nebuchadnezzar(card, cardName);
-        } else if (cardName.equals("Duct Crawler") || cardName.equals("Shrewd Hatchling")
-                || cardName.equals("Spin Engine") || cardName.equals("Screeching Griffin")) {
-            getCard_DuctCrawler(card, cardName);
         }
 
         // ***************************************************
