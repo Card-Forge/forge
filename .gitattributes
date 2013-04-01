@@ -13847,6 +13847,7 @@ src/main/java/forge/control/input/InputSelectCards.java -text
 src/main/java/forge/control/input/InputSelectCardsFromList.java -text
 src/main/java/forge/control/input/InputSelectMany.java -text
 src/main/java/forge/control/input/InputSelectManyBase.java -text
+src/main/java/forge/control/input/InputSelectTargets.java -text
 src/main/java/forge/control/input/InputSynchronized.java -text
 src/main/java/forge/control/input/InputSyncronizedBase.java -text
 src/main/java/forge/control/input/package-info.java svneol=native#text/plain

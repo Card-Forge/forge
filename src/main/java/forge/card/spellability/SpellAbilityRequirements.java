@@ -39,24 +39,15 @@ import forge.game.zone.Zone;
  */
 public class SpellAbilityRequirements {
     private final SpellAbility ability;
-    private final TargetChooser select;
     private final CostPayment payment;
-    private boolean isFree;
-    private boolean skipStack = false;
-    private boolean isAlreadyTargeted = false;
-
-    public void setAlreadyTargeted() { isAlreadyTargeted  = true; }
-    public final void setSkipStack() { this.skipStack = true; }
-    public void setFree() { this.isFree = true; } 
 
     public SpellAbilityRequirements(final SpellAbility sa, final CostPayment cp) {
         this.ability = sa;
-        this.select = new TargetChooser(sa);
         this.payment = cp;
     }
 
 
-    public final void fillRequirements() {
+    public final void fillRequirements(boolean isAlreadyTargeted, boolean isFree, boolean skipStack) {
         final GameState game = Singletons.getModel().getGame();
 
         // used to rollback
@@ -75,26 +66,26 @@ public class SpellAbilityRequirements {
 
         // Announce things like how many times you want to Multikick or the value of X
         if (!this.announceRequirements()) {
-            this.select.setCancel(true);
-            rollbackAbility(fromZone, zonePosition);
+            rollbackAbility(fromZone, zonePosition, null);
             return;
         }
 
+        final TargetChooser select = new TargetChooser(ability);
         // Skip to paying if parent ability doesn't target and has no
         // subAbilities.
         // (or trigger case where its already targeted)
-        boolean acceptsTargets = this.select.doesTarget() || this.ability.getSubAbility() != null;
+        boolean acceptsTargets = select.doesTarget() || this.ability.getSubAbility() != null;
         if (!isAlreadyTargeted && acceptsTargets) {
-            this.select.clearTargets();
-            this.select.chooseTargets();
-            if (this.select.isCanceled()) {
-                rollbackAbility(fromZone, zonePosition);
+            select.clearTargets();
+            select.chooseTargets();
+            if (select.isCanceled()) {
+                rollbackAbility(fromZone, zonePosition, select);
                 return;
             }
         }
         
         // Payment
-        boolean paymentMade = this.isFree;
+        boolean paymentMade = isFree;
         
         if (!paymentMade) {
             this.payment.changeCost();
@@ -102,12 +93,12 @@ public class SpellAbilityRequirements {
         } 
     
         if (!paymentMade) {
-            rollbackAbility(fromZone, zonePosition);
+            rollbackAbility(fromZone, zonePosition, select);
             return;
         }
         
-        else if (this.isFree || this.payment.isFullyPaid()) {
-            if (this.skipStack) {
+        else if (isFree || this.payment.isFullyPaid()) {
+            if (skipStack) {
                 AbilityUtils.resolve(this.ability, false);
             } else {
 
@@ -116,13 +107,13 @@ public class SpellAbilityRequirements {
                 game.getStack().addAndUnfreeze(this.ability);
             }
     
-            // Warning about this - resolution may come in another thread, and it would still need its targets
-            this.select.clearTargets();
+            // no worries here. The same thread must resolve, and by this moment ability will have been resolved already
+            select.clearTargets();
             game.getAction().checkStateEffects();
         }
     }
 
-    private void rollbackAbility(Zone fromZone, int zonePosition) { 
+    private void rollbackAbility(Zone fromZone, int zonePosition, TargetChooser select) { 
         // cancel ability during target choosing
         final Card c = this.ability.getSourceCard();
 
@@ -136,8 +127,8 @@ public class SpellAbilityRequirements {
             Singletons.getModel().getGame().getAction().moveTo(fromZone, c, zonePosition >= 0 ? Integer.valueOf(zonePosition) : null);
         }
 
-        if (this.select != null) {
-            this.select.clearTargets();
+        if (select != null) {
+            select.clearTargets();
         }
 
         this.ability.resetOnceResolved();
@@ -147,7 +138,7 @@ public class SpellAbilityRequirements {
     }
     
 
-    public boolean announceRequirements() {
+    private boolean announceRequirements() {
         // Announcing Requirements like Choosing X or Multikicker
         // SA Params as comma delimited list
         String announce = ability.getParam("Announce");

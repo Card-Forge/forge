@@ -66,7 +66,9 @@ public class GameActionPlay {
     public final void playSpellAbilityWithoutPayingManaCost(final SpellAbility sa) {
         FThreads.checkEDT("GameActionPlay.playSpellAbilityWithoutPayingManaCost", false);
         final Card source = sa.getSourceCard();
-        setSplitCardState(source, sa); // Split card support
+        
+        if( source.isSplitCard())
+            setSplitCardState(source, sa);
 
         if (sa.getPayCosts() != null) {
             if (sa.getApi() == ApiType.Charm && !sa.isWrapper()) {
@@ -75,8 +77,7 @@ public class GameActionPlay {
             final CostPayment payment = new CostPayment(sa.getPayCosts(), sa);
 
             final SpellAbilityRequirements req = new SpellAbilityRequirements(sa, payment);
-            req.setFree();
-            req.fillRequirements();
+            req.fillRequirements(false, true, false);
         } else {
             if (sa.isSpell()) {
                 final Card c = sa.getSourceCard();
@@ -356,8 +357,8 @@ public class GameActionPlay {
 
         final Card source = sa.getSourceCard();
         
-        // Split card support
-        setSplitCardState(source, sa);
+        if(source.isSplitCard())
+            setSplitCardState(source, sa);
 
         if (sa.getApi() == ApiType.Charm && !sa.isWrapper()) {
             CharmEffect.makeChoices(sa);
@@ -389,7 +390,7 @@ public class GameActionPlay {
             }
 
             final SpellAbilityRequirements req = new SpellAbilityRequirements(sa, payment);
-            req.fillRequirements();
+            req.fillRequirements(false, false, false);
         } else {
             ManaCostBeingPaid manaCost = new ManaCostBeingPaid(sa.getManaCost());
             if (sa.getSourceCard().isCopiedSpell() && sa.isSpell()) {
@@ -437,10 +438,8 @@ public class GameActionPlay {
             }
 
             final SpellAbilityRequirements req = new SpellAbilityRequirements(sa, payment);
-            if( useOldTargets )
-                req.setAlreadyTargeted();
-            req.setSkipStack();
-            req.fillRequirements();
+            
+            req.fillRequirements(useOldTargets, false, true);
         } else {
             ManaCostBeingPaid manaCost = new ManaCostBeingPaid(sa.getManaCost());
             if (sa.getSourceCard().isCopiedSpell() && sa.isSpell()) {
@@ -492,21 +491,20 @@ public class GameActionPlay {
 
     private void setSplitCardState(final Card source, SpellAbility sa) {
         // Split card support
-        if (source.isSplitCard()) {
-            List<SpellAbility> leftSplitAbilities = source.getState(CardCharacteristicName.LeftSplit).getSpellAbility();
-            List<SpellAbility> rightSplitAbilities = source.getState(CardCharacteristicName.RightSplit).getSpellAbility();
-            for (SpellAbility a : leftSplitAbilities) {
-                if (sa == a || sa.getDescription().equals(String.format("%s (without paying its mana cost)", a.getDescription()))) {
-                    source.setState(CardCharacteristicName.LeftSplit);
-                    break;
-                }
-            }
-            for (SpellAbility a : rightSplitAbilities) {
-                if (sa == a || sa.getDescription().equals(String.format("%s (without paying its mana cost)", a.getDescription()))) {
-                    source.setState(CardCharacteristicName.RightSplit);
-                    break;
-                }
+        List<SpellAbility> leftSplitAbilities = source.getState(CardCharacteristicName.LeftSplit).getSpellAbility();
+        List<SpellAbility> rightSplitAbilities = source.getState(CardCharacteristicName.RightSplit).getSpellAbility();
+        for (SpellAbility a : leftSplitAbilities) {
+            if (sa == a || sa.getDescription().equals(String.format("%s (without paying its mana cost)", a.getDescription()))) {
+                source.setState(CardCharacteristicName.LeftSplit);
+                return;
             }
         }
+        for (SpellAbility a : rightSplitAbilities) {
+            if (sa == a || sa.getDescription().equals(String.format("%s (without paying its mana cost)", a.getDescription()))) {
+                source.setState(CardCharacteristicName.RightSplit);
+                return;
+            }
+        }
+        throw new RuntimeException("Not found which part to choose for ability " + sa + " from card " + source);
     }
 }
