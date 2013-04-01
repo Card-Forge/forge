@@ -83,7 +83,7 @@ public class CostUntapType extends CostPartWithList {
 
         sb.append(Cost.convertAmountTypeToWords(i, this.getAmount(), " tapped " + desc));
 
-        if (this.getType().contains("YouDontCtrl")) {
+        if (this.getType().contains("OppCtrl")) {
             sb.append(" an opponent controls");
         } else if (this.getType().contains("YouCtrl")) {
             sb.append(" you control");
