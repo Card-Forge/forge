@@ -171,18 +171,8 @@ public class Zone extends MyObservable implements IZone, Observer, java.io.Seria
         return this.cardList.contains(c);
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see forge.IPlayerZone#getPosition(forge.Card)
-     */
-    @Override
-    public final Integer getPosition(final Card c) {
-        int index = this.cardList.indexOf(c);
-        if (index == -1) {
-            return null;
-        }
-        return index;
+    public final int getPosition(final Card c) {
+        return this.cardList.indexOf(c);
     }
 
     /**

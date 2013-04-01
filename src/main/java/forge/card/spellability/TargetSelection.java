@@ -344,68 +344,33 @@ public class TargetSelection {
     private final void chooseCardFromStack(final boolean mandatory) {
         final Target tgt = this.getTgt();
         final String message = tgt.getVTSelection();
-        final String doneDummy = "[FINISH TARGETING]";
-
         // Find what's targetable, then allow human to choose
-        final ArrayList<SpellAbility> choosables = getTargetableOnStack();
-
-        final HashMap<String, SpellAbility> map = new HashMap<String, SpellAbility>();
-
-        for (final SpellAbility sa : choosables) {
-            if (!tgt.getTargetSAs().contains(sa)) {
-                map.put(choosables.indexOf(sa) + ". " + sa.getStackDescription(), sa);
-            }
-        }
-
-        if (tgt.isMinTargetsChosen(this.ability.getSourceCard(), this.ability)) {
-            map.put(doneDummy, null);
-        }
-
-
-        if (map.isEmpty()) {
-            setCancel(true);
-        } else {
-            final String madeChoice = GuiChoose.oneOrNone(message, map.keySet());
-            if (madeChoice != null) {
-                if (madeChoice.equals(doneDummy)) {
-                    bTargetingDone = true;
-                } else {
-                    tgt.addTarget(map.get(madeChoice));
-                }
-            } else {
-                setCancel(true);
-            }
-        }
-    }
-
-    // TODO The following three functions are Utility functions for
-    // TargetOnStack, probably should be moved
-    // The following should be select.getTargetableOnStack()
-    /**
-     * <p>
-     * getTargetableOnStack.
-     * </p>
-     * 
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @param tgt
-     *            a {@link forge.card.spellability.Target} object.
-     * @return a {@link java.util.ArrayList} object.
-     */
-    private ArrayList<SpellAbility> getTargetableOnStack() {
-        final ArrayList<SpellAbility> choosables = new ArrayList<SpellAbility>();
+        final List<Object> selectOptions = new ArrayList<Object>();
 
         final GameState game = ability.getActivatingPlayer().getGame();
         for (int i = 0; i < game.getStack().size(); i++) {
-            choosables.add(game.getStack().peekAbility(i));
+            SpellAbility stackItem = game.getStack().peekAbility(i); 
+            if( ability.canTargetSpellAbility(stackItem))
+                selectOptions.add(stackItem);
+        }
+        
+        if (tgt.isMinTargetsChosen(this.ability.getSourceCard(), this.ability)) {
+            selectOptions.add("[FINISH TARGETING]");
         }
 
-        for (int i = 0; i < choosables.size(); i++) {
-            if (!ability.canTargetSpellAbility(choosables.get(i))) {
-                choosables.remove(i);
+        if (selectOptions.isEmpty()) {
+            setCancel(true);
+        } else {
+            final Object madeChoice = GuiChoose.oneOrNone(message, selectOptions);
+            if (madeChoice == null) {
+                setCancel(true);
+                return;
             }
+            if (madeChoice instanceof SpellAbility) {
+                tgt.addTarget(madeChoice);
+            } else // only 'FINISH TARGETING' remains 
+                bTargetingDone = true;
         }
-        return choosables;
     }
 
     /**
