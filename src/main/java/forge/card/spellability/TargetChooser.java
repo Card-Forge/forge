@@ -158,25 +158,7 @@ public class TargetChooser {
         return chooseTargets();
     }
 
-    /**
-     * Gets the unique targets.
-     * 
-     * @param ability
-     *            the ability
-     * @return the unique targets
-     */
-    public static final ArrayList<Object> getUniqueTargets(final SpellAbility ability) {
-        final ArrayList<Object> targets = new ArrayList<Object>();
-        SpellAbility child = ability;
-        while (child instanceof AbilitySub) {
-            child = ((AbilitySub) child).getParent();
-            if (child != null && child.getTarget() != null) {
-                targets.addAll(child.getTarget().getTargets());
-            }
-        }
-
-        return targets;
-    }
+    
 
     // these have been copied over from CardFactoryUtil as they need two extra
     // parameters for target selection.
@@ -204,7 +186,7 @@ public class TargetChooser {
                 choices.remove(tgt.getSourceCard());
             }
         }
-        ArrayList<Object> objects = getUniqueTargets(this.ability);
+        ArrayList<Object> objects = this.ability.getUniqueTargets();
 
         if (tgt.isUniqueTargets()) {
             for (final Object o : objects) {
@@ -419,7 +401,7 @@ public class TargetChooser {
         }
 
         for (int i = 0; i < choosables.size(); i++) {
-            if (!TargetChooser.matchSpellAbility(ability, choosables.get(i), getTgt())) {
+            if (!ability.canTargetSpellAbility(choosables.get(i))) {
                 choosables.remove(i);
             }
         }
@@ -439,70 +421,4 @@ public class TargetChooser {
      *            a {@link forge.card.spellability.Target} object.
      * @return a boolean.
      */
-    public static boolean matchSpellAbility(final SpellAbility sa, final SpellAbility topSA, final Target tgt) {
-        final String saType = tgt.getTargetSpellAbilityType();
-
-        if (null == saType) {
-            // just take this to mean no restrictions - carry on.
-        } else if (topSA instanceof Spell) {
-            if (!saType.contains("Spell")) {
-                return false;
-            }
-        } else if (topSA.isTrigger()) {
-            if (!saType.contains("Triggered")) {
-                return false;
-            }
-        } else if (topSA instanceof AbilityActivated) {
-            if (!saType.contains("Activated")) {
-                return false;
-            }
-        } else {
-            return false; //Static ability? Whatever.
-        }
-
-        final String splitTargetRestrictions = tgt.getSAValidTargeting();
-        if (splitTargetRestrictions != null) {
-            // TODO What about spells with SubAbilities with Targets?
-
-            final Target matchTgt = topSA.getTarget();
-
-            if (matchTgt == null) {
-                return false;
-            }
-
-            boolean result = false;
-
-            for (final Object o : matchTgt.getTargets()) {
-                if (TargetChooser.matchesValid(o, splitTargetRestrictions.split(","), sa)) {
-                    result = true;
-                    break;
-                }
-            }
-
-            if (!result) {
-                return false;
-            }
-        }
-
-        return topSA.getSourceCard().isValid(tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getSourceCard());
-    }
-
-
-    private static boolean matchesValid(final Object o, final String[] valids, final SpellAbility sa) {
-        final Card srcCard = sa.getSourceCard();
-        final Player activatingPlayer = sa.getActivatingPlayer();
-        if (o instanceof Card) {
-            final Card c = (Card) o;
-            return c.isValid(valids, activatingPlayer, srcCard);
-        }
-
-        if (o instanceof Player) {
-            Player p = (Player) o;
-            if (p.isValid(valids, sa.getActivatingPlayer(), sa.getSourceCard())) {
-                return true;
-            }
-        }
-
-        return false;
-    }
 }

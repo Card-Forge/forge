@@ -1313,7 +1313,7 @@ public abstract class SpellAbility implements ISpellAbility {
             return false;
         }
         if (entity.isValid(this.getTarget().getValidTgts(), this.getActivatingPlayer(), this.getSourceCard())
-                && (!this.getTarget().isUniqueTargets() || !TargetChooser.getUniqueTargets(this).contains(entity))
+                && (!this.getTarget().isUniqueTargets() || !this.getUniqueTargets().contains(entity))
                 && entity.canBeTargetedBy(this)) {
             return true;
         }
@@ -1679,4 +1679,92 @@ public abstract class SpellAbility implements ISpellAbility {
     public void setCopied(boolean isCopied0) {
         this.isCopied = isCopied0; 
     }
+
+    /**
+     * Gets the unique targets.
+     * 
+     * @param ability
+     *            the ability
+     * @return the unique targets
+     */
+    public final ArrayList<Object> getUniqueTargets() {
+        final ArrayList<Object> targets = new ArrayList<Object>();
+        SpellAbility child = this;
+        while (child instanceof AbilitySub) {
+            child = ((AbilitySub) child).getParent();
+            if (child != null && child.getTarget() != null) {
+                targets.addAll(child.getTarget().getTargets());
+            }
+        }
+    
+        return targets;
+    }
+    
+    public boolean canTargetSpellAbility(final SpellAbility topSA) {
+        final Target tgt = this.getTarget();
+        final String saType = tgt.getTargetSpellAbilityType();
+
+        if (null == saType) {
+            // just take this to mean no restrictions - carry on.
+        } else if (topSA instanceof Spell) {
+            if (!saType.contains("Spell")) {
+                return false;
+            }
+        } else if (topSA.isTrigger()) {
+            if (!saType.contains("Triggered")) {
+                return false;
+            }
+        } else if (topSA instanceof AbilityActivated) {
+            if (!saType.contains("Activated")) {
+                return false;
+            }
+        } else {
+            return false; //Static ability? Whatever.
+        }
+
+        final String splitTargetRestrictions = tgt.getSAValidTargeting();
+        if (splitTargetRestrictions != null) {
+            // TODO What about spells with SubAbilities with Targets?
+
+            final Target matchTgt = topSA.getTarget();
+
+            if (matchTgt == null) {
+                return false;
+            }
+
+            boolean result = false;
+
+            for (final Object o : matchTgt.getTargets()) {
+                if (matchesValid(o, splitTargetRestrictions.split(","))) {
+                    result = true;
+                    break;
+                }
+            }
+
+            if (!result) {
+                return false;
+            }
+        }
+
+        return topSA.getSourceCard().isValid(tgt.getValidTgts(), this.getActivatingPlayer(), this.getSourceCard());
+    }
+
+
+    private boolean matchesValid(final Object o, final String[] valids) {
+        final Card srcCard = this.getSourceCard();
+        final Player activatingPlayer = this.getActivatingPlayer();
+        if (o instanceof Card) {
+            final Card c = (Card) o;
+            return c.isValid(valids, activatingPlayer, srcCard);
+        }
+
+        if (o instanceof Player) {
+            Player p = (Player) o;
+            if (p.isValid(valids, activatingPlayer, srcCard)) {
+                return true;
+            }
+        }
+
+        return false;
+    }    
 }

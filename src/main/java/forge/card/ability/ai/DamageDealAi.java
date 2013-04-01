@@ -15,7 +15,6 @@ import forge.card.cost.Cost;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
-import forge.card.spellability.TargetChooser;
 import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilCard;
 import forge.game.ai.ComputerUtilCombat;
@@ -143,7 +142,7 @@ public class DamageDealAi extends DamageAiBase {
 
         final ArrayList<Object> objects = tgt.getTargets();
         if (saMe.hasParam("TargetUnique")) {
-            objects.addAll(TargetChooser.getUniqueTargets(saMe));
+            objects.addAll(saMe.getUniqueTargets());
         }
         for (final Object o : objects) {
             if (o instanceof Card) {
