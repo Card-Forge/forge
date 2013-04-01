@@ -11647,6 +11647,7 @@ res/cardsfolder/v/vex.txt svneol=native#text/plain
 res/cardsfolder/v/vexing_arcanix.txt -text
 res/cardsfolder/v/vexing_beetle.txt svneol=native#text/plain
 res/cardsfolder/v/vexing_devil.txt -text
+res/cardsfolder/v/vexing_shusher.txt -text
 res/cardsfolder/v/vexing_sphinx.txt -text
 res/cardsfolder/v/vhati_il_dal.txt -text
 res/cardsfolder/v/viashino_bladescout.txt svneol=native#text/plain
@@ -12456,6 +12457,7 @@ res/cardsfolder/z/zur_the_enchanter.txt svneol=native#text/plain
 res/cardsfolder/z/zuran_enchanter.txt svneol=native#text/plain
 res/cardsfolder/z/zuran_orb.txt svneol=native#text/plain
 res/cardsfolder/z/zuran_spellcaster.txt svneol=native#text/plain
+res/cardsfolder/z/zurs_weirding.txt -text
 res/defaults/editor.preferences svneol=native#text/xml
 res/defaults/editor.xml svneol=native#text/xml
 res/defaults/gauntlet/LOCKED_DotP[!!-~]Preconstructed.dat -text

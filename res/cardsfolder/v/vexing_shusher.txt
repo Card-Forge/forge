@@ -1,0 +1,11 @@
+Name:Vexing Shusher
+ManaCost:RG RG
+Types:Creature Goblin Shaman
+PT:2/2
+K:CARDNAME can't be countered.
+A:AB$ Pump | Cost$ RG | ValidTgts$ Card.inZoneStack | TgtZone$ Stack,Battlefield | PumpZone$ Stack | KW$ HIDDEN CARDNAME can't be countered. | SpellDescription$ Target spell can't be countered by spells or abilities.
+#Should include another zone otherwise the target would not be defined as a card
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/vexing_shusher.jpg
+Oracle:Vexing Shusher can't be countered.\n{R/G}: Target spell can't be countered by spells or abilities.
+SetInfo:SHM Rare
