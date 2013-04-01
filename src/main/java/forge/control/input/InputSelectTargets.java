@@ -189,8 +189,11 @@ public final class InputSelectTargets extends InputSyncronizedBase {
         addTarget(player);
     }
 
-    void addTarget(GameEntity ge) {
+    private void addTarget(GameEntity ge) {
         tgt.addTarget(ge);
+        if(ge instanceof Card) {
+            ((Card) ge).setUsedToPay(true);
+        }
         Integer val = targetDepth.get(ge);
         targetDepth.put(ge, val == null ? Integer.valueOf(1) : Integer.valueOf(val.intValue() + 1) );
         
@@ -202,11 +205,23 @@ public final class InputSelectTargets extends InputSyncronizedBase {
             this.showMessage();
     }
     
-    void done() {
+    /* (non-Javadoc)
+     * @see forge.control.input.InputSyncronizedBase#afterStop()
+     */
+    @Override
+    protected void afterStop() {
+        for(GameEntity c : targetDepth.keySet())
+            if( c instanceof Card)
+                ((Card)c).setUsedToPay(false);
+        super.afterStop();
+
+    }
+    
+    private void done() {
         this.stop();
     }
     
-    boolean hasAllTargets() {
-        return tgt.isMaxTargetsChosen(sa.getSourceCard(), sa) || tgt.getStillToDivide() == 0;
+    private boolean hasAllTargets() {
+        return tgt.isMaxTargetsChosen(sa.getSourceCard(), sa) || ( tgt.getStillToDivide() == 0 && tgt.isDividedAsYouChoose());
     }
 }
