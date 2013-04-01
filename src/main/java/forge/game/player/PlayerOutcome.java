@@ -72,6 +72,7 @@ public class PlayerOutcome {
             case Poisoned: return "lost because of obtaining 10 poison counters";
             case OpponentWon: return "lost because an opponent has won by spell '" + loseConditionSpell + "'";
             case SpellEffect: return "lost due to effect of spell '" + loseConditionSpell + "'";
+            case EdhGeneralDamage: return "lost due to accumulation of 21 damage from generals";
         }
         return "lost for unknown reason (this is a bug)";
     }

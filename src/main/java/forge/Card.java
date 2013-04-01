@@ -9137,6 +9137,15 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
     public void setRules(CardRules r) {
         cardRules = r;
-    }    
+    }
+
+    /**
+     * TODO: Write javadoc for this method.
+     * @return
+     */
+    public boolean isEdhGeneral() {
+        // TODO - have a field
+        return false;
+    }
 
 } // end Card class

@@ -88,6 +88,8 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
     /** The poison counters. */
     private int poisonCounters = 0;
 
+    private int edhGeneralDamage = 0;
+
     /** The life. */
     private int life = 20;
 
@@ -641,7 +643,10 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
             }
         }
 
-        this.addAssignedDamage(damageToDo, source);
+        this.assignedDamage.put(source, damageToDo);
+        if(source.isEdhGeneral())
+            this.edhGeneralDamage+= damageToDo; 
+                
         GameActionUtil.executeDamageDealingEffects(source, damageToDo);
         GameActionUtil.executeDamageToPlayerEffects(this, source, damageToDo);
 
@@ -914,20 +919,6 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
      */
     public final void clearAssignedDamage() {
         this.assignedDamage.clear();
-    }
-
-    /**
-     * <p>
-     * addAssignedDamage.
-     * </p>
-     * 
-     * @param n
-     *            a int.
-     * @param source
-     *            a {@link forge.Card} object.
-     */
-    public final void addAssignedDamage(final int n, final Card source) {
-        this.assignedDamage.put(source, n);
     }
 
     /**
@@ -2161,6 +2152,10 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
         final boolean hasNoLife = this.getLife() <= 0;
         if (hasNoLife && !this.cantLoseForZeroOrLessLife()) {
             return this.loseConditionMet(GameLossReason.LifeReachedZero, null);
+        }
+        
+        if(this.edhGeneralDamage >= 21) {
+            return this.loseConditionMet(GameLossReason.EdhGeneralDamage, null);
         }
 
         return false;
