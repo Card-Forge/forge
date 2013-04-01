@@ -1,0 +1,17 @@
+Name:Warp World
+ManaCost:5 R R R
+Types:Sorcery
+A:SP$ RepeatEach | Cost$ 5 R R R | RepeatPlayers$ Player | RepeatSubAbility$ DBShuffle | SubAbility$ ChangePermanent | StackDescription$ SpellDescription | SpellDescription$ Each player shuffles all permanents he or she owns into his or her library, then reveals that many cards from the top of his or her library. Each player puts all artifact, creature, and land cards revealed this way onto the battlefield, then does the same for enchantment cards, then puts all cards revealed this way that weren't put onto the battlefield on the bottom of his or her library.
+SVar:DBShuffle:DB$ ChangeZoneAll | ChangeType$ Permanent.RememberedPlayerCtrl | Imprint$ True | Origin$ Battlefield | Destination$ Library | Shuffle$ True | SubAbility$ DBDig
+SVar:DBDig:DB$ Dig | Defined$ Remembered | NoMove$ True | DigNum$ WarpX | References$ WarpX | RememberRevealed$ True | Reveal$ True | SubAbility$ DBCleanImprint
+SVar:DBCleanImprint:DB$ Cleanup | ClearImprinted$ True
+SVar:WarpX:Imprinted$Amount
+SVar:ChangePermanent:DB$ ChangeZoneAll | ChangeType$ Artifact.IsRemembered,Creature.IsRemembered,Land.IsRemembered | Origin$ Library | Destination$ Battlefield | ForgetChanged$ True | SubAbility$ ChangeEnchantment
+SVar:ChangeEnchantment:DB$ ChangeZoneAll | ChangeType$ Enchantment.IsRemembered | Origin$ Library | Destination$ Battlefield | ForgetChanged$ True | SubAbility$ GotoBottom
+SVar:GotoBottom:DB$ ChangeZoneAll | ChangeType$ Card.IsRemembered | Origin$ Library | Destination$ Library | LibraryPosition$ -1 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/warp_world.jpg
+Oracle:Each player shuffles all permanents he or she owns into his or her library, then reveals that many cards from the top of his or her library. Each player puts all artifact, creature, and land cards revealed this way onto the battlefield, then does the same for enchantment cards, then puts all cards revealed this way that weren't put onto the battlefield on the bottom of his or her library.
+SetInfo:RAV Rare
+SetInfo:M10 Rare
+SetInfo:10E Rare

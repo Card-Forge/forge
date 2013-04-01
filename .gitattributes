@@ -11963,6 +11963,7 @@ res/cardsfolder/w/warmongers_chariot.txt svneol=native#text/plain
 res/cardsfolder/w/warmth.txt svneol=native#text/plain
 res/cardsfolder/w/warning.txt svneol=native#text/plain
 res/cardsfolder/w/warp_artifact.txt svneol=native#text/plain
+res/cardsfolder/w/warp_world.txt -text
 res/cardsfolder/w/warpath.txt svneol=native#text/plain
 res/cardsfolder/w/warpath_ghoul.txt svneol=native#text/plain
 res/cardsfolder/w/warped_devotion.txt svneol=native#text/plain
