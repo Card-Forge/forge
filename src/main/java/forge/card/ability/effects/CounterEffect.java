@@ -1,6 +1,7 @@
 package forge.card.ability.effects;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import forge.Card;
@@ -10,6 +11,7 @@ import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityStackInstance;
 import forge.card.spellability.SpellPermanent;
+import forge.card.trigger.TriggerType;
 
 public class CounterEffect extends SpellAbilityEffect {
     @Override
@@ -164,6 +166,13 @@ public class CounterEffect extends SpellAbilityEffect {
             throw new IllegalArgumentException("AbilityFactory_CounterMagic: Invalid Destination argument for card "
                     + srcSA.getSourceCard().getName());
         }
+        // Run triggers
+        final HashMap<String, Object> runParams = new HashMap<String, Object>();
+        runParams.put("Player", tgtSA.getActivatingPlayer());
+        runParams.put("Card", tgtSA.getSourceCard());
+        runParams.put("Cause", srcSA.getSourceCard());
+        srcSA.getActivatingPlayer().getGame().getTriggerHandler().runTrigger(TriggerType.Countered, runParams, false);
+        
 
         if (!tgtSA.isAbility()) {
             System.out.println("Send countered spell to " + destination);

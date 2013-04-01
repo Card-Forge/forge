@@ -6206,6 +6206,7 @@ res/cardsfolder/l/lu_xun_scholar_general.txt svneol=native#text/plain
 res/cardsfolder/l/lucent_liminid.txt svneol=native#text/plain
 res/cardsfolder/l/ludevics_test_subject_ludevics_abomination.txt -text
 res/cardsfolder/l/lull.txt svneol=native#text/plain
+res/cardsfolder/l/lullmage_mentor.txt -text
 res/cardsfolder/l/lumbering_satyr.txt svneol=native#text/plain
 res/cardsfolder/l/lumberknot.txt -text
 res/cardsfolder/l/lumengrid_augur.txt -text
@@ -6940,6 +6941,7 @@ res/cardsfolder/m/multani_maro_sorcerer.txt svneol=native#text/plain
 res/cardsfolder/m/multanis_acolyte.txt svneol=native#text/plain
 res/cardsfolder/m/multanis_decree.txt svneol=native#text/plain
 res/cardsfolder/m/multanis_harmony.txt -text svneol=unset#text/plain
+res/cardsfolder/m/multanis_presence.txt -text
 res/cardsfolder/m/mundungu.txt -text
 res/cardsfolder/m/mungha_wurm.txt svneol=native#text/plain
 res/cardsfolder/m/muraganda_petroglyphs.txt svneol=native#text/plain
@@ -13789,6 +13791,7 @@ src/main/java/forge/card/trigger/TriggerChangesZone.java svneol=native#text/plai
 src/main/java/forge/card/trigger/TriggerClashed.java svneol=native#text/plain
 src/main/java/forge/card/trigger/TriggerCounterAdded.java svneol=native#text/plain
 src/main/java/forge/card/trigger/TriggerCounterRemoved.java -text
+src/main/java/forge/card/trigger/TriggerCountered.java -text
 src/main/java/forge/card/trigger/TriggerCycled.java svneol=native#text/plain
 src/main/java/forge/card/trigger/TriggerDamageDone.java svneol=native#text/plain
 src/main/java/forge/card/trigger/TriggerDiscarded.java svneol=native#text/plain

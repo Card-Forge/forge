@@ -1,0 +1,8 @@
+Name:Multani's Presence
+ManaCost:G
+Types:Enchantment
+T:Mode$ Countered | ValidCard$ Card | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ DBDraw | TriggerDescription$ Whenever a spell you've cast is countered, draw a card.
+SVar:DBDraw:AB$ Draw | Cost$ 0 | NumCards$ 1
+SVar:Picture:http://www.wizards.com/global/images/magic/general/multanis_presence.jpg
+Oracle:Whenever a spell you've cast is countered, draw a card.
+SetInfo:ULG Uncommon
