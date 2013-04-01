@@ -1,6 +1,5 @@
 Name:Rhys the Exiled
 ManaCost:2 G
-ColorIdentity:Green,Black
 Types:Legendary Creature Elf Warrior
 PT:3/2
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ Whenever CARDNAME attacks, you gain 1 life for each Elf you control.

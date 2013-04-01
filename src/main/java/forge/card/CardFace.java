@@ -29,7 +29,6 @@ final class CardFace implements ICardFace {
     private CardType type = null;
     private ManaCost manaCost = ManaCost.NO_COST;
     private ColorSet color = null;
-    private ColorSet colorIdentity = null;
 
     private String oracleText = null;
     private int iPower = -1;
@@ -59,15 +58,7 @@ final class CardFace implements ICardFace {
     @Override public CardType getType()             { return this.type; }
     @Override public ManaCost getManaCost()         { return this.manaCost; }
     @Override public ColorSet getColor()            { return this.color; }
-    
-    @Override
-    public ColorSet getColorIdentity() {
-        if(this.colorIdentity != null)
-                return this.colorIdentity;
-                       
-        return this.color;
-    }
-    
+        
     // these are raw and unparsed used for Card creation
     @Override public Iterable<String> getKeywords()   { return keywords; }
     @Override public Iterable<String> getAbilities()  { return abilities; }
@@ -86,7 +77,6 @@ final class CardFace implements ICardFace {
     public void setType(CardType type0)             { this.type = type0; }
     public void setManaCost(ManaCost manaCost0)     { this.manaCost = manaCost0; }
     public void setColor(ColorSet color0)           { this.color = color0; }
-    public void setColorIdentity(ColorSet color0)   { this.colorIdentity = color0; }
     public void setOracleText(String text)          { this.oracleText = text; }
     public void setInitialLoyalty(int value)        { this.initialLoyalty = value; }
 

@@ -23,6 +23,7 @@ import java.util.Map.Entry;
 import java.util.Set;
 import java.util.TreeMap;
 
+import forge.CardColor;
 import forge.card.mana.ManaCost;
 
 /**
@@ -39,6 +40,8 @@ public final class CardRules implements ICardCharacteristics {
     private final Map<String, CardInSet> setsPrinted = new TreeMap<String, CardInSet>(String.CASE_INSENSITIVE_ORDER);
 
     private CardAiHints aiHints;
+    
+    private ColorSet colorIdentity = null;
 
     public CardRules(ICardFace[] faces, CardSplitType altMode, CardAiHints cah, Map<String, CardInSet> sets) {
         splitType = altMode;
@@ -57,6 +60,49 @@ public final class CardRules implements ICardCharacteristics {
             System.err.println(getName() + " was not assigned any set."); 
             setsPrinted.put(CardEdition.UNKNOWN.getCode(), new CardInSet(CardRarity.Common, 1) );
         }
+        
+        //Calculate Color Identity
+        byte colMask = calculateColorIdentity(mainPart);
+        
+        if(otherPart != null)
+        {
+            colMask |= calculateColorIdentity(otherPart);
+        }        
+        colorIdentity = ColorSet.fromMask(colMask);
+    }
+    
+    private byte calculateColorIdentity(ICardFace face)
+    {
+        byte res = face.getManaCost() == null ? 0 : face.getManaCost().getColorProfile();
+        boolean isReminder = false;
+        boolean isSymbol = false;
+        for(char c : face.getOracleText().toCharArray()) {
+            switch(c)
+            {
+            case('('): isReminder = true; break;
+            case(')'): isReminder = false; break;
+            case('{'): isSymbol = true; break;
+            case('}'): isSymbol = false; break;
+            default:
+                    if(isSymbol && !isReminder) {
+                        switch(c)
+                        {
+                        case('W'): res |= MagicColor.WHITE; break;
+                        case('U'): res |= MagicColor.BLUE; break;
+                        case('B'): res |= MagicColor.BLACK; break;
+                        case('R'): res |= MagicColor.RED; break;
+                        case('G'): res |= MagicColor.GREEN; break;
+                        }
+                    }
+                    else
+                    {
+                        continue;
+                    }
+                    break;
+            }
+        }
+        
+        return res;
     }
 
     public boolean isTraditional() {
@@ -178,16 +224,8 @@ public final class CardRules implements ICardCharacteristics {
         return null;
     }
     
-    @Override
     public ColorSet getColorIdentity() {
-        if(this.otherPart != null)
-        {
-            return ColorSet.fromMask(mainPart.getColorIdentity().getColor() | otherPart.getColorIdentity().getColor());
-        }
-        else
-        {
-            return mainPart.getColorIdentity();
-        }
+        return colorIdentity;
         
     }
 }

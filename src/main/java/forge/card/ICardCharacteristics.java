@@ -7,7 +7,6 @@ public interface ICardCharacteristics {
     CardType getType();
     ManaCost getManaCost();
     ColorSet getColor();
-    ColorSet getColorIdentity();
 
     int    getIntPower();
     int    getIntToughness();

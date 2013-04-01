@@ -1,6 +1,5 @@
 Name:Thelon of Havenwood
 ManaCost:G G
-ColorIdentity:Green,Black
 Types:Legendary Creature Elf Druid
 PT:2/2
 S:Mode$ Continuous | Affected$ Creature.Fungus | AffectedZone$ Battlefield | AddPower$ AffectedX | AddToughness$ AffectedX | Description$ Each Fungus creature gets +1/+1 for each spore counter on it.
