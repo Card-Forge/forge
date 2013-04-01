@@ -59,15 +59,6 @@ public class CostUntapType extends CostPartWithList {
     public boolean isReusable() { return true; }
 
     
-    /**
-     * Gets the description.
-     * 
-     * @return the description
-     */
-    public final String getDescription() {
-        return this.getTypeDescription() == null ? this.getType() : this.getTypeDescription();
-    }
-
     /*
      * (non-Javadoc)
      * 
@@ -79,7 +70,7 @@ public class CostUntapType extends CostPartWithList {
         sb.append("Untap ");
 
         final Integer i = this.convertAmount();
-        final String desc = this.getDescription();
+        final String desc = this.getDescriptiveType();
 
         sb.append(Cost.convertAmountTypeToWords(i, this.getAmount(), " tapped " + desc));
 
@@ -161,7 +152,7 @@ public class CostUntapType extends CostPartWithList {
             }
         }
         InputSelectCards inp = new InputSelectCardsFromList(c, c, typeList);
-        inp.setMessage("Select a " + getDescription() + " to untap (%d left)");
+        inp.setMessage("Select a " + getDescriptiveType() + " to untap (%d left)");
         FThreads.setInputAndWait(inp);
         if( inp.hasCancelled() || inp.getSelected().size() != c )
             return false;

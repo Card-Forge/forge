@@ -24,84 +24,19 @@ import forge.CardLists;
 import forge.FThreads;
 import forge.card.ability.AbilityUtils;
 import forge.card.spellability.SpellAbility;
-import forge.control.input.InputPayment;
+import forge.control.input.InputSelectCards;
+import forge.control.input.InputSelectCardsFromList;
 import forge.game.GameState;
 import forge.game.ai.ComputerUtil;
 import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiDialog;
-import forge.gui.match.CMatchUI;
-import forge.view.ButtonUtil;
 
 /**
  * The Class CostSacrifice.
  */
 public class CostSacrifice extends CostPartWithList {
-
-    /** 
-     * TODO: Write javadoc for this type.
-     *
-     */
-    public static final class InputPayCostSacrificeFromList extends InputPayCostBase {
-        private final CostSacrifice part;
-        private final SpellAbility sa;
-        private final int nNeeded;
-        private final List<Card> typeList;
-        private static final long serialVersionUID = 2685832214519141903L;
-        private int nSacrifices = 0;
-
-        /**
-         * TODO: Write javadoc for Constructor.
-         * @param part
-         * @param sa
-         * @param nNeeded
-         * @param payment
-         * @param typeList
-         */
-        public InputPayCostSacrificeFromList(CostSacrifice part, SpellAbility sa, int nNeeded, List<Card> typeList) {
-            this.part = part;
-            this.sa = sa;
-            this.nNeeded = nNeeded;
-            this.typeList = typeList;
-        }
-
-        @Override
-        public void showMessage() {
-            if (nNeeded == 0) {
-                this.done();
-            }
-
-            final StringBuilder msg = new StringBuilder("Sacrifice ");
-            final int nLeft = nNeeded - this.nSacrifices;
-            msg.append(nLeft).append(" ");
-            msg.append(part.getDescriptiveType());
-            if (nLeft > 1) {
-                msg.append("s");
-            }
-
-            CMatchUI.SINGLETON_INSTANCE.showMessage(msg.toString());
-            ButtonUtil.enableOnlyCancel();
-        }
-
-        @Override
-        public void selectCard(final Card card) {
-            if (typeList.contains(card)) {
-                this.nSacrifices++;
-                part.executePayment(sa, card);
-                typeList.remove(card);
-                // in case nothing else to sacrifice
-                if (this.nSacrifices == nNeeded) {
-                    this.done();
-                } else if (typeList.isEmpty()) {
-                    // happen
-                    this.cancel();
-                } else {
-                    this.showMessage();
-                }
-            }
-        }
-    }
 
     /**
      * Instantiates a new cost sacrifice.
@@ -226,9 +161,14 @@ public class CostSacrifice extends CostPartWithList {
             if (0 == c.intValue()) {
                 return true;
             }
-            InputPayment inp = new InputPayCostSacrificeFromList(this, ability, c, list);
+            
+            InputSelectCards inp = new InputSelectCardsFromList(c, c, list);
+            inp.setMessage("Select a " + this.getDescriptiveType() + " to sacrifice (%d left)");
             FThreads.setInputAndWait(inp);
-            return inp.isPaid();
+            if ( inp.hasCancelled() )
+                return false;
+
+            return executePayment(ability, inp.getSelected());
         }
         return false;
     }

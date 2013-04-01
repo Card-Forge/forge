@@ -62,15 +62,6 @@ public class CostTapType extends CostPartWithList {
     public boolean isReusable() { return true; }
 
 
-    /**
-     * Gets the description.
-     * 
-     * @return the description
-     */
-    public final String getDescription() {
-        return this.getTypeDescription() == null ? this.getType() : this.getTypeDescription();
-    }
-
     /*
      * (non-Javadoc)
      * 
@@ -82,7 +73,7 @@ public class CostTapType extends CostPartWithList {
         sb.append("Tap ");
 
         final Integer i = this.convertAmount();
-        final String desc = this.getDescription();
+        final String desc = this.getDescriptiveType();
         final String type = this.getType();
         
         if (type.contains("sharesCreatureTypeWith")) {
@@ -206,7 +197,7 @@ public class CostTapType extends CostPartWithList {
         
         
         InputSelectCards inp = new InputSelectCardsFromList(c, c, typeList);
-        inp.setMessage("Select a " + getDescription() + " to tap (%d left)");
+        inp.setMessage("Select a " + getDescriptiveType() + " to tap (%d left)");
         FThreads.setInputAndWait(inp);
         if ( inp.hasCancelled() )
             return false;

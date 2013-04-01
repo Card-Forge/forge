@@ -91,13 +91,9 @@ public abstract class CostPart {
         return this.typeDescription;
     }
 
-    /**
-     * Gets the descriptive type.
-     * 
-     * @return the descriptive type
-     */
     public final String getDescriptiveType() {
-        return this.getTypeDescription() == null ? this.getType() : this.getTypeDescription();
+        String typeDesc = this.getTypeDescription();
+        return typeDesc == null ? this.getType() : typeDesc;
     }
 
     /**

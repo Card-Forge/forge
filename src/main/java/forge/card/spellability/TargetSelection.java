@@ -42,11 +42,11 @@ import forge.gui.GuiChoose;
  * @author Forge
  * @version $Id$
  */
-public class TargetChooser {
+public class TargetSelection {
     private final SpellAbility ability;
 
 
-    public TargetChooser(final SpellAbility sa) {
+    public TargetSelection(final SpellAbility sa) {
         this.ability = sa;
     }
 
@@ -58,7 +58,7 @@ public class TargetChooser {
         return this.ability.getSourceCard();
     }
 
-    private TargetChooser subSelection = null;
+    private TargetSelection subSelection = null;
 
     private boolean bCancel = false;
     private boolean bTargetingDone = false;
@@ -125,7 +125,7 @@ public class TargetChooser {
                 return true;
 
             // Has Sub Ability
-            this.subSelection = new TargetChooser(abSub);
+            this.subSelection = new TargetSelection(abSub);
             this.subSelection.clearTargets();
             return this.subSelection.chooseTargets();
         }
@@ -171,7 +171,7 @@ public class TargetChooser {
      * </p>
      * @return 
      */
-    public final List<Card> chooseValidInput() {
+    private final List<Card> chooseValidInput() {
         final Target tgt = this.getTgt();
         final GameState game = ability.getActivatingPlayer().getGame();
         final List<ZoneType> zone = tgt.getZone();

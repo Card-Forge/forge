@@ -70,7 +70,7 @@ public class SpellAbilityRequirements {
             return;
         }
 
-        final TargetChooser select = new TargetChooser(ability);
+        final TargetSelection select = new TargetSelection(ability);
         // Skip to paying if parent ability doesn't target and has no
         // subAbilities.
         // (or trigger case where its already targeted)
@@ -113,7 +113,7 @@ public class SpellAbilityRequirements {
         }
     }
 
-    private void rollbackAbility(Zone fromZone, int zonePosition, TargetChooser select) { 
+    private void rollbackAbility(Zone fromZone, int zonePosition, TargetSelection select) { 
         // cancel ability during target choosing
         final Card c = this.ability.getSourceCard();
 
