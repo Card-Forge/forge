@@ -19,8 +19,12 @@ package forge.card.cost;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import com.google.common.base.Predicate;
+
 import forge.Card;
 import forge.CardLists;
+import forge.CardPredicates;
 import forge.CardPredicates.Presets;
 import forge.FThreads;
 import forge.card.ability.AbilityUtils;
@@ -80,11 +84,14 @@ public class CostTapType extends CostPartWithList {
 
         final Integer i = this.convertAmount();
         final String desc = this.getDescription();
-
-        sb.append(Cost.convertAmountTypeToWords(i, this.getAmount(), "untapped " + desc));
-
-        sb.append(" you control");
-
+        final String type = this.getType();
+        
+        if (type.contains("sharesCreatureTypeWith")) {
+            sb.append("two untapped creatures you control that share a creature type");
+        } else {
+            sb.append(Cost.convertAmountTypeToWords(i, this.getAmount(), "untapped " + desc));
+            sb.append(" you control");
+        }
         return sb.toString();
     }
 
@@ -115,13 +122,34 @@ public class CostTapType extends CostPartWithList {
         final Card source = ability.getSourceCard();
         
         List<Card> typeList = new ArrayList<Card>(activator.getCardsIn(ZoneType.Battlefield));
-
-        typeList = CardLists.getValidCards(typeList, this.getType().split(";"), activator, source);
+        String type = this.getType();
+        boolean sameType = false;
+        
+        if (type.contains("sharesCreatureTypeWith")) {
+            sameType = true;
+            type = type.replace("sharesCreatureTypeWith", "");
+        }
+        
+        typeList = CardLists.getValidCards(typeList, type.split(";"), activator, source);
 
         if (!canTapSource) {
             typeList.remove(source);
         }
         typeList = CardLists.filter(typeList, Presets.UNTAPPED);
+        
+        if (sameType) {
+            for (final Card card : typeList) {
+                if (CardLists.filter(typeList, new Predicate<Card>() {
+                    @Override
+                    public boolean apply(final Card c) {
+                        return c.sharesCreatureTypeWith(card);
+                    }
+                }).size() > 1) {
+                    return true;
+                }
+            }
+            return false;
+        }
 
         final Integer amount = this.convertAmount();
         if ((typeList.size() == 0) || ((amount != null) && (typeList.size() < amount))) {
@@ -141,8 +169,29 @@ public class CostTapType extends CostPartWithList {
     @Override
     public final boolean payHuman(final SpellAbility ability, final GameState game) {
         List<Card> typeList = new ArrayList<Card>(ability.getActivatingPlayer().getCardsIn(ZoneType.Battlefield));
-        typeList = CardLists.getValidCards(typeList, this.getType().split(";"), ability.getActivatingPlayer(), ability.getSourceCard());
+        String type = this.getType();
+        boolean sameType = false;
+        if (type.contains("sharesCreatureTypeWith")) {
+            sameType = true;
+            type = type.replace("sharesCreatureTypeWith", "");
+        }
+        typeList = CardLists.getValidCards(typeList, type.split(";"), ability.getActivatingPlayer(), ability.getSourceCard());
         typeList = CardLists.filter(typeList, Presets.UNTAPPED);
+        if (sameType) {
+            final List<Card> List2 = typeList;
+            typeList = CardLists.filter(typeList, new Predicate<Card>() {
+                @Override
+                public boolean apply(final Card c) {
+                    for (Card card : List2) {
+                        if (!card.equals(c) && card.sharesCreatureTypeWith(c)) {
+                            return true;
+                        }
+                    }
+                    return false;
+                }
+            });
+        }
+        
         final String amount = this.getAmount();
         final Card source = ability.getSourceCard();
         Integer c = this.convertAmount();
@@ -184,6 +233,9 @@ public class CostTapType extends CostPartWithList {
             } else {
                 c = AbilityUtils.calculateAmount(source, amount, ability);
             }
+        }
+        if (this.getType().contains("sharesCreatureTypeWith")) {
+            return null;
         }
 
         List<Card> totap = ComputerUtil.chooseTapType(ai, this.getType(), source, !canTapSource, c);
