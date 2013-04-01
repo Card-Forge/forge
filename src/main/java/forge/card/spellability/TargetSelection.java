@@ -18,7 +18,6 @@
 package forge.card.spellability;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import com.google.common.base.Predicate;
@@ -54,108 +53,63 @@ public class TargetSelection {
         return this.ability.getTarget();
     }
 
-    private final Card getCard() {
-        return this.ability.getSourceCard();
-    }
-
-    private TargetSelection subSelection = null;
-
-    private boolean bCancel = false;
     private boolean bTargetingDone = false;
 
-    /**
-     * <p>
-     * setCancel.
-     * </p>
-     * 
-     * @param done
-     *            a boolean.
-     */
-    public final void setCancel(final boolean done) {
-        this.bCancel = done;
-    }
-
-    /**
-     * <p>
-     * isCanceled.
-     * </p>
-     * 
-     * @return a boolean.
-     */
-    public final boolean isCanceled() {
-        return this.bCancel || this.subSelection != null && this.subSelection.isCanceled();
-    }
-
-    public final boolean doesTarget() {
-        Target tg = getTgt();
-        return tg != null && tg.doesTarget();
-    }
 
     /**
      * <p>
      * resetTargets.
      * </p>
      */
-    public final void clearTargets() {
-        Target tg = getTgt();
-        if (tg != null) {
-            tg.resetTargets();
-            tg.calculateStillToDivide(this.ability.getParam("DividedAsYouChoose"), this.getCard(), this.ability);
-        }
-    }
 
     public final boolean chooseTargets() {
         Target tgt = getTgt();
-        final boolean canTarget = tgt == null ? false : doesTarget();
-        final int minTargets = canTarget ? tgt.getMinTargets(getCard(), ability) : 0;
-        final int maxTargets = canTarget ? tgt.getMaxTargets(getCard(), ability) : 0;
-        final int numTargeted = canTarget ? tgt.getNumTargeted() : 0;
+        final boolean canTarget = tgt != null && tgt.doesTarget();
+        if( !canTarget )
+            throw new RuntimeException("TargetSelection.chooseTargets called for ability that does not target - " + ability);
+        
+        final int minTargets = tgt.getMinTargets(ability.getSourceCard(), ability);
+        final int maxTargets = tgt.getMaxTargets(ability.getSourceCard(), ability);
+        final int numTargeted = tgt.getNumTargeted();
 
         boolean hasEnoughTargets = minTargets == 0 || numTargeted >= minTargets;
         boolean hasAllTargets = numTargeted == maxTargets && maxTargets > 0;
 
-        // if not enough targets chosen, reset and cancel Ability
-        if (this.bTargetingDone && !hasEnoughTargets) this.bCancel = true;
-        if (this.bCancel) return false;
+        // if not enough targets chosen, cancel Ability
+        if (this.bTargetingDone && !hasEnoughTargets)
+            return false;
         
 
-        if (!canTarget || this.bTargetingDone && hasEnoughTargets || hasAllTargets || tgt.isDividedAsYouChoose() && tgt.getStillToDivide() == 0) {
-            final AbilitySub abSub = this.ability.getSubAbility();
-            if (abSub == null) // if no more SubAbilities finish targeting
-                return true;
-
-            // Has Sub Ability
-            this.subSelection = new TargetSelection(abSub);
-            this.subSelection.clearTargets();
-            return this.subSelection.chooseTargets();
+        if (this.bTargetingDone && hasEnoughTargets || hasAllTargets || tgt.isDividedAsYouChoose() && tgt.getStillToDivide() == 0) {
+            return true;
         }
 
         if (!tgt.hasCandidates(this.ability, true) && !hasEnoughTargets) {
             // Cancel ability if there aren't any valid Candidates
-            this.bCancel = true;
             return false;
         }
         
         final List<ZoneType> zone = tgt.getZone();
         final boolean mandatory = tgt.getMandatory() && tgt.hasCandidates(this.ability, true);
         
+        final boolean choiceResult;
         if (zone.size() == 1 && zone.get(0) == ZoneType.Stack) {
             // If Zone is Stack, the choices are handled slightly differently
-           this.chooseCardFromStack(mandatory);
+            choiceResult = this.chooseCardFromStack(mandatory);
         } else {
-            List<Card> validTargets = this.chooseValidInput();
+            List<Card> validTargets = this.getValidCardsToTarget();
             if (zone.size() == 1 && zone.get(0) == ZoneType.Battlefield) {
                 InputSelectTargets inp = new InputSelectTargets(validTargets, ability, mandatory);
                 FThreads.setInputAndWait(inp);
-                bCancel = inp.hasCancelled();
+                choiceResult = !inp.hasCancelled();
                 bTargetingDone = inp.hasPressedOk();
             } else {
-                this.chooseCardFromList(validTargets, true, mandatory);
+                // for every other case an all-purpose GuiChoose
+                choiceResult = this.chooseCardFromList(validTargets, true, mandatory);
             }
         }
-        // some inputs choose cards 1-by-1 and need to be called again, 
-        // moreover there are sub-abilities that also need targets
-        return chooseTargets();
+        // some inputs choose cards one-by-one and need to be called again 
+        return choiceResult && chooseTargets();
     }
 
     
@@ -171,13 +125,14 @@ public class TargetSelection {
      * </p>
      * @return 
      */
-    private final List<Card> chooseValidInput() {
+    private final List<Card> getValidCardsToTarget() {
         final Target tgt = this.getTgt();
         final GameState game = ability.getActivatingPlayer().getGame();
         final List<ZoneType> zone = tgt.getZone();
 
         final boolean canTgtStack = zone.contains(ZoneType.Stack);
-        List<Card> choices = CardLists.getTargetableCards(CardLists.getValidCards(game.getCardsIn(zone), tgt.getValidTgts(), this.ability.getActivatingPlayer(), this.ability.getSourceCard()), this.ability);
+        List<Card> validCards = CardLists.getValidCards(game.getCardsIn(zone), tgt.getValidTgts(), this.ability.getActivatingPlayer(), this.ability.getSourceCard());
+        List<Card> choices = CardLists.getTargetableCards(validCards, this.ability);
         if (canTgtStack) {
             // Since getTargetableCards doesn't have additional checks if one of the Zones is stack
             // Remove the activating card from targeting itself if its on the Stack
@@ -186,11 +141,11 @@ public class TargetSelection {
                 choices.remove(tgt.getSourceCard());
             }
         }
-        ArrayList<Object> objects = this.ability.getUniqueTargets();
+        List<Object> targetedObjects = this.ability.getUniqueTargets();
 
         if (tgt.isUniqueTargets()) {
-            for (final Object o : objects) {
-                if ((o instanceof Card) && objects.contains(o)) {
+            for (final Object o : targetedObjects) {
+                if ((o instanceof Card) && targetedObjects.contains(o)) {
                     choices.remove(o);
                 }
             }
@@ -205,9 +160,9 @@ public class TargetSelection {
         }
 
         // If all cards (including subability targets) must have the same controller
-        if (tgt.isSameController() && !objects.isEmpty()) {
+        if (tgt.isSameController() && !targetedObjects.isEmpty()) {
             final List<Card> list = new ArrayList<Card>();
-            for (final Object o : objects) {
+            for (final Object o : targetedObjects) {
                 if (o instanceof Card) {
                     list.add((Card) o);
                 }
@@ -251,7 +206,7 @@ public class TargetSelection {
         }
         // If the cards must have a specific controller
         if (tgt.getDefinedController() != null) {
-            List<Player> pl = AbilityUtils.getDefinedPlayers(getCard(), tgt.getDefinedController(), this.ability);
+            List<Player> pl = AbilityUtils.getDefinedPlayers(ability.getSourceCard(), tgt.getDefinedController(), this.ability);
             if (pl != null && !pl.isEmpty()) {
                 Player controller = pl.get(0);
                 choices = CardLists.filterControlledBy(choices, controller);
@@ -260,7 +215,7 @@ public class TargetSelection {
             }
         }
         return choices;
-    } // input_targetValid
+    }
 
     /**
      * <p>
@@ -274,7 +229,7 @@ public class TargetSelection {
      * @param mandatory
      *            a boolean.
      */
-    private final void chooseCardFromList(final List<Card> choices, final boolean targeted, final boolean mandatory) {
+    private final boolean chooseCardFromList(final List<Card> choices, final boolean targeted, final boolean mandatory) {
         // Send in a list of valid cards, and popup a choice box to target
         final GameState game = ability.getActivatingPlayer().getGame(); 
 
@@ -321,16 +276,16 @@ public class TargetSelection {
         
         final Object chosen = GuiChoose.oneOrNone(getTgt().getVTSelection(), choicesFiltered);
         if (chosen == null) {
-            this.setCancel(true);
-            return;
+            return false;
         }
         if (msgDone.equals(chosen)) {
             bTargetingDone = true;
-            return;
+            return true;
         }
         
         if (chosen instanceof Card )
             this.getTgt().addTarget(chosen);
+        return true;
     }
 
     /**
@@ -341,7 +296,7 @@ public class TargetSelection {
      * @param mandatory
      *            a boolean.
      */
-    private final void chooseCardFromStack(final boolean mandatory) {
+    private final boolean chooseCardFromStack(final boolean mandatory) {
         final Target tgt = this.getTgt();
         final String message = tgt.getVTSelection();
         // Find what's targetable, then allow human to choose
@@ -359,18 +314,18 @@ public class TargetSelection {
         }
 
         if (selectOptions.isEmpty()) {
-            setCancel(true);
+            return false;
         } else {
             final Object madeChoice = GuiChoose.oneOrNone(message, selectOptions);
             if (madeChoice == null) {
-                setCancel(true);
-                return;
+                return false;
             }
             if (madeChoice instanceof SpellAbility) {
                 tgt.addTarget(madeChoice);
             } else // only 'FINISH TARGETING' remains 
                 bTargetingDone = true;
         }
+        return true;
     }
 
     /**

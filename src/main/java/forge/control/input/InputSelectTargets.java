@@ -207,6 +207,6 @@ public final class InputSelectTargets extends InputSyncronizedBase {
     }
     
     boolean hasAllTargets() {
-        return tgt.isMaxTargetsChosen(sa.getSourceCard(), sa);
+        return tgt.isMaxTargetsChosen(sa.getSourceCard(), sa) || tgt.getStillToDivide() == 0;
     }
 }

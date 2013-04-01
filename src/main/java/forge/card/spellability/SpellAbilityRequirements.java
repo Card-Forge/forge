@@ -66,22 +66,28 @@ public class SpellAbilityRequirements {
 
         // Announce things like how many times you want to Multikick or the value of X
         if (!this.announceRequirements()) {
-            rollbackAbility(fromZone, zonePosition, null);
+            rollbackAbility(fromZone, zonePosition);
             return;
         }
 
-        final TargetSelection select = new TargetSelection(ability);
         // Skip to paying if parent ability doesn't target and has no
         // subAbilities.
         // (or trigger case where its already targeted)
-        boolean acceptsTargets = select.doesTarget() || this.ability.getSubAbility() != null;
-        if (!isAlreadyTargeted && acceptsTargets) {
-            select.clearTargets();
-            select.chooseTargets();
-            if (select.isCanceled()) {
-                rollbackAbility(fromZone, zonePosition, select);
-                return;
-            }
+        if (!isAlreadyTargeted) {
+            
+            SpellAbility beingTargeted = ability;
+            do { 
+                Target tgt = beingTargeted.getTarget();
+                if( tgt != null && tgt.doesTarget()) {
+                    clearTargets(beingTargeted);
+                    final TargetSelection select = new TargetSelection(beingTargeted);
+                    if (!select.chooseTargets() ) {
+                        rollbackAbility(fromZone, zonePosition);
+                        return;
+                    }
+                }
+                beingTargeted = beingTargeted.getSubAbility();
+            } while (beingTargeted != null);
         }
         
         // Payment
@@ -93,7 +99,7 @@ public class SpellAbilityRequirements {
         } 
     
         if (!paymentMade) {
-            rollbackAbility(fromZone, zonePosition, select);
+            rollbackAbility(fromZone, zonePosition);
             return;
         }
         
@@ -101,19 +107,26 @@ public class SpellAbilityRequirements {
             if (skipStack) {
                 AbilityUtils.resolve(this.ability, false);
             } else {
-
                 this.enusureAbilityHasDescription(this.ability);
                 this.ability.getActivatingPlayer().getManaPool().clearManaPaid(this.ability, false);
                 game.getStack().addAndUnfreeze(this.ability);
             }
     
             // no worries here. The same thread must resolve, and by this moment ability will have been resolved already
-            select.clearTargets();
+            clearTargets(ability);
             game.getAction().checkStateEffects();
         }
     }
 
-    private void rollbackAbility(Zone fromZone, int zonePosition, TargetSelection select) { 
+    public final void clearTargets(SpellAbility ability) {
+        Target tg = ability.getTarget();
+        if (tg != null) {
+            tg.resetTargets();
+            tg.calculateStillToDivide(ability.getParam("DividedAsYouChoose"), ability.getSourceCard(), ability);
+        }
+    }
+    
+    private void rollbackAbility(Zone fromZone, int zonePosition) { 
         // cancel ability during target choosing
         final Card c = this.ability.getSourceCard();
 
@@ -127,9 +140,7 @@ public class SpellAbilityRequirements {
             Singletons.getModel().getGame().getAction().moveTo(fromZone, c, zonePosition >= 0 ? Integer.valueOf(zonePosition) : null);
         }
 
-        if (select != null) {
-            select.clearTargets();
-        }
+        clearTargets(ability);
 
         this.ability.resetOnceResolved();
         this.payment.refundPayment();

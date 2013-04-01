@@ -1687,16 +1687,15 @@ public abstract class SpellAbility implements ISpellAbility {
      *            the ability
      * @return the unique targets
      */
-    public final ArrayList<Object> getUniqueTargets() {
-        final ArrayList<Object> targets = new ArrayList<Object>();
-        SpellAbility child = this;
-        while (child instanceof AbilitySub) {
-            child = ((AbilitySub) child).getParent();
-            if (child != null && child.getTarget() != null) {
+    public final List<Object> getUniqueTargets() {
+        final List<Object> targets = new ArrayList<Object>();
+        SpellAbility child = this.getParent();
+        while (child != null) {
+            if (child.getTarget() != null) {
                 targets.addAll(child.getTarget().getTargets());
             }
+            child = child.getParent();
         }
-    
         return targets;
     }
     

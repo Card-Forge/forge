@@ -23,7 +23,6 @@ import java.util.Map.Entry;
 import java.util.Set;
 import java.util.TreeMap;
 
-import forge.CardColor;
 import forge.card.mana.ManaCost;
 
 /**
@@ -76,32 +75,28 @@ public final class CardRules implements ICardCharacteristics {
         byte res = face.getManaCost() == null ? 0 : face.getManaCost().getColorProfile();
         boolean isReminder = false;
         boolean isSymbol = false;
-        for(char c : face.getOracleText().toCharArray()) {
-            switch(c)
-            {
-            case('('): isReminder = true; break;
-            case(')'): isReminder = false; break;
-            case('{'): isSymbol = true; break;
-            case('}'): isSymbol = false; break;
-            default:
+        String oracleText = face.getOracleText();
+        int len = oracleText.length();
+        for(int i = 0; i < len; i++) {
+            char c = oracleText.charAt(i); // This is to avoid needless allocations performed by toCharArray()
+            switch(c) {
+                case('('): isReminder = true; break;
+                case(')'): isReminder = false; break;
+                case('{'): isSymbol = true; break;
+                case('}'): isSymbol = false; break;
+                default:
                     if(isSymbol && !isReminder) {
-                        switch(c)
-                        {
-                        case('W'): res |= MagicColor.WHITE; break;
-                        case('U'): res |= MagicColor.BLUE; break;
-                        case('B'): res |= MagicColor.BLACK; break;
-                        case('R'): res |= MagicColor.RED; break;
-                        case('G'): res |= MagicColor.GREEN; break;
+                        switch(c) {
+                            case('W'): res |= MagicColor.WHITE; break;
+                            case('U'): res |= MagicColor.BLUE; break;
+                            case('B'): res |= MagicColor.BLACK; break;
+                            case('R'): res |= MagicColor.RED; break;
+                            case('G'): res |= MagicColor.GREEN; break;
                         }
-                    }
-                    else
-                    {
-                        continue;
                     }
                     break;
             }
         }
-        
         return res;
     }
 
