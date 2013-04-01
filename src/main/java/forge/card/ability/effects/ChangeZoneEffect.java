@@ -171,7 +171,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
 
         final StringBuilder sbTargets = new StringBuilder();
 
-        ArrayList<Card> tgts;
+        List<Card> tgts;
         if (sa.getTarget() != null) {
             tgts = sa.getTarget().getTargetCards();
         } else {
@@ -301,8 +301,8 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
      *            a {@link forge.card.spellability.SpellAbility} object.
      */
     private static void changeKnownOriginResolve(final SpellAbility sa) {
-        ArrayList<Card> tgtCards;
-        ArrayList<SpellAbility> sas;
+        List<Card> tgtCards;
+        List<SpellAbility> sas;
 
         final Target tgt = sa.getTarget();
         final Player player = sa.getActivatingPlayer();
@@ -552,7 +552,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
 
         final Target tgt = sa.getTarget();
         if (tgt != null) {
-            final ArrayList<Player> players = tgt.getTargetPlayers();
+            final List<Player> players = tgt.getTargetPlayers();
             player = player != null ? player : players.get(0);
             if (players.contains(player) && !player.canBeTargetedBy(sa)) {
                 return;

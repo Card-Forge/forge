@@ -8,7 +8,7 @@ import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
-import forge.card.spellability.TargetSelection;
+import forge.card.spellability.TargetChooser;
 import forge.game.ai.ComputerUtilCard;
 import forge.game.ai.ComputerUtilCost;
 import forge.game.ai.ComputerUtilMana;
@@ -50,7 +50,7 @@ public class CounterAi extends SpellAbilityAi {
             }
 
             tgt.resetTargets();
-            if (TargetSelection.matchSpellAbility(sa, topSA, tgt)) {
+            if (TargetChooser.matchSpellAbility(sa, topSA, tgt)) {
                 tgt.addTarget(topSA);
             } else {
                 return false;
@@ -120,7 +120,7 @@ public class CounterAi extends SpellAbilityAi {
             }
 
             tgt.resetTargets();
-            if (TargetSelection.matchSpellAbility(sa, topSA, tgt)) {
+            if (TargetChooser.matchSpellAbility(sa, topSA, tgt)) {
                 tgt.addTarget(topSA);
             } else {
                 return false;

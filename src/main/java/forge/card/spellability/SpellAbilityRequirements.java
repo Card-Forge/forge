@@ -38,48 +38,36 @@ import forge.game.zone.Zone;
  * @version $Id$
  */
 public class SpellAbilityRequirements {
-    private SpellAbility ability = null;
-    private TargetSelection select = null;
-    private CostPayment payment = null;
-    private boolean isFree = false;
+    private final SpellAbility ability;
+    private final TargetChooser select;
+    private final CostPayment payment;
+    private boolean isFree;
     private boolean skipStack = false;
-    private boolean bCasting = false;
-    private Zone fromZone = null;
-    private Integer zonePosition = null;
+    private boolean isAlreadyTargeted = false;
 
- 
-    public final void setSkipStack(final boolean bSkip) {
-        this.skipStack = bSkip;
-    }
- 
-    public final void setFree(final boolean bFree) {
-        this.isFree = bFree;
-    }
+    public void setAlreadyTargeted() { isAlreadyTargeted  = true; }
+    public final void setSkipStack() { this.skipStack = true; }
+    public void setFree() { this.isFree = true; } 
 
-
-    public SpellAbilityRequirements(final SpellAbility sa, final TargetSelection ts, final CostPayment cp) {
+    public SpellAbilityRequirements(final SpellAbility sa, final CostPayment cp) {
         this.ability = sa;
-        this.select = ts;
+        this.select = new TargetChooser(sa);
         this.payment = cp;
     }
 
+
     public final void fillRequirements() {
-        this.fillRequirements(false);
-    }
-
-    public final void fillRequirements(final boolean skipTargeting) {
         final GameState game = Singletons.getModel().getGame();
-        
-        if ((this.ability instanceof Spell) && !this.bCasting) {
-            // remove from hand
-            this.bCasting = true;
-            if (!this.ability.getSourceCard().isCopiedSpell()) {
-                final Card c = this.ability.getSourceCard();
 
-                this.fromZone = game.getZoneOf(c);
-                this.zonePosition = this.fromZone.getPosition(c);
-                this.ability.setSourceCard(game.getAction().moveToStack(c));
-            }
+        // used to rollback
+        Zone fromZone = null;
+        int zonePosition = 0;
+
+        final Card c = this.ability.getSourceCard();
+        if (this.ability instanceof Spell && !c.isCopiedSpell()) {
+            fromZone = game.getZoneOf(c);
+            zonePosition = fromZone.getPosition(c);
+            this.ability.setSourceCard(game.getAction().moveToStack(c));
         }
 
         // freeze Stack. No abilities should go onto the stack while I'm filling requirements.
@@ -88,19 +76,19 @@ public class SpellAbilityRequirements {
         // Announce things like how many times you want to Multikick or the value of X
         if (!this.announceRequirements()) {
             this.select.setCancel(true);
-            rollbackAbility();
+            rollbackAbility(fromZone, zonePosition);
             return;
         }
 
         // Skip to paying if parent ability doesn't target and has no
         // subAbilities.
         // (or trigger case where its already targeted)
-        if (!skipTargeting && (this.select.doesTarget() || (this.ability.getSubAbility() != null))) {
-            this.select.setRequirements(this);
+        boolean acceptsTargets = this.select.doesTarget() || this.ability.getSubAbility() != null;
+        if (!isAlreadyTargeted && acceptsTargets) {
             this.select.clearTargets();
             this.select.chooseTargets();
             if (this.select.isCanceled()) {
-                rollbackAbility();
+                rollbackAbility(fromZone, zonePosition);
                 return;
             }
         }
@@ -114,7 +102,7 @@ public class SpellAbilityRequirements {
         } 
     
         if (!paymentMade) {
-            rollbackAbility();
+            rollbackAbility(fromZone, zonePosition);
             return;
         }
         
@@ -134,7 +122,7 @@ public class SpellAbilityRequirements {
         }
     }
 
-    private void rollbackAbility() { 
+    private void rollbackAbility(Zone fromZone, int zonePosition) { 
         // cancel ability during target choosing
         final Card c = this.ability.getSourceCard();
 
@@ -143,9 +131,9 @@ public class SpellAbilityRequirements {
             c.setState(CardCharacteristicName.Original);
         }
 
-        if (this.bCasting && !c.isCopiedSpell()) { // and not a copy
+        if (fromZone != null) { // and not a copy
             // add back to where it came from
-            Singletons.getModel().getGame().getAction().moveTo(this.fromZone, c, this.zonePosition);
+            Singletons.getModel().getGame().getAction().moveTo(fromZone, c, zonePosition >= 0 ? Integer.valueOf(zonePosition) : null);
         }
 
         if (this.select != null) {

@@ -13766,7 +13766,7 @@ src/main/java/forge/card/spellability/SpellAbilityVariables.java svneol=native#t
 src/main/java/forge/card/spellability/SpellPermanent.java svneol=native#text/plain
 src/main/java/forge/card/spellability/Target.java svneol=native#text/plain
 src/main/java/forge/card/spellability/TargetChoices.java svneol=native#text/plain
-src/main/java/forge/card/spellability/TargetSelection.java svneol=native#text/plain
+src/main/java/forge/card/spellability/TargetChooser.java svneol=native#text/plain
 src/main/java/forge/card/spellability/package-info.java svneol=native#text/plain
 src/main/java/forge/card/staticability/StaticAbility.java svneol=native#text/plain
 src/main/java/forge/card/staticability/StaticAbilityCantAttackBlock.java -text

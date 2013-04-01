@@ -623,7 +623,7 @@ public class AbilityUtils {
 
         } else if (type.startsWith("Targeted")) {
             source = null;
-            ArrayList<Card> tgts = sa.findTargetedCards();
+            List<Card> tgts = sa.findTargetedCards();
             if (!tgts.isEmpty()) {
                 source = tgts.get(0);
             }

@@ -15,7 +15,7 @@ import forge.card.cost.Cost;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
-import forge.card.spellability.TargetSelection;
+import forge.card.spellability.TargetChooser;
 import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilCard;
 import forge.game.ai.ComputerUtilCombat;
@@ -103,8 +103,7 @@ public class DamageDealAi extends DamageAiBase {
             if (tgt != null && tgt.getTargetPlayers().isEmpty() && !sa.hasParam("DividedAsYouChoose")) {
                 int actualPay = 0;
                 final boolean noPrevention = sa.hasParam("NoPrevention");
-                final ArrayList<Card> cards = tgt.getTargetCards();
-                for (final Card c : cards) {
+                for (final Card c : tgt.getTargetCards()) {
                     final int adjDamage = ComputerUtilCombat.getEnoughDamageToKill(c, dmg, source, false, noPrevention);
                     if ((adjDamage > actualPay) && (adjDamage <= dmg)) {
                         actualPay = adjDamage;
@@ -144,7 +143,7 @@ public class DamageDealAi extends DamageAiBase {
 
         final ArrayList<Object> objects = tgt.getTargets();
         if (saMe.hasParam("TargetUnique")) {
-            objects.addAll(TargetSelection.getUniqueTargets(saMe));
+            objects.addAll(TargetChooser.getUniqueTargets(saMe));
         }
         for (final Object o : objects) {
             if (o instanceof Card) {
@@ -472,7 +471,7 @@ public class DamageDealAi extends DamageAiBase {
                 // If I can kill my target by paying less mana, do it
                 int actualPay = 0;
                 final boolean noPrevention = sa.hasParam("NoPrevention");
-                final ArrayList<Card> cards = tgt.getTargetCards();
+                final List<Card> cards = tgt.getTargetCards();
                 //target is a player
                 if (cards.isEmpty()) {
                     actualPay = dmg;

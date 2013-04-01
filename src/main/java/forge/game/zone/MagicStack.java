@@ -42,7 +42,7 @@ import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityStackInstance;
 import forge.card.spellability.Target;
 import forge.card.spellability.TargetChoices;
-import forge.card.spellability.TargetSelection;
+import forge.card.spellability.TargetChooser;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerType;
 import forge.control.input.InputPayManaExecuteCommands;
@@ -885,7 +885,7 @@ public class MagicStack extends MyObservable {
                     }
                     else if (o instanceof SpellAbility) {
                         final SpellAbility tgtSA = (SpellAbility) o;
-                        invalidTarget = !(TargetSelection.matchSpellAbility(sa, tgtSA, tgt));
+                        invalidTarget = !(TargetChooser.matchSpellAbility(sa, tgtSA, tgt));
                         // TODO Remove target?
                         if (invalidTarget) {
                             choices.removeTarget(tgtSA);

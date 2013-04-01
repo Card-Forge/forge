@@ -1053,7 +1053,7 @@ public abstract class SpellAbility implements ISpellAbility {
         if (this.targetCard == null) {
             final Target tgt = this.getTarget();
             if (tgt != null) {
-                final ArrayList<Card> list = tgt.getTargetCards();
+                final List<Card> list = tgt.getTargetCards();
 
                 if (!list.isEmpty()) {
                     return list.get(0);
@@ -1106,7 +1106,7 @@ public abstract class SpellAbility implements ISpellAbility {
     public Player getTargetPlayer() {
         final Target tgt = this.getTarget();
         if (tgt != null) {
-            final ArrayList<Player> list = tgt.getTargetPlayers();
+            final List<Player> list = tgt.getTargetPlayers();
 
             if (!list.isEmpty()) {
                 return list.get(0);
@@ -1313,7 +1313,7 @@ public abstract class SpellAbility implements ISpellAbility {
             return false;
         }
         if (entity.isValid(this.getTarget().getValidTgts(), this.getActivatingPlayer(), this.getSourceCard())
-                && (!this.getTarget().isUniqueTargets() || !TargetSelection.getUniqueTargets(this).contains(entity))
+                && (!this.getTarget().isUniqueTargets() || !TargetChooser.getUniqueTargets(this).contains(entity))
                 && entity.canBeTargetedBy(this)) {
             return true;
         }
@@ -1494,23 +1494,22 @@ public abstract class SpellAbility implements ISpellAbility {
      * 
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
-    public ArrayList<Card> findTargetedCards() {
-
-        ArrayList<Card> list = new ArrayList<Card>();
+    public List<Card> findTargetedCards() {
         Target tgt = this.getTarget();
         // First search for targeted cards associated with current ability
         if (tgt != null && tgt.getTargetCards() != null && !tgt.getTargetCards().isEmpty()) {
             return tgt.getTargetCards();
         }
+        List<Card> list = new ArrayList<Card>();
         // Next search for source cards of targeted SAs associated with current ability
-        else if (tgt != null && tgt.getTargetSAs() != null && !tgt.getTargetSAs().isEmpty()) {
+        if (tgt != null && tgt.getTargetSAs() != null && !tgt.getTargetSAs().isEmpty()) {
             for (final SpellAbility ability : tgt.getTargetSAs()) {
                 list.add(ability.getSourceCard());
             }
             return list;
         }
         // Lastly Search parent SAs for target cards
-        else {
+        
             // Check for a parent that targets a card
             SpellAbility parent = this.getParentTargetingCard();
             if (null != parent) {
@@ -1523,7 +1522,7 @@ public abstract class SpellAbility implements ISpellAbility {
                     list.add(ability.getSourceCard());
                 }
             }
-        }
+        
         return list;
     }
 

@@ -205,7 +205,6 @@ public final class CEditorConstructed extends ACEditorBase<CardPrinted, Deck> {
     /**
      * Switch between the main deck and the sideboard editor.
      */
-    @SuppressWarnings("incomplete-switch")
     public void cycleEditorMode() {
         int curindex = allSections.indexOf(sectionMode);
 

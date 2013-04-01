@@ -34,7 +34,6 @@ import forge.CardPredicates.Presets;
 import forge.Command;
 import forge.CounterType;
 import forge.Singletons;
-import forge.card.ability.AbilityFactory;
 import forge.card.cost.Cost;
 import forge.card.mana.ManaCost;
 import forge.card.spellability.Ability;

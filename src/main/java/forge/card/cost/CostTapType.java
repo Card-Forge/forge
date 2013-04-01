@@ -24,7 +24,6 @@ import com.google.common.base.Predicate;
 
 import forge.Card;
 import forge.CardLists;
-import forge.CardPredicates;
 import forge.CardPredicates.Presets;
 import forge.FThreads;
 import forge.card.ability.AbilityUtils;

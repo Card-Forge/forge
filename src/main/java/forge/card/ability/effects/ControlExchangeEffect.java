@@ -1,6 +1,6 @@
 package forge.card.ability.effects;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import forge.Card;
 import forge.Singletons;
@@ -21,7 +21,7 @@ public class ControlExchangeEffect extends SpellAbilityEffect {
         Card object1 = null;
         Card object2 = null;
         final Target tgt = sa.getTarget();
-        ArrayList<Card> tgts = tgt.getTargetCards();
+        List<Card> tgts = tgt.getTargetCards();
         if (tgts.size() > 0) {
             object1 = tgts.get(0);
         }
@@ -42,7 +42,7 @@ public class ControlExchangeEffect extends SpellAbilityEffect {
         Card object1 = null;
         Card object2 = null;
         final Target tgt = sa.getTarget();
-        ArrayList<Card> tgts = tgt.getTargetCards();
+        List<Card> tgts = tgt.getTargetCards();
         if (tgts.size() > 0) {
             object1 = tgts.get(0);
         }

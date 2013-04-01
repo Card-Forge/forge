@@ -464,7 +464,7 @@ public class Target {
      * 
      * @return a {@link java.util.ArrayList} object.
      */
-    public final ArrayList<Card> getTargetCards() {
+    public final List<Card> getTargetCards() {
         if (this.choice == null) {
             return new ArrayList<Card>();
         }
@@ -479,7 +479,7 @@ public class Target {
      * 
      * @return a {@link java.util.ArrayList} object.
      */
-    public final ArrayList<Player> getTargetPlayers() {
+    public final List<Player> getTargetPlayers() {
         if (this.choice == null) {
             return new ArrayList<Player>();
         }
@@ -494,7 +494,7 @@ public class Target {
      * 
      * @return a {@link java.util.ArrayList} object.
      */
-    public final ArrayList<SpellAbility> getTargetSAs() {
+    public final List<SpellAbility> getTargetSAs() {
         if (this.choice == null) {
             return new ArrayList<SpellAbility>();
         }

@@ -21,7 +21,7 @@ public class DestroyAllEffect extends SpellAbilityEffect {
         final StringBuilder sb = new StringBuilder();
         final boolean noRegen = sa.hasParam("NoRegen");
 
-        ArrayList<Card> tgtCards;
+        List<Card> tgtCards;
 
         final Target tgt = sa.getTarget();
         if (tgt != null) {

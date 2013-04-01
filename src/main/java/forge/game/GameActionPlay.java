@@ -21,7 +21,6 @@ import forge.card.mana.ManaCostShard;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityRequirements;
 import forge.card.spellability.Target;
-import forge.card.spellability.TargetSelection;
 import forge.card.staticability.StaticAbility;
 import forge.control.input.InputPayManaSimple;
 import forge.game.ai.ComputerUtilCard;
@@ -73,11 +72,10 @@ public class GameActionPlay {
             if (sa.getApi() == ApiType.Charm && !sa.isWrapper()) {
                 CharmEffect.makeChoices(sa);
             }
-            final TargetSelection ts = new TargetSelection(sa.getTarget(), sa);
             final CostPayment payment = new CostPayment(sa.getPayCosts(), sa);
 
-            final SpellAbilityRequirements req = new SpellAbilityRequirements(sa, ts, payment);
-            req.setFree(true);
+            final SpellAbilityRequirements req = new SpellAbilityRequirements(sa, payment);
+            req.setFree();
             req.fillRequirements();
         } else {
             if (sa.isSpell()) {
@@ -383,7 +381,6 @@ public class GameActionPlay {
 
         // System.out.println("Playing:" + sa.getDescription() + " of " + sa.getSourceCard() +  " new = " + newAbility);
         if (newAbility) {
-            final TargetSelection ts = new TargetSelection(sa.getTarget(), sa);
             CostPayment payment = null;
             if (sa.getPayCosts() == null) {
                 payment = new CostPayment(new Cost(sa.getSourceCard(), "0", sa.isAbility()), sa);
@@ -391,7 +388,7 @@ public class GameActionPlay {
                 payment = new CostPayment(sa.getPayCosts(), sa);
             }
 
-            final SpellAbilityRequirements req = new SpellAbilityRequirements(sa, ts, payment);
+            final SpellAbilityRequirements req = new SpellAbilityRequirements(sa, payment);
             req.fillRequirements();
         } else {
             ManaCostBeingPaid manaCost = new ManaCostBeingPaid(sa.getManaCost());
@@ -426,20 +423,24 @@ public class GameActionPlay {
      * @param skipTargeting
      *            a boolean.
      */
-    public final void playSpellAbilityNoStack(final Player human, final SpellAbility sa, final boolean skipTargeting) {
+    public final void playSpellAbilityNoStack(final Player human, final SpellAbility sa) {
+        playSpellAbilityNoStack(human, sa, false);
+    }
+    public final void playSpellAbilityNoStack(final Player human, final SpellAbility sa, boolean useOldTargets) {
         sa.setActivatingPlayer(human);
 
         if (sa.getPayCosts() != null) {
-            final TargetSelection ts = new TargetSelection(sa.getTarget(), sa);
             final CostPayment payment = new CostPayment(sa.getPayCosts(), sa);
 
             if (!sa.isTrigger()) {
                 payment.changeCost();
             }
 
-            final SpellAbilityRequirements req = new SpellAbilityRequirements(sa, ts, payment);
-            req.setSkipStack(true);
-            req.fillRequirements(skipTargeting);
+            final SpellAbilityRequirements req = new SpellAbilityRequirements(sa, payment);
+            if( useOldTargets )
+                req.setAlreadyTargeted();
+            req.setSkipStack();
+            req.fillRequirements();
         } else {
             ManaCostBeingPaid manaCost = new ManaCostBeingPaid(sa.getManaCost());
             if (sa.getSourceCard().isCopiedSpell() && sa.isSpell()) {

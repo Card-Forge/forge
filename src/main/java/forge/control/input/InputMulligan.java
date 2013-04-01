@@ -78,7 +78,7 @@ public class InputMulligan extends InputBase {
         }
 
         sb.append("Do you want to Mulligan?");
-        CMatchUI.SINGLETON_INSTANCE.showMessage(sb.toString());
+        showMessage(sb.toString());
     }
 
     /** {@inheritDoc} */
@@ -130,7 +130,7 @@ public class InputMulligan extends InputBase {
                             if (GuiDialog.confirm(c, "Use " + c +"'s  ability?")) {
                                 // If we ever let the AI memorize cards in the players
                                 // hand, this would be a place to do so.
-                                game.getActionPlay().playSpellAbilityNoStack(p, effect, false);
+                                game.getActionPlay().playSpellAbilityNoStack(p, effect);
                             }
                         }
                     }

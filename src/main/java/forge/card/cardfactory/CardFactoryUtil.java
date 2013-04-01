@@ -2919,7 +2919,7 @@ public class CardFactoryUtil {
                 }
 
                 if (card.getController().isHuman()) {
-                    game.getActionPlay().playSpellAbilityNoStack(card.getController(), origSA, false);
+                    game.getActionPlay().playSpellAbilityNoStack(card.getController(), origSA);
                 } else {
                     ComputerUtil.playNoStack((AIPlayer) card.getController(), origSA, game);
                 }
