@@ -2394,7 +2394,6 @@ public class CardFactoryUtil {
                 final String[] k = parse.split("kicker ");
 
                 final SpellAbility sa = card.getSpellAbility()[0];
-                sa.setIsMultiKicker(true);
                 sa.setMultiKickerManaCost(new ManaCost(new ManaCostParser(k[1])));
             }
         }
@@ -2557,7 +2556,6 @@ public class CardFactoryUtil {
         int xCount = card.getManaCost().getShardCount(ManaCostShard.X);
         if (xCount > 0) {
             final SpellAbility sa = card.getSpellAbility()[0];
-            sa.setIsXCost(true);
             sa.setXManaCost(xCount);
         } // X
 

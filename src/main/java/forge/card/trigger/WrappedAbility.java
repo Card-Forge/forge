@@ -285,11 +285,6 @@ public class WrappedAbility extends Ability implements ISpellAbility {
     }
 
     @Override
-    public void setIsXCost(final boolean b) {
-        sa.setIsXCost(b);
-    }
-
-    @Override
     public void setMultiKickerManaCost(final ManaCost cost) {
         sa.setMultiKickerManaCost(cost);
     }

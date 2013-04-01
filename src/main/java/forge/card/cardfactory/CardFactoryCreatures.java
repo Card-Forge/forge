@@ -316,7 +316,7 @@ public class CardFactoryCreatures {
                 c.addCounter(CounterType.P1P1, xCounters, true);
             }
         };
-        spell.setIsXCost(true);
+        spell.setXManaCost(1);
         // Do not remove SpellAbilities created by AbilityFactory or
         // Keywords.
         card.clearFirstSpell();

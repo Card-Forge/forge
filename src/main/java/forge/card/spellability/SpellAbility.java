@@ -74,9 +74,7 @@ public abstract class SpellAbility implements ISpellAbility {
     private boolean temporarilySuppressed = false;
 
     private boolean flashBackAbility = false;
-    private boolean multiKicker = false;
     private boolean replicate = false;
-    private boolean xCost = false;
     private boolean cycling = false;
     private boolean delve = false;
 
@@ -387,19 +385,7 @@ public abstract class SpellAbility implements ISpellAbility {
         return false;
     }
 
-    /**
-     * <p>
-     * setIsMultiKicker.
-     * </p>
-     * 
-     * @param b
-     *            a boolean.
-     */
-    public final void setIsMultiKicker(final boolean b) {
-        this.multiKicker = b;
-    }
-
-    /**
+     /**
      * <p>
      * isMultiKicker.
      * </p>
@@ -407,7 +393,7 @@ public abstract class SpellAbility implements ISpellAbility {
      * @return a boolean.
      */
     public boolean isMultiKicker() {
-        return this.multiKicker;
+        return this.multiKickerManaCost != null;
     }
 
     /**
@@ -433,17 +419,6 @@ public abstract class SpellAbility implements ISpellAbility {
         return this.replicate;
     }
 
-    /**
-     * <p>
-     * setIsXCost.
-     * </p>
-     * 
-     * @param b
-     *            a boolean.
-     */
-    public void setIsXCost(final boolean b) {
-        this.xCost = b;
-    }
 
     /**
      * <p>
@@ -453,7 +428,7 @@ public abstract class SpellAbility implements ISpellAbility {
      * @return a boolean.
      */
     public boolean isXCost() {
-        return this.xCost;
+        return getXManaCost() > 0;
     }
 
     /**
