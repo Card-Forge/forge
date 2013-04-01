@@ -127,12 +127,7 @@ public class GameAction {
             return c;
         }
 
-        boolean suppress;
-        if (c.isToken()) {
-            suppress = false;
-        } else {
-            suppress = zoneFrom.equals(zoneTo);
-        }
+        boolean suppress = !c.isToken() && zoneFrom.equals(zoneTo);
 
         Card copied = null;
         Card lastKnownInfo = null;
