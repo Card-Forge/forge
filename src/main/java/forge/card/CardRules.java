@@ -72,7 +72,7 @@ public final class CardRules implements ICardCharacteristics {
     
     private byte calculateColorIdentity(ICardFace face)
     {
-        byte res = face.getManaCost() == null ? 0 : face.getManaCost().getColorProfile();
+        byte res = face.getColor().getColor();
         boolean isReminder = false;
         boolean isSymbol = false;
         String oracleText = face.getOracleText();
