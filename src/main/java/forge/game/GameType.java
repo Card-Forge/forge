@@ -16,7 +16,8 @@ public enum GameType {
     Constructed ( DeckFormat.Constructed, false, true ), 
     Archenemy   ( DeckFormat.Archenemy, false, false ),
     Planechase  ( DeckFormat.Planechase, false, false ),
-    Vanguard    ( DeckFormat.Vanguard, true, true );
+    Vanguard    ( DeckFormat.Vanguard, true, true ), 
+    Commander   ( DeckFormat.Commander, false, false);
 
     private final DeckFormat decksFormat;
     private final boolean bCardpoolLimited;

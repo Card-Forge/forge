@@ -133,6 +133,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     private List<Card> blockedThisTurn = null;
     private List<Card> blockedByThisTurn = null;
 
+    private boolean isCommander = false;
     private boolean startsGameInPlay = false;
     private boolean drawnThisTurn = false;
     private boolean tapped = false;
@@ -7320,6 +7321,10 @@ public class Card extends GameEntity implements Comparable<Card> {
             if (!this.isType(source.getChosenType())) {
                 return false;
             }
+        } else if (property.equals("IsCommander")) {
+            if(!this.isCommander) {
+                return false;
+            }
         } else {
             if (!this.isType(property)) {
                 return false;
@@ -9139,13 +9144,13 @@ public class Card extends GameEntity implements Comparable<Card> {
         cardRules = r;
     }
 
-    /**
-     * TODO: Write javadoc for this method.
-     * @return
-     */
-    public boolean isEdhGeneral() {
+    public boolean isCommander() {
         // TODO - have a field
-        return false;
+        return this.isCommander;
+    }
+    
+    public void setCommander(boolean b) {
+        this.isCommander = b;
     }
 
 } // end Card class

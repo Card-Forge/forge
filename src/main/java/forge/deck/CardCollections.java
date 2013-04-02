@@ -40,6 +40,7 @@ public class CardCollections {
     private final IStorage<Deck> cube;
     private final IStorage<Deck> scheme;
     private final IStorage<Deck> plane;
+    private final IStorage<Deck> commander;
 
     /**
      * TODO: Write javadoc for Constructor.
@@ -56,9 +57,10 @@ public class CardCollections {
         this.cube = new StorageImmediatelySerialized<Deck>(new DeckSerializer(new File(NewConstants.DECK_CUBE_DIR)));
         this.scheme = new StorageImmediatelySerialized<Deck>(new DeckSerializer(new File(NewConstants.DECK_SCHEME_DIR)));
         this.plane = new StorageImmediatelySerialized<Deck>(new DeckSerializer(new File(NewConstants.DECK_PLANE_DIR)));
-
+        this.commander = new StorageImmediatelySerialized<Deck>(new DeckSerializer(new File(NewConstants.DECK_COMMANDER_DIR)));
+        
         sw.stop();
-        System.out.printf("Read decks (%d ms): %d constructed, %d sealed, %d draft, %d cubes, %d scheme, %d planar.%n", sw.getTime(), constructed.size(), sealed.size(), draft.size(), cube.size(), scheme.size(), plane.size());
+        System.out.printf("Read decks (%d ms): %d constructed, %d sealed, %d draft, %d cubes, %d scheme, %d planar, %d commander.%n", sw.getTime(), constructed.size(), sealed.size(), draft.size(), cube.size(), scheme.size(), plane.size(),commander.size());
 //        int sum = constructed.size() + sealed.size() + draft.size() + cube.size() + scheme.size() + plane.size();
 //        FSkin.setProgessBarMessage(String.format("Loaded %d decks in %f sec", sum, sw.getTime() / 1000f ));
         // remove this after most people have been switched to new layout
@@ -115,6 +117,13 @@ public class CardCollections {
      */
     public IStorage<Deck> getPlane() {
         return plane;
+    }
+    
+    /**
+     * @return the plane
+     */
+    public IStorage<Deck> getCommander() {
+        return commander;
     }
 
 }

@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import forge.deck.Deck;
+import forge.deck.DeckSection;
 import forge.game.player.LobbyPlayer;
 import forge.item.CardPrinted;
 
@@ -31,6 +32,15 @@ public class MatchStartHelper {
         start.setStartingHand(start.getStartingHand() + avatar.getRules().getHand());
         start.setCardsInCommand(Arrays.asList(avatar));
 
+        players.put(player, start);
+    }
+    
+    public void addCommanderPlayer(final LobbyPlayer player, final Deck deck)
+    {
+        PlayerStartConditions start = new PlayerStartConditions(deck);
+        start.setStartingLife(40);
+        start.setCardsInCommand(deck.get(DeckSection.Commander).toFlatList());
+        
         players.put(player, start);
     }
 

@@ -644,7 +644,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
         }
 
         this.assignedDamage.put(source, damageToDo);
-        if(source.isEdhGeneral())
+        if(source.isCommander())
             this.edhGeneralDamage+= damageToDo; 
                 
         GameActionUtil.executeDamageDealingEffects(source, damageToDo);
