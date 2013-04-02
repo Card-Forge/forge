@@ -21,6 +21,7 @@ import java.util.Stack;
 
 import forge.Singletons;
 import forge.game.GameState;
+import forge.game.GameType;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -117,8 +118,14 @@ public class InputControl extends MyObservable implements java.io.Serializable {
     public final Input getActualInput(GameState game) {
         if ( !game.hasMulliganned() )
         {
-            return new InputMulligan(Singletons.getModel().getMatch(), Singletons.getControl().getPlayer());
-            //return new InputPartialParisMulligan(Singletons.getModel().getMatch(), Singletons.getControl().getPlayer());
+            if(game.getType() == GameType.Commander)
+            {
+                return new InputPartialParisMulligan(Singletons.getModel().getMatch(), Singletons.getControl().getPlayer());
+            }
+            else
+            {
+                return new InputMulligan(Singletons.getModel().getMatch(), Singletons.getControl().getPlayer());
+            }            
         }
         final PhaseHandler handler = game.getPhaseHandler();
         final PhaseType phase = handler.getPhase();

@@ -204,26 +204,27 @@ public class InputPartialParisMulligan extends InputBase {
         {
             lastExiled.remove(c0);
             c0.setUsedToPay(false);
-            return;
         }
-        
-        Zone z0 = match.getCurrentGame().getZoneOf(c0);
-        if (c0.getName().equals("Serum Powder") && z0.is(ZoneType.Hand)) {
-            if (GuiDialog.confirm(c0, "Use " + c0.getName() + "'s ability?")) {
-                List<Card> hand = new ArrayList<Card>(c0.getController().getCardsIn(ZoneType.Hand));
-                for (Card c : hand) {
-                    match.getCurrentGame().getAction().exile(c);
+        else
+        {        
+            Zone z0 = match.getCurrentGame().getZoneOf(c0);
+            if (c0.getName().equals("Serum Powder") && z0.is(ZoneType.Hand)) {
+                if (GuiDialog.confirm(c0, "Use " + c0.getName() + "'s ability?")) {
+                    List<Card> hand = new ArrayList<Card>(c0.getController().getCardsIn(ZoneType.Hand));
+                    for (Card c : hand) {
+                        match.getCurrentGame().getAction().exile(c);
+                    }
+                    c0.getController().drawCards(hand.size());
                 }
-                c0.getController().drawCards(hand.size());
-            }
-            else
-            {
+                else
+                {
+                    lastExiled.add(c0);
+                    c0.setUsedToPay(true);
+                }
+            } else {
                 lastExiled.add(c0);
                 c0.setUsedToPay(true);
             }
-        } else {
-            lastExiled.add(c0);
-            c0.setUsedToPay(true);
         }
         
         if(lastExiled.size() > 0)
