@@ -5,6 +5,7 @@ K:ETBReplacement:Other:DBNameCard
 SVar:DBNameCard:DB$ NameCard | Defined$ You | SpellDescription$ As CARDNAME enters the battlefield, name a card.
 S:Mode$ Continuous | Affected$ You | AddKeyword$ Protection:ChosenName | Description$ You have protection from the chosen name. (You can't be targeted, dealt damage, or enchanted by anything with that name.)
 SVar:RemAIDeck:True
+SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/runed_halo.jpg
 Oracle:As Runed Halo enters the battlefield, name a card.\nYou have protection from the chosen name. (You can't be targeted, dealt damage, or enchanted by anything with that name.)
 SetInfo:SHM Rare
