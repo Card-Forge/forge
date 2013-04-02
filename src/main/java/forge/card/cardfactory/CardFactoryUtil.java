@@ -1247,22 +1247,18 @@ public class CardFactoryUtil {
             return highest;
         }
 
-        if (l[0].startsWith("DifferentCardNamesRemembered")) {
-            final List<Card> list = new ArrayList<Card>();
+        if (l[0].startsWith("DifferentCardNames_")) {
             final List<String> crdname = new ArrayList<String>();
-            if (c.getRemembered().size() > 0) {
-                for (final Object o : c.getRemembered()) {
-                    if (o instanceof Card) {
-                        list.add(Singletons.getModel().getGame().getCardState((Card) o));
-                    }
-                }
-            }
+            final String restriction = l[0].substring(19);
+            final String[] rest = restriction.split(",");
+            List<Card> list = cardController.getGame().getCardsInGame();
+            list = CardLists.getValidCards(list, rest, cardController, c);
             for (final Card card : list) {
                 if (!crdname.contains(card.getName())) {
                     crdname.add(card.getName());
                 }
             }
-            return crdname.size();
+            return CardFactoryUtil.doXMath(crdname.size(), m, c);
         }
 
         if (l[0].startsWith("RememberedSize")) {
