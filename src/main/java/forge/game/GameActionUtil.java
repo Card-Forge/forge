@@ -405,6 +405,16 @@ public final class GameActionUtil {
         // Only human player pays this way
         final Player p = ability.getActivatingPlayer();
         final Card source = ability.getSourceCard();
+        Card current = null; // Used in spells with RepeatEach effect to distinguish cards, Cut the Tethers
+        if (!source.getRemembered().isEmpty() && source.isSpell()) {
+            if (source.getRemembered().get(0) instanceof Card) { 
+                current = (Card) source.getRemembered().get(0);
+            }
+        }
+        if (!source.getImprinted().isEmpty() && source.isSpell()) {
+            current = source.getImprinted().get(0);
+        }
+        
         final List<CostPart> parts =  cost.getCostParts();
         ArrayList<CostPart> remainingParts =  new ArrayList<CostPart>(cost.getCostParts());
         CostPart costPart = null;
@@ -554,7 +564,9 @@ public final class GameActionUtil {
         if (!(costPart instanceof CostPartMana ))
             throw new RuntimeException("GameActionUtil.payCostDuringAbilityResolve - The remaining payment type is not Mana.");
 
-        InputPayment toSet = new InputPayManaExecuteCommands(p, source + "\r\n", ability.getManaCost());
+        InputPayment toSet = current == null 
+                ? new InputPayManaExecuteCommands(p, source + "\r\n", ability.getManaCost())
+                : new InputPayManaExecuteCommands(p, source + "\r\n" + "Current Card: " + current + "\r\n" , ability.getManaCost());
         FThreads.setInputAndWait(toSet);
         return toSet.isPaid();
     }
