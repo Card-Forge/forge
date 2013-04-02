@@ -8,10 +8,12 @@ import forge.Card;
 import forge.Singletons;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.cardfactory.CardFactoryUtil;
+import forge.game.player.AIPlayer;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityStackInstance;
 import forge.card.spellability.SpellPermanent;
 import forge.card.trigger.TriggerType;
+import forge.gui.GuiChoose;
 
 public class CounterEffect extends SpellAbilityEffect {
     @Override
@@ -107,8 +109,8 @@ public class CounterEffect extends SpellAbilityEffect {
                 Singletons.getModel().getGame().getAction().destroy(tgtSACard);
             }
 
-            if (sa.hasParam("RememberTargets")) {
-                if (sa.getParam("RememberTargets").equals("True")) {
+            if (sa.hasParam("RememberCountered")) {
+                if (sa.getParam("RememberCountered").equals("True")) {
                     sa.getSourceCard().addRemembered(tgtSACard);
                 }
             }
@@ -133,7 +135,15 @@ public class CounterEffect extends SpellAbilityEffect {
         Singletons.getModel().getGame().getStack().remove(si);
 
         String destination =  srcSA.hasParam("Destination") ? srcSA.getParam("Destination") : "Graveyard";
-
+        if (srcSA.hasParam("DestinationChoice")) {//Hinder
+            final String[] pos = srcSA.getParam("DestinationChoice").split(",");
+            if (srcSA.getActivatingPlayer() instanceof AIPlayer) {
+                destination = pos[0];
+            } else {
+                final String prompt = "Select a destination to remove";
+                destination = GuiChoose.one(prompt, pos);
+            }
+        }
         if (tgtSA.isAbility()) {
             // For Ability-targeted counterspells - do not move it anywhere,
             // even if Destination$ is specified.

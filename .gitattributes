@@ -3790,6 +3790,7 @@ res/cardsfolder/f/fog_bank.txt svneol=native#text/plain
 res/cardsfolder/f/fog_elemental.txt svneol=native#text/plain
 res/cardsfolder/f/fog_of_gnats.txt svneol=native#text/plain
 res/cardsfolder/f/foil.txt -text
+res/cardsfolder/f/fold_into_aether.txt -text
 res/cardsfolder/f/folk_medicine.txt svneol=native#text/plain
 res/cardsfolder/f/folk_of_an_havva.txt svneol=native#text/plain
 res/cardsfolder/f/folk_of_the_pines.txt svneol=native#text/plain
@@ -4902,6 +4903,7 @@ res/cardsfolder/h/higure_the_still_wind_avatar.txt -text
 res/cardsfolder/h/hikari_twilight_guardian.txt -text
 res/cardsfolder/h/hill_giant.txt svneol=native#text/plain
 res/cardsfolder/h/hillcomber_giant.txt svneol=native#text/plain
+res/cardsfolder/h/hinder.txt -text
 res/cardsfolder/h/hindering_light.txt svneol=native#text/plain
 res/cardsfolder/h/hindering_touch.txt svneol=native#text/plain
 res/cardsfolder/h/hindervines.txt -text
@@ -10567,6 +10569,7 @@ res/cardsfolder/s/swell_of_courage.txt svneol=native#text/plain
 res/cardsfolder/s/swelter.txt svneol=native#text/plain
 res/cardsfolder/s/swift_justice.txt -text
 res/cardsfolder/s/swift_maneuver.txt svneol=native#text/plain
+res/cardsfolder/s/swift_silence.txt -text
 res/cardsfolder/s/swiftfoot_boots.txt svneol=native#text/plain
 res/cardsfolder/s/swirling_sandstorm.txt svneol=native#text/plain
 res/cardsfolder/s/swirling_spriggan.txt -text
