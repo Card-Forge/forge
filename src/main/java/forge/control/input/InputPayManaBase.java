@@ -14,7 +14,7 @@ import forge.card.mana.ManaPool;
 import forge.card.spellability.AbilityManaPart;
 import forge.card.spellability.SpellAbility;
 import forge.game.GameState;
-import forge.game.player.Player;
+import forge.game.player.HumanPlayer;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 import forge.gui.framework.SDisplayUtil;
@@ -291,8 +291,7 @@ public abstract class InputPayManaBase extends InputSyncronizedBase implements I
         Runnable proc = new Runnable() {
             @Override
             public void run() {
-                final Player p = chosen.getActivatingPlayer();
-                p.getGame().getActionPlay().playSpellAbility(chosen, p);
+                player.getGame().getActionPlay().playSpellAbility(chosen, (HumanPlayer)chosen.getActivatingPlayer());
                 onManaAbilityPlayed(chosen); 
             }
         };

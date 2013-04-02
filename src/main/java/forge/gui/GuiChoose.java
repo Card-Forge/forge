@@ -7,6 +7,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.concurrent.Callable;
 
 import javax.swing.JDialog;
 import javax.swing.JFrame;
@@ -16,6 +17,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import forge.Card;
+import forge.FThreads;
 import forge.gui.match.CMatchUI;
 import forge.item.InventoryItem;
 
@@ -102,25 +104,34 @@ public class GuiChoose {
             }
         }
         
-        ListChooser<T> c = new ListChooser<T>(message, min, max, choices);
-        final JList list = c.getJList();
-        list.addListSelectionListener(new ListSelectionListener() {
+        FThreads.RunnableWithResult<List<T>> showChoice = new FThreads.RunnableWithResult<List<T>>() {
+            
             @Override
-            public void valueChanged(final ListSelectionEvent ev) {
-                if (list.getSelectedValue() instanceof Card) {
-                    CMatchUI.SINGLETON_INSTANCE.setCard((Card) list.getSelectedValue());
-
-                    GuiUtils.clearPanelSelections();
-                    GuiUtils.setPanelSelection((Card) list.getSelectedValue());
-                }
-                if (list.getSelectedValue() instanceof InventoryItem) {
-                    CMatchUI.SINGLETON_INSTANCE.setCard((InventoryItem) list.getSelectedValue());
-                }
+            public void run() {
+                ListChooser<T> c = new ListChooser<T>(message, min, max, choices);
+                final JList list = c.getJList();
+                list.addListSelectionListener(new ListSelectionListener() {
+                    @Override
+                    public void valueChanged(final ListSelectionEvent ev) {
+                        if (list.getSelectedValue() instanceof Card) {
+                            CMatchUI.SINGLETON_INSTANCE.setCard((Card) list.getSelectedValue());
+        
+                            GuiUtils.clearPanelSelections();
+                            GuiUtils.setPanelSelection((Card) list.getSelectedValue());
+                        }
+                        if (list.getSelectedValue() instanceof InventoryItem) {
+                            CMatchUI.SINGLETON_INSTANCE.setCard((InventoryItem) list.getSelectedValue());
+                        }
+                    }
+                });
+                c.show();
+                GuiUtils.clearPanelSelections();
+                result = c.getSelectedValues();
             }
-        });
-        c.show();
-        GuiUtils.clearPanelSelections();
-        return c.getSelectedValues();
+        };
+
+        FThreads.invokeInEDTAndWait(showChoice);
+        return showChoice.getResult();
     }
 
     // Nothing to choose here. Code uses this to just show a card.
