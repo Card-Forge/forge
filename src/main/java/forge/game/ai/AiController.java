@@ -750,6 +750,7 @@ public class AiController {
     /** Returns the spell ability which has already been played - use it for reference only */
     public SpellAbility chooseAndPlaySa(final List<SpellAbility> choices, boolean mandatory, boolean withoutPayingManaCost) {
         for (final SpellAbility sa : choices) {
+            sa.setActivatingPlayer(player);
             //Spells
             if (sa instanceof Spell) {
                 if (!((Spell) sa).canPlayFromEffectAI(mandatory, withoutPayingManaCost)) {
