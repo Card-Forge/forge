@@ -57,6 +57,7 @@ import forge.game.ai.ComputerUtilCost;
 import forge.game.event.SpellResolvedEvent;
 import forge.game.phase.PhaseType;
 import forge.game.player.AIPlayer;
+import forge.game.player.HumanPlayer;
 import forge.game.player.Player;
 import forge.gui.GuiChoose;
 import forge.gui.framework.EDocID;
@@ -1124,7 +1125,7 @@ public class MagicStack extends MyObservable {
             for (int i = size - 1; i >= 0; i--) {
                 SpellAbility next = orderedSAs.get(i);
                 if (next.isTrigger()) {
-                    game.getActionPlay().playSpellAbility(next, activePlayer);
+                    game.getActionPlay().playSpellAbility(next, (HumanPlayer)activePlayer);
                 } else {
                     this.add(next);
                 }

@@ -21,6 +21,7 @@ import java.util.List;
 
 import forge.Card;
 import forge.FThreads;
+import forge.card.spellability.Ability;
 import forge.card.spellability.SpellAbility;
 import forge.control.input.InputSelectCards;
 import forge.control.input.InputSelectCardsFromList;
@@ -57,6 +58,19 @@ public class HumanPlayer extends Player {
             c.getController().discard(c, sa);
     } // input_discardNumUnless
     
+    /**
+     * TODO: Write javadoc for this method.
+     * @param card
+     * @param ab
+     */
+    public void playSpellAbility(Card c, SpellAbility ab) {
+        if (ab == Ability.PLAY_LAND_SURROGATE)
+            this.playLand(c);
+        else {
+            game.getActionPlay().playSpellAbility(ab, this);
+        }
+        game.getPhaseHandler().setPriority(this);
+    }
 
     @Override
     public PlayerType getType() {

@@ -19,11 +19,12 @@ import forge.card.cost.CostPayment;
 import forge.card.mana.ManaCostBeingPaid;
 import forge.card.mana.ManaCostShard;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.SpellAbilityRequirements;
+import forge.card.spellability.HumanPlaySpellAbility;
 import forge.card.spellability.Target;
 import forge.card.staticability.StaticAbility;
 import forge.control.input.InputPayManaSimple;
 import forge.game.ai.ComputerUtilCard;
+import forge.game.player.HumanPlayer;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
@@ -76,7 +77,7 @@ public class GameActionPlay {
             }
             final CostPayment payment = new CostPayment(sa.getPayCosts(), sa);
 
-            final SpellAbilityRequirements req = new SpellAbilityRequirements(sa, payment);
+            final HumanPlaySpellAbility req = new HumanPlaySpellAbility(sa, payment);
             req.fillRequirements(false, true, false);
         } else {
             if (sa.isSpell()) {
@@ -351,7 +352,7 @@ public class GameActionPlay {
      * @param sa
      *            a {@link forge.card.spellability.SpellAbility} object.
      */
-    public final void playSpellAbility(SpellAbility sa, Player activator) {
+    public final void playSpellAbility(SpellAbility sa, HumanPlayer activator) {
         FThreads.checkEDT("Player.playSpellAbility", false);
         sa.setActivatingPlayer(activator);
 
@@ -389,7 +390,7 @@ public class GameActionPlay {
                 payment = new CostPayment(sa.getPayCosts(), sa);
             }
 
-            final SpellAbilityRequirements req = new SpellAbilityRequirements(sa, payment);
+            final HumanPlaySpellAbility req = new HumanPlaySpellAbility(sa, payment);
             req.fillRequirements(false, false, false);
         } else {
             ManaCostBeingPaid manaCost = new ManaCostBeingPaid(sa.getManaCost());
@@ -424,10 +425,10 @@ public class GameActionPlay {
      * @param skipTargeting
      *            a boolean.
      */
-    public final void playSpellAbilityNoStack(final Player human, final SpellAbility sa) {
+    public final void playSpellAbilityNoStack(final HumanPlayer human, final SpellAbility sa) {
         playSpellAbilityNoStack(human, sa, false);
     }
-    public final void playSpellAbilityNoStack(final Player human, final SpellAbility sa, boolean useOldTargets) {
+    public final void playSpellAbilityNoStack(final HumanPlayer human, final SpellAbility sa, boolean useOldTargets) {
         sa.setActivatingPlayer(human);
 
         if (sa.getPayCosts() != null) {
@@ -437,7 +438,7 @@ public class GameActionPlay {
                 payment.changeCost();
             }
 
-            final SpellAbilityRequirements req = new SpellAbilityRequirements(sa, payment);
+            final HumanPlaySpellAbility req = new HumanPlaySpellAbility(sa, payment);
             
             req.fillRequirements(useOldTargets, false, true);
         } else {

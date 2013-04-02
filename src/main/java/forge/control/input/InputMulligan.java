@@ -33,6 +33,7 @@ import forge.game.GameType;
 import forge.game.MatchController;
 import forge.game.ai.ComputerUtil;
 import forge.game.player.AIPlayer;
+import forge.game.player.HumanPlayer;
 import forge.game.player.Player;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
@@ -130,7 +131,7 @@ public class InputMulligan extends InputBase {
                             if (GuiDialog.confirm(c, "Use " + c +"'s  ability?")) {
                                 // If we ever let the AI memorize cards in the players
                                 // hand, this would be a place to do so.
-                                game.getActionPlay().playSpellAbilityNoStack(p, effect);
+                                game.getActionPlay().playSpellAbilityNoStack((HumanPlayer)p, effect);
                             }
                         }
                     }

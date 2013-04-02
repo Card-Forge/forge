@@ -31,6 +31,7 @@ import forge.card.spellability.SpellAbility;
 import forge.game.GameState;
 import forge.game.ai.ComputerUtil;
 import forge.game.player.AIPlayer;
+import forge.game.player.HumanPlayer;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
@@ -239,7 +240,7 @@ public class ReplacementHandler {
         Player player = replacementEffect.getHostCard().getController();
         //player.getController().playNoStack()
         if (player.isHuman()) {
-            game.getActionPlay().playSpellAbilityNoStack(player, effectSA);
+            game.getActionPlay().playSpellAbilityNoStack((HumanPlayer)player, effectSA);
         } else {
             ComputerUtil.playNoStack((AIPlayer) player, effectSA, game);
         }

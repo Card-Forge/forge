@@ -72,6 +72,7 @@ import forge.game.ai.ComputerUtilCost;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.AIPlayer;
+import forge.game.player.HumanPlayer;
 import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.Zone;
@@ -2913,7 +2914,7 @@ public class CardFactoryUtil {
                 }
 
                 if (card.getController().isHuman()) {
-                    game.getActionPlay().playSpellAbilityNoStack(card.getController(), origSA);
+                    game.getActionPlay().playSpellAbilityNoStack((HumanPlayer)card.getController(), origSA);
                 } else {
                     ComputerUtil.playNoStack((AIPlayer) card.getController(), origSA, game);
                 }

@@ -86,7 +86,7 @@ public class InputPassPriority extends InputBase {
             Runnable execAbility = new Runnable() {
                 @Override
                 public void run() {
-                    player.playSpellAbility(card, ab);
+                    ((HumanPlayer)player).playSpellAbility(card, ab);
                 }
             };
             

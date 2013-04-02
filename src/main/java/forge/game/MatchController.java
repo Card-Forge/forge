@@ -16,6 +16,7 @@ import forge.error.BugReporter;
 import forge.game.ai.AiProfileUtil;
 import forge.game.event.DuelOutcomeEvent;
 import forge.game.player.AIPlayer;
+import forge.game.player.HumanPlayer;
 import forge.game.player.LobbyPlayer;
 import forge.game.player.Player;
 import forge.game.player.PlayerStatistics;
@@ -156,7 +157,7 @@ public class MatchController {
         
         
         try {
-            Player localHuman = Aggregates.firstFieldEquals(currentGame.getPlayers(), Player.Accessors.FN_GET_TYPE, PlayerType.HUMAN);
+            HumanPlayer localHuman = (HumanPlayer) Aggregates.firstFieldEquals(currentGame.getPlayers(), Player.Accessors.FN_GET_TYPE, PlayerType.HUMAN);
             FControl.SINGLETON_INSTANCE.setPlayer(localHuman);
             CMatchUI.SINGLETON_INSTANCE.initMatch(currentGame.getRegisteredPlayers(), localHuman);
             CDock.SINGLETON_INSTANCE.onGameStarts(currentGame, localHuman);

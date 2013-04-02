@@ -36,6 +36,7 @@ import net.miginfocom.swing.MigLayout;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.mana.ManaPool;
 import forge.game.phase.PhaseType;
+import forge.game.player.HumanPlayer;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.framework.DragCell;
@@ -111,7 +112,7 @@ public class VField implements IVDoc<CField> {
      * @param playerOnwer &emsp; {@link forge.game.player.Player}
      * @param id0 &emsp; {@link forge.gui.framework.EDocID}
      */
-    public VField(final EDocID id0, final Player playerOnwer, Player playerViewer) {
+    public VField(final EDocID id0, final Player playerOnwer, HumanPlayer playerViewer) {
         this.docID = id0;
         id0.setDoc(this);
 

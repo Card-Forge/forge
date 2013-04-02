@@ -37,11 +37,11 @@ import forge.game.zone.Zone;
  * @author Forge
  * @version $Id$
  */
-public class SpellAbilityRequirements {
+public class HumanPlaySpellAbility {
     private final SpellAbility ability;
     private final CostPayment payment;
 
-    public SpellAbilityRequirements(final SpellAbility sa, final CostPayment cp) {
+    public HumanPlaySpellAbility(final SpellAbility sa, final CostPayment cp) {
         this.ability = sa;
         this.payment = cp;
     }

@@ -2891,20 +2891,6 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
     }
 
     /**
-     * TODO: Write javadoc for this method.
-     * @param card
-     * @param ab
-     */
-    public void playSpellAbility(Card c, SpellAbility ab) {
-        if (ab == Ability.PLAY_LAND_SURROGATE)
-            this.playLand(c);
-        else {
-            game.getActionPlay().playSpellAbility(ab, this);
-        }
-        game.getPhaseHandler().setPriority(this);
-    }
-
-    /**
      * 
      * Takes the top plane of the planar deck and put it face up in the command zone.
      * Then runs triggers. 
