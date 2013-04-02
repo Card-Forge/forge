@@ -57,6 +57,7 @@ public class InputPartialParisMulligan extends InputBase {
     private final MatchController match;
     
     private final List<Card> lastExiled = new ArrayList<Card>();
+    private final List<Card> allExiled = new ArrayList<Card>();
     
     public InputPartialParisMulligan(MatchController match0, Player humanPlayer) {
         super(humanPlayer);
@@ -98,6 +99,7 @@ public class InputPartialParisMulligan extends InputBase {
         }
         
         player.drawCards(lastExiled.size()-1);
+        allExiled.addAll(lastExiled);
         lastExiled.clear();
 
         if (player.getCardsIn(ZoneType.Hand).isEmpty()) {
@@ -107,9 +109,15 @@ public class InputPartialParisMulligan extends InputBase {
         }
     }
 
-    final void end() {
-
+    final void end() {        
+        
         final GameState game = match.getCurrentGame();
+
+        for(Card c : allExiled)
+        {
+            game.action.moveToLibrary(c);
+        }
+        player.shuffle();
         
         // Computer mulligan
         //TODO: How should AI approach Partial Paris?
