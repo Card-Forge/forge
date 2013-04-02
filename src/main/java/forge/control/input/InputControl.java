@@ -116,8 +116,10 @@ public class InputControl extends MyObservable implements java.io.Serializable {
      */
     public final Input getActualInput(GameState game) {
         if ( !game.hasMulliganned() )
+        {
             return new InputMulligan(Singletons.getModel().getMatch(), Singletons.getControl().getPlayer());
-
+            //return new InputPartialParisMulligan(Singletons.getModel().getMatch(), Singletons.getControl().getPlayer());
+        }
         final PhaseHandler handler = game.getPhaseHandler();
         final PhaseType phase = handler.getPhase();
         final Player playerTurn = handler.getPlayerTurn();
