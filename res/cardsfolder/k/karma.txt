@@ -1,7 +1,9 @@
 Name:Karma
 ManaCost:2 W W
 Types:Enchantment
-Text:At the beginning of each player's upkeep, Karma deals damage to that player equal to the number of Swamps he or she controls.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ At the beginning of each player's upkeep, CARDNAME deals damage to that player equal to the number of Swamps he or she controls.
+SVar:TrigDamage:AB$ DealDamage | Cost$ 0 | Defined$ TriggeredPlayer | NumDmg$ X | References$ X
+SVar:X:Count$Valid Swamp.ActivePlayerCtrl
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/karma.jpg
 Oracle:At the beginning of each player's upkeep, Karma deals damage to that player equal to the number of Swamps he or she controls.

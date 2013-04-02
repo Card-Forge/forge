@@ -94,7 +94,6 @@ public class Upkeep extends Phase {
         Upkeep.upkeepDemonicHordes(game);
         Upkeep.upkeepTangleWire(game);
 
-        Upkeep.upkeepKarma(game);
         Upkeep.upkeepOathOfDruids(game);
         Upkeep.upkeepOathOfGhouls(game);
         Upkeep.upkeepSuspend(game);
@@ -874,46 +873,6 @@ public class Upkeep extends Phase {
             }
         }
     } // Oath of Ghouls
-
-    /**
-     * <p>
-     * upkeepKarma.
-     * </p>
-     */
-    private static void upkeepKarma(final GameState game) {
-        final Player player = game.getPhaseHandler().getPlayerTurn();
-        final List<Card> karmas =
-                CardLists.filter(game.getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Karma"));
-        final List<Card> swamps = CardLists.getType(player.getCardsIn(ZoneType.Battlefield), "Swamp");
-
-        // determine how much damage to deal the current player
-        final int damage = swamps.size();
-
-        // if there are 1 or more Karmas on the
-        // battlefield have each of them deal damage.
-        if (0 < karmas.size()) {
-            for (final Card karma : karmas) {
-                final Ability ability = new Ability(karma, ManaCost.ZERO) {
-                    @Override
-                    public void resolve() {
-                        if (damage > 0) {
-                            player.addDamage(damage, karma);
-                        }
-                    }
-                }; // Ability
-                if (damage > 0) {
-
-                final StringBuilder sb = new StringBuilder();
-                sb.append("Karma deals ").append(damage).append(" damage to ").append(player);
-                ability.setStackDescription(sb.toString());
-                ability.setDescription(sb.toString());
-                ability.setActivatingPlayer(karma.getController());
-
-                game.getStack().addSimultaneousStackEntry(ability);
-                }
-            }
-        } // if
-    } // upkeepKarma()
 
     /**
      * <p>
