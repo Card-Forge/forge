@@ -16,13 +16,6 @@ import forge.control.input.InputSynchronized;
  */
 public class FThreads {
     
-    // This could be some bad copy of SwingWorker
-    public abstract static class RunnableWithResult<T> implements Runnable {
-        protected T result = null;
-        public T getResult() { return result; }
-
-    }
-    
     static { 
         System.out.printf("(FThreads static ctor): Running on a machine with %d cpu core(s)%n", Runtime.getRuntime().availableProcessors() );
     }
