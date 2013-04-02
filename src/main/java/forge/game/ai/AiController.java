@@ -45,6 +45,7 @@ import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellPermanent;
 import forge.game.GameActionUtil;
 import forge.game.GameState;
+import forge.game.phase.CombatUtil;
 import forge.game.phase.PhaseType;
 import forge.game.player.AIPlayer;
 import forge.game.player.Player;
@@ -661,20 +662,17 @@ public class AiController {
             
             case Encode:
                 if (logic == null) {
-                    // Base Logic is choose "best"
-                    choice = ComputerUtilCard.getBestAI(options);
-                } else if ("WorstCard".equals(logic)) {
-                    choice = ComputerUtilCard.getWorstAI(options);
-                } else if (logic.equals("BestBlocker")) {
-                    if (!CardLists.filter(options, Presets.UNTAPPED).isEmpty()) {
-                        options = CardLists.filter(options, Presets.UNTAPPED);
+                    List<Card> attackers = CardLists.filter(options, new Predicate<Card>() {
+                        @Override
+                        public boolean apply(final Card c) {
+                            return CombatUtil.canAttackNextTurn(c);
+                        }
+                    });
+                    if (attackers.isEmpty()) {
+                        choice = ComputerUtilCard.getBestAI(options);
+                    } else {
+                        choice = ComputerUtilCard.getBestAI(attackers);
                     }
-                    choice = ComputerUtilCard.getBestCreatureAI(options);
-                } else if (logic.equals("Clone")) {
-                    if (!CardLists.getValidCards(options, "Permanent.YouDontCtrl,Permanent.nonLegendary", host.getController(), host).isEmpty()) {
-                        options = CardLists.getValidCards(options, "Permanent.YouDontCtrl,Permanent.nonLegendary", host.getController(), host);
-                    }
-                    choice = ComputerUtilCard.getBestAI(options);
                 }
                 return choice;
                 
