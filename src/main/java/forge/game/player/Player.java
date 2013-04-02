@@ -88,8 +88,6 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
     /** The poison counters. */
     private int poisonCounters = 0;
 
-    private int edhGeneralDamage = 0;
-
     /** The life. */
     private int life = 20;
 
@@ -644,9 +642,6 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
         }
 
         this.assignedDamage.put(source, damageToDo);
-        if(source.isCommander())
-            this.edhGeneralDamage+= damageToDo; 
-                
         GameActionUtil.executeDamageDealingEffects(source, damageToDo);
         GameActionUtil.executeDamageToPlayerEffects(this, source, damageToDo);
 
@@ -2152,10 +2147,6 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
         final boolean hasNoLife = this.getLife() <= 0;
         if (hasNoLife && !this.cantLoseForZeroOrLessLife()) {
             return this.loseConditionMet(GameLossReason.LifeReachedZero, null);
-        }
-        
-        if(this.edhGeneralDamage >= 21) {
-            return this.loseConditionMet(GameLossReason.EdhGeneralDamage, null);
         }
 
         return false;
