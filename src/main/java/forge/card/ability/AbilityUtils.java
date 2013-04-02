@@ -1181,11 +1181,19 @@ public class AbilityUtils {
     private static boolean willAIPayForAbility(SpellAbility sa, Player payer, SpellAbility ability, boolean paid, List<Player> payers) {
         Card source = sa.getSourceCard();
         boolean payForOwnOnly = "OnlyOwn".equals(sa.getParam("UnlessAI"));
+        boolean payOwner = sa.getParam("UnlessAI").startsWith("Defined");
         boolean payNever = "Never".equals(sa.getParam("UnlessAI"));
         boolean isMine = sa.getActivatingPlayer().equals(payer);
 
         if (payNever) { return false; }
         if (payForOwnOnly && !isMine) { return false; }
+        if (payOwner) {
+            final String defined = sa.getParam("UnlessAI").substring(7);
+            final Player player = AbilityUtils.getDefinedPlayers(source, defined, sa).get(0);
+            if (!payer.equals(player)) {
+                return false;
+            }
+        }
 
         // AI will only pay when it's not already payed and only opponents abilities
         if (paid || (payers.size() > 1 && (isMine && !payForOwnOnly))) {
