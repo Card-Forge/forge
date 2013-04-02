@@ -528,7 +528,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             if (decider instanceof AIPlayer) {
                 ChangeZoneAi.hiddenOriginResolveAI(decider, sa, player);
             } else {
-                changeHiddenOriginResolveHuman((HumanPlayer)decider, sa, player);
+                changeHiddenOriginResolveHuman((HumanPlayer) decider, sa, player);
             }
         }
     }
@@ -554,7 +554,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         final Target tgt = sa.getTarget();
         if (tgt != null) {
             final List<Player> players = tgt.getTargetPlayers();
-            player = player != null ? player : players.get(0);
+            player = sa.hasParam("DefinedPlayer") ? player : players.get(0);
             if (players.contains(player) && !player.canBeTargetedBy(sa)) {
                 return;
             }
@@ -623,7 +623,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             }
 
             // Look at opponents hand before moving onto choosing a card
-            if (origin.contains(ZoneType.Hand) && player.isOpponentOf(player)) {
+            if (origin.contains(ZoneType.Hand) && player.isOpponentOf(decider)) {
                 GuiChoose.oneOrNone(sa.getSourceCard().getName() + " - Looking at Opponent's Hand", player
                         .getCardsIn(ZoneType.Hand));
             }
