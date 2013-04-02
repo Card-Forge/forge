@@ -12,7 +12,7 @@ ALTERNATE
 Name:Seek
 ManaCost:W B
 Types:Instant
-A:SP$ ChangeZone | Cost$ W B | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | Origin$ Library | DefinedPlayer$ Targeted | Chooser$ You | Destination$ Exile | Changetype$ Card | ChangeNum$ 1 | RememberChanged$ True | SubAbility$ DBGainLife | SpellDescription$ Search target opponent's library for a card and exile it. You gain life equal to its converted mana cost. Then that player shuffles his or her library.
+A:SP$ ChangeZone | Cost$ W B | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | Origin$ Library | DefinedPlayer$ Targeted | Chooser$ You | Destination$ Exile | Changetype$ Card | ChangeNum$ 1 | RememberChanged$ True | SubAbility$ DBGainLife | StackDescription$ SpellDescription | SpellDescription$ Search target opponent's library for a card and exile it. You gain life equal to its converted mana cost. Then that player shuffles his or her library.
 SVar:DBGainLife:DB$ GainLife | LifeAmount$ X | References$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$CardManaCost
