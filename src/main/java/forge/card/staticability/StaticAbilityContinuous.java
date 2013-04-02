@@ -154,6 +154,12 @@ public class StaticAbilityContinuous {
             for (int w = 0; w < addKeywords.length; w++) {
                 addKeywords[w] = addKeywords[w].replaceAll("ChosenType", chosenType);
             }
+            final String chosenName = hostCard.getNamedCard();
+            for (int w = 0; w < addKeywords.length; w++) {
+                if (addKeywords[w].startsWith("Protection:")) {
+                    addKeywords[w] = addKeywords[w].replaceAll("ChosenName", "Card.named" + chosenName);
+                }
+            }
         }
 
         if (params.containsKey("AddHiddenKeyword")) {

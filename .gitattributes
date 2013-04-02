@@ -8856,6 +8856,7 @@ res/cardsfolder/r/runeboggle.txt svneol=native#text/plain
 res/cardsfolder/r/runechanters_pike.txt -text
 res/cardsfolder/r/runeclaw_bear.txt svneol=native#text/plain
 res/cardsfolder/r/runed_arch.txt svneol=native#text/plain
+res/cardsfolder/r/runed_halo.txt -text
 res/cardsfolder/r/runed_servitor.txt svneol=native#text/plain
 res/cardsfolder/r/runed_stalactite.txt svneol=native#text/plain
 res/cardsfolder/r/runeflare_trap.txt -text
