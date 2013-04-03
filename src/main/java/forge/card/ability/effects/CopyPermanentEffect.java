@@ -6,10 +6,17 @@ import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 
+import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
+
 import forge.Card;
 import forge.CardCharacteristicName;
+import forge.CardLists;
 import forge.Command;
 import forge.Singletons;
+import forge.card.CardRulesPredicates;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.cardfactory.CardFactory;
@@ -18,8 +25,15 @@ import forge.card.mana.ManaCost;
 import forge.card.spellability.Ability;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
+import forge.game.ai.ComputerUtilCard;
+import forge.game.player.HumanPlayer;
 import forge.game.player.Player;
+import forge.game.zone.ZoneType;
+import forge.gui.GuiChoose;
 import forge.item.CardDb;
+import forge.item.CardPrinted;
+import forge.util.Aggregates;
+import forge.util.PredicateString.StringOp;
 
 public class CopyPermanentEffect extends SpellAbilityEffect {
 
@@ -36,6 +50,9 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
         return sb.toString();
     }
 
+    /* (non-Javadoc)
+     * @see forge.card.ability.SpellAbilityEffect#resolve(forge.card.spellability.SpellAbility)
+     */
     @Override
     public void resolve(final SpellAbility sa) {
         final Card hostCard = sa.getSourceCard();
@@ -46,8 +63,46 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
         final int numCopies = sa.hasParam("NumCopies") ? AbilityUtils.calculateAmount(hostCard,
                 sa.getParam("NumCopies"), sa) : 1;
 
-        final List<Card> tgtCards = getTargetCards(sa);
+        List<Card> tgtCards = getTargetCards(sa);
         final Target tgt = sa.getTarget();
+
+        if (sa.hasParam("ValidSupportedCopy")) {
+            List<CardPrinted> cards = Lists.newArrayList(CardDb.instance().getUniqueCards());
+            String valid = sa.getParam("ValidSupportedCopy");
+            if (valid.contains("X")) {
+                valid = valid.replace("X", Integer.toString(AbilityUtils.calculateAmount(hostCard, "X", sa)));
+            }
+            if (StringUtils.containsIgnoreCase(valid, "creature")) {
+                Predicate<CardPrinted> cpp = Predicates.compose(CardRulesPredicates.Presets.IS_CREATURE, CardPrinted.FN_GET_RULES);
+                cards = Lists.newArrayList(Iterables.filter(cards, cpp));
+            }
+            if (StringUtils.containsIgnoreCase(valid, "equipment")) {
+                Predicate<CardPrinted> cpp = Predicates.compose(CardRulesPredicates.Presets.IS_EQUIPMENT, CardPrinted.FN_GET_RULES);
+                cards = Lists.newArrayList(Iterables.filter(cards, cpp));
+            }
+            if (sa.hasParam("RandomCopied")) {
+                List<CardPrinted> copysource = new ArrayList<CardPrinted>(cards);
+                List<Card> choice = new ArrayList<Card>();
+                final String num = sa.hasParam("RandomNum") ? sa.getParam("RandomNum") : "1";
+                int ncopied = AbilityUtils.calculateAmount(hostCard, num, sa);
+                while(ncopied > 0) {
+                    final CardPrinted cp = Aggregates.random(copysource);
+                    if (cp.getMatchingForgeCard().isValid(valid, hostCard.getController(), hostCard)) {
+                        choice.add(cp.getMatchingForgeCard());
+                        copysource.remove(cp);
+                        ncopied -= 1;
+                    }
+                }
+                tgtCards = choice;
+            } else if (sa.hasParam("DefinedName")) {
+                final String name = sa.getParam("DefinedName");
+                Predicate<CardPrinted> cpp = Predicates.compose(CardRulesPredicates.name(StringOp.EQUALS, name), CardPrinted.FN_GET_RULES);
+                cards = Lists.newArrayList(Iterables.filter(cards, cpp));
+                Card c = cards.get(0).getMatchingForgeCard();
+                tgtCards.clear();
+                tgtCards.add(c);
+            }
+        }
 
         Player controller = null;
         if (sa.hasParam("Controller")) {
@@ -137,6 +192,38 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
                     if (c.isFaceDown()) {
                         c.setState(CardCharacteristicName.FaceDown);
                     }
+
+                    if (sa.hasParam("AttachedTo")) {
+                        List<Card> list = AbilityUtils.getDefinedCards(hostCard,
+                                sa.getParam("AttachedTo"), sa);
+                        if (list.isEmpty()) {
+                            list = copy.getController().getGame().getCardsIn(ZoneType.Battlefield);
+                            list = CardLists.getValidCards(list, sa.getParam("AttachedTo"), copy.getController(), copy);
+                        }
+                        if (!list.isEmpty()) {
+                            Card attachedTo = null;
+                            if (sa.getActivatingPlayer() instanceof HumanPlayer) {
+                                if (list.size() > 1) {
+                                    attachedTo = GuiChoose.one(copy + " - Select a card to attach to.", list);
+                                } else {
+                                    attachedTo = list.get(0);
+                                }
+                            } else { // AI player
+                                attachedTo = ComputerUtilCard.getBestAI(list);
+                            }
+                            if (copy.isAura()) {
+                                if (attachedTo.canBeEnchantedBy(copy)) {
+                                    copy.enchantEntity(attachedTo);
+                                } else {//can't enchant
+                                    continue;
+                                }
+                            } else { //Equipment
+                                copy.equipCard(attachedTo);
+                            }
+                        } else {
+                            continue;
+                        }
+                    }
                     copy = Singletons.getModel().getGame().getAction().moveToPlay(copy);
 
                     copy.setCloneOrigin(hostCard);
@@ -147,6 +234,7 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
                 if (wasInAlt) {
                     c.setState(stateName);
                 }
+                
 
                 // have to do this since getTargetCard() might change
                 // if Kiki-Jiki somehow gets untapped again

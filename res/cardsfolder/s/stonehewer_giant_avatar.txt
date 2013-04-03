@@ -1,0 +1,10 @@
+Name:Stonehewer Giant Avatar
+ManaCost:no cost
+Types:Vanguard
+HandLifeModifier:+1/-5
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.YouCtrl | TriggerZones$ Command | Execute$ TrigCopyEquip | TriggerDescription$ Whenever a creature enters the battlefield under your control, put a token onto the battlefield that's a copy of a random Equipment card with converted mana cost less than or equal to that creature's converted mana cost. Attach that Equipment to that creature.
+SVar:TrigCopyEquip:AB$ CopyPermanent | Cost$ 0 | Defined$ TriggeredCard | NumCopies$ 1 | ValidSupportedCopy$ Equipment.cmcLEX | References$ X | RandomCopied$ True | RandomNum$ 1 | RememberCopied$ True | AttachedTo$ TriggeredCard
+SVar:X:TriggeredCard$CardManaCost
+SVar:Picture:http://www.cardforge.org/fpics/vgd-lq/stonehewer_giant_avatar.jpg
+Oracle:Hand +1, life -5\nWhenever a creature enters the battlefield under your control, put a token onto the battlefield that's a copy of a random Equipment card with converted mana cost less than or equal to that creature's converted mana cost. Attach that Equipment to that creature.
+SetInfo:VAN Special

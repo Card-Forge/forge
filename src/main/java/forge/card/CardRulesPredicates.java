@@ -462,6 +462,10 @@ public final class CardRulesPredicates {
         /** The Constant isArtifact. */
         public static final Predicate<CardRules> IS_ARTIFACT = CardRulesPredicates
                 .coreType(true, CardCoreType.Artifact);
+        
+        /** The Constant isEquipment. */
+        public static final Predicate<CardRules> IS_EQUIPMENT = CardRulesPredicates
+                .subType("Equipment");
 
         /** The Constant isLand. */
         public static final Predicate<CardRules> IS_LAND = CardRulesPredicates.coreType(true, CardCoreType.Land);

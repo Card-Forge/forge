@@ -1,0 +1,10 @@
+Name:Peacekeeper Avatar
+ManaCost:no cost
+Types:Vanguard
+HandLifeModifier:+0/+9
+A:AB$ RepeatEach | Cost$ 3 | ActivationZone$ Command | RepeatPlayers$ Player.Opponent | RepeatSubAbility$ ArrestEach | StackDescription$ SpellDescription | SpellDescription$ For each opponent who controls a creature, put a token onto the battlefield that's a copy of a card named Arrest and attach it to a creature that player controls chosen at random.
+SVar:ArrestEach:DB$ ChooseCard | Amount$ 1 | Choices$ Creature.RememberedPlayerCtrl | AtRandom$ True | SubAbility$ DBAttach
+SVar:DBAttach:DB$ CopyPermanent | NumCopies$ 1 | ValidSupportedCopy$ Card.namedArrest | DefinedName$ Arrest | AttachedTo$ ChosenCard | ConditionDefined$ ChosenCard | ConditionPresent$ Creature | ConditionCompare$ GE1
+SVar:Picture:http://www.cardforge.org/fpics/vgd-lq/peacekeeper_avatar.jpg
+Oracle:Hand +0, life +9\n{3}: For each opponent who controls a creature, put a token onto the battlefield that's a copy of a card named Arrest and attach it to a creature that player controls chosen at random.
+SetInfo:VAN Special
