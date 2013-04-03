@@ -169,27 +169,29 @@ public class TriggerHandler {
         if (game.getStack().isFrozen() || holdTrigger) {
             waitingTriggers.add(new TriggerWaiting(mode, runParams));
         } else {
-            runWaitingTrigger(new TriggerWaiting(mode, runParams), true);
+            runWaitingTrigger(new TriggerWaiting(mode, runParams));
         }
         // Tell auto stop to stop
     }
 
-    public final boolean runWaitingTriggers(boolean runStaticEffects) {
+    public final boolean runWaitingTriggers() {
         ArrayList<TriggerWaiting> waiting = new ArrayList<TriggerWaiting>(waitingTriggers);
         waitingTriggers.clear();
         if (waiting.isEmpty()) {
             return false;
         }
+        
+        Singletons.getModel().getGame().getAction().checkStaticAbilities();
 
         boolean haveWaiting = false;
         for (TriggerWaiting wt : waiting) {
-            haveWaiting |= runWaitingTrigger(wt, runStaticEffects);
+            haveWaiting |= runWaitingTrigger(wt);
         }
 
         return haveWaiting;
     }
 
-    public final boolean runWaitingTrigger(TriggerWaiting wt, boolean runStaticEffects) {
+    public final boolean runWaitingTrigger(TriggerWaiting wt) {
         final TriggerType mode = wt.getMode();
         final Map<String, Object> runParams = wt.getParams();
         final GameState game = Singletons.getModel().getGame();

@@ -848,7 +848,7 @@ public class GameAction {
     }
 
     /** */
-    private final void checkStaticAbilities() {
+    public final void checkStaticAbilities() {
         // remove old effects
         game.getStaticEffects().clearStaticEffects();
 
@@ -1051,7 +1051,7 @@ public class GameAction {
                 }
             }
 
-            if (game.getTriggerHandler().runWaitingTriggers(true)) {
+            if (game.getTriggerHandler().runWaitingTriggers()) {
                 checkAgain = true;
                 // Place triggers on stack
             }

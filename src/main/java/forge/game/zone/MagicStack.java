@@ -201,7 +201,7 @@ public class MagicStack extends MyObservable {
             this.add(sa);
         }
         // Add all waiting triggers onto the stack
-        checkState |= Singletons.getModel().getGame().getTriggerHandler().runWaitingTriggers(false);
+        checkState |= Singletons.getModel().getGame().getTriggerHandler().runWaitingTriggers();
         if (checkState) {
             this.chooseOrderOfSimultaneousStackEntryAll();
             game.getAction().checkStateEffects();
