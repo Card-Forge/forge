@@ -7,13 +7,20 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import com.google.common.collect.Iterables;
+
 import forge.Constant.Preferences;
+import forge.Card;
+import forge.CardPredicates;
 import forge.Singletons;
+import forge.card.ability.AbilityFactory;
+import forge.card.spellability.SpellAbility;
 import forge.control.FControl;
 import forge.control.input.InputControl;
 import forge.deck.Deck;
 import forge.error.BugReporter;
 import forge.game.ai.AiProfileUtil;
+import forge.game.ai.ComputerUtil;
 import forge.game.event.DuelOutcomeEvent;
 import forge.game.player.AIPlayer;
 import forge.game.player.HumanPlayer;
@@ -22,6 +29,7 @@ import forge.game.player.Player;
 import forge.game.player.PlayerStatistics;
 import forge.game.player.PlayerType;
 import forge.game.zone.ZoneType;
+import forge.gui.GuiDialog;
 import forge.gui.InputProxy;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.SDisplayUtil;
@@ -338,5 +346,64 @@ public class MatchController {
      */
     public static int getPoisonCountersAmountToLose() {
         return 10;
+    }
+    
+    private void handleLeylinesAndChancellors() {
+        for (Player p : currentGame.getPlayers()) {
+            final List<Card> openingHand = new ArrayList<Card>(p.getCardsIn(ZoneType.Hand));
+
+            for (final Card c : openingHand) {
+                if (p.isHuman()) {
+                    for (String kw : c.getKeyword()) {
+                        if (kw.startsWith("MayEffectFromOpeningHand")) {
+                            final String effName = kw.split(":")[1];
+
+                            final SpellAbility effect = AbilityFactory.getAbility(c.getSVar(effName), c);
+                            if (GuiDialog.confirm(c, "Use " + c +"'s  ability?")) {
+                                // If we ever let the AI memorize cards in the players
+                                // hand, this would be a place to do so.
+                                currentGame.getActionPlay().playSpellAbilityNoStack((HumanPlayer)p, effect);
+                            }
+                        }
+                    }
+                    if (c.getName().startsWith("Leyline of")) {
+                        if (GuiDialog.confirm(c, "Use " + c + "'s ability?")) {
+                            currentGame.getAction().moveToPlay(c);
+                        }
+                    }
+                } else { // Computer Leylines & Chancellors
+                    if (!c.getName().startsWith("Leyline of")) {
+                        for (String kw : c.getKeyword()) {
+                            if (kw.startsWith("MayEffectFromOpeningHand")) {
+                                final String effName = kw.split(":")[1];
+
+                                final SpellAbility effect = AbilityFactory.getAbility(c.getSVar(effName), c);
+
+                                // Is there a better way for the AI to decide this?
+                                if (effect.doTrigger(false, (AIPlayer)p)) {
+                                    GuiDialog.message("Computer reveals " + c.getName() + "(" + c.getUniqueNumber() + ").");
+                                    ComputerUtil.playNoStack((AIPlayer)p, effect, currentGame);
+                                }
+                            }
+                        }
+                    }
+                    if (c.getName().startsWith("Leyline of")
+                            && !(c.getName().startsWith("Leyline of Singularity")
+                            && (Iterables.any(currentGame.getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Leyline of Singularity"))))) {
+                        currentGame.getAction().moveToPlay(c);
+                        //ga.checkStateEffects();
+                    }
+                }
+            }
+        }
+
+        currentGame.getAction().checkStateEffects();
+    }
+    
+    public void afterMulligans()
+    {
+        handleLeylinesAndChancellors();
+        currentGame.setMulliganned(true);
+        getInput().clearInput();
     }
 }

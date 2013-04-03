@@ -20,20 +20,13 @@ package forge.control.input;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.google.common.collect.Iterables;
-
 import forge.Card;
-import forge.CardPredicates;
 import forge.FThreads;
-import forge.card.ability.AbilityFactory;
-import forge.card.spellability.SpellAbility;
-import forge.game.GameAction;
 import forge.game.GameState;
 import forge.game.GameType;
 import forge.game.MatchController;
 import forge.game.ai.ComputerUtil;
 import forge.game.player.AIPlayer;
-import forge.game.player.HumanPlayer;
 import forge.game.player.Player;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
@@ -114,76 +107,21 @@ public class InputMulligan extends InputBase {
             }
         }
 
-        // Human Leylines & Chancellors
+
         ButtonUtil.reset();
-
-        final GameAction ga = game.getAction();
-        for (Player p : game.getPlayers()) {
-            final List<Card> openingHand = new ArrayList<Card>(p.getCardsIn(ZoneType.Hand));
-
-            for (final Card c : openingHand) {
-                if (p.isHuman()) {
-                    for (String kw : c.getKeyword()) {
-                        if (kw.startsWith("MayEffectFromOpeningHand")) {
-                            final String effName = kw.split(":")[1];
-
-                            final SpellAbility effect = AbilityFactory.getAbility(c.getSVar(effName), c);
-                            if (GuiDialog.confirm(c, "Use " + c +"'s  ability?")) {
-                                // If we ever let the AI memorize cards in the players
-                                // hand, this would be a place to do so.
-                                game.getActionPlay().playSpellAbilityNoStack((HumanPlayer)p, effect);
-                            }
-                        }
-                    }
-                    if (c.getName().startsWith("Leyline of")) {
-                        if (GuiDialog.confirm(c, "Use " + c + "'s ability?")) {
-                            ga.moveToPlay(c);
-                        }
-                    }
-                } else { // Computer Leylines & Chancellors
-                    if (!c.getName().startsWith("Leyline of")) {
-                        for (String kw : c.getKeyword()) {
-                            if (kw.startsWith("MayEffectFromOpeningHand")) {
-                                final String effName = kw.split(":")[1];
-
-                                final SpellAbility effect = AbilityFactory.getAbility(c.getSVar(effName), c);
-
-                                // Is there a better way for the AI to decide this?
-                                if (effect.doTrigger(false, (AIPlayer)p)) {
-                                    GuiDialog.message("Computer reveals " + c.getName() + "(" + c.getUniqueNumber() + ").");
-                                    ComputerUtil.playNoStack((AIPlayer)p, effect, game);
-                                }
-                            }
-                        }
-                    }
-                    if (c.getName().startsWith("Leyline of")
-                            && !(c.getName().startsWith("Leyline of Singularity")
-                            && (Iterables.any(game.getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Leyline of Singularity"))))) {
-                        ga.moveToPlay(c);
-                        //ga.checkStateEffects();
-                    }
-                }
-            }
-        }
-
-        ga.checkStateEffects();
-        
         Player next = game.getPhaseHandler().getPlayerTurn();
-        
         if(game.getType() == GameType.Planechase)
         {
             next.initPlane();
         }
-
         //Set Field shown to current player.        
         VField nextField = CMatchUI.SINGLETON_INSTANCE.getFieldViewFor(next);
         SDisplayUtil.showTab(nextField);
-
-        game.setMulliganned(true);
+        
         FThreads.invokeInNewThread( new Runnable() {
             @Override
             public void run() {
-                match.getInput().clearInput();
+                match.afterMulligans();
             }
         });
     }
