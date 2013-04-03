@@ -85,7 +85,8 @@ public class ManaCostBeingPaid {
         
         @Override
         public int getTotalColorlessCost() {
-            return unpaidShards.get(ManaCostShard.COLORLESS);
+            Integer c = unpaidShards.get(ManaCostShard.COLORLESS);
+            return c == null ? 0 : c.intValue();
         }
     }
 

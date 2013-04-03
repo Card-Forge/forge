@@ -19,6 +19,7 @@ package forge.card.cost;
 
 import forge.Card;
 import forge.FThreads;
+import forge.card.MagicColor;
 import forge.card.ability.AbilityUtils;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostBeingPaid;
@@ -117,13 +118,13 @@ public class CostPartMana extends CostPart {
         final Card source = ability.getSourceCard();
         ManaCostBeingPaid toPay = new ManaCostBeingPaid(getManaToPay());
         
-        if (this.getAmountOfX() > 0) {
+        if (this.getAmountOfX() > 0 && !ability.getSVar("X").equals("Count$xPaid")) {
             // if X cost is a defined value, other than xPaid
-            if (!ability.getSVar("X").equals("Count$xPaid")) {
-                // this currently only works for things about Targeted object
-                int xCost = AbilityUtils.calculateAmount(source, "X", ability) * this.getAmountOfX();
-                toPay.increaseColorlessMana(xCost);
-            }
+
+            // this currently only works for things about Targeted object
+            int xCost = AbilityUtils.calculateAmount(source, "X", ability) * this.getAmountOfX();
+            byte xColor = MagicColor.fromName(ability.hasParam("XColor") ? ability.getParam("XColor") : "1"); 
+            toPay.increaseShard(ManaCostShard.valueOf(xColor), xCost);
         }
     
     

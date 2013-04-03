@@ -79,9 +79,6 @@ public final class ManaCost implements Comparable<ManaCost> {
      *            the parser
      */
     public ManaCost(final IParserManaCost parser) {
-        if (!parser.hasNext()) {
-            throw new RuntimeException("Empty manacost passed to parser (this should have been handled before)");
-        }
         final List<ManaCostShard> shardsTemp = new ArrayList<ManaCostShard>();
         this.hasNoCost = false;
         while (parser.hasNext()) {
@@ -90,8 +87,7 @@ public final class ManaCost implements Comparable<ManaCost> {
                 shardsTemp.add(shard);
             } // null is OK - that was generic mana
         }
-        this.genericCost = parser.getTotalColorlessCost(); // collect generic
-                                                           // mana
+        this.genericCost = parser.getTotalColorlessCost(); // collect generic mana
         // here
         sealClass(shardsTemp);
     }
