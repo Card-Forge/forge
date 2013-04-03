@@ -16,12 +16,14 @@ import forge.Constant;
 import forge.card.MagicColor;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.ApiType;
+import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.cost.CostPayment;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostBeingPaid;
 import forge.card.mana.ManaCostShard;
 import forge.card.mana.ManaPool;
+import forge.card.spellability.Ability;
 import forge.card.spellability.AbilityManaPart;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
@@ -65,7 +67,7 @@ public class ComputerUtilMana {
             manapool.clearManaPaid(sa, test);
             return true;
         }
-    
+
         // get map of mana abilities
         final Map<String, List<SpellAbility>> manaAbilityMap = ComputerUtilMana.mapManaSources(ai, checkPlayable);
         // initialize ArrayList list for mana needed
@@ -237,6 +239,22 @@ public class ComputerUtilMana {
     
     } // payManaCost()
 
+    // TODO: this code is disconnected now, it was moved here from MagicStack, where X cost is not processed any more
+    public static void computerPayX(final SpellAbility sa, AIPlayer player, int xCost) {
+        final int neededDamage = CardFactoryUtil.getNeededXDamage(sa);
+        final Ability ability = new Ability(sa.getSourceCard(), ManaCost.get(xCost)) {
+            @Override
+            public void resolve() {
+                sa.getSourceCard().addXManaCostPaid(1);
+            }
+        };
+        
+        while (ComputerUtilCost.canPayCost(ability, player) && (neededDamage != sa.getSourceCard().getXManaCostPaid())) {
+            ComputerUtil.playNoStack(player, ability, player.getGame());
+        }
+
+    }
+    
     /**
      * <p>
      * payManaCost.

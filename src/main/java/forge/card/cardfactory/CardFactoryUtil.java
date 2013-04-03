@@ -47,7 +47,6 @@ import forge.card.ability.ApiType;
 import forge.card.cost.Cost;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostParser;
-import forge.card.mana.ManaCostShard;
 import forge.card.replacement.ReplacementEffect;
 import forge.card.replacement.ReplacementHandler;
 import forge.card.replacement.ReplacementLayer;
@@ -2508,12 +2507,6 @@ public class CardFactoryUtil {
                 card.addSpellAbility(CardFactoryUtil.abilitySuspend(card, cost, timeCounters));
             }
         } // Suspend
-
-        int xCount = card.getManaCost().getShardCount(ManaCostShard.X);
-        if (xCount > 0) {
-            final SpellAbility sa = card.getSpellAbility()[0];
-            sa.setXManaCost(xCount);
-        } // X
 
         if (CardFactoryUtil.hasKeyword(card, "Fading") != -1) {
             final int n = CardFactoryUtil.hasKeyword(card, "Fading");

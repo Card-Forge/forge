@@ -1,0 +1,11 @@
+Name:Comet Storm
+ManaCost:X R R
+Types:Instant
+A:SP$ DealDamage | Cost$ X R R | Announce$ Multikicker,X | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ X | TargetMin$ TargetsNum | TargetMax$ TargetsNum | References$ X,TargetsNum | SpellDescription$ CARDNAME deals X damage to each target creature and/or player.
+K:Multikicker 1
+SVar:TargetsNum:Count$TimesKicked/Plus.1
+SVar:Picture:http://www.wizards.com/global/images/magic/general/comet_storm.jpg
+SVar:X:Count$xPaid
+Oracle:Multikicker {1} (You may pay an additional {1} any number of times as you cast this spell.)\nChoose target creature or player, then choose another target creature or player for each time Comet Storm was kicked. Comet Storm deals X damage to each of them.
+SetInfo:WWK Mythic
+SetInfo:CMD Mythic

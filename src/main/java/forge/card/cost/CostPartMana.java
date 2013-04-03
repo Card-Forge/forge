@@ -124,6 +124,12 @@ public class CostPartMana extends CostPart {
             byte xColor = MagicColor.fromName(ability.hasParam("XColor") ? ability.getParam("XColor") : "1"); 
             toPay.increaseShard(ManaCostShard.valueOf(xColor), xCost);
         }
+        int timesMultikicked = ability.getSourceCard().getMultiKickerMagnitude();
+        if ( timesMultikicked > 0 && ability.isAnnouncing("Multikicker")) {
+            ManaCost mkCost = ability.getMultiKickerManaCost();
+            for(int i = 0; i < timesMultikicked; i++)
+                toPay.combineManaCost(mkCost);
+        }
     
     
         if (!toPay.isPaid()) {

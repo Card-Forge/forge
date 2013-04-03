@@ -62,6 +62,11 @@ public final class InputSelectTargets extends InputSyncronizedBase {
         }
         //sb.append(tgt.getTargetedString()).append("\n");
         sb.append(tgt.getVTSelection());
+        
+        int maxTargets = tgt.getMaxTargets(sa.getSourceCard(), sa);
+        int targeted = tgt.getNumTargeted();
+        if(maxTargets > 1)
+            sb.append("\n(").append(maxTargets - targeted).append(" more can be targeted)");
 
         showMessage(sb.toString());
 

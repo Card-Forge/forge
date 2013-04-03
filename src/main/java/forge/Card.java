@@ -4470,26 +4470,10 @@ public class Card extends GameEntity implements Comparable<Card> {
     public final void addMultiKickerMagnitude(final int n) {
         this.multiKickerMagnitude += n;
     }
-
-    /**
-     * <p>
-     * Setter for the field <code>multiKickerMagnitude</code>.
-     * </p>
-     * 
-     * @param n
-     *            a int.
-     */
     public final void setMultiKickerMagnitude(final int n) {
         this.multiKickerMagnitude = n;
     }
 
-    /**
-     * <p>
-     * Getter for the field <code>multiKickerMagnitude</code>.
-     * </p>
-     * 
-     * @return a int.
-     */
     public final int getMultiKickerMagnitude() {
         return this.multiKickerMagnitude;
     }

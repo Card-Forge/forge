@@ -1907,6 +1907,7 @@ res/cardsfolder/c/colossus_of_sardia.txt svneol=native#text/plain
 res/cardsfolder/c/coma_veil.txt svneol=native#text/plain
 res/cardsfolder/c/combat_medic.txt svneol=native#text/plain
 res/cardsfolder/c/combust.txt svneol=native#text/plain
+res/cardsfolder/c/comet_storm.txt -text
 res/cardsfolder/c/command_of_unsummoning.txt svneol=native#text/plain
 res/cardsfolder/c/commander_eesha.txt svneol=native#text/plain
 res/cardsfolder/c/commander_greven_il_vec.txt svneol=native#text/plain

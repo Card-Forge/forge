@@ -57,7 +57,6 @@ public abstract class SpellAbility implements ISpellAbility {
     private ManaCost manaCost = null;
     private ManaCost multiKickerManaCost = null;
     private ManaCost replicateManaCost = null;
-    private int xManaCost = 0;
     private Player activatingPlayer = null;
 
     private String type = "Intrinsic"; // set to Intrinsic by default
@@ -292,29 +291,6 @@ public abstract class SpellAbility implements ISpellAbility {
 
     /**
      * <p>
-     * Getter for the field <code>xManaCost</code>.
-     * </p>
-     * 
-     * @return a {@link java.lang.String} object.
-     */
-    public int getXManaCost() {
-        return this.xManaCost;
-    }
-
-    /**
-     * <p>
-     * Setter for the field <code>xManaCost</code>.
-     * </p>
-     * 
-     * @param cost
-     *            a {@link java.lang.String} object.
-     */
-    public final void setXManaCost(final int cost) {
-        this.xManaCost = cost;
-    }
-
-    /**
-     * <p>
      * Getter for the field <code>activatingPlayer</code>.
      * </p>
      * 
@@ -396,7 +372,7 @@ public abstract class SpellAbility implements ISpellAbility {
      * @return a boolean.
      */
     public boolean isMultiKicker() {
-        return this.multiKickerManaCost != null;
+        return this.multiKickerManaCost != null && !this.isAnnouncing("Multikicker");
     }
 
     /**
@@ -422,17 +398,6 @@ public abstract class SpellAbility implements ISpellAbility {
         return this.replicate;
     }
 
-
-    /**
-     * <p>
-     * isXCost.
-     * </p>
-     * 
-     * @return a boolean.
-     */
-    public boolean isXCost() {
-        return getXManaCost() > 0;
-    }
 
     /**
      * <p>
@@ -1757,5 +1722,10 @@ public abstract class SpellAbility implements ISpellAbility {
                 return true;
         }
         return false;
+    }
+
+    public boolean isXCost() {
+        CostPartMana cm = payCosts != null ? getPayCosts().getCostMana() : null;
+        return cm != null && cm.getAmountOfX() > 0; 
     }    
 }

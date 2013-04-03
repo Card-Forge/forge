@@ -220,11 +220,6 @@ public class WrappedAbility extends Ability implements ISpellAbility {
     }
 
     @Override
-    public int getXManaCost() {
-        return sa.getXManaCost();
-    }
-
-    @Override
     public boolean isAbility() {
         return sa.isAbility();
     }

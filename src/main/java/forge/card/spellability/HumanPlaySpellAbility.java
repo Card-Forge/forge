@@ -155,11 +155,20 @@ public class HumanPlaySpellAbility {
         String announce = ability.getParam("Announce");
         if (announce != null) {
             for(String aVar : announce.split(",")) {
-                Integer value = ability.getActivatingPlayer().getController().announceRequirements(ability, aVar, ability.getPayCosts().getCostMana().canXbe0());
+                String varName = aVar.trim();
+
+                boolean allowZero = !("X".equalsIgnoreCase(varName)) || ability.getPayCosts().getCostMana().canXbe0();
+
+                Integer value = ability.getActivatingPlayer().getController().announceRequirements(ability, varName, allowZero);
                 if ( null == value )
                     return false;
-                ability.setSVar(aVar, value.toString());
-                ability.getSourceCard().setSVar(aVar, value.toString());
+
+                ability.setSVar(varName, value.toString());
+                if( "Multikicker".equals(varName) ) {
+                    ability.getSourceCard().setMultiKickerMagnitude(value);
+                } else {
+                    ability.getSourceCard().setSVar(varName, value.toString());
+                }
             }
         }
         return true;
