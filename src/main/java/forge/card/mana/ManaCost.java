@@ -83,7 +83,7 @@ public final class ManaCost implements Comparable<ManaCost> {
         this.hasNoCost = false;
         while (parser.hasNext()) {
             final ManaCostShard shard = parser.next();
-            if (shard != null) {
+            if (shard != null && shard != ManaCostShard.COLORLESS) {
                 shardsTemp.add(shard);
             } // null is OK - that was generic mana
         }
