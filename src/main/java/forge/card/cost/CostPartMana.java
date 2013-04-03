@@ -17,11 +17,11 @@
  */
 package forge.card.cost;
 
-import com.google.common.base.Strings;
-
 import forge.Card;
 import forge.FThreads;
 import forge.card.ability.AbilityUtils;
+import forge.card.mana.ManaCost;
+import forge.card.mana.ManaCostShard;
 import forge.card.spellability.SpellAbility;
 import forge.control.input.InputPayManaOfCostPayment;
 import forge.control.input.InputPayManaX;
@@ -35,9 +35,8 @@ import forge.game.player.AIPlayer;
  */
 public class CostPartMana extends CostPart {
     // "Leftover"
-    private String mana = "";
-    private int amountX = 0;
-    private String adjustedMana = "";
+    private final ManaCost cost;
+    private ManaCost adjustedCost;
     private boolean xCantBe0 = false;
 
     /**
@@ -45,19 +44,9 @@ public class CostPartMana extends CostPart {
      * 
      * @return the mana
      */
-    public final String getMana() {
+    public final ManaCost getMana() {
         // Only used for Human to pay for non-X cost first
-        return this.mana;
-    }
-
-    /**
-     * Sets the mana.
-     * 
-     * @param sCost
-     *            the new mana
-     */
-    public final void setMana(final String sCost) {
-        this.mana = sCost;
+        return this.cost;
     }
 
     /**
@@ -66,7 +55,7 @@ public class CostPartMana extends CostPart {
      * @return true, if successful
      */
     public final boolean hasNoXManaCost() {
-        return this.amountX == 0;
+        return getAmountOfX() == 0;
     }
 
     /**
@@ -75,36 +64,7 @@ public class CostPartMana extends CostPart {
      * @return the x mana
      */
     public final int getAmountOfX() {
-        return this.amountX;
-    }
-
-    /**
-     * Sets the x mana.
-     * 
-     * @param xCost
-     *            the new x mana
-     */
-    public final void setAmountOfX(final int xCost) {
-        this.amountX = xCost;
-    }
-
-    /**
-     * Gets the adjusted mana.
-     * 
-     * @return the adjusted mana
-     */
-    public final String getAdjustedMana() {
-        return this.adjustedMana;
-    }
-
-    /**
-     * Sets the adjusted mana.
-     * 
-     * @param adjustedMana
-     *            the new adjusted mana
-     */
-    public final void setAdjustedMana(final String adjustedMana) {
-        this.adjustedMana = adjustedMana;
+        return this.cost.getShardCount(ManaCostShard.X);
     }
 
     /**
@@ -126,13 +86,13 @@ public class CostPartMana extends CostPart {
      * 
      * @return the mana to pay
      */
-    public final String getManaToPay() {
+    public final ManaCost getManaToPay() {
         // Only used for Human to pay for non-X cost first
-        if (!this.adjustedMana.equals("")) {
-            return this.adjustedMana;
+        if (this.adjustedCost != null ) {
+            return this.adjustedCost;
         }
 
-        return this.mana;
+        return this.cost;
     }
     
     @Override
@@ -150,9 +110,8 @@ public class CostPartMana extends CostPart {
      *            the amount
      * @param xCantBe0 TODO
      */
-    public CostPartMana(final String mana, final int amount, boolean xCantBe0) {
-        this.mana = mana.trim();
-        this.amountX = amount;
+    public CostPartMana(final ManaCost cost, boolean xCantBe0) {
+        this.cost = cost;
         this.setxCantBe0(xCantBe0);
     }
 
@@ -163,13 +122,7 @@ public class CostPartMana extends CostPart {
      */
     @Override
     public final String toString() {
-        final StringBuilder sb = new StringBuilder();
-
-        sb.append(Strings.repeat("X ", this.amountX));
-        if ( sb.length() == 0 || mana != "0" )
-            sb.append(this.mana);
-
-        return sb.toString().trim();
+        return cost.toString();
     }
 
     /*
@@ -228,7 +181,7 @@ public class CostPartMana extends CostPart {
                 if(!inpPayment.isPaid())
                     return false;
             } else {
-                int x = AbilityUtils.calculateAmount(source, ability.getSVar("X"), ability);
+                int x = AbilityUtils.calculateAmount(source, "X", ability);
                 source.setXManaCostPaid(x);
             }
         }
@@ -244,6 +197,12 @@ public class CostPartMana extends CostPart {
         return new PaymentDecision(0);
     }
 
-    // Inputs
-
+    /**
+     * TODO: Write javadoc for this method.
+     * @param manaCost
+     */
+    public void setAdjustedMana(ManaCost manaCost) {
+        // this is set when static effects of LodeStone Golems or Thalias are applied
+        adjustedCost = manaCost;
+    }
 }

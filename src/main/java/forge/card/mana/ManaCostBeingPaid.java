@@ -19,6 +19,7 @@ package forge.card.mana;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map.Entry;
 
@@ -47,6 +48,47 @@ import forge.util.MyRandom;
  * @version $Id$
  */
 public class ManaCostBeingPaid {
+    private class ManaCostBeingPaidIterator implements IParserManaCost {
+        private Iterator<ManaCostShard> mch;
+        private ManaCostShard nextShard;
+        private int remainingShards = 0;
+        
+        public ManaCostBeingPaidIterator() { 
+            mch = unpaidShards.keySet().iterator();
+        }
+    
+        @Override
+        public void remove() {
+            throw new UnsupportedOperationException();
+        }
+        
+        @Override
+        public ManaCostShard next() {
+            if (remainingShards == 0)
+                throw new UnsupportedOperationException("All shards were depleted, call hasNext()");
+            remainingShards--;
+            return nextShard;
+        }
+        
+        @Override
+        public boolean hasNext() {
+            if ( remainingShards > 0 ) return true;
+            if ( !mch.hasNext() ) return false;
+            
+            nextShard = mch.next();
+            if ( nextShard == ManaCostShard.COLORLESS )
+                return this.hasNext(); // skip colorless
+            remainingShards = unpaidShards.get(nextShard);
+            
+            return true;
+        }
+        
+        @Override
+        public int getTotalColorlessCost() {
+            return unpaidShards.get(ManaCostShard.COLORLESS);
+        }
+    }
+
     // holds Mana_Part objects
     // ManaPartColor is stored before ManaPartColorless
     private final HashMap<ManaCostShard, Integer> unpaidShards = new HashMap<ManaCostShard, Integer>();
@@ -528,24 +570,19 @@ public class ManaCostBeingPaid {
         return true;
     }
 
-    /**
-     * <p>
-     * combineManaCost.
-     * </p>
-     * 
-     * @param extra
-     *            a {@link java.lang.String} object.
-     */
-    public final void combineManaCost(final String extra) {
-        final ManaCost manaCost = new ManaCost(new ManaCostParser(extra));
-        for (ManaCostShard shard : manaCost.getShards()) {
+    public final void combineManaCost(final ManaCost extra) {
+        for (ManaCostShard shard : extra.getShards()) {
             if (shard == ManaCostShard.X) {
                 cntX++;
             } else {
                 increaseShard(shard, 1);
             }
         }
-        increaseColorlessMana(manaCost.getGenericCost());
+        increaseColorlessMana(extra.getGenericCost());
+    }
+
+    public final void combineManaCost(final String extra) {
+        combineManaCost(new ManaCost(new ManaCostParser(extra)));
     }
 
     /**
@@ -608,6 +645,10 @@ public class ManaCostBeingPaid {
             cmc += s.getKey().getCmc() * s.getValue();
         }
         return cmc;
+    }
+    
+    public ManaCost toManaCost() {
+        return new ManaCost(new ManaCostBeingPaidIterator());
     }
 
     /**

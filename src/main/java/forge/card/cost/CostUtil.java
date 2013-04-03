@@ -126,31 +126,19 @@ public class CostUtil {
     }
 
     public static Cost combineCosts(Cost cost1, Cost cost2) {
-        if (cost1 == null) {
-            if (cost2 == null) {
-                return null;
-            } else {
-                return cost2;
-            }
-        }
+        if (cost1 == null) return cost2;
+        if (cost2 == null) return cost1;
 
-        if (cost2 == null) {
-            return cost1;
-        }
-
+        CostPartMana costPart2 = cost2.getCostMana();
         for (final CostPart part : cost1.getCostParts()) {
-            if (!(part instanceof CostPartMana)) {
+            if (part instanceof CostPartMana && costPart2 != null) {
+                ManaCostBeingPaid oldManaCost = new ManaCostBeingPaid(((CostPartMana) part).getMana());
+                boolean xCanBe0 = ((CostPartMana) part).canXbe0() && costPart2.canXbe0();
+                oldManaCost.combineManaCost(costPart2.getMana());
+                
+                cost2.getCostParts().add(0, new CostPartMana(oldManaCost.toManaCost(), !xCanBe0));
+            } else { 
                 cost2.getCostParts().add(part);
-            } else {
-                CostPartMana newCostMana = cost2.getCostMana();
-                if (newCostMana != null) {
-                    ManaCostBeingPaid oldManaCost = new ManaCostBeingPaid(part.toString());
-                    newCostMana.setAmountOfX(oldManaCost.getXcounter() + newCostMana.getAmountOfX());
-                    oldManaCost.combineManaCost(newCostMana.toString());
-                    newCostMana.setMana(oldManaCost.toString(false));
-                } else {
-                    cost2.getCostParts().add(0, part);
-                }
             }
         }
         return cost2;
