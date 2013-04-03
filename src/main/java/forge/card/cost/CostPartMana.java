@@ -118,9 +118,7 @@ public class CostPartMana extends CostPart {
         final Card source = ability.getSourceCard();
         ManaCostBeingPaid toPay = new ManaCostBeingPaid(getManaToPay());
         
-        if (this.getAmountOfX() > 0 && !ability.getSVar("X").equals("Count$xPaid")) {
-            // if X cost is a defined value, other than xPaid
-
+        if (this.getAmountOfX() > 0 && !ability.getSVar("X").equals("Count$xPaid")) { // announce X will overwrite whatever was in card script
             // this currently only works for things about Targeted object
             int xCost = AbilityUtils.calculateAmount(source, "X", ability) * this.getAmountOfX();
             byte xColor = MagicColor.fromName(ability.hasParam("XColor") ? ability.getParam("XColor") : "1"); 
