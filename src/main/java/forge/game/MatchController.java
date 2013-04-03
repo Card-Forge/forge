@@ -362,7 +362,7 @@ public class MatchController {
                             if (GuiDialog.confirm(c, "Use " + c +"'s  ability?")) {
                                 // If we ever let the AI memorize cards in the players
                                 // hand, this would be a place to do so.
-                                currentGame.getActionPlay().playSpellAbilityNoStack((HumanPlayer)p, effect);
+                                ((HumanPlayer)p).playSpellAbilityNoStack(effect);
                             }
                         }
                     }

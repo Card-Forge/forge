@@ -9152,5 +9152,25 @@ public class Card extends GameEntity implements Comparable<Card> {
     public void setCommander(boolean b) {
         this.isCommander = b;
     }
-
+    
+    public void setSplitStateToPlayAbility(SpellAbility sa) {
+        if( !isSplitCard() ) return; // just in case
+        // Split card support
+        List<SpellAbility> leftSplitAbilities = getState(CardCharacteristicName.LeftSplit).getSpellAbility();
+        List<SpellAbility> rightSplitAbilities = getState(CardCharacteristicName.RightSplit).getSpellAbility();
+        for (SpellAbility a : leftSplitAbilities) {
+            if (sa == a || sa.getDescription().equals(String.format("%s (without paying its mana cost)", a.getDescription()))) {
+                setState(CardCharacteristicName.LeftSplit);
+                return;
+            }
+        }
+        for (SpellAbility a : rightSplitAbilities) {
+            if (sa == a || sa.getDescription().equals(String.format("%s (without paying its mana cost)", a.getDescription()))) {
+                setState(CardCharacteristicName.RightSplit);
+                return;
+            }
+        }
+        throw new RuntimeException("Not found which part to choose for ability " + sa + " from card " + this);
+    }
+    
 } // end Card class

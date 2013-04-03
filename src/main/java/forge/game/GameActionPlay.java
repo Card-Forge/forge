@@ -5,26 +5,20 @@ import java.util.List;
 import com.google.common.collect.Lists;
 
 import forge.Card;
-import forge.CardCharacteristicName;
 import forge.CardColor;
 import forge.CardLists;
 import forge.CardPredicates;
 import forge.FThreads;
 import forge.card.MagicColor;
-import forge.card.ability.AbilityUtils;
 import forge.card.ability.ApiType;
 import forge.card.ability.effects.CharmEffect;
-import forge.card.cost.Cost;
 import forge.card.cost.CostPayment;
 import forge.card.mana.ManaCostBeingPaid;
 import forge.card.mana.ManaCostShard;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.HumanPlaySpellAbility;
-import forge.card.spellability.Target;
 import forge.card.staticability.StaticAbility;
-import forge.control.input.InputPayManaSimple;
 import forge.game.ai.ComputerUtilCard;
-import forge.game.player.HumanPlayer;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
@@ -68,8 +62,7 @@ public class GameActionPlay {
         FThreads.checkEDT("GameActionPlay.playSpellAbilityWithoutPayingManaCost", false);
         final Card source = sa.getSourceCard();
         
-        if( source.isSplitCard())
-            setSplitCardState(source, sa);
+        source.setSplitStateToPlayAbility(sa);
 
         if (sa.getPayCosts() != null) {
             if (sa.getApi() == ApiType.Charm && !sa.isWrapper()) {
@@ -326,142 +319,6 @@ public class GameActionPlay {
     }
 
     /**
-     * choose optional additional costs. For HUMAN only
-     * @param activator 
-     * 
-     * @param original
-     *            the original sa
-     * @return an ArrayList<SpellAbility>.
-     */
-    public static SpellAbility chooseOptionalAdditionalCosts(Player activator, final SpellAbility original) {
-        //final HashMap<String, SpellAbility> map = new HashMap<String, SpellAbility>();
-        final ArrayList<SpellAbility> abilities = GameActionUtil.getOptionalAdditionalCosts(original);
-        
-        if (!original.isSpell()) {
-            return original;
-        }
-
-        return activator.getController().getAbilityToPlay(abilities);
-    }
-
-    /**
-     * <p>
-     * playSpellAbility.
-     * </p>
-     * 
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     */
-    public final void playSpellAbility(SpellAbility sa, HumanPlayer activator) {
-        FThreads.checkEDT("Player.playSpellAbility", false);
-        sa.setActivatingPlayer(activator);
-
-        final Card source = sa.getSourceCard();
-        
-        if(source.isSplitCard())
-            setSplitCardState(source, sa);
-
-        if (sa.getApi() == ApiType.Charm && !sa.isWrapper()) {
-            CharmEffect.makeChoices(sa);
-        }
-
-        sa = chooseOptionalAdditionalCosts(activator, sa);
-
-        if (sa == null) {
-            return;
-        }
-
-        // Need to check PayCosts, and Ability + All SubAbilities for Target
-        boolean newAbility = sa.getPayCosts() != null;
-        SpellAbility ability = sa;
-        while ((ability != null) && !newAbility) {
-            final Target tgt = ability.getTarget();
-
-            newAbility |= tgt != null;
-            ability = ability.getSubAbility();
-        }
-
-        // System.out.println("Playing:" + sa.getDescription() + " of " + sa.getSourceCard() +  " new = " + newAbility);
-        if (newAbility) {
-            CostPayment payment = null;
-            if (sa.getPayCosts() == null) {
-                payment = new CostPayment(new Cost(sa.getSourceCard(), "0", sa.isAbility()), sa);
-            } else {
-                payment = new CostPayment(sa.getPayCosts(), sa);
-            }
-
-            final HumanPlaySpellAbility req = new HumanPlaySpellAbility(sa, payment);
-            req.fillRequirements(false, false, false);
-        } else {
-            ManaCostBeingPaid manaCost = new ManaCostBeingPaid(sa.getManaCost());
-            if (sa.getSourceCard().isCopiedSpell() && sa.isSpell()) {
-                manaCost = new ManaCostBeingPaid("0");
-            } else {
-                manaCost = this.getSpellCostChange(sa, new ManaCostBeingPaid(sa.getManaCost()));
-            }
-
-            if  (!manaCost.isPaid()) {
-                FThreads.setInputAndWait(new InputPayManaSimple(game, sa, manaCost));
-            }
-
-            
-            if (manaCost.isPaid()) {
-                if (sa.isSpell() && !source.isCopiedSpell()) {
-                    sa.setSourceCard(game.getAction().moveToStack(source));
-                }
-
-                game.getStack().add(sa);
-            } 
-        }
-    }
-
-    /**
-     * <p>
-     * playSpellAbility_NoStack.
-     * </p>
-     * 
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @param skipTargeting
-     *            a boolean.
-     */
-    public final void playSpellAbilityNoStack(final HumanPlayer human, final SpellAbility sa) {
-        playSpellAbilityNoStack(human, sa, false);
-    }
-    public final void playSpellAbilityNoStack(final HumanPlayer human, final SpellAbility sa, boolean useOldTargets) {
-        sa.setActivatingPlayer(human);
-
-        if (sa.getPayCosts() != null) {
-            final CostPayment payment = new CostPayment(sa.getPayCosts(), sa);
-
-            if (!sa.isTrigger()) {
-                payment.changeCost();
-            }
-
-            final HumanPlaySpellAbility req = new HumanPlaySpellAbility(sa, payment);
-            
-            req.fillRequirements(useOldTargets, false, true);
-        } else {
-            ManaCostBeingPaid manaCost = new ManaCostBeingPaid(sa.getManaCost());
-            if (sa.getSourceCard().isCopiedSpell() && sa.isSpell()) {
-                manaCost = new ManaCostBeingPaid("0");
-            } else {
-                manaCost = this.getSpellCostChange(sa, new ManaCostBeingPaid(sa.getManaCost()));
-            }
-
-            if( !manaCost.isPaid() ) {
-                FThreads.setInputAndWait(new InputPayManaSimple(game, sa, getSpellCostChange(sa, new ManaCostBeingPaid(sa.getManaCost()))));
-            }
-            
-            if (manaCost.isPaid()) {
-                AbilityUtils.resolve(sa, false);
-            }
-
-        }
-    }
-
-
-    /**
      * Gets the convokable colors.
      * 
      * @param cardToConvoke
@@ -488,24 +345,5 @@ public class GameActionPlay {
         }
     
         return usableColors;
-    }
-
-    private void setSplitCardState(final Card source, SpellAbility sa) {
-        // Split card support
-        List<SpellAbility> leftSplitAbilities = source.getState(CardCharacteristicName.LeftSplit).getSpellAbility();
-        List<SpellAbility> rightSplitAbilities = source.getState(CardCharacteristicName.RightSplit).getSpellAbility();
-        for (SpellAbility a : leftSplitAbilities) {
-            if (sa == a || sa.getDescription().equals(String.format("%s (without paying its mana cost)", a.getDescription()))) {
-                source.setState(CardCharacteristicName.LeftSplit);
-                return;
-            }
-        }
-        for (SpellAbility a : rightSplitAbilities) {
-            if (sa == a || sa.getDescription().equals(String.format("%s (without paying its mana cost)", a.getDescription()))) {
-                source.setState(CardCharacteristicName.RightSplit);
-                return;
-            }
-        }
-        throw new RuntimeException("Not found which part to choose for ability " + sa + " from card " + source);
     }
 }

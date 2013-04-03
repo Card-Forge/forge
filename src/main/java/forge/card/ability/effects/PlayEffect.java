@@ -203,7 +203,7 @@ public class PlayEffect extends SpellAbilityEffect {
             boolean noManaCost = sa.hasParam("WithoutManaCost"); 
             if (controller.isHuman()) {
                 SpellAbility newSA = noManaCost ? tgtSA.copyWithNoManaCost() : tgtSA;
-                game.getActionPlay().playSpellAbility(newSA, (HumanPlayer)activator);
+                ((HumanPlayer)activator).playSpellAbility(newSA);
             } else {
                 if (tgtSA instanceof Spell) { // Isn't it ALWAYS a spell?
                     Spell spell = (Spell) tgtSA;

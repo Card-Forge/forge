@@ -2914,7 +2914,7 @@ public class CardFactoryUtil {
                 }
 
                 if (card.getController().isHuman()) {
-                    game.getActionPlay().playSpellAbilityNoStack((HumanPlayer)card.getController(), origSA);
+                    ((HumanPlayer)card.getController()).playSpellAbilityNoStack(origSA);
                 } else {
                     ComputerUtil.playNoStack((AIPlayer) card.getController(), origSA, game);
                 }

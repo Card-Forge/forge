@@ -1125,7 +1125,7 @@ public class MagicStack extends MyObservable {
             for (int i = size - 1; i >= 0; i--) {
                 SpellAbility next = orderedSAs.get(i);
                 if (next.isTrigger()) {
-                    game.getActionPlay().playSpellAbility(next, (HumanPlayer)activePlayer);
+                    ((HumanPlayer)activePlayer).playSpellAbility(next);
                 } else {
                     this.add(next);
                 }

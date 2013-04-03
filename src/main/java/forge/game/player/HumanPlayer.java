@@ -17,14 +17,25 @@
  */
 package forge.game.player;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import forge.Card;
 import forge.FThreads;
+import forge.card.ability.AbilityUtils;
+import forge.card.ability.ApiType;
+import forge.card.ability.effects.CharmEffect;
+import forge.card.cost.Cost;
+import forge.card.cost.CostPayment;
+import forge.card.mana.ManaCostBeingPaid;
 import forge.card.spellability.Ability;
+import forge.card.spellability.HumanPlaySpellAbility;
 import forge.card.spellability.SpellAbility;
+import forge.card.spellability.Target;
+import forge.control.input.InputPayManaSimple;
 import forge.control.input.InputSelectCards;
 import forge.control.input.InputSelectCardsFromList;
+import forge.game.GameActionUtil;
 import forge.game.GameState;
 import forge.game.zone.ZoneType;
 
@@ -67,7 +78,7 @@ public class HumanPlayer extends Player {
         if (ab == Ability.PLAY_LAND_SURROGATE)
             this.playLand(c);
         else {
-            game.getActionPlay().playSpellAbility(ab, this);
+            this.playSpellAbility(ab);
         }
         game.getPhaseHandler().setPriority(this);
     }
@@ -79,5 +90,142 @@ public class HumanPlayer extends Player {
     public PlayerController getController() {
         return controller;
     }
+    
+
+    /**
+     * <p>
+     * playSpellAbility.
+     * </p>
+     * 
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
+     */
+    public final void playSpellAbility(SpellAbility sa) {
+        FThreads.checkEDT("Player.playSpellAbility", false);
+        sa.setActivatingPlayer(this);
+
+        final Card source = sa.getSourceCard();
+        
+        source.setSplitStateToPlayAbility(sa);
+
+        if (sa.getApi() == ApiType.Charm && !sa.isWrapper()) {
+            CharmEffect.makeChoices(sa);
+        }
+
+        sa = chooseOptionalAdditionalCosts(sa);
+
+        if (sa == null) {
+            return;
+        }
+
+        // Need to check PayCosts, and Ability + All SubAbilities for Target
+        boolean newAbility = sa.getPayCosts() != null;
+        SpellAbility ability = sa;
+        while ((ability != null) && !newAbility) {
+            final Target tgt = ability.getTarget();
+
+            newAbility |= tgt != null;
+            ability = ability.getSubAbility();
+        }
+
+        // System.out.println("Playing:" + sa.getDescription() + " of " + sa.getSourceCard() +  " new = " + newAbility);
+        if (newAbility) {
+            CostPayment payment = null;
+            if (sa.getPayCosts() == null) {
+                payment = new CostPayment(new Cost(sa.getSourceCard(), "0", sa.isAbility()), sa);
+            } else {
+                payment = new CostPayment(sa.getPayCosts(), sa);
+            }
+
+            final HumanPlaySpellAbility req = new HumanPlaySpellAbility(sa, payment);
+            req.fillRequirements(false, false, false);
+        } else {
+            ManaCostBeingPaid manaCost = new ManaCostBeingPaid(sa.getManaCost());
+            if (sa.getSourceCard().isCopiedSpell() && sa.isSpell()) {
+                manaCost = new ManaCostBeingPaid("0");
+            } else {
+                manaCost = game.getActionPlay().getSpellCostChange(sa, new ManaCostBeingPaid(sa.getManaCost()));
+            }
+
+            if  (!manaCost.isPaid()) {
+                FThreads.setInputAndWait(new InputPayManaSimple(game, sa, manaCost));
+            }
+
+            
+            if (manaCost.isPaid()) {
+                if (sa.isSpell() && !source.isCopiedSpell()) {
+                    sa.setSourceCard(game.getAction().moveToStack(source));
+                }
+
+                game.getStack().add(sa);
+            } 
+        }
+    }
+
+    /**
+     * <p>
+     * playSpellAbility_NoStack.
+     * </p>
+     * 
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
+     * @param skipTargeting
+     *            a boolean.
+     */
+    public final void playSpellAbilityNoStack( final SpellAbility sa) {
+        playSpellAbilityNoStack(sa, false);
+    }
+    public final void playSpellAbilityNoStack(final SpellAbility sa, boolean useOldTargets) {
+        sa.setActivatingPlayer(this);
+
+        if (sa.getPayCosts() != null) {
+            final CostPayment payment = new CostPayment(sa.getPayCosts(), sa);
+
+            if (!sa.isTrigger()) {
+                payment.changeCost();
+            }
+
+            final HumanPlaySpellAbility req = new HumanPlaySpellAbility(sa, payment);
+            
+            req.fillRequirements(useOldTargets, false, true);
+        } else {
+            ManaCostBeingPaid manaCost = new ManaCostBeingPaid(sa.getManaCost());
+            if (sa.getSourceCard().isCopiedSpell() && sa.isSpell()) {
+                manaCost = new ManaCostBeingPaid("0");
+            } else {
+                manaCost = game.getActionPlay().getSpellCostChange(sa, new ManaCostBeingPaid(sa.getManaCost()));
+            }
+
+            if( !manaCost.isPaid() ) {
+                FThreads.setInputAndWait(new InputPayManaSimple(game, sa, manaCost));
+            }
+            
+            if (manaCost.isPaid()) {
+                AbilityUtils.resolve(sa, false);
+            }
+
+        }
+    }
+    
+    /**
+     * choose optional additional costs. For HUMAN only
+     * @param activator 
+     * 
+     * @param original
+     *            the original sa
+     * @return an ArrayList<SpellAbility>.
+     */
+    public SpellAbility chooseOptionalAdditionalCosts(final SpellAbility original) {
+        //final HashMap<String, SpellAbility> map = new HashMap<String, SpellAbility>();
+        final ArrayList<SpellAbility> abilities = GameActionUtil.getOptionalAdditionalCosts(original);
+        
+        if (!original.isSpell()) {
+            return original;
+        }
+
+        return getController().getAbilityToPlay(abilities);
+    }
+
+
 
 } // end HumanPlayer class
