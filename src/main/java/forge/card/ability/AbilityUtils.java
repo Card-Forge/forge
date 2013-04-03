@@ -300,7 +300,7 @@ public class AbilityUtils {
         // Strip and save sign for calculations
         boolean startsWithMinus = amount.charAt(0) == '-';
         int multiplier = startsWithMinus ? -1 : 1;
-        if(startsWithPlus )
+        if(startsWithMinus)
             amount = amount.substring(1);
 
         // These are some special cases - who is implementing them?
