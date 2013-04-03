@@ -278,14 +278,13 @@ public class ComputerUtil {
      *            a {@link forge.card.spellability.SpellAbility} object.
      */
     public static final void playNoStack(final AIPlayer ai, final SpellAbility sa, final GameState game) {
+        sa.setActivatingPlayer(ai);
         // TODO: We should really restrict what doesn't use the Stack
         if (ComputerUtilCost.canPayCost(sa, ai)) {
             final Card source = sa.getSourceCard();
             if (sa.isSpell() && !source.isCopiedSpell()) {
                 sa.setSourceCard(game.getAction().moveToStack(source));
             }
-
-            sa.setActivatingPlayer(ai);
 
             final Cost cost = sa.getPayCosts();
             if (cost == null) {
