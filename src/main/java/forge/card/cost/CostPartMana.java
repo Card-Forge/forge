@@ -21,6 +21,7 @@ import forge.Card;
 import forge.FThreads;
 import forge.card.ability.AbilityUtils;
 import forge.card.mana.ManaCost;
+import forge.card.mana.ManaCostBeingPaid;
 import forge.card.mana.ManaCostShard;
 import forge.card.spellability.SpellAbility;
 import forge.control.input.InputPayManaOfCostPayment;
@@ -40,6 +41,20 @@ public class CostPartMana extends CostPart {
     private boolean xCantBe0 = false;
 
     /**
+     * Instantiates a new cost mana.
+     * 
+     * @param mana
+     *            the mana
+     * @param amount
+     *            the amount
+     * @param xCantBe0 TODO
+     */
+    public CostPartMana(final ManaCost cost, boolean xCantBe0) {
+        this.cost = cost;
+        this.xCantBe0 = xCantBe0; // TODO: Add 0 to parameter's name.
+    }
+
+    /**
      * Gets the mana.
      * 
      * @return the mana
@@ -49,20 +64,6 @@ public class CostPartMana extends CostPart {
         return this.cost;
     }
 
-    /**
-     * Checks for no x mana cost.
-     * 
-     * @return true, if successful
-     */
-    public final boolean hasNoXManaCost() {
-        return getAmountOfX() == 0;
-    }
-
-    /**
-     * Gets the x mana.
-     * 
-     * @return the x mana
-     */
     public final int getAmountOfX() {
         return this.cost.getShardCount(ManaCostShard.X);
     }
@@ -75,10 +76,11 @@ public class CostPartMana extends CostPart {
     }
 
     /**
-     * @param xCantBe00 the xCantBe0 to set
+     * Used to set mana cost after applying static effects that change costs.
      */
-    public void setxCantBe0(boolean xCantBe0) {
-        this.xCantBe0 = xCantBe0; // TODO: Add 0 to parameter's name.
+    public void setAdjustedMana(ManaCost manaCost) {
+        // this is set when static effects of LodeStone Golems or Thalias are applied
+        adjustedCost = manaCost;
     }
 
     /**
@@ -87,12 +89,7 @@ public class CostPartMana extends CostPart {
      * @return the mana to pay
      */
     public final ManaCost getManaToPay() {
-        // Only used for Human to pay for non-X cost first
-        if (this.adjustedCost != null ) {
-            return this.adjustedCost;
-        }
-
-        return this.cost;
+        return adjustedCost == null ? cost : adjustedCost;
     }
     
     @Override
@@ -101,37 +98,13 @@ public class CostPartMana extends CostPart {
     @Override
     public boolean isUndoable() { return true; }
     
-    /**
-     * Instantiates a new cost mana.
-     * 
-     * @param mana
-     *            the mana
-     * @param amount
-     *            the amount
-     * @param xCantBe0 TODO
-     */
-    public CostPartMana(final ManaCost cost, boolean xCantBe0) {
-        this.cost = cost;
-        this.setxCantBe0(xCantBe0);
-    }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see forge.card.cost.CostPart#toString()
-     */
     @Override
     public final String toString() {
         return cost.toString();
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * forge.card.cost.CostPart#canPay(forge.card.spellability.SpellAbility,
-     * forge.Card, forge.Player, forge.card.cost.Cost)
-     */
+
     @Override
     public final boolean canPay(final SpellAbility ability) {
         // For now, this will always return true. But this should probably be
@@ -139,36 +112,23 @@ public class CostPartMana extends CostPart {
         return true;
     }
 
-    /* (non-Javadoc)
-     * @see forge.card.cost.CostPart#payAI(forge.card.cost.PaymentDecision, forge.game.player.AIPlayer, forge.card.spellability.SpellAbility, forge.Card)
-     */
-    @Override
-    public void payAI(PaymentDecision decision, AIPlayer ai, SpellAbility ability, Card source) {
-        ComputerUtilMana.payManaCost(ai, ability);
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * forge.card.cost.CostPart#payHuman(forge.card.spellability.SpellAbility,
-     * forge.Card, forge.card.cost.Cost_Payment)
-     */
     @Override
     public final boolean payHuman(final SpellAbility ability, final GameState game) {
         final Card source = ability.getSourceCard();
-        int manaToAdd = 0;
-        if (!this.hasNoXManaCost()) {
+        ManaCostBeingPaid toPay = new ManaCostBeingPaid(getManaToPay());
+        
+        if (this.getAmountOfX() > 0) {
             // if X cost is a defined value, other than xPaid
             if (!ability.getSVar("X").equals("Count$xPaid")) {
                 // this currently only works for things about Targeted object
-                manaToAdd += AbilityUtils.calculateAmount(source, "X", ability) * this.getAmountOfX();
+                int xCost = AbilityUtils.calculateAmount(source, "X", ability) * this.getAmountOfX();
+                toPay.increaseColorlessMana(xCost);
             }
         }
-
-
-        if (!"0".equals(this.getManaToPay()) || manaToAdd > 0) {
-            InputPayment inpPayment = new InputPayManaOfCostPayment(game, this, ability, manaToAdd);
+    
+    
+        if (!toPay.isPaid()) {
+            InputPayment inpPayment = new InputPayManaOfCostPayment(game, toPay, ability);
             FThreads.setInputAndWait(inpPayment);
             if(!inpPayment.isPaid())
                 return false;
@@ -186,8 +146,17 @@ public class CostPartMana extends CostPart {
             }
         }
         return true;
-
+    
     }
+
+    /* (non-Javadoc)
+     * @see forge.card.cost.CostPart#payAI(forge.card.cost.PaymentDecision, forge.game.player.AIPlayer, forge.card.spellability.SpellAbility, forge.Card)
+     */
+    @Override
+    public void payAI(PaymentDecision decision, AIPlayer ai, SpellAbility ability, Card source) {
+        ComputerUtilMana.payManaCost(ai, ability);
+    }
+
 
     /* (non-Javadoc)
      * @see forge.card.cost.CostPart#decideAIPayment(forge.game.player.AIPlayer, forge.card.spellability.SpellAbility, forge.Card)
@@ -195,14 +164,5 @@ public class CostPartMana extends CostPart {
     @Override
     public PaymentDecision decideAIPayment(AIPlayer ai, SpellAbility ability, Card source) {
         return new PaymentDecision(0);
-    }
-
-    /**
-     * TODO: Write javadoc for this method.
-     * @param manaCost
-     */
-    public void setAdjustedMana(ManaCost manaCost) {
-        // this is set when static effects of LodeStone Golems or Thalias are applied
-        adjustedCost = manaCost;
     }
 }

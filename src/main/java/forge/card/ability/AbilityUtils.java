@@ -294,14 +294,15 @@ public class AbilityUtils {
         if (StringUtils.isBlank(amount)) return 0;
         final boolean startsWithPlus = amount.charAt(0) == '+';
         if(startsWithPlus) amount = amount.substring(1);
-        
-        if (StringUtils.isNumeric(amount)) return Integer.parseInt(amount);
 
         // Strip and save sign for calculations
         boolean startsWithMinus = amount.charAt(0) == '-';
         int multiplier = startsWithMinus ? -1 : 1;
         if(startsWithMinus)
             amount = amount.substring(1);
+
+        // return result soon for plain numbers
+        if (StringUtils.isNumeric(amount)) return Integer.parseInt(amount) * multiplier;
 
         // These are some special cases - who is implementing them?
         if (amount.equals("ChosenX") || amount.equals("ChosenY")) {

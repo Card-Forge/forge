@@ -320,7 +320,7 @@ public abstract class InputPayManaBase extends InputSyncronizedBase implements I
 
     @Override
     public String toString() {
-        return String.format("PayManaBase %s (out of %s)", manaCost.toString(), manaCost.getStartingCost() );
+        return String.format("PayManaBase %s left", manaCost.toString() );
     }
 
     protected void handleConvokedCards(boolean isCancelled) {
