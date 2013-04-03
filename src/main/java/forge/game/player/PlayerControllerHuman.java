@@ -374,4 +374,31 @@ public class PlayerControllerHuman extends PlayerController {
             player.playSpellAbility(madness);
         }
     }
+
+    @Override
+    public List<Card> chooseCardsToDelve(int colorLessAmount, List<Card> grave) {
+        List<Card> toExile = new ArrayList<Card>();
+        int cardsInGrave = grave.size();
+        final Integer[] cntChoice = new Integer[cardsInGrave + 1];
+        for (int i = 0; i <= cardsInGrave; i++) {
+            cntChoice[i] = Integer.valueOf(i);
+        }
+
+        final Integer chosenAmount = GuiChoose.one("Exile how many cards?", cntChoice);
+        System.out.println("Delve for " + chosenAmount);
+
+        for (int i = 0; i < chosenAmount; i++) {
+            final Card nowChosen = GuiChoose.oneOrNone("Exile which card?", grave);
+
+            if (nowChosen == null) {
+                // User canceled,abort delving.
+                toExile.clear();
+                break;
+            }
+
+            grave.remove(nowChosen);
+            toExile.add(nowChosen);
+        }
+        return toExile;
+    }
 }

@@ -244,4 +244,12 @@ public class PlayerControllerAi extends PlayerController {
         getAi().chooseAndPlaySa(false, false, madness);
     }
 
+    /* (non-Javadoc)
+     * @see forge.game.player.PlayerController#chooseCardsToDelve(int, java.util.List)
+     */
+    @Override
+    public List<Card> chooseCardsToDelve(int colorlessCost, List<Card> grave) {
+        return getAi().chooseCardsToDelve(colorlessCost, grave);
+    }
+
 }

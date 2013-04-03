@@ -22,8 +22,21 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map.Entry;
 
+import com.google.common.collect.Lists;
+
+import forge.Card;
+import forge.CardColor;
+import forge.CardLists;
+import forge.CardPredicates;
 import forge.Constant;
 import forge.card.MagicColor;
+import forge.card.spellability.SpellAbility;
+import forge.card.staticability.StaticAbility;
+import forge.game.GameState;
+import forge.game.player.Player;
+import forge.game.zone.ZoneType;
+import forge.gui.GuiChoose;
+import forge.util.MyRandom;
 
 /**
  * <p>
@@ -652,4 +665,165 @@ public class ManaCostBeingPaid {
     public ManaCost getStartingCost() {
         return originalCost;
     }
+    
+    public final void applySpellCostChange(final SpellAbility sa) {
+        final GameState game = sa.getActivatingPlayer().getGame();
+        // Beached
+        final Card originalCard = sa.getSourceCard();
+        final SpellAbility spell = sa;
+
+
+        if (sa.isXCost() && !originalCard.isCopiedSpell()) {
+            originalCard.setXManaCostPaid(0);
+        }
+
+        if (sa.isTrigger()) {
+            return;
+        }
+
+        if (spell.isSpell()) {
+            if (spell.isDelve()) {
+                final Player pc = originalCard.getController();
+                final List<Card> mutableGrave = Lists.newArrayList(pc.getZone(ZoneType.Graveyard).getCards());
+                final List<Card> toExile = pc.getController().chooseCardsToDelve(this.getColorlessManaAmount(), mutableGrave);
+                for (final Card c : toExile) {
+                    pc.getGame().getAction().exile(c);
+                    decreaseColorlessMana(1);
+                }
+            } else if (spell.getSourceCard().hasKeyword("Convoke")) {
+                adjustCostByConvoke(sa, spell);
+            }
+        } // isSpell
+
+        List<Card> cardsOnBattlefield = Lists.newArrayList(game.getCardsIn(ZoneType.Battlefield));
+        cardsOnBattlefield.addAll(game.getCardsIn(ZoneType.Stack));
+        cardsOnBattlefield.addAll(game.getCardsIn(ZoneType.Command));
+        if (!cardsOnBattlefield.contains(originalCard)) {
+            cardsOnBattlefield.add(originalCard);
+        }
+        final ArrayList<StaticAbility> raiseAbilities = new ArrayList<StaticAbility>();
+        final ArrayList<StaticAbility> reduceAbilities = new ArrayList<StaticAbility>();
+        final ArrayList<StaticAbility> setAbilities = new ArrayList<StaticAbility>();
+
+        // Sort abilities to apply them in proper order
+        for (Card c : cardsOnBattlefield) {
+            final ArrayList<StaticAbility> staticAbilities = c.getStaticAbilities();
+            for (final StaticAbility stAb : staticAbilities) {
+                if (stAb.getMapParams().get("Mode").equals("RaiseCost")) {
+                    raiseAbilities.add(stAb);
+                } else if (stAb.getMapParams().get("Mode").equals("ReduceCost")) {
+                    reduceAbilities.add(stAb);
+                } else if (stAb.getMapParams().get("Mode").equals("SetCost")) {
+                    setAbilities.add(stAb);
+                }
+            }
+        }
+        // Raise cost
+        for (final StaticAbility stAb : raiseAbilities) {
+            stAb.applyAbility("RaiseCost", spell, this);
+        }
+
+        // Reduce cost
+        for (final StaticAbility stAb : reduceAbilities) {
+            stAb.applyAbility("ReduceCost", spell, this);
+        }
+
+        // Set cost (only used by Trinisphere) is applied last
+        for (final StaticAbility stAb : setAbilities) {
+            stAb.applyAbility("SetCost", spell, this);
+        }
+    } // GetSpellCostChange
+
+    private void adjustCostByConvoke(final SpellAbility sa, final SpellAbility spell) {
+        
+        List<Card> untappedCreats = CardLists.filter(spell.getActivatingPlayer().getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.CREATURES);
+        untappedCreats = CardLists.filter(untappedCreats, CardPredicates.Presets.UNTAPPED);
+
+        while (!untappedCreats.isEmpty() && getConvertedManaCost() > 0) {
+            Card workingCard = null;
+            String chosenColor = null;
+            if (sa.getActivatingPlayer().isHuman()) {
+                workingCard = GuiChoose.oneOrNone("Tap for Convoke? " + toString(), untappedCreats);
+                if( null == workingCard )
+                    break; // that means "I'm done"
+
+                List<String> usableColors = getConvokableColors(workingCard);
+                if ( !usableColors.isEmpty() ) {
+                    chosenColor = usableColors.size() == 1 ? usableColors.get(0) : GuiChoose.one("Convoke for which color?", usableColors);
+                } 
+            } else {
+                // TODO: AI to choose a creature to tap would go here
+                // Probably along with deciding how many creatures to
+                // tap
+                
+                if ( MyRandom.getRandom().nextInt(3) == 0 ) // 66% chance to chose first creature, 33% to cancel
+                    workingCard = untappedCreats.get(0);
+                
+                if( null == workingCard ) 
+                    break; // that means "I'm done"
+                
+                List<String> usableColors = getConvokableColors(workingCard);
+                if ( !usableColors.isEmpty() ) {
+                    // TODO: AI for choosing which color to convoke goes here.
+                    chosenColor = usableColors.get(0);
+                }
+
+            }
+            untappedCreats.remove(workingCard);
+
+
+            if ( null == chosenColor )
+                continue;
+            else if (chosenColor.equals("colorless")) {
+                decreaseColorlessMana(1);
+            } else {
+                decreaseShard(ManaCostShard.valueOf(MagicColor.fromName(chosenColor)), 1);
+            }
+
+            sa.addTappedForConvoke(workingCard);
+        }
+
+        // Convoked creats are tapped here with triggers
+        // suppressed,
+        // Then again when payment is done(In
+        // InputPayManaCost.done()) with suppression cleared.
+        // This is to make sure that triggers go off at the
+        // right time
+        // AND that you can't use mana tapabilities of convoked
+        // creatures
+        // to pay the convoked cost.
+        for (final Card c : sa.getTappedForConvoke()) {
+            c.setTapped(true);
+        }
+
+    }
+
+    /**
+     * Gets the convokable colors.
+     * 
+     * @param cardToConvoke
+     *            the card to convoke
+     * @param cost
+     *            the cost
+     * @return the convokable colors
+     */
+    private List<String> getConvokableColors(final Card cardToConvoke) {
+        final ArrayList<String> usableColors = new ArrayList<String>();
+    
+        if (getColorlessManaAmount() > 0) {
+            usableColors.add("colorless");
+        }
+        for (final CardColor col : cardToConvoke.getColor()) {
+            for (final String strCol : col.toStringList()) {
+                if (strCol.equals("colorless")) {
+                    continue;
+                }
+                if (toString().contains(MagicColor.toShortString(strCol))) {
+                    usableColors.add(strCol.toString());
+                }
+            }
+        }
+    
+        return usableColors;
+    }    
 }

@@ -45,51 +45,50 @@ public class StaticAbilityCostChange {
      * @param originalCost
      *            a ManaCost
      */
-    public static ManaCostBeingPaid applyRaiseCostAbility(final StaticAbility staticAbility, final SpellAbility sa
-            , final ManaCostBeingPaid originalCost) {
+    public static void applyRaiseCostAbility(final StaticAbility staticAbility, final SpellAbility sa, final ManaCostBeingPaid manaCost) {
         final HashMap<String, String> params = staticAbility.getMapParams();
         final Card hostCard = staticAbility.getHostCard();
         final Player activator = sa.getActivatingPlayer();
         final Card card = sa.getSourceCard();
         final String amount = params.get("Amount");
-        final ManaCostBeingPaid manaCost = new ManaCostBeingPaid(originalCost.toString());
+
 
         if (params.containsKey("ValidCard")
                 && !card.isValid(params.get("ValidCard").split(","), hostCard.getController(), hostCard)) {
-            return originalCost;
+            return;
         }
 
         if (params.containsKey("Activator") && ((activator == null)
                 || !activator.isValid(params.get("Activator"), hostCard.getController(), hostCard))) {
-            return originalCost;
+            return;
         }
 
         if (params.containsKey("Type")) {
             if (params.get("Type").equals("Spell")) {
                 if (!sa.isSpell()) {
-                    return originalCost;
+                    return;
                 }
             } else if (params.get("Type").equals("Ability")) {
                 if (!(sa instanceof AbilityActivated)) {
-                    return originalCost;
+                    return;
                 }
             } else if (params.get("Type").equals("NonManaAbility")) {
                     if (!(sa instanceof AbilityActivated) || sa.isManaAbility()) {
-                        return originalCost;
+                        return;
                     }
             } else if (params.get("Type").equals("Flashback")) {
                     if (!sa.isFlashBackAbility()) {
-                        return originalCost;
+                        return;
                     }
             }
         }
         if (params.containsKey("AffectedZone") && !card.isInZone(ZoneType.smartValueOf(params.get("AffectedZone")))) {
-            return originalCost;
+            return;
         }
         if (params.containsKey("ValidTarget")) {
             Target tgt = sa.getTarget();
             if (tgt == null) {
-                return originalCost;
+                return;
             }
             boolean targetValid = false;
             for (Object target : tgt.getTargets()) {
@@ -101,13 +100,13 @@ public class StaticAbilityCostChange {
                 }
             }
             if (!targetValid) {
-                return originalCost;
+                return;
             }
         }
         if (params.containsKey("ValidSpellTarget")) {
             Target tgt = sa.getTarget();
             if (tgt == null) {
-                return originalCost;
+                return;
             }
             boolean targetValid = false;
             for (Object target : tgt.getTargets()) {
@@ -119,7 +118,7 @@ public class StaticAbilityCostChange {
                 }
             }
             if (!targetValid) {
-                return originalCost;
+                return;
             }
         }
         int value = 0;
@@ -155,8 +154,6 @@ public class StaticAbilityCostChange {
                 manaCost.increaseShard(ManaCostShard.GREEN, value);
             }
         }
-
-        return manaCost;
     }
 
     /**
@@ -169,58 +166,57 @@ public class StaticAbilityCostChange {
      * @param originalCost
      *            a ManaCost
      */
-    public static ManaCostBeingPaid applyReduceCostAbility(final StaticAbility staticAbility, final SpellAbility sa
-            , final ManaCostBeingPaid originalCost) {
+    public static void applyReduceCostAbility(final StaticAbility staticAbility, final SpellAbility sa, final ManaCostBeingPaid manaCost) {
         //Can't reduce zero cost
-        if (originalCost.toString().equals("0")) {
-            return originalCost;
+        if (manaCost.toString().equals("0")) {
+            return;
         }
         final HashMap<String, String> params = staticAbility.getMapParams();
         final Card hostCard = staticAbility.getHostCard();
         final Player activator = sa.getActivatingPlayer();
         final Card card = sa.getSourceCard();
         final String amount = params.get("Amount");
-        final ManaCostBeingPaid manaCost = new ManaCostBeingPaid(originalCost.toString());
+
 
         if (params.containsKey("ValidCard")
                 && !card.isValid(params.get("ValidCard").split(","), hostCard.getController(), hostCard)) {
-            return originalCost;
+            return;
         }
         if (params.containsKey("Activator") && ((activator == null)
                 || !activator.isValid(params.get("Activator"), hostCard.getController(), hostCard))) {
-            return originalCost;
+            return;
         }
         if (params.containsKey("Type")) {
             if (params.get("Type").equals("Spell")) {
                 if (!sa.isSpell()) {
-                    return originalCost;
+                    return;
                 }
             } else if (params.get("Type").equals("Ability")) {
                 if (!(sa instanceof AbilityActivated)) {
-                    return originalCost;
+                    return;
                 }
             } else if (params.get("Type").equals("Buyback")) {
                 if (!sa.isBuyBackAbility()) {
-                    return originalCost;
+                    return;
                 }
             } else if (params.get("Type").equals("Cycling")) {
                 if (!sa.isCycling()) {
-                    return originalCost;
+                    return;
                 }
             } else if (params.get("Type").equals("Equip")) {
                 if (!(sa instanceof AbilityActivated) || !sa.hasParam("Equip")) {
-                    return originalCost;
+                    return;
                 }
             } else if (params.get("Type").equals("Flashback")) {
                 if (!sa.isFlashBackAbility()) {
-                    return originalCost;
+                    return;
                 }
             }
         }
         if (params.containsKey("ValidTarget")) {
             Target tgt = sa.getTarget();
             if (tgt == null) {
-                return originalCost;
+                return;
             }
             boolean targetValid = false;
             for (Object target : tgt.getTargets()) {
@@ -232,11 +228,11 @@ public class StaticAbilityCostChange {
                 }
             }
             if (!targetValid) {
-                return originalCost;
+                return;
             }
         }
         if (params.containsKey("AffectedZone") && !card.isInZone(ZoneType.smartValueOf(params.get("AffectedZone")))) {
-            return originalCost;
+            return;
         }
         int value = 0;
         if ("X".equals(amount)) {
@@ -259,8 +255,5 @@ public class StaticAbilityCostChange {
                 manaCost.decreaseShard(ManaCostShard.GREEN, value);
             }
         }
-
-
-        return manaCost;
     }
 }

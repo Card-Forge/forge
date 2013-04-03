@@ -358,28 +358,26 @@ public class StaticAbility {
      *            the originalCost
      * @return the modified ManaCost
      */
-    public final ManaCostBeingPaid applyAbility(final String mode, final SpellAbility sa, final ManaCostBeingPaid originalCost) {
+    public final void applyAbility(final String mode, final SpellAbility sa, final ManaCostBeingPaid originalCost) {
 
         // don't apply the ability if it hasn't got the right mode
         if (!this.params.get("Mode").equals(mode)) {
-            return originalCost;
+            return;
         }
 
         if (this.isSuppressed() || !this.checkConditions()) {
-            return originalCost;
+            return;
         }
 
         if (mode.equals("RaiseCost")) {
-            return StaticAbilityCostChange.applyRaiseCostAbility(this, sa, originalCost);
+            StaticAbilityCostChange.applyRaiseCostAbility(this, sa, originalCost);
         }
         if (mode.equals("ReduceCost")) {
-            return StaticAbilityCostChange.applyReduceCostAbility(this, sa, originalCost);
+            StaticAbilityCostChange.applyReduceCostAbility(this, sa, originalCost);
         }
         if (mode.equals("SetCost")) { //Set cost is only used by Trinisphere
-            return StaticAbilityCostChange.applyRaiseCostAbility(this, sa, originalCost);
+            StaticAbilityCostChange.applyRaiseCostAbility(this, sa, originalCost);
         }
-
-        return originalCost;
     }
 
     /**

@@ -118,4 +118,5 @@ public abstract class PlayerController {
 
     public abstract void playMiracle(SpellAbility miracle, Card card);
     public abstract void playMadness(SpellAbility madness);
+    public abstract List<Card> chooseCardsToDelve(int colorLessAmount, List<Card> grave);
 }

@@ -864,5 +864,35 @@ public class AiController {
         } while ( sa != null );
     }
 
+    public List<Card> chooseCardsToDelve(int colorlessCost, List<Card> grave) {
+        List<Card> toExile = new ArrayList<Card>();
+        int numToExile = Math.min(grave.size(), colorlessCost);
+        
+        for (int i = 0; i < numToExile; i++) {
+            Card chosen = null;
+            for (final Card c : grave) { // Exile noncreatures first in
+                // case we can revive. Might
+                // wanna do some additional
+                // checking here for Flashback
+                // and the like.
+                if (!c.isCreature()) {
+                    chosen = c;
+                    break;
+                }
+            }
+            if (chosen == null) {
+                chosen = ComputerUtilCard.getWorstCreatureAI(grave);
+            }
+
+            if (chosen == null) {
+                // Should never get here but... You know how it is.
+                chosen = grave.get(0);
+            }
+
+            toExile.add(chosen);
+            grave.remove(chosen);
+        }
+        return toExile;
+    }
 }
 

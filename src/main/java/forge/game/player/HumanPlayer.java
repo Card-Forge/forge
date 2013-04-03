@@ -144,7 +144,8 @@ public class HumanPlayer extends Player {
             if (sa.getSourceCard().isCopiedSpell() && sa.isSpell()) {
                 manaCost = new ManaCostBeingPaid("0");
             } else {
-                manaCost = game.getActionPlay().getSpellCostChange(sa, new ManaCostBeingPaid(sa.getManaCost()));
+                manaCost = new ManaCostBeingPaid(sa.getManaCost());
+                manaCost.applySpellCostChange(sa);
             }
 
             if  (!manaCost.isPaid()) {
@@ -193,7 +194,8 @@ public class HumanPlayer extends Player {
             if (sa.getSourceCard().isCopiedSpell() && sa.isSpell()) {
                 manaCost = new ManaCostBeingPaid("0");
             } else {
-                manaCost = game.getActionPlay().getSpellCostChange(sa, new ManaCostBeingPaid(sa.getManaCost()));
+                manaCost = new ManaCostBeingPaid(sa.getManaCost());
+                manaCost.applySpellCostChange(sa);
             }
 
             if( !manaCost.isPaid() ) {

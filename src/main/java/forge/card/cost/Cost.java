@@ -23,7 +23,6 @@ import java.util.regex.Pattern;
 
 import forge.Card;
 import forge.CounterType;
-import forge.Singletons;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostBeingPaid;
 import forge.card.mana.ManaCostParser;
@@ -366,7 +365,8 @@ public class Cost {
         for (final CostPart part : this.costParts) {
             if (part instanceof CostPartMana) {
                 final ManaCost mana = new ManaCost(new ManaCostParser(part.toString()));
-                final ManaCostBeingPaid changedCost = Singletons.getModel().getGame().getActionPlay().getSpellCostChange(sa, new ManaCostBeingPaid(mana));
+                final ManaCostBeingPaid changedCost = new ManaCostBeingPaid(mana);
+                changedCost.applySpellCostChange(sa);
 
                 ((CostPartMana)part).setAdjustedMana(changedCost.toString(false));
                 costChanged = true;
@@ -374,7 +374,8 @@ public class Cost {
         }
         if (!costChanged) {
             // Spells with a cost of 0 should be affected too
-            final ManaCostBeingPaid changedCost = Singletons.getModel().getGame().getActionPlay().getSpellCostChange(sa, new ManaCostBeingPaid("0"));
+            final ManaCostBeingPaid changedCost = new ManaCostBeingPaid("0");
+            changedCost.applySpellCostChange(sa);
             this.costParts.add(new CostPartMana(changedCost.toString(), 0, false));
         }
     }

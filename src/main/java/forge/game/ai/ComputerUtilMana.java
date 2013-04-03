@@ -13,7 +13,6 @@ import forge.Card;
 import forge.CardLists;
 import forge.CardUtil;
 import forge.Constant;
-import forge.Singletons;
 import forge.card.MagicColor;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.ApiType;
@@ -398,8 +397,7 @@ public class ComputerUtilMana {
         final ManaCost mana = sa.getPayCosts() != null ? sa.getPayCosts().getTotalMana() : sa.getManaCost();
     
         ManaCostBeingPaid cost = new ManaCostBeingPaid(mana);
-    
-        cost = Singletons.getModel().getGame().getActionPlay().getSpellCostChange(sa, cost);
+        cost.applySpellCostChange(sa);
     
         final Card card = sa.getSourceCard();
         // Tack xMana Payments into mana here if X is a set value
