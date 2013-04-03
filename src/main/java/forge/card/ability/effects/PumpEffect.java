@@ -16,6 +16,7 @@ import forge.card.spellability.Target;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiDialog;
+import forge.util.Aggregates;
 
 public class PumpEffect extends SpellAbilityEffect {
 
@@ -179,7 +180,7 @@ public class PumpEffect extends SpellAbilityEffect {
         String pumpForget = null;
         String pumpImprint = null;
         
-        final List<String> keywords = sa.hasParam("KW") ? Arrays.asList(sa.getParam("KW").split(" & ")) : new ArrayList<String>();
+        List<String> keywords = sa.hasParam("KW") ? Arrays.asList(sa.getParam("KW").split(" & ")) : new ArrayList<String>();
         final int a = AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("NumAtt"), sa);
         final int d = AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("NumDef"), sa);
 
@@ -194,7 +195,29 @@ public class PumpEffect extends SpellAbilityEffect {
                 tgtCards = AbilityUtils.getDefinedCards(sa.getSourceCard(), sa.getParam("Defined"), sa);
             }
         }
-
+        
+        if (sa.hasParam("RandomKeyword")) {
+            final String num = sa.hasParam("RandomKWNum") ? sa.getParam("RandomKWNum") : "1";
+            final int numkw = AbilityUtils.calculateAmount(sa.getSourceCard(), num, sa);
+            List<String> choice = new ArrayList<String>();
+            List<String> total = new ArrayList<String>(keywords);
+            if (sa.hasParam("NoRepetition")) {
+                final List<String> tgtCardskws = tgtCards.get(0).getKeyword();
+                for (int i = 0; i < tgtCardskws.size(); i++) {
+                    if (total.contains(tgtCardskws.get(i))) {
+                        total.remove(tgtCardskws.get(i));
+                    }
+                }
+            }
+            final int min = Math.min(total.size(), numkw);
+            for (int i = 0; i < min; i++) {
+                final String random = Aggregates.random(total);
+                choice.add(random);
+                total.remove(random);
+            }
+            keywords = choice;
+        }
+        
         if (sa.hasParam("Optional")) {
             if (sa.getActivatingPlayer().isHuman()) {
                 final StringBuilder targets = new StringBuilder();

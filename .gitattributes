@@ -176,6 +176,7 @@ res/cardsfolder/a/akoum_refuge.txt svneol=native#text/plain
 res/cardsfolder/a/akrasan_squire.txt svneol=native#text/plain
 res/cardsfolder/a/akroma_angel_of_fury.txt svneol=native#text/plain
 res/cardsfolder/a/akroma_angel_of_wrath.txt svneol=native#text/plain
+res/cardsfolder/a/akroma_angel_of_wrath_avatar.txt -text
 res/cardsfolder/a/akromas_blessing.txt -text
 res/cardsfolder/a/akromas_devoted.txt svneol=native#text/plain
 res/cardsfolder/a/akromas_memorial.txt svneol=native#text/plain
@@ -3040,6 +3041,7 @@ res/cardsfolder/e/ego_erasure.txt -text
 res/cardsfolder/e/eiganjo_castle.txt svneol=native#text/plain
 res/cardsfolder/e/eiganjo_free_riders.txt svneol=native#text/plain
 res/cardsfolder/e/eight_and_a_half_tails.txt -text
+res/cardsfolder/e/eight_and_a_half_tails_avatar.txt -text
 res/cardsfolder/e/eightfold_maze.txt svneol=native#text/plain
 res/cardsfolder/e/ekundu_griffin.txt svneol=native#text/plain
 res/cardsfolder/e/el_hajjaj.txt svneol=native#text/plain
