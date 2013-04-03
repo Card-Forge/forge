@@ -1,0 +1,10 @@
+Name:Heroism
+ManaCost:2 W
+Types:Enchantment
+A:AB$ RepeatEach | Cost$ Sac<1/Creature.White/White Creature> | RepeatCards$ Creature.attacking+Red | RepeatSubAbility$ DBPump | SpellDescription$ For each attacking red creature, prevent all combat damage that would be dealt by that creature this turn unless its controller pays 2 R.
+SVar:DBPump:DB$ Pump | Defined$ Remembered | KW$ HIDDEN Prevent all combat damage that would be dealt by CARDNAME. | UnlessCost$ 2 R | UnlessPayer$ RememberedController
+SVar:RemRandomDeck:True
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/heroism.jpg
+Oracle:Sacrifice a white creature: For each attacking red creature, prevent all combat damage that would be dealt by that creature this turn unless its controller pays {2}{R}.
+SetInfo:FEM Uncommon

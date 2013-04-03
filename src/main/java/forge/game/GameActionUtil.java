@@ -406,12 +406,12 @@ public final class GameActionUtil {
         final Player p = ability.getActivatingPlayer();
         final Card source = ability.getSourceCard();
         Card current = null; // Used in spells with RepeatEach effect to distinguish cards, Cut the Tethers
-        if (!source.getRemembered().isEmpty() && source.isSpell()) {
+        if (!source.getRemembered().isEmpty()) {
             if (source.getRemembered().get(0) instanceof Card) { 
                 current = (Card) source.getRemembered().get(0);
             }
         }
-        if (!source.getImprinted().isEmpty() && source.isSpell()) {
+        if (!source.getImprinted().isEmpty()) {
             current = source.getImprinted().get(0);
         }
         

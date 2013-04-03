@@ -1181,7 +1181,7 @@ public class AbilityUtils {
     private static boolean willAIPayForAbility(SpellAbility sa, Player payer, SpellAbility ability, boolean paid, List<Player> payers) {
         Card source = sa.getSourceCard();
         boolean payForOwnOnly = "OnlyOwn".equals(sa.getParam("UnlessAI"));
-        boolean payOwner = sa.getParam("UnlessAI").startsWith("Defined");
+        boolean payOwner = sa.hasParam("UnlessAI") ? sa.getParam("UnlessAI").startsWith("Defined") : false;
         boolean payNever = "Never".equals(sa.getParam("UnlessAI"));
         boolean isMine = sa.getActivatingPlayer().equals(payer);
 

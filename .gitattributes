@@ -4867,6 +4867,7 @@ res/cardsfolder/h/hero_of_oxid_ridge.txt svneol=native#text/plain
 res/cardsfolder/h/heroes_remembered.txt svneol=native#text/plain
 res/cardsfolder/h/heroes_reunion.txt svneol=native#text/plain
 res/cardsfolder/h/heroic_defiance.txt -text
+res/cardsfolder/h/heroism.txt -text
 res/cardsfolder/h/heros_demise.txt svneol=native#text/plain
 res/cardsfolder/h/heros_resolve.txt svneol=native#text/plain
 res/cardsfolder/h/hesitation.txt -text svneol=unset#text/plain
