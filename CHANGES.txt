@@ -78,6 +78,7 @@ Swift Silence
 Cut the Tethers
 Delay
 Runed Halo
+Heroism
 
 
 ----------
@@ -85,6 +86,18 @@ New Planes
 ----------
 
 Sea of Sand
+
+
+--------------------
+New Vanguard Avatars
+--------------------
+
+Akroma, Angel of Wrath Avatar
+Eight-and-a-Half-Tails Avatar
+Peacekeeper Avatar
+Stonehewer Giant Avatar
+Sliver Queen Avatar
+Jhoira of the Ghitu Avatar
 
 
 ------------
