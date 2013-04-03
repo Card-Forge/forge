@@ -2,7 +2,7 @@ Name:Fold into AEther
 ManaCost:2 U U
 Types:Instant
 A:SP$ Counter | Cost$ 2 U U | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | RememberCountered$ True | SubAbility$ DBChangeZone | SpellDescription$ Counter target spell. If that spell is countered this way, its controller may put a creature card from his or her hand onto the battlefield.
-SVar:DBChangeZone:DB$ ChangeZone | ChangeType$ Creature | Origin$ Hand | Destination$ Battlefield | ChangeNum$ 1 | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ GE1 | SubAbility$ DBleanup
+SVar:DBChangeZone:DB$ ChangeZone | ChangeType$ Creature | Origin$ Hand | Destination$ Battlefield | ChangeNum$ 1 | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ GE1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fold_into_aether.jpg
 Oracle:Counter target spell. If that spell is countered this way, its controller may put a creature card from his or her hand onto the battlefield.
