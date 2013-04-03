@@ -34,7 +34,7 @@ import javax.swing.WindowConstants;
 import forge.Singletons;
 import forge.control.KeyboardShortcuts.Shortcut;
 import forge.game.ai.AiProfileUtil;
-import forge.game.player.Player;
+import forge.game.player.HumanPlayer;
 import forge.gui.SOverlayUtils;
 import forge.gui.deckeditor.CDeckEditorUI;
 import forge.gui.deckeditor.VDeckEditorUI;
@@ -284,8 +284,8 @@ public enum FControl {
     }
 
     /** @return {@link forge.game.player.Player} */
-    private Player localPlayer;
-    public Player getPlayer() {
+    private HumanPlayer localPlayer;
+    public HumanPlayer getPlayer() {
         return localPlayer;
     }
 
@@ -305,7 +305,7 @@ public enum FControl {
      * TODO: Write javadoc for this method.
      * @param localHuman
      */
-    public void setPlayer(Player localHuman) {
+    public void setPlayer(HumanPlayer localHuman) {
         localPlayer = localHuman;
     }
 

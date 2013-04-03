@@ -28,6 +28,7 @@ import forge.card.ability.effects.CharmEffect;
 import forge.card.cost.Cost;
 import forge.card.cost.CostPayment;
 import forge.card.mana.ManaCostBeingPaid;
+import forge.card.mana.ManaCostShard;
 import forge.card.spellability.Ability;
 import forge.card.spellability.HumanPlaySpellAbility;
 import forge.card.spellability.SpellAbility;
@@ -229,5 +230,52 @@ public class HumanPlayer extends Player {
     }
 
 
+    public final void playCardWithoutManaCost(final Card c) {
+        final List<SpellAbility> choices = c.getBasicSpells();
+        // TODO add Buyback, Kicker, ... , spells here
 
+        SpellAbility sa = controller.getAbilityToPlay(choices);
+
+        if (sa == null) {
+            return;
+        }
+
+        sa.setActivatingPlayer(this);
+        this.playSpellAbilityWithoutPayingManaCost(sa);
+    }
+    
+    /**
+     * <p>
+     * playSpellAbilityForFree.
+     * </p>
+     * 
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
+     */
+    public final void playSpellAbilityWithoutPayingManaCost(final SpellAbility sa) {
+        FThreads.checkEDT("GameActionPlay.playSpellAbilityWithoutPayingManaCost", false);
+        final Card source = sa.getSourceCard();
+        
+        source.setSplitStateToPlayAbility(sa);
+
+        if (sa.getPayCosts() != null) {
+            if (sa.getApi() == ApiType.Charm && !sa.isWrapper()) {
+                CharmEffect.makeChoices(sa);
+            }
+            final CostPayment payment = new CostPayment(sa.getPayCosts(), sa);
+
+            final HumanPlaySpellAbility req = new HumanPlaySpellAbility(sa, payment);
+            req.fillRequirements(false, true, false);
+        } else {
+            if (sa.isSpell()) {
+                final Card c = sa.getSourceCard();
+                if (!c.isCopiedSpell()) {
+                    sa.setSourceCard(game.getAction().moveToStack(c));
+                }
+            }
+            boolean x = sa.getSourceCard().getManaCost().getShardCount(ManaCostShard.X) > 0;
+
+            game.getStack().add(sa, x);
+        }
+    }
 } // end HumanPlayer class

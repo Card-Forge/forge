@@ -88,7 +88,6 @@ public class GameState {
 
     private long timestamp = 0;
     public final GameAction action;
-    public final GameActionPlay actionPlay;
     private final MatchController match;
 
     /**
@@ -109,7 +108,6 @@ public class GameState {
         allPlayers = Collections.unmodifiableList(players);
         roIngamePlayers = Collections.unmodifiableList(ingamePlayers);
         action = new GameAction(this);
-        actionPlay = new GameActionPlay(this);
         stack = new MagicStack(this);
         phaseHandler = new PhaseHandler(this);
         
@@ -661,15 +659,6 @@ public class GameState {
             }
 
         }
-    }
-
-    /**
-     * TODO: Write javadoc for this method.
-     * @return
-     */
-    public GameActionPlay getActionPlay() {
-        // TODO Auto-generated method stub
-        return actionPlay;
     }
 
     public boolean mulliganned = false;

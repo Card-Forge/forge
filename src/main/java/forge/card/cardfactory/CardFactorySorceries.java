@@ -45,6 +45,7 @@ import forge.control.input.InputSelectCardsFromList;
 import forge.game.GameState;
 import forge.game.ai.ComputerUtil;
 import forge.game.player.AIPlayer;
+import forge.game.player.HumanPlayer;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
@@ -225,7 +226,7 @@ public class CardFactorySorceries {
                                         JOptionPane.INFORMATION_MESSAGE);
                             }
                         } else {
-                            Singletons.getModel().getGame().getActionPlay().playCardWithoutManaCost(playing, card.getController());
+                            ((HumanPlayer)card.getController()).playCardWithoutManaCost(playing);
                         }
                         chosen.remove(playing);
                     }

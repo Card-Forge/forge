@@ -68,7 +68,7 @@ public class PlayerControllerAi extends PlayerController {
         } else if (abilities.size() == 1) {
             return abilities.get(0);
         } else {
-            return GuiChoose.oneOrNone("Choose", abilities); // some day network interaction will be here
+            return GuiChoose.oneOrNone("Choose ability for AI to play", abilities); // some day network interaction will be here
         }
     }
 
