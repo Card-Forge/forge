@@ -1,0 +1,17 @@
+Name:Blazing Effigy
+ManaCost:1 R
+Types:Creature Elemental
+PT:0/3
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ BlazeDmg | TriggerDescription$ When CARDNAME dies, it deals X damage to target creature, where X is 3 plus the amount of damage dealt to CARDNAME this turn by other sources named Blazing Effigy.
+SVar:BlazeDmg:DB$ DealDamage | ValidTgts$ Creature | TgtPrompt$ Select target creature to deal damage to | NumDmg$ BlazeSize | References$ BlazeSize,Contributions | SubAbility$ TrigReset
+T:Mode$ DamageDone | ValidSource$ Card.Other+namedBlazing Effigy | ValidTarget$ Card.Self | Execute$ StoreContribution | Static$ True
+SVar:StoreContribution:DB$ StoreSVar | SVar$ Contributions | Type$ CountSVar | Expression$ Contributions/Plus.Blazed
+T:Mode$ Phase | Phase$ Cleanup | Execute$ TrigReset | Static$ True
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Ante,Library,Hand,Exile | ValidCard$ Card.Self | Execute$ TrigReset | Static$ True
+SVar:TrigReset:DB$ StoreSVar | SVar$ Contributions | Type$ Number | Expression$ 0
+SVar:BlazeSize:SVar$Contributions/Plus.3
+SVar:Contributions:Number$0
+SVar:Blazed:TriggerCount$DamageAmount
+SVar:Picture:http://www.wizards.com/global/images/magic/general/blazing_effigy.jpg
+Oracle:When Blazing Effigy dies, it deals X damage to target creature, where X is 3 plus the amount of damage dealt to Blazing Effigy this turn by other sources named Blazing Effigy.
+SetInfo:LEG Common
