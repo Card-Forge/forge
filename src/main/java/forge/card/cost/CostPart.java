@@ -18,6 +18,8 @@
 package forge.card.cost;
 
 
+import org.apache.commons.lang3.StringUtils;
+
 import forge.Card;
 import forge.card.spellability.SpellAbility;
 import forge.game.GameState;
@@ -120,12 +122,7 @@ public abstract class CostPart {
      * @return the integer
      */
     public final Integer convertAmount() {
-        Integer i = null;
-        try {
-            i = Integer.parseInt(this.getAmount());
-        } catch (final NumberFormatException e) {
-        }
-        return i;
+        return StringUtils.isNumeric(amount) ? Integer.parseInt(amount) : null; 
     }
 
     /**

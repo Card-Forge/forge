@@ -866,13 +866,9 @@ public class CardFactoryUtil {
      *            an array of {@link java.lang.String} objects.
      * @return an array of {@link java.lang.String} objects.
      */
-    public static String[] parseMath(final String[] l) {
-        final String[] m = { "none" };
-        if (l.length > 1) {
-            m[0] = l[1];
-        }
-
-        return m;
+    public static String extractOperators(final String expression) {
+        String[] l = expression.split("/");
+        return l.length > 1 ? l[1] : null;
     }
 
     /**
@@ -889,20 +885,12 @@ public class CardFactoryUtil {
      * @return a int.
      */
     public static int objectXCount(final ArrayList<Object> objects, final String s, final Card source) {
-        if (objects.size() == 0) {
+        if (objects.isEmpty()) {
             return 0;
         }
 
-        final String[] l = s.split("/");
-        final String[] m = CardFactoryUtil.parseMath(l);
-
-        int n = 0;
-
-        if (s.startsWith("Amount")) {
-            n = objects.size();
-        }
-
-        return CardFactoryUtil.doXMath(n, m, source);
+        int n = s.startsWith("Amount") ? objects.size() : 0;
+        return CardFactoryUtil.doXMath(n, CardFactoryUtil.extractOperators(s), source);
     }
 
     /**
@@ -924,7 +912,7 @@ public class CardFactoryUtil {
         }
 
         final String[] l = s.split("/");
-        final String[] m = CardFactoryUtil.parseMath(l);
+        final String m = CardFactoryUtil.extractOperators(s);
 
         int n = 0;
 
@@ -1115,19 +1103,19 @@ public class CardFactoryUtil {
      * 
      * @param c
      *            a {@link forge.Card} object.
-     * @param s
+     * @param expression
      *            a {@link java.lang.String} object.
      * @return a int.
      */
-    public static int xCount(final Card c, final String s) {
+    public static int xCount(final Card c, final String expression) {
         int n = 0;
 
         final Player cardController = c.getController();
         final Player oppController = cardController.getOpponent();
         final Player activePlayer = Singletons.getModel().getGame().getPhaseHandler().getPlayerTurn();
 
-        final String[] l = s.split("/");
-        final String[] m = CardFactoryUtil.parseMath(l);
+        final String[] l = expression.split("/");
+        final String m = CardFactoryUtil.extractOperators(expression);
 
         // accept straight numbers
         if (l[0].startsWith("Number$")) {
@@ -2028,12 +2016,12 @@ public class CardFactoryUtil {
         return CardFactoryUtil.doXMath(n, m, c);
     }
 
-    private static int doXMath(final int num, final String m, final Card c) {
-        if (m.equals("none")) {
+    public static int doXMath(final int num, final String operators, final Card c) {
+        if (operators == null || operators.equals("none")) {
             return num;
         }
 
-        final String[] s = m.split("\\.");
+        final String[] s = operators.split("\\.");
         int secondaryNum = 0;
 
         try {
@@ -2094,27 +2082,6 @@ public class CardFactoryUtil {
 
     /**
      * <p>
-     * doXMath.
-     * </p>
-     * 
-     * @param num
-     *            a int.
-     * @param m
-     *            an array of {@link java.lang.String} objects.
-     * @param c
-     *            a {@link forge.Card} object.
-     * @return a int.
-     */
-    public static int doXMath(final int num, final String[] m, final Card c) {
-        if (m.length == 0) {
-            return num;
-        }
-
-        return CardFactoryUtil.doXMath(num, m[0], c);
-    }
-
-    /**
-     * <p>
      * handlePaid.
      * </p>
      * 
@@ -2145,17 +2112,9 @@ public class CardFactoryUtil {
 
         }
         if (string.startsWith("Valid")) {
-            final String[] m = { "none" };
-
             String valid = string.substring(6);
-            final String[] l;
-            l = valid.split("/"); // separate the specification from any math
-            valid = l[0];
-            if (l.length > 1) {
-                m[0] = l[1];
-            }
             final List<Card> list = CardLists.getValidCards(paidList, valid, source.getController(), source);
-            return CardFactoryUtil.doXMath(list.size(), m, source);
+            return CardFactoryUtil.doXMath(list.size(), CardFactoryUtil.extractOperators(valid), source);
         }
 
         int tot = 0;

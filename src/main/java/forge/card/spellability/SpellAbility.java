@@ -23,6 +23,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.apache.commons.lang3.StringUtils;
+
 import forge.Card;
 import forge.GameEntity;
 import forge.Singletons;
@@ -35,6 +37,7 @@ import forge.card.mana.Mana;
 import forge.card.mana.ManaCost;
 import forge.game.player.AIPlayer;
 import forge.game.player.Player;
+import forge.util.TextUtil;
 
 //only SpellAbility can go on the stack
 //override any methods as needed
@@ -1739,6 +1742,20 @@ public abstract class SpellAbility implements ISpellAbility {
             }
         }
 
+        return false;
+    }
+
+    /**
+     * Returns whether variable was present in the announce list.
+     */
+    public boolean isAnnouncing(String variable) {
+        String announce = getParam("Announce");
+        if (StringUtils.isBlank(announce)) return false;
+        String[] announcedOnes = TextUtil.split(announce, ',');
+        for(String a : announcedOnes) {
+            if( a.trim().equalsIgnoreCase(variable))
+                return true;
+        }
         return false;
     }    
 }

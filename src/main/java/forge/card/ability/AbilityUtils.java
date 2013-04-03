@@ -290,250 +290,18 @@ public class AbilityUtils {
      * @return a int.
      */
     public static int calculateAmount(final Card card, String amount, final SpellAbility ability) {
-        // amount can be anything, not just 'X' as long as sVar exists
+        // return empty strings and constants
+        if (StringUtils.isBlank(amount)) return 0;
+        if (StringUtils.isNumeric(amount)) return Integer.parseInt(amount);
 
-        if (amount == null || amount.isEmpty()) {
-            return 0;
-        }
-
-        // If Amount is -X, strip the minus sign before looking for an SVar of
-        // that kind
-        int multiplier = 1;
-        if (amount.startsWith("-")) {
-            multiplier = -1;
+        // Strip and save sign for calculations
+        boolean startsWithPlus = amount.charAt(0) == '+';
+        boolean startsWithMinus = amount.charAt(0) == '-';
+        int multiplier = startsWithMinus ? -1 : 1;
+        if(startsWithMinus || startsWithPlus )
             amount = amount.substring(1);
-        } else if (amount.startsWith("+")) {
-            amount = amount.substring(1);
-        }
 
-        String svarval;
-        if (ability != null) {
-
-            svarval = ability.getSVar(amount);
-            if (svarval.equals("")) {
-                try {
-                    Integer.parseInt(amount);
-                }
-                catch (NumberFormatException ignored) {
-                    //If this is reached, amount wasn't an integer
-                    //Print a warning to console to help debug if an ability is not stolen properly.
-                    StringBuilder sb = new StringBuilder("WARNING:SVar fallback to Card (");
-                    sb.append(card.getName()).append(") and Ability(").append(ability.toString()).append(")");
-                    System.out.println(sb.toString());
-                    svarval = card.getSVar(amount);
-                }
-            }
-        } else {
-            svarval = card.getSVar(amount);
-        }
-
-        if (!svarval.equals("")) {
-            final String[] calcX = svarval.split("\\$");
-            if ((calcX.length == 1) || calcX[1].equals("none")) {
-                return 0;
-            }
-
-            if (calcX[0].startsWith("Count")) {
-                return AbilityUtils.xCount(card, calcX[1], ability) * multiplier;
-            } else if (calcX[0].startsWith("Number")) {
-                return CardFactoryUtil.xCount(card, svarval) * multiplier;
-            } else if (calcX[0].startsWith("SVar")) {
-                final String[] l = calcX[1].split("/");
-                final String[] m = CardFactoryUtil.parseMath(l);
-                return CardFactoryUtil.doXMath(AbilityUtils.calculateAmount(card, l[0], ability), m, card)
-                        * multiplier;
-            } else if (calcX[0].startsWith("PlayerCount")) {
-                final String hType = calcX[0].substring(11);
-                final ArrayList<Player> players = new ArrayList<Player>();
-                if (hType.equals("Players") || hType.equals("")) {
-                    players.addAll(Singletons.getModel().getGame().getPlayers());
-                    return CardFactoryUtil.playerXCount(players, calcX[1], card) * multiplier;
-                } else if (hType.equals("Opponents")) {
-                    players.addAll(card.getController().getOpponents());
-                    return CardFactoryUtil.playerXCount(players, calcX[1], card) * multiplier;
-                } else if (hType.equals("Other")) {
-                    players.addAll(card.getController().getAllOtherPlayers());
-                    return CardFactoryUtil.playerXCount(players, calcX[1], card) * multiplier;
-                } else if (hType.equals("Remembered")) {
-                    for (final Object o : card.getRemembered()) {
-                        if (o instanceof Player) {
-                            players.add((Player) o);
-                        }
-                    }
-                    return CardFactoryUtil.playerXCount(players, calcX[1], card) * multiplier;
-                } else if (hType.equals("NonActive")) {
-                    players.addAll(Singletons.getModel().getGame().getPlayers());
-                    players.remove(Singletons.getModel().getGame().getPhaseHandler().getPlayerTurn());
-                    return CardFactoryUtil.playerXCount(players, calcX[1], card) * multiplier;
-                }
-            } else if (calcX[0].startsWith("Remembered")) {
-                // Add whole Remembered list to handlePaid
-                final List<Card> list = new ArrayList<Card>();
-                if (card.getRemembered().isEmpty()) {
-                    final Card newCard = Singletons.getModel().getGame().getCardState(card);
-                    for (final Object o : newCard.getRemembered()) {
-                        if (o instanceof Card) {
-                            list.add(Singletons.getModel().getGame().getCardState((Card) o));
-                        }
-                    }
-                }
-
-                if (calcX[0].endsWith("LKI")) { // last known information
-                    for (final Object o : card.getRemembered()) {
-                        if (o instanceof Card) {
-                            list.add((Card) o);
-                        }
-                    }
-                } else {
-                    for (final Object o : card.getRemembered()) {
-                        if (o instanceof Card) {
-                            list.add(Singletons.getModel().getGame().getCardState((Card) o));
-                        }
-                    }
-                }
-
-                return CardFactoryUtil.handlePaid(list, calcX[1], card) * multiplier;
-            } else if (calcX[0].startsWith("Imprinted")) {
-                // Add whole Imprinted list to handlePaid
-                final List<Card> list = new ArrayList<Card>();
-                for (final Card c : card.getImprinted()) {
-                    list.add(Singletons.getModel().getGame().getCardState(c));
-                }
-
-                return CardFactoryUtil.handlePaid(list, calcX[1], card) * multiplier;
-            } else if (calcX[0].matches("Enchanted")) {
-                // Add whole Enchanted list to handlePaid
-                final List<Card> list = new ArrayList<Card>();
-                if (card.isEnchanting()) {
-                    Object o = card.getEnchanting();
-                    if (o instanceof Card) {
-                        list.add(Singletons.getModel().getGame().getCardState((Card) o));
-                    }
-                }
-                return CardFactoryUtil.handlePaid(list, calcX[1], card) * multiplier;
-            } else if (ability != null) {
-                // Player attribute counting
-                if (calcX[0].startsWith("TargetedPlayer")) {
-                    final ArrayList<Player> players = new ArrayList<Player>();
-                    final SpellAbility saTargeting = ability.getSATargetingPlayer();
-                    if (null != saTargeting) {
-                        players.addAll(saTargeting.getTarget().getTargetPlayers());
-                    }
-                    return CardFactoryUtil.playerXCount(players, calcX[1], card) * multiplier;
-                }
-                if (calcX[0].startsWith("TargetedObjects")) {
-                    final ArrayList<Object> objects = new ArrayList<Object>();
-                    // Make list of all targeted objects starting with the root SpellAbility
-                    SpellAbility loopSA = ability.getRootAbility();
-                    while (loopSA != null) {
-                        if (loopSA.getTarget() != null) {
-                            objects.addAll(loopSA.getTarget().getTargets());
-                        }
-                        loopSA = loopSA.getSubAbility();
-                    }
-                    return CardFactoryUtil.objectXCount(objects, calcX[1], card) * multiplier;
-                }
-                if (calcX[0].startsWith("TargetedController")) {
-                    final ArrayList<Player> players = new ArrayList<Player>();
-                    final List<Card> list = getDefinedCards(card, "Targeted", ability);
-                    final List<SpellAbility> sas = AbilityUtils.getDefinedSpellAbilities(card, "Targeted",
-                            ability);
-
-                    for (final Card c : list) {
-                        final Player p = c.getController();
-                        if (!players.contains(p)) {
-                            players.add(p);
-                        }
-                    }
-                    for (final SpellAbility s : sas) {
-                        final Player p = s.getSourceCard().getController();
-                        if (!players.contains(p)) {
-                            players.add(p);
-                        }
-                    }
-                    return CardFactoryUtil.playerXCount(players, calcX[1], card) * multiplier;
-                }
-                if (calcX[0].startsWith("TargetedByTarget")) {
-                    final List<Card> tgtList = new ArrayList<Card>();
-                    final List<SpellAbility> saList = getDefinedSpellAbilities(card, "Targeted", ability);
-
-                    for (final SpellAbility s : saList) {
-                        tgtList.addAll(getDefinedCards(s.getSourceCard(), "Targeted", s));
-                    }
-                    return CardFactoryUtil.handlePaid(tgtList, calcX[1], card) * multiplier;
-                }
-                if (calcX[0].startsWith("TriggeredPlayer") || calcX[0].startsWith("TriggeredTarget")) {
-                    final SpellAbility root = ability.getRootAbility();
-                    Object o = root.getTriggeringObject(calcX[0].substring(9));
-                    final List<Player> players = new ArrayList<Player>();
-                    if (o instanceof Player) {
-                        players.add((Player) o);
-                    }
-                    return CardFactoryUtil.playerXCount(players, calcX[1], card) * multiplier;
-                }
-                // Added on 9/30/12 (ArsenalNut) - Ended up not using but might be useful in future
-                /*
-                if (calcX[0].startsWith("EnchantedController")) {
-                    final ArrayList<Player> players = new ArrayList<Player>();
-                    players.addAll(AbilityFactory.getDefinedPlayers(card, "EnchantedController", ability));
-                    return CardFactoryUtil.playerXCount(players, calcX[1], card) * multiplier;
-                }
-                 */
-
-                List<Card> list = new ArrayList<Card>();
-                if (calcX[0].startsWith("Sacrificed")) {
-                    list = ability.getRootAbility().getPaidList("Sacrificed");
-                } else if (calcX[0].startsWith("Discarded")) {
-                    final SpellAbility root = ability.getRootAbility();
-                    list = root.getPaidList("Discarded");
-                    if ((null == list) && root.isTrigger()) {
-                        list = root.getSourceCard().getSpellPermanent().getPaidList("Discarded");
-                    }
-                } else if (calcX[0].startsWith("Exiled")) {
-                    list = ability.getRootAbility().getPaidList("Exiled");
-                } else if (calcX[0].startsWith("Tapped")) {
-                    list = ability.getRootAbility().getPaidList("Tapped");
-                } else if (calcX[0].startsWith("Revealed")) {
-                    list = ability.getRootAbility().getPaidList("Revealed");
-                } else if (calcX[0].startsWith("Targeted")) {
-                    list = ability.findTargetedCards();
-                } else if (calcX[0].startsWith("Triggered")) {
-                    final SpellAbility root = ability.getRootAbility();
-                    list = new ArrayList<Card>();
-                    list.add((Card) root.getTriggeringObject(calcX[0].substring(9)));
-                } else if (calcX[0].startsWith("TriggerCount")) {
-                    // TriggerCount is similar to a regular Count, but just
-                    // pulls Integer Values from Trigger objects
-                    final SpellAbility root = ability.getRootAbility();
-                    final String[] l = calcX[1].split("/");
-                    final String[] m = CardFactoryUtil.parseMath(l);
-                    final int count = (Integer) root.getTriggeringObject(l[0]);
-
-                    return CardFactoryUtil.doXMath(count, m, card) * multiplier;
-                } else if (calcX[0].startsWith("Replaced")) {
-                    final SpellAbility root = ability.getRootAbility();
-                    list = new ArrayList<Card>();
-                    list.add((Card) root.getReplacingObject(calcX[0].substring(8)));
-                } else if (calcX[0].startsWith("ReplaceCount")) {
-                    // ReplaceCount is similar to a regular Count, but just
-                    // pulls Integer Values from Replacement objects
-                    final SpellAbility root = ability.getRootAbility();
-                    final String[] l = calcX[1].split("/");
-                    final String[] m = CardFactoryUtil.parseMath(l);
-                    final int count = (Integer) root.getReplacingObject(l[0]);
-
-                    return CardFactoryUtil.doXMath(count, m, card) * multiplier;
-                } else {
-
-                    return 0;
-                }
-
-                return CardFactoryUtil.handlePaid(list, calcX[1], card) * multiplier;
-
-            } else {
-                return 0;
-            }
-        }
+        // These are some special cases - who is implementing them?
         if (amount.equals("ChosenX") || amount.equals("ChosenY")) {
             // isn't made yet
             return 0;
@@ -543,7 +311,244 @@ public class AbilityUtils {
             return 0;
         }
 
-        return Integer.parseInt(amount) * multiplier;
+        // Try to fetch variable, try ability first, then card.
+        String svarval = null;
+        if (ability != null) {
+            svarval = ability.getSVar(amount);
+        }
+        if (StringUtils.isBlank(svarval)) {
+            if( ability != null) {
+                System.err.printf("SVar '%s' not found in ability, fallback to Card (%s). Ability is (%s)%n", amount, card.getName(), ability);
+            }
+            svarval = card.getSVar(amount);
+        }
+        
+        // Nothing to do here if value is missing or blank
+        if (StringUtils.isBlank(svarval)) {
+            System.err.printf("SVar '%s' not defined in Card (%s)%n", amount, card.getName());
+            return 0;
+        }
+        
+        // Handle numeric constant coming in svar value
+        if( StringUtils.isNumeric(svarval) ) 
+            return multiplier * Integer.parseInt(svarval);
+
+        // Parse Object$Property string
+        final String[] calcX = svarval.split("\\$");
+        
+        // Incorrect parses mean zero.
+        if ((calcX.length == 1) || calcX[1].equals("none"))
+            return 0;
+
+        if (calcX[0].startsWith("Count"))
+            return AbilityUtils.xCount(card, calcX[1], ability) * multiplier;
+            
+        if (calcX[0].startsWith("Number"))
+            return CardFactoryUtil.xCount(card, svarval) * multiplier;
+
+        if (calcX[0].startsWith("SVar")) {
+            final String[] l = calcX[1].split("/");
+            final String m = CardFactoryUtil.extractOperators(calcX[1]);
+            return CardFactoryUtil.doXMath(AbilityUtils.calculateAmount(card, l[0], ability), m, card) * multiplier;
+        }
+
+        if (calcX[0].startsWith("PlayerCount")) {
+            final String hType = calcX[0].substring(11);
+            final ArrayList<Player> players = new ArrayList<Player>();
+            if (hType.equals("Players") || hType.equals("")) {
+                players.addAll(Singletons.getModel().getGame().getPlayers());
+                return CardFactoryUtil.playerXCount(players, calcX[1], card) * multiplier;
+            } else if (hType.equals("Opponents")) {
+                players.addAll(card.getController().getOpponents());
+                return CardFactoryUtil.playerXCount(players, calcX[1], card) * multiplier;
+            } else if (hType.equals("Other")) {
+                players.addAll(card.getController().getAllOtherPlayers());
+                return CardFactoryUtil.playerXCount(players, calcX[1], card) * multiplier;
+            } else if (hType.equals("Remembered")) {
+                for (final Object o : card.getRemembered()) {
+                    if (o instanceof Player) {
+                        players.add((Player) o);
+                    }
+                }
+                return CardFactoryUtil.playerXCount(players, calcX[1], card) * multiplier;
+            } else if (hType.equals("NonActive")) {
+                players.addAll(Singletons.getModel().getGame().getPlayers());
+                players.remove(Singletons.getModel().getGame().getPhaseHandler().getPlayerTurn());
+                return CardFactoryUtil.playerXCount(players, calcX[1], card) * multiplier;
+            }
+            return 0;
+        }
+
+        if (calcX[0].startsWith("Remembered")) {
+            // Add whole Remembered list to handlePaid
+            final List<Card> list = new ArrayList<Card>();
+            if (card.getRemembered().isEmpty()) {
+                final Card newCard = Singletons.getModel().getGame().getCardState(card);
+                for (final Object o : newCard.getRemembered()) {
+                    if (o instanceof Card) {
+                        list.add(Singletons.getModel().getGame().getCardState((Card) o));
+                    }
+                }
+            }
+
+            if (calcX[0].endsWith("LKI")) { // last known information
+                for (final Object o : card.getRemembered()) {
+                    if (o instanceof Card) {
+                        list.add((Card) o);
+                    }
+                }
+            } else {
+                for (final Object o : card.getRemembered()) {
+                    if (o instanceof Card) {
+                        list.add(Singletons.getModel().getGame().getCardState((Card) o));
+                    }
+                }
+            }
+
+            return CardFactoryUtil.handlePaid(list, calcX[1], card) * multiplier;
+        }
+
+        if (calcX[0].startsWith("Imprinted")) {
+            // Add whole Imprinted list to handlePaid
+            final List<Card> list = new ArrayList<Card>();
+            for (final Card c : card.getImprinted()) {
+                list.add(Singletons.getModel().getGame().getCardState(c));
+            }
+
+            return CardFactoryUtil.handlePaid(list, calcX[1], card) * multiplier;
+        } 
+
+        if (calcX[0].matches("Enchanted")) {
+            // Add whole Enchanted list to handlePaid
+            final List<Card> list = new ArrayList<Card>();
+            if (card.isEnchanting()) {
+                Object o = card.getEnchanting();
+                if (o instanceof Card) {
+                    list.add(Singletons.getModel().getGame().getCardState((Card) o));
+                }
+            }
+            return CardFactoryUtil.handlePaid(list, calcX[1], card) * multiplier;
+        }
+
+        if (ability == null)
+            return 0;
+        
+        // Player attribute counting
+        if (calcX[0].startsWith("TargetedPlayer")) {
+            final ArrayList<Player> players = new ArrayList<Player>();
+            final SpellAbility saTargeting = ability.getSATargetingPlayer();
+            if (null != saTargeting) {
+                players.addAll(saTargeting.getTarget().getTargetPlayers());
+            }
+            return CardFactoryUtil.playerXCount(players, calcX[1], card) * multiplier;
+        }
+        if (calcX[0].startsWith("TargetedObjects")) {
+            final ArrayList<Object> objects = new ArrayList<Object>();
+            // Make list of all targeted objects starting with the root SpellAbility
+            SpellAbility loopSA = ability.getRootAbility();
+            while (loopSA != null) {
+                if (loopSA.getTarget() != null) {
+                    objects.addAll(loopSA.getTarget().getTargets());
+                }
+                loopSA = loopSA.getSubAbility();
+            }
+            return CardFactoryUtil.objectXCount(objects, calcX[1], card) * multiplier;
+        }
+        if (calcX[0].startsWith("TargetedController")) {
+            final ArrayList<Player> players = new ArrayList<Player>();
+            final List<Card> list = getDefinedCards(card, "Targeted", ability);
+            final List<SpellAbility> sas = AbilityUtils.getDefinedSpellAbilities(card, "Targeted",
+                    ability);
+
+            for (final Card c : list) {
+                final Player p = c.getController();
+                if (!players.contains(p)) {
+                    players.add(p);
+                }
+            }
+            for (final SpellAbility s : sas) {
+                final Player p = s.getSourceCard().getController();
+                if (!players.contains(p)) {
+                    players.add(p);
+                }
+            }
+            return CardFactoryUtil.playerXCount(players, calcX[1], card) * multiplier;
+        }
+        if (calcX[0].startsWith("TargetedByTarget")) {
+            final List<Card> tgtList = new ArrayList<Card>();
+            final List<SpellAbility> saList = getDefinedSpellAbilities(card, "Targeted", ability);
+
+            for (final SpellAbility s : saList) {
+                tgtList.addAll(getDefinedCards(s.getSourceCard(), "Targeted", s));
+            }
+            return CardFactoryUtil.handlePaid(tgtList, calcX[1], card) * multiplier;
+        }
+        if (calcX[0].startsWith("TriggeredPlayer") || calcX[0].startsWith("TriggeredTarget")) {
+            final SpellAbility root = ability.getRootAbility();
+            Object o = root.getTriggeringObject(calcX[0].substring(9));
+            final List<Player> players = new ArrayList<Player>();
+            if (o instanceof Player) {
+                players.add((Player) o);
+            }
+            return CardFactoryUtil.playerXCount(players, calcX[1], card) * multiplier;
+        }
+        // Added on 9/30/12 (ArsenalNut) - Ended up not using but might be useful in future
+        /*
+        if (calcX[0].startsWith("EnchantedController")) {
+            final ArrayList<Player> players = new ArrayList<Player>();
+            players.addAll(AbilityFactory.getDefinedPlayers(card, "EnchantedController", ability));
+            return CardFactoryUtil.playerXCount(players, calcX[1], card) * multiplier;
+        }
+         */
+
+        List<Card> list = new ArrayList<Card>();
+        if (calcX[0].startsWith("Sacrificed")) {
+            list = ability.getRootAbility().getPaidList("Sacrificed");
+        } else if (calcX[0].startsWith("Discarded")) {
+            final SpellAbility root = ability.getRootAbility();
+            list = root.getPaidList("Discarded");
+            if ((null == list) && root.isTrigger()) {
+                list = root.getSourceCard().getSpellPermanent().getPaidList("Discarded");
+            }
+        } else if (calcX[0].startsWith("Exiled")) {
+            list = ability.getRootAbility().getPaidList("Exiled");
+        } else if (calcX[0].startsWith("Tapped")) {
+            list = ability.getRootAbility().getPaidList("Tapped");
+        } else if (calcX[0].startsWith("Revealed")) {
+            list = ability.getRootAbility().getPaidList("Revealed");
+        } else if (calcX[0].startsWith("Targeted")) {
+            list = ability.findTargetedCards();
+        } else if (calcX[0].startsWith("Triggered")) {
+            final SpellAbility root = ability.getRootAbility();
+            list = new ArrayList<Card>();
+            list.add((Card) root.getTriggeringObject(calcX[0].substring(9)));
+        } else if (calcX[0].startsWith("TriggerCount")) {
+            // TriggerCount is similar to a regular Count, but just
+            // pulls Integer Values from Trigger objects
+            final SpellAbility root = ability.getRootAbility();
+            final String[] l = calcX[1].split("/");
+            final String m = CardFactoryUtil.extractOperators(calcX[1]);
+            final int count = (Integer) root.getTriggeringObject(l[0]);
+
+            return CardFactoryUtil.doXMath(count, m, card) * multiplier;
+        } else if (calcX[0].startsWith("Replaced")) {
+            final SpellAbility root = ability.getRootAbility();
+            list = new ArrayList<Card>();
+            list.add((Card) root.getReplacingObject(calcX[0].substring(8)));
+        } else if (calcX[0].startsWith("ReplaceCount")) {
+            // ReplaceCount is similar to a regular Count, but just
+            // pulls Integer Values from Replacement objects
+            final SpellAbility root = ability.getRootAbility();
+            final String[] l = calcX[1].split("/");
+            final String m = CardFactoryUtil.extractOperators(calcX[1]);
+            final int count = (Integer) root.getReplacingObject(l[0]);
+
+            return CardFactoryUtil.doXMath(count, m, card) * multiplier;
+        } else {
+            return 0;
+        }
+
+        return CardFactoryUtil.handlePaid(list, calcX[1], card) * multiplier;
     }
 
     /**
@@ -1231,7 +1236,7 @@ public class AbilityUtils {
     public static int xCount(final Card c, final String s, final SpellAbility sa) {
 
         final String[] l = s.split("/");
-        final String[] m = CardFactoryUtil.parseMath(l);
+        final String expr = CardFactoryUtil.extractOperators(s);
 
         final String[] sq;
         sq = l[0].split("\\.");
@@ -1240,9 +1245,9 @@ public class AbilityUtils {
             // Count$Kicked.<numHB>.<numNotHB>
             if (sq[0].startsWith("Kicked")) {
                 if (sa.isKicked()) {
-                    return CardFactoryUtil.doXMath(Integer.parseInt(sq[1]), m, c); // Kicked
+                    return CardFactoryUtil.doXMath(Integer.parseInt(sq[1]), expr, c); // Kicked
                 } else {
-                    return CardFactoryUtil.doXMath(Integer.parseInt(sq[2]), m, c); // not Kicked
+                    return CardFactoryUtil.doXMath(Integer.parseInt(sq[2]), expr, c); // not Kicked
                 }
             }
 
@@ -1252,9 +1257,9 @@ public class AbilityUtils {
                 final int lhs = calculateAmount(c, compString[1], sa);
                 final int rhs =  calculateAmount(c, compString[2].substring(2), sa);
                 if (Expressions.compare(lhs, compString[2], rhs)) {
-                    return CardFactoryUtil.doXMath(Integer.parseInt(sq[1]), m, c);
+                    return CardFactoryUtil.doXMath(Integer.parseInt(sq[1]), expr, c);
                 } else {
-                    return CardFactoryUtil.doXMath(Integer.parseInt(sq[2]), m, c);
+                    return CardFactoryUtil.doXMath(Integer.parseInt(sq[2]), expr, c);
                 }
             }
         }

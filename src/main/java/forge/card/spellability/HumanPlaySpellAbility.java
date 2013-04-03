@@ -158,8 +158,8 @@ public class HumanPlaySpellAbility {
                 Integer value = ability.getActivatingPlayer().getController().announceRequirements(ability, aVar, ability.getPayCosts().getCostMana().canXbe0());
                 if ( null == value )
                     return false;
-                ability.setSVar(aVar, "Number$" + value);
-                ability.getSourceCard().setSVar(aVar, "Number$" + value);
+                ability.setSVar(aVar, value.toString());
+                ability.getSourceCard().setSVar(aVar, value.toString());
             }
         }
         return true;

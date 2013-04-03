@@ -281,7 +281,7 @@ public class Target {
      *
      * @return the max targets
      */
-    public final String getMaxTargets() {
+    private final String getMaxTargets() {
         return this.maxTargets;
     }
 
