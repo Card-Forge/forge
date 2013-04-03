@@ -32,7 +32,6 @@ import forge.gui.GuiDialog;
 import forge.item.CardDb;
 import forge.item.CardPrinted;
 import forge.util.Aggregates;
-import forge.util.PredicateString.StringOp;
 
 public class PlayEffect extends SpellAbilityEffect {
     @Override
