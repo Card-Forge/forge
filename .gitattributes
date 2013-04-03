@@ -9794,6 +9794,7 @@ res/cardsfolder/s/slithery_stalker.txt svneol=native#text/plain
 res/cardsfolder/s/sliver_legion.txt svneol=native#text/plain
 res/cardsfolder/s/sliver_overlord.txt svneol=native#text/plain
 res/cardsfolder/s/sliver_queen.txt svneol=native#text/plain
+res/cardsfolder/s/sliver_queen_avatar.txt -text
 res/cardsfolder/s/sliver_queen_brood_mother.txt -text
 res/cardsfolder/s/sliversmith.txt svneol=native#text/plain
 res/cardsfolder/s/slobad_goblin_tinkerer.txt svneol=native#text/plain
