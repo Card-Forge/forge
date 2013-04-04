@@ -1108,6 +1108,9 @@ public class CardFactoryUtil {
      */
     public static int xCount(final Card c, final String expression) {
         int n = 0;
+        
+        if (StringUtils.isNumeric(expression))
+            return Integer.parseInt(expression);
 
         final Player cardController = c.getController();
         final Player oppController = cardController.getOpponent();

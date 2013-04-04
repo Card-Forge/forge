@@ -23,7 +23,6 @@ import org.apache.commons.lang3.StringUtils;
 
 import forge.Card;
 import forge.CardCharacteristicName;
-import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.cost.CostPayment;
 import forge.game.GameState;
@@ -48,7 +47,7 @@ public class HumanPlaySpellAbility {
 
 
     public final void fillRequirements(boolean isAlreadyTargeted, boolean isFree, boolean skipStack) {
-        final GameState game = Singletons.getModel().getGame();
+        final GameState game = ability.getActivatingPlayer().getGame();
 
         // used to rollback
         Zone fromZone = null;
@@ -128,7 +127,8 @@ public class HumanPlaySpellAbility {
     
     private void rollbackAbility(Zone fromZone, int zonePosition) { 
         // cancel ability during target choosing
-        final Card c = this.ability.getSourceCard();
+        final GameState game = ability.getActivatingPlayer().getGame();
+        final Card c = ability.getSourceCard();
 
         // split cards transform back to full form if targeting is canceled
         if (c.isSplitCard()) {
@@ -137,14 +137,14 @@ public class HumanPlaySpellAbility {
 
         if (fromZone != null) { // and not a copy
             // add back to where it came from
-            Singletons.getModel().getGame().getAction().moveTo(fromZone, c, zonePosition >= 0 ? Integer.valueOf(zonePosition) : null);
+            game.getAction().moveTo(fromZone, c, zonePosition >= 0 ? Integer.valueOf(zonePosition) : null);
         }
 
         clearTargets(ability);
 
         this.ability.resetOnceResolved();
         this.payment.refundPayment();
-        Singletons.getModel().getGame().getStack().clearFrozen();
+        game.getStack().clearFrozen();
         // Singletons.getModel().getGame().getStack().removeFromFrozenStack(this.ability);
     }
     
