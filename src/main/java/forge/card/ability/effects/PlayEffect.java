@@ -6,11 +6,15 @@ import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 
 import forge.Card;
 import forge.CardCharacteristicName;
 import forge.CardLists;
 import forge.Singletons;
+import forge.card.CardRulesPredicates;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.Spell;
@@ -20,11 +24,14 @@ import forge.game.GameState;
 import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilCard;
 import forge.game.player.AIPlayer;
+import forge.game.player.HumanPlayer;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 import forge.gui.GuiDialog;
 import forge.item.CardDb;
+import forge.item.CardPrinted;
+import forge.util.Aggregates;
 
 public class PlayEffect extends SpellAbilityEffect {
     @Override
@@ -80,6 +87,43 @@ public class PlayEffect extends SpellAbilityEffect {
             final int encodedIndex = Integer.parseInt(sa.getParam("Encoded")) - 1;
             tgtCards.add(encodedCards.get(encodedIndex));
             useEncoded = true;
+        }
+        else if (sa.hasParam("AnySupportedCard")) {
+            List<CardPrinted> cards = Lists.newArrayList(CardDb.instance().getUniqueCards());
+            String valid = sa.getParam("AnySupportedCard");
+            if (StringUtils.containsIgnoreCase(valid, "sorcery")) {
+                Predicate<CardPrinted> cpp = Predicates.compose(CardRulesPredicates.Presets.IS_SORCERY, CardPrinted.FN_GET_RULES);
+                cards = Lists.newArrayList(Iterables.filter(cards, cpp));
+            }
+            if (StringUtils.containsIgnoreCase(valid, "instant")) {
+                Predicate<CardPrinted> cpp = Predicates.compose(CardRulesPredicates.Presets.IS_INSTANT, CardPrinted.FN_GET_RULES);
+                cards = Lists.newArrayList(Iterables.filter(cards, cpp));
+            }
+            if (sa.hasParam("RandomCopied")) {
+                List<CardPrinted> copysource = new ArrayList<CardPrinted>(cards);
+                List<Card> choice = new ArrayList<Card>();
+                final String num = sa.hasParam("RandomNum") ? sa.getParam("RandomNum") : "1";
+                int ncopied = AbilityUtils.calculateAmount(source, num, sa);
+                while(ncopied > 0) {
+                    final CardPrinted cp = Aggregates.random(copysource);
+                    if (cp.getMatchingForgeCard().isValid(valid, source.getController(), source)) {
+                        choice.add(cp.getMatchingForgeCard());
+                        copysource.remove(cp);
+                        ncopied -= 1;
+                    }
+                }
+                if (sa.hasParam("ChoiceNum")) {
+                    final int choicenum = AbilityUtils.calculateAmount(source, sa.getParam("ChoiceNum"), sa);
+                    List<Card> afterchoice = new ArrayList<Card>();
+                    for (int i = 0; i < choicenum; i++) {
+                        afterchoice.add(GuiChoose.oneOrNone(source + "- Choose a Card", choice));
+                    }
+                    tgtCards = afterchoice;
+                } else {
+                    tgtCards = choice;
+                }
+
+            }
         }
         else {
             tgtCards = getTargetCards(sa);
@@ -202,7 +246,7 @@ public class PlayEffect extends SpellAbilityEffect {
             boolean noManaCost = sa.hasParam("WithoutManaCost"); 
             if (controller.isHuman()) {
                 SpellAbility newSA = noManaCost ? tgtSA.copyWithNoManaCost() : tgtSA;
-                game.getActionPlay().playSpellAbility(newSA, activator);
+                ((HumanPlayer)activator).playSpellAbility(newSA);
             } else {
                 if (tgtSA instanceof Spell) { // Isn't it ALWAYS a spell?
                     Spell spell = (Spell) tgtSA;

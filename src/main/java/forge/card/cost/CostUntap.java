@@ -21,7 +21,6 @@ import forge.Card;
 import forge.card.spellability.SpellAbility;
 import forge.game.GameState;
 import forge.game.player.AIPlayer;
-import forge.game.player.Player;
 
 /**
  * The Class CostUntap.
@@ -69,7 +68,8 @@ public class CostUntap extends CostPart {
      * forge.Card, forge.Player, forge.card.cost.Cost)
      */
     @Override
-    public final boolean canPay(final SpellAbility ability, final Card source, final Player activator, final Cost cost, final GameState game) {
+    public final boolean canPay(final SpellAbility ability) {
+        final Card source = ability.getSourceCard();
         return source.isTapped() && (!source.isSick() || source.hasKeyword("CARDNAME may activate abilities as though it has haste."));
     }
 

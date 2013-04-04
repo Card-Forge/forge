@@ -19,6 +19,7 @@ import forge.card.spellability.Target;
 import forge.game.GameState;
 import forge.game.ai.ComputerUtil;
 import forge.game.player.AIPlayer;
+import forge.game.player.HumanPlayer;
 import forge.game.player.Player;
 import forge.gui.GuiDialog;
 
@@ -219,11 +220,6 @@ public class WrappedAbility extends Ability implements ISpellAbility {
     }
 
     @Override
-    public int getXManaCost() {
-        return sa.getXManaCost();
-    }
-
-    @Override
     public boolean isAbility() {
         return sa.isAbility();
     }
@@ -282,11 +278,6 @@ public class WrappedAbility extends Ability implements ISpellAbility {
     @Override
     public void setFlashBackAbility(final boolean flashBackAbility) {
         sa.setFlashBackAbility(flashBackAbility);
-    }
-
-    @Override
-    public void setIsXCost(final boolean b) {
-        sa.setIsXCost(b);
     }
 
     @Override
@@ -419,7 +410,7 @@ public class WrappedAbility extends Ability implements ISpellAbility {
         }
 
         if (getActivatingPlayer().isHuman()) {
-            game.getActionPlay().playSpellAbilityNoStack(getActivatingPlayer(), sa, true);
+            ((HumanPlayer)getActivatingPlayer()).playSpellAbilityNoStack(sa, true);
         } else {
             // commented out because i don't think this should be called
             // again here

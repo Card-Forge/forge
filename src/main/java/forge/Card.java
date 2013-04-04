@@ -133,6 +133,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     private List<Card> blockedThisTurn = null;
     private List<Card> blockedByThisTurn = null;
 
+    private boolean isCommander = false;
     private boolean startsGameInPlay = false;
     private boolean drawnThisTurn = false;
     private boolean tapped = false;
@@ -1258,13 +1259,12 @@ public class Card extends GameEntity implements Comparable<Card> {
         if (this.hasKeyword("CARDNAME can't have counters placed on it.")) {
             return false;
         }
-        if (this.isCreature() && counterName.equals(CounterType.M1M1)) {
+        if (this.isCreature() && counterName == CounterType.M1M1) {
             for (final Card c : this.getController().getCreaturesInPlay()) { // look for Melira, Sylvok Outcast
                 if (c.hasKeyword("Creatures you control can't have -1/-1 counters placed on them.")) {
                     return false;
                 }
             }
-
         }
         return true;
     }
@@ -4470,26 +4470,10 @@ public class Card extends GameEntity implements Comparable<Card> {
     public final void addMultiKickerMagnitude(final int n) {
         this.multiKickerMagnitude += n;
     }
-
-    /**
-     * <p>
-     * Setter for the field <code>multiKickerMagnitude</code>.
-     * </p>
-     * 
-     * @param n
-     *            a int.
-     */
     public final void setMultiKickerMagnitude(final int n) {
         this.multiKickerMagnitude = n;
     }
 
-    /**
-     * <p>
-     * Getter for the field <code>multiKickerMagnitude</code>.
-     * </p>
-     * 
-     * @return a int.
-     */
     public final int getMultiKickerMagnitude() {
         return this.multiKickerMagnitude;
     }
@@ -7321,6 +7305,10 @@ public class Card extends GameEntity implements Comparable<Card> {
             if (!this.isType(source.getChosenType())) {
                 return false;
             }
+        } else if (property.equals("IsCommander")) {
+            if(!this.isCommander) {
+                return false;
+            }
         } else {
             if (!this.isType(property)) {
                 return false;
@@ -8358,7 +8346,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                 additionalLog = "(As -1/-1 Counters)";
             }
             if (source.hasKeyword("Deathtouch") && this.isCreature()) {
-                Singletons.getModel().getGame().getAction().destroy(this);
+                Singletons.getModel().getGame().getAction().destroy(this, null);
                 additionalLog = "(Deathtouch)";
             } else if (this.isInPlay() && !wither) {
                 this.damage += damageToAdd;
@@ -9138,6 +9126,35 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
     public void setRules(CardRules r) {
         cardRules = r;
-    }    
+    }
 
+    public boolean isCommander() {
+        // TODO - have a field
+        return this.isCommander;
+    }
+    
+    public void setCommander(boolean b) {
+        this.isCommander = b;
+    }
+    
+    public void setSplitStateToPlayAbility(SpellAbility sa) {
+        if( !isSplitCard() ) return; // just in case
+        // Split card support
+        List<SpellAbility> leftSplitAbilities = getState(CardCharacteristicName.LeftSplit).getSpellAbility();
+        List<SpellAbility> rightSplitAbilities = getState(CardCharacteristicName.RightSplit).getSpellAbility();
+        for (SpellAbility a : leftSplitAbilities) {
+            if (sa == a || sa.getDescription().equals(String.format("%s (without paying its mana cost)", a.getDescription()))) {
+                setState(CardCharacteristicName.LeftSplit);
+                return;
+            }
+        }
+        for (SpellAbility a : rightSplitAbilities) {
+            if (sa == a || sa.getDescription().equals(String.format("%s (without paying its mana cost)", a.getDescription()))) {
+                setState(CardCharacteristicName.RightSplit);
+                return;
+            }
+        }
+        throw new RuntimeException("Not found which part to choose for ability " + sa + " from card " + this);
+    }
+    
 } // end Card class

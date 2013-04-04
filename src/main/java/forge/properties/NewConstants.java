@@ -75,6 +75,7 @@ public final class NewConstants {
     public static final String DECK_SEALED_DIR      = DECK_BASE_DIR + "sealed/";
     public static final String DECK_SCHEME_DIR      = DECK_BASE_DIR + "scheme/";
     public static final String DECK_PLANE_DIR       = DECK_BASE_DIR + "planar/";
+    public static final String DECK_COMMANDER_DIR   = DECK_BASE_DIR + "commander/";
     public static final String QUEST_SAVE_DIR       = USER_QUEST_DIR + "saves/";
     public static final String MAIN_PREFS_FILE      = USER_PREFS_DIR + "forge.preferences";
     public static final String QUEST_PREFS_FILE     = USER_PREFS_DIR + "quest.preferences";

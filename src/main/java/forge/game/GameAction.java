@@ -38,6 +38,7 @@ import forge.CounterType;
 import forge.GameEntity;
 import forge.card.CardType;
 import forge.card.TriggerReplacementBase;
+import forge.card.ability.AbilityFactory;
 import forge.card.ability.effects.AttachEffect;
 import forge.card.cardfactory.CardFactory;
 import forge.card.cost.Cost;
@@ -57,6 +58,7 @@ import forge.game.event.CardDestroyedEvent;
 import forge.game.event.CardRegeneratedEvent;
 import forge.game.event.CardSacrificedEvent;
 import forge.game.player.AIPlayer;
+import forge.game.player.HumanPlayer;
 import forge.game.player.Player;
 import forge.game.player.PlayerType;
 import forge.game.zone.PlayerZone;
@@ -64,6 +66,7 @@ import forge.game.zone.PlayerZoneBattlefield;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
+import forge.gui.GuiDialog;
 
 /**
  * Methods for common actions performed during a game.
@@ -127,12 +130,7 @@ public class GameAction {
             return c;
         }
 
-        boolean suppress;
-        if (c.isToken()) {
-            suppress = false;
-        } else {
-            suppress = zoneFrom.equals(zoneTo);
-        }
+        boolean suppress = !c.isToken() && zoneFrom.equals(zoneTo);
 
         Card copied = null;
         Card lastKnownInfo = null;
@@ -508,7 +506,7 @@ public class GameAction {
                 return null;
             }
         };
-
+        abRecover.setActivatingPlayer(recoverable.getController());
         final StringBuilder sb = new StringBuilder();
         sb.append("Recover ").append(recoverable).append("\n");
 
@@ -518,7 +516,7 @@ public class GameAction {
                 Player p = recoverable.getController();
 
                 if (p.isHuman()) {
-                    if ( GameActionUtil.payCostDuringAbilityResolve(p, abRecover, abRecover.getPayCosts(), null, game) )
+                    if ( GameActionUtil.payCostDuringAbilityResolve(abRecover, abRecover.getPayCosts(), null, game) )
                         moveToHand(recoverable);
                     else
                         exile(recoverable);
@@ -853,7 +851,7 @@ public class GameAction {
     }
 
     /** */
-    private final void checkStaticAbilities() {
+    public final void checkStaticAbilities() {
         // remove old effects
         game.getStaticEffects().clearStaticEffects();
 
@@ -1020,7 +1018,7 @@ public class GameAction {
                         checkAgain = true;
                     }
                     if (c.getNetDefense() <= 0 || c.getNetDefense() <= c.getDamage()) {
-                        this.destroy(c);
+                        this.destroy(c, null);
                         checkAgain = true;
                     }
                     // Soulbond unpairing
@@ -1056,7 +1054,7 @@ public class GameAction {
                 }
             }
 
-            if (game.getTriggerHandler().runWaitingTriggers(true)) {
+            if (game.getTriggerHandler().runWaitingTriggers()) {
                 checkAgain = true;
                 // Place triggers on stack
             }
@@ -1191,7 +1189,7 @@ public class GameAction {
      *            a {@link forge.Card} object.
      * @return a boolean.
      */
-    public final boolean destroy(final Card c) {
+    public final boolean destroy(final Card c, final SpellAbility sa) {
         if (!c.canBeDestroyed()) {
             return false;
         }
@@ -1210,7 +1208,7 @@ public class GameAction {
             return false;
         }
 
-        return this.destroyNoRegeneration(c);
+        return this.destroyNoRegeneration(c, sa);
     }
 
     /**
@@ -1222,7 +1220,8 @@ public class GameAction {
      *            a {@link forge.Card} object.
      * @return a boolean.
      */
-    public final boolean destroyNoRegeneration(final Card c) {
+    public final boolean destroyNoRegeneration(final Card c, final SpellAbility sa) {
+        Player activator = null;
         if (!c.canBeDestroyed())
             return false;
 
@@ -1252,7 +1251,7 @@ public class GameAction {
                 final AbilityStatic ability = new AbilityStatic(crd, ManaCost.ZERO) {
                     @Override
                     public void resolve() {
-                        GameAction.this.destroy(crd);
+                        GameAction.this.destroy(crd, sa);
                         card.setDamage(0);
 
                         // Play the Destroy sound
@@ -1268,9 +1267,17 @@ public class GameAction {
                 return false;
             }
         } // totem armor
+        if (sa != null) {
+            activator = sa.getActivatingPlayer();
+        }
 
         // Play the Destroy sound
         game.getEvents().post(new CardDestroyedEvent());
+        // Run triggers
+        final HashMap<String, Object> runParams = new HashMap<String, Object>();
+        runParams.put("Card", c);
+        runParams.put("Causer", activator);
+        game.getTriggerHandler().runTrigger(TriggerType.Destroyed, runParams, false);
 
         return this.sacrificeDestroy(c);
     }
@@ -1405,6 +1412,58 @@ public class GameAction {
             if ( cardOwner == p) continue;
             p.getController().reveal(cardOwner + " reveals card", cards, ZoneType.Hand, cardOwner);
         }
+    }
+
+    void handleLeylinesAndChancellors() {
+        for (Player p : game.getPlayers()) {
+            final List<Card> openingHand = new ArrayList<Card>(p.getCardsIn(ZoneType.Hand));
+    
+            for (final Card c : openingHand) {
+                if (p.isHuman()) {
+                    for (String kw : c.getKeyword()) {
+                        if (kw.startsWith("MayEffectFromOpeningHand")) {
+                            final String effName = kw.split(":")[1];
+    
+                            final SpellAbility effect = AbilityFactory.getAbility(c.getSVar(effName), c);
+                            if (GuiDialog.confirm(c, "Use " + c +"'s  ability?")) {
+                                // If we ever let the AI memorize cards in the players
+                                // hand, this would be a place to do so.
+                                ((HumanPlayer)p).playSpellAbilityNoStack(effect);
+                            }
+                        }
+                    }
+                    if (c.getName().startsWith("Leyline of")) {
+                        if (GuiDialog.confirm(c, "Use " + c + "'s ability?")) {
+                            game.getAction().moveToPlay(c);
+                        }
+                    }
+                } else { // Computer Leylines & Chancellors
+                    if (!c.getName().startsWith("Leyline of")) {
+                        for (String kw : c.getKeyword()) {
+                            if (kw.startsWith("MayEffectFromOpeningHand")) {
+                                final String effName = kw.split(":")[1];
+    
+                                final SpellAbility effect = AbilityFactory.getAbility(c.getSVar(effName), c);
+    
+                                // Is there a better way for the AI to decide this?
+                                if (effect.doTrigger(false, (AIPlayer)p)) {
+                                    GuiDialog.message("Computer reveals " + c.getName() + "(" + c.getUniqueNumber() + ").");
+                                    ComputerUtil.playNoStack((AIPlayer)p, effect, game);
+                                }
+                            }
+                        }
+                    }
+                    if (c.getName().startsWith("Leyline of")
+                            && !(c.getName().startsWith("Leyline of Singularity")
+                            && (Iterables.any(game.getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Leyline of Singularity"))))) {
+                        game.getAction().moveToPlay(c);
+                        //ga.checkStateEffects();
+                    }
+                }
+            }
+        }
+    
+        game.getAction().checkStateEffects();
     }
 
     /**

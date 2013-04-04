@@ -18,6 +18,7 @@
 package forge.game;
 
 import java.util.ArrayList;
+
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -54,9 +55,8 @@ import forge.game.zone.PlayerZone;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 
-/**
- * Represents the state of a <i>single game</i> and is
- * "cleaned up" at each new game.
+    /**
+ * Represents the state of a <i>single game</i>, a new instance is created for each game.
  */
 public class GameState {
     private final GameType type;
@@ -82,14 +82,12 @@ public class GameState {
     private final GameLog gameLog = new GameLog();
     private final ColorChanger colorChanger = new ColorChanger();
 
-    private boolean gameOver = false;
-
     private final Zone stackZone = new Zone(ZoneType.Stack);
 
     private long timestamp = 0;
     public final GameAction action;
-    public final GameActionPlay actionPlay;
     private final MatchController match;
+    private GameAge age = GameAge.BeforeMulligan;
 
     /**
      * Constructor.
@@ -109,7 +107,6 @@ public class GameState {
         allPlayers = Collections.unmodifiableList(players);
         roIngamePlayers = Collections.unmodifiableList(ingamePlayers);
         action = new GameAction(this);
-        actionPlay = new GameActionPlay(this);
         stack = new MagicStack(this);
         phaseHandler = new PhaseHandler(this);
         
@@ -293,7 +290,7 @@ public class GameState {
      * @return the gameOver
      */
     public synchronized boolean isGameOver() {
-        return gameOver;
+        return age == GameAge.GameOver;
     }
 
     /**
@@ -301,7 +298,7 @@ public class GameState {
      * @param go the gameOver to set
      */
     public synchronized void setGameOver(GameEndReason reason) {
-        this.gameOver = true;
+        this.age = GameAge.GameOver;
         for (Player p : roIngamePlayers) {
             p.onGameOver();
         }
@@ -484,19 +481,10 @@ public class GameState {
 
     }
     
-    public String getOrdinalPosition(Player player, Player startingPlayer) {
+    public int getPosition(Player player, Player startingPlayer) {
         int startPosition = roIngamePlayers.indexOf(startingPlayer);
         int position = (roIngamePlayers.indexOf(player) + startPosition) % roIngamePlayers.size() + 1;
-        String[] sufixes = new String[] { "th", "st", "nd", "rd", "th", "th", "th", "th", "th", "th" };
-        switch (position % 100) {
-        case 11:
-        case 12:
-        case 13:
-            return position + "th";
-        default:
-            return position + sufixes[position % 10];
-
-        }
+        return position;
     }
 
     /**
@@ -663,16 +651,11 @@ public class GameState {
         }
     }
 
-    /**
-     * TODO: Write javadoc for this method.
-     * @return
-     */
-    public GameActionPlay getActionPlay() {
-        // TODO Auto-generated method stub
-        return actionPlay;
+    public GameAge getAge() {
+        return age;
     }
 
-    public boolean mulliganned = false;
-    public boolean hasMulliganned(){ return mulliganned; }
-    public void setMulliganned(boolean value) { mulliganned = value; }
+    void setAge(GameAge value) {
+        age = value;
+    }
 }

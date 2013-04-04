@@ -47,7 +47,6 @@ import forge.card.ability.ApiType;
 import forge.card.cost.Cost;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostParser;
-import forge.card.mana.ManaCostShard;
 import forge.card.replacement.ReplacementEffect;
 import forge.card.replacement.ReplacementHandler;
 import forge.card.replacement.ReplacementLayer;
@@ -63,7 +62,6 @@ import forge.card.spellability.Target;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerHandler;
 import forge.card.trigger.TriggerType;
-import forge.control.input.InputBase;
 import forge.control.input.InputSelectCards;
 import forge.control.input.InputSelectCardsFromList;
 import forge.game.GameState;
@@ -73,14 +71,13 @@ import forge.game.ai.ComputerUtilCost;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.AIPlayer;
+import forge.game.player.HumanPlayer;
 import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
-import forge.gui.match.CMatchUI;
 import forge.util.Aggregates;
-import forge.view.ButtonUtil;
 
 /**
  * <p>
@@ -868,13 +865,9 @@ public class CardFactoryUtil {
      *            an array of {@link java.lang.String} objects.
      * @return an array of {@link java.lang.String} objects.
      */
-    public static String[] parseMath(final String[] l) {
-        final String[] m = { "none" };
-        if (l.length > 1) {
-            m[0] = l[1];
-        }
-
-        return m;
+    public static String extractOperators(final String expression) {
+        String[] l = expression.split("/");
+        return l.length > 1 ? l[1] : null;
     }
 
     /**
@@ -891,20 +884,12 @@ public class CardFactoryUtil {
      * @return a int.
      */
     public static int objectXCount(final ArrayList<Object> objects, final String s, final Card source) {
-        if (objects.size() == 0) {
+        if (objects.isEmpty()) {
             return 0;
         }
 
-        final String[] l = s.split("/");
-        final String[] m = CardFactoryUtil.parseMath(l);
-
-        int n = 0;
-
-        if (s.startsWith("Amount")) {
-            n = objects.size();
-        }
-
-        return CardFactoryUtil.doXMath(n, m, source);
+        int n = s.startsWith("Amount") ? objects.size() : 0;
+        return CardFactoryUtil.doXMath(n, CardFactoryUtil.extractOperators(s), source);
     }
 
     /**
@@ -926,7 +911,7 @@ public class CardFactoryUtil {
         }
 
         final String[] l = s.split("/");
-        final String[] m = CardFactoryUtil.parseMath(l);
+        final String m = CardFactoryUtil.extractOperators(s);
 
         int n = 0;
 
@@ -1117,19 +1102,21 @@ public class CardFactoryUtil {
      * 
      * @param c
      *            a {@link forge.Card} object.
-     * @param s
+     * @param expression
      *            a {@link java.lang.String} object.
      * @return a int.
      */
-    public static int xCount(final Card c, final String s) {
+    public static int xCount(final Card c, final String expression) {
         int n = 0;
+        if (StringUtils.isBlank(expression)) return 0;
+        if (StringUtils.isNumeric(expression)) return Integer.parseInt(expression);
 
         final Player cardController = c.getController();
         final Player oppController = cardController.getOpponent();
         final Player activePlayer = Singletons.getModel().getGame().getPhaseHandler().getPlayerTurn();
 
-        final String[] l = s.split("/");
-        final String[] m = CardFactoryUtil.parseMath(l);
+        final String[] l = expression.split("/");
+        final String m = CardFactoryUtil.extractOperators(expression);
 
         // accept straight numbers
         if (l[0].startsWith("Number$")) {
@@ -1250,22 +1237,18 @@ public class CardFactoryUtil {
             return highest;
         }
 
-        if (l[0].startsWith("DifferentCardNamesRemembered")) {
-            final List<Card> list = new ArrayList<Card>();
+        if (l[0].startsWith("DifferentCardNames_")) {
             final List<String> crdname = new ArrayList<String>();
-            if (c.getRemembered().size() > 0) {
-                for (final Object o : c.getRemembered()) {
-                    if (o instanceof Card) {
-                        list.add(Singletons.getModel().getGame().getCardState((Card) o));
-                    }
-                }
-            }
+            final String restriction = l[0].substring(19);
+            final String[] rest = restriction.split(",");
+            List<Card> list = cardController.getGame().getCardsInGame();
+            list = CardLists.getValidCards(list, rest, cardController, c);
             for (final Card card : list) {
                 if (!crdname.contains(card.getName())) {
                     crdname.add(card.getName());
                 }
             }
-            return crdname.size();
+            return CardFactoryUtil.doXMath(crdname.size(), m, c);
         }
 
         if (l[0].startsWith("RememberedSize")) {
@@ -2034,12 +2017,12 @@ public class CardFactoryUtil {
         return CardFactoryUtil.doXMath(n, m, c);
     }
 
-    private static int doXMath(final int num, final String m, final Card c) {
-        if (m.equals("none")) {
+    public static int doXMath(final int num, final String operators, final Card c) {
+        if (operators == null || operators.equals("none")) {
             return num;
         }
 
-        final String[] s = m.split("\\.");
+        final String[] s = operators.split("\\.");
         int secondaryNum = 0;
 
         try {
@@ -2100,27 +2083,6 @@ public class CardFactoryUtil {
 
     /**
      * <p>
-     * doXMath.
-     * </p>
-     * 
-     * @param num
-     *            a int.
-     * @param m
-     *            an array of {@link java.lang.String} objects.
-     * @param c
-     *            a {@link forge.Card} object.
-     * @return a int.
-     */
-    public static int doXMath(final int num, final String[] m, final Card c) {
-        if (m.length == 0) {
-            return num;
-        }
-
-        return CardFactoryUtil.doXMath(num, m[0], c);
-    }
-
-    /**
-     * <p>
      * handlePaid.
      * </p>
      * 
@@ -2151,17 +2113,9 @@ public class CardFactoryUtil {
 
         }
         if (string.startsWith("Valid")) {
-            final String[] m = { "none" };
-
             String valid = string.substring(6);
-            final String[] l;
-            l = valid.split("/"); // separate the specification from any math
-            valid = l[0];
-            if (l.length > 1) {
-                m[0] = l[1];
-            }
             final List<Card> list = CardLists.getValidCards(paidList, valid, source.getController(), source);
-            return CardFactoryUtil.doXMath(list.size(), m, source);
+            return CardFactoryUtil.doXMath(list.size(), CardFactoryUtil.extractOperators(valid), source);
         }
 
         int tot = 0;
@@ -2397,7 +2351,6 @@ public class CardFactoryUtil {
                 final String[] k = parse.split("kicker ");
 
                 final SpellAbility sa = card.getSpellAbility()[0];
-                sa.setIsMultiKicker(true);
                 sa.setMultiKickerManaCost(new ManaCost(new ManaCostParser(k[1])));
             }
         }
@@ -2556,13 +2509,6 @@ public class CardFactoryUtil {
                 card.addSpellAbility(CardFactoryUtil.abilitySuspend(card, cost, timeCounters));
             }
         } // Suspend
-
-        int xCount = card.getManaCost().getShardCount(ManaCostShard.X);
-        if (xCount > 0) {
-            final SpellAbility sa = card.getSpellAbility()[0];
-            sa.setIsXCost(true);
-            sa.setXManaCost(xCount);
-        } // X
 
         if (CardFactoryUtil.hasKeyword(card, "Fading") != -1) {
             final int n = CardFactoryUtil.hasKeyword(card, "Fading");
@@ -2922,7 +2868,7 @@ public class CardFactoryUtil {
                 }
 
                 if (card.getController().isHuman()) {
-                    game.getActionPlay().playSpellAbilityNoStack(card.getController(), origSA, false);
+                    ((HumanPlayer)card.getController()).playSpellAbilityNoStack(origSA);
                 } else {
                     ComputerUtil.playNoStack((AIPlayer) card.getController(), origSA, game);
                 }
@@ -3459,6 +3405,10 @@ public class CardFactoryUtil {
                                     Card dinner = (Card) o;
                                     card.addDevoured(dinner);
                                     Singletons.getModel().getGame().getAction().sacrifice(dinner, null);
+                                    final HashMap<String, Object> runParams = new HashMap<String, Object>();
+                                    runParams.put("Devoured", dinner);
+                                    card.getController().getGame().getTriggerHandler()
+                                    .runTrigger(TriggerType.Devoured, runParams, false);
                                 }
                             }
                         } // human
@@ -3469,6 +3419,10 @@ public class CardFactoryUtil {
                                 if ((c.getNetAttack() <= 1) && ((c.getNetAttack() + c.getNetDefense()) <= 3)) {
                                     card.addDevoured(c);
                                     Singletons.getModel().getGame().getAction().sacrifice(c, null);
+                                    final HashMap<String, Object> runParams = new HashMap<String, Object>();
+                                    runParams.put("Devoured", c);
+                                    card.getController().getGame().getTriggerHandler()
+                                    .runTrigger(TriggerType.Devoured, runParams, false);
                                     count++;
                                 }
                             }

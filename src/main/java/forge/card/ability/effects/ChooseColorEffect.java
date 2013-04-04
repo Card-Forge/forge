@@ -46,7 +46,7 @@ public class ChooseColorEffect extends SpellAbilityEffect {
 
         for (final Player p : tgtPlayers) {
             if ((tgt == null) || p.canBeTargetedBy(sa)) {
-                if (sa.getActivatingPlayer().isHuman()) {
+                if (p.isHuman()) {
                     if (sa.hasParam("OrColors")) {
                         ImmutableList<String> choices = Constant.Color.ONLY_COLORS;
                         final List<String> o = GuiChoose.getChoices("Choose a color or colors", 1, choices.size(), choices);

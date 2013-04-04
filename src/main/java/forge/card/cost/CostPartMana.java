@@ -17,11 +17,13 @@
  */
 package forge.card.cost;
 
-import com.google.common.base.Strings;
-
 import forge.Card;
 import forge.FThreads;
+import forge.card.MagicColor;
 import forge.card.ability.AbilityUtils;
+import forge.card.mana.ManaCost;
+import forge.card.mana.ManaCostBeingPaid;
+import forge.card.mana.ManaCostShard;
 import forge.card.spellability.SpellAbility;
 import forge.control.input.InputPayManaOfCostPayment;
 import forge.control.input.InputPayManaX;
@@ -29,83 +31,42 @@ import forge.control.input.InputPayment;
 import forge.game.GameState;
 import forge.game.ai.ComputerUtilMana;
 import forge.game.player.AIPlayer;
-import forge.game.player.Player;
 
 /**
  * The mana component of any spell or ability cost
  */
 public class CostPartMana extends CostPart {
     // "Leftover"
-    private String mana = "";
-    private int amountX = 0;
-    private String adjustedMana = "";
+    private final ManaCost cost;
+    private ManaCost adjustedCost;
     private boolean xCantBe0 = false;
+
+    /**
+     * Instantiates a new cost mana.
+     * 
+     * @param mana
+     *            the mana
+     * @param amount
+     *            the amount
+     * @param xCantBe0 TODO
+     */
+    public CostPartMana(final ManaCost cost, boolean xCantBe0) {
+        this.cost = cost;
+        this.xCantBe0 = xCantBe0; // TODO: Add 0 to parameter's name.
+    }
 
     /**
      * Gets the mana.
      * 
      * @return the mana
      */
-    public final String getMana() {
+    public final ManaCost getMana() {
         // Only used for Human to pay for non-X cost first
-        return this.mana;
+        return this.cost;
     }
 
-    /**
-     * Sets the mana.
-     * 
-     * @param sCost
-     *            the new mana
-     */
-    public final void setMana(final String sCost) {
-        this.mana = sCost;
-    }
-
-    /**
-     * Checks for no x mana cost.
-     * 
-     * @return true, if successful
-     */
-    public final boolean hasNoXManaCost() {
-        return this.amountX == 0;
-    }
-
-    /**
-     * Gets the x mana.
-     * 
-     * @return the x mana
-     */
     public final int getAmountOfX() {
-        return this.amountX;
-    }
-
-    /**
-     * Sets the x mana.
-     * 
-     * @param xCost
-     *            the new x mana
-     */
-    public final void setAmountOfX(final int xCost) {
-        this.amountX = xCost;
-    }
-
-    /**
-     * Gets the adjusted mana.
-     * 
-     * @return the adjusted mana
-     */
-    public final String getAdjustedMana() {
-        return this.adjustedMana;
-    }
-
-    /**
-     * Sets the adjusted mana.
-     * 
-     * @param adjustedMana
-     *            the new adjusted mana
-     */
-    public final void setAdjustedMana(final String adjustedMana) {
-        this.adjustedMana = adjustedMana;
+        return this.cost.getShardCount(ManaCostShard.X);
     }
 
     /**
@@ -116,10 +77,11 @@ public class CostPartMana extends CostPart {
     }
 
     /**
-     * @param xCantBe00 the xCantBe0 to set
+     * Used to set mana cost after applying static effects that change costs.
      */
-    public void setxCantBe0(boolean xCantBe0) {
-        this.xCantBe0 = xCantBe0; // TODO: Add 0 to parameter's name.
+    public void setAdjustedMana(ManaCost manaCost) {
+        // this is set when static effects of LodeStone Golems or Thalias are applied
+        adjustedCost = manaCost;
     }
 
     /**
@@ -127,13 +89,8 @@ public class CostPartMana extends CostPart {
      * 
      * @return the mana to pay
      */
-    public final String getManaToPay() {
-        // Only used for Human to pay for non-X cost first
-        if (!this.adjustedMana.equals("")) {
-            return this.adjustedMana;
-        }
-
-        return this.mana;
+    public final ManaCost getManaToPay() {
+        return adjustedCost == null ? cost : adjustedCost;
     }
     
     @Override
@@ -142,49 +99,59 @@ public class CostPartMana extends CostPart {
     @Override
     public boolean isUndoable() { return true; }
     
-    /**
-     * Instantiates a new cost mana.
-     * 
-     * @param mana
-     *            the mana
-     * @param amount
-     *            the amount
-     * @param xCantBe0 TODO
-     */
-    public CostPartMana(final String mana, final int amount, boolean xCantBe0) {
-        this.mana = mana.trim();
-        this.amountX = amount;
-        this.setxCantBe0(xCantBe0);
-    }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see forge.card.cost.CostPart#toString()
-     */
     @Override
     public final String toString() {
-        final StringBuilder sb = new StringBuilder();
-
-        sb.append(Strings.repeat("X ", this.amountX));
-        if ( sb.length() == 0 || mana != "0" )
-            sb.append(this.mana);
-
-        return sb.toString().trim();
+        return cost.toString();
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * forge.card.cost.CostPart#canPay(forge.card.spellability.SpellAbility,
-     * forge.Card, forge.Player, forge.card.cost.Cost)
-     */
+
     @Override
-    public final boolean canPay(final SpellAbility ability, final Card source, final Player activator, final Cost cost, final GameState game) {
+    public final boolean canPay(final SpellAbility ability) {
         // For now, this will always return true. But this should probably be
         // checked at some point
         return true;
+    }
+
+    @Override
+    public final boolean payHuman(final SpellAbility ability, final GameState game) {
+        final Card source = ability.getSourceCard();
+        ManaCostBeingPaid toPay = new ManaCostBeingPaid(getManaToPay());
+        
+        if (this.getAmountOfX() > 0 && !ability.getSVar("X").equals("Count$xPaid")) { // announce X will overwrite whatever was in card script
+            // this currently only works for things about Targeted object
+            int xCost = AbilityUtils.calculateAmount(source, "X", ability) * this.getAmountOfX();
+            byte xColor = MagicColor.fromName(ability.hasParam("XColor") ? ability.getParam("XColor") : "1"); 
+            toPay.increaseShard(ManaCostShard.valueOf(xColor), xCost);
+        }
+        int timesMultikicked = ability.getSourceCard().getMultiKickerMagnitude();
+        if ( timesMultikicked > 0 && ability.isAnnouncing("Multikicker")) {
+            ManaCost mkCost = ability.getMultiKickerManaCost();
+            for(int i = 0; i < timesMultikicked; i++)
+                toPay.combineManaCost(mkCost);
+        }
+    
+    
+        if (!toPay.isPaid()) {
+            InputPayment inpPayment = new InputPayManaOfCostPayment(game, toPay, ability);
+            FThreads.setInputAndWait(inpPayment);
+            if(!inpPayment.isPaid())
+                return false;
+        } 
+        if (this.getAmountOfX() > 0) {
+            if( !ability.isAnnouncing("X") ) {
+                source.setXManaCostPaid(0);
+                InputPayment inpPayment = new InputPayManaX(ability, this.getAmountOfX(), this.canXbe0());
+                FThreads.setInputAndWait(inpPayment);
+                if(!inpPayment.isPaid())
+                    return false;
+            } else {
+                int x = AbilityUtils.calculateAmount(source, "X", ability);
+                source.setXManaCostPaid(x);
+            }
+        }
+        return true;
+    
     }
 
     /* (non-Javadoc)
@@ -195,42 +162,6 @@ public class CostPartMana extends CostPart {
         ComputerUtilMana.payManaCost(ai, ability);
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * forge.card.cost.CostPart#payHuman(forge.card.spellability.SpellAbility,
-     * forge.Card, forge.card.cost.Cost_Payment)
-     */
-    @Override
-    public final boolean payHuman(final SpellAbility ability, final GameState game) {
-        final Card source = ability.getSourceCard();
-        int manaToAdd = 0;
-        if (!this.hasNoXManaCost()) {
-            // if X cost is a defined value, other than xPaid
-            if (!ability.getSVar("X").equals("Count$xPaid")) {
-                // this currently only works for things about Targeted object
-                manaToAdd = AbilityUtils.calculateAmount(source, "X", ability) * this.getAmountOfX();
-            }
-        }
-        
-
-        if (!"0".equals(this.getManaToPay()) || manaToAdd > 0) {
-            InputPayment inpPayment = new InputPayManaOfCostPayment(game, this, ability, manaToAdd);
-            FThreads.setInputAndWait(inpPayment);
-            if(!inpPayment.isPaid())
-                return false;
-        } 
-        if (this.getAmountOfX() > 0) {
-            source.setXManaCostPaid(0);
-            InputPayment inpPayment = new InputPayManaX(game, ability, this.getAmountOfX(), this.canXbe0());
-            FThreads.setInputAndWait(inpPayment);
-            if(!inpPayment.isPaid())
-                return false;
-        }
-        return true;
-
-    }
 
     /* (non-Javadoc)
      * @see forge.card.cost.CostPart#decideAIPayment(forge.game.player.AIPlayer, forge.card.spellability.SpellAbility, forge.Card)
@@ -239,7 +170,4 @@ public class CostPartMana extends CostPart {
     public PaymentDecision decideAIPayment(AIPlayer ai, SpellAbility ability, Card source) {
         return new PaymentDecision(0);
     }
-
-    // Inputs
-
 }

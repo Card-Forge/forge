@@ -2,11 +2,8 @@ Name:Fallow Wurm
 ManaCost:2 G
 Types:Creature Wurm
 PT:4/4
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDiscard | TriggerDescription$ When CARDNAME enters the battlefield, sacrifice it unless you discard a land card.
-SVar:TrigDiscard:AB$ Discard | Cost$ 0 | NumCards$ 1 | DiscardValid$ Land | Mode$ TgtChoose | Optional$ True | RememberDiscarded$ True | SubAbility$ DBSacSelf
-SVar:DBSacSelf:DB$ Sacrifice | Cost$ 0 | Defined$ Self | SubAbility$ DBCleanup | ConditionCheckSVar$ X | ConditionSVarCompare$ LT1 | References$ X
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:X:Remembered$Amount
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ DBSacSelf | TriggerDescription$ When CARDNAME enters the battlefield, sacrifice it unless you discard a land card.
+SVar:DBSacSelf:DB$ Sacrifice |  Defined$ Self | UnlessCost$ Discard<1/Land> | UnlessPayer$ You
 SVar:NeedsToPlayVar:Y GE1
 SVar:Y:Count$TypeInYourHand.Land
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fallow_wurm.jpg

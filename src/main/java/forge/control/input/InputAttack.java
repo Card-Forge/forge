@@ -47,8 +47,9 @@ public class InputAttack extends InputBase {
     private static final long serialVersionUID = 7849903731842214245L;
 
     private final GameState game;
-    public InputAttack(GameState game0) {
-        game = game0;
+    public InputAttack(Player human) {
+        super(human);
+        game = human.getGame();
     }
     
     
@@ -119,6 +120,7 @@ public class InputAttack extends InputBase {
             // just to make sure the attack symbol is marked
             human.getZone(ZoneType.Battlefield).updateObservers();
             CombatUtil.showCombat();
+            ButtonUtil.enableOnlyOk();
         }
         else {
             SDisplayUtil.remind(VMessage.SINGLETON_INSTANCE);

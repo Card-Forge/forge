@@ -34,7 +34,7 @@ import forge.view.ButtonUtil;
  * @author Forge
  * @version $Id$
  */
-public class InputPayManaExecuteCommands extends InputPayManaBase implements InputPayment {
+public class InputPayManaExecuteCommands extends InputPayManaBase {
     /**
      * Constant <code>serialVersionUID=3836655722696348713L</code>.
      */
@@ -62,7 +62,7 @@ public class InputPayManaExecuteCommands extends InputPayManaBase implements Inp
      *            a {@link forge.Command} object.
      */
     public InputPayManaExecuteCommands(final Player p, final String prompt, final ManaCost manaCost2) {
-        super(p.getGame(), new SpellAbility(null) {
+        super(new SpellAbility(null) {
             @Override
             public void resolve() {}
             
@@ -80,18 +80,10 @@ public class InputPayManaExecuteCommands extends InputPayManaBase implements Inp
 
     }
 
-    /**
-     * <p>
-     * resetManaCost.
-     * </p>
-     */
-    public final void resetManaCost() {
-        this.manaCost = new ManaCostBeingPaid(this.originalManaCost);
-    }
 
     @Override
-    public void selectPlayer(final Player player) {
-        if (player == whoPays) {
+    public void selectPlayer(final Player selectedPlayer) {
+        if (player == selectedPlayer) {
             if (player.canPayLife(this.phyLifeToLose + 2) && manaCost.payPhyrexian()) {
                 this.phyLifeToLose += 2;
             }
@@ -109,7 +101,6 @@ public class InputPayManaExecuteCommands extends InputPayManaBase implements Inp
         if (this.phyLifeToLose > 0) {
             Singletons.getControl().getPlayer().payLife(this.phyLifeToLose, null);
         }
-        this.resetManaCost();
         Singletons.getControl().getPlayer().getManaPool().clearManaPaid(this.saPaidFor, false);
         bPaid = true;
         this.stop();
@@ -118,8 +109,6 @@ public class InputPayManaExecuteCommands extends InputPayManaBase implements Inp
     /** {@inheritDoc} */
     @Override
     public final void selectButtonCancel() {
-
-        this.resetManaCost();
         Singletons.getControl().getPlayer().getManaPool().refundManaPaid(this.saPaidFor, true);
         bPaid = false;
         this.stop();

@@ -61,12 +61,12 @@ public class SacrificeEffect extends SpellAbilityEffect {
                     choosenToSacrifice = Aggregates.random(validTargets, Math.min(amount, validTargets.size()));
                 } else {
                     boolean isOptional = sa.hasParam("Optional");
-                    choosenToSacrifice = p.getController().choosePermanentsToSacrifice(validTargets, amount, sa, destroy, isOptional);
+                    choosenToSacrifice = p.getController().choosePermanentsToSacrifice(validTargets, valid, amount, sa, destroy, isOptional);
                 }
                 
                 for(Card sac : choosenToSacrifice) {
                     boolean wasSacrificed = !destroy && game.getAction().sacrifice(sac, sa);
-                    boolean wasDestroyed = destroy && game.getAction().destroy(sac);
+                    boolean wasDestroyed = destroy && game.getAction().destroy(sac, sa);
                     
                     if ( remSacrificed && (wasDestroyed || wasSacrificed) ) {
                         card.addRemembered(sac);

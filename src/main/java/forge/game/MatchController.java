@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+
 import forge.Constant.Preferences;
 import forge.Singletons;
 import forge.control.FControl;
@@ -16,6 +17,7 @@ import forge.error.BugReporter;
 import forge.game.ai.AiProfileUtil;
 import forge.game.event.DuelOutcomeEvent;
 import forge.game.player.AIPlayer;
+import forge.game.player.HumanPlayer;
 import forge.game.player.LobbyPlayer;
 import forge.game.player.Player;
 import forge.game.player.PlayerStatistics;
@@ -128,8 +130,7 @@ public class MatchController {
      */
     public void startRound() {
 
-        // Deal with circular dependencies here
-        input = new InputControl();
+        input = new InputControl(this);
         currentGame = Singletons.getModel().newGame(players.keySet(),gameType, this);
 
         Map<Player, PlayerStartConditions> startConditions = new HashMap<Player, PlayerStartConditions>();
@@ -156,7 +157,7 @@ public class MatchController {
         
         
         try {
-            Player localHuman = Aggregates.firstFieldEquals(currentGame.getPlayers(), Player.Accessors.FN_GET_TYPE, PlayerType.HUMAN);
+            HumanPlayer localHuman = (HumanPlayer) Aggregates.firstFieldEquals(currentGame.getPlayers(), Player.Accessors.FN_GET_TYPE, PlayerType.HUMAN);
             FControl.SINGLETON_INSTANCE.setPlayer(localHuman);
             CMatchUI.SINGLETON_INSTANCE.initMatch(currentGame.getRegisteredPlayers(), localHuman);
             CDock.SINGLETON_INSTANCE.onGameStarts(currentGame, localHuman);
@@ -177,6 +178,7 @@ public class MatchController {
             final boolean canRandomFoil = Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_RANDOM_FOIL) && gameType == GameType.Constructed;
             GameNew.newGame(this, startConditions, currentGame, canRandomFoil);
             
+            currentGame.setAge(GameAge.Mulligan);
             getInput().clearInput();
             //getInput().setNewInput(currentGame);
             
@@ -337,5 +339,12 @@ public class MatchController {
      */
     public static int getPoisonCountersAmountToLose() {
         return 10;
+    }
+    
+    public void afterMulligans()
+    {
+        currentGame.getAction().handleLeylinesAndChancellors();
+        currentGame.setAge(GameAge.Play);
+        getInput().clearInput();
     }
 }

@@ -21,7 +21,7 @@ public class DestroyAllEffect extends SpellAbilityEffect {
         final StringBuilder sb = new StringBuilder();
         final boolean noRegen = sa.hasParam("NoRegen");
 
-        ArrayList<Card> tgtCards;
+        List<Card> tgtCards;
 
         final Target tgt = sa.getTarget();
         if (tgt != null) {
@@ -87,13 +87,13 @@ public class DestroyAllEffect extends SpellAbilityEffect {
 
         if (noRegen) {
             for (int i = 0; i < list.size(); i++) {
-                if (Singletons.getModel().getGame().getAction().destroyNoRegeneration(list.get(i)) && remDestroyed) {
+                if (Singletons.getModel().getGame().getAction().destroyNoRegeneration(list.get(i), sa) && remDestroyed) {
                     card.addRemembered(list.get(i));
                 }
             }
         } else {
             for (int i = 0; i < list.size(); i++) {
-                if (Singletons.getModel().getGame().getAction().destroy(list.get(i)) && remDestroyed) {
+                if (Singletons.getModel().getGame().getAction().destroy(list.get(i), sa) && remDestroyed) {
                     card.addRemembered(list.get(i));
                 }
             }

@@ -1,0 +1,9 @@
+Name:Akroma, Angel of Wrath Avatar
+ManaCost:no cost
+Types:Vanguard
+HandLifeModifier:+1/+7
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | TriggerZones$ Command | ValidCard$ Creature.YouCtrl | Execute$ PumpRandom | TriggerDescription$ Whenever a creature enters the battlefield under your control, it gains two abilities chosen at random from flying, first strike, trample, haste, protection from black, protection from red, and vigilance.
+SVar:PumpRandom:AB$ Pump | Cost$ 0 | Defined$ TriggeredCard | Permanent$ True | KW$ Flying & First Strike & Trample & Haste & Protection from black & Protection from red & Vigilance | RandomKeyword$ True | RandomKWNum$ 2
+SVar:Picture:http://www.cardforge.org/fpics/vgd-lq/akroma_angel_of_wrath_avatar.jpg
+Oracle:Hand +1, life +7\nWhenever a creature enters the battlefield under your control, it gains two abilities chosen at random from flying, first strike, trample, haste, protection from black, protection from red, and vigilance.
+SetInfo:VAN Special

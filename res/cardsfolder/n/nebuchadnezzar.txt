@@ -2,7 +2,10 @@ Name:Nebuchadnezzar
 ManaCost:3 U B
 Types:Legendary Creature Human Wizard
 PT:3/3
-#This is necessary for cost payment, but not used.
+A:AB$ NameCard | Cost$ X T | Defined$ You | SubAbility$ DBReveal | PlayerTurn$ True | SpellDescription$ Name a card. Target opponent reveals X cards at random from his or her hand. Then that player discards all cards with that name revealed this way. Activate this ability only during your turn.
+SVar:DBReveal:DB$ Reveal | ValidTgts$ Opponent | Random$ True | NumCards$ X | References$ X | RememberRevealed$ True | SubAbility$ DBDiscard
+SVar:DBDiscard:DB$ Discard | DefinedCards$ ValidHand Card.IsRemembered+NamedCard | Defined$ Targeted | Mode$ Defined | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$xPaid
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nebuchadnezzar.jpg

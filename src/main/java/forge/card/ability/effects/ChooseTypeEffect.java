@@ -60,7 +60,7 @@ public class ChooseTypeEffect extends SpellAbilityEffect {
                     }
                     boolean valid = false;
                     while (!valid) {
-                        if (sa.getActivatingPlayer().isHuman()) {
+                        if (p.isHuman()) {
                             final Object o = GuiChoose.one("Choose a card type", validTypes);
                             if (null == o) {
                                 return;
@@ -82,14 +82,14 @@ public class ChooseTypeEffect extends SpellAbilityEffect {
                     String chosenType = "";
                     boolean valid = false;
                     while (!valid) {
-                        if (sa.getActivatingPlayer().isHuman()) {
+                        if (p.isHuman()) {
                             final ArrayList<String> validChoices = CardType.getCreatureTypes();
                             for (final String s : invalidTypes) {
                                 validChoices.remove(s);
                             }
                             chosenType = GuiChoose.one("Choose a creature type", validChoices);
                         } else {
-                            Player ai = sa.getActivatingPlayer();
+                            Player ai = p;
                             Player opp = ai.getOpponent();
                             String chosen = "";
                             if (sa.hasParam("AILogic")) {
@@ -128,7 +128,7 @@ public class ChooseTypeEffect extends SpellAbilityEffect {
                 } else if (type.equals("Basic Land")) {
                     boolean valid = false;
                     while (!valid) {
-                        if (sa.getActivatingPlayer().isHuman()) {
+                        if (p.isHuman()) {
                             final String choice = GuiChoose.one("Choose a basic land type", CardType.getBasicTypes());
                             if (null == choice) {
                                 return;
@@ -138,7 +138,7 @@ public class ChooseTypeEffect extends SpellAbilityEffect {
                                 card.setChosenType(choice);
                             }
                         } else {
-                            Player ai = sa.getActivatingPlayer();
+                            Player ai = p;
                             String chosen = "";
                             if (sa.hasParam("AILogic")) {
                                 final String logic = sa.getParam("AILogic");
@@ -176,7 +176,7 @@ public class ChooseTypeEffect extends SpellAbilityEffect {
                 } else if (type.equals("Land")) {
                     boolean valid = false;
                     while (!valid) {
-                        if (sa.getActivatingPlayer().isHuman()) {
+                        if (p.isHuman()) {
                             final String choice = GuiChoose
                                     .one("Choose a land type", CardType.getLandTypes());
                             if (null == choice) {

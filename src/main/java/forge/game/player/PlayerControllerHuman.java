@@ -16,6 +16,7 @@ import forge.FThreads;
 import forge.GameEntity;
 import forge.card.spellability.SpellAbility;
 import forge.control.input.Input;
+import forge.control.input.InputAutoPassPriority;
 import forge.control.input.InputBlock;
 import forge.control.input.InputCleanup;
 import forge.control.input.InputPassPriority;
@@ -45,8 +46,9 @@ public class PlayerControllerHuman extends PlayerController {
     private final Input defaultInput;
     private final Input blockInput;
     private final Input cleanupInput;
+    private final Input autoPassPriorityInput;
     private final HumanPlayer player;
-    
+
     public final Input getDefaultInput() {
         return defaultInput;
     }
@@ -55,9 +57,10 @@ public class PlayerControllerHuman extends PlayerController {
         super(game0);
         player = p;
         
-        defaultInput = new InputPassPriority();
+        defaultInput = new InputPassPriority(player);
         blockInput = new InputBlock(getPlayer());
-        cleanupInput = new InputCleanup(game);
+        cleanupInput = new InputCleanup(getPlayer());
+        autoPassPriorityInput = new InputAutoPassPriority(getPlayer());
     }
 
 	@Override
@@ -83,6 +86,11 @@ public class PlayerControllerHuman extends PlayerController {
         return blockInput;
     }
 
+    @Override
+    public Input getAutoPassPriorityInput() {
+        return autoPassPriorityInput;
+    }
+
     /**
      * @return the cleanupInput
      */
@@ -96,7 +104,7 @@ public class PlayerControllerHuman extends PlayerController {
      */
     public void playFromSuspend(Card c) {
         c.setSuspendCast(true);
-        game.getActionPlay().playCardWithoutManaCost(c, c.getOwner());
+        player.playCardWithoutManaCost(c);
     }
 
     /* (non-Javadoc)
@@ -114,7 +122,7 @@ public class PlayerControllerHuman extends PlayerController {
 
         boolean result = GuiDialog.confirm(cascadedCard, question.toString());
         if ( result )
-            game.getActionPlay().playCardWithoutManaCost(cascadedCard, getPlayer());
+            player.playCardWithoutManaCost(cascadedCard);
         return result;
     }
 
@@ -123,7 +131,7 @@ public class PlayerControllerHuman extends PlayerController {
      */
     @Override
     public void playSpellAbilityForFree(SpellAbility copySA) {
-        game.getActionPlay().playSpellAbilityWithoutPayingManaCost(copySA);
+        player.playSpellAbilityWithoutPayingManaCost(copySA);
     }
 
     /**
@@ -203,26 +211,43 @@ public class PlayerControllerHuman extends PlayerController {
      * @see forge.game.player.PlayerController#announceRequirements(java.lang.String)
      */
     @Override
-    public String announceRequirements(SpellAbility ability, String announce) {
-        StringBuilder sb = new StringBuilder(ability.getSourceCard().getName());
-        sb.append(" - How much will you announce for ");
-        sb.append(announce);
-        sb.append("?");
-        return JOptionPane.showInputDialog(sb.toString());
+    public Integer announceRequirements(SpellAbility ability, String announce, boolean canChooseZero) {
+        List<Object> options = new ArrayList<Object>();
+        for(int i = canChooseZero ? 0 : 1; i < 10; i++)
+            options.add(Integer.valueOf(i));
+        options.add("Other amount");
+        
+        
+        Object chosen = GuiChoose.oneOrNone("Choose " + announce + " for " + ability.getSourceCard().getName(), options);
+        if (chosen instanceof Integer || chosen == null)
+            return (Integer)chosen;
+
+        String message = String.format("How much will you announce for %s?%s", announce, canChooseZero ? "" : " (X cannot be 0)");
+        while(true){
+            String str = JOptionPane.showInputDialog(null, message, ability.getSourceCard().getName(), JOptionPane.QUESTION_MESSAGE);
+            if (null == str) return null; // that is 'cancel'
+            
+            if(StringUtils.isNumeric(str)) {
+                Integer val = Integer.valueOf(str);
+                if (val == 0 && canChooseZero || val > 0) 
+                    return val;
+            }
+            JOptionPane.showMessageDialog(null, "You have to enter a valid number", "Announce value", JOptionPane.WARNING_MESSAGE);
+        }
     }
 
     /* (non-Javadoc)
      * @see forge.game.player.PlayerController#choosePermanentsToSacrifice(java.util.List, int, forge.card.spellability.SpellAbility, boolean, boolean)
      */
     @Override
-    public List<Card> choosePermanentsToSacrifice(List<Card> validTargets, int amount, SpellAbility sa, boolean destroy, boolean isOptional) {
+    public List<Card> choosePermanentsToSacrifice(List<Card> validTargets, String validMessage, int amount, SpellAbility sa, boolean destroy, boolean isOptional) {
         int max = Math.min(amount, validTargets.size());
         if (max == 0)
             return new ArrayList<Card>();
 
         InputSelectCards inp = new InputSelectCardsFromList(isOptional ? 0 : amount, max, validTargets);
         // TODO: Either compose a message here, or pass it as parameter from caller. 
-        inp.setMessage("Select %d card(s) to sacrifice");
+        inp.setMessage("Select %d " + validMessage + "(s) to sacrifice");
         
         FThreads.setInputAndWait(inp);
         if( inp.hasCancelled() )
@@ -316,14 +341,13 @@ public class PlayerControllerHuman extends PlayerController {
     }
 
     @Override
-    public List<Card> chooseCardsToDiscardFrom(Player p, SpellAbility sa, List<Card> valid, int minDiscard) {
+    public List<Card> chooseCardsToDiscardFrom(Player p, SpellAbility sa, List<Card> valid, int min, int max) {
         if ( p != getPlayer() ) {
-            int cntToKeepInHand =  minDiscard == 0 ? -1 : valid.size() - minDiscard;
+            int cntToKeepInHand =  min == 0 ? -1 : valid.size() - min;
             return GuiChoose.order("Choose cards to Discard", "Discarded", cntToKeepInHand, valid, null, null);
         }
 
-        int max = minDiscard == 0 ? Integer.MAX_VALUE : minDiscard;
-        InputSelectCards inp = new InputSelectCardsFromList(minDiscard, max, valid);
+        InputSelectCards inp = new InputSelectCardsFromList(min, max, valid);
         inp.setMessage("Discard %d cards");
         FThreads.setInputAndWait(inp);
         return inp.getSelected();
@@ -340,14 +364,41 @@ public class PlayerControllerHuman extends PlayerController {
     @Override
     public void playMiracle(SpellAbility miracle, Card card) {
         if (GuiDialog.confirm(card, card + " - Drawn. Play for Miracle Cost?")) {
-            game.getActionPlay().playSpellAbility(miracle, getPlayer());
+            player.playSpellAbility(miracle);
         }
     }
 
     @Override
     public void playMadness(SpellAbility madness) {
         if (GuiDialog.confirm(madness.getSourceCard(), madness.getSourceCard() + " - Discarded. Pay Madness Cost?")) {
-            game.getActionPlay().playSpellAbility(madness, getPlayer());
+            player.playSpellAbility(madness);
         }
+    }
+
+    @Override
+    public List<Card> chooseCardsToDelve(int colorLessAmount, List<Card> grave) {
+        List<Card> toExile = new ArrayList<Card>();
+        int cardsInGrave = grave.size();
+        final Integer[] cntChoice = new Integer[cardsInGrave + 1];
+        for (int i = 0; i <= cardsInGrave; i++) {
+            cntChoice[i] = Integer.valueOf(i);
+        }
+
+        final Integer chosenAmount = GuiChoose.one("Exile how many cards?", cntChoice);
+        System.out.println("Delve for " + chosenAmount);
+
+        for (int i = 0; i < chosenAmount; i++) {
+            final Card nowChosen = GuiChoose.oneOrNone("Exile which card?", grave);
+
+            if (nowChosen == null) {
+                // User canceled,abort delving.
+                toExile.clear();
+                break;
+            }
+
+            grave.remove(nowChosen);
+            toExile.add(nowChosen);
+        }
+        return toExile;
     }
 }

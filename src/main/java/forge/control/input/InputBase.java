@@ -18,6 +18,7 @@
 package forge.control.input;
 
 import forge.Card;
+import forge.FThreads;
 import forge.Singletons;
 import forge.game.player.Player;
 import forge.gui.match.CMatchUI;
@@ -33,7 +34,11 @@ import forge.gui.match.CMatchUI;
 public abstract class InputBase implements java.io.Serializable, Input {
     /** Constant <code>serialVersionUID=-6539552513871194081L</code>. */
     private static final long serialVersionUID = -6539552513871194081L;
-
+    protected final Player player;  
+    public InputBase(Player player) {
+        this.player = player;
+    }
+    
     // showMessage() is always the first method called
     @Override
     public abstract void showMessage();
@@ -64,4 +69,18 @@ public abstract class InputBase implements java.io.Serializable, Input {
     }
     
     protected void afterStop() { }
+    
+    
+    
+    protected void passPriority() {
+        final Runnable pass = new Runnable() {
+            @Override public void run() {
+                player.getController().passPriority();
+            }
+        };
+        if( FThreads.isEDT() )
+            FThreads.invokeInNewThread(pass, true);
+        else 
+            pass.run();
+    }
 }

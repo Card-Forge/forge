@@ -96,7 +96,7 @@ public class EndOfTurn extends Phase {
                     @Override
                     public void resolve() {
                         if (card.isInPlay()) {
-                            game.getAction().destroy(card);
+                            game.getAction().destroy(card, this);
                         }
                     }
                 };
@@ -116,7 +116,7 @@ public class EndOfTurn extends Phase {
                         @Override
                         public void resolve() {
                             if (card.isInPlay()) {
-                                game.getAction().destroy(card);
+                                game.getAction().destroy(card, this);
                             }
                         }
                     };

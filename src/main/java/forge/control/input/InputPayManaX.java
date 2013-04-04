@@ -3,7 +3,6 @@ package forge.control.input;
 import forge.Card;
 import forge.card.mana.ManaCostBeingPaid;
 import forge.card.spellability.SpellAbility;
-import forge.game.GameState;
 import forge.view.ButtonUtil;
 
 public class InputPayManaX extends InputPayManaBase {
@@ -15,9 +14,9 @@ public class InputPayManaX extends InputPayManaBase {
     private final boolean xCanBe0;
 
 
-    public InputPayManaX(final GameState game, final SpellAbility sa0, final int amountX, final boolean xCanBe0)
+    public InputPayManaX(final SpellAbility sa0, final int amountX, final boolean xCanBe0)
     {
-        super(game, sa0);
+        super(sa0);
 
         xPaid = 0;
         colorX =  saPaidFor.hasParam("XColor") ? saPaidFor.getParam("XColor") : "";

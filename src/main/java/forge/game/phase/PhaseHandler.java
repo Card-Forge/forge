@@ -709,6 +709,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
      * </p>
      */
     public final void passPriority() {
+        FThreads.checkEDT("PhaseHandler.passPriority", false);
         // stop game if it's outcome is clear
         if (game.isGameOver()) {
             return;

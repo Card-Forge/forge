@@ -15,6 +15,7 @@ import forge.control.input.InputSynchronized;
  *
  */
 public class FThreads {
+    
     static { 
         System.out.printf("(FThreads static ctor): Running on a machine with %d cpu core(s)%n", Runtime.getRuntime().availableProcessors() );
     }
@@ -122,6 +123,10 @@ public class FThreads {
 
     public static void delay(int milliseconds, Runnable inputUpdater) {
         getScheduledPool().schedule(inputUpdater, milliseconds, TimeUnit.MILLISECONDS);
+    }
+    
+    public static String debugGetCurrThreadId() {
+        return isEDT() ? "EDT" : Long.toString(Thread.currentThread().getId());
     }
    
 }

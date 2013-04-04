@@ -18,6 +18,7 @@
 package forge.card.spellability;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import forge.Card;
 import forge.game.player.Player;
@@ -45,9 +46,9 @@ public class TargetChoices {
     }
 
     // Card or Player are legal targets.
-    private final ArrayList<Card> targetCards = new ArrayList<Card>();
-    private final ArrayList<Player> targetPlayers = new ArrayList<Player>();
-    private final ArrayList<SpellAbility> targetSAs = new ArrayList<SpellAbility>();
+    private final List<Card> targetCards = new ArrayList<Card>();
+    private final List<Player> targetPlayers = new ArrayList<Player>();
+    private final List<SpellAbility> targetSAs = new ArrayList<SpellAbility>();
 
     /**
      * <p>
@@ -199,7 +200,7 @@ public class TargetChoices {
      * 
      * @return a {@link java.util.ArrayList} object.
      */
-    public final ArrayList<Card> getTargetCards() {
+    public final List<Card> getTargetCards() {
         return this.targetCards;
     }
 
@@ -210,7 +211,7 @@ public class TargetChoices {
      * 
      * @return a {@link java.util.ArrayList} object.
      */
-    public final ArrayList<Player> getTargetPlayers() {
+    public final List<Player> getTargetPlayers() {
         return this.targetPlayers;
     }
 
@@ -221,7 +222,7 @@ public class TargetChoices {
      * 
      * @return a {@link java.util.ArrayList} object.
      */
-    public final ArrayList<SpellAbility> getTargetSAs() {
+    public final List<SpellAbility> getTargetSAs() {
         return this.targetSAs;
     }
 

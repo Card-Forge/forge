@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Preacher 3
+Title=Preacher
+Difficulty=hard
+Description=WB Cleric deck
+Icon=Preacher.jpg
+Deck Type=constructed
+[main]
+1 Akroma's Devoted
+3 Ancestor's Prophet
+1 Battlefield Medic
+3 Battletide Alchemist
+2 Cathedral Sanctifier
+2 Celestial Gatekeeper
+4 Doubtless One
+4 Edgewalker
+4 Hedron-Field Purists
+2 High Priest of Penance
+1 Mox Jet
+1 Mox Pearl
+1 Order of Whiteclay
+12 Plains
+1 Profane Prayers
+1 Rotlung Reanimator
+4 Scrubland
+1 Skirsdag High Priest
+5 Swamp
+1 Syndic of Tithes
+1 Temple Acolyte
+1 Urborg, Tomb of Yawgmoth
+2 Vile Deacon
+2 Weathered Wayfarer
+[sideboard]

@@ -19,86 +19,27 @@ package forge.card.cost;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import com.google.common.base.Predicate;
+
 import forge.Card;
 import forge.CardLists;
 import forge.CardPredicates.Presets;
 import forge.FThreads;
-import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.spellability.SpellAbility;
-import forge.control.input.InputPayment;
+import forge.control.input.InputSelectCards;
+import forge.control.input.InputSelectCardsFromList;
 import forge.game.GameState;
 import forge.game.ai.ComputerUtil;
 import forge.game.player.AIPlayer;
 import forge.game.player.Player;
-import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
-import forge.view.ButtonUtil;
 
 /**
  * The Class CostTapType.
  */
 public class CostTapType extends CostPartWithList {
-
-    /** 
-     * TODO: Write javadoc for this type.
-     *
-     */
-    public static final class InputPayCostTapType extends InputPayCostBase {
-        private final CostTapType tapType;
-        private final int nCards;
-        private final List<Card> cardList;
-        private static final long serialVersionUID = 6438988130447851042L;
-        private int nTapped = 0;
-
-        /**
-         * TODO: Write javadoc for Constructor.
-         * @param sa
-         * @param tapType
-         * @param nCards
-         * @param cardList
-         * @param payment
-         */
-        public InputPayCostTapType(CostTapType tapType, int nCards, List<Card> cardList) {
-            this.tapType = tapType;
-            this.nCards = nCards;
-            this.cardList = cardList;
-        }
-
-        @Override
-        public void showMessage() {
-
-            final int left = nCards - this.nTapped;
-            showMessage("Select a " + tapType.getDescription() + " to tap (" + left + " left)");
-            ButtonUtil.enableOnlyCancel();
-            if (nCards == 0) {
-                this.done();
-            }
-        }
-
-
-
-        @Override
-        public void selectCard(final Card card) {
-            Zone zone = Singletons.getModel().getGame().getZoneOf(card);
-            if (zone.is(ZoneType.Battlefield) && cardList.contains(card) && card.isUntapped()) {
-                // send in List<Card> for Typing
-                tapType.executePayment(null, card);
-                cardList.remove(card);
-
-                this.nTapped++;
-
-                if (this.nTapped == nCards) {
-                    this.done();
-                } else if (cardList.size() == 0) {
-                    // happen
-                    this.cancel();
-                } else {
-                    this.showMessage();
-                }
-            }
-        }
-    }
 
     private final boolean canTapSource;
 
@@ -121,15 +62,6 @@ public class CostTapType extends CostPartWithList {
     public boolean isReusable() { return true; }
 
 
-    /**
-     * Gets the description.
-     * 
-     * @return the description
-     */
-    public final String getDescription() {
-        return this.getTypeDescription() == null ? this.getType() : this.getTypeDescription();
-    }
-
     /*
      * (non-Javadoc)
      * 
@@ -141,12 +73,15 @@ public class CostTapType extends CostPartWithList {
         sb.append("Tap ");
 
         final Integer i = this.convertAmount();
-        final String desc = this.getDescription();
-
-        sb.append(Cost.convertAmountTypeToWords(i, this.getAmount(), "untapped " + desc));
-
-        sb.append(" you control");
-
+        final String desc = this.getDescriptiveType();
+        final String type = this.getType();
+        
+        if (type.contains("sharesCreatureTypeWith")) {
+            sb.append("two untapped creatures you control that share a creature type");
+        } else {
+            sb.append(Cost.convertAmountTypeToWords(i, this.getAmount(), "untapped " + desc));
+            sb.append(" you control");
+        }
         return sb.toString();
     }
 
@@ -172,15 +107,39 @@ public class CostTapType extends CostPartWithList {
      * forge.Card, forge.Player, forge.card.cost.Cost)
      */
     @Override
-    public final boolean canPay(final SpellAbility ability, final Card source, final Player activator, final Cost cost, final GameState game) {
+    public final boolean canPay(final SpellAbility ability) {
+        final Player activator = ability.getActivatingPlayer();
+        final Card source = ability.getSourceCard();
+        
         List<Card> typeList = new ArrayList<Card>(activator.getCardsIn(ZoneType.Battlefield));
+        String type = this.getType();
+        boolean sameType = false;
+        
+        if (type.contains("sharesCreatureTypeWith")) {
+            sameType = true;
+            type = type.replace("sharesCreatureTypeWith", "");
+        }
+        
+        typeList = CardLists.getValidCards(typeList, type.split(";"), activator, source);
 
-        typeList = CardLists.getValidCards(typeList, this.getType().split(";"), activator, source);
-
-        if (cost.hasTapCost()) {
+        if (!canTapSource) {
             typeList.remove(source);
         }
         typeList = CardLists.filter(typeList, Presets.UNTAPPED);
+        
+        if (sameType) {
+            for (final Card card : typeList) {
+                if (CardLists.filter(typeList, new Predicate<Card>() {
+                    @Override
+                    public boolean apply(final Card c) {
+                        return c.sharesCreatureTypeWith(card);
+                    }
+                }).size() > 1) {
+                    return true;
+                }
+            }
+            return false;
+        }
 
         final Integer amount = this.convertAmount();
         if ((typeList.size() == 0) || ((amount != null) && (typeList.size() < amount))) {
@@ -200,8 +159,29 @@ public class CostTapType extends CostPartWithList {
     @Override
     public final boolean payHuman(final SpellAbility ability, final GameState game) {
         List<Card> typeList = new ArrayList<Card>(ability.getActivatingPlayer().getCardsIn(ZoneType.Battlefield));
-        typeList = CardLists.getValidCards(typeList, this.getType().split(";"), ability.getActivatingPlayer(), ability.getSourceCard());
+        String type = this.getType();
+        boolean sameType = false;
+        if (type.contains("sharesCreatureTypeWith")) {
+            sameType = true;
+            type = type.replace("sharesCreatureTypeWith", "");
+        }
+        typeList = CardLists.getValidCards(typeList, type.split(";"), ability.getActivatingPlayer(), ability.getSourceCard());
         typeList = CardLists.filter(typeList, Presets.UNTAPPED);
+        if (sameType) {
+            final List<Card> List2 = typeList;
+            typeList = CardLists.filter(typeList, new Predicate<Card>() {
+                @Override
+                public boolean apply(final Card c) {
+                    for (Card card : List2) {
+                        if (!card.equals(c) && card.sharesCreatureTypeWith(c)) {
+                            return true;
+                        }
+                    }
+                    return false;
+                }
+            });
+        }
+        
         final String amount = this.getAmount();
         final Card source = ability.getSourceCard();
         Integer c = this.convertAmount();
@@ -214,9 +194,15 @@ public class CostTapType extends CostPartWithList {
                 c = AbilityUtils.calculateAmount(source, amount, ability);
             }
         }
-        InputPayment inp = new InputPayCostTapType(this, c, typeList);
+        
+        
+        InputSelectCards inp = new InputSelectCardsFromList(c, c, typeList);
+        inp.setMessage("Select a " + getDescriptiveType() + " to tap (%d left)");
         FThreads.setInputAndWait(inp);
-        return inp.isPaid();
+        if ( inp.hasCancelled() )
+            return false;
+
+        return executePayment(ability, inp.getSelected());
     }
 
     /* (non-Javadoc)
@@ -237,6 +223,9 @@ public class CostTapType extends CostPartWithList {
             } else {
                 c = AbilityUtils.calculateAmount(source, amount, ability);
             }
+        }
+        if (this.getType().contains("sharesCreatureTypeWith")) {
+            return null;
         }
 
         List<Card> totap = ComputerUtil.chooseTapType(ai, this.getType(), source, !canTapSource, c);

@@ -14,21 +14,17 @@ import forge.game.player.Player;
  *
  */
 public class AiInputBlock extends InputBase {
-
     private final GameState game;
     /**
      * TODO: Write javadoc for Constructor.
      * @param game
      * @param player
      */
-    public AiInputBlock(GameState game, Player player) {
-        super();
-        this.game = game;
-        this.player = player;
+    public AiInputBlock(Player human) {
+        super(human);
+        this.game = human.getGame();
     }
 
-    private final Player player; 
-    
     private static final long serialVersionUID = -2253562658069995572L;
 
     @Override

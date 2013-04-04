@@ -94,7 +94,6 @@ public class Upkeep extends Phase {
         Upkeep.upkeepDemonicHordes(game);
         Upkeep.upkeepTangleWire(game);
 
-        Upkeep.upkeepKarma(game);
         Upkeep.upkeepOathOfDruids(game);
         Upkeep.upkeepOathOfGhouls(game);
         Upkeep.upkeepSuspend(game);
@@ -171,6 +170,7 @@ public class Upkeep extends Phase {
             final Card c = list.get(i);
             if (c.hasStartOfKeyword("(Echo unpaid)")) {
                 final Ability blankAbility = Upkeep.BlankAbility(c, c.getEchoCost());
+                blankAbility.setActivatingPlayer(c.getController());
 
                 final StringBuilder sb = new StringBuilder();
                 sb.append("Echo for ").append(c).append("\n");
@@ -182,7 +182,7 @@ public class Upkeep extends Phase {
                         Player controller = c.getController();
                         if (controller.isHuman()) {
                             Cost cost = new Cost(c, c.getEchoCost().trim(), true);
-                            if ( !GameActionUtil.payCostDuringAbilityResolve(controller, blankAbility, cost, null, game) )
+                            if ( !GameActionUtil.payCostDuringAbilityResolve(blankAbility, cost, null, game) )
                                 game.getAction().sacrifice(c, null);;
 
                         } else { // computer
@@ -285,7 +285,7 @@ public class Upkeep extends Phase {
                                 if (c.getName().equals("Cosmic Horror")) {
                                     controller.addDamage(7, c);
                                 }
-                                game.getAction().destroy(c);
+                                game.getAction().destroy(c, this);
                             }
                             
                         }
@@ -324,7 +324,7 @@ public class Upkeep extends Phase {
                         @Override
                         public void resolve() {
                             if (controller.isHuman()) {
-                                if ( !GameActionUtil.payCostDuringAbilityResolve(controller, blankAbility, blankAbility.getPayCosts(), this, game))
+                                if ( !GameActionUtil.payCostDuringAbilityResolve(blankAbility, blankAbility.getPayCosts(), this, game))
                                     game.getAction().sacrifice(c, null);
                             } else { // computer
                                 if (ComputerUtilCost.shouldPayCost(controller, c, upkeepCost) && ComputerUtilCost.canPayCost(blankAbility, controller)) {
@@ -444,20 +444,20 @@ public class Upkeep extends Phase {
                         chooseArt.setMessage(abyss.getName() + " - Select one nonartifact creature to destroy");
                         FThreads.setInputAndWait(chooseArt); // Input
                         if (!chooseArt.hasCancelled()) {
-                            game.getAction().destroyNoRegeneration(chooseArt.getSelected().get(0));
+                            game.getAction().destroyNoRegeneration(chooseArt.getSelected().get(0), this);
                         }
                         
                     } else { // computer
 
                         final List<Card> indestruct = CardLists.getKeyword(targets, "Indestructible");
                         if (indestruct.size() > 0) {
-                            game.getAction().destroyNoRegeneration(indestruct.get(0));
+                            game.getAction().destroyNoRegeneration(indestruct.get(0), this);
                         } else if (targets.size() > 0) {
                             final Card target = ComputerUtilCard.getWorstCreatureAI(targets);
                             if (null == target) {
                                 // must be nothing valid to destroy
                             } else {
-                                game.getAction().destroyNoRegeneration(target);
+                                game.getAction().destroyNoRegeneration(target, this);
                             }
                         }
                     }
@@ -504,11 +504,11 @@ public class Upkeep extends Phase {
                             inp.setMessage("Select creature with power: " + power + " to sacrifice.");
                             FThreads.setInputAndWait(inp);
                             if(!inp.hasCancelled())
-                                game.getAction().destroyNoRegeneration(inp.getSelected().get(0));
+                                game.getAction().destroyNoRegeneration(inp.getSelected().get(0), this);
 
                         } else { // computer
                             final Card compyTarget = this.getCompyCardToDestroy(creatures);
-                            game.getAction().destroyNoRegeneration(compyTarget);
+                            game.getAction().destroyNoRegeneration(compyTarget, this);
                         }
                     }
                 } // resolve
@@ -873,46 +873,6 @@ public class Upkeep extends Phase {
             }
         }
     } // Oath of Ghouls
-
-    /**
-     * <p>
-     * upkeepKarma.
-     * </p>
-     */
-    private static void upkeepKarma(final GameState game) {
-        final Player player = game.getPhaseHandler().getPlayerTurn();
-        final List<Card> karmas =
-                CardLists.filter(game.getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Karma"));
-        final List<Card> swamps = CardLists.getType(player.getCardsIn(ZoneType.Battlefield), "Swamp");
-
-        // determine how much damage to deal the current player
-        final int damage = swamps.size();
-
-        // if there are 1 or more Karmas on the
-        // battlefield have each of them deal damage.
-        if (0 < karmas.size()) {
-            for (final Card karma : karmas) {
-                final Ability ability = new Ability(karma, ManaCost.ZERO) {
-                    @Override
-                    public void resolve() {
-                        if (damage > 0) {
-                            player.addDamage(damage, karma);
-                        }
-                    }
-                }; // Ability
-                if (damage > 0) {
-
-                final StringBuilder sb = new StringBuilder();
-                sb.append("Karma deals ").append(damage).append(" damage to ").append(player);
-                ability.setStackDescription(sb.toString());
-                ability.setDescription(sb.toString());
-                ability.setActivatingPlayer(karma.getController());
-
-                game.getStack().addSimultaneousStackEntry(ability);
-                }
-            }
-        } // if
-    } // upkeepKarma()
 
     /**
      * <p>

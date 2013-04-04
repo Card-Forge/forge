@@ -37,7 +37,7 @@ public class InputPayManaSimple extends InputPayManaBase {
     private final String originalManaCost;
 
     public InputPayManaSimple(final GameState game, final SpellAbility sa, final ManaCostBeingPaid manaCostToPay) {
-        super(game, sa);
+        super(sa);
         this.originalManaCost = manaCostToPay.toString(); // Change
         this.originalCard = sa.getSourceCard();
 
@@ -68,9 +68,9 @@ public class InputPayManaSimple extends InputPayManaBase {
 
     /** {@inheritDoc} */
     @Override
-    public final void selectPlayer(final Player player) {
+    public final void selectPlayer(final Player selectedPlayer) {
 
-        if (player == whoPays) {
+        if (player == selectedPlayer) {
             if (player.canPayLife(this.phyLifeToLose + 2) && manaCost.payPhyrexian()) {
                 this.phyLifeToLose += 2;
             }
@@ -88,10 +88,10 @@ public class InputPayManaSimple extends InputPayManaBase {
     @Override
     protected void done() {
         if (this.phyLifeToLose > 0) {
-            whoPays.payLife(this.phyLifeToLose, this.originalCard);
+            player.payLife(this.phyLifeToLose, this.originalCard);
         }
         if (!this.saPaidFor.getSourceCard().isCopiedSpell()) {
-            whoPays.getManaPool().clearManaPaid(this.saPaidFor, false);
+            player.getManaPool().clearManaPaid(this.saPaidFor, false);
             this.resetManaCost();
 
             if (this.saPaidFor.isSpell()) {
@@ -110,8 +110,8 @@ public class InputPayManaSimple extends InputPayManaBase {
         handleConvokedCards(true);
         this.resetManaCost();
 
-        whoPays.getManaPool().refundManaPaid(this.saPaidFor, true);
-        whoPays.getZone(ZoneType.Battlefield).updateObservers(); // DO
+        player.getManaPool().refundManaPaid(this.saPaidFor, true);
+        player.getZone(ZoneType.Battlefield).updateObservers(); // DO
 
         this.stop();
     }

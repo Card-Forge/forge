@@ -23,7 +23,6 @@ import java.util.regex.Pattern;
 
 import forge.Card;
 import forge.CounterType;
-import forge.Singletons;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostBeingPaid;
 import forge.card.mana.ManaCostParser;
@@ -141,8 +140,7 @@ public class Cost {
         this.name = card != null ? card.getName() : "";
 
         boolean xCantBe0 = false;
-        int amountX = 0;
-        
+
         StringBuilder manaParts = new StringBuilder();
         String[] parts = TextUtil.splitWithParenthesis(parse, ' ', '<', '>');
         
@@ -157,8 +155,6 @@ public class Cost {
         for(String part : parts) {
             if( "XCantBe0".equals(part) )
                 xCantBe0 = true;
-            else if ( "X".equals(part) )
-                amountX++;
             else {
                 CostPart cp = parseCostPart(part, tapCost, untapCost);
                 if ( null != cp )
@@ -169,11 +165,10 @@ public class Cost {
             
         }
 
-        if ((amountX > 0) || manaParts.length() > 0) {
-            this.costParts.add(0, new CostPartMana(manaParts.toString(), amountX, xCantBe0));
+        if (manaParts.length() > 0) {
+            this.costParts.add(0, new CostPartMana(new ManaCost(new ManaCostParser(manaParts.toString())), xCantBe0));
         }
-        
-        
+
         // inspect parts to set Sac, {T} and {Q} flags
         for (int iCp = 0; iCp < costParts.size(); iCp++) {
             CostPart cp = costParts.get(iCp);
@@ -366,16 +361,18 @@ public class Cost {
         for (final CostPart part : this.costParts) {
             if (part instanceof CostPartMana) {
                 final ManaCost mana = new ManaCost(new ManaCostParser(part.toString()));
-                final ManaCostBeingPaid changedCost = Singletons.getModel().getGame().getActionPlay().getSpellCostChange(sa, new ManaCostBeingPaid(mana));
+                final ManaCostBeingPaid changedCost = new ManaCostBeingPaid(mana);
+                changedCost.applySpellCostChange(sa);
 
-                ((CostPartMana)part).setAdjustedMana(changedCost.toString(false));
+                ((CostPartMana)part).setAdjustedMana(changedCost.toManaCost());
                 costChanged = true;
             }
         }
         if (!costChanged) {
             // Spells with a cost of 0 should be affected too
-            final ManaCostBeingPaid changedCost = Singletons.getModel().getGame().getActionPlay().getSpellCostChange(sa, new ManaCostBeingPaid("0"));
-            this.costParts.add(new CostPartMana(changedCost.toString(), 0, false));
+            final ManaCostBeingPaid changedCost = new ManaCostBeingPaid("0");
+            changedCost.applySpellCostChange(sa);
+            this.costParts.add(new CostPartMana(changedCost.toManaCost(), false));
         }
     }
 

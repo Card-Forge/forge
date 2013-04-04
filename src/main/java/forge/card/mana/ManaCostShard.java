@@ -282,6 +282,7 @@ public class ManaCostShard {
      * @return the card mana cost shard
      */
     public static ManaCostShard valueOf(final int atoms) {
+        if ( atoms == 0 ) return ManaCostShard.COLORLESS;
         for (final ManaCostShard element : ManaCostShard.ALL_POSSIBLE) {
             if (element.shard == atoms) {
                 return element;

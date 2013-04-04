@@ -17,6 +17,7 @@
  */
 package forge.gui.match.nonsingleton;
 
+import java.awt.Event;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -42,7 +43,9 @@ import forge.control.input.Input;
 import forge.control.input.InputAttack;
 import forge.control.input.InputBlock;
 import forge.control.input.InputPayManaBase;
+import forge.game.GameState;
 import forge.game.phase.CombatUtil;
+import forge.game.player.HumanPlayer;
 import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
@@ -62,7 +65,7 @@ public class CField implements ICDoc {
     // The one who owns cards on this side of table
     private final Player player;
     // Tho one who looks at screen and 'performs actions'
-    private final Player playerViewer;
+    private final HumanPlayer playerViewer;
     private final VField view;
     private boolean initializedAlready = false;
 
@@ -154,9 +157,9 @@ public class CField implements ICDoc {
      * @param v0 &emsp; {@link forge.gui.match.nonsingleton.VField}
      * @param playerViewer 
      */
-    public CField(final Player p0, final VField v0, Player playerViewer) {
+    public CField(final Player p0, final VField v0, HumanPlayer playerViewer) {
         this.player = p0;
-        this.playerViewer = playerViewer;;
+        this.playerViewer = playerViewer;
         this.view = v0;
     }
 
@@ -340,13 +343,11 @@ public class CField implements ICDoc {
 
             @Override
             protected void doAction(final Card c) {
-                if ( CField.this.player != CField.this.playerViewer )
-                    return;
-                
-                final SpellAbility ab = player.getController().getAbilityToPlay(player.getGame().getAbilitesOfCard(c, player));
+                final GameState game = player.getGame();
+                final SpellAbility ab = CField.this.playerViewer.getController().getAbilityToPlay(game.getAbilitesOfCard(c, CField.this.playerViewer));
                 if ( null != ab) {
                     FThreads.invokeInNewThread(new Runnable(){ @Override public void run(){
-                        player.playSpellAbility(c, ab);
+                        CField.this.playerViewer.playSpellAbility(c, ab);
                     }});
                 }
             }
@@ -375,9 +376,10 @@ public class CField implements ICDoc {
 
     /** */
     private void cardoverAction(MouseEvent e) {
+        boolean isShiftDown = (e.getModifiers() & Event.SHIFT_MASK) != 0;
         final Card c = CField.this.view.getTabletop().getHoveredCard(e);
         if (c != null) {
-            CMatchUI.SINGLETON_INSTANCE.setCard(c);
+            CMatchUI.SINGLETON_INSTANCE.setCard(c, isShiftDown);
         }
     }
 

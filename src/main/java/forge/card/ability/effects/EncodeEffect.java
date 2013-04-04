@@ -35,8 +35,8 @@ public class EncodeEffect extends SpellAbilityEffect {
         choices = CardLists.getValidCards(choices, "Creature.YouCtrl", host.getController(), host);
 
         // if no creatures on battlefield, cannot encoded
-        if (choices.size() == 0) {
-
+        if (choices.isEmpty()) {
+            return;
         }
         // Handle choice of whether or not to encoded
         
@@ -46,8 +46,6 @@ public class EncodeEffect extends SpellAbilityEffect {
         if (!player.getController().confirmAction(sa, null, sb.toString())) {
             return;
         }
-        // Note: AI will always choose to encode
-        // TODO add better AI choice here
 
         // move host card to exile
         Card movedCard = Singletons.getModel().getGame().getAction().moveTo(ZoneType.Exile, host);

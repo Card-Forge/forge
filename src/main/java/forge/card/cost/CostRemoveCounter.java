@@ -297,8 +297,10 @@ public class CostRemoveCounter extends CostPartWithList {
      * forge.Card, forge.Player, forge.card.cost.Cost)
      */
     @Override
-    public final boolean canPay(final SpellAbility ability, final Card source, final Player activator, final Cost cost, final GameState game) {
+    public final boolean canPay(final SpellAbility ability) {
         final CounterType cntrs = this.getCounter();
+        final Player activator = ability.getActivatingPlayer();
+        final Card source = ability.getSourceCard();
 
         final Integer amount = this.convertAmount();
         if (this.payCostFromSource()) {

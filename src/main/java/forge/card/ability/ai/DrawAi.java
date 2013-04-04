@@ -18,7 +18,7 @@
  */
 package forge.card.ability.ai;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import forge.Card;
@@ -96,7 +96,7 @@ public class DrawAi extends SpellAbilityAi {
         }
 
         if (tgt != null) {
-            final ArrayList<Player> players = tgt.getTargetPlayers();
+            final List<Player> players = tgt.getTargetPlayers();
             if ((players.size() > 0) && players.get(0).isOpponentOf(ai)) {
                 return true;
             }

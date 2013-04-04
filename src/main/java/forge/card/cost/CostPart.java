@@ -18,11 +18,12 @@
 package forge.card.cost;
 
 
+import org.apache.commons.lang3.StringUtils;
+
 import forge.Card;
 import forge.card.spellability.SpellAbility;
 import forge.game.GameState;
 import forge.game.player.AIPlayer;
-import forge.game.player.Player;
 
 /**
  * The Class CostPart.
@@ -92,13 +93,9 @@ public abstract class CostPart {
         return this.typeDescription;
     }
 
-    /**
-     * Gets the descriptive type.
-     * 
-     * @return the descriptive type
-     */
     public final String getDescriptiveType() {
-        return this.getTypeDescription() == null ? this.getType() : this.getTypeDescription();
+        String typeDesc = this.getTypeDescription();
+        return typeDesc == null ? this.getType() : typeDesc;
     }
 
     /**
@@ -125,12 +122,7 @@ public abstract class CostPart {
      * @return the integer
      */
     public final Integer convertAmount() {
-        Integer i = null;
-        try {
-            i = Integer.parseInt(this.getAmount());
-        } catch (final NumberFormatException e) {
-        }
-        return i;
+        return StringUtils.isNumeric(amount) ? Integer.parseInt(amount) : null; 
     }
 
     /**
@@ -147,7 +139,7 @@ public abstract class CostPart {
      * @param game
      * @return true, if successful
      */
-    public abstract boolean canPay(SpellAbility ability, Card source, Player activator, Cost cost, GameState game);
+    public abstract boolean canPay(SpellAbility ability);
 
     /**
      * Decide ai payment.

@@ -34,7 +34,6 @@ import forge.CardPredicates.Presets;
 import forge.Command;
 import forge.CounterType;
 import forge.Singletons;
-import forge.card.ability.AbilityFactory;
 import forge.card.cost.Cost;
 import forge.card.mana.ManaCost;
 import forge.card.spellability.Ability;
@@ -317,7 +316,6 @@ public class CardFactoryCreatures {
                 c.addCounter(CounterType.P1P1, xCounters, true);
             }
         };
-        spell.setIsXCost(true);
         // Do not remove SpellAbilities created by AbilityFactory or
         // Keywords.
         card.clearFirstSpell();
@@ -530,140 +528,7 @@ public class CardFactoryCreatures {
         card.addTrigger(myTrigger);
     }
 
-    private static void getCard_Nebuchadnezzar(final Card card, final String cardName) {
-        /*
-         * X, T: Name a card. Target opponent reveals X cards at random from
-         * his or her hand. Then that player discards all cards with that
-         * name revealed this way. Activate this ability only during your
-         * turn.
-         */
-        final Cost abCost = new Cost(card, "X T", true);
-        final Target target = new Target(card, "Select target opponent", "Opponent".split(","));
-        class NebuchadnezzarAbility extends AbilityActivated {
-            public NebuchadnezzarAbility(final Card ca, final Cost co, final Target t) {
-                super(ca, co, t);
-            }
 
-            @Override
-            public AbilityActivated getCopy() {
-                AbilityActivated discard = new NebuchadnezzarAbility(getSourceCard(),
-                        getPayCosts(), new Target(getTarget()));
-                discard.getRestrictions().setPlayerTurn(true);
-                return discard;
-            }
-
-            private static final long serialVersionUID = 4839778470534392198L;
-
-            @Override
-            public void resolve() {
-                // name a card
-                final String choice = JOptionPane.showInputDialog(null, "Name a card", cardName,
-                        JOptionPane.QUESTION_MESSAGE);
-                final List<Card> hand = new ArrayList<Card>(this.getTargetPlayer().getCardsIn(ZoneType.Hand));
-                int numCards = card.getXManaCostPaid();
-                numCards = Math.min(hand.size(), numCards);
-
-                final List<Card> revealed = new ArrayList<Card>();
-                for (int i = 0; i < numCards; i++) {
-                    final Card random = Aggregates.random(hand);
-                    revealed.add(random);
-                    hand.remove(random);
-                }
-                if (!revealed.isEmpty()) {
-                    GuiChoose.one("Revealed at random", revealed);
-                } else {
-                    GuiChoose.one("Revealed at random", new String[] { "Nothing to reveal" });
-                }
-
-                for (final Card c : revealed) {
-                    if (c.getName().equals(choice)) {
-                        c.getController().discard(c, this);
-                    }
-                }
-            }
-
-            @Override
-            public boolean canPlayAI() {
-                return false;
-            }
-
-            @Override
-            public String getDescription() {
-                final StringBuilder sbDesc = new StringBuilder();
-                sbDesc.append(abCost).append("Name a card. ");
-                sbDesc.append("Target opponent reveals X cards at random from his or her hand. ");
-                sbDesc.append("Then that player discards all cards with that name revealed this way. ");
-                sbDesc.append("Activate this ability only during your turn.");
-                return sbDesc.toString();
-            }
-        }
-        final AbilityActivated discard = new NebuchadnezzarAbility(card, abCost, target);
-
-        discard.getRestrictions().setPlayerTurn(true);
-
-        final StringBuilder sbStack = new StringBuilder();
-        sbStack.append(cardName).append(" - name a card.");
-        discard.setStackDescription(sbStack.toString());
-
-        card.addSpellAbility(discard);
-    }
-
-    private static void getCard_DuctCrawler(final Card card, final String cardName) {
-        final String theCost;
-        if (cardName.equals("Duct Crawler")) {
-            theCost = "1 R";
-        } else if (cardName.equals("Shrewd Hatchling")) {
-            theCost = "UR";
-        } else { // if (cardName.equals("Spin Engine") ||
-                 // cardName.equals("Screeching Griffin")) {
-            theCost = "R";
-        }
-
-        class DuctCrawlerAbility extends AbilityActivated {
-            private static final long serialVersionUID = 7914250202245863157L;
-
-            public DuctCrawlerAbility(final Card ca, final Cost co, Target t) {
-                super(ca, co, t);
-            }
-
-            @Override
-            public AbilityActivated getCopy() {
-                return new DuctCrawlerAbility(getSourceCard(),
-                        getPayCosts(), new Target(getTarget()));
-            }
-
-            @Override
-            public void resolve() {
-                final StringBuilder keywordBuilder = new StringBuilder("HIDDEN CARDNAME can't block ");
-                keywordBuilder.append(this.getSourceCard().toString());
-
-                final StringBuilder abilityBuilder = new StringBuilder("AB$Pump | Cost$ ");
-                abilityBuilder.append(theCost);
-                abilityBuilder.append(" | ValidTgts$ Creature | TgtPrompt$ Select target creature | IsCurse$ True | KW$ ");
-                abilityBuilder.append(keywordBuilder.toString());
-                abilityBuilder.append(" | SpellDescription$ Target creature can't block CARDNAME this turn.");
-                final SpellAbility myAb = AbilityFactory.getAbility(abilityBuilder.toString(), card);
-
-                myAb.getTarget().setTargetChoices(this.getChosenTarget().getTargetChoices());
-                myAb.resolve();
-            }
-
-            @Override
-            public String getStackDescription() {
-                return this.getSourceCard().toString() + " - Target creature can't block "
-                        + this.getSourceCard().getName() + " this turn.";
-            }
-
-            @Override
-            public String getDescription() {
-                return theCost + ": Target creature can't block CARDNAME this turn.";
-            }
-        }
-        final SpellAbility finalAb = new DuctCrawlerAbility(card, new Cost(card, theCost, true), new Target(card,
-                "Select target creature.", "Creature"));
-
-        card.addSpellAbility(finalAb);
-    }
 
 //    // This is a hardcoded card template
 //
@@ -686,11 +551,6 @@ public class CardFactoryCreatures {
             getCard_SurturedGhoul(card);
         } else if (cardName.equals("Phyrexian Dreadnought")) {
             getCard_PhyrexianDreadnought(card, cardName);
-        } else if (cardName.equals("Nebuchadnezzar")) {
-            getCard_Nebuchadnezzar(card, cardName);
-        } else if (cardName.equals("Duct Crawler") || cardName.equals("Shrewd Hatchling")
-                || cardName.equals("Spin Engine") || cardName.equals("Screeching Griffin")) {
-            getCard_DuctCrawler(card, cardName);
         }
 
         // ***************************************************

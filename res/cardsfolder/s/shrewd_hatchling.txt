@@ -3,6 +3,11 @@ ManaCost:3 UR
 Types:Creature Elemental
 PT:6/6
 K:etbCounter:M1M1:4
+A:AB$ Pump | Cost$ UR | ValidTgts$ Creature | TgtPrompt$ Select target creature that can't block this creature this turn | IsCurse$ True | RememberObjects$ Targeted | SubAbility$ DBPump | StackDescription$ {c:Targeted} can't block CARDNAME this turn. | SpellDescription$ Target creature can't block CARDNAME this turn.
+SVar:DBPump:DB$ Pump | KW$ HIDDEN CantBeBlockedBy Creature.IsRemembered | StackDescription$ None
+T:Mode$ Phase | Phase$ Cleanup | TriggerZones$ Battlefield | Execute$ DBCleanup | Static$ True
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ DBCleanup | Static$ True
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 T:Mode$ SpellCast | ValidCard$ Card.Red | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigRemoveCounter | TriggerDescription$ Whenever you cast a red spell, remove a -1/-1 counter from CARDNAME.
 T:Mode$ SpellCast | ValidCard$ Card.Blue | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigRemoveCounter | TriggerDescription$ Whenever you cast a blue spell, remove a -1/-1 counter from CARDNAME.
 SVar:TrigRemoveCounter:AB$ RemoveCounter | Cost$ 0 | Defined$ Self | CounterType$ M1M1 | CounterNum$ 1

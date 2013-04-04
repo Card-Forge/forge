@@ -13,6 +13,7 @@ import forge.GameEntity;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.control.input.Input;
+import forge.control.input.InputAutoPassPriority;
 import forge.deck.Deck;
 import forge.game.GameState;
 import forge.game.GameType;
@@ -36,6 +37,7 @@ public class PlayerControllerAi extends PlayerController {
     private Input defaultInput;
     private Input blockInput;
     private Input cleanupInput;
+    private Input autoPassPriorityInput;
     
     private final AiController brains;
     private final AIPlayer player;
@@ -52,9 +54,9 @@ public class PlayerControllerAi extends PlayerController {
         brains = new AiController(p, game); 
         
         defaultInput = new AiInputCommon(brains);
-        blockInput = new AiInputBlock(game, getPlayer());
+        blockInput = new AiInputBlock(getPlayer());
         cleanupInput = getDefaultInput();
-        
+        autoPassPriorityInput = new InputAutoPassPriority(getPlayer());
     }
 
     /**
@@ -66,13 +68,18 @@ public class PlayerControllerAi extends PlayerController {
         } else if (abilities.size() == 1) {
             return abilities.get(0);
         } else {
-            return GuiChoose.oneOrNone("Choose", abilities); // some day network interaction will be here
+            return GuiChoose.oneOrNone("Choose ability for AI to play", abilities); // some day network interaction will be here
         }
     }
 
     /** Input to use when player has to declare blockers */
     public Input getBlockInput() {
         return blockInput;
+    }
+
+    @Override
+    public Input getAutoPassPriorityInput() {
+        return autoPassPriorityInput;
     }
 
     /**
@@ -142,13 +149,13 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public String announceRequirements(SpellAbility ability, String announce) {
+    public Integer announceRequirements(SpellAbility ability, String announce, boolean allowZero) {
         // For now, these "announcements" are made within the AI classes of the appropriate SA effects
-        return null;
+        return null; // return incorrect value to indicate that
     }
 
     @Override
-    public List<Card> choosePermanentsToSacrifice(List<Card> validTargets, int amount, SpellAbility sa, boolean destroy, boolean isOptional) {
+    public List<Card> choosePermanentsToSacrifice(List<Card> validTargets, String validMessage, int amount, SpellAbility sa, boolean destroy, boolean isOptional) {
         return ComputerUtil.choosePermanentsToSacrifice(player, validTargets, amount, sa, destroy, isOptional);
     }
 
@@ -213,12 +220,12 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public List<Card> chooseCardsToDiscardFrom(Player p, SpellAbility sa, List<Card> validCards, int min) {
+    public List<Card> chooseCardsToDiscardFrom(Player p, SpellAbility sa, List<Card> validCards, int min, int max) {
         boolean isTargetFriendly = !p.isOpponentOf(getPlayer());
         
         return isTargetFriendly
-               ? ComputerUtil.getCardsToDiscardFromFriend(player, p, sa, validCards, min)
-               : ComputerUtil.getCardsToDiscardFromOpponent(player, p, sa, validCards, min);
+               ? ComputerUtil.getCardsToDiscardFromFriend(player, p, sa, validCards, min, max)
+               : ComputerUtil.getCardsToDiscardFromOpponent(player, p, sa, validCards, min, max);
     }
 
     @Override
@@ -235,6 +242,14 @@ public class PlayerControllerAi extends PlayerController {
     @Override
     public void playMadness(SpellAbility madness) {
         getAi().chooseAndPlaySa(false, false, madness);
+    }
+
+    /* (non-Javadoc)
+     * @see forge.game.player.PlayerController#chooseCardsToDelve(int, java.util.List)
+     */
+    @Override
+    public List<Card> chooseCardsToDelve(int colorlessCost, List<Card> grave) {
+        return getAi().chooseCardsToDelve(colorlessCost, grave);
     }
 
 }

@@ -2,6 +2,11 @@ Name:Duct Crawler
 ManaCost:R
 Types:Creature Insect
 PT:1/1
+A:AB$ Pump | Cost$ 1 R | ValidTgts$ Creature | TgtPrompt$ Select target creature that can't block this creature this turn | IsCurse$ True | RememberObjects$ Targeted | SubAbility$ DBPump | StackDescription$ {c:Targeted} can't block CARDNAME this turn. | SpellDescription$ Target creature can't block CARDNAME this turn.
+SVar:DBPump:DB$ Pump | KW$ HIDDEN CantBeBlockedBy Creature.IsRemembered | StackDescription$ None
+T:Mode$ Phase | Phase$ Cleanup | TriggerZones$ Battlefield | Execute$ DBCleanup | Static$ True
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ DBCleanup | Static$ True
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/duct_crawler.jpg
 Oracle:{1}{R}: Target creature can't block Duct Crawler this turn.

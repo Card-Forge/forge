@@ -58,7 +58,7 @@ final class CardFace implements ICardFace {
     @Override public CardType getType()             { return this.type; }
     @Override public ManaCost getManaCost()         { return this.manaCost; }
     @Override public ColorSet getColor()            { return this.color; }
-    
+        
     // these are raw and unparsed used for Card creation
     @Override public Iterable<String> getKeywords()   { return keywords; }
     @Override public Iterable<String> getAbilities()  { return abilities; }
@@ -114,6 +114,4 @@ final class CardFace implements ICardFace {
         if ( variables == null ) variables = emptyMap;
         if ( null == nonAbilityText ) nonAbilityText = "";
     }
-
-
 }

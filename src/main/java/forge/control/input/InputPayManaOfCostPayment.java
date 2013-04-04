@@ -2,7 +2,6 @@ package forge.control.input;
 
 import forge.Card;
 import forge.Singletons;
-import forge.card.cost.CostPartMana;
 import forge.card.mana.ManaCostBeingPaid;
 import forge.card.spellability.SpellAbility;
 import forge.game.GameState;
@@ -11,18 +10,17 @@ import forge.view.ButtonUtil;
 
 public class InputPayManaOfCostPayment extends InputPayManaBase {
 
-    public InputPayManaOfCostPayment(final GameState game, CostPartMana costMana, SpellAbility spellAbility, int toAdd) {
-        super(game, spellAbility);
-        manaCost = new ManaCostBeingPaid(costMana.getManaToPay());
-        manaCost.increaseColorlessMana(toAdd);
+    public InputPayManaOfCostPayment(final GameState game, ManaCostBeingPaid cost, SpellAbility spellAbility) {
+        super(spellAbility);
+        manaCost = cost;
     }
 
     private static final long serialVersionUID = 3467312982164195091L;
     private int phyLifeToLose = 0;
 
     @Override
-    public void selectPlayer(final Player player) {
-        if (player == whoPays) {
+    public void selectPlayer(final Player selectedPlayer) {
+        if (player == selectedPlayer) {
             if (player.canPayLife(this.phyLifeToLose + 2) && manaCost.payPhyrexian()) {
                 this.phyLifeToLose += 2;
             }

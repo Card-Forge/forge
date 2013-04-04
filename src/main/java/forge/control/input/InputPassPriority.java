@@ -19,11 +19,9 @@ package forge.control.input;
 
 import forge.Card;
 import forge.FThreads;
-import forge.Singletons;
 import forge.card.spellability.SpellAbility;
-import forge.control.FControl;
-import forge.game.phase.PhaseType;
-import forge.game.player.Player;
+import forge.game.phase.PhaseHandler;
+import forge.game.player.HumanPlayer;
 import forge.gui.GuiDisplayUtil;
 import forge.gui.framework.SDisplayUtil;
 import forge.gui.match.CMatchUI;
@@ -42,26 +40,28 @@ public class InputPassPriority extends InputBase {
     /** Constant <code>serialVersionUID=-581477682214137181L</code>. */
     private static final long serialVersionUID = -581477682214137181L;
 
+    /**
+     * TODO: Write javadoc for Constructor.
+     * @param player
+     */
+    public InputPassPriority(HumanPlayer human) {
+        super(human);
+    }
+
     /** {@inheritDoc} */
     @Override
     public final void showMessage() {
         GuiDisplayUtil.updateGUI();
         ButtonUtil.enableOnlyOk();
 
-        final PhaseType phase = Singletons.getModel().getGame().getPhaseHandler().getPhase();
-        final Player player = Singletons.getModel().getGame().getPhaseHandler().getPriorityPlayer();
-
-        if (player.isComputer()) {
-            System.err.println(phase + ": Computer in passpriority");
-        }
-
+        final PhaseHandler ph = player.getGame().getPhaseHandler();
         final StringBuilder sb = new StringBuilder();
 
-        sb.append("Turn : ").append(Singletons.getModel().getGame().getPhaseHandler().getPlayerTurn()).append("\n");
-        sb.append("Phase: ").append(phase.Name).append("\n");
+        sb.append("Turn : ").append(ph.getPlayerTurn()).append("\n");
+        sb.append("Phase: ").append(ph.getPhase().Name).append("\n");
         sb.append("Stack: ");
-        if (Singletons.getModel().getGame().getStack().size() != 0) {
-            sb.append(Singletons.getModel().getGame().getStack().size()).append(" to Resolve.");
+        if (player.getGame().getStack().size() != 0) {
+            sb.append(player.getGame().getStack().size()).append(" to Resolve.");
         } else {
             sb.append("Empty");
         }
@@ -71,22 +71,22 @@ public class InputPassPriority extends InputBase {
         CMatchUI.SINGLETON_INSTANCE.showMessage(sb.toString());
     }
 
+
     /** {@inheritDoc} */
     @Override
     public final void selectButtonOK() {
-        FControl.SINGLETON_INSTANCE.getPlayer().getController().passPriority();
+        passPriority(); 
     }
 
     /** {@inheritDoc} */
     @Override
     public final void selectCard(final Card card) {
-        final Player player = Singletons.getControl().getPlayer();
         final SpellAbility ab = player.getController().getAbilityToPlay(player.getGame().getAbilitesOfCard(card, player));
         if ( null != ab) {
             Runnable execAbility = new Runnable() {
                 @Override
                 public void run() {
-                    player.playSpellAbility(card, ab);
+                    ((HumanPlayer)player).playSpellAbility(card, ab);
                 }
             };
             

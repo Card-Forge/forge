@@ -50,6 +50,7 @@ import net.miginfocom.swing.MigLayout;
 
 import org.apache.commons.lang3.StringUtils;
 
+import forge.FThreads;
 import forge.gui.WrapLayout;
 import forge.gui.toolbox.FHyperlink;
 import forge.gui.toolbox.FLabel;
@@ -76,7 +77,7 @@ public class BugReporter {
             return;
         }
         if (message != null) {
-            System.err.println(message);
+            System.err.printf("%s > %s%n", FThreads.debugGetCurrThreadId(), message);
         }
         ex.printStackTrace();
         
@@ -85,8 +86,7 @@ public class BugReporter {
         _buildSpoilerHeader(sb, ex.getClass().getSimpleName());
         sb.append("\n\n");
         if (null != message && !message.isEmpty()) {
-            sb.append(message);
-            sb.append("\n");
+            sb.append(FThreads.debugGetCurrThreadId()).append(" > ").append(message).append("\n");
         }
         
         StringWriter sw = new StringWriter();

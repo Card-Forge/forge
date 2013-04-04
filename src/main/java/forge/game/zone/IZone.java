@@ -121,16 +121,6 @@ interface IZone {
      * @return true, if successful
      */
     boolean contains(Card c);
-
-    /**
-     * gets the positon of a specific card in this zone, null if it doesn't exist.
-     * 
-     * @param c
-     *            the card
-     * @return position
-     */
-    Integer getPosition(Card c);
-
     /**
      * isEmpty returns true if given zone contains no cards.
      * 

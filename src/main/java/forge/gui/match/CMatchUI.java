@@ -29,6 +29,7 @@ import forge.GameEntity;
 import forge.ImageCache;
 import forge.Singletons;
 import forge.game.phase.PhaseType;
+import forge.game.player.HumanPlayer;
 import forge.game.player.LobbyPlayer;
 import forge.game.player.Player;
 import forge.gui.framework.EDocID;
@@ -77,7 +78,7 @@ public enum CMatchUI {
      * @param numFieldPanels int
      * @param numHandPanels int
      */
-    public void initMatch(final List<Player> players, Player localPlayer) {
+    public void initMatch(final List<Player> players, HumanPlayer localPlayer) {
         // TODO fix for use with multiplayer
 
         final String[] indices = Singletons.getModel().getPreferences().getPref(FPref.UI_AVATARS).split(",");
@@ -236,8 +237,12 @@ public enum CMatchUI {
     }
 
     public void setCard(final Card c) {
+        setCard(c, false);
+    }
+    
+    public void setCard(final Card c, final boolean showFlipped ) {
         CDetail.SINGLETON_INSTANCE.showCard(c);
-        CPicture.SINGLETON_INSTANCE.showCard(c);
+        CPicture.SINGLETON_INSTANCE.showCard(c, showFlipped);
     }
 
     public void setCard(final InventoryItem c) {

@@ -23,7 +23,6 @@ import org.apache.commons.lang3.StringUtils;
 
 import forge.Card;
 import forge.CardCharacteristicName;
-import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.cost.CostPayment;
 import forge.game.GameState;
@@ -37,49 +36,28 @@ import forge.game.zone.Zone;
  * @author Forge
  * @version $Id$
  */
-public class SpellAbilityRequirements {
-    private SpellAbility ability = null;
-    private TargetSelection select = null;
-    private CostPayment payment = null;
-    private boolean isFree = false;
-    private boolean skipStack = false;
-    private boolean bCasting = false;
-    private Zone fromZone = null;
-    private Integer zonePosition = null;
+public class HumanPlaySpellAbility {
+    private final SpellAbility ability;
+    private final CostPayment payment;
 
- 
-    public final void setSkipStack(final boolean bSkip) {
-        this.skipStack = bSkip;
-    }
- 
-    public final void setFree(final boolean bFree) {
-        this.isFree = bFree;
-    }
-
-
-    public SpellAbilityRequirements(final SpellAbility sa, final TargetSelection ts, final CostPayment cp) {
+    public HumanPlaySpellAbility(final SpellAbility sa, final CostPayment cp) {
         this.ability = sa;
-        this.select = ts;
         this.payment = cp;
     }
 
-    public final void fillRequirements() {
-        this.fillRequirements(false);
-    }
 
-    public final void fillRequirements(final boolean skipTargeting) {
-        final GameState game = Singletons.getModel().getGame();
-        
-        if ((this.ability instanceof Spell) && !this.bCasting) {
-            // remove from hand
-            this.bCasting = true;
-            if (!this.ability.getSourceCard().isCopiedSpell()) {
-                final Card c = this.ability.getSourceCard();
+    public final void fillRequirements(boolean isAlreadyTargeted, boolean isFree, boolean skipStack) {
+        final GameState game = ability.getActivatingPlayer().getGame();
 
-                this.fromZone = game.getZoneOf(c);
-                this.zonePosition = this.fromZone.getPosition(c);
-                this.ability.setSourceCard(game.getAction().moveToStack(c));
-            }
+        // used to rollback
+        Zone fromZone = null;
+        int zonePosition = 0;
+
+        final Card c = this.ability.getSourceCard();
+        if (this.ability instanceof Spell && !c.isCopiedSpell()) {
+            fromZone = game.getZoneOf(c);
+            zonePosition = fromZone.getPosition(c);
+            this.ability.setSourceCard(game.getAction().moveToStack(c));
         }
 
         // freeze Stack. No abilities should go onto the stack while I'm filling requirements.
@@ -87,26 +65,32 @@ public class SpellAbilityRequirements {
 
         // Announce things like how many times you want to Multikick or the value of X
         if (!this.announceRequirements()) {
-            this.select.setCancel(true);
-            rollbackAbility();
+            rollbackAbility(fromZone, zonePosition);
             return;
         }
 
         // Skip to paying if parent ability doesn't target and has no
         // subAbilities.
         // (or trigger case where its already targeted)
-        if (!skipTargeting && (this.select.doesTarget() || (this.ability.getSubAbility() != null))) {
-            this.select.setRequirements(this);
-            this.select.clearTargets();
-            this.select.chooseTargets();
-            if (this.select.isCanceled()) {
-                rollbackAbility();
-                return;
-            }
+        if (!isAlreadyTargeted) {
+            
+            SpellAbility beingTargeted = ability;
+            do { 
+                Target tgt = beingTargeted.getTarget();
+                if( tgt != null && tgt.doesTarget()) {
+                    clearTargets(beingTargeted);
+                    final TargetSelection select = new TargetSelection(beingTargeted);
+                    if (!select.chooseTargets() ) {
+                        rollbackAbility(fromZone, zonePosition);
+                        return;
+                    }
+                }
+                beingTargeted = beingTargeted.getSubAbility();
+            } while (beingTargeted != null);
         }
         
         // Payment
-        boolean paymentMade = this.isFree;
+        boolean paymentMade = isFree;
         
         if (!paymentMade) {
             this.payment.changeCost();
@@ -114,66 +98,77 @@ public class SpellAbilityRequirements {
         } 
     
         if (!paymentMade) {
-            rollbackAbility();
+            rollbackAbility(fromZone, zonePosition);
             return;
         }
         
-        else if (this.isFree || this.payment.isFullyPaid()) {
-            if (this.skipStack) {
+        else if (isFree || this.payment.isFullyPaid()) {
+            if (skipStack) {
                 AbilityUtils.resolve(this.ability, false);
             } else {
-
                 this.enusureAbilityHasDescription(this.ability);
                 this.ability.getActivatingPlayer().getManaPool().clearManaPaid(this.ability, false);
                 game.getStack().addAndUnfreeze(this.ability);
             }
     
-            // Warning about this - resolution may come in another thread, and it would still need its targets
-            this.select.clearTargets();
+            // no worries here. The same thread must resolve, and by this moment ability will have been resolved already
+            clearTargets(ability);
             game.getAction().checkStateEffects();
         }
     }
 
-    private void rollbackAbility() { 
+    public final void clearTargets(SpellAbility ability) {
+        Target tg = ability.getTarget();
+        if (tg != null) {
+            tg.resetTargets();
+            tg.calculateStillToDivide(ability.getParam("DividedAsYouChoose"), ability.getSourceCard(), ability);
+        }
+    }
+    
+    private void rollbackAbility(Zone fromZone, int zonePosition) { 
         // cancel ability during target choosing
-        final Card c = this.ability.getSourceCard();
+        final GameState game = ability.getActivatingPlayer().getGame();
+        final Card c = ability.getSourceCard();
 
         // split cards transform back to full form if targeting is canceled
         if (c.isSplitCard()) {
             c.setState(CardCharacteristicName.Original);
         }
 
-        if (this.bCasting && !c.isCopiedSpell()) { // and not a copy
+        if (fromZone != null) { // and not a copy
             // add back to where it came from
-            Singletons.getModel().getGame().getAction().moveTo(this.fromZone, c, this.zonePosition);
+            game.getAction().moveTo(fromZone, c, zonePosition >= 0 ? Integer.valueOf(zonePosition) : null);
         }
 
-        if (this.select != null) {
-            this.select.clearTargets();
-        }
+        clearTargets(ability);
 
         this.ability.resetOnceResolved();
         this.payment.refundPayment();
-        Singletons.getModel().getGame().getStack().clearFrozen();
+        game.getStack().clearFrozen();
         // Singletons.getModel().getGame().getStack().removeFromFrozenStack(this.ability);
     }
     
 
-    public boolean announceRequirements() {
+    private boolean announceRequirements() {
         // Announcing Requirements like Choosing X or Multikicker
         // SA Params as comma delimited list
         String announce = ability.getParam("Announce");
         if (announce != null) {
             for(String aVar : announce.split(",")) {
-                String value = ability.getActivatingPlayer().getController().announceRequirements(ability, aVar);
-                 if (value == null || !StringUtils.isNumeric(value)) { 
-                     return false;
-                 } else if (ability.getPayCosts().getCostMana() != null && !ability.getPayCosts().getCostMana().canXbe0() 
-                         && Integer.parseInt(value) == 0) {
-                     return false;
-                 }
-                 ability.setSVar(aVar, "Number$" + value);
-                 ability.getSourceCard().setSVar(aVar, "Number$" + value);
+                String varName = aVar.trim();
+
+                boolean allowZero = !("X".equalsIgnoreCase(varName)) || ability.getPayCosts().getCostMana().canXbe0();
+
+                Integer value = ability.getActivatingPlayer().getController().announceRequirements(ability, varName, allowZero);
+                if ( null == value )
+                    return false;
+
+                ability.setSVar(varName, value.toString());
+                if( "Multikicker".equals(varName) ) {
+                    ability.getSourceCard().setMultiKickerMagnitude(value);
+                } else {
+                    ability.getSourceCard().setSVar(varName, value.toString());
+                }
             }
         }
         return true;

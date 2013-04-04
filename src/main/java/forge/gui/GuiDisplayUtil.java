@@ -632,9 +632,10 @@ public final class GuiDisplayUtil {
             FThreads.invokeInNewThread(new Runnable() {
                 @Override
                 public void run() {
+                    game.getAction().moveToHand(forgeCard); // this is really needed (for rollbacks at least) 
+                    // Human player is choosing targets for an ability controlled by chosen player. 
                     sa.setActivatingPlayer(p);
-                    game.getAction().moveToHand(forgeCard); // this is really needed
-                    game.getActionPlay().playSpellAbilityWithoutPayingManaCost(sa);
+                    Singletons.getControl().getPlayer().playSpellAbilityWithoutPayingManaCost(sa);
                 }
             });
         }
@@ -683,7 +684,7 @@ public final class GuiDisplayUtil {
         
         PlanarDice.roll(p, res);
         
-        Singletons.getModel().getGame().getStack().chooseOrderOfSimultaneousStackEntryAll();
+        p.getGame().getStack().chooseOrderOfSimultaneousStackEntryAll();
     }
 
 } // end class GuiDisplayUtil

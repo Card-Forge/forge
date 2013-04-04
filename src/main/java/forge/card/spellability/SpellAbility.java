@@ -23,6 +23,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.apache.commons.lang3.StringUtils;
+
 import forge.Card;
 import forge.GameEntity;
 import forge.Singletons;
@@ -35,6 +37,7 @@ import forge.card.mana.Mana;
 import forge.card.mana.ManaCost;
 import forge.game.player.AIPlayer;
 import forge.game.player.Player;
+import forge.util.TextUtil;
 
 //only SpellAbility can go on the stack
 //override any methods as needed
@@ -54,7 +57,6 @@ public abstract class SpellAbility implements ISpellAbility {
     private ManaCost manaCost = null;
     private ManaCost multiKickerManaCost = null;
     private ManaCost replicateManaCost = null;
-    private int xManaCost = 0;
     private Player activatingPlayer = null;
 
     private String type = "Intrinsic"; // set to Intrinsic by default
@@ -74,9 +76,7 @@ public abstract class SpellAbility implements ISpellAbility {
     private boolean temporarilySuppressed = false;
 
     private boolean flashBackAbility = false;
-    private boolean multiKicker = false;
     private boolean replicate = false;
-    private boolean xCost = false;
     private boolean cycling = false;
     private boolean delve = false;
 
@@ -291,29 +291,6 @@ public abstract class SpellAbility implements ISpellAbility {
 
     /**
      * <p>
-     * Getter for the field <code>xManaCost</code>.
-     * </p>
-     * 
-     * @return a {@link java.lang.String} object.
-     */
-    public int getXManaCost() {
-        return this.xManaCost;
-    }
-
-    /**
-     * <p>
-     * Setter for the field <code>xManaCost</code>.
-     * </p>
-     * 
-     * @param cost
-     *            a {@link java.lang.String} object.
-     */
-    public final void setXManaCost(final int cost) {
-        this.xManaCost = cost;
-    }
-
-    /**
-     * <p>
      * Getter for the field <code>activatingPlayer</code>.
      * </p>
      * 
@@ -387,19 +364,7 @@ public abstract class SpellAbility implements ISpellAbility {
         return false;
     }
 
-    /**
-     * <p>
-     * setIsMultiKicker.
-     * </p>
-     * 
-     * @param b
-     *            a boolean.
-     */
-    public final void setIsMultiKicker(final boolean b) {
-        this.multiKicker = b;
-    }
-
-    /**
+     /**
      * <p>
      * isMultiKicker.
      * </p>
@@ -407,7 +372,7 @@ public abstract class SpellAbility implements ISpellAbility {
      * @return a boolean.
      */
     public boolean isMultiKicker() {
-        return this.multiKicker;
+        return this.multiKickerManaCost != null && !this.isAnnouncing("Multikicker");
     }
 
     /**
@@ -433,28 +398,6 @@ public abstract class SpellAbility implements ISpellAbility {
         return this.replicate;
     }
 
-    /**
-     * <p>
-     * setIsXCost.
-     * </p>
-     * 
-     * @param b
-     *            a boolean.
-     */
-    public void setIsXCost(final boolean b) {
-        this.xCost = b;
-    }
-
-    /**
-     * <p>
-     * isXCost.
-     * </p>
-     * 
-     * @return a boolean.
-     */
-    public boolean isXCost() {
-        return this.xCost;
-    }
 
     /**
      * <p>
@@ -1053,7 +996,7 @@ public abstract class SpellAbility implements ISpellAbility {
         if (this.targetCard == null) {
             final Target tgt = this.getTarget();
             if (tgt != null) {
-                final ArrayList<Card> list = tgt.getTargetCards();
+                final List<Card> list = tgt.getTargetCards();
 
                 if (!list.isEmpty()) {
                     return list.get(0);
@@ -1106,7 +1049,7 @@ public abstract class SpellAbility implements ISpellAbility {
     public Player getTargetPlayer() {
         final Target tgt = this.getTarget();
         if (tgt != null) {
-            final ArrayList<Player> list = tgt.getTargetPlayers();
+            final List<Player> list = tgt.getTargetPlayers();
 
             if (!list.isEmpty()) {
                 return list.get(0);
@@ -1313,7 +1256,7 @@ public abstract class SpellAbility implements ISpellAbility {
             return false;
         }
         if (entity.isValid(this.getTarget().getValidTgts(), this.getActivatingPlayer(), this.getSourceCard())
-                && (!this.getTarget().isUniqueTargets() || !TargetSelection.getUniqueTargets(this).contains(entity))
+                && (!this.getTarget().isUniqueTargets() || !this.getUniqueTargets().contains(entity))
                 && entity.canBeTargetedBy(this)) {
             return true;
         }
@@ -1494,23 +1437,22 @@ public abstract class SpellAbility implements ISpellAbility {
      * 
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
-    public ArrayList<Card> findTargetedCards() {
-
-        ArrayList<Card> list = new ArrayList<Card>();
+    public List<Card> findTargetedCards() {
         Target tgt = this.getTarget();
         // First search for targeted cards associated with current ability
         if (tgt != null && tgt.getTargetCards() != null && !tgt.getTargetCards().isEmpty()) {
             return tgt.getTargetCards();
         }
+        List<Card> list = new ArrayList<Card>();
         // Next search for source cards of targeted SAs associated with current ability
-        else if (tgt != null && tgt.getTargetSAs() != null && !tgt.getTargetSAs().isEmpty()) {
+        if (tgt != null && tgt.getTargetSAs() != null && !tgt.getTargetSAs().isEmpty()) {
             for (final SpellAbility ability : tgt.getTargetSAs()) {
                 list.add(ability.getSourceCard());
             }
             return list;
         }
         // Lastly Search parent SAs for target cards
-        else {
+        
             // Check for a parent that targets a card
             SpellAbility parent = this.getParentTargetingCard();
             if (null != parent) {
@@ -1523,7 +1465,7 @@ public abstract class SpellAbility implements ISpellAbility {
                     list.add(ability.getSourceCard());
                 }
             }
-        }
+        
         return list;
     }
 
@@ -1680,4 +1622,110 @@ public abstract class SpellAbility implements ISpellAbility {
     public void setCopied(boolean isCopied0) {
         this.isCopied = isCopied0; 
     }
+
+    /**
+     * Gets the unique targets.
+     * 
+     * @param ability
+     *            the ability
+     * @return the unique targets
+     */
+    public final List<Object> getUniqueTargets() {
+        final List<Object> targets = new ArrayList<Object>();
+        SpellAbility child = this.getParent();
+        while (child != null) {
+            if (child.getTarget() != null) {
+                targets.addAll(child.getTarget().getTargets());
+            }
+            child = child.getParent();
+        }
+        return targets;
+    }
+    
+    public boolean canTargetSpellAbility(final SpellAbility topSA) {
+        final Target tgt = this.getTarget();
+        final String saType = tgt.getTargetSpellAbilityType();
+
+        if (null == saType) {
+            // just take this to mean no restrictions - carry on.
+        } else if (topSA instanceof Spell) {
+            if (!saType.contains("Spell")) {
+                return false;
+            }
+        } else if (topSA.isTrigger()) {
+            if (!saType.contains("Triggered")) {
+                return false;
+            }
+        } else if (topSA instanceof AbilityActivated) {
+            if (!saType.contains("Activated")) {
+                return false;
+            }
+        } else {
+            return false; //Static ability? Whatever.
+        }
+
+        final String splitTargetRestrictions = tgt.getSAValidTargeting();
+        if (splitTargetRestrictions != null) {
+            // TODO What about spells with SubAbilities with Targets?
+
+            final Target matchTgt = topSA.getTarget();
+
+            if (matchTgt == null) {
+                return false;
+            }
+
+            boolean result = false;
+
+            for (final Object o : matchTgt.getTargets()) {
+                if (matchesValid(o, splitTargetRestrictions.split(","))) {
+                    result = true;
+                    break;
+                }
+            }
+
+            if (!result) {
+                return false;
+            }
+        }
+
+        return topSA.getSourceCard().isValid(tgt.getValidTgts(), this.getActivatingPlayer(), this.getSourceCard());
+    }
+
+
+    private boolean matchesValid(final Object o, final String[] valids) {
+        final Card srcCard = this.getSourceCard();
+        final Player activatingPlayer = this.getActivatingPlayer();
+        if (o instanceof Card) {
+            final Card c = (Card) o;
+            return c.isValid(valids, activatingPlayer, srcCard);
+        }
+
+        if (o instanceof Player) {
+            Player p = (Player) o;
+            if (p.isValid(valids, activatingPlayer, srcCard)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * Returns whether variable was present in the announce list.
+     */
+    public boolean isAnnouncing(String variable) {
+        String announce = getParam("Announce");
+        if (StringUtils.isBlank(announce)) return false;
+        String[] announcedOnes = TextUtil.split(announce, ',');
+        for(String a : announcedOnes) {
+            if( a.trim().equalsIgnoreCase(variable))
+                return true;
+        }
+        return false;
+    }
+
+    public boolean isXCost() {
+        CostPartMana cm = payCosts != null ? getPayCosts().getCostMana() : null;
+        return cm != null && cm.getAmountOfX() > 0; 
+    }    
 }

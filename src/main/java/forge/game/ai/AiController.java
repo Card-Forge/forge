@@ -45,6 +45,7 @@ import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellPermanent;
 import forge.game.GameActionUtil;
 import forge.game.GameState;
+import forge.game.phase.CombatUtil;
 import forge.game.phase.PhaseType;
 import forge.game.player.AIPlayer;
 import forge.game.player.Player;
@@ -467,7 +468,14 @@ public class AiController {
 
     // This is for playing spells regularly (no Cascade/Ripple etc.)
     private boolean canPlayAndPayFor(final SpellAbility sa) {
-        return sa.canPlay() && sa.canPlayAI() && ComputerUtilCost.canPayCost(sa, player);
+        boolean canPlay = sa.canPlay();
+        if (!canPlay) 
+            return false;
+        //System.out.printf("Ai thinks of %s @ %s >>> ", sa, sa.getActivatingPlayer().getGame().getPhaseHandler().debugPrintState());
+        boolean aiWouldPlay = sa.canPlayAI();
+        boolean canPay = ComputerUtilCost.canPayCost(sa, player);
+        //System.out.printf("wouldPlay: %s, canPay: %s%n", aiWouldPlay, canPay);
+        return aiWouldPlay && canPay;
     }
     
     // not sure "playing biggest spell" matters?
@@ -534,12 +542,12 @@ public class AiController {
         if ((uTypes != null) && (sa != null)) {
             hand = CardLists.getValidCards(hand, uTypes, sa.getActivatingPlayer(), sa.getSourceCard());
         }
-        return getCardsToDiscard(numDiscard, hand, sa);
+        return getCardsToDiscard(numDiscard, numDiscard, hand, sa);
     }
     
-    public List<Card> getCardsToDiscard(final int numDiscard, final List<Card> validCards, final SpellAbility sa) {
+    public List<Card> getCardsToDiscard(final int min, final int max, final List<Card> validCards, final SpellAbility sa) {
         
-        if (validCards.size() < numDiscard) {
+        if (validCards.size() < min) {
             return null;
         }
 
@@ -551,7 +559,7 @@ public class AiController {
         }
     
         // look for good discards
-        while (count < numDiscard) {
+        while (count < min) {
             Card prefCard = null;
             if (sa != null && sa.getActivatingPlayer() != null && sa.getActivatingPlayer().isOpponentOf(player)) {
                 for (Card c : validCards) {
@@ -574,7 +582,7 @@ public class AiController {
             }
         }
     
-        final int discardsLeft = numDiscard - count;
+        final int discardsLeft = min - count;
     
         // choose rest
         for (int i = 0; i < discardsLeft; i++) {
@@ -654,20 +662,17 @@ public class AiController {
             
             case Encode:
                 if (logic == null) {
-                    // Base Logic is choose "best"
-                    choice = ComputerUtilCard.getBestAI(options);
-                } else if ("WorstCard".equals(logic)) {
-                    choice = ComputerUtilCard.getWorstAI(options);
-                } else if (logic.equals("BestBlocker")) {
-                    if (!CardLists.filter(options, Presets.UNTAPPED).isEmpty()) {
-                        options = CardLists.filter(options, Presets.UNTAPPED);
+                    List<Card> attackers = CardLists.filter(options, new Predicate<Card>() {
+                        @Override
+                        public boolean apply(final Card c) {
+                            return CombatUtil.canAttackNextTurn(c);
+                        }
+                    });
+                    if (attackers.isEmpty()) {
+                        choice = ComputerUtilCard.getBestAI(options);
+                    } else {
+                        choice = ComputerUtilCard.getBestAI(attackers);
                     }
-                    choice = ComputerUtilCard.getBestCreatureAI(options);
-                } else if (logic.equals("Clone")) {
-                    if (!CardLists.getValidCards(options, "Permanent.YouDontCtrl,Permanent.nonLegendary", host.getController(), host).isEmpty()) {
-                        options = CardLists.getValidCards(options, "Permanent.YouDontCtrl,Permanent.nonLegendary", host.getController(), host);
-                    }
-                    choice = ComputerUtilCard.getBestAI(options);
                 }
                 return choice;
                 
@@ -743,6 +748,7 @@ public class AiController {
     /** Returns the spell ability which has already been played - use it for reference only */
     public SpellAbility chooseAndPlaySa(final List<SpellAbility> choices, boolean mandatory, boolean withoutPayingManaCost) {
         for (final SpellAbility sa : choices) {
+            sa.setActivatingPlayer(player);
             //Spells
             if (sa instanceof Spell) {
                 if (!((Spell) sa).canPlayFromEffectAI(mandatory, withoutPayingManaCost)) {
@@ -778,9 +784,11 @@ public class AiController {
                         
                         if (!player.isUnlimitedHandSize()) {
                             int max = Math.min(player.getZone(ZoneType.Hand).size(), size - player.getMaxHandSize());
-                            final List<Card> toDiscard = player.getAi().getCardsToDiscard(max, (String[])null, null);
-                            for (int i = 0; i < toDiscard.size(); i++) {
-                                player.discard(toDiscard.get(i), null);
+                            if( max > 0) {
+                                final List<Card> toDiscard = player.getAi().getCardsToDiscard(max, (String[])null, null);
+                                for (int i = 0; i < toDiscard.size(); i++) {
+                                    player.discard(toDiscard.get(i), null);
+                                }
                             }
                             game.getStack().chooseOrderOfSimultaneousStackEntryAll();
                         }
@@ -856,5 +864,35 @@ public class AiController {
         } while ( sa != null );
     }
 
+    public List<Card> chooseCardsToDelve(int colorlessCost, List<Card> grave) {
+        List<Card> toExile = new ArrayList<Card>();
+        int numToExile = Math.min(grave.size(), colorlessCost);
+        
+        for (int i = 0; i < numToExile; i++) {
+            Card chosen = null;
+            for (final Card c : grave) { // Exile noncreatures first in
+                // case we can revive. Might
+                // wanna do some additional
+                // checking here for Flashback
+                // and the like.
+                if (!c.isCreature()) {
+                    chosen = c;
+                    break;
+                }
+            }
+            if (chosen == null) {
+                chosen = ComputerUtilCard.getWorstCreatureAI(grave);
+            }
+
+            if (chosen == null) {
+                // Should never get here but... You know how it is.
+                chosen = grave.get(0);
+            }
+
+            toExile.add(chosen);
+            grave.remove(chosen);
+        }
+        return toExile;
+    }
 }
 

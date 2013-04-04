@@ -22,12 +22,14 @@ import forge.card.spellability.Target;
 import forge.card.trigger.TriggerType;
 import forge.game.ai.ComputerUtilCard;
 import forge.game.player.AIPlayer;
+import forge.game.player.HumanPlayer;
 import forge.game.player.Player;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 import forge.gui.GuiDialog;
 import forge.util.Aggregates;
+import forge.util.Lang;
 
 public class ChangeZoneEffect extends SpellAbilityEffect {
     @Override
@@ -63,10 +65,46 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         final Card host = sa.getSourceCard();
 
         if (!(sa instanceof AbilitySub)) {
-            sb.append(host.getName()).append(" -");
+            sb.append(" -");
         }
 
         sb.append(" ");
+
+        // Player whose cards will change zones
+        List<Player> fetchers = new ArrayList<Player>();
+        if (sa.hasParam("DefinedPlayer")) {
+            fetchers = AbilityUtils.getDefinedPlayers(sa.getSourceCard(), sa.getParam("DefinedPlayer"), sa);
+        }
+        if (fetchers.isEmpty() && sa.hasParam("ValidTgts") && sa.getTarget() != null) {
+            fetchers = sa.getTarget().getTargetPlayers();
+        }
+        if (fetchers.isEmpty()) {
+            fetchers.add(sa.getSourceCard().getController());
+        }
+
+        final String fetcherNames = Lang.joinHomogenous(fetchers, Player.Accessors.FN_GET_NAME);
+
+        // Player who chooses the cards to move
+        List<Player> choosers = new ArrayList<Player>();
+        if (sa.hasParam("Chooser")) {
+            choosers = AbilityUtils.getDefinedPlayers(sa.getSourceCard(), sa.getParam("Chooser"), sa);
+        }
+        if (choosers.isEmpty()) {
+            choosers.add(sa.getActivatingPlayer());
+        }
+
+        final StringBuilder chooserSB = new StringBuilder();
+        for (int i = 0; i < choosers.size(); i++) {
+            chooserSB.append(choosers.get(i).getName());
+            chooserSB.append((i + 2) == choosers.size() ? " and " : (i + 1) == choosers.size() ? "" : ", ");
+        }
+        final String chooserNames = chooserSB.toString();
+
+        String fetchPlayer = fetcherNames;
+        if (chooserNames.equals(fetcherNames)) {
+            fetchPlayer = fetchers.size() > 1 ? "their" : "his/her";
+        }
+
         String origin = "";
         if (sa.hasParam("Origin")) {
             origin = sa.getParam("Origin");
@@ -90,49 +128,79 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             }
             sb.append(".");
         } else if (origin.equals("Library")) {
-            sb.append("Search your library for ").append(num).append(" ").append(type).append(" and ");
+            sb.append(chooserNames);
+            sb.append(" search").append(choosers.size() > 1 ? " " : "es ");
+            sb.append(fetchPlayer);
+            sb.append("'s library for ").append(num).append(" ").append(type).append(" and ");
 
-            if (num == 1) {
-                sb.append("put that card ");
+            if (destination.equals("Exile")) {
+                if (num == 1) {
+                    sb.append("exiles that card ");
+                } else {
+                    sb.append("exiles those cards ");
+                }
             } else {
-                sb.append("put those cards ");
+                if (num == 1) {
+                    sb.append("puts that card ");
+                } else {
+                    sb.append("puts those cards ");
+                }
+
+                if (destination.equals("Battlefield")) {
+                    sb.append("onto the battlefield");
+                    if (sa.hasParam("Tapped")) {
+                        sb.append(" tapped");
+                    }
+                    if (sa.hasParam("GainControl")) {
+                        sb.append(" under ").append(chooserNames).append("'s control");
+                    }
+
+                    sb.append(".");
+
+                }
+                if (destination.equals("Hand")) {
+                    sb.append("into its owner's hand.");
+                }
+                if (destination.equals("Graveyard")) {
+                    sb.append("into its owners's graveyard.");
+                }
+            }
+            sb.append(" Then shuffle that library.");
+        } else if (origin.equals("Hand")) {
+            sb.append(chooserNames);
+            if (!chooserNames.equals(fetcherNames)) {
+                sb.append(" looks at " + fetcherNames + "'s hand and ");
+                sb.append(destination.equals("Exile") ? "exiles " : "puts ");
+                sb.append(num).append(" of those ").append(type).append(" card(s)");
+            } else {
+                sb.append(destination.equals("Exile") ? " exiles " : " puts ");
+                sb.append(num).append(" ").append(type).append(" card(s) from");
+                sb.append(fetchPlayer).append(" hand");
             }
 
             if (destination.equals("Battlefield")) {
-                sb.append("onto the battlefield");
+                sb.append(" onto the battlefield");
                 if (sa.hasParam("Tapped")) {
                     sb.append(" tapped");
                 }
-
-                sb.append(".");
-
-            }
-            if (destination.equals("Hand")) {
-                sb.append("into your hand.");
-            }
-            if (destination.equals("Graveyard")) {
-                sb.append("into your graveyard.");
-            }
-
-            sb.append(" Then shuffle your library.");
-        } else if (origin.equals("Hand")) {
-            sb.append("Put ").append(num).append(" ").append(type).append(" card(s) from your hand ");
-
-            if (destination.equals("Battlefield")) {
-                sb.append("onto the battlefield.");
+                if (sa.hasParam("GainControl")) {
+                    sb.append(" under ").append(chooserNames).append("'s control");
+                }
             }
             if (destination.equals("Library")) {
                 final int libraryPos = sa.hasParam("LibraryPosition") ? Integer.parseInt(sa.getParam("LibraryPosition")) : 0;
 
                 if (libraryPos == 0) {
-                    sb.append("on top");
+                    sb.append(" on top");
                 }
                 if (libraryPos == -1) {
-                    sb.append("on bottom");
+                    sb.append(" on the bottom");
                 }
 
-                sb.append(" of your library.");
+                sb.append(" of ").append(fetchPlayer).append("'s library");
             }
+
+            sb.append(".");
         } else if (origin.equals("Battlefield")) {
             // TODO Expand on this Description as more cards use it
             // for the non-targeted SAs when you choose what is returned on
@@ -171,7 +239,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
 
         final StringBuilder sbTargets = new StringBuilder();
 
-        ArrayList<Card> tgts;
+        List<Card> tgts;
         if (sa.getTarget() != null) {
             tgts = sa.getTarget().getTargetCards();
         } else {
@@ -301,8 +369,8 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
      *            a {@link forge.card.spellability.SpellAbility} object.
      */
     private static void changeKnownOriginResolve(final SpellAbility sa) {
-        ArrayList<Card> tgtCards;
-        ArrayList<SpellAbility> sas;
+        List<Card> tgtCards;
+        List<SpellAbility> sas;
 
         final Target tgt = sa.getTarget();
         final Player player = sa.getActivatingPlayer();
@@ -527,7 +595,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             if (decider instanceof AIPlayer) {
                 ChangeZoneAi.hiddenOriginResolveAI(decider, sa, player);
             } else {
-                changeHiddenOriginResolveHuman(sa, player);
+                changeHiddenOriginResolveHuman((HumanPlayer) decider, sa, player);
             }
         }
     }
@@ -544,7 +612,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
      * @param player
      *            a {@link forge.game.player.Player} object.
      */
-    private static void changeHiddenOriginResolveHuman(final SpellAbility sa, Player player) {
+    private static void changeHiddenOriginResolveHuman(final HumanPlayer decider, final SpellAbility sa, Player player) {
         final Card card = sa.getSourceCard();
         final List<Card> movedCards = new ArrayList<Card>();
         final boolean defined = sa.hasParam("Defined");
@@ -552,8 +620,8 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
 
         final Target tgt = sa.getTarget();
         if (tgt != null) {
-            final ArrayList<Player> players = tgt.getTargetPlayers();
-            player = player != null ? player : players.get(0);
+            final List<Player> players = tgt.getTargetPlayers();
+            player = sa.hasParam("DefinedPlayer") ? player : players.get(0);
             if (players.contains(player) && !player.canBeTargetedBy(sa)) {
                 return;
             }
@@ -622,7 +690,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             }
 
             // Look at opponents hand before moving onto choosing a card
-            if (origin.contains(ZoneType.Hand) && player.isOpponentOf(player)) {
+            if (origin.contains(ZoneType.Hand) && player.isOpponentOf(decider)) {
                 GuiChoose.oneOrNone(sa.getSourceCard().getName() + " - Looking at Opponent's Hand", player
                         .getCardsIn(ZoneType.Hand));
             }

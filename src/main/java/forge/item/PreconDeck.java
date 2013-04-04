@@ -77,17 +77,14 @@ public class PreconDeck implements InventoryItemFromSet {
         final Map<String, List<String>> sections = FileSection.parseSections(deckLines);
         this.deck = Deck.fromSections(sections);
 
-        String setProxy = "n/a";
+        
 
         FileSection kv = FileSection.parse(sections.get("metadata"), "=");
 
         imageFilename = kv.get("Image");
         description = kv.get("Description");
-        if (Singletons.getModel().getEditions().get(kv.get("set").toUpperCase()) != null) {
-            setProxy = kv.get("set");
-        }
-
-        this.set = setProxy;
+        String deckEdition = kv.get("set");
+        this.set = deckEdition == null || Singletons.getModel().getEditions().get(deckEdition.toUpperCase()) == null ? "n/a" : deckEdition;
         this.recommendedDeals = new SellRules(sections.get("shop"));
 
     }

@@ -1,6 +1,7 @@
 package forge.card.ability.effects;
 
 import forge.Card;
+import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
@@ -42,6 +43,11 @@ public class StoreSVarEffect extends SpellAbilityEffect {
             value = Integer.valueOf(expr);
         }
         else if (type.equals("CountSVar")) {
+            if (expr.contains("/")) {
+                final String exprMathVar = expr.split("\\/")[1].split("\\.")[1];
+                int exprMath = AbilityUtils.calculateAmount(source, exprMathVar, sa);
+                expr = expr.replace(exprMathVar, Integer.toString(exprMath));
+            }
             value = CardFactoryUtil.xCount(source, "SVar$" + expr);
         }
         else if (type.equals("Targeted")) {

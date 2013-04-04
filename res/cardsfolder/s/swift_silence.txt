@@ -1,0 +1,11 @@
+Name:Swift Silence
+ManaCost:2 W U U
+Types:Instant
+A:SP$ Counter | Cost$ 2 W U U | AllType$ Spell | AllValid$ Card.Other | RememberCountered$ True | SubAbility$ DBDraw | SpellDescription$ Counter all other spells. Draw a card for each spell countered this way.
+SVar:DBDraw:DB$ Draw | NumCards$ X | References$ X | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Remembered$Amount
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/swift_silence.jpg
+Oracle:Counter all other spells. Draw a card for each spell countered this way.
+SetInfo:DIS Rare

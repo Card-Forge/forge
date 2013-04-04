@@ -166,6 +166,7 @@ u_1_1_camarid.jpg                      http://www.cardforge.org/fpics/tokens/u_1
 u_1_1_cloud_sprite.jpg                 http://www.cardforge.org/fpics/tokens/u_1_1_cloud_sprite.jpg
 u_1_1_faerie.jpg                       http://www.cardforge.org/fpics/tokens/u_1_1_faerie.jpg
 u_1_1_illusion.jpg                     http://www.cardforge.org/fpics/tokens/u_1_1_illusion.jpg
+u_1_1_merfolk.jpg                      http://www.cardforge.org/fpics/tokens/u_1_1_merfolk.jpg
 u_1_1_merfolk_wizard.jpg               http://www.cardforge.org/fpics/tokens/u_1_1_merfolk_wizard.jpg
 u_1_1_thopter.jpg                      http://www.cardforge.org/fpics/tokens/u_1_1_thopter.jpg
 u_1_1_spirit_avr.jpg                   http://www.cardforge.org/fpics/tokens/u_1_1_spirit_avr.jpg
@@ -236,5 +237,4 @@ morph.jpg                              http://www.cardforge.org/fpics/effects/mo
 # //These tokens are not currently used by any cards in Forge, but links provided should they be scripted so the correct name is used:
 # //g_1_1_wolves_of_the_hunt.jpg           http://www.cardforge.org/fpics/tokens/g_1_1_wolves_of_the_hunt.jpg           [LEG] Master of the Hunt
 # //rg_1_1_goblin_warrior.jpg              http://www.cardforge.org/fpics/tokens/rg_1_1_goblin_warrior.jpg              [SHM] Wort, the Raidmother
-# //u_1_1_merfolk.jpg                      http://www.cardforge.org/fpics/tokens/u_1_1_merfolk.jpg                      [ZEN] Lullmage Mentor
 # //w_1_1_knight.jpg                       http://www.cardforge.org/fpics/tokens/w_1_1_knight.jpg                       [ALL] Errand of Duty

@@ -17,7 +17,7 @@ public class PeekAndRevealAi extends SpellAbilityAi {
     protected boolean canPlayAI(AIPlayer aiPlayer, SpellAbility sa) {
         // So far this only appears on Triggers, but will expand
         // once things get converted from Dig + NoMove
-        return false;
+        return true;
     }
 
 }

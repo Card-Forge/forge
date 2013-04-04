@@ -1152,7 +1152,7 @@ public class CombatUtil {
 
             ability.setActivatingPlayer(c.getController());
             if (c.getController().isHuman()) {
-                if ( GameActionUtil.payCostDuringAbilityResolve(c.getController(), ability, attackCost, null, game) ) {
+                if ( GameActionUtil.payCostDuringAbilityResolve(ability, attackCost, null, game) ) {
                     if (!crd.hasKeyword("Vigilance")) { crd.tap(); }
                 } else {
                     game.getCombat().removeFromCombat(crd);
@@ -1207,7 +1207,7 @@ public class CombatUtil {
                         final Player opponent = Singletons.getModel().getGame().getCombat().getDefendingPlayerRelatedTo(c).get(0);
                         //List<Card> list = AbilityUtils.filterListByType(opponent.getCardsIn(ZoneType.Battlefield), "Permanent", this);
                         final List<Card> list = opponent.getCardsIn(ZoneType.Battlefield);
-                        List<Card> toSac = opponent.getController().choosePermanentsToSacrifice(list, a, this, false, false);
+                        List<Card> toSac = opponent.getController().choosePermanentsToSacrifice(list, "Card", a, this, false, false);
 
                         for(Card sacd : toSac) {
                             final GameState game = Singletons.getModel().getGame(); 
@@ -1292,22 +1292,6 @@ public class CombatUtil {
         c.getController().setAttackedWithCreatureThisTurn(true);
         c.getController().incrementAttackersDeclaredThisTurn();
     } // checkDeclareAttackers
-
-    /**
-     * <p>
-     * checkUnblockedAttackers.
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.Card} object.
-     */
-    public static void checkUnblockedAttackers(final Card c) {
-
-        // Run triggers
-        final HashMap<String, Object> runParams = new HashMap<String, Object>();
-        runParams.put("Card", c);
-        Singletons.getModel().getGame().getTriggerHandler().runTrigger(TriggerType.AttackerUnblocked, runParams, false);
-    }
 
     /**
      * <p>

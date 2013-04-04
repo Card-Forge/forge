@@ -51,6 +51,7 @@ import forge.card.cost.CostPutCounter;
 import forge.card.cost.CostRemoveCounter;
 import forge.card.cost.CostReturn;
 import forge.card.cost.CostSacrifice;
+import forge.card.cost.CostTapType;
 import forge.card.cost.CostUtil;
 import forge.card.mana.ManaCost;
 import forge.card.spellability.Ability;
@@ -65,11 +66,11 @@ import forge.control.input.InputSelectCardsFromList;
 import forge.game.event.CardDamagedEvent;
 import forge.game.event.LifeLossEvent;
 import forge.game.player.AIPlayer;
+import forge.game.player.HumanPlayer;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 import forge.gui.GuiDialog;
-import forge.gui.GuiUtils;
 import forge.sound.SoundEffectType;
 
 
@@ -102,9 +103,9 @@ public final class GameActionUtil {
         public void resolve() {
             final GameState game = Singletons.getModel().getGame(); 
             if ( canRegenerate )
-                game.getAction().destroy(affected);
+                game.getAction().destroy(affected, this);
             else
-                game.getAction().destroyNoRegeneration(affected);
+                game.getAction().destroyNoRegeneration(affected, this);
         }
     }
 
@@ -274,7 +275,7 @@ public final class GameActionUtil {
     
                     if (p.isHuman()) {
                         if (GuiDialog.confirm(rippledCards[i], "Cast " + rippledCards[i].getName() + "?")) {
-                            game.getActionPlay().playCardWithoutManaCost(rippledCards[i], p);
+                            ((HumanPlayer)p).playCardWithoutManaCost(rippledCards[i]);
                             revealed.remove(rippledCards[i]);
                         }
                     } else {
@@ -400,8 +401,21 @@ public final class GameActionUtil {
      *            a {@link forge.Command} object.
      * @param sourceAbility TODO
      */
-    public static boolean payCostDuringAbilityResolve(final Player p, final SpellAbility ability, final Cost cost, SpellAbility sourceAbility, final GameState game) {
+    public static boolean payCostDuringAbilityResolve(final SpellAbility ability, final Cost cost, SpellAbility sourceAbility, final GameState game) {
+        
+        // Only human player pays this way
+        final Player p = ability.getActivatingPlayer();
         final Card source = ability.getSourceCard();
+        Card current = null; // Used in spells with RepeatEach effect to distinguish cards, Cut the Tethers
+        if (!source.getRemembered().isEmpty()) {
+            if (source.getRemembered().get(0) instanceof Card) { 
+                current = (Card) source.getRemembered().get(0);
+            }
+        }
+        if (!source.getImprinted().isEmpty()) {
+            current = source.getImprinted().get(0);
+        }
+        
         final List<CostPart> parts =  cost.getCostParts();
         ArrayList<CostPart> remainingParts =  new ArrayList<CostPart>(cost.getCostParts());
         CostPart costPart = null;
@@ -462,7 +476,7 @@ public final class GameActionUtil {
                 int amount = getAmountFromPartX(part, source, sourceAbility);
                 String plural = amount > 1 ? "s" : "";
                 
-                if (!part.canPay(sourceAbility, source, p, cost, game))
+                if (!part.canPay(sourceAbility))
                     return false;
 
                 if ( false == GuiDialog.confirm(source, "Do you want to remove " + amount + " " + counterType.getName() + " counter" + plural + " from " + source + "?"))
@@ -501,73 +515,39 @@ public final class GameActionUtil {
             }
 
             else if (part instanceof CostSacrifice) {
-                CostSacrifice sacCost = (CostSacrifice) part;
-                String valid = sacCost.getType();
-                int amount = Integer.parseInt(sacCost.getAmount());
-                List<Card> list = AbilityUtils.filterListByType(p.getCardsIn(ZoneType.Battlefield), valid, ability);
-
-                if (list.size() < amount) {
-                    // unable to pay (not enough cards)
-                    return false;
-                }
-
-                GuiUtils.clearPanelSelections();
-                GuiUtils.setPanelSelection(source);
-
-                List<Card> toSac = p.getController().choosePermanentsToSacrifice(list, amount, ability, false, true);
-                if ( toSac.size() != amount )
-                    return false;
-
-                CostPartWithList cpl = (CostPartWithList)part;
-                for(Card c : toSac) {
-                    cpl.executePayment(sourceAbility, c);
-                }
-                cpl.reportPaidCardsTo(sourceAbility);
+                int amount = Integer.parseInt(((CostSacrifice)part).getAmount());
+                List<Card> list = CardLists.getValidCards(p.getCardsIn(ZoneType.Battlefield), part.getType().split(";"), p, source);
+                boolean hasPaid = payCostPart(sourceAbility, (CostPartWithList)part, amount, list, "sacrifice");
+                if(!hasPaid) return false;
             }
             
             else if (part instanceof CostReturn) {
-                List<Card> choiceList = CardLists.getValidCards(p.getCardsIn(ZoneType.Battlefield), part.getType().split(";"), p, source);
+                List<Card> list = CardLists.getValidCards(p.getCardsIn(ZoneType.Battlefield), part.getType().split(";"), p, source);
                 int amount = getAmountFromPartX(part, source, sourceAbility);
-                
-                InputSelectCards inp = new InputSelectCardsFromList(amount, amount, choiceList);
-                inp.setMessage("Select %d card(s) to return to hand");
-                inp.setCancelAllowed(true);
-                
-                FThreads.setInputAndWait(inp);
-                if( inp.hasCancelled() || inp.getSelected().size() != amount)
-                    return false;
-
-                CostPartWithList cpl = (CostPartWithList)part;
-                for(Card c : inp.getSelected()) {
-                    cpl.executePayment(sourceAbility, c);
-                }
-                cpl.reportPaidCardsTo(sourceAbility);
+                boolean hasPaid = payCostPart(sourceAbility, (CostPartWithList)part, amount, list, "return to hand");
+                if(!hasPaid) return false;
             }
 
             else if (part instanceof CostDiscard) {
-                List<Card> choiceList = CardLists.getValidCards(p.getCardsIn(ZoneType.Hand), part.getType().split(";"), p, source);
+                List<Card> list = CardLists.getValidCards(p.getCardsIn(ZoneType.Hand), part.getType().split(";"), p, source);
                 int amount = getAmountFromPartX(part, source, sourceAbility);
-
-                InputSelectCards inp = new InputSelectCardsFromList(amount, amount, choiceList);
-                inp.setMessage("Select %d card(s) to discard");
-                inp.setCancelAllowed(true);
-                
-                FThreads.setInputAndWait(inp);
-                if( inp.hasCancelled() || inp.getSelected().size() != amount)
-                    return false;
-
-                CostPartWithList cpl = (CostPartWithList)part;
-                for(Card c : inp.getSelected()) {
-                    cpl.executePayment(sourceAbility, c);
-                }
-                cpl.reportPaidCardsTo(sourceAbility);
+                boolean hasPaid = payCostPart(sourceAbility, (CostPartWithList)part, amount, list, "discard");
+                if(!hasPaid) return false;
+            }
+            
+            else if (part instanceof CostTapType) {
+                List<Card> list = CardLists.getValidCards(p.getCardsIn(ZoneType.Battlefield), part.getType().split(";"), p, source);
+                list = CardLists.filter(list, Presets.UNTAPPED);
+                int amount = getAmountFromPartX(part, source, sourceAbility);
+                boolean hasPaid = payCostPart(sourceAbility, (CostPartWithList)part, amount, list, "tap");
+                if(!hasPaid) return false;
             }
             
             else if (part instanceof CostPartMana ) {
                 if (!((CostPartMana) part).getManaToPay().equals("0")) // non-zero costs require input
                     mayRemovePart = false; 
             } else
-                throw new RuntimeException("GameActionUtil.payCostDuringAbilityResolve - An unhandled type of cost has ocurred: " + part.getClass());
+                throw new RuntimeException("GameActionUtil.payCostDuringAbilityResolve - An unhandled type of cost was met: " + part.getClass());
 
             if( mayRemovePart )
                 remainingParts.remove(part);
@@ -585,9 +565,29 @@ public final class GameActionUtil {
         if (!(costPart instanceof CostPartMana ))
             throw new RuntimeException("GameActionUtil.payCostDuringAbilityResolve - The remaining payment type is not Mana.");
 
-        InputPayment toSet = new InputPayManaExecuteCommands(p, source + "\r\n", ability.getManaCost());
+        InputPayment toSet = current == null 
+                ? new InputPayManaExecuteCommands(p, source + "\r\n", ability.getManaCost())
+                : new InputPayManaExecuteCommands(p, source + "\r\n" + "Current Card: " + current + "\r\n" , ability.getManaCost());
         FThreads.setInputAndWait(toSet);
         return toSet.isPaid();
+    }
+
+    private static boolean payCostPart(SpellAbility sourceAbility, CostPartWithList cpl, int amount, List<Card> list, String actionName) {
+        if (list.size() < amount) return false;                     // unable to pay (not enough cards)
+
+        InputSelectCards inp = new InputSelectCardsFromList(amount, amount, list);
+        inp.setMessage("Select %d " + cpl.getDescriptiveType() + " card(s) to " + actionName);
+        inp.setCancelAllowed(true);
+        
+        FThreads.setInputAndWait(inp);
+        if( inp.hasCancelled() || inp.getSelected().size() != amount)
+            return false;
+
+        for(Card c : inp.getSelected()) {
+            cpl.executePayment(sourceAbility, c);
+        }
+        cpl.reportPaidCardsTo(sourceAbility);
+        return true;
     }
 
     // not restricted to combat damage, not restricted to dealing damage to

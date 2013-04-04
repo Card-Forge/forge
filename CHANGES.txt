@@ -47,6 +47,14 @@ The Import Pictures dialog, accessed via the Content Downloaders submenu, has re
 An importer option was added for including pictures in set-specific card directories that don't map to any currently known card.  This handles the case where people have collected complete sets of pics in anticipation of when Forge supports them.
 
 
+- Flip, Transform and Morph cards -
+When you mouse over a flip, transform or Morph (controlled by you) card in battlefield, you may hold SHIFT to see other state of that card at the side panel that displays card picture and details.
+
+
+- Milestone reached -
+There is now under 700 unsupported cards, and we should be at or near 85% for all the sets.
+
+
 ---------
 New Cards
 ---------
@@ -58,6 +66,30 @@ Breathstealer's Crypt
 Moonlight Bargain
 Auriok Siege Sled
 Burning-Tree Bloodscale
+Soulbright Flamekin
+Koskun Falls
+Warp World
+Zur's Weirding
+Vexing Shusher
+Benthic Explorers
+Leech Bonder
+Weight of Conscience
+Multani's Presence
+Lullmage Mentor
+Fold into AEther
+Hinder
+Swift Silence
+Cut the Tethers
+Delay
+Runed Halo
+Heroism
+Blazing Effigy
+Karmic Justice
+Harsh Mercy
+Kamahl's Summons
+Kaboom!
+Curtain of Light
+Dazzling Beauty
 
 
 ----------
@@ -65,6 +97,27 @@ New Planes
 ----------
 
 Sea of Sand
+Astral Arena
+Bloodhill Bastion
+Gavony
+Hedron Fields of Agadeem
+Kessig
+Nephalia
+The Zephyr Maze
+
+
+--------------------
+New Vanguard Avatars
+--------------------
+
+Akroma, Angel of Wrath Avatar
+Eight-and-a-Half-Tails Avatar
+Peacekeeper Avatar
+Stonehewer Giant Avatar
+Sliver Queen Avatar
+Jhoira of the Ghitu Avatar
+Kresh the Bloodbraided Avatar
+Karona, False God Avatar
 
 
 ------------

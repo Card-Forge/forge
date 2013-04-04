@@ -1,15 +1,19 @@
 package forge.card.ability.effects;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import forge.Card;
 import forge.Singletons;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.cardfactory.CardFactoryUtil;
+import forge.game.player.AIPlayer;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityStackInstance;
 import forge.card.spellability.SpellPermanent;
+import forge.card.trigger.TriggerType;
+import forge.gui.GuiChoose;
 
 public class CounterEffect extends SpellAbilityEffect {
     @Override
@@ -102,11 +106,11 @@ public class CounterEffect extends SpellAbilityEffect {
 
             // Destroy Permanent may be able to be turned into a SubAbility
             if (tgtSA.isAbility() && sa.hasParam("DestroyPermanent")) {
-                Singletons.getModel().getGame().getAction().destroy(tgtSACard);
+                Singletons.getModel().getGame().getAction().destroy(tgtSACard, sa);
             }
 
-            if (sa.hasParam("RememberTargets")) {
-                if (sa.getParam("RememberTargets").equals("True")) {
+            if (sa.hasParam("RememberCountered")) {
+                if (sa.getParam("RememberCountered").equals("True")) {
                     sa.getSourceCard().addRemembered(tgtSACard);
                 }
             }
@@ -131,7 +135,15 @@ public class CounterEffect extends SpellAbilityEffect {
         Singletons.getModel().getGame().getStack().remove(si);
 
         String destination =  srcSA.hasParam("Destination") ? srcSA.getParam("Destination") : "Graveyard";
-
+        if (srcSA.hasParam("DestinationChoice")) {//Hinder
+            final String[] pos = srcSA.getParam("DestinationChoice").split(",");
+            if (srcSA.getActivatingPlayer() instanceof AIPlayer) {
+                destination = pos[0];
+            } else {
+                final String prompt = "Select a destination to remove";
+                destination = GuiChoose.one(prompt, pos);
+            }
+        }
         if (tgtSA.isAbility()) {
             // For Ability-targeted counterspells - do not move it anywhere,
             // even if Destination$ is specified.
@@ -164,6 +176,13 @@ public class CounterEffect extends SpellAbilityEffect {
             throw new IllegalArgumentException("AbilityFactory_CounterMagic: Invalid Destination argument for card "
                     + srcSA.getSourceCard().getName());
         }
+        // Run triggers
+        final HashMap<String, Object> runParams = new HashMap<String, Object>();
+        runParams.put("Player", tgtSA.getActivatingPlayer());
+        runParams.put("Card", tgtSA.getSourceCard());
+        runParams.put("Cause", srcSA.getSourceCard());
+        srcSA.getActivatingPlayer().getGame().getTriggerHandler().runTrigger(TriggerType.Countered, runParams, false);
+        
 
         if (!tgtSA.isAbility()) {
             System.out.println("Send countered spell to " + destination);

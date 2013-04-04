@@ -1,0 +1,10 @@
+Name:Astral Arena
+ManaCost:no cost
+Types:Plane Kolbahan
+S:Mode$ Continuous | EffectZone$ Command | GlobalRule$ No more than one creature can attack each combat. | Description$ No more than one creature can attack each combat.
+S:Mode$ Continuous | EffectZone$ Command | GlobalRule$ No more than one creature can block each combat. | Description$ No more than one creature can block each combat.
+T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever you roll Chaos, CARDNAME deals 2 damage to each creature.
+SVar:RolledChaos:AB$ DamageAll | Cost$ 0 | NumDmg$ 2 | ValidCards$ Creature | ValidDescription$ each creature.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/astral_arena.jpg
+Oracle:No more than one creature can attack each combat.\nNo more than one creature can block each combat.\nWhenever you roll {C}, Astral Arena deals 2 damage to each creature.
+SetInfo:PC2 Common

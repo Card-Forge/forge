@@ -59,15 +59,6 @@ public class CostUntapType extends CostPartWithList {
     public boolean isReusable() { return true; }
 
     
-    /**
-     * Gets the description.
-     * 
-     * @return the description
-     */
-    public final String getDescription() {
-        return this.getTypeDescription() == null ? this.getType() : this.getTypeDescription();
-    }
-
     /*
      * (non-Javadoc)
      * 
@@ -79,11 +70,11 @@ public class CostUntapType extends CostPartWithList {
         sb.append("Untap ");
 
         final Integer i = this.convertAmount();
-        final String desc = this.getDescription();
+        final String desc = this.getDescriptiveType();
 
         sb.append(Cost.convertAmountTypeToWords(i, this.getAmount(), " tapped " + desc));
 
-        if (this.getType().contains("YouDontCtrl")) {
+        if (this.getType().contains("OppCtrl")) {
             sb.append(" an opponent controls");
         } else if (this.getType().contains("YouCtrl")) {
             sb.append(" you control");
@@ -113,8 +104,10 @@ public class CostUntapType extends CostPartWithList {
      * forge.Card, forge.Player, forge.card.cost.Cost)
      */
     @Override
-    public final boolean canPay(final SpellAbility ability, final Card source, final Player activator, final Cost cost, final GameState game) {
-        List<Card> typeList = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
+    public final boolean canPay(final SpellAbility ability) {
+        final Player activator = ability.getActivatingPlayer();
+        final Card source = ability.getSourceCard();
+        List<Card> typeList = activator.getGame().getCardsIn(ZoneType.Battlefield);
 
         typeList = CardLists.getValidCards(typeList, this.getType().split(";"), activator, source);
 
@@ -159,7 +152,7 @@ public class CostUntapType extends CostPartWithList {
             }
         }
         InputSelectCards inp = new InputSelectCardsFromList(c, c, typeList);
-        inp.setMessage("Select a " + getDescription() + " to untap (%d left)");
+        inp.setMessage("Select a " + getDescriptiveType() + " to untap (%d left)");
         FThreads.setInputAndWait(inp);
         if( inp.hasCancelled() || inp.getSelected().size() != c )
             return false;

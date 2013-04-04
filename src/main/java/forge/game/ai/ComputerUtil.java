@@ -254,7 +254,7 @@ public class ComputerUtil {
         final SpellAbility newSA = sa.copyWithNoManaCost();
         newSA.setActivatingPlayer(ai);
 
-        if (!ComputerUtilCost.canPayAdditionalCosts(newSA, ai, game)) {
+        if (!ComputerUtilCost.canPayAdditionalCosts(newSA, ai)) {
             return;
         }
 
@@ -278,14 +278,13 @@ public class ComputerUtil {
      *            a {@link forge.card.spellability.SpellAbility} object.
      */
     public static final void playNoStack(final AIPlayer ai, final SpellAbility sa, final GameState game) {
+        sa.setActivatingPlayer(ai);
         // TODO: We should really restrict what doesn't use the Stack
         if (ComputerUtilCost.canPayCost(sa, ai)) {
             final Card source = sa.getSourceCard();
             if (sa.isSpell() && !source.isCopiedSpell()) {
                 sa.setSourceCard(game.getAction().moveToStack(source));
             }
-
-            sa.setActivatingPlayer(ai);
 
             final Cost cost = sa.getPayCosts();
             if (cost == null) {
@@ -1217,7 +1216,7 @@ public class ComputerUtil {
      * @param min
      * @return
      */
-    public static List<Card> getCardsToDiscardFromOpponent(AIPlayer chooser, Player discarder, SpellAbility sa, List<Card> validCards, int min) {
+    public static List<Card> getCardsToDiscardFromOpponent(AIPlayer chooser, Player discarder, SpellAbility sa, List<Card> validCards, int min, int max) {
         List<Card> goodChoices = CardLists.filter(validCards, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
@@ -1258,11 +1257,11 @@ public class ComputerUtil {
      * @param min
      * @return
      */
-    public static List<Card> getCardsToDiscardFromFriend(AIPlayer aiChooser, Player p, SpellAbility sa, List<Card> validCards, int min) {
+    public static List<Card> getCardsToDiscardFromFriend(AIPlayer aiChooser, Player p, SpellAbility sa, List<Card> validCards, int min, int max) {
         if (p instanceof AIPlayer) { // ask that ai player what he would like to discard
-            return ((AIPlayer) p).getAi().getCardsToDiscard(min, validCards, sa);
+            return ((AIPlayer) p).getAi().getCardsToDiscard(min, max, validCards, sa);
         } 
         // no special options for human or remote friends
-        return getCardsToDiscardFromOpponent(aiChooser, p, sa, validCards, min);
+        return getCardsToDiscardFromOpponent(aiChooser, p, sa, validCards, min, max);
     }
 }

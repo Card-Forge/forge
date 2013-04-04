@@ -7,6 +7,8 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.concurrent.Callable;
+import java.util.concurrent.FutureTask;
 
 import javax.swing.JDialog;
 import javax.swing.JFrame;
@@ -16,6 +18,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import forge.Card;
+import forge.FThreads;
 import forge.gui.match.CMatchUI;
 import forge.item.InventoryItem;
 
@@ -102,25 +105,39 @@ public class GuiChoose {
             }
         }
         
-        ListChooser<T> c = new ListChooser<T>(message, min, max, choices);
-        final JList list = c.getJList();
-        list.addListSelectionListener(new ListSelectionListener() {
+        Callable<List<T>> showChoice = new Callable<List<T>>() {
             @Override
-            public void valueChanged(final ListSelectionEvent ev) {
-                if (list.getSelectedValue() instanceof Card) {
-                    CMatchUI.SINGLETON_INSTANCE.setCard((Card) list.getSelectedValue());
-
-                    GuiUtils.clearPanelSelections();
-                    GuiUtils.setPanelSelection((Card) list.getSelectedValue());
-                }
-                if (list.getSelectedValue() instanceof InventoryItem) {
-                    CMatchUI.SINGLETON_INSTANCE.setCard((InventoryItem) list.getSelectedValue());
-                }
+            public List<T> call() {
+                ListChooser<T> c = new ListChooser<T>(message, min, max, choices);
+                final JList list = c.getJList();
+                list.addListSelectionListener(new ListSelectionListener() {
+                    @Override
+                    public void valueChanged(final ListSelectionEvent ev) {
+                        if (list.getSelectedValue() instanceof Card) {
+                            CMatchUI.SINGLETON_INSTANCE.setCard((Card) list.getSelectedValue());
+        
+                            GuiUtils.clearPanelSelections();
+                            GuiUtils.setPanelSelection((Card) list.getSelectedValue());
+                        }
+                        if (list.getSelectedValue() instanceof InventoryItem) {
+                            CMatchUI.SINGLETON_INSTANCE.setCard((InventoryItem) list.getSelectedValue());
+                        }
+                    }
+                });
+                c.show();
+                GuiUtils.clearPanelSelections();
+                return c.getSelectedValues();
             }
-        });
-        c.show();
-        GuiUtils.clearPanelSelections();
-        return c.getSelectedValues();
+        };
+
+        FutureTask<List<T>> future = new FutureTask<List<T>>(showChoice);
+        FThreads.invokeInEDTAndWait(future);
+        try { 
+            return future.get();
+        } catch (Exception e) { // should be no exception here
+            e.printStackTrace();
+        }
+        return null;
     }
 
     // Nothing to choose here. Code uses this to just show a card.
@@ -142,39 +159,54 @@ public class GuiChoose {
     }
 
     
-    public static <T> List<T> order(final String title, final String top, int remainingObjects,
-            final List<T> sourceChoices, List<T> destChoices, Card referenceCard, boolean sideboardingMode) {
+    public static <T> List<T> order(final String title, final String top, final int remainingObjects,
+            final List<T> sourceChoices, final List<T> destChoices, final Card referenceCard, final boolean sideboardingMode) {
         // An input box for handling the order of choices.
-        final JFrame frame = new JFrame();
-        DualListBox<T> dual = new DualListBox<T>(remainingObjects, sourceChoices, destChoices);
-        dual.setSecondColumnLabelText(top);
+        
+        Callable<List<T>> callable = new Callable<List<T>>() {
+            @Override
+            public List<T> call() throws Exception {
+                final JFrame frame = new JFrame();
+                DualListBox<T> dual = new DualListBox<T>(remainingObjects, sourceChoices, destChoices);
+                dual.setSecondColumnLabelText(top);
+        
+                frame.setLayout(new BorderLayout());
+                frame.setSize(dual.getPreferredSize());
+                frame.add(dual);
+                frame.setTitle(title);
+                frame.setVisible(false);
+        
+                dual.setSideboardMode(sideboardingMode);
+        
+                final JDialog dialog = new JDialog(frame, true);
+                dialog.setTitle(title);
+                dialog.setContentPane(dual);
+                dialog.setSize(dual.getPreferredSize());
+                dialog.setLocationRelativeTo(null);
+                dialog.pack();
+                dialog.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+                if (referenceCard != null) {
+                    CMatchUI.SINGLETON_INSTANCE.setCard(referenceCard);
+                    // MARKED FOR UPDATE
+                }
+                dialog.setVisible(true);
+        
+                List<T> objects = dual.getOrderedList();
+        
+                dialog.dispose();
+                GuiUtils.clearPanelSelections();
+                return objects;
+            }
+        };
 
-        frame.setLayout(new BorderLayout());
-        frame.setSize(dual.getPreferredSize());
-        frame.add(dual);
-        frame.setTitle(title);
-        frame.setVisible(false);
-
-        dual.setSideboardMode(sideboardingMode);
-
-        final JDialog dialog = new JDialog(frame, true);
-        dialog.setTitle(title);
-        dialog.setContentPane(dual);
-        dialog.setSize(dual.getPreferredSize());
-        dialog.setLocationRelativeTo(null);
-        dialog.pack();
-        dialog.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
-        if (referenceCard != null) {
-            CMatchUI.SINGLETON_INSTANCE.setCard(referenceCard);
-            // MARKED FOR UPDATE
+        FutureTask<List<T>> ft = new FutureTask<List<T>>(callable);
+        FThreads.invokeInEDTAndWait(ft);
+        try {
+            return ft.get();
+        } catch (Exception e) { // we have waited enough
+            e.printStackTrace();
         }
-        dialog.setVisible(true);
-
-        List<T> objects = dual.getOrderedList();
-
-        dialog.dispose();
-        GuiUtils.clearPanelSelections();
-        return objects;
+        return null;
     }
 
     // If comparer is NULL, T has to be comparable. Otherwise you'll get an exception from inside the Arrays.sort() routine

@@ -24,7 +24,6 @@ import forge.game.GameState;
 import forge.game.player.Player;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
-import forge.gui.match.CMatchUI;
 import forge.view.ButtonUtil;
 
 /**
@@ -44,9 +43,9 @@ public class InputCleanup extends InputBase {
      * TODO: Write javadoc for Constructor.
      * @param game
      */
-    public InputCleanup(GameState game) {
-        super();
-        this.game = game;
+    public InputCleanup(Player player) {
+        super(player);
+        this.game = player.getGame();
     }
 
     /** {@inheritDoc} */
@@ -59,7 +58,7 @@ public class InputCleanup extends InputBase {
         final int max = active.getMaxHandSize();
         // goes to the next phase
         if (active.isUnlimitedHandSize() || n <= max || n <= 0 || active != turnOwner) {
-            active.getController().passPriority();
+            passPriority();
             return;
         }
         ButtonUtil.disableAll();
@@ -69,7 +68,7 @@ public class InputCleanup extends InputBase {
         final StringBuffer sb = new StringBuffer();
         sb.append("Cleanup Phase: You can only have a maximum of ").append(max);
         sb.append(" cards, you currently have ").append(n).append(" cards in your hand - select a card to discard");
-        CMatchUI.SINGLETON_INSTANCE.showMessage(sb.toString());
+        showMessage(sb.toString());
     }
 
     /** {@inheritDoc} */

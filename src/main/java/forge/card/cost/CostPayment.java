@@ -22,6 +22,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import forge.Card;
+import forge.card.mana.ManaCost;
 import forge.card.spellability.SpellAbility;
 import forge.game.GameState;
 import forge.game.player.AIPlayer;
@@ -77,7 +78,7 @@ public class CostPayment {
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
-    public static boolean canPayAdditionalCosts(final GameState game, final Cost cost, final SpellAbility ability) {
+    public static boolean canPayAdditionalCosts(final Cost cost, final SpellAbility ability) {
         if (cost == null) {
             return true;
         }
@@ -90,7 +91,7 @@ public class CostPayment {
         }
 
         for (final CostPart part : cost.getCostParts()) {
-            if (!part.canPay(ability, card, activator, cost, game)) {
+            if (!part.canPay(ability)) {
                 return false;
             }
         }
@@ -179,7 +180,7 @@ public class CostPayment {
         final List<CostPart> parts = this.cost.getCostParts();
 
         if (this.getCost().getCostMana() == null) {
-            parts.add(new CostPartMana("0", 0, false));
+            parts.add(new CostPartMana(ManaCost.ZERO, false));
         }
 
         Map<Class<? extends CostPart>, PaymentDecision> decisions = new HashMap<Class<? extends CostPart>, PaymentDecision>();

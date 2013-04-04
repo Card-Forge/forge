@@ -6,7 +6,7 @@ SVar:DBChoose:DB$ ChooseCard | Defined$ You | Amount$ 1 | AtRandom$ True | Choic
 SVar:DBChange:DB$ ChangeZone | Origin$ Library | Destination$ Hand | Defined$ ChosenCard | StackDescription$ None | SubAbility$ DBShuffle | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ3
 SVar:DBShuffle:DB$ ChangeZoneAll | ChangeType$ Card.IsRemembered | Origin$ Library | Destination$ Library | Shuffle$ True | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:X:Count$DifferentCardNamesRemembered
+SVar:X:Count$DifferentCardNames_Creature.IsRemembered
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/signal_the_clans.jpg
 Oracle:Search your library for three creature cards and reveal them. If you reveal three cards with different names, choose one of them at random and put that card into your hand. Shuffle the rest into your library.

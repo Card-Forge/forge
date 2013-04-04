@@ -641,7 +641,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
             }
         }
 
-        this.addAssignedDamage(damageToDo, source);
+        this.assignedDamage.put(source, damageToDo);
         GameActionUtil.executeDamageDealingEffects(source, damageToDo);
         GameActionUtil.executeDamageToPlayerEffects(this, source, damageToDo);
 
@@ -914,20 +914,6 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
      */
     public final void clearAssignedDamage() {
         this.assignedDamage.clear();
-    }
-
-    /**
-     * <p>
-     * addAssignedDamage.
-     * </p>
-     * 
-     * @param n
-     *            a int.
-     * @param source
-     *            a {@link forge.Card} object.
-     */
-    public final void addAssignedDamage(final int n, final Card source) {
-        this.assignedDamage.put(source, n);
     }
 
     /**
@@ -1384,7 +1370,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
                 this.numDrawnThisDrawStep++;
 
             // Miracle draws
-            if (this.numDrawnThisTurn == 1 && game.getPhaseHandler().getTurn() != 0) {
+            if (this.numDrawnThisTurn == 1 && game.getPhaseHandler().getTurn() != 1) {
                 drawMiracle(c);
             }
 
@@ -2902,20 +2888,6 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
     public void setStartingHandSize(int shs) {
 
         this.startingHandSize = shs;
-    }
-
-    /**
-     * TODO: Write javadoc for this method.
-     * @param card
-     * @param ab
-     */
-    public void playSpellAbility(Card c, SpellAbility ab) {
-        if (ab == Ability.PLAY_LAND_SURROGATE)
-            this.playLand(c);
-        else {
-            game.getActionPlay().playSpellAbility(ab, this);
-        }
-        game.getPhaseHandler().setPriority(this);
     }
 
     /**
