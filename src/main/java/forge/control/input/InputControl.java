@@ -22,8 +22,10 @@ import java.util.Stack;
 import forge.Singletons;
 import forge.game.GameState;
 import forge.game.GameType;
+import forge.game.MatchController;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
+import forge.game.player.HumanPlayer;
 import forge.game.player.Player;
 import forge.game.player.PlayerController;
 import forge.game.zone.MagicStack;
@@ -116,16 +118,14 @@ public class InputControl extends MyObservable implements java.io.Serializable {
      * @return a {@link forge.control.input.InputBase} object.
      */
     public final Input getActualInput(GameState game) {
-        if ( !game.hasMulliganned() )
-        {
-            if(game.getType() == GameType.Commander)
-            {
-                return new InputPartialParisMulligan(Singletons.getModel().getMatch(), Singletons.getControl().getPlayer());
-            }
-            else
-            {
-                return new InputMulligan(Singletons.getModel().getMatch(), Singletons.getControl().getPlayer());
-            }            
+        if (!this.inputStack.isEmpty()) { // incoming input to Control
+            return this.inputStack.peek();
+        }
+
+        if ( !game.hasMulliganned() ) {
+            HumanPlayer human = Singletons.getControl().getPlayer();
+            MatchController match = Singletons.getModel().getMatch();
+            return game.getType() == GameType.Commander ? new InputPartialParisMulligan(match, human) : new InputMulligan(match, human);
         }
         final PhaseHandler handler = game.getPhaseHandler();
         final PhaseType phase = handler.getPhase();
@@ -134,13 +134,6 @@ public class InputControl extends MyObservable implements java.io.Serializable {
         if (priority == null) 
             throw new RuntimeException("No player has priority!");
         PlayerController pc = priority.getController();
-
-
-
-        if (!this.inputStack.isEmpty()) { // incoming input to Control
-            return this.inputStack.peek();
-        }
-
 
         
         // If the Phase we're in doesn't allow for Priority, move to next phase
