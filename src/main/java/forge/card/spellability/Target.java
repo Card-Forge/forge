@@ -272,7 +272,7 @@ public class Target {
      *
      * @return the min targets
      */
-    public final String getMinTargets() {
+    private final String getMinTargets() {
         return this.minTargets;
     }
 
