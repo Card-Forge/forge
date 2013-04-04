@@ -13527,6 +13527,7 @@ src/main/java/forge/card/ability/ai/AlwaysPlayAi.java -text
 src/main/java/forge/card/ability/ai/AnimateAi.java -text
 src/main/java/forge/card/ability/ai/AnimateAllAi.java -text
 src/main/java/forge/card/ability/ai/AttachAi.java -text
+src/main/java/forge/card/ability/ai/BecomesBlockedAi.java -text
 src/main/java/forge/card/ability/ai/BondAi.java -text
 src/main/java/forge/card/ability/ai/CanPlayAsDrawbackAi.java -text
 src/main/java/forge/card/ability/ai/CannotPlayAi.java -text
