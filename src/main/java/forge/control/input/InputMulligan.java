@@ -35,6 +35,7 @@ import forge.gui.framework.SDisplayUtil;
 import forge.gui.match.CMatchUI;
 import forge.gui.match.nonsingleton.VField;
 import forge.gui.match.views.VMessage;
+import forge.util.Lang;
 import forge.view.ButtonUtil;
  /**
   * <p>
@@ -58,20 +59,21 @@ public class InputMulligan extends InputBase {
     /** {@inheritDoc} */
     @Override
     public final void showMessage() {
-        ButtonUtil.setButtonText("No", "Yes");
+        ButtonUtil.setButtonText("Keep", "Mulligan");
         ButtonUtil.enableAllFocusOk();
 
         GameState game = match.getCurrentGame();
         Player startingPlayer = game.getPhaseHandler().getPlayerTurn();
 
         StringBuilder sb = new StringBuilder();
-        sb.append(startingPlayer.getName()).append(" is going first. ");
-
-        if (!startingPlayer.equals(player)) {
-            sb.append("You are going ").append(game.getOrdinalPosition(player, startingPlayer)).append(". ");
+        if( startingPlayer == player ) {
+            sb.append("You are going first.\n");
+        } else {
+            sb.append(startingPlayer.getName()).append(" is going first. ");
+            sb.append("You are going ").append(Lang.getOrdinal(game.getPosition(player, startingPlayer))).append(".\n");
         }
 
-        sb.append("Do you want to Mulligan?");
+        sb.append("Do you want to keep your hand?");
         showMessage(sb.toString());
     }
 
