@@ -51,6 +51,10 @@ An importer option was added for including pictures in set-specific card directo
 When you mouse over a flip, transform or Morph (controlled by you) card in battlefield, you may hold SHIFT to see other state of that card at the side panel that displays card picture and details.
 
 
+- Milestone reached -
+There is now under 700 unsupported cards, and we should be at or near 85% for all the sets.
+
+
 ---------
 New Cards
 ---------
@@ -79,6 +83,13 @@ Cut the Tethers
 Delay
 Runed Halo
 Heroism
+Blazing Effigy
+Karmic Justice
+Harsh Mercy
+Kamahl's Summons
+Kaboom!
+Curtain of Light
+Dazzling Beauty
 
 
 ----------
@@ -86,6 +97,13 @@ New Planes
 ----------
 
 Sea of Sand
+Astral Arena
+Bloodhill Bastion
+Gavony
+Hedron Fields of Agadeem
+Kessig
+Nephalia
+The Zephyr Maze
 
 
 --------------------
@@ -98,6 +116,8 @@ Peacekeeper Avatar
 Stonehewer Giant Avatar
 Sliver Queen Avatar
 Jhoira of the Ghitu Avatar
+Kresh the Bloodbraided Avatar
+Karona, False God Avatar
 
 
 ------------
