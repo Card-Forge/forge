@@ -120,6 +120,7 @@ public class InputAttack extends InputBase {
             // just to make sure the attack symbol is marked
             human.getZone(ZoneType.Battlefield).updateObservers();
             CombatUtil.showCombat();
+            ButtonUtil.enableOnlyOk();
         }
         else {
             SDisplayUtil.remind(VMessage.SINGLETON_INSTANCE);
