@@ -213,7 +213,7 @@ public class PlayerControllerHuman extends PlayerController {
     @Override
     public Integer announceRequirements(SpellAbility ability, String announce, boolean canChooseZero) {
         List<Object> options = new ArrayList<Object>();
-        for(int i = canChooseZero ? 0 : 1; i <= 20; i++)
+        for(int i = canChooseZero ? 0 : 1; i < 10; i++)
             options.add(Integer.valueOf(i));
         options.add("Other amount");
         
