@@ -6,6 +6,7 @@ SVar:DBChooseType:DB$ ChooseType | Defined$ Player.IsRemembered | Type$ Creature
 SVar:DBRemember:DB$ PumpAll | ValidCards$ Creature.ChosenType | RememberAllPumped$ True
 SVar:DBDestroyAll:DB$ DestroyAll | ValidCards$ Creature.IsNotRemembered | NoRegen$ True | SubAbility$ DBCleanup | StackDescription$ None
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/harsh_mercy.jpg
 Oracle:Each player chooses a creature type. Destroy all creatures that aren't of a type chosen this way. They can't be regenerated.
 SetInfo:ONS Rare
