@@ -240,14 +240,14 @@ public class PlayerControllerHuman extends PlayerController {
      * @see forge.game.player.PlayerController#choosePermanentsToSacrifice(java.util.List, int, forge.card.spellability.SpellAbility, boolean, boolean)
      */
     @Override
-    public List<Card> choosePermanentsToSacrifice(List<Card> validTargets, int amount, SpellAbility sa, boolean destroy, boolean isOptional) {
+    public List<Card> choosePermanentsToSacrifice(List<Card> validTargets, String validMessage, int amount, SpellAbility sa, boolean destroy, boolean isOptional) {
         int max = Math.min(amount, validTargets.size());
         if (max == 0)
             return new ArrayList<Card>();
 
         InputSelectCards inp = new InputSelectCardsFromList(isOptional ? 0 : amount, max, validTargets);
         // TODO: Either compose a message here, or pass it as parameter from caller. 
-        inp.setMessage("Select %d card(s) to sacrifice");
+        inp.setMessage("Select %d " + validMessage + "(s) to sacrifice");
         
         FThreads.setInputAndWait(inp);
         if( inp.hasCancelled() )

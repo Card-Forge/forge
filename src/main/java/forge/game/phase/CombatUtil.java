@@ -1207,7 +1207,7 @@ public class CombatUtil {
                         final Player opponent = Singletons.getModel().getGame().getCombat().getDefendingPlayerRelatedTo(c).get(0);
                         //List<Card> list = AbilityUtils.filterListByType(opponent.getCardsIn(ZoneType.Battlefield), "Permanent", this);
                         final List<Card> list = opponent.getCardsIn(ZoneType.Battlefield);
-                        List<Card> toSac = opponent.getController().choosePermanentsToSacrifice(list, a, this, false, false);
+                        List<Card> toSac = opponent.getController().choosePermanentsToSacrifice(list, "Card", a, this, false, false);
 
                         for(Card sacd : toSac) {
                             final GameState game = Singletons.getModel().getGame(); 
