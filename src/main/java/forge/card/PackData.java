@@ -18,26 +18,30 @@
 
 package forge.card;
 
+import org.apache.commons.lang.NullArgumentException;
+
 import com.google.common.base.Function;
 
 public class PackData {
     private final String edition;
+    private final String landEdition;
+    private final int    cntLands;
+    
     public final String getEdition() {
         return edition;
     }
 
-    private final String landEdition;
     public final String getLandEdition() {
         return landEdition == null ? edition : landEdition;
     }
 
-    private final int cntLands;
     public int getCntLands() {
         return cntLands;
     }
-
+    
     public PackData(String edition0, String landEdition0, int nBasicLands)
     {
+        if (null == edition0) { throw new NullArgumentException("edition0"); }
         edition = edition0;
         landEdition = landEdition0;
         cntLands = nBasicLands;
@@ -49,4 +53,24 @@ public class PackData {
             return arg1.edition;
         }
     };
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (this.getClass() != obj.getClass()) {
+            return false;
+        }
+        PackData other = (PackData)obj;
+        return edition.equals(other.edition);
+    }
+
+    @Override
+    public int hashCode() {
+        return edition.hashCode();
+    }
 }

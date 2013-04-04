@@ -218,8 +218,11 @@ public class ImageCache {
             return getImageKey((CardPrinted)ii, altState, true);
         if ( ii instanceof TournamentPack )
             return ImageCache.TOURNAMENTPACK_PREFIX + ((TournamentPack)ii).getEdition();
-        if ( ii instanceof BoosterPack )
-            return ImageCache.BOOSTER_PREFIX + ((BoosterPack)ii).getEdition();
+        if ( ii instanceof BoosterPack ) {
+            BoosterPack bp = (BoosterPack)ii;
+            String suffix = (1 >= bp.getBoosterData().getArtIndices()) ? "" : ("_" + bp.getArtIndex());
+            return ImageCache.BOOSTER_PREFIX + bp.getEdition() + suffix;
+        }
         if ( ii instanceof FatPack )
             return ImageCache.FATPACK_PREFIX + ((FatPack)ii).getEdition();
         if ( ii instanceof PreconDeck )

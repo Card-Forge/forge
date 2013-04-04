@@ -14,37 +14,39 @@ public class BoosterData extends PackData {
     private final int nSpecial;
     private final int nDoubleFaced;
     private final int foilRate;
+    private final int artIndices;
     private static final int CARDS_PER_BOOSTER = 15;
 
-    public BoosterData(final String edition, final String editionLand, final int nC, final int nU, final int nR, final int nS, final int nDF) {
+    public BoosterData(String edition, String editionLand, int nC, int nU, int nR, int nS, int nDF, int artIndices) {
         // if this booster has more that 10 cards, there must be a land in
         // 15th slot unless it's already taken
-        this(edition, editionLand, nC, nU, nR, nS, nDF, (nC + nR + nU + nS + nDF) > 10 ? BoosterData.CARDS_PER_BOOSTER - nC - nR - nU
-                - nS - nDF : 0, 68);
+        this(edition, editionLand, nC, nU, nR, nS, nDF, artIndices,
+                (nC + nR + nU + nS + nDF) > 10 ? BoosterData.CARDS_PER_BOOSTER - nC - nR - nU - nS - nDF : 0, 68);
     }
 
-    public BoosterData(final String edition0, final String editionLand, final int nC, final int nU, final int nR, final int nS, final int nDF, final int nL,
-            final int oneFoilPer) {
-        super(edition0, editionLand, nL > 0 ? nL : 0);
+    public BoosterData(String edition, String editionLand, int nC, int nU, int nR, int nS, int nDF, int artIndices0, int nL, int oneFoilPer) {
+        super(edition, editionLand, nL > 0 ? nL : 0);
         this.nCommon = nC;
         this.nUncommon = nU;
         this.nRare = nR;
         this.nSpecial = nS;
         this.nDoubleFaced = nDF;
         this.foilRate = oneFoilPer;
-    }
-
-    public final int getCommon() {
-        return this.nCommon;
+        artIndices = artIndices0;
     }
 
     public final Predicate<CardPrinted> getEditionFilter() {
         return IPaperCard.Predicates.printedInSets(getEdition());
     }
+    
     public final Predicate<CardPrinted> getLandEditionFilter() {
         return IPaperCard.Predicates.printedInSets(getLandEdition());
     }
     
+    public final int getCommon() {
+        return this.nCommon;
+    }
+
     public final int getUncommon() {
         return this.nUncommon;
     }
@@ -69,6 +71,10 @@ public class BoosterData extends PackData {
         return this.foilRate;
     }
     
+    public int getArtIndices() {
+        return artIndices;
+    }
+
     private void _append(StringBuilder s, int val, String name) {
         if (0 >= val) {
             return;
@@ -141,6 +147,7 @@ public class BoosterData extends PackData {
             int nR = section.getInt("Rares", 0);
             int nS = section.getInt("Special", 0);
             int nDf = section.getInt("DoubleFaced", 0);
+            int artIndices = section.getInt("Images", 1);
             int nLand = section.getInt("BasicLands", 0);
             int nFoilRate = section.getInt("FoilRate", 68);
             String edition = section.get("Set");
@@ -149,7 +156,7 @@ public class BoosterData extends PackData {
                 editionLand = edition;
             }
             
-            return new BoosterData(edition, editionLand, nC, nU, nR, nS, nDf, nLand, nFoilRate);
+            return new BoosterData(edition, editionLand, nC, nU, nR, nS, nDf, artIndices, nLand, nFoilRate);
         }
     }
 }
