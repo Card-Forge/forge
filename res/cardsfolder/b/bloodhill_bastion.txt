@@ -1,0 +1,11 @@
+Name:Bloodhill Bastion
+ManaCost:no cost
+Types:Plane Equilor
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | TriggerZones$ Command | ValidCard$ Creature | Execute$ TrigPump | TriggerDescription$ Whenever a creature enters the battlefield, it gains double strike and haste until end of turn.
+SVar:TrigPump:AB$ Pump | Cost$ 0 | Defined$ TriggeredCard | KW$ Double Strike & Haste
+T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever you roll Chaos, exile target nontoken creature you control, then return it to the battlefield under your control.
+SVar:RolledChaos:AB$ ChangeZone | Cost$ 0 | ValidTgts$ Creature.nonToken+YouCtrl | TgtPrompt$ Select target non-Token creature you control | Origin$ Battlefield | Destination$ Exile | RememberTargets$ True | ForgetOtherTargets$ True | SubAbility$ RestorationReturn
+SVar:RestorationReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | GainControl$ True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/bloodhill_bastion.jpg
+Oracle:Whenever a creature enters the battlefield, it gains double strike and haste until end of turn.\nWhenever you roll {C}, exile target nontoken creature you control, then return it to the battlefield under your control.
+SetInfo:PC2 Common

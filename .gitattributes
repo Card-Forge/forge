@@ -559,6 +559,7 @@ res/cardsfolder/a/assemble_the_legion.txt -text
 res/cardsfolder/a/assembly_hall.txt -text
 res/cardsfolder/a/assembly_worker.txt svneol=native#text/plain
 res/cardsfolder/a/assert_authority.txt svneol=native#text/plain
+res/cardsfolder/a/astral_arena.txt -text
 res/cardsfolder/a/astral_slide.txt svneol=native#text/plain
 res/cardsfolder/a/astral_steel.txt svneol=native#text/plain
 res/cardsfolder/a/astrolabe.txt svneol=native#text/plain
@@ -1078,6 +1079,7 @@ res/cardsfolder/b/bloodfray_giant.txt -text
 res/cardsfolder/b/bloodghast.txt svneol=native#text/plain
 res/cardsfolder/b/bloodgift_demon.txt -text
 res/cardsfolder/b/bloodhall_ooze.txt svneol=native#text/plain
+res/cardsfolder/b/bloodhill_bastion.txt -text
 res/cardsfolder/b/bloodhunter_bat.txt -text
 res/cardsfolder/b/bloodhusk_ritualist.txt svneol=native#text/plain
 res/cardsfolder/b/bloodied_ghost.txt svneol=native#text/plain
@@ -4024,6 +4026,7 @@ res/cardsfolder/g/gather_the_townsfolk.txt -text
 res/cardsfolder/g/gatherer_of_graces.txt svneol=native#text/plain
 res/cardsfolder/g/gatstaf_shepherd_gatstaf_howler.txt -text
 res/cardsfolder/g/gauntlet_of_might.txt svneol=native#text/plain
+res/cardsfolder/g/gavony.txt -text
 res/cardsfolder/g/gavony_ironwright.txt -text
 res/cardsfolder/g/gavony_township.txt -text
 res/cardsfolder/g/gaze_of_adamaro.txt svneol=native#text/plain
@@ -4813,6 +4816,7 @@ res/cardsfolder/h/heckling_fiends.txt -text
 res/cardsfolder/h/hedge_troll.txt svneol=native#text/plain
 res/cardsfolder/h/hedron_crab.txt svneol=native#text/plain
 res/cardsfolder/h/hedron_field_purists.txt -text
+res/cardsfolder/h/hedron_fields_of_agadeem.txt -text
 res/cardsfolder/h/hedron_matrix.txt svneol=native#text/plain
 res/cardsfolder/h/hedron_rover.txt svneol=native#text/plain
 res/cardsfolder/h/hedron_scrabbler.txt svneol=native#text/plain
@@ -5645,6 +5649,7 @@ res/cardsfolder/k/kemba_kha_regent.txt svneol=native#text/plain
 res/cardsfolder/k/kembas_legion.txt -text
 res/cardsfolder/k/kembas_skyguard.txt svneol=native#text/plain
 res/cardsfolder/k/kemuri_onna.txt svneol=native#text/plain
+res/cardsfolder/k/kessig.txt -text
 res/cardsfolder/k/kessig_cagebreakers.txt -text
 res/cardsfolder/k/kessig_malcontents.txt -text
 res/cardsfolder/k/kessig_recluse.txt -text
@@ -7144,6 +7149,7 @@ res/cardsfolder/n/nemata_grove_guardian.txt svneol=native#text/plain
 res/cardsfolder/n/nemesis_mask.txt svneol=native#text/plain
 res/cardsfolder/n/nemesis_of_reason.txt svneol=native#text/plain
 res/cardsfolder/n/nemesis_trap.txt -text
+res/cardsfolder/n/nephalia.txt -text
 res/cardsfolder/n/nephalia_drownyard.txt -text
 res/cardsfolder/n/nephalia_seakite.txt -text
 res/cardsfolder/n/nephalia_smuggler.txt -text
@@ -10880,6 +10886,7 @@ res/cardsfolder/t/the_tabernacle_at_pendrell_vale.txt svneol=native#text/plain
 res/cardsfolder/t/the_unspeakable.txt svneol=native#text/plain
 res/cardsfolder/t/the_very_soil_shall_shake.txt -text
 res/cardsfolder/t/the_wretched.txt -text svneol=unset#text/plain
+res/cardsfolder/t/the_zephyr_maze.txt -text
 res/cardsfolder/t/theft_of_dreams.txt svneol=native#text/plain
 res/cardsfolder/t/thelon_of_havenwood.txt -text
 res/cardsfolder/t/thelonite_druid.txt -text
