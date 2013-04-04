@@ -1,7 +1,13 @@
 Name:Brilliant Ultimatum
 ManaCost:W W U U U B B
 Types:Sorcery
-Text:Exile the top five cards of your library. An opponent separates those cards into two piles. You may play any number of cards from one of those piles without paying their mana costs.
+A:SP$ Mill | Cost$ W W U U U B B | Defined$ You | NumCards$ 5 | Destination$ Exile | RememberMilled$ True | SubAbility$ DBTwoPiles | SpellDescription$ Exile the top five cards of your library. An opponent separates those cards into two piles. You may play any number of cards from one of those piles without paying their mana costs.
+SVar:DBTwoPiles:DB$ TwoPiles | Defined$ You | DefinedCards$ Remembered | Separator$ Opponent | ChosenPile$ DBPlay | SubAbility$ DBCleanup
+SVar:DBPlay:DB$ RepeatEach | UseImprinted$ True | RepeatCards$ Card.IsRemembered | ChooseOrder$ True | Zone$ Exile | RepeatSubAbility$ DBPlayCard
+SVar:DBPlayCard:DB$ Play | Defined$ Imprinted | Controller$ You | WithoutManaCost$ True | Optional$ True
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:Y:Count$InYourLibrary
+SVar:NeedsToPlayVar:Y GE8
 SVar:Picture:http://www.wizards.com/global/images/magic/general/brilliant_ultimatum.jpg
 Oracle:Exile the top five cards of your library. An opponent separates those cards into two piles. You may play any number of cards from one of those piles without paying their mana costs.
 SetInfo:ALA Rare
