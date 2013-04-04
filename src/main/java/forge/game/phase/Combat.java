@@ -51,7 +51,7 @@ public class Combat {
     private final Map<Card, List<Card>> blockerMap = new TreeMap<Card, List<Card>>();
 
     private final Set<Card> blocked = new HashSet<Card>();
-    private final HashMap<Card, List<Card>> unblockedMap = new HashMap<Card, List<Card>>();
+    private final Set<Card> unblocked = new HashSet<Card>();
     private final HashMap<Card, Integer> defendingDamageMap = new HashMap<Card, Integer>();
 
     // Defenders are the Defending Player + Each controlled Planeswalker
@@ -83,7 +83,7 @@ public class Combat {
         this.resetAttackers();
         this.blocked.clear();
 
-        this.unblockedMap.clear();
+        this.unblocked.clear();
         this.defendingDamageMap.clear();
 
         this.attackingPlayer = null;
@@ -453,6 +453,13 @@ public class Combat {
         return this.blocked.contains(attacker);
     }
 
+    public final void setBlocked(final Card attacker) {
+        if (!this.blocked.contains(attacker)) {
+            this.blocked.add(attacker);
+            this.unblocked.remove(attacker);
+        }
+    }
+
     /**
      * <p>
      * addBlocker.
@@ -771,8 +778,6 @@ public class Combat {
     public void dealAssignedDamage() {
         // This function handles both Regular and First Strike combat assignment
 
-        final boolean bFirstStrike = Singletons.getModel().getGame().getPhaseHandler().is(PhaseType.COMBAT_FIRST_STRIKE_DAMAGE);
-
         final HashMap<Card, Integer> defMap = this.getDefendingDamageMap();
 
         for (final Entry<Card, Integer> entry : defMap.entrySet()) {
@@ -781,18 +786,6 @@ public class Combat {
                 ((Player) defender).addCombatDamage(entry.getValue(), entry.getKey());
             } else if (defender instanceof Card) { // planeswalker
                 ((Card) defender).getController().addCombatDamage(entry.getValue(), entry.getKey());
-            }
-        }
-
-        final List<Card> unblocked = new ArrayList<Card>(bFirstStrike ? this.getUnblockedAttackers() : this.getUnblockedFirstStrikeAttackers());
-
-        for (int j = 0; j < unblocked.size(); j++) {
-            if (bFirstStrike) {
-                CombatUtil.checkUnblockedAttackers(unblocked.get(j));
-            } else {
-                if (!unblocked.get(j).hasFirstStrike() && !unblocked.get(j).hasDoubleStrike()) {
-                    CombatUtil.checkUnblockedAttackers(unblocked.get(j));
-                }
             }
         }
 
@@ -840,7 +833,7 @@ public class Combat {
      * @return a boolean.
      */
     public final boolean isUnblocked(final Card att) {
-        return this.unblockedMap.containsKey(att);
+        return this.unblocked.contains(att);
     }
 
     /**
@@ -852,7 +845,7 @@ public class Combat {
      */
     public final List<Card> getUnblockedAttackers() {
         final List<Card> out = new ArrayList<Card>();
-        for (Card c : this.unblockedMap.keySet()) {
+        for (Card c : this.unblocked) {
             if (!c.hasFirstStrike()) {
                 out.add(c);
             }
@@ -869,7 +862,7 @@ public class Combat {
      */
     public final List<Card> getUnblockedFirstStrikeAttackers() {
         final List<Card> out = new ArrayList<Card>();
-        for (Card c : this.unblockedMap.keySet()) { // only add creatures without firstStrike to this
+        for (Card c : this.unblocked) { // only add creatures without firstStrike to this
             if (c.hasFirstStrike() || c.hasDoubleStrike()) {
                 out.add(c);
             }
@@ -886,7 +879,9 @@ public class Combat {
      *            a {@link forge.Card} object.
      */
     public final void addUnblockedAttacker(final Card c) {
-        this.unblockedMap.put(c, new ArrayList<Card>());
+        if (!this.unblocked.contains(c)) {
+            this.unblocked.add(c);
+        }
     }
 
     public boolean isPlayerAttacked(Player priority) {

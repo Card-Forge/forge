@@ -1295,22 +1295,6 @@ public class CombatUtil {
 
     /**
      * <p>
-     * checkUnblockedAttackers.
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.Card} object.
-     */
-    public static void checkUnblockedAttackers(final Card c) {
-
-        // Run triggers
-        final HashMap<String, Object> runParams = new HashMap<String, Object>();
-        runParams.put("Card", c);
-        Singletons.getModel().getGame().getTriggerHandler().runTrigger(TriggerType.AttackerUnblocked, runParams, false);
-    }
-
-    /**
-     * <p>
      * checkDeclareBlockers.
      * </p>
      * 
