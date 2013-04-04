@@ -5565,6 +5565,7 @@ res/cardsfolder/k/karakas.txt svneol=native#text/plain
 res/cardsfolder/k/kargan_dragonlord.txt svneol=native#text/plain
 res/cardsfolder/k/karma.txt svneol=native#text/plain
 res/cardsfolder/k/karmic_guide.txt svneol=native#text/plain
+res/cardsfolder/k/karmic_justice.txt -text
 res/cardsfolder/k/karn.txt -text
 res/cardsfolder/k/karn_liberated.txt -text
 res/cardsfolder/k/karn_silver_golem.txt svneol=native#text/plain
@@ -5814,6 +5815,7 @@ res/cardsfolder/k/krark_clan_stoker.txt svneol=native#text/plain
 res/cardsfolder/k/krenko_mob_boss.txt -text
 res/cardsfolder/k/krenkos_command.txt -text
 res/cardsfolder/k/kresh_the_bloodbraided.txt svneol=native#text/plain
+res/cardsfolder/k/kresh_the_bloodbraided_avatar.txt -text
 res/cardsfolder/k/kris_mage.txt svneol=native#text/plain
 res/cardsfolder/k/krond_the_dawn_clad.txt -text
 res/cardsfolder/k/krosa.txt -text
@@ -13817,6 +13819,8 @@ src/main/java/forge/card/trigger/TriggerCounterRemoved.java -text
 src/main/java/forge/card/trigger/TriggerCountered.java -text
 src/main/java/forge/card/trigger/TriggerCycled.java svneol=native#text/plain
 src/main/java/forge/card/trigger/TriggerDamageDone.java svneol=native#text/plain
+src/main/java/forge/card/trigger/TriggerDestroyed.java -text
+src/main/java/forge/card/trigger/TriggerDevoured.java -text
 src/main/java/forge/card/trigger/TriggerDiscarded.java svneol=native#text/plain
 src/main/java/forge/card/trigger/TriggerDrawn.java svneol=native#text/plain
 src/main/java/forge/card/trigger/TriggerHandler.java svneol=native#text/plain

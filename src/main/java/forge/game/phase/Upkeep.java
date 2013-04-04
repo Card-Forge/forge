@@ -285,7 +285,7 @@ public class Upkeep extends Phase {
                                 if (c.getName().equals("Cosmic Horror")) {
                                     controller.addDamage(7, c);
                                 }
-                                game.getAction().destroy(c);
+                                game.getAction().destroy(c, this);
                             }
                             
                         }
@@ -444,20 +444,20 @@ public class Upkeep extends Phase {
                         chooseArt.setMessage(abyss.getName() + " - Select one nonartifact creature to destroy");
                         FThreads.setInputAndWait(chooseArt); // Input
                         if (!chooseArt.hasCancelled()) {
-                            game.getAction().destroyNoRegeneration(chooseArt.getSelected().get(0));
+                            game.getAction().destroyNoRegeneration(chooseArt.getSelected().get(0), this);
                         }
                         
                     } else { // computer
 
                         final List<Card> indestruct = CardLists.getKeyword(targets, "Indestructible");
                         if (indestruct.size() > 0) {
-                            game.getAction().destroyNoRegeneration(indestruct.get(0));
+                            game.getAction().destroyNoRegeneration(indestruct.get(0), this);
                         } else if (targets.size() > 0) {
                             final Card target = ComputerUtilCard.getWorstCreatureAI(targets);
                             if (null == target) {
                                 // must be nothing valid to destroy
                             } else {
-                                game.getAction().destroyNoRegeneration(target);
+                                game.getAction().destroyNoRegeneration(target, this);
                             }
                         }
                     }
@@ -504,11 +504,11 @@ public class Upkeep extends Phase {
                             inp.setMessage("Select creature with power: " + power + " to sacrifice.");
                             FThreads.setInputAndWait(inp);
                             if(!inp.hasCancelled())
-                                game.getAction().destroyNoRegeneration(inp.getSelected().get(0));
+                                game.getAction().destroyNoRegeneration(inp.getSelected().get(0), this);
 
                         } else { // computer
                             final Card compyTarget = this.getCompyCardToDestroy(creatures);
-                            game.getAction().destroyNoRegeneration(compyTarget);
+                            game.getAction().destroyNoRegeneration(compyTarget, this);
                         }
                     }
                 } // resolve

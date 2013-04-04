@@ -3406,6 +3406,10 @@ public class CardFactoryUtil {
                                     Card dinner = (Card) o;
                                     card.addDevoured(dinner);
                                     Singletons.getModel().getGame().getAction().sacrifice(dinner, null);
+                                    final HashMap<String, Object> runParams = new HashMap<String, Object>();
+                                    runParams.put("Devoured", dinner);
+                                    card.getController().getGame().getTriggerHandler()
+                                    .runTrigger(TriggerType.Devoured, runParams, false);
                                 }
                             }
                         } // human
@@ -3416,6 +3420,10 @@ public class CardFactoryUtil {
                                 if ((c.getNetAttack() <= 1) && ((c.getNetAttack() + c.getNetDefense()) <= 3)) {
                                     card.addDevoured(c);
                                     Singletons.getModel().getGame().getAction().sacrifice(c, null);
+                                    final HashMap<String, Object> runParams = new HashMap<String, Object>();
+                                    runParams.put("Devoured", c);
+                                    card.getController().getGame().getTriggerHandler()
+                                    .runTrigger(TriggerType.Devoured, runParams, false);
                                     count++;
                                 }
                             }

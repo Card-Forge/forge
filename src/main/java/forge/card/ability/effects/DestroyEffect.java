@@ -96,9 +96,9 @@ public class DestroyEffect extends SpellAbilityEffect {
                 if (sac) {
                     destroyed = Singletons.getModel().getGame().getAction().sacrifice(tgtC, sa);
                 } else if (noRegen) {
-                    destroyed = Singletons.getModel().getGame().getAction().destroyNoRegeneration(tgtC);
+                    destroyed = Singletons.getModel().getGame().getAction().destroyNoRegeneration(tgtC, sa);
                 } else {
-                    destroyed = Singletons.getModel().getGame().getAction().destroy(tgtC);
+                    destroyed = Singletons.getModel().getGame().getAction().destroy(tgtC, sa);
                 } if (destroyed  && remDestroyed) {
                     card.addRemembered(tgtC);
                 }
@@ -111,9 +111,9 @@ public class DestroyEffect extends SpellAbilityEffect {
                 if (sac) {
                     destroyed = Singletons.getModel().getGame().getAction().sacrifice(unTgtC, sa);
                 } else if (noRegen) {
-                    destroyed = Singletons.getModel().getGame().getAction().destroyNoRegeneration(unTgtC);
+                    destroyed = Singletons.getModel().getGame().getAction().destroyNoRegeneration(unTgtC, sa);
                 } else {
-                    destroyed = Singletons.getModel().getGame().getAction().destroy(unTgtC);
+                    destroyed = Singletons.getModel().getGame().getAction().destroy(unTgtC, sa);
                 } if (destroyed  && remDestroyed) {
                     card.addRemembered(unTgtC);
                 }

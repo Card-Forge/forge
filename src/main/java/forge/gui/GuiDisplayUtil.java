@@ -684,7 +684,7 @@ public final class GuiDisplayUtil {
         
         PlanarDice.roll(p, res);
         
-        Singletons.getModel().getGame().getStack().chooseOrderOfSimultaneousStackEntryAll();
+        p.getGame().getStack().chooseOrderOfSimultaneousStackEntryAll();
     }
 
 } // end class GuiDisplayUtil

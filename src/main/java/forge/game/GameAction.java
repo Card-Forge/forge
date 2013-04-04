@@ -1018,7 +1018,7 @@ public class GameAction {
                         checkAgain = true;
                     }
                     if (c.getNetDefense() <= 0 || c.getNetDefense() <= c.getDamage()) {
-                        this.destroy(c);
+                        this.destroy(c, null);
                         checkAgain = true;
                     }
                     // Soulbond unpairing
@@ -1189,7 +1189,7 @@ public class GameAction {
      *            a {@link forge.Card} object.
      * @return a boolean.
      */
-    public final boolean destroy(final Card c) {
+    public final boolean destroy(final Card c, final SpellAbility sa) {
         if (!c.canBeDestroyed()) {
             return false;
         }
@@ -1208,7 +1208,7 @@ public class GameAction {
             return false;
         }
 
-        return this.destroyNoRegeneration(c);
+        return this.destroyNoRegeneration(c, sa);
     }
 
     /**
@@ -1220,7 +1220,7 @@ public class GameAction {
      *            a {@link forge.Card} object.
      * @return a boolean.
      */
-    public final boolean destroyNoRegeneration(final Card c) {
+    public final boolean destroyNoRegeneration(final Card c, final SpellAbility sa) {
         if (!c.canBeDestroyed())
             return false;
 
@@ -1250,7 +1250,7 @@ public class GameAction {
                 final AbilityStatic ability = new AbilityStatic(crd, ManaCost.ZERO) {
                     @Override
                     public void resolve() {
-                        GameAction.this.destroy(crd);
+                        GameAction.this.destroy(crd, sa);
                         card.setDamage(0);
 
                         // Play the Destroy sound
@@ -1269,6 +1269,11 @@ public class GameAction {
 
         // Play the Destroy sound
         game.getEvents().post(new CardDestroyedEvent());
+        // Run triggers
+        final HashMap<String, Object> runParams = new HashMap<String, Object>();
+        runParams.put("Card", c);
+        runParams.put("Causer", sa.getActivatingPlayer());
+        game.getTriggerHandler().runTrigger(TriggerType.Destroyed, runParams, false);
 
         return this.sacrificeDestroy(c);
     }

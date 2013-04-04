@@ -106,7 +106,7 @@ public class CounterEffect extends SpellAbilityEffect {
 
             // Destroy Permanent may be able to be turned into a SubAbility
             if (tgtSA.isAbility() && sa.hasParam("DestroyPermanent")) {
-                Singletons.getModel().getGame().getAction().destroy(tgtSACard);
+                Singletons.getModel().getGame().getAction().destroy(tgtSACard, sa);
             }
 
             if (sa.hasParam("RememberCountered")) {

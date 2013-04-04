@@ -197,9 +197,9 @@ public class ControlGainEffect extends SpellAbilityEffect {
                     public void resolve() {
 
                         if (bNoRegen) {
-                            Singletons.getModel().getGame().getAction().destroyNoRegeneration(c);
+                            Singletons.getModel().getGame().getAction().destroyNoRegeneration(c, null);
                         } else {
-                            Singletons.getModel().getGame().getAction().destroy(c);
+                            Singletons.getModel().getGame().getAction().destroy(c, null);
                         }
                     }
                 };

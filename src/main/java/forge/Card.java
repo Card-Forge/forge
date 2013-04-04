@@ -8346,7 +8346,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                 additionalLog = "(As -1/-1 Counters)";
             }
             if (source.hasKeyword("Deathtouch") && this.isCreature()) {
-                Singletons.getModel().getGame().getAction().destroy(this);
+                Singletons.getModel().getGame().getAction().destroy(this, null);
                 additionalLog = "(Deathtouch)";
             } else if (this.isInPlay() && !wither) {
                 this.damage += damageToAdd;

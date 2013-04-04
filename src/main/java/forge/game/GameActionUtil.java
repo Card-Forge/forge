@@ -103,9 +103,9 @@ public final class GameActionUtil {
         public void resolve() {
             final GameState game = Singletons.getModel().getGame(); 
             if ( canRegenerate )
-                game.getAction().destroy(affected);
+                game.getAction().destroy(affected, this);
             else
-                game.getAction().destroyNoRegeneration(affected);
+                game.getAction().destroyNoRegeneration(affected, this);
         }
     }
 

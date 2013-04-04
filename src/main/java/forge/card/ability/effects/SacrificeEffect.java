@@ -66,7 +66,7 @@ public class SacrificeEffect extends SpellAbilityEffect {
                 
                 for(Card sac : choosenToSacrifice) {
                     boolean wasSacrificed = !destroy && game.getAction().sacrifice(sac, sa);
-                    boolean wasDestroyed = destroy && game.getAction().destroy(sac);
+                    boolean wasDestroyed = destroy && game.getAction().destroy(sac, sa);
                     
                     if ( remSacrificed && (wasDestroyed || wasSacrificed) ) {
                         card.addRemembered(sac);
