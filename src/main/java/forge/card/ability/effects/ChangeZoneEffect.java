@@ -29,6 +29,7 @@ import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 import forge.gui.GuiDialog;
 import forge.util.Aggregates;
+import forge.util.Lang;
 
 public class ChangeZoneEffect extends SpellAbilityEffect {
     @Override
@@ -81,12 +82,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             fetchers.add(sa.getSourceCard().getController());
         }
 
-        final StringBuilder fetcherSB = new StringBuilder();
-        for (int i = 0; i < fetchers.size(); i++) {
-            fetcherSB.append(fetchers.get(i).getName());
-            fetcherSB.append((i + 2) == fetchers.size() ? " and " : (i + 1) == fetchers.size() ? "" : ", ");
-        }
-        final String fetcherNames = fetcherSB.toString();
+        final String fetcherNames = Lang.joinHomogenous(fetchers, Player.Accessors.FN_GET_NAME);
 
         // Player who chooses the cards to move
         List<Player> choosers = new ArrayList<Player>();
