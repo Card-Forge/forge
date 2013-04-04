@@ -136,6 +136,7 @@ public class CostUtil {
                 boolean xCanBe0 = ((CostPartMana) part).canXbe0() && costPart2.canXbe0();
                 oldManaCost.combineManaCost(costPart2.getMana());
                 
+                cost2.getCostParts().remove(costPart2);
                 cost2.getCostParts().add(0, new CostPartMana(oldManaCost.toManaCost(), !xCanBe0));
             } else { 
                 cost2.getCostParts().add(part);
