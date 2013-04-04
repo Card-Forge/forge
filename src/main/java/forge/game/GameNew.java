@@ -220,7 +220,7 @@ public class GameNew {
             playersConditions.put(p, players.get(p.getLobbyPlayer()));
         }
     
-        game.setMulliganned(false);
+        game.setAge(GameAge.Mulligan);
         match.getInput().clearInput();
     
         //Card.resetUniqueNumber();

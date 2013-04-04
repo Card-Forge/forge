@@ -20,6 +20,7 @@ package forge.control.input;
 import java.util.Stack;
 
 import forge.Singletons;
+import forge.game.GameAge;
 import forge.game.GameState;
 import forge.game.GameType;
 import forge.game.MatchController;
@@ -44,6 +45,11 @@ public class InputControl extends MyObservable implements java.io.Serializable {
     private static final long serialVersionUID = 3955194449319994301L;
 
     private final Stack<Input> inputStack = new Stack<Input>();
+
+    private final MatchController match;
+    public InputControl(MatchController matchController) {
+        match = matchController;
+    }
 
     /**
      * <p>
@@ -118,15 +124,20 @@ public class InputControl extends MyObservable implements java.io.Serializable {
      * @return a {@link forge.control.input.InputBase} object.
      */
     public final Input getActualInput(GameState game) {
+        GameAge age = game.getAge();
+
+        if ( age == GameAge.BeforeMulligan || age == GameAge.GameOver) 
+            return inputLock;
+
+        if ( age == GameAge.Mulligan ) {
+            HumanPlayer human = Singletons.getControl().getPlayer();
+            return game.getType() == GameType.Commander ? new InputPartialParisMulligan(match, human) : new InputMulligan(match, human);
+        }
+
         if (!this.inputStack.isEmpty()) { // incoming input to Control
             return this.inputStack.peek();
         }
-
-        if ( !game.hasMulliganned() ) {
-            HumanPlayer human = Singletons.getControl().getPlayer();
-            MatchController match = Singletons.getModel().getMatch();
-            return game.getType() == GameType.Commander ? new InputPartialParisMulligan(match, human) : new InputMulligan(match, human);
-        }
+        
         final PhaseHandler handler = game.getPhaseHandler();
         final PhaseType phase = handler.getPhase();
         final Player playerTurn = handler.getPlayerTurn();
@@ -186,9 +197,7 @@ public class InputControl extends MyObservable implements java.io.Serializable {
          return pc.getDefaultInput();
     } // getInput()
 
-    /**
-     * TODO: Write javadoc for this method.
-     */
+
     private final static InputLockUI inputLock = new InputLockUI();
     public void lock() {
         setInput(inputLock);

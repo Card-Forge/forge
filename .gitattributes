@@ -13897,6 +13897,7 @@ src/main/java/forge/error/ExceptionHandler.java svneol=native#text/plain
 src/main/java/forge/error/package-info.java svneol=native#text/plain
 src/main/java/forge/game/GameAction.java svneol=native#text/plain
 src/main/java/forge/game/GameActionUtil.java svneol=native#text/plain
+src/main/java/forge/game/GameAge.java -text
 src/main/java/forge/game/GameEndReason.java -text
 src/main/java/forge/game/GameFormat.java -text
 src/main/java/forge/game/GameLossReason.java -text
