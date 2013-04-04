@@ -68,7 +68,7 @@ public class ChooseNumberEffect extends SpellAbilityEffect {
 
         for (final Player p : tgtPlayers) {
             if ((tgt == null) || p.canBeTargetedBy(sa)) {
-                if (sa.getActivatingPlayer().isHuman()) {
+                if (p.isHuman()) {
                     int chosen;
                     if (random) {
                         final Random randomGen = new Random();

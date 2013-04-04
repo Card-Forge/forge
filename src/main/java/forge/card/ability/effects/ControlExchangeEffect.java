@@ -1,5 +1,6 @@
 package forge.card.ability.effects;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import forge.Card;
@@ -21,12 +22,16 @@ public class ControlExchangeEffect extends SpellAbilityEffect {
         Card object1 = null;
         Card object2 = null;
         final Target tgt = sa.getTarget();
-        List<Card> tgts = tgt.getTargetCards();
+        List<Card> tgts = tgt == null ? new ArrayList<Card>() : tgt.getTargetCards();
         if (tgts.size() > 0) {
             object1 = tgts.get(0);
         }
         if (sa.hasParam("Defined")) {
-            object2 = AbilityUtils.getDefinedCards(sa.getSourceCard(), sa.getParam("Defined"), sa).get(0);
+            List<Card> cards = AbilityUtils.getDefinedCards(sa.getSourceCard(), sa.getParam("Defined"), sa);
+            object2 = cards.isEmpty() ? null : cards.get(0);
+            if (cards.size() > 1 && sa.hasParam("BothDefined")) {
+                object1 = cards.get(1);
+            }
         } else if (tgts.size() > 1) {
             object2 = tgts.get(1);
         }
@@ -42,12 +47,16 @@ public class ControlExchangeEffect extends SpellAbilityEffect {
         Card object1 = null;
         Card object2 = null;
         final Target tgt = sa.getTarget();
-        List<Card> tgts = tgt.getTargetCards();
+        List<Card> tgts = tgt == null ? new ArrayList<Card>() : tgt.getTargetCards();
         if (tgts.size() > 0) {
             object1 = tgts.get(0);
         }
         if (sa.hasParam("Defined")) {
-            object2 = AbilityUtils.getDefinedCards(sa.getSourceCard(), sa.getParam("Defined"), sa).get(0);
+            final List<Card> cards = AbilityUtils.getDefinedCards(sa.getSourceCard(), sa.getParam("Defined"), sa);
+            object2 = cards.isEmpty() ? null : cards.get(0);
+            if (cards.size() > 1 && sa.hasParam("BothDefined")) {
+                object1 = cards.get(1);
+            }
         } else if (tgts.size() > 1) {
             object2 = tgts.get(1);
         }

@@ -4728,6 +4728,7 @@ res/cardsfolder/h/harrow.txt svneol=native#text/plain
 res/cardsfolder/h/harrowing_journey.txt -text
 res/cardsfolder/h/harsh_deceiver.txt -text
 res/cardsfolder/h/harsh_justice.txt -text
+res/cardsfolder/h/harsh_mercy.txt -text
 res/cardsfolder/h/haru_onna.txt svneol=native#text/plain
 res/cardsfolder/h/harvest_gwyllion.txt svneol=native#text/plain
 res/cardsfolder/h/harvest_pyre.txt -text
@@ -5545,6 +5546,7 @@ res/cardsfolder/k/kamahl_fist_of_krosa.txt svneol=native#text/plain
 res/cardsfolder/k/kamahl_pit_fighter.txt svneol=native#text/plain
 res/cardsfolder/k/kamahls_desire.txt svneol=native#text/plain
 res/cardsfolder/k/kamahls_sledge.txt -text
+res/cardsfolder/k/kamahls_summons.txt -text
 res/cardsfolder/k/kami_of_ancient_law.txt svneol=native#text/plain
 res/cardsfolder/k/kami_of_empty_graves.txt svneol=native#text/plain
 res/cardsfolder/k/kami_of_false_hope.txt svneol=native#text/plain
@@ -5571,6 +5573,7 @@ res/cardsfolder/k/karn_liberated.txt -text
 res/cardsfolder/k/karn_silver_golem.txt svneol=native#text/plain
 res/cardsfolder/k/karns_touch.txt svneol=native#text/plain
 res/cardsfolder/k/karona_false_god.txt -text
+res/cardsfolder/k/karona_false_god_avatar.txt -text
 res/cardsfolder/k/karonas_zealot.txt -text
 res/cardsfolder/k/karoo.txt svneol=native#text/plain
 res/cardsfolder/k/karoo_meerkat.txt svneol=native#text/plain
