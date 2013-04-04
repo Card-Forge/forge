@@ -125,14 +125,13 @@ public class InputControl extends MyObservable implements java.io.Serializable {
      */
     public final Input getActualInput(GameState game) {
         GameAge age = game.getAge();
-
-        if ( age == GameAge.BeforeMulligan || age == GameAge.GameOver) 
-            return inputLock;
-
         if ( age == GameAge.Mulligan ) {
             HumanPlayer human = Singletons.getControl().getPlayer();
             return game.getType() == GameType.Commander ? new InputPartialParisMulligan(match, human) : new InputMulligan(match, human);
         }
+
+        if ( age != GameAge.Play ) 
+            return inputLock;
 
         if (!this.inputStack.isEmpty()) { // incoming input to Control
             return this.inputStack.peek();
