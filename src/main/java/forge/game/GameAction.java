@@ -1221,6 +1221,7 @@ public class GameAction {
      * @return a boolean.
      */
     public final boolean destroyNoRegeneration(final Card c, final SpellAbility sa) {
+        Player activator = null;
         if (!c.canBeDestroyed())
             return false;
 
@@ -1266,13 +1267,16 @@ public class GameAction {
                 return false;
             }
         } // totem armor
+        if (sa != null) {
+            activator = sa.getActivatingPlayer();
+        }
 
         // Play the Destroy sound
         game.getEvents().post(new CardDestroyedEvent());
         // Run triggers
         final HashMap<String, Object> runParams = new HashMap<String, Object>();
         runParams.put("Card", c);
-        runParams.put("Causer", sa.getActivatingPlayer());
+        runParams.put("Causer", activator);
         game.getTriggerHandler().runTrigger(TriggerType.Destroyed, runParams, false);
 
         return this.sacrificeDestroy(c);
