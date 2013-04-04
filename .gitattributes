@@ -2245,6 +2245,7 @@ res/cardsfolder/c/cursed_rack.txt svneol=native#text/plain
 res/cardsfolder/c/cursed_ronin.txt svneol=native#text/plain
 res/cardsfolder/c/cursed_scroll.txt svneol=native#text/plain
 res/cardsfolder/c/cursed_totem.txt svneol=native#text/plain
+res/cardsfolder/c/curtain_of_light.txt -text
 res/cardsfolder/c/custody_battle.txt -text svneol=unset#text/plain
 res/cardsfolder/c/customs_depot.txt svneol=native#text/plain
 res/cardsfolder/c/cut_the_earthly_bond.txt svneol=native#text/plain
@@ -2386,6 +2387,7 @@ res/cardsfolder/d/day_of_the_dragons.txt svneol=native#text/plain
 res/cardsfolder/d/daybreak_coronet.txt -text
 res/cardsfolder/d/daybreak_ranger_nightfall_predator.txt -text
 res/cardsfolder/d/daze.txt svneol=native#text/plain
+res/cardsfolder/d/dazzling_beauty.txt -text
 res/cardsfolder/d/dead_gone.txt -text
 res/cardsfolder/d/dead_iron_sledge.txt svneol=native#text/plain
 res/cardsfolder/d/dead_reckoning.txt -text svneol=unset#text/plain
@@ -13624,6 +13626,7 @@ src/main/java/forge/card/ability/effects/AnimateAllEffect.java -text
 src/main/java/forge/card/ability/effects/AnimateEffect.java -text
 src/main/java/forge/card/ability/effects/AnimateEffectBase.java svneol=native#text/plain
 src/main/java/forge/card/ability/effects/AttachEffect.java -text
+src/main/java/forge/card/ability/effects/BecomesBlockedEffect.java -text
 src/main/java/forge/card/ability/effects/BondEffect.java -text
 src/main/java/forge/card/ability/effects/ChangeZoneAllEffect.java -text
 src/main/java/forge/card/ability/effects/ChangeZoneEffect.java -text

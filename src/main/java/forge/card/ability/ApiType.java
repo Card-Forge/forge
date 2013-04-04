@@ -112,6 +112,7 @@ public enum ApiType {
     Animate (AnimateEffect.class, AnimateAi.class),
     AnimateAll (AnimateAllEffect.class, AnimateAllAi.class),
     Attach (AttachEffect.class, AttachAi.class),
+    BecomesBlocked (BecomesBlockedEffect.class, CannotPlayAi.class),
     Bond (BondEffect.class, BondAi.class),
     ChangeZone(ChangeZoneEffect.class, ChangeZoneAi.class),
     ChangeZoneAll(ChangeZoneAllEffect.class, ChangeZoneAllAi.class),
