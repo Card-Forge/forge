@@ -256,7 +256,7 @@
 //Rank|Name|Rarity|Set
 #1|Vraska the Unseen|M|RTR
 #2|Trostani Selesnyas Voice|M|RTR
-#3|Niv Mizzet Dracogenius|M|RTR
+#3|Niv-Mizzet Dracogenius|M|RTR
 #4|Rakdos Lord of Riots|M|RTR
 #5|Jace Architect of Thought|M|RTR
 #6|Isperia Supreme Judge|M|RTR
@@ -6244,7 +6244,7 @@
 #180|Nightcreep|U|DIS
 //Rank|Name|Rarity|Set
 #1|Skeletal Vampire|R|GPT
-#2|Niv Mizzet, the Firemind|R|GPT
+#2|Niv-Mizzet, the Firemind|R|GPT
 #3|Savage Twister|U|GPT
 #4|Angel of Despair|R|GPT
 #5|Debtors' Knell|R|GPT
