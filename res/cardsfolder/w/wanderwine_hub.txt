@@ -4,6 +4,8 @@ Types:Land
 Text:As CARDNAME enters the battlefield, you may reveal a Merfolk card from your hand. If you don't, CARDNAME enters the battlefield tapped.
 A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add W to your mana pool.
 A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add U to your mana pool.
+K:ETBReplacement:Other:DBTap
+SVar:DBTap:AB$ Tap | Cost$ 0 | ETB$ True | Defined$ Self | UnlessCost$ Reveal<1/Merfolk> | UnlessPayer$ You | StackDescription$ enters the battlefield tapped.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wanderwine_hub.jpg
 Oracle:As Wanderwine Hub enters the battlefield, you may reveal a Merfolk card from your hand. If you don't, Wanderwine Hub enters the battlefield tapped.\n{T}: Add {W} or {U} to your mana pool.
 SetInfo:LRW Rare
