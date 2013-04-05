@@ -417,7 +417,7 @@ public class ComputerUtilCost {
         if (canPayCost(ability, payer)
                 && checkLifeCost(payer, ability.getPayCosts(), source, 4, sa)
                 && checkDamageCost(payer, ability.getPayCosts(), source, 4)
-                && checkDiscardCost(payer, ability.getPayCosts(), source)
+                && (isMine || checkDiscardCost(payer, ability.getPayCosts(), source))
                 && (!source.getName().equals("Tyrannize") || payer.getCardsIn(ZoneType.Hand).size() > 2)
                 && (!source.getName().equals("Perplex") || payer.getCardsIn(ZoneType.Hand).size() < 2)
                 && (!source.getName().equals("Breaking Point") || payer.getCreaturesInPlay().size() > 1)
