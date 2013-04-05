@@ -50,6 +50,7 @@ import forge.card.cost.CostPayLife;
 import forge.card.cost.CostPutCounter;
 import forge.card.cost.CostRemoveCounter;
 import forge.card.cost.CostReturn;
+import forge.card.cost.CostReveal;
 import forge.card.cost.CostSacrifice;
 import forge.card.cost.CostTapType;
 import forge.card.cost.CostUtil;
@@ -515,30 +516,29 @@ public final class GameActionUtil {
 
             else if (part instanceof CostSacrifice) {
                 int amount = Integer.parseInt(((CostSacrifice)part).getAmount());
-                List<Card> list = CardLists.getValidCards(p.getCardsIn(ZoneType.Battlefield), part.getType().split(";"), p, source);
-                boolean hasPaid = payCostPart(sourceAbility, (CostPartWithList)part, amount, list, "sacrifice");
+                List<Card> list = CardLists.getValidCards(p.getCardsIn(ZoneType.Battlefield), part.getType(), p, source);
+                boolean hasPaid = payCostPart(sourceAbility, (CostPartWithList)part, amount, list, "sacrifice." + orString);
                 if(!hasPaid) return false;
-            }
-            
-            else if (part instanceof CostReturn) {
-                List<Card> list = CardLists.getValidCards(p.getCardsIn(ZoneType.Battlefield), part.getType().split(";"), p, source);
+            } else if (part instanceof CostReturn) {
+                List<Card> list = CardLists.getValidCards(p.getCardsIn(ZoneType.Battlefield), part.getType(), p, source);
                 int amount = getAmountFromPartX(part, source, sourceAbility);
-                boolean hasPaid = payCostPart(sourceAbility, (CostPartWithList)part, amount, list, "return to hand");
+                boolean hasPaid = payCostPart(sourceAbility, (CostPartWithList)part, amount, list, "return to hand." + orString);
                 if(!hasPaid) return false;
-            }
-
-            else if (part instanceof CostDiscard) {
-                List<Card> list = CardLists.getValidCards(p.getCardsIn(ZoneType.Hand), part.getType().split(";"), p, source);
+            } else if (part instanceof CostDiscard) {
+                List<Card> list = CardLists.getValidCards(p.getCardsIn(ZoneType.Hand), part.getType(), p, source);
                 int amount = getAmountFromPartX(part, source, sourceAbility);
-                boolean hasPaid = payCostPart(sourceAbility, (CostPartWithList)part, amount, list, "discard");
+                boolean hasPaid = payCostPart(sourceAbility, (CostPartWithList)part, amount, list, "discard." + orString);
                 if(!hasPaid) return false;
-            }
-            
-            else if (part instanceof CostTapType) {
-                List<Card> list = CardLists.getValidCards(p.getCardsIn(ZoneType.Battlefield), part.getType().split(";"), p, source);
+            } else if (part instanceof CostReveal) {
+                List<Card> list = CardLists.getValidCards(p.getCardsIn(ZoneType.Hand), part.getType(), p, source);
+                int amount = getAmountFromPartX(part, source, sourceAbility);
+                boolean hasPaid = payCostPart(sourceAbility, (CostPartWithList)part, amount, list, "reveal." + orString);
+                if(!hasPaid) return false;
+            } else if (part instanceof CostTapType) {
+                List<Card> list = CardLists.getValidCards(p.getCardsIn(ZoneType.Battlefield), part.getType(), p, source);
                 list = CardLists.filter(list, Presets.UNTAPPED);
                 int amount = getAmountFromPartX(part, source, sourceAbility);
-                boolean hasPaid = payCostPart(sourceAbility, (CostPartWithList)part, amount, list, "tap");
+                boolean hasPaid = payCostPart(sourceAbility, (CostPartWithList)part, amount, list, "tap." + orString);
                 if(!hasPaid) return false;
             }
             

@@ -22,6 +22,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.TreeMap;
 
 import org.apache.commons.lang.StringUtils;
 
@@ -3145,13 +3146,14 @@ public class CardFactoryUtil {
         return evokedSpell;
     }
 
+    private static final Map<String,String> emptyMap = new TreeMap<String,String>();
     public static void setupETBReplacementAbility(SpellAbility sa) {
         SpellAbility tailend = sa;
         while (tailend.getSubAbility() != null) {
             tailend = tailend.getSubAbility();
         }
 
-        tailend.setSubAbility(new AbilitySub(ApiType.InternalEtbReplacement, sa.getSourceCard(), null, null));
+        tailend.setSubAbility(new AbilitySub(ApiType.InternalEtbReplacement, sa.getSourceCard(), null, emptyMap));
         // ETBReplacementMove(sa.getSourceCard(), null));
     }
 
