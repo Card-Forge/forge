@@ -420,7 +420,7 @@ public enum FSkin {
      */
     public static void loadLight(final String skinName) {
         // No need for this method to be loaded while on the EDT.
-        FThreads.checkEDT("FSkin$constructor", false);
+        FThreads.assertExecutedByEdt(false);
 
         // Non-default (preferred) skin name and dir.
         FSkin.preferredName = skinName.toLowerCase().replace(' ', '_');
@@ -500,7 +500,7 @@ public enum FSkin {
      */
     public static void loadFull() {
         // No need for this method to be loaded while on the EDT.
-        FThreads.checkEDT("FSkin$load", false);
+        FThreads.assertExecutedByEdt(false);
 
         // Preferred skin name must be called via loadLight() method,
         // which does some cleanup and init work.

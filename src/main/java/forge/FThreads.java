@@ -43,9 +43,10 @@ public class FThreads {
      * @param methodName &emsp; String, part of the custom exception message.
      * @param mustBeEDT &emsp; boolean: true = exception if not EDT, false = exception if EDT
      */
-    public static void checkEDT(final String methodName, final boolean mustBeEDT) {
-        boolean isEDT = SwingUtilities.isEventDispatchThread();
-        if ( isEDT != mustBeEDT ) { 
+    public static void assertExecutedByEdt(final boolean mustBeEDT) {
+        if (isEDT() != mustBeEDT ) { 
+            StackTraceElement[] trace = Thread.currentThread().getStackTrace();
+            final String methodName =  trace[2].getClassName() + "." + trace[2].getMethodName();
             String modalOperator = mustBeEDT ? " must be" : " may not be";
             throw new IllegalStateException( methodName + modalOperator + " accessed from the event dispatch thread.");
         }

@@ -102,7 +102,7 @@ public class HumanPlayer extends Player {
      *            a {@link forge.card.spellability.SpellAbility} object.
      */
     public final void playSpellAbility(SpellAbility sa) {
-        FThreads.checkEDT("Player.playSpellAbility", false);
+        FThreads.assertExecutedByEdt(false);
         sa.setActivatingPlayer(this);
 
         final Card source = sa.getSourceCard();
@@ -253,7 +253,7 @@ public class HumanPlayer extends Player {
      *            a {@link forge.card.spellability.SpellAbility} object.
      */
     public final void playSpellAbilityWithoutPayingManaCost(final SpellAbility sa) {
-        FThreads.checkEDT("GameActionPlay.playSpellAbilityWithoutPayingManaCost", false);
+        FThreads.assertExecutedByEdt(false);
         final Card source = sa.getSourceCard();
         
         source.setSplitStateToPlayAbility(sa);

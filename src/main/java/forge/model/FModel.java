@@ -162,7 +162,7 @@ public enum FModel {
         this.loadDynamicGamedata();
 
         // Loads all cards (using progress bar).
-        FThreads.checkEDT("CardFactory$constructor", false);
+        FThreads.assertExecutedByEdt(false);
         final CardStorageReader reader = new CardStorageReader(NewConstants.CARD_DATA_DIR, true);
         try {
             // this fills in our map of card names to Card instances.

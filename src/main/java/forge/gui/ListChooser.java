@@ -42,6 +42,8 @@ import javax.swing.event.ListSelectionListener;
 
 import com.google.common.collect.Lists;
 
+import forge.FThreads;
+
 /**
  * A simple class that shows a list of choices in a dialog. Two properties
  * influence the behavior of a list chooser: minSelection and maxSelection.
@@ -84,6 +86,7 @@ public class ListChooser<T> {
     private Action ok, cancel;
 
     public ListChooser(final String title, final int minChoices, final int maxChoices, final Collection<T> list) {
+        FThreads.assertExecutedByEdt(true);
         this.title = title;
         this.minChoices = minChoices;
         this.maxChoices = maxChoices;

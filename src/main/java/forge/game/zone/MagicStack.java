@@ -301,7 +301,7 @@ public class MagicStack extends MyObservable {
      *            a {@link forge.card.spellability.SpellAbility} object.
      */
     public final void add(final SpellAbility sp) {
-        FThreads.checkEDT("MagicStack.add", false);
+        FThreads.assertExecutedByEdt(false);
         final ArrayList<TargetChoices> chosenTargets = sp.getAllTargetChoices();
 
         if (sp.isManaAbility()) { // Mana Abilities go straight through

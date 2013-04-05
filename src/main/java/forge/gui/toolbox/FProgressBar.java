@@ -37,7 +37,7 @@ public class FProgressBar extends JProgressBar {
      * @param s0 &emsp; A description to prepend before statistics.
      */
     public void setDescription(final String s0) {
-        FThreads.checkEDT("FProgressBar$setDescription", true);
+        FThreads.assertExecutedByEdt(true);
         this.desc = s0;
         this.setString(s0);
     }
@@ -77,7 +77,7 @@ public class FProgressBar extends JProgressBar {
 
     /** Resets the various values required for this class. Must be called from EDT. */
     public void reset() {
-        FThreads.checkEDT("FProgressBar$reset", true);
+        FThreads.assertExecutedByEdt(true);
         this.setIndeterminate(true);
         this.setValue(0);
         this.tempVal = 0;

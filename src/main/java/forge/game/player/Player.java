@@ -1580,7 +1580,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
      * @return a {@link forge.CardList} object.
      */
     public final boolean discard(final Card c, final SpellAbility sa) {
-        FThreads.checkEDT("Player.doDiscard", false);
+        FThreads.assertExecutedByEdt(false);
         // TODO: This line should be moved inside CostPayment somehow
         /*if (sa != null) {
             sa.addCostToHashList(c, "Discarded");
@@ -1746,7 +1746,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
      *            a {@link forge.Card} object.
      */
     public final void playLand(final Card land) {
-        FThreads.checkEDT("Player.playSpellAbility", false);
+        FThreads.assertExecutedByEdt(false);
         if (this.canPlayLand(land)) {
             land.setController(this, 0);
             game.getAction().moveTo(this.getZone(ZoneType.Battlefield), land);
