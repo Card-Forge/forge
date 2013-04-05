@@ -19,6 +19,7 @@ public class ChangeTargetsEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
         final List<SpellAbility> sas = getTargetSpellAbilities(sa);
+        final boolean remember = sa.hasParam("RememberTargetedCard");
         
         final MagicStack stack = sa.getActivatingPlayer().getGame().getStack();
         for (final SpellAbility tgtSA : sas) {
@@ -29,6 +30,9 @@ public class ChangeTargetsEffect extends SpellAbilityEffect {
             }
             // Update targets, with a potential new target
             si.updateTarget(sa.getActivatingPlayer().getController().chooseTargets(tgtSA));
+            if (remember) {
+                sa.getSourceCard().addRemembered(tgtSA.getSourceCard());
+            }
         }
     }
 }
