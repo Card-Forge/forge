@@ -202,8 +202,6 @@ public class MatchController {
             CMessage.SINGLETON_INSTANCE.updateGameInfo(this);
             // Update observers
             currentGame.getGameLog().updateObservers();
-
-            CMatchUI.SINGLETON_INSTANCE.setCard(Singletons.getControl().getPlayer().getCardsIn(ZoneType.Hand).get(0));
         } catch (Exception e) {
             BugReporter.reportException(e);
         }

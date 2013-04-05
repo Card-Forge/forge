@@ -79,7 +79,7 @@ public class InputProxy implements Observer {
 //            if( nextInput instanceof AiInput )
 //                FThreads.invokeInNewThread(showMessage, true);
 //            else
-        FThreads.invokeInEDT(showMessage);
+        FThreads.invokeInEdtLater(showMessage);
     }
     /**
      * <p>

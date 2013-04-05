@@ -197,7 +197,7 @@ public enum CMatchUI {
         }
 
         final Object[] result = { null }; // how else can I extract a value from EDT thread?
-        FThreads.invokeInEDTAndWait(new Runnable() {
+        FThreads.invokeInEdtAndWait(new Runnable() {
             @Override
             public void run() {
                 // TODO Auto-generated method stub
@@ -237,6 +237,7 @@ public enum CMatchUI {
     }
 
     public void setCard(final Card c) {
+        FThreads.assertExecutedByEdt(true);
         setCard(c, false);
     }
     

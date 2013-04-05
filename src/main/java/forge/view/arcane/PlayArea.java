@@ -503,7 +503,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
     public void setupPlayZone() {
         boolean wasSet = wantRedraw.getAndSet(true);
         if(wasSet) return;
-        FThreads.invokeInEDT(new Runnable() {
+        FThreads.invokeInEdtLater(new Runnable() {
             @Override
             public void run() {
                 try { // user won't notice, but the requests coming in that interval won't trigger re-draw

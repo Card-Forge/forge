@@ -58,8 +58,6 @@ import forge.game.player.AIPlayer;
 import forge.game.player.HumanPlayer;
 import forge.game.player.Player;
 import forge.gui.GuiChoose;
-import forge.gui.framework.EDocID;
-import forge.gui.framework.SDisplayUtil;
 import forge.util.MyObservable;
 
 /**
@@ -607,7 +605,6 @@ public class MagicStack extends MyObservable {
             game.getPhaseHandler().setPriority(sp.getActivatingPlayer());
         }
 
-        SDisplayUtil.showTab(EDocID.REPORT_STACK.getDoc());
         this.updateObservers();
 
         if (sp.isSpell() && !sp.getSourceCard().isCopiedSpell()) {

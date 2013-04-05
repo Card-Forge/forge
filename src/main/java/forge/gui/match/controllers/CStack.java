@@ -4,6 +4,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 import forge.Command;
+import forge.FThreads;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.ICDoc;
 import forge.gui.framework.SDisplayUtil;
@@ -48,6 +49,8 @@ public enum CStack implements ICDoc, Observer {
     @Override
     public void update(Observable arg0, Object arg1) {
         SDisplayUtil.showTab(EDocID.REPORT_STACK.getDoc());
-        update();
+        FThreads.invokeInEdtNowOrLater(doUpdate);
     }
+    
+    private final Runnable doUpdate = new Runnable() { @Override public void run() {update(); } };
 }

@@ -37,7 +37,7 @@ public class InputLockUI implements Input  {
         public void run() {
             if ( ixCall != iCall.get() || !isActive()) // cancel the message if it's not from latest call or input is gone already 
                 return;
-            FThreads.invokeInEDT(showMessageFromEdt);
+            FThreads.invokeInEdtLater(showMessageFromEdt);
         }
     };
     

@@ -56,8 +56,18 @@ public class FThreads {
      * TODO: Write javadoc for this method.
      * @param runnable
      */
-    public static void invokeInEDT(Runnable runnable) {
+    public static void invokeInEdtLater(Runnable runnable) {
         SwingUtilities.invokeLater(runnable);
+    }
+
+    /**
+     * TODO: Write javadoc for this method.
+     */
+    public static void invokeInEdtNowOrLater(Runnable proc) {
+        if( isEDT() )
+            proc.run();
+        else
+            invokeInEdtLater(proc);
     }
 
     /**
@@ -72,7 +82,7 @@ public class FThreads {
      *            the Runnable to run
      * @see javax.swing.SwingUtilities#invokeLater(Runnable)
      */
-    public static void invokeInEDTAndWait(final Runnable proc) {
+    public static void invokeInEdtAndWait(final Runnable proc) {
         if (SwingUtilities.isEventDispatchThread()) {
             // Just run in the current thread.
             proc.run();

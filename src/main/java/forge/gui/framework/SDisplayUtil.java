@@ -9,6 +9,8 @@ import java.util.TimerTask;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
+import forge.FThreads;
+
 /** 
  * Experimental static factory for generic operations carried out
  * onto specific members of the framework. Doublestrike 11-04-12
@@ -86,11 +88,19 @@ public class SDisplayUtil {
 
     /** @param tab0 &emsp; {@link java.gui.framework.IVDoc} */
     public static void showTab(final IVDoc<? extends ICDoc> tab0) {
-        Component c = KeyboardFocusManager.getCurrentKeyboardFocusManager().getPermanentFocusOwner();
-        tab0.getParentCell().setSelected(tab0);
-        // set focus back to previous owner, if any
-        if (null != c) {
-            c.requestFocusInWindow();
-        }
+        
+        Runnable showTabRoutine = new Runnable() {
+            @Override
+            public void run() {
+                FThreads.assertExecutedByEdt(true);
+                Component c = KeyboardFocusManager.getCurrentKeyboardFocusManager().getPermanentFocusOwner();
+                tab0.getParentCell().setSelected(tab0);
+                // set focus back to previous owner, if any
+                if (null != c) {
+                    c.requestFocusInWindow();
+                }
+            }
+        };
+        FThreads.invokeInEdtNowOrLater(showTabRoutine);
     }
 }

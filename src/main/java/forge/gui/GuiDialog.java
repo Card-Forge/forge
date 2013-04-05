@@ -1,8 +1,14 @@
 package forge.gui;
 
+import java.util.concurrent.Callable;
+import java.util.concurrent.FutureTask;
+
 import javax.swing.JOptionPane;
 
+import org.apache.commons.lang3.StringUtils;
+
 import forge.Card;
+import forge.FThreads;
 import forge.Singletons;
 import forge.game.event.FlipCoinEvent;
 import forge.game.player.Player;
@@ -26,23 +32,28 @@ public class GuiDialog {
         return GuiDialog.confirm(c, question, true, options);
     }
     
-    public static boolean confirm(final Card c, String question, final boolean defaultIsYes, final String[] options) {
-        CMatchUI.SINGLETON_INSTANCE.setCard(c);
-        final StringBuilder title = new StringBuilder();
-        if ( c != null)
-            title.append(c.getName()).append(" - Ability");
-    
-        if (!(question.length() > 0)) {
-            question = "Activate card's ability?";
+    public static boolean confirm(final Card c, final String question, final boolean defaultIsYes, final String[] options) {
+        Callable<Boolean> confirmTask = new Callable<Boolean>() {
+            @Override
+            public Boolean call() throws Exception {
+                CMatchUI.SINGLETON_INSTANCE.setCard(c);
+                final String title = c == null ? "Question" : c.getName() + " - Ability";
+                String questionToUse = StringUtils.isBlank(question) ? "Activate card's ability?" : question;
+                String[] opts = options == null ? defaultConfirmOptions : options;
+                int answer = JOptionPane.showOptionDialog(null, questionToUse, title, 
+                        JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, 
+                        opts, opts[defaultIsYes ? 0 : 1]);
+                return answer == JOptionPane.YES_OPTION;
+            }};
+
+        FutureTask<Boolean> future = new FutureTask<Boolean>(confirmTask);
+        FThreads.invokeInEdtAndWait(future);
+        try { 
+            return future.get().booleanValue();
+        } catch (Exception e) { // should be no exception here
+            e.printStackTrace();
         }
-    
-        int answer;
-
-        String[] opts = options == null ? defaultConfirmOptions : options;
-        answer = JOptionPane.showOptionDialog(null, question, title.toString(), JOptionPane.YES_NO_OPTION,
-                JOptionPane.QUESTION_MESSAGE, null, opts, opts[defaultIsYes ? 0 : 1]);
-
-        return answer == JOptionPane.YES_OPTION;
+        return false;
     }
 
     /**

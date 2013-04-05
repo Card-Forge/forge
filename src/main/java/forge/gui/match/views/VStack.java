@@ -175,7 +175,7 @@ public enum VStack implements IVDoc<CStack> {
 
             /*
              * This updates the Card Picture/Detail when the spell is added to
-             * the stack. This funcaitonality was not present in v 1.1.8.
+             * the stack. This functionality was not present in v 1.1.8.
              * 
              * Problem is described in TODO right above this.
              */

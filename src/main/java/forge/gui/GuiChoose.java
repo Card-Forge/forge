@@ -131,7 +131,7 @@ public class GuiChoose {
         };
 
         FutureTask<List<T>> future = new FutureTask<List<T>>(showChoice);
-        FThreads.invokeInEDTAndWait(future);
+        FThreads.invokeInEdtAndWait(future);
         try { 
             return future.get();
         } catch (Exception e) { // should be no exception here
@@ -200,7 +200,7 @@ public class GuiChoose {
         };
 
         FutureTask<List<T>> ft = new FutureTask<List<T>>(callable);
-        FThreads.invokeInEDTAndWait(ft);
+        FThreads.invokeInEdtAndWait(ft);
         try {
             return ft.get();
         } catch (Exception e) { // we have waited enough
