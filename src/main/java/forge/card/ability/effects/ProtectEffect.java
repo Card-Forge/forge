@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import javax.swing.JOptionPane;
-
 import forge.Card;
 import forge.CardLists;
 import forge.CardUtil;
@@ -18,6 +16,7 @@ import forge.card.spellability.Target;
 import forge.game.ai.ComputerUtilCard;
 import forge.game.player.Player;
 import forge.gui.GuiChoose;
+import forge.gui.GuiDialog;
 
 
 public class ProtectEffect extends SpellAbilityEffect {
@@ -129,7 +128,7 @@ public class ProtectEffect extends SpellAbilityEffect {
                     }
                 }
                 gains.add(choice);
-                JOptionPane.showMessageDialog(null, "Computer chooses " + gains, "" + host, JOptionPane.PLAIN_MESSAGE);
+                GuiDialog.message("Computer chooses " + gains, host.toString());
             }
         } else {
             if (sa.getParam("Gains").equals("ChosenColor")) {

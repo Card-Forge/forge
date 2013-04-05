@@ -244,7 +244,6 @@ public final class GameActionUtil {
     
         @Override
         public void resolve() {
-            final GameState game = Singletons.getModel().getGame();
             final List<Card> topOfLibrary = controller.getCardsIn(ZoneType.Library);
             final List<Card> revealed = new ArrayList<Card>();
             int rippleNumber = rippleCount;

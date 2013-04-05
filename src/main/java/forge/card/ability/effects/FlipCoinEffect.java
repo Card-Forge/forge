@@ -2,8 +2,6 @@ package forge.card.ability.effects;
 
 import java.util.List;
 
-import javax.swing.JOptionPane;
-
 import forge.Card;
 import forge.Singletons;
 import forge.card.ability.AbilityFactory;
@@ -127,14 +125,11 @@ public class FlipCoinEffect extends SpellAbilityEffect {
         final boolean resultIsHeads = MyRandom.getRandom().nextBoolean();
 
         Singletons.getModel().getGame().getEvents().post(new FlipCoinEvent());
-        final StringBuilder msgTitle = new StringBuilder();
-        msgTitle.append(source);
-        msgTitle.append(" Flip result:");
         final StringBuilder result = new StringBuilder();
         result.append(flipper.getName());
         result.append("'s flip comes up");
         result.append(resultIsHeads ? " heads." : " tails.");
-        JOptionPane.showMessageDialog(null, result, msgTitle.toString(), JOptionPane.PLAIN_MESSAGE);
+        GuiDialog.message(result.toString(), source + " Flip result:");
 
         return resultIsHeads;
     }

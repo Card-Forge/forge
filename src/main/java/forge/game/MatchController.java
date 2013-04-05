@@ -22,7 +22,6 @@ import forge.game.player.LobbyPlayer;
 import forge.game.player.Player;
 import forge.game.player.PlayerStatistics;
 import forge.game.player.PlayerType;
-import forge.game.zone.ZoneType;
 import forge.gui.InputProxy;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.SDisplayUtil;

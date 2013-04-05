@@ -4,6 +4,7 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.FutureTask;
 
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -65,7 +66,11 @@ public class GuiDialog {
      *            a {@link java.lang.String} object.
      */
     public static void message(final String message) {
-        JOptionPane.showMessageDialog(null, message);
+        message(message, UIManager.getString("OptionPane.messageDialogTitle"));
+    }
+
+    public static void message(final String message, String title) {
+        JOptionPane.showMessageDialog(null, message, title, JOptionPane.PLAIN_MESSAGE);
     }
 
     /**

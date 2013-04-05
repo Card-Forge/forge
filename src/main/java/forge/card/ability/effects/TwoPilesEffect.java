@@ -3,8 +3,6 @@ package forge.card.ability.effects;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.JOptionPane;
-
 import forge.Card;
 import forge.CardLists;
 import forge.card.ability.AbilityFactory;
@@ -17,6 +15,7 @@ import forge.game.ai.ComputerUtilCard;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
+import forge.gui.GuiDialog;
 
 public class TwoPilesEffect extends SpellAbilityEffect {
 
@@ -178,16 +177,9 @@ public class TwoPilesEffect extends SpellAbilityEffect {
             if (chooser.isHuman()) {
                 final String p1Str = String.format("Pile 1 (%s cards)", pile1.size());
                 final String p2Str = String.format("Pile 2 (%s cards)", pile2.size());
+                final String[] possibleValues = { p1Str , p2Str };
 
-                final String message = String.format("Choose a pile\n%s or %s", p1Str, p2Str);
-
-                final Object[] possibleValues = { p1Str , p2Str };
-
-                final Object playDraw = JOptionPane.showOptionDialog(null, message, "Choose a Pile",
-                        JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null,
-                        possibleValues, possibleValues[0]);
-
-                pile1WasChosen = playDraw.equals(0);
+                pile1WasChosen = GuiDialog.confirm(card, "Choose a Pile", possibleValues);
             }
             else {
                 // AI will choose the first pile if it is larger or the same
@@ -237,13 +229,7 @@ public class TwoPilesEffect extends SpellAbilityEffect {
                 if ("Worst".equals(sa.getParam("AILogic"))) {
                     pile1WasChosen = !pile1WasChosen;
                 }
-                if (pile1WasChosen) {
-                    JOptionPane.showMessageDialog(null, "Computer chooses the Pile 1", "",
-                            JOptionPane.INFORMATION_MESSAGE);
-                } else {
-                    JOptionPane.showMessageDialog(null, "Computer chooses the Pile 2", "",
-                            JOptionPane.INFORMATION_MESSAGE);
-                }
+                GuiDialog.message("Computer chooses the Pile " + (pile1WasChosen ? "1" : "2"));
             }
         }
 

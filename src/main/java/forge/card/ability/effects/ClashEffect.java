@@ -2,8 +2,6 @@ package forge.card.ability.effects;
 
 import java.util.HashMap;
 
-import javax.swing.JOptionPane;
-
 import forge.Card;
 import forge.Singletons;
 import forge.card.ability.AbilityFactory;
@@ -16,6 +14,7 @@ import forge.game.GameAction;
 import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
+import forge.gui.GuiDialog;
 
 public class ClashEffect extends SpellAbilityEffect {
 
@@ -122,11 +121,9 @@ public class ClashEffect extends SpellAbilityEffect {
             } else {
                 reveal.append(player).append(" loses clash.");
             }
-            JOptionPane.showMessageDialog(null, reveal.toString(), source.getName(), JOptionPane.PLAIN_MESSAGE);
+            GuiDialog.message(reveal.toString(), source.getName());
             clashMoveToTopOrBottom(player, pCard);
             clashMoveToTopOrBottom(opponent, oCard);
-            // JOptionPane.showMessageDialog(null, reveal.toString(),
-            // source.getName(), JOptionPane.PLAIN_MESSAGE);
             return pCMC > oCMC;
         }
     }

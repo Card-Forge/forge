@@ -3,8 +3,6 @@ package forge.card.ability.effects;
 import java.util.List;
 import java.util.Random;
 
-import javax.swing.JOptionPane;
-
 import forge.Card;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.cardfactory.CardFactoryUtil;
@@ -12,6 +10,7 @@ import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.game.player.Player;
 import forge.gui.GuiChoose;
+import forge.gui.GuiDialog;
 
 public class ChooseNumberEffect extends SpellAbilityEffect {
 
@@ -74,7 +73,7 @@ public class ChooseNumberEffect extends SpellAbilityEffect {
                         final Random randomGen = new Random();
                         chosen = randomGen.nextInt(max - min) + min;
                         final String message = "Randomly chosen number: " + chosen;
-                        JOptionPane.showMessageDialog(null, message, "" + card, JOptionPane.PLAIN_MESSAGE);
+                        GuiDialog.message(message, card.toString());
                     } else if (sa.hasParam("ListTitle")) {
                         final Object o = GuiChoose.one(sa.getParam("ListTitle"), choices);
                         if (null == o) {
