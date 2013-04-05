@@ -760,6 +760,7 @@ public class CardFactoryUtil {
         for (final Player opponent : activator.getOpponents()) {
             cl.addAll(CardFactoryUtil.getActivateablesFromZone(opponent.getZone(ZoneType.Exile), activator));
             cl.addAll(CardFactoryUtil.getActivateablesFromZone(opponent.getZone(ZoneType.Graveyard), activator));
+            cl.addAll(CardFactoryUtil.getActivateablesFromZone(opponent.getZone(ZoneType.Library), activator));
             if (opponent.hasKeyword("Play with your hand revealed.")) {
                 cl.addAll(CardFactoryUtil.getActivateablesFromZone(opponent.getZone(ZoneType.Hand), activator));
             }

@@ -3882,6 +3882,7 @@ res/cardsfolder/f/freed_from_the_real.txt svneol=native#text/plain
 res/cardsfolder/f/freewind_equenaut.txt svneol=native#text/plain
 res/cardsfolder/f/freewind_falcon.txt svneol=native#text/plain
 res/cardsfolder/f/frenetic_efreet.txt -text
+res/cardsfolder/f/frenetic_efreet_avatar.txt -text
 res/cardsfolder/f/frenetic_ogre.txt svneol=native#text/plain
 res/cardsfolder/f/frenetic_raptor.txt svneol=native#text/plain
 res/cardsfolder/f/frenetic_sliver.txt -text
@@ -12194,6 +12195,7 @@ res/cardsfolder/w/winding_canyons.txt -text
 res/cardsfolder/w/winding_wurm.txt svneol=native#text/plain
 res/cardsfolder/w/windreaper_falcon.txt svneol=native#text/plain
 res/cardsfolder/w/windreaver.txt svneol=native#text/plain
+res/cardsfolder/w/windriddle_palaces.txt -text
 res/cardsfolder/w/windrider_eel.txt svneol=native#text/plain
 res/cardsfolder/w/winds_of_change.txt svneol=native#text/plain
 res/cardsfolder/w/winds_of_rath.txt svneol=native#text/plain
