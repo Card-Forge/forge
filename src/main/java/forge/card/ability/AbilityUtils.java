@@ -1100,7 +1100,7 @@ public class AbilityUtils {
             ManaCostBeingPaid newCost = new ManaCostBeingPaid(unlessCost.toString());
             newCost.decreaseColorlessMana(2);
             unlessCost = newCost.toString();
-        } else {
+        } else if( unlessCost.indexOf('<') < 0 ) { // if cost has '<' or '>' signs - it's definitely not a variable
             try {
                 String unlessVar = Integer.toString(calculateAmount(source, sa.getParam("UnlessCost").replace(" ", ""), sa));
                 unlessCost = unlessVar;
@@ -1110,19 +1110,16 @@ public class AbilityUtils {
         }
 
         final Cost cost = new Cost(source, unlessCost, true);
-        final Ability ability = new AbilityStatic(source, cost, null) {
+        final Ability ability = new AbilityStatic(source, cost, sa.getTarget()) {
             @Override
-            public void resolve() {
-                // nothing to do here
-            }
+            public void resolve() { /* nothing to do here */ }
         };
 
         boolean paid = false;
         for (Player payer : payers) {
             ability.setActivatingPlayer(payer);
-            ability.setTarget(sa.getTarget());
             if (payer.isComputer()) {
-                if (AbilityUtils.willAIPayForAbility(sa, payer, ability, paid, payers)) {
+                if (ComputerUtilCost.willPayUnlessCost(sa, payer, ability, paid, payers)) {
                     ComputerUtil.playNoStack((AIPlayer) payer, ability, game); // Unless cost was payed - no resolve
                     paid = true;
                 }
@@ -1132,21 +1129,15 @@ public class AbilityUtils {
             }
         }
 
-        if ( paid ^ isSwitched ) {
-            if (isSwitched && execSubsWhenNotPaid || execSubsWhenPaid) {
-                resolveSubAbilities(sa, usedStack, game);
-            } else if (usedStack) {
-                SpellAbility root = sa.getRootAbility();
-                game.getStack().finishResolving(root, false);
-            }
-        } else {
+        if( paid == isSwitched ) { 
             sa.resolve();
-            if (isSwitched && execSubsWhenPaid || execSubsWhenNotPaid) {
-                resolveSubAbilities(sa, usedStack, game);
-            } else if (usedStack) {
-                SpellAbility root = sa.getRootAbility();
-                game.getStack().finishResolving(root, false);
-            }
+        }
+
+        if ( paid && execSubsWhenPaid || !paid && execSubsWhenNotPaid ) { // switched refers only to main ability!
+            resolveSubAbilities(sa, usedStack, game);
+        } else if (usedStack) {
+            SpellAbility root = sa.getRootAbility();
+            game.getStack().finishResolving(root, false);
         }
     }
 
@@ -1193,43 +1184,6 @@ public class AbilityUtils {
                 }
             }
         }
-    }
-
-    private static boolean willAIPayForAbility(SpellAbility sa, Player payer, SpellAbility ability, boolean paid, List<Player> payers) {
-        Card source = sa.getSourceCard();
-        boolean payForOwnOnly = "OnlyOwn".equals(sa.getParam("UnlessAI"));
-        boolean payOwner = sa.hasParam("UnlessAI") ? sa.getParam("UnlessAI").startsWith("Defined") : false;
-        boolean payNever = "Never".equals(sa.getParam("UnlessAI"));
-        boolean isMine = sa.getActivatingPlayer().equals(payer);
-
-        if (payNever) { return false; }
-        if (payForOwnOnly && !isMine) { return false; }
-        if (payOwner) {
-            final String defined = sa.getParam("UnlessAI").substring(7);
-            final Player player = AbilityUtils.getDefinedPlayers(source, defined, sa).get(0);
-            if (!payer.equals(player)) {
-                return false;
-            }
-        }
-
-        // AI will only pay when it's not already payed and only opponents abilities
-        if (paid || (payers.size() > 1 && (isMine && !payForOwnOnly))) {
-            return false;
-        }
-        if (ComputerUtilCost.canPayCost(ability, payer)
-                && ComputerUtilCost.checkLifeCost(payer, ability.getPayCosts(), source, 4, sa)
-                && ComputerUtilCost.checkDamageCost(payer, ability.getPayCosts(), source, 4)
-                && ComputerUtilCost.checkDiscardCost(payer, ability.getPayCosts(), source)
-                && (!source.getName().equals("Tyrannize") || payer.getCardsIn(ZoneType.Hand).size() > 2)
-                && (!source.getName().equals("Perplex") || payer.getCardsIn(ZoneType.Hand).size() < 2)
-                && (!source.getName().equals("Breaking Point") || payer.getCreaturesInPlay().size() > 1)
-                && (!source.getName().equals("Chain of Vapor")
-                        || (payer.getOpponent().getCreaturesInPlay().size() > 0 && payer.getLandsInPlay().size() > 3))) {
-            // AI was crashing because the blank ability used to pay costs
-            // Didn't have any of the data on the original SA to pay dependant costs
-            return true;
-        }
-        return false;
     }
 
     /**

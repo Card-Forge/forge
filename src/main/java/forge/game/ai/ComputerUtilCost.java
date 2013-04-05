@@ -382,4 +382,41 @@ public class ComputerUtilCost {
         return CostPayment.canPayAdditionalCosts(sa.getPayCosts(), sa);
     }
 
+    public static boolean willPayUnlessCost(SpellAbility sa, Player payer, SpellAbility ability, boolean alreadyPaid, List<Player> payers) {
+        Card source = sa.getSourceCard();
+        boolean payForOwnOnly = "OnlyOwn".equals(sa.getParam("UnlessAI"));
+        boolean payOwner = sa.hasParam("UnlessAI") ? sa.getParam("UnlessAI").startsWith("Defined") : false;
+        boolean payNever = "Never".equals(sa.getParam("UnlessAI"));
+        boolean isMine = sa.getActivatingPlayer().equals(payer);
+    
+        if (payNever) { return false; }
+        if (payForOwnOnly && !isMine) { return false; }
+        if (payOwner) {
+            final String defined = sa.getParam("UnlessAI").substring(7);
+            final Player player = AbilityUtils.getDefinedPlayers(source, defined, sa).get(0);
+            if (!payer.equals(player)) {
+                return false;
+            }
+        }
+    
+        // AI will only pay when it's not already payed and only opponents abilities
+        if (alreadyPaid || (payers.size() > 1 && (isMine && !payForOwnOnly))) {
+            return false;
+        }
+        if (canPayCost(ability, payer)
+                && checkLifeCost(payer, ability.getPayCosts(), source, 4, sa)
+                && checkDamageCost(payer, ability.getPayCosts(), source, 4)
+                && checkDiscardCost(payer, ability.getPayCosts(), source)
+                && (!source.getName().equals("Tyrannize") || payer.getCardsIn(ZoneType.Hand).size() > 2)
+                && (!source.getName().equals("Perplex") || payer.getCardsIn(ZoneType.Hand).size() < 2)
+                && (!source.getName().equals("Breaking Point") || payer.getCreaturesInPlay().size() > 1)
+                && (!source.getName().equals("Chain of Vapor")
+                        || (payer.getOpponent().getCreaturesInPlay().size() > 0 && payer.getLandsInPlay().size() > 3))) {
+            // AI was crashing because the blank ability used to pay costs
+            // Didn't have any of the data on the original SA to pay dependant costs
+            return true;
+        }
+        return false;
+    }
+
 }
