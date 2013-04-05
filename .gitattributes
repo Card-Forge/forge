@@ -2500,6 +2500,7 @@ res/cardsfolder/d/defiant_stand.txt -text
 res/cardsfolder/d/defiant_vanguard.txt -text
 res/cardsfolder/d/defiler_of_souls.txt svneol=native#text/plain
 res/cardsfolder/d/defiling_tears.txt svneol=native#text/plain
+res/cardsfolder/d/deflection.txt -text
 res/cardsfolder/d/deft_duelist.txt svneol=native#text/plain
 res/cardsfolder/d/deftblade_elite.txt -text svneol=unset#text/plain
 res/cardsfolder/d/defy_death.txt -text
@@ -2717,6 +2718,7 @@ res/cardsfolder/d/dive_bomber.txt svneol=native#text/plain
 res/cardsfolder/d/divebomber_griffin.txt svneol=native#text/plain
 res/cardsfolder/d/divergent_growth.txt -text
 res/cardsfolder/d/diversionary_tactics.txt svneol=native#text/plain
+res/cardsfolder/d/divert.txt -text
 res/cardsfolder/d/divination.txt svneol=native#text/plain
 res/cardsfolder/d/divine_congregation.txt svneol=native#text/plain
 res/cardsfolder/d/divine_favor.txt svneol=native#text/plain
@@ -9533,6 +9535,7 @@ res/cardsfolder/s/shu_general.txt svneol=native#text/plain
 res/cardsfolder/s/shu_grain_caravan.txt svneol=native#text/plain
 res/cardsfolder/s/shu_soldier_farmers.txt svneol=native#text/plain
 res/cardsfolder/s/shuko.txt svneol=native#text/plain
+res/cardsfolder/s/shunt.txt -text
 res/cardsfolder/s/shuriken.txt -text
 res/cardsfolder/s/shyft.txt -text
 res/cardsfolder/s/sibilant_spirit.txt svneol=native#text/plain
@@ -11232,6 +11235,7 @@ res/cardsfolder/t/transmogrifying_licid.txt -text
 res/cardsfolder/t/transmutation.txt svneol=native#text/plain
 res/cardsfolder/t/transmute_artifact.txt -text
 res/cardsfolder/t/trap_digger.txt svneol=native#text/plain
+res/cardsfolder/t/trap_runner.txt -text
 res/cardsfolder/t/trapfinders_trick.txt -text
 res/cardsfolder/t/trapjaw_kelpie.txt svneol=native#text/plain
 res/cardsfolder/t/trapmakers_snare.txt svneol=native#text/plain
