@@ -2,6 +2,8 @@ Name:Breeding Pool
 ManaCost:no cost
 Types:Land Forest Island
 Text:As CARDNAME enters the battlefield, you may pay 2 life. If you don't, CARDNAME enters the battlefield tapped.
+K:ETBReplacement:Other:DBTap
+SVar:DBTap:AB$ Tap | Cost$ 0 | ETB$ True | Defined$ Self | UnlessCost$ PayLife<2> | UnlessPayer$ You | StackDescription$ enters the battlefield tapped.
 SVar:Picture:http://resources.wizards.com/magic/cards/dis/en-us/card97088.jpg
 Oracle:({T}: Add {G} or {U} to your mana pool.)\nAs Breeding Pool enters the battlefield, you may pay 2 life. If you don't, Breeding Pool enters the battlefield tapped.
 SetInfo:GTC Rare

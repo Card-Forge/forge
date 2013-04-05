@@ -2,6 +2,8 @@ Name:Blood Crypt
 ManaCost:no cost
 Types:Land Swamp Mountain
 Text:As CARDNAME enters the battlefield, you may pay 2 life. If you don't, CARDNAME enters the battlefield tapped.
+K:ETBReplacement:Other:DBTap
+SVar:DBTap:AB$ Tap | Cost$ 0 | ETB$ True | Defined$ Self | UnlessCost$ PayLife<2> | UnlessPayer$ You | StackDescription$ enters the battlefield tapped.
 SVar:Picture:http://resources.wizards.com/magic/cards/dis/en-us/card97102.jpg
 Oracle:({T}: Add {B} or {R} to your mana pool.)\nAs Blood Crypt enters the battlefield, you may pay 2 life. If you don't, Blood Crypt enters the battlefield tapped.
 SetInfo:RTR Rare

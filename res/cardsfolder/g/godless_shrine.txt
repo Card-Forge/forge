@@ -2,6 +2,8 @@ Name:Godless Shrine
 ManaCost:no cost
 Types:Land Plains Swamp
 Text:As CARDNAME enters the battlefield, you may pay 2 life. If you don't, CARDNAME enters the battlefield tapped.
+K:ETBReplacement:Other:DBTap
+SVar:DBTap:AB$ Tap | Cost$ 0 | ETB$ True | Defined$ Self | UnlessCost$ PayLife<2> | UnlessPayer$ You | StackDescription$ enters the battlefield tapped.
 SVar:Picture:http://resources.wizards.com/magic/cards/gpt/en-us/card96935.jpg
 Oracle:({T}: Add {W} or {B} to your mana pool.)\nAs Godless Shrine enters the battlefield, you may pay 2 life. If you don't, Godless Shrine enters the battlefield tapped.
 SetInfo:GPT Rare
