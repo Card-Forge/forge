@@ -140,8 +140,8 @@ public class CostPartMana extends CostPart {
             if(!inpPayment.isPaid())
                 return false;
         } 
-        if (this.getAmountOfX() > 0 && !xWasBilled) {
-            if( !ability.isAnnouncing("X") ) {
+        if (this.getAmountOfX() > 0) {
+            if( !ability.isAnnouncing("X") && !xWasBilled) {
                 source.setXManaCostPaid(0);
                 InputPayment inpPayment = new InputPayManaX(ability, this.getAmountOfX(), this.canXbe0());
                 FThreads.setInputAndWait(inpPayment);
