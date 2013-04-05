@@ -19,16 +19,13 @@ package forge.card.cardfactory;
 
 import java.util.List;
 
-import javax.swing.JOptionPane;
-
 import forge.Card;
 import forge.CardLists;
 import forge.Command;
 import forge.FThreads;
-import forge.Singletons;
 import forge.control.input.InputSelectCards;
+import forge.control.input.InputSelectCardsFromList;
 import forge.game.player.Player;
-import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiDialog;
 
@@ -41,40 +38,6 @@ import forge.gui.GuiDialog;
  * @version $Id$
  */
 class CardFactoryLands {
-
-    /** 
-     * TODO: Write javadoc for this type.
-     *
-     */
-    private static final class InputRevealCardType extends InputSelectCards {
-        private final String type;
-        private final Card card;
-        private static final long serialVersionUID = -2774066137824255680L;
-
-        /**
-         * TODO: Write javadoc for Constructor.
-         * @param min
-         * @param max
-         * @param type
-         * @param card
-         */
-        private InputRevealCardType(int min, int max, String type, Card card) {
-            super(min, max);
-            this.type = type;
-            this.card = card;
-        }
-
-        @Override
-        public String getMessage() {
-            return card.getName() + " - Reveal a card.";
-        }
-
-        @Override
-        protected boolean isValidChoice(Card c) {
-            Zone zone = Singletons.getModel().getGame().getZoneOf(c);
-            return zone.is(ZoneType.Hand) && c.isType(type) && c.getController() == card.getController();
-        }
-    }
 
     /**
      * <p>
@@ -195,39 +158,26 @@ class CardFactoryLands {
 
                 @Override
                 public void execute() {
-                    if (card.getController().isHuman()) {
-                        this.humanExecute();
-                    } else {
-                        this.computerExecute();
-                    }
-                }
-
-                public void computerExecute() {
                     List<Card> hand = CardLists.getType(card.getController().getCardsIn(ZoneType.Hand), type);
-                    if (hand.size() > 0) {
-                        this.revealCard(hand.get(0));
-                    } else {
-                        card.setTapped(true);
-                    }
-                }
-
-                public void humanExecute() {
-                    InputSelectCards inp = new InputRevealCardType(0, 1, type, card);
-                    FThreads.setInputAndWait(inp);
+                    List<Card> toReveal = null;
+                    if (!hand.isEmpty()) {
+                        if (card.getController().isHuman()) {
+                                InputSelectCards inp = new InputSelectCardsFromList(1, 1, hand);
+                                inp.setCancelAllowed(true);
+                                inp.setMessage("Reveal a " + type + " card.");
+                                FThreads.setInputAndWait(inp);
+                                toReveal = inp.hasCancelled() ? null : inp.getSelected();
+                        } else {
+                            // Ai wants to reveal the first card out of a list
+                            toReveal = hand.subList(0, 0);
+                        }
+                    } else toReveal = null;
                     
-                    if ( inp.hasCancelled() || inp.getSelected().isEmpty() ) {
-                        card.setTapped(true);
+                    if (toReveal != null && !toReveal.isEmpty()) {
+                        card.getController().getGame().getAction().reveal(toReveal, card.getController());
                     } else {
-                        String cardName = inp.getSelected().get(0).getName();
-                        JOptionPane.showMessageDialog(null, "Revealed card: " + cardName, cardName, JOptionPane.PLAIN_MESSAGE);
+                        card.setTapped(true);
                     }
-
-                } // execute()
-
-                private void revealCard(final Card c) {
-                    final StringBuilder sb = new StringBuilder();
-                    sb.append(c.getController()).append(" reveals ").append(c.getName());
-                    JOptionPane.showMessageDialog(null, sb.toString(), card.getName(), JOptionPane.PLAIN_MESSAGE);
                 }
             });
         } // *************** END ************ END **************************
