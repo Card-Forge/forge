@@ -180,7 +180,7 @@ public class CostPayment {
         final List<CostPart> parts = this.cost.getCostParts();
 
         if (this.getCost().getCostMana() == null) {
-            parts.add(new CostPartMana(ManaCost.ZERO, false));
+            parts.add(new CostPartMana(ManaCost.ZERO, null, false));
         }
 
         Map<Class<? extends CostPart>, PaymentDecision> decisions = new HashMap<Class<? extends CostPart>, PaymentDecision>();

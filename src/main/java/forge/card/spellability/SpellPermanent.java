@@ -71,22 +71,6 @@ public class SpellPermanent extends Spell {
     } // Spell_Permanent()
 
     /**
-     * <p>
-     * Constructor for Spell_Permanent.
-     * </p>
-     * 
-     * @param sourceCard
-     *            a {@link forge.Card} object.
-     * @param cost
-     *            a {@link forge.card.cost.Cost} object.
-     * @param tgt
-     *            a {@link forge.card.spellability.Target} object.
-     */
-    public SpellPermanent(final Card sourceCard, final Cost cost, final Target tgt) {
-        this(sourceCard, cost, tgt, true);
-    } // Spell_Permanent()
-
-    /**
      * Instantiates a new spell_ permanent.
      * 
      * @param sourceCard
@@ -98,7 +82,7 @@ public class SpellPermanent extends Spell {
      * @param setDesc
      *            the set desc
      */
-    public SpellPermanent(final Card sourceCard, final Cost cost, final Target tgt, final boolean setDesc) {
+    public SpellPermanent(final Card sourceCard, final Cost cost, final Target tgt) {
         super(sourceCard, cost, tgt);
 
         if (sourceCard.isCreature()) {
@@ -110,9 +94,8 @@ public class SpellPermanent extends Spell {
             this.setStackDescription(sourceCard.getName());
         }
 
-        if (setDesc) {
-            this.setDescription(this.getStackDescription());
-        }
+
+        this.setDescription(this.getStackDescription());
 
         if (this.getManaCost().countX() > 0) {
             if (!this.getSourceCard().getSVar("X").equals("")) {

@@ -51,22 +51,10 @@ public class Cost {
         return this.costParts;
     }
 
-    private boolean sacCost = false;
     private boolean tapCost = false;
-    private boolean untapCost = false;
-
-
-    public final boolean getSacCost() {
-        return this.sacCost;
-    }
-
 
     public final boolean hasTapCost() {
         return this.tapCost;
-    }
-
-    public final boolean hasUntapCost() {
-        return this.untapCost;
     }
 
     /**
@@ -140,6 +128,7 @@ public class Cost {
         this.name = card != null ? card.getName() : "";
 
         boolean xCantBe0 = false;
+        boolean untapCost = false;
 
         StringBuilder manaParts = new StringBuilder();
         String[] parts = TextUtil.splitWithParenthesis(parse, ' ', '<', '>');
@@ -149,30 +138,38 @@ public class Cost {
             if ( part.equals("T") || part.equals("Tap") )
                 this.tapCost = true;
             if ( part.equals("Q") || part.equals("Untap") )
-                this.untapCost = true;
+                untapCost = true;
         }
         
+        CostPartMana parsedMana = null;
         for(String part : parts) {
             if( "XCantBe0".equals(part) )
                 xCantBe0 = true;
             else {
                 CostPart cp = parseCostPart(part, tapCost, untapCost);
                 if ( null != cp )
-                    this.costParts.add(cp);
+                    if ( cp instanceof CostPartMana ) {
+                        parsedMana = (CostPartMana) cp;
+                    } else {
+                        this.costParts.add(cp);
+                    }
                 else
                     manaParts.append(part).append(" ");
             }
             
         }
 
-        if (manaParts.length() > 0) {
-            this.costParts.add(0, new CostPartMana(new ManaCost(new ManaCostParser(manaParts.toString())), xCantBe0));
+        if ( parsedMana == null && manaParts.length() > 0) {
+            parsedMana = new CostPartMana(new ManaCost(new ManaCostParser(manaParts.toString())), null, xCantBe0);
+        }
+        if ( parsedMana != null ) {
+            this.costParts.add(0, parsedMana);
         }
 
+        
         // inspect parts to set Sac, {T} and {Q} flags
         for (int iCp = 0; iCp < costParts.size(); iCp++) {
             CostPart cp = costParts.get(iCp);
-            if( cp instanceof CostSacrifice ) sacCost = true;
 
             // my guess why Q/T are to be first and are followed by mana parts 
             // is because Q/T are undoable and mana is interactive, so it well be easy to rollback if player refuses to pay 
@@ -189,6 +186,13 @@ public class Cost {
 
     private static CostPart parseCostPart(String parse, boolean tapCost, boolean untapCost) {
 
+        if(parse.startsWith("Mana<")) {
+            final String[] splitStr = TextUtil.split(abCostParse(parse, 1)[0], '\\');
+            final String restriction = splitStr.length > 1 ? splitStr[1] : null;
+            final boolean xCantBe0 = splitStr.length > 1 && splitStr[1].equals("XCantBe0");
+            return new CostPartMana(new ManaCost(new ManaCostParser(splitStr[0])), xCantBe0 ? null : restriction, xCantBe0);
+        }
+        
         if(parse.startsWith("tapXType<")) {
             final String[] splitStr = abCostParse(parse, 3);
             final String description = splitStr.length > 2 ? splitStr[2] : null;
@@ -342,8 +346,7 @@ public class Cost {
         final int startPos = 1 + parse.indexOf("<");
         final int endPos = parse.indexOf(">", startPos);
         String str = parse.substring(startPos, endPos);
-
-        final String[] splitStr = str.split("/", numParse);
+        final String[] splitStr = TextUtil.split(str, '/', numParse);
         return splitStr;
     }
 
@@ -372,7 +375,7 @@ public class Cost {
             // Spells with a cost of 0 should be affected too
             final ManaCostBeingPaid changedCost = new ManaCostBeingPaid("0");
             changedCost.applySpellCostChange(sa);
-            this.costParts.add(new CostPartMana(changedCost.toManaCost(), false));
+            this.costParts.add(new CostPartMana(changedCost.toManaCost(), null, false));
         }
     }
 

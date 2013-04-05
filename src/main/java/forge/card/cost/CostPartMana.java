@@ -40,6 +40,7 @@ public class CostPartMana extends CostPart {
     private final ManaCost cost;
     private ManaCost adjustedCost;
     private boolean xCantBe0 = false;
+    private final String restriction;
 
     /**
      * Instantiates a new cost mana.
@@ -50,9 +51,10 @@ public class CostPartMana extends CostPart {
      *            the amount
      * @param xCantBe0 TODO
      */
-    public CostPartMana(final ManaCost cost, boolean xCantBe0) {
+    public CostPartMana(final ManaCost cost, String restriction, boolean xCantBe0) {
         this.cost = cost;
-        this.xCantBe0 = xCantBe0; // TODO: Add 0 to parameter's name.
+        this.xCantBe0 = xCantBe0;
+        this.restriction = restriction;
     }
 
     /**
@@ -171,5 +173,14 @@ public class CostPartMana extends CostPart {
     @Override
     public PaymentDecision decideAIPayment(AIPlayer ai, SpellAbility ability, Card source) {
         return new PaymentDecision(0);
+    }
+
+    /**
+     * TODO: Write javadoc for this method.
+     * @return
+     */
+    public String getRestiction() {
+        // TODO Auto-generated method stub
+        return restriction;
     }
 }
