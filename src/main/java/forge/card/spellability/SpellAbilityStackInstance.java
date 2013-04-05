@@ -256,4 +256,12 @@ public class SpellAbilityStackInstance {
     public final boolean isOptionalTrigger() {
         return this.ability.isOptionalTrigger();
     }
+
+    public void updateTarget(Target target) {
+        if (target != null) {
+            this.tc = target.getTargetChoices();
+            this.ability.setTarget(target);
+            this.stackDescription = this.ability.getStackDescription();
+        }
+    }
 }

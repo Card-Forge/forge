@@ -115,6 +115,7 @@ public enum ApiType {
     Attach (AttachEffect.class, AttachAi.class),
     BecomesBlocked (BecomesBlockedEffect.class, BecomesBlockedAi.class),
     Bond (BondEffect.class, BondAi.class),
+    ChangeTargets(ChangeTargetsEffect.class,  CannotPlayAi.class),
     ChangeZone(ChangeZoneEffect.class, ChangeZoneAi.class),
     ChangeZoneAll(ChangeZoneAllEffect.class, ChangeZoneAllAi.class),
     /** This is <b>Modal</b>, like 'choose one - ' or 'choose two - '. <br> Might be great to rename this api and update all scripts.*/

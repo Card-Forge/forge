@@ -15,6 +15,9 @@ import forge.Card;
 import forge.FThreads;
 import forge.GameEntity;
 import forge.card.spellability.SpellAbility;
+import forge.card.spellability.Target;
+import forge.card.spellability.TargetChoices;
+import forge.card.spellability.TargetSelection;
 import forge.control.input.Input;
 import forge.control.input.InputAutoPassPriority;
 import forge.control.input.InputBlock;
@@ -400,5 +403,21 @@ public class PlayerControllerHuman extends PlayerController {
             toExile.add(nowChosen);
         }
         return toExile;
+    }
+
+    /* (non-Javadoc)
+     * @see forge.game.player.PlayerController#chooseTargets(forge.card.spellability.SpellAbility, forge.card.spellability.SpellAbilityStackInstance)
+     */
+    @Override
+    public Target chooseTargets(SpellAbility ability) {
+        Target oldTarget = new Target(ability.getTarget());
+        TargetSelection select = new TargetSelection(ability);
+        ability.getTarget().resetTargets();
+        if (select.chooseTargets()) {
+            return ability.getTarget();
+        } else {
+            // Return old target, since we had to reset them above
+            return oldTarget;
+        }
     }
 }

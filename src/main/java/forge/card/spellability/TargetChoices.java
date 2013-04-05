@@ -34,6 +34,11 @@ import forge.game.player.Player;
 public class TargetChoices {
     private int numTargeted = 0;
 
+    // Card or Player are legal targets.
+    private final List<Card> targetCards = new ArrayList<Card>();
+    private final List<Player> targetPlayers = new ArrayList<Player>();
+    private final List<SpellAbility> targetSAs = new ArrayList<SpellAbility>();
+
     /**
      * <p>
      * Getter for the field <code>numTargeted</code>.
@@ -44,11 +49,6 @@ public class TargetChoices {
     public final int getNumTargeted() {
         return this.numTargeted;
     }
-
-    // Card or Player are legal targets.
-    private final List<Card> targetCards = new ArrayList<Card>();
-    private final List<Player> targetPlayers = new ArrayList<Player>();
-    private final List<SpellAbility> targetSAs = new ArrayList<SpellAbility>();
 
     /**
      * <p>

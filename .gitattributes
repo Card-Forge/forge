@@ -10592,6 +10592,7 @@ res/cardsfolder/s/sway_of_illusion.txt -text
 res/cardsfolder/s/sway_of_the_stars.txt svneol=native#text/plain
 res/cardsfolder/s/swell_of_courage.txt svneol=native#text/plain
 res/cardsfolder/s/swelter.txt svneol=native#text/plain
+res/cardsfolder/s/swerve.txt -text
 res/cardsfolder/s/swift_justice.txt -text
 res/cardsfolder/s/swift_maneuver.txt svneol=native#text/plain
 res/cardsfolder/s/swift_silence.txt -text
@@ -13628,6 +13629,7 @@ src/main/java/forge/card/ability/effects/AnimateEffectBase.java svneol=native#te
 src/main/java/forge/card/ability/effects/AttachEffect.java -text
 src/main/java/forge/card/ability/effects/BecomesBlockedEffect.java -text
 src/main/java/forge/card/ability/effects/BondEffect.java -text
+src/main/java/forge/card/ability/effects/ChangeTargetsEffect.java -text
 src/main/java/forge/card/ability/effects/ChangeZoneAllEffect.java -text
 src/main/java/forge/card/ability/effects/ChangeZoneEffect.java -text
 src/main/java/forge/card/ability/effects/CharmEffect.java -text

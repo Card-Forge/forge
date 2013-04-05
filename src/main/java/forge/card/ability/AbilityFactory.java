@@ -108,9 +108,9 @@ public final class AbilityFactory {
             hostCard.setCopiesSpells(true);
         }
 
-        else if (api == ApiType.Counter) {
-            // Since all "Counter" ABs Counter things on the Stack no need for
-            // it to be everywhere
+        else if (api == ApiType.Counter || api == ApiType.ChangeTargets) {
+            // Since all "Counter" or "ChangeTargets" abilities only target the Stack Zone
+            // No need to have each of those scripts have that info
             if (abTgt != null) {
                 abTgt.setZone(ZoneType.Stack);
             }
@@ -227,6 +227,9 @@ public final class AbilityFactory {
             abTgt.setSAValidTargeting(mapParams.get("TargetValidTargeting"));
         }
 
+        if (mapParams.containsKey("TargetsSingleTarget")) {
+            abTgt.setSingleTarget(true);
+        }
         if (mapParams.containsKey("TargetUnique")) {
             abTgt.setUniqueTargets(true);
         }

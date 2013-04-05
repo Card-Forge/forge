@@ -9,6 +9,7 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
 import forge.Card;
 import forge.GameEntity;
 import forge.card.spellability.SpellAbility;
+import forge.card.spellability.Target;
 import forge.control.input.Input;
 import forge.deck.Deck;
 import forge.game.GameState;
@@ -96,6 +97,7 @@ public abstract class PlayerController {
 
     public abstract Integer announceRequirements(SpellAbility ability, String announce, boolean allowZero);
     public abstract List<Card> choosePermanentsToSacrifice(List<Card> validTargets, String validMessage, int amount, SpellAbility sa, boolean destroy, boolean isOptional);
+    public abstract Target chooseTargets(SpellAbility ability);
 
     public Card chooseSingleCardForEffect(List<Card> sourceList, SpellAbility sa, String title) { return chooseSingleCardForEffect(sourceList, sa, title, false); }
     public abstract Card chooseSingleCardForEffect(List<Card> sourceList, SpellAbility sa, String title, boolean isOptional);

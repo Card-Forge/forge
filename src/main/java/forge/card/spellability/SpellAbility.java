@@ -1688,6 +1688,22 @@ public abstract class SpellAbility implements ISpellAbility {
             }
         }
 
+        if (tgt.isSingleTarget()) {
+            final ArrayList<TargetChoices> choices = topSA.getAllTargetChoices();
+            int totalTargets = 0;
+            for(TargetChoices tc : choices) {
+                totalTargets += tc.getNumTargeted();
+                if (totalTargets > 1) {
+                    // As soon as we get more than one, bail out
+                    return false;
+                }
+            }
+            if (totalTargets != 1) {
+                // Make sure that there actually is one target
+                return false;
+            }
+        }
+
         return topSA.getSourceCard().isValid(tgt.getValidTgts(), this.getActivatingPlayer(), this.getSourceCard());
     }
 

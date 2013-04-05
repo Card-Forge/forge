@@ -12,6 +12,7 @@ import forge.Card;
 import forge.GameEntity;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
+import forge.card.spellability.Target;
 import forge.control.input.Input;
 import forge.control.input.InputAutoPassPriority;
 import forge.deck.Deck;
@@ -250,6 +251,15 @@ public class PlayerControllerAi extends PlayerController {
     @Override
     public List<Card> chooseCardsToDelve(int colorlessCost, List<Card> grave) {
         return getAi().chooseCardsToDelve(colorlessCost, grave);
+    }
+
+    /* (non-Javadoc)
+     * @see forge.game.player.PlayerController#chooseTargets(forge.card.spellability.SpellAbility, forge.card.spellability.SpellAbilityStackInstance)
+     */
+    @Override
+    public Target chooseTargets(SpellAbility ability) {
+        // AI currently can't do this. But when it can it will need to be based on Ability API
+        return null;
     }
 
 }

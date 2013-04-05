@@ -62,6 +62,7 @@ public class Target {
     private boolean differentControllers = false;
     private boolean sameController = false;
     private boolean withoutSameCreatureType = false;
+    private boolean singleTarget = false;
     private String definedController = null;
 
     // How many can be targeted?
@@ -105,6 +106,8 @@ public class Target {
         this.sameController = target.isSameController();
         this.withoutSameCreatureType = target.isWithoutSameCreatureType();
         this.definedController = target.getDefinedController();
+        this.singleTarget = target.isSingleTarget();
+        this.choice = target.getTargetChoices();
     }
 
     /**
@@ -663,6 +666,7 @@ public class Target {
         }
 
         if (this.tgtZone.contains(ZoneType.Stack)) {
+            // Stack Zone targets are considered later
             return true;
         } else {
             for (final Card c : Singletons.getModel().getGame().getCardsIn(this.tgtZone)) {
@@ -848,6 +852,20 @@ public class Target {
      */
     public void setDefinedController(String defined) {
         this.definedController = defined;
+    }
+
+    /**
+     * @return the singleTarget
+     */
+    public boolean isSingleTarget() {
+        return singleTarget;
+    }
+
+    /**
+     * @param singleTarget the singleTarget to set
+     */
+    public void setSingleTarget(boolean singleTarget) {
+        this.singleTarget = singleTarget;
     }
 
     /**
