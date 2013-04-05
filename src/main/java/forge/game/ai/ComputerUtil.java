@@ -810,12 +810,20 @@ public class ComputerUtil {
                 || card.hasKeyword("Haste"))) || card.hasKeyword("Exalted")) {
             return true;
         }
-        //cast equipments in Main1 when there are creatures to equip
+        //cast equipments in Main1 when there are creatures to equip and no other unequipped equipment
         if (card.isEquipment()) {
-            for (Card c : card.getController().getCreaturesInPlay()) {
-                if (CombatUtil.canAttackNextTurn(c) && c.canBeEquippedBy(card)) {
-                    return true;
+            boolean playNow = false;
+            for (Card c : card.getController().getCardsIn(ZoneType.Battlefield)) {
+                if (c.isEquipment() && ! c.isEquipping()) {
+                    playNow = false;
+                    break;
                 }
+                if (!playNow && c.isCreature() && CombatUtil.canAttackNextTurn(c) && c.canBeEquippedBy(card)) {
+                    playNow = true;
+                }
+            }
+            if (playNow) {
+                return true;
             }
         }
 
