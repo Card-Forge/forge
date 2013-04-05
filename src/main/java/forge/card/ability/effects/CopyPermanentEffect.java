@@ -229,6 +229,9 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
                     copy.setCloneOrigin(hostCard);
                     sa.getSourceCard().addClone(copy);
                     crds[i] = copy;
+                    if (sa.hasParam("RememberCopied")) {
+                        hostCard.addRemembered(copy);
+                    }
                 }
 
                 if (wasInAlt) {

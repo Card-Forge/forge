@@ -1,0 +1,15 @@
+Name:Dual Nature
+ManaCost:4 G G
+Types:Enchantment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.nonToken | TriggerZones$ Battlefield | Execute$ TrigDualCopy | TriggerDescription$ Whenever a nontoken creature enters the battlefield, its controller puts a token that's a copy of that creature onto the battlefield.
+SVar:TrigDualCopy:AB$ CopyPermanent | Cost$ 0 | Defined$ TriggeredCard | Controller$ TriggeredCardController | RememberCopied$ True
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Creature.nonToken | TriggerZones$ Battlefield | Execute$ TrigDualExile | TriggerDescription$ Whenever a nontoken creature leaves the battlefield, exile all tokens with the same name as that creature.
+SVar:TrigDualExile:AB$ ChangeZoneAll | Cost$ 0 | ChangeType$ Triggered.sameName+token | Origin$ Battlefield | Destination$ Exile
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigDualExileAll | TriggerDescription$ When CARDNAME leaves the battlefield, exile all tokens put onto the battlefield with CARDNAME.
+SVar:TrigDualExileAll:AB$ ChangeZoneAll | Cost$ 0 | ChangeType$ Card.IsRemembered | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.IsRemembered | TriggerZones$ Battlefield | Execute$ TrigForget | Static$ True
+SVar:TrigForget:DB$ Pump | ForgetObjects$ TriggeredCard
+SVar:Picture:http://www.wizards.com/global/images/magic/general/dual_nature.jpg
+Oracle:Whenever a nontoken creature enters the battlefield, its controller puts a token that's a copy of that creature onto the battlefield.\nWhenever a nontoken creature leaves the battlefield, exile all tokens with the same name as that creature.\nWhen Dual Nature leaves the battlefield, exile all tokens put onto the battlefield with Dual Nature.
+SetInfo:PCY Rare
