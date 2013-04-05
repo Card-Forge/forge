@@ -387,6 +387,7 @@ public class ComputerUtilCost {
         boolean payForOwnOnly = "OnlyOwn".equals(sa.getParam("UnlessAI"));
         boolean payOwner = sa.hasParam("UnlessAI") ? sa.getParam("UnlessAI").startsWith("Defined") : false;
         boolean payNever = "Never".equals(sa.getParam("UnlessAI"));
+        boolean shockland = "Shockland".equals(sa.getParam("UnlessAI"));
         boolean isMine = sa.getActivatingPlayer().equals(payer);
     
         if (payNever) { return false; }
@@ -397,6 +398,16 @@ public class ComputerUtilCost {
             if (!payer.equals(player)) {
                 return false;
             }
+        } else if (shockland) {
+            if (payer.getLife() > 3 && payer.canPayLife(2)) {
+                final int landsize = payer.getLandsInPlay().size();
+                for (Card c : payer.getCardsIn(ZoneType.Hand)) {
+                    if (landsize == c.getCMC()) {
+                        return true;
+                    }
+                }
+            }
+            return false;
         }
     
         // AI will only pay when it's not already payed and only opponents abilities
