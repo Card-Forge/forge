@@ -810,6 +810,14 @@ public class ComputerUtil {
                 || card.hasKeyword("Haste"))) || card.hasKeyword("Exalted")) {
             return true;
         }
+        //cast equipments in Main1 when there are creatures to equip
+        if (card.isEquipment()) {
+            for (Card c : card.getController().getCreaturesInPlay()) {
+                if (CombatUtil.canAttackNextTurn(c) && c.canBeEquippedBy(card)) {
+                    return true;
+                }
+            }
+        }
 
         // get all cards the computer controls with BuffedBy
         final List<Card> buffed = ai.getCardsIn(ZoneType.Battlefield);

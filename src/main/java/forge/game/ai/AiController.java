@@ -489,9 +489,9 @@ public class AiController {
 
             // cast 0 mana cost spells first (might be a Mox)
             if (a1 == 0) {
-                b1 = -2;
+                return -1;
             } else if (b1 == 0) {
-                a1 = -2;
+                return 1;
             }
 
             a1 += getSpellAbilityPriority(a);
@@ -505,6 +505,10 @@ public class AiController {
             // puts creatures in front of spells
             if (sa.getSourceCard().isCreature()) {
                 p += 1;
+            }
+            // don't play equipments before having any creatures
+            if (sa.getSourceCard().isEquipment() && sa.getSourceCard().getController().getCreaturesInPlay().isEmpty()) {
+                p -= 9;
             }
             // sort planeswalker abilities for ultimate
             if (sa.getRestrictions().getPlaneswalker()) {
