@@ -6738,6 +6738,7 @@ res/cardsfolder/m/mirrorworks.txt svneol=native#text/plain
 res/cardsfolder/m/miscalculation.txt svneol=native#text/plain
 res/cardsfolder/m/mischievous_poltergeist.txt svneol=native#text/plain
 res/cardsfolder/m/mischievous_quanar.txt -text
+res/cardsfolder/m/misdirection.txt -text
 res/cardsfolder/m/misers_cage.txt svneol=native#text/plain
 res/cardsfolder/m/misery_charm.txt svneol=native#text/plain
 res/cardsfolder/m/misfortune.txt -text
@@ -6968,6 +6969,7 @@ res/cardsfolder/m/multanis_presence.txt -text
 res/cardsfolder/m/mundungu.txt -text
 res/cardsfolder/m/mungha_wurm.txt svneol=native#text/plain
 res/cardsfolder/m/muraganda_petroglyphs.txt svneol=native#text/plain
+res/cardsfolder/m/murasa.txt -text
 res/cardsfolder/m/murasa_pyromancer.txt svneol=native#text/plain
 res/cardsfolder/m/murder.txt -text
 res/cardsfolder/m/murder_investigation.txt -text
