@@ -118,11 +118,13 @@ public class CostPartMana extends CostPart {
         final Card source = ability.getSourceCard();
         ManaCostBeingPaid toPay = new ManaCostBeingPaid(getManaToPay());
         
+        boolean xWasBilled = false;
         if (this.getAmountOfX() > 0 && !ability.getSVar("X").equals("Count$xPaid")) { // announce X will overwrite whatever was in card script
             // this currently only works for things about Targeted object
             int xCost = AbilityUtils.calculateAmount(source, "X", ability) * this.getAmountOfX();
             byte xColor = MagicColor.fromName(ability.hasParam("XColor") ? ability.getParam("XColor") : "1"); 
             toPay.increaseShard(ManaCostShard.valueOf(xColor), xCost);
+            xWasBilled = true;
         }
         int timesMultikicked = ability.getSourceCard().getMultiKickerMagnitude();
         if ( timesMultikicked > 0 && ability.isAnnouncing("Multikicker")) {
@@ -138,7 +140,7 @@ public class CostPartMana extends CostPart {
             if(!inpPayment.isPaid())
                 return false;
         } 
-        if (this.getAmountOfX() > 0) {
+        if (this.getAmountOfX() > 0 && !xWasBilled) {
             if( !ability.isAnnouncing("X") ) {
                 source.setXManaCostPaid(0);
                 InputPayment inpPayment = new InputPayManaX(ability, this.getAmountOfX(), this.canXbe0());
