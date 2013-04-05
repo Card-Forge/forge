@@ -2,6 +2,7 @@ Name:Deflection
 ManaCost:3 U
 Types:Instant
 A:SP$ ChangeTargets | Cost$ 3 U | TargetType$ Spell | ValidTgts$ Card | TargetsSingleTarget$ True | SpellDescription$ Change the target of target spell with a single target.
+SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deflection.jpg
 Oracle:Change the target of target spell with a single target.
 SetInfo:ICE Rare

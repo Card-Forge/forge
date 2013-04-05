@@ -3,6 +3,7 @@ ManaCost:3 U U
 Types:Instant
 SVar:AltCost:Cost$ ExileFromHand<1/Card.Blue> | Description$ You may exile a blue card from your hand rather than pay CARDNAME's mana cost.
 A:SP$ ChangeTargets | Cost$ 3 U U | TargetType$ Spell | ValidTgts$ Card | TargetsSingleTarget$ True | SpellDescription$ Change the target of target spell with a single target.
+SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/misdirection.jpg
 Oracle:You may exile a blue card from your hand rather than pay Misdirection's mana cost.\nChange the target of target spell with a single target.
 SetInfo:MMQ Rare
