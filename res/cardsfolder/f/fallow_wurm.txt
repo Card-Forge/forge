@@ -3,7 +3,7 @@ ManaCost:2 G
 Types:Creature Wurm
 PT:4/4
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ DBSacSelf | TriggerDescription$ When CARDNAME enters the battlefield, sacrifice it unless you discard a land card.
-SVar:DBSacSelf:DB$ Sacrifice |  Defined$ Self | UnlessCost$ Discard<1/Land> | UnlessPayer$ You
+SVar:DBSacSelf:DB$ Sacrifice | Defined$ Self | UnlessCost$ Discard<1/Land> | UnlessPayer$ You
 SVar:NeedsToPlayVar:Y GE1
 SVar:Y:Count$TypeInYourHand.Land
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fallow_wurm.jpg

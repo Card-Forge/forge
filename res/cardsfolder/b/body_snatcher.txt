@@ -2,10 +2,8 @@ Name:Body Snatcher
 ManaCost:2 B B
 Types:Creature Minion
 PT:2/2
-T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigBodySnatcherDiscardCreature | TriggerDescription$ When CARDNAME enters the battlefield, exile it unless you discard a creature card.
-SVar:TrigBodySnatcherDiscardCreature:AB$ Discard | Cost$ 0 | Mode$ TgtChoose | DiscardValid$ Creature | RememberDiscarded$ True | Optional$ True | SubAbility$ DBBodySnatcherExileMe
-SVar:DBBodySnatcherExileMe:DB$ ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Exile | ConditionDefined$ Remembered | ConditionPresent$ Creature | ConditionCompare$ EQ0 | SubAbility$ DBBodySnatcherCleanup
-SVar:DBBodySnatcherCleanup:DB$ Cleanup | ClearRemembered$ True
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ DBExileMe | TriggerDescription$ When CARDNAME enters the battlefield, exile it unless you discard a creature card.
+SVar:DBExileMe:DB$ ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Exile | UnlessCost$ Discard<1/Creature> | UnlessPayer$ You
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigBodySnatcherExileMe | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, exile CARDNAME and return target creature card from your graveyard to the battlefield.
 SVar:TrigBodySnatcherExileMe:AB$ ChangeZone | Cost$ 0 | Defined$ Self | Origin$ Graveyard | Destination$ Exile | SubAbility$ DBBodySnatcherReturnCreature
 SVar:DBBodySnatcherReturnCreature:DB$ ChangeZone | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature from your graveyard | Origin$ Graveyard | Destination$ Battlefield
