@@ -52,7 +52,7 @@ When you mouse over a flip, transform or Morph (controlled by you) card in battl
 
 
 - Milestone reached -
-There is now under 700 unsupported cards, and we should be at or near 85% for all the sets.
+There are now under 700 unsupported cards, and we should be at or near 85% for all the sets.
 
 
 ---------
@@ -90,6 +90,14 @@ Kamahl's Summons
 Kaboom!
 Curtain of Light
 Dazzling Beauty
+Strength of the Tajuru
+Misdirection
+Trap Runner
+Deflection
+Divert
+Shunt
+Imp's Mischief
+Dual Nature
 
 
 ----------
@@ -104,6 +112,8 @@ Hedron Fields of Agadeem
 Kessig
 Nephalia
 The Zephyr Maze
+Windriddle Palaces
+Murasa
 
 
 --------------------
@@ -118,6 +128,7 @@ Sliver Queen Avatar
 Jhoira of the Ghitu Avatar
 Kresh the Bloodbraided Avatar
 Karona, False God Avatar
+Frenetic Efreet Avatar
 
 
 ------------
