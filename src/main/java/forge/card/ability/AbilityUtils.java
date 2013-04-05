@@ -291,18 +291,17 @@ public class AbilityUtils {
      */
     public static int calculateAmount(final Card card, String amount, final SpellAbility ability) {
         // return empty strings and constants
-        if (StringUtils.isBlank(amount)) return 0;
+        if (StringUtils.isBlank(amount)) { return 0; }
         final boolean startsWithPlus = amount.charAt(0) == '+';
-        if(startsWithPlus) amount = amount.substring(1);
+        if (startsWithPlus) { amount = amount.substring(1); }
 
         // Strip and save sign for calculations
         boolean startsWithMinus = amount.charAt(0) == '-';
         int multiplier = startsWithMinus ? -1 : 1;
-        if(startsWithMinus)
-            amount = amount.substring(1);
+        if (startsWithMinus) { amount = amount.substring(1); }
 
         // return result soon for plain numbers
-        if (StringUtils.isNumeric(amount)) return Integer.parseInt(amount) * multiplier;
+        if (StringUtils.isNumeric(amount)) { return Integer.parseInt(amount) * multiplier; }
 
         // These are some special cases - who is implementing them?
         if (amount.equals("ChosenX") || amount.equals("ChosenY")) {
@@ -320,34 +319,38 @@ public class AbilityUtils {
             svarval = ability.getSVar(amount);
         }
         if (StringUtils.isBlank(svarval)) {
-            if( ability != null) {
+            if (ability != null) {
                 System.err.printf("SVar '%s' not found in ability, fallback to Card (%s). Ability is (%s)%n", amount, card.getName(), ability);
             }
             svarval = card.getSVar(amount);
         }
-        
+
         // Nothing to do here if value is missing or blank
         if (StringUtils.isBlank(svarval)) {
             System.err.printf("SVar '%s' not defined in Card (%s)%n", amount, card.getName());
             return 0;
         }
-        
+
         // Handle numeric constant coming in svar value
-        if( StringUtils.isNumeric(svarval) ) 
+        if (StringUtils.isNumeric(svarval)) {
             return multiplier * Integer.parseInt(svarval);
+        }
 
         // Parse Object$Property string
         final String[] calcX = svarval.split("\\$");
-        
-        // Incorrect parses mean zero.
-        if ((calcX.length == 1) || calcX[1].equals("none"))
-            return 0;
 
-        if (calcX[0].startsWith("Count"))
+        // Incorrect parses mean zero.
+        if ((calcX.length == 1) || calcX[1].equals("none")) {
+            return 0;
+        }
+
+        if (calcX[0].startsWith("Count")) {
             return AbilityUtils.xCount(card, calcX[1], ability) * multiplier;
-            
-        if (calcX[0].startsWith("Number"))
+        }
+
+        if (calcX[0].startsWith("Number")) {
             return CardFactoryUtil.xCount(card, svarval) * multiplier;
+        }
 
         if (calcX[0].startsWith("SVar")) {
             final String[] l = calcX[1].split("/");

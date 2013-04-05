@@ -1,12 +1,9 @@
 Name:Impatience
 ManaCost:2 R
 Types:Enchantment
-T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | CheckSVar$ YouCast | SVarCompare$ EQ0 | Execute$ TrigDamageYou | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of each player's end step, if that player didn't cast a spell this turn, CARDNAME deals 2 damage to him or her.
-SVar:TrigDamageYou:AB$ DealDamage | Cost$ 0 | Defined$ You | NumDmg$ 2
-T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ Opponent | CheckSVar$ OppCast | SVarCompare$ EQ0 | Execute$ TrigDamageOpp | TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ At the beginning of each player's end step, if that player didn't cast a spell this turn, CARDNAME deals 2 damage to him or her.
-SVar:TrigDamageOpp:AB$ DealDamage | Cost$ 0 | Defined$ Opponent | NumDmg$ 2
-SVar:YouCast:Count$ThisTurnCast_Card.YouCtrl
-SVar:OppCast:Count$ThisTurnCast_Card.YouDontCtrl
+T:Mode$ Phase | Phase$ End of Turn | CheckSVar$ TrigCast | SVarCompare$ EQ0 | Execute$ ImpatientDamage | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of each player's end step, if that player didn't cast a spell this turn, CARDNAME deals 2 damage to him or her.
+SVar:ImpatientDamage:AB$ DealDamage | Cost$ 0 | Defined$ TriggeredPlayer | NumDmg$ 2
+SVar:TrigCast:Count$ThisTurnCast_Card.ActivePlayerCtrl
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/impatience.jpg
 Oracle:At the beginning of each player's end step, if that player didn't cast a spell this turn, Impatience deals 2 damage to him or her.
