@@ -23,8 +23,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map.Entry;
-import javax.swing.JOptionPane;
-
 import com.google.common.collect.Iterables;
 
 import forge.Card;
@@ -43,13 +41,10 @@ import forge.control.input.InputPayManaExecuteCommands;
 import forge.control.input.InputSelectCards;
 import forge.control.input.InputSelectCardsFromList;
 import forge.game.GameState;
-import forge.game.ai.ComputerUtil;
 import forge.game.player.AIPlayer;
-import forge.game.player.HumanPlayer;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
-import forge.util.Aggregates;
 
 /**
  * <p>

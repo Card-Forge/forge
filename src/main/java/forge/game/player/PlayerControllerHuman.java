@@ -16,7 +16,6 @@ import forge.FThreads;
 import forge.GameEntity;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
-import forge.card.spellability.TargetChoices;
 import forge.card.spellability.TargetSelection;
 import forge.control.input.Input;
 import forge.control.input.InputAutoPassPriority;

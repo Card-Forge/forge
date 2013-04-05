@@ -2,14 +2,9 @@ package forge.card.ability.effects;
 
 import java.util.List;
 
-import forge.Card;
-import forge.Singletons;
 import forge.card.ability.SpellAbilityEffect;
-import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityStackInstance;
-import forge.card.spellability.Target;
-import forge.card.spellability.TargetSelection;
 import forge.game.zone.MagicStack;
 
 /** 
