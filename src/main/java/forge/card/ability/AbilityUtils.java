@@ -742,6 +742,12 @@ public class AbilityUtils {
                     players.add(((Card) rem).getController());
                 }
             }
+        } else if (defined.equals("RememberedOwner")) {
+            for (final Object rem : card.getRemembered()) {
+                if (rem instanceof Card) {
+                    players.add(((Card) rem).getOwner());
+                }
+            }
         } else if (defined.equals("ImprintedController")) {
             for (final Card rem : card.getImprinted()) {
                 players.add(rem.getController());
