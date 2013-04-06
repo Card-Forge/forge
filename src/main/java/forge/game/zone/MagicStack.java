@@ -421,9 +421,10 @@ public class MagicStack extends MyObservable {
                         this.getSourceCard().addReplicateMagnitude(1);
                     }
                 };
-
- 
                 final Player controller = sp.getSourceCard().getController();
+                ability.setActivatingPlayer(controller);
+ 
+
                 if (controller.isHuman()) {
                     sa.getSourceCard().addReplicateMagnitude(-1);
                     final Runnable addMagnitude = new Runnable() {

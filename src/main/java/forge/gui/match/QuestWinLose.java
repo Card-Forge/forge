@@ -47,7 +47,6 @@ import forge.game.player.PlayerOutcome;
 import forge.game.player.PlayerStatistics;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
-import forge.gui.ListChooser;
 import forge.gui.SOverlayUtils;
 import forge.gui.home.quest.CSubmenuChallenges;
 import forge.gui.home.quest.CSubmenuDuels;
