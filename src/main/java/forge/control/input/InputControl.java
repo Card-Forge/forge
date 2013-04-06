@@ -17,7 +17,8 @@
  */
 package forge.control.input;
 
-import java.util.Stack;
+import java.util.concurrent.BlockingDeque;
+import java.util.concurrent.LinkedBlockingDeque;
 
 import forge.Singletons;
 import forge.game.GameAge;
@@ -44,7 +45,7 @@ public class InputControl extends MyObservable implements java.io.Serializable {
     /** Constant <code>serialVersionUID=3955194449319994301L</code>. */
     private static final long serialVersionUID = 3955194449319994301L;
 
-    private final Stack<Input> inputStack = new Stack<Input>();
+    private final BlockingDeque<Input> inputStack = new LinkedBlockingDeque<Input>();
 
     private final MatchController match;
     public InputControl(MatchController matchController) {
@@ -133,9 +134,9 @@ public class InputControl extends MyObservable implements java.io.Serializable {
         if ( age != GameAge.Play ) 
             return inputLock;
 
-        if (!this.inputStack.isEmpty()) { // incoming input to Control
-            return this.inputStack.peek();
-        }
+        Input topMost = inputStack.peek(); // incoming input to Control
+        if (topMost != null )
+            return topMost;
         
         final PhaseHandler handler = game.getPhaseHandler();
         final PhaseType phase = handler.getPhase();
