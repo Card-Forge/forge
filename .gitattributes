@@ -8649,6 +8649,7 @@ res/cardsfolder/r/rib_cage_spider.txt svneol=native#text/plain
 res/cardsfolder/r/ribbon_snake.txt -text
 res/cardsfolder/r/ribbons_of_night.txt -text svneol=unset#text/plain
 res/cardsfolder/r/ribbons_of_the_reikai.txt svneol=native#text/plain
+res/cardsfolder/r/ricochet_trap.txt -text
 res/cardsfolder/r/riddle_of_lightning.txt svneol=native#text/plain
 res/cardsfolder/r/riddlekeeper.txt svneol=native#text/plain
 res/cardsfolder/r/riddlesmith.txt svneol=native#text/plain
@@ -11465,6 +11466,7 @@ res/cardsfolder/u/unlikely_alliance.txt svneol=native#text/plain
 res/cardsfolder/u/unliving_psychopath.txt svneol=native#text/plain
 res/cardsfolder/u/unmake.txt svneol=native#text/plain
 res/cardsfolder/u/unmask.txt svneol=native#text/plain
+res/cardsfolder/u/unnatural_hunger.txt -text
 res/cardsfolder/u/unnatural_predation.txt svneol=native#text/plain
 res/cardsfolder/u/unnatural_selection.txt -text
 res/cardsfolder/u/unnatural_speed.txt svneol=native#text/plain
@@ -11827,6 +11829,7 @@ res/cardsfolder/v/vodalian_merchant.txt svneol=native#text/plain
 res/cardsfolder/v/vodalian_mystic.txt -text
 res/cardsfolder/v/vodalian_serpent.txt svneol=native#text/plain
 res/cardsfolder/v/vodalian_soldiers.txt svneol=native#text/plain
+res/cardsfolder/v/vodalian_war_machine.txt -text
 res/cardsfolder/v/vodalian_zombie.txt svneol=native#text/plain
 res/cardsfolder/v/voice_of_all.txt -text
 res/cardsfolder/v/voice_of_duty.txt svneol=native#text/plain
