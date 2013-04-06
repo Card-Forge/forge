@@ -1,6 +1,7 @@
 Name:Imperiosaur
 ManaCost:2 G G
 Types:Creature Lizard
+Text:Spend only mana produced by basic lands to cast Imperiosaur.
 PT:5/5
 K:FullCost:Mana<2 G G\Basic>
 SVar:Picture:http://resources.wizards.com/magic/cards/fut/en-us/card130634.jpg
