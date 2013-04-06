@@ -52,7 +52,7 @@ When you mouse over a flip, transform or Morph (controlled by you) card in battl
 
 
 - Milestone reached -
-There are now under 700 unsupported cards, and we should be at or near 85% for all the sets.
+There are now under 700 unsupported cards and we now have implemented over 95% of all distinct cards. We should be at (Planechase 2012) or over 85% for all the sets.
 
 
 ---------
@@ -98,6 +98,18 @@ Divert
 Shunt
 Imp's Mischief
 Dual Nature
+Reroute
+Torchling
+Willbender
+Ricochet Trap
+Unnatural Hunger
+Vodalian War Machine
+Myr Superion
+Bramble Elemental
+Oathkeeper, Takeno's Daisho
+Shieldmage Elder
+Horn of Plenty
+Spellshift
 
 
 ----------
@@ -114,6 +126,8 @@ Nephalia
 The Zephyr Maze
 Windriddle Palaces
 Murasa
+Isle of Vesuva
+Izzet Steam Maze
 
 
 --------------------
