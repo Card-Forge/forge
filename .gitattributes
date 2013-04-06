@@ -4998,6 +4998,7 @@ res/cardsfolder/h/horizon_seed.txt -text
 res/cardsfolder/h/horizon_spellbomb.txt svneol=native#text/plain
 res/cardsfolder/h/horn_of_deafening.txt svneol=native#text/plain
 res/cardsfolder/h/horn_of_greed.txt svneol=native#text/plain
+res/cardsfolder/h/horn_of_plenty.txt -text
 res/cardsfolder/h/horn_of_ramos.txt svneol=native#text/plain
 res/cardsfolder/h/horncallers_chant.txt -text
 res/cardsfolder/h/horned_cheetah.txt svneol=native#text/plain

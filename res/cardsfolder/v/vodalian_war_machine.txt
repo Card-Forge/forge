@@ -8,7 +8,9 @@ A:AB$ Pump | Cost$ tapXType<1/Merfolk> | RememberCostCards$ True | NumAtt$ +2 | 
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME dies, destroy all Merfolk tapped this turn to pay for its abilities.
 SVar:TrigDestroy:AB$ DestroyAll | Cost$ 0 | ValidCards$ Merfolk.IsRemembered | SubAbility$ DBCleanup
 T:Mode$ Phase | Phase$ Cleanup | TriggerZones$ Battlefield | Execute$ DBCleanup | Static$ True
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Exile,Hand,Library,Ante | ValidCard$ Card.Self | Execute$ DBCleanup | Static$ True
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Exile | Execute$ DBCleanup | Static$ True | Secondary$ True | TriggerDescription$ Forget remembered card if it goes into Exile.
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Hand | Execute$ DBCleanup | Static$ True | Secondary$ True | TriggerDescription$ Forget remembered card if it goes into Hand.
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Library | Execute$ DBCleanup | Static$ True | Secondary$ True | TriggerDescription$ Forget remembered card if it goes into Library.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vodalian_war_machine.jpg
 Oracle:Defender (This creature can't attack.)\nTap an untapped Merfolk you control: Vodalian War Machine can attack this turn as though it didn't have defender.\nTap an untapped Merfolk you control: Vodalian War Machine gets +2/+1 until end of turn.\nWhen Vodalian War Machine dies, destroy all Merfolk tapped this turn to pay for its abilities.
