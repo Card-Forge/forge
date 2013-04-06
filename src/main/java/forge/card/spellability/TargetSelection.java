@@ -94,8 +94,9 @@ public class TargetSelection {
         
         final boolean choiceResult;
         if (zone.size() == 1 && zone.get(0) == ZoneType.Stack) {
-            // If Zone is Stack, the choices are handled slightly differently
-            choiceResult = this.chooseCardFromStack(mandatory);
+            // If Zone is Stack, the choices are handled slightly differently.
+            // Handle everything inside function due to interaction with StackInstance
+            return this.chooseCardFromStack(mandatory);
         } else {
             List<Card> validTargets = this.getValidCardsToTarget();
             if (zone.size() == 1 && zone.get(0) == ZoneType.Battlefield) {
@@ -304,41 +305,40 @@ public class TargetSelection {
 
         final GameState game = ability.getActivatingPlayer().getGame();
         for (int i = 0; i < game.getStack().size(); i++) {
-            SpellAbility stackItem = game.getStack().peekAbility(i); 
-            if( ability.canTargetSpellAbility(stackItem))
+            SpellAbility stackItem = game.getStack().peekAbility(i);
+            if (ability.equals(stackItem)) {
+                // By peeking at stack item, target is set to its SI state. So set it back before adding targets
+                tgt.resetTargets();
+            }
+            else if (ability.canTargetSpellAbility(stackItem)) {
                 selectOptions.add(stackItem);
-        }
-        
-        if (tgt.isMinTargetsChosen(this.ability.getSourceCard(), this.ability)) {
-            selectOptions.add("[FINISH TARGETING]");
+            }
         }
 
-        if (selectOptions.isEmpty()) {
-            return false;
-        } else {
-            final Object madeChoice = GuiChoose.oneOrNone(message, selectOptions);
-            if (madeChoice == null) {
-                return false;
-            }
-            if (madeChoice instanceof SpellAbility) {
-                tgt.addTarget(madeChoice);
-            } else // only 'FINISH TARGETING' remains 
+        while(!bTargetingDone) {
+            if (tgt.isMaxTargetsChosen(this.ability.getSourceCard(), this.ability)) {
                 bTargetingDone = true;
+                return true;
+            }
+
+            if (!selectOptions.contains("[FINISH TARGETING]") && tgt.isMinTargetsChosen(this.ability.getSourceCard(), this.ability)) {
+                selectOptions.add("[FINISH TARGETING]");
+            }
+
+            if (selectOptions.isEmpty()) {
+                // Not enough targets, cancel targeting
+                return false;
+            } else {
+                final Object madeChoice = GuiChoose.oneOrNone(message, selectOptions);
+                if (madeChoice == null) {
+                    return false;
+                }
+                if (madeChoice instanceof SpellAbility) {
+                    tgt.addTarget(madeChoice);
+                } else // 'FINISH TARGETING' chosen 
+                    bTargetingDone = true;
+            }
         }
         return true;
     }
-
-    /**
-     * <p>
-     * matchSpellAbility.
-     * </p>
-     * 
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @param topSA
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @param tgt
-     *            a {@link forge.card.spellability.Target} object.
-     * @return a boolean.
-     */
 }

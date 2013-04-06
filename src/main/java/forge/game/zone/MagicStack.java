@@ -625,17 +625,17 @@ public class MagicStack extends MyObservable {
         // TODO: change to use forge.view.FView?
         //GuiDisplayUtil.updateGUI();
 
-        this.freezeStack(); // freeze the stack while we're in the middle of
-                            // resolving
+        // freeze the stack while we're in the middle of resolving
+        this.freezeStack(); 
         this.setResolving(true);
 
-        final SpellAbility sa = this.pop();
+        final SpellAbility sa = this.top();
 
-        game.getPhaseHandler().resetPriority(); // ActivePlayer gains priority first
-                                            // after Resolve
+        // ActivePlayer gains priority first after Resolve
+        game.getPhaseHandler().resetPriority(); 
+
         final Card source = sa.getSourceCard();
         curResolvingCard = source;
-
         
         boolean thisHasFizzled = this.hasFizzled(sa, source, false);
         String messageForLog = thisHasFizzled ? source.getName() + " ability fizzles." : sa.getStackDescription();
@@ -756,8 +756,9 @@ public class MagicStack extends MyObservable {
      */
     public final void finishResolving(final SpellAbility sa, final boolean fizzle) {
 
-        // remove card from the stack
+        // remove SA and card from the stack
         this.removeCardFromStack(sa, fizzle);
+        this.remove(sa);
 
         // After SA resolves we have to do a handful of things
         this.setResolving(false);
@@ -876,11 +877,13 @@ public class MagicStack extends MyObservable {
     public final SpellAbility pop() {
         final SpellAbilityStackInstance si = this.getStack().pop();
         final SpellAbility sp = si.getSpellAbility();
-        // NOTE (12/04/22): Update Observers here causes multi-targeting bug
-        // We Update Observers after the Stack Finishes Resolving
-        // No need to do it sooner
-        //this.updateObservers();
         return sp;
+    }
+
+    public final SpellAbility top() {
+        final SpellAbilityStackInstance si = this.getStack().peek();
+        final SpellAbility sa = si.getSpellAbility();
+        return sa;
     }
 
     // CAREFUL! Peeking while an SAs Targets are being choosen may cause issues
