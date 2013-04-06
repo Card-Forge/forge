@@ -74,9 +74,9 @@ public class DigUntilEffect extends SpellAbilityEffect {
     public void resolve(SpellAbility sa) {
         final Card host = sa.getSourceCard();
 
-        String type = "Card";
+        String[] type = new String[]{"Card"};
         if (sa.hasParam("Valid")) {
-            type = sa.getParam("Valid");
+            type = sa.getParam("Valid").split(",");
         }
 
         int untilAmount = 1;

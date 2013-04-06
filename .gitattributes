@@ -10070,6 +10070,7 @@ res/cardsfolder/s/spellbound_dragon.txt -text svneol=unset#text/plain
 res/cardsfolder/s/spellbreaker_behemoth.txt svneol=native#text/plain
 res/cardsfolder/s/spellgorger_barbarian.txt svneol=native#text/plain
 res/cardsfolder/s/spelljack.txt -text
+res/cardsfolder/s/spellshift.txt -text
 res/cardsfolder/s/spellshock.txt svneol=native#text/plain
 res/cardsfolder/s/spellstutter_sprite.txt svneol=native#text/plain
 res/cardsfolder/s/spelltithe_enforcer.txt -text
