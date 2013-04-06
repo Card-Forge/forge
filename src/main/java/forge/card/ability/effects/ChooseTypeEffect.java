@@ -186,10 +186,22 @@ public class ChooseTypeEffect extends SpellAbilityEffect {
                                 valid = true;
                                 card.setChosenType(choice);
                             }
-                        } else {
-                            // TODO
-                            // computer will need to choose a type
-                            card.setChosenType("Island");
+                        } else {//AI
+                            String choice = null;
+                            if (sa.hasParam("AILogic")) {
+                                final String logic = sa.getParam("AILogic");
+                                if (logic.equals("ChosenLandwalk")) {
+                                    final List<Card> lands = p.getOpponent().getLandsInPlay();
+                                    final List<String> totallands = CardType.getLandTypes();
+                                    for (Card c : lands) {
+                                        if (!invalidTypes.contains(c.getName())) {
+                                            choice = c.getName();
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
+                            card.setChosenType(choice != null ? choice :"Island");
                             valid = true;
                         }
                     }

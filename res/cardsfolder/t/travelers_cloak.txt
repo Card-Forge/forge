@@ -1,0 +1,12 @@
+Name:Traveler's Cloak
+ManaCost:2 U
+Types:Enchantment Aura
+K:Enchant creature
+A:SP$ Attach | Cost$ 2 U | ValidTgts$ Creature | AILogic$ Pump
+K:ETBReplacement:Other:ChooseLT
+SVar:ChooseLT:DB$ ChooseType | Defined$ You | Type$ Land | AILogic$ ChosenLandwalk | SpellDescription$ As CARDNAME enters the battlefield, choose a land type.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, draw a card.
+SVar:TrigDraw:AB$ Draw | Cost$ 0 | NumCards$ 1
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ ChosenTypewalk | Description$ Enchanted creature has landwalk of the chosen type.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/travelers_cloak.jpg
+SetInfo:INV Common
