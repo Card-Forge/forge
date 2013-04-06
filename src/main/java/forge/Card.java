@@ -6693,6 +6693,13 @@ public class Card extends GameEntity implements Comparable<Card> {
                         }
                     }
                     return false;
+                } else if (restriction.equals(ZoneType.Graveyard.toString())) {
+                    for (final Card card : Singletons.getModel().getGame().getCardsIn(ZoneType.Graveyard)) {
+                        if (this.getName().equals(card.getName())) {
+                            return true;
+                        }
+                    }
+                    return false;
                 } else if (restriction.equals(ZoneType.Battlefield.toString())) {
                     for (final Card card : Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield)) {
                         if (this.getName().equals(card.getName())) {

@@ -2119,7 +2119,7 @@ public class CardFactoryUtil {
             final String[] splitString = string.split("/", 2);
             String valid = splitString[0].substring(6);
             final List<Card> list = CardLists.getValidCards(paidList, valid, source.getController(), source);
-            return CardFactoryUtil.doXMath(list.size(), splitString[1], source);
+            return CardFactoryUtil.doXMath(list.size(), splitString.length > 1 ? splitString[1] : null, source);
         }
 
         int tot = 0;
