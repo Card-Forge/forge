@@ -3715,6 +3715,11 @@ public class Card extends GameEntity implements Comparable<Card> {
 
         // Play the Equip sound
         Singletons.getModel().getGame().getEvents().post(new CardEquippedEvent());
+        // run trigger
+        final HashMap<String, Object> runParams = new HashMap<String, Object>();
+        runParams.put("AttachSource", this);
+        runParams.put("AttachTarget", c);
+        this.getController().getGame().getTriggerHandler().runTrigger(TriggerType.Attached, runParams, false);
     }
 
     /**
@@ -3898,6 +3903,11 @@ public class Card extends GameEntity implements Comparable<Card> {
         this.addEnchanting(entity);
         entity.addEnchantedBy(this);
         this.enchant();
+        // run trigger
+        final HashMap<String, Object> runParams = new HashMap<String, Object>();
+        runParams.put("AttachSource", this);
+        runParams.put("AttachTarget", entity);
+        this.getController().getGame().getTriggerHandler().runTrigger(TriggerType.Attached, runParams, false);
     }
 
     /**

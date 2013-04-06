@@ -1247,6 +1247,7 @@ res/cardsfolder/b/brainspoil.txt svneol=native#text/plain
 res/cardsfolder/b/brainstorm.txt svneol=native#text/plain
 res/cardsfolder/b/brainwash.txt svneol=native#text/plain
 res/cardsfolder/b/bramble_creeper.txt svneol=native#text/plain
+res/cardsfolder/b/bramble_elemental.txt -text
 res/cardsfolder/b/bramblecrush.txt -text
 res/cardsfolder/b/bramblesnap.txt svneol=native#text/plain
 res/cardsfolder/b/bramblewood_paragon.txt svneol=native#text/plain
@@ -7355,6 +7356,7 @@ res/cardsfolder/o/oath_of_druids.txt svneol=native#text/plain
 res/cardsfolder/o/oath_of_ghouls.txt svneol=native#text/plain
 res/cardsfolder/o/oath_of_lieges.txt -text
 res/cardsfolder/o/oath_of_lim_dul.txt -text
+res/cardsfolder/o/oathkeeper_takenos_daisho.txt -text
 res/cardsfolder/o/oathsworn_giant.txt svneol=native#text/plain
 res/cardsfolder/o/ob_nixilis_the_fallen.txt svneol=native#text/plain
 res/cardsfolder/o/obelisk_of_alara.txt svneol=native#text/plain
@@ -9453,6 +9455,7 @@ res/cardsfolder/s/shield_sphere.txt svneol=native#text/plain
 res/cardsfolder/s/shield_wall.txt svneol=native#text/plain
 res/cardsfolder/s/shielded_passage.txt -text
 res/cardsfolder/s/shielding_plax.txt svneol=native#text/plain
+res/cardsfolder/s/shieldmage_elder.txt -text
 res/cardsfolder/s/shieldmates_blessing.txt svneol=native#text/plain
 res/cardsfolder/s/shields_of_velis_vel.txt -text
 res/cardsfolder/s/shifting_borders.txt -text
@@ -13831,6 +13834,7 @@ src/main/java/forge/card/staticability/StaticAbilityPreventDamage.java svneol=na
 src/main/java/forge/card/staticability/package-info.java svneol=native#text/plain
 src/main/java/forge/card/trigger/Trigger.java svneol=native#text/plain
 src/main/java/forge/card/trigger/TriggerAlways.java svneol=native#text/plain
+src/main/java/forge/card/trigger/TriggerAttached.java -text
 src/main/java/forge/card/trigger/TriggerAttackerBlocked.java svneol=native#text/plain
 src/main/java/forge/card/trigger/TriggerAttackerUnblocked.java svneol=native#text/plain
 src/main/java/forge/card/trigger/TriggerAttackersDeclared.java svneol=native#text/plain
