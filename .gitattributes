@@ -5365,6 +5365,7 @@ res/cardsfolder/i/island.txt svneol=native#text/plain
 res/cardsfolder/i/island_fish_jasconius.txt svneol=native#text/plain
 res/cardsfolder/i/island_of_wak_wak.txt svneol=native#text/plain
 res/cardsfolder/i/island_sanctuary.txt -text
+res/cardsfolder/i/isle_of_vesuva.txt -text
 res/cardsfolder/i/isleback_spawn.txt svneol=native#text/plain
 res/cardsfolder/i/isochron_scepter.txt svneol=native#text/plain
 res/cardsfolder/i/isolated_chapel.txt -text
@@ -5398,6 +5399,7 @@ res/cardsfolder/i/izzet_guildmage.txt -text
 res/cardsfolder/i/izzet_keyrune.txt -text
 res/cardsfolder/i/izzet_signet.txt svneol=native#text/plain
 res/cardsfolder/i/izzet_staticaster.txt -text
+res/cardsfolder/i/izzet_steam_maze.txt -text
 res/cardsfolder/j/jabaris_banner.txt svneol=native#text/plain
 res/cardsfolder/j/jabaris_influence.txt -text
 res/cardsfolder/j/jace_architect_of_thought.txt -text
@@ -8558,6 +8560,7 @@ res/cardsfolder/r/reprisal.txt svneol=native#text/plain
 res/cardsfolder/r/reprocess.txt -text
 res/cardsfolder/r/repulse.txt svneol=native#text/plain
 res/cardsfolder/r/requiem_angel.txt -text
+res/cardsfolder/r/reroute.txt -text
 res/cardsfolder/r/rescind.txt svneol=native#text/plain
 res/cardsfolder/r/rescue.txt svneol=native#text/plain
 res/cardsfolder/r/research_the_deep.txt svneol=native#text/plain
@@ -11141,6 +11144,7 @@ res/cardsfolder/t/torch_drake.txt svneol=native#text/plain
 res/cardsfolder/t/torch_fiend.txt -text
 res/cardsfolder/t/torch_slinger.txt svneol=native#text/plain
 res/cardsfolder/t/torch_song.txt svneol=native#text/plain
+res/cardsfolder/t/torchling.txt -text
 res/cardsfolder/t/torii_watchward.txt svneol=native#text/plain
 res/cardsfolder/t/torment.txt svneol=native#text/plain
 res/cardsfolder/t/tormented_angel.txt svneol=native#text/plain
@@ -12181,6 +12185,7 @@ res/cardsfolder/w/wildslayer_elves.txt svneol=native#text/plain
 res/cardsfolder/w/wildwood_geist.txt -text
 res/cardsfolder/w/wildwood_rebirth.txt -text
 res/cardsfolder/w/will_o_the_wisp.txt svneol=native#text/plain
+res/cardsfolder/w/willbender.txt -text
 res/cardsfolder/w/willow_dryad.txt svneol=native#text/plain
 res/cardsfolder/w/willow_elf.txt svneol=native#text/plain
 res/cardsfolder/w/willow_faerie.txt svneol=native#text/plain

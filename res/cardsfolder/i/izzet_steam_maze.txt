@@ -1,0 +1,11 @@
+Name:Izzet Steam Maze
+ManaCost:no cost
+Types:Plane Ravnica
+T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ Player | Execute$ TrigCopy | TriggerZones$ Command | TriggerDescription$ Whenever a player casts an instant or sorcery spell, that player copies it. The player may choose new targets for the copy.
+SVar:TrigCopy:AB$ CopySpellAbility | Cost$ 0 | Defined$ TriggeredSpellAbility | Controller$ TriggeredActivator
+T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever you roll Chaos, instant and sorcery spells you cast this turn cost {3} less to cast.
+SVar:RolledChaos:AB$ Effect | Cost$ 0 | StaticAbilities$ ReduceSPcost
+SVar:ReduceSPcost:Mode$ ReduceCost | EffectZone$ Command | ValidCard$ Instant,Sorcery | Type$ Spell | Activator$ You | Amount$ 3 | Description$ Instant and sorcery spells you cast this turn cost 3 less to cast.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/izzet_steam_maze.jpg
+Oracle:Whenever a player casts an instant or sorcery spell, that player copies it. The player may choose new targets for the copy.\nWhenever you roll {C}, instant and sorcery spells you cast this turn cost {3} less to cast.
+SetInfo:HOP Common
