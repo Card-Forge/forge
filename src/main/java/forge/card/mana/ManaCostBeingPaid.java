@@ -120,7 +120,7 @@ public class ManaCostBeingPaid {
     }
     public ManaCostBeingPaid(ManaCost manaCost, String srcRestriction) {
         sourceRestriction = srcRestriction;
-
+        if( manaCost == null ) return;
         for (ManaCostShard shard : manaCost.getShards()) {
             if (shard == ManaCostShard.X) {
                 cntX++;
