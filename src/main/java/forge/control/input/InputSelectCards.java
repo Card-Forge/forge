@@ -11,7 +11,7 @@ public abstract class InputSelectCards extends InputSelectManyBase<Card> {
     }
 
     @Override
-    public final void selectCard(final Card c) {
+    protected void onCardSelected(Card c) {
         if ( !selectEntity(c) )
             return;
         

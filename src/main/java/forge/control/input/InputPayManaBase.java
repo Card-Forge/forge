@@ -45,9 +45,10 @@ public abstract class InputPayManaBase extends InputSyncronizedBase implements I
         this.saPaidFor = saToPayFor;
     }
     
-    /** {@inheritDoc} */
+    
+
     @Override
-    public void selectCard(final Card card) {
+    protected void onCardSelected(Card card) {
         if (card.getManaAbility().isEmpty() || card.isInZone(ZoneType.Hand)) {
             SDisplayUtil.remind(VMessage.SINGLETON_INSTANCE);
             return;
@@ -245,7 +246,6 @@ public abstract class InputPayManaBase extends InputSyncronizedBase implements I
         if (!skipExpress) {
             // express Mana Choice
             final ArrayList<SpellAbility> colorMatches = new ArrayList<SpellAbility>();
-    
             for (final SpellAbility am : abilities) {
                 AbilityManaPart m = am.getManaPart();
                 if (am.getApi() == ApiType.ManaReflected) {

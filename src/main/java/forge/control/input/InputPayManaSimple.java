@@ -106,7 +106,7 @@ public class InputPayManaSimple extends InputPayManaBase {
 
     /** {@inheritDoc} */
     @Override
-    public final void selectButtonCancel() {
+    protected final void onCancel() {
         handleConvokedCards(true);
         this.resetManaCost();
 
@@ -119,6 +119,8 @@ public class InputPayManaSimple extends InputPayManaBase {
     /** {@inheritDoc} */
     @Override
     public final void showMessage() {
+        if( isFinished() ) return;
+        
         ButtonUtil.enableOnlyCancel();
 
         final StringBuilder msg = new StringBuilder("Pay Mana Cost: " + this.manaCost.toString());

@@ -13902,6 +13902,7 @@ src/main/java/forge/control/input/InputPayManaOfCostPayment.java -text
 src/main/java/forge/control/input/InputPayManaSimple.java svneol=native#text/plain
 src/main/java/forge/control/input/InputPayManaX.java -text
 src/main/java/forge/control/input/InputPayment.java -text
+src/main/java/forge/control/input/InputProliferate.java -text
 src/main/java/forge/control/input/InputSelectCards.java -text
 src/main/java/forge/control/input/InputSelectCardsFromList.java -text
 src/main/java/forge/control/input/InputSelectMany.java -text

@@ -20,17 +20,13 @@ abstract class InputPayCostBase extends InputSyncronizedBase implements InputPay
     private static final long serialVersionUID = -2967434867139585579L;
     boolean bPaid = false;
     
-    @Override
-    final public void selectButtonCancel() {
-        this.cancel();
-    }
-
     final protected void done() {
         bPaid = true;
         this.stop();
     }
 
-    final public void cancel() {
+    @Override
+    final protected void onCancel() {
         this.stop();
     }
     

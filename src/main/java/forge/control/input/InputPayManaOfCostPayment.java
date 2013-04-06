@@ -48,13 +48,15 @@ public class InputPayManaOfCostPayment extends InputPayManaBase {
     }
     
     @Override
-    public void selectButtonCancel() {
+    protected void onCancel() {
         handleConvokedCards(true);
         stop();
     }
 
     @Override
     public void showMessage() {
+        if ( isFinished() ) return; // 
+        
         ButtonUtil.enableOnlyCancel();
         final String displayMana = manaCost.toString().replace("X", "").trim();
 

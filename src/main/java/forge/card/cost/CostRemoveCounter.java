@@ -93,8 +93,11 @@ public class CostRemoveCounter extends CostPartWithList {
             ButtonUtil.enableOnlyCancel();
         }
 
+        /* (non-Javadoc)
+         * @see forge.control.input.InputSyncronizedBase#onCardSelected(forge.Card)
+         */
         @Override
-        public void selectCard(final Card card) {
+        protected void onCardSelected(Card card) {
             if (this.typeList.contains(card)) {
                 if (card.getCounters(costRemoveCounter.getCounter()) > 0) {
                     this.nRemove++;
@@ -132,7 +135,6 @@ public class CostRemoveCounter extends CostPartWithList {
          * @param payment
          */
         public InputPayCostRemoveCounterFrom(CostRemoveCounter costRemoveCounter, String type, SpellAbility sa, int nNeeded) {
-
             this.costRemoveCounter = costRemoveCounter;
             this.type = type;
             this.sa = sa;
@@ -151,14 +153,11 @@ public class CostRemoveCounter extends CostPartWithList {
 
             for (int i = 0; i < nNeeded; i++) {
                 if (this.typeList.isEmpty()) {
-                    this.cancel();
+                    this.onCancel();
                 }
 
-                final Card o = GuiChoose.oneOrNone("Remove counter(s) from a card in " + costRemoveCounter.getZone(), this.typeList);
-
-                if (o != null) {
-                    final Card card = o;
-
+                final Card card = GuiChoose.oneOrNone("Remove counter(s) from a card in " + costRemoveCounter.getZone(), this.typeList);
+                if (card != null) {
                     if (card.getCounters(costRemoveCounter.getCounter()) > 0) {
                         this.nRemove++;
                         costRemoveCounter.executePayment(sa, card);
@@ -174,7 +173,7 @@ public class CostRemoveCounter extends CostPartWithList {
                         }
                     }
                 } else {
-                    this.cancel();
+                    this.onCancel();
                     break;
                 }
             }

@@ -89,19 +89,19 @@ public final class InputSelectTargets extends InputSyncronizedBase {
     }
 
     @Override
-    public void selectButtonCancel() {
+    protected final void onCancel() {
         bCancel = true;
         this.done();
     }
 
     @Override
-    public void selectButtonOK() {
+    protected final void onOk() {
         bOk = true;
         this.done();
     }
 
     @Override
-    public void selectCard(final Card card) {
+    protected final void onCardSelected(Card card) {
         if (!tgt.isUniqueTargets() && targetDepth.containsKey(card)) {
             return;
         }

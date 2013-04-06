@@ -39,6 +39,8 @@ public class InputPayManaX extends InputPayManaBase {
     
     @Override
     public void showMessage() {
+        if( isFinished() ) return;
+        
         // only cancel if partially paid an X value
         // or X is 0, and x can't be 0
         if (!isPaid()) {
@@ -57,9 +59,8 @@ public class InputPayManaX extends InputPayManaBase {
         showMessage(msg.toString());
     }
 
-    // selectCard
     @Override
-    public void selectCard(final Card card) {
+    protected void onCardSelected(Card card) {
         // don't allow here the cards that produce only wrong colors
         activateManaAbility(card, this.colorX.isEmpty() ? this.manaCost : new ManaCostBeingPaid(this.colorX));
     }
@@ -77,12 +78,12 @@ public class InputPayManaX extends InputPayManaBase {
     }
 
     @Override
-    public void selectButtonCancel() {
+    protected final void onCancel() {
         this.stop();
     }
 
     @Override
-    public void selectButtonOK() {
+    protected final void onOk() {
         done();
     }
 

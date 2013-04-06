@@ -85,7 +85,7 @@ public class CostExile extends CostPartWithList {
 
             for (int i = 0; i < nNeeded; i++) {
                 if (this.typeList.size() == 0) {
-                    this.cancel();
+                    this.onCancel();
                 }
 
                 final Card c = GuiChoose.oneOrNone("Exile from " + part.getFrom(), this.typeList);
@@ -97,7 +97,7 @@ public class CostExile extends CostPartWithList {
                         this.done();
                     }
                 } else {
-                    this.cancel();
+                    this.onCancel();
                     break;
                 }
             }
@@ -145,14 +145,14 @@ public class CostExile extends CostPartWithList {
 
             final Player p = GuiChoose.oneOrNone(sb.toString(), payableZone);
             if (p == null) {
-                this.cancel();
+                this.onCancel();
             }
 
             typeList = CardLists.filter(list, CardPredicates.isOwner(p));
 
             for (int i = 0; i < nNeeded; i++) {
                 if (this.typeList.size() == 0) {
-                    this.cancel();
+                    this.onCancel();
                 }
 
                 final Card c = GuiChoose.oneOrNone("Exile from " + part.getFrom(), this.typeList);
@@ -164,7 +164,7 @@ public class CostExile extends CostPartWithList {
                         this.done();
                     }
                 } else {
-                    this.cancel();
+                    this.onCancel();
                     break;
                 }
             }
@@ -225,7 +225,7 @@ public class CostExile extends CostPartWithList {
 
             for (int i = 0; i < nNeeded; i++) {
                 if (this.saList.isEmpty()) {
-                    this.cancel();
+                    this.onCancel();
                 }
 
                 //Have to use the stack descriptions here because some copied spells have no description otherwise
@@ -248,7 +248,7 @@ public class CostExile extends CostPartWithList {
                     final SpellAbilityStackInstance si = stack.getInstanceFromSpellAbility(toExile);
                     stack.remove(si);
                 } else {
-                    this.cancel();
+                    this.onCancel();
                     break;
                 }
             }
@@ -309,7 +309,7 @@ public class CostExile extends CostPartWithList {
         }
 
         @Override
-        public void selectCard(final Card card) {
+        protected void onCardSelected(Card card) {
             if (this.typeList.contains(card)) {
                 this.nExiles++;
                 part.executePayment(sa, card);
@@ -319,7 +319,7 @@ public class CostExile extends CostPartWithList {
                     this.done();
                 } else if (this.typeList.size() == 0) {
                     // happen
-                    this.cancel();
+                    this.onCancel();
                 } else {
                     this.showMessage();
                 }
@@ -357,7 +357,7 @@ public class CostExile extends CostPartWithList {
                     return;
                 }
             }
-            cancel();
+            onCancel();
         }
     }
 

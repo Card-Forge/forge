@@ -87,7 +87,7 @@ public class CostPutCounter extends CostPartWithList {
         }
 
         @Override
-        public void selectCard(final Card card) {
+        protected void onCardSelected(Card card) {
             if (this.typeList.contains(card)) {
                 this.nPut++;
                 costPutCounter.executePayment(sa, card);

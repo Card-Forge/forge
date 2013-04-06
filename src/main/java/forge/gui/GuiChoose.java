@@ -88,19 +88,15 @@ public class GuiChoose {
     }
 
     public static <T> List<T> noneOrMany(final String message, final Collection<T> choices) {
-        return GuiChoose.getChoices(message, 0, choices.size(), choices, null);
+        return GuiChoose.getChoices(message, 0, choices.size(), choices);
     }
 
     // returned Object will never be null
     public static <T> List<T> getChoices(final String message, final int min, final int max, final T[] choices) {
-        return getChoices(message, min, max, Arrays.asList(choices), null);
-    }
-    
-    public static <T> List<T> getChoices(final String message, final int min, final int max, final Collection<T> choices) {
-        return getChoices(message, min, max, choices, null);
+        return getChoices(message, min, max, Arrays.asList(choices));
     }
 
-    public static <T> List<T> getChoices(final String message, final int min, final int max, final Collection<T> choices,final T selected) {
+    public static <T> List<T> getChoices(final String message, final int min, final int max, final Collection<T> choices) {
         if (null == choices || choices.isEmpty()) {
             if (0 == min) {
                 return new ArrayList<T>();
@@ -128,12 +124,7 @@ public class GuiChoose {
                         }
                     }
                 });
-                
-                if(selected != null)
-                    c.show(selected);
-                else
-                    c.show();
-                
+                c.show();
                 GuiUtils.clearPanelSelections();
                 return c.getSelectedValues();
             }

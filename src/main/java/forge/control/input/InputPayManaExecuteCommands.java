@@ -108,7 +108,7 @@ public class InputPayManaExecuteCommands extends InputPayManaBase {
 
     /** {@inheritDoc} */
     @Override
-    public final void selectButtonCancel() {
+    protected final void onCancel() {
         Singletons.getControl().getPlayer().getManaPool().refundManaPaid(this.saPaidFor, true);
         bPaid = false;
         this.stop();
@@ -116,11 +116,9 @@ public class InputPayManaExecuteCommands extends InputPayManaBase {
 
     /** {@inheritDoc} */
     @Override
-    public final void selectButtonOK() {}
-
-    /** {@inheritDoc} */
-    @Override
     public final void showMessage() {
+        if ( isFinished() ) return;
+        
         ButtonUtil.enableOnlyCancel();
         final StringBuilder msg = new StringBuilder(this.message + "Pay Mana Cost: " + this.manaCost);
         if (this.phyLifeToLose > 0) {
