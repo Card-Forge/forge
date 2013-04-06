@@ -6516,6 +6516,12 @@ public class Card extends GameEntity implements Comparable<Card> {
                     if (list.isEmpty() || !this.sharesColorWith(list.get(0))) {
                         return false;
                     }
+                } else if (restriction.equals("Remembered")) {
+                    for (final Object obj : source.getRemembered()) {
+                        if (!(obj instanceof Card) || !this.sharesColorWith((Card) obj)) {
+                            return false;
+                        }
+                    }
                 } else if (restriction.equals("Imprinted")) {
                     for (final Card card : source.getImprinted()) {
                         if (!this.sharesColorWith(card)) {

@@ -13740,7 +13740,6 @@ src/main/java/forge/card/ability/effects/UntapAllEffect.java -text
 src/main/java/forge/card/ability/effects/UntapEffect.java -text
 src/main/java/forge/card/ability/package-info.java svneol=native#text/plain
 src/main/java/forge/card/cardfactory/CardFactory.java svneol=native#text/plain
-src/main/java/forge/card/cardfactory/CardFactoryArtifacts.java -text
 src/main/java/forge/card/cardfactory/CardFactoryCreatures.java svneol=native#text/plain
 src/main/java/forge/card/cardfactory/CardFactorySorceries.java svneol=native#text/plain
 src/main/java/forge/card/cardfactory/CardFactoryUtil.java svneol=native#text/plain

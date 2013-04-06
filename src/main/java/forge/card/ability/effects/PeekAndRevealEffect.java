@@ -5,6 +5,7 @@ import java.util.List;
 
 import forge.Card;
 import forge.CardLists;
+import forge.CardUtil;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.AbilitySub;
@@ -39,44 +40,52 @@ public class PeekAndRevealEffect extends SpellAbilityEffect {
         int numPeek = AbilityUtils.calculateAmount(sa.getSourceCard(), peekAmount, sa);
         
         // Right now, this is only used on your own library.
-        Player libraryToPeek = sa.getActivatingPlayer();
+        List<Player> libraryPlayers = AbilityUtils.getDefinedPlayers(sa.getSourceCard(), sa.getParam("Defined"), sa);
         Player peekingPlayer = sa.getActivatingPlayer();
         
-        final PlayerZone library = libraryToPeek.getZone(ZoneType.Library);
-        numPeek = Math.min(numPeek, library.size());
-        
-        List<Card> peekCards = new ArrayList<Card>();
-        for(int i = 0; i < numPeek; i++) {
-            peekCards.add(library.get(i));
-        }
-        
-        List<Card> revealableCards = CardLists.getValidCards(peekCards, revealValid, sa.getActivatingPlayer(), sa.getSourceCard());
-        boolean doReveal = !revealableCards.isEmpty();
-        
-        //peekingPlayer.showCards(peekCards)
-        if (peekingPlayer.isHuman()) {
-            GuiChoose.one(source + "Revealing cards from library", peekCards);
-            if (doReveal && revealOptional) {
-                StringBuilder question = new StringBuilder();
-                question.append("Reveal cards to other players?");
-                doReveal = GuiDialog.confirm(source, question.toString());
+        for(Player libraryToPeek : libraryPlayers) {
+            final PlayerZone library = libraryToPeek.getZone(ZoneType.Library);
+            numPeek = Math.min(numPeek, library.size());
+            
+            List<Card> peekCards = new ArrayList<Card>();
+            for(int i = 0; i < numPeek; i++) {
+                peekCards.add(library.get(i));
             }
-        } else {
-            if (doReveal && revealOptional) {
-                // If 
-                AbilitySub subAb = sa.getSubAbility();
-                doReveal = subAb != null && subAb.getAi().chkDrawbackWithSubs((AIPlayer)peekingPlayer, subAb);
+            
+            List<Card> revealableCards = CardLists.getValidCards(peekCards, revealValid, sa.getActivatingPlayer(), sa.getSourceCard());
+            boolean doReveal = !sa.hasParam("NoReveal") && !revealableCards.isEmpty();
+            
+            //peekingPlayer.showCards(peekCards)
+            if (peekingPlayer.isHuman()) {
+                if (!sa.hasParam("NoPeek")) {
+                    GuiChoose.one(source + "Revealing cards from library", peekCards);
+                }
+                if (doReveal && revealOptional) {
+                    StringBuilder question = new StringBuilder();
+                    question.append("Reveal cards to other players?");
+                    doReveal = GuiDialog.confirm(source, question.toString());
+                }
+            } else {
+                if (doReveal && revealOptional) {
+                    // If 
+                    AbilitySub subAb = sa.getSubAbility();
+                    doReveal = subAb != null && subAb.getAi().chkDrawbackWithSubs((AIPlayer)peekingPlayer, subAb);
+                }
             }
-        }
-        
-        if (doReveal) {
-            if (!peekingPlayer.isHuman()) {
-                GuiChoose.one(source + "Revealing cards from library", revealableCards);
-            }
-            // Singletons.getModel().getGameAction().revealCardsToOtherPlayers(peekingPlayer, revealableCards);
-            if (rememberRevealed) {
+            
+            if (doReveal) {
+                if (!peekingPlayer.isHuman()) {
+                    GuiChoose.one(source + "Revealing cards from library", revealableCards);
+                }
+                // Singletons.getModel().getGameAction().revealCardsToOtherPlayers(peekingPlayer, revealableCards);
+                if (rememberRevealed) {
+                    for(Card c : revealableCards) {
+                        source.addRemembered(CardUtil.getLKICopy(c));
+                    }
+                }
+            } else if (sa.hasParam("RememberPeeked")) {
                 for(Card c : revealableCards) {
-                    source.addRemembered(c);
+                    source.addRemembered(CardUtil.getLKICopy(c));
                 }
             }
         }
