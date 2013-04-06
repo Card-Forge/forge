@@ -2,6 +2,7 @@ Name:Myr Superion
 ManaCost:2
 Types:Artifact Creature Myr
 PT:5/6
+Text:Spend only mana produced by creatures to cast Myr Superion.
 SVar:FullCost:Mana<2\Creature>
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/myr_superion.jpg
