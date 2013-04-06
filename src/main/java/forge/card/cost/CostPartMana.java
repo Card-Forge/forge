@@ -118,7 +118,7 @@ public class CostPartMana extends CostPart {
     @Override
     public final boolean payHuman(final SpellAbility ability, final GameState game) {
         final Card source = ability.getSourceCard();
-        ManaCostBeingPaid toPay = new ManaCostBeingPaid(getManaToPay());
+        ManaCostBeingPaid toPay = new ManaCostBeingPaid(getManaToPay(), restriction);
         
         boolean xWasBilled = false;
         if (this.getAmountOfX() > 0 && !ability.getSVar("X").equals("Count$xPaid")) { // announce X will overwrite whatever was in card script
@@ -141,7 +141,7 @@ public class CostPartMana extends CostPart {
             FThreads.setInputAndWait(inpPayment);
             if(!inpPayment.isPaid())
                 return false;
-        } 
+        }
         if (this.getAmountOfX() > 0) {
             if( !ability.isAnnouncing("X") && !xWasBilled) {
                 source.setXManaCostPaid(0);

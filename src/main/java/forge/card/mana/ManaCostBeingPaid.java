@@ -97,6 +97,7 @@ public class ManaCostBeingPaid {
     private int cntX = 0;
     private final ArrayList<String> manaNeededToAvoidNegativeEffect = new ArrayList<String>();
     private final ArrayList<String> manaPaidToAvoidNegativeEffect = new ArrayList<String>();
+    private final String sourceRestriction;
     
     // manaCost can be like "0", "3", "G", "GW", "10", "3 GW", "10 GW"
     // or "split hybrid mana" like "2/G 2/G", "2/B 2/B 2/B"
@@ -111,12 +112,14 @@ public class ManaCostBeingPaid {
      *            a {@link java.lang.String} object.
      */
     public ManaCostBeingPaid(String sCost) {
-        this("0".equals(sCost) || "C".equals(sCost) || sCost.isEmpty() ? null : new ManaCost(new ManaCostParser(sCost)));
+        this("0".equals(sCost) || "C".equals(sCost) || sCost.isEmpty() ? ManaCost.ZERO : new ManaCost(new ManaCostParser(sCost)));
     }
 
     public ManaCostBeingPaid(ManaCost manaCost) {
-        if ( null == manaCost )
-            return;
+        this(manaCost, null);
+    }
+    public ManaCostBeingPaid(ManaCost manaCost, String srcRestriction) {
+        sourceRestriction = srcRestriction;
 
         for (ManaCostShard shard : manaCost.getShards()) {
             if (shard == ManaCostShard.X) {
@@ -860,5 +863,9 @@ public class ManaCostBeingPaid {
         }
     
         return usableColors;
+    }
+
+    public String getSourceRestriction() {
+        return sourceRestriction;
     }    
 }

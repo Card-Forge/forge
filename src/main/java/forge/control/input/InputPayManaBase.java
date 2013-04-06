@@ -3,6 +3,9 @@ package forge.control.input;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+
+import org.apache.commons.lang3.StringUtils;
+
 import forge.Card;
 import forge.CardUtil;
 import forge.Constant;
@@ -54,7 +57,7 @@ public abstract class InputPayManaBase extends InputSyncronizedBase implements I
     }
     
     public void selectManaPool(String color) {
-        useManaFromPool(color, this.manaCost);
+        useManaFromPool(color);
     }
 
     /**
@@ -113,6 +116,7 @@ public abstract class InputPayManaBase extends InputSyncronizedBase implements I
      * 
      * @return ManaCost the amount of mana remaining to be paid after the mana is activated
      */
+    protected void useManaFromPool(String color) { useManaFromPool(color, manaCost); } 
     protected void useManaFromPool(String color, ManaCostBeingPaid manaCost) {
         ManaPool mp = player.getManaPool();
     
@@ -122,7 +126,7 @@ public abstract class InputPayManaBase extends InputSyncronizedBase implements I
             manaStr = CardUtil.getShortColor(color);
         }
         
-        this.manaCost = mp.payManaFromPool(saPaidFor, manaCost, manaStr); 
+        mp.payManaFromPool(saPaidFor, manaCost, manaStr); 
     
         onManaAbilityPlayed(null);
         showMessage();
@@ -146,8 +150,7 @@ public abstract class InputPayManaBase extends InputSyncronizedBase implements I
         if (card.getController() != player) {
             return;
         }
-        
-    
+
         final StringBuilder cneeded = new StringBuilder();
         final StringBuilder colorRequired = new StringBuilder();
         boolean choice = true;
@@ -166,6 +169,10 @@ public abstract class InputPayManaBase extends InputSyncronizedBase implements I
         List<SpellAbility> abilities = new ArrayList<SpellAbility>();
         // you can't remove unneeded abilities inside a for(am:abilities) loop :(
     
+        final String typeRes = manaCost.getSourceRestriction();
+        if( StringUtils.isNotBlank(typeRes) && !card.isType(typeRes))
+            return;
+
         for (SpellAbility ma : card.getManaAbility()) {
             ma.setActivatingPlayer(player);
             AbilityManaPart m = null;

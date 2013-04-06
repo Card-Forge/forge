@@ -52,11 +52,6 @@ public class ManaPool {
 
     /** Constant <code>map</code>. */
     private static final Map<String, Integer> MAP = new HashMap<String, Integer>();
-
-    /** Constant <code>colors="WUBRG"</code>. */
-    public static final String COLORS = "WUBRG";
-    /** Constant <code>mcolors="1WUBRG"</code>. */
-    public static final String M_COLORS = "1WUBRG";
     private final Player owner;
 
     /**
@@ -228,7 +223,7 @@ public class ManaPool {
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a {@link forge.card.mana.Mana} object.
      */
-    private Mana getMana(final String manaStr, final SpellAbility saBeingPaidFor) {
+    private Mana getMana(final String manaStr, final SpellAbility saBeingPaidFor, String restriction) {
         final ArrayList<Mana> pool = this.floatingMana;
         
         //System.out.format("ManaStr='%s' ...", manaStr);
@@ -248,6 +243,9 @@ public class ManaPool {
             if (!canPay || (shard.isSnow() && !thisMana.isSnow())) {
                 continue;
             }
+
+            if( StringUtils.isNotBlank(restriction) && !thisMana.getSourceCard().isType(restriction) )
+                continue;
 
             // prefer colorless mana to spend
             int weight = thisMana.isColorless() ? 5 : 0;
@@ -438,7 +436,7 @@ public class ManaPool {
         for(String part : splitCost) {
             int loops = StringUtils.isNumeric(part) ? Integer.parseInt(part) : 1;
             for(int i = 0; i < loops; i++ ) {
-                final Mana mana = this.getMana(part, saBeingPaidFor);
+                final Mana mana = this.getMana(part, saBeingPaidFor, manaCost.getSourceRestriction());
                 if (mana != null) {
                     manaCost.payMana(mana);
                     manaPaid.add(mana);
@@ -466,27 +464,24 @@ public class ManaPool {
      *            a {@link java.lang.String} object.
      * @return a {@link forge.card.mana.ManaCostBeingPaid} object.
      */
-    public final ManaCostBeingPaid payManaFromPool(final SpellAbility saBeingPaidFor, final ManaCostBeingPaid manaCost, final String manaStr) {
+    public final void payManaFromPool(final SpellAbility saBeingPaidFor, final ManaCostBeingPaid manaCost, final String manaStr) {
         if (manaStr.trim().equals("") || manaCost.isPaid()) {
-            return manaCost;
+            return;
         }
-
-        final ArrayList<Mana> manaPaid = saBeingPaidFor.getPayingMana();
 
         // get a mana of this type from floating, bail if none available
-        final Mana mana = this.getMana(manaStr, saBeingPaidFor);
+        final Mana mana = this.getMana(manaStr, saBeingPaidFor, manaCost.getSourceRestriction());
         if (mana == null) {
-            return manaCost; // no matching mana in the pool
+            return; // no matching mana in the pool
         }
         else if (manaCost.isNeeded(mana)) {
-                manaCost.payMana(mana);
-                manaPaid.add(mana);
-                this.removeManaFrom(this.floatingMana, mana);
-                if (mana.addsNoCounterMagic() && saBeingPaidFor.getSourceCard() != null) {
-                    saBeingPaidFor.getSourceCard().setCanCounter(false);
-                }
+            manaCost.payMana(mana);
+            saBeingPaidFor.getPayingMana().add(mana);
+            this.removeManaFrom(this.floatingMana, mana);
+            if (mana.addsNoCounterMagic() && saBeingPaidFor.getSourceCard() != null) {
+                saBeingPaidFor.getSourceCard().setCanCounter(false);
+            }
         }
-        return manaCost;
     }
 
     /**
