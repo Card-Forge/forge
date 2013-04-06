@@ -27,6 +27,7 @@ Name=SkieraCube
 1 Badlands|LEB
 1 Balance|LEB
 1 Bane of the Living|LGN
+1 Banefire|CFX
 1 Baneslayer Angel|M11
 1 Barter in Blood|MRD
 1 Basilisk Collar|WWK
@@ -69,6 +70,7 @@ Name=SkieraCube
 1 Carnophage|EXO
 1 Catastrophe|USG
 1 Celestial Colonnade|WWK
+1 Chain Lightning|LEG
 1 Chainer's Edict|TOR
 1 Chameleon Colossus|MOR
 1 Chandra Nalaar|M11
@@ -108,6 +110,7 @@ Name=SkieraCube
 1 Deep Analysis|TOR
 1 Demonic Tutor|LEB
 1 Deranged Hermit|ULG
+1 Desertion|6ED
 1 Devil's Play|ISD
 1 Diabolic Edict|TMP
 1 Diregraf Ghoul|ISD
@@ -117,10 +120,12 @@ Name=SkieraCube
 1 Dismiss|TMP
 1 Doom Blade|M12
 1 Drana, Kalastria Bloodchief|ROE
+1 Duplicant|MRD
 1 Duress|USG
 1 Dust Bowl|MMQ
 1 Earthquake|POR
 1 Edric, Spymaster of Trest|COM
+1 Eight-and-a-Half-Tails|CHK
 1 Electrolyze|GPT
 1 Elite Vanguard|M12
 1 Elspeth Tirel|SOM
@@ -147,6 +152,7 @@ Name=SkieraCube
 1 Fiend Hunter|ISD
 1 Figure of Destiny|EVE
 1 Fire Imp|POR
+1 Fire // Ice|COM
 1 Fireball|M12
 1 Fireblast|VIS
 1 Firebolt|ODY
@@ -172,6 +178,7 @@ Name=SkieraCube
 1 Ghitu Slinger|ULG
 1 Giant Solifuge|GPT
 1 Gideon Jura|ROE
+1 Gifts Ungiven|CHK
 1 Glen Elendra Archmage|EVE
 1 Glorious Anthem|USG
 1 Go for the Throat|MBS
@@ -186,6 +193,7 @@ Name=SkieraCube
 1 Grave Titan|M12
 1 Gravecrawler|DKA
 1 Graveborn Muse|LGN
+1 Greater Gargadon|TSP
 1 Great Sable Stag|M10
 1 Green Sun's Zenith|MBS
 1 Grim Lavamancer|TOR
@@ -223,6 +231,7 @@ Name=SkieraCube
 1 Jungle Lion|POR
 1 Kargan Dragonlord|ROE
 1 Karmic Guide|ULG
+1 Karn Liberated|NPH
 1 Keiga, the Tide Star|CHK
 1 Keldon Champion|UDS
 1 Keldon Marauders|PLC
@@ -304,6 +313,7 @@ Name=SkieraCube
 1 Nantuko Shade|TOR
 1 Nantuko Vigilante|LGN
 1 Naturalize|ROE
+1 Necromancy|VIS
 1 Nekrataal|VIS
 1 Nether Void|LEG
 1 Nevinyrral's Disk|LEB
@@ -384,9 +394,12 @@ Name=SkieraCube
 1 Scrubland|LEB
 1 Sea Gate Oracle|ROE
 1 Seal of Cleansing|NMS
+1 Searing Blaze|WWK
 1 Sensei's Divining Top|CHK
 1 Serendib Efreet|ARN
+1 Sewer Nemesis|COM
 1 Shadowmage Infiltrator|TSB
+1 Shelldock Isle|LRW
 1 Shriekmaw|LRW
 1 Siege-Gang Commander|SCG
 1 Silver Knight|SCG
@@ -485,7 +498,9 @@ Name=SkieraCube
 1 Vendilion Clique|MOR
 1 Vengevine|ROE
 1 Venser, the Sojourner|SOM
+1 Venser, Shaper Savant|FUT
 1 Verdant Catacombs|ZEN
+1 Vesuvan Shapeshifter|TSP
 1 Vindicate|APC
 1 Vines of Vastwood|ZEN
 1 Viridian Shaman|MRD
@@ -508,6 +523,7 @@ Name=SkieraCube
 1 Wild Mongrel|ODY
 1 Wild Nacatl|ALA
 1 Wildfire|USG
+1 Willbender|LGN
 1 Windswept Heath|ONS
 1 Winter Orb|LEB
 1 Wooded Foothills|ONS
