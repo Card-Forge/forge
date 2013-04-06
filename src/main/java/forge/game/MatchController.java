@@ -9,6 +9,7 @@ import java.util.Map.Entry;
 
 
 import forge.Constant.Preferences;
+import forge.FThreads;
 import forge.Singletons;
 import forge.control.FControl;
 import forge.control.input.InputControl;
@@ -91,7 +92,7 @@ public class MatchController {
             throw new RuntimeException("Game is not over yet.");
         }
 
-        GameOutcome result = new GameOutcome(reason, game.getRegisteredPlayers());
+        final GameOutcome result = new GameOutcome(reason, game.getRegisteredPlayers());
         result.setTurnsPlayed(game.getPhaseHandler().getTurn());
         gamesPlayed.add(result);
 
@@ -100,10 +101,10 @@ public class MatchController {
         game.getGameLog().add("Final", result.getWinner() + " won", 0);
 
         // add result entries to the game log
-        LobbyPlayer human = Singletons.getControl().getPlayer().getLobbyPlayer();
-        String title = result.isWinner(human) ? "You Win" : "You Lost";
+        final LobbyPlayer human = Singletons.getControl().getPlayer().getLobbyPlayer();
+        
 
-        List<String> outcomes = new ArrayList<String>();
+        final List<String> outcomes = new ArrayList<String>();
         for (Entry<LobbyPlayer, PlayerStatistics> p : result) {
             String whoHas = p.getKey().equals(human) ? "You have" : p.getKey().getName() + " has";
             String outcome = String.format("%s %s", whoHas, p.getValue().getOutcome().toString());
@@ -113,14 +114,17 @@ public class MatchController {
         
         int humanWins = getGamesWonBy(human);
         int humanLosses = getPlayedGames().size() - humanWins;
-        String statsSummary = "Won: " + humanWins + ", Lost: " + humanLosses;
+        final String statsSummary = "Won: " + humanWins + ", Lost: " + humanLosses;
         game.getGameLog().add("Final", statsSummary, 0);
 
 
-        ViewWinLose v = new ViewWinLose(this);
-        v.setTitle(title);
-        v.setOutcomes(outcomes);
-        v.setStatsSummary(statsSummary);
+        FThreads.invokeInEdtNowOrLater(new Runnable() { @Override public void run() {
+            String title = result.isWinner(human) ? "You Win" : "You Lost";
+            ViewWinLose v = new ViewWinLose(MatchController.this);
+            v.setTitle(title);
+            v.setOutcomes(outcomes);
+            v.setStatsSummary(statsSummary);
+        } });
     }
     
 
