@@ -140,6 +140,7 @@ http://www.cardforge.org/fpics/questAvatars/Milhouse_van_Houten.jpg
 http://www.cardforge.org/fpics/questAvatars/Minerva%20McGonagall.jpg
 http://www.cardforge.org/fpics/questAvatars/Mines%20of%20Kazum%20Durl.jpg
 http://www.cardforge.org/fpics/questAvatars/Mister%20Fantastic.jpg
+http://www.cardforge.org/fpics/questAvatars/Montgomery%20Burns.jpg
 http://www.cardforge.org/fpics/questAvatars/Morpheus.jpg
 http://www.cardforge.org/fpics/questAvatars/Mortivore.jpg
 http://www.cardforge.org/fpics/questAvatars/Mr%20Slate.jpg
