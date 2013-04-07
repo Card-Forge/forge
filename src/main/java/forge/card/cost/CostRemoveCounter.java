@@ -165,6 +165,7 @@ public class CostRemoveCounter extends CostPartWithList {
                 int oldVal = crd.getCounters().get(getCounter()).intValue();
                 crd.getCounters().put(getCounter(), Integer.valueOf(oldVal - cntRemoved + 1));
             }
+            cntRemoved = 1;
             return executePayment(ability, inp.getSelected());
 
         } 
@@ -338,7 +339,7 @@ public class CostRemoveCounter extends CostPartWithList {
 
     @Override
     protected void doPayment(SpellAbility ability, Card targetCard){
-        targetCard.subtractCounter(this.getCounter(), 1);
+        targetCard.subtractCounter(this.getCounter(), cntRemoved);
     }
     
     /* (non-Javadoc)
