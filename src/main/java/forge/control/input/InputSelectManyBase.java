@@ -19,7 +19,7 @@ public abstract class InputSelectManyBase<T extends GameEntity> extends InputSyn
     public boolean allowUnselect = false;
     private boolean allowCancel = false;
     
-    private String message = "Source-Card-Name - Select %d more card(s)";
+    protected String message = "Source-Card-Name - Select %d more card(s)";
 
 
 
@@ -45,21 +45,13 @@ public abstract class InputSelectManyBase<T extends GameEntity> extends InputSyn
     public final void showMessage() {
         showMessage(getMessage());
 
-        boolean canCancel = (min == 0 && selected.isEmpty()) || allowCancel;
+        boolean canCancel = allowCancel;
         boolean canOk = hasEnoughTargets();
 
-        if (canOk && canCancel) {
-            ButtonUtil.enableAllFocusOk();
-        }
-        if (!canOk && canCancel) {
-            ButtonUtil.enableOnlyCancel();
-        }
-        if (canOk && !canCancel) {
-            ButtonUtil.enableOnlyOk();
-        }
-        if (!canOk && !canCancel) {
-            ButtonUtil.disableAll();
-        }
+        if (canOk && canCancel) { ButtonUtil.enableAllFocusOk(); }
+        if (!canOk && canCancel) { ButtonUtil.enableOnlyCancel(); }
+        if (canOk && !canCancel) { ButtonUtil.enableOnlyOk(); }
+        if (!canOk && !canCancel) { ButtonUtil.disableAll(); }
     }
 
 
@@ -67,7 +59,7 @@ public abstract class InputSelectManyBase<T extends GameEntity> extends InputSyn
      * TODO: Write javadoc for this method.
      * @return
      */
-    protected  String getMessage() {
+    protected String getMessage() {
         return max == Integer.MAX_VALUE
             ? String.format(message, selected.size())
             : String.format(message, max - selected.size());
