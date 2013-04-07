@@ -1416,8 +1416,6 @@ public class GameAction {
 
     void handleLeylinesAndChancellors() {
         for (Player p : game.getPlayers()) {
-            if(p.isComputer())
-                System.out.println("AI");
             final List<Card> openingHand = new ArrayList<Card>(p.getCardsIn(ZoneType.Hand));
     
             for (final Card c : openingHand) {
