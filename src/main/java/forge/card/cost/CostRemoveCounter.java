@@ -150,7 +150,7 @@ public class CostRemoveCounter extends CostPartWithList {
         if (this.getZone().equals(ZoneType.Battlefield)) {
             final InputSelectCardToRemoveCounter inp = new InputSelectCardToRemoveCounter(cntRemoved, getCounter(), validCards);
             inp.setMessage("Remove %d " + getCounter().getName() + " counters from " + getDescriptiveType());
-            
+            inp.setCancelAllowed(true);
             FThreads.setInputAndWait(inp);
             if(inp.hasCancelled())
                 return false;
