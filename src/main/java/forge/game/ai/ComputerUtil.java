@@ -703,7 +703,7 @@ public class ComputerUtil {
                     if (!sa.isAbility() || sa.getApi() != ApiType.Regenerate) {
                         continue; // Not a Regenerate ability
                     }
-
+                    sa.setActivatingPlayer(controller);
                     // sa.setActivatingPlayer(controller);
                     if (!(sa.canPlay() && ComputerUtilCost.canPayCost(sa, controller))) {
                         continue; // Can't play ability
