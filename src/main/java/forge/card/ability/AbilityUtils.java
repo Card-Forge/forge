@@ -1100,13 +1100,9 @@ public class AbilityUtils {
             ManaCostBeingPaid newCost = new ManaCostBeingPaid(unlessCost.toString());
             newCost.decreaseColorlessMana(2);
             unlessCost = newCost.toString();
-        } else if( unlessCost.indexOf('<') < 0 ) { // if cost has '<' or '>' signs - it's definitely not a variable
-            try {
-                String unlessVar = Integer.toString(calculateAmount(source, sa.getParam("UnlessCost").replace(" ", ""), sa));
-                unlessCost = unlessVar;
-            } catch (final NumberFormatException n) {
-            } //This try/catch method enables UnlessCost to parse any svar name
-              //instead of just X for cards like Draco.
+        } else if( !StringUtils.isBlank(sa.getSVar(unlessCost)) || !StringUtils.isBlank(source.getSVar(unlessCost))) {
+            // check for X costs (stored in SVars 
+            unlessCost = Integer.toString(calculateAmount(source, sa.getParam("UnlessCost").replace(" ", ""), sa));
         }
 
         final Cost cost = new Cost(source, unlessCost, true);
