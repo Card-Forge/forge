@@ -883,6 +883,7 @@ public class ComputerUtilCard {
             @Override
             public boolean apply(final Card c) {
                 for (final SpellAbility am : c.getAIPlayableMana()) {
+                    am.setActivatingPlayer(player);
                     if (am.canPlay()) {
                         return true;
                     }
