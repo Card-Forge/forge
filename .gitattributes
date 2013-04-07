@@ -4144,6 +4144,7 @@ res/cardsfolder/g/giant_mantis.txt svneol=native#text/plain
 res/cardsfolder/g/giant_octopus.txt svneol=native#text/plain
 res/cardsfolder/g/giant_scorpion.txt svneol=native#text/plain
 res/cardsfolder/g/giant_shark.txt svneol=native#text/plain
+res/cardsfolder/g/giant_slug.txt -text
 res/cardsfolder/g/giant_solifuge.txt svneol=native#text/plain
 res/cardsfolder/g/giant_spider.txt svneol=native#text/plain
 res/cardsfolder/g/giant_strength.txt svneol=native#text/plain
@@ -5154,6 +5155,7 @@ res/cardsfolder/i/illuminated_wings.txt svneol=native#text/plain
 res/cardsfolder/i/illumination.txt svneol=native#text/plain
 res/cardsfolder/i/illusion_reality.txt -text
 res/cardsfolder/i/illusionary_forces.txt svneol=native#text/plain
+res/cardsfolder/i/illusionary_presence.txt -text
 res/cardsfolder/i/illusionary_servant.txt svneol=native#text/plain
 res/cardsfolder/i/illusionary_wall.txt svneol=native#text/plain
 res/cardsfolder/i/illusionists_bracers.txt -text

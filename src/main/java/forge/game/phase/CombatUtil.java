@@ -35,6 +35,7 @@ import forge.Command;
 import forge.Constant;
 import forge.GameEntity;
 import forge.Singletons;
+import forge.card.CardType;
 import forge.card.ability.ApiType;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
@@ -269,6 +270,13 @@ public class CombatUtil {
                 walkTypes.add("Land.nonBasic");
             } else if (keyword.equals("Snow landwalk")) {
                 walkTypes.add("Land.Snow");
+            } else if (keyword.endsWith("walk")) {
+                final String landtype = keyword.replace("walk", "");
+                if (CardType.isALandType(landtype)) {
+                    if (!walkTypes.contains(landtype)) {
+                        walkTypes.add(landtype);
+                    }
+                }
             }
         }
 

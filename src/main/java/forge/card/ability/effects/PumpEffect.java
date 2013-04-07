@@ -195,7 +195,14 @@ public class PumpEffect extends SpellAbilityEffect {
                 tgtCards = AbilityUtils.getDefinedCards(sa.getSourceCard(), sa.getParam("Defined"), sa);
             }
         }
-        
+        if (sa.hasParam("DefinedChosenKW")) {
+            if (sa.getParam("DefinedChosenKW").equals("Type")) {
+                final String t = sa.getSourceCard().getChosenType();
+                for (int i = 0; i < keywords.size(); i++) {
+                    keywords.set(i, keywords.get(i).replaceAll("ChosenType", t));
+                }
+            }
+        }
         if (sa.hasParam("RandomKeyword")) {
             final String num = sa.hasParam("RandomKWNum") ? sa.getParam("RandomKWNum") : "1";
             final int numkw = AbilityUtils.calculateAmount(sa.getSourceCard(), num, sa);

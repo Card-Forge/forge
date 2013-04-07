@@ -162,6 +162,17 @@ public class ChooseTypeEffect extends SpellAbilityEffect {
                                             }
                                         }
                                     }
+                                } else if (logic.equals("ChosenLandwalk")) {
+                                    final List<Card> lands = p.getOpponent().getLandsInPlay();
+                                    for (Card c : lands) {
+                                        for (String t : c.getType()) {
+                                            if (!invalidTypes.contains(t)
+                                                    && CardType.isABasicLandType(t)) {
+                                                chosen = t;
+                                                break;
+                                            }
+                                        }
+                                    }
                                 }
                             }
 
@@ -192,11 +203,13 @@ public class ChooseTypeEffect extends SpellAbilityEffect {
                                 final String logic = sa.getParam("AILogic");
                                 if (logic.equals("ChosenLandwalk")) {
                                     final List<Card> lands = p.getOpponent().getLandsInPlay();
-                                    final List<String> totallands = CardType.getLandTypes();
                                     for (Card c : lands) {
-                                        if (!invalidTypes.contains(c.getName())) {
-                                            choice = c.getName();
-                                            break;
+                                        for (String t : c.getType()) {
+                                            if (!invalidTypes.contains(t)
+                                                    && CardType.isALandType(t)) {
+                                                choice = t;
+                                                break;
+                                            }
                                         }
                                     }
                                 }
