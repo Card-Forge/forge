@@ -160,6 +160,12 @@ public class StaticAbilityContinuous {
                     addKeywords[w] = addKeywords[w].replaceAll("ChosenName", "Card.named" + chosenName);
                 }
             }
+            if (params.containsKey("SharedKeywordsZone")) {
+                List<ZoneType> zones = ZoneType.listValueOf(params.get("SharedKeywordsZone"));
+                String[] restrictions = params.containsKey("SharedRestrictions") ? params.get("SharedRestrictions").split(",") : new String[] {"Card"};
+                List<String> kw = CardFactoryUtil.sharedKeywords(addKeywords, restrictions, zones, hostCard);
+                addKeywords = kw.toArray(new String[kw.size()]);
+            }
         }
 
         if (params.containsKey("AddHiddenKeyword")) {

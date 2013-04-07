@@ -2170,6 +2170,53 @@ public class CardFactoryUtil {
 
         return true;
     }
+    
+    /**
+     * <p>
+     * sharedKeywords.
+     * </p>
+     * 
+     * @param kw
+     *            a {@link forge.CardList} object.
+     * @return a List<String>.
+     */
+    public static List<String> sharedKeywords(final String[] kw, final String[] restrictions,
+            final List<ZoneType> zones, final Card host) {
+        final List<String> filteredkw = new ArrayList<String>();
+        final Player p = host.getController();
+        List<Card> cardlist = new ArrayList<Card>(p.getGame().getCardsIn(zones));
+        final List<String> landkw = new ArrayList<String>();
+        final List<String> protectionkw = new ArrayList<String>();
+        final List<String> allkw = new ArrayList<String>();
+        
+        cardlist = CardLists.getValidCards(cardlist, restrictions, p, host);
+        for (Card c : cardlist) {
+            for (String k : c.getKeyword()) {
+                if (k.endsWith("walk")) {
+                    if (!landkw.contains(k)) {
+                        landkw.add(k);
+                    }
+                } else if (k.startsWith("Protection")) {
+                    if (!protectionkw.contains(k)) {
+                        protectionkw.add(k);
+                    }
+                }
+                if (!allkw.contains(k)) {
+                    allkw.add(k);
+                }
+            }
+        }
+        for (String keyword : kw) {
+            if (keyword.equals("Protection")) {
+                filteredkw.addAll(protectionkw);
+            } else if (keyword.equals("Landwalk")) {
+                filteredkw.addAll(landkw);
+            } else if (allkw.contains(keyword)) {
+                filteredkw.add(keyword);
+            }
+        }
+        return filteredkw;
+    }
 
     /**
      * <p>

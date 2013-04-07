@@ -1420,6 +1420,7 @@ res/cardsfolder/c/cadaverous_bloom.txt svneol=native#text/plain
 res/cardsfolder/c/cadaverous_knight.txt svneol=native#text/plain
 res/cardsfolder/c/cage_of_hands.txt svneol=native#text/plain
 res/cardsfolder/c/cagemail.txt svneol=native#text/plain
+res/cardsfolder/c/cairn_wanderer.txt -text
 res/cardsfolder/c/calciderm.txt svneol=native#text/plain
 res/cardsfolder/c/calciform_pools.txt svneol=native#text/plain
 res/cardsfolder/c/calcite_snapper.txt svneol=native#text/plain
@@ -1925,6 +1926,7 @@ res/cardsfolder/c/compost.txt svneol=native#text/plain
 res/cardsfolder/c/compulsion.txt svneol=native#text/plain
 res/cardsfolder/c/compulsive_research.txt svneol=native#text/plain
 res/cardsfolder/c/concentrate.txt svneol=native#text/plain
+res/cardsfolder/c/concerted_effort.txt -text
 res/cardsfolder/c/conch_horn.txt svneol=native#text/plain
 res/cardsfolder/c/conclave_equenaut.txt -text
 res/cardsfolder/c/conclave_phalanx.txt -text
@@ -2414,6 +2416,7 @@ res/cardsfolder/d/death_cultist.txt svneol=native#text/plain
 res/cardsfolder/d/death_denied.txt svneol=native#text/plain
 res/cardsfolder/d/death_grasp.txt svneol=native#text/plain
 res/cardsfolder/d/death_hood_cobra.txt svneol=native#text/plain
+res/cardsfolder/d/death_mask_duplicant.txt -text
 res/cardsfolder/d/death_mutation.txt svneol=native#text/plain
 res/cardsfolder/d/death_of_a_thousand_stings.txt svneol=native#text/plain
 res/cardsfolder/d/death_or_glory.txt -text

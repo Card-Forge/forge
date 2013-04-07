@@ -9,11 +9,70 @@ import forge.Command;
 import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
+import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
 public class PumpAllEffect extends SpellAbilityEffect {
+    private void applyPumpAll(final SpellAbility sa, final List<Card> list, final int a, 
+            final int d, final List<String> keywords, final ArrayList<ZoneType> affectedZones) {
+        
+        for (final Card tgtC : list) {
+
+            // only pump things in the affected zones.
+            boolean found = false;
+            for (final ZoneType z : affectedZones) {
+                if (tgtC.isInZone(z)) {
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) {
+                continue;
+            }
+
+            tgtC.addTempAttackBoost(a);
+            tgtC.addTempDefenseBoost(d);
+
+            for (int i = 0; i < keywords.size(); i++) {
+                tgtC.addExtrinsicKeyword(keywords.get(i));
+                if (keywords.get(i).equals("Suspend")) {
+                    tgtC.setSuspend(true);
+                }
+            }
+
+            if (sa.hasParam("RememberAllPumped")) {
+                sa.getSourceCard().addRemembered(tgtC);
+            }
+        
+            if (!sa.hasParam("Permanent")) {
+                // If not Permanent, remove Pumped at EOT
+                final Command untilEOT = new Command() {
+                    private static final long serialVersionUID = 5415795460189457660L;
+
+                    @Override
+                    public void execute() {
+                        tgtC.addTempAttackBoost(-1 * a);
+                        tgtC.addTempDefenseBoost(-1 * d);
+
+                        if (keywords.size() > 0) {
+                            for (int i = 0; i < keywords.size(); i++) {
+                                tgtC.removeExtrinsicKeyword(keywords.get(i));
+                            }
+                        }
+                    }
+                };
+                if (sa.hasParam("UntilUntaps")) {
+                    sa.getSourceCard().addUntapCommand(untilEOT);
+                } else if (sa.hasParam("UntilEndOfCombat")) {
+                    Singletons.getModel().getGame().getEndOfCombat().addUntil(untilEOT);
+                } else {
+                    Singletons.getModel().getGame().getEndOfTurn().addUntil(untilEOT);
+                }
+            }
+        }
+    }
     @Override
     protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
@@ -65,65 +124,16 @@ public class PumpAllEffect extends SpellAbilityEffect {
 
         list = AbilityUtils.filterListByType(list, valid, sa);
 
-        final List<String> keywords = sa.hasParam("KW") ? Arrays.asList(sa.getParam("KW").split(" & ")) : new ArrayList<String>();
+        List<String> keywords = sa.hasParam("KW") ? Arrays.asList(sa.getParam("KW").split(" & ")) : new ArrayList<String>();
         final int a = AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("NumAtt"), sa);
         final int d = AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("NumDef"), sa);
-        final String remember = sa.getParam("RememberAllPumped");
         
-        for (final Card tgtC : list) {
-
-            // only pump things in the affected zones.
-            boolean found = false;
-            for (final ZoneType z : affectedZones) {
-                if (tgtC.isInZone(z)) {
-                    found = true;
-                    break;
-                }
-            }
-            if (!found) {
-                continue;
-            }
-
-            tgtC.addTempAttackBoost(a);
-            tgtC.addTempDefenseBoost(d);
-
-            for (int i = 0; i < keywords.size(); i++) {
-                tgtC.addExtrinsicKeyword(keywords.get(i));
-                if (keywords.get(i).equals("Suspend")) {
-                    tgtC.setSuspend(true);
-                }
-            }
-
-            if (remember != null) {
-                sa.getSourceCard().addRemembered(tgtC);
-            }
-        
-            if (!sa.hasParam("Permanent")) {
-                // If not Permanent, remove Pumped at EOT
-                final Command untilEOT = new Command() {
-                    private static final long serialVersionUID = 5415795460189457660L;
-
-                    @Override
-                    public void execute() {
-                        tgtC.addTempAttackBoost(-1 * a);
-                        tgtC.addTempDefenseBoost(-1 * d);
-
-                        if (keywords.size() > 0) {
-                            for (int i = 0; i < keywords.size(); i++) {
-                                tgtC.removeExtrinsicKeyword(keywords.get(i));
-                            }
-                        }
-                    }
-                };
-                if (sa.hasParam("UntilUntaps")) {
-                    sa.getSourceCard().addUntapCommand(untilEOT);
-                } else if (sa.hasParam("UntilEndOfCombat")) {
-                    Singletons.getModel().getGame().getEndOfCombat().addUntil(untilEOT);
-                } else {
-                    Singletons.getModel().getGame().getEndOfTurn().addUntil(untilEOT);
-                }
-            }
+        if (sa.hasParam("SharedKeywordsZone")) {
+            List<ZoneType> zones = ZoneType.listValueOf(sa.getParam("SharedKeywordsZone"));
+            String[] restrictions = sa.hasParam("SharedRestrictions") ? sa.getParam("SharedRestrictions").split(",") : new String[] {"Card"};
+            keywords = CardFactoryUtil.sharedKeywords(sa.getParam("KW").split(" & "), restrictions, zones, sa.getSourceCard());
         }
+        this.applyPumpAll(sa, list, a, d, keywords, affectedZones);
     } // pumpAllResolve()
 
 }
