@@ -1416,6 +1416,8 @@ public class GameAction {
 
     void handleLeylinesAndChancellors() {
         for (Player p : game.getPlayers()) {
+            if(p.isComputer())
+                System.out.println("AI");
             final List<Card> openingHand = new ArrayList<Card>(p.getCardsIn(ZoneType.Hand));
     
             for (final Card c : openingHand) {
@@ -1425,6 +1427,7 @@ public class GameAction {
                             final String effName = kw.split(":")[1];
     
                             final SpellAbility effect = AbilityFactory.getAbility(c.getSVar(effName), c);
+                            effect.setActivatingPlayer(p);
                             if (GuiDialog.confirm(c, "Use " + c +"'s  ability?")) {
                                 // If we ever let the AI memorize cards in the players
                                 // hand, this would be a place to do so.
@@ -1444,7 +1447,7 @@ public class GameAction {
                                 final String effName = kw.split(":")[1];
     
                                 final SpellAbility effect = AbilityFactory.getAbility(c.getSVar(effName), c);
-    
+                                effect.setActivatingPlayer(p);
                                 // Is there a better way for the AI to decide this?
                                 if (effect.doTrigger(false, (AIPlayer)p)) {
                                     GuiDialog.message("Computer reveals " + c.getName() + "(" + c.getUniqueNumber() + ").");
