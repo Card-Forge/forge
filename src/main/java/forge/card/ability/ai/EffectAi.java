@@ -39,6 +39,11 @@ public class EffectAi extends SpellAbilityAi {
                     return false;
                 }
                 randomReturn = true;
+            } else if (logic.equals("EndOfOppTurn")) {
+                if (phase.isPlayerTurn(ai) || phase.getPhase().isBefore(PhaseType.END_OF_TURN)) {
+                    return false;
+                }
+                randomReturn = true;
             } else if (logic.equals("Fog")) {
                 if (game.getPhaseHandler().isPlayerTurn(sa.getActivatingPlayer())) {
                     return false;
@@ -95,15 +100,13 @@ public class EffectAi extends SpellAbilityAi {
             return false;
         }
 
-        final String stackable = sa.getParam("Stackable");
-
-        if ((stackable != null) && stackable.equals("False")) {
+        if ("False".equals(sa.getParam("Stackable"))) {
             String name = sa.getParam("Name");
             if (name == null) {
                 name = sa.getSourceCard().getName() + "'s Effect";
             }
-            final List<Card> list = sa.getActivatingPlayer().getCardsIn(ZoneType.Battlefield, name);
-            if (list.size() != 0) {
+            final List<Card> list = sa.getActivatingPlayer().getCardsIn(ZoneType.Command, name);
+            if (!list.isEmpty()) {
                 return false;
             }
         }
