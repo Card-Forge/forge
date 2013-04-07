@@ -110,6 +110,13 @@ Oathkeeper, Takeno's Daisho
 Shieldmage Elder
 Horn of Plenty
 Spellshift
+Traveler's Cloak
+Killing Wave
+Giant Slug
+Illusionary Presence
+Cairn Wanderer
+Concerted Effort
+Death-Mask Duplicant
 
 
 ----------
