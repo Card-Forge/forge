@@ -122,21 +122,23 @@ public class CostRemoveCounter extends CostPartWithList {
         final String amount = this.getAmount();
         final Card source = ability.getSourceCard();
         Integer c = this.convertAmount();
-        int maxCounters = 0;
         
+        String sVarAmount = ability.getSVar(amount);
         cntRemoved = 1;
-        if (amount.equals("All"))
-            cntRemoved = -1;
-        else if (c != null) {
+        if (c != null)  
             cntRemoved = c.intValue();
-        } else {
-            cntRemoved = "XChoice".equals(ability.getSVar(amount)) 
-                ? CostUtil.chooseXValue(source, ability, maxCounters)
-                : AbilityUtils.calculateAmount(source, amount, ability);
+        else if (!"XChoice".equals(sVarAmount)) {
+            cntRemoved = AbilityUtils.calculateAmount(source, amount, ability);
         }
-    
+
         if (this.payCostFromSource()) {
-            maxCounters = source.getCounters(this.counter);
+            int maxCounters = source.getCounters(this.counter);
+            if (amount.equals("All"))
+                cntRemoved = maxCounters;
+            else if ( c == null && "XChoice".equals(sVarAmount)) { 
+                cntRemoved = CostUtil.chooseXValue(source, ability, maxCounters);
+            }
+
             if (maxCounters < cntRemoved) 
                 return false;
             cntRemoved = cntRemoved >= 0 ? cntRemoved : maxCounters;

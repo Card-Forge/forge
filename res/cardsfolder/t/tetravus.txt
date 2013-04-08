@@ -9,9 +9,7 @@ SVar:TrigToken:AB$Token | Cost$ SubCounter<X/P1P1> | References$ X | TokenAmount
 SVar:DBClearXChoice:DB$ Cleanup | ClearChosenX$ True
 SVar:X:XChoice
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounters | TriggerDescription$ At the beginning of your upkeep, you may exile any number of tokens put onto the battlefield with CARDNAME. If you do, put that many +1/+1 counters on CARDNAME.
-SVar:TrigPutCounters:AB$PutCounter | Cost$ Exile<Y/Creature.IsRemembered/Tetravite> | References$ Y | Defined$ Self | CounterType$ P1P1 | CounterNum$ ChosenY | CostDesc$ Exile any number of tokens put onto the battlefield with CARDNAME. | SubAbility$ DBClearYChoice
-SVar:DBClearYChoice:DB$ Cleanup | ClearChosenY$ True
-SVar:Y:YChoice
+SVar:TrigPutCounters:AB$PutCounter | Cost$ Exile<X/Creature.IsRemembered/Tetravite> | References$ X | Defined$ Self | CounterType$ P1P1 | CounterNum$ ChosenX | CostDesc$ Exile any number of tokens put onto the battlefield with CARDNAME. | SubAbility$ DBClearXChoice
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tetravus.jpg
 Oracle:Flying\nTetravus enters the battlefield with three +1/+1 counters on it.\nAt the beginning of your upkeep, you may remove any number of +1/+1 counters from Tetravus. If you do, put that many 1/1 colorless Tetravite artifact creature tokens onto the battlefield. They each have flying and "This creature can't be enchanted."\nAt the beginning of your upkeep, you may exile any number of tokens put onto the battlefield with Tetravus. If you do, put that many +1/+1 counters on Tetravus.
 SetInfo:ATQ Rare

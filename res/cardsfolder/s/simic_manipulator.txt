@@ -3,7 +3,7 @@ ManaCost:1 U U
 Types:Creature Merfolk
 PT:0/1
 K:Evolve
-A:AB$ GainControl | Announce$ X | Cost$ XCantBe0 T SubCounter<X/P1P1/CARDNAME> | ValidTgts$ Creature.powerLEX | TgtPrompt$ Select target with power less than or equal to the number of +1/+1 counters removed this way | SpellDescription$ Gain control of target creature with power less than or equal to the number of +1/+1 counters removed this way.
+A:AB$ GainControl | Announce$ X | Cost$ XCantBe0 T SubCounter<X/P1P1> | ValidTgts$ Creature.powerLEX | TgtPrompt$ Select target with power less than or equal to the number of +1/+1 counters removed this way | SpellDescription$ Gain control of target creature with power less than or equal to the number of +1/+1 counters removed this way.
 SVar:X:Count$xPaid
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/simic_manipulator.jpg

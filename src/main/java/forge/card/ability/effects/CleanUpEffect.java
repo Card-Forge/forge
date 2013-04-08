@@ -31,9 +31,6 @@ public class CleanUpEffect extends SpellAbilityEffect {
         if (sa.hasParam("ClearChosenX")) {
             source.setSVar("ChosenX", "");
         }
-        if (sa.hasParam("ClearChosenY")) {
-            source.setSVar("ChosenY", "");
-        }
         if (sa.hasParam("ClearTriggered")) {
             Singletons.getModel().getGame().getTriggerHandler().clearDelayedTrigger(source);
         }

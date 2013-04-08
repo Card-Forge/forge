@@ -226,7 +226,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     private final List<Command> untapCommandList = new ArrayList<Command>();
     private final List<Command> changeControllerCommandList = new ArrayList<Command>();
 
-    private final static ImmutableList<String> storableSVars = ImmutableList.of("ChosenX", "ChosenY" );
+    private final static ImmutableList<String> storableSVars = ImmutableList.of("ChosenX" );
 
     private final List<Card> hauntedBy = new ArrayList<Card>();
     private Card haunting = null;

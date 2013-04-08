@@ -318,7 +318,7 @@ public class AbilityUtils {
         if (StringUtils.isBlank(svarval)) { 
             // Some variables may be not chosen yet at this moment
             // So return 0 and don't issue an error.
-            if (amount.equals("ChosenX") || amount.equals("ChosenY")) {
+            if (amount.equals("ChosenX")) {
                 // isn't made yet
                 return 0;
             }

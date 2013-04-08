@@ -26,7 +26,6 @@ import com.esotericsoftware.minlog.Log;
 
 import forge.Card;
 import forge.CardLists;
-import forge.CardPredicates;
 import forge.FThreads;
 import forge.CardPredicates.Presets;
 import forge.Singletons;

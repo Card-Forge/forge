@@ -542,8 +542,6 @@ public class CostExile extends CostPartWithList {
             // Generalize this
             if (sVar.equals("XChoice")) {
                 c = CostUtil.chooseXValue(source, ability, list.size());
-            } else if (sVar.equals("YChoice")) {
-                c = CostUtil.chooseYValue(source, ability, list.size());
             } else {
                 c = AbilityUtils.calculateAmount(source, amount, ability);
             }
@@ -652,7 +650,7 @@ public class CostExile extends CostPartWithList {
         if (c == null) {
             final String sVar = ability.getSVar(this.getAmount());
             // Generalize this
-            if (sVar.equals("XChoice") || sVar.equals("YChoice")) {
+            if (sVar.equals("XChoice")) {
                 return null;
             }
             c = AbilityUtils.calculateAmount(source, this.getAmount(), ability);

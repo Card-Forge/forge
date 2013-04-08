@@ -97,33 +97,6 @@ public class CostUtil {
         return chosenX;
     }
 
-    /**
-     * Choose x value (for ChosenY).
-     * 
-     * @param card
-     *            the card
-     * @param sa
-     *            the SpellAbility
-     * @param maxValue
-     *            the max value
-     * @return the int
-     */
-    public static int chooseYValue(final Card card, final SpellAbility sa, final int maxValue) {
-        /*final String chosen = sa.getSVar("ChosenY");
-        if (chosen.length() > 0) {
-            return AbilityFactory.calculateAmount(card, "ChosenY", null);
-        }*/
-
-        final Integer[] choiceArray = new Integer[maxValue + 1];
-        for (int i = 0; i < choiceArray.length; i++) {
-            choiceArray[i] = Integer.valueOf(i);
-        }
-        final Integer chosenY = GuiChoose.one(card.toString() + " - Choose a Value for Y", choiceArray);
-        sa.setSVar("ChosenY", Integer.toString(chosenY));
-        card.setSVar("ChosenY", Integer.toString(chosenY));
-
-        return chosenY;
-    }
 
     public static Cost combineCosts(Cost cost1, Cost cost2) {
         if (cost1 == null) return cost2;
