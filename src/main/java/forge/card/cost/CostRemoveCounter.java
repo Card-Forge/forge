@@ -156,16 +156,18 @@ public class CostRemoveCounter extends CostPartWithList {
             if(inp.hasCancelled())
                 return false;
 
-            source.setSVar("CostCountersRemoved", Integer.toString(inp.getSelected().size()));
             // Have to hack here: remove all counters minus one, without firing any triggers,
             // triggers will fire when last is removed by executePayment.
             // They don't care how many were removed anyway
+            int sum = 0;
             for(Card crd : inp.getSelected()) {
-                int cntRemoved = inp.getTimesSelected(crd);
-                if(cntRemoved < 2) continue;
+                int removed = inp.getTimesSelected(crd);
+                sum += removed;
+                if(removed < 2) continue;
                 int oldVal = crd.getCounters().get(getCounter()).intValue();
-                crd.getCounters().put(getCounter(), Integer.valueOf(oldVal - cntRemoved + 1));
+                crd.getCounters().put(getCounter(), Integer.valueOf(oldVal - removed + 1));
             }
+            source.setSVar("CostCountersRemoved", Integer.toString(sum));
             cntRemoved = 1;
             return executePayment(ability, inp.getSelected());
 

@@ -303,16 +303,6 @@ public class AbilityUtils {
         // return result soon for plain numbers
         if (StringUtils.isNumeric(amount)) { return Integer.parseInt(amount) * multiplier; }
 
-        // These are some special cases - who is implementing them?
-        if (amount.equals("ChosenX") || amount.equals("ChosenY")) {
-            // isn't made yet
-            return 0;
-        }
-        // cost hasn't been paid yet
-        if (amount.startsWith("Cost")) {
-            return 0;
-        }
-
         // Try to fetch variable, try ability first, then card.
         String svarval = null;
         if (ability != null) {
@@ -323,6 +313,19 @@ public class AbilityUtils {
                 System.err.printf("SVar '%s' not found in ability, fallback to Card (%s). Ability is (%s)%n", amount, card.getName(), ability);
             }
             svarval = card.getSVar(amount);
+        }
+        
+        if (StringUtils.isBlank(svarval)) { 
+            // Some variables may be not chosen yet at this moment
+            // So return 0 and don't issue an error.
+            if (amount.equals("ChosenX") || amount.equals("ChosenY")) {
+                // isn't made yet
+                return 0;
+            }
+            // cost hasn't been paid yet
+            if (amount.startsWith("Cost")) {
+                return 0;
+            }
         }
 
         // Nothing to do here if value is missing or blank

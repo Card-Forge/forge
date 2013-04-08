@@ -91,8 +91,8 @@ public class CostUtil {
             choiceArray[i] = i;
         }
         final Integer chosenX = GuiChoose.one(card.toString() + " - Choose a Value for X", choiceArray);
-        sa.setSVar("ChosenX", "Number$" + Integer.toString(chosenX));
-        card.setSVar("ChosenX", "Number$" + Integer.toString(chosenX));
+        sa.setSVar("ChosenX", Integer.toString(chosenX));
+        card.setSVar("ChosenX", Integer.toString(chosenX));
 
         return chosenX;
     }
@@ -119,8 +119,8 @@ public class CostUtil {
             choiceArray[i] = Integer.valueOf(i);
         }
         final Integer chosenY = GuiChoose.one(card.toString() + " - Choose a Value for Y", choiceArray);
-        sa.setSVar("ChosenY", "Number$" + Integer.toString(chosenY));
-        card.setSVar("ChosenY", "Number$" + Integer.toString(chosenY));
+        sa.setSVar("ChosenY", Integer.toString(chosenY));
+        card.setSVar("ChosenY", Integer.toString(chosenY));
 
         return chosenY;
     }
