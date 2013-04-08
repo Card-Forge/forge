@@ -51,6 +51,16 @@ public class ReplaceGainLife extends ReplacementEffect {
                 return false;
             }
         }
+        if (this.getMapParams().containsKey("ValidSource")) {
+            if (!matchesValid(runParams.get("Source"), this.getMapParams().get("ValidSource").split(","), this.getHostCard())) {
+                return false;
+            }
+        }
+        if ("True".equals(this.getMapParams().get("SourceController"))) {
+            if (runParams.get("Source") == null || !runParams.get("Affected").equals(((Card)runParams.get("Source")).getController())) {
+                return false;
+            }
+        }
 
         return true;
     }
@@ -73,6 +83,7 @@ public class ReplaceGainLife extends ReplacementEffect {
     @Override
     public void setReplacingObjects(Map<String, Object> runParams, SpellAbility sa) {
         sa.setReplacingObject("LifeGained", runParams.get("LifeGained"));
+        sa.setReplacingObject("Player", runParams.get("Affected"));
     }
 
 }

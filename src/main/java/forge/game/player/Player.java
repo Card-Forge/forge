@@ -441,6 +441,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
         repParams.put("Event", "GainLife");
         repParams.put("Affected", this);
         repParams.put("LifeGained", toGain);
+        repParams.put("Source", source);
         if (game.getReplacementHandler().run(repParams) != ReplacementResult.NotReplaced) {
             return false;
         }

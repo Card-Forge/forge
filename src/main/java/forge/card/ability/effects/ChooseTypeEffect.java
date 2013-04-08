@@ -206,7 +206,7 @@ public class ChooseTypeEffect extends SpellAbilityEffect {
                                     for (Card c : lands) {
                                         for (String t : c.getType()) {
                                             if (!invalidTypes.contains(t)
-                                                    && CardType.isALandType(t)) {
+                                                    && CardType.getLandTypes().contains(t)) {
                                                 choice = t;
                                                 break;
                                             }
