@@ -55,6 +55,10 @@ When you mouse over a flip, transform or Morph (controlled by you) card in battl
 There are now under 700 unsupported cards and we now have implemented over 95% of all distinct cards. We should be at (Planechase 2012) or over 85% for all the sets.
 
 
+- Dragon's Maze -
+We have created a branch for Dragon's Maze spoilers. These new cards are not included in the Forge distributions at this time. Please be patient as these DGM cards will become available in the near future.
+
+
 ---------
 New Cards
 ---------
@@ -117,6 +121,7 @@ Illusionary Presence
 Cairn Wanderer
 Concerted Effort
 Death-Mask Duplicant
+Rain of Gore
 
 
 ----------
@@ -150,6 +155,13 @@ Jhoira of the Ghitu Avatar
 Kresh the Bloodbraided Avatar
 Karona, False God Avatar
 Frenetic Efreet Avatar
+
+
+------------------------------
+New Dragon's Maze branch Cards
+------------------------------
+
+Melek, Izzet Paragon
 
 
 ------------
