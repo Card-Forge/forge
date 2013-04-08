@@ -126,7 +126,7 @@ public class CostRemoveCounter extends CostPartWithList {
         
         cntRemoved = 1;
         if (amount.equals("All"))
-            cntRemoved = maxCounters;
+            cntRemoved = -1;
         else if (c != null) {
             cntRemoved = c.intValue();
         } else {
@@ -137,9 +137,10 @@ public class CostRemoveCounter extends CostPartWithList {
     
         if (this.payCostFromSource()) {
             maxCounters = source.getCounters(this.counter);
-            if (maxCounters < c) 
+            if (maxCounters < cntRemoved) 
                 return false;
-            source.setSVar("CostCountersRemoved", Integer.toString(c));
+            cntRemoved = cntRemoved >= 0 ? cntRemoved : maxCounters;
+            source.setSVar("CostCountersRemoved", Integer.toString(cntRemoved));
             executePayment(ability, source);
             return true;
         }
