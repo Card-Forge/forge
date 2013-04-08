@@ -2382,12 +2382,17 @@ public class CardFactoryUtil {
         AbilityFactory.AbilityRecordType leftType = AbilityFactory.AbilityRecordType.getRecordType(leftMap);
         Cost leftCost = AbilityFactory.parseAbilityCost(card, leftMap, leftType);
         ApiType leftApi = leftType.getApiTypeOf(leftMap);
+        leftMap.put("StackDecription", leftMap.get("SpellDescription"));
+        leftMap.put("SpellDescription", "Fuse (you may cast both halves of this card from your hand).");
 
         final String strRightAbility = card.getState(CardCharacteristicName.RightSplit).getIntrinsicAbility().get(0);
         Map<String, String> rightMap = AbilityFactory.getMapParams(strRightAbility);
         AbilityFactory.AbilityRecordType rightType = AbilityFactory.AbilityRecordType.getRecordType(leftMap);
         Cost rightCost = AbilityFactory.parseAbilityCost(card, rightMap, rightType);
         ApiType rightApi = leftType.getApiTypeOf(rightMap);
+        rightMap.put("StackDecription", rightMap.get("SpellDescription"));
+        rightMap.put("SpellDescription", "");
+
         
         Cost joinedCost = Cost.combine(rightCost, leftCost);
         final SpellAbility left = AbilityFactory.getAbility(leftType, leftApi, leftMap, joinedCost, card);
