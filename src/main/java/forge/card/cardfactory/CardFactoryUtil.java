@@ -2373,34 +2373,6 @@ public class CardFactoryUtil {
         }
     }
 
-    public static final SpellAbility buildFusedAbility(final Card card) {
-        if(!card.isSplitCard()) 
-            throw new IllegalStateException("Fuse ability may be built only on split cards");
-        
-        final String strLeftAbility = card.getState(CardCharacteristicName.LeftSplit).getIntrinsicAbility().get(0);
-        Map<String, String> leftMap = AbilityFactory.getMapParams(strLeftAbility);
-        AbilityFactory.AbilityRecordType leftType = AbilityFactory.AbilityRecordType.getRecordType(leftMap);
-        Cost leftCost = AbilityFactory.parseAbilityCost(card, leftMap, leftType);
-        ApiType leftApi = leftType.getApiTypeOf(leftMap);
-        leftMap.put("StackDecription", leftMap.get("SpellDescription"));
-        leftMap.put("SpellDescription", "Fuse (you may cast both halves of this card from your hand).");
-
-        final String strRightAbility = card.getState(CardCharacteristicName.RightSplit).getIntrinsicAbility().get(0);
-        Map<String, String> rightMap = AbilityFactory.getMapParams(strRightAbility);
-        AbilityFactory.AbilityRecordType rightType = AbilityFactory.AbilityRecordType.getRecordType(leftMap);
-        Cost rightCost = AbilityFactory.parseAbilityCost(card, rightMap, rightType);
-        ApiType rightApi = leftType.getApiTypeOf(rightMap);
-        rightMap.put("StackDecription", rightMap.get("SpellDescription"));
-        rightMap.put("SpellDescription", "");
-
-        
-        Cost joinedCost = Cost.combine(rightCost, leftCost);
-        final SpellAbility left = AbilityFactory.getAbility(leftType, leftApi, leftMap, joinedCost, card);
-        final AbilitySub right = (AbilitySub) AbilityFactory.getAbility(AbilityFactory.AbilityRecordType.SubAbility, rightApi, rightMap, null, card);
-        left.appendSubAbility(right);
-        return left;
-    }
-
     /**
      * <p>
      * postFactoryKeywords.
@@ -2446,7 +2418,7 @@ public class CardFactoryUtil {
         }
         
         if(CardFactoryUtil.hasKeyword(card, "Fuse") != -1) {
-            card.getState(CardCharacteristicName.Original).getSpellAbility().add(buildFusedAbility(card));
+            card.getState(CardCharacteristicName.Original).getSpellAbility().add(AbilityFactory.buildFusedAbility(card));
         }
 
         final int evokePos = CardFactoryUtil.hasKeyword(card, "Evoke");

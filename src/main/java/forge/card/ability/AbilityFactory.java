@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.Map;
 
 import forge.Card;
+import forge.CardCharacteristicName;
 import forge.card.cost.Cost;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
@@ -120,7 +121,7 @@ public final class AbilityFactory {
         return abCost;
     }
 
-    public static final SpellAbility getAbility(AbilityRecordType type, ApiType api, Map<String, String> mapParams, Cost abCost, Card hostCard) {
+    private static final SpellAbility getAbility(AbilityRecordType type, ApiType api, Map<String, String> mapParams, Cost abCost, Card hostCard) {
         
         
         Target abTgt = mapParams.containsKey("ValidTgts") ? readTarget(hostCard, mapParams) : null;
@@ -349,6 +350,35 @@ public final class AbilityFactory {
         if ((tgt != null) && !tgt.canTgtPlayer()) {
             sa.getTarget().setZone(origin);
         }
+    }
+
+    public static final SpellAbility buildFusedAbility(final Card card) {
+        if(!card.isSplitCard()) 
+            throw new IllegalStateException("Fuse ability may be built only on split cards");
+        
+        final String strLeftAbility = card.getState(CardCharacteristicName.LeftSplit).getIntrinsicAbility().get(0);
+        Map<String, String> leftMap = getMapParams(strLeftAbility);
+        AbilityRecordType leftType = AbilityRecordType.getRecordType(leftMap);
+        Cost leftCost = parseAbilityCost(card, leftMap, leftType);
+        ApiType leftApi = leftType.getApiTypeOf(leftMap);
+        leftMap.put("StackDecription", leftMap.get("SpellDescription"));
+        leftMap.put("SpellDescription", "Fuse (you may cast both halves of this card from your hand).");
+        leftMap.put("ActivationZone", "Hand");
+    
+        final String strRightAbility = card.getState(CardCharacteristicName.RightSplit).getIntrinsicAbility().get(0);
+        Map<String, String> rightMap = getMapParams(strRightAbility);
+        AbilityRecordType rightType = AbilityRecordType.getRecordType(leftMap);
+        Cost rightCost = parseAbilityCost(card, rightMap, rightType);
+        ApiType rightApi = leftType.getApiTypeOf(rightMap);
+        rightMap.put("StackDecription", rightMap.get("SpellDescription"));
+        rightMap.put("SpellDescription", "");
+    
+        
+        Cost joinedCost = Cost.combine(rightCost, leftCost);
+        final SpellAbility left = getAbility(leftType, leftApi, leftMap, joinedCost, card);
+        final AbilitySub right = (AbilitySub) getAbility(AbilityRecordType.SubAbility, rightApi, rightMap, null, card);
+        left.appendSubAbility(right);
+        return left;
     }
 
 } // end class AbilityFactory
