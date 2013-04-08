@@ -24,10 +24,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+import com.google.common.collect.Iterables;
 import com.google.common.eventbus.EventBus;
 
 import forge.Card;
 import forge.CardLists;
+import forge.CardPredicates;
 import forge.ColorChanger;
 import forge.GameLog;
 import forge.Singletons;
@@ -362,10 +364,18 @@ public class GameState {
         return getCardsIn(ZoneType.Exile).contains(c);
     }
 
-
     public boolean isCardInPlay(final String cardName) {
         for (final Player p : getPlayers()) {
             if (p.isCardInPlay(cardName)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean isCardInCommand(final String cardName) {
+        for (final Player p : getPlayers()) {
+            if (p.isCardInCommand(cardName)) {
                 return true;
             }
         }

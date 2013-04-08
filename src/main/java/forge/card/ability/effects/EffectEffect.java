@@ -87,7 +87,7 @@ public class EffectEffect extends SpellAbilityEffect {
         }
 
         // Unique Effects shouldn't be duplicated
-        if (sa.hasParam("Unique") && Singletons.getModel().getGame().isCardInPlay(name)) {
+        if (sa.hasParam("Unique") && Singletons.getModel().getGame().isCardInCommand(name)) {
             return;
         }
 

@@ -2734,6 +2734,9 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
         return Iterables.any(getZone(ZoneType.Battlefield), CardPredicates.nameEquals(cardName));
     }
 
+    public boolean isCardInCommand(final String cardName) {
+        return Iterables.any(getZone(ZoneType.Command), CardPredicates.nameEquals(cardName));
+    }
 
     public List<Card> getColoredCardsInPlay(final String color) {
         return CardLists.filter(getCardsIn(ZoneType.Battlefield), new Predicate<Card>() {

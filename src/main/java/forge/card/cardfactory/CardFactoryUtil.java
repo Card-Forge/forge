@@ -65,14 +65,11 @@ import forge.card.trigger.TriggerHandler;
 import forge.card.trigger.TriggerType;
 import forge.control.input.InputSelectCards;
 import forge.control.input.InputSelectCardsFromList;
-import forge.game.GameState;
-import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilCard;
 import forge.game.ai.ComputerUtilCost;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.AIPlayer;
-import forge.game.player.HumanPlayer;
 import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.Zone;
@@ -2652,10 +2649,7 @@ public class CardFactoryUtil {
         }
 
         if (card.hasKeyword("Epic")) {
-            final SpellAbility newSA = makeEpic(card);
-
-            card.clearSpellAbility();
-            card.addSpellAbility(newSA);
+            makeEpic(card);
         }
 
         if (card.hasKeyword("Soulbond")) {
@@ -2881,58 +2875,26 @@ public class CardFactoryUtil {
      * @param card
      * @return
      */
-    private static SpellAbility makeEpic(final Card card) {
+    private static void makeEpic(final Card card) {
+
+        // Add the Epic effect as a subAbility
+        String dbStr = "DB$ Effect | Triggers$ EpicTrigger | SVars$ EpicCopy | StaticAbilities$ EpicCantBeCast | Duration$ Permanent | Unique$ True";
+        
+        final AbilitySub newSA = (AbilitySub) AbilityFactory.getAbility(dbStr.toString(), card);
+        
+        card.setSVar("EpicCantBeCast", "Mode$ CantBeCast | ValidCard$ Card | Caster$ You | Description$ For the rest of the game, you can't cast spells.");
+        card.setSVar("EpicTrigger", "Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ EpicCopy | TriggerDescription$ "
+                + "At the beginning of each of your upkeeps, copy " + card.toString() + " except for its epic ability.");
+        card.setSVar("EpicCopy", "DB$ CopySpellAbility | Defined$ EffectSource");
+        
         final SpellAbility origSA = card.getSpellAbilities().get(0);
-
-        final SpellAbility newSA = new Spell(card, origSA.getPayCosts(), origSA.getTarget()) {
-            private static final long serialVersionUID = -7934420043356101045L;
-
-            @Override
-            public void resolve() {
-                final GameState game = Singletons.getModel().getGame();
-
-                String name = card.toString() + " Epic";
-                if (card.getController().getCardsIn(ZoneType.Battlefield, name).isEmpty()) {
-                    // Create Epic emblem
-                    final Card eff = new Card();
-                    eff.setName(card.toString() + " Epic");
-                    eff.addType("Effect"); // Or Emblem
-                    eff.setToken(true); // Set token to true, so when leaving
-                                        // play it gets nuked
-                    eff.setOwner(card.getController());
-                    eff.setColor(card.getColor());
-                    eff.setImmutable(true);
-                    eff.setEffectSource(card);
-
-                    eff.addStaticAbility("Mode$ CantBeCast | ValidCard$ Card | Caster$ You "
-                            + "| Description$ For the rest of the game, you can't cast spells.");
-
-                    eff.setSVar("EpicCopy", "AB$ CopySpellAbility | Cost$ 0 | Defined$ EffectSource");
-
-                    final Trigger copyTrigger = forge.card.trigger.TriggerHandler.parseTrigger(
-                            "Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ EpicCopy | TriggerDescription$ "
-                                    + "At the beginning of each of your upkeeps, copy " + card.toString()
-                                    + " except for its epic ability.", eff, false);
-
-                    eff.addTrigger(copyTrigger);
-
-                    game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
-                    game.getAction().moveToPlay(eff);
-                    game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
-                }
-
-                if (card.getController().isHuman()) {
-                    ((HumanPlayer)card.getController()).playSpellAbilityNoStack(origSA);
-                } else {
-                    ComputerUtil.playNoStack((AIPlayer) card.getController(), origSA, game);
-                }
-            }
-        };
-        newSA.setDescription(origSA.getDescription());
-
-        origSA.setPayCosts(null);
-        origSA.setManaCost(ManaCost.ZERO);
-        return newSA;
+        
+        SpellAbility child = origSA;
+        while (child.getSubAbility() != null) {
+            child = child.getSubAbility();
+        }
+        child.setSubAbility(newSA);
+        newSA.setParent(child);
     }
 
     /**

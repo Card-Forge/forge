@@ -4,7 +4,7 @@ Types:Sorcery
 K:Epic
 A:SP$ Pump | Cost$ 4 R R | SubAbility$ FlamingExile | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | StackDescription$ None | SpellDescription$ Exile cards from the top of your library until you exile a nonland card. Undying Flames deals damage to target creature or player equal to that card's converted mana cost.
 SVar:FlamingExile:DB$ DigUntil | Valid$ Card.nonLand | ValidDescription$ nonland | FoundDestination$ Exile | RevealedDestination$ Exile | RememberFound$ True | SubAbility$ UndyingDamage
-SVar:UndyingDamage:DB$ DealDamage | Defined$ Targeted | NumDmg$ X | SubAbility$ DBCleanup
+SVar:UndyingDamage:DB$ DealDamage | Defined$ Targeted | NumDmg$ X | References$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
 SVar:X:Remembered$CardManaCost
 SVar:RemAIDeck:True
