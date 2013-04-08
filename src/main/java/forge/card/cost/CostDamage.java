@@ -88,7 +88,7 @@ public class CostDamage extends CostPart {
             final String sVar = ability.getSVar(amount);
             // Generalize this
             if (sVar.equals("XChoice")) {
-                c = CostUtil.chooseXValue(source, ability, life);
+                c = Cost.chooseXValue(source, ability, life);
             } else {
                 c = AbilityUtils.calculateAmount(source, amount, ability);
             }

@@ -292,6 +292,7 @@ public class CardFactory {
             if ( state == CardCharacteristicName.LeftSplit || state == CardCharacteristicName.RightSplit )
             {
                 card.getState(CardCharacteristicName.Original).getSpellAbility().addAll(card.getCharacteristics().getSpellAbility());
+                card.getState(CardCharacteristicName.Original).getIntrinsicKeyword().addAll(card.getIntrinsicKeyword()); // Copy 'Fuse' to original side
             }
         }
 

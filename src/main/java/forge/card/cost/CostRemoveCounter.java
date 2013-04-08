@@ -136,7 +136,7 @@ public class CostRemoveCounter extends CostPartWithList {
             if (amount.equals("All"))
                 cntRemoved = maxCounters;
             else if ( c == null && "XChoice".equals(sVarAmount)) { 
-                cntRemoved = CostUtil.chooseXValue(source, ability, maxCounters);
+                cntRemoved = Cost.chooseXValue(source, ability, maxCounters);
             }
 
             if (maxCounters < cntRemoved) 

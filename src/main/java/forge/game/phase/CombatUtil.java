@@ -39,7 +39,6 @@ import forge.card.CardType;
 import forge.card.ability.ApiType;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
-import forge.card.cost.CostUtil;
 import forge.card.mana.ManaCost;
 import forge.card.spellability.Ability;
 import forge.card.spellability.AbilityStatic;
@@ -1131,7 +1130,7 @@ public class CombatUtil {
             final ArrayList<StaticAbility> staticAbilities = card.getStaticAbilities();
             for (final StaticAbility stAb : staticAbilities) {
                 Cost additionalCost = stAb.getCostAbility("CantAttackUnless", c, game.getCombat().getDefenderByAttacker(c));
-                attackCost = CostUtil.combineCosts(attackCost, additionalCost);
+                attackCost = Cost.combine(attackCost, additionalCost);
             }
         }
         if (attackCost.toSimpleString().equals("")) {

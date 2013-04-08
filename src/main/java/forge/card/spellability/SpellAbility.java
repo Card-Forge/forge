@@ -959,6 +959,15 @@ public abstract class SpellAbility implements ISpellAbility {
         return sb.toString();
     }
 
+    public void appendSubAbility(final AbilitySub toAdd) {
+        SpellAbility tailend = this;
+        while (tailend.getSubAbility() != null) {
+            tailend = tailend.getSubAbility();
+        }
+        tailend.setSubAbility(toAdd);
+    }
+    
+    
     /**
      * <p>
      * Setter for the field <code>subAbility</code>.

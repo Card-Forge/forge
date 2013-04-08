@@ -2371,7 +2371,29 @@ public class CardFactoryUtil {
             }
             card.addSpellAbility(sa);
         }
+    }
 
+    public static final SpellAbility buildFusedAbility(final Card card) {
+        if(!card.isSplitCard()) 
+            throw new IllegalStateException("Fuse ability may be built only on split cards");
+        
+        final String strLeftAbility = card.getState(CardCharacteristicName.LeftSplit).getIntrinsicAbility().get(0);
+        Map<String, String> leftMap = AbilityFactory.getMapParams(strLeftAbility);
+        AbilityFactory.AbilityRecordType leftType = AbilityFactory.AbilityRecordType.getRecordType(leftMap);
+        Cost leftCost = AbilityFactory.parseAbilityCost(card, leftMap, leftType);
+        ApiType leftApi = leftType.getApiTypeOf(leftMap);
+
+        final String strRightAbility = card.getState(CardCharacteristicName.RightSplit).getIntrinsicAbility().get(0);
+        Map<String, String> rightMap = AbilityFactory.getMapParams(strRightAbility);
+        AbilityFactory.AbilityRecordType rightType = AbilityFactory.AbilityRecordType.getRecordType(leftMap);
+        Cost rightCost = AbilityFactory.parseAbilityCost(card, rightMap, rightType);
+        ApiType rightApi = leftType.getApiTypeOf(rightMap);
+        
+        Cost joinedCost = Cost.combine(rightCost, leftCost);
+        final SpellAbility left = AbilityFactory.getAbility(leftType, leftApi, leftMap, joinedCost, card);
+        final AbilitySub right = (AbilitySub) AbilityFactory.getAbility(AbilityFactory.AbilityRecordType.SubAbility, rightApi, rightMap, null, card);
+        left.appendSubAbility(right);
+        return left;
     }
 
     /**
@@ -2416,6 +2438,10 @@ public class CardFactoryUtil {
                 sa.setIsReplicate(true);
                 sa.setReplicateManaCost(new ManaCost(new ManaCostParser(k[1])));
             }
+        }
+        
+        if(CardFactoryUtil.hasKeyword(card, "Fuse") != -1) {
+            card.getState(CardCharacteristicName.Original).getSpellAbility().add(buildFusedAbility(card));
         }
 
         final int evokePos = CardFactoryUtil.hasKeyword(card, "Evoke");
@@ -3197,12 +3223,7 @@ public class CardFactoryUtil {
 
     private static final Map<String,String> emptyMap = new TreeMap<String,String>();
     public static void setupETBReplacementAbility(SpellAbility sa) {
-        SpellAbility tailend = sa;
-        while (tailend.getSubAbility() != null) {
-            tailend = tailend.getSubAbility();
-        }
-
-        tailend.setSubAbility(new AbilitySub(ApiType.InternalEtbReplacement, sa.getSourceCard(), null, emptyMap));
+        sa.appendSubAbility(new AbilitySub(ApiType.InternalEtbReplacement, sa.getSourceCard(), null, emptyMap));
         // ETBReplacementMove(sa.getSourceCard(), null));
     }
 

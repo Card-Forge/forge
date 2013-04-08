@@ -9177,6 +9177,9 @@ public class Card extends GameEntity implements Comparable<Card> {
                 return;
             }
         }
+        if ( sa.getSourceCard().hasKeyword("Fuse") ) // it's ok that such card won't change its side
+            return;
+
         throw new RuntimeException("Not found which part to choose for ability " + sa + " from card " + this);
     }
     

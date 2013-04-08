@@ -13,7 +13,8 @@ import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.cost.Cost;
-import forge.card.cost.CostUtil;
+import forge.card.cost.CostPart;
+import forge.card.cost.CostTapType;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityRestriction;
 import forge.card.spellability.Target;
@@ -29,6 +30,19 @@ import forge.game.zone.ZoneType;
 
 public class PumpAi extends PumpAiBase {
 
+    private static boolean hasTapCost(final Cost cost, final Card source) {
+        if (cost == null) {
+            return true;
+        }
+        for (final CostPart part : cost.getCostParts()) {
+            if (part instanceof CostTapType) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    
     /* (non-Javadoc)
          * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
          */
@@ -56,7 +70,7 @@ public class PumpAi extends PumpAiBase {
             return false;
         }
 
-        if (Singletons.getModel().getGame().getStack().isEmpty() && CostUtil.hasTapCost(cost, sa.getSourceCard())) {
+        if (Singletons.getModel().getGame().getStack().isEmpty() && hasTapCost(cost, sa.getSourceCard())) {
                 if (ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS) && ph.isPlayerTurn(ai)) {
                     return false;
                 }

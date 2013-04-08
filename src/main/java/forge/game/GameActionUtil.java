@@ -53,7 +53,6 @@ import forge.card.cost.CostReturn;
 import forge.card.cost.CostReveal;
 import forge.card.cost.CostSacrifice;
 import forge.card.cost.CostTapType;
-import forge.card.cost.CostUtil;
 import forge.card.mana.ManaCost;
 import forge.card.spellability.Ability;
 import forge.card.spellability.AbilityManaPart;
@@ -1250,10 +1249,8 @@ public final class GameActionUtil {
         return alternatives;
     }
 
-    public static Cost combineCosts(SpellAbility sa, String additionalCost) {
-        final Cost newCost = new Cost(sa.getSourceCard(), additionalCost, false);
-        Cost oldCost = sa.getPayCosts();
-        return CostUtil.combineCosts(oldCost, newCost);
+    private static Cost combineCosts(SpellAbility sa, String additionalCost) {
+        return Cost.combine(sa.getPayCosts(), new Cost(sa.getSourceCard(), additionalCost, false));
     }
 
     /**

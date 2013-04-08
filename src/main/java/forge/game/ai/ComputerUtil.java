@@ -36,8 +36,9 @@ import forge.card.ability.ApiType;
 import forge.card.ability.effects.CharmEffect;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
+import forge.card.cost.CostDiscard;
+import forge.card.cost.CostPart;
 import forge.card.cost.CostPayment;
-import forge.card.cost.CostUtil;
 import forge.card.spellability.AbilityStatic;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
@@ -124,6 +125,21 @@ public class ComputerUtil {
         return false;
     }
 
+    
+    private static boolean hasDiscardHandCost(final Cost cost) {
+        if (cost == null) {
+            return false;
+        }
+        for (final CostPart part : cost.getCostParts()) {
+            if (part instanceof CostDiscard) {
+                final CostDiscard disc = (CostDiscard) part;
+                if (disc.getType().equals("Hand")) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
     /**
      * <p>
      * counterSpellRestriction.
@@ -149,7 +165,7 @@ public class ComputerUtil {
         // String totalMana = source.getSVar("PayX"); // + cost.getCMC()
 
         // Consider the costs here for relative "scoring"
-        if (CostUtil.hasDiscardHandCost(cost)) {
+        if (hasDiscardHandCost(cost)) {
             // Null Brooch aid
             restrict -= (ai.getCardsIn(ZoneType.Hand).size() * 20);
         }

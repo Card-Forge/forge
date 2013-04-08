@@ -41,6 +41,44 @@ import forge.util.FileSection;
  */
 public final class AbilityFactory {
 
+    public enum AbilityRecordType {
+        Ability("AB"),
+        Spell("SP"),
+        SubAbility("DB");
+        
+        private final String prefix;
+        private AbilityRecordType(String prefix) {
+            this.prefix = prefix;
+        }
+        public String getPrefix() {
+            return prefix;
+        }
+        
+        public SpellAbility buildSpellAbility(ApiType api, Card hostCard, Cost abCost, Target abTgt, Map<String, String> mapParams ) {
+            switch(this) {
+                case Ability: return new AbilityApiBased(api, hostCard, abCost, abTgt, mapParams);
+                case Spell: return new SpellApiBased(api, hostCard, abCost, abTgt, mapParams);
+                case SubAbility: return new AbilitySub(api, hostCard, abTgt, mapParams);
+            }
+            return null; // exception here would be fine!
+        }
+        
+        public ApiType getApiTypeOf(Map<String, String> abParams) {
+            return ApiType.smartValueOf(abParams.get(this.getPrefix()));
+        }
+        
+        public static AbilityRecordType getRecordType(Map<String, String> abParams) {
+            if (abParams.containsKey(AbilityRecordType.Ability.getPrefix())) {
+                return AbilityRecordType.Ability;
+            } else if (abParams.containsKey(AbilityRecordType.Spell.getPrefix())) {
+                return AbilityRecordType.Spell;
+            } else if (abParams.containsKey(AbilityRecordType.SubAbility.getPrefix())) {
+                return AbilityRecordType.SubAbility;
+            } else {
+                return null;
+            }
+        }
+    }
     /**
      * <p>
      * getAbility.
@@ -53,12 +91,7 @@ public final class AbilityFactory {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static final SpellAbility getAbility(final String abString, final Card hostCard) {
-
-        SpellAbility spellAbility = null;
-
-        boolean isAb = false;
-        boolean isSp = false;
-        boolean isDb = false;
+        
 
         Map<String, String> mapParams;
         try {
@@ -69,34 +102,28 @@ public final class AbilityFactory {
         }
 
         // parse universal parameters
-
-        ApiType api = null;
-        if (mapParams.containsKey("AB")) {
-            isAb = true;
-            api = ApiType.smartValueOf(mapParams.get("AB"));
-        } else if (mapParams.containsKey("SP")) {
-            isSp = true;
-            api = ApiType.smartValueOf(mapParams.get("SP"));
-        } else if (mapParams.containsKey("DB")) {
-            isDb = true;
-            api = ApiType.smartValueOf(mapParams.get("DB"));
-        } else {
+        AbilityRecordType type = AbilityRecordType.getRecordType(mapParams);
+        if( null == type )
             throw new RuntimeException("AbilityFactory : getAbility -- no API in " + hostCard.getName());
-        }
+        
+        return getAbility(type, type.getApiTypeOf(mapParams), mapParams, parseAbilityCost(hostCard, mapParams, type), hostCard);
+    }
 
+    public static Cost parseAbilityCost(final Card hostCard, Map<String, String> mapParams, AbilityRecordType type) {
         Cost abCost = null;
-        if (!isDb) {
+        if (type != AbilityRecordType.SubAbility) {
             if (!mapParams.containsKey("Cost")) {
                 throw new RuntimeException("AbilityFactory : getAbility -- no Cost in " + hostCard.getName());
             }
-            abCost = new Cost(hostCard, mapParams.get("Cost"), isAb);
-
+            abCost = new Cost(hostCard, mapParams.get("Cost"), type == AbilityRecordType.Ability);
         }
+        return abCost;
+    }
 
+    public static final SpellAbility getAbility(AbilityRecordType type, ApiType api, Map<String, String> mapParams, Cost abCost, Card hostCard) {
+        
+        
         Target abTgt = mapParams.containsKey("ValidTgts") ? readTarget(hostCard, mapParams) : null;
-
-        // ***********************************
-        // Match API keywords. These are listed in alphabetical order.
 
 
         if (api == ApiType.CopySpellAbility) {
@@ -119,20 +146,13 @@ public final class AbilityFactory {
         else if (api == ApiType.PermanentCreature || api == ApiType.PermanentNoncreature) {
             // If API is a permanent type, and creating AF Spell
             // Clear out the auto created SpellPemanent spell
-            if (isSp) {
+            if (type == AbilityRecordType.Spell) {
                 hostCard.clearFirstSpell();
             }
         }
 
 
-        if (isAb) {
-            spellAbility = new AbilityApiBased(api, hostCard, abCost, abTgt, mapParams);
-        } else if (isSp) {
-            spellAbility = new SpellApiBased(api, hostCard, abCost, abTgt, mapParams);
-        } else if (isDb) {
-            spellAbility = new AbilitySub(api, hostCard, abTgt, mapParams);
-        }
-
+        SpellAbility spellAbility = type.buildSpellAbility(api, hostCard, abCost, abTgt, mapParams);
 
 
         if (spellAbility == null) {
@@ -163,7 +183,7 @@ public final class AbilityFactory {
         } else if (mapParams.containsKey("SpellDescription")) {
             final StringBuilder sb = new StringBuilder();
 
-            if (!isDb) { // SubAbilities don't have Costs or Cost
+            if (type != AbilityRecordType.SubAbility) { // SubAbilities don't have Costs or Cost
                               // descriptors
                 if (mapParams.containsKey("PrecostDesc")) {
                     sb.append(mapParams.get("PrecostDesc")).append(" ");

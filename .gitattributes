@@ -13790,7 +13790,6 @@ src/main/java/forge/card/cost/CostTapType.java -text
 src/main/java/forge/card/cost/CostUnattach.java -text
 src/main/java/forge/card/cost/CostUntap.java -text
 src/main/java/forge/card/cost/CostUntapType.java -text
-src/main/java/forge/card/cost/CostUtil.java -text
 src/main/java/forge/card/cost/InputPayCostBase.java -text
 src/main/java/forge/card/cost/PaymentDecision.java -text
 src/main/java/forge/card/cost/package-info.java svneol=native#text/plain

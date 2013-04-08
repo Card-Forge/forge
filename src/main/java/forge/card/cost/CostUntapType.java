@@ -146,7 +146,7 @@ public class CostUntapType extends CostPartWithList {
             final String sVar = ability.getSVar(amount);
             // Generalize this
             if (sVar.equals("XChoice")) {
-                c = CostUtil.chooseXValue(source, ability, typeList.size());
+                c = Cost.chooseXValue(source, ability, typeList.size());
             } else {
                 c = AbilityUtils.calculateAmount(source, amount, ability);
             }

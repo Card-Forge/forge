@@ -153,7 +153,7 @@ public class CostSacrifice extends CostPartWithList {
             if (c == null) {
                 // Generalize this
                 if (ability.getSVar(amount).equals("XChoice")) {
-                    c = CostUtil.chooseXValue(source, ability, list.size());
+                    c = Cost.chooseXValue(source, ability, list.size());
                 } else {
                     c = AbilityUtils.calculateAmount(source, amount, ability);
                 }

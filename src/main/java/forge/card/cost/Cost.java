@@ -28,6 +28,7 @@ import forge.card.mana.ManaCostBeingPaid;
 import forge.card.mana.ManaCostParser;
 import forge.card.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
+import forge.gui.GuiChoose;
 import forge.util.TextUtil;
 
 /**
@@ -646,5 +647,43 @@ public class Cost {
         sb.append(type);
 
         return sb.toString();
+    }
+    
+    public static Cost combine(Cost cost1, Cost cost2) {
+        if (cost1 == null) return cost2;
+        if (cost2 == null) return cost1;
+
+        CostPartMana costPart2 = cost2.getCostMana();
+        for (final CostPart part : cost1.getCostParts()) {
+            if (part instanceof CostPartMana && costPart2 != null) {
+                ManaCostBeingPaid oldManaCost = new ManaCostBeingPaid(((CostPartMana) part).getMana());
+                boolean xCanBe0 = ((CostPartMana) part).canXbe0() && costPart2.canXbe0();
+                oldManaCost.combineManaCost(costPart2.getMana());
+                String r2 = costPart2.getRestiction();
+                String r1 = ((CostPartMana) part).getRestiction();
+                String r = r1 == null ? r2 : ( r2 == null ? r1 : r1+"."+r2);
+                cost2.getCostParts().remove(costPart2);
+                cost2.getCostParts().add(0, new CostPartMana(oldManaCost.toManaCost(), r, !xCanBe0));
+            } else { 
+                cost2.getCostParts().add(part);
+            }
+        }
+        return cost2;
+    }
+    
+    public static int chooseXValue(final Card card, final SpellAbility sa, final int maxValue) {
+        /*final String chosen = sa.getSVar("ChosenX");
+        if (chosen.length() > 0) {
+            return AbilityFactory.calculateAmount(card, "ChosenX", null);
+        }*/
+
+        final Integer[] choiceArray = new Integer[maxValue + 1];
+        for (int i = 0; i < choiceArray.length; i++) {
+            choiceArray[i] = i;
+        }
+        final Integer chosenX = GuiChoose.one(card.toString() + " - Choose a Value for X", choiceArray);
+        sa.setSVar("ChosenX", Integer.toString(chosenX));
+        card.setSVar("ChosenX", Integer.toString(chosenX));
+        return chosenX;
     }
 }
