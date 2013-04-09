@@ -279,10 +279,14 @@ public class TokenEffect extends SpellAbilityEffect {
                         c.setTapped(true);
                     }
                     if (this.tokenAttacking) {
-                        final List<GameEntity> e = c.getController().getGame().getCombat().getDefenders();
-                        final GameEntity defender = e.size() == 1 
-                                ? e.get(0) : GuiChoose.one("Declare " + c, e);
-                        Singletons.getModel().getGame().getCombat().addAttacker(c, defender);
+                        if (c.getController().isHuman()) {
+                            final List<GameEntity> e = c.getController().getGame().getCombat().getDefenders();
+                            final GameEntity defender = e.size() == 1 
+                                    ? e.get(0) : GuiChoose.one("Declare " + c, e);
+                                    Singletons.getModel().getGame().getCombat().addAttacker(c, defender);
+                        } else {
+                            Singletons.getModel().getGame().getCombat().addAttacker(c);
+                        }
                     }
                     if (remember != null) {
                         Singletons.getModel().getGame().getCardState(sa.getSourceCard()).addRemembered(c);
