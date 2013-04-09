@@ -82,11 +82,9 @@ public class PhaseUtil {
         game.getCombat().reset();
         game.getCombat().setAttackingPlayer(turn);
 
-        // Tokens starting game in play now actually suffer from Sum. Sickness
-        // again
         final List<Card> list = turn.getCardsIncludePhasingIn(ZoneType.Battlefield);
         for (final Card c : list) {
-            if (turn.getTurn() > 0 || !c.isStartsGameInPlay()) {
+            if (turn.getTurn() >= 0 || !c.isStartsGameInPlay()) {
                 c.setSickness(false);
             }
         }
