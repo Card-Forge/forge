@@ -121,7 +121,8 @@ public class PhaseUtil {
      * handleDeclareAttackers.
      * </p>
      */
-    public static void handleDeclareAttackers(Combat combat) {
+    public static void handleDeclareAttackers(final GameState game) {
+        final Combat combat = game.getCombat();
         combat.verifyCreaturesInPlay();
 
         // Handles removing cards like Mogg Flunkies from combat if group attack
@@ -143,9 +144,9 @@ public class PhaseUtil {
         final int size = list.size();
         for (int i = 0; i < size; i++) {
             final Card c = list.get(i);
-            final boolean last = (i == (size - 1));
-            CombatUtil.checkPropagandaEffects(c, last);
+            CombatUtil.checkPropagandaEffects(game, c);
         }
+        PhaseUtil.handleAttackingTriggers();
     }
 
     /**

@@ -292,7 +292,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
 
             case COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY:
                 if (this.inCombat()) {
-                    PhaseUtil.handleDeclareAttackers(game.getCombat());
+                    PhaseUtil.handleDeclareAttackers(game);
                     CombatUtil.showCombat();
                 } else {
                     this.setPlayersPriorityPermission(false);

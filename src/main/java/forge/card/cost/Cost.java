@@ -97,7 +97,7 @@ public class Cost {
     public final ManaCost getTotalMana() {
         for (final CostPart part : this.costParts) {
             if (part instanceof CostPartMana) {
-                return new ManaCost(new ManaCostParser(part.toString()));
+                return ((CostPartMana) part).getManaToPay();
             }
         }
 

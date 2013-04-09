@@ -1122,62 +1122,36 @@ public class CombatUtil {
      * @param bLast
      *            a boolean.
      */
-    public static void checkPropagandaEffects(final Card c, final boolean bLast) {
+    public static void checkPropagandaEffects(final GameState game, final Card c) {
         Cost attackCost = new Cost(c, "0", true);
-        final GameState game = Singletons.getModel().getGame();
         // Sort abilities to apply them in proper order
-        for (Card card : Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield)) {
+        for (Card card : game.getCardsIn(ZoneType.Battlefield)) {
             final ArrayList<StaticAbility> staticAbilities = card.getStaticAbilities();
             for (final StaticAbility stAb : staticAbilities) {
                 Cost additionalCost = stAb.getCostAbility("CantAttackUnless", c, game.getCombat().getDefenderByAttacker(c));
                 attackCost = Cost.combine(attackCost, additionalCost);
             }
         }
-        if (attackCost.toSimpleString().equals("")) {
-            if (!c.hasKeyword("Vigilance")) {
-                c.tap();
-            }
-
-            if (bLast) {
-                PhaseUtil.handleAttackingTriggers();
-            }
-            return;
-        }
-
-        final Card crd = c;
-
         
-        final PhaseType phase = game.getPhaseHandler().getPhase();
-
-        if (phase == PhaseType.COMBAT_DECLARE_ATTACKERS || phase == PhaseType.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY) {
-            final Ability ability = new AbilityStatic(c, attackCost, null) {
-                @Override
-                public void resolve() {
-
-                }
-            };
-
+        boolean hasPaid = attackCost.getTotalMana().isZero() && attackCost.isOnlyManaCost(); // true if needless to pay
+        if (!hasPaid) { 
+            final Ability ability = new AbilityStatic(c, attackCost, null) { @Override public void resolve() {} };
             ability.setActivatingPlayer(c.getController());
+
             if (c.getController().isHuman()) {
-                if ( GameActionUtil.payCostDuringAbilityResolve(ability, attackCost, null, game) ) {
-                    if (!crd.hasKeyword("Vigilance")) { crd.tap(); }
-                } else {
-                    game.getCombat().removeFromCombat(crd);
-                }
+                hasPaid = GameActionUtil.payCostDuringAbilityResolve(ability, attackCost, null, game);
             } else { // computer
                 if (ComputerUtilCost.canPayCost(ability, c.getController())) {
                     ComputerUtil.playNoStack((AIPlayer)c.getController(), ability, game);
-                    if (!crd.hasKeyword("Vigilance")) {
-                        crd.tap();
-                    }
-                } else {
-                    // TODO remove the below line after Propaganda occurs
-                    // during Declare_Attackers
-                    game.getCombat().removeFromCombat(crd);
+                    hasPaid = true;
                 }
             }
-            if (bLast) 
-                PhaseUtil.handleAttackingTriggers();
+        }
+
+        if ( hasPaid ) {
+            if (!c.hasKeyword("Vigilance")) { c.tap(); }
+        } else {
+            game.getCombat().removeFromCombat(c);
         }
     }
 
