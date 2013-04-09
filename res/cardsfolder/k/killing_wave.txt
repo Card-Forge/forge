@@ -2,7 +2,7 @@ Name:Killing Wave
 ManaCost:X B
 Types:Sorcery
 A:SP$ RepeatEach | Announce$ X | Cost$ X B | RepeatCards$ Creature | Zone$ Battlefield | RepeatSubAbility$ DBSacUnless | References$ X | SpellDescription$ For each creature, its controller sacrifices it unless he or she pays X life.
-SVar:DBSacUnless:DB$ Sacrifice | Cost$ 0 | SacValid$ Remembered.Self | UnlessCost$ PayLife<X> | UnlessPayer$ RememberedController | Random$ True | StackDescription$ Sacrifice {c:Remembered}
+SVar:DBSacUnless:DB$ Sacrifice | SacValid$ Remembered.Self | UnlessCost$ PayLife<X> | UnlessPayer$ RememberedController | Random$ True | StackDescription$ Sacrifice {c:Remembered}
 SVar:X:Count$xPaid
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/killing_wave.jpg
