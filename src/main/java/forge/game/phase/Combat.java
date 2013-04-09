@@ -431,17 +431,6 @@ public class Combat {
 
     /**
      * <p>
-     * getAttackerList.
-     * </p>
-     * 
-     * @return an array of {@link forge.Card} objects.
-     */
-    public final List<Card> getAttackerList() {
-        return new ArrayList<Card>(this.attackerMap.keySet());
-    } // getAttackers()
-
-    /**
-     * <p>
      * isBlocked.
      * </p>
      * 
@@ -642,7 +631,7 @@ public class Combat {
      *            a {@link forge.Card} object.
      */
     public final void undoBlockingAssignment(final Card blocker) {
-        final List<Card> att = this.getAttackerList();
+        final List<Card> att = this.getAttackers();
         for (final Card attacker : att) {
             if (this.getBlockers(attacker).contains(blocker)) {
                 this.getBlockingAttackerList(attacker).remove(blocker);
@@ -677,7 +666,7 @@ public class Combat {
      * </p>
      */
     public final void setUnblocked() {
-        final List<Card> attacking = this.getAttackerList();
+        final List<Card> attacking = this.getAttackers();
 
         for (final Card attacker : attacking) {
             final List<Card> block = this.getBlockers(attacker);
@@ -723,7 +712,7 @@ public class Combat {
     private final boolean assignAttackersDamage(boolean firstStrikeDamage) {
         this.defendingDamageMap.clear(); // this should really happen in deal damage
         List<Card> blockers = null;
-        final List<Card> attackers = this.getAttackerList();
+        final List<Card> attackers = this.getAttackers();
         boolean assignedDamage = false;
         for (final Card attacker : attackers) {
             // If attacker isn't in the right first/regular strike section, continue along

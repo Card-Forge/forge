@@ -167,7 +167,7 @@ public abstract class TapAiBase extends SpellAbilityAi  {
                 List<Card> attackers;
                 if (phase.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
                     //Combat has already started
-                    attackers = Singletons.getModel().getGame().getCombat().getAttackerList();
+                    attackers = Singletons.getModel().getGame().getCombat().getAttackers();
                 } else {
                     attackers = CardLists.filter(ai.getCreaturesInPlay(), new Predicate<Card>() {
                         @Override

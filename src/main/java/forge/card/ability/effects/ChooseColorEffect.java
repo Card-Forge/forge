@@ -100,8 +100,7 @@ public class ChooseColorEffect extends SpellAbilityEffect {
                             chosen.add(ComputerUtilCard.getMostProminentColor(list));
                         }
                         else if (logic.equals("MostProminentAttackers")) {
-                            chosen.add(ComputerUtilCard.getMostProminentColor(Singletons.getModel().getGame().getCombat()
-                                    .getAttackerList()));
+                            chosen.add(ComputerUtilCard.getMostProminentColor(Singletons.getModel().getGame().getCombat().getAttackers()));
                         }
                         else if (logic.equals("MostProminentKeywordInComputerDeck")) {
                             List<Card> list = ai.getAllCards();

@@ -63,7 +63,7 @@ public class EffectAi extends SpellAbilityAi {
                 final Target tgt = sa.getTarget();
                 if (tgt != null) {
                     tgt.resetTargets();
-                    List<Card> list = game.getCombat().getAttackerList();
+                    List<Card> list = game.getCombat().getAttackers();
                     list = CardLists.getValidCards(list, tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getSourceCard());
                     list = CardLists.getTargetableCards(list, sa);
                     Card target = ComputerUtilCard.getBestCreatureAI(list);

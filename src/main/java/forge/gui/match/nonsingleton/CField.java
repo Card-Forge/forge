@@ -406,7 +406,7 @@ public class CField implements ICDoc {
             }
         }
 
-        final List<Card> att = Singletons.getModel().getGame().getCombat().getAttackerList();
+        final List<Card> att = Singletons.getModel().getGame().getCombat().getAttackers();
         if ((c.isTapped() || c.hasSickness() || (c.hasKeyword("Vigilance") && att.contains(c))) && (input instanceof InputAttack)) {
             final CardPanel cardPanel = CField.this.view.getTabletop().getCardPanel(c.getUniqueNumber());
             for (final CardPanel cp : cardPanel.getAttachedPanels()) {

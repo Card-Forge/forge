@@ -126,7 +126,7 @@ public class PhaseUtil {
 
         // Handles removing cards like Mogg Flunkies from combat if group attack
         // didn't occur
-        final List<Card> filterList = combat.getAttackerList();
+        final List<Card> filterList = combat.getAttackers();
         for (Card c : filterList) {
             if (c.hasKeyword("CARDNAME can't attack or block alone.") && c.isAttacking()) {
                 if (combat.getAttackers().size() < 2) {
@@ -135,7 +135,7 @@ public class PhaseUtil {
             }
         }
 
-        final List<Card> list = combat.getAttackerList();
+        final List<Card> list = combat.getAttackers();
 
         // TODO move propaganda to happen as the Attacker is Declared
         // Remove illegal Propaganda attacks first only for attacking the Player
@@ -154,7 +154,7 @@ public class PhaseUtil {
      * </p>
      */
     public static void handleAttackingTriggers() {
-        final List<Card> list = Singletons.getModel().getGame().getCombat().getAttackerList();
+        final List<Card> list = Singletons.getModel().getGame().getCombat().getAttackers();
         Singletons.getModel().getGame().getStack().freezeStack();
         // Then run other Attacker bonuses
         // check for exalted:
@@ -220,7 +220,7 @@ public class PhaseUtil {
             }
         });
 
-        final List<Card> attList = game.getCombat().getAttackerList();
+        final List<Card> attList = game.getCombat().getAttackers();
 
         CombatUtil.checkDeclareBlockers(list);
 

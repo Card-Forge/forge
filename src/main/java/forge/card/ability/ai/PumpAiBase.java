@@ -179,7 +179,7 @@ public abstract class PumpAiBase extends SpellAbilityAi {
         } else if (keyword.endsWith("Flying")) {
             if (ph.isPlayerTurn(opp)
                     && ph.getPhase().equals(PhaseType.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY)
-                    && !CardLists.getKeyword(Singletons.getModel().getGame().getCombat().getAttackerList(), "Flying").isEmpty()
+                    && !CardLists.getKeyword(Singletons.getModel().getGame().getCombat().getAttackers(), "Flying").isEmpty()
                     && !card.hasKeyword("Reach")
                     && CombatUtil.canBlock(card)
                     && ComputerUtilCombat.lifeInDanger(ai, Singletons.getModel().getGame().getCombat())) {
@@ -196,7 +196,7 @@ public abstract class PumpAiBase extends SpellAbilityAi {
         } else if (keyword.endsWith("Horsemanship")) {
             if (ph.isPlayerTurn(opp)
                     && ph.getPhase().equals(PhaseType.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY)
-                    && !CardLists.getKeyword(Singletons.getModel().getGame().getCombat().getAttackerList(), "Horsemanship").isEmpty()
+                    && !CardLists.getKeyword(Singletons.getModel().getGame().getCombat().getAttackers(), "Horsemanship").isEmpty()
                     && CombatUtil.canBlock(card)
                     && ComputerUtilCombat.lifeInDanger(ai, Singletons.getModel().getGame().getCombat())) {
                 return true;
@@ -312,7 +312,7 @@ public abstract class PumpAiBase extends SpellAbilityAi {
         } else if (keyword.equals("Reach")) {
             if (ph.isPlayerTurn(ai)
                     || !ph.getPhase().equals(PhaseType.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY)
-                    || CardLists.getKeyword(Singletons.getModel().getGame().getCombat().getAttackerList(), "Flying").isEmpty()
+                    || CardLists.getKeyword(Singletons.getModel().getGame().getCombat().getAttackers(), "Flying").isEmpty()
                     || card.hasKeyword("Flying")
                     || !CombatUtil.canBlock(card)) {
                 return false;
@@ -324,7 +324,7 @@ public abstract class PumpAiBase extends SpellAbilityAi {
             }
             int canBlockNum = 1 + card.getKeywordAmount("CARDNAME can block an additional creature.");
             int possibleBlockNum = 0;
-            for (Card attacker : Singletons.getModel().getGame().getCombat().getAttackerList()) {
+            for (Card attacker : Singletons.getModel().getGame().getCombat().getAttackers()) {
                 if (CombatUtil.canBlock(attacker, card)) {
                     possibleBlockNum++;
                     if (possibleBlockNum > canBlockNum) {

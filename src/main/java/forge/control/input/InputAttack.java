@@ -65,18 +65,12 @@ public class InputAttack extends InputBase {
             return;
         }
 
-        final StringBuilder sb = new StringBuilder();
-        sb.append("Declare Attackers: Select Creatures to Attack ");
-        sb.append(o.toString());
+        showMessage("Declare Attackers: Select Creatures to Attack " + o.toString());
 
-        CMatchUI.SINGLETON_INSTANCE.showMessage(sb.toString());
-
-        if (game.getCombat().getRemainingDefenders() == 0) {
-            // Nothing left to attack, has to attack this defender
-            List<Card> possibleAttackers = Singletons.getControl().getPlayer().getCardsIn(ZoneType.Battlefield);
+        if (game.getCombat().getRemainingDefenders() == 0) { // last Target
+            List<Card> possibleAttackers = player.getCardsIn(ZoneType.Battlefield);
             for (Card c : Iterables.filter(possibleAttackers, CardPredicates.Presets.CREATURES)) {
-                if (c.hasKeyword("CARDNAME attacks each turn if able.") && CombatUtil.canAttack(c, game.getCombat())
-                        && !c.isAttacking()) {
+                if (c.hasKeyword("CARDNAME attacks each turn if able.") && CombatUtil.canAttack(c, game.getCombat()) && !c.isAttacking()) {
                     game.getCombat().addAttacker(c);
                 }
             }

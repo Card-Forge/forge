@@ -385,7 +385,7 @@ public class CombatUtil {
     public static boolean finishedMandatoryBlocks(final Combat combat, final Player defending) {
 
         final List<Card> blockers = Singletons.getControl().getPlayer().getCreaturesInPlay();
-        final List<Card> attackers = combat.getAttackerList();
+        final List<Card> attackers = combat.getAttackers();
 
         // if a creature does not block but should, return false
         for (final Card blocker : blockers) {
@@ -433,7 +433,7 @@ public class CombatUtil {
     private static void orderMultipleBlockers(final Combat combat) {
         // If there are multiple blockers, the Attacker declares the Assignment Order
         final Player player = combat.getAttackingPlayer();
-        final List<Card> attackers = combat.getAttackerList();
+        final List<Card> attackers = combat.getAttackers();
         for (final Card attacker : attackers) {
             List<Card> blockers = combat.getBlockers(attacker);
             if (blockers.size() <= 1) {
@@ -484,7 +484,7 @@ public class CombatUtil {
             return false;
         }
 
-        final List<Card> attackers = combat.getAttackerList();
+        final List<Card> attackers = combat.getAttackers();
         final List<Card> attackersWithLure = new ArrayList<Card>();
         for (final Card attacker : attackers) {
             if (attacker.hasStartOfKeyword("All creatures able to block CARDNAME do so.")
@@ -1194,7 +1194,7 @@ public class CombatUtil {
         // Run triggers
         final HashMap<String, Object> runParams = new HashMap<String, Object>();
         runParams.put("Attacker", c);
-        final List<Card> otherAttackers = Singletons.getModel().getGame().getCombat().getAttackerList();
+        final List<Card> otherAttackers = Singletons.getModel().getGame().getCombat().getAttackers();
         otherAttackers.remove(c);
         runParams.put("OtherAttackers", otherAttackers);
         runParams.put("Attacked", Singletons.getModel().getGame().getCombat().getDefenderByAttacker(c));
