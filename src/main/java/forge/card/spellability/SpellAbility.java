@@ -468,6 +468,10 @@ public abstract class SpellAbility implements ISpellAbility {
         return this.originalHost;
     }
 
+    public String getParamOrDefault(String key, String defaultValue) { 
+        return params == null || !params.containsKey(key) ? defaultValue : params.get(key);
+    }
+
     public String getParam(String key) {
         return params == null ? null : params.get(key);
     }
