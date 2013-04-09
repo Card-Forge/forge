@@ -21,6 +21,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import forge.Card;
+import forge.GameEntity;
 import forge.Singletons;
 import forge.card.ability.AbilityFactory;
 import forge.card.ability.AbilityUtils;
@@ -31,6 +32,7 @@ import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerHandler;
 import forge.game.event.TokenCreatedEvent;
 import forge.game.player.Player;
+import forge.gui.GuiChoose;
 import forge.item.CardToken;
 
 public class TokenEffect extends SpellAbilityEffect {
@@ -277,7 +279,10 @@ public class TokenEffect extends SpellAbilityEffect {
                         c.setTapped(true);
                     }
                     if (this.tokenAttacking) {
-                        Singletons.getModel().getGame().getCombat().addAttacker(c);
+                        final List<GameEntity> e = c.getController().getGame().getCombat().getDefenders();
+                        final GameEntity defender = e.size() == 1 
+                                ? e.get(0) : GuiChoose.one("Declare " + c, e);
+                        Singletons.getModel().getGame().getCombat().addAttacker(c, defender);
                     }
                     if (remember != null) {
                         Singletons.getModel().getGame().getCardState(sa.getSourceCard()).addRemembered(c);
