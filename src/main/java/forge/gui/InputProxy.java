@@ -43,6 +43,8 @@ public class InputProxy implements Observer {
     private AtomicReference<Input> input = new AtomicReference<Input>();
     private MatchController match = null;
 
+    private static final boolean INPUT_DEBUG = false; 
+    
     public void setMatch(MatchController matchController) {
         match = matchController;
     }
@@ -51,13 +53,16 @@ public class InputProxy implements Observer {
     public final synchronized void update(final Observable observable, final Object obj) {
         final GameState game = match.getCurrentGame();
         final PhaseHandler ph = game.getPhaseHandler();
-        //System.out.printf("%s > InputProxy.update() =>%n", FThreads.debugGetCurrThreadId());
+        
+        if(INPUT_DEBUG)
+            System.out.printf("%s > InputProxy.update() =>%n", FThreads.debugGetCurrThreadId());
         
         if ( match.getInput().isEmpty() && ph.hasPhaseEffects()) {
             Runnable rPhase = new Runnable() {
                 @Override
                 public void run() {
-                    //System.out.printf("\t%s > handle begin phase during %s%n", FThreads.debugGetCurrThreadId(), ph.debugPrintState());
+                    if(INPUT_DEBUG)
+                        System.out.printf("\t%s > handle begin phase during %s%n", FThreads.debugGetCurrThreadId(), ph.debugPrintState());
                     ph.handleBeginPhase();
                     update(null, null); 
                 }
@@ -67,12 +72,15 @@ public class InputProxy implements Observer {
         }
         
         final Input nextInput = match.getInput().getActualInput(game);
-        //System.out.printf("\tinput is %s during %s, \tstack = %s%n", nextInput == null ? "null" : nextInput.getClass().getSimpleName(), ph.debugPrintState(), match.getInput().printInputStack());
+        
+        if(INPUT_DEBUG)
+            System.out.printf("\tinput is %s during %s, \tstack = %s%n", nextInput == null ? "null" : nextInput.getClass().getSimpleName(), ph.debugPrintState(), match.getInput().printInputStack());
 
         this.input.set(nextInput);
         Runnable showMessage = new Runnable() {
             @Override public void run() { 
-                //System.out.printf("%s > showMessage @ %s during %s%n", FThreads.debugGetCurrThreadId(), nextInput.getClass().getSimpleName(), ph.debugPrintState());
+                if(INPUT_DEBUG)
+                    System.out.printf("%s > showMessage @ %s during %s%n", FThreads.debugGetCurrThreadId(), nextInput.getClass().getSimpleName(), ph.debugPrintState());
                 nextInput.showMessage(); 
             }
         };

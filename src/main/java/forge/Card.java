@@ -4774,24 +4774,6 @@ public class Card extends GameEntity implements Comparable<Card> {
         return res;
     }
 
-    /**
-     * Sets the changed card keywords.
-     * 
-     * @param kw
-     *            the new changed card keywords
-     */
-    public final void setChangedCardKeywords(final ArrayList<CardKeywords> kw) {
-        this.changedCardKeywords = kw;
-    }
-
-    /**
-     * Gets the changed card keywords.
-     * 
-     * @return the changed card keywords
-     */
-    public final ArrayList<CardKeywords> getChangedCardKeywords() {
-        return this.changedCardKeywords;
-    }
 
     /**
      * Adds the changed card keywords.

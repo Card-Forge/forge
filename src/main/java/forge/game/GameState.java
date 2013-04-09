@@ -24,12 +24,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-import com.google.common.collect.Iterables;
 import com.google.common.eventbus.EventBus;
 
 import forge.Card;
 import forge.CardLists;
-import forge.CardPredicates;
 import forge.ColorChanger;
 import forge.GameLog;
 import forge.Singletons;
