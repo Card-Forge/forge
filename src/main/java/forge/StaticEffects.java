@@ -223,8 +223,7 @@ public class StaticEffects {
 
             // remove abilities
             if (params.containsKey("AddAbility") || params.containsKey("GainsAbilitiesOf")) {
-                final SpellAbility[] spellAbility = affectedCard.getSpellAbility();
-                for (final SpellAbility s : spellAbility) {
+                for (final SpellAbility s : affectedCard.getSpellAbilities()) {
                     if (s.getType().equals("Temporary")) {
                         affectedCard.removeSpellAbility(s);
                     }

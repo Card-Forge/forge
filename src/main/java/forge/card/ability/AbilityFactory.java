@@ -126,17 +126,8 @@ public final class AbilityFactory {
         
         Target abTgt = mapParams.containsKey("ValidTgts") ? readTarget(hostCard, mapParams) : null;
 
-
-        if (api == ApiType.CopySpellAbility) {
-            if (abTgt != null) {
-                // Since all "CopySpell" ABs copy things on the Stack no need for it to be everywhere
-                abTgt.setZone(ZoneType.Stack);
-            }
-
-            hostCard.setCopiesSpells(true);
-        }
-
-        else if (api == ApiType.Counter || api == ApiType.ChangeTargets) {
+        if (api == ApiType.CopySpellAbility || api == ApiType.Counter || api == ApiType.ChangeTargets) {
+            // Since all "CopySpell" ABs copy things on the Stack no need for it to be everywhere
             // Since all "Counter" or "ChangeTargets" abilities only target the Stack Zone
             // No need to have each of those scripts have that info
             if (abTgt != null) {

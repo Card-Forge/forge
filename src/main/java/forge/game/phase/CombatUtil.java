@@ -731,11 +731,11 @@ public class CombatUtil {
             }
         }
 
-        if (attacker.hasKeyword("CARDNAME can't be blocked by Walls.") && blocker.isWall()) {
+        if (attacker.hasKeyword("CARDNAME can't be blocked by Walls.") && blocker.isType("Wall")) {
             return false;
         }
 
-        if (attacker.hasKeyword("CARDNAME can't be blocked except by Walls.") && !blocker.isWall()) {
+        if (attacker.hasKeyword("CARDNAME can't be blocked except by Walls.") && !blocker.isType("Wall")) {
             return false;
         }
 

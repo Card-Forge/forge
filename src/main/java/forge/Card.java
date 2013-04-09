@@ -38,7 +38,6 @@ import forge.CardPredicates.Presets;
 import forge.card.CardCharacteristics;
 import forge.card.CardRarity;
 import forge.card.CardRules;
-import forge.card.CardSplitType;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.ApiType;
 import forge.card.cardfactory.CardFactoryUtil;
@@ -89,10 +88,6 @@ public class Card extends GameEntity implements Comparable<Card> {
     private CardCharacteristicName curCharacteristics = CardCharacteristicName.Original;
     private CardCharacteristicName preTFDCharacteristic = CardCharacteristicName.Original;
 
-    private boolean isDoubleFaced = false;
-    private boolean isFlipCard = false;
-    private CardCharacteristicName otherTransformable = null;
-
     private ZoneType castFrom = null;
 
     private final CardDamageHistory damageHistory = new CardDamageHistory();
@@ -141,7 +136,6 @@ public class Card extends GameEntity implements Comparable<Card> {
     private boolean copiedToken = false;
     private boolean copiedSpell = false;
     private boolean spellWithChoices = false;
-    private boolean spellCopyingCard = false;
 
     private ArrayList<Card> mustBlockCards = null;
 
@@ -288,7 +282,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @return true, if successful
      */
     public boolean setState(final CardCharacteristicName state) {
-        if (state == CardCharacteristicName.FaceDown && this.isDoubleFaced) {
+        if (state == CardCharacteristicName.FaceDown && this.isDoubleFaced()) {
             return false; // Doublefaced cards can't be turned face-down.
         }
 
@@ -358,7 +352,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @return true, if successful
      */
     public boolean turnFaceDown() {
-        if (!this.isDoubleFaced) {
+        if (!this.isDoubleFaced()) {
             this.preTFDCharacteristic = this.curCharacteristics;
             return this.setState(CardCharacteristicName.FaceDown);
         }
@@ -389,20 +383,6 @@ public class Card extends GameEntity implements Comparable<Card> {
             return result;
         }
 
-        return false;
-    }
-
-    /**
-     * Checks if is cloned.
-     * 
-     * @return true, if is cloned
-     */
-    public boolean isCloned() {
-        for (final CardCharacteristicName state : this.characteristicsMap.keySet()) {
-            if (state == CardCharacteristicName.Cloner) {
-                return true;
-            }
-        }
         return false;
     }
 
@@ -477,76 +457,25 @@ public class Card extends GameEntity implements Comparable<Card> {
         return this.characteristicsMap.keySet().size() > 2;
     }
 
-    /**
-     * Checks if is double faced.
-     * 
-     * @return the isDoubleFaced
-     */
     public final boolean isDoubleFaced() {
-        return this.isDoubleFaced;
+        return characteristicsMap.containsKey(CardCharacteristicName.Transformed);
     }
 
-    /**
-     * Sets the double faced.
-     * 
-     * @param isDoubleFaced0
-     *            the isDoubleFaced to set
-     */
-    public final void setDoubleFaced(final boolean isDoubleFaced0) {
-        this.isDoubleFaced = isDoubleFaced0;
-    }
-
-    /**
-     * Checks if is flip card.
-     * 
-     * @return the isFlipCard
-     */
     public final boolean isFlipCard() {
-        return this.isFlipCard;
+        return characteristicsMap.containsKey(CardCharacteristicName.Flipped);
     }
     
     public final boolean isSplitCard() { 
-        return cardRules != null && cardRules.getSplitType() == CardSplitType.Split;
+        return characteristicsMap.containsKey(CardCharacteristicName.LeftSplit);
     }
 
     /**
-     * Sets the flip card.
+     * Checks if is cloned.
      * 
-     * @param isFlip0
-     *            the isFlip to set
+     * @return true, if is cloned
      */
-    public final void setFlipCard(final boolean isFlip0) {
-        this.isFlipCard = isFlip0;
-    }
-
-    /**
-     * 
-     * Checks if card status is flipped.
-     * 
-     * @return the flipped
-     */
-    public final boolean isFlipped() {
-        return curCharacteristics == CardCharacteristicName.Flipped;
-    }
-
-    /**
-     * Checks if this is transformable (i.e. Licids.)
-     * 
-     * @return a boolean
-     */
-    public final CardCharacteristicName isTransformable() {
-        return this.otherTransformable;
-    }
-
-    /**
-     * Sets whether or not this card is transformable, but non-flip and not
-     * double-faced.
-     * 
-     * @param otherTransformable0
-     *            a String
-     */
-    public final void setTransformable(final CardCharacteristicName otherTransformable0) {
-        this.otherTransformable = otherTransformable0;
+    public boolean isCloned() {
+        return characteristicsMap.containsKey(CardCharacteristicName.Cloner);
     }
 
     /**
@@ -2390,9 +2319,8 @@ public class Card extends GameEntity implements Comparable<Card> {
         }
 
         final ArrayList<String> addedManaStrings = new ArrayList<String>();
-        final SpellAbility[] abilities = this.getSpellAbility();
         boolean primaryCost = true;
-        for (final SpellAbility sa : abilities) {
+        for (final SpellAbility sa : this.getSpellAbilities()) {
             // only add abilities not Spell portions of cards
             if (!this.isPermanent()) {
                 continue;
@@ -2465,8 +2393,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         }
 
         // Add SpellAbilities
-        final SpellAbility[] sa = this.getSpellAbility();
-        for (final SpellAbility element : sa) {
+        for (final SpellAbility element : this.getSpellAbilities()) {
             sb.append(element.toString() + "\r\n");
         }
 
@@ -2681,23 +2608,10 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @return a SpellAbility object.
      */
     public final SpellAbility getFirstSpellAbility() {
-        final ArrayList<SpellAbility> sas = this.getCharacteristics().getSpellAbility();
-        if (!sas.isEmpty()) {
-            return sas.get(0);
-        }
-
-        return null;
+        final List<SpellAbility> sas = this.getCharacteristics().getSpellAbility();
+        return sas.isEmpty() ? null : sas.get(0);
     }
 
-    /**
-     * <p>
-     * clearSpellAbility.
-     * </p>
-     */
-    public final void clearSpellAbility() {
-        this.getCharacteristics().getSpellAbility().clear();
-        this.getCharacteristics().getManaAbility().clear();
-    }
 
     /**
      * <p>
@@ -2713,15 +2627,6 @@ public class Card extends GameEntity implements Comparable<Card> {
             }
         }
         return null;
-    }
-
-    /**
-     * <p>
-     * clearSpellKeepManaAbility.
-     * </p>
-     */
-    public final void clearSpellKeepManaAbility() {
-        this.getCharacteristics().getSpellAbility().clear();
     }
 
     /**
@@ -2763,20 +2668,6 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     /**
      * <p>
-     * Getter for the field <code>spellAbility</code>.
-     * </p>
-     * 
-     * @return an array of {@link forge.card.spellability.SpellAbility} objects.
-     */
-    public final SpellAbility[] getSpellAbility() {
-        final ArrayList<SpellAbility> res = getSpellAbilities();
-        final SpellAbility[] s = new SpellAbility[res.size()];
-        res.toArray(s);
-        return s;
-    }
-
-    /**
-     * <p>
      * getSpellAbilities.
      * </p>
      * 
@@ -2795,7 +2686,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * 
      * @return a {@link java.util.ArrayList} object.
      */
-    public final ArrayList<SpellAbility> getNonManaSpellAbilities() {
+    public final List<SpellAbility> getNonManaSpellAbilities() {
         return this.getCharacteristics().getSpellAbility();
     }
 
@@ -2853,18 +2744,6 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
 
     // shield = regeneration
-    /**
-     * <p>
-     * setShield.
-     * </p>
-     * 
-     * @param n
-     *            a int.
-     */
-    public final void setShield(final int n) {
-        this.nShield = n;
-    }
-
     /**
      * <p>
      * getShield.
@@ -3031,29 +2910,6 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     public final boolean hasChoices() {
         return this.spellWithChoices;
-    }
-
-    /**
-     * <p>
-     * setCopiesSpells.
-     * </p>
-     * 
-     * @param b
-     *            a boolean.
-     */
-    public final void setCopiesSpells(final boolean b) {
-        this.spellCopyingCard = b;
-    }
-
-    /**
-     * <p>
-     * copiesSpells.
-     * </p>
-     * 
-     * @return a boolean.
-     */
-    public final boolean copiesSpells() {
-        return this.spellCopyingCard;
     }
 
     /**
@@ -5194,204 +5050,36 @@ public class Card extends GameEntity implements Comparable<Card> {
         return stAb;
     }
 
-    /**
-     * <p>
-     * isPermanent.
-     * </p>
-     * 
-     * @return a boolean.
-     */
     public final boolean isPermanent() {
         return !(this.isInstant() || this.isSorcery() || this.isImmutable());
     }
 
-    /**
-     * <p>
-     * isSpell.
-     * </p>
-     * 
-     * @return a boolean.
-     */
     public final boolean isSpell() {
         return (this.isInstant() || this.isSorcery() || (this.isAura() && !this.isInZone((ZoneType.Battlefield))));
     }
 
-    /**
-     * <p>
-     * isCreature.
-     * </p>
-     * 
-     * @return a boolean.
-     */
-    public final boolean isCreature() {
-        return this.typeContains("Creature");
-    }
+    public final boolean isEmblem()     { return this.typeContains("Emblem"); }
 
-    /**
-     * <p>
-     * isWall.
-     * </p>
-     * 
-     * @return a boolean.
-     */
-    public final boolean isWall() {
-        return this.typeContains("Wall");
-    }
+    public final boolean isLand()       { return this.typeContains("Land"); }
+    public final boolean isBasicLand()  { return this.typeContains("Basic"); }
+    public final boolean isSnow()       { return this.typeContains("Snow"); }
 
-    /**
-     * <p>
-     * isBasicLand.
-     * </p>
-     * 
-     * @return a boolean.
-     */
-    public final boolean isBasicLand() {
-        return this.typeContains("Basic");
-    }
+    public final boolean isTribal()     { return this.typeContains("Tribal"); }
+    public final boolean isSorcery()    { return this.typeContains("Sorcery"); }
+    public final boolean isInstant()    { return this.typeContains("Instant"); }
 
-    /**
-     * <p>
-     * isLand.
-     * </p>
-     * 
-     * @return a boolean.
-     */
-    public final boolean isLand() {
-        return this.typeContains("Land");
-    }
+    public final boolean isCreature()   { return this.typeContains("Creature"); }
+    public final boolean isArtifact()   { return this.typeContains("Artifact"); }
+    public final boolean isEquipment()  { return this.typeContains("Equipment"); }
+    public final boolean isScheme()     { return this.typeContains("Scheme"); }
+    
 
-    /**
-     * <p>
-     * isSorcery.
-     * </p>
-     * 
-     * @return a boolean.
-     */
-    public final boolean isSorcery() {
-        return this.typeContains("Sorcery");
-    }
+    public final boolean isPlaneswalker()   { return this.typeContains("Planeswalker"); }
 
-    /**
-     * <p>
-     * isInstant.
-     * </p>
-     * 
-     * @return a boolean.
-     */
-    public final boolean isInstant() {
-        return this.typeContains("Instant");
-    }
+    public final boolean isEnchantment()    { return this.typeContains("Enchantment"); }
+    public final boolean isAura()           { return this.typeContains("Aura"); }
 
-    /**
-     * <p>
-     * isArtifact.
-     * </p>
-     * 
-     * @return a boolean.
-     */
-    public final boolean isArtifact() {
-        return this.typeContains("Artifact");
-    }
 
-    /**
-     * <p>
-     * isEquipment.
-     * </p>
-     * 
-     * @return a boolean.
-     */
-    public final boolean isEquipment() {
-        return this.typeContains("Equipment");
-    }
-
-    /**
-     * <p>
-     * isScheme.
-     * </p>
-     * 
-     * @return a boolean.
-     */
-    public final boolean isScheme() {
-        return this.typeContains("Scheme");
-    }
-
-    /**
-     * <p>
-     * isPlaneswalker.
-     * </p>
-     * 
-     * @return a boolean.
-     */
-    public final boolean isPlaneswalker() {
-        return this.typeContains("Planeswalker");
-    }
-
-    /**
-     * <p>
-     * isEmblem.
-     * </p>
-     * 
-     * @return a boolean.
-     */
-    public final boolean isEmblem() {
-        return this.typeContains("Emblem");
-    }
-
-    /**
-     * <p>
-     * isTribal.
-     * </p>
-     * 
-     * @return a boolean.
-     */
-    public final boolean isTribal() {
-        return this.typeContains("Tribal");
-    }
-
-    /**
-     * <p>
-     * isSnow.
-     * </p>
-     * 
-     * @return a boolean.
-     */
-    public final boolean isSnow() {
-        return this.typeContains("Snow");
-    }
-
-    // global and local enchantments
-    /**
-     * <p>
-     * isEnchantment.
-     * </p>
-     * 
-     * @return a boolean.
-     */
-    public final boolean isEnchantment() {
-        return this.typeContains("Enchantment");
-    }
-
-    /**
-     * <p>
-     * isAura.
-     * </p>
-     * 
-     * @return a boolean.
-     */
-    public final boolean isAura() {
-        return this.typeContains("Aura");
-    }
-
-    /**
-     * <p>
-     * isGlobalEnchantment.
-     * </p>
-     * 
-     * @return a boolean.
-     */
-    public final boolean isGlobalEnchantment() {
-        return this.typeContains("Enchantment") && (!this.isAura());
-    }
 
     private boolean typeContains(final String s) {
         final Iterator<?> it = this.getType().iterator();
@@ -6115,11 +5803,11 @@ public class Card extends GameEntity implements Comparable<Card> {
                 return false;
             }
         } else if (property.equals("DoubleFaced")) {
-            if (!this.isDoubleFaced) {
+            if (!this.isDoubleFaced()) {
                 return false;
             }
         } else if (property.equals("Flip")) {
-            if (!this.isFlipCard) {
+            if (!this.isFlipCard()) {
                 return false;
             }
         } else if (property.startsWith("YouCtrl")) {
@@ -7002,10 +6690,9 @@ public class Card extends GameEntity implements Comparable<Card> {
                 return false;
             }
         } else if (property.startsWith("hasXCost")) {
-            if (this.getSpellAbility().length > 0) {
-                if (!this.getSpellAbility()[0].isXCost()) {
-                    return false;
-                }
+            SpellAbility sa1 = this.getFirstSpellAbility();
+            if( sa1 != null && !sa1.isXCost()) {
+                return false;
             }
         } else if (property.startsWith("suspended")) {
             if (!this.hasSuspend() || !Singletons.getModel().getGame().isCardExiled(this)

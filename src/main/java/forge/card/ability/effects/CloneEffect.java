@@ -159,15 +159,12 @@ public class CloneEffect extends SpellAbilityEffect {
             if (keepName) {
                 tgtCard.setName(originalName);
             }
-            tgtCard.setFlipCard(true);
             //keep the Clone card image for the cloned card
             tgtCard.setImageKey(imageFileName);
 
-            if (!tgtCard.isFlipped()) {
+            if (tgtCard.getCurState() != CardCharacteristicName.Flipped) {
               tgtCard.setState(CardCharacteristicName.Original);
             }
-        } else {
-            tgtCard.setFlipCard(false);
         }
 
         //Clean up copy of cloned state

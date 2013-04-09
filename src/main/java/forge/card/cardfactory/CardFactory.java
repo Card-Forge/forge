@@ -358,17 +358,9 @@ public class CardFactory {
 
         // 1. The states we may have:
         CardSplitType st = rules.getSplitType();
-        switch ( st ) {
-            case Split:
-                card.addAlternateState(CardCharacteristicName.LeftSplit);
-                card.setState(CardCharacteristicName.LeftSplit);
-                break;
-            
-            case Transform: card.setDoubleFaced(true);break;
-            case Flip: card.setFlipCard(true); break;
-            case None: break;
-
-            default: card.setTransformable(st.getChangedStateName()); break;
+        if ( st ==  CardSplitType.Split) {
+            card.addAlternateState(CardCharacteristicName.LeftSplit);
+            card.setState(CardCharacteristicName.LeftSplit);
         } 
 
         readCardFace(card, rules.getMainPart());
@@ -458,8 +450,6 @@ public class CardFactory {
     public static Card copyStats(final Card sim) {
         final Card c = new Card();
     
-        c.setFlipCard(sim.isFlipCard());
-        c.setDoubleFaced(sim.isDoubleFaced());
         c.setCurSetCode(sim.getCurSetCode());
     
         final CardCharacteristicName origState = sim.getCurState();
@@ -527,7 +517,7 @@ public class CardFactory {
     
         // get CardCharacteristics for desired state
         CardCharacteristics characteristics = from.getState(stateToCopy);
-        to.getCharacteristics().copy(characteristics);
+        to.getCharacteristics().copyFrom(characteristics);
         // handle triggers and replacement effect through Card class interface
         to.setTriggers(characteristics.getTriggers());
         to.setReplacementEffects(characteristics.getReplacementEffects());

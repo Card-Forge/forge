@@ -138,9 +138,7 @@ public final class CardUtil {
         newCopy.setCurSetCode(in.getCurSetCode());
         newCopy.setOwner(in.getOwner());
         newCopy.setController(in.getController(), 0);
-        newCopy.setFlipCard(in.isFlipCard());
-        newCopy.setDoubleFaced(in.isDoubleFaced());
-        newCopy.getCharacteristics().copy(in.getState(in.getCurState()));
+        newCopy.getCharacteristics().copyFrom(in.getState(in.getCurState()));
         newCopy.setBaseAttack(in.getNetAttack());
         newCopy.setBaseDefense(in.getNetDefense());
         newCopy.setType(new ArrayList<String>(in.getType()));

@@ -394,10 +394,6 @@ public class CardFactoryCreatures {
     }
 
     private static void getCard_SurturedGhoul(final Card card) {
-        final int[] numCreatures = new int[1];
-        final int[] sumPower = new int[1];
-        final int[] sumToughness = new int[1];
-
         final Command intoPlay = new Command() {
             private static final long serialVersionUID = -75234586897814L;
 
@@ -406,8 +402,7 @@ public class CardFactoryCreatures {
                 int intermSumPower = 0;
                 int intermSumToughness = 0;
                 // intermSumPower = intermSumToughness = 0;
-                List<Card> creats =
-                        CardLists.filter(card.getController().getCardsIn(ZoneType.Graveyard), new Predicate<Card>() {
+                List<Card> creats = CardLists.filter(card.getController().getCardsIn(ZoneType.Graveyard), new Predicate<Card>() {
                     @Override
                     public boolean apply(final Card c) {
                         return c.isCreature() && !c.equals(card);
@@ -415,10 +410,9 @@ public class CardFactoryCreatures {
                 });
 
                 if (card.getController().isHuman()) {
-                    if (creats.size() > 0) {
-                        final List<Card> selection = GuiChoose.noneOrMany("Select creatures to sacrifice", creats);
+                    if (!creats.isEmpty()) {
+                        final List<Card> selection = GuiChoose.noneOrMany("Select creatures to exile", creats);
 
-                        numCreatures[0] = selection.size();
                         for (int m = 0; m < selection.size(); m++) {
                             intermSumPower += selection.get(m).getBaseAttack();
                             intermSumToughness += selection.get(m).getBaseDefense();
@@ -428,24 +422,19 @@ public class CardFactoryCreatures {
 
                 } // human
                 else {
-                    int count = 0;
                     for (int i = 0; i < creats.size(); i++) {
                         final Card c = creats.get(i);
                         if ((c.getNetAttack() <= 2) && (c.getNetDefense() <= 3)) {
                             intermSumPower += c.getBaseAttack();
                             intermSumToughness += c.getBaseDefense();
                             Singletons.getModel().getGame().getAction().exile(c);
-                            count++;
                         }
                         // is this needed?
                         card.getController().getZone(ZoneType.Battlefield).updateObservers();
                     }
-                    numCreatures[0] = count;
                 }
-                sumPower[0] = intermSumPower;
-                sumToughness[0] = intermSumToughness;
-                card.setBaseAttack(sumPower[0]);
-                card.setBaseDefense(sumToughness[0]);
+                card.setBaseAttack(intermSumPower);
+                card.setBaseDefense(intermSumToughness);
             }
         };
         // Do not remove SpellAbilities created by AbilityFactory or

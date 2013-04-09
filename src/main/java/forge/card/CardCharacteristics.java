@@ -43,7 +43,7 @@ public class CardCharacteristics {
     private int baseAttack = 0;
     private int baseDefense = 0;
     private ArrayList<String> intrinsicKeyword = new ArrayList<String>();
-    private final ArrayList<SpellAbility> spellAbility = new ArrayList<SpellAbility>();
+    private final List<SpellAbility> spellAbility = new ArrayList<SpellAbility>();
     private final List<SpellAbility> manaAbility = new ArrayList<SpellAbility>();
     private ArrayList<String> intrinsicAbility = new ArrayList<String>();
     private ArrayList<Trigger> triggers = new ArrayList<Trigger>();
@@ -203,7 +203,7 @@ public class CardCharacteristics {
      * 
      * @return the spellAbility
      */
-    public final ArrayList<SpellAbility> getSpellAbility() {
+    public final List<SpellAbility> getSpellAbility() {
         return this.spellAbility;
     }
 
@@ -388,7 +388,7 @@ public class CardCharacteristics {
      * @param source
      *            a Map object.
      */
-    public final void copy(final CardCharacteristics source) {
+    public final void copyFrom(final CardCharacteristics source) {
         // Makes a "deeper" copy of a CardCharacteristics object
 
         // String name : just copy reference

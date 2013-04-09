@@ -184,7 +184,7 @@ public class CardFactoryUtil {
             }
         };
 
-        morphDown.setManaCost(new ManaCost(new ManaCostParser("3")));
+        morphDown.setManaCost(ManaCost.THREE);
         morphDown.setDescription("(You may cast this face down as a 2/2 creature for 3.)");
         morphDown.setStackDescription("Morph - Creature 2/2");
         morphDown.setCastFaceDown(true);
@@ -800,7 +800,7 @@ public class CardFactoryUtil {
                         return true;
                     }
 
-                    for (final SpellAbility sa : c.getSpellAbility()) {
+                    for (final SpellAbility sa : c.getSpellAbilities()) {
                         final ZoneType restrictZone = sa.getRestrictions().getZone();
                         if (zone.is(restrictZone)) {
                             return true;
@@ -2397,7 +2397,7 @@ public class CardFactoryUtil {
                 final String parse = card.getKeyword().get(n).toString();
                 final String[] k = parse.split("kicker ");
 
-                final SpellAbility sa = card.getSpellAbility()[0];
+                final SpellAbility sa = card.getFirstSpellAbility();
                 sa.setMultiKickerManaCost(new ManaCost(new ManaCostParser(k[1])));
             }
         }
@@ -2408,7 +2408,7 @@ public class CardFactoryUtil {
                 final String parse = card.getKeyword().get(n).toString();
                 final String[] k = parse.split("cate ");
 
-                final SpellAbility sa = card.getSpellAbility()[0];
+                final SpellAbility sa = card.getFirstSpellAbility();
                 sa.setIsReplicate(true);
                 sa.setReplicateManaCost(new ManaCost(new ManaCostParser(k[1])));
             }
@@ -2583,19 +2583,19 @@ public class CardFactoryUtil {
 
         // AddCost
         if (!card.getSVar("FullCost").equals("")) {
-            final SpellAbility[] abilities = card.getSpellAbility();
-            if ((abilities.length > 0) && abilities[0].isSpell()) {
+            final SpellAbility sa1 = card.getFirstSpellAbility();
+            if (sa1 != null && sa1.isSpell()) {
                 final String altCost = card.getSVar("FullCost");
-                final Cost abCost = new Cost(card, altCost, abilities[0].isAbility());
-                abilities[0].setPayCosts(abCost);
+                final Cost abCost = new Cost(card, altCost, sa1.isAbility());
+                sa1.setPayCosts(abCost);
             }
         }
 
         // AltCost
         if (!card.getSVar("AltCost").equals("")) {
-            final SpellAbility[] abilities = card.getSpellAbility();
-            if ((abilities.length > 0) && abilities[0].isSpell()) {
-                card.addSpellAbility(makeAltCost(card, abilities[0]));
+            final SpellAbility sa1 = card.getFirstSpellAbility();
+            if (sa1 != null && sa1.isSpell()) {
+                card.addSpellAbility(makeAltCost(card, sa1));
             }
         }
 
