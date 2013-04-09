@@ -48,77 +48,50 @@ public class SetStateEffect extends SpellAbilityEffect {
         final boolean remChanged = sa.hasParam("RememberChanged");
 
         for (final Card tgt : tgtCards) {
-            if (sa.getTarget() != null) {
-                if (!tgt.canBeTargetedBy(sa)) {
-                    continue;
-                }
+            if (sa.getTarget() != null && !tgt.canBeTargetedBy(sa)) {
+                continue;
             }
 
-            final String mode = sa.getParam("Mode");
-
-            if (mode != null) {
-                if (mode.equals("Transform")) {
-                    if (tgt.hasKeyword("CARDNAME can't transform")) {
-                        continue;
-                    }
-                    if (tgt.isDoubleFaced()) {
-                        if (tgt.getCurState() == CardCharacteristicName.Original) {
-                            if (tgt.changeToState(CardCharacteristicName.Transformed)) {
-                                if (remChanged) {
-                                    host.addRemembered(tgt);
-                                }
-                            }
-                        } else if (tgt.getCurState() == CardCharacteristicName.Transformed) {
-                            if (tgt.changeToState(CardCharacteristicName.Original)) {
-                                if (remChanged) {
-                                    host.addRemembered(tgt);
-                                }
-
-                            }
-                        }
-                    }
-                } else if (mode.equals("Flip")) {
-                    if (tgt.isFlipCard()) {
-                        if (tgt.getCurState() == CardCharacteristicName.Original) {
-                            if (tgt.changeToState(CardCharacteristicName.Flipped)) {
-                                host.setFlipStaus(true);
-                                if (remChanged) {
-                                    host.addRemembered(tgt);
-                                }
-                            }
-
-                        } else if (tgt.getCurState() == CardCharacteristicName.Flipped) {
-                            if (tgt.changeToState(CardCharacteristicName.Original)) {
-                                host.setFlipStaus(false);
-                                if (remChanged) {
-                                    host.addRemembered(tgt);
-                                }
-                            }
-                        }
-                    }
-                } else if (mode.equals("TurnFace")) {
-                    if (tgt.getCurState() == CardCharacteristicName.Original) {
-                        // Reset cloned state if Vesuvan Shapeshifter
-                        if (tgt.isCloned() && tgt.getState(CardCharacteristicName.Cloner).getName().equals("Vesuvan Shapeshifter")) {
-                            tgt.switchStates(CardCharacteristicName.Cloner, CardCharacteristicName.Original);
-                            tgt.setState(CardCharacteristicName.Original);
-                            tgt.clearStates(CardCharacteristicName.Cloner);
-                        }
-                        if (tgt.turnFaceDown() && remChanged) {
-                            host.addRemembered(tgt);
-                        }
-                    } else if (tgt.getCurState() == CardCharacteristicName.FaceDown) {
-                        if (tgt.turnFaceUp() && remChanged) {
-                            host.addRemembered(tgt);
-                        }
-                    }
-                }
-            } else {
-                tgt.changeToState(CardCharacteristicName.smartValueOf(sa.getParam("NewState")));
+            boolean hasTransformed = changeCardState(tgt, sa.getParam("Mode"), sa.getParam("NewState"));
+            if ( hasTransformed && remChanged) {
+                host.addRemembered(tgt);
             }
-
         }
+    }
 
+    private boolean changeCardState(final Card tgt, final String mode, final String customState) {
+        if (mode == null)
+            return tgt.changeToState(CardCharacteristicName.smartValueOf(customState));
+
+        // flip and face-down don't overlap. That is there is no chance to turn face down a flipped permanent
+        // and then any effect have it turn upface again and demand its former flip state to be restored
+        // Proof: Morph cards never have ability that makes them flip, Ixidron does not suppose cards to be turned face up again, 
+        // Illusionary Mask affects cards in hand.
+        CardCharacteristicName oldState = tgt.getCurState();
+        if (mode.equals("Transform") && tgt.isDoubleFaced()) {
+            if (tgt.hasKeyword("CARDNAME can't transform")) {
+                return false;
+            }
+            CardCharacteristicName destState = oldState == CardCharacteristicName.Transformed ? CardCharacteristicName.Original : CardCharacteristicName.Transformed;
+            return tgt.changeToState(destState);
+            
+        } else if (mode.equals("Flip") && tgt.isFlipCard()) {
+            CardCharacteristicName destState = oldState == CardCharacteristicName.Flipped ? CardCharacteristicName.Original : CardCharacteristicName.Flipped;
+            return tgt.changeToState(destState);
+        } else if (mode.equals("TurnFace")) {
+            if (oldState == CardCharacteristicName.Original) {
+                // Reset cloned state if Vesuvan Shapeshifter
+                if (tgt.isCloned() && tgt.getState(CardCharacteristicName.Cloner).getName().equals("Vesuvan Shapeshifter")) {
+                    tgt.switchStates(CardCharacteristicName.Cloner, CardCharacteristicName.Original);
+                    tgt.setState(CardCharacteristicName.Original);
+                    tgt.clearStates(CardCharacteristicName.Cloner);
+                }
+                return tgt.turnFaceDown();
+            } else if (oldState == CardCharacteristicName.FaceDown) {
+                return tgt.turnFaceUp();
+            }
+        }
+        return false;
     }
 
 }

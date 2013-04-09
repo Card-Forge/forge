@@ -86,7 +86,6 @@ import forge.card.ability.ai.SacrificeAi;
 import forge.card.ability.ai.SacrificeAllAi;
 import forge.card.ability.ai.ScryAi;
 import forge.card.ability.ai.SetStateAi;
-import forge.card.ability.ai.SetStateAllAi;
 import forge.card.ability.ai.ShuffleAi;
 import forge.card.ability.ai.StoreSVarAi;
 import forge.card.ability.ai.TapAi;
@@ -199,7 +198,6 @@ public enum ApiType {
     SetInMotion (SetInMotionEffect.class, AlwaysPlayAi.class),
     SetLife (LifeSetEffect.class, LifeSetAi.class),
     SetState (SetStateEffect.class, SetStateAi.class),
-    SetStateAll (SetStateAllEffect.class, SetStateAllAi.class),
     Shuffle (ShuffleEffect.class, ShuffleAi.class),
     StoreSVar (StoreSVarEffect.class, StoreSVarAi.class),
     Tap (TapEffect.class, TapAi.class),

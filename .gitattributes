@@ -13645,7 +13645,6 @@ src/main/java/forge/card/ability/ai/SacrificeAi.java -text
 src/main/java/forge/card/ability/ai/SacrificeAllAi.java -text
 src/main/java/forge/card/ability/ai/ScryAi.java -text
 src/main/java/forge/card/ability/ai/SetStateAi.java -text
-src/main/java/forge/card/ability/ai/SetStateAllAi.java -text
 src/main/java/forge/card/ability/ai/ShuffleAi.java -text
 src/main/java/forge/card/ability/ai/StoreSVarAi.java -text
 src/main/java/forge/card/ability/ai/TapAi.java -text
@@ -13752,7 +13751,6 @@ src/main/java/forge/card/ability/effects/SacrificeAllEffect.java -text
 src/main/java/forge/card/ability/effects/SacrificeEffect.java -text
 src/main/java/forge/card/ability/effects/ScryEffect.java -text
 src/main/java/forge/card/ability/effects/SetInMotionEffect.java -text
-src/main/java/forge/card/ability/effects/SetStateAllEffect.java -text
 src/main/java/forge/card/ability/effects/SetStateEffect.java -text
 src/main/java/forge/card/ability/effects/ShuffleEffect.java -text
 src/main/java/forge/card/ability/effects/StoreSVarEffect.java -text

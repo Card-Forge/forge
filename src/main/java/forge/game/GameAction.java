@@ -151,10 +151,6 @@ public class GameAction {
                     c.clearStates(CardCharacteristicName.Flipped);
                 }
             }
-            // reset flip status when card leaves battlefield
-            if (zoneFrom.is(ZoneType.Battlefield)) {
-                c.setFlipStaus(false);
-            }
             copied = CardFactory.copyCard(c);
             copied.setUnearthed(c.isUnearthed());
             copied.setTapped(false);

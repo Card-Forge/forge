@@ -91,7 +91,6 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     private boolean isDoubleFaced = false;
     private boolean isFlipCard = false;
-    private boolean isFlipped = false;
     private CardCharacteristicName otherTransformable = null;
 
     private ZoneType castFrom = null;
@@ -527,17 +526,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @return the flipped
      */
     public final boolean isFlipped() {
-        return this.isFlipped;
-    }
-
-    /**
-     * Sets a cards flipped status.
-     * 
-     * @param newStatus
-     *      boolean with new flipped status
-     */
-    public final void setFlipStaus(final boolean newStatus) {
-        this.isFlipped = newStatus;
+        return curCharacteristics == CardCharacteristicName.Flipped;
     }
 
     /**
