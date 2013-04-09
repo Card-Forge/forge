@@ -122,6 +122,9 @@ Cairn Wanderer
 Concerted Effort
 Death-Mask Duplicant
 Rain of Gore
+Brine Hag
+Cathedral Membrane
+Chance Encounter
 
 
 ----------
@@ -162,6 +165,13 @@ New Dragon's Maze branch Cards
 ------------------------------
 
 Melek, Izzet Paragon
+Beck // Call
+Wear // Tear
+Maze's End
+Render Silent
+Sin Collector
+Vorel of the Hull Clade
+Master of Cruelties
 
 
 ------------
