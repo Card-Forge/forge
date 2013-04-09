@@ -2,6 +2,7 @@ Name:Damping Matrix
 ManaCost:3
 Types:Artifact
 S:Mode$ CantBeActivated | ValidCard$ Artifact,Creature | NonMana$ True | Description$ Activated abilities of artifacts and creatures can't be activated unless they're mana abilities.
+SVar:NonStackingEffect:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/damping_matrix.jpg
 Oracle:Activated abilities of artifacts and creatures can't be activated unless they're mana abilities.

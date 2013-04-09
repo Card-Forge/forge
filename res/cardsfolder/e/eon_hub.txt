@@ -2,6 +2,7 @@ Name:Eon Hub
 ManaCost:5
 Types:Artifact
 S:Mode$ Continuous | Affected$ Player | AddKeyword$ Skip your upkeep step. | Description$ Players skip their upkeep steps.
+SVar:NonStackingEffect:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/eon_hub.jpg
 Oracle:Players skip their upkeep steps.

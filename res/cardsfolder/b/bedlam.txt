@@ -2,6 +2,7 @@ Name:Bedlam
 ManaCost:2 R R
 Types:Enchantment
 S:Mode$ Continuous | Affected$ Creature | AddHiddenKeyword$ CARDNAME can't block. | Description$ Creatures can't block.
+SVar:NonStackingEffect:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bedlam.jpg
 Oracle:Creatures can't block.

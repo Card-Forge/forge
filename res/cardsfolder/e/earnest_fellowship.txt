@@ -7,6 +7,7 @@ S:Mode$ Continuous | Affected$ Creature.Blue | AddKeyword$ Protection from blue
 S:Mode$ Continuous | Affected$ Creature.Black | AddKeyword$ Protection from black
 S:Mode$ Continuous | Affected$ Creature.Red | AddKeyword$ Protection from red
 S:Mode$ Continuous | Affected$ Creature.Green | AddKeyword$ Protection from green
+SVar:NonStackingEffect:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/earnest_fellowship.jpg
 Oracle:Each creature has protection from its colors.

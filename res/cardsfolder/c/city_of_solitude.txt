@@ -5,6 +5,7 @@ S:Mode$ CantBeCast | ValidCard$ Card | Condition$ PlayerTurn | Caster$ Opponent 
 S:Mode$ CantBeCast | ValidCard$ Card | Condition$ NotPlayerTurn | Caster$ You
 S:Mode$ CantBeActivated | ValidCard$ Card | Condition$ PlayerTurn | Activator$ Opponent
 S:Mode$ CantBeActivated | ValidCard$ Card | Condition$ NotPlayerTurn | Activator$ You
+SVar:NonStackingEffect:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://wizards.com/global/images/magic/general/city_of_solitude.jpg
 Oracle:Players can cast spells and activate abilities only during their own turns.

@@ -5,6 +5,7 @@ Text:Islands don't untap during their controllers' untap steps.
 K:Permanents don't untap during their controllers' untap steps:Island
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigTapAll | TriggerDescription$ When CARDNAME enters the battlefield, tap all Islands.
 SVar:TrigTapAll:AB$ TapAll | Cost$ 0 | ValidCards$ Island
+SVar:NonStackingEffect:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/curse_of_marit_lage.jpg
 Oracle:When Curse of Marit Lage enters the battlefield, tap all Islands.\nIslands don't untap during their controllers' untap steps.

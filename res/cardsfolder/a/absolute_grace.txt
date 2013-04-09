@@ -2,6 +2,7 @@ Name:Absolute Grace
 ManaCost:1 W
 Types:Enchantment
 S:Mode$ Continuous | Affected$ Creature | AddKeyword$ Protection from black | Description$ All creatures have protection from black.
+SVar:NonStackingEffect:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/absolute_grace.jpg
 Oracle:All creatures have protection from black.

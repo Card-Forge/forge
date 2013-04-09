@@ -2,6 +2,7 @@ Name:Crumbling Sanctuary
 ManaCost:5
 Types:Artifact
 Text:For each 1 damage that would be dealt to a player, that player exiles the top card of his or her library instead.
+SVar:NonStackingEffect:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crumbling_sanctuary.jpg
 Oracle:If damage would be dealt to a player, that player exiles that many cards from the top of his or her library instead.

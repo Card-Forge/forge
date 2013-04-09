@@ -2,6 +2,7 @@ Name:Darksteel Forge
 ManaCost:9
 Types:Artifact
 S:Mode$ Continuous | Affected$ Artifact.YouCtrl | AddHiddenKeyword$ Indestructible | Description$ Artifacts you control are indestructible.
+SVar:NonStackingEffect:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/darksteel_forge.jpg
 Oracle:Artifacts you control are indestructible. ("Destroy" effects and lethal damage don't destroy them.)
 SetInfo:DST Rare

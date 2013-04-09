@@ -2,6 +2,7 @@ Name:Blood Moon
 ManaCost:2 R
 Types:Enchantment
 S:Mode$ Continuous | Affected$ Land.nonBasic | AddType$ Mountain | RemoveSubTypes$ True | RemoveAllAbilities$ True | Description$ Nonbasic lands are Mountains.
+SVar:NonStackingEffect:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blood_moon.jpg
 Oracle:Nonbasic lands are Mountains.
