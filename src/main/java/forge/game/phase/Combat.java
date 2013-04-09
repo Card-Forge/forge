@@ -689,6 +689,7 @@ public class Combat {
                 // Run Unblocked Trigger
                 final HashMap<String, Object> runParams = new HashMap<String, Object>();
                 runParams.put("Attacker", attacker);
+                runParams.put("Defender",this.getDefenderByAttacker(attacker));
                 Singletons.getModel().getGame().getTriggerHandler().runTrigger(TriggerType.AttackerUnblocked, runParams, false);
 
             }

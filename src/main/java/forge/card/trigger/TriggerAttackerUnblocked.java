@@ -57,7 +57,12 @@ public class TriggerAttackerUnblocked extends Trigger {
                 return false;
             }
         }
-
+        if (this.getMapParams().containsKey("ValidDefender")) {
+            if (!matchesValid(runParams2.get("Defender"), this.getMapParams().get("ValidDefender").split(","),
+                    this.getHostCard())) {
+                return false;
+            }
+        }
         return true;
     }
 
@@ -77,5 +82,6 @@ public class TriggerAttackerUnblocked extends Trigger {
     @Override
     public final void setTriggeringObjects(final SpellAbility sa) {
         sa.setTriggeringObject("Attacker", this.getRunParams().get("Attacker"));
+        sa.setTriggeringObject("Defender", this.getRunParams().get("Defender"));
     }
 }
