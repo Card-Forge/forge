@@ -345,9 +345,15 @@ public class CardFactoryUtil {
                 final List<Card> cards = sourceCard.getController().getCardsIn(ZoneType.Library);
                 final List<Card> sameCost = new ArrayList<Card>();
 
-                for (int i = 0; i < cards.size(); i++) {
-                    if (cards.get(i).getManaCost().getCMC() == sourceCard.getManaCost().getCMC()) {
-                        sameCost.add(cards.get(i));
+                for (Card c : cards) {
+                    if (c.isSplitCard() && c.getCurState() == CardCharacteristicName.Original) {
+                        if (c.getState(CardCharacteristicName.LeftSplit).getManaCost().getCMC() == sourceCard.getManaCost().getCMC() ||
+                                c.getState(CardCharacteristicName.RightSplit).getManaCost().getCMC() == sourceCard.getManaCost().getCMC()) {
+                            sameCost.add(c);
+                        }
+                    }
+                    else if (c.getManaCost().getCMC() == sourceCard.getManaCost().getCMC()) {
+                        sameCost.add(c);
                     }
                 }
 
