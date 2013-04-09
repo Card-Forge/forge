@@ -22,6 +22,8 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
+
 import forge.Card;
 import forge.CardLists;
 import forge.CardUtil;
@@ -104,30 +106,26 @@ public class StaticAbilityContinuous {
 
         if (params.containsKey("SetPower")) {
             setP = params.get("SetPower");
-            setPower = setP.matches("[0-9][0-9]?") ? Integer.parseInt(setP)
-                    : AbilityUtils.calculateAmount(hostCard, setP, null);
+            setPower = AbilityUtils.calculateAmount(hostCard, setP, null);
         }
 
         if (params.containsKey("SetToughness")) {
             setT = params.get("SetToughness");
-            setToughness = setT.matches("[0-9][0-9]?") ? Integer.parseInt(setT)
-                    : AbilityUtils.calculateAmount(hostCard, setT, null);
+            setToughness = AbilityUtils.calculateAmount(hostCard, setT, null);
         }
 
         if (params.containsKey("AddPower")) {
             addP = params.get("AddPower");
-            powerBonus = addP.matches("[0-9][0-9]?") ? Integer.parseInt(addP)
-                    : AbilityUtils.calculateAmount(hostCard, addP, null);
-            if (!addP.matches("[0-9][0-9]?") && !addP.equals("AffectedX")) {
+            powerBonus = AbilityUtils.calculateAmount(hostCard, addP, null);
+            if (!StringUtils.isNumeric(addP) && !addP.equals("AffectedX")) {
                 se.setXValue(powerBonus);
             }
         }
 
         if (params.containsKey("AddToughness")) {
             addT = params.get("AddToughness");
-            toughnessBonus = addT.matches("[0-9][0-9]?") ? Integer.parseInt(addT)
-                    : AbilityUtils.calculateAmount(hostCard, addT, null);
-            if (!addT.matches("[0-9][0-9]?") && !addT.equals("AffectedX")) {
+            toughnessBonus = AbilityUtils.calculateAmount(hostCard, addT, null);
+            if (!StringUtils.isNumeric(addT) && !addT.equals("AffectedX")) {
                 se.setYValue(toughnessBonus);
             }
         }
@@ -312,16 +310,14 @@ public class StaticAbilityContinuous {
                 if (mhs.equals("Unlimited")) {
                     p.setUnlimitedHandSize(true);
                 } else {
-                    int max = mhs.matches("[0-9][0-9]?") ? Integer.parseInt(mhs)
-                            : AbilityUtils.calculateAmount(hostCard, mhs, null);
+                    int max = AbilityUtils.calculateAmount(hostCard, mhs, null);
                     p.setMaxHandSize(max);
                 }
             }
 
             if (params.containsKey("RaiseMaxHandSize")) {
                 String rmhs = params.get("RaiseMaxHandSize");
-                int rmax = rmhs.matches("[0-9][0-9]?") ? Integer.parseInt(rmhs)
-                        : AbilityUtils.calculateAmount(hostCard, rmhs, null);
+                int rmax = AbilityUtils.calculateAmount(hostCard, rmhs, null);
                 p.setMaxHandSize(p.getMaxHandSize() + rmax);
             }
         }

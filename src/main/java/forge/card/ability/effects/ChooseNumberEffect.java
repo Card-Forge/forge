@@ -3,6 +3,8 @@ package forge.card.ability.effects;
 import java.util.List;
 import java.util.Random;
 
+import org.apache.commons.lang.StringUtils;
+
 import forge.Card;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.cardfactory.CardFactoryUtil;
@@ -36,23 +38,10 @@ public class ChooseNumberEffect extends SpellAbilityEffect {
         //final int max = sa.containsKey("Max") ? Integer.parseInt(sa.get("Max")) : 99;
         final boolean random = sa.hasParam("Random");
 
-        final int min;
-        if (!sa.hasParam("Min")) {
-            min = Integer.parseInt("0");
-        } else if (sa.getParam("Min").matches("[0-9][0-9]?")) {
-            min = Integer.parseInt(sa.getParam("Min"));
-        } else {
-            min = CardFactoryUtil.xCount(card, card.getSVar(sa.getParam("Min")));
-        } // Allow variables for Min
-
-        final int max;
-        if (!sa.hasParam("Max")) {
-            max = Integer.parseInt("99");
-        } else if (sa.getParam("Max").matches("[0-9][0-9]?")) {
-            max = Integer.parseInt(sa.getParam("Max"));
-        } else {
-            max = CardFactoryUtil.xCount(card, card.getSVar(sa.getParam("Max")));
-        } // Allow variables for Max
+        final String sMin = sa.getParamOrDefault("Min", "0");
+        final int min = StringUtils.isNumeric(sMin) ? Integer.parseInt(sMin) : CardFactoryUtil.xCount(card, card.getSVar(sMin));
+        final String sMax = sa.getParamOrDefault("Max", "99");
+        final int max = StringUtils.isNumeric(sMax) ? Integer.parseInt(sMax) : CardFactoryUtil.xCount(card, card.getSVar(sMax)); 
 
         final String[] choices = new String[max + 1];
         if (!random) {

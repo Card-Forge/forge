@@ -3,6 +3,8 @@ package forge.card.ability.effects;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
+
 import forge.Card;
 import forge.CardLists;
 import forge.CardPredicates.Presets;
@@ -49,9 +51,8 @@ public class ChooseCardEffect extends SpellAbilityEffect {
             choices = CardLists.filterControlledBy(choices, tgtPlayers.get(0));
         }
 
-        final String numericAmount = sa.hasParam("Amount") ? sa.getParam("Amount") : "1";
-        final int validAmount = !numericAmount.matches("[0-9][0-9]?")
-                ? CardFactoryUtil.xCount(host, host.getSVar(sa.getParam("Amount"))) : Integer.parseInt(numericAmount);
+        final String numericAmount = sa.getParamOrDefault("Amount", "1");
+        final int validAmount = StringUtils.isNumeric(numericAmount) ? Integer.parseInt(numericAmount) : CardFactoryUtil.xCount(host, host.getSVar(numericAmount));
 
         for (final Player p : tgtPlayers) {
             if (sa.hasParam("EachBasicType")) {

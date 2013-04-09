@@ -318,8 +318,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
 
         if (this.getLimitToCheck() != null) {
             String limit = this.getLimitToCheck();
-            int activationLimit = limit.matches("[0-9][0-9]?")
-              ? Integer.parseInt(limit) : AbilityUtils.calculateAmount(c, limit, sa);
+            int activationLimit = AbilityUtils.calculateAmount(c, limit, sa);
             this.setActivationLimit(activationLimit);
 
             if ((this.getActivationLimit() != -1) && (this.getNumberTurnActivations() >= this.getActivationLimit())) {

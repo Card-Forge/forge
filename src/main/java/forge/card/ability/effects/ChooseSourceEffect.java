@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.google.common.base.Predicate;
 
 import forge.Card;
@@ -122,9 +124,8 @@ public class ChooseSourceEffect extends SpellAbilityEffect {
             return;
         }
 
-        final String numericAmount = sa.hasParam("Amount") ? sa.getParam("Amount") : "1";
-        final int validAmount = !numericAmount.matches("[0-9][0-9]?")
-                ? CardFactoryUtil.xCount(host, host.getSVar(sa.getParam("Amount"))) : Integer.parseInt(numericAmount);
+        final String numericAmount = sa.getParamOrDefault("Amount", "1");
+        final int validAmount = StringUtils.isNumeric(numericAmount) ? Integer.parseInt(numericAmount) : CardFactoryUtil.xCount(host, host.getSVar(numericAmount));
 
         for (final Player p : tgtPlayers) {
             if ((tgt == null) || p.canBeTargetedBy(sa)) {

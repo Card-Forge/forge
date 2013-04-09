@@ -348,7 +348,7 @@ public class ManaPool {
         }
 
         int numColorless = 0;
-        if (manaStr.matches("[0-9][0-9]?")) {
+        if (StringUtils.isNumeric(manaStr)) {
             numColorless = Integer.parseInt(manaStr);
         }
         if (numColorless >= totalMana) {
