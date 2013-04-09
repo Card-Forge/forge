@@ -2,11 +2,10 @@ Name:Undying Flames
 ManaCost:4 R R
 Types:Sorcery
 K:Epic
-A:SP$ Pump | Cost$ 4 R R | SubAbility$ FlamingExile | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | StackDescription$ None | SpellDescription$ Exile cards from the top of your library until you exile a nonland card. Undying Flames deals damage to target creature or player equal to that card's converted mana cost.
-SVar:FlamingExile:DB$ DigUntil | Valid$ Card.nonLand | ValidDescription$ nonland | FoundDestination$ Exile | RevealedDestination$ Exile | RememberFound$ True | SubAbility$ UndyingDamage
-SVar:UndyingDamage:DB$ DealDamage | Defined$ Targeted | NumDmg$ X | References$ X | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
-SVar:X:Remembered$CardManaCost
+A:SP$ DigUntil | Cost$ 4 R R | Defined$ You | Valid$ Card.nonLand | ValidDescription$ nonland | FoundDestination$ Exile | RevealedDestination$ Exile | RememberFound$ True | SubAbility$ UndyingDamage | SpellDescription$ Exile cards from the top of your library until you exile a nonland card. Undying Flames deals damage to target creature or player equal to that card's converted mana cost.
+SVar:UndyingDamage:DB$ DealDamage | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ FlameX | References$ FlameX | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:FlameX:Remembered$CardManaCost
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/undying_flames.jpg
 Oracle:Exile cards from the top of your library until you exile a nonland card. Undying Flames deals damage to target creature or player equal to that card's converted mana cost.\nEpic (For the rest of the game, you can't cast spells. At the beginning of each of your upkeeps, copy this spell except for its epic ability. You may choose a new target for the copy.)
