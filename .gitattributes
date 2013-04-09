@@ -1545,6 +1545,7 @@ res/cardsfolder/c/cateran_summons.txt svneol=native#text/plain
 res/cardsfolder/c/caterwauling_boggart.txt -text
 res/cardsfolder/c/cathars_crusade.txt -text
 res/cardsfolder/c/cathartic_adept.txt svneol=native#text/plain
+res/cardsfolder/c/cathedral_membrane.txt -text
 res/cardsfolder/c/cathedral_of_war.txt -text
 res/cardsfolder/c/cathedral_sanctifier.txt -text
 res/cardsfolder/c/cathodion.txt svneol=native#text/plain
