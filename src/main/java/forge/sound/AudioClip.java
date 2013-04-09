@@ -43,8 +43,6 @@ public class AudioClip implements IAudioClip {
     private Clip clip;
     private final int SOUND_SYSTEM_DELAY = 30;
 
-    private static final String PathToSound = "res/sound";
-
     public static boolean fileExists(String fileName) {
         File fSound = new File(PathToSound, fileName);
         return fSound.exists();

@@ -22,6 +22,10 @@ public class SoundSystem {
 
     private final EventVisualizer visualizer = new EventVisualizer();
 
+    private boolean isUsingAltSystem() {
+	return Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_ALT_SOUND_SYSTEM);
+    }
+
     /**
      * Fetch a resource based on the sound effect type from the SoundEffectType enumeration.
      * 
@@ -67,38 +71,54 @@ public class SoundSystem {
      * Play the sound associated with the Sounds enumeration element.
      */
     public void play(SoundEffectType type) {
-        fetchResource(type).play();
+	if (isUsingAltSystem()) {
+	    new AsyncSoundPlayer(String.format("%s/%s", IAudioClip.PathToSound, type.getResourceFileName()), false).start();
+	} else {
+	   fetchResource(type).play();
+	}
     }
 
     /**
      * Play the sound associated with a specific resource file.
      */
     public void play(String resourceFileName) {
-        fetchResource(resourceFileName).play();
+	if (isUsingAltSystem()) {
+	    new AsyncSoundPlayer(String.format("%s/%s", IAudioClip.PathToSound, resourceFileName), false).start();
+	} else {
+	    fetchResource(resourceFileName).play();
+	}
     }
 
     /**
-     * Play the sound associated with the resource specified by the file name 
-     * (synchronized with other sounds of the same kind, so only one can play
-     * at the same time).
+     * Play the sound associated with the resource specified by the file name
+     * (synchronized with other sounds of the same kind, so only one can play at
+     * the same time).
      */
     public void playSync(String resourceFileName) {
-        IAudioClip snd = fetchResource(resourceFileName);
-        if (snd.isDone()) {
-            snd.play();
-        }
+	if (isUsingAltSystem()) {
+	    new AsyncSoundPlayer(String.format("%s/%s", IAudioClip.PathToSound, resourceFileName), false).start();
+	} else {
+	    IAudioClip snd = fetchResource(resourceFileName);
+	    if (snd.isDone()) {
+		snd.play();
+	    }
+	}
     }
 
     /**
      * Play the sound associated with the Sounds enumeration element
-     * (synchronized with other sounds of the same kind, so only one can play
-     * at the same time).
+     * (synchronized with other sounds of the same kind, so only one can play at
+     * the same time).
      */
     public void playSync(SoundEffectType type) {
-        IAudioClip snd = fetchResource(type);
-        if (snd.isDone()) {
-            snd.play();
-        }
+	if (isUsingAltSystem()) {
+	    new AsyncSoundPlayer(String.format("%s/%s", IAudioClip.PathToSound, type.getResourceFileName()), false).start();
+	} else {
+	    IAudioClip snd = fetchResource(type);
+	    if (snd.isDone()) {
+		snd.play();
+	    }
+	}
     }
 
     /**

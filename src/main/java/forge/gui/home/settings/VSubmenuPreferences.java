@@ -96,6 +96,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final JCheckBox cbRandomFoil = new OptionsCheckBox("Random Foil");
     private final JCheckBox cbRandomizeArt = new OptionsCheckBox("Randomize Card Art");
     private final JCheckBox cbEnableSounds = new OptionsCheckBox("Enable Sounds");
+    private final JCheckBox cbAltSoundSystem = new OptionsCheckBox("Use Alternative Sound System");
 
     private final Map<FPref, KeyboardShortcutField> shortcutFields = new HashMap<FPref, KeyboardShortcutField>();
 
@@ -178,6 +179,9 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         pnlPrefs.add(cbEnableSounds, regularConstraints);
         pnlPrefs.add(new NoteLabel("Enable sound effects during the game."), regularConstraints);
 
+	pnlPrefs.add(cbAltSoundSystem, regularConstraints);
+	pnlPrefs.add(new NoteLabel("Use an alternative sound system (in case your have issues with sound on Linux)"), regularConstraints);
+	
         // Keyboard shortcuts
         final JLabel lblShortcuts = new SectionLabel("Keyboard Shortcuts");
         pnlPrefs.add(lblShortcuts, sectionConstraints);
@@ -462,6 +466,11 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     /** @return {@link javax.swing.JCheckBox} */
     public JCheckBox getCbEnableSounds() {
         return cbEnableSounds;
+    }
+
+    /** @return {@link javax.swing.JCheckBox} */
+    public JCheckBox getCbAltSoundSystem() {
+	return cbAltSoundSystem;
     }
 
     /** @return {@link forge.gui.toolbox.FLabel} */

@@ -186,6 +186,14 @@ public enum CSubmenuPreferences implements ICDoc {
             }
         });
 
+	view.getCbAltSoundSystem().addItemListener(new ItemListener() {
+	    @Override
+	    public void itemStateChanged(final ItemEvent arg0) {
+		prefs.setPref(FPref.UI_ALT_SOUND_SYSTEM, view.getCbAltSoundSystem().isSelected());
+		prefs.save();
+	    }
+	});
+
         view.getBtnReset().setCommand(new Command() {
             @Override
             public void execute() {
@@ -222,6 +230,7 @@ public enum CSubmenuPreferences implements ICDoc {
         view.getCbScaleLarger().setSelected(prefs.getPrefBoolean(FPref.UI_SCALE_LARGER));
         view.getCbTextMana().setSelected(prefs.getPrefBoolean(FPref.UI_CARD_OVERLAY));
         view.getCbEnableSounds().setSelected(prefs.getPrefBoolean(FPref.UI_ENABLE_SOUNDS));
+	view.getCbAltSoundSystem().setSelected(prefs.getPrefBoolean(FPref.UI_ALT_SOUND_SYSTEM));
         view.reloadShortcuts();
 
         SwingUtilities.invokeLater(new Runnable() {
