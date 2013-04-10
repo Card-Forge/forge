@@ -1,6 +1,5 @@
 package forge.gui.deckeditor.views;
 
-import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 
 import net.miginfocom.swing.MigLayout;
@@ -11,7 +10,6 @@ import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.IVDoc;
 import forge.gui.toolbox.DeckLister;
-import forge.gui.toolbox.FLabel;
 
 /** 
  * Assembles Swing components of all deck viewer in deck editor.

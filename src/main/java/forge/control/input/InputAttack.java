@@ -30,7 +30,6 @@ import forge.game.player.Player;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.gui.framework.SDisplayUtil;
-import forge.gui.match.CMatchUI;
 import forge.gui.match.views.VMessage;
 import forge.view.ButtonUtil;
 
