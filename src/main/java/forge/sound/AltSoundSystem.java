@@ -22,32 +22,34 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 class AsyncSoundRegistry {
     static Map<String, Integer> soundsPlayed = new HashMap<String, Integer>();
 
-    public static void registerSound(String soundName) {
+    public synchronized static void registerSound(String soundName) {
 	if (soundsPlayed.containsKey(soundName)) {
 	    soundsPlayed.put(soundName, soundsPlayed.get(soundName) + 1);
 	} else {
 	    soundsPlayed.put(soundName, 1);
 	}
+	//System.out.println("Register: Count for " + soundName + " = " + soundsPlayed.get(soundName));
     }
 
-    public static void unregisterSound(String soundName) {
-	if (soundsPlayed.containsKey(soundName) && soundsPlayed.get(soundName) != 1) {
+    public synchronized static void unregisterSound(String soundName) {
+	if (soundsPlayed.containsKey(soundName) && soundsPlayed.get(soundName) > 1) {
 	    soundsPlayed.put(soundName, soundsPlayed.get(soundName) - 1);
 	} else {
 	    soundsPlayed.remove(soundName);
 	}
+	//System.out.println("Unregister: Count for " + soundName + " = " + soundsPlayed.get(soundName));
     }
 
-    public static boolean isRegistered(String soundName) {
+    public synchronized static boolean isRegistered(String soundName) {
 	return soundsPlayed.containsKey(soundName);
     }
 
-    public static int getNumIterations(String soundName) {
+    public synchronized static int getNumIterations(String soundName) {
 	return soundsPlayed.containsKey(soundName) ? soundsPlayed.get(soundName) : 0;
     }
 }
 
-public class AsyncSoundPlayer extends Thread { 
+public class AltSoundSystem extends Thread { 
  
     private String filename;
     private boolean isSync;
@@ -55,13 +57,13 @@ public class AsyncSoundPlayer extends Thread {
     private final int EXTERNAL_BUFFER_SIZE = 524288;
     private final int MAX_SOUND_ITERATIONS = 5;
  
-    public AsyncSoundPlayer(String wavfile, boolean synced) { 
+    public AltSoundSystem(String wavfile, boolean synced) { 
         filename = wavfile;
 	isSync = synced;
     } 
  
     public void run() { 
-	if (isSync && AsyncSoundRegistry.isRegistered(filename)) {
+	if (isSync && AsyncSoundRegistry.getNumIterations(filename) >= 1) {
 	    return;
 	}
 	if (AsyncSoundRegistry.getNumIterations(filename) >= MAX_SOUND_ITERATIONS) {

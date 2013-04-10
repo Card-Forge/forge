@@ -72,7 +72,7 @@ public class SoundSystem {
      */
     public void play(SoundEffectType type) {
 	if (isUsingAltSystem()) {
-	    new AsyncSoundPlayer(String.format("%s/%s", IAudioClip.PathToSound, type.getResourceFileName()), false).start();
+	    new AltSoundSystem(String.format("%s/%s", IAudioClip.PathToSound, type.getResourceFileName()), false).start();
 	} else {
 	   fetchResource(type).play();
 	}
@@ -83,7 +83,7 @@ public class SoundSystem {
      */
     public void play(String resourceFileName) {
 	if (isUsingAltSystem()) {
-	    new AsyncSoundPlayer(String.format("%s/%s", IAudioClip.PathToSound, resourceFileName), false).start();
+	    new AltSoundSystem(String.format("%s/%s", IAudioClip.PathToSound, resourceFileName), false).start();
 	} else {
 	    fetchResource(resourceFileName).play();
 	}
@@ -96,7 +96,7 @@ public class SoundSystem {
      */
     public void playSync(String resourceFileName) {
 	if (isUsingAltSystem()) {
-	    new AsyncSoundPlayer(String.format("%s/%s", IAudioClip.PathToSound, resourceFileName), false).start();
+	    new AltSoundSystem(String.format("%s/%s", IAudioClip.PathToSound, resourceFileName), true).start();
 	} else {
 	    IAudioClip snd = fetchResource(resourceFileName);
 	    if (snd.isDone()) {
@@ -112,7 +112,7 @@ public class SoundSystem {
      */
     public void playSync(SoundEffectType type) {
 	if (isUsingAltSystem()) {
-	    new AsyncSoundPlayer(String.format("%s/%s", IAudioClip.PathToSound, type.getResourceFileName()), false).start();
+	    new AltSoundSystem(String.format("%s/%s", IAudioClip.PathToSound, type.getResourceFileName()), true).start();
 	} else {
 	    IAudioClip snd = fetchResource(type);
 	    if (snd.isDone()) {

@@ -14324,7 +14324,7 @@ src/main/java/forge/quest/io/QuestDataIO.java svneol=native#text/plain
 src/main/java/forge/quest/io/ReadPriceList.java svneol=native#text/plain
 src/main/java/forge/quest/io/package-info.java svneol=native#text/plain
 src/main/java/forge/quest/package-info.java svneol=native#text/plain
-src/main/java/forge/sound/AsyncSoundPlayer.java -text
+src/main/java/forge/sound/AltSoundSystem.java -text
 src/main/java/forge/sound/AudioClip.java -text
 src/main/java/forge/sound/EventVisualizer.java -text
 src/main/java/forge/sound/IAudioClip.java -text
