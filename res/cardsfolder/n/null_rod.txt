@@ -2,6 +2,7 @@ Name:Null Rod
 ManaCost:2
 Types:Artifact
 S:Mode$ Continuous | Affected$ Artifact | AddHiddenKeyword$ CARDNAME's activated abilities can't be activated. | Description$ Activated abilities of artifacts can't be activated.
+SVar:NonStackingEffect:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/null_rod.jpg
 Oracle:Activated abilities of artifacts can't be activated.

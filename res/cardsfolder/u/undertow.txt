@@ -2,6 +2,7 @@ Name:Undertow
 ManaCost:2 U
 Types:Enchantment
 S:Mode$ Continuous | Affected$ Creature.withIslandwalk | AddHiddenKeyword$ May be blocked as though it doesn't have Islandwalk. | Description$ Creatures with islandwalk can be blocked as though they didn't have islandwalk.
+SVar:NonStackingEffect:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/undertow.jpg
 Oracle:Creatures with islandwalk can be blocked as though they didn't have islandwalk.

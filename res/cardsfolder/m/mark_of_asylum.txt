@@ -2,6 +2,7 @@ Name:Mark of Asylum
 ManaCost:1 W
 Types:Enchantment
 S:Mode$ PreventDamage | Target$ Creature.YouCtrl | CombatDamage$ False | Description$ Prevent all noncombat damage that would be dealt to creatures you control.
+SVar:NonStackingEffect:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mark_of_asylum.jpg
 Oracle:Prevent all noncombat damage that would be dealt to creatures you control.
 SetInfo:CFX Rare

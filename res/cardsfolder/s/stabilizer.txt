@@ -2,6 +2,7 @@ Name:Stabilizer
 ManaCost:2
 Types:Artifact
 S:Mode$ Continuous | GlobalRule$ Players can't cycle cards. | Description$ Players can't cycle cards.
+SVar:NonStackingEffect:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stabilizer.jpg
 Oracle:Players can't cycle cards.

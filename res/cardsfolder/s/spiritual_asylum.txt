@@ -4,6 +4,7 @@ Types:Enchantment
 S:Mode$ Continuous | Affected$ Creature.YouCtrl,Land.YouCtrl | AddKeyword$ Shroud | Description$ Creatures and lands you control have shroud.
 T:Mode$ Attacks | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigSacrifice | TriggerDescription$ When a creature you control attacks, sacrifice CARDNAME.
 SVar:TrigSacrifice:AB$Sacrifice | Cost$ 0
+SVar:NonStackingEffect:True
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spiritual_asylum.jpg
 Oracle:Creatures and lands you control have shroud. (They can't be the targets of spells or abilities.)\nWhen a creature you control attacks, sacrifice Spiritual Asylum.

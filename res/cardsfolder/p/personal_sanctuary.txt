@@ -2,6 +2,7 @@ Name:Personal Sanctuary
 ManaCost:2 W
 Types:Enchantment
 S:Mode$ PreventDamage | Target$ You | Condition$ PlayerTurn | Description$ During your turn, prevent all damage that would be dealt to you.
+SVar:NonStackingEffect:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/personal_sanctuary.jpg
 Oracle:During your turn, prevent all damage that would be dealt to you.
 SetInfo:M12 Rare

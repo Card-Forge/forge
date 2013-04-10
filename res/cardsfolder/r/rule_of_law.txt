@@ -5,6 +5,7 @@ S:Mode$ CantBeCast | ValidCard$ Card | Caster$ You | CheckSVar$ X | References$ 
 S:Mode$ CantBeCast | ValidCard$ Card | Caster$ Opponent | CheckSVar$ Y | References$ Y
 SVar:X:Count$ThisTurnCast_Card.YouCtrl
 SVar:Y:Count$ThisTurnCast_Card.YouDontCtrl
+SVar:NonStackingEffect:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rule_of_law.jpg
 Oracle:Each player can't cast more than one spell each turn.

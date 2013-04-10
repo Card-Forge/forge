@@ -2,6 +2,7 @@ Name:Smoke
 ManaCost:R R
 Types:Enchantment
 Text:Players can't untap more than one creature during their untap steps.
+SVar:NonStackingEffect:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/smoke.jpg
 Oracle:Players can't untap more than one creature during their untap steps.

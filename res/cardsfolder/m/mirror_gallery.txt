@@ -2,6 +2,7 @@ Name:Mirror Gallery
 ManaCost:5
 Types:Artifact
 S:Mode$ Continuous | GlobalRule$ The legend rule doesn't apply. | Description$ The "legend rule" doesn't apply.
+SVar:NonStackingEffect:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mirror_gallery.jpg
 Oracle:The "legend rule" doesn't apply.

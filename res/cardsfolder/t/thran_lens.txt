@@ -2,6 +2,7 @@ Name:Thran Lens
 ManaCost:2
 Types:Artifact
 S:Mode$ Continuous | Affected$ Permanent | SetColor$ Colorless | Description$ All permanents are colorless.
+SVar:NonStackingEffect:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thran_lens.jpg
 Oracle:All permanents are colorless.

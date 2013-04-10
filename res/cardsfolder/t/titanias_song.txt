@@ -6,6 +6,7 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.S
 SVar:TrigEffect:AB$ Effect | Cost$ 0 | Name$ Titania's Song Effect | StaticAbilities$ KWAnimateAll | SVars$ AffectedX | References$ AffectedX
 SVar:KWAnimateAll:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected$ Artifact.nonCreature | SetPower$ AffectedX | SetToughness$ AffectedX | AddType$ Creature | RemoveAllAbilities$ True | Description$ Each noncreature artifact loses all abilities and is an artifact creature with power and toughness each equal to its converted mana cost.
 SVar:AffectedX:Count$CardManaCost
+SVar:NonStackingEffect:True
 SVar:PlayMain1:TRUE
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/titanias_song.jpg
