@@ -264,4 +264,11 @@ public class SpellAbilityStackInstance {
             this.stackDescription = this.ability.getStackDescription();
         }
     }
+
+    public boolean compareToSpellAbility(SpellAbility sa) {
+        // Compare my target choices to the SA passed in
+        // TODO? Compare other data points in the SI to the passed SpellAbility for confirmation
+        TargetChoices choices = sa.getTarget() != null ? sa.getTarget().getTargetChoices() : null;
+        return (sa.equals(this.ability) && (choices == null || choices.equals(this.tc)));
+    }
 }
