@@ -2,6 +2,7 @@ Name:Field of Dreams
 ManaCost:U
 Types:World Enchantment
 K:Players play with the top card of their libraries revealed.
+SVar:NonStackingEffect:True
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/field_of_dreams.jpg
 Oracle:Players play with the top card of their libraries revealed.

@@ -2,6 +2,7 @@ Name:Life and Limb
 ManaCost:3 G
 Types:Enchantment
 S:Mode$ Continuous | Affected$ Forest,Saproling | SetPower$ 1 | SetToughness$ 1 | AddType$ Land & Creature & Forest & Saproling | SetColor$ Green | Description$ All Forests and all Saprolings are 1/1 green Saproling creatures and Forest lands in addition to their other types.
+SVar:NonStackingEffect:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/life_and_limb.jpg
 Oracle:All Forests and all Saprolings are 1/1 green Saproling creatures and Forest lands in addition to their other types.

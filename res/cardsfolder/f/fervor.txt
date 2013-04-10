@@ -3,6 +3,7 @@ ManaCost:2 R
 Types:Enchantment
 S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddKeyword$ Haste | Description$ Creatures you control have haste.
 SVar:BuffedBy:Creature
+SVar:NonStackingEffect:True
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fervor.jpg
 Oracle:Creatures you control have haste.

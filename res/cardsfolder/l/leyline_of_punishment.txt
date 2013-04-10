@@ -4,6 +4,7 @@ Types:Enchantment
 Text:If Leyline of Punishment is in your opening hand, you may begin the game with it on the battlefield.
 S:Mode$ Continuous | Affected$ Player | AddKeyword$ You can't gain life. | Description$ Players can't gain life.
 S:Mode$ Continuous | GlobalRule$ Damage can't be prevented. | Description$ Damage can't be prevented.
+SVar:NonStackingEffect:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/leyline_of_punishment.jpg
 Oracle:If Leyline of Punishment is in your opening hand, you may begin the game with it on the battlefield.\nPlayers can't gain life.\nDamage can't be prevented.

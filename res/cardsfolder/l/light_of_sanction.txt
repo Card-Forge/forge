@@ -2,6 +2,7 @@ Name:Light of Sanction
 ManaCost:1 W W
 Types:Enchantment
 S:Mode$ PreventDamage | Target$ Creature.YouCtrl | Source$ Card.YouCtrl | Amount$ All | Description$ Prevent all damage that would be dealt to creatures you control by sources you control.
+SVar:NonStackingEffect:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/light_of_sanction.jpg
 Oracle:Prevent all damage that would be dealt to creatures you control by sources you control.

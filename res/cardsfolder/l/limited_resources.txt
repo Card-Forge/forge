@@ -8,6 +8,7 @@ SVar:SacRest:DB$ SacrificeAll | ValidCards$ Land.RememberedPlayerCtrl+IsNotRemem
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 S:Mode$ CantPlayLand | CheckSVar$ X | SVarCompare$ GE10 | Description$ Players can't play lands as long as ten or more lands are on the battlefield.
 SVar:X:Count$Valid Land
+SVar:NonStackingEffect:True
 SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/limited_resources.jpg

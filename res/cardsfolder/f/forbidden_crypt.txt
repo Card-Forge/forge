@@ -7,6 +7,7 @@ SVar:ForbiddenPractice:DB$ ChangeZone | Hidden$ True | Mandatory$ True | ChangeT
 SVar:CardsInGrave:Count$InYourYard
 R:Event$ Moved | ActiveZones$ Battlefield | Destination$ Graveyard | ValidCard$ Card.nonToken+YouOwn | ReplaceWith$ CryptExile | Description$ If a card would be put into your graveyard from anywhere, exile that card instead.
 SVar:CryptExile:AB$ ChangeZone | Cost$ 0 | Hidden$ True | Origin$ All | Destination$ Exile | Defined$ ReplacedCard
+SVar:NonStackingEffect:True
 SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/forbidden_crypt.jpg
