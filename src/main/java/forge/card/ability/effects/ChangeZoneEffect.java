@@ -830,7 +830,9 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     }
 
                     if (sa.hasParam("Attacking")) {
-                        Singletons.getModel().getGame().getCombat().addAttacker(c);
+                        final List<GameEntity> e = c.getController().getGame().getCombat().getDefenders();
+                        final GameEntity defender = e.size() == 1 ? e.get(0) : GuiChoose.one("Declare " + c, e);
+                        Singletons.getModel().getGame().getCombat().addAttacker(c, defender);
                     }
 
                     movedCard = Singletons.getModel().getGame().getAction().moveTo(c.getController().getZone(destination), c);
