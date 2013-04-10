@@ -1064,6 +1064,12 @@ public class CardFactoryUtil {
                 return CardFactoryUtil.doXMath(players.get(0).getNumDrawnThisTurn(), m, source);
             }
         }
+        
+        if (sq[0].contains("CardsDiscardedThisTurn")) {
+            if (players.size() > 0) {
+                return CardFactoryUtil.doXMath(players.get(0).getNumDiscardedThisTurn(), m, source);
+            }
+        }
 
         if (sq[0].contains("AttackersDeclared")) {
             if (players.size() > 0) {

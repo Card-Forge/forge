@@ -127,7 +127,10 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
     /** The num drawn this turn. */
     private int numDrawnThisTurn = 0;
     private int numDrawnThisDrawStep = 0;
-
+    
+    /** The num discarded this turn. */
+    private int numDiscardedThisTurn = 0;
+    
     /** The slowtrip list. */
     private List<Card> slowtripList = new ArrayList<Card>();
 
@@ -1607,11 +1610,13 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
             game.getAction().moveToLibrary(c, 0);
             // Play the Discard sound
             game.getEvents().post(new CardDiscardedEvent());
+            this.numDiscardedThisTurn++;
         } else {
             game.getAction().moveToGraveyard(c);
 
             // Play the Discard sound
             game.getEvents().post(new CardDiscardedEvent());
+            this.numDiscardedThisTurn++;
         }
 
         // Run triggers
@@ -1628,6 +1633,27 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
 
     } // end doDiscard
 
+    /**
+     * <p>
+     * Getter for the field <code>numDiscardedThisTurn</code>.
+     * </p>
+     * 
+     * @return a int.
+     */
+    public final int getNumDiscardedThisTurn() {
+        return this.numDiscardedThisTurn;
+    }
+    
+    /**
+     * <p>
+     * Getter for the field <code>numDrawnThisTurn</code>.
+     * </p>
+     * 
+     * @return a int.
+     */
+    public final void resetNumDiscardedThisTurn() {
+        this.numDiscardedThisTurn = 0;
+    }
     /**
      * <p>
      * discardUnless.
@@ -2767,6 +2793,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
         }
         resetPreventNextDamage();
         resetNumDrawnThisTurn();
+        resetNumDiscardedThisTurn();
         setAttackedWithCreatureThisTurn(false);
         setNumLandsPlayed(0);
         clearAssignedDamage();
