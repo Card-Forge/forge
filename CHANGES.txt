@@ -63,6 +63,10 @@ We have created a branch for Dragon's Maze spoilers. These new cards are not inc
 On several occasions people have noticed that the Forge deck editor and/or quest mode card shop would not open or display. We have also received reports that some of the tabs/panels in the deck editor are missing. There has also been reports that Forge will crash while creating/populating display components during start up or crash when a match is started. One or both of your layout xml files may be corrupted in some fashion. Try deleting the file(s) named "editor.xml" and/or "match.xml" that are now located in your userDir/preferences/ directory. This should force Forge to then use the default layout xml files instead.
 
 
+- Alternate sound system -
+Implemented an alternative sound system for people who have issues with sound gradually or instantly disappearing on certain Linux systems. Can be switched on/off in the preferences without needing a restart. Uses the standard Java Sound API so it doesn't require an external dependency. It's non-caching and, as such, less efficient than the regular sound system, so only use it in case you have issues with the default system, otherwise leave the option unchecked.
+
+
 ---------
 New Cards
 ---------
@@ -176,6 +180,10 @@ Render Silent
 Sin Collector
 Vorel of the Hull Clade
 Master of Cruelties
+Advent of the Wurm
+Deputy of Acquittals
+Toil // Trouble
+Renounce the Guilds
 
 
 ------------
