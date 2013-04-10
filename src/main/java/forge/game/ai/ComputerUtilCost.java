@@ -336,6 +336,8 @@ public class ComputerUtilCost {
      * @return a boolean.
      */
     public static boolean canPayCost(final SpellAbility sa, final Player player) {
+        sa.setActivatingPlayer(player); // complaints on NPE had came before this line was added.
+
         // Check for stuff like Nether Void
         int extraManaNeeded = 0;
         if (sa instanceof Spell) {
