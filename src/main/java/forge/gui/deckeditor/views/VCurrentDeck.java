@@ -58,7 +58,7 @@ public enum VCurrentDeck implements IVDoc<CCurrentDeck>, ITableContainer {
             .icon(FSkin.getIcon(FSkin.InterfaceIcons.ICO_SAVEAS))
             .text(" ").hoverable(true).build();
 
-    private final JLabel btnImport = new FLabel.Builder()
+    private final JLabel btnLoad = new FLabel.Builder()
             .fontSize(14)
             .tooltip("Load")
             .iconInBackground(true)
@@ -106,6 +106,12 @@ public enum VCurrentDeck implements IVDoc<CCurrentDeck>, ITableContainer {
             .icon(FSkin.getIcon(FSkin.InterfaceIcons.ICO_EDIT))
             .iconScaleAuto(false).hoverable().build();
 
+    private final FLabel btnImport = new FLabel.Builder()
+            .fontSize(14)
+            .text("Import").tooltip("Attempt to import a deck from a non-Forge format")
+            .opaque(true).hoverable(true).build();
+
+    
     private final JTextField txfTitle = new FTextField.Builder().text("[New Deck]").build();
 
     private final JPanel pnlRemove = new JPanel();
@@ -134,9 +140,10 @@ public enum VCurrentDeck implements IVDoc<CCurrentDeck>, ITableContainer {
         pnlHeader.add(btnSave, "w 26px!, h 26px!, gap 0 5px 0 0");
         pnlHeader.add(btnNew, "w 26px!, h 26px!, gap 0 5px 0 0");
 
-        pnlHeader.add(btnImport, "w 26px!, h 26px!, gap 0 5px 0 0");
+        pnlHeader.add(btnLoad, "w 26px!, h 26px!, gap 0 5px 0 0");
         pnlHeader.add(btnExport, "w 26px!, h 26px!, gap 0 5px 0 0");
-        pnlHeader.add(btnPrintProxies, "w 26px!, h 26px!, gap 0 20px 0 0");
+        pnlHeader.add(btnPrintProxies, "w 26px!, h 26px!, gap 0 5px 0 0");
+        pnlHeader.add(btnImport, "w 50px!, h 26px!, gap 0 0 20px 0");
 
         pnlRemove.setOpaque(false);
         pnlRemove.setLayout(new MigLayout("insets 0, gap 0, ax center"));
@@ -273,7 +280,7 @@ public enum VCurrentDeck implements IVDoc<CCurrentDeck>, ITableContainer {
 
     /** @return {@link javax.swing.JLabel} */
     public JLabel getBtnOpen() {
-        return btnImport;
+        return btnLoad;
     }
 
     /** @return {@link javax.swing.JLabel} */
@@ -338,5 +345,14 @@ public enum VCurrentDeck implements IVDoc<CCurrentDeck>, ITableContainer {
         label.setMinimumSize(labelSize);
         
         return label;
+    }
+
+    /**
+     * TODO: Write javadoc for this method.
+     * @return
+     */
+    public FLabel getBtnImport() {
+        // TODO Auto-generated method stub
+        return (FLabel) btnImport;
     }
 }

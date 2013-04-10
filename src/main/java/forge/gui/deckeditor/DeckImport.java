@@ -63,7 +63,7 @@ public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> ex
 
     private final JTextArea txtInput = new JTextArea();
     private static final String STYLESHEET = "<style>"
-            + "body, h1, h2, h3, h4, h5, h6, table, tr, td, p {margin: 1px; padding: 0; font-weight: "
+            + "body, h1, h2, h3, h4, h5, h6, table, tr, td, p {margin: 3px 1px; padding: 0; font-weight: "
             + "normal; font-style: normal; text-decoration: none; font-family: Arial; font-size: 10px;} "
             +
             // "h1 {border-bottom: solid 1px black; color: blue; font-size: 12px; margin: 3px 0 9px 0; } "
@@ -79,6 +79,10 @@ public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> ex
             + "<li class='knowncard'>Recognized cards will be shown in green. These cards will be auto-imported into a new deck<BR></li>"
             + "<li class='unknowncard'>Lines which seem to be cards but are either misspelled or unsupported by Forge, are shown in dark-red<BR></li>"
             + "<li class='comment'>Lines that appear unsignificant will be shown in gray<BR><BR></li>" + "</ul>"
+            + "<div class='section'>Choosing source</div>"
+            + "<p>In most cases when you paste from clipboard a carefully selected area of a webpage, it works perfectly.</p>"
+            + "<p>Sometimes to filter out unneeded data you may have to export deck in MTGO format, and paste here downloaded file contents.</p>"
+            + "<p>Sideboard recognition is supported. Make sure that the sideboard cards are listed after a line that contains the word 'Sideboard'</p>"
             + "</html>";
 
     private final JEditorPane htmlOutput = new JEditorPane("text/html", DeckImport.HTML_WELCOME_TEXT);
@@ -111,7 +115,7 @@ public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> ex
         this.setSize(wWidth, wHeight);
         GuiUtils.centerFrame(this);
         this.setResizable(false);
-        this.setTitle("Deck Import (wip)");
+        this.setTitle("Deck Importer");
 
         final Font fButtons = new java.awt.Font("Dialog", 0, 13);
         this.cmdAccept.setFont(fButtons);
