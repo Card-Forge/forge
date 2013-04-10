@@ -147,12 +147,13 @@ public class MatchController {
                 continue;
             
             String currentAiProfile = Singletons.getModel().getPreferences().getPref(FPref.UI_CURRENT_AI_PROFILE);
+	    String lastProfileChosen = this.getPlayedGames().isEmpty() ? currentAiProfile : p.getLobbyPlayer().getAiProfile();
             
             // TODO: implement specific AI profiles for quest mode.
             boolean wantRandomProfile = currentAiProfile.equals(AiProfileUtil.AI_PROFILE_RANDOM_DUEL) 
                     || (this.getPlayedGames().isEmpty() && currentAiProfile.equals(AiProfileUtil.AI_PROFILE_RANDOM_MATCH)); 
             
-            String profileToSet = wantRandomProfile ? AiProfileUtil.getRandomProfile() : currentAiProfile;
+            String profileToSet = wantRandomProfile ? AiProfileUtil.getRandomProfile() : lastProfileChosen;
             
             p.getLobbyPlayer().setAiProfile(profileToSet);
             System.out.println(String.format("AI profile %s was chosen for the lobby player %s.", p.getLobbyPlayer().getAiProfile(), p.getLobbyPlayer().getName()));
