@@ -1646,7 +1646,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
     
     /**
      * <p>
-     * Getter for the field <code>numDrawnThisTurn</code>.
+     * Getter for the field <code>numDiscardedThisTurn</code>.
      * </p>
      * 
      * @return a int.

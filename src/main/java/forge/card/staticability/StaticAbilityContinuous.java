@@ -401,7 +401,13 @@ public class StaticAbilityContinuous {
 
             // add abilities
             if (addAbilities != null) {
-                for (final String abilty : addAbilities) {
+                for (String abilty : addAbilities) {
+                    if (abilty.contains("CardManaCost")) {
+                        abilty = abilty.replace("CardManaCost", affectedCard.getManaCost().toString());
+                    } else if (abilty.contains("ConvertedManaCost")) {
+                        final String costcmc = Integer.toString(affectedCard.getCMC());
+                        abilty = abilty.replace("ConvertedManaCost", costcmc);
+                    }
                     if (abilty.startsWith("AB")) { // grant the ability
                         final SpellAbility sa = AbilityFactory.getAbility(abilty, affectedCard);
                         sa.setType("Temporary");
