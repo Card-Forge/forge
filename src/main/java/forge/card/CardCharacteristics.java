@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import com.google.common.collect.Lists;
 
@@ -37,7 +38,7 @@ import forge.card.trigger.Trigger;
  */
 public class CardCharacteristics {
     private String name = "";
-    private ArrayList<String> type = new ArrayList<String>();
+    private List<String> type = new CopyOnWriteArrayList<String>();
     private ManaCost manaCost = ManaCost.NO_COST;
     private ArrayList<CardColor> cardColor = new ArrayList<CardColor>();
     private int baseAttack = 0;
@@ -80,7 +81,7 @@ public class CardCharacteristics {
      * 
      * @return the type
      */
-    public final ArrayList<String> getType() {
+    public final List<String> getType() {
         return this.type;
     }
 
