@@ -385,7 +385,7 @@ public class ComputerUtilCost {
     }
 
     public static boolean willPayUnlessCost(SpellAbility sa, Player payer, SpellAbility ability, boolean alreadyPaid, List<Player> payers) {
-        Card source = sa.getSourceCard();
+        final Card source = sa.getSourceCard();
         boolean payForOwnOnly = "OnlyOwn".equals(sa.getParam("UnlessAI"));
         boolean payOwner = sa.hasParam("UnlessAI") ? sa.getParam("UnlessAI").startsWith("Defined") : false;
         boolean payNever = "Never".equals(sa.getParam("UnlessAI"));
@@ -410,6 +410,11 @@ public class ComputerUtilCost {
                 }
             }
             return false;
+        } else if ("Paralyze".equals(sa.getParam("UnlessAI"))) {
+            final Card c = source.getEnchantingCard();
+            if (c == null || c.isUntapped()) {
+                return false;
+            }
         }
     
         // AI will only pay when it's not already payed and only opponents abilities
