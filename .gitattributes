@@ -7648,6 +7648,7 @@ res/cardsfolder/p/parallax_wave.txt svneol=native#text/plain
 res/cardsfolder/p/parallectric_feedback.txt -text
 res/cardsfolder/p/parallel_evolution.txt svneol=native#text/plain
 res/cardsfolder/p/parallel_lives.txt -text
+res/cardsfolder/p/paralyze.txt -text
 res/cardsfolder/p/paralyzing_grasp.txt svneol=native#text/plain
 res/cardsfolder/p/paranoid_delusions.txt -text
 res/cardsfolder/p/parapet.txt -text
@@ -8632,6 +8633,7 @@ res/cardsfolder/r/reverent_mantra.txt -text
 res/cardsfolder/r/reverent_silence.txt -text
 res/cardsfolder/r/reverse_damage.txt -text
 res/cardsfolder/r/reverse_polarity.txt -text
+res/cardsfolder/r/reverse_the_sands.txt -text
 res/cardsfolder/r/revive.txt svneol=native#text/plain
 res/cardsfolder/r/revive_the_fallen.txt svneol=native#text/plain
 res/cardsfolder/r/reviving_dose.txt svneol=native#text/plain

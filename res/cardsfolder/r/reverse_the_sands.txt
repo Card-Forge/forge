@@ -1,0 +1,9 @@
+Name:Reverse the Sands
+ManaCost:6 W W
+Types:Sorcery
+A:SP$ SetLife | Cost$ 0 | ValidTgts$ Player | TargetMin$ 0 | TargetMax$ Maxplayer | Redistribute$ True | SpellDescription$ Redistribute any number of players' life totals. (Each of those players gets one life total back.)
+SVar:Maxplayer:PlayerCountPlayers$Amount
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/reverse_the_sands.jpg
+Oracle:Redistribute any number of players' life totals. (Each of those players gets one life total back.)
+SetInfo:CHK Rare
