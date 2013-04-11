@@ -49,7 +49,7 @@ public class CountersPutAi extends SpellAbilityAi {
         list = CardLists.filter(player.getCardsIn(ZoneType.Battlefield), new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
-                return c.canBeTargetedBy(sa) && c.canHaveCountersPlacedOnIt(CounterType.valueOf(type));
+                return c.canBeTargetedBy(sa) && c.canReceiveCounters(CounterType.valueOf(type));
             }
         });
 

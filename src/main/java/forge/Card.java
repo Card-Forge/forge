@@ -1080,18 +1080,6 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     /**
      * <p>
-     * addClones.
-     * </p>
-     * 
-     * @param c
-     *            a {@link java.util.ArrayList} object.
-     */
-    public final void addClones(final ArrayList<Card> c) {
-        this.clones.addAll(c);
-    }
-
-    /**
-     * <p>
      * clearClones.
      * </p>
      */
@@ -1169,15 +1157,15 @@ public class Card extends GameEntity implements Comparable<Card> {
     /**
      * Can have counters placed on it.
      * 
-     * @param counterName
+     * @param type
      *            the counter name
      * @return true, if successful
      */
-    public final boolean canHaveCountersPlacedOnIt(final CounterType counterName) {
+    public final boolean canReceiveCounters(final CounterType type) {
         if (this.hasKeyword("CARDNAME can't have counters placed on it.")) {
             return false;
         }
-        if (this.isCreature() && counterName == CounterType.M1M1) {
+        if (this.isCreature() && type == CounterType.M1M1) {
             for (final Card c : this.getController().getCreaturesInPlay()) { // look for Melira, Sylvok Outcast
                 if (c.hasKeyword("Creatures you control can't have -1/-1 counters placed on them.")) {
                     return false;
@@ -1188,7 +1176,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
 
     public final int getTotalCountersToAdd(final CounterType counterType, final int baseAmount, final boolean applyMultiplier) {
-        if (!this.canHaveCountersPlacedOnIt(counterType)) {
+        if (!this.canReceiveCounters(counterType)) {
             return 0;
         }
         final int multiplier = applyMultiplier ? this.getController().getCounterDoublersMagnitude(counterType) : 1;
@@ -1197,7 +1185,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
 
     public final void addCounter(final CounterType counterType, final int n, final boolean applyMultiplier) {
-        if (!this.canHaveCountersPlacedOnIt(counterType)) {
+        if (!this.canReceiveCounters(counterType)) {
             return;
         }
         final int multiplier = applyMultiplier ? this.getController().getCounterDoublersMagnitude(counterType) : 1;

@@ -457,7 +457,7 @@ public final class GameActionUtil {
                 CounterType counterType = ((CostPutCounter) part).getCounter();
                 int amount = getAmountFromPartX(part, source, sourceAbility);
                 
-                if (false == source.canHaveCountersPlacedOnIt(counterType)) {
+                if (false == source.canReceiveCounters(counterType)) {
                     String message = String.format("Won't be able to pay upkeep for %s but it can't have %s counters put on it.", source, counterType.getName());
                     p.getGame().getGameLog().add("ResolveStack", message, 2);
                     return false;

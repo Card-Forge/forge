@@ -193,7 +193,7 @@ public class CostPutCounter extends CostPartWithList {
         final Player activator = ability.getActivatingPlayer();
         final Card source = ability.getSourceCard();
         if (this.payCostFromSource()) {
-            if (!source.canHaveCountersPlacedOnIt(this.counter)) {
+            if (!source.canReceiveCounters(this.counter)) {
                 return false;
             }
         } else {

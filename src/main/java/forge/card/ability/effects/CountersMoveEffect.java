@@ -97,7 +97,7 @@ public class CountersMoveEffect extends SpellAbilityEffect {
         for (final Card dest : tgtCards) {
             if ((null != source) && (null != dest)) {
                 if (!"Any".matches(counterName)) {
-                    if (dest.canHaveCountersPlacedOnIt(cType)
+                    if (dest.canReceiveCounters(cType)
                             && source.getCounters(cType) >= amount) {
                         dest.addCounter(cType, amount, true);
                         source.subtractCounter(cType, amount);

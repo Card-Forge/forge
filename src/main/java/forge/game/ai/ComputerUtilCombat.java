@@ -1384,9 +1384,9 @@ public class ComputerUtilCombat {
 
         if (((attacker.hasKeyword("Indestructible") || (ComputerUtil.canRegenerate(ai, attacker) && !withoutAbilities)) && !(defender
                 .hasKeyword("Wither") || defender.hasKeyword("Infect")))
-                || (attacker.hasKeyword("Persist") && !attacker.canHaveCountersPlacedOnIt(CounterType.M1M1) && (attacker
+                || (attacker.hasKeyword("Persist") && !attacker.canReceiveCounters(CounterType.M1M1) && (attacker
                         .getCounters(CounterType.M1M1) == 0))
-                || (attacker.hasKeyword("Undying") && !attacker.canHaveCountersPlacedOnIt(CounterType.P1P1) && (attacker
+                || (attacker.hasKeyword("Undying") && !attacker.canReceiveCounters(CounterType.P1P1) && (attacker
                         .getCounters(CounterType.P1P1) == 0))) {
             return false;
         }
@@ -1533,9 +1533,9 @@ public class ComputerUtilCombat {
 
         if (((defender.hasKeyword("Indestructible") || (ComputerUtil.canRegenerate(ai, defender) && !withoutAbilities)) && !(attacker
                 .hasKeyword("Wither") || attacker.hasKeyword("Infect")))
-                || (defender.hasKeyword("Persist") && !defender.canHaveCountersPlacedOnIt(CounterType.M1M1) && (defender
+                || (defender.hasKeyword("Persist") && !defender.canReceiveCounters(CounterType.M1M1) && (defender
                         .getCounters(CounterType.M1M1) == 0))
-                || (defender.hasKeyword("Undying") && !defender.canHaveCountersPlacedOnIt(CounterType.P1P1) && (defender
+                || (defender.hasKeyword("Undying") && !defender.canReceiveCounters(CounterType.P1P1) && (defender
                         .getCounters(CounterType.P1P1) == 0))) {
             return false;
         }
