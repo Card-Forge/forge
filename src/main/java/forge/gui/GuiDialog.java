@@ -37,7 +37,9 @@ public class GuiDialog {
         Callable<Boolean> confirmTask = new Callable<Boolean>() {
             @Override
             public Boolean call() throws Exception {
-                CMatchUI.SINGLETON_INSTANCE.setCard(c);
+                if ( null != c )
+                    CMatchUI.SINGLETON_INSTANCE.setCard(c);
+
                 final String title = c == null ? "Question" : c.getName() + " - Ability";
                 String questionToUse = StringUtils.isBlank(question) ? "Activate card's ability?" : question;
                 String[] opts = options == null ? defaultConfirmOptions : options;
