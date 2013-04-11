@@ -133,6 +133,9 @@ Rain of Gore
 Brine Hag
 Cathedral Membrane
 Chance Encounter
+Dream Salvage
+Paralyze
+Reverse the Sands
 
 
 ----------
@@ -184,6 +187,8 @@ Advent of the Wurm
 Deputy of Acquittals
 Toil // Trouble
 Renounce the Guilds
+Exava, Rakdos Blood Witch
+Varolz, the Scar-Striped
 
 
 ------------
