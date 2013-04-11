@@ -882,7 +882,7 @@ public class ComputerUtilCard {
         List<Card> list = CardLists.filter(player.getCardsIn(ZoneType.Battlefield), new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
-                for (final SpellAbility am : c.getAIPlayableMana()) {
+                for (final SpellAbility am : ComputerUtilMana.getAIPlayableMana(c)) {
                     am.setActivatingPlayer(player);
                     if (am.canPlay()) {
                         return true;

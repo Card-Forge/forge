@@ -34,6 +34,7 @@ import forge.card.mana.ManaCost;
 import forge.card.spellability.Ability;
 import forge.card.spellability.SpellAbility;
 import forge.card.staticability.StaticAbility;
+import forge.card.trigger.ZCTrigger;
 import forge.game.GameActionUtil;
 import forge.game.player.Player;
 
@@ -116,7 +117,7 @@ public class PlayerZoneBattlefield extends PlayerZone {
 
         if (this.trigger) {
             c.setSickness(true); // summoning sickness
-            c.comesIntoPlay();
+            c.executeTrigger(ZCTrigger.ENTERFIELD);
 
             if (c.isLand()) {
 
@@ -214,7 +215,7 @@ public class PlayerZoneBattlefield extends PlayerZone {
         }*/
 
         if (this.leavesTrigger) {
-            c.leavesPlay();
+            c.executeTrigger(ZCTrigger.LEAVEFIELD);
         }
 
         if (Singletons.getModel().getGame().getStaticEffects().getCardToEffectsList().containsKey(c.getName())) {

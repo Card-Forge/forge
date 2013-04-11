@@ -48,7 +48,7 @@ public class RepeatEachAi extends SpellAbilityAi {
             perms = CardLists.filter(CardLists.getTargetableCards(perms, sa), new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {
-                    return (c.sumAllCounters() > 0);
+                    return c.hasCounters();
                 }
             });
             if (perms.isEmpty()) {

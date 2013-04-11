@@ -3344,7 +3344,6 @@ public class CardFactoryUtil {
             if (n != -1) {
 
                 final String parse = card.getKeyword().get(n).toString();
-                card.setCanMorph(true);
                 Map<String, String> sVars = card.getSVars();
 
                 final String[] k = parse.split(":");

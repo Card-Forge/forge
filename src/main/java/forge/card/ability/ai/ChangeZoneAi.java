@@ -1277,8 +1277,6 @@ public class ChangeZoneAi extends SpellAbilityAi {
                             // to unenchant it, then clear out the commands
                             final GameEntity oldEnchanted = c.getEnchanting();
                             c.removeEnchanting(oldEnchanted);
-                            c.clearEnchantCommand();
-                            c.clearUnEnchantCommand();
                         }
                         c.enchantEntity(attachedTo);
                     } else { // When it should enter the battlefield attached to an illegal permanent it fails

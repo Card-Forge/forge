@@ -477,7 +477,7 @@ public class ComputerUtilMana {
             @Override
             public boolean apply(final Card c) {
                 if (checkPlayable) {
-                    for (final SpellAbility am : c.getAIPlayableMana()) {
+                    for (final SpellAbility am : getAIPlayableMana(c)) {
                         am.setActivatingPlayer(ai);
                         if (am.canPlay()) {
                             return true;
@@ -518,7 +518,7 @@ public class ComputerUtilMana {
             int usableManaAbilities = 0;
             boolean needsLimitedResources = false;
             boolean producesAnyColor = false;
-            final ArrayList<SpellAbility> manaAbilities = card.getAIPlayableMana();
+            final ArrayList<SpellAbility> manaAbilities = getAIPlayableMana(card);
     
             for (final SpellAbility m : manaAbilities) {
     
@@ -605,7 +605,7 @@ public class ComputerUtilMana {
         // Loop over all mana sources
         for (int i = 0; i < manaSources.size(); i++) {
             final Card sourceCard = manaSources.get(i);
-            final ArrayList<SpellAbility> manaAbilities = sourceCard.getAIPlayableMana();
+            final ArrayList<SpellAbility> manaAbilities = getAIPlayableMana(sourceCard);
     
             // Loop over all mana abilities for a source
             for (final SpellAbility m : manaAbilities) {
@@ -779,6 +779,35 @@ public class ComputerUtilMana {
             choiceString.append("0");
         }
         return choiceString.toString();
+    }
+
+    // Returns basic mana abilities plus "reflected mana" abilities
+    /**
+     * <p>
+     * getAIPlayableMana.
+     * </p>
+     * 
+     * @return a {@link java.util.ArrayList} object.
+     */
+    public static final ArrayList<SpellAbility> getAIPlayableMana(Card c) {
+        final ArrayList<SpellAbility> res = new ArrayList<SpellAbility>();
+        for (final SpellAbility a : c.getManaAbility()) {
+    
+            // if a mana ability has a mana cost the AI will miscalculate
+            // if there is a parent ability the AI can't use it
+            final Cost cost = a.getPayCosts();
+            if (!cost.hasNoManaCost()
+                || (a.getApi() != ApiType.Mana && a.getApi() != ApiType.ManaReflected)) {
+                continue;
+            }
+    
+            AbilityManaPart am = a.getManaPart();
+            if (am.isBasic() && !res.contains(a)) {
+                res.add(a);
+            }
+    
+        }
+        return res;
     }
 
 }

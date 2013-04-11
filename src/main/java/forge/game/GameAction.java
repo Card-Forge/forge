@@ -52,6 +52,7 @@ import forge.card.spellability.Target;
 import forge.card.staticability.StaticAbility;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerType;
+import forge.card.trigger.ZCTrigger;
 import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilCost;
 import forge.game.event.CardDestroyedEvent;
@@ -1345,7 +1346,7 @@ public class GameAction {
         final Card newCard = this.moveToGraveyard(c);
 
         // Destroy needs to be called with Last Known Information
-        c.destroy();
+        c.executeTrigger(ZCTrigger.DESTROY);
 
         // System.out.println("Card " + c.getName() +
         // " is getting sent to GY, and this turn it got damaged by: ");

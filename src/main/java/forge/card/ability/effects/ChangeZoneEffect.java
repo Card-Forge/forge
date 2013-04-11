@@ -488,8 +488,6 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                                         // to unenchant it, then clear out the commands
                                         final GameEntity oldEnchanted = tgtC.getEnchanting();
                                         tgtC.removeEnchanting(oldEnchanted);
-                                        tgtC.clearEnchantCommand();
-                                        tgtC.clearUnEnchantCommand();
                                     }
                                     tgtC.enchantEntity(attachedTo);
                                 } else { //Equipment
@@ -780,8 +778,6 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                                     // to unenchant it, then clear out the commands
                                     final GameEntity oldEnchanted = c.getEnchanting();
                                     c.removeEnchanting(oldEnchanted);
-                                    c.clearEnchantCommand();
-                                    c.clearUnEnchantCommand();
                                 }
                                 c.enchantEntity(attachedTo);
                             } else { //Equipment
@@ -819,8 +815,6 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                                     // to unenchant it, then clear out the commands
                                     final GameEntity oldEnchanted = c.getEnchanting();
                                     c.removeEnchanting(oldEnchanted);
-                                    c.clearEnchantCommand();
-                                    c.clearUnEnchantCommand();
                                 }
                                 c.enchantEntity(attachedTo);
                             }

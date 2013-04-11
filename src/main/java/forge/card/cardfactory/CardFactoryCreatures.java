@@ -359,7 +359,7 @@ public class CardFactoryCreatures {
             @Override
             public void resolve() {
                 int n = card.sumAllCounters();
-                for (int i = 0; i < card.sumAllCounters(); i++) {
+                for (int i = 0; i < n; i++) {
                     for(Card tok : this.makeToken()) {
                         Singletons.getModel().getGame().getAction().moveToPlay(tok);
                     }
