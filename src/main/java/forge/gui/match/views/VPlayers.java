@@ -145,7 +145,7 @@ public enum VPlayers implements IVDoc<CPlayers> {
     /** @param p0 {@link forge.game.player.Player} */
     public void updatePlayerLabels(final Player p0) {
         // No need to update if this panel isn't showing
-        if (!parentCell.getSelected().equals(this)) { return; }
+        if (!this.equals(parentCell.getSelected())) { return; }
 
         final JLabel[] temp = this.infoLBLs.get(p0);
         temp[1].setText("Life: " + String.valueOf(p0.getLife()) + "  |  Poison counters: "
