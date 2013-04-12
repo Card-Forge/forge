@@ -1,6 +1,5 @@
 package forge.game.player;
 
-import forge.game.GameLossReason;
 
 /**
  * TODO: Write javadoc for this type.

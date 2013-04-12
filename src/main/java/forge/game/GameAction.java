@@ -59,6 +59,7 @@ import forge.game.event.CardDestroyedEvent;
 import forge.game.event.CardRegeneratedEvent;
 import forge.game.event.CardSacrificedEvent;
 import forge.game.player.AIPlayer;
+import forge.game.player.GameLossReason;
 import forge.game.player.HumanPlayer;
 import forge.game.player.Player;
 import forge.game.player.PlayerType;

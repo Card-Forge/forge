@@ -29,7 +29,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 import java.util.TreeMap;
-
 import org.apache.commons.lang3.StringUtils;
 
 import com.esotericsoftware.minlog.Log;
@@ -113,7 +112,7 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     // changes by AF animate and continuous static effects
     private ArrayList<CardType> changedCardTypes = new ArrayList<CardType>();
-    private ArrayList<CardKeywords> changedCardKeywords = new ArrayList<CardKeywords>();
+    private List<CardKeywords> changedCardKeywords = new ArrayList<CardKeywords>();
 
     private final ArrayList<Object> rememberedObjects = new ArrayList<Object>();
     private final ArrayList<Card> imprintedCards = new ArrayList<Card>();
@@ -4294,7 +4293,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         // see if keyword changes are in effect
         if (!this.changedCardKeywords.isEmpty()) {
 
-            final ArrayList<CardKeywords> newKeywords = this.changedCardKeywords;
+            final ArrayList<CardKeywords> newKeywords = new ArrayList<CardKeywords>(this.changedCardKeywords);
             Collections.sort(newKeywords); // sorts newKeywords by timeStamp
 
             for (final CardKeywords ck : newKeywords) {

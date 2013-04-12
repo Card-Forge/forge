@@ -55,7 +55,6 @@ import forge.card.spellability.Target;
 import forge.card.staticability.StaticAbility;
 import forge.card.trigger.TriggerType;
 import forge.game.GameActionUtil;
-import forge.game.GameLossReason;
 import forge.game.GameState;
 import forge.game.GlobalRuleChange;
 import forge.game.event.CardDiscardedEvent;

@@ -5,7 +5,7 @@ import java.util.List;
 import forge.Card;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
-import forge.game.GameLossReason;
+import forge.game.player.GameLossReason;
 import forge.game.player.Player;
 
 public class GameLossEffect extends SpellAbilityEffect {

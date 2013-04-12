@@ -22,8 +22,8 @@ import forge.Singletons;
 import forge.card.mana.ManaCost;
 import forge.card.spellability.Ability;
 import forge.card.spellability.SpellAbility;
-import forge.game.GameLossReason;
 import forge.game.GameState;
+import forge.game.player.GameLossReason;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 

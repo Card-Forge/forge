@@ -13961,7 +13961,6 @@ src/main/java/forge/game/GameActionUtil.java svneol=native#text/plain
 src/main/java/forge/game/GameAge.java -text
 src/main/java/forge/game/GameEndReason.java -text
 src/main/java/forge/game/GameFormat.java -text
-src/main/java/forge/game/GameLossReason.java -text
 src/main/java/forge/game/GameNew.java -text
 src/main/java/forge/game/GameOutcome.java -text
 src/main/java/forge/game/GameState.java -text
@@ -14039,6 +14038,7 @@ src/main/java/forge/game/phase/Untap.java -text
 src/main/java/forge/game/phase/Upkeep.java svneol=native#text/plain
 src/main/java/forge/game/phase/package-info.java svneol=native#text/plain
 src/main/java/forge/game/player/AIPlayer.java svneol=native#text/plain
+src/main/java/forge/game/player/GameLossReason.java -text
 src/main/java/forge/game/player/HumanPlayer.java svneol=native#text/plain
 src/main/java/forge/game/player/LobbyPlayer.java -text
 src/main/java/forge/game/player/Player.java svneol=native#text/plain
