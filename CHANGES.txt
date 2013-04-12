@@ -136,6 +136,8 @@ Chance Encounter
 Dream Salvage
 Paralyze
 Reverse the Sands
+Earwig Squad
+Latchkey Faerie
 
 
 ----------
@@ -189,6 +191,9 @@ Toil // Trouble
 Renounce the Guilds
 Exava, Rakdos Blood Witch
 Varolz, the Scar-Striped
+Ral Zarek
+Blood Scrivener
+Voice of Resurgence
 
 
 ------------
