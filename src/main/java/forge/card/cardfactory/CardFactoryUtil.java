@@ -3123,6 +3123,7 @@ public class CardFactoryUtil {
         altCostSA.setRestrictions(restriction);
         altCostSA.setDescription(sb.toString());
         altCostSA.setBasicSpell(false);
+        altCostSA.setAltCost(true);
 
         return altCostSA;
     }

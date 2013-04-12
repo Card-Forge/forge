@@ -112,6 +112,7 @@ public abstract class SpellAbility implements ISpellAbility {
     private boolean undoable;
     
     private boolean isCopied = false;
+    private boolean isAltCost = false;
 
     public final AbilityManaPart getManaPart() {
         return manaPart;
@@ -1756,5 +1757,23 @@ public abstract class SpellAbility implements ISpellAbility {
     public boolean isXCost() {
         CostPartMana cm = payCosts != null ? getPayCosts().getCostMana() : null;
         return cm != null && cm.getAmountOfX() > 0; 
-    }    
+    }
+
+    /**
+     * @param isAltCost the isAltCost to set
+     */
+    public void setAltCost(boolean isAltCost) {
+        this.isAltCost = isAltCost; 
+    }
+    
+    /**
+     * @return the isAltCost
+     */
+    public boolean isAltCost() {
+        // only used in prowl, cannot distinguish the alt cost type currently
+        // TODO : support the altcost type
+        return isAltCost;
+    }
+
+
 }

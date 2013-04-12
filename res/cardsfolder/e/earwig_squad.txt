@@ -1,0 +1,18 @@
+Name:Earwig Squad
+ManaCost:3 B B
+Types:Creature Goblin Rogue
+PT:5/3
+SVar:AltCost:Cost$ 2 B | Activation$ ProwlGoblin | Description$ Prowl 2 B (You may cast this for its prowl cost if you dealt combat damage to a player this turn with a Goblin or Rogue.)
+T:Mode$ SpellCast | ValidCard$ Card.Self | AltCostSpellAbility$ True | Execute$ ProwlStore | Static$ True
+SVar:ProwlStore:AB$ StoreSVar | Cost$ 0 | SVar$ ProwlCheck | Type$ Number | Expression$ 1
+T:Mode$ ChangesZone | Origin$ Stack | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | CheckSVar$ ProwlCheck | SVarCompare$ EQ1 | TriggerDescription$ When CARDNAME enters the battlefield, if its prowl cost was paid, search target opponent's library for three cards and exile them. Then that player shuffles his or her library.
+SVar:ProwlCheck:Number$0
+SVar:TrigExile:AB$ ChangeZone | Cost$ 0 | ValidTgts$ Opponent | DefinedPlayer$ Targeted | Chooser$ You | ChangeType$ Card | ChangeNum$ 3 | Origin$ Library | Destination$ Exile | SubAbility$ DBReset
+SVar:DBReset:DB$ StoreSVar | Cost$ 0 | SVar$ ProwlCheck | Type$ Number | Expression$ 0
+T:Mode$ ChangesZone | Origin$ Stack | Destination$ Library | ValidCard$ Card.Self | Execute$ DBReset | Static$ True
+T:Mode$ ChangesZone | Origin$ Stack | Destination$ Hand | ValidCard$ Card.Self | Execute$ DBReset | Static$ True
+T:Mode$ ChangesZone | Origin$ Stack | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ DBReset | Static$ True
+T:Mode$ ChangesZone | Origin$ Stack | Destination$ Exile | ValidCard$ Card.Self | Execute$ DBReset | Static$ True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/earwig_squad.jpg
+Oracle:Prowl {2}{B} (You may cast this for its prowl cost if you dealt combat damage to a player this turn with a Goblin or Rogue.)\nWhen Earwig Squad enters the battlefield, if its prowl cost was paid, search target opponent's library for three cards and exile them. Then that player shuffles his or her library.
+SetInfo:MOR Rare

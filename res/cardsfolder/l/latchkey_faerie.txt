@@ -1,0 +1,19 @@
+Name:Latchkey Faerie
+ManaCost:3 U
+Types:Creature Faerie Rogue
+PT:3/1
+K:Flying
+SVar:AltCost:Cost$ 2 U | Activation$ ProwlFaerie | Description$ Prowl {2}{U} (You may cast this for its prowl cost if you dealt combat damage to a player this turn with a Faerie or Rogue.)
+T:Mode$ SpellCast | ValidCard$ Card.Self | AltCostSpellAbility$ True | Execute$ ProwlStore | Static$ True
+SVar:ProwlStore:AB$ StoreSVar | Cost$ 0 | SVar$ ProwlCheck | Type$ Number | Expression$ 1
+SVar:ProwlCheck:Number$0
+T:Mode$ ChangesZone | Origin$ Stack | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | CheckSVar$ ProwlCheck | SVarCompare$ EQ1 | TriggerDescription$ When CARDNAME enters the battlefield, if its prowl cost was paid, draw a card.
+SVar:TrigDraw:AB$ Draw | Cost$ 0 | NumCards$ 1 | SubAbility$ DBReset
+SVar:DBReset:DB$ StoreSVar | Cost$ 0 | SVar$ ProwlCheck | Type$ Number | Expression$ 0
+T:Mode$ ChangesZone | Origin$ Stack | Destination$ Library | ValidCard$ Card.Self | Execute$ DBReset | Static$ True
+T:Mode$ ChangesZone | Origin$ Stack | Destination$ Hand | ValidCard$ Card.Self | Execute$ DBReset | Static$ True
+T:Mode$ ChangesZone | Origin$ Stack | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ DBReset | Static$ True
+T:Mode$ ChangesZone | Origin$ Stack | Destination$ Exile | ValidCard$ Card.Self | Execute$ DBReset | Static$ True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/latchkey_faerie.jpg
+Oracle:Flying\nProwl {2}{U} (You may cast this for its prowl cost if you dealt combat damage to a player this turn with a Faerie or Rogue.)\nWhen Latchkey Faerie enters the battlefield, if its prowl cost was paid, draw a card.
+SetInfo:MOR Common

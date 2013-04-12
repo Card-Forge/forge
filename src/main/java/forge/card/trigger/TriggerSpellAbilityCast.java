@@ -74,6 +74,12 @@ public class TriggerSpellAbilityCast extends Trigger {
                 return false;
             }
         }
+        
+        if (this.getMapParams().containsKey("AltCostSpellAbility")) {
+            if (!spellAbility.isAltCost()) {
+                return false;
+            }
+        }
 
         if (this.getMapParams().containsKey("ValidControllingPlayer")) {
             if (!matchesValid(cast.getController(), this.getMapParams().get("ValidControllingPlayer").split(","),
