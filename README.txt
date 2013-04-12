@@ -556,6 +556,18 @@ High Quality Booster Pictures:
 Forge will now download high quality booster pictures. If you are interested in these high quality booster pictures, then you should delete the pictures that are found in your <cacheDir>/pics/boosters/ directory. Then download the new pictures by using the Home View -> Game Settings -> Content Downloaders -> Download Quest Images button.
 
 
+Flip, Transform and Morph cards:
+--------------------------------
+
+When you mouse over a flip, transform or Morph (controlled by you) card in battlefield, you may hold SHIFT to see other state of that card at the side panel that displays card picture and details.
+
+
+Alternate sound system:
+-----------------------
+
+Implemented an alternative sound system for people who have issues with sound gradually or instantly disappearing on certain Linux systems. Can be switched on/off in the preferences without needing a restart. Uses the standard Java Sound API so it doesn't require an external dependency. It's non-caching and, as such, less efficient than the regular sound system, so only use it in case you have issues with the default system, otherwise leave the option unchecked.
+
+
 Our Lawyers Made Us Do This:
 ----------------------------
 

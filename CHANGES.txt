@@ -1,7 +1,7 @@
-Forge Beta: 04-12-2013 ver 1.3.12
+Forge Beta: 0#-##-2013 ver 1.3.13
 
 
-12516 cards in total.
+12### cards in total.
 
 
 -------------
@@ -47,130 +47,11 @@ The Import Pictures dialog, accessed via the Content Downloaders submenu, has re
 An importer option was added for including pictures in set-specific card directories that don't map to any currently known card.  This handles the case where people have collected complete sets of pics in anticipation of when Forge supports them.
 
 
-- Flip, Transform and Morph cards -
-When you mouse over a flip, transform or Morph (controlled by you) card in battlefield, you may hold SHIFT to see other state of that card at the side panel that displays card picture and details.
-
-
-- Milestone reached -
-There are now under 700 unsupported cards and we now have implemented over 95% of all distinct cards. We should be at (Planechase 2012) or over 85% for all the sets.
-
-
-- Dragon's Maze -
-We have created a branch for Dragon's Maze spoilers. These new cards are not included in the Forge distributions at this time. Please be patient as these DGM cards will become available in the near future.
-
-
-- Deck Editor and Match layout file issues -
-On several occasions people have noticed that the Forge deck editor and/or quest mode card shop would not open or display. We have also received reports that some of the tabs/panels in the deck editor are missing. There has also been reports that Forge will crash while creating/populating display components during start up or crash when a match is started. One or both of your layout xml files may be corrupted in some fashion. Try deleting the file(s) named "editor.xml" and/or "match.xml" that are now located in your userDir/preferences/ directory. This should force Forge to then use the default layout xml files instead.
-
-
-- Alternate sound system -
-Implemented an alternative sound system for people who have issues with sound gradually or instantly disappearing on certain Linux systems. Can be switched on/off in the preferences without needing a restart. Uses the standard Java Sound API so it doesn't require an external dependency. It's non-caching and, as such, less efficient than the regular sound system, so only use it in case you have issues with the default system, otherwise leave the option unchecked.
-
-
 ---------
 New Cards
 ---------
 
-Auriok Siege Sled
-Benthic Explorers
-Blazing Effigy
-Bramble Elemental
-Breathstealer's Crypt
-Brine Hag
-Burning-Tree Bloodscale
-Cairn Wanderer
-Cathedral Membrane
-Chance Encounter
-Concerted Effort
-Curtain of Light
-Cut the Tethers
-Dazzling Beauty
-Death-Mask Duplicant
-Deflection
-Delay
-Divert
-Dream Salvage
-Dual Nature
-Earwig Squad
-Fold into AEther
-Giant Slug
-Grifter's Blade
-Harsh Mercy
-Heroism
-Hinder
-Horn of Plenty
-Illusionary Presence
-Imp's Mischief
-Kaboom!
-Kamahl's Summons
-Karmic Justice
-Killing Wave
-Konda's Banner
-Koskun Falls
-Latchkey Faerie
-Leech Bonder
-Lullmage Mentor
-Misdirection
-Moonlight Bargain
-Multani's Presence
-Myr Superion
-O-Naginata
-Oathkeeper, Takeno's Daisho
-Paralyze
-Rain of Gore
-Reroute
-Reverse the Sands
-Ricochet Trap
-Runed Halo
-Shieldmage Elder
-Shunt
-Soulbright Flamekin
-Spellshift
-Strength of the Tajuru
-Swift Silence
-Torchling
-Trap Runner
-Traveler's Cloak
-Unnatural Hunger
-Vexing Shusher
-Vodalian War Machine
-Warp World
-Weight of Conscience
-Willbender
-Zur's Weirding
 
-
-----------
-New Planes
-----------
-
-Astral Arena
-Bloodhill Bastion
-Gavony
-Hedron Fields of Agadeem
-Isle of Vesuva
-Izzet Steam Maze
-Kessig
-Murasa
-Nephalia
-Sea of Sand
-The Zephyr Maze
-Windriddle Palaces
-
-
---------------------
-New Vanguard Avatars
---------------------
-
-Akroma, Angel of Wrath Avatar
-Eight-and-a-Half-Tails Avatar
-Frenetic Efreet Avatar
-Jhoira of the Ghitu Avatar
-Karona, False God Avatar
-Kresh the Bloodbraided Avatar
-Peacekeeper Avatar
-Sliver Queen Avatar
-Stonehewer Giant Avatar
 
 
 ------------------------------
@@ -228,20 +109,7 @@ Some people use the Windows application 7zip. This utility can be found at http:
 Contributors to This Release
 ----------------------------
 
-Agetian
-Gos
-Hellfish
-Marc
-Max
-Myk
-Nordos
-PowerClaws
-Sloth
-Sol
-Swordshine
-Xitax
-ZzzzSleep
-Chris H
+
 
 
 (Quest icons used created by Teekatas, from his Legendora set http://raindropmemory.deviantart.com)
