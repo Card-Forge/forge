@@ -92,7 +92,8 @@ public class CardCharacteristics {
      *            the type to set
      */
     public final void setType(final ArrayList<String> type0) {
-        this.type = type0;
+        this.type.clear();
+        this.type.addAll(type0);
     }
 
     /**
@@ -395,7 +396,7 @@ public class CardCharacteristics {
         // String name : just copy reference
         this.name = source.getName();
         // ArrayList<String> type : list of String objects so use copy constructor
-        this.type = new ArrayList<String>(source.getType());
+        this.type = new CopyOnWriteArrayList<String>(source.getType());
         // CardManaCost manaCost : not sure if a deep copy is needed
         this.manaCost = source.getManaCost();
         // ArrayList<CardColor> cardColor : not sure if a deep copy is needed
