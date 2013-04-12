@@ -593,7 +593,9 @@ public class MagicStack extends MyObservable {
         this.setResolving(true);
 
         // The SpellAbility isn't removed from the Stack until it finishes resolving
-        final SpellAbility sa = this.top();
+        // temporarily reverted removing SAs after resolution
+        //final SpellAbility sa = this.top();
+        final SpellAbility sa = this.pop();
 
         // ActivePlayer gains priority first after Resolve
         game.getPhaseHandler().resetPriority(); 
@@ -723,7 +725,8 @@ public class MagicStack extends MyObservable {
         // remove SA and card from the stack
         this.removeCardFromStack(sa, fizzle);
         // SpellAbility is removed from the stack here
-        this.remove(sa);
+        // temporarily removed removing SA after resolution
+        //this.remove(sa);
 
         // After SA resolves we have to do a handful of things
         this.setResolving(false);
@@ -950,16 +953,6 @@ public class MagicStack extends MyObservable {
         // TODO: Confirm this works!
         for (final SpellAbilityStackInstance si : this.getStack()) {
             if (si.compareToSpellAbility(sa)) {
-                return si;
-            }
-        }
-        return null;
-    }
-    
-    public final SpellAbilityStackInstance getInstanceFromAbilityAndTarget(final SpellAbility sa, final Target tgt) {
-        // TODO: Confirm this works!
-        for (final SpellAbilityStackInstance si : this.getStack()) {
-            if (si.getSpellAbility().equals(sa) && tgt.equals(sa.getTarget())) {
                 return si;
             }
         }
