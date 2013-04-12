@@ -2894,7 +2894,7 @@ public class CardFactoryUtil {
         
         final AbilitySub newSA = (AbilitySub) AbilityFactory.getAbility(dbStr.toString(), card);
         
-        card.setSVar("EpicCantBeCast", "Mode$ CantBeCast | ValidCard$ Card | Caster$ You | Description$ For the rest of the game, you can't cast spells.");
+        card.setSVar("EpicCantBeCast", "Mode$ CantBeCast | ValidCard$ Card | Caster$ You | EffectZone$ Command | Description$ For the rest of the game, you can't cast spells.");
         card.setSVar("EpicTrigger", "Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ EpicCopy | TriggerDescription$ "
                 + "At the beginning of each of your upkeeps, copy " + card.toString() + " except for its epic ability.");
         card.setSVar("EpicCopy", "DB$ CopySpellAbility | Defined$ EffectSource");
