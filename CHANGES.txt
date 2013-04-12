@@ -1,7 +1,7 @@
-Forge Beta: 04-##-2013 ver 1.3.12
+Forge Beta: 04-12-2013 ver 1.3.12
 
 
-12### cards in total.
+12516 cards in total.
 
 
 -------------
@@ -71,91 +71,91 @@ Implemented an alternative sound system for people who have issues with sound gr
 New Cards
 ---------
 
-Konda's Banner
-O-Naginata
-Grifter's Blade
-Breathstealer's Crypt
-Moonlight Bargain
 Auriok Siege Sled
-Burning-Tree Bloodscale
-Soulbright Flamekin
-Koskun Falls
-Warp World
-Zur's Weirding
-Vexing Shusher
 Benthic Explorers
-Leech Bonder
-Weight of Conscience
-Multani's Presence
-Lullmage Mentor
-Fold into AEther
-Hinder
-Swift Silence
-Cut the Tethers
-Delay
-Runed Halo
-Heroism
 Blazing Effigy
-Karmic Justice
-Harsh Mercy
-Kamahl's Summons
-Kaboom!
-Curtain of Light
-Dazzling Beauty
-Strength of the Tajuru
-Misdirection
-Trap Runner
-Deflection
-Divert
-Shunt
-Imp's Mischief
-Dual Nature
-Reroute
-Torchling
-Willbender
-Ricochet Trap
-Unnatural Hunger
-Vodalian War Machine
-Myr Superion
 Bramble Elemental
-Oathkeeper, Takeno's Daisho
-Shieldmage Elder
-Horn of Plenty
-Spellshift
-Traveler's Cloak
-Killing Wave
-Giant Slug
-Illusionary Presence
-Cairn Wanderer
-Concerted Effort
-Death-Mask Duplicant
-Rain of Gore
+Breathstealer's Crypt
 Brine Hag
+Burning-Tree Bloodscale
+Cairn Wanderer
 Cathedral Membrane
 Chance Encounter
+Concerted Effort
+Curtain of Light
+Cut the Tethers
+Dazzling Beauty
+Death-Mask Duplicant
+Deflection
+Delay
+Divert
 Dream Salvage
-Paralyze
-Reverse the Sands
+Dual Nature
 Earwig Squad
+Fold into AEther
+Giant Slug
+Grifter's Blade
+Harsh Mercy
+Heroism
+Hinder
+Horn of Plenty
+Illusionary Presence
+Imp's Mischief
+Kaboom!
+Kamahl's Summons
+Karmic Justice
+Killing Wave
+Konda's Banner
+Koskun Falls
 Latchkey Faerie
+Leech Bonder
+Lullmage Mentor
+Misdirection
+Moonlight Bargain
+Multani's Presence
+Myr Superion
+O-Naginata
+Oathkeeper, Takeno's Daisho
+Paralyze
+Rain of Gore
+Reroute
+Reverse the Sands
+Ricochet Trap
+Runed Halo
+Shieldmage Elder
+Shunt
+Soulbright Flamekin
+Spellshift
+Strength of the Tajuru
+Swift Silence
+Torchling
+Trap Runner
+Traveler's Cloak
+Unnatural Hunger
+Vexing Shusher
+Vodalian War Machine
+Warp World
+Weight of Conscience
+Willbender
+Zur's Weirding
 
 
 ----------
 New Planes
 ----------
 
-Sea of Sand
 Astral Arena
 Bloodhill Bastion
 Gavony
 Hedron Fields of Agadeem
-Kessig
-Nephalia
-The Zephyr Maze
-Windriddle Palaces
-Murasa
 Isle of Vesuva
 Izzet Steam Maze
+Kessig
+Murasa
+Nephalia
+Sea of Sand
+The Zephyr Maze
+Windriddle Palaces
 
 
 --------------------
@@ -164,36 +164,36 @@ New Vanguard Avatars
 
 Akroma, Angel of Wrath Avatar
 Eight-and-a-Half-Tails Avatar
-Peacekeeper Avatar
-Stonehewer Giant Avatar
-Sliver Queen Avatar
-Jhoira of the Ghitu Avatar
-Kresh the Bloodbraided Avatar
-Karona, False God Avatar
 Frenetic Efreet Avatar
+Jhoira of the Ghitu Avatar
+Karona, False God Avatar
+Kresh the Bloodbraided Avatar
+Peacekeeper Avatar
+Sliver Queen Avatar
+Stonehewer Giant Avatar
 
 
 ------------------------------
 New Dragon's Maze branch Cards
 ------------------------------
 
-Melek, Izzet Paragon
-Beck // Call
-Wear // Tear
-Maze's End
-Render Silent
-Sin Collector
-Vorel of the Hull Clade
-Master of Cruelties
 Advent of the Wurm
-Deputy of Acquittals
-Toil // Trouble
-Renounce the Guilds
-Exava, Rakdos Blood Witch
-Varolz, the Scar-Striped
-Ral Zarek
+Beck // Call
 Blood Scrivener
+Deputy of Acquittals
+Exava, Rakdos Blood Witch
+Master of Cruelties
+Maze's End
+Melek, Izzet Paragon
+Ral Zarek
+Render Silent
+Renounce the Guilds
+Sin Collector
+Toil // Trouble
+Varolz, the Scar-Striped
 Voice of Resurgence
+Vorel of the Hull Clade
+Wear // Tear
 
 
 ------------
@@ -228,7 +228,20 @@ Some people use the Windows application 7zip. This utility can be found at http:
 Contributors to This Release
 ----------------------------
 
-
+Agetian
+Gos
+Hellfish
+Marc
+Max
+Myk
+Nordos
+PowerClaws
+Sloth
+Sol
+Swordshine
+Xitax
+ZzzzSleep
+Chris H
 
 
 (Quest icons used created by Teekatas, from his Legendora set http://raindropmemory.deviantart.com)
