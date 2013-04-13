@@ -51,7 +51,7 @@ An importer option was added for including pictures in set-specific card directo
 New Cards
 ---------
 
-
+Fog Patch
 
 
 ------------------------------
@@ -75,6 +75,12 @@ Varolz, the Scar-Striped
 Voice of Resurgence
 Vorel of the Hull Clade
 Wear // Tear
+
+Opal Lake Gatekeeper
+Obzedat's Aid
+Teysa, Envoy of Ghosts
+Renegade Krasis
+Council of the Absolute
 
 
 ------------
