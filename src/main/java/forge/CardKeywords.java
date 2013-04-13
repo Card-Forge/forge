@@ -27,23 +27,11 @@ import java.util.ArrayList;
  * @author Forge
  * @version $Id$
  */
-public class CardKeywords implements Comparable<CardKeywords> {
+public class CardKeywords {
     // takes care of individual card types
     private ArrayList<String> keywords = new ArrayList<String>();
     private ArrayList<String> removeKeywords = new ArrayList<String>();
     private boolean removeAllKeywords = false;
-    private long timeStamp = 0;
-
-    /**
-     * <p>
-     * getTimestamp.
-     * </p>
-     * 
-     * @return a long.
-     */
-    public final long getTimestamp() {
-        return this.timeStamp;
-    }
 
     /**
      * 
@@ -58,12 +46,10 @@ public class CardKeywords implements Comparable<CardKeywords> {
      * @param stamp
      *            a long
      */
-    CardKeywords(final ArrayList<String> keywordList, final ArrayList<String> removeKeywordList,
-            final boolean removeAll, final long stamp) {
+    CardKeywords(final ArrayList<String> keywordList, final ArrayList<String> removeKeywordList, final boolean removeAll) {
         this.keywords = keywordList;
         this.removeKeywords = removeKeywordList;
         this.removeAllKeywords = removeAll;
-        this.timeStamp = stamp;
     }
 
     /**
@@ -95,22 +81,4 @@ public class CardKeywords implements Comparable<CardKeywords> {
     public final boolean isRemoveAllKeywords() {
         return this.removeAllKeywords;
     }
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see java.lang.Comparable#compareTo(java.lang.Object)
-     */
-    @Override
-    public final int compareTo(final CardKeywords anotherCardKeywords) {
-        int returnValue = 0;
-        final long anotherTimeStamp = anotherCardKeywords.getTimestamp();
-        if (this.timeStamp < anotherTimeStamp) {
-            returnValue = -1;
-        } else if (this.timeStamp > anotherTimeStamp) {
-            returnValue = 1;
-        }
-        return returnValue;
-    }
-
 }

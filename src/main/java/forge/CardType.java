@@ -27,7 +27,7 @@ import java.util.ArrayList;
  * @author Forge
  * @version $Id$
  */
-public class CardType implements Comparable<CardType> {
+public class CardType {
     // takes care of individual card types
     private ArrayList<String> type = new ArrayList<String>();
     private ArrayList<String> removeType = new ArrayList<String>();
@@ -35,18 +35,6 @@ public class CardType implements Comparable<CardType> {
     private final boolean removeCardTypes;
     private final boolean removeSubTypes;
     private final boolean removeCreatureTypes;
-    private long timeStamp = 0;
-
-    /**
-     * <p>
-     * getTimestamp.
-     * </p>
-     * 
-     * @return a long.
-     */
-    public final long getTimestamp() {
-        return this.timeStamp;
-    }
 
     /**
      * Instantiates a new card_ type.
@@ -67,15 +55,13 @@ public class CardType implements Comparable<CardType> {
      *            a long
      */
     CardType(final ArrayList<String> types, final ArrayList<String> removeTypes, final boolean removeSuperType,
-            final boolean removeCardType, final boolean removeSubType, final boolean removeCreatureType,
-            final long stamp) {
+            final boolean removeCardType, final boolean removeSubType, final boolean removeCreatureType) {
         this.type = types;
         this.removeType = removeTypes;
         this.removeSuperTypes = removeSuperType;
         this.removeCardTypes = removeCardType;
         this.removeSubTypes = removeSubType;
         this.removeCreatureTypes = removeCreatureType;
-        this.timeStamp = stamp;
     }
 
     /**
@@ -137,22 +123,4 @@ public class CardType implements Comparable<CardType> {
     public final boolean isRemoveCreatureTypes() {
         return this.removeCreatureTypes;
     }
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see java.lang.Comparable#compareTo(java.lang.Object)
-     */
-    @Override
-    public final int compareTo(final CardType anotherCardType) {
-        int returnValue = 0;
-        final long anotherTimeStamp = anotherCardType.getTimestamp();
-        if (this.timeStamp < anotherTimeStamp) {
-            returnValue = -1;
-        } else if (this.timeStamp > anotherTimeStamp) {
-            returnValue = 1;
-        }
-        return returnValue;
-    }
-
 }

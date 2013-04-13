@@ -29,6 +29,8 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 import java.util.TreeMap;
+import java.util.concurrent.ConcurrentSkipListMap;
+
 import org.apache.commons.lang3.StringUtils;
 
 import com.esotericsoftware.minlog.Log;
@@ -110,9 +112,9 @@ public class Card extends GameEntity implements Comparable<Card> {
     private GameEntity enchanting = null;
     private ArrayList<String> optionalAdditionalCostsPaid = null;
 
-    // changes by AF animate and continuous static effects
-    private ArrayList<CardType> changedCardTypes = new ArrayList<CardType>();
-    private List<CardKeywords> changedCardKeywords = new ArrayList<CardKeywords>();
+    // changes by AF animate and continuous static effects - timestamp is the key of maps
+    private Map<Long, CardType> changedCardTypes = new ConcurrentSkipListMap<Long, CardType>();
+    private Map<Long, CardKeywords> changedCardKeywords = new ConcurrentSkipListMap<Long, CardKeywords>();
 
     private final ArrayList<Object> rememberedObjects = new ArrayList<Object>();
     private final ArrayList<Card> imprintedCards = new ArrayList<Card>();
@@ -1583,16 +1585,9 @@ public class Card extends GameEntity implements Comparable<Card> {
         if (this.isImmutable()) {
             return new CardColor(this);
         }
-        CardColor colors = null;
-        final ArrayList<CardColor> globalChanges;
-        if (Singletons.getModel().getGame() == null) {
-            globalChanges = new ArrayList<CardColor>();
-        }
-        else {
-            globalChanges = Singletons.getModel().getGame().getColorChanger().getColorChanges();
-        }
 
-        colors = this.determineColor(globalChanges);
+        final ArrayList<CardColor> globalChanges = getOwner() == null ? new ArrayList<CardColor>() : getOwner().getGame().getColorChanger().getColorChanges();
+        CardColor colors = this.determineColor(globalChanges);
         colors.fixColorless();
         return colors;
     }
@@ -3469,46 +3464,38 @@ public class Card extends GameEntity implements Comparable<Card> {
     public final ArrayList<String> getType() {
 
         // see if type changes are in effect
-        if (!this.changedCardTypes.isEmpty()) {
-
-            final ArrayList<String> newType = new ArrayList<String>(this.getCharacteristics().getType());
-            final ArrayList<CardType> types = this.changedCardTypes;
-            Collections.sort(types); // sorts types by timeStamp
-
-            for (final CardType ct : types) {
-                final ArrayList<String> removeTypes = new ArrayList<String>();
-                if (ct.getRemoveType() != null) {
-                    removeTypes.addAll(ct.getRemoveType());
+        final ArrayList<String> newType = new ArrayList<String>(this.getCharacteristics().getType());
+        for (final CardType ct : this.changedCardTypes.values()) {
+            final ArrayList<String> removeTypes = new ArrayList<String>();
+            if (ct.getRemoveType() != null) {
+                removeTypes.addAll(ct.getRemoveType());
+            }
+            // remove old types
+            for (int i = 0; i < newType.size(); i++) {
+                final String t = newType.get(i);
+                if (ct.isRemoveSuperTypes() && forge.card.CardType.isASuperType(t)) {
+                    removeTypes.add(t);
                 }
-                // remove old types
-                for (int i = 0; i < newType.size(); i++) {
-                    final String t = newType.get(i);
-                    if (ct.isRemoveSuperTypes() && forge.card.CardType.isASuperType(t)) {
-                        removeTypes.add(t);
-                    }
-                    if (ct.isRemoveCardTypes() && forge.card.CardType.isACardType(t)) {
-                        removeTypes.add(t);
-                    }
-                    if (ct.isRemoveSubTypes() && forge.card.CardType.isASubType(t)) {
-                        removeTypes.add(t);
-                    }
-                    if (ct.isRemoveCreatureTypes() && (forge.card.CardType.isACreatureType(t) || t.equals("AllCreatureTypes"))) {
-                        removeTypes.add(t);
-                    }
+                if (ct.isRemoveCardTypes() && forge.card.CardType.isACardType(t)) {
+                    removeTypes.add(t);
                 }
-                newType.removeAll(removeTypes);
-                // add new types
-                if (ct.getType() != null) {
-                    newType.addAll(ct.getType());
+                if (ct.isRemoveSubTypes() && forge.card.CardType.isASubType(t)) {
+                    removeTypes.add(t);
                 }
-
+                if (ct.isRemoveCreatureTypes() && (forge.card.CardType.isACreatureType(t) || t.equals("AllCreatureTypes"))) {
+                    removeTypes.add(t);
+                }
+            }
+            newType.removeAll(removeTypes);
+            // add new types
+            if (ct.getType() != null) {
+                newType.addAll(ct.getType());
             }
 
-            return newType;
         }
 
-        // nothing changed
-        return new ArrayList<String>(this.getCharacteristics().getType());
+        return newType;
+
     }
 
     /**
@@ -3534,8 +3521,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             final boolean removeSuperTypes, final boolean removeCardTypes, final boolean removeSubTypes,
             final boolean removeCreatureTypes, final long timestamp) {
 
-        this.changedCardTypes.add(new CardType(types, removeTypes, removeSuperTypes, removeCardTypes, removeSubTypes,
-                removeCreatureTypes, timestamp));
+        this.changedCardTypes.put(timestamp, new CardType(types, removeTypes, removeSuperTypes, removeCardTypes, removeSubTypes, removeCreatureTypes));
     }
 
     /**
@@ -3582,12 +3568,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      *            long
      */
     public final void removeChangedCardTypes(final long timestamp) {
-        for (int i = 0; i < this.changedCardTypes.size(); i++) {
-            final CardType cardT = this.changedCardTypes.get(i);
-            if (cardT.getTimestamp() == timestamp) {
-                this.changedCardTypes.remove(cardT);
-            }
-        }
+        this.changedCardTypes.remove(Long.valueOf(timestamp));
     }
 
     // values that are printed on card
@@ -4232,7 +4213,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     public final void addChangedCardKeywords(final ArrayList<String> keywords, final ArrayList<String> removeKeywords,
             final boolean removeAllKeywords, final long timestamp) {
 
-        this.changedCardKeywords.add(new CardKeywords(keywords, removeKeywords, removeAllKeywords, timestamp));
+        this.changedCardKeywords.put(timestamp, new CardKeywords(keywords, removeKeywords, removeAllKeywords));
     }
 
     /**
@@ -4269,12 +4250,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      *            the timestamp
      */
     public final void removeChangedCardKeywords(final long timestamp) {
-        for (int i = 0; i < this.changedCardKeywords.size(); i++) {
-            final CardKeywords cardK = this.changedCardKeywords.get(i);
-            if (cardK.getTimestamp() == timestamp) {
-                this.changedCardKeywords.remove(cardK);
-            }
-        }
+        changedCardKeywords.remove(Long.valueOf(timestamp));
     }
 
     // Hidden keywords will be left out
@@ -4291,22 +4267,16 @@ public class Card extends GameEntity implements Comparable<Card> {
         keywords.addAll(this.getExtrinsicKeyword());
 
         // see if keyword changes are in effect
-        if (!this.changedCardKeywords.isEmpty()) {
+        for (final CardKeywords ck : this.changedCardKeywords.values()) {
 
-            final ArrayList<CardKeywords> newKeywords = new ArrayList<CardKeywords>(this.changedCardKeywords);
-            Collections.sort(newKeywords); // sorts newKeywords by timeStamp
+            if (ck.isRemoveAllKeywords()) {
+                keywords.clear();
+            } else if (ck.getRemoveKeywords() != null) {
+                keywords.removeAll(ck.getRemoveKeywords());
+            }
 
-            for (final CardKeywords ck : newKeywords) {
-
-                if (ck.isRemoveAllKeywords()) {
-                    keywords.clear();
-                } else if (ck.getRemoveKeywords() != null) {
-                    keywords.removeAll(ck.getRemoveKeywords());
-                }
-
-                if (ck.getKeywords() != null) {
-                    keywords.addAll(ck.getKeywords());
-                }
+            if (ck.getKeywords() != null) {
+                keywords.addAll(ck.getKeywords());
             }
         }
 
