@@ -1,7 +1,7 @@
 Name:Golden Wish
 ManaCost:3 W W
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 3 W W | Origin$ Sideboard | Destination$ Hand | ChangeType$ Artifact,Enchantment | ChangeNum$ 1 | SubAbility$ DBChange | SpellDescription$ You may choose an artifact or enchantment card you own from outside the game, reveal that card, and put it into your hand. Exile CARDNAME.
+A:SP$ ChangeZone | Cost$ 3 W W | Origin$ Sideboard | Destination$ Hand | ChangeType$ Artifact.YouOwn,Enchantment.YouOwn | ChangeNum$ 1 | SubAbility$ DBChange | SpellDescription$ You may choose an artifact or enchantment card you own from outside the game, reveal that card, and put it into your hand. Exile CARDNAME.
 SVar:DBChange:DB$ ChangeZone | Origin$ Stack | Destination$ Exile
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/golden_wish.jpg
