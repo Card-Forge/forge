@@ -28,6 +28,7 @@
             ISO-8859-1
         </project.reporting.outputEncoding>
         <configSourceDirectory>src/main/config</configSourceDirectory>
+        <jettyVersion>8.1.9.v20130131</jettyVersion>
     </properties>
     <developers>
         <developer>
@@ -322,16 +323,16 @@
                     <source>1.6</source>
                     <target>1.6</target>
                     <compilerId>groovy-eclipse-compiler</compilerId>
-                    <!-- set verbose to be true if you want lots of uninteresting messages -->
-                    <!-- <verbose>true</verbose> -->
+							      <!-- set verbose to be true if you want lots of uninteresting messages -->
+							      <!-- <verbose>true</verbose> -->
                 </configuration>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.codehaus.groovy</groupId>
-                        <artifactId>groovy-eclipse-compiler</artifactId>
-                        <version>2.7.0-01</version>
-                    </dependency>
-                </dependencies>
+						    <dependencies>
+						      <dependency>
+						        <groupId>org.codehaus.groovy</groupId>
+						        <artifactId>groovy-eclipse-compiler</artifactId>
+						        <version>2.7.0-01</version>
+						      </dependency>
+						    </dependencies>
             </plugin>
 
             <plugin>
@@ -475,18 +476,18 @@
                                     </action>
                                 </pluginExecution>
                                 <pluginExecution>
-                                    <pluginExecutionFilter>
+                                	<pluginExecutionFilter>
                                         <groupId>org.apache.maven.plugins</groupId>
                                         <artifactId>maven-compiler-plugin</artifactId>
                                         <versionRange>[2.5.1,)</versionRange>
-                                        <goals>
-                                            <goal>testCompile</goal>
-                                            <goal>compile</goal>
-                                        </goals>
-                                    </pluginExecutionFilter>
-                                    <action>
+                                		<goals>
+                                			<goal>testCompile</goal>
+                                			<goal>compile</goal>
+                                		</goals>
+                                	</pluginExecutionFilter>
+                                	<action>
                                         <execute />
-                                    </action>
+                                	</action>
                                 </pluginExecution>
                                 <pluginExecution>
                                     <pluginExecutionFilter>
@@ -708,8 +709,23 @@
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
-            <version>6.5.2</version>
+            <version>6.7</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.jetty</groupId>
+            <artifactId>jetty-websocket</artifactId>
+            <version>${jettyVersion}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.jetty</groupId>
+            <artifactId>jetty-server</artifactId>
+            <version>${jettyVersion}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.jetty</groupId>
+            <artifactId>jetty-servlet</artifactId>
+            <version>${jettyVersion}</version>
         </dependency>
         <dependency>
             <groupId>log4j</groupId>
