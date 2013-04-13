@@ -72,7 +72,12 @@ public class ChooseCardNameEffect extends SpellAbilityEffect {
                             Predicate<CardPrinted> cpp = Predicates.compose(Predicates.not(CardRulesPredicates.Presets.IS_BASIC_LAND), CardPrinted.FN_GET_RULES);
                             cards = Lists.newArrayList(Iterables.filter(cards, cpp));
                         }
-                        if ( StringUtils.containsIgnoreCase(valid, "creature") )
+                        if ( StringUtils.containsIgnoreCase(valid, "noncreature") )
+                        {
+                            Predicate<CardPrinted> cpp = Predicates.compose(Predicates.not(CardRulesPredicates.Presets.IS_CREATURE), CardPrinted.FN_GET_RULES);
+                            cards = Lists.newArrayList(Iterables.filter(cards, cpp));
+                        }
+                        else if ( StringUtils.containsIgnoreCase(valid, "creature") )
                         {
                             Predicate<CardPrinted> cpp = Predicates.compose(CardRulesPredicates.Presets.IS_CREATURE, CardPrinted.FN_GET_RULES);
                             cards = Lists.newArrayList(Iterables.filter(cards, cpp));
