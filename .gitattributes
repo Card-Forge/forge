@@ -13503,6 +13503,12 @@ src/main/config/forge.ico -text svneol=unset#image/ico
 src/main/config/forge.sh svneol=native#text/x-sh
 src/main/config/forge_checks.xml svneol=native#text/xml
 src/main/config/support/template.applescript -text
+src/main/html/css/core.css -text
+src/main/html/index.html -text
+src/main/html/js/jquery/jquery-1.9.1.js -text
+src/main/html/js/jquery/jquery-1.9.1.min.js -text
+src/main/html/js/main.js -text
+src/main/html/js/websocket.js -text
 src/main/java/forge/Action.java -text
 src/main/java/forge/Card.java svneol=native#text/plain
 src/main/java/forge/CardCharacteristicName.java -text

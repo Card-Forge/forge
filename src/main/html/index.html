@@ -1,0 +1,30 @@
+<html>
+	<head>
+		<title>Tail-based by Web Sockets</title>
+		
+
+		<link href="css/core.css" media="all" rel="stylesheet" type="text/css" />
+		<script type="text/javascript" src="js/jquery/jquery-1.9.1.min.js"></script>
+		<script type="text/javascript" src="js/websocket.js"></script>
+		<script type='text/javascript' src="js/main.js"></script>
+	</head>
+	<body>
+		<div class="wrap">
+			<div class="title">
+				<span>Your server: <b>ws://</b></span>
+				<input id="ws_uri" type="text" value="localhost:81/" name="uri"/>
+				<button id="connect" name="connect" class="cn">Connect</button>
+				<button id="disconn" name="disconn" class="dc" disabled="disabled">Disconnect</button>
+			</div>
+			<ul class="messages" id='messages'></ul>
+			<div class="packets" id='input'>
+				<span>Raw text to send:</span>
+				<input type="text" name="packet" value="" />
+				<button id="send" class="send">Send</button>
+			</div>
+	
+		</div>
+		
+	
+	</body>
+</html> 

@@ -1,0 +1,22 @@
+ul, ol { margin: 0; }
+
+div { border: 0px solid black; }
+div.wrap { width: 640px; margin: 100px auto;}
+
+.title { height: 24px; background-color: #ddd; padding: 4px; border: 1px solid black; border-bottom: 0px }
+.title input {width: 300px; }
+.title span { display: inline-block; width: 120px; text-align: right; }
+
+.messages { height: 20ex; overflow: auto; background-color: #eee; padding: 4px; border: 1px solid black; list-style: none; }
+.messages .incoming { color: #006; }
+.messages .incoming:before { content: "<< "}
+.messages .outcoming { color: #060; }
+.messages .outcoming:before { content: ">> "}
+.messages .error { color: #600; }
+
+.packets { padding: 4px; background-color: #ddd; border: 1px solid black; border-top: 0px; display: none; }
+.packets span { display: inline-block; width: 120px; text-align: right; }
+.packets input {width: 400px; }
+.packets button { width: 100px; }
+
+span.alert { font-style: italic; }
