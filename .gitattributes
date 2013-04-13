@@ -3810,6 +3810,7 @@ res/cardsfolder/f/fog.txt svneol=native#text/plain
 res/cardsfolder/f/fog_bank.txt svneol=native#text/plain
 res/cardsfolder/f/fog_elemental.txt svneol=native#text/plain
 res/cardsfolder/f/fog_of_gnats.txt svneol=native#text/plain
+res/cardsfolder/f/fog_patch.txt -text
 res/cardsfolder/f/foil.txt -text
 res/cardsfolder/f/fold_into_aether.txt -text
 res/cardsfolder/f/folk_medicine.txt svneol=native#text/plain
