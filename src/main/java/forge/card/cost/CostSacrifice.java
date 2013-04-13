@@ -164,6 +164,7 @@ public class CostSacrifice extends CostPartWithList {
             
             InputSelectCards inp = new InputSelectCardsFromList(c, c, list);
             inp.setMessage("Select a " + this.getDescriptiveType() + " to sacrifice (%d left)");
+            inp.setCancelAllowed(true);
             FThreads.setInputAndWait(inp);
             if ( inp.hasCancelled() )
                 return false;
