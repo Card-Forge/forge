@@ -82,7 +82,14 @@ public enum CHomeUI implements ICDoc {
             public void execute() {
                 server.listen();
             }
-        });        
+        });
+        
+        VHomeUI.SINGLETON_INSTANCE.getLblStopServer().setCommand(new Command() {
+            @Override
+            public void execute() {
+                server.stop();
+            }
+        });
     }
 
     /* (non-Javadoc)
