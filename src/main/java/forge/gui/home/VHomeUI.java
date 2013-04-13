@@ -89,8 +89,9 @@ public enum VHomeUI implements IVTopLevelUI {
         .iconAlignX(SwingConstants.CENTER)
         .iconInBackground(true).iconScaleFactor(1.0).build();
 
-    private final FLabel lblExit = new FLabel.ButtonBuilder().text("Exit Forge").fontSize(16).build();
-    private final FLabel lblEditor = new FLabel.ButtonBuilder().text("Deck Editor").fontSize(16).build();
+    private final FLabel lblExit = new FLabel.ButtonBuilder().text("Exit Forge").fontSize(14).build();
+    private final FLabel lblEditor = new FLabel.ButtonBuilder().text("Deck Editor").fontSize(14).build();
+    private final FLabel lblStartServer = new FLabel.ButtonBuilder().text("Start Server").fontSize(14).build();
 
     private VHomeUI() {
         pnlMenu.add(lblLogo, "w 150px!, h 150px!, gap 0 0 5px 10px, ax center");
@@ -150,13 +151,13 @@ public enum VHomeUI implements IVTopLevelUI {
             }
         }
 
-        JPanel pnlButtons = new JPanel(new MigLayout("insets 0, gap 0"));
+        JPanel pnlButtons = new JPanel(new MigLayout("insets 0, gap 0, wrap 2"));
         pnlButtons.setOpaque(false);
 
-        lblExit.setFont(FSkin.getFont(14));
-        lblEditor.setFont(FSkin.getFont(14));
+        pnlButtons.add(lblStartServer, "w 230px!, h 24px!, sx 2, gap 0 0 0 10px");
         pnlButtons.add(lblExit, "w 110px!, h 30px!, gap 0 10px 0 0");
         pnlButtons.add(lblEditor, "w 110px!, h 30px!");
+        
 
         pnlMenu.add(pnlButtons, "w 230px!, gap 10px 0 10px 10px");
         pnlDisplay.setBackground(FSkin.alphaColor(l00, 100));
@@ -170,6 +171,10 @@ public enum VHomeUI implements IVTopLevelUI {
     /** @return {@link forge.gui.toolbox.ExperimentalLabel} */
     public FLabel getLblEditor() {
         return this.lblEditor;
+    }
+
+    public final FLabel getLblStartServer() {
+        return lblStartServer;
     }
 
     /** @return {@link javax.swing.JPanel} */
