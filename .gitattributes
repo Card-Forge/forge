@@ -13871,6 +13871,7 @@ src/main/java/forge/card/trigger/TriggerDestroyed.java -text
 src/main/java/forge/card/trigger/TriggerDevoured.java -text
 src/main/java/forge/card/trigger/TriggerDiscarded.java svneol=native#text/plain
 src/main/java/forge/card/trigger/TriggerDrawn.java svneol=native#text/plain
+src/main/java/forge/card/trigger/TriggerEvolved.java -text
 src/main/java/forge/card/trigger/TriggerFlipped.java -text
 src/main/java/forge/card/trigger/TriggerHandler.java svneol=native#text/plain
 src/main/java/forge/card/trigger/TriggerLandPlayed.java svneol=native#text/plain

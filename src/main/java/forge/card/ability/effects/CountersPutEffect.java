@@ -1,5 +1,6 @@
 package forge.card.ability.effects;
 
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
@@ -10,6 +11,7 @@ import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
+import forge.card.trigger.TriggerType;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
@@ -113,6 +115,11 @@ public class CountersPutEffect extends SpellAbilityEffect {
                         tgtCard.addCountersAddedBy(card, counterType, value);
                     }
                     tgtCard.addCounter(counterType, counterAmount, true);
+                    if (sa.hasParam("Evolve")) {
+                        final HashMap<String, Object> runParams = new HashMap<String, Object>();
+                        runParams.put("Card", tgtCard);
+                        tgtCard.getController().getGame().getTriggerHandler().runTrigger(TriggerType.Evolved, runParams, false);
+                    }
                 } else {
                     // adding counters to something like re-suspend cards
                     tgtCard.addCounter(counterType, counterAmount, false);

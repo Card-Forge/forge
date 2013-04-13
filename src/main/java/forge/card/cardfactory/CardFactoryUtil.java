@@ -2710,7 +2710,7 @@ public class CardFactoryUtil {
                     + "control, if that creature has greater power or toughness than this creature, put a "
                     + "+1/+1 counter on this creature.)";
             final String abString = "AB$ PutCounter | Cost$ 0 | Defined$ Self | CounterType$ P1P1 | "
-                    + "CounterNum$ 1";
+                    + "CounterNum$ 1 | Evolve$ True";
             final Trigger parsedTrigger = TriggerHandler.parseTrigger(evolveTrigger, card, true);
             card.addTrigger(parsedTrigger);
             card.setSVar("EvolveAddCounter", abString);

@@ -28,6 +28,7 @@ public enum TriggerType {
     TapsForMana(TriggerTapsForMana.class),
     CounterAdded(TriggerCounterAdded.class),
     CounterRemoved(TriggerCounterRemoved.class),
+    Evolved(TriggerEvolved.class),
     Unequip(TriggerUnequip.class),
     DamageDone(TriggerDamageDone.class),
     Championed(TriggerChampioned.class),
