@@ -90,6 +90,11 @@ public class ComputerUtilCost {
                     }
                     continue;
                 }
+
+                //don't kill the creature
+                if (type.name().equals("P1P1") && source.getLethalDamage() <= 1) {
+                    return false;
+                }
     
                 Integer amount = part.convertAmount();
                 if (amount == null) {
