@@ -2958,6 +2958,7 @@ public class CardFactoryUtil {
         final Ability haunterDiesSetup = new Ability(card, ManaCost.ZERO) {
             @Override
             public void resolve() {
+                this.setActivatingPlayer(card.getController());
                 final List<Card> creats = CardLists.filter(Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield), Presets.CREATURES);
                 for (int i = 0; i < creats.size(); i++) {
                     if (!creats.get(i).canBeTargetedBy(this)) {

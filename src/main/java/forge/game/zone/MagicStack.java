@@ -633,6 +633,7 @@ public class MagicStack extends MyObservable {
                 }
             };
             for (int i = 0; i < creats.size(); i++) {
+                haunterDiesWork.setActivatingPlayer(sa.getActivatingPlayer());
                 if (!creats.get(i).canBeTargetedBy(haunterDiesWork)) {
                     creats.remove(i);
                     i--;
