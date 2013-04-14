@@ -1,7 +1,7 @@
 package forge.net.client.state;
 
 import forge.net.client.INetClient;
-import forge.net.protocol.incoming.Packet;
+import forge.net.protocol.incoming.IPacket;
 
 /** 
  * TODO: Write javadoc for this type.
@@ -15,7 +15,7 @@ public class InLobbyClientState implements IClientState {
     }
 
     @Override
-    public boolean processPacket(Packet data) {
+    public boolean processPacket(IPacket data) {
         return false;
     }
 }

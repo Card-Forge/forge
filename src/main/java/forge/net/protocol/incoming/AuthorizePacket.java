@@ -8,12 +8,11 @@ import forge.util.TextUtil;
  * TODO: Write javadoc for this type.
  *
  */
-public class AuthorizePacket extends Packet {
+public class AuthorizePacket implements IPacket {
     private final String username;
     private final String password;
     
     private AuthorizePacket(String name, String pass) {
-        super(PacketOpcode.Authorize);
         username = name;
         password = pass;
     }
@@ -27,7 +26,7 @@ public class AuthorizePacket extends Packet {
     }
 
 
-    public static Packet parse(String data) {
+    public static IPacket parse(String data) {
         String[] parts = TextUtil.splitWithParenthesis(data, ' ', '\"', '\"');
         if(parts.length == 1 || parts.length == 2) {
             if(!StringUtils.isAlphanumericSpace(parts[0]))
@@ -41,6 +40,11 @@ public class AuthorizePacket extends Packet {
                 return new AuthorizePacket(parts[0], parts[1]); 
         }
         return UnknownPacket.parse(data);
+    }
+
+    @Override
+    public PacketOpcode getOpCode() {
+        return PacketOpcode.Authorize;
     }
 
 }

@@ -5,11 +5,10 @@ package forge.net.protocol.incoming;
  * TODO: Write javadoc for this type.
  *
  */
-public class UnknownPacket extends Packet {
+public class UnknownPacket implements IPacket {
 
     private final String message;
     private UnknownPacket(String data) {
-        super(PacketOpcode.Unknown);
         message = data;
     }
     public String getMessage() {
@@ -20,8 +19,14 @@ public class UnknownPacket extends Packet {
      * @param substring
      * @return
      */
-    public static Packet parse(String substring) {
+    public static IPacket parse(String substring) {
         return new UnknownPacket(substring);
     }
+    
+    @Override
+    public PacketOpcode getOpCode() {
+        return PacketOpcode.Unknown;
+    }
+
 
 }

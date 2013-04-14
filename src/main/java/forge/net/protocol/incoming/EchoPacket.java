@@ -5,11 +5,10 @@ package forge.net.protocol.incoming;
  * TODO: Write javadoc for this type.
  *
  */
-public class EchoPacket extends Packet {
+public class EchoPacket implements IPacket {
 
     private final String message;
     private EchoPacket(String data) {
-        super(PacketOpcode.Echo);
         message = data;
     }
     
@@ -19,6 +18,11 @@ public class EchoPacket extends Packet {
     
     public String getMessage() {
         return message;
+    }
+    
+    @Override
+    public PacketOpcode getOpCode() {
+        return PacketOpcode.Echo;
     }
 
 }

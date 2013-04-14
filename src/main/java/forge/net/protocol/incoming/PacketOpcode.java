@@ -30,7 +30,7 @@ public enum PacketOpcode {
      * @param data
      * @return
      */
-    public static Packet decode(String data) {
+    public static IPacket decode(String data) {
         for(PacketOpcode s : PacketOpcode.values()) {
             if ( s.opcode != null && data.startsWith(s.opcode) )
                 return decodePacket(s, data.substring(s.opcode.length()).trim());
@@ -42,7 +42,7 @@ public enum PacketOpcode {
     }
 
 
-    private static Packet decodePacket(PacketOpcode code, String data) {
+    private static IPacket decodePacket(PacketOpcode code, String data) {
         switch(code) {
             case Echo:
                 return EchoPacket.parse(data);

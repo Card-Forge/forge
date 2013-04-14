@@ -9,7 +9,7 @@ import forge.net.IConnectionObserver;
 import forge.net.client.state.ConnectedClientState;
 import forge.net.client.state.UnauthorizedClientState;
 import forge.net.client.state.IClientState;
-import forge.net.protocol.incoming.Packet;
+import forge.net.protocol.incoming.IPacket;
 import forge.net.protocol.incoming.PacketOpcode;
 import forge.net.protocol.outcoming.IMessage;
 
@@ -46,7 +46,7 @@ public class NetClient implements IConnectionObserver, INetClient{
     /** Receives input from network client */ 
     @Override
     public void onMessage(String data) {
-        Packet p = PacketOpcode.decode(data);
+        IPacket p = PacketOpcode.decode(data);
         for(IClientState s : state) {
             if ( s.processPacket(p) )
                 break;

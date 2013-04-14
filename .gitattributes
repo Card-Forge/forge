@@ -14301,8 +14301,8 @@ src/main/java/forge/net/package-info.java -text
 src/main/java/forge/net/protocol/incoming/AuthorizePacket.java -text
 src/main/java/forge/net/protocol/incoming/ChatPacket.java -text
 src/main/java/forge/net/protocol/incoming/EchoPacket.java -text
+src/main/java/forge/net/protocol/incoming/IPacket.java -text
 src/main/java/forge/net/protocol/incoming/IncorrectPacket.java -text
-src/main/java/forge/net/protocol/incoming/Packet.java -text
 src/main/java/forge/net/protocol/incoming/PacketOpcode.java -text
 src/main/java/forge/net/protocol/incoming/UnknownPacket.java -text
 src/main/java/forge/net/protocol/incoming/package-info.java -text
