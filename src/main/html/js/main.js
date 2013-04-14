@@ -31,7 +31,9 @@ function addLi(className, text) {
 }
 
 function onConnectClicked() {
-	server.connect($("#ws_uri").val());
+	var uri = $("#ws_uri").val()
+	addLi("connecting", "Connecting to ws://" + uri + " ..." )
+	server.connect(uri);
 	$('#connect').attr("disabled", "disabled")
 	$('#disconn').removeAttr("disabled")
 

@@ -44,12 +44,10 @@ public enum PacketOpcode {
 
     private static IPacket decodePacket(PacketOpcode code, String data) {
         switch(code) {
-            case Echo:
-                return EchoPacket.parse(data);
-            case Authorize:
-                return AuthorizePacket.parse(data);
-            default: 
-                return UnknownPacket.parse(data);
+            case Echo: return EchoPacket.parse(data);
+            case Authorize: return AuthorizePacket.parse(data);
+            
+            default: return UnknownPacket.parse(data);
         }
     }
 }
