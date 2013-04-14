@@ -1,27 +1,32 @@
 package forge.net.client;
 
+import java.util.concurrent.BlockingDeque;
+import java.util.concurrent.LinkedBlockingDeque;
+
 import forge.game.player.LobbyPlayer;
-import forge.game.player.PlayerType;
 import forge.net.IClientSocket;
 import forge.net.IConnectionObserver;
-import forge.net.client.state.ClientStateUnauthorized;
+import forge.net.client.state.ConnectedClientState;
+import forge.net.client.state.UnauthorizedClientState;
 import forge.net.client.state.IClientState;
 import forge.net.protocol.incoming.Packet;
 import forge.net.protocol.incoming.PacketOpcode;
-import forge.net.protocol.outcoming.Message;
+import forge.net.protocol.outcoming.IMessage;
 
 public class NetClient implements IConnectionObserver, INetClient{
 
     private final IClientSocket socket; 
-    private IClientState state = new ClientStateUnauthorized(this);
+    private BlockingDeque<IClientState> state = new LinkedBlockingDeque<IClientState>();
     private LobbyPlayer player = null;
     
     public NetClient(IClientSocket clientSocket) {
         socket = clientSocket;
+        state.push(new ConnectedClientState(this));
+        state.push(new UnauthorizedClientState(this));
     }
 
     public void autorized() { 
-        player = new LobbyPlayer(PlayerType.REMOTE, "Guest");
+
     }
     
     /* (non-Javadoc)
@@ -34,15 +39,41 @@ public class NetClient implements IConnectionObserver, INetClient{
 
 
     @Override
+    public final LobbyPlayer getPlayer() {
+        return player;
+    }
+
+    /** Receives input from network client */ 
+    @Override
     public void onMessage(String data) {
         Packet p = PacketOpcode.decode(data);
-        state.onPacket(p);
+        for(IClientState s : state) {
+            if ( s.processPacket(p) )
+                break;
+        }
     }
 
 
     @Override
-    public void send(Message message) {
+    public void send(IMessage message) {
         socket.send(message.toNetString());
+    }
+
+    /* (non-Javadoc)
+     * @see forge.net.client.INetClient#setPlayer(forge.game.player.LobbyPlayer)
+     */
+    @Override
+    public final void setPlayer(LobbyPlayer lobbyPlayer) {
+        player = lobbyPlayer;
+    }
+
+    /* (non-Javadoc)
+     * @see forge.net.client.INetClient#replaceState(forge.net.client.state.IClientState, forge.net.client.state.IClientState)
+     */
+    @Override
+    public synchronized void replaceState(IClientState old, IClientState newState) {
+        state.removeFirstOccurrence(old);
+        state.push(newState);
     }
 
 }

@@ -4,7 +4,7 @@ package forge.net.protocol.outcoming;
  * TODO: Write javadoc for this type.
  *
  */
-public class EchoMessage extends Message {
+public class EchoMessage implements IMessage {
 
     private final String message;
     

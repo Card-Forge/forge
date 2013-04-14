@@ -7,6 +7,7 @@ import java.util.concurrent.CopyOnWriteArraySet;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.eclipse.jetty.server.Connector;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.nio.SelectChannelConnector;
 import org.eclipse.jetty.servlet.ServletContextHandler;
@@ -26,6 +27,18 @@ public class NetServer {
 
     private final Server srv = new Server();
     private final Set<ClientSocket> _openSockets = new CopyOnWriteArraySet<ClientSocket>();
+    
+    public NetServer() {
+        SelectChannelConnector connector= new SelectChannelConnector();
+        connector.setPort(81);
+        srv.addConnector(connector);
+        
+        ServletContextHandler context = new ServletContextHandler();
+        ServletHolder sh = new ServletHolder(new GameServlet());
+        context.addServlet(sh, "/*");
+        //context.setContextPath("/");
+        srv.setHandler(context);
+    }
     
     @SuppressWarnings("serial")
     public class GameServlet extends WebSocketServlet
@@ -86,19 +99,10 @@ public class NetServer {
     public void listen() {
         if (!srv.isStarted())
         {
-            SelectChannelConnector connector= new SelectChannelConnector();
-            connector.setPort(81);
-            srv.addConnector(connector);
-            
-            ServletContextHandler context = new ServletContextHandler();
-            ServletHolder sh = new ServletHolder(new GameServlet());
-            context.addServlet(sh, "/*");
-            //context.setContextPath("/");
-            srv.setHandler(context);
-
             URI serverUri = null;
             try {
                 srv.start();
+                Connector connector = srv.getConnectors()[0];
                 int port = connector.getLocalPort();
                 String host = connector.getHost();
                 serverUri = new URI(String.format("ws://%s:%d/", host == null ? "localhost" : host ,port));

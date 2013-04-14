@@ -4,7 +4,7 @@ package forge.net.protocol.outcoming;
  * TODO: Write javadoc for this type.
  *
  */
-public class UnknownPacketMessage extends Message {
+public class UnknownPacketMessage implements IMessage {
 
     /* (non-Javadoc)
      * @see forge.net.protocol.outcoming.Message#toNetString()

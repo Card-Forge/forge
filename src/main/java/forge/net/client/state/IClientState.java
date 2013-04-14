@@ -7,5 +7,5 @@ import forge.net.protocol.incoming.Packet;
  *
  */
 public interface IClientState {
-    void onPacket(Packet data);
+    boolean processPacket(Packet data);
 }

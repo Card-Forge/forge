@@ -59,7 +59,6 @@ import forge.gui.home.variant.VSubmenuPlanechase;
 import forge.gui.home.variant.VSubmenuVanguard;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FSkin;
-import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 import forge.view.FView;
 
@@ -162,6 +161,7 @@ public enum VHomeUI implements IVTopLevelUI {
         if ( Singletons.getModel().getPreferences().getPrefBoolean(FPref.DEV_MODE_ENABLED) ) {
             pnlButtons.add(lblStartServer, "w 170px!, h 25px!, gap 0 10px 10px 0, sx 2 ");
             pnlButtons.add(lblStopServer, "w 50px!, h 25px!, gap 0 0 10px 0");
+            lblStopServer.setEnabled(false);
         }
         
         pnlMenu.add(pnlButtons, "w 230px!, gap 10px 0 10px 10px");

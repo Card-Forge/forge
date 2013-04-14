@@ -46,6 +46,7 @@ import forge.gui.match.VMatchUI;
 import forge.gui.match.controllers.CDock;
 import forge.gui.toolbox.CardFaceSymbols;
 import forge.gui.toolbox.FSkin;
+import forge.net.NetServer;
 import forge.properties.NewConstants;
 import forge.quest.data.QuestPreferences.QPref;
 import forge.quest.io.QuestDataIO;
@@ -315,5 +316,15 @@ public enum FControl {
      */
     public SoundSystem getSoundSystem() {
         return soundSystem;
+    }
+
+    /**
+     * TODO: Write javadoc for this method.
+     * @return
+     */
+    private final NetServer server = new NetServer();
+    public NetServer getServer() {
+        // TODO Auto-generated method stub
+        return server;
     }
 }

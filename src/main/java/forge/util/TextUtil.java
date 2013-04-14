@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.StringUtils;
 
 /** 
  * TODO: Write javadoc for this type.
@@ -58,14 +59,16 @@ public class TextUtil {
      */
     public static String[] splitWithParenthesis(CharSequence input, char delimiter, int maxEntries, char openPar, char closePar, boolean skipEmpty) {
         List<String> result = new ArrayList<String>();
+        // Assume that when equal non-zero parenthesis are passed, they need to be discarded
+        boolean trimParenthesis = openPar == closePar && openPar > 0;
         int nPar = 0;
         int len = input.length();
         int start = 0;
         int idx = 1;
         for (int iC = 0; iC < len; iC++ ) {
             char c = input.charAt(iC);
-            if( openPar > 0 && c == openPar ) nPar++;
-            if( closePar > 0 && c == closePar ) { nPar = nPar > 0 ? nPar - 1 : 0; }
+            if( closePar > 0 && c == closePar && nPar > 0 ) { nPar--; }
+            else if( openPar > 0 && c == openPar ) nPar++;
 
             if( c == delimiter && nPar == 0 && idx < maxEntries) {
                 if( iC > start || !skipEmpty ) {
@@ -79,7 +82,8 @@ public class TextUtil {
         if( len > start || !skipEmpty )
             result.add(input.subSequence(start, len).toString());
 
-        return result.toArray(ArrayUtils.EMPTY_STRING_ARRAY);
+        String[] toReturn = result.toArray(ArrayUtils.EMPTY_STRING_ARRAY);
+        return trimParenthesis ? StringUtils.stripAll(toReturn, String.valueOf(openPar)) : toReturn;
     }
     
     /**

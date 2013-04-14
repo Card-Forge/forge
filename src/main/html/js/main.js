@@ -4,31 +4,30 @@ if (!window.WebSocket)
 var server = new CWebSocket();
 var listener = {
 	onOpen : function() {
-		server.send('websockets are open for communications!');
-		$('#input').fadeIn();
+		$('#input').slideDown();
 	},
 
 	onMessage : function(m) {
 		if (m.data) {
-			$('#messages').append(makeLi("incoming", m.data));
-			var messageBox = $('#messages')[0];
-			messageBox.scrollTop = messageBox.scrollHeight - messageBox.clientHeight;
+			addLi("incoming", m.data);
 		}
 	},
 
 	onClose : function(m) {
-		$('#messages').append(makeLi("error", "Connection was closed (" + m.code + "): " + m.reason));
+		addLi("error", "Connection was closed (" + m.code + "): " + m.reason);
 		onDisconnectClicked();
 		$('#input').fadeOut();
 	}
 };
 server.addListener(listener);
 
-function makeLi(className, text) {
+function addLi(className, text) {
 	var spanText = document.createElement('li');
 	spanText.className = className;
 	spanText.innerHTML = text;
-	return spanText;
+	var messageBox = $('#messages')[0];
+	messageBox.appendChild(spanText);
+	messageBox.scrollTop = messageBox.scrollHeight - messageBox.clientHeight;
 }
 
 function onConnectClicked() {
@@ -48,7 +47,7 @@ function onDisconnectClicked() {
 function onSendClicked() { 
 	var toSend = $("#input input").val();
 	$("#input input").val("");
-	$('#messages').append(makeLi("outcoming", toSend));
+	addLi("outcoming", toSend);
 	server.send(toSend)
 }
 

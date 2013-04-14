@@ -8,12 +8,20 @@ package forge.net.protocol.incoming;
 public class UnknownPacket extends Packet {
 
     private final String message;
-    public UnknownPacket(String data) {
+    private UnknownPacket(String data) {
         super(PacketOpcode.Unknown);
         message = data;
     }
     public String getMessage() {
         return message;
+    }
+    /**
+     * TODO: Write javadoc for this method.
+     * @param substring
+     * @return
+     */
+    public static Packet parse(String substring) {
+        return new UnknownPacket(substring);
     }
 
 }

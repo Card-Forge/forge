@@ -8,10 +8,15 @@ package forge.net.protocol.incoming;
 public class EchoPacket extends Packet {
 
     private final String message;
-    public EchoPacket(String data) {
+    private EchoPacket(String data) {
         super(PacketOpcode.Echo);
         message = data;
     }
+    
+    public static EchoPacket parse(String data) {
+        return new EchoPacket(data);
+    }
+    
     public String getMessage() {
         return message;
     }

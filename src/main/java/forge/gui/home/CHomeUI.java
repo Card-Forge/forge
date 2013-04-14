@@ -8,7 +8,6 @@ import forge.gui.deckeditor.controllers.CEditorConstructed;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.ICDoc;
 import forge.gui.home.sanctioned.VSubmenuConstructed;
-import forge.net.NetServer;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 
@@ -56,7 +55,6 @@ public enum CHomeUI implements ICDoc {
     /* (non-Javadoc)
      * @see forge.view.home.ICDoc#intialize()
      */
-    private final NetServer server = new NetServer();
     
     @SuppressWarnings("serial")
     @Override
@@ -80,14 +78,18 @@ public enum CHomeUI implements ICDoc {
         VHomeUI.SINGLETON_INSTANCE.getLblStartServer().setCommand(new Command() {
             @Override
             public void execute() {
-                server.listen();
+                FControl.SINGLETON_INSTANCE.getServer().listen();
+                VHomeUI.SINGLETON_INSTANCE.getLblStopServer().setEnabled(true);
+                VHomeUI.SINGLETON_INSTANCE.getLblStartServer().setEnabled(false);
             }
         });
         
         VHomeUI.SINGLETON_INSTANCE.getLblStopServer().setCommand(new Command() {
             @Override
             public void execute() {
-                server.stop();
+                FControl.SINGLETON_INSTANCE.getServer().stop();
+                VHomeUI.SINGLETON_INSTANCE.getLblStopServer().setEnabled(false);
+                VHomeUI.SINGLETON_INSTANCE.getLblStartServer().setEnabled(true);
             }
         });
     }

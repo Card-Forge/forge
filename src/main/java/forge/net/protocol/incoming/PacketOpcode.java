@@ -8,7 +8,10 @@ package forge.net.protocol.incoming;
 public enum PacketOpcode {
     Echo("/echo"),
     Chat("/s"),
-    Unknown("");
+    Authorize("/auth"),
+    
+    Incorrect(null),
+    Unknown(null);
     
     
     
@@ -18,6 +21,10 @@ public enum PacketOpcode {
         opcode = code;
     }
 
+    public final String getOpcode() {
+        return opcode;
+    }
+
     /**
      * TODO: Write javadoc for this method.
      * @param data
@@ -25,11 +32,11 @@ public enum PacketOpcode {
      */
     public static Packet decode(String data) {
         for(PacketOpcode s : PacketOpcode.values()) {
-            if ( data.startsWith(s.opcode) )
+            if ( s.opcode != null && data.startsWith(s.opcode) )
                 return decodePacket(s, data.substring(s.opcode.length()).trim());
         }
         if( data.startsWith("/") )
-            return new UnknownPacket(data.substring(1));
+            return UnknownPacket.parse(data.substring(1));
         else
             return new ChatPacket(data);
     }
@@ -38,9 +45,11 @@ public enum PacketOpcode {
     private static Packet decodePacket(PacketOpcode code, String data) {
         switch(code) {
             case Echo:
-                return new EchoPacket(data);
+                return EchoPacket.parse(data);
+            case Authorize:
+                return AuthorizePacket.parse(data);
             default: 
-                return new UnknownPacket(data);
+                return UnknownPacket.parse(data);
         }
     }
 }
