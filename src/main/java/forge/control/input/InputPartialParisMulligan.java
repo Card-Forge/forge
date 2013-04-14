@@ -25,6 +25,8 @@ import forge.FThreads;
 import forge.game.GameState;
 import forge.game.GameType;
 import forge.game.MatchController;
+import forge.game.ai.ComputerUtil;
+import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
@@ -47,6 +49,7 @@ public class InputPartialParisMulligan extends InputBase {
     private static final long serialVersionUID = -8112954303001155622L;
     
     private final MatchController match;
+    private final GameState game;
     
     private final List<Card> lastExiled = new ArrayList<Card>();
     private final List<Card> allExiled = new ArrayList<Card>();
@@ -54,6 +57,7 @@ public class InputPartialParisMulligan extends InputBase {
     public InputPartialParisMulligan(MatchController match0, Player humanPlayer) {
         super(humanPlayer);
         match = match0;
+        game = match.getCurrentGame();
     }
     
     /** {@inheritDoc} */
@@ -88,12 +92,35 @@ public class InputPartialParisMulligan extends InputBase {
     public final void selectButtonCancel() {
         for(Card c : lastExiled)
         {
-            match.getCurrentGame().action.exile(c);
+            game.action.exile(c);
         }
         
         player.drawCards(lastExiled.size()-1);
         allExiled.addAll(lastExiled);
         lastExiled.clear();
+        
+        final List<Card> aiAllExiled = new ArrayList<Card>();
+        for (Player p : game.getPlayers()) {
+            if (!(p instanceof AIPlayer)) {
+                continue;
+            }
+            int ppcandidates = -1;
+            AIPlayer ai = (AIPlayer) p;
+            
+            while (ComputerUtil.wantMulligan(ai) && ppcandidates != 0) {
+                List<Card> cand = ComputerUtil.getPartialParisCandidates(ai);
+                ppcandidates = cand.size();
+                if(ppcandidates != 0)
+                {
+                    aiAllExiled.addAll(cand);
+                    for(Card c : cand)
+                    {
+                        game.action.exile(c);
+                    }
+                    ai.drawCards(ppcandidates-1);
+                }
+            }
+        }
 
         if (player.getCardsIn(ZoneType.Hand).isEmpty()) {
             this.end();
@@ -102,9 +129,7 @@ public class InputPartialParisMulligan extends InputBase {
         }
     }
 
-    final void end() {        
-        
-        final GameState game = match.getCurrentGame();
+    final void end() {               
 
         for(Card c : allExiled)
         {
@@ -113,17 +138,28 @@ public class InputPartialParisMulligan extends InputBase {
         player.shuffle();
         
         // Computer mulligan
-        //TODO: How should AI approach Partial Paris?
-        /*        
+        final List<Card> aiAllExiled = new ArrayList<Card>();
         for (Player p : game.getPlayers()) {
             if (!(p instanceof AIPlayer)) {
                 continue;
             }
+            int ppcandidates = -1;
             AIPlayer ai = (AIPlayer) p;
-            while (ComputerUtil.wantMulligan(ai)) {
-                ai.doMulligan();
+            
+            while (ComputerUtil.wantMulligan(ai) && ppcandidates != 0) {
+                List<Card> cand = ComputerUtil.getPartialParisCandidates(ai);
+                ppcandidates = cand.size();
+                if(ppcandidates != 0)
+                {
+                    aiAllExiled.addAll(cand);
+                    for(Card c : cand)
+                    {
+                        game.action.exile(c);
+                    }
+                    ai.drawCards(ppcandidates-1);
+                }
             }
-        }*/
+        }
 
         // Human Leylines & Chancellors
         ButtonUtil.reset();
@@ -158,7 +194,7 @@ public class InputPartialParisMulligan extends InputBase {
                 if (GuiDialog.confirm(c0, "Use " + c0.getName() + "'s ability?")) {
                     List<Card> hand = new ArrayList<Card>(c0.getController().getCardsIn(ZoneType.Hand));
                     for (Card c : hand) {
-                        match.getCurrentGame().getAction().exile(c);
+                        game.getAction().exile(c);
                     }
                     c0.getController().drawCards(hand.size());
                 }

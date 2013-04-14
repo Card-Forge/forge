@@ -19,7 +19,9 @@ package forge.game.ai;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import com.google.common.base.Predicate;
@@ -30,7 +32,9 @@ import forge.CardLists;
 import forge.CardPredicates;
 import forge.CardPredicates.Presets;
 import forge.CardUtil;
+import forge.Color;
 import forge.Singletons;
+import forge.card.MagicColor;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.ApiType;
 import forge.card.ability.effects.CharmEffect;
@@ -39,6 +43,7 @@ import forge.card.cost.Cost;
 import forge.card.cost.CostDiscard;
 import forge.card.cost.CostPart;
 import forge.card.cost.CostPayment;
+import forge.card.spellability.AbilityManaPart;
 import forge.card.spellability.AbilityStatic;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
@@ -1225,6 +1230,67 @@ public class ComputerUtil {
         final boolean hasLittleCmc0Cards = CardLists.getValidCards(handList, "Card.cmcEQ0", ai, null).size() < 2;
         return (handList.size() > ai.getAi().getIntProperty(AiProps.AI_MULLIGAN_THRESHOLD)) && hasLittleCmc0Cards;
 
+    }
+    
+    public static List<Card> getPartialParisCandidates(AIPlayer ai) {
+        final List<Card> candidates = new ArrayList<Card>();
+        final List<Card> handList = ai.getCardsIn(ZoneType.Hand);
+        
+        final List<Card> lands = CardLists.getValidCards(handList, "Card.Land", ai, null);
+        final List<Card> nonLands = CardLists.getValidCards(handList, "Card.nonLand", ai, null);
+        CardLists.sortByCmcDesc(nonLands);
+        
+        if(lands.size() >= 3 && lands.size() <= 4)
+            return candidates;
+        
+        if(lands.size() < 3)
+        {
+            //Not enough lands!
+            int tgtCandidates = Math.max(Math.abs(lands.size()-nonLands.size()), 3);
+            System.out.println("Partial Paris: " + ai.getName() + " lacks lands, aiming to exile " + tgtCandidates + " cards.");
+            
+            for(int i=0;i<tgtCandidates;i++)
+            {
+                candidates.add(nonLands.get(i));
+            }
+        }
+        else
+        {
+            //Too many lands!
+            //Init
+            Map<Color,List<Card>> numProducers = new HashMap<Color,List<Card>>();
+            for(Color col : Color.WUBRG)
+            {
+                numProducers.put(col, new ArrayList<Card>());
+            }
+            
+            
+            for(Card c : lands)
+            {
+                for(SpellAbility sa : c.getManaAbility())
+                {
+                    AbilityManaPart abmana = sa.getManaPart();
+                    for(Color col : Color.WUBRG)
+                    {
+                        if(abmana.canProduce(col.toString()))
+                        {
+                            numProducers.get(col).add(c);
+                        }
+                    }
+                }                
+            }
+        }
+
+        System.out.print("Partial Paris: " + ai.getName() + " may exile ");
+        for(Card c : candidates)
+        {
+            System.out.print(c.toString() + ", ");
+        }
+        System.out.println();
+        
+        if(candidates.size() < 2)
+            candidates.clear();
+        return candidates;
     }
 
 
