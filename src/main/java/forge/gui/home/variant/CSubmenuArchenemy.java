@@ -22,7 +22,6 @@ import forge.game.GameType;
 import forge.game.MatchController;
 import forge.game.MatchStartHelper;
 import forge.game.player.LobbyPlayer;
-import forge.game.player.PlayerType;
 import forge.gui.GuiDialog;
 import forge.gui.SOverlayUtils;
 import forge.gui.deckeditor.CDeckEditorUI;
@@ -227,7 +226,7 @@ public enum CSubmenuArchenemy implements ICDoc {
                 Lobby lobby = Singletons.getControl().getLobby();
                 MatchStartHelper helper = new MatchStartHelper();
                 for (int i = 0; i < view.getNumPlayers(); i++) {
-                    LobbyPlayer player = lobby.findLocalPlayer(i == 0 ? PlayerType.HUMAN : PlayerType.COMPUTER);
+                    LobbyPlayer player = i == 0 ? lobby.getGuiPlayer() : lobby.getAiPlayer();
 
                     if (i == 0) {
 

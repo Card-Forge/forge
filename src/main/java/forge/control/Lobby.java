@@ -1,6 +1,8 @@
 package forge.control;
 
+import java.util.Map;
 import java.util.Random;
+import java.util.concurrent.ConcurrentHashMap;
 
 import forge.game.player.LobbyPlayer;
 import forge.game.player.PlayerType;
@@ -55,30 +57,21 @@ public class Lobby {
             "Walter", "Wilfred", "William", "Winston"
     };
 
-    /**
-     * TODO: Write javadoc for this method.
-     * @param human
-     * @return
-     */
-    public LobbyPlayer findLocalPlayer(PlayerType type, String name) {
+    private Map<String, LobbyPlayer> remotePlayers = new ConcurrentHashMap<String, LobbyPlayer>();
+    private final LobbyPlayer guiPlayer = new LobbyPlayer(PlayerType.HUMAN, "Human");
+    
 
-        return new LobbyPlayer(type, name);
+    public final LobbyPlayer getGuiPlayer() {
+        return guiPlayer;
     }
 
-    /**
-     * TODO: Write javadoc for this method.
-     * @param human
-     * @return
-     */
-    public LobbyPlayer findLocalPlayer(PlayerType type) {
-        if (type == PlayerType.HUMAN) {
-            return new LobbyPlayer(type, "Human"); // need to get name!
-        }
-
-        LobbyPlayer player = findLocalPlayer(type, getRandomName());
+    public final LobbyPlayer getAiPlayer() { return getAiPlayer(getRandomName()); }
+    public final LobbyPlayer getAiPlayer(String name) {
+        LobbyPlayer player = new LobbyPlayer(PlayerType.COMPUTER, name);
         player.setAvatarIndex(MyRandom.getRandom().nextInt(FSkin.getAvatars().size()));
         return player;
     }
+
 
     /**
      * TODO: Write javadoc for this method.
@@ -96,7 +89,26 @@ public class Lobby {
      * @return
      */
     public LobbyPlayer getQuestPlayer() {
-        return new LobbyPlayer(PlayerType.HUMAN, "Human"); // need to get name!
+        return guiPlayer;
+    }
+
+    /**
+     * TODO: Write javadoc for this method.
+     * @param name
+     * @return
+     */
+    public synchronized LobbyPlayer findOrCreateRemotePlayer(String name) {
+        if (remotePlayers.containsKey(name))
+            return remotePlayers.get(name);
+
+        LobbyPlayer res = new LobbyPlayer(PlayerType.REMOTE, name);
+        // have to load avatar from remote user's preferences here
+        remotePlayers.put(name, res);
+        return res;
+    }
+
+    public void disconnectPlayer(LobbyPlayer player) {
+        // Should set up a timer here to discard player and all of his games after 20 minutes of being offline
     }
 
 

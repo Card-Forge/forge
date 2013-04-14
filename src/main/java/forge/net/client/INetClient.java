@@ -17,7 +17,7 @@ public interface INetClient {
     void send(IMessage message);
 
 
-    void setPlayer(LobbyPlayer lobbyPlayer);
+    void createPlayer(String playerName);
     LobbyPlayer getPlayer();
 
 

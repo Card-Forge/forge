@@ -20,7 +20,7 @@ public class EchoMessage implements IMessage {
 
     @Override
     public String toNetString() {
-        return String.format("System: %s", message);
+        return String.format("Echo: %s", message);
     }
 
 }

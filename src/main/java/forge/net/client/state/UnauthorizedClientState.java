@@ -1,7 +1,5 @@
 package forge.net.client.state;
 
-import forge.game.player.LobbyPlayer;
-import forge.game.player.PlayerType;
 import forge.net.client.INetClient;
 import forge.net.protocol.incoming.AuthorizePacket;
 import forge.net.protocol.incoming.IPacket;
@@ -32,7 +30,7 @@ public class UnauthorizedClientState  implements IClientState {
                 client.send(new AuthorizationSuccessfulMessage(p.getUsername()));
                 
                 
-                client.setPlayer(new LobbyPlayer(PlayerType.REMOTE, p.getUsername()));
+                client.createPlayer(p.getUsername());
                 client.replaceState(this, new InLobbyClientState(client));
                 return true;
             }

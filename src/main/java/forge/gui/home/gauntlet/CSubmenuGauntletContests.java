@@ -253,8 +253,9 @@ public enum CSubmenuGauntletContests implements ICDoc {
 
                 MatchStartHelper starter = new MatchStartHelper();
                 Lobby lobby = Singletons.getControl().getLobby();
-                starter.addPlayer(lobby.findLocalPlayer(PlayerType.HUMAN), gd.getUserDeck());
-                starter.addPlayer(lobby.findLocalPlayer(PlayerType.COMPUTER), aiDeck);
+
+                starter.addPlayer(lobby.getGuiPlayer(), gd.getUserDeck());
+                starter.addPlayer(lobby.getAiPlayer(), aiDeck);
 
                 MatchController mc = Singletons.getModel().getMatch();
                 mc.initMatch(GameType.Gauntlet, starter.getPlayerMap());

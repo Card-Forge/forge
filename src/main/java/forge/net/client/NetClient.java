@@ -3,6 +3,7 @@ package forge.net.client;
 import java.util.concurrent.BlockingDeque;
 import java.util.concurrent.LinkedBlockingDeque;
 
+import forge.Singletons;
 import forge.game.player.LobbyPlayer;
 import forge.net.IClientSocket;
 import forge.net.IConnectionObserver;
@@ -35,6 +36,7 @@ public class NetClient implements IConnectionObserver, INetClient{
     @Override
     public void onConnectionClosed() {
         // Tell the game, the client is gone.
+        if ( player != null ) Singletons.getControl().getLobby().disconnectPlayer(player);
     }
 
 
@@ -63,8 +65,8 @@ public class NetClient implements IConnectionObserver, INetClient{
      * @see forge.net.client.INetClient#setPlayer(forge.game.player.LobbyPlayer)
      */
     @Override
-    public final void setPlayer(LobbyPlayer lobbyPlayer) {
-        player = lobbyPlayer;
+    public final void createPlayer(String name) {
+        player = Singletons.getControl().getLobby().findOrCreateRemotePlayer(name);
     }
 
     /* (non-Javadoc)

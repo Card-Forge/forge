@@ -14,7 +14,6 @@ import forge.deck.Deck;
 import forge.game.GameType;
 import forge.game.MatchController;
 import forge.game.MatchStartHelper;
-import forge.game.player.PlayerType;
 import forge.gui.SOverlayUtils;
 import forge.gui.framework.ICDoc;
 import forge.properties.ForgePreferences;
@@ -120,8 +119,8 @@ public enum CSubmenuConstructed implements ICDoc {
 
                 MatchStartHelper starter = new MatchStartHelper();
                 Lobby lobby = Singletons.getControl().getLobby();
-                starter.addPlayer(lobby.findLocalPlayer(PlayerType.HUMAN), humanDeck);
-                starter.addPlayer(lobby.findLocalPlayer(PlayerType.COMPUTER), aiDeck);
+                starter.addPlayer(lobby.getGuiPlayer(), humanDeck);
+                starter.addPlayer(lobby.getAiPlayer(), aiDeck);
 
                 MatchController mc = Singletons.getModel().getMatch();
                 mc.initMatch(gameType, starter.getPlayerMap());

@@ -30,7 +30,6 @@ import forge.game.GameType;
 import forge.game.MatchController;
 import forge.game.MatchStartHelper;
 import forge.game.PlayerStartConditions;
-import forge.game.player.PlayerType;
 import forge.gui.SOverlayUtils;
 
 /**
@@ -170,8 +169,8 @@ public class GauntletMini {
 
                 MatchStartHelper starter = new MatchStartHelper();
                 Lobby lobby = Singletons.getControl().getLobby();
-                starter.addPlayer(lobby.findLocalPlayer(PlayerType.HUMAN), humanDeck);
-                starter.addPlayer(lobby.findLocalPlayer(PlayerType.COMPUTER), aiOpponents.get(currentRound - 1));
+                starter.addPlayer(lobby.getGuiPlayer(), humanDeck);
+                starter.addPlayer(lobby.getAiPlayer(), aiOpponents.get(currentRound - 1));
 
                 MatchController mc = Singletons.getModel().getMatch();
                 mc.initMatch(gauntletType, starter.getPlayerMap());

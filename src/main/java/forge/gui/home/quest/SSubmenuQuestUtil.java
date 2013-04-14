@@ -19,7 +19,6 @@ import forge.game.GameType;
 import forge.game.MatchStartHelper;
 import forge.game.PlayerStartConditions;
 import forge.game.player.LobbyPlayer;
-import forge.game.player.PlayerType;
 import forge.gui.GuiChoose;
 import forge.gui.SOverlayUtils;
 import forge.gui.deckeditor.CDeckEditorUI;
@@ -418,7 +417,7 @@ public class SSubmenuQuestUtil {
         MatchStartHelper msh = new MatchStartHelper();
         msh.addPlayer(Singletons.getControl().getLobby().getQuestPlayer(), humanStart);
 
-        LobbyPlayer aiPlayer = Singletons.getControl().getLobby().findLocalPlayer(PlayerType.COMPUTER, event.getOpponent() == null ? event.getTitle() : event.getOpponent());
+        LobbyPlayer aiPlayer = Singletons.getControl().getLobby().getAiPlayer(event.getOpponent() == null ? event.getTitle() : event.getOpponent());
         aiPlayer.setIconImageKey(event.getIconImageKey());
         msh.addPlayer(aiPlayer, aiStart);
 
