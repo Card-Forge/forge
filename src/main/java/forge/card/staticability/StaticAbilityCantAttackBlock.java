@@ -94,20 +94,31 @@ public class StaticAbilityCantAttackBlock {
      * 
      * @param stAb
      *            a StaticAbility
-     * @param card
+     * @param blocker
      *            the card
      * @return a Cost
      */
-    public static Cost applyCantBlockUnlessAbility(final StaticAbility stAb, final Card card) {
+    public static Cost applyCantBlockUnlessAbility(final StaticAbility stAb, final Card blocker, final GameEntity attacker) {
         final HashMap<String, String> params = stAb.getMapParams();
         final Card hostCard = stAb.getHostCard();
 
         if (params.containsKey("ValidCard")
-                && !card.isValid(params.get("ValidCard").split(","), hostCard.getController(), hostCard)) {
+                && !blocker.isValid(params.get("ValidCard").split(","), hostCard.getController(), hostCard)) {
             return null;
         }
+        
+        if (params.containsKey("Attacker") && attacker != null
+                && !attacker.isValid(params.get("Attacker").split(","), hostCard.getController(), hostCard)) {
+            return null;
+        }
+        String costString = params.get("Cost");
+        if ("X".equals(costString)) {
+            costString = Integer.toString(CardFactoryUtil.xCount(hostCard, hostCard.getSVar("X")));
+        } else if ("Y".equals(costString)) {
+            costString = Integer.toString(CardFactoryUtil.xCount(hostCard, hostCard.getSVar("Y")));
+        }
 
-        final Cost cost = new Cost(hostCard, params.get("Cost"), true);
+        final Cost cost = new Cost(hostCard, costString, true);
 
         return cost;
     }

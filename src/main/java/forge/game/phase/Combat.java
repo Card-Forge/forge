@@ -471,6 +471,38 @@ public class Combat {
         Singletons.getModel().getGame().getEvents().post(new BlockerAssignedEvent());
     }
 
+    public final void removeBlockAssignment(final Card attacker, final Card blocker) {
+        this.attackerMap.get(attacker).remove(blocker);
+        this.blockerMap.get(blocker).remove(attacker);
+        if (this.attackerMap.get(attacker).isEmpty()) {
+            this.blocked.remove(attacker);
+        }
+        if (this.blockerMap.get(blocker).isEmpty()) {
+            this.blockerMap.remove(blocker);
+        }
+    }
+
+    /**
+     * <p>
+     * undoBlockingAssignment.
+     * </p>
+     * 
+     * @param blocker
+     *            a {@link forge.Card} object.
+     */
+    public final void undoBlockingAssignment(final Card blocker) {
+        final List<Card> att = this.getAttackers();
+        for (final Card attacker : att) {
+            if (this.getBlockers(attacker).contains(blocker)) {
+                this.getBlockingAttackerList(attacker).remove(blocker);
+                if (this.getBlockers(attacker).isEmpty()) {
+                    this.blocked.remove(attacker);
+                }
+            }
+        }
+        this.blockerMap.remove(blocker);
+    } // undoBlockingAssignment(Card)
+
     /**
      * <p>
      * getAllBlockers.
@@ -615,33 +647,12 @@ public class Combat {
             this.blockerMap.remove(c);
             for (Card a : attackers) {
                 this.attackerMap.get(a).remove(c);
-                if (stillDeclaring && this.attackerMap.get(a).size() == 0) {
+                if (stillDeclaring && this.attackerMap.get(a).isEmpty()) {
                     this.blocked.remove(a);
                 }
             }
         }
     } // removeFromCombat()
-
-    /**
-     * <p>
-     * undoBlockingAssignment.
-     * </p>
-     * 
-     * @param blocker
-     *            a {@link forge.Card} object.
-     */
-    public final void undoBlockingAssignment(final Card blocker) {
-        final List<Card> att = this.getAttackers();
-        for (final Card attacker : att) {
-            if (this.getBlockers(attacker).contains(blocker)) {
-                this.getBlockingAttackerList(attacker).remove(blocker);
-                if (this.getBlockers(attacker).size() == 0) {
-                    this.blocked.remove(attacker);
-                }
-            }
-        }
-        this.blockerMap.remove(blocker);
-    } // undoBlockingAssignment(Card)
 
     /**
      * <p>
@@ -671,7 +682,7 @@ public class Combat {
         for (final Card attacker : attacking) {
             final List<Card> block = this.getBlockers(attacker);
 
-            if (block.size() == 0) {
+            if (block.isEmpty()) {
                 // this damage is assigned to a player by setPlayerDamage()
                 this.addUnblockedAttacker(attacker);
 

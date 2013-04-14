@@ -467,7 +467,7 @@ public class StaticAbility {
         }
 
         if (mode.equals("CantBlockUnless")) {
-            return StaticAbilityCantAttackBlock.applyCantBlockUnlessAbility(this, card);
+            return StaticAbilityCantAttackBlock.applyCantBlockUnlessAbility(this, card, target);
         }
 
         return null;

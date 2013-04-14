@@ -27,8 +27,16 @@ import forge.Card;
 import forge.CardLists;
 import forge.CardPredicates.Presets;
 import forge.Singletons;
+import forge.card.cost.Cost;
+import forge.card.spellability.Ability;
+import forge.card.spellability.AbilityStatic;
+import forge.card.staticability.StaticAbility;
 import forge.card.trigger.TriggerType;
+import forge.game.GameActionUtil;
 import forge.game.GameState;
+import forge.game.ai.ComputerUtil;
+import forge.game.ai.ComputerUtilCost;
+import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.match.CMatchUI;
@@ -195,25 +203,59 @@ public class PhaseUtil {
      * @param game
      */
     public static void handleDeclareBlockers(GameState game) {
-        game.getCombat().verifyCreaturesInPlay();
+        final Combat combat = game.getCombat();
+        combat.verifyCreaturesInPlay();
 
         // Handles removing cards like Mogg Flunkies from combat if group block
         // didn't occur
-        final List<Card> filterList = game.getCombat().getAllBlockers();
+        final List<Card> filterList = combat.getAllBlockers();
+        for (Card blocker : filterList) {
+            final List<Card> attackers = new ArrayList<Card>(combat.getAttackersBlockedBy(blocker));
+            for (Card attacker : attackers) {
+                Cost blockCost = new Cost(blocker, "0", true);
+                // Sort abilities to apply them in proper order
+                for (Card card : game.getCardsIn(ZoneType.Battlefield)) {
+                    final ArrayList<StaticAbility> staticAbilities = card.getStaticAbilities();
+                    for (final StaticAbility stAb : staticAbilities) {
+                        Cost additionalCost = stAb.getCostAbility("CantBlockUnless", blocker, attacker);
+                        blockCost = Cost.combine(blockCost, additionalCost);
+                    }
+                }
+                
+                boolean hasPaid = blockCost.getTotalMana().isZero() && blockCost.isOnlyManaCost(); // true if needless to pay
+                if (!hasPaid) { 
+                    final Ability ability = new AbilityStatic(blocker, blockCost, null) { @Override public void resolve() {} };
+                    ability.setActivatingPlayer(blocker.getController());
+
+                    if (blocker.getController().isHuman()) {
+                        hasPaid = GameActionUtil.payCostDuringAbilityResolve(ability, blockCost, null, game);
+                    } else { // computer
+                        if (ComputerUtilCost.canPayCost(ability, blocker.getController())) {
+                            ComputerUtil.playNoStack((AIPlayer)blocker.getController(), ability, game);
+                            hasPaid = true;
+                        }
+                    }
+                }
+
+                if ( !hasPaid ) {
+                    combat.removeBlockAssignment(attacker, blocker);
+                }
+            }
+        }
         for (Card c : filterList) {
             if (c.hasKeyword("CARDNAME can't attack or block alone.") && c.isBlocking()) {
-                if (game.getCombat().getAllBlockers().size() < 2) {
-                    game.getCombat().undoBlockingAssignment(c);
+                if (combat.getAllBlockers().size() < 2) {
+                    combat.undoBlockingAssignment(c);
                 }
             }
         }
 
         game.getStack().freezeStack();
 
-        game.getCombat().setUnblocked();
+        combat.setUnblocked();
 
         List<Card> list = new ArrayList<Card>();
-        list.addAll(game.getCombat().getAllBlockers());
+        list.addAll(combat.getAllBlockers());
 
         list = CardLists.filter(list, new Predicate<Card>() {
             @Override
@@ -222,12 +264,12 @@ public class PhaseUtil {
             }
         });
 
-        final List<Card> attList = game.getCombat().getAttackers();
+        final List<Card> attList = combat.getAttackers();
 
         CombatUtil.checkDeclareBlockers(list);
 
         for (final Card a : attList) {
-            final List<Card> blockList = game.getCombat().getBlockers(a);
+            final List<Card> blockList = combat.getBlockers(a);
             for (final Card b : blockList) {
                 CombatUtil.checkBlockedAttackers(a, b);
             }
