@@ -146,9 +146,8 @@ public class CostRemoveCounter extends CostPartWithList {
             executePayment(ability, source);
             return true;
         }
-        
-        
-        
+
+
         List<Card> validCards = CardLists.getValidCards(ability.getActivatingPlayer().getCardsIn(getZone()), getType().split(";"), ability.getActivatingPlayer(), source);
         if (this.getZone().equals(ZoneType.Battlefield)) {
             final InputSelectCardToRemoveCounter inp = new InputSelectCardToRemoveCounter(cntRemoved, getCounter(), validCards);
@@ -326,11 +325,12 @@ public class CostRemoveCounter extends CostPartWithList {
         Integer c = this.convertAmount();
         if (c == null) {
             if (amount.equals("All")) {
-                c = source.getCounters(this.counter);
+                cntRemoved = source.getCounters(this.counter);
             } else {
-                c = AbilityUtils.calculateAmount(source, amount, ability);
+                cntRemoved = AbilityUtils.calculateAmount(source, amount, ability);
             }
-        }
+        } else 
+            cntRemoved = c.intValue();
 
         if (this.payCostFromSource()) {
             executePayment(ability, source);
@@ -339,7 +339,7 @@ public class CostRemoveCounter extends CostPartWithList {
                 executePayment(ability, card);
             }
         }
-        source.setSVar("CostCountersRemoved", Integer.toString(c));
+        source.setSVar("CostCountersRemoved", Integer.toString(cntRemoved));
     }
 
     @Override
