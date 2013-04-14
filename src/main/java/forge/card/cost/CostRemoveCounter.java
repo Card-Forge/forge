@@ -391,6 +391,7 @@ public class CostRemoveCounter extends CostPartWithList {
             System.out.println("Not enough " + this.counter + " on " + source.getName());
             return null;
         }
+        this.cntRemoved = c;
         return new PaymentDecision(source);
     }
 }
