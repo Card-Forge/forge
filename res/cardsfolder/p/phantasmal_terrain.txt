@@ -2,7 +2,7 @@ Name:Phantasmal Terrain
 ManaCost:U U
 Types:Enchantment Aura
 K:Enchant land
-A:SP$ Attach | Cost$ 1 U | ValidTgts$ Land | AILogic$ ChangeType
+A:SP$ Attach | Cost$ U U | ValidTgts$ Land | AILogic$ ChangeType
 K:ETBReplacement:Other:DBChooseBasic
 SVar:DBChooseBasic:DB$ ChooseType | Type$ Basic Land | SpellDescription$ As CARDNAME enters the battlefield, choose a basic land type.
 S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddType$ ChosenType | RemoveSubTypes$ True | RemoveAllAbilities$ True | Description$ Enchanted land is the chosen type.
