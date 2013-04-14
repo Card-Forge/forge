@@ -47,6 +47,16 @@ The Import Pictures dialog, accessed via the Content Downloaders submenu, has re
 An importer option was added for including pictures in set-specific card directories that don't map to any currently known card.  This handles the case where people have collected complete sets of pics in anticipation of when Forge supports them.
 
 
+- Fixed a few bugs -
+The AI was not removing counters as part of paying a cost. Cards including Phyrexian Prowler, Golem Foundry, Serrated Arrows, Triskelion and others should now work correctly for the computer player.
+
+Several people reported a ConcurrentModificationException which resulted in a crash report and this should now be fixed.
+
+Wishes can now only retrieve cards you own which prevents retrieving an opponents card, which would then go into that player's hand.
+
+Flicker effects were using the wrong Defined$ param.
+
+
 ---------
 New Cards
 ---------
