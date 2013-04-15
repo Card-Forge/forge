@@ -350,7 +350,6 @@ public final class AbilityFactory {
         final String strLeftAbility = card.getState(CardCharacteristicName.LeftSplit).getIntrinsicAbility().get(0);
         Map<String, String> leftMap = getMapParams(strLeftAbility);
         AbilityRecordType leftType = AbilityRecordType.getRecordType(leftMap);
-        Cost leftCost = parseAbilityCost(card, leftMap, leftType);
         ApiType leftApi = leftType.getApiTypeOf(leftMap);
         leftMap.put("StackDecription", leftMap.get("SpellDescription"));
         leftMap.put("SpellDescription", "Fuse (you may cast both halves of this card from your hand).");
@@ -359,14 +358,14 @@ public final class AbilityFactory {
         final String strRightAbility = card.getState(CardCharacteristicName.RightSplit).getIntrinsicAbility().get(0);
         Map<String, String> rightMap = getMapParams(strRightAbility);
         AbilityRecordType rightType = AbilityRecordType.getRecordType(leftMap);
-        Cost rightCost = parseAbilityCost(card, rightMap, rightType);
         ApiType rightApi = leftType.getApiTypeOf(rightMap);
         rightMap.put("StackDecription", rightMap.get("SpellDescription"));
         rightMap.put("SpellDescription", "");
-    
-        
-        Cost joinedCost = Cost.combine(rightCost, leftCost);
-        final SpellAbility left = getAbility(leftType, leftApi, leftMap, joinedCost, card);
+
+        Cost totalCost = parseAbilityCost(card, leftMap, leftType);
+        totalCost.add(parseAbilityCost(card, rightMap, rightType));
+
+        final SpellAbility left = getAbility(leftType, leftApi, leftMap, totalCost, card);
         final AbilitySub right = (AbilitySub) getAbility(AbilityRecordType.SubAbility, rightApi, rightMap, null, card);
         left.appendSubAbility(right);
         return left;

@@ -649,11 +649,8 @@ public class Cost {
         return sb.toString();
     }
     
-    public static Cost combine(Cost cost1, Cost cost2) {
-        if (cost1 == null) return cost2;
-        if (cost2 == null) return cost1;
-
-        CostPartMana costPart2 = cost2.getCostMana();
+    public Cost add(Cost cost1) {
+        CostPartMana costPart2 = this.getCostMana();
         for (final CostPart part : cost1.getCostParts()) {
             if (part instanceof CostPartMana && costPart2 != null) {
                 ManaCostBeingPaid oldManaCost = new ManaCostBeingPaid(((CostPartMana) part).getMana());
@@ -662,13 +659,13 @@ public class Cost {
                 String r2 = costPart2.getRestiction();
                 String r1 = ((CostPartMana) part).getRestiction();
                 String r = r1 == null ? r2 : ( r2 == null ? r1 : r1+"."+r2);
-                cost2.getCostParts().remove(costPart2);
-                cost2.getCostParts().add(0, new CostPartMana(oldManaCost.toManaCost(), r, !xCanBe0));
+                getCostParts().remove(costPart2);
+                getCostParts().add(0, new CostPartMana(oldManaCost.toManaCost(), r, !xCanBe0));
             } else { 
-                cost2.getCostParts().add(part);
+                getCostParts().add(part);
             }
         }
-        return cost2;
+        return this;
     }
     
     public static int chooseXValue(final Card card, final SpellAbility sa, final int maxValue) {

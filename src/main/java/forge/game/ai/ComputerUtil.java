@@ -34,7 +34,6 @@ import forge.CardPredicates.Presets;
 import forge.CardUtil;
 import forge.Color;
 import forge.Singletons;
-import forge.card.MagicColor;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.ApiType;
 import forge.card.ability.effects.CharmEffect;
