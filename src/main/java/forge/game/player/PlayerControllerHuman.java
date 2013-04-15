@@ -246,7 +246,7 @@ public class PlayerControllerHuman extends PlayerController {
     @Override
     public List<Card> choosePermanentsToSacrifice(List<Card> validTargets, String validMessage, int amount, SpellAbility sa, boolean destroy, boolean isOptional) {
         int max = Math.min(amount, validTargets.size());
-        if (max == 0)
+        if (max <= 0)
             return new ArrayList<Card>();
 
         InputSelectCards inp = new InputSelectCardsFromList(isOptional ? 0 : amount, max, validTargets);
