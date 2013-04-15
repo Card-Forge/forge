@@ -3,7 +3,7 @@
 Name=King Arthur 3
 Title=King Arthur
 Difficulty=hard
-Description=WG Hybrid Knight deck with Wilt-Leaf Liege, Knight of New Alara and equipments
+Description=WG Knight deck with Wilt-Leaf Liege, Knight of New Alara and equipments
 Icon=King Arthur.jpg
 Deck Type=constructed
 [main]
@@ -16,7 +16,7 @@ Deck Type=constructed
 2 Kinsbaile Cavalier
 4 Wilt-Leaf Liege
 4 Juniper Order Ranger
-1 Sigil Blessing
+1 Swords to Plowshares
 1 Aura Shards
 1 Armadillo Cloak
 1 Behemoth Sledge
@@ -29,8 +29,8 @@ Deck Type=constructed
 1 Mox Emerald
 1 Mox Pearl
 4 Savannah
-6 Forest|M11
-6 Plains|M11
-2 Elfhame Palace
+5 Forest|M11
+5 Plains|M11
+4 Sunpetal Grove
 4 Graypelt Refuge
 [sideboard]
