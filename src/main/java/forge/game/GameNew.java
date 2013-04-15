@@ -11,8 +11,6 @@ import java.util.Set;
 
 import javax.swing.JOptionPane;
 
-import org.apache.commons.lang.time.StopWatch;
-
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
@@ -21,7 +19,6 @@ import com.google.common.collect.Lists;
 import forge.Card;
 import forge.CardLists;
 import forge.CardPredicates;
-import forge.FThreads;
 import forge.Singletons;
 import forge.card.trigger.TriggerHandler;
 import forge.card.trigger.TriggerType;
