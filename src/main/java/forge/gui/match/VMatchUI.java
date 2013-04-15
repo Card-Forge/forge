@@ -92,41 +92,27 @@ public enum VMatchUI implements IVTopLevelUI {
         // Add extra players alternatively to existing user/AI field panels.
         for (int i = 2; i < lstFields.size(); i++) {
             // If already in layout, no need to add again.
-            if (lstFields.get(i).getParentCell() != null) {
-                continue;
-            }
-
-            if (i % 2 == 0) {
-                lstFields.get(0).getParentCell().addDoc(lstFields.get(i));
-            }
-            else {
-                lstFields.get(1).getParentCell().addDoc(lstFields.get(i));
+            VField vField = lstFields.get(i);
+            if (vField.getParentCell() == null) {
+                lstFields.get(i % 2).getParentCell().addDoc(vField);
             }
         }
 
      // Add extra players alternatively to existing user/AI field panels.
         for (int i = 2; i < lstCommands.size(); i++) {
             // If already in layout, no need to add again.
-            if (lstCommands.get(i).getParentCell() != null) {
-                continue;
-            }
-
-            if (i % 2 == 0) {
-                lstCommands.get(0).getParentCell().addDoc(lstCommands.get(i));
-            }
-            else {
-                lstCommands.get(1).getParentCell().addDoc(lstCommands.get(i));
+            VCommand cmdView = lstCommands.get(i);
+            if (cmdView.getParentCell() == null) {
+                lstCommands.get(i % 2).getParentCell().addDoc(cmdView);
             }
         }
 
         // Add extra hands to existing hand panel.
         for (int i = 0; i < lstHands.size(); i++) {
             // If already in layout, no need to add again.
-            if (lstHands.get(i).getParentCell() != null) {
-                continue;
+            if (lstHands.get(i).getParentCell() == null) {
+                lstHands.get(0).getParentCell().addDoc(lstHands.get(i));
             }
-
-            lstHands.get(0).getParentCell().addDoc(lstHands.get(i));
         }
 
         // Fill in gaps
