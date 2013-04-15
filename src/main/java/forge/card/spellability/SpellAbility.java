@@ -31,7 +31,6 @@ import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.ApiType;
 import forge.card.cost.Cost;
-import forge.card.cost.CostPart;
 import forge.card.cost.CostPartMana;
 import forge.card.mana.Mana;
 import forge.card.mana.ManaCost;
@@ -54,7 +53,6 @@ public abstract class SpellAbility implements ISpellAbility {
     // choices for constructor isPermanent argument
     private String description = "";
     private String stackDescription = "";
-    private ManaCost manaCost = null;
     private ManaCost multiKickerManaCost = null;
     private ManaCost replicateManaCost = null;
     private Player activatingPlayer = null;
@@ -173,8 +171,13 @@ public abstract class SpellAbility implements ISpellAbility {
      * @param iSourceCard
      *            a {@link forge.Card} object.
      */
-    public SpellAbility(final Card iSourceCard) {
+    public SpellAbility(final Card iSourceCard, Cost toPay) {
         this.sourceCard = iSourceCard;
+        this.payCosts = toPay;
+    }
+    
+    public SpellAbility(final Card iSourceCard ) { 
+        this(iSourceCard, null);
     }
 
     // Spell, and Ability, and other Ability objects override this method
@@ -219,29 +222,6 @@ public abstract class SpellAbility implements ISpellAbility {
      */
     public boolean doTrigger(final boolean mandatory, AIPlayer ai) {
         return false;
-    }
-
-    /**
-     * <p>
-     * Getter for the field <code>manaCost</code>.
-     * </p>
-     * 
-     * @return a {@link java.lang.String} object.
-     */
-    public ManaCost getManaCost() {
-        return this.manaCost;
-    }
-
-    /**
-     * <p>
-     * Setter for the field <code>manaCost</code>.
-     * </p>
-     * 
-     * @param cost
-     *            a {@link java.lang.String} object.
-     */
-    public void setManaCost(final ManaCost cost) {
-        this.manaCost = cost;
     }
 
     /**
@@ -1136,17 +1116,8 @@ public abstract class SpellAbility implements ISpellAbility {
     }
     
     public SpellAbility copyWithNoManaCost() {
-        final SpellAbility newSA = this;
-        final Cost cost = new Cost(this.getSourceCard(), "", false);
-        if (newSA.getPayCosts() != null) {
-            for (final CostPart part : newSA.getPayCosts().getCostParts()) {
-                if (!(part instanceof CostPartMana)) {
-                    cost.getCostParts().add(part);
-                }
-            }
-        }
-        newSA.setPayCosts(cost);
-        newSA.setManaCost(ManaCost.NO_COST);
+        final SpellAbility newSA = this.copy();
+        newSA.setPayCosts(newSA.getPayCosts().copyWithNoMana());
         newSA.setDescription(newSA.getDescription() + " (without paying its mana cost)");
         return newSA;
     }

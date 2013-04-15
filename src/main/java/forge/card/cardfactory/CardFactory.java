@@ -181,7 +181,7 @@ public class CardFactory {
         }
         copySA.setCopied(true);
         //remove all costs
-        copySA.setPayCosts(new Cost(c, "", sa.isAbility()));
+        copySA.setPayCosts(new Cost("", sa.isAbility()));
         if (sa.getTarget() != null) {
             Target target = new Target(sa.getTarget());
             target.setSourceCard(c);

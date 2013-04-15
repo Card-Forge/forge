@@ -43,6 +43,16 @@ public class Cost {
     private boolean isAbility = true;
     private final ArrayList<CostPart> costParts = new ArrayList<CostPart>();
 
+    private boolean tapCost = false;
+
+    public final boolean hasTapCost() {
+        return this.tapCost;
+    }
+
+    public final boolean hasNoManaCost() {
+        return this.getTotalMana().isZero();
+    }
+
     /**
      * Gets the cost parts.
      * 
@@ -50,23 +60,6 @@ public class Cost {
      */
     public final List<CostPart> getCostParts() {
         return this.costParts;
-    }
-
-    private boolean tapCost = false;
-
-    public final boolean hasTapCost() {
-        return this.tapCost;
-    }
-
-    /**
-     * <p>
-     * hasNoManaCost.
-     * </p>
-     * 
-     * @return a boolean.
-     */
-    public final boolean hasNoManaCost() {
-        return this.getTotalMana().isZero();
     }
 
     /**
@@ -104,12 +97,12 @@ public class Cost {
         return ManaCost.ZERO;
     }
 
-    private final String name;
-
+    private Cost() {}
+    
     // Parsing Strings
 
-    public Cost(final Card card, ManaCost cost, final boolean bAbility) {
-        this(card, cost.toString(), bAbility);
+    public Cost(ManaCost cost, final boolean bAbility) {
+        this(cost.toString(), bAbility);
     }
 
     /**
@@ -123,10 +116,9 @@ public class Cost {
      * @param bAbility
      *            a boolean.
      */
-    public Cost(final Card card, String parse, final boolean bAbility) {
+    public Cost(String parse, final boolean bAbility) {
         this.isAbility = bAbility;
         // when adding new costs for cost string, place them here
-        this.name = card != null ? card.getName() : "";
 
         boolean xCantBe0 = false;
         boolean untapCost = false;
@@ -379,6 +371,17 @@ public class Cost {
             this.costParts.add(new CostPartMana(changedCost.toManaCost(), null, false));
         }
     }
+    
+    public final Cost copyWithNoMana() {
+        Cost toRet = new Cost();
+        for(CostPart cp : this.costParts) {
+            if ( cp instanceof CostPartMana )
+                toRet.costParts.add(new CostPartMana(ManaCost.ZERO, null, false));
+            else
+                toRet.costParts.add(cp);
+        }
+        return toRet;
+    }
 
     public final CostPartMana getCostMana() {
         for (final CostPart part : this.costParts) {
@@ -502,7 +505,7 @@ public class Cost {
         boolean first = true;
 
         if (bFlag) {
-            cost.append("As an additional cost to cast ").append(this.name).append(", ");
+            cost.append("As an additional cost to cast selected card, ");
         } else {
             // usually no additional mana cost for spells
             // only three Alliances cards have additional mana costs, but they

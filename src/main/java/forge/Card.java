@@ -2110,7 +2110,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             } else if (keyword.startsWith("Morph")) {
                 sbLong.append("Morph");
                 if (keyword.contains(":")) {
-                    final Cost mCost = new Cost(this, keywords.get(i).substring(6), true);
+                    final Cost mCost = new Cost(keywords.get(i).substring(6), true);
                     if (!mCost.isOnlyManaCost()) {
                         sbLong.append(" -");
                     }
@@ -2147,12 +2147,12 @@ public class Card extends GameEntity implements Comparable<Card> {
             } else if (keyword.startsWith("AlternateAdditionalCost")) {
                 final String costString1 = keyword.split(":")[1];
                 final String costString2 = keyword.split(":")[2];
-                final Cost cost1 = new Cost(this, costString1, false);
-                final Cost cost2 = new Cost(this, costString2, false);
+                final Cost cost1 = new Cost(costString1, false);
+                final Cost cost2 = new Cost(costString2, false);
                 sbLong.append("As an additional cost to cast " + this.getName() + ", " + cost1.toSimpleString()
                         + " or pay " + cost2.toSimpleString() + ".\r\n");
             } else if (keyword.startsWith("Kicker")) {
-                final Cost cost = new Cost(this, keywords.get(i).substring(7), false);
+                final Cost cost = new Cost(keywords.get(i).substring(7), false);
                 sbLong.append("Kicker " + cost.toSimpleString() + "\r\n");
             } else if (keyword.endsWith(".") && !keywords.get(i).startsWith("Haunt")) {
                 sbLong.append(keywords.get(i).toString()).append("\r\n");
@@ -2404,7 +2404,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             if (keyword.startsWith("Flashback")) {
                 sb.append("Flashback");
                 if (keyword.contains(" ")) {
-                    final Cost fbCost = new Cost(this, keyword.substring(10), true);
+                    final Cost fbCost = new Cost(keyword.substring(10), true);
                     if (!fbCost.isOnlyManaCost()) {
                         sb.append(" -");
                     }
@@ -2415,19 +2415,19 @@ public class Card extends GameEntity implements Comparable<Card> {
                 }
                 sb.append("\r\n");
             } else if (keyword.startsWith("Splice")) {
-                final Cost cost = new Cost(this, keyword.substring(19), false);
+                final Cost cost = new Cost(keyword.substring(19), false);
                 sb.append("Splice onto Arcane " + cost.toSimpleString() + "\r\n");
             } else if (keyword.startsWith("Buyback")) {
-                final Cost cost = new Cost(this, keyword.substring(8), false);
+                final Cost cost = new Cost(keyword.substring(8), false);
                 sb.append("Buyback " + cost.toSimpleString() + "\r\n");
             } else if (keyword.startsWith("Kicker")) {
-                final Cost cost = new Cost(this, keyword.substring(7), false);
+                final Cost cost = new Cost(keyword.substring(7), false);
                 sb.append("Kicker " + cost.toSimpleString() + "\r\n");
             } else if (keyword.startsWith("AlternateAdditionalCost")) {
                 final String costString1 = keyword.split(":")[1];
                 final String costString2 = keyword.split(":")[2];
-                final Cost cost1 = new Cost(this, costString1, false);
-                final Cost cost2 = new Cost(this, costString2, false);
+                final Cost cost1 = new Cost(costString1, false);
+                final Cost cost2 = new Cost(costString2, false);
                 sb.append("As an additional cost to cast " + this.getName() + ", " + cost1.toSimpleString()
                         + " or pay " + cost2.toSimpleString() + ".\r\n");
             } else if (keyword.startsWith("Storm")) {

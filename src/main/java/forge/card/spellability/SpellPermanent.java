@@ -67,7 +67,7 @@ public class SpellPermanent extends Spell {
      */
     public SpellPermanent(final Card sourceCard) {
         // Add Costs for all SpellPermanents
-        this(sourceCard, new Cost(sourceCard, sourceCard.getManaCost(), false), null);
+        this(sourceCard, new Cost(sourceCard.getManaCost(), false), null);
     } // Spell_Permanent()
 
     /**
@@ -97,7 +97,7 @@ public class SpellPermanent extends Spell {
 
         this.setDescription(this.getStackDescription());
 
-        if (this.getManaCost().countX() > 0) {
+        if (this.getPayCosts().getTotalMana().countX() > 0) {
             if (!this.getSourceCard().getSVar("X").equals("")) {
                 this.setSVar("X", this.getSourceCard().getSVar("X"));
             }

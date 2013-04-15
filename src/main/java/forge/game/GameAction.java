@@ -35,6 +35,7 @@ import forge.CardPredicates;
 import forge.CardUtil;
 import forge.Command;
 import forge.CounterType;
+import forge.FThreads;
 import forge.GameEntity;
 import forge.card.CardType;
 import forge.card.TriggerReplacementBase;
@@ -335,8 +336,11 @@ public class GameAction {
      * @return a {@link forge.Card} object.
      */
     public final Card moveTo(final Zone zoneTo, Card c) {
+       // FThreads.assertExecutedByEdt(false); // This code must never be executed from EDT, 
+                                             // use FThreads.invokeInNewThread to run code in a pooled thread
+
         // if a split card is moved, convert it back to its full form before moving (unless moving to stack)
-        if (c.isSplitCard() && zoneTo != game.getStackZone()) {
+        if (c.isSplitCard() && !zoneTo.is(ZoneType.Stack)) {
             c.setState(CardCharacteristicName.Original);
         }
 
@@ -481,7 +485,7 @@ public class GameAction {
 
     private void handleRecoverAbility(final Card recoverable) {
         final String recoverCost = recoverable.getKeyword().get(recoverable.getKeywordPosition("Recover")).split(":")[1];
-        final Cost cost = new Cost(recoverable, recoverCost, true);
+        final Cost cost = new Cost(recoverCost, true);
 
         final SpellAbility abRecover = new AbilityActivated(recoverable, cost, null) {
             private static final long serialVersionUID = 8858061639236920054L;
@@ -758,7 +762,7 @@ public class GameAction {
         }
 
         final SpellAbility madness = card.getFirstSpellAbility().copy();
-        madness.setPayCosts(new Cost(card, card.getMadnessCost(), false));
+        madness.setPayCosts(new Cost(card.getMadnessCost(), false));
 
         final StringBuilder sb = new StringBuilder();
         sb.append(card.getName()).append(" - Cast via Madness");

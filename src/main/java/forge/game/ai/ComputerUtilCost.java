@@ -312,7 +312,7 @@ public class ComputerUtilCost {
      * @return a boolean.
      */
     public static boolean shouldPayCost(final Player ai, final Card hostCard, final String costString) {
-        final Cost cost = new Cost(hostCard, costString, false);
+        final Cost cost = new Cost(costString, false);
     
         for (final CostPart part : cost.getCostParts()) {
             if (part instanceof CostPayLife) {

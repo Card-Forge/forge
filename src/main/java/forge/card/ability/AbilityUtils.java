@@ -1107,7 +1107,7 @@ public class AbilityUtils {
             unlessCost = Integer.toString(calculateAmount(source, sa.getParam("UnlessCost").replace(" ", ""), sa));
         }
 
-        final Cost cost = new Cost(source, unlessCost, true);
+        final Cost cost = new Cost(unlessCost, true);
         final Ability ability = new AbilityStatic(source, cost, sa.getTarget()) {
             @Override
             public void resolve() { /* nothing to do here */ }

@@ -38,6 +38,7 @@ import forge.card.spellability.AbilityManaPart;
 import forge.card.spellability.AbilityStatic;
 import forge.card.spellability.SpellAbility;
 import forge.control.input.InputPayManaExecuteCommands;
+import forge.control.input.InputPayment;
 import forge.control.input.InputSelectCards;
 import forge.control.input.InputSelectCardsFromList;
 import forge.game.GameActionUtil;
@@ -169,7 +170,7 @@ public class Upkeep extends Phase {
         for (int i = 0; i < list.size(); i++) {
             final Card c = list.get(i);
             if (c.hasStartOfKeyword("(Echo unpaid)")) {
-                final Ability blankAbility = Upkeep.BlankAbility(c, c.getEchoCost());
+                final Ability blankAbility = Upkeep.getBlankAbility(c, c.getEchoCost());
                 blankAbility.setActivatingPlayer(c.getController());
 
                 final StringBuilder sb = new StringBuilder();
@@ -181,7 +182,7 @@ public class Upkeep extends Phase {
                         
                         Player controller = c.getController();
                         if (controller.isHuman()) {
-                            Cost cost = new Cost(c, c.getEchoCost().trim(), true);
+                            Cost cost = new Cost(c.getEchoCost().trim(), true);
                             if ( !GameActionUtil.payCostDuringAbilityResolve(blankAbility, cost, null, game) )
                                 game.getAction().sacrifice(c, null);;
 
@@ -275,7 +276,7 @@ public class Upkeep extends Phase {
                                 FThreads.setInputAndWait(inp);
                                 isUpkeepPaid = inp.isPaid();
                             } else { // computer
-                                Ability aiPaid = Upkeep.BlankAbility(c, upkeepCost.toString());
+                                Ability aiPaid = Upkeep.getBlankAbility(c, upkeepCost.toString());
                                 isUpkeepPaid = ComputerUtilCost.canPayCost(aiPaid, controller) && !c.hasKeyword("Indestructible"); 
                                 if (isUpkeepPaid) {
                                     ComputerUtil.playNoStack((AIPlayer)controller, aiPaid, game);
@@ -317,7 +318,7 @@ public class Upkeep extends Phase {
                     }
 
                     final String upkeepCost = cost;
-                    final Ability blankAbility = Upkeep.BlankAbility(c, upkeepCost);
+                    final Ability blankAbility = Upkeep.getBlankAbility(c, upkeepCost);
                     blankAbility.setActivatingPlayer(controller);
 
                     final Ability upkeepAbility = new Ability(c, ManaCost.ZERO) {
@@ -360,7 +361,7 @@ public class Upkeep extends Phase {
                                 FThreads.setInputAndWait(inp);
                                 isUpkeepPaid = inp.isPaid();
                             } else { // computers
-                                final Ability aiPaid = Upkeep.BlankAbility(c, upkeepCost.toString());
+                                final Ability aiPaid = Upkeep.getBlankAbility(c, upkeepCost.toString());
                                 if (ComputerUtilCost.canPayCost(aiPaid, controller) && ComputerUtilCombat.predictDamageTo(controller, upkeepDamage, c, false) > 0) {
                                     ComputerUtil.playNoStack((AIPlayer)controller, aiPaid, game);
                                     isUpkeepPaid = true;
@@ -395,13 +396,10 @@ public class Upkeep extends Phase {
      *            a {@link java.lang.String} object.
      * @return a {@link forge.card.spellability.Ability} object.
      */
-    private static Ability BlankAbility(final Card c, final String costString) {
-        Cost cost = new Cost(c, costString, true);
-        return new AbilityStatic(c, cost, null) {
+    public static Ability getBlankAbility(final Card c, final String costString) {
+        return new AbilityStatic(c, new Cost(costString, true), null) {
             @Override
-            public void resolve() {
-
-            }
+            public void resolve() {}
         };
     }
 
@@ -601,7 +599,7 @@ public class Upkeep extends Phase {
                     @Override
                     public void resolve() {
                         if (game.getZoneOf(c).is(ZoneType.Battlefield)) {
-                            InputPayManaExecuteCommands inp = new InputPayManaExecuteCommands(cp, "Pay Demonic Hordes upkeep cost", cost.getManaCost() /*, true */);
+                            InputPayment inp = new InputPayManaExecuteCommands(cp, "Pay Demonic Hordes upkeep cost", cost.getPayCosts().getTotalMana() /*, true */);
                             FThreads.setInputAndWait(inp);
                             if ( !inp.isPaid() ) 
                                 unpaidHordesAb.resolve();

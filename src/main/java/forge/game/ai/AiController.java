@@ -484,8 +484,8 @@ public class AiController {
         public int compare(final SpellAbility a, final SpellAbility b) {
             // sort from highest cost to lowest
             // we want the highest costs first
-            int a1 = a.getManaCost().getCMC();
-            int b1 = b.getManaCost().getCMC();
+            int a1 = a.getPayCosts() == null ? 0 : a.getPayCosts().getTotalMana().getCMC();
+            int b1 = b.getPayCosts() == null ? 0 : b.getPayCosts().getTotalMana().getCMC();
 
             // cast 0 mana cost spells first (might be a Mox)
             if (a1 == 0) {

@@ -3036,7 +3036,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
         }
 
         final SpellAbility playForMiracleCost = card.getFirstSpellAbility().copy();
-        playForMiracleCost.setPayCosts(new Cost(card, card.getMiracleCost(), false));
+        playForMiracleCost.setPayCosts(new Cost(card.getMiracleCost(), false));
         playForMiracleCost.setStackDescription(card.getName() + " - Cast via Miracle");
 
         // TODO Convert this to a Trigger

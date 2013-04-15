@@ -28,6 +28,7 @@ import forge.CardLists;
 import forge.CardPredicates.Presets;
 import forge.Singletons;
 import forge.card.cost.Cost;
+import forge.card.mana.ManaCost;
 import forge.card.spellability.Ability;
 import forge.card.spellability.AbilityStatic;
 import forge.card.staticability.StaticAbility;
@@ -212,13 +213,14 @@ public class PhaseUtil {
         for (Card blocker : filterList) {
             final List<Card> attackers = new ArrayList<Card>(combat.getAttackersBlockedBy(blocker));
             for (Card attacker : attackers) {
-                Cost blockCost = new Cost(blocker, "0", true);
+                Cost blockCost = new Cost(ManaCost.ZERO, true);
                 // Sort abilities to apply them in proper order
                 for (Card card : game.getCardsIn(ZoneType.Battlefield)) {
                     final ArrayList<StaticAbility> staticAbilities = card.getStaticAbilities();
                     for (final StaticAbility stAb : staticAbilities) {
-                        Cost additionalCost = stAb.getCostAbility("CantBlockUnless", blocker, attacker);
-                        blockCost = Cost.combine(blockCost, additionalCost);
+                        Cost c1 = stAb.getCostAbility("CantBlockUnless", blocker, attacker);
+                        if ( c1 != null )
+                            blockCost.add(c1);
                     }
                 }
                 

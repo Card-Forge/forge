@@ -133,7 +133,7 @@ public class HumanPlayer extends Player {
         if (newAbility) {
             CostPayment payment = null;
             if (sa.getPayCosts() == null) {
-                payment = new CostPayment(new Cost(sa.getSourceCard(), "0", sa.isAbility()), sa);
+                payment = new CostPayment(new Cost("0", sa.isAbility()), sa);
             } else {
                 payment = new CostPayment(sa.getPayCosts(), sa);
             }
@@ -141,11 +141,10 @@ public class HumanPlayer extends Player {
             final HumanPlaySpellAbility req = new HumanPlaySpellAbility(sa, payment);
             req.fillRequirements(false, false, false);
         } else {
-            ManaCostBeingPaid manaCost = new ManaCostBeingPaid(sa.getManaCost());
+            ManaCostBeingPaid manaCost = new ManaCostBeingPaid(sa.getPayCosts().getCostMana().getManaToPay());
             if (sa.getSourceCard().isCopiedSpell() && sa.isSpell()) {
                 manaCost = new ManaCostBeingPaid("0");
             } else {
-                manaCost = new ManaCostBeingPaid(sa.getManaCost());
                 manaCost.applySpellCostChange(sa);
             }
 
@@ -191,11 +190,10 @@ public class HumanPlayer extends Player {
             
             req.fillRequirements(useOldTargets, false, true);
         } else {
-            ManaCostBeingPaid manaCost = new ManaCostBeingPaid(sa.getManaCost());
+            ManaCostBeingPaid manaCost = new ManaCostBeingPaid(sa.getPayCosts().getTotalMana());
             if (sa.getSourceCard().isCopiedSpell() && sa.isSpell()) {
                 manaCost = new ManaCostBeingPaid("0");
             } else {
-                manaCost = new ManaCostBeingPaid(sa.getManaCost());
                 manaCost.applySpellCostChange(sa);
             }
 

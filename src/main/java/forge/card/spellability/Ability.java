@@ -21,6 +21,7 @@ import com.esotericsoftware.minlog.Log;
 
 import forge.Card;
 import forge.Singletons;
+import forge.card.cost.Cost;
 import forge.card.mana.ManaCost;
 
 /**
@@ -44,10 +45,11 @@ public abstract class Ability extends SpellAbility {
      *            a {@link java.lang.String} object.
      */
     public Ability(final Card sourceCard, final ManaCost manaCost) {
-        super(sourceCard);
-        this.setManaCost(manaCost);
+        this(sourceCard, new Cost(manaCost, true));
     }
-
+    public Ability(final Card sourceCard, final Cost cost) {
+        super(sourceCard, cost);
+    }
     /**
      * <p>
      * Constructor for Ability.
@@ -76,7 +78,7 @@ public abstract class Ability extends SpellAbility {
         return this.getSourceCard().isInPlay() && !this.getSourceCard().isFaceDown();
     }
     
-    public static final Ability PLAY_LAND_SURROGATE = new Ability(null, null){
+    public static final Ability PLAY_LAND_SURROGATE = new Ability(null, (Cost)null){
         @Override
         public void resolve() {
             // TODO Auto-generated method stub

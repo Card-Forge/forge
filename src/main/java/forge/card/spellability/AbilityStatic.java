@@ -45,9 +45,7 @@ public abstract class AbilityStatic extends Ability {
     }
 
     public AbilityStatic(final Card sourceCard, final Cost abCost, final Target tgt) {
-        super(sourceCard, abCost.getTotalMana());
-        this.setManaCost(abCost.getTotalMana());
-        this.setPayCosts(abCost);
+        super(sourceCard, abCost);
         if ((tgt != null) && tgt.doesTarget()) {
             this.setTarget(tgt);
         }

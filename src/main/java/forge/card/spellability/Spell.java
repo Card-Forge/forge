@@ -59,7 +59,7 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
     public Spell(final Card sourceCard) {
         super(sourceCard);
 
-        this.setManaCost(sourceCard.getManaCost());
+        this.setPayCosts(new Cost(sourceCard.getManaCost(), false));
         this.setStackDescription(sourceCard.getSpellText());
         this.getRestrictions().setZone(ZoneType.Hand);
     }
@@ -109,7 +109,7 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
             return false;
         }
         // for uncastables like lotus bloom, check if manaCost is blank
-        if (isBasicSpell() && getManaCost().isNoCost()) {
+        if (isBasicSpell() && (getPayCosts() == null || getPayCosts().getTotalMana().isNoCost())) {
             return false;
         }
 

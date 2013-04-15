@@ -100,7 +100,7 @@ public class CardFactoryUtil {
      */
     public static AbilityActivated abilityUnearth(final Card sourceCard, final String manaCost) {
 
-        final Cost cost = new Cost(sourceCard, manaCost, true);
+        final Cost cost = new Cost(manaCost, true);
         class AbilityUnearth extends AbilityActivated {
             public AbilityUnearth(final Card ca, final Cost co, final Target t) {
                 super(ca, co, t);
@@ -162,7 +162,7 @@ public class CardFactoryUtil {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility abilityMorphDown(final Card sourceCard) {
-        final Spell morphDown = new Spell(sourceCard) {
+        final Spell morphDown = new Spell(sourceCard, new Cost(ManaCost.THREE, false), null) {
             private static final long serialVersionUID = -1438810964807867610L;
 
             @Override
@@ -184,7 +184,6 @@ public class CardFactoryUtil {
             }
         };
 
-        morphDown.setManaCost(ManaCost.THREE);
         morphDown.setDescription("(You may cast this face down as a 2/2 creature for 3.)");
         morphDown.setStackDescription("Morph - Creature 2/2");
         morphDown.setCastFaceDown(true);
@@ -313,7 +312,7 @@ public class CardFactoryUtil {
      */
     public static SpellAbility abilityTransmute(final Card sourceCard, String transmuteCost) {
         transmuteCost += " Discard<1/CARDNAME>";
-        final Cost abCost = new Cost(sourceCard, transmuteCost, true);
+        final Cost abCost = new Cost(transmuteCost, true);
         class AbilityTransmute extends AbilityActivated {
             public AbilityTransmute(final Card ca, final Cost co, final Target t) {
                 super(ca, co, t);
@@ -406,7 +405,7 @@ public class CardFactoryUtil {
      */
     public static SpellAbility abilitySuspend(final Card sourceCard, final String suspendCost, final String timeCounters) {
         // be careful with Suspend ability, it will not hit the stack
-        Cost cost = new Cost(sourceCard, suspendCost, true);
+        Cost cost = new Cost(suspendCost, true);
         final SpellAbility suspend = new AbilityStatic(sourceCard, cost, null) {
             @Override
             public boolean canPlay() {
@@ -2598,7 +2597,7 @@ public class CardFactoryUtil {
             final SpellAbility sa1 = card.getFirstSpellAbility();
             if (sa1 != null && sa1.isSpell()) {
                 final String altCost = card.getSVar("FullCost");
-                final Cost abCost = new Cost(card, altCost, sa1.isAbility());
+                final Cost abCost = new Cost(altCost, sa1.isAbility());
                 sa1.setPayCosts(abCost);
             }
         }
@@ -3104,7 +3103,7 @@ public class CardFactoryUtil {
 
         final SpellAbility altCostSA = sa.copy();
 
-        final Cost abCost = new Cost(card, altCost, altCostSA.isAbility());
+        final Cost abCost = new Cost(altCost, altCostSA.isAbility());
         altCostSA.setPayCosts(abCost);
 
         final StringBuilder sb = new StringBuilder();
@@ -3136,7 +3135,11 @@ public class CardFactoryUtil {
      * @return
      */
     private static SpellAbility makeEvokeSpell(final Card card, final String evokeKeyword) {
-        final SpellAbility evokedSpell = new Spell(card) {
+        final String[] k = evokeKeyword.split(":");
+        final String evokedCost = k[1];
+        ManaCost manaCost = new ManaCost(new ManaCostParser(evokedCost));
+        
+        final SpellAbility evokedSpell = new Spell(card, new Cost(manaCost, false), null) {
             private static final long serialVersionUID = -1598664196463358630L;
 
             @Override
@@ -3154,12 +3157,6 @@ public class CardFactoryUtil {
             }
         };
         card.removeIntrinsicKeyword(evokeKeyword);
-
-        final String[] k = evokeKeyword.split(":");
-        final String evokedCost = k[1];
-
-        evokedSpell.setManaCost(new ManaCost(new ManaCostParser(evokedCost)));
-
         final StringBuilder desc = new StringBuilder();
         desc.append("Evoke ").append(evokedCost);
         desc.append(" (You may cast this spell for its evoke cost. ");
@@ -3349,7 +3346,7 @@ public class CardFactoryUtil {
                 Map<String, String> sVars = card.getSVars();
 
                 final String[] k = parse.split(":");
-                final Cost cost = new Cost(card, k[1], true);
+                final Cost cost = new Cost(k[1], true);
 
                 card.addSpellAbility(CardFactoryUtil.abilityMorphDown(card));
 

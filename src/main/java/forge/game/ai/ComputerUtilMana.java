@@ -412,7 +412,7 @@ public class ComputerUtilMana {
      * @return ManaCost
      */
     private static ManaCostBeingPaid calculateManaCost(final SpellAbility sa, final boolean test, final int extraMana) {
-        final ManaCost mana = sa.getPayCosts() != null ? sa.getPayCosts().getTotalMana() : sa.getManaCost();
+        final ManaCost mana = sa.getPayCosts() != null ? sa.getPayCosts().getTotalMana() : ManaCost.NO_COST;
     
         ManaCostBeingPaid cost = new ManaCostBeingPaid(mana);
         cost.applySpellCostChange(sa);

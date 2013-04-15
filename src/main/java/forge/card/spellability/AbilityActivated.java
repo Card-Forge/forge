@@ -50,7 +50,7 @@ public abstract class AbilityActivated extends SpellAbility implements java.io.S
      *            a {@link java.lang.String} object.
      */
     public AbilityActivated(final Card card, final String manacost) {
-        this(card, new Cost(card, manacost, true), null);
+        this(card, new Cost(manacost, true), null);
     }
 
     /**
@@ -66,9 +66,7 @@ public abstract class AbilityActivated extends SpellAbility implements java.io.S
      *            a {@link forge.card.spellability.Target} object.
      */
     public AbilityActivated(final Card sourceCard, final Cost abCost, final Target tgt) {
-        super(sourceCard);
-        this.setManaCost(abCost.getTotalMana());
-        this.setPayCosts(abCost);
+        super(sourceCard, abCost);
         if ((tgt != null) && tgt.doesTarget()) {
             this.setTarget(tgt);
         }

@@ -84,7 +84,7 @@ public class StaticAbilityCantAttackBlock {
             costString = Integer.toString(CardFactoryUtil.xCount(hostCard, hostCard.getSVar("Y")));
         }
 
-        final Cost cost = new Cost(hostCard, costString, true);
+        final Cost cost = new Cost(costString, true);
 
         return cost;
     }
@@ -118,7 +118,7 @@ public class StaticAbilityCantAttackBlock {
             costString = Integer.toString(CardFactoryUtil.xCount(hostCard, hostCard.getSVar("Y")));
         }
 
-        final Cost cost = new Cost(hostCard, costString, true);
+        final Cost cost = new Cost(costString, true);
 
         return cost;
     }

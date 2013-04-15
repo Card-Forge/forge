@@ -116,7 +116,7 @@ public final class AbilityFactory {
             if (!mapParams.containsKey("Cost")) {
                 throw new RuntimeException("AbilityFactory : getAbility -- no Cost in " + hostCard.getName());
             }
-            abCost = new Cost(hostCard, mapParams.get("Cost"), type == AbilityRecordType.Ability);
+            abCost = new Cost(mapParams.get("Cost"), type == AbilityRecordType.Ability);
         }
         return abCost;
     }

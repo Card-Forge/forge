@@ -1123,13 +1123,14 @@ public class CombatUtil {
      *            a boolean.
      */
     public static void checkPropagandaEffects(final GameState game, final Card c) {
-        Cost attackCost = new Cost(c, "0", true);
+        Cost attackCost = new Cost(ManaCost.ZERO, true);
         // Sort abilities to apply them in proper order
         for (Card card : game.getCardsIn(ZoneType.Battlefield)) {
             final ArrayList<StaticAbility> staticAbilities = card.getStaticAbilities();
             for (final StaticAbility stAb : staticAbilities) {
                 Cost additionalCost = stAb.getCostAbility("CantAttackUnless", c, game.getCombat().getDefenderByAttacker(c));
-                attackCost.add(additionalCost);
+                if ( null != additionalCost )
+                    attackCost.add(additionalCost);
             }
         }
         

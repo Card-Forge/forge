@@ -564,8 +564,8 @@ public final class GameActionUtil {
             throw new RuntimeException("GameActionUtil.payCostDuringAbilityResolve - The remaining payment type is not Mana.");
 
         InputPayment toSet = current == null 
-                ? new InputPayManaExecuteCommands(p, source + "\r\n", ability.getManaCost())
-                : new InputPayManaExecuteCommands(p, source + "\r\n" + "Current Card: " + current + "\r\n" , ability.getManaCost());
+                ? new InputPayManaExecuteCommands(p, source + "\r\n", cost.getCostMana().getManaToPay())
+                : new InputPayManaExecuteCommands(p, source + "\r\n" + "Current Card: " + current + "\r\n" , cost.getCostMana().getManaToPay());
         FThreads.setInputAndWait(toSet);
         return toSet.isPaid();
     }
@@ -1159,7 +1159,7 @@ public final class GameActionUtil {
 
                 // there is a flashback cost (and not the cards cost)
                 if (!keyword.equals("Flashback")) {
-                    final Cost fbCost = new Cost(source, keyword.substring(10), false);
+                    final Cost fbCost = new Cost(keyword.substring(10), false);
                     flashback.setPayCosts(fbCost);
                 }
                 alternatives.add(flashback);
@@ -1170,17 +1170,8 @@ public final class GameActionUtil {
                 sar.setVariables(sa.getRestrictions());
                 sar.setZone(null);
                 newSA.setRestrictions(sar);
-                final Cost cost = new Cost(source, "", false);
-                if (newSA.getPayCosts() != null) {
-                    for (final CostPart part : newSA.getPayCosts().getCostParts()) {
-                        if (!(part instanceof CostPartMana)) {
-                            cost.getCostParts().add(part);
-                        }
-                    }
-                }
                 newSA.setBasicSpell(false);
-                newSA.setPayCosts(cost);
-                newSA.setManaCost(ManaCost.NO_COST);
+                newSA.setPayCosts(newSA.getPayCosts().copyWithNoMana());
                 newSA.setDescription(sa.getDescription() + " (without paying its mana cost)");
                 alternatives.add(newSA);
             }
@@ -1191,17 +1182,8 @@ public final class GameActionUtil {
                 sar.setZone(null);
                 sar.setOpponentOnly(true);
                 newSA.setRestrictions(sar);
-                final Cost cost = new Cost(source, "", false);
-                if (newSA.getPayCosts() != null) {
-                    for (final CostPart part : newSA.getPayCosts().getCostParts()) {
-                        if (!(part instanceof CostPartMana)) {
-                            cost.getCostParts().add(part);
-                        }
-                    }
-                }
                 newSA.setBasicSpell(false);
-                newSA.setPayCosts(cost);
-                newSA.setManaCost(ManaCost.NO_COST);
+                newSA.setPayCosts(newSA.getPayCosts().copyWithNoMana());
                 newSA.setDescription(sa.getDescription() + " (without paying its mana cost)");
                 alternatives.add(newSA);
             }
@@ -1211,38 +1193,17 @@ public final class GameActionUtil {
                 sar.setVariables(sa.getRestrictions());
                 sar.setInstantSpeed(true);
                 newSA.setRestrictions(sar);
-                final Cost cost = new Cost(source, "", false);
-                if (newSA.getPayCosts() != null) {
-                    for (final CostPart part : newSA.getPayCosts().getCostParts()) {
-                        if (!(part instanceof CostPartMana)) {
-                            cost.getCostParts().add(part);
-                        }
-                    }
-                }
                 newSA.setBasicSpell(false);
-                newSA.setPayCosts(cost);
-                newSA.setManaCost(ManaCost.NO_COST);
+                newSA.setPayCosts(newSA.getPayCosts().copyWithNoMana());
                 newSA.setDescription(sa.getDescription() + " (without paying its mana cost and as though it has flash)");
                 alternatives.add(newSA);
             }
             if (sa.isSpell() && keyword.startsWith("Alternative Cost")) {
                 final SpellAbility newSA = sa.copy();
-                final Cost cost = new Cost(source, keyword.substring(17), false);
-                if (newSA.getPayCosts() != null) {
-                    for (final CostPart part : newSA.getPayCosts().getCostParts()) {
-                        if (!(part instanceof CostPartMana)) {
-                            cost.getCostParts().add(part);
-                        }
-                    }
-                }
                 newSA.setBasicSpell(false);
+                final Cost cost = new Cost(keyword.substring(17), false).add(newSA.getPayCosts().copyWithNoMana());
                 newSA.setPayCosts(cost);
-                newSA.setManaCost(ManaCost.NO_COST);
-                String costString = cost.toSimpleString();
-                if (costString.equals("")) {
-                    costString = "0";
-                }
-                newSA.setDescription(sa.getDescription() + " (by paying " + costString + " instead of its mana cost)");
+                newSA.setDescription(sa.getDescription() + " (by paying " + cost.toSimpleString() + " instead of its mana cost)");
                 alternatives.add(newSA);
             }
         }
@@ -1286,8 +1247,7 @@ public final class GameActionUtil {
                     //create a new spell copy
                     final SpellAbility newSA = s.copy();
                     newSA.setBasicSpell(false);
-                    newSA.setPayCosts(new Cost(c, keyword.substring(19), false).add(newSA.getPayCosts()));
-                    newSA.setManaCost(ManaCost.NO_COST);
+                    newSA.setPayCosts(new Cost(keyword.substring(19), false).add(newSA.getPayCosts()));
                     newSA.setDescription(s.getDescription() + " (Splicing " + c + " onto it)");
                     newSA.addSplicedCards(c);
 
@@ -1343,8 +1303,7 @@ public final class GameActionUtil {
                 for (SpellAbility sa : abilities) {
                     final SpellAbility newSA = sa.copy();
                     newSA.setBasicSpell(false);
-                    newSA.setPayCosts(new Cost(source, keyword.substring(8), false).add(newSA.getPayCosts()));
-                    newSA.setManaCost(ManaCost.NO_COST);
+                    newSA.setPayCosts(new Cost(keyword.substring(8), false).add(newSA.getPayCosts()));
                     newSA.setDescription(sa.getDescription() + " (with Buyback)");
                     ArrayList<String> newoacs = new ArrayList<String>();
                     newoacs.addAll(sa.getOptionalAdditionalCosts());
@@ -1360,10 +1319,9 @@ public final class GameActionUtil {
                 for (SpellAbility sa : abilities) {
                     final SpellAbility newSA = sa.copy();
                     newSA.setBasicSpell(false);
-                    final Cost cost = new Cost(source, keyword.substring(7), false);
+                    final Cost cost = new Cost(keyword.substring(7), false);
                     newSA.setDescription(sa.getDescription() + " (Kicker " + cost.toSimpleString() + ")");
                     newSA.setPayCosts(cost.add(newSA.getPayCosts()));
-                    newSA.setManaCost(ManaCost.NO_COST);
                     ArrayList<String> newoacs = new ArrayList<String>();
                     newoacs.addAll(sa.getOptionalAdditionalCosts());
                     newSA.setOptionalAdditionalCosts(newoacs);
@@ -1380,9 +1338,8 @@ public final class GameActionUtil {
                 for (SpellAbility sa : abilities) {
                     final SpellAbility newSA = sa.copy();
                     newSA.setBasicSpell(false);
-                    newSA.setPayCosts(new Cost(source, costString1, false).add(newSA.getPayCosts()));
-                    newSA.setManaCost(ManaCost.NO_COST);
-                    final Cost cost1 = new Cost(source, costString1, false);
+                    newSA.setPayCosts(new Cost(costString1, false).add(newSA.getPayCosts()));
+                    final Cost cost1 = new Cost(costString1, false);
                     newSA.setDescription(sa.getDescription() + " (Additional cost " + cost1.toSimpleString() + ")");
                     ArrayList<String> newoacs = new ArrayList<String>();
                     newoacs.addAll(sa.getOptionalAdditionalCosts());
@@ -1393,9 +1350,8 @@ public final class GameActionUtil {
                     //second option
                     final SpellAbility newSA2 = sa.copy();
                     newSA2.setBasicSpell(false);
-                    newSA.setPayCosts(new Cost(source, costString2, false).add(newSA.getPayCosts()));
-                    newSA2.setManaCost(ManaCost.NO_COST);
-                    final Cost cost2 = new Cost(source, costString2, false);
+                    newSA.setPayCosts(new Cost(costString2, false).add(newSA.getPayCosts()));
+                    final Cost cost2 = new Cost(costString2, false);
                     newSA2.setDescription(sa.getDescription() + " (Additional cost " + cost2.toSimpleString() + ")");
                     ArrayList<String> newoacs2 = new ArrayList<String>();
                     newoacs.addAll(sa.getOptionalAdditionalCosts());
@@ -1413,8 +1369,7 @@ public final class GameActionUtil {
                     newSA.setBasicSpell(false);
                     final String conspireCost = "tapXType<2/Creature.SharesColorWith/untapped creature you control"
                             + " that shares a color with " + source.getName() + ">";
-                    newSA.setPayCosts(new Cost(source, conspireCost, false).add(newSA.getPayCosts()));
-                    newSA.setManaCost(ManaCost.NO_COST);
+                    newSA.setPayCosts(new Cost(conspireCost, false).add(newSA.getPayCosts()));
                     newSA.setDescription(sa.getDescription() + " (Conspire)");
                     ArrayList<String> newoacs = new ArrayList<String>();
                     newoacs.addAll(sa.getOptionalAdditionalCosts());
