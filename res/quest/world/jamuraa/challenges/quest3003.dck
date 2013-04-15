@@ -6,8 +6,8 @@ Repeat=true
 Wins=20
 Card Reward=33% duplicate card;3 rares;80% Aladdin's Lamp|ARN;33% Aladdin's Ring|ARN
 Credit Reward=300
-HumanExtras=Aladdin's Lamp
-AIExtras=Aladdin's Ring
+HumanExtras=Aladdin's Lamp|ARN
+AIExtras=Aladdin's Ring|ARN
 [metadata]
 Name=quest3003
 Title=Aladdin's Cave
