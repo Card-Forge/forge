@@ -188,12 +188,14 @@ public class PlayerControllerHuman extends PlayerController {
      */
     @Override
     public Map<Card, Integer> assignCombatDamage(Card attacker, List<Card> blockers, int damageDealt, GameEntity defender) {
+        // Attacker is a poor name here, since the creature assigning damage
+        // could just as easily be the blocker. 
         Map<Card, Integer> map;
         if (defender != null && assignDamageAsIfNotBlocked(attacker)) {
             map = new HashMap<Card, Integer>();
             map.put(null, damageDealt);
         } else {
-            if (attacker.hasKeyword("Trample") || (blockers.size() > 1)) {
+            if ((attacker.hasKeyword("Trample") && defender != null) || (blockers.size() > 1)) {
                 map = CMatchUI.SINGLETON_INSTANCE.getDamageToAssign(attacker, blockers, damageDealt, defender);
             } else {
                 map = new HashMap<Card, Integer>();
