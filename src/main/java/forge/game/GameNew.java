@@ -120,12 +120,7 @@ public class GameNew {
             boolean canSideBoard = !isFirstGame && gameType.isSideboardingAllowed() && hasSideboard;
          
             if (canSideBoard) {
-                StopWatch sw = new StopWatch();
-                sw.start();
-                System.out.println(FThreads.debugGetCurrThreadId() + " > " + "entering sideboard routine");
                 Deck sideboarded = player.getController().sideboard(psc.getCurrentDeck(), gameType);
-                sw.stop();
-                System.out.println(FThreads.debugGetCurrThreadId() + " > " + "sideboard routine returned after " + sw.getTime() + " ms");
                 psc.setCurrentDeck(sideboarded);
             } else { 
                 psc.restoreOriginalDeck();
