@@ -29,6 +29,7 @@ import forge.card.ability.effects.ChangeZoneEffect;
 import forge.card.ability.effects.ManaEffect;
 import forge.card.ability.effects.ManaReflectedEffect;
 import forge.card.cardfactory.CardFactory;
+import forge.card.cost.Cost;
 import forge.game.player.AIPlayer;
 
 /**
@@ -90,8 +91,9 @@ public final class AbilitySub extends SpellAbility implements java.io.Serializab
     }
 
     public AbilitySub(ApiType api0, final Card ca, final Target tgt, Map<String, String> params0) {
-        super(ca);
+        super(ca, Cost.Zero);
         this.setTarget(tgt);
+
         api = api0;
         params = params0;
         ai = api.getAi();

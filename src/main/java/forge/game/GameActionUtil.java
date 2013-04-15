@@ -1159,8 +1159,7 @@ public final class GameActionUtil {
 
                 // there is a flashback cost (and not the cards cost)
                 if (!keyword.equals("Flashback")) {
-                    final Cost fbCost = new Cost(keyword.substring(10), false);
-                    flashback.setPayCosts(fbCost);
+                    flashback.setPayCosts(new Cost(keyword.substring(10), false));
                 }
                 alternatives.add(flashback);
             }

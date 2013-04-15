@@ -137,7 +137,7 @@ public class CostPartMana extends CostPart {
     
     
         if (!toPay.isPaid()) {
-            InputPayment inpPayment = new InputPayManaOfCostPayment(game, toPay, ability);
+            InputPayment inpPayment = new InputPayManaOfCostPayment(toPay, ability);
             FThreads.setInputAndWait(inpPayment);
             if(!inpPayment.isPaid())
                 return false;

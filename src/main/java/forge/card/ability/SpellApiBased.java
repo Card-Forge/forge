@@ -19,7 +19,9 @@ public class SpellApiBased extends Spell {
     private final SpellAbilityAi ai;
 
     public SpellApiBased(ApiType api0, Card sourceCard, Cost abCost, Target tgt, Map<String, String> params0) {
-        super(sourceCard, abCost, tgt);
+        super(sourceCard, abCost);
+        this.setTarget(tgt);
+        
         params = params0;
         api = api0;
         effect = api.getSpellEffect();

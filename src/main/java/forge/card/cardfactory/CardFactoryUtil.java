@@ -162,7 +162,7 @@ public class CardFactoryUtil {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility abilityMorphDown(final Card sourceCard) {
-        final Spell morphDown = new Spell(sourceCard, new Cost(ManaCost.THREE, false), null) {
+        final Spell morphDown = new Spell(sourceCard, new Cost(ManaCost.THREE, false)) {
             private static final long serialVersionUID = -1438810964807867610L;
 
             @Override
@@ -2596,9 +2596,7 @@ public class CardFactoryUtil {
         if (!card.getSVar("FullCost").equals("")) {
             final SpellAbility sa1 = card.getFirstSpellAbility();
             if (sa1 != null && sa1.isSpell()) {
-                final String altCost = card.getSVar("FullCost");
-                final Cost abCost = new Cost(altCost, sa1.isAbility());
-                sa1.setPayCosts(abCost);
+                sa1.setPayCosts(new Cost(card.getSVar("FullCost"), sa1.isAbility()));
             }
         }
 
@@ -3136,10 +3134,9 @@ public class CardFactoryUtil {
      */
     private static SpellAbility makeEvokeSpell(final Card card, final String evokeKeyword) {
         final String[] k = evokeKeyword.split(":");
-        final String evokedCost = k[1];
-        ManaCost manaCost = new ManaCost(new ManaCostParser(evokedCost));
+        final Cost evokedCost = new Cost(k[1], false);
         
-        final SpellAbility evokedSpell = new Spell(card, new Cost(manaCost, false), null) {
+        final SpellAbility evokedSpell = new Spell(card, evokedCost) {
             private static final long serialVersionUID = -1598664196463358630L;
 
             @Override

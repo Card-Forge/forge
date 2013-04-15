@@ -18,6 +18,7 @@
 package forge.control.input;
 
 import forge.Singletons;
+import forge.card.cost.Cost;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostBeingPaid;
 import forge.card.spellability.SpellAbility;
@@ -62,15 +63,10 @@ public class InputPayManaExecuteCommands extends InputPayManaBase {
      *            a {@link forge.Command} object.
      */
     public InputPayManaExecuteCommands(final Player p, final String prompt, final ManaCost manaCost2) {
-        super(new SpellAbility(null) {
-            @Override
-            public void resolve() {}
-            
-            @Override 
-            public Player getActivatingPlayer() { return p; }
-
-            @Override
-            public boolean canPlay() { return false; }
+        super(new SpellAbility(null, Cost.Zero) {
+            @Override public void resolve() {}
+            @Override public Player getActivatingPlayer() { return p; }
+            @Override public boolean canPlay() { return false; }
         });
         this.originalManaCost = manaCost2;
         this.phyLifeToLose = 0;

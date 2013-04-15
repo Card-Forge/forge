@@ -97,7 +97,9 @@ public class Cost {
         return ManaCost.ZERO;
     }
 
-    private Cost() {}
+    private Cost(int colorlessmana) {
+        costParts.add(new CostPartMana(ManaCost.get(colorlessmana), null, false));
+    }
     
     // Parsing Strings
 
@@ -373,11 +375,9 @@ public class Cost {
     }
     
     public final Cost copyWithNoMana() {
-        Cost toRet = new Cost();
+        Cost toRet = new Cost(0);
         for(CostPart cp : this.costParts) {
-            if ( cp instanceof CostPartMana )
-                toRet.costParts.add(new CostPartMana(ManaCost.ZERO, null, false));
-            else
+            if (!(cp instanceof CostPartMana))
                 toRet.costParts.add(cp);
         }
         return toRet;
@@ -686,4 +686,6 @@ public class Cost {
         card.setSVar("ChosenX", Integer.toString(chosenX));
         return chosenX;
     }
+    
+    public static final Cost Zero = new Cost(0);
 }

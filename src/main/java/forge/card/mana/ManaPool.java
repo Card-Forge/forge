@@ -551,10 +551,9 @@ public class ManaPool {
      *            a boolean.
      */
     public final void clearManaPaid(final SpellAbility ability, final boolean refund) {
-        final List<SpellAbility> abilitiesUsedToPay = ability.getPayingManaAbilities();
         final List<Mana> manaPaid = ability.getPayingMana();
 
-        abilitiesUsedToPay.clear();
+        ability.getPayingManaAbilities().clear();
         // move non-undoable paying mana back to floating
         if (refund) {
             if (ability.getSourceCard() != null) {

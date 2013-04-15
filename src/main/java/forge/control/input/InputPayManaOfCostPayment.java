@@ -4,13 +4,12 @@ import forge.Card;
 import forge.Singletons;
 import forge.card.mana.ManaCostBeingPaid;
 import forge.card.spellability.SpellAbility;
-import forge.game.GameState;
 import forge.game.player.Player;
 import forge.view.ButtonUtil;
 
 public class InputPayManaOfCostPayment extends InputPayManaBase {
 
-    public InputPayManaOfCostPayment(final GameState game, ManaCostBeingPaid cost, SpellAbility spellAbility) {
+    public InputPayManaOfCostPayment(ManaCostBeingPaid cost, SpellAbility spellAbility) {
         super(spellAbility);
         manaCost = cost;
     }

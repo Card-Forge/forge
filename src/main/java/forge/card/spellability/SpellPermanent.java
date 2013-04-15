@@ -66,24 +66,7 @@ public class SpellPermanent extends Spell {
      *            a {@link forge.Card} object.
      */
     public SpellPermanent(final Card sourceCard) {
-        // Add Costs for all SpellPermanents
-        this(sourceCard, new Cost(sourceCard.getManaCost(), false), null);
-    } // Spell_Permanent()
-
-    /**
-     * Instantiates a new spell_ permanent.
-     * 
-     * @param sourceCard
-     *            the source card
-     * @param cost
-     *            the cost
-     * @param tgt
-     *            the tgt
-     * @param setDesc
-     *            the set desc
-     */
-    public SpellPermanent(final Card sourceCard, final Cost cost, final Target tgt) {
-        super(sourceCard, cost, tgt);
+        super(sourceCard, new Cost(sourceCard.getManaCost(), false));
 
         if (sourceCard.isCreature()) {
             final StringBuilder sb = new StringBuilder();

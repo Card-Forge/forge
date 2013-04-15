@@ -255,7 +255,7 @@ public class CardFactorySorceries {
          * library.
          */
 
-        return new Spell(card, new Cost("U U", false), null) {
+        return new Spell(card, new Cost("U U", false)) {
             private static final long serialVersionUID = -8497142072380944393L;
 
             @Override

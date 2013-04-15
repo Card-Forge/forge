@@ -57,30 +57,13 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
      *            a {@link forge.Card} object.
      */
     public Spell(final Card sourceCard) {
-        super(sourceCard);
+        this(sourceCard, new Cost(sourceCard.getManaCost(), false));
+    }
+    public Spell(final Card sourceCard, final Cost abCost) {
+        super(sourceCard, abCost);
 
-        this.setPayCosts(new Cost(sourceCard.getManaCost(), false));
         this.setStackDescription(sourceCard.getSpellText());
         this.getRestrictions().setZone(ZoneType.Hand);
-    }
-
-    /**
-     * <p>
-     * Constructor for Spell.
-     * </p>
-     * 
-     * @param sourceCard
-     *            a {@link forge.Card} object.
-     * @param abCost
-     *            a {@link forge.card.cost.Cost} object.
-     * @param abTgt
-     *            a {@link forge.card.spellability.Target} object.
-     */
-    public Spell(final Card sourceCard, final Cost abCost, final Target abTgt) {
-        this(sourceCard);
-
-        this.setPayCosts(abCost);
-        this.setTarget(abTgt);
     }
 
     /** {@inheritDoc} */
