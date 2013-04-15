@@ -22,6 +22,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.google.common.collect.Iterables;
 
 import forge.Card;
@@ -80,10 +82,8 @@ public class SpellPermanent extends Spell {
 
         this.setDescription(this.getStackDescription());
 
-        if (this.getPayCosts().getTotalMana().countX() > 0) {
-            if (!this.getSourceCard().getSVar("X").equals("")) {
-                this.setSVar("X", this.getSourceCard().getSVar("X"));
-            }
+        if (this.getPayCosts().getTotalMana().countX() > 0 && StringUtils.isNotBlank(getSourceCard().getSVar("X"))) {
+            this.setSVar("X", this.getSourceCard().getSVar("X"));
         }
 
     } // Spell_Permanent()

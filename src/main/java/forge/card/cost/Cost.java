@@ -376,6 +376,7 @@ public class Cost {
     
     public final Cost copyWithNoMana() {
         Cost toRet = new Cost(0);
+        toRet.isAbility = this.isAbility;
         for(CostPart cp : this.costParts) {
             if (!(cp instanceof CostPartMana))
                 toRet.costParts.add(cp);

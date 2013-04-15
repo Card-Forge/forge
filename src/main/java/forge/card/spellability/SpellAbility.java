@@ -59,7 +59,6 @@ public abstract class SpellAbility implements ISpellAbility {
 
     private String type = "Intrinsic"; // set to Intrinsic by default
 
-    private Card targetCard;
     private Card sourceCard;
     private Card originalHost = null;
 
@@ -78,12 +77,12 @@ public abstract class SpellAbility implements ISpellAbility {
     private boolean cycling = false;
     private boolean delve = false;
 
-    /** The pay costs. */
-    private Cost payCosts = null;
-
+    private Card targetCard;
     /** The chosen target. */
     private Target chosenTarget = null;
 
+    /** The pay costs. */
+    private Cost payCosts = null;
     private SpellAbilityRestriction restrictions = new SpellAbilityRestriction();
     private SpellAbilityCondition conditions = new SpellAbilityCondition();
     private AbilitySub subAbility = null;
@@ -174,10 +173,6 @@ public abstract class SpellAbility implements ISpellAbility {
     public SpellAbility(final Card iSourceCard, Cost toPay) {
         this.sourceCard = iSourceCard;
         this.payCosts = toPay;
-    }
-    
-    public SpellAbility(final Card iSourceCard ) { 
-        this(iSourceCard, null);
     }
 
     // Spell, and Ability, and other Ability objects override this method

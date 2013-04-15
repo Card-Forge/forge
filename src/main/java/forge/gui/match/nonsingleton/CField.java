@@ -129,15 +129,17 @@ public class CField implements ICDoc {
     private final Observer observerZones = new Observer() {
         @Override
         public void update(final Observable a, final Object b) {
-            CField.this.view.updateZones(CField.this.player);
+            FThreads.invokeInEdtNowOrLater(updateZonesRunnable);
         }
     };
-
+    private final Runnable updateZonesRunnable = new Runnable() { @Override public void run() { CField.this.view.updateZones(CField.this.player); } };
+    private final Runnable updateDetailsRunnable = new Runnable() { @Override public void run() { CField.this.view.updateDetails(CField.this.player); } };
+    
     // Life total, poison total, and keywords, attached directly to Player.
     private final Observer observerDetails = new Observer() {
         @Override
         public void update(final Observable a, final Object b) {
-            CField.this.view.updateDetails(CField.this.player);
+            FThreads.invokeInEdtNowOrLater(updateDetailsRunnable);
         }
     };
 
