@@ -1,0 +1,9 @@
+Name:Rumbling Aftershocks
+ManaCost:4 R
+Types:Enchantment
+T:Mode$ SpellCast | ValidCard$ Card.YouCtrl+kicked | Execute$ DamageSomeone | OptionalDecider$ You | TriggerDescription$ Whenever you cast a kicked spell, you may have CARDNAME deal damage to target creature or player equal to the number of times that spell was kicked.
+SVar:DamageSomeone:AB$ DealDamage | Cost$ 0 | ValidTgts$ Creature,Player | References$ X | NumDmg$ X | TgtPrompt$ Select target creature or player 
+SVar:X:TriggeredSpellAbility$Count$TimesKicked
+SVar:Picture:http://www.wizards.com/global/images/magic/general/rumbling_aftershocks.jpg
+Oracle:Whenever you cast a kicked spell, you may have Rumbling Aftershocks deal damage to target creature or player equal to the number of times that spell was kicked.
+SetInfo:WWK Uncommon

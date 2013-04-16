@@ -304,7 +304,9 @@ public class AbilityUtils {
 
         // Try to fetch variable, try ability first, then card.
         String svarval = null;
-        if (ability != null) {
+        if (amount.indexOf('$') > 0 ) // when there is a dollar sign, it's not a reference, it's a raw value!
+            svarval = amount;
+        else if (ability != null) {
             svarval = ability.getSVar(amount);
         }
         if (StringUtils.isBlank(svarval)) {
@@ -339,7 +341,7 @@ public class AbilityUtils {
         }
 
         // Parse Object$Property string
-        final String[] calcX = svarval.split("\\$");
+        final String[] calcX = svarval.split("\\$", 2);
 
         // Incorrect parses mean zero.
         if ((calcX.length == 1) || calcX[1].equals("none")) {
@@ -499,6 +501,11 @@ public class AbilityUtils {
                 players.add((Player) o);
             }
             return CardFactoryUtil.playerXCount(players, calcX[1], card) * multiplier;
+        }
+        if(calcX[0].equals("TriggeredSpellAbility")) {
+            final SpellAbility root = ability.getRootAbility();
+            SpellAbility sat = (SpellAbility) root.getTriggeringObject("SpellAbility");
+            return calculateAmount(sat.getSourceCard(), calcX[1], sat);
         }
         // Added on 9/30/12 (ArsenalNut) - Ended up not using but might be useful in future
         /*
