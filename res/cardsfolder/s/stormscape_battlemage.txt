@@ -2,11 +2,10 @@ Name:Stormscape Battlemage
 ManaCost:2 U
 Types:Creature Metathran Wizard
 PT:2/2
-K:Kicker W
-K:Kicker 2 B
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+kicked W | Execute$ TrigKicker | TriggerDescription$ When CARDNAME enters the battlefield, if it was kicked with its W kicker, you gain 3 life.
+K:Kicker W : 2 B
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+kicked 1 | Execute$ TrigKicker | TriggerDescription$ When CARDNAME enters the battlefield, if it was kicked with its W kicker, you gain 3 life.
 SVar:TrigKicker:DB$ GainLife | Defined$ You | LifeAmount$ 3
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+kicked 2 B | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME enters the battlefield, if it was kicked with its 2 B kicker, destroy target nonblack creature. That creature can't be regenerated.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+kicked 2 | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME enters the battlefield, if it was kicked with its 2 B kicker, destroy target nonblack creature. That creature can't be regenerated.
 SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Creature.nonBlack | NoRegen$ True | TgtPrompt$ Select target nonblack creature.
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stormscape_battlemage.jpg
