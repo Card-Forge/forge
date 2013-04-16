@@ -197,13 +197,4 @@ public class CostPayment {
         }
         return true;
     }
-
-    /**
-     * <p>
-     * changeCost.
-     * </p>
-     */
-    public final void changeCost() {
-        this.cost.changeCost(this.ability);
-    }
 }

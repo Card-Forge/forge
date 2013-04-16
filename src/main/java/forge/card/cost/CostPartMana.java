@@ -38,7 +38,6 @@ import forge.game.player.AIPlayer;
 public class CostPartMana extends CostPart {
     // "Leftover"
     private final ManaCost cost;
-    private ManaCost adjustedCost;
     private boolean xCantBe0 = false;
     private final String restriction;
 
@@ -79,20 +78,12 @@ public class CostPartMana extends CostPart {
     }
 
     /**
-     * Used to set mana cost after applying static effects that change costs.
-     */
-    public void setAdjustedMana(ManaCost manaCost) {
-        // this is set when static effects of LodeStone Golems or Thalias are applied
-        adjustedCost = manaCost;
-    }
-
-    /**
      * Gets the mana to pay.
      * 
      * @return the mana to pay
      */
     public final ManaCost getManaToPay() {
-        return adjustedCost == null ? cost : adjustedCost;
+        return cost;
     }
     
     @Override
@@ -134,8 +125,8 @@ public class CostPartMana extends CostPart {
             for(int i = 0; i < timesMultikicked; i++)
                 toPay.combineManaCost(mkCost);
         }
-    
-    
+
+        toPay.applySpellCostChange(ability);
         if (!toPay.isPaid()) {
             InputPayment inpPayment = new InputPayManaOfCostPayment(toPay, ability);
             FThreads.setInputAndWait(inpPayment);

@@ -345,35 +345,6 @@ public class Cost {
         return splitStr;
     }
 
-    /**
-     * <p>
-     * changeCost.
-     * </p>
-     * 
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     */
-    public final void changeCost(final SpellAbility sa) {
-        boolean costChanged = false;
-        // TODO: Change where ChangeCost happens
-        for (final CostPart part : this.costParts) {
-            if (part instanceof CostPartMana) {
-                final ManaCost mana = new ManaCost(new ManaCostParser(part.toString()));
-                final ManaCostBeingPaid changedCost = new ManaCostBeingPaid(mana);
-                changedCost.applySpellCostChange(sa);
-
-                ((CostPartMana)part).setAdjustedMana(changedCost.toManaCost());
-                costChanged = true;
-            }
-        }
-        if (!costChanged) {
-            // Spells with a cost of 0 should be affected too
-            final ManaCostBeingPaid changedCost = new ManaCostBeingPaid("0");
-            changedCost.applySpellCostChange(sa);
-            this.costParts.add(new CostPartMana(changedCost.toManaCost(), null, false));
-        }
-    }
-    
     public final Cost copyWithNoMana() {
         Cost toRet = new Cost(0);
         toRet.isAbility = this.isAbility;

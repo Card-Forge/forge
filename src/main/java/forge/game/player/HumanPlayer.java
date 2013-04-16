@@ -179,13 +179,7 @@ public class HumanPlayer extends Player {
         sa.setActivatingPlayer(this);
 
         if (sa.getPayCosts() != null) {
-            final CostPayment payment = new CostPayment(sa.getPayCosts(), sa);
-
-            if (!sa.isTrigger()) {
-                payment.changeCost();
-            }
-
-            final HumanPlaySpellAbility req = new HumanPlaySpellAbility(sa, payment);
+            final HumanPlaySpellAbility req = new HumanPlaySpellAbility(sa, new CostPayment(sa.getPayCosts(), sa));
             
             req.fillRequirements(useOldTargets, false, true);
         } else {

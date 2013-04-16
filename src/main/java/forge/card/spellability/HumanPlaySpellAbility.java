@@ -94,7 +94,6 @@ public class HumanPlaySpellAbility {
         boolean paymentMade = isFree;
         
         if (!paymentMade) {
-            this.payment.changeCost();
             paymentMade = this.payment.payCost(game);
         } 
     
