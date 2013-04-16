@@ -1,11 +1,10 @@
 Name:Probe
 ManaCost:2 U
 Types:Sorcery
-A:SP$ Draw | Cost$ 2 U | NumCards$ 3 | SubAbility$ DBDiscardYou | SpellDescription$ Draw three cards, then discard two cards.
-SVar:DBDiscardYou:DB$ Discard | Defined$ You | NumCards$ 2 | Mode$ TgtChoose
-A:SP$ Draw | Cost$ 3 U B | SetAsKicked$ True | NumCards$ 3 | SubAbility$ DBDiscardYou2 | SpellDescription$ Kicker 1 B (You may pay an additional 1 B as you cast this spell.) If CARDNAME was kicked, target player discards two cards.
-SVar:DBDiscardYou2:DB$ Discard | Defined$ You | NumCards$ 2 | SubAbility$ DBDiscard3 | Mode$ TgtChoose
-SVar:DBDiscard3:DB$ Discard | ValidTgts$ Player | TgtPrompt$ Select target player | NumCards$ 2 | Mode$ TgtChoose
+K:Kicker 1 B
+A:SP$ Draw | Cost$ 2 U | SetAsKicked$ True | NumCards$ 3 | SubAbility$ DBDiscardYou | SpellDescription$ Draw three cards,
+SVar:DBDiscardYou:DB$ Discard | Defined$ You | NumCards$ 2 | SubAbility$ DBDiscardTarget | Mode$ TgtChoose | SpellDescription$ then discard two cards.
+SVar:DBDiscardTarget:DB$ Discard | Condition$ Kicked | ValidTgts$ Player | TgtPrompt$ Select target player | NumCards$ 2 | Mode$ TgtChoose | SpellDescription$ If CARDNAME was kicked, target player discards two cards.
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/probe.jpg
 Oracle:Kicker {1}{B} (You may pay an additional {1}{B} as you cast this spell.)\nDraw three cards, then discard two cards.\nIf Probe was kicked, target player discards two cards.
