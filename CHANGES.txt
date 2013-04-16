@@ -100,6 +100,22 @@ Far // Away
 Bred for the Hunt
 Lavinia of the Tenth
 Progenitor Mimic
+Azorius Cluestone
+Boros Cluestone
+Dimir Cluestone
+Golgari Cluestone
+Gruul Cluestone
+Izzet Cluestone
+Orzhov Cluestone
+Rakdos Cluestone
+Selesnya Cluestone
+Simic Cluestone
+Tajic, Blade of the Legion
+Goblin Test Pilot
+Blood Baron of Vizkopa
+Alive // Well
+Sire of Insanity
+Zhur-Taa Ancient
 
 
 ------------
