@@ -92,7 +92,7 @@ public abstract class SpellAbility implements ISpellAbility {
 
     private final ArrayList<Mana> payingMana = new ArrayList<Mana>();
     private final List<SpellAbility> paidAbilities = new ArrayList<SpellAbility>();
-    private ArrayList<String> optionalAdditionalCosts = new ArrayList<String>();
+    private List<String> optionalAdditionalCosts = new ArrayList<String>();
 
     private HashMap<String, List<Card>> paidLists = new HashMap<String, List<Card>>();
 
@@ -671,14 +671,14 @@ public abstract class SpellAbility implements ISpellAbility {
     /**
      * @return the optionalAdditionalCosts
      */
-    public ArrayList<String> getOptionalAdditionalCosts() {
+    public List<String> getOptionalAdditionalCosts() {
         return optionalAdditionalCosts;
     }
 
     /**
      * @param costs the optionalAdditionalCosts to set
      */
-    public final void setOptionalAdditionalCosts(ArrayList<String> costs) {
+    public final void setOptionalAdditionalCosts(List<String> costs) {
         this.optionalAdditionalCosts = costs;
     }
 

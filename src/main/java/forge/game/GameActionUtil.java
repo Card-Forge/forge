@@ -1287,9 +1287,9 @@ public final class GameActionUtil {
      *            the original sa
      * @return an ArrayList<SpellAbility>.
      */
-    public static ArrayList<SpellAbility> getOptionalAdditionalCosts(final SpellAbility original) {
-        final ArrayList<SpellAbility> abilities = new ArrayList<SpellAbility>();
-        final ArrayList<SpellAbility> newAbilities = new ArrayList<SpellAbility>();
+    public static List<SpellAbility> getOptionalAdditionalCosts(final SpellAbility original) {
+        final List<SpellAbility> abilities = new ArrayList<SpellAbility>();
+        final List<SpellAbility> newAbilities = new ArrayList<SpellAbility>();
         final Card source = original.getSourceCard();
         abilities.add(original);
         if (!original.isSpell()) {
@@ -1304,12 +1304,12 @@ public final class GameActionUtil {
                     newSA.setBasicSpell(false);
                     newSA.setPayCosts(new Cost(keyword.substring(8), false).add(newSA.getPayCosts()));
                     newSA.setDescription(sa.getDescription() + " (with Buyback)");
-                    ArrayList<String> newoacs = new ArrayList<String>();
-                    newoacs.addAll(sa.getOptionalAdditionalCosts());
+                    
+                    ArrayList<String> newoacs = new ArrayList<String>(sa.getOptionalAdditionalCosts());
+                    newoacs.add(keyword);
                     newSA.setOptionalAdditionalCosts(newoacs);
-                    newSA.addOptionalAdditionalCosts(keyword);
                     if (newSA.canPlay()) {
-                        newAbilities.add(newAbilities.size(), newSA);
+                        newAbilities.add(newSA);
                     }
                 }
                 abilities.addAll(0, newAbilities);
@@ -1321,12 +1321,12 @@ public final class GameActionUtil {
                     final Cost cost = new Cost(keyword.substring(7), false);
                     newSA.setDescription(sa.getDescription() + " (Kicker " + cost.toSimpleString() + ")");
                     newSA.setPayCosts(cost.add(newSA.getPayCosts()));
-                    ArrayList<String> newoacs = new ArrayList<String>();
-                    newoacs.addAll(sa.getOptionalAdditionalCosts());
+                    
+                    ArrayList<String> newoacs = new ArrayList<String>(sa.getOptionalAdditionalCosts());
+                    newoacs.add(keyword);
                     newSA.setOptionalAdditionalCosts(newoacs);
-                    newSA.addOptionalAdditionalCosts(keyword);
                     if (newSA.canPlay()) {
-                        newAbilities.add(newAbilities.size(), newSA);
+                        newAbilities.add(newSA);
                     }
                 }
                 abilities.addAll(0, newAbilities);
@@ -1337,24 +1337,23 @@ public final class GameActionUtil {
                 for (SpellAbility sa : abilities) {
                     final SpellAbility newSA = sa.copy();
                     newSA.setBasicSpell(false);
-                    newSA.setPayCosts(new Cost(costString1, false).add(newSA.getPayCosts()));
+                    
                     final Cost cost1 = new Cost(costString1, false);
                     newSA.setDescription(sa.getDescription() + " (Additional cost " + cost1.toSimpleString() + ")");
-                    ArrayList<String> newoacs = new ArrayList<String>();
-                    newoacs.addAll(sa.getOptionalAdditionalCosts());
-                    newSA.setOptionalAdditionalCosts(newoacs);
+                    newSA.setPayCosts(cost1.add(sa.getPayCosts()));
+                    newSA.setOptionalAdditionalCosts(new ArrayList<String>(sa.getOptionalAdditionalCosts()));
                     if (newSA.canPlay()) {
-                        newAbilities.add(newAbilities.size(), newSA);
+                        newAbilities.add(newSA);
                     }
+
                     //second option
                     final SpellAbility newSA2 = sa.copy();
                     newSA2.setBasicSpell(false);
-                    newSA.setPayCosts(new Cost(costString2, false).add(newSA.getPayCosts()));
+
                     final Cost cost2 = new Cost(costString2, false);
                     newSA2.setDescription(sa.getDescription() + " (Additional cost " + cost2.toSimpleString() + ")");
-                    ArrayList<String> newoacs2 = new ArrayList<String>();
-                    newoacs.addAll(sa.getOptionalAdditionalCosts());
-                    newSA2.setOptionalAdditionalCosts(newoacs2);
+                    newSA2.setPayCosts(cost2.add(sa.getPayCosts()));
+                    newSA2.setOptionalAdditionalCosts(new ArrayList<String>(sa.getOptionalAdditionalCosts()));
                     if (newSA2.canPlay()) {
                         newAbilities.add(newAbilities.size(), newSA2);
                     }
@@ -1370,10 +1369,10 @@ public final class GameActionUtil {
                             + " that shares a color with " + source.getName() + ">";
                     newSA.setPayCosts(new Cost(conspireCost, false).add(newSA.getPayCosts()));
                     newSA.setDescription(sa.getDescription() + " (Conspire)");
-                    ArrayList<String> newoacs = new ArrayList<String>();
-                    newoacs.addAll(sa.getOptionalAdditionalCosts());
+                    
+                    ArrayList<String> newoacs = new ArrayList<String>(sa.getOptionalAdditionalCosts());
+                    newoacs.add(keyword);
                     newSA.setOptionalAdditionalCosts(newoacs);
-                    newSA.addOptionalAdditionalCosts(keyword);
                     if (newSA.canPlay()) {
                         newAbilities.add(newAbilities.size(), newSA);
                     }

@@ -17,7 +17,6 @@
  */
 package forge.game.player;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import forge.Card;
@@ -218,7 +217,7 @@ public class HumanPlayer extends Player {
      */
     public SpellAbility chooseOptionalAdditionalCosts(final SpellAbility original) {
         //final HashMap<String, SpellAbility> map = new HashMap<String, SpellAbility>();
-        final ArrayList<SpellAbility> abilities = GameActionUtil.getOptionalAdditionalCosts(original);
+        final List<SpellAbility> abilities = GameActionUtil.getOptionalAdditionalCosts(original);
         
         if (!original.isSpell()) {
             return original;
