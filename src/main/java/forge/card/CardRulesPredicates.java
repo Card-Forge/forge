@@ -538,6 +538,8 @@ public final class CardRulesPredicates {
 
         /** The Constant isMulticolor. */
         public static final Predicate<CardRules> IS_MULTICOLOR = CardRulesPredicates.hasAtLeastCntColors((byte) 2);
+        
+        public static final Predicate<CardRules> IS_MONOCOLOR = CardRulesPredicates.hasCntColors((byte) 1);
 
         /** The Constant colors. */
         public static final List<Predicate<CardRules>> COLORS = new ArrayList<Predicate<CardRules>>();

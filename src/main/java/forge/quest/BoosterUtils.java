@@ -83,11 +83,11 @@ public final class BoosterUtils {
                 colorFilters.add(CardRulesPredicates.Presets.IS_COLORLESS);
             }
 
-            colorFilters.add(CardRulesPredicates.Presets.IS_WHITE);
-            colorFilters.add(CardRulesPredicates.Presets.IS_RED);
-            colorFilters.add(CardRulesPredicates.Presets.IS_BLUE);
-            colorFilters.add(CardRulesPredicates.Presets.IS_BLACK);
-            colorFilters.add(CardRulesPredicates.Presets.IS_GREEN);
+            colorFilters.add(Predicates.and(CardRulesPredicates.Presets.IS_MONOCOLOR, CardRulesPredicates.Presets.IS_WHITE));
+            colorFilters.add(Predicates.and(CardRulesPredicates.Presets.IS_MONOCOLOR, CardRulesPredicates.Presets.IS_RED));
+            colorFilters.add(Predicates.and(CardRulesPredicates.Presets.IS_MONOCOLOR, CardRulesPredicates.Presets.IS_BLUE));
+            colorFilters.add(Predicates.and(CardRulesPredicates.Presets.IS_MONOCOLOR, CardRulesPredicates.Presets.IS_BLACK));
+            colorFilters.add(Predicates.and(CardRulesPredicates.Presets.IS_MONOCOLOR, CardRulesPredicates.Presets.IS_GREEN));
         }
 
         // This will save CPU time when sets are limited
