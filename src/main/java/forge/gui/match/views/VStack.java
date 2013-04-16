@@ -186,7 +186,7 @@ public enum VStack implements IVDoc<CStack> {
             parentCell.getBody().add(tar, "w 98%!");
             stackTARs.add(tar);
 
-            if (spell != null && spell.isOptionalTrigger()) {
+            if (spell.isOptionalTrigger()) {
                 tar.addMouseListener(new MouseAdapter() {
                     @Override
                     public void mousePressed(final MouseEvent e) {

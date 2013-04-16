@@ -49,7 +49,7 @@ public enum CPicture implements ICDoc {
      */
     public void showCard(final Card c, boolean showFlipped) {
         cameFaceDown = c.isFaceDown() && c.canBeShownTo(Singletons.getControl().getPlayer());
-        canFlip = c != null && (c.isDoubleFaced() || c.isFlipCard() || cameFaceDown);
+        canFlip = c.isDoubleFaced() || c.isFlipCard() || cameFaceDown;
         currentCard = c;
         flipped = canFlip && (c.getCurState() == CardCharacteristicName.Transformed ||
                               c.getCurState() == CardCharacteristicName.Flipped || c.getCurState() == CardCharacteristicName.FaceDown); 

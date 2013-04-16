@@ -542,7 +542,7 @@ public final class GameActionUtil {
             }
             
             else if (part instanceof CostPartMana ) {
-                if (!((CostPartMana) part).getManaToPay().equals("0")) // non-zero costs require input
+                if (!((CostPartMana) part).getManaToPay().isZero()) // non-zero costs require input
                     mayRemovePart = false; 
             } else
                 throw new RuntimeException("GameActionUtil.payCostDuringAbilityResolve - An unhandled type of cost was met: " + part.getClass());
