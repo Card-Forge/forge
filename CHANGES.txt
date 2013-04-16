@@ -58,7 +58,7 @@ Flicker effects were using the wrong Defined$ param.
 
 
 - Targeting arrows -
-Some people have noticed slowdowns when Targeting arrows are enabled.
+Some people have noticed slowdowns when Targeting arrows are enabled. The battlefield Dock tab includes a targeting icon. You can set the targeting arrows to Off or to Card mouseover to speed up the game.
 
 
 ---------
