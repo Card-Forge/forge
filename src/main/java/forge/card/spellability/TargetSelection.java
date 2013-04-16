@@ -32,6 +32,7 @@ import forge.game.player.Player;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
+import forge.util.Aggregates;
 
 /**
  * <p>
@@ -93,7 +94,12 @@ public class TargetSelection {
         final boolean mandatory = tgt.getMandatory() && tgt.hasCandidates(this.ability, true);
         
         final boolean choiceResult;
-        if (zone.size() == 1 && zone.get(0) == ZoneType.Stack) {
+        final boolean random = tgt.isRandomTarget();
+        if (random) {
+            List<Object> candidates = tgt.getAllCandidates(this.ability, true);
+            Object choice = Aggregates.random(candidates);
+            return tgt.addTarget(choice);
+        } else if (zone.size() == 1 && zone.get(0) == ZoneType.Stack) {
             // If Zone is Stack, the choices are handled slightly differently.
             // Handle everything inside function due to interaction with StackInstance
             return this.chooseCardFromStack(mandatory);

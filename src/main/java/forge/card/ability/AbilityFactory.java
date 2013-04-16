@@ -267,6 +267,9 @@ public final class AbilityFactory {
             abTgt.calculateStillToDivide(mapParams.get("DividedAsYouChoose"), hostC, null);
             abTgt.setDividedAsYouChoose(true);
         }
+        if (mapParams.containsKey("TargetsAtRandom")) {
+            abTgt.setRandomTarget(true);
+        }
         return abTgt;
     }
 
