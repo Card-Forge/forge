@@ -57,6 +57,10 @@ Wishes can now only retrieve cards you own which prevents retrieving an opponent
 Flicker effects were using the wrong Defined$ param.
 
 
+- Targeting arrows -
+Some people have noticed slowdowns when Targeting arrows are enabled.
+
+
 ---------
 New Cards
 ---------
