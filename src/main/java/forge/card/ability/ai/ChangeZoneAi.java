@@ -1168,7 +1168,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                         });
                     }
                 }
-                if (ZoneType.Exile.equals(destination) || origin.contains(ZoneType.Battlefield)) {
+                if (ZoneType.Exile.equals(destination) || origin.contains(ZoneType.Battlefield) || ZoneType.Library.equals(destination)) {
                     // Exiling or bouncing stuff
                     if (player.isOpponentOf(ai)) {
                         c = ComputerUtilCard.getBestAI(fetchList);
@@ -1198,7 +1198,9 @@ public class ChangeZoneAi extends SpellAbilityAi {
                     if (CardLists.filter(hand, Presets.LANDS).isEmpty() && CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), Presets.LANDS).size() < 4) {
                         boolean canCastSomething = false;
                         for (Card cardInHand : hand) {
-                            canCastSomething |= ComputerUtilMana.payManaCost(cardInHand.getFirstSpellAbility(), ai, true, 0, false);
+                            final SpellAbility spell = cardInHand.getFirstSpellAbility();
+                            spell.setActivatingPlayer(ai);
+                            canCastSomething |= ComputerUtilMana.payManaCost(spell, ai, true, 0, false);
                         }
                         if (!canCastSomething) {
                             System.out.println("Pulling a land as there are none in hand, less than 4 on the board, and nothing in hand is castable.");
