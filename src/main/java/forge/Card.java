@@ -22,6 +22,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.EnumMap;
+import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -51,6 +52,7 @@ import forge.card.replacement.ReplaceMoved;
 import forge.card.replacement.ReplacementEffect;
 import forge.card.replacement.ReplacementResult;
 import forge.card.spellability.AbilityTriggered;
+import forge.card.spellability.OptionalCost;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellPermanent;
 import forge.card.spellability.Target;
@@ -110,7 +112,6 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     // if this card is an Aura, what Entity is it enchanting?
     private GameEntity enchanting = null;
-    private ArrayList<String> optionalAdditionalCostsPaid = null;
 
     // changes by AF animate and continuous static effects - timestamp is the key of maps
     private Map<Long, CardType> changedCardTypes = new ConcurrentSkipListMap<Long, CardType>();
@@ -182,7 +183,6 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     private int xManaCostPaid = 0;
 
-    private int multiKickerMagnitude = 0;
     private int replicateMagnitude = 0;
 
     private int sunburstValue = 0;
@@ -3892,23 +3892,14 @@ public class Card extends GameEntity implements Comparable<Card> {
         return this.getNetAttack();
     }
 
-    /**
-     * <p>
-     * addMultiKickerMagnitude.
-     * </p>
-     * 
-     * @param n
-     *            a int.
-     */
-    public final void addMultiKickerMagnitude(final int n) {
-        this.multiKickerMagnitude += n;
-    }
-    public final void setMultiKickerMagnitude(final int n) {
-        this.multiKickerMagnitude = n;
-    }
-
-    public final int getMultiKickerMagnitude() {
-        return this.multiKickerMagnitude;
+    private int multiKickerMagnitude = 0;
+    public final void addMultiKickerMagnitude(final int n) { this.multiKickerMagnitude += n; }
+    public final void setKickerMagnitude(final int n) { this.multiKickerMagnitude = n; }
+    public final int getKickerMagnitude() { 
+        if ( this.multiKickerMagnitude > 0 )
+            return multiKickerMagnitude;
+        boolean hasK1 = costsPaid.contains(OptionalCost.Kicker1);
+        return hasK1 == costsPaid.contains(OptionalCost.Kicker2) ? (hasK1 ? 2 : 0) : 1; 
     }
 
     /**
@@ -4290,8 +4281,8 @@ public class Card extends GameEntity implements Comparable<Card> {
      * 
      * @return a {@link java.util.ArrayList} object.
      */
-    public final ArrayList<String> getIntrinsicAbilities() {
-        return this.getCharacteristics().getIntrinsicAbility();
+    public final List<String> getUnparsedAbilities() {
+        return this.getCharacteristics().getUnparsedAbilities();
     }
 
     /**
@@ -4328,8 +4319,8 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @param a
      *            a {@link java.util.ArrayList} object.
      */
-    public final void setIntrinsicAbilities(final ArrayList<String> a) {
-        this.getCharacteristics().setIntrinsicAbility(new ArrayList<String>(a));
+    public final void setIntrinsicAbilities(final List<String> a) {
+        this.getCharacteristics().setUnparsedAbilities(new ArrayList<String>(a));
     }
 
     /**
@@ -4358,7 +4349,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     public final void addIntrinsicAbility(final String s) {
         if (s.trim().length() != 0) {
-            this.getCharacteristics().getIntrinsicAbility().add(s);
+            this.getCharacteristics().getUnparsedAbilities().add(s);
         }
     }
 
@@ -4794,64 +4785,6 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     public final void setSuspendCast(final boolean b) {
         this.suspendCast = b;
-    }
-
-    /**
-     * <p>
-     * optionalAdditionalCostsPaid.
-     * </p>
-     * 
-     * @param cost
-     *            a String.
-     */
-    public final void addOptionalAdditionalCostsPaid(final String cost) {
-        if (optionalAdditionalCostsPaid == null) {
-            optionalAdditionalCostsPaid = new ArrayList<String>();
-        }
-        this.optionalAdditionalCostsPaid.add(cost);
-    }
-
-    /**
-     * <p>
-     * optionalAdditionalCostsPaid.
-     * </p>
-     */
-    public final void clearAdditionalCostsPaid() {
-        if (optionalAdditionalCostsPaid != null) {
-            optionalAdditionalCostsPaid.clear();
-        }
-    }
-
-    /**
-     * <p>
-     * isOptionalAdditionalCostsPaid.
-     * </p>
-     * 
-     * @param cost
-     *            a String.
-     * @return a boolean.
-     */
-    public final boolean isOptionalAdditionalCostsPaid(final String cost) {
-        if (optionalAdditionalCostsPaid == null) {
-            return false;
-        }
-        for (String s : optionalAdditionalCostsPaid) {
-            if (s.startsWith(cost)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    /**
-     * <p>
-     * isOptionalAdditionalCostsPaid.
-     * </p>
-     * @return an ArrayList<String>.
-     * 
-     */
-    public final ArrayList<String> getOptionalAdditionalCostsPaid() {
-        return this.optionalAdditionalCostsPaid;
     }
 
     /**
@@ -6369,17 +6302,16 @@ public class Card extends GameEntity implements Comparable<Card> {
             }
         } else if (property.startsWith("kicked")) {
             if (property.equals("kicked")) {
-                if (!this.isOptionalAdditionalCostsPaid("Kicker")) {
+                if (this.getKickerMagnitude() == 0) {
                     return false;
                 }
             } else {
                 String s = "Kicker " + property.split("kicked ")[1];
-                if (!this.isOptionalAdditionalCostsPaid(s)) {
-                    return false;
-                }
+                if ("1".equals(s) && !this.isOptionalCostPaid(OptionalCost.Kicker1)) return false;
+                if ("2".equals(s) && !this.isOptionalCostPaid(OptionalCost.Kicker2)) return false;
             }
         } else if (property.startsWith("notkicked")) {
-            if (this.isOptionalAdditionalCostsPaid("Kicker")) {
+            if (this.getKickerMagnitude() > 0) {
                 return false;
             }
         } else if (property.startsWith("evoked")) {
@@ -8317,15 +8249,13 @@ public class Card extends GameEntity implements Comparable<Card> {
     public void setSplitStateToPlayAbility(SpellAbility sa) {
         if( !isSplitCard() ) return; // just in case
         // Split card support
-        List<SpellAbility> leftSplitAbilities = getState(CardCharacteristicName.LeftSplit).getSpellAbility();
-        List<SpellAbility> rightSplitAbilities = getState(CardCharacteristicName.RightSplit).getSpellAbility();
-        for (SpellAbility a : leftSplitAbilities) {
+        for (SpellAbility a : getState(CardCharacteristicName.LeftSplit).getSpellAbility()) {
             if (sa == a || sa.getDescription().equals(String.format("%s (without paying its mana cost)", a.getDescription()))) {
                 setState(CardCharacteristicName.LeftSplit);
                 return;
             }
         }
-        for (SpellAbility a : rightSplitAbilities) {
+        for (SpellAbility a : getState(CardCharacteristicName.RightSplit).getSpellAbility()) {
             if (sa == a || sa.getDescription().equals(String.format("%s (without paying its mana cost)", a.getDescription()))) {
                 setState(CardCharacteristicName.RightSplit);
                 return;
@@ -8336,5 +8266,12 @@ public class Card extends GameEntity implements Comparable<Card> {
 
         throw new RuntimeException("Not found which part to choose for ability " + sa + " from card " + this);
     }
-    
+
+    // Optional costs paid
+    private final EnumSet<OptionalCost> costsPaid = EnumSet.noneOf(OptionalCost.class);
+    public void clearOptionalCostsPaid() { costsPaid.clear(); }
+    public void addOptionalCostPaid(OptionalCost cost) { costsPaid.add(cost); }
+    public Iterable<OptionalCost> getOptionalCostsPaid() { return costsPaid; }
+    public boolean isOptionalCostPaid(OptionalCost cost) { return costsPaid.contains(cost); }
+
 } // end Card class

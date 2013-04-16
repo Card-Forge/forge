@@ -46,7 +46,7 @@ public class CardCharacteristics {
     private ArrayList<String> intrinsicKeyword = new ArrayList<String>();
     private final List<SpellAbility> spellAbility = new ArrayList<SpellAbility>();
     private final List<SpellAbility> manaAbility = new ArrayList<SpellAbility>();
-    private ArrayList<String> intrinsicAbility = new ArrayList<String>();
+    private List<String> unparsedAbilities = new ArrayList<String>();
     private ArrayList<Trigger> triggers = new ArrayList<Trigger>();
     private ArrayList<ReplacementEffect> replacementEffects = new ArrayList<ReplacementEffect>();
     private ArrayList<StaticAbility> staticAbilities = new ArrayList<StaticAbility>();
@@ -215,18 +215,18 @@ public class CardCharacteristics {
      * 
      * @return the intrinsicAbility
      */
-    public final ArrayList<String> getIntrinsicAbility() {
-        return this.intrinsicAbility;
+    public final List<String> getUnparsedAbilities() {
+        return this.unparsedAbilities;
     }
 
     /**
      * Sets the intrinsic ability.
      * 
-     * @param intrinsicAbility0
+     * @param list
      *            the intrinsicAbility to set
      */
-    public final void setIntrinsicAbility(final ArrayList<String> intrinsicAbility0) {
-        this.intrinsicAbility = intrinsicAbility0;
+    public final void setUnparsedAbilities(final List<String> list) {
+        this.unparsedAbilities = list;
     }
 
     /**
@@ -408,7 +408,7 @@ public class CardCharacteristics {
         // ArrayList<String> intrinsicKeyword : list of String objects so use copy constructor
         this.intrinsicKeyword =  new ArrayList<String>(source.getIntrinsicKeyword());
         // ArrayList<String> intrinsicAbility : list of String objects so use copy constructor
-        this.intrinsicAbility = new ArrayList<String>(source.getIntrinsicAbility());
+        this.unparsedAbilities = new ArrayList<String>(source.getUnparsedAbilities());
         // ArrayList<String> staticAbilityStrings : list of String objects so use copy constructor
         this.staticAbilityStrings = new ArrayList<String>(source.getStaticAbilityStrings());
         // String imageFilename = copy reference

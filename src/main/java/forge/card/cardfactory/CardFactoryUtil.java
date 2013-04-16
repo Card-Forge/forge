@@ -55,6 +55,7 @@ import forge.card.spellability.Ability;
 import forge.card.spellability.AbilityActivated;
 import forge.card.spellability.AbilityStatic;
 import forge.card.spellability.AbilitySub;
+import forge.card.spellability.OptionalCost;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityRestriction;
@@ -1556,11 +1557,8 @@ public class CardFactoryUtil {
             }
         }
         if (sq[0].startsWith("Kicked")) {
-            if (c.isOptionalAdditionalCostsPaid("Kicker")) {
-                return CardFactoryUtil.doXMath(Integer.parseInt(sq[1]), m, c);
-            } else {
-                return CardFactoryUtil.doXMath(Integer.parseInt(sq[2]), m, c);
-            }
+            int ix = c.getKickerMagnitude() > 0 ? 1 : 2;
+            return CardFactoryUtil.doXMath(Integer.parseInt(sq[ix]), m, c);
         }
 
         if (sq[0].contains("GraveyardWithGE20Cards")) {
@@ -1660,7 +1658,7 @@ public class CardFactoryUtil {
 
         // Count$TimesKicked
         if (sq[0].contains("TimesKicked")) {
-            return CardFactoryUtil.doXMath(c.getMultiKickerMagnitude(), m, c);
+            return CardFactoryUtil.doXMath(c.getKickerMagnitude(), m, c);
         }
         if (sq[0].contains("NumCounters")) {
             final int num = c.getCounters(CounterType.getType(sq[1]));
@@ -2370,14 +2368,8 @@ public class CardFactoryUtil {
     public static final void addAbilityFactoryAbilities(final Card card) {
         // **************************************************
         // AbilityFactory cards
-        final ArrayList<String> ia = card.getIntrinsicAbilities();
-        for (int i = 0; i < ia.size(); i++) {
-            // System.out.println(cardName);
-            final SpellAbility sa = AbilityFactory.getAbility(ia.get(i), card);
-            if (sa.hasParam("SetAsKicked")) {
-                sa.addOptionalAdditionalCosts("Kicker");
-            }
-            card.addSpellAbility(sa);
+        for (String rawAbility : card.getUnparsedAbilities()) {
+            card.addSpellAbility(AbilityFactory.getAbility(rawAbility, card));
         }
     }
 
@@ -2601,10 +2593,11 @@ public class CardFactoryUtil {
         }
 
         // AltCost
-        if (!card.getSVar("AltCost").equals("")) {
+        String altCost = card.getSVar("AltCost");
+        if (StringUtils.isNotBlank(altCost)) {
             final SpellAbility sa1 = card.getFirstSpellAbility();
             if (sa1 != null && sa1.isSpell()) {
-                card.addSpellAbility(makeAltCost(card, sa1));
+                card.addSpellAbility(makeAltCostAbility(card, altCost, sa1));
             }
         }
 
@@ -2779,7 +2772,7 @@ public class CardFactoryUtil {
             final SpellAbility sa = AbilityFactory.getAbility(abilityStr.toString(), card);
             card.addSpellAbility(sa);
             // add ability to instrinic strings so copies/clones create the ability also
-            card.getIntrinsicAbilities().add(abilityStr.toString());
+            card.getUnparsedAbilities().add(abilityStr.toString());
         }
 
         setupEtbKeywords(card);
@@ -3066,63 +3059,26 @@ public class CardFactoryUtil {
      * @param abilities
      * @return 
      */
-    private static SpellAbility makeAltCost(final Card card, final SpellAbility sa) {
-        String altCost = card.getSVar("AltCost");
-        final HashMap<String, String> mapParams = new HashMap<String, String>();
-        String altCostDescription = "";
-        final String[] altCosts = altCost.split("\\|");
-
-        for (int aCnt = 0; aCnt < altCosts.length; aCnt++) {
-            altCosts[aCnt] = altCosts[aCnt].trim();
-        }
-
-        for (final String altCost2 : altCosts) {
-            final String[] aa = altCost2.split("\\$");
-
-            for (int aaCnt = 0; aaCnt < aa.length; aaCnt++) {
-                aa[aaCnt] = aa[aaCnt].trim();
-            }
-
-            if (aa.length != 2) {
-                final StringBuilder sb = new StringBuilder();
-                sb.append("StaticEffectFactory Parsing Error: Split length of ");
-                sb.append(altCost2).append(" in ").append(card.getName()).append(" is not 2.");
-                throw new RuntimeException(sb.toString());
-            }
-
-            mapParams.put(aa[0], aa[1]);
-        }
-
-        altCost = mapParams.get("Cost");
-
-        if (mapParams.containsKey("Description")) {
-            altCostDescription = mapParams.get("Description");
-        }
+    private static SpellAbility makeAltCostAbility(final Card card, final String altCost, final SpellAbility sa) {
+        final Map<String, String> params = AbilityFactory.getMapParams(altCost);
 
         final SpellAbility altCostSA = sa.copy();
-
-        final Cost abCost = new Cost(altCost, altCostSA.isAbility());
+        final Cost abCost = new Cost(params.get("Cost"), altCostSA.isAbility());
         altCostSA.setPayCosts(abCost);
-
-        final StringBuilder sb = new StringBuilder();
-
-        if (!altCostDescription.equals("")) {
-            sb.append(altCostDescription);
-        } else {
-            sb.append("You may ").append(abCost.toStringAlt());
-            sb.append(" rather than pay ").append(card.getName()).append("'s mana cost.");
-        }
+        altCostSA.setBasicSpell(false);
+        altCostSA.addOptionalCost(OptionalCost.AltCost);
 
         final SpellAbilityRestriction restriction = new SpellAbilityRestriction();
-        restriction.setRestrictions(mapParams);
-        if (!mapParams.containsKey("ActivationZone")) {
+        restriction.setRestrictions(params);
+        if (!params.containsKey("ActivationZone")) {
             restriction.setZone(ZoneType.Hand);
         }
         altCostSA.setRestrictions(restriction);
-        altCostSA.setDescription(sb.toString());
-        altCostSA.setBasicSpell(false);
-        altCostSA.setAltCost(true);
 
+        final String costDescription = params.containsKey("Description") ? params.get("Description") 
+                : String.format("You may %s rather than pay %s's mana cost.", abCost.toStringAlt(), card.getName());
+        
+        altCostSA.setDescription(costDescription);
         return altCostSA;
     }
 
@@ -3186,14 +3142,7 @@ public class CardFactoryUtil {
      * @return a int.
      */
     public static final int hasKeyword(final Card c, final String k) {
-        final List<String> a = c.getKeyword();
-        for (int i = 0; i < a.size(); i++) {
-            if (a.get(i).startsWith(k)) {
-                return i;
-            }
-        }
-
-        return -1;
+        return hasKeyword(c, k, 0);
     }
 
     /**
@@ -3209,7 +3158,7 @@ public class CardFactoryUtil {
      *            a int.
      * @return a int.
      */
-    static final int hasKeyword(final Card c, final String k, final int startPos) {
+    private static final int hasKeyword(final Card c, final String k, final int startPos) {
         final List<String> a = c.getKeyword();
         for (int i = startPos; i < a.size(); i++) {
             if (a.get(i).startsWith(k)) {

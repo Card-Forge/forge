@@ -18,6 +18,7 @@
 package forge.card.spellability;
 
 import java.util.ArrayList;
+import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -92,7 +93,6 @@ public abstract class SpellAbility implements ISpellAbility {
 
     private final ArrayList<Mana> payingMana = new ArrayList<Mana>();
     private final List<SpellAbility> paidAbilities = new ArrayList<SpellAbility>();
-    private List<String> optionalAdditionalCosts = new ArrayList<String>();
 
     private HashMap<String, List<Card>> paidLists = new HashMap<String, List<Card>>();
 
@@ -109,7 +109,6 @@ public abstract class SpellAbility implements ISpellAbility {
     private boolean undoable;
     
     private boolean isCopied = false;
-    private boolean isAltCost = false;
 
     public final AbilityManaPart getManaPart() {
         return manaPart;
@@ -302,43 +301,6 @@ public abstract class SpellAbility implements ISpellAbility {
     public boolean isSpell() { return false; }
     public boolean isAbility() { return true; }
 
-    /**
-     * <p>
-     * isBuyBackAbility.
-     * </p>
-     * 
-     * @return a boolean.
-     */
-    public boolean isBuyBackAbility() {
-        return this.optionalAdditionalCosts.contains("Buyback");
-    }
-
-    /**
-     * <p>
-     * isKicked.
-     * </p>
-     * 
-     * @return a boolean.
-     */
-    public boolean isKicked() {
-        return isOptionalAdditionalCostPaid("Kicker");
-    }
-
-    /**
-     * <p>
-     * isOptionalAdditionalCostPaid.
-     * </p>
-     * 
-     * @return a boolean.
-     */
-    public boolean isOptionalAdditionalCostPaid(String cost) {
-        for (String s : this.optionalAdditionalCosts) {
-            if (s.startsWith(cost)) {
-                return true;
-            }
-        }
-        return false;
-    }
 
      /**
      * <p>
@@ -668,27 +630,37 @@ public abstract class SpellAbility implements ISpellAbility {
         this.paidLists = new HashMap<String, List<Card>>();
     }
 
+    private EnumSet<OptionalCost> optionalCosts = EnumSet.noneOf(OptionalCost.class);
     /**
      * @return the optionalAdditionalCosts
      */
-    public List<String> getOptionalAdditionalCosts() {
-        return optionalAdditionalCosts;
-    }
-
-    /**
-     * @param costs the optionalAdditionalCosts to set
-     */
-    public final void setOptionalAdditionalCosts(List<String> costs) {
-        this.optionalAdditionalCosts = costs;
+    public Iterable<OptionalCost> getOptionalCosts() {
+        return optionalCosts;
     }
 
     /**
      * @param cost the optionalAdditionalCost to add
      */
-    public final void addOptionalAdditionalCosts(String cost) {
-        this.optionalAdditionalCosts.add(cost);
+    public final void addOptionalCost(OptionalCost cost) {
+        // Optional costs are added to swallow copies of original SAs, 
+        // Thus, to protect the original's set from changes, we make a copy right here.
+        this.optionalCosts = EnumSet.copyOf(optionalCosts);
+        this.optionalCosts.add(cost);
     }
 
+    public boolean isBuyBackAbility() {
+        return isOptionalCostPaid(OptionalCost.Buyback);
+    }
+
+    public boolean isKicked() {
+        return isOptionalCostPaid(OptionalCost.Kicker1) || isOptionalCostPaid(OptionalCost.Kicker2);
+    }
+
+    public boolean isOptionalCostPaid(OptionalCost cost) {
+        SpellAbility saRoot = this.getRootAbility();
+        return saRoot.optionalCosts.contains(cost);
+    }
+    
     /**
      * <p>
      * Getter for the field <code>triggeringObjects</code>.
@@ -1724,22 +1696,4 @@ public abstract class SpellAbility implements ISpellAbility {
         CostPartMana cm = payCosts != null ? getPayCosts().getCostMana() : null;
         return cm != null && cm.getAmountOfX() > 0; 
     }
-
-    /**
-     * @param isAltCost the isAltCost to set
-     */
-    public void setAltCost(boolean isAltCost) {
-        this.isAltCost = isAltCost; 
-    }
-    
-    /**
-     * @return the isAltCost
-     */
-    public boolean isAltCost() {
-        // only used in prowl, cannot distinguish the alt cost type currently
-        // TODO : support the altcost type
-        return isAltCost;
-    }
-
-
 }

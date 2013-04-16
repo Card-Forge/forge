@@ -70,7 +70,7 @@ public class SpellAbilityVariables {
         this.metalcraft = sav.isThreshold();
         this.hellbent = sav.isHellbent();
         this.allTargetsLegal = sav.isAllTargetsLegal();
-        this.prowl = new ArrayList<String>(sav.getProwl());
+        this.prowlTypes = new ArrayList<String>(sav.getProwlTypes());
         this.isPresent = sav.getIsPresent();
         this.presentCompare = sav.getPresentCompare();
         this.presentDefined = sav.getPresentDefined();
@@ -135,13 +135,10 @@ public class SpellAbilityVariables {
     /** The hellbent. */
     private boolean hellbent = false;
 
-    /** The Kicked. */
-    private boolean kicked = false;
-    
     private boolean allTargetsLegal = false;
 
     /** The prowl. */
-    private ArrayList<String> prowl = new ArrayList<String>();
+    private ArrayList<String> prowlTypes = new ArrayList<String>();
 
     /** The s is present. */
     private String isPresent = null;
@@ -185,6 +182,8 @@ public class SpellAbilityVariables {
 
     /** The chosen colors string. */
     private String chosenColors = null;
+
+
 
     /**
      * <p>
@@ -507,20 +506,11 @@ public class SpellAbilityVariables {
         this.metalcraft = bMetalcraft;
     }
 
-    /**
-     * @return the kicked
-     */
-    public boolean isKicked() {
-        return kicked;
-    }
-
-    /**
-     * @param kicked the kicked to set
-     */
-    public void setKicked(boolean kicked) {
-        this.kicked = kicked;
-    }
-
+    /** The Kicked. */
+    protected boolean kicked = false;
+    protected boolean kicked1 = false; // http://magiccards.info/query?q=o%3A%22kicker%22+not+o%3A%22multikicker%22+o%3A%22and%2For+{%22
+    protected boolean kicked2 = false; // Some spells have 2 kickers with different effects
+    protected boolean altCostPaid = false;
 
     /**
      * @return the allTargetsLegal
@@ -535,7 +525,7 @@ public class SpellAbilityVariables {
     public void setAllTargetsLegal(boolean allTargets) {
         this.allTargetsLegal = allTargets;
     }
-    
+
 
     /**
      * <p>
@@ -545,8 +535,8 @@ public class SpellAbilityVariables {
      * @param types
      *            the new prowl
      */
-    public final void setProwl(final ArrayList<String> types) {
-        this.prowl = types;
+    public final void setProwlTypes(final ArrayList<String> types) {
+        this.prowlTypes = types;
     }
 
     // IsPresent for Valid battlefield stuff
@@ -760,8 +750,8 @@ public class SpellAbilityVariables {
      * 
      * @return the prowl
      */
-    public final ArrayList<String> getProwl() {
-        return this.prowl;
+    public final ArrayList<String> getProwlTypes() {
+        return this.prowlTypes;
     }
 
     /**

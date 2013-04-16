@@ -291,7 +291,7 @@ public class GameAction {
             }
         } else if (zoneFrom.is(ZoneType.Exile) && !zoneTo.is(ZoneType.Battlefield)) {
             // Pull from Eternity used on a suspended card
-            copied.clearAdditionalCostsPaid();
+            copied.clearOptionalCostsPaid();
             if (copied.isFaceDown()) {
                 copied.turnFaceUp();
             }
@@ -315,7 +315,7 @@ public class GameAction {
                     copied.removeHiddenExtrinsicKeyword(s);
                 }
             }
-            copied.clearAdditionalCostsPaid();
+            copied.clearOptionalCostsPaid();
             if (copied.isFaceDown()) {
                 copied.turnFaceUp();
             }

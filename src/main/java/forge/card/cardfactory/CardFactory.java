@@ -40,6 +40,7 @@ import forge.card.mana.ManaCost;
 import forge.card.replacement.ReplacementHandler;
 import forge.card.spellability.AbilityActivated;
 import forge.card.spellability.AbilitySub;
+import forge.card.spellability.OptionalCost;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellPermanent;
 import forge.card.spellability.Target;
@@ -191,11 +192,10 @@ public class CardFactory {
 
         if (bCopyDetails) {
             c.addXManaCostPaid(original.getXManaCostPaid());
-            c.addMultiKickerMagnitude(original.getMultiKickerMagnitude());
-            if (original.getOptionalAdditionalCostsPaid() != null) {
-                for (String cost : original.getOptionalAdditionalCostsPaid()) {
-                    c.addOptionalAdditionalCostsPaid(cost);
-                }
+            c.setKickerMagnitude(original.getKickerMagnitude());
+
+            for (OptionalCost cost : original.getOptionalCostsPaid()) {
+                c.addOptionalCostPaid(cost);
             }
             c.addReplicateMagnitude(original.getReplicateMagnitude());
             if (sa.isReplicate()) {
@@ -488,7 +488,7 @@ public class CardFactory {
         to.setManaCost(from.getManaCost());
         to.setColor(from.getColor());
         to.setSVars(from.getSVars());
-        to.setIntrinsicAbilities(from.getIntrinsicAbilities());
+        to.setIntrinsicAbilities(from.getUnparsedAbilities());
     
         to.setImageKey(from.getImageKey());
         to.setTriggers(from.getTriggers());

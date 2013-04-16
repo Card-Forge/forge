@@ -20,6 +20,7 @@ package forge.card.trigger;
 import forge.Card;
 import forge.Singletons;
 import forge.card.cost.Cost;
+import forge.card.spellability.OptionalCost;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityStackInstance;
 import forge.game.player.Player;
@@ -76,7 +77,7 @@ public class TriggerSpellAbilityCast extends Trigger {
         }
         
         if (this.getMapParams().containsKey("AltCostSpellAbility")) {
-            if (!spellAbility.isAltCost()) {
+            if (!spellAbility.isOptionalCostPaid(OptionalCost.AltCost)) {
                 return false;
             }
         }
@@ -157,7 +158,7 @@ public class TriggerSpellAbilityCast extends Trigger {
         }
 
         if (this.getMapParams().containsKey("Conspire")) {
-            if (!spellAbility.isOptionalAdditionalCostPaid("Conspire")) {
+            if (!spellAbility.isOptionalCostPaid(OptionalCost.Conspire)) {
                 return false;
             }
         }

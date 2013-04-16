@@ -217,7 +217,7 @@ public class HumanPlayer extends Player {
      */
     public SpellAbility chooseOptionalAdditionalCosts(final SpellAbility original) {
         //final HashMap<String, SpellAbility> map = new HashMap<String, SpellAbility>();
-        final List<SpellAbility> abilities = GameActionUtil.getOptionalAdditionalCosts(original);
+        final List<SpellAbility> abilities = GameActionUtil.getOptionalCosts(original);
         
         if (!original.isSpell()) {
             return original;

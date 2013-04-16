@@ -36,6 +36,7 @@ import forge.card.mana.ManaCost;
 import forge.card.spellability.Ability;
 import forge.card.spellability.AbilityStatic;
 import forge.card.spellability.AbilityTriggered;
+import forge.card.spellability.OptionalCost;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityStackInstance;
@@ -369,10 +370,9 @@ public class MagicStack extends MyObservable {
             game.getAction().checkStateEffects();
             //GuiDisplayUtil.updateGUI();
         } else {
-            if (sp.getOptionalAdditionalCosts() != null) {
-                for (String s : sp.getOptionalAdditionalCosts()) {
-                    sp.getSourceCard().addOptionalAdditionalCostsPaid(s);
-                }
+            for (OptionalCost s : sp.getOptionalCosts()) {
+                
+                sp.getSourceCard().addOptionalCostPaid(s);
             }
             if (sp.getSourceCard().isCopiedSpell()) {
                 this.push(sp);
@@ -384,7 +384,7 @@ public class MagicStack extends MyObservable {
 
                 if (activating.isHuman()) {
                     while(true) {
-                        int mkMagnitude = sa.getSourceCard().getMultiKickerMagnitude();
+                        int mkMagnitude = sa.getSourceCard().getKickerMagnitude();
                         String prompt = String.format("Multikicker for %s\r\nTimes Kicked: %d\r\n", sa.getSourceCard(), mkMagnitude );
                         InputPayManaExecuteCommands toSet = new InputPayManaExecuteCommands(activating, prompt, sp.getMultiKickerManaCost());
                         FThreads.setInputAndWait(toSet);

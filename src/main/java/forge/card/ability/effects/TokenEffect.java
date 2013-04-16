@@ -227,7 +227,7 @@ public class TokenEffect extends SpellAbilityEffect {
                             final SpellAbility grantedAbility = AbilityFactory.getAbility(actualAbility, c);
                             c.addSpellAbility(grantedAbility);
                             // added ability to intrinsic list so copies and clones work
-                            c.getIntrinsicAbilities().add(actualAbility);
+                            c.getUnparsedAbilities().add(actualAbility);
                         }
                     }
                 }

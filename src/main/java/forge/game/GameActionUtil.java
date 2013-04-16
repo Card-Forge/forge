@@ -20,6 +20,8 @@ package forge.game;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.collect.Iterables;
@@ -36,6 +38,7 @@ import forge.CounterType;
 import forge.FThreads;
 import forge.Singletons;
 import forge.card.ability.AbilityFactory;
+import forge.card.ability.AbilityFactory.AbilityRecordType;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.ApiType;
 import forge.card.cardfactory.CardFactoryUtil;
@@ -57,6 +60,7 @@ import forge.card.mana.ManaCost;
 import forge.card.spellability.Ability;
 import forge.card.spellability.AbilityManaPart;
 import forge.card.spellability.AbilitySub;
+import forge.card.spellability.OptionalCost;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityRestriction;
 import forge.control.input.InputPayManaExecuteCommands;
@@ -72,6 +76,7 @@ import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 import forge.gui.GuiDialog;
 import forge.sound.SoundEffectType;
+import forge.util.TextUtil;
 
 
 /**
@@ -1210,6 +1215,115 @@ public final class GameActionUtil {
     }
 
     /**
+     * get optional additional costs.
+     * 
+     * @param original
+     *            the original sa
+     * @return an ArrayList<SpellAbility>.
+     */
+    public static List<SpellAbility> getOptionalCosts(final SpellAbility original) {
+        final List<SpellAbility> abilities = new ArrayList<SpellAbility>();
+
+        final Card source = original.getSourceCard();
+        abilities.add(original);
+        if (!original.isSpell()) {
+            return abilities;
+        }
+
+        // Buyback, Kicker
+        for (String keyword : source.getKeyword()) {
+            if (keyword.startsWith("AlternateAdditionalCost")) {
+                final List<SpellAbility> newAbilities = new ArrayList<SpellAbility>();
+                String[] costs = TextUtil.split(keyword, ':');
+                for (SpellAbility sa : abilities) {
+                    final SpellAbility newSA = sa.copy();
+                    newSA.setBasicSpell(false);
+                    
+                    final Cost cost1 = new Cost(costs[1], false);
+                    newSA.setDescription(sa.getDescription() + " (Additional cost " + cost1.toSimpleString() + ")");
+                    newSA.setPayCosts(cost1.add(sa.getPayCosts()));
+                    if (newSA.canPlay()) {
+                        newAbilities.add(newSA);
+                    }
+
+                    //second option
+                    final SpellAbility newSA2 = sa.copy();
+                    newSA2.setBasicSpell(false);
+
+                    final Cost cost2 = new Cost(costs[2], false);
+                    newSA2.setDescription(sa.getDescription() + " (Additional cost " + cost2.toSimpleString() + ")");
+                    newSA2.setPayCosts(cost2.add(sa.getPayCosts()));
+                    if (newSA2.canPlay()) {
+                        newAbilities.add(newAbilities.size(), newSA2);
+                    }
+                }
+                abilities.clear();
+                abilities.addAll(newAbilities);
+            } else if (keyword.startsWith("Buyback")) {
+                for (int i = 0; i < abilities.size(); i++) {
+                    final SpellAbility newSA = abilities.get(i).copy();
+                    newSA.setBasicSpell(false);
+                    newSA.setPayCosts(new Cost(keyword.substring(8), false).add(newSA.getPayCosts()));
+                    newSA.setDescription(newSA.getDescription() + " (with Buyback)");
+                    newSA.addOptionalCost(OptionalCost.Buyback);
+                    if ( newSA.canPlay() )
+                        abilities.add(++i, newSA);
+                }
+            } else if (keyword.startsWith("Kicker")) {
+                for (int i = 0; i < abilities.size(); i++) {
+                    String[] sCosts = TextUtil.split(keyword.substring(7), ':');
+                    int iUnKicked = i;
+                    for(int j = 0; j < sCosts.length; j++) {
+                        final SpellAbility newSA = abilities.get(iUnKicked).copy();
+                        newSA.setBasicSpell(false);
+                        final Cost cost = new Cost(sCosts[j], false);
+                        newSA.setDescription(newSA.getDescription() + " (Kicker " + cost.toSimpleString() + ")");
+                        newSA.setPayCosts(cost.add(newSA.getPayCosts()));
+                        newSA.addOptionalCost(j == 0 ? OptionalCost.Kicker1 : OptionalCost.Kicker2);
+                        if ( newSA.canPlay() )
+                            abilities.add(++i, newSA);
+                    }
+                    if(sCosts.length == 2) { // case for both kickers - it's hardcoded since they never have more that 2 kickers
+                        final SpellAbility newSA = abilities.get(iUnKicked).copy();
+                        newSA.setBasicSpell(false);
+                        final Cost cost1 = new Cost(sCosts[0], false);
+                        final Cost cost2 = new Cost(sCosts[1], false);
+                        newSA.setDescription(newSA.getDescription() + String.format(" (Both kickers: %s and %s)", cost1.toSimpleString(), cost2.toSimpleString()));
+                        newSA.setPayCosts(cost2.add(cost1.add(newSA.getPayCosts())));
+                        newSA.addOptionalCost(OptionalCost.Kicker1);
+                        newSA.addOptionalCost(OptionalCost.Kicker2);
+                        if ( newSA.canPlay() )
+                            abilities.add(++i, newSA);
+                    }
+                }
+            } else if (keyword.startsWith("Conspire")) {
+                for (int i = 0; i < abilities.size(); i++) {
+                    final SpellAbility newSA = abilities.get(i).copy();
+                    newSA.setBasicSpell(false);
+                    final String conspireCost = "tapXType<2/Creature.SharesColorWith/untapped creature you control that shares a color with " + source.getName() + ">";
+                    newSA.setPayCosts(new Cost(conspireCost, false).add(newSA.getPayCosts()));
+                    newSA.setDescription(newSA.getDescription() + " (Conspire)");
+                    newSA.addOptionalCost(OptionalCost.Conspire);
+                    if ( newSA.canPlay() )
+                        abilities.add(++i, newSA);
+                }
+            }
+        }
+
+        // Splice
+        final List<SpellAbility> newAbilities = new ArrayList<SpellAbility>();
+        for (SpellAbility sa : abilities) {
+            if( sa.isSpell() && sa.getSourceCard().isType("Arcane") && sa.getApi() != null ) {
+                newAbilities.addAll(GameActionUtil.getSpliceAbilities(sa));
+            }
+        }
+        abilities.addAll(newAbilities);
+        
+
+        return abilities;
+    }
+
+    /**
      * <p>
      * getSpliceAbilities.
      * </p>
@@ -1219,177 +1333,68 @@ public final class GameActionUtil {
      * @return an ArrayList<SpellAbility>.
      * get abilities with all Splice options
      */
-    public static final ArrayList<SpellAbility> getSpliceAbilities(SpellAbility sa) {
+    private  static final ArrayList<SpellAbility> getSpliceAbilities(SpellAbility sa) {
         ArrayList<SpellAbility> newSAs = new ArrayList<SpellAbility>();
-        ArrayList<SpellAbility> allSAs = new ArrayList<SpellAbility>();
-        allSAs.add(sa);
+        ArrayList<SpellAbility> allSaCombinations = new ArrayList<SpellAbility>();
+        allSaCombinations.add(sa);
         Card source = sa.getSourceCard();
 
-        if (!sa.isSpell() || !source.isType("Arcane") || sa.getApi() == null) {
-            return newSAs;
-        }
-
+    
         for (Card c : sa.getActivatingPlayer().getCardsIn(ZoneType.Hand)) {
             if (c.equals(source)) {
                 continue;
             }
+
+            String spliceKwCost = null;
             for (String keyword : c.getKeyword()) {
-                if (!keyword.startsWith("Splice")) {
-                    continue;
+                if (keyword.startsWith("Splice")) {
+                    spliceKwCost = keyword.substring(19); 
+                    break;
                 }
-                String newSubSAString = c.getCharacteristics().getIntrinsicAbility().get(0);
-                newSubSAString = newSubSAString.replace("SP", "DB");
-                final AbilitySub newSubSA = (AbilitySub) AbilityFactory.getAbility(newSubSAString, c);
-                ArrayList<SpellAbility> addSAs = new ArrayList<SpellAbility>();
-                // Add the subability to all existing variants
-                for (SpellAbility s : allSAs) {
-                    //create a new spell copy
-                    final SpellAbility newSA = s.copy();
-                    newSA.setBasicSpell(false);
-                    newSA.setPayCosts(new Cost(keyword.substring(19), false).add(newSA.getPayCosts()));
-                    newSA.setDescription(s.getDescription() + " (Splicing " + c + " onto it)");
-                    newSA.addSplicedCards(c);
+            }
 
-                    // copy all subAbilities
-                    SpellAbility child = newSA;
-                    while (child.getSubAbility() != null) {
-                        AbilitySub newChild = child.getSubAbility().getCopy();
-                        child.setSubAbility(newChild);
-                        child.setActivatingPlayer(s.getActivatingPlayer());
-                        child = newChild;
-                    }
+            if( spliceKwCost == null )
+                continue;
 
-                    //add the spliced ability to the end of the chain
-                    child.setSubAbility(newSubSA);
+            Map<String, String> params = AbilityFactory.getMapParams(c.getCharacteristics().getUnparsedAbilities().get(0));
+            AbilityRecordType rc = AbilityRecordType.getRecordType(params);
+            ApiType api = rc.getApiTypeOf(params);
+            AbilitySub subAbility = (AbilitySub) AbilityFactory.getAbility(AbilityRecordType.SubAbility, api, params, null, c);
 
-                    //set correct source and activating player to all the spliced abilities
-                    child = newSubSA;
-                    while (child != null) {
-                        child.setSourceCard(source);
-                        child.setActivatingPlayer(s.getActivatingPlayer());
-                        child = child.getSubAbility();
-                    }
-                    newSAs.add(0, newSA);
-                    addSAs.add(newSA);
+            // Add the subability to all existing variants
+            for (int i = 0; i < allSaCombinations.size(); ++i) {
+                //create a new spell copy
+                final SpellAbility newSA = allSaCombinations.get(i).copy();
+                newSA.setBasicSpell(false);
+                newSA.setPayCosts(new Cost(spliceKwCost, false).add(newSA.getPayCosts()));
+                newSA.setDescription(newSA.getDescription() + " (Splicing " + c + " onto it)");
+                newSA.addSplicedCards(c);
+
+                // copy all subAbilities
+                SpellAbility child = newSA;
+                while (child.getSubAbility() != null) {
+                    AbilitySub newChild = child.getSubAbility().getCopy();
+                    child.setSubAbility(newChild);
+                    child.setActivatingPlayer(newSA.getActivatingPlayer());
+                    child = newChild;
                 }
-                allSAs.addAll(addSAs);
-                break;
+
+                //add the spliced ability to the end of the chain
+                child.setSubAbility(subAbility);
+
+                //set correct source and activating player to all the spliced abilities
+                child = subAbility;
+                while (child != null) {
+                    child.setSourceCard(source);
+                    child.setActivatingPlayer(newSA.getActivatingPlayer());
+                    child = child.getSubAbility();
+                }
+                newSAs.add(newSA);
+                allSaCombinations.add(++i, newSA);
             }
         }
-
+    
         return newSAs;
-    }
-
-    /**
-     * get optional additional costs.
-     * 
-     * @param original
-     *            the original sa
-     * @return an ArrayList<SpellAbility>.
-     */
-    public static List<SpellAbility> getOptionalAdditionalCosts(final SpellAbility original) {
-        final List<SpellAbility> abilities = new ArrayList<SpellAbility>();
-        final List<SpellAbility> newAbilities = new ArrayList<SpellAbility>();
-        final Card source = original.getSourceCard();
-        abilities.add(original);
-        if (!original.isSpell()) {
-            return abilities;
-        }
-
-        // Buyback, Kicker
-        for (String keyword : source.getKeyword()) {
-            if (keyword.startsWith("Buyback")) {
-                for (SpellAbility sa : abilities) {
-                    final SpellAbility newSA = sa.copy();
-                    newSA.setBasicSpell(false);
-                    newSA.setPayCosts(new Cost(keyword.substring(8), false).add(newSA.getPayCosts()));
-                    newSA.setDescription(sa.getDescription() + " (with Buyback)");
-                    
-                    ArrayList<String> newoacs = new ArrayList<String>(sa.getOptionalAdditionalCosts());
-                    newoacs.add(keyword);
-                    newSA.setOptionalAdditionalCosts(newoacs);
-                    if (newSA.canPlay()) {
-                        newAbilities.add(newSA);
-                    }
-                }
-                abilities.addAll(0, newAbilities);
-                newAbilities.clear();
-            } else if (keyword.startsWith("Kicker")) {
-                for (SpellAbility sa : abilities) {
-                    final SpellAbility newSA = sa.copy();
-                    newSA.setBasicSpell(false);
-                    final Cost cost = new Cost(keyword.substring(7), false);
-                    newSA.setDescription(sa.getDescription() + " (Kicker " + cost.toSimpleString() + ")");
-                    newSA.setPayCosts(cost.add(newSA.getPayCosts()));
-                    
-                    ArrayList<String> newoacs = new ArrayList<String>(sa.getOptionalAdditionalCosts());
-                    newoacs.add(keyword);
-                    newSA.setOptionalAdditionalCosts(newoacs);
-                    if (newSA.canPlay()) {
-                        newAbilities.add(newSA);
-                    }
-                }
-                abilities.addAll(0, newAbilities);
-                newAbilities.clear();
-            } else if (keyword.startsWith("AlternateAdditionalCost")) {
-                String costString1 = keyword.split(":")[1];
-                String costString2 = keyword.split(":")[2];
-                for (SpellAbility sa : abilities) {
-                    final SpellAbility newSA = sa.copy();
-                    newSA.setBasicSpell(false);
-                    
-                    final Cost cost1 = new Cost(costString1, false);
-                    newSA.setDescription(sa.getDescription() + " (Additional cost " + cost1.toSimpleString() + ")");
-                    newSA.setPayCosts(cost1.add(sa.getPayCosts()));
-                    newSA.setOptionalAdditionalCosts(new ArrayList<String>(sa.getOptionalAdditionalCosts()));
-                    if (newSA.canPlay()) {
-                        newAbilities.add(newSA);
-                    }
-
-                    //second option
-                    final SpellAbility newSA2 = sa.copy();
-                    newSA2.setBasicSpell(false);
-
-                    final Cost cost2 = new Cost(costString2, false);
-                    newSA2.setDescription(sa.getDescription() + " (Additional cost " + cost2.toSimpleString() + ")");
-                    newSA2.setPayCosts(cost2.add(sa.getPayCosts()));
-                    newSA2.setOptionalAdditionalCosts(new ArrayList<String>(sa.getOptionalAdditionalCosts()));
-                    if (newSA2.canPlay()) {
-                        newAbilities.add(newAbilities.size(), newSA2);
-                    }
-                }
-                abilities.clear();
-                abilities.addAll(0, newAbilities);
-                newAbilities.clear();
-            } else if (keyword.startsWith("Conspire")) {
-                for (SpellAbility sa : abilities) {
-                    final SpellAbility newSA = sa.copy();
-                    newSA.setBasicSpell(false);
-                    final String conspireCost = "tapXType<2/Creature.SharesColorWith/untapped creature you control"
-                            + " that shares a color with " + source.getName() + ">";
-                    newSA.setPayCosts(new Cost(conspireCost, false).add(newSA.getPayCosts()));
-                    newSA.setDescription(sa.getDescription() + " (Conspire)");
-                    
-                    ArrayList<String> newoacs = new ArrayList<String>(sa.getOptionalAdditionalCosts());
-                    newoacs.add(keyword);
-                    newSA.setOptionalAdditionalCosts(newoacs);
-                    if (newSA.canPlay()) {
-                        newAbilities.add(newAbilities.size(), newSA);
-                    }
-                }
-                abilities.addAll(0, newAbilities);
-                newAbilities.clear();
-            }
-        }
-
-        // Splice
-        for (SpellAbility sa : abilities) {
-            newAbilities.addAll(GameActionUtil.getSpliceAbilities(sa));
-        }
-        abilities.addAll(newAbilities);
-        newAbilities.clear();
-
-        return abilities;
     }
 
     /**

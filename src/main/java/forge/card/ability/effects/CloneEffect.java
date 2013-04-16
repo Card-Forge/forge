@@ -248,7 +248,7 @@ public class CloneEffect extends SpellAbilityEffect {
                     final String actualAbility = origSVars.get(s);
                     // final SpellAbility grantedAbility = newAF.getAbility(actualAbility, tgtCard);
                     // tgtCard.addSpellAbility(grantedAbility);
-                    tgtCard.getIntrinsicAbilities().add(actualAbility);
+                    tgtCard.getUnparsedAbilities().add(actualAbility);
                 }
             }
         }

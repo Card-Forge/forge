@@ -13839,6 +13839,7 @@ src/main/java/forge/card/spellability/AbilitySub.java svneol=native#text/plain
 src/main/java/forge/card/spellability/AbilityTriggered.java svneol=native#text/plain
 src/main/java/forge/card/spellability/HumanPlaySpellAbility.java svneol=native#text/plain
 src/main/java/forge/card/spellability/ISpellAbility.java -text
+src/main/java/forge/card/spellability/OptionalCost.java -text
 src/main/java/forge/card/spellability/Spell.java svneol=native#text/plain
 src/main/java/forge/card/spellability/SpellAbility.java svneol=native#text/plain
 src/main/java/forge/card/spellability/SpellAbilityCondition.java svneol=native#text/plain

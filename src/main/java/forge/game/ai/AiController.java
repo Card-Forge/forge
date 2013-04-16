@@ -173,7 +173,7 @@ public class AiController {
         final List<SpellAbility> result = new ArrayList<SpellAbility>();
         for (SpellAbility sa : newAbilities) {
             sa.setActivatingPlayer(player);
-            result.addAll(GameActionUtil.getOptionalAdditionalCosts(sa));
+            result.addAll(GameActionUtil.getOptionalCosts(sa));
         }
         result.addAll(newAbilities);
         return result;

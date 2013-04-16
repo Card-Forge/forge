@@ -26,6 +26,7 @@ import forge.Card;
 import forge.Singletons;
 import forge.card.TriggerReplacementBase;
 import forge.card.spellability.Ability;
+import forge.card.spellability.OptionalCost;
 import forge.card.spellability.SpellAbility;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
@@ -315,22 +316,28 @@ public abstract class Trigger extends TriggerReplacementBase {
         if ( !meetsCommonRequirements(getMapParams()))
             return false;
 
-        if (this.getMapParams().containsKey("EvolveCondition")) {
-            if (this.getMapParams().get("EvolveCondition").equals("True")) {
-                final Card moved = (Card) runParams2.get("Card");
-                if (moved == null) {
-                    return false;
-                    // final StringBuilder sb = new StringBuilder();
-                    // sb.append("Trigger::requirementsCheck() - EvolveCondition condition being checked without a moved card. ");
-                    // sb.append(this.getHostCard().getName());
-                    // throw new RuntimeException(sb.toString());
-                }
-                if (moved.getNetAttack() <= this.getHostCard().getNetAttack()
-                        && moved.getNetDefense() <= this.getHostCard().getNetDefense()) {
-                    return false;
-                }
+        if ("True".equals(getMapParams().get("EvolveCondition"))) {
+            final Card moved = (Card) runParams2.get("Card");
+            if (moved == null) {
+                return false;
+                // final StringBuilder sb = new StringBuilder();
+                // sb.append("Trigger::requirementsCheck() - EvolveCondition condition being checked without a moved card. ");
+                // sb.append(this.getHostCard().getName());
+                // throw new RuntimeException(sb.toString());
+            }
+            if (moved.getNetAttack() <= this.getHostCard().getNetAttack()
+                    && moved.getNetDefense() <= this.getHostCard().getNetDefense()) {
+                return false;
             }
         }
+        
+        String condition = getMapParams().get("Condition");
+        if( "AltCost".equals(condition) ) {
+            final Card moved = (Card) runParams2.get("Card");
+            if( null != moved && !moved.isOptionalCostPaid(OptionalCost.AltCost))
+                return false;
+        }
+
 
         return true;
     }

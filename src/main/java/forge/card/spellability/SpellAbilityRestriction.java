@@ -85,7 +85,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
                 if (value.split("Prowl").length > 1) {
                     prowlTypes.add(value.split("Prowl")[1]);
                 }
-                this.setProwl(prowlTypes);
+                this.setProwlTypes(prowlTypes);
             }
         }
 
@@ -352,11 +352,11 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
                 return false;
             }
         }
-        if (this.getProwl() != null && !this.getProwl().isEmpty()) {
+        if (this.getProwlTypes() != null && !this.getProwlTypes().isEmpty()) {
             // only true if the activating player has damaged the opponent with
             // one of the specified types
             boolean prowlFlag = false;
-            for (final String type : this.getProwl()) {
+            for (final String type : this.getProwlTypes()) {
                 if (activator.hasProwl(type)) {
                     prowlFlag = true;
                 }

@@ -497,28 +497,21 @@ public class StaticAbility {
             }
         }
 
-        if (params.containsKey("Condition")) {
-            if (params.get("Condition").equals("Threshold")) {
-                if (!controller.hasThreshold()) {
+        String condition = params.get("Condition");
+        if (null != condition) {
+            if (condition.equals("Threshold") && !controller.hasThreshold()) return false;
+            if (condition.equals("Hellbent") && !controller.hasHellbent()) return false;
+            if (condition.equals("Metalcraft") && !controller.hasMetalcraft()) return false;
+
+            if (condition.equals("PlayerTurn")) {
+                if (!controller.getGame().getPhaseHandler().isPlayerTurn(controller)) {
                     return false;
                 }
-            } else if (params.get("Condition").equals("Hellbent")) {
-                if (!controller.hasHellbent()) {
+            } else if (condition.equals("NotPlayerTurn")) {
+                if (controller.getGame().getPhaseHandler().isPlayerTurn(controller)) {
                     return false;
                 }
-            } else if (params.get("Condition").equals("Metalcraft")) {
-                if (!controller.hasMetalcraft()) {
-                    return false;
-                }
-            } else if (params.get("Condition").equals("PlayerTurn")) {
-                if (!Singletons.getModel().getGame().getPhaseHandler().isPlayerTurn(controller)) {
-                    return false;
-                }
-            } else if (params.get("Condition").equals("NotPlayerTurn")) {
-                if (Singletons.getModel().getGame().getPhaseHandler().isPlayerTurn(controller)) {
-                    return false;
-                }
-            } else if (params.get("Condition").equals("PermanentOfEachColor")) {
+            } else if (condition.equals("PermanentOfEachColor")) {
                 if ((controller.getColoredCardsInPlay(Constant.Color.BLACK).isEmpty()
                         || controller.getColoredCardsInPlay(Constant.Color.BLUE).isEmpty()
                         || controller.getColoredCardsInPlay(Constant.Color.GREEN).isEmpty()
@@ -526,7 +519,7 @@ public class StaticAbility {
                         || controller.getColoredCardsInPlay(Constant.Color.WHITE).isEmpty())) {
                     return false;
                 }
-            } else if (params.get("Condition").equals("FatefulHour")) {
+            } else if (condition.equals("FatefulHour")) {
                 if (controller.getLife() > 5) {
                     return false;
                 }

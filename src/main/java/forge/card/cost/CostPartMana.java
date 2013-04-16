@@ -128,7 +128,7 @@ public class CostPartMana extends CostPart {
             toPay.increaseShard(ManaCostShard.valueOf(xColor), xCost);
             xWasBilled = true;
         }
-        int timesMultikicked = ability.getSourceCard().getMultiKickerMagnitude();
+        int timesMultikicked = ability.getSourceCard().getKickerMagnitude();
         if ( timesMultikicked > 0 && ability.isAnnouncing("Multikicker")) {
             ManaCost mkCost = ability.getMultiKickerManaCost();
             for(int i = 0; i < timesMultikicked; i++)

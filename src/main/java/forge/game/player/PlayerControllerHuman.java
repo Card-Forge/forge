@@ -74,7 +74,7 @@ public class PlayerControllerHuman extends PlayerController {
      * Uses GUI to learn which spell the player (human in our case) would like to play
      */
     public SpellAbility getAbilityToPlay(List<SpellAbility> abilities) {
-        if (abilities.size() == 0) {
+        if (abilities.isEmpty()) {
             return null;
         } else if (abilities.size() == 1) {
             return abilities.get(0);

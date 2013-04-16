@@ -238,25 +238,13 @@ public class SpellPermanent extends Spell {
                         continue;
                     }
                 } else if (params.get("ValidCard").contains("kicked")) {
-                    if (!params.get("ValidCard").contains("kicked ")) {
-                        if (!sa.isKicked()) {
-                            continue;
-                        }
-                    } else {
-                        String s = "Kicker " + params.get("ValidCard").split("kicked ")[1];
-                        boolean rightKicker = false;
-                        if (sa.getOptionalAdditionalCosts() != null) {
-                            for (String string : sa.getOptionalAdditionalCosts()) {
-                                if (string.startsWith(s)) {
-                                    rightKicker = true;
-                                }
-                            }
-                        }
-                        if (!rightKicker) {
-                            continue;
-                        }
+                    if (params.get("ValidCard").contains("kicked ")) { // want a specific kicker
+                        String s = params.get("ValidCard").split("kicked ")[1];
+                        if ( "1".equals(s) && !sa.isOptionalCostPaid(OptionalCost.Kicker1)) continue;
+                        if ( "2".equals(s) && !sa.isOptionalCostPaid(OptionalCost.Kicker2)) continue;
+                    } else if (!sa.isKicked()) { 
+                        continue;
                     }
-
                 }
             }
 
@@ -335,23 +323,12 @@ public class SpellPermanent extends Spell {
                         continue;
                     }
                 } else if (params.get("ValidCard").contains("kicked")) {
-                    if (!params.get("ValidCard").contains("kicked ")) {
-                        if (!sa.isKicked()) {
-                            continue;
-                        }
-                    } else {
-                        String s = "Kicker " + params.get("ValidCard").split("kicked ")[1];
-                        boolean rightKicker = false;
-                        if (sa.getOptionalAdditionalCosts() != null) {
-                            for (String string : sa.getOptionalAdditionalCosts()) {
-                                if (string.startsWith(s)) {
-                                    rightKicker = true;
-                                }
-                            }
-                        }
-                        if (!rightKicker) {
-                            continue;
-                        }
+                    if (params.get("ValidCard").contains("kicked ")) { // want a specific kicker
+                        String s = params.get("ValidCard").split("kicked ")[1];
+                        if ( "1".equals(s) && !sa.isOptionalCostPaid(OptionalCost.Kicker1)) continue;
+                        if ( "2".equals(s) && !sa.isOptionalCostPaid(OptionalCost.Kicker2)) continue;
+                    } else if (!sa.isKicked()) { // otherwise just any must be present
+                        continue;
                     }
                 }
             }
