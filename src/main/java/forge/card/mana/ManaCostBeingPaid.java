@@ -50,8 +50,9 @@ import forge.util.MyRandom;
 public class ManaCostBeingPaid {
     private class ManaCostBeingPaidIterator implements IParserManaCost {
         private Iterator<ManaCostShard> mch;
-        private ManaCostShard nextShard;
+        private ManaCostShard nextShard = null;
         private int remainingShards = 0;
+        private boolean hasSentX = false;
         
         public ManaCostBeingPaidIterator() { 
             mch = unpaidShards.keySet().iterator();
@@ -73,6 +74,14 @@ public class ManaCostBeingPaid {
         @Override
         public boolean hasNext() {
             if ( remainingShards > 0 ) return true;
+            if ( !hasSentX ) {
+                if ( nextShard != ManaCostShard.X && cntX > 0) {
+                    nextShard = ManaCostShard.X;
+                    remainingShards = cntX;
+                    return true;
+                } else 
+                    hasSentX = true;
+            }
             if ( !mch.hasNext() ) return false;
             
             nextShard = mch.next();
