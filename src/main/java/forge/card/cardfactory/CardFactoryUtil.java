@@ -2829,7 +2829,7 @@ public class CardFactoryUtil {
                     }
                 }
                 if (splitkw.length > 4) {
-                    desc = splitkw[4];
+                    desc = !splitkw[4].equals("no desc") ? splitkw[4] : "";
                 }
                 String abStr = "AB$ ChangeZone | Cost$ 0 | Hidden$ True | Origin$ All | Destination$ Battlefield"
                         + "| Defined$ ReplacedCard | SubAbility$ ETBCounterDBSVar";

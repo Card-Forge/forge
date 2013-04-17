@@ -12,6 +12,7 @@ import forge.GameEntity;
 import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.cardfactory.CardFactoryUtil;
+import forge.card.spellability.OptionalCost;
 import forge.card.spellability.SpellAbility;
 import forge.game.player.Player;
 import forge.game.zone.Zone;
@@ -317,6 +318,11 @@ public abstract class TriggerReplacementBase {
             final List<Card> you = CardUtil.getLastTurnCast("Card.YouCtrl", this.getHostCard());
             final List<Card> opp = CardUtil.getLastTurnCast("Card.YouDontCtrl", this.getHostCard());
             if (!((you.size() > 1) || (opp.size() > 1))) {
+                return false;
+            }
+        }
+        if (params.containsKey("AltCost")) {
+            if (!this.getHostCard().isOptionalCostPaid(OptionalCost.AltCost)) {
                 return false;
             }
         }
