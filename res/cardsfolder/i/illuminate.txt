@@ -6,6 +6,6 @@ A:SP$ DealDamage | Cost$ X R | ValidTgts$ Creature | TgtPrompt$ Select target cr
 SVar:DmgController:DB$ DealDamage | Defined$ TargetedController | NumDmg$ X | SubAbility$ DrawYou | Condition$ Kicked 1 | References$ X | SpellDescription$ If CARDNAME was kicked with its {2}{R} kicker, it deals X damage to that creature's controller.
 SVar:DrawYou:DB$ Draw | NumCards$ X | Defined$ You | References$ X | Condition$ Kicked 2 | SpellDescription$ If CARDNAME was kicked with its {3}{U} kicker, you draw X cards.
 SVar:X:Count$xPaid
-SVar:Picture:http://www.wizards.com/global/images/magic/general/.jpg
+SVar:Picture:http://www.wizards.com/global/images/magic/general/illuminate.jpg
 Oracle:Kicker {2}{R} and/or {3}{U} (You may pay an additional {2}{R} and/or {3}{U} as you cast this spell.)\nIlluminate deals X damage to target creature. If Illuminate was kicked with its {2}{R} kicker, it deals X damage to that creature's controller. If Illuminate was kicked with its {3}{U} kicker, you draw X cards.
 SetInfo:APC Uncommon
