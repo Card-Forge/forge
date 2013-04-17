@@ -40,10 +40,12 @@ import forge.game.GameState;
 import forge.game.zone.ZoneType;
 
 public class HumanPlayer extends Player {
-    private PlayerControllerHuman controller;
+    private final PlayerControllerHuman controller;
+    private final LobbyPlayerHuman lobbyPlayer;
     
-    public HumanPlayer(final LobbyPlayer player, GameState game) {
-        super(player, game);
+    public HumanPlayer(final LobbyPlayerHuman player, GameState game) {
+        super(player.getName(), game);
+        lobbyPlayer = player;
         controller = new PlayerControllerHuman(game, this);
     }
 
@@ -84,10 +86,7 @@ public class HumanPlayer extends Player {
     }
 
     @Override
-    public PlayerType getType() {
-        return PlayerType.HUMAN;
-    }
-    public PlayerController getController() {
+    public PlayerControllerHuman getController() {
         return controller;
     }
     
@@ -268,5 +267,10 @@ public class HumanPlayer extends Player {
 
             game.getStack().add(sa, x);
         }
+    }
+    
+    @Override
+    public LobbyPlayerHuman getLobbyPlayer() {
+        return lobbyPlayer;
     }
 } // end HumanPlayer class

@@ -164,7 +164,6 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
             ZoneType.Library, ZoneType.Graveyard, ZoneType.Hand, ZoneType.Exile, ZoneType.Command, ZoneType.Ante,
             ZoneType.Sideboard));
 
-    protected final LobbyPlayer lobbyPlayer;
     protected final GameState game;
 
     public final PlayerOutcome getOutcome() {
@@ -183,8 +182,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
      * @param myPoisonCounters
      *            a int.
      */
-    public Player(LobbyPlayer lobbyPlayer0, GameState game0) {
-        lobbyPlayer = lobbyPlayer0;
+    public Player(String name, GameState game0) {
         game = game0;
         for (final ZoneType z : Player.ALL_ZONES) {
             final PlayerZone toPut = z == ZoneType.Battlefield
@@ -192,7 +190,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
                     : new PlayerZone(z, this);
             this.zones.put(z, toPut);
         }
-        this.setName(lobbyPlayer.getName());
+        this.setName(name);
     }
 
     public GameState getGame() { // I'll probably regret about this  
@@ -207,7 +205,9 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
     public boolean isHuman() { return getType() == PlayerType.HUMAN; }
     @Deprecated
     public boolean isComputer() { return getType() == PlayerType.COMPUTER; }
-    public abstract PlayerType getType();
+    public PlayerType getType() {
+        return getLobbyPlayer().getType();
+    }
 
     public List<Card> getSchemeDeck() {
 
@@ -2727,9 +2727,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
      * TODO: Write javadoc for this method.
      * @return
      */
-    public LobbyPlayer getLobbyPlayer() {
-        return lobbyPlayer;
-    }
+    public abstract LobbyPlayer getLobbyPlayer();
 
     private void setOutcome(PlayerOutcome outcome) {
         stats.setOutcome(outcome);

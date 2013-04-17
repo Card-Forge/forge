@@ -39,6 +39,7 @@ import forge.util.Aggregates;
 public class AIPlayer extends Player {
 
     private final PlayerControllerAi controller;
+    private final LobbyPlayerAi lobbyPlayer;
     /**
      * <p>
      * Constructor for AIPlayer.
@@ -48,9 +49,11 @@ public class AIPlayer extends Player {
      * @param myName
      *            a {@link java.lang.String} object.
      */
-    public AIPlayer(final LobbyPlayer player, final GameState game) {
-        super(player, game);
+    public AIPlayer(final LobbyPlayerAi player, final GameState game) {
+        super(player.getName(), game);
+        lobbyPlayer = player;
         controller = new PlayerControllerAi(game, this);
+        
     }
 
     public AiController getAi() { 
@@ -99,7 +102,16 @@ public class AIPlayer extends Player {
      * @see forge.game.player.Player#getController()
      */
     @Override
-    public PlayerController getController() {
+    public PlayerControllerAi getController() {
         return controller;
+    }
+
+    /* (non-Javadoc)
+     * @see forge.game.player.Player#getLobbyPlayer()
+     */
+    @Override
+    public LobbyPlayerAi getLobbyPlayer() {
+        // TODO Auto-generated method stub
+        return lobbyPlayer;
     }
 } // end AIPlayer class

@@ -14058,6 +14058,9 @@ src/main/java/forge/game/player/AIPlayer.java svneol=native#text/plain
 src/main/java/forge/game/player/GameLossReason.java -text
 src/main/java/forge/game/player/HumanPlayer.java svneol=native#text/plain
 src/main/java/forge/game/player/LobbyPlayer.java -text
+src/main/java/forge/game/player/LobbyPlayerAi.java -text
+src/main/java/forge/game/player/LobbyPlayerHuman.java -text
+src/main/java/forge/game/player/LobbyPlayerRemote.java -text
 src/main/java/forge/game/player/Player.java svneol=native#text/plain
 src/main/java/forge/game/player/PlayerController.java -text
 src/main/java/forge/game/player/PlayerControllerAi.java -text

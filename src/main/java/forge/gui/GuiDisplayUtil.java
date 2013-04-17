@@ -52,6 +52,7 @@ import forge.card.spellability.SpellAbility;
 import forge.card.trigger.TriggerType;
 import forge.game.GameState;
 import forge.game.PlanarDice;
+import forge.game.player.HumanPlayer;
 import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
@@ -285,7 +286,7 @@ public final class GuiDisplayUtil {
         List<Card> humanDevExileSetup = new ArrayList<Card>();
         List<Card> computerDevExileSetup = new ArrayList<Card>();
 
-        final Player human = Singletons.getControl().getPlayer();
+        final HumanPlayer human = Singletons.getControl().getPlayer();
         final Player ai = human.getOpponents().get(0);
 
         if (!tChangePlayer.trim().toLowerCase().equals("none")) {

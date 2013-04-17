@@ -17,8 +17,7 @@
  */
 package forge.game.ai;
 
-import forge.Singletons;
-import forge.game.player.LobbyPlayer;
+import forge.game.player.LobbyPlayerAi;
 import forge.util.Aggregates;
 import forge.util.FileUtil;
 
@@ -97,7 +96,7 @@ public class AiProfileUtil {
      * @param fp0 an AI property.
      * @return String
      */
-    public static String getAIProp(final LobbyPlayer p, final AiProps fp0) {
+    public static String getAIProp(final LobbyPlayerAi p, final AiProps fp0) {
         String val = null;
         String profile = p.getAiProfile();
        
@@ -159,7 +158,7 @@ public class AiProfileUtil {
 
     /**
      * Simple class test facility for AiProfileUtil.
-     */
+     *-/
     public static void selfTest() {
         final LobbyPlayer activePlayer = Singletons.getControl().getPlayer().getLobbyPlayer();
         System.out.println(String.format("Current profile = %s", activePlayer.getAiProfile()));
@@ -181,4 +180,5 @@ public class AiProfileUtil {
             }
         }
     }
+    */
 }

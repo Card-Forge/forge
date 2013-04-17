@@ -35,7 +35,6 @@ import forge.CardPredicates;
 import forge.CardUtil;
 import forge.Command;
 import forge.CounterType;
-import forge.FThreads;
 import forge.GameEntity;
 import forge.card.CardType;
 import forge.card.TriggerReplacementBase;

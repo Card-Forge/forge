@@ -5,7 +5,9 @@ import java.util.Random;
 import java.util.concurrent.ConcurrentHashMap;
 
 import forge.game.player.LobbyPlayer;
-import forge.game.player.PlayerType;
+import forge.game.player.LobbyPlayerAi;
+import forge.game.player.LobbyPlayerHuman;
+import forge.game.player.LobbyPlayerRemote;
 import forge.gui.toolbox.FSkin;
 import forge.util.MyRandom;
 
@@ -57,17 +59,17 @@ public class Lobby {
             "Walter", "Wilfred", "William", "Winston"
     };
 
-    private Map<String, LobbyPlayer> remotePlayers = new ConcurrentHashMap<String, LobbyPlayer>();
-    private final LobbyPlayer guiPlayer = new LobbyPlayer(PlayerType.HUMAN, "Human");
+    private Map<String, LobbyPlayerRemote> remotePlayers = new ConcurrentHashMap<String, LobbyPlayerRemote>();
+    private final LobbyPlayerHuman guiPlayer = new LobbyPlayerHuman("Human");
     
 
-    public final LobbyPlayer getGuiPlayer() {
+    public final LobbyPlayerHuman getGuiPlayer() {
         return guiPlayer;
     }
 
     public final LobbyPlayer getAiPlayer() { return getAiPlayer(getRandomName()); }
     public final LobbyPlayer getAiPlayer(String name) {
-        LobbyPlayer player = new LobbyPlayer(PlayerType.COMPUTER, name);
+        LobbyPlayer player = new LobbyPlayerAi(name);
         player.setAvatarIndex(MyRandom.getRandom().nextInt(FSkin.getAvatars().size()));
         return player;
     }
@@ -101,7 +103,7 @@ public class Lobby {
         if (remotePlayers.containsKey(name))
             return remotePlayers.get(name);
 
-        LobbyPlayer res = new LobbyPlayer(PlayerType.REMOTE, name);
+        LobbyPlayerRemote res = new LobbyPlayerRemote(name);
         // have to load avatar from remote user's preferences here
         remotePlayers.put(name, res);
         return res;

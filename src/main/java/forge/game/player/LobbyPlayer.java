@@ -1,28 +1,25 @@
 package forge.game.player;
 
+import forge.game.GameState;
+
 /** 
  * This means a player's part unchanged for all games.
  * 
  * May store player's assets here.
  *
  */
-public class LobbyPlayer implements IHasIcon {
+public abstract class LobbyPlayer implements IHasIcon {
 
-    protected final PlayerType type;
-    public final PlayerType getType() {
-        return type;
-    }
+    public abstract PlayerType getType();
 
     protected final String name;
     protected String imageKey;
     private int avatarIndex = -1;
 
     /** The AI profile. */
-    private String aiProfile = "";
 
-    public LobbyPlayer(PlayerType type, String name) {
 
-        this.type = type;
+    public LobbyPlayer(String name) {
         this.name = name;
     }
 
@@ -44,8 +41,8 @@ public class LobbyPlayer implements IHasIcon {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((name == null) ? 0 : name.hashCode());
-        result = prime * result + ((type == null) ? 0 : type.hashCode());
+        result = prime * result + name.hashCode();
+        result = prime * result + getType().hashCode();
         return result;
     }
 
@@ -68,7 +65,7 @@ public class LobbyPlayer implements IHasIcon {
         } else if (!name.equals(other.name)) {
             return false;
         }
-        return type == other.type;
+        return getType() == other.getType();
     }
 
     public int getAvatarIndex() {
@@ -79,11 +76,5 @@ public class LobbyPlayer implements IHasIcon {
         this.avatarIndex = avatarIndex;
     }
 
-    public void setAiProfile(String profileName) {
-        aiProfile = profileName;
-    }
-
-    public String getAiProfile() {
-        return aiProfile;
-    }
+    public abstract Player getPlayer(GameState gameState); // factory method to create player
 }

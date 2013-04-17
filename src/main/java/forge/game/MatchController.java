@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import com.google.common.collect.Iterables;
+
 
 import forge.Constant.Preferences;
 import forge.FThreads;
@@ -21,6 +23,7 @@ import forge.game.event.DuelOutcomeEvent;
 import forge.game.player.AIPlayer;
 import forge.game.player.HumanPlayer;
 import forge.game.player.LobbyPlayer;
+import forge.game.player.LobbyPlayerHuman;
 import forge.game.player.Player;
 import forge.game.player.PlayerStatistics;
 import forge.game.player.PlayerType;
@@ -102,7 +105,7 @@ public class MatchController {
         game.getGameLog().add("Final", result.getWinner() + " won", 0);
 
         // add result entries to the game log
-        final LobbyPlayer human = Singletons.getControl().getPlayer().getLobbyPlayer();
+        final LobbyPlayerHuman human = Singletons.getControl().getLobby().getGuiPlayer();
         
 
         final List<String> outcomes = new ArrayList<String>();
@@ -146,9 +149,10 @@ public class MatchController {
         for (Player p : currentGame.getPlayers()) {
             if ( !(p instanceof AIPlayer))
                 continue;
+            AIPlayer ai = (AIPlayer) p; 
             
             String currentAiProfile = Singletons.getModel().getPreferences().getPref(FPref.UI_CURRENT_AI_PROFILE);
-            String lastProfileChosen = this.getPlayedGames().isEmpty() ? currentAiProfile : p.getLobbyPlayer().getAiProfile();
+            String lastProfileChosen = this.getPlayedGames().isEmpty() ? currentAiProfile : ai.getLobbyPlayer().getAiProfile();
             
             // TODO: implement specific AI profiles for quest mode.
             boolean wantRandomProfile = currentAiProfile.equals(AiProfileUtil.AI_PROFILE_RANDOM_DUEL) 
@@ -156,11 +160,10 @@ public class MatchController {
             
             String profileToSet = wantRandomProfile ? AiProfileUtil.getRandomProfile() : lastProfileChosen;
             
-            p.getLobbyPlayer().setAiProfile(profileToSet);
-            System.out.println(String.format("AI profile %s was chosen for the lobby player %s.", p.getLobbyPlayer().getAiProfile(), p.getLobbyPlayer().getName()));
+            ai.getLobbyPlayer().setAiProfile(profileToSet);
+            System.out.println(String.format("AI profile %s was chosen for the lobby player %s.", ai.getLobbyPlayer().getAiProfile(), ai.getLobbyPlayer().getName()));
         }
-        
-        
+
         try {
             HumanPlayer localHuman = (HumanPlayer) Aggregates.firstFieldEquals(currentGame.getPlayers(), Player.Accessors.FN_GET_TYPE, PlayerType.HUMAN);
             FControl.SINGLETON_INSTANCE.setPlayer(localHuman);

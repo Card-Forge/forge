@@ -45,11 +45,8 @@ import forge.game.phase.EndOfTurn;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.Untap;
 import forge.game.phase.Upkeep;
-import forge.game.player.AIPlayer;
-import forge.game.player.HumanPlayer;
 import forge.game.player.LobbyPlayer;
 import forge.game.player.Player;
-import forge.game.player.PlayerType;
 import forge.game.zone.MagicStack;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.Zone;
@@ -99,7 +96,7 @@ public class GameState {
         type = t;
         List<Player> players = new ArrayList<Player>();
         for (LobbyPlayer p : players2) {
-            Player pl = getIngamePlayer(p);
+            Player pl = p.getPlayer(this);
             players.add(pl);
             ingamePlayers.add(pl);
         }
@@ -493,19 +490,6 @@ public class GameState {
         int startPosition = roIngamePlayers.indexOf(startingPlayer);
         int position = (roIngamePlayers.indexOf(player) + startPosition) % roIngamePlayers.size() + 1;
         return position;
-    }
-
-    /**
-     * Only game knows how to get suitable players out of just connected clients.
-     * @return
-     */
-    public Player getIngamePlayer(LobbyPlayer player) {
-        if (player.getType() == PlayerType.HUMAN) {
-            return new HumanPlayer(player, this);
-        } else {
-            return new AIPlayer(player, this);
-
-        }
     }
 
     /**
