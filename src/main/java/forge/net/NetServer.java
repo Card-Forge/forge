@@ -27,10 +27,17 @@ public class NetServer {
 
     private final Server srv = new Server();
     private final Set<ClientSocket> _openSockets = new CopyOnWriteArraySet<ClientSocket>();
+
+    public final int portNumber;
     
-    public NetServer() {
+    public final int getPortNumber() {
+        return portNumber;
+    }
+
+    public NetServer(int port) {
+        portNumber = port;
         SelectChannelConnector connector= new SelectChannelConnector();
-        connector.setPort(81);
+        connector.setPort(portNumber);
         srv.addConnector(connector);
         
         ServletContextHandler context = new ServletContextHandler();

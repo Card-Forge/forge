@@ -20,7 +20,6 @@ import javax.swing.ScrollPaneConstants;
 import org.apache.commons.lang3.StringUtils;
 
 import net.miginfocom.swing.MigLayout;
-import forge.Command;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FTextArea;
@@ -57,7 +56,7 @@ public enum FNetOverlay {
             txtInput.setText("");
             if ( StringUtils.isBlank(message) )
                 return;
-            addMessage(message);
+            addMessage("You", message);
         }
     };
     
@@ -83,13 +82,12 @@ public enum FNetOverlay {
         txtLog.setOpaque(true);
         txtLog.setFocusable(true);
         txtLog.setBackground(FSkin.getColor(FSkin.Colors.CLR_ZEBRA));
-        txtLog.setText("This is Forge chat window\n");
 
         JScrollPane _operationLogScroller = new JScrollPane(txtLog);
         _operationLogScroller.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         _operationLogScroller.setBorder(null);
         new SmartScroller(_operationLogScroller);
-        pnl.add(_operationLogScroller, "pushx, hmin 24, growy, growx, gap 2px 2px 2px 0, sx 2");
+        pnl.add(_operationLogScroller, "pushx, hmin 24, pushy, growy, growx, gap 2px 2px 2px 0, sx 2");
 
         txtInput.setBorder(BorderFactory.createLineBorder(FSkin.getColor(FSkin.Colors.CLR_BORDERS)));
         pnl.add(txtInput, "pushx, growx, h 26px!, gap 2px 2px 2px 0");
@@ -97,6 +95,11 @@ public enum FNetOverlay {
         
         txtInput.addActionListener(onSend);
         cmdSend.setCommand(new Runnable() { @Override public void run() { onSend.actionPerformed(null); } });
+    }
+    
+    public void showUp(String message) { 
+        txtLog.setText(message + "\n");
+        pnl.setVisible(true);
     }
 
     private class OverlayPanel extends JPanel {
@@ -131,8 +134,8 @@ public enum FNetOverlay {
     }
     
     SimpleDateFormat inFormat = new SimpleDateFormat("HH:mm:ss");
-    public void addMessage(String message) {
-        String toAdd = String.format("[%s]: %s%n", inFormat.format(new Date()), message);
+    public void addMessage(String origin, String message) {
+        String toAdd = String.format("[%s] %s: %s%n", inFormat.format(new Date()), origin, message);
         txtLog.append(toAdd);
     }
 }

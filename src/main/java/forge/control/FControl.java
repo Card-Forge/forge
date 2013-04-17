@@ -322,7 +322,7 @@ public enum FControl {
      * TODO: Write javadoc for this method.
      * @return
      */
-    private final NetServer server = new NetServer();
+    private final NetServer server = new NetServer(81);
     public NetServer getServer() {
         // TODO Auto-generated method stub
         return server;

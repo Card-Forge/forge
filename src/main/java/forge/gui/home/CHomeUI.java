@@ -9,6 +9,7 @@ import forge.gui.deckeditor.controllers.CEditorConstructed;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.ICDoc;
 import forge.gui.home.sanctioned.VSubmenuConstructed;
+import forge.net.NetServer;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 
@@ -76,18 +77,20 @@ public enum CHomeUI implements ICDoc {
             }
         });
         
-        VHomeUI.SINGLETON_INSTANCE.getLblStartServer().setCommand(new Command() {
+        VHomeUI.SINGLETON_INSTANCE.getLblStartServer().setCommand(new Runnable() {
             @Override
             public void run() {
-                FControl.SINGLETON_INSTANCE.getServer().listen();
+                NetServer srv = FControl.SINGLETON_INSTANCE.getServer(); 
+                srv.listen();
+                
                 VHomeUI.SINGLETON_INSTANCE.getLblStopServer().setEnabled(true);
                 VHomeUI.SINGLETON_INSTANCE.getLblStartServer().setEnabled(false);
 
-                FNetOverlay.SINGLETON_INSTANCE.getPanel().setVisible(true);
+                FNetOverlay.SINGLETON_INSTANCE.showUp("Server listening on port " + srv.getPortNumber());
             }
         });
         
-        VHomeUI.SINGLETON_INSTANCE.getLblStopServer().setCommand(new Command() {
+        VHomeUI.SINGLETON_INSTANCE.getLblStopServer().setCommand(new Runnable() {
             @Override
             public void run() {
                 FControl.SINGLETON_INSTANCE.getServer().stop();
