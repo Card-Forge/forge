@@ -446,9 +446,11 @@ public class CardFactoryUtil {
         sbDesc.append("Suspend ").append(timeCounters).append(" - ").append(cost.toSimpleString());
         suspend.setDescription(sbDesc.toString());
 
+        String svar = "X"; // emulate "References X" here
+        suspend.setSVar(svar, sourceCard.getSVar(svar));
+
         final StringBuilder sbStack = new StringBuilder();
-        sbStack.append(sourceCard.getName()).append(" suspending for ");
-        sbStack.append(timeCounters).append(" turns.)");
+        sbStack.append(sourceCard.getName()).append(" suspending for ").append(timeCounters).append(" turns.)");
         suspend.setStackDescription(sbStack.toString());
 
         suspend.getRestrictions().setZone(ZoneType.Hand);
