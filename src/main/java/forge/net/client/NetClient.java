@@ -66,7 +66,7 @@ public class NetClient implements IConnectionObserver, INetClient{
      */
     @Override
     public final void createPlayer(String name) {
-        player = Singletons.getControl().getLobby().findOrCreateRemotePlayer(name);
+        player = Singletons.getControl().getLobby().findOrCreateRemotePlayer(name, this);
     }
 
     /* (non-Javadoc)

@@ -7,7 +7,7 @@ div.wrap { width: 640px; margin: 100px auto;}
 .title input {width: 300px; }
 .title span { display: inline-block; width: 120px; text-align: right; }
 
-.messages { height: 20ex; overflow: auto; background-color: #fff; padding: 4px; border: 1px solid black; list-style: none; }
+.messages { height: 30ex; overflow: auto; background-color: #fff; padding: 4px; border: 1px solid black; list-style: none; }
 .messages .incoming { color: #006; }
 .messages .incoming:before { content: "<< "}
 .messages .outcoming { color: #060; }

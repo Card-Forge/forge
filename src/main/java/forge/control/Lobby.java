@@ -9,6 +9,7 @@ import forge.game.player.LobbyPlayerAi;
 import forge.game.player.LobbyPlayerHuman;
 import forge.game.player.LobbyPlayerRemote;
 import forge.gui.toolbox.FSkin;
+import forge.net.client.INetClient;
 import forge.util.MyRandom;
 
 /** 
@@ -61,7 +62,7 @@ public class Lobby {
 
     private Map<String, LobbyPlayerRemote> remotePlayers = new ConcurrentHashMap<String, LobbyPlayerRemote>();
     private final LobbyPlayerHuman guiPlayer = new LobbyPlayerHuman("Human");
-    
+    private final LobbyPlayerAi system = new LobbyPlayerAi("System");
 
     public final LobbyPlayerHuman getGuiPlayer() {
         return guiPlayer;
@@ -99,13 +100,15 @@ public class Lobby {
      * @param name
      * @return
      */
-    public synchronized LobbyPlayer findOrCreateRemotePlayer(String name) {
+    public synchronized LobbyPlayer findOrCreateRemotePlayer(String name, INetClient client) {
         if (remotePlayers.containsKey(name))
             return remotePlayers.get(name);
 
-        LobbyPlayerRemote res = new LobbyPlayerRemote(name);
+        LobbyPlayerRemote res = new LobbyPlayerRemote(name, client);
+        speak(ChatArea.Room, system, res.getName()  + " has joined the server.");
         // have to load avatar from remote user's preferences here
         remotePlayers.put(name, res);
+        
         return res;
     }
 
@@ -114,4 +117,10 @@ public class Lobby {
     }
 
 
+    public void speak(ChatArea room, LobbyPlayer player, String message) {
+        getGuiPlayer().hear(player, message);
+        for(LobbyPlayer remote : remotePlayers.values()) {
+            remote.hear(player, message);
+        }
+    }
 }

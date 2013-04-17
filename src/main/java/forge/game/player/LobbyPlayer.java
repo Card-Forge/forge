@@ -77,4 +77,6 @@ public abstract class LobbyPlayer implements IHasIcon {
     }
 
     public abstract Player getPlayer(GameState gameState); // factory method to create player
+
+    public abstract void hear(LobbyPlayer player, String message);
 }

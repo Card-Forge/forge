@@ -1,10 +1,11 @@
 package forge.net.client.state;
 
+import forge.Singletons;
+import forge.control.ChatArea;
 import forge.net.client.INetClient;
 import forge.net.protocol.incoming.ChatPacket;
 import forge.net.protocol.incoming.IPacket;
 import forge.net.protocol.incoming.PacketOpcode;
-import forge.net.protocol.outcoming.EchoMessage;
 
 /** 
  * TODO: Write javadoc for this type.
@@ -22,8 +23,10 @@ public class InLobbyClientState implements IClientState {
         if( data.getOpCode() == PacketOpcode.Chat) 
         {
             ChatPacket cp = (ChatPacket) data;
-            // should actually find all players in a lobby and send it to them
-            client.send(new EchoMessage("chat - " + cp.getMessage()));
+            // if ( not muted ) 
+            Singletons.getControl().getLobby().speak(ChatArea.Room, client.getPlayer(), cp.getMessage());
+            // else 
+            //   client.send("You are banned and cannot speak");
             return true;
         }
         return false;

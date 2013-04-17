@@ -20,6 +20,9 @@ import javax.swing.ScrollPaneConstants;
 import org.apache.commons.lang3.StringUtils;
 
 import net.miginfocom.swing.MigLayout;
+import forge.Singletons;
+import forge.control.ChatArea;
+import forge.control.Lobby;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FTextArea;
@@ -56,7 +59,9 @@ public enum FNetOverlay {
             txtInput.setText("");
             if ( StringUtils.isBlank(message) )
                 return;
-            addMessage("You", message);
+
+            Lobby lobby = Singletons.getControl().getLobby(); 
+            lobby.speak(ChatArea.Room, lobby.getGuiPlayer(), message);
         }
     };
     
@@ -98,7 +103,7 @@ public enum FNetOverlay {
     }
     
     public void showUp(String message) { 
-        txtLog.setText(message + "\n");
+        txtLog.setText(message);
         pnl.setVisible(true);
     }
 
@@ -135,7 +140,7 @@ public enum FNetOverlay {
     
     SimpleDateFormat inFormat = new SimpleDateFormat("HH:mm:ss");
     public void addMessage(String origin, String message) {
-        String toAdd = String.format("[%s] %s: %s%n", inFormat.format(new Date()), origin, message);
+        String toAdd = String.format("%n[%s] %s: %s", inFormat.format(new Date()), origin, message);
         txtLog.append(toAdd);
     }
 }

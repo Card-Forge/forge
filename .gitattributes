@@ -13914,6 +13914,7 @@ src/main/java/forge/card/trigger/TriggerWaiting.java -text
 src/main/java/forge/card/trigger/WrappedAbility.java -text
 src/main/java/forge/card/trigger/ZCTrigger.java svneol=native#text/plain
 src/main/java/forge/card/trigger/package-info.java svneol=native#text/plain
+src/main/java/forge/control/ChatArea.java -text
 src/main/java/forge/control/ControlBazaarUI.java -text
 src/main/java/forge/control/FControl.java -text
 src/main/java/forge/control/KeyboardShortcuts.java -text
@@ -14321,6 +14322,7 @@ src/main/java/forge/net/protocol/incoming/PacketOpcode.java -text
 src/main/java/forge/net/protocol/incoming/UnknownPacket.java -text
 src/main/java/forge/net/protocol/incoming/package-info.java -text
 src/main/java/forge/net/protocol/outcoming/AuthorizationSuccessfulMessage.java -text
+src/main/java/forge/net/protocol/outcoming/ChatMessage.java -text
 src/main/java/forge/net/protocol/outcoming/EchoMessage.java -text
 src/main/java/forge/net/protocol/outcoming/IMessage.java -text
 src/main/java/forge/net/protocol/outcoming/IncorrectPacketMessage.java -text

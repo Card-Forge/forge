@@ -7,9 +7,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import com.google.common.collect.Iterables;
-
-
 import forge.Constant.Preferences;
 import forge.FThreads;
 import forge.Singletons;
@@ -188,12 +185,6 @@ public class MatchController {
             
             currentGame.setAge(GameAge.Mulligan);
             getInput().clearInput();
-            //getInput().setNewInput(currentGame);
-            
-            
-//            Thread thGame = new GameInputUpdatesThread(this, currentGame);
-//            thGame.setName("Game input updater");
-//            thGame.start();
 
             // TODO restore this functionality!!!
             //VMatchUI.SINGLETON_INSTANCE.getViewDevMode().getDocument().setVisible(Preferences.DEV_MODE);
