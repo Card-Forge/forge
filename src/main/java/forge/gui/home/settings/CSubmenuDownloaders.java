@@ -22,21 +22,21 @@ public enum CSubmenuDownloaders implements ICDoc {
     SINGLETON_INSTANCE;
 
     private final Command cmdLicensing = new Command() { @Override
-        public void execute() { VSubmenuDownloaders.SINGLETON_INSTANCE.showLicensing(); } };
+        public void run() { VSubmenuDownloaders.SINGLETON_INSTANCE.showLicensing(); } };
     private final Command cmdPicDownload  = new Command() { @Override
-        public void execute() { new GuiDownloadPicturesLQ(); } };
+        public void run() { new GuiDownloadPicturesLQ(); } };
     private final Command cmdSetDownload = new Command() { @Override
-        public void execute() { new GuiDownloadSetPicturesLQ(); } };
+        public void run() { new GuiDownloadSetPicturesLQ(); } };
     private final Command cmdQuestImages = new Command() { @Override
-        public void execute() { new GuiDownloadQuestImages(); } };
+        public void run() { new GuiDownloadQuestImages(); } };
     private final Command cmdDownloadPrices = new Command() { @Override
-        public void execute() { new GuiDownloadPrices(); } };
+        public void run() { new GuiDownloadPrices(); } };
     private final Command cmdHowToPlay = new Command() { @Override
-        public void execute() { VSubmenuDownloaders.SINGLETON_INSTANCE.showHowToPlay(); } };
+        public void run() { VSubmenuDownloaders.SINGLETON_INSTANCE.showHowToPlay(); } };
     private final Command cmdImportPictures = new Command() { @Override
-        public void execute() { new ImportDialog(null, null); } };
+        public void run() { new ImportDialog(null, null); } };
     private final Command cmdReportBug = new Command() { @Override
-        public void execute() { BugReporter.reportBug(null); }
+        public void run() { BugReporter.reportBug(null); }
     };
 
     /* (non-Javadoc)

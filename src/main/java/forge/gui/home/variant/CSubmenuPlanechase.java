@@ -85,7 +85,7 @@ public enum CSubmenuPlanechase implements ICDoc {
     public void initialize() {
         VSubmenuPlanechase.SINGLETON_INSTANCE.getLblEditor().setCommand(new Command() {
             @Override
-            public void execute() {
+            public void run() {
                 Predicate<CardPrinted> predPlanes = new Predicate<CardPrinted>() {
                     @Override
                     public boolean apply(CardPrinted arg0) {

@@ -86,20 +86,20 @@ public enum CCardCatalog implements ICDoc {
         // Add/remove buttons (refresh analysis on add)
         VCardCatalog.SINGLETON_INSTANCE.getBtnAdd().setCommand(new Command() {
             @Override
-            public void execute() {
+            public void run() {
                 CDeckEditorUI.SINGLETON_INSTANCE.addSelectedCards(false, 1);
             }
         });
         VCardCatalog.SINGLETON_INSTANCE.getBtnAdd4().setCommand(new Command() {
             @Override
-            public void execute() {
+            public void run() {
                 CDeckEditorUI.SINGLETON_INSTANCE.addSelectedCards(false, 4);
             }
         });
         
         final Command updateFilterCommand = new Command() {
             @Override
-            public void execute() {
+            public void run() {
                 if (!disableFiltering) {
                     applyCurrentFilter();
                 }
@@ -114,7 +114,7 @@ public enum CCardCatalog implements ICDoc {
             private boolean lastToggle = true;
             
             @Override
-            public void execute() {
+            public void run() {
                 disableFiltering = true;
                 lastToggle = !lastToggle;
                 for (SEditorUtil.StatTypes s : SEditorUtil.StatTypes.values()) {
@@ -130,7 +130,7 @@ public enum CCardCatalog implements ICDoc {
         // assemble add restriction menu
         VCardCatalog.SINGLETON_INSTANCE.getBtnAddRestriction().setCommand(new Command() {
             @Override
-            public void execute() {
+            public void run() {
                 JPopupMenu popup = new JPopupMenu("RestrictionPopupMenu");
                 GuiUtils.addMenuItem(popup, "Current text search",
                         KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()),
@@ -382,7 +382,7 @@ public enum CCardCatalog implements ICDoc {
         
         VCardCatalog.SINGLETON_INSTANCE.addRestrictionWidget(restriction.getLeft(), new Command() {
             @Override
-            public void execute() {
+            public void run() {
                 if (null != key) {
                     activeSet.remove(key);
                 }

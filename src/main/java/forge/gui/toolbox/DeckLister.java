@@ -416,7 +416,7 @@ public class DeckLister extends JPanel implements ILocalRepaint {
         this.previousSelect = r0;
 
         if (this.cmdRowSelect != null) {
-            this.cmdRowSelect.execute();
+            this.cmdRowSelect.run();
         }
     }
     private <T extends DeckBase> void editDeck(final Deck d0) {
@@ -479,7 +479,7 @@ public class DeckLister extends JPanel implements ILocalRepaint {
         this.revalidate();
 
         if (this.cmdDelete != null) {
-            this.cmdDelete.execute();
+            this.cmdDelete.run();
         }
     }
 }

@@ -257,7 +257,7 @@ public class QuickGauntletLister extends JPanel {
         r0.setSelected(true);
         previousSelect = r0;
 
-        if (cmdRowSelect != null) { cmdRowSelect.execute(); }
+        if (cmdRowSelect != null) { cmdRowSelect.run(); }
     }
 
     private void deleteFile(RowPanel r0) {
@@ -273,7 +273,7 @@ public class QuickGauntletLister extends JPanel {
 
 
         GauntletIO.getGauntletFile(gd).delete();
-        if (cmdRowDelete != null) { cmdRowDelete.execute(); }
+        if (cmdRowDelete != null) { cmdRowDelete.run(); }
 
         this.setSelectedIndex(0);
         this.remove(r0);

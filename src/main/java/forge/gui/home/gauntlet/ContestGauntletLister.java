@@ -213,6 +213,6 @@ public class ContestGauntletLister extends JPanel {
         r0.setSelected(true);
         previousSelect = r0;
 
-        if (cmdRowSelect != null) { cmdRowSelect.execute(); }
+        if (cmdRowSelect != null) { cmdRowSelect.run(); }
     }
 }

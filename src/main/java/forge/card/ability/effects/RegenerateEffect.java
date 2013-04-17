@@ -51,7 +51,7 @@ public class RegenerateEffect extends SpellAbilityEffect {
                 private static final long serialVersionUID = 1922050611313909200L;
 
                 @Override
-                public void execute() {
+                public void run() {
                     tgtC.resetShield();
                 }
             };

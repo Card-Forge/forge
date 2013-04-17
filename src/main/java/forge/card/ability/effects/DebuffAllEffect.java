@@ -66,7 +66,7 @@ public class DebuffAllEffect extends SpellAbilityEffect {
                     private static final long serialVersionUID = 7486231071095628674L;
 
                     @Override
-                    public void execute() {
+                    public void run() {
                         if (tgtC.isInPlay()) {
                             for (final String kw : hadIntrinsic) {
                                 tgtC.addIntrinsicKeyword(kw);

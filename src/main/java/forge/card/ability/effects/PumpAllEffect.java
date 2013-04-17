@@ -52,7 +52,7 @@ public class PumpAllEffect extends SpellAbilityEffect {
                     private static final long serialVersionUID = 5415795460189457660L;
 
                     @Override
-                    public void execute() {
+                    public void run() {
                         tgtC.addTempAttackBoost(-1 * a);
                         tgtC.addTempDefenseBoost(-1 * d);
 

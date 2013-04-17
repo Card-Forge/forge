@@ -196,7 +196,7 @@ public enum CSubmenuPreferences implements ICDoc {
 
         view.getBtnReset().setCommand(new Command() {
             @Override
-            public void execute() {
+            public void run() {
                 ForgePreferences prefs = Singletons.getModel().getPreferences();
                 prefs.reset();
                 prefs.save();
@@ -281,7 +281,7 @@ public enum CSubmenuPreferences implements ICDoc {
         view.getLblChooseSkin().setText("Please restart Forge (click here to close).");
         view.getLblChooseSkin().setHoverable(true);
         view.getLblChooseSkin().setCommand(new Command() { @Override
-            public void execute() { RestartUtil.restartApplication(null); } });
+            public void run() { RestartUtil.restartApplication(null); } });
 
         prefs.setPref(FPref.UI_SKIN, name);
         prefs.save();

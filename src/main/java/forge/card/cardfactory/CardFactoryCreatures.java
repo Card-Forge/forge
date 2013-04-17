@@ -82,7 +82,7 @@ public class CardFactoryCreatures {
                     private static final long serialVersionUID = 3367390368512271319L;
 
                     @Override
-                    public void execute() {
+                    public void run() {
                         if (card.isInPlay()) {
                             Singletons.getModel().getGame().getAction().sacrifice(card, null);
                         }
@@ -100,7 +100,7 @@ public class CardFactoryCreatures {
             private static final long serialVersionUID = 6667896040611028600L;
 
             @Override
-            public void execute() {
+            public void run() {
                 Singletons.getModel().getGame().getStack().addSimultaneousStackEntry(ability);
 
             }
@@ -110,7 +110,7 @@ public class CardFactoryCreatures {
             private static final long serialVersionUID = 1786900359843939456L;
 
             @Override
-            public void execute() {
+            public void run() {
                 final List<Card> list = CardLists.filter(Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Stangg Twin"));
 
                 if (list.size() == 1) {
@@ -345,7 +345,7 @@ public class CardFactoryCreatures {
             private static final long serialVersionUID = -7067218066522935060L;
 
             @Override
-            public void execute() {
+            public void run() {
                 final StringBuilder sb = new StringBuilder();
                 sb.append("Kinsbaile Borderguard enters the battlefield with a ");
                 sb.append("+1/+1 counter on it for each other Kithkin you control.");
@@ -378,7 +378,7 @@ public class CardFactoryCreatures {
             private static final long serialVersionUID = 304026662487997331L;
 
             @Override
-            public void execute() {
+            public void run() {
                 final StringBuilder sb = new StringBuilder();
                 sb.append("When Kinsbaile Borderguard is put into a graveyard ");
                 sb.append("from play, put a 1/1 white Kithkin Soldier creature ");
@@ -398,7 +398,7 @@ public class CardFactoryCreatures {
             private static final long serialVersionUID = -75234586897814L;
 
             @Override
-            public void execute() {
+            public void run() {
                 int intermSumPower = 0;
                 int intermSumToughness = 0;
                 // intermSumPower = intermSumToughness = 0;

@@ -2865,7 +2865,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     public final void executeTrigger(final ZCTrigger type) {
         for (final AbilityTriggered t : this.zcTriggers) {
             if (t.getTrigger().equals(type) && t.isBasic()) {
-                t.execute();
+                t.run();
             }
         }
     }
@@ -2945,7 +2945,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     
     public final void runChangeControllerCommands() {
         for (final Command c : this.changeControllerCommandList) {
-            c.execute();
+            c.run();
         }
     }
 
@@ -4149,7 +4149,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         }
 
         for (final Command var : this.untapCommandList) {
-            var.execute();
+            var.run();
         }
 
         this.setTapped(false);

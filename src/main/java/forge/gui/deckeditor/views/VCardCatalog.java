@@ -298,10 +298,10 @@ public enum VCardCatalog implements IVDoc<CCardCatalog>, ITableContainer {
         pnl.add(new FLabel.Builder().text("X").fontSize(10).hoverable(true)
                 .tooltip("Remove filter").cmdClick(new Command() {
                     @Override
-                    public void execute() {
+                    public void run() {
                         pnlRestrictions.remove(pnl);
                         refreshRestrictionWidgets();
-                        onRemove.execute();
+                        onRemove.run();
                     }
                 }).build(), "top");
 

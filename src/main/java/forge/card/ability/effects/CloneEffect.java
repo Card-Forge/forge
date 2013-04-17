@@ -190,7 +190,7 @@ public class CloneEffect extends SpellAbilityEffect {
                 private static final long serialVersionUID = -78375985476256279L;
 
                 @Override
-                public void execute() {
+                public void run() {
                     if (cloneCard.isCloned()) {
                       cloneCard.switchStates(CardCharacteristicName.Cloner, CardCharacteristicName.Original);
                       cloneCard.setState(CardCharacteristicName.Original);

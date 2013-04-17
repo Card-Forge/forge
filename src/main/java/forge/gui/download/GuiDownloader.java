@@ -92,7 +92,7 @@ public abstract class GuiDownloader extends DefaultBoundedRangeModel implements 
     };
 
     private final Command cmdClose = new Command() { @Override
-        public void execute() { close(); } };
+        public void run() { close(); } };
 
     // Swing components
     private final FPanel pnlDialog = new FPanel(new MigLayout("insets 0, gap 0, wrap, ax center, ay center"));

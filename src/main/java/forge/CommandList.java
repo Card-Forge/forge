@@ -130,9 +130,9 @@ public class CommandList implements Command, Iterable<Command> {
      * </p>
      */
     @Override
-    public final void execute() {
+    public final void run() {
         for (int i = 0; i < this.size(); i++) {
-            this.get(i).execute();
+            this.get(i).run();
         }
     }
 

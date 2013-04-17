@@ -52,7 +52,7 @@ public enum CSubmenuSealed implements ICDoc {
 
     private final Command cmdDeckSelect = new Command() {
         @Override
-        public void execute() {
+        public void run() {
             VSubmenuSealed.SINGLETON_INSTANCE.getBtnStart().setEnabled(true);
         }
     };

@@ -108,10 +108,10 @@ public enum VSubmenuAvatars implements IVSubmenu<CSubmenuAvatars> {
                 "w 90%!, pushy, growy, gap 5% 0 0 0");
 
         final Command cmdHuman = new Command() { @Override
-            public void execute() { lblAvatarAI.setSelected(false); lblAvatarHuman.requestFocusInWindow(); } };
+            public void run() { lblAvatarAI.setSelected(false); lblAvatarHuman.requestFocusInWindow(); } };
 
         final Command cmdAI = new Command() { @Override
-            public void execute() { lblAvatarHuman.setSelected(false); lblAvatarAI.requestFocusInWindow(); } };
+            public void run() { lblAvatarHuman.setSelected(false); lblAvatarAI.requestFocusInWindow(); } };
 
         lblAvatarHuman.setCommand(cmdHuman);
         lblAvatarAI.setCommand(cmdAI);
@@ -144,7 +144,7 @@ public enum VSubmenuAvatars implements IVSubmenu<CSubmenuAvatars> {
 
         final Command cmd = new Command() {
             @Override
-            public void execute() {
+            public void run() {
                 String[] indices = Singletons.getModel().getPreferences()
                         .getPref(FPref.UI_AVATARS).split(",");
 

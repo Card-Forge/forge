@@ -67,14 +67,14 @@ public enum CSubmenuGauntletContests implements ICDoc {
 
     private final Command cmdRandomRegular = new Command() {
         @Override
-        public void execute() {
+        public void run() {
             DeckgenUtil.randomSelect(view.getLstDecks());
         }
     };
 
     private final Command cmdRandomColors = new Command() {
         @Override
-        public void execute() {
+        public void run() {
             view.getLstDecks().setSelectedIndices(DeckgenUtil.randomSelectColors());
         }
     };
@@ -278,7 +278,7 @@ public enum CSubmenuGauntletContests implements ICDoc {
     public Command getCommandOnSelect() {
         return new Command() {
             @Override
-            public void execute() {
+            public void run() {
                 updateData();
             }
         };

@@ -475,7 +475,7 @@ public class CardFactoryUtil {
             private static final long serialVersionUID = 4825430555490333062L;
 
             @Override
-            public void execute() {
+            public void run() {
                 c.addCounter(type, n, true);
             }
         };
@@ -2013,7 +2013,7 @@ public class CardFactoryUtil {
                             private static final long serialVersionUID = 3014846051064254493L;
 
                             @Override
-                            public void execute() {
+                            public void run() {
                                 if (crd.isInPlay()) {
                                     crd.addTempAttackBoost(-1 * magnitude);
                                     crd.addTempDefenseBoost(-1 * magnitude);
@@ -2302,7 +2302,7 @@ public class CardFactoryUtil {
                 private static final long serialVersionUID = -7913835645603984242L;
 
                 @Override
-                public void execute() {
+                public void run() {
                     card.addExtrinsicKeyword("(Echo unpaid)");
                 }
             };
@@ -2949,7 +2949,7 @@ public class CardFactoryUtil {
                 private static final long serialVersionUID = 6436821515525468682L;
 
                 @Override
-                public void execute() {
+                public void run() {
                     final List<Card> lands = card.getController().getLandsInPlay();
                     lands.remove(card);
                     if (!(lands.size() <= 2)) {
@@ -2978,7 +2978,7 @@ public class CardFactoryUtil {
                 private static final long serialVersionUID = 403635232455049834L;
 
                 @Override
-                public void execute() {
+                public void run() {
                     final List<Card> clICtrl = card.getOwner().getCardsIn(ZoneType.Battlefield);
 
                     boolean fnd = false;
@@ -3005,7 +3005,7 @@ public class CardFactoryUtil {
                 private static final long serialVersionUID = 1489845860231758299L;
 
                 @Override
-                public void execute() {
+                public void run() {
                     if (card.isCreature()) {
                         card.addCounter(CounterType.P1P1, card.getSunburstValue(), true);
                     } else {
@@ -3019,7 +3019,7 @@ public class CardFactoryUtil {
                 private static final long serialVersionUID = -7564420917490677427L;
 
                 @Override
-                public void execute() {
+                public void run() {
                     card.setSunburstValue(0);
                 }
             };
@@ -3034,7 +3034,7 @@ public class CardFactoryUtil {
                 private static final long serialVersionUID = 6536398032388958127L;
 
                 @Override
-                public void execute() {
+                public void run() {
                     final List<Card> cardsInPlay = CardLists.getType(Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield), "World");
                     cardsInPlay.remove(card);
                     for (int i = 0; i < cardsInPlay.size(); i++) {
@@ -3119,7 +3119,7 @@ public class CardFactoryUtil {
                     private static final long serialVersionUID = -7530312713496897814L;
 
                     @Override
-                    public void execute() {
+                    public void run() {
                         final List<Card> creats = card.getController().getCreaturesInPlay();
                         creats.remove(card);
                         // System.out.println("Creats size: " + creats.size());
@@ -3192,7 +3192,7 @@ public class CardFactoryUtil {
                     private static final long serialVersionUID = 304026662487997331L;
 
                     @Override
-                    public void execute() {
+                    public void run() {
                         final Player modularPlayer =  card.getController();
                         final List<Card> choices = Lists.newArrayList();
                         for(Card c : modularPlayer.getGame().getCardsIn(ZoneType.Battlefield)) {

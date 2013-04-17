@@ -136,6 +136,6 @@ public final class SEditorUtil  {
 
         ((FLabel) VCurrentDeck.SINGLETON_INSTANCE.getBtnSave())
             .setCommand(new Command() {
-                @Override public void execute() { SEditorIO.saveDeck(); } });
+                @Override public void run() { SEditorIO.saveDeck(); } });
     }
 }

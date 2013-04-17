@@ -143,7 +143,7 @@ public class ImportDialog {
         _fileChooser.setMultiSelectionEnabled(false);
         _fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         _btnChooseDir.setCommand(new Command() {
-            @Override public void execute() {
+            @Override public void run() {
                 // bring up a file open dialog and, if the OK button is selected, apply the filename
                 // to the import source text field
                 if (JFileChooser.APPROVE_OPTION == _fileChooser.showOpenDialog(null)) {
@@ -215,7 +215,7 @@ public class ImportDialog {
                             synchronized (_onAnalyzerDone) {
                                 // this will populate the panel with data selection widgets
                                 _AnalyzerUpdater analyzer = new _AnalyzerUpdater(text, _onAnalyzerDone, isMigration);
-                                analyzer.execute();
+                                analyzer.run();
                                 _analyzerActive = true;
                             }
                             if (!isMigration) {
@@ -654,7 +654,7 @@ public class ImportDialog {
                         _Importer importer = new _Importer(
                                 _srcDir, _selections, _unknownDeckCombo, _operationLog, _progressBar,
                                 _moveCheckbox.isSelected(), _overwriteCheckbox.isSelected());
-                        importer.execute();
+                        importer.run();
                         
                         _btnCancel.requestFocusInWindow();
                     }

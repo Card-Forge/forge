@@ -87,7 +87,7 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
     private final JLabel fullCatalogToggle = new FLabel.Builder().text("See full catalog")
             .fontSize(14).hoverable(true).cmdClick(new Command() {
                 @Override
-                public void execute() {
+                public void run() {
                     toggleFullCatalog();
                 }
             })
@@ -115,7 +115,7 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
     private String CDRemLabel = new String();
     private String prevRem4Label = null;
     private String prevRem4Tooltip = null;
-    private Command prevRem4Cmd = null;
+    private Runnable prevRem4Cmd = null;
 
     /**
      * Child controller for quest card shop UI.
@@ -463,7 +463,7 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
         VCurrentDeck.SINGLETON_INSTANCE.getBtnRemove4().setToolTipText("Sell unneeded extra copies of all cards");
         VCurrentDeck.SINGLETON_INSTANCE.getBtnRemove4().setCommand(new Command() {
             @Override
-            public void execute() {
+            public void run() {
                 List<Map.Entry<InventoryItem, Integer>> cardsToRemove = new LinkedList<Map.Entry<InventoryItem,Integer>>();
                 for (Map.Entry<InventoryItem, Integer> item : getTableDeck().getCards()) {
                     CardPrinted card = (CardPrinted)item.getKey();

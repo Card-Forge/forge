@@ -241,7 +241,7 @@ public class AnimateEffect extends AnimateEffectBase {
                 private static final long serialVersionUID = -5861759814760561373L;
 
                 @Override
-                public void execute() {
+                public void run() {
                     doUnanimate(c, sa, finalDesc, hiddenKeywords, addedAbilities, addedTriggers,
                             colorTimestamp, givesStAbs, removedAbilities, timestamp);
 

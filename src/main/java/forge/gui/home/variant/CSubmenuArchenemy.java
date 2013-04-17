@@ -86,7 +86,7 @@ public enum CSubmenuArchenemy implements ICDoc {
             private static final long serialVersionUID = -4548064747843903896L;
 
             @Override
-            public void execute() {
+            public void run() {
                 
                 Predicate<CardPrinted> predSchemes = new Predicate<CardPrinted>() {
                     @Override

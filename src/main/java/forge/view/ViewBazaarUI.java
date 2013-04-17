@@ -65,7 +65,7 @@ public class ViewBazaarUI extends FPanel {
 
             lbl.setCommand(new Command() {
                 @Override
-                public void execute() {
+                public void run() {
                     if (previousSelected != null) { previousSelected.setSelected(false); }
                     lbl.setSelected(true);
                     previousSelected = lbl;

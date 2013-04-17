@@ -69,9 +69,9 @@ public enum CSubmenuGauntletLoad implements ICDoc {
         view.getBtnStart().addActionListener(actStartGame);
 
         view.getGauntletLister().setCmdDelete(new Command() { @Override
-            public void execute() { enableStartButton(); } });
+            public void run() { enableStartButton(); } });
         view.getGauntletLister().setCmdSelect(new Command() { @Override
-            public void execute() { enableStartButton(); } });
+            public void run() { enableStartButton(); } });
     }
 
     private void updateData() {
@@ -140,7 +140,7 @@ public enum CSubmenuGauntletLoad implements ICDoc {
     public Command getCommandOnSelect() {
         return new Command() {
             @Override
-            public void execute() {
+            public void run() {
                 updateData();
             }
         };

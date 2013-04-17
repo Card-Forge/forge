@@ -1228,7 +1228,7 @@ public class CombatUtil {
                         private static final long serialVersionUID = -1703473800920781454L;
 
                         @Override
-                        public void execute() {
+                        public void run() {
                             if (charger.isInPlay()) {
                                 charger.removeIntrinsicKeyword("Trample");
                             }
@@ -1367,7 +1367,7 @@ public class CombatUtil {
                         private static final long serialVersionUID = 7662543891117427727L;
 
                         @Override
-                        public void execute() {
+                        public void run() {
                             if (blocker.isInPlay()) {
                                 blocker.addTempAttackBoost(mag);
                                 blocker.addTempDefenseBoost(mag);
@@ -1423,7 +1423,7 @@ public class CombatUtil {
                         private static final long serialVersionUID = 1497565871061029469L;
 
                         @Override
-                        public void execute() {
+                        public void run() {
                             if (crd.isInPlay()) {
                                 crd.addTempAttackBoost(-1);
                                 crd.addTempDefenseBoost(-1);
@@ -1532,7 +1532,7 @@ public class CombatUtil {
                         private static final long serialVersionUID = -3215615538474963181L;
 
                         @Override
-                        public void execute() {
+                        public void run() {
                             if (crd.isInPlay()) {
                                 crd.addTempAttackBoost(-pump);
                                 crd.addTempDefenseBoost(-pump);

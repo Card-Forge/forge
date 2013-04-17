@@ -190,7 +190,7 @@ public final class GameActionUtil {
         }
 
         @Override
-        public void execute() {
+        public void run() {
             if (!c.isCopiedSpell()) {
                 final List<Card> maelstromNexii = CardLists.filter(Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Maelstrom Nexus"));
 
@@ -318,7 +318,7 @@ public final class GameActionUtil {
         }
 
         @Override
-        public void execute() {
+        public void run() {
 
             final List<Card> thrummingStones = controller.getCardsIn(ZoneType.Battlefield, "Thrumming Stone");
             for (int i = 0; i < thrummingStones.size(); i++) {
@@ -368,9 +368,9 @@ public final class GameActionUtil {
 
         final GameState game = Singletons.getModel().getGame(); 
         final Command cascade = new CascadeExecutor(sa.getActivatingPlayer(), sa.getSourceCard(), game);
-        cascade.execute();
+        cascade.run();
         final Command ripple = new RippleExecutor(sa.getActivatingPlayer(), sa.getSourceCard());
-        ripple.execute();
+        ripple.run();
     }
 
     private static int getAmountFromPart(CostPart part, Card source, SpellAbility sourceAbility) {
@@ -913,7 +913,7 @@ public final class GameActionUtil {
         private static final long serialVersionUID = -3500747003228938898L;
 
         @Override
-        public void execute() {
+        public void run() {
             // get all creatures
             final List<Card> cards = CardLists.filter(Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Umbra Stalker"));
             for (final Card c : cards) {
@@ -931,14 +931,14 @@ public final class GameActionUtil {
         private static final long serialVersionUID = 8076177362922156784L;
 
         @Override
-        public void execute() {
+        public void run() {
             final List<Card> list = CardLists.filter(Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Old Man of the Sea"));
             for (final Card oldman : list) {
                 if (!oldman.getGainControlTargets().isEmpty()) {
                     if (oldman.getNetAttack() < oldman.getGainControlTargets().get(0).getNetAttack()) {
                         final List<Command> coms = oldman.getGainControlReleaseCommands();
                         for (int i = 0; i < coms.size(); i++) {
-                            coms.get(i).execute();
+                            coms.get(i).run();
                         }
                     }
                 }
@@ -952,7 +952,7 @@ public final class GameActionUtil {
         private static final long serialVersionUID = 4235093010715735727L;
 
         @Override
-        public void execute() {
+        public void run() {
             final List<Card> list = CardLists.filter(Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Liu Bei, Lord of Shu"));
 
             if (list.size() > 0) {
@@ -988,7 +988,7 @@ public final class GameActionUtil {
         private static final long serialVersionUID = 5895665460018262987L;
 
         @Override
-        public void execute() {
+        public void run() {
             // get all creatures
             final List<Card> list = CardLists.filter(Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Tarmogoyf"));
 

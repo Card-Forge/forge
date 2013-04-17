@@ -2,17 +2,26 @@ package forge.gui;
 
 import java.awt.Graphics;
 import java.awt.Rectangle;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseMotionAdapter;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
 
+import org.apache.commons.lang3.StringUtils;
+
 import net.miginfocom.swing.MigLayout;
+import forge.Command;
+import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FTextArea;
 import forge.gui.toolbox.FTextField;
@@ -32,12 +41,26 @@ public enum FNetOverlay {
     }
     
     private final JTextArea txtLog = new FTextArea();
-    private final FTextField txtInput = new FTextField.Builder().maxLength(60).build();
+    private final JTextField txtInput = new FTextField.Builder().maxLength(60).build();
+    private final FLabel cmdSend = new FLabel.ButtonBuilder().text("Send").build(); 
 
+    
     private boolean minimized = false;
     private int height = 120;
     private int width = 400;
 
+    private final ActionListener onSend = new ActionListener() {
+        
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            String message = txtInput.getText();
+            txtInput.setText("");
+            if ( StringUtils.isBlank(message) )
+                return;
+            addMessage(message);
+        }
+    };
+    
     private final int minimizedHeight = 30;
     
     /**
@@ -49,7 +72,7 @@ public enum FNetOverlay {
         pnl.setBackground(FSkin.getColor(FSkin.Colors.CLR_ZEBRA));
         pnl.setBorder(BorderFactory.createLineBorder(FSkin.getColor(FSkin.Colors.CLR_BORDERS)));
 
-        pnl.setLayout(new MigLayout("insets 0, gap 0, ax center, wrap"));
+        pnl.setLayout(new MigLayout("insets 0, gap 0, ax center, wrap 2"));
 //        pnl.add(new FLabel.Builder().text("Loading new game...").fontSize(22).build(), "h 40px!, align center");
 
         // Block all input events below the overlay
@@ -60,15 +83,20 @@ public enum FNetOverlay {
         txtLog.setOpaque(true);
         txtLog.setFocusable(true);
         txtLog.setBackground(FSkin.getColor(FSkin.Colors.CLR_ZEBRA));
-        txtLog.setText("console is here\nconsole is here\nconsole is here\nconsole is here\nconsole is here\nconsole is here\nconsole is here\nconsole is here");
+        txtLog.setText("This is Forge chat window\n");
 
         JScrollPane _operationLogScroller = new JScrollPane(txtLog);
         _operationLogScroller.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         _operationLogScroller.setBorder(null);
         new SmartScroller(_operationLogScroller);
-        pnl.add(_operationLogScroller, "pushx, hmin 24, growy, growx, gap 2px 2px 2px 0");
+        pnl.add(_operationLogScroller, "pushx, hmin 24, growy, growx, gap 2px 2px 2px 0, sx 2");
 
-        pnl.add(txtInput, "pushx, growx, h 26px!, gap 0 0 2px 0");
+        txtInput.setBorder(BorderFactory.createLineBorder(FSkin.getColor(FSkin.Colors.CLR_BORDERS)));
+        pnl.add(txtInput, "pushx, growx, h 26px!, gap 2px 2px 2px 0");
+        pnl.add(cmdSend, "w 60px!, h 28px!, gap 0 0 2px 0");
+        
+        txtInput.addActionListener(onSend);
+        cmdSend.setCommand(new Runnable() { @Override public void run() { onSend.actionPerformed(null); } });
     }
 
     private class OverlayPanel extends JPanel {
@@ -102,7 +130,9 @@ public enum FNetOverlay {
         getPanel().validate();
     }
     
+    SimpleDateFormat inFormat = new SimpleDateFormat("HH:mm:ss");
     public void addMessage(String message) {
-        txtLog.append(message);
+        String toAdd = String.format("[%s]: %s%n", inFormat.format(new Date()), message);
+        txtLog.append(toAdd);
     }
 }

@@ -44,7 +44,7 @@ public class ViewItem extends FPanel {
 
         this.btnPurchase.setCommand(new Command() {
             @Override
-            public void execute() {
+            public void run() {
                 final QuestAssets qA = Singletons.getModel().getQuest().getAssets();
                 final int cost = ViewItem.this.getItem().getBuyingPrice(qA);
                 if (cost >= 0 && (qA.getCredits() - cost) >= 0) {

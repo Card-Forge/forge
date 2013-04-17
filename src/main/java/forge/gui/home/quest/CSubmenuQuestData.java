@@ -48,10 +48,10 @@ public enum CSubmenuQuestData implements ICDoc {
     private final List<String> customPrizeFormatCodes = new ArrayList<String>();
 
     private final Command cmdQuestSelect = new Command() { @Override
-        public void execute() { changeQuest(); } };
+        public void run() { changeQuest(); } };
 
     private final Command cmdQuestDelete = new Command() { @Override
-        public void execute() { update(); } };
+        public void run() { update(); } };
 
     /* (non-Javadoc)
      * @see forge.control.home.IControlSubmenu#update()
@@ -59,7 +59,7 @@ public enum CSubmenuQuestData implements ICDoc {
     @Override
     public void initialize() {
         view.getBtnEmbark().setCommand(
-                new Command() { @Override public void execute() { newQuest(); } });
+                new Command() { @Override public void run() { newQuest(); } });
 
         // disable the very powerful sets -- they can be unlocked later for a high price
         final List<String> unselectableSets = new ArrayList<String>();
@@ -70,7 +70,7 @@ public enum CSubmenuQuestData implements ICDoc {
         unselectableSets.add("ARC");
         unselectableSets.add("PC2");
         
-        view.getBtnCustomFormat().setCommand(new Command() { @Override public void execute() {
+        view.getBtnCustomFormat().setCommand(new Command() { @Override public void run() {
             final DialogChooseSets dialog = new DialogChooseSets(customFormatCodes, unselectableSets, false);
             dialog.setOkCallback(new Runnable() {
                 @Override
@@ -81,7 +81,7 @@ public enum CSubmenuQuestData implements ICDoc {
             });
         } });
 
-        view.getBtnPrizeCustomFormat().setCommand(new Command() { @Override public void execute() {
+        view.getBtnPrizeCustomFormat().setCommand(new Command() { @Override public void run() {
             final DialogChooseSets dialog = new DialogChooseSets(customPrizeFormatCodes, unselectableSets, false);
             dialog.setOkCallback(new Runnable() {
                 @Override

@@ -218,7 +218,7 @@ public class FLabel extends JLabel implements ILocalRepaint {
             this.addKeyListener(new KeyAdapter() {
                 @Override
                 public void keyPressed(final KeyEvent e) {
-                    if (e.getKeyChar() == ' ' || e.getKeyCode() == 10) { _doMouseAction(); }
+                    if (e.getKeyChar() == ' ' || e.getKeyCode() == 10 || e.getKeyCode() == KeyEvent.VK_ENTER) { _doMouseAction(); }
                 }
             });
             
@@ -267,7 +267,7 @@ public class FLabel extends JLabel implements ILocalRepaint {
     // Various variables used in image rendering.
     private Image img;
 
-    private Command cmdClick;
+    private Runnable cmdClick;
 
     private double iar;
 
@@ -306,7 +306,7 @@ public class FLabel extends JLabel implements ILocalRepaint {
         if (cmdClick != null && isEnabled()) {
             hovered = false;
             repaintSelf();
-            cmdClick.execute();
+            cmdClick.run();
         }
     }
     
@@ -416,7 +416,7 @@ public class FLabel extends JLabel implements ILocalRepaint {
     }
 
     /** @return {@link forge.Command} */
-    public Command getCommand() {
+    public Runnable getCommand() {
         return this.cmdClick;
     }
 
@@ -439,7 +439,7 @@ public class FLabel extends JLabel implements ILocalRepaint {
     }
 
     /** @param c0 &emsp; {@link forge.Command} on click */
-    public void setCommand(final Command c0) {
+    public void setCommand(final Runnable c0) {
         this.cmdClick = c0;
     }
 

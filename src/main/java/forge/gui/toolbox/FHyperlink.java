@@ -48,7 +48,7 @@ public class FHyperlink extends FLabel {
             // overwrite whatever command is there -- we could chain them if we wanted to, though
             cmdClick(new Command() {
                 @Override
-                public void execute() {
+                public void run() {
                     if (browsingSupported) {
                         // open link in default browser
                         new _LinkRunner(uri).execute();

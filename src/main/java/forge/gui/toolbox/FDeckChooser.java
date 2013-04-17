@@ -118,7 +118,7 @@ public class FDeckChooser extends JPanel {
         lst.addMouseListener(madDecklist);
 
         getBtnRandom().setCommand(new Command() {
-            @Override public void execute() { lst.setSelectedIndices(DeckgenUtil.randomSelectColors()); } });
+            @Override public void run() { lst.setSelectedIndices(DeckgenUtil.randomSelectColors()); } });
 
         // Init basic two color deck
         lst.setSelectedIndices(new int[]{0, 1});
@@ -140,7 +140,7 @@ public class FDeckChooser extends JPanel {
         lst.removeMouseListener(madDecklist);
 
         getBtnRandom().setCommand(new Command() {
-            @Override public void execute() { DeckgenUtil.randomSelect(lst); } });
+            @Override public void run() { DeckgenUtil.randomSelect(lst); } });
 
         // Init first in list
         lst.setSelectedIndex(0);
@@ -161,7 +161,7 @@ public class FDeckChooser extends JPanel {
         lst.addMouseListener(madDecklist);
 
         getBtnRandom().setCommand(new Command() {
-            @Override public void execute() { DeckgenUtil.randomSelect(lst); } });
+            @Override public void run() { DeckgenUtil.randomSelect(lst); } });
 
         // Init first in list
         lst.setSelectedIndex(0);
@@ -189,7 +189,7 @@ public class FDeckChooser extends JPanel {
         lst.addMouseListener(madDecklist);
 
         getBtnRandom().setCommand(new Command() {
-            @Override public void execute() { DeckgenUtil.randomSelect(lst); } });
+            @Override public void run() { DeckgenUtil.randomSelect(lst); } });
 
         // Init first in list
         lst.setSelectedIndex(0);

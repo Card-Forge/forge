@@ -196,7 +196,7 @@ public class EffectEffect extends SpellAbilityEffect {
                 private static final long serialVersionUID = -5861759814760561373L;
 
                 @Override
-                public void execute() {
+                public void run() {
                     Singletons.getModel().getGame().getAction().exile(e);
                 }
             };

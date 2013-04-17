@@ -110,7 +110,7 @@ public class ViewWinLose {
         FLabel btnCopyLog = new FLabel.ButtonBuilder().text("Copy to clipboard").build();
         btnCopyLog.setCommand(new Command() {
             @Override
-            public void execute() {
+            public void run() {
                 StringSelection ss = new StringSelection(txtLog.getText());
                 try {
                     Toolkit.getDefaultToolkit().getSystemClipboard().setContents(ss, null);

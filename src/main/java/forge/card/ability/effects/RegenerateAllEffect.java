@@ -34,7 +34,7 @@ public class RegenerateAllEffect extends SpellAbilityEffect {
                 private static final long serialVersionUID = 259368227093961103L;
 
                 @Override
-                public void execute() {
+                public void run() {
                     c.resetShield();
                 }
             };

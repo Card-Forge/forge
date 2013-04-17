@@ -80,25 +80,25 @@ public enum CSubmenuGauntletBuild implements ICDoc {
         //public void keyPressed(final KeyEvent e) { search(); } };
 
     private final Command cmdAddDeck = new Command() { @Override
-        public void execute() { addDeck(); } };
+        public void run() { addDeck(); } };
 
     private final Command cmdRemoveDeck = new Command() { @Override
-        public void execute() { removeDeck(); } };
+        public void run() { removeDeck(); } };
 
     private final Command cmdDeckUp = new Command() { @Override
-        public void execute() { deckUp(); } };
+        public void run() { deckUp(); } };
 
     private final Command cmdDeckDown = new Command() { @Override
-        public void execute() { deckDown(); } };
+        public void run() { deckDown(); } };
 
     private final Command cmdSave = new Command() { @Override
-        public void execute() { saveGauntlet(); } };
+        public void run() { saveGauntlet(); } };
 
     private final Command cmdNew = new Command() { @Override
-        public void execute() { newGauntlet(); } };
+        public void run() { newGauntlet(); } };
 
     private final Command cmdOpen = new Command() { @Override
-        public void execute() { openGauntlet(); } };
+        public void run() { openGauntlet(); } };
 
     /* (non-Javadoc)
      * @see forge.gui.home.ICSubmenu#initialize()

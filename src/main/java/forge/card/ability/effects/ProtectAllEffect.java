@@ -92,7 +92,7 @@ public class ProtectAllEffect extends SpellAbilityEffect {
                             private static final long serialVersionUID = -6573962672873853565L;
 
                             @Override
-                            public void execute() {
+                            public void run() {
                                 if (tgtC.isInPlay()) {
                                     for (final String gain : gains) {
                                         tgtC.removeExtrinsicKeyword("Protection from " + gain);
@@ -128,7 +128,7 @@ public class ProtectAllEffect extends SpellAbilityEffect {
                         private static final long serialVersionUID = -6573962672873853565L;
 
                         @Override
-                        public void execute() {
+                        public void run() {
                             for (final String gain : gains) {
                                 player.removeKeyword("Protection from " + gain);
                             }

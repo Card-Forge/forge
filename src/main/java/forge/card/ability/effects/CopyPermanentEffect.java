@@ -268,7 +268,7 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
                         private static final long serialVersionUID = -4184510100801568140L;
 
                         @Override
-                        public void execute() {
+                        public void run() {
                             sac.setStackDescription(sa.getParam("AtEOT") + " " + target[index] + ".");
                             Singletons.getModel().getGame().getStack().addSimultaneousStackEntry(sac);
                         }

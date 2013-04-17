@@ -226,7 +226,7 @@ public class PlayerZoneBattlefield extends PlayerZone {
                 Singletons.getModel().getGame().getStaticEffects().removeStateBasedEffect(effect);
                 // this is to make sure cards reset correctly
                 final Command comm = GameActionUtil.getCommands().get(tempEffect);
-                comm.execute();
+                comm.run();
             }
         }
     }

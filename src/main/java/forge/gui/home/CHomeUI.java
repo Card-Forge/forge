@@ -63,7 +63,7 @@ public enum CHomeUI implements ICDoc {
         selectPrevious();
         VHomeUI.SINGLETON_INSTANCE.getLblEditor().setCommand(new Command() {
             @Override
-            public void execute() {
+            public void run() {
                 FControl.SINGLETON_INSTANCE.changeState(FControl.Screens.DECK_EDITOR_CONSTRUCTED);
                 CDeckEditorUI.SINGLETON_INSTANCE.setCurrentEditorController(new CEditorConstructed());
             }
@@ -71,14 +71,14 @@ public enum CHomeUI implements ICDoc {
 
         VHomeUI.SINGLETON_INSTANCE.getLblExit().setCommand(new Command() {
             @Override
-            public void execute() {
+            public void run() {
                 System.exit(0);
             }
         });
         
         VHomeUI.SINGLETON_INSTANCE.getLblStartServer().setCommand(new Command() {
             @Override
-            public void execute() {
+            public void run() {
                 FControl.SINGLETON_INSTANCE.getServer().listen();
                 VHomeUI.SINGLETON_INSTANCE.getLblStopServer().setEnabled(true);
                 VHomeUI.SINGLETON_INSTANCE.getLblStartServer().setEnabled(false);
@@ -89,7 +89,7 @@ public enum CHomeUI implements ICDoc {
         
         VHomeUI.SINGLETON_INSTANCE.getLblStopServer().setCommand(new Command() {
             @Override
-            public void execute() {
+            public void run() {
                 FControl.SINGLETON_INSTANCE.getServer().stop();
                 VHomeUI.SINGLETON_INSTANCE.getLblStopServer().setEnabled(false);
                 VHomeUI.SINGLETON_INSTANCE.getLblStartServer().setEnabled(true);

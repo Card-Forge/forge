@@ -134,7 +134,7 @@ public class AttachEffect extends SpellAbilityEffect {
             private static final long serialVersionUID = -639204333673364477L;
 
             @Override
-            public void execute() {
+            public void run() {
                 final GameEntity entity = card.getEnchanting();
                 if (entity == null) {
                     return;

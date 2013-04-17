@@ -97,7 +97,7 @@ public class FPanel extends JPanel implements ILocalRepaint {
 
         @Override
         public void mouseClicked(final MouseEvent evt) {
-            if (cmdClick != null) { cmdClick.execute(); }
+            if (cmdClick != null) { cmdClick.run(); }
             if (!selectable) { return; }
 
             if (selected) { setSelected(false); }

@@ -46,19 +46,19 @@ public enum CSubmenuChallenges implements ICDoc {
 
         view.getBtnSpellShop().setCommand(
                 new Command() { @Override
-                    public void execute() { SSubmenuQuestUtil.showSpellShop(); } });
+                    public void run() { SSubmenuQuestUtil.showSpellShop(); } });
 
         view.getBtnBazaar().setCommand(
                 new Command() { @Override
-                    public void execute() { SSubmenuQuestUtil.showBazaar(); } });
+                    public void run() { SSubmenuQuestUtil.showBazaar(); } });
 
         view.getBtnUnlock().setCommand(
                 new Command() { @Override
-                    public void execute() { SSubmenuQuestUtil.chooseAndUnlockEdition(); CSubmenuChallenges.this.update(); } });
+                    public void run() { SSubmenuQuestUtil.chooseAndUnlockEdition(); CSubmenuChallenges.this.update(); } });
 
         view.getBtnTravel().setCommand(
                 new Command() { @Override
-                    public void execute() { SSubmenuQuestUtil.travelWorld(); CSubmenuChallenges.this.update(); } });
+                    public void run() { SSubmenuQuestUtil.travelWorld(); CSubmenuChallenges.this.update(); } });
 
         view.getBtnStart().addActionListener(
                 new ActionListener() { @Override
@@ -67,7 +67,7 @@ public enum CSubmenuChallenges implements ICDoc {
         ((FLabel) view.getLblZep()).setCommand(
                 new Command() {
                     @Override
-                    public void execute() {
+                    public void run() {
                         if (!SSubmenuQuestUtil.checkActiveQuest("Launch a Zeppelin.")) {
                             return;
                         }
@@ -176,7 +176,7 @@ public enum CSubmenuChallenges implements ICDoc {
         final QuestController qc = Singletons.getModel().getQuest();
         return new Command() {
             @Override
-            public void execute() {
+            public void run() {
                 if (qc.getAchievements() == null) {
                     CHomeUI.SINGLETON_INSTANCE.itemClick(EDocID.HOME_QUESTDATA);
                 }

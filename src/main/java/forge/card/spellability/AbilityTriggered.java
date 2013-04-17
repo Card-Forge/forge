@@ -109,7 +109,7 @@ public class AbilityTriggered extends Ability implements Command {
     /** {@inheritDoc} */
     @Override
     public final void resolve() {
-        this.todo.execute();
+        this.todo.run();
     }
 
     /**
@@ -118,7 +118,7 @@ public class AbilityTriggered extends Ability implements Command {
      * </p>
      */
     @Override
-    public final void execute() {
+    public final void run() {
         this.resolve();
     }
 

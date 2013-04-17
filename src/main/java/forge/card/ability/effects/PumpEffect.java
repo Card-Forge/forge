@@ -43,7 +43,7 @@ public class PumpEffect extends SpellAbilityEffect {
                 private static final long serialVersionUID = -42244224L;
 
                 @Override
-                public void execute() {
+                public void run() {
                     applyTo.addTempAttackBoost(-1 * a);
                     applyTo.addTempDefenseBoost(-1 * d);
 
@@ -85,7 +85,7 @@ public class PumpEffect extends SpellAbilityEffect {
                 private static final long serialVersionUID = -32453460L;
 
                 @Override
-                public void execute() {
+                public void run() {
 
                     if (keywords.size() > 0) {
                         for (int i = 0; i < keywords.size(); i++) {

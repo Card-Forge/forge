@@ -191,7 +191,7 @@ public class ControlGainEffect extends SpellAbilityEffect {
             private static final long serialVersionUID = 878543373519872418L;
 
             @Override
-            public void execute() {
+            public void run() {
                 final Ability ability = new Ability(hostCard, ManaCost.ZERO) {
                     @Override
                     public void resolve() {
@@ -234,7 +234,7 @@ public class ControlGainEffect extends SpellAbilityEffect {
             private static final long serialVersionUID = 878543373519872418L;
 
             @Override
-            public void execute() { doLoseControl(c, hostCard, bTapOnLose, kws, tStamp); }
+            public void run() { doLoseControl(c, hostCard, bTapOnLose, kws, tStamp); }
         };
 
         return loseControl;

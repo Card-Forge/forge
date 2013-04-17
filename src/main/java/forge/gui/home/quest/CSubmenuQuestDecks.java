@@ -30,7 +30,7 @@ public enum CSubmenuQuestDecks implements ICDoc {
 
     private final Command cmdDeckSelect = new Command() {
         @Override
-        public void execute() {
+        public void run() {
             currentDeck = VSubmenuQuestDecks.SINGLETON_INSTANCE.getLstDecks().getSelectedDeck();
             Singletons.getModel().getQuestPreferences().setPref(QPref.CURRENT_DECK, currentDeck.toString());
             Singletons.getModel().getQuestPreferences().save();
@@ -38,7 +38,7 @@ public enum CSubmenuQuestDecks implements ICDoc {
     };
 
     private final Command cmdDeckDelete = new Command() { @Override
-        public void execute() { update(); } };
+        public void run() { update(); } };
 
     /* (non-Javadoc)
      * @see forge.control.home.IControlSubmenu#update()
@@ -47,7 +47,7 @@ public enum CSubmenuQuestDecks implements ICDoc {
     public void initialize() {
         VSubmenuQuestDecks.SINGLETON_INSTANCE.getBtnNewDeck().setCommand(new Command() {
             @Override
-            public void execute() {
+            public void run() {
                 if (!SSubmenuQuestUtil.checkActiveQuest("Create a Deck.")) {
                     return;
                 }
@@ -114,7 +114,7 @@ public enum CSubmenuQuestDecks implements ICDoc {
         final QuestController qc = Singletons.getModel().getQuest();
         return new Command() {
             @Override
-            public void execute() {
+            public void run() {
                 if (qc.getAchievements() == null) {
                     CHomeUI.SINGLETON_INSTANCE.itemClick(EDocID.HOME_QUESTDATA);
                 }

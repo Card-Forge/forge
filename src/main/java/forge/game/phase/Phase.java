@@ -205,7 +205,7 @@ public abstract class Phase implements java.io.Serializable {
         final int length = c.size();
 
         for (int i = 0; i < length; i++) {
-            c.remove(0).execute();
+            c.remove(0).run();
         }
     }
 

@@ -67,23 +67,23 @@ public enum CCurrentDeck implements ICDoc {
     public void initialize() {
         ((FLabel) VCurrentDeck.SINGLETON_INSTANCE.getBtnSave())
             .setCommand(new Command() { @Override
-                public void execute() { SEditorIO.saveDeck(); } });
+                public void run() { SEditorIO.saveDeck(); } });
 
         ((FLabel) VCurrentDeck.SINGLETON_INSTANCE.getBtnSaveAs())
             .setCommand(new Command() { @Override
-                public void execute() { exportDeck(); } });
+                public void run() { exportDeck(); } });
 
         ((FLabel) VCurrentDeck.SINGLETON_INSTANCE.getBtnPrintProxies())
         .setCommand(new Command() { @Override
-            public void execute() { printProxies(); } });
+            public void run() { printProxies(); } });
 
         ((FLabel) VCurrentDeck.SINGLETON_INSTANCE.getBtnOpen())
             .setCommand(new Command() { @Override
-                public void execute() { openDeck(); } });
+                public void run() { openDeck(); } });
 
         ((FLabel) VCurrentDeck.SINGLETON_INSTANCE.getBtnNew())
             .setCommand(new Command() { @Override
-                public void execute() { newDeck(); } });
+                public void run() { newDeck(); } });
 
         VCurrentDeck.SINGLETON_INSTANCE.getTxfTitle().addFocusListener(new FocusAdapter() {
             @Override
@@ -102,19 +102,19 @@ public enum CCurrentDeck implements ICDoc {
         });
 
         ((FLabel) VCurrentDeck.SINGLETON_INSTANCE.getBtnRemove()).setCommand(new Command() {
-            @Override  public void execute() {
+            @Override  public void run() {
                 CDeckEditorUI.SINGLETON_INSTANCE.removeSelectedCards(false, 1);
             } });
 
         ((FLabel) VCurrentDeck.SINGLETON_INSTANCE.getBtnRemove4()).setCommand(new Command() {
-            @Override  public void execute() {
+            @Override  public void run() {
                 CDeckEditorUI.SINGLETON_INSTANCE.removeSelectedCards(false, 4);
             }
         });
 
         VCurrentDeck.SINGLETON_INSTANCE.getBtnImport()
         .setCommand(new Command() { @Override
-            public void execute() { importDeck(); } });
+            public void run() { importDeck(); } });
     }
     
     /**

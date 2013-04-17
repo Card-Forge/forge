@@ -289,7 +289,7 @@ public class QuestFileLister extends JPanel {
         r0.setSelected(true);
         previousSelect = r0;
 
-        if (cmdRowSelect != null) { cmdRowSelect.execute(); }
+        if (cmdRowSelect != null) { cmdRowSelect.run(); }
     }
 
     private void editFileName(String s0) {
@@ -320,7 +320,7 @@ public class QuestFileLister extends JPanel {
             oldpath.renameTo(newpath);
         }
 
-        if (cmdRowEdit != null) { cmdRowEdit.execute(); }
+        if (cmdRowEdit != null) { cmdRowEdit.run(); }
     }
 
     private void deleteFile(RowPanel r0) {
@@ -336,7 +336,7 @@ public class QuestFileLister extends JPanel {
 
         new File(NewConstants.QUEST_SAVE_DIR, r0.getQuestData().getName() + ".dat").delete();
 
-        if (cmdRowDelete != null) { cmdRowDelete.execute(); }
+        if (cmdRowDelete != null) { cmdRowDelete.run(); }
 
         this.remove(r0);
         this.repaint();

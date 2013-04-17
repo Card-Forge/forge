@@ -894,7 +894,7 @@ public class GameAction {
         // card state effects like Glorious Anthem
         for (final String effect : game.getStaticEffects().getStateBasedMap().keySet()) {
             final Command com = GameActionUtil.getCommands().get(effect);
-            com.execute();
+            com.run();
         }
 
         GameActionUtil.grantBasicLandsManaAbilities();
@@ -1303,7 +1303,7 @@ public class GameAction {
             private static final long serialVersionUID = -4514610171270596654L;
 
             @Override
-            public void execute() {
+            public void run() {
                 if (c.isInPlay() && c.isCreature()) {
                     c.addExtrinsicKeyword("Haste");
                 }
@@ -1316,7 +1316,7 @@ public class GameAction {
             private static final long serialVersionUID = -4514610171270596654L;
 
             @Override
-            public void execute() {
+            public void run() {
                 if (c.getSVar("HasteFromSuspend").equals("True")) {
                     c.setSVar("HasteFromSuspend", "False");
                     c.removeExtrinsicKeyword("Haste");

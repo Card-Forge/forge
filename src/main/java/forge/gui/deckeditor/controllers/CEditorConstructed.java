@@ -318,7 +318,7 @@ public final class CEditorConstructed extends ACEditorBase<CardPrinted, Deck> {
         VCurrentDeck.SINGLETON_INSTANCE.getBtnDoSideboard().setVisible(true);
         ((FLabel) VCurrentDeck.SINGLETON_INSTANCE.getBtnDoSideboard()).setCommand(new Command() {
             @Override
-            public void execute() {
+            public void run() {
                 cycleEditorMode();
         } });
 
