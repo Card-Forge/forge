@@ -61,6 +61,10 @@ Flicker effects were using the wrong Defined$ param.
 Some people have noticed slowdowns when Targeting arrows are enabled. The battlefield Dock tab includes a targeting icon. You can set the targeting arrows to Off or to Card mouseover to speed up the game.
 
 
+- Quest challenge start in play cards -
+The quest challenge start in play cards are not appearing on the battlefield.
+
+
 ---------
 New Cards
 ---------
@@ -68,6 +72,17 @@ New Cards
 Fog Patch
 Cowed by Wisdom
 Hipparion
+Illuminate
+Rumbling Aftershocks
+Worldheart Phoenix
+
+
+--------------------
+New Vanguard Avatars
+--------------------
+
+Ink-Eyes, Servant of Oni Avatar
+Maralen of the Mornsong Avatar
 
 
 ------------------------------
@@ -120,6 +135,7 @@ Blood Baron of Vizkopa
 Alive // Well
 Sire of Insanity
 Zhur-Taa Ancient
+Legion's Initiative
 
 
 ------------
