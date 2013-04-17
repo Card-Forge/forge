@@ -14080,6 +14080,7 @@ src/main/java/forge/gui/CardDetailPanel.java svneol=native#text/plain
 src/main/java/forge/gui/CardListViewer.java -text
 src/main/java/forge/gui/CardPicturePanel.java svneol=native#text/plain
 src/main/java/forge/gui/DualListBox.java -text
+src/main/java/forge/gui/FNetOverlay.java -text
 src/main/java/forge/gui/ForgeAction.java svneol=native#text/plain
 src/main/java/forge/gui/GuiChoose.java -text
 src/main/java/forge/gui/GuiDialog.java -text

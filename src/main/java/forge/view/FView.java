@@ -35,6 +35,7 @@ import com.google.common.collect.Lists;
 import forge.Singletons;
 import forge.control.FControl;
 import forge.control.RestartUtil;
+import forge.gui.FNetOverlay;
 import forge.gui.ImportDialog;
 import forge.gui.SOverlayUtils;
 import forge.gui.deckeditor.VDeckEditorUI;
@@ -107,6 +108,7 @@ public enum FView {
         // has a null layout, so new components will be W0 x H0 pixels - gotcha!
         // FControl has a method called "sizeComponents" which will fix this.
         lpnDocument.add(TargetingOverlay.SINGLETON_INSTANCE.getPanel(), TARGETING_LAYER);
+        lpnDocument.add(FNetOverlay.SINGLETON_INSTANCE.getPanel(), TARGETING_LAYER);        
 
         pnlInsets.add(pnlContent, BorderLayout.CENTER);
         pnlInsets.setBackgroundTexture(FSkin.getIcon(FSkin.Backgrounds.BG_TEXTURE));

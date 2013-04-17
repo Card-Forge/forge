@@ -3,6 +3,7 @@ package forge.gui.home;
 import forge.Command;
 import forge.Singletons;
 import forge.control.FControl;
+import forge.gui.FNetOverlay;
 import forge.gui.deckeditor.CDeckEditorUI;
 import forge.gui.deckeditor.controllers.CEditorConstructed;
 import forge.gui.framework.EDocID;
@@ -81,6 +82,8 @@ public enum CHomeUI implements ICDoc {
                 FControl.SINGLETON_INSTANCE.getServer().listen();
                 VHomeUI.SINGLETON_INSTANCE.getLblStopServer().setEnabled(true);
                 VHomeUI.SINGLETON_INSTANCE.getLblStartServer().setEnabled(false);
+
+                FNetOverlay.SINGLETON_INSTANCE.getPanel().setVisible(true);
             }
         });
         
@@ -90,6 +93,8 @@ public enum CHomeUI implements ICDoc {
                 FControl.SINGLETON_INSTANCE.getServer().stop();
                 VHomeUI.SINGLETON_INSTANCE.getLblStopServer().setEnabled(false);
                 VHomeUI.SINGLETON_INSTANCE.getLblStartServer().setEnabled(true);
+
+                FNetOverlay.SINGLETON_INSTANCE.getPanel().setVisible(false);
             }
         });
     }

@@ -2,6 +2,7 @@ package forge.gui.framework;
 
 import java.awt.Component;
 import java.awt.Cursor;
+import java.awt.Rectangle;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
@@ -18,6 +19,7 @@ import java.util.Set;
 
 import javax.swing.JPanel;
 
+import forge.gui.FNetOverlay;
 import forge.gui.toolbox.FOverlay;
 import forge.view.FView;
 
@@ -114,7 +116,10 @@ public final class SResizingUtil {
         final JPanel pnlContent = FView.SINGLETON_INSTANCE.getPnlContent();
         final JPanel pnlInsets = FView.SINGLETON_INSTANCE.getPnlInsets();
 
-        FOverlay.SINGLETON_INSTANCE.getPanel().setBounds(FView.SINGLETON_INSTANCE.getFrame().getContentPane().getBounds());
+        Rectangle mainBounds = FView.SINGLETON_INSTANCE.getFrame().getContentPane().getBounds();
+        FOverlay.SINGLETON_INSTANCE.getPanel().setBounds(mainBounds);
+        FNetOverlay.SINGLETON_INSTANCE.containerResized(mainBounds);
+        
         pnlInsets.setBounds(FView.SINGLETON_INSTANCE.getFrame().getContentPane().getBounds());
         pnlInsets.validate();
 
