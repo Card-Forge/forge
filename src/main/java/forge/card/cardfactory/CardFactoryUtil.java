@@ -1560,7 +1560,10 @@ public class CardFactoryUtil {
             int ix = c.getKickerMagnitude() > 0 ? 1 : 2;
             return CardFactoryUtil.doXMath(Integer.parseInt(sq[ix]), m, c);
         }
-
+        if (sq[0].startsWith("AltCost")) {
+            int ix = c.isOptionalCostPaid(OptionalCost.AltCost) ? 1 : 2;
+            return CardFactoryUtil.doXMath(Integer.parseInt(sq[ix]), m, c);
+        }
         if (sq[0].contains("GraveyardWithGE20Cards")) {
             if (Aggregates.max(Singletons.getModel().getGame().getPlayers(), Player.Accessors.countCardsInZone(ZoneType.Graveyard)) >= 20) {
                 return CardFactoryUtil.doXMath(Integer.parseInt(sq[1]), m, c);
