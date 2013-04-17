@@ -1565,6 +1565,17 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
         return this.numDrawnThisTurn;
     }
 
+    /**
+     * <p>
+     * Getter for the field <code>numDrawnThisTurnDrawStep</code>.
+     * </p>
+     * 
+     * @return a int.
+     */
+    public final int numDrawnThisDrawStep() {
+        return this.numDrawnThisDrawStep;
+    }
+
     // //////////////////////////////
     // /
     // / replaces Singletons.getModel().getGameAction().discard* methods

@@ -21,6 +21,8 @@ import java.util.Map;
 
 import forge.Card;
 import forge.card.spellability.SpellAbility;
+import forge.game.phase.PhaseType;
+import forge.game.player.Player;
 
 /** 
  * TODO: Write javadoc for this type.
@@ -48,6 +50,14 @@ public class ReplaceDraw extends ReplacementEffect {
         }
         if (this.getMapParams().containsKey("ValidPlayer")) {
             if (!matchesValid(runParams.get("Affected"), this.getMapParams().get("ValidPlayer").split(","), this.getHostCard())) {
+                return false;
+            }
+        }
+        if (this.getMapParams().containsKey("NotFirstCardInDrawStep")) {
+            final Player p = (Player)runParams.get("Affected");
+            if (p.numDrawnThisDrawStep() == 0
+                    && this.getHostCard().getController().getGame().getPhaseHandler().is(PhaseType.DRAW)
+                    && this.getHostCard().getController().getGame().getPhaseHandler().getPlayerTurn().equals(p)) {
                 return false;
             }
         }
