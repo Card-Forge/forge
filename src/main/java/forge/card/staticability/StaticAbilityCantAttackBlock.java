@@ -82,6 +82,8 @@ public class StaticAbilityCantAttackBlock {
             costString = Integer.toString(CardFactoryUtil.xCount(hostCard, hostCard.getSVar("X")));
         } else if ("Y".equals(costString)) {
             costString = Integer.toString(CardFactoryUtil.xCount(hostCard, hostCard.getSVar("Y")));
+        } else if (params.containsKey("References")) {
+            costString = Integer.toString(CardFactoryUtil.xCount(hostCard, hostCard.getSVar(params.get("References"))));
         }
 
         final Cost cost = new Cost(costString, true);
@@ -116,6 +118,8 @@ public class StaticAbilityCantAttackBlock {
             costString = Integer.toString(CardFactoryUtil.xCount(hostCard, hostCard.getSVar("X")));
         } else if ("Y".equals(costString)) {
             costString = Integer.toString(CardFactoryUtil.xCount(hostCard, hostCard.getSVar("Y")));
+        } else if (params.containsKey("References")) {
+            costString = Integer.toString(CardFactoryUtil.xCount(hostCard, hostCard.getSVar(params.get("References"))));
         }
 
         final Cost cost = new Cost(costString, true);
