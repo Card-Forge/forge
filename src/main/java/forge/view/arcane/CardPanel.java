@@ -387,12 +387,13 @@ public class CardPanel extends JPanel implements CardContainer {
             }
         }
 
-        if (this.getCard() == null) {
+        Card card = this.getCard();
+        if (card == null) {
             return;
         }
 
         int number = 0;
-        for (final Integer i : this.getCard().getCounters().values()) {
+        for (final Integer i : card.getCounters().values()) {
             number += i.intValue();
         }
 
@@ -409,30 +410,31 @@ public class CardPanel extends JPanel implements CardContainer {
             CardFaceSymbols.drawSymbol("countersMulti", g, this.cardXOffset - 15, yCounters);
         }
 
-        final int xSymbols = (this.cardXOffset + (this.cardWidth / 4)) - 16;
+        final int combatXSymbols = (this.cardXOffset + (this.cardWidth / 4)) - 16;
+        final int stateXSymbols = (this.cardXOffset + (this.cardWidth / 2)) - 16;
         final int ySymbols = (this.cardYOffset + this.cardHeight) - (this.cardHeight / 8) - 16; 
         // int yOff = (cardHeight/4) + 2;
-        if (this.getCard().isAttacking()) {
-            CardFaceSymbols.drawSymbol("attack", g, xSymbols, ySymbols);
-        } else if (this.getCard().isBlocking()) {
-            CardFaceSymbols.drawSymbol("defend", g, xSymbols, ySymbols);
+        if (card.isAttacking()) {
+            CardFaceSymbols.drawSymbol("attack", g, combatXSymbols, ySymbols);
+        } else if (card.isBlocking()) {
+            CardFaceSymbols.drawSymbol("defend", g, combatXSymbols, ySymbols);
         }
 
-        if (this.getCard().isSick() && this.getCard().isInPlay()) {
-            CardFaceSymbols.drawSymbol("summonsick", g, xSymbols, ySymbols);
+        if (card.isSick() && card.isInPlay()) {
+            CardFaceSymbols.drawSymbol("summonsick", g, stateXSymbols, ySymbols);
         }
 
-        if (this.getCard().isPhasedOut()) {
-            CardFaceSymbols.drawSymbol("phasing", g, xSymbols, ySymbols);
+        if (card.isPhasedOut()) {
+            CardFaceSymbols.drawSymbol("phasing", g, stateXSymbols, ySymbols);
         }
 
-        if (this.getCard().isUsedToPay()) {
+        if (card.isUsedToPay()) {
             CardFaceSymbols.drawSymbol("sacrifice", g, (this.cardXOffset + (this.cardWidth / 2)) - 20,
                     (this.cardYOffset + (this.cardHeight / 2)) - 20);
         }
 
-        if (this.getCard() != null && this.getGameCard().getFoil() > 0) {
-            final String fl = String.format("foil%02d", this.getCard().getFoil());
+        if (this.getGameCard().getFoil() > 0) {
+            final String fl = String.format("foil%02d", card.getFoil());
             final int z = Math.round(this.cardWidth * CardPanel.BLACK_BORDER_SIZE);
             CardFaceSymbols.drawOther(g, fl, this.cardXOffset + z, this.cardYOffset + z, this.cardWidth - (2 * z),
                     this.cardHeight - (2 * z));
