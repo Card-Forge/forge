@@ -57,7 +57,8 @@ public enum TriggerType {
     PlanarDice(TriggerPlanarDice.class),
     PlaneswalkedTo(TriggerPlaneswalkedTo.class),
     PlaneswalkedFrom(TriggerPlaneswalkedFrom.class),
-    SetInMotion(TriggerSetInMotion.class);
+    SetInMotion(TriggerSetInMotion.class),
+    NewGame(TriggerNewGame.class);
 
     private final Class<? extends Trigger> classTrigger;
     private TriggerType(Class<? extends Trigger> clasz) {

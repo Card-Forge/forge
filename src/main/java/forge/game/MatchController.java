@@ -11,6 +11,7 @@ import java.util.Map.Entry;
 import forge.Constant.Preferences;
 import forge.FThreads;
 import forge.Singletons;
+import forge.card.trigger.TriggerType;
 import forge.control.FControl;
 import forge.control.input.InputControl;
 import forge.deck.Deck;
@@ -346,6 +347,9 @@ public class MatchController {
     public void afterMulligans()
     {
         currentGame.getAction().handleLeylinesAndChancellors();
+        // Run Trigger beginning of the game
+        final HashMap<String, Object> runParams = new HashMap<String, Object>();
+        currentGame.getTriggerHandler().runTrigger(TriggerType.NewGame, runParams, false);
         currentGame.setAge(GameAge.Play);
         getInput().clearInput();
     }

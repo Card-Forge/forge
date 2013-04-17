@@ -5280,6 +5280,7 @@ res/cardsfolder/i/initiate_of_blood_goka_the_unjust.txt -text
 res/cardsfolder/i/initiates_of_the_ebon_hand.txt svneol=native#text/plain
 res/cardsfolder/i/ink_dissolver.txt svneol=native#text/plain
 res/cardsfolder/i/ink_eyes_servant_of_oni.txt svneol=native#text/plain
+res/cardsfolder/i/ink_eyes_servant_of_oni_avatar.txt -text
 res/cardsfolder/i/inkfathom_divers.txt svneol=native#text/plain
 res/cardsfolder/i/inkfathom_infiltrator.txt svneol=native#text/plain
 res/cardsfolder/i/inkfathom_witch.txt -text svneol=unset#text/plain
@@ -6427,6 +6428,7 @@ res/cardsfolder/m/manta_riders.txt svneol=native#text/plain
 res/cardsfolder/m/mantis_engine.txt svneol=native#text/plain
 res/cardsfolder/m/mantle_of_leadership.txt svneol=native#text/plain
 res/cardsfolder/m/maralen_of_the_mornsong.txt -text
+res/cardsfolder/m/maralen_of_the_mornsong_avatar.txt -text
 res/cardsfolder/m/marauding_knight.txt svneol=native#text/plain
 res/cardsfolder/m/maraxus.txt -text
 res/cardsfolder/m/maraxus_of_keld.txt svneol=native#text/plain
@@ -13890,6 +13892,7 @@ src/main/java/forge/card/trigger/TriggerLandPlayed.java svneol=native#text/plain
 src/main/java/forge/card/trigger/TriggerLifeGained.java svneol=native#text/plain
 src/main/java/forge/card/trigger/TriggerLifeLost.java svneol=native#text/plain
 src/main/java/forge/card/trigger/TriggerLosesGame.java -text
+src/main/java/forge/card/trigger/TriggerNewGame.java -text
 src/main/java/forge/card/trigger/TriggerPhase.java svneol=native#text/plain
 src/main/java/forge/card/trigger/TriggerPlanarDice.java -text
 src/main/java/forge/card/trigger/TriggerPlaneswalkedFrom.java -text
