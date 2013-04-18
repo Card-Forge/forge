@@ -75,7 +75,7 @@ Hipparion
 Illuminate
 Rumbling Aftershocks
 Worldheart Phoenix
-
+Corrosion
 
 --------------------
 New Vanguard Avatars
@@ -140,7 +140,6 @@ Notion Thief
 Uncovered Clues
 Warleader's Helix
 Smelt-Ward Gatekeepers
-Corrosion
 Maze Sentinel
 Wake the Reflections
 Deadbridge Chant
