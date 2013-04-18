@@ -186,6 +186,8 @@ public enum CounterType {
 
     QUEST(),
 
+    RUST(),
+
     SCREAM(),
 
     SCROLL(),

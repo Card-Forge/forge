@@ -2025,6 +2025,7 @@ res/cardsfolder/c/corpse_traders.txt -text
 res/cardsfolder/c/corpsehatch.txt svneol=native#text/plain
 res/cardsfolder/c/corpsejack_menace.txt -text
 res/cardsfolder/c/corpulent_corpse.txt svneol=native#text/plain
+res/cardsfolder/c/corrosion.txt -text
 res/cardsfolder/c/corrosive_gale.txt svneol=native#text/plain
 res/cardsfolder/c/corrosive_mentor.txt svneol=native#text/plain
 res/cardsfolder/c/corrupt.txt svneol=native#text/plain
