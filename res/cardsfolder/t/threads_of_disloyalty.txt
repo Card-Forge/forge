@@ -4,7 +4,6 @@ Types:Enchantment Aura
 A:SP$ Attach | Cost$ 1 U U | ValidTgts$ Creature.cmcLE2 | TgtPrompt$ Select target creature with converted mana cost 2 or less | AILogic$ GainControl
 K:Enchant creature with converted mana cost 2 or less
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | GainControl$ You | Description$ You control enchanted creature.
-SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/threads_of_disloyalty.jpg
 Oracle:Enchant creature with converted mana cost 2 or less\nYou control enchanted creature.
 SetInfo:BOK Rare

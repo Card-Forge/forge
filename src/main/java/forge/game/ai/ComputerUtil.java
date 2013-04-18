@@ -826,7 +826,7 @@ public class ComputerUtil {
         if ("True".equals(card.getSVar("NonStackingEffect")) && card.getController().isCardInPlay(card.getName())) {
             return false;
         }
-        if (card.getSVar("PlayMain1").equals("TRUE")) {
+        if (card.getSVar("PlayMain1").equals("TRUE") && !card.getController().getCreaturesInPlay().isEmpty()) {
             return true;
         }
         if ((card.isCreature() && (ComputerUtil.hasACardGivingHaste(ai)
@@ -837,7 +837,7 @@ public class ComputerUtil {
         if (card.isEquipment()) {
             boolean playNow = false;
             for (Card c : card.getController().getCardsIn(ZoneType.Battlefield)) {
-                if (c.isEquipment() && ! c.isEquipping()) {
+                if (c.isEquipment() && !c.isEquipping()) {
                     playNow = false;
                     break;
                 }
