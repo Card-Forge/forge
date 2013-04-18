@@ -136,6 +136,15 @@ Alive // Well
 Sire of Insanity
 Zhur-Taa Ancient
 Legion's Initiative
+Notion Thief
+Uncovered Clues
+Warleader's Helix
+Smelt-Ward Gatekeepers
+Corrosion
+Maze Sentinel
+Wake the Reflections
+Deadbridge Chant
+Ruric Thar, the Unbowed
 
 
 ------------
