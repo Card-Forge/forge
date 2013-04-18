@@ -10,5 +10,7 @@ SVar:RememberedCMC:Remembered$CardCounters.RUST
 SVar:X:Remembered$CardManaCost
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigWipeCounters | TriggerDescription$ When CARDNAME leaves the battlefield, remove all rust counters from all permanents.
 SVar:TrigWipeCounters:DB$ RemoveCounterAll | Cost$ 3 B B | ValidCards$ Permanent | AllCounterTypes$ True
+SVar:NeedsToPlayVar:Y GE1
+SVar:Y:Count$Valid Artifact.OppCtrl
 Oracle:Cumulative upkeep {1} (At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.)\nAt the beginning of your upkeep, put a rust counter on each artifact target opponent controls. Then destroy each artifact with converted mana cost less than or equal to the number of rust counters on it. Artifacts destroyed this way can't be regenerated.\nWhen Corrosion leaves the battlefield, remove all rust counters from all permanents.
 SetInfo:VIS Rare
