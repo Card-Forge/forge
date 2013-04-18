@@ -1,0 +1,14 @@
+Name:Seshiro the Anointed Avatar
+ManaCost:no cost
+Types:Vanguard
+HandLifeModifier:+0/-1
+T:Mode$ NewGame | Execute$ TrigChooseCT | TriggerZones$ Command | TriggerDescription$ At the beginning of the game, choose a creature type. Creatures you control, creature spells you control, and creature cards you own in any zone other than the battlefield or the stack have the chosen type in addition to their other types.
+SVar:TrigChooseCT:DB$ ChooseType | Defined$ You | Type$ Creature
+S:Mode$ Continuous | EffectZone$ Command | Affected$ Creature.YouOwn | AffectedZone$ Graveyard | AddType$ ChosenType
+S:Mode$ Continuous | EffectZone$ Command | Affected$ Creature.YouOwn | AffectedZone$ Hand | AddType$ ChosenType
+S:Mode$ Continuous | EffectZone$ Command | Affected$ Creature.YouOwn | AffectedZone$ Library | AddType$ ChosenType
+S:Mode$ Continuous | EffectZone$ Command | Affected$ Creature.YouOwn | AffectedZone$ Exile | AddType$ ChosenType
+S:Mode$ Continuous | EffectZone$ Command | Affected$ Creature.YouOwn | AffectedZone$ Ante | AddType$ ChosenType
+S:Mode$ Continuous | EffectZone$ Command | Affected$ Creature.YouOwn | AffectedZone$ Command | AddType$ ChosenType
+SVar:Picture:http://www.cardforge.org/fpics/vgd-lq/seshiro_the_anointed_avatar.jpg
+Oracle:Hand +0, life -1\nAt the beginning of the game, choose a creature type. Creatures you control, creature spells you control, and creature cards you own in any zone other than the battlefield or the stack have the chosen type in addition to their other types.

@@ -3130,6 +3130,7 @@ res/cardsfolder/e/elvish_bard.txt svneol=native#text/plain
 res/cardsfolder/e/elvish_berserker.txt svneol=native#text/plain
 res/cardsfolder/e/elvish_branchbender.txt svneol=native#text/plain
 res/cardsfolder/e/elvish_champion.txt svneol=native#text/plain
+res/cardsfolder/e/elvish_champion_avatar.txt -text
 res/cardsfolder/e/elvish_eulogist.txt svneol=native#text/plain
 res/cardsfolder/e/elvish_farmer.txt svneol=native#text/plain
 res/cardsfolder/e/elvish_fury.txt svneol=native#text/plain
@@ -9391,6 +9392,7 @@ res/cardsfolder/s/serum_visions.txt svneol=native#text/plain
 res/cardsfolder/s/servant_of_nefarox.txt -text
 res/cardsfolder/s/servant_of_volrath.txt svneol=native#text/plain
 res/cardsfolder/s/seshiro_the_anointed.txt svneol=native#text/plain
+res/cardsfolder/s/seshiro_the_anointed_avatar.txt -text
 res/cardsfolder/s/seton_krosan_protector.txt svneol=native#text/plain
 res/cardsfolder/s/setons_desire.txt svneol=native#text/plain
 res/cardsfolder/s/setons_scout.txt svneol=native#text/plain
