@@ -826,7 +826,7 @@ public class ComputerUtil {
         if ("True".equals(card.getSVar("NonStackingEffect")) && card.getController().isCardInPlay(card.getName())) {
             return false;
         }
-        if (card.getSVar("PlayMain1").equals("TRUE") && !card.getController().getCreaturesInPlay().isEmpty()) {
+        if (card.getSVar("PlayMain1").equals("TRUE") && (!card.getController().getCreaturesInPlay().isEmpty() || sa.getPayCosts().hasNoManaCost())) {
             return true;
         }
         if ((card.isCreature() && (ComputerUtil.hasACardGivingHaste(ai)
