@@ -83,6 +83,8 @@ New Vanguard Avatars
 
 Ink-Eyes, Servant of Oni Avatar
 Maralen of the Mornsong Avatar
+Elvish Champion Avatar
+Seshiro the Anointed Avatar
 
 
 ------------------------------
@@ -144,6 +146,14 @@ Maze Sentinel
 Wake the Reflections
 Deadbridge Chant
 Ruric Thar, the Unbowed
+Maze Abomination
+Maze Behemoth
+Maze Glider
+Maze Rusher
+Emmara Tandris
+Viashino Firstblade
+Mirko Vosk, Mind Drinker
+Nivix Cyclops
 
 
 ------------
