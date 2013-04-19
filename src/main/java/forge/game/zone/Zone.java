@@ -23,6 +23,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import forge.Card;
 import forge.Singletons;
@@ -42,7 +43,7 @@ public class Zone extends MyObservable implements IZone, Observer, java.io.Seria
     private static final long serialVersionUID = -5687652485777639176L;
 
     /** The cards. */
-    protected final transient List<Card> cardList = new ArrayList<Card>();
+    protected final transient List<Card> cardList = new CopyOnWriteArrayList<Card>();
     protected final transient List<Card> roCardList;
     protected final ZoneType zoneName;
     protected boolean update = true;

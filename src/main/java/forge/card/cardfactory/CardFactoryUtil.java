@@ -788,7 +788,7 @@ public class CardFactoryUtil {
      */
     public static List<Card> getActivateablesFromZone(final PlayerZone zone, final Player activator) {
 
-        Iterable<Card> cl = Lists.newArrayList(zone.getCards());
+        Iterable<Card> cl = zone.getCards(); // copy to new AL won't help here
 
         // Only check the top card of the library
         if (zone.is(ZoneType.Library)) {

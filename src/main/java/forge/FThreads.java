@@ -135,6 +135,15 @@ public class FThreads {
     public static void delay(int milliseconds, Runnable inputUpdater) {
         getScheduledPool().schedule(inputUpdater, milliseconds, TimeUnit.MILLISECONDS);
     }
+
+    public static void delayInEDT(int milliseconds, final Runnable inputUpdater) {
+        Runnable runInEdt = new Runnable() {
+            @Override public void run() {
+                FThreads.invokeInEdtNowOrLater(inputUpdater);
+            }
+        };
+        delay(milliseconds, runInEdt);
+    }
     
     public static String debugGetCurrThreadId() {
         return isEDT() ? "EDT" : Long.toString(Thread.currentThread().getId());

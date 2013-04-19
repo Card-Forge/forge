@@ -503,17 +503,11 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
     public void setupPlayZone() {
         boolean wasSet = wantRedraw.getAndSet(true);
         if(wasSet) return;
-        FThreads.invokeInEdtLater(new Runnable() {
+        FThreads.delayInEDT(50, new Runnable() { // postpone play area update per 50ms
             @Override
             public void run() {
-                try { // user won't notice, but the requests coming in that interval won't trigger re-draw
-                    Thread.sleep(20);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                } 
                 wantRedraw.set(false);
-                final List<Card> modelshot = new ArrayList<Card>(model); // I am afraid of ConcurrentModificationExceptions
-                setupPlayZone(modelshot);
+                setupPlayZone(model);
             }
         });
     }
