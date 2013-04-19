@@ -58,9 +58,33 @@ public class ComputerUtilMana {
      */
     public static boolean payManaCost(final SpellAbility sa, final Player ai, final boolean test, final int extraMana, boolean checkPlayable) {
         ManaCostBeingPaid cost = ComputerUtilMana.calculateManaCost(sa, test, extraMana);
+        
+        final Card card = sa.getSourceCard();
+        // Make mana needed to avoid negative effect a mandatory cost for the AI
+        
+        final String[] negEffects = card.getSVar("ManaNeededToAvoidNegativeEffect").split(",");
+        int amountAdded = 0;
+        for (int nStr = 0; nStr < negEffects.length; nStr++) {
+            // convert long color strings to short color strings
+            if (negEffects[nStr].length() > 1) {
+                negEffects[nStr] = MagicColor.toShortString(negEffects[nStr]);
+            }
+            // make mana mandatory for AI
+            if (!cost.isColor(negEffects[nStr]) && cost.getColorlessManaAmount() > amountAdded) {
+                cost.combineManaCost(negEffects[nStr]);
+                amountAdded++;
+            }
+        }
+
+        // TODO: should it be an error condition if amountAdded is greater
+        // than the colorless in the original cost? (ArsenalNut - 120102)
+        // adjust colorless amount to account for added mana
+        cost.decreaseColorlessMana(amountAdded);
+        
+        
         final ManaPool manapool = ai.getManaPool();
     
-        cost = manapool.payManaFromPool(sa, cost);
+        manapool.payManaFromPool(sa, cost);
     
         if (cost.isPaid()) {
             // refund any mana taken from mana pool when test
@@ -91,6 +115,7 @@ public class ComputerUtilMana {
         usedSources.add(sa.getSourceCard());
         // Loop over mana needed
         int nPriority = 0;
+        List<String> negEffectPaid = new ArrayList<String>();
         while (nPriority < partPriority.size()) {
             final int nPart = partPriority.get(nPriority);
             final ManaCostBeingPaid costPart = new ManaCostBeingPaid(costParts[nPart]);
@@ -140,17 +165,15 @@ public class ComputerUtilMana {
                     // check if ability produces any color
                     else if (m.isAnyMana()) {
                         String colorChoice = costParts[nPart];
-                        final ArrayList<String> negEffect = cost.getManaNeededToAvoidNegativeEffect();
-                        final ArrayList<String> negEffectPaid = cost.getManaPaidToAvoidNegativeEffect();
                         // Check for
                         // 1) Colorless
                         // 2) Split e.g. 2/G
                         // 3) Hybrid e.g. UG
                         if (costParts[nPart].matches("[0-9]+")) {
                             colorChoice = "W";
-                            for (int n = 0; n < negEffect.size(); n++) {
-                                if (!negEffectPaid.contains(negEffect.get(n))) {
-                                    colorChoice = negEffect.get(n);
+                            for (int n = 0; n < negEffects.length; n++) {
+                                if (!negEffectPaid.contains(negEffects[n])) {
+                                    colorChoice = negEffects[n];
                                     break;
                                 }
                             }
@@ -158,10 +181,9 @@ public class ComputerUtilMana {
                             colorChoice = costParts[nPart].replace("2/", "");
                         } else if (costParts[nPart].length() > 1) {
                             colorChoice = costParts[nPart].substring(0, 1);
-                            for (int n = 0; n < negEffect.size(); n++) {
-                                if (costParts[nPart].contains(negEffect.get(n))
-                                        && !negEffectPaid.contains(negEffect.get(n))) {
-                                    colorChoice = negEffect.get(n);
+                            for (int n = 0; n < negEffects.length; n++) {
+                                if (costParts[nPart].contains(negEffects[n]) && !negEffectPaid.contains(negEffects[n])) {
+                                    colorChoice = negEffects[n];
                                     break;
                                 }
                             }
@@ -177,7 +199,7 @@ public class ComputerUtilMana {
     
                 // add source card to used list
                 usedSources.add(sourceCard);
-    
+                negEffectPaid.add(manaProduced);
                 costPart.payMultipleMana(manaProduced);
     
                 if (!test) {
@@ -445,27 +467,6 @@ public class ComputerUtilMana {
             }
         }
     
-        // Make mana needed to avoid negative effect a mandatory cost for the AI
-        if (!card.getSVar("ManaNeededToAvoidNegativeEffect").equals("")) {
-            final String[] negEffects = card.getSVar("ManaNeededToAvoidNegativeEffect").split(",");
-            int amountAdded = 0;
-            for (int nStr = 0; nStr < negEffects.length; nStr++) {
-                // convert long color strings to short color strings
-                if (negEffects[nStr].length() > 1) {
-                    negEffects[nStr] = MagicColor.toShortString(negEffects[nStr]);
-                }
-                // make mana mandatory for AI
-                if (!cost.isColor(negEffects[nStr])) {
-                    cost.combineManaCost(negEffects[nStr]);
-                    amountAdded++;
-                }
-            }
-            cost.setManaNeededToAvoidNegativeEffect(negEffects);
-            // TODO: should it be an error condition if amountAdded is greater
-            // than the colorless in the original cost? (ArsenalNut - 120102)
-            // adjust colorless amount to account for added mana
-            cost.decreaseColorlessMana(amountAdded);
-        }
         return cost;
     }
 

@@ -422,11 +422,11 @@ public class ManaPool {
      *            a {@link forge.card.mana.ManaCostBeingPaid} object.
      * @return a {@link forge.card.mana.ManaCostBeingPaid} object.
      */
-    public final ManaCostBeingPaid payManaFromPool(final SpellAbility saBeingPaidFor, ManaCostBeingPaid manaCost) {
+    public final void payManaFromPool(final SpellAbility saBeingPaidFor, ManaCostBeingPaid manaCost) {
 
         // paying from Mana Pool
         if (manaCost.isPaid() || this.isEmpty()) {
-            return manaCost;
+            return;
         }
 
         final ArrayList<Mana> manaPaid = saBeingPaidFor.getPayingMana();
@@ -447,8 +447,6 @@ public class ManaPool {
                 }
             }
         }
-
-        return manaCost;
     }
 
     /**
