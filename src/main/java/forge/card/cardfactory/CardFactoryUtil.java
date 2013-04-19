@@ -1402,7 +1402,7 @@ public class CardFactoryUtil {
             final String[] restrictions = l[0].split("_");
             final String[] rest = restrictions[1].split(",");
             List<Card> filteredCards = CardLists.getValidCards(cc.getGame().getCardsIn(ZoneType.Battlefield), rest, cc, c);
-            return doXMath(Aggregates.sum(filteredCards, CardPredicates.Accessors.fnGetCmc), m, c);
+            return doXMath(Aggregates.sum(filteredCards, CardPredicates.Accessors.fnGetNetAttack), m, c);
         }
         // Count$CardManaCost
         if (sq[0].contains("CardManaCost")) {
