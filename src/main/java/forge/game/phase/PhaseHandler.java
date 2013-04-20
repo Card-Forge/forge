@@ -20,6 +20,7 @@ package forge.game.phase;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Stack;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import com.esotericsoftware.minlog.Log;
 
@@ -71,7 +72,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
     private Player pPlayerPriority = null;
     private Player pFirstPriority = null;
     private boolean bPhaseEffects = true;
-    private boolean bCombat = false;
+    private AtomicBoolean bCombat = new AtomicBoolean(false);
     private boolean bRepeat = false;
 
     /** The need to next phase. */
@@ -203,7 +204,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
      * @return a boolean.
      */
     public final boolean inCombat() {
-        return this.bCombat;
+        return this.bCombat.get();
     }
 
     /**
@@ -214,8 +215,8 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
      * @param b
      *            a boolean.
      */
-    public final void setCombat(final boolean b) {
-        this.bCombat = b;
+    public final void setCombat() {
+        this.bCombat.set(true);
     }
 
     /**
@@ -293,7 +294,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
             case COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY:
                 if (this.inCombat()) {
                     PhaseUtil.handleDeclareAttackers(game);
-                    CombatUtil.showCombat();
+                    CombatUtil.showCombat(game);
                 } else {
                     this.setPlayersPriorityPermission(false);
                 }
@@ -302,7 +303,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
             case COMBAT_DECLARE_BLOCKERS:
                 if (this.inCombat()) {
                     game.getCombat().verifyCreaturesInPlay();
-                    CombatUtil.showCombat();
+                    CombatUtil.showCombat(game);
                 } else {
                     this.setPlayersPriorityPermission(false);
                 }
@@ -313,7 +314,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
                 // blocked and trigger blocking things
                 if (this.inCombat()) {
                     PhaseUtil.handleDeclareBlockers(game);
-                    CombatUtil.showCombat();
+                    CombatUtil.showCombat(game);
                 } else {
                     this.setPlayersPriorityPermission(false);
                 }
@@ -331,7 +332,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
                     } else {
                         game.getCombat().dealAssignedDamage();
                         game.getAction().checkStateEffects();
-                        CombatUtil.showCombat();
+                        CombatUtil.showCombat(game);
                     }
                 }
                 break;
@@ -347,7 +348,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
                     } else {
                         game.getCombat().dealAssignedDamage();
                         game.getAction().checkStateEffects();
-                        CombatUtil.showCombat();
+                        CombatUtil.showCombat(game);
                     }
                 }
                 break;
@@ -356,12 +357,12 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
                 // End Combat always happens
                 game.getEndOfCombat().executeUntil();
                 game.getEndOfCombat().executeAt();
-                CombatUtil.showCombat();
+                CombatUtil.showCombat(game);
                 //SDisplayUtil.showTab(EDocID.REPORT_STACK.getDoc());
                 break;
 
             case MAIN2:
-                CombatUtil.showCombat();
+                CombatUtil.showCombat(game);
                 //SDisplayUtil.showTab(EDocID.REPORT_STACK.getDoc());
                 break;
 
@@ -462,7 +463,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
                 //SDisplayUtil.showTab(EDocID.REPORT_STACK.getDoc());
                 game.getCombat().reset();
                 this.getPlayerTurn().resetAttackedThisCombat();
-                this.bCombat = false;
+                this.bCombat.set(false);
 
                 break;
 

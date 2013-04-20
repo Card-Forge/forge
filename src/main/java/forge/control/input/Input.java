@@ -12,7 +12,7 @@ public interface Input {
     // showMessage() is always the first method called
     void showMessage();
 
-    void selectCard(Card c);
+    void selectCard(Card c, boolean isMetaDown);
 
     void selectPlayer(Player player);
 

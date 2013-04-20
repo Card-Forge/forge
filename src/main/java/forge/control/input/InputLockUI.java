@@ -58,7 +58,7 @@ public class InputLockUI implements Input  {
         CMatchUI.SINGLETON_INSTANCE.showMessage(message);
     }
 
-    @Override public void selectCard(Card c) {}
+    @Override public void selectCard(Card c, boolean isMetaDown) {}
     @Override public void selectPlayer(Player player) {}
     @Override public void selectButtonOK() {}
     @Override public void selectButtonCancel() {}

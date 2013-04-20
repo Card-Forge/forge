@@ -138,7 +138,7 @@ public class InputProxy implements Observer {
     public final void selectCard(final Card card) {
         Input inp = getInput();
         if ( null != inp )
-            inp.selectCard(card);
+            inp.selectCard(card, false);
     }
 
     /** {@inheritDoc} */

@@ -4,9 +4,6 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseMotionAdapter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -80,10 +77,7 @@ public enum FNetOverlay {
 //        pnl.add(new FLabel.Builder().text("Loading new game...").fontSize(22).build(), "h 40px!, align center");
 
         // Block all input events below the overlay
-        pnl.addMouseListener(new MouseAdapter() { });
-        pnl.addMouseMotionListener(new MouseMotionAdapter() { });
-        pnl.addKeyListener(new KeyAdapter() { });
-        
+
         txtLog.setOpaque(true);
         txtLog.setFocusable(true);
         txtLog.setBackground(FSkin.getColor(FSkin.Colors.CLR_ZEBRA));

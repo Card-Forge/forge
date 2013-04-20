@@ -181,7 +181,7 @@ public class InputPartialParisMulligan extends InputBase {
     }
 
     @Override
-    public void selectCard(Card c0) {
+    public void selectCard(Card c0, boolean isMetaDown) {
         if(lastExiled.contains(c0))
         {
             lastExiled.remove(c0);

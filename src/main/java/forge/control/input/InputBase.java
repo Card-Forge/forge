@@ -44,7 +44,7 @@ public abstract class InputBase implements java.io.Serializable, Input {
     public abstract void showMessage();
 
     @Override
-    public void selectCard(final Card c) {   }
+    public void selectCard(final Card c, boolean isMetaDown) {   }
     @Override
     public void selectPlayer(final Player player) {    }
     @Override

@@ -80,7 +80,7 @@ public class InputAttack extends InputBase {
     @Override
     public final void selectButtonOK() {
         if (!game.getCombat().getAttackers().isEmpty()) {
-            game.getPhaseHandler().setCombat(true);
+            game.getPhaseHandler().setCombat();
         }
 
         if (game.getCombat().getRemainingDefenders() != 0) {
@@ -93,7 +93,15 @@ public class InputAttack extends InputBase {
 
     /** {@inheritDoc} */
     @Override
-    public final void selectCard(final Card card) {
+    public final void selectCard(final Card card, boolean isMetaDown) {
+        final List<Card> att = game.getCombat().getAttackers();
+        if (isMetaDown && att.contains(card) && !card.hasKeyword("CARDNAME attacks each turn if able.")) {
+            card.untap();
+            game.getCombat().removeFromCombat(card);
+            CombatUtil.showCombat(game);
+            return;
+        }
+
         if (card.isAttacking() || card.getController() != Singletons.getControl().getPlayer()) {
             return;
         }
@@ -112,7 +120,7 @@ public class InputAttack extends InputBase {
 
             // just to make sure the attack symbol is marked
             human.getZone(ZoneType.Battlefield).updateObservers();
-            CombatUtil.showCombat();
+            CombatUtil.showCombat(game);
             ButtonUtil.enableOnlyOk();
         }
         else {

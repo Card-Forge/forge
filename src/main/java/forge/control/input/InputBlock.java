@@ -47,24 +47,18 @@ public class InputBlock extends InputBase {
 
     private Card currentAttacker = null;
     private final HashMap<Card, List<Card>> allBlocking = new HashMap<Card, List<Card>>();
-
+    private final GameState game; 
+    
     /**
      * TODO: Write javadoc for Constructor.
      * @param priority
      */
-    public InputBlock(Player human) {
+    public InputBlock(Player human, GameState game) {
         super(human);
+        this.game = game;
     }
 
-    /**
-     * <p>
-     * removeFromAllBlocking.
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.Card} object.
-     */
-    public final void removeFromAllBlocking(final Card c) {
+    private  final void removeFromAllBlocking(final Card c) {
         this.allBlocking.remove(c);
     }
 
@@ -89,17 +83,16 @@ public class InputBlock extends InputBase {
             CMatchUI.SINGLETON_INSTANCE.showMessage(sb.toString());
         }
 
-        CombatUtil.showCombat();
+        CombatUtil.showCombat(game);
     }
 
     /** {@inheritDoc} */
     @Override
     public final void selectButtonOK() {
-        final GameState game = Singletons.getModel().getGame();
         if (CombatUtil.finishedMandatoryBlocks(game.getCombat(), player)) {
             // Done blocking
             ButtonUtil.reset();
-            CombatUtil.orderMultipleCombatants(game.getCombat());
+            CombatUtil.orderMultipleCombatants(game);
             currentAttacker = null;
             allBlocking.clear();
 
@@ -109,11 +102,22 @@ public class InputBlock extends InputBase {
 
     /** {@inheritDoc} */
     @Override
-    public final void selectCard(final Card card) {
+    public final void selectCard(final Card card, boolean isMetaDown) {
+
+
+        if (isMetaDown) {
+            if (card.getController() == Singletons.getControl().getPlayer() ) {
+                game.getCombat().removeFromCombat(card);
+            }
+            removeFromAllBlocking(card);
+            CombatUtil.showCombat(game);
+            return;
+        }
+        
         // is attacking?
         boolean reminder = true;
 
-        if (Singletons.getModel().getGame().getCombat().getAttackers().contains(card)) {
+        if (game.getCombat().getAttackers().contains(card)) {
             this.currentAttacker = card;
             reminder = false;
         } else {

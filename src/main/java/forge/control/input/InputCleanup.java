@@ -73,7 +73,7 @@ public class InputCleanup extends InputBase {
 
     /** {@inheritDoc} */
     @Override
-    public final void selectCard(final Card card) {
+    public final void selectCard(final Card card, boolean isMetaDown) {
         Zone zone = game.getZoneOf(card);
         if (!zone.is(ZoneType.Hand, Singletons.getControl().getPlayer())) 
             return;

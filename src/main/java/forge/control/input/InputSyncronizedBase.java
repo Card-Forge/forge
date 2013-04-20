@@ -48,7 +48,7 @@ public abstract class InputSyncronizedBase extends InputBase implements InputSyn
     }
 
     @Override
-    public final void selectCard(Card c) {
+    public final void selectCard(Card c, boolean isMetaDown) {
         if( finished ) return;
         onCardSelected(c);
     }

@@ -18,7 +18,6 @@
 package forge.gui.match.views;
 
 import javax.swing.JTextArea;
-import javax.swing.border.Border;
 import javax.swing.border.MatteBorder;
 
 import net.miginfocom.swing.MigLayout;
@@ -42,7 +41,17 @@ public enum VCombat implements IVDoc<CCombat> {
     // Fields used with interface IVDoc
     private DragCell parentCell;
     private final DragTab tab = new DragTab("Combat");
+    
+    final JTextArea tar = new JTextArea();
 
+    private VCombat() {
+        tar.setOpaque(false);
+        tar.setBorder(new MatteBorder(0, 0, 0, 0, FSkin.getColor(FSkin.Colors.CLR_BORDERS)));
+        tar.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+        tar.setFocusable(false);
+        tar.setLineWrap(true);
+    }
+    
     //========== Overridden methods
 
     /* (non-Javadoc)
@@ -50,7 +59,9 @@ public enum VCombat implements IVDoc<CCombat> {
      */
     @Override
     public void populate() {
-        // (Panel uses observers to update, no permanent components here.)
+        parentCell.getBody().removeAll();
+        parentCell.getBody().setLayout(new MigLayout("insets 0, gap 0, wrap"));
+        parentCell.getBody().add(tar, "w 95%!, gapleft 3%, gaptop 1%, h 95%");
     }
 
     /* (non-Javadoc)
@@ -98,21 +109,9 @@ public enum VCombat implements IVDoc<CCombat> {
     /** @param s0 &emsp; {@link java.lang.String} */
     public void updateCombat(final String s0) {
         // No need to update this unless it's showing
-        if (!parentCell.getSelected().equals(this)) { return; }
-
-        parentCell.getBody().removeAll();
-        parentCell.getBody().setLayout(new MigLayout("insets 0, gap 0, wrap"));
-
-        final Border border = new MatteBorder(0, 0, 0, 0, FSkin.getColor(FSkin.Colors.CLR_BORDERS));
+        if (!this.equals(parentCell.getSelected())) { return; }
 
         tab.setText("Combat : " + Singletons.getModel().getGame().getCombat().getAttackers().size());
-
-        final JTextArea tar = new JTextArea(s0);
-        tar.setOpaque(false);
-        tar.setBorder(border);
-        tar.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
-        tar.setFocusable(false);
-        tar.setLineWrap(true);
-        parentCell.getBody().add(tar, "w 95%!, gapleft 3%, gaptop 1%, h 95%");
+        tar.setText(s0);
     }
 }

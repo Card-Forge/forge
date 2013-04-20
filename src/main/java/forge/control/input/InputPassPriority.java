@@ -80,7 +80,7 @@ public class InputPassPriority extends InputBase {
 
     /** {@inheritDoc} */
     @Override
-    public final void selectCard(final Card card) {
+    public final void selectCard(final Card card, boolean isMetaDown) {
         final SpellAbility ab = player.getController().getAbilityToPlay(player.getGame().getAbilitesOfCard(card, player));
         if ( null != ab) {
             Runnable execAbility = new Runnable() {

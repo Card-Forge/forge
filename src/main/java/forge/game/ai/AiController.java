@@ -828,7 +828,7 @@ public class AiController {
 
         final List<Card> att = game.getCombat().getAttackers();
         if (!att.isEmpty()) {
-            game.getPhaseHandler().setCombat(true);
+            game.getPhaseHandler().setCombat();
         }
 
         for (final Card element : att) {

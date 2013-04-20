@@ -425,16 +425,20 @@ public class CombatUtil {
         return true;
     }
 
-    public static void orderMultipleCombatants(final Combat combat) {
+    public static void orderMultipleCombatants(final GameState game) {
+        final Combat combat = game.getCombat();
+
         CombatUtil.orderMultipleBlockers(combat);
+        CombatUtil.showCombat(game);
+
         CombatUtil.orderBlockingMultipleAttackers(combat);
+        CombatUtil.showCombat(game);
     }
 
     private static void orderMultipleBlockers(final Combat combat) {
         // If there are multiple blockers, the Attacker declares the Assignment Order
         final Player player = combat.getAttackingPlayer();
-        final List<Card> attackers = combat.getAttackers();
-        for (final Card attacker : attackers) {
+        for (final Card attacker : combat.getAttackers()) {
             List<Card> blockers = combat.getBlockers(attacker);
             if (blockers.size() <= 1) {
                 continue;
@@ -442,7 +446,7 @@ public class CombatUtil {
             List<Card> orderedBlockers = player.getController().orderBlockers(attacker, blockers);
             combat.setBlockerList(attacker, orderedBlockers);
         }
-        CombatUtil.showCombat();
+
         // Refresh Combat Panel
     }
 
@@ -457,7 +461,6 @@ public class CombatUtil {
             List<Card> orderedAttacker = blocker.getController().getController().orderAttackers(blocker, attackers);
             combat.setAttackersBlockedByList(blocker,  orderedAttacker);
         }
-        CombatUtil.showCombat();
         // Refresh Combat Panel
     }
 
@@ -1081,11 +1084,11 @@ public class CombatUtil {
      * showCombat.
      * </p>
      */
-    public static void showCombat() {
+    public static void showCombat(GameState game) {
         // TODO(sol) ShowCombat seems to be resetting itself when switching away and switching back?
         String text = "";
-        if (Singletons.getModel().getGame().getPhaseHandler().inCombat()) {
-            text = getCombatDescription(Singletons.getModel().getGame().getCombat());
+        if (game.getPhaseHandler().inCombat()) {
+            text = getCombatDescription(game.getCombat());
             SDisplayUtil.showTab(EDocID.REPORT_COMBAT.getDoc());
         }
         VCombat.SINGLETON_INSTANCE.updateCombat(text);

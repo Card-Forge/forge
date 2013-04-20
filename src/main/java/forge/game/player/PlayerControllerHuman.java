@@ -60,7 +60,7 @@ public class PlayerControllerHuman extends PlayerController {
         player = p;
         
         defaultInput = new InputPassPriority(player);
-        blockInput = new InputBlock(getPlayer());
+        blockInput = new InputBlock(getPlayer(), game0);
         cleanupInput = new InputCleanup(getPlayer());
         autoPassPriorityInput = new InputAutoPassPriority(getPlayer());
     }

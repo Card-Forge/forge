@@ -129,7 +129,7 @@ public class InputMulligan extends InputBase {
     }
 
     @Override
-    public void selectCard(Card c0) {
+    public void selectCard(Card c0, boolean isMetaDown) {
         Zone z0 = match.getCurrentGame().getZoneOf(c0);
         if (c0.getName().equals("Serum Powder") && z0.is(ZoneType.Hand)) {
             if (GuiDialog.confirm(c0, "Use " + c0.getName() + "'s ability?")) {

@@ -32,7 +32,7 @@ public class AiInputBlock extends InputBase {
         // TODO Auto-generated method stub
         final List<Card> blockers = player.getCreaturesInPlay();
         game.setCombat(ComputerUtilBlock.getBlockers(player, game.getCombat(), blockers));
-        CombatUtil.orderMultipleCombatants(game.getCombat());
+        CombatUtil.orderMultipleCombatants(game);
         game.getPhaseHandler().setPlayersPriorityPermission(false);
         
         // was not added to stack, so will be replaced by plain update
