@@ -23,6 +23,10 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -32,7 +36,11 @@ import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 import javax.swing.border.MatteBorder;
 
+import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.apache.commons.lang3.tuple.Pair;
+
 import net.miginfocom.swing.MigLayout;
+import forge.Constant;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.mana.ManaPool;
 import forge.game.phase.PhaseType;
@@ -84,12 +92,7 @@ public class VField implements IVDoc<CField> {
     private FLabel lblExile = getBuiltFLabel(FSkin.ZoneImages.ICO_EXILE, "99", "Exiled cards");
     private FLabel lblFlashback = getBuiltFLabel(FSkin.ZoneImages.ICO_FLASHBACK, "99", "Flashback cards");
     private FLabel lblPoison = getBuiltFLabel(FSkin.ZoneImages.ICO_POISON, "99", "Poison counters");
-    private FLabel lblBlack = getBuiltFLabel(FSkin.ManaImages.IMG_BLACK, "99", "Black mana");
-    private FLabel lblBlue = getBuiltFLabel(FSkin.ManaImages.IMG_BLUE, "99", "Blue mana");
-    private FLabel lblGreen = getBuiltFLabel(FSkin.ManaImages.IMG_GREEN, "99", "Green mana");
-    private FLabel lblRed = getBuiltFLabel(FSkin.ManaImages.IMG_RED, "99", "Red mana");
-    private FLabel lblWhite = getBuiltFLabel(FSkin.ManaImages.IMG_WHITE, "99", "White mana");
-    private FLabel lblColorless = getBuiltFLabel(FSkin.ManaImages.IMG_COLORLESS, "99", "Colorless mana");
+    private final List<Pair<FLabel, String>> manaLabels = new ArrayList<Pair<FLabel,String>>();
 
     // Phase labels
     private PhaseLabel lblUpkeep = new PhaseLabel("UP");
@@ -119,6 +122,13 @@ public class VField implements IVDoc<CField> {
         this.player = playerOnwer;
         if (playerOnwer != null) { tab.setText(playerOnwer.getName() + " Field"); }
         else { tab.setText("NO PLAYER FOR " + docID.toString()); }
+
+        manaLabels.add(ImmutablePair.of(getBuiltFLabel(FSkin.ManaImages.IMG_BLACK, "99", "Black mana"), Constant.Color.BLACK));
+        manaLabels.add(ImmutablePair.of(getBuiltFLabel(FSkin.ManaImages.IMG_BLUE, "99", "Blue mana"), Constant.Color.BLUE));
+        manaLabels.add(ImmutablePair.of(getBuiltFLabel(FSkin.ManaImages.IMG_GREEN, "99", "Green mana"), Constant.Color.GREEN));
+        manaLabels.add(ImmutablePair.of(getBuiltFLabel(FSkin.ManaImages.IMG_RED, "99", "Red mana"), Constant.Color.RED));
+        manaLabels.add(ImmutablePair.of(getBuiltFLabel(FSkin.ManaImages.IMG_WHITE, "99", "White mana"), Constant.Color.WHITE));
+        manaLabels.add(ImmutablePair.of(getBuiltFLabel(FSkin.ManaImages.IMG_COLORLESS, "99", "Colorless mana"), Constant.Color.COLORLESS));
 
         // TODO player is hard-coded into tabletop...should be dynamic
         // (haven't looked into it too deeply). Doublestrike 12-04-12
@@ -293,14 +303,14 @@ public class VField implements IVDoc<CField> {
         row3.add(lblFlashback, constraintsCell);
         row3.add(lblPoison, constraintsCell);
 
-        row4.add(lblBlack, constraintsCell);
-        row4.add(lblBlue, constraintsCell);
+        row4.add(manaLabels.get(0).getLeft(), constraintsCell);
+        row4.add(manaLabels.get(1).getLeft(), constraintsCell);
 
-        row5.add(lblGreen, constraintsCell);
-        row5.add(lblRed, constraintsCell);
+        row5.add(manaLabels.get(2).getLeft(), constraintsCell);
+        row5.add(manaLabels.get(3).getLeft(), constraintsCell);
 
-        row6.add(lblWhite, constraintsCell);
-        row6.add(lblColorless, constraintsCell);
+        row6.add(manaLabels.get(4).getLeft(), constraintsCell);
+        row6.add(manaLabels.get(5).getLeft(), constraintsCell);
 
         final String constraintsRow = "w 100%!, h 16%!";
         pnlDetails.add(row1, constraintsRow + ", gap 0 0 4% 0");
@@ -374,12 +384,8 @@ public class VField implements IVDoc<CField> {
      */
     public void updateManaPool(final Player p0) {
         ManaPool m = p0.getManaPool();
-        this.lblBlack.setText("" + m.getAmountOfColor(forge.Constant.Color.BLACK));
-        this.lblBlue.setText("" + m.getAmountOfColor(forge.Constant.Color.BLUE));
-        this.lblGreen.setText("" + m.getAmountOfColor(forge.Constant.Color.GREEN));
-        this.lblRed.setText("" + m.getAmountOfColor(forge.Constant.Color.RED));
-        this.lblWhite.setText("" + m.getAmountOfColor(forge.Constant.Color.WHITE));
-        this.lblColorless.setText("" + m.getAmountOfColor(forge.Constant.Color.COLORLESS));
+        for(Pair<FLabel, String> label : manaLabels)
+            label.getKey().setText(Integer.toString(m.getAmountOfColor(label.getRight())));
     }
 
     //========= Retrieval methods
@@ -428,6 +434,10 @@ public class VField implements IVDoc<CField> {
     public FLabel getLblLibrary() {
         return this.lblLibrary;
     }
+    
+    public final Iterable<Pair<FLabel, String>> getManaLabels() {
+        return manaLabels;
+    }
 
     /** @return  {@link javax.swing.JLabel} */
     public JLabel getLblGraveyard() {
@@ -447,36 +457,6 @@ public class VField implements IVDoc<CField> {
     /** @return {@link javax.swing.JLabel} */
     public JLabel getLblPoison() {
         return this.lblPoison;
-    }
-
-    /** @return {@link javax.swing.JLabel} */
-    public JLabel getLblColorless() {
-        return this.lblColorless;
-    }
-
-    /** @return {@link javax.swing.JLabel} */
-    public JLabel getLblBlack() {
-        return this.lblBlack;
-    }
-
-    /** @return {@link javax.swing.JLabel} */
-    public JLabel getLblBlue() {
-        return this.lblBlue;
-    }
-
-    /** @return {@link javax.swing.JLabel} */
-    public JLabel getLblGreen() {
-        return this.lblGreen;
-    }
-
-    /** @return {@link javax.swing.JLabel} */
-    public JLabel getLblRed() {
-        return this.lblRed;
-    }
-
-    /** @return {@link javax.swing.JLabel} */
-    public JLabel getLblWhite() {
-        return this.lblWhite;
     }
 
     // Phases

@@ -18,37 +18,36 @@
 package forge.gui.match.nonsingleton;
 
 import java.awt.Event;
-import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionAdapter;
 import java.awt.event.MouseMotionListener;
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
 
+import org.apache.commons.lang3.tuple.Pair;
+
 import forge.Card;
-import forge.CardCharacteristicName;
 import forge.Command;
 import forge.Constant;
 import forge.FThreads;
 import forge.Constant.Preferences;
 import forge.Singletons;
-import forge.card.cardfactory.CardFactory;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
+import forge.control.FControl;
+import forge.control.Lobby;
 import forge.control.input.Input;
 import forge.control.input.InputPayManaBase;
 import forge.game.GameState;
 import forge.game.player.HumanPlayer;
 import forge.game.player.Player;
-import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
-import forge.gui.ForgeAction;
 import forge.gui.ForgeAction.MatchConstants;
-import forge.gui.GuiChoose;
 import forge.gui.framework.ICDoc;
 import forge.gui.match.CMatchUI;
 import forge.gui.match.controllers.CMessage;
@@ -71,55 +70,27 @@ public class CField implements ICDoc {
 
     private final MouseListener madHand = new MouseAdapter() { @Override
         public void mousePressed(final MouseEvent e) {
-            handAction(); } };
+            handClicked(); } };
 
     private final MouseListener madAvatar = new MouseAdapter() { @Override
         public void mousePressed(final MouseEvent e) {
-            avatarAction(); } };
+            CMessage.SINGLETON_INSTANCE.getInputControl().selectPlayer(player); } };
 
     private final MouseListener madExiled = new MouseAdapter() { @Override
-        public void mousePressed(final MouseEvent e) {
-            exiledAction(); } };
+        public void mousePressed(final MouseEvent e) { exileAction.actionPerformed(null); } };
 
     private final MouseListener madLibrary = new MouseAdapter() { @Override
-        public void mousePressed(final MouseEvent e) {
-            libraryAction(); } };
+        public void mousePressed(final MouseEvent e) { if (Preferences.DEV_MODE) libraryAction.actionPerformed(null); } };
 
     private final MouseListener madGraveyard = new MouseAdapter() { @Override
-        public void mousePressed(final MouseEvent e) {
-            graveyardAction(); } };
+        public void mousePressed(final MouseEvent e) { graveAction.actionPerformed(null); } };
 
     private final MouseListener madFlashback = new MouseAdapter() { @Override
-        public void mousePressed(final MouseEvent e) {
-            flashbackAction(); } };
+        public void mousePressed(final MouseEvent e) { flashBackAction.actionPerformed(null); } };
 
     private final MouseListener madCardClick = new MouseAdapter() { @Override
-        public void mousePressed(final MouseEvent e) {
-            cardclickAction(e); } };
+        public void mousePressed(final MouseEvent e) { cardclickAction(e); } };
 
-    private final MouseListener madBlack = new MouseAdapter() { @Override
-        public void mousePressed(final MouseEvent e) {
-            manaAction(Constant.Color.BLACK); } };
-
-    private final MouseListener madBlue = new MouseAdapter() { @Override
-        public void mousePressed(final MouseEvent e) {
-            manaAction(Constant.Color.BLUE); } };
-
-    private final MouseListener madGreen = new MouseAdapter() { @Override
-        public void mousePressed(final MouseEvent e) {
-            manaAction(Constant.Color.GREEN); } };
-
-    private final MouseListener madRed = new MouseAdapter() { @Override
-        public void mousePressed(final MouseEvent e) {
-            manaAction(Constant.Color.RED); } };
-
-    private final MouseListener madWhite = new MouseAdapter() { @Override
-        public void mousePressed(final MouseEvent e) {
-            manaAction(Constant.Color.WHITE); } };
-
-    private final MouseListener madColorless = new MouseAdapter() { @Override
-        public void mousePressed(final MouseEvent e) {
-            manaAction(Constant.Color.COLORLESS); } };
 
     // Hand, Graveyard, Library, Flashback, Exile zones, attached to hand.
     private final Observer observerZones = new Observer() {
@@ -148,6 +119,12 @@ public class CField implements ICDoc {
         }
     };
 
+    private final ZoneAction handAction;
+    private final ZoneAction libraryAction;
+    private final ZoneAction exileAction;
+    private final ZoneAction graveAction;
+    private final ZoneAction flashBackAction;
+
     /**
      * Controls Swing components of a player's field instance.
      * 
@@ -155,185 +132,17 @@ public class CField implements ICDoc {
      * @param v0 &emsp; {@link forge.gui.match.nonsingleton.VField}
      * @param playerViewer 
      */
+    @SuppressWarnings("serial")
     public CField(final Player p0, final VField v0, HumanPlayer playerViewer) {
         this.player = p0;
         this.playerViewer = playerViewer;
         this.view = v0;
-    }
 
-    @Override
-    public void initialize() {
-        if (initializedAlready) { return; }
-        initializedAlready = true;
-
-        // Observers
-        CField.this.player.getZone(ZoneType.Hand).addObserver(observerZones);
-        CField.this.player.getZone(ZoneType.Battlefield).addObserver(observerPlay);
-        CField.this.player.addObserver(observerDetails);
-
-        // Listeners
-        // Battlefield card clicks
-        this.view.getTabletop().addMouseListener(madCardClick);
-
-        // Battlefield card mouseover
-        this.view.getTabletop().addMouseMotionListener(mmlCardOver);
-
-        // Player select
-        this.view.getAvatarArea().addMouseListener(madAvatar);
-
-        // Detail label listeners
-        ((FLabel) this.view.getLblGraveyard()).setHoverable(true);
-        this.view.getLblGraveyard().addMouseListener(madGraveyard);
-
-        ((FLabel) this.view.getLblExile()).setHoverable(true);
-        this.view.getLblExile().addMouseListener(madExiled);
-
-        if (Preferences.DEV_MODE) {
-            ((FLabel) this.view.getLblLibrary()).setHoverable(true);
-        }
-        this.view.getLblLibrary().addMouseListener(madLibrary);
-
-        ((FLabel) this.view.getLblHand()).setHoverable(true);
-        this.view.getLblHand().addMouseListener(madHand);
-
-        ((FLabel) this.view.getLblFlashback()).setHoverable(true);
-        this.view.getLblFlashback().addMouseListener(madFlashback);
-
-        ((FLabel) this.view.getLblBlack()).setHoverable(true);
-        this.view.getLblBlack().addMouseListener(madBlack);
-
-        ((FLabel) this.view.getLblBlue()).setHoverable(true);
-        this.view.getLblBlue().addMouseListener(madBlue);
-
-        ((FLabel) this.view.getLblGreen()).setHoverable(true);
-        this.view.getLblGreen().addMouseListener(madGreen);
-
-        ((FLabel) this.view.getLblRed()).setHoverable(true);
-        this.view.getLblRed().addMouseListener(madRed);
-
-        ((FLabel) this.view.getLblWhite()).setHoverable(true);
-        this.view.getLblWhite().addMouseListener(madWhite);
-
-        ((FLabel) this.view.getLblColorless()).setHoverable(true);
-        this.view.getLblColorless().addMouseListener(madColorless);
-    }
-
-    @Override
-    public void update() {
-    }
-
-    /** @return {@link forge.game.player.Player} */
-    public Player getPlayer() {
-        return this.player;
-    }
-
-    /** @return {@link forge.gui.nonsingleton.VField} */
-    public VField getView() {
-        return this.view;
-    }
-
-    /**
-     * Resets all phase buttons to "inactive", so highlight won't be drawn on
-     * them. "Enabled" state remains the same.
-     */
-    public void resetPhaseButtons() {
-        this.view.getLblUpkeep().setActive(false);
-        this.view.getLblDraw().setActive(false);
-        this.view.getLblMain1().setActive(false);
-        this.view.getLblBeginCombat().setActive(false);
-        this.view.getLblDeclareAttackers().setActive(false);
-        this.view.getLblDeclareBlockers().setActive(false);
-        this.view.getLblFirstStrike().setActive(false);
-        this.view.getLblCombatDamage().setActive(false);
-        this.view.getLblEndCombat().setActive(false);
-        this.view.getLblMain2().setActive(false);
-        this.view.getLblEndTurn().setActive(false);
-        this.view.getLblCleanup().setActive(false);
-    }
-
-    /**
-     * Receives click and programmatic requests for viewing data stacks in the
-     * "zones" of a player field: hand, library, etc.
-     * 
-     */
-    private class ZoneAction extends ForgeAction {
-        private static final long serialVersionUID = -5822976087772388839L;
-        private final PlayerZone zone;
-        private final String title;
-
-        /**
-         * Receives click and programmatic requests for viewing data stacks in
-         * the "zones" of a player field: hand, graveyard, etc. The library
-         * "zone" is an exception to the rule; it's handled in DeckListAction.
-         * 
-         * @param zone
-         *            &emsp; PlayerZone obj
-         * @param property
-         *            &emsp; String obj
-         */
-        public ZoneAction(final PlayerZone zone, MatchConstants property) {
-            super(property);
-            this.title = property.title;
-            this.zone = zone;
-        }
-
-        /**
-         * @param e
-         *            &emsp; ActionEvent obj
-         */
-        @Override
-        public void actionPerformed(final ActionEvent e) {
-            final List<Card> choices = this.getCardsAsIterable();
-
-            final ArrayList<Card> choices2 = new ArrayList<Card>();
-
-            if (choices.isEmpty()) {
-                GuiChoose.oneOrNone(this.title, new String[] { "no cards" });
-            } else {
-                for (int i = 0; i < choices.size(); i++) {
-                    final Card crd = choices.get(i);
-                    if (crd.isFaceDown()) {
-                        if ((crd.getController() != playerViewer && !crd.hasKeyword("Your opponent may look at this card."))
-                                || !crd.hasKeyword("You may look at this card.")) {
-                            final Card faceDown = new Card();
-                            faceDown.setName("Face Down");
-                            choices2.add(faceDown);
-                        } else {
-                            final Card faceDown = CardFactory.copyCard(crd);
-                            faceDown.setState(CardCharacteristicName.Original);
-                            choices2.add(faceDown);
-                        }
-                    } else {
-                        choices2.add(crd);
-                    }
-                }
-                final Card choice = GuiChoose.oneOrNone(this.title, choices2);
-                if (choice != null) {
-                    this.doAction(choice);
-                }
-            }
-        }
-
-        protected List<Card> getCardsAsIterable() {
-            return this.zone.getCards();
-        }
-
-        protected void doAction(final Card c) {
-        }
-    } // End ZoneAction
-
-    /** */
-    private void handAction() {
-        if ( CField.this.player == playerViewer || Preferences.DEV_MODE || CField.this.player.hasKeyword("Play with your hand revealed.")) {
-            new ZoneAction(CField.this.player.getZone(ZoneType.Hand), MatchConstants.HUMANHAND)
-            .actionPerformed(null);
-        }
-    }
-
-    /** */
-    @SuppressWarnings("serial")
-    private void flashbackAction() {
-        new ZoneAction(CField.this.player.getZone(ZoneType.Graveyard), MatchConstants.HUMANFLASHBACK) {
+        handAction = new ZoneAction(player.getZone(ZoneType.Hand), MatchConstants.HUMANHAND);
+        libraryAction = new ZoneAction(player.getZone(ZoneType.Library), MatchConstants.HUMANLIBRARY);
+        exileAction = new ZoneAction(player.getZone(ZoneType.Exile), MatchConstants.HUMANEXILED);
+        graveAction = new ZoneAction(player.getZone(ZoneType.Graveyard), MatchConstants.HUMANGRAVEYARD);
+        flashBackAction = new ZoneAction(player.getZone(ZoneType.Graveyard), MatchConstants.HUMANFLASHBACK) {
             @Override
             protected List<Card> getCardsAsIterable() {
                 return CardFactoryUtil.getExternalZoneActivationCards(player);
@@ -342,6 +151,7 @@ public class CField implements ICDoc {
             @Override
             protected void doAction(final Card c) {
                 final GameState game = player.getGame();
+                // should I check for who owns these cards? Are there any abilities to be played from opponent's graveyard? 
                 final SpellAbility ab = CField.this.playerViewer.getController().getAbilityToPlay(game.getAbilitesOfCard(c, CField.this.playerViewer));
                 if ( null != ab) {
                     FThreads.invokeInNewThread(new Runnable(){ @Override public void run(){
@@ -349,35 +159,20 @@ public class CField implements ICDoc {
                     }});
                 }
             }
-        }.actionPerformed(null);
+        };
     }
 
-    /** */
-    private void libraryAction() {
-        if (!Preferences.DEV_MODE) { return; }
-        
-        new ZoneAction(CField.this.player.getZone(ZoneType.Library), MatchConstants.HUMANLIBRARY).actionPerformed(null);
-    }
-
-    /** */
-    private void exiledAction() {
-        new ZoneAction(CField.this.player.getZone(ZoneType.Exile), MatchConstants.HUMANEXILED).actionPerformed(null);
-    }
-
-    private void graveyardAction() {
-        new ZoneAction(CField.this.player.getZone(ZoneType.Graveyard), MatchConstants.HUMANGRAVEYARD).actionPerformed(null);
-    }
-
-    private void avatarAction() {
-        CMessage.SINGLETON_INSTANCE.getInputControl().selectPlayer(player);
+    private void handClicked() {
+        if ( player == playerViewer || Preferences.DEV_MODE || player.hasKeyword("Play with your hand revealed.")) {
+            handAction.actionPerformed(null);
+        }
     }
 
     /** */
     private void cardoverAction(MouseEvent e) {
-        boolean isShiftDown = (e.getModifiers() & Event.SHIFT_MASK) != 0;
         final Card c = CField.this.view.getTabletop().getHoveredCard(e);
         if (c != null) {
-            CMatchUI.SINGLETON_INSTANCE.setCard(c, isShiftDown);
+            CMatchUI.SINGLETON_INSTANCE.setCard(c, e.isShiftDown());
         }
     }
 
@@ -413,6 +208,86 @@ public class CField implements ICDoc {
                 ((InputPayManaBase) in).selectManaPool(constantColor);
             }
         }
+    }
+
+    @Override
+    public void initialize() {
+        if (initializedAlready) { return; }
+        initializedAlready = true;
+    
+        // Observers
+        CField.this.player.getZone(ZoneType.Hand).addObserver(observerZones);
+        CField.this.player.getZone(ZoneType.Battlefield).addObserver(observerPlay);
+        CField.this.player.addObserver(observerDetails);
+    
+        // Listeners
+        // Battlefield card clicks
+        this.view.getTabletop().addMouseListener(madCardClick);
+    
+        // Battlefield card mouseover
+        this.view.getTabletop().addMouseMotionListener(mmlCardOver);
+    
+        // Player select
+        this.view.getAvatarArea().addMouseListener(madAvatar);
+    
+        // Detail label listeners
+        ((FLabel) this.view.getLblGraveyard()).setHoverable(true);
+        this.view.getLblGraveyard().addMouseListener(madGraveyard);
+    
+        ((FLabel) this.view.getLblExile()).setHoverable(true);
+        this.view.getLblExile().addMouseListener(madExiled);
+    
+        if (Preferences.DEV_MODE) {
+            ((FLabel) this.view.getLblLibrary()).setHoverable(true);
+        }
+        this.view.getLblLibrary().addMouseListener(madLibrary);
+    
+        ((FLabel) this.view.getLblHand()).setHoverable(true);
+        this.view.getLblHand().addMouseListener(madHand);
+    
+        ((FLabel) this.view.getLblFlashback()).setHoverable(true);
+        this.view.getLblFlashback().addMouseListener(madFlashback);
+    
+        for(final Pair<FLabel, String> labelPair : this.view.getManaLabels()) {
+            labelPair.getLeft().setHoverable(true);
+            labelPair.getLeft().addMouseListener(new MouseAdapter() { @Override
+                public void mousePressed(final MouseEvent e) {
+                manaAction(labelPair.getRight()); } }
+            );
+        }
+    }
+
+    @Override
+    public void update() {
+    }
+
+    /** @return {@link forge.game.player.Player} */
+    public Player getPlayer() {
+        return this.player;
+    }
+
+    /** @return {@link forge.gui.nonsingleton.VField} */
+    public VField getView() {
+        return this.view;
+    }
+
+    /**
+     * Resets all phase buttons to "inactive", so highlight won't be drawn on
+     * them. "Enabled" state remains the same.
+     */
+    public void resetPhaseButtons() {
+        this.view.getLblUpkeep().setActive(false);
+        this.view.getLblDraw().setActive(false);
+        this.view.getLblMain1().setActive(false);
+        this.view.getLblBeginCombat().setActive(false);
+        this.view.getLblDeclareAttackers().setActive(false);
+        this.view.getLblDeclareBlockers().setActive(false);
+        this.view.getLblFirstStrike().setActive(false);
+        this.view.getLblCombatDamage().setActive(false);
+        this.view.getLblEndCombat().setActive(false);
+        this.view.getLblMain2().setActive(false);
+        this.view.getLblEndTurn().setActive(false);
+        this.view.getLblCleanup().setActive(false);
     }
 
     /* (non-Javadoc)

@@ -14256,6 +14256,7 @@ src/main/java/forge/gui/match/nonsingleton/CHand.java -text
 src/main/java/forge/gui/match/nonsingleton/VCommand.java -text
 src/main/java/forge/gui/match/nonsingleton/VField.java -text
 src/main/java/forge/gui/match/nonsingleton/VHand.java -text
+src/main/java/forge/gui/match/nonsingleton/ZoneAction.java -text
 src/main/java/forge/gui/match/nonsingleton/package-info.java svneol=native#text/plain
 src/main/java/forge/gui/match/package-info.java svneol=native#text/plain
 src/main/java/forge/gui/match/views/VAntes.java -text
