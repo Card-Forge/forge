@@ -1,6 +1,5 @@
 package forge.card.trigger;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,6 +15,7 @@ import forge.card.spellability.ISpellAbility;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityRestriction;
 import forge.card.spellability.Target;
+import forge.card.spellability.TargetChoices;
 import forge.game.GameState;
 import forge.game.ai.ComputerUtil;
 import forge.game.player.AIPlayer;
@@ -352,10 +352,7 @@ public class WrappedAbility extends Ability implements ISpellAbility {
     public void resolve() {
         final GameState game = Singletons.getModel().getGame();
         if (!(regtrig instanceof TriggerAlways)) {
-            // State triggers
-            // don't do the whole
-            // "Intervening If"
-            // thing.
+            // State triggers don't have "Intervening If"
             if (!regtrig.requirementsCheck()) {
                 return;
             }
@@ -390,20 +387,23 @@ public class WrappedAbility extends Ability implements ISpellAbility {
                     //TODO: The only card with an optional delayed trigger is Shirei, Shizo's Caretaker, 
                     //      needs to be expanded when a more difficult cards comes up
                 } else {
-                    ArrayList<Object> tgts = null;
-                    // make sure the targets won't change
-                    if (sa.getTarget() != null && sa.getTarget().getTargetChoices() != null) {
-                        tgts = new ArrayList<Object>(sa.getTarget().getTargetChoices().getTargets());
+                    // Store/replace target choices more properly to get this SA cleared.
+                    Target tgt = sa.getTarget();
+                    TargetChoices tc = null;
+                    boolean storeChoices = tgt != null && tgt.getTargetChoices() != null;
+
+                    if (storeChoices) {
+                        tc = tgt.getTargetChoices();
+                        tgt.resetTargets();
                     }
-                    // This isn't quite right, but better than canPlayAI
+                    // There is no way this doTrigger here will have the same target as stored above
+                    // So it's possible it's making a different decision here than will actually happen
                     if (!sa.doTrigger(this.isMandatory(), (AIPlayer) decider)) {
                         return;
                     }
-                    if (sa.getTarget() != null && sa.getTarget().getTargetChoices() != null) {
-                        for (Object tgt : tgts) {
-                            sa.getTarget().getTargetChoices().clear();
-                            sa.getTarget().getTargetChoices().addTarget(tgt);
-                        }
+                    if (storeChoices) {
+                        tgt.resetTargets();
+                        tgt.setTargetChoices(tc);
                     }
                 }
             }

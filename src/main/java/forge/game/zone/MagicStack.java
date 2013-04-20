@@ -594,8 +594,8 @@ public class MagicStack extends MyObservable {
 
         // The SpellAbility isn't removed from the Stack until it finishes resolving
         // temporarily reverted removing SAs after resolution
-        //final SpellAbility sa = this.top();
-        final SpellAbility sa = this.pop();
+        final SpellAbility sa = this.top();
+        //final SpellAbility sa = this.pop();
 
         // ActivePlayer gains priority first after Resolve
         game.getPhaseHandler().resetPriority(); 
@@ -727,7 +727,7 @@ public class MagicStack extends MyObservable {
         this.removeCardFromStack(sa, fizzle);
         // SpellAbility is removed from the stack here
         // temporarily removed removing SA after resolution
-        //this.remove(sa);
+        this.remove(sa);
 
         // After SA resolves we have to do a handful of things
         this.setResolving(false);
