@@ -17,15 +17,12 @@
  */
 package forge.gui.match.nonsingleton;
 
-import java.awt.Event;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionAdapter;
 import java.awt.event.MouseMotionListener;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -33,14 +30,11 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import forge.Card;
 import forge.Command;
-import forge.Constant;
 import forge.FThreads;
 import forge.Constant.Preferences;
 import forge.Singletons;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
-import forge.control.FControl;
-import forge.control.Lobby;
 import forge.control.input.Input;
 import forge.control.input.InputPayManaBase;
 import forge.game.GameState;
