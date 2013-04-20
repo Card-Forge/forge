@@ -1131,7 +1131,7 @@ public class CombatUtil {
         for (Card card : game.getCardsIn(ZoneType.Battlefield)) {
             final ArrayList<StaticAbility> staticAbilities = card.getStaticAbilities();
             for (final StaticAbility stAb : staticAbilities) {
-                Cost additionalCost = stAb.getCostAbility("CantAttackUnless", c, game.getCombat().getDefenderByAttacker(c));
+                Cost additionalCost = stAb.getAttackCost(c, game.getCombat().getDefenderByAttacker(c));
                 if ( null != additionalCost )
                     attackCost.add(additionalCost);
             }

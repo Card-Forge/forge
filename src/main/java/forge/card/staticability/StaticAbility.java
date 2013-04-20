@@ -440,37 +440,18 @@ public class StaticAbility {
         return false;
     }
 
-    /**
-     * Apply ability.
-     * 
-     * @param mode
-     *            the mode
-     * @param card
-     *            the card
-     * @param target
-     *            the target
-     * @return true, if successful
-     */
-    public final Cost getCostAbility(final String mode, final Card card, final GameEntity target) {
-
-        // don't apply the ability if it hasn't got the right mode
-        if (!this.params.get("Mode").equals(mode)) {
+    public final Cost getAttackCost(final Card attacker, final GameEntity target) {
+        if (this.isSuppressed() || !params.get("Mode").equals("CantAttackUnless") || !this.checkConditions()) {
             return null;
         }
+        return StaticAbilityCantAttackBlock.getAttackCost(this, attacker, target);
+    }
 
-        if (this.isSuppressed() || !this.checkConditions()) {
+    public final Cost getBlockCost(final Card blocker, final Card attacker) {
+        if (this.isSuppressed() || !params.get("Mode").equals("CantBlockUnless") || !this.checkConditions()) {
             return null;
         }
-
-        if (mode.equals("CantAttackUnless")) {
-            return StaticAbilityCantAttackBlock.applyCantAttackUnlessAbility(this, card, target);
-        }
-
-        if (mode.equals("CantBlockUnless")) {
-            return StaticAbilityCantAttackBlock.applyCantBlockUnlessAbility(this, card, target);
-        }
-
-        return null;
+        return StaticAbilityCantAttackBlock.getBlockCost(this, blocker, attacker);
     }
 
     /**

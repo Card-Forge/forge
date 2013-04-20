@@ -218,7 +218,7 @@ public class PhaseUtil {
                 for (Card card : game.getCardsIn(ZoneType.Battlefield)) {
                     final ArrayList<StaticAbility> staticAbilities = card.getStaticAbilities();
                     for (final StaticAbility stAb : staticAbilities) {
-                        Cost c1 = stAb.getCostAbility("CantBlockUnless", blocker, attacker);
+                        Cost c1 = stAb.getBlockCost(blocker, attacker);
                         if ( c1 != null )
                             blockCost.add(c1);
                     }

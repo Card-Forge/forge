@@ -64,7 +64,7 @@ public class StaticAbilityCantAttackBlock {
      *            the card
      * @return a Cost
      */
-    public static Cost applyCantAttackUnlessAbility(final StaticAbility stAb, final Card card, final GameEntity target) {
+    public static Cost getAttackCost(final StaticAbility stAb, final Card card, final GameEntity target) {
         final HashMap<String, String> params = stAb.getMapParams();
         final Card hostCard = stAb.getHostCard();
 
@@ -100,7 +100,7 @@ public class StaticAbilityCantAttackBlock {
      *            the card
      * @return a Cost
      */
-    public static Cost applyCantBlockUnlessAbility(final StaticAbility stAb, final Card blocker, final GameEntity attacker) {
+    public static Cost getBlockCost(final StaticAbility stAb, final Card blocker, final GameEntity attacker) {
         final HashMap<String, String> params = stAb.getMapParams();
         final Card hostCard = stAb.getHostCard();
 
