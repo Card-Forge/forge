@@ -74,7 +74,7 @@ public final class CardUtil {
     public static String getShortColorsString(final Iterable<String> colors) {
         StringBuilder colorDesc = new StringBuilder();
         for (final String col : colors) {
-            colorDesc.append(getShortColor(col));
+            colorDesc.append(getShortColor(col) + " ");
         }
         return colorDesc.toString();
     }
