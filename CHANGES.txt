@@ -76,6 +76,10 @@ Illuminate
 Rumbling Aftershocks
 Worldheart Phoenix
 Corrosion
+Consuming Ferocity
+Myr Prototype
+Stromgald Spy
+
 
 --------------------
 New Vanguard Avatars
@@ -154,6 +158,15 @@ Emmara Tandris
 Viashino Firstblade
 Mirko Vosk, Mind Drinker
 Nivix Cyclops
+Hidden Strings
+AEtherling
+Beetleform Mage
+Blast of Genius
+Fluxcharger
+Korozda Gorgon
+Armed // Dangerous
+Breaking // Entering
+Down // Dirty
 
 
 ------------
