@@ -395,10 +395,20 @@ public class AttachAi extends SpellAbilityAi {
     private static Card attachAISpecificCardPreference(final SpellAbility sa, final List<Card> list, final boolean mandatory,
             final Card attachSource) {
         // I know this isn't much better than Hardcoding, but some cards need it for now
-        Player ai = sa.getActivatingPlayer();
+        final Player ai = sa.getActivatingPlayer();
         Card chosen = null;
         if ("Guilty Conscience".equals(sa.getSourceCard().getName())) {
-            List<Card> aiStuffies = CardLists.filter(list, Predicates.and(CardPredicates.isController(ai), CardPredicates.nameEquals("Stuffy Doll")));
+            List<Card> aiStuffies = CardLists.filter(list, new Predicate<Card>() {
+                @Override
+                public boolean apply(final Card c) {
+                    // Don't enchant creatures that can survive
+                    if (!c.getController().equals(ai)) {
+                        return false;
+                    }
+                    final String name = c.getName();
+                    return name.equals("Stuffy Doll") || name.equals("Boros Reckoner") || name.equals("Spitemare");
+                }
+            });
             if (!aiStuffies.isEmpty()) {
                 chosen = aiStuffies.get(0);
             } else {
@@ -407,7 +417,7 @@ public class AttachAi extends SpellAbilityAi {
                     @Override
                     public boolean apply(final Card c) {
                         // Don't enchant creatures that can survive
-                        if (!c.canBeDestroyed() || c.getNetCombatDamage() < c.getNetDefense()) {
+                        if (!c.canBeDestroyed() || c.getNetCombatDamage() < c.getNetDefense() || c.isEnchantedBy("Guilty Conscience")) {
                             return false;
                         }
                         return true;
