@@ -1,0 +1,16 @@
+Name:Consuming Ferocity
+ManaCost:1 R
+Types:Enchantment Aura
+K:Enchant non-Wall creature
+A:SP$ Attach | Cost$ 1 R | ValidTgts$ Creature.nonWall | TgtPrompt$ Select target non-Wall creature | AILogic$ Curse
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 1 | Description$ Enchanted creature gets +1/+0.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your upkeep, put a +1/+0 counter on enchanted creature. If that creature has three or more +1/+0 counters on it, it deals damage equal to its power to its controller, then destroy that creature and it can't be regenerated.
+SVar:TrigPutCounter:AB$ PutCounter | Cost$ 0 | Defined$ Enchanted | CounterType$ P1P0 | CounterNum$ 1 | SubAbility$ DBDmg
+SVar:DBDmg:DB$ DealDamage | Defined$ EnchantedController | DamageSource$ Enchanted | NumDmg$ X | References$ X | ConditionCheckSVar$ Y | ConditionSVarCompare$ GE3 | SubAbility$ DBDes
+SVar:DBDes:DB$ Destroy | Defined$ Enchanted | NoRegen$ True | ConditionCheckSVar$ Y | ConditionSVarCompare$ GE3
+SVar:Y:Count$TotalCounters_P1P0_Creature.EnchantedBy
+SVar:X:Enchanted$CardPower
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/consuming_ferocity.jpg
+Oracle:Enchant non-Wall creature\nEnchanted creature gets +1/+0.\nAt the beginning of your upkeep, put a +1/+0 counter on enchanted creature. If that creature has three or more +1/+0 counters on it, it deals damage equal to its power to its controller, then destroy that creature and it can't be regenerated.
+SetInfo:MIR Uncommon
