@@ -1,7 +1,7 @@
 if (!window.WebSocket)
 	alert("WebSocket not supported by this browser");
 
-var server = new CWebSocket();
+var server = Socket();
 var listener = {
 	onOpen : function() {
 		$('#input').slideDown();
@@ -19,7 +19,7 @@ var listener = {
 		$('#input').fadeOut();
 	}
 };
-server.addListener(listener);
+server.addObserver(listener);
 
 function addLi(className, text) {
 	var spanText = document.createElement('li');
