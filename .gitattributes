@@ -14316,6 +14316,7 @@ src/main/java/forge/net/IClientSocket.java -text
 src/main/java/forge/net/IConnectionObserver.java -text
 src/main/java/forge/net/NetServer.java -text
 src/main/java/forge/net/client/INetClient.java -text
+src/main/java/forge/net/client/InvalidFieldInPacketException.java -text
 src/main/java/forge/net/client/NetClient.java -text
 src/main/java/forge/net/client/package-info.java -text
 src/main/java/forge/net/client/state/ConnectedClientState.java -text
@@ -14331,8 +14332,10 @@ src/main/java/forge/net/protocol/toclient/AuthResultPacketClt.java -text
 src/main/java/forge/net/protocol/toclient/ChatPacketClt.java -text
 src/main/java/forge/net/protocol/toclient/EchoPacketClt.java -text
 src/main/java/forge/net/protocol/toclient/ErrorIncorrectPacketClt.java -text
-src/main/java/forge/net/protocol/toclient/ErrorUnknownPacketClt.java -text
+src/main/java/forge/net/protocol/toclient/ErrorNoStateForPacketClt.java -text
 src/main/java/forge/net/protocol/toclient/IPacketClt.java -text
+src/main/java/forge/net/protocol/toclient/WelcomePacketClt.java -text
+src/main/java/forge/net/protocol/toclient/package-info.java -text
 src/main/java/forge/net/protocol/toserver/AuthorizePacketSrv.java -text
 src/main/java/forge/net/protocol/toserver/ChatPacketSrv.java -text
 src/main/java/forge/net/protocol/toserver/EchoPacketSrv.java -text

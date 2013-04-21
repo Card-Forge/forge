@@ -12,7 +12,10 @@ import forge.net.client.state.UnauthorizedClientState;
 import forge.net.client.state.IClientState;
 import forge.net.protocol.ClientProtocol;
 import forge.net.protocol.ClientProtocolJson;
+import forge.net.protocol.toclient.ErrorIncorrectPacketClt;
+import forge.net.protocol.toclient.ErrorNoStateForPacketClt;
 import forge.net.protocol.toclient.IPacketClt;
+import forge.net.protocol.toclient.WelcomePacketClt;
 import forge.net.protocol.toserver.IPacketSrv;
 
 public class NetClient implements IConnectionObserver, INetClient{
@@ -28,6 +31,7 @@ public class NetClient implements IConnectionObserver, INetClient{
         state.push(new ConnectedClientState(this));
         state.push(new UnauthorizedClientState(this));
         protocol = new ClientProtocolJson();
+        send(new WelcomePacketClt("Welcome to server"));
     }
 
     public void autorized() { 
@@ -53,9 +57,15 @@ public class NetClient implements IConnectionObserver, INetClient{
     @Override
     public void onMessage(String data) {
         IPacketSrv p = protocol.decodePacket(data);
-        for(IClientState s : state) {
-            if ( s.processPacket(p) )
-                break;
+        boolean processed = false;
+        try{ 
+            for(IClientState s : state) {
+                if ( s.processPacket(p) ) { processed = true; break; } 
+            }
+            if (!processed)
+                send(new ErrorNoStateForPacketClt(p.getClass().getSimpleName()));
+        } catch ( InvalidFieldInPacketException ex ) {
+            send(new ErrorIncorrectPacketClt(ex.getMessage()));
         }
     }
 

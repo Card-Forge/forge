@@ -28,16 +28,15 @@ public class NetServer {
     private final Server srv = new Server();
     private final Set<ClientSocket> _openSockets = new CopyOnWriteArraySet<ClientSocket>();
 
-    public final int portNumber;
+    public int portNumber;
     
     public final int getPortNumber() {
         return portNumber;
     }
 
-    public NetServer(int port) {
-        portNumber = port;
+    public NetServer() {
         SelectChannelConnector connector= new SelectChannelConnector();
-        connector.setPort(portNumber);
+        connector.setMaxIdleTime(1200000); // 20 minutes
         srv.addConnector(connector);
         
         ServletContextHandler context = new ServletContextHandler();
@@ -81,7 +80,6 @@ public class NetServer {
 
         @Override
         public void onMessage(String data) {
-            System.out.println("Received: " + data);
             _client.onMessage(data);
         }
         
@@ -92,9 +90,8 @@ public class NetServer {
         @Override
         public void onOpen(Connection connection) {
             _connection = connection;
-            _client = new NetClient(this);
             _openSockets.add(this);
-            send("CardForge server welcomes you.");
+            _client = new NetClient(this);
         }
 
         @Override
@@ -103,14 +100,16 @@ public class NetServer {
         }
     }
     
-    public void listen() {
+    public void listen(int port) {
         if (!srv.isStarted())
         {
+            portNumber = port;
             URI serverUri = null;
             try {
-                srv.start();
                 Connector connector = srv.getConnectors()[0];
-                int port = connector.getLocalPort();
+                connector.setPort(portNumber);
+                srv.start();
+
                 String host = connector.getHost();
                 serverUri = new URI(String.format("ws://%s:%d/", host == null ? "localhost" : host ,port));
             } catch (Exception e) {
@@ -127,6 +126,7 @@ public class NetServer {
     public void stop() { 
         try {
             srv.stop();
+            portNumber = -1;
         } catch (Exception e) {
             BugReporter.reportException(e);
         }

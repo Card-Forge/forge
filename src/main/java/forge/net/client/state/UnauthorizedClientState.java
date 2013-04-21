@@ -1,6 +1,9 @@
 package forge.net.client.state;
 
+import org.apache.commons.lang3.StringUtils;
+
 import forge.net.client.INetClient;
+import forge.net.client.InvalidFieldInPacketException;
 import forge.net.protocol.toclient.AuthResultPacketClt;
 import forge.net.protocol.toserver.AuthorizePacketSrv;
 import forge.net.protocol.toserver.IPacketSrv;
@@ -25,14 +28,18 @@ public class UnauthorizedClientState  implements IClientState {
     public boolean processPacket(IPacketSrv packet) {
         if( packet instanceof AuthorizePacketSrv ) {
             AuthorizePacketSrv p = (AuthorizePacketSrv)packet;
-            if( true ) { // check credentials here!
-                client.send(new AuthResultPacketClt(p.getUsername(), true));
-                
-                
-                client.createPlayer(p.getUsername());
-                client.replaceState(this, new InLobbyClientState(client));
-                return true;
-            }
+
+            if( StringUtils.isBlank(p.getUsername()))
+                throw new InvalidFieldInPacketException("username is blank");
+
+            // check credentials here!
+
+            client.createPlayer(p.getUsername()); 
+
+            client.send(new AuthResultPacketClt(client.getPlayer().getName(), true));
+            client.replaceState(this, new InLobbyClientState(client));
+
+            return true;
         }
 
         return false;

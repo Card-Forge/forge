@@ -11,8 +11,9 @@ import forge.net.protocol.toclient.AuthResultPacketClt;
 import forge.net.protocol.toclient.ChatPacketClt;
 import forge.net.protocol.toclient.EchoPacketClt;
 import forge.net.protocol.toclient.ErrorIncorrectPacketClt;
-import forge.net.protocol.toclient.ErrorUnknownPacketClt;
+import forge.net.protocol.toclient.ErrorNoStateForPacketClt;
 import forge.net.protocol.toclient.IPacketClt;
+import forge.net.protocol.toclient.WelcomePacketClt;
 import forge.net.protocol.toserver.AuthorizePacketSrv;
 import forge.net.protocol.toserver.ChatPacketSrv;
 import forge.net.protocol.toserver.EchoPacketSrv;
@@ -37,11 +38,12 @@ public class ClientProtocolJson implements ClientProtocol<IPacketSrv, IPacketClt
         headerToClassInbound.put("auth", AuthorizePacketSrv.class);
 
         // The what we reply there
+        classToHeaderOutbound.put(WelcomePacketClt.class, "welcome");
         classToHeaderOutbound.put(AuthResultPacketClt.class, "auth");
         classToHeaderOutbound.put(ChatPacketClt.class, "s");
         classToHeaderOutbound.put(EchoPacketClt.class, "echo");
-        classToHeaderOutbound.put(ErrorIncorrectPacketClt.class, "err:packet_args");
-        classToHeaderOutbound.put(ErrorUnknownPacketClt.class, "err:packet");
+        classToHeaderOutbound.put(ErrorNoStateForPacketClt.class, "err:packet-state");
+        classToHeaderOutbound.put(ErrorIncorrectPacketClt.class, "err:packet");
     }
 
     private final Gson gson = new Gson(); // looks like a single instance per class is enough
@@ -63,7 +65,7 @@ public class ClientProtocolJson implements ClientProtocol<IPacketSrv, IPacketClt
             args = "{}"; // assume default empty object
 
         try {
-            return gson.fromJson(parts[1].trim(), packetClass);
+            return gson.fromJson(args, packetClass);
         } catch( JsonParseException  ex ) {
             return new IncorrectPacketSrv("Invalid json: " + args);
         }
@@ -73,7 +75,7 @@ public class ClientProtocolJson implements ClientProtocol<IPacketSrv, IPacketClt
     public String encodePacket(IPacketClt packet) {
         Class<? extends IPacketClt> packetClass = packet.getClass();
         String prefix = classToHeaderOutbound.get(packetClass);
-        return String.format("%s %s", prefix != null ? prefix : "/!unserialized!: " + packetClass.getName(), gson.toJson(packet));
+        return String.format("/%s %s", prefix != null ? prefix : "/!unserialized!: " + packetClass.getName(), gson.toJson(packet));
     }
 
 }

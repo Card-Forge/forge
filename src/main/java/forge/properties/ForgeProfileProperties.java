@@ -38,11 +38,14 @@ public class ForgeProfileProperties {
     public final String cacheDir;
     public final String cardPicsDir;
     public final Map<String, String> cardPicsSubDir;
+    public final int serverPort; 
     
     private static final String _USER_DIR_KEY      = "userDir";
     private static final String _CACHE_DIR_KEY     = "cacheDir";
     private static final String _CARD_PICS_DIR_KEY = "cardPicsDir";
     private static final String _CARD_PICS_SUB_DIRS_KEY = "cardPicsSubDirs";
+    
+    private static final String _SERVER_PORT = "serverPort";
 
     public ForgeProfileProperties(String filename) {
         Properties props = new Properties();
@@ -60,6 +63,8 @@ public class ForgeProfileProperties {
         cacheDir    = _getDir(props, _CACHE_DIR_KEY,     defaults.getRight());
         cardPicsDir = _getDir(props, _CARD_PICS_DIR_KEY, cacheDir + "pics/cards/");
         cardPicsSubDir = _getMap(props, _CARD_PICS_SUB_DIRS_KEY);
+        serverPort = _getInt(props, _SERVER_PORT, 0);
+        
     }
 
 
@@ -67,6 +72,13 @@ public class ForgeProfileProperties {
         String strMap = props.getProperty(propertyKey, "").trim();
         return FileSection.parseToMap(strMap, "->", "|");
     }
+
+    private int _getInt(Properties props, String propertyKey, int defaultValue) {
+        String strValue = props.getProperty(propertyKey, "").trim();
+        if ( StringUtils.isNotBlank(strValue) && StringUtils.isNumeric(strValue) ) 
+            return Integer.parseInt(strValue);
+        return defaultValue;
+    }    
 
     private static String _getDir(Properties props, String propertyKey, String defaultVal) {
         String retDir = props.getProperty(propertyKey, defaultVal).trim();

@@ -1,5 +1,7 @@
 package forge.gui.home;
 
+import org.apache.commons.lang.StringUtils;
+
 import forge.Command;
 import forge.Singletons;
 import forge.control.FControl;
@@ -11,6 +13,7 @@ import forge.gui.framework.ICDoc;
 import forge.gui.home.sanctioned.VSubmenuConstructed;
 import forge.net.NetServer;
 import forge.properties.ForgePreferences;
+import forge.properties.NewConstants;
 import forge.properties.ForgePreferences.FPref;
 
 /** 
@@ -81,8 +84,8 @@ public enum CHomeUI implements ICDoc {
             @Override
             public void run() {
                 NetServer srv = FControl.SINGLETON_INSTANCE.getServer(); 
-                srv.listen();
-                
+                srv.listen(NewConstants.SERVER_PORT_NUMBER);
+
                 VHomeUI.SINGLETON_INSTANCE.getLblStopServer().setEnabled(true);
                 VHomeUI.SINGLETON_INSTANCE.getLblStartServer().setEnabled(false);
 

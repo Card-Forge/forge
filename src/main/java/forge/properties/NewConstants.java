@@ -57,12 +57,14 @@ public final class NewConstants {
     public static final String CACHE_DIR;
     public static final String CACHE_CARD_PICS_DIR;
     public static final Map<String, String> CACHE_CARD_PICS_SUBDIR;
+    public static final int SERVER_PORT_NUMBER;
     static {
         ForgeProfileProperties profileProps = new ForgeProfileProperties(PROFILE_FILE);
         USER_DIR           = profileProps.userDir;
         CACHE_DIR          = profileProps.cacheDir;
         CACHE_CARD_PICS_DIR = profileProps.cardPicsDir;
         CACHE_CARD_PICS_SUBDIR = Collections.unmodifiableMap(profileProps.cardPicsSubDir);
+        SERVER_PORT_NUMBER = profileProps.serverPort;
     }
 
     // data that is only in the profile dirs

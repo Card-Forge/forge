@@ -3,7 +3,6 @@ package forge.net.client.state;
 import forge.net.client.INetClient;
 import forge.net.protocol.toclient.EchoPacketClt;
 import forge.net.protocol.toclient.ErrorIncorrectPacketClt;
-import forge.net.protocol.toclient.ErrorUnknownPacketClt;
 import forge.net.protocol.toserver.EchoPacketSrv;
 import forge.net.protocol.toserver.IPacketSrv;
 import forge.net.protocol.toserver.IncorrectPacketSrv;
@@ -28,9 +27,7 @@ public class ConnectedClientState implements IClientState {
             client.send(new ErrorIncorrectPacketClt(((IncorrectPacketSrv)packet).getMessage()));
             return true;
         }
-
-        client.send(new ErrorUnknownPacketClt());
-        return true;
+        return false;
     }
     
 }
