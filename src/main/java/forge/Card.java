@@ -3798,13 +3798,19 @@ public class Card extends GameEntity implements Comparable<Card> {
      * 
      * @return a int.
      */
-    public final int getUnswitchedAttack() {
+    public final int getUnswitchedPower() {
         int total = this.getCurrentPower();
 
-        total += ((this.getTempAttackBoost() + this.getSemiPermanentAttackBoost() + this.getCounters(CounterType.P1P1)
-                + this.getCounters(CounterType.P1P2) + this.getCounters(CounterType.P1P0)) - this.getCounters(CounterType.M1M1))
-                + ((2 * this.getCounters(CounterType.P2P2)) - (2 * this.getCounters(CounterType.M2M1))
-                        - (2 * this.getCounters(CounterType.M2M2)) - this.getCounters(CounterType.M1M0));
+        total += this.getTempAttackBoost() + this.getSemiPermanentAttackBoost() + getPowerBonusFromCounters();
+        return total;
+    }
+    
+    public final int getPowerBonusFromCounters() {
+        int total = 0;
+
+        total += this.getCounters(CounterType.P1P1) + this.getCounters(CounterType.P1P2) + this.getCounters(CounterType.P1P0) 
+                - this.getCounters(CounterType.M1M1) + 2 * this.getCounters(CounterType.P2P2) - 2 * this.getCounters(CounterType.M2M1)
+                - 2 * this.getCounters(CounterType.M2M2) - this.getCounters(CounterType.M1M0);
         return total;
     }
 
@@ -3817,9 +3823,9 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     public final int getNetAttack() {
         if ((this.getAmountOfKeyword("CARDNAME's power and toughness are switched") % 2) != 0) {
-            return this.getUnswitchedDefense();
+            return this.getUnswitchedToughness();
         }
-        return this.getUnswitchedAttack();
+        return this.getUnswitchedPower();
     }
 
     /**
@@ -3846,16 +3852,19 @@ public class Card extends GameEntity implements Comparable<Card> {
      * 
      * @return a int.
      */
-    public final int getUnswitchedDefense() {
+    public final int getUnswitchedToughness() {
         int total = this.getCurrentToughness();
 
-        total += (((((this.getTempDefenseBoost() + this.getSemiPermanentDefenseBoost()
-                + this.getCounters(CounterType.P1P1) + (2 * this.getCounters(CounterType.P1P2))) - this
-                .getCounters(CounterType.M1M1)) + this.getCounters(CounterType.P0P1)) - (2 * this.getCounters(CounterType.M0M2))) + (2 * this
-                .getCounters(CounterType.P2P2)))
-                - this.getCounters(CounterType.M0M1)
-                - this.getCounters(CounterType.M2M1)
-                - (2 * this.getCounters(CounterType.M2M2));
+        total += this.getTempDefenseBoost() + this.getSemiPermanentDefenseBoost() + getToughnessBonusFromCounters();
+        return total;
+    }
+    
+    public final int getToughnessBonusFromCounters() {
+        int total = 0;
+
+        total += this.getCounters(CounterType.P1P1) + 2 * this.getCounters(CounterType.P1P2) - this.getCounters(CounterType.M1M1)
+                + this.getCounters(CounterType.P0P1) - 2 * this.getCounters(CounterType.M0M2) + 2 * this.getCounters(CounterType.P2P2)
+                - this.getCounters(CounterType.M0M1) - this.getCounters(CounterType.M2M1) - 2 * this.getCounters(CounterType.M2M2);
         return total;
     }
 
@@ -3868,9 +3877,9 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     public final int getNetDefense() {
         if ((this.getAmountOfKeyword("CARDNAME's power and toughness are switched") % 2) != 0) {
-            return this.getUnswitchedAttack();
+            return this.getUnswitchedPower();
         }
-        return this.getUnswitchedDefense();
+        return this.getUnswitchedToughness();
     }
 
     // How much combat damage does the card deal
