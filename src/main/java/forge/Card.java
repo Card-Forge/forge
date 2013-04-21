@@ -3822,7 +3822,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @return a int.
      */
     public final int getNetAttack() {
-        if ((this.getAmountOfKeyword("CARDNAME's power and toughness are switched") % 2) != 0) {
+        if (this.getAmountOfKeyword("CARDNAME's power and toughness are switched") % 2 != 0) {
             return this.getUnswitchedToughness();
         }
         return this.getUnswitchedPower();
@@ -3876,7 +3876,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @return a int.
      */
     public final int getNetDefense() {
-        if ((this.getAmountOfKeyword("CARDNAME's power and toughness are switched") % 2) != 0) {
+        if (this.getAmountOfKeyword("CARDNAME's power and toughness are switched") % 2 != 0) {
             return this.getUnswitchedPower();
         }
         return this.getUnswitchedToughness();
