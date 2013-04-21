@@ -1,0 +1,14 @@
+Name:Dismantle
+ManaCost:2 R
+Types:Sorcery
+A:SP$ Destroy | Cost$ 2 R | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | RememberDestroyed$ True | SubAbility$ DBChoice | SpellDescription$ Destroy target artifact. If that artifact had counters on it, put that many +1/+1 counters or charge counters on an artifact you control.
+SVar:DBChoice:DB$ GenericChoice | Choices$ DBP1P1,DBCharge | ConditionDefined$ Targeted | ConditionPresent$ Card.HasCounters | ConditionCompare$ GE1 | StackDescription$ put that many +1/+1 counters or charge counters on an artifact you control.
+SVar:DBP1P1:DB$ ChooseCard | Choices$ Artifact.YouCtrl | Amount$ 1 | ChoiceDescription$ +1/+1 | SubAbility$ DBPutP1P1
+SVar:DBPutP1P1:DB$ PutCounter | Defined$ ChosenCard | CounterType$ P1P1 | CounterNum$ X | References$ X | SubAbility$ DBCleanup
+SVar:DBCharge:DB$ ChooseCard | Choices$ Artifact.YouCtrl | Amount$ 1 | ChoiceDescription$ charge | SubAbility$ DBPutCharge
+SVar:DBPutCharge:DB$ PutCounter | Defined$ ChosenCard | CounterType$ CHARGE | CounterNum$ X | References$ X | ChoiceDescription$ Charge | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:RememberedLKI$CardCounters.ALL
+SVar:Picture:http://www.wizards.com/global/images/magic/general/dismantle.jpg
+Oracle:Destroy target artifact. If that artifact had counters on it, put that many +1/+1 counters or charge counters on an artifact you control.
+SetInfo:DST Uncommon
