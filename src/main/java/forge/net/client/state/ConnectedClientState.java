@@ -21,13 +21,11 @@ public class ConnectedClientState implements IClientState {
     @Override
     public boolean processPacket(IPacketSrv packet ) {
         if( packet instanceof EchoPacketSrv) {
-            EchoPacketSrv pe = (EchoPacketSrv)packet;
-            client.send(new EchoPacketClt(pe.getMessage()));
+            client.send(new EchoPacketClt(((EchoPacketSrv)packet).getMessage()));
             return true;
         }
         if( packet instanceof IncorrectPacketSrv) {
-            IncorrectPacketSrv pi = (IncorrectPacketSrv)packet;
-            client.send(new ErrorIncorrectPacketClt(pi.getMessage()));
+            client.send(new ErrorIncorrectPacketClt(((IncorrectPacketSrv)packet).getMessage()));
             return true;
         }
 

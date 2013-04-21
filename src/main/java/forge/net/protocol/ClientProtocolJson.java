@@ -7,8 +7,6 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonParseException;
-import com.google.gson.JsonSyntaxException;
-
 import forge.net.protocol.toclient.AuthResultPacketClt;
 import forge.net.protocol.toclient.ChatPacketClt;
 import forge.net.protocol.toclient.EchoPacketClt;
@@ -20,7 +18,6 @@ import forge.net.protocol.toserver.ChatPacketSrv;
 import forge.net.protocol.toserver.EchoPacketSrv;
 import forge.net.protocol.toserver.IPacketSrv;
 import forge.net.protocol.toserver.IncorrectPacketSrv;
-import forge.net.protocol.toserver.UnknownPacketSrv;
 import forge.util.TextUtil;
 
 /** 
@@ -64,7 +61,7 @@ public class ClientProtocolJson implements ClientProtocol<IPacketSrv, IPacketClt
         String args = parts.length > 1 ? parts[1] : null;
         if ( StringUtils.isBlank(args) )
             args = "{}"; // assume default empty object
-        
+
         try {
             return gson.fromJson(parts[1].trim(), packetClass);
         } catch( JsonParseException  ex ) {
