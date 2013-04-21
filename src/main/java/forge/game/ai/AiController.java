@@ -671,16 +671,24 @@ public class AiController {
             
             case Encode:
                 if (logic == null) {
-                    List<Card> attackers = CardLists.filter(options, new Predicate<Card>() {
+                    final List<Card> attackers = CardLists.filter(options, new Predicate<Card>() {
                         @Override
                         public boolean apply(final Card c) {
                             return CombatUtil.canAttackNextTurn(c);
                         }
                     });
-                    if (attackers.isEmpty()) {
-                        choice = ComputerUtilCard.getBestAI(options);
-                    } else {
+                    final List<Card> unblockables = CardLists.filter(options, new Predicate<Card>() {
+                        @Override
+                        public boolean apply(final Card c) {
+                            return CombatUtil.canBeBlocked(c);
+                        }
+                    });
+                    if (!unblockables.isEmpty()) {
+                        choice = ComputerUtilCard.getBestAI(unblockables);
+                    } else if (!attackers.isEmpty()) {
                         choice = ComputerUtilCard.getBestAI(attackers);
+                    } else {
+                        choice = ComputerUtilCard.getBestAI(options);
                     }
                 }
                 return choice;
