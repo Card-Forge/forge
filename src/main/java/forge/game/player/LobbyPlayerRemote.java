@@ -4,7 +4,7 @@ import org.apache.commons.lang.NotImplementedException;
 
 import forge.game.GameState;
 import forge.net.client.INetClient;
-import forge.net.protocol.outcoming.ChatMessage;
+import forge.net.protocol.toclient.ChatPacketClt;
 
 public class LobbyPlayerRemote extends LobbyPlayer {
     
@@ -31,6 +31,6 @@ public class LobbyPlayerRemote extends LobbyPlayer {
 
     @Override
     public void hear(LobbyPlayer player, String message) {
-        connection.send(new ChatMessage(player.getName(), message));
+        connection.send(new ChatPacketClt(player.getName(), message));
     }
 }

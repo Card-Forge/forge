@@ -1,10 +1,10 @@
-package forge.net.protocol.outcoming;
+package forge.net.protocol.toclient;
 
 /** 
  * TODO: Write javadoc for this type.
  *
  */
-public class EchoMessage implements IMessage {
+public class EchoPacketClt implements IPacketClt {
 
     private final String message;
     
@@ -13,14 +13,12 @@ public class EchoMessage implements IMessage {
      * TODO: Write javadoc for Constructor.
      * @param message2
      */
-    public EchoMessage(String message) {
+    public EchoPacketClt(String message) {
         this.message = message;
     }
 
 
-    @Override
-    public String toNetString() {
-        return String.format("Echo: %s", message);
+    public String getMessage() {
+        return message;
     }
-
 }

@@ -2,7 +2,7 @@ package forge.net.client;
 
 import forge.game.player.LobbyPlayer;
 import forge.net.client.state.IClientState;
-import forge.net.protocol.outcoming.IMessage;
+import forge.net.protocol.toclient.IPacketClt;
 
 /** 
  * TODO: Write javadoc for this type.
@@ -14,7 +14,7 @@ public interface INetClient {
      * TODO: Write javadoc for this method.
      * @param echoMessage
      */
-    void send(IMessage message);
+    void send(IPacketClt message);
 
 
     void createPlayer(String playerName);

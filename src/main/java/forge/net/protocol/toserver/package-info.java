@@ -1,3 +1,3 @@
 /** Model (as in model-view-controller) for Forge. */
-package forge.net.protocol.incoming;
+package forge.net.protocol.toserver;
 

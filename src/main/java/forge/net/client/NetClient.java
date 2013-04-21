@@ -10,20 +10,24 @@ import forge.net.IConnectionObserver;
 import forge.net.client.state.ConnectedClientState;
 import forge.net.client.state.UnauthorizedClientState;
 import forge.net.client.state.IClientState;
-import forge.net.protocol.incoming.IPacket;
-import forge.net.protocol.incoming.PacketOpcode;
-import forge.net.protocol.outcoming.IMessage;
+import forge.net.protocol.ClientProtocol;
+import forge.net.protocol.ClientProtocolJson;
+import forge.net.protocol.toclient.IPacketClt;
+import forge.net.protocol.toserver.IPacketSrv;
 
 public class NetClient implements IConnectionObserver, INetClient{
 
     private final IClientSocket socket; 
-    private BlockingDeque<IClientState> state = new LinkedBlockingDeque<IClientState>();
+    private final BlockingDeque<IClientState> state = new LinkedBlockingDeque<IClientState>();
     private LobbyPlayer player = null;
+    private final ClientProtocol<IPacketSrv, IPacketClt> protocol;
+    
     
     public NetClient(IClientSocket clientSocket) {
         socket = clientSocket;
         state.push(new ConnectedClientState(this));
         state.push(new UnauthorizedClientState(this));
+        protocol = new ClientProtocolJson();
     }
 
     public void autorized() { 
@@ -48,7 +52,7 @@ public class NetClient implements IConnectionObserver, INetClient{
     /** Receives input from network client */ 
     @Override
     public void onMessage(String data) {
-        IPacket p = PacketOpcode.decode(data);
+        IPacketSrv p = protocol.decodePacket(data);
         for(IClientState s : state) {
             if ( s.processPacket(p) )
                 break;
@@ -57,8 +61,9 @@ public class NetClient implements IConnectionObserver, INetClient{
 
 
     @Override
-    public void send(IMessage message) {
-        socket.send(message.toNetString());
+    public void send(IPacketClt message) {
+        String rawData = protocol.encodePacket(message);
+        socket.send(rawData);
     }
 
     /* (non-Javadoc)

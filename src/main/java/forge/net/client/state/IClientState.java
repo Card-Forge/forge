@@ -1,11 +1,11 @@
 package forge.net.client.state;
 
-import forge.net.protocol.incoming.IPacket;
+import forge.net.protocol.toserver.IPacketSrv;
 
 /** 
  * TODO: Write javadoc for this type.
  *
  */
 public interface IClientState {
-    boolean processPacket(IPacket data);
+    boolean processPacket(IPacketSrv data);
 }
