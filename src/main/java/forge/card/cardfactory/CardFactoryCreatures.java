@@ -299,79 +299,6 @@ public class CardFactoryCreatures {
         card.addSpellAbility(ability);
     }
 
-    private static void getCard_KinsbaileBorderguard(final Card card) {
-        final SpellAbility ability = new Ability(card, ManaCost.ZERO) {
-            @Override
-            public void resolve() {
-                card.addCounter(CounterType.P1P1, this.countKithkin(), true);
-            } // resolve()
-
-            public int countKithkin() {
-                final List<Card> kithkin =
-                        CardLists.filter(card.getController().getCardsIn(ZoneType.Battlefield), new Predicate<Card>() {
-
-                        @Override
-                        public boolean apply(final Card c) {
-                            return (c.isType("Kithkin")) && !c.equals(card);
-                        }
-
-                    });
-                return kithkin.size();
-
-            }
-        };
-        final Command intoPlay = new Command() {
-            private static final long serialVersionUID = -7067218066522935060L;
-
-            @Override
-            public void run() {
-                final StringBuilder sb = new StringBuilder();
-                sb.append("Kinsbaile Borderguard enters the battlefield with a ");
-                sb.append("+1/+1 counter on it for each other Kithkin you control.");
-                ability.setStackDescription(sb.toString());
-                Singletons.getModel().getGame().getStack().addSimultaneousStackEntry(ability);
-
-            }
-        };
-
-        final SpellAbility ability2 = new Ability(card, ManaCost.ZERO) {
-            @Override
-            public void resolve() {
-                int n = card.sumAllCounters();
-                for (int i = 0; i < n; i++) {
-                    for(Card tok : this.makeToken()) {
-                        Singletons.getModel().getGame().getAction().moveToPlay(tok);
-                    }
-                }
-                if (n > 0)
-                    Singletons.getModel().getGame().getEvents().post(new TokenCreatedEvent());
-            } // resolve()
-
-            public List<Card> makeToken() {
-                return CardFactory.makeToken("Kithkin Soldier", CardToken.makeTokenFileName("W", 1, 1, "Kithkin Soldier"),
-                        card.getController(), "W", new String[] { "Creature", "Kithkin", "Soldier" }, 1, 1, new String[] { "" });
-            }
-        };
-
-        final Command destroy = new Command() {
-            private static final long serialVersionUID = 304026662487997331L;
-
-            @Override
-            public void run() {
-                final StringBuilder sb = new StringBuilder();
-                sb.append("When Kinsbaile Borderguard is put into a graveyard ");
-                sb.append("from play, put a 1/1 white Kithkin Soldier creature ");
-                sb.append("token onto the battlefield for each counter on it.");
-                ability2.setStackDescription(sb.toString());
-                Singletons.getModel().getGame().getStack().addSimultaneousStackEntry(ability2);
-
-            }
-        };
-
-        card.addComesIntoPlayCommand(intoPlay);
-        card.addDestroyCommand(destroy);
-    }
-
     private static void getCard_SurturedGhoul(final Card card) {
         final Command intoPlay = new Command() {
             private static final long serialVersionUID = -75234586897814L;
@@ -509,8 +436,6 @@ public class CardFactoryCreatures {
             getCard_SphinxJwar(card);
         } else if (cardName.equals("Master of the Wild Hunt")) {
             getCard_MasterOfTheWildHunt(card);
-        } else if (cardName.equals("Kinsbaile Borderguard")) {
-            getCard_KinsbaileBorderguard(card);
         } else if (cardName.equals("Sutured Ghoul")) {
             getCard_SurturedGhoul(card);
         } else if (cardName.equals("Phyrexian Dreadnought")) {

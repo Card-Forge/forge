@@ -1420,7 +1420,20 @@ public class CardFactoryUtil {
 
         if (sq[0].contains("CardNumColors"))    return doXMath(CardUtil.getColors(c).size(), m, c);
         if (sq[0].contains("ChosenNumber"))     return doXMath(c.getChosenNumber(), m, c);
-        if (sq[0].contains("CardCounters"))     return doXMath(c.getCounters(CounterType.getType(sq[1])), m, c);
+        if (sq[0].contains("CardCounters")) {
+            // CardCounters.ALL to be used for Kinsbaile Borderguard and anything that cares about all counters
+            int count = 0;
+            if (sq[1].equals("ALL")) {
+                for(Integer i : c.getCounters().values()) {
+                    if (i != null && i > 0) {
+                        count += i;
+                    }
+                }
+            } else {
+                count = c.getCounters(CounterType.getType(sq[1]));
+            }
+            return doXMath(count, m, c);
+        }
 
         // Count$TotalCounters.<counterType>_<valid>
         if (sq[0].contains("TotalCounters")) {
