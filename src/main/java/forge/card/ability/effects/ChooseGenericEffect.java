@@ -41,7 +41,7 @@ public class ChooseGenericEffect extends SpellAbilityEffect {
             choices.put(s, theseParams.get("ChoiceDescription"));
         }
 
-        final List<Player> tgtPlayers = getTargetPlayers(sa);
+        final List<Player> tgtPlayers = getDefinedPlayersBeforeTargetOnes(sa);
 
         final Target tgt = sa.getTarget();
 
