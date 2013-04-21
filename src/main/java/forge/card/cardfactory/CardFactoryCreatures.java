@@ -64,62 +64,6 @@ import forge.util.Aggregates;
  * @version $Id$
  */
 public class CardFactoryCreatures {
-    private static void getCard_Stangg(final Card card) {
-
-        final Ability ability = new Ability(card, ManaCost.ZERO) {
-            @Override
-            public void resolve() {
-                final List<Card> cl = CardFactory.makeToken("Stangg Twin",
-                        CardToken.makeTokenFileName("RG", 3, 4, "Stangg Twin"),
-                        card.getController(), "R G", new String[] { "Legendary", "Creature", "Human", "Warrior" },
-                        3, 4, new String[] { "" });
-                for(Card tok : cl) {
-                    Singletons.getModel().getGame().getAction().moveToPlay(tok);
-                }
-                Singletons.getModel().getGame().getEvents().post(new TokenCreatedEvent());
-                
-                cl.get(0).addLeavesPlayCommand(new Command() {
-                    private static final long serialVersionUID = 3367390368512271319L;
-
-                    @Override
-                    public void run() {
-                        if (card.isInPlay()) {
-                            Singletons.getModel().getGame().getAction().sacrifice(card, null);
-                        }
-                    }
-                });
-            }
-        };
-        final StringBuilder sb = new StringBuilder();
-        sb.append("When Stangg enters the battlefield, if Stangg is on the battlefield, ");
-        sb.append("put a legendary 3/4 red and green Human Warrior creature token ");
-        sb.append("named Stangg Twin onto the battlefield.");
-        ability.setStackDescription(sb.toString());
-
-        card.addComesIntoPlayCommand(new Command() {
-            private static final long serialVersionUID = 6667896040611028600L;
-
-            @Override
-            public void run() {
-                Singletons.getModel().getGame().getStack().addSimultaneousStackEntry(ability);
-
-            }
-        });
-
-        card.addLeavesPlayCommand(new Command() {
-            private static final long serialVersionUID = 1786900359843939456L;
-
-            @Override
-            public void run() {
-                final List<Card> list = CardLists.filter(Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Stangg Twin"));
-
-                if (list.size() == 1) {
-                    Singletons.getModel().getGame().getAction().exile(list.get(0));
-                }
-            }
-        });
-    }
-
     private static void getCard_SphinxJwar(final Card card) {
         final SpellAbility ability1 = new AbilityStatic(card, ManaCost.ZERO) {
             @Override
@@ -430,9 +374,7 @@ public class CardFactoryCreatures {
 
     public static void buildCard(final Card card, final String cardName) {
 
-        if (cardName.equals("Stangg")) {
-            getCard_Stangg(card);
-        } else if (cardName.equals("Sphinx of Jwar Isle")) {
+        if (cardName.equals("Sphinx of Jwar Isle")) {
             getCard_SphinxJwar(card);
         } else if (cardName.equals("Master of the Wild Hunt")) {
             getCard_MasterOfTheWildHunt(card);

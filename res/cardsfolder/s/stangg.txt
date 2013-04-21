@@ -1,8 +1,14 @@
 Name:Stangg
 ManaCost:4 R G
 Types:Legendary Creature Human Warrior
-Text:When Stangg enters the battlefield, if Stangg is on the battlefield, put a legendary 3/4 red and green Human Warrior creature token named Stangg Twin onto the battlefield. When Stangg leaves the battlefield, exile that token. When that token leaves the battlefield, sacrifice Stangg.
 PT:3/4
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigStangg | TriggerDescription$ When CARDNAME enters the battlefield, if Stangg is on the battlefield, put a legendary 3/4 red and green Human Warrior creature token named Stangg Twin onto the battlefield.
+SVar:TrigStangg:DB$ Token | TokenAmount$ 1 | TokenName$ Stangg Twin | TokenTypes$ Legendary,Creature,Human,Warrior | TokenOwner$ You | TokenColors$ Green,Red | TokenPower$ 3 | TokenToughness$ 4 | RememberTokens$ True
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigExile | TriggerController$ TriggeredCardController | TriggerDescription$ When Stangg leaves the battlefield, exile that token.
+SVar:TrigExile:AB$ ChangeZone | Cost$ 0 | Defined$ Remembered | Origin$ Battlefield | Destination$ Exile | DB$ Cleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.IsRemembered | Execute$ TrigSac | TriggerDescription$ When that token leaves the battlefield, sacrifice CARDNAME.
+SVar:TrigSac:AB$ Sacrifice | Cost$ 0 | Defined$ Self  | SubAbility$ DBCleanup
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stangg.jpg
 Oracle:When Stangg enters the battlefield, put a legendary 3/4 red and green Human Warrior creature token named Stangg Twin onto the battlefield. When Stangg leaves the battlefield, exile that token. When that token leaves the battlefield, sacrifice Stangg.
 SetInfo:CHR Rare
