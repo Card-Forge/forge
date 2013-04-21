@@ -677,8 +677,13 @@ public class AbilityUtils {
         }
 
         String valid = type;
-        if (valid.contains("EQX")) {
-            valid = valid.replace("X", Integer.toString(calculateAmount(source, "X", sa)));
+        int eqIndex = valid.indexOf("EQ");
+        if (eqIndex >= 0) {
+            char reference = valid.charAt(eqIndex + 2); // take whatever goes after EQ
+            if( Character.isLetter(reference)) {
+                String varName = valid.substring(eqIndex + 2, 1); 
+                valid = valid.replace(varName, Integer.toString(calculateAmount(source, varName, sa)));
+            }
         }
         return CardLists.getValidCards(list, valid.split(","), sa.getActivatingPlayer(), source);
     }
