@@ -1228,9 +1228,9 @@ public class AbilityUtils {
                 final int lhs = calculateAmount(c, compString[1], sa);
                 final int rhs =  calculateAmount(c, compString[2].substring(2), sa);
                 if (Expressions.compare(lhs, compString[2], rhs)) {
-                    return CardFactoryUtil.doXMath(Integer.parseInt(sq[1]), expr, c);
+                    return CardFactoryUtil.doXMath(calculateAmount(c, sq[1], sa), expr, c);
                 } else {
-                    return CardFactoryUtil.doXMath(Integer.parseInt(sq[2]), expr, c);
+                    return CardFactoryUtil.doXMath(calculateAmount(c, sq[2], sa), expr, c);
                 }
             }
         }

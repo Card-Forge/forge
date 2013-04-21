@@ -1,11 +1,13 @@
 Name:Apocalypse Hydra
 ManaCost:X G R
 Types:Creature Hydra
-Text:Apocalypse Hydra enters the battlefield with X +1/+1 counters on it. If X is 5 or more, it enters the battlefield with an additional X +1/+1 counters on it.
 PT:0/0
+K:etbCounter:P1P1:Y:no condition:CARDNAME enters the battlefield with X +1/+1 counters on it. If X is 5 or more, it enters the battlefield with an additional X +1/+1 counters on it.
 A:AB$ DealDamage | Cost$ 1 R SubCounter<1/P1P1> | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target creature or player.
 # This xPaid doesn't do anything, it's just needed to make Cost work properly
 SVar:X:Count$xPaid
+SVar:Y:Count$Compare X LT5.X.Z
+SVar:Z:Count$xPaid/Twice
 SVar:Picture:http://www.wizards.com/global/images/magic/general/apocalypse_hydra.jpg
 Oracle:Apocalypse Hydra enters the battlefield with X +1/+1 counters on it. If X is 5 or more, it enters the battlefield with an additional X +1/+1 counters on it.\n{1}{R}, Remove a +1/+1 counter from Apocalypse Hydra: Apocalypse Hydra deals 1 damage to target creature or player.
 SetInfo:CFX Mythic

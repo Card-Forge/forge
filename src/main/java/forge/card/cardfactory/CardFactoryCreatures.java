@@ -299,27 +299,6 @@ public class CardFactoryCreatures {
         card.addSpellAbility(ability);
     }
 
-    private static void getCard_ApocalypseHydra(final Card card) {
-        final SpellAbility spell = new SpellPermanent(card) {
-            private static final long serialVersionUID = -11489323313L;
-
-            @Override
-            public void resolve() {
-                int xCounters = card.getXManaCostPaid();
-                final Card c = Singletons.getModel().getGame().getAction().moveToPlay(this.getSourceCard());
-
-                if (xCounters >= 5) {
-                    xCounters = 2 * xCounters;
-                }
-                c.addCounter(CounterType.P1P1, xCounters, true);
-            }
-        };
-        // Do not remove SpellAbilities created by AbilityFactory or
-        // Keywords.
-        card.clearFirstSpell();
-        card.addSpellAbility(spell);
-    }
-
     private static void getCard_KinsbaileBorderguard(final Card card) {
         final SpellAbility ability = new Ability(card, ManaCost.ZERO) {
             @Override
@@ -530,8 +509,6 @@ public class CardFactoryCreatures {
             getCard_SphinxJwar(card);
         } else if (cardName.equals("Master of the Wild Hunt")) {
             getCard_MasterOfTheWildHunt(card);
-        } else if (cardName.equals("Apocalypse Hydra")) {
-            getCard_ApocalypseHydra(card);
         } else if (cardName.equals("Kinsbaile Borderguard")) {
             getCard_KinsbaileBorderguard(card);
         } else if (cardName.equals("Sutured Ghoul")) {
