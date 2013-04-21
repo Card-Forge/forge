@@ -7,7 +7,7 @@ SVar:CheckLifePaid:DB$ StoreSVar | SVar$ LifePaid | Type$ Number | Expression$ 1
 SVar:DBResetRem:DB$ Cleanup | ClearRemembered$ True | SubAbility$ GoToBottom
 SVar:GoToBottom:DB$ Dig | DigNum$ 5 | ChangeNum$ All | DestinationZone$ Library | LibraryPosition$ -1 | NoLooking$ True | SubAbility$ DBLookAgain | StackDescription$ None
 SVar:DBLookAgain:DB$ Dig | DigNum$ 5 | NoMove$ True | RememberRevealed$ True | StackDescription$ None
-SVar:DBShuffle:DB$ ChangeZone | Origin$ Library | Destination$ Library | LibraryPosition$ 0 | ChangeType$ Card.IsRemembered | ChangeNum$ 5 | SubAbility$ DBReset | Hidden$ True | SelectPrompt$ Pick 1 on the top of library | Mandatory$ True | NoReveal$ True | StackDescription$ None
+SVar:DBShuffle:DB$ ChangeZone | Origin$ Library | Destination$ Library | LibraryPosition$ 0 | ChangeType$ Card.IsRemembered | ChangeNum$ 5 | SubAbility$ DBReset | Hidden$ True | SelectPrompt$ Pick 1 on the top of library | Mandatory$ True | NoReveal$ True | NoLooking$ True | StackDescription$ None
 SVar:DBReset:DB$ StoreSVar | SVar$ LifePaid | Type$ Number | Expression$ 0 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:LifePaid:Number$0
