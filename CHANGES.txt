@@ -79,6 +79,8 @@ Corrosion
 Consuming Ferocity
 Myr Prototype
 Stromgald Spy
+Saproling Infestation
+Dismantle
 
 
 --------------------
@@ -167,6 +169,14 @@ Korozda Gorgon
 Armed // Dangerous
 Breaking // Entering
 Down // Dirty
+Flesh // Blood
+Turn // Burn
+Drown in Filth
+Gaze of Granite
+Gleam of Battle
+Gruul War Chant
+Haunter of Nightveil
+Jelenn Sphinx
 
 
 ------------
