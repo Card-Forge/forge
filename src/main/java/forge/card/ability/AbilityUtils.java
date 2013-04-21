@@ -681,8 +681,8 @@ public class AbilityUtils {
         if (eqIndex >= 0) {
             char reference = valid.charAt(eqIndex + 2); // take whatever goes after EQ
             if( Character.isLetter(reference)) {
-                String varName = valid.substring(eqIndex + 2, 1); 
-                valid = valid.replace(varName, Integer.toString(calculateAmount(source, varName, sa)));
+                String varName = valid.substring(eqIndex + 2, eqIndex + 3); 
+                valid = valid.replace("EQ" + varName, "EQ" + Integer.toString(calculateAmount(source, varName, sa)));
             }
         }
         return CardLists.getValidCards(list, valid.split(","), sa.getActivatingPlayer(), source);
