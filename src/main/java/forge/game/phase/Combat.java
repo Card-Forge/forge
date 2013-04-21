@@ -331,7 +331,7 @@ public class Combat {
      * @return a boolean.
      */
     public final boolean isAttacking(final Card c) {
-        return this.attackerMap.get(c) != null;
+        return this.attackerMap.containsKey(c);
     }
 
     /**

@@ -94,9 +94,11 @@ public enum TargetingOverlay {
                     for (CardPanel c : cPanels) {
                         if (c.isSelected()) {
                             activePanel = c;
+                            break;
                         }
                     }
                 }
+                if (activePanel == null) { return; }
                 break;
             default:
                 // Draw all
@@ -121,7 +123,6 @@ public enum TargetingOverlay {
 
         if (CDock.SINGLETON_INSTANCE.getArcState() == 1) {
             // Only work with the active panel
-            if (activePanel == null) { return; }
             Card c = activePanel.getCard();
 
             Card enchanting = c.getEnchantingCard();
@@ -173,16 +174,17 @@ public enum TargetingOverlay {
                 if (!c.isShowing()) {
                     continue;
                 }
+                Card card = c.getCard();
 
                 // Enchantments
-                Card enchanting = c.getCard().getEnchantingCard();
+                Card enchanting = card.getEnchantingCard();
                 if (enchanting != null) {
-                    if (enchanting.getController().equals(c.getCard().getController())) {
+                    if (enchanting.getController().equals(card.getController())) {
                         continue;
                     }
                     arcs.add(new Point[]{
                                 endpoints.get(enchanting.getUniqueNumber()),
-                                endpoints.get(c.getCard().getUniqueNumber())
+                                endpoints.get(card.getUniqueNumber())
                             });
                 }
             }
@@ -291,13 +293,13 @@ public enum TargetingOverlay {
             if (overlaystate == 0) { return; }
 
             // Arc drawing
+            assembleArcs();
+            if (arcs.isEmpty()) { return; }
+
             Graphics2D g2d = (Graphics2D) g;
             g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
                     RenderingHints.VALUE_ANTIALIAS_ON);
-
-            assembleArcs();
-            if (arcs.size() < 1) { return; }
-
+            Color color = FSkin.getColor(FSkin.Colors.CLR_ACTIVE);
 
             for (Point[] p : arcs) {
                 if (p[0] == null || p[1] == null) {
@@ -309,7 +311,6 @@ public enum TargetingOverlay {
                 int startX = (int) p[1].getX();
                 int startY = (int) p[1].getY();
 
-                Color color = FSkin.getColor(FSkin.Colors.CLR_ACTIVE);
                 drawArrow(g2d, startX, startY, endX, endY, color);
             }
 
