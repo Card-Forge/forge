@@ -503,7 +503,9 @@ public class ChangeZoneAi extends SpellAbilityAi {
             // need something AI can cast now
             CardLists.sortByEvaluateCreature(list);
             for (Card c : list) {
-               if (ComputerUtilMana.payManaCost(c.getFirstSpellAbility(), ai, true, 0, false)) {
+                SpellAbility spell = c.getFirstSpellAbility();
+                spell.setActivatingPlayer(ai);
+               if (ComputerUtilMana.payManaCost(spell, ai, true, 0, false)) {
                    card = c;
                    break;
                }
