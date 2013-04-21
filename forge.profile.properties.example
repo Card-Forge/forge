@@ -75,3 +75,6 @@ cardPicsDir=
 # holds card images from that edition. Separate records by a vertical bar (|).
 #   Ex: cardPicsSubDirs=LEA->Alpha|ROE->Rise of Eldrazi
 cardPicsSubDirs=
+
+# Forge server port. Values under 1024 won't work on Macs.
+serverPort=
