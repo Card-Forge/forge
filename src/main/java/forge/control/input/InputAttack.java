@@ -106,6 +106,7 @@ public class InputAttack extends InputBase {
         final List<Card> att = game.getCombat().getAttackers();
         if (isMetaDown && att.contains(card) && !card.hasKeyword("CARDNAME attacks each turn if able.")) {
             game.getCombat().removeFromCombat(card);
+            player.getZone(ZoneType.Battlefield).updateObservers();
             CombatUtil.showCombat(game);
             return;
         }
