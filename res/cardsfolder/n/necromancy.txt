@@ -12,7 +12,7 @@ SVar:Aurify:DB$ Animate | IsPresent$ Card.Self | Types$ Aura | OverwriteSpells$ 
 SVar:NewAttach:SP$ Attach | Cost$ 2 B | ValidTgts$ Creature.IsRemembered | AILogic$ Pump
 SVar:NecromAttach:DB$ Attach | Defined$ Remembered
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigSac | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME leaves the battlefield, enchanted permanent's controller sacrifices it.
-SVar:TrigSacrifice:DB$ Destroy | Sacrifice$ True | Defined$ Remembered
+SVar:TrigSac:DB$ Destroy | Sacrifice$ True | Defined$ Remembered
 SVar:NeedsToPlayVar:Y GE1
 SVar:Y:Count$TypeInYourYard.Creature
 SVar:Picture:http://www.wizards.com/global/images/magic/general/necromancy.jpg
