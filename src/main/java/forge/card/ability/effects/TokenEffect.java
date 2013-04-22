@@ -22,7 +22,7 @@ import java.util.List;
 
 import forge.Card;
 import forge.GameEntity;
-import forge.Singletons;
+
 import forge.card.ability.AbilityFactory;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
@@ -30,6 +30,7 @@ import forge.card.cardfactory.CardFactory;
 import forge.card.spellability.SpellAbility;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerHandler;
+import forge.game.GameState;
 import forge.game.event.TokenCreatedEvent;
 import forge.game.player.Player;
 import forge.gui.GuiChoose;
@@ -206,9 +207,9 @@ public class TokenEffect extends SpellAbilityEffect {
                 final List<Card> tokens = CardFactory.makeToken(substitutedName, imageName, controller, cost,
                         substitutedTypes, finalPower, finalToughness, this.tokenKeywords);
                 for(Card tok : tokens) {
-                    Singletons.getModel().getGame().getAction().moveToPlay(tok);
+                    controller.getGame().getAction().moveToPlay(tok);
                 }
-                Singletons.getModel().getGame().getEvents().post(new TokenCreatedEvent());
+                controller.getGame().getEvents().post(new TokenCreatedEvent());
                 
                 // Grant rule changes
                 if (this.tokenHiddenKeywords != null) {
@@ -274,25 +275,25 @@ public class TokenEffect extends SpellAbilityEffect {
                     }
                 }
 
+                final GameState game = controller.getGame();
                 for (final Card c : tokens) {
                     if (this.tokenTapped) {
                         c.setTapped(true);
                     }
                     if (this.tokenAttacking) {
+                        final List<GameEntity> defs = c.getController().getGame().getCombat().getDefenders();
                         if (c.getController().isHuman()) {
-                            final List<GameEntity> e = c.getController().getGame().getCombat().getDefenders();
-                            final GameEntity defender = e.size() == 1 
-                                    ? e.get(0) : GuiChoose.one("Declare " + c, e);
-                                    Singletons.getModel().getGame().getCombat().addAttacker(c, defender);
+                            final GameEntity defender = defs.size() == 1 ? defs.get(0) : GuiChoose.one("Declare " + c, defs);
+                            game.getCombat().addAttacker(c, defender);
                         } else {
-                            Singletons.getModel().getGame().getCombat().addAttacker(c);
+                            game.getCombat().addAttacker(c, defs.get(0));
                         }
                     }
                     if (remember != null) {
-                        Singletons.getModel().getGame().getCardState(sa.getSourceCard()).addRemembered(c);
+                        game.getCardState(sa.getSourceCard()).addRemembered(c);
                     }
                     if (sa.getParam("RememberSource") != null) {
-                        Singletons.getModel().getGame().getCardState(c).addRemembered(host);
+                        game.getCardState(c).addRemembered(host);
                     }
                 }
             }

@@ -76,8 +76,14 @@ public class InputAttack extends InputBase {
 
         List<Card> possibleAttackers = player.getCardsIn(ZoneType.Battlefield);
         for (Card c : Iterables.filter(possibleAttackers, CardPredicates.Presets.CREATURES)) {
-            if (c.hasKeyword("CARDNAME attacks each turn if able.") && CombatUtil.canAttack(c, game.getCombat()) ) {
-                game.getCombat().addAttacker(c, currentDefender);
+            if (!c.hasKeyword("CARDNAME attacks each turn if able."))
+                continue; // do not force
+
+            for(GameEntity def : defenders ) {
+                if( CombatUtil.canAttack(c, def, game.getCombat()) ) {
+                    game.getCombat().addAttacker(c, currentDefender);
+                    break;
+                }
             }
         }
     }
@@ -125,7 +131,7 @@ public class InputAttack extends InputBase {
         }
 
         Zone zone = game.getZoneOf(card);
-        if (zone.is(ZoneType.Battlefield, player) && CombatUtil.canAttack(card, game.getCombat())) {
+        if (zone.is(ZoneType.Battlefield, player) && CombatUtil.canAttack(card, currentDefender, game.getCombat())) {
 
             // TODO add the propaganda code here and remove it in
             // Phase.nextPhase()

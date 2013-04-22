@@ -22,6 +22,7 @@ import java.awt.datatransfer.StringSelection;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
+import java.util.List;
 import java.util.Map.Entry;
 import java.util.TreeMap;
 
@@ -191,10 +192,17 @@ public enum CDock implements ICDoc {
         final PhaseHandler ph = game.getPhaseHandler();
 
         if (ph.is(PhaseType.COMBAT_DECLARE_ATTACKERS, player)) {
+            List<Player> defenders = player.getOpponents();
+            
             for (Card c : CardLists.filter(player.getCardsIn(ZoneType.Battlefield), Presets.CREATURES)) {
-                if (!c.isAttacking() && CombatUtil.canAttack(c, game.getCombat())) {
-                    game.getCombat().addAttacker(c);
-                }
+                if (c.isAttacking())
+                    continue;
+                
+                for(Player defender : defenders)
+                    if( CombatUtil.canAttack(c, defender, game.getCombat())) {
+                        game.getCombat().addAttacker(c, defender);
+                        break;
+                    }
             }
             //human.updateObservers();
 

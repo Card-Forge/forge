@@ -16,7 +16,6 @@ import forge.CardPredicates;
 import forge.CardPredicates.Presets;
 import forge.Constant;
 import forge.GameEntity;
-import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.ApiType;
 import forge.card.ability.SpellAbilityAi;
@@ -28,6 +27,7 @@ import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.card.trigger.TriggerType;
+import forge.game.GameState;
 import forge.game.GlobalRuleChange;
 import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilBlock;
@@ -191,17 +191,17 @@ public class ChangeZoneAi extends SpellAbilityAi {
             //Ninjutsu
             if (sa.hasParam("Ninjutsu")) {
                 if (source.isType("Legendary")
-                        && !Singletons.getModel().getGame().getStaticEffects().getGlobalRuleChange(GlobalRuleChange.noLegendRule)) {
+                        && !ai.getGame().getStaticEffects().getGlobalRuleChange(GlobalRuleChange.noLegendRule)) {
                     final List<Card> list = ai.getCardsIn(ZoneType.Battlefield);
                     if (Iterables.any(list, CardPredicates.nameEquals(source.getName()))) {
                         return false;
                     }
                 }
-                if (Singletons.getModel().getGame().getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_DAMAGE)) {
+                if (ai.getGame().getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_DAMAGE)) {
                     return false;
                 }
                 List<Card> attackers = new ArrayList<Card>();
-                attackers.addAll(Singletons.getModel().getGame().getCombat().getUnblockedAttackers());
+                attackers.addAll(ai.getGame().getCombat().getUnblockedAttackers());
                 boolean lowerCMC = false;
                 for (Card attacker : attackers) {
                     if (attacker.getCMC() < source.getCMC()) {
@@ -284,7 +284,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
         }
 
         // don't use fetching to top of library/graveyard before main2
-        if (Singletons.getModel().getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2)
+        if (ai.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2)
                 && !sa.hasParam("ActivationPhases")) {
             if (!destination.equals("Battlefield") && !destination.equals("Hand")) {
                 return false;
@@ -495,7 +495,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
         combat.initiatePossibleDefenders(ai);
         List<Card> attackers = ai.getOpponent().getCreaturesInPlay();
         for (Card att : attackers) {
-            combat.addAttacker(att);
+            combat.addAttacker(att, ai);
         }
         combat = ComputerUtilBlock.getBlockers(ai, combat, ai.getCreaturesInPlay());
 
@@ -589,7 +589,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
             // in general this should only be used to protect from Imminent Harm
             // (dying or losing control of)
             if (origin.equals(ZoneType.Battlefield)) {
-                if (Singletons.getModel().getGame().getStack().size() == 0) {
+                if (ai.getGame().getStack().size() == 0) {
                     return false;
                 }
 
@@ -620,14 +620,14 @@ public class ChangeZoneAi extends SpellAbilityAi {
         // don't return something to your hand if your hand is full of good stuff
         if (destination.equals(ZoneType.Hand) && origin.equals(ZoneType.Graveyard)) {
             final int handSize = ai.getCardsIn(ZoneType.Hand).size();
-            if (Singletons.getModel().getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN1)) {
+            if (ai.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN1)) {
                 return false;
             }
-            if (Singletons.getModel().getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2)
+            if (ai.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2)
                     && handSize > 1) {
                 return false;
             }
-            if (Singletons.getModel().getGame().getPhaseHandler().isPlayerTurn(ai)
+            if (ai.getGame().getPhaseHandler().isPlayerTurn(ai)
                     && handSize >= ai.getMaxHandSize()) {
                 return false;
             }
@@ -688,7 +688,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
         }
 
         tgt.resetTargets();
-        List<Card> list = CardLists.getValidCards(Singletons.getModel().getGame().getCardsIn(origin), tgt.getValidTgts(), ai, source);
+        List<Card> list = CardLists.getValidCards(ai.getGame().getCardsIn(origin), tgt.getValidTgts(), ai, source);
         if (sa.hasParam("AITgts")) {
             list = CardLists.getValidCards(list, sa.getParam("AITgts"), sa.getActivatingPlayer(), source);
         }
@@ -721,7 +721,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
 
                 // check stack for something on the stack that will kill
                 // anything i control
-                if (Singletons.getModel().getGame().getStack().size() > 0) {
+                if (ai.getGame().getStack().size() > 0) {
                     final ArrayList<Object> objects = ComputerUtil.predictThreatenedObjects(ai, sa);
 
                     final List<Card> threatenedTargets = new ArrayList<Card>();
@@ -739,7 +739,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                     }
                 }
                 // Save combatants
-                else if (Singletons.getModel().getGame().getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
+                else if (ai.getGame().getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
                     final List<Card> combatants = CardLists.filter(aiPermanents, CardPredicates.Presets.CREATURES);
                     CardLists.sortByEvaluateCreature(combatants);
 
@@ -795,7 +795,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
         if (origin.equals(ZoneType.Battlefield)
                 && destination.equals(ZoneType.Exile)
                 && (subApi == ApiType.DelayedTrigger || (subApi == ApiType.ChangeZone  && subAffected.equals("Remembered")))
-                && !(Singletons.getModel().getGame().getPhaseHandler().is(PhaseType.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY) || sa
+                && !(ai.getGame().getPhaseHandler().is(PhaseType.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY) || sa
                         .isAbility())) {
             return false;
         }
@@ -805,8 +805,8 @@ public class ChangeZoneAi extends SpellAbilityAi {
 
             // don't rush bouncing stuff when not going to attack
             if (!sa.isTrigger() && sa.getPayCosts() != null
-                    && Singletons.getModel().getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2)
-                    && Singletons.getModel().getGame().getPhaseHandler().isPlayerTurn(ai)
+                    && ai.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2)
+                    && ai.getGame().getPhaseHandler().isPlayerTurn(ai)
                     && ai.getCreaturesInPlay().isEmpty()) {
                 return false;
             }
@@ -825,7 +825,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
         }
 
         // Only care about combatants during combat
-        if (Singletons.getModel().getGame().getPhaseHandler().inCombat()) {
+        if (ai.getGame().getPhaseHandler().inCombat()) {
             CardLists.getValidCards(list, "Card.attacking,Card.blocking", null, null);
         }
 
@@ -931,7 +931,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
         final ZoneType destination = ZoneType.smartValueOf(sa.getParam("Destination"));
         final Target tgt = sa.getTarget();
 
-        List<Card> list = CardLists.getValidCards(Singletons.getModel().getGame().getCardsIn(origin), tgt.getValidTgts(), ai, source);
+        List<Card> list = CardLists.getValidCards(ai.getGame().getCardsIn(origin), tgt.getValidTgts(), ai, source);
 
         // Narrow down the list:
         if (origin.equals(ZoneType.Battlefield)) {
@@ -1070,6 +1070,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
         final Card card = sa.getSourceCard();
         final boolean defined = sa.hasParam("Defined");
         final Player activator = sa.getActivatingPlayer();
+        final GameState game = ai.getGame();
 
         if (tgt != null) {
             if (!tgt.getTargetPlayers().isEmpty()) {
@@ -1101,7 +1102,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
             }
         } else if (!origin.contains(ZoneType.Library) && !origin.contains(ZoneType.Hand)
                 && !sa.hasParam("DefinedPlayer")) {
-            fetchList = Singletons.getModel().getGame().getCardsIn(origin);
+            fetchList = game.getCardsIn(origin);
             fetchList = AbilityUtils.filterListByType(fetchList, type, sa);
         } else {
             fetchList = player.getCardsIn(origin);
@@ -1253,7 +1254,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
             Card movedCard = null;
             if (ZoneType.Library.equals(destination)) {
                 final int libraryPos = sa.hasParam("LibraryPosition") ? Integer.parseInt(sa.getParam("LibraryPosition")) : 0;
-                movedCard = Singletons.getModel().getGame().getAction().moveToLibrary(c, libraryPos);
+                movedCard = game.getAction().moveToLibrary(c, libraryPos);
             } else if (ZoneType.Battlefield.equals(destination)) {
                 if (sa.hasParam("Tapped")) {
                     c.setTapped(true);
@@ -1261,9 +1262,9 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 if (sa.hasParam("GainControl")) {
                     if (sa.hasParam("NewController")) {
                         final Player p = AbilityUtils.getDefinedPlayers(sa.getSourceCard(), sa.getParam("DefinedPlayer"), sa).get(0);
-                        c.setController(p, Singletons.getModel().getGame().getNextTimestamp());
+                        c.setController(p, game.getNextTimestamp());
                     } else {
-                        c.setController(sa.getActivatingPlayer(), Singletons.getModel().getGame().getNextTimestamp());
+                        c.setController(sa.getActivatingPlayer(), game.getNextTimestamp());
                     }
                 }
 
@@ -1271,7 +1272,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                     List<Card> list = AbilityUtils.getDefinedCards(sa.getSourceCard(),
                             sa.getParam("AttachedTo"), sa);
                     if (list.isEmpty()) {
-                        list = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
+                        list = game.getCardsIn(ZoneType.Battlefield);
                         list = CardLists.getValidCards(list, sa.getParam("AttachedTo"), c.getController(), c);
                     }
                     if (!list.isEmpty()) {
@@ -1289,7 +1290,9 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 }
 
                 if (sa.hasParam("Attacking")) {
-                    Singletons.getModel().getGame().getCombat().addAttacker(c);
+                    List<GameEntity> defenders = game.getCombat().getDefenders();
+                    if ( !defenders.isEmpty() )
+                        game.getCombat().addAttacker(c, defenders.get(0));
                 }
                 // Auras without Candidates stay in their current location
                 if (c.isAura()) {
@@ -1299,24 +1302,24 @@ public class ChangeZoneAi extends SpellAbilityAi {
                     }
                 }
 
-                movedCard = Singletons.getModel().getGame().getAction().moveTo(c.getController().getZone(destination), c);
+                movedCard = game.getAction().moveTo(c.getController().getZone(destination), c);
                 if (sa.hasParam("Tapped")) {
                     movedCard.setTapped(true);
                 }
             } else if (destination.equals(ZoneType.Exile)) {
-                movedCard = Singletons.getModel().getGame().getAction().exile(c);
+                movedCard = game.getAction().exile(c);
                 if (sa.hasParam("ExileFaceDown")) {
                     movedCard.setState(CardCharacteristicName.FaceDown);
                 }
             } else {
-                movedCard = Singletons.getModel().getGame().getAction().moveTo(destination, c);
+                movedCard = game.getAction().moveTo(destination, c);
             }
 
             if (champion) {
                 final HashMap<String, Object> runParams = new HashMap<String, Object>();
                 runParams.put("Card", card);
                 runParams.put("Championed", c);
-                Singletons.getModel().getGame().getTriggerHandler().runTrigger(TriggerType.Championed, runParams, false);
+                game.getTriggerHandler().runTrigger(TriggerType.Championed, runParams, false);
             }
             
             if (remember != null) {

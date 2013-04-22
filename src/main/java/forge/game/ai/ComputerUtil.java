@@ -917,7 +917,7 @@ public class ComputerUtil {
             List<Card> attackers = ai.getOpponent().getCreaturesInPlay();
             for (Card att : attackers) {
                 if (CombatUtil.canAttackNextTurn(att)) {
-                    combat.addAttacker(att);
+                    combat.addAttacker(att, att.getController().getOpponent());
                 }
             }
             combat = ComputerUtilBlock.getBlockers(ai, combat, ai.getCreaturesInPlay());

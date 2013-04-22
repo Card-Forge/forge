@@ -765,10 +765,9 @@ public class CombatUtil {
      *            a {@link forge.game.phase.Combat} object.
      * @return a boolean.
      */
-    public static boolean canAttack(final Card c, final Combat combat) {
-
+    public static boolean canAttack(final Card c, final GameEntity def, final Combat combat) {
         int cntAttackers = combat.getAttackers().size();
-        final GameEntity def = combat.getDefender();
+
         for (final Card card : Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield)) {
             for (final String keyword : card.getKeyword()) {
                 if (keyword.equals("No more than two creatures can attack each combat.") && cntAttackers > 1) {

@@ -445,7 +445,7 @@ public class AiAttackController {
      * @param bAssault
      *            a boolean.
      */
-    public final void chooseDefender(final Combat c, final boolean bAssault) {
+    public final GameEntity chooseDefender(final Combat c, final Combat gameCombat, final boolean bAssault) {
         final List<GameEntity> defs = c.getDefenders();
 
         // Start with last planeswalker
@@ -453,23 +453,17 @@ public class AiAttackController {
 
         final GameEntity entity = ai.getMustAttackEntity();
         if (null != entity) {
-            final List<GameEntity> defenders = Singletons.getModel().getGame().getCombat().getDefenders();
+            final List<GameEntity> defenders = gameCombat.getDefenders();
             n = defenders.indexOf(entity);
             if (-1 == n) {
                 System.out.println("getMustAttackEntity() returned something not in defenders.");
-                c.setCurrentDefenderNumber(0);
+                return defs.get(0);
             } else {
-                c.setCurrentDefenderNumber(n);
+                return entity;
             }
         } else {
-            if (bAssault) {
-                c.setCurrentDefenderNumber(0);
-            } else {
-                c.setCurrentDefenderNumber(n);
-            }
+            return defs.get(bAssault ? 0 : n);
         }
-
-        return;
     }
 
     /**
@@ -501,11 +495,11 @@ public class AiAttackController {
 
         final boolean bAssault = this.doAssault(ai);
         // Determine who will be attacked
-        this.chooseDefender(combat, bAssault);
+        GameEntity defender = this.chooseDefender(combat, game.getCombat(), bAssault);
         List<Card> attackersLeft = new ArrayList<Card>(this.attackers);
         // Attackers that don't really have a choice
         for (final Card attacker : this.attackers) {
-            if (!CombatUtil.canAttack(attacker, combat)) {
+            if (!CombatUtil.canAttack(attacker, defender, combat)) {
                 continue;
             }
             boolean mustAttack = false;
@@ -521,7 +515,7 @@ public class AiAttackController {
             if (mustAttack || attacker.getSacrificeAtEOT()
                     || attacker.getController().getMustAttackEntity() != null
                     || attacker.getSVar("MustAttack").equals("True")) {
-                combat.addAttacker(attacker);
+                combat.addAttacker(attacker, defender);
                 attackersLeft.remove(attacker);
             }
         }
@@ -532,8 +526,8 @@ public class AiAttackController {
             System.out.println("Assault");
             CardLists.sortByPowerDesc(attackersLeft);
             for (Card attacker : attackersLeft) {
-                if (CombatUtil.canAttack(attacker, combat) && this.isEffectiveAttacker(ai, attacker, combat)) {
-                    combat.addAttacker(attacker);
+                if (CombatUtil.canAttack(attacker, defender, combat) && this.isEffectiveAttacker(ai, attacker, combat)) {
+                    combat.addAttacker(attacker, defender);
                 }
             }
             return combat;
@@ -566,8 +560,8 @@ public class AiAttackController {
                 System.out.println("Exalted");
                 this.aiAggression = 6;
                 for (Card attacker : this.attackers) {
-                    if (CombatUtil.canAttack(attacker, combat) && this.shouldAttack(ai, attacker, this.blockers, combat)) {
-                        combat.addAttacker(attacker);
+                    if (CombatUtil.canAttack(attacker, defender, combat) && this.shouldAttack(ai, attacker, this.blockers, combat)) {
+                        combat.addAttacker(attacker, defender);
                         return combat;
                     }
                 }
@@ -780,6 +774,7 @@ public class AiAttackController {
 
         attackersLeft = this.sortAttackers(attackersLeft);
 
+        int iDefender = combat.getDefenders().indexOf(defender);
         for (int i = 0; i < attackersLeft.size(); i++) {
             final Card attacker = attackersLeft.get(i);
             if (this.aiAggression < 5 && !attacker.hasFirstStrike() && !attacker.hasDoubleStrike()
@@ -788,16 +783,15 @@ public class AiAttackController {
                 continue;
             }
 
-            if (this.shouldAttack(ai, attacker, this.blockers, combat)
-                    && CombatUtil.canAttack(attacker, combat)) {
-                combat.addAttacker(attacker);
+            if (this.shouldAttack(ai, attacker, this.blockers, combat) && CombatUtil.canAttack(attacker, defender, combat)) {
+                combat.addAttacker(attacker, defender);
                 // check if attackers are enough to finish the attacked planeswalker
-                if (combat.getCurrentDefenderNumber() > 0) {
-                    Card pw = (Card) combat.getDefender();
+                if (iDefender > 0) {
+                    Card pw = (Card) defender;
                     final int blockNum = this.blockers.size();
                     int attackNum = 0;
                     int damage = 0;
-                    List<Card> attacking = combat.getAttackersByDefenderSlot(combat.getCurrentDefenderNumber());
+                    List<Card> attacking = combat.getAttackersByDefenderSlot(iDefender);
                     CardLists.sortByPowerAsc(attacking);
                     for (Card atta : attacking) {
                         if (attackNum >= blockNum || !CombatUtil.canBeBlocked(attacker, this.blockers)) {
@@ -808,7 +802,8 @@ public class AiAttackController {
                     }
                     // if enough damage: switch to next planeswalker or player
                     if (damage >= pw.getCounters(CounterType.LOYALTY)) {
-                        combat.setCurrentDefenderNumber(combat.getCurrentDefenderNumber() - 1);
+                        iDefender--;
+                        defender = combat.getDefenders().get(iDefender);
                     }
                 }
             }

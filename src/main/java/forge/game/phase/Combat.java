@@ -57,7 +57,6 @@ public class Combat {
     // Defenders are the Defending Player + Each controlled Planeswalker
     private List<GameEntity> defenders = new ArrayList<GameEntity>();
     private Map<GameEntity, List<Card>> defenderMap = new HashMap<GameEntity, List<Card>>();
-    private int currentDefender = 0;
 
 
     // This Hash keeps track of
@@ -87,7 +86,6 @@ public class Combat {
         this.defendingDamageMap.clear();
 
         this.attackingPlayer = null;
-        this.currentDefender = 0;
 
         this.initiatePossibleDefenders(Singletons.getModel().getGame().getPhaseHandler().getPlayerTurn().getOpponents());
     }
@@ -123,40 +121,6 @@ public class Combat {
             this.defenders.add(pw);
             this.defenderMap.put(pw, new ArrayList<Card>());
         }
-    }
-
-    /**
-     * <p>
-     * getDefender.
-     * </p>
-     * 
-     * @return a {@link java.lang.Object} object.
-     */
-    public final GameEntity getDefender() {
-        return this.defenders.get(this.currentDefender);
-    }
-
-    /**
-     * <p>
-     * Setter for the field <code>currentDefender</code>.
-     * </p>
-     * 
-     * @param def
-     *            a int.
-     */
-    public final void setCurrentDefenderNumber(final int def) {
-        this.currentDefender = def;
-    }
-
-    /**
-     * <p>
-     * Setter for the field <code>currentDefender</code>.
-     * </p>
-     * 
-     *  @return a int.
-     */
-    public final int getCurrentDefenderNumber() {
-        return this.currentDefender;
     }
 
     /**
@@ -302,18 +266,6 @@ public class Combat {
      */
     public final boolean isAttacking(final Card c) {
         return this.attackerMap.containsKey(c);
-    }
-
-    /**
-     * <p>
-     * addAttacker.
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.Card} object.
-     */
-    public final void addAttacker(final Card c) {
-        this.addAttacker(c, defenders.get(this.currentDefender));
     }
 
     /**
