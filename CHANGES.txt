@@ -81,6 +81,7 @@ Myr Prototype
 Stromgald Spy
 Saproling Infestation
 Dismantle
+Needlebite Trap
 
 
 --------------------
@@ -177,6 +178,12 @@ Gleam of Battle
 Gruul War Chant
 Haunter of Nightveil
 Jelenn Sphinx
+Pilfered Plans
+Restore the Peace
+Rot Farm Skeleton
+Species Gorger
+Tithe Drinker
+Woodlot Crawler
 
 
 ------------
