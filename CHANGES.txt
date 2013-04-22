@@ -184,6 +184,9 @@ Rot Farm Skeleton
 Species Gorger
 Tithe Drinker
 Woodlot Crawler
+Scab-Clan Giant
+Spike Jester
+Zhur-Taa Druid
 
 
 ------------
