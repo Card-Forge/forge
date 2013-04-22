@@ -480,7 +480,8 @@ public class CostExile extends CostPartWithList {
             // TODO Determine exile from same zone for AI
             return null;
         } else {
-            return new PaymentDecision(ComputerUtil.chooseExileFrom(ai, this.getFrom(), this.getType(), source, ability.getTargetCard(), c));
+            List<Card> chosen = ComputerUtil.chooseExileFrom(ai, this.getFrom(), this.getType(), source, ability.getTargetCard(), c);
+            return null == chosen ? null : new PaymentDecision(chosen);
         }
     }
 
