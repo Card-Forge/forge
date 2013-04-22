@@ -7177,6 +7177,7 @@ res/cardsfolder/n/need_for_speed.txt svneol=native#text/plain
 res/cardsfolder/n/needle_drop.txt -text
 res/cardsfolder/n/needle_specter.txt svneol=native#text/plain
 res/cardsfolder/n/needle_storm.txt svneol=native#text/plain
+res/cardsfolder/n/needlebite_trap.txt -text
 res/cardsfolder/n/needlebug.txt svneol=native#text/plain
 res/cardsfolder/n/needlepeak_spider.txt svneol=native#text/plain
 res/cardsfolder/n/needleshot_gourna.txt svneol=native#text/plain

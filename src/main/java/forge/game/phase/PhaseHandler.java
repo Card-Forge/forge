@@ -539,6 +539,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
 
             p.resetProwl();
             p.setLifeLostThisTurn(0);
+            p.setLifeGainedThisTurn(0);
 
             p.removeKeyword("At the beginning of this turn's end step, you lose the game.");
             p.removeKeyword("Skip the untap step of this turn.");

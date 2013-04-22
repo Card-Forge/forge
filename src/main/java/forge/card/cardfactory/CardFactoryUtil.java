@@ -1042,6 +1042,12 @@ public class CardFactoryUtil {
             }
         }
 
+        if (sq[0].contains("LifeGainedThisTurn")) {
+            if (players.size() > 0) {
+                return doXMath(players.get(0).getLifeGainedThisTurn(), m, source);
+            }
+        }
+
         if (sq[0].contains("PoisonCounters")) {
             if (players.size() > 0) {
                 return doXMath(players.get(0).getPoisonCounters(), m, source);

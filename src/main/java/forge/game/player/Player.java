@@ -99,6 +99,9 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
     /** The life lost this turn. */
     private int lifeLostThisTurn = 0;
 
+    /** The life Gained this turn. */
+    private int lifeGainedThisTurn = 0;
+
     /** The num power surge lands. */
     private int numPowerSurgeLands;
 
@@ -458,6 +461,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
             this.addLife(lifeGain);
             newLifeSet = true;
             this.updateObservers();
+            this.lifeGainedThisTurn += lifeGain;
 
             // Run triggers
             final HashMap<String, Object> runParams = new HashMap<String, Object>();
@@ -2573,6 +2577,29 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
      */
     public final void setNumLandsPlayed(final int n) {
         this.numLandsPlayed = n;
+    }
+
+    /**
+     * <p>
+     * Getter for the field <code>lifeGainedThisTurn</code>.
+     * </p>
+     * 
+     * @return a int.
+     */
+    public final int getLifeGainedThisTurn() {
+        return this.lifeGainedThisTurn;
+    }
+
+    /**
+     * <p>
+     * Setter for the field <code>lifeGainedThisTurn</code>.
+     * </p>
+     * 
+     * @param n
+     *            a int.
+     */
+    public final void setLifeGainedThisTurn(final int n) {
+        this.lifeGainedThisTurn = n;
     }
 
     /**
