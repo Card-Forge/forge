@@ -96,8 +96,10 @@ public class InputAttack extends InputBase {
 
     @Override
     public void selectPlayer(Player selected) {
-        if(player.isOpponentOf(selected))
+        if(defenders.contains(selected))
             setCurrentDefender(selected);
+        else
+            SDisplayUtil.remind(VMessage.SINGLETON_INSTANCE); // cannot attack that player
     }
     
     /** {@inheritDoc} */
@@ -144,7 +146,7 @@ public class InputAttack extends InputBase {
             SDisplayUtil.remind(VMessage.SINGLETON_INSTANCE);
         }
     } // selectCard()
-    
+
     private final void setCurrentDefender(GameEntity def) {
         Set<MyObservable> toUpdate = new HashSet<MyObservable>();
         currentDefender = def; 
@@ -159,7 +161,8 @@ public class InputAttack extends InputBase {
             }
         }
 
-        showMessage("Declare Attackers.\nSelecting Creatures to Attack " + currentDefender + "\n\nTo attack other players or their planewalkers just click on them");
+        showMessage("Declare Attackers.\nSelecting Creatures to Attack " + currentDefender + 
+                "\n\nTo attack other players or their planewalkers just click on them");
 
         // This will instantly highlight targets
         for(MyObservable updateable : toUpdate) {
