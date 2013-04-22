@@ -18,6 +18,7 @@
 package forge;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import forge.card.mana.ManaCostBeingPaid;
 
@@ -26,7 +27,7 @@ import forge.card.mana.ManaCostBeingPaid;
  * 
  */
 public class ColorChanger {
-    private final ArrayList<CardColor> globalColorChanges = new ArrayList<CardColor>();
+    private final List<CardColor> globalColorChanges = new ArrayList<CardColor>();
 
     /**
      * <p>
@@ -104,7 +105,7 @@ public class ColorChanger {
      * 
      * @return a {@link java.util.ArrayList} object.
      */
-    public final ArrayList<CardColor> getColorChanges() {
+    public final List<CardColor> getColorChanges() {
         return this.globalColorChanges;
     }
 }

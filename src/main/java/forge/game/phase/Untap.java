@@ -63,7 +63,7 @@ public class Untap extends Phase {
      */
     @Override
     public void executeAt() {
-        this.execute(this.getAt());
+        this.execute(this.at);
 
         final Player turn = game.getPhaseHandler().getPlayerTurn();
         Untap.doPhasing(turn);

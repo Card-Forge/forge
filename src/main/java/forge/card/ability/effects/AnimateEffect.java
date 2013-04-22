@@ -272,7 +272,7 @@ public class AnimateEffect extends AnimateEffectBase {
                 } else if (sa.hasParam("UntilControllerNextUntap")) {
                     Singletons.getModel().getGame().getUntap().addUntil(c.getController(), unanimate);
                 } else if (sa.hasParam("UntilYourNextTurn")) {
-                    Singletons.getModel().getGame().getCleanup().addUntilYourNextTurn(host.getController(), unanimate);
+                    Singletons.getModel().getGame().getCleanup().addUntil(host.getController(), unanimate);
                 } else {
                     Singletons.getModel().getGame().getEndOfTurn().addUntil(unanimate);
                 }

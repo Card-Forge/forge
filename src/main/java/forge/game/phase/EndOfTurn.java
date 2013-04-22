@@ -170,7 +170,7 @@ public class EndOfTurn extends Phase {
             game.getStack().addSimultaneousStackEntry(change);
         }
 
-        this.execute(this.getAt());
+        this.execute(this.at);
 
     } // executeAt()
 

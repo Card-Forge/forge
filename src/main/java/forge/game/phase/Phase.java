@@ -17,11 +17,13 @@
  */
 package forge.game.phase;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+
+import com.google.common.collect.Lists;
 
 import forge.Command;
-import forge.CommandList;
-import forge.Singletons;
 import forge.game.GameState;
 import forge.game.player.Player;
 
@@ -38,66 +40,76 @@ public abstract class Phase implements java.io.Serializable {
 
     private static final long serialVersionUID = 4665309652476851977L;
 
-    /** The at. */
-    private final CommandList at = new CommandList();
     protected final GameState game;
-    
+
     public Phase(final GameState game0) {
         game = game0;
     }
-    
+
+    /** The at. */
+    protected final List<Command> at = new ArrayList<Command>();
     /**
-     * Gets the at.
-     *
-     * @return the at
+     * <p>
+     * Add a hardcoded trigger that will execute "at <phase>".
+     * </p>
+     * 
+     * @param c
+     *            a {@link forge.Command} object.
      */
-    public CommandList getAt() {
-        return at;
+    public final void addAt(final Command c) {
+        this.at.add(0, c);
     }
 
     /**
-     * Gets the until.
-     *
-     * @return the until
+     * <p>
+     * Executes any hardcoded triggers that happen "at <phase>".
+     * </p>
      */
-    public CommandList getUntil() {
-        return until;
-    }
-
-    /**
-     * Gets the until map.
-     *
-     * @return the until map
-     */
-    public HashMap<Player, CommandList> getUntilMap() {
-        return untilMap;
+    public void executeAt() {
+        this.execute(this.at);
     }
 
     /** The until. */
-    private final CommandList until = new CommandList();
+    private final List<Command> until = new ArrayList<Command>();
+
+    /**
+     * <p>
+     * Add a Command that will terminate an effect with "until <phase>".
+     * </p>
+     * 
+     * @param c
+     *            a {@link forge.Command} object.
+     */
+    public final void addUntil(final Command c) {
+        this.until.add(0, c);
+    }
+
+    /**
+     * <p>
+     * Executes the termination of effects that apply "until <phase>".
+     * </p>
+     */
+    public final void executeUntil() {
+        this.execute(this.until);
+    }
 
     /** The until map. */
-    private final HashMap<Player, CommandList> untilMap = new HashMap<Player, CommandList>();
+    private final HashMap<Player, List<Command>> untilMap = new HashMap<Player, List<Command>>();
 
     /**
      * <p>
      * Add a Command that will terminate an effect with "until <Player's> next <phase>".
-     * </p>
-     * 
-     * @param p
-     *            a {@link forge.game.player.Player} object
-     * @param c
-     *            a {@link forge.Command} object.
+     * Use cleanup phase to terminate an effect with "until <Player's> next turn"
      */
     public final void addUntil(Player p, final Command c) {
         if (null == p) {
-            p = Singletons.getModel().getGame().getPhaseHandler().getPlayerTurn();
+            p = game.getPhaseHandler().getPlayerTurn();
         }
-
+    
         if (this.untilMap.containsKey(p)) {
-            this.untilMap.get(p).add(c);
+            this.untilMap.get(p).add(0, c);
         } else {
-            this.untilMap.put(p, new CommandList(c));
+            this.untilMap.put(p, Lists.newArrayList(c));
         }
     }
 
@@ -117,107 +129,18 @@ public abstract class Phase implements java.io.Serializable {
 
     /**
      * <p>
-     * Add a Command that will terminate an effect with "until <Player's> next turn".
-     * </p>
-     * 
-     * @param p
-     *            a {@link forge.game.player.Player} object
-     * @param command
-     *            a {@link forge.Command} object.
-     */
-    public final void addUntilYourNextTurn(Player p, final Command command) {
-        if (null == p) {
-            p = Singletons.getModel().getGame().getPhaseHandler().getPlayerTurn();
-        }
-
-        if (this.untilMap.containsKey(p)) {
-            this.untilMap.get(p).add(command);
-        } else {
-            this.untilMap.put(p, new CommandList(command));
-        }
-    }
-
-    /**
-     * <p>
-     * Executes the termination of effects that apply "until <Player's> next turn".
-     * </p>
-     * 
-     * @param pNext
-     *            the next active player
-     */
-    public final void executeUntilTurn(final Player pNext) {
-        if (this.untilMap.containsKey(pNext)) {
-            this.execute(this.untilMap.get(pNext));
-        }
-    }
-
-    /**
-     * <p>
-     * Add a hardcoded trigger that will execute "at <phase>".
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.Command} object.
-     */
-    public final void addAt(final Command c) {
-        this.at.add(c);
-    }
-
-    /**
-     * <p>
-     * Add a Command that will terminate an effect with "until <phase>".
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.Command} object.
-     */
-    public final void addUntil(final Command c) {
-        this.until.add(c);
-    }
-
-    /**
-     * <p>
-     * Executes any hardcoded triggers that happen "at <phase>".
-     * </p>
-     */
-    public void executeAt() {
-        this.execute(this.at);
-    }
-
-    /**
-     * <p>
-     * Executes the termination of effects that apply "until <phase>".
-     * </p>
-     */
-    public final void executeUntil() {
-        this.execute(this.until);
-    }
-
-    /**
-     * <p>
      * execute.
      * </p>
      * 
      * @param c
      *            a {@link forge.CommandList} object.
      */
-    protected void execute(final CommandList c) {
+    protected void execute(final List<Command> c) {
         final int length = c.size();
 
         for (int i = 0; i < length; i++) {
             c.remove(0).run();
         }
-    }
-
-    /**
-     * <p>
-     * reset.
-     * </p>
-     */
-    public void reset() {
-        at.clear();
-        until.clear();
-        untilMap.clear();
     }
 
 } //end class Phase

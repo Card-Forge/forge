@@ -203,7 +203,7 @@ public class CloneEffect extends SpellAbilityEffect {
             if (duration.equals("UntilEndOfTurn")) {
                 Singletons.getModel().getGame().getEndOfTurn().addUntil(unclone);
             } else if (duration.equals("UntilYourNextTurn")) {
-                Singletons.getModel().getGame().getCleanup().addUntilYourNextTurn(host.getController(), unclone);
+                Singletons.getModel().getGame().getCleanup().addUntil(host.getController(), unclone);
             }
         }
 

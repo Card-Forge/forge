@@ -1586,7 +1586,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             return new CardColor(this);
         }
 
-        final ArrayList<CardColor> globalChanges = getOwner() == null ? new ArrayList<CardColor>() : getOwner().getGame().getColorChanger().getColorChanges();
+        final List<CardColor> globalChanges = getOwner() == null ? new ArrayList<CardColor>() : getOwner().getGame().getColorChanger().getColorChanges();
         CardColor colors = this.determineColor(globalChanges);
         colors.fixColorless();
         return colors;
@@ -1623,7 +1623,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      *            an ArrayList<CardColor>
      * @return a CardColor
      */
-    final CardColor determineColor(final ArrayList<CardColor> globalChanges) {
+    final CardColor determineColor(final List<CardColor> globalChanges) {
         final CardColor colors = new CardColor(this);
         int i = this.getCharacteristics().getCardColor().size() - 1;
         int j = -1;

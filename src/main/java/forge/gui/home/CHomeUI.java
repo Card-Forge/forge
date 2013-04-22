@@ -1,7 +1,5 @@
 package forge.gui.home;
 
-import org.apache.commons.lang.StringUtils;
-
 import forge.Command;
 import forge.Singletons;
 import forge.control.FControl;

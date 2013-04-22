@@ -212,7 +212,7 @@ public class EffectEffect extends SpellAbilityEffect {
                 hostCard.addLeavesPlayCommand(endEffect);
             }
             else if (duration.equals("UntilYourNextTurn")) {
-                Singletons.getModel().getGame().getCleanup().addUntilYourNextTurn(controller, endEffect);
+                Singletons.getModel().getGame().getCleanup().addUntil(controller, endEffect);
             }
         }
 

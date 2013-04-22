@@ -383,7 +383,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
                     player.getController().autoPassCancel(); // autopass won't wrap to next turn
                 }
                 this.getPlayerTurn().removeKeyword("Skip all combat phases of this turn.");
-                game.getCleanup().executeUntilTurn(this.getNextTurn());
+                game.getCleanup().executeUntil(this.getNextTurn());
                 break;
 
             default:

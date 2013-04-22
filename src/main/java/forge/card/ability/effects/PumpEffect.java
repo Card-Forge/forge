@@ -64,7 +64,7 @@ public class PumpEffect extends SpellAbilityEffect {
                 sa.getSourceCard().addLeavesPlayCommand(untilEOT);
                 sa.getSourceCard().addChangeControllerCommand(untilEOT);
             } else if (sa.hasParam("UntilYourNextTurn")) {
-                Singletons.getModel().getGame().getCleanup().addUntilYourNextTurn(sa.getActivatingPlayer(), untilEOT);
+                Singletons.getModel().getGame().getCleanup().addUntil(sa.getActivatingPlayer(), untilEOT);
             } else if (sa.hasParam("UntilUntaps")) {
                 sa.getSourceCard().addUntapCommand(untilEOT);
             } else {
