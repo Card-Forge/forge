@@ -65,6 +65,10 @@ Some people have noticed slowdowns when Targeting arrows are enabled. The battle
 The quest challenge start in play cards are not appearing on the battlefield.
 
 
+- Human vs Human play over the internet -
+Some initial code has been added that will at some point in the future allow human vs human play over the internet. This is a work in progress and is far from being implemented at this time. Please be patient. Anyone who is curious can read the messages in the http://www.slightlymagic.net/forum/viewtopic.php?f=52&t=9837 topic.
+
+
 ---------
 New Cards
 ---------
