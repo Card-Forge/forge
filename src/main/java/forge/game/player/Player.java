@@ -3124,4 +3124,10 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
         }
     }
 
+    // These are used by UI to mark the player currently being attacked or targeted
+    // Very bad practice! Someone blame on me.
+    private boolean highlited = false; 
+    public final void setHighlited(boolean value) { highlited = value; }
+    public final boolean isHighlited() { return highlited; }
+
 }

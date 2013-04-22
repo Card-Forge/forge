@@ -30,6 +30,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
+import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 import javax.swing.border.MatteBorder;
 
@@ -105,6 +106,11 @@ public class VField implements IVDoc<CField> {
     private PhaseLabel lblEndTurn = new PhaseLabel("ET");
     private PhaseLabel lblCleanup = new PhaseLabel("CL");
 
+    private final Border borderAvatarSimple = new LineBorder(new Color(0, 0, 0, 0), 1);
+    private final Border borderAvatarHover = new LineBorder(FSkin.getColor(FSkin.Colors.CLR_BORDERS), 1);
+    private final Border borderAvatarHighlited = new LineBorder(Color.red, 2);
+
+
     //========= Constructor
     /**
      * Assembles Swing components of a player field instance.
@@ -144,13 +150,15 @@ public class VField implements IVDoc<CField> {
             @Override
             public void mouseEntered(final MouseEvent e) {
                 avatarArea.setOpaque(true);
-                avatarArea.setBorder(new LineBorder(FSkin.getColor(FSkin.Colors.CLR_BORDERS), 1));
+                if (!player.isHighlited())
+                    avatarArea.setBorder(borderAvatarHover);
             }
 
             @Override
             public void mouseExited(final MouseEvent e) {
                 avatarArea.setOpaque(false);
-                avatarArea.setBorder(new LineBorder(new Color(0, 0, 0, 0), 1));
+                if (!player.isHighlited())
+                    avatarArea.setBorder(borderAvatarSimple);
             }
         });
 
@@ -359,19 +367,14 @@ public class VField implements IVDoc<CField> {
         this.getLblLife().setText("" + p0.getLife());
         this.getLblPoison().setText("" + p0.getPoisonCounters());
 
-        if (p0.getLife() <= 5) {
-            this.getLblLife().setForeground(Color.red);
-        }
-        else {
-            this.getLblLife().setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
-        }
+        Color lifeFg = p0.getLife() <= 5 ? Color.red : FSkin.getColor(FSkin.Colors.CLR_TEXT);
+        this.getLblLife().setForeground(lifeFg);
 
-        if (p0.getPoisonCounters() >= 8) {
-            this.getLblPoison().setForeground(Color.red);
-        }
-        else {
-            this.getLblPoison().setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
-        }
+        Color poisonFg = p0.getPoisonCounters() >= 8 ? Color.red : FSkin.getColor(FSkin.Colors.CLR_TEXT);
+        this.getLblPoison().setForeground(poisonFg);
+
+        this.avatarArea.setBorder(p0.isHighlited() ? borderAvatarHighlited : borderAvatarSimple );
+        this.avatarArea.setOpaque(p0.isHighlited());
     }
 
     /**

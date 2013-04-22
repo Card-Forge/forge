@@ -58,7 +58,7 @@ public class Combat {
     private List<GameEntity> defenders = new ArrayList<GameEntity>();
     private Map<GameEntity, List<Card>> defenderMap = new HashMap<GameEntity, List<Card>>();
     private int currentDefender = 0;
-    private int nextDefender = 0;
+
 
     // This Hash keeps track of
     private final HashMap<Card, GameEntity> attackerToDefender = new HashMap<Card, GameEntity>();
@@ -88,7 +88,6 @@ public class Combat {
 
         this.attackingPlayer = null;
         this.currentDefender = 0;
-        this.nextDefender = 0;
 
         this.initiatePossibleDefenders(Singletons.getModel().getGame().getPhaseHandler().getPlayerTurn().getOpponents());
     }
@@ -128,24 +127,6 @@ public class Combat {
 
     /**
      * <p>
-     * nextDefender.
-     * </p>
-     * 
-     * @return a {@link java.lang.Object} object.
-     */
-    public final GameEntity nextDefender() {
-        if (this.nextDefender >= this.defenders.size()) {
-            return null;
-        }
-
-        this.currentDefender = this.nextDefender;
-        this.nextDefender++;
-
-        return this.defenders.get(this.currentDefender);
-    }
-
-    /**
-     * <p>
      * getDefender.
      * </p>
      * 
@@ -176,17 +157,6 @@ public class Combat {
      */
     public final int getCurrentDefenderNumber() {
         return this.currentDefender;
-    }
-
-    /**
-     * <p>
-     * getRemainingDefenders.
-     * </p>
-     * 
-     * @return a int.
-     */
-    public final int getRemainingDefenders() {
-        return this.defenders.size() - this.nextDefender;
     }
 
     /**
