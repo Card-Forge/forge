@@ -20,9 +20,13 @@ package forge;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.google.common.collect.ImmutableList;
+
+import forge.card.MagicColor;
 
 /**
  * <p>
@@ -95,6 +99,20 @@ public final class Constant {
 
         /** The Basic lands. */
         public static final List<String> BASIC_LANDS = Collections.unmodifiableList(Arrays.asList("Plains", "Island", "Swamp", "Mountain", "Forest"));
+        
+        public static final Map<String, String> COLOR_TO_BASIC_LAND_TYPE_MAP;
+        
+        static
+        {
+            Map<String, String> colToType = new HashMap<String, String>();
+            colToType.put(Color.WHITE, "Plains");
+            colToType.put(Color.BLUE,  "Island");
+            colToType.put(Color.BLACK, "Swamp");
+            colToType.put(Color.RED,   "Mountain");
+            colToType.put(Color.GREEN, "Forest");
+            
+            COLOR_TO_BASIC_LAND_TYPE_MAP = Collections.unmodifiableMap(colToType);
+        }
     }
 
     /**
