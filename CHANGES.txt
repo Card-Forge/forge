@@ -214,6 +214,7 @@ Ascended Lawmage
 Bronzebeak Moa
 Blaze Commando
 Carnage Gladiator
+Pontiff of Blight
 
 
 ------------
