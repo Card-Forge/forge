@@ -23,7 +23,6 @@ import forge.game.player.LobbyPlayer;
 import forge.game.player.LobbyPlayerHuman;
 import forge.game.player.Player;
 import forge.game.player.PlayerStatistics;
-import forge.game.player.PlayerType;
 import forge.gui.InputProxy;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.SDisplayUtil;
@@ -38,7 +37,6 @@ import forge.gui.match.controllers.CStack;
 import forge.gui.match.nonsingleton.VField;
 import forge.gui.match.views.VAntes;
 import forge.properties.ForgePreferences.FPref;
-import forge.util.Aggregates;
 
 /**
  * TODO: Write javadoc for this type.
@@ -163,30 +161,43 @@ public class MatchController {
         }
 
         try {
-            HumanPlayer localHuman = (HumanPlayer) Aggregates.firstFieldEquals(currentGame.getPlayers(), Player.Accessors.FN_GET_TYPE, PlayerType.HUMAN);
+            
+            HumanPlayer localHuman = null;
+            for(Player p : currentGame.getPlayers()) {
+                if ( p.getLobbyPlayer() != FControl.SINGLETON_INSTANCE.getLobby().getGuiPlayer())
+                    continue;
+                localHuman = (HumanPlayer) p;
+                break;
+            }
+            if (null == localHuman)
+                throw new IllegalStateException("Cannot start a game without a human yet!");
+                
             FControl.SINGLETON_INSTANCE.setPlayer(localHuman);
+
+            // The UI controls should use these game data as models
             CMatchUI.SINGLETON_INSTANCE.initMatch(currentGame.getRegisteredPlayers(), localHuman);
             CDock.SINGLETON_INSTANCE.onGameStarts(currentGame, localHuman);
-            
-            CLog.SINGLETON_INSTANCE.init(currentGame.getGameLog());
-            currentGame.getGameLog().addObserver(CLog.SINGLETON_INSTANCE);
-            
+            CStack.SINGLETON_INSTANCE.setModel(currentGame.getStack());
+            CLog.SINGLETON_INSTANCE.setModel(currentGame.getGameLog());
             CCombat.SINGLETON_INSTANCE.setModel(currentGame);
-            
+
             Singletons.getModel().getPreferences().actuateMatchPreferences();
             Singletons.getControl().changeState(FControl.Screens.MATCH_SCREEN);
             SDisplayUtil.showTab(EDocID.REPORT_LOG.getDoc());
 
-            InputProxy inputControl = CMessage.SINGLETON_INSTANCE.getInputControl();
-            inputControl.setMatch(this);
-            input.addObserver(inputControl);
-            currentGame.getStack().addObserver(inputControl);
-            currentGame.getStack().addObserver(CStack.SINGLETON_INSTANCE);
-            currentGame.getPhaseHandler().addObserver(inputControl);
-            
+            // black magic still
+            InputProxy inputProxy = CMessage.SINGLETON_INSTANCE.getInputControl();
+            inputProxy.setMatch(this);
+            input.addObserver(inputProxy);
 
-            
+            // models shall notify controllers of changes
+            currentGame.getStack().addObserver(inputProxy);
+            currentGame.getStack().addObserver(CStack.SINGLETON_INSTANCE);
+            currentGame.getPhaseHandler().addObserver(inputProxy);
+            currentGame.getGameLog().addObserver(CLog.SINGLETON_INSTANCE);
             // some observers are set in CMatchUI.initMatch
+
+
 
             final boolean canRandomFoil = Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_RANDOM_FOIL) && gameType == GameType.Constructed;
             GameNew.newGame(this, startConditions, currentGame, canRandomFoil);

@@ -86,13 +86,7 @@ public class CField implements ICDoc {
         public void mousePressed(final MouseEvent e) { cardclickAction(e); } };
 
 
-    // Hand, Graveyard, Library, Flashback, Exile zones, attached to hand.
-    private final Observer observerZones = new Observer() {
-        @Override
-        public void update(final Observable a, final Object b) {
-            FThreads.invokeInEdtNowOrLater(updateZonesRunnable);
-        }
-    };
+
     private final Runnable updateZonesRunnable = new Runnable() { @Override public void run() { CField.this.view.updateZones(CField.this.player); } };
     private final Runnable updateDetailsRunnable = new Runnable() { @Override public void run() { CField.this.view.updateDetails(CField.this.player); } };
     
@@ -103,7 +97,14 @@ public class CField implements ICDoc {
             FThreads.invokeInEdtNowOrLater(updateDetailsRunnable);
         }
     };
-
+    // Hand, Graveyard, Library, Flashback, Exile zones, attached to hand.
+    private final Observer observerZones = new Observer() {
+        @Override
+        public void update(final Observable a, final Object b) {
+            FThreads.invokeInEdtNowOrLater(updateZonesRunnable);
+        }
+    };
+    
     // Card play area, attached to battlefield zone.
     private final Observer observerPlay = new Observer() {
         @Override

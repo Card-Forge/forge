@@ -20,6 +20,8 @@ import forge.gui.match.views.VStack;
 public enum CStack implements ICDoc, Observer {
     /** */
     SINGLETON_INSTANCE;
+    
+    private MagicStack model;
 
     /* (non-Javadoc)
      * @see forge.gui.framework.ICDoc#getCommandOnSelect()
@@ -36,25 +38,17 @@ public enum CStack implements ICDoc, Observer {
     public void initialize() {
     }
 
-    /* (non-Javadoc)
-     * @see forge.gui.framework.ICDoc#update()
-     */
-    public void update(MagicStack model) {
-        VStack.SINGLETON_INSTANCE.updateStack(model);
-    }
+    private final Runnable upd = new Runnable() { @Override public void run() {
+        SDisplayUtil.showTab(EDocID.REPORT_STACK.getDoc());
+        VStack.SINGLETON_INSTANCE.updateStack(model); 
+    } };
 
     /* (non-Javadoc)
      * @see java.util.Observer#update(java.util.Observable, java.lang.Object)
      */
     @Override
     public void update(final Observable arg0, Object arg1) {
-        if ( arg0 instanceof MagicStack )
-        {
-            FThreads.invokeInEdtNowOrLater(new Runnable() { @Override public void run() {
-                SDisplayUtil.showTab(EDocID.REPORT_STACK.getDoc());
-                update((MagicStack)arg0); 
-            } });
-        }
+        update();
     }
 
     /* (non-Javadoc)
@@ -62,7 +56,9 @@ public enum CStack implements ICDoc, Observer {
      */
     @Override
     public void update() {
-        // won't update without a model!
+        FThreads.invokeInEdtNowOrLater(upd);
     }
+    
+    public void setModel(MagicStack model) { this.model = model; }
 
 }
