@@ -59,6 +59,7 @@ import forge.gui.GuiDialog;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.SDisplayUtil;
 import forge.gui.match.controllers.CCombat;
+import forge.util.Lang;
 
 
 /**
@@ -977,22 +978,18 @@ public class CombatUtil {
         // Loop through Defenders
         // Append Defending Player/Planeswalker
         final Combat combat = game.getCombat();
-        final List<GameEntity> defenders = combat.getDefenders();
-        final List<List<Card>> attackers = combat.sortAttackerByDefender();
+        
 
         // Not a big fan of the triple nested loop here
-        for (int def = 0; def < defenders.size(); def++) {
-            List<Card> attacker = attackers.get(def);
-            if ((attacker == null) || (attacker.size() == 0)) {
+        for (GameEntity defender : combat.getDefenders()) {
+            List<Card> attackers = combat.getAttackersOf(defender);
+            if (attackers == null || attackers.isEmpty()) {
                 continue;
             }
+            if ( sb.length() > 0 ) sb.append("\n");
 
-            sb.append(combat.getAttackingPlayer()).append(" declared ");
-            for (final Card atk : attacker) {
-                sb.append(atk).append(" ");
-            }
-
-            sb.append("attacking ").append(defenders.get(def).toString()).append(".");
+            sb.append(combat.getAttackingPlayer()).append(" declared ").append(Lang.joinHomogenous(attackers));
+            sb.append(" to attack ").append(defender.toString()).append(".");
         }
 
         return sb.toString();
@@ -1007,35 +1004,34 @@ public class CombatUtil {
     public static String getCombatBlockForLog(GameState game) {
         final StringBuilder sb = new StringBuilder();
 
-        List<Card> defend = null;
-
         // Loop through Defenders
         // Append Defending Player/Planeswalker
         final Combat combat = game.getCombat();
-        final List<GameEntity> defenders = combat.getDefenders();
-        final List<List<Card>> attackers = combat.sortAttackerByDefender();
+        List<Card> blockers = null;
+        
 
-        // Not a big fan of the triple nested loop here
-        for (int def = 0; def < defenders.size(); def++) {
-            final List<Card> list = attackers.get(def);
+        for (GameEntity defender : combat.getDefenders()) {
+            List<Card> attackers = combat.getAttackersOf(defender);
+            if (attackers == null || attackers.isEmpty()) {
+                continue;
+            }
+            if ( sb.length() > 0 ) sb.append("\n");
 
-            for (final Card attacker : list) {
-
-
-                defend = game.getCombat().getBlockers(attacker);
-                sb.append(combat.getDefenderByAttacker(attacker)).append(" assigned ");
-
-                if (!defend.isEmpty()) {
-                    // loop through blockers
-                    for (final Card blocker : defend) {
-                        sb.append(blocker).append(" ");
-                    }
+            String controllerName = defender instanceof Card ? ((Card)defender).getController().getName() : defender.getName();
+            boolean firstAttacker = true;
+            for (final Card attacker : attackers) {
+                if ( !firstAttacker ) sb.append("\n");
+                
+                blockers = game.getCombat().getBlockers(attacker);
+                if ( blockers.isEmpty() ) {
+                    sb.append(controllerName).append(" didn't block ");
                 } else {
-                    sb.append("<nothing> ");
+                    sb.append(controllerName).append(" assigned ").append(Lang.joinHomogenous(blockers)).append(" to block ");
                 }
-
-                sb.append("to block ").append(attacker).append(". ");
-            } // loop through attackers
+                
+                sb.append(attacker).append(".");
+                firstAttacker = false;
+            }
         }
 
         return sb.toString();

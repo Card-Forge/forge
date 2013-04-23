@@ -265,17 +265,19 @@ public class ComputerUtilBlock {
         return blockers;
     }
 
-    /**
-     * <p>
-     * sortPotentialAttackers.
-     * </p>
-     * 
-     * @param combat
-     *            a {@link forge.game.phase.Combat} object.
-     * @return a {@link forge.CardList} object.
-     */
+
+
+    public final static List<List<Card>> sortAttackerByDefender(Combat combat) {
+        List<GameEntity> defenders = combat.getDefenders();
+        final ArrayList<List<Card>> attackers = new ArrayList<List<Card>>(defenders.size());
+        for (GameEntity defender : defenders) {
+            attackers.add(combat.getAttackersOf(defender));
+        }
+        return attackers;
+    }
+    
     public static List<Card> sortPotentialAttackers(final Player ai, final Combat combat) {
-        final List<List<Card>> attackerLists = combat.sortAttackerByDefender();
+        final List<List<Card>> attackerLists = sortAttackerByDefender(combat);
         final List<Card> sortedAttackers = new ArrayList<Card>();
         final List<Card> firstAttacker = attackerLists.get(0);
 

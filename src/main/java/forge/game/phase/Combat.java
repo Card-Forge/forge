@@ -229,25 +229,13 @@ public class Combat {
         }
     }
 
-    /**
-     * <p>
-     * sortAttackerByDefender.
-     * </p>
-     * 
-     * @return an array of {@link forge.CardList} objects.
-     */
-    public final List<List<Card>> sortAttackerByDefender() {
-        int size = this.defenders.size();
-        final ArrayList<List<Card>> attackers = new ArrayList<List<Card>>(size);
-        for (int i = 0; i < size; i++) {
-            attackers.add(getAttackersByDefenderSlot(i));
-        }
-        return attackers;
-    }
-
     public final List<Card> getAttackersByDefenderSlot(int slot) {
         GameEntity entity = this.defenders.get(slot);
         return this.defenderMap.get(entity);
+    }
+    
+    public final List<Card> getAttackersOf(GameEntity defender) {
+        return defenderMap.get(defender);
     }
 
     /**

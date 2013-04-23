@@ -99,6 +99,8 @@ public class InputAttack extends InputBase {
     public final void selectButtonOK() {
         // Propaganda costs could have been paid here.
         setCurrentDefender(null); // remove highlights
+        
+        game.getPhaseHandler().setCombat(!game.getCombat().getAttackers().isEmpty());
         game.getPhaseHandler().setPlayersPriorityPermission(false);
         Singletons.getModel().getMatch().getInput().updateObservers();
     }

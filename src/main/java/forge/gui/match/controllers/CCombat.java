@@ -7,8 +7,10 @@ import forge.Command;
 import forge.GameEntity;
 import forge.game.GameState;
 import forge.game.phase.Combat;
+import forge.game.player.Player;
 import forge.gui.framework.ICDoc;
 import forge.gui.match.views.VCombat;
+import forge.util.Lang;
 
 /** 
  * Controls the combat panel in the match UI.
@@ -57,37 +59,34 @@ public enum CCombat implements ICDoc {
     private static String getCombatDescription(Combat combat) {
         final StringBuilder display = new StringBuilder();
 
-        // Loop through Defenders
-        // Append Defending Player/Planeswalker
-        final List<GameEntity> defenders = combat.getDefenders();
-        final List<List<Card>> attackers = combat.sortAttackerByDefender();
-
         // Not a big fan of the triple nested loop here
-        for (int def = 0; def < defenders.size(); def++) {
-            List<Card> atk = attackers.get(def);
-            if ((atk == null) || (atk.size() == 0)) {
+        for (GameEntity defender : combat.getDefenders()) {
+            List<Card> atk = combat.getAttackersOf(defender);
+            if (atk == null || atk.isEmpty()) {
                 continue;
             }
 
-            if (def > 0) {
+            if (display.length() > 0) {
                 display.append("\n");
             }
 
-            display.append("Defender - ");
-            display.append(defenders.get(def).toString());
-            display.append("\n");
+            if (defender instanceof Card) {
+                Player controller = ((Card) defender).getController();
+                display.append(Lang.getPossesive(controller.getName())).append(" ");
+            }
+
+            display.append(defender.getName()).append(" is attacked by:\n");
 
             for (final Card c : atk) {
                 // loop through attackers
-                display.append("-> ");
+                display.append(" > ");
                 display.append(combatantToString(c)).append("\n");
 
                 List<Card> blockers = combat.getBlockers(c);
 
                 // loop through blockers
                 for (final Card element : blockers) {
-                    display.append(" [ ");
-                    display.append(combatantToString(element)).append("\n");
+                    display.append("     < ").append(combatantToString(element)).append("\n");
                 }
             } // loop through attackers
         }
@@ -107,10 +106,11 @@ public enum CCombat implements ICDoc {
         final StringBuilder sb = new StringBuilder();
 
         final String name = (c.isFaceDown()) ? "Morph" : c.getName();
-
+        
+        sb.append("( ").append(c.getNetAttack()).append(" / ").append(c.getNetDefense()).append(" ) ... ");
         sb.append(name);
-        sb.append(" (").append(c.getUniqueNumber()).append(") ");
-        sb.append(c.getNetAttack()).append("/").append(c.getNetDefense());
+        sb.append(" [").append(c.getUniqueNumber()).append("] ");
+        
 
         return sb.toString();
     }

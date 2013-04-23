@@ -42,4 +42,13 @@ public class Lang {
         }
         return sb.toString();
     }
+
+    /**
+     * TODO: Write javadoc for this method.
+     * @param name
+     * @return
+     */
+    public static String getPossesive(String name) {
+        return name.endsWith("s") ? name + "'" : name + "'s";
+    }
 }
