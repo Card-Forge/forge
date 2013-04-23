@@ -191,6 +191,29 @@ Woodlot Crawler
 Scab-Clan Giant
 Spike Jester
 Zhur-Taa Druid
+Debt to the Deathless
+Maw of the Obzedat
+Morgue Burst
+Awe for the Guilds
+Clear a Path
+Punish the Enemy
+Riot Piker
+Rubblebelt Maaka
+Weapon Surge
+Krasis Incubation
+Plasm Capture
+Reap Intellect
+Bane Alley Blackguard
+Crypt Incursion
+Fatal Fumes
+Hired Torturer
+Rakdos Drake
+Sinister Possession
+Armored Wolf-Rider
+Ascended Lawmage
+Bronzebeak Moa
+Blaze Commando
+Carnage Gladiator
 
 
 ------------
