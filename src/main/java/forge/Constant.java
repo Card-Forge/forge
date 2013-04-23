@@ -26,8 +26,6 @@ import java.util.Map;
 
 import com.google.common.collect.ImmutableList;
 
-import forge.card.MagicColor;
-
 /**
  * <p>
  * Constant interface.

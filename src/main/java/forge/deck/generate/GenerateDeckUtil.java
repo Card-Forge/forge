@@ -58,7 +58,7 @@ public class GenerateDeckUtil {
         @Override
         public boolean apply(CardRules c) {
             ManaCost mc = c.getManaCost();
-            return mc.getColorProfile() == 0 && !mc.isNoCost();
+            return c.getColorIdentity().isColorless() && !mc.isNoCost();
         }
     };
 
@@ -72,7 +72,8 @@ public class GenerateDeckUtil {
         @Override
         public boolean apply(CardRules subject) {
             ManaCost mc = subject.getManaCost();
-            return !mc.isPureGeneric() && mc.canBePaidWithAvaliable(allowedColor);
+            return !mc.isPureGeneric() && allowedColor.containsAllColorsFrom(subject.getColorIdentity().getColor());
+            //return  mc.canBePaidWithAvaliable(allowedColor);
             // return allowedColor.containsAllColorsFrom(mc.getColorProfile());
         }
     }

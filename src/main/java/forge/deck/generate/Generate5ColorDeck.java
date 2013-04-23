@@ -17,8 +17,11 @@
  */
 package forge.deck.generate;
 
-import java.util.Arrays;
 import java.util.List;
+
+import org.apache.commons.lang3.tuple.ImmutablePair;
+
+import com.google.common.collect.Lists;
 
 import forge.card.ColorSet;
 import forge.deck.generate.GenerateDeckUtil.FilterCMC;
@@ -35,11 +38,12 @@ import forge.item.ItemPoolView;
  * @version $Id$
  */
 public class Generate5ColorDeck extends GenerateColoredDeckBase {
-    final List<FilterCMC> cmcLevels = Arrays.asList(
-            new GenerateDeckUtil.FilterCMC(0, 2),
-            new GenerateDeckUtil.FilterCMC(3, 5),
-            new GenerateDeckUtil.FilterCMC(6, 20));
-    final int[] cmcAmounts = {15, 10, 5};
+    @SuppressWarnings("unchecked")
+    final List<ImmutablePair<FilterCMC, Integer>> cmcLevels = Lists.newArrayList(
+        ImmutablePair.of(new GenerateDeckUtil.FilterCMC(0, 2), 3),
+        ImmutablePair.of(new GenerateDeckUtil.FilterCMC(3, 5), 2),
+        ImmutablePair.of(new GenerateDeckUtil.FilterCMC(6, 20), 1)
+    );
 
     // resulting mana curve of the card pool
     // 30x 0 - 2
@@ -66,28 +70,24 @@ public class Generate5ColorDeck extends GenerateColoredDeckBase {
      * @return a {@link forge.CardList} object.
      */
     public final ItemPoolView<CardPrinted> getDeck(final int size, final PlayerType pt) {
-        addCreaturesAndSpells(size, cmcLevels, cmcAmounts, pt);
+        addCreaturesAndSpells(size, cmcLevels, pt);
 
         // Add lands
-        int numLands = (int) (getLandsPercentage() * size);
-
+        int numLands = Math.round(size * getLandsPercentage());
+        adjustDeckSize(size - numLands);
         tmpDeck.append("numLands:").append(numLands).append("\n");
 
         // Add dual lands
-
         List<String> duals = GenerateDeckUtil.getDualLandList(colors);
         for (String s : duals) {
             this.cardCounts.put(s, 0);
         }
+
         int dblsAdded = addSomeStr((numLands / 4), duals);
         numLands -= dblsAdded;
 
         addBasicLand(numLands);
         tmpDeck.append("DeckSize:").append(tDeck.countAll()).append("\n");
-
-        adjustDeckSize(size);
-        tmpDeck.append("DeckSize:").append(tDeck.countAll()).append("\n");
-
         return tDeck;
     }
 }

@@ -17,7 +17,6 @@
  */
 package forge.deck.generate;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,9 +24,12 @@ import java.util.Map.Entry;
 import java.util.Random;
 import java.util.TreeMap;
 
+import org.apache.commons.lang3.tuple.ImmutablePair;
+
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 
 import forge.Constant;
 import forge.Singletons;
@@ -73,20 +75,24 @@ public abstract class GenerateColoredDeckBase {
         tDeck = new ItemPool<CardPrinted>(CardPrinted.class);
     }
 
-    protected void addCreaturesAndSpells(int size, List<FilterCMC> cmcLevels, int[] cmcAmounts, PlayerType pt) {
+    protected void addCreaturesAndSpells(int size, List<ImmutablePair<FilterCMC, Integer>> cmcLevels, PlayerType pt) {
+        tmpDeck.append("Building deck of ").append(size).append("cards\n");
+        
         final Iterable<CardPrinted> cards = selectCardsOfMatchingColorForPlayer(pt);
         // build subsets based on type
 
         final Iterable<CardPrinted> creatures = Iterables.filter(cards, Predicates.compose(CardRulesPredicates.Presets.IS_CREATURE, CardPrinted.FN_GET_RULES));
-        final int creatCnt = (int) (getCreatPercentage() * size);
-        tmpDeck.append("Creature Count:").append(creatCnt).append("\n");
-        addCmcAdjusted(creatures, creatCnt, cmcLevels, cmcAmounts);
+        final int creatCnt = (int) Math.ceil(getCreatPercentage() * size);
+        tmpDeck.append("Creatures to add:").append(creatCnt).append("\n");
+        addCmcAdjusted(creatures, creatCnt, cmcLevels);
 
         Predicate<CardPrinted> preSpells = Predicates.compose(CardRulesPredicates.Presets.IS_NONCREATURE_SPELL_FOR_GENERATOR, CardPrinted.FN_GET_RULES);
         final Iterable<CardPrinted> spells = Iterables.filter(cards, preSpells);
-        final int spellCnt = (int) (getSpellPercentage() * size);
-        tmpDeck.append("Spell Count:").append(spellCnt).append("\n");
-        addCmcAdjusted(spells, spellCnt, cmcLevels, cmcAmounts);
+        final int spellCnt = (int) Math.ceil(getSpellPercentage() * size);
+        tmpDeck.append("Spells to add:").append(spellCnt).append("\n");
+        addCmcAdjusted(spells, spellCnt, cmcLevels);
+        
+        tmpDeck.append(String.format("Current deck size: %d... should be %f%n", tDeck.countAll(), size * (getCreatPercentage() + getSpellPercentage())));
     }
 
     public ItemPoolView<CardPrinted> getDeck(final int size, final PlayerType pt) {
@@ -97,19 +103,22 @@ public abstract class GenerateColoredDeckBase {
         for (int i = 0; i < cnt; i++) {
             CardPrinted cp;
             int lc = 0;
+            int srcLen = source.size();
             do {
-                cp = source.get(this.r.nextInt(source.size()));
+                cp = source.get(this.r.nextInt(srcLen));
                 lc++;
-            } while ((this.cardCounts.get(cp.getName()) > (this.maxDuplicates - 1)) && (lc <= 100));
+            } while (this.cardCounts.get(cp.getName()) > this.maxDuplicates - 1 && lc <= 100);
 
             if (lc > 100) {
                 throw new RuntimeException("Generate2ColorDeck : get2ColorDeck -- looped too much -- Cr12");
             }
 
-            tDeck.add(CardDb.instance().getCard(cp.getName(), Aggregates.random(cp.getRules().getSets())));
+            tDeck.add(cp);
             final int n = this.cardCounts.get(cp.getName());
             this.cardCounts.put(cp.getName(), n + 1);
-            tmpDeck.append(cp.getName() + " " + cp.getRules().getManaCost() + "\n");
+            if( n + 1 == this.maxDuplicates )
+                source.remove(cp);
+            tmpDeck.append(String.format("(%d) %s [%s]%n", cp.getRules().getManaCost().getCMC(), cp.getName(), cp.getRules().getManaCost()));
         }
     }
 
@@ -136,6 +145,8 @@ public abstract class GenerateColoredDeckBase {
     }
 
     protected void addBasicLand(int cnt) {
+        tmpDeck.append(cnt).append(" basic lands remain").append("\n");
+        
         // attempt to optimize basic land counts according to colors of picked cards
         final Map<String, Integer> clrCnts = countLands(tDeck);
         // total of all ClrCnts
@@ -147,24 +158,23 @@ public abstract class GenerateColoredDeckBase {
 
         tmpDeck.append("totalColor:").append(totalColor).append("\n");
 
+        int landsLeft = cnt;
         for (Entry<String, Integer> c : clrCnts.entrySet()) {
             String color = c.getKey();
 
 
             // calculate number of lands for each color
-            float p = (float) c.getValue() / totalColor;
-            final int nLand = (int) (cnt * p);
+            final int nLand = Math.min(landsLeft, Math.round(cnt * c.getValue() / totalColor));
             tmpDeck.append("nLand-").append(color).append(":").append(nLand).append("\n");
 
-            // just to prevent a null exception by the deck size fixing
-            // code
+            // just to prevent a null exception by the deck size fixing code
             this.cardCounts.put(color, nLand);
 
             CardPrinted cp = CardDb.instance().getCard(color);
             String basicLandSet = Aggregates.random(cp.getRules().getSets());
-            for (int j = 0; j <= nLand; j++) {
-                tDeck.add(CardDb.instance().getCard(cp.getName(), basicLandSet));
-            }
+
+            tDeck.add(CardDb.instance().getCard(cp.getName(), basicLandSet), nLand);
+            landsLeft -= nLand;
         }
     }
 
@@ -191,19 +201,34 @@ public abstract class GenerateColoredDeckBase {
         }
     }
 
-    protected void addCmcAdjusted(Iterable<CardPrinted> source, int cnt, List<FilterCMC> cmcLevels, int[] cmcAmounts) {
-        final List<CardPrinted> curved = new ArrayList<CardPrinted>();
-
-        for (int i = 0; i < cmcAmounts.length; i++) {
-            Iterable<CardPrinted> matchingCards = Iterables.filter(source, Predicates.compose(cmcLevels.get(i), CardPrinted.FN_GET_RULES));
-            curved.addAll(Aggregates.random(matchingCards, cmcAmounts[i]));
+    protected void addCmcAdjusted(Iterable<CardPrinted> source, int cnt, List<ImmutablePair<FilterCMC, Integer>> cmcLevels) {
+        int totalWeight = 0;
+        for (ImmutablePair<FilterCMC, Integer> pair : cmcLevels) {
+            totalWeight += pair.getRight();
         }
+        
+        float variability = 0.6f; // if set to 1, you'll get minimum cards to choose from
+        float desiredWeight = (float)cnt / ( maxDuplicates * variability ); 
+        float desiredOverTotal = desiredWeight / totalWeight;
+        float requestedOverTotal = (float)cnt / totalWeight;
+        
+        for (ImmutablePair<FilterCMC, Integer> pair : cmcLevels) {
+            Iterable<CardPrinted> matchingCards = Iterables.filter(source, Predicates.compose(pair.getLeft(), CardPrinted.FN_GET_RULES));
+            int cmcCountForPool = (int) Math.ceil(pair.getRight().intValue() * desiredOverTotal);
+            
+            int addOfThisCmc = Math.round(pair.getRight().intValue() * requestedOverTotal);
+            tmpDeck.append(String.format("Adding %d cards for cmc range from a pool with %d cards:%n", addOfThisCmc, cmcCountForPool));
 
-        for (CardPrinted c : curved) {
-            this.cardCounts.put(c.getName(), 0);
+            final List<CardPrinted> curved = Aggregates.random(matchingCards, cmcCountForPool);
+            final List<CardPrinted> curvedRandomized = Lists.newArrayList();
+            for (CardPrinted c : curved) {
+                this.cardCounts.put(c.getName(), 0);
+                CardPrinted cpRandomSet = CardDb.instance().getCard(c.getName(), Aggregates.random(c.getRules().getSets()));
+                curvedRandomized.add(cpRandomSet);
+            }
+
+            addSome(addOfThisCmc, curvedRandomized);
         }
-
-        addSome(cnt, curved);
     }
 
     protected Iterable<CardPrinted> selectCardsOfMatchingColorForPlayer(PlayerType pt) {

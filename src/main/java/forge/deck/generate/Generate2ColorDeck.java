@@ -17,8 +17,10 @@
  */
 package forge.deck.generate;
 
-import java.util.Arrays;
 import java.util.List;
+
+import org.apache.commons.lang3.tuple.ImmutablePair;
+import com.google.common.collect.Lists;
 
 import forge.card.ColorSet;
 import forge.card.MagicColor;
@@ -40,12 +42,13 @@ public class Generate2ColorDeck extends GenerateColoredDeckBase {
     @Override protected final float getCreatPercentage() { return 0.36f; }
     @Override protected final float getSpellPercentage() { return 0.25f; }
 
-    final List<FilterCMC> cmcLevels = Arrays.asList(
-            new GenerateDeckUtil.FilterCMC(0, 2),
-            new GenerateDeckUtil.FilterCMC(3, 4),
-            new GenerateDeckUtil.FilterCMC(5, 6),
-            new GenerateDeckUtil.FilterCMC(7, 20));
-    final int[] cmcAmounts = {10, 8, 6, 2};
+    @SuppressWarnings("unchecked")
+    final List<ImmutablePair<FilterCMC, Integer>> cmcRelativeWeights = Lists.newArrayList(
+        ImmutablePair.of(new GenerateDeckUtil.FilterCMC(0, 2), 6),
+        ImmutablePair.of(new GenerateDeckUtil.FilterCMC(3, 4), 4),
+        ImmutablePair.of(new GenerateDeckUtil.FilterCMC(5, 6), 2),
+        ImmutablePair.of(new GenerateDeckUtil.FilterCMC(7, 20), 1)
+    );
 
     // mana curve of the card pool
     // 20x 0 - 2
@@ -77,15 +80,14 @@ public class Generate2ColorDeck extends GenerateColoredDeckBase {
 
 
     public final ItemPoolView<CardPrinted> getDeck(final int size, final PlayerType pt) {
-        addCreaturesAndSpells(size, cmcLevels, cmcAmounts, pt);
+        addCreaturesAndSpells(size, cmcRelativeWeights, pt);
 
         // Add lands
-        int numLands = (int) (getLandsPercentage() * size);
-
-        tmpDeck.append("numLands:").append(numLands).append("\n");
+        int numLands = Math.round(size * getLandsPercentage());
+        adjustDeckSize(size - numLands);
+        tmpDeck.append(String.format("Adjusted deck size to: %d, should add %d land(s)%n", size - numLands, numLands));
 
         // Add dual lands
-
         List<String> duals = GenerateDeckUtil.getDualLandList(colors);
         for (String s : duals) {
             this.cardCounts.put(s, 0);
@@ -96,10 +98,9 @@ public class Generate2ColorDeck extends GenerateColoredDeckBase {
 
         addBasicLand(numLands);
         tmpDeck.append("DeckSize:").append(tDeck.countAll()).append("\n");
-
-        adjustDeckSize(size);
-        tmpDeck.append("DeckSize:").append(tDeck.countAll()).append("\n");
-
+        
+        //System.out.println(tmpDeck.toString());
+        
         return tDeck;
     }
 }

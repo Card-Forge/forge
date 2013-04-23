@@ -17,8 +17,11 @@
  */
 package forge.deck.generate;
 
-import java.util.Arrays;
 import java.util.List;
+
+import org.apache.commons.lang3.tuple.ImmutablePair;
+
+import com.google.common.collect.Lists;
 
 import forge.card.ColorSet;
 import forge.card.MagicColor;
@@ -40,12 +43,13 @@ public class GenerateMonoColorDeck extends GenerateColoredDeckBase {
     @Override protected final float getCreatPercentage() { return 0.36f; }
     @Override protected final float getSpellPercentage() { return 0.25f; }
 
-    final List<FilterCMC> cmcLevels = Arrays.asList(
-            new GenerateDeckUtil.FilterCMC(0, 2),
-            new GenerateDeckUtil.FilterCMC(3, 4),
-            new GenerateDeckUtil.FilterCMC(5, 6),
-            new GenerateDeckUtil.FilterCMC(7, 20));
-    final int[] cmcAmounts = {10, 8, 5, 3};
+    @SuppressWarnings("unchecked")
+    final List<ImmutablePair<FilterCMC, Integer>> cmcLevels = Lists.newArrayList(
+        ImmutablePair.of(new GenerateDeckUtil.FilterCMC(0, 2), 10),
+        ImmutablePair.of(new GenerateDeckUtil.FilterCMC(3, 4), 8),
+        ImmutablePair.of(new GenerateDeckUtil.FilterCMC(5, 6), 5),
+        ImmutablePair.of(new GenerateDeckUtil.FilterCMC(7, 20), 3)
+    );
 
     // mana curve of the card pool
     // 20x 0 - 2
@@ -76,7 +80,7 @@ public class GenerateMonoColorDeck extends GenerateColoredDeckBase {
 
 
     public final ItemPoolView<CardPrinted> getDeck(final int size, final PlayerType pt) {
-        addCreaturesAndSpells(size, cmcLevels, cmcAmounts, pt);
+        addCreaturesAndSpells(size, cmcLevels, pt);
 
         // Add lands
         int numLands = (int) (getLandsPercentage() * size);
