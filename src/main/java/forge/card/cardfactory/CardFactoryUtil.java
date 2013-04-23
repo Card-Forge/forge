@@ -2891,7 +2891,7 @@ public class CardFactoryUtil {
         };
         card.removeIntrinsicKeyword(evokeKeyword);
         final StringBuilder desc = new StringBuilder();
-        desc.append("Evoke ").append(evokedCost);
+        desc.append("Evoke ").append(evokedCost.toSimpleString());
         desc.append(" (You may cast this spell for its evoke cost. ");
         desc.append("If you do, when it enters the battlefield, sacrifice it.)");
 
