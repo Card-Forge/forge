@@ -110,7 +110,7 @@ public enum VCombat implements IVDoc<CCombat> {
         // No need to update this unless it's showing
         if (!this.equals(parentCell.getSelected())) { return; }
 
-        tab.setText("Combat : " + cntAttackers);
+        tab.setText(cntAttackers > 0 ? ("Combat : " + cntAttackers) : "Combat");
         tar.setText(desc);
     }
 }

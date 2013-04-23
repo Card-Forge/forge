@@ -88,13 +88,16 @@ public class InputAttack extends InputBase {
         }
     }
     
+    private void showCombat() {
+        player.getZone(ZoneType.Battlefield).updateObservers(); // redraw sword icons
+        game.getPhaseHandler().setCombat(!game.getCombat().getAttackers().isEmpty());
+        CombatUtil.showCombat(game);
+    }
+    
     /** {@inheritDoc} */
     @Override
     public final void selectButtonOK() {
-        if (!game.getCombat().getAttackers().isEmpty()) {
-            game.getPhaseHandler().setCombat();
-        }
-
+        // Propaganda costs could have been paid here.
         setCurrentDefender(null); // remove highlights
         game.getPhaseHandler().setPlayersPriorityPermission(false);
         Singletons.getModel().getMatch().getInput().updateObservers();
@@ -114,8 +117,7 @@ public class InputAttack extends InputBase {
         final List<Card> att = game.getCombat().getAttackers();
         if (isMetaDown && att.contains(card) && !card.hasKeyword("CARDNAME attacks each turn if able.")) {
             game.getCombat().removeFromCombat(card);
-            player.getZone(ZoneType.Battlefield).updateObservers();
-            CombatUtil.showCombat(game);
+            showCombat();
             return;
         }
 
@@ -132,21 +134,11 @@ public class InputAttack extends InputBase {
 
         Zone zone = game.getZoneOf(card);
         if (zone.is(ZoneType.Battlefield, player) && CombatUtil.canAttack(card, currentDefender, game.getCombat())) {
-
-            // TODO add the propaganda code here and remove it in
-            // Phase.nextPhase()
-            // if (!CombatUtil.checkPropagandaEffects(card))
-            // return;
-
             if( game.getCombat().isAttacking(card)) {
                 game.getCombat().removeFromCombat(card);
             }
             game.getCombat().addAttacker(card, currentDefender);
-
-            // just to make sure the attack symbol is marked
-            player.getZone(ZoneType.Battlefield).updateObservers();
-            CombatUtil.showCombat(game);
-            ButtonUtil.enableOnlyOk();
+            showCombat();
         }
         else {
             SDisplayUtil.remind(VMessage.SINGLETON_INSTANCE);

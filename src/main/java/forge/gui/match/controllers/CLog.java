@@ -19,6 +19,7 @@ public enum CLog implements ICDoc, Observer {
     /** */
     SINGLETON_INSTANCE;
 
+    private GameLog model;
     /* (non-Javadoc)
      * @see forge.gui.framework.ICDoc#getCommandOnSelect()
      */
@@ -35,24 +36,35 @@ public enum CLog implements ICDoc, Observer {
 
     }
     
+    private final Runnable r = new Runnable() {
+        @Override
+        public void run() {
+            VLog.SINGLETON_INSTANCE.updateConsole(model);
+        }
+    };
 
-    @Override
-    public void update() {}
+    /**
+     * TODO: Write javadoc for this method.
+     * @param gameLog
+     */
+    public void init(GameLog gameLog) {
+        model = gameLog;
+    }
 
     /* (non-Javadoc)
      * @see java.util.Observer#update(java.util.Observable, java.lang.Object)
      */
     @Override
-    public void update(final Observable model, Object arg1) {
-        if( model instanceof GameLog ) {
-            FThreads.invokeInEdtNowOrLater(new Runnable() {
-                
-                @Override
-                public void run() {
-                    VLog.SINGLETON_INSTANCE.updateConsole((GameLog)model);
-                }
-            });
-        }
+    public void update(Observable o, Object arg) {
+        update();
+    }
+
+    /* (non-Javadoc)
+     * @see forge.gui.framework.ICDoc#update()
+     */
+    @Override
+    public void update() {
+        FThreads.invokeInEdtNowOrLater(r);
     }
 
 }

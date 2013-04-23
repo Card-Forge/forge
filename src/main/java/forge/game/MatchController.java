@@ -30,6 +30,7 @@ import forge.gui.framework.SDisplayUtil;
 import forge.gui.match.CMatchUI;
 import forge.gui.match.VMatchUI;
 import forge.gui.match.ViewWinLose;
+import forge.gui.match.controllers.CCombat;
 import forge.gui.match.controllers.CDock;
 import forge.gui.match.controllers.CLog;
 import forge.gui.match.controllers.CMessage;
@@ -166,6 +167,12 @@ public class MatchController {
             FControl.SINGLETON_INSTANCE.setPlayer(localHuman);
             CMatchUI.SINGLETON_INSTANCE.initMatch(currentGame.getRegisteredPlayers(), localHuman);
             CDock.SINGLETON_INSTANCE.onGameStarts(currentGame, localHuman);
+            
+            CLog.SINGLETON_INSTANCE.init(currentGame.getGameLog());
+            currentGame.getGameLog().addObserver(CLog.SINGLETON_INSTANCE);
+            
+            CCombat.SINGLETON_INSTANCE.setModel(currentGame);
+            
             Singletons.getModel().getPreferences().actuateMatchPreferences();
             Singletons.getControl().changeState(FControl.Screens.MATCH_SCREEN);
             SDisplayUtil.showTab(EDocID.REPORT_LOG.getDoc());
@@ -174,10 +181,11 @@ public class MatchController {
             inputControl.setMatch(this);
             input.addObserver(inputControl);
             currentGame.getStack().addObserver(inputControl);
+            currentGame.getStack().addObserver(CStack.SINGLETON_INSTANCE);
             currentGame.getPhaseHandler().addObserver(inputControl);
             
-            currentGame.getGameLog().addObserver(CLog.SINGLETON_INSTANCE);
-            currentGame.getStack().addObserver(CStack.SINGLETON_INSTANCE);
+
+            
             // some observers are set in CMatchUI.initMatch
 
             final boolean canRandomFoil = Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_RANDOM_FOIL) && gameType == GameType.Constructed;

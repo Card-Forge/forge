@@ -834,9 +834,8 @@ public class AiController {
         game.setCombat(new AiAttackController(player, player.getOpponent()).getAttackers());
 
         final List<Card> att = game.getCombat().getAttackers();
-        if (!att.isEmpty()) {
-            game.getPhaseHandler().setCombat();
-        }
+        game.getPhaseHandler().setCombat(!att.isEmpty());
+
 
         for (final Card element : att) {
             // tapping of attackers happens after Propaganda is paid for

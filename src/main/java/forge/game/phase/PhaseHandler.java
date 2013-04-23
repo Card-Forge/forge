@@ -215,8 +215,8 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
      * @param b
      *            a boolean.
      */
-    public final void setCombat() {
-        this.bCombat.set(true);
+    public final void setCombat(boolean value) {
+        this.bCombat.set(value);
     }
 
     /**
