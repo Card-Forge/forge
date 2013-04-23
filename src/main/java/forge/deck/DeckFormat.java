@@ -170,20 +170,23 @@ public enum DeckFormat {
                         }
                     }
                 }
-                for(Entry<CardPrinted, Integer> cp : deck.get(DeckSection.Sideboard)) {
-                    if(!cp.getKey().getRules().getColorIdentity().hasNoColorsExcept(cmdCI.getColor()))
-                    {
-                        erroneousCI.add(cp.getKey());
-                    }
-                    if(cp.getKey().getRules().getType().isLand())
-                    {
-                        for(String key : Constant.Color.COLOR_TO_BASIC_LAND_TYPE_MAP.keySet())
+                if(deck.get(DeckSection.Sideboard) != null)
+                {
+                    for(Entry<CardPrinted, Integer> cp : deck.get(DeckSection.Sideboard)) {
+                        if(!cp.getKey().getRules().getColorIdentity().hasNoColorsExcept(cmdCI.getColor()))
                         {
-                            if(!cmdCI.hasAnyColor(MagicColor.fromName(key)))
+                            erroneousCI.add(cp.getKey());
+                        }
+                        if(cp.getKey().getRules().getType().isLand())
+                        {
+                            for(String key : Constant.Color.COLOR_TO_BASIC_LAND_TYPE_MAP.keySet())
                             {
-                                if(cp.getKey().getRules().getType().subTypeContains(Constant.Color.COLOR_TO_BASIC_LAND_TYPE_MAP.get(key)))
+                                if(!cmdCI.hasAnyColor(MagicColor.fromName(key)))
                                 {
-                                    erroneousCI.add(cp.getKey());
+                                    if(cp.getKey().getRules().getType().subTypeContains(Constant.Color.COLOR_TO_BASIC_LAND_TYPE_MAP.get(key)))
+                                    {
+                                        erroneousCI.add(cp.getKey());
+                                    }
                                 }
                             }
                         }
