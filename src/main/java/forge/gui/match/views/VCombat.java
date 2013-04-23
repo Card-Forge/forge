@@ -21,7 +21,6 @@ import javax.swing.JTextArea;
 import javax.swing.border.MatteBorder;
 
 import net.miginfocom.swing.MigLayout;
-import forge.Singletons;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
@@ -107,11 +106,11 @@ public enum VCombat implements IVDoc<CCombat> {
     //========= Observer update methods
 
     /** @param s0 &emsp; {@link java.lang.String} */
-    public void updateCombat(final String s0) {
+    public void updateCombat(final int cntAttackers, final String desc) {
         // No need to update this unless it's showing
         if (!this.equals(parentCell.getSelected())) { return; }
 
-        tab.setText("Combat : " + Singletons.getModel().getGame().getCombat().getAttackers().size());
-        tar.setText(s0);
+        tab.setText("Combat : " + cntAttackers);
+        tar.setText(desc);
     }
 }

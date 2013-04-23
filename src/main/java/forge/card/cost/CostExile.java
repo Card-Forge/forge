@@ -24,7 +24,6 @@ import forge.Card;
 import forge.CardLists;
 import forge.CardPredicates;
 import forge.FThreads;
-import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityStackInstance;
@@ -164,8 +163,8 @@ public class CostExile extends CostPartWithList {
             return true; // this will always work
         }
         if (this.getFrom().equals(ZoneType.Stack)) {
-            for (int i = 0; i < Singletons.getModel().getGame().getStack().size(); i++) {
-                typeList.add(Singletons.getModel().getGame().getStack().peekAbility(i).getSourceCard());
+            for (int i = 0; i < game.getStack().size(); i++) {
+                typeList.add(game.getStack().peekAbility(i).getSourceCard());
             }
         } else {
             if (this.sameZone) {

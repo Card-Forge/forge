@@ -1,6 +1,5 @@
 package forge.card.ability.effects;
 
-import forge.Singletons;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
 import forge.game.GameState;
@@ -17,7 +16,7 @@ public class PlaneswalkEffect extends SpellAbilityEffect {
      */
     @Override
     public void resolve(SpellAbility sa) {
-        GameState game = Singletons.getModel().getGame();
+        GameState game = sa.getActivatingPlayer().getGame();
         
         System.out.println("AF Planeswalking!");
         

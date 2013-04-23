@@ -5,11 +5,11 @@ import java.util.List;
 import forge.Card;
 import forge.CardLists;
 import forge.CounterType;
-import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
+import forge.game.GameState;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
@@ -43,8 +43,9 @@ public class CountersPutAllEffect extends SpellAbilityEffect  {
         final int counterAmount = AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("CounterNum"), sa);
         final String valid = sa.getParam("ValidCards");
         final ZoneType zone = sa.hasParam("ValidZone") ? ZoneType.smartValueOf(sa.getParam("ValidZone")) : ZoneType.Battlefield;
+        final GameState game = sa.getActivatingPlayer().getGame();
 
-        List<Card> cards = Singletons.getModel().getGame().getCardsIn(zone);
+        List<Card> cards = game.getCardsIn(zone);
         cards = CardLists.getValidCards(cards, valid, sa.getSourceCard().getController(), sa.getSourceCard());
 
         final Target tgt = sa.getTarget();
@@ -54,7 +55,7 @@ public class CountersPutAllEffect extends SpellAbilityEffect  {
         }
 
         for (final Card tgtCard : cards) {
-            if (Singletons.getModel().getGame().getZoneOf(tgtCard).is(ZoneType.Battlefield)) {
+            if (game.getZoneOf(tgtCard).is(ZoneType.Battlefield)) {
                 tgtCard.addCounter(CounterType.valueOf(type), counterAmount, true);
             } else {
                 // adding counters to something like re-suspend cards

@@ -506,7 +506,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
         if (toLose > 0) {
             this.subtractLife(toLose);
             lifeLost = toLose;
-            Singletons.getModel().getGame().getEvents().post(new LifeLossEvent());
+            game.getEvents().post(new LifeLossEvent());
             this.updateObservers();
         } else if (toLose == 0) {
             // Rule 118.4
@@ -691,7 +691,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
     @Override
     public final int staticDamagePrevention(final int damage, final Card source, final boolean isCombat, final boolean isTest) {
 
-        if (Singletons.getModel().getGame().getStaticEffects().getGlobalRuleChange(GlobalRuleChange.noPrevention)) {
+        if (game.getStaticEffects().getGlobalRuleChange(GlobalRuleChange.noPrevention)) {
             return damage;
         }
 
@@ -882,7 +882,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
     @Override
     public final int preventDamage(final int damage, final Card source, final boolean isCombat) {
 
-        if (Singletons.getModel().getGame().getStaticEffects().getGlobalRuleChange(GlobalRuleChange.noPrevention)
+        if (game.getStaticEffects().getGlobalRuleChange(GlobalRuleChange.noPrevention)
                 || source.hasKeyword("Damage that would be dealt by CARDNAME can't be prevented.")) {
             return damage;
         }
@@ -1769,7 +1769,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
         game.getTriggerHandler().runTrigger(TriggerType.Shuffled, runParams, false);
 
         // Play the shuffle sound
-        Singletons.getModel().getGame().getEvents().post(new ShuffleEvent());
+        game.getEvents().post(new ShuffleEvent());
     } // shuffle
       // //////////////////////////////
 
@@ -2438,7 +2438,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
             if (property.substring(8).equals("Life")) {
                 int highestLife = -50; // Negative base just in case a few Lich's are running around
                 Player healthiest = null;
-                for (final Player p : Singletons.getModel().getGame().getPlayers()) {
+                for (final Player p : game.getPlayers()) {
                     if (p.getLife() > highestLife) {
                         highestLife = p.getLife();
                         healthiest = p;
@@ -2451,7 +2451,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
             else if (property.substring(8).equals("CardsInHand")) {
                 int largestHand = 0;
                 Player withLargestHand = null;
-                for (final Player p : Singletons.getModel().getGame().getPlayers()) {
+                for (final Player p : game.getPlayers()) {
                     if (p.getCardsIn(ZoneType.Hand).size() > largestHand) {
                         largestHand = p.getCardsIn(ZoneType.Hand).size();
                         withLargestHand = p;
@@ -2465,7 +2465,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
             if (property.substring(10).equals("Life")) {
                 int lowestLife = 1000;
                 List<Player> lowestlifep = new ArrayList<Player>();
-                for (final Player p : Singletons.getModel().getGame().getPlayers()) {
+                for (final Player p : game.getPlayers()) {
                     if (p.getLife() == lowestLife) {
                         lowestlifep.add(p);
                     } else if (p.getLife() < lowestLife) {

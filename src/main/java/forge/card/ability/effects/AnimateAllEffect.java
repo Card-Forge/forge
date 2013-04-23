@@ -9,7 +9,6 @@ import forge.Card;
 import forge.CardLists;
 import forge.CardUtil;
 import forge.Command;
-import forge.Singletons;
 import forge.card.TriggerReplacementBase;
 import forge.card.ability.AbilityFactory;
 import forge.card.ability.AbilityUtils;
@@ -19,6 +18,7 @@ import forge.card.spellability.Target;
 import forge.card.staticability.StaticAbility;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerHandler;
+import forge.game.GameState;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
@@ -33,7 +33,6 @@ public class AnimateAllEffect extends AnimateEffectBase {
     public void resolve(final SpellAbility sa) {
         final Card host = sa.getSourceCard();
         final Map<String, String> svars = host.getSVars();
-        long timest = -1;
 
         // AF specific sa
         int power = -1;
@@ -44,11 +43,10 @@ public class AnimateAllEffect extends AnimateEffectBase {
         if (sa.hasParam("Toughness")) {
             toughness = AbilityUtils.calculateAmount(host, sa.getParam("Toughness"), sa);
         }
+        final GameState game = sa.getActivatingPlayer().getGame();
 
         // Every Animate event needs a unique time stamp
-        timest = Singletons.getModel().getGame().getNextTimestamp();
-
-        final long timestamp = timest;
+        final long timestamp = game.getNextTimestamp();
 
         final boolean permanent = sa.hasParam("Permanent");
 
@@ -134,7 +132,7 @@ public class AnimateAllEffect extends AnimateEffectBase {
         }
 
         if ((tgtPlayers == null) || tgtPlayers.isEmpty()) {
-            list = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
+            list = game.getCardsIn(ZoneType.Battlefield);
         } else {
             list = new ArrayList<Card>(tgtPlayers.get(0).getCardsIn(ZoneType.Battlefield));
         }
@@ -243,9 +241,9 @@ public class AnimateAllEffect extends AnimateEffectBase {
 
             if (!permanent) {
                 if (sa.hasParam("UntilEndOfCombat")) {
-                    Singletons.getModel().getGame().getEndOfCombat().addUntil(unanimate);
+                    game.getEndOfCombat().addUntil(unanimate);
                 } else {
-                    Singletons.getModel().getGame().getEndOfTurn().addUntil(unanimate);
+                    game.getEndOfTurn().addUntil(unanimate);
                 }
             }
         }

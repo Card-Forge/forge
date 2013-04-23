@@ -135,7 +135,7 @@ public class MatchController {
     public void startRound() {
 
         input = new InputControl(this);
-        currentGame = Singletons.getModel().newGame(players.keySet(),gameType, this);
+        currentGame = new GameState(players.keySet(), gameType, this);
 
         Map<Player, PlayerStartConditions> startConditions = new HashMap<Player, PlayerStartConditions>();
         for (Player p : currentGame.getPlayers()) {

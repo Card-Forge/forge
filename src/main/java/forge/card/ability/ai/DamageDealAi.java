@@ -8,13 +8,13 @@ import com.google.common.base.Predicate;
 
 import forge.Card;
 import forge.CardLists;
-import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.cost.Cost;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
+import forge.game.GameState;
 import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilCard;
 import forge.game.ai.ComputerUtilCombat;
@@ -81,7 +81,7 @@ public class DamageDealAi extends DamageAiBase {
         if (source.getName().equals("Stuffy Doll")) {
             // Now stuffy sits around for blocking
             // TODO(sol): this should also happen if Stuffy is going to die
-            return Singletons.getModel().getGame().getPhaseHandler().is(PhaseType.END_OF_TURN, ai.getOpponent());
+            return ai.getGame().getPhaseHandler().is(PhaseType.END_OF_TURN, ai.getOpponent());
         }
 
         if (sa.isAbility()) {
@@ -133,7 +133,7 @@ public class DamageDealAi extends DamageAiBase {
             final Player pl, final boolean mandatory) {
 
         // wait until stack is empty (prevents duplicate kills)
-        if (!saMe.isTrigger() && !Singletons.getModel().getGame().getStack().isEmpty()) {
+        if (!saMe.isTrigger() && !ai.getGame().getStack().isEmpty()) {
             return null;
         }
         final Target tgt = saMe.getTarget();
@@ -226,7 +226,8 @@ public class DamageDealAi extends DamageAiBase {
             final boolean isTrigger, final boolean mandatory) {
         final Card source = saMe.getSourceCard();
         final boolean noPrevention = saMe.hasParam("NoPrevention");
-        final PhaseHandler phase = Singletons.getModel().getGame().getPhaseHandler();
+        final GameState game = source.getGame();
+        final PhaseHandler phase = game.getPhaseHandler();
         final boolean divided = saMe.hasParam("DividedAsYouChoose");
 
         // target loop

@@ -6,11 +6,11 @@ import java.util.List;
 
 import forge.Card;
 import forge.Command;
-import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
+import forge.game.GameState;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
@@ -18,6 +18,7 @@ public class PumpAllEffect extends SpellAbilityEffect {
     private void applyPumpAll(final SpellAbility sa, final List<Card> list, final int a, 
             final int d, final List<String> keywords, final ArrayList<ZoneType> affectedZones) {
         
+        final GameState game = sa.getActivatingPlayer().getGame();
         for (final Card tgtC : list) {
 
             // only pump things in the affected zones.
@@ -66,9 +67,9 @@ public class PumpAllEffect extends SpellAbilityEffect {
                 if (sa.hasParam("UntilUntaps")) {
                     sa.getSourceCard().addUntapCommand(untilEOT);
                 } else if (sa.hasParam("UntilEndOfCombat")) {
-                    Singletons.getModel().getGame().getEndOfCombat().addUntil(untilEOT);
+                    game.getEndOfCombat().addUntil(untilEOT);
                 } else {
-                    Singletons.getModel().getGame().getEndOfTurn().addUntil(untilEOT);
+                    game.getEndOfTurn().addUntil(untilEOT);
                 }
             }
         }
@@ -94,6 +95,7 @@ public class PumpAllEffect extends SpellAbilityEffect {
         List<Card> list;
         final List<Player> tgtPlayers = getTargetPlayersEmptyAsDefault(sa);
         final ArrayList<ZoneType> affectedZones = new ArrayList<ZoneType>();
+        final GameState game = sa.getActivatingPlayer().getGame();
 
         if (sa.hasParam("PumpZone")) {
             for (final String zone : sa.getParam("PumpZone").split(",")) {
@@ -106,7 +108,7 @@ public class PumpAllEffect extends SpellAbilityEffect {
         list = new ArrayList<Card>();
         if (tgtPlayers.isEmpty()) {
             for (final ZoneType zone : affectedZones) {
-                list.addAll(Singletons.getModel().getGame().getCardsIn(zone));
+                list.addAll(game.getCardsIn(zone));
             }
 
         } else {

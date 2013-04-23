@@ -4,10 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import forge.Card;
-import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
+import forge.game.GameState;
+import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
 public class SacrificeAllEffect extends SpellAbilityEffect {
@@ -33,8 +34,10 @@ public class SacrificeAllEffect extends SpellAbilityEffect {
 
     @Override
     public void resolve(SpellAbility sa) {
-
         final Card card = sa.getSourceCard();
+        final Player activator = sa.getActivatingPlayer();
+        final GameState game = activator.getGame();
+
 
         String valid = "";
 
@@ -46,7 +49,7 @@ public class SacrificeAllEffect extends SpellAbilityEffect {
         if (sa.hasParam("Defined")) {
             list = new ArrayList<Card>(AbilityUtils.getDefinedCards(sa.getSourceCard(), sa.getParam("Defined"), sa));
         } else {
-            list = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
+            list = game.getCardsIn(ZoneType.Battlefield);
         }
 
         final boolean remSacrificed = sa.hasParam("RememberSacrificed");
@@ -57,7 +60,7 @@ public class SacrificeAllEffect extends SpellAbilityEffect {
         list = AbilityUtils.filterListByType(list, valid, sa);
 
         for (int i = 0; i < list.size(); i++) {
-            if (Singletons.getModel().getGame().getAction().sacrifice(list.get(i), sa) && remSacrificed) {
+            if (game.getAction().sacrifice(list.get(i), sa) && remSacrificed) {
                 card.addRemembered(list.get(i));
             }
         }

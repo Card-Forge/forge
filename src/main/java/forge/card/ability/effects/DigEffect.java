@@ -9,11 +9,11 @@ import java.util.Random;
 import forge.Card;
 import forge.CardCharacteristicName;
 import forge.CardLists;
-import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
+import forge.game.GameState;
 import forge.game.ai.ComputerUtilCard;
 import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
@@ -52,6 +52,7 @@ public class DigEffect extends SpellAbilityEffect {
     public void resolve(SpellAbility sa) {
         final Card host = sa.getSourceCard();
         final Player player = sa.getActivatingPlayer();
+        final GameState game = player.getGame();
         Player choser = player;
         int numToDig = AbilityUtils.calculateAmount(host, sa.getParam("DigNum"), sa);
         final ZoneType destZone1 = sa.hasParam("DestinationZone") ? ZoneType.smartValueOf(sa.getParam("DestinationZone"))
@@ -161,7 +162,7 @@ public class DigEffect extends SpellAbilityEffect {
                         rest.add(c);
                     }
                     if (mitosis) {
-                        valid = sharesNameWithCardOnBattlefield(top);
+                        valid = sharesNameWithCardOnBattlefield(game, top);
                     } else if (!changeValid.equals("")) {
                         if (changeValid.contains("ChosenType")) {
                             changeValid = changeValid.replace("ChosenType", host.getChosenType());
@@ -283,9 +284,9 @@ public class DigEffect extends SpellAbilityEffect {
                         }
                         final PlayerZone zone = c.getOwner().getZone(destZone1);
                         if (zone.is(ZoneType.Library)) {
-                            Singletons.getModel().getGame().getAction().moveToLibrary(c, libraryPosition);
+                            game.getAction().moveToLibrary(c, libraryPosition);
                         } else {
-                            c = Singletons.getModel().getGame().getAction().moveTo(zone, c);
+                            c = game.getAction().moveTo(zone, c);
                             if (destZone1.equals(ZoneType.Battlefield)) {
                                 for (final String kw : keywords) {
                                     c.addExtrinsicKeyword(kw);
@@ -328,12 +329,12 @@ public class DigEffect extends SpellAbilityEffect {
                                 } else {
                                     chosen = rest.get(0);
                                 }
-                                Singletons.getModel().getGame().getAction().moveToLibrary(chosen, libraryPosition2);
+                                game.getAction().moveToLibrary(chosen, libraryPosition2);
                                 rest.remove(chosen);
                             }
                         } else { // Computer
                             for (int i = 0; i < rest.size(); i++) {
-                                Singletons.getModel().getGame().getAction().moveToLibrary(rest.get(i), libraryPosition2);
+                                game.getAction().moveToLibrary(rest.get(i), libraryPosition2);
                             }
                         }
                     } else {
@@ -341,7 +342,7 @@ public class DigEffect extends SpellAbilityEffect {
                         for (int i = 0; i < rest.size(); i++) {
                             Card c = rest.get(i);
                             final PlayerZone toZone = c.getOwner().getZone(destZone2);
-                            c = Singletons.getModel().getGame().getAction().moveTo(toZone, c);
+                            c = game.getAction().moveTo(toZone, c);
                             if (destZone2.equals(ZoneType.Battlefield) && !keywords.isEmpty()) {
                                 for (final String kw : keywords) {
                                     c.addExtrinsicKeyword(kw);
@@ -366,9 +367,9 @@ public class DigEffect extends SpellAbilityEffect {
      *            a {@link forge.CardList} object.
      * @return a {@link forge.CardList} object.
      */
-    private List<Card> sharesNameWithCardOnBattlefield(final List<Card> list) {
+    private List<Card> sharesNameWithCardOnBattlefield(final GameState game, final List<Card> list) {
         final List<Card> toReturn = new ArrayList<Card>();
-        final List<Card> play = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
+        final List<Card> play = game.getCardsIn(ZoneType.Battlefield);
         for (final Card c : list) {
             for (final Card p : play) {
                 if (p.getName().equals(c.getName()) && !toReturn.contains(c)) {

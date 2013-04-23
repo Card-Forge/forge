@@ -1,8 +1,8 @@
 package forge.card.ability.effects;
 
-import forge.Singletons;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
+import forge.game.GameState;
 import forge.game.PlanarDice;
 import forge.game.player.Player;
 import forge.gui.GuiDialog;
@@ -19,16 +19,15 @@ public class RollPlanarDiceEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
         boolean countedTowardsCost = !sa.hasParam("NotCountedTowardsCost");
-        
-        Player roller = sa.getActivatingPlayer();
-        if(countedTowardsCost)
-        {
-            
-            Singletons.getModel().getGame().getPhaseHandler().incPlanarDiceRolledthisTurn();
+        final Player activator = sa.getActivatingPlayer();
+        final GameState game = activator.getGame();
+
+        if(countedTowardsCost) {
+            game.getPhaseHandler().incPlanarDiceRolledthisTurn();
         }
-        PlanarDice result = PlanarDice.roll(roller,null);
+        PlanarDice result = PlanarDice.roll(activator, null);
         
-        GuiDialog.message(roller.getName() + " rolled " + result.toString());
+        GuiDialog.message(activator.getName() + " rolled " + result.toString());
 
     }
 }

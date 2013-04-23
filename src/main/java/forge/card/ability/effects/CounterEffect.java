@@ -5,9 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 
 import forge.Card;
-import forge.Singletons;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.cardfactory.CardFactoryUtil;
+import forge.game.GameState;
 import forge.game.player.AIPlayer;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityStackInstance;
@@ -18,14 +18,15 @@ import forge.gui.GuiChoose;
 public class CounterEffect extends SpellAbilityEffect {
     @Override
     protected String getStackDescription(SpellAbility sa) {
+        final GameState game = sa.getActivatingPlayer().getGame();
 
         final StringBuilder sb = new StringBuilder();
         final List<SpellAbility> sas;
 
         if (sa.hasParam("AllType")) {
             sas = new ArrayList<SpellAbility>();
-            for (int i = 0; i < Singletons.getModel().getGame().getStack().size(); i++) {
-                SpellAbility spell = Singletons.getModel().getGame().getStack().peekAbility(i);
+            for (int i = 0; i < game.getStack().size(); i++) {
+                SpellAbility spell = game.getStack().peekAbility(i);
                 if (sa.getParam("AllType").equals("Spell") && !spell.isSpell()) {
                     continue;
                 }
@@ -62,14 +63,15 @@ public class CounterEffect extends SpellAbilityEffect {
 
     @Override
     public void resolve(SpellAbility sa) {
+        final GameState game = sa.getActivatingPlayer().getGame();
         // TODO Before this resolves we should see if any of our targets are
         // still on the stack
         final List<SpellAbility> sas;
 
         if (sa.hasParam("AllType")) {
             sas = new ArrayList<SpellAbility>();
-            for (int i = 0; i < Singletons.getModel().getGame().getStack().size(); i++) {
-                SpellAbility spell = Singletons.getModel().getGame().getStack().peekAbility(i);
+            for (int i = 0; i < game.getStack().size(); i++) {
+                SpellAbility spell = game.getStack().peekAbility(i);
                 if (sa.getParam("AllType").equals("Spell") && !spell.isSpell()) {
                     continue;
                 }
@@ -97,7 +99,7 @@ public class CounterEffect extends SpellAbilityEffect {
                 continue;
             }
 
-            final SpellAbilityStackInstance si = Singletons.getModel().getGame().getStack().getInstanceFromSpellAbility(tgtSA);
+            final SpellAbilityStackInstance si = game.getStack().getInstanceFromSpellAbility(tgtSA);
             if (si == null) {
                 continue;
             }
@@ -106,7 +108,7 @@ public class CounterEffect extends SpellAbilityEffect {
 
             // Destroy Permanent may be able to be turned into a SubAbility
             if (tgtSA.isAbility() && sa.hasParam("DestroyPermanent")) {
-                Singletons.getModel().getGame().getAction().destroy(tgtSACard, sa);
+                game.getAction().destroy(tgtSACard, sa);
             }
 
             if (sa.hasParam("RememberCountered")) {
@@ -132,7 +134,8 @@ public class CounterEffect extends SpellAbilityEffect {
      * @param sa
      */
     private void removeFromStack(final SpellAbility tgtSA, final SpellAbility srcSA, final SpellAbilityStackInstance si) {
-        Singletons.getModel().getGame().getStack().remove(si);
+        final GameState game = tgtSA.getActivatingPlayer().getGame();
+        game.getStack().remove(si);
 
         String destination =  srcSA.hasParam("Destination") ? srcSA.getParam("Destination") : "Graveyard";
         if (srcSA.hasParam("DestinationChoice")) {//Hinder
@@ -148,29 +151,29 @@ public class CounterEffect extends SpellAbilityEffect {
             // For Ability-targeted counterspells - do not move it anywhere,
             // even if Destination$ is specified.
         } else if (tgtSA.isFlashBackAbility())  {
-            Singletons.getModel().getGame().getAction().exile(tgtSA.getSourceCard());
+            game.getAction().exile(tgtSA.getSourceCard());
         } else if (destination.equals("Graveyard")) {
-            Singletons.getModel().getGame().getAction().moveToGraveyard(tgtSA.getSourceCard());
+            game.getAction().moveToGraveyard(tgtSA.getSourceCard());
         } else if (destination.equals("Exile")) {
-            Singletons.getModel().getGame().getAction().exile(tgtSA.getSourceCard());
+            game.getAction().exile(tgtSA.getSourceCard());
         } else if (destination.equals("TopOfLibrary")) {
-            Singletons.getModel().getGame().getAction().moveToLibrary(tgtSA.getSourceCard());
+            game.getAction().moveToLibrary(tgtSA.getSourceCard());
         } else if (destination.equals("Hand")) {
-            Singletons.getModel().getGame().getAction().moveToHand(tgtSA.getSourceCard());
+            game.getAction().moveToHand(tgtSA.getSourceCard());
         } else if (destination.equals("Battlefield")) {
             if (tgtSA instanceof SpellPermanent) {
                 Card c = tgtSA.getSourceCard();
                 System.out.println(c + " is SpellPermanent");
                 c.setController(srcSA.getActivatingPlayer(), 0);
-                Singletons.getModel().getGame().getAction().moveToPlay(c, srcSA.getActivatingPlayer());
+                game.getAction().moveToPlay(c, srcSA.getActivatingPlayer());
             } else {
-                Card c = Singletons.getModel().getGame().getAction().moveToPlay(tgtSA.getSourceCard(), srcSA.getActivatingPlayer());
+                Card c = game.getAction().moveToPlay(tgtSA.getSourceCard(), srcSA.getActivatingPlayer());
                 c.setController(srcSA.getActivatingPlayer(), 0);
             }
         } else if (destination.equals("BottomOfLibrary")) {
-            Singletons.getModel().getGame().getAction().moveToBottomOfLibrary(tgtSA.getSourceCard());
+            game.getAction().moveToBottomOfLibrary(tgtSA.getSourceCard());
         } else if (destination.equals("ShuffleIntoLibrary")) {
-            Singletons.getModel().getGame().getAction().moveToBottomOfLibrary(tgtSA.getSourceCard());
+            game.getAction().moveToBottomOfLibrary(tgtSA.getSourceCard());
             tgtSA.getSourceCard().getController().shuffle();
         } else {
             throw new IllegalArgumentException("AbilityFactory_CounterMagic: Invalid Destination argument for card "

@@ -7,9 +7,9 @@ import org.apache.commons.lang3.StringUtils;
 import forge.Card;
 import forge.CardLists;
 import forge.GameEntity;
-import forge.Singletons;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
+import forge.game.GameState;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
@@ -150,6 +150,7 @@ public class UnattachAllEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
         Card source = sa.getSourceCard();
+        final GameState game = sa.getActivatingPlayer().getGame();
         final List<Object> targets = getTargetObjects(sa);
 
         // If Cast Targets will be checked on the Stack
@@ -159,7 +160,7 @@ public class UnattachAllEffect extends SpellAbilityEffect {
             }
 
             String valid = sa.getParam("UnattachValid");
-            List<Card> unattachList = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
+            List<Card> unattachList = game.getCardsIn(ZoneType.Battlefield);
             unattachList = CardLists.getValidCards(unattachList, valid.split(","), source.getController(), source);
             for (final Card c : unattachList) {
                 handleUnattachment((GameEntity) o, c);

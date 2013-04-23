@@ -5,6 +5,7 @@ import java.util.Observer;
 
 import forge.Command;
 import forge.FThreads;
+import forge.GameLog;
 import forge.gui.framework.ICDoc;
 import forge.gui.match.views.VLog;
 
@@ -34,25 +35,24 @@ public enum CLog implements ICDoc, Observer {
 
     }
     
-    private static Runnable updateConsole = new Runnable() {
-        
-        @Override
-        public void run() {
-            VLog.SINGLETON_INSTANCE.updateConsole();
-        }
-    };
 
     @Override
-    public void update() {
-        FThreads.invokeInEdtNowOrLater(updateConsole);
-    }
+    public void update() {}
 
     /* (non-Javadoc)
      * @see java.util.Observer#update(java.util.Observable, java.lang.Object)
      */
     @Override
-    public void update(Observable arg0, Object arg1) {
-        update();
+    public void update(final Observable model, Object arg1) {
+        if( model instanceof GameLog ) {
+            FThreads.invokeInEdtNowOrLater(new Runnable() {
+                
+                @Override
+                public void run() {
+                    VLog.SINGLETON_INSTANCE.updateConsole((GameLog)model);
+                }
+            });
+        }
     }
 
 }

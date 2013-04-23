@@ -2,7 +2,6 @@ package forge.card.ability.ai;
 
 import java.util.Random;
 
-import forge.Singletons;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
@@ -47,7 +46,7 @@ public class DigAi extends SpellAbilityAi {
         }
 
         // Don't use draw abilities before main 2 if possible
-        if (Singletons.getModel().getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2) && !sa.hasParam("ActivationPhases")
+        if (ai.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2) && !sa.hasParam("ActivationPhases")
                 && !sa.hasParam("DestinationZone")) {
             return false;
         }

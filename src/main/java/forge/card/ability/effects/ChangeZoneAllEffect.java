@@ -8,10 +8,10 @@ import com.google.common.collect.Iterables;
 import forge.Card;
 import forge.CardCharacteristicName;
 import forge.CardPredicates;
-import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
+import forge.game.GameState;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
@@ -40,9 +40,10 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
         List<Card> cards = new ArrayList<Card>();
 
         List<Player> tgtPlayers = getTargetPlayersEmptyAsDefault(sa);
+        final GameState game = sa.getActivatingPlayer().getGame();
 
         if ((tgtPlayers == null) || tgtPlayers.isEmpty() || sa.hasParam("UseAllOriginZones")) {
-            cards = Singletons.getModel().getGame().getCardsIn(origin);
+            cards = game.getCardsIn(origin);
         } else {
             for (final Player p : tgtPlayers) {
                 cards.addAll(p.getCardsIn(origin));
@@ -81,10 +82,10 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
             }
 
             if (sa.hasParam("GainControl")) {
-                c.setController(sa.getActivatingPlayer(), Singletons.getModel().getGame().getNextTimestamp());
-                Singletons.getModel().getGame().getAction().moveToPlay(c, sa.getActivatingPlayer());
+                c.setController(sa.getActivatingPlayer(), game.getNextTimestamp());
+                game.getAction().moveToPlay(c, sa.getActivatingPlayer());
             } else {
-                final Card movedCard = Singletons.getModel().getGame().getAction().moveTo(destination, c, libraryPos);
+                final Card movedCard = game.getAction().moveTo(destination, c, libraryPos);
                 if (sa.hasParam("ExileFaceDown")) {
                     movedCard.setState(CardCharacteristicName.FaceDown);
                 }
@@ -94,20 +95,20 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
             }
 
             if (remember != null) {
-                Singletons.getModel().getGame().getCardState(sa.getSourceCard()).addRemembered(c);
+                game.getCardState(sa.getSourceCard()).addRemembered(c);
             }
             if (forget != null) {
-                Singletons.getModel().getGame().getCardState(sa.getSourceCard()).removeRemembered(c);
+                game.getCardState(sa.getSourceCard()).removeRemembered(c);
             }
             if (imprint != null) {
-                Singletons.getModel().getGame().getCardState(sa.getSourceCard()).addImprinted(c);
+                game.getCardState(sa.getSourceCard()).addImprinted(c);
             }
         }
 
         // if Shuffle parameter exists, and any amount of cards were owned by
         // that player, then shuffle that library
         if (sa.hasParam("Shuffle")) {
-            for (Player p : Singletons.getModel().getGame().getPlayers()) {
+            for (Player p : game.getPlayers()) {
                 if (Iterables.any(cards, CardPredicates.isOwner(p))) {
                     p.shuffle();
                 }

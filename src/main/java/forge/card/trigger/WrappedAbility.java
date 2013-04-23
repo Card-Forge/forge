@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Map;
 
 import forge.Card;
-import forge.Singletons;
 import forge.card.ability.ApiType;
 import forge.card.cost.Cost;
 import forge.card.mana.ManaCost;
@@ -350,13 +349,16 @@ public class WrappedAbility extends Ability implements ISpellAbility {
     // //////////////////////////////////////
     @Override
     public void resolve() {
-        final GameState game = Singletons.getModel().getGame();
+        final GameState game = sa.getActivatingPlayer().getGame();
+
         if (!(regtrig instanceof TriggerAlways)) {
             // State triggers don't have "Intervening If"
-            if (!regtrig.requirementsCheck()) {
+            if (!regtrig.requirementsCheck(game)) {
                 return;
             }
         }
+
+        
         TriggerHandler th = game.getTriggerHandler();
         Map<String, String> triggerParams = regtrig.getMapParams();
 

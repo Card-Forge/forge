@@ -44,6 +44,7 @@ import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerHandler;
 import forge.control.input.InputSelectCards;
 import forge.control.input.InputSelectCardsFromList;
+import forge.game.GameState;
 import forge.game.ai.ComputerUtilCard;
 import forge.game.ai.ComputerUtilCombat;
 import forge.game.player.Player;
@@ -247,6 +248,7 @@ public class CardFactoryCreatures {
 
             @Override
             public void run() {
+                final GameState game = card.getGame();
                 int intermSumPower = 0;
                 int intermSumToughness = 0;
                 // intermSumPower = intermSumToughness = 0;
@@ -264,7 +266,7 @@ public class CardFactoryCreatures {
                         for (int m = 0; m < selection.size(); m++) {
                             intermSumPower += selection.get(m).getBaseAttack();
                             intermSumToughness += selection.get(m).getBaseDefense();
-                            Singletons.getModel().getGame().getAction().exile(selection.get(m));
+                            game.getAction().exile(selection.get(m));
                         }
                     }
 
@@ -275,7 +277,7 @@ public class CardFactoryCreatures {
                         if ((c.getNetAttack() <= 2) && (c.getNetDefense() <= 3)) {
                             intermSumPower += c.getBaseAttack();
                             intermSumToughness += c.getBaseDefense();
-                            Singletons.getModel().getGame().getAction().exile(c);
+                            game.getAction().exile(c);
                         }
                         // is this needed?
                         card.getController().getZone(ZoneType.Battlefield).updateObservers();
@@ -305,10 +307,11 @@ public class CardFactoryCreatures {
         final Ability sacOrSac = new Ability(card, ManaCost.NO_COST) {
             @Override
             public void resolve() {
+                final GameState game = player.getGame();
                 if (player.isHuman()) {
                     final InputSelectCards target = new InputSelectCards(0, Integer.MAX_VALUE) {
                         private static final long serialVersionUID = 2698036349873486664L;
-
+                        
                         @Override
                         public String getMessage() {
                             String toDisplay = cardName + " - Select any number of creatures to sacrifice.  ";
@@ -319,7 +322,7 @@ public class CardFactoryCreatures {
 
                         @Override
                         protected boolean isValidChoice(Card c) {
-                            Zone zone = Singletons.getModel().getGame().getZoneOf(c);
+                            Zone zone = game.getZoneOf(c);
                             return c.isCreature() && zone.is(ZoneType.Battlefield, player);
                         } // selectCard()
 
@@ -341,10 +344,10 @@ public class CardFactoryCreatures {
                     FThreads.setInputAndWait(target);
                     if(!target.hasCancelled()) {
                         for (final Card sac : target.getSelected()) {
-                            Singletons.getModel().getGame().getAction().sacrifice(sac, null);
+                            game.getAction().sacrifice(sac, null);
                         }
                     } else {
-                        Singletons.getModel().getGame().getAction().sacrifice(card, null);
+                        game.getAction().sacrifice(card, null);
                     }
                     
                     Singletons.getModel().getMatch().getInput().setInput(target);

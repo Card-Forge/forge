@@ -38,11 +38,8 @@ import forge.card.cardfactory.CardStorageReader;
 import forge.deck.CardCollections;
 import forge.error.BugReporter;
 import forge.error.ExceptionHandler;
-import forge.game.GameState;
-import forge.game.GameType;
 import forge.game.MatchController;
 import forge.game.limited.GauntletMini;
-import forge.game.player.LobbyPlayer;
 import forge.gauntlet.GauntletData;
 import forge.item.CardDb;
 import forge.properties.ForgePreferences;
@@ -83,7 +80,6 @@ public enum FModel {
     private final CardCollections decks;
 
     private final MatchController match;
-    private GameState gameState;
 
     private final EditionCollection editions;
     private final FormatCollection formats;
@@ -315,15 +311,6 @@ public enum FModel {
     }
 
     /**
-     * Gets the game state model - that is, the data stored for a single game.
-     * 
-     * @return {@link forge.game.GameState}
-     */
-    public final GameState getGame() {
-        return this.gameState;
-    }
-
-    /**
      * TODO: Write javadoc for this method.
      *
      * @return the editions
@@ -396,16 +383,6 @@ public enum FModel {
 
     public MatchController getMatch() {
         return match;
-    }
-
-    /**
-     * TODO: Write javadoc for this method.
-     * @param players
-     * @param input 
-     */
-    public GameState newGame(Iterable<LobbyPlayer> players, GameType type, final MatchController match0) {
-        gameState = new GameState(players,type, match0);
-        return gameState;
     }
 
     public GauntletMini getGauntletMini() {

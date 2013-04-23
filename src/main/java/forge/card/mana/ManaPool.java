@@ -28,7 +28,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
 import forge.Constant;
-import forge.Singletons;
 import forge.card.spellability.AbilityManaPart;
 import forge.card.spellability.SpellAbility;
 import forge.game.GlobalRuleChange;
@@ -164,7 +163,7 @@ public class ManaPool {
         for (final Mana m : manaList) {
             this.addManaToPool(this.floatingMana, m);
         }
-        Singletons.getModel().getGame().getAction().checkStateEffects();
+        owner.getGame().getAction().checkStateEffects();
         owner.updateObservers();
     }
 
@@ -178,8 +177,7 @@ public class ManaPool {
     public final int clearPool(boolean isEndOfPhase) {
         int numRemoved = 0;
 
-        if (isEndOfPhase
-                && Singletons.getModel().getGame().getStaticEffects().getGlobalRuleChange(GlobalRuleChange.manapoolsDontEmpty)) {
+        if (isEndOfPhase && owner.getGame().getStaticEffects().getGlobalRuleChange(GlobalRuleChange.manapoolsDontEmpty)) {
             return numRemoved;
         }
 

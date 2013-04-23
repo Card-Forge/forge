@@ -4,7 +4,6 @@ import java.util.Random;
 
 import forge.Card;
 import forge.CounterType;
-import forge.Singletons;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.cost.Cost;
 import forge.card.spellability.SpellAbility;
@@ -66,7 +65,7 @@ public class CountersRemoveAi extends SpellAbilityAi {
             return false;
         }
 
-        if (Singletons.getModel().getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2)
+        if (ai.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2)
                 && !sa.hasParam("ActivationPhases")
                 && !type.equals("M1M1")) {
             return false;

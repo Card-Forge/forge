@@ -5,11 +5,11 @@ import java.util.List;
 
 import forge.Card;
 import forge.CardLists;
-import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
+import forge.game.GameState;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
@@ -46,6 +46,7 @@ public class DamageAllEffect extends SpellAbilityEffect {
         final List<Card> definedSources = AbilityUtils.getDefinedCards(sa.getSourceCard(), sa.getParam("DamageSource"), sa);
         final Card card = definedSources.get(0);
         final Card source = sa.getSourceCard();
+        final GameState game = sa.getActivatingPlayer().getGame();
 
         final String damage = sa.getParam("NumDmg");
         final int dmg = AbilityUtils.calculateAmount(sa.getSourceCard(), damage, sa);
@@ -64,7 +65,7 @@ public class DamageAllEffect extends SpellAbilityEffect {
         }
 
         if (sa.hasParam("ValidCards")) {
-            list = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
+            list = game.getCardsIn(ZoneType.Battlefield);
         }
 
         if (targetPlayer != null) {

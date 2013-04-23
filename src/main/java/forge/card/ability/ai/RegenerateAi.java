@@ -23,12 +23,12 @@ import java.util.List;
 import forge.Card;
 import forge.CardLists;
 import forge.CardPredicates;
-import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.cost.Cost;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
+import forge.game.GameState;
 import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilCard;
 import forge.game.ai.ComputerUtilCombat;
@@ -59,8 +59,10 @@ public class RegenerateAi extends SpellAbilityAi {
     @Override
     protected boolean canPlayAI(AIPlayer ai, SpellAbility sa) {
         final Card hostCard = sa.getSourceCard();
-        boolean chance = false;
         final Cost abCost = sa.getPayCosts();
+        final GameState game = ai.getGame();
+
+        boolean chance = false;
         if (abCost != null) {
             // AI currently disabled for these costs
             if (!ComputerUtilCost.checkLifeCost(ai, abCost, hostCard, 4, null)) {
@@ -82,7 +84,7 @@ public class RegenerateAi extends SpellAbilityAi {
             // them
             final List<Card> list = AbilityUtils.getDefinedCards(hostCard, sa.getParam("Defined"), sa);
 
-            if (Singletons.getModel().getGame().getStack().size() > 0) {
+            if (game.getStack().size() > 0) {
                 final List<Object> objects = ComputerUtil.predictThreatenedObjects(sa.getActivatingPlayer(), sa);
 
                 for (final Card c : list) {
@@ -91,7 +93,7 @@ public class RegenerateAi extends SpellAbilityAi {
                     }
                 }
             } else {
-                if (Singletons.getModel().getGame().getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
+                if (game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
                     boolean flag = false;
 
                     for (final Card c : list) {
@@ -116,7 +118,7 @@ public class RegenerateAi extends SpellAbilityAi {
                 return false;
             }
 
-            if (Singletons.getModel().getGame().getStack().size() > 0) {
+            if (game.getStack().size() > 0) {
                 // check stack for something on the stack will kill anything i
                 // control
                 final ArrayList<Object> objects = ComputerUtil.predictThreatenedObjects(sa.getActivatingPlayer(), sa);
@@ -135,7 +137,7 @@ public class RegenerateAi extends SpellAbilityAi {
                     chance = true;
                 }
             } else {
-                if (Singletons.getModel().getGame().getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
+                if (game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
                     final List<Card> combatants = CardLists.filter(targetables, CardPredicates.Presets.CREATURES);
                     CardLists.sortByEvaluateCreature(combatants);
 
@@ -173,10 +175,11 @@ public class RegenerateAi extends SpellAbilityAi {
 
     private static boolean regenMandatoryTarget(final Player ai, final SpellAbility sa, final boolean mandatory) {
         final Card hostCard = sa.getSourceCard();
+        final GameState game = ai.getGame();
         final Target tgt = sa.getTarget();
         tgt.resetTargets();
         // filter AIs battlefield by what I can target
-        List<Card> targetables = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
+        List<Card> targetables = game.getCardsIn(ZoneType.Battlefield);
         targetables = CardLists.getValidCards(targetables, tgt.getValidTgts(), ai, hostCard);
         targetables = CardLists.getTargetableCards(targetables, sa);
         final List<Card> compTargetables = CardLists.filterControlledBy(targetables, ai);
@@ -192,7 +195,7 @@ public class RegenerateAi extends SpellAbilityAi {
         if (compTargetables.size() > 0) {
             final List<Card> combatants = CardLists.filter(compTargetables, CardPredicates.Presets.CREATURES);
             CardLists.sortByEvaluateCreature(combatants);
-            if (Singletons.getModel().getGame().getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
+            if (game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
                 for (final Card c : combatants) {
                     if ((c.getShield() == 0) && ComputerUtilCombat.combatantWouldBeDestroyed(ai, c)) {
                         tgt.addTarget(c);

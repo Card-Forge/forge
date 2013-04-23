@@ -5,11 +5,11 @@ import java.util.Iterator;
 import java.util.List;
 
 import forge.Card;
-import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
+import forge.game.GameState;
 import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
@@ -124,6 +124,7 @@ public class DigUntilEffect extends SpellAbilityEffect {
                 if (revealed.size() > 0) {
                     GuiChoose.one(p + " revealed: ", revealed);
                 }
+                final GameState game = p.getGame();
 
                 // TODO Allow Human to choose the order
                 if (foundDest != null) {
@@ -131,12 +132,12 @@ public class DigUntilEffect extends SpellAbilityEffect {
                     while (itr.hasNext()) {
                         final Card c = itr.next();
                         if (sa.hasParam("GainControl") && foundDest.equals(ZoneType.Battlefield)) {
-                            c.setController(sa.getActivatingPlayer(), Singletons.getModel().getGame().getNextTimestamp());
-                            Singletons.getModel().getGame().getAction().moveTo(c.getController().getZone(foundDest), c);
+                            c.setController(sa.getActivatingPlayer(), game.getNextTimestamp());
+                            game.getAction().moveTo(c.getController().getZone(foundDest), c);
                         } else if (sa.hasParam("NoMoveFound") && foundDest.equals(ZoneType.Library)) {
                             //Don't do anything
                         } else {
-                            Singletons.getModel().getGame().getAction().moveTo(foundDest, c, foundLibPos);
+                            game.getAction().moveTo(foundDest, c, foundLibPos);
                         }
                         revealed.remove(c);
                     }
@@ -152,7 +153,7 @@ public class DigUntilEffect extends SpellAbilityEffect {
                 final Iterator<Card> itr = revealed.iterator();
                 while (itr.hasNext()) {
                     final Card c = itr.next();
-                    Singletons.getModel().getGame().getAction().moveTo(revealedDest, c, revealedLibPos);
+                    game.getAction().moveTo(revealedDest, c, revealedLibPos);
                 }
 
                 if (sa.hasParam("Shuffle")) {

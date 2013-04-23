@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import forge.Card;
-import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
@@ -119,7 +118,7 @@ public class RearrangeTopOfLibraryEffect extends SpellAbilityEffect {
         List<Card> orderedCards = GuiChoose.order("Select order to Rearrange", "Top of Library", 0, topCards, null, src);
         for (int i = maxCards - 1; i >= 0; i--) {
             Card next = orderedCards.get(i);
-            Singletons.getModel().getGame().getAction().moveToLibrary(next, 0);
+            player.getGame().getAction().moveToLibrary(next, 0);
         }
         if (mayshuffle) {
             if (GuiDialog.confirm(src, "Do you want to shuffle the library?")) {

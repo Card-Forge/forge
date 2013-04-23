@@ -7,9 +7,9 @@ import java.util.List;
 import forge.Card;
 import forge.CardLists;
 import forge.Command;
-import forge.Singletons;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
+import forge.game.GameState;
 import forge.game.zone.ZoneType;
 
 public class DebuffAllEffect extends SpellAbilityEffect {
@@ -40,6 +40,7 @@ public class DebuffAllEffect extends SpellAbilityEffect {
     public void resolve(SpellAbility sa) {
         final Card hostCard = sa.getSourceCard();
         final List<String> kws = sa.hasParam("Keywords") ? Arrays.asList(sa.getParam("Keywords").split(" & ")) : new ArrayList<String>();
+        final GameState game = sa.getActivatingPlayer().getGame();
 
         String valid = "";
 
@@ -47,7 +48,7 @@ public class DebuffAllEffect extends SpellAbilityEffect {
             valid = sa.getParam("ValidCards");
         }
 
-        List<Card> list = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
+        List<Card> list = game.getCardsIn(ZoneType.Battlefield);
         list = CardLists.getValidCards(list, valid.split(","), hostCard.getController(), hostCard);
 
         for (final Card tgtC : list) {
@@ -62,7 +63,7 @@ public class DebuffAllEffect extends SpellAbilityEffect {
                 }
             }
             if (!sa.hasParam("Permanent")) {
-                Singletons.getModel().getGame().getEndOfTurn().addUntil(new Command() {
+                game.getEndOfTurn().addUntil(new Command() {
                     private static final long serialVersionUID = 7486231071095628674L;
 
                     @Override

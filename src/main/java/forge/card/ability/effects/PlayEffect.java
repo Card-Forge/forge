@@ -13,7 +13,6 @@ import com.google.common.collect.Lists;
 import forge.Card;
 import forge.CardCharacteristicName;
 import forge.CardLists;
-import forge.Singletons;
 import forge.card.CardRulesPredicates;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
@@ -55,9 +54,9 @@ public class PlayEffect extends SpellAbilityEffect {
 
     @Override
     public void resolve(SpellAbility sa) {
-        final GameState game = Singletons.getModel().getGame();
         final Card source = sa.getSourceCard();
         Player activator = sa.getActivatingPlayer();
+        final GameState game = activator.getGame();
         boolean optional = sa.hasParam("Optional");
         boolean remember = sa.hasParam("RememberPlayed");
         boolean wasFaceDown = false;

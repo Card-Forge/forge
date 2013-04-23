@@ -5,7 +5,6 @@ import java.util.List;
 
 import forge.Card;
 import forge.CardLists;
-import forge.Singletons;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
@@ -40,7 +39,7 @@ public class UntapAllEffect extends SpellAbilityEffect {
         }
 
         if (tgtPlayers.isEmpty()) {
-            list = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
+            list = sa.getActivatingPlayer().getGame().getCardsIn(ZoneType.Battlefield);
         } else {
             list = new ArrayList<Card>();
             for (final Player p : tgtPlayers) {

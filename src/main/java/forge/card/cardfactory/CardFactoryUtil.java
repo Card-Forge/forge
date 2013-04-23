@@ -41,7 +41,6 @@ import forge.Constant;
 import forge.CounterType;
 import forge.FThreads;
 import forge.GameEntity;
-import forge.Singletons;
 import forge.card.ability.AbilityFactory;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.ApiType;
@@ -66,6 +65,7 @@ import forge.card.trigger.TriggerHandler;
 import forge.card.trigger.TriggerType;
 import forge.control.input.InputSelectCards;
 import forge.control.input.InputSelectCardsFromList;
+import forge.game.GameState;
 import forge.game.ai.ComputerUtilCard;
 import forge.game.ai.ComputerUtilCost;
 import forge.game.phase.PhaseHandler;
@@ -123,7 +123,7 @@ public class CardFactoryUtil {
 
             @Override
             public void resolve() {
-                final Card card = Singletons.getModel().getGame().getAction().moveToPlay(sourceCard);
+                final Card card = sourceCard.getGame().getAction().moveToPlay(sourceCard);
 
                 card.addIntrinsicKeyword("At the beginning of the end step, exile CARDNAME.");
                 card.addIntrinsicKeyword("Haste");
@@ -132,7 +132,7 @@ public class CardFactoryUtil {
 
             @Override
             public boolean canPlayAI() {
-                PhaseHandler phase = Singletons.getModel().getGame().getPhaseHandler();
+                PhaseHandler phase = sourceCard.getGame().getPhaseHandler();
                 if (phase.getPhase().isAfter(PhaseType.MAIN1) || !phase.isPlayerTurn(getActivatingPlayer())) {
                     return false;
                 }
@@ -168,7 +168,7 @@ public class CardFactoryUtil {
 
             @Override
             public void resolve() {
-                Card c = Singletons.getModel().getGame().getAction().moveToPlay(sourceCard);
+                Card c = sourceCard.getGame().getAction().moveToPlay(sourceCard);
                 c.setPreFaceDownCharacteristic(CardCharacteristicName.Original);
             }
 
@@ -176,7 +176,7 @@ public class CardFactoryUtil {
             public boolean canPlay() {
                 //Lands do not have SpellPermanents.
                 if (sourceCard.isLand()) {
-                    return (Singletons.getModel().getGame().getZoneOf(sourceCard).is(ZoneType.Hand) || sourceCard.hasKeyword("May be played"))
+                    return (sourceCard.getGame().getZoneOf(sourceCard).is(ZoneType.Hand) || sourceCard.hasKeyword("May be played"))
                             && sourceCard.getController().canCastSorcery();
                 }
                 else {
@@ -212,7 +212,7 @@ public class CardFactoryUtil {
                     StringBuilder sb = new StringBuilder();
                     sb.append(this.getActivatingPlayer()).append(" has unmorphed ");
                     sb.append(sourceCard.getName());
-                    Singletons.getModel().getGame().getGameLog().add("ResolveStack", sb.toString(), 2);
+                    sourceCard.getGame().getGameLog().add("ResolveStack", sb.toString(), 2);
                 }
             }
 
@@ -361,14 +361,12 @@ public class CardFactoryUtil {
                     return;
                 }
 
-                final Card o = GuiChoose.oneOrNone("Select a card", sameCost);
-                if (o != null) {
+                final Card c1 = GuiChoose.oneOrNone("Select a card", sameCost);
+                if (c1 != null) {
                     // ability.setTargetCard((Card)o);
 
                     sourceCard.getController().discard(sourceCard, this);
-                    final Card c1 = o;
-
-                    Singletons.getModel().getGame().getAction().moveToHand(c1);
+                    sourceCard.getGame().getAction().moveToHand(c1);
 
                 }
                 sourceCard.getController().shuffle();
@@ -430,7 +428,8 @@ public class CardFactoryUtil {
 
             @Override
             public void resolve() {
-                final Card c = Singletons.getModel().getGame().getAction().exile(sourceCard);
+                final GameState game = sourceCard.getGame();
+                final Card c = game.getAction().exile(sourceCard);
 
                 int counters = AbilityUtils.calculateAmount(c, timeCounters, this);
                 c.addCounter(CounterType.TIME, counters, true);
@@ -439,7 +438,7 @@ public class CardFactoryUtil {
                 sb.append(this.getActivatingPlayer()).append(" has suspended ");
                 sb.append(c.getName()).append("with ");
                 sb.append(counters).append(" time counters on it.");
-                Singletons.getModel().getGame().getGameLog().add("ResolveStack", sb.toString(), 2);
+                game.getGameLog().add("ResolveStack", sb.toString(), 2);
             }
         };
         final StringBuilder sbDesc = new StringBuilder();
@@ -657,7 +656,8 @@ public class CardFactoryUtil {
      */
     public static boolean isTargetStillValid(final SpellAbility ability, final Card target) {
 
-        if (Singletons.getModel().getGame().getZoneOf(target) == null) {
+        Zone zone = target.getGame().getZoneOf(target);
+        if (zone == null) {
             return false; // for tokens that disappeared
         }
 
@@ -673,7 +673,7 @@ public class CardFactoryUtil {
 
             // Check if the target is in the zone it needs to be in to be
             // targeted
-            if (!Singletons.getModel().getGame().getZoneOf(target).is(tgt.getZone())) {
+            if (!zone.is(tgt.getZone())) {
                 return false;
             }
         } else {
@@ -916,6 +916,7 @@ public class CardFactoryUtil {
         if (players.size() == 0) {
             return 0;
         }
+        final GameState game = source.getGame();
 
         final String[] l = s.split("/");
         final String m = extractOperators(s);
@@ -954,7 +955,7 @@ public class CardFactoryUtil {
             final List<ZoneType> vZone = ZoneType.listValueOf(lparts[0].split("Valid")[1]);
             String restrictions = l[0].replace(lparts[0] + " ", "");
             final String[] rest = restrictions.split(",");
-            List<Card> cards = Singletons.getModel().getGame().getCardsIn(vZone);
+            List<Card> cards = game.getCardsIn(vZone);
             cards = CardLists.getValidCards(cards, rest, players.get(0), source);
 
             n = cards.size();
@@ -965,7 +966,7 @@ public class CardFactoryUtil {
         if (l[0].startsWith("Valid ")) {
             final String restrictions = l[0].substring(6);
             final String[] rest = restrictions.split(",");
-            List<Card> cardsonbattlefield = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
+            List<Card> cardsonbattlefield = game.getCardsIn(ZoneType.Battlefield);
             cardsonbattlefield = CardLists.getValidCards(cardsonbattlefield, rest, players.get(0), source);
 
             n = cardsonbattlefield.size();
@@ -1131,7 +1132,9 @@ public class CardFactoryUtil {
 
         final Player cc = c.getController();
         final Player ccOpp = cc.getOpponent();
-        final Player activePlayer = cc.getGame().getPhaseHandler().getPlayerTurn();
+        final GameState game = c.getGame();
+        final Player activePlayer = game.getPhaseHandler().getPlayerTurn();
+        
 
         final String[] l = expression.split("/");
         final String m = extractOperators(expression);
@@ -1209,7 +1212,7 @@ public class CardFactoryUtil {
             int highest = 0;
             for (final Object o : c.getRemembered()) {
                 if (o instanceof Card) {
-                    list.add(Singletons.getModel().getGame().getCardState((Card) o));
+                    list.add(game.getCardState((Card) o));
                 }
             }
             for (final Card crd : list) {
@@ -1253,7 +1256,7 @@ public class CardFactoryUtil {
             final CounterType counterType = CounterType.valueOf(components[1]);
             String restrictions = components[2];
             final String[] rest = restrictions.split(",");
-            List<Card> candidates = Singletons.getModel().getGame().getCardsInGame();
+            List<Card> candidates = game.getCardsInGame();
             candidates = CardLists.getValidCards(candidates, rest, cc, c);
 
             int added = 0;
@@ -1264,7 +1267,7 @@ public class CardFactoryUtil {
         }
 
         if (l[0].startsWith("RolledThisTurn")) {
-            return Singletons.getModel().getGame().getPhaseHandler().getPlanarDiceRolledthisTurn();
+            return game.getPhaseHandler().getPlanarDiceRolledthisTurn();
         }
 
         final String[] sq;
@@ -1277,7 +1280,7 @@ public class CardFactoryUtil {
         if (sq[0].equals("OppDrewThisTurn"))    return doXMath(c.getController().getOpponent().getNumDrawnThisTurn(), m, c);
         
 
-        if (sq[0].equals("StormCount"))         return doXMath(Singletons.getModel().getGame().getStack().getCardsCastThisTurn().size() - 1, m, c);
+        if (sq[0].equals("StormCount"))         return doXMath(game.getStack().getCardsCastThisTurn().size() - 1, m, c);
         if (sq[0].equals("DamageDoneThisTurn")) return doXMath(c.getDamageDoneThisTurn(), m, c);
         if (sq[0].equals("BloodthirstAmount"))  return doXMath(c.getController().getBloodthirstAmount(), m, c);
         if (sq[0].equals("RegeneratedThisTurn")) return doXMath(c.getRegeneratedThisTurn(), m, c);
@@ -1419,7 +1422,7 @@ public class CardFactoryUtil {
         if (sq[0].contains("SumCMC")) {
             final String[] restrictions = l[0].split("_");
             final String[] rest = restrictions[1].split(",");
-            List<Card> cardsonbattlefield = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
+            List<Card> cardsonbattlefield = game.getCardsIn(ZoneType.Battlefield);
             List<Card> filteredCards = CardLists.getValidCards(cardsonbattlefield, rest, cc, c);
             return Aggregates.sum(filteredCards, CardPredicates.Accessors.fnGetCmc);
         }
@@ -1446,7 +1449,7 @@ public class CardFactoryUtil {
             final String[] restrictions = l[0].split("_");
             final CounterType cType = CounterType.getType(restrictions[1]);
             final String[] validFilter = restrictions[2].split(",");
-            List<Card> validCards = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
+            List<Card> validCards = game.getCardsIn(ZoneType.Battlefield);
             validCards = CardLists.getValidCards(validCards, validFilter, cc, c);
             int cCount = 0;
             for (final Card card : validCards) {
@@ -1529,7 +1532,7 @@ public class CardFactoryUtil {
 
         if (sq[0].equals("TotalTurns")) {
             // Sorry for the Singleton use, replace this once this function has game passed into it
-            return doXMath(Singletons.getModel().getGame().getPhaseHandler().getTurn(), m, c);
+            return doXMath(game.getPhaseHandler().getTurn(), m, c);
         }
         
         //Count$Random.<Min>.<Max>
@@ -1587,6 +1590,7 @@ public class CardFactoryUtil {
 
     private static List<Card> getCardListForXCount(final Card c, final Player cc, final Player ccOpp, final String[] sq) {
         List<Card> someCards = new ArrayList<Card>();
+        final GameState game = c.getGame();
         
         // Generic Zone-based counting
         // Count$QualityAndZones.Subquality
@@ -1681,7 +1685,7 @@ public class CardFactoryUtil {
         }
 
         if (sq[0].contains("SpellsOnStack")) {
-            someCards.addAll(Singletons.getModel().getGame().getCardsIn(ZoneType.Stack));
+            someCards.addAll(game.getCardsIn(ZoneType.Stack));
         }
 
         if (sq[0].contains("InAllHands")) {
@@ -2016,7 +2020,6 @@ public class CardFactoryUtil {
     public static ArrayList<Ability> getBushidoEffects(final Card c) {
         final ArrayList<Ability> list = new ArrayList<Ability>();
 
-        final Card crd = c;
 
         for (final String kw : c.getKeyword()) {
             if (kw.contains("Bushido")) {
@@ -2033,17 +2036,17 @@ public class CardFactoryUtil {
 
                             @Override
                             public void run() {
-                                if (crd.isInPlay()) {
-                                    crd.addTempAttackBoost(-1 * magnitude);
-                                    crd.addTempDefenseBoost(-1 * magnitude);
+                                if (c.isInPlay()) {
+                                    c.addTempAttackBoost(-1 * magnitude);
+                                    c.addTempDefenseBoost(-1 * magnitude);
                                 }
                             }
                         };
 
-                        Singletons.getModel().getGame().getEndOfTurn().addUntil(untilEOT);
+                        c.getGame().getEndOfTurn().addUntil(untilEOT);
 
-                        crd.addTempAttackBoost(magnitude);
-                        crd.addTempDefenseBoost(magnitude);
+                        c.addTempAttackBoost(magnitude);
+                        c.addTempDefenseBoost(magnitude);
                     }
                 };
                 final StringBuilder sb = new StringBuilder();
@@ -2108,27 +2111,11 @@ public class CardFactoryUtil {
                     }
                 };
                 ability.setStackDescription("Fastbond - Deals 1 damage to you.");
-
-                Singletons.getModel().getGame().getStack().addSimultaneousStackEntry(ability);
-
+                c.getGame().getStack().addSimultaneousStackEntry(ability);
             }
         }
     }
 
-    /**
-     * <p>
-     * isNegativeCounter.
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.CounterType} object.
-     * @return a boolean.
-     */
-    public static boolean isNegativeCounter(final CounterType c) {
-        return (c == CounterType.AGE) || (c == CounterType.BLAZE) || (c == CounterType.BRIBERY) || (c == CounterType.DOOM)
-                || (c == CounterType.ICE) || (c == CounterType.M1M1) || (c == CounterType.M0M2) || (c == CounterType.M0M1)
-                || (c == CounterType.TIME);
-    }
 
     public static void correctAbilityChainSourceCard(final SpellAbility sa, final Card card) {
 
@@ -2720,7 +2707,7 @@ public class CardFactoryUtil {
             @Override
             public void resolve() {
                 this.getTargetCard().addHauntedBy(card);
-                Singletons.getModel().getGame().getAction().exile(card);
+                card.getGame().getAction().exile(card);
             }
         };
         haunterDiesWork.setDescription(hauntDescription);
@@ -2728,8 +2715,9 @@ public class CardFactoryUtil {
         final Ability haunterDiesSetup = new Ability(card, ManaCost.ZERO) {
             @Override
             public void resolve() {
+                final GameState game = card.getGame();
                 this.setActivatingPlayer(card.getController());
-                final List<Card> creats = CardLists.filter(Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield), Presets.CREATURES);
+                final List<Card> creats = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), Presets.CREATURES);
                 for (int i = 0; i < creats.size(); i++) {
                     if (!creats.get(i).canBeTargetedBy(this)) {
                         creats.remove(i);
@@ -2748,7 +2736,7 @@ public class CardFactoryUtil {
                         private static final long serialVersionUID = 1981791992623774490L;
                         @Override
                         protected boolean isValidChoice(Card c) {
-                            Zone zone = Singletons.getModel().getGame().getZoneOf(c);
+                            Zone zone = game.getZoneOf(c);
                             if (!zone.is(ZoneType.Battlefield) || !c.isCreature()) {
                                 return false;
                             }
@@ -2760,7 +2748,7 @@ public class CardFactoryUtil {
                     FThreads.setInputAndWait(target);
                     if (!target.hasCancelled()) {
                         haunterDiesWork.setTargetCard(target.getSelected().get(0));
-                        Singletons.getModel().getGame().getStack().add(haunterDiesWork);
+                        game.getStack().add(haunterDiesWork);
                     }
                 } else {
                     // AI choosing what to haunt
@@ -2770,7 +2758,7 @@ public class CardFactoryUtil {
                     } else {
                         haunterDiesWork.setTargetCard(ComputerUtilCard.getWorstCreatureAI(creats));
                     }
-                    Singletons.getModel().getGame().getStack().add(haunterDiesWork);
+                    game.getStack().add(haunterDiesWork);
                 }
             }
         };
@@ -2878,7 +2866,7 @@ public class CardFactoryUtil {
             @Override
             public void resolve() {
                 card.setEvoked(true);
-                Singletons.getModel().getGame().getAction().moveToPlay(card);
+                card.getGame().getAction().moveToPlay(card);
             }
 
             @Override
@@ -3054,10 +3042,11 @@ public class CardFactoryUtil {
 
                 @Override
                 public void run() {
-                    final List<Card> cardsInPlay = CardLists.getType(Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield), "World");
+                    final GameState game = card.getGame();
+                    final List<Card> cardsInPlay = CardLists.getType(game.getCardsIn(ZoneType.Battlefield), "World");
                     cardsInPlay.remove(card);
                     for (int i = 0; i < cardsInPlay.size(); i++) {
-                        Singletons.getModel().getGame().getAction().sacrificeDestroy(cardsInPlay.get(i));
+                        game.getAction().sacrificeDestroy(cardsInPlay.get(i));
                     }
                 } // execute()
             }; // Command
@@ -3140,6 +3129,7 @@ public class CardFactoryUtil {
                     @Override
                     public void run() {
                         final List<Card> creats = card.getController().getCreaturesInPlay();
+                        final GameState game = card.getGame();
                         creats.remove(card);
                         // System.out.println("Creats size: " + creats.size());
 
@@ -3152,7 +3142,7 @@ public class CardFactoryUtil {
                                 for (Object o : selection) {
                                     Card dinner = (Card) o;
                                     card.addDevoured(dinner);
-                                    Singletons.getModel().getGame().getAction().sacrifice(dinner, null);
+                                    game.getAction().sacrifice(dinner, null);
                                     final HashMap<String, Object> runParams = new HashMap<String, Object>();
                                     runParams.put("Devoured", dinner);
                                     card.getController().getGame().getTriggerHandler()
@@ -3166,7 +3156,7 @@ public class CardFactoryUtil {
                                 final Card c = creats.get(i);
                                 if ((c.getNetAttack() <= 1) && ((c.getNetAttack() + c.getNetDefense()) <= 3)) {
                                     card.addDevoured(c);
-                                    Singletons.getModel().getGame().getAction().sacrifice(c, null);
+                                    game.getAction().sacrifice(c, null);
                                     final HashMap<String, Object> runParams = new HashMap<String, Object>();
                                     runParams.put("Devoured", c);
                                     card.getController().getGame().getTriggerHandler()

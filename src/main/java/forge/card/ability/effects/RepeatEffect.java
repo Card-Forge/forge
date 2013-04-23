@@ -5,13 +5,14 @@ import java.util.List;
 
 import forge.Card;
 import forge.CardLists;
-import forge.Singletons;
 import forge.card.ability.AbilityFactory;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
+import forge.game.GameState;
+import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiDialog;
 import forge.util.Expressions;
@@ -69,6 +70,9 @@ public class RepeatEffect extends SpellAbilityEffect {
      */
     private boolean checkRepeatConditions(final SpellAbility sa) {
         //boolean doAgain = false;
+        final Player activator = sa.getActivatingPlayer();
+        final GameState game = activator.getGame();
+
 
         if (sa.hasParam("RepeatPresent")) {
             final String repeatPresent = sa.getParam("RepeatPresent");
@@ -82,7 +86,7 @@ public class RepeatEffect extends SpellAbilityEffect {
             if (sa.hasParam("RepeatDefined")) {
                 list.addAll(AbilityUtils.getDefinedCards(sa.getSourceCard(), sa.getParam("RepeatDefined"), sa));
             } else {
-                list = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
+                list = game.getCardsIn(ZoneType.Battlefield);
             }
 
             list = CardLists.getValidCards(list, repeatPresent.split(","), sa.getActivatingPlayer(), sa.getSourceCard());

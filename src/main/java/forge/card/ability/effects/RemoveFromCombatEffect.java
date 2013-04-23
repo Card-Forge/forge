@@ -5,10 +5,11 @@ import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.Card;
-import forge.Singletons;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
+import forge.game.GameState;
+import forge.game.player.Player;
 
 public class RemoveFromCombatEffect extends SpellAbilityEffect {
 
@@ -27,11 +28,14 @@ public class RemoveFromCombatEffect extends SpellAbilityEffect {
 
     @Override
     public void resolve(SpellAbility sa) {
+        final Player activator = sa.getActivatingPlayer();
+        final GameState game = activator.getGame();
+
 
         final Target tgt = sa.getTarget();
         for (final Card c : getTargetCards(sa)) {
             if ((tgt == null) || c.canBeTargetedBy(sa)) {
-                Singletons.getModel().getGame().getCombat().removeFromCombat(c);
+                game.getCombat().removeFromCombat(c);
             }
         }
 

@@ -9,7 +9,6 @@ import com.google.common.base.Predicate;
 import forge.Card;
 import forge.CardLists;
 import forge.CardPredicates.Presets;
-import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.cost.Cost;
@@ -18,6 +17,7 @@ import forge.card.cost.CostTapType;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityRestriction;
 import forge.card.spellability.Target;
+import forge.game.GameState;
 import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilCard;
 import forge.game.ai.ComputerUtilCost;
@@ -49,7 +49,8 @@ public class PumpAi extends PumpAiBase {
     @Override
     protected boolean canPlayAI(AIPlayer ai, SpellAbility sa) {
         final Cost cost = sa.getPayCosts();
-        final PhaseHandler ph = Singletons.getModel().getGame().getPhaseHandler();
+        final GameState game = ai.getGame();
+        final PhaseHandler ph = game.getPhaseHandler();
         final List<String> keywords = sa.hasParam("KW") ? Arrays.asList(sa.getParam("KW").split(" & ")) : new ArrayList<String>();
         final String numDefense = sa.hasParam("NumDef") ? sa.getParam("NumDef") : "";
         final String numAttack = sa.hasParam("NumAtt") ? sa.getParam("NumAtt") : "";
@@ -70,7 +71,7 @@ public class PumpAi extends PumpAiBase {
             return false;
         }
 
-        if (Singletons.getModel().getGame().getStack().isEmpty() && hasTapCost(cost, sa.getSourceCard())) {
+        if (game.getStack().isEmpty() && hasTapCost(cost, sa.getSourceCard())) {
                 if (ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS) && ph.isPlayerTurn(ai)) {
                     return false;
                 }
@@ -83,13 +84,13 @@ public class PumpAi extends PumpAiBase {
         }
 
         // Phase Restrictions
-        if ((Singletons.getModel().getGame().getStack().size() == 0) && ph.getPhase().isBefore(PhaseType.COMBAT_BEGIN)) {
+        if ((game.getStack().size() == 0) && ph.getPhase().isBefore(PhaseType.COMBAT_BEGIN)) {
             // Instant-speed pumps should not be cast outside of combat when the
             // stack is empty
             if (!sa.isCurse() && !SpellAbilityAi.isSorcerySpeed(sa)) {
                 return false;
             }
-        } else if (Singletons.getModel().getGame().getStack().size() > 0) {
+        } else if (game.getStack().size() > 0) {
             if (!keywords.contains("Shroud") && !keywords.contains("Hexproof")) {
                 return false;
             }
@@ -181,10 +182,11 @@ public class PumpAi extends PumpAiBase {
 
     private boolean pumpTgtAI(final Player ai, final SpellAbility sa, final int defense, final int attack, final boolean mandatory) {
         final List<String> keywords = sa.hasParam("KW") ? Arrays.asList(sa.getParam("KW").split(" & ")) : new ArrayList<String>();
+        final GameState game = ai.getGame();
 
         if (!mandatory
                 && !sa.isTrigger()
-                && Singletons.getModel().getGame().getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)
+                && game.getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)
                 && !(sa.isCurse() && (defense < 0))
                 && !this.containsNonCombatKeyword(keywords)
                 && !sa.hasParam("UntilYourNextTurn")) {
@@ -197,7 +199,7 @@ public class PumpAi extends PumpAiBase {
         List<Card> list = new ArrayList<Card>();
         if (sa.hasParam("AILogic")) {
             if (sa.getParam("AILogic").equals("HighestPower")) {
-                list = CardLists.getValidCards(CardLists.filter(Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield), Presets.CREATURES), tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getSourceCard());
+                list = CardLists.getValidCards(CardLists.filter(game.getCardsIn(ZoneType.Battlefield), Presets.CREATURES), tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getSourceCard());
                 list = CardLists.getTargetableCards(list, sa);
                 CardLists.sortByPowerDesc(list);
                 if (!list.isEmpty()) {
@@ -216,7 +218,7 @@ public class PumpAi extends PumpAiBase {
         } else {
             if (!tgt.canTgtCreature()) {
                 ZoneType zone = tgt.getZone().get(0);
-                list = Singletons.getModel().getGame().getCardsIn(zone);
+                list = game.getCardsIn(zone);
             } else {
                 list = this.getPumpCreatures(ai, sa, defense, attack, keywords);
             }
@@ -227,16 +229,16 @@ public class PumpAi extends PumpAiBase {
         }
 
         list = CardLists.getValidCards(list, tgt.getValidTgts(), ai, sa.getSourceCard());
-        if (Singletons.getModel().getGame().getStack().size() == 0) {
+        if (game.getStack().size() == 0) {
             // If the cost is tapping, don't activate before declare
             // attack/block
             if ((sa.getPayCosts() != null) && sa.getPayCosts().hasTapCost()) {
-                if (Singletons.getModel().getGame().getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)
-                        && Singletons.getModel().getGame().getPhaseHandler().isPlayerTurn(ai)) {
+                if (game.getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)
+                        && game.getPhaseHandler().isPlayerTurn(ai)) {
                     list.remove(sa.getSourceCard());
                 }
-                if (Singletons.getModel().getGame().getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS)
-                        && Singletons.getModel().getGame().getPhaseHandler().isPlayerTurn(opp)) {
+                if (game.getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS)
+                        && game.getPhaseHandler().isPlayerTurn(opp)) {
                     list.remove(sa.getSourceCard());
                 }
             }
@@ -283,7 +285,8 @@ public class PumpAi extends PumpAiBase {
     } // pumpTgtAI()
 
     private boolean pumpMandatoryTarget(final Player ai, final SpellAbility sa, final boolean mandatory) {
-        List<Card> list = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
+        final GameState game = ai.getGame();
+        List<Card> list = game.getCardsIn(ZoneType.Battlefield);
         final Target tgt = sa.getTarget();
         final Player opp = ai.getOpponent();
         list = CardLists.getValidCards(list, tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getSourceCard());

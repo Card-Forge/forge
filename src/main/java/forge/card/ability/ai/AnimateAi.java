@@ -6,11 +6,11 @@ import com.google.common.collect.Iterables;
 
 import forge.Card;
 import forge.CardPredicates;
-import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
+import forge.game.GameState;
 import forge.game.phase.PhaseType;
 import forge.game.player.AIPlayer;
 import forge.game.player.Player;
@@ -34,7 +34,8 @@ public class AnimateAi extends SpellAbilityAi {
     protected boolean canPlayAI(AIPlayer aiPlayer, SpellAbility sa) {
         final Target tgt = sa.getTarget();
         final Card source = sa.getSourceCard();
-
+        final GameState game = aiPlayer.getGame();
+        
         // TODO - add some kind of check to answer
         // "Am I going to attack with this?"
         // TODO - add some kind of check for during human turn to answer
@@ -42,8 +43,8 @@ public class AnimateAi extends SpellAbilityAi {
 
         // don't use instant speed animate abilities outside computers
         // Combat_Begin step
-        if (!Singletons.getModel().getGame().getPhaseHandler().is(PhaseType.COMBAT_BEGIN)
-                && Singletons.getModel().getGame().getPhaseHandler().isPlayerTurn(aiPlayer)
+        if (!game.getPhaseHandler().is(PhaseType.COMBAT_BEGIN)
+                && game.getPhaseHandler().isPlayerTurn(aiPlayer)
                 && !SpellAbilityAi.isSorcerySpeed(sa)
                 && !sa.hasParam("ActivationPhases") && !sa.hasParam("Permanent")) {
             return false;
@@ -51,7 +52,7 @@ public class AnimateAi extends SpellAbilityAi {
 
         Player opponent = aiPlayer.getWeakestOpponent();
         // don't animate if the AI won't attack anyway
-        if (Singletons.getModel().getGame().getPhaseHandler().isPlayerTurn(aiPlayer)
+        if (game.getPhaseHandler().isPlayerTurn(aiPlayer)
                 && aiPlayer.getLife() < 6
                 && opponent.getLife() > 6
                 && Iterables.any(opponent.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.CREATURES)) {
@@ -60,14 +61,14 @@ public class AnimateAi extends SpellAbilityAi {
 
         // don't use instant speed animate abilities outside humans
         // Combat_Declare_Attackers_InstantAbility step
-        if ((!Singletons.getModel().getGame().getPhaseHandler().is(PhaseType.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY)
-                || (Singletons.getModel().getGame().getCombat().getAttackers().isEmpty()))
-                && Singletons.getModel().getGame().getPhaseHandler().isPlayerTurn(opponent)) {
+        if ((!game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY)
+                || (game.getCombat().getAttackers().isEmpty()))
+                && game.getPhaseHandler().isPlayerTurn(opponent)) {
             return false;
         }
 
         // don't activate during main2 unless this effect is permanent
-        if (Singletons.getModel().getGame().getPhaseHandler().is(PhaseType.MAIN2) && !sa.hasParam("Permanent")) {
+        if (game.getPhaseHandler().is(PhaseType.MAIN2) && !sa.hasParam("Permanent")) {
             return false;
         }
 
@@ -77,7 +78,7 @@ public class AnimateAi extends SpellAbilityAi {
             boolean bFlag = false;
             for (final Card c : defined) {
                 bFlag |= (!c.isCreature() && !c.isTapped()
-                        && !(c.getTurnInZone() == Singletons.getModel().getGame().getPhaseHandler().getTurn())
+                        && !(c.getTurnInZone() == game.getPhaseHandler().getTurn())
                         && !c.isEquipping());
 
                 // for creatures that could be improved (like Figure of Destiny)

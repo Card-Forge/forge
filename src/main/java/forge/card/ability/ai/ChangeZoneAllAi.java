@@ -5,7 +5,6 @@ import java.util.Random;
 
 import forge.Card;
 import forge.CardLists;
-import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.cost.Cost;
@@ -101,7 +100,7 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
             }
 
             // Don't cast during main1?
-            if (Singletons.getModel().getGame().getPhaseHandler().is(PhaseType.MAIN1, ai)) {
+            if (ai.getGame().getPhaseHandler().is(PhaseType.MAIN1, ai)) {
                 return false;
             }
         } else if (origin.equals(ZoneType.Graveyard)) {

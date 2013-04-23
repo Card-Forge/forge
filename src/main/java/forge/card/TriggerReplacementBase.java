@@ -9,10 +9,10 @@ import forge.Card;
 import forge.CardLists;
 import forge.CardUtil;
 import forge.GameEntity;
-import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
+import forge.game.GameState;
 import forge.game.player.Player;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
@@ -155,8 +155,8 @@ public abstract class TriggerReplacementBase {
     }
 
     protected boolean meetsCommonRequirements(Map<String, String> params) {
-        
-        Player hostController = this.getHostCard().getController();
+        final Player hostController = this.getHostCard().getController();
+        final GameState game = hostController.getGame();
         
         if ("True".equalsIgnoreCase(params.get("Metalcraft")) && !hostController.hasMetalcraft()) return false;
         if ("True".equalsIgnoreCase(params.get("Threshold")) && !hostController.hasThreshold()) return false;
@@ -167,7 +167,7 @@ public abstract class TriggerReplacementBase {
         if ("You".equalsIgnoreCase(params.get("PlayersPoisoned")) && hostController.getPoisonCounters() == 0) return false;
         if ("Opponent".equalsIgnoreCase(params.get("PlayersPoisoned")) && hostController.getOpponent().getPoisonCounters() == 0) return false;
         if ("Each".equalsIgnoreCase(params.get("PlayersPoisoned"))) {
-            for( Player p : Singletons.getModel().getGame().getPlayers())
+            for( Player p : game.getPlayers())
                 if( p.getPoisonCounters() == 0 ) 
                     return false;
         }
@@ -281,14 +281,14 @@ public abstract class TriggerReplacementBase {
         }
     
         if (params.containsKey("CheckSVar")) {
-            final int sVar = AbilityUtils.calculateAmount(Singletons.getModel().getGame().getCardState(this.getHostCard()), params.get("CheckSVar"), null);
+            final int sVar = AbilityUtils.calculateAmount(game.getCardState(this.getHostCard()), params.get("CheckSVar"), null);
             String comparator = "GE1";
             if (params.containsKey("SVarCompare")) {
                 comparator = params.get("SVarCompare");
             }
             final String svarOperator = comparator.substring(0, 2);
             final String svarOperand = comparator.substring(2);
-            final int operandValue = AbilityUtils.calculateAmount(Singletons.getModel().getGame().getCardState(this.getHostCard()),
+            final int operandValue = AbilityUtils.calculateAmount(game.getCardState(this.getHostCard()),
                     svarOperand, null);
             if (!Expressions.compare(sVar, svarOperator, operandValue)) {
                 return false;

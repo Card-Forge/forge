@@ -1,9 +1,7 @@
 package forge.card.ability.ai;
 
-import forge.Singletons;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.spellability.SpellAbility;
-import forge.game.GameState;
 import forge.game.ai.ComputerUtil;
 import forge.game.phase.PhaseType;
 import forge.game.player.AIPlayer;
@@ -20,7 +18,6 @@ public class PermanentNoncreatureAi extends SpellAbilityAi {
     @Override
     protected boolean canPlayAI(AIPlayer aiPlayer, SpellAbility sa) {
         String logic = sa.getParam("AILogic");
-        GameState game = Singletons.getModel().getGame();
 
         if ("DontCast".equals(logic)) {
             return false;
@@ -29,7 +26,7 @@ public class PermanentNoncreatureAi extends SpellAbilityAi {
         }
 
         // Wait for Main2 if possible
-        if (game.getPhaseHandler().is(PhaseType.MAIN1)
+        if (aiPlayer.getGame().getPhaseHandler().is(PhaseType.MAIN1)
                 && !ComputerUtil.castPermanentInMain1(aiPlayer, sa)) {
             return false;
         }

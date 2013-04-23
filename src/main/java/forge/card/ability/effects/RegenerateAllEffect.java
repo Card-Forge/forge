@@ -5,9 +5,9 @@ import java.util.List;
 import forge.Card;
 import forge.CardLists;
 import forge.Command;
-import forge.Singletons;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
+import forge.game.GameState;
 import forge.game.zone.ZoneType;
 
 public class RegenerateAllEffect extends SpellAbilityEffect {
@@ -20,13 +20,14 @@ public class RegenerateAllEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
         final Card hostCard = sa.getSourceCard();
+        final GameState game = hostCard.getGame();
         String valid = "";
 
         if (sa.hasParam("ValidCards")) {
             valid = sa.getParam("ValidCards");
         }
 
-        List<Card> list = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
+        List<Card> list = game.getCardsIn(ZoneType.Battlefield);
         list = CardLists.getValidCards(list, valid.split(","), hostCard.getController(), hostCard);
 
         for (final Card c : list) {
@@ -41,7 +42,7 @@ public class RegenerateAllEffect extends SpellAbilityEffect {
 
             if (c.isInPlay()) {
                 c.addShield();
-                Singletons.getModel().getGame().getEndOfTurn().addUntil(untilEOT);
+                game.getEndOfTurn().addUntil(untilEOT);
             }
         }
     } // regenerateAllResolve

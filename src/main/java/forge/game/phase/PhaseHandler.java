@@ -440,7 +440,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
                 p.loseLife(burn);
 
                 // Play the Mana Burn sound
-                Singletons.getModel().getGame().getEvents().post(new ManaBurnEvent());
+                game.getEvents().post(new ManaBurnEvent());
             }
             p.updateObservers();
         }
@@ -461,7 +461,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
 
             case COMBAT_END:
                 //SDisplayUtil.showTab(EDocID.REPORT_STACK.getDoc());
-                game.getCombat().reset();
+                game.getCombat().reset(playerTurn);
                 this.getPlayerTurn().resetAttackedThisCombat();
                 this.bCombat.set(false);
 
@@ -474,7 +474,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
                 }
                 this.planarDiceRolledthisTurn = 0;
                 // Play the End Turn sound
-                Singletons.getModel().getGame().getEvents().post(new EndOfTurnEvent());
+                game.getEvents().post(new EndOfTurnEvent());
                 break;
             default: // no action
         }

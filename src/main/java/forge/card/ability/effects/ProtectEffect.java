@@ -8,11 +8,11 @@ import forge.Card;
 import forge.CardLists;
 import forge.CardUtil;
 import forge.Command;
-import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
+import forge.game.GameState;
 import forge.game.ai.ComputerUtilCard;
 import forge.game.player.Player;
 import forge.gui.GuiChoose;
@@ -97,6 +97,7 @@ public class ProtectEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
         final Card host = sa.getSourceCard();
+        final GameState game = sa.getActivatingPlayer().getGame();
 
         final boolean isChoice = sa.getParam("Gains").contains("Choice");
         final ArrayList<String> choices = AbilityUtils.getProtectionList(sa);
@@ -120,7 +121,7 @@ public class ProtectEffect extends SpellAbilityEffect {
                             list.addAll(opp.getCreaturesInPlay());
                         }
                         if (list.isEmpty()) {
-                            list = CardLists.filterControlledBy(Singletons.getModel().getGame().getCardsInGame(), ai.getOpponents());
+                            list = CardLists.filterControlledBy(game.getCardsInGame(), ai.getOpponents());
                         }
                         if (!list.isEmpty()) {
                             choice = ComputerUtilCard.getMostProminentColor(list);
@@ -182,9 +183,9 @@ public class ProtectEffect extends SpellAbilityEffect {
                     }
                 };
                 if (sa.hasParam("UntilEndOfCombat")) {
-                    Singletons.getModel().getGame().getEndOfCombat().addUntil(untilEOT);
+                    game.getEndOfCombat().addUntil(untilEOT);
                 } else {
-                    Singletons.getModel().getGame().getEndOfTurn().addUntil(untilEOT);
+                    game.getEndOfTurn().addUntil(untilEOT);
                 }
             }
         }
@@ -214,9 +215,9 @@ public class ProtectEffect extends SpellAbilityEffect {
                     }
                 };
                 if (sa.hasParam("UntilEndOfCombat")) {
-                    Singletons.getModel().getGame().getEndOfCombat().addUntil(untilEOT);
+                    game.getEndOfCombat().addUntil(untilEOT);
                 } else {
-                    Singletons.getModel().getGame().getEndOfTurn().addUntil(untilEOT);
+                    game.getEndOfTurn().addUntil(untilEOT);
                 }
             }
         }

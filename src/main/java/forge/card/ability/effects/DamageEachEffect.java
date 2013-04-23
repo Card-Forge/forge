@@ -5,7 +5,6 @@ import java.util.List;
 
 import forge.Card;
 import forge.CardLists;
-import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.cardfactory.CardFactoryUtil;
@@ -61,7 +60,7 @@ public class DamageEachEffect extends SpellAbilityEffect {
     public void resolve(SpellAbility sa) {
         final Card card = sa.getSourceCard();
 
-        List<Card> sources = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
+        List<Card> sources = card.getGame().getCardsIn(ZoneType.Battlefield);
         if (sa.hasParam("ValidCards")) {
             sources = CardLists.getValidCards(sources, sa.getParam("ValidCards"), card.getController(), card);
         }

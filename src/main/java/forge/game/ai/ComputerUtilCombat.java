@@ -28,7 +28,6 @@ import forge.Card;
 import forge.CardLists;
 import forge.CounterType;
 import forge.GameEntity;
-import forge.Singletons;
 import forge.card.TriggerReplacementBase;
 import forge.card.ability.AbilityFactory;
 import forge.card.ability.AbilityUtils;
@@ -418,6 +417,7 @@ public class ComputerUtilCombat {
      */
     public static int dealsDamageAsBlocker(final Card attacker, final Card defender) {
 
+        final GameState game = attacker.getGame();
         if (attacker.getName().equals("Sylvan Basilisk") && !defender.hasKeyword("Indestructible")) {
             return 0;
         }
@@ -441,7 +441,7 @@ public class ComputerUtilCombat {
         }
 
         int defenderDamage = defender.getNetAttack() + ComputerUtilCombat.predictPowerBonusOfBlocker(attacker, defender, true);
-        if (Singletons.getModel().getGame().getStaticEffects().getGlobalRuleChange(GlobalRuleChange.toughnessAssignsDamage)) {
+        if (game.getStaticEffects().getGlobalRuleChange(GlobalRuleChange.toughnessAssignsDamage)) {
             defenderDamage = defender.getNetDefense() + ComputerUtilCombat.predictToughnessBonusOfBlocker(attacker, defender, true);
         }
 
@@ -550,10 +550,11 @@ public class ComputerUtilCombat {
      * @return a boolean.
      */
     public static boolean attackerWouldBeDestroyed(Player ai, final Card attacker) {
-        final List<Card> blockers = Singletons.getModel().getGame().getCombat().getBlockers(attacker);
+        final GameState game = ai.getGame();
+        final List<Card> blockers = game.getCombat().getBlockers(attacker);
 
         for (final Card defender : blockers) {
-            if (ComputerUtilCombat.canDestroyAttacker(ai, attacker, defender, Singletons.getModel().getGame().getCombat(), true)
+            if (ComputerUtilCombat.canDestroyAttacker(ai, attacker, defender, game.getCombat(), true)
                     && !(defender.hasKeyword("Wither") || defender.hasKeyword("Infect"))) {
                 return true;
             }
@@ -580,17 +581,18 @@ public class ComputerUtilCombat {
      */
     public static boolean combatTriggerWillTrigger(final Card attacker, final Card defender, final Trigger trigger,
             Combat combat) {
+        final GameState game = attacker.getGame();
         final HashMap<String, String> trigParams = trigger.getMapParams();
         boolean willTrigger = false;
         final Card source = trigger.getHostCard();
         if (combat == null) {
-            combat = Singletons.getModel().getGame().getCombat();
+            combat = game.getCombat();
         }
 
-        if (!trigger.zonesCheck(Singletons.getModel().getGame().getZoneOf(trigger.getHostCard()))) {
+        if (!trigger.zonesCheck(game.getZoneOf(trigger.getHostCard()))) {
             return false;
         }
-        if (!trigger.requirementsCheck()) {
+        if (!trigger.requirementsCheck(game)) {
             return false;
         }
 
@@ -701,9 +703,10 @@ public class ComputerUtilCombat {
 
         power += defender.getKeywordMagnitude("Bushido");
 
+        final GameState game = attacker.getGame();
         // look out for continuous static abilities that only care for blocking
         // creatures
-        final List<Card> cardList = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
+        final List<Card> cardList = game.getCardsIn(ZoneType.Battlefield);
         for (final Card card : cardList) {
             for (final StaticAbility stAb : card.getStaticAbilities()) {
                 final HashMap<String, String> params = stAb.getMapParams();
@@ -730,7 +733,7 @@ public class ComputerUtilCombat {
         }
 
         final ArrayList<Trigger> theTriggers = new ArrayList<Trigger>();
-        for (Card card : Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield)) {
+        for (Card card : game.getCardsIn(ZoneType.Battlefield)) {
             theTriggers.addAll(card.getTriggers());
         }
         theTriggers.addAll(attacker.getTriggers());
@@ -824,9 +827,9 @@ public class ComputerUtilCombat {
         }
 
         toughness += defender.getKeywordMagnitude("Bushido");
-
+        final GameState game = attacker.getGame();
         final ArrayList<Trigger> theTriggers = new ArrayList<Trigger>();
-        for (Card card : Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield)) {
+        for (Card card : game.getCardsIn(ZoneType.Battlefield)) {
             theTriggers.addAll(card.getTriggers());
         }
         theTriggers.addAll(attacker.getTriggers());
@@ -942,8 +945,9 @@ public class ComputerUtilCombat {
             }
         }
 
+        final GameState game = attacker.getGame();
         final ArrayList<Trigger> theTriggers = new ArrayList<Trigger>();
-        for (Card card : Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield)) {
+        for (Card card : game.getCardsIn(ZoneType.Battlefield)) {
             theTriggers.addAll(card.getTriggers());
         }
         // if the defender has first strike and wither the attacker will deal
@@ -960,7 +964,7 @@ public class ComputerUtilCombat {
 
         // look out for continuous static abilities that only care for attacking
         // creatures
-        final List<Card> cardList = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
+        final List<Card> cardList = game.getCardsIn(ZoneType.Battlefield);
         for (final Card card : cardList) {
             for (final StaticAbility stAb : card.getStaticAbilities()) {
                 final HashMap<String, String> params = stAb.getMapParams();
@@ -1097,8 +1101,9 @@ public class ComputerUtilCombat {
             }
         }
 
+        final GameState game = attacker.getGame();
         final ArrayList<Trigger> theTriggers = new ArrayList<Trigger>();
-        for (Card card : Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield)) {
+        for (Card card : game.getCardsIn(ZoneType.Battlefield)) {
             theTriggers.addAll(card.getTriggers());
         }
         if (defender != null) {
@@ -1108,7 +1113,7 @@ public class ComputerUtilCombat {
 
         // look out for continuous static abilities that only care for attacking
         // creatures
-        final List<Card> cardList = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
+        final List<Card> cardList = game.getCardsIn(ZoneType.Battlefield);
         for (final Card card : cardList) {
             for (final StaticAbility stAb : card.getStaticAbilities()) {
                 final HashMap<String, String> params = stAb.getMapParams();
@@ -1247,8 +1252,9 @@ public class ComputerUtilCombat {
      * @return a boolean.
      */
     public static boolean checkDestroyBlockerTrigger(final Card attacker, final Card defender) {
+        final GameState game = attacker.getGame();
         final ArrayList<Trigger> theTriggers = new ArrayList<Trigger>();
-        for (Card card : Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield)) {
+        for (Card card : game.getCardsIn(ZoneType.Battlefield)) {
             theTriggers.addAll(card.getTriggers());
         }
         for (Trigger trigger : theTriggers) {
@@ -1303,7 +1309,7 @@ public class ComputerUtilCombat {
      */
     public static boolean checkDestroyAttackerTrigger(final Card attacker, final Card defender) {
         final ArrayList<Trigger> theTriggers = new ArrayList<Trigger>();
-        for (Card card : Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield)) {
+        for (Card card : attacker.getGame().getCardsIn(ZoneType.Battlefield)) {
             theTriggers.addAll(card.getTriggers());
         }
         for (Trigger trigger : theTriggers) {
@@ -1398,7 +1404,7 @@ public class ComputerUtilCombat {
                 + ComputerUtilCombat.predictPowerBonusOfBlocker(attacker, defender, withoutAbilities);
         int attackerDamage = attacker.getNetAttack()
                 + ComputerUtilCombat.predictPowerBonusOfAttacker(attacker, defender, combat, withoutAbilities);
-        if (Singletons.getModel().getGame().getStaticEffects().getGlobalRuleChange(GlobalRuleChange.toughnessAssignsDamage)) {
+        if (ai.getGame().getStaticEffects().getGlobalRuleChange(GlobalRuleChange.toughnessAssignsDamage)) {
             defenderDamage = defender.getNetDefense()
                     + ComputerUtilCombat.predictToughnessBonusOfBlocker(attacker, defender, withoutAbilities);
             attackerDamage = attacker.getNetDefense()
@@ -1485,12 +1491,13 @@ public class ComputerUtilCombat {
      * @return a boolean.
      */
     public static boolean blockerWouldBeDestroyed(Player ai, final Card blocker) {
+        final GameState game = ai.getGame();
         // TODO THis function only checks if a single attacker at a time would destroy a blocker
         // This needs to expand to tally up damage
-        final List<Card> attackers = Singletons.getModel().getGame().getCombat().getAttackersBlockedBy(blocker);
+        final List<Card> attackers = game.getCombat().getAttackersBlockedBy(blocker);
 
         for (Card attacker : attackers) {
-            if (ComputerUtilCombat.canDestroyBlocker(ai, blocker, attacker, Singletons.getModel().getGame().getCombat(), true)
+            if (ComputerUtilCombat.canDestroyBlocker(ai, blocker, attacker, game.getCombat(), true)
                     && !(attacker.hasKeyword("Wither") || attacker.hasKeyword("Infect"))) {
                 return true;
             }
@@ -1517,7 +1524,7 @@ public class ComputerUtilCombat {
      */
     public static boolean canDestroyBlocker(Player ai, final Card defender, final Card attacker, final Combat combat,
             final boolean withoutAbilities) {
-
+        final GameState game = ai.getGame();
         int flankingMagnitude = 0;
         if (attacker.hasKeyword("Flanking") && !defender.hasKeyword("Flanking")) {
 
@@ -1548,7 +1555,7 @@ public class ComputerUtilCombat {
                 + ComputerUtilCombat.predictPowerBonusOfBlocker(attacker, defender, withoutAbilities);
         int attackerDamage = attacker.getNetAttack()
                 + ComputerUtilCombat.predictPowerBonusOfAttacker(attacker, defender, combat, withoutAbilities);
-        if (Singletons.getModel().getGame().getStaticEffects().getGlobalRuleChange(GlobalRuleChange.toughnessAssignsDamage)) {
+        if (game.getStaticEffects().getGlobalRuleChange(GlobalRuleChange.toughnessAssignsDamage)) {
             defenderDamage = defender.getNetDefense()
                     + ComputerUtilCombat.predictToughnessBonusOfBlocker(attacker, defender, withoutAbilities);
             attackerDamage = attacker.getNetDefense()
@@ -1825,7 +1832,7 @@ public class ComputerUtilCombat {
 
     public final static int predictDamageTo(final Player target, final int damage, final Card source, final boolean isCombat) {
 
-        final GameState game = Singletons.getModel().getGame();
+        final GameState game = target.getGame();
         int restDamage = damage;
 
         restDamage = target.staticReplaceDamage(restDamage, source, isCombat);

@@ -7,9 +7,9 @@ import java.util.List;
 
 import forge.Card;
 import forge.Command;
-import forge.Singletons;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
+import forge.game.GameState;
 
 public class DebuffEffect extends SpellAbilityEffect {
 
@@ -56,6 +56,7 @@ public class DebuffEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
         final List<String> kws = sa.hasParam("Keywords") ? Arrays.asList(sa.getParam("Keywords").split(" & ")) : new ArrayList<String>();
+        final GameState game = sa.getActivatingPlayer().getGame();
 
         for (final Card tgtC : getTargetCards(sa)) {
             final ArrayList<String> hadIntrinsic = new ArrayList<String>();
@@ -69,7 +70,7 @@ public class DebuffEffect extends SpellAbilityEffect {
                 }
             }
             if (!sa.hasParam("Permanent")) {
-                Singletons.getModel().getGame().getEndOfTurn().addUntil(new Command() {
+                game.getEndOfTurn().addUntil(new Command() {
                     private static final long serialVersionUID = 5387486776282932314L;
 
                     @Override

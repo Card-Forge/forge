@@ -3,12 +3,12 @@ package forge.card.ability.ai;
 import java.util.Random;
 
 import forge.Card;
-import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.cost.Cost;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
+import forge.game.GameState;
 import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilCost;
 import forge.game.ai.ComputerUtilMana;
@@ -67,6 +67,7 @@ public class TokenAi extends SpellAbilityAi {
     @Override
     protected boolean canPlayAI(AIPlayer ai, SpellAbility sa) {
         final Cost cost = sa.getPayCosts();
+        final GameState game = ai.getGame();
         readParameters(sa);
 
         if (ComputerUtil.preventRunAwayActivations(sa)) {
@@ -95,7 +96,7 @@ public class TokenAi extends SpellAbilityAi {
             }
         }
 
-        PhaseHandler ph = Singletons.getModel().getGame().getPhaseHandler();
+        PhaseHandler ph = game.getPhaseHandler();
         // Don't generate tokens without haste before main 2 if possible
         if (ph.getPhase().isBefore(PhaseType.MAIN2)
                 && ph.isPlayerTurn(ai) && !haste
@@ -109,7 +110,7 @@ public class TokenAi extends SpellAbilityAi {
                 && !SpellAbilityAi.isSorcerySpeed(sa) && !haste) {
             return false;
         }
-        if ((ph.getPhase().isAfter(PhaseType.COMBAT_BEGIN) || Singletons.getModel().getGame().getPhaseHandler().isPlayerTurn(
+        if ((ph.getPhase().isAfter(PhaseType.COMBAT_BEGIN) || game.getPhaseHandler().isPlayerTurn(
                 opp))
                 && oneShot) {
             return false;
@@ -163,7 +164,7 @@ public class TokenAi extends SpellAbilityAi {
             return true;
         }
 
-        if (Singletons.getModel().getGame().getPhaseHandler().is(PhaseType.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY)) {
+        if (game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY)) {
             return true;
         }
         if (sa.isAbility()) {

@@ -8,7 +8,6 @@ import com.google.common.base.Predicate;
 
 import forge.Card;
 import forge.CardLists;
-import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.cost.Cost;
@@ -86,7 +85,7 @@ public class  DamageAllAi extends SpellAbilityAi {
         }
 
         // wait until stack is empty (prevents duplicate kills)
-        if (!Singletons.getModel().getGame().getStack().isEmpty()) {
+        if (!ai.getGame().getStack().isEmpty()) {
             return false;
         }
 

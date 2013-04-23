@@ -6,13 +6,13 @@ import java.util.List;
 
 import forge.Card;
 import forge.Command;
-import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.mana.ManaCost;
 import forge.card.spellability.Ability;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
+import forge.game.GameState;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
@@ -85,8 +85,20 @@ public class ControlGainEffect extends SpellAbilityEffect {
         final List<String> lose = sa.hasParam("LoseControl") ? Arrays.asList(sa.getParam("LoseControl").split(",")) : null;
 
         final Target tgt = sa.getTarget();
+        final List<Player> controllers;
+
+        if (sa.hasParam("NewController")) {
+            controllers = AbilityUtils.getDefinedPlayers(sa.getSourceCard(), sa.getParam("NewController"), sa);
+        } else if (tgt != null && tgt.getTargetPlayers() != null && tgt.canTgtPlayer()) {
+            controllers = tgt.getTargetPlayers();
+        } else
+            controllers = new ArrayList<Player>();
+
+        final Player newController = controllers.isEmpty() ? sa.getActivatingPlayer() : controllers.get(0);
+        final GameState game = newController.getGame();
+
         if (sa.hasParam("AllValid")) {
-            tgtCards = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
+            tgtCards = game.getCardsIn(ZoneType.Battlefield);
             tgtCards = AbilityUtils.filterListByType(tgtCards, sa.getParam("AllValid"), sa);
         } else if (sa.hasParam("Defined")) {
             tgtCards = AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa);
@@ -94,21 +106,7 @@ public class ControlGainEffect extends SpellAbilityEffect {
             tgtCards = getTargetCards(sa);
         }
 
-        List<Player> controllers = new ArrayList<Player>();
 
-        if (sa.hasParam("NewController")) {
-            controllers = AbilityUtils.getDefinedPlayers(sa.getSourceCard(), sa.getParam("NewController"), sa);
-        } else if (tgt != null && tgt.getTargetPlayers() != null && tgt.canTgtPlayer()) {
-            controllers = tgt.getTargetPlayers();
-        }
-
-        Player newController;
-
-        if (controllers.size() == 0) {
-            newController = sa.getActivatingPlayer();
-        } else {
-            newController = controllers.get(0);
-        }
         // check for lose control criteria right away
         if (lose != null && lose.contains("LeavesPlay") && !source.isInZone(ZoneType.Battlefield)) {
             return;
@@ -127,7 +125,7 @@ public class ControlGainEffect extends SpellAbilityEffect {
                 return;
             }
 
-            long tStamp = Singletons.getModel().getGame().getNextTimestamp();
+            long tStamp = game.getNextTimestamp();
             if (lose != null) {
                 tgtC.addTempController(newController, tStamp);
             } else {
@@ -155,7 +153,7 @@ public class ControlGainEffect extends SpellAbilityEffect {
                     sa.getSourceCard().addChangeControllerCommand(this.getLoseControlCommand(tgtC, tStamp, bTapOnLose, source, kws));
                 }
                 if (lose.contains("EOT")) {
-                    Singletons.getModel().getGame().getEndOfTurn().addAt(this.getLoseControlCommand(tgtC, tStamp, bTapOnLose, source, kws));
+                    game.getEndOfTurn().addAt(this.getLoseControlCommand(tgtC, tStamp, bTapOnLose, source, kws));
                 }
             }
 
@@ -192,14 +190,15 @@ public class ControlGainEffect extends SpellAbilityEffect {
 
             @Override
             public void run() {
+                final GameState game = hostCard.getGame();
                 final Ability ability = new Ability(hostCard, ManaCost.ZERO) {
                     @Override
                     public void resolve() {
 
                         if (bNoRegen) {
-                            Singletons.getModel().getGame().getAction().destroyNoRegeneration(c, null);
+                            game.getAction().destroyNoRegeneration(c, null);
                         } else {
-                            Singletons.getModel().getGame().getAction().destroy(c, null);
+                            game.getAction().destroy(c, null);
                         }
                     }
                 };
@@ -210,7 +209,7 @@ public class ControlGainEffect extends SpellAbilityEffect {
                 }
                 ability.setStackDescription(sb.toString());
 
-                Singletons.getModel().getGame().getStack().addSimultaneousStackEntry(ability);
+                game.getStack().addSimultaneousStackEntry(ability);
             }
 
         };

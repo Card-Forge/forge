@@ -13,7 +13,6 @@ import com.google.common.collect.Lists;
 import forge.Card;
 import forge.CardLists;
 import forge.CardPredicates.Presets;
-import forge.Singletons;
 import forge.card.CardRulesPredicates;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
@@ -100,7 +99,7 @@ public class ChooseCardNameEffect extends SpellAbilityEffect {
                                 chosen = ComputerUtilCard.getMostProminentCardName(p.getOpponent().getCardsIn(ZoneType.Library));
                             }
                         } else {
-                            List<Card> list = CardLists.filterControlledBy(Singletons.getModel().getGame().getCardsInGame(), p.getOpponent());
+                            List<Card> list = CardLists.filterControlledBy(p.getGame().getCardsInGame(), p.getOpponent());
                             list = CardLists.filter(list, Predicates.not(Presets.LANDS));
                             if (!list.isEmpty()) {
                                 chosen = list.get(0).getName();

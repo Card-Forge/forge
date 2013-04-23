@@ -26,7 +26,6 @@ import java.util.Observer;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import forge.Card;
-import forge.Singletons;
 import forge.game.player.Player;
 import forge.util.MyObservable;
 
@@ -80,7 +79,7 @@ public class Zone extends MyObservable implements IZone, Observer, java.io.Seria
         // don't want to log those.
         if (!c.isImmutable()) {
             this.cardsAddedThisTurn.add(c);
-            final Zone zone = Singletons.getModel().getGame().getZoneOf(c);
+            final Zone zone = c.getGame().getZoneOf(c);
             if (zone != null) {
                 this.cardsAddedThisTurnSource.add(zone.getZoneType());
             } else {
@@ -89,7 +88,7 @@ public class Zone extends MyObservable implements IZone, Observer, java.io.Seria
         }
 
         c.addObserver(this);
-        c.setTurnInZone(Singletons.getModel().getGame().getPhaseHandler().getTurn());
+        c.setTurnInZone(c.getGame().getPhaseHandler().getTurn());
         c.setTapped(false);
 
         this.cardList.add(c);
@@ -138,7 +137,7 @@ public class Zone extends MyObservable implements IZone, Observer, java.io.Seria
         // don't want to log those.
         if (!c.isImmutable()) {
             this.cardsAddedThisTurn.add(c);
-            final Zone zone = Singletons.getModel().getGame().getZoneOf(c);
+            final Zone zone = c.getGame().getZoneOf(c);
             if (zone != null) {
                 this.cardsAddedThisTurnSource.add(zone.getZoneType());
             } else {
@@ -151,7 +150,7 @@ public class Zone extends MyObservable implements IZone, Observer, java.io.Seria
         }
 
         this.cardList.add(index, c);
-        c.setTurnInZone(Singletons.getModel().getGame().getPhaseHandler().getTurn());
+        c.setTurnInZone(c.getGame().getPhaseHandler().getTurn());
         this.update();
     }
 

@@ -5,11 +5,11 @@ import java.util.Random;
 
 import forge.Card;
 import forge.CardLists;
-import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
+import forge.game.GameState;
 import forge.game.player.AIPlayer;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
@@ -61,7 +61,7 @@ public class PhasesAi extends SpellAbilityAi {
             return true;
         } else if (mandatory) {
             // not enough preferred targets, but mandatory so keep going:
-            return phasesUnpreferredTargeting(sa, mandatory);
+            return phasesUnpreferredTargeting(aiPlayer.getGame(), sa, mandatory);
         }
 
         return false;
@@ -133,12 +133,11 @@ public class PhasesAi extends SpellAbilityAi {
      *            a boolean.
      * @return a boolean.
      */
-    private boolean phasesUnpreferredTargeting(final SpellAbility sa,
-            final boolean mandatory) {
+    private boolean phasesUnpreferredTargeting(final GameState game, final SpellAbility sa, final boolean mandatory) {
         final Card source = sa.getSourceCard();
         final Target tgt = sa.getTarget();
 
-        List<Card> list = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
+        List<Card> list = game.getCardsIn(ZoneType.Battlefield);
         list = CardLists.getTargetableCards(CardLists.getValidCards(list, tgt.getValidTgts(), source.getController(), source), sa);
 
         return false;

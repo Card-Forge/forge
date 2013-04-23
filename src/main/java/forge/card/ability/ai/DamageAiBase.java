@@ -6,9 +6,9 @@ import com.google.common.collect.Iterables;
 
 import forge.Card;
 import forge.CardPredicates;
-import forge.Singletons;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.spellability.SpellAbility;
+import forge.game.GameState;
 import forge.game.ai.ComputerUtilCombat;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -17,6 +17,7 @@ import forge.game.zone.ZoneType;
 public abstract class DamageAiBase extends SpellAbilityAi {
     protected boolean shouldTgtP(final Player comp, final SpellAbility sa, final int d, final boolean noPrevention) {
         int restDamage = d;
+        final GameState game = comp.getGame();
         final Player enemy = comp.getOpponent();
         if (!sa.canTarget(enemy)) {
             return false;
@@ -44,8 +45,8 @@ public abstract class DamageAiBase extends SpellAbilityAi {
 
         if (sa.isSpell()) {
             // If this is a spell, cast it instead of discarding
-            if ((Singletons.getModel().getGame().getPhaseHandler().is(PhaseType.END_OF_TURN) || Singletons.getModel().getGame().getPhaseHandler().is(PhaseType.MAIN2))
-                    && Singletons.getModel().getGame().getPhaseHandler().isPlayerTurn(comp) && (hand.size() > comp.getMaxHandSize())) {
+            if ((game.getPhaseHandler().is(PhaseType.END_OF_TURN) || game.getPhaseHandler().is(PhaseType.MAIN2))
+                    && game.getPhaseHandler().isPlayerTurn(comp) && (hand.size() > comp.getMaxHandSize())) {
                 return true;
             }
         }

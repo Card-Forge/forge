@@ -10,11 +10,11 @@ import forge.Card;
 import forge.CardLists;
 import forge.CardPredicates;
 import forge.Constant;
-import forge.Singletons;
 import forge.card.CardType;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
+import forge.game.GameState;
 import forge.game.ai.ComputerUtilCard;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
@@ -52,6 +52,7 @@ public class ChooseTypeEffect extends SpellAbilityEffect {
         final List<Player> tgtPlayers = getTargetPlayers(sa);
 
         for (final Player p : tgtPlayers) {
+            final GameState game = p.getGame();
             if ((tgt == null) || p.canBeTargetedBy(sa)) {
 
                 if (type.equals("Card")) {
@@ -95,7 +96,7 @@ public class ChooseTypeEffect extends SpellAbilityEffect {
                             if (sa.hasParam("AILogic")) {
                                 final String logic = sa.getParam("AILogic");
                                 if (logic.equals("MostProminentOnBattlefield")) {
-                                    chosen = ComputerUtilCard.getMostProminentCreatureType(Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield));
+                                    chosen = ComputerUtilCard.getMostProminentCreatureType(game.getCardsIn(ZoneType.Battlefield));
                                 }
                                 else if (logic.equals("MostProminentComputerControls")) {
                                     chosen = ComputerUtilCard.getMostProminentCreatureType(ai.getCardsIn(ZoneType.Battlefield));
@@ -103,11 +104,11 @@ public class ChooseTypeEffect extends SpellAbilityEffect {
                                 else if (logic.equals("MostProminentHumanControls")) {
                                     chosen = ComputerUtilCard.getMostProminentCreatureType(opp.getCardsIn(ZoneType.Battlefield));
                                     if (!CardType.isACreatureType(chosen) || invalidTypes.contains(chosen)) {
-                                        chosen = ComputerUtilCard.getMostProminentCreatureType(CardLists.filterControlledBy(Singletons.getModel().getGame().getCardsInGame(), opp));
+                                        chosen = ComputerUtilCard.getMostProminentCreatureType(CardLists.filterControlledBy(game.getCardsInGame(), opp));
                                     }
                                 }
                                 else if (logic.equals("MostProminentInComputerDeck")) {
-                                    chosen = ComputerUtilCard.getMostProminentCreatureType(CardLists.filterControlledBy(Singletons.getModel().getGame().getCardsInGame(), ai));
+                                    chosen = ComputerUtilCard.getMostProminentCreatureType(CardLists.filterControlledBy(game.getCardsInGame(), ai));
                                 }
                                 else if (logic.equals("MostProminentInComputerGraveyard")) {
                                     chosen = ComputerUtilCard.getMostProminentCreatureType(ai.getCardsIn(ZoneType.Graveyard));

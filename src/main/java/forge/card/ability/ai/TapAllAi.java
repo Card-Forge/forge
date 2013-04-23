@@ -9,10 +9,10 @@ import com.google.common.collect.Iterables;
 import forge.Card;
 import forge.CardLists;
 import forge.CardPredicates.Presets;
-import forge.Singletons;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
+import forge.game.GameState;
 import forge.game.phase.CombatUtil;
 import forge.game.phase.PhaseType;
 import forge.game.player.AIPlayer;
@@ -33,8 +33,9 @@ public class TapAllAi extends SpellAbilityAi {
 
         final Card source = sa.getSourceCard();
         final Player opp = ai.getOpponent();
+        final GameState game = ai.getGame();
 
-        if (Singletons.getModel().getGame().getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_BEGIN)) {
+        if (game.getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_BEGIN)) {
             return false;
         }
 
@@ -43,7 +44,7 @@ public class TapAllAi extends SpellAbilityAi {
             valid = sa.getParam("ValidCards");
         }
 
-        List<Card> validTappables = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
+        List<Card> validTappables = game.getCardsIn(ZoneType.Battlefield);
 
         final Target tgt = sa.getTarget();
 
@@ -81,7 +82,7 @@ public class TapAllAi extends SpellAbilityAi {
             return false;
         }
         // in AI's turn, check if there are possible attackers, before tapping blockers
-        if (Singletons.getModel().getGame().getPhaseHandler().isPlayerTurn(ai) && !SpellAbilityAi.isSorcerySpeed(sa)) {
+        if (game.getPhaseHandler().isPlayerTurn(ai) && !SpellAbilityAi.isSorcerySpeed(sa)) {
             validTappables = ai.getCardsIn(ZoneType.Battlefield);
             final boolean any = Iterables.any(validTappables, new Predicate<Card>() {
                 @Override
@@ -108,7 +109,8 @@ public class TapAllAi extends SpellAbilityAi {
      * @return a {@link forge.CardList} object.
      */
     private List<Card> getTapAllTargets(final String valid, final Card source) {
-        List<Card> tmpList = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
+        final GameState game = source.getGame();
+        List<Card> tmpList = game.getCardsIn(ZoneType.Battlefield);
         tmpList = CardLists.getValidCards(tmpList, valid, source.getController(), source);
         tmpList = CardLists.filter(tmpList, Presets.UNTAPPED);
         return tmpList;

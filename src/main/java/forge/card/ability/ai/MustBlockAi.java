@@ -7,7 +7,6 @@ import com.google.common.base.Predicate;
 import forge.Card;
 import forge.CardLists;
 import forge.CardPredicates;
-import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.spellability.SpellAbility;
@@ -39,7 +38,7 @@ public class MustBlockAi extends SpellAbilityAi {
         final Target abTgt = sa.getTarget();
 
         // only use on creatures that can attack
-        if (!Singletons.getModel().getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2)) {
+        if (!ai.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2)) {
             return false;
         }
 

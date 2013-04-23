@@ -8,12 +8,12 @@ import org.apache.commons.lang3.StringUtils;
 import forge.Card;
 import forge.CardLists;
 import forge.CardPredicates.Presets;
-import forge.Singletons;
 import forge.card.CardType;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
+import forge.game.GameState;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
@@ -34,6 +34,7 @@ public class ChooseCardEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
         final Card host = sa.getSourceCard();
+        final GameState game = sa.getActivatingPlayer().getGame();
         final ArrayList<Card> chosen = new ArrayList<Card>();
 
         final Target tgt = sa.getTarget();
@@ -43,7 +44,7 @@ public class ChooseCardEffect extends SpellAbilityEffect {
         if (sa.hasParam("ChoiceZone")) {
             choiceZone = ZoneType.smartValueOf(sa.getParam("ChoiceZone"));
         }
-        List<Card> choices = Singletons.getModel().getGame().getCardsIn(choiceZone);
+        List<Card> choices = game.getCardsIn(choiceZone);
         if (sa.hasParam("Choices")) {
             choices = CardLists.getValidCards(choices, sa.getParam("Choices"), host.getController(), host);
         }
@@ -57,7 +58,7 @@ public class ChooseCardEffect extends SpellAbilityEffect {
         for (final Player p : tgtPlayers) {
             if (sa.hasParam("EachBasicType")) {
                 // Get all lands, 
-                List<Card> land = CardLists.filter(Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield), Presets.LANDS);
+                List<Card> land = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), Presets.LANDS);
                 String eachBasic = sa.getParam("EachBasicType");
                 if (eachBasic.equals("Controlled")) {
                     land = CardLists.filterControlledBy(land, p);

@@ -6,12 +6,12 @@ import java.util.List;
 import forge.Card;
 import forge.CardLists;
 import forge.CardPredicates;
-import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.cost.Cost;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
+import forge.game.GameState;
 import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilCard;
 import forge.game.ai.ComputerUtilCombat;
@@ -27,6 +27,7 @@ public class DamagePreventAi extends SpellAbilityAi {
     @Override
     protected boolean canPlayAI(AIPlayer ai, SpellAbility sa) {
         final Card hostCard = sa.getSourceCard();
+        final GameState game = ai.getGame();
         boolean chance = false;
 
         final Cost cost = sa.getPayCosts();
@@ -56,7 +57,7 @@ public class DamagePreventAi extends SpellAbilityAi {
                     sa.getParam("Defined"), sa);
 
             // react to threats on the stack
-            if (Singletons.getModel().getGame().getStack().size() > 0) {
+            if (game.getStack().size() > 0) {
                 final ArrayList<Object> threatenedObjects = ComputerUtil.predictThreatenedObjects(sa.getActivatingPlayer(), sa);
                 for (final Object o : objects) {
                     if (threatenedObjects.contains(o)) {
@@ -64,7 +65,7 @@ public class DamagePreventAi extends SpellAbilityAi {
                     }
                 }
             } else {
-                PhaseHandler handler = Singletons.getModel().getGame().getPhaseHandler();
+                PhaseHandler handler = game.getPhaseHandler();
                 if (handler.is(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
                     boolean flag = false;
                     for (final Object o : objects) {
@@ -75,8 +76,8 @@ public class DamagePreventAi extends SpellAbilityAi {
                             // Don't need to worry about Combat Damage during AI's turn
                             final Player p = (Player) o;
                             if (!handler.isPlayerTurn(p)) {
-                                flag |= (p == ai && ((ComputerUtilCombat.wouldLoseLife(ai, Singletons.getModel().getGame().getCombat()) && sa
-                                        .isAbility()) || ComputerUtilCombat.lifeInDanger(ai, Singletons.getModel().getGame().getCombat())));
+                                flag |= (p == ai && ((ComputerUtilCombat.wouldLoseLife(ai, game.getCombat()) && sa
+                                        .isAbility()) || ComputerUtilCombat.lifeInDanger(ai, game.getCombat())));
                             }
                         }
                     }
@@ -90,7 +91,7 @@ public class DamagePreventAi extends SpellAbilityAi {
         } // targeted
 
         // react to threats on the stack
-        else if (Singletons.getModel().getGame().getStack().size() > 0) {
+        else if (game.getStack().size() > 0) {
             tgt.resetTargets();
             // check stack for something on the stack will kill anything i
             // control
@@ -118,10 +119,10 @@ public class DamagePreventAi extends SpellAbilityAi {
             }
 
         } // Protect combatants
-        else if (Singletons.getModel().getGame().getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
-            if (sa.canTarget(ai) && ComputerUtilCombat.wouldLoseLife(ai, Singletons.getModel().getGame().getCombat())
-                    && (ComputerUtilCombat.lifeInDanger(ai, Singletons.getModel().getGame().getCombat()) || sa.isAbility())
-                    && Singletons.getModel().getGame().getPhaseHandler().isPlayerTurn(ai.getOpponent())) {
+        else if (game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
+            if (sa.canTarget(ai) && ComputerUtilCombat.wouldLoseLife(ai, game.getCombat())
+                    && (ComputerUtilCombat.lifeInDanger(ai, game.getCombat()) || sa.isAbility())
+                    && game.getPhaseHandler().isPlayerTurn(ai.getOpponent())) {
                 tgt.addTarget(ai);
                 chance = true;
             } else {
@@ -180,7 +181,8 @@ public class DamagePreventAi extends SpellAbilityAi {
         final Target tgt = sa.getTarget();
         tgt.resetTargets();
         // filter AIs battlefield by what I can target
-        List<Card> targetables = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
+        final GameState game = ai.getGame();
+        List<Card> targetables = game.getCardsIn(ZoneType.Battlefield);
         targetables = CardLists.getValidCards(targetables, tgt.getValidTgts(), ai, sa.getSourceCard());
         final List<Card> compTargetables = CardLists.filterControlledBy(targetables, ai);
 
@@ -195,7 +197,7 @@ public class DamagePreventAi extends SpellAbilityAi {
         if (compTargetables.size() > 0) {
             final List<Card> combatants = CardLists.filter(compTargetables, CardPredicates.Presets.CREATURES);
             CardLists.sortByEvaluateCreature(combatants);
-            if (Singletons.getModel().getGame().getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
+            if (game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
                 for (final Card c : combatants) {
                     if (ComputerUtilCombat.combatantWouldBeDestroyed(ai, c)) {
                         tgt.addTarget(c);

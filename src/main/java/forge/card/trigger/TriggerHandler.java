@@ -25,7 +25,6 @@ import java.util.Map;
 
 import forge.Card;
 import forge.CardLists;
-import forge.Singletons;
 import forge.card.ability.AbilityFactory;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.ApiType;
@@ -48,9 +47,18 @@ public class TriggerHandler {
 
     private final ArrayList<Trigger> delayedTriggers = new ArrayList<Trigger>();
     private final List<TriggerWaiting> waitingTriggers = new ArrayList<TriggerWaiting>();
+    private final GameState game;
+
+    /**
+     * TODO: Write javadoc for Constructor.
+     * @param gameState
+     */
+    public TriggerHandler(GameState gameState) {
+        game = gameState;
+    }
 
     public final void cleanUpTemporaryTriggers() {
-        final List<Card> absolutelyAllCards = Singletons.getModel().getGame().getCardsInGame();
+        final List<Card> absolutelyAllCards = game.getCardsInGame();
         for (final Card c : absolutelyAllCards) {
             for (int i = 0; i < c.getTriggers().size(); i++) {
                 if (c.getTriggers().get(i).isTemporary()) {
@@ -162,8 +170,6 @@ public class TriggerHandler {
             return;
         }
 
-        final GameState game = Singletons.getModel().getGame();
-
         //runWaitingTrigger(new TriggerWaiting(mode, runParams));
         
         if (game.getStack().isFrozen() || holdTrigger) {
@@ -181,7 +187,7 @@ public class TriggerHandler {
             return false;
         }
         
-        Singletons.getModel().getGame().getAction().checkStaticAbilities();
+        game.getAction().checkStaticAbilities();
 
         boolean haveWaiting = false;
         for (TriggerWaiting wt : waiting) {
@@ -194,7 +200,6 @@ public class TriggerHandler {
     public final boolean runWaitingTrigger(TriggerWaiting wt) {
         final TriggerType mode = wt.getMode();
         final Map<String, Object> runParams = wt.getParams();
-        final GameState game = Singletons.getModel().getGame();
 
         final Player playerAP = game.getPhaseHandler().getPlayerTurn();
         if (playerAP == null) {
@@ -295,17 +300,16 @@ public class TriggerHandler {
     // Return true if the trigger went off, false otherwise.
     private boolean runSingleTrigger(final Trigger regtrig, final TriggerType mode, final Map<String, Object> runParams) {
         final Map<String, String> triggerParams = regtrig.getMapParams();
-        final GameState game = Singletons.getModel().getGame();
 
         if (regtrig.getMode() != mode) {
             return false; // Not the right mode.
         }
 
-        if (!regtrig.phasesCheck()) {
+        if (!regtrig.phasesCheck(game)) {
             return false; // It's not the right phase to go off.
         }
 
-        if (!regtrig.requirementsCheck(runParams)) {
+        if (!regtrig.requirementsCheck(game, runParams)) {
             return false; // Conditions aren't right.
         }
         if (regtrig.getHostCard().isFaceDown() && regtrig.isIntrinsic()) {
@@ -343,7 +347,7 @@ public class TriggerHandler {
         } // Torpor Orb check
 
         // Any trigger should cause the phase not to skip
-        for (Player p : Singletons.getModel().getGame().getPlayers()) {
+        for (Player p : game.getPlayers()) {
             p.getController().autoPassCancel();
         }
 

@@ -6,7 +6,6 @@ import java.util.List;
 
 import forge.Card;
 import forge.CounterType;
-import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
@@ -108,7 +107,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
                 if (max != -1) {
                     counterAmount = max - tgtCard.getCounters(counterType);
                 }
-                final Zone zone = Singletons.getModel().getGame().getZoneOf(tgtCard);
+                final Zone zone = tgtCard.getGame().getZoneOf(tgtCard);
                 if (zone == null || zone.is(ZoneType.Battlefield) || zone.is(ZoneType.Stack)) {
                     if (remember) {
                         final int value = tgtCard.getTotalCountersToAdd(counterType, counterAmount, true);

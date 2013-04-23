@@ -3,7 +3,6 @@ package forge.card.ability.effects;
 import java.util.List;
 
 import forge.Card;
-import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
@@ -21,7 +20,7 @@ public class BondEffect extends SpellAbilityEffect {
         }
 
         // find list of valid cards to pair with
-        List<Card> cards = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
+        List<Card> cards = sa.getActivatingPlayer().getGame().getCardsIn(ZoneType.Battlefield);
         cards = AbilityUtils.filterListByType(cards, sa.getParam("ValidCards"), sa);
         if (cards.isEmpty()) {
             return;

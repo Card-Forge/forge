@@ -24,6 +24,7 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 
+import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
@@ -855,6 +856,7 @@ public class GameAction {
     public final void checkStaticAbilities() {
         // remove old effects
         game.getStaticEffects().clearStaticEffects();
+        game.getTriggerHandler().cleanUpTemporaryTriggers();
 
         // search for cards with static abilities
         final List<Card> allCards = game.getCardsInGame();
@@ -892,11 +894,11 @@ public class GameAction {
 
         // card state effects like Glorious Anthem
         for (final String effect : game.getStaticEffects().getStateBasedMap().keySet()) {
-            final Command com = GameActionUtil.getCommands().get(effect);
-            com.run();
+            final Function<GameState, ?> com = GameActionUtil.getCommands().get(effect);
+            com.apply(game);
         }
 
-        GameActionUtil.grantBasicLandsManaAbilities();
+        GameActionUtil.grantBasicLandsManaAbilities(game);
     }
 
     /**

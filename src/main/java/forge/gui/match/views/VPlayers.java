@@ -20,6 +20,7 @@ package forge.gui.match.views;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -28,6 +29,7 @@ import javax.swing.border.MatteBorder;
 import net.miginfocom.swing.MigLayout;
 import forge.Card;
 import forge.Singletons;
+import forge.game.GameState;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.framework.DragCell;
@@ -65,14 +67,22 @@ public enum VPlayers implements IVDoc<CPlayers> {
         final JPanel pnl = parentCell.getBody();
         pnl.setLayout(new MigLayout("insets 0, gap 0, wrap"));
 
-        final List<Player> players = Singletons.getModel().getGame().getRegisteredPlayers();
-        this.infoLBLs = new HashMap<Player, JLabel[]>();
-
         final String constraints = "w 97%!, gapleft 2%, gapbottom 1%";
 
+        for (final Entry<Player, JLabel[]> p : infoLBLs.entrySet()) {
+            for(JLabel label : p.getValue() )
+                pnl.add(label, constraints);
+        }
+
+        stormLabel = new InfoLabel();
+        pnl.add(stormLabel, constraints);
+    }
+    
+    public void init(final Iterable<Player> players) {
+
+        this.infoLBLs = new HashMap<Player, JLabel[]>();
         for (final Player p : players) {
-            // Create and store labels detailing various non-critical player
-            // info.
+            // Create and store labels detailing various non-critical player info.
             final InfoLabel name = new InfoLabel();
             final InfoLabel life = new InfoLabel();
             final InfoLabel hand = new InfoLabel();
@@ -85,19 +95,7 @@ public enum VPlayers implements IVDoc<CPlayers> {
             // Set border on bottom label, and larger font on player name
             antes.setBorder(new MatteBorder(0, 0, 1, 0, FSkin.getColor(FSkin.Colors.CLR_BORDERS)));
             name.setText(p.getName());
-
-            // Add to "players" tab panel
-            pnl.add(name, constraints);
-            pnl.add(life, constraints);
-            pnl.add(hand, constraints);
-            pnl.add(draw, constraints);
-            pnl.add(prevention, constraints);
-            pnl.add(keywords, constraints);
-            pnl.add(antes, constraints);
         }
-
-        stormLabel = new InfoLabel();
-        pnl.add(stormLabel, constraints);
     }
 
     /* (non-Javadoc)
@@ -143,41 +141,45 @@ public enum VPlayers implements IVDoc<CPlayers> {
     //========== Observer update methods
 
     /** @param p0 {@link forge.game.player.Player} */
-    public void updatePlayerLabels(final Player p0) {
+    public void update() {
         // No need to update if this panel isn't showing
         if (!this.equals(parentCell.getSelected())) { return; }
 
-        final JLabel[] temp = this.infoLBLs.get(p0);
-        temp[1].setText("Life: " + String.valueOf(p0.getLife()) + "  |  Poison counters: "
-                + String.valueOf(p0.getPoisonCounters()));
-        temp[2].setText("Maximum hand size: " + String.valueOf(p0.getMaxHandSize()));
-        temp[3].setText("Cards drawn this turn: " + String.valueOf(p0.getNumDrawnThisTurn()));
-        temp[4].setText("Damage Prevention: " + String.valueOf(p0.getPreventNextDamage()));
-        if (!p0.getKeywords().isEmpty()) {
-            temp[5].setText(p0.getKeywords().toString());
-        } else {
-            temp[5].setText("");
-        }
-        if (Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_ANTE)) {
-            List<Card> list = p0.getCardsIn(ZoneType.Ante);
-            StringBuilder sb = new StringBuilder();
-            sb.append("Ante'd: ");
-            for (int i = 0; i < list.size(); i++) {
-                sb.append(list.get(i));
-                if (i < (list.size() - 1)) {
-                    sb.append(", ");
-                }
+        for(Entry<Player, JLabel[]> rr : infoLBLs.entrySet()) {
+            Player p0 = rr.getKey();
+            final JLabel[] temp = rr.getValue();
+            temp[1].setText("Life: " + String.valueOf(p0.getLife()) + "  |  Poison counters: "
+                    + String.valueOf(p0.getPoisonCounters()));
+            temp[2].setText("Maximum hand size: " + String.valueOf(p0.getMaxHandSize()));
+            temp[3].setText("Cards drawn this turn: " + String.valueOf(p0.getNumDrawnThisTurn()));
+            temp[4].setText("Damage Prevention: " + String.valueOf(p0.getPreventNextDamage()));
+            if (!p0.getKeywords().isEmpty()) {
+                temp[5].setText(p0.getKeywords().toString());
+            } else {
+                temp[5].setText("");
             }
-            temp[6].setText(sb.toString());
+            if (Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_ANTE)) {
+                List<Card> list = p0.getCardsIn(ZoneType.Ante);
+                StringBuilder sb = new StringBuilder();
+                sb.append("Ante'd: ");
+                for (int i = 0; i < list.size(); i++) {
+                    sb.append(list.get(i));
+                    if (i < (list.size() - 1)) {
+                        sb.append(", ");
+                    }
+                }
+                temp[6].setText(sb.toString());
+            }
         }
     }
 
-    /** */
-    public void updateStormLabel() {
+    /**
+     * @param game  */
+    public void updateStormLabel(GameState game) {
         // No need to update if this panel isn't showing
         if (!parentCell.getSelected().equals(this)) { return; }
 
-        stormLabel.setText("Storm count: " + Singletons.getModel().getGame().getStack().getCardsCastThisTurn().size());
+        stormLabel.setText("Storm count: " + game.getStack().getCardsCastThisTurn().size());
     }
 
     //========= Custom class handling

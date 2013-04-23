@@ -3,11 +3,11 @@ package forge.card.ability.ai;
 import java.util.List;
 
 import forge.Card;
-import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
+import forge.game.GameState;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.AIPlayer;
@@ -18,6 +18,7 @@ public class CloneAi extends SpellAbilityAi {
     protected boolean canPlayAI(AIPlayer ai, SpellAbility sa) {
         final Target tgt = sa.getTarget();
         final Card source = sa.getSourceCard();
+        final GameState game = source.getGame();
 
         boolean useAbility = true;
 
@@ -33,7 +34,7 @@ public class CloneAi extends SpellAbilityAi {
         // TODO - add some kind of check for during human turn to answer
         // "Can I use this to block something?"
 
-        PhaseHandler phase = Singletons.getModel().getGame().getPhaseHandler();
+        PhaseHandler phase = game.getPhaseHandler();
         // don't use instant speed clone abilities outside computers
         // Combat_Begin step
         if (!phase.is(PhaseType.COMBAT_BEGIN)
@@ -45,7 +46,7 @@ public class CloneAi extends SpellAbilityAi {
         // don't use instant speed clone abilities outside humans
         // Combat_Declare_Attackers_InstantAbility step
         if ((!phase.is(PhaseType.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY)
-                || Singletons.getModel().getGame().getCombat().getAttackers().isEmpty())
+                || game.getCombat().getAttackers().isEmpty())
                 && !phase.isPlayerTurn(ai)) {
             return false;
         }

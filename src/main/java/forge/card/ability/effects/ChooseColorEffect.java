@@ -9,10 +9,10 @@ import forge.Card;
 import forge.CardLists;
 import forge.CardPredicates;
 import forge.Constant;
-import forge.Singletons;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
+import forge.game.GameState;
 import forge.game.ai.ComputerUtilCard;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
@@ -67,25 +67,26 @@ public class ChooseColorEffect extends SpellAbilityEffect {
                 } else {
                     List<String> chosen = new ArrayList<String>();
                     Player ai = sa.getActivatingPlayer();
+                    final GameState game = ai.getGame();
                     Player opp = ai.getOpponent();
                     if (sa.hasParam("AILogic")) {
                         final String logic = sa.getParam("AILogic");
                         if (logic.equals("MostProminentInHumanDeck")) {
-                            chosen.add(ComputerUtilCard.getMostProminentColor(CardLists.filterControlledBy(Singletons.getModel().getGame().getCardsInGame(), opp)));
+                            chosen.add(ComputerUtilCard.getMostProminentColor(CardLists.filterControlledBy(game.getCardsInGame(), opp)));
                         } else if (logic.equals("MostProminentInComputerDeck")) {
-                            chosen.add(ComputerUtilCard.getMostProminentColor(CardLists.filterControlledBy(Singletons.getModel().getGame().getCardsInGame(), ai)));
+                            chosen.add(ComputerUtilCard.getMostProminentColor(CardLists.filterControlledBy(game.getCardsInGame(), ai)));
                         } else if (logic.equals("MostProminentDualInComputerDeck")) {
-                            List<String> prominence = ComputerUtilCard.getColorByProminence(CardLists.filterControlledBy(Singletons.getModel().getGame().getCardsInGame(), ai));
+                            List<String> prominence = ComputerUtilCard.getColorByProminence(CardLists.filterControlledBy(game.getCardsInGame(), ai));
                             chosen.add(prominence.get(0));
                             chosen.add(prominence.get(1));
                         }
                         else if (logic.equals("MostProminentInGame")) {
-                            chosen.add(ComputerUtilCard.getMostProminentColor(Singletons.getModel().getGame().getCardsInGame()));
+                            chosen.add(ComputerUtilCard.getMostProminentColor(game.getCardsInGame()));
                         }
                         else if (logic.equals("MostProminentHumanCreatures")) {
                             List<Card> list = opp.getCreaturesInPlay();
                             if (list.isEmpty()) {
-                                list = CardLists.filter(CardLists.filterControlledBy(Singletons.getModel().getGame().getCardsInGame(), opp), CardPredicates.Presets.CREATURES);
+                                list = CardLists.filter(CardLists.filterControlledBy(game.getCardsInGame(), opp), CardPredicates.Presets.CREATURES);
                             }
                             chosen.add(ComputerUtilCard.getMostProminentColor(list));
                         }
@@ -96,11 +97,11 @@ public class ChooseColorEffect extends SpellAbilityEffect {
                             chosen.add(ComputerUtilCard.getMostProminentColor(ai.getOpponent().getCardsIn(ZoneType.Battlefield)));
                         }
                         else if (logic.equals("MostProminentPermanent")) {
-                            final List<Card> list = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
+                            final List<Card> list = game.getCardsIn(ZoneType.Battlefield);
                             chosen.add(ComputerUtilCard.getMostProminentColor(list));
                         }
                         else if (logic.equals("MostProminentAttackers")) {
-                            chosen.add(ComputerUtilCard.getMostProminentColor(Singletons.getModel().getGame().getCombat().getAttackers()));
+                            chosen.add(ComputerUtilCard.getMostProminentColor(game.getCombat().getAttackers()));
                         }
                         else if (logic.equals("MostProminentKeywordInComputerDeck")) {
                             List<Card> list = ai.getAllCards();

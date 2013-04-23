@@ -22,7 +22,6 @@ import java.util.List;
 import java.util.Random;
 
 import forge.Card;
-import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.cost.Cost;
@@ -32,6 +31,7 @@ import forge.card.cost.PaymentDecision;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
+import forge.game.GameState;
 import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilCost;
 import forge.game.ai.ComputerUtilMana;
@@ -56,6 +56,7 @@ public class DrawAi extends SpellAbilityAi {
         final Target tgt = sa.getTarget();
         final Card source = sa.getSourceCard();
         final Cost abCost = sa.getPayCosts();
+        final GameState game = ai.getGame();
 
         if (abCost != null) {
             // AI currently disabled for these costs
@@ -103,12 +104,12 @@ public class DrawAi extends SpellAbilityAi {
         }
 
         // Don't use draw abilities before main 2 if possible
-        if (Singletons.getModel().getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2)
+        if (game.getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2)
                 && !sa.hasParam("ActivationPhases")) {
             return false;
         }
-        if ((!Singletons.getModel().getGame().getPhaseHandler().getNextTurn().equals(ai)
-                    || Singletons.getModel().getGame().getPhaseHandler().getPhase().isBefore(PhaseType.END_OF_TURN))
+        if ((!game.getPhaseHandler().getNextTurn().equals(ai)
+                    || game.getPhaseHandler().getPhase().isBefore(PhaseType.END_OF_TURN))
                 && !sa.hasParam("PlayerTurn") && !SpellAbilityAi.isSorcerySpeed(sa)
                 && ai.getCardsIn(ZoneType.Hand).size() > 1) {
             return false;
@@ -126,8 +127,8 @@ public class DrawAi extends SpellAbilityAi {
         if (SpellAbilityAi.isSorcerySpeed(sa)) {
             randomReturn = true;
         }
-        if ((Singletons.getModel().getGame().getPhaseHandler().is(PhaseType.END_OF_TURN)
-                && Singletons.getModel().getGame().getPhaseHandler().getNextTurn().equals(ai))) {
+        if ((game.getPhaseHandler().is(PhaseType.END_OF_TURN)
+                && game.getPhaseHandler().getNextTurn().equals(ai))) {
             randomReturn = true;
         }
 
@@ -142,6 +143,7 @@ public class DrawAi extends SpellAbilityAi {
         final Target tgt = sa.getTarget();
         final Card source = sa.getSourceCard();
         final boolean drawback = (sa instanceof AbilitySub);
+        final GameState game = ai.getGame();
         Player opp = ai.getOpponent();
 
         int computerHandSize = ai.getCardsIn(ZoneType.Hand).size();
@@ -209,7 +211,7 @@ public class DrawAi extends SpellAbilityAi {
             }
 
             if (((computerHandSize + numCards) > computerMaxHandSize)
-                    && Singletons.getModel().getGame().getPhaseHandler().isPlayerTurn(ai)) {
+                    && game.getPhaseHandler().isPlayerTurn(ai)) {
                 if (xPaid) {
                     numCards = computerMaxHandSize - computerHandSize;
                     source.setSVar("PayX", Integer.toString(numCards));
@@ -247,7 +249,7 @@ public class DrawAi extends SpellAbilityAi {
             }
 
             if ((computerHandSize + numCards > computerMaxHandSize)
-                    && Singletons.getModel().getGame().getPhaseHandler().isPlayerTurn(ai)
+                    && game.getPhaseHandler().isPlayerTurn(ai)
                     && !sa.isTrigger()) {
                 // Don't draw too many cards and then risk discarding cards at
                 // EOT

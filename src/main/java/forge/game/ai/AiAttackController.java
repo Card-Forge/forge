@@ -27,7 +27,6 @@ import forge.Card;
 import forge.CardLists;
 import forge.CounterType;
 import forge.GameEntity;
-import forge.Singletons;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerType;
 import forge.game.GameState;
@@ -230,7 +229,7 @@ public class AiAttackController {
         int fixedBlockers = 0;
         final List<Card> vigilantes = new ArrayList<Card>();
         //check for time walks
-        if (Singletons.getModel().getGame().getPhaseHandler().getNextTurn().equals(ai)) {
+        if (ai.getGame().getPhaseHandler().getNextTurn().equals(ai)) {
             return attackers;
         }
         for (final Card c : this.myList) {
@@ -479,7 +478,7 @@ public class AiAttackController {
         // randomInt is used so that the computer doesn't always
         // do the same thing on turn 3 if he had the same creatures in play
         // I know this is a little confusing
-        GameState game = Singletons.getModel().getGame();
+        GameState game = ai.getGame();
 
         this.random.setSeed(game.getPhaseHandler().getTurn() + this.randomInt);
 

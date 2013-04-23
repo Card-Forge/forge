@@ -8,7 +8,6 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import forge.Singletons;
 import forge.properties.ForgePreferences;
 
 /**
@@ -92,23 +91,6 @@ public class FModelTest {
     public final void test_getPreferences() throws FileNotFoundException {
         final ForgePreferences prefs = this.model.getPreferences();
         Assert.assertNotNull(prefs, "prefs instance is not null");
-    }
-
-    /**
-     * Test resetGameState and getGameState.
-     */
-    @Test(enabled = false)
-    public final void test_resetGameState_getGameState() {
-        Singletons.setModel(this.model);
-        Assert.assertNull(this.model.getGame(), "game state has not yet been initialized");
-
-        /*final GameState state1 = this.model.resetGameState();
-        Assert.assertNotNull(state1, "first state is OK");
-
-        final GameState state2 = this.model.resetGameState();
-        Assert.assertNotNull(state1, "first state is OK");
-        Assert.assertNotEquals(state1, state2, "first and second states are different");*/
-
     }
 
 }

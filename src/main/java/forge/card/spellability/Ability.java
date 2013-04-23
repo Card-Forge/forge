@@ -20,9 +20,9 @@ package forge.card.spellability;
 import com.esotericsoftware.minlog.Log;
 
 import forge.Card;
-import forge.Singletons;
 import forge.card.cost.Cost;
 import forge.card.mana.ManaCost;
+import forge.game.GameState;
 
 /**
  * <p>
@@ -71,7 +71,8 @@ public abstract class Ability extends SpellAbility {
     /** {@inheritDoc} */
     @Override
     public boolean canPlay() {
-        if (Singletons.getModel().getGame().getStack().isSplitSecondOnStack() && !this.isManaAbility()) {
+        final GameState game = getActivatingPlayer().getGame();
+        if (game.getStack().isSplitSecondOnStack() && !this.isManaAbility()) {
             return false;
         }
 

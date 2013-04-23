@@ -4,11 +4,11 @@ import java.util.List;
 
 import forge.Card;
 import forge.CardLists;
-import forge.Singletons;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerHandler;
+import forge.game.GameState;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
@@ -29,9 +29,10 @@ public class EncodeEffect extends SpellAbilityEffect {
     public void resolve(SpellAbility sa) {
         final Card host = sa.getSourceCard();
         final Player player = sa.getActivatingPlayer();
+        final GameState game = player.getGame();
 
         // make list of creatures that controller has on Battlefield
-        List<Card> choices = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
+        List<Card> choices = game.getCardsIn(ZoneType.Battlefield);
         choices = CardLists.getValidCards(choices, "Creature.YouCtrl", host.getController(), host);
 
         // if no creatures on battlefield, cannot encoded
@@ -48,7 +49,7 @@ public class EncodeEffect extends SpellAbilityEffect {
         }
 
         // move host card to exile
-        Card movedCard = Singletons.getModel().getGame().getAction().moveTo(ZoneType.Exile, host);
+        Card movedCard = game.getAction().moveTo(ZoneType.Exile, host);
 
         // choose a creature
         Card choice = player.getController().chooseSingleCardForEffect(choices, sa, "Choose a creature you control to encode ", true);

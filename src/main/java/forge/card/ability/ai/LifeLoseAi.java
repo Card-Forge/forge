@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Random;
 
 import forge.Card;
-import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.cost.Cost;
@@ -110,7 +109,7 @@ public class LifeLoseAi extends SpellAbilityAi {
         }
 
         // Don't use loselife before main 2 if possible
-        if (Singletons.getModel().getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2)
+        if (ai.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2)
                 && !sa.hasParam("ActivationPhases") && !priority) {
             return false;
         }

@@ -22,7 +22,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import forge.Card;
-import forge.Singletons;
 import forge.card.MagicColor;
 import forge.card.mana.Mana;
 import forge.card.mana.ManaPool;
@@ -130,7 +129,7 @@ public class AbilityManaPart implements java.io.Serializable {
         runParams.put("Player", player);
         runParams.put("AbilityMana", sa);
         runParams.put("Produced", produced);
-        Singletons.getModel().getGame().getTriggerHandler().runTrigger(TriggerType.TapsForMana, runParams, false);
+        player.getGame().getTriggerHandler().runTrigger(TriggerType.TapsForMana, runParams, false);
 
     } // end produceMana(String)
 

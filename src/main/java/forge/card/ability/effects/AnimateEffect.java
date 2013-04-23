@@ -8,7 +8,6 @@ import java.util.Map;
 import forge.Card;
 import forge.CardUtil;
 import forge.Command;
-import forge.Singletons;
 import forge.card.TriggerReplacementBase;
 import forge.card.ability.AbilityFactory;
 import forge.card.ability.AbilityUtils;
@@ -18,6 +17,7 @@ import forge.card.spellability.Target;
 import forge.card.staticability.StaticAbility;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerHandler;
+import forge.game.GameState;
 
 public class AnimateEffect extends AnimateEffectBase {
 
@@ -29,7 +29,7 @@ public class AnimateEffect extends AnimateEffectBase {
         final Card source = sa.getSourceCard();
         final Card host = sa.getSourceCard();
         final Map<String, String> svars = host.getSVars();
-        long timest = -1;
+
         String animateRemembered = null;
 
         //if host is not on the battlefield don't apply
@@ -53,10 +53,11 @@ public class AnimateEffect extends AnimateEffectBase {
             toughness = AbilityUtils.calculateAmount(host, sa.getParam("Toughness"), sa);
         }
 
+        final GameState game = sa.getActivatingPlayer().getGame();
         // Every Animate event needs a unique time stamp
-        timest = Singletons.getModel().getGame().getNextTimestamp();
+        final long timestamp = game.getNextTimestamp();
 
-        final long timestamp = timest;
+
 
         final boolean permanent = sa.hasParam("Permanent");
 
@@ -264,17 +265,17 @@ public class AnimateEffect extends AnimateEffectBase {
 
             if (!permanent) {
                 if (sa.hasParam("UntilEndOfCombat")) {
-                    Singletons.getModel().getGame().getEndOfCombat().addUntil(unanimate);
+                    game.getEndOfCombat().addUntil(unanimate);
                 } else if (sa.hasParam("UntilHostLeavesPlay")) {
                     host.addLeavesPlayCommand(unanimate);
                 } else if (sa.hasParam("UntilYourNextUpkeep")) {
-                    Singletons.getModel().getGame().getUpkeep().addUntil(host.getController(), unanimate);
+                    game.getUpkeep().addUntil(host.getController(), unanimate);
                 } else if (sa.hasParam("UntilControllerNextUntap")) {
-                    Singletons.getModel().getGame().getUntap().addUntil(c.getController(), unanimate);
+                    game.getUntap().addUntil(c.getController(), unanimate);
                 } else if (sa.hasParam("UntilYourNextTurn")) {
-                    Singletons.getModel().getGame().getCleanup().addUntil(host.getController(), unanimate);
+                    game.getCleanup().addUntil(host.getController(), unanimate);
                 } else {
-                    Singletons.getModel().getGame().getEndOfTurn().addUntil(unanimate);
+                    game.getEndOfTurn().addUntil(unanimate);
                 }
             }
         }

@@ -9,7 +9,6 @@ import com.google.common.base.Predicate;
 import forge.Card;
 import forge.CardLists;
 import forge.CardPredicates.Presets;
-import forge.Singletons;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
@@ -29,7 +28,7 @@ public class CopyPermanentAi extends SpellAbilityAi {
         // Card source = sa.getSourceCard();
         // TODO - I'm sure someone can do this AI better
 
-        if (sa.hasParam("AtEOT") && !Singletons.getModel().getGame().getPhaseHandler().is(PhaseType.MAIN1)) {
+        if (sa.hasParam("AtEOT") && !aiPlayer.getGame().getPhaseHandler().is(PhaseType.MAIN1)) {
             return false;
         } else {
             double chance = .4; // 40 percent chance with instant speed stuff
@@ -56,7 +55,7 @@ public class CopyPermanentAi extends SpellAbilityAi {
         final Target abTgt = sa.getTarget();
 
         if (abTgt != null) {
-            List<Card> list = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
+            List<Card> list = aiPlayer.getGame().getCardsIn(ZoneType.Battlefield);
             list = CardLists.getValidCards(list, abTgt.getValidTgts(), source.getController(), source);
             list = CardLists.getTargetableCards(list, sa);
             list = CardLists.filter(list, new Predicate<Card>() {

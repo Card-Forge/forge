@@ -3,13 +3,13 @@ package forge.card.ability.ai;
 import java.util.Random;
 
 import forge.Card;
-import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.cost.Cost;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
+import forge.game.GameState;
 import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilCombat;
 import forge.game.ai.ComputerUtilCost;
@@ -34,6 +34,7 @@ public class LifeGainAi extends SpellAbilityAi {
         final Random r = MyRandom.getRandom();
         final Cost abCost = sa.getPayCosts();
         final Card source = sa.getSourceCard();
+        final GameState game = source.getGame();
         final int life = ai.getLife();
         final String amountStr = sa.getParam("LifeAmount");
         int lifeAmount = 0;
@@ -62,13 +63,13 @@ public class LifeGainAi extends SpellAbilityAi {
                 return false;
             }
         }
-        if (Singletons.getModel().getGame().getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS)
+        if (game.getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS)
                 && !sa.hasParam("ActivationPhases")) {
             return false;
         }
         boolean lifeCritical = life <= 5;
-        lifeCritical |= (Singletons.getModel().getGame().getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_DAMAGE) && ComputerUtilCombat
-                .lifeInDanger(ai, Singletons.getModel().getGame().getCombat()));
+        lifeCritical |= (game.getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_DAMAGE) && ComputerUtilCombat
+                .lifeInDanger(ai, game.getCombat()));
 
         if (abCost != null && !lifeCritical) {
             if (!ComputerUtilCost.checkSacrificeCost(ai, abCost, source, false)) {
@@ -93,13 +94,13 @@ public class LifeGainAi extends SpellAbilityAi {
         }
 
         // Don't use lifegain before main 2 if possible
-        if (!lifeCritical && Singletons.getModel().getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2)
+        if (!lifeCritical && game.getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2)
                 && !sa.hasParam("ActivationPhases")) {
             return false;
         }
         // Don't use lifegain before main 2 if possible
-        if (!lifeCritical && (!Singletons.getModel().getGame().getPhaseHandler().getNextTurn().equals(ai)
-                || Singletons.getModel().getGame().getPhaseHandler().getPhase().isBefore(PhaseType.END_OF_TURN))
+        if (!lifeCritical && (!game.getPhaseHandler().getNextTurn().equals(ai)
+                || game.getPhaseHandler().getPhase().isBefore(PhaseType.END_OF_TURN))
                 && !sa.hasParam("PlayerTurn") && !SpellAbilityAi.isSorcerySpeed(sa)) {
             return false;
         }

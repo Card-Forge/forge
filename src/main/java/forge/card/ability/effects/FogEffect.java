@@ -1,6 +1,5 @@
 package forge.card.ability.effects;
 
-import forge.Singletons;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
 
@@ -15,6 +14,6 @@ public class FogEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
         // Expand Fog keyword here depending on what we need out of it.
-        Singletons.getModel().getGame().getPhaseHandler().setPreventCombatDamageThisTurn(true);
+        sa.getActivatingPlayer().getGame().getPhaseHandler().setPreventCombatDamageThisTurn(true);
     }
 }

@@ -133,7 +133,7 @@ public class QuestWinLose extends ControlWinLose {
             if (!outcome.isDraw()) {
                 boolean isHumanWinner = outcome.getWinner().equals(questPlayer);
                 final List<CardPrinted> anteCards = new ArrayList<CardPrinted>();
-                for (Player p : Singletons.getModel().getGame().getRegisteredPlayers()) {
+                for (Player p : match.getCurrentGame().getRegisteredPlayers()) {
                     if (p.getLobbyPlayer().equals(questPlayer) == isHumanWinner) {
                         continue;
                     }

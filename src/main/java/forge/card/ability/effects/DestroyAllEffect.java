@@ -5,11 +5,11 @@ import java.util.List;
 
 import forge.Card;
 import forge.CardLists;
-import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
+import forge.game.GameState;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
@@ -48,6 +48,7 @@ public class DestroyAllEffect extends SpellAbilityEffect {
 
         final boolean noRegen = sa.hasParam("NoRegen");
         final Card card = sa.getSourceCard();
+        final GameState game = sa.getActivatingPlayer().getGame();
 
         final Target tgt = sa.getTarget();
         Player targetPlayer = null;
@@ -72,7 +73,7 @@ public class DestroyAllEffect extends SpellAbilityEffect {
             valid = valid.replace("X", Integer.toString(AbilityUtils.calculateAmount(card, "X", sa)));
         }
 
-        List<Card> list = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
+        List<Card> list = game.getCardsIn(ZoneType.Battlefield);
 
         if (targetPlayer != null) {
             list = CardLists.filterControlledBy(list, targetPlayer);
@@ -87,13 +88,13 @@ public class DestroyAllEffect extends SpellAbilityEffect {
 
         if (noRegen) {
             for (int i = 0; i < list.size(); i++) {
-                if (Singletons.getModel().getGame().getAction().destroyNoRegeneration(list.get(i), sa) && remDestroyed) {
+                if (game.getAction().destroyNoRegeneration(list.get(i), sa) && remDestroyed) {
                     card.addRemembered(list.get(i));
                 }
             }
         } else {
             for (int i = 0; i < list.size(); i++) {
-                if (Singletons.getModel().getGame().getAction().destroy(list.get(i), sa) && remDestroyed) {
+                if (game.getAction().destroy(list.get(i), sa) && remDestroyed) {
                     card.addRemembered(list.get(i));
                 }
             }

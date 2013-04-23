@@ -8,7 +8,6 @@ import java.util.Set;
 import forge.Card;
 import forge.CardLists;
 import forge.CounterType;
-import forge.Singletons;
 import forge.card.ability.AbilityFactory;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
@@ -33,7 +32,7 @@ public class RepeatEachEffect extends SpellAbilityEffect {
         repeat.setActivatingPlayer(sa.getActivatingPlayer());
         ((AbilitySub) repeat).setParent(sa);
 
-        GameState game = Singletons.getModel().getGame();
+        final GameState game = sa.getActivatingPlayer().getGame();
 
         boolean useImprinted = sa.hasParam("UseImprinted");
         boolean loopOverCards = false;

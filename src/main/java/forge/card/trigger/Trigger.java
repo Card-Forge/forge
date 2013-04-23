@@ -23,11 +23,11 @@ import java.util.List;
 import java.util.Map;
 
 import forge.Card;
-import forge.Singletons;
 import forge.card.TriggerReplacementBase;
 import forge.card.spellability.Ability;
 import forge.card.spellability.OptionalCost;
 import forge.card.spellability.SpellAbility;
+import forge.game.GameState;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -223,8 +223,8 @@ public abstract class Trigger extends TriggerReplacementBase {
      * 
      * @return a boolean.
      */
-    public final boolean phasesCheck() {
-        PhaseHandler phaseHandler = Singletons.getModel().getGame().getPhaseHandler();
+    public final boolean phasesCheck(final GameState game) {
+        PhaseHandler phaseHandler = game.getPhaseHandler();
         if (null != validPhases) {
             if (!validPhases.contains(phaseHandler.getPhase())) {
                 return false;
@@ -255,28 +255,30 @@ public abstract class Trigger extends TriggerReplacementBase {
      * <p>
      * requirementsCheck.
      * </p>
+     * @param game 
      * 
      * @return a boolean.
      */
-    public final boolean requirementsCheck() {
-        return this.requirementsCheck(this.getRunParams());
+    public final boolean requirementsCheck(GameState game) {
+        return this.requirementsCheck(game, this.getRunParams());
     }
 
     /**
      * <p>
      * requirementsCheck.
      * </p>
+     * @param game 
      * 
      * @param runParams2
      *            a {@link java.util.HashMap} object.
      * @return a boolean.
      */
-    public final boolean requirementsCheck(final Map<String, Object> runParams2) {
+    public final boolean requirementsCheck(GameState game, final Map<String, Object> runParams2) {
 
         if (this.getMapParams().containsKey("APlayerHasMoreLifeThanEachOther")) {
             int highestLife = -50; // Negative base just in case a few Lich's or Platinum Angels are running around
             final List<Player> healthiest = new ArrayList<Player>();
-            for (final Player p : Singletons.getModel().getGame().getPlayers()) {
+            for (final Player p : game.getPlayers()) {
                 if (p.getLife() > highestLife) {
                     healthiest.clear();
                     highestLife = p.getLife();
@@ -296,7 +298,7 @@ public abstract class Trigger extends TriggerReplacementBase {
         if (this.getMapParams().containsKey("APlayerHasMostCardsInHand")) {
             int largestHand = 0;
             final List<Player> withLargestHand = new ArrayList<Player>();
-            for (final Player p : Singletons.getModel().getGame().getPlayers()) {
+            for (final Player p : game.getPlayers()) {
                 if (p.getCardsIn(ZoneType.Hand).size() > largestHand) {
                     withLargestHand.clear();
                     largestHand = p.getCardsIn(ZoneType.Hand).size();

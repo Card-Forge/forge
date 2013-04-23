@@ -14,7 +14,6 @@ import forge.Card;
 import forge.CardLists;
 import forge.CardPredicates;
 import forge.CardUtil;
-import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.ApiType;
 import forge.card.ability.SpellAbilityAi;
@@ -79,7 +78,7 @@ public class AttachAi extends SpellAbilityAi {
             source.setSVar("PayX", Integer.toString(xPay));
         }
 
-        if (Singletons.getModel().getGame().getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)
+        if (ai.getGame().getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)
                 && !"Curse".equals(sa.getParam("AILogic"))) {
             return false;
         }
@@ -264,7 +263,7 @@ public class AttachAi extends SpellAbilityAi {
     private static Player attachToPlayerAIPreferences(final Player aiPlayer, final SpellAbility sa,
             final boolean mandatory) {
         List<Player> targetable = new ArrayList<Player>();
-        for (final Player player : Singletons.getModel().getGame().getPlayers()) {
+        for (final Player player : aiPlayer.getGame().getPlayers()) {
             if (sa.canTarget(player)) {
                 targetable.add(player);
             }
@@ -880,7 +879,7 @@ public class AttachAi extends SpellAbilityAi {
             return null;
         }
 
-        List<Card> list = Singletons.getModel().getGame().getCardsIn(tgt.getZone());
+        List<Card> list = aiPlayer.getGame().getCardsIn(tgt.getZone());
         list = CardLists.getValidCards(list, tgt.getValidTgts(), sa.getActivatingPlayer(), attachSource);
 
         // TODO If Attaching without casting, don't need to actually target.
@@ -1023,7 +1022,7 @@ public class AttachAi extends SpellAbilityAi {
      * @return true, if is useful keyword
      */
     private static boolean isUsefulAttachKeyword(final String keyword, final Card card, final SpellAbility sa, final int powerBonus) {
-        final PhaseHandler ph = Singletons.getModel().getGame().getPhaseHandler();
+        final PhaseHandler ph = sa.getActivatingPlayer().getGame().getPhaseHandler();
         if (!CardUtil.isStackingKeyword(keyword) && card.hasKeyword(keyword)) {
             return false;
         }

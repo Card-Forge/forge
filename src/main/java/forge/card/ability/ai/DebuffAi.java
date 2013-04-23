@@ -8,7 +8,6 @@ import com.google.common.base.Predicate;
 
 import forge.Card;
 import forge.CardLists;
-import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.cost.Cost;
@@ -52,12 +51,12 @@ public class DebuffAi extends SpellAbilityAi {
         }
 
         final SpellAbilityRestriction restrict = sa.getRestrictions();
-        final PhaseHandler ph =  Singletons.getModel().getGame().getPhaseHandler();
+        final PhaseHandler ph =  ai.getGame().getPhaseHandler();
 
         // Phase Restrictions
         if (ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY)
                 || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)
-                || !Singletons.getModel().getGame().getStack().isEmpty()) {
+                || !ai.getGame().getStack().isEmpty()) {
             // Instant-speed pumps should not be cast outside of combat when the
             // stack is empty
             if (!SpellAbilityAi.isSorcerySpeed(sa)) {
@@ -126,7 +125,7 @@ public class DebuffAi extends SpellAbilityAi {
      */
     private boolean debuffTgtAI(final Player ai, final SpellAbility sa, final List<String> kws, final boolean mandatory) {
         // this would be for evasive things like Flying, Unblockable, etc
-        if (!mandatory && Singletons.getModel().getGame().getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
+        if (!mandatory && ai.getGame().getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
             return false;
         }
 
@@ -217,7 +216,7 @@ public class DebuffAi extends SpellAbilityAi {
      * @return a boolean.
      */
     private boolean debuffMandatoryTarget(final Player ai, final SpellAbility sa, final boolean mandatory) {
-        List<Card> list = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
+        List<Card> list = ai.getGame().getCardsIn(ZoneType.Battlefield);
         final Target tgt = sa.getTarget();
         list = CardLists.getValidCards(list, tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getSourceCard());
 

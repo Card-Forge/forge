@@ -22,7 +22,6 @@ import java.util.List;
 
 import forge.Card;
 import forge.CardLists;
-import forge.Singletons;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.cost.CostPayment;
@@ -69,7 +68,7 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
     /** {@inheritDoc} */
     @Override
     public boolean canPlay() {
-        final GameState game = Singletons.getModel().getGame();
+        final GameState game = getActivatingPlayer().getGame();
         if (game.getStack().isSplitSecondOnStack()) {
             return false;
         }
@@ -121,9 +120,10 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
     @Override
     public boolean canPlayAI() {
         final Card card = this.getSourceCard();
+        final GameState game = getActivatingPlayer().getGame();
         if (card.getSVar("NeedsToPlay").length() > 0) {
             final String needsToPlay = card.getSVar("NeedsToPlay");
-            List<Card> list = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
+            List<Card> list = game.getCardsIn(ZoneType.Battlefield);
 
             list = CardLists.getValidCards(list, needsToPlay.split(","), card.getController(), card);
             if (list.isEmpty()) {

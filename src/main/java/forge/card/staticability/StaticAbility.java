@@ -24,7 +24,6 @@ import java.util.Map;
 import forge.Card;
 import forge.Constant;
 import forge.GameEntity;
-import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.cost.Cost;
 import forge.card.mana.ManaCostBeingPaid;
@@ -469,7 +468,7 @@ public class StaticAbility {
         if (this.params.containsKey("EffectZone")) {
             if (!this.params.get("EffectZone").equals("All")
                     && !ZoneType.listValueOf(this.params.get("EffectZone"))
-                        .contains(Singletons.getModel().getGame().getZoneOf(this.hostCard).getZoneType())) {
+                        .contains(controller.getGame().getZoneOf(this.hostCard).getZoneType())) {
                 return false;
             }
         } else {
@@ -514,7 +513,7 @@ public class StaticAbility {
 
         if (this.params.containsKey("Phases")) {
             List<PhaseType> phases = PhaseType.parseRange(this.params.get("Phases"));
-            if (!phases.contains(Singletons.getModel().getGame().getPhaseHandler().getPhase())) {
+            if (!phases.contains(controller.getGame().getPhaseHandler().getPhase())) {
                 return false;
             }
         }

@@ -6,7 +6,6 @@ import java.util.List;
 import forge.Card;
 import forge.Constant;
 import forge.CounterType;
-import forge.Singletons;
 import forge.card.MagicColor;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
@@ -14,6 +13,7 @@ import forge.card.spellability.AbilityManaPart;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.game.GameActionUtil;
+import forge.game.GameState;
 import forge.game.ai.ComputerUtilCard;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
@@ -39,6 +39,7 @@ public class ManaEffect extends SpellAbilityEffect {
         final List<Player> tgtPlayers = getTargetPlayers(sa);
         final Target tgt = sa.getTarget();
         final boolean optional = sa.hasParam("Optional");
+        final GameState game = sa.getActivatingPlayer().getGame();
 
         if (optional) {
             if (!GuiDialog.confirm(sa.getSourceCard(), "Do you want to add mana to your mana pool?")) {
@@ -186,7 +187,7 @@ public class ManaEffect extends SpellAbilityEffect {
             final int num = card.getCounters(CounterType.getType(deplete));
             if (num == 0) {
                 sa.setUndoable(false);
-                Singletons.getModel().getGame().getAction().sacrifice(card, null);
+                game.getAction().sacrifice(card, null);
             }
         }
 

@@ -88,7 +88,7 @@ public class PhaseUtil {
 
         CMessage.SINGLETON_INSTANCE.updateGameInfo(Singletons.getModel().getMatch());
 
-        game.getCombat().reset();
+        game.getCombat().reset(turn);
         game.getCombat().setAttackingPlayer(turn);
 
         // Tokens starting game in play should suffer from Sum. Sickness
@@ -156,44 +156,45 @@ public class PhaseUtil {
             final Card c = list.get(i);
             CombatUtil.checkPropagandaEffects(game, c);
         }
-        PhaseUtil.handleAttackingTriggers();
+        PhaseUtil.handleAttackingTriggers(game);
     }
 
     /**
      * <p>
      * handleAttackingTriggers.
      * </p>
+     * @param game 
      */
-    public static void handleAttackingTriggers() {
-        final List<Card> list = Singletons.getModel().getGame().getCombat().getAttackers();
-        Singletons.getModel().getGame().getStack().freezeStack();
+    public static void handleAttackingTriggers(GameState game) {
+        final List<Card> list = game.getCombat().getAttackers();
+        game.getStack().freezeStack();
         // Then run other Attacker bonuses
         // check for exalted:
         if (list.size() == 1) {
-            final Player attackingPlayer = Singletons.getModel().getGame().getCombat().getAttackingPlayer();
+            final Player attackingPlayer = game.getCombat().getAttackingPlayer();
             int exaltedMagnitude = 0;
             for (Card card : attackingPlayer.getCardsIn(ZoneType.Battlefield)) {
                 exaltedMagnitude += card.getKeywordAmount("Exalted");
             }
 
             if (exaltedMagnitude > 0) {
-                CombatUtil.executeExaltedAbility(list.get(0), exaltedMagnitude);
+                CombatUtil.executeExaltedAbility(game, list.get(0), exaltedMagnitude);
                 // Make sure exalted effects get applied only once per combat
             }
 
         }
 
-        Singletons.getModel().getGame().getGameLog().add("Combat", CombatUtil.getCombatAttackForLog(), 1);
+        game.getGameLog().add("Combat", CombatUtil.getCombatAttackForLog(game), 1);
 
         final HashMap<String, Object> runParams = new HashMap<String, Object>();
         runParams.put("Attackers", list);
-        runParams.put("AttackingPlayer", Singletons.getModel().getGame().getCombat().getAttackingPlayer());
-        Singletons.getModel().getGame().getTriggerHandler().runTrigger(TriggerType.AttackersDeclared, runParams, false);
+        runParams.put("AttackingPlayer", game.getCombat().getAttackingPlayer());
+        game.getTriggerHandler().runTrigger(TriggerType.AttackersDeclared, runParams, false);
 
         for (final Card c : list) {
-            CombatUtil.checkDeclareAttackers(c);
+            CombatUtil.checkDeclareAttackers(game, c);
         }
-        Singletons.getModel().getGame().getStack().unfreezeStack();
+        game.getStack().unfreezeStack();
     }
 
     /**
@@ -268,35 +269,20 @@ public class PhaseUtil {
 
         final List<Card> attList = combat.getAttackers();
 
-        CombatUtil.checkDeclareBlockers(list);
+        CombatUtil.checkDeclareBlockers(game, list);
 
         for (final Card a : attList) {
             final List<Card> blockList = combat.getBlockers(a);
             for (final Card b : blockList) {
-                CombatUtil.checkBlockedAttackers(a, b);
+                CombatUtil.checkBlockedAttackers(game, a, b);
             }
         }
 
         game.getStack().unfreezeStack();
 
-        game.getGameLog().add("Combat", CombatUtil.getCombatBlockForLog(), 1);
+        game.getGameLog().add("Combat", CombatUtil.getCombatBlockForLog(game), 1);
     }
 
-    // ***** Combat Utility **********
-    // TODO: the below functions should be removed and the code blocks that use
-    // them should instead use SpellAbilityRestriction
-    /**
-     * <p>
-     * isBeforeAttackersAreDeclared.
-     * </p>
-     * 
-     * @return a boolean.
-     */
-    public static boolean isBeforeAttackersAreDeclared() {
-        final PhaseType phase = Singletons.getModel().getGame().getPhaseHandler().getPhase();
-        return phase == PhaseType.UNTAP || phase == PhaseType.UPKEEP || phase == PhaseType.DRAW
-                || phase == PhaseType.MAIN1 || phase == PhaseType.COMBAT_BEGIN;
-    }
 
     /**
      * Retrieves and visually activates phase label for appropriate phase and

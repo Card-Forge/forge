@@ -2,7 +2,6 @@ package forge.game;
 
 import java.util.HashMap;
 
-import forge.Singletons;
 import forge.card.trigger.TriggerType;
 import forge.game.player.Player;
 
@@ -29,7 +28,7 @@ public enum PlanarDice {
         
         PlanarDice trigRes = res;
         
-        if(Singletons.getModel().getGame().getStaticEffects().getGlobalRuleChange(GlobalRuleChange.blankIsChaos)
+        if(roller.getGame().getStaticEffects().getGlobalRuleChange(GlobalRuleChange.blankIsChaos)
                 && res == Blank)
         {
             trigRes = Chaos;
@@ -38,7 +37,7 @@ public enum PlanarDice {
         HashMap<String,Object> runParams = new HashMap<String,Object>();
         runParams.put("Player", roller);
         runParams.put("Result", trigRes);
-        Singletons.getModel().getGame().getTriggerHandler().runTrigger(TriggerType.PlanarDice, runParams,false);
+        roller.getGame().getTriggerHandler().runTrigger(TriggerType.PlanarDice, runParams,false);
     
         
         return res;

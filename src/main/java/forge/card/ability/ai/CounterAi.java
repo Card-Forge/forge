@@ -1,13 +1,13 @@
 package forge.card.ability.ai;
 
 import forge.Card;
-import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
+import forge.game.GameState;
 import forge.game.ai.ComputerUtilCard;
 import forge.game.ai.ComputerUtilCost;
 import forge.game.ai.ComputerUtilMana;
@@ -21,7 +21,8 @@ public class CounterAi extends SpellAbilityAi {
         boolean toReturn = true;
         final Cost abCost = sa.getPayCosts();
         final Card source = sa.getSourceCard();
-        if (Singletons.getModel().getGame().getStack().isEmpty()) {
+        final GameState game = ai.getGame();
+        if (game.getStack().isEmpty()) {
             return false;
         }
 
@@ -38,7 +39,7 @@ public class CounterAi extends SpellAbilityAi {
         final Target tgt = sa.getTarget();
         if (tgt != null) {
 
-            final SpellAbility topSA = Singletons.getModel().getGame().getStack().peekAbility();
+            final SpellAbility topSA = game.getStack().peekAbility();
             if (!CardFactoryUtil.isCounterableBy(topSA.getSourceCard(), sa) || topSA.getActivatingPlayer() == ai) { 
                 // might as well check for player's friendliness
                 return false;
@@ -110,10 +111,11 @@ public class CounterAi extends SpellAbilityAi {
 
         final Target tgt = sa.getTarget();
         if (tgt != null) {
-            if (Singletons.getModel().getGame().getStack().isEmpty()) {
+            final GameState game = ai.getGame();
+            if (game.getStack().isEmpty()) {
                 return false;
             }
-            final SpellAbility topSA = Singletons.getModel().getGame().getStack().peekAbility();
+            final SpellAbility topSA = game.getStack().peekAbility();
             if (!CardFactoryUtil.isCounterableBy(topSA.getSourceCard(), sa) || topSA.getActivatingPlayer() == ai) {
                 return false;
             }

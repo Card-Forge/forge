@@ -4,7 +4,6 @@ import java.util.List;
 
 import forge.Card;
 import forge.CardLists;
-import forge.Singletons;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
@@ -20,7 +19,7 @@ public class UntapAllAi extends SpellAbilityAi {
         final AbilitySub abSub = sa.getSubAbility();
         if (abSub != null) {
             String valid = "";
-            List<Card> list = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
+            List<Card> list = aiPlayer.getGame().getCardsIn(ZoneType.Battlefield);
             if (sa.hasParam("ValidCards")) {
                 valid = sa.getParam("ValidCards");
             }

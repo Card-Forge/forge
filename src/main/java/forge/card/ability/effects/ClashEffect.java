@@ -3,7 +3,6 @@ package forge.card.ability.effects;
 import java.util.HashMap;
 
 import forge.Card;
-import forge.Singletons;
 import forge.card.ability.AbilityFactory;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
@@ -59,7 +58,8 @@ public class ClashEffect extends SpellAbilityEffect {
             runParams.put("Won", "False");
         }
 
-        Singletons.getModel().getGame().getTriggerHandler().runTrigger(TriggerType.Clashed, runParams, false);
+        
+        sa.getSourceCard().getGame().getTriggerHandler().runTrigger(TriggerType.Clashed, runParams, false);
     }
 
     /**

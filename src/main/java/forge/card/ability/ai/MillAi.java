@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Random;
 
 import forge.Card;
-import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.cost.Cost;
@@ -53,7 +52,7 @@ public class MillAi extends SpellAbilityAi {
         final Random r = MyRandom.getRandom();
 
         // Don't use draw abilities before main 2 if possible
-        if (Singletons.getModel().getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2) && !sa.hasParam("ActivationPhases")) {
+        if (ai.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2) && !sa.hasParam("ActivationPhases")) {
             return false;
         }
 
@@ -68,8 +67,7 @@ public class MillAi extends SpellAbilityAi {
             chance = .667; // 66.7% chance for sorcery speed
         }
 
-        if ((Singletons.getModel().getGame().getPhaseHandler().is(PhaseType.END_OF_TURN)
-                && Singletons.getModel().getGame().getPhaseHandler().getNextTurn().equals(ai))) {
+        if ((ai.getGame().getPhaseHandler().is(PhaseType.END_OF_TURN) && ai.getGame().getPhaseHandler().getNextTurn().equals(ai))) {
             chance = .9; // 90% for end of opponents turn
         }
 

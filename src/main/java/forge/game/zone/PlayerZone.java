@@ -18,7 +18,6 @@
 package forge.game.zone;
 
 import forge.Card;
-import forge.Singletons;
 import forge.game.player.Player;
 
 /**
@@ -60,11 +59,10 @@ public class PlayerZone extends Zone {
     public void add(final Object o, boolean update) {
         final Card c = (Card) o;
 
-        // Immutable cards are usually emblems,effects and the mana pool and we
-        // don't want to log those.
+        // Immutable cards are usually emblems and effects - we don't want to log those.
         if (!c.isImmutable()) {
             this.cardsAddedThisTurn.add(c);
-            final Zone zone = Singletons.getModel().getGame().getZoneOf(c);
+            final Zone zone = c.getGame().getZoneOf(c);
             if (zone != null) {
                 this.cardsAddedThisTurnSource.add(zone.getZoneType());
             } else {
@@ -89,7 +87,7 @@ public class PlayerZone extends Zone {
         }
 
         c.addObserver(this);
-        c.setTurnInZone(Singletons.getModel().getGame().getPhaseHandler().getTurn());
+        c.setTurnInZone(c.getGame().getPhaseHandler().getTurn());
 
         if (!this.is(ZoneType.Battlefield)) {
             c.setTapped(false);

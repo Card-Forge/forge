@@ -6,10 +6,10 @@ import org.apache.commons.lang3.StringUtils;
 
 import forge.Card;
 import forge.CardLists;
-import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
+import forge.game.GameState;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
@@ -44,11 +44,14 @@ public class TapOrUntapAllEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
         List<Card> validCards = getTargetCards(sa);
+        final Player activator = sa.getActivatingPlayer();
+        final GameState game = activator.getGame();
+
         
         List<Player> targetedPlayers = getTargetPlayersEmptyAsDefault(sa);
 
         if (sa.hasParam("ValidCards")) {
-            validCards = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
+            validCards = game.getCardsIn(ZoneType.Battlefield);
             validCards = AbilityUtils.filterListByType(validCards, sa.getParam("ValidCards"), sa);
         }
         

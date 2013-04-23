@@ -25,8 +25,8 @@ import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
 
 import net.miginfocom.swing.MigLayout;
+import forge.GameLog;
 import forge.GameLog.LogEntry;
-import forge.Singletons;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
@@ -110,14 +110,15 @@ public enum VLog implements IVDoc<CLog> {
     }
 
     //========== Observer update methods
-    /** */
-    public void updateConsole() {
+    /**
+     * @param model  */
+    public void updateConsole(GameLog model) {
         // No need to update this unless it's showing
         if (!parentCell.getSelected().equals(this)) { return; }
 
         // TODO - some option to make this configurable is probably desirable
         // By default, grab everything log level 3 or less.
-        final List<LogEntry> data = Singletons.getModel().getGame().getGameLog().getLogEntries(3);
+        final List<LogEntry> data = model.getLogEntries(3);
         final int size = data.size();
 
         pnl.removeAll();

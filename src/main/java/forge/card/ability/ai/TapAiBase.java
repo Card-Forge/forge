@@ -9,10 +9,10 @@ import forge.Card;
 import forge.CardLists;
 import forge.CardPredicates;
 import forge.CardPredicates.Presets;
-import forge.Singletons;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
+import forge.game.GameState;
 import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilCard;
 import forge.game.phase.CombatUtil;
@@ -115,6 +115,7 @@ public abstract class TapAiBase extends SpellAbilityAi  {
      */
     protected boolean tapPrefTargeting(final Player ai, final Card source, final Target tgt, final SpellAbility sa, final boolean mandatory) {
         final Player opp = ai.getOpponent();
+        final GameState game = ai.getGame();
         List<Card> tapList = opp.getCardsIn(ZoneType.Battlefield);
         tapList = CardLists.filter(tapList, Presets.UNTAPPED);
         tapList = CardLists.getValidCards(tapList, tgt.getValidTgts(), source.getController(), source);
@@ -159,7 +160,7 @@ public abstract class TapAiBase extends SpellAbilityAi  {
                 }
             }
 
-            PhaseHandler phase = Singletons.getModel().getGame().getPhaseHandler();
+            PhaseHandler phase = game.getPhaseHandler();
             if (phase.isPlayerTurn(ai)
                     && phase.getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
                 // Tap creatures possible blockers before combat during AI's turn.
@@ -167,7 +168,7 @@ public abstract class TapAiBase extends SpellAbilityAi  {
                 List<Card> attackers;
                 if (phase.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
                     //Combat has already started
-                    attackers = Singletons.getModel().getGame().getCombat().getAttackers();
+                    attackers = game.getCombat().getAttackers();
                 } else {
                     attackers = CardLists.filter(ai.getCreaturesInPlay(), new Predicate<Card>() {
                         @Override
@@ -240,8 +241,9 @@ public abstract class TapAiBase extends SpellAbilityAi  {
     protected  boolean tapUnpreferredTargeting(final Player ai, final SpellAbility sa, final boolean mandatory) {
         final Card source = sa.getSourceCard();
         final Target tgt = sa.getTarget();
+        final GameState game = ai.getGame();
 
-        List<Card> list = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
+        List<Card> list = game.getCardsIn(ZoneType.Battlefield);
         list = CardLists.getValidCards(list, tgt.getValidTgts(), source.getController(), source);
         list = CardLists.getTargetableCards(list, sa);
 

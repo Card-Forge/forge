@@ -28,7 +28,6 @@ import forge.Card;
 import forge.CardLists;
 import forge.FThreads;
 import forge.CardPredicates.Presets;
-import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.cardfactory.CardFactory;
 import forge.card.cardfactory.CardFactoryUtil;
@@ -199,7 +198,7 @@ public class MagicStack extends MyObservable {
             this.add(sa);
         }
         // Add all waiting triggers onto the stack
-        checkState |= Singletons.getModel().getGame().getTriggerHandler().runWaitingTriggers();
+        checkState |= game.getTriggerHandler().runWaitingTriggers();
         if (checkState) {
             this.chooseOrderOfSimultaneousStackEntryAll();
             game.getAction().checkStateEffects();

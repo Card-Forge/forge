@@ -7,7 +7,6 @@ import com.google.common.base.Predicate;
 
 import forge.Card;
 import forge.CardLists;
-import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.cost.Cost;
@@ -105,7 +104,7 @@ public class CountersPutAllAi extends SpellAbilityAi {
             }
 
             //Check for cards that could profit from the ability
-            PhaseHandler phase = Singletons.getModel().getGame().getPhaseHandler();
+            PhaseHandler phase = ai.getGame().getPhaseHandler();
             if (type.equals("P1P1") && sa.isAbility() && source.isCreature()
                     && sa.getPayCosts() != null && sa.getPayCosts().hasTapCost()
                     && sa instanceof AbilitySub

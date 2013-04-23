@@ -6,10 +6,10 @@ import java.util.List;
 
 import forge.Card;
 import forge.CardUtil;
-import forge.Singletons;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
+import forge.game.GameState;
 
 public class DestroyEffect extends SpellAbilityEffect {
     /* (non-Javadoc)
@@ -69,6 +69,7 @@ public class DestroyEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
         final Card card = sa.getSourceCard();
+        final GameState game = card.getGame();
 
         final boolean remDestroyed = sa.hasParam("RememberDestroyed");
         if (remDestroyed) {
@@ -94,11 +95,11 @@ public class DestroyEffect extends SpellAbilityEffect {
             if (tgtC.isInPlay() && ((tgt == null) || tgtC.canBeTargetedBy(sa))) {
                 boolean destroyed = false;
                 if (sac) {
-                    destroyed = Singletons.getModel().getGame().getAction().sacrifice(tgtC, sa);
+                    destroyed = game.getAction().sacrifice(tgtC, sa);
                 } else if (noRegen) {
-                    destroyed = Singletons.getModel().getGame().getAction().destroyNoRegeneration(tgtC, sa);
+                    destroyed = game.getAction().destroyNoRegeneration(tgtC, sa);
                 } else {
-                    destroyed = Singletons.getModel().getGame().getAction().destroy(tgtC, sa);
+                    destroyed = game.getAction().destroy(tgtC, sa);
                 } if (destroyed  && remDestroyed) {
                     card.addRemembered(tgtC);
                 }
@@ -109,11 +110,11 @@ public class DestroyEffect extends SpellAbilityEffect {
             if (unTgtC.isInPlay()) {
                 boolean destroyed = false;
                 if (sac) {
-                    destroyed = Singletons.getModel().getGame().getAction().sacrifice(unTgtC, sa);
+                    destroyed = game.getAction().sacrifice(unTgtC, sa);
                 } else if (noRegen) {
-                    destroyed = Singletons.getModel().getGame().getAction().destroyNoRegeneration(unTgtC, sa);
+                    destroyed = game.getAction().destroyNoRegeneration(unTgtC, sa);
                 } else {
-                    destroyed = Singletons.getModel().getGame().getAction().destroy(unTgtC, sa);
+                    destroyed = game.getAction().destroy(unTgtC, sa);
                 } if (destroyed  && remDestroyed) {
                     card.addRemembered(unTgtC);
                 }

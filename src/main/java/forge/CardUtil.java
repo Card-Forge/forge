@@ -30,6 +30,7 @@ import forge.card.ability.ApiType;
 import forge.card.spellability.AbilityManaPart;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
+import forge.game.GameState;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.properties.NewConstants;
@@ -88,15 +89,15 @@ public final class CardUtil {
      * @param src   a Card object
      * @return a List<Card> that matches the given criteria
      */
-    public static List<Card> getThisTurnEntered(final ZoneType to, final ZoneType from, final String valid,
-            final Card src) {
+    public static List<Card> getThisTurnEntered(final ZoneType to, final ZoneType from, final String valid, final Card src) {
         List<Card> res = new ArrayList<Card>();
+        final GameState game = src.getGame();
         if (to != ZoneType.Stack) {
-            for (Player p : Singletons.getModel().getGame().getPlayers()) {
+            for (Player p : game.getPlayers()) {
                 res.addAll(p.getZone(to).getCardsAddedThisTurn(from));
             }
         } else {
-            res.addAll(Singletons.getModel().getGame().getStackZone().getCardsAddedThisTurn(from));
+            res.addAll(game.getStackZone().getCardsAddedThisTurn(from));
         }
 
         res = CardLists.getValidCards(res, valid, src.getController(), src);
@@ -106,8 +107,8 @@ public final class CardUtil {
 
     public static List<Card> getThisTurnCast(final String valid, final Card src) {
         List<Card> res = new ArrayList<Card>();
-
-        res.addAll(Singletons.getModel().getGame().getStack().getCardsCastThisTurn());
+        final GameState game = src.getGame();
+        res.addAll(game.getStack().getCardsCastThisTurn());
 
         res = CardLists.getValidCards(res, valid, src.getController(), src);
 
@@ -116,8 +117,8 @@ public final class CardUtil {
 
     public static List<Card> getLastTurnCast(final String valid, final Card src) {
         List<Card> res = new ArrayList<Card>();
-
-        res.addAll(Singletons.getModel().getGame().getStack().getCardsCastLastTurn());
+        final GameState game = src.getGame();
+        res.addAll(game.getStack().getCardsCastLastTurn());
 
         res = CardLists.getValidCards(res, valid, src.getController(), src);
 
@@ -181,12 +182,13 @@ public final class CardUtil {
     public static List<Card> getRadiance(final Card source, final Card origin, final String[] valid) {
         final List<Card> res = new ArrayList<Card>();
 
+        final GameState game = source.getGame();
         for (final CardColor col : origin.getColor()) {
             for (final String strCol : col.toStringList()) {
                 if (strCol.equalsIgnoreCase("Colorless")) {
                     continue;
                 }
-                for (final Card c : Singletons.getModel().getGame().getColoredCardsInPlay(strCol)) {
+                for (final Card c : game.getColoredCardsInPlay(strCol)) {
                     if (!res.contains(c) && c.isValid(valid, source.getController(), source) && !c.equals(origin)) {
                         res.add(c);
                     }
@@ -248,7 +250,8 @@ public final class CardUtil {
         if (validCard.startsWith("Defined.")) {
             cards = AbilityUtils.getDefinedCards(card, validCard.replace("Defined.", ""), abMana);
         } else {
-            cards = CardLists.getValidCards(Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield), validCard, abMana.getActivatingPlayer(), card);
+            final GameState game = sa.getActivatingPlayer().getGame();
+            cards = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), validCard, abMana.getActivatingPlayer(), card);
         }
 
         // remove anything cards that is already in parents

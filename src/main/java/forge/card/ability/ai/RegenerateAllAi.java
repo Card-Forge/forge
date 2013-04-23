@@ -6,10 +6,10 @@ import java.util.List;
 import forge.Card;
 import forge.CardLists;
 import forge.CardPredicates;
-import forge.Singletons;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.cost.Cost;
 import forge.card.spellability.SpellAbility;
+import forge.game.GameState;
 import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilCombat;
 import forge.game.ai.ComputerUtilCost;
@@ -24,6 +24,7 @@ public class RegenerateAllAi extends SpellAbilityAi {
         final Card hostCard = sa.getSourceCard();
         boolean chance = false;
         final Cost abCost = sa.getPayCosts();
+        final GameState game = ai.getGame();
         if (abCost != null) {
             // AI currently disabled for these costs
             if (!ComputerUtilCost.checkSacrificeCost(ai, abCost, hostCard)) {
@@ -46,7 +47,7 @@ public class RegenerateAllAi extends SpellAbilityAi {
             valid = sa.getParam("ValidCards");
         }
 
-        List<Card> list = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
+        List<Card> list = game.getCardsIn(ZoneType.Battlefield);
         list = CardLists.getValidCards(list, valid.split(","), hostCard.getController(), hostCard);
         list = CardLists.filter(list, CardPredicates.isController(ai));
 
@@ -55,7 +56,7 @@ public class RegenerateAllAi extends SpellAbilityAi {
         }
 
         int numSaved = 0;
-        if (Singletons.getModel().getGame().getStack().size() > 0) {
+        if (game.getStack().size() > 0) {
             final ArrayList<Object> objects = ComputerUtil.predictThreatenedObjects(sa.getActivatingPlayer(), sa);
 
             for (final Card c : list) {
@@ -64,7 +65,7 @@ public class RegenerateAllAi extends SpellAbilityAi {
                 }
             }
         } else {
-            if (Singletons.getModel().getGame().getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
+            if (game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
                 final List<Card> combatants = CardLists.filter(list, CardPredicates.Presets.CREATURES);
 
                 for (final Card c : combatants) {

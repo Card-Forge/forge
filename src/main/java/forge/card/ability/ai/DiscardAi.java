@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Random;
 
 import forge.Card;
-import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.cost.Cost;
@@ -95,7 +94,7 @@ public class DiscardAi extends SpellAbilityAi {
         // TODO: Implement support for Discard AI for cards with AnyNumber set to true.
 
         // Don't use draw abilities before main 2 if possible
-        if (Singletons.getModel().getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2)
+        if (ai.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2)
                 && !sa.hasParam("ActivationPhases")) {
             return false;
         }

@@ -24,7 +24,6 @@ import java.util.List;
 import java.util.Map;
 
 import forge.Card;
-import forge.Singletons;
 import forge.card.ability.AbilityFactory;
 import forge.card.ability.AbilityUtils;
 import forge.card.spellability.SpellAbility;
@@ -48,9 +47,9 @@ public class ReplacementHandler {
 
     public ReplacementResult run(final HashMap<String, Object> runParams) {
         final Object affected = runParams.get("Affected");
-        final GameState game = Singletons.getModel().getGame();
         Player decider = null;
 
+        
         // Figure out who decides which of multiple replacements to apply
         // as well as whether or not to apply optional replacements.
         if (affected instanceof Player) {
@@ -58,6 +57,7 @@ public class ReplacementHandler {
         } else {
             decider = ((Card) affected).getController();
         }
+        final GameState game = decider.getGame(); 
 
         if (runParams.get("Event").equals("Moved")) {
             ReplacementResult res = run(runParams, ReplacementLayer.Control, decider, game);
@@ -113,7 +113,7 @@ public class ReplacementHandler {
                 for (final ReplacementEffect replacementEffect : crd.getReplacementEffects()) {
                     if (!replacementEffect.hasRun()
                             && replacementEffect.getLayer() == layer
-                            && replacementEffect.requirementsCheck()
+                            && replacementEffect.requirementsCheck(game)
                             && replacementEffect.canReplace(runParams)
                             && !possibleReplacers.contains(replacementEffect)
                             && replacementEffect.zonesCheck(game.getZoneOf(crd))) {
@@ -151,7 +151,7 @@ public class ReplacementHandler {
             ReplacementResult res = this.executeReplacement(runParams, chosenRE, decider, game);
             if (res != ReplacementResult.NotReplaced) {
                 chosenRE.setHasRun(false);
-                Singletons.getModel().getGame().getGameLog().add("ReplacementEffect", chosenRE.toString(), 2);
+                game.getGameLog().add("ReplacementEffect", chosenRE.toString(), 2);
                 return res;
             } else {
                 if (possibleReplacers.size() == 0) {

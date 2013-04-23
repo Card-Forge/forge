@@ -23,9 +23,9 @@ import java.util.Map;
 
 import forge.Card;
 import forge.CardLists;
-import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.cardfactory.CardFactoryUtil;
+import forge.game.GameState;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.zone.Zone;
@@ -192,8 +192,10 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
         if (this.getZone() == null) {
             return true;
         }
-        Zone cardZone = Singletons.getModel().getGame().getZoneOf(c);
+
         Player activator = sa.getActivatingPlayer();
+        Zone cardZone = activator.getGame().getZoneOf(c);
+
         if (cardZone == null || !cardZone.is(this.getZone())) {
             // If Card is not in the default activating zone, do some additional checks
             // Not a Spell, or on Battlefield, return false
@@ -225,18 +227,19 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
      */
     public final boolean checkTimingRestrictions(final Card c, final SpellAbility sa) {
         Player activator = sa.getActivatingPlayer();
+        final GameState game = activator.getGame();
 
-        if (this.isPlayerTurn() && !Singletons.getModel().getGame().getPhaseHandler().isPlayerTurn(activator)) {
+        if (this.isPlayerTurn() && !game.getPhaseHandler().isPlayerTurn(activator)) {
             return false;
         }
 
-        if (this.isOpponentTurn() && !Singletons.getModel().getGame().getPhaseHandler().getPlayerTurn().isOpponentOf(activator)) {
+        if (this.isOpponentTurn() && !game.getPhaseHandler().getPlayerTurn().isOpponentOf(activator)) {
             return false;
         }
 
         if (this.getPhases().size() > 0) {
             boolean isPhase = false;
-            final PhaseType currPhase = Singletons.getModel().getGame().getPhaseHandler().getPhase();
+            final PhaseType currPhase = game.getPhaseHandler().getPhase();
             for (final PhaseType s : this.getPhases()) {
                 if (s == currPhase) {
                     isPhase = true;
@@ -299,6 +302,8 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
             sa.setActivatingPlayer(activator);
             System.out.println(c.getName() + " Did not have activator set in SpellAbilityRestriction.canPlay()");
         }
+
+        final GameState game = activator.getGame();
 
         if (this.isSorcerySpeed() && !activator.canCastSorcery()) {
             return false;
@@ -366,7 +371,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
             }
         }
         if (this.getIsPresent() != null) {
-            List<Card> list = Singletons.getModel().getGame().getCardsIn(this.getPresentZone());
+            List<Card> list = game.getCardsIn(this.getPresentZone());
 
             list = CardLists.getValidCards(list, this.getIsPresent().split(","), activator, c);
 

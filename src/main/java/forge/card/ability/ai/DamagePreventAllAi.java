@@ -2,7 +2,6 @@ package forge.card.ability.ai;
 
 
 import forge.Card;
-import forge.Singletons;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.cost.Cost;
 import forge.card.spellability.SpellAbility;
@@ -39,12 +38,12 @@ public class DamagePreventAllAi extends SpellAbilityAi {
             return false;
         }
 
-        if (Singletons.getModel().getGame().getStack().size() > 0) {
+        if (ai.getGame().getStack().size() > 0) {
             // TODO check stack for something on the stack will kill anything i
             // control
 
         } // Protect combatants
-        else if (Singletons.getModel().getGame().getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
+        else if (ai.getGame().getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
             // TODO
         }
 

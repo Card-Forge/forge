@@ -22,11 +22,11 @@ import java.util.List;
 import java.util.Map;
 
 import forge.Card;
-import forge.Singletons;
 import forge.card.TriggerReplacementBase;
 import forge.card.ability.AbilityUtils;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
+import forge.game.GameState;
 import forge.game.phase.PhaseType;
 import forge.game.player.AIPlayer;
 import forge.util.Expressions;
@@ -168,21 +168,22 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
      * <p>
      * requirementsCheck.
      * </p>
+     * @param game 
      * 
      * @return a boolean.
      */
-    public boolean requirementsCheck() {
-        return this.requirementsCheck(this.getMapParams());
+    public boolean requirementsCheck(GameState game) {
+        return this.requirementsCheck(game, this.getMapParams());
     }
     
-    public boolean requirementsCheck(Map<String,String> params) {
+    public boolean requirementsCheck(GameState game, Map<String,String> params) {
 
         if (this.isSuppressed()) {
             return false; // Effect removed by effect
         }
 
         if (params.containsKey("PlayerTurn")) {
-            if (params.get("PlayerTurn").equals("True") && !Singletons.getModel().getGame().getPhaseHandler().isPlayerTurn(this.getHostCard().getController())) {
+            if (params.get("PlayerTurn").equals("True") && !game.getPhaseHandler().isPlayerTurn(this.getHostCard().getController())) {
                 return false;
             }
         }
@@ -190,7 +191,7 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
         if (params.containsKey("ActivePhases")) {
             boolean isPhase = false;
             List<PhaseType> aPhases = PhaseType.parseRange(params.get("ActivePhases"));
-            final PhaseType currPhase = Singletons.getModel().getGame().getPhaseHandler().getPhase();
+            final PhaseType currPhase = game.getPhaseHandler().getPhase();
             for (final PhaseType s : aPhases) {
                 if (s == currPhase) {
                     isPhase = true;

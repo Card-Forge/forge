@@ -4,7 +4,6 @@ import java.util.List;
 
 import forge.Card;
 import forge.CardLists;
-import forge.Singletons;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
@@ -34,7 +33,7 @@ public class ChooseCardAi extends SpellAbilityAi {
             if (sa.hasParam("ChoiceZone")) {
                 choiceZone = ZoneType.smartValueOf(sa.getParam("ChoiceZone"));
             }
-            List<Card> choices = Singletons.getModel().getGame().getCardsIn(choiceZone);
+            List<Card> choices = ai.getGame().getCardsIn(choiceZone);
             if (sa.hasParam("Choices")) {
                 choices = CardLists.getValidCards(choices, sa.getParam("Choices"), host.getController(), host);
             }

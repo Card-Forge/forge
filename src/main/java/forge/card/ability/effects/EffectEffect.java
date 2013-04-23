@@ -4,7 +4,6 @@ import java.util.List;
 
 import forge.Card;
 import forge.Command;
-import forge.Singletons;
 import forge.card.ability.AbilityFactory;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
@@ -14,6 +13,7 @@ import forge.card.spellability.SpellAbility;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerHandler;
 import forge.card.trigger.TriggerType;
+import forge.game.GameState;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
@@ -37,6 +37,7 @@ public class EffectEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
         final Card hostCard = sa.getSourceCard();
+        final GameState game = hostCard.getGame();
 
         String[] effectAbilities = null;
         String[] effectTriggers = null;
@@ -87,7 +88,7 @@ public class EffectEffect extends SpellAbilityEffect {
         }
 
         // Unique Effects shouldn't be duplicated
-        if (sa.hasParam("Unique") && Singletons.getModel().getGame().isCardInCommand(name)) {
+        if (sa.hasParam("Unique") && game.isCardInCommand(name)) {
             return;
         }
 
@@ -186,7 +187,7 @@ public class EffectEffect extends SpellAbilityEffect {
 
         // Remember created effect
         if (sa.hasParam("RememberEffect")) {
-            Singletons.getModel().getGame().getCardState(hostCard).addRemembered(eff);
+            game.getCardState(hostCard).addRemembered(eff);
         }
 
         // Duration
@@ -197,29 +198,29 @@ public class EffectEffect extends SpellAbilityEffect {
 
                 @Override
                 public void run() {
-                    Singletons.getModel().getGame().getAction().exile(e);
+                    game.getAction().exile(e);
                 }
             };
 
             if ((duration == null) || duration.equals("EndOfTurn")) {
-                Singletons.getModel().getGame().getEndOfTurn().addUntil(endEffect);
+                game.getEndOfTurn().addUntil(endEffect);
             }
             else if (duration.equals("UntilHostLeavesPlay")) {
                 hostCard.addLeavesPlayCommand(endEffect);
             }
             else if (duration.equals("HostLeavesOrEOT")) {
-                Singletons.getModel().getGame().getEndOfTurn().addUntil(endEffect);
+                game.getEndOfTurn().addUntil(endEffect);
                 hostCard.addLeavesPlayCommand(endEffect);
             }
             else if (duration.equals("UntilYourNextTurn")) {
-                Singletons.getModel().getGame().getCleanup().addUntil(controller, endEffect);
+                game.getCleanup().addUntil(controller, endEffect);
             }
         }
 
         // TODO: Add targeting to the effect so it knows who it's dealing with
-        Singletons.getModel().getGame().getTriggerHandler().suppressMode(TriggerType.ChangesZone);
-        Singletons.getModel().getGame().getAction().moveTo(ZoneType.Command, eff);
-        Singletons.getModel().getGame().getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
+        game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
+        game.getAction().moveTo(ZoneType.Command, eff);
+        game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
     }
 
 }

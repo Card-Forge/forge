@@ -12,7 +12,6 @@ import forge.CardLists;
 import forge.CardUtil;
 import forge.Constant;
 import forge.CounterType;
-import forge.Singletons;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.mana.ManaCostBeingPaid;
@@ -79,7 +78,8 @@ public class AbilityUtils {
     public static List<Card> getDefinedCards(final Card hostCard, final String def, final SpellAbility sa) {
         final List<Card> cards = new ArrayList<Card>();
         final String defined = (def == null) ? "Self" : def; // default to Self
-
+        final GameState game = sa.getActivatingPlayer().getGame();
+        
         Card c = null;
 
         if (defined.equals("Self")) {
@@ -142,7 +142,7 @@ public class AbilityUtils {
             else {
                 final Object crd = root.getTriggeringObject(defined.substring(9));
                 if (crd instanceof Card) {
-                    c = Singletons.getModel().getGame().getCardState((Card) crd);
+                    c = game.getCardState((Card) crd);
                 } else if (crd instanceof List<?>) {
                     for (final Card cardItem : (List<Card>) crd) {
                         cards.add(cardItem);
@@ -153,7 +153,7 @@ public class AbilityUtils {
             final SpellAbility root = sa.getRootAbility();
             final Object crd = root.getReplacingObject(defined.substring(8));
             if (crd instanceof Card) {
-                c = Singletons.getModel().getGame().getCardState((Card) crd);
+                c = game.getCardState((Card) crd);
             } else if (crd instanceof List<?>) {
                 for (final Card cardItem : (List<Card>) crd) {
                     cards.add(cardItem);
@@ -161,26 +161,26 @@ public class AbilityUtils {
             }
         } else if (defined.equals("Remembered")) {
             if (hostCard.getRemembered().isEmpty()) {
-                final Card newCard = Singletons.getModel().getGame().getCardState(hostCard);
+                final Card newCard = game.getCardState(hostCard);
                 for (final Object o : newCard.getRemembered()) {
                     if (o instanceof Card) {
-                        cards.add(Singletons.getModel().getGame().getCardState((Card) o));
+                        cards.add(game.getCardState((Card) o));
                     }
                 }
             }
 
             for (final Object o : hostCard.getRemembered()) {
                 if (o instanceof Card) {
-                    cards.add(Singletons.getModel().getGame().getCardState((Card) o));
+                    cards.add(game.getCardState((Card) o));
                 }
             }
         } else if (defined.equals("Clones")) {
             for (final Card clone : hostCard.getClones()) {
-                cards.add(Singletons.getModel().getGame().getCardState(clone));
+                cards.add(game.getCardState(clone));
             }
         } else if (defined.equals("Imprinted")) {
             for (final Card imprint : hostCard.getImprinted()) {
-                cards.add(Singletons.getModel().getGame().getCardState(imprint));
+                cards.add(game.getCardState(imprint));
             }
         } else if (defined.startsWith("ThisTurnEntered")) {
             final String[] workingCopy = defined.split("_");
@@ -196,11 +196,11 @@ public class AbilityUtils {
                 validFilter = workingCopy[2];
             }
             for (final Card cl : CardUtil.getThisTurnEntered(destination, origin, validFilter, hostCard)) {
-                cards.add(Singletons.getModel().getGame().getCardState(cl));
+                cards.add(game.getCardState(cl));
             }
         } else if (defined.equals("ChosenCard")) {
             for (final Card chosen : hostCard.getChosenCard()) {
-                cards.add(Singletons.getModel().getGame().getCardState(chosen));
+                cards.add(game.getCardState(chosen));
             }
         } else {
             List<Card> list = null;
@@ -226,22 +226,16 @@ public class AbilityUtils {
 
             else if (defined.startsWith("Valid ")) {
                 String validDefined = defined.substring("Valid ".length());
-                GameState game = Singletons.getModel().getGame();
-
                 list = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), validDefined.split(","), hostCard.getController(), hostCard);
             }
 
             else if (defined.startsWith("ValidHand ")) {
                 String validDefined = defined.substring("ValidHand ".length());
-                GameState game = Singletons.getModel().getGame();
-
                 list = CardLists.getValidCards(game.getCardsIn(ZoneType.Hand), validDefined.split(","), hostCard.getController(), hostCard);
             }
 
             else if (defined.startsWith("ValidAll ")) {
                 String validDefined = defined.substring("ValidAll ".length());
-                GameState game = Singletons.getModel().getGame();
-
                 list = CardLists.getValidCards(game.getCardsInGame(), validDefined.split(","), hostCard.getController(), hostCard);
             }
 
@@ -292,6 +286,7 @@ public class AbilityUtils {
     public static int calculateAmount(final Card card, String amount, final SpellAbility ability) {
         // return empty strings and constants
         if (StringUtils.isBlank(amount)) { return 0; }
+        final GameState game = card.getController().getGame(); 
 
         // Strip and save sign for calculations
         final boolean startsWithPlus = amount.charAt(0) == '+';
@@ -366,7 +361,7 @@ public class AbilityUtils {
             final String hType = calcX[0].substring(11);
             final ArrayList<Player> players = new ArrayList<Player>();
             if (hType.equals("Players") || hType.equals("")) {
-                players.addAll(Singletons.getModel().getGame().getPlayers());
+                players.addAll(game.getPlayers());
                 return CardFactoryUtil.playerXCount(players, calcX[1], card) * multiplier;
             } else if (hType.equals("Opponents")) {
                 players.addAll(card.getController().getOpponents());
@@ -382,8 +377,8 @@ public class AbilityUtils {
                 }
                 return CardFactoryUtil.playerXCount(players, calcX[1], card) * multiplier;
             } else if (hType.equals("NonActive")) {
-                players.addAll(Singletons.getModel().getGame().getPlayers());
-                players.remove(Singletons.getModel().getGame().getPhaseHandler().getPlayerTurn());
+                players.addAll(game.getPlayers());
+                players.remove(game.getPhaseHandler().getPlayerTurn());
                 return CardFactoryUtil.playerXCount(players, calcX[1], card) * multiplier;
             }
             return 0;
@@ -393,10 +388,10 @@ public class AbilityUtils {
             // Add whole Remembered list to handlePaid
             final List<Card> list = new ArrayList<Card>();
             if (card.getRemembered().isEmpty()) {
-                final Card newCard = Singletons.getModel().getGame().getCardState(card);
+                final Card newCard = game.getCardState(card);
                 for (final Object o : newCard.getRemembered()) {
                     if (o instanceof Card) {
-                        list.add(Singletons.getModel().getGame().getCardState((Card) o));
+                        list.add(game.getCardState((Card) o));
                     }
                 }
             }
@@ -410,7 +405,7 @@ public class AbilityUtils {
             } else {
                 for (final Object o : card.getRemembered()) {
                     if (o instanceof Card) {
-                        list.add(Singletons.getModel().getGame().getCardState((Card) o));
+                        list.add(game.getCardState((Card) o));
                     }
                 }
             }
@@ -422,7 +417,7 @@ public class AbilityUtils {
             // Add whole Imprinted list to handlePaid
             final List<Card> list = new ArrayList<Card>();
             for (final Card c : card.getImprinted()) {
-                list.add(Singletons.getModel().getGame().getCardState(c));
+                list.add(game.getCardState(c));
             }
 
             return CardFactoryUtil.handlePaid(list, calcX[1], card) * multiplier;
@@ -434,7 +429,7 @@ public class AbilityUtils {
             if (card.isEnchanting()) {
                 Object o = card.getEnchanting();
                 if (o instanceof Card) {
-                    list.add(Singletons.getModel().getGame().getCardState((Card) o));
+                    list.add(game.getCardState((Card) o));
                 }
             }
             return CardFactoryUtil.handlePaid(list, calcX[1], card) * multiplier;
@@ -704,6 +699,7 @@ public class AbilityUtils {
     public static List<Player> getDefinedPlayers(final Card card, final String def, final SpellAbility sa) {
         final List<Player> players = new ArrayList<Player>();
         final String defined = (def == null) ? "You" : def;
+        final GameState game = sa.getActivatingPlayer().getGame();
 
         if (defined.equals("Targeted")) {
             final SpellAbility saTargeting = sa.getSATargetingPlayer();
@@ -893,12 +889,12 @@ public class AbilityUtils {
                 }
             }
         } else if (defined.equals("AttackingPlayer")) {
-            final Player p = Singletons.getModel().getGame().getCombat().getAttackingPlayer();
+            final Player p = game.getCombat().getAttackingPlayer();
             if (!players.contains(p)) {
                 players.add(p);
             }
         } else if (defined.equals("DefendingPlayer")) {
-            players.addAll(Singletons.getModel().getGame().getCombat().getDefendingPlayerRelatedTo(card));
+            players.addAll(game.getCombat().getDefendingPlayerRelatedTo(card));
         } else if (defined.equals("ChosenPlayer")) {
             final Player p = card.getChosenPlayer();
             if (!players.contains(p)) {
@@ -910,7 +906,7 @@ public class AbilityUtils {
                 players.add(p);
             }
         } else if (defined.startsWith("Flipped")) {
-            for (Player p : Singletons.getModel().getGame().getPlayers()) {
+            for (Player p : game.getPlayers()) {
                 if (null != sa.getSourceCard().getFlipResult(p)) {
                     if (sa.getSourceCard().getFlipResult(p).equals(defined.substring(7))) {
                         players.add(p);
@@ -920,11 +916,11 @@ public class AbilityUtils {
         } else if (defined.equals("You")) {
             players.add(sa.getActivatingPlayer());
         } else if (defined.equals("Each")) {
-            players.addAll(Singletons.getModel().getGame().getPlayers());
+            players.addAll(game.getPlayers());
         } else if (defined.equals("Opponent")) {
             players.add(sa.getActivatingPlayer().getOpponent());
         } else {
-            for (Player p : Singletons.getModel().getGame().getPlayers()) {
+            for (Player p : game.getPlayers()) {
                 if (p.isValid(defined, sa.getActivatingPlayer(), sa.getSourceCard())) {
                     players.add(p);
                 }
@@ -950,7 +946,8 @@ public class AbilityUtils {
             final SpellAbility sa) {
         final ArrayList<SpellAbility> sas = new ArrayList<SpellAbility>();
         final String defined = (def == null) ? "Self" : def; // default to Self
-
+        final GameState game = sa.getActivatingPlayer().getGame();
+        
         SpellAbility s = null;
 
         // TODO - this probably needs to be fleshed out a bit, but the basics
@@ -974,7 +971,7 @@ public class AbilityUtils {
             for (final Object o : card.getRemembered()) {
                 if (o instanceof Card) {
                     final Card rem = (Card) o;
-                    sas.addAll(Singletons.getModel().getGame().getCardState(rem).getSpellAbilities());
+                    sas.addAll(game.getCardState(rem).getSpellAbilities());
                 }
             }
         } else if (defined.equals("Imprinted")) {
@@ -995,7 +992,7 @@ public class AbilityUtils {
             final SpellAbility root = sa.getRootAbility();
             final Object crd = root.getTriggeringObject("Card");
             if (crd instanceof Card) {
-                triggeredCard = Singletons.getModel().getGame().getCardState((Card) crd);
+                triggeredCard = game.getCardState((Card) crd);
             } //find the imprinted card that does not share a name with the triggered card
             for (final SpellAbility spell : imprintedCards) {
                 if (!spell.getSourceCard().getName().equals(triggeredCard.getName())) {
@@ -1057,8 +1054,7 @@ public class AbilityUtils {
             return;
         }
 
-        final GameState game = Singletons.getModel().getGame();
-        AbilityUtils.resolveApiAbility(sa, usedStack, game);
+        AbilityUtils.resolveApiAbility(sa, usedStack, sa.getActivatingPlayer().getGame());
     }
 
     private static void resolveSubAbilities(final SpellAbility sa, boolean usedStack, final GameState game) {

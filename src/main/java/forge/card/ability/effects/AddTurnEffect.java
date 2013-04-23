@@ -2,7 +2,6 @@ package forge.card.ability.effects;
 
 import java.util.List;
 
-import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
@@ -52,7 +51,7 @@ public class AddTurnEffect extends SpellAbilityEffect {
         for (final Player p : tgtPlayers) {
             if ((tgt == null) || p.canBeTargetedBy(sa)) {
                 for (int i = 0; i < numTurns; i++) {
-                    ExtraTurn extra = Singletons.getModel().getGame().getPhaseHandler().addExtraTurn(p);
+                    ExtraTurn extra = p.getGame().getPhaseHandler().addExtraTurn(p);
                     if (sa.hasParam("LoseAtEndStep")) {
                         extra.setLoseAtEndStep(true);
                     }

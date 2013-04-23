@@ -33,7 +33,6 @@ import forge.CardPredicates;
 import forge.CardPredicates.Presets;
 import forge.CardUtil;
 import forge.Color;
-import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.ApiType;
 import forge.card.ability.effects.CharmEffect;
@@ -462,10 +461,11 @@ public class ComputerUtil {
      */
     public static List<Card> chooseExileFrom(final Player ai, final ZoneType zone, final String type, final Card activate,
             final Card target, final int amount) {
+        final GameState game = ai.getGame();
         List<Card> typeList = new ArrayList<Card>();
         if (zone.equals(ZoneType.Stack)) {
-            for (int i = 0; i < Singletons.getModel().getGame().getStack().size(); i++) {
-                typeList.add(Singletons.getModel().getGame().getStack().peekAbility(i).getSourceCard());
+            for (int i = 0; i < game.getStack().size(); i++) {
+                typeList.add(game.getStack().peekAbility(i).getSourceCard());
                 typeList = CardLists.getValidCards(typeList, type.split(","), activate.getController(), activate);
             }
         } else {
@@ -614,7 +614,7 @@ public class ComputerUtil {
     public static Combat getBlockers(final Player ai) {
         final List<Card> blockers = ai.getCardsIn(ZoneType.Battlefield);
 
-        return ComputerUtilBlock.getBlockers(ai, Singletons.getModel().getGame().getCombat(), blockers);
+        return ComputerUtilBlock.getBlockers(ai, ai.getGame().getCombat(), blockers);
     }
 
 
@@ -714,6 +714,7 @@ public class ComputerUtil {
         }
 
         final Player controller = card.getController();
+        final GameState game = controller.getGame();
         final List<Card> l = controller.getCardsIn(ZoneType.Battlefield);
         for (final Card c : l) {
             for (final SpellAbility sa : c.getSpellAbilities()) {
@@ -749,11 +750,10 @@ public class ComputerUtil {
 
                     final Target tgt = sa.getTarget();
                     if (tgt != null) {
-                        if (CardLists.getValidCards(Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield), tgt.getValidTgts(), controller, sa.getSourceCard()).contains(card)) {
+                        if (CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), tgt.getValidTgts(), controller, sa.getSourceCard()).contains(card)) {
                             return true;
                         }
-                    } else if (AbilityUtils.getDefinedCards(sa.getSourceCard(), sa.getParam("Defined"), sa)
-                            .contains(card)) {
+                    } else if (AbilityUtils.getDefinedCards(sa.getSourceCard(), sa.getParam("Defined"), sa).contains(card)) {
                         return true;
                     }
 
@@ -780,6 +780,8 @@ public class ComputerUtil {
         int prevented = 0;
 
         final Player controller = card.getController();
+        final GameState game = controller.getGame();
+
         final List<Card> l = controller.getCardsIn(ZoneType.Battlefield);
         for (final Card c : l) {
             for (final SpellAbility sa : c.getSpellAbilities()) {
@@ -797,7 +799,7 @@ public class ComputerUtil {
                         }
                         final Target tgt = sa.getTarget();
                         if (tgt != null) {
-                            if (CardLists.getValidCards(Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield), tgt.getValidTgts(), controller, sa.getSourceCard()).contains(card)) {
+                            if (CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), tgt.getValidTgts(), controller, sa.getSourceCard()).contains(card)) {
                                 prevented += AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("Amount"), sa);
                             }
 
@@ -938,6 +940,8 @@ public class ComputerUtil {
         if (!discard.getSVar("DiscardMe").equals("")) {
             return true;
         }
+        
+        final GameState game = ai.getGame();
         final List<Card> landsInPlay = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.LANDS);
         final List<Card> landsInHand = CardLists.filter(ai.getCardsIn(ZoneType.Hand), CardPredicates.Presets.LANDS);
         final List<Card> nonLandsInHand = CardLists.getNotType(ai.getCardsIn(ZoneType.Hand), "Land");
@@ -954,8 +958,8 @@ public class ComputerUtil {
             if (discardCMC > landsInPlay.size() + landsInHand.size() + 2) {
                 // not castable for some time.
                 return true;
-            } else if (!Singletons.getModel().getGame().getPhaseHandler().isPlayerTurn(ai)
-                    && Singletons.getModel().getGame().getPhaseHandler().getPhase().isAfter(PhaseType.MAIN2)
+            } else if (!game.getPhaseHandler().isPlayerTurn(ai)
+                    && game.getPhaseHandler().getPhase().isAfter(PhaseType.MAIN2)
                     && discardCMC > landsInPlay.size() + landsInHand.size()
                     && discardCMC > landsInPlay.size() + 1
                     && nonLandsInHand.size() > 1) {
@@ -981,7 +985,8 @@ public class ComputerUtil {
      * @return a boolean (returns true if it's better to wait until blockers are declared).
      */
     public static boolean waitForBlocking(final SpellAbility sa) {
-        final PhaseHandler ph = Singletons.getModel().getGame().getPhaseHandler();
+        final GameState game = sa.getActivatingPlayer().getGame();
+        final PhaseHandler ph = game.getPhaseHandler();
 
         return (sa.getSourceCard().isCreature()
                 && sa.getPayCosts().hasTapCost()
@@ -1043,13 +1048,14 @@ public class ComputerUtil {
      * @since 1.0.15
      */
     public static ArrayList<Object> predictThreatenedObjects(final Player aiPlayer, final SpellAbility sa) {
+        final GameState game = aiPlayer.getGame();
         final ArrayList<Object> objects = new ArrayList<Object>();
-        if (Singletons.getModel().getGame().getStack().isEmpty()) {
+        if (game.getStack().isEmpty()) {
             return objects;
         }
     
         // check stack for something that will kill this
-        final SpellAbility topStack = Singletons.getModel().getGame().getStack().peekAbility();
+        final SpellAbility topStack = game.getStack().peekAbility();
         objects.addAll(ComputerUtil.predictThreatenedObjects(aiPlayer, sa, topStack));
     
         return objects;

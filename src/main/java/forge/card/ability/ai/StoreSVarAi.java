@@ -1,7 +1,6 @@
 package forge.card.ability.ai;
 
 import forge.Card;
-import forge.Singletons;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.spellability.SpellAbility;
 import forge.game.ai.ComputerUtil;
@@ -16,7 +15,7 @@ public class StoreSVarAi extends SpellAbilityAi {
 
         final Card source = sa.getSourceCard();
         if (ComputerUtil.waitForBlocking(sa) || ai.getLife() + 1 >= source.getNetDefense()
-                || (ai.getLife() > 5 && !ComputerUtilCombat.lifeInSeriousDanger(ai, Singletons.getModel().getGame().getCombat()))) {
+                || (ai.getLife() > 5 && !ComputerUtilCombat.lifeInSeriousDanger(ai, ai.getGame().getCombat()))) {
             return false;
         }
 

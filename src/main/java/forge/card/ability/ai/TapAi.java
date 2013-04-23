@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Random;
 
 import forge.Card;
-import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.spellability.SpellAbility;
@@ -19,7 +18,7 @@ public class TapAi extends TapAiBase {
     @Override
     protected boolean canPlayAI(AIPlayer ai, SpellAbility sa) {
 
-        final PhaseHandler phase = Singletons.getModel().getGame().getPhaseHandler();
+        final PhaseHandler phase = ai.getGame().getPhaseHandler();
         final Player turn = phase.getPlayerTurn();
 
         if (turn.isOpponentOf(ai) && phase.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)) {

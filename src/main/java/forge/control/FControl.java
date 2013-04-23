@@ -110,10 +110,9 @@ public enum FControl {
         this.waConcede = new WindowAdapter() {
             @Override
             public void windowClosing(final WindowEvent e) {
-                Singletons.getView().getFrame().setDefaultCloseOperation(
-                        WindowConstants.DO_NOTHING_ON_CLOSE);
+                Singletons.getView().getFrame().setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 
-                if (!Singletons.getModel().getGame().isGameOver())
+                if (!Singletons.getModel().getMatch().getCurrentGame().isGameOver())
                     CDock.SINGLETON_INSTANCE.concede();
                 else {
                     Singletons.getControl().changeState(FControl.Screens.HOME_SCREEN);

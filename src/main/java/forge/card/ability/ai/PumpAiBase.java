@@ -11,7 +11,6 @@ import forge.Card;
 import forge.CardLists;
 import forge.CardPredicates;
 import forge.CardUtil;
-import forge.Singletons;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.spellability.SpellAbility;
 import forge.game.GameState;
@@ -52,7 +51,8 @@ public abstract class PumpAiBase extends SpellAbilityAi {
      * @return true, if is useful keyword
      */
     public boolean isUsefulCurseKeyword(final Player ai, final String keyword, final Card card, final SpellAbility sa) {
-        final PhaseHandler ph = Singletons.getModel().getGame().getPhaseHandler();
+        final GameState game = ai.getGame();
+        final PhaseHandler ph = game.getPhaseHandler();
         final Player human = ai.getOpponent();
         //int attack = getNumAttack(sa);
         //int defense = getNumDefense(sa);
@@ -157,7 +157,8 @@ public abstract class PumpAiBase extends SpellAbilityAi {
      * @return true, if is useful keyword
      */
     public boolean isUsefulPumpKeyword(final Player ai, final String keyword, final Card card, final SpellAbility sa, final int attack) {
-        final PhaseHandler ph = Singletons.getModel().getGame().getPhaseHandler();
+        final GameState game = ai.getGame();
+        final PhaseHandler ph = game.getPhaseHandler();
         final Player opp = ai.getOpponent();
         //int defense = getNumDefense(sa);
         if (!CardUtil.isStackingKeyword(keyword) && card.hasKeyword(keyword)) {
@@ -179,10 +180,10 @@ public abstract class PumpAiBase extends SpellAbilityAi {
         } else if (keyword.endsWith("Flying")) {
             if (ph.isPlayerTurn(opp)
                     && ph.getPhase().equals(PhaseType.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY)
-                    && !CardLists.getKeyword(Singletons.getModel().getGame().getCombat().getAttackers(), "Flying").isEmpty()
+                    && !CardLists.getKeyword(game.getCombat().getAttackers(), "Flying").isEmpty()
                     && !card.hasKeyword("Reach")
                     && CombatUtil.canBlock(card)
-                    && ComputerUtilCombat.lifeInDanger(ai, Singletons.getModel().getGame().getCombat())) {
+                    && ComputerUtilCombat.lifeInDanger(ai, game.getCombat())) {
                 return true;
             }
             Predicate<Card> flyingOrReach = Predicates.or(CardPredicates.hasKeyword("Flying"), CardPredicates.hasKeyword("Reach"));
@@ -196,9 +197,9 @@ public abstract class PumpAiBase extends SpellAbilityAi {
         } else if (keyword.endsWith("Horsemanship")) {
             if (ph.isPlayerTurn(opp)
                     && ph.getPhase().equals(PhaseType.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY)
-                    && !CardLists.getKeyword(Singletons.getModel().getGame().getCombat().getAttackers(), "Horsemanship").isEmpty()
+                    && !CardLists.getKeyword(game.getCombat().getAttackers(), "Horsemanship").isEmpty()
                     && CombatUtil.canBlock(card)
-                    && ComputerUtilCombat.lifeInDanger(ai, Singletons.getModel().getGame().getCombat())) {
+                    && ComputerUtilCombat.lifeInDanger(ai, game.getCombat())) {
                 return true;
             }
             if (ph.isPlayerTurn(opp) || !(CombatUtil.canAttack(card, opp) || card.isAttacking())
@@ -219,7 +220,7 @@ public abstract class PumpAiBase extends SpellAbilityAi {
         } else if (keyword.endsWith("Indestructible")) {
             return true;
         } else if (keyword.endsWith("Deathtouch")) {
-            Combat combat = Singletons.getModel().getGame().getCombat();
+            Combat combat = game.getCombat();
             if (ph.isPlayerTurn(opp) && ph.getPhase().equals(PhaseType.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY)) {
                 List<Card> attackers = combat.getAttackers();
                 for (Card attacker : attackers) {
@@ -312,7 +313,7 @@ public abstract class PumpAiBase extends SpellAbilityAi {
         } else if (keyword.equals("Reach")) {
             if (ph.isPlayerTurn(ai)
                     || !ph.getPhase().equals(PhaseType.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY)
-                    || CardLists.getKeyword(Singletons.getModel().getGame().getCombat().getAttackers(), "Flying").isEmpty()
+                    || CardLists.getKeyword(game.getCombat().getAttackers(), "Flying").isEmpty()
                     || card.hasKeyword("Flying")
                     || !CombatUtil.canBlock(card)) {
                 return false;
@@ -324,7 +325,7 @@ public abstract class PumpAiBase extends SpellAbilityAi {
             }
             int canBlockNum = 1 + card.getKeywordAmount("CARDNAME can block an additional creature.");
             int possibleBlockNum = 0;
-            for (Card attacker : Singletons.getModel().getGame().getCombat().getAttackers()) {
+            for (Card attacker : game.getCombat().getAttackers()) {
                 if (CombatUtil.canBlock(attacker, card)) {
                     possibleBlockNum++;
                     if (possibleBlockNum > canBlockNum) {
@@ -383,7 +384,7 @@ public abstract class PumpAiBase extends SpellAbilityAi {
 
     protected boolean shouldPumpCard(final Player ai, final SpellAbility sa, final Card c, final int defense, final int attack,
             final List<String> keywords) {
-        final GameState game = Singletons.getModel().getGame();
+        final GameState game = ai.getGame();
         PhaseHandler phase = game.getPhaseHandler();
 
         if (!c.canBeTargetedBy(sa)) {
@@ -413,7 +414,7 @@ public abstract class PumpAiBase extends SpellAbilityAi {
             if (defense > 0 && ComputerUtilCombat.blockerWouldBeDestroyed(ai, c)) {
                 return true;
             }
-            List<Card> blockedBy = Singletons.getModel().getGame().getCombat().getAttackersBlockedBy(c);
+            List<Card> blockedBy = game.getCombat().getAttackersBlockedBy(c);
             // For now, Only care the first creature blocked by a card.
             // TODO Add in better BlockAdditional support
             if (!blockedBy.isEmpty() && attack > 0 && !ComputerUtilCombat.attackerWouldBeDestroyed(ai, blockedBy.get(0))) {
@@ -490,6 +491,7 @@ public abstract class PumpAiBase extends SpellAbilityAi {
      */
     protected List<Card> getCurseCreatures(final Player ai, final SpellAbility sa, final int defense, final int attack, final List<String> keywords) {
         List<Card> list = ai.getOpponent().getCreaturesInPlay();
+        final GameState game = ai.getGame();
         list = CardLists.getTargetableCards(list, sa);
         
         if (list.isEmpty()) {
@@ -507,11 +509,11 @@ public abstract class PumpAiBase extends SpellAbilityAi {
                 }
             }); // leaves all creatures that will be destroyed
         } // -X/-X end
-        else if (attack < 0 && !Singletons.getModel().getGame().getPhaseHandler().isPreventCombatDamageThisTurn()) {
+        else if (attack < 0 && !game.getPhaseHandler().isPreventCombatDamageThisTurn()) {
             // spells that give -X/0
-            boolean isMyTurn = Singletons.getModel().getGame().getPhaseHandler().isPlayerTurn(ai);
+            boolean isMyTurn = game.getPhaseHandler().isPlayerTurn(ai);
             if (isMyTurn) {
-                if (Singletons.getModel().getGame().getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_BEGIN)) {
+                if (game.getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_BEGIN)) {
                     // TODO: Curse creatures that will block AI's creatures, if AI is going to attack.
                     list = new ArrayList<Card>();
                 } else {
@@ -519,7 +521,7 @@ public abstract class PumpAiBase extends SpellAbilityAi {
                 }
             } else {
                 // Human active, only curse attacking creatures
-                if (Singletons.getModel().getGame().getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
+                if (game.getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
                     list = CardLists.filter(list, new Predicate<Card>() {
                         @Override
                         public boolean apply(final Card c) {

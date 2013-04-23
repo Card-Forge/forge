@@ -2,7 +2,6 @@ package forge.card.ability.effects;
 
 
 import forge.Card;
-import forge.Singletons;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
 import forge.game.GameState;
@@ -21,7 +20,7 @@ public class EndTurnEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
 
-        GameState game = Singletons.getModel().getGame();
+        GameState game = sa.getActivatingPlayer().getGame();
         // Steps taken from gatherer's rulings on Time Stop.
         // 1) All spells and abilities on the stack are exiled. This includes
         // Time Stop, though it will continue to resolve. It also includes
@@ -32,7 +31,7 @@ public class EndTurnEffect extends SpellAbilityEffect {
         game.getStack().getStack().clear();
 
         // 2) All attacking and blocking creatures are removed from combat.
-        game.getCombat().reset();
+        game.getCombat().reset(game.getPhaseHandler().getPlayerTurn());
 
         // 3) State-based actions are checked. No player gets priority, and no
         // triggered abilities are put onto the stack.

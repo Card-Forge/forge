@@ -1,6 +1,5 @@
 package forge.card.ability.effects;
 
-import forge.Singletons;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
 import forge.game.phase.PhaseHandler;
@@ -14,7 +13,7 @@ public class AddPhaseEffect extends SpellAbilityEffect {
 
     @Override
     public void resolve(SpellAbility sa) {
-        PhaseHandler phaseHandler = Singletons.getModel().getGame().getPhaseHandler();
+        PhaseHandler phaseHandler = sa.getActivatingPlayer().getGame().getPhaseHandler();
         PhaseType extra = PhaseType.smartValueOf(sa.getParam("ExtraPhase"));
 
         PhaseType after;

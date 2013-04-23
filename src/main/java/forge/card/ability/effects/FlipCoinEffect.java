@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 
 import forge.Card;
-import forge.Singletons;
 import forge.card.ability.AbilityFactory;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
@@ -132,7 +131,7 @@ public class FlipCoinEffect extends SpellAbilityEffect {
     public static boolean flipCoinNoCall(final Card source, final Player flipper) {
         final boolean resultIsHeads = MyRandom.getRandom().nextBoolean();
 
-        Singletons.getModel().getGame().getEvents().post(new FlipCoinEvent());
+        flipper.getGame().getEvents().post(new FlipCoinEvent());
         final StringBuilder result = new StringBuilder();
         result.append(flipper.getName());
         result.append("'s flip comes up");

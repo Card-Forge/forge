@@ -8,11 +8,11 @@ import forge.Card;
 import forge.CardUtil;
 import forge.Command;
 import forge.GameEntity;
-import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
+import forge.game.GameState;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiDialog;
@@ -26,6 +26,7 @@ public class PumpEffect extends SpellAbilityEffect {
                 && !sa.getSourceCard().isInPlay()) {
             return;
         }
+        final GameState game = sa.getActivatingPlayer().getGame();
 
         applyTo.addTempAttackBoost(a);
         applyTo.addTempDefenseBoost(d);
@@ -55,26 +56,26 @@ public class PumpEffect extends SpellAbilityEffect {
                 }
             };
             if (sa.hasParam("UntilEndOfCombat")) {
-                Singletons.getModel().getGame().getEndOfCombat().addUntil(untilEOT);
+                game.getEndOfCombat().addUntil(untilEOT);
             } else if (sa.hasParam("UntilYourNextUpkeep")) {
-                Singletons.getModel().getGame().getUpkeep().addUntil(sa.getActivatingPlayer(), untilEOT);
+                game.getUpkeep().addUntil(sa.getActivatingPlayer(), untilEOT);
             } else if (sa.hasParam("UntilHostLeavesPlay")) {
                 sa.getSourceCard().addLeavesPlayCommand(untilEOT);
             } else if (sa.hasParam("UntilLoseControlOfHost")) {
                 sa.getSourceCard().addLeavesPlayCommand(untilEOT);
                 sa.getSourceCard().addChangeControllerCommand(untilEOT);
             } else if (sa.hasParam("UntilYourNextTurn")) {
-                Singletons.getModel().getGame().getCleanup().addUntil(sa.getActivatingPlayer(), untilEOT);
+                game.getCleanup().addUntil(sa.getActivatingPlayer(), untilEOT);
             } else if (sa.hasParam("UntilUntaps")) {
                 sa.getSourceCard().addUntapCommand(untilEOT);
             } else {
-                Singletons.getModel().getGame().getEndOfTurn().addUntil(untilEOT);
+                game.getEndOfTurn().addUntil(untilEOT);
             }
         }
     }
 
     private void applyPump(final SpellAbility sa, final Player p, final List<String> keywords) {
-
+        final GameState game = p.getGame();
         for (int i = 0; i < keywords.size(); i++) {
             p.addKeyword(keywords.get(i));
         }
@@ -95,11 +96,11 @@ public class PumpEffect extends SpellAbilityEffect {
                 }
             };
             if (sa.hasParam("UntilEndOfCombat")) {
-                Singletons.getModel().getGame().getEndOfCombat().addUntil(untilEOT);
+                game.getEndOfCombat().addUntil(untilEOT);
             } else if (sa.hasParam("UntilYourNextUpkeep")) {
-                Singletons.getModel().getGame().getUpkeep().addUntil(sa.getActivatingPlayer(), untilEOT);
+                game.getUpkeep().addUntil(sa.getActivatingPlayer(), untilEOT);
             } else {
-                Singletons.getModel().getGame().getEndOfTurn().addUntil(untilEOT);
+                game.getEndOfTurn().addUntil(untilEOT);
             }
         }
     }
@@ -175,6 +176,7 @@ public class PumpEffect extends SpellAbilityEffect {
         List<Card> tgtCards = new ArrayList<Card>();
         final ArrayList<Card> untargetedCards = new ArrayList<Card>();
         final Target tgt = sa.getTarget();
+        final GameState game = sa.getActivatingPlayer().getGame();
         List<Player> tgtPlayers = new ArrayList<Player>();
         String pumpRemembered = null;
         String pumpForget = null;
@@ -301,7 +303,7 @@ public class PumpEffect extends SpellAbilityEffect {
             final Card tgtC = tgtCards.get(j);
 
             // only pump things in PumpZone
-            if (!Singletons.getModel().getGame().getCardsIn(pumpZone).contains(tgtC)) {
+            if (!game.getCardsIn(pumpZone).contains(tgtC)) {
                 continue;
             }
 
@@ -316,7 +318,7 @@ public class PumpEffect extends SpellAbilityEffect {
         for (int i = 0; i < untargetedCards.size(); i++) {
             final Card tgtC = untargetedCards.get(i);
             // only pump things in PumpZone
-            if (!Singletons.getModel().getGame().getCardsIn(pumpZone).contains(tgtC)) {
+            if (!game.getCardsIn(pumpZone).contains(tgtC)) {
                 continue;
             }
 

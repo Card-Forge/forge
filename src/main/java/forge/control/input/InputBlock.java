@@ -121,7 +121,7 @@ public class InputBlock extends InputBase {
             this.currentAttacker = card;
             reminder = false;
         } else {
-            Zone zone = Singletons.getModel().getGame().getZoneOf(card);
+            Zone zone = game.getZoneOf(card);
             // Make sure this card is valid to even be a blocker
             if (this.currentAttacker != null && card.isCreature() && card.getController().equals(player)
                     && zone.is(ZoneType.Battlefield, player)) {
@@ -132,9 +132,9 @@ public class InputBlock extends InputBase {
 
                 List<Card> attackersBlocked = this.allBlocking.get(card);
                 if (!attackersBlocked.contains(this.currentAttacker)
-                        && CombatUtil.canBlock(this.currentAttacker, card, Singletons.getModel().getGame().getCombat())) {
+                        && CombatUtil.canBlock(this.currentAttacker, card, game.getCombat())) {
                     attackersBlocked.add(this.currentAttacker);
-                    Singletons.getModel().getGame().getCombat().addBlocker(this.currentAttacker, card);
+                    game.getCombat().addBlocker(this.currentAttacker, card);
                     reminder = false;
                 }
             }

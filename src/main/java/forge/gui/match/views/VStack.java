@@ -18,25 +18,19 @@
 package forge.gui.match.views;
 
 import java.awt.Color;
-import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.JCheckBoxMenuItem;
-import javax.swing.JPopupMenu;
 import javax.swing.JTextArea;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 
 import net.miginfocom.swing.MigLayout;
 import forge.CardUtil;
-import forge.Singletons;
 import forge.card.spellability.SpellAbilityStackInstance;
 import forge.game.zone.MagicStack;
-import forge.gui.ForgeAction;
-import forge.gui.ForgeAction.MatchConstants;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
@@ -60,7 +54,6 @@ public enum VStack implements IVDoc<CStack> {
 
     // Other fields
     private List<JTextArea> stackTARs = new ArrayList<JTextArea>();
-    private TriggerReactionMenu triggerMenu = new TriggerReactionMenu();
 
     //========= Overridden methods
 
@@ -114,12 +107,11 @@ public enum VStack implements IVDoc<CStack> {
 
     //========== Observer update methods
 
-    /** */
-    public void updateStack() {
+    /**
+     * @param stack  */
+    public void updateStack(final MagicStack stack) {
         // No need to update this unless it's showing
         if (!parentCell.getSelected().equals(this)) { return; }
-
-        final MagicStack stack = Singletons.getModel().getGame().getStack();
 
         int count = 1;
         JTextArea tar;
@@ -136,7 +128,6 @@ public enum VStack implements IVDoc<CStack> {
         stackTARs.clear();
         for (int i = stack.size() - 1; 0 <= i; i--) {
             final SpellAbilityStackInstance spell = stack.peekInstance(i);
-            final int index = i;
 
             scheme = getSpellColor(spell);
 
@@ -185,21 +176,6 @@ public enum VStack implements IVDoc<CStack> {
 
             parentCell.getBody().add(tar, "w 98%!");
             stackTARs.add(tar);
-
-            if (spell.isOptionalTrigger()) {
-                tar.addMouseListener(new MouseAdapter() {
-                    @Override
-                    public void mousePressed(final MouseEvent e) {
-
-                        if (e.getButton() != MouseEvent.BUTTON3) {
-                            return;
-                        }
-
-                        triggerMenu.setTrigger(stack.peekAbility(index).getSourceTrigger());
-                        triggerMenu.show(e.getComponent(), e.getX(), e.getY());
-                    }
-                });
-            }
         }
 
         parentCell.getBody().repaint();
@@ -207,82 +183,23 @@ public enum VStack implements IVDoc<CStack> {
 
     /** Returns array with [background, foreground] colors. */
     private Color[] getSpellColor(SpellAbilityStackInstance s0) {
-        if (s0.getStackDescription().startsWith("Morph ")) {
+        if (s0.getStackDescription().startsWith("Morph ")) 
             return new Color[] { new Color(0, 0, 0, 0), FSkin.getColor(FSkin.Colors.CLR_TEXT) };
-        } else if (CardUtil.getColors(s0.getSourceCard()).size() > 1) {
+        if (CardUtil.getColors(s0.getSourceCard()).size() > 1) 
             return new Color[] { new Color(253, 175, 63), Color.black };
-        } else if (s0.getSourceCard().isBlack()) {
-            return new Color[] { Color.black, Color.white };
-        } else if (s0.getSourceCard().isBlue()) {
-            return new Color[] { new Color(71, 108, 191), Color.white };
-        } else if (s0.getSourceCard().isGreen()) {
-            return new Color[] { new Color(23, 95, 30), Color.white };
-        } else if (s0.getSourceCard().isRed()) {
-            return new Color[] { new Color(214, 8, 8), Color.white };
-        } else if (s0.getSourceCard().isWhite()) {
-            return new Color[] { Color.white, Color.black };
-        } else if (s0.getSourceCard().isArtifact() || s0.getSourceCard().isLand()) {
+
+        if (s0.getSourceCard().isBlack())      return new Color[] { Color.black, Color.white };
+        if (s0.getSourceCard().isBlue())       return new Color[] { new Color(71, 108, 191), Color.white };
+        if (s0.getSourceCard().isGreen())      return new Color[] { new Color(23, 95, 30), Color.white };
+        if (s0.getSourceCard().isRed())        return new Color[] { new Color(214, 8, 8), Color.white };
+        if (s0.getSourceCard().isWhite())      return new Color[] { Color.white, Color.black };
+
+        if (s0.getSourceCard().isArtifact() || s0.getSourceCard().isLand())
             return new Color[] { new Color(111, 75, 43), Color.white };
-        }
 
         return new Color[] { new Color(0, 0, 0, 0), FSkin.getColor(FSkin.Colors.CLR_TEXT) };
     }
 
     //========= Custom class handling
 
-    @SuppressWarnings("serial")
-    private class TriggerReactionMenu extends JPopupMenu {
-        private int workTrigID;
-
-        public TriggerReactionMenu() {
-            super();
-
-            final ForgeAction actAccept = new ForgeAction(MatchConstants.ALWAYSACCEPT) {
-                @Override
-                public final void actionPerformed(final ActionEvent e) {
-                    Singletons.getModel().getGame().getTriggerHandler().setAlwaysAcceptTrigger(TriggerReactionMenu.this.workTrigID);
-                }
-            };
-
-            final ForgeAction actDecline = new ForgeAction(MatchConstants.ALWAYSDECLINE) {
-                @Override
-                public final void actionPerformed(final ActionEvent e) {
-                    Singletons.getModel().getGame().getTriggerHandler().setAlwaysDeclineTrigger(TriggerReactionMenu.this.workTrigID);
-                }
-            };
-
-            final ForgeAction actAsk = new ForgeAction(MatchConstants.ALWAYSASK) {
-                @Override
-                public final void actionPerformed(final ActionEvent e) {
-                    Singletons.getModel().getGame().getTriggerHandler().setAlwaysAskTrigger(TriggerReactionMenu.this.workTrigID);
-                }
-            };
-
-            final JCheckBoxMenuItem jcbmiAccept = new JCheckBoxMenuItem(actAccept);
-            final JCheckBoxMenuItem jcbmiDecline = new JCheckBoxMenuItem(actDecline);
-            final JCheckBoxMenuItem jcbmiAsk = new JCheckBoxMenuItem(actAsk);
-
-            this.add(jcbmiAccept);
-            this.add(jcbmiDecline);
-            this.add(jcbmiAsk);
-        }
-
-        public void setTrigger(final int trigID) {
-            this.workTrigID = trigID;
-
-            if (Singletons.getModel().getGame().getTriggerHandler().isAlwaysAccepted(trigID)) {
-                ((JCheckBoxMenuItem) this.getComponent(0)).setState(true);
-                ((JCheckBoxMenuItem) this.getComponent(1)).setState(false);
-                ((JCheckBoxMenuItem) this.getComponent(2)).setState(false);
-            } else if (Singletons.getModel().getGame().getTriggerHandler().isAlwaysDeclined(trigID)) {
-                ((JCheckBoxMenuItem) this.getComponent(0)).setState(false);
-                ((JCheckBoxMenuItem) this.getComponent(1)).setState(true);
-                ((JCheckBoxMenuItem) this.getComponent(2)).setState(false);
-            } else {
-                ((JCheckBoxMenuItem) this.getComponent(0)).setState(false);
-                ((JCheckBoxMenuItem) this.getComponent(1)).setState(false);
-                ((JCheckBoxMenuItem) this.getComponent(2)).setState(true);
-            }
-        }
-    }
 }

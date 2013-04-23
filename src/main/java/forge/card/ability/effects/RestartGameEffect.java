@@ -24,7 +24,8 @@ public class RestartGameEffect extends SpellAbilityEffect {
      */
     @Override
     public void resolve(SpellAbility sa) {
-        GameState game = Singletons.getModel().getGame();
+        final Player activator = sa.getActivatingPlayer();
+        final GameState game = activator.getGame();
         List<Player> players = game.getPlayers();
         Map<Player, List<Card>> playerLibraries = new HashMap<Player, List<Card>>();
 

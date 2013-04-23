@@ -34,6 +34,6 @@ public enum CCombat implements ICDoc {
      */
     @Override
     public void update() {
-        VCombat.SINGLETON_INSTANCE.updateCombat("");
+        VCombat.SINGLETON_INSTANCE.updateCombat(0, "");
     }
 }

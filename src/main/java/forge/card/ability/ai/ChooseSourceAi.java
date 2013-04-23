@@ -7,13 +7,13 @@ import com.google.common.base.Predicate;
 
 import forge.Card;
 import forge.CardLists;
-import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.ApiType;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.cost.Cost;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
+import forge.game.GameState;
 import forge.game.ai.ComputerUtilCombat;
 import forge.game.ai.ComputerUtilCost;
 import forge.game.phase.PhaseType;
@@ -65,9 +65,10 @@ public class ChooseSourceAi extends SpellAbilityAi {
             }
         }
         if (sa.hasParam("AILogic")) {
+            final GameState game = ai.getGame();
             if (sa.getParam("AILogic").equals("NeedsPrevention")) {
-                if (!Singletons.getModel().getGame().getStack().isEmpty()) {
-                    final SpellAbility topStack = Singletons.getModel().getGame().getStack().peekAbility();
+                if (!game.getStack().isEmpty()) {
+                    final SpellAbility topStack = game.getStack().peekAbility();
                     if (sa.hasParam("Choices") && !topStack.getSourceCard().isValid(sa.getParam("Choices"), ai, source)) {
                         return false;
                     }
@@ -98,21 +99,21 @@ public class ChooseSourceAi extends SpellAbilityAi {
                     }
                     return true;
                 }
-                if (!Singletons.getModel().getGame().getPhaseHandler().getPhase()
+                if (!game.getPhaseHandler().getPhase()
                         .equals(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
                     return false;
                 }
-                List<Card> choices = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
+                List<Card> choices = game.getCardsIn(ZoneType.Battlefield);
                 if (sa.hasParam("Choices")) {
                     choices = CardLists.getValidCards(choices, sa.getParam("Choices"), host.getController(), host);
                 }
                 choices = CardLists.filter(choices, new Predicate<Card>() {
                     @Override
                     public boolean apply(final Card c) {
-                        if (!c.isAttacking(ai) || !Singletons.getModel().getGame().getCombat().isUnblocked(c)) {
+                        if (!c.isAttacking(ai) || !game.getCombat().isUnblocked(c)) {
                             return false;
                         }
-                        return ComputerUtilCombat.damageIfUnblocked(c, ai, Singletons.getModel().getGame().getCombat()) > 0;
+                        return ComputerUtilCombat.damageIfUnblocked(c, ai, game.getCombat()) > 0;
                     }
                 });
                 if (choices.isEmpty()) {

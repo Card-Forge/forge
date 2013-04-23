@@ -24,6 +24,7 @@ import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 
+import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
@@ -36,7 +37,6 @@ import forge.Command;
 import forge.Constant;
 import forge.CounterType;
 import forge.FThreads;
-import forge.Singletons;
 import forge.card.ability.AbilityFactory;
 import forge.card.ability.AbilityFactory.AbilityRecordType;
 import forge.card.ability.AbilityUtils;
@@ -106,7 +106,7 @@ public final class GameActionUtil {
 
         @Override
         public void resolve() {
-            final GameState game = Singletons.getModel().getGame(); 
+            final GameState game = affected.getGame(); 
             if ( canRegenerate )
                 game.getAction().destroy(affected, this);
             else
@@ -133,7 +133,7 @@ public final class GameActionUtil {
 
         @Override
         public void resolve() {
-            final GameState game = Singletons.getModel().getGame(); 
+            final GameState game =controller.getGame(); 
             final List<Card> topOfLibrary = controller.getCardsIn(ZoneType.Library);
             final List<Card> revealed = new ArrayList<Card>();
 
@@ -192,7 +192,7 @@ public final class GameActionUtil {
         @Override
         public void run() {
             if (!c.isCopiedSpell()) {
-                final List<Card> maelstromNexii = CardLists.filter(Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Maelstrom Nexus"));
+                final List<Card> maelstromNexii = CardLists.filter(controller.getGame().getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Maelstrom Nexus"));
 
                 for (final Card nexus : maelstromNexii) {
                     if (CardUtil.getThisTurnCast("Card.YouCtrl", nexus).size() == 1) {
@@ -292,7 +292,7 @@ public final class GameActionUtil {
             }
             CardLists.shuffle(revealed);
             for (final Card bottom : revealed) {
-                Singletons.getModel().getGame().getAction().moveToBottomOfLibrary(bottom);
+                controller.getGame().getAction().moveToBottomOfLibrary(bottom);
             }
         }
     
@@ -345,7 +345,7 @@ public final class GameActionUtil {
                 ability.setDescription(sb.toString());
                 ability.setActivatingPlayer(controller);
 
-                Singletons.getModel().getGame().getStack().addSimultaneousStackEntry(ability);
+                controller.getGame().getStack().addSimultaneousStackEntry(ability);
 
             }
         }
@@ -366,7 +366,7 @@ public final class GameActionUtil {
     public static void executePlayCardEffects(final SpellAbility sa) {
         // (called in MagicStack.java)
 
-        final GameState game = Singletons.getModel().getGame(); 
+        final GameState game = sa.getActivatingPlayer().getGame(); 
         final Command cascade = new CascadeExecutor(sa.getActivatingPlayer(), sa.getSourceCard(), game);
         cascade.run();
         final Command ripple = new RippleExecutor(sa.getActivatingPlayer(), sa.getSourceCard());
@@ -636,6 +636,7 @@ public final class GameActionUtil {
         if (damage <= 0) {
             return;
         }
+        final GameState game = source.getGame();
 
         if (affected.hasStartOfKeyword("When CARDNAME is dealt damage, destroy it.")) {
             final Ability ability = new AbilityDestroy(source, affected, true);
@@ -648,17 +649,17 @@ public final class GameActionUtil {
             final int amount = affected.getAmountOfKeyword("When CARDNAME is dealt damage, destroy it. It can't be regenerated.");
 
             for (int i = 0; i < amount; i++) {
-                Singletons.getModel().getGame().getStack().addSimultaneousStackEntry(ability2);
+                game.getStack().addSimultaneousStackEntry(ability2);
             }
             final int amount2 = affected.getAmountOfKeyword("When CARDNAME is dealt damage, destroy it.");
 
             for (int i = 0; i < amount2; i++) {
-                Singletons.getModel().getGame().getStack().addSimultaneousStackEntry(ability);
+                game.getStack().addSimultaneousStackEntry(ability);
             }
         }
 
         // Play the Damage sound
-        Singletons.getModel().getGame().getEvents().post(new CardDamagedEvent());
+        game.getEvents().post(new CardDamagedEvent());
     }
 
     // this is for cards like Sengir Vampire
@@ -701,7 +702,7 @@ public final class GameActionUtil {
             }
             ability2.setStackDescription(sb.toString());
 
-            Singletons.getModel().getGame().getStack().addSimultaneousStackEntry(ability2);
+            c.getGame().getStack().addSimultaneousStackEntry(ability2);
 
         }
     }
@@ -727,7 +728,7 @@ public final class GameActionUtil {
         c.getDamageHistory().registerDamage(player);
 
         // Play the Life Loss sound
-        Singletons.getModel().getGame().getEvents().post(new LifeLossEvent());
+        player.getGame().getEvents().post(new LifeLossEvent());
     }
 
     // restricted to combat damage, restricted to players
@@ -781,7 +782,7 @@ public final class GameActionUtil {
 
             for (String kw : c.getKeyword()) {
                 if (kw.startsWith("Poisonous")) {
-                    Singletons.getModel().getGame().getStack().addSimultaneousStackEntry(ability);
+                    player.getGame().getStack().addSimultaneousStackEntry(ability);
                 }
             }
         }
@@ -796,7 +797,7 @@ public final class GameActionUtil {
         c.getDamageHistory().registerCombatDamage(player);
 
         // Play the Life Loss sound
-        Singletons.getModel().getGame().getEvents().post(SoundEffectType.LifeLoss);
+        player.getGame().getEvents().post(SoundEffectType.LifeLoss);
     } // executeCombatDamageToPlayerEffects
 
     /**
@@ -821,7 +822,7 @@ public final class GameActionUtil {
                 doubleLife.setStackDescription(aura.getName() + " - " + enchanted.getController()
                         + " doubles his or her life total.");
 
-                Singletons.getModel().getGame().getStack().addSimultaneousStackEntry(doubleLife);
+                enchanted.getGame().getStack().addSimultaneousStackEntry(doubleLife);
 
             }
         }
@@ -838,6 +839,7 @@ public final class GameActionUtil {
     private static void playerCombatDamageScalpelexis(final Card c) {
         final Player player = c.getController();
         final Player opponent = player.getOpponent();
+        final GameState game = player.getGame();
 
         if (c.getNetAttack() > 0) {
             final Ability ability = new Ability(c, ManaCost.ZERO) {
@@ -891,7 +893,7 @@ public final class GameActionUtil {
 
                     for (int j = 0; j < max; j++) {
                         final Card c = libList.get(j);
-                        Singletons.getModel().getGame().getAction().exile(c);
+                        game.getAction().exile(c);
                     }
                 }
             }; // ability
@@ -903,19 +905,17 @@ public final class GameActionUtil {
             ability.setStackDescription(sb.toString());
             ability.setDescription(sb.toString());
 
-            Singletons.getModel().getGame().getStack().addSimultaneousStackEntry(ability);
+            game.getStack().addSimultaneousStackEntry(ability);
 
         }
     }
 
     /** stores the Command. */
-    private static Command umbraStalker = new Command() {
-        private static final long serialVersionUID = -3500747003228938898L;
-
+    private static Function<GameState, ?> umbraStalker = new Function<GameState, Object>() {
         @Override
-        public void run() {
+        public Object apply(GameState game) {
             // get all creatures
-            final List<Card> cards = CardLists.filter(Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Umbra Stalker"));
+            final List<Card> cards = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Umbra Stalker"));
             for (final Card c : cards) {
                 final Player player = c.getController();
                 final List<Card> grave = player.getCardsIn(ZoneType.Graveyard);
@@ -923,16 +923,16 @@ public final class GameActionUtil {
                 c.setBaseAttack(pt);
                 c.setBaseDefense(pt);
             }
+            return null;
         } // execute()
     };
 
     /** Constant <code>oldManOfTheSea</code>. */
-    private static Command oldManOfTheSea = new Command() {
-        private static final long serialVersionUID = 8076177362922156784L;
+    private static Function<GameState, ?> oldManOfTheSea = new Function<GameState, Object>() {
 
         @Override
-        public void run() {
-            final List<Card> list = CardLists.filter(Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Old Man of the Sea"));
+        public Object apply(GameState game) {
+            final List<Card> list = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Old Man of the Sea"));
             for (final Card oldman : list) {
                 if (!oldman.getGainControlTargets().isEmpty()) {
                     if (oldman.getNetAttack() < oldman.getGainControlTargets().get(0).getNetAttack()) {
@@ -943,17 +943,16 @@ public final class GameActionUtil {
                     }
                 }
             }
+            return null;
         }
     }; // Old Man of the Sea
 
     /** Constant <code>liuBei</code>. */
-    private static Command liuBei = new Command() {
-
-        private static final long serialVersionUID = 4235093010715735727L;
+    private static Function<GameState, ?> liuBei = new Function<GameState, Object>() {
 
         @Override
-        public void run() {
-            final List<Card> list = CardLists.filter(Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Liu Bei, Lord of Shu"));
+        public Object apply(GameState game) {
+            final List<Card> list = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Liu Bei, Lord of Shu"));
 
             if (list.size() > 0) {
                 for (int i = 0; i < list.size(); i++) {
@@ -969,6 +968,7 @@ public final class GameActionUtil {
 
                 }
             }
+            return null;
         } // execute()
 
         private boolean getsBonus(final Card c) {
@@ -984,24 +984,22 @@ public final class GameActionUtil {
     }; // Liu_Bei
 
     /** Constant <code>Tarmogoyf</code>. */
-    private static Command tarmogoyf = new Command() {
-        private static final long serialVersionUID = 5895665460018262987L;
-
+    private static Function<GameState, ?> tarmogoyf = new Function<GameState, Object>() {
         @Override
-        public void run() {
+        public Object apply(GameState game) {
             // get all creatures
-            final List<Card> list = CardLists.filter(Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Tarmogoyf"));
+            final List<Card> list = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Tarmogoyf"));
 
             for (int i = 0; i < list.size(); i++) {
                 final Card c = list.get(i);
-                c.setBaseAttack(this.countDiffTypes());
+                c.setBaseAttack(this.countDiffTypes(game));
                 c.setBaseDefense(c.getBaseAttack() + 1);
             }
-
+            return null;
         } // execute()
 
-        private int countDiffTypes() {
-            final List<Card> list = Singletons.getModel().getGame().getCardsIn(ZoneType.Graveyard);
+        private int countDiffTypes(GameState game) {
+            final List<Card> list = game.getCardsIn(ZoneType.Graveyard);
 
             int count = 0;
             for (Card c : list) {
@@ -1061,7 +1059,7 @@ public final class GameActionUtil {
     };
 
     /** Constant <code>commands</code>. */
-    private final static HashMap<String, Command> commands = new HashMap<String, Command>();
+    private final static HashMap<String, Function<GameState, ?>> commands = new HashMap<String, Function<GameState, ?>>();
 
     static {
         // Please add cards in alphabetical order so they are easier to find
@@ -1079,16 +1077,17 @@ public final class GameActionUtil {
      * 
      * @return the commands
      */
-    public static HashMap<String, Command> getCommands() {
+    public static Map<String, Function<GameState, ?>> getCommands() {
         return GameActionUtil.commands;
     }
 
     /**
      * Gets the st land mana abilities.
+     * @param game 
      * 
      * @return the stLandManaAbilities
      */
-    public static void grantBasicLandsManaAbilities() {
+    public static void grantBasicLandsManaAbilities(GameState game) {
         final HashMap<String, String> produces = new HashMap<String, String>();
         /*
          * for future use boolean naked =
@@ -1108,7 +1107,7 @@ public final class GameActionUtil {
         produces.put("Plains", "W");
         produces.put("Swamp", "B");
 
-        List<Card> lands = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
+        List<Card> lands = game.getCardsIn(ZoneType.Battlefield);
         lands = CardLists.filter(lands, Presets.LANDS);
 
         // remove all abilities granted by this Command

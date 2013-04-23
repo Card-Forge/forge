@@ -18,6 +18,7 @@ import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerHandler;
+import forge.game.GameState;
 import forge.gui.GuiDialog;
 import forge.properties.ForgePreferences.FPref;
 
@@ -199,11 +200,12 @@ public class CloneEffect extends SpellAbilityEffect {
                 }
             };
 
+            final GameState game = sa.getActivatingPlayer().getGame();
             String duration = sa.getParam("Duration");
             if (duration.equals("UntilEndOfTurn")) {
-                Singletons.getModel().getGame().getEndOfTurn().addUntil(unclone);
+                game.getEndOfTurn().addUntil(unclone);
             } else if (duration.equals("UntilYourNextTurn")) {
-                Singletons.getModel().getGame().getCleanup().addUntil(host.getController(), unclone);
+                game.getCleanup().addUntil(host.getController(), unclone);
             }
         }
 

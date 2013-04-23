@@ -1,7 +1,6 @@
 package forge.card.ability;
 
 
-import forge.Singletons;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.game.ai.ComputerUtilCost;
@@ -81,7 +80,7 @@ public abstract class SpellAbilityAi {
             return false;
         }
     
-        if (sa.getRestrictions().getPlaneswalker() && Singletons.getModel().getGame().getPhaseHandler().is(PhaseType.MAIN2)) {
+        if (sa.getRestrictions().getPlaneswalker() && ai.getGame().getPhaseHandler().is(PhaseType.MAIN2)) {
             return true;
         }
         if (sa.isTrigger()) {
@@ -91,7 +90,7 @@ public abstract class SpellAbilityAi {
             return false;
         }
         
-        PhaseHandler phase = Singletons.getModel().getGame().getPhaseHandler();
+        PhaseHandler phase = ai.getGame().getPhaseHandler();
         return phase.is(PhaseType.END_OF_TURN) && phase.getNextTurn().equals(ai);
     }
 

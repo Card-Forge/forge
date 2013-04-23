@@ -35,7 +35,6 @@ import forge.CardPredicates;
 import forge.CardPredicates.Presets;
 import forge.Constant;
 import forge.GameEntity;
-import forge.Singletons;
 import forge.card.ability.ApiType;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.CostDiscard;
@@ -281,7 +280,7 @@ public class AiController {
             public boolean apply(final Card c) {
                 if (c.getSVar("NeedsToPlay").length() > 0) {
                     final String needsToPlay = c.getSVar("NeedsToPlay");
-                    List<Card> list = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
+                    List<Card> list = game.getCardsIn(ZoneType.Battlefield);
     
                     list = CardLists.getValidCards(list, needsToPlay.split(","), c.getController(), c);
                     if (list.isEmpty()) {

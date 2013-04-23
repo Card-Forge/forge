@@ -40,6 +40,7 @@ import forge.gui.match.nonsingleton.CField;
 import forge.gui.match.nonsingleton.VCommand;
 import forge.gui.match.nonsingleton.VField;
 import forge.gui.match.nonsingleton.VHand;
+import forge.gui.match.views.VPlayers;
 import forge.gui.toolbox.FSkin;
 import forge.item.InventoryItem;
 import forge.properties.ForgePreferences.FPref;
@@ -130,6 +131,8 @@ public enum CMatchUI {
         VMatchUI.SINGLETON_INSTANCE.setCommandViews(commands);
         VMatchUI.SINGLETON_INSTANCE.setFieldViews(fields);
         VMatchUI.SINGLETON_INSTANCE.setHandViews(hands);
+        
+        VPlayers.SINGLETON_INSTANCE.init(players);
     }
 
     /**

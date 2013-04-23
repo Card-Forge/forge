@@ -289,4 +289,12 @@ public enum CounterType {
         final String replacedName = name.replace("/", "").replaceAll("\\+", "p").replaceAll("\\-", "m").toUpperCase();
         return Enum.valueOf(CounterType.class, replacedName);
     }
+    
+    // although this should be in AI's code 
+    public boolean isNegativeCounter() {
+        CounterType c = this;
+        return (c == CounterType.AGE) || (c == CounterType.BLAZE) || (c == CounterType.BRIBERY) || (c == CounterType.DOOM)
+                || (c == CounterType.ICE) || (c == CounterType.M1M1) || (c == CounterType.M0M2) || (c == CounterType.M0M1)
+                || (c == CounterType.TIME);
+    }
 }

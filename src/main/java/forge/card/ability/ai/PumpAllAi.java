@@ -8,10 +8,10 @@ import com.google.common.base.Predicate;
 
 import forge.Card;
 import forge.CardLists;
-import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
+import forge.game.GameState;
 import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilCard;
 import forge.game.ai.ComputerUtilCombat;
@@ -30,12 +30,13 @@ public class PumpAllAi extends PumpAiBase {
     protected boolean canPlayAI(final AIPlayer ai, final SpellAbility sa) {
         String valid = "";
         final Card source = sa.getSourceCard();
+        final GameState game = ai.getGame();
 
         final int power = AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("NumAtt"), sa);
         final int defense = AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("NumDef"), sa);
         final List<String> keywords = sa.hasParam("KW") ? Arrays.asList(sa.getParam("KW").split(" & ")) : new ArrayList<String>();
 
-        final PhaseType phase = Singletons.getModel().getGame().getPhaseHandler().getPhase();
+        final PhaseType phase = game.getPhaseHandler().getPhase();
 
         if (ComputerUtil.preventRunAwayActivations(sa)) {
             return false;
@@ -80,8 +81,8 @@ public class PumpAllAi extends PumpAiBase {
             else if (power < 0) { // -X/-0
                 if (phase.isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)
                         || phase.isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY)
-                        || Singletons.getModel().getGame().getPhaseHandler().isPlayerTurn(sa.getActivatingPlayer())
-                        || Singletons.getModel().getGame().getPhaseHandler().isPreventCombatDamageThisTurn()) {
+                        || game.getPhaseHandler().isPlayerTurn(sa.getActivatingPlayer())
+                        || game.getPhaseHandler().isPreventCombatDamageThisTurn()) {
                     return false;
                 }
                 int totalPower = 0;
@@ -91,8 +92,8 @@ public class PumpAllAi extends PumpAiBase {
                     }
                     totalPower += Math.min(c.getNetAttack(), power * -1);
                     if (phase == PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY
-                            && Singletons.getModel().getGame().getCombat().getUnblockedAttackers().contains(c)) {
-                        if (ComputerUtilCombat.lifeInDanger(sa.getActivatingPlayer(), Singletons.getModel().getGame().getCombat())) {
+                            && game.getCombat().getUnblockedAttackers().contains(c)) {
+                        if (ComputerUtilCombat.lifeInDanger(sa.getActivatingPlayer(), game.getCombat())) {
                             return true;
                         }
                         totalPower += Math.min(c.getNetAttack(), power * -1);

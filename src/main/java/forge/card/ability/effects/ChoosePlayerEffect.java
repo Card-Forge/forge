@@ -3,7 +3,6 @@ package forge.card.ability.effects;
 import java.util.List;
 
 import forge.Card;
-import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
@@ -34,7 +33,7 @@ public class ChoosePlayerEffect extends SpellAbilityEffect {
         final Target tgt = sa.getTarget();
 
         final List<Player> choices = sa.hasParam("Choices") ? AbilityUtils.getDefinedPlayers(
-                sa.getSourceCard(), sa.getParam("Choices"), sa) : Singletons.getModel().getGame().getPlayers();
+                sa.getSourceCard(), sa.getParam("Choices"), sa) : sa.getActivatingPlayer().getGame().getPlayers();
 
         final String choiceDesc = sa.hasParam("ChoiceTitle") ? sa.getParam("ChoiceTitle") : "Choose a player";
 

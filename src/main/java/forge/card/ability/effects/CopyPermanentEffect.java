@@ -15,7 +15,6 @@ import forge.Card;
 import forge.CardCharacteristicName;
 import forge.CardLists;
 import forge.Command;
-import forge.Singletons;
 import forge.card.CardRulesPredicates;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
@@ -25,6 +24,7 @@ import forge.card.mana.ManaCost;
 import forge.card.spellability.Ability;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
+import forge.game.GameState;
 import forge.game.ai.ComputerUtilCard;
 import forge.game.player.HumanPlayer;
 import forge.game.player.Player;
@@ -56,6 +56,7 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
     @Override
     public void resolve(final SpellAbility sa) {
         final Card hostCard = sa.getSourceCard();
+        final GameState game = hostCard.getGame();
         final ArrayList<String> keywords = new ArrayList<String>();
         if (sa.hasParam("Keywords")) {
             keywords.addAll(Arrays.asList(sa.getParam("Keywords").split(" & ")));
@@ -224,7 +225,7 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
                             continue;
                         }
                     }
-                    copy = Singletons.getModel().getGame().getAction().moveToPlay(copy);
+                    copy = game.getAction().moveToPlay(copy);
 
                     copy.setCloneOrigin(hostCard);
                     sa.getSourceCard().addClone(copy);
@@ -255,9 +256,9 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
                                 if (sa.getParam("AtEOT").equals("Sacrifice")) {
                                     // maybe do a setSacrificeAtEOT, but
                                     // probably not.
-                                    Singletons.getModel().getGame().getAction().sacrifice(target[index], sa);
+                                    game.getAction().sacrifice(target[index], sa);
                                 } else if (sa.getParam("AtEOT").equals("Exile")) {
-                                    Singletons.getModel().getGame().getAction().exile(target[index]);
+                                    game.getAction().exile(target[index]);
                                 }
 
                             }
@@ -270,11 +271,11 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
                         @Override
                         public void run() {
                             sac.setStackDescription(sa.getParam("AtEOT") + " " + target[index] + ".");
-                            Singletons.getModel().getGame().getStack().addSimultaneousStackEntry(sac);
+                            game.getStack().addSimultaneousStackEntry(sac);
                         }
                     }; // Command
                     if (sa.hasParam("AtEOT")) {
-                        Singletons.getModel().getGame().getEndOfTurn().addAt(atEOT);
+                        game.getEndOfTurn().addAt(atEOT);
                     }
                     // end copied Kiki code
 

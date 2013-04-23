@@ -6,7 +6,6 @@ import java.util.Random;
 import forge.Card;
 import forge.CardLists;
 import forge.CardPredicates.Presets;
-import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.cost.Cost;
@@ -187,12 +186,11 @@ public class UntapAi extends SpellAbilityAi {
      *            a boolean.
      * @return a boolean.
      */
-    private boolean untapUnpreferredTargeting(final SpellAbility sa,
-            final boolean mandatory) {
+    private boolean untapUnpreferredTargeting(final SpellAbility sa, final boolean mandatory) {
         final Card source = sa.getSourceCard();
         final Target tgt = sa.getTarget();
 
-        List<Card> list = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
+        List<Card> list = sa.getActivatingPlayer().getGame().getCardsIn(ZoneType.Battlefield);
 
         list = CardLists.getValidCards(list, tgt.getValidTgts(), source.getController(), source);
         list = CardLists.getTargetableCards(list, sa);

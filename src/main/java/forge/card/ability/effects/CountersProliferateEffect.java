@@ -10,9 +10,7 @@ import forge.CardLists;
 import forge.CounterType;
 import forge.FThreads;
 import forge.GameEntity;
-import forge.Singletons;
 import forge.card.ability.SpellAbilityEffect;
-import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
 import forge.control.input.InputProliferate;
 import forge.game.player.Player;
@@ -58,10 +56,10 @@ public class CountersProliferateEffect extends SpellAbilityEffect {
             @Override
             public boolean apply(Card crd) {
                 for (final Entry<CounterType, Integer> c1 : crd.getCounters().entrySet()) {
-                    if (CardFactoryUtil.isNegativeCounter(c1.getKey()) && enemies.contains(crd.getController())) {
+                    if (c1.getKey().isNegativeCounter() && enemies.contains(crd.getController())) {
                         return true;
                     }
-                    if (!CardFactoryUtil.isNegativeCounter(c1.getKey()) && allies.contains(crd.getController())) {
+                    if (!c1.getKey().isNegativeCounter() && allies.contains(crd.getController())) {
                         return true;
                     }
                 }
@@ -69,7 +67,7 @@ public class CountersProliferateEffect extends SpellAbilityEffect {
             }
         };
 
-        List<Card> cardsToProliferate = CardLists.filter(Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield), predProliferate);
+        List<Card> cardsToProliferate = CardLists.filter(ai.getGame().getCardsIn(ZoneType.Battlefield), predProliferate);
         List<Player> playersToPoison = new ArrayList<Player>();
         for (Player e : enemies) {
             if (e.getPoisonCounters() > 0) {
@@ -104,12 +102,12 @@ public class CountersProliferateEffect extends SpellAbilityEffect {
         // computer
         for (final Card c : cardsToProliferate) {
             for (final Entry<CounterType, Integer> c1 : c.getCounters().entrySet()) {
-                if (CardFactoryUtil.isNegativeCounter(c1.getKey()) && enemies.contains(c.getController()))
+                if (c1.getKey().isNegativeCounter() && enemies.contains(c.getController()))
                 {
                     c.addCounter(c1.getKey(), 1, true);
                     break;
                 }
-                if (!CardFactoryUtil.isNegativeCounter(c1.getKey()) && allies.contains(c.getController()))
+                if (!c1.getKey().isNegativeCounter() && allies.contains(c.getController()))
                 {
                     c.addCounter(c1.getKey(), 1, true);
                     break;

@@ -23,9 +23,9 @@ import java.util.Map;
 
 import forge.Card;
 import forge.CardLists;
-import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.cardfactory.CardFactoryUtil;
+import forge.game.GameState;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
@@ -184,6 +184,7 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
             System.out.println(sa.getSourceCard().getName()
                     + " Did not have activator set in SpellAbility_Condition.checkConditions()");
         }
+        final GameState game = activator.getGame();
 
         if (this.isHellbent() && !activator.hasHellbent()) return false;
         if (this.isThreshold() && !activator.hasThreshold()) return false;
@@ -220,7 +221,7 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
 
         if (this.getPhases().size() > 0) {
             boolean isPhase = false;
-            final PhaseType currPhase = Singletons.getModel().getGame().getPhaseHandler().getPhase();
+            final PhaseType currPhase = game.getPhaseHandler().getPhase();
             for (final PhaseType s : this.getPhases()) {
                 if (s == currPhase) {
                     isPhase = true;
@@ -270,7 +271,7 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
             if (this.getPresentDefined() != null) {
                 list.addAll(AbilityUtils.getDefinedCards(sa.getSourceCard(), this.getPresentDefined(), sa));
             } else {
-                list = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
+                list = game.getCardsIn(ZoneType.Battlefield);
             }
 
             list = CardLists.getValidCards(list, this.getIsPresent().split(","), sa.getActivatingPlayer(), sa.getSourceCard());

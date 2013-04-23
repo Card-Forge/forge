@@ -30,7 +30,6 @@ import forge.Card;
 import forge.CardLists;
 import forge.CardPredicates;
 import forge.GameEntity;
-import forge.Singletons;
 import forge.card.trigger.TriggerType;
 import forge.game.event.BlockerAssignedEvent;
 import forge.game.player.Player;
@@ -78,7 +77,7 @@ public class Combat {
      * reset.
      * </p>
      */
-    public final void reset() {
+    public final void reset(Player playerTurn) {
         this.resetAttackers();
         this.blocked.clear();
 
@@ -87,7 +86,7 @@ public class Combat {
 
         this.attackingPlayer = null;
 
-        this.initiatePossibleDefenders(Singletons.getModel().getGame().getPhaseHandler().getPlayerTurn().getOpponents());
+        this.initiatePossibleDefenders(playerTurn.getOpponents());
     }
 
     /**
@@ -188,11 +187,7 @@ public class Combat {
      * @return a {@link forge.game.player.Player} object.
      */
     public final Player getAttackingPlayer() {
-        if (this.attackingPlayer != null) {
-            return this.attackingPlayer;
-        } else {
-            return Singletons.getModel().getGame().getPhaseHandler().getPlayerTurn();
-        }
+        return this.attackingPlayer;
     }
 
 
@@ -390,7 +385,7 @@ public class Combat {
         else {
             this.blockerMap.get(blocker).add(attacker);
         }
-        Singletons.getModel().getGame().getEvents().post(new BlockerAssignedEvent());
+        attacker.getGame().getEvents().post(new BlockerAssignedEvent());
     }
 
     public final void removeBlockAssignment(final Card attacker, final Card blocker) {
@@ -565,7 +560,7 @@ public class Combat {
         } else if (this.blockerMap.containsKey(c)) { // card is a blocker
             List<Card> attackers = this.blockerMap.get(c);
 
-            boolean stillDeclaring = Singletons.getModel().getGame().getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS);
+            boolean stillDeclaring = c.getGame().getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS);
             this.blockerMap.remove(c);
             for (Card a : attackers) {
                 this.attackerMap.get(a).remove(c);
@@ -612,7 +607,7 @@ public class Combat {
                 final HashMap<String, Object> runParams = new HashMap<String, Object>();
                 runParams.put("Attacker", attacker);
                 runParams.put("Defender",this.getDefenderByAttacker(attacker));
-                Singletons.getModel().getGame().getTriggerHandler().runTrigger(TriggerType.AttackerUnblocked, runParams, false);
+                attacker.getGame().getTriggerHandler().runTrigger(TriggerType.AttackerUnblocked, runParams, false);
 
             }
         }

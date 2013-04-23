@@ -9,7 +9,6 @@ import com.google.common.base.Predicate;
 import forge.Card;
 import forge.CardLists;
 import forge.CounterType;
-import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.cost.Cost;
@@ -172,7 +171,7 @@ public class DestroyAi extends SpellAbilityAi {
         final Player opp = ai.getOpponent();
         if (tgt != null) {
             List<Card> list;
-            list = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
+            list = ai.getGame().getCardsIn(ZoneType.Battlefield);
             list = CardLists.getTargetableCards(list, sa);
             list = CardLists.getValidCards(list, tgt.getValidTgts(), source.getController(), source);
 

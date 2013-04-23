@@ -8,7 +8,6 @@ import com.google.common.base.Predicate;
 import forge.Card;
 import forge.CardLists;
 import forge.Constant;
-import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.cost.Cost;
@@ -68,7 +67,7 @@ public class ProtectAi extends SpellAbilityAi {
      */
     private static List<Card> getProtectCreatures(final Player ai, final SpellAbility sa) {
         final ArrayList<String> gains = AbilityUtils.getProtectionList(sa);
-        final GameState game = Singletons.getModel().getGame();
+        final GameState game = ai.getGame();
         
         List<Card> list = ai.getCreaturesInPlay();
         list = CardLists.filter(list, new Predicate<Card>() {
@@ -113,6 +112,7 @@ public class ProtectAi extends SpellAbilityAi {
     @Override
     protected boolean canPlayAI(AIPlayer ai, SpellAbility sa) {
         final Card hostCard = sa.getSourceCard();
+        final GameState game = ai.getGame();
         // if there is no target and host card isn't in play, don't activate
         if ((sa.getTarget() == null) && !hostCard.isInPlay()) {
             return false;
@@ -138,13 +138,13 @@ public class ProtectAi extends SpellAbilityAi {
         }
 
         // Phase Restrictions
-        if ((Singletons.getModel().getGame().getStack().size() == 0) && Singletons.getModel().getGame().getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_FIRST_STRIKE_DAMAGE)) {
+        if ((game.getStack().size() == 0) && game.getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_FIRST_STRIKE_DAMAGE)) {
             // Instant-speed protections should not be cast outside of combat
             // when the stack is empty
             if (!SpellAbilityAi.isSorcerySpeed(sa)) {
                 return false;
             }
-        } else if (Singletons.getModel().getGame().getStack().size() > 0) {
+        } else if (game.getStack().size() > 0) {
             // TODO protection something only if the top thing on the stack will
             // kill it via damage or destroy
             return false;
@@ -172,7 +172,8 @@ public class ProtectAi extends SpellAbilityAi {
     } // protectPlayAI()
 
     private boolean protectTgtAI(final Player ai, final SpellAbility sa, final boolean mandatory) {
-        if (!mandatory && Singletons.getModel().getGame().getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
+        final GameState game = ai.getGame();
+        if (!mandatory && game.getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
             return false;
         }
 
@@ -195,16 +196,16 @@ public class ProtectAi extends SpellAbilityAi {
          * Or, add protection (to make it unblockable) when Compy is attacking.
          */
 
-        if (Singletons.getModel().getGame().getStack().isEmpty()) {
+        if (game.getStack().isEmpty()) {
             // If the cost is tapping, don't activate before declare
             // attack/block
             if ((sa.getPayCosts() != null) && sa.getPayCosts().hasTapCost()) {
-                if (Singletons.getModel().getGame().getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)
-                        && Singletons.getModel().getGame().getPhaseHandler().isPlayerTurn(ai)) {
+                if (game.getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)
+                        && game.getPhaseHandler().isPlayerTurn(ai)) {
                     list.remove(sa.getSourceCard());
                 }
-                if (Singletons.getModel().getGame().getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS)
-                        && Singletons.getModel().getGame().getPhaseHandler().isPlayerTurn(ai)) {
+                if (game.getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS)
+                        && game.getPhaseHandler().isPlayerTurn(ai)) {
                     list.remove(sa.getSourceCard());
                 }
             }
@@ -250,9 +251,9 @@ public class ProtectAi extends SpellAbilityAi {
     } // protectTgtAI()
 
     private static boolean protectMandatoryTarget(final Player ai, final SpellAbility sa, final boolean mandatory) {
+        final GameState game = ai.getGame();
 
-
-        List<Card> list = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
+        List<Card> list = game.getCardsIn(ZoneType.Battlefield);
         final Target tgt = sa.getTarget();
         list = CardLists.getValidCards(list, tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getSourceCard());
 

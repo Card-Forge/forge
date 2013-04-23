@@ -3,7 +3,6 @@ package forge.card.ability.effects;
 import java.util.HashMap;
 import java.util.Map;
 
-import forge.Singletons;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
 import forge.card.trigger.Trigger;
@@ -40,6 +39,6 @@ public class DelayedTriggerEffect extends SpellAbilityEffect {
 
         final Trigger delTrig = TriggerHandler.parseTrigger(mapParams, sa.getSourceCard(), true);
 
-        Singletons.getModel().getGame().getTriggerHandler().registerDelayedTrigger(delTrig);
+        sa.getActivatingPlayer().getGame().getTriggerHandler().registerDelayedTrigger(delTrig);
     }
 }
