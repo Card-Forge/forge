@@ -56,6 +56,8 @@ Wishes can now only retrieve cards you own which prevents retrieving an opponent
 
 Flicker effects were using the wrong Defined$ param.
 
+Spells that Change Target (like Swerve) are now able to redirect a Counterspell onto itself and this is now considered fixed.
+
 
 - Targeting arrows -
 Some people have noticed slowdowns when Targeting arrows are enabled. The battlefield Dock tab includes a targeting icon. You can set the targeting arrows to Off or to Card mouseover to speed up the game.
@@ -220,8 +222,6 @@ Pontiff of Blight
 ------------
 Known Issues
 ------------
-
-Spells that Change Target (like Swerve) are currently unable to redirect a Counterspell onto itself do to other unforeseen issues with the current infrastructure.
 
 A small number of cards including Wall of Corpses, Abu Ja'far and others with a similar ability are not functional. The common issue here is actually that they check the blocker/attacker after being removed from the battlefield. Probably need to use LKI. Regular destroy/destroy all effects work just fine. The problem cards are caring about battlefield specific properties, that no longer apply when the base card is no longer on the battlefield.
 
