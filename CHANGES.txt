@@ -71,6 +71,10 @@ The quest challenge start in play cards are not appearing on the battlefield.
 Some initial code has been added that will at some point in the future allow human vs human play over the internet. This is a work in progress and is far from being implemented at this time. Please be patient. Anyone who is curious can read the messages in the http://www.slightlymagic.net/forum/viewtopic.php?f=52&t=9837 topic.
 
 
+- Dragon's Maze -
+We have created a branch for Dragon's Maze spoilers. These new cards are not included in the Forge distributions at this time. Please be patient as these DGM cards will become available in the near future. We plan to add these new Dragon's Maze cards to the 1.3.14 beta which should be released in a week or two.
+
+
 ---------
 New Cards
 ---------
