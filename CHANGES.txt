@@ -88,6 +88,8 @@ Stromgald Spy
 Saproling Infestation
 Dismantle
 Needlebite Trap
+Spitting Slug
+Taunt
 
 
 --------------------
@@ -217,6 +219,31 @@ Bronzebeak Moa
 Blaze Commando
 Carnage Gladiator
 Pontiff of Blight
+Battering Krasis
+Kraul Warrior
+Mending Touch
+Mutant's Prey
+Phytoburst
+Skylasher
+Thrashing Mossdog
+Mindstatic
+Murmuring Phantasm
+Runner's Bane
+Give // Take
+Profit // Loss
+Protect // Serve
+Ready // Willing
+Savageborn Hydra
+Trostani's Summoner
+Unflinching Courage
+Warped Physique
+Boros Mastiff
+Haazda Snare Squad
+Lyev Decree
+Riot Control
+Scion of Vitu-Ghazi
+Steeple Roc
+Dragonshift
 
 
 ------------
