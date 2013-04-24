@@ -1,0 +1,8 @@
+Name:Taunt
+ManaCost:U
+Types:Sorcery
+A:SP$ MustAttack | Cost$ U | ValidTgts$ Player | TgtPrompt$ Select target player | Defender$ You | SpellDescription$ During target player's next turn, creatures that player controls attack you if able.
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/taunt.jpg
+Oracle:During target player's next turn, creatures that player controls attack you if able.
+SetInfo:POR Rare

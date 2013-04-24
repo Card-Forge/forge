@@ -28,7 +28,7 @@ public class MustAttackEffect extends SpellAbilityEffect {
         if (sa.getParam("Defender").equals("Self")) {
             defender = host.toString();
         } else {
-            // TODO - if more needs arise in the future
+            defender = host.getController().toString();
         }
 
         for (final Player player : tgtPlayers) {
