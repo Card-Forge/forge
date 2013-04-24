@@ -21,16 +21,20 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map.Entry;
 
+import org.apache.commons.lang3.tuple.Pair;
+
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 
 import forge.Singletons;
 import forge.card.BoosterGenerator;
 import forge.card.CardEdition;
 import forge.card.CardRarity;
 import forge.card.FormatCollection;
+import forge.card.SealedProductTemplate;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.item.BoosterPack;
@@ -521,8 +525,6 @@ public final class QuestUtilCards {
                     qc.getFormat().getFilterPrinted());
         }
 
-        final BoosterGenerator pack = new BoosterGenerator(cardList);
-
         int nLevel = this.qc.getAchievements().getLevel();
 
         // Preferences
@@ -537,8 +539,13 @@ public final class QuestUtilCards {
         final int winPacks = this.qc.getAchievements().getWin() / winsForPack;
         final int totalPacks = Math.min(levelPacks + winPacks, maxPacks);
 
+        @SuppressWarnings("unchecked")
+        SealedProductTemplate template = new SealedProductTemplate(Lists.newArrayList(
+            Pair.of("Commmon", common), Pair.of("uncommmon", uncommon), Pair.of("Rare", rare) 
+        ));
+        
         for (int i = 0; i < totalPacks; i++) {
-            this.qa.getShopList().addAllFlat(pack.getBoosterPack(common, uncommon, rare, 0, 0, 0, 0, 0, 0));
+            this.qa.getShopList().addAllFlat(BoosterGenerator.getBoosterPack(template, cardList));
         }
 
         this.generateBoostersInShop(totalPacks);
@@ -631,7 +638,7 @@ public final class QuestUtilCards {
     
     public int getCompletionPercent(String edition) {
         // get all cards in the specified edition
-        Predicate<CardPrinted> filter = IPaperCard.Predicates.printedInSets(edition);
+        Predicate<CardPrinted> filter = IPaperCard.Predicates.printedInSet(edition);
         Iterable<CardPrinted> editionCards = Iterables.filter(CardDb.instance().getAllCards(), filter);
 
         ItemPool<CardPrinted> ownedCards = qa.getCardPool();

@@ -78,7 +78,7 @@ public class GameFormat implements Comparable<GameFormat> {
     }
 
     private Predicate<CardPrinted> buildFilterPrinted() {
-        final Predicate<CardPrinted> banNames = IPaperCard.Predicates.namesExcept(this.bannedCardNames);
+        final Predicate<CardPrinted> banNames = Predicates.not(IPaperCard.Predicates.names(this.bannedCardNames));
         if (this.allowedSetCodes == null || this.allowedSetCodes.isEmpty()) {
             return banNames;
         }
@@ -86,7 +86,7 @@ public class GameFormat implements Comparable<GameFormat> {
     }
 
     private Predicate<CardPrinted> buildFilterRules() {
-        final Predicate<CardPrinted> banNames = IPaperCard.Predicates.namesExcept(this.bannedCardNames);
+        final Predicate<CardPrinted> banNames = Predicates.not(IPaperCard.Predicates.names(this.bannedCardNames));
         if (this.allowedSetCodes == null || this.allowedSetCodes.isEmpty()) {
             return banNames;
         }

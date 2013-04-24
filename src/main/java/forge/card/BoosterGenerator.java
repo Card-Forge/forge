@@ -18,20 +18,24 @@
 package forge.card;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.EnumMap;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 
-import com.google.common.base.Function;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.Pair;
+
+
 import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 
 import forge.item.CardDb;
 import forge.item.CardPrinted;
-import forge.item.ItemPoolView;
-import forge.util.MyRandom;
+import forge.item.IPaperCard;
+import forge.item.PrintSheet;
+import forge.util.TextUtil;
 
 /**
  * <p>
@@ -42,272 +46,147 @@ import forge.util.MyRandom;
  * @version $Id$
  */
 public class BoosterGenerator {
-    private static final int BOOSTERS_TO_FIND_MYTHIC = 8;
-
-    // Function to open a booster as it is.
-    /** The Constant IDENTITY_PICK. */
-    public static final Function<BoosterGenerator, List<CardPrinted>> IDENTITY_PICK = new Function<BoosterGenerator, List<CardPrinted>>() {
-        @Override
-        public List<CardPrinted> apply(final BoosterGenerator arg1) {
-            return arg1.getBoosterPack(10, 3, 1, 0, 0, 0, 0, 0, 1);
-        }
-    };
-
-    // These lists are to hold cards grouped by rarity in advance.
-
-    private final List<CardPrinted> allButLands = new ArrayList<CardPrinted>();
-
-    private final Map<CardRarity, List<CardPrinted>> cardsByRarity = new EnumMap<CardRarity, List<CardPrinted>>(CardRarity.class);
-    private final Map<CardRarity, List<CardPrinted>> twoFacedByRarity = new EnumMap<CardRarity, List<CardPrinted>>(CardRarity.class);
-    private final Map<CardRarity, List<CardPrinted>> singleFacedByRarity = new EnumMap<CardRarity, List<CardPrinted>>(CardRarity.class);
-
-    // private List<CardPrinted> commonCreatures;
-    // private List<CardPrinted> commonNonCreatures;
-
-    private static final List<CardPrinted> EMPTY_LIST = Collections.unmodifiableList(new ArrayList<CardPrinted>(0));
-
-    private BoosterGenerator() {
-        for (CardRarity v : CardRarity.values()) {
-            twoFacedByRarity.put(v, new ArrayList<CardPrinted>());
-            singleFacedByRarity.put(v, new ArrayList<CardPrinted>());
-        }
+    private final static Map<String, PrintSheet> cachedSheets = new HashMap<String, PrintSheet>();
+    private static final synchronized PrintSheet getPrintSheet(String key) {
+        if( !cachedSheets.containsKey(key) )
+            cachedSheets.put(key, makeSheet(key, CardDb.instance().getAllCards()));
+        return cachedSheets.get(key);
     }
 
-    private void mergeAllFacedCards() {
-        for (CardRarity v : CardRarity.values()) {
-            List<CardPrinted> cp = new ArrayList<CardPrinted>(singleFacedByRarity.get(v));
-            cp.addAll(twoFacedByRarity.get(v));
-            cardsByRarity.put(v, cp);
-        }
-    }
+    public static final List<CardPrinted> getBoosterPack(SealedProductTemplate booster) {
+        List<CardPrinted> result = new ArrayList<CardPrinted>();
+        for(Pair<String, Integer> slot : booster.getSlots()) {
+            String slotType = slot.getLeft(); // add expansion symbol here?
+            int numCards = slot.getRight().intValue();
 
-    /**
-     * <p>
-     * Constructor for BoosterGenerator.
-     * </p>
-     * 
-     * @param cards
-     *            the cards
-     */
-    public BoosterGenerator(final Iterable<CardPrinted> cards) {
-        this();
-        for (final CardPrinted c : cards) {
-            this.addToRarity(c);
-        }
-        mergeAllFacedCards();
-    }
+            String[] sType = TextUtil.splitWithParenthesis(slotType, ' ', '(', ')');
+            String sheetKey = sType.length == 1 ? slotType.trim() + " " + booster.getEdition() : slotType.trim(); 
 
-    /**
-     * Instantiates a new booster generator.
-     * 
-     * @param dPool
-     *            the d pool
-     */
-    public BoosterGenerator(final ItemPoolView<CardPrinted> dPool) {
-        this();
-        for (final Entry<CardPrinted, Integer> e : dPool) {
-            this.addToRarity(e.getKey());
-        }
-        mergeAllFacedCards();
-    }
-
-    /**
-     * <p>
-     * Constructor for BoosterGenerator.
-     * </p>
-     * 
-     * @param filter
-     *            the card set
-     */
-    public BoosterGenerator(Predicate<CardPrinted> filter) {
-        this();
-
-        for (final CardPrinted c : Iterables.filter(CardDb.instance().getAllCards(), filter)) {
-            this.addToRarity(c);
-            // System.out.println(c);
-        }
-        mergeAllFacedCards();
-        // System.out.println("done");
-    }
-
-    private List<CardPrinted> pickRandomCards(final List<CardPrinted> source, final int count) {
-        return this.pickRandomCards(source, count, false);
-    }
-
-    private List<CardPrinted> pickRandomCards(final List<CardPrinted> source, final int count, final boolean singleton) {
-        int listSize = source == null ? 0 : source.size();
-        if ((count <= 0) || (listSize == 0)) {
-            return BoosterGenerator.EMPTY_LIST;
-        }
-        final List<CardPrinted> result = new ArrayList<CardPrinted>(count);
-
-        int index = Integer.MAX_VALUE;
-        for (int iCard = 0; iCard < count; iCard++) {
-            if (index >= listSize) {
-                Collections.shuffle(source, MyRandom.getRandom());
-                index = 0;
-            }
-            result.add(source.get(index));
-
-            if (!singleton) {
-                index++;
-            } else {
-                source.remove(index);
-                listSize--;
-            }
+            PrintSheet ps = getPrintSheet(sheetKey);
+            result.addAll(ps.random(numCards, true));
         }
         return result;
     }
 
-    private List<CardPrinted> pickRandomRaresOrMythics(final List<CardPrinted> rares, final List<CardPrinted> mythics,
-            final int count) {
-        final int raresSize = rares == null ? 0 : rares.size();
-        final int mythicsSize = mythics == null ? 0 : mythics.size();
-        if ((count <= 0) || (raresSize == 0)) {
-            return BoosterGenerator.EMPTY_LIST;
-        }
+    // If they request cards from an arbitrary pool, there's no use to cache printsheets.
+    public static final List<CardPrinted> getBoosterPack(SealedProductTemplate booster, Iterable<CardPrinted> sourcePool) {
+        if(sourcePool == CardDb.instance().getAllCards())
+            throw new IllegalArgumentException("Do not use this overload to obtain boosters based on complete cardDb");
+        
+        List<CardPrinted> result = new ArrayList<CardPrinted>();
+        for(Pair<String, Integer> slot : booster.getSlots()) {
+            String slotType = slot.getLeft(); // add expansion symbol here?
+            int numCards = slot.getRight().intValue();
 
-        final List<CardPrinted> result = new ArrayList<CardPrinted>(count);
+            String[] sType = TextUtil.splitWithParenthesis(slotType, ' ', '(', ')');
+            String sheetKey = sType.length == 1 ? slotType.trim() + " " + booster.getEdition() : slotType.trim(); 
 
-        int indexRares = Integer.MAX_VALUE;
-        int indexMythics = Integer.MAX_VALUE;
-        for (int iCard = 0; iCard < count; iCard++) {
-            final int rollD8 = MyRandom.getRandom().nextInt(BOOSTERS_TO_FIND_MYTHIC);
-            final boolean takeMythic = (mythicsSize > 0) && (rollD8 < 1);
-            if (takeMythic) {
-                if (indexMythics >= mythicsSize) {
-                    Collections.shuffle(mythics, MyRandom.getRandom());
-                    indexMythics = 0;
-                }
-                result.add(mythics.get(indexMythics));
-                indexMythics++;
-            } else {
-                if (indexRares >= raresSize) {
-                    Collections.shuffle(rares, MyRandom.getRandom());
-                    indexRares = 0;
-                }
-                result.add(rares.get(indexRares));
-                indexRares++;
-            }
+            PrintSheet ps = makeSheet(sheetKey, sourcePool);
+            result.addAll(ps.random(numCards, true));
         }
         return result;
-    }
+    }    
+    
+    @SuppressWarnings("unchecked")
+    private static final PrintSheet makeSheet(String sheetKey, Iterable<CardPrinted> src) {
+        PrintSheet ps = new PrintSheet();
+        String[] sKey = TextUtil.splitWithParenthesis(sheetKey, ' ', '(', ')', 2);
+        
+        String[] operators = TextUtil.splitWithParenthesis(sKey[0], ':', '(', ')');
+        Predicate<CardPrinted> extraPred = buildExtraPredicate(operators);
+        String mainCode = operators[0].trim();
+        if(mainCode.endsWith("s"))
+            mainCode = mainCode.substring(0, mainCode.length()-1);
 
-    /**
-     * Gets the singleton booster pack.
-     * Singleton means that every card in every booster in whole draft is unique!
-     * First arg in pickRandomCards can't be copy, because picker must remove card from pool to ensure uniqueness.
-     * 
-     * @param nAnyCard
-     *            the n any card
-     * @return the singleton booster pack
-     */
-    public final List<CardPrinted> getSingletonBoosterPack(final int nAnyCard) {
-        return this.pickRandomCards(allButLands, nAnyCard, true);
-    }
+        String sets = sKey[1];
+        Predicate<CardPrinted> setPred = IPaperCard.Predicates.printedInSets(sets.split(" "));
 
-    /**
-     * Gets the booster pack.
-     * 
-     * @return the booster pack
-     */
-    public final List<CardPrinted> getBoosterPack(BoosterData booster) {
-        return this.getBoosterPack(booster.getCommon(), booster.getUncommon(), booster.getRare(), 0, 0, booster.getSpecial(),
-                booster.getDoubleFaced(), 0, booster.getCntLands());
-    }
+        // Pre-defined sheets:
+        if( mainCode.equalsIgnoreCase("any") ) {
+            Predicate<CardPrinted> predicate = Predicates.and(setPred, extraPred);
+            ps.addAll(Iterables.filter(src, predicate));
 
-    /**
-     * Gets the booster pack.
-     *
-     * @param numbers the numbers
-     * @param nRareSlots the n rare slots
-     * @param nDoubls the n doubls
-     * @param nAnyCard the n any card
-     * @return the booster pack
-     */
-    public final List<CardPrinted> getBoosterPack(final Map<CardRarity, Integer> numbers,
-            final int nRareSlots, final int nDoubls, final int nAnyCard) {
-        return getBoosterPack(numbers.get(CardRarity.Common), numbers.get(CardRarity.Uncommon), nRareSlots,
-                numbers.get(CardRarity.Rare), numbers.get(CardRarity.MythicRare), numbers.get(CardRarity.Special),
-                nDoubls, nAnyCard, numbers.get(CardRarity.BasicLand));
-    }
+        } else if( mainCode.equalsIgnoreCase("common") ) {
+            Predicate<CardPrinted> predicate = Predicates.and(setPred, IPaperCard.Predicates.Presets.IS_COMMON, extraPred);
+            ps.addAll(Iterables.filter(src, predicate));
 
+        } else if ( mainCode.equalsIgnoreCase("uncommon") ) {
+            Predicate<CardPrinted> predicate = Predicates.and(setPred, IPaperCard.Predicates.Presets.IS_UNCOMMON, extraPred);
+            ps.addAll(Iterables.filter(src, predicate));
 
-    /**
-     * So many parameters are needed for custom limited cardpools,.
-     * 
-     * @param nCom
-     *            the n com
-     * @param nUnc
-     *            the n unc
-     * @param nRareSlots
-     *            the n rare slots
-     * @param nRares
-     *            the n rares
-     * @param nMythics
-     *            the n mythics
-     * @param nSpecs
-     *            the n specs
-     * @param nDoubls
-     *            the n doubls
-     * @param nAnyCard
-     *            the n any card
-     * @param nLands
-     *            the n lands
-     * @return the booster pack
-     */
-    public final List<CardPrinted> getBoosterPack(final int nCom, final int nUnc, final int nRareSlots,
-            final int nRares, final int nMythics, final int nSpecs, final int nDoubls, final int nAnyCard,
-            final int nLands) {
+        } else if ( mainCode.equalsIgnoreCase("uncommonrare") ) { // for sets like ARN, where U1 cards are considered rare and U3 are uncommon
 
-        final List<CardPrinted> temp = new ArrayList<CardPrinted>();
-        final Map<CardRarity, List<CardPrinted>> commonCardsMap = nDoubls != 0 ? singleFacedByRarity : cardsByRarity;
+            Predicate<CardPrinted> predicateRares = Predicates.and(setPred, IPaperCard.Predicates.Presets.IS_RARE, extraPred);
+            ps.addAll(Iterables.filter(src, predicateRares));
+            
+            Predicate<CardPrinted> predicateUncommon = Predicates.and( setPred, IPaperCard.Predicates.Presets.IS_UNCOMMON, extraPred);
+            ps.addAll(Iterables.filter(src, predicateUncommon), 3);
 
-        temp.addAll(this.pickRandomCards(commonCardsMap.get(CardRarity.Common), nCom));
-        temp.addAll(this.pickRandomCards(commonCardsMap.get(CardRarity.Uncommon), nUnc));
+        } else if ( mainCode.equalsIgnoreCase("rare") ) {
+            Predicate<CardPrinted> predicateMythic = Predicates.and( setPred, IPaperCard.Predicates.Presets.IS_MYTHIC_RARE, extraPred);
+            ps.addAll(Iterables.filter(src, predicateMythic));
+            
+            Predicate<CardPrinted> predicateRare = Predicates.and( setPred, IPaperCard.Predicates.Presets.IS_RARE, extraPred);
+            ps.addAll(Iterables.filter(src, predicateRare), 2);
+            
+        } else if ( mainCode.equalsIgnoreCase("rarenotmythic") ) {
+            Predicate<CardPrinted> predicateRare = Predicates.and( setPred, IPaperCard.Predicates.Presets.IS_RARE, extraPred);
+            ps.addAll(Iterables.filter(src, predicateRare));
+            
+        } else if ( mainCode.equalsIgnoreCase("mythic") ) {
+            Predicate<CardPrinted> predicateMythic = Predicates.and( setPred, IPaperCard.Predicates.Presets.IS_MYTHIC_RARE, extraPred);
+            ps.addAll(Iterables.filter(src, predicateMythic));
 
-        if (nRareSlots > 0) {
-            temp.addAll(this.pickRandomRaresOrMythics(commonCardsMap.get(CardRarity.Rare),
-                    cardsByRarity.get(CardRarity.MythicRare), nRareSlots));
+        } else if ( mainCode.equalsIgnoreCase("basicland") ) {
+            Predicate<CardPrinted> predicateLand = Predicates.and( setPred, IPaperCard.Predicates.Presets.IS_BASIC_LAND, extraPred );
+            ps.addAll(Iterables.filter(src, predicateLand));
+
+        } else if ( mainCode.equalsIgnoreCase("timeshifted") ) {
+            Predicate<CardPrinted> predicate = Predicates.and( setPred, IPaperCard.Predicates.Presets.IS_SPECIAL, extraPred );
+            ps.addAll(Iterables.filter(src, predicate));
+
+        } else if ( mainCode.equalsIgnoreCase("mazeland") ) {
+            
         }
-        if ((nRares > 0) || (nMythics > 0)) {
-            if (nMythics == 0) {
-                temp.addAll(this.pickRandomRaresOrMythics(commonCardsMap.get(CardRarity.Rare),
-                        cardsByRarity.get(CardRarity.MythicRare), nRares));
-            } else {
-                temp.addAll(this.pickRandomCards(commonCardsMap.get(CardRarity.Rare), nRares));
-                temp.addAll(this.pickRandomCards(commonCardsMap.get(CardRarity.MythicRare), nMythics));
-            }
-        }
-        if (nDoubls > 0) {
-            final int dblFacedRarity = MyRandom.getRandom().nextInt(nCom + nUnc + nRareSlots);
-            CardRarity rarityInSlot = CardRarity.MythicRare;
-            if (dblFacedRarity < nCom) {
-                rarityInSlot = CardRarity.Common;
-            } else if (dblFacedRarity < nCom + nUnc) {
-                rarityInSlot = CardRarity.Uncommon;
-            } else if (MyRandom.getRandom().nextInt(BOOSTERS_TO_FIND_MYTHIC) != 0) {
-                rarityInSlot = CardRarity.Rare;
+        return ps;
+    }
+
+    /**
+     * TODO: Write javadoc for this method.
+     * @param operators
+     * @return
+     */
+    private static Predicate<CardPrinted> buildExtraPredicate(String[] operators) {
+        if ( operators.length == 0)
+            return Predicates.alwaysTrue();
+        
+        List<Predicate<CardPrinted>> conditions = new ArrayList<Predicate<CardPrinted>>();
+        for(int i = 1; i < operators.length; i++) {
+            String operator = operators[i];
+            if(StringUtils.isEmpty(operator))
+                continue;
+            
+            boolean invert = operator.charAt(0) == '!';
+            if( invert ) operator = operator.substring(1);
+            
+            Predicate<CardPrinted> toAdd = null;
+            if( operator.equals("dfc") ) {
+                toAdd = Predicates.compose(CardRulesPredicates.splitType(CardSplitType.Transform), CardPrinted.FN_GET_RULES);
+            } else if ( operator.startsWith("name(") ) {
+                operator = StringUtils.strip(operator.substring(4), "() ");
+                String[] cardNames = TextUtil.splitWithParenthesis(operator, ',', '"', '"');
+                toAdd = IPaperCard.Predicates.names(Lists.newArrayList(cardNames));
             }
 
-            temp.addAll(this.pickRandomCards(twoFacedByRarity.get(rarityInSlot), nDoubls));
+            if(toAdd == null)
+                throw new IllegalArgumentException("Booster generator: operator could not be parsed - " + operator);
+
+            if( invert )
+                toAdd = Predicates.not(toAdd);
+            conditions.add(toAdd);
         }
-
-        temp.addAll(this.pickRandomCards(commonCardsMap.get(CardRarity.Special), nSpecs));
-        temp.addAll(this.pickRandomCards(this.allButLands, nAnyCard));
-        temp.addAll(this.pickRandomCards(commonCardsMap.get(CardRarity.BasicLand), nLands));
-
-        return temp;
+        return Predicates.and(conditions);
     }
-
-    private void addToRarity(final CardPrinted c) {
-
-        Map<CardRarity, List<CardPrinted>> targetList = c.getRules().getSplitType() == CardSplitType.Transform ? twoFacedByRarity : singleFacedByRarity;
-        targetList.get(c.getRarity()).add(c);
-
-        if (!c.getRules().getType().isBasicLand()) {
-            this.allButLands.add(c);
-        }
-    }
+        
 
 }

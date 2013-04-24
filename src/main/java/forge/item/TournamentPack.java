@@ -22,7 +22,7 @@ import java.util.List;
 import com.google.common.base.Function;
 
 import forge.Singletons;
-import forge.card.BoosterData;
+import forge.card.BoosterTemplate;
 import forge.card.BoosterGenerator;
 import forge.card.CardEdition;
 
@@ -32,17 +32,17 @@ public class TournamentPack extends OpenablePack {
     public static final Function<CardEdition, TournamentPack> FN_FROM_SET = new Function<CardEdition, TournamentPack>() {
         @Override
         public TournamentPack apply(final CardEdition arg1) {
-            BoosterData d = Singletons.getModel().getTournamentPacks().get(arg1.getCode());
+            BoosterTemplate d = Singletons.getModel().getTournamentPacks().get(arg1.getCode());
             return new TournamentPack(arg1.getName(), d);
         }
     };
 
-    public TournamentPack(final String name0, final BoosterData boosterData) {
+    public TournamentPack(final String name0, final BoosterTemplate boosterData) {
         super(name0, boosterData);
     }
 
     public final boolean isStarterDeck() {
-        return contents.getCommon() < 30;
+        return contents.getSlots().get(0).getRight() < 30; // hack - getting number of commons, they are first in list
     }
 
     @Override
@@ -52,8 +52,7 @@ public class TournamentPack extends OpenablePack {
 
     @Override
     protected List<CardPrinted> generate() {
-        final BoosterGenerator gen = new BoosterGenerator(this.contents.getEditionFilter());
-        return gen.getBoosterPack(this.contents);
+        return BoosterGenerator.getBoosterPack(this.contents);
     }
 
     @Override

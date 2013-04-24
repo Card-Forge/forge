@@ -43,7 +43,7 @@ public class InputProxy implements Observer {
     private AtomicReference<Input> input = new AtomicReference<Input>();
     private MatchController match = null;
 
-    private static final boolean INPUT_DEBUG = false; 
+    private static final boolean INPUT_DEBUG = true; 
     
     public void setMatch(MatchController matchController) {
         match = matchController;

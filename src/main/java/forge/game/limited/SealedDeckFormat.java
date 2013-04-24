@@ -23,12 +23,11 @@ import java.util.List;
 
 import javax.swing.JOptionPane;
 
-import com.google.common.base.Function;
-
 import forge.Singletons;
-import forge.card.BoosterGenerator;
+import forge.card.BoosterTemplate;
 import forge.card.CardBlock;
 import forge.card.CardEdition;
+import forge.card.UnOpenedMeta;
 import forge.card.UnOpenedProduct;
 import forge.gui.GuiChoose;
 import forge.item.CardDb;
@@ -65,9 +64,6 @@ public class SealedDeckFormat {
         partiality = new ArrayList<String>();
 
         if (sealedType.equals("Full")) {
-
-            final BoosterGenerator bpFull = new BoosterGenerator(CardDb.instance().getUniqueCards());
-
             // Choose number of boosters
             final Integer[] integers = new Integer[10];
 
@@ -78,7 +74,7 @@ public class SealedDeckFormat {
             Integer nrBoosters = GuiChoose.one("How many booster packs?", integers);
 
             for (int i = 0; i < nrBoosters; i++) {
-                this.product.add(new UnOpenedProduct(BoosterGenerator.IDENTITY_PICK, bpFull));
+                this.product.add(new UnOpenedProduct(BoosterTemplate.genericBooster));
             }
 
             this.getLandSetCode()[0] = CardDb.instance().getCard("Plains").getEdition();
@@ -259,7 +255,7 @@ public class SealedDeckFormat {
                 if (element.endsWith(".sealed")) {
                     final List<String> dfData = FileUtil.readFile("res/sealed/" + element);
                     final CustomLimited cs = CustomLimited.parse(dfData, Singletons.getModel().getDecks().getCubes());
-                    if (cs.getNumCards() > 5) { // Do not allow too small cubes to be played as 'stand-alone'!
+                    if (cs.getSealedProductTemplate().getTotal() > 5) { // Do not allow too small cubes to be played as 'stand-alone'!
                         customs.add(cs);
                     }
                 }
@@ -273,20 +269,6 @@ public class SealedDeckFormat {
                 final CustomLimited draft = GuiChoose.one("Choose Custom Sealed Pool",
                         customs);
 
-                final BoosterGenerator bpCustom = new BoosterGenerator(draft.getCardPool());
-                final Function<BoosterGenerator, List<CardPrinted>> fnPick = new Function<BoosterGenerator, List<CardPrinted>>() {
-                    @Override
-                    public List<CardPrinted> apply(final BoosterGenerator pack) {
-                        if (draft.getIgnoreRarity()) {
-                            if (!draft.getSingleton()) {
-                                return pack.getBoosterPack(0, 0, 0, 0, 0, 0, 0, draft.getNumCards(), 0);
-                            } else {
-                                return pack.getSingletonBoosterPack(draft.getNumCards());
-                            }
-                        }
-                        return pack.getBoosterPack(draft.getNumbersByRarity(), 0, 0, 0);
-                    }
-                };
 
                 // Choose number of boosters
                 final Integer[] integers = new Integer[10];
@@ -298,7 +280,7 @@ public class SealedDeckFormat {
                 Integer nrBoosters = GuiChoose.one("How many booster packs?", integers);
 
                 for (int i = 0; i < nrBoosters; i++) {
-                    this.product.add(new UnOpenedProduct(fnPick, bpCustom));
+                    this.product.add(new UnOpenedProduct(draft.getSealedProductTemplate(), draft.getCardPool()));
                 }
 
                 this.getLandSetCode()[0] = draft.getLandSetCode();
@@ -468,10 +450,12 @@ public class SealedDeckFormat {
         }
         final ItemPool<CardPrinted> pool = new ItemPool<CardPrinted>(CardPrinted.class);
 
-        for (int i = 0; i < this.product.size(); i++) {
-            pool.addAllFlat(this.product.get(i).open(isHuman, partiality));
+        for (UnOpenedProduct prod : product) {
+            if( prod instanceof UnOpenedMeta )
+                pool.addAllFlat(((UnOpenedMeta) prod).open(isHuman, partiality));
+            else
+                pool.addAllFlat(prod.get());
         }
-
         return pool;
     }
 

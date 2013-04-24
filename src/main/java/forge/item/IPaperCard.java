@@ -1,6 +1,5 @@
 package forge.item;
 
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -8,6 +7,7 @@ import java.util.Set;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.base.Predicate;
+import com.google.common.collect.Lists;
 
 import forge.Card;
 import forge.card.CardRarity;
@@ -25,6 +25,9 @@ public interface IPaperCard extends InventoryItem {
         public static Predicate<CardPrinted> rarity(final boolean isEqual, final CardRarity value) {
             return new PredicateRarity(value, isEqual);
         }
+        public static Predicate<CardPrinted> printedInSets(final String[] sets) {
+            return printedInSets(Lists.newArrayList(sets), true);
+        }
     
         public static Predicate<CardPrinted> printedInSets(final List<String> value, final boolean shouldContain) {
             if ((value == null) || value.isEmpty()) {
@@ -33,11 +36,11 @@ public interface IPaperCard extends InventoryItem {
             return new PredicateSets(value, shouldContain);
         }
     
-        public static Predicate<CardPrinted> printedInSets(final String value) {
+        public static Predicate<CardPrinted> printedInSet(final String value) {
             if (StringUtils.isEmpty(value)) {
                 return com.google.common.base.Predicates.alwaysTrue();
             }
-            return new PredicateSets(Arrays.asList(new String[] { value }), true);
+            return new PredicateSets(Lists.newArrayList(value), true);
         }
     
         public static Predicate<CardPrinted> name(final String what) {
@@ -48,8 +51,8 @@ public interface IPaperCard extends InventoryItem {
             return new PredicateName(op, what);
         }
     
-        public static Predicate<CardPrinted> namesExcept(final List<String> what) {
-            return new PredicateNamesExcept(what);
+        public static Predicate<CardPrinted> names(final List<String> what) {
+            return new PredicateNames(what);
         }
     
         private static class PredicateRarity implements Predicate<CardPrinted> {
@@ -96,7 +99,7 @@ public interface IPaperCard extends InventoryItem {
             }
         }
     
-        private static class PredicateNamesExcept extends PredicateString<CardPrinted> {
+        private static class PredicateNames extends PredicateString<CardPrinted> {
             private final List<String> operand;
     
             @Override
@@ -104,13 +107,13 @@ public interface IPaperCard extends InventoryItem {
                 final String cardName = card.getName();
                 for (final String element : this.operand) {
                     if (this.op(cardName, element)) {
-                        return false;
+                        return true;
                     }
                 }
-                return true;
+                return false;
             }
     
-            public PredicateNamesExcept(final List<String> operand) {
+            public PredicateNames(final List<String> operand) {
                 super(StringOp.EQUALS);
                 this.operand = operand;
             }
@@ -143,7 +146,7 @@ public interface IPaperCard extends InventoryItem {
             public static final Predicate<CardPrinted> IS_SPECIAL = Predicates.rarity(true, CardRarity.Special);
     
             /** The Constant exceptLands. */
-            public static final Predicate<CardPrinted> EXCEPT_LANDS = Predicates.rarity(false, CardRarity.BasicLand);
+            public static final Predicate<CardPrinted> IS_BASIC_LAND = Predicates.rarity(true, CardRarity.BasicLand);
         }
     }
 

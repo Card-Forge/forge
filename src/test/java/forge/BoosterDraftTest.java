@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.testng.annotations.Test;
 
-import forge.card.BoosterData;
+import forge.card.BoosterTemplate;
 import forge.card.BoosterGenerator;
 import forge.deck.Deck;
 import forge.game.limited.IBoosterDraft;
@@ -49,9 +49,8 @@ public class BoosterDraftTest implements IBoosterDraft {
     @Override
     public ItemPoolView<CardPrinted> nextChoice() {
         this.n--;
-        BoosterData booster = Singletons.getModel().getBoosters().get("M11");
-        final BoosterGenerator pack = new BoosterGenerator(booster.getEditionFilter());
-        return ItemPool.createFrom(pack.getBoosterPack(booster), CardPrinted.class);
+        BoosterTemplate booster = Singletons.getModel().getBoosters().get("M11");
+        return ItemPool.createFrom(BoosterGenerator.getBoosterPack(booster), CardPrinted.class);
     }
 
     /** {@inheritDoc} */

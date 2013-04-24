@@ -249,7 +249,6 @@ public final class CardDb {
                 if (null == result) {
                     throw new NoSuchElementException(String.format("Card '%s' not found in our database.", name));
                 }
-
             }
         }
         if (isFoil) {

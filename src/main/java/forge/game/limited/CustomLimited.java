@@ -17,11 +17,15 @@
  */
 package forge.game.limited;
 
-import java.util.EnumMap;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
-import forge.card.CardRarity;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.apache.commons.lang3.tuple.Pair;
+
+import forge.card.BoosterTemplate;
+import forge.card.SealedProductTemplate;
 import forge.deck.Deck;
 import forge.deck.DeckBase;
 import forge.item.CardDb;
@@ -29,6 +33,7 @@ import forge.item.CardPrinted;
 import forge.item.ItemPool;
 import forge.item.ItemPoolView;
 import forge.util.FileSection;
+import forge.util.TextUtil;
 import forge.util.storage.IStorageView;
 
 /**
@@ -40,14 +45,17 @@ import forge.util.storage.IStorageView;
  * @version $Id$
  */
 public class CustomLimited extends DeckBase {
-
+    private final SealedProductTemplate tpl;
+    
     /**
      * TODO: Write javadoc for Constructor.
      *
      * @param name0 the name0
+     * @param slots 
      */
-    public CustomLimited(final String name0) {
+    public CustomLimited(final String name0, List<Pair<String, Integer>> slots) {
         super(name0);
+        tpl = new SealedProductTemplate(slots);
     }
 
     private static final long serialVersionUID = 7435640939026612173L;
@@ -58,10 +66,6 @@ public class CustomLimited extends DeckBase {
     /** The Singleton. */
     private boolean singleton = false;
 
-    /** The Num cards. */
-    private int numCards = 15;
-
-    private final Map<CardRarity, Integer> numRarity = new EnumMap<CardRarity, Integer>(CardRarity.class);
 
     /** The Num packs. */
     private int numPacks = 3;
@@ -70,6 +74,7 @@ public class CustomLimited extends DeckBase {
 
     /** The Land set code. */
     private String landSetCode = CardDb.instance().getCard("Plains", true).getEdition();
+
 
     /*
      * (non-Javadoc)
@@ -92,48 +97,29 @@ public class CustomLimited extends DeckBase {
 
         final FileSection data = FileSection.parse(dfData, ":");
 
-        final CustomLimited cd = new CustomLimited(data.get("Name"));
+        List<Pair<String, Integer>> slots = new ArrayList<Pair<String,Integer>>();
+        String boosterData = data.get("Booster");
+        if(StringUtils.isNotEmpty(boosterData)){
+            final String[] booster = TextUtil.splitWithParenthesis(boosterData, ',', '(', ')');
+            for(String slotDesc : booster) {
+                String[] kv = TextUtil.splitWithParenthesis(slotDesc, ' ', '(', ')', 2);
+                slots.add(ImmutablePair.of(kv[1], Integer.parseInt(kv[0])));
+            }
+        } else
+            slots = BoosterTemplate.genericBooster.getSlots();
+
+        final CustomLimited cd = new CustomLimited(data.get("Name"), slots);
         cd.setIgnoreRarity(data.getBoolean("IgnoreRarity"));
         cd.setSingleton(data.getBoolean("Singleton"));
-        cd.setLandSetCode(data.get("LandSetCode"));
-        cd.numCards = data.getInt("NumCards", 15);
-
-        cd.numRarity.put(CardRarity.BasicLand, data.getInt("NumBasicLands", 1));
-        cd.numRarity.put(CardRarity.Special, data.getInt("NumSpecials"));
-        cd.numRarity.put(CardRarity.Rare, data.getInt("NumRares", 1));
-        cd.numRarity.put(CardRarity.MythicRare, data.getInt("NumMythics"));
-        cd.numRarity.put(CardRarity.Uncommon, data.getInt("NumUncommons", 3));
-        cd.numRarity.put(CardRarity.Common, data.getInt("NumCommons", 10));
-
+        cd.landSetCode = data.get("LandSetCode");
         cd.numPacks = data.getInt("NumPacks");
-
-        final String deckName = data.get("DeckFile");
-        final Deck deckCube = cubes.get(deckName);
-        cd.cardPool = deckCube == null ? ItemPool.createFrom(
-                        CardDb.instance().getUniqueCards(), CardPrinted.class)
-                : deckCube.getMain();
+        final Deck deckCube = cubes.get(data.get("DeckFile"));
+        cd.cardPool = deckCube == null ? ItemPool.createFrom(CardDb.instance().getUniqueCards(), CardPrinted.class) : deckCube.getMain();
 
         return cd;
     }
 
-    /**
-     * Gets the num cards.
-     * 
-     * @return the numCards
-     */
-    public int getNumCards() {
-        return this.numCards;
-    }
 
-    /**
-     * Sets the num cards.
-     * 
-     * @param numCardsIn
-     *            the numCards to set
-     */
-    public void setNumCards(final int numCardsIn) {
-        this.numCards = numCardsIn;
-    }
 
     /**
      * Gets the num packs.
@@ -201,16 +187,6 @@ public class CustomLimited extends DeckBase {
         return this.landSetCode;
     }
 
-    /**
-     * Sets the land set code.
-     * 
-     * @param landSetCodeIn
-     *            the landSetCode to set
-     */
-    public void setLandSetCode(final String landSetCodeIn) {
-        this.landSetCode = landSetCodeIn;
-    }
-
     /*
      * (non-Javadoc)
      * 
@@ -227,16 +203,14 @@ public class CustomLimited extends DeckBase {
      */
     @Override
     protected DeckBase newInstance(final String name0) {
-        return new CustomLimited(name0);
+        return new CustomLimited(name0, tpl.getSlots());
     }
 
     /**
      * TODO: Write javadoc for this method.
-     *
-     * @return the numbers by rarity
+     * @return
      */
-    public Map<CardRarity, Integer> getNumbersByRarity() {
-        return this.numRarity;
+    public SealedProductTemplate getSealedProductTemplate() {
+        return tpl;
     }
-
 }

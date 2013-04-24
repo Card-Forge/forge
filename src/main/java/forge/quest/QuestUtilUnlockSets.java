@@ -31,7 +31,7 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 import forge.Singletons;
-import forge.card.BoosterData;
+import forge.card.BoosterTemplate;
 import forge.card.CardEdition;
 import forge.card.UnOpenedProduct;
 import forge.gui.CardListViewer;
@@ -184,21 +184,21 @@ public class QuestUtilUnlockSets {
      */
     public static void doUnlock(QuestController qData, final CardEdition unlockedSet) {
 
-        IStorageView<BoosterData> starters = Singletons.getModel().getTournamentPacks();
-        IStorageView<BoosterData> boosters = Singletons.getModel().getBoosters();
+        IStorageView<BoosterTemplate> starters = Singletons.getModel().getTournamentPacks();
+        IStorageView<BoosterTemplate> boosters = Singletons.getModel().getBoosters();
         qData.getFormat().unlockSet(unlockedSet.getCode());
 
         List<CardPrinted> cardsWon = new ArrayList<CardPrinted>();
 
         if (starters.contains(unlockedSet.getCode())) {
             UnOpenedProduct starter = new UnOpenedProduct(starters.get(unlockedSet.getCode()));
-            cardsWon.addAll(starter.open());
+            cardsWon.addAll(starter.get());
         }
         else if (boosters.contains(unlockedSet.getCode())) {
             UnOpenedProduct booster = new UnOpenedProduct(boosters.get(unlockedSet.getCode()));
-            cardsWon.addAll(booster.open());
-            cardsWon.addAll(booster.open());
-            cardsWon.addAll(booster.open());
+            cardsWon.addAll(booster.get());
+            cardsWon.addAll(booster.get());
+            cardsWon.addAll(booster.get());
         }
 
         qData.getCards().addAllCards(cardsWon);

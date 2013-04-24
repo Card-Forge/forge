@@ -22,8 +22,6 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.google.common.base.Function;
-
 import forge.Singletons;
 import forge.game.limited.CustomLimited;
 import forge.item.CardDb;
@@ -189,8 +187,7 @@ public class MetaSet {
             final File dFolder = new File("res/sealed/");
 
             if (!dFolder.exists()) {
-                throw new RuntimeException("GenerateSealed : folder not found -- folder is "
-                        + dFolder.getAbsolutePath());
+                throw new RuntimeException("GenerateSealed : folder not found -- folder is " + dFolder.getAbsolutePath());
             }
 
             if (!dFolder.isDirectory()) {
@@ -199,27 +196,12 @@ public class MetaSet {
 
             List<String> dfData = FileUtil.readFile("res/sealed/" + data + ".sealed");
             final CustomLimited myCube = CustomLimited.parse(dfData, Singletons.getModel().getDecks().getCubes());
-            final BoosterGenerator bpCustom = new BoosterGenerator(myCube.getCardPool());
-            final Function<BoosterGenerator, List<CardPrinted>> fnPick = new Function<BoosterGenerator, List<CardPrinted>>() {
-              @Override
-              public List<CardPrinted> apply(final BoosterGenerator pack) {
-                   if (myCube.getIgnoreRarity()) {
-                       if (!myCube.getSingleton()) {
-                           return pack.getBoosterPack(0, 0, 0, 0, 0, 0, 0, myCube.getNumCards(), 0);
-                       } else {
-                           return pack.getSingletonBoosterPack(myCube.getNumCards());
-                       }
-                   }
-                   return pack.getBoosterPack(myCube.getNumbersByRarity(), 0, 0, 0);
-               }
-
-            };
-
-            return new UnOpenedProduct(fnPick, bpCustom);
+            
+            SealedProductTemplate fnPick = myCube.getIgnoreRarity() ? myCube.getSealedProductTemplate() : BoosterTemplate.genericBooster;
+            return new UnOpenedProduct(fnPick, myCube.getCardPool());
         }
         else if ("full".equalsIgnoreCase(type)) {
-            final BoosterGenerator bpFull = new BoosterGenerator(CardDb.instance().getUniqueCards());
-            return new UnOpenedProduct(BoosterGenerator.IDENTITY_PICK, bpFull);
+            return new UnOpenedProduct(BoosterTemplate.genericBooster);
         }
         else if ("meta".equalsIgnoreCase(type)) {
 
@@ -230,11 +212,9 @@ public class MetaSet {
                 if (data.indexOf(aCard.getEdition()) > -1) {
                     cardPool.add(aCard);
                     // System.out.println("Added card" + aCard.getName());
-                    }
+                }
             }
-
-                final BoosterGenerator bpSets = new BoosterGenerator(cardPool);
-                return new UnOpenedProduct(BoosterGenerator.IDENTITY_PICK, bpSets);
+            return new UnOpenedProduct(BoosterTemplate.genericBooster, cardPool);
         } else if ("booster".equalsIgnoreCase(type)) {
             return new UnOpenedProduct(Singletons.getModel().getBoosters().get(data));
         } else if ("pack".equalsIgnoreCase(type)) {
@@ -244,8 +224,8 @@ public class MetaSet {
         } else if ("random1".equalsIgnoreCase(type)) {
             return new UnOpenedMeta(data, false);
         } else if ("combo".equalsIgnoreCase(type)) {
-            final BoosterGenerator bpSets = new BoosterGenerator(buildPool(data));
-            return new UnOpenedProduct(BoosterGenerator.IDENTITY_PICK, bpSets);
+            final BoosterGenerator bpSets = new BoosterGenerator();
+            return new UnOpenedProduct(BoosterTemplate.genericBooster, buildPool(data));
         }
         else {
             throw new RuntimeException("Cannot initialize boosters for: " + type);

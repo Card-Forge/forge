@@ -52,7 +52,11 @@ public class TextUtil {
     public static String[] splitWithParenthesis(CharSequence input, char delimiter, char openPar, char closePar) {
         return splitWithParenthesis(input, delimiter, Integer.MAX_VALUE, openPar, closePar, true);
     }
-    
+
+    public static String[] splitWithParenthesis(CharSequence input, char delimiter, char openPar, char closePar, int limit) {
+        return splitWithParenthesis(input, delimiter, limit, openPar, closePar, true);
+    }
+
     /** 
      * Split string separated by a single char delimiter, can take parenthesis in account
      * It's faster than String.split, and allows parenthesis 

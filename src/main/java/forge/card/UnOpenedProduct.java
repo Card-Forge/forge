@@ -2,50 +2,48 @@ package forge.card;
 
 import java.util.List;
 
-import com.google.common.base.Function;
+import com.google.common.base.Supplier;
 
 import forge.item.CardPrinted;
+import forge.item.ItemPoolView;
 
 /** 
  * TODO: Write javadoc for this type.
  *
  */
-public class UnOpenedProduct {
+public class UnOpenedProduct implements Supplier<List<CardPrinted>> {
 
-    private final Function<BoosterGenerator, List<CardPrinted>> openBooster;
-    private final BoosterGenerator generator;
-    private final BoosterData booster;
-
-    public UnOpenedProduct(Function<BoosterGenerator, List<CardPrinted>> identityPick, BoosterGenerator bpFull) {
-        openBooster = identityPick;
-        generator = bpFull;
-        booster = null;
-    }
-
+    private final ItemPoolView<CardPrinted> cards;
+    private final Iterable<CardPrinted> cardPoolFlat;
+    private final SealedProductTemplate tpl;
     /**
      * TODO: Write javadoc for Constructor.
-     * @param boosterData
      */
-    public UnOpenedProduct(BoosterData boosterData) {
-        booster = boosterData;
-        openBooster = null;
-        generator = new BoosterGenerator(boosterData.getEditionFilter());
+    public UnOpenedProduct(SealedProductTemplate template) {
+        tpl = template;
+        cards = null;
+        cardPoolFlat = null;
     }
 
-    public List<CardPrinted> open() {
-        return openBooster != null ? openBooster.apply(generator) : generator.getBoosterPack(booster);
+    public UnOpenedProduct(SealedProductTemplate template, ItemPoolView<CardPrinted> pool) {
+        cards = pool;
+        cardPoolFlat = null;
+        tpl = template;
     }
 
-    /**
-     * Like open, can define whether is human or not.
-     * @param isHuman
-     *      boolean, is human player?
-     * @param partialities
-     *      known partialities for the AI.
-     * @return List, list of cards.
+    public UnOpenedProduct(SealedProductTemplate template, Iterable<CardPrinted> pool) {
+        cardPoolFlat = pool;
+        tpl = template;
+        cards = null;
+     }
+    
+    /* (non-Javadoc)
+     * @see com.google.common.base.Supplier#get()
      */
-    public List<CardPrinted> open(final boolean isHuman, List<String> partialities) {
-        return open();
+    @Override
+    public List<CardPrinted> get() {
+        return cards == null && cardPoolFlat == null ? BoosterGenerator.getBoosterPack(tpl) 
+                : BoosterGenerator.getBoosterPack(tpl, cardPoolFlat == null ? cards.toFlatList() : cardPoolFlat);
     }
 
 }

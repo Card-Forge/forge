@@ -95,4 +95,6 @@ Code2:GTC|Code3:GTC|Type:Expansion|Name:Gatecrash
 
 Code2:VAN|Code3:VAN|Type:Other|Name:Vanguard
 Code2:ARC|Code3:ARC|Type:Other|Name:Archenemy
-
+Code2:DDC|Code3:DDC|Type:Other|Name:Divine vs. Demonic
+Code2:PD2|Code3:PD2|Type:Other|Name:Fire and Lightning
+Code2:EVG|Code3:EVG|Type:Other|Name:Elves vs. Goblins

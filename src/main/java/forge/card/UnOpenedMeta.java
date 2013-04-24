@@ -100,7 +100,7 @@ public class UnOpenedMeta extends UnOpenedProduct {
      * @return List, list of cards.
      */
     @Override
-    public List<CardPrinted> open() {
+    public List<CardPrinted> get() {
         return this.open(true, null);
     }
 
@@ -112,7 +112,7 @@ public class UnOpenedMeta extends UnOpenedProduct {
      *      known partialities for the AI.
      * @return List, list of cards.
      */
-    @Override
+
     public List<CardPrinted> open(final boolean isHuman, List<String> partialities) {
 
         if (metaSets.size() < 1) {
@@ -132,7 +132,7 @@ public class UnOpenedMeta extends UnOpenedProduct {
                 for (int i = 0; i < metaSets.size(); i++) {
                     if (o.toString().equals(metaSets.get(i).getCode())) {
                         final UnOpenedProduct newBooster = metaSets.get(i).getBooster();
-                        return newBooster.open();
+                        return newBooster.get();
                     }
                 }
 
@@ -168,7 +168,7 @@ public class UnOpenedMeta extends UnOpenedProduct {
                 // System.out.println("AI chose " + metaSets.get(selected).getCode() + " because partiality not established or failed percentage test.");
                 }
                 final UnOpenedProduct newBooster = metaSets.get(selected).getBooster();
-                return newBooster.open();
+                return newBooster.get();
             }
         }
         else {
@@ -183,7 +183,7 @@ public class UnOpenedMeta extends UnOpenedProduct {
                 // System.out.println("AI decided to add " + metaSets.get(selected).getCode() + " to partialities.");
             }
             final UnOpenedProduct newBooster = metaSets.get(selected).getBooster();
-            return newBooster.open();
+            return newBooster.get();
         }
     }
 }

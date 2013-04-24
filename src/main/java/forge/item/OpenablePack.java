@@ -26,19 +26,18 @@ import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 
-import forge.card.BoosterData;
+import forge.card.BoosterTemplate;
 import forge.card.BoosterGenerator;
 import forge.card.CardRulesPredicates;
 import forge.util.Aggregates;
 
 public abstract class OpenablePack implements InventoryItemFromSet {
-    protected final BoosterData contents;
+    protected final BoosterTemplate contents;
     protected final String name;
     private final int hash;
     private List<CardPrinted> cards = null;
-    private BoosterGenerator generator = null;
 
-    public OpenablePack(String name0, BoosterData boosterData) {
+    public OpenablePack(String name0, BoosterTemplate boosterData) {
         if (null == name0)       { throw new NullArgumentException("name0");       }
         if (null == boosterData) { throw new NullArgumentException("boosterData"); }
         contents = boosterData;
@@ -93,16 +92,7 @@ public abstract class OpenablePack implements InventoryItemFromSet {
     }
 
     protected List<CardPrinted> generate() {
-        if (null == generator) {
-            generator = new BoosterGenerator(contents.getEditionFilter());
-        }
-        final List<CardPrinted> myCards = generator.getBoosterPack(contents);
-
-        final int cntLands = contents.getCntLands();
-        if (cntLands > 0) {
-            myCards.add(getRandomBasicLand(contents.getLandEdition()));
-        }
-        return myCards;
+        return BoosterGenerator.getBoosterPack(contents);
     }
 
     protected CardPrinted getRandomBasicLand(final String setCode) {
@@ -111,7 +101,7 @@ public abstract class OpenablePack implements InventoryItemFromSet {
 
     protected List<CardPrinted> getRandomBasicLands(final String setCode, final int count) {
         Predicate<CardPrinted> cardsRule = Predicates.and(
-                IPaperCard.Predicates.printedInSets(setCode),
+                IPaperCard.Predicates.printedInSet(setCode),
                 Predicates.compose(CardRulesPredicates.Presets.IS_BASIC_LAND, CardPrinted.FN_GET_RULES));
         return Aggregates.random(Iterables.filter(CardDb.instance().getAllCards(), cardsRule), count);
     }

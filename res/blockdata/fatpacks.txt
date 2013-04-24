@@ -1,49 +1,50 @@
-Set:MMQ|LandSet:MMQ|Boosters:6|BasicLands:30
-Set:NMS|LandSet:MMQ|Boosters:6|BasicLands:0
-Set:PCY|LandSet:MMQ|Boosters:6|BasicLands:0
-Set:INV|LandSet:INV|Boosters:6|BasicLands:0
-Set:PLS|LandSet:INV|Boosters:6|BasicLands:0
-Set:APC|LandSet:INV|Boosters:6|BasicLands:0
-Set:ODY|LandSet:ODY|Boosters:6|BasicLands:0
-Set:TOR|LandSet:ODY|Boosters:6|BasicLands:0
-Set:JUD|LandSet:ODY|Boosters:6|BasicLands:0
-Set:ONS|LandSet:ONS|Boosters:9|BasicLands:30
-Set:LGN|LandSet:ONS|Boosters:6|BasicLands:0
-Set:SCG|LandSet:ONS|Boosters:6|BasicLands:0
-Set:MRD|LandSet:MRD|Boosters:6|BasicLands:0
-Set:DST|LandSet:MRD|Boosters:6|BasicLands:0
-Set:5DN|LandSet:MRD|Boosters:6|BasicLands:0
-Set:CHK|LandSet:CHK|Boosters:6|BasicLands:0
-Set:BOK|LandSet:CHK|Boosters:6|BasicLands:0
-Set:SOK|LandSet:CHK|Boosters:6|BasicLands:0
-Set:9ED|LandSet:9ED|Boosters:6|BasicLands:40
-Set:RAV|LandSet:RAV|Boosters:6|BasicLands:40
-Set:GPT|LandSet:RAV|Boosters:6|BasicLands:40
-Set:DIS|LandSet:RAV|Boosters:6|BasicLands:40
-Set:CSP|LandSet:CSP|Boosters:6|BasicLands:40
-Set:TSP|LandSet:TSP|Boosters:6|BasicLands:40
-Set:PLC|LandSet:TSP|Boosters:6|BasicLands:40
-Set:FUT|LandSet:TSP|Boosters:6|BasicLands:40
-Set:10E|LandSet:10E|Boosters:6|BasicLands:40
-Set:LRW|LandSet:LRW|Boosters:6|BasicLands:40
-Set:MOR|LandSet:LRW|Boosters:6|BasicLands:40
-Set:SHM|LandSet:SHM|Boosters:8|BasicLands:40
-Set:EVE|LandSet:SHM|Boosters:8|BasicLands:40
-Set:ALA|LandSet:ALA|Boosters:8|BasicLands:40
-Set:CFX|LandSet:ALA|Boosters:8|BasicLands:40
-Set:ARB|LandSet:ALA|Boosters:8|BasicLands:40
-Set:M10|LandSet:M10|Boosters:8|BasicLands:40
-Set:ZEN|LandSet:ZEN|Boosters:8|BasicLands:40
-Set:WWK|LandSet:ZEN|Boosters:8|BasicLands:40
-Set:ROE|LandSet:ROE|Boosters:8|BasicLands:40
-Set:M11|LandSet:M11|Boosters:8|BasicLands:40
-Set:SOM|LandSet:SOM|Boosters:8|BasicLands:40
-Set:MBS|LandSet:MBS|Boosters:9|BasicLands:80
-Set:NPH|LandSet:NPH|Boosters:9|BasicLands:80
-Set:M12|LandSet:M12|Boosters:9|BasicLands:80
-Set:ISD|LandSet:ISD|Boosters:9|BasicLands:70
-Set:DKA|LandSet:ISD|Boosters:9|BasicLands:70
-Set:AVR|LandSet:AVR|Boosters:9|BasicLands:80
-Set:M13|LandSet:M13|Boosters:9|BasicLands:80
-Set:RTR|LandSet:RTR|Boosters:9|BasicLands:80
-Set:GTC|LandSet:RTR|Boosters:9|BasicLands:80
+MMQ: 6 Boosters, 30 BasicLands 
+NMS: 6 Boosters
+PCY: 6 Boosters
+INV: 6 Boosters
+PLS: 6 Boosters
+APC: 6 Boosters
+ODY: 6 Boosters
+TOR: 6 Boosters
+JUD: 6 Boosters
+ONS: 9 Boosters, 30 BasicLands 
+LGN: 6 Boosters
+SCG: 6 Boosters
+MRD: 6 Boosters
+DST: 6 Boosters
+5DN: 6 Boosters
+CHK: 6 Boosters
+BOK: 6 Boosters
+SOK: 6 Boosters
+9ED: 6 Boosters, 40 BasicLands 
+RAV: 6 Boosters, 40 BasicLands 
+GPT: 6 Boosters, 40 BasicLands RAV
+DIS: 6 Boosters, 40 BasicLands RAV
+CSP: 6 Boosters, 40 BasicLands 
+TSP: 6 Boosters, 40 BasicLands 
+PLC: 6 Boosters, 40 BasicLands TSP
+FUT: 6 Boosters, 40 BasicLands TSP
+10E: 6 Boosters, 40 BasicLands 
+LRW: 6 Boosters, 40 BasicLands 
+MOR: 6 Boosters, 40 BasicLands LRW
+SHM: 8 Boosters, 40 BasicLands 
+EVE: 8 Boosters, 40 BasicLands SHM
+ALA: 8 Boosters, 40 BasicLands 
+CFX: 8 Boosters, 40 BasicLands ALA
+ARB: 8 Boosters, 40 BasicLands ALA
+M10: 8 Boosters, 40 BasicLands 
+ZEN: 8 Boosters, 40 BasicLands 
+WWK: 8 Boosters, 40 BasicLands ZEN
+ROE: 8 Boosters, 40 BasicLands 
+M11: 8 Boosters, 40 BasicLands 
+SOM: 8 Boosters, 40 BasicLands 
+MBS: 9 Boosters, 80 BasicLands MBS
+NPH: 9 Boosters, 80 BasicLands NPH
+M12: 9 Boosters, 80 BasicLands 
+ISD: 9 Boosters, 70 BasicLands 
+DKA: 9 Boosters, 70 BasicLands ISD
+AVR: 9 Boosters, 80 BasicLands 
+M13: 9 Boosters, 80 BasicLands 
+RTR: 9 Boosters, 80 BasicLands 
+GTC: 9 Boosters, 80 BasicLands RTR
+DGM: 9 Boosters, 80 BasicLands RTR

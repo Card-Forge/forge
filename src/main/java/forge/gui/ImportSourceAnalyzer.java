@@ -380,7 +380,7 @@ public class ImportSourceAnalyzer {
             _cardFileNamesBySet = new TreeMap<String, Map<String, String>>(String.CASE_INSENSITIVE_ORDER);
             for (CardEdition ce : Singletons.getModel().getEditions()) {
                 Map<String, String> cardFileNames = new TreeMap<String, String>(String.CASE_INSENSITIVE_ORDER);
-                Predicate<CardPrinted> filter = IPaperCard.Predicates.printedInSets(ce.getCode());
+                Predicate<CardPrinted> filter = IPaperCard.Predicates.printedInSet(ce.getCode());
                 _addSetCards(cardFileNames, CardDb.instance().getAllCards(), filter);
                 _addSetCards(cardFileNames, CardDb.variants().getAllCards(), filter);
                 _cardFileNamesBySet.put(ce.getCode2(), cardFileNames);

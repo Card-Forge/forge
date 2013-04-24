@@ -1,79 +1,80 @@
-Set:10E|LandSet:10E|Commons:10|Uncommons:3|Rares:1|Images:5
-Set:2ED|Commons:11|Uncommons:3|Rares:1|Images:1
-Set:3ED|Commons:11|Uncommons:3|Rares:1|Images:1
-Set:4ED|Commons:11|Uncommons:3|Rares:1|Images:5
-Set:5DN|Commons:11|Uncommons:3|Rares:1|Images:3
-Set:5ED|Commons:11|Uncommons:3|Rares:1|Images:5
-Set:6ED|Commons:11|Uncommons:3|Rares:1|Images:1
-Set:7ED|Commons:10|Uncommons:3|Rares:1|Images:5
-Set:8ED|Commons:10|Uncommons:3|Rares:1|Images:5
-Set:9ED|Commons:10|Uncommons:3|Rares:1|Images:5
-Set:ALA|Commons:10|Uncommons:3|Rares:1|Images:5
-Set:ALL|Commons:8|Uncommons:3|Rares:1|Images:1
-Set:APC|Commons:11|Uncommons:3|Rares:1|Images:1
-Set:ARB|LandSet:ALA|Commons:10|Uncommons:3|Rares:1|Images:3
-Set:ARN|Commons:6|Uncommons:2|Images:1
-Set:ATQ|Commons:5|Uncommons:2|Rares:1|Images:1
-Set:AVR|Commons:10|Uncommons:3|Rares:1|Images:5
-Set:BOK|Commons:11|Uncommons:3|Rares:1|Images:3
-Set:CFX|LandSet:ALA|Commons:10|Uncommons:3|Rares:1|Images:3
-Set:CHK|Commons:11|Uncommons:3|Rares:1|Images:5
-Set:CHR|Commons:9|Uncommons:3|Images:1
-Set:CSP|Commons:11|Uncommons:3|Rares:1|Images:3
-Set:DIS|Commons:11|Uncommons:3|Rares:1|Images:3
-Set:DKA|LandSet:ISD|Commons:9|Uncommons:3|DoubleFaced:1|Rares:1|Images:3
-Set:DRK|Commons:6|Rares:2|Images:1
-Set:DST|Commons:11|Uncommons:3|Rares:1|Images:3
-Set:EVE|Commons:11|Uncommons:3|Rares:1|Images:3
-Set:EXO|Commons:11|Uncommons:3|Rares:1|Images:1
-Set:FEM|Commons:5|Uncommons:2|Rares:1|Images:1
-Set:FUT|Commons:11|Uncommons:3|Rares:1|Images:3
-Set:GPT|Commons:11|Uncommons:3|Rares:1|Images:3
-Set:GTC|Commons:10|Uncommons:3|Rares:1|Images:5
-Set:HML|Commons:6|Uncommons:2|Images:1
-Set:ICE|Commons:11|Uncommons:3|Rares:1|Images:5
-Set:INV|Commons:11|Uncommons:3|Rares:1|Images:3
-Set:ISD|Commons:9|Uncommons:3|DoubleFaced:1|Rares:1|Images:5
-Set:JUD|Commons:11|Uncommons:3|Rares:1|Images:1
-Set:LEA|Commons:11|Uncommons:3|Rares:1|Images:1
-Set:LEB|Commons:11|Uncommons:3|Rares:1|Images:1
-Set:LEG|Commons:11|Uncommons:3|Rares:1|Images:1
-Set:LGN|Commons:11|Uncommons:3|Rares:1|Images:3
-Set:LRW|Commons:11|Uncommons:3|Rares:1|Images:5
-Set:M10|Commons:10|Uncommons:3|Rares:1|Images:5
-Set:M11|Commons:10|Uncommons:3|Rares:1|Images:5
-Set:M12|Commons:10|Uncommons:3|Rares:1|Images:5
-Set:M13|Commons:10|Uncommons:3|Rares:1|Images:5
-Set:MBS|Commons:10|Uncommons:3|Rares:1|Images:3
-Set:MIR|Commons:11|Uncommons:3|Rares:1|Images:5
-Set:MMQ|Commons:11|Uncommons:3|Rares:1|Images:3
-Set:MOR|Commons:11|Uncommons:3|Rares:1|Images:3
-Set:MRD|Commons:11|Uncommons:3|Rares:1|Images:5
-Set:NMS|Commons:11|Uncommons:3|Rares:1|Images:1
-Set:NPH|Commons:10|Uncommons:3|Rares:1|Images:3
-Set:ODY|Commons:11|Uncommons:3|Rares:1|Images:3
-Set:ONS|Commons:11|Uncommons:3|Rares:1|Images:5
-Set:PCY|Commons:11|Uncommons:3|Rares:1|Images:1
-Set:PLC|Commons:11|Uncommons:3|Rares:1|Images:3
-Set:PLS|Commons:11|Uncommons:3|Rares:1|Images:1
-Set:PO2|Commons:11|Uncommons:3|Rares:1|Images:1
-Set:POR|Commons:11|Uncommons:3|Rares:1|Images:5
-Set:PTK|Commons:5|Uncommons:2|Rares:1|Images:1
-Set:RAV|Commons:11|Uncommons:3|Rares:1|Images:5
-Set:ROE|Commons:10|Uncommons:3|Rares:1|Images:5
-Set:RTR|Commons:10|Uncommons:3|Rares:1|Images:5
-Set:SCG|Commons:11|Uncommons:3|Rares:1|Images:3
-Set:SHM|Commons:11|Uncommons:3|Rares:1|Images:5
-Set:SOK|Commons:11|Uncommons:3|Rares:1|Images:3
-Set:SOM|Commons:10|Uncommons:3|Rares:1|Images:5
-Set:STH|Commons:11|Uncommons:3|Rares:1|Images:1
-Set:TMP|Commons:11|Uncommons:3|Rares:1|Images:3
-Set:TOR|Commons:11|Uncommons:3|Rares:1|Images:1
-Set:TSP|Commons:10|Uncommons:3|Rares:1|Special:1|Images:5
-Set:UDS|Commons:11|Uncommons:3|Rares:1|Images:1
-Set:ULG|Commons:11|Uncommons:3|Rares:1|Images:1
-Set:USG|Commons:11|Uncommons:3|Rares:1|Images:3
-Set:VIS|Commons:11|Uncommons:3|Rares:1|Images:1
-Set:WTH|Commons:11|Uncommons:3|Rares:1|Images:1
-Set:WWK|LandSet:ZEN|Commons:10|Uncommons:3|Rares:1|Images:3
-Set:ZEN|Commons:10|Uncommons:3|Rares:1|Images:5
+10E: 5 covers, 10 Common, 3 Uncommon, 1 Rare, 1 BasicLand 
+2ED: 1 covers, 11 Common, 3 Uncommon, 1 Rare
+3ED: 1 covers, 11 Common, 3 Uncommon, 1 Rare
+4ED: 5 covers, 11 Common, 3 Uncommon, 1 Rare
+5DN: 3 covers, 11 Common, 3 Uncommon, 1 Rare
+5ED: 5 covers, 11 Common, 3 Uncommon, 1 Rare
+6ED: 1 covers, 11 Common, 3 Uncommon, 1 Rare
+7ED: 5 covers, 10 Common, 3 Uncommon, 1 Rare, 1 BasicLand 
+8ED: 5 covers, 10 Common, 3 Uncommon, 1 Rare, 1 BasicLand 
+9ED: 5 covers, 10 Common, 3 Uncommon, 1 Rare, 1 BasicLand 
+ALA: 5 covers, 10 Common, 3 Uncommon, 1 Rare, 1 BasicLand 
+ALL: 1 covers, 8 Common, 3 Uncommon, 1 Rare
+APC: 1 covers, 11 Common, 3 Uncommon, 1 Rare
+ARB: 3 covers, 10 Common, 3 Uncommon, 1 Rare, 1 BasicLand ALA
+ARN: 1 covers, 6 Common, 2 UncommonRare
+ATQ: 1 covers, 6 Common, 2 UncommonRare
+AVR: 5 covers, 10 Common, 3 Uncommon, 1 Rare, 1 BasicLand 
+BOK: 3 covers, 11 Common, 3 Uncommon, 1 Rare
+CFX: 3 covers, 10 Common, 3 Uncommon, 1 Rare, 1 BasicLand ALA
+CHK: 5 covers, 11 Common, 3 Uncommon, 1 Rare
+CHR: 1 covers, 9 Common, 3 UncommonRare
+CSP: 3 covers, 11 Common, 3 Uncommon, 1 Rare
+DGM: 3 covers, 10 Common, 3 Uncommon, 1 Rare:!name("Maze's End"), 1 MazeLand
+DIS: 3 covers, 11 Common, 3 Uncommon, 1 Rare
+DKA: 3 covers, 9 Common:!dfc, 3 Uncommon:!dfc, 1 Rare:!dfc, 1 Any:dfc, 1 BasicLand ISD
+DRK: 1 covers, 6 Common, 2 UncommonRare
+DST: 3 covers, 11 Common, 3 Uncommon, 1 Rare
+EVE: 3 covers, 11 Common, 3 Uncommon, 1 Rare
+EXO: 1 covers, 11 Common, 3 Uncommon, 1 Rare
+FEM: 1 covers, 5 Common, 2 Uncommon, 1 Rare
+FUT: 3 covers, 11 Common, 3 Uncommon, 1 Rare
+GPT: 3 covers, 11 Common, 3 Uncommon, 1 Rare
+GTC: 5 covers, 10 Common, 3 Uncommon, 1 Rare, 1 BasicLand 
+HML: 1 covers, 6 Common, 2 UncommonRare
+ICE: 5 covers, 11 Common, 3 Uncommon, 1 Rare
+INV: 3 covers, 11 Common, 3 Uncommon, 1 Rare
+ISD: 5 covers, 9 Common:!dfc, 3 Uncommon:!dfc, 1 Rare:!dfc, 1 Any:dfc, 1 BasicLand
+JUD: 1 covers, 11 Common, 3 Uncommon, 1 Rare
+LEA: 1 covers, 11 Common, 3 Uncommon, 1 Rare
+LEB: 1 covers, 11 Common, 3 Uncommon, 1 Rare
+LEG: 1 covers, 11 Common, 3 Uncommon, 1 Rare
+LGN: 3 covers, 11 Common, 3 Uncommon, 1 Rare
+LRW: 5 covers, 11 Common, 3 Uncommon, 1 Rare
+M10: 5 covers, 10 Common, 3 Uncommon, 1 Rare, 1 BasicLand 
+M11: 5 covers, 10 Common, 3 Uncommon, 1 Rare, 1 BasicLand 
+M12: 5 covers, 10 Common, 3 Uncommon, 1 Rare, 1 BasicLand 
+M13: 5 covers, 10 Common, 3 Uncommon, 1 Rare, 1 BasicLand 
+MBS: 3 covers, 10 Common, 3 Uncommon, 1 Rare, 1 BasicLand 
+MIR: 5 covers, 11 Common, 3 Uncommon, 1 Rare
+MMQ: 3 covers, 11 Common, 3 Uncommon, 1 Rare
+MOR: 3 covers, 11 Common, 3 Uncommon, 1 Rare
+MRD: 5 covers, 11 Common, 3 Uncommon, 1 Rare
+NMS: 1 covers, 11 Common, 3 Uncommon, 1 Rare
+NPH: 3 covers, 10 Common, 3 Uncommon, 1 Rare, 1 BasicLand 
+ODY: 3 covers, 11 Common, 3 Uncommon, 1 Rare
+ONS: 5 covers, 11 Common, 3 Uncommon, 1 Rare
+PCY: 1 covers, 11 Common, 3 Uncommon, 1 Rare
+PLC: 3 covers, 11 Common, 3 Uncommon, 1 Rare
+PLS: 1 covers, 11 Common, 3 Uncommon, 1 Rare
+PO2: 1 covers, 11 Common, 3 Uncommon, 1 Rare
+POR: 5 covers, 11 Common, 3 Uncommon, 1 Rare
+PTK: 1 covers, 5 Common, 2 Uncommon, 1 Rare, 2 BasicLand 
+RAV: 5 covers, 11 Common, 3 Uncommon, 1 Rare
+ROE: 5 covers, 10 Common, 3 Uncommon, 1 Rare, 1 BasicLand 
+RTR: 5 covers, 10 Common, 3 Uncommon, 1 Rare, 1 BasicLand 
+SCG: 3 covers, 11 Common, 3 Uncommon, 1 Rare
+SHM: 5 covers, 11 Common, 3 Uncommon, 1 Rare
+SOK: 3 covers, 11 Common, 3 Uncommon, 1 Rare
+SOM: 5 covers, 10 Common, 3 Uncommon, 1 Rare, 1 BasicLand 
+STH: 1 covers, 11 Common, 3 Uncommon, 1 Rare
+TMP: 3 covers, 11 Common, 3 Uncommon, 1 Rare
+TOR: 1 covers, 11 Common, 3 Uncommon, 1 Rare
+TSP: 5 covers, 10 Common, 3 Uncommon, 1 Rare, 1 TimeShifted
+UDS: 1 covers, 11 Common, 3 Uncommon, 1 Rare
+ULG: 1 covers, 11 Common, 3 Uncommon, 1 Rare
+USG: 3 covers, 11 Common, 3 Uncommon, 1 Rare
+VIS: 1 covers, 11 Common, 3 Uncommon, 1 Rare
+WTH: 1 covers, 11 Common, 3 Uncommon, 1 Rare
+WWK: 3 covers, 10 Common, 3 Uncommon, 1 Rare, 1 BasicLand ZEN
+ZEN: 5 covers, 10 Common, 3 Uncommon, 1 Rare, 1 BasicLand

@@ -24,21 +24,22 @@ import java.util.List;
 import com.google.common.base.Function;
 
 import forge.Singletons;
+import forge.card.BoosterGenerator;
 import forge.card.CardEdition;
-import forge.card.FatPackData;
+import forge.card.FatPackTemplate;
 
 public class FatPack extends OpenablePack {
     public static final Function<CardEdition, FatPack> FN_FROM_SET = new Function<CardEdition, FatPack>() {
         @Override
         public FatPack apply(final CardEdition arg1) {
-            FatPackData d = Singletons.getModel().getFatPacks().get(arg1.getCode());
+            FatPackTemplate d = Singletons.getModel().getFatPacks().get(arg1.getCode());
             return new FatPack(arg1.getName(), d);
         }
     };
 
-    private final FatPackData fpData;
+    private final FatPackTemplate fpData;
 
-    public FatPack(final String name0, final FatPackData fpData0) {
+    public FatPack(final String name0, final FatPackTemplate fpData0) {
         super(name0, Singletons.getModel().getBoosters().get(fpData0.getEdition()));
         fpData = fpData0;
     }
@@ -59,7 +60,7 @@ public class FatPack extends OpenablePack {
         for (int i = 0; i < fpData.getCntBoosters(); i++) {
             result.addAll(super.generate());
         }
-        result.addAll(getRandomBasicLands(fpData.getLandEdition(), fpData.getCntLands()));
+        result.addAll(BoosterGenerator.getBoosterPack(contents));
         return result;
     }
 
@@ -70,6 +71,6 @@ public class FatPack extends OpenablePack {
 
     @Override
     public int getTotalCards() {
-        return super.getTotalCards() * fpData.getCntBoosters() + fpData.getCntLands();
+        return super.getTotalCards() * fpData.getCntBoosters() + fpData.getTotal();
     }
 }

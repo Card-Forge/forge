@@ -6,7 +6,6 @@ import java.util.List;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
-
 import forge.util.ComparableOp;
 import forge.util.PredicateString;
 
@@ -96,6 +95,15 @@ public final class CardRulesPredicates {
      */
     public static Predicate<CardRules> name(final PredicateString.StringOp op, final String what) {
         return new LeafString(LeafString.CardField.NAME, op, what);
+    }
+
+    /**
+     * TODO: Write javadoc for this method.
+     * @param transform
+     * @return
+     */
+    public static Predicate<CardRules> splitType(CardSplitType transform) {
+        return new PredicateSplitType(transform);
     }
 
     /**
@@ -444,6 +452,19 @@ public final class CardRulesPredicates {
                 if ( null != subject.getEditionInfo(s) )
                     return true;
             return false;
+        }
+    }
+    
+    private static class PredicateSplitType implements Predicate<CardRules> {
+        private final CardSplitType cst;
+
+        public PredicateSplitType(final CardSplitType type) {
+            cst = type;
+        }
+
+        @Override
+        public boolean apply(final CardRules subject) {
+            return subject.getSplitType() == cst;
         }
     }
 

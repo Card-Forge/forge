@@ -1,22 +1,22 @@
-Set:LEA|Commons:23|Uncommons:13|Rares:2|BasicLands:22
-Set:LEB|Commons:23|Uncommons:13|Rares:2|BasicLands:22
-Set:2ED|Commons:23|Uncommons:13|Rares:2|BasicLands:22
-Set:3ED|Commons:23|Uncommons:13|Rares:2|BasicLands:22
-Set:4ED|Commons:26|Uncommons:9|Rares:3|BasicLands:22
-Set:ICE|Commons:26|Uncommons:9|Rares:3|BasicLands:22
-Set:5ED|Commons:26|Uncommons:9|Rares:3|BasicLands:22
-Set:MIR|Commons:25|Uncommons:10|Rares:3|BasicLands:22
-Set:TMP|Commons:25|Uncommons:10|Rares:3|BasicLands:22
-Set:USG|Commons:32|Uncommons:10|Rares:3|BasicLands:30
-Set:6ED|Commons:32|Uncommons:10|Rares:3|BasicLands:30
-Set:MMQ|Commons:32|Uncommons:10|Rares:3|BasicLands:30
-Set:INV|Commons:32|Uncommons:10|Rares:3|BasicLands:30
-Set:ODY|Commons:32|Uncommons:10|Rares:3|BasicLands:30
-Set:ONS|Commons:32|Uncommons:10|Rares:3|BasicLands:30
-Set:MRD|Commons:32|Uncommons:10|Rares:3|BasicLands:30
-Set:CHK|Commons:32|Uncommons:10|Rares:3|BasicLands:30
-Set:RAV|Commons:32|Uncommons:10|Rares:3|BasicLands:30
-Set:TSP|Commons:29|Uncommons:10|Rares:3|BasicLands:30|Special:3
-Set:LRW|Commons:32|Uncommons:10|Rares:3|BasicLands:30
-Set:SHM|Commons:32|Uncommons:10|Rares:3|BasicLands:30
-Set:ALA|Commons:32|Uncommons:10|Rares:3|BasicLands:30
+LEA: 23 Common, 13 Uncommon, 2 Rare, 22 BasicLand
+LEB: 23 Common, 13 Uncommon, 2 Rare, 22 BasicLand
+2ED: 23 Common, 13 Uncommon, 2 Rare, 22 BasicLand
+3ED: 23 Common, 13 Uncommon, 2 Rare, 22 BasicLand
+4ED: 26 Common, 9 Uncommon, 3 Rare, 22 BasicLand
+ICE: 26 Common, 9 Uncommon, 3 Rare, 22 BasicLand
+5ED: 26 Common, 9 Uncommon, 3 Rare, 22 BasicLand
+MIR: 25 Common, 10 Uncommon, 3 Rare, 22 BasicLand
+TMP: 25 Common, 10 Uncommon, 3 Rare, 22 BasicLand
+USG: 32 Common, 10 Uncommon, 3 Rare, 30 BasicLand
+6ED: 32 Common, 10 Uncommon, 3 Rare, 30 BasicLand
+MMQ: 32 Common, 10 Uncommon, 3 Rare, 30 BasicLand
+INV: 32 Common, 10 Uncommon, 3 Rare, 30 BasicLand
+ODY: 32 Common, 10 Uncommon, 3 Rare, 30 BasicLand
+ONS: 32 Common, 10 Uncommon, 3 Rare, 30 BasicLand
+MRD: 32 Common, 10 Uncommon, 3 Rare, 30 BasicLand
+CHK: 32 Common, 10 Uncommon, 3 Rare, 30 BasicLand
+RAV: 32 Common, 10 Uncommon, 3 Rare, 30 BasicLand
+TSP: 29 Common, 10 Uncommon, 3 Rare, 3 Special, 30 BasicLand
+LRW: 32 Common, 10 Uncommon, 3 Rare, 30 BasicLand
+SHM: 32 Common, 10 Uncommon, 3 Rare, 30 BasicLand
+ALA: 32 Common, 10 Uncommon, 3 Rare, 30 BasicLand
