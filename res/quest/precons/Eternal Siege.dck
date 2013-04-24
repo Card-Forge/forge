@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Eternal Siege
-Description=The best strategy against an overwhelming enemy is to stay on the offensive. You’ll forge a new alliance between Bant and Naya against the forces of Nicol Bolas, charging into the fray with an array of efficient, battle-ready knights and behemoths.
+Description=The best strategy against an overwhelming enemy is to stay on the offensive. You'll forge a new alliance between Bant and Naya against the forces of Nicol Bolas, charging into the fray with an array of efficient, battle-ready knights and behemoths.
 Deck Type=constructed
 Set=ARB
 Image=eternal_siege.jpg

@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Grab for Power
-Description=The ultimate goal of the deck is to have three specific artifacts -Crown of Empires, Scepter of Empires, and Throne of Empires- on the battlefield at the same time.
+Description=The ultimate goal of the deck is to have three specific artifacts - Crown of Empires, Scepter of Empires, and Throne of Empires - on the battlefield at the same time.
 Deck Type=constructed
 Set=M12
 Image=grab_for_power.jpg

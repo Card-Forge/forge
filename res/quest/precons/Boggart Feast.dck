@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Boggart Feast
-Description=When playing the “Boggart Feast” deck, you're running a raucous warren of expendable, accident-prone Goblins. Enjoy the sadistic delight of offing your own creatures for fun and profit, since that's what Facevaulter, Tar Pitcher, and Fodder Launch do.
+Description=When playing the "Boggart Feast" deck, you're running a raucous warren of expendable, accident-prone Goblins. Enjoy the sadistic delight of offing your own creatures for fun and profit, since that's what Facevaulter, Tar Pitcher, and Fodder Launch do.
 Deck Type=constructed
 Set=LRW
 Image=boggart_feast.jpg

@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Expulsion
-Description=The "Expulsion" deck is all about making your opponent discard cards. Your plan is to use your discard spells and abilities to cripple your opponents-they can't play what they can't hold on to!
+Description=The "Expulsion" deck is all about making your opponent discard cards. Your plan is to use your discard spells and abilities to cripple your opponents - they can't play what they can't hold on to!
 Deck Type=constructed
 Set=8ED
 Image=expulsion.jpg

@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Fate Blaster
-Description=The "Fate Blaster" deck is designed to let you get ahead of yourself. That’s because you’ll have your head in the future, molding fate to your whims. 
+Description=The "Fate Blaster" deck is designed to let you get ahead of yourself. That's because you'll have your head in the future, molding fate to your whims. 
 Deck Type=constructed
 Set=FUT
 Image=fate_blaster.jpg

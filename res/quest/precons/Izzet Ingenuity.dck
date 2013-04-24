@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Izzet Ingenuity
-Description=The mad geniuses of the Izzet League are known for their brilliant innovation—and catastrophic experimentation. The "Izzet Ingenuity" deck takes advantage of both. When you win, you win big. Harness the genius of the Izzet League, and immolate your opponents with a flurry of arcane power.
+Description=The mad geniuses of the Izzet League are known for their brilliant innovation - and catastrophic experimentation. The "Izzet Ingenuity" deck takes advantage of both. When you win, you win big. Harness the genius of the Izzet League, and immolate your opponents with a flurry of arcane power.
 Deck Type=constructed
 Set=RTR
 Image=izzet_ingenuity.jpg

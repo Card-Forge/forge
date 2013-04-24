@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Golgari Growth
-Description=The Golgari don't discriminate based on paltry factors like whether a creature is alive. Any warm—or cold—body will do the job. That's why the scavenge mechanic is so powerful: when you put that card's power back on the battlefield in the form of +1/+1 counters, it's like the creature never died at all!
+Description=The Golgari don't discriminate based on paltry factors like whether a creature is alive. Any warm - or cold - body will do the job. That's why the scavenge mechanic is so powerful: when you put that card's power back on the battlefield in the form of +1/+1 counters, it's like the creature never died at all!
 Deck Type=constructed
 Set=RTR
 Image=golgari_growth.jpg

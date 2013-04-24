@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Legion Aloft
-Description=Your strategy revolves around ruling two fronts at once: the land and the sky. You’ll set down an impenetrable blockade of foe-frustrating creatures on the ground, and then launch a combined force of quick Bant and Esper fliers over enemy defenses. Keep your opponents off-balance with sneaky spells while you pummel their befuddled faces with your winged minions.
+Description=Your strategy revolves around ruling two fronts at once: the land and the sky. You'll set down an impenetrable blockade of foe-frustrating creatures on the ground, and then launch a combined force of quick Bant and Esper fliers over enemy defenses. Keep your opponents off-balance with sneaky spells while you pummel their befuddled faces with your winged minions.
 Deck Type=constructed
 Set=ARB
 Image=legion_aloft.jpg

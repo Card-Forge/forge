@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Bant on the March
-Description=Now you can answer that call to war. You’ll assemble a quick force of heroic soldiers, rhoxes, and flying aven to defend the noble realm of Bant from the other planes. Then you can continue the attack one of two ways: build up a single, unstoppable champion using the exalted mechanic, or overrun your enemy with a game-ending spell that empowers your whole army at once.
+Description=Now you can answer that call to war. You'll assemble a quick force of heroic soldiers, rhoxes, and flying aven to defend the noble realm of Bant from the other planes. Then you can continue the attack one of two ways: build up a single, unstoppable champion using the exalted mechanic, or overrun your enemy with a game-ending spell that empowers your whole army at once.
 Deck Type=constructed
 Set=CFX
 Image=bant_on_the_march.jpg

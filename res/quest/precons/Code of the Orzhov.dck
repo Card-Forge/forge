@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Code of the Orzhov
-Description=The Orzhov know how to get what they want—they bleed it out of their victims. Slo-o-owly. While playing the "Code of the Orzhov" deck, you'll strip away all opposing threats while you gradually, relentlessly pick away at your opponent's life total.
+Description=The Orzhov know how to get what they want - they bleed it out of their victims. Slo-o-owly. While playing the "Code of the Orzhov" deck, you'll strip away all opposing threats while you gradually, relentlessly pick away at your opponent's life total.
 Deck Type=constructed
 Set=GPT
 Image=code_of_the_orzhov.jpg
