@@ -589,7 +589,9 @@ public final class GameActionUtil {
         for(Card c : inp.getSelected()) {
             cpl.executePayment(sourceAbility, c);
         }
-        cpl.reportPaidCardsTo(sourceAbility);
+        if (sourceAbility != null) {
+            cpl.reportPaidCardsTo(sourceAbility);
+        }
         return true;
     }
 
