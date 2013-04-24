@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Simic Synthesis
-Description=The Simic Combine is always evolving—literally! The evolve mechanic means your creatures are constantly growing into new and unusual forms. A creature with evolve gets a +1/+1 counter if a larger creature (meaning it has a greater power or a greater toughness) enters the battlefield under your control. After enough evolutions, even the smallest creature can sit on top of the food chain.
+Description=The Simic Combine is always evolving — literally! The evolve mechanic means your creatures are constantly growing into new and unusual forms. A creature with evolve gets a +1/+1 counter if a larger creature (meaning it has a greater power or a greater toughness) enters the battlefield under your control. After enough evolutions, even the smallest creature can sit on top of the food chain.
 Deck Type=constructed
 Set=GTC
 Image=simic_synthesis.jpg

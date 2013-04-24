@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Rakdos Raid
-Description=With the "Rakdos Raid" deck, you'll rein in the chaos of the Rakdos horde, and revel in the carnage of your enemy's downfall. At the core of the deck are creatures with the unleash ability. A creature with unleash can enter the battlefield with a +1/+1 counter on it—if it gives up the idea of playing defense. Get ready to start attacking your opponent and hit hard and fast.
+Description=With the "Rakdos Raid" deck, you'll rein in the chaos of the Rakdos horde, and revel in the carnage of your enemy's downfall. At the core of the deck are creatures with the unleash ability. A creature with unleash can enter the battlefield with a +1/+1 counter on it - if it gives up the idea of playing defense. Get ready to start attacking your opponent and hit hard and fast.
 Deck Type=constructed
 Set=RTR
 Image=rakdos_raid.jpg

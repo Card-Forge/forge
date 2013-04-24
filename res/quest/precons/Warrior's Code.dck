@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Warrior's Code
-Description=The "Warrior's Code" deck is a deck you can hear from across the room. It's not that fast and not that subtle—it's just brutal, relentless, and rip-roaringly face-smashy! It's primed to deliver the kind of whupping that'll leave welts.
+Description=The "Warrior's Code" deck is a deck you can hear from across the room. It's not that fast and not that subtle - it's just brutal, relentless, and rip-roaringly face-smashy! It's primed to deliver the kind of whupping that'll leave welts.
 Deck Type=constructed
 Set=MOR
 Image=warriors_code.jpg

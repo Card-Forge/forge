@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Wild Rush
-Description=If you play by instinct, combining natural skill with unrelenting ferocity, you're sure to enjoy the "Wild Rush" deck led by Yeva, Nature's Herald. Yeva turns every green creature in your hand—including herself—into an opportunity for an ambush.
+Description=If you play by instinct, combining natural skill with unrelenting ferocity, you're sure to enjoy the "Wild Rush" deck led by Yeva, Nature's Herald. Yeva turns every green creature in your hand - including herself - into an opportunity for an ambush.
 Deck Type=constructed
 Set=M13
 Image=wild_rush.jpg

@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Mystical Might
-Description=Attack early, attack often! That's the motto of the "Mystical Might" deck, which seeks to overwhelm your opponents with elusive—and illusory—creatures before they can mount a defense.
+Description=Attack early, attack often! That's the motto of the "Mystical Might" deck, which seeks to overwhelm your opponents with elusive - and illusory - creatures before they can mount a defense.
 Deck Type=constructed
 Set=M12
 Image=mystical_might.jpg

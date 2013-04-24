@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Vampire Onslaught
-Description=Competitive Magic players often face the difficult choice between an aggressive deck that wins as fast as possible and a combo deck that uses powerful synergies to generate an insurmountable lead. With the "Vampire Onslaught" deck, you don't need to make that choice—you can have both!
+Description=Competitive Magic players often face the difficult choice between an aggressive deck that wins as fast as possible and a combo deck that uses powerful synergies to generate an insurmountable lead. With the "Vampire Onslaught" deck, you don't need to make that choice - you can have both!
 Set=M12
 Image=vampire_onslaught.jpg
 [main]

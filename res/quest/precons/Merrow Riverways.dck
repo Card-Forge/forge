@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Merrow Riverways
-Description=Merfolk are slippery creatures, and you'll use that to your advantage in the “Merrow Riverways” deck. Plenty of Merfolk, like Streambed Aquitects and Silvergill Douser, have abilities that cause them to tap.
+Description=Merfolk are slippery creatures, and you'll use that to your advantage in the "Merrow Riverways" deck. Plenty of Merfolk, like Streambed Aquitects and Silvergill Douser, have abilities that cause them to tap.
 Deck Type=constructed
 Set=LRW
 Image=merrow_riverways.jpg
