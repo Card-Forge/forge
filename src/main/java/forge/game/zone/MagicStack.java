@@ -167,7 +167,7 @@ public class MagicStack extends MyObservable {
         if ((ability.getRestrictions().getActivationNumberSacrifice() != -1)
                 && (ability.getRestrictions().getNumberTurnActivations() >= ability.getRestrictions()
                         .getActivationNumberSacrifice())) {
-            ability.getSourceCard().addExtrinsicKeyword("At the beginning of the end step, sacrifice CARDNAME.");
+            ability.getSourceCard().addHiddenExtrinsicKeyword("At the beginning of the end step, sacrifice CARDNAME.");
         }
 
         // if the ability is a spell, but not a copied spell and its not already

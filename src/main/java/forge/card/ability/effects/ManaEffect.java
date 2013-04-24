@@ -179,7 +179,7 @@ public class ManaEffect extends SpellAbilityEffect {
         // convert these to SubAbilities when appropriate
         if (sa.hasParam("Stuck")) {
             sa.setUndoable(false);
-            card.addExtrinsicKeyword("This card doesn't untap during your next untap step.");
+            card.addHiddenExtrinsicKeyword("This card doesn't untap during your next untap step.");
         }
 
         final String deplete = sa.getParam("Deplete");
