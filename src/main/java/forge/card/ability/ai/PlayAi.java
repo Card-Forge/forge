@@ -70,4 +70,28 @@ public class PlayAi extends SpellAbilityAi {
         }
         return chance;
     }
+    
+    /**
+     * <p>
+     * doTriggerAINoCost
+     * </p>
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
+     * @param mandatory
+     *            a boolean.
+     * @param af
+     *            a {@link forge.card.ability.AbilityFactory} object.
+     *
+     * @return a boolean.
+     */
+    @Override
+    protected boolean doTriggerAINoCost(final AIPlayer ai, final SpellAbility sa, final boolean mandatory) {
+
+        final Target tgt = sa.getTarget();
+        if (tgt != null) {
+            return false;
+        }
+
+        return true;
+    }
 }
