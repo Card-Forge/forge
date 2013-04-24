@@ -4457,11 +4457,8 @@ public class Card extends GameEntity implements Comparable<Card> {
     public void removeAllExtrinsicKeyword(final String s) {
         final ArrayList<String> strings = new ArrayList<String>();
         strings.add(s);
-        if (s.startsWith("HIDDEN")) {
-            this.hiddenExtrinsicKeyword.removeAll(strings);
-        } else {
-            this.extrinsicKeyword.removeAll(strings);
-        }
+        this.hiddenExtrinsicKeyword.removeAll(strings);
+        this.extrinsicKeyword.removeAll(strings);
     }
 
 
