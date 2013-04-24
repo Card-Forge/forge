@@ -2,8 +2,8 @@ Name:Spitting Slug
 ManaCost:1 G G
 Types:Creature Slug
 PT:2/4
-T:Mode$ AttackerBlocked | ValidCard$ Card.Self | Execute$ DBPay | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked, you may pay 1 G. If you do, Spitting Slug gains first strike until end of turn. Otherwise, each creature blocking or blocked by CARDNAME gains first strike until end of turn.
-T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ DBPay | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked, you may pay 1 G. If you do, Spitting Slug gains first strike until end of turn. Otherwise, each creature blocking or blocked by CARDNAME gains first strike until end of turn.
+T:Mode$ AttackerBlocked | ValidCard$ Card.Self | Execute$ DBPay | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked, you may pay 1 G. If you do, CARDNAME gains first strike until end of turn. Otherwise, each creature blocking or blocked by CARDNAME gains first strike until end of turn.
+T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ DBPay | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked, you may pay 1 G. If you do, CARDNAME gains first strike until end of turn. Otherwise, each creature blocking or blocked by CARDNAME gains first strike until end of turn.
 SVar:DBPay:DB$ StoreSVar | SVar$ SlugUnpaid | Type$ Number | Expression$ 1 | UnlessCost$ 1 G | UnlessPayer$ You | SubAbility$ PumpSelf | References$ SlugUnpaid
 SVar:PumpSelf:DB$Pump | Defined$ Self | KW$ First Strike | ConditionCheckSVar$ SlugUnpaid | ConditionSVarCompare$ EQ0 | SubAbility$ PumpOthers
 SVar:PumpOthers:DB$PumpAll | ValidCards$ Creature.blockingSource,Creature.blockedBySource | KW$ First Strike | ConditionCheckSVar$ SlugUnpaid | ConditionSVarCompare$ EQ1 | SubAbility$ DBReset
