@@ -31,10 +31,12 @@ import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
+import forge.Singletons;
 import forge.item.CardDb;
 import forge.item.CardPrinted;
 import forge.item.IPaperCard;
 import forge.item.PrintSheet;
+import forge.model.FModel;
 import forge.util.TextUtil;
 
 /**
@@ -86,7 +88,7 @@ public class BoosterGenerator {
     
     @SuppressWarnings("unchecked")
     private static final PrintSheet makeSheet(String sheetKey, Iterable<CardPrinted> src) {
-        PrintSheet ps = new PrintSheet();
+        PrintSheet ps = new PrintSheet(sheetKey);
         String[] sKey = TextUtil.splitWithParenthesis(sheetKey, ' ', '(', ')', 2);
         
         String[] operators = TextUtil.splitWithParenthesis(sKey[0], ':', '(', ')');
@@ -148,8 +150,9 @@ public class BoosterGenerator {
             Predicate<CardPrinted> predicate = Predicates.and( setPred, IPaperCard.Predicates.Presets.IS_SPECIAL, extraPred );
             ps.addAll(Iterables.filter(src, predicate));
 
-        } else if ( mainCode.equalsIgnoreCase("mazeland") ) {
-            
+        } else if ( mainCode.equalsIgnoreCase("custom(") ) {
+            String sheetName = StringUtils.strip(mainCode.substring(6), "()\" ");
+            return Singletons.getModel().getPrintSheets().get(sheetName);
         }
         return ps;
     }

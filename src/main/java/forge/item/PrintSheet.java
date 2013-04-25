@@ -1,10 +1,16 @@
 package forge.item;
 
+import java.io.File;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.ArrayList;
 import java.util.Collection;
+
+import com.google.common.base.Function;
+
+import forge.deck.CardPool;
 import forge.util.MyRandom;
+import forge.util.storage.StorageReaderFileSections;
 
 
 /** 
@@ -12,8 +18,23 @@ import forge.util.MyRandom;
  *
  */
 public class PrintSheet {
-    private final ItemPool<CardPrinted> cardsWithWeights = new ItemPool<CardPrinted>(CardPrinted.class);
+    public static final Function<PrintSheet, String> FN_GET_KEY = new Function<PrintSheet, String>() { 
+        @Override public final String apply(PrintSheet sheet) { return sheet.name; } 
+    };
 
+
+    private final ItemPool<CardPrinted> cardsWithWeights;
+
+    
+    private final String name;
+    public PrintSheet(String name0) {
+        this(name0, null);
+    }
+    
+    private PrintSheet(String name0, ItemPool<CardPrinted> pool) {
+        name = name0;
+        cardsWithWeights = pool != null ? pool : new ItemPool<CardPrinted>(CardPrinted.class);
+    }
     
     public void add(CardPrinted card) {
         add(card,1);
@@ -67,5 +88,16 @@ public class PrintSheet {
         return result;
     }
 
+    public static class Reader extends StorageReaderFileSections<PrintSheet> {
+        public Reader(String fileName) {
+            super(fileName, PrintSheet.FN_GET_KEY);
+        }
+
+        @Override
+        protected PrintSheet read(String title, Iterable<String> body, int idx) {
+            return new PrintSheet(title, CardPool.fromCardList(body));
+        }
+        
+    }
 
 }

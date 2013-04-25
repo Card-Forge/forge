@@ -42,6 +42,7 @@ import forge.game.MatchController;
 import forge.game.limited.GauntletMini;
 import forge.gauntlet.GauntletData;
 import forge.item.CardDb;
+import forge.item.PrintSheet;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 import forge.properties.NewConstants;
@@ -89,6 +90,7 @@ public enum FModel {
     private final IStorageView<CardBlock> blocks;
     private final IStorageView<CardBlock> fantasyBlocks;
     private final IStorageView<QuestWorld> worlds;
+    private final IStorageView<PrintSheet> printSheets;
 
     /**
      * Constructor.
@@ -170,6 +172,8 @@ public enum FModel {
 
         this.decks = new CardCollections();
         this.quest = new QuestController();
+        
+        this.printSheets = new StorageView<PrintSheet>(new PrintSheet.Reader("res/blockdata/printsheets.txt"));
     }
 
     public final QuestController getQuest() {
@@ -373,6 +377,10 @@ public enum FModel {
         return boosters;
     }
 
+    public IStorageView<PrintSheet> getPrintSheets() {
+        return printSheets;
+    }
+    
     /**
      * TODO: Write javadoc for this method.
      * @param data0 {@link forge.gauntlet.GauntletData}
@@ -392,4 +400,6 @@ public enum FModel {
         }
         return gauntlet;
     }
+
+
 }

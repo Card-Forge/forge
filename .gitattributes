@@ -15,6 +15,7 @@ res/blockdata/blocks.txt svneol=native#text/plain
 res/blockdata/fantasyblocks.txt -text
 res/blockdata/fatpacks.txt -text
 res/blockdata/formats.txt -text
+res/blockdata/printsheets.txt -text
 res/blockdata/setdata.txt svneol=native#text/plain
 res/blockdata/starters.txt -text
 res/cardsfolder/a/a_display_of_my_dark_power.txt -text
@@ -14418,6 +14419,7 @@ src/main/java/forge/util/storage/IStorage.java -text
 src/main/java/forge/util/storage/IStorageView.java -text
 src/main/java/forge/util/storage/StorageImmediatelySerialized.java svneol=native#text/plain
 src/main/java/forge/util/storage/StorageReaderFile.java -text
+src/main/java/forge/util/storage/StorageReaderFileSections.java -text
 src/main/java/forge/util/storage/StorageReaderFolder.java -text
 src/main/java/forge/util/storage/StorageView.java -text
 src/main/java/forge/util/storage/package-info.java -text

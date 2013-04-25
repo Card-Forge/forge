@@ -27,9 +27,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 import java.util.TreeSet;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.base.Function;
@@ -185,9 +182,7 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
             if ( null == sec )
                 continue;
             
-            CardPool pool = new CardPool();
-            pool.set(Deck.readCardList(s.getValue()));
-
+            CardPool pool = CardPool.fromCardList(s.getValue());
             // I used to store planes and schemes under sideboard header, so this will assign them to a correct section
             IPaperCard sample = pool.get(0); 
             if ( sample != null && ( sample.getRules().getType().isPlane() || sample.getRules().getType().isPhenomenon() ) )
@@ -200,34 +195,7 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
         return d;
     }
 
-    private static List<String> readCardList(final List<String> lines) {
-        final List<String> result = new ArrayList<String>();
-        final Pattern p = Pattern.compile("((\\d+)\\s+)?(.*?)");
 
-        if (lines == null) {
-            return result;
-        }
-
-        final Iterator<String> lineIterator = lines.iterator();
-        while (lineIterator.hasNext()) {
-            final String line = lineIterator.next();
-            if (line.startsWith(";") || line.startsWith("#")) { continue; } // that is a comment or not-yet-supported card
-
-            final Matcher m = p.matcher(line.trim());
-            m.matches();
-            final String sCnt = m.group(2);
-            final String cardName = m.group(3);
-            if (StringUtils.isBlank(cardName)) {
-                continue;
-            }
-
-            final int count = sCnt == null ? 1 : Integer.parseInt(sCnt);
-            for (int i = 0; i < count; i++) {
-                result.add(cardName);
-            }
-        }
-        return result;
-    }
 
     private static List<String> writeCardPool(final ItemPoolView<CardPrinted> pool) {
         final List<Entry<CardPrinted, Integer>> main2sort = pool.getOrderedList();

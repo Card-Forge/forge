@@ -17,9 +17,14 @@
  */
 package forge.deck;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map.Entry;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.NoSuchElementException;
+
+import org.apache.commons.lang3.StringUtils;
 
 import forge.Card;
 import forge.item.CardDb;
@@ -50,19 +55,6 @@ public class CardPool extends ItemPool<CardPrinted> {
     }
 
     /**
-     * Sets the.
-     * 
-     * @param cardNames
-     *            the card names
-     */
-    public void set(final Iterable<String> cardNames) {
-        this.clear();
-        for (final String name : cardNames) {
-            this.add(name);
-        }
-    }
-
-    /**
      * Adds the.
      * 
      * @param card
@@ -71,7 +63,7 @@ public class CardPool extends ItemPool<CardPrinted> {
     public void add(final Card card) {
         this.add(CardDb.getCard(card));
     }
-
+    
     /**
      * Adds the.
      * 
@@ -131,13 +123,13 @@ public class CardPool extends ItemPool<CardPrinted> {
      *
      * @param cardName the card name
      */
-    public void add(final String cardName) {
+    public void add(final String cardName, int cnt) {
         CardPrinted cp = CardDb.instance().tryGetCard(cardName);
         if ( cp == null )
             cp = CardDb.variants().tryGetCard(cardName);
 
         if ( cp != null)
-            this.add(cp);
+            this.add(cp, cnt);
         else
             throw new NoSuchElementException(String.format("Card %s is not supported by Forge, as it's neither a known common card nor one of casual variants' card.", cardName));
     }
@@ -170,5 +162,33 @@ public class CardPool extends ItemPool<CardPrinted> {
             sb.append(e.getValue()).append(" x ").append(e.getKey().getName());
         }
         return sb.append(']').toString();
+    }
+    
+    
+    public static CardPool fromCardList(final Iterable<String> lines) {
+        CardPool pool = new CardPool();
+        final Pattern p = Pattern.compile("((\\d+)\\s+)?(.*?)");
+
+        if (lines == null) {
+            return pool;
+        }
+
+        final Iterator<String> lineIterator = lines.iterator();
+        while (lineIterator.hasNext()) {
+            final String line = lineIterator.next();
+            if (line.startsWith(";") || line.startsWith("#")) { continue; } // that is a comment or not-yet-supported card
+
+            final Matcher m = p.matcher(line.trim());
+            m.matches();
+            final String sCnt = m.group(2);
+            final String cardName = m.group(3);
+            if (StringUtils.isBlank(cardName)) {
+                continue;
+            }
+
+            final int count = sCnt == null ? 1 : Integer.parseInt(sCnt);
+            pool.add(cardName, count);
+        }
+        return pool;
     }
 }
