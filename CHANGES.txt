@@ -64,7 +64,7 @@ Some people have noticed slowdowns when Targeting arrows are enabled. The battle
 
 
 - Quest challenge start in play cards -
-The quest challenge start in play cards are not appearing on the battlefield.
+We have received reports that the quest challenge start in play cards are not appearing on the battlefield for some people. This was either fixed recently or it only affects some people but not all of them. Your match.xml and/or your quest save files may be corrupted.
 
 
 - Human vs Human play over the internet -
