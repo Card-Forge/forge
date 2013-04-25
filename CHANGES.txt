@@ -80,7 +80,7 @@ Deck generation is now strictly conforming the colors chosen. You won't get any 
 
 
 - Single declare attackers step -
-Single declare attackers step for all Targets (see viewtopic.php?f=26&t=10046)
+Combined declare attackers step for all Defending Players/Planeswalkers (see viewtopic.php?f=26&t=10046)
 
 
 - Booster slots -
