@@ -17,7 +17,6 @@
  */
 package forge.control.input;
 
-import forge.Singletons;
 import forge.card.cost.Cost;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostBeingPaid;
@@ -95,9 +94,9 @@ public class InputPayManaExecuteCommands extends InputPayManaBase {
     @Override
     protected void done() {
         if (this.phyLifeToLose > 0) {
-            Singletons.getControl().getPlayer().payLife(this.phyLifeToLose, null);
+            player.payLife(this.phyLifeToLose, null);
         }
-        Singletons.getControl().getPlayer().getManaPool().clearManaPaid(this.saPaidFor, false);
+        player.getManaPool().clearManaPaid(this.saPaidFor, false);
         bPaid = true;
         this.stop();
     }
@@ -105,7 +104,7 @@ public class InputPayManaExecuteCommands extends InputPayManaBase {
     /** {@inheritDoc} */
     @Override
     protected final void onCancel() {
-        Singletons.getControl().getPlayer().getManaPool().refundManaPaid(this.saPaidFor, true);
+        player.getManaPool().refundManaPaid(this.saPaidFor, true);
         bPaid = false;
         this.stop();
     }

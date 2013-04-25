@@ -1,7 +1,6 @@
 package forge.control.input;
 
 import forge.Card;
-import forge.Singletons;
 import forge.card.mana.ManaCostBeingPaid;
 import forge.card.spellability.SpellAbility;
 import forge.game.player.Player;
@@ -32,10 +31,8 @@ public class InputPayManaOfCostPayment extends InputPayManaBase {
     protected void done() {
         final Card source = saPaidFor.getSourceCard();
         if (this.phyLifeToLose > 0) {
-            Singletons.getControl().getPlayer().payLife(this.phyLifeToLose, source);
+            player.payLife(this.phyLifeToLose, source);
         }
-        source.setColorsPaid(this.manaCost.getColorsPaid());
-        source.setSunburstValue(this.manaCost.getSunburst());
 
         // If this is a spell with convoke, re-tap all creatures used  for it.
         // This is done to make sure Taps triggers go off at the right time

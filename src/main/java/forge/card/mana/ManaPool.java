@@ -493,11 +493,7 @@ public class ManaPool {
      *            a {@link forge.card.spellability.AbilityMana} object.
      * @return a {@link forge.card.mana.ManaCostBeingPaid} object.
      */
-    public final ManaCostBeingPaid payManaFromAbility(final SpellAbility sa, ManaCostBeingPaid manaCost, final SpellAbility ma) {
-        if (manaCost.isPaid() || this.isEmpty()) {
-            return manaCost;
-        }
-
+    public final void payManaFromAbility(final SpellAbility sa, ManaCostBeingPaid manaCost, final SpellAbility ma) {
         // Mana restriction must be checked before this method is called
 
         final List<SpellAbility> paidAbs = sa.getPayingManaAbilities();
@@ -522,7 +518,6 @@ public class ManaPool {
                 }
             }
         }
-        return manaCost;
     }
 
     /**

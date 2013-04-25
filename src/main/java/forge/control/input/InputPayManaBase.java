@@ -308,7 +308,7 @@ public abstract class InputPayManaBase extends InputSyncronizedBase implements I
     
     public void onManaAbilityPlayed(final SpellAbility saPaymentSrc) { 
         if ( saPaymentSrc != null) // null comes when they've paid from pool
-            this.manaCost = player.getManaPool().payManaFromAbility(saPaidFor, manaCost, saPaymentSrc);
+            player.getManaPool().payManaFromAbility(saPaidFor, manaCost, saPaymentSrc);
 
         onManaAbilityPaid();
         if ( saPaymentSrc != null )

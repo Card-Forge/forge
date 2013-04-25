@@ -133,6 +133,9 @@ public class CostPartMana extends CostPart {
             FThreads.setInputAndWait(inpPayment);
             if(!inpPayment.isPaid())
                 return false;
+
+            source.setColorsPaid(toPay.getColorsPaid());
+            source.setSunburstValue(toPay.getSunburst());
         }
         if (this.getAmountOfX() > 0) {
             if( !ability.isAnnouncing("X") && !xWasBilled) {

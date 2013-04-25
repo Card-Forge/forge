@@ -216,7 +216,7 @@ public class ComputerUtilMana {
                     //ma.resolve();
                     AbilityUtils.resolve(ma, false);
                     // subtract mana from mana pool
-                    cost = manapool.payManaFromAbility(sa, cost, ma);
+                    manapool.payManaFromAbility(sa, cost, ma);
                 } else {
                     cost.payMultipleMana(manaProduced);
                 }

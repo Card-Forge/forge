@@ -50,16 +50,6 @@ public class InputPayManaSimple extends InputPayManaBase {
         
     }
 
-    /**
-     * <p>
-     * resetManaCost.
-     * </p>
-     */
-    private void resetManaCost() {
-        this.manaCost = new ManaCostBeingPaid(this.originalManaCost);
-        this.phyLifeToLose = 0;
-    }
-
     protected void onManaAbilityPaid() {
         if (this.manaCost.isPaid()) {
             this.originalCard.setSunburstValue(this.manaCost.getSunburst());
@@ -92,7 +82,6 @@ public class InputPayManaSimple extends InputPayManaBase {
         }
         if (!this.saPaidFor.getSourceCard().isCopiedSpell()) {
             player.getManaPool().clearManaPaid(this.saPaidFor, false);
-            this.resetManaCost();
 
             if (this.saPaidFor.isSpell()) {
                 this.saPaidFor.setSourceCard(game.getAction().moveToStack(this.originalCard));
@@ -108,7 +97,6 @@ public class InputPayManaSimple extends InputPayManaBase {
     @Override
     protected final void onCancel() {
         handleConvokedCards(true);
-        this.resetManaCost();
 
         player.getManaPool().refundManaPaid(this.saPaidFor, true);
         player.getZone(ZoneType.Battlefield).updateObservers(); // DO
