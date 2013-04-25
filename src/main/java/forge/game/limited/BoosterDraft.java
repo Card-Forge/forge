@@ -24,9 +24,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.NoSuchElementException;
+import java.util.Stack;
 import java.util.TreeMap;
 
 import javax.swing.JOptionPane;
+
+import org.apache.commons.lang.ArrayUtils;
 
 import com.google.common.base.Supplier;
 
@@ -37,6 +40,7 @@ import forge.card.BoosterGenerator;
 import forge.card.BoosterTemplate;
 import forge.card.CardBlock;
 import forge.card.CardEdition;
+import forge.card.IUnOpenedProduct;
 import forge.card.SealedProductTemplate;
 import forge.card.UnOpenedProduct;
 import forge.deck.Deck;
@@ -96,63 +100,37 @@ public final class BoosterDraft implements IBoosterDraft {
         case Block: case FantasyBlock: // Draft from cards by block or set
 
             List<CardBlock> blocks = new ArrayList<CardBlock>();
-
             IStorageView<CardBlock> storage = draftType == CardPoolLimitation.Block 
                     ? Singletons.getModel().getBlocks() : Singletons.getModel().getFantasyBlocks();
 
             for (CardBlock b : storage) {
-                if (b.hasMetaSetType("choose1") || b.hasMetaSetType("random1")) {
-                    System.out.println("Ignoring block " + b.getName() + " because its MetaSet types are not supported in Draft.");
-                } else {
-                    blocks.add(b);
-                }
+                blocks.add(b);
             }
-
 
             final CardBlock block = GuiChoose.one("Choose Block", blocks);
 
             final CardEdition[] cardSets = block.getSets();
-            final String[] sets = new String[cardSets.length + block.getNumberMetaSets()];
+            final Stack<String> sets = new Stack<String>();
             for (int k = cardSets.length - 1; k >= 0; --k) {
-                sets[k] = cardSets[k].getCode();
+                sets.add(cardSets[k].getCode());
             }
 
-            if (block.getNumberMetaSets() > 0) {
-
-                int j = cardSets.length;
-
-                for (int k = 0; k < block.getNumberMetaSets(); k++) {
-                    sets[j + k] = block.getMetaSet(k).getCode();
-                }
+            for(String setCode : block.getMetaSetNames() ) {
+                if ( block.getMetaSet(setCode).isDraftable() )
+                    sets.push(setCode); // to the beginning
             }
 
             final int nPacks = block.getCntBoostersDraft();
-            final List<String> setCombos = getSetCombos(sets);
 
-            while (setCombos == null) {
-                throw new RuntimeException("Unsupported amount of packs (" + nPacks + ") in a Draft block!");
-            }
-
-            if (sets.length > 1) {
-                final Object p = GuiChoose.one("Choose Set Combination", setCombos);
+            if (sets.size() > 1) {
+                final Object p = GuiChoose.one("Choose Set Combination", getSetCombos(sets));
                 final String[] pp = p.toString().split("/");
                 for (int i = 0; i < nPacks; i++) {
-                    if (pp[i].charAt(0) == '*') {
-                        this.product.add(block.getBooster(pp[i]));
-                    }
-                    else {
-                        this.product.add(
-                                new UnOpenedProduct(Singletons.getModel().getBoosters().get(pp[i])));
-                    }
+                    this.product.add(block.getBooster(pp[i]));
                 }
             } else {
-                UnOpenedProduct product1;
-                if (sets[0].charAt(0) == '*') {
-                    product1 = block.getBooster(sets[0]);
-                }
-                else {
-                    product1 = new UnOpenedProduct(Singletons.getModel().getBoosters().get(sets[0]));
-                }
+                IUnOpenedProduct product1 = block.getBooster(sets.get(0));
+
                 for (int i = 0; i < nPacks; i++) {
                     this.product.add(product1);
                 }
@@ -368,8 +346,9 @@ public final class BoosterDraft implements IBoosterDraft {
         HttpUtil.upload(NewConstants.URL_DRAFT_UPLOAD + "?fmt=" + draftFormat, outDraftData);
     }
 
-    private ArrayList<String> getSetCombos(final String[] sets) {
-        ArrayList<String> setCombos = new ArrayList<String>();
+    private List<String> getSetCombos(final List<String> setz) {
+        String[] sets = setz.toArray(ArrayUtils.EMPTY_STRING_ARRAY);
+        List<String> setCombos = new ArrayList<String>();
         if (sets.length >= 2) {
             setCombos.add(String.format("%s/%s/%s", sets[0], sets[0], sets[0]));
             setCombos.add(String.format("%s/%s/%s", sets[0], sets[0], sets[1]));

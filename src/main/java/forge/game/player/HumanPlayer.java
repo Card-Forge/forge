@@ -150,27 +150,6 @@ public class HumanPlayer extends Player {
         }
     }
 
-    private boolean payManaCostIfNeeded(final SpellAbility sa) {
-        final ManaCostBeingPaid manaCost; 
-        if (sa.getSourceCard().isCopiedSpell() && sa.isSpell()) {
-            manaCost = new ManaCostBeingPaid(ManaCost.ZERO);
-        } else {
-            manaCost = new ManaCostBeingPaid(sa.getPayCosts().getTotalMana());
-            manaCost.applySpellCostChange(sa);
-        }
-
-        boolean isPaid = manaCost.isPaid();
-    
-        if( !isPaid ) {
-            InputPayManaBase inputPay = new InputPayManaSimple(game, sa, manaCost);
-            FThreads.setInputAndWait(inputPay);
-            isPaid = inputPay.isPaid();
-        }
-        return isPaid;
-    }
-    
-    
-
     /**
      * <p>
      * playSpellAbility_NoStack.
@@ -197,6 +176,25 @@ public class HumanPlayer extends Player {
             }
 
         }
+    }
+
+    private boolean payManaCostIfNeeded(final SpellAbility sa) {
+        final ManaCostBeingPaid manaCost; 
+        if (sa.getSourceCard().isCopiedSpell() && sa.isSpell()) {
+            manaCost = new ManaCostBeingPaid(ManaCost.ZERO);
+        } else {
+            manaCost = new ManaCostBeingPaid(sa.getPayCosts().getTotalMana());
+            manaCost.applySpellCostChange(sa);
+        }
+    
+        boolean isPaid = manaCost.isPaid();
+    
+        if( !isPaid ) {
+            InputPayManaBase inputPay = new InputPayManaSimple(game, sa, manaCost);
+            FThreads.setInputAndWait(inputPay);
+            isPaid = inputPay.isPaid();
+        }
+        return isPaid;
     }
 
     /**

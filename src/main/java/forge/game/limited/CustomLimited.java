@@ -60,13 +60,6 @@ public class CustomLimited extends DeckBase {
 
     private static final long serialVersionUID = 7435640939026612173L;
 
-    /** The Ignore rarity. */
-    private boolean ignoreRarity;
-
-    /** The Singleton. */
-    private boolean singleton = false;
-
-
     /** The Num packs. */
     private int numPacks = 3;
 
@@ -109,8 +102,6 @@ public class CustomLimited extends DeckBase {
             slots = BoosterTemplate.genericBooster.getSlots();
 
         final CustomLimited cd = new CustomLimited(data.get("Name"), slots);
-        cd.setIgnoreRarity(data.getBoolean("IgnoreRarity"));
-        cd.setSingleton(data.getBoolean("Singleton"));
         cd.landSetCode = data.get("LandSetCode");
         cd.numPacks = data.getInt("NumPacks");
         final Deck deckCube = cubes.get(data.get("DeckFile"));
@@ -138,44 +129,6 @@ public class CustomLimited extends DeckBase {
      */
     public void setNumPacks(final int numPacksIn) {
         this.numPacks = numPacksIn;
-    }
-
-    /**
-     * Gets the singleton.
-     * 
-     * @return the singleton
-     */
-    public boolean getSingleton() {
-        return this.singleton;
-    }
-
-    /**
-     * Sets the singleton.
-     * 
-     * @param singletonIn
-     *            the singleton to set
-     */
-    public void setSingleton(final boolean singletonIn) {
-        this.singleton = singletonIn;
-    }
-
-    /**
-     * Gets the ignore rarity.
-     * 
-     * @return the ignoreRarity
-     */
-    public boolean getIgnoreRarity() {
-        return this.ignoreRarity;
-    }
-
-    /**
-     * Sets the ignore rarity.
-     * 
-     * @param ignoreRarityIn
-     *            the ignoreRarity to set
-     */
-    public void setIgnoreRarity(final boolean ignoreRarityIn) {
-        this.ignoreRarity = ignoreRarityIn;
     }
 
     /**

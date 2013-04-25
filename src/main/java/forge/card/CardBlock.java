@@ -19,11 +19,16 @@ package forge.card;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
+
+import forge.Singletons;
 import forge.item.CardPrinted;
 import forge.item.IPaperCard;
+import forge.util.TextUtil;
 import forge.util.storage.StorageReaderFile;
 
 // import forge.deck.Deck;
@@ -37,7 +42,7 @@ public final class CardBlock implements Comparable<CardBlock> {
     private final int orderNum;
     private final String name;
     private final CardEdition[] sets;
-    private final ArrayList<MetaSet> metaSets;
+    private final Map<String, MetaSet> metaSets = new TreeMap<String, MetaSet>();
     private final CardEdition landSet;
     private final int cntBoostersDraft;
     private final int cntBoostersSealed;
@@ -61,12 +66,14 @@ public final class CardBlock implements Comparable<CardBlock> {
      * @param cntBoostersSealed
      *            the cnt boosters sealed
      */
-    public CardBlock(final int index, final String name, final List<CardEdition> sets, final ArrayList<MetaSet> metas,
+    public CardBlock(final int index, final String name, final List<CardEdition> sets, final List<MetaSet> metas,
             final CardEdition landSet, final int cntBoostersDraft, final int cntBoostersSealed) {
         this.orderNum = index;
         this.name = name;
         this.sets = sets.toArray(CardBlock.EMPTY_SET_ARRAY);
-        this.metaSets = metas;
+        for(MetaSet m : metas) {
+            this.metaSets.put(m.getCode(), m);
+        }
         this.landSet = landSet;
         this.cntBoostersDraft = cntBoostersDraft;
         this.cntBoostersSealed = cntBoostersSealed;
@@ -195,9 +202,9 @@ public final class CardBlock implements Comparable<CardBlock> {
      */
     @Override
     public String toString() {
-        if (this.getNumberMetaSets() + this.getNumberSets() < 1) {
+        if (this.metaSets.isEmpty() && this.sets.length < 1) {
             return this.name + " (empty)";
-        } else if (this.getNumberMetaSets() + this.getNumberSets() < 2) {
+        } else if (this.metaSets.size() + this.getNumberSets() < 2) {
             return this.name + " (set)";
         }
         return this.name + " (block)";
@@ -229,39 +236,30 @@ public final class CardBlock implements Comparable<CardBlock> {
          */
         @Override
         protected CardBlock read(String line, int i) {
-            final String[] sParts = line.trim().split("\\|");
+            final String[] sParts = TextUtil.splitWithParenthesis(line.trim(), ',', '(', ')', 3);
+            String name = sParts[0];
 
-            String name = null;
-            int index = 1+i;
-            final List<CardEdition> sets = new ArrayList<CardEdition>(9); // add support for up to 9 different sets in a block!
-            final ArrayList<MetaSet> metas = new ArrayList<MetaSet>();
-            CardEdition landSet = null;
-            int draftBoosters = 3;
-            int sealedBoosters = 6;
+            String[] numbers = sParts[1].trim().split("/");
+            int draftBoosters = Integer.parseInt(numbers[0]);
+            int sealedBoosters = Integer.parseInt(numbers[1]);
+            CardEdition landSet = editions.getEditionByCodeOrThrow(numbers[2]);
 
-            for (final String sPart : sParts) {
-                final String[] kv = sPart.split(":", 2);
-                final String key = kv[0].toLowerCase();
-                if ("name".equals(key)) {
-                    name = kv[1];
-                } else if ("set0".equals(key) || "set1".equals(key) || "set2".equals(key) || "set3".equals(key)
-                        || "set4".equals(key) || "set5".equals(key) || "set6".equals(key) || "set7".equals(key)
-                        || "set8".equals(key)) {
-                    sets.add(editions.getEditionByCodeOrThrow(kv[1]));
-                } else if ("meta0".equals(key) || "meta1".equals(key) || "meta2".equals(key) || "meta3".equals(key)
-                        || "meta4".equals(key) || "meta5".equals(key) || "meta6".equals(key) || "meta7".equals(key)
-                        || "meta8".equals(key)) {
-                    metas.add(new MetaSet(kv[1]));
-                } else if ("landsetcode".equals(key)) {
-                    landSet = editions.getEditionByCodeOrThrow(kv[1]);
-                } else if ("draftpacks".equals(key)) {
-                    draftBoosters = Integer.parseInt(kv[1]);
-                } else if ("sealedpacks".equals(key)) {
-                    sealedBoosters = Integer.parseInt(kv[1]);
+            List<CardEdition> sets = new ArrayList<CardEdition>();
+            List<MetaSet> metas = new ArrayList<MetaSet>();
+            
+            String[] setNames = TextUtil.splitWithParenthesis(sParts[2], ' ', '(', ')' );
+            for(final String set : setNames ) {
+                if(set.startsWith("Meta-")) {
+                    String metaSpec = set.substring(5);
+                    boolean noDraft = metaSpec.startsWith("NoDraft-");
+                    if( noDraft ) metaSpec = metaSpec.substring(8);
+                    metas.add(new MetaSet(metaSpec, noDraft));
+                } else {
+                    sets.add(editions.getEditionByCodeOrThrow(set));
                 }
-
             }
-            return new CardBlock(index, name, sets, metas, landSet, draftBoosters, sealedBoosters);
+
+            return new CardBlock(i+1, name, sets, metas, landSet, draftBoosters, sealedBoosters);
         }
 
     }
@@ -280,56 +278,15 @@ public final class CardBlock implements Comparable<CardBlock> {
         }
     }
 
-    /**
-     * The number of meta-sets in the block.
-     *
-     * @return int, number of meta-sets.
-     */
-    public int getNumberMetaSets() {
-        if (metaSets == null || metaSets.size() < 1) {
-            return 0;
-        }
-        else {
-            return metaSets.size();
-        }
+    public Iterable<String> getMetaSetNames() {
+        return metaSets.keySet();
     }
 
-    /**
-     * Returns the requested meta-set.
-     *
-     * @param index
-     *      int, the requested index
-     * @return MetaSet, the requested meta-set.
-     */
-    public MetaSet getMetaSet(final int index) {
-            if (index < 0 || index > this.getNumberMetaSets() - 1) {
-                throw new RuntimeException("Illegal MetaSet requested: " + index);
-            }
-            else {
-                return metaSets.get(index);
-            }
+
+    public MetaSet getMetaSet(String key) {
+       return metaSets.get(key);
     }
 
-    /**
-     * Returns true if there is a meta-set of the requested type.
-     *
-     * @param compare
-     *      String, the requested the requested type
-     * @return boolean, the requsted type was found
-     */
-    public boolean hasMetaSetType(final String compare) {
-
-        if (this.getNumberMetaSets() < 1) {
-            return false;
-        }
-
-        for (MetaSet mSet : metaSets) {
-            if (mSet.getType().equalsIgnoreCase(compare)) {
-                return true;
-            }
-        }
-        return false;
-    }
 
     /**
      * Tries to create a booster for the selected meta-set code.
@@ -338,18 +295,8 @@ public final class CardBlock implements Comparable<CardBlock> {
      *      String, the MetaSet code
      * @return UnOpenedProduct, the created booster.
      */
-    public UnOpenedProduct getBooster(final String code) {
-
-        if (this.getNumberMetaSets() < 1) {
-            throw new RuntimeException("Attempted to get a booster pack for empty metasets.");
-        }
-        else {
-            for (int i = 0; i < this.getNumberMetaSets(); i++) {
-                if (code.equals(metaSets.get(i).getCode())) {
-                    return metaSets.get(i).getBooster();
-                }
-            }
-            throw new RuntimeException("Could not find metaset " + code + " for booster generation.");
-        }
+    public IUnOpenedProduct getBooster(final String code) {
+        MetaSet ms = metaSets.get(code);
+        return ms == null ? new UnOpenedProduct(Singletons.getModel().getBoosters().get(code)) : ms.getBooster();
     }
 }

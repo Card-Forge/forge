@@ -19,14 +19,16 @@
 package forge.card;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
+
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
 
 import forge.Singletons;
 import forge.game.limited.CustomLimited;
 import forge.item.CardDb;
 import forge.item.CardPrinted;
-import forge.item.ItemPool;
+import forge.item.IPaperCard;
 import forge.util.FileUtil;
 
 /** 
@@ -90,10 +92,21 @@ import forge.util.FileUtil;
  *
  */
 public class MetaSet {
+    
+    private enum MetaSetType { 
+        Full,
+        Cube,
+        JoinedSet,
+        Choose,
+        Random,
+        Booster,
+        Pack
+    }
 
-    private final String type;
+    private final MetaSetType type;
     private final String data;
     private final String code;
+    private final boolean draftable; 
     // private BoosterGenerator boosterGen;
 
     /**
@@ -103,48 +116,26 @@ public class MetaSet {
      * @param creationString
      *       a {@link java.lang.String} object.
      */
-    public MetaSet(final String creationString) {
+    public MetaSet(final String creationString, boolean canDraft) {
+        int idxFirstPar = creationString.indexOf('(');
+        int idxLastPar = creationString.lastIndexOf(')');
 
+        draftable = canDraft; 
+        type = MetaSetType.valueOf(creationString.substring(0, idxFirstPar).trim());
+        data = creationString.substring(idxFirstPar + 1, idxLastPar);
+        String description = creationString.substring(idxLastPar + 1);
 
-        String[] kv = new String [3];
-        kv[0] = creationString.substring(0, creationString.indexOf('/'));
-        kv[1] = creationString.substring(creationString.indexOf('/') + 1, creationString.lastIndexOf('/'));
-        kv[2] = creationString.substring(creationString.lastIndexOf('/') + 1);
-        // Display the parse results:
-        // System.out.println("KV = '" + kv[0] + "', '" + kv[1] + "', '" + kv[2] + "'");
+        switch (type) {
+            case Cube: code = "*C:" + description; break;
+            case Full: code = "*FULL"; break;
+            case JoinedSet: code = "*B:" + description; break;
+            case Choose: code = "*!:" + description; break;
+            case Random: code = "*?:" + description; break;
+            case Booster: code = "*" + description; break;
+            case Pack: code = "*" + description + "(S)"; break; 
 
-        type = kv[0];
-        data = kv[1];
-
-        if ("cube".equalsIgnoreCase(type)) {
-            code = "*C:" + kv[2];
+            default: throw new RuntimeException("Invalid MetaSet type: " + type); 
         }
-        else if ("full".equalsIgnoreCase(type)) {
-            code = "*FULL";
-        }
-        else if ("meta".equalsIgnoreCase(type)) {
-            code = "*B:" + kv[2];
-        }
-        else if ("choose1".equalsIgnoreCase(type)) {
-            code = "*!:" + kv[2];
-        }
-        else if ("random1".equalsIgnoreCase(type)) {
-            code = "*?:" + kv[2];
-        }
-        else if ("combo".equalsIgnoreCase(type)) {
-            code = "*+:" + kv[2];
-        }
-        else if ("booster".equalsIgnoreCase(type)) {
-            code = "*" + kv[2];
-        }
-        else if ("pack".equalsIgnoreCase(type)) {
-            code = "*" + kv[2] + "(S)";
-        }
-        else {
-            code = null;
-            throw new RuntimeException("Invalid MetaSet type: " + type);
-        }
-
     }
 
     /**
@@ -158,151 +149,56 @@ public class MetaSet {
     }
 
     /**
-     * Return the type.
-     * 
-     * @return
-     *  String, type
-     */
-    public final String getType() {
-        return type;
-    }
-
-    /**
      * 
      * Attempt to get a booster.
      * 
      * @return UnOpenedProduct, the generated booster.
      */
-    public UnOpenedProduct getBooster() {
+    public IUnOpenedProduct getBooster() {
 
-        ItemPool<CardPrinted> cardPool = null;
+        switch(type) {
+            case Full:
+                return new UnOpenedProduct(BoosterTemplate.genericBooster);
 
-        if ("meta".equalsIgnoreCase(type) || "choose1".equalsIgnoreCase(type)
-                || "random1".equalsIgnoreCase(type) || "combo".equalsIgnoreCase(type)) {
-            cardPool = new ItemPool<CardPrinted>(CardPrinted.class);
-        }
+            case Booster:
+                return new UnOpenedProduct(Singletons.getModel().getBoosters().get(data));
 
-        if ("cube".equalsIgnoreCase(type)) {
+            case Pack:
+                return new UnOpenedProduct(Singletons.getModel().getTournamentPacks().get(data));
 
-            final File dFolder = new File("res/sealed/");
+            case JoinedSet:
+                Predicate<CardPrinted> predicate = IPaperCard.Predicates.printedInSets(data.split(" "));
+                Iterable<CardPrinted> pool = Iterables.filter(CardDb.instance().getAllCards(), predicate); 
+                return new UnOpenedProduct(BoosterTemplate.genericBooster, pool);
 
-            if (!dFolder.exists()) {
-                throw new RuntimeException("GenerateSealed : folder not found -- folder is " + dFolder.getAbsolutePath());
-            }
+            case Choose:
+                return new UnOpenedMeta(data, true);
 
-            if (!dFolder.isDirectory()) {
-                throw new RuntimeException("GenerateSealed : not a folder -- " + dFolder.getAbsolutePath());
-            }
+            case Random:
+                return new UnOpenedMeta(data, false);
 
-            List<String> dfData = FileUtil.readFile("res/sealed/" + data + ".sealed");
-            final CustomLimited myCube = CustomLimited.parse(dfData, Singletons.getModel().getDecks().getCubes());
-            
-            SealedProductTemplate fnPick = myCube.getIgnoreRarity() ? myCube.getSealedProductTemplate() : BoosterTemplate.genericBooster;
-            return new UnOpenedProduct(fnPick, myCube.getCardPool());
-        }
-        else if ("full".equalsIgnoreCase(type)) {
-            return new UnOpenedProduct(BoosterTemplate.genericBooster);
-        }
-        else if ("meta".equalsIgnoreCase(type)) {
-
-            // NOTE: The following code is far from ideal in a number of ways. If someone can
-            // think of a way to improve it, please do so. --BBU
-            // ItemPool<CardPrinted> cardPool = new ItemPool<CardPrinted>(CardPrinted.class);
-            for (CardPrinted aCard : CardDb.instance().getAllCards()) {
-                if (data.indexOf(aCard.getEdition()) > -1) {
-                    cardPool.add(aCard);
-                    // System.out.println("Added card" + aCard.getName());
-                }
-            }
-            return new UnOpenedProduct(BoosterTemplate.genericBooster, cardPool);
-        } else if ("booster".equalsIgnoreCase(type)) {
-            return new UnOpenedProduct(Singletons.getModel().getBoosters().get(data));
-        } else if ("pack".equalsIgnoreCase(type)) {
-            return new UnOpenedProduct(Singletons.getModel().getTournamentPacks().get(data));
-        } else if ("choose1".equalsIgnoreCase(type)) {
-            return new UnOpenedMeta(data, true);
-        } else if ("random1".equalsIgnoreCase(type)) {
-            return new UnOpenedMeta(data, false);
-        } else if ("combo".equalsIgnoreCase(type)) {
-            final BoosterGenerator bpSets = new BoosterGenerator();
-            return new UnOpenedProduct(BoosterTemplate.genericBooster, buildPool(data));
-        }
-        else {
-            throw new RuntimeException("Cannot initialize boosters for: " + type);
-        }
-    }
-
-    /** 
-     * Build a cardpool for the 'combo' special MetaSet type.
-     * 
-     * @param creationString
-     *      the data that contains a collection of semicolon-separated metaset definitions
-     * @return ItemPool<CardPrinted>
-     *      the collection of cards
-     *
-     */
-    private ItemPool<CardPrinted> buildPool(final String creationString) {
-
-        ItemPool<CardPrinted> cardPool = new ItemPool<CardPrinted>(CardPrinted.class);
-
-        List<MetaSet> metaSets = new ArrayList<MetaSet>();
-        final String[] metas = creationString.split(";");
-
-        for (int i = 0; i < metas.length; i++) {
-
-            final String [] typeTest = metas[i].split("/");
-            if (typeTest[0].equalsIgnoreCase("choose1") || typeTest[0].equalsIgnoreCase("random1")
-                    || typeTest[0].equalsIgnoreCase("combo")) {
-                        System.out.println("WARNING - MetaSet type '" + typeTest[0] + "' ignored in pool creation.");
-                    }
-            else if (typeTest[0].equalsIgnoreCase("full")) {
-                for (CardPrinted aCard : CardDb.instance().getUniqueCards()) {
-                    cardPool.add(aCard);
-                }
-                return cardPool;
-            }
-            final MetaSet addMeta = new MetaSet(metas[i]);
-            metaSets.add(addMeta);
-        }
-
-        if (metaSets.size() < 1) {
-            return null;
-        }
-
-        for (MetaSet mSet : metaSets) {
-            if (mSet.type.equalsIgnoreCase("meta") || mSet.type.equalsIgnoreCase("booster")
-                    || mSet.type.equalsIgnoreCase("pack")) {
-                final String mData = new String(mSet.data);
-                for (CardPrinted aCard : CardDb.instance().getAllCards()) {
-                    if (mData.indexOf(aCard.getEdition()) > -1) {
-                        if (!cardPool.contains(aCard)) {
-                            cardPool.add(aCard);
-                            // System.out.println(mSet.type + " " + mData + ":  Added card: " + aCard.getName());
-                            }
-                        }
-                }
-            } else if (mSet.type.equalsIgnoreCase("cube")) {
+            case Cube:
                 final File dFolder = new File("res/sealed/");
 
                 if (!dFolder.exists()) {
-                    throw new RuntimeException("GenerateSealed : folder not found -- folder is "
-                            + dFolder.getAbsolutePath());
+                    throw new RuntimeException("GenerateSealed : folder not found -- folder is " + dFolder.getAbsolutePath());
                 }
 
                 if (!dFolder.isDirectory()) {
                     throw new RuntimeException("GenerateSealed : not a folder -- " + dFolder.getAbsolutePath());
                 }
 
-                List<String> dfData = FileUtil.readFile("res/sealed/" + mSet.data + ".sealed");
+                List<String> dfData = FileUtil.readFile("res/sealed/" + data + ".sealed");
                 final CustomLimited myCube = CustomLimited.parse(dfData, Singletons.getModel().getDecks().getCubes());
-                for (CardPrinted aCard : myCube.getCardPool().toFlatList()) {
-                        if (!cardPool.contains(aCard)) {
-                            cardPool.add(aCard);
-                            // System.out.println(mSet.type + " " + mSet.data + ":  Added card: " + aCard.getName());
-                            }
-                }
-            }
+
+                SealedProductTemplate fnPick = myCube.getSealedProductTemplate();
+                return new UnOpenedProduct(fnPick, myCube.getCardPool());
+                
+            default: return null;
         }
-        return cardPool;
+    }
+
+    public boolean isDraftable() {
+        return draftable;
     }
 }

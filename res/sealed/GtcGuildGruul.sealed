@@ -3,10 +3,5 @@ DeckFile:GtcGuildGruul
 IgnoreRarity:False
 LandSetCode:M13
                  
-NumCards:14
-NumSpecials:0
-NumMythics:0
-NumRares:1
-NumUncommons:3
-NumCommons:10
+Booster:10 Common, 3 Uncommon, 1 Rare, 2 promo("Gruul Guildgate|GTC","Rubblehulk|GTC")               
 NumPacks:1

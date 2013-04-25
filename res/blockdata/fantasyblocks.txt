@@ -1,29 +1,29 @@
-Index:0|Set0:ICE|Set1:ARN|Set2:LEG|Name:(3) Arabian Ice Age|DraftPacks:3|LandSetCode:ICE|SealedPacks:6
-Index:1|Set0:2ED|Set1:ARN|Set2:LEG|Name:(3) Unlimited Power|DraftPacks:3|LandSetCode:2ED|SealedPacks:6
-Index:2|Set0:DRK|Set1:FEM|Set2:HML|Name:(3) Dark Empires|DraftPacks:3|LandSetCode:3ED|SealedPacks:6
-Index:3|Set0:MIR|Set1:TMP|Set2:USG|Name:(3) Urza's Tempest Mirage|DraftPacks:3|LandSetCode:5ED|SealedPacks:6
-Index:4|Set0:INV|Set1:ODY|Set2:ONS|Name:(3) Twilight of an Era|DraftPacks:3|LandSetCode:7ED|SealedPacks:6
-Index:5|Set0:MRD|Set1:CHK|Set2:RAV|Name:(3) New Dawn|DraftPacks:3|LandSetCode:9ED|SealedPacks:6
-Index:6|Set0:2ED|Set1:ARN|Set2:ATQ|Set3:LEG|Set4:DRK|Set5:FEM|Name:(5-6) Chronicles 01 - Origins|DraftPacks:3|LandSetCode:2ED|SealedPacks:6
-Index:7|Set0:ICE|Set1:HML|Set2:ALL|Set3:MIR|Set4:VIS|Set5:WTH|Name:(5-6) Chronicles 02 - Icy Mirage|DraftPacks:3|LandSetCode:5ED|SealedPacks:6
-Index:8|Set0:TMP|Set1:USG|Set2:STH|Set3:ULG|Set4:EXO|Set5:UDS|Name:(5-6) Chronicles 03 - Urza's Tempest|DraftPacks:3|LandSetCode:6ED|SealedPacks:6
-Index:9|Set0:MMQ|Set1:INV|Set2:NMS|Set3:PLS|Set4:PCY|Set5:APC|Name:(5-6) Chronicles 04 - Mercadian Invasion|DraftPacks:3|LandSetCode:7ED|SealedPacks:6
-Index:10|Set0:ODY|Set1:ONS|Set2:TOR|Set3:LGN|Set4:JUD|Set5:SCG|Name:(5-6) Chronicles 05 - Onslaught Odyssey|DraftPacks:3|LandSetCode:8ED|SealedPacks:6
-Index:11|Set0:MRD|Set1:CHK|Set2:DST|Set3:BOK|Set4:5DN|Set5:SOK|Name:(5-6) Chronicles 06 - Champions of Mirrodin|DraftPacks:3|LandSetCode:9ED|SealedPacks:6
-Index:12|Set0:RAV|Set1:TSP|Set2:GPT|Set3:PLC|Set4:DIS|Set5:FUT|Name:(5-6) Chronicles 07 - Ravnica Spiral|DraftPacks:3|LandSetCode:9ED|SealedPacks:6
-Index:13|Set0:LRW|Set1:SHM|Set2:MOR|Set3:EVE|Set3:CSP|Name:(5-6) Chronicles 08 - Cold Lorwynmoor (5 only)|DraftPacks:3|LandSetCode:10E|SealedPacks:6
-Index:14|Set0:ALA|Set1:ZEN|Set2:CFX|Set3:WWK|Set4:ARB|Set5:ROE|Name:(5-6) Chronicles 09 - Shards of Zendikar|DraftPacks:3|LandSetCode:M11|SealedPacks:6
-Index:15|Set0:SOM|Set1:ISD|Set2:MBS|Set3:DKA|Set4:NPH|Set5:AVR|Name:(5-6) Chronicles 10 - Scars of Innistrad|DraftPacks:3|LandSetCode:M11|SealedPacks:6
-Index:16|Set0:ARN|Set1:MIR|Set2:VIS|Set3:WTH|Name:(4) Arabian Africa|DraftPacks:3|LandSetCode:MIR|SealedPacks:6
-Index:17|Set0:MIR|Set1:CHK|Set2:VIS|Set3:BOK|Set4:WTH|Set5:SOK|Name:(6) Africa-Asia|DraftPacks:3|LandSetCode:MIR|SealedPacks:6
-Index:18|Set0:2ED|Set1:3ED|Set2:4ED|Set3:5ED|Set4:6ED|Set5:7ED|Name:(6-7)Cores 1 (2,3,4,5,6,7)|DraftPacks:3|LandSetCode:4ED|SealedPacks:6
-Index:19|Set0:8ED|Set1:9ED|Set2:10E|Set3:M10|Set4:M11|Set5:M12|Set6:M13|Name:(6-7)Cores 2 (8,9,10,M10,M11,M12,M13)|DraftPacks:3|LandSetCode:9ED|SealedPacks:7
-Index:20|Set0:ICE|Set1:ALL|Set2:CSP|Set3:HML|Name:(4) Ice Age Extended|DraftPacks:3|LandSetCode:ICE|SealedPacks:6
-Index:21|Set0:2ED|Set1:ICE|Set2:HML|Set3:LEG|Set4:DRK|Set5:FEM|Name:(6) Sample 6-pack|DraftPacks:3|LandSetCode:2ED|SealedPacks:6
-Index:22|Set0:4ED|Set1:ALL|Set2:ICE|Set3:HML|Set4:LEG|Set5:DRK|Set6:FEM|Name:(7) Sample 7-pack|DraftPacks:3|LandSetCode:4ED|SealedPacks:7
-Index:23|Set0:4ED|Set1:ALL|Set2:ICE|Set3:HML|Set4:LEG|Set5:DRK|Set6:FEM|Set7:CHR|Name:(8) Sample 8-pack|DraftPacks:3|LandSetCode:4ED|SealedPacks:8
-Index:24|Set0:2ED|Set1:ALL|Set2:ICE|Set3:HML|Set4:LEG|Set5:DRK|Set6:FEM|Set7:ATQ|Set8:ARN|Name:(9) Sample 9-pack|DraftPacks:3|LandSetCode:2ED|SealedPacks:9
-Index:25|Set0:2ED|Set1:ATQ|Set2:ARN|Set3:DRK|Set4:LEG|Set5:FEM|Set6:ICE|Set7:HML|Set8:ALL|Name:(9) MtG Encyclopedia|DraftPacks:3|LandSetCode:2ED|SealedPacks:9
-Index:26|Meta0:CUBE/ArabianExtended/ARAB|Meta1:META/ISD,DKA,AVR,M13/M13-ISD|Meta2:FULL/*/*|Name:(3) Metaset Sample|DraftPacks:3|LandSetCode:2ED|SealedPacks:6
-Index:27|Meta0:CHOOSE1/CUBE/ArabianExtended/ArabianExtended;FULL/*/*;META/ICE,ALL,HML,CSP/IceAgeBlockExtended;BOOSTER/2ED/Unlimited;PACK/4ED/4th Edition /CHOOSE|Meta1:RANDOM1/FULL/*/*;META/CHK,BOK,SOK/KAMI;BOOSTER/8ED/8ED/RANDOM|Meta2:COMBO/CUBE/juzamjedi/JZJEDI;META/USG,ULG,UDS/URZA;PACK/M13/M13;BOOSTER/TSB/TimeShift/COMBO|Name:(3) Metaset Sample 2|DraftPacks:3|LandSetCode:2ED|SealedPacks:6
-
+# Name, Draft/Sealed/Lands, All sets and metas
+(3) Arabian Ice Age, 3/6/ICE, ICE ARN LEG      
+(3) Unlimited Power, 3/6/2ED, 2ED ARN LEG      
+(3) Dark Empires, 3/6/3ED, DRK FEM HML      
+(3) Urza's Tempest Mirage, 3/6/5ED, MIR TMP USG      
+(3) Twilight of an Era, 3/6/7ED, INV ODY ONS      
+(3) New Dawn, 3/6/9ED, MRD CHK RAV      
+(5-6) Chronicles 01 - Origins, 3/6/2ED, 2ED ARN ATQ LEG DRK FEM   
+(5-6) Chronicles 02 - Icy Mirage, 3/6/5ED, ICE HML ALL MIR VIS WTH   
+(5-6) Chronicles 03 - Urza's Tempest, 3/6/6ED, TMP USG STH ULG EXO UDS   
+(5-6) Chronicles 04 - Mercadian Invasion, 3/6/7ED, MMQ INV NMS PLS PCY APC   
+(5-6) Chronicles 05 - Onslaught Odyssey, 3/6/8ED, ODY ONS TOR LGN JUD SCG   
+(5-6) Chronicles 06 - Champions of Mirrodin, 3/6/9ED, MRD CHK DST BOK 5DN SOK   
+(5-6) Chronicles 07 - Ravnica Spiral, 3/6/9ED, RAV TSP GPT PLC DIS FUT   
+(5-6) Chronicles 08 - Cold Lorwynmoor (5 only), 3/6/10E, LRW SHM MOR EVE CSP    
+(5-6) Chronicles 09 - Shards of Zendikar, 3/6/M11, ALA ZEN CFX WWK ARB ROE   
+(5-6) Chronicles 10 - Scars of Innistrad, 3/6/M11, SOM ISD MBS DKA NPH AVR   
+(4) Arabian Africa, 3/6/MIR, ARN MIR VIS WTH     
+(6) Africa-Asia, 3/6/MIR, MIR CHK VIS BOK WTH SOK   
+(6-7)Cores 1 (2,3,4,5,6,7), 3/6/4ED, 2ED 3ED 4ED 5ED 6ED 7ED   
+(6-7)Cores 2 (8,9,10,M10,M11,M12,M13), 3/7/10E, 8ED 9ED 10E M10 M11 M12 M13  
+(4) Ice Age Extended, 3/6/ICE, ICE ALL CSP HML     
+(6) Sample 6-pack, 3/6/2ED, 2ED ICE HML LEG DRK FEM   
+(7) Sample 7-pack, 3/7/4ED, 4ED ALL ICE HML LEG DRK FEM  
+(8) Sample 8-pack, 3/8/4ED, 4ED ALL ICE HML LEG DRK FEM CHR 
+(9) Sample 9-pack, 3/9/2ED, 2ED ALL ICE HML LEG DRK FEM ATQ ARN
+(9) MtG Encyclopedia, 3/9/2ED, 2ED ATQ ARN DRK LEG FEM ICE HML ALL
+(3) Metaset Sample, 3/6/2ED, Meta-Cube(ArabianExtended)ARAB Meta-JoinedSet(ISD DKA AVR M13)M13-ISD Meta-Full()
+(3) Metaset Sample 2, 3/6/2ED, Meta-Choose(CUBE(ArabianExtended)Arabian Extended;FULL()*;JoinedSet(ICE ALL HML CSP)Ice Age Block Extended;Booster(2ED)Unlimited booster;Pack(4ED)4th Edition Tournament)CHOOSE Meta-Random(Full()*;JoinedSet(CHK BOK SOK)KAMI;Booster(8ED)8ED)RANDOM

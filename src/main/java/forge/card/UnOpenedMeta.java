@@ -22,7 +22,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import forge.Singletons;
 import forge.gui.GuiChoose;
 import forge.item.CardPrinted;
 import forge.util.MyRandom;
@@ -30,14 +29,12 @@ import forge.util.MyRandom;
 /** 
  * This type extends UnOpenedProduct to support booster choice or random boosters
  * in sealed deck games. See MetaSet.java for further information.
- *
  */
-public class UnOpenedMeta extends UnOpenedProduct {
+
+public class UnOpenedMeta implements IUnOpenedProduct {
 
     private final ArrayList<MetaSet> metaSets;
-    private final boolean choice;
-    private List<String> partiality;
-    private final int partialityPreference = 100; // Otherwise guild sealed will result in silly combinations
+    private final boolean canChoose;
     private final Random generator = MyRandom.getRandom();
 
     /**
@@ -48,52 +45,15 @@ public class UnOpenedMeta extends UnOpenedProduct {
      *        sets the random/choice status.
      */
     public UnOpenedMeta(final String creationString, final boolean choose) {
-        // NOTE: we need to call the super constructor with something non-null,
-        // but it doesn't matter with what exactly, since we are overriding it
-        // in open() anyway. I'm using Portal because that makes it easier to
-        // spot if the code is misbehaving in certain ways. --BBU
-        super(Singletons.getModel().getBoosters().get("POR"));
         metaSets = new ArrayList<MetaSet>();
-        choice = choose;
-        final String[] metas = creationString.split(";");
-        partiality = null;
-        for (int i = 0; i < metas.length; i++) {
-            final MetaSet addMeta = new MetaSet(metas[i]);
-            metaSets.add(addMeta);
+        canChoose = choose;
+
+        
+        for(String m : creationString.split(";")) {
+            metaSets.add(new MetaSet(m, true));
         }
     }
 
-
-
-    /**
-     * Adds to partiality info.
-     * @param addString
-     *   String, add partiality for this String.
-     */
-    private void addPartiality(final String addString) {
-        if (!hasPartiality(addString)) {
-            partiality.add(addString);
-        }
-    }
-
-    /**
-     * Checks if the AI has a partiality for this set.
-     * @param partialString
-     *   String, check partiality for this.
-     */
-    private boolean hasPartiality(final String partialString) {
-
-        if (partiality.isEmpty()) {
-            return false;
-        }
-
-        for (final String cmp : partiality) {
-            if (partialString.equals(cmp)) {
-                return true;
-            }
-        }
-        return false;
-    }
 
     /**
      * Open the booster pack, return contents.
@@ -101,7 +61,7 @@ public class UnOpenedMeta extends UnOpenedProduct {
      */
     @Override
     public List<CardPrinted> get() {
-        return this.open(true, null);
+        return this.open(true);
     }
 
     /**
@@ -113,14 +73,13 @@ public class UnOpenedMeta extends UnOpenedProduct {
      * @return List, list of cards.
      */
 
-    public List<CardPrinted> open(final boolean isHuman, List<String> partialities) {
+    public List<CardPrinted> open(final boolean isHuman) {
 
         if (metaSets.size() < 1) {
             throw new RuntimeException("Empty UnOpenedMetaset, cannot generate booster.");
         }
 
-        if (choice) {
-
+        if (canChoose) {
             if (isHuman) {
                 final List<String> choices = new ArrayList<String>();
 
@@ -131,7 +90,7 @@ public class UnOpenedMeta extends UnOpenedProduct {
 
                 for (int i = 0; i < metaSets.size(); i++) {
                     if (o.toString().equals(metaSets.get(i).getCode())) {
-                        final UnOpenedProduct newBooster = metaSets.get(i).getBooster();
+                        final IUnOpenedProduct newBooster = metaSets.get(i).getBooster();
                         return newBooster.get();
                     }
                 }
@@ -139,50 +98,14 @@ public class UnOpenedMeta extends UnOpenedProduct {
                 throw new RuntimeException("Could not find MetaSet " + o.toString());
             }
             else {
-                partiality = partialities;
-                int selected = -1;
-
-                if (partiality == null || partiality.isEmpty()) {
-                    // System.out.println("No partiality yet");
-                    selected = generator.nextInt(metaSets.size());
-                    // System.out.println("AI randomly chose " + metaSets.get(selected).getCode());
-                    if (partiality != null) {
-                        addPartiality(metaSets.get(selected).getCode());
-                    }
-                 }
-                else {
-                    for (int i = 0; i < metaSets.size(); i++) {
-                        if (hasPartiality(metaSets.get(i).getCode()) && MyRandom.percentTrue(partialityPreference)) {
-                            // System.out.println("AI chose " + metaSets.get(i).getCode() + " because of partiality.");
-                            selected = i;
-                            break;
-                        }
-                    }
-                }
-
-                if (selected == -1) {
-                selected = generator.nextInt(metaSets.size());
-                if (partiality != null) {
-                    addPartiality(metaSets.get(selected).getCode());
-                    }
-                // System.out.println("AI chose " + metaSets.get(selected).getCode() + " because partiality not established or failed percentage test.");
-                }
-                final UnOpenedProduct newBooster = metaSets.get(selected).getBooster();
+                int selected = generator.nextInt(metaSets.size());
+                final IUnOpenedProduct newBooster = metaSets.get(selected).getBooster();
                 return newBooster.get();
             }
         }
         else {
             int selected = generator.nextInt(metaSets.size());
-            // System.out.println("RANDOMLY got " + metaSets.get(selected).getCode());
-
-            // It may actually seem slightly unfair to allow the computer change its partialities based
-            // on the random sets it gets since the player can't do the same...but, OTOH, this could also
-            // work against the computer, if this results in a bad partiality choice. --BBU
-            if (!isHuman && partiality != null && MyRandom.percentTrue(partialityPreference)) {
-                addPartiality(metaSets.get(selected).getCode());
-                // System.out.println("AI decided to add " + metaSets.get(selected).getCode() + " to partialities.");
-            }
-            final UnOpenedProduct newBooster = metaSets.get(selected).getBooster();
+            final IUnOpenedProduct newBooster = metaSets.get(selected).getBooster();
             return newBooster.get();
         }
     }

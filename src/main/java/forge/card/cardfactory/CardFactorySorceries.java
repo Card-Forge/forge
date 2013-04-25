@@ -19,19 +19,13 @@ package forge.card.cardfactory;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map.Entry;
-import com.google.common.collect.Iterables;
-
 import forge.Card;
 import forge.CardLists;
 import forge.CardPredicates;
 import forge.FThreads;
 import forge.CardPredicates.Presets;
-import forge.Constant;
-import forge.card.CardType;
 import forge.card.cost.Cost;
 import forge.card.mana.ManaCost;
 import forge.card.spellability.Spell;

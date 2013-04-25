@@ -2,16 +2,11 @@ package forge.card;
 
 import java.util.List;
 
-import com.google.common.base.Supplier;
 
 import forge.item.CardPrinted;
 import forge.item.ItemPoolView;
 
-/** 
- * TODO: Write javadoc for this type.
- *
- */
-public class UnOpenedProduct implements Supplier<List<CardPrinted>> {
+public class UnOpenedProduct implements IUnOpenedProduct {
 
     private final ItemPoolView<CardPrinted> cards;
     private final Iterable<CardPrinted> cardPoolFlat;

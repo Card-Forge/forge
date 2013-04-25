@@ -78,10 +78,7 @@ public class BoosterGenerator {
             String slotType = slot.getLeft(); // add expansion symbol here?
             int numCards = slot.getRight().intValue();
 
-            String[] sType = TextUtil.splitWithParenthesis(slotType, ' ', '(', ')');
-            String sheetKey = sType.length == 1 ? slotType.trim() + " " + booster.getEdition() : slotType.trim(); 
-
-            PrintSheet ps = makeSheet(sheetKey, sourcePool);
+            PrintSheet ps = makeSheet(slotType, sourcePool);
             result.addAll(ps.random(numCards, true));
         }
         return result;
@@ -98,11 +95,17 @@ public class BoosterGenerator {
         if(mainCode.endsWith("s"))
             mainCode = mainCode.substring(0, mainCode.length()-1);
 
-        String sets = sKey[1];
-        Predicate<CardPrinted> setPred = IPaperCard.Predicates.printedInSets(sets.split(" "));
+        Predicate<CardPrinted> setPred = (Predicate<CardPrinted>) (sKey.length > 1 ? IPaperCard.Predicates.printedInSets(sKey[1].split(" ")) : Predicates.alwaysTrue());
 
         // Pre-defined sheets:
-        if( mainCode.equalsIgnoreCase("any") ) {
+        if (mainCode.startsWith("promo(")) { // get exactly the named cards, nevermind any restrictions
+            String list = StringUtils.strip(mainCode.substring(5), "() ");
+            String[] cardNames = TextUtil.splitWithParenthesis(list, ',', '"', '"');
+            for(String cardName: cardNames) {
+                ps.add(CardDb.instance().getCard(cardName));
+            }
+
+        } else if( mainCode.equalsIgnoreCase("any") ) { // no restriction on rarity
             Predicate<CardPrinted> predicate = Predicates.and(setPred, extraPred);
             ps.addAll(Iterables.filter(src, predicate));
 
