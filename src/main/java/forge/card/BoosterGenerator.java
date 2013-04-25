@@ -150,7 +150,7 @@ public class BoosterGenerator {
             Predicate<CardPrinted> predicate = Predicates.and( setPred, IPaperCard.Predicates.Presets.IS_SPECIAL, extraPred );
             ps.addAll(Iterables.filter(src, predicate));
 
-        } else if ( mainCode.equalsIgnoreCase("custom(") ) {
+        } else if ( mainCode.startsWith("Custom(") || mainCode.startsWith("custom(") ) {
             String sheetName = StringUtils.strip(mainCode.substring(6), "()\" ");
             return Singletons.getModel().getPrintSheets().get(sheetName);
         }
