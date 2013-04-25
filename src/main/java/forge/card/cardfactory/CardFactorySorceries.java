@@ -193,58 +193,6 @@ public class CardFactorySorceries {
         };
     }
 
-    private static final SpellAbility getPatriarchsBidding(final Card card) {
-
-        final SpellAbility spell = new Spell(card) {
-            private static final long serialVersionUID = -2182173662547136798L;
-
-            @Override
-            public void resolve() {
-                final GameState game = getActivatingPlayer().getGame();
-                List<String> types = new ArrayList<String>();
-                for (Player p : game.getPlayers()) {
-                    if (p.isHuman()) {
-                         types.add(GuiChoose.one("Which creature type?", Constant.CardTypes.CREATURE_TYPES));
-                    } else {
-                        final HashMap<String, Integer> countInGraveyard = new HashMap<String, Integer>();
-                        final List<Card> aiGrave = p.getCardsIn(ZoneType.Graveyard);
-                        for (final Card c : Iterables.filter(aiGrave, CardPredicates.Presets.CREATURES)) {
-                            for (final String type : c.getType()) {
-                                if (CardType.isACreatureType(type)) {
-                                    Integer oldVal = countInGraveyard.get(type);
-                                    countInGraveyard.put(type, 1 + (oldVal != null ? oldVal : 0));
-                                 }
-                            }
-                        }
-                        String maxKey = "";
-                        int maxCount = -1;
-                        for (final Entry<String, Integer> entry : countInGraveyard.entrySet()) {
-                            if (entry.getValue() > maxCount) {
-                                maxKey = entry.getKey();
-                                maxCount = entry.getValue();
-                            }
-                        }
-                        types.add(maxKey.equals("") ? "Sliver" : maxKey);
-                    }
-                }
-
-                List<Card> bidded = CardLists.filter(game.getCardsIn(ZoneType.Graveyard), CardPredicates.Presets.CREATURES);
-                for (final Card c : bidded) {
-                    for (int i = 0; i < types.size(); i++) {
-                        if (c.isType(types.get(i))) {
-                            game.getAction().moveToPlay(c);
-                            i = types.size(); // break inner loop
-                        }
-                    }
-                }
-            } // resolve()
-        }; // SpellAbility
-        final StringBuilder sb = new StringBuilder();
-        sb.append(card.getName()).append(" - choose a creature type.");
-        spell.setStackDescription(sb.toString());
-        return spell;
-    }
-
     private static final SpellAbility getTransmuteArtifact(final Card card) {
         /*
          * Sacrifice an artifact. If you do, search your library for an
@@ -318,7 +266,6 @@ public class CardFactorySorceries {
     public static void buildCard(final Card card, final String cardName) {
 
         if (cardName.equals("Balance")) { card.addSpellAbility(getBalance(card));
-        } else if (cardName.equals("Patriarch's Bidding")) { card.addSpellAbility(getPatriarchsBidding(card));
         } else if (cardName.equals("Transmute Artifact")) { card.addSpellAbility(getTransmuteArtifact(card));
         }
     } // getCard
