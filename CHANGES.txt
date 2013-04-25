@@ -75,6 +75,18 @@ Some initial code has been added that will at some point in the future allow hum
 We have created a branch for Dragon's Maze spoilers. These new cards are not included in the Forge distributions at this time. Please be patient as these DGM cards will become available in the near future. We plan to add these new Dragon's Maze cards to the 1.3.14 beta which should be released in a week or two.
 
 
+- Random Deck generation -
+Deck generation is now strictly conforming the colors chosen. You won't get any Boros Reckoner in a RG deck, that could be added before the change (because they it red and it's ok). Avacyn's Piligrim won't be added in a deck that has green but doesn't have white, though it does not consume, but produces white mana. As well there won't be added any creatures whose activated abilities require colors not choosen for a given deck. That is to say that now color identity is used for deck generation, that allows a better filtering of cards.
+
+
+- Single declare attackers step -
+Single declare attackers step for all Targets (see viewtopic.php?f=26&t=10046)
+
+
+- Booster slots -
+Booster slots are now way more customizable* (viewtopic.php?f=52&t=10128). Textfiles format in res/blockdata was changed, meta of type "combo" feature cut.
+
+
 ---------
 New Cards
 ---------
