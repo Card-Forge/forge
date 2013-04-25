@@ -70,16 +70,15 @@ public class PrintSheet {
         return fetchRoulette(sum + 1, roulette, toSkip); // start over from beginning, in case last cards were to skip
     }
     
-    public CardPrinted random() {
-        int totalWeight = cardsWithWeights.countAll();
-        int index = MyRandom.getRandom().nextInt(totalWeight);
-        return fetchRoulette(0, index, null);
-    }
-
     public List<CardPrinted> random(int number, boolean wantUnique) {
         List<CardPrinted> result = new ArrayList<CardPrinted>();
         
         int totalWeight = cardsWithWeights.countAll();
+        if( totalWeight == 0) {
+            System.err.println("No cards were found on sheet " + name);
+            return result;
+        }
+
         for(int iC = 0; iC < number; iC++) {
             int index = MyRandom.getRandom().nextInt(totalWeight);
             CardPrinted toAdd = fetchRoulette(0, index, wantUnique ? result : null);
