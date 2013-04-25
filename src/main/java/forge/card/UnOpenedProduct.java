@@ -31,10 +31,7 @@ public class UnOpenedProduct implements IUnOpenedProduct {
         tpl = template;
         cards = null;
      }
-    
-    /* (non-Javadoc)
-     * @see com.google.common.base.Supplier#get()
-     */
+
     @Override
     public List<CardPrinted> get() {
         return cards == null && cardPoolFlat == null ? BoosterGenerator.getBoosterPack(tpl) 

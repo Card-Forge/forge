@@ -38,6 +38,7 @@ import forge.item.CardDb;
 import forge.item.CardPrinted;
 import forge.item.IPaperCard;
 import forge.item.InventoryItem;
+import forge.item.PrintSheet;
 import forge.item.TournamentPack;
 import forge.util.Aggregates;
 import forge.util.MyRandom;
@@ -288,9 +289,10 @@ public final class BoosterUtils {
             if (Singletons.getModel().getQuest().getFormat() != null) {
                 rarAndColor = Predicates.and(Singletons.getModel().getQuest().getFormat().getFilterPrinted(), rarAndColor);
             }
-            Iterable<CardPrinted> cardPool = Iterables.filter(CardDb.instance().getAllCards(), rarAndColor);
-            UnOpenedProduct product = new UnOpenedProduct(new SealedProductTemplate(qty), cardPool);
-            rewards.addAll(product.get());
+
+            PrintSheet ps = new PrintSheet("Quest rewards");
+            ps.addAll(Iterables.filter(CardDb.instance().getAllCards(), rarAndColor));
+            rewards.addAll(ps.random(qty, true));
         } else if (temp.length == 2 && temp[0].equalsIgnoreCase("duplicate") && temp[1].equalsIgnoreCase("card")) {
             // Type 2: a duplicate card of the players choice
             rewards.add(new QuestRewardCardDuplicate());
