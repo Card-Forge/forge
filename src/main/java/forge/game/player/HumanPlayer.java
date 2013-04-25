@@ -26,12 +26,14 @@ import forge.card.ability.ApiType;
 import forge.card.ability.effects.CharmEffect;
 import forge.card.cost.Cost;
 import forge.card.cost.CostPayment;
+import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostBeingPaid;
 import forge.card.mana.ManaCostShard;
 import forge.card.spellability.Ability;
 import forge.card.spellability.HumanPlaySpellAbility;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
+import forge.control.input.InputPayManaBase;
 import forge.control.input.InputPayManaSimple;
 import forge.control.input.InputSelectCards;
 import forge.control.input.InputSelectCardsFromList;
@@ -139,27 +141,35 @@ public class HumanPlayer extends Player {
             final HumanPlaySpellAbility req = new HumanPlaySpellAbility(sa, payment);
             req.fillRequirements(false, false, false);
         } else {
-            ManaCostBeingPaid manaCost = new ManaCostBeingPaid(sa.getPayCosts().getCostMana().getManaToPay());
-            if (sa.getSourceCard().isCopiedSpell() && sa.isSpell()) {
-                manaCost = new ManaCostBeingPaid("0");
-            } else {
-                manaCost.applySpellCostChange(sa);
-            }
-
-            if  (!manaCost.isPaid()) {
-                FThreads.setInputAndWait(new InputPayManaSimple(game, sa, manaCost));
-            }
-
-            
-            if (manaCost.isPaid()) {
+            if (payManaCostIfNeeded(sa)) {
                 if (sa.isSpell() && !source.isCopiedSpell()) {
                     sa.setSourceCard(game.getAction().moveToStack(source));
                 }
-
                 game.getStack().add(sa);
             } 
         }
     }
+
+    private boolean payManaCostIfNeeded(final SpellAbility sa) {
+        final ManaCostBeingPaid manaCost; 
+        if (sa.getSourceCard().isCopiedSpell() && sa.isSpell()) {
+            manaCost = new ManaCostBeingPaid(ManaCost.ZERO);
+        } else {
+            manaCost = new ManaCostBeingPaid(sa.getPayCosts().getTotalMana());
+            manaCost.applySpellCostChange(sa);
+        }
+
+        boolean isPaid = manaCost.isPaid();
+    
+        if( !isPaid ) {
+            InputPayManaBase inputPay = new InputPayManaSimple(game, sa, manaCost);
+            FThreads.setInputAndWait(inputPay);
+            isPaid = inputPay.isPaid();
+        }
+        return isPaid;
+    }
+    
+    
 
     /**
      * <p>
@@ -182,24 +192,13 @@ public class HumanPlayer extends Player {
             
             req.fillRequirements(useOldTargets, false, true);
         } else {
-            ManaCostBeingPaid manaCost = new ManaCostBeingPaid(sa.getPayCosts().getTotalMana());
-            if (sa.getSourceCard().isCopiedSpell() && sa.isSpell()) {
-                manaCost = new ManaCostBeingPaid("0");
-            } else {
-                manaCost.applySpellCostChange(sa);
-            }
-
-            if( !manaCost.isPaid() ) {
-                FThreads.setInputAndWait(new InputPayManaSimple(game, sa, manaCost));
-            }
-            
-            if (manaCost.isPaid()) {
+            if (payManaCostIfNeeded(sa)) {
                 AbilityUtils.resolve(sa, false);
             }
 
         }
     }
-    
+
     /**
      * choose optional additional costs. For HUMAN only
      * @param activator 
