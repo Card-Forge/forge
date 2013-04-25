@@ -107,12 +107,17 @@ public final class InputSelectTargets extends InputSyncronizedBase {
         }
         
         // leave this in temporarily, there some seriously wrong things going on here
+        // Can be targeted doesn't check if the target is a valid type, only if a card is generally "targetable"
         if (!card.canBeTargetedBy(sa)) {
-            showMessage("Cannot target this card (Shroud? Protection? Restrictions?).");
+            showMessage("Cannot target this card (Shroud? Protection? Restrictions).");
             return;
         } 
         if (!choices.contains(card)) {
-            showMessage("This card is not a valid choice for some other reason besides (Shroud? Protection? Restrictions?).");
+            if (card.isPlaneswalker() && sa.getApi() == ApiType.DealDamage) {
+                showMessage("To deal an opposing Planeswalker direct damage, target its controller and then redirect the damage on resolution.");
+            } else {
+                showMessage("The selected card is not a valid choice to be targeted.");
+            }
             return;
         }
         
