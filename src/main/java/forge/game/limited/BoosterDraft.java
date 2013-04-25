@@ -104,7 +104,8 @@ public final class BoosterDraft implements IBoosterDraft {
                     ? Singletons.getModel().getBlocks() : Singletons.getModel().getFantasyBlocks();
 
             for (CardBlock b : storage) {
-                blocks.add(b);
+                if( b.getCntBoostersDraft() > 0)
+                    blocks.add(b);
             }
 
             final CardBlock block = GuiChoose.one("Choose Block", blocks);

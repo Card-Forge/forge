@@ -22,6 +22,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 
@@ -240,8 +242,8 @@ public final class CardBlock implements Comparable<CardBlock> {
             String name = sParts[0];
 
             String[] numbers = sParts[1].trim().split("/");
-            int draftBoosters = Integer.parseInt(numbers[0]);
-            int sealedBoosters = Integer.parseInt(numbers[1]);
+            int draftBoosters = StringUtils.isNumeric(numbers[0]) ? Integer.parseInt(numbers[0]) : 0;
+            int sealedBoosters = StringUtils.isNumeric(numbers[1]) ? Integer.parseInt(numbers[1]) : 0;
             CardEdition landSet = editions.getEditionByCodeOrThrow(numbers[2]);
 
             List<CardEdition> sets = new ArrayList<CardEdition>();
