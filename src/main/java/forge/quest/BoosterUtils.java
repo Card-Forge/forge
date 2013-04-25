@@ -31,8 +31,6 @@ import com.google.common.collect.Lists;
 import forge.Singletons;
 import forge.card.CardRules;
 import forge.card.CardRulesPredicates;
-import forge.card.SealedProductTemplate;
-import forge.card.UnOpenedProduct;
 import forge.item.BoosterPack;
 import forge.item.CardDb;
 import forge.item.CardPrinted;

@@ -36,7 +36,6 @@ import forge.item.CardDb;
 import forge.item.CardPrinted;
 import forge.item.IPaperCard;
 import forge.item.PrintSheet;
-import forge.model.FModel;
 import forge.util.TextUtil;
 
 /**
@@ -128,6 +127,9 @@ public class BoosterGenerator {
             ps.addAll(Iterables.filter(src, predicateUncommon), 3);
 
         } else if ( mainCode.equalsIgnoreCase("rare") ) {
+            // Typical ratio of rares to mythics is 53:15, changing to 35:10 in smaller sets.
+            // To achieve the desired 1:8 are all mythics are added once, and all rares added twice per print sheet.
+
             Predicate<CardPrinted> predicateMythic = Predicates.and( setPred, IPaperCard.Predicates.Presets.IS_MYTHIC_RARE, extraPred);
             ps.addAll(Iterables.filter(src, predicateMythic));
             
