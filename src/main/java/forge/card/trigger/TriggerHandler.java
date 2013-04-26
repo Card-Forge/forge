@@ -437,45 +437,4 @@ public class TriggerHandler {
         regtrig.setTriggeredSA(wrapperAbility);
         return true;
     }
-
-    private final ArrayList<Integer> triggersAlwaysAccept = new ArrayList<Integer>();
-    private final ArrayList<Integer> triggersAlwaysDecline = new ArrayList<Integer>();
-
-    public final void setAlwaysAcceptTrigger(final int trigID) {
-        if (this.triggersAlwaysDecline.contains(trigID)) {
-            this.triggersAlwaysDecline.remove((Object) trigID);
-        }
-
-        if (!this.triggersAlwaysAccept.contains(trigID)) {
-            this.triggersAlwaysAccept.add(trigID);
-        }
-    }
-
-    public final void setAlwaysDeclineTrigger(final int trigID) {
-        if (this.triggersAlwaysAccept.contains(trigID)) {
-            this.triggersAlwaysAccept.remove((Object) trigID);
-        }
-
-        if (!this.triggersAlwaysDecline.contains(trigID)) {
-            this.triggersAlwaysDecline.add(trigID);
-        }
-    }
-
-    public final void setAlwaysAskTrigger(final int trigID) {
-        this.triggersAlwaysAccept.remove((Object) trigID);
-        this.triggersAlwaysDecline.remove((Object) trigID);
-    }
-
-    public final boolean isAlwaysAccepted(final int trigID) {
-        return this.triggersAlwaysAccept.contains(trigID);
-    }
-
-    public final boolean isAlwaysDeclined(final int trigID) {
-        return this.triggersAlwaysDecline.contains(trigID);
-    }
-
-    public final void clearTriggerSettings() {
-        this.triggersAlwaysAccept.clear();
-        this.triggersAlwaysDecline.clear();
-    }
 }

@@ -92,7 +92,6 @@ public class GameNew {
         // need this code here, otherwise observables fail
         forge.card.trigger.Trigger.resetIDs();
         TriggerHandler trigHandler = game.getTriggerHandler();
-        trigHandler.clearTriggerSettings();
         trigHandler.clearDelayedTrigger();
 
         // friendliness
@@ -219,7 +218,6 @@ public class GameNew {
         // need this code here, otherwise observables fail
         forge.card.trigger.Trigger.resetIDs();
         TriggerHandler trigHandler = game.getTriggerHandler();
-        trigHandler.clearTriggerSettings();
         trigHandler.clearDelayedTrigger();
         trigHandler.cleanUpTemporaryTriggers();
         trigHandler.suppressMode(TriggerType.ChangesZone);
