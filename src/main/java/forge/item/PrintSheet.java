@@ -71,11 +71,20 @@ public class PrintSheet {
     
     public List<CardPrinted> random(int number, boolean wantUnique) {
         List<CardPrinted> result = new ArrayList<CardPrinted>();
-        
+
         int totalWeight = cardsWithWeights.countAll();
         if( totalWeight == 0) {
             System.err.println("No cards were found on sheet " + name);
             return result;
+        }
+
+        // If they ask for 40 unique basic lands (to make a fatpack) out of 20 distinct possible, add the whole print run N times.
+        int uniqueCards = cardsWithWeights.countDistinct();
+        while ( number >= uniqueCards ) {
+            for(Entry<CardPrinted, Integer> kv : cardsWithWeights) {
+                result.add(kv.getKey());
+            }
+            number -= uniqueCards;
         }
 
         for(int iC = 0; iC < number; iC++) {
@@ -97,5 +106,6 @@ public class PrintSheet {
         }
         
     }
+
 
 }
