@@ -107,6 +107,8 @@ Dismantle
 Needlebite Trap
 Spitting Slug
 Taunt
+Cyclone
+Mind Whip
 
 
 --------------------
