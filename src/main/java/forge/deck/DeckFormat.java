@@ -116,6 +116,10 @@ public enum DeckFormat {
 
     @SuppressWarnings("incomplete-switch")
     public String getDeckConformanceProblem(Deck deck) {
+        if(deck == null) {
+            return "is not selected";
+        }
+
         // That's really a bad dependence
         if (!Singletons.getModel().getPreferences().getPrefBoolean(FPref.ENFORCE_DECK_LEGALITY)) {
             return null;

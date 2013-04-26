@@ -92,14 +92,22 @@ public enum CSubmenuConstructed implements ICDoc {
         view.getCbRemoveSmall().setSelected(prefs.getPrefBoolean(FPref.DECKGEN_NOSMALL));
     }
 
-    /** @param gameType 
-     * @param lists0 &emsp; {@link java.util.List}<{@link javax.swing.JList}> */
+    /**
+     *
+     * @param gameType
+     */
     private void startGame(final GameType gameType) {
         Deck humanDeck = VSubmenuConstructed.SINGLETON_INSTANCE.getDcHuman().getDeck();
+        String humanDeckErrorMessage = gameType.getDecksFormat().getDeckConformanceProblem(humanDeck);
+        if (null != humanDeckErrorMessage) {
+            JOptionPane.showMessageDialog(null, "Your deck " + humanDeckErrorMessage, "Invalid deck", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
 
-        String errorMessage = gameType.getDecksFormat().getDeckConformanceProblem(humanDeck);
-        if (null != errorMessage) {
-            JOptionPane.showMessageDialog(null, "Your deck " + errorMessage, "Invalid deck", JOptionPane.ERROR_MESSAGE);
+        Deck aiDeck = VSubmenuConstructed.SINGLETON_INSTANCE.getDcAi().getDeck();
+        String aiDeckErrorMessage = gameType.getDecksFormat().getDeckConformanceProblem(aiDeck);
+        if (null != aiDeckErrorMessage) {
+            JOptionPane.showMessageDialog(null, "AI deck " + aiDeckErrorMessage, "Invalid deck", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
