@@ -58,11 +58,7 @@ public class BoosterTemplate extends SealedProductTemplate {
         if (0 < lastCommaIdx) {
             s.replace(lastCommaIdx+1, lastCommaIdx+1, " and");
         }
-        
-        if (0 < foilRate) {
-            s.append(", with a foil rate of 1 in ").append(foilRate);
-        }
-        
+
         return s.toString();
     }
 

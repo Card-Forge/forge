@@ -1,6 +1,5 @@
 package forge.item;
 
-import java.io.File;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.ArrayList;

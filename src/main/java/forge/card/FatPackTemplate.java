@@ -69,16 +69,19 @@ public class FatPackTemplate extends SealedProductTemplate {
         }
 
         StringBuilder s = new StringBuilder();
-        if (0 < cntBoosters) {
-            s.append(cntBoosters).append(" booster packs, ");
-        }
-
         for(Pair<String, Integer> p : slots) {
             s.append(p.getRight()).append(" ").append(p.getLeft()).append(", ");
         }
         // trim the last comma and space
-        s.replace(s.length() - 2, s.length(), "");
+        if( s.length() > 0 )
+            s.replace(s.length() - 2, s.length(), "");
 
+        if (0 < cntBoosters) {
+            if( s.length() > 0 )
+                s.append(" and ");
+                
+            s.append(cntBoosters).append(" booster packs ");
+        }
         return s.toString();
     }
 }

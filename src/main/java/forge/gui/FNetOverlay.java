@@ -44,7 +44,7 @@ public enum FNetOverlay {
     private final FLabel cmdSend = new FLabel.ButtonBuilder().text("Send").build(); 
 
     
-    private boolean minimized = false;
+    //private boolean minimized = false;
     private int height = 120;
     private int width = 400;
 
@@ -62,7 +62,7 @@ public enum FNetOverlay {
         }
     };
     
-    private final int minimizedHeight = 30;
+    //private final int minimizedHeight = 30;
     
     /**
      * Semi-transparent overlay panel. Should be used with layered panes.

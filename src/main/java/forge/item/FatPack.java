@@ -60,7 +60,7 @@ public class FatPack extends OpenablePack {
         for (int i = 0; i < fpData.getCntBoosters(); i++) {
             result.addAll(super.generate());
         }
-        result.addAll(BoosterGenerator.getBoosterPack(contents));
+        result.addAll(BoosterGenerator.getBoosterPack(fpData));
         return result;
     }
 
