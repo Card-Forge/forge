@@ -97,6 +97,8 @@ public class ChooseCardNameEffect extends SpellAbilityEffect {
                                 chosen = ComputerUtilCard.getMostProminentCardName(p.getCardsIn(ZoneType.Library));
                             } else if (logic.equals("MostProminentInHumanDeck")) {
                                 chosen = ComputerUtilCard.getMostProminentCardName(p.getOpponent().getCardsIn(ZoneType.Library));
+                            } else if (logic.equals("BestCreatureInComputerDeck")) {
+                                chosen = ComputerUtilCard.getBestCreatureAI(p.getCardsIn(ZoneType.Library)).getName();
                             }
                         } else {
                             List<Card> list = CardLists.filterControlledBy(p.getGame().getCardsInGame(), p.getOpponent());
