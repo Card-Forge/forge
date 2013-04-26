@@ -1,7 +1,7 @@
-Forge Beta: 0#-##-2013 ver 1.3.13
+Forge Beta: 04-26-2013 ver 1.3.13
 
 
-12### cards in total.
+12538 cards in total.
 
 
 -------------
@@ -92,32 +92,32 @@ Booster slots are now way more customizable. This change allows us to implement 
 New Cards
 ---------
 
-Fog Patch
+Consuming Ferocity
+Corrosion
 Cowed by Wisdom
+Cyclone
+Dismantle
+Fog Patch
 Hipparion
 Illuminate
-Rumbling Aftershocks
-Worldheart Phoenix
-Corrosion
-Consuming Ferocity
-Myr Prototype
-Stromgald Spy
-Saproling Infestation
-Dismantle
-Needlebite Trap
-Spitting Slug
-Taunt
-Cyclone
 Mind Whip
+Myr Prototype
+Needlebite Trap
+Rumbling Aftershocks
+Saproling Infestation
+Spitting Slug
+Stromgald Spy
+Taunt
+Worldheart Phoenix
 
 
 --------------------
 New Vanguard Avatars
 --------------------
 
+Elvish Champion Avatar
 Ink-Eyes, Servant of Oni Avatar
 Maralen of the Mornsong Avatar
-Elvish Champion Avatar
 Seshiro the Anointed Avatar
 
 
@@ -126,143 +126,142 @@ New Dragon's Maze branch Cards
 ------------------------------
 
 Advent of the Wurm
-Beck // Call
-Blood Scrivener
-Deputy of Acquittals
-Exava, Rakdos Blood Witch
-Master of Cruelties
-Maze's End
-Melek, Izzet Paragon
-Ral Zarek
-Render Silent
-Renounce the Guilds
-Sin Collector
-Toil // Trouble
-Varolz, the Scar-Striped
-Voice of Resurgence
-Vorel of the Hull Clade
-Wear // Tear
-
-Opal Lake Gatekeeper
-Obzedat's Aid
-Teysa, Envoy of Ghosts
-Renegade Krasis
-Council of the Absolute
-Sunspire Gatekeepers
-Saruli Gatekeepers
-Ubul Sar Gatekeepers
-Far // Away
-Bred for the Hunt
-Lavinia of the Tenth
-Progenitor Mimic
+AEtherling
+Alive // Well
+Armed // Dangerous
+Armored Wolf-Rider
+Ascended Lawmage
+Awe for the Guilds
 Azorius Cluestone
+Bane Alley Blackguard
+Battering Krasis
+Beck // Call
+Beetleform Mage
+Blast of Genius
+Blaze Commando
+Blood Baron of Vizkopa
+Blood Scrivener
 Boros Cluestone
+Boros Mastiff
+Breaking // Entering
+Bred for the Hunt
+Bronzebeak Moa
+Carnage Gladiator
+Clear a Path
+Council of the Absolute
+Crypt Incursion
+Deadbridge Chant
+Debt to the Deathless
+Deputy of Acquittals
 Dimir Cluestone
+Down // Dirty
+Dragonshift
+Drown in Filth
+Emmara Tandris
+Exava, Rakdos Blood Witch
+Far // Away
+Fatal Fumes
+Flesh // Blood
+Fluxcharger
+Gaze of Granite
+Give // Take
+Gleam of Battle
+Goblin Test Pilot
 Golgari Cluestone
 Gruul Cluestone
+Gruul War Chant
+Haazda Snare Squad
+Haunter of Nightveil
+Hidden Strings
+Hired Torturer
 Izzet Cluestone
-Orzhov Cluestone
-Rakdos Cluestone
-Selesnya Cluestone
-Simic Cluestone
-Tajic, Blade of the Legion
-Goblin Test Pilot
-Blood Baron of Vizkopa
-Alive // Well
-Sire of Insanity
-Zhur-Taa Ancient
+Jelenn Sphinx
+Korozda Gorgon
+Krasis Incubation
+Kraul Warrior
+Lavinia of the Tenth
 Legion's Initiative
-Notion Thief
-Uncovered Clues
-Warleader's Helix
-Smelt-Ward Gatekeepers
-Maze Sentinel
-Wake the Reflections
-Deadbridge Chant
-Ruric Thar, the Unbowed
+Lyev Decree
+Master of Cruelties
+Maw of the Obzedat
 Maze Abomination
 Maze Behemoth
 Maze Glider
 Maze Rusher
-Emmara Tandris
-Viashino Firstblade
-Mirko Vosk, Mind Drinker
-Nivix Cyclops
-Hidden Strings
-AEtherling
-Beetleform Mage
-Blast of Genius
-Fluxcharger
-Korozda Gorgon
-Armed // Dangerous
-Breaking // Entering
-Down // Dirty
-Flesh // Blood
-Turn // Burn
-Drown in Filth
-Gaze of Granite
-Gleam of Battle
-Gruul War Chant
-Haunter of Nightveil
-Jelenn Sphinx
-Pilfered Plans
-Restore the Peace
-Rot Farm Skeleton
-Species Gorger
-Tithe Drinker
-Woodlot Crawler
-Scab-Clan Giant
-Spike Jester
-Zhur-Taa Druid
-Debt to the Deathless
-Maw of the Obzedat
-Morgue Burst
-Awe for the Guilds
-Clear a Path
-Punish the Enemy
-Riot Piker
-Rubblebelt Maaka
-Weapon Surge
-Krasis Incubation
-Plasm Capture
-Reap Intellect
-Bane Alley Blackguard
-Crypt Incursion
-Fatal Fumes
-Hired Torturer
-Rakdos Drake
-Sinister Possession
-Armored Wolf-Rider
-Ascended Lawmage
-Bronzebeak Moa
-Blaze Commando
-Carnage Gladiator
-Pontiff of Blight
-Battering Krasis
-Kraul Warrior
+Maze Sentinel
+Maze's End
+Melek, Izzet Paragon
 Mending Touch
-Mutant's Prey
-Phytoburst
-Skylasher
-Thrashing Mossdog
 Mindstatic
+Mirko Vosk, Mind Drinker
+Morgue Burst
 Murmuring Phantasm
-Runner's Bane
-Give // Take
+Mutant's Prey
+Nivix Cyclops
+Notion Thief
+Obzedat's Aid
+Opal Lake Gatekeeper
+Orzhov Cluestone
+Phytoburst
+Pilfered Plans
+Plasm Capture
+Pontiff of Blight
 Profit // Loss
+Progenitor Mimic
 Protect // Serve
+Punish the Enemy
+Rakdos Cluestone
+Rakdos Drake
+Ral Zarek
 Ready // Willing
-Savageborn Hydra
-Trostani's Summoner
-Unflinching Courage
-Warped Physique
-Boros Mastiff
-Haazda Snare Squad
-Lyev Decree
+Reap Intellect
+Render Silent
+Renegade Krasis
+Renounce the Guilds
+Restore the Peace
 Riot Control
+Riot Piker
+Rot Farm Skeleton
+Rubblebelt Maaka
+Runner's Bane
+Ruric Thar, the Unbowed
+Saruli Gatekeepers
+Savageborn Hydra
+Scab-Clan Giant
 Scion of Vitu-Ghazi
+Selesnya Cluestone
+Simic Cluestone
+Sin Collector
+Sinister Possession
+Sire of Insanity
+Skylasher
+Smelt-Ward Gatekeepers
+Species Gorger
+Spike Jester
 Steeple Roc
-Dragonshift
+Sunspire Gatekeepers
+Tajic, Blade of the Legion
+Teysa, Envoy of Ghosts
+Thrashing Mossdog
+Tithe Drinker
+Toil // Trouble
+Trostani's Summoner
+Turn // Burn
+Ubul Sar Gatekeepers
+Uncovered Clues
+Unflinching Courage
+Varolz, the Scar-Striped
+Viashino Firstblade
+Voice of Resurgence
+Vorel of the Hull Clade
+Wake the Reflections
+Warleader's Helix
+Warped Physique
+Weapon Surge
+Wear // Tear
+Woodlot Crawler
+Zhur-Taa Ancient
+Zhur-Taa Druid
 
 
 ------------
@@ -297,7 +296,19 @@ Some people use the Windows application 7zip. This utility can be found at http:
 Contributors to This Release
 ----------------------------
 
-
+Gos
+Hellfish
+Marc
+Max
+Nordos
+PowerClaws
+RedDeckWins
+RumbleBBU
+Sloth
+Sol
+Swordshine
+ZzzzSleep
+Chris H
 
 
 (Quest icons used created by Teekatas, from his Legendora set http://raindropmemory.deviantart.com)
