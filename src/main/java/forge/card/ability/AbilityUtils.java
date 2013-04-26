@@ -5,6 +5,8 @@ import java.util.Arrays;
 import java.util.List;
 
 
+import forge.card.MagicColor;
+import forge.card.mana.ManaCostShard;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.Card;
@@ -1111,8 +1113,13 @@ public class AbilityUtils {
             newCost.decreaseColorlessMana(2);
             unlessCost = newCost.toString();
         } else if( !StringUtils.isBlank(sa.getSVar(unlessCost)) || !StringUtils.isBlank(source.getSVar(unlessCost))) {
-            // check for X costs (stored in SVars 
-            unlessCost = Integer.toString(calculateAmount(source, sa.getParam("UnlessCost").replace(" ", ""), sa));
+            // check for X costs (stored in SVars
+            int xCost = calculateAmount(source, sa.getParam("UnlessCost").replace(" ", ""), sa);
+            //Check for XColor
+            ManaCostBeingPaid toPay = new ManaCostBeingPaid("0");
+            byte xColor = MagicColor.fromName(sa.hasParam("UnlessXColor") ? sa.getParam("UnlessXColor") : "1");
+            toPay.increaseShard(ManaCostShard.valueOf(xColor), xCost);
+            unlessCost = toPay.toString();
         }
 
         final Cost cost = new Cost(unlessCost, true);
