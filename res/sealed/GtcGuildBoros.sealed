@@ -3,5 +3,5 @@ DeckFile:GtcGuildBoros
 IgnoreRarity:False
 LandSetCode:M13
 
-Booster:10 Common, 3 Uncommon, 1 Rare, 2 promo("Boros Guildgate|GTC","Foundry Champion|GTC")
+Booster:10 Common, 3 Uncommon, 1 RareMythic, 2 promo("Boros Guildgate|GTC","Foundry Champion|GTC")
 NumPacks:1

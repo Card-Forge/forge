@@ -8,21 +8,21 @@
 7ED: 5 covers, 10 Common, 3 Uncommon, 1 Rare, 1 BasicLand 
 8ED: 5 covers, 10 Common, 3 Uncommon, 1 Rare, 1 BasicLand 
 9ED: 5 covers, 10 Common, 3 Uncommon, 1 Rare, 1 BasicLand 
-ALA: 5 covers, 10 Common, 3 Uncommon, 1 Rare, 1 BasicLand 
+ALA: 5 covers, 10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand 
 ALL: 1 covers, 8 Common, 3 Uncommon, 1 Rare
 APC: 1 covers, 11 Common, 3 Uncommon, 1 Rare
-ARB: 3 covers, 10 Common, 3 Uncommon, 1 Rare, 1 BasicLand ALA
+ARB: 3 covers, 10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand ALA
 ARN: 1 covers, 6 Common, 2 UncommonRare
 ATQ: 1 covers, 6 Common, 2 UncommonRare
-AVR: 5 covers, 10 Common, 3 Uncommon, 1 Rare, 1 BasicLand 
+AVR: 5 covers, 10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand 
 BOK: 3 covers, 11 Common, 3 Uncommon, 1 Rare
-CFX: 3 covers, 10 Common, 3 Uncommon, 1 Rare, 1 BasicLand ALA
+CFX: 3 covers, 10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand ALA
 CHK: 5 covers, 11 Common, 3 Uncommon, 1 Rare
 CHR: 1 covers, 9 Common, 3 UncommonRare
 CSP: 3 covers, 11 Common, 3 Uncommon, 1 Rare
-DGM: 3 covers, 10 Common, 3 Uncommon, 1 Rare:!name("Maze's End"), 1 Custom("Dragon's Maze Lands")
+DGM: 3 covers, 10 Common, 3 Uncommon, 1 RareMythic:!name("Maze's End"), 1 Custom("Dragon's Maze Lands")
 DIS: 3 covers, 11 Common, 3 Uncommon, 1 Rare
-DKA: 3 covers, 9 Common:!dfc, 3 Uncommon:!dfc, 1 Rare:!dfc, 1 Any:dfc, 1 BasicLand ISD
+DKA: 3 covers, 9 Common:!dfc, 3 Uncommon:!dfc, 1 RareMythic:!dfc, 1 Any:dfc, 1 BasicLand ISD
 DRK: 1 covers, 6 Common, 2 UncommonRare
 DST: 3 covers, 11 Common, 3 Uncommon, 1 Rare
 EVE: 3 covers, 11 Common, 3 Uncommon, 1 Rare
@@ -30,28 +30,28 @@ EXO: 1 covers, 11 Common, 3 Uncommon, 1 Rare
 FEM: 1 covers, 5 Common, 2 Uncommon, 1 Rare
 FUT: 3 covers, 11 Common, 3 Uncommon, 1 Rare
 GPT: 3 covers, 11 Common, 3 Uncommon, 1 Rare
-GTC: 5 covers, 10 Common, 3 Uncommon, 1 Rare, 1 BasicLand 
+GTC: 5 covers, 10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand 
 HML: 1 covers, 6 Common, 2 UncommonRare
 ICE: 5 covers, 11 Common, 3 Uncommon, 1 Rare
 INV: 3 covers, 11 Common, 3 Uncommon, 1 Rare
-ISD: 5 covers, 9 Common:!dfc, 3 Uncommon:!dfc, 1 Rare:!dfc, 1 Any:dfc, 1 BasicLand
+ISD: 5 covers, 9 Common:!dfc, 3 Uncommon:!dfc, 1 RareMythic:!dfc, 1 Any:dfc, 1 BasicLand
 JUD: 1 covers, 11 Common, 3 Uncommon, 1 Rare
 LEA: 1 covers, 11 Common, 3 Uncommon, 1 Rare
 LEB: 1 covers, 11 Common, 3 Uncommon, 1 Rare
 LEG: 1 covers, 11 Common, 3 Uncommon, 1 Rare
 LGN: 3 covers, 11 Common, 3 Uncommon, 1 Rare
 LRW: 5 covers, 11 Common, 3 Uncommon, 1 Rare
-M10: 5 covers, 10 Common, 3 Uncommon, 1 Rare, 1 BasicLand 
-M11: 5 covers, 10 Common, 3 Uncommon, 1 Rare, 1 BasicLand 
-M12: 5 covers, 10 Common, 3 Uncommon, 1 Rare, 1 BasicLand 
-M13: 5 covers, 10 Common, 3 Uncommon, 1 Rare, 1 BasicLand 
-MBS: 3 covers, 10 Common, 3 Uncommon, 1 Rare, 1 BasicLand 
+M10: 5 covers, 10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand 
+M11: 5 covers, 10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand 
+M12: 5 covers, 10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand 
+M13: 5 covers, 10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand 
+MBS: 3 covers, 10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand 
 MIR: 5 covers, 11 Common, 3 Uncommon, 1 Rare
 MMQ: 3 covers, 11 Common, 3 Uncommon, 1 Rare
 MOR: 3 covers, 11 Common, 3 Uncommon, 1 Rare
 MRD: 5 covers, 11 Common, 3 Uncommon, 1 Rare
 NMS: 1 covers, 11 Common, 3 Uncommon, 1 Rare
-NPH: 3 covers, 10 Common, 3 Uncommon, 1 Rare, 1 BasicLand 
+NPH: 3 covers, 10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand 
 ODY: 3 covers, 11 Common, 3 Uncommon, 1 Rare
 ONS: 5 covers, 11 Common, 3 Uncommon, 1 Rare
 PCY: 1 covers, 11 Common, 3 Uncommon, 1 Rare
@@ -61,12 +61,12 @@ PO2: 1 covers, 11 Common, 3 Uncommon, 1 Rare
 POR: 5 covers, 11 Common, 3 Uncommon, 1 Rare
 PTK: 1 covers, 5 Common, 2 Uncommon, 1 Rare, 2 BasicLand 
 RAV: 5 covers, 11 Common, 3 Uncommon, 1 Rare
-ROE: 5 covers, 10 Common, 3 Uncommon, 1 Rare, 1 BasicLand 
-RTR: 5 covers, 10 Common, 3 Uncommon, 1 Rare, 1 BasicLand 
+ROE: 5 covers, 10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand 
+RTR: 5 covers, 10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand 
 SCG: 3 covers, 11 Common, 3 Uncommon, 1 Rare
 SHM: 5 covers, 11 Common, 3 Uncommon, 1 Rare
 SOK: 3 covers, 11 Common, 3 Uncommon, 1 Rare
-SOM: 5 covers, 10 Common, 3 Uncommon, 1 Rare, 1 BasicLand 
+SOM: 5 covers, 10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand 
 STH: 1 covers, 11 Common, 3 Uncommon, 1 Rare
 TMP: 3 covers, 11 Common, 3 Uncommon, 1 Rare
 TOR: 1 covers, 11 Common, 3 Uncommon, 1 Rare
@@ -76,5 +76,5 @@ ULG: 1 covers, 11 Common, 3 Uncommon, 1 Rare
 USG: 3 covers, 11 Common, 3 Uncommon, 1 Rare
 VIS: 1 covers, 11 Common, 3 Uncommon, 1 Rare
 WTH: 1 covers, 11 Common, 3 Uncommon, 1 Rare
-WWK: 3 covers, 10 Common, 3 Uncommon, 1 Rare, 1 BasicLand ZEN
-ZEN: 5 covers, 10 Common, 3 Uncommon, 1 Rare, 1 BasicLand
+WWK: 3 covers, 10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand ZEN
+ZEN: 5 covers, 10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand

@@ -126,7 +126,7 @@ public class BoosterGenerator {
             Predicate<CardPrinted> predicateUncommon = Predicates.and( setPred, IPaperCard.Predicates.Presets.IS_UNCOMMON, extraPred);
             ps.addAll(Iterables.filter(src, predicateUncommon), 3);
 
-        } else if ( mainCode.equalsIgnoreCase("rare") ) {
+        } else if ( mainCode.equalsIgnoreCase("raremythic") ) {
             // Typical ratio of rares to mythics is 53:15, changing to 35:10 in smaller sets.
             // To achieve the desired 1:8 are all mythics are added once, and all rares added twice per print sheet.
 
@@ -136,7 +136,7 @@ public class BoosterGenerator {
             Predicate<CardPrinted> predicateRare = Predicates.and( setPred, IPaperCard.Predicates.Presets.IS_RARE, extraPred);
             ps.addAll(Iterables.filter(src, predicateRare), 2);
             
-        } else if ( mainCode.equalsIgnoreCase("rarenotmythic") ) {
+        } else if ( mainCode.equalsIgnoreCase("rare") ) {
             Predicate<CardPrinted> predicateRare = Predicates.and( setPred, IPaperCard.Predicates.Presets.IS_RARE, extraPred);
             ps.addAll(Iterables.filter(src, predicateRare));
             

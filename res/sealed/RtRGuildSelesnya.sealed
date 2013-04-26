@@ -3,5 +3,5 @@ DeckFile:RtRGuildSelesnya
 IgnoreRarity:False
 LandSetCode:M13
 
-Booster:10 Common, 3 Uncommon, 1 Rare, 2 promo("Selesnya Guildgate|RTR","Grove of the Guardian|RTR")
+Booster:10 Common, 3 Uncommon, 1 RareMythic, 2 promo("Selesnya Guildgate|RTR","Grove of the Guardian|RTR")
 NumPacks:1

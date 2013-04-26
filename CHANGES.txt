@@ -76,15 +76,16 @@ We have created a branch for Dragon's Maze spoilers. These new cards are not inc
 
 
 - Random Deck generation -
-Deck generation is now strictly conforming the colors chosen. You won't get any Boros Reckoner in a RG deck, that could be added before the change (because they it red and it's ok). Avacyn's Piligrim won't be added in a deck that has green but doesn't have white, though it does not consume, but produces white mana. As well there won't be added any creatures whose activated abilities require colors not choosen for a given deck. That is to say that now color identity is used for deck generation, that allows a better filtering of cards.
+Deck generation is now strictly conforming the colors chosen. You won't get any Boros Reckoner in a RG deck, that could be added before the change (because its manacost could be paid with red mana). Avacyn's Piligrim won't be added in a deck that has green but doesn't have white, though it does not consume, but produces white mana. As well there won't be added any creatures whose activated abilities require colors not choosen for a given deck.
+That is to say that now color identity is used for deck generation, that allows a better filtering of cards.
 
 
 - Single declare attackers step -
-Combined declare attackers step for all Defending Players/Planeswalkers (see viewtopic.php?f=26&t=10046)
+Combined declare attackers step for all Defending Players/Planeswalkers. On declare attackers step you have to click the entiry you are about to attack and then click on the creatures that should attack it. Clicking on a planeswalker or player visually highlights it, so that you will see whos attackers are assigned at the moment. By default your first opponent is pre-selected.
 
 
 - Booster slots -
-Booster slots are now way more customizable* (viewtopic.php?f=52&t=10128). Textfiles format in res/blockdata was changed, meta of type "combo" feature cut.
+Booster slots are now way more customizable. This change allows us to implement DGM boosters correctly. 
 
 
 ---------
