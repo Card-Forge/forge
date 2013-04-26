@@ -13,4 +13,4 @@ ManaCost:2 W
 Types:Instant
 A:SP$ PumpAll | Cost$ 1 W | ValidTgts$ Player | TgtPrompt$ Select target player | ValidCards$ Creature | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ Creatures target player controls get +1/+1 until end of turn.
 Oracle:Creatures target player controls get +1/+1 until end of turn.
-SetInfo:APC Uncommon
+SetInfo:APC Uncommon x2

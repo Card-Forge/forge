@@ -12,5 +12,5 @@ SVar:SlugUnpaid:Number$0
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spitting_slug.jpg
 Oracle:Whenever Spitting Slug blocks or becomes blocked, you may pay 1 G. If you do, Spitting Slug gains first strike until end of turn. Otherwise, each creature blocking or blocked by Spitting Slug gains first strike until end of turn.
-SetInfo:DRK Uncommon
 SetInfo:TSB Special
+SetInfo:DRK Uncommon

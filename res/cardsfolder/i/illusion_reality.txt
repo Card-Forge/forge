@@ -14,4 +14,4 @@ ManaCost:2 G
 Types:Instant
 A:SP$ Destroy | Cost$ 2 G | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | SpellDescription$ Destroy target artifact.
 Oracle:Destroy target artifact.
-SetInfo:APC Uncommon
+SetInfo:APC Uncommon x2

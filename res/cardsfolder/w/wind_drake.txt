@@ -11,6 +11,7 @@ SetInfo:7ED Common
 SetInfo:6ED Common
 SetInfo:S00 Common
 SetInfo:9ED Common
+SetInfo:DGM Common
 SetInfo:M10 Common
 SetInfo:M13 Common
 SetInfo:TMP Common

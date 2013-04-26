@@ -8,3 +8,5 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$CardManaCost
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blast_of_genius.jpg
+Oracle:Choose target creature or player. Draw three cards, then discard a card. Blast of Genius deals damage equal to the discarded card's converted mana cost to that creature or player.
+SetInfo:DGM Uncommon

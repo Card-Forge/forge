@@ -5,3 +5,5 @@ PT:2/4
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigDig | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, that player reveals cards from the top of his or her library until he or she reveals four land cards, then puts those cards into his or her graveyard.
 SVar:TrigDig:AB$ DigUntil | Defined$ TriggeredTarget | Cost$ 0 | Amount$ 4 | Valid$ Land | ValidDescription$ land | RevealedDestination$ Graveyard
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mirko_vosk_mind_drinker.jpg
+Oracle:Flying\nWhenever Mirko Vosk, Mind Drinker deals combat damage to a player, that player reveals cards from the top of his or her library until he or she reveals four land cards, then puts those cards into his or her graveyard.
+SetInfo:DGM Rare

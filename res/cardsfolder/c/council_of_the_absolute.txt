@@ -8,3 +8,5 @@ S:Mode$ CantBeCast | ValidCard$ Card.NamedCard | Caster$ Player.Opponent | Descr
 S:Mode$ ReduceCost | ValidCard$ Card.NamedCard | Type$ Spell | Activator$ You | Amount$ 2 | Description$ Spells with the chosen name cost 2 less for you to cast.
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/council_of_the_absolute.jpg
+Oracle:As Council of the Absolute enters the battlefield, name a card other than a creature or land card.\nYour opponents can't cast cards with the chosen name.\nSpells with the chosen name you cast cost {2} less to cast.
+SetInfo:DGM Mythic

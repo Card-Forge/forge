@@ -6,3 +6,5 @@ A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add W to your mana pool.
 A:AB$ Draw | Cost$ R W T Sac<1/CARDNAME> | NumCards$ 1 | SpellDescription$ Draw a card.
 DeckNeeds:Color$Red|White
 SVar:Picture:http://www.wizards.com/global/images/magic/general/boros_cluestone.jpg
+Oracle:{T}: Add {R} or {W} to your mana pool.\n{R}{W}, {T}, Sacrifice Boros Cluestone: Draw a card.
+SetInfo:DGM Common

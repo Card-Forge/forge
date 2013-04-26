@@ -8,5 +8,6 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigSac:AB$ Sacrifice | Cost$ 0 | Defined$ Player.Opponent | SacValid$ Creature
 SVar:Picture:http://www.wizards.com/global/images/magic/general/butcher_of_malakir.jpg
 Oracle:Flying\nWhenever Butcher of Malakir or another creature you control dies, each opponent sacrifices a creature.
+SetInfo:DDK Rare
 SetInfo:COM Rare
 SetInfo:WWK Rare

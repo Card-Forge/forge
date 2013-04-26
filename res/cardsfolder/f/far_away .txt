@@ -5,10 +5,10 @@ Types:Instant
 K:Fuse
 A:SP$ ChangeZone | Cost$ 1 U | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target creature to its owner's hand.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/far_away.jpg
-
 ALTERNATE
-
 Name:Away
 ManaCost:2 B
 Types:Instant
 A:SP$ Sacrifice | Cost$ 2 B | ValidTgts$ Opponent | SacValid$ Creature | SacMessage$ Creature | SpellDescription$ Target opponent sacrifices a creature.
+Oracle:Return target creature to its owner's hand.\nFuse (You may cast one or both halves of this card from your hand.)\n----\nAway\n{2}{B}\nInstant\nTarget player sacrifices a creature.\nFuse (You may cast one or both halves of this card from your hand.)
+SetInfo:DGM Uncommon

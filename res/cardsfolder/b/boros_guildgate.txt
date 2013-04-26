@@ -7,3 +7,4 @@ A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add R to your mana pool.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/boros_guildgate.jpg
 Oracle:Boros Guildgate enters the battlefield tapped.\n{T}: Add {R} or {W} to your mana pool.
 SetInfo:GTC Common
+SetInfo:DGM Common

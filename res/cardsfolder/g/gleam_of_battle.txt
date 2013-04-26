@@ -5,3 +5,5 @@ T:Mode$ Attacks | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | Exec
 SVar:TrigPut:AB$ PutCounter | Cost$ 0 | Defined$ TriggeredAttacker | CounterType$ P1P1 | CounterNum$ 1
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gleam_of_battle.jpg
+Oracle:Whenever a creature you control attacks, put a +1/+1 counter on it.
+SetInfo:DGM Uncommon

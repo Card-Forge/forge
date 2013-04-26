@@ -5,4 +5,5 @@ A:SP$ ChangeZone | Cost$ 1 B | TargetMin$ 0 | TargetMax$ 3 | TargetsFromSingleZo
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/decompose.jpg
 Oracle:Exile up to three target cards from a single graveyard.
+SetInfo:DDK Uncommon
 SetInfo:ODY Uncommon

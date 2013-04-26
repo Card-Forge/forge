@@ -6,3 +6,5 @@ K:Deathtouch
 S:Mode$ Continuous | Affected$ Creature.MultiColor+YouCtrl | AddKeyword$ Deathtouch | Description$ Multicolored creatures you control have deathtouch.
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/maze_abomination.jpg
+Oracle:Deathtouch (Any amount of damage this deals to a creature is enough to destroy it.)\nMulticolored creatures you control have deathtouch.
+SetInfo:DGM Common

@@ -5,9 +5,7 @@ Types:Sorcery
 K:Fuse
 A:SP$ Mill | Cost$ U B | NumCards$ 8 | ValidTgts$ Player | TgtPrompt$ Choose a player | SpellDescription$ Target player puts the top eight cards of his or her library into his or her graveyard.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/breakingd_entering.jpg
-
 ALTERNATE
-
 Name:Entering
 ManaCost:4 B R
 Types:Sorcery
@@ -15,4 +13,5 @@ A:SP$ ChooseCard | Cost$ 4 B R | Choices$ Creature | ChoiceZone$ Graveyard | Amo
 SVar:DBChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | Defined$ ChosenCard | GainControl$ True | RememberChanged$ True | SubAbility$ DBPump
 SVar:DBPump:DB$ Pump | Defined$ Remembered | KW$ Haste | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-
+Oracle:Target player puts the top eight cards of his or her library into his or her graveyard.\nFuse (You may cast one or both halves of this card from your hand.)\n----\nEntering\n{4}{U}{B}\nSorcery\nPut a creature card from a graveyard onto the battlefield under your control. It gains haste until end of turn.\nFuse (You may cast one or both halves of this card from your hand.)
+SetInfo:DGM Rare

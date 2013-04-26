@@ -38,6 +38,8 @@ CON CFX # Conflux
 ===DDH # Duel Decks: Ajani vs. Nicol Bolas
 ===DDI # Duel Decks: Venser vs. Koth
 ===DDJ # Duel Decks: Izzet vs. Golgari
+===DDK # Duel Decks: Sorin vs. Tibalt
+===DGM # Dragon's Maze
 ===DIS # Dissension
 DK DRK # The Dark
 ===DKA # Dark Ascension

@@ -14,4 +14,4 @@ Types:Sorcery
 A:SP$ Destroy | Cost$ 3 R | ValidTgts$ Land | TgtPrompt$ Select target land | SpellDescription$ Destroy target land.
 Oracle:Destroy target land.
 SetInfo:DDH Uncommon
-SetInfo:INV Uncommon
+SetInfo:INV Uncommon x2

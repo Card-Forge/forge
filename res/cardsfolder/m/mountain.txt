@@ -36,6 +36,7 @@ SetInfo:S00 Land x2
 SetInfo:CHK Land x4
 SetInfo:9ED Land x4
 SetInfo:ARN Common
+SetInfo:DDK Land x3
 SetInfo:LEB Land x3
 SetInfo:DDI Land x4
 SetInfo:DDE Land

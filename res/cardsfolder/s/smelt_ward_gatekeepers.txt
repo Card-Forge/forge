@@ -6,3 +6,5 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigGainControl:AB$ GainControl | Cost$ 0 | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | Untap$ True | LoseControl$ EOT | SubAbility$ DBPump
 SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ Haste
 SVar:Picture:http://www.wizards.com/global/images/magic/general/smelt_ward_gatekeepers.jpg
+Oracle:When Smelt-Ward Gatekeepers enters the battlefield, if you control two or more Gates, gain control of target creature an opponent controls until end of turn. Untap that creature. It gains haste until end of turn.
+SetInfo:DGM Common

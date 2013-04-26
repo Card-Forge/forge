@@ -6,3 +6,5 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigBounce | Trigger
 SVar:TrigBounce:AB$ ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Hand | Mandatory$ True | Hidden$ True | ChangeType$ Creature.YouCtrl
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/species_gorger.jpg
+Oracle:At the beginning of your upkeep, return a creature you control to its owner's hand.
+SetInfo:DGM Uncommon

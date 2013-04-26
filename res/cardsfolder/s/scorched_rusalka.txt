@@ -7,3 +7,4 @@ SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scorched_rusalka.jpg
 Oracle:{R}, Sacrifice a creature: Scorched Rusalka deals 1 damage to target player.
 SetInfo:GPT Uncommon
+SetInfo:DDK Uncommon

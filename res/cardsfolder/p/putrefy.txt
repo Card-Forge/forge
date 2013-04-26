@@ -6,3 +6,4 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/putrefy.jpg
 Oracle:Destroy target artifact or creature. It can't be regenerated.
 SetInfo:RAV Uncommon
 SetInfo:DDJ Uncommon
+SetInfo:DGM Uncommon

@@ -7,5 +7,6 @@ SVar:TrigDamage:AB$ DealDamage | Cost$ 0 | Defined$ TriggeredPlayer | NumDmg$ 3
 SVar:CardsInHand:Count$ValidHand Card.ActivePlayerCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lavaborn_muse.jpg
 Oracle:At the beginning of each opponent's upkeep, if that player has two or fewer cards in hand, Lavaborn Muse deals 3 damage to him or her.
+SetInfo:DDK Rare
 SetInfo:LGN Rare
 SetInfo:10E Rare

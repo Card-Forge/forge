@@ -16,3 +16,4 @@ Types:Sorcery
 A:SP$ DealDamage | Cost$ 2 R | ValidTgts$ Player | NumDmg$ X | References$ X | SpellDescription$ CARDNAME deals damage equal to the number of cards in target player's hand to that player.
 SVar:X:TargetedPlayer$CardsInHand
 Oracle:Trouble deals damage to target player equal to the number of cards in that player's hand.
+SetInfo:DGM Uncommon

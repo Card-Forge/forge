@@ -6,3 +6,5 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigFight:AB$ Fight | Cost$ 0 | Defined$ Self | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Choose target creature an opponent controls | TargetsAtRandom$ True
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scab_clan_giant.jpg
+Oracle:When Scab-Clan Giant enters the battlefield, it fights target creature an opponent controls chosen at random.
+SetInfo:DGM Uncommon

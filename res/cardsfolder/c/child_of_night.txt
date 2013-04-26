@@ -8,3 +8,4 @@ Oracle:Lifelink (Damage dealt by this creature also causes you to gain that much
 SetInfo:M11 Common
 SetInfo:M10 Common
 SetInfo:M12 Common
+SetInfo:DDK Common

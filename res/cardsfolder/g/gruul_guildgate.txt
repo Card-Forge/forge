@@ -7,3 +7,4 @@ A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add G to your mana pool.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gruul_guildgate.jpg
 Oracle:Gruul Guildgate enters the battlefield tapped.\n{T}: Add {R} or {G} to your mana pool.
 SetInfo:GTC Common
+SetInfo:DGM Common

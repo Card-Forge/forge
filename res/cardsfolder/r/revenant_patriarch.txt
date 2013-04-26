@@ -11,3 +11,4 @@ DeckNeeds:Color$White
 SVar:Picture:http://www.wizards.com/global/images/magic/general/revenant_patriarch.jpg
 Oracle:When Revenant Patriarch enters the battlefield, if {W} was spent to cast Revenant Patriarch, target player skips his or her next combat phase.\nRevenant Patriarch can't block.
 SetInfo:GPT Uncommon
+SetInfo:DDK Uncommon

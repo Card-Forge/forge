@@ -5,3 +5,5 @@ PT:7/5
 T:Mode$ TapsForMana | ValidCard$ Land | Execute$ TrigMana | TriggerZones$ Battlefield | Static$ True | TriggerDescription$ Whenever a player taps a land for mana, that player adds one mana to his or her mana pool of any type that land produced.
 SVar:TrigMana:AB$ ManaReflected | Cost$ 0 | ColorOrType$ Type | Valid$ Defined.Triggered | ReflectProperty$ Produced | Defined$ TriggeredPlayer
 SVar:Picture:http://www.wizards.com/global/images/magic/general/zhur_taa_ancient.jpg
+Oracle:Whenever a player taps a land for mana, that player adds one mana to his or her mana pool of any type that land produced.
+SetInfo:DGM Rare

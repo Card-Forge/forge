@@ -8,4 +8,5 @@ SVar:TrigPumpAll:AB$PumpAll | Cost$ 0 | ValidCards$ Creature.YouCtrl | NumAtt$ +
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scourge_devil.jpg
 Oracle:When Scourge Devil enters the battlefield, creatures you control get +1/+0 until end of turn.\nUnearth {2}{R} ({2}{R}: Return this card from your graveyard to the battlefield. It gains haste. Exile it at the beginning of the next end step or if it would leave the battlefield. Unearth only as a sorcery.)
+SetInfo:DDK Uncommon
 SetInfo:ALA Uncommon

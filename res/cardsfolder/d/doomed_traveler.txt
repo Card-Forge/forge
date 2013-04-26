@@ -7,4 +7,5 @@ SVar:TrigToken:AB$Token | Cost$ 0 | TokenImage$ W 1 1 Spirit | TokenAmount$ 1 | 
 SVar:SacMe:1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/doomed_traveler.jpg
 Oracle:When Doomed Traveler dies, put a 1/1 white Spirit creature token with flying onto the battlefield.
+SetInfo:DDK Common
 SetInfo:ISD Common

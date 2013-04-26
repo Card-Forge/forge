@@ -8,4 +8,5 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.S
 SVar:TrigReturn:AB$ChangeZone | Cost$ 0 | Origin$ Exile | Destination$ Battlefield | Defined$ Remembered
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fiend_hunter.jpg
 Oracle:When Fiend Hunter enters the battlefield, you may exile another target creature.\nWhen Fiend Hunter leaves the battlefield, return the exiled card to the battlefield under its owner's control.
+SetInfo:DDK Uncommon
 SetInfo:ISD Uncommon

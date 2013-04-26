@@ -8,3 +8,4 @@ SVar:TrigPutCounter:AB$ PutCounter | Cost$ 0 | CounterType$ P1P1 | CounterNum$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/twilight_drover.jpg
 Oracle:Whenever a creature token leaves the battlefield, put a +1/+1 counter on Twilight Drover.\n{2}{W}, Remove a +1/+1 counter from Twilight Drover: Put two 1/1 white Spirit creature tokens with flying onto the battlefield.
 SetInfo:RAV Rare
+SetInfo:DDK Rare

@@ -4,3 +4,5 @@ Types:Instant
 A:SP$ Pump | Cost$ R | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | NumAtt$ +1 | KW$ First Strike | SpellDescription$ Target creature you control gets +1/+0 and gains first strike until end of turn.
 A:SP$ PumpAll | Cost$ 1 R | ValidCards$ Creature.YouCtrl | ValidDescription$ each creature you control. | NumAtt$ +1 | KW$ First Strike | PrecostDesc$ Overload | CostDesc$ 1 R | NonBasicSpell$ True | SpellDescription$ (You may cast this spell for its overload cost. If you do, change its text by replacing all instances of "target" with "each.".)
 SVar:Picture:http://www.wizards.com/global/images/magic/general/weapon_surge.jpg
+Oracle:Target creature you control gets +1/+0 and gains first strike until end of turn.\nOverload {1}{R} (You may cast this spell for its overload cost. If you do, change its text by replacing all instances of "target" with "each.")
+SetInfo:DGM Common

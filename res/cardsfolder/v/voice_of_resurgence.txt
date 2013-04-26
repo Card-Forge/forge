@@ -8,3 +8,5 @@ SVar:TrigToken:AB$ Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Elemental | Tok
 SVar:TokenPT:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ TokenX | SetToughness$ TokenX | Description$ CARDNAME's power and toughness are each equal to the number of creatures you control.
 SVar:TokenX:Count$Valid Creature.YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/voice_of_resurgence.jpg
+Oracle:Whenever an opponent casts a spell during your turn or when Voice of Resurgence dies, put a green and white Elemental creature token onto the battlefield with "This creature's power and toughness are each equal to the number of creatures you control."
+SetInfo:DGM Mythic

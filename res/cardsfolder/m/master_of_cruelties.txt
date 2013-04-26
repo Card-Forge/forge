@@ -10,3 +10,5 @@ SVar:TrigDamage:AB$ SetLife | Cost$ 0 | Defined$ TriggeredDefender | LifeAmount$
 SVar:DBPump:DB$ Pump | KW$ HIDDEN Prevent all combat damage that would be dealt by CARDNAME. | UntilEndOfCombat$ True
 SVar:MustBeBlocked:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/master_of_cruelties.jpg
+Oracle:First strike, deathtouch\nMaster of Cruelties can only attack alone.\nWhenever Master of Cruelties attacks a player and isn't blocked, that player's life total becomes 1. Master of Cruelties assigns no combat damage this combat.
+SetInfo:DGM Mythic

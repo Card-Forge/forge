@@ -7,6 +7,7 @@ K:Deathtouch
 K:Lifelink
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vampire_nighthawk.jpg
 Oracle:Flying\nDeathtouch (Any amount of damage this deals to a creature is enough to destroy it.)\nLifelink (Damage dealt by this creature also causes you to gain that much life.)
+SetInfo:DDK Uncommon
 SetInfo:M13 Uncommon
 SetInfo:COM Uncommon
 SetInfo:ZEN Uncommon

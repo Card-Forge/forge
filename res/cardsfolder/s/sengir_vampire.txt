@@ -10,6 +10,7 @@ SetInfo:2ED Uncommon
 SetInfo:TOR Rare
 SetInfo:9ED Rare
 SetInfo:10E Rare
+SetInfo:DDK Uncommon
 SetInfo:LEB Uncommon
 SetInfo:M12 Uncommon
 SetInfo:LEA Uncommon

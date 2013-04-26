@@ -6,3 +6,5 @@ K:Defender
 A:AB$ LoseLife | Cost$ 3 B T | ValidTgts$ Opponent | LifeAmount$ 2 | SubAbility$ DBReveal | SpellDescription$ Target opponent loses 2 life and reveals a card at random from his or her hand.
 SVar:DBReveal:DB$ Reveal | Random$ True | Defined$ Targeted
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hired_torturer.jpg
+Oracle:Defender\n{3}{B}, {T}: Target opponent loses 2 life, then reveals a card at random from his or her hand.
+SetInfo:DGM Common

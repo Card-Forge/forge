@@ -4,6 +4,7 @@ Types:Instant
 A:SP$ Destroy | Cost$ B R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NoRegen$ True | SpellDescription$ Destroy target creature. It can't be regenerated.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/terminate.jpg
 Oracle:Destroy target creature. It can't be regenerated.
+SetInfo:DDK Common
 SetInfo:PLS Common
 SetInfo:ARB Common
 SetInfo:ARC Common

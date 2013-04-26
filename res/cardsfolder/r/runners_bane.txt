@@ -7,3 +7,5 @@ T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefi
 SVar:TrigTap:AB$ Tap | Cost$ 0 | Defined$ Enchanted
 S:Mode$ Continuous | Affected$ Creature.AttachedBy | AddHiddenKeyword$ CARDNAME doesn't untap during your untap step. | Description$ Enchanted creature doesn't untap during the untap step.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/runners_bane.jpg
+Oracle:Enchant creature with power 3 or less\nWhen Runner's Bane enters the battlefield, tap enchanted creature.\nEnchanted creature doesn't untap during its controller's untap step.
+SetInfo:DGM Common

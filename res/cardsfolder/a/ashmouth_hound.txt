@@ -8,4 +8,5 @@ SVar:TrigDamageAttacker:AB$ DealDamage | Cost$ 0 | Defined$ TriggeredAttacker | 
 SVar:TrigDamageBlocker:AB$ DealDamage | Cost$ 0 | Defined$ TriggeredBlocker | NumDmg$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ashmouth_hound.jpg
 Oracle:Whenever Ashmouth Hound blocks or becomes blocked by a creature, Ashmouth Hound deals 1 damage to that creature.
+SetInfo:DDK Common
 SetInfo:ISD Common

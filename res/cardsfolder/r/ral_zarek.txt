@@ -9,3 +9,5 @@ A:AB$ Repeat | Cost$ SubCounter<7/LOYALTY> | MaxRepeat$ 5 | RepeatSubAbility$ DB
 SVar:DBFlip:DB$ FlipACoin | NoCall$ True | HeadsSubAbility$ DBAddTurn
 SVar:DBAddTurn:DB$ AddTurn | Defined$ You | NumTurns$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ral_zarek.jpg
+Oracle:[+1] Tap target permanent, then untap another target permanent.\n[-2] Ral Zarek deals 3 damage to target creature or player.\n[-7] Flip five coins. Take an extra turn after this one for each coin that comes up heads.
+SetInfo:DGM Mythic

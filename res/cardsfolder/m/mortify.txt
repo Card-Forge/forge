@@ -5,4 +5,5 @@ A:SP$ Destroy | Cost$ 1 W B | ValidTgts$ Creature,Enchantment | TgtPrompt$ Selec
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mortify.jpg
 Oracle:Destroy target creature or enchantment.
 SetInfo:GPT Uncommon
+SetInfo:DDK Uncommon
 SetInfo:COM Uncommon

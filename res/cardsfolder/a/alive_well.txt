@@ -5,11 +5,11 @@ Types:Sorcery
 K:Fuse
 A:SP$ Token | Cost$ 3 G | TokenAmount$ 1 | TokenName$ Centaur | TokenTypes$ Creature,Centaur | TokenOwner$ You | TokenColors$ Green | TokenPower$ 3 | TokenToughness$ 3 | TokenImage$ g 3 3 centaur rtr | SpellDescription$ Put a 3/3 green Centaur creature token onto the battlefield.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/alive_well.jpg
-
 ALTERNATE
-
 Name:Well
 ManaCost:W
 Types:Sorcery
 A:SP$ GainLife | Cost$ W | LifeAmount$ X | References$ X | SpellDescription$ You gain 2 life for each creature you control.
 SVar:X:Count$TypeYouCtrl.Creature/Times.2
+Oracle:Put a 3/3 green Centaur creature token onto the battlefield.\nFuse (You may cast one or both halves of this card from your hand.)\n----\nWell\n{W}\nSorcery\nYou gain 2 life for each creature you control.\nFuse (You may cast one or both halves of this card from your hand.)
+SetInfo:DGM Uncommon

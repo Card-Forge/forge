@@ -7,3 +7,4 @@ SVar:X:Count$CardPower
 SVar:Picture:http://www.wizards.com/global/images/magic/general/feral_animist.jpg
 Oracle:{3}: Feral Animist gets +X/+0 until end of turn, where X is its power.
 SetInfo:GPT Uncommon
+SetInfo:DGM Uncommon

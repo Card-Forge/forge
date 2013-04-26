@@ -14,4 +14,4 @@ Types:Instant
 A:SP$ Destroy | Cost$ W | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment | SpellDescription$ Destroy target enchantment.
 Oracle:Destroy target enchantment.
 SetInfo:ARC Uncommon
-SetInfo:INV Uncommon
+SetInfo:INV Uncommon x2

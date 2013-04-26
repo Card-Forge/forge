@@ -5,3 +5,5 @@ A:SP$ Animate | Cost$ 1 U R | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select ta
 A:SP$ AnimateAll | Cost$ 3 U U R R | ValidCards$ Creature.YouCtrl | Power$ 4 | Toughness$ 4 | Keywords$ Flying | RemoveAllAbilities$ True | Colors$ Blue,Red | OverwriteColors$ True | Types$ Dragon | RemoveCreatureTypes$ True | PrecostDesc$ Overload | CostDesc$ 3 U U R R | NonBasicSpell$ True | SpellDescription$ Until end of turn, each creature you control becomes a 4/4 blue and red Dragon, loses all abilites, and gains flying.
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dragonshift.jpg
+Oracle:Until end of turn, target creature you control becomes a 4/4 blue and red Dragon, loses all abilities, and gains flying.\nOverload {3}{U}{U}{R}{R} (You may cast this spell for its overload cost. If you do, change its text by replacing all instances of "target" with "each.")
+SetInfo:DGM Rare

@@ -10,3 +10,5 @@ SVar:DBChange2:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | Defined$
 SVar:Y:Count$InYourLibrary
 SVar:NeedsToPlayVar:Y GE15
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deadbridge_chant.jpg
+Oracle:When Deadbridge Chant enters the battlefield, put the top ten cards of your library into your graveyard.\nAt the beginning of your upkeep, choose a card at random in your graveyard. If it's a creature card, put it onto the battlefield. Otherwise, put it into your hand.
+SetInfo:DGM Mythic

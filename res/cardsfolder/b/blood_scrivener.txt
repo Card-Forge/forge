@@ -6,3 +6,5 @@ R:Event$ Draw | ActiveZones$ Battlefield | ValidPlayer$ You | Hellbent$ True | R
 SVar:DrawTwo:AB$ Draw | Cost$ 0 | NumCards$ 2 | SubAbility$ DBLoseLife
 SVar:DBLoseLife:DB$ LoseLife | Defined$ You | LifeAmount$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blood_scrivener.jpg
+Oracle:If you would draw a card while you have no cards in hand, instead draw two cards and lose 1 life.
+SetInfo:DGM Rare
