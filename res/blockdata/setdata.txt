@@ -92,6 +92,7 @@ Code2:PC2|Code3:PC2|Type:Other|Name:Planechase 2012 Edition
 Code2:M13|Code3:M13|Type:Core|Name:Magic 2013
 Code2:RTR|Code3:RTR|Type:Expansion|Name:Return to Ravnica
 Code2:GTC|Code3:GTC|Type:Expansion|Name:Gatecrash
+Code2:DGM|Code3:DGM|Type:Expansion|Name:Dragon's Maze
 
 Code2:VAN|Code3:VAN|Type:Other|Name:Vanguard
 Code2:ARC|Code3:ARC|Type:Other|Name:Archenemy
