@@ -67,19 +67,18 @@ public class FatPackTemplate extends SealedProductTemplate {
         if (0 >= cntBoosters) {
             return "no cards";
         }
-        
+
         StringBuilder s = new StringBuilder();
+        if (0 < cntBoosters) {
+            s.append(cntBoosters).append(" booster packs, ");
+        }
+
         for(Pair<String, Integer> p : slots) {
             s.append(p.getRight()).append(" ").append(p.getLeft()).append(", ");
         }
         // trim the last comma and space
         s.replace(s.length() - 2, s.length(), "");
-        
-        s.append(" and ");
-        if (0 < cntBoosters) {
-            s.append(cntBoosters).append(" booster packs");
-        }
-        
+
         return s.toString();
     }
 }
