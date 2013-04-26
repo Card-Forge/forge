@@ -538,7 +538,7 @@ public final class QuestUtilCards {
 
         @SuppressWarnings("unchecked")
         SealedProductTemplate template = new SealedProductTemplate(Lists.newArrayList(
-            Pair.of("Commmon", common), Pair.of("uncommmon", uncommon), Pair.of("RareMythic", rare) 
+            Pair.of("Common", common), Pair.of("uncommon", uncommon), Pair.of("RareMythic", rare) 
         ));
         
         for (int i = 0; i < totalPacks; i++) {
