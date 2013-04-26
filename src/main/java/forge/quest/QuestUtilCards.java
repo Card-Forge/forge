@@ -453,7 +453,7 @@ public final class QuestUtilCards {
      * @param count
      *            the count
      */
-    public void generateBoostersInShop(final int count) {
+    private void generateBoostersInShop(final int count) {
         for (int i = 0; i < count; i++) {
             final int rollD100 = MyRandom.getRandom().nextInt(100);
             Predicate<CardEdition> filter = rollD100 < 40 ? this.filterT2booster
@@ -472,7 +472,7 @@ public final class QuestUtilCards {
      * @param count
      *            the count
      */
-    public void generateTournamentsInShop(final int count) {
+    private void generateTournamentsInShop(final int count) {
         Predicate<CardEdition> formatFilter = CardEdition.Predicates.HAS_TOURNAMENT_PACK;
         if (qc.getFormat() != null) {
             formatFilter = Predicates.and(formatFilter, isLegalInQuestFormat(qc.getFormat()));
@@ -487,7 +487,7 @@ public final class QuestUtilCards {
      * @param count
      *            the count
      */
-    public void generateFatPacksInShop(final int count) {
+    private void generateFatPacksInShop(final int count) {
         Predicate<CardEdition> formatFilter = CardEdition.Predicates.HAS_FAT_PACK;
         if (qc.getFormat() != null) {
             formatFilter = Predicates.and(formatFilter, isLegalInQuestFormat(qc.getFormat()));
@@ -502,7 +502,7 @@ public final class QuestUtilCards {
      * @param count
      *            the count
      */
-    public void generatePreconsInShop(final int count) {
+    private void generatePreconsInShop(final int count) {
         final List<PreconDeck> meetRequirements = new ArrayList<PreconDeck>();
         for (final PreconDeck deck : QuestController.getPrecons()) {
             if (deck.getRecommendedDeals().meetsRequiremnts(this.qc.getAchievements()) &&

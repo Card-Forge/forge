@@ -61,7 +61,7 @@ public class BoosterGenerator {
             int numCards = slot.getRight().intValue();
 
             String[] sType = TextUtil.splitWithParenthesis(slotType, ' ', '(', ')');
-            String sheetKey = sType.length == 1 ? slotType.trim() + " " + booster.getEdition() : slotType.trim(); 
+            String sheetKey = sType.length == 1 && booster.getEdition() != null ? slotType.trim() + " " + booster.getEdition() : slotType.trim(); 
 
             PrintSheet ps = getPrintSheet(sheetKey);
             result.addAll(ps.random(numCards, true));
@@ -167,7 +167,7 @@ public class BoosterGenerator {
      * @return
      */
     private static Predicate<CardPrinted> buildExtraPredicate(String[] operators) {
-        if ( operators.length == 0)
+        if ( operators.length <= 1)
             return Predicates.alwaysTrue();
         
         List<Predicate<CardPrinted>> conditions = new ArrayList<Predicate<CardPrinted>>();
