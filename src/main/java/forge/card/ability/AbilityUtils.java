@@ -80,7 +80,7 @@ public class AbilityUtils {
     public static List<Card> getDefinedCards(final Card hostCard, final String def, final SpellAbility sa) {
         final List<Card> cards = new ArrayList<Card>();
         final String defined = (def == null) ? "Self" : def; // default to Self
-        final GameState game = sa.getActivatingPlayer().getGame();
+        final GameState game = hostCard.getGame();
         
         Card c = null;
 
