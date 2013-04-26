@@ -518,11 +518,8 @@ public final class QuestUtilCards {
      */
     private void generateCardsInShop() {
         Iterable<CardPrinted> cardList = null;
-        if (qc.getFormat() == null) {
-              cardList = CardDb.instance().getAllCards(); }
-        else {
-            cardList = Iterables.filter(CardDb.instance().getAllCards(),
-                    qc.getFormat().getFilterPrinted());
+        if (qc.getFormat() != null) {
+            cardList = Iterables.filter(CardDb.instance().getAllCards(), qc.getFormat().getFilterPrinted());
         }
 
         int nLevel = this.qc.getAchievements().getLevel();
@@ -541,7 +538,7 @@ public final class QuestUtilCards {
 
         @SuppressWarnings("unchecked")
         SealedProductTemplate template = new SealedProductTemplate(Lists.newArrayList(
-            Pair.of("Commmon", common), Pair.of("uncommmon", uncommon), Pair.of("Rare", rare) 
+            Pair.of("Commmon", common), Pair.of("uncommmon", uncommon), Pair.of("RareMythic", rare) 
         ));
         
         for (int i = 0; i < totalPacks; i++) {

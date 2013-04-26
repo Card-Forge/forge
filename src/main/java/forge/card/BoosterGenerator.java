@@ -73,6 +73,8 @@ public class BoosterGenerator {
     public static final List<CardPrinted> getBoosterPack(SealedProductTemplate booster, Iterable<CardPrinted> sourcePool) {
         if(sourcePool == CardDb.instance().getAllCards())
             throw new IllegalArgumentException("Do not use this overload to obtain boosters based on complete cardDb");
+        if(null == sourcePool)
+            return getBoosterPack(booster);
         
         List<CardPrinted> result = new ArrayList<CardPrinted>();
         for(Pair<String, Integer> slot : booster.getSlots()) {

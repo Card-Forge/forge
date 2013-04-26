@@ -16,7 +16,7 @@ public class BoosterTemplate extends SealedProductTemplate {
 
     @SuppressWarnings("unchecked")
     public final static BoosterTemplate genericBooster = new BoosterTemplate(null, 1, Lists.newArrayList(
-        Pair.of("Common", 10), Pair.of("Uncommon", 3), Pair.of("Rare", 1), Pair.of("BasicLand", 1)  
+        Pair.of("Common", 10), Pair.of("Uncommon", 3), Pair.of("RareMythic", 1), Pair.of("BasicLand", 1)  
     ));
     
     private final int foilRate = 68;
