@@ -11,7 +11,7 @@ class cis:      # CardInSet
 		self.arts = 0
 
 	def __str__(self):
-		return self.rarityFull() if self.arts <= 1 else "{} x{}".format(self.rarityFull(), self.arts)
+		return self.rarityFull() if self.arts <= 1 else "{0} x{1}".format(self.rarityFull(), self.arts)
 
 	def __repr__(self):
 		return self.__str__()
@@ -81,11 +81,14 @@ if __name__ == '__main__':
 					editions = {}
 					for i in range(len(sets)):
 						ee = sets[i].split(' ')
+
 						setName = ee[0]
 						if not setName in editions:
 							editions[setName] = cis()
+
 						editions[setName].rarity = ee[1].strip()
 						prints = int(ee[2][2:3]) if len(ee) > 2 else 1
+
 						editions[setName].arts += prints
 					#print sets
 					mtgDataCards[tmpName] = editions
@@ -142,8 +145,8 @@ if __name__ == '__main__':
 				cardName = altName
 
 			for e in mtgDataCards[cardName]:
-				if not setCodeToForge[e] is None:
-					validLines.append( "SetInfo:{} {}".format(setCodeToForge[e], mtgDataCards[cardName][e]) )
+				if setCodeToForge[e] is not None:
+					validLines.append( "SetInfo:{0} {1}".format(setCodeToForge[e], mtgDataCards[cardName][e]))
 
 			if previousLines == validLines:
 				continue
