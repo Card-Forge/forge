@@ -16,5 +16,5 @@ A:SP$ Effect | Cost$ 2 R | Name$ Chaos Effect | StaticAbilities$ KWPump | AILogi
 SVar:KWPump:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected$ Creature | AddHiddenKeyword$ CARDNAME can't block. | Description$ Creatures can't block this turn.
 SVar:RemAIDeck:True
 Oracle:Creatures can't block this turn.
-SetInfo:APC Uncommon x2
+SetInfo:APC Uncommon
 SetInfo:HOP Uncommon
