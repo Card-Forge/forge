@@ -1,0 +1,11 @@
+Name:AEtherling
+ManaCost:4 U U
+Types:Creature Shapeshifter
+PT:4/5
+A:AB$ ChangeZone | Cost$ U | Defined$ Self | Origin$ Battlefield | Destination$ Exile | SubAbility$ DelTrig | SpellDescription$ Exile CARDNAME. Return it to the battlefield under its owner's control at the beginning of the next end step.
+SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | Execute$ TrigReturn | TriggerDescription$ Return CARDNAME to the battlefield.
+SVar:TrigReturn:DB$ ChangeZone | Defined$ Self | Origin$ Exile | Destination$ Battlefield
+A:AB$ Pump | Cost$ U | Defined$ Self | KW$ HIDDEN Unblockable | SpellDescription$ CARDNAME is unblockable this turn.
+A:AB$ Pump | Cost$ 1 | NumAtt$ +1 | NumDef$ -1 | SpellDescription$ CARDNAME gets +1/-1 until end of turn.
+A:AB$ Pump | Cost$ 1 | NumAtt$ -1 | NumDef$ +1 | SpellDescription$ CARDNAME gets -1/+1 until end of turn.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/aetherling.jpg

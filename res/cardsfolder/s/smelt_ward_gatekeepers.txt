@@ -1,0 +1,8 @@
+Name:Smelt-Ward Gatekeepers
+ManaCost:3 R
+Types:Creature Human Warrior
+PT:2/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | IsPresent$ Gate.YouCtrl | PresentCompare$ GE2 | Execute$ TrigGainControl | TriggerDescription$ When CARDNAME enters the battlefield, if you control two or more Gates, gain control of target creature an opponent controls until end of turn. Untap that creature. That creature gains haste until end of turn.
+SVar:TrigGainControl:AB$ GainControl | Cost$ 0 | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | Untap$ True | LoseControl$ EOT | SubAbility$ DBPump
+SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ Haste
+SVar:Picture:http://www.wizards.com/global/images/magic/general/smelt_ward_gatekeepers.jpg

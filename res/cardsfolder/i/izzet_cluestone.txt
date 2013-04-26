@@ -1,0 +1,8 @@
+Name:Izzet Cluestone
+ManaCost:3
+Types:Artifact
+A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add U to your mana pool.
+A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add R to your mana pool.
+A:AB$ Draw | Cost$ U R T Sac<1/CARDNAME> | NumCards$ 1 | SpellDescription$ Draw a card.
+DeckNeeds:Color$Blue|Red
+SVar:Picture:http://www.wizards.com/global/images/magic/general/izzet_cluestone.jpg

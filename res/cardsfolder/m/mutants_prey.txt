@@ -1,0 +1,7 @@
+Name:Mutant's Prey
+ManaCost:G
+Types:Instant
+A:SP$ Pump | Cost$ 0 | ValidTgts$ Creature.YouCtrl+counters_GE1_P1P1 | TgtPrompt$ Select target creature you control with a +1/+1 counter | SubAbility$ DBFight | SpellDescription$ Target creature you control with a +1/+1 counter on it fights target creature an opponent controls.
+SVar:DBFight:DB$ Fight | Defined$ ParentTarget | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls
+SVar:RemRandomDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/mutants_prey.jpg

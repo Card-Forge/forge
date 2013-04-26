@@ -1,0 +1,7 @@
+Name:Tithe Drinker
+ManaCost:W B
+Types:Creature Vampire
+PT:2/1
+K:Lifelink
+K:Extort
+SVar:Picture:http://www.wizards.com/global/images/magic/general/tithe_drinker.jpg

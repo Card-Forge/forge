@@ -1,0 +1,18 @@
+Name:Give
+ManaCost:2 G
+AlternateMode: Split
+Types:Sorcery
+K:Fuse
+A:SP$ PutCounter | Cost$ 2 G | ValidTgts$ Creature | TgtPrompt$ Select target creature to put counters | CounterType$ P1P1 | CounterNum$ 3 | SpellDescription$ Put three +1/+1 counters on target creature.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/give_take.jpg
+
+ALTERNATE
+
+Name:Take
+ManaCost:2 U
+Types:Sorcery
+A:SP$ RemoveCounter | Cost$ 2 U | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control to remove counters | CounterType$ P1P1 | CounterNum$ All | RememberRemoved$ True | SubAbility$ DBDraw | SpellDescription$ Remove all +1/+1 counters from target creature you control. Draw that many cards.
+SVar:DBDraw:DB$ Draw | NumCards$ X | References$ X | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$RememberedSize
+SVar:RemAIDeck:True

@@ -1,0 +1,7 @@
+Name:Rot Farm Skeleton
+ManaCost:2 B G
+Types:Creature Plant Skeleton
+PT:4/1
+K:CARDNAME can't block.
+A:AB$ ChangeZone | Cost$ 2 B G Mill<4> | Origin$ Graveyard | Destination$ Battlefield | ActivationZone$ Graveyard | SorcerySpeed$ True | SpellDescription$ Return CARDNAME from your graveyard to the battlefield. Activate this ability only any time you could cast a sorcery.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/rot_farm_skeleton.jpg

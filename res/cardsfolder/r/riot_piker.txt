@@ -1,0 +1,7 @@
+Name:Riot Piker
+ManaCost:1 R
+Types:Creature Goblin Berserker
+PT:2/1
+K:First Strike
+K:CARDNAME attacks each turn if able.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/riot_piker.jpg

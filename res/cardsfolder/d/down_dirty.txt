@@ -1,0 +1,14 @@
+Name:Down
+ManaCost:3 B
+AlternateMode: Split
+Types:Sorcery
+K:Fuse
+A:SP$ Discard | Cost$ 3 B | ValidTgts$ Player | NumCards$ 2 | Mode$ TgtChoose | SpellDescription$ Target player discards two cards.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/down_dirty.jpg
+
+ALTERNATE
+
+Name:Dirty
+ManaCost:2 G
+Types:Sorcery
+A:SP$ ChangeZone | Cost$ 2 G | TgtPrompt$ Select target card in your graveyard | ValidTgts$ Card.YouCtrl | Origin$ Graveyard | Destination$ Hand | SpellDescription$ Return target card from your graveyard to your hand.

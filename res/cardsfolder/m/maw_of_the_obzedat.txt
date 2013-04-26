@@ -1,0 +1,7 @@
+Name:Maw of the Obzedat
+ManaCost:3 W B
+Types:Creature Thrull
+PT:3/3
+A:AB$ PumpAll | Cost$ Sac<1/Creature> | ValidCards$ Creature.YouCtrl | NumAtt$ 1 | NumDef$ 1 | SpellDescription$ Creatures you control get +1/+1 until end of turn.
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/maw_of_the_obzedat.jpg

@@ -1,0 +1,8 @@
+Name:Boros Mastiff
+ManaCost:1 W
+Types:Creature Hound
+PT:2/2
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | CheckSVar$ BattalionTest | SVarCompare$ GE2 | Execute$ TrigBattalionPump | TriggerDescription$ Battalion - Whenever CARDNAME and at least two other creatures attack, CARDNAME gets lifelink until end of turn.
+SVar:TrigBattalionPump:AB$ Pump | Cost$ 0 | KW$ Lifelink
+SVar:BattalionTest:Count$Valid Creature.attacking+Other
+SVar:Picture:http://www.wizards.com/global/images/magic/general/boros_mastiff.jpg

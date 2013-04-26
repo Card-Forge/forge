@@ -1,0 +1,11 @@
+Name:Reap Intellect
+ManaCost:X 2 U B
+Types:Sorcery
+A:SP$ ChangeZone | Cost$ X 2 U B | Origin$ Hand | Destination$ Exile | ValidTgts$ Opponent | DefinedPlayer$ Targeted | Chooser$ You | ChangeType$ Card.nonLand | ChangeNum$ X | References$ X | IsCurse$ True | Mandatory$ True | RememberChanged$ True | SubAbility$ DBExile | SpellDescription$ Target opponent reveals his or her hand. You choose X non-land cards from among them. Search that player's library, hand and graveyard for cards with the same name as those cards and exile them. Then, that player shuffles his or her library.
+SVar:DBExile:DB$ RepeatEach | UseImprinted$ True | DefinedCards$ Remembered | RepeatSubAbility$ DBExileAll | SubAbility$ DBShuffle
+SVar:DBExileAll:DB$ ChangeZoneAll | Origin$ Hand,Library,Graveyard | Destination$ Exile | Defined$ ImprintedController | ChangeType$ Card.sharesNameWith Imprinted
+SVar:DBShuffle:DB$ Shuffle | Defined$ Targeted | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$xPaid
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/reap_intellect.jpg

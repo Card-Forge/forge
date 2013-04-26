@@ -1,0 +1,7 @@
+Name:Battering Krasis
+ManaCost:2 G
+Types:Creature Fish Beast
+PT:2/1
+K:Evolve
+K:Trample
+SVar:Picture:http://www.wizards.com/global/images/magic/general/battering_krasis.jpg

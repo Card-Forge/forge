@@ -1,0 +1,9 @@
+Name:Debt to the Deathless
+ManaCost:X W W B B
+Types:Sorcery
+A:SP$ LoseLife | Cost$ X W W B B | Defined$ Player.Opponent | LifeAmount$ Y | References$ X,Y | SubAbility$ DBGainLife | SpellDescription$ Each opponent loses two times X life. You gain life equal to the life lost this way.
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ AFLifeLost
+SVar:AFLifeLost:Number$0
+SVar:X:Count$xPaid
+SVar:Y:SVar$X/Twice
+SVar:Picture:http://www.wizards.com/global/images/magic/general/debt_to_the_deathless.jpg

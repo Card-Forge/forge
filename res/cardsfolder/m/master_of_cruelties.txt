@@ -1,0 +1,12 @@
+Name:Master of Cruelties
+ManaCost:3 B R
+Types:Creature Demon
+PT:1/4
+K:First Strike
+K:Deathtouch
+K:CARDNAME can only attack alone.
+T:Mode$ AttackerUnblocked | ValidCard$ Card.Self | ValidDefender$ Player | Execute$ TrigDamage | TriggerDescription$ Whenever CARDNAME attacks a player and isn't blocked, that player's life total becomes 1. CARDNAME assigns no combat damage this combat.
+SVar:TrigDamage:AB$ SetLife | Cost$ 0 | Defined$ TriggeredDefender | LifeAmount$ 1 | SubAbility$ DBPump
+SVar:DBPump:DB$ Pump | KW$ HIDDEN Prevent all combat damage that would be dealt by CARDNAME. | UntilEndOfCombat$ True
+SVar:MustBeBlocked:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/master_of_cruelties.jpg

@@ -1,0 +1,10 @@
+Name:Blast of Genius
+ManaCost:4 U R
+Types:Sorcery
+A:SP$ Draw | Cost$ 4 U R | NumCards$ 3 | SubAbility$ DBDiscard | SpellDescription$ Choose target creature or player. Draw three cards and discard a card. CARDNAME deals damage equal to the converted mana cost of the discard card to that creature or player.
+SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose | RememberDiscarded$ True | SubAbility$ DBDamage
+SVar:DBDamage:DB$ DealDamage | ValidTgts$ Creature,Player | TgtPrompt$ Choose target creature or player | NumDmg$ X | References$ X | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Remembered$CardManaCost
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/blast_of_genius.jpg

@@ -1,0 +1,12 @@
+Name:Ruric Thar, the Unbowed
+ManaCost:4 R G
+Types:Legendary Creature Ogre Warrior
+PT:6/6
+K:Vigilance
+K:Reach
+K:CARDNAME attacks each turn if able.
+T:Mode$ SpellCast | TriggerZones$ Battlefield | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ Player | Execute$ TrigDmg | TriggerDescription$ Whenever a player casts a noncreature spell, CARDNAME deals 6 damage to that player.
+SVar:TrigDmg:AB$ DealDamage | Cost$ 0 | Defined$ TriggeredActivator | NumDmg$ 6
+SVar:RemAIDeck:True
+SVar:RemRandomDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ruric_thar_the_unbowed.jpg

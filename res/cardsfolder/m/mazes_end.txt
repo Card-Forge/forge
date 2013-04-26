@@ -1,0 +1,11 @@
+Name:Maze's End
+ManaCost:no cost
+Types:Land
+K:CARDNAME enters the battlefield tapped.
+A:AB$ Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add 1 to your mana pool.
+A:AB$ ChangeZone | Cost$ 3 T Return<1/CARDNAME> | ChangeType$ Gate | ChangeNum$ 1 | Origin$ Library | Destination$ Battlefield | SubAbility$ DBWin | SpellDescription$ Search your library for a Gate card, put it onto the battlefield, then shuffle your library. If you control ten or more Gates with different names, you win the game.
+SVar:DBWin:DB$ WinsGame | Defined$ You | ConditionCheckSVar$ MazeGate | ConditionSVarCompare$ GE10
+SVar:MazeGate:Count$DifferentCardNames_Gate.YouCtrl+inZoneBattlefield
+SVar:RemAIDeck:True
+SVar:RemRandomDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/mazes_end.jpg

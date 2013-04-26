@@ -1,0 +1,12 @@
+Name:Krasis Incubation
+ManaCost:2 G U
+Types:Enchantment Aura
+K:Enchant creature
+A:SP$ Attach | Cost$ 2 G U | ValidTgts$ Creature | AILogic$ Curse
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ CARDNAME can't attack or block. & CARDNAME's activated abilities can't be activated. | Description$ Enchanted creature can't attack or block and its activated abilities can't be activated.
+T:Mode$ Attached | ValidSource$ Card.Self | ValidTarget$ Creature | TriggerZones$ Battlefield | Execute$ TrigRemember | Static$ True
+SVar:TrigRemember:DB$ Cleanup | ClearRemembered$ True | SubAbility$ RememberNew
+SVar:RememberNew:DB$ Pump | RememberObjects$ Enchanted
+A:AB$ PutCounter | Cost$ 1 G U Return<1/CARDNAME> | Defined$ Remembered | CounterType$ P1P1 | CounterNum$ 2 | SpellDescription$ Put two +1/+1 counters on enchanted creature.
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/krasis_incubation.jpg

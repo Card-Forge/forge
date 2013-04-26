@@ -1,0 +1,9 @@
+Name:Runner's Bane
+ManaCost:1 U
+Types:Enchantment Aura
+K:Enchant creature with power 3 or less
+A:SP$ Attach | Cost$ 1 U | ValidTgts$ Creature.powerLE3 | TgtPrompt$ Select target creature with power 3 or less | AILogic$ Curse
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigTap | TriggerDescription$ When CARDNAME enters the battlefield, tap enchanted creature.
+SVar:TrigTap:AB$ Tap | Cost$ 0 | Defined$ Enchanted
+S:Mode$ Continuous | Affected$ Creature.AttachedBy | AddHiddenKeyword$ CARDNAME doesn't untap during your untap step. | Description$ Enchanted creature doesn't untap during the untap step.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/runners_bane.jpg

@@ -1,0 +1,8 @@
+Name:Simic Cluestone
+ManaCost:3
+Types:Artifact
+A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add G to your mana pool.
+A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add U to your mana pool.
+A:AB$ Draw | Cost$ G U T Sac<1/CARDNAME> | NumCards$ 1 | SpellDescription$ Draw a card.
+DeckNeeds:Color$Green|Blue
+SVar:Picture:http://www.wizards.com/global/images/magic/general/simic_cluestone.jpg

@@ -1,0 +1,5 @@
+Name:Advent of the Wurm
+ManaCost:1 G G W
+Types:Instant
+A:SP$ Token | Cost$ 1 G G W | TokenImage$ g w 5 5 wurm | TokenName$ Wurm | TokenAmount$ 1 | TokenTypes$ Creature,Wurm | TokenOwner$ You | TokenColors$ Green | TokenPower$ 5 | TokenToughness$ 5 | TokenKeywords$ Trample | SpellDescription$ Put a 5/5 green Wurm creature token with trample onto the battlefield.
+SVar:Picture:http://www.wizards.com.sixxs.org/global/images/magic/general/advent_of_the_wurm.jpg

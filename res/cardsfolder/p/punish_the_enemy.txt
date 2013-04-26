@@ -1,0 +1,6 @@
+Name:Punish the Enemy
+ManaCost:4 R
+Types:Instant
+A:SP$ DealDamage | Cost$ 4 R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 3 | SubAbility$ DB1 | SpellDescription$ CARDNAME deals 3 damage to target player and 3 damage to target creature.
+SVar:DB1:DB$ DealDamage | NumDmg$ 3 | ValidTgts$ Player | TgtPrompt$ Select target player
+SVar:Picture:http://www.wizards.com/global/images/magic/general/punish_the_enemy.jpg

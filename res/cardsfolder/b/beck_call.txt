@@ -1,0 +1,18 @@
+Name:Beck
+ManaCost:G U
+AlternateMode: Split
+Types:Sorcery
+K:Fuse
+A:SP$ Effect | Cost$ G U | Name$ Beck Effect | Triggers$ CreatureEntered | SVars$ TrigDraw | SpellDescription$ Whenever a creature enters the battlefield this turn, you may draw a card.
+SVar:CreatureEntered:Mode$ ChangesZone | ValidCard$ Creature | Origin$ Any | Destination$ Battlefield | Execute$ TrigDraw | TriggerZones$ Command | TriggerDescription$ Whenever a creature enters the battlefield this turn, you may draw a card.
+SVar:TrigDraw:AB$ Draw | Cost$ 0 | Defined$ You | NumCards$ 1
+SVar:Picture:http://www.wizards.com/global/images/magic/general/beck_call.jpg
+Oracle:Whenever a creature enters the battlefield this turn, you may draw a card.
+
+ALTERNATE
+
+Name:Call
+ManaCost:4 W U
+Types:Sorcery
+A:SP$ Token | Cost$ 4 W U | TokenImage$ W 1 1 Bird | TokenAmount$ 4 | TokenName$ Bird | TokenTypes$ Creature,Bird | TokenOwner$ You | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | SpellDescription$ Put four 1/1 white Bird creature tokens with flying onto the battlefield.
+Oracle:Put four 1/1 white Bird creature tokens with flying onto the battlefield.

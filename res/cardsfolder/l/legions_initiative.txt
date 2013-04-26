@@ -1,0 +1,11 @@
+Name:Legion's Initiative
+ManaCost:R W
+Types:Enchantment
+S:Mode$ Continuous | Affected$ Creature.Red | AddPower$ 1 | Description$ Red creatures you control get +1/+0.
+S:Mode$ Continuous | Affected$ Creature.White | AddToughness$ 1 | Description$ White creatures you control get +0/+1.
+A:AB$ ChangeZoneAll | Cost$ R W Exile<1/CARDNAME> | Origin$ Battlefield | Destination$ Exile | ChangeType$ Creature.YouCtrl | RememberChanged$ True | SubAbility$ DBDelayTrig | SpellDescription$ Exile all creatures you control. At the beginning of the next combat, return those cards to the battlefield under their owner's control and those creatures gains haste until end of turn.
+SVar:DBDelayTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ Player | Execute$ TrigReturn | TriggerDescription$ At the beginning of the next combat, return those cards to the battlefield under their owner's control and those creatures gains haste until end of turn.
+SVar:TrigReturn:DB$ ChangeZoneAll | ChangeType$ Card.IsRemembered | Origin$ Exile | Destination$ Battlefield | SubAbility$ DBPump
+SVar:DBPump:DB$ PumpAll | ValidCards$ Card.IsRemembered | KW$ Haste | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/legions_initiative.jpg

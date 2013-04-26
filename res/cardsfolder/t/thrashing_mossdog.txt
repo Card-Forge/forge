@@ -1,0 +1,8 @@
+Name:Thrashing Mossdog
+ManaCost:3 G
+Types:Creature Plant Hound
+PT:3/3
+K:Reach
+A:AB$ PutCounter | Cost$ 4 G G ExileFromGrave<1/CARDNAME> | ActivationZone$ Graveyard | ValidTgts$ Creature | CounterType$ P1P1 | CounterNum$ X | SorcerySpeed$ True | References$ X | PrecostDesc$ Scavenge | SpellDescription$ Put a number of +1/+1 counter's equal to this card's power on target creature. Scavenge only as a sorcery.
+SVar:X:Count$CardPower
+SVar:Picture:http://www.wizards.com/global/images/magic/general/thrashing_mossdog.jpg

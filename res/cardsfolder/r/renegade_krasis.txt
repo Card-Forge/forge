@@ -1,0 +1,8 @@
+Name:Renegade Krasis
+ManaCost:1 G G
+Types:Creature Beast Mutant
+PT:3/2
+K:Evolve
+T:Mode$ Evolved | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPutCounterAll | TriggerDescription$ Whenever CARDNAME evolves, put a +1/+1 counter on each other creature you control with a +1/+1 counter on it.
+SVar:TrigPutCounterAll:AB$ PutCounterAll | Cost$ 0 | ValidCards$ Creature.YouCtrl+counters_GE1_P1P1 | CounterType$ P1P1 | CounterNum$ 1
+SVar:Picture:http://www.wizards.com/global/images/magic/general/renegade_krasis.jpg

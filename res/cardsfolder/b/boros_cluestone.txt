@@ -1,0 +1,8 @@
+Name:Boros Cluestone
+ManaCost:3
+Types:Artifact
+A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add R to your mana pool.
+A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add W to your mana pool.
+A:AB$ Draw | Cost$ R W T Sac<1/CARDNAME> | NumCards$ 1 | SpellDescription$ Draw a card.
+DeckNeeds:Color$Red|White
+SVar:Picture:http://www.wizards.com/global/images/magic/general/boros_cluestone.jpg

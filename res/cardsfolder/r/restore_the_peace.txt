@@ -1,0 +1,5 @@
+Name:Restore the Peace
+ManaCost:1 W U
+Types:Instant
+A:SP$ ChangeZoneAll | Cost$ 1 W U | IsCurse$ True | ChangeType$ Creature.dealtDamageThisTurn | ValidDescription$ creatures that dealt damage this turn | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return each creature that dealt damage this turn to its owner's hand.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/restore_the_peace.jpg

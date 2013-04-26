@@ -1,0 +1,8 @@
+Name:Nivix Cyclops
+ManaCost:1 U R
+Types:Creature Cyclops
+PT:1/4
+K:Defender
+T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever you cast an instant or sorcery spell, CARDNAME gets +3/+0 until end of turn and can attack this turn as though it didn't have defender.
+SVar:TrigPump:AB$ Pump | Cost$ 0 | KW$ HIDDEN CARDNAME can attack as though it didn't have defender. | NumAtt$ +3
+SVar:Picture:http://www.wizards.com/global/images/magic/general/nivix_cyclops.jpg

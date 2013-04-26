@@ -1,0 +1,7 @@
+Name:Opal Lake Gatekeepers
+ManaCost:3 U
+Types:Creature Vedalken Soldier
+PT:2/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | IsPresent$ Gate.YouCtrl | PresentCompare$ GE2 | Execute$ TrigDraw | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, if you control two or more Gates, you may draw a card.
+SVar:TrigDraw:AB$ Draw | Cost$ 0 | NumCards$ 1
+SVar:Picture:http://www.wizards.com/global/images/magic/general/opal_lake_gatekeepers.jpg

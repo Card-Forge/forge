@@ -1,0 +1,7 @@
+Name:Saruli Gatekeepers
+ManaCost:3 G
+Types:Creature Elf Warrior
+PT:2/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | IsPresent$ Gate.YouCtrl | PresentCompare$ GE2 | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters the battlefield, if you control two or more Gates, gain 7 life.
+SVar:TrigGainLife:AB$ GainLife | Cost$ 0 | LifeAmount$ 7
+SVar:Picture:http://www.wizards.com/global/images/magic/general/saruli_gatekeepers.jpg

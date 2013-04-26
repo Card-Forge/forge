@@ -1,0 +1,9 @@
+Name:Hidden Strings
+ManaCost:1 U
+Types:Sorcery
+A:SP$ TapOrUntap | Cost$ 1 U | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | SubAbility$ DBTapOrUntap | SpellDescription$ You may tap or untap target permanent, then you may tap or untap another target permanent. Cipher
+SVar:DBTapOrUntap:DB$ TapOrUntap | ValidTgts$ Permanent | TgtPrompt$ Select target permanent (2) | TargetUnique$ True | SubAbility$ Cipher
+SVar:Cipher:DB$ Encode | Defined$ Self | ConditionCheckSVar$ IsEncoded | ConditionSVarCompare$ EQ0
+SVar:IsEncoded:Number$0
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/hidden_strings.jpg
