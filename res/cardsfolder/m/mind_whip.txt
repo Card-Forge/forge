@@ -1,0 +1,14 @@
+Name:Mind Whip
+ManaCost:2 B B
+Types:Enchantment Aura
+K:Enchant creature
+A:SP$ Attach | Cost$ 2 B B | ValidTgts$ Creature | AILogic$ Curse
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ EnchantedController | TriggerZones$ Battlefield | Execute$ DBPay | TriggerDescription$ At the beginning of the upkeep of enchanted creature's controller, that player may pay 3. If he or she doesn't, CARDNAME deals 2 damage to that player and you tap that creature.
+SVar:DBPay:DB$ StoreSVar | SVar$ Paid | Type$ Number | Expression$ 0 | UnlessCost$ 3 | UnlessPayer$ EnchantedController | SubAbility$ DBTap
+SVar:DBTap:DB$ Tap | Defined$ Enchanted | ConditionCheckSVar$ Paid | ConditionSVarCompare$ EQ0 | SubAbility$ DBDmg
+SVar:DBDmg:DB$DealDamage | Defined$ EnchantedController | NumDmg$ 2 | ConditionCheckSVar$ Paid | ConditionSVarCompare$ EQ0 | SubAbility$ DBReset
+SVar:DBReset:DB$ StoreSVar | SVar$ Paid | Type$ Number | Expression$ 1
+SVar:Paid:Number$1
+SVar:Picture:http://www.wizards.com/global/images/magic/general/mind_whip.jpg
+Oracle:Enchant creature\nAt the beginning of the upkeep of enchanted creature's controller, that player may pay {3}. If he or she doesn't, CARDNAME deals 2 damage to that player and you tap that creature.
+SetInfo:ICE Rare
