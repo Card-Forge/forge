@@ -89,7 +89,6 @@ public class PhaseUtil {
         CMessage.SINGLETON_INSTANCE.updateGameInfo(Singletons.getModel().getMatch());
 
         game.getCombat().reset(turn);
-        game.getCombat().setAttackingPlayer(turn);
 
         // Tokens starting game in play should suffer from Sum. Sickness
         final List<Card> list = turn.getCardsIncludePhasingIn(ZoneType.Battlefield);

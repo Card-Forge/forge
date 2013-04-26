@@ -84,7 +84,7 @@ public class Combat {
         this.unblocked.clear();
         this.defendingDamageMap.clear();
 
-        this.attackingPlayer = null;
+        this.attackingPlayer = playerTurn;
 
         this.initiatePossibleDefenders(playerTurn.getOpponents());
     }
