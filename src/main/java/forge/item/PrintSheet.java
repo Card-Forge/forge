@@ -94,10 +94,13 @@ public class PrintSheet {
             number -= uniqueCards;
         }
 
+        List<CardPrinted> uniques = wantUnique ? new ArrayList<CardPrinted>() : null; 
         for(int iC = 0; iC < number; iC++) {
             int index = MyRandom.getRandom().nextInt(totalWeight);
-            CardPrinted toAdd = fetchRoulette(0, index, wantUnique ? result : null);
+            CardPrinted toAdd = fetchRoulette(0, index, wantUnique ? uniques : null);
             result.add(toAdd);
+            if( wantUnique )
+                uniques.add(toAdd);
         }
         return result;
     }
