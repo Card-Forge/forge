@@ -104,7 +104,7 @@ public class Cost {
     // Parsing Strings
 
     public Cost(ManaCost cost, final boolean bAbility) {
-        this(cost.toString(), bAbility);
+        costParts.add(new CostPartMana(cost, null, false));
     }
 
     /**
