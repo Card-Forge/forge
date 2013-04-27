@@ -546,6 +546,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
     
         for (final Card card : model) {
             final CardPanel toPanel = getCardPanel(card.getUniqueNumber());
+            if (null == toPanel) continue; // although, wth it's null?
             if (card.isTapped()) {
                 toPanel.setTapped(true);
                 toPanel.setTappedAngle(forge.view.arcane.CardPanel.TAPPED_ANGLE);
