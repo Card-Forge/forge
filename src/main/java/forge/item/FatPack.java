@@ -71,6 +71,6 @@ public class FatPack extends OpenablePack {
 
     @Override
     public int getTotalCards() {
-        return super.getTotalCards() * fpData.getCntBoosters() + fpData.getTotal();
+        return super.getTotalCards() * fpData.getCntBoosters() + fpData.getNumberOfCardsExpected();
     }
 }

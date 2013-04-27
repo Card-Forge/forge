@@ -29,12 +29,13 @@ import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
+import forge.Constant;
 import forge.Singletons;
-import forge.card.BoosterGenerator;
 import forge.card.CardEdition;
 import forge.card.CardRarity;
 import forge.card.FormatCollection;
 import forge.card.SealedProductTemplate;
+import forge.card.UnOpenedProduct;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.item.BoosterPack;
@@ -120,11 +121,10 @@ public final class QuestUtilCards {
             landCode = "M10";
         }
 
-        pool.add(db.getCard("Forest", landCode), nBasic);
-        pool.add(db.getCard("Mountain", landCode), nBasic);
-        pool.add(db.getCard("Swamp", landCode), nBasic);
-        pool.add(db.getCard("Island", landCode), nBasic);
-        pool.add(db.getCard("Plains", landCode), nBasic);
+        for(String landName : Constant.Color.BASIC_LANDS) {
+            pool.add(db.getCard(landName, landCode), nBasic);
+        }
+
 
         if (!snowLandCodes.isEmpty()) {
             String snowLandCode = Aggregates.random(snowLandCodes);
@@ -517,10 +517,7 @@ public final class QuestUtilCards {
      * Generate cards in shop.
      */
     private void generateCardsInShop() {
-        Iterable<CardPrinted> cardList = null;
-        if (qc.getFormat() != null) {
-            cardList = Iterables.filter(CardDb.instance().getAllCards(), qc.getFormat().getFilterPrinted());
-        }
+
 
         int nLevel = this.qc.getAchievements().getLevel();
 
@@ -537,12 +534,11 @@ public final class QuestUtilCards {
         final int totalPacks = Math.min(levelPacks + winPacks, maxPacks);
 
         @SuppressWarnings("unchecked")
-        SealedProductTemplate template = new SealedProductTemplate(Lists.newArrayList(
-            Pair.of("Common", common), Pair.of("uncommon", uncommon), Pair.of("RareMythic", rare) 
-        ));
+        SealedProductTemplate tpl = new SealedProductTemplate(Lists.newArrayList( Pair.of("Common", common), Pair.of("Uncommon", uncommon), Pair.of("RareMythic", rare)));
+        UnOpenedProduct unopened = qc.getFormat() == null ?  new UnOpenedProduct( tpl ) : new UnOpenedProduct( tpl, qc.getFormat().getFilterPrinted());
         
         for (int i = 0; i < totalPacks; i++) {
-            this.qa.getShopList().addAllFlat(BoosterGenerator.getBoosterPack(template, cardList));
+            this.qa.getShopList().addAllFlat(unopened.get());
         }
 
         this.generateBoostersInShop(totalPacks);

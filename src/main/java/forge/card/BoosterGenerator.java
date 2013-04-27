@@ -18,9 +18,9 @@
 package forge.card;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
@@ -47,7 +47,7 @@ import forge.util.TextUtil;
  * @version $Id$
  */
 public class BoosterGenerator {
-    private final static Map<String, PrintSheet> cachedSheets = new HashMap<String, PrintSheet>();
+    private final static Map<String, PrintSheet> cachedSheets = new TreeMap<String, PrintSheet>(String.CASE_INSENSITIVE_ORDER);
     private static final synchronized PrintSheet getPrintSheet(String key) {
         if( !cachedSheets.containsKey(key) )
             cachedSheets.put(key, makeSheet(key, CardDb.instance().getAllCards()));
@@ -69,26 +69,8 @@ public class BoosterGenerator {
         return result;
     }
 
-    // If they request cards from an arbitrary pool, there's no use to cache printsheets.
-    public static final List<CardPrinted> getBoosterPack(SealedProductTemplate booster, Iterable<CardPrinted> sourcePool) {
-        if(sourcePool == CardDb.instance().getAllCards())
-            throw new IllegalArgumentException("Do not use this overload to obtain boosters based on complete cardDb");
-        if(null == sourcePool)
-            return getBoosterPack(booster);
-        
-        List<CardPrinted> result = new ArrayList<CardPrinted>();
-        for(Pair<String, Integer> slot : booster.getSlots()) {
-            String slotType = slot.getLeft(); // add expansion symbol here?
-            int numCards = slot.getRight().intValue();
-
-            PrintSheet ps = makeSheet(slotType, sourcePool);
-            result.addAll(ps.random(numCards, true));
-        }
-        return result;
-    }    
-    
     @SuppressWarnings("unchecked")
-    private static final PrintSheet makeSheet(String sheetKey, Iterable<CardPrinted> src) {
+    public static final PrintSheet makeSheet(String sheetKey, Iterable<CardPrinted> src) {
         PrintSheet ps = new PrintSheet(sheetKey);
         String[] sKey = TextUtil.splitWithParenthesis(sheetKey, ' ', '(', ')', 2);
         

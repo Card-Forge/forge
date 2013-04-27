@@ -68,7 +68,7 @@ public abstract class OpenablePack implements InventoryItemFromSet {
     }
     
     public int getTotalCards() {
-        return contents.getTotal();
+        return contents.getNumberOfCardsExpected();
     }
 
     @Override

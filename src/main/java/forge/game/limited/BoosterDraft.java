@@ -36,7 +36,6 @@ import com.google.common.base.Supplier;
 import forge.Card;
 import forge.Constant.Preferences;
 import forge.Singletons;
-import forge.card.BoosterGenerator;
 import forge.card.BoosterTemplate;
 import forge.card.CardBlock;
 import forge.card.CardEdition;
@@ -89,9 +88,7 @@ public final class BoosterDraft implements IBoosterDraft {
 
         switch (draftType) {
         case Full: // Draft from all cards in Forge
-            Supplier<List<CardPrinted>> s = new Supplier<List<CardPrinted>>() {
-                @Override public List<CardPrinted> get() { return BoosterGenerator.getBoosterPack(BoosterTemplate.genericBooster); }
-            };
+            Supplier<List<CardPrinted>> s = new UnOpenedProduct(BoosterTemplate.genericBooster);
 
             for (int i = 0; i < 3; i++) this.product.add(s);
             IBoosterDraft.LAND_SET_CODE[0] = CardDb.instance().getCard("Plains").getEdition();
@@ -167,8 +164,9 @@ public final class BoosterDraft implements IBoosterDraft {
 
         final SealedProductTemplate tpl = draft.getSealedProductTemplate();
 
+        UnOpenedProduct toAdd = new UnOpenedProduct(tpl, dPool);
         for (int i = 0; i < draft.getNumPacks(); i++) {
-            this.product.add(new UnOpenedProduct(tpl, dPool));
+            this.product.add(toAdd);
         }
 
         IBoosterDraft.LAND_SET_CODE[0] = draft.getLandSetCode();

@@ -22,11 +22,8 @@ import java.io.File;
 import java.util.List;
 
 import com.google.common.base.Predicate;
-import com.google.common.collect.Iterables;
-
 import forge.Singletons;
 import forge.game.limited.CustomLimited;
-import forge.item.CardDb;
 import forge.item.CardPrinted;
 import forge.item.IPaperCard;
 import forge.util.FileUtil;
@@ -168,8 +165,7 @@ public class MetaSet {
 
             case JoinedSet:
                 Predicate<CardPrinted> predicate = IPaperCard.Predicates.printedInSets(data.split(" "));
-                Iterable<CardPrinted> pool = Iterables.filter(CardDb.instance().getAllCards(), predicate); 
-                return new UnOpenedProduct(BoosterTemplate.genericBooster, pool);
+                return new UnOpenedProduct(BoosterTemplate.genericBooster, predicate);
 
             case Choose:
                 return new UnOpenedMeta(data, true);

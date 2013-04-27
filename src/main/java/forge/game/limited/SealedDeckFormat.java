@@ -246,19 +246,17 @@ public class SealedDeckFormat {
                 if (element.endsWith(".sealed")) {
                     final List<String> dfData = FileUtil.readFile("res/sealed/" + element);
                     final CustomLimited cs = CustomLimited.parse(dfData, Singletons.getModel().getDecks().getCubes());
-                    if (cs.getSealedProductTemplate().getTotal() > 5) { // Do not allow too small cubes to be played as 'stand-alone'!
+                    if (cs.getSealedProductTemplate().getNumberOfCardsExpected() > 5) { // Do not allow too small cubes to be played as 'stand-alone'!
                         customs.add(cs);
                     }
                 }
             }
 
             // present list to user
-            if (customs.size() < 1) {
-                JOptionPane.showMessageDialog(null, "No custom sealed files found.", "",
-                        JOptionPane.INFORMATION_MESSAGE);
+            if (customs.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "No custom sealed files found.", "", JOptionPane.INFORMATION_MESSAGE);
             } else {
-                final CustomLimited draft = GuiChoose.one("Choose Custom Sealed Pool",
-                        customs);
+                final CustomLimited draft = GuiChoose.one("Choose Custom Sealed Pool", customs);
 
 
                 // Choose number of boosters
@@ -270,8 +268,9 @@ public class SealedDeckFormat {
 
                 Integer nrBoosters = GuiChoose.one("How many booster packs?", integers);
 
+                IUnOpenedProduct toAdd = new UnOpenedProduct(draft.getSealedProductTemplate(), draft.getCardPool());
                 for (int i = 0; i < nrBoosters; i++) {
-                    this.product.add(new UnOpenedProduct(draft.getSealedProductTemplate(), draft.getCardPool()));
+                    this.product.add(toAdd);
                 }
 
                 this.getLandSetCode()[0] = draft.getLandSetCode();

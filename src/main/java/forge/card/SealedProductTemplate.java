@@ -29,12 +29,12 @@ public class SealedProductTemplate {
     protected final List<Pair<String, Integer>> slots;
 
 
-    public String getEdition() {
-        return null;
-    }
-
     public final List<Pair<String, Integer>> getSlots() {
         return slots;
+    }
+
+    public String getEdition() {
+        return null;
     }
 
     public SealedProductTemplate(Iterable<Pair<String, Integer>> itrSlots)
@@ -42,12 +42,7 @@ public class SealedProductTemplate {
         slots = Lists.newArrayList(itrSlots);
     }
 
-    @SuppressWarnings("unchecked")
-    public SealedProductTemplate(int qty) {
-        this(Lists.newArrayList(Pair.of("any", qty)));
-    }
-
-    public int getTotal() {
+    public int getNumberOfCardsExpected() {
         int sum = 0;
         for(Pair<String, Integer> p : slots) {
             sum += p.getRight().intValue();

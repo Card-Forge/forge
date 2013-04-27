@@ -50,7 +50,14 @@ public class PrintSheet {
     public void addAll(Iterable<CardPrinted> cards, int weight) {
         for(CardPrinted card : cards)
             cardsWithWeights.add(card, weight);
-    }    
+    }
+    
+    /** Cuts cards out of a sheet - they won't be printed again.
+    * Please use mutable sheets for cubes only.*/ 
+    public void removeAll(Iterable<CardPrinted> cards) {
+        for(CardPrinted card : cards)
+            cardsWithWeights.remove(card);
+    }
 
     private CardPrinted fetchRoulette(int start, int roulette, Collection<CardPrinted> toSkip) {
         int sum = start;
@@ -105,6 +112,10 @@ public class PrintSheet {
             return new PrintSheet(title, CardPool.fromCardList(body));
         }
         
+    }
+
+    public boolean isEmpty() {
+        return cardsWithWeights.isEmpty();
     }
 
 
