@@ -165,6 +165,7 @@ public final class BoosterDraft implements IBoosterDraft {
         final SealedProductTemplate tpl = draft.getSealedProductTemplate();
 
         UnOpenedProduct toAdd = new UnOpenedProduct(tpl, dPool);
+        toAdd.setLimitedPool(draft.isSingleton());
         for (int i = 0; i < draft.getNumPacks(); i++) {
             this.product.add(toAdd);
         }

@@ -68,6 +68,8 @@ public class CustomLimited extends DeckBase {
     /** The Land set code. */
     private String landSetCode = CardDb.instance().getCard("Plains", true).getEdition();
 
+    private boolean singleton; 
+
 
     /*
      * (non-Javadoc)
@@ -104,6 +106,7 @@ public class CustomLimited extends DeckBase {
         final CustomLimited cd = new CustomLimited(data.get("Name"), slots);
         cd.landSetCode = data.get("LandSetCode");
         cd.numPacks = data.getInt("NumPacks");
+        cd.setSingleton(data.getBoolean("Singleton"));
         final Deck deckCube = cubes.get(data.get("DeckFile"));
         cd.cardPool = deckCube == null ? ItemPool.createFrom(CardDb.instance().getUniqueCards(), CardPrinted.class) : deckCube.getMain();
 
@@ -165,5 +168,9 @@ public class CustomLimited extends DeckBase {
      */
     public SealedProductTemplate getSealedProductTemplate() {
         return tpl;
+    }
+
+    public boolean isSingleton() {
+        return singleton;
     }
 }

@@ -268,7 +268,8 @@ public class SealedDeckFormat {
 
                 Integer nrBoosters = GuiChoose.one("How many booster packs?", integers);
 
-                IUnOpenedProduct toAdd = new UnOpenedProduct(draft.getSealedProductTemplate(), draft.getCardPool());
+                UnOpenedProduct toAdd = new UnOpenedProduct(draft.getSealedProductTemplate(), draft.getCardPool());
+                toAdd.setLimitedPool(draft.isSingleton());
                 for (int i = 0; i < nrBoosters; i++) {
                     this.product.add(toAdd);
                 }
