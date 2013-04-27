@@ -1,129 +1,19 @@
-Forge Beta: 04-26-2013 ver 1.3.13
+Forge Beta: 0#-##-2013 ver 1.3.14
 
 
-12538 cards in total.
+12### cards in total.
 
 
 -------------
 Release Notes
 -------------
 
-- User data migration -
-User data files, like decks, saved gauntlets, and card pictures, are now stored in new directories separate from the program data.  When this version of Forge is first run, it will scan the program directory for all user data and automatically migrate the files to their new homes.  There are three defined user data directores: userDir, cacheDir, and cardPicsDir, and their locations depend on the standard paths for your operating system:
 
-    Windows:
-        userDir=%APPDATA%/Forge/
-        cacheDir=%LOCALAPPDATA%/Forge/Cache/ (or %APPDATA%/Forge/Cache/ for windows versions before the local/roaming directory split)
-    OSX:
-        userDir=$HOME/Library/Application Support/Forge/
-        cacheDir=$HOME/Library/Caches/Forge/
-    Linux:
-        userDir=$HOME/.forge/
-        cacheDir=$HOME/.cache/forge/
-
-cardPicsDir is defined as <cacheDir>/pics/cards/ by default.  If you wish to use a non-default directory, please see the forge.profile.preferences.example file located in the Forge installation directory root.  You can use this file to, for example, share the card pics directory with another program, such as Magic Workstation.
-
-If you are using the Mac OS X version of Forge then you will find the forge.profile.preferences.example file by right clicking or control clicking on the Forge.app icon. Select "Show Package Contents" from the contextual menu. A Finder window will open and will display a folder named Contents. Navigate to the folder:
-    /Contents/Resources/Java/
-and you will find the file named forge.profile.preferences.example.
-
-
-For reference, here is the full list of moved directories and files:
-
-Old location      New location
-----------------  ----------------------
-res/decks/        <userDir>/decks/
-res/gauntlet/     <userDir>/gauntlet/
-res/layouts/      <userDir>/preferences/
-res/preferences/  <userDir>/preferences/
-res/quest/data/   <userDir>/quest/saves/
-res/pics/         <cacheDir>/pics/
-forge.log         <userDir>/forge.log
-
-
-- New Import Data dialog -
-The Import Pictures dialog, accessed via the Content Downloaders submenu, has received an overhaul and has been reincarnated as the Import Data dialog.  You may recognize it from the automatic data migration procedure if you had any data to migrate when this version was first started.  Instead of just importing pictures from a previous version of Forge, it can now import any kind of Forge data whatsoever.  If you have a directory full of deck files, you can use the Import Data dialog to copy or move them to the appropriate directory.  If you have just downloaded a torrent of high-quality pics for a particular set, use the Import Data dialog to get them to the proper place.  The dialog give you a full listing of all file copy/move operations, so you can see what will happen before you click 'Start Import'.
-
-An importer option was added for including pictures in set-specific card directories that don't map to any currently known card.  This handles the case where people have collected complete sets of pics in anticipation of when Forge supports them.
-
-
-- Fixed a few bugs -
-The AI was not removing counters as part of paying a cost. Cards including Phyrexian Prowler, Golem Foundry, Serrated Arrows, Triskelion and others should now work correctly for the computer player.
-
-Several people reported a ConcurrentModificationException which resulted in a crash report and this should now be fixed.
-
-Wishes can now only retrieve cards you own which prevents retrieving an opponents card, which would then go into that player's hand.
-
-Flicker effects were using the wrong Defined$ param.
-
-Spells that Change Target (like Swerve) are now able to redirect a Counterspell onto itself and this is now considered fixed.
-
-
-- Targeting arrows -
-Some people have noticed slowdowns when Targeting arrows are enabled. The battlefield Dock tab includes a targeting icon. You can set the targeting arrows to Off or to Card mouseover to speed up the game.
-
-
-- Quest challenge start in play cards -
-We have received reports that the quest challenge start in play cards are not appearing on the battlefield for some people. This was either fixed recently or it only affects some people but not all of them. Your match.xml and/or your quest save files may be corrupted.
-
-
-- Human vs Human play over the internet -
-Some initial code has been added that will at some point in the future allow human vs human play over the internet. This is a work in progress and is far from being implemented at this time. Please be patient. Anyone who is curious can read the messages in the http://www.slightlymagic.net/forum/viewtopic.php?f=52&t=9837 topic.
-
-
-- Dragon's Maze -
-We have created a branch for Dragon's Maze spoilers. These new cards are not included in the Forge distributions at this time. Please be patient as these DGM cards will become available in the near future. We plan to add these new Dragon's Maze cards to the 1.3.14 beta which should be released in a week or two.
-
-
-- Random Deck generation -
-Deck generation is now strictly conforming the colors chosen. You won't get any Boros Reckoner in a RG deck, that could be added before the change (because its manacost could be paid with red mana). Avacyn's Piligrim won't be added in a deck that has green but doesn't have white, though it does not consume, but produces white mana. As well there won't be added any creatures whose activated abilities require colors not choosen for a given deck.
-That is to say that now color identity is used for deck generation, that allows a better filtering of cards.
-
-
-- Single declare attackers step -
-Combined declare attackers step for all Defending Players/Planeswalkers. On declare attackers step you have to click the entiry you are about to attack and then click on the creatures that should attack it. Clicking on a planeswalker or player visually highlights it, so that you will see whos attackers are assigned at the moment. By default your first opponent is pre-selected.
-
-
-- Booster slots -
-Booster slots are now way more customizable. This change allows us to implement DGM boosters correctly. Note that custom cube .draft and .sealed files have changed their format. They require a booster description instead of Num(Rarity) N lines. Find example records in files describing SkieraCube and Juzamjedi cude coming with Forge. Singleton parameter is obsolette, since all cards within a booster slot are unique. Ignore rarity is also deprecated, for Booster options allow you to pick cards regardless of rarity with 'any' word standing for ignored rarity. (ex: 15 Any)
 
 
 ---------
 New Cards
 ---------
-
-Consuming Ferocity
-Corrosion
-Cowed by Wisdom
-Cyclone
-Dismantle
-Fog Patch
-Hipparion
-Illuminate
-Mind Whip
-Myr Prototype
-Needlebite Trap
-Rumbling Aftershocks
-Saproling Infestation
-Spitting Slug
-Stromgald Spy
-Taunt
-Worldheart Phoenix
-
-
---------------------
-New Vanguard Avatars
---------------------
-
-Elvish Champion Avatar
-Ink-Eyes, Servant of Oni Avatar
-Maralen of the Mornsong Avatar
-Seshiro the Anointed Avatar
-
-
-------------------------------
-New Dragon's Maze branch Cards
-------------------------------
 
 Advent of the Wurm
 AEtherling
@@ -268,6 +158,8 @@ Zhur-Taa Druid
 Known Issues
 ------------
 
+We have received reports that the quest challenge start in play cards are not appearing on the battlefield for some people. This was either fixed recently or it only affects some people but not all of them. Your match.xml and/or your quest save files may be corrupted.
+
 A small number of cards including Wall of Corpses, Abu Ja'far and others with a similar ability are not functional. The common issue here is actually that they check the blocker/attacker after being removed from the battlefield. Probably need to use LKI. Regular destroy/destroy all effects work just fine. The problem cards are caring about battlefield specific properties, that no longer apply when the base card is no longer on the battlefield.
 
 On several occasions people have noticed that the Forge deck editor and/or quest mode card shop would not open or display. We have also received reports that some of the tabs/panels in the deck editor are missing. There has also been reports that Forge will crash while creating/populating display components during start up or crash when a match is started. One or both of your layout xml files may be corrupted in some fashion. Try deleting the file(s) named "editor.xml" and/or "match.xml" that are now located in your userDir/preferences/ directory. This should force Forge to then use the default layout xml files instead.
@@ -296,19 +188,7 @@ Some people use the Windows application 7zip. This utility can be found at http:
 Contributors to This Release
 ----------------------------
 
-Gos
-Hellfish
-Marc
-Max
-Nordos
-PowerClaws
-RedDeckWins
-RumbleBBU
-Sloth
-Sol
-Swordshine
-ZzzzSleep
-Chris H
+
 
 
 (Quest icons used created by Teekatas, from his Legendora set http://raindropmemory.deviantart.com)

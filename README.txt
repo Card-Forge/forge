@@ -11,13 +11,41 @@ Once the Forge archive has been decompressed you should then be able to launch F
 Updating to a newer version Instructions:
 -----------------------------------------
 
-The instructions that were found in this section are now out of date. Current instructions can be found in the CHANGES.txt and forge.profile.properties.example files.
+- User data migration -
+User data files, like decks, saved gauntlets, and card pictures, are now stored in new directories separate from the program data.  When this version of Forge is first run, it will scan the program directory for all user data and automatically migrate the files to their new homes.  There are three defined user data directores: userDir, cacheDir, and cardPicsDir, and their locations depend on the standard paths for your operating system:
 
+    Windows:
+        userDir=%APPDATA%/Forge/
+        cacheDir=%LOCALAPPDATA%/Forge/Cache/ (or %APPDATA%/Forge/Cache/ for windows versions before the local/roaming directory split)
+    OSX:
+        userDir=$HOME/Library/Application Support/Forge/
+        cacheDir=$HOME/Library/Caches/Forge/
+    Linux:
+        userDir=$HOME/.forge/
+        cacheDir=$HOME/.cache/forge/
 
-Advanced Updating to a newer version Instructions:
---------------------------------------------------
+cardPicsDir is defined as <cacheDir>/pics/cards/ by default.  If you wish to use a non-default directory, please see the forge.profile.preferences.example file located in the Forge installation directory root.  You can use this file to, for example, share the card pics directory with another program, such as Magic Workstation.
 
-The instructions that were found in this section are now out of date. Current instructions can be found in the CHANGES.txt and forge.profile.properties.example files.
+If you are using the Mac OS X version of Forge then you will find the forge.profile.preferences.example file by right clicking or control clicking on the Forge.app icon. Select "Show Package Contents" from the contextual menu. A Finder window will open and will display a folder named Contents. Navigate to the folder:
+    /Contents/Resources/Java/
+and you will find the file named forge.profile.preferences.example.
+
+For reference, here is the full list of moved directories and files:
+
+Old location      New location
+----------------  ----------------------
+res/decks/        <userDir>/decks/
+res/gauntlet/     <userDir>/gauntlet/
+res/layouts/      <userDir>/preferences/
+res/preferences/  <userDir>/preferences/
+res/quest/data/   <userDir>/quest/saves/
+res/pics/         <cacheDir>/pics/
+forge.log         <userDir>/forge.log
+
+- New Import Data dialog -
+The Import Pictures dialog, accessed via the Content Downloaders submenu, has received an overhaul and has been reincarnated as the Import Data dialog.  You may recognize it from the automatic data migration procedure if you had any data to migrate when this version was first started.  Instead of just importing pictures from a previous version of Forge, it can now import any kind of Forge data whatsoever.  If you have a directory full of deck files, you can use the Import Data dialog to copy or move them to the appropriate directory.  If you have just downloaded a torrent of high-quality pics for a particular set, use the Import Data dialog to get them to the proper place.  The dialog give you a full listing of all file copy/move operations, so you can see what will happen before you click 'Start Import'.
+
+An importer option was added for including pictures in set-specific card directories that don't map to any currently known card.  This handles the case where people have collected complete sets of pics in anticipation of when Forge supports them.
 
 
 The Mac OS application version:
@@ -346,6 +374,8 @@ The Targeting Overlay has been fixed and re-enabled. It now correctly shows the 
 
 The visuals for targeting arrows has been improved and looks better, with an adaptation of the arrow drawing code from MAGE. Thanks to the MAGE team for permission for the adaptation.
 
+Some people have noticed slowdowns when Targeting arrows are enabled. The battlefield Dock tab includes a targeting icon. You can set the targeting arrows to Off or to Card mouseover to speed up the game.
+
 
 The new sound system:
 ---------------------
@@ -566,6 +596,30 @@ Alternate sound system:
 -----------------------
 
 Implemented an alternative sound system for people who have issues with sound gradually or instantly disappearing on certain Linux systems. Can be switched on/off in the preferences without needing a restart. Uses the standard Java Sound API so it doesn't require an external dependency. It's non-caching and, as such, less efficient than the regular sound system, so only use it in case you have issues with the default system, otherwise leave the option unchecked.
+
+
+Human vs Human play over the internet:
+--------------------------------------
+
+Some initial code has been added that will at some point in the future allow human vs human play over the internet. This is a work in progress and is far from being implemented at this time. Please be patient. Anyone who is curious can read the messages in the http://www.slightlymagic.net/forum/viewtopic.php?f=52&t=9837 topic.
+
+
+Random Deck generation:
+-----------------------
+
+Deck generation is now strictly conforming the colors chosen. You won't get any Boros Reckoner in a RG deck, that could be added before the change (because its manacost could be paid with red mana). Avacyn's Piligrim won't be added in a deck that has green but doesn't have white, though it does not consume, but produces white mana. As well there won't be added any creatures whose activated abilities require colors not choosen for a given deck. That is to say that now color identity is used for deck generation, that allows a better filtering of cards.
+
+
+Single declare attackers step:
+------------------------------
+
+Combined declare attackers step for all Defending Players/Planeswalkers. On declare attackers step you have to click the entiry you are about to attack and then click on the creatures that should attack it. Clicking on a planeswalker or player visually highlights it, so that you will see whos attackers are assigned at the moment. By default your first opponent is pre-selected.
+
+
+Booster slots:
+--------------
+
+Booster slots are now way more customizable. This change allows us to implement DGM boosters correctly. Note that custom cube .draft and .sealed files have changed their format. They require a booster description instead of Num(Rarity) N lines. Find example records in files describing SkieraCube and Juzamjedi cude coming with Forge. Singleton parameter is obsolette, since all cards within a booster slot are unique. Ignore rarity is also deprecated, for Booster options allow you to pick cards regardless of rarity with 'any' word standing for ignored rarity. (ex: 15 Any)
 
 
 Our Lawyers Made Us Do This:
