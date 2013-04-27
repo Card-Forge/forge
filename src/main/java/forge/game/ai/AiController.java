@@ -676,10 +676,10 @@ public class AiController {
                             return CombatUtil.canAttackNextTurn(c);
                         }
                     });
-                    final List<Card> unblockables = CardLists.filter(options, new Predicate<Card>() {
+                    final List<Card> unblockables = CardLists.filter(attackers, new Predicate<Card>() {
                         @Override
                         public boolean apply(final Card c) {
-                            return CombatUtil.canBeBlocked(c);
+                            return !CombatUtil.canBeBlocked(c);
                         }
                     });
                     if (!unblockables.isEmpty()) {
