@@ -226,7 +226,7 @@ public final class BoosterUtils {
      * 
      */
     public static Predicate<CardRules> parseRulesLimitation(final String input) {
-        if (null == input)
+        if (null == input || "random".equalsIgnoreCase(input))
             return Predicates.alwaysTrue();
 
         if (input.equalsIgnoreCase("black")) {
