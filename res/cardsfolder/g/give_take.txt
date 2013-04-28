@@ -5,6 +5,7 @@ Types:Sorcery
 K:Fuse
 A:SP$ PutCounter | Cost$ 2 G | ValidTgts$ Creature | TgtPrompt$ Select target creature to put counters | CounterType$ P1P1 | CounterNum$ 3 | SpellDescription$ Put three +1/+1 counters on target creature.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/give_take.jpg
+Oracle:Put three +1/+1 counters on target creature.\nFuse (You may cast one or both halves of this card from your hand.)
 ALTERNATE
 Name:Take
 ManaCost:2 U
@@ -14,5 +15,5 @@ SVar:DBDraw:DB$ Draw | NumCards$ X | References$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$RememberedSize
 SVar:RemAIDeck:True
-Oracle:Put three +1/+1 counters on target creature.\nFuse (You may cast one or both halves of this card from your hand.)\n----\nTake\n{2}{U}\nSorcery\nRemove all +1/+1 counters from target creature you control. Draw that many cards.\nFuse (You may cast one or both halves of this card from your hand.)
+Oracle:Remove all +1/+1 counters from target creature you control. Draw that many cards.\nFuse (You may cast one or both halves of this card from your hand.)
 SetInfo:DGM Uncommon

@@ -8,6 +8,7 @@ SVar:DBPutCounter:DB$ PutCounter | ValidTgts$ Creature | TgtPrompt$ Select targe
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$CardPower
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flesh_blood.jpg
+Oracle:Exile target creature card from a graveyard. Put X +1/+1 counters on target creature, where X is the power of the card you exiled.\nFuse (You may cast one or both halves of this card from your hand.)
 ALTERNATE
 Name:Blood
 ManaCost:R G
@@ -17,5 +18,5 @@ SVar:BloodDamage:DB$ DealDamage | ValidTgts$ Creature,Player | TgtPrompt$ Select
 SVar:DBCleanup2:DB$ Cleanup | ClearImprinted$ True
 SVar:Y:Imprinted$CardPower
 SVar:RemAIDeck:True
-Oracle:Exile target creature card from a graveyard. Put X +1/+1 counters on target creature, where X is the power of the card you exiled.\nFuse (You may cast one or both halves of this card from your hand.)\n----\nBlood\n{R}{G}\nSorcery\nTarget creature you control deals damage equal to its power to target creature or player.\nFuse (You may cast one or both halves of this card from your hand.)
+Oracle:Target creature you control deals damage equal to its power to target creature or player.\nFuse (You may cast one or both halves of this card from your hand.)
 SetInfo:DGM Rare

@@ -7,10 +7,11 @@ A:SP$ Effect | Cost$ 1 G W | StaticAbilities$ STIndestructible | SubAbility$ DBU
 SVar:STIndestructible:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected$ Creature.YouCtrl | AddHiddenKeyword$ Indestructible | Description$ Creatures you control are indestructible this turn.
 SVar:DBUnTapAll:DB$ UntapAll | ValidCards$ Creature.YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ready_willing.jpg
+Oracle:Creatures you control are indestructible this turn. Untap each creature you control.\nFuse (You may cast one or both halves of this card from your hand.)
 ALTERNATE
 Name:Willing
 ManaCost:1 W B
 Types:Instant
 A:SP$ PumpAll | Cost$ 1 W B | ValidCards$ Creature.YouCtrl | KW$ Deathtouch & Lifelink | SpellDescription$ Creatures you control gain deathtouch and lifelink until end of turn.
-Oracle:Creatures you control are indestructible this turn. Untap each creature you control.\nFuse (You may cast one or both halves of this card from your hand.)\n----\nWilling\n{1}{W}{B}\nInstant\nCreatures you control gain deathtouch and lifelink until end of turn.\nFuse (You may cast one or both halves of this card from your hand.)
+Oracle:Creatures you control gain deathtouch and lifelink until end of turn.\nFuse (You may cast one or both halves of this card from your hand.)
 SetInfo:DGM Rare
