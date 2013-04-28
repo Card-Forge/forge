@@ -160,6 +160,8 @@ Woodlot Crawler
 Zhur-Taa Ancient
 Zhur-Taa Druid
 
+Vulshok Battlemaster
+
 
 ------------
 Known Issues
