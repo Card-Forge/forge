@@ -384,7 +384,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             tgtCards = tgt.getTargetCards();
         } else {
             tgtCards = new ArrayList<Card>();
-            for (final Card c : AbilityUtils.getDefinedCards(sa.getSourceCard(), sa.getParam("Defined"), sa)) {
+            for (final Card c : AbilityUtils.getDefinedCards(hostCard, sa.getParam("Defined"), sa)) {
                 tgtCards.add(c);
             }
         }
@@ -393,7 +393,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         if (tgt != null) {
             sas = tgt.getTargetSAs();
         } else {
-            sas = AbilityUtils.getDefinedSpellAbilities(sa.getSourceCard(), sa.getParam("Defined"), sa);
+            sas = AbilityUtils.getDefinedSpellAbilities(hostCard, sa.getParam("Defined"), sa);
         }
 
         for (final SpellAbility tgtSA : sas) {
@@ -459,15 +459,14 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                         }
                         if (sa.hasParam("GainControl")) {
                             if (sa.hasParam("NewController")) {
-                                final Player p = AbilityUtils.getDefinedPlayers(sa.getSourceCard(), sa.getParam("NewController"), sa).get(0);
+                                final Player p = AbilityUtils.getDefinedPlayers(hostCard, sa.getParam("NewController"), sa).get(0);
                                 tgtC.setController(p, game.getNextTimestamp());
                             } else {
-                                tgtC.setController(sa.getActivatingPlayer(), game.getNextTimestamp());
+                                tgtC.setController(player, game.getNextTimestamp());
                             }
                         }
                         if (sa.hasParam("AttachedTo")) {
-                            List<Card> list = AbilityUtils.getDefinedCards(hostCard,
-                                    sa.getParam("AttachedTo"), sa);
+                            List<Card> list = AbilityUtils.getDefinedCards(hostCard, sa.getParam("AttachedTo"), sa);
                             if (list.isEmpty()) {
                                 list = game.getCardsIn(ZoneType.Battlefield);
                                 list = CardLists.getValidCards(list, sa.getParam("AttachedTo"), tgtC.getController(), tgtC);
@@ -546,7 +545,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     hostCard.addRemembered(movedCard);
                 }
                 if (forget != null) {
-                    sa.getSourceCard().getRemembered().remove(movedCard);
+                    hostCard.getRemembered().remove(movedCard);
                 }
                 if (imprint != null) {
                     hostCard.addImprinted(movedCard);

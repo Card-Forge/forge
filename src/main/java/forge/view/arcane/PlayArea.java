@@ -520,7 +520,16 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
             oldCards.add(cpa.getGameCard());
         }
         toDelete = new ArrayList<Card>(oldCards);
-        toDelete.removeAll(model);
+        
+        // delete all cards that differ in timestamp (they have been blinked) 
+        for (final Card c : model) {
+            for (int i = 0; i  < toDelete.size(); i++) {
+                final Card c2 = toDelete.get(i);
+                if (c.equals(c2) && c.getTimestamp() == c2.getTimestamp()) {
+                    toDelete.remove(i);
+                }
+            }
+        }
         if (toDelete.size() == getCardPanels().size()) {
             clear();
         } else {
