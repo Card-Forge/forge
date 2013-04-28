@@ -191,7 +191,7 @@ public class DrawAi extends SpellAbilityAi {
                 return false;
             }
 
-            if (canTgtHuman && !opp.cantLose() && (numCards >= humanLibrarySize)) {
+            if (canTgtHuman && !opp.cantLose() && numCards >= humanLibrarySize) {
                 // Deck the Human? DO IT!
                 tgt.addTarget(opp);
                 return true;
@@ -210,8 +210,7 @@ public class DrawAi extends SpellAbilityAi {
                 }
             }
 
-            if (((computerHandSize + numCards) > computerMaxHandSize)
-                    && game.getPhaseHandler().isPlayerTurn(ai)) {
+            if (computerHandSize + numCards > computerMaxHandSize && game.getPhaseHandler().isPlayerTurn(ai)) {
                 if (xPaid) {
                     numCards = computerMaxHandSize - computerHandSize;
                     source.setSVar("PayX", Integer.toString(numCards));
@@ -240,6 +239,9 @@ public class DrawAi extends SpellAbilityAi {
 
             // ability is not targeted
             if (numCards >= computerLibrarySize) {
+                if (ai.isCardInPlay("Laboratory Maniac")) {
+                    return true;
+                }
                 // Don't deck yourself
                 return false;
             }
