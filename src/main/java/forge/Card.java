@@ -8005,7 +8005,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         }
         if (this.hasProtectionFrom(equip)
             || this.hasKeyword("CARDNAME can't be equipped.")
-            || !this.isValid("Creature.YouCtrl", equip.getController(), equip)) {
+            || !this.isValid("Creature", equip.getController(), equip)) {
             return false;
         }
         return true;
