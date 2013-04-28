@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Hugo Drax 1
+Title=Hugo Drax
+Difficulty=easy
+Description=Mono B control deck
+Icon=Hugo Drax.jpg
+Deck Type=constructed
+[main]
+24 Swamp|TMP
+2 Will-o'-the-Wisp
+2 Zulaport Enforcer
+1 Giant Slug
+2 Fog of Gnats
+2 Withered Wretch
+2 Carrion Wall
+2 Wall of Bone
+1 Corrosive Mentor
+2 Soot Imp
+2 Urborg Stalker
+2 Highway Robber
+1 Uncle Istvan
+4 Dash Hopes
+1 Death Stroke
+1 Scepter of Fugue
+1 Vicious Hunger
+1 Warp Artifact
+1 Underworld Dreams
+1 Death's Duet
+1 Enfeeblement
+4 Grave Peril
+[sideboard]
