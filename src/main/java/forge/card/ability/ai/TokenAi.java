@@ -187,7 +187,7 @@ public class TokenAi extends SpellAbilityAi {
                 tgt.addTarget(ai);
             }
         }
-        if (this.tokenAmount.equals("X") || this.tokenPower.equals("X") || this.tokenToughness.equals("X")) {
+        if ("X".equals(this.tokenAmount) || "X".equals(this.tokenPower) || "X".equals(this.tokenToughness)) {
             int x = AbilityUtils.calculateAmount(source, this.tokenAmount, sa);
             if (source.getSVar("X").equals("Count$xPaid")) {
                 // Set PayX here to maximum value.
