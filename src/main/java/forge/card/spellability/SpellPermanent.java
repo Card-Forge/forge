@@ -104,19 +104,6 @@ public class SpellPermanent extends Spell {
             }
             card.setSVar("PayX", Integer.toString(xPay));
         }
-        // Wait for Main2 if possible
-        if (game.getPhaseHandler().is(PhaseType.MAIN1)
-                && !ComputerUtil.castPermanentInMain1(ai, this)
-                && game.getPhaseHandler().isPlayerTurn(ai)) {
-            return false;
-        }
-        // save cards with flash for surprise blocking
-        if (card.hasKeyword("Flash")
-                && !card.hasETBTrigger()
-                && (game.getPhaseHandler().isPlayerTurn(ai)
-                     || game.getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY))) {
-            return false;
-        }
         // Prevent the computer from summoning Ball Lightning type creatures after attacking
         if (card.hasKeyword("At the beginning of the end step, sacrifice CARDNAME.")
                 && (game.getPhaseHandler().isPlayerTurn(ai.getOpponent())
@@ -127,6 +114,23 @@ public class SpellPermanent extends Spell {
         // Prevent the computer from summoning Ball Lightning type creatures after attacking
         if (card.hasStartOfKeyword("You may cast CARDNAME as though it had flash. If")
                 && !card.getController().couldCastSorcery(this)) {
+            return false;
+        }
+        
+        // Wait for Main2 if possible
+        if (game.getPhaseHandler().is(PhaseType.MAIN1)
+                && game.getPhaseHandler().isPlayerTurn(ai)
+                && ai.getManaPool().totalMana() <= 0
+                && !ComputerUtil.castPermanentInMain1(ai, this)) {
+            return false;
+        }
+        // save cards with flash for surprise blocking
+        if (card.hasKeyword("Flash")
+                && (ai.isUnlimitedHandSize() || ai.getCardsIn(ZoneType.Hand).size() <= ai.getMaxHandSize())
+                && ai.getManaPool().totalMana() <= 0
+                && (game.getPhaseHandler().isPlayerTurn(ai)
+                        || game.getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY)
+                && !card.hasETBTrigger())) {
             return false;
         }
 
