@@ -4,7 +4,7 @@ Types:Creature Human Spellshaper
 PT:1/1
 A:AB$ Effect | Cost$ 1 B B T Discard<1/Card> | Name$ Instigator Effect | ValidTgts$ Player | TgtPrompt$ Select target player | StaticAbilities$ AttackThisTurn | References$ AttackThisTurn | RememberObjects$ Targeted | SpellDescription$ Creatures target player controls attack this turn if able.
 SVar:AttackThisTurn:Mode$ Continuous | EffectZone$ Command | Affected$ Creature.RememberedPlayerCtrl | AddHiddenKeyword$ CARDNAME attacks each turn if able. | Description$ Creatures targeted player controls attack this turn if able.
-SVar:RemAIdeck:True
+SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/Instigator.jpg
 Oracle:{1}{B}{B}, {T}, Discard a card: Creatures target player controls attack this turn if able.
 SetInfo:MMQ Rare
