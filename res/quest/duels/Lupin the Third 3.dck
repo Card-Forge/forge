@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Lupin the Third 3
+Title=Lupin the Third
+Difficulty=hard
+Description=UB Notion Thief deck with Howling Mine and Words of Wisdom
+Icon=Lupin the Third.jpg
+Deck Type=constructed
+[main]
+2 Swamp|M12
+4 Island|M12
+4 Underground Sea
+2 Flooded Strand
+4 Polluted Delta
+1 Mikokoro, Center of the Sea
+1 Mox Emerald
+1 Mox Sapphire
+1 Mox Jet
+1 Mox Pearl
+1 Mox Ruby
+1 Sol Ring
+1 Ancestral Recall
+1 Time Walk
+2 Laboratory Maniac
+4 Notion Thief
+1 Demonic Tutor
+2 Jace Beleren
+1 Anvil of Bogardan
+1 Kami of the Crescent Moon
+4 Howling Mine
+3 Words of Wisdom
+4 Sinkhole
+4 Spell Snare
+4 Mental Misstep
+1 Mana Drain
+2 Doom Blade
+1 Terror
+1 Go for the Throat
+[sideboard]
