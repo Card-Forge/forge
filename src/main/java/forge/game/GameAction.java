@@ -854,6 +854,10 @@ public class GameAction {
 
     /** */
     public final void checkStaticAbilities() {
+
+        if (game.isGameOver())
+            return;
+
         // remove old effects
         game.getStaticEffects().clearStaticEffects();
         game.getTriggerHandler().cleanUpTemporaryTriggers();
