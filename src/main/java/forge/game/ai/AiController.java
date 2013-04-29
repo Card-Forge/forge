@@ -97,12 +97,12 @@ public class AiController {
             SpellAbility counter = chooseCounterSpell(getPlayableCounters(cards));
             if( counter != null ) return counter;
     
-            SpellAbility counterETB = chooseSpellAbilities(this.getPossibleETBCounters(), false);
+            SpellAbility counterETB = chooseSpellAbilyToPlay(this.getPossibleETBCounters(), false);
             if( counterETB != null )
                 return counterETB;
         }
     
-        return chooseSpellAbilities(getSpellAbilities(cards), true);
+        return chooseSpellAbilyToPlay(getSpellAbilities(cards), true);
     }
 
     /**
@@ -442,7 +442,7 @@ public class AiController {
      *            objects.
      * @return a boolean.
      */
-    private SpellAbility chooseSpellAbilities(final List<SpellAbility> all, boolean skipCounter) {
+    private SpellAbility chooseSpellAbilyToPlay(final List<SpellAbility> all, boolean skipCounter) {
         if ( all == null || all.isEmpty() )
             return null;
 
@@ -467,14 +467,15 @@ public class AiController {
 
     // This is for playing spells regularly (no Cascade/Ripple etc.)
     private boolean canPlayAndPayFor(final SpellAbility sa) {
-        boolean canPlay = sa.canPlay();
-        if (!canPlay) 
+        if (!sa.canPlay()) {
             return false;
+        }
         //System.out.printf("Ai thinks of %s @ %s >>> ", sa, sa.getActivatingPlayer().getGame().getPhaseHandler().debugPrintState());
-        boolean aiWouldPlay = sa.canPlayAI();
-        boolean canPay = ComputerUtilCost.canPayCost(sa, player);
+        if (!sa.canPlayAI()) {
+            return false;
+        }
         //System.out.printf("wouldPlay: %s, canPay: %s%n", aiWouldPlay, canPay);
-        return aiWouldPlay && canPay;
+        return ComputerUtilCost.canPayCost(sa, player);
     }
     
     // not sure "playing biggest spell" matters?
