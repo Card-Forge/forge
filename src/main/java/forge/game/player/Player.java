@@ -1320,7 +1320,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
 
         // This is why the code is placed after any other replacement effects could affect the draw event.  
         List<Card> chainsList = null;
-        for(Card c: game.getCardsInGame()) {
+        for(Card c : game.getCardsIn(ZoneType.Battlefield)) {
             if ( c.getName().equals("Chains of Mephistopheles") ) {
                 if ( null == chainsList )
                     chainsList = new ArrayList<Card>();
