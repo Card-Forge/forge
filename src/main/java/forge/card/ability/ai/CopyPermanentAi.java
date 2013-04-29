@@ -46,7 +46,7 @@ public class CopyPermanentAi extends SpellAbilityAi {
     }
 
     @Override
-    protected boolean doTriggerAINoCost(AIPlayer aiPlayer, SpellAbility sa, boolean mandatory) {
+    protected boolean doTriggerAINoCost(final AIPlayer aiPlayer, SpellAbility sa, boolean mandatory) {
         final Card source = sa.getSourceCard();
 
         // ////
@@ -68,7 +68,7 @@ public class CopyPermanentAi extends SpellAbilityAi {
             abTgt.resetTargets();
             // target loop
             while (abTgt.getNumTargeted() < abTgt.getMaxTargets(sa.getSourceCard(), sa)) {
-                if (list.size() == 0) {
+                if (list.isEmpty()) {
                     if ((abTgt.getNumTargeted() < abTgt.getMinTargets(sa.getSourceCard(), sa))
                             || (abTgt.getNumTargeted() == 0)) {
                         abTgt.resetTargets();
@@ -79,6 +79,12 @@ public class CopyPermanentAi extends SpellAbilityAi {
                     }
                 }
 
+                list = CardLists.filter(list, new Predicate<Card>() {
+                    @Override
+                    public boolean apply(final Card c) {
+                        return !c.isType("Legendary") || c.getController().isOpponentOf(aiPlayer);
+                    }
+                });
                 Card choice;
                 if (!CardLists.filter(list, Presets.CREATURES).isEmpty()) {
                     choice = ComputerUtilCard.getBestCreatureAI(list);
