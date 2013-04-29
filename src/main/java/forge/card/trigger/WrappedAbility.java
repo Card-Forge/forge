@@ -385,6 +385,11 @@ public class WrappedAbility extends Ability implements ISpellAbility {
     
     private boolean confirmTrigger(Player decider, Map<String, String> triggerParams) {
         if (decider.isHuman()) {
+            if(decider.getController().shouldAlwaysAcceptTrigger(regtrig.getId()))
+                return true;
+            else if(decider.getController().shouldAlwaysDeclineTrigger(regtrig.getId()))
+                return false;
+            
             String triggerDesc = triggerParams.get("TriggerDescription").replace("CARDNAME", regtrig.getHostCard().getName());
             final StringBuilder buildQuestion = new StringBuilder("Use triggered ability of ");
             buildQuestion.append(regtrig.getHostCard().toString()).append("?");

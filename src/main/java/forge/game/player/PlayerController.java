@@ -1,5 +1,6 @@
 package forge.game.player;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -40,6 +41,11 @@ public abstract class PlayerController {
     public abstract Input getCleanupInput();
     public abstract Input getAutoPassPriorityInput();
 
+    public abstract boolean shouldAlwaysAcceptTrigger(Integer trigger);
+    public abstract boolean shouldAlwaysDeclineTrigger(Integer trigger);
+    public abstract void setShouldAlwaysAcceptTrigger(Integer trigger);
+    public abstract void setShouldAlwaysDeclineTrigger(Integer trigger);
+    public abstract void setShouldAlwaysAskTrigger(Integer trigger);
 
     /**
      * TODO: Write javadoc for this method.

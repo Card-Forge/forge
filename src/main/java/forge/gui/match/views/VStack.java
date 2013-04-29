@@ -18,11 +18,15 @@
 package forge.gui.match.views;
 
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JCheckBoxMenuItem;
+import javax.swing.JPopupMenu;
 import javax.swing.JTextArea;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
@@ -30,6 +34,8 @@ import javax.swing.border.EmptyBorder;
 import net.miginfocom.swing.MigLayout;
 import forge.CardUtil;
 import forge.card.spellability.SpellAbilityStackInstance;
+import forge.control.FControl;
+import forge.game.player.PlayerController;
 import forge.game.zone.MagicStack;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
@@ -54,6 +60,7 @@ public enum VStack implements IVDoc<CStack> {
 
     // Other fields
     private List<JTextArea> stackTARs = new ArrayList<JTextArea>();
+    private OptionalTriggerMenu otMenu = new OptionalTriggerMenu();
 
     //========= Overridden methods
 
@@ -163,6 +170,19 @@ public enum VStack implements IVDoc<CStack> {
                     }
                 }
             });
+            
+            if(spell.getSpellAbility().isOptionalTrigger()) {
+                tar.addMouseListener(new MouseAdapter() {
+                    @Override
+                    public void mouseClicked(MouseEvent e){
+                        if (e.getButton() == MouseEvent.BUTTON3)
+                        {
+                            otMenu.setStackInstance(spell);
+                            otMenu.show(e.getComponent(), e.getX(), e.getY());
+                        }
+                    }
+                });
+            }
 
             /*
              * This updates the Card Picture/Detail when the spell is added to
@@ -201,5 +221,75 @@ public enum VStack implements IVDoc<CStack> {
     }
 
     //========= Custom class handling
+    
+    private final class OptionalTriggerMenu extends JPopupMenu {
+        private static final long serialVersionUID = 1548494191627807962L;
+        private final JCheckBoxMenuItem jmiAccept;
+        private final JCheckBoxMenuItem jmiDecline;
+        private final JCheckBoxMenuItem jmiAsk;
+        private PlayerController localPlayer;
+        
+        private Integer triggerID = 0;
+        
+        public OptionalTriggerMenu(){
+            
+            jmiAccept = new JCheckBoxMenuItem("Always Accept");
+            jmiDecline = new JCheckBoxMenuItem("Always Decline");
+            jmiAsk = new JCheckBoxMenuItem("Always Ask");
+            
+            jmiAccept.addActionListener(new ActionListener() {
 
+                @Override
+                public void actionPerformed(ActionEvent arg0) {
+                    localPlayer.setShouldAlwaysAcceptTrigger(triggerID);
+                }
+                
+            });
+            
+            jmiDecline.addActionListener(new ActionListener() {
+
+                @Override
+                public void actionPerformed(ActionEvent arg0) {
+                    localPlayer.setShouldAlwaysDeclineTrigger(triggerID);
+                }
+                
+            });
+            
+            jmiAsk.addActionListener(new ActionListener() {
+
+                @Override
+                public void actionPerformed(ActionEvent arg0) {
+                    System.out.println("ask");
+                    localPlayer.setShouldAlwaysAskTrigger(triggerID);
+                }
+                
+            });
+            
+            add(jmiAccept);
+            add(jmiDecline);
+            add(jmiAsk);
+        }
+        
+        public void setStackInstance(final SpellAbilityStackInstance SI)
+        {
+            if(localPlayer == null)
+                localPlayer = FControl.SINGLETON_INSTANCE.getPlayer().getController();
+            
+            triggerID = SI.getSpellAbility().getSourceTrigger();
+            
+            if(localPlayer.shouldAlwaysAcceptTrigger(triggerID)) {
+                jmiAccept.setSelected(true);
+                jmiDecline.setSelected(false);
+                jmiAsk.setSelected(false);
+            } else if(localPlayer.shouldAlwaysDeclineTrigger(triggerID)) {
+                jmiDecline.setSelected(true);
+                jmiAccept.setSelected(false);
+                jmiAsk.setSelected(false);
+            } else {
+                jmiAsk.setSelected(true);
+                jmiAccept.setSelected(false);
+                jmiDecline.setSelected(false);
+            }
+        }
+    }
 }
