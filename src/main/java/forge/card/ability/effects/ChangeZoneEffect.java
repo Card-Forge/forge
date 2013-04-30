@@ -920,9 +920,11 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 game.getAction().moveToHand(tgtSA.getSourceCard());
             } else if (srcSA.getParam("Destination").equals("BottomOfLibrary")) {
                 game.getAction().moveToBottomOfLibrary(tgtSA.getSourceCard());
-            } else if (srcSA.getParam("Destination").equals("ShuffleIntoLibrary")) {
+            } else if (srcSA.getParam("Destination").equals("Library")) {
                 game.getAction().moveToBottomOfLibrary(tgtSA.getSourceCard());
-                tgtSA.getSourceCard().getController().shuffle();
+                if (srcSA.hasParam("Shuffle")) {
+                    tgtSA.getSourceCard().getOwner().shuffle();
+                }
             } else {
                 throw new IllegalArgumentException("AbilityFactory_ChangeZone: Invalid Destination argument for card "
                         + srcSA.getSourceCard().getName());
