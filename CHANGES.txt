@@ -8,6 +8,10 @@ Forge Beta: 0#-##-2013 ver 1.3.14
 Release Notes
 -------------
 
+- Dragon's Maze -
+Forge now includes 160 of the 166 Dragon's Maze cards in this new set. At this time card pictures for these cards are not available for downloading via the Download LQ Card Pictures and the Download LQ Set Pictures. They will become available at some point in the near future. Please be patient.
+
+
 - Thread bug -
 We have received several reports about a Null Pointer Exception crash report which contains the following info:
 
