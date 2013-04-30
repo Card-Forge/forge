@@ -5535,6 +5535,12 @@ public class Card extends GameEntity implements Comparable<Card> {
                         }
                     }
                 }
+            } else if (property.substring(10).equals("Enchanted")) {
+                for (final Card card : source.getEnchantedBy()) {
+                    if (!this.equippedBy.contains(card)) {
+                        return false;
+                    }
+                }
             } else {
                 if (!this.equippedBy.contains(source)) {
                     return false;
@@ -5908,8 +5914,18 @@ public class Card extends GameEntity implements Comparable<Card> {
             }
             return false;
         } else if (property.startsWith("sharesTypeWith")) {
-            if (!this.sharesTypeWith(source)) {
-                return false;
+            if (property.equals("sharesTypeWith")) {
+                if (!this.sharesTypeWith(source)) {
+                    return false;
+                }
+            } else {
+                final String restriction = property.split("sharesTypeWith ")[1];
+                if (restriction.equals("FirstImprinted")) {
+                    if (source.getImprinted().isEmpty() || 
+                            !this.sharesTypeWith(source.getImprinted().get(0))) {
+                        return false;
+                    }
+                }
             }
         } else if (property.startsWith("withFlashback")) {
             boolean fb = false;
