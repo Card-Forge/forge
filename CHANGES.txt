@@ -19,7 +19,7 @@ java.lang.NullPointerException
    at forge.gui.match.VMatchUI.populate(VMatchUI.java:###)
    at forge.control.FControl.changeState(FControl.java:###)
 
-We current suspect that this is a thread misuse issue. This will cause forge to crash eventually on some systems. Once the SwingWorkers that start different types of matches are refactored this problem should be fixed. The problem with a match starting with a blank screen will also be gone.
+We currently suspect that this is a thread misuse issue. This will cause forge to crash eventually on some systems. Once the SwingWorkers that start different types of matches are refactored this problem should be fixed. The problem with a match starting with a blank screen will also be gone.
 
 
 ---------
@@ -165,6 +165,9 @@ Zhur-Taa Ancient
 Zhur-Taa Druid
 
 Vulshok Battlemaster
+Carry Away
+Possibility Storm
+Rhystic Lightning
 
 
 ------------
