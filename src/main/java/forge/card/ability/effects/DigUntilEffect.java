@@ -148,6 +148,11 @@ public class DigUntilEffect extends SpellAbilityEffect {
                         host.addRemembered(c);
                     }
                 }
+                if (sa.hasParam("ImprintRevealed")) {
+                    for (final Card c : revealed) {
+                        host.addImprinted(c);
+                    }
+                }
 
                 // TODO Use getOrderChoices before this moveTo call for the Human
                 final Iterator<Card> itr = revealed.iterator();

@@ -1,0 +1,13 @@
+Name:Rhystic Lightning
+ManaCost:2 R
+Types:Instant
+A:SP$ StoreSVar | Cost$ 2 R | SVar$ RhysticPaid | Type$ Number | Expression$ 0 | UnlessPayer$ Targeted | UnlessCost$ 2 | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | ConditionDefined$ Targeted | ConditionPresent$ Creature | ConditionCompare$ EQ0 | SubAbility$ DBStore2 | SpellDescription$ CARDNAME deals 4 damage to target creature or player unless that creature's controller or that player pays 2. If he or she does, CARDNAME deals 2 damage to the creature or player.
+SVar:DBStore2:DB$ StoreSVar | SVar$ RhysticPaid | Type$ Number | Expression$ 0 | UnlessPayer$ TargetedController | UnlessCost$ 2 | ConditionDefined$ Targeted | ConditionPresent$ Creature | ConditionCompare$ GE1 | SubAbility$ DBDmg
+SVar:DBDmg:DB$ DealDamage | Defined$ Targeted | NumDmg$ X | References$ X,RhysticPaid | SubAbility$ DBReset
+SVar:DBReset:DB$ StoreSVar | SVar$ RhysticPaid | Type$ Number | Expression$ 1
+SVar:RhysticPaid:Number$1
+SVar:X:Count$Compare RhysticPaid EQ1.2.4
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/rhystic_lightning.jpg
+Oracle:Rhystic Lightning deals 4 damage to target creature or player unless that creature's controller or that player pays {2}. If he or she does, Rhystic Lightning deals 2 damage to the creature or player.
+SetInfo:PCY Common

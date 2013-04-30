@@ -1,7 +1,9 @@
 package forge.card.ability.effects;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 
 import com.google.common.collect.Iterables;
 
@@ -15,6 +17,7 @@ import forge.game.GameState;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
+import forge.util.MyRandom;
 
 public class ChangeZoneAllEffect extends SpellAbilityEffect {
 
@@ -59,12 +62,18 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
         final String remember = sa.getParam("RememberChanged");
         final String forget = sa.getParam("ForgetChanged");
         final String imprint = sa.getParam("Imprint");
+        final boolean random = sa.hasParam("RandomOrder");
 
         final int libraryPos = sa.hasParam("LibraryPosition") ? Integer.parseInt(sa.getParam("LibraryPosition")) : 0;
 
         if (sa.getActivatingPlayer().isHuman() && destination.equals(ZoneType.Library) && !sa.hasParam("Shuffle")
-                && cards.size() >= 2) {
+                && cards.size() >= 2 && !random) {
             cards = GuiChoose.order("Choose order of cards to put into the library", "Put first", 0, cards, null, null);
+        }
+
+        if (destination.equals(ZoneType.Library) && random) {
+            final Random ran = MyRandom.getRandom();
+            Collections.shuffle(cards, ran);
         }
 
         for (final Card c : cards) {

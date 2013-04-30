@@ -8077,6 +8077,7 @@ res/cardsfolder/p/possessed_barbarian.txt svneol=native#text/plain
 res/cardsfolder/p/possessed_centaur.txt svneol=native#text/plain
 res/cardsfolder/p/possessed_nomad.txt svneol=native#text/plain
 res/cardsfolder/p/possessed_portal.txt -text
+res/cardsfolder/p/possibility_storm.txt -text
 res/cardsfolder/p/postmortem_lunge.txt svneol=native#text/plain
 res/cardsfolder/p/poultice_sliver.txt svneol=native#text/plain
 res/cardsfolder/p/pouncing_jaguar.txt svneol=native#text/plain
@@ -8769,6 +8770,7 @@ res/cardsfolder/r/rhys_the_redeemed.txt svneol=native#text/plain
 res/cardsfolder/r/rhystic_cave.txt -text
 res/cardsfolder/r/rhystic_circle.txt -text
 res/cardsfolder/r/rhystic_deluge.txt svneol=native#text/plain
+res/cardsfolder/r/rhystic_lightning.txt -text
 res/cardsfolder/r/rhystic_scrying.txt -text
 res/cardsfolder/r/rhystic_shield.txt -text
 res/cardsfolder/r/rhystic_study.txt svneol=native#text/plain
