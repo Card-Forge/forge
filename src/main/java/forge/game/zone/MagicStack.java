@@ -310,6 +310,7 @@ public class MagicStack extends MyObservable {
         }
 
         if (sp.isSpell()) {
+            sp.getSourceCard().setController(sp.getActivatingPlayer(), 0);
             Spell spell = (Spell) sp;
             if (spell.isCastFaceDown()) {
                 sp.getSourceCard().turnFaceDown();
