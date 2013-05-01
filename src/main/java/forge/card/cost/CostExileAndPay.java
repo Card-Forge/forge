@@ -112,7 +112,16 @@ public class CostExileAndPay extends CostPartWithList {
             }
         }
         
-        Cost selectedCost = GuiChoose.oneOrNone("Choose a cost", options);
+        Cost selectedCost;
+        if(options.size() > 1)
+        {
+            selectedCost = GuiChoose.oneOrNone("Choose a cost", options);
+        }
+        else
+        {
+            selectedCost = options.get(0);
+        }
+        
         if(selectedCost == null)
         {
             return false;
