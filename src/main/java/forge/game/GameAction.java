@@ -1031,7 +1031,7 @@ public class GameAction {
                     // Soulbond unpairing
                     if (c.isPaired()) {
                         Card partner = c.getPairedWith();
-                        if (!partner.isCreature() || c.getController() != partner.getController()) {
+                        if (!partner.isCreature() || c.getController() != partner.getController() || !game.isCardInZone(c, ZoneType.Battlefield)) {
                             c.setPairedWith(null);
                             partner.setPairedWith(null);
                         }
