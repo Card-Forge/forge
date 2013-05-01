@@ -300,6 +300,10 @@ public class Cost {
             final String description = splitStr.length > 2 ? splitStr[2] : null;
             return new CostExile(splitStr[0], splitStr[1], description, ZoneType.Graveyard, true);
         }
+        
+        if(parse.equals("ExileAndPay")) {
+            return new CostExileAndPay();
+        }
     
         if(parse.startsWith("Return<")) {
             final String[] splitStr = abCostParse(parse, 3);

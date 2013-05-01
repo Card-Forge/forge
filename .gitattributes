@@ -701,6 +701,7 @@ res/cardsfolder/a/azors_elocutors.txt -text
 res/cardsfolder/a/azure_drake.txt svneol=native#text/plain
 res/cardsfolder/a/azure_mage.txt svneol=native#text/plain
 res/cardsfolder/a/azusa_lost_but_seeking.txt svneol=native#text/plain
+res/cardsfolder/b/back_from_the_brink.txt -text
 res/cardsfolder/b/back_to_basics.txt svneol=native#text/plain
 res/cardsfolder/b/back_to_nature.txt svneol=native#text/plain
 res/cardsfolder/b/backfire.txt svneol=native#text/plain
@@ -13944,6 +13945,7 @@ src/main/java/forge/card/cost/Cost.java svneol=native#text/plain
 src/main/java/forge/card/cost/CostDamage.java -text
 src/main/java/forge/card/cost/CostDiscard.java -text
 src/main/java/forge/card/cost/CostExile.java -text
+src/main/java/forge/card/cost/CostExileAndPay.java -text
 src/main/java/forge/card/cost/CostGainLife.java -text
 src/main/java/forge/card/cost/CostMill.java -text
 src/main/java/forge/card/cost/CostPart.java -text
