@@ -6341,7 +6341,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                     return false;
                 }
             } else {
-                String s = "Kicker " + property.split("kicked ")[1];
+                String s = property.split("kicked ")[1];
                 if ("1".equals(s) && !this.isOptionalCostPaid(OptionalCost.Kicker1)) return false;
                 if ("2".equals(s) && !this.isOptionalCostPaid(OptionalCost.Kicker2)) return false;
             }
