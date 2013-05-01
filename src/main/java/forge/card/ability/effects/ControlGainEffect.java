@@ -171,6 +171,8 @@ public class ControlGainEffect extends SpellAbilityEffect {
 
             sa.getSourceCard().clearGainControlReleaseCommands();
             sa.getSourceCard().addGainControlReleaseCommand(this.getLoseControlCommand(tgtC, tStamp, bTapOnLose, source, kws));
+            game.getAction().controllerChangeZoneCorrection(tgtC);
+            tgtC.runChangeControllerCommands();
 
         } // end foreach target
     }

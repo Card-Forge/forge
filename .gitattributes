@@ -1559,6 +1559,7 @@ res/cardsfolder/c/catalyst_stone.txt -text
 res/cardsfolder/c/catapult_master.txt svneol=native#text/plain
 res/cardsfolder/c/catapult_squad.txt svneol=native#text/plain
 res/cardsfolder/c/catastrophe.txt svneol=native#text/plain
+res/cardsfolder/c/catch_release.txt -text
 res/cardsfolder/c/cateran_brute.txt svneol=native#text/plain
 res/cardsfolder/c/cateran_enforcer.txt svneol=native#text/plain
 res/cardsfolder/c/cateran_kidnappers.txt svneol=native#text/plain
