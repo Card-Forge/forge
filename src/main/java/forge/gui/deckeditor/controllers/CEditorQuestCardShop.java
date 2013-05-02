@@ -48,6 +48,7 @@ import forge.gui.deckeditor.views.VAllDecks;
 import forge.gui.deckeditor.views.VCardCatalog;
 import forge.gui.deckeditor.views.VCurrentDeck;
 import forge.gui.deckeditor.views.VDeckgen;
+import forge.gui.deckeditor.views.VProbabilities;
 import forge.gui.framework.DragCell;
 import forge.gui.home.quest.CSubmenuQuestDecks;
 import forge.gui.toolbox.FLabel;
@@ -102,6 +103,7 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
     private boolean showingFullCatalog = false;
     private DragCell allDecksParent = null;
     private DragCell deckGenParent = null;
+    private DragCell probsParent = null;
 
     // get pricelist:
     private final ReadPriceList r = new ReadPriceList();
@@ -203,6 +205,8 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
 
         CDRemLabel = VCurrentDeck.SINGLETON_INSTANCE.getBtnRemove().getText();
         VCurrentDeck.SINGLETON_INSTANCE.getBtnRemove().setText("Sell Card");
+        
+        VProbabilities.SINGLETON_INSTANCE.getTabLabel().setVisible(false);
 
         prevRem4Label = VCurrentDeck.SINGLETON_INSTANCE.getBtnRemove4().getText();
         prevRem4Tooltip = VCurrentDeck.SINGLETON_INSTANCE.getBtnRemove4().getToolTipText();
@@ -499,7 +503,8 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
         VCardCatalog.SINGLETON_INSTANCE.getStatLabel(SEditorUtil.StatTypes.PACK).setVisible(true);
         
         deckGenParent = removeTab(VDeckgen.SINGLETON_INSTANCE);
-        allDecksParent = removeTab(VAllDecks.SINGLETON_INSTANCE);        
+        allDecksParent = removeTab(VAllDecks.SINGLETON_INSTANCE);
+        probsParent = removeTab(VProbabilities.SINGLETON_INSTANCE);
     }
 
     /* (non-Javadoc)
@@ -538,6 +543,9 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
         }
         if (allDecksParent != null) {
             allDecksParent.addDoc(VAllDecks.SINGLETON_INSTANCE);
+        }
+        if (probsParent != null) {
+            probsParent.addDoc(VProbabilities.SINGLETON_INSTANCE);
         }
         
         return true;
