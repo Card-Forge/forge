@@ -38,6 +38,7 @@ public class CountersPutAi extends SpellAbilityAi {
         Card choice = null;
         final String type = sa.getParam("CounterType");
         final String amountStr = sa.getParam("CounterNum");
+        final boolean divided = sa.hasParam("DividedAsYouChoose");
 
         final Player player = sa.isCurse() ? ai.getOpponent() : ai;
 
@@ -128,7 +129,11 @@ public class CountersPutAi extends SpellAbilityAi {
                         // TODO is this good enough? for up to amounts?
                         break;
                     }
+                } else if (divided) {
+                    abTgt.addDividedAllocation(choice, amount);
+                    break;
                 }
+
                 list.remove(choice);
                 abTgt.addTarget(choice);
             }
@@ -171,6 +176,7 @@ public class CountersPutAi extends SpellAbilityAi {
         Card choice = null;
         final String type = sa.getParam("CounterType");
         final String amountStr = sa.getParam("CounterNum");
+        final boolean divided = sa.hasParam("DividedAsYouChoose");
         final int amount = AbilityUtils.calculateAmount(sa.getSourceCard(), amountStr, sa);
 
         final Player player = sa.isCurse() ? ai.getOpponent() : ai;
@@ -217,6 +223,9 @@ public class CountersPutAi extends SpellAbilityAi {
                         // TODO is this good enough? for up to amounts?
                         break;
                     }
+                } else if (divided) {
+                    abTgt.addDividedAllocation(choice, amount);
+                    break;
                 }
                 list.remove(choice);
                 abTgt.addTarget(choice);
@@ -237,6 +246,7 @@ public class CountersPutAi extends SpellAbilityAi {
         final Player player = isCurse ? ai.getOpponent() : ai;
         final String type = sa.getParam("CounterType");
         final String amountStr = sa.getParam("CounterNum");
+        final boolean divided = sa.hasParam("DividedAsYouChoose");
         final int amount = AbilityUtils.calculateAmount(sa.getSourceCard(), amountStr, sa);
 
         if (abTgt == null) {
@@ -293,6 +303,9 @@ public class CountersPutAi extends SpellAbilityAi {
                     } else {
                         choice = ComputerUtilCard.getRandomCard(list);
                     }
+                }
+                if (choice !=  null && divided) {
+                    abTgt.addDividedAllocation(choice, amount);
                 }
             }
 

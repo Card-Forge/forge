@@ -4,11 +4,7 @@ Types:Legendary Creature Dragon Spirit
 PT:5/5
 K:Flying
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigPutCounter | OptionalDecider$ TriggeredCardController | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, you may distribute five +1/+1 counters among any number of target creatures.
-SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature (1) | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ PutCounter2
-SVar:PutCounter2:DB$PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature (2) | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ PutCounter3
-SVar:PutCounter3:DB$PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature (3) | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ PutCounter4
-SVar:PutCounter4:DB$PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature (4) | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ PutCounter5
-SVar:PutCounter5:DB$PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature (5) | CounterType$ P1P1 | CounterNum$ 1
+SVar:TrigPutCounter:AB$ PutCounter | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature to distribute counters to | CounterType$ P1P1 | CounterNum$ 5 | TargetMin$ 1 | TargetMax$ 5 | DividedAsYouChoose$ 5
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jugan_the_rising_star.jpg
 Oracle:Flying\nWhen Jugan, the Rising Star dies, you may distribute five +1/+1 counters among any number of target creatures.
 SetInfo:CHK Rare
