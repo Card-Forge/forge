@@ -70,7 +70,7 @@ SOM: 5 covers, 10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand
 STH: 1 covers, 11 Common, 3 Uncommon, 1 Rare
 TMP: 3 covers, 11 Common, 3 Uncommon, 1 Rare
 TOR: 1 covers, 11 Common, 3 Uncommon, 1 Rare
-TSP: 5 covers, 10 Common, 3 Uncommon, 1 Rare, 1 TimeShifted
+TSP: 5 covers, 10 Common, 3 Uncommon, 1 Rare, 1 TimeShifted TSB
 UDS: 1 covers, 11 Common, 3 Uncommon, 1 Rare
 ULG: 1 covers, 11 Common, 3 Uncommon, 1 Rare
 USG: 3 covers, 11 Common, 3 Uncommon, 1 Rare
