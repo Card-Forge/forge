@@ -5855,6 +5855,24 @@ public class Card extends GameEntity implements Comparable<Card> {
                     return false;
                 }
             }
+        } else if (property.startsWith("doesNotShareNameWith")) {
+            if (property.equals("doesNotShareNameWith")) {
+                if (this.getName().equals(source.getName())) {
+                    return false;
+                }
+            } else {
+                final String restriction = property.split("doesNotShareNameWith ")[1];
+                if (restriction.equals("Remembered")) {
+                    for (final Object rem : source.getRemembered()) {
+                        if (rem instanceof Card) {
+                            final Card card = (Card) rem;
+                            if (this.getName().equals(card.getName())) {
+                                return false;
+                            }
+                        }
+                    }
+                }
+            }
         } else if (property.startsWith("sharesControllerWith")) {
             if (property.equals("sharesControllerWith")) {
                 if (!this.sharesControllerWith(source)) {

@@ -984,26 +984,6 @@ public class AbilityUtils {
             if (card.getEffectSource() != null) {
                 sas.addAll(card.getEffectSource().getSpellAbilities());
             }
-        } else if (defined.equals("Imprinted.doesNotShareNameWith+TriggeredCard+Exiled")) {
-            //get Imprinted list
-            ArrayList<SpellAbility> imprintedCards = new ArrayList<SpellAbility>();
-            for (final Card imp : card.getImprinted()) {
-                imprintedCards.addAll(imp.getSpellAbilities());
-            } //get Triggered card
-            Card triggeredCard = null;
-            final SpellAbility root = sa.getRootAbility();
-            final Object crd = root.getTriggeringObject("Card");
-            if (crd instanceof Card) {
-                triggeredCard = game.getCardState((Card) crd);
-            } //find the imprinted card that does not share a name with the triggered card
-            for (final SpellAbility spell : imprintedCards) {
-                if (!spell.getSourceCard().getName().equals(triggeredCard.getName())) {
-                    sas.add(spell);
-                }
-            } //is it exiled?
-            if (!sas.get(0).getSourceCard().isInZone(ZoneType.Exile)) {
-                sas.clear();
-            }
         }
 
         if (s != null) {
