@@ -394,26 +394,22 @@ public class SSubmenuQuestUtil {
         worker.execute();
         PlayerStartConditions humanStart = new PlayerStartConditions(SSubmenuQuestUtil.getCurrentDeck());
         PlayerStartConditions aiStart = new PlayerStartConditions(event.getEventDeck());
+        
+        int extraLifeHuman = 0;
+        int lifeAI = 20;
+        if (event instanceof QuestEventChallenge) {
+            lifeAI = ((QuestEventChallenge) event).getAILife();
 
-        if (qData.getMode() == QuestMode.Fantasy) {
-            int lifeAI = 20;
-            int extraLifeHuman = 0;
-
-            if (event instanceof QuestEventChallenge) {
-                lifeAI = ((QuestEventChallenge) event).getAILife();
-
-                if (qData.getAssets().hasItem(QuestItemType.ZEPPELIN)) {
-                    extraLifeHuman = 3;
-                }
+            if (qData.getAssets().hasItem(QuestItemType.ZEPPELIN)) {
+                extraLifeHuman = 3;
             }
+        }
+        humanStart.setStartingLife(qData.getAssets().getLife(qData.getMode()) + extraLifeHuman);
+        aiStart.setStartingLife(lifeAI);
 
-            humanStart.setStartingLife(qData.getAssets().getLife(qData.getMode()) + extraLifeHuman);
-            aiStart.setStartingLife(lifeAI);
-
-            humanStart.setCardsOnBattlefield(QuestUtil.getHumanStartingCards(qData, event));
-            aiStart.setCardsOnBattlefield(QuestUtil.getComputerStartingCards(event));
-        } // End isFantasy
-
+        humanStart.setCardsOnBattlefield(QuestUtil.getHumanStartingCards(qData, event));
+        aiStart.setCardsOnBattlefield(QuestUtil.getComputerStartingCards(event));
+        
         MatchStartHelper msh = new MatchStartHelper();
         msh.addPlayer(Singletons.getControl().getLobby().getQuestPlayer(), humanStart);
 
