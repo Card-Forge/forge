@@ -8,7 +8,10 @@ Forge Beta: 05-##-2013 ver 1.3.15
 Release Notes
 -------------
 
+- Bug Fixes -
+Reverted the synchronize changes since it seemed to break all of the trigger payment stuff.
 
+Added DGM into RTR block and made DGM lands no longer appear in the common slot.
 
 
 ---------
