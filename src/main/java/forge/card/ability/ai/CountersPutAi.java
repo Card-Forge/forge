@@ -129,13 +129,15 @@ public class CountersPutAi extends SpellAbilityAi {
                         // TODO is this good enough? for up to amounts?
                         break;
                     }
-                } else if (divided) {
-                    abTgt.addDividedAllocation(choice, amount);
-                    break;
                 }
 
                 list.remove(choice);
                 abTgt.addTarget(choice);
+                
+                if (divided) {
+                    abTgt.addDividedAllocation(choice, amount);
+                    break;
+                }
             }
         } else {
             final List<Card> cards = AbilityUtils.getDefinedCards(sa.getSourceCard(), sa.getParam("Defined"), sa);
@@ -223,12 +225,13 @@ public class CountersPutAi extends SpellAbilityAi {
                         // TODO is this good enough? for up to amounts?
                         break;
                     }
-                } else if (divided) {
-                    abTgt.addDividedAllocation(choice, amount);
-                    break;
                 }
                 list.remove(choice);
                 abTgt.addTarget(choice);
+                if (divided) {
+                    abTgt.addDividedAllocation(choice, amount);
+                    break;
+                }
             }
         }
 
