@@ -162,7 +162,7 @@ public class MagicStack extends MyObservable {
      * @param ability
      *            a {@link forge.card.spellability.SpellAbility} object.
      */
-    public final synchronized void addAndUnfreeze(final SpellAbility ability) {
+    public final void addAndUnfreeze(final SpellAbility ability) {
         ability.getRestrictions().abilityActivated();
         if ((ability.getRestrictions().getActivationNumberSacrifice() != -1)
                 && (ability.getRestrictions().getNumberTurnActivations() >= ability.getRestrictions()
@@ -224,7 +224,7 @@ public class MagicStack extends MyObservable {
      * @param sa
      *            a SpellAbility.
      */
-    public final synchronized void removeFromFrozenStack(SpellAbility sa) {
+    public final void removeFromFrozenStack(SpellAbility sa) {
         SpellAbilityStackInstance si = this.getInstanceFromSpellAbility(sa);
         this.getFrozenStack().remove(si);
         if (this.getFrozenStack().isEmpty()) {
@@ -268,7 +268,7 @@ public class MagicStack extends MyObservable {
      * @param useX
      *            a boolean.
      */
-    public final synchronized void add(final SpellAbility sp, final boolean useX) {
+    public final void add(final SpellAbility sp, final boolean useX) {
         if (!useX) {
             this.add(sp);
         } else {
@@ -297,7 +297,7 @@ public class MagicStack extends MyObservable {
      * @param sp
      *            a {@link forge.card.spellability.SpellAbility} object.
      */
-    public final synchronized void add(final SpellAbility sp) {
+    public final void add(final SpellAbility sp) {
         FThreads.assertExecutedByEdt(false);
         final ArrayList<TargetChoices> chosenTargets = sp.getAllTargetChoices();
 
@@ -582,7 +582,7 @@ public class MagicStack extends MyObservable {
      * resolveStack.
      * </p>
      */
-    public final synchronized void resolveStack() {
+    public final void resolveStack() {
         // Resolving the Stack
 
         // TODO: change to use forge.view.FView?
@@ -669,7 +669,7 @@ public class MagicStack extends MyObservable {
      *            a boolean.
      * @since 1.0.15
      */
-    public final synchronized void removeCardFromStack(final SpellAbility sa, final boolean fizzle) {
+    public final void removeCardFromStack(final SpellAbility sa, final boolean fizzle) {
         Card source = sa.getSourceCard();
 
         // do nothing
@@ -843,7 +843,7 @@ public class MagicStack extends MyObservable {
      * 
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
-    public final synchronized SpellAbility pop() {
+    public final SpellAbility pop() {
         final SpellAbilityStackInstance si = this.getStack().pop();
         final SpellAbility sp = si.getSpellAbility();
         return sp;
@@ -915,7 +915,7 @@ public class MagicStack extends MyObservable {
      * @param sa
      *            a {@link forge.card.spellability.SpellAbility} object.
      */
-    public final synchronized void remove(final SpellAbility sa) {
+    public final void remove(final SpellAbility sa) {
         final SpellAbilityStackInstance si = this.getInstanceFromSpellAbility(sa);
 
         if (si == null) {
@@ -934,7 +934,7 @@ public class MagicStack extends MyObservable {
      *            a {@link forge.card.spellability.SpellAbilityStackInstance}
      *            object.
      */
-    public final synchronized void remove(final SpellAbilityStackInstance si) {
+    public final void remove(final SpellAbilityStackInstance si) {
         this.getStack().remove(si);
         this.getFrozenStack().remove(si);
         this.updateObservers();
