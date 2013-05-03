@@ -1,0 +1,13 @@
+Name:Callous Oppressor
+ManaCost:1 U U
+Types:Creature Cephalid
+PT:1/2
+K:You may choose not to untap CARDNAME during your untap step.
+K:ETBReplacement:Other:DBChooseOpp
+SVar:DBChooseOpp:DB$ ChoosePlayer | ChoiceTitle$ Choose an opponent | Choices$ Player.Opponent | AILogic$ Curse | SpellDescription$ As CARDNAME enters the battlefield, an opponent chooses a creature type. | SubAbility$ DBChooseType
+SVar:DBChooseType:DB$ ChooseType | Defined$ Player.Chosen | Type$ Creature | AILogic$ MostProminentComputerControls
+A:AB$ GainControl | Cost$ T | ValidTgts$ Creature.IsNotChosenType | TgtPrompt$ Select target creature that isn't of the chosen type | LoseControl$ Untap,LeavesPlay | SpellDescription$ Gain control of target creature that isn't of the chosen type for as long as CARDNAME remains tapped.
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/callous_oppressor.jpg
+Oracle:You may choose not to untap Callous Oppressor during your untap step.\nAs Callous Oppressor enters the battlefield, an opponent chooses a creature type.\n{T}: Gain control of target creature that isn't of the chosen type for as long as Callous Oppressor remains tapped.
+SetInfo:ONS Rare

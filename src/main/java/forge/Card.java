@@ -6467,6 +6467,10 @@ public class Card extends GameEntity implements Comparable<Card> {
             if (!this.isType(source.getChosenType())) {
                 return false;
             }
+        } else if (property.equals("IsNotChosenType")) {
+            if (this.isType(source.getChosenType())) {
+                return false;
+            }
         } else if (property.equals("IsCommander")) {
             if(!this.isCommander) {
                 return false;
