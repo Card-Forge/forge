@@ -622,6 +622,12 @@ Booster slots:
 Booster slots are now way more customizable. This change allows us to implement DGM boosters correctly. Note that custom cube .draft and .sealed files have changed their format. They require a booster description instead of Num(Rarity) N lines. Find example records in files describing SkieraCube and Juzamjedi cude coming with Forge. Singleton parameter is obsolette, since all cards within a booster slot are unique. Ignore rarity is also deprecated, for Booster options allow you to pick cards regardless of rarity with 'any' word standing for ignored rarity. (ex: 15 Any)
 
 
+Quest challenge start in play cards:
+------------------------------------
+
+We have received reports that the quest challenge start in play cards are not appearing on the battlefield for people who were playing the classic mode rather than the fantasy mode. This should now be fixed.
+
+
 Our Lawyers Made Us Do This:
 ----------------------------
 

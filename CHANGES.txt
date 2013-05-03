@@ -1,18 +1,27 @@
-Forge Beta: 05-03-2013 ver 1.3.14
+Forge Beta: 05-##-2013 ver 1.3.15
 
 
-12682 cards in total.
+12### cards in total.
 
 
 -------------
 Release Notes
 -------------
 
-- Dragon's Maze -
-Forge now includes 160 of the 166 Dragon's Maze cards in this new set. At this time card pictures for these cards are not available for downloading via the Download LQ Card Pictures and the Download LQ Set Pictures buttons. They will become available at some point in the near future. Please be patient.
 
 
-- Thread bug -
+
+---------
+New Cards
+---------
+
+
+
+
+------------
+Known Issues
+------------
+
 We have received several reports about a Null Pointer Exception crash report which contains the following info:
 
 java.lang.NullPointerException
@@ -20,165 +29,6 @@ java.lang.NullPointerException
    at forge.control.FControl.changeState(FControl.java:###)
 
 We currently suspect that this is a thread misuse issue. This will cause forge to crash eventually on some systems. Once the SwingWorkers that start different types of matches are refactored this problem should be fixed. The problem with a match starting with a blank screen will also be gone.
-
-
-- Quest challenge start in play cards -
-We have received reports that the quest challenge start in play cards are not appearing on the battlefield for people who were playing the classic mode rather than the fantasy mode. This should now be fixed.
-
-
----------
-New Cards
----------
-
-Advent of the Wurm
-AEtherling
-Alive // Well
-Armed // Dangerous
-Armored Wolf-Rider
-Ascended Lawmage
-Awe for the Guilds
-Azorius Cluestone
-Back from the Brink
-Bane Alley Blackguard
-Battering Krasis
-Beck // Call
-Beetleform Mage
-Blast of Genius
-Blaze Commando
-Blood Baron of Vizkopa
-Blood Scrivener
-Boros Cluestone
-Boros Mastiff
-Breaking // Entering
-Bred for the Hunt
-Bronzebeak Moa
-Callous Oppressor
-Carnage Gladiator
-Carry Away
-Catch // Release
-Clear a Path
-Council of the Absolute
-Crypt Incursion
-Deadbridge Chant
-Debt to the Deathless
-Deputy of Acquittals
-Dimir Cluestone
-Down // Dirty
-Dragonshift
-Drown in Filth
-Emmara Tandris
-Exava, Rakdos Blood Witch
-Far // Away
-Fatal Fumes
-Flesh // Blood
-Fluxcharger
-Gaze of Granite
-Give // Take
-Gleam of Battle
-Goblin Test Pilot
-Golgari Cluestone
-Gruul Cluestone
-Gruul War Chant
-Haazda Snare Squad
-Haunter of Nightveil
-Hidden Strings
-Hired Torturer
-Izzet Cluestone
-Jelenn Sphinx
-Korozda Gorgon
-Krasis Incubation
-Kraul Warrior
-Lavinia of the Tenth
-Legion's Initiative
-Lyev Decree
-Master of Cruelties
-Maw of the Obzedat
-Maze Abomination
-Maze Behemoth
-Maze Glider
-Maze Rusher
-Maze Sentinel
-Maze's End
-Melek, Izzet Paragon
-Mending Touch
-Mindstatic
-Mirko Vosk, Mind Drinker
-Morgue Burst
-Murmuring Phantasm
-Mutant's Prey
-Nivix Cyclops
-Notion Thief
-Obzedat's Aid
-Opal Lake Gatekeeper
-Orzhov Cluestone
-Phytoburst
-Pilfered Plans
-Plasm Capture
-Pontiff of Blight
-Possibility Storm
-Profit // Loss
-Progenitor Mimic
-Protect // Serve
-Punish the Enemy
-Rakdos Cluestone
-Rakdos Drake
-Ral Zarek
-Ready // Willing
-Reap Intellect
-Render Silent
-Renegade Krasis
-Renounce the Guilds
-Restore the Peace
-Rhystic Lightning
-Riot Control
-Riot Piker
-Rot Farm Skeleton
-Rubblebelt Maaka
-Runner's Bane
-Ruric Thar, the Unbowed
-Saruli Gatekeepers
-Savageborn Hydra
-Scab-Clan Giant
-Scion of Vitu-Ghazi
-Selesnya Cluestone
-Simic Cluestone
-Sin Collector
-Sinister Possession
-Sire of Insanity
-Skylasher
-Smelt-Ward Gatekeepers
-Species Gorger
-Spike Jester
-Steeple Roc
-Sunspire Gatekeepers
-Tajic, Blade of the Legion
-Teysa, Envoy of Ghosts
-Thrashing Mossdog
-Tithe Drinker
-Toil // Trouble
-Trostani's Summoner
-Turn // Burn
-Ubul Sar Gatekeepers
-Uncovered Clues
-Unflinching Courage
-Varolz, the Scar-Striped
-Viashino Firstblade
-Voice of Resurgence
-Vorel of the Hull Clade
-Vulshok Battlemaster
-Wake the Reflections
-Warleader's Helix
-Warped Physique
-Weapon Surge
-Wear // Tear
-Woodlot Crawler
-Zhur-Taa Ancient
-Zhur-Taa Druid
-
-
-------------
-Known Issues
-------------
 
 A small number of cards including Wall of Corpses, Abu Ja'far and others with a similar ability are not functional. The common issue here is actually that they check the blocker/attacker after being removed from the battlefield. Probably need to use LKI. Regular destroy/destroy all effects work just fine. The problem cards are caring about battlefield specific properties, that no longer apply when the base card is no longer on the battlefield.
 
@@ -208,17 +58,7 @@ Some people use the Windows application 7zip. This utility can be found at http:
 Contributors to This Release
 ----------------------------
 
-Asepetci
-Gos
-Hellfish
-Marc
-Max
-Nordos
-Sloth
-Sol
-Swordshine
-Xitax
-Chris H
+
 
 
 (Quest icons used created by Teekatas, from his Legendora set http://raindropmemory.deviantart.com)
