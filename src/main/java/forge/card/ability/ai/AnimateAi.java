@@ -68,7 +68,7 @@ public class AnimateAi extends SpellAbilityAi {
         }
 
         // don't activate during main2 unless this effect is permanent
-        if (game.getPhaseHandler().is(PhaseType.MAIN2) && !sa.hasParam("Permanent")) {
+        if (game.getPhaseHandler().is(PhaseType.MAIN2) && !sa.hasParam("Permanent") && !sa.hasParam("UntilYourNextTurn")) {
             return false;
         }
 
@@ -76,13 +76,21 @@ public class AnimateAi extends SpellAbilityAi {
             final List<Card> defined = AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa);
 
             boolean bFlag = false;
-            for (final Card c : defined) {
-                bFlag |= (!c.isCreature() && !c.isTapped()
+            if (sa.hasParam("AILogic")) {
+                if ("EOT".equals(sa.getParam("AILogic"))) {
+                    if (game.getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2)) {
+                        return false;
+                    } else {
+                        bFlag = true;
+                    }
+                }
+            } else for (final Card c : defined) {
+                bFlag |= !c.isCreature() && !c.isTapped()
                         && !(c.getTurnInZone() == game.getPhaseHandler().getTurn())
-                        && !c.isEquipping());
+                        && !c.isEquipping();
 
                 // for creatures that could be improved (like Figure of Destiny)
-                if (c.isCreature() && (sa.hasParam("Permanent") || (!c.isTapped() && !c.isSick()))) {
+                if (!bFlag && c.isCreature() && (sa.hasParam("Permanent") || (!c.isTapped() && !c.isSick()))) {
                     int power = -5;
                     if (sa.hasParam("Power")) {
                         power = AbilityUtils.calculateAmount(source, sa.getParam("Power"), sa);
