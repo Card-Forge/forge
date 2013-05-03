@@ -27,16 +27,23 @@ public class PumpEffect extends SpellAbilityEffect {
             return;
         }
         final GameState game = sa.getActivatingPlayer().getGame();
+        final long timestamp = game.getNextTimestamp();
+        final ArrayList<String> kws = new ArrayList<String>();
+        
+        for (String kw : keywords) {
+            if (kw.startsWith("HIDDEN")) {
+                applyTo.addHiddenExtrinsicKeyword(kw);
+            } else {
+                kws.add(kw);
+                if (kw.equals("Suspend")) {
+                    applyTo.setSuspend(true);
+                }
+            }
+        }
 
         applyTo.addTempAttackBoost(a);
         applyTo.addTempDefenseBoost(d);
-
-        for (int i = 0; i < keywords.size(); i++) {
-            applyTo.addExtrinsicKeyword(keywords.get(i));
-            if (keywords.get(i).equals("Suspend")) {
-                applyTo.setSuspend(true);
-            }
-        }
+        applyTo.addChangedCardKeywords(kws, null, false, timestamp);
 
         if (!sa.hasParam("Permanent")) {
             // If not Permanent, remove Pumped at EOT
@@ -49,9 +56,12 @@ public class PumpEffect extends SpellAbilityEffect {
                     applyTo.addTempDefenseBoost(-1 * d);
 
                     if (keywords.size() > 0) {
-                        for (int i = 0; i < keywords.size(); i++) {
-                            applyTo.removeExtrinsicKeyword(keywords.get(i));
+                        for (String kw : keywords) {
+                            if (kw.startsWith("HIDDEN")) {
+                                applyTo.removeHiddenExtrinsicKeyword(kw);
+                            }
                         }
+                        applyTo.removeChangedCardKeywords(timestamp);
                     }
                 }
             };
