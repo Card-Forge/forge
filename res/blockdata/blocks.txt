@@ -44,7 +44,7 @@ Magic 2012, 3/6/M12, M12
 Innistrad, 3/6/ISD, ISD DKA 
 Avacyn Restored, 3/6/AVR, AVR  
 Magic 2013, 3/6/M13, M13  
-Return to Ravnica, 3/6/RTR, RTR  
-Return to Ravnica Guild Sealed, -/6/RTR, RTR RTR RTR Meta-Choose(Cube(RtRGuildAzorius)Azorius Guild;Cube(RtRGuildIzzet)Izzet Guild;Cube(RtRGuildRakdos)Rakdos Guild;Cube(RtRGuildGolgari)Golgari Guild;Cube(RtRGuildSelesnya)Selesnya Guild)GUILD
-Gatecrash, 3/6/RTR, GTC  
+Return to Ravnica, 3/6/RTR, RTR GTC DGM
+Return to Ravnica Guild Sealed, -/6/RTR, RTR RTR RTR Meta-Choose(Cube(RtRGuildAzorius)Azorius Guild;Cube(RtRGuildIzzet)Izzet Guild;Cube(RtRGuildRakdos)Rakdos Guild;Cube(RtRGuildGolgari)Golgari Guild;Cube(RtRGuildSelesnya)Selesnya Guild)GUILD 
 Gatecrash Guild Sealed, -/6/RTR, GTC GTC GTC Meta-Choose(Cube(GtcGuildBoros)Boros Guild;Cube(GtcGuildDimir)Dimir Guild;Cube(GtcGuildGruul)Gruul Guild;Cube(GtcGuildOrzhov)Orzhov Guild;Cube(GtcGuildSimic)Simic Guild)GUILD
+#Dragon's Maze Race Sealed, -/6/RTR, DGM DGM DGM ?<GuildPack> <RandomRelatedGuildPack2>?

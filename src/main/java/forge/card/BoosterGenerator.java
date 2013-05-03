@@ -168,6 +168,9 @@ public class BoosterGenerator {
                 operator = StringUtils.strip(operator.substring(4), "() ");
                 String[] cardNames = TextUtil.splitWithParenthesis(operator, ',', '"', '"');
                 toAdd = IPaperCard.Predicates.names(Lists.newArrayList(cardNames));
+            } else if ( operator.startsWith("type(") ) {
+                operator = StringUtils.strip(operator.substring(4), "()\" ");
+                toAdd = Predicates.compose(CardRulesPredicates.coreType(true, operator), CardPrinted.FN_GET_RULES);
             }
 
             if(toAdd == null)
