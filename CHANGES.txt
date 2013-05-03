@@ -1,7 +1,7 @@
-Forge Beta: 0#-##-2013 ver 1.3.14
+Forge Beta: 05-03-2013 ver 1.3.14
 
 
-12### cards in total.
+12682 cards in total.
 
 
 -------------
@@ -9,7 +9,7 @@ Release Notes
 -------------
 
 - Dragon's Maze -
-Forge now includes 160 of the 166 Dragon's Maze cards in this new set. At this time card pictures for these cards are not available for downloading via the Download LQ Card Pictures and the Download LQ Set Pictures. They will become available at some point in the near future. Please be patient.
+Forge now includes 160 of the 166 Dragon's Maze cards in this new set. At this time card pictures for these cards are not available for downloading via the Download LQ Card Pictures and the Download LQ Set Pictures buttons. They will become available at some point in the near future. Please be patient.
 
 
 - Thread bug -
@@ -20,6 +20,10 @@ java.lang.NullPointerException
    at forge.control.FControl.changeState(FControl.java:###)
 
 We currently suspect that this is a thread misuse issue. This will cause forge to crash eventually on some systems. Once the SwingWorkers that start different types of matches are refactored this problem should be fixed. The problem with a match starting with a blank screen will also be gone.
+
+
+- Quest challenge start in play cards -
+We have received reports that the quest challenge start in play cards are not appearing on the battlefield for people who were playing the classic mode rather than the fantasy mode. This should now be fixed.
 
 
 ---------
@@ -34,6 +38,7 @@ Armored Wolf-Rider
 Ascended Lawmage
 Awe for the Guilds
 Azorius Cluestone
+Back from the Brink
 Bane Alley Blackguard
 Battering Krasis
 Beck // Call
@@ -47,7 +52,10 @@ Boros Mastiff
 Breaking // Entering
 Bred for the Hunt
 Bronzebeak Moa
+Callous Oppressor
 Carnage Gladiator
+Carry Away
+Catch // Release
 Clear a Path
 Council of the Absolute
 Crypt Incursion
@@ -107,6 +115,7 @@ Phytoburst
 Pilfered Plans
 Plasm Capture
 Pontiff of Blight
+Possibility Storm
 Profit // Loss
 Progenitor Mimic
 Protect // Serve
@@ -120,6 +129,7 @@ Render Silent
 Renegade Krasis
 Renounce the Guilds
 Restore the Peace
+Rhystic Lightning
 Riot Control
 Riot Piker
 Rot Farm Skeleton
@@ -155,6 +165,7 @@ Varolz, the Scar-Striped
 Viashino Firstblade
 Voice of Resurgence
 Vorel of the Hull Clade
+Vulshok Battlemaster
 Wake the Reflections
 Warleader's Helix
 Warped Physique
@@ -164,20 +175,10 @@ Woodlot Crawler
 Zhur-Taa Ancient
 Zhur-Taa Druid
 
-Vulshok Battlemaster
-Carry Away
-Possibility Storm
-Rhystic Lightning
-Catch // Release
-Back from the Brink
-Callous Oppressor
-
 
 ------------
 Known Issues
 ------------
-
-We have received reports that the quest challenge start in play cards are not appearing on the battlefield for some people. This was either fixed recently or it only affects some people but not all of them. Your match.xml and/or your quest save files may be corrupted.
 
 A small number of cards including Wall of Corpses, Abu Ja'far and others with a similar ability are not functional. The common issue here is actually that they check the blocker/attacker after being removed from the battlefield. Probably need to use LKI. Regular destroy/destroy all effects work just fine. The problem cards are caring about battlefield specific properties, that no longer apply when the base card is no longer on the battlefield.
 
@@ -207,7 +208,17 @@ Some people use the Windows application 7zip. This utility can be found at http:
 Contributors to This Release
 ----------------------------
 
-
+Asepetci
+Gos
+Hellfish
+Marc
+Max
+Nordos
+Sloth
+Sol
+Swordshine
+Xitax
+Chris H
 
 
 (Quest icons used created by Teekatas, from his Legendora set http://raindropmemory.deviantart.com)
