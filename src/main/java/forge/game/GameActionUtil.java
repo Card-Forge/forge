@@ -57,6 +57,7 @@ import forge.card.cost.CostReveal;
 import forge.card.cost.CostSacrifice;
 import forge.card.cost.CostTapType;
 import forge.card.mana.ManaCost;
+import forge.card.mana.ManaCostBeingPaid;
 import forge.card.spellability.Ability;
 import forge.card.spellability.AbilityManaPart;
 import forge.card.spellability.AbilitySub;
@@ -1209,6 +1210,22 @@ public final class GameActionUtil {
                 final Cost cost = new Cost(keyword.substring(17), false).add(newSA.getPayCosts().copyWithNoMana());
                 newSA.setPayCosts(cost);
                 newSA.setDescription(sa.getDescription() + " (by paying " + cost.toSimpleString() + " instead of its mana cost)");
+                alternatives.add(newSA);
+            }
+            if (sa.isSpell() && keyword.equals("You may cast CARDNAME any time you could cast an instant if you pay 2 more to cast it.")) {
+                final SpellAbility newSA = sa.copy();
+                newSA.setBasicSpell(false);
+                String cost = source.getManaCost().toString();
+                ManaCostBeingPaid newCost = new ManaCostBeingPaid(cost);
+                newCost.increaseColorlessMana(2);
+                cost = newCost.toString();
+                final Cost actualcost = new Cost(cost, false);
+                newSA.setPayCosts(actualcost);
+                SpellAbilityRestriction sar = new SpellAbilityRestriction();
+                sar.setVariables(sa.getRestrictions());
+                sar.setInstantSpeed(true);
+                newSA.setRestrictions(sar);
+                newSA.setDescription(sa.getDescription() + " (by paying " + actualcost.toSimpleString() + " instead of its mana cost)");
                 alternatives.add(newSA);
             }
         }

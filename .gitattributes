@@ -1293,6 +1293,7 @@ res/cardsfolder/b/break_of_day.txt -text
 res/cardsfolder/b/break_open.txt -text
 res/cardsfolder/b/breaking_entering.txt -text
 res/cardsfolder/b/breaking_point.txt -text
+res/cardsfolder/b/breaking_wave.txt -text
 res/cardsfolder/b/breakthrough.txt -text svneol=unset#text/plain
 res/cardsfolder/b/breath_of_darigaaz.txt -text svneol=unset#text/plain
 res/cardsfolder/b/breath_of_dreams.txt svneol=native#text/plain
@@ -4152,6 +4153,7 @@ res/cardsfolder/g/ghastly_remains.txt -text
 res/cardsfolder/g/ghave_guru_of_spores.txt -text
 res/cardsfolder/g/ghazban_ogre.txt -text
 res/cardsfolder/g/ghitu_encampment.txt svneol=native#text/plain
+res/cardsfolder/g/ghitu_fire.txt -text
 res/cardsfolder/g/ghitu_fire_eater.txt svneol=native#text/plain
 res/cardsfolder/g/ghitu_firebreathing.txt svneol=native#text/plain
 res/cardsfolder/g/ghitu_slinger.txt svneol=native#text/plain
@@ -6753,6 +6755,7 @@ res/cardsfolder/m/minamo_scrollkeeper.txt svneol=native#text/plain
 res/cardsfolder/m/minamo_sightbender.txt svneol=native#text/plain
 res/cardsfolder/m/mind_burst.txt svneol=native#text/plain
 res/cardsfolder/m/mind_control.txt svneol=native#text/plain
+res/cardsfolder/m/mind_extraction.txt -text
 res/cardsfolder/m/mind_funeral.txt svneol=native#text/plain
 res/cardsfolder/m/mind_games.txt svneol=native#text/plain
 res/cardsfolder/m/mind_grind.txt -text
@@ -8979,6 +8982,7 @@ res/cardsfolder/r/rotting_rats.txt svneol=native#text/plain
 res/cardsfolder/r/rough_tumble.txt -text
 res/cardsfolder/r/roughshod_mentor.txt svneol=native#text/plain
 res/cardsfolder/r/rouse.txt svneol=native#text/plain
+res/cardsfolder/r/rout.txt -text
 res/cardsfolder/r/rowan_treefolk.txt svneol=native#text/plain
 res/cardsfolder/r/rowen.txt -text
 res/cardsfolder/r/royal_assassin.txt svneol=native#text/plain
@@ -9177,6 +9181,7 @@ res/cardsfolder/s/saprazzan_skerry.txt svneol=native#text/plain
 res/cardsfolder/s/saproling_burst.txt -text
 res/cardsfolder/s/saproling_cluster.txt -text
 res/cardsfolder/s/saproling_infestation.txt -text
+res/cardsfolder/s/saproling_symbiosis.txt -text
 res/cardsfolder/s/sapseep_forest.txt svneol=native#text/plain
 res/cardsfolder/s/sarcatog.txt svneol=native#text/plain
 res/cardsfolder/s/sarcomancy.txt svneol=native#text/plain
@@ -11551,6 +11556,7 @@ res/cardsfolder/t/twigwalker.txt svneol=native#text/plain
 res/cardsfolder/t/twilight_drover.txt svneol=native#text/plain
 res/cardsfolder/t/twilight_mire.txt svneol=native#text/plain
 res/cardsfolder/t/twilight_shepherd.txt -text
+res/cardsfolder/t/twilights_call.txt -text
 res/cardsfolder/t/twinblade_slasher.txt svneol=native#text/plain
 res/cardsfolder/t/twincast.txt svneol=native#text/plain
 res/cardsfolder/t/twinning_glass.txt -text svneol=unset#text/plain

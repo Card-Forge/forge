@@ -1,0 +1,9 @@
+Name:Saproling Symbiosis
+ManaCost:3 G
+Types:Sorcery
+K:You may cast CARDNAME any time you could cast an instant if you pay 2 more to cast it.
+A:SP$ Token | Cost$ 3 G | TokenAmount$ X | References$ X | TokenName$ Saproling | TokenTypes$ Creature,Saproling | TokenOwner$ You | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1 | SpellDescription$ Put a 1/1 green Saproling creature token onto the battlefield for each creature you control.
+SVar:X:Count$Valid Creature.YouCtrl
+SVar:Picture:http://www.wizards.com/global/images/magic/general/saproling_symbiosis.jpg
+Oracle:You may cast Saproling Symbiosis any time you could cast an instant if you pay {2} more to cast it.\nPut a 1/1 green Saproling creature token onto the battlefield for each creature you control.
+SetInfo:INV Rare
