@@ -941,8 +941,12 @@ public class MagicStack extends MyObservable {
      *            object.
      */
     public final void remove(final SpellAbilityStackInstance si) {
-        this.getStack().remove(si);
-        this.getFrozenStack().remove(si);
+        synchronized (this.stack) {
+            this.getStack().remove(si);
+        }
+        synchronized (this.frozenStack) {
+            this.getFrozenStack().remove(si);
+        }
         this.updateObservers();
     }
 
