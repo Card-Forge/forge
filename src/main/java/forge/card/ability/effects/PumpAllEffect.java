@@ -84,6 +84,8 @@ public class PumpAllEffect extends SpellAbilityEffect {
                     sa.getSourceCard().addUntapCommand(untilEOT);
                 } else if (sa.hasParam("UntilEndOfCombat")) {
                     game.getEndOfCombat().addUntil(untilEOT);
+                } else if (sa.hasParam("UntilYourNextTurn")) {
+                    game.getCleanup().addUntil(sa.getActivatingPlayer(), untilEOT);
                 } else {
                     game.getEndOfTurn().addUntil(untilEOT);
                 }
