@@ -3,6 +3,7 @@ package forge.card.ability.ai;
 import java.util.Random;
 
 import forge.Card;
+import forge.CardLists;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
@@ -38,6 +39,13 @@ public class DigUntilAi extends SpellAbilityAi {
                 sa.getTarget().addTarget(opp);
             }
             libraryOwner = opp;
+        } else {
+            if (sa.hasParam("Valid")) {
+                final String valid = sa.getParam("Valid");
+                if (CardLists.getValidCards(ai.getCardsIn(ZoneType.Library), valid.split(","), source.getController(), source).isEmpty()) {
+                    return false;
+                }
+            }
         }
 
         final String num = sa.getParam("Amount");
