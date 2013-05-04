@@ -1,8 +1,10 @@
 http://www.cardforge.org/fpics/questAvatars/A%20Wolf%20in%20Sheeps%20Clothing.jpg
 http://www.cardforge.org/fpics/questAvatars/Abraham%20Lincoln.jpg
+http://www.cardforge.org/fpics/questAvatars/Air-Walker.jpg
 http://www.cardforge.org/fpics/questAvatars/Albert%20Einstein.jpg
 http://www.cardforge.org/fpics/questAvatars/Alice%20in%20Wonderland.jpg
-http://www.cardforge.org/fpics/questAvatars/amphibian.jpg
+http://www.cardforge.org/fpics/questAvatars/Amphibian.jpg
+http://www.cardforge.org/fpics/questAvatars/Anakin%20Skywalker.jpg
 http://www.cardforge.org/fpics/questAvatars/Ancient%20Battlefield.jpg
 http://www.cardforge.org/fpics/questAvatars/Apu%20Nahasapeemapetilon.jpg
 http://www.cardforge.org/fpics/questAvatars/Aquaman.jpg
@@ -51,6 +53,7 @@ http://www.cardforge.org/fpics/questAvatars/Dead%20Girl.jpg
 http://www.cardforge.org/fpics/questAvatars/Deadpool.jpg
 http://www.cardforge.org/fpics/questAvatars/Demon.jpg
 http://www.cardforge.org/fpics/questAvatars/Denethor.jpg
+http://www.cardforge.org/fpics/questAvatars/Diablo.jpg
 http://www.cardforge.org/fpics/questAvatars/Dilbert.jpg
 http://www.cardforge.org/fpics/questAvatars/Dino.jpg
 http://www.cardforge.org/fpics/questAvatars/Doc%20Holiday.jpg
@@ -108,6 +111,7 @@ http://www.cardforge.org/fpics/questAvatars/Higgins.jpg
 http://www.cardforge.org/fpics/questAvatars/Hobbes.jpg
 http://www.cardforge.org/fpics/questAvatars/Homer%20Simpson.jpg
 http://www.cardforge.org/fpics/questAvatars/House%20Party.jpg
+http://www.cardforge.org/fpics/questAvatars/Hugo%20Drax.jpg
 http://www.cardforge.org/fpics/questAvatars/Hulk.jpg
 http://www.cardforge.org/fpics/questAvatars/Iceman.jpg
 http://www.cardforge.org/fpics/questAvatars/Indiana%20Jones.jpg
@@ -131,6 +135,7 @@ http://www.cardforge.org/fpics/questAvatars/Krypto.jpg
 http://www.cardforge.org/fpics/questAvatars/Leprechaun.jpg
 http://www.cardforge.org/fpics/questAvatars/Lisa%20Simpson.jpg
 http://www.cardforge.org/fpics/questAvatars/Luke%20Skywalker.jpg
+http://www.cardforge.org/fpics/questAvatars/Lupin%20the%20Third.jpg
 http://www.cardforge.org/fpics/questAvatars/Maggie%20Simpson.jpg
 http://www.cardforge.org/fpics/questAvatars/Magneto.jpg
 http://www.cardforge.org/fpics/questAvatars/Magnum.jpg
