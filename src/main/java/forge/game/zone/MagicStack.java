@@ -944,9 +944,8 @@ public class MagicStack extends MyObservable {
         synchronized (this.stack) {
             this.getStack().remove(si);
         }
-        synchronized (this.frozenStack) {
-            this.getFrozenStack().remove(si);
-        }
+
+        this.getFrozenStack().remove(si);
         this.updateObservers();
     }
 
@@ -1110,7 +1109,9 @@ public class MagicStack extends MyObservable {
      * @return the stack
      */
     public final Stack<SpellAbilityStackInstance> getStack() {
-        return this.stack;
+        synchronized(this.stack) {
+            return this.stack;
+        }        
     }
 
     /**
