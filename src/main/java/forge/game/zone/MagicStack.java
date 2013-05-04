@@ -559,7 +559,10 @@ public class MagicStack extends MyObservable {
         }
 
         final SpellAbilityStackInstance si = new SpellAbilityStackInstance(sp);
-        this.getStack().push(si);
+        
+        synchronized (this.stack) {
+            this.getStack().push(si);
+        }
 
         // 2012-07-21 the following comparison needs to move below the pushes but somehow screws up priority
         // When it's down there. That makes absolutely no sense to me, so i'm putting it back for now
@@ -844,9 +847,12 @@ public class MagicStack extends MyObservable {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public final SpellAbility pop() {
-        final SpellAbilityStackInstance si = this.getStack().pop();
-        final SpellAbility sp = si.getSpellAbility();
-        return sp;
+        synchronized(this.stack)
+        {
+            final SpellAbilityStackInstance si = this.getStack().pop();
+            final SpellAbility sp = si.getSpellAbility();
+            return sp;
+        }
     }
 
     public final SpellAbility top() {
