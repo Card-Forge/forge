@@ -14,6 +14,14 @@ Reverted the synchronize changes since it seemed to break all of the trigger pay
 Added DGM into RTR block and made DGM lands no longer appear in the common slot.
 
 
+- DGM card pictures -
+Most but not all of the LQ non-set DGM card pics are now available for downloading. The DGM set pics might become available in about a couple of weeks or so.
+
+
+- Java 7 -
+The devs are discussing a plan to update the battlefield display code with Java FX 2.2 and this should help to improve a few things. Java FX 2.2 requires Java 7 so it is important for members of our user base to update in the near future as Forge at the time of the update will no longer run under Java 6.
+
+
 ---------
 New Cards
 ---------
