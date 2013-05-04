@@ -4211,13 +4211,13 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @param timestamp
      *            the timestamp
      */
-    public final void addChangedCardKeywords(final ArrayList<String> keywords, final ArrayList<String> removeKeywords,
+    public final void addChangedCardKeywords(final List<String> keywords, final List<String> removeKeywords,
             final boolean removeAllKeywords, final long timestamp) {
         
         // if the key already exists - merge entries
         if (changedCardKeywords.containsKey(timestamp)) {
-            ArrayList<String> kws = keywords;
-            ArrayList<String> rkws = removeKeywords;
+            List<String> kws = keywords;
+            List<String> rkws = removeKeywords;
             boolean remAll = removeAllKeywords;
             CardKeywords cks = changedCardKeywords.get(timestamp);
             kws.addAll(cks.getKeywords());

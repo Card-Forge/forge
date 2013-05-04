@@ -19,6 +19,22 @@ public class PumpAllEffect extends SpellAbilityEffect {
             final int d, final List<String> keywords, final ArrayList<ZoneType> affectedZones) {
         
         final GameState game = sa.getActivatingPlayer().getGame();
+        final long timestamp = game.getNextTimestamp();
+        final ArrayList<String> kws = new ArrayList<String>();
+        final ArrayList<String> hiddenkws = new ArrayList<String>();
+        boolean suspend = false;
+        
+        for (String kw : keywords) {
+            if (kw.startsWith("HIDDEN")) {
+                hiddenkws.add(kw);
+            } else {
+                kws.add(kw);
+                if (kw.equals("Suspend")) {
+                    suspend = true;
+                }
+            }
+        }
+        
         for (final Card tgtC : list) {
 
             // only pump things in the affected zones.
@@ -35,12 +51,13 @@ public class PumpAllEffect extends SpellAbilityEffect {
 
             tgtC.addTempAttackBoost(a);
             tgtC.addTempDefenseBoost(d);
+            tgtC.addChangedCardKeywords(kws, new ArrayList<String>(), false, timestamp);
 
-            for (int i = 0; i < keywords.size(); i++) {
-                tgtC.addExtrinsicKeyword(keywords.get(i));
-                if (keywords.get(i).equals("Suspend")) {
-                    tgtC.setSuspend(true);
-                }
+            for (String kw : hiddenkws) {
+                tgtC.addHiddenExtrinsicKeyword(kw);
+            }
+            if (suspend) {
+                tgtC.setSuspend(true);
             }
 
             if (sa.hasParam("RememberAllPumped")) {
@@ -56,11 +73,10 @@ public class PumpAllEffect extends SpellAbilityEffect {
                     public void run() {
                         tgtC.addTempAttackBoost(-1 * a);
                         tgtC.addTempDefenseBoost(-1 * d);
+                        tgtC.removeChangedCardKeywords(timestamp);
 
-                        if (keywords.size() > 0) {
-                            for (int i = 0; i < keywords.size(); i++) {
-                                tgtC.removeExtrinsicKeyword(keywords.get(i));
-                            }
+                        for (String kw : hiddenkws) {
+                            tgtC.removeHiddenExtrinsicKeyword(kw);
                         }
                     }
                 };

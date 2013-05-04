@@ -43,7 +43,7 @@ public class PumpEffect extends SpellAbilityEffect {
 
         applyTo.addTempAttackBoost(a);
         applyTo.addTempDefenseBoost(d);
-        applyTo.addChangedCardKeywords(kws, null, false, timestamp);
+        applyTo.addChangedCardKeywords(kws, new ArrayList<String>(), false, timestamp);
 
         if (!sa.hasParam("Permanent")) {
             // If not Permanent, remove Pumped at EOT

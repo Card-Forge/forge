@@ -57,6 +57,7 @@ public class DebuffEffect extends SpellAbilityEffect {
     public void resolve(SpellAbility sa) {
         final List<String> kws = sa.hasParam("Keywords") ? Arrays.asList(sa.getParam("Keywords").split(" & ")) : new ArrayList<String>();
         final GameState game = sa.getActivatingPlayer().getGame();
+        final long timestamp = game.getNextTimestamp();
 
         for (final Card tgtC : getTargetCards(sa)) {
             final ArrayList<String> hadIntrinsic = new ArrayList<String>();
@@ -67,6 +68,7 @@ public class DebuffEffect extends SpellAbilityEffect {
                     }
                     tgtC.removeIntrinsicKeyword(kw);
                     tgtC.removeAllExtrinsicKeyword(kw);
+                    tgtC.addChangedCardKeywords(new ArrayList<String>(), kws, false, timestamp);
                 }
             }
             if (!sa.hasParam("Permanent")) {
@@ -75,6 +77,7 @@ public class DebuffEffect extends SpellAbilityEffect {
 
                     @Override
                     public void run() {
+                        tgtC.removeChangedCardKeywords(timestamp);
                         if (tgtC.isInPlay()) {
                             for (final String kw : hadIntrinsic) {
                                 tgtC.addIntrinsicKeyword(kw);

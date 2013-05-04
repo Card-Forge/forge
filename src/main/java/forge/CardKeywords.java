@@ -17,6 +17,7 @@
  */
 package forge;
 
+import java.util.List;
 import java.util.ArrayList;
 
 /**
@@ -29,8 +30,8 @@ import java.util.ArrayList;
  */
 public class CardKeywords {
     // takes care of individual card types
-    private ArrayList<String> keywords = new ArrayList<String>();
-    private ArrayList<String> removeKeywords = new ArrayList<String>();
+    private List<String> keywords = new ArrayList<String>();
+    private List<String> removeKeywords = new ArrayList<String>();
     private boolean removeAllKeywords = false;
 
     /**
@@ -46,7 +47,7 @@ public class CardKeywords {
      * @param stamp
      *            a long
      */
-    CardKeywords(final ArrayList<String> keywordList, final ArrayList<String> removeKeywordList, final boolean removeAll) {
+    CardKeywords(final List<String> keywordList, final List<String> removeKeywordList, final boolean removeAll) {
         this.keywords = keywordList;
         this.removeKeywords = removeKeywordList;
         this.removeAllKeywords = removeAll;
@@ -58,7 +59,7 @@ public class CardKeywords {
      * 
      * @return ArrayList<String>
      */
-    public final ArrayList<String> getKeywords() {
+    public final List<String> getKeywords() {
         return this.keywords;
     }
 
@@ -68,7 +69,7 @@ public class CardKeywords {
      * 
      * @return ArrayList<String>
      */
-    public final ArrayList<String> getRemoveKeywords() {
+    public final List<String> getRemoveKeywords() {
         return this.removeKeywords;
     }
 
