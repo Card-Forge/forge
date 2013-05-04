@@ -757,20 +757,8 @@ public class ManaCostBeingPaid {
                 } 
             } else {
                 // TODO: AI to choose a creature to tap would go here
-                // Probably along with deciding how many creatures to
-                // tap
-                
-                if ( MyRandom.getRandom().nextInt(3) == 0 ) // 66% chance to chose first creature, 33% to cancel
-                    workingCard = untappedCreats.get(0);
-                
-                if( null == workingCard ) 
-                    break; // that means "I'm done"
-                
-                List<String> usableColors = getConvokableColors(workingCard);
-                if ( !usableColors.isEmpty() ) {
-                    // TODO: AI for choosing which color to convoke goes here.
-                    chosenColor = usableColors.get(0);
-                }
+                // Probably along with deciding how many creatures to tap
+                break;
 
             }
             untappedCreats.remove(workingCard);
