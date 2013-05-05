@@ -132,6 +132,7 @@ http://www.cardforge.org/fpics/questAvatars/King%20Goldemar.jpg
 http://www.cardforge.org/fpics/questAvatars/King%20Kong.jpg
 http://www.cardforge.org/fpics/questAvatars/Kojak.jpg
 http://www.cardforge.org/fpics/questAvatars/Krypto.jpg
+http://www.cardforge.org/fpics/questAvatars/LeChuck.jpg
 http://www.cardforge.org/fpics/questAvatars/Leprechaun.jpg
 http://www.cardforge.org/fpics/questAvatars/Lisa%20Simpson.jpg
 http://www.cardforge.org/fpics/questAvatars/Luke%20Skywalker.jpg
