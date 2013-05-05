@@ -917,15 +917,26 @@ public class ComputerUtilBlock {
     }
 
     public static List<Card> orderBlockers(Card attacker, List<Card> blockers) {
-        // very very simple ordering of blockers, sort by evaluate, then sort by attack
-        //final int damage = attacker.getNetCombatDamage();
+        // ordering of blockers, sort by evaluate, then try to kill the best
+        int damage = attacker.getNetCombatDamage();
         CardLists.sortByEvaluateCreature(blockers);
-        CardLists.sortByPowerDesc(blockers);
+        final List<Card> first = new ArrayList<Card>();
+        final List<Card> last = new ArrayList<Card>();
+        for (Card blocker : blockers) {
+            int lethal = ComputerUtilCombat.getEnoughDamageToKill(blocker, damage, attacker, true);
+            if (lethal > damage) {
+                last.add(blocker);
+            } else {
+                first.add(blocker);
+                damage -= lethal;
+            }
+        }
+        first.addAll(last);
 
         // TODO: Take total damage, and attempt to maximize killing the greatest evaluation of creatures
         // It's probably generally better to kill the largest creature, but sometimes its better to kill a few smaller ones
 
-        return blockers;
+        return first;
     }
 
     public static List<Card> orderAttackers(Card attacker, List<Card> blockers) {
