@@ -4,7 +4,7 @@ AlternateMode: Split
 Types:Sorcery
 K:Fuse
 A:SP$ Mill | Cost$ U B | NumCards$ 8 | ValidTgts$ Player | TgtPrompt$ Choose a player | SpellDescription$ Target player puts the top eight cards of his or her library into his or her graveyard.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/breakingd_entering.jpg
+SVar:Picture:http://www.wizards.com/global/images/magic/general/breaking_entering.jpg
 Oracle:Target player puts the top eight cards of his or her library into his or her graveyard.\nFuse (You may cast one or both halves of this card from your hand.)
 ALTERNATE
 Name:Entering
