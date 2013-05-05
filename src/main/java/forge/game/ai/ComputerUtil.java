@@ -854,9 +854,8 @@ public class ComputerUtil {
 
         // get all cards the computer controls with BuffedBy
         final List<Card> buffed = ai.getCardsIn(ZoneType.Battlefield);
-        for (int j = 0; j < buffed.size(); j++) {
-            final Card buffedcard = buffed.get(j);
-            if (buffedcard.getSVar("BuffedBy").length() > 0) {
+        for (Card buffedcard : buffed) {
+            if (buffedcard.hasSVar("BuffedBy")) {
                 final String buffedby = buffedcard.getSVar("BuffedBy");
                 final String[] bffdby = buffedby.split(",");
                 if (card.isValid(bffdby, buffedcard.getController(), buffedcard)) {
@@ -866,12 +865,20 @@ public class ComputerUtil {
             if (card.isEquipment() && buffedcard.isCreature() && CombatUtil.canAttack(buffedcard, ai.getOpponent())) {
                 return true;
             }
-            if (card.isCreature() && buffedcard.hasKeyword("Soulbond") && !buffedcard.isPaired()) {
-                return true;
+            if (card.isCreature()) {
+                if (buffedcard.hasKeyword("Soulbond") && !buffedcard.isPaired()) {
+                    return true;
+                }
+                if (buffedcard.hasKeyword("Evolve")) {
+                    if (buffedcard.getNetAttack() < card.getNetAttack() || buffedcard.getNetDefense() < card.getNetDefense()) {
+                        return true;
+                    }
+                }
             }
             if (card.hasKeyword("Soulbond") && buffedcard.isCreature() && !buffedcard.isPaired()) {
                 return true;
             }
+
         } // BuffedBy
 
         // get all cards the human controls with AntiBuffedBy
