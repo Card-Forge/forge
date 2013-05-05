@@ -128,7 +128,7 @@ public class SacrificeAi extends SpellAbilityAi {
             List<Card> computerList =
                     CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), valid.split(","), sa.getActivatingPlayer(), sa.getSourceCard());
             for (Card c : computerList) {
-                if (!c.getSVar("SacMe").equals("") || ComputerUtilCard.evaluateCreature(c) <= 135) {
+                if (c.hasSVar("SacMe") || ComputerUtilCard.evaluateCreature(c) <= 135) {
                     return true;
                 }
             }

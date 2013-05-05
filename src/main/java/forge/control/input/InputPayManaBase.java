@@ -213,7 +213,7 @@ public abstract class InputPayManaBase extends InputSyncronizedBase implements I
         String colorsNeeded = colorRequired.toString();
         if ("1".equals(colorsNeeded)) {  // only colorless left
             if (saPaidFor.getSourceCard() != null
-                    && !saPaidFor.getSourceCard().getSVar("ManaNeededToAvoidNegativeEffect").equals("")) {
+                    && saPaidFor.getSourceCard().hasSVar("ManaNeededToAvoidNegativeEffect")) {
                 colorsNeeded = "";
                 String[] negEffects = saPaidFor.getSourceCard().getSVar("ManaNeededToAvoidNegativeEffect").split(",");
                 for (String negColor : negEffects) {

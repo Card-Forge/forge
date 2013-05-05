@@ -1163,7 +1163,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                         fetchList = CardLists.filter(fetchList, new Predicate<Card>() {
                             @Override
                             public boolean apply(final Card c) {
-                                if (!c.getSVar("RemAIDeck").equals("") || !c.getSVar("RemRandomDeck").equals("")) {
+                                if (c.hasSVar("RemAIDeck") || c.hasSVar("RemRandomDeck")) {
                                     return false;
                                 }
                                 return true;

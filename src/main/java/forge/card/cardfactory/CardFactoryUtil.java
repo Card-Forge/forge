@@ -2352,7 +2352,7 @@ public class CardFactoryUtil {
         } // Vanishing
 
         // AddCost
-        if (!card.getSVar("FullCost").equals("")) {
+        if (card.hasSVar("FullCost")) {
             final SpellAbility sa1 = card.getFirstSpellAbility();
             if (sa1 != null && sa1.isSpell()) {
                 sa1.setPayCosts(new Cost(card.getSVar("FullCost"), sa1.isAbility()));

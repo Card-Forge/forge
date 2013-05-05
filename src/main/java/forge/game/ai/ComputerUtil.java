@@ -352,7 +352,7 @@ public class ComputerUtil {
                 final List<Card> sacMeList = CardLists.filter(typeList, new Predicate<Card>() {
                     @Override
                     public boolean apply(final Card c) {
-                        return (!c.getSVar("SacMe").equals("") && (Integer.parseInt(c.getSVar("SacMe")) == priority));
+                        return (c.hasSVar("SacMe") && (Integer.parseInt(c.getSVar("SacMe")) == priority));
                     }
                 });
                 if (sacMeList.size() != 0) {
@@ -372,7 +372,7 @@ public class ComputerUtil {
                             && !ai.getCardsIn(ZoneType.Battlefield, "Crucible of Worlds").isEmpty()) {
                         return c;
                     }
-                    if (!c.getSVar("DiscardMe").equals("") && (Integer.parseInt(c.getSVar("DiscardMe")) == priority)) {
+                    if (c.hasSVar("DiscardMe") && Integer.parseInt(c.getSVar("DiscardMe")) == priority) {
                         return c;
                     }
                 }
@@ -667,7 +667,7 @@ public class ComputerUtil {
         for (int ip = 0; ip < 6; ip++) { // priority 0 is the lowest, priority 5 the highest
             final int priority = 6 - ip;
             for (Card card : remaining) {
-                if (!card.getSVar("SacMe").equals("") && Integer.parseInt(card.getSVar("SacMe")) == priority) {
+                if (card.hasSVar("SacMe") && Integer.parseInt(card.getSVar("SacMe")) == priority) {
                     return card;
                 }
             }
@@ -937,7 +937,7 @@ public class ComputerUtil {
      * @return boolean
      */
     public static boolean isWorseThanDraw(final Player ai, Card discard) {
-        if (!discard.getSVar("DiscardMe").equals("")) {
+        if (discard.hasSVar("DiscardMe")) {
             return true;
         }
         
@@ -1326,7 +1326,7 @@ public class ComputerUtil {
         List<Card> goodChoices = CardLists.filter(validCards, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
-                if (!c.getSVar("DiscardMeByOpp").equals("") || !c.getSVar("DiscardMe").equals("")) {
+                if (c.hasSVar("DiscardMeByOpp") || c.hasSVar("DiscardMe")) {
                     return false;
                 }
                 return true;
