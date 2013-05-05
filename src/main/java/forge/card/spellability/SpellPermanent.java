@@ -219,7 +219,7 @@ public class SpellPermanent extends Spell {
         final GameState game = ai.getGame();
 
         if (card.isCreature()
-                && ai.getGame().getStaticEffects().getGlobalRuleChange(GlobalRuleChange.noCreatureETBTriggers)) {
+                && game.getStaticEffects().getGlobalRuleChange(GlobalRuleChange.noCreatureETBTriggers)) {
             return api == null;
         }
 
@@ -263,6 +263,11 @@ public class SpellPermanent extends Spell {
                 // Abilities yet
                 continue;
             }
+            
+            // if trigger is not mandatory - no problem
+            if (params.get("OptionalDecider") != null) {
+                continue;
+            }
 
             // Maybe better considerations
             final String execute = params.get("Execute");
@@ -282,26 +287,16 @@ public class SpellPermanent extends Spell {
             if (sa != null) {
                 exSA.setActivatingPlayer(sa.getActivatingPlayer());
             }
-            else if (ai != null) {
-                exSA.setActivatingPlayer(ai);
-            }
             else {
-                throw new InvalidParameterException("Either ai or sa must be not null!");
+                exSA.setActivatingPlayer(ai);
             }
             exSA.setTrigger(true);
 
             // Run non-mandatory trigger.
-            // These checks only work if the Executing SpellAbility is an
-            // Ability_Sub.
+            // These checks only work if the Executing SpellAbility is an Ability_Sub.
             if ((exSA instanceof AbilitySub) && !exSA.doTrigger(false, ai)) {
                 // AI would not run this trigger if given the chance
-
-                // if trigger is mandatory, return false
-                if (params.get("OptionalDecider") == null) {
-                    return false;
-                }
-                // else
-                // otherwise, return false 50% of the time?
+                return false;
             }
         }
         if (api != null && !rightapi) {
@@ -349,11 +344,8 @@ public class SpellPermanent extends Spell {
                 if (sa != null) {
                     exSA.setActivatingPlayer(sa.getActivatingPlayer());
                 }
-                else if (ai != null) {
-                    exSA.setActivatingPlayer(ai);
-                }
                 else {
-                    throw new InvalidParameterException("Either ai or sa must be not null!");
+                    exSA.setActivatingPlayer(ai);
                 }
 
                 if (exSA.getActivatingPlayer() == null) {
@@ -362,8 +354,7 @@ public class SpellPermanent extends Spell {
             }
 
             // ETBReplacement uses overriding abilities.
-            // These checks only work if the Executing SpellAbility is an
-            // Ability_Sub.
+            // These checks only work if the Executing SpellAbility is an Ability_Sub.
             if (exSA != null && (exSA instanceof AbilitySub) && !exSA.doTrigger(false, ai)) {
                 return false;
             }
