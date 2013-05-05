@@ -74,6 +74,12 @@ public class TokenAi extends SpellAbilityAi {
             return false;
         }
 
+        if (sa.hasParam("AILogic")) {
+            if ("Never".equals(sa.getParam("AILogic"))) {
+                return false;
+            }
+        }
+
         Player opp = ai.getOpponent();
         for (final String type : this.tokenTypes) {
             if (type.equals("Legendary")) {

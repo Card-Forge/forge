@@ -83,6 +83,8 @@ public class AnimateAi extends SpellAbilityAi {
                     } else {
                         bFlag = true;
                     }
+                } if ("Never".equals(sa.getParam("AILogic"))) {
+                    return false;
                 }
             } else for (final Card c : defined) {
                 bFlag |= !c.isCreature() && !c.isTapped()
