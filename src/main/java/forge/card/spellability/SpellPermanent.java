@@ -130,7 +130,8 @@ public class SpellPermanent extends Spell {
                 && ai.getManaPool().totalMana() <= 0
                 && (game.getPhaseHandler().isPlayerTurn(ai)
                         || game.getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY)
-                && !card.hasETBTrigger())) {
+                && !card.hasETBTrigger())
+                && !ComputerUtil.castPermanentInMain1(ai, this)) {
             return false;
         }
 
