@@ -425,12 +425,10 @@ public class Upkeep extends Phase {
         for (final Card c : cards) {
             final Card abyss = c;
 
-            final List<Card> abyssGetTargets = CardLists.filter(player.getCreaturesInPlay(), Presets.NON_ARTIFACTS);
-
             final Ability sacrificeCreature = new Ability(abyss, ManaCost.NO_COST) {
                 @Override
                 public void resolve() {
-                    final List<Card> targets = CardLists.getTargetableCards(abyssGetTargets, this);
+                    final List<Card> targets = CardLists.getTargetableCards(CardLists.filter(player.getCreaturesInPlay(), Presets.NON_ARTIFACTS), this);
                     if (player.isHuman() && targets.size() > 0) {
                         final InputSelectCards chooseArt = new InputSelectCards(1, 1) {
                             private static final long serialVersionUID = 4820011040853968644L;
