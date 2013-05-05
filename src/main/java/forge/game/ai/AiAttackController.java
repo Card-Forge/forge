@@ -637,13 +637,6 @@ public class AiAttackController {
         // compare the ratios, higher = better for ai
         final double ratioDiff = aiLifeToPlayerDamageRatio - humanLifeToDamageRatio;
 
-        /*
-         * System.out.println(String.valueOf(ratioDiff) +
-         * " = ratio difference, higher = better for ai");
-         * System.out.println(String.valueOf(outNumber) +
-         * " = outNumber, higher = better for ai");
-         */
-
         // *********************
         // if outnumber and superior ratio work out whether attritional all out
         // attacking will work
@@ -744,10 +737,9 @@ public class AiAttackController {
             this.aiAggression = 5; // attack at all costs
         } else if (ratioDiff >= 1 && (humanLifeToDamageRatio < 2 || outNumber > 0)) {
             this.aiAggression = 4; // attack expecting to trade or damage player.
-        } else if ((humanLifeToDamageRatio < 2 && ratioDiff >= 0) || ratioDiff > 3
-                || (ratioDiff > 0 && outNumber > 0)) {
+        } else if (ratioDiff >= 0) {
             this.aiAggression = 3; // attack expecting to make good trades or damage player.
-        } else if (ratioDiff >= 0 || ratioDiff + outNumber >= -1 || aiLifeToPlayerDamageRatio > 1
+        } else if (ratioDiff + outNumber >= -1 || aiLifeToPlayerDamageRatio > 1
                 || ratioDiff * -1 < turnsUntilDeathByUnblockable) {
             // at 0 ratio expect to potentially gain an advantage by attacking first
             // if the ai has a slight advantage
@@ -769,8 +761,6 @@ public class AiAttackController {
         System.out.println("Normal attack");
 
         attackersLeft = this.notNeededAsBlockers(ai, attackersLeft);
-        System.out.println(attackersLeft.size());
-
         attackersLeft = this.sortAttackers(attackersLeft);
 
         int iDefender = combat.getDefenders().indexOf(defender);
@@ -900,7 +890,7 @@ public class AiAttackController {
                                              // the creature
                     // see if the defending creature is of higher or lower
                     // value. We don't want to attack only to lose value
-                    if (isWorthLessThanAllKillers && attacker.getSVar("SacMe").equals("")
+                    if (isWorthLessThanAllKillers && !attacker.hasSVar("SacMe")
                             && ComputerUtilCard.evaluateCreature(defender) <= ComputerUtilCard.evaluateCreature(attacker)) {
                         isWorthLessThanAllKillers = false;
                     }
@@ -930,7 +920,7 @@ public class AiAttackController {
 
         // if the creature cannot block and can kill all opponents they might as
         // well attack, they do nothing staying back
-        if (canKillAll && !CombatUtil.canBlock(attacker) && isWorthLessThanAllKillers) {
+        if (canKillAll && isWorthLessThanAllKillers && !CombatUtil.canBlock(attacker)) {
             System.out.println(attacker.getName()
                     + " = attacking because they can't block, expecting to kill or damage player");
             return true;

@@ -347,6 +347,18 @@ public class CardCharacteristics {
 
     /**
      * <p>
+     * hasSVar.
+     * </p>
+     * 
+     * @param var
+     *            a {@link java.lang.String} object.
+     */
+    public final boolean hasSVar(final String var) {
+        return this.sVars.containsKey(var);
+    }
+
+    /**
+     * <p>
      * setSVar.
      * </p>
      * 

@@ -1389,6 +1389,18 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     /**
      * <p>
+     * hasSVar.
+     * </p>
+     * 
+     * @param var
+     *            a {@link java.lang.String} object.
+     */
+    public final boolean hasSVar(final String var) {
+        return this.getCharacteristics().hasSVar(var);
+    }
+
+    /**
+     * <p>
      * setSVar.
      * </p>
      * 
