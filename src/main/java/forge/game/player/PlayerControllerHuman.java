@@ -248,8 +248,13 @@ public class PlayerControllerHuman extends PlayerController {
         int max = Math.min(amount, validTargets.size());
         if (max <= 0)
             return new ArrayList<Card>();
+        
+        int min = isOptional ? 0 : amount;
+        if (min > max) {
+            min = max;
+        }
 
-        InputSelectCards inp = new InputSelectCardsFromList(isOptional ? 0 : amount, max, validTargets);
+        InputSelectCards inp = new InputSelectCardsFromList(min, max, validTargets);
         // TODO: Either compose a message here, or pass it as parameter from caller. 
         inp.setMessage("Select %d " + validMessage + "(s) to sacrifice");
         
