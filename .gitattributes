@@ -2518,6 +2518,7 @@ res/cardsfolder/d/deep_reconnaissance.txt svneol=native#text/plain
 res/cardsfolder/d/deep_sea_kraken.txt svneol=native#text/plain
 res/cardsfolder/d/deep_sea_serpent.txt svneol=native#text/plain
 res/cardsfolder/d/deep_slumber_titan.txt svneol=native#text/plain
+res/cardsfolder/d/deep_spawn.txt -text
 res/cardsfolder/d/deep_wood.txt -text
 res/cardsfolder/d/deepcavern_imp.txt -text
 res/cardsfolder/d/deepchannel_mentor.txt svneol=native#text/plain

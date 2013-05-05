@@ -1,0 +1,15 @@
+Name:Deep Spawn
+ManaCost:5 U U U
+Types:Creature Homarid
+Text:no text
+PT:6/6
+K:Trample
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigSac | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, sacrifice CARDNAME unless you put the top two cards of your library into your graveyard.
+SVar:TrigSac:AB$ Sacrifice | Cost$ 0 | Defined$ Self | UnlessCost$ Mill<2> | UnlessPayer$ You
+A:AB$ Pump | Cost$ U | KW$ Shroud | SubAbility$ DBPump | SpellDescription$ CARDNAME gains shroud until end of turn and doesn't untap during your next untap step. Tap CARDNAME. (A permanent with shroud can't be the target of spells or abilities.)
+SVar:DBPump:DB$ Pump | KW$ HIDDEN This card doesn't untap during your next untap step. | Permanent$ True | SubAbility$ DBTap
+SVar:DBTap:DB$ Tap | Defined$ Self
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/deep_spawn.jpg
+Oracle:Trample\nAt the beginning of your upkeep, sacrifice Deep Spawn unless you put the top two cards of your library into your graveyard.\n{U}: Deep Spawn gains shroud until end of turn and doesn't untap during your next untap step. Tap Deep Spawn. (A permanent with shroud can't be the target of spells or abilities.)
+SetInfo:FEM Uncommon

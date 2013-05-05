@@ -46,6 +46,7 @@ import forge.card.cost.Cost;
 import forge.card.cost.CostDamage;
 import forge.card.cost.CostDiscard;
 import forge.card.cost.CostExile;
+import forge.card.cost.CostMill;
 import forge.card.cost.CostPart;
 import forge.card.cost.CostPartMana;
 import forge.card.cost.CostPartWithList;
@@ -446,6 +447,16 @@ public final class GameActionUtil {
                     return false;
 
                 p.payLife(amount, null);
+            }
+
+            else if (part instanceof CostMill) {
+                final int amount = getAmountFromPart(part, source, sourceAbility);
+                final List<Card> list = p.getCardsIn(ZoneType.Library);
+                if (list.size() < amount) return false;
+                if (!GuiDialog.confirm(source, "Do you want to mill " + amount + " card(s)?" + orString))
+                    return false;
+                List<Card> listmill = p.getCardsIn(ZoneType.Library, amount);
+                ((CostMill) part).executePayment(sourceAbility, listmill);
             }
 
             else if (part instanceof CostDamage) {
