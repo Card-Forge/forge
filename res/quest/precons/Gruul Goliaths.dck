@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Gruul Goliaths
-Description=Join the Boros Legion and become part of a unified attack force! The "Boros Battalion" deck hammers that point home by way of the battalion mechanic. Whenever you attack with a creature that has battalion and at least two other creatures, an effect that makes your assault even more powerful happens!
+Description=In the Gruul Clans, bigger is better, and with the "Gruul Goliaths" deck, you'll be king of the hill. Gruul creatures crave battle so much, sometimes they don't even wait until they're on the battlefield!
 Deck Type=constructed
 Set=GTC
 Image=gruul_goliaths.jpg
