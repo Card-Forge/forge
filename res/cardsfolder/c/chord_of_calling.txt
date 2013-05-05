@@ -1,0 +1,9 @@
+Name:Chord of Calling
+ManaCost:X G G G
+Types:Instant
+K:Convoke
+A:SP$ ChangeZone | Announce$ X | Cost$ X G G G | Origin$ Library | Destination$ Battlefield | ChangeType$ Creature.cmcLEX | ChangeNum$ 1 | References$ X | SpellDescription$ Search your library for a creature card with converted mana cost X or less and put it onto the battlefield. Then shuffle your library.
+SVar:X:Count$xPaid
+SVar:Picture:http://www.wizards.com/global/images/magic/general/chord_of_calling.jpg
+Oracle:Convoke (Each creature you tap while casting this spell reduces its cost by {1} or by one mana of that creature's color.)\nSearch your library for a creature card with converted mana cost X or less and put it onto the battlefield. Then shuffle your library.
+SetInfo:RAV Rare
