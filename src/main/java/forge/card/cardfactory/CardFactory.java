@@ -81,7 +81,9 @@ public class CardFactory {
      */
     public final static Card copyCard(final Card in) {
         final CardCharacteristicName curState = in.getCurState();
+        boolean alternate = false;
         if (in.isInAlternateState()) {
+            alternate = true;
             in.setState(CardCharacteristicName.Original);
         }
         final Card out = getCard(CardDb.getCard(in), in.getOwner());
@@ -97,9 +99,11 @@ public class CardFactory {
                 out.setState(state);
                 CardFactory.copyCharacteristics(in, out);
             }
-            in.setState(curState);
-            out.setState(curState);
         }
+        if (alternate) {
+            in.setState(curState);
+        }
+        out.setState(curState);
 
         // I'm not sure if we really should be copying enchant/equip stuff over.
         out.setEquipping(in.getEquipping());
