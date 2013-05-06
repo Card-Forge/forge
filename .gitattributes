@@ -13798,6 +13798,7 @@ src/main/java/forge/card/ability/ai/EffectAi.java -text
 src/main/java/forge/card/ability/ai/EncodeAi.java -text
 src/main/java/forge/card/ability/ai/EndTurnAi.java -text
 src/main/java/forge/card/ability/ai/FightAi.java -text
+src/main/java/forge/card/ability/ai/FlipACoinAi.java -text
 src/main/java/forge/card/ability/ai/FogAi.java -text
 src/main/java/forge/card/ability/ai/GameLossAi.java -text
 src/main/java/forge/card/ability/ai/GameWinAi.java -text

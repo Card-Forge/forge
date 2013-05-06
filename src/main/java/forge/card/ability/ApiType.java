@@ -53,6 +53,7 @@ import forge.card.ability.ai.EffectAi;
 import forge.card.ability.ai.EncodeAi;
 import forge.card.ability.ai.EndTurnAi;
 import forge.card.ability.ai.FightAi;
+import forge.card.ability.ai.FlipACoinAi;
 import forge.card.ability.ai.FogAi;
 import forge.card.ability.ai.GameLossAi;
 import forge.card.ability.ai.GameWinAi;
@@ -150,7 +151,7 @@ public enum ApiType {
     ExchangeLife (LifeExchangeEffect.class, LifeExchangeAi.class),
     ExchangeControl (ControlExchangeEffect.class, ControlExchangeAi.class),
     Fight (FightEffect.class, FightAi.class),
-    FlipACoin (FlipCoinEffect.class, AlwaysPlayAi.class),
+    FlipACoin (FlipCoinEffect.class, FlipACoinAi.class),
     Fog (FogEffect.class, FogAi.class),
     GainControl (ControlGainEffect.class, ControlGainAi.class),
     GainLife (LifeGainEffect.class, LifeGainAi.class),
