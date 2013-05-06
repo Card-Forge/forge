@@ -1,4 +1,4 @@
-[Dragon's Maze Lands]
+[DGM Lands]
 10 Azorius Guildgate|DGM
 10 Boros Guildgate|DGM 
 10 Dimir Guildgate|DGM
@@ -20,3 +20,640 @@
 2 Stomping Ground|GTC
 2 Watery Grave|GTC
 1 Maze's End|DGM
+
+[GTC Boros Guild]
+1 Act of Treason|GTC
+1 Aerial Maneuver|GTC
+1 Angelic Edict|GTC
+1 Arrows of Justice|GTC
+1 Assault Griffin|GTC
+1 Assemble the Legion|GTC
+1 Aurelia, the Warleader|GTC
+1 Bomber Corps|GTC
+1 Boros Charm|GTC
+1 Boros Elite|GTC
+1 Boros Keyrune|GTC
+1 Boros Reckoner|GTC
+1 Cinder Elemental|GTC
+1 Court Street Denizen|GTC
+1 Crackling Perimeter|GTC
+1 Daring Skyjek|GTC
+1 Debtor's Pulpit|GTC
+1 Ember Beast|GTC
+1 Firefist Striker|GTC
+1 Firemane Avenger|GTC
+1 Fortress Cyclops|GTC
+1 Foundry Street Denizen|GTC
+1 Frontline Medic|GTC
+1 Furious Resistance|GTC
+1 Guardian of the Gateless|GTC
+1 Guildscorn Ward|GTC
+1 Hellraiser Goblin|GTC
+1 Homing Lightning|GTC
+1 Knight Watch|GTC
+1 Legion Loyalist|GTC
+1 Madcap Skills|GTC
+1 Mark for Death|GTC
+1 Martial Glory|GTC
+1 Massive Raid|GTC
+1 Molten Primordial|GTC
+1 Mugging|GTC
+1 Murder Investigation|GTC
+1 Nav Squad Commandos|GTC
+1 Ordruun Veteran|GTC
+1 Righteous Charge|GTC
+1 Ripscale Predator|GTC
+1 Shattering Blow|GTC
+1 Shielded Passage|GTC
+1 Skullcrack|GTC
+1 Skyknight Legionnaire|GTC
+1 Smite|GTC
+1 Spark Trooper|GTC
+1 Structural Collapse|GTC
+1 Sunhome Guildmage|GTC
+1 Tin Street Market|GTC
+1 Towering Thunderfist|GTC
+1 Truefire Paladin|GTC
+1 Urbis Protector|GTC
+1 Warmind Infantry|GTC
+1 Wojek Halberdiers|GTC
+1 Zarichi Tiger|GTC
+
+[GTC Dimir Guild]
+1 AEtherize|GTC
+1 Agoraphobia|GTC
+1 Balustrade Spy|GTC
+1 Call of the Nightwing|GTC
+1 Coerced Confession|GTC
+1 Contaminated Ground|GTC
+1 Corpse Blockade|GTC
+1 Death's Approach|GTC
+1 Deathcult Rogue|GTC
+1 Dimir Charm|GTC
+1 Dimir Keyrune|GTC
+1 Dinrova Horror|GTC
+1 Duskmantle Guildmage|GTC
+1 Dying Wish|GTC
+1 Gateway Shade|GTC
+1 Gridlock|GTC
+1 Grisly Spectacle|GTC
+1 Gutter Skulk|GTC
+1 Hands of Binding|GTC
+1 Horror of the Dim|GTC
+1 Illness in the Ranks|GTC
+1 Incursion Specialist|GTC
+1 Keymaster Rogue|GTC
+1 Killing Glare|GTC
+1 Last Thoughts|GTC
+1 Lazav, Dimir Mastermind|GTC
+1 Leyline Phantom|GTC
+1 Mental Vapors|GTC
+1 Metropolis Sprite|GTC
+1 Midnight Recovery|GTC
+1 Mind Grind|GTC
+1 Mindeye Drake|GTC
+1 Mortus Strider|GTC
+1 Nightveil Specter|GTC
+1 Paranoid Delusions|GTC
+1 Psychic Strike|GTC
+1 Rapid Hybridization|GTC
+1 Sage's Row Denizen|GTC
+1 Sapphire Drake|GTC
+1 Scatter Arc|GTC
+1 Sepulchral Primordial|GTC
+1 Shadow Alley Denizen|GTC
+1 Shadow Slice|GTC
+1 Skygames|GTC
+1 Slate Street Ruffian|GTC
+1 Smog Elemental|GTC
+1 Soul Ransom|GTC
+1 Spell Rupture|GTC
+1 Stolen Identity|GTC
+1 Totally Lost|GTC
+1 Undercity Informer|GTC
+1 Undercity Plague|GTC
+1 Voidwalk|GTC
+1 Way of the Thief|GTC
+1 Whispering Madness|GTC
+1 Wight of Precinct Six|GTC
+
+[GTC Gruul Guild]
+1 Act of Treason|GTC
+1 Alpha Authority|GTC
+1 Borborygmos Enraged|GTC
+1 Burning-Tree Emissary|GTC
+1 Burst of Strength|GTC
+1 Cinder Elemental|GTC
+1 Clan Defiance|GTC
+1 Crackling Perimeter|GTC
+1 Crowned Ceratok|GTC
+1 Disciple of the Old Ways|GTC
+1 Ember Beast|GTC
+1 Forced Adaptation|GTC
+1 Foundry Street Denizen|GTC
+1 Frenzied Tilling|GTC
+1 Furious Resistance|GTC
+1 Ghor-Clan Rampager|GTC
+1 Greenside Watcher|GTC
+1 Ground Assault|GTC
+1 Gruul Charm|GTC
+1 Gruul Keyrune|GTC
+1 Gruul Ragebeast|GTC
+1 Hellraiser Goblin|GTC
+1 Hindervines|GTC
+1 Homing Lightning|GTC
+1 Ivy Lane Denizen|GTC
+1 Madcap Skills|GTC
+1 Mark for Death|GTC
+1 Massive Raid|GTC
+1 Miming Slime|GTC
+1 Mugging|GTC
+1 Naturalize|GTC
+1 Pit Fight|GTC
+1 Primal Visitation|GTC
+1 Ripscale Predator|GTC
+1 Rubblebelt Raiders|GTC
+1 Ruination Wurm|GTC
+1 Rust Scarab|GTC
+1 Scab-Clan Charger|GTC
+1 Scorchwalker|GTC
+1 Serene Remembrance|GTC
+1 Signal the Clans|GTC
+1 Skarrg Goliath|GTC
+1 Skarrg Guildmage|GTC
+1 Skinbrand Goblin|GTC
+1 Skullcrack|GTC
+1 Slaughterhorn|GTC
+1 Spire Tracer|GTC
+1 Structural Collapse|GTC
+1 Sylvan Primordial|GTC
+1 Tin Street Market|GTC
+1 Tower Defense|GTC
+1 Verdant Haven|GTC
+1 Viashino Shanktail|GTC
+1 Wasteland Viper|GTC
+1 Wildwood Rebirth|GTC
+1 Wrecking Ogre|GTC
+1 Zhur-Taa Swine|GTC
+
+[GTC Orzhov Guild]
+1 Aerial Maneuver|GTC
+1 Alms Beast|GTC
+1 Angelic Edict|GTC
+1 Assault Griffin|GTC
+1 Balustrade Spy|GTC
+1 Basilica Guards|GTC
+1 Basilica Screecher|GTC
+1 Beckon Apparition|GTC
+1 Blind Obedience|GTC
+1 Cartel Aristocrat|GTC
+1 Contaminated Ground|GTC
+1 Corpse Blockade|GTC
+1 Court Street Denizen|GTC
+1 Crypt Ghast|GTC
+1 Death's Approach|GTC
+1 Debtor's Pulpit|GTC
+1 Dutiful Thrull|GTC
+1 Dying Wish|GTC
+1 Executioner's Swing|GTC
+1 Gateway Shade|GTC
+1 Gift of Orzhova|GTC
+1 Grisly Spectacle|GTC
+1 Guardian of the Gateless|GTC
+1 Guildscorn Ward|GTC
+1 Gutter Skulk|GTC
+1 High Priest of Penance|GTC
+1 Illness in the Ranks|GTC
+1 Immortal Servitude|GTC
+1 Killing Glare|GTC
+1 Kingpin's Pet|GTC
+1 Knight of Obligation|GTC
+1 Knight Watch|GTC
+1 Luminate Primordial|GTC
+1 Merciless Eviction|GTC
+1 Murder Investigation|GTC
+1 Obzedat, Ghost Council|GTC
+1 One Thousand Lashes|GTC
+1 Orzhov Charm|GTC
+1 Orzhov Keyrune|GTC
+1 Purge the Profane|GTC
+1 Righteous Charge|GTC
+1 Shadow Alley Denizen|GTC
+1 Shielded Passage|GTC
+1 Slate Street Ruffian|GTC
+1 Smite|GTC
+1 Smog Elemental|GTC
+1 Syndic of Tithes|GTC
+1 Syndicate Enforcer|GTC
+1 Thrull Parasite|GTC
+1 Undercity Informer|GTC
+1 Urbis Protector|GTC
+1 Vizkopa Confessor|GTC
+1 Vizkopa Guildmage|GTC
+1 Wight of Precinct Six|GTC
+1 Zarichi Tiger|GTC
+
+[GTC Simic Guild]
+1 Adaptive Snapjaw|GTC
+1 AEtherize|GTC
+1 Agoraphobia|GTC
+1 Alpha Authority|GTC
+1 Biomass Mutation|GTC
+1 Bioshift|GTC
+1 Biovisionary|GTC
+1 Burst of Strength|GTC
+1 Clinging Anemones|GTC
+1 Cloudfin Raptor|GTC
+1 Crocanura|GTC
+1 Crowned Ceratok|GTC
+1 Diluvian Primordial|GTC
+1 Drakewing Krasis|GTC
+1 Elusive Krasis|GTC
+1 Experiment One|GTC
+1 Forced Adaptation|GTC
+1 Frilled Oculus|GTC
+1 Greenside Watcher|GTC
+1 Gridlock|GTC
+1 Gyre Sage|GTC
+1 Hindervines|GTC
+1 Hydroform|GTC
+1 Incursion Specialist|GTC
+1 Ivy Lane Denizen|GTC
+1 Keymaster Rogue|GTC
+1 Leyline Phantom|GTC
+1 Merfolk of the Depths|GTC
+1 Metropolis Sprite|GTC
+1 Miming Slime|GTC
+1 Mindeye Drake|GTC
+1 Mystic Genesis|GTC
+1 Naturalize|GTC
+1 Nimbus Swimmer|GTC
+1 Prime Speaker Zegana|GTC
+1 Rapid Hybridization|GTC
+1 Rust Scarab|GTC
+1 Sage's Row Denizen|GTC
+1 Sapphire Drake|GTC
+1 Scatter Arc|GTC
+1 Serene Remembrance|GTC
+1 Shambleshark|GTC
+1 Simic Charm|GTC
+1 Simic Fluxmage|GTC
+1 Simic Keyrune|GTC
+1 Simic Manipulator|GTC
+1 Skygames|GTC
+1 Spell Rupture|GTC
+1 Spire Tracer|GTC
+1 Totally Lost|GTC
+1 Tower Defense|GTC
+1 Unexpected Results|GTC
+1 Urban Evolution|GTC
+1 Verdant Haven|GTC
+1 Way of the Thief|GTC
+1 Wildwood Rebirth|GTC
+1 Zameck Guildmage|GTC
+
+[RTR Azorius Guild]
+1 Aquus Steed|RTR
+1 Armory Guard|RTR
+1 Arrest|RTR
+1 Avenging Arrow|RTR
+1 Azor's Elocutors|RTR
+1 Azorius Arrester|RTR
+1 Azorius Charm|RTR
+1 Azorius Justiciar|RTR
+1 Azorius Keyrune|RTR
+1 Bazaar Krovod|RTR
+1 Cancel|RTR
+1 Chronic Flooding|RTR
+1 Civic Saber|RTR
+1 Codex Shredder|RTR
+1 Concordia Pegasus|RTR
+1 Conjured Currency|RTR
+1 Crosstown Courier|RTR
+1 Detention Sphere|RTR
+1 Dispel|RTR
+1 Doorkeeper|RTR
+1 Dramatic Rescue|RTR
+1 Ethereal Armor|RTR
+1 Faerie Impostor|RTR
+1 Fall of the Gavel|RTR
+1 Fencing Ace|RTR
+1 Hallowed Fountain|RTR
+1 Hover Barrier|RTR
+1 Hussar Patrol|RTR
+1 Inaction Injunction|RTR
+1 Inspiration|RTR
+1 Isperia's Skywatch|RTR
+1 Isperia, Supreme Judge|RTR
+1 Judge's Familiar|RTR
+1 Keening Apparition|RTR
+1 Knightly Valor|RTR
+1 Lyev Skyknight|RTR
+1 Martial Law|RTR
+1 New Prahv Guildmage|RTR
+1 Palisade Giant|RTR
+1 Paralyzing Grasp|RTR
+1 Phantom General|RTR
+1 Precinct Captain|RTR
+1 Psychic Spiral|RTR
+1 Rest in Peace|RTR
+1 Righteous Authority|RTR
+1 Runewing|RTR
+1 Search the City|RTR
+1 Search Warrant|RTR
+1 Security Blockade|RTR
+1 Seller of Songbirds|RTR
+1 Skyline Predator|RTR
+1 Skymark Roc|RTR
+1 Soul Tithe|RTR
+1 Soulsworn Spirit|RTR
+1 Sphere of Safety|RTR
+1 Sphinx of the Chimes|RTR
+1 Stealer of Secrets|RTR
+1 Street Sweeper|RTR
+1 Sunspire Griffin|RTR
+1 Supreme Verdict|RTR
+1 Swift Justice|RTR
+1 Syncopate|RTR
+1 Tablet of the Guilds|RTR
+1 Tower Drake|RTR
+1 Trained Caracal|RTR
+1 Vassal Soul|RTR
+1 Voidwielder|RTR
+
+[RTR Golgari Guild]
+1 Abrupt Decay|RTR
+1 Aerial Predation|RTR
+1 Archweaver|RTR
+1 Assassin's Strike|RTR
+1 Axebane Guardian|RTR
+1 Axebane Stag|RTR
+1 Brushstrider|RTR
+1 Catacomb Slug|RTR
+1 Centaur's Herald|RTR
+1 Chorus of Might|RTR
+1 Civic Saber|RTR
+1 Codex Shredder|RTR
+1 Cremate|RTR
+1 Daggerdrome Imp|RTR
+1 Dark Revenant|RTR
+1 Deadbridge Goliath|RTR
+1 Death's Presence|RTR
+1 Deathrite Shaman|RTR
+1 Desecration Demon|RTR
+1 Destroy the Evidence|RTR
+1 Drainpipe Vermin|RTR
+1 Dreg Mangler|RTR
+1 Drudge Beetle|RTR
+1 Gatecreeper Vine|RTR
+1 Giant Growth|RTR
+1 Gobbling Ooze|RTR
+1 Golgari Charm|RTR
+1 Golgari Decoy|RTR
+1 Golgari Keyrune|RTR
+1 Golgari Longlegs|RTR
+1 Grave Betrayal|RTR
+1 Grisly Salvage|RTR
+1 Jarad's Orders|RTR
+1 Jarad, Golgari Lich Lord|RTR
+1 Korozda Guildmage|RTR
+1 Korozda Monitor|RTR
+1 Launch Party|RTR
+1 Lotleth Troll|RTR
+1 Mana Bloom|RTR
+1 Mind Rot|RTR
+1 Oak Street Innkeeper|RTR
+1 Ogre Jailbreaker|RTR
+1 Overgrown Tomb|RTR
+1 Pack Rat|RTR
+1 Perilous Shadow|RTR
+1 Rites of Reaping|RTR
+1 Rubbleback Rhino|RTR
+1 Savage Surge|RTR
+1 Seek the Horizon|RTR
+1 Sewer Shambler|RTR
+1 Shrieking Affliction|RTR
+1 Slime Molding|RTR
+1 Slitherhead|RTR
+1 Sluiceway Scorpion|RTR
+1 Slum Reaper|RTR
+1 Stab Wound|RTR
+1 Stonefare Crocodile|RTR
+1 Street Sweeper|RTR
+1 Tablet of the Guilds|RTR
+1 Tavern Swindler|RTR
+1 Terrus Wurm|RTR
+1 Towering Indrik|RTR
+1 Treasured Find|RTR
+1 Trestle Troll|RTR
+1 Ultimate Price|RTR
+1 Underworld Connections|RTR
+1 Urban Burgeoning|RTR
+1 Wild Beastmaster|RTR
+1 Zanikev Locust|RTR
+
+[RTR Izzet Guild]
+1 Annihilating Fire|RTR
+1 Aquus Steed|RTR
+1 Ash Zealot|RTR
+1 Batterhorn|RTR
+1 Bellows Lizard|RTR
+1 Blistercoil Weird|RTR
+1 Blustersquall|RTR
+1 Cancel|RTR
+1 Chemister's Trick|RTR
+1 Chronic Flooding|RTR
+1 Civic Saber|RTR
+1 Cobblebrute|RTR
+1 Codex Shredder|RTR
+1 Conjured Currency|RTR
+1 Counterflux|RTR
+1 Crosstown Courier|RTR
+1 Cyclonic Rift|RTR
+1 Dispel|RTR
+1 Doorkeeper|RTR
+1 Downsize|RTR
+1 Dynacharge|RTR
+1 Electrickery|RTR
+1 Essence Backlash|RTR
+1 Explosive Impact|RTR
+1 Faerie Impostor|RTR
+1 Firemind's Foresight|RTR
+1 Frostburn Weird|RTR
+1 Goblin Electromancer|RTR
+1 Goblin Rally|RTR
+1 Guild Feud|RTR
+1 Guttersnipe|RTR
+1 Hover Barrier|RTR
+1 Inspiration|RTR
+1 Izzet Charm|RTR
+1 Izzet Keyrune|RTR
+1 Izzet Staticaster|RTR
+1 Lobber Crew|RTR
+1 Mercurial Chemister|RTR
+1 Minotaur Aggressor|RTR
+1 Mizzium Mortars|RTR
+1 Mizzium Skin|RTR
+1 Niv-Mizzet, Dracogenius|RTR
+1 Nivix Guildmage|RTR
+1 Nivmagus Elemental|RTR
+1 Paralyzing Grasp|RTR
+1 Psychic Spiral|RTR
+1 Pursuit of Flight|RTR
+1 Pyroconvergence|RTR
+1 Racecourse Fury|RTR
+1 Runewing|RTR
+1 Search the City|RTR
+1 Skyline Predator|RTR
+1 Sphinx of the Chimes|RTR
+1 Stealer of Secrets|RTR
+1 Steam Vents|RTR
+1 Street Spasm|RTR
+1 Street Sweeper|RTR
+1 Survey the Wreckage|RTR
+1 Syncopate|RTR
+1 Tablet of the Guilds|RTR
+1 Teleportal|RTR
+1 Tenement Crasher|RTR
+1 Thoughtflare|RTR
+1 Traitorous Instinct|RTR
+1 Vandalblast|RTR
+1 Viashino Racketeer|RTR
+1 Voidwielder|RTR
+
+[RTR Rakdos Guild]
+1 Annihilating Fire|RTR
+1 Ash Zealot|RTR
+1 Assassin's Strike|RTR
+1 Auger Spree|RTR
+1 Batterhorn|RTR
+1 Bellows Lizard|RTR
+1 Blood Crypt|RTR
+1 Bloodfray Giant|RTR
+1 Catacomb Slug|RTR
+1 Chaos Imps|RTR
+1 Civic Saber|RTR
+1 Cobblebrute|RTR
+1 Codex Shredder|RTR
+1 Cremate|RTR
+1 Cryptborn Horror|RTR
+1 Daggerdrome Imp|RTR
+1 Dark Revenant|RTR
+1 Dead Reveler|RTR
+1 Desecration Demon|RTR
+1 Destroy the Evidence|RTR
+1 Deviant Glee|RTR
+1 Drainpipe Vermin|RTR
+1 Dreadbore|RTR
+1 Explosive Impact|RTR
+1 Goblin Rally|RTR
+1 Gore-House Chainwalker|RTR
+1 Grave Betrayal|RTR
+1 Grim Roustabout|RTR
+1 Guild Feud|RTR
+1 Guttersnipe|RTR
+1 Havoc Festival|RTR
+1 Hellhole Flailer|RTR
+1 Launch Party|RTR
+1 Lobber Crew|RTR
+1 Mind Rot|RTR
+1 Minotaur Aggressor|RTR
+1 Ogre Jailbreaker|RTR
+1 Pack Rat|RTR
+1 Perilous Shadow|RTR
+1 Pyroconvergence|RTR
+1 Racecourse Fury|RTR
+1 Rakdos Cackler|RTR
+1 Rakdos Charm|RTR
+1 Rakdos Keyrune|RTR
+1 Rakdos Ragemutt|RTR
+1 Rakdos Ringleader|RTR
+1 Rakdos Shred-Freak|RTR
+1 Rakdos, Lord of Riots|RTR
+1 Rix Maadi Guildmage|RTR
+1 Shrieking Affliction|RTR
+1 Skull Rend|RTR
+1 Slaughter Games|RTR
+1 Slum Reaper|RTR
+1 Spawn of Rix Maadi|RTR
+1 Splatter Thug|RTR
+1 Stab Wound|RTR
+1 Street Sweeper|RTR
+1 Survey the Wreckage|RTR
+1 Tablet of the Guilds|RTR
+1 Tavern Swindler|RTR
+1 Tenement Crasher|RTR
+1 Thrill-Kill Assassin|RTR
+1 Traitorous Instinct|RTR
+1 Ultimate Price|RTR
+1 Underworld Connections|RTR
+1 Viashino Racketeer|RTR
+
+[RTR Selesnya Guild]
+1 Aerial Predation|RTR
+1 Archweaver|RTR
+1 Armory Guard|RTR
+1 Arrest|RTR
+1 Avenging Arrow|RTR
+1 Axebane Guardian|RTR
+1 Axebane Stag|RTR
+1 Bazaar Krovod|RTR
+1 Brushstrider|RTR
+1 Call of the Conclave|RTR
+1 Centaur Healer|RTR
+1 Centaur's Herald|RTR
+1 Chorus of Might|RTR
+1 Civic Saber|RTR
+1 Codex Shredder|RTR
+1 Collective Blessing|RTR
+1 Common Bond|RTR
+1 Concordia Pegasus|RTR
+1 Coursers' Accord|RTR
+1 Death's Presence|RTR
+1 Druid's Deliverance|RTR
+1 Dryad Militant|RTR
+1 Ethereal Armor|RTR
+1 Eyes in the Skies|RTR
+1 Fencing Ace|RTR
+1 Gatecreeper Vine|RTR
+1 Giant Growth|RTR
+1 Gobbling Ooze|RTR
+1 Growing Ranks|RTR
+1 Heroes' Reunion|RTR
+1 Horncaller's Chant|RTR
+1 Keening Apparition|RTR
+1 Knightly Valor|RTR
+1 Loxodon Smiter|RTR
+1 Mana Bloom|RTR
+1 Oak Street Innkeeper|RTR
+1 Palisade Giant|RTR
+1 Phantom General|RTR
+1 Precinct Captain|RTR
+1 Rest in Peace|RTR
+1 Risen Sanctuary|RTR
+1 Rootborn Defenses|RTR
+1 Rubbleback Rhino|RTR
+1 Savage Surge|RTR
+1 Security Blockade|RTR
+1 Seek the Horizon|RTR
+1 Selesnya Charm|RTR
+1 Selesnya Keyrune|RTR
+1 Selesnya Sentry|RTR
+1 Seller of Songbirds|RTR
+1 Slime Molding|RTR
+1 Soul Tithe|RTR
+1 Sphere of Safety|RTR
+1 Street Sweeper|RTR
+1 Sundering Growth|RTR
+1 Sunspire Griffin|RTR
+1 Swift Justice|RTR
+1 Tablet of the Guilds|RTR
+1 Temple Garden|RTR
+1 Towering Indrik|RTR
+1 Trained Caracal|RTR
+1 Trostani's Judgment|RTR
+1 Trostani, Selesnya's Voice|RTR
+1 Urban Burgeoning|RTR
+1 Vitu-Ghazi Guildmage|RTR
+1 Wayfaring Temple|RTR
+1 Wild Beastmaster|RTR
