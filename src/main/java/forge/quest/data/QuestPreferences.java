@@ -174,7 +174,7 @@ public class QuestPreferences extends PreferencesStore<QuestPreferences.QPref> i
     
     /** Instantiates a QuestPreferences object. */
     public QuestPreferences() {
-        super(NewConstants.QUEST_PREFS_FILE);
+        super(NewConstants.QUEST_PREFS_FILE, QPref.class);
     }
 
     protected QPref[] getEnumValues() {

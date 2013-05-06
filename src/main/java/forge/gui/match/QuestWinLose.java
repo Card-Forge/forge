@@ -34,6 +34,7 @@ import forge.Card;
 import forge.Singletons;
 import forge.card.BoosterTemplate;
 import forge.card.CardEdition;
+import forge.card.IUnOpenedProduct;
 import forge.card.UnOpenedProduct;
 import forge.control.FControl;
 import forge.game.GameEndReason;
@@ -398,13 +399,11 @@ public class QuestWinLose extends ControlWinLose {
             }
             // Mulligan to zero
             final int cntCardsHumanStartedWith = humanRating.getOpeningHandSize();
-            final int mulliganReward = Singletons.getModel().getQuestPreferences()
-                    .getPrefInt(QPref.REWARDS_MULLIGAN0);
+            final int mulliganReward = Singletons.getModel().getQuestPreferences().getPrefInt(QPref.REWARDS_MULLIGAN0);
 
             if (0 == cntCardsHumanStartedWith) {
                 credGameplay += mulliganReward;
-                sb.append(String
-                        .format("Mulliganed to zero and still won! " + "Bonus: %d credits.<br>", mulliganReward));
+                sb.append(String.format("Mulliganed to zero and still won! " + "Bonus: %d credits.<br>", mulliganReward));
             }
 
             // Early turn bonus
@@ -578,56 +577,29 @@ public class QuestWinLose extends ControlWinLose {
                 }
             }
 
-            List<String> chooseSets = new ArrayList<String>();
-
             int maxChoices = 1;
-
             if (this.wonMatch) {
                 maxChoices++;
                 final int wins = qData.getAchievements().getWin();
-                if (wins > 0 && (wins + 1) % 5 == 0) { maxChoices++; }
-                if (wins > 0 && (wins + 1) % 20 == 0) { maxChoices++; }
-                if (wins > 0 && (wins + 1) % 50 == 0) { maxChoices++; }
+                if (wins + 1 % 5 == 0) { maxChoices++; }
+                if (wins + 1 % 20 == 0) { maxChoices++; }
+                if (wins + 1 % 50 == 0) { maxChoices++; }
             }
 
-            if (sets.size() > maxChoices) {
-                if (maxChoices > 1) {
-                    boolean[] choices = new boolean[sets.size()];
-                    for (int i = 0; i < sets.size(); i++) {
-                        choices[i] = false;
-                    }
-
-                    int toEnable = maxChoices;
-
-                    while (toEnable > 0) {
-                        int index = MyRandom.getRandom().nextInt(sets.size());
-                        if (!choices[index]) {
-                            choices[index] = true;
-                            toEnable--;
-                        }
-                    }
-
-                    for (int i = 0; i < sets.size(); i++) {
-                        if (choices[i]) {
-                            chooseSets.add(sets.get(i));
-                        }
-                    }
-                } else {
-                    chooseSets.add(sets.get(MyRandom.getRandom().nextInt(sets.size())));
-                }
-
-            } else {
-                chooseSets.addAll(sets);
+            List<CardEdition> options = new ArrayList<CardEdition>();
+            
+            while(!sets.isEmpty() && maxChoices > 0) {
+                int ix = MyRandom.getRandom().nextInt(sets.size());
+                String set = sets.get(ix);
+                sets.remove(ix);
+                options.add(Singletons.getModel().getEditions().get(set));
+                maxChoices--;
             }
 
-            final String setPrompt = "Choose bonus booster set:";
-            List<CardEdition> chooseEditions = new ArrayList<CardEdition>();
-            for (String ed : chooseSets) {
-                chooseEditions.add(Singletons.getModel().getEditions().get(ed));
-            }
-            final CardEdition chooseEd = GuiChoose.one(setPrompt, chooseEditions);
+            final CardEdition chooseEd = GuiChoose.one("Choose bonus booster set:", options);
 
-            cardsWon = (new UnOpenedProduct(Singletons.getModel().getBoosters().get(chooseEd.getCode()))).get();
+            IUnOpenedProduct product = new UnOpenedProduct(Singletons.getModel().getBoosters().get(chooseEd.getCode()));
+            cardsWon = product.get();
             qData.getCards().addAllCards(cardsWon);
             this.lblTemp1 = new TitleLabel("Bonus " + chooseEd.getName() + " booster pack!");
         }

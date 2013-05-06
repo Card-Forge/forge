@@ -50,7 +50,7 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         UI_PREFERRED_AVATARS_ONLY ("false"),
         UI_TARGETING_OVERLAY ("false"),
         UI_ENABLE_SOUNDS ("true"),
-	UI_ALT_SOUND_SYSTEM ("false"),
+        UI_ALT_SOUND_SYSTEM ("false"),
         UI_RANDOM_CARD_ART ("false"),
         UI_CURRENT_AI_PROFILE (AiProfileUtil.AI_PROFILE_RANDOM_MATCH),
         UI_CLONE_MODE_SOURCE ("false"), /** */
@@ -138,7 +138,7 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
 
     /** Instantiates a ForgePreferences object. */
     public ForgePreferences() {
-        super(NewConstants.MAIN_PREFS_FILE);
+        super(NewConstants.MAIN_PREFS_FILE, FPref.class);
     }
 
     /**

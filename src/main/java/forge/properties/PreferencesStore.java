@@ -20,7 +20,7 @@ package forge.properties;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.HashMap;
+import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 
@@ -31,11 +31,12 @@ import forge.util.FileUtil;
  * Loads preferred values when instantiated.
  * If a requested value is not present, default is returned.
  */
-public abstract class PreferencesStore<T extends Enum<?>> {
-    private final Map<T, String> preferenceValues = new HashMap<T, String>();
+public abstract class PreferencesStore<T extends Enum<T>> {
+    private final Map<T, String> preferenceValues;
     private final String filename;
 
-    public PreferencesStore(String filename0) {
+    public PreferencesStore(String filename0, Class<T> clasz) {
+        preferenceValues = new EnumMap<T, String>(clasz);
         filename = filename0;
         
         List<String> lines = FileUtil.readFile(filename);

@@ -503,14 +503,23 @@ public final class QuestUtilCards {
     }
 
     @SuppressWarnings("unchecked")
-    private SealedProductTemplate getBoosterTemplate() {
+    private SealedProductTemplate getShopBoosterTemplate() {
         return new SealedProductTemplate(Lists.newArrayList( 
             Pair.of(BoosterGenerator.COMMON, this.qpref.getPrefInt(QPref.SHOP_SINGLES_COMMON)), 
             Pair.of(BoosterGenerator.UNCOMMON, this.qpref.getPrefInt(QPref.SHOP_SINGLES_UNCOMMON)), 
             Pair.of(BoosterGenerator.RARE_MYTHIC, this.qpref.getPrefInt(QPref.SHOP_SINGLES_RARE))
         ));
     }
-    
+
+    @SuppressWarnings("unchecked")
+    private SealedProductTemplate getBoosterTemplate() {
+        return new SealedProductTemplate(Lists.newArrayList( 
+            Pair.of(BoosterGenerator.COMMON, this.qpref.getPrefInt(QPref.BOOSTER_COMMONS)), 
+            Pair.of(BoosterGenerator.UNCOMMON, this.qpref.getPrefInt(QPref.BOOSTER_UNCOMMONS)), 
+            Pair.of(BoosterGenerator.RARE_MYTHIC, this.qpref.getPrefInt(QPref.BOOSTER_RARES))
+        ));
+    }
+
     /**
      * Generate cards in shop.
      */
@@ -526,7 +535,7 @@ public final class QuestUtilCards {
         final int totalPacks = Math.min(levelPacks + winPacks, maxPacks);
 
         
-        SealedProductTemplate tpl = getBoosterTemplate();
+        SealedProductTemplate tpl = getShopBoosterTemplate();
         UnOpenedProduct unopened = qc.getFormat() == null ?  new UnOpenedProduct( tpl ) : new UnOpenedProduct( tpl, qc.getFormat().getFilterPrinted());
         
         for (int i = 0; i < totalPacks; i++) {
