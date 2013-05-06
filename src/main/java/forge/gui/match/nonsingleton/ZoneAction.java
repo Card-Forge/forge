@@ -54,9 +54,7 @@ class ZoneAction extends ForgeAction {
         for (Card crd : choices) {
             Card toAdd = crd;
             if (crd.isFaceDown()) {
-                boolean ctrldByUiPlayer = crd.getController().getLobbyPlayer() == Singletons.getControl().getLobby().getGuiPlayer();
-                boolean canSee = ctrldByUiPlayer && crd.hasKeyword("You may look at this card.") || crd.hasKeyword("Your opponent may look at this card.");  
-                if (canSee) {
+                if (crd.canBeSeenBy(Singletons.getControl().getLobby().getGuiPlayer().getPlayer(crd.getGame()))) {
                     toAdd = CardFactory.copyCard(crd);
                     toAdd.setState(CardCharacteristicName.Original);
                 } else {

@@ -749,6 +749,7 @@ res/cardsfolder/b/balustrade_spy.txt -text
 res/cardsfolder/b/bamboozle.txt -text
 res/cardsfolder/b/bandage.txt svneol=native#text/plain
 res/cardsfolder/b/bane_alley_blackguard.txt -text
+res/cardsfolder/b/bane_alley_broker.txt -text
 res/cardsfolder/b/bane_of_the_living.txt svneol=native#text/plain
 res/cardsfolder/b/banefire.txt -text
 res/cardsfolder/b/baneful_omen.txt -text
@@ -14031,6 +14032,7 @@ src/main/java/forge/card/staticability/StaticAbilityCantTarget.java -text
 src/main/java/forge/card/staticability/StaticAbilityContinuous.java svneol=native#text/plain
 src/main/java/forge/card/staticability/StaticAbilityCostChange.java -text
 src/main/java/forge/card/staticability/StaticAbilityETBTapped.java -text
+src/main/java/forge/card/staticability/StaticAbilityMayLookAt.java -text
 src/main/java/forge/card/staticability/StaticAbilityPreventDamage.java svneol=native#text/plain
 src/main/java/forge/card/staticability/package-info.java svneol=native#text/plain
 src/main/java/forge/card/trigger/Trigger.java svneol=native#text/plain

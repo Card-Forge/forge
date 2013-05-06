@@ -666,6 +666,8 @@ public class AiController {
                         options = CardLists.getValidCards(options, "Permanent.YouCtrl,Permanent.tapped", host.getController(), host);
                     }
                     choice = ComputerUtilCard.getBestAI(options);
+                } else {
+                    choice = ComputerUtilCard.getBestAI(options);
                 }
                 return choice;
             

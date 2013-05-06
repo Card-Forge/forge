@@ -287,11 +287,11 @@ public class StaticAbility {
      *            the mode
      * @param card
      *            the card
-     * @param activator
+     * @param player
      *            the activator
      * @return true, if successful
      */
-    public final boolean applyAbility(final String mode, final Card card, final Player activator) {
+    public final boolean applyAbility(final String mode, final Card card, final Player player) {
 
         // don't apply the ability if it hasn't got the right mode
         if (!this.params.get("Mode").equals(mode)) {
@@ -303,11 +303,15 @@ public class StaticAbility {
         }
 
         if (mode.equals("CantBeCast")) {
-            return StaticAbilityCantBeCast.applyCantBeCastAbility(this, card, activator);
+            return StaticAbilityCantBeCast.applyCantBeCastAbility(this, card, player);
         }
 
         if (mode.equals("CantPlayLand")) {
-            return StaticAbilityCantBeCast.applyCantPlayLandAbility(this, card, activator);
+            return StaticAbilityCantBeCast.applyCantPlayLandAbility(this, card, player);
+        }
+
+        if (mode.equals("MayLookAt")) {
+            return StaticAbilityMayLookAt.applyMayLookAtAbility(this, card, player);
         }
 
         return false;

@@ -8298,6 +8298,24 @@ public class Card extends GameEntity implements Comparable<Card> {
         return true;
     }
 
+    public boolean canBeSeenBy(final Player p) {
+        final GameState game = this.getGame();
+        if (getController().equals(p) && hasKeyword("You may look at this card.")) {
+            return true; 
+        }
+        if (getController().isOpponentOf(p) && hasKeyword("Your opponent may look at this card.")) {
+            return true; 
+        }
+        for (Card host : game.getCardsIn(ZoneType.Battlefield)) {
+            final ArrayList<StaticAbility> staticAbilities = host.getStaticAbilities();
+            for (final StaticAbility stAb : staticAbilities) {
+                if (stAb.applyAbility("MayLookAt", this, p)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 
     CardRules cardRules;
     public CardRules getRules() {
