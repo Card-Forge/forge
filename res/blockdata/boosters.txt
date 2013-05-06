@@ -20,7 +20,7 @@ CFX: 3 covers, 10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand ALA
 CHK: 5 covers, 11 Common, 3 Uncommon, 1 Rare
 CHR: 1 covers, 9 Common, 3 UncommonRare
 CSP: 3 covers, 11 Common, 3 Uncommon, 1 Rare
-DGM: 3 covers, 10 Common:!land, 3 Uncommon, 1 RareMythic:!name("Maze's End"), 1 Custom("Dragon's Maze Lands")
+DGM: 3 covers, 10 Common:!land, 3 Uncommon, 1 RareMythic:!land, 1 Custom("Dragon's Maze Lands")
 DIS: 3 covers, 11 Common, 3 Uncommon, 1 Rare
 DKA: 3 covers, 9 Common:!dfc, 3 Uncommon:!dfc, 1 RareMythic:!dfc, 1 Any:dfc, 1 BasicLand ISD
 DRK: 1 covers, 6 Common, 2 UncommonRare

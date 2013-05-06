@@ -67,7 +67,7 @@ public class GameFormat implements Comparable<GameFormat> {
     public GameFormat(final String fName, final Iterable<String> sets, final List<String> bannedCards, int compareIdx) {
         this.index = compareIdx;
         this.name = fName;
-        this.allowedSetCodes = Lists.newArrayList(sets);
+        this.allowedSetCodes = sets == null ? new ArrayList<String>() : Lists.newArrayList(sets);
         this.bannedCardNames = bannedCards == null ? new ArrayList<String>() : Lists.newArrayList(bannedCards);
 
         this.allowedSetCodes_ro = Collections.unmodifiableList(allowedSetCodes);

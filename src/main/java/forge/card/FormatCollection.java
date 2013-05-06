@@ -17,13 +17,12 @@
  */
 package forge.card;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import forge.game.GameFormat;
 import forge.util.FileSection;
-import forge.util.storage.StorageReaderFile;
+import forge.util.storage.StorageReaderFileSections;
 import forge.util.storage.StorageView;
 
 /**
@@ -79,46 +78,28 @@ public final class FormatCollection extends StorageView<GameFormat> {
     /**
      * Instantiates a new format utils.
      */
-    public static class FormatReader extends StorageReaderFile<GameFormat> {
-
-        /**
-         * TODO: Write javadoc for Constructor.
-         * @param file0
-         * @param keySelector0
-         */
+    public static class FormatReader extends StorageReaderFileSections<GameFormat> {
         public FormatReader(String file0) {
             super(file0, GameFormat.FN_GET_NAME);
         }
 
-        /* (non-Javadoc)
-         * @see forge.util.StorageReaderFile#read(java.lang.String)
-         */
         @Override
-        protected GameFormat read(String line, int i) {
-            final List<String> sets = new ArrayList<String>(); // default: all sets allowed
-            final List<String> bannedCards = new ArrayList<String>(); // default:
-            // nothing
-            // banned
+        protected GameFormat read(String title, Iterable<String> body, int idx) {
+            List<String> sets = null; // default: all sets allowed
+            List<String> bannedCards = null; // default: nothing banned
 
-            FileSection section = FileSection.parse(line, ":", "|");
-            String name = section.get("name");
-            int index = 1 + i;
+            FileSection section = FileSection.parse(body, ":");
             String strSets = section.get("sets");
             if ( null != strSets ) {
-                sets.addAll(Arrays.asList(strSets.split(", ")));
+                sets = Arrays.asList(strSets.split(", "));
             }
             String strCars = section.get("banned");
             if ( strCars != null ) {
-                bannedCards.addAll(Arrays.asList(strCars.split("; ")));
+                bannedCards = Arrays.asList(strCars.split("; "));
             }
 
-            if (name == null) {
-                throw new RuntimeException("Format must have a name! Check formats.txt file");
-            }
-            return new GameFormat(name, sets, bannedCards, index);
-
+            return new GameFormat(title, sets, bannedCards, 1 + idx);
         }
-
     }
 }
 
