@@ -408,6 +408,18 @@ public abstract class PumpAiBase extends SpellAbilityAi {
             return true;
         }
 
+        if (sa.isTrigger() && phase.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
+            if (phase.isPlayerTurn(ai)) {
+                if (CombatUtil.canAttack(c)) {
+                    return true;
+                }
+            } else {
+                if (CombatUtil.canBlock(c)) {
+                    return true;
+                }
+            }
+        }
+
         // is the creature blocking and unable to destroy the attacker
         // or would be destroyed itself?
         if (phase.is(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY) && c.isBlocking()) {
