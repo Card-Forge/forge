@@ -6,7 +6,6 @@ import java.util.List;
 import forge.Card;
 import forge.CardLists;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.SpellAbilityStackInstance;
 import forge.card.spellability.SpellPermanent;
 import forge.game.GameState;
 import forge.game.ai.ComputerUtilCard;
