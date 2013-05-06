@@ -9,6 +9,8 @@ Release Notes
 -------------
 
 - Bug Fixes -
+This version is primarily a maintenance release. We fixed several important bugs and a number of smaller card related bugs.
+
 Reverted the synchronize changes since it seemed to break all of the trigger payment stuff.
 
 Added DGM into RTR block and made DGM lands no longer appear in the common slot. You should now be able to play a DGM draft/sealed game.
@@ -46,6 +48,9 @@ Saproling Symbiosis
 Twilight's Call
 Deep Spawn
 Chord of Calling
+Stench of Evil
+Disrupting Shoal
+Minamo's Meddling
 
 
 ------------
