@@ -2750,6 +2750,7 @@ res/cardsfolder/d/disperse.txt svneol=native#text/plain
 res/cardsfolder/d/dispersing_orb.txt svneol=native#text/plain
 res/cardsfolder/d/disrupt.txt svneol=native#text/plain
 res/cardsfolder/d/disrupting_scepter.txt svneol=native#text/plain
+res/cardsfolder/d/disrupting_shoal.txt -text
 res/cardsfolder/d/disruption_aura.txt -text
 res/cardsfolder/d/disruptive_pitmage.txt svneol=native#text/plain
 res/cardsfolder/d/disruptive_student.txt svneol=native#text/plain
@@ -6755,6 +6756,7 @@ res/cardsfolder/m/miming_slime.txt -text
 res/cardsfolder/m/minamo_school_at_waters_edge.txt svneol=native#text/plain
 res/cardsfolder/m/minamo_scrollkeeper.txt svneol=native#text/plain
 res/cardsfolder/m/minamo_sightbender.txt svneol=native#text/plain
+res/cardsfolder/m/minamos_meddling.txt -text
 res/cardsfolder/m/mind_burst.txt svneol=native#text/plain
 res/cardsfolder/m/mind_control.txt svneol=native#text/plain
 res/cardsfolder/m/mind_extraction.txt -text

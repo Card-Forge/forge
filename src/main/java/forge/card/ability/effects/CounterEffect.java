@@ -116,6 +116,12 @@ public class CounterEffect extends SpellAbilityEffect {
                     sa.getSourceCard().addRemembered(tgtSACard);
                 }
             }
+
+            if (sa.hasParam("RememberSplicedOntoCounteredSpell")) {
+                if (tgtSA.getSplicedCards() != null) {
+                    sa.getSourceCard().getRemembered().addAll(tgtSA.getSplicedCards());
+                }
+            }
         }
     } // end counterResolve
 
