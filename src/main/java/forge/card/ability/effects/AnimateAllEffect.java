@@ -197,9 +197,9 @@ public class AnimateAllEffect extends AnimateEffectBase {
             }
 
             // suppress static abilities from the animated card
-            final ArrayList<ReplacementEffect> removedReplacements = new ArrayList<ReplacementEffect>();
+            final List<ReplacementEffect> removedReplacements = new ArrayList<ReplacementEffect>();
             if (sa.hasParam("OverwriteReplacements") || sa.hasParam("RemoveAllAbilities")) {
-                final ArrayList<ReplacementEffect> replacementsToRemove = c.getReplacementEffects();
+                final List<ReplacementEffect> replacementsToRemove = c.getReplacementEffects();
                 for (final ReplacementEffect re : replacementsToRemove) {
                     re.setTemporarilySuppressed(true);
                     removedReplacements.add(re);

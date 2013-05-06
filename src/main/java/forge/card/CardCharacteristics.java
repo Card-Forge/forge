@@ -40,17 +40,17 @@ public class CardCharacteristics {
     private String name = "";
     private List<String> type = new CopyOnWriteArrayList<String>();
     private ManaCost manaCost = ManaCost.NO_COST;
-    private ArrayList<CardColor> cardColor = new ArrayList<CardColor>();
+    private List<CardColor> cardColor = new ArrayList<CardColor>();
     private int baseAttack = 0;
     private int baseDefense = 0;
-    private ArrayList<String> intrinsicKeyword = new ArrayList<String>();
+    private List<String> intrinsicKeyword = new ArrayList<String>();
     private final List<SpellAbility> spellAbility = new ArrayList<SpellAbility>();
     private final List<SpellAbility> manaAbility = new ArrayList<SpellAbility>();
     private List<String> unparsedAbilities = new ArrayList<String>();
-    private ArrayList<Trigger> triggers = new ArrayList<Trigger>();
-    private ArrayList<ReplacementEffect> replacementEffects = new ArrayList<ReplacementEffect>();
-    private ArrayList<StaticAbility> staticAbilities = new ArrayList<StaticAbility>();
-    private ArrayList<String> staticAbilityStrings = new ArrayList<String>();
+    private List<Trigger> triggers = new CopyOnWriteArrayList<Trigger>();
+    private List<ReplacementEffect> replacementEffects = new ArrayList<ReplacementEffect>();
+    private List<StaticAbility> staticAbilities = new ArrayList<StaticAbility>();
+    private List<String> staticAbilityStrings = new ArrayList<String>();
     private String imageKey = "";
     private Map<String, String> sVars = new TreeMap<String, String>();
 
@@ -120,7 +120,7 @@ public class CardCharacteristics {
      * 
      * @return the cardColor
      */
-    public final ArrayList<CardColor> getCardColor() {
+    public final List<CardColor> getCardColor() {
         return this.cardColor;
     }
 
@@ -186,7 +186,7 @@ public class CardCharacteristics {
      * 
      * @return the intrinsicKeyword
      */
-    public final ArrayList<String> getIntrinsicKeyword() {
+    public final List<String> getIntrinsicKeyword() {
         return this.intrinsicKeyword;
     }
 
@@ -253,7 +253,7 @@ public class CardCharacteristics {
      * @param triggers0
      *            the triggers to set
      */
-    public final void setTriggers(final ArrayList<Trigger> triggers0) {
+    public final void setTriggers(final List<Trigger> triggers0) {
         this.triggers = triggers0;
     }
 
@@ -262,7 +262,7 @@ public class CardCharacteristics {
      * 
      * @return the staticAbilities
      */
-    public final ArrayList<StaticAbility> getStaticAbilities() {
+    public final List<StaticAbility> getStaticAbilities() {
         return this.staticAbilities;
     }
 
@@ -300,7 +300,7 @@ public class CardCharacteristics {
      * 
      * @return the staticAbilityStrings
      */
-    public final ArrayList<String> getStaticAbilityStrings() {
+    public final List<String> getStaticAbilityStrings() {
         return this.staticAbilityStrings;
     }
 
@@ -317,7 +317,7 @@ public class CardCharacteristics {
     /**
      * @return the replacementEffects
      */
-    public ArrayList<ReplacementEffect> getReplacementEffects() {
+    public List<ReplacementEffect> getReplacementEffects() {
         return replacementEffects;
     }
 

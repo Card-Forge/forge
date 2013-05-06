@@ -282,12 +282,10 @@ public class CardFactory {
             }
             card.setState(state);
             CardFactoryUtil.addAbilityFactoryAbilities(card);
-            final ArrayList<String> stAbs = card.getStaticAbilityStrings();
-            if (stAbs.size() > 0) {
-                for (int i = 0; i < stAbs.size(); i++) {
-                    card.addStaticAbility(stAbs.get(i));
-                }
+            for (String stAb : card.getStaticAbilityStrings()) {
+                card.addStaticAbility(stAb);
             }
+
 
             if ( state == CardCharacteristicName.LeftSplit || state == CardCharacteristicName.RightSplit )
             {

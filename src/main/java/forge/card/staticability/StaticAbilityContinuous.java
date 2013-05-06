@@ -34,7 +34,6 @@ import forge.card.TriggerReplacementBase;
 import forge.card.ability.AbilityFactory;
 import forge.card.ability.AbilityUtils;
 import forge.card.cardfactory.CardFactoryUtil;
-import forge.card.replacement.ReplacementEffect;
 import forge.card.spellability.AbilityActivated;
 import forge.card.spellability.SpellAbility;
 import forge.card.trigger.Trigger;
@@ -447,16 +446,13 @@ public class StaticAbilityContinuous {
 
             // remove activated and static abilities
             if (removeAllAbilities) {
-                final ArrayList<SpellAbility> abilities = affectedCard.getSpellAbilities();
-                for (final SpellAbility ab : abilities) {
+                for (final SpellAbility ab : affectedCard.getSpellAbilities()) {
                     ab.setTemporarilySuppressed(true);
                 }
-                final ArrayList<StaticAbility> staticAbilities = affectedCard.getStaticAbilities();
-                for (final StaticAbility stA : staticAbilities) {
+                for (final StaticAbility stA : affectedCard.getStaticAbilities()) {
                     stA.setTemporarilySuppressed(true);
                 }
-                final ArrayList<ReplacementEffect> replacementEffects = affectedCard.getReplacementEffects();
-                for (final TriggerReplacementBase rE : replacementEffects) {
+                for (final TriggerReplacementBase rE : affectedCard.getReplacementEffects()) {
                     rE.setTemporarilySuppressed(true);
                 }
             }

@@ -26,7 +26,6 @@ import java.util.List;
 import com.esotericsoftware.minlog.Log;
 
 import forge.card.TriggerReplacementBase;
-import forge.card.replacement.ReplacementEffect;
 import forge.card.spellability.SpellAbility;
 import forge.card.staticability.StaticAbility;
 import forge.game.GameState;
@@ -239,16 +238,13 @@ public class StaticEffects {
 
             // remove abilities
             if (params.containsKey("RemoveAllAbilities")) {
-                final ArrayList<SpellAbility> abilities = affectedCard.getSpellAbilities();
-                for (final SpellAbility ab : abilities) {
+                for (final SpellAbility ab : affectedCard.getSpellAbilities()) {
                     ab.setTemporarilySuppressed(false);
                 }
-                final ArrayList<StaticAbility> staticAbilities = affectedCard.getStaticAbilities();
-                for (final StaticAbility stA : staticAbilities) {
+                for (final StaticAbility stA : affectedCard.getStaticAbilities()) {
                     stA.setTemporarilySuppressed(false);
                 }
-                final ArrayList<ReplacementEffect> replacementEffects = affectedCard.getReplacementEffects();
-                for (final TriggerReplacementBase rE : replacementEffects) {
+                for (final TriggerReplacementBase rE : affectedCard.getReplacementEffects()) {
                     rE.setTemporarilySuppressed(false);
                 }
             }

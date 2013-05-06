@@ -31,6 +31,7 @@ import java.util.Map.Entry;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.concurrent.ConcurrentSkipListMap;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -827,7 +828,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      *            a {@link java.util.ArrayList} object.
      */
     public final void setTriggers(final List<Trigger> trigs) {
-        final ArrayList<Trigger> copyList = new ArrayList<Trigger>();
+        final List<Trigger> copyList = new CopyOnWriteArrayList<Trigger>();
         for (final Trigger t : trigs) {
             if (t.isIntrinsic()) {
                 final Trigger newtrig = t.getCopy();
@@ -1624,7 +1625,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * 
      * @return a {@link java.util.ArrayList} object.
      */
-    public final ArrayList<CardColor> getColor() {
+    public final List<CardColor> getColor() {
         return this.getCharacteristics().getCardColor();
     }
 
@@ -4527,7 +4528,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @param a
      *            a {@link java.util.ArrayList} object.
      */
-    public final void setStaticAbilityStrings(final ArrayList<String> a) {
+    public final void setStaticAbilityStrings(final List<String> a) {
         this.getCharacteristics().setStaticAbilityStrings(new ArrayList<String>(a));
     }
 
@@ -4536,7 +4537,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * 
      * @return the static ability strings
      */
-    public final ArrayList<String> getStaticAbilityStrings() {
+    public final List<String> getStaticAbilityStrings() {
         return this.getCharacteristics().getStaticAbilityStrings();
     }
 
@@ -8065,7 +8066,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * 
      * @return the replacement effects
      */
-    public ArrayList<ReplacementEffect> getReplacementEffects() {
+    public List<ReplacementEffect> getReplacementEffects() {
         return this.getCharacteristics().getReplacementEffects();
     }
 
@@ -8075,7 +8076,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @param res
      *            the new replacement effects
      */
-    public void setReplacementEffects(final ArrayList<ReplacementEffect> res) {
+    public void setReplacementEffects(final List<ReplacementEffect> res) {
         this.getCharacteristics().getReplacementEffects().clear();
         for (final ReplacementEffect replacementEffect : res) {
             this.addReplacementEffect(replacementEffect);
