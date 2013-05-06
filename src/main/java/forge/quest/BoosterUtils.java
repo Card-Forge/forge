@@ -171,52 +171,6 @@ public final class BoosterUtils {
         return result;
     }
 
-    /**
-     * Generate distinct cards.
-     * 
-     * @param filter
-     *            the filter
-     * @param cntNeeded
-     *            the cnt needed
-     * @return the list
-     */
-    public static List<CardPrinted> generateDistinctCards(final Predicate<CardPrinted> filter, final int cntNeeded) {
-        return BoosterUtils.generateDistinctCards(CardDb.instance().getAllCards(), filter, cntNeeded);
-    }
-
-    /**
-     * Generate distinct cards.
-     * 
-     * @param source
-     *            the source
-     * @param filter
-     *            the filter
-     * @param cntNeeded
-     *            the cnt needed
-     * @return the list
-     */
-    public static List<CardPrinted> generateDistinctCards(final Iterable<CardPrinted> source,
-            final Predicate<CardPrinted> filter, final int cntNeeded) {
-        final ArrayList<CardPrinted> result = new ArrayList<CardPrinted>();
-        int cntMade = 0;
-
-        // This will prevent endless loop @ while
-        int allowedMisses = (2 + 2) * cntNeeded; // lol, 2+2 is not magic
-                                                 // constant!
-
-        while ((cntMade < cntNeeded) && (allowedMisses > 0)) {
-            final CardPrinted card = Aggregates.random(Iterables.filter(source, filter));
-
-            if ((card != null) && !result.contains(card)) {
-                result.add(card);
-                cntMade++;
-            } else {
-                allowedMisses--;
-            }
-        }
-
-        return result;
-    }
 
     /**
      * Parse a limitation for a reward or chosen card.

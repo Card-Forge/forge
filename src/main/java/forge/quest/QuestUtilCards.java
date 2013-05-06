@@ -31,6 +31,7 @@ import com.google.common.collect.Lists;
 
 import forge.Constant;
 import forge.Singletons;
+import forge.card.BoosterGenerator;
 import forge.card.CardEdition;
 import forge.card.CardRarity;
 import forge.card.FormatCollection;
@@ -147,21 +148,9 @@ public final class QuestUtilCards {
      *            the f sets
      * @return the array list
      */
-    public ArrayList<CardPrinted> addCards(final Predicate<CardPrinted> fSets) {
-        final int nCommon = this.qpref.getPrefInt(QPref.BOOSTER_COMMONS);
-        final int nUncommon = this.qpref.getPrefInt(QPref.BOOSTER_UNCOMMONS);
-        final int nRare = this.qpref.getPrefInt(QPref.BOOSTER_RARES);
-
-        final ArrayList<CardPrinted> newCards = new ArrayList<CardPrinted>();
-        Predicate<CardPrinted> predCommons = Predicates.and(fSets, IPaperCard.Predicates.Presets.IS_COMMON);
-        newCards.addAll(BoosterUtils.generateDistinctCards(predCommons, nCommon));
-        Predicate<CardPrinted> predUncommons = Predicates.and(fSets, IPaperCard.Predicates.Presets.IS_UNCOMMON);
-        newCards.addAll(BoosterUtils.generateDistinctCards(predUncommons, nUncommon));
-        Predicate<CardPrinted> predRareMythics = Predicates.and(fSets, IPaperCard.Predicates.Presets.IS_RARE_OR_MYTHIC);
-        newCards.addAll(BoosterUtils.generateDistinctCards(predRareMythics, nRare));
-
-        this.addAllCards(newCards);
-        return newCards;
+    public List<CardPrinted> generateQuestBooster(final Predicate<CardPrinted> fSets) {
+        UnOpenedProduct unopened = new UnOpenedProduct(getBoosterTemplate(), fSets);
+        return unopened.get();
     }
 
     /**
@@ -513,28 +502,31 @@ public final class QuestUtilCards {
         this.qa.getShopList().addAllFlat(Aggregates.random(meetRequirements, count));
     }
 
+    @SuppressWarnings("unchecked")
+    private SealedProductTemplate getBoosterTemplate() {
+        return new SealedProductTemplate(Lists.newArrayList( 
+            Pair.of(BoosterGenerator.COMMON, this.qpref.getPrefInt(QPref.SHOP_SINGLES_COMMON)), 
+            Pair.of(BoosterGenerator.UNCOMMON, this.qpref.getPrefInt(QPref.SHOP_SINGLES_UNCOMMON)), 
+            Pair.of(BoosterGenerator.RARE_MYTHIC, this.qpref.getPrefInt(QPref.SHOP_SINGLES_RARE))
+        ));
+    }
+    
     /**
      * Generate cards in shop.
      */
     private void generateCardsInShop() {
-
-
-        int nLevel = this.qc.getAchievements().getLevel();
-
         // Preferences
         final int startPacks = this.qpref.getPrefInt(QPref.SHOP_STARTING_PACKS);
         final int winsForPack = this.qpref.getPrefInt(QPref.SHOP_WINS_FOR_ADDITIONAL_PACK);
         final int maxPacks = this.qpref.getPrefInt(QPref.SHOP_MAX_PACKS);
-        final int common = this.qpref.getPrefInt(QPref.SHOP_SINGLES_COMMON);
-        final int uncommon = this.qpref.getPrefInt(QPref.SHOP_SINGLES_UNCOMMON);
-        final int rare = this.qpref.getPrefInt(QPref.SHOP_SINGLES_RARE);
 
-        final int levelPacks = nLevel > 0 ? startPacks / nLevel : startPacks;
+        int level = this.qc.getAchievements().getLevel();
+        final int levelPacks = level > 0 ? startPacks / level : startPacks;
         final int winPacks = this.qc.getAchievements().getWin() / winsForPack;
         final int totalPacks = Math.min(levelPacks + winPacks, maxPacks);
 
-        @SuppressWarnings("unchecked")
-        SealedProductTemplate tpl = new SealedProductTemplate(Lists.newArrayList( Pair.of("Common", common), Pair.of("Uncommon", uncommon), Pair.of("RareMythic", rare)));
+        
+        SealedProductTemplate tpl = getBoosterTemplate();
         UnOpenedProduct unopened = qc.getFormat() == null ?  new UnOpenedProduct( tpl ) : new UnOpenedProduct( tpl, qc.getFormat().getFilterPrinted());
         
         for (int i = 0; i < totalPacks; i++) {
