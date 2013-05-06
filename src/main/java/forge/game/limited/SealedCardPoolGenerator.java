@@ -194,7 +194,7 @@ public class SealedCardPoolGenerator {
                 setCombos.add(String.format("%s, %s, %s", sets[0], sets[0], sets[0]));
                 setCombos.add(String.format("%s, %s, %s", sets[1], sets[0], sets[0]));
                 setCombos.add(String.format("%s, %s, %s", sets[1], sets[1], sets[0]));
-                setCombos.add(String.format("%s, %s, %s", sets[1], sets[1], sets[1]));
+                setCombos.add(String.format("3 %s", sets[1]));
             }
             if (sets.length >= 3) {
                 setCombos.add(String.format("%s, %s, %s", sets[2], sets[0], sets[0]));
@@ -279,17 +279,20 @@ public class SealedCardPoolGenerator {
             setCombos.add(String.format("%s, %s, %s, %s, %s, %s, %s, %s, %s", sets[4], sets[3], sets[2], sets[1], sets[0], sets[0], sets[0], sets[0], sets[0]));
             setCombos.add(String.format("%s, %s, %s, %s, %s, %s, %s, %s, %s", sets[3], sets[3], sets[2], sets[2], sets[1], sets[1], sets[0], sets[0], sets[0]));
             setCombos.add(String.format("%s, %s, %s, %s, %s, %s, %s, %s, %s", sets[3], sets[2], sets[2], sets[1], sets[1], sets[1], sets[0], sets[0], sets[0]));
-            setCombos.add(String.format("%s, %s, %s, %s, %s, %s, %s, %s, %s", sets[3], sets[2], sets[1], sets[1], sets[0], sets[0], sets[0], sets[0], sets[0]));
-            setCombos.add(String.format("%s, %s, %s, %s, %s, %s, %s, %s, %s", sets[2], sets[2], sets[2], sets[1], sets[1], sets[1], sets[0], sets[0], sets[0]));
-            setCombos.add(String.format("%s, %s, %s, %s, %s, %s, %s, %s, %s", sets[2], sets[2], sets[1], sets[1], sets[0], sets[0], sets[0], sets[0], sets[0]));
-            setCombos.add(String.format("%s, %s, %s, %s, %s, %s, %s, %s, %s", sets[2], sets[1], sets[0], sets[0], sets[0], sets[0], sets[0], sets[0], sets[0]));
-            setCombos.add(String.format("%s, %s, %s, %s, %s, %s, %s, %s, %s", sets[2], sets[2], sets[2], sets[2], sets[0], sets[0], sets[0], sets[0], sets[0]));
-            setCombos.add(String.format("%s, %s, %s, %s, %s, %s, %s, %s, %s", sets[1], sets[1], sets[1], sets[1], sets[0], sets[0], sets[0], sets[0], sets[0]));
+            setCombos.add(String.format("%s, %s, 2 %s, 5 %s", sets[3], sets[2], sets[1], sets[0]));
+            setCombos.add(String.format("3 %s, 3 %s, 3 %s", sets[2], sets[1], sets[0]));
+            setCombos.add(String.format("2 %s, 2 %s, 5 %s", sets[2], sets[1], sets[0]));
+            setCombos.add(String.format("%s, %s, 7 %s", sets[2], sets[1], sets[0]));
+            setCombos.add(String.format("4 %s, 5 %s", sets[2], sets[0]));
+            setCombos.add(String.format("4 %s, 5 %s", sets[1], sets[0]));
             setCombos.add(String.format("9 %s", sets[0]));
         }
         else { // Default to 6 packs
-            if (sets.length >= 2 && !sets[0].equals(sets[1])) {
+            if (sets.length == 1 || !sets[0].equals(sets[1]) ) {
                 setCombos.add(String.format("6 %s", sets[0]));
+            }
+
+            if (sets.length >= 2 && !sets[0].equals(sets[1])) {
                 setCombos.add(String.format("4 %s, 2 %s", sets[0], sets[1]));
                 setCombos.add(String.format("3 %s, 3 %s", sets[0], sets[1]));
             }
