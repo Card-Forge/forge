@@ -47,6 +47,18 @@ import forge.util.TextUtil;
  * @version $Id$
  */
 public class BoosterGenerator {
+
+    public static final String ANY = "Any";
+    public static final String COMMON = "Common";
+    public static final String UNCOMMON = "Uncommon";
+    public static final String UNCOMMON_RARE = "UncommonRare";
+    public static final String RARE = "Rare";
+    public static final String RARE_MYTHIC = "RareMythic";
+    public static final String MYTHIC = "Mythic";
+    public static final String BASIC_LAND = "BasicLand";
+    public static final String TIME_SHIFTED = "TimeShifted";
+
+
     private final static Map<String, PrintSheet> cachedSheets = new TreeMap<String, PrintSheet>(String.CASE_INSENSITIVE_ORDER);
     private static final synchronized PrintSheet getPrintSheet(String key) {
         if( !cachedSheets.containsKey(key) )
@@ -90,19 +102,19 @@ public class BoosterGenerator {
                 ps.add(CardDb.instance().getCard(cardName));
             }
 
-        } else if( mainCode.equalsIgnoreCase("any") ) { // no restriction on rarity
+        } else if( mainCode.equalsIgnoreCase(ANY) ) { // no restriction on rarity
             Predicate<CardPrinted> predicate = Predicates.and(setPred, extraPred);
             ps.addAll(Iterables.filter(src, predicate));
 
-        } else if( mainCode.equalsIgnoreCase("common") ) {
+        } else if( mainCode.equalsIgnoreCase(COMMON) ) {
             Predicate<CardPrinted> predicate = Predicates.and(setPred, IPaperCard.Predicates.Presets.IS_COMMON, extraPred);
             ps.addAll(Iterables.filter(src, predicate));
 
-        } else if ( mainCode.equalsIgnoreCase("uncommon") ) {
+        } else if ( mainCode.equalsIgnoreCase(UNCOMMON) ) {
             Predicate<CardPrinted> predicate = Predicates.and(setPred, IPaperCard.Predicates.Presets.IS_UNCOMMON, extraPred);
             ps.addAll(Iterables.filter(src, predicate));
 
-        } else if ( mainCode.equalsIgnoreCase("uncommonrare") ) { // for sets like ARN, where U1 cards are considered rare and U3 are uncommon
+        } else if ( mainCode.equalsIgnoreCase(UNCOMMON_RARE) ) { // for sets like ARN, where U1 cards are considered rare and U3 are uncommon
 
             Predicate<CardPrinted> predicateRares = Predicates.and(setPred, IPaperCard.Predicates.Presets.IS_RARE, extraPred);
             ps.addAll(Iterables.filter(src, predicateRares));
@@ -110,7 +122,7 @@ public class BoosterGenerator {
             Predicate<CardPrinted> predicateUncommon = Predicates.and( setPred, IPaperCard.Predicates.Presets.IS_UNCOMMON, extraPred);
             ps.addAll(Iterables.filter(src, predicateUncommon), 3);
 
-        } else if ( mainCode.equalsIgnoreCase("raremythic") ) {
+        } else if ( mainCode.equalsIgnoreCase(RARE_MYTHIC) ) {
             // Typical ratio of rares to mythics is 53:15, changing to 35:10 in smaller sets.
             // To achieve the desired 1:8 are all mythics are added once, and all rares added twice per print sheet.
 
@@ -120,19 +132,19 @@ public class BoosterGenerator {
             Predicate<CardPrinted> predicateRare = Predicates.and( setPred, IPaperCard.Predicates.Presets.IS_RARE, extraPred);
             ps.addAll(Iterables.filter(src, predicateRare), 2);
             
-        } else if ( mainCode.equalsIgnoreCase("rare") ) {
+        } else if ( mainCode.equalsIgnoreCase(RARE) ) {
             Predicate<CardPrinted> predicateRare = Predicates.and( setPred, IPaperCard.Predicates.Presets.IS_RARE, extraPred);
             ps.addAll(Iterables.filter(src, predicateRare));
             
-        } else if ( mainCode.equalsIgnoreCase("mythic") ) {
+        } else if ( mainCode.equalsIgnoreCase(MYTHIC) ) {
             Predicate<CardPrinted> predicateMythic = Predicates.and( setPred, IPaperCard.Predicates.Presets.IS_MYTHIC_RARE, extraPred);
             ps.addAll(Iterables.filter(src, predicateMythic));
 
-        } else if ( mainCode.equalsIgnoreCase("basicland") ) {
+        } else if ( mainCode.equalsIgnoreCase(BASIC_LAND) ) {
             Predicate<CardPrinted> predicateLand = Predicates.and( setPred, IPaperCard.Predicates.Presets.IS_BASIC_LAND, extraPred );
             ps.addAll(Iterables.filter(src, predicateLand));
 
-        } else if ( mainCode.equalsIgnoreCase("timeshifted") ) {
+        } else if ( mainCode.equalsIgnoreCase(TIME_SHIFTED) ) {
             Predicate<CardPrinted> predicate = Predicates.and( setPred, IPaperCard.Predicates.Presets.IS_SPECIAL, extraPred );
             ps.addAll(Iterables.filter(src, predicate));
 
