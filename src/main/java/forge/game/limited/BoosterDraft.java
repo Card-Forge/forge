@@ -70,7 +70,7 @@ public final class BoosterDraft implements IBoosterDraft {
 
     /** The draft picks. */
     private final Map<String, Float> draftPicks = new TreeMap<String, Float>();
-    private final CardPoolLimitation draftFormat;
+    private final LimitedPoolType draftFormat;
 
     private final List<Supplier<List<CardPrinted>>> product = new ArrayList<Supplier<List<CardPrinted>>>();
 
@@ -82,7 +82,7 @@ public final class BoosterDraft implements IBoosterDraft {
      * @param draftType
      *            a {@link java.lang.String} object.
      */
-    public BoosterDraft(final CardPoolLimitation draftType) {
+    public BoosterDraft(final LimitedPoolType draftType) {
         this.draftAI.setBd(this);
         this.draftFormat = draftType;
 
@@ -97,7 +97,7 @@ public final class BoosterDraft implements IBoosterDraft {
         case Block: case FantasyBlock: // Draft from cards by block or set
 
             List<CardBlock> blocks = new ArrayList<CardBlock>();
-            IStorageView<CardBlock> storage = draftType == CardPoolLimitation.Block 
+            IStorageView<CardBlock> storage = draftType == LimitedPoolType.Block 
                     ? Singletons.getModel().getBlocks() : Singletons.getModel().getFantasyBlocks();
 
             for (CardBlock b : storage) {

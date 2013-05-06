@@ -20,7 +20,7 @@ import forge.game.GameType;
 import forge.game.MatchController;
 import forge.game.MatchStartHelper;
 import forge.game.limited.BoosterDraft;
-import forge.game.limited.CardPoolLimitation;
+import forge.game.limited.LimitedPoolType;
 import forge.gui.GuiChoose;
 import forge.gui.SOverlayUtils;
 import forge.gui.deckeditor.CDeckEditorUI;
@@ -155,33 +155,15 @@ public enum CSubmenuDraft implements ICDoc {
 
     /** */
     private void setupDraft() {
-        final CEditorDraftingProcess draft = new CEditorDraftingProcess();
+        
 
         // Determine what kind of booster draft to run
-        final ArrayList<String> draftTypes = new ArrayList<String>();
-        draftTypes.add("Full Cardpool");
-        draftTypes.add("Block / Set");
-        draftTypes.add("Fantasy Block");
-        draftTypes.add("Custom");
-
         final String prompt = "Choose Draft Format:";
-        final Object o = GuiChoose.one(prompt, draftTypes);
-
-        if (o.toString().equals(draftTypes.get(0))) {
-            draft.showGui(new BoosterDraft(CardPoolLimitation.Full));
-        }
-
-        else if (o.toString().equals(draftTypes.get(1))) {
-            draft.showGui(new BoosterDraft(CardPoolLimitation.Block));
-        }
-
-        else if (o.toString().equals(draftTypes.get(2))) {
-            draft.showGui(new BoosterDraft(CardPoolLimitation.FantasyBlock));
-        }
-
-        else if (o.toString().equals(draftTypes.get(3))) {
-            draft.showGui(new BoosterDraft(CardPoolLimitation.Custom));
-        }
+        final LimitedPoolType o = GuiChoose.oneOrNone(prompt, LimitedPoolType.values());
+        if ( o == null ) return;
+        
+        final CEditorDraftingProcess draft = new CEditorDraftingProcess();
+        draft.showGui(new BoosterDraft(o));
 
         FControl.SINGLETON_INSTANCE.changeState(FControl.Screens.DRAFTING_PROCESS);
         CDeckEditorUI.SINGLETON_INSTANCE.setCurrentEditorController(draft);

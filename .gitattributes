@@ -14198,7 +14198,6 @@ src/main/java/forge/game/limited/BoosterDeckBuilder.java -text
 src/main/java/forge/game/limited/BoosterDraft.java svneol=native#text/plain
 src/main/java/forge/game/limited/BoosterDraftAI.java svneol=native#text/plain
 src/main/java/forge/game/limited/CCnt.java svneol=native#text/plain
-src/main/java/forge/game/limited/CardPoolLimitation.java -text
 src/main/java/forge/game/limited/CardRankingComparator.java -text
 src/main/java/forge/game/limited/CustomLimited.java svneol=native#text/plain
 src/main/java/forge/game/limited/DeckColors.java svneol=native#text/plain

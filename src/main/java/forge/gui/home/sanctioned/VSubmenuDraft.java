@@ -39,10 +39,10 @@ public enum VSubmenuDraft implements IVSubmenu<CSubmenuDraft> {
 
     // Fields used with interface IVDoc
     private DragCell parentCell;
-    private final DragTab tab = new DragTab("Draft Mode");
+    private final DragTab tab = new DragTab("Booster Draft");
 
     /** */
-    private final LblHeader lblTitle = new LblHeader("Sanctioned Format: Draft");
+    private final LblHeader lblTitle = new LblHeader("Sanctioned Format: Booster Draft");
 
     private final JPanel pnlStart = new JPanel();
     private final StartButton btnStart  = new StartButton();
@@ -69,7 +69,7 @@ public enum VSubmenuDraft implements IVSubmenu<CSubmenuDraft> {
         .text("Then, play against one or all of the AI opponents.")
         .fontSize(12).build();
 
-    private final FLabel btnBuildDeck = new FLabel.ButtonBuilder().text("New Draft Mode Game").fontSize(16).build();
+    private final FLabel btnBuildDeck = new FLabel.ButtonBuilder().text("New Booster Draft Game").fontSize(16).build();
 
 
     /**
@@ -105,7 +105,7 @@ public enum VSubmenuDraft implements IVSubmenu<CSubmenuDraft> {
      */
     @Override
     public String getMenuTitle() {
-        return "Draft Mode";
+        return "Booster Draft";
     }
 
     /* (non-Javadoc)

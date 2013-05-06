@@ -3,7 +3,7 @@ package forge;
 import org.testng.annotations.Test;
 
 import forge.game.limited.BoosterDraft;
-import forge.game.limited.CardPoolLimitation;
+import forge.game.limited.LimitedPoolType;
 import forge.item.CardPrinted;
 import forge.item.ItemPoolView;
 
@@ -21,7 +21,7 @@ public class BoosterDraft1Test {
      */
     @Test(groups = { "UnitTest", "fast" }, timeOut = 1000, enabled = false)
     public void boosterDraft1Test1() throws Exception {
-        final BoosterDraft draft = new BoosterDraft(CardPoolLimitation.Full);
+        final BoosterDraft draft = new BoosterDraft(LimitedPoolType.Full);
         while (draft.hasNextChoice()) {
             final ItemPoolView<CardPrinted> list = draft.nextChoice();
             System.out.println(list.countAll());

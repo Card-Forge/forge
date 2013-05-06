@@ -43,10 +43,10 @@ public enum VSubmenuSealed implements IVSubmenu<CSubmenuSealed> {
 
     // Fields used with interface IVDoc
     private DragCell parentCell;
-    private final DragTab tab = new DragTab("Sealed Mode");
+    private final DragTab tab = new DragTab("Sealed Deck");
 
     /** */
-    private final LblHeader lblTitle = new LblHeader("Sanctioned Format: Sealed");
+    private final LblHeader lblTitle = new LblHeader("Sanctioned Format: Sealed Deck");
 
     private final StartButton btnStart  = new StartButton();
     private final DeckLister lstDecks   = new DeckLister(GameType.Sealed);
@@ -67,7 +67,7 @@ public enum VSubmenuSealed implements IVSubmenu<CSubmenuSealed> {
         .text("Then, you will play against each of the AI opponents.")
         .fontSize(12).build();
 
-    private final FLabel btnBuildDeck = new FLabel.ButtonBuilder().text("New Sealed Mode Game").fontSize(16).build();
+    private final FLabel btnBuildDeck = new FLabel.ButtonBuilder().text("Build New Sealed Deck").fontSize(16).build();
 
     private final JLabel btnDirections = new FLabel.Builder()
         .fontSize(16).opaque(true).hoverable(true)
@@ -117,7 +117,7 @@ public enum VSubmenuSealed implements IVSubmenu<CSubmenuSealed> {
      */
     @Override
     public String getMenuTitle() {
-        return "Sealed Mode";
+        return "Sealed Deck";
     }
 
     /* (non-Javadoc)
