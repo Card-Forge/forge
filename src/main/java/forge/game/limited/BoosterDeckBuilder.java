@@ -10,7 +10,7 @@ import forge.item.CardPrinted;
  * Deck built from a Booster Draft.
  * 
  */
-public class BoosterDeck extends LimitedDeck {
+public class BoosterDeckBuilder extends LimitedDeckBuilder {
 
     /**
      * Constructor.
@@ -20,7 +20,7 @@ public class BoosterDeck extends LimitedDeck {
      * @param pClrs
      *            colors
      */
-    public BoosterDeck(List<CardPrinted> dList, DeckColors pClrs) {
+    public BoosterDeckBuilder(List<CardPrinted> dList, DeckColors pClrs) {
         super(dList, pClrs);
     }
 

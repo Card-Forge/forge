@@ -39,7 +39,7 @@ import forge.util.MyRandom;
  * Limited format deck.
  * 
  */
-public class LimitedDeck {
+public class LimitedDeckBuilder {
 
     private int numSpellsNeeded = 22;
     private int landsNeeded = 18;
@@ -67,7 +67,7 @@ public class LimitedDeck {
      * @param pClrs
      *            Chosen colors.
      */
-    public LimitedDeck(List<CardPrinted> dList, DeckColors pClrs) {
+    public LimitedDeckBuilder(List<CardPrinted> dList, DeckColors pClrs) {
         this.availableList = dList;
         this.deckColors = pClrs;
         this.colors = pClrs.getChosenColors();
@@ -88,7 +88,7 @@ public class LimitedDeck {
      * @param list
      *            Cards to build the deck from.
      */
-    public LimitedDeck(List<CardPrinted> list) {
+    public LimitedDeckBuilder(List<CardPrinted> list) {
         this(list, new DeckColors());
     }
 

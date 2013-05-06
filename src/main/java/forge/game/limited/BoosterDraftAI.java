@@ -158,7 +158,7 @@ public class BoosterDraftAI {
                 System.out.println("Deck[" + i + "]");
             }
 
-            out[i] = new BoosterDeck(this.deck.get(i), this.playerColors.get(i)).buildDeck();
+            out[i] = new BoosterDeckBuilder(this.deck.get(i), this.playerColors.get(i)).buildDeck();
         }
         return out;
     } // getDecks()

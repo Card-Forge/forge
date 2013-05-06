@@ -24,7 +24,7 @@ import forge.deck.DeckGroup;
 import forge.deck.DeckSection;
 import forge.game.GameType;
 import forge.game.limited.ReadDraftRankings;
-import forge.game.limited.SealedDeck;
+import forge.game.limited.SealedDeckBuilder;
 import forge.game.limited.SealedDeckFormat;
 import forge.gui.GuiChoose;
 import forge.gui.deckeditor.CDeckEditorUI;
@@ -229,7 +229,7 @@ public enum CSubmenuSealed implements ICDoc {
                 // Re-randomize for AI decks beyond the first...
                 aiDecks = sd.getCardpool(false);
             }
-            sealed.addAiDeck(new SealedDeck(aiDecks.toFlatList()).buildDeck());
+            sealed.addAiDeck(new SealedDeckBuilder(aiDecks.toFlatList()).buildDeck());
         }
 
         // Rank the AI decks

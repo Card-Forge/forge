@@ -21,15 +21,9 @@ import forge.util.MyRandom;
  * Deck builder for Sealed Deck Format.
  * 
  */
-public class SealedDeck extends LimitedDeck {
+public class SealedDeckBuilder extends LimitedDeckBuilder {
 
-    /**
-     * Constructor.
-     * 
-     * @param list
-     *            list of cards available
-     */
-    public SealedDeck(List<CardPrinted> list) {
+    public SealedDeckBuilder(List<CardPrinted> list) {
         super(list);
         this.setColors(chooseColors());
     }
