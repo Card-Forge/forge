@@ -1,56 +1,22 @@
-Forge Beta: 05-06-2013 ver 1.3.15
+Forge Beta: 05-##-2013 ver 1.3.16
 
 
-12694 cards in total.
+12### cards in total.
 
 
 -------------
 Release Notes
 -------------
 
-- Bug Fixes -
-This version is primarily a maintenance release. We fixed several important bugs and a number of smaller card related bugs.
-
-Reverted the synchronize changes since it seemed to break all of the trigger payment stuff.
-
-Added DGM into RTR block and made DGM lands no longer appear in the common slot. You should now be able to play a DGM draft/sealed game.
-
-
-- DGM card pictures -
-Most but not all of the LQ non-set DGM card pics are now available for downloading. The DGM set pics might become available in about a couple of weeks or so.
-
-
 - Java 7 -
 The devs are discussing a plan to update the battlefield display code with Java FX 2.2 and this should help to improve a few things. Java FX 2.2 requires Java 7 so it is important for members of our user base to update in the near future as Forge at the time of the update will no longer run under Java 6.
-
-
-- The following 4 cards from Dragon's Maze are not implemented -
-Boros Battleshaper
-Pyrewild Shaman
-Showstopper
-Trait Doctoring
-
-
-- Commander -
-We are taking baby steps toward Commander but there are some hurdles left before we get there. We need to implement the replacement effect that moves the commander back to your command zone; the cost-changing depending on how many times you've cast your commander; generating colorless mana if you try to generate mana outside your commanders color identity and AI for all the above.
 
 
 ---------
 New Cards
 ---------
 
-Breaking Wave
-Chord of Calling
-Deep Spawn
-Disrupting Shoal
-Dwarven Sea Clan
-Ghitu Fire
-Minamo's Meddling
-Mind Extraction
-Rout
-Saproling Symbiosis
-Stench of Evil
-Twilight's Call
+
 
 
 ------------
@@ -93,16 +59,7 @@ Some people use the Windows application 7zip. This utility can be found at http:
 Contributors to This Release
 ----------------------------
 
-Gos
-Hellfish
-Marc
-Max
-Nordos
-RedDeckWins
-Sloth
-Sol
-Swordshine
-Chris H
+
 
 
 (Quest icons used created by Teekatas, from his Legendora set http://raindropmemory.deviantart.com)

@@ -628,6 +628,10 @@ Quest challenge start in play cards:
 We have received reports that the quest challenge start in play cards are not appearing on the battlefield for people who were playing the classic mode rather than the fantasy mode. This should now be fixed.
 
 
+- Commander -
+We are taking baby steps toward Commander but there are some hurdles left before we get there. We need to implement the replacement effect that moves the commander back to your command zone; the cost-changing depending on how many times you've cast your commander; generating colorless mana if you try to generate mana outside your commanders color identity and AI for all the above.
+
+
 Our Lawyers Made Us Do This:
 ----------------------------
 
