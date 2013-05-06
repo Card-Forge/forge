@@ -164,13 +164,12 @@ public class BoosterGenerator {
             Predicate<CardPrinted> toAdd = null;
             if( operator.equals("dfc") ) {
                 toAdd = Predicates.compose(CardRulesPredicates.splitType(CardSplitType.Transform), CardPrinted.FN_GET_RULES);
+            } else if( operator.equals("land") ) {
+                toAdd = Predicates.compose(CardRulesPredicates.Presets.IS_LAND, CardPrinted.FN_GET_RULES);
             } else if ( operator.startsWith("name(") ) {
                 operator = StringUtils.strip(operator.substring(4), "() ");
                 String[] cardNames = TextUtil.splitWithParenthesis(operator, ',', '"', '"');
                 toAdd = IPaperCard.Predicates.names(Lists.newArrayList(cardNames));
-            } else if ( operator.startsWith("type(") ) {
-                operator = StringUtils.strip(operator.substring(4), "()\" ");
-                toAdd = Predicates.compose(CardRulesPredicates.coreType(true, operator), CardPrinted.FN_GET_RULES);
             }
 
             if(toAdd == null)
