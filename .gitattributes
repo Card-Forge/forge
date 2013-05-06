@@ -14206,9 +14206,10 @@ src/main/java/forge/game/limited/DraftRankCache.java -text
 src/main/java/forge/game/limited/GauntletMini.java -text
 src/main/java/forge/game/limited/IBoosterDraft.java svneol=native#text/plain
 src/main/java/forge/game/limited/LimitedDeckBuilder.java -text
+src/main/java/forge/game/limited/LimitedPoolType.java -text
 src/main/java/forge/game/limited/ReadDraftRankings.java -text
+src/main/java/forge/game/limited/SealedCardPoolGenerator.java svneol=native#text/plain
 src/main/java/forge/game/limited/SealedDeckBuilder.java svneol=native#text/plain
-src/main/java/forge/game/limited/SealedDeckFormat.java svneol=native#text/plain
 src/main/java/forge/game/limited/package-info.java svneol=native#text/plain
 src/main/java/forge/game/package-info.java -text
 src/main/java/forge/game/phase/Cleanup.java -text

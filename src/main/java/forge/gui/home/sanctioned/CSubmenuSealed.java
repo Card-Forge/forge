@@ -23,9 +23,10 @@ import forge.deck.DeckBase;
 import forge.deck.DeckGroup;
 import forge.deck.DeckSection;
 import forge.game.GameType;
+import forge.game.limited.LimitedPoolType;
 import forge.game.limited.ReadDraftRankings;
 import forge.game.limited.SealedDeckBuilder;
-import forge.game.limited.SealedDeckFormat;
+import forge.game.limited.SealedCardPoolGenerator;
 import forge.gui.GuiChoose;
 import forge.gui.deckeditor.CDeckEditorUI;
 import forge.gui.deckeditor.controllers.ACEditorBase;
@@ -34,7 +35,6 @@ import forge.gui.framework.ICDoc;
 import forge.item.CardPrinted;
 import forge.item.InventoryItem;
 import forge.item.ItemPool;
-import forge.util.TextUtil;
 import forge.util.storage.IStorage;
 
 /** 
@@ -142,53 +142,25 @@ public enum CSubmenuSealed implements ICDoc {
     @SuppressWarnings("unchecked")
     private <T extends DeckBase> void setupSealed() {
 
-        final List<String> sealedTypes = new ArrayList<String>();
-        sealedTypes.add("Full Cardpool");
-        sealedTypes.add("Block / Set");
-        sealedTypes.add("Fantasy Block");
-        sealedTypes.add("Custom");
 
         final String prompt = "Choose Sealed Deck Format:";
-        final Object o = GuiChoose.one(prompt, sealedTypes);
+        final LimitedPoolType o = GuiChoose.oneOrNone(prompt, LimitedPoolType.values());
+        if ( o == null ) return;
+        
+        SealedCardPoolGenerator sd = new SealedCardPoolGenerator(o);
+        if (sd.isEmpty()) return;
 
-        SealedDeckFormat sd = null;
-
-        if (o.toString().equals(sealedTypes.get(0))) {
-            sd = new SealedDeckFormat("Full");
-        }
-
-        else if (o.toString().equals(sealedTypes.get(1))) {
-            sd = new SealedDeckFormat("Block");
-        }
-
-        else if (o.toString().equals(sealedTypes.get(2))) {
-            sd = new SealedDeckFormat("FBlock");
-        }
-
-        else if (o.toString().equals(sealedTypes.get(3))) {
-            sd = new SealedDeckFormat("Custom");
-        }
-        else {
-            throw new IllegalStateException("choice <<" + TextUtil.safeToString(o)
-                    + ">> does not equal any of the sealedTypes.");
-        }
-
-        if (sd.getCardpool(false).isEmpty()) {
-            return;
-        }
+        final ItemPool<CardPrinted> humanPool = sd.getCardpool(true);
+        
+        // System.out.println(humanPool);
 
         // This seems to be limited by the MAX_DRAFT_PLAYERS constant
         // in DeckGroupSerializer.java. You could create more AI decks
         // but only the first seven would load. --BBU
-        final Integer[] integers = new Integer[7];
+        final Integer[] integers = {1,2,3,4,5,6,7};
+        Integer rounds = GuiChoose.oneOrNone("How many opponents are you willing to face?", integers);
+        if ( null == rounds ) return;
 
-        for (int i = 0; i <= 6; i++) {
-            integers[i] = Integer.valueOf(i + 1);
-        }
-
-        Integer rounds = GuiChoose.one("How many matches?", integers);
-
-        // System.out.println("You selected " + rounds + " rounds.");
 
         final String sDeckName = JOptionPane.showInputDialog(null,
                 "Save this card pool as:",
@@ -197,6 +169,14 @@ public enum CSubmenuSealed implements ICDoc {
 
         if (StringUtils.isBlank(sDeckName)) {
             return;
+        }
+
+
+        final Deck deck = new Deck(sDeckName);
+        deck.getOrCreate(DeckSection.Sideboard).addAll(humanPool);
+
+        for (final String element : Constant.Color.BASIC_LANDS) {
+            deck.get(DeckSection.Sideboard).add(element, sd.getLandSetCode(), 18);
         }
 
         final IStorage<DeckGroup> sealedDecks = Singletons.getModel().getDecks().getSealed();
@@ -212,24 +192,11 @@ public enum CSubmenuSealed implements ICDoc {
             sealedDecks.delete(sDeckName);
         }
 
-        final ItemPool<CardPrinted> sDeck = sd.getCardpool(true);
-        ItemPool<CardPrinted> aiDecks = sd.getCardpool(false);
-
-        final Deck deck = new Deck(sDeckName);
-        deck.getOrCreate(DeckSection.Sideboard).addAll(sDeck);
-
-        for (final String element : Constant.Color.BASIC_LANDS) {
-            deck.get(DeckSection.Sideboard).add(element, sd.getLandSetCode()[0], 18);
-        }
-
         final DeckGroup sealed = new DeckGroup(sDeckName);
         sealed.setHumanDeck(deck);
         for (int i = 0; i < rounds; i++) {
-            if (i > 0) {
-                // Re-randomize for AI decks beyond the first...
-                aiDecks = sd.getCardpool(false);
-            }
-            sealed.addAiDeck(new SealedDeckBuilder(aiDecks.toFlatList()).buildDeck());
+            // Generate other decks for next N opponents
+            sealed.addAiDeck(new SealedDeckBuilder(sd.getCardpool(false).toFlatList()).buildDeck());
         }
 
         // Rank the AI decks
