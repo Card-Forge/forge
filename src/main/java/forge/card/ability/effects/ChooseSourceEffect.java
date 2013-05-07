@@ -144,38 +144,14 @@ public class ChooseSourceEffect extends SpellAbilityEffect {
                         if (sa.hasParam("AILogic") && sa.getParam("AILogic").equals("NeedsPrevention")) {
                             final Player ai = sa.getActivatingPlayer();
                             if (!game.getStack().isEmpty()) {
-                                final SpellAbility topStack = game.getStack().peekAbility();
-                                if (sa.hasParam("Choices") && !topStack.getSourceCard().isValid(sa.getParam("Choices"), ai, host)) {
-                                    break;
+                                Card choseCard = ChooseCardOnStack(sa, ai, game);
+                                if (choseCard != null) {
+                                    chosen.add(ChooseCardOnStack(sa, ai, game));
                                 }
-                                final ApiType threatApi = topStack.getApi();
-                                if (threatApi != ApiType.DealDamage && threatApi != ApiType.DamageAll) {
-                                    break;
-                                }
+                            }
 
-                                final Card source = topStack.getSourceCard();
-                                ArrayList<Object> objects = new ArrayList<Object>();
-                                final Target threatTgt = topStack.getTarget();
-
-                                if (threatTgt == null) {
-                                    if (topStack.hasParam("Defined")) {
-                                        objects = AbilityUtils.getDefinedObjects(source, topStack.getParam("Defined"), topStack);
-                                    } else if (topStack.hasParam("ValidPlayers")) {
-                                        objects.addAll(AbilityUtils.getDefinedPlayers(source, topStack.getParam("ValidPlayers"), topStack));
-                                    }
-                                } else {
-                                    objects.addAll(threatTgt.getTargetPlayers());
-                                }
-                                if (!objects.contains(ai) || topStack.hasParam("NoPrevention")) {
-                                    break;
-                                }
-                                int dmg = AbilityUtils.calculateAmount(source, topStack.getParam("NumDmg"), topStack);
-                                if (ComputerUtilCombat.predictDamageTo(ai, dmg, source, false) <= 0) {
-                                    break;
-                                }
-                                chosen.add(topStack.getSourceCard());
-                            } else {
-                                sourcesToChooseFrom = CardLists.filter(sourcesToChooseFrom, new Predicate<Card>() {
+                            if (chosen.isEmpty()) {
+                                permanentSources = CardLists.filter(permanentSources, new Predicate<Card>() {
                                     @Override
                                     public boolean apply(final Card c) {
                                         if (!c.isAttacking(ai) || !game.getCombat().isUnblocked(c)) {
@@ -184,7 +160,7 @@ public class ChooseSourceEffect extends SpellAbilityEffect {
                                         return ComputerUtilCombat.damageIfUnblocked(c, ai, game.getCombat()) > 0;
                                     }
                                 });
-                                chosen.add(ComputerUtilCard.getBestCreatureAI(sourcesToChooseFrom));
+                                chosen.add(ComputerUtilCard.getBestCreatureAI(permanentSources));
                             }
                         } else {
                             chosen.add(ComputerUtilCard.getBestAI(sourcesToChooseFrom));
@@ -201,4 +177,40 @@ public class ChooseSourceEffect extends SpellAbilityEffect {
         }
     }
 
+    private Card ChooseCardOnStack(SpellAbility sa, Player ai, GameState game) {
+        int size = game.getStack().size();
+        for (int i = 0; i < size; i++) {
+            final SpellAbility topStack = game.getStack().peekAbility(i);
+            if (sa.hasParam("Choices") && !topStack.getSourceCard().isValid(sa.getParam("Choices"), ai, sa.getSourceCard())) {
+                continue;
+            }
+            final ApiType threatApi = topStack.getApi();
+            if (threatApi != ApiType.DealDamage && threatApi != ApiType.DamageAll) {
+                continue;
+            }
+    
+            final Card source = topStack.getSourceCard();
+            ArrayList<Object> objects = new ArrayList<Object>();
+            final Target threatTgt = topStack.getTarget();
+    
+            if (threatTgt == null) {
+                if (topStack.hasParam("Defined")) {
+                    objects = AbilityUtils.getDefinedObjects(source, topStack.getParam("Defined"), topStack);
+                } else if (topStack.hasParam("ValidPlayers")) {
+                    objects.addAll(AbilityUtils.getDefinedPlayers(source, topStack.getParam("ValidPlayers"), topStack));
+                }
+            } else {
+                objects.addAll(threatTgt.getTargetPlayers());
+            }
+            if (!objects.contains(ai) || topStack.hasParam("NoPrevention")) {
+                continue;
+            }
+            int dmg = AbilityUtils.calculateAmount(source, topStack.getParam("NumDmg"), topStack);
+            if (ComputerUtilCombat.predictDamageTo(ai, dmg, source, false) <= 0) {
+                continue;
+            }
+            return source;
+        }
+        return null;
+    }
 }
