@@ -34,6 +34,7 @@ import forge.card.CardRulesReader;
 import forge.card.EditionCollection;
 import forge.card.FatPackTemplate;
 import forge.card.FormatCollection;
+import forge.card.SealedProductTemplate;
 import forge.card.cardfactory.CardStorageReader;
 import forge.deck.CardCollections;
 import forge.error.BugReporter;
@@ -85,6 +86,7 @@ public enum FModel {
     private final EditionCollection editions;
     private final FormatCollection formats;
     private final IStorageView<BoosterTemplate> boosters;
+    private final IStorageView<SealedProductTemplate> specialBoosters;
     private final IStorageView<BoosterTemplate> tournaments;
     private final IStorageView<FatPackTemplate> fatPacks;
     private final IStorageView<CardBlock> blocks;
@@ -147,6 +149,7 @@ public enum FModel {
         this.editions = CardRulesReader.editions; // CardRules ctor cannot refer to FModel, since it is not yet build by that moment
         this.formats = new FormatCollection("res/blockdata/formats.txt");
         this.boosters = new StorageView<BoosterTemplate>(new BoosterTemplate.Reader("res/blockdata/boosters.txt"));
+        this.specialBoosters = new StorageView<SealedProductTemplate>(new SealedProductTemplate.Reader("res/blockdata/boosters-special.txt"));
         this.tournaments = new StorageView<BoosterTemplate>(new BoosterTemplate.Reader("res/blockdata/starters.txt"));
         this.fatPacks = new StorageView<FatPackTemplate>(new FatPackTemplate.Reader("res/blockdata/fatpacks.txt"));
         this.blocks = new StorageView<CardBlock>(new CardBlock.Reader("res/blockdata/blocks.txt", editions));
@@ -375,6 +378,10 @@ public enum FModel {
     /** @return {@link forge.util.storage.IStorageView}<{@link forge.card.BoosterTemplate}> */
     public final IStorageView<BoosterTemplate> getBoosters() {
         return boosters;
+    }
+
+    public final IStorageView<SealedProductTemplate> getSpecialBoosters() {
+        return specialBoosters;
     }
 
     public IStorageView<PrintSheet> getPrintSheets() {

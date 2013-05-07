@@ -87,7 +87,7 @@ public class StorageView<T> implements IStorageView<T> {
      */
     @Override
     public boolean contains(String name) {
-        return this.map.containsKey(name);
+        return name == null ? false : this.map.containsKey(name);
     }
 
     @Override

@@ -25,6 +25,7 @@ import java.util.Random;
 import forge.gui.GuiChoose;
 import forge.item.CardPrinted;
 import forge.util.MyRandom;
+import forge.util.TextUtil;
 
 /** 
  * This type extends UnOpenedProduct to support booster choice or random boosters
@@ -33,8 +34,14 @@ import forge.util.MyRandom;
 
 public class UnOpenedMeta implements IUnOpenedProduct {
 
+    private enum JoinOperation {
+        RandomOne,
+        ChooseOne,
+        SelectAll,
+    }
+    
     private final ArrayList<MetaSet> metaSets;
-    private final boolean canChoose;
+    private final JoinOperation operation;
     private final Random generator = MyRandom.getRandom();
 
     /**
@@ -44,12 +51,11 @@ public class UnOpenedMeta implements IUnOpenedProduct {
      * @param choose
      *        sets the random/choice status.
      */
-    public UnOpenedMeta(final String creationString, final boolean choose) {
+    private UnOpenedMeta(final String creationString, final JoinOperation op) {
         metaSets = new ArrayList<MetaSet>();
-        canChoose = choose;
+        operation = op;
 
-        
-        for(String m : creationString.split(";")) {
+        for(String m : TextUtil.splitWithParenthesis(creationString, ';', '(', ')')) {
             metaSets.add(new MetaSet(m, true));
         }
     }
@@ -72,41 +78,42 @@ public class UnOpenedMeta implements IUnOpenedProduct {
      *      known partialities for the AI.
      * @return List, list of cards.
      */
-
     public List<CardPrinted> open(final boolean isHuman) {
 
-        if (metaSets.size() < 1) {
+        if (metaSets.isEmpty()) {
             throw new RuntimeException("Empty UnOpenedMetaset, cannot generate booster.");
         }
 
-        if (canChoose) {
-            if (isHuman) {
-                final List<String> choices = new ArrayList<String>();
-
-                for (MetaSet meta : metaSets) {
-                    choices.add(meta.getCode());
+        switch(operation) {
+            case ChooseOne:
+                if (isHuman) {
+                    final MetaSet ms = GuiChoose.one("Choose booster:", metaSets);
+                    return ms.getBooster().get();
                 }
-                final Object o = GuiChoose.one("Choose booster:", choices);
-
-                for (int i = 0; i < metaSets.size(); i++) {
-                    if (o.toString().equals(metaSets.get(i).getCode())) {
-                        final IUnOpenedProduct newBooster = metaSets.get(i).getBooster();
-                        return newBooster.get();
-                    }
-                }
-
-                throw new RuntimeException("Could not find MetaSet " + o.toString());
-            }
-            else {
+                
+            case RandomOne: // AI should fall though here from the case above
                 int selected = generator.nextInt(metaSets.size());
                 final IUnOpenedProduct newBooster = metaSets.get(selected).getBooster();
                 return newBooster.get();
-            }
+            
+            case SelectAll:
+                List<CardPrinted> allCards = new ArrayList<CardPrinted>();
+                for (MetaSet ms : metaSets) {
+                    allCards.addAll(ms.getBooster().get());
+                }
+                return allCards;
         }
-        else {
-            int selected = generator.nextInt(metaSets.size());
-            final IUnOpenedProduct newBooster = metaSets.get(selected).getBooster();
-            return newBooster.get();
-        }
+        throw new IllegalStateException("Got wrong operation type in unopenedMeta - execution should never reach this point");
     }
+    
+    public static UnOpenedMeta choose(String desc) {
+        return new UnOpenedMeta(desc, JoinOperation.ChooseOne);
+    }
+    public static UnOpenedMeta random(String desc) {
+        return new UnOpenedMeta(desc, JoinOperation.RandomOne);
+    }
+    public static UnOpenedMeta selectAll(String desc) {
+        return new UnOpenedMeta(desc, JoinOperation.SelectAll);
+    }
+    
 }

@@ -6,7 +6,6 @@ import java.util.List;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 
-import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 
 import forge.util.TextUtil;
@@ -22,11 +21,9 @@ public class BoosterTemplate extends SealedProductTemplate {
     
     private final int foilRate = 68;
     private final int artIndices;
-    private final String edition;
-    
-    private BoosterTemplate(String edition0, int artIndices0, Iterable<Pair<String, Integer>> itrSlots) {
-        super(itrSlots);
-        this.edition = edition0;
+
+    private BoosterTemplate(String edition, int artIndices0, Iterable<Pair<String, Integer>> itrSlots) {
+        super(edition, itrSlots);
         artIndices = artIndices0;
     }
 
@@ -38,8 +35,6 @@ public class BoosterTemplate extends SealedProductTemplate {
         return artIndices;
     }
     
-    @Override
-    public final String getEdition() { return edition; } 
 
     @Override
     public String toString() {
@@ -63,17 +58,9 @@ public class BoosterTemplate extends SealedProductTemplate {
         return s.toString();
     }
 
-    public static final Function<? super BoosterTemplate, String> FN_GET_CODE = new Function<BoosterTemplate, String>() {
-        @Override
-        public String apply(BoosterTemplate arg1) {
-            return arg1.edition;
-        }
-    };
-
-    
     public static final class Reader extends StorageReaderFile<BoosterTemplate> {
         public Reader(String pathname) {
-            super(pathname, BoosterTemplate.FN_GET_CODE);
+            super(pathname, BoosterTemplate.FN_GET_NAME);
         }
 
         @Override

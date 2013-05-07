@@ -13596,16 +13596,6 @@ res/quest/world/shandalar/duels/Witch[!!-~]2.dck -text
 res/quest/world/shandalar/duels/Witch[!!-~]3.dck -text
 res/quest/world/worlds.txt -text
 res/sealed/ArabianExtended.sealed -text
-res/sealed/GtcGuildBoros.sealed -text
-res/sealed/GtcGuildDimir.sealed -text
-res/sealed/GtcGuildGruul.sealed -text
-res/sealed/GtcGuildOrzhov.sealed -text
-res/sealed/GtcGuildSimic.sealed -text
-res/sealed/RtRGuildAzorius.sealed -text
-res/sealed/RtRGuildGolgari.sealed -text
-res/sealed/RtRGuildIzzet.sealed -text
-res/sealed/RtRGuildRakdos.sealed -text
-res/sealed/RtRGuildSelesnya.sealed -text
 res/sealed/juzamjedi.sealed -text
 res/skins/dark_ascension/bg_match.jpg -text
 res/skins/dark_ascension/bg_splash.png -text

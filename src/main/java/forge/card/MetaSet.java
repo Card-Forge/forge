@@ -91,13 +91,30 @@ import forge.util.FileUtil;
 public class MetaSet {
     
     private enum MetaSetType { 
-        Full,
-        Cube,
-        JoinedSet,
-        Choose,
-        Random,
-        Booster,
-        Pack
+        Full("F", "All cards"),
+        Cube("C", "Cube"),
+        JoinedSet("J", "Joined set"),
+        Choose("Select", "Choose from list"),
+        Combo("All", "Combined booster"),
+        Random("Any", "Randomly selected"),
+        Booster("B", "Booster"),
+        SpecialBooster("S", "Special Booster"),
+        Pack("T", "Tournament/Starter");
+        
+        private final String shortHand;
+        public final String descriptiveName;
+        private MetaSetType(String shortname, String descName) {
+            shortHand = shortname;
+            descriptiveName = descName;
+        }
+
+        public static MetaSetType smartValueOf(String trim) {
+            for(MetaSetType mt : MetaSetType.values()) {
+                if( mt.name().equalsIgnoreCase(trim) || mt.shortHand.equalsIgnoreCase(trim))
+                    return mt;
+            }
+            throw new IllegalArgumentException(trim + " not recognized as Meta Set");
+        }
     }
 
     private final MetaSetType type;
@@ -118,21 +135,10 @@ public class MetaSet {
         int idxLastPar = creationString.lastIndexOf(')');
 
         draftable = canDraft; 
-        type = MetaSetType.valueOf(creationString.substring(0, idxFirstPar).trim());
+        type = MetaSetType.smartValueOf(creationString.substring(0, idxFirstPar).trim());
         data = creationString.substring(idxFirstPar + 1, idxLastPar);
         String description = creationString.substring(idxLastPar + 1);
-
-        switch (type) {
-            case Cube: code = "*C:" + description; break;
-            case Full: code = "*FULL"; break;
-            case JoinedSet: code = "*B:" + description; break;
-            case Choose: code = "*!:" + description; break;
-            case Random: code = "*?:" + description; break;
-            case Booster: code = "*" + description; break;
-            case Pack: code = "*" + description + "(S)"; break; 
-
-            default: throw new RuntimeException("Invalid MetaSet type: " + type); 
-        }
+        code = description + "\u00A0(" + type.descriptiveName + ")"; // u00A0 (nbsp) will not be equal to simple space
     }
 
     /**
@@ -160,6 +166,9 @@ public class MetaSet {
             case Booster:
                 return new UnOpenedProduct(Singletons.getModel().getBoosters().get(data));
 
+            case SpecialBooster:
+                return new UnOpenedProduct(Singletons.getModel().getSpecialBoosters().get(data));
+
             case Pack:
                 return new UnOpenedProduct(Singletons.getModel().getTournamentPacks().get(data));
 
@@ -167,11 +176,9 @@ public class MetaSet {
                 Predicate<CardPrinted> predicate = IPaperCard.Predicates.printedInSets(data.split(" "));
                 return new UnOpenedProduct(BoosterTemplate.genericBooster, predicate);
 
-            case Choose:
-                return new UnOpenedMeta(data, true);
-
-            case Random:
-                return new UnOpenedMeta(data, false);
+            case Choose: return UnOpenedMeta.choose(data);
+            case Random: return UnOpenedMeta.random(data);
+            case Combo:  return UnOpenedMeta.selectAll(data);
 
             case Cube:
                 final File dFolder = new File("res/sealed/");
@@ -193,6 +200,11 @@ public class MetaSet {
             default: return null;
         }
     }
+    
+    @Override
+    public String toString() {
+        return code;
+    } 
 
     public boolean isDraftable() {
         return draftable;

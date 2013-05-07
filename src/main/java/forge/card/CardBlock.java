@@ -284,11 +284,9 @@ public final class CardBlock implements Comparable<CardBlock> {
         return metaSets.keySet();
     }
 
-
     public MetaSet getMetaSet(String key) {
        return metaSets.get(key);
     }
-
 
     /**
      * Tries to create a booster for the selected meta-set code.

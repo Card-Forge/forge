@@ -108,10 +108,9 @@ public class SealedCardPoolGenerator {
                         return;
 
                     for (String pz : TextUtil.split(p, ',')) {
-                        String pp = pz.trim();
-                        int idxSp = pp.indexOf(' ');
-                        String setCode = idxSp > 0 ? pp.substring(idxSp+1) : pp;
-                        int nBoosters = idxSp > 0 ? Integer.parseInt(pp.substring(0, idxSp)) : 1; 
+                        String[] pps = TextUtil.splitWithParenthesis(pz.trim(), ' ' , '(', ')');
+                        String setCode = pps[pps.length - 1];
+                        int nBoosters = pps.length > 1 ? Integer.parseInt(pps[0]) : 1; 
                         while(nBoosters-- > 0)
                             this.product.add(block.getBooster(setCode));
                     }
@@ -218,17 +217,25 @@ public class SealedCardPoolGenerator {
             }
         }
         else if (nPacks == 5) {
-            if (sets.length >= 2) {
-                setCombos.add(String.format("%s, %s, %s, %s, %s", sets[0], sets[0], sets[0], sets[0], sets[0]));
-                setCombos.add(String.format("%s, %s, %s, %s, %s", sets[1], sets[1], sets[0], sets[0], sets[0]));
+            if (sets.length == 1 || !sets[0].equals(sets[1]) ) {
+                setCombos.add(String.format("5 %s", sets[0]));
             }
-            if (sets.length >= 3) {
-                setCombos.add(String.format("%s, %s, %s, %s, %s", sets[2], sets[2], sets[0], sets[0], sets[0]));
-                setCombos.add(String.format("%s, %s, %s, %s, %s", sets[2], sets[1], sets[0], sets[0], sets[0]));
-                setCombos.add(String.format("%s, %s, %s, %s, %s", sets[2], sets[1], sets[1], sets[0], sets[0]));
+
+            if (sets.length >= 2 && !sets[0].equals(sets[1])) {
+                setCombos.add(String.format("3 %s, 2 %s", sets[0], sets[1]));
+                setCombos.add(String.format("2 %s, 3 %s", sets[0], sets[1]));
+            }
+            if (sets.length >= 3 && !sets[0].equals(sets[2])) {
+                setCombos.add(String.format("3 %s, 2 %s", sets[0], sets[2]));
+                setCombos.add(String.format("3 %s, %s, %s", sets[0], sets[1], sets[2]));
+                setCombos.add(String.format("2 %s, 2 %s, %s", sets[0], sets[1], sets[2]));
             }
             if (sets.length >= 4) {
-                setCombos.add(String.format("%s, %s, %s, %s, %s", sets[3], sets[2], sets[1], sets[0], sets[0]));
+                if( sets[1].equals(sets[2]) && sets[1].equals(sets[0])) {
+                    setCombos.add(String.format("%s, 4 %s", sets[3], sets[0])); // for guild sealed
+                } else {
+                    setCombos.add(String.format("%s, %s, %s, 2 %s", sets[3], sets[2], sets[1], sets[0]));
+                }
             }
             if (sets.length >= 5) {
                 setCombos.add(String.format("%s, %s, %s, %s, %s", sets[4], sets[3], sets[2], sets[1], sets[0]));

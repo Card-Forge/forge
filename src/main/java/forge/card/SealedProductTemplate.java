@@ -18,28 +18,40 @@
 
 package forge.card;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 
+import com.google.common.base.Function;
 import com.google.common.collect.Lists;
+
+import forge.util.TextUtil;
+import forge.util.storage.StorageReaderFile;
 
 public class SealedProductTemplate {
 
     protected final List<Pair<String, Integer>> slots;
+    protected final String name;
 
 
     public final List<Pair<String, Integer>> getSlots() {
         return slots;
     }
 
-    public String getEdition() {
-        return null;
+    public final String getEdition() {
+        return name;
     }
-
     public SealedProductTemplate(Iterable<Pair<String, Integer>> itrSlots)
     {
+        this(null, itrSlots);
+    }
+    
+    public SealedProductTemplate(String name0, Iterable<Pair<String, Integer>> itrSlots)
+    {
         slots = Lists.newArrayList(itrSlots);
+        name = name0;
     }
 
     public int getNumberOfCardsExpected() {
@@ -48,5 +60,33 @@ public class SealedProductTemplate {
             sum += p.getRight().intValue();
         }
         return sum;
+    }
+    
+    protected static final Function<? super SealedProductTemplate, String> FN_GET_NAME = new Function<SealedProductTemplate, String>() {
+        @Override
+        public String apply(SealedProductTemplate arg1) {
+            return arg1.name;
+        }
+    };
+    
+    public static final class Reader extends StorageReaderFile<SealedProductTemplate> {
+        public Reader(String pathname) {
+            super(pathname, SealedProductTemplate.FN_GET_NAME);
+        }
+
+        @Override
+        protected SealedProductTemplate read(String line, int i) {
+            String[] headAndData = TextUtil.split(line, ':', 2);
+            final String edition = headAndData[0];
+            final String[] data = TextUtil.splitWithParenthesis(headAndData[1], ',', '(', ')');
+
+            List<Pair<String, Integer>> slots = new ArrayList<Pair<String,Integer>>();
+            for(String slotDesc : data) {
+                String[] kv = TextUtil.splitWithParenthesis(slotDesc, ' ', '(', ')', 2);
+                slots.add(ImmutablePair.of(kv[1], Integer.parseInt(kv[0])));
+            }
+
+            return new SealedProductTemplate(edition, slots);
+        }
     }
 }

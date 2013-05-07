@@ -121,5 +121,9 @@ public class PrintSheet {
         return cardsWithWeights.isEmpty();
     }
 
+    public Iterable<CardPrinted> toFlatList() {
+        return cardsWithWeights.toFlatList();
+    }
+
 
 }

@@ -6,8 +6,6 @@ import java.util.List;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 
-import com.google.common.base.Function;
-
 import forge.util.TextUtil;
 import forge.util.storage.StorageReaderFile;
 
@@ -17,29 +15,19 @@ import forge.util.storage.StorageReaderFile;
  */
 public class FatPackTemplate extends SealedProductTemplate {
     private final int cntBoosters;
-    private final String edition;
 
-    @Override
-    public String getEdition() { return edition; }
+
     public int getCntBoosters() { return cntBoosters; }
 
-    public static final Function<? super FatPackTemplate, String> FN_GET_CODE = new Function<FatPackTemplate, String>() {
-        @Override
-        public String apply(FatPackTemplate arg1) {
-            return arg1.edition;
-        }
-    };
-
-    private FatPackTemplate(String edition0, int boosters, Iterable<Pair<String, Integer>> itrSlots)
+    private FatPackTemplate(String edition, int boosters, Iterable<Pair<String, Integer>> itrSlots)
     {
-        super(itrSlots);
-        edition = edition0;
+        super(edition, itrSlots);
         cntBoosters = boosters;
     }
 
     public static final class Reader extends StorageReaderFile<FatPackTemplate> {
         public Reader(String pathname) {
-            super(pathname, FatPackTemplate.FN_GET_CODE);
+            super(pathname, FatPackTemplate.FN_GET_NAME);
         }
 
         @Override
