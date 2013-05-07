@@ -149,17 +149,26 @@ if __name__ == '__main__':
 	currentImplemented = []
 	allMissing = set()
 	allImplemented = set()
+
+	standardSets = getSetByFormat('Standard')
 	standardMissing = set()
 	standardImplemented = set()
+
+	modernSets = getSetByFormat('Modern')
+	modernMissing = set()
+	modernImplemented = set()
+
+	extendedSets = getSetByFormat('Extended')
+	extendedMissing = set()
+	extendedImplemented = set()
+
 	total = 0
 	percentage = 0
 
-	standardSets = getSetByFormat('Standard')
 
 	ignoredSet = [ 'ASTRAL', 'ATH', 'BD', 'BR', 'CM1', 'DD2', 'DDC', 'DDD', 'DDE', 'DDF',
 		'DDG', 'DDH', 'DDI', 'DDJ', 'DKM', 'DRB', 'DREAM', 'EVG', 'H09', 'ME2',
-		'ME3', 'ME4', 'MED', 'PD2', 'PD3', 'SDC', 'UG', 'UGL', 'UNH', 
-		'V09', 'V10', 'V11', 'V12', '']
+		'ME3', 'ME4', 'MED', 'PD2', 'PD3', 'SDC', 'UG', 'UGL', 'UNH', 'V09', 'V10', 'V11', 'V12', '']
 
 	for currentSet in setCodes :
 		# Ignore any sets that we don't tabulate
@@ -196,6 +205,13 @@ if __name__ == '__main__':
 		if currentSet in standardSets:
 			standardMissing |= set(currentMissing)
 			standardImplemented |= set(currentImplemented)
+		if currentSet in modernSets:
+			modernMissing |= set(currentMissing)
+			modernImplemented |= set(currentImplemented)
+		if currentSet in extendedSets:
+			extendedMissing |= set(currentMissing)
+			extendedImplemented |= set(currentImplemented)
+
 
 		del currentMissing[:]
 		del currentImplemented[:]
@@ -222,6 +238,8 @@ if __name__ == '__main__':
 
 	printCardSet(allImplemented, allMissing, "DistinctStats.txt")
 	printCardSet(standardImplemented, standardMissing, "FormatStandard.txt", setCoverage=standardSets)
+	printCardSet(extendedImplemented, extendedMissing, "FormatExtended.txt", setCoverage=extendedSets)
+	printCardSet(modernImplemented, modernMissing, "FormatModern.txt", setCoverage=modernSets)
 	printDistinctOracle(allMissing, "DistinctOracle.txt")
 
 	print ("Done!")
