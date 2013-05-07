@@ -14627,6 +14627,7 @@ src/test/java/forge/model/FModelTest.java -text
 tools/PerSetTracking.py svneol=native#text/x-python
 tools/assignSetInfo.py svneol=native#text/x-python
 tools/cardTemplateScript.py svneol=native#text/x-python
+tools/formats.txt -text
 tools/guilds.xlsx -text
 tools/mtg-data.txt svneol=native#text/plain
 tools/mtgdata-sets-to-forge.txt svneol=native#text/plain

@@ -1,0 +1,5 @@
+Name:Standard|Sets:ISD, DKA, AVR, M13, RTR, GTC, DGM
+Name:Extended|Sets:ZEN, WWK, ROE, M11, SOM, MBS, NPH, M12, ISD, DKA, AVR, M13, RTR, GTC, DGM|Banned:Stoneforge Mystic; Jace, the Mind Sculptor; Ponder; Preordain; Mental Misstep
+Name:Modern|Sets:8ED, MRD, DST, 5DN, CHK, BOK, SOK, 9ED, RAV, GPT, DIS, CSP, TSP, PLC, FUT, 10E, LRW, EVE, SHM, MOR, ALA, CFX, ARB, M10, ZEN, WWK, ROE, M11, SOM, MBS, NPH, M12, ISD, DKA, AVR, M13, RTR, GTC, DGM
+Name:Legacy
+Name:Vintage

@@ -7,7 +7,7 @@ pathToMtgData = os.path.join(sys.path[0], "mtg-data.txt")
 
 def getSetByFormat(requestedFormat):
 	# Parse out Standard sets from the Format file
-	formatLocation = os.path.join(sys.path[0], '..', 'res', 'blockdata', 'formats.txt')
+	formatLocation = os.path.join(sys.path[0], 'formats.txt')
 	with open(formatLocation) as formatFile:
 		formats = formatFile.readlines()
 
@@ -201,12 +201,13 @@ if __name__ == '__main__':
 		del currentImplemented[:]
 
 	#sort sets by percentage completed
-	totalDataList = sorted(totalData.items(), key=lambda (key,entry): entry[3], reverse=True)
+	totalDataList = sorted(totalData.items(), key=lambda k: k[1][3], reverse=True)
 
 	totalPercentage = 0
 	totalMissing = 0
 	totalImplemented = 0
 	fullTotal = 0
+
 	with open(os.path.join(sys.path[0], "PerSetTrackingResults", "CompleteStats.txt"), "w") as statsfile:
 		statsfile.write("Set: Implemented (Missing) / Total = Percentage Implemented\n")
 		for k,dataKey in totalDataList :
@@ -223,4 +224,4 @@ if __name__ == '__main__':
 	printCardSet(standardImplemented, standardMissing, "FormatStandard.txt", setCoverage=standardSets)
 	printDistinctOracle(allMissing, "DistinctOracle.txt")
 
-	print "Done!"
+	print ("Done!")
