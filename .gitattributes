@@ -11227,6 +11227,7 @@ res/cardsfolder/t/ticking_gnomes.txt svneol=native#text/plain
 res/cardsfolder/t/tidal_bore.txt svneol=native#text/plain
 res/cardsfolder/t/tidal_control.txt svneol=native#text/plain
 res/cardsfolder/t/tidal_courier.txt svneol=native#text/plain
+res/cardsfolder/t/tidal_flats.txt -text
 res/cardsfolder/t/tidal_kraken.txt svneol=native#text/plain
 res/cardsfolder/t/tidal_surge.txt svneol=native#text/plain
 res/cardsfolder/t/tidal_visionary.txt -text

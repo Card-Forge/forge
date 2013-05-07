@@ -1,0 +1,9 @@
+Name:Tidal Flats
+ManaCost:U
+Types:Enchantment
+A:AB$ RepeatEach | Cost$ U U | RepeatCards$ Creature.attacking+withoutFlying | RepeatSubAbility$ PumpOthers | SpellDescription$ For each attacking creature without flying, its controller may pay 1. If he or she doesn't, creatures you control blocking that creature gain first strike until end of turn.
+SVar:PumpOthers:DB$PumpAll | ValidCards$ Creature.blockingRemembered+YouCtrl | KW$ First Strike | UnlessCost$ 1 | UnlessPayer$ RememberedController
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/tidal_flats.jpg
+Oracle:{U}{U}:  For each attacking creature without flying, its controller may pay {1}. If he or she doesn't, creatures you control blocking that creature gain first strike until end of turn.
+SetInfo:FEM Common
