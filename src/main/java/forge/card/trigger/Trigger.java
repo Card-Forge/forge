@@ -273,7 +273,7 @@ public abstract class Trigger extends TriggerReplacementBase {
      *            a {@link java.util.HashMap} object.
      * @return a boolean.
      */
-    public final boolean requirementsCheck(GameState game, final Map<String, Object> runParams2) {
+    public final boolean requirementsCheck(GameState game, final Map<String, Object> runParams) {
 
         if (this.getMapParams().containsKey("APlayerHasMoreLifeThanEachOther")) {
             int highestLife = -50; // Negative base just in case a few Lich's or Platinum Angels are running around
@@ -318,8 +318,11 @@ public abstract class Trigger extends TriggerReplacementBase {
         if ( !meetsCommonRequirements(getMapParams()))
             return false;
 
+        if ( !meetsRequirementsOnTriggeredObjects(runParams) )
+            return false;
+        
         if ("True".equals(getMapParams().get("EvolveCondition"))) {
-            final Card moved = (Card) runParams2.get("Card");
+            final Card moved = (Card) runParams.get("Card");
             if (moved == null) {
                 return false;
                 // final StringBuilder sb = new StringBuilder();
@@ -335,12 +338,18 @@ public abstract class Trigger extends TriggerReplacementBase {
         
         String condition = getMapParams().get("Condition");
         if( "AltCost".equals(condition) ) {
-            final Card moved = (Card) runParams2.get("Card");
+            final Card moved = (Card) runParams.get("Card");
             if( null != moved && !moved.isOptionalCostPaid(OptionalCost.AltCost))
                 return false;
         }
 
 
+        return true;
+    }
+
+
+    private boolean meetsRequirementsOnTriggeredObjects(Map<String, Object> runParams) {
+        // Check number of lands ETB this turn on triggered card's controller
         return true;
     }
 

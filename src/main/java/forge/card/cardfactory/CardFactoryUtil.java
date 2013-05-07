@@ -917,7 +917,6 @@ public class CardFactoryUtil {
         if (players.size() == 0) {
             return 0;
         }
-        final GameState game = source.getGame();
 
         final String[] l = s.split("/");
         final String m = extractOperators(s);
@@ -927,9 +926,7 @@ public class CardFactoryUtil {
         // methods for getting the highest/lowest playerXCount from a range of players
         if (l[0].startsWith("Highest")) {
             for (final Player player : players) {
-                final ArrayList<Player> temp = new ArrayList<Player>();
-                temp.add(player);
-                final int current = playerXCount(temp, s.replace("Highest", ""), source);
+                final int current = playerXProperty(player, s.replace("Highest", ""), source);
                 if (current > n) {
                     n = current;
                 }
@@ -939,41 +936,14 @@ public class CardFactoryUtil {
         } else if (l[0].startsWith("Lowest")) {
             n = 99999; // if no players have fewer than 99999 valids, the game is frozen anyway
             for (final Player player : players) {
-                final ArrayList<Player> temp = new ArrayList<Player>();
-                temp.add(player);
-                final int current = playerXCount(temp, s.replace("Lowest", ""), source);
+                final int current = playerXProperty(player, s.replace("Lowest", ""), source);
                 if (current < n) {
                     n = current;
                 }
             }
-
             return doXMath(n, m, source);
         }
 
-        // count valid cards in any specified zone/s
-        if (l[0].startsWith("Valid") && !l[0].contains("Valid ")) {
-            String[] lparts = l[0].split(" ", 2);
-            final List<ZoneType> vZone = ZoneType.listValueOf(lparts[0].split("Valid")[1]);
-            String restrictions = l[0].replace(lparts[0] + " ", "");
-            final String[] rest = restrictions.split(",");
-            List<Card> cards = game.getCardsIn(vZone);
-            cards = CardLists.getValidCards(cards, rest, players.get(0), source);
-
-            n = cards.size();
-
-            return doXMath(n, m, source);
-        }
-        // count valid cards on the battlefield
-        if (l[0].startsWith("Valid ")) {
-            final String restrictions = l[0].substring(6);
-            final String[] rest = restrictions.split(",");
-            List<Card> cardsonbattlefield = game.getCardsIn(ZoneType.Battlefield);
-            cardsonbattlefield = CardLists.getValidCards(cardsonbattlefield, rest, players.get(0), source);
-
-            n = cardsonbattlefield.size();
-
-            return doXMath(n, m, source);
-        }
 
         final String[] sq;
         sq = l[0].split("\\.");
@@ -982,16 +952,56 @@ public class CardFactoryUtil {
         if (sq[0].equals("Amount")) {
             return doXMath(players.size(), m, source);
         }
-
-        if (sq[0].contains("CardsInHand")) {
-            if (players.size() > 0) {
-                return doXMath(players.get(0).getCardsIn(ZoneType.Hand).size(), m, source);
+        if (sq[0].contains("DamageThisTurn")) {
+            int totDmg = 0;
+            for (Player p : players) {
+                totDmg += p.getAssignedDamage();
             }
+            return doXMath(totDmg, m, source);
         }
 
-        if (sq[0].contains("DomainPlayer")) {
+        if(players.size() > 0)
+            return playerXProperty(players.get(0), s, source);
+
+        return doXMath(n, m, source);
+    }
+    
+    public static int playerXProperty(Player player, String s, Card source) {
+        final String[] l = s.split("/");
+        final String m = extractOperators(s);
+        
+        final GameState game = player.getGame();
+        
+        // count valid cards in any specified zone/s
+        if (l[0].startsWith("Valid") && !l[0].contains("Valid ")) {
+            String[] lparts = l[0].split(" ", 2);
+            final List<ZoneType> vZone = ZoneType.listValueOf(lparts[0].split("Valid")[1]);
+            String restrictions = l[0].replace(lparts[0] + " ", "");
+            final String[] rest = restrictions.split(",");
+            List<Card> cards = game.getCardsIn(vZone);
+            cards = CardLists.getValidCards(cards, rest, player, source);
+            return doXMath(cards.size(), m, source);
+        }
+        // count valid cards on the battlefield
+        if (l[0].startsWith("Valid ")) {
+            final String restrictions = l[0].substring(6);
+            final String[] rest = restrictions.split(",");
+            List<Card> cardsonbattlefield = game.getCardsIn(ZoneType.Battlefield);
+            cardsonbattlefield = CardLists.getValidCards(cardsonbattlefield, rest, player, source);
+            return doXMath(cardsonbattlefield.size(), m, source);
+        }
+        
+        final String[] sq = l[0].split("\\.");
+        final String value = sq[0];
+        
+        if (value.contains("CardsInHand")) {
+            return doXMath(player.getCardsIn(ZoneType.Hand).size(), m, source);
+        }
+
+        if (value.contains("DomainPlayer")) {
+            int n = 0;
             final List<Card> someCards = new ArrayList<Card>();
-            someCards.addAll(players.get(0).getCardsIn(ZoneType.Battlefield));
+            someCards.addAll(player.getCardsIn(ZoneType.Battlefield));
             final String[] basic = { "Forest", "Plains", "Mountain", "Island", "Swamp" };
 
             for (int i = 0; i < basic.length; i++) {
@@ -1002,118 +1012,74 @@ public class CardFactoryUtil {
             return doXMath(n, m, source);
         }
 
-        if (sq[0].contains("CardsInLibrary")) {
-            if (players.size() > 0) {
-                return doXMath(players.get(0).getCardsIn(ZoneType.Library).size(), m, source);
-            }
+        if (value.contains("CardsInLibrary")) {
+            return doXMath(player.getCardsIn(ZoneType.Library).size(), m, source);
         }
 
-        if (sq[0].contains("CardsInGraveyard")) {
-            if (players.size() > 0) {
-                return doXMath(players.get(0).getCardsIn(ZoneType.Graveyard).size(), m, source);
-            }
+        if (value.contains("CardsInGraveyard")) {
+            return doXMath(player.getCardsIn(ZoneType.Graveyard).size(), m, source);
         }
-        if (sq[0].contains("LandsInGraveyard")) {
-            if (players.size() > 0) {
-                return doXMath(CardLists.getType(players.get(0).getCardsIn(ZoneType.Graveyard), "Land").size(), m,
-                        source);
-            }
+        if (value.contains("LandsInGraveyard")) {
+            return doXMath(CardLists.getType(player.getCardsIn(ZoneType.Graveyard), "Land").size(), m, source);
         }
 
-        if (sq[0].contains("CreaturesInPlay")) {
-            if (players.size() > 0) {
-                return doXMath(players.get(0).getCreaturesInPlay().size(), m, source);
-            }
+        if (value.contains("CreaturesInPlay")) {
+            return doXMath(player.getCreaturesInPlay().size(), m, source);
         }
 
-        if (sq[0].contains("CardsInPlay")) {
-            if (players.size() > 0) {
-                return doXMath(players.get(0).getCardsIn(ZoneType.Battlefield).size(), m, source);
-            }
+        if (value.contains("CardsInPlay")) {
+            return doXMath(player.getCardsIn(ZoneType.Battlefield).size(), m, source);
         }
 
-        if (sq[0].contains("LifeTotal")) {
-            if (players.size() > 0) {
-                return doXMath(players.get(0).getLife(), m, source);
-            }
+        if (value.contains("LifeTotal")) {
+            return doXMath(player.getLife(), m, source);
         }
 
-        if (sq[0].contains("LifeLostThisTurn")) {
-            if (players.size() > 0) {
-                return doXMath(players.get(0).getLifeLostThisTurn(), m, source);
-            }
+        if (value.contains("LifeLostThisTurn")) {
+            return doXMath(player.getLifeLostThisTurn(), m, source);
         }
 
-        if (sq[0].contains("LifeGainedThisTurn")) {
-            if (players.size() > 0) {
-                return doXMath(players.get(0).getLifeGainedThisTurn(), m, source);
-            }
+        if (value.contains("LifeGainedThisTurn")) {
+            return doXMath(player.getLifeGainedThisTurn(), m, source);
         }
 
-        if (sq[0].contains("PoisonCounters")) {
-            if (players.size() > 0) {
-                return doXMath(players.get(0).getPoisonCounters(), m, source);
-            }
+        if (value.contains("PoisonCounters")) {
+            return doXMath(player.getPoisonCounters(), m, source);
         }
 
-        if (sq[0].contains("TopOfLibraryCMC")) {
-            if (players.size() > 0) {
-                return doXMath(Aggregates.sum(players.get(0).getCardsIn(ZoneType.Library, 1), CardPredicates.Accessors.fnGetCmc),
-                        m, source);
-            }
+        if (value.contains("TopOfLibraryCMC")) {
+            return doXMath(Aggregates.sum(player.getCardsIn(ZoneType.Library, 1), CardPredicates.Accessors.fnGetCmc), m, source);
         }
 
-        if (sq[0].contains("LandsPlayed")) {
-            if (players.size() > 0) {
-                return doXMath(players.get(0).getNumLandsPlayed(), m, source);
-            }
+        if (value.contains("LandsPlayed")) {
+            return doXMath(player.getNumLandsPlayed(), m, source);
         }
 
-        if (sq[0].contains("CardsDrawn")) {
-            if (players.size() > 0) {
-                return doXMath(players.get(0).getNumDrawnThisTurn(), m, source);
-            }
+        if (value.contains("CardsDrawn")) {
+            return doXMath(player.getNumDrawnThisTurn(), m, source);
         }
         
-        if (sq[0].contains("CardsDiscardedThisTurn")) {
-            if (players.size() > 0) {
-                return doXMath(players.get(0).getNumDiscardedThisTurn(), m, source);
-            }
+        if (value.contains("CardsDiscardedThisTurn")) {
+            return doXMath(player.getNumDiscardedThisTurn(), m, source);
         }
 
-        if (sq[0].contains("AttackersDeclared")) {
-            if (players.size() > 0) {
-                return doXMath(players.get(0).getAttackersDeclaredThisTurn(), m, source);
-            }
+        if (value.contains("AttackersDeclared")) {
+            return doXMath(player.getAttackersDeclaredThisTurn(), m, source);
         }
 
-        if (sq[0].equals("DamageDoneToPlayerBy")) {
-            if (players.size() > 0) {
-                return doXMath(source.getDamageDoneToPlayerBy(players.get(0).getName()), m, source);
-            }
+        if (value.equals("DamageDoneToPlayerBy")) {
+            return doXMath(source.getDamageDoneToPlayerBy(player.getName()), m, source);
         }
 
-        if (sq[0].contains("DamageToOppsThisTurn")) {
-            if (players.size() > 0) {
-                int oppDmg = 0;
-                for (Player opp : players.get(0).getOpponents()) {
-                    oppDmg += opp.getAssignedDamage();
-                }
-                return doXMath(oppDmg, m, source);
+        if (value.contains("DamageToOppsThisTurn")) {
+            int oppDmg = 0;
+            for (Player opp : player.getOpponents()) {
+                oppDmg += opp.getAssignedDamage();
             }
+            return doXMath(oppDmg, m, source);
         }
-
-        if (sq[0].contains("DamageThisTurn")) {
-            if (players.size() > 0) {
-                int totDmg = 0;
-                for (Player p : players) {
-                    totDmg += p.getAssignedDamage();
-                }
-                return doXMath(totDmg, m, source);
-            }
-        }
-
-        return doXMath(n, m, source);
+        
+        return doXMath(0, m, source);
     }
 
     /**
@@ -1323,12 +1289,14 @@ public class CardFactoryUtil {
         if (sq[0].contains("YourPoisonCounters"))           return doXMath(cc.getPoisonCounters(), m, c);
         if (sq[0].contains("OppPoisonCounters"))            return doXMath(ccOpp.getPoisonCounters(), m, c);
 
-        if (sq[0].contains("OppDamageThisTurn"))            return doXMath(cc.getOpponent().getAssignedDamage(), m, c);
+        if (sq[0].contains("OppDamageThisTurn"))            return doXMath(ccOpp.getAssignedDamage(), m, c);
         if (sq[0].contains("YourDamageThisTurn"))           return doXMath(cc.getAssignedDamage(), m, c);
 
         // Count$YourTypeDamageThisTurn Type
         if (sq[0].contains("YourTypeDamageThisTurn"))       return doXMath(cc.getAssignedDamage(sq[0].split(" ")[1]), m, c);
+        
         if (sq[0].contains("YourLandsPlayed"))              return doXMath(cc.getNumLandsPlayed(), m, c);
+        if (sq[0].contains("OppLandsPlayed"))               return doXMath(ccOpp.getNumLandsPlayed(), m, c);
 
 
         // Count$HighestLifeTotal

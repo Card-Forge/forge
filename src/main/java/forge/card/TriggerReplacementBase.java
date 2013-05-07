@@ -277,7 +277,6 @@ public abstract class TriggerReplacementBase {
             if (!Expressions.compare(left, presentCompare, right)) {
                 return false;
             }
-    
         }
     
         if (params.containsKey("CheckSVar")) {
@@ -288,8 +287,7 @@ public abstract class TriggerReplacementBase {
             }
             final String svarOperator = comparator.substring(0, 2);
             final String svarOperand = comparator.substring(2);
-            final int operandValue = AbilityUtils.calculateAmount(game.getCardState(this.getHostCard()),
-                    svarOperand, null);
+            final int operandValue = AbilityUtils.calculateAmount(game.getCardState(this.getHostCard()), svarOperand, null);
             if (!Expressions.compare(sVar, svarOperator, operandValue)) {
                 return false;
             }

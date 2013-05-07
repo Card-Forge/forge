@@ -493,11 +493,7 @@ public class AbilityUtils {
         if (calcX[0].startsWith("TriggeredPlayer") || calcX[0].startsWith("TriggeredTarget")) {
             final SpellAbility root = ability.getRootAbility();
             Object o = root.getTriggeringObject(calcX[0].substring(9));
-            final List<Player> players = new ArrayList<Player>();
-            if (o instanceof Player) {
-                players.add((Player) o);
-            }
-            return CardFactoryUtil.playerXCount(players, calcX[1], card) * multiplier;
+            return o instanceof Player ? CardFactoryUtil.playerXProperty((Player) o, calcX[1], card) * multiplier : 0;
         }
         if(calcX[0].equals("TriggeredSpellAbility")) {
             final SpellAbility root = ability.getRootAbility();
