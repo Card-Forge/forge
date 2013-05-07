@@ -167,6 +167,13 @@ public final class CardPredicates {
             }
         };
 
+        public static final Predicate<Card> FACE_DOWN = new Predicate<Card>() {
+            @Override
+            public boolean apply(Card c) {
+                return c.isFaceDown();
+            }
+        };
+        
         /**
          * a Predicate<Card> to get all cards that are untapped.
          */

@@ -10,6 +10,7 @@ import forge.Card;
 import forge.CardCharacteristicName;
 import forge.CardLists;
 import forge.CardPredicates;
+import forge.FThreads;
 import forge.GameEntity;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
@@ -19,6 +20,7 @@ import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityStackInstance;
 import forge.card.spellability.Target;
 import forge.card.trigger.TriggerType;
+import forge.control.input.InputSelectCardsFromList;
 import forge.game.GameState;
 import forge.game.ai.ComputerUtilCard;
 import forge.game.player.AIPlayer;
@@ -693,17 +695,14 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         if (!defined) {
             if (origin.contains(ZoneType.Library) && !defined && !sa.hasParam("NoLooking")) {
                 final int fetchNum = Math.min(player.getCardsIn(ZoneType.Library).size(), 4);
+                List<Card> shown = !decider.hasKeyword("LimitSearchLibrary") ? player.getCardsIn(ZoneType.Library) : player.getCardsIn(ZoneType.Library, fetchNum);
                 // Look at whole library before moving onto choosing a card
-                GuiChoose.oneOrNone(sa.getSourceCard().getName() + " - Looking at Library",
-                        !decider.hasKeyword("LimitSearchLibrary") 
-                            ? player.getCardsIn(ZoneType.Library) 
-                            : player.getCardsIn(ZoneType.Library, fetchNum));
+                decider.getController().reveal(sa.getSourceCard().getName() + " - Looking at library", shown, ZoneType.Library, player);
             }
 
             // Look at opponents hand before moving onto choosing a card
             if (origin.contains(ZoneType.Hand) && player.isOpponentOf(decider)) {
-                GuiChoose.oneOrNone(sa.getSourceCard().getName() + " - Looking at Opponent's Hand", player
-                        .getCardsIn(ZoneType.Hand));
+                decider.getController().reveal(sa.getSourceCard().getName() + " - Looking at Opponent's Hand", player.getCardsIn(ZoneType.Hand), ZoneType.Hand, player);
             }
             fetchList = AbilityUtils.filterListByType(fetchList, sa.getParam("ChangeType"), sa);
         }
@@ -712,7 +711,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         final boolean champion = sa.hasParam("Champion");
         final String forget = sa.getParam("ForgetChanged");
         final String imprint = sa.getParam("Imprint");
-        final String selectPrompt = sa.hasParam("SelectPrompt") ? sa.getParam("SelectPrompt") : "Select a card";
+        final String selectPrompt = sa.hasParam("SelectPrompt") ? sa.getParam("SelectPrompt") : "Select a card from " + origin;
         final String totalcmc = sa.getParam("WithTotalCMC");
         int totcmc = AbilityUtils.calculateAmount(card, totalcmc, sa);
 
@@ -735,15 +734,25 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 break;
             }
 
+            // card has to be on battlefield or in own hand
+            boolean canUseInputToSelectCard = origin.size() == 1 && ( origin.get(0) == ZoneType.Battlefield || origin.get(0) == ZoneType.Hand && player == decider); 
+            
             Object o;
             if (sa.hasParam("AtRandom")) {
                 o = Aggregates.random(fetchList);
-            } else if (sa.hasParam("Mandatory")) {
-                o = GuiChoose.one(selectPrompt, fetchList);
             } else if (sa.hasParam("Defined")) {
                 o = fetchList.get(0);
             } else {
-                o = GuiChoose.oneOrNone(selectPrompt, fetchList);
+                boolean mustChoose = sa.hasParam("Mandatory");
+                if( canUseInputToSelectCard ) {
+                    InputSelectCardsFromList inp = new InputSelectCardsFromList(1, 1, fetchList);
+                    inp.setCancelAllowed(!mustChoose);
+                    inp.setMessage(selectPrompt);
+                    FThreads.setInputAndWait(inp);
+                    o = inp.getSelected().get(0);
+                }
+                else
+                    o = GuiChoose.getChoices(selectPrompt, 0, mustChoose ? 1 : 0, fetchList);
             }
 
             if (o != null) {
@@ -887,7 +896,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             }
         }
         if (sa.hasParam("Reveal") && !movedCards.isEmpty()) {
-            GuiChoose.one(card + " - Revealed card: ", movedCards);
+            decider.getController().reveal(card + " - Revealed card: ", movedCards, origin.get(0), player);
         }
 
         if ((origin.contains(ZoneType.Library) && !destination.equals(ZoneType.Library) && !defined)
