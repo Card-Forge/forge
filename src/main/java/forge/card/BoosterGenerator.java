@@ -76,7 +76,7 @@ public class BoosterGenerator {
             String slotType = slot.getLeft(); // add expansion symbol here?
             int numCards = slot.getRight().intValue();
 
-            String[] sType = TextUtil.splitWithParenthesis(slotType, ' ', '(', ')');
+            String[] sType = TextUtil.splitWithParenthesis(slotType, ' ');
             String setCode = sType.length == 1 && booster.getEdition() != null ?  booster.getEdition() : null;
             String sheetKey = Singletons.getModel().getEditions().contains(setCode) ? slotType.trim() + " " + setCode: slotType.trim(); 
 
@@ -89,10 +89,10 @@ public class BoosterGenerator {
     @SuppressWarnings("unchecked")
     public static final PrintSheet makeSheet(String sheetKey, Iterable<CardPrinted> src) {
         PrintSheet ps = new PrintSheet(sheetKey);
-        String[] sKey = TextUtil.splitWithParenthesis(sheetKey, ' ', '(', ')', 2);
+        String[] sKey = TextUtil.splitWithParenthesis(sheetKey, ' ', 2);
         Predicate<CardPrinted> setPred = (Predicate<CardPrinted>) (sKey.length > 1 ? IPaperCard.Predicates.printedInSets(sKey[1].split(" ")) : Predicates.alwaysTrue());
 
-        List<String> operators = new LinkedList<String>(Arrays.asList(TextUtil.splitWithParenthesis(sKey[0], ':', '(', ')')));
+        List<String> operators = new LinkedList<String>(Arrays.asList(TextUtil.splitWithParenthesis(sKey[0], ':')));
         Predicate<CardPrinted> extraPred = buildExtraPredicate(operators);
 
         // source replacement operators - if one is applied setPredicate will be ignored

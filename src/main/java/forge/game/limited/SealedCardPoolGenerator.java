@@ -108,7 +108,7 @@ public class SealedCardPoolGenerator {
                         return;
 
                     for (String pz : TextUtil.split(p, ',')) {
-                        String[] pps = TextUtil.splitWithParenthesis(pz.trim(), ' ' , '(', ')');
+                        String[] pps = TextUtil.splitWithParenthesis(pz.trim(), ' ');
                         String setCode = pps[pps.length - 1];
                         int nBoosters = pps.length > 1 ? Integer.parseInt(pps[0]) : 1; 
                         while(nBoosters-- > 0)

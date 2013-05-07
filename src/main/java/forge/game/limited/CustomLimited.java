@@ -95,9 +95,9 @@ public class CustomLimited extends DeckBase {
         List<Pair<String, Integer>> slots = new ArrayList<Pair<String,Integer>>();
         String boosterData = data.get("Booster");
         if(StringUtils.isNotEmpty(boosterData)){
-            final String[] booster = TextUtil.splitWithParenthesis(boosterData, ',', '(', ')');
+            final String[] booster = TextUtil.splitWithParenthesis(boosterData, ',');
             for(String slotDesc : booster) {
-                String[] kv = TextUtil.splitWithParenthesis(slotDesc, ' ', '(', ')', 2);
+                String[] kv = TextUtil.splitWithParenthesis(slotDesc, ' ', 2);
                 slots.add(ImmutablePair.of(kv[1], Integer.parseInt(kv[0])));
             }
         } else

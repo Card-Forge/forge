@@ -34,7 +34,7 @@ public class FatPackTemplate extends SealedProductTemplate {
         protected FatPackTemplate read(String line, int i) {
             String[] headAndData = TextUtil.split(line, ':', 2);
             final String edition = headAndData[0];
-            final String[] data = TextUtil.splitWithParenthesis(headAndData[1], ',', '(', ')');
+            final String[] data = TextUtil.splitWithParenthesis(headAndData[1], ',');
             int nBoosters = 6;
 
             List<Pair<String, Integer>> slots = new ArrayList<Pair<String,Integer>>();

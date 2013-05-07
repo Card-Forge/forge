@@ -78,11 +78,11 @@ public class SealedProductTemplate {
         protected SealedProductTemplate read(String line, int i) {
             String[] headAndData = TextUtil.split(line, ':', 2);
             final String edition = headAndData[0];
-            final String[] data = TextUtil.splitWithParenthesis(headAndData[1], ',', '(', ')');
+            final String[] data = TextUtil.splitWithParenthesis(headAndData[1], ',');
 
             List<Pair<String, Integer>> slots = new ArrayList<Pair<String,Integer>>();
             for(String slotDesc : data) {
-                String[] kv = TextUtil.splitWithParenthesis(slotDesc, ' ', '(', ')', 2);
+                String[] kv = TextUtil.splitWithParenthesis(slotDesc, ' ', 2);
                 slots.add(ImmutablePair.of(kv[1], Integer.parseInt(kv[0])));
             }
 

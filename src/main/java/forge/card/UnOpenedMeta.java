@@ -55,7 +55,7 @@ public class UnOpenedMeta implements IUnOpenedProduct {
         metaSets = new ArrayList<MetaSet>();
         operation = op;
 
-        for(String m : TextUtil.splitWithParenthesis(creationString, ';', '(', ')')) {
+        for(String m : TextUtil.splitWithParenthesis(creationString, ';')) {
             metaSets.add(new MetaSet(m, true));
         }
     }

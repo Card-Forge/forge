@@ -238,7 +238,7 @@ public final class CardBlock implements Comparable<CardBlock> {
          */
         @Override
         protected CardBlock read(String line, int i) {
-            final String[] sParts = TextUtil.splitWithParenthesis(line.trim(), ',', '(', ')', 3);
+            final String[] sParts = TextUtil.splitWithParenthesis(line.trim(), ',', 3);
             String name = sParts[0];
 
             String[] numbers = sParts[1].trim().split("/");
@@ -249,7 +249,7 @@ public final class CardBlock implements Comparable<CardBlock> {
             List<CardEdition> sets = new ArrayList<CardEdition>();
             List<MetaSet> metas = new ArrayList<MetaSet>();
             
-            String[] setNames = TextUtil.splitWithParenthesis(sParts[2], ' ', '(', ')' );
+            String[] setNames = TextUtil.splitWithParenthesis(sParts[2], ' ' );
             for(final String set : setNames ) {
                 if(set.startsWith("Meta-")) {
                     String metaSpec = set.substring(5);

@@ -48,9 +48,16 @@ public class TextUtil {
     public static String[] split(CharSequence input, char delimiter, int limit) {
         return splitWithParenthesis(input, delimiter, limit, '\0', '\0', true);
     }
+    public static String[] splitWithParenthesis(CharSequence input, char delimiter) {
+        return splitWithParenthesis(input, delimiter, Integer.MAX_VALUE, '(', ')', true);
+    }
 
     public static String[] splitWithParenthesis(CharSequence input, char delimiter, char openPar, char closePar) {
         return splitWithParenthesis(input, delimiter, Integer.MAX_VALUE, openPar, closePar, true);
+    }
+
+    public static String[] splitWithParenthesis(CharSequence input, char delimiter, int limit) {
+        return splitWithParenthesis(input, delimiter, limit, '(', ')', true);
     }
 
     public static String[] splitWithParenthesis(CharSequence input, char delimiter, char openPar, char closePar, int limit) {
