@@ -24,6 +24,8 @@ User data files, like decks, saved gauntlets, and card pictures, are now stored 
         userDir=$HOME/.forge/
         cacheDir=$HOME/.cache/forge/
 
+The appdata directory is hidden by default in Win7. Open a Windows Explorer window (or double-click on My Computer] and in the address field type "%appdata%/forge/" (without the quotes). If that doesn't work, type "%appdata"/roaming/forge".
+
 cardPicsDir is defined as <cacheDir>/pics/cards/ by default.  If you wish to use a non-default directory, please see the forge.profile.preferences.example file located in the Forge installation directory root.  You can use this file to, for example, share the card pics directory with another program, such as Magic Workstation.
 
 If you are using the Mac OS X version of Forge then you will find the forge.profile.preferences.example file by right clicking or control clicking on the Forge.app icon. Select "Show Package Contents" from the contextual menu. A Finder window will open and will display a folder named Contents. Navigate to the folder:

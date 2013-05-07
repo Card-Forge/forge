@@ -12,11 +12,18 @@ Release Notes
 The devs are discussing a plan to update the battlefield display code with Java FX 2.2 and this should help to improve a few things. Java FX 2.2 requires Java 7 so it is important for members of our user base to update in the near future as Forge at the time of the update will no longer run under Java 6.
 
 
+- HOW-TO: Customize your Sealed Deck games with fantasy blocks -
+We have an informative topic at CCGH which explains how you can create "fantasy blocks" and the greatly increased flexibility you have when you are building your own blocks. Please see the topic http://www.slightlymagic.net/forum/viewtopic.php?f=26&t=8164 for more information. Also not that the syntax was recently changes, see message http://www.slightlymagic.net/forum/viewtopic.php?f=26&t=8164&view=unread#p117389 for additional information.
+
+
 ---------
 New Cards
 ---------
 
-
+Bane Alley Broker
+Aven Mindcensor
+Tidal Flats
+Leonin Shikari
 
 
 ------------
