@@ -1,7 +1,7 @@
 package forge.game.ai;
 
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
@@ -17,8 +17,10 @@ import com.google.common.collect.Iterables;
 import forge.Card;
 import forge.CardLists;
 import forge.CardPredicates;
+import forge.CardUtil;
 import forge.Constant;
 import forge.card.CardType;
+import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
@@ -823,27 +825,32 @@ public class ComputerUtilCard {
     }
 
     public static List<String> getColorByProminence(final List<Card> list) {
-        final HashMap<String, Integer> counts = new HashMap<String, Integer>();
-        for (String color : Constant.Color.ONLY_COLORS) {
-            counts.put(color, 0);
-        }
-        for (Card c : list) {
-            List<String> colors = c.determineColor().toStringList();
-            for (String col : colors) {
-                if (counts.containsKey(col)) {
-                    counts.put(col.toString(), counts.get(col.toString()) + 1);
-                }
+        int cntColors = MagicColor.WUBRG.length;
+        final Integer[] map = new Integer[cntColors];
+
+        for (final Card crd : list) {
+            ColorSet color = CardUtil.getColors(crd);
+            for(int i = 0; i < cntColors; i++) {
+                if( color.hasAnyColor(MagicColor.WUBRG[i]))
+                    map[i]++;
             }
-        }
-        ArrayList<String> res = new ArrayList<String>(counts.keySet());
-        Collections.sort(res, new Comparator<String>() {
-            @Override
-            public int compare(final String a, final String b) {
-                return counts.get(b) - counts.get(a);
-            }
+        } // for
+
+        Integer[] indices = new Integer[cntColors];
+        for(int i = 0; i < cntColors; i++)
+            indices[i] = Integer.valueOf(i);
+
+        // sort indices for WUBRG array, to get indices for most prominent colors first.
+        Arrays.sort(indices, new Comparator<Integer>() {
+            @Override public int compare(final Integer a, final Integer b) { return map[b] - map[a]; }
         });
     
-        return res;
+        // fetch color names in the same order
+        List<String> result = new ArrayList<String>(cntColors);
+        for(Integer idx : indices) {
+            result.add(MagicColor.toLongString(MagicColor.WUBRG[idx]));
+        }
+        return result;
     }
 
     /**

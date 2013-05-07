@@ -39,7 +39,7 @@ public final class CardUtil {
     private CardUtil() { }
 
     public static ColorSet getColors(final Card c) {
-        return c.determineColor().toColorSet();
+        return c.determineColor();
     }
 
     public static boolean isStackingKeyword(final String keyword) {
@@ -135,7 +135,7 @@ public final class CardUtil {
 
         // Determine the color for LKI copy, not just getColor
         ArrayList<CardColor> currentColor = new ArrayList<CardColor>();
-        currentColor.add(in.determineColor());
+        currentColor.add(new CardColor(in.determineColor().getColor()));
         newCopy.setColor(currentColor);
         newCopy.setReceivedDamageFromThisTurn(in.getReceivedDamageFromThisTurn());
         newCopy.getDamageHistory().setCreatureGotBlockedThisTurn(in.getDamageHistory().getCreatureGotBlockedThisTurn());
@@ -162,19 +162,17 @@ public final class CardUtil {
         final List<Card> res = new ArrayList<Card>();
 
         final GameState game = source.getGame();
-        for (final CardColor col : origin.getColor()) {
-            for (final String strCol : col.toStringList()) {
-                if (strCol.equalsIgnoreCase("Colorless")) {
-                    continue;
-                }
-                for (final Card c : game.getColoredCardsInPlay(strCol)) {
-                    if (!res.contains(c) && c.isValid(valid, source.getController(), source) && !c.equals(origin)) {
-                        res.add(c);
-                    }
+        ColorSet cs = CardUtil.getColors(origin);
+        for (byte color : MagicColor.WUBRG) {
+            if(!cs.hasAnyColor(color)) 
+                continue;
+            
+            for(final Card c : game.getColoredCardsInPlay(MagicColor.toLongString(color))) {
+                if (!res.contains(c) && c.isValid(valid, source.getController(), source) && !c.equals(origin)) {
+                    res.add(c);
                 }
             }
         }
-
         return res;
     }
 

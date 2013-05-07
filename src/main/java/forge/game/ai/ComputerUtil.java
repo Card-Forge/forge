@@ -19,9 +19,7 @@ package forge.game.ai;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 
 import com.google.common.base.Predicate;
@@ -32,7 +30,7 @@ import forge.CardLists;
 import forge.CardPredicates;
 import forge.CardPredicates.Presets;
 import forge.CardUtil;
-import forge.Color;
+import forge.card.MagicColor;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.ApiType;
 import forge.card.ability.effects.CharmEffect;
@@ -1270,10 +1268,10 @@ public class ComputerUtil {
         {
             //Too many lands!
             //Init
-            Map<Color,List<Card>> numProducers = new HashMap<Color,List<Card>>();
-            for(Color col : Color.WUBRG)
-            {
-                numProducers.put(col, new ArrayList<Card>());
+            int cntColors = MagicColor.WUBRG.length;
+            List<List<Card>> numProducers = new ArrayList<List<Card>>(cntColors);
+            for(byte col : MagicColor.WUBRG) {
+                numProducers.add(col, new ArrayList<Card>());
             }
             
             
@@ -1282,10 +1280,8 @@ public class ComputerUtil {
                 for(SpellAbility sa : c.getManaAbility())
                 {
                     AbilityManaPart abmana = sa.getManaPart();
-                    for(Color col : Color.WUBRG)
-                    {
-                        if(abmana.canProduce(col.toString()))
-                        {
+                    for(byte col : MagicColor.WUBRG) {
+                        if(abmana.canProduce(MagicColor.toLongString(col))) {
                             numProducers.get(col).add(c);
                         }
                     }

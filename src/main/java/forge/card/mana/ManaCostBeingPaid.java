@@ -26,10 +26,11 @@ import java.util.Map.Entry;
 import com.google.common.collect.Lists;
 
 import forge.Card;
-import forge.CardColor;
 import forge.CardLists;
 import forge.CardPredicates;
+import forge.CardUtil;
 import forge.Constant;
+import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.card.spellability.SpellAbility;
 import forge.card.staticability.StaticAbility;
@@ -804,17 +805,11 @@ public class ManaCostBeingPaid {
         if (getColorlessManaAmount() > 0) {
             usableColors.add("colorless");
         }
-        for (final CardColor col : cardToConvoke.getColor()) {
-            for (final String strCol : col.toStringList()) {
-                if (strCol.equals("colorless")) {
-                    continue;
-                }
-                if (toString().contains(MagicColor.toShortString(strCol))) {
-                    usableColors.add(strCol.toString());
-                }
-            }
+        ColorSet cs = CardUtil.getColors(cardToConvoke);
+        for(byte color : MagicColor.WUBRG) {
+            if( cs.hasAnyColor(color))
+                usableColors.add(MagicColor.toLongString(color));
         }
-    
         return usableColors;
     }
 

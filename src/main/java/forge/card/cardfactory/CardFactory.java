@@ -26,7 +26,6 @@ import forge.Card;
 import forge.CardCharacteristicName;
 import forge.CardColor;
 import forge.CardUtil;
-import forge.Color;
 import forge.Command;
 import forge.CounterType;
 import forge.ImageCache;
@@ -154,7 +153,7 @@ public class CardFactory {
             }
             final String finalColors = tmp;
 
-            c.addColor(finalColors, c, !sourceSA.hasParam("OverwriteColors"), true);
+            c.addColor(finalColors, !sourceSA.hasParam("OverwriteColors"), true);
         }
         
         c.clearControllers();
@@ -385,9 +384,8 @@ public class CardFactory {
             card.setManaCost(combinedManaCost);
 
             // Combined card color
-            CardColor combinedCardColor = new CardColor(card);
-            combinedCardColor.addToCardColor(Color.fromColorSet(rules.getMainPart().getColor()));
-            combinedCardColor.addToCardColor(Color.fromColorSet(rules.getOtherPart().getColor()));
+            int combinedColor = rules.getMainPart().getColor().getColor() | rules.getOtherPart().getColor().getColor();
+            CardColor combinedCardColor = new CardColor((byte)combinedColor);
             ArrayList<CardColor> combinedCardColorArr = new ArrayList<CardColor>();
             combinedCardColorArr.add(combinedCardColor);
             card.setColor(combinedCardColorArr);
@@ -424,8 +422,7 @@ public class CardFactory {
         c.setType(coreTypes);
 
         // What a perverted color code we have!
-        CardColor col1 = new CardColor(c);
-        col1.addToCardColor(Color.fromColorSet(face.getColor()));
+        CardColor col1 = new CardColor(face.getColor().getColor());
         ArrayList<CardColor> ccc = new ArrayList<CardColor>();
         ccc.add(col1);
         c.setColor(ccc);

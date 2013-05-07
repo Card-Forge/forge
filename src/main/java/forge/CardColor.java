@@ -17,13 +17,9 @@
  */
 package forge;
 
-import java.util.ArrayList;
-import java.util.EnumSet;
-import java.util.Iterator;
-import java.util.List;
-
 import forge.card.ColorSet;
-import forge.card.mana.ManaCostBeingPaid;
+import forge.card.mana.ManaCost;
+import forge.card.mana.ManaCostParser;
 
 /**
  * <p>
@@ -33,32 +29,21 @@ import forge.card.mana.ManaCostBeingPaid;
  * @author Forge
  * @version $Id$
  */
-public class CardColor implements Iterable<Color> {
-    /* (non-Javadoc)
-     * @see java.lang.Iterable#iterator()
-     */
-    @Override
-    public Iterator<Color> iterator() {
-        return col.iterator();
-    }
+public class CardColor  {
+    private static long timeStamp = 0;
+    public static long getTimestamp() { return CardColor.timeStamp; }
+    static void increaseTimestamp() { CardColor.timeStamp++; }
 
     // takes care of individual card color, for global color change effects use
     // AllZone.getGameInfo().getColorChanges()
-    private final EnumSet<Color> col;
-    private final boolean additional;
+    private final byte colorMask;
+    public final byte getColorMask() { return colorMask; }
 
-    /**
-     * <p>
-     * Getter for the field <code>additional</code>.
-     * </p>
-     * 
-     * @return a boolean.
-     */
-    public final boolean getAdditional() {
+    private final boolean additional;
+    public final boolean isAdditional() {
         return this.additional;
     }
 
-    private Card effectingCard = null;
     private long stamp = 0;
 
     /**
@@ -70,22 +55,6 @@ public class CardColor implements Iterable<Color> {
      */
     public final long getStamp() {
         return this.stamp;
-    }
-
-    /**
-     * Constant <code>timeStamp=0</code>.
-     */
-    private static long timeStamp = 0;
-
-    /**
-     * <p>
-     * getTimestamp.
-     * </p>
-     * 
-     * @return a long.
-     */
-    public static long getTimestamp() {
-        return CardColor.timeStamp;
     }
 
     /**
@@ -102,10 +71,10 @@ public class CardColor implements Iterable<Color> {
      * @param baseColor
      *            a boolean.
      */
-    CardColor(final ManaCostBeingPaid mc, final Card c, final boolean addToColors, final boolean baseColor) {
+    CardColor(final String colors, final boolean addToColors, final boolean baseColor) {
         this.additional = addToColors;
-        this.col = Color.convertManaCostToColor(mc);
-        this.effectingCard = c;
+        ManaCost mc = new ManaCost(new ManaCostParser(colors));
+        this.colorMask = mc.getColorProfile();
         if (baseColor) {
             this.stamp = 0;
         } else {
@@ -113,65 +82,15 @@ public class CardColor implements Iterable<Color> {
         }
     }
 
-    /**
-     * <p>
-     * Constructor for Card_Color.
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.Card} object.
-     */
-    public CardColor(final Card c) {
-        this.col = Color.colorless();
+    public CardColor(byte mask) {
+        this.colorMask = mask;
         this.additional = false;
         this.stamp = 0;
-        this.effectingCard = c;
     }
 
-    /**
-     * <p>
-     * addToCardColor.
-     * </p>
-     * 
-     * @param s
-     *            a {@link java.lang.String} object.
-     * @return a boolean.
-     */
-    public final void addToCardColor(final String[] ss) {
-        for (String s : ss) {
-            final Color c = Color.convertFromString(s);
-            if (!this.col.contains(c)) {
-                this.col.add(c);
-            }
-        }
-    }
-
-    public final void addToCardColor(final Iterable<Color> cc) {
-        for (Color c : cc) {
-            if (!this.col.contains(c)) {
-                this.col.add(c);
-            }
-        }
-    }
-
-    /**
-     * <p>
-     * fixColorless.
-     * </p>
-     */
-    public final void fixColorless() {
-        if ((this.col.size() > 1) && this.col.contains(Color.Colorless)) {
-            this.col.remove(Color.Colorless);
-        }
-    }
-
-    /**
-     * <p>
-     * increaseTimestamp.
-     * </p>
-     */
-    static void increaseTimestamp() {
-        CardColor.timeStamp++;
+    
+    public CardColor() {
+        this((byte)0);
     }
 
     /**
@@ -190,38 +109,10 @@ public class CardColor implements Iterable<Color> {
      * @return a boolean.
      */
     public final boolean equals(final String cost, final Card c, final boolean addToColors, final long time) {
-        return (this.effectingCard == c) && (addToColors == this.additional) && (this.stamp == time);
+        return (addToColors == this.additional) && (this.stamp == time);
     }
 
-    /**
-     * <p>
-     * toStringArray.
-     * </p>
-     * 
-     * @return a {@link java.util.ArrayList} object.
-     */
-    public final String[] toStringArray() {
-        final String[] list = new String[this.col.size()];
-        int i  = 0;
-        for (final Color c : this.col) {
-            list[i++] = c.toString();
-        }
-        return list;
-    }
-    
     public final ColorSet toColorSet() {
-        int mask = 0; 
-        for (final Color c : this.col) {
-            mask |= c.getMagicColor();
-        }
-        return ColorSet.fromMask(mask);
-    }
-
-    public final List<String> toStringList() {
-        final List<String> list = new ArrayList<String>(this.col.size());
-        for (final Color c : this.col) {
-            list.add(c.toString());
-        }
-        return list;
+        return ColorSet.fromMask(colorMask);
     }
 }

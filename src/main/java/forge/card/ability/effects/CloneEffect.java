@@ -306,10 +306,10 @@ public class CloneEffect extends SpellAbilityEffect {
             if (colors.equals("ChosenColor")) {
                 shortColors = CardUtil.getShortColorsString(tgtCard.getChosenColor());
             } else {
-                shortColors = CardUtil.getShortColorsString(new ArrayList<String>(Arrays.asList(colors.split(","))));
+                shortColors = CardUtil.getShortColorsString(Arrays.asList(colors.split(",")));
             }
         }
-        tgtCard.addColor(shortColors, tgtCard, !sa.hasParam("OverwriteColors"), true);
+        tgtCard.addColor(shortColors, !sa.hasParam("OverwriteColors"), true);
     }
 
 }

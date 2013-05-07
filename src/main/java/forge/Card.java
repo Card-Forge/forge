@@ -50,7 +50,6 @@ import forge.card.ability.ApiType;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.mana.ManaCost;
-import forge.card.mana.ManaCostBeingPaid;
 import forge.card.replacement.ReplaceMoved;
 import forge.card.replacement.ReplacementEffect;
 import forge.card.replacement.ReplacementResult;
@@ -1537,7 +1536,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         if (s.equals("")) {
             s = "0";
         }
-        this.getCharacteristics().getCardColor().add(new CardColor(new ManaCostBeingPaid(s), this, false, true));
+        this.getCharacteristics().getCardColor().add(new CardColor(s, false, true));
     }
 
     /**
@@ -1555,11 +1554,11 @@ public class Card extends GameEntity implements Comparable<Card> {
      *            a boolean.
      * @return a long.
      */
-    public final long addColor(final String s, final Card c, final boolean addToColors, final boolean bIncrease) {
+    public final long addColor(final String s, final boolean addToColors, final boolean bIncrease) {
         if (bIncrease) {
             CardColor.increaseTimestamp();
         }
-        this.getCharacteristics().getCardColor().add(new CardColor(new ManaCostBeingPaid(s), c, addToColors, false));
+        this.getCharacteristics().getCardColor().add(new CardColor(s, addToColors, false));
         return CardColor.getTimestamp();
     }
 
@@ -1597,15 +1596,13 @@ public class Card extends GameEntity implements Comparable<Card> {
      * 
      * @return a {@link forge.CardColor} object.
      */
-    public final CardColor determineColor() {
+    public final ColorSet determineColor() {
         if (this.isImmutable()) {
-            return new CardColor(this);
+            return ColorSet.getNullColor();
         }
 
         final List<CardColor> globalChanges = getOwner() == null ? new ArrayList<CardColor>() : getOwner().getGame().getColorChanger().getColorChanges();
-        CardColor colors = this.determineColor(globalChanges);
-        colors.fixColorless();
-        return colors;
+        return this.determineColor(globalChanges);
     }
 
     /**
@@ -1639,8 +1636,8 @@ public class Card extends GameEntity implements Comparable<Card> {
      *            an ArrayList<CardColor>
      * @return a CardColor
      */
-    final CardColor determineColor(final List<CardColor> globalChanges) {
-        final CardColor colors = new CardColor(this);
+    final ColorSet determineColor(final List<CardColor> globalChanges) {
+        byte colors = 0;
         int i = this.getCharacteristics().getCardColor().size() - 1;
         int j = -1;
         if (globalChanges != null) {
@@ -1659,29 +1656,29 @@ public class Card extends GameEntity implements Comparable<Card> {
                 j--;
             }
 
-            colors.addToCardColor(cc);
-            if (!cc.getAdditional()) {
-                return colors;
+            colors |= cc.getColorMask();
+            if (!cc.isAdditional()) {
+                return ColorSet.fromMask(colors);
             }
         }
         while (i >= 0) {
             final CardColor cc = this.getCharacteristics().getCardColor().get(i);
             i--;
-            colors.addToCardColor(cc);
-            if (!cc.getAdditional()) {
-                return colors;
+            colors |= cc.getColorMask();
+            if (!cc.isAdditional()) {
+                return ColorSet.fromMask(colors);
             }
         }
         while (j >= 0) {
             final CardColor cc = globalChanges.get(j);
             j--;
-            colors.addToCardColor(cc);
-            if (!cc.getAdditional()) {
-                return colors;
+            colors |= cc.getColorMask();
+            if (!cc.isAdditional()) {
+                return ColorSet.fromMask(colors);
             }
         }
 
-        return colors;
+        return ColorSet.fromMask(colors);
     }
 
     /**

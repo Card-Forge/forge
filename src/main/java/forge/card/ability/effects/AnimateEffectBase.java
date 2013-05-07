@@ -104,7 +104,7 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
             c.addHiddenExtrinsicKeyword(k);
         }
 
-        final long colorTimestamp = c.addColor(colors, c, !sa.hasParam("OverwriteColors"), true);
+        final long colorTimestamp = c.addColor(colors, !sa.hasParam("OverwriteColors"), true);
         return colorTimestamp;
     }
 

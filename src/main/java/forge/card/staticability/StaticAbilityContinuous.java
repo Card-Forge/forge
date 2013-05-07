@@ -425,7 +425,7 @@ public class StaticAbilityContinuous {
 
             // add colors
             if (addColors != null) {
-                final long t = affectedCard.addColor(addColors, affectedCard, !se.isOverwriteColors(), true);
+                final long t = affectedCard.addColor(addColors, !se.isOverwriteColors(), true);
                 se.addTimestamp(affectedCard, t);
             }
 
