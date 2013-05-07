@@ -9,6 +9,7 @@ import com.google.common.collect.Iterables;
 
 import forge.Card;
 import forge.CardCharacteristicName;
+import forge.CardLists;
 import forge.CardPredicates;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
@@ -47,12 +48,24 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
 
         if ((tgtPlayers == null) || tgtPlayers.isEmpty() || sa.hasParam("UseAllOriginZones")) {
             cards = game.getCardsIn(origin);
+        } else if (sa.getActivatingPlayer().hasKeyword("LimitSearchLibrary")
+                && origin.contains(ZoneType.Library) && sa.hasParam("Search")) {
+            for (final Player p : tgtPlayers) {
+                cards.addAll(p.getCardsIn(origin));
+                cards.removeAll(p.getCardsIn(ZoneType.Library));
+                int fetchNum = Math.min(p.getCardsIn(ZoneType.Library).size(), 4);
+                cards.addAll(p.getCardsIn(ZoneType.Library, fetchNum));
+            }
         } else {
             for (final Player p : tgtPlayers) {
                 cards.addAll(p.getCardsIn(origin));
             }
         }
-
+        if (sa.getActivatingPlayer().isHuman() && origin.contains(ZoneType.Library) 
+                && sa.hasParam("Search")) {
+            GuiChoose.oneOrNone("Looking at the Library", 
+                    CardLists.getValidCards(cards, "Card.inZoneLibrary", sa.getActivatingPlayer(), sa.getSourceCard()));
+        }
         cards = AbilityUtils.filterListByType(cards, sa.getParam("ChangeType"), sa);
 
         if (sa.hasParam("ForgetOtherRemembered")) {

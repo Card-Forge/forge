@@ -2,9 +2,7 @@ Name:Haunting Echoes
 ManaCost:3 B B
 Types:Sorcery
 A:SP$ ChangeZoneAll | Cost$ 3 B B | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Player | TgtPrompt$ Select target player | ChangeType$ Card.nonBasic | RememberChanged$ True | SubAbility$ DBRepeat | SpellDescription$ Exile all cards from target player's graveyard other than basic land cards. For each card exiled this way, search that player's library for all cards with the same name as that card and exile them. Then that player shuffles his or her library.
-SVar:DBRepeat:DB$ RepeatEach | UseImprinted$ True | RepeatCards$ Card.IsRemembered | Zone$ Exile | RepeatSubAbility$ DBRemove | SubAbility$ DBShuffle
-SVar:DBRemove:DB$ ChangeZoneAll | Origin$ Library | Defined$ Targeted | Destination$ Exile | Mandatory$ True | ChangeType$ Card.sharesNameWith Imprinted | SubAbility$ DBCleanup
-SVar:DBShuffle:DB$ Shuffle | Defined$ Targeted | SubAbility$ DBCleanup
+SVar:DBRepeat:DB$ ChangeZoneAll | Origin$ Library | Defined$ Targeted | Destination$ Exile | Mandatory$ True | ChangeType$ Card.sharesNameWith Remembered | Search$ True | Shuffle$ True | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/haunting_echoes.jpg

@@ -1106,6 +1106,13 @@ public class ChangeZoneAi extends SpellAbilityAi {
             fetchList = AbilityUtils.filterListByType(fetchList, type, sa);
         } else {
             fetchList = player.getCardsIn(origin);
+            if (origin.contains(ZoneType.Library) && ai.hasKeyword("LimitSearchLibrary")
+                    && !sa.hasParam("NoLooking")) {
+                // Aven Mindcensor
+                fetchList.removeAll(player.getCardsIn(ZoneType.Library));
+                final int fetchNum = Math.min(player.getCardsIn(ZoneType.Library).size(), 4);
+                fetchList.addAll(player.getCardsIn(ZoneType.Library, fetchNum));
+            }
             fetchList = AbilityUtils.filterListByType(fetchList, type, sa);
         }
 

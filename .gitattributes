@@ -651,6 +651,7 @@ res/cardsfolder/a/aven_flock.txt svneol=native#text/plain
 res/cardsfolder/a/aven_fogbringer.txt svneol=native#text/plain
 res/cardsfolder/a/aven_liberator.txt -text
 res/cardsfolder/a/aven_mimeomancer.txt -text svneol=unset#text/plain
+res/cardsfolder/a/aven_mindcensor.txt -text
 res/cardsfolder/a/aven_redeemer.txt svneol=native#text/plain
 res/cardsfolder/a/aven_riftwatcher.txt svneol=native#text/plain
 res/cardsfolder/a/aven_shrine.txt -text

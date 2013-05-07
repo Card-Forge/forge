@@ -4,8 +4,7 @@ Types:Sorcery
 A:SP$ NameCard | Cost$ 2 B R | ValidCards$ Card.nonLand | SubAbility$ DBReveal | ValidDesc$ nonland | SpellDescription$ Name a nonland card. Target player reveals his or her hand. CARDNAME deals 3 damage to that player for each card with that name revealed this way. Search that player's graveyard, hand, and library for all cards with that name and exile them. Then that player shuffles his or her library.
 SVar:DBReveal:DB$ RevealHand | RememberRevealed$ True | ValidTgts$ Player | TgtPrompt$ Select target player | SubAbility$ DBDamage
 SVar:DBDamage:DB$ DealDamage | Defined$ Targeted | NumDmg$ X | SubAbility$ DBChangeZone
-SVar:DBChangeZone:DB$ ChangeZoneAll | Defined$ Targeted | ChangeType$ Card.NamedCard | Origin$ Graveyard,Hand,Library | Destination$ Exile | SubAbility$ DBShuffle
-SVar:DBShuffle:DB$ Shuffle | Defined$ Targeted | SubAbility$ DBCleanup
+SVar:DBChangeZone:DB$ ChangeZoneAll | Defined$ Targeted | ChangeType$ Card.NamedCard | Origin$ Graveyard,Hand,Library | Destination$ Exile | Search$ True | Shuffle$ True | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Valid Card.NamedCard/Times.3
 SVar:RemAIDeck:True

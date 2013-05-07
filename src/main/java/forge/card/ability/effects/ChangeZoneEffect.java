@@ -682,13 +682,22 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             fetchList = game.getCardsIn(origin);
         } else {
             fetchList = player.getCardsIn(origin);
+            if (origin.contains(ZoneType.Library) && decider.hasKeyword("LimitSearchLibrary") 
+                    && !sa.hasParam("NoLooking")) {// Aven Mindcensor
+                fetchList.removeAll(player.getCardsIn(ZoneType.Library));
+                final int fetchNum = Math.min(player.getCardsIn(ZoneType.Library).size(), 4);
+                fetchList.addAll(player.getCardsIn(ZoneType.Library, fetchNum));
+            }
         }
-
+        
         if (!defined) {
             if (origin.contains(ZoneType.Library) && !defined && !sa.hasParam("NoLooking")) {
+                final int fetchNum = Math.min(player.getCardsIn(ZoneType.Library).size(), 4);
                 // Look at whole library before moving onto choosing a card
                 GuiChoose.oneOrNone(sa.getSourceCard().getName() + " - Looking at Library",
-                        player.getCardsIn(ZoneType.Library));
+                        !decider.hasKeyword("LimitSearchLibrary") 
+                            ? player.getCardsIn(ZoneType.Library) 
+                            : player.getCardsIn(ZoneType.Library, fetchNum));
             }
 
             // Look at opponents hand before moving onto choosing a card
