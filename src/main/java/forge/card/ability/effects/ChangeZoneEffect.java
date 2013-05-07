@@ -752,7 +752,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     c = inp.hasCancelled() ? null : inp.getSelected().get(0);
                 }
                 else {
-                    List<Card> chosen = GuiChoose.getChoices(selectPrompt, 0, mustChoose ? 1 : 0, fetchList);
+                    List<Card> chosen = GuiChoose.getChoices(selectPrompt, mustChoose ? 1 : 0, 1, fetchList);
                     c = chosen.isEmpty() ? null : chosen.get(0);
                 }
             }
