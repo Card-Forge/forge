@@ -74,6 +74,14 @@ public final class ColorSet implements Comparable<ColorSet> {
         return fromMask(mask);
     }
 
+    public static ColorSet fromNames(Iterable<String> colors) {
+        byte mask = 0;
+        for (String s : colors) {
+            mask |= MagicColor.fromName(s);
+        }
+        return fromMask(mask);
+    }
+    
     public static ColorSet fromManaCost(final ManaCost mana) {
         return fromMask(mana.getColorProfile());
     }
@@ -222,51 +230,6 @@ public final class ColorSet implements Comparable<ColorSet> {
      */
     public boolean hasGreen() {
         return this.hasAnyColor(MagicColor.GREEN);
-    }
-
-    /**
-     * Checks if is white.
-     * 
-     * @return true, if is white
-     */
-    public boolean isWhite() {
-        return this.isEqual(MagicColor.WHITE);
-    }
-
-    /**
-     * Checks if is blue.
-     * 
-     * @return true, if is blue
-     */
-    public boolean isBlue() {
-        return this.isEqual(MagicColor.BLUE);
-    }
-
-    /**
-     * Checks if is black.
-     * 
-     * @return true, if is black
-     */
-    public boolean isBlack() {
-        return this.isEqual(MagicColor.BLACK);
-    }
-
-    /**
-     * Checks if is red.
-     * 
-     * @return true, if is red
-     */
-    public boolean isRed() {
-        return this.isEqual(MagicColor.RED);
-    }
-
-    /**
-     * Checks if is green.
-     * 
-     * @return true, if is green
-     */
-    public boolean isGreen() {
-        return this.isEqual(MagicColor.GREEN);
     }
 
     public ColorSet inverse() {

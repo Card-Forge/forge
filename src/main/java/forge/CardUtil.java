@@ -18,12 +18,11 @@
 package forge;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 import forge.card.CardCharacteristics;
+import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.ApiType;
@@ -39,28 +38,8 @@ public final class CardUtil {
     // disable instantiation
     private CardUtil() { }
 
-    static final Map<String, String> colorMap;
-    static {
-        colorMap = new HashMap<String, String>();
-        colorMap.put(Constant.Color.BLACK.toString(), "B");
-        colorMap.put(Constant.Color.BLUE.toString(), "U");
-        colorMap.put(Constant.Color.GREEN.toString(), "G");
-        colorMap.put(Constant.Color.RED.toString(), "R");
-        colorMap.put(Constant.Color.WHITE.toString(), "W");
-        colorMap.put(Constant.Color.COLORLESS.toString(), "C");
-    }
-    
-    // returns "G", longColor is Constant.Color.Green and the like
-    public static String getShortColor(final String longColor) {
-        String color = longColor.toLowerCase();
-        if (!colorMap.containsKey(color)) {
-            throw new RuntimeException("CardUtil : getShortColor() invalid argument - " + longColor);
-        }
-        return colorMap.get(color);
-    }
-
-    public static List<String> getColors(final Card c) {
-        return c.determineColor().toStringList();
+    public static ColorSet getColors(final Card c) {
+        return c.determineColor().toColorSet();
     }
 
     public static boolean isStackingKeyword(final String keyword) {
@@ -75,7 +54,7 @@ public final class CardUtil {
     public static String getShortColorsString(final Iterable<String> colors) {
         StringBuilder colorDesc = new StringBuilder();
         for (final String col : colors) {
-            colorDesc.append(getShortColor(col) + " ");
+            colorDesc.append(MagicColor.toShortString(col) + " ");
         }
         return colorDesc.toString();
     }
@@ -269,7 +248,7 @@ public final class CardUtil {
             for (final Card card1 : cards) {
                 // For each card, go through all the colors and if the card is that color, add
                 for (final String col : Constant.Color.ONLY_COLORS) {
-                    if (card1.isColor(col)) {
+                    if (card1.isOfColor(col)) {
                         colors.add(col);
                         if (colors.size() == maxChoices) {
                             break;

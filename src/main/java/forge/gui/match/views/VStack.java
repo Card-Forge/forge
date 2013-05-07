@@ -205,7 +205,7 @@ public enum VStack implements IVDoc<CStack> {
     private Color[] getSpellColor(SpellAbilityStackInstance s0) {
         if (s0.getStackDescription().startsWith("Morph ")) 
             return new Color[] { new Color(0, 0, 0, 0), FSkin.getColor(FSkin.Colors.CLR_TEXT) };
-        if (CardUtil.getColors(s0.getSourceCard()).size() > 1) 
+        if (CardUtil.getColors(s0.getSourceCard()).isMulticolor()) 
             return new Color[] { new Color(253, 175, 63), Color.black };
 
         if (s0.getSourceCard().isBlack())      return new Color[] { Color.black, Color.white };

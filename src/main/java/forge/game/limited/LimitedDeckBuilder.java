@@ -101,7 +101,7 @@ public class LimitedDeckBuilder {
      */
     public Deck buildDeck() {
         // 1. Prepare
-        hasColor = Predicates.or(new GenerateDeckUtil.CanBePaidWithColors(colors), GenerateDeckUtil.COLORLESS_CARDS);
+        hasColor = Predicates.or(new GenerateDeckUtil.MatchColorIdentity(colors), GenerateDeckUtil.COLORLESS_CARDS);
         colorList = Iterables.filter(aiPlayables, Predicates.compose(hasColor, CardPrinted.FN_GET_RULES));
         onColorCreatures = Iterables.filter(colorList,
                 Predicates.compose(CardRulesPredicates.Presets.IS_CREATURE, CardPrinted.FN_GET_RULES));
@@ -431,13 +431,13 @@ public class LimitedDeckBuilder {
             for (Pair<Double, CardPrinted> bean : ranked) {
                 // Want a card that has just one "off" color.
                 ColorSet off = colors.getOffColors(bean.getValue().getRules().getColor());
-                if (off.isWhite() || off.isBlue() || off.isBlack() || off.isRed() || off.isGreen()) {
+                if (off.isMonoColor()) {
                     colors = ColorSet.fromMask(colors.getColor() | off.getColor());
                     break;
                 }
             }
 
-            hasColor = Predicates.or(new GenerateDeckUtil.CanBePaidWithColors(colors),
+            hasColor = Predicates.or(new GenerateDeckUtil.MatchColorIdentity(colors),
                     GenerateDeckUtil.COLORLESS_CARDS);
             Iterable<CardPrinted> threeColorList = Iterables.filter(aiPlayables,
                     Predicates.compose(hasColor, CardPrinted.FN_GET_RULES));

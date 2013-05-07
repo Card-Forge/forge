@@ -62,10 +62,10 @@ public class GenerateDeckUtil {
         }
     };
 
-    public static class CanBePaidWithColors implements Predicate<CardRules> {
+    public static class MatchColorIdentity implements Predicate<CardRules> {
         private final ColorSet allowedColor;
 
-        public CanBePaidWithColors(ColorSet color) {
+        public MatchColorIdentity(ColorSet color) {
             allowedColor = color;
         }
 

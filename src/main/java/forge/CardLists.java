@@ -144,28 +144,6 @@ public class CardLists {
     } // sortAttack()
 
 
-
-    /**
-     * <p>
-     * getColor.
-     * </p>
-     * 
-     * @param list
-     *            a {@link forge.CardList} object.
-     * @param color
-     *            a {@link java.lang.String} object.
-     * @return a {@link forge.CardList} object.
-     */
-    public static List<Card> getColor(final List<Card> list, final String color) {
-        return CardLists.filter(list, new Predicate<Card>() {
-            @Override
-            public boolean apply(final Card c) {
-                return CardUtil.getColors(c).contains(color);
-            }
-        });
-    } // getColor()
-
-
     /**
      * 
      * Given a List<Card> c, return a List<Card> that contains a random amount of cards from c.

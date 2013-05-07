@@ -27,6 +27,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.esotericsoftware.minlog.Log;
 import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
 
 import forge.Card;
 import forge.CardLists;
@@ -36,6 +37,7 @@ import forge.Constant;
 import forge.GameEntity;
 import forge.Singletons;
 import forge.card.CardType;
+import forge.card.MagicColor;
 import forge.card.ability.ApiType;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
@@ -941,10 +943,8 @@ public class CombatUtil {
                     return false;
                 }
             } else if (keyword.equals("CARDNAME can't attack unless defending player controls a blue permanent.")) {
-                temp = CardLists.getColor(list, Constant.Color.BLUE);
-                if (temp.isEmpty()) {
+                if (!Iterables.any(list, CardPredicates.isColor(MagicColor.BLUE)))
                     return false;
-                }
             }
         }
 

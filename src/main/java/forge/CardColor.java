@@ -22,6 +22,7 @@ import java.util.EnumSet;
 import java.util.Iterator;
 import java.util.List;
 
+import forge.card.ColorSet;
 import forge.card.mana.ManaCostBeingPaid;
 
 /**
@@ -206,6 +207,14 @@ public class CardColor implements Iterable<Color> {
             list[i++] = c.toString();
         }
         return list;
+    }
+    
+    public final ColorSet toColorSet() {
+        int mask = 0; 
+        for (final Color c : this.col) {
+            mask |= c.getMagicColor();
+        }
+        return ColorSet.fromMask(mask);
     }
 
     public final List<String> toStringList() {

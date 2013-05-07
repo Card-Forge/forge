@@ -36,34 +36,24 @@ import forge.card.mana.ManaCostBeingPaid;
 public enum Color {
 
     /** The Colorless. */
-    Colorless(0),
+    Colorless((byte)0),
     /** The White. */
-    White(1),
+    White(MagicColor.WHITE),
     /** The Green. */
-    Green(2),
+    Green(MagicColor.GREEN),
     /** The Red. */
-    Red(4),
+    Red(MagicColor.RED),
     /** The Black. */
-    Black(8),
+    Black(MagicColor.BLACK),
     /** The Blue. */
-    Blue(16);
-    
-    public static final ImmutableList<Color> WUBRG = ImmutableList.of( White, Blue, Black, Red, Green );  
+    Blue(MagicColor.BLUE);
 
-    @SuppressWarnings("unused")
-    private int flag = 0;
-
-    /**
-     * <p>
-     * Constructor for Color.
-     * </p>
-     * 
-     * @param c
-     *            a int.
-     */
-    Color(final int c) {
-        this.flag = c;
+    private final byte magicColor;
+    private Color(final byte c) {
+        this.magicColor = c;
     }
+
+    public static final ImmutableList<Color> WUBRG = ImmutableList.of( White, Blue, Black, Red, Green );  
 
     /**
      * <p>
@@ -77,6 +67,10 @@ public enum Color {
         return colors;
     }
 
+    public byte getMagicColor() {
+        return magicColor;
+    }
+    
     /**
      * <p>
      * ConvertStringsToColor.

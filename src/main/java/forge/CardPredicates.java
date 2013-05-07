@@ -153,7 +153,16 @@ public final class CardPredicates {
             }
         };
     };
-    
+
+    public static final Predicate<Card> isColor(final byte color) {
+        return new Predicate<Card>() {
+            @Override
+            public boolean apply(final Card c) {
+                return CardUtil.getColors(c).hasAnyColor(color);
+            }
+        };
+    } // getColor()
+
 
     public static class Presets {
 
@@ -284,53 +293,6 @@ public final class CardPredicates {
                 return c.isLand();
             }
         };
-
-        /**
-         * a Predicate<Card> to get all cards that are black.
-         */
-        public static final Predicate<Card> BLACK = new Predicate<Card>() {
-            @Override
-            public boolean apply(Card c) {
-                return c.isBlack();
-            }
-        };
-        /**
-         * a Predicate<Card> to get all cards that are blue.
-         */
-        public static final Predicate<Card> BLUE = new Predicate<Card>() {
-            @Override
-            public boolean apply(Card c) {
-                return c.isBlue();
-            }
-        };
-        /**
-         * a Predicate<Card> to get all cards that are green.
-         */
-        public static final Predicate<Card> GREEN = new Predicate<Card>() {
-            @Override
-            public boolean apply(Card c) {
-                return c.isGreen();
-            }
-        };
-        /**
-         * a Predicate<Card> to get all cards that are red.
-         */
-        public static final Predicate<Card> RED = new Predicate<Card>() {
-            @Override
-            public boolean apply(Card c) {
-                return c.isRed();
-            }
-        };
-        /**
-         * a Predicate<Card> to get all cards that are white.
-         */
-        public static final Predicate<Card> WHITE = new Predicate<Card>() {
-            @Override
-            public boolean apply(Card c) {
-                return c.isWhite();
-            }
-        };
-
 
         public static final Predicate<Card> hasFirstStrike = new Predicate<Card>() {
             @Override

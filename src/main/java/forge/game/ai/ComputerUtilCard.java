@@ -9,7 +9,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Random;
 
-import com.esotericsoftware.minlog.Log;
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
@@ -18,9 +17,10 @@ import com.google.common.collect.Iterables;
 import forge.Card;
 import forge.CardLists;
 import forge.CardPredicates;
-import forge.CardUtil;
 import forge.Constant;
 import forge.card.CardType;
+import forge.card.MagicColor;
+import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
 import forge.deck.CardPool;
 import forge.deck.Deck;
@@ -814,35 +814,12 @@ public class ComputerUtilCard {
      * @return a {@link java.lang.String} object.
      */
     public static String getMostProminentColor(final List<Card> list) {
-    
-        final Map<String, Integer> map = new HashMap<String, Integer>();
-    
-        for (final Card c : list) {
-            for (final String color : CardUtil.getColors(c)) {
-                if (color.equals("colorless")) {
-                    // nothing to do
-                } else if (!map.containsKey(color)) {
-                    map.put(color, 1);
-                } else {
-                    map.put(color, map.get(color) + 1);
-                }
-            }
-        } // for
-    
-        int max = 0;
-        String maxColor = "";
-    
-        for (final Entry<String, Integer> entry : map.entrySet()) {
-            final String color = entry.getKey();
-            Log.debug(color + " - " + entry.getValue());
-    
-            if (max < entry.getValue()) {
-                max = entry.getValue();
-                maxColor = color;
-            }
+        byte colors = CardFactoryUtil.getMostProminentColors(list);
+        for(byte c : MagicColor.WUBRG) {
+            if ( (colors & c) != 0 )
+                return MagicColor.toLongString(c);
         }
-    
-        return maxColor;
+        return Constant.Color.WHITE; // no difference, there was no prominent color
     }
 
     public static List<String> getColorByProminence(final List<Card> list) {

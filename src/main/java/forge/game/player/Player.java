@@ -36,12 +36,12 @@ import forge.Card;
 import forge.CardLists;
 import forge.CardPredicates;
 import forge.CardPredicates.Presets;
-import forge.CardUtil;
 import forge.Constant.Preferences;
 import forge.CounterType;
 import forge.FThreads;
 import forge.GameEntity;
 import forge.Singletons;
+import forge.card.MagicColor;
 import forge.card.ability.AbilityFactory;
 import forge.card.ability.AbilityUtils;
 import forge.card.cardfactory.CardFactoryUtil;
@@ -2800,12 +2800,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
     }
 
     public List<Card> getColoredCardsInPlay(final String color) {
-        return CardLists.filter(getCardsIn(ZoneType.Battlefield), new Predicate<Card>() {
-            @Override
-            public boolean apply(final Card c) {
-                return CardUtil.getColors(c).contains(color);
-            }
-        });
+        return CardLists.filter(getCardsIn(ZoneType.Battlefield), CardPredicates.isColor(MagicColor.fromName(color)));
     }
 
     public int getCounterDoublersMagnitude(final CounterType type) {

@@ -21,7 +21,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.TreeMap;
 
 import org.apache.commons.lang.StringUtils;
@@ -41,6 +40,8 @@ import forge.Constant;
 import forge.CounterType;
 import forge.FThreads;
 import forge.GameEntity;
+import forge.card.ColorSet;
+import forge.card.MagicColor;
 import forge.card.ability.AbilityFactory;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.ApiType;
@@ -1427,7 +1428,7 @@ public class CardFactoryUtil {
             return Aggregates.sum(filteredCards, CardPredicates.Accessors.fnGetCmc);
         }
 
-        if (sq[0].contains("CardNumColors"))    return doXMath(CardUtil.getColors(c).size(), m, c);
+        if (sq[0].contains("CardNumColors"))    return doXMath(CardUtil.getColors(c).countColors(), m, c);
         if (sq[0].contains("ChosenNumber"))     return doXMath(c.getChosenNumber(), m, c);
         if (sq[0].contains("CardCounters")) {
             // CardCounters.ALL to be used for Kinsbaile Borderguard and anything that cares about all counters
@@ -1559,19 +1560,17 @@ public class CardFactoryUtil {
 
         // Count$ColoredCreatures *a DOMAIN for creatures*
         if (sq[0].contains("ColoredCreatures")) {
-            int n = 0;
+            int mask = 0;
             List<Card> someCards = CardLists.filter(cc.getCardsIn(ZoneType.Battlefield), Presets.CREATURES);
-            for (final String color : Constant.Color.ONLY_COLORS) {
-                if (!CardLists.getColor(someCards, color).isEmpty()) {
-                    n++;
-                }
+            for (final Card crd : someCards) {
+                mask |= CardUtil.getColors(crd).getColor();
             }
-            return doXMath(n, m, c);
+            return doXMath(ColorSet.fromMask(mask).countColors(), m, c);
         }
         
         // Count$CardMulticolor.<numMC>.<numNotMC>
         if (sq[0].contains("CardMulticolor")) {
-            final boolean isMulti = CardUtil.getColors(c).size() > 1; 
+            final boolean isMulti = CardUtil.getColors(c).isMulticolor(); 
             return doXMath(Integer.parseInt(sq[isMulti ? 1 : 2]), m, c);
         }
 
@@ -1769,31 +1768,17 @@ public class CardFactoryUtil {
 //                someCards = someCards.filter(CardListFilter.WHITE);
 //        }
         // "White Creatures" - Count$WhiteTypeYouCtrl.Creature
-        if (sq[0].contains("White")) {
-            someCards = CardLists.filter(someCards, Presets.WHITE);
-        }
-
-        if (sq[0].contains("Blue")) {
-            someCards = CardLists.filter(someCards, Presets.BLUE);
-        }
-
-        if (sq[0].contains("Black")) {
-            someCards = CardLists.filter(someCards, Presets.BLACK);
-        }
-
-        if (sq[0].contains("Red")) {
-            someCards = CardLists.filter(someCards, Presets.RED);
-        }
-
-        if (sq[0].contains("Green")) {
-            someCards = CardLists.filter(someCards, Presets.GREEN);
-        }
+        if (sq[0].contains("White")) someCards = CardLists.filter(someCards, CardPredicates.isColor(MagicColor.WHITE));
+        if (sq[0].contains("Blue"))  someCards = CardLists.filter(someCards, CardPredicates.isColor(MagicColor.BLUE));
+        if (sq[0].contains("Black")) someCards = CardLists.filter(someCards, CardPredicates.isColor(MagicColor.BLACK));
+        if (sq[0].contains("Red"))   someCards = CardLists.filter(someCards, CardPredicates.isColor(MagicColor.RED));
+        if (sq[0].contains("Green")) someCards = CardLists.filter(someCards, CardPredicates.isColor(MagicColor.GREEN));
 
         if (sq[0].contains("Multicolor")) {
             someCards = CardLists.filter(someCards, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {
-                    return CardUtil.getColors(c).size() > 1;
+                    return CardUtil.getColors(c).isMulticolor();
                 }
             });
         }
@@ -1802,7 +1787,7 @@ public class CardFactoryUtil {
             someCards = CardLists.filter(someCards, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {
-                    return (CardUtil.getColors(c).size() == 1);
+                    return CardUtil.getColors(c).isMonoColor();
                 }
             });
         }
@@ -1929,36 +1914,30 @@ public class CardFactoryUtil {
      *            a {@link forge.CardList} object.
      * @return a boolean.
      */
-    public static boolean isMostProminentColor(final List<Card> list, final String color) {
+    public static byte getMostProminentColors(final List<Card> list) {
+        int cntColors = MagicColor.WUBRG.length;
+        final Integer[] map = new Integer[cntColors];
 
-        final Map<String, Integer> map = new HashMap<String, Integer>();
-
-        for (final Card c : list) {
-            for (final String color2 : CardUtil.getColors(c)) {
-                if (color2.equals("colorless")) {
-                    // nothing to do
-                } else if (!map.containsKey(color2)) {
-                    map.put(color2, 1);
-                } else {
-                    map.put(color2, map.get(color2) + 1);
-                }
+        for (final Card crd : list) {
+            ColorSet color = CardUtil.getColors(crd);
+            for(int i = 0; i < cntColors; i++) {
+                if( color.hasAnyColor(MagicColor.WUBRG[i]))
+                    map[i]++;
             }
         } // for
 
-        if (map.isEmpty() || !map.containsKey(color)) {
-            return false;
+        byte mask = 0;
+        int nMax = -1;
+        for(int i = 0; i < cntColors; i++) { 
+            if ( map[i] > nMax )
+                mask = MagicColor.WUBRG[i];
+            else if ( map[i] == nMax )
+                mask |= MagicColor.WUBRG[i];
+            else 
+                continue;
+            nMax = map[i];
         }
-
-        int num = map.get(color);
-
-        for (final Entry<String, Integer> entry : map.entrySet()) {
-
-            if (num < entry.getValue()) {
-                return false;
-            }
-        }
-
-        return true;
+        return mask;
     }
     
     /**

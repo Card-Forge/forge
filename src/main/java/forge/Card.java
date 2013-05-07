@@ -43,6 +43,8 @@ import forge.CardPredicates.Presets;
 import forge.card.CardCharacteristics;
 import forge.card.CardRarity;
 import forge.card.CardRules;
+import forge.card.ColorSet;
+import forge.card.MagicColor;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.ApiType;
 import forge.card.cardfactory.CardFactoryUtil;
@@ -5211,59 +5213,34 @@ public class Card extends GameEntity implements Comparable<Card> {
         }
         // ... Card colors
         else if (property.contains("White") || property.contains("Blue") || property.contains("Black")
-                || property.contains("Red") || property.contains("Green") || property.contains("Colorless")) {
-            if (property.startsWith("non")) {
-                if (CardUtil.getColors(this).contains(property.substring(3).toLowerCase())) {
-                    return false;
-                }
-            } else if (!CardUtil.getColors(this).contains(property.toLowerCase())) {
+                || property.contains("Red") || property.contains("Green") ) {
+            boolean mustHave = !property.startsWith("non");
+            int desiredColor = MagicColor.fromName(mustHave ? property : property.substring(3)); 
+            boolean hasColor = CardUtil.getColors(this).hasAnyColor(desiredColor);
+            if( mustHave != hasColor )
                 return false;
-            }
-        } else if (property.contains("MultiColor")) // ... Card is multicolored
-        {
-            if (property.startsWith("non") && (CardUtil.getColors(this).size() > 1)) {
-                return false;
-            }
-            if (!property.startsWith("non") && (CardUtil.getColors(this).size() <= 1)) {
-                return false;
-            }
-        } else if (property.contains("MonoColor")) {
-            // ... Card is monocolored
-            if (property.startsWith("non") && ((CardUtil.getColors(this).size() == 1) && !this.isColorless())) {
-                return false;
-            }
-            if (!property.startsWith("non") && ((CardUtil.getColors(this).size() > 1) || this.isColorless())) {
-                return false;
-            }
+
+        } else if (property.contains("Colorless")) { // ... Card is colorless
+            if( property.startsWith("non") == CardUtil.getColors(this).isColorless() ) return false;
+
+        } else if (property.contains("MultiColor")) { // ... Card is multicolored
+            if( property.startsWith("non") == CardUtil.getColors(this).isMulticolor() ) return false;
+
+        } else if (property.contains("MonoColor")) { // ... Card is monocolored
+            if( property.startsWith("non") == CardUtil.getColors(this).isMonoColor() ) return false;
+
         } else if (property.equals("ChosenColor")) {
-            if (source.getChosenColor().size() == 0) {
+            if (source.getChosenColor().isEmpty() || !CardUtil.getColors(this).hasAnyColor(MagicColor.fromName(source.getChosenColor().get(0))))
                 return false;
-            }
-            if (!CardUtil.getColors(this).contains(source.getChosenColor().get(0))) {
-                return false;
-            }
+
         } else if (property.equals("AllChosenColors")) {
-            if (source.getChosenColor().size() == 0) {
+            if ( source.getChosenColor().isEmpty() || !CardUtil.getColors(this).hasAllColors(ColorSet.fromNames(source.getChosenColor()).getColor()) )
                 return false;
-            }
-            for (String col : source.getChosenColor()) {
-                if (!CardUtil.getColors(this).contains(col)) {
-                    return false;
-                }
-            }
+
         } else if (property.equals("AnyChosenColor")) {
-            if (source.getChosenColor().size() == 0) {
+            if ( source.getChosenColor().isEmpty() || !CardUtil.getColors(this).hasAnyColor(ColorSet.fromNames(source.getChosenColor()).getColor()) )
                 return false;
-            }
-            int matched = 0;
-            for (String col : source.getChosenColor()) {
-                if (CardUtil.getColors(this).contains(col)) {
-                    matched++;
-                }
-            }
-            if (matched == 0) {
-                return false;
-            }
+
         } else if (property.equals("DoubleFaced")) {
             if (!this.isDoubleFaced()) {
                 return false;
@@ -5670,12 +5647,9 @@ public class Card extends GameEntity implements Comparable<Card> {
                         return false;
                     }
                 } else if (restriction.equals("MostProminentColor")) {
-                    for (final String color : CardUtil.getColors(this)) {
-                        if (CardFactoryUtil.isMostProminentColor(getGame().getCardsIn(ZoneType.Battlefield), color)) {
-                            return true;
-                        }
-                    }
-                    return false;
+                    byte mask = CardFactoryUtil.getMostProminentColors(getGame().getCardsIn(ZoneType.Battlefield));
+                    if( !CardUtil.getColors(this).hasAnyColor(mask))
+                        return false;
                 } else {
                     for (final Card card : sourceController.getCardsIn(ZoneType.Battlefield)) {
                         if (card.isValid(restriction, sourceController, source) && this.sharesColorWith(card)) {
@@ -5695,7 +5669,8 @@ public class Card extends GameEntity implements Comparable<Card> {
             }
             String color = props[1];
 
-            return CardFactoryUtil.isMostProminentColor(getGame().getCardsIn(ZoneType.Battlefield), color);
+            byte mostProm = CardFactoryUtil.getMostProminentColors(getGame().getCardsIn(ZoneType.Battlefield));
+            return ColorSet.fromMask(mostProm).hasAnyColor(MagicColor.fromName(color));
         } else if (property.startsWith("notSharesColorWith")) {
             if (property.equals("notSharesColorWith")) {
                 if (this.sharesColorWith(source)) {
@@ -6524,84 +6499,13 @@ public class Card extends GameEntity implements Comparable<Card> {
      * part of the Card class, so calling out is not necessary
      */
 
-    /**
-     * <p>
-     * isColor.
-     * </p>
-     * 
-     * @param col
-     *            a {@link java.lang.String} object.
-     * @return a boolean.
-     */
-    public final boolean isColor(final String col) {
-        return CardUtil.getColors(this).contains(col);
-    }
-
-    /**
-     * <p>
-     * isBlack.
-     * </p>
-     * 
-     * @return a boolean.
-     */
-    public final boolean isBlack() {
-        return CardUtil.getColors(this).contains(Constant.Color.BLACK);
-    }
-
-    /**
-     * <p>
-     * isBlue.
-     * </p>
-     * 
-     * @return a boolean.
-     */
-    public final boolean isBlue() {
-        return CardUtil.getColors(this).contains(Constant.Color.BLUE);
-    }
-
-    /**
-     * <p>
-     * isRed.
-     * </p>
-     * 
-     * @return a boolean.
-     */
-    public final boolean isRed() {
-        return CardUtil.getColors(this).contains(Constant.Color.RED);
-    }
-
-    /**
-     * <p>
-     * isGreen.
-     * </p>
-     * 
-     * @return a boolean.
-     */
-    public final boolean isGreen() {
-        return CardUtil.getColors(this).contains(Constant.Color.GREEN);
-    }
-
-    /**
-     * <p>
-     * isWhite.
-     * </p>
-     * 
-     * @return a boolean.
-     */
-    public final boolean isWhite() {
-        return CardUtil.getColors(this).contains(Constant.Color.WHITE);
-    }
-
-    /**
-     * <p>
-     * isColorless.
-     * </p>
-     * 
-     * @return a boolean.
-     */
-    public final boolean isColorless() {
-        return CardUtil.getColors(this).contains(Constant.Color.COLORLESS);
-    }
+    public final boolean isOfColor(final String col) { return CardUtil.getColors(this).hasAnyColor(MagicColor.fromName(col)); }
+    public final boolean isBlack() { return CardUtil.getColors(this).hasBlack(); }
+    public final boolean isBlue() { return CardUtil.getColors(this).hasBlue(); }
+    public final boolean isRed() { return CardUtil.getColors(this).hasRed(); }
+    public final boolean isGreen() { return CardUtil.getColors(this).hasGreen(); }
+    public final boolean isWhite() { return CardUtil.getColors(this).hasWhite(); }
+    public final boolean isColorless() { return CardUtil.getColors(this).isColorless(); }
 
     /**
      * <p>

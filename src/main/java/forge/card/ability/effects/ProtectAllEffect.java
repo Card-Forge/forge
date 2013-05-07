@@ -7,6 +7,8 @@ import forge.Card;
 import forge.CardLists;
 import forge.CardUtil;
 import forge.Command;
+import forge.card.ColorSet;
+import forge.card.MagicColor;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
@@ -63,8 +65,10 @@ public class ProtectAllEffect extends SpellAbilityEffect {
                 }
             } else if (sa.getParam("Gains").equals("TargetedCardColor")) {
                 for (final Card c : sa.getSATargetingCard().getTarget().getTargetCards()) {
-                    for(final String color : CardUtil.getColors(c)) {
-                        gains.add(color.toLowerCase());
+                    ColorSet cs = CardUtil.getColors(c);
+                    for(byte col : MagicColor.WUBRG) {
+                        if (cs.hasAnyColor(col))
+                            gains.add(MagicColor.toLongString(col).toLowerCase());
                     }
                 }
             } else {

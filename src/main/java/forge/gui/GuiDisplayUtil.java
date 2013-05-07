@@ -42,11 +42,11 @@ import forge.CardCharacteristicName;
 import forge.CardLists;
 import forge.CardPredicates;
 import forge.CardUtil;
-import forge.Constant;
 import forge.CounterType;
 import forge.FThreads;
 import forge.Singletons;
 import forge.card.CardType;
+import forge.card.ColorSet;
 import forge.card.spellability.AbilityManaPart;
 import forge.card.spellability.SpellAbility;
 import forge.card.trigger.TriggerType;
@@ -71,23 +71,23 @@ public final class GuiDisplayUtil {
             return BorderFactory.createEmptyBorder(2, 2, 2, 2);
         }
         java.awt.Color color;
-        final List<String> list = CardUtil.getColors(card);
+        final ColorSet list = CardUtil.getColors(card);
 
         if (card.isFaceDown()) {
             color = Color.gray;
-        } else if (list.size() > 1) {
+        } else if (list.isMulticolor()) {
             color = Color.orange;
-        } else if (list.get(0).equals(Constant.Color.BLACK)) {
+        } else if (list.hasBlack()) {
             color = Color.black;
-        } else if (list.get(0).equals(Constant.Color.GREEN)) {
+        } else if (list.hasGreen()) {
             color = new Color(0, 220, 39);
-        } else if (list.get(0).equals(Constant.Color.WHITE)) {
+        } else if (list.hasWhite()) {
             color = Color.white;
-        } else if (list.get(0).equals(Constant.Color.RED)) {
+        } else if (list.hasRed()) {
             color = Color.red;
-        } else if (list.get(0).equals(Constant.Color.BLUE)) {
+        } else if (list.hasBlue()) {
             color = Color.blue;
-        } else if (list.get(0).equals(Constant.Color.COLORLESS)) {
+        } else if (list.isColorless()) {
             color = Color.gray;
         } else {
             color = new Color(200, 0, 230); // If your card has a violet border,
