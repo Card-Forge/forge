@@ -18,10 +18,8 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import forge.Card;
-import forge.CardCharacteristicName;
 import forge.FThreads;
 import forge.Singletons;
-import forge.card.cardfactory.CardFactory;
 import forge.gui.match.CMatchUI;
 import forge.item.InventoryItem;
 
@@ -122,16 +120,14 @@ public class GuiChoose {
                     public void valueChanged(final ListSelectionEvent ev) {
                         if (list.getSelectedValue() instanceof Card) {
                             Card card = (Card) list.getSelectedValue();
-                            if (card.isFaceDown()) {
-                                if (card.canBeShownTo(Singletons.getControl().getLobby().getGuiPlayer().getPlayer(card.getGame()))) {
-                                    card = CardFactory.copyCard(card);
-                                    card.setState(CardCharacteristicName.Original);
-                                }
+                            if (card.isFaceDown() && card.canBeShownTo(Singletons.getControl().getPlayer())) {
+                                CMatchUI.SINGLETON_INSTANCE.setCard(card, true);
+                            } else {
+                                CMatchUI.SINGLETON_INSTANCE.setCard(card);
                             }
-                            CMatchUI.SINGLETON_INSTANCE.setCard(card);
         
                             GuiUtils.clearPanelSelections();
-                            GuiUtils.setPanelSelection((Card) list.getSelectedValue());
+                            GuiUtils.setPanelSelection(card);
                         }
                         if (list.getSelectedValue() instanceof InventoryItem) {
                             CMatchUI.SINGLETON_INSTANCE.setCard((InventoryItem) list.getSelectedValue());
