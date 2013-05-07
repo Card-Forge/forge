@@ -8229,7 +8229,28 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
 
     public boolean canBeShownTo(final Player viewer) {
-        return !isFaceDown() || getController() == viewer;
+        if (!isFaceDown()) {
+            return true;
+        }
+        if (getController() == viewer && isInZone(ZoneType.Battlefield)) {
+            return true;
+        }
+        final GameState game = this.getGame();
+        if (getController() == viewer && hasKeyword("You may look at this card.")) {
+            return true; 
+        }
+        if (getController().isOpponentOf(viewer) && hasKeyword("Your opponent may look at this card.")) {
+            return true; 
+        }
+        for (Card host : game.getCardsIn(ZoneType.Battlefield)) {
+            final ArrayList<StaticAbility> staticAbilities = host.getStaticAbilities();
+            for (final StaticAbility stAb : staticAbilities) {
+                if (stAb.applyAbility("MayLookAt", this, viewer)) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     /**
@@ -8296,25 +8317,6 @@ public class Card extends GameEntity implements Comparable<Card> {
             return false;
         }
         return true;
-    }
-
-    public boolean canBeSeenBy(final Player p) {
-        final GameState game = this.getGame();
-        if (getController().equals(p) && hasKeyword("You may look at this card.")) {
-            return true; 
-        }
-        if (getController().isOpponentOf(p) && hasKeyword("Your opponent may look at this card.")) {
-            return true; 
-        }
-        for (Card host : game.getCardsIn(ZoneType.Battlefield)) {
-            final ArrayList<StaticAbility> staticAbilities = host.getStaticAbilities();
-            for (final StaticAbility stAb : staticAbilities) {
-                if (stAb.applyAbility("MayLookAt", this, p)) {
-                    return true;
-                }
-            }
-        }
-        return false;
     }
 
     CardRules cardRules;

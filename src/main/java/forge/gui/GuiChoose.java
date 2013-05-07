@@ -123,7 +123,7 @@ public class GuiChoose {
                         if (list.getSelectedValue() instanceof Card) {
                             Card card = (Card) list.getSelectedValue();
                             if (card.isFaceDown()) {
-                                if (card.canBeSeenBy(Singletons.getControl().getLobby().getGuiPlayer().getPlayer(card.getGame()))) {
+                                if (card.canBeShownTo(Singletons.getControl().getLobby().getGuiPlayer().getPlayer(card.getGame()))) {
                                     card = CardFactory.copyCard(card);
                                     card.setState(CardCharacteristicName.Original);
                                 }
