@@ -60,6 +60,7 @@ import forge.card.cost.CostTapType;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostBeingPaid;
 import forge.card.spellability.Ability;
+import forge.card.spellability.AbilityActivated;
 import forge.card.spellability.AbilityManaPart;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.OptionalCost;
@@ -1237,6 +1238,16 @@ public final class GameActionUtil {
                 sar.setInstantSpeed(true);
                 newSA.setRestrictions(sar);
                 newSA.setDescription(sa.getDescription() + " (by paying " + actualcost.toSimpleString() + " instead of its mana cost)");
+                alternatives.add(newSA);
+            }
+            if (sa.hasParam("Equip") && sa instanceof AbilityActivated && keyword.equals("EquipInstantSpeed")) {
+                final SpellAbility newSA = ((AbilityActivated) sa).getCopy();
+                SpellAbilityRestriction sar = new SpellAbilityRestriction();
+                sar.setVariables(sa.getRestrictions());
+                sar.setSorcerySpeed(false);
+                sar.setInstantSpeed(true);
+                newSA.setRestrictions(sar);
+                newSA.setDescription(sa.getDescription() + " (you may activate any time you could cast an instant )");
                 alternatives.add(newSA);
             }
         }

@@ -1,0 +1,8 @@
+Name:Leonin Shikari
+ManaCost:1 W
+Types:Creature Cat Soldier
+PT:2/2
+S:Mode$ Continuous | AddHiddenKeyword$ EquipInstantSpeed | Affected$ Card.withEquip+YouCtrl | Description$ You may activate equip abilities any time you could cast an instant.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/leonin_shikari.jpg
+Oracle:You may activate equip abilities any time you could cast an instant.
+SetInfo:DST Rare
