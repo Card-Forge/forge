@@ -1178,7 +1178,8 @@ public class ChangeZoneAi extends SpellAbilityAi {
                         });
                     }
                 }
-                if (ZoneType.Exile.equals(destination) || origin.contains(ZoneType.Battlefield) || ZoneType.Library.equals(destination)) {
+                if (ZoneType.Exile.equals(destination) || origin.contains(ZoneType.Battlefield)
+                        || (ZoneType.Library.equals(destination) && origin.contains(ZoneType.Hand))) {
                     // Exiling or bouncing stuff
                     if (player.isOpponentOf(ai)) {
                         c = ComputerUtilCard.getBestAI(fetchList);
