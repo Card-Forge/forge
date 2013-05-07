@@ -749,7 +749,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     inp.setCancelAllowed(!mustChoose);
                     inp.setMessage(selectPrompt);
                     FThreads.setInputAndWait(inp);
-                    c = inp.getSelected().get(0);
+                    c = inp.hasCancelled() ? null : inp.getSelected().get(0);
                 }
                 else {
                     List<Card> chosen = GuiChoose.getChoices(selectPrompt, 0, mustChoose ? 1 : 0, fetchList);
