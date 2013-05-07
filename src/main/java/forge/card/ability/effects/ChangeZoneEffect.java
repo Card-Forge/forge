@@ -737,11 +737,11 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             // card has to be on battlefield or in own hand
             boolean canUseInputToSelectCard = origin.size() == 1 && ( origin.get(0) == ZoneType.Battlefield || origin.get(0) == ZoneType.Hand && player == decider); 
             
-            Object o;
+            Card c;
             if (sa.hasParam("AtRandom")) {
-                o = Aggregates.random(fetchList);
+                c = Aggregates.random(fetchList);
             } else if (sa.hasParam("Defined")) {
-                o = fetchList.get(0);
+                c = fetchList.get(0);
             } else {
                 boolean mustChoose = sa.hasParam("Mandatory");
                 if( canUseInputToSelectCard ) {
@@ -749,14 +749,15 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     inp.setCancelAllowed(!mustChoose);
                     inp.setMessage(selectPrompt);
                     FThreads.setInputAndWait(inp);
-                    o = inp.getSelected().get(0);
+                    c = inp.getSelected().get(0);
                 }
-                else
-                    o = GuiChoose.getChoices(selectPrompt, 0, mustChoose ? 1 : 0, fetchList);
+                else {
+                    List<Card> chosen = GuiChoose.getChoices(selectPrompt, 0, mustChoose ? 1 : 0, fetchList);
+                    c = chosen.isEmpty() ? null : chosen.get(0);
+                }
             }
 
-            if (o != null) {
-                final Card c = (Card) o;
+            if (c != null) {
                 fetchList.remove(c);
                 Card movedCard = null;
 
