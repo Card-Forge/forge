@@ -88,8 +88,8 @@ public class InputPayManaX extends InputPayManaBase {
     }
 
     @Override
-    public void selectManaPool(String color) {
-        useManaFromPool(color, this.colorX.isEmpty() ? this.manaCost : new ManaCostBeingPaid(this.colorX));
+    public void selectManaPool(byte colorCode) {
+        useManaFromPool(colorCode, this.colorX.isEmpty() ? this.manaCost : new ManaCostBeingPaid(this.colorX));
     }
 
 

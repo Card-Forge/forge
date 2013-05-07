@@ -195,12 +195,12 @@ public class CField implements ICDoc {
     }
 
     /** */
-    private void manaAction(String constantColor) {
+    private void manaAction(byte colorCode) {
         if (CField.this.player == CField.this.playerViewer) {
             final Input in = Singletons.getModel().getMatch().getInput().getInput();
             if (in instanceof InputPayManaBase) {
                 // Do something
-                ((InputPayManaBase) in).selectManaPool(constantColor);
+                ((InputPayManaBase) in).selectManaPool(colorCode);
             }
         }
     }
@@ -243,7 +243,7 @@ public class CField implements ICDoc {
         ((FLabel) this.view.getLblFlashback()).setHoverable(true);
         this.view.getLblFlashback().addMouseListener(madFlashback);
     
-        for(final Pair<FLabel, String> labelPair : this.view.getManaLabels()) {
+        for(final Pair<FLabel, Byte> labelPair : this.view.getManaLabels()) {
             labelPair.getLeft().setHoverable(true);
             labelPair.getLeft().addMouseListener(new MouseAdapter() { @Override
                 public void mousePressed(final MouseEvent e) {

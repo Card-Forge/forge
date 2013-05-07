@@ -38,7 +38,7 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 
 import net.miginfocom.swing.MigLayout;
-import forge.Constant;
+import forge.card.MagicColor;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.mana.ManaPool;
 import forge.game.phase.PhaseType;
@@ -90,7 +90,7 @@ public class VField implements IVDoc<CField> {
     private FLabel lblExile = getBuiltFLabel(FSkin.ZoneImages.ICO_EXILE, "99", "Exiled cards");
     private FLabel lblFlashback = getBuiltFLabel(FSkin.ZoneImages.ICO_FLASHBACK, "99", "Flashback cards");
     private FLabel lblPoison = getBuiltFLabel(FSkin.ZoneImages.ICO_POISON, "99", "Poison counters");
-    private final List<Pair<FLabel, String>> manaLabels = new ArrayList<Pair<FLabel,String>>();
+    private final List<Pair<FLabel, Byte>> manaLabels = new ArrayList<Pair<FLabel,Byte>>();
 
     // Phase labels
     private PhaseLabel lblUpkeep = new PhaseLabel("UP");
@@ -126,12 +126,12 @@ public class VField implements IVDoc<CField> {
         if (playerOnwer != null) { tab.setText(playerOnwer.getName() + " Field"); }
         else { tab.setText("NO PLAYER FOR " + docID.toString()); }
 
-        manaLabels.add(ImmutablePair.of(getBuiltFLabel(FSkin.ManaImages.IMG_BLACK, "99", "Black mana"), Constant.Color.BLACK));
-        manaLabels.add(ImmutablePair.of(getBuiltFLabel(FSkin.ManaImages.IMG_BLUE, "99", "Blue mana"), Constant.Color.BLUE));
-        manaLabels.add(ImmutablePair.of(getBuiltFLabel(FSkin.ManaImages.IMG_GREEN, "99", "Green mana"), Constant.Color.GREEN));
-        manaLabels.add(ImmutablePair.of(getBuiltFLabel(FSkin.ManaImages.IMG_RED, "99", "Red mana"), Constant.Color.RED));
-        manaLabels.add(ImmutablePair.of(getBuiltFLabel(FSkin.ManaImages.IMG_WHITE, "99", "White mana"), Constant.Color.WHITE));
-        manaLabels.add(ImmutablePair.of(getBuiltFLabel(FSkin.ManaImages.IMG_COLORLESS, "99", "Colorless mana"), Constant.Color.COLORLESS));
+        manaLabels.add(ImmutablePair.of(getBuiltFLabel(FSkin.ManaImages.IMG_BLACK, "99", "Black mana"), MagicColor.BLACK));
+        manaLabels.add(ImmutablePair.of(getBuiltFLabel(FSkin.ManaImages.IMG_BLUE, "99", "Blue mana"), MagicColor.BLUE));
+        manaLabels.add(ImmutablePair.of(getBuiltFLabel(FSkin.ManaImages.IMG_GREEN, "99", "Green mana"), MagicColor.GREEN));
+        manaLabels.add(ImmutablePair.of(getBuiltFLabel(FSkin.ManaImages.IMG_RED, "99", "Red mana"), MagicColor.RED));
+        manaLabels.add(ImmutablePair.of(getBuiltFLabel(FSkin.ManaImages.IMG_WHITE, "99", "White mana"), MagicColor.WHITE));
+        manaLabels.add(ImmutablePair.of(getBuiltFLabel(FSkin.ManaImages.IMG_COLORLESS, "99", "Colorless mana"), (byte)0));
 
         // TODO player is hard-coded into tabletop...should be dynamic
         // (haven't looked into it too deeply). Doublestrike 12-04-12
@@ -384,8 +384,8 @@ public class VField implements IVDoc<CField> {
      */
     public void updateManaPool(final Player p0) {
         ManaPool m = p0.getManaPool();
-        for(Pair<FLabel, String> label : manaLabels)
-            label.getKey().setText(Integer.toString(m.getAmountOfColor(label.getRight())));
+        for(Pair<FLabel, Byte> label : manaLabels)
+            label.getKey().setText(Integer.toString(m.getAmountOfColor(MagicColor.toLongString(label.getRight()))));
     }
 
     //========= Retrieval methods
@@ -435,7 +435,7 @@ public class VField implements IVDoc<CField> {
         return this.lblLibrary;
     }
     
-    public final Iterable<Pair<FLabel, String>> getManaLabels() {
+    public final Iterable<Pair<FLabel, Byte>> getManaLabels() {
         return manaLabels;
     }
 

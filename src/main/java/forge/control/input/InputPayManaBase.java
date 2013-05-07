@@ -13,7 +13,6 @@ import forge.FThreads;
 import forge.card.MagicColor;
 import forge.card.ability.ApiType;
 import forge.card.mana.ManaCostBeingPaid;
-import forge.card.mana.ManaPool;
 import forge.card.spellability.AbilityManaPart;
 import forge.card.spellability.SpellAbility;
 import forge.game.GameState;
@@ -57,8 +56,8 @@ public abstract class InputPayManaBase extends InputSyncronizedBase implements I
         activateManaAbility(card, this.manaCost);
     }
     
-    public void selectManaPool(String color) {
-        useManaFromPool(color);
+    public void selectManaPool(byte colorCode) {
+        useManaFromPool(colorCode);
     }
 
     /**
@@ -117,17 +116,10 @@ public abstract class InputPayManaBase extends InputSyncronizedBase implements I
      * 
      * @return ManaCost the amount of mana remaining to be paid after the mana is activated
      */
-    protected void useManaFromPool(String color) { useManaFromPool(color, manaCost); } 
-    protected void useManaFromPool(String color, ManaCostBeingPaid manaCost) {
-        ManaPool mp = player.getManaPool();
-    
+    protected void useManaFromPool(byte colorCode) { useManaFromPool(colorCode, manaCost); } 
+    protected void useManaFromPool(byte colorCode, ManaCostBeingPaid manaCost) {
         // Convert Color to short String
-        String manaStr = "1";
-        if (!color.equalsIgnoreCase("Colorless")) {
-            manaStr = CardUtil.getShortColor(color);
-        }
-        
-        mp.payManaFromPool(saPaidFor, manaCost, manaStr); 
+        player.getManaPool().payManaFromPool(saPaidFor, manaCost, MagicColor.toShortString(colorCode)); 
     
         onManaAbilityPlayed(null);
         showMessage();
