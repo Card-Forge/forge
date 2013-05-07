@@ -73,7 +73,7 @@ public class MillAi extends SpellAbilityAi {
 
         boolean randomReturn = r.nextFloat() <= Math.pow(chance, sa.getActivationsThisTurn() + 1);
 
-        if (sa.getParam("NumCards").equals("X") && source.getSVar("X").startsWith("Count$xPaid")) {
+        if ((sa.getParam("NumCards").equals("X") || sa.getParam("NumCards").equals("Z")) && source.getSVar("X").startsWith("Count$xPaid")) {
             // Set PayX here to maximum value.
             final int cardsToDiscard =
                     Math.min(ComputerUtilMana.determineLeftoverMana(sa, ai), ai.getOpponent().getCardsIn(ZoneType.Library).size());
