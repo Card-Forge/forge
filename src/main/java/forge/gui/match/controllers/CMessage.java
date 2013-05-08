@@ -23,6 +23,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.JButton;
 
@@ -38,7 +40,7 @@ import forge.gui.match.views.VMessage;
  * 
  * <br><br><i>(C at beginning of class name denotes a control class.)</i>
  */
-public enum CMessage implements ICDoc {
+public enum CMessage implements ICDoc, Observer {
     /** */
     SINGLETON_INSTANCE;
 
@@ -67,6 +69,7 @@ public enum CMessage implements ICDoc {
             }
         }
     };
+    private MatchController match;
 
     private void _initButton(JButton button, ActionListener onClick) {
         // remove to ensure listeners don't accumulate over many initializations
@@ -96,17 +99,6 @@ public enum CMessage implements ICDoc {
         VMessage.SINGLETON_INSTANCE.getTarMessage().setText(s0);
     }
 
-    /** Updates counter label in message area.
-     * @param match
-     * @param gameState */
-    public void updateGameInfo(MatchController match) {
-        VMessage.SINGLETON_INSTANCE.getLblGames().setText(
-                match.getGameType().toString() + ": Game #"
-                + (match.getPlayedGames().size() + 1)
-                + " of " + match.getGamesPerMatch()
-                + ", turn " + match.getCurrentGame().getPhaseHandler().getTurn());
-    }
-
     /** Flashes animation on input panel if play is currently waiting on input. */
     public void remind() {
         SDisplayUtil.remind(VMessage.SINGLETON_INSTANCE);
@@ -121,6 +113,18 @@ public enum CMessage implements ICDoc {
     }
 
     /* (non-Javadoc)
+     * @see java.util.Observer#update(java.util.Observable, java.lang.Object)
+     */
+    @Override
+    public void update(Observable o, Object arg) {
+        VMessage.SINGLETON_INSTANCE.getLblGames().setText(
+                match.getGameType().toString() + ": Game #"
+                + (match.getPlayedGames().size() + 1)
+                + " of " + match.getGamesPerMatch()
+                + ", turn " + match.getCurrentGame().getPhaseHandler().getTurn());
+    }
+
+    /* (non-Javadoc)
      * @see forge.gui.framework.ICDoc#update()
      */
     @Override
@@ -129,5 +133,15 @@ public enum CMessage implements ICDoc {
         if (null != lastFocusedButton) {
             lastFocusedButton.requestFocusInWindow();
         }
+    }
+
+    /**
+     * TODO: Write javadoc for this method.
+     * @param match
+     */
+    public void setModel(MatchController match0) {
+        match = match0;
+        match.getCurrentGame().getPhaseHandler().addObserver(this);
+        update(null, null);
     }
 }

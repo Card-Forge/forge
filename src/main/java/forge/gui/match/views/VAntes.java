@@ -18,7 +18,6 @@
 package forge.gui.match.views;
 
 import java.awt.Dimension;
-import java.util.Iterator;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.SortedSet;
@@ -170,11 +169,6 @@ public enum VAntes implements IVDoc<CAntes>, Observer {
             CardPicturePanel picPanel = new CardPicturePanel();
             add(picPanel, "w 160px, h 230px");
             picPanel.setCard(c0);
-        }
-
-        /** @return {@link forge.Card} */
-        public Card getCard() {
-            return card;
         }
 
         @Override

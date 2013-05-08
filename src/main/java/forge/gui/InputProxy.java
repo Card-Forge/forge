@@ -45,8 +45,11 @@ public class InputProxy implements Observer {
 
     private static final boolean INPUT_DEBUG = false;
     
-    public void setMatch(MatchController matchController) {
-        match = matchController;
+    public void setMatch(MatchController match0) {
+        match = match0;
+        match.getCurrentGame().getStack().addObserver(this);
+        match.getCurrentGame().getPhaseHandler().addObserver(this);
+        match.getInput().addObserver(this);
     }
     
     @Override

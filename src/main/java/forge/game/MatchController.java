@@ -24,8 +24,6 @@ import forge.game.player.LobbyPlayer;
 import forge.game.player.LobbyPlayerHuman;
 import forge.game.player.Player;
 import forge.game.player.PlayerStatistics;
-import forge.game.zone.ZoneType;
-import forge.gui.InputProxy;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.SDisplayUtil;
 import forge.gui.match.CMatchUI;
@@ -186,23 +184,23 @@ public class MatchController {
         CStack.SINGLETON_INSTANCE.setModel(currentGame.getStack());
         CLog.SINGLETON_INSTANCE.setModel(currentGame.getGameLog());
         CCombat.SINGLETON_INSTANCE.setModel(currentGame);
+        CMessage.SINGLETON_INSTANCE.setModel(match);
+
 
         Singletons.getModel().getPreferences().actuateMatchPreferences();
         Singletons.getControl().changeState(FControl.Screens.MATCH_SCREEN);
         SDisplayUtil.showTab(EDocID.REPORT_LOG.getDoc());
 
-        InputProxy inputProxy = CMessage.SINGLETON_INSTANCE.getInputControl();
-        inputProxy.setMatch(match);
+        CMessage.SINGLETON_INSTANCE.getInputControl().setMatch(match);
 
         // models shall notify controllers of changes
-        currentGame.getStack().addObserver(inputProxy);
+        
         currentGame.getStack().addObserver(CStack.SINGLETON_INSTANCE);
-        currentGame.getPhaseHandler().addObserver(inputProxy);
         currentGame.getGameLog().addObserver(CLog.SINGLETON_INSTANCE);
         // some observers were set in CMatchUI.initMatch
 
         // black magic still
-        match.getInput().addObserver(inputProxy);
+        
         
         VAntes.SINGLETON_INSTANCE.setModel(currentGame.getRegisteredPlayers());
 
@@ -211,7 +209,6 @@ public class MatchController {
         }
 
         // per player observers were set in CMatchUI.SINGLETON_INSTANCE.initMatch
-        CMessage.SINGLETON_INSTANCE.updateGameInfo(match);
     }
 
     /**

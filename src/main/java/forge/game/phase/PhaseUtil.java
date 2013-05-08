@@ -26,7 +26,6 @@ import com.google.common.base.Predicate;
 import forge.Card;
 import forge.CardLists;
 import forge.CardPredicates.Presets;
-import forge.Singletons;
 import forge.card.cost.Cost;
 import forge.card.mana.ManaCost;
 import forge.card.spellability.Ability;
@@ -41,7 +40,6 @@ import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.match.CMatchUI;
-import forge.gui.match.controllers.CMessage;
 import forge.gui.match.nonsingleton.VField.PhaseLabel;
 
 /**
@@ -85,8 +83,6 @@ public class PhaseUtil {
     public static void handleUntap(GameState game) {
         final PhaseHandler ph = game.getPhaseHandler();
         final Player turn = ph.getPlayerTurn();
-
-        CMessage.SINGLETON_INSTANCE.updateGameInfo(Singletons.getControl().getMatch());
 
         game.getCombat().reset(turn);
 
