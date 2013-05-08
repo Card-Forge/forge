@@ -152,6 +152,6 @@ public class CostUnattach extends CostPartWithList {
             // We really shouldn't be able to get here if there's nothing to unattach
             return null;
         }
-        return new PaymentDecision(cardToUnattach.getEquippingCard());
+        return new PaymentDecision(cardToUnattach);
     }
 }
