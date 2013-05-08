@@ -1146,7 +1146,10 @@ public class GameAction {
             return false;
         }
         boolean recheck = false;
-
+        final List<Card> yamazaki = CardLists.filter(a, CardPredicates.nameEquals("Brothers Yamazaki"));
+        if (yamazaki.size() == 2) {
+            a.removeAll(yamazaki);
+        }
         while (!a.isEmpty()) {
             List<Card> b = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals(a.get(0).getName()));
             b = CardLists.getType(b, "Legendary");

@@ -1,0 +1,10 @@
+Name:Brothers Yamazaki
+ManaCost:2 R
+Types:Legendary Creature Human Samurai
+PT:2/1
+Text:If there are exactly two permanents named CARDNAME on the battlefield, the "legend rule" doesn't apply to them.
+K:Bushido 1
+S:Mode$ Continuous | Affected$ Creature.Other+namedBrothers Yamazaki | AddPower$ 2 | AddToughness$ 2 | AddKeyword$ Haste | Description$ Each other creature named CARDNAME gets +2/+2 and has haste.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/brothers_yamazaki.jpg
+Oracle:Bushido 1 (When this blocks or becomes blocked, it gets +1/+1 until end of turn.)\nIf there are exactly two permanents named Brothers Yamazaki on the battlefield, the "legend rule" doesn't apply to them.\nEach other creature named Brothers Yamazaki gets +2/+2 and has haste.
+SetInfo:CHK Uncommon
