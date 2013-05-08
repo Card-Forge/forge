@@ -144,11 +144,6 @@ public class MatchController {
         inputQueue = new InputQueue(this);
         currentGame = new GameState(players.keySet(), gameType, this);
 
-        Map<Player, PlayerStartConditions> startConditions = new HashMap<Player, PlayerStartConditions>();
-        for (Player p : currentGame.getPlayers()) {
-            startConditions.put(p, players.get(p.getLobbyPlayer()));
-        }
-
         try {
             attachUiToMatch(this, FControl.SINGLETON_INSTANCE.getLobby().getGuiPlayer());
 
