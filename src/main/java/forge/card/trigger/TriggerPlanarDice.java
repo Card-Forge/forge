@@ -33,15 +33,15 @@ public class TriggerPlanarDice extends Trigger {
      */
     @Override
     public boolean performTest(Map<String, Object> runParams2) {
-        if (this.getMapParams().containsKey("ValidPlayer")) {
-            if (!matchesValid(runParams2.get("Player"), this.getMapParams().get("ValidPlayer").split(","),
+        if (this.mapParams.containsKey("ValidPlayer")) {
+            if (!matchesValid(runParams2.get("Player"), this.mapParams.get("ValidPlayer").split(","),
                     this.getHostCard())) {
                 return false;
             }
         }
 
-        if (this.getMapParams().containsKey("Result")) {
-            PlanarDice cond = PlanarDice.smartValueOf(this.getMapParams().get("Result"));
+        if (this.mapParams.containsKey("Result")) {
+            PlanarDice cond = PlanarDice.smartValueOf(this.mapParams.get("Result"));
             if (cond != ((PlanarDice) runParams2.get("Result"))) {
                 return false;
             }
@@ -55,7 +55,7 @@ public class TriggerPlanarDice extends Trigger {
      */
     @Override
     public Trigger getCopy() {
-        final Trigger copy = new TriggerPlanarDice(this.getMapParams(), this.getHostCard(), this.isIntrinsic());
+        final Trigger copy = new TriggerPlanarDice(this.mapParams, this.getHostCard(), this.isIntrinsic());
         if (this.getOverridingAbility() != null) {
             copy.setOverridingAbility(this.getOverridingAbility());
         }

@@ -50,14 +50,14 @@ public class TriggerSacrificed extends Trigger {
     @Override
     public final boolean performTest(final java.util.Map<String, Object> runParams2) {
         final Card sac = (Card) runParams2.get("Card");
-        if (this.getMapParams().containsKey("ValidPlayer")) {
-            if (!matchesValid(sac.getController(), this.getMapParams().get("ValidPlayer").split(","),
+        if (this.mapParams.containsKey("ValidPlayer")) {
+            if (!matchesValid(sac.getController(), this.mapParams.get("ValidPlayer").split(","),
                     this.getHostCard())) {
                 return false;
             }
         }
-        if (this.getMapParams().containsKey("ValidCard")) {
-            if (!sac.isValid(this.getMapParams().get("ValidCard").split(","), this.getHostCard().getController(),
+        if (this.mapParams.containsKey("ValidCard")) {
+            if (!sac.isValid(this.mapParams.get("ValidCard").split(","), this.getHostCard().getController(),
                     this.getHostCard())) {
                 return false;
             }
@@ -68,7 +68,7 @@ public class TriggerSacrificed extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final Trigger getCopy() {
-        final Trigger copy = new TriggerSacrificed(this.getMapParams(), this.getHostCard(), this.isIntrinsic());
+        final Trigger copy = new TriggerSacrificed(this.mapParams, this.getHostCard(), this.isIntrinsic());
         if (this.getOverridingAbility() != null) {
             copy.setOverridingAbility(this.getOverridingAbility());
         }

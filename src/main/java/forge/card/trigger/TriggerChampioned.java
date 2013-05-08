@@ -52,8 +52,8 @@ public class TriggerChampioned extends Trigger {
     public final boolean performTest(final java.util.Map<String, Object> runParams2) {
         final Card championed = (Card) runParams2.get("Championed");
 
-        if (this.getMapParams().containsKey("ValidCard")) {
-            if (!championed.isValid(this.getMapParams().get("ValidCard").split(","),
+        if (this.mapParams.containsKey("ValidCard")) {
+            if (!championed.isValid(this.mapParams.get("ValidCard").split(","),
                     this.getHostCard().getController(), this.getHostCard())) {
                 return false;
             }
@@ -65,7 +65,7 @@ public class TriggerChampioned extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final Trigger getCopy() {
-        final Trigger copy = new TriggerChampioned(this.getMapParams(), this.getHostCard(), this.isIntrinsic());
+        final Trigger copy = new TriggerChampioned(this.mapParams, this.getHostCard(), this.isIntrinsic());
         if (this.getOverridingAbility() != null) {
             copy.setOverridingAbility(this.getOverridingAbility());
         }

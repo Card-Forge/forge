@@ -53,28 +53,28 @@ public class TriggerAttacks extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final boolean performTest(final Map<String, Object> runParams2) {
-        if (this.getMapParams().containsKey("ValidCard")) {
-            if (!matchesValid(runParams2.get("Attacker"), this.getMapParams().get("ValidCard").split(","),
+        if (this.mapParams.containsKey("ValidCard")) {
+            if (!matchesValid(runParams2.get("Attacker"), this.mapParams.get("ValidCard").split(","),
                     this.getHostCard())) {
                 return false;
             }
         }
 
-        if (this.getMapParams().containsKey("Attacked")) {
+        if (this.mapParams.containsKey("Attacked")) {
             GameEntity attacked = (GameEntity) runParams2.get("Attacked");
-            if (!attacked.isValid(this.getMapParams().get("Attacked").split(",")
+            if (!attacked.isValid(this.mapParams.get("Attacked").split(",")
                     , this.getHostCard().getController(), this.getHostCard())) {
                 return false;
             }
         }
 
-        if (this.getMapParams().containsKey("Alone")) {
+        if (this.mapParams.containsKey("Alone")) {
             @SuppressWarnings("unchecked")
             final List<Card> otherAttackers = (List<Card>) runParams2.get("OtherAttackers");
             if (otherAttackers == null) {
                 return false;
             }
-            if (this.getMapParams().get("Alone").equals("True")) {
+            if (this.mapParams.get("Alone").equals("True")) {
                 if (otherAttackers.size() != 0) {
                     return false;
                 }
@@ -85,7 +85,7 @@ public class TriggerAttacks extends Trigger {
             }
         }
 
-        if (this.getMapParams().containsKey("FirstAttack")) {
+        if (this.mapParams.containsKey("FirstAttack")) {
             Card attacker = (Card) runParams2.get("Attacker");
             if (attacker.getDamageHistory().getCreatureAttacksThisTurn() > 1) {
                 return false;
@@ -98,7 +98,7 @@ public class TriggerAttacks extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final Trigger getCopy() {
-        final Trigger copy = new TriggerAttacks(this.getMapParams(), this.getHostCard(), this.isIntrinsic());
+        final Trigger copy = new TriggerAttacks(this.mapParams, this.getHostCard(), this.isIntrinsic());
         if (this.getOverridingAbility() != null) {
             copy.setOverridingAbility(this.getOverridingAbility());
         }

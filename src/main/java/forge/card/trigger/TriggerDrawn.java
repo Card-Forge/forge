@@ -52,15 +52,15 @@ public class TriggerDrawn extends Trigger {
         final Card draw = ((Card) runParams2.get("Card"));
         final int number = ((Integer) runParams2.get("Number"));
 
-        if (this.getMapParams().containsKey("ValidCard")) {
-            if (!draw.isValid(this.getMapParams().get("ValidCard").split(","), this.getHostCard().getController(),
+        if (this.mapParams.containsKey("ValidCard")) {
+            if (!draw.isValid(this.mapParams.get("ValidCard").split(","), this.getHostCard().getController(),
                     this.getHostCard())) {
                 return false;
             }
         }
 
-        if (this.getMapParams().containsKey("Number")) {
-            if (number != Integer.parseInt(this.getMapParams().get("Number"))) {
+        if (this.mapParams.containsKey("Number")) {
+            if (number != Integer.parseInt(this.mapParams.get("Number"))) {
                 return false;
             }
         }
@@ -70,7 +70,7 @@ public class TriggerDrawn extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final Trigger getCopy() {
-        final Trigger copy = new TriggerDrawn(this.getMapParams(), this.getHostCard(), this.isIntrinsic());
+        final Trigger copy = new TriggerDrawn(this.mapParams, this.getHostCard(), this.isIntrinsic());
         if (this.getOverridingAbility() != null) {
             copy.setOverridingAbility(this.getOverridingAbility());
         }

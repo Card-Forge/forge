@@ -27,8 +27,8 @@ public class TriggerLosesGame extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final boolean performTest(final java.util.Map<String, Object> runParams2) {
-        if (this.getMapParams().containsKey("ValidPlayer")) {
-            if (!matchesValid(runParams2.get("Player"), this.getMapParams().get("ValidPlayer").split(","),
+        if (this.mapParams.containsKey("ValidPlayer")) {
+            if (!matchesValid(runParams2.get("Player"), this.mapParams.get("ValidPlayer").split(","),
                     this.getHostCard())) {
                 return false;
             }
@@ -40,7 +40,7 @@ public class TriggerLosesGame extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final Trigger getCopy() {
-        final Trigger copy = new TriggerLosesGame(this.getMapParams(), this.getHostCard(), this.isIntrinsic());
+        final Trigger copy = new TriggerLosesGame(this.mapParams, this.getHostCard(), this.isIntrinsic());
         if (this.getOverridingAbility() != null) {
             copy.setOverridingAbility(this.getOverridingAbility());
         }

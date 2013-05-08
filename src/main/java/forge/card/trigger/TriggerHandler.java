@@ -299,7 +299,7 @@ public class TriggerHandler {
     // runs it if so.
     // Return true if the trigger went off, false otherwise.
     private boolean runSingleTrigger(final Trigger regtrig, final TriggerType mode, final Map<String, Object> runParams) {
-        final Map<String, String> triggerParams = regtrig.getMapParams();
+        final Map<String, String> triggerParams = regtrig.mapParams;
 
         if (regtrig.getMode() != mode) {
             return false; // Not the right mode.

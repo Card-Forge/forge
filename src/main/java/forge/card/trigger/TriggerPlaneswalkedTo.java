@@ -32,9 +32,9 @@ public class TriggerPlaneswalkedTo extends Trigger {
      */
     @Override
     public boolean performTest(Map<String, Object> runParams2) {
-        if (this.getMapParams().containsKey("ValidCard")) {
+        if (this.mapParams.containsKey("ValidCard")) {
             final Card moved = (Card) runParams2.get("Card");
-            if (!moved.isValid(this.getMapParams().get("ValidCard").split(","), this.getHostCard().getController(),
+            if (!moved.isValid(this.mapParams.get("ValidCard").split(","), this.getHostCard().getController(),
                     this.getHostCard())) {
                 return false;
             }
@@ -48,7 +48,7 @@ public class TriggerPlaneswalkedTo extends Trigger {
      */
     @Override
     public Trigger getCopy() {
-        final Trigger copy = new TriggerPlaneswalkedTo(this.getMapParams(), this.getHostCard(), this.isIntrinsic());
+        final Trigger copy = new TriggerPlaneswalkedTo(this.mapParams, this.getHostCard(), this.isIntrinsic());
         if (this.getOverridingAbility() != null) {
             copy.setOverridingAbility(this.getOverridingAbility());
         }

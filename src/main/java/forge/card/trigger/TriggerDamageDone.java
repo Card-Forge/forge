@@ -53,33 +53,33 @@ public class TriggerDamageDone extends Trigger {
         final Card src = (Card) runParams2.get("DamageSource");
         final Object tgt = runParams2.get("DamageTarget");
 
-        if (this.getMapParams().containsKey("ValidSource")) {
-            if (!src.isValid(this.getMapParams().get("ValidSource").split(","), this.getHostCard().getController(),
+        if (this.mapParams.containsKey("ValidSource")) {
+            if (!src.isValid(this.mapParams.get("ValidSource").split(","), this.getHostCard().getController(),
                     this.getHostCard())) {
                 return false;
             }
         }
 
-        if (this.getMapParams().containsKey("ValidTarget")) {
-            if (!matchesValid(tgt, this.getMapParams().get("ValidTarget").split(","), this.getHostCard())) {
+        if (this.mapParams.containsKey("ValidTarget")) {
+            if (!matchesValid(tgt, this.mapParams.get("ValidTarget").split(","), this.getHostCard())) {
                 return false;
             }
         }
 
-        if (this.getMapParams().containsKey("CombatDamage")) {
-            if (this.getMapParams().get("CombatDamage").equals("True")) {
+        if (this.mapParams.containsKey("CombatDamage")) {
+            if (this.mapParams.get("CombatDamage").equals("True")) {
                 if (!((Boolean) runParams2.get("IsCombatDamage"))) {
                     return false;
                 }
-            } else if (this.getMapParams().get("CombatDamage").equals("False")) {
+            } else if (this.mapParams.get("CombatDamage").equals("False")) {
                 if (((Boolean) runParams2.get("IsCombatDamage"))) {
                     return false;
                 }
             }
         }
 
-        if (this.getMapParams().containsKey("DamageAmount")) {
-            final String fullParam = this.getMapParams().get("DamageAmount");
+        if (this.mapParams.containsKey("DamageAmount")) {
+            final String fullParam = this.mapParams.get("DamageAmount");
 
             final String operator = fullParam.substring(0, 2);
             final int operand = Integer.parseInt(fullParam.substring(2));
@@ -101,7 +101,7 @@ public class TriggerDamageDone extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final Trigger getCopy() {
-        final Trigger copy = new TriggerDamageDone(this.getMapParams(), this.getHostCard(), this.isIntrinsic());
+        final Trigger copy = new TriggerDamageDone(this.mapParams, this.getHostCard(), this.isIntrinsic());
         if (this.getOverridingAbility() != null) {
             copy.setOverridingAbility(this.getOverridingAbility());
         }

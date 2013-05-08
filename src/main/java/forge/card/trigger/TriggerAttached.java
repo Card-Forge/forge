@@ -52,15 +52,15 @@ public class TriggerAttached extends Trigger {
         final Card src = (Card) runParams2.get("AttachSource");
         final Object tgt = runParams2.get("AttachTarget");
 
-        if (this.getMapParams().containsKey("ValidSource")) {
-            if (!src.isValid(this.getMapParams().get("ValidSource").split(","), this.getHostCard().getController(),
+        if (this.mapParams.containsKey("ValidSource")) {
+            if (!src.isValid(this.mapParams.get("ValidSource").split(","), this.getHostCard().getController(),
                     this.getHostCard())) {
                 return false;
             }
         }
 
-        if (this.getMapParams().containsKey("ValidTarget")) {
-            if (!matchesValid(tgt, this.getMapParams().get("ValidTarget").split(","), this.getHostCard())) {
+        if (this.mapParams.containsKey("ValidTarget")) {
+            if (!matchesValid(tgt, this.mapParams.get("ValidTarget").split(","), this.getHostCard())) {
                 return false;
             }
         }
@@ -71,7 +71,7 @@ public class TriggerAttached extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final Trigger getCopy() {
-        final Trigger copy = new TriggerAttached(this.getMapParams(), this.getHostCard(), this.isIntrinsic());
+        final Trigger copy = new TriggerAttached(this.mapParams, this.getHostCard(), this.isIntrinsic());
         if (this.getOverridingAbility() != null) {
             copy.setOverridingAbility(this.getOverridingAbility());
         }

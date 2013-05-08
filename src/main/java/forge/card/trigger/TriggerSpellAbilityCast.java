@@ -71,39 +71,39 @@ public class TriggerSpellAbilityCast extends Trigger {
             // Empty block for readability.
         }
 
-        if (this.getMapParams().containsKey("ActivatedOnly")) {
+        if (this.mapParams.containsKey("ActivatedOnly")) {
             if (spellAbility.isTrigger()) {
                 return false;
             }
         }
         
-        if (this.getMapParams().containsKey("AltCostSpellAbility")) {
+        if (this.mapParams.containsKey("AltCostSpellAbility")) {
             if (!spellAbility.isOptionalCostPaid(OptionalCost.AltCost)) {
                 return false;
             }
         }
 
-        if (this.getMapParams().containsKey("ValidControllingPlayer")) {
-            if (!matchesValid(cast.getController(), this.getMapParams().get("ValidControllingPlayer").split(","),
+        if (this.mapParams.containsKey("ValidControllingPlayer")) {
+            if (!matchesValid(cast.getController(), this.mapParams.get("ValidControllingPlayer").split(","),
                     this.getHostCard())) {
                 return false;
             }
         }
 
-        if (this.getMapParams().containsKey("ValidActivatingPlayer")) {
-            if (si == null || !matchesValid(si.getActivatingPlayer(), this.getMapParams().get("ValidActivatingPlayer")
+        if (this.mapParams.containsKey("ValidActivatingPlayer")) {
+            if (si == null || !matchesValid(si.getActivatingPlayer(), this.mapParams.get("ValidActivatingPlayer")
                     .split(","), this.getHostCard())) {
                 return false;
             }
         }
 
-        if (this.getMapParams().containsKey("ValidCard")) {
-            if (!matchesValid(cast, this.getMapParams().get("ValidCard").split(","), this.getHostCard())) {
+        if (this.mapParams.containsKey("ValidCard")) {
+            if (!matchesValid(cast, this.mapParams.get("ValidCard").split(","), this.getHostCard())) {
                 return false;
             }
         }
 
-        if (this.getMapParams().containsKey("TargetsValid")) {
+        if (this.mapParams.containsKey("TargetsValid")) {
             SpellAbility sa = spellAbility;
             if (si != null) {
                 sa = si.getSpellAbility();
@@ -114,12 +114,12 @@ public class TriggerSpellAbilityCast extends Trigger {
                         return false;
                     } else {
                         if (!matchesValid(sa.getTargetPlayer(),
-                                this.getMapParams().get("TargetsValid").split(","), this.getHostCard())) {
+                                this.mapParams.get("TargetsValid").split(","), this.getHostCard())) {
                             return false;
                         }
                     }
                 } else {
-                    if (!matchesValid(sa.getTargetCard(), this.getMapParams().get("TargetsValid").split(","),
+                    if (!matchesValid(sa.getTargetCard(), this.mapParams.get("TargetsValid").split(","),
                             this.getHostCard())) {
                         return false;
                     }
@@ -128,7 +128,7 @@ public class TriggerSpellAbilityCast extends Trigger {
                 if (sa.getTarget().doesTarget()) {
                     boolean validTgtFound = false;
                     for (final Card tgt : sa.getTarget().getTargetCards()) {
-                        if (tgt.isValid(this.getMapParams().get("TargetsValid").split(","), this.getHostCard()
+                        if (tgt.isValid(this.mapParams.get("TargetsValid").split(","), this.getHostCard()
                                 .getController(), this.getHostCard())) {
                             validTgtFound = true;
                             break;
@@ -136,7 +136,7 @@ public class TriggerSpellAbilityCast extends Trigger {
                     }
 
                     for (final Player p : sa.getTarget().getTargetPlayers()) {
-                        if (matchesValid(p, this.getMapParams().get("TargetsValid").split(","), this.getHostCard())) {
+                        if (matchesValid(p, this.mapParams.get("TargetsValid").split(","), this.getHostCard())) {
                             validTgtFound = true;
                             break;
                         }
@@ -151,21 +151,21 @@ public class TriggerSpellAbilityCast extends Trigger {
             }
         }
 
-        if (this.getMapParams().containsKey("NonTapCost")) {
+        if (this.mapParams.containsKey("NonTapCost")) {
             final Cost cost = (Cost) (runParams2.get("Cost"));
             if (cost.hasTapCost()) {
                 return false;
             }
         }
 
-        if (this.getMapParams().containsKey("Conspire")) {
+        if (this.mapParams.containsKey("Conspire")) {
             if (!spellAbility.isOptionalCostPaid(OptionalCost.Conspire)) {
                 return false;
             }
         }
 
-        if (this.getMapParams().containsKey("SpellSpeed")) {
-            if (this.getMapParams().get("SpellSpeed").equals("NotSorcerySpeed")) {
+        if (this.mapParams.containsKey("SpellSpeed")) {
+            if (this.mapParams.get("SpellSpeed").equals("NotSorcerySpeed")) {
                 if (this.getHostCard().getController().couldCastSorcery(spellAbility)) {
                     return false;
                 }
@@ -188,7 +188,7 @@ public class TriggerSpellAbilityCast extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final Trigger getCopy() {
-        final Trigger copy = new TriggerSpellAbilityCast(this.getMapParams(), this.getHostCard(), this.isIntrinsic());
+        final Trigger copy = new TriggerSpellAbilityCast(this.mapParams, this.getHostCard(), this.isIntrinsic());
         if (this.getOverridingAbility() != null) {
             copy.setOverridingAbility(this.getOverridingAbility());
         }

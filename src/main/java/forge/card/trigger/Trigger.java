@@ -97,7 +97,7 @@ public abstract class Trigger extends TriggerReplacementBase {
     }
 
     /** The map params. */
-    private HashMap<String, String> mapParams = new HashMap<String, String>();
+    protected final HashMap<String, String> mapParams = new HashMap<String, String>();
 
     /**
      * <p>
@@ -108,16 +108,6 @@ public abstract class Trigger extends TriggerReplacementBase {
      */
     public final HashMap<String, String> getMapParams() {
         return this.mapParams;
-    }
-
-    /**
-     * Sets the map params.
-     * 
-     * @param mapParams0
-     *            the mapParams to set
-     */
-    public final void setMapParams(final HashMap<String, String> mapParams0) {
-        this.mapParams = mapParams0;
     }
 
     /** The run params. */
@@ -174,7 +164,7 @@ public abstract class Trigger extends TriggerReplacementBase {
     public Trigger(final String n, final Map<String, String> params, final Card host, final boolean intrinsic) {
         this.name = n;
         this.setRunParams(new HashMap<String, Object>());
-        this.getMapParams().putAll(params);
+        this.mapParams.putAll(params);
         this.setHostCard(host);
 
         this.setIntrinsic(intrinsic);
@@ -194,7 +184,7 @@ public abstract class Trigger extends TriggerReplacementBase {
      */
     public Trigger(final Map<String, String> params, final Card host, final boolean intrinsic) {
         this.setRunParams(new HashMap<String, Object>());
-        this.getMapParams().putAll(params);
+        this.mapParams.putAll(params);
         this.setHostCard(host);
 
         this.setIntrinsic(intrinsic);
@@ -209,8 +199,8 @@ public abstract class Trigger extends TriggerReplacementBase {
      */
     @Override
     public final String toString() {
-        if (this.getMapParams().containsKey("TriggerDescription") && !this.isSuppressed()) {
-            return this.getMapParams().get("TriggerDescription").replace("CARDNAME", this.getHostCard().getName());
+        if (this.mapParams.containsKey("TriggerDescription") && !this.isSuppressed()) {
+            return this.mapParams.get("TriggerDescription").replace("CARDNAME", this.getHostCard().getName());
         } else {
             return "";
         }
@@ -231,19 +221,19 @@ public abstract class Trigger extends TriggerReplacementBase {
             }
         }
 
-        if (this.getMapParams().containsKey("PlayerTurn")) {
+        if (this.mapParams.containsKey("PlayerTurn")) {
             if (!phaseHandler.isPlayerTurn(this.getHostCard().getController())) {
                 return false;
             }
         }
 
-        if (this.getMapParams().containsKey("OpponentTurn")) {
+        if (this.mapParams.containsKey("OpponentTurn")) {
             if (!phaseHandler.getPlayerTurn().isOpponentOf(this.getHostCard().getController())) {
                 return false;
             }
         }
 
-        if (this.getMapParams().containsKey("FirstCombat")) {
+        if (this.mapParams.containsKey("FirstCombat")) {
             if (!phaseHandler.isFirstCombat()) {
                 return false;
             }
@@ -275,7 +265,7 @@ public abstract class Trigger extends TriggerReplacementBase {
      */
     public final boolean requirementsCheck(GameState game, final Map<String, Object> runParams) {
 
-        if (this.getMapParams().containsKey("APlayerHasMoreLifeThanEachOther")) {
+        if (this.mapParams.containsKey("APlayerHasMoreLifeThanEachOther")) {
             int highestLife = -50; // Negative base just in case a few Lich's or Platinum Angels are running around
             final List<Player> healthiest = new ArrayList<Player>();
             for (final Player p : game.getPlayers()) {
@@ -295,7 +285,7 @@ public abstract class Trigger extends TriggerReplacementBase {
             }
         }
 
-        if (this.getMapParams().containsKey("APlayerHasMostCardsInHand")) {
+        if (this.mapParams.containsKey("APlayerHasMostCardsInHand")) {
             int largestHand = 0;
             final List<Player> withLargestHand = new ArrayList<Player>();
             for (final Player p : game.getPlayers()) {
@@ -315,13 +305,13 @@ public abstract class Trigger extends TriggerReplacementBase {
             }
         }
         
-        if ( !meetsCommonRequirements(getMapParams()))
+        if ( !meetsCommonRequirements(this.mapParams))
             return false;
 
-        if ( !meetsRequirementsOnTriggeredObjects(runParams) )
-            return false;
+//        if ( !meetsRequirementsOnTriggeredObjects(runParams) )
+//            return false;
         
-        if ("True".equals(getMapParams().get("EvolveCondition"))) {
+        if ("True".equals(this.mapParams.get("EvolveCondition"))) {
             final Card moved = (Card) runParams.get("Card");
             if (moved == null) {
                 return false;
@@ -336,7 +326,7 @@ public abstract class Trigger extends TriggerReplacementBase {
             }
         }
         
-        String condition = getMapParams().get("Condition");
+        String condition = this.mapParams.get("Condition");
         if( "AltCost".equals(condition) ) {
             final Card moved = (Card) runParams.get("Card");
             if( null != moved && !moved.isOptionalCostPaid(OptionalCost.AltCost))
@@ -348,10 +338,10 @@ public abstract class Trigger extends TriggerReplacementBase {
     }
 
 
-    private boolean meetsRequirementsOnTriggeredObjects(Map<String, Object> runParams) {
-        // Check number of lands ETB this turn on triggered card's controller
-        return true;
-    }
+//    private boolean meetsRequirementsOnTriggeredObjects(Map<String, Object> runParams) {
+//
+//        return true;
+//    }
 
     /**
      * <p>
@@ -361,8 +351,8 @@ public abstract class Trigger extends TriggerReplacementBase {
      * @return a boolean.
      */
     public final boolean isSecondary() {
-        if (this.getMapParams().containsKey("Secondary")) {
-            if (this.getMapParams().get("Secondary").equals("True")) {
+        if (this.mapParams.containsKey("Secondary")) {
+            if (this.mapParams.get("Secondary").equals("True")) {
                 return true;
             }
         }
@@ -548,7 +538,7 @@ public abstract class Trigger extends TriggerReplacementBase {
     }
 
     public boolean isStatic() {
-        return getMapParams().containsKey("Static"); // && params.get("Static").equals("True") [always true if present]
+        return this.mapParams.containsKey("Static"); // && params.get("Static").equals("True") [always true if present]
     }
 
     public void setTriggerPhases(List<PhaseType> phases) {

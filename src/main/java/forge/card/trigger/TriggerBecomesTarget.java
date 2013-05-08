@@ -52,26 +52,26 @@ public class TriggerBecomesTarget extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final boolean performTest(final Map<String, Object> runParams2) {
-        if (this.getMapParams().containsKey("SourceType")) {
+        if (this.mapParams.containsKey("SourceType")) {
             final SpellAbility sa = (SpellAbility) runParams2.get("SourceSA");
-            if (this.getMapParams().get("SourceType").equalsIgnoreCase("spell")) {
+            if (this.mapParams.get("SourceType").equalsIgnoreCase("spell")) {
                 if (!sa.isSpell()) {
                     return false;
                 }
-            } else if (this.getMapParams().get("SourceType").equalsIgnoreCase("ability")) {
+            } else if (this.mapParams.get("SourceType").equalsIgnoreCase("ability")) {
                 if (!sa.isAbility()) {
                     return false;
                 }
             }
         }
-        if (this.getMapParams().containsKey("ValidSource")) {
-            if (!matchesValid(((SpellAbility) runParams2.get("SourceSA")).getSourceCard(), this.getMapParams()
+        if (this.mapParams.containsKey("ValidSource")) {
+            if (!matchesValid(((SpellAbility) runParams2.get("SourceSA")).getSourceCard(), this.mapParams
                     .get("ValidSource").split(","), this.getHostCard())) {
                 return false;
             }
         }
-        if (this.getMapParams().containsKey("ValidTarget")) {
-            if (!matchesValid(runParams2.get("Target"), this.getMapParams().get("ValidTarget").split(","),
+        if (this.mapParams.containsKey("ValidTarget")) {
+            if (!matchesValid(runParams2.get("Target"), this.mapParams.get("ValidTarget").split(","),
                     this.getHostCard())) {
                 return false;
             }
@@ -83,7 +83,7 @@ public class TriggerBecomesTarget extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final Trigger getCopy() {
-        final Trigger copy = new TriggerBecomesTarget(this.getMapParams(), this.getHostCard(), this.isIntrinsic());
+        final Trigger copy = new TriggerBecomesTarget(this.mapParams, this.getHostCard(), this.isIntrinsic());
         if (this.getOverridingAbility() != null) {
             copy.setOverridingAbility(this.getOverridingAbility());
         }

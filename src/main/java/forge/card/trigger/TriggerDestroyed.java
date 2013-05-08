@@ -49,14 +49,14 @@ public class TriggerDestroyed extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final boolean performTest(final java.util.Map<String, Object> runParams2) {
-        if (this.getMapParams().containsKey("ValidCauser")) {
-            if (!matchesValid(runParams2.get("Causer"), this.getMapParams().get("ValidCauser").split(","),
+        if (this.mapParams.containsKey("ValidCauser")) {
+            if (!matchesValid(runParams2.get("Causer"), this.mapParams.get("ValidCauser").split(","),
                     this.getHostCard())) {
                 return false;
             }
         }
-        if (this.getMapParams().containsKey("ValidCard")) {
-            if (!matchesValid(runParams2.get("Card"), this.getMapParams().get("ValidCard").split(","),
+        if (this.mapParams.containsKey("ValidCard")) {
+            if (!matchesValid(runParams2.get("Card"), this.mapParams.get("ValidCard").split(","),
                     this.getHostCard())) {
                 return false;
             }
@@ -67,7 +67,7 @@ public class TriggerDestroyed extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final Trigger getCopy() {
-        final Trigger copy = new TriggerDestroyed(this.getMapParams(), this.getHostCard(), this.isIntrinsic());
+        final Trigger copy = new TriggerDestroyed(this.mapParams, this.getHostCard(), this.isIntrinsic());
         if (this.getOverridingAbility() != null) {
             copy.setOverridingAbility(this.getOverridingAbility());
         }

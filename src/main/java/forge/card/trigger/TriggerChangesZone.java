@@ -20,7 +20,10 @@ package forge.card.trigger;
 import java.util.Map;
 
 import forge.Card;
+import forge.card.ability.AbilityUtils;
+import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
+import forge.util.Expressions;
 
 /**
  * <p>
@@ -51,40 +54,57 @@ public class TriggerChangesZone extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final boolean performTest(final java.util.Map<String, Object> runParams2) {
-        if (this.getMapParams().containsKey("Origin")) {
-            if (!this.getMapParams().get("Origin").equals("Any")) {
-                if (this.getMapParams().get("Origin") == null) {
+        if (this.mapParams.containsKey("Origin")) {
+            if (!this.mapParams.get("Origin").equals("Any")) {
+                if (this.mapParams.get("Origin") == null) {
                     return false;
                 }
-                if (!this.getMapParams().get("Origin").equals(runParams2.get("Origin"))) {
-                    return false;
-                }
-            }
-        }
-
-        if (this.getMapParams().containsKey("Destination")) {
-            if (!this.getMapParams().get("Destination").equals("Any")) {
-                if (!this.getMapParams().get("Destination").equals(runParams2.get("Destination"))) {
+                if (!this.mapParams.get("Origin").equals(runParams2.get("Origin"))) {
                     return false;
                 }
             }
         }
 
-        if (this.getMapParams().containsKey("ValidCard")) {
+        if (this.mapParams.containsKey("Destination")) {
+            if (!this.mapParams.get("Destination").equals("Any")) {
+                if (!this.mapParams.get("Destination").equals(runParams2.get("Destination"))) {
+                    return false;
+                }
+            }
+        }
+
+        if (this.mapParams.containsKey("ValidCard")) {
             final Card moved = (Card) runParams2.get("Card");
-            if (!moved.isValid(this.getMapParams().get("ValidCard").split(","), this.getHostCard().getController(),
+            if (!moved.isValid(this.mapParams.get("ValidCard").split(","), this.getHostCard().getController(),
                     this.getHostCard())) {
                 return false;
             }
         }
 
+        // Check number of lands ETB this turn on triggered card's controller
+        if (mapParams.containsKey("CheckOnTriggeredCard")) {
+            final String[] condition = mapParams.get("CheckOnTriggeredCard").split(" ", 2);
+
+            final Card host = hostCard.getGame().getCardState(hostCard);
+            final String comparator = condition.length < 2 ? "GE1" : condition[1];
+            final int referenceValue = AbilityUtils.calculateAmount(host, comparator.substring(2), null);
+            final Object triggered = runParams2.get("Card"); 
+            if(!(triggered instanceof Card))
+                throw new IllegalArgumentException( host + " - CheckOnTriggeredCard being checked for a trigger that has no card!");
+
+            final int actualValue = CardFactoryUtil.xCount((Card)triggered, host.getSVar(condition[0]));
+            if (!Expressions.compare(actualValue, comparator.substring(0, 2), referenceValue)) {
+                return false;
+            }
+        }        
+        
         return true;
     }
 
     /** {@inheritDoc} */
     @Override
     public final Trigger getCopy() {
-        final Trigger copy = new TriggerChangesZone(this.getMapParams(), this.getHostCard(), this.isIntrinsic());
+        final Trigger copy = new TriggerChangesZone(this.mapParams, this.getHostCard(), this.isIntrinsic());
         if (this.getOverridingAbility() != null) {
             copy.setOverridingAbility(this.getOverridingAbility());
         }

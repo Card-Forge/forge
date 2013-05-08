@@ -70,7 +70,7 @@ public class TriggerLandPlayed extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final Trigger getCopy() {
-        final Trigger copy = new TriggerLandPlayed(this.getName(), this.getMapParams(), this.getHostCard(),
+        final Trigger copy = new TriggerLandPlayed(this.getName(), this.mapParams, this.getHostCard(),
                 this.isIntrinsic());
 
         if (this.getOverridingAbility() != null) {
@@ -90,8 +90,8 @@ public class TriggerLandPlayed extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final boolean performTest(final java.util.Map<String, Object> runParams2) {
-        if (this.getMapParams().containsKey("ValidCard")) {
-            if (!matchesValid(runParams2.get("Card"), this.getMapParams().get("ValidCard").split(","),
+        if (this.mapParams.containsKey("ValidCard")) {
+            if (!matchesValid(runParams2.get("Card"), this.mapParams.get("ValidCard").split(","),
                     this.getHostCard())) {
                 return false;
             }

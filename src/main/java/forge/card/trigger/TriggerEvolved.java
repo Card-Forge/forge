@@ -50,8 +50,8 @@ public class TriggerEvolved extends Trigger {
     @Override
     public final boolean performTest(final java.util.Map<String, Object> runParams2) {
         final Card sac = (Card) runParams2.get("Card");
-        if (this.getMapParams().containsKey("ValidCard")) {
-            if (!sac.isValid(this.getMapParams().get("ValidCard").split(","), this.getHostCard().getController(),
+        if (this.mapParams.containsKey("ValidCard")) {
+            if (!sac.isValid(this.mapParams.get("ValidCard").split(","), this.getHostCard().getController(),
                     this.getHostCard())) {
                 return false;
             }
@@ -62,7 +62,7 @@ public class TriggerEvolved extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final Trigger getCopy() {
-        final Trigger copy = new TriggerEvolved(this.getMapParams(), this.getHostCard(), this.isIntrinsic());
+        final Trigger copy = new TriggerEvolved(this.mapParams, this.getHostCard(), this.isIntrinsic());
         if (this.getOverridingAbility() != null) {
             copy.setOverridingAbility(this.getOverridingAbility());
         }

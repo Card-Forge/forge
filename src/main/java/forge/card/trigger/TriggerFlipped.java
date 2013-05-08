@@ -49,15 +49,15 @@ public class TriggerFlipped extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final boolean performTest(final java.util.Map<String, Object> runParams2) {
-        if (this.getMapParams().containsKey("ValidPlayer")) {
-            if (!matchesValid(runParams2.get("Player"), this.getMapParams().get("ValidPlayer").split(","),
+        if (this.mapParams.containsKey("ValidPlayer")) {
+            if (!matchesValid(runParams2.get("Player"), this.mapParams.get("ValidPlayer").split(","),
                     this.getHostCard())) {
                 return false;
             }
         }
-        if (this.getMapParams().containsKey("ValidResult")) {
+        if (this.mapParams.containsKey("ValidResult")) {
             final boolean result = (Boolean) runParams2.get("Result");
-            final boolean valid = "Win".equals(this.getMapParams().get("ValidResult"));
+            final boolean valid = "Win".equals(this.mapParams.get("ValidResult"));
             if (result ^ valid) {
                 return false;
             }
@@ -69,7 +69,7 @@ public class TriggerFlipped extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final Trigger getCopy() {
-        final Trigger copy = new TriggerFlipped(this.getMapParams(), this.getHostCard(), this.isIntrinsic());
+        final Trigger copy = new TriggerFlipped(this.mapParams, this.getHostCard(), this.isIntrinsic());
         if (this.getOverridingAbility() != null) {
             copy.setOverridingAbility(this.getOverridingAbility());
         }

@@ -52,15 +52,15 @@ public class TriggerUnequip extends Trigger {
         final Card equipped = (Card) runParams2.get("Card");
         final Card equipment = (Card) runParams2.get("Equipment");
 
-        if (this.getMapParams().containsKey("ValidCard")) {
-            if (!equipped.isValid(this.getMapParams().get("ValidCard").split(","), this.getHostCard().getController(),
+        if (this.mapParams.containsKey("ValidCard")) {
+            if (!equipped.isValid(this.mapParams.get("ValidCard").split(","), this.getHostCard().getController(),
                     this.getHostCard())) {
                 return false;
             }
         }
 
-        if (this.getMapParams().containsKey("ValidEquipment")) {
-            if (!equipment.isValid(this.getMapParams().get("ValidEquipment").split(","), this.getHostCard()
+        if (this.mapParams.containsKey("ValidEquipment")) {
+            if (!equipment.isValid(this.mapParams.get("ValidEquipment").split(","), this.getHostCard()
                     .getController(), this.getHostCard())) {
                 return false;
             }
@@ -72,7 +72,7 @@ public class TriggerUnequip extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final Trigger getCopy() {
-        final Trigger copy = new TriggerUnequip(this.getMapParams(), this.getHostCard(), this.isIntrinsic());
+        final Trigger copy = new TriggerUnequip(this.mapParams, this.getHostCard(), this.isIntrinsic());
         if (this.getOverridingAbility() != null) {
             copy.setOverridingAbility(this.getOverridingAbility());
         }

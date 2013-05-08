@@ -53,15 +53,15 @@ public class TriggerCounterAdded extends Trigger {
         final Card addedTo = (Card) runParams2.get("Card");
         final CounterType addedType = (CounterType) runParams2.get("CounterType");
 
-        if (this.getMapParams().containsKey("ValidCard")) {
-            if (!addedTo.isValid(this.getMapParams().get("ValidCard").split(","), this.getHostCard().getController(),
+        if (this.mapParams.containsKey("ValidCard")) {
+            if (!addedTo.isValid(this.mapParams.get("ValidCard").split(","), this.getHostCard().getController(),
                     this.getHostCard())) {
                 return false;
             }
         }
 
-        if (this.getMapParams().containsKey("CounterType")) {
-            final String type = this.getMapParams().get("CounterType");
+        if (this.mapParams.containsKey("CounterType")) {
+            final String type = this.mapParams.get("CounterType");
             if (!type.equals(addedType.toString())) {
                 return false;
             }
@@ -73,7 +73,7 @@ public class TriggerCounterAdded extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final Trigger getCopy() {
-        final Trigger copy = new TriggerCounterAdded(this.getMapParams(), this.getHostCard(), this.isIntrinsic());
+        final Trigger copy = new TriggerCounterAdded(this.mapParams, this.getHostCard(), this.isIntrinsic());
         if (this.getOverridingAbility() != null) {
             copy.setOverridingAbility(this.getOverridingAbility());
         }

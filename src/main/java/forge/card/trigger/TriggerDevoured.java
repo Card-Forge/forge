@@ -50,8 +50,8 @@ public class TriggerDevoured extends Trigger {
     @Override
     public final boolean performTest(final java.util.Map<String, Object> runParams2) {
         final Card sac = (Card) runParams2.get("Devoured");
-        if (this.getMapParams().containsKey("ValidDevoured")) {
-            if (!sac.isValid(this.getMapParams().get("ValidDevoured").split(","), this.getHostCard().getController(),
+        if (this.mapParams.containsKey("ValidDevoured")) {
+            if (!sac.isValid(this.mapParams.get("ValidDevoured").split(","), this.getHostCard().getController(),
                     this.getHostCard())) {
                 return false;
             }
@@ -62,7 +62,7 @@ public class TriggerDevoured extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final Trigger getCopy() {
-        final Trigger copy = new TriggerDevoured(this.getMapParams(), this.getHostCard(), this.isIntrinsic());
+        final Trigger copy = new TriggerDevoured(this.mapParams, this.getHostCard(), this.isIntrinsic());
         if (this.getOverridingAbility() != null) {
             copy.setOverridingAbility(this.getOverridingAbility());
         }

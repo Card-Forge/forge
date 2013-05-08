@@ -44,8 +44,8 @@ public class TriggerTransformed extends Trigger {
      */
     @Override
     public boolean performTest(Map<String, Object> runParams2) {
-        if (this.getMapParams().containsKey("ValidCard")) {
-            if (!matchesValid(runParams2.get("Transformer"), this.getMapParams().get("ValidCard").split(","),
+        if (this.mapParams.containsKey("ValidCard")) {
+            if (!matchesValid(runParams2.get("Transformer"), this.mapParams.get("ValidCard").split(","),
                     this.getHostCard())) {
                 return false;
             }
@@ -59,7 +59,7 @@ public class TriggerTransformed extends Trigger {
      */
     @Override
     public final Trigger getCopy() {
-        final Trigger copy = new TriggerTransformed(this.getMapParams(), this.getHostCard(), this.isIntrinsic());
+        final Trigger copy = new TriggerTransformed(this.mapParams, this.getHostCard(), this.isIntrinsic());
 
         if (this.getOverridingAbility() != null) {
             copy.setOverridingAbility(this.getOverridingAbility());

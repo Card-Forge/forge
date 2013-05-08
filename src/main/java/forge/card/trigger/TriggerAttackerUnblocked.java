@@ -51,14 +51,14 @@ public class TriggerAttackerUnblocked extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final boolean performTest(final Map<String, Object> runParams2) {
-        if (this.getMapParams().containsKey("ValidCard")) {
-            if (!matchesValid(runParams2.get("Attacker"), this.getMapParams().get("ValidCard").split(","),
+        if (this.mapParams.containsKey("ValidCard")) {
+            if (!matchesValid(runParams2.get("Attacker"), this.mapParams.get("ValidCard").split(","),
                     this.getHostCard())) {
                 return false;
             }
         }
-        if (this.getMapParams().containsKey("ValidDefender")) {
-            if (!matchesValid(runParams2.get("Defender"), this.getMapParams().get("ValidDefender").split(","),
+        if (this.mapParams.containsKey("ValidDefender")) {
+            if (!matchesValid(runParams2.get("Defender"), this.mapParams.get("ValidDefender").split(","),
                     this.getHostCard())) {
                 return false;
             }
@@ -69,7 +69,7 @@ public class TriggerAttackerUnblocked extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final Trigger getCopy() {
-        final Trigger copy = new TriggerAttackerUnblocked(this.getMapParams(), this.getHostCard(), this.isIntrinsic());
+        final Trigger copy = new TriggerAttackerUnblocked(this.mapParams, this.getHostCard(), this.isIntrinsic());
         if (this.getOverridingAbility() != null) {
             copy.setOverridingAbility(this.getOverridingAbility());
         }

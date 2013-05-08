@@ -46,16 +46,16 @@ public class TriggerAttackersDeclared extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final boolean performTest(final Map<String, Object> runParams2) {
-        if (this.getMapParams().containsKey("SingleAttacker")) {
+        if (this.mapParams.containsKey("SingleAttacker")) {
             @SuppressWarnings("unchecked")
             final List<Card> attackers = (List<Card>) runParams2.get("Attackers");
             if (attackers.size() != 1) {
                 return false;
             }
         }
-        if (this.getMapParams().containsKey("AttackingPlayer")) {
+        if (this.mapParams.containsKey("AttackingPlayer")) {
             if (!matchesValid(runParams2.get("AttackingPlayer"),
-                    this.getMapParams().get("AttackingPlayer").split(","), this.getHostCard())) {
+                    this.mapParams.get("AttackingPlayer").split(","), this.getHostCard())) {
                 return false;
             }
         }
@@ -65,7 +65,7 @@ public class TriggerAttackersDeclared extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final Trigger getCopy() {
-        final Trigger copy = new TriggerAttackersDeclared(this.getMapParams(), this.getHostCard(), this.isIntrinsic());
+        final Trigger copy = new TriggerAttackersDeclared(this.mapParams, this.getHostCard(), this.isIntrinsic());
 
         if (this.getOverridingAbility() != null) {
             copy.setOverridingAbility(this.getOverridingAbility());

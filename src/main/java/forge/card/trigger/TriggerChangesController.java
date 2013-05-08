@@ -51,8 +51,8 @@ public class TriggerChangesController extends Trigger {
     public final boolean performTest(final java.util.Map<String, Object> runParams2) {
         final Card moved = (Card) runParams2.get("Card");
 
-        if (this.getMapParams().containsKey("ValidCard")) {
-            if (!moved.isValid(this.getMapParams().get("ValidCard").split(","), this.getHostCard().getController(),
+        if (this.mapParams.containsKey("ValidCard")) {
+            if (!moved.isValid(this.mapParams.get("ValidCard").split(","), this.getHostCard().getController(),
                     this.getHostCard())) {
                 return false;
             }
@@ -64,7 +64,7 @@ public class TriggerChangesController extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final Trigger getCopy() {
-        final Trigger copy = new TriggerChangesZone(this.getMapParams(), this.getHostCard(), this.isIntrinsic());
+        final Trigger copy = new TriggerChangesZone(this.mapParams, this.getHostCard(), this.isIntrinsic());
         if (this.getOverridingAbility() != null) {
             copy.setOverridingAbility(this.getOverridingAbility());
         }
