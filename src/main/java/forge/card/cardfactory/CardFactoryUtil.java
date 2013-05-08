@@ -1895,6 +1895,9 @@ public class CardFactoryUtil {
     public static byte getMostProminentColors(final List<Card> list) {
         int cntColors = MagicColor.WUBRG.length;
         final Integer[] map = new Integer[cntColors];
+        for(int i = 0; i < cntColors; i++) {
+            map[i] = 0;
+        }
 
         for (final Card crd : list) {
             ColorSet color = CardUtil.getColors(crd);
