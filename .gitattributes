@@ -4642,6 +4642,7 @@ res/cardsfolder/g/grisly_salvage.txt -text
 res/cardsfolder/g/grisly_spectacle.txt -text
 res/cardsfolder/g/gristle_grinner.txt svneol=native#text/plain
 res/cardsfolder/g/gristleback.txt svneol=native#text/plain
+res/cardsfolder/g/grixis.txt -text
 res/cardsfolder/g/grixis_battlemage.txt svneol=native#text/plain
 res/cardsfolder/g/grixis_charm.txt svneol=native#text/plain
 res/cardsfolder/g/grixis_grimblade.txt svneol=native#text/plain

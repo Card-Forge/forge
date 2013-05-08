@@ -1,0 +1,13 @@
+Name:Grixis
+ManaCost:no cost
+Types:Plane Alara
+S:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Graveyard | Affected$ Creature.YouOwn+Blue,Creature.YouOwn+Red,Creature.YouOwn+Black | AddAbility$ Unearth | AddSVar$ Unearthed & TrueDeath & Unavailable | Description$ Blue, black, and/or red creature cards in your graveyard have unearth. The unearth cost is equal to the card's mana cost. (Pay the card's mana cost: Return it to the battlefield. The creature gains haste. Exile it at the beginning of the next end step or if it would leave the battlefield. Unearth only as a sorcery.)
+SVar:Unearth:AB$ ChangeZone | Cost$ CardManaCost | Defined$ Self | Origin$ Graveyard | Destination$ Battlefield | SorcerySpeed$ True | ActivationZone$ Graveyard | SubAbility$ Unearthed | PrecostDesc$ Unearth | StackDescription$ Unearth: Return CARDNAME to the battlefield. | SpellDescription$ (Pay the card's mana cost: Return CARDNAME to the battlefield. It gains haste. Exile it at the beginning of the next end step or if it would leave the battlefield. Unearth only as a sorcery.)
+SVar:Unearthed:DB$ Pump | Defined$ Self | KW$ Haste & HIDDEN If CARDNAME would leave the battlefield, exile it instead of putting it anywhere else. | Permanent$ True | SubAbility$ TrueDeath | StackDescription$ It gains haste. Exile it at the beginning of the next end step or if it would leave the battlefield.
+SVar:TrueDeath:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | Execute$ Unavailable | TriggerDescription$ Exile CARDNAME at the beginning of the next end step.
+SVar:Unavailable:DB$ ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Exile
+T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever you roll Chaos, put target creature card from a graveyard onto the battlefield under your control.
+SVar:RolledChaos:AB$ ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | TgtPrompt$ Choose target creature card in a graveyard | ValidTgts$ Creature
+SVar:Picture:http://www.wizards.com/global/images/magic/general/grixis.jpg
+Oracle:Blue, black, and/or red creature cards in your graveyard have unearth. The unearth cost is equal to the card's mana cost. (Pay the card's mana cost: Return it to the battlefield. The creature gains haste. Exile it at the beginning of the next end step or if it would leave the battlefield. Unearth only as a sorcery.)\nWhenever you roll {C}, put target creature card from a graveyard onto the battlefield under your control.
+SetInfo:HOP Common

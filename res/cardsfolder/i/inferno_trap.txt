@@ -2,10 +2,10 @@ Name:Inferno Trap
 ManaCost:3 R
 Types:Instant Trap
 A:SP$ DealDamage | Cost$ 3 R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 4 | SpellDescription$ CARDNAME deals 4 damage to target creature.
-A:SP$ DealDamage | Cost$ R | CheckSVar$ CreaturesAttacked | SVarCompare$ GE2 | ValidTgts$ Creature | References$ CreaturesAttacked | TgtPrompt$ Select target creature | NumDmg$ 4 | SpellDescription$ (Pay only {R}) CARDNAME deals 4 damage to target creature.
+A:SP$ DealDamage | Cost$ R | CheckSVar$ CreaturesAttacked | SVarCompare$ GE2 | ValidTgts$ Creature | References$ CreaturesAttacked | TgtPrompt$ Select target creature | NumDmg$ 4 | SpellDescription$ If you've been dealt damage by two or more creatures this turn, you may pay R rather than pay CARDNAME's mana cost.
 SVar:CreaturesAttacked:Count$YourDamageSourcesThisTurn Creature
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/inferno_trap.jpg
-Oracle:If you've been dealt damage by two or more creatures this turn, you may pay {R} rather than pay CARDNAME's mana cost.\nCARDNAME deals 4 damage to target creature.
-SetInfo:ZEN Uncommon
+Oracle:If you've been dealt damage by two or more creatures this turn, you may pay {R} rather than pay Inferno Trap's mana cost.\nInferno Trap deals 4 damage to target creature.
 SetInfo:ARC Uncommon
+SetInfo:ZEN Uncommon
