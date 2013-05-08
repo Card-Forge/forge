@@ -1123,14 +1123,18 @@ public class CardFactoryUtil {
         if (l[0].startsWith("SVar$")) {
             return doXMath(xCount(c, c.getSVar(l[0].substring(5))), m, c);
         }
+        
+        if (l[0].startsWith("Controller$"))
+            return playerXProperty(cc, l[0].substring(11), c);
+        
 
         // Manapool
         if (l[0].startsWith("ManaPool")) {
             final String color = l[0].split(":")[1];
             if (color.equals("All")) {
-                return c.getController().getManaPool().totalMana();
+                return cc.getManaPool().totalMana();
             } else {
-                return c.getController().getManaPool().getAmountOfColor(color);
+                return cc.getManaPool().getAmountOfColor(color);
             }
         }
 
@@ -1140,8 +1144,8 @@ public class CardFactoryUtil {
             final String[] rest = lparts[1].split(",");
 
             final List<Card> cardsInZones = lparts[0].length() > 5 
-                ? cc.getGame().getCardsIn(ZoneType.listValueOf(lparts[0].substring(5)))
-                : cc.getGame().getCardsIn(ZoneType.Battlefield);
+                ? game.getCardsIn(ZoneType.listValueOf(lparts[0].substring(5)))
+                : game.getCardsIn(ZoneType.Battlefield);
 
             List<Card> cards = CardLists.getValidCards(cardsInZones, rest, cc, c);
             return doXMath(cards.size(), m, c);

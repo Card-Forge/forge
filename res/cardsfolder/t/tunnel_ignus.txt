@@ -1,0 +1,10 @@
+Name:Tunnel Ignus
+ManaCost:1 R
+Types:Creature Elemental
+PT:2/1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.OppCtrl | CheckOnTriggeredCard$ X GT1 | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever a land enters the battlefield under an opponent's control, if that player had another land enter the battlefield under his or her control this turn, CARDNAME deals 3 damage to that player.
+SVar:TrigPump:AB$DealDamage | Cost$ 0 | Defined$ TriggeredCardController | NumDmg$ 3
+SVar:X:ThisTurnEntered_Battlefield_Land.YouCtrl
+SVar:Picture:http://www.wizards.com/global/images/magic/general/tunner_ignus.jpg
+Oracle:Whenever a land enters the battlefield under an opponent's control, if that player had another land enter the battlefield under his or her control this turn, Tunnel Ignus deals 3 damage to that player.
+SetInfo:SOM Rare

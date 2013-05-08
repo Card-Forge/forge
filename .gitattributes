@@ -11545,6 +11545,7 @@ res/cardsfolder/t/tundra.txt svneol=native#text/plain
 res/cardsfolder/t/tundra_kavu.txt -text
 res/cardsfolder/t/tundra_wolves.txt svneol=native#text/plain
 res/cardsfolder/t/tunnel.txt svneol=native#text/plain
+res/cardsfolder/t/tunnel_ignus.txt -text
 res/cardsfolder/t/tunneler_wurm.txt svneol=native#text/plain
 res/cardsfolder/t/turbulent_dreams.txt -text
 res/cardsfolder/t/turf_wound.txt -text
