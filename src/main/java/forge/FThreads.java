@@ -106,12 +106,12 @@ public class FThreads {
         Runnable toRun = proc;
         if( lockUI ) {
             // checkEDT("FThreads.invokeInNewthread", true)
-            Singletons.getModel().getMatch().getInput().lock();
+            Singletons.getControl().getMatch().getInput().lock();
             toRun = new Runnable() {
                 @Override
                 public void run() {
                     proc.run();
-                    Singletons.getModel().getMatch().getInput().unlock();
+                    Singletons.getControl().getMatch().getInput().unlock();
                 }
             };
         }
@@ -119,7 +119,7 @@ public class FThreads {
     }
     
     public static void setInputAndWait(InputSynchronized input) {
-        Singletons.getModel().getMatch().getInput().setInput(input);
+        Singletons.getControl().getMatch().getInput().setInput(input);
         input.awaitLatchRelease();
     }
 

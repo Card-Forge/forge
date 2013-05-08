@@ -5,9 +5,8 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
-import javax.swing.SwingWorker;
-
 import forge.Command;
+import forge.FThreads;
 import forge.Singletons;
 import forge.control.Lobby;
 import forge.deck.Deck;
@@ -111,38 +110,22 @@ public enum CSubmenuConstructed implements ICDoc {
             return;
         }
 
-        SwingUtilities.invokeLater(new Runnable() {
+        SOverlayUtils.startGameOverlay();
+        SOverlayUtils.showOverlay();
+
+        final MatchStartHelper starter = new MatchStartHelper();
+        Lobby lobby = Singletons.getControl().getLobby();
+        starter.addPlayer(lobby.getGuiPlayer(), humanDeck);
+        starter.addPlayer(lobby.getAiPlayer(), aiDeck);
+        final MatchController mc = new MatchController(gameType, starter.getPlayerMap());
+        
+        FThreads.invokeInEdtLater(new Runnable(){
             @Override
             public void run() {
-                SOverlayUtils.startGameOverlay();
-                SOverlayUtils.showOverlay();
-            }
-        });
-
-        final SwingWorker<Object, Void> worker = new SwingWorker<Object, Void>() {
-            @Override
-            public Object doInBackground() {
-                Deck humanDeck = VSubmenuConstructed.SINGLETON_INSTANCE.getDcHuman().getDeck();
-                Deck aiDeck = VSubmenuConstructed.SINGLETON_INSTANCE.getDcAi().getDeck();
-
-                MatchStartHelper starter = new MatchStartHelper();
-                Lobby lobby = Singletons.getControl().getLobby();
-                starter.addPlayer(lobby.getGuiPlayer(), humanDeck);
-                starter.addPlayer(lobby.getAiPlayer(), aiDeck);
-
-                MatchController mc = Singletons.getModel().getMatch();
-                mc.initMatch(gameType, starter.getPlayerMap());
                 mc.startRound();
-
-                return null;
-            }
-
-            @Override
-            public void done() {
                 SOverlayUtils.hideOverlay();
             }
-        };
-        worker.execute();
+        });
     }
 
     /* (non-Javadoc)

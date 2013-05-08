@@ -7,22 +7,24 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import javax.swing.JOptionPane;
+
 import forge.Constant.Preferences;
 import forge.FThreads;
 import forge.Singletons;
 import forge.card.trigger.TriggerType;
 import forge.control.FControl;
-import forge.control.input.InputControl;
+import forge.control.input.InputQueue;
 import forge.deck.Deck;
 import forge.error.BugReporter;
-import forge.game.ai.AiProfileUtil;
 import forge.game.event.DuelOutcomeEvent;
-import forge.game.player.AIPlayer;
+import forge.game.event.FlipCoinEvent;
 import forge.game.player.HumanPlayer;
 import forge.game.player.LobbyPlayer;
 import forge.game.player.LobbyPlayerHuman;
 import forge.game.player.Player;
 import forge.game.player.PlayerStatistics;
+import forge.game.zone.ZoneType;
 import forge.gui.InputProxy;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.SDisplayUtil;
@@ -37,6 +39,7 @@ import forge.gui.match.controllers.CStack;
 import forge.gui.match.nonsingleton.VField;
 import forge.gui.match.views.VAntes;
 import forge.properties.ForgePreferences.FPref;
+import forge.util.MyRandom;
 
 /**
  * TODO: Write javadoc for this type.
@@ -46,7 +49,7 @@ import forge.properties.ForgePreferences.FPref;
 public class MatchController {
 
     private final Map<LobbyPlayer, PlayerStartConditions> players = new HashMap<LobbyPlayer, PlayerStartConditions>();
-    private GameType gameType = GameType.Constructed;
+    private final GameType gameType;
 
     private int gamesPerMatch = 3;
     private int gamesToWinMatch = 2;
@@ -56,10 +59,15 @@ public class MatchController {
     private final List<GameOutcome> gamesPlayed = new ArrayList<GameOutcome>();
     private final List<GameOutcome> gamesPlayedRo;
 
-    private InputControl input;
+    private InputQueue inputQueue;
 
-    public MatchController() {
+    /**
+     * This should become constructor once.
+     */
+    public MatchController(GameType type, Map<LobbyPlayer, PlayerStartConditions> map) {
         gamesPlayedRo = Collections.unmodifiableList(gamesPlayed);
+        players.putAll(map);
+        gameType = type;
     }
 
     /**
@@ -133,7 +141,7 @@ public class MatchController {
      */
     public void startRound() {
 
-        input = new InputControl(this);
+        inputQueue = new InputQueue(this);
         currentGame = new GameState(players.keySet(), gameType, this);
 
         Map<Player, PlayerStartConditions> startConditions = new HashMap<Player, PlayerStartConditions>();
@@ -141,83 +149,16 @@ public class MatchController {
             startConditions.put(p, players.get(p.getLobbyPlayer()));
         }
 
-        // Set the current AI profile.
-        for (Player p : currentGame.getPlayers()) {
-            if ( !(p instanceof AIPlayer))
-                continue;
-            AIPlayer ai = (AIPlayer) p; 
-            
-            String currentAiProfile = Singletons.getModel().getPreferences().getPref(FPref.UI_CURRENT_AI_PROFILE);
-            String lastProfileChosen = this.getPlayedGames().isEmpty() ? currentAiProfile : ai.getLobbyPlayer().getAiProfile();
-            
-            // TODO: implement specific AI profiles for quest mode.
-            boolean wantRandomProfile = currentAiProfile.equals(AiProfileUtil.AI_PROFILE_RANDOM_DUEL) 
-                    || (this.getPlayedGames().isEmpty() && currentAiProfile.equals(AiProfileUtil.AI_PROFILE_RANDOM_MATCH)); 
-            
-            String profileToSet = wantRandomProfile ? AiProfileUtil.getRandomProfile() : lastProfileChosen;
-            
-            ai.getLobbyPlayer().setAiProfile(profileToSet);
-            System.out.println(String.format("AI profile %s was chosen for the lobby player %s.", ai.getLobbyPlayer().getAiProfile(), ai.getLobbyPlayer().getName()));
-        }
-
         try {
-            
-            HumanPlayer localHuman = null;
-            for(Player p : currentGame.getPlayers()) {
-                if ( p.getLobbyPlayer() != FControl.SINGLETON_INSTANCE.getLobby().getGuiPlayer())
-                    continue;
-                localHuman = (HumanPlayer) p;
-                break;
-            }
-            if (null == localHuman)
-                throw new IllegalStateException("Cannot start a game without a human yet!");
-                
-            FControl.SINGLETON_INSTANCE.setPlayer(localHuman);
-
-            // The UI controls should use these game data as models
-            CMatchUI.SINGLETON_INSTANCE.initMatch(currentGame.getRegisteredPlayers(), localHuman);
-            CDock.SINGLETON_INSTANCE.onGameStarts(currentGame, localHuman);
-            CStack.SINGLETON_INSTANCE.setModel(currentGame.getStack());
-            CLog.SINGLETON_INSTANCE.setModel(currentGame.getGameLog());
-            CCombat.SINGLETON_INSTANCE.setModel(currentGame);
-
-            Singletons.getModel().getPreferences().actuateMatchPreferences();
-            Singletons.getControl().changeState(FControl.Screens.MATCH_SCREEN);
-            SDisplayUtil.showTab(EDocID.REPORT_LOG.getDoc());
-
-            // black magic still
-            InputProxy inputProxy = CMessage.SINGLETON_INSTANCE.getInputControl();
-            inputProxy.setMatch(this);
-            input.addObserver(inputProxy);
-
-            // models shall notify controllers of changes
-            currentGame.getStack().addObserver(inputProxy);
-            currentGame.getStack().addObserver(CStack.SINGLETON_INSTANCE);
-            currentGame.getPhaseHandler().addObserver(inputProxy);
-            currentGame.getGameLog().addObserver(CLog.SINGLETON_INSTANCE);
-            // some observers are set in CMatchUI.initMatch
-
-
+            attachUiToMatch(this, FControl.SINGLETON_INSTANCE.getLobby().getGuiPlayer());
 
             final boolean canRandomFoil = Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_RANDOM_FOIL) && gameType == GameType.Constructed;
-            GameNew.newGame(this, startConditions, currentGame, canRandomFoil);
-            
+            GameNew.newGame(currentGame, canRandomFoil);
+            determineFirstTurnPlayer(getLastGameOutcome(), currentGame);
+
             currentGame.setAge(GameAge.Mulligan);
             getInput().clearInput();
 
-            // TODO restore this functionality!!!
-            //VMatchUI.SINGLETON_INSTANCE.getViewDevMode().getDocument().setVisible(Preferences.DEV_MODE);
-            for (final VField field : VMatchUI.SINGLETON_INSTANCE.getFieldViews()) {
-                field.getLblLibrary().setHoverable(Preferences.DEV_MODE);
-            }
-
-            if (this.getPlayedGames().isEmpty()) {
-                VAntes.SINGLETON_INSTANCE.clearAnteCards();
-            }
-
-            // per player observers were set in CMatchUI.SINGLETON_INSTANCE.initMatch
-
-            CMessage.SINGLETON_INSTANCE.updateGameInfo(this);
             // Update observers
             currentGame.getGameLog().updateObservers();
         } catch (Exception e) {
@@ -226,14 +167,56 @@ public class MatchController {
 
     }
 
-    /**
-     * This should become constructor once.
-     */
-    public void initMatch(GameType type, Map<LobbyPlayer, PlayerStartConditions> map) {
-        gamesPlayed.clear();
-        players.clear();
-        players.putAll(map);
-        gameType = type;
+    public static void attachUiToMatch(MatchController match, LobbyPlayerHuman humanLobbyPlayer) {
+        FControl.SINGLETON_INSTANCE.setMatch(match);
+        
+        GameState currentGame = match.getCurrentGame();
+        currentGame.getEvents().register(Singletons.getControl().getSoundSystem());
+        
+        HumanPlayer localHuman = null;
+        for(Player p : currentGame.getPlayers()) {
+            if ( p.getLobbyPlayer() != humanLobbyPlayer)
+                continue;
+            localHuman = (HumanPlayer) p;
+            break;
+        }
+        if (null == localHuman)
+            throw new IllegalStateException("Cannot start a game without a human yet!");
+
+        FControl.SINGLETON_INSTANCE.setPlayer(localHuman);
+
+        // The UI controls should use these game data as models
+        CMatchUI.SINGLETON_INSTANCE.initMatch(currentGame.getRegisteredPlayers(), localHuman);
+        CDock.SINGLETON_INSTANCE.setModel(currentGame, localHuman);
+        CStack.SINGLETON_INSTANCE.setModel(currentGame.getStack());
+        CLog.SINGLETON_INSTANCE.setModel(currentGame.getGameLog());
+        CCombat.SINGLETON_INSTANCE.setModel(currentGame);
+
+        Singletons.getModel().getPreferences().actuateMatchPreferences();
+        Singletons.getControl().changeState(FControl.Screens.MATCH_SCREEN);
+        SDisplayUtil.showTab(EDocID.REPORT_LOG.getDoc());
+
+        InputProxy inputProxy = CMessage.SINGLETON_INSTANCE.getInputControl();
+        inputProxy.setMatch(match);
+
+        // models shall notify controllers of changes
+        currentGame.getStack().addObserver(inputProxy);
+        currentGame.getStack().addObserver(CStack.SINGLETON_INSTANCE);
+        currentGame.getPhaseHandler().addObserver(inputProxy);
+        currentGame.getGameLog().addObserver(CLog.SINGLETON_INSTANCE);
+        // some observers were set in CMatchUI.initMatch
+
+        // black magic still
+        match.getInput().addObserver(inputProxy);
+        
+        VAntes.SINGLETON_INSTANCE.setModel(currentGame.getRegisteredPlayers());
+
+        for (final VField field : VMatchUI.SINGLETON_INSTANCE.getFieldViews()) {
+            field.getLblLibrary().setHoverable(Preferences.DEV_MODE);
+        }
+
+        // per player observers were set in CMatchUI.SINGLETON_INSTANCE.initMatch
+        CMessage.SINGLETON_INSTANCE.updateGameInfo(match);
     }
 
     /**
@@ -345,8 +328,8 @@ public class MatchController {
         return players;
     }
 
-    public final InputControl getInput() {
-        return input;
+    public final InputQueue getInput() {
+        return inputQueue;
     }
 
     /**
@@ -366,4 +349,44 @@ public class MatchController {
         currentGame.setAge(GameAge.Play);
         getInput().clearInput();
     }
+
+    /**
+     * TODO: Write javadoc for this method.
+     * @param match
+     * @param game
+     */
+    private void determineFirstTurnPlayer(final GameOutcome lastGameOutcome, final GameState game) {
+        // Only cut/coin toss if it's the first game of the match
+        Player goesFirst;
+        Player humanPlayer = Singletons.getControl().getPlayer();
+        boolean isFirstGame = lastGameOutcome == null;
+        if (isFirstGame) {
+            goesFirst = seeWhoPlaysFirstDice(game);
+        } else {
+            goesFirst = lastGameOutcome.isWinner(humanPlayer.getLobbyPlayer()) ? humanPlayer.getOpponent() : humanPlayer;
+        }
+        String message = goesFirst + ( isFirstGame ? " has won the coin toss." : " lost the last game.");
+        boolean willPlay = goesFirst.getController().getWillPlayOnFirstTurn(message);
+        if ( goesFirst != humanPlayer ) {
+            JOptionPane.showMessageDialog(null, message + "\nComputer Going First", "You are drawing", JOptionPane.INFORMATION_MESSAGE);
+        }
+        goesFirst = willPlay ? goesFirst : goesFirst.getOpponent();
+        game.getPhaseHandler().setPlayerTurn(goesFirst);
+    }
+    
+    // decides who goes first when starting another game, used by newGame()
+    /**
+     * <p>
+     * seeWhoPlaysFirstCoinToss.
+     * </p>
+     * @return 
+     */
+    private Player seeWhoPlaysFirstDice(final GameState game) {
+        // Play the Flip Coin sound
+        game.getEvents().post(new FlipCoinEvent());
+
+        List<Player> allPlayers = game.getPlayers();
+        return allPlayers.get(MyRandom.getRandom().nextInt(allPlayers.size()));
+    }
+
 }

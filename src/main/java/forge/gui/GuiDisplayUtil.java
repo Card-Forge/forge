@@ -690,7 +690,7 @@ public final class GuiDisplayUtil {
     }
     
     private static GameState getGame() {
-        return Singletons.getModel().getMatch().getCurrentGame();
+        return Singletons.getControl().getMatch().getCurrentGame();
     }
 
 } // end class GuiDisplayUtil

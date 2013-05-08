@@ -14096,7 +14096,6 @@ src/main/java/forge/control/input/InputAutoPassPriority.java -text
 src/main/java/forge/control/input/InputBase.java svneol=native#text/plain
 src/main/java/forge/control/input/InputBlock.java svneol=native#text/plain
 src/main/java/forge/control/input/InputCleanup.java svneol=native#text/plain
-src/main/java/forge/control/input/InputControl.java svneol=native#text/plain
 src/main/java/forge/control/input/InputLockUI.java -text
 src/main/java/forge/control/input/InputMulligan.java svneol=native#text/plain
 src/main/java/forge/control/input/InputPartialParisMulligan.java -text
@@ -14108,6 +14107,7 @@ src/main/java/forge/control/input/InputPayManaSimple.java svneol=native#text/pla
 src/main/java/forge/control/input/InputPayManaX.java -text
 src/main/java/forge/control/input/InputPayment.java -text
 src/main/java/forge/control/input/InputProliferate.java -text
+src/main/java/forge/control/input/InputQueue.java svneol=native#text/plain
 src/main/java/forge/control/input/InputSelectCards.java -text
 src/main/java/forge/control/input/InputSelectCardsFromList.java -text
 src/main/java/forge/control/input/InputSelectMany.java -text

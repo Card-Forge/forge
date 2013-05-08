@@ -12,11 +12,10 @@ import java.util.List;
 import javax.swing.JList;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingUtilities;
-import javax.swing.SwingWorker;
-
 import org.apache.commons.lang3.ArrayUtils;
 
 import forge.Command;
+import forge.FThreads;
 import forge.Singletons;
 import forge.control.Lobby;
 import forge.deck.Deck;
@@ -245,30 +244,22 @@ public enum CSubmenuGauntletContests implements ICDoc {
             }
         });
 
-        final SwingWorker<Object, Void> worker = new SwingWorker<Object, Void>() {
+        Deck aiDeck = gd.getDecks().get(gd.getCompleted());
+
+        MatchStartHelper starter = new MatchStartHelper();
+        Lobby lobby = Singletons.getControl().getLobby();
+
+        starter.addPlayer(lobby.getGuiPlayer(), gd.getUserDeck());
+        starter.addPlayer(lobby.getAiPlayer(), aiDeck);
+
+        final MatchController mc = new MatchController(GameType.Gauntlet, starter.getPlayerMap());
+        FThreads.invokeInEdtLater(new Runnable(){
             @Override
-            public Object doInBackground() {
-                final GauntletData gd = FModel.SINGLETON_INSTANCE.getGauntletData();
-                Deck aiDeck = gd.getDecks().get(gd.getCompleted());
-
-                MatchStartHelper starter = new MatchStartHelper();
-                Lobby lobby = Singletons.getControl().getLobby();
-
-                starter.addPlayer(lobby.getGuiPlayer(), gd.getUserDeck());
-                starter.addPlayer(lobby.getAiPlayer(), aiDeck);
-
-                MatchController mc = Singletons.getModel().getMatch();
-                mc.initMatch(GameType.Gauntlet, starter.getPlayerMap());
+            public void run() {
                 mc.startRound();
-                return null;
-            }
-
-            @Override
-            public void done() {
                 SOverlayUtils.hideOverlay();
             }
-        };
-        worker.execute();
+        });
     }
 
     /* (non-Javadoc)

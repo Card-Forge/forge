@@ -86,7 +86,7 @@ public class PhaseUtil {
         final PhaseHandler ph = game.getPhaseHandler();
         final Player turn = ph.getPlayerTurn();
 
-        CMessage.SINGLETON_INSTANCE.updateGameInfo(Singletons.getModel().getMatch());
+        CMessage.SINGLETON_INSTANCE.updateGameInfo(Singletons.getControl().getMatch());
 
         game.getCombat().reset(turn);
 

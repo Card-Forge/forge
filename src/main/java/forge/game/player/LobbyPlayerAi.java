@@ -1,6 +1,9 @@
 package forge.game.player;
 
+import forge.Singletons;
 import forge.game.GameState;
+import forge.game.ai.AiProfileUtil;
+import forge.properties.ForgePreferences.FPref;
 
 public class LobbyPlayerAi extends LobbyPlayer {
     public LobbyPlayerAi(String name) {
@@ -24,7 +27,18 @@ public class LobbyPlayerAi extends LobbyPlayer {
 
     @Override
     public Player getPlayer(GameState game) {
-        return new AIPlayer(this, game);
+        AIPlayer ai = new AIPlayer(this, game);
+
+        String currentAiProfile = Singletons.getModel().getPreferences().getPref(FPref.UI_CURRENT_AI_PROFILE);
+        String lastProfileChosen = game.getMatch().getPlayedGames().isEmpty() ? currentAiProfile : getAiProfile();
+
+        // TODO: implement specific AI profiles for quest mode.
+        boolean wantRandomProfile = currentAiProfile.equals(AiProfileUtil.AI_PROFILE_RANDOM_DUEL) 
+             || game.getMatch().getPlayedGames().isEmpty() && currentAiProfile.equals(AiProfileUtil.AI_PROFILE_RANDOM_MATCH); 
+
+        setAiProfile(wantRandomProfile ? AiProfileUtil.getRandomProfile() : lastProfileChosen);
+        System.out.println(String.format("AI profile %s was chosen for the lobby player %s.", getAiProfile(), getName()));
+        return ai;
     }
 
     @Override

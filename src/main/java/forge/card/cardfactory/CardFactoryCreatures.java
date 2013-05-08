@@ -31,7 +31,6 @@ import forge.FThreads;
 import forge.CardPredicates.Presets;
 import forge.Command;
 import forge.CounterType;
-import forge.Singletons;
 import forge.card.cost.Cost;
 import forge.card.mana.ManaCost;
 import forge.card.spellability.Ability;
@@ -349,8 +348,6 @@ public class CardFactoryCreatures {
                     } else {
                         game.getAction().sacrifice(card, null);
                     }
-                    
-                    Singletons.getModel().getMatch().getInput().setInput(target);
                 }
             } // end resolve
         }; // end sacOrSac

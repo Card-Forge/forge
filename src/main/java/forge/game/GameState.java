@@ -94,19 +94,20 @@ public class GameState {
      */
     public GameState(Iterable<LobbyPlayer> players2, GameType t, MatchController match0) { /* no more zones to map here */
         type = t;
+        match = match0;
         List<Player> players = new ArrayList<Player>();
         for (LobbyPlayer p : players2) {
             Player pl = p.getPlayer(this);
             players.add(pl);
             ingamePlayers.add(pl);
         }
-        match = match0;
+
         allPlayers = Collections.unmodifiableList(players);
         roIngamePlayers = Collections.unmodifiableList(ingamePlayers);
         action = new GameAction(this);
         stack = new MagicStack(this);
         phaseHandler = new PhaseHandler(this);
-        
+
         untap = new Untap(this);
         upkeep = new Upkeep(this);
         cleanup = new Cleanup(this);
@@ -116,10 +117,9 @@ public class GameState {
         if ( match0.getGameType() == GameType.Quest)
             events.register(Singletons.getModel().getQuest()); // this one listens to player's mulligans ATM
 
-        events.register(Singletons.getControl().getSoundSystem());
         events.register(gameLog);
-
     }
+    
 
     /**
      * Gets the players who are still fighting to win.
@@ -455,8 +455,12 @@ public class GameState {
         return colorChanger;
     }
 
-    public GameAction getAction() {
+    public final GameAction getAction() {
         return action;
+    }
+
+    public final MatchController getMatch() {
+        return match;
     }
 
     /**

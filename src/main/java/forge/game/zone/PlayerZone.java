@@ -88,14 +88,11 @@ public class PlayerZone extends Zone {
 
         c.addObserver(this);
         c.setTurnInZone(c.getGame().getPhaseHandler().getTurn());
-
+        this.cardList.add(c);
+        
         if (!this.is(ZoneType.Battlefield)) {
             c.setTapped(false);
-        }
-
-        this.cardList.add(c);
-
-        if (update) {
+        } else if (update) { // setTapped has already called update once
             this.update();
         }
     }

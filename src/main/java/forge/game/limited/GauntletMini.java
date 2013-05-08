@@ -21,8 +21,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.SwingUtilities;
-import javax.swing.SwingWorker;
 
+import forge.FThreads;
 import forge.Singletons;
 import forge.control.Lobby;
 import forge.deck.Deck;
@@ -162,28 +162,19 @@ public class GauntletMini {
             }
         });
 
-        final SwingWorker<Object, Void> worker = new SwingWorker<Object, Void>() {
+        final MatchStartHelper starter = new MatchStartHelper();
+        Lobby lobby = Singletons.getControl().getLobby();
+        starter.addPlayer(lobby.getGuiPlayer(), humanDeck);
+        starter.addPlayer(lobby.getAiPlayer(), aiOpponents.get(currentRound - 1));
+
+        final MatchController mc = new MatchController(gauntletType, starter.getPlayerMap());
+        FThreads.invokeInEdtLater(new Runnable(){
             @Override
-
-            public Object doInBackground() {
-
-                MatchStartHelper starter = new MatchStartHelper();
-                Lobby lobby = Singletons.getControl().getLobby();
-                starter.addPlayer(lobby.getGuiPlayer(), humanDeck);
-                starter.addPlayer(lobby.getAiPlayer(), aiOpponents.get(currentRound - 1));
-
-                MatchController mc = Singletons.getModel().getMatch();
-                mc.initMatch(gauntletType, starter.getPlayerMap());
+            public void run() {
                 mc.startRound();
-                return null;
-            }
-
-            @Override
-            public void done() {
                 SOverlayUtils.hideOverlay();
             }
-        };
-        worker.execute();
+        });
     }
 
 

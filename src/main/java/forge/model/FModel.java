@@ -39,7 +39,6 @@ import forge.card.cardfactory.CardStorageReader;
 import forge.deck.CardCollections;
 import forge.error.BugReporter;
 import forge.error.ExceptionHandler;
-import forge.game.MatchController;
 import forge.game.limited.GauntletMini;
 import forge.gauntlet.GauntletData;
 import forge.item.CardDb;
@@ -80,8 +79,6 @@ public enum FModel {
 
     private final QuestController quest;
     private final CardCollections decks;
-
-    private final MatchController match;
 
     private final EditionCollection editions;
     private final FormatCollection formats;
@@ -155,8 +152,6 @@ public enum FModel {
         this.blocks = new StorageView<CardBlock>(new CardBlock.Reader("res/blockdata/blocks.txt", editions));
         this.fantasyBlocks = new StorageView<CardBlock>(new CardBlock.Reader("res/blockdata/fantasyblocks.txt", editions));
         this.worlds = new StorageView<QuestWorld>(new QuestWorld.Reader("res/quest/world/worlds.txt"));
-
-        this.match = new MatchController();
         // TODO - there's got to be a better place for this...oblivion?
         Preferences.DEV_MODE = this.preferences.getPrefBoolean(FPref.DEV_MODE_ENABLED);
 
@@ -396,9 +391,6 @@ public enum FModel {
         this.gauntletData = data0;
     }
 
-    public MatchController getMatch() {
-        return match;
-    }
 
     public GauntletMini getGauntletMini() {
 

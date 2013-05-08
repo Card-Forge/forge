@@ -8,9 +8,8 @@ import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
-import javax.swing.SwingWorker;
-
 import forge.Command;
+import forge.FThreads;
 import forge.Singletons;
 import forge.control.FControl;
 import forge.control.Lobby;
@@ -124,33 +123,26 @@ public enum CSubmenuDraft implements ICDoc {
             }
         });
 
-        final SwingWorker<Object, Void> worker = new SwingWorker<Object, Void>() {
+ 
+        DeckGroup opponentDecks = Singletons.getModel().getDecks().getDraft().get(humanDeck.getName());
+        Deck aiDeck = opponentDecks.getAiDecks().get(aiIndex);
+        if (aiDeck == null) {
+            throw new IllegalStateException("Draft: Computer deck is null!");
+        }
+
+        MatchStartHelper starter = new MatchStartHelper();
+        Lobby lobby = Singletons.getControl().getLobby();
+        starter.addPlayer(lobby.getGuiPlayer(), humanDeck);
+        starter.addPlayer(lobby.getAiPlayer(), aiDeck);
+
+        final MatchController mc = new MatchController(GameType.Draft, starter.getPlayerMap());
+        FThreads.invokeInEdtLater(new Runnable(){
             @Override
-            public Object doInBackground() {
-                DeckGroup opponentDecks = Singletons.getModel().getDecks().getDraft().get(humanDeck.getName());
-                Deck aiDeck = opponentDecks.getAiDecks().get(aiIndex);
-                if (aiDeck == null) {
-                    throw new IllegalStateException("Draft: Computer deck is null!");
-                }
-
-                MatchStartHelper starter = new MatchStartHelper();
-                Lobby lobby = Singletons.getControl().getLobby();
-                starter.addPlayer(lobby.getGuiPlayer(), humanDeck);
-                starter.addPlayer(lobby.getAiPlayer(), aiDeck);
-
-                MatchController mc = Singletons.getModel().getMatch();
-                mc.initMatch(GameType.Draft, starter.getPlayerMap());
+            public void run() {
                 mc.startRound();
-
-                return null;
-            }
-
-            @Override
-            public void done() {
                 SOverlayUtils.hideOverlay();
             }
-        };
-        worker.execute();
+        });
     }
 
     /** */

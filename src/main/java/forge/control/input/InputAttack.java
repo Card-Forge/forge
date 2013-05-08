@@ -102,7 +102,7 @@ public class InputAttack extends InputBase {
         
         game.getPhaseHandler().setCombat(!game.getCombat().getAttackers().isEmpty());
         game.getPhaseHandler().setPlayersPriorityPermission(false);
-        Singletons.getModel().getMatch().getInput().updateObservers();
+        Singletons.getControl().getMatch().getInput().updateObservers();
     }
 
     @Override

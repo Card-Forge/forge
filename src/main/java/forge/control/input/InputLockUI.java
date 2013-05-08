@@ -51,7 +51,7 @@ public class InputLockUI implements Input  {
     };
     
     protected final boolean isActive() {
-        return Singletons.getModel().getMatch().getInput().getInput() == this;
+        return Singletons.getControl().getMatch().getInput().getInput() == this;
     }
 
     protected void showMessage(String message) { 

@@ -36,6 +36,6 @@ public class AiInputBlock extends InputBase {
         game.getPhaseHandler().setPlayersPriorityPermission(false);
         
         // was not added to stack, so will be replaced by plain update
-        Singletons.getModel().getMatch().getInput().updateObservers();
+        Singletons.getControl().getMatch().getInput().updateObservers();
     }
 }

@@ -60,12 +60,12 @@ public abstract class InputBase implements java.io.Serializable, Input {
     // Removes this input from the stack and releases any latches (in synchronous imports)
     protected final void stop() {
         // clears a "temp" Input like Input_PayManaCost if there is one
-        Singletons.getModel().getMatch().getInput().removeInput(this);
+        Singletons.getControl().getMatch().getInput().removeInput(this);
         afterStop(); // sync inputs will release their latch there
     }
 
     protected final boolean isActive() {
-        return Singletons.getModel().getMatch().getInput().getInput() == this;
+        return Singletons.getControl().getMatch().getInput().getInput() == this;
     }
     
     protected void afterStop() { }

@@ -724,24 +724,15 @@ public class GameAction {
      */
     public final Card moveTo(final ZoneType name, final Card c, final int libPosition) {
         // Call specific functions to set PlayerZone, then move onto moveTo
-        if (name.equals(ZoneType.Hand)) {
-            return this.moveToHand(c);
-        } else if (name.equals(ZoneType.Library)) {
-            return this.moveToLibrary(c, libPosition);
-        } else if (name.equals(ZoneType.Battlefield)) {
-            return this.moveToPlay(c);
-        } else if (name.equals(ZoneType.Graveyard)) {
-            return this.moveToGraveyard(c);
-        } else if (name.equals(ZoneType.Exile)) {
-            return this.exile(c);
-        } else if (name.equals(ZoneType.Ante)) {
-            final PlayerZone ante = c.getOwner().getZone(ZoneType.Ante);
-            return this.moveTo(ante, c);
-        } else if (name.equals(ZoneType.Command)) {
-            final PlayerZone command = c.getOwner().getZone(ZoneType.Command);
-            return this.moveTo(command, c);
-        } else {
-            return this.moveToStack(c);
+        switch(name) {
+            case Hand:          return this.moveToHand(c);
+            case Library:       return this.moveToLibrary(c, libPosition);
+            case Battlefield:   return this.moveToPlay(c);
+            case Graveyard:     return this.moveToGraveyard(c);
+            case Exile:         return this.exile(c);
+            case Ante:          return this.moveTo(c.getOwner().getZone(ZoneType.Ante), c);
+            case Command:       return this.moveTo(c.getOwner().getZone(ZoneType.Command), c);
+            default:            return this.moveToStack(c);
         }
     }
 

@@ -41,14 +41,14 @@ import forge.util.MyObservable;
  * @author Forge
  * @version $Id$
  */
-public class InputControl extends MyObservable implements java.io.Serializable {
+public class InputQueue extends MyObservable implements java.io.Serializable {
     /** Constant <code>serialVersionUID=3955194449319994301L</code>. */
     private static final long serialVersionUID = 3955194449319994301L;
 
     private final BlockingDeque<Input> inputStack = new LinkedBlockingDeque<Input>();
 
     private final MatchController match;
-    public InputControl(MatchController matchController) {
+    public InputQueue(MatchController matchController) {
         match = matchController;
     }
 

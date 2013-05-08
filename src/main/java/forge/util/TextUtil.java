@@ -9,6 +9,8 @@ import java.util.Map.Entry;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 
+import forge.item.CardPrinted;
+
 /** 
  * TODO: Write javadoc for this type.
  *
@@ -104,5 +106,17 @@ public class TextUtil {
     public static String enumToLabel(Enum<?> val) {
         return val.toString().substring(0, 1).toUpperCase(Locale.ENGLISH) +
                 val.toString().substring(1).toLowerCase(Locale.ENGLISH);
+    }
+
+    public static String buildFourColumnList(String firstLine, Iterable<CardPrinted> cAnteRemoved) {
+        StringBuilder sb = new StringBuilder(firstLine);
+        int i = 0;
+        for(CardPrinted cp: cAnteRemoved) {
+            if ( i != 0 ) sb.append(", ");
+            if ( i % 4 == 0 ) sb.append("\n");
+            sb.append(cp);
+            i++;
+        }
+        return sb.toString();
     }
 }

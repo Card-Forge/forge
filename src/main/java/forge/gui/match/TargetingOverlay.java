@@ -284,7 +284,7 @@ public enum TargetingOverlay {
 
         @Override
         public void paintComponent(final Graphics g) {
-            final Combat combat = Singletons.getModel().getMatch().getCurrentGame().getCombat(); // this will get deprecated too
+            final Combat combat = Singletons.getControl().getMatch().getCurrentGame().getCombat(); // this will get deprecated too
             // No need for this except in match view
             if (FControl.SINGLETON_INSTANCE.getState() != FControl.Screens.MATCH_SCREEN) { return; }
 

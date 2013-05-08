@@ -7,11 +7,10 @@ import java.util.List;
 import java.util.Vector;
 
 import javax.swing.SwingUtilities;
-import javax.swing.SwingWorker;
-
 import com.google.common.base.Predicate;
 
 import forge.Command;
+import forge.FThreads;
 import forge.Singletons;
 import forge.control.FControl;
 import forge.control.Lobby;
@@ -156,100 +155,93 @@ public enum CSubmenuArchenemy implements ICDoc {
 
     /** @param lists0 &emsp; {@link java.util.List}<{@link javax.swing.JList}> */
     private void startGame() {
-        SwingUtilities.invokeLater(new Runnable() {
+
+
+
+        boolean usedDefaults = false;
+
+        List<Deck> playerDecks = new ArrayList<Deck>();
+        for (int i = 0; i < view.getNumPlayers(); i++) {
+            Deck d = view.getDeckChoosers().get(i).getDeck();
+
+            if (d == null) {
+                //ERROR!
+                GuiDialog.message("No deck selected for player " + (i + 1));
+                return;
+            }
+            playerDecks.add(d);
+        }
+
+        List<CardPrinted> schemes = null;
+        Object obj = view.getArchenemySchemes().getSelectedValue();
+
+        boolean useDefault = VSubmenuArchenemy.SINGLETON_INSTANCE.getCbUseDefaultSchemes().isSelected();
+        useDefault &= playerDecks.get(0).has(DeckSection.Schemes);
+
+        System.out.println(useDefault);
+        if (useDefault) {
+            schemes = playerDecks.get(0).get(DeckSection.Schemes).toFlatList();
+            System.out.println(schemes.toString());
+            usedDefaults = true;
+        } else {
+            if (obj instanceof String) {
+                String sel = (String) obj;
+                if (sel.equals("Random")) {
+                    if (view.getAllSchemeDecks().isEmpty()) {
+                        //Generate if no constructed scheme decks are available
+                        System.out.println("Generating scheme deck - no others available");
+                        schemes = DeckgenUtil.generateSchemeDeck().toFlatList();
+                    } else {
+                        System.out.println("Using scheme deck: " + Aggregates.random(view.getAllSchemeDecks()).getName());
+                        schemes = Aggregates.random(view.getAllSchemeDecks()).get(DeckSection.Schemes).toFlatList();
+                    }
+                } else {
+                    //Generate
+                    schemes = DeckgenUtil.generateSchemeDeck().toFlatList();
+                }
+            } else {
+                schemes = ((Deck) obj).get(DeckSection.Schemes).toFlatList();
+            }
+        }
+        if (schemes == null) {
+            //ERROR!
+            GuiDialog.message("No scheme deck selected!");
+            return;
+        }
+
+        if (usedDefaults) {
+
+            GuiDialog.message("Using default scheme deck.");
+        }
+
+        // won't cancel after this point
+        SOverlayUtils.startGameOverlay();
+        SOverlayUtils.showOverlay();
+
+        Lobby lobby = Singletons.getControl().getLobby();
+        MatchStartHelper helper = new MatchStartHelper();
+        for (int i = 0; i < view.getNumPlayers(); i++) {
+            LobbyPlayer player = i == 0 ? lobby.getGuiPlayer() : lobby.getAiPlayer();
+
+            if (i == 0) {
+
+                helper.addArchenemy(player, playerDecks.get(i), schemes);
+                helper.getPlayerMap().get(player).setStartingLife(10 + (10 * (view.getNumPlayers() - 1)));
+            } else {
+
+                helper.addPlayer(player, playerDecks.get(i));
+            }
+        }
+        
+        final MatchController mc = new MatchController(GameType.Archenemy, helper.getPlayerMap());
+        FThreads.invokeInEdtLater(new Runnable(){
             @Override
             public void run() {
-                SOverlayUtils.startGameOverlay();
-                SOverlayUtils.showOverlay();
+                mc.startRound();
+                SOverlayUtils.hideOverlay();
             }
         });
 
-        final SwingWorker<Object, Void> worker = new SwingWorker<Object, Void>() {
-            @Override
-            public Object doInBackground() {
-                boolean usedDefaults = false;
-
-                List<Deck> playerDecks = new ArrayList<Deck>();
-                for (int i = 0; i < view.getNumPlayers(); i++) {
-                    Deck d = view.getDeckChoosers().get(i).getDeck();
-
-                    if (d == null) {
-                        //ERROR!
-                        GuiDialog.message("No deck selected for player " + (i + 1));
-                        return null;
-                    }
-                    playerDecks.add(d);
-                }
-
-                List<CardPrinted> schemes = null;
-                Object obj = view.getArchenemySchemes().getSelectedValue();
-
-                boolean useDefault = VSubmenuArchenemy.SINGLETON_INSTANCE.getCbUseDefaultSchemes().isSelected();
-                useDefault &= playerDecks.get(0).has(DeckSection.Schemes);
-
-                System.out.println(useDefault);
-                if (useDefault) {
-                    schemes = playerDecks.get(0).get(DeckSection.Schemes).toFlatList();
-                    System.out.println(schemes.toString());
-                    usedDefaults = true;
-                } else {
-                    if (obj instanceof String) {
-                        String sel = (String) obj;
-                        if (sel.equals("Random")) {
-                            if (view.getAllSchemeDecks().isEmpty()) {
-                                //Generate if no constructed scheme decks are available
-                                System.out.println("Generating scheme deck - no others available");
-                                schemes = DeckgenUtil.generateSchemeDeck().toFlatList();
-                            } else {
-                                System.out.println("Using scheme deck: " + Aggregates.random(view.getAllSchemeDecks()).getName());
-                                schemes = Aggregates.random(view.getAllSchemeDecks()).get(DeckSection.Schemes).toFlatList();
-                            }
-                        } else {
-                            //Generate
-                            schemes = DeckgenUtil.generateSchemeDeck().toFlatList();
-                        }
-                    } else {
-                        schemes = ((Deck) obj).get(DeckSection.Schemes).toFlatList();
-                    }
-                }
-                if (schemes == null) {
-                    //ERROR!
-                    GuiDialog.message("No scheme deck selected!");
-                    return null;
-                }
-
-                if (usedDefaults) {
-
-                    GuiDialog.message("Using default scheme deck.");
-                }
-
-                Lobby lobby = Singletons.getControl().getLobby();
-                MatchStartHelper helper = new MatchStartHelper();
-                for (int i = 0; i < view.getNumPlayers(); i++) {
-                    LobbyPlayer player = i == 0 ? lobby.getGuiPlayer() : lobby.getAiPlayer();
-
-                    if (i == 0) {
-
-                        helper.addArchenemy(player, playerDecks.get(i), schemes);
-                        helper.getPlayerMap().get(player).setStartingLife(10 + (10 * (view.getNumPlayers() - 1)));
-                    } else {
-
-                        helper.addPlayer(player, playerDecks.get(i));
-                    }
-                }
-                MatchController mc = Singletons.getModel().getMatch();
-                mc.initMatch(GameType.Archenemy, helper.getPlayerMap());
-                mc.startRound();
-
-                return null;
-            }
-
-            @Override
-            public void done() {
-                SOverlayUtils.hideOverlay();
-            }
-        };
-        worker.execute();
     }
 
     /* (non-Javadoc)

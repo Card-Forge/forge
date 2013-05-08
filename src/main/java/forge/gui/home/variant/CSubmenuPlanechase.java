@@ -7,11 +7,10 @@ import java.util.List;
 import java.util.Vector;
 
 import javax.swing.SwingUtilities;
-import javax.swing.SwingWorker;
-
 import com.google.common.base.Predicate;
 
 import forge.Command;
+import forge.FThreads;
 import forge.Singletons;
 import forge.control.FControl;
 import forge.control.Lobby;
@@ -149,94 +148,80 @@ public enum CSubmenuPlanechase implements ICDoc {
 
     /** @param lists0 &emsp; {@link java.util.List}<{@link javax.swing.JList}> */
     private void startGame() {
-        SwingUtilities.invokeLater(new Runnable() {
+        Lobby lobby = Singletons.getControl().getLobby();
+        MatchStartHelper helper = new MatchStartHelper();
+        List<Deck> playerDecks = new ArrayList<Deck>();
+        for (int i = 0; i < view.getNumPlayers(); i++) {
+            Deck d = view.getDeckChoosers().get(i).getDeck();
+
+            if (d == null) {
+                //ERROR!
+                GuiDialog.message("No deck selected for player " + (i + 1));
+                return;
+            }
+            playerDecks.add(d);
+            
+
+            List<CardPrinted> planes = null;
+            Object obj = view.getPlanarDeckLists().get(i).getSelectedValue();
+
+            boolean useDefault = VSubmenuPlanechase.SINGLETON_INSTANCE.getCbUseDefaultPlanes().isSelected();
+            useDefault &= playerDecks.get(i).has(DeckSection.Planes);
+
+            System.out.println(useDefault);
+            if (useDefault) {
+
+                planes = playerDecks.get(i).get(DeckSection.Planes).toFlatList();
+                System.out.println(planes.toString());
+
+            } else {
+
+                if (obj instanceof String) {
+                    String sel = (String) obj;
+                    if (sel.equals("Random")) {
+                        if (view.getAllPlanarDecks().isEmpty()) {
+                            //Generate if no constructed scheme decks are available
+                            System.out.println("Generating planar deck - no others available");
+                            planes = DeckgenUtil.generatePlanarDeck().toFlatList();
+                        } else {
+                            System.out.println("Using planar deck: " + Aggregates.random(view.getAllPlanarDecks()).getName());
+                            planes = Aggregates.random(view.getAllPlanarDecks()).get(DeckSection.Planes).toFlatList();
+                        }
+                        
+                    } else {
+
+                        //Generate
+                        planes = DeckgenUtil.generatePlanarDeck().toFlatList();
+                    }
+                } else {
+                    planes = ((Deck) obj).get(DeckSection.Planes).toFlatList();
+                }
+            }
+            if (planes == null) {
+                //ERROR!
+                GuiDialog.message("No planar deck selected for player" + (i+1) + "!");
+                return;
+            }
+
+            if (useDefault) {
+
+                GuiDialog.message("Player " + (i+1) + " will use a default planar deck.");
+            }
+            LobbyPlayer player = i == 0 ? lobby.getGuiPlayer() : lobby.getAiPlayer();
+            helper.addPlanechasePlayer(player, playerDecks.get(i), planes);
+        }
+
+        SOverlayUtils.startGameOverlay();
+        SOverlayUtils.showOverlay();
+                
+        final MatchController mc = new MatchController(GameType.Planechase, helper.getPlayerMap());
+        FThreads.invokeInEdtLater(new Runnable(){
             @Override
             public void run() {
-                SOverlayUtils.startGameOverlay();
-                SOverlayUtils.showOverlay();
-            }
-        });
-
-        final SwingWorker<Object, Void> worker = new SwingWorker<Object, Void>() {
-            @Override
-            public Object doInBackground() {
-
-                Lobby lobby = Singletons.getControl().getLobby();
-                MatchStartHelper helper = new MatchStartHelper();
-                List<Deck> playerDecks = new ArrayList<Deck>();
-                for (int i = 0; i < view.getNumPlayers(); i++) {
-                    Deck d = view.getDeckChoosers().get(i).getDeck();
-
-                    if (d == null) {
-                        //ERROR!
-                        GuiDialog.message("No deck selected for player " + (i + 1));
-                        return null;
-                    }
-                    playerDecks.add(d);
-                    
-    
-                    List<CardPrinted> planes = null;
-                    Object obj = view.getPlanarDeckLists().get(i).getSelectedValue();
-
-                    boolean useDefault = VSubmenuPlanechase.SINGLETON_INSTANCE.getCbUseDefaultPlanes().isSelected();
-                    useDefault &= playerDecks.get(i).has(DeckSection.Planes);
-    
-                    System.out.println(useDefault);
-                    if (useDefault) {
-    
-                        planes = playerDecks.get(i).get(DeckSection.Planes).toFlatList();
-                        System.out.println(planes.toString());
-    
-                    } else {
-    
-                        if (obj instanceof String) {
-                            String sel = (String) obj;
-                            if (sel.equals("Random")) {
-                                if (view.getAllPlanarDecks().isEmpty()) {
-                                    //Generate if no constructed scheme decks are available
-                                    System.out.println("Generating planar deck - no others available");
-                                    planes = DeckgenUtil.generatePlanarDeck().toFlatList();
-                                } else {
-                                    System.out.println("Using planar deck: " + Aggregates.random(view.getAllPlanarDecks()).getName());
-                                    planes = Aggregates.random(view.getAllPlanarDecks()).get(DeckSection.Planes).toFlatList();
-                                }
-                                
-                            } else {
-    
-                                //Generate
-                                planes = DeckgenUtil.generatePlanarDeck().toFlatList();
-                            }
-                        } else {
-                            planes = ((Deck) obj).get(DeckSection.Planes).toFlatList();
-                        }
-                    }
-                    if (planes == null) {
-                        //ERROR!
-                        GuiDialog.message("No planar deck selected for player" + (i+1) + "!");
-                        return null;
-                    }
-    
-                    if (useDefault) {
-    
-                        GuiDialog.message("Player " + (i+1) + " will use a default planar deck.");
-                    }
-                    LobbyPlayer player = i == 0 ? lobby.getGuiPlayer() : lobby.getAiPlayer();
-                    helper.addPlanechasePlayer(player, playerDecks.get(i), planes);
-                }
-                
-                MatchController mc = Singletons.getModel().getMatch();
-                mc.initMatch(GameType.Planechase, helper.getPlayerMap());
                 mc.startRound();
-
-                return null;
-            }
-
-            @Override
-            public void done() {
                 SOverlayUtils.hideOverlay();
             }
-        };
-        worker.execute();
+        });
     }
 
 

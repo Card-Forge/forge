@@ -18,8 +18,9 @@
 package forge.gui.match.views;
 
 import java.awt.Dimension;
-import java.util.Comparator;
 import java.util.Iterator;
+import java.util.Observable;
+import java.util.Observer;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
@@ -30,6 +31,7 @@ import javax.swing.SwingConstants;
 import net.miginfocom.swing.MigLayout;
 import forge.Card;
 import forge.game.player.Player;
+import forge.game.zone.ZoneType;
 import forge.gui.CardPicturePanel;
 import forge.gui.WrapLayout;
 import forge.gui.framework.DragCell;
@@ -44,7 +46,7 @@ import forge.gui.toolbox.FLabel;
  *
  * <br><br><i>(V at beginning of class name denotes a view class.)</i>
  */
-public enum VAntes implements IVDoc<CAntes> {
+public enum VAntes implements IVDoc<CAntes>, Observer {
     /** */
     SINGLETON_INSTANCE;
 
@@ -52,18 +54,11 @@ public enum VAntes implements IVDoc<CAntes> {
     private DragCell parentCell;
     private final DragTab tab = new DragTab("Ante");
 
-    // Other fields
-    private final Comparator<AntePanel> c = new Comparator<AntePanel>() {
-        @Override
-        public int compare(AntePanel arg0, AntePanel arg1) {
-            return arg0.getID().compareTo(arg1.getID());
-        }
-    };
-
     private final JPanel pnl = new JPanel();
     private final JScrollPane scroller = new JScrollPane(pnl);
-    private final SortedSet<AntePanel> allAntes = new TreeSet<AntePanel>(c);
+    private final SortedSet<AntePanel> allAntes = new TreeSet<AntePanel>();
 
+    private Iterable<Player> players;
     //========== Constructor
     private VAntes() {
         pnl.setLayout(new WrapLayout());
@@ -82,6 +77,14 @@ public enum VAntes implements IVDoc<CAntes> {
     public void populate() {
         parentCell.getBody().setLayout(new MigLayout("insets 0, gap 0"));
         parentCell.getBody().add(scroller, "w 100%!, h 100%!");
+    }
+    
+    public final void setModel(Iterable<Player> playerz) {
+        players = playerz;
+        for(Player p: players) {
+            p.getZone(ZoneType.Ante).addObserver(this);
+        }
+        update(null, null);
     }
 
     /* (non-Javadoc)
@@ -125,50 +128,34 @@ public enum VAntes implements IVDoc<CAntes> {
     }
 
     //========== Setters / getters
-    /**
-     * @param p0 &emsp; {@link forge.game.player.Player}
-     * @param c0 &emsp; {@link forge.Card}
-     */
-    public void addAnteCard(final Player p0, final Card c0) {
-        final AntePanel pnlTemp = new AntePanel(p0, c0);
-        allAntes.add(pnlTemp);
-        pnl.add(pnlTemp);
-    }
+    @Override
+    public void update(Observable o, Object arg) {
+        allAntes.clear();
+        pnl.removeAll();
 
-    /**
-     * @param p0 &emsp; {@link forge.game.player.Player}
-     * @param c0 &emsp; {@link forge.Card}
-     */
-    public void removeAnteCard(final Player p0, final Card c0) {
-        final Iterator<AntePanel> itr = allAntes.iterator();
-        while (itr.hasNext()) {
-            final AntePanel pnlTemp = itr.next();
-
-            if (pnlTemp.getPlayer().equals(p0) && pnlTemp.getCard().equals(c0)) {
-                pnl.remove(pnlTemp);
-                itr.remove();
+        for(Player p : players) {
+            for(Card c : p.getZone(ZoneType.Ante)) {
+                final AntePanel pnlTemp = new AntePanel(c);
+                allAntes.add(pnlTemp);
             }
         }
-    }
 
-    /** */
-    public void clearAnteCards() {
-        allAntes.clear();
+        for(AntePanel ap : allAntes) {
+            pnl.add(ap);
+        }
     }
 
     //========= Private class handling
     @SuppressWarnings("serial")
-    private class AntePanel extends JPanel {
-        private final Player player;
+    private class AntePanel extends JPanel implements Comparable<AntePanel> {
         private final Card card;
         /**
          * 
          * @param p0 &emsp; {@link forge.game.player.Player}
          * @param c0 &emsp; {@link forge.Card}
          */
-        public AntePanel(final Player p0, final Card c0) {
+        public AntePanel(final Card c0) {
             super();
-            player = p0;
             card = c0;
 
             final Dimension d = new Dimension(160, 250);
@@ -178,16 +165,11 @@ public enum VAntes implements IVDoc<CAntes> {
 
             setOpaque(false);
             setLayout(new MigLayout("gap 0, insets 0, wrap"));
-            add(new FLabel.Builder().fontSize(14).text(player.getName())
-                    .fontAlign(SwingConstants.CENTER).build(), "w 160px, h 20px");
+            add(new FLabel.Builder().fontSize(14).text(card.getOwner().getName())
+                .fontAlign(SwingConstants.CENTER).build(), "w 160px, h 20px");
             CardPicturePanel picPanel = new CardPicturePanel();
             add(picPanel, "w 160px, h 230px");
             picPanel.setCard(c0);
-        }
-
-        /** @return {@link forge.game.player.Player} */
-        public Player getPlayer() {
-            return player;
         }
 
         /** @return {@link forge.Card} */
@@ -195,8 +177,9 @@ public enum VAntes implements IVDoc<CAntes> {
             return card;
         }
 
-        public String getID() {
-            return player.getName() + card.getName();
+        @Override
+        public int compareTo(AntePanel o) {
+            return o.card.getUniqueNumber() - card.getUniqueNumber();
         }
     }
 }

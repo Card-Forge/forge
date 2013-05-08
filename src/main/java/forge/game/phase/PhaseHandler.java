@@ -753,8 +753,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
         } else {
             // pass the priority to other player
             this.pPlayerPriority = nextPlayer;
-            Singletons.getModel().getMatch().getInput().updateObservers();
-
+            updateObservers();
         }
         
     }

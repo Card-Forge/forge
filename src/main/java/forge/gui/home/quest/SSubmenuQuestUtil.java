@@ -11,11 +11,13 @@ import javax.swing.SwingWorker;
 
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
+import forge.FThreads;
 import forge.Singletons;
 import forge.card.CardEdition;
 import forge.control.FControl;
 import forge.deck.Deck;
 import forge.game.GameType;
+import forge.game.MatchController;
 import forge.game.MatchStartHelper;
 import forge.game.PlayerStartConditions;
 import forge.game.player.LobbyPlayer;
@@ -417,8 +419,14 @@ public class SSubmenuQuestUtil {
         aiPlayer.setIconImageKey(event.getIconImageKey());
         msh.addPlayer(aiPlayer, aiStart);
 
-        Singletons.getModel().getMatch().initMatch(GameType.Quest, msh.getPlayerMap());
-        Singletons.getModel().getMatch().startRound();
+        final MatchController mc = new MatchController(GameType.Quest, msh.getPlayerMap());
+        FThreads.invokeInEdtLater(new Runnable(){
+            @Override
+            public void run() {
+                mc.startRound();
+                // no overlays here?
+            }
+        });
     }
 
     /** Duplicate in DeckEditorQuestMenu and

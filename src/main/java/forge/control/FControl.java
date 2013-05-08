@@ -33,6 +33,7 @@ import javax.swing.WindowConstants;
 
 import forge.Singletons;
 import forge.control.KeyboardShortcuts.Shortcut;
+import forge.game.MatchController;
 import forge.game.ai.AiProfileUtil;
 import forge.game.player.HumanPlayer;
 import forge.gui.SOverlayUtils;
@@ -112,7 +113,7 @@ public enum FControl {
             public void windowClosing(final WindowEvent e) {
                 Singletons.getView().getFrame().setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 
-                if (!Singletons.getModel().getMatch().getCurrentGame().isGameOver())
+                if (!getMatch().getCurrentGame().isGameOver())
                     CDock.SINGLETON_INSTANCE.concede();
                 else {
                     Singletons.getControl().changeState(FControl.Screens.HOME_SCREEN);
@@ -326,4 +327,12 @@ public enum FControl {
         // TODO Auto-generated method stub
         return server;
     }
+
+    private MatchController match;
+    public MatchController getMatch() {
+        return match;
+    }
+    public void setMatch(MatchController newMatch) {
+        match = newMatch;
+    }    
 }

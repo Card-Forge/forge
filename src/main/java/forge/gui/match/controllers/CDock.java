@@ -67,7 +67,7 @@ public enum CDock implements ICDoc {
     private GameState game;
     private Player player;
 
-    public void onGameStarts(GameState game0, Player player0) {
+    public void setModel(GameState game0, Player player0) {
 
         game = game0;
         player = player0;
@@ -149,7 +149,7 @@ public enum CDock implements ICDoc {
      * View deck list.
      */
     private void viewDeckList() {
-        showDeck(Singletons.getModel().getMatch().getPlayersDeck(player.getLobbyPlayer()));
+        showDeck(Singletons.getControl().getMatch().getPlayersDeck(player.getLobbyPlayer()));
     }
 
     /**

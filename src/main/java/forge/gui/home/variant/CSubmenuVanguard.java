@@ -7,11 +7,10 @@ import java.util.List;
 import java.util.Random;
 
 import javax.swing.SwingUtilities;
-import javax.swing.SwingWorker;
-
 import com.google.common.collect.Iterables;
 
 import forge.Command;
+import forge.FThreads;
 import forge.Singletons;
 import forge.control.Lobby;
 import forge.deck.Deck;
@@ -113,87 +112,79 @@ public enum CSubmenuVanguard implements ICDoc {
             }
         });
 
-        final SwingWorker<Object, Void> worker = new SwingWorker<Object, Void>() {
-            @Override
-            public Object doInBackground() {
-                Random rnd = new Random();
-                String nl = System.getProperty("line.separator");
-                boolean usedDefaults = false;
-                StringBuilder defaultAvatarInfo = new StringBuilder("The following decks will use a default avatar:" + nl);
 
-                List<Deck> playerDecks = new ArrayList<Deck>();
-                for (int i = 0; i < view.getNumPlayers(); i++) {
-                    Deck d = view.getDeckChoosers().get(i).getDeck();
+        Random rnd = new Random();
+        String nl = System.getProperty("line.separator");
+        boolean usedDefaults = false;
+        StringBuilder defaultAvatarInfo = new StringBuilder("The following decks will use a default avatar:" + nl);
 
-                    if (d == null) {
-                        //ERROR!
-                        GuiDialog.message("No deck selected for player " + (i + 1));
-                        return null;
-                    }
-                    playerDecks.add(d);
-                }
+        List<Deck> playerDecks = new ArrayList<Deck>();
+        for (int i = 0; i < view.getNumPlayers(); i++) {
+            Deck d = view.getDeckChoosers().get(i).getDeck();
 
-                List<CardPrinted> playerAvatars = new ArrayList<CardPrinted>();
-                for (int i = 0; i < view.getNumPlayers(); i++) {
-                    CardPrinted avatar = null;
-                    Object obj = view.getAvatarLists().get(i).getSelectedValue();
-
-                    boolean useDefault = VSubmenuVanguard.SINGLETON_INSTANCE.getCbDefaultAvatars().isSelected();
-                    useDefault &= playerDecks.get(i).get(DeckSection.Avatar) != null;
-
-                    if (useDefault) {
-                        avatar = playerDecks.get(i).get(DeckSection.Avatar).get(0);
-                        defaultAvatarInfo.append("Player " + (i + 1) + ": ");
-                        defaultAvatarInfo.append(avatar.getName() + nl);
-                        usedDefaults = true;
-                    } else {
-
-                        if (obj instanceof String) {
-                            //Random is the only string in the list so grab a random avatar.
-                            if (i == 0)  {
-                                //HUMAN
-                                avatar = Iterables.get(view.getAllAvatars(), rnd.nextInt(Iterables.size(view.getNonRandomHumanAvatars())));
-                            } else {
-                                //AI
-                                avatar = Iterables.get(view.getAllAiAvatars(), rnd.nextInt(Iterables.size(view.getNonRandomAiAvatars())));
-                            }
-                        } else {
-                            avatar = (CardPrinted) obj;
-                        }
-                    }
-                    if (avatar == null) {
-                        //ERROR!
-                        GuiDialog.message("No avatar selected for player " + (i + 1));
-                        return null;
-                    }
-                    playerAvatars.add(avatar);
-                }
-
-                if (usedDefaults) {
-
-                    GuiDialog.message(defaultAvatarInfo.toString());
-                }
-
-                Lobby lobby = Singletons.getControl().getLobby();
-                MatchStartHelper helper = new MatchStartHelper();
-                for (int i = 0; i < view.getNumPlayers(); i++) {
-                    LobbyPlayer player = i == 0 ? lobby.getGuiPlayer() : lobby.getAiPlayer();
-
-                    helper.addVanguardPlayer(player, playerDecks.get(i), playerAvatars.get(i));
-                }
-                MatchController mc = Singletons.getModel().getMatch();
-                mc.initMatch(GameType.Vanguard, helper.getPlayerMap());
-                mc.startRound();
-
-                return null;
+            if (d == null) {
+                //ERROR!
+                GuiDialog.message("No deck selected for player " + (i + 1));
+                return;
             }
+            playerDecks.add(d);
+        }
 
+        List<CardPrinted> playerAvatars = new ArrayList<CardPrinted>();
+        for (int i = 0; i < view.getNumPlayers(); i++) {
+            CardPrinted avatar = null;
+            Object obj = view.getAvatarLists().get(i).getSelectedValue();
+
+            boolean useDefault = VSubmenuVanguard.SINGLETON_INSTANCE.getCbDefaultAvatars().isSelected();
+            useDefault &= playerDecks.get(i).get(DeckSection.Avatar) != null;
+
+            if (useDefault) {
+                avatar = playerDecks.get(i).get(DeckSection.Avatar).get(0);
+                defaultAvatarInfo.append("Player " + (i + 1) + ": ");
+                defaultAvatarInfo.append(avatar.getName() + nl);
+                usedDefaults = true;
+            } else {
+
+                if (obj instanceof String) {
+                    //Random is the only string in the list so grab a random avatar.
+                    if (i == 0)  {
+                        //HUMAN
+                        avatar = Iterables.get(view.getAllAvatars(), rnd.nextInt(Iterables.size(view.getNonRandomHumanAvatars())));
+                    } else {
+                        //AI
+                        avatar = Iterables.get(view.getAllAiAvatars(), rnd.nextInt(Iterables.size(view.getNonRandomAiAvatars())));
+                    }
+                } else {
+                    avatar = (CardPrinted) obj;
+                }
+            }
+            if (avatar == null) {
+                //ERROR!
+                GuiDialog.message("No avatar selected for player " + (i + 1));
+                return;
+            }
+            playerAvatars.add(avatar);
+        }
+
+        if (usedDefaults) {
+            GuiDialog.message(defaultAvatarInfo.toString());
+        }
+
+        Lobby lobby = Singletons.getControl().getLobby();
+        MatchStartHelper helper = new MatchStartHelper();
+        for (int i = 0; i < view.getNumPlayers(); i++) {
+            LobbyPlayer player = i == 0 ? lobby.getGuiPlayer() : lobby.getAiPlayer();
+
+            helper.addVanguardPlayer(player, playerDecks.get(i), playerAvatars.get(i));
+        }
+        final MatchController mc = new MatchController(GameType.Vanguard, helper.getPlayerMap());
+        FThreads.invokeInEdtLater(new Runnable(){
             @Override
-            public void done() {
+            public void run() {
+                mc.startRound();
                 SOverlayUtils.hideOverlay();
             }
-        };
-        worker.execute();
+        });
     }
 
 

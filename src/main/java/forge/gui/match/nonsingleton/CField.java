@@ -197,7 +197,7 @@ public class CField implements ICDoc {
     /** */
     private void manaAction(byte colorCode) {
         if (CField.this.player == CField.this.playerViewer) {
-            final Input in = Singletons.getModel().getMatch().getInput().getInput();
+            final Input in = Singletons.getControl().getMatch().getInput().getInput();
             if (in instanceof InputPayManaBase) {
                 // Do something
                 ((InputPayManaBase) in).selectManaPool(colorCode);
