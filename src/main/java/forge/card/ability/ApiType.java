@@ -61,6 +61,7 @@ import forge.card.ability.ai.LifeExchangeAi;
 import forge.card.ability.ai.LifeGainAi;
 import forge.card.ability.ai.LifeLoseAi;
 import forge.card.ability.ai.LifeSetAi;
+import forge.card.ability.ai.ManaEffectAi;
 import forge.card.ability.ai.MillAi;
 import forge.card.ability.ai.MustAttackAi;
 import forge.card.ability.ai.MustBlockAi;
@@ -158,7 +159,7 @@ public enum ApiType {
     GenericChoice (ChooseGenericEffect.class, CannotPlayAi.class),
     LoseLife (LifeLoseEffect.class, LifeLoseAi.class),
     LosesGame (GameLossEffect.class, GameLossAi.class),
-    Mana (ManaEffect.class, CanPlayAsDrawbackAi.class),
+    Mana (ManaEffect.class, ManaEffectAi.class),
     ManaReflected (ManaReflectedEffect.class, CannotPlayAi.class),
     Mill (MillEffect.class, MillAi.class),
     MoveCounter (CountersMoveEffect.class, CountersMoveAi.class),

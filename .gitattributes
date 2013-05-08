@@ -13803,6 +13803,7 @@ src/main/java/forge/card/ability/ai/LifeExchangeAi.java -text
 src/main/java/forge/card/ability/ai/LifeGainAi.java -text
 src/main/java/forge/card/ability/ai/LifeLoseAi.java -text
 src/main/java/forge/card/ability/ai/LifeSetAi.java -text
+src/main/java/forge/card/ability/ai/ManaEffectAi.java -text
 src/main/java/forge/card/ability/ai/MillAi.java -text
 src/main/java/forge/card/ability/ai/MustAttackAi.java -text
 src/main/java/forge/card/ability/ai/MustBlockAi.java -text
