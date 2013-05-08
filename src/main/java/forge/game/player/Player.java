@@ -937,6 +937,10 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
         }
         return num;
     }
+    
+    public final Iterable<Card> getAssignedDamageSources() { 
+        return assignedDamage.keySet();
+    }
 
     /**
      * <p>

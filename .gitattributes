@@ -5330,6 +5330,7 @@ res/cardsfolder/i/infernal_tutor.txt -text
 res/cardsfolder/i/inferno.txt svneol=native#text/plain
 res/cardsfolder/i/inferno_elemental.txt -text
 res/cardsfolder/i/inferno_titan.txt svneol=native#text/plain
+res/cardsfolder/i/inferno_trap.txt -text
 res/cardsfolder/i/infest.txt svneol=native#text/plain
 res/cardsfolder/i/infested_roothold.txt svneol=native#text/plain
 res/cardsfolder/i/infiltrate.txt svneol=native#text/plain

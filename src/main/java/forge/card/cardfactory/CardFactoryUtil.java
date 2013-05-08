@@ -1298,6 +1298,12 @@ public class CardFactoryUtil {
 
         // Count$YourTypeDamageThisTurn Type
         if (sq[0].contains("YourTypeDamageThisTurn"))       return doXMath(cc.getAssignedDamage(sq[0].split(" ")[1]), m, c);
+        if (sq[0].contains("YourDamageSourcesThisTurn")) {
+            Iterable<Card> allSrc = cc.getAssignedDamageSources();
+            String restriction = sq[0].split(" ")[1];
+            List<Card> filtered = CardLists.getValidCards(allSrc, restriction, cc, c);
+            return doXMath(filtered.size(), m, c);
+        }
         
         if (sq[0].contains("YourLandsPlayed"))              return doXMath(cc.getNumLandsPlayed(), m, c);
         if (sq[0].contains("OppLandsPlayed"))               return doXMath(ccOpp.getNumLandsPlayed(), m, c);
