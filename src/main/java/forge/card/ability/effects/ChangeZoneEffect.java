@@ -897,7 +897,11 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             }
         }
         if (sa.hasParam("Reveal") && !movedCards.isEmpty()) {
-            decider.getController().reveal(card + " - Revealed card: ", movedCards, origin.get(0), player);
+            ZoneType zt = null;
+            if (!origin.isEmpty()) {
+                zt = origin.get(0);
+            }
+            decider.getController().reveal(card + " - Revealed card: ", movedCards, zt, player);
         }
 
         if ((origin.contains(ZoneType.Library) && !destination.equals(ZoneType.Library) && !defined)
