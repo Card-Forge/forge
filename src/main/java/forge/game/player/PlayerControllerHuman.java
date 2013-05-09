@@ -300,13 +300,13 @@ public class PlayerControllerHuman extends PlayerController {
     @Override
     public List<Card> orderBlockers(Card attacker, List<Card> blockers) {
         GuiUtils.setPanelSelection(attacker);
-        return GuiChoose.order("Choose Blocking Order", "Damaged First", 0, blockers, null, attacker);
+        return GuiChoose.order("Choose Damage Order for " + attacker, "Damaged First", 0, blockers, null, attacker);
     }
 
     @Override
     public List<Card> orderAttackers(Card blocker, List<Card> attackers) {
         GuiUtils.setPanelSelection(blocker);
-        return GuiChoose.order("Choose Blocking Order", "Damaged First", 0, attackers, null, blocker);
+        return GuiChoose.order("Choose Damage Order for " + blocker, "Damaged First", 0, attackers, null, blocker);
     }
 
     /* (non-Javadoc)
