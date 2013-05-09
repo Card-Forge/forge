@@ -30,6 +30,7 @@ public enum TriggerType {
     CounterRemoved(TriggerCounterRemoved.class),
     Evolved(TriggerEvolved.class),
     Unequip(TriggerUnequip.class),
+    CombatDamageDoneOnce(TriggerCombatDamageDoneOnce.class),
     DamageDone(TriggerDamageDone.class),
     Championed(TriggerChampioned.class),
     TurnFaceUp(TriggerTurnFaceUp.class),

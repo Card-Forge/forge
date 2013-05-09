@@ -20,6 +20,7 @@ package forge;
 import java.util.ArrayList;
 
 import forge.card.spellability.SpellAbility;
+import forge.game.GameState;
 import forge.game.player.Player;
 import forge.util.MyObservable;
 
@@ -423,5 +424,9 @@ public abstract class GameEntity extends MyObservable {
     @Override
     public String toString() {
         return this.name;
+    }
+
+    public GameState getGame() {
+        return null;
     }
 }

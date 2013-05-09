@@ -8316,6 +8316,7 @@ res/cardsfolder/p/pyre_charger.txt svneol=native#text/plain
 res/cardsfolder/p/pyre_zombie.txt svneol=native#text/plain
 res/cardsfolder/p/pyreheart_wolf.txt -text
 res/cardsfolder/p/pyretic_ritual.txt svneol=native#text/plain
+res/cardsfolder/p/pyrewild_shaman.txt -text
 res/cardsfolder/p/pyric_salamander.txt svneol=native#text/plain
 res/cardsfolder/p/pyrite_spellbomb.txt svneol=native#text/plain
 res/cardsfolder/p/pyroblast.txt -text
@@ -14050,6 +14051,7 @@ src/main/java/forge/card/trigger/TriggerChampioned.java svneol=native#text/plain
 src/main/java/forge/card/trigger/TriggerChangesController.java -text
 src/main/java/forge/card/trigger/TriggerChangesZone.java svneol=native#text/plain
 src/main/java/forge/card/trigger/TriggerClashed.java svneol=native#text/plain
+src/main/java/forge/card/trigger/TriggerCombatDamageDoneOnce.java -text
 src/main/java/forge/card/trigger/TriggerCounterAdded.java svneol=native#text/plain
 src/main/java/forge/card/trigger/TriggerCounterRemoved.java -text
 src/main/java/forge/card/trigger/TriggerCountered.java -text

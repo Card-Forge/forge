@@ -196,6 +196,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
         this.setName(name);
     }
 
+    @Override
     public GameState getGame() { // I'll probably regret about this  
         return game;
     }
@@ -976,7 +977,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
      * @param source
      *            a {@link forge.Card} object.
      */
-    public final void addCombatDamage(final int damage, final Card source) {
+    public final boolean addCombatDamage(final int damage, final Card source) {
 
         int damageToDo = damage;
 
@@ -990,7 +991,9 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
 
         if (damageToDo > 0) {
             GameActionUtil.executeCombatDamageToPlayerEffects(this, source, damageToDo);
+            return true;
         }
+        return false;
     }
 
     // ////////////////////////

@@ -8268,6 +8268,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     /**
      * Fetch GameState for this card from references to players who may own or control this card. 
      */
+    @Override
     public GameState getGame() {
         
         Player controller = getController();

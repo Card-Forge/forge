@@ -685,13 +685,30 @@ public class Combat {
         // This function handles both Regular and First Strike combat assignment
 
         final HashMap<Card, Integer> defMap = this.getDefendingDamageMap();
+        final HashMap<GameEntity, List<Card>> wasDamaged = new HashMap<GameEntity, List<Card>>();
 
         for (final Entry<Card, Integer> entry : defMap.entrySet()) {
             GameEntity defender = getDefendingEntity(entry.getKey());
             if (defender instanceof Player) { // player
-                ((Player) defender).addCombatDamage(entry.getValue(), entry.getKey());
+                if (((Player) defender).addCombatDamage(entry.getValue(), entry.getKey())) {
+                    if (wasDamaged.containsKey(defender)) {
+                        wasDamaged.get(defender).add(entry.getKey());
+                    } else {
+                        List<Card> l = new ArrayList<Card>();
+                        l.add(entry.getKey());
+                        wasDamaged.put(defender, l);
+                    }
+                }
             } else if (defender instanceof Card) { // planeswalker
-                ((Card) defender).getController().addCombatDamage(entry.getValue(), entry.getKey());
+                if (((Card) defender).getController().addCombatDamage(entry.getValue(), entry.getKey())) {
+                    if (wasDamaged.containsKey(defender)) {
+                        wasDamaged.get(defender).add(entry.getKey());
+                    } else {
+                        List<Card> l = new ArrayList<Card>();
+                        l.add(entry.getKey());
+                        wasDamaged.put(defender, l);
+                    }
+                }
             }
         }
 
@@ -722,6 +739,14 @@ public class Combat {
 
             damageMap.clear();
             c.clearAssignedDamage();
+        }
+        
+        // Run triggers
+        for (final GameEntity ge : wasDamaged.keySet()) {
+            final HashMap<String, Object> runParams = new HashMap<String, Object>();
+            runParams.put("DamageSources", wasDamaged.get(ge));
+            runParams.put("DamageTarget", ge);
+            ge.getGame().getTriggerHandler().runTrigger(TriggerType.CombatDamageDoneOnce, runParams, false);
         }
 
         // This was deeper before, but that resulted in the stack entry acting
