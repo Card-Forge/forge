@@ -9,7 +9,6 @@ import java.util.Map;
 import forge.Card;
 import forge.CardLists;
 import forge.CardPredicates;
-import forge.Singletons;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
 import forge.game.GameNew;

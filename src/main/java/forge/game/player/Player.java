@@ -1672,19 +1672,6 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
     public final void resetNumDiscardedThisTurn() {
         this.numDiscardedThisTurn = 0;
     }
-    /**
-     * <p>
-     * discardUnless.
-     * </p>
-     * 
-     * @param num
-     *            a int.
-     * @param uType
-     *            a {@link java.lang.String} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     */
-    public abstract void discardUnless(int num, String uType, SpellAbility sa);
 
     /**
      * <p>

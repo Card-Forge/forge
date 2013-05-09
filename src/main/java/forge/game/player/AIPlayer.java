@@ -17,16 +17,8 @@
  */
 package forge.game.player;
 
-import java.util.List;
-
-import forge.Card;
-import forge.CardLists;
-import forge.CardPredicates;
-import forge.card.spellability.SpellAbility;
 import forge.game.GameState;
 import forge.game.ai.AiController;
-import forge.game.zone.ZoneType;
-import forge.util.Aggregates;
 
 /**
  * <p>
@@ -61,31 +53,6 @@ public class AIPlayer extends Player {
     }
     
 
-
-    // //////////////////////////////
-    // /
-    // / replaces Singletons.getModel().getGameAction().discard* methods
-    // /
-    // //////////////////////////////
-
-
-    /** {@inheritDoc} */
-    @Override
-    public final void discardUnless(final int num, final String uType, final SpellAbility sa) {
-        final List<Card> hand = this.getCardsIn(ZoneType.Hand);
-        final List<Card> tHand = CardLists.getType(hand, uType);
-
-        if (tHand.size() > 0) {
-            Card toDiscard = Aggregates.itemWithMin(tHand, CardPredicates.Accessors.fnGetCmc);
-            discard(toDiscard, sa); // this got changed to doDiscard basically
-            return;
-        }
-        
-        final List<Card> toDiscard = getAi().getCardsToDiscard(num, (String[])null, sa);
-        for (int i = 0; i < toDiscard.size(); i++) {
-            discard(toDiscard.get(i), sa);
-        }
-    }
 
     // /////////////////////////
 

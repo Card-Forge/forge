@@ -35,11 +35,8 @@ import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.control.input.InputPayManaBase;
 import forge.control.input.InputPayManaSimple;
-import forge.control.input.InputSelectCards;
-import forge.control.input.InputSelectCardsFromList;
 import forge.game.GameActionUtil;
 import forge.game.GameState;
-import forge.game.zone.ZoneType;
 
 public class HumanPlayer extends Player {
     private final PlayerControllerHuman controller;
@@ -51,28 +48,6 @@ public class HumanPlayer extends Player {
         controller = new PlayerControllerHuman(game, this);
     }
 
-    /** {@inheritDoc} */
-    @Override
-    public final void discardUnless(final int num, final String uType, final SpellAbility sa) {
-        final List<Card> hand = getCardsIn(ZoneType.Hand);
-        final InputSelectCards target = new InputSelectCardsFromList(num, num, hand) {
-            private static final long serialVersionUID = -5774108410928795591L;
-
-            @Override
-            protected boolean hasAllTargets() {
-                for(Card c : selected) {
-                    if (c.isType(uType))
-                        return true;
-                }
-                return super.hasAllTargets();
-            }
-        };
-        target.setMessage("Select %d cards to discard, unless you discard a " + uType + ".");
-        FThreads.setInputAndWait(target);
-        for(Card c : target.getSelected())
-            c.getController().discard(c, sa);
-    } // input_discardNumUnless
-    
     /**
      * TODO: Write javadoc for this method.
      * @param card

@@ -8,7 +8,11 @@ import java.util.Map;
 
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
+import com.google.common.collect.Lists;
+
 import forge.Card;
+import forge.CardLists;
+import forge.CardPredicates;
 import forge.GameEntity;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
@@ -26,6 +30,7 @@ import forge.game.ai.ComputerUtilBlock;
 import forge.game.ai.ComputerUtilCombat;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
+import forge.util.Aggregates;
 
 
 /** 
@@ -298,5 +303,19 @@ public class PlayerControllerAi extends PlayerController {
     @Override
     public void setShouldAlwaysAskTrigger(Integer trigger) {
     }
+
+    /* (non-Javadoc)
+     * @see forge.game.player.PlayerController#chooseCardsToDiscardUnlessType(int, java.util.List, java.lang.String, forge.card.spellability.SpellAbility)
+     */
+    @Override
+    public List<Card> chooseCardsToDiscardUnlessType(int num, List<Card> hand, String uType, SpellAbility sa) {
+        final List<Card> cardsOfType = CardLists.getType(hand, uType);
+        if (!cardsOfType.isEmpty()) {
+            Card toDiscard = Aggregates.itemWithMin(cardsOfType, CardPredicates.Accessors.fnGetCmc);
+            return Lists.newArrayList(toDiscard);
+        }
+        return getAi().getCardsToDiscard(num, (String[])null, sa);
+    }
+
 
 }

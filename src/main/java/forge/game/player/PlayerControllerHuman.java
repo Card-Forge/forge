@@ -475,4 +475,26 @@ public class PlayerControllerHuman extends PlayerController {
         triggersAlwaysDecline.remove((Object)trigger);
     }
 
+    /* (non-Javadoc)
+     * @see forge.game.player.PlayerController#chooseCardsToDiscardUnlessType(int, java.lang.String, forge.card.spellability.SpellAbility)
+     */
+    @Override
+    public List<Card> chooseCardsToDiscardUnlessType(int num, List<Card> hand, final String uType, SpellAbility sa) {
+        final InputSelectCards target = new InputSelectCardsFromList(num, num, hand) {
+            private static final long serialVersionUID = -5774108410928795591L;
+
+            @Override
+            protected boolean hasAllTargets() {
+                for(Card c : selected) {
+                    if (c.isType(uType))
+                        return true;
+                }
+                return super.hasAllTargets();
+            }
+        };
+        target.setMessage("Select %d cards to discard, unless you discard a " + uType + ".");
+        FThreads.setInputAndWait(target);
+        return target.getSelected();
+    }
+
 }

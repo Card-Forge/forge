@@ -157,8 +157,12 @@ public class DiscardEffect extends RevealEffectBase {
                         }
                     }
                 } else if (mode.equals("TgtChoose") && sa.hasParam("UnlessType")) {
-                    if( numCardsInHand > 0 )
-                        p.discardUnless(Math.min(numCards, numCardsInHand), sa.getParam("UnlessType"), sa);
+                    if( numCardsInHand > 0 ) {
+                        final List<Card> hand = p.getCardsIn(ZoneType.Hand);
+                        List<Card> toDiscard = p.getController().chooseCardsToDiscardUnlessType(Math.min(numCards, numCardsInHand), hand, sa.getParam("UnlessType"), sa);
+                        for(Card c : toDiscard)
+                            c.getController().discard(c, sa);
+                    }
                 } else if (mode.equals("RevealDiscardAll")) {
                     // Reveal
                     final List<Card> dPHand = p.getCardsIn(ZoneType.Hand);

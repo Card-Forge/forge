@@ -8,6 +8,7 @@ import java.util.concurrent.TimeUnit;
 
 import javax.swing.SwingUtilities;
 
+import forge.control.input.InputQueue;
 import forge.control.input.InputSynchronized;
 
 /** 
@@ -104,14 +105,15 @@ public class FThreads {
     
     public static void invokeInNewThread(final Runnable proc, boolean lockUI) {
         Runnable toRun = proc;
+        final InputQueue iq = Singletons.getControl().getMatch().getInput();
         if( lockUI ) {
             // checkEDT("FThreads.invokeInNewthread", true)
-            Singletons.getControl().getMatch().getInput().lock();
+            iq.lock();
             toRun = new Runnable() {
                 @Override
                 public void run() {
                     proc.run();
-                    Singletons.getControl().getMatch().getInput().unlock();
+                    iq.unlock();
                 }
             };
         }
