@@ -660,7 +660,7 @@ public class Target {
      * @return a boolean.
      */
     public final boolean hasCandidates(final SpellAbility sa, final boolean isTargeted) {
-        final GameState game = sa.getActivatingPlayer().getGame();
+        final GameState game = sa.getSourceCard().getGame();
         for (Player player : game.getPlayers()) {
             if (sa.canTarget(player)) {
                 return true;
@@ -672,13 +672,16 @@ public class Target {
             return true;
         } else {
             for (final Card c : game.getCardsIn(this.tgtZone)) {
-                boolean isValidTarget = c.isValid(this.validTgts, this.srcCard.getController(), this.srcCard);
-                boolean canTarget = (!isTargeted || c.canBeTargetedBy(sa));
-                boolean isAlreadyTargeted = this.getTargetCards().contains(c);
-                //System.out.print(c);
-                if (isValidTarget && canTarget && !isAlreadyTargeted) {
-                    return true;
+                if (!c.isValid(this.validTgts, this.srcCard.getController(), this.srcCard)) {
+                    continue;
                 }
+                if (isTargeted && !c.canBeTargetedBy(sa)) {
+                    continue;
+                }
+                if (this.getTargetCards().contains(c)) {
+                    continue;
+                }
+                return true;
             }
         }
 
