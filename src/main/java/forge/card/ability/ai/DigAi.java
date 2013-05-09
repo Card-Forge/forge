@@ -18,13 +18,9 @@ public class DigAi extends SpellAbilityAi {
      */
     @Override
     protected boolean canPlayAI(AIPlayer ai, SpellAbility sa) {
-        double chance = .4; // 40 percent chance with instant speed stuff
-        if (SpellAbilityAi.isSorcerySpeed(sa)) {
-            chance = .667; // 66.7% chance for sorcery speed (since it will
-                           // never activate EOT)
-        }
+
         final Random r = MyRandom.getRandom();
-        boolean randomReturn = r.nextFloat() <= Math.pow(chance, sa.getActivationsThisTurn() + 1);
+        boolean randomReturn = r.nextFloat() <= Math.pow(0.9, sa.getActivationsThisTurn());
 
         Player opp = ai.getOpponent();
         final Target tgt = sa.getTarget();
