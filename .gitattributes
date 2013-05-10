@@ -6007,6 +6007,7 @@ res/cardsfolder/l/land_grant.txt -text
 res/cardsfolder/l/land_leeches.txt svneol=native#text/plain
 res/cardsfolder/l/land_tax.txt svneol=native#text/plain
 res/cardsfolder/l/landbind_ritual.txt svneol=native#text/plain
+res/cardsfolder/l/lands_edge.txt -text
 res/cardsfolder/l/landslide.txt -text
 res/cardsfolder/l/lantern_kami.txt svneol=native#text/plain
 res/cardsfolder/l/lantern_lit_graveyard.txt svneol=native#text/plain

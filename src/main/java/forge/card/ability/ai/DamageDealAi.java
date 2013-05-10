@@ -60,6 +60,9 @@ public class DamageDealAi extends DamageAiBase {
             dmg = ComputerUtilMana.determineLeftoverMana(sa, ai);
             source.setSVar("PayX", Integer.toString(dmg));
         }
+        if ("DiscardLands".equals(sa.getParam("AILogic"))) {
+            dmg = 2;
+        }
 
         if (dmg <= 0) {
             return false;
@@ -75,6 +78,10 @@ public class DamageDealAi extends DamageAiBase {
         }
 
         if (!ComputerUtilCost.checkRemoveCounterCost(abCost, source)) {
+            return false;
+        }
+        
+        if ("DiscardLands".equals(sa.getParam("AILogic")) && !ComputerUtilCost.checkDiscardCost(ai, abCost, source)) {
             return false;
         }
 
