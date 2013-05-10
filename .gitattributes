@@ -7227,6 +7227,7 @@ res/cardsfolder/n/natures_resurgence.txt svneol=native#text/plain
 res/cardsfolder/n/natures_revolt.txt svneol=native#text/plain
 res/cardsfolder/n/natures_ruin.txt svneol=native#text/plain
 res/cardsfolder/n/natures_spiral.txt svneol=native#text/plain
+res/cardsfolder/n/natures_will.txt -text
 res/cardsfolder/n/natures_wrath.txt svneol=native#text/plain
 res/cardsfolder/n/nausea.txt svneol=native#text/plain
 res/cardsfolder/n/nav_squad_commandos.txt -text
@@ -11208,6 +11209,7 @@ res/cardsfolder/t/thunder_strike.txt svneol=native#text/plain
 res/cardsfolder/t/thunder_thrash_elder.txt svneol=native#text/plain
 res/cardsfolder/t/thunder_totem.txt svneol=native#text/plain
 res/cardsfolder/t/thunder_wall.txt svneol=native#text/plain
+res/cardsfolder/t/thunderblade_charge.txt -text
 res/cardsfolder/t/thunderblust.txt svneol=native#text/plain
 res/cardsfolder/t/thunderbolt.txt svneol=native#text/plain
 res/cardsfolder/t/thunderclap.txt svneol=native#text/plain
