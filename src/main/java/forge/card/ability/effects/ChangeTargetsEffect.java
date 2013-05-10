@@ -28,8 +28,15 @@ public class ChangeTargetsEffect extends SpellAbilityEffect {
                 // If there isn't a Stack Instance, there isn't really a target
                 continue;
             }
-            // Update targets, with a potential new target
-            si.updateTarget(sa.getActivatingPlayer().getController().chooseTargets(tgtSA));
+
+            SpellAbilityStackInstance changingTgtSI = si;
+            while(changingTgtSI != null) {
+                // Update targets, with a potential new target
+                SpellAbility changingTgtSA = changingTgtSI.getSpellAbility();
+                changingTgtSI.updateTarget(sa.getActivatingPlayer().getController().chooseTargets(changingTgtSA));
+                changingTgtSI = changingTgtSI.getSubInstace();
+            }
+
             if (remember) {
                 sa.getSourceCard().addRemembered(tgtSA.getSourceCard());
             }

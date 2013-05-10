@@ -416,6 +416,9 @@ public class PlayerControllerHuman extends PlayerController {
      */
     @Override
     public Target chooseTargets(SpellAbility ability) {
+        if (ability.getTarget() == null) {
+            return null;
+        }
         Target oldTarget = new Target(ability.getTarget());
         TargetSelection select = new TargetSelection(ability);
         ability.getTarget().resetTargets();
