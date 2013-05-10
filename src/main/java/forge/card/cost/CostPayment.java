@@ -194,6 +194,11 @@ public class CostPayment {
 
         for (final CostPart part : parts) {
             part.payAI(decisions.get(part.getClass()), ai, this.ability, this.ability.getSourceCard());
+            // abilities care what was used to pay for them
+            if( part instanceof CostPartWithList ) {
+                ((CostPartWithList) part).reportPaidCardsTo(ability);
+                ((CostPartWithList) part).resetList();
+            }
         }
         return true;
     }
