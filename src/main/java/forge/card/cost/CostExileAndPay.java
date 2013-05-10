@@ -154,7 +154,6 @@ public class CostExileAndPay extends CostPartWithList {
                 }
             }
         }
-        this.reportPaidCardsTo(ability);
     }
 
     /* (non-Javadoc)
