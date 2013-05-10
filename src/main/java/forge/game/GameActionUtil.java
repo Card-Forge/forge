@@ -1219,7 +1219,12 @@ public final class GameActionUtil {
             if (sa.isSpell() && keyword.startsWith("Alternative Cost")) {
                 final SpellAbility newSA = sa.copy();
                 newSA.setBasicSpell(false);
-                final Cost cost = new Cost(keyword.substring(17), false).add(newSA.getPayCosts().copyWithNoMana());
+                String kw = keyword;
+                if (keyword.contains("ConvertedManaCost")) {
+                    final String cmc = Integer.toString(sa.getSourceCard().getCMC());
+                    kw = keyword.replace("ConvertedManaCost", cmc);
+                }
+                final Cost cost = new Cost(kw.substring(17), false).add(newSA.getPayCosts().copyWithNoMana());
                 newSA.setPayCosts(cost);
                 newSA.setDescription(sa.getDescription() + " (by paying " + cost.toSimpleString() + " instead of its mana cost)");
                 alternatives.add(newSA);
