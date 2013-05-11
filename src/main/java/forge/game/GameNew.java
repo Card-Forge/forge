@@ -301,7 +301,8 @@ public class GameNew {
                 Predicate<Card> goodForAnte = Predicates.not(CardPredicates.Presets.BASIC_LANDS);
                 Card ante = Aggregates.random(Iterables.filter(lib, goodForAnte));
                 if (ante == null) {
-                    throw new RuntimeException(p + " library is empty.");
+                    game.getGameLog().add("Ante", "Only basic lands found. Will ante one of them", 0);
+                    ante = Aggregates.random(lib);
                 }
                 game.getGameLog().add("Ante", p + " anted " + ante, 0);
                 game.getAction().moveTo(ZoneType.Ante, ante);
