@@ -11203,6 +11203,7 @@ res/cardsfolder/t/thrull_champion.txt svneol=native#text/plain
 res/cardsfolder/t/thrull_parasite.txt -text
 res/cardsfolder/t/thrull_retainer.txt -text
 res/cardsfolder/t/thrull_surgeon.txt svneol=native#text/plain
+res/cardsfolder/t/thrull_wizard.txt -text
 res/cardsfolder/t/thrumming_stone.txt svneol=native#text/plain
 res/cardsfolder/t/thrummingbird.txt svneol=native#text/plain
 res/cardsfolder/t/thrun_the_last_troll.txt svneol=native#text/plain

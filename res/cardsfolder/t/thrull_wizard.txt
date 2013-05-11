@@ -1,0 +1,12 @@
+Name:Thrull Wizard
+ManaCost:2 B
+Types:Creature Thrull Wizard
+PT:1/1
+A:AB$ GenericChoice | Cost$ 1 B | TgtPrompt$ Select target spell | TargetType$ Spell | ValidTgts$ Card.Black | TgtZone$ Stack | Choices$ PayB,Pay3 | Defined$ TargetedController | SpellDescription$ Counter target black spell unless that spell's controller pays B or 3
+SVar:PayB:DB$ Counter | Defined$ Targeted | UnlessCost$ B | ChoiceDescription$ Counter spell unless you pay B
+SVar:Pay3:DB$ Counter | Defined$ Targeted | UnlessCost$ 3 | ChoiceDescription$ Counter spell unless you pay 3
+SVar:RemRandomDeck:True
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/thrull_wizard.jpg
+Oracle:{1}{B}: Counter target black spell unless that spell's controller pays {B} or {3}
+SetInfo:FEM Uncommon
