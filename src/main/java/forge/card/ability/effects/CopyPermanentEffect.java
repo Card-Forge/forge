@@ -96,12 +96,21 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
                 }
                 tgtCards = choice;
             } else if (sa.hasParam("DefinedName")) {
-                final String name = sa.getParam("DefinedName");
+                String name = sa.getParam("DefinedName");
+                if (name.equals("NamedCard")) {
+                    if (!hostCard.getNamedCard().isEmpty()) {
+                        name = hostCard.getNamedCard();
+                    }
+                }
+
                 Predicate<CardPrinted> cpp = Predicates.compose(CardRulesPredicates.name(StringOp.EQUALS, name), CardPrinted.FN_GET_RULES);
                 cards = Lists.newArrayList(Iterables.filter(cards, cpp));
-                Card c = cards.get(0).getMatchingForgeCard();
+
                 tgtCards.clear();
-                tgtCards.add(c);
+                if (!cards.isEmpty()) {
+                    Card c = cards.get(0).getMatchingForgeCard();
+                    tgtCards.add(c);
+                }
             }
         }
 

@@ -13,7 +13,9 @@ import com.google.common.collect.Lists;
 import forge.Card;
 import forge.CardLists;
 import forge.CardPredicates.Presets;
+import forge.card.CardRules;
 import forge.card.CardRulesPredicates;
+import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
@@ -23,6 +25,8 @@ import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 import forge.item.CardDb;
 import forge.item.CardPrinted;
+import forge.util.Aggregates;
+import forge.util.ComparableOp;
 
 public class ChooseCardNameEffect extends SpellAbilityEffect {
 
@@ -56,8 +60,23 @@ public class ChooseCardNameEffect extends SpellAbilityEffect {
             if ((tgt == null) || p.canBeTargetedBy(sa)) {
                 boolean ok = false;
                 while (!ok) {
-                    if (p.isHuman()) {
-                        
+                    if (sa.hasParam("AtRandom")) {
+                        // Currently only used for Momir Avatar, if something else gets added here, make it more generic
+                        Predicate<CardRules> baseRule = CardRulesPredicates.Presets.IS_CREATURE;
+
+                        String numericAmount = "X";
+                        final int validAmount = StringUtils.isNumeric(numericAmount) ? Integer.parseInt(numericAmount) :
+                            AbilityUtils.calculateAmount(host, numericAmount, sa);
+
+                        Predicate<CardRules>  additionalRule = CardRulesPredicates.cmc(ComparableOp.EQUALS, validAmount);
+
+                        List<CardPrinted> cards = Lists.newArrayList(CardDb.instance().getUniqueCards());
+                        Predicate<CardPrinted> cpp = Predicates.and(Predicates.compose(baseRule, CardPrinted.FN_GET_RULES), 
+                                Predicates.compose(additionalRule, CardPrinted.FN_GET_RULES));
+                        cards = Lists.newArrayList(Iterables.filter(cards, cpp));                        
+                        host.setNamedCard(Aggregates.random(cards).getName());
+                        ok = true;
+                    } else if (p.isHuman()) {
                         final String message = validDesc.equals("card") ? "Name a card" : "Name a " + validDesc + " card.";
                         
                         List<CardPrinted> cards = Lists.newArrayList(CardDb.instance().getUniqueCards());
