@@ -5647,6 +5647,11 @@ public class Card extends GameEntity implements Comparable<Card> {
                     byte mask = CardFactoryUtil.getMostProminentColors(getGame().getCardsIn(ZoneType.Battlefield));
                     if( !CardUtil.getColors(this).hasAnyColor(mask))
                         return false;
+                } else if (restriction.equals("LastCastThisTurn")) {
+                    final List<Card> c = source.getGame().getStack().getCardsCastThisTurn();
+                    if (c.isEmpty() || !this.sharesColorWith(c.get(c.size() - 1))) {
+                        return false;
+                    }
                 } else {
                     for (final Card card : sourceController.getCardsIn(ZoneType.Battlefield)) {
                         if (card.isValid(restriction, sourceController, source) && this.sharesColorWith(card)) {

@@ -6482,6 +6482,7 @@ res/cardsfolder/m/mana_geyser.txt svneol=native#text/plain
 res/cardsfolder/m/mana_leak.txt svneol=native#text/plain
 res/cardsfolder/m/mana_leech.txt svneol=native#text/plain
 res/cardsfolder/m/mana_matrix.txt svneol=native#text/plain
+res/cardsfolder/m/mana_maze.txt -text
 res/cardsfolder/m/mana_prism.txt svneol=native#text/plain
 res/cardsfolder/m/mana_seism.txt -text
 res/cardsfolder/m/mana_severance.txt svneol=native#text/plain
