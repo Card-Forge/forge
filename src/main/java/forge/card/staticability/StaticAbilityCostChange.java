@@ -237,6 +237,8 @@ public class StaticAbilityCostChange {
         int value = 0;
         if ("X".equals(amount)) {
             value = CardFactoryUtil.xCount(hostCard, hostCard.getSVar("X"));
+        } else if ("AffectedX".equals(amount)) {
+            value = CardFactoryUtil.xCount(card, hostCard.getSVar("AffectedX"));
         } else {
             value = Integer.valueOf(amount);
         }

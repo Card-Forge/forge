@@ -6261,6 +6261,7 @@ res/cardsfolder/l/loaming_shaman.txt -text
 res/cardsfolder/l/lobber_crew.txt -text
 res/cardsfolder/l/lobotomy.txt svneol=native#text/plain
 res/cardsfolder/l/loch_korrigan.txt svneol=native#text/plain
+res/cardsfolder/l/locket_of_yesterdays.txt -text
 res/cardsfolder/l/lockjaw_snapper.txt svneol=native#text/plain
 res/cardsfolder/l/locust_miser.txt svneol=native#text/plain
 res/cardsfolder/l/locust_swarm.txt svneol=native#text/plain
@@ -6485,6 +6486,7 @@ res/cardsfolder/m/mana_prism.txt svneol=native#text/plain
 res/cardsfolder/m/mana_seism.txt -text
 res/cardsfolder/m/mana_severance.txt svneol=native#text/plain
 res/cardsfolder/m/mana_short.txt svneol=native#text/plain
+res/cardsfolder/m/mana_skimmer.txt -text
 res/cardsfolder/m/mana_tithe.txt svneol=native#text/plain
 res/cardsfolder/m/mana_vapors.txt -text
 res/cardsfolder/m/mana_vault.txt svneol=native#text/plain
