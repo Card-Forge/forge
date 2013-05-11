@@ -12,6 +12,7 @@ public class InputPayManaX extends InputPayManaBase {
     private final String strX;
     private String colorsPaid;
     private final boolean xCanBe0;
+    private boolean canceled = false;
 
 
     public InputPayManaX(final SpellAbility sa0, final int amountX, final boolean xCanBe0)
@@ -34,14 +35,14 @@ public class InputPayManaX extends InputPayManaBase {
     public boolean isPaid() {
         //return !( xPaid == 0 && !costMana.canXbe0() || this.colorX.equals("") && !this.manaCost.toString().equals(strX) );
         // return !( xPaid == 0 && !costMana.canXbe0()) && !(this.colorX.equals("") && !this.manaCost.toString().equals(strX));
-        return ( xPaid > 0 || xCanBe0) && (!this.colorX.equals("") || this.manaCost.toString().equals(strX));
+        return ( !canceled && (xPaid > 0 || xCanBe0) && (!this.colorX.equals("") || this.manaCost.toString().equals(strX)));
     }
     
     @Override
     public void showMessage() {
         if( isFinished() ) return;
         
-        // only cancel if partially paid an X value
+        // Enable just cancel is full X value hasn't been paid for multiple X values
         // or X is 0, and x can't be 0
         if (!isPaid()) {
             ButtonUtil.enableOnlyCancel();
@@ -79,6 +80,8 @@ public class InputPayManaX extends InputPayManaBase {
 
     @Override
     protected final void onCancel() {
+        // If you hit cancel, isPaid needs to return false
+        this.canceled = true;
         this.stop();
     }
 
