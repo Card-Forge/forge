@@ -2,6 +2,7 @@ package forge.game.ai;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
@@ -826,7 +827,10 @@ public class ComputerUtilCard {
 
     public static List<String> getColorByProminence(final List<Card> list) {
         int cntColors = MagicColor.WUBRG.length;
-        final Integer[] map = new Integer[cntColors];
+        final int[] map = new int[cntColors];
+        for(int i = 0; i < map.length; i++) {
+            map[i] = 0;
+        }
 
         for (final Card crd : list) {
             ColorSet color = CardUtil.getColors(crd);
@@ -836,20 +840,20 @@ public class ComputerUtilCard {
             }
         } // for
 
-        Integer[] indices = new Integer[cntColors];
+        int[] indices = new int[cntColors];
         for(int i = 0; i < cntColors; i++)
             indices[i] = Integer.valueOf(i);
 
-        // sort indices for WUBRG array, to get indices for most prominent colors first.
-        Arrays.sort(indices, new Comparator<Integer>() {
-            @Override public int compare(final Integer a, final Integer b) { return map[b] - map[a]; }
-        });
+        // sort indices for WUBRG array
+        Arrays.sort(indices);
     
         // fetch color names in the same order
         List<String> result = new ArrayList<String>(cntColors);
-        for(Integer idx : indices) {
+        for(int idx : indices) {
             result.add(MagicColor.toLongString(MagicColor.WUBRG[idx]));
         }
+        // reverse to get indices for most prominent colors first.
+        Collections.reverse(result);
         return result;
     }
 
