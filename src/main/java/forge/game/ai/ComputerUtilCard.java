@@ -1,15 +1,12 @@
 package forge.game.ai;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Random;
-
 import org.apache.commons.lang3.tuple.MutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -35,7 +32,6 @@ import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.item.CardPrinted;
 import forge.util.Aggregates;
-import forge.util.MyRandom;
 
 /** 
  * TODO: Write javadoc for this type.

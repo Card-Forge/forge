@@ -1,6 +1,5 @@
 package forge.card.trigger;
 
-import java.util.ArrayList;
 import java.util.Map;
 
 import forge.Card;
@@ -31,10 +30,11 @@ public class TriggerPlaneswalkedFrom extends Trigger {
     /* (non-Javadoc)
      * @see forge.card.trigger.Trigger#performTest(java.util.Map)
      */
+    @SuppressWarnings("unchecked")
     @Override
     public boolean performTest(Map<String, Object> runParams2) {
         if (this.mapParams.containsKey("ValidCard")) {
-            for(Card moved : (ArrayList<Card>)runParams2.get("Card"))
+            for(Card moved : (Iterable<Card>)runParams2.get("Card"))
             {
                 if (moved.isValid(this.mapParams.get("ValidCard").split(","), this.getHostCard().getController(),
                         this.getHostCard())) {
