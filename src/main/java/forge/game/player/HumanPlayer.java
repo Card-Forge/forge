@@ -39,8 +39,6 @@ import forge.game.GameActionUtil;
 import forge.game.GameState;
 
 public class HumanPlayer extends Player {
-    private final PlayerControllerHuman controller;
-    
     public HumanPlayer(final LobbyPlayerHuman player, GameState game) {
         super(player, game);
         controller = new PlayerControllerHuman(game, this);

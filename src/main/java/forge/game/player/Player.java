@@ -158,7 +158,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     private Card currentPlane = null;
 
     private PlayerStatistics stats = new PlayerStatistics();
-    private PlayerController controller;
+    protected PlayerController controller;
     private final LobbyPlayer lobbyPlayer;
     
     private final List<Card> schemeDeck = new ArrayList<Card>();

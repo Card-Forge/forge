@@ -29,8 +29,6 @@ import forge.game.ai.AiController;
  * @version $Id$
  */
 public class AIPlayer extends Player {
-
-    private final PlayerControllerAi controller;
     /**
      * <p>
      * Constructor for AIPlayer.
@@ -46,7 +44,7 @@ public class AIPlayer extends Player {
     }
 
     public AiController getAi() { 
-        return controller.getAi();
+        return controller instanceof PlayerControllerAi ? ((PlayerControllerAi) controller).getAi() : null;
     }
     
 } // end AIPlayer class
