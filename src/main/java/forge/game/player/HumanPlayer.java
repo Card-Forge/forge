@@ -40,11 +40,9 @@ import forge.game.GameState;
 
 public class HumanPlayer extends Player {
     private final PlayerControllerHuman controller;
-    private final LobbyPlayerHuman lobbyPlayer;
     
     public HumanPlayer(final LobbyPlayerHuman player, GameState game) {
-        super(player.getName(), game);
-        lobbyPlayer = player;
+        super(player, game);
         controller = new PlayerControllerHuman(game, this);
     }
 
@@ -62,11 +60,6 @@ public class HumanPlayer extends Player {
         p.getGame().getPhaseHandler().setPriority(p);
     }
 
-    @Override
-    public PlayerControllerHuman getController() {
-        return controller;
-    }
-    
 
     /**
      * <p>
@@ -239,9 +232,5 @@ public class HumanPlayer extends Player {
             game.getStack().add(sa, x);
         }
     }
-    
-    @Override
-    public LobbyPlayerHuman getLobbyPlayer() {
-        return lobbyPlayer;
-    }
+
 } // end HumanPlayer class

@@ -31,7 +31,6 @@ import forge.game.ai.AiController;
 public class AIPlayer extends Player {
 
     private final PlayerControllerAi controller;
-    private final LobbyPlayerAi lobbyPlayer;
     /**
      * <p>
      * Constructor for AIPlayer.
@@ -42,43 +41,12 @@ public class AIPlayer extends Player {
      *            a {@link java.lang.String} object.
      */
     public AIPlayer(final LobbyPlayerAi player, final GameState game) {
-        super(player.getName(), game);
-        lobbyPlayer = player;
+        super(player, game);
         controller = new PlayerControllerAi(game, this);
-        
     }
 
     public AiController getAi() { 
         return controller.getAi();
     }
     
-
-
-    // /////////////////////////
-
-    /* (non-Javadoc)
-     * @see forge.game.player.Player#getType()
-     */
-    @Override
-    public PlayerType getType() {
-        return PlayerType.COMPUTER;
-    }
-
-
-    /* (non-Javadoc)
-     * @see forge.game.player.Player#getController()
-     */
-    @Override
-    public PlayerControllerAi getController() {
-        return controller;
-    }
-
-    /* (non-Javadoc)
-     * @see forge.game.player.Player#getLobbyPlayer()
-     */
-    @Override
-    public LobbyPlayerAi getLobbyPlayer() {
-        // TODO Auto-generated method stub
-        return lobbyPlayer;
-    }
 } // end AIPlayer class

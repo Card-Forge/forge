@@ -83,7 +83,7 @@ import forge.util.MyRandom;
  * @author Forge
  * @version $Id$
  */
-public abstract class Player extends GameEntity implements Comparable<Player> {
+public class Player extends GameEntity implements Comparable<Player> {
     /** The poison counters. */
     private int poisonCounters = 0;
 
@@ -158,7 +158,9 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
     private Card currentPlane = null;
 
     private PlayerStatistics stats = new PlayerStatistics();
-
+    private PlayerController controller;
+    private final LobbyPlayer lobbyPlayer;
+    
     private final List<Card> schemeDeck = new ArrayList<Card>();
     private Card activeScheme = null;
 
@@ -185,7 +187,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
      * @param myPoisonCounters
      *            a int.
      */
-    public Player(String name, GameState game0) {
+    public Player(LobbyPlayer lobby, GameState game0) {
         game = game0;
         for (final ZoneType z : Player.ALL_ZONES) {
             final PlayerZone toPut = z == ZoneType.Battlefield
@@ -193,7 +195,8 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
                     : new PlayerZone(z, this);
             this.zones.put(z, toPut);
         }
-        this.setName(name);
+        this.setName(lobby.getName());
+        this.lobbyPlayer = lobby;
     }
 
     @Override
@@ -2748,7 +2751,9 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
      * TODO: Write javadoc for this method.
      * @return
      */
-    public abstract LobbyPlayer getLobbyPlayer();
+    public final LobbyPlayer getLobbyPlayer() {
+        return lobbyPlayer;
+    }
 
     private void setOutcome(PlayerOutcome outcome) {
         stats.setOutcome(outcome);
@@ -2865,8 +2870,12 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
      * TODO: Write javadoc for this method.
      * @return
      */
-    public abstract PlayerController getController();
-
+    public final PlayerController getController() {
+        return controller;
+    }
+    public final void setController(PlayerController ctrlr) {
+        controller = ctrlr; 
+    }
     /**
      * <p>
      * skipCombat.
