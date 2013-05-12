@@ -73,12 +73,24 @@ public class GameNew {
         // Schemes
         List<Card> sd = new ArrayList<Card>();
         for(IPaperCard cp : psc.getSchemes(player)) sd.add(cp.toForgeCard(player));
-        if ( !sd.isEmpty()) player.setSchemeDeck(sd);
+        if ( !sd.isEmpty()) {
+            for(Card c : sd) {
+                player.getZone(ZoneType.SchemeDeck).add(c);
+            }
+            player.getZone(ZoneType.SchemeDeck).shuffle();
+        }
+        
     
         // Planes
         List<Card> l = new ArrayList<Card>();
         for(IPaperCard cp : psc.getPlanes(player)) l.add(cp.toForgeCard(player));
-        if ( !l.isEmpty() ) player.setPlanarDeck(l);
+        if ( !l.isEmpty() ) {
+            for(Card c : l) {
+                player.getZone(ZoneType.PlanarDeck).add(c);
+            }
+            player.getZone(ZoneType.PlanarDeck).shuffle();
+        }
+        
     }
 
     private static Set<CardPrinted> getRemovedAnteCards(Deck toUse) {

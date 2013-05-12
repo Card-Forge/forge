@@ -211,8 +211,12 @@ public class TriggerHandler {
         // This is done to allow the list of triggers to be modified while
         // triggers are running.
         final ArrayList<Trigger> delayedTriggersWorkingCopy = new ArrayList<Trigger>(this.delayedTriggers);
-        List<Card> allCards = game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES);
-        allCards.addAll(game.getCardsIn(ZoneType.Stack));
+        List<Card> allCards = new ArrayList<Card>();
+        for(Player p : game.getPlayers())
+        {
+            allCards.addAll(p.getAllCards());
+        }
+        //allCards.addAll(game.getCardsIn(ZoneType.Stack));
         boolean checkStatics = false;
 
         // Static triggers
@@ -233,7 +237,7 @@ public class TriggerHandler {
         }
 
         // AP
-        allCards = playerAP.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES);
+        allCards = playerAP.getAllCards();
         allCards.addAll(CardLists.filterControlledBy(game.getCardsIn(ZoneType.Stack), playerAP));
         // add cards that move to hidden zones
         if (runParams.containsKey("Destination") && runParams.containsKey("Card")) {
@@ -266,7 +270,7 @@ public class TriggerHandler {
                 continue;
             }
 
-            allCards = nap.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES);
+            allCards = nap.getAllCards();
             allCards.addAll(CardLists.filterControlledBy(game.getCardsIn(ZoneType.Stack), nap));
             // add cards that move to hidden zones
             if (runParams.containsKey("Destination") && runParams.containsKey("Card")) {

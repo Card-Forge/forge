@@ -172,7 +172,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     /** The Constant ALL_ZONES. */
     public static final List<ZoneType> ALL_ZONES = Collections.unmodifiableList(Arrays.asList(ZoneType.Battlefield,
             ZoneType.Library, ZoneType.Graveyard, ZoneType.Hand, ZoneType.Exile, ZoneType.Command, ZoneType.Ante,
-            ZoneType.Sideboard));
+            ZoneType.Sideboard, ZoneType.PlanarDeck,ZoneType.SchemeDeck));
 
     protected final GameState game;
 
@@ -2968,9 +2968,9 @@ public class Player extends GameEntity implements Comparable<Player> {
     public void planeswalk()
     {
         
-        currentPlane = planarDeck.get(0);
+        currentPlane = getZone(ZoneType.PlanarDeck).get(0);
 
-        planarDeck.remove(0);
+        getZone(ZoneType.PlanarDeck).remove(currentPlane);
         getZone(ZoneType.Command).add(currentPlane);
         
         game.setActivePlane(currentPlane);
@@ -2996,15 +2996,9 @@ public class Player extends GameEntity implements Comparable<Player> {
             Zone com = game.getZoneOf(currentPlane);
             com.remove(currentPlane);
             currentPlane.clearControllers();
-            planarDeck.add(currentPlane);
+            getZone(ZoneType.PlanarDeck).add(currentPlane);
             currentPlane = null;
         }
-    }
-    
-    public void setPlanarDeck(List<Card> pd)
-    {
-        planarDeck = pd;
-        Collections.shuffle(planarDeck);
     }
     
     /**
@@ -3016,11 +3010,11 @@ public class Player extends GameEntity implements Comparable<Player> {
         Card firstPlane = null;
         while(true)
         {
-            firstPlane = planarDeck.get(0);
-            planarDeck.remove(0);
+            firstPlane = getZone(ZoneType.PlanarDeck).get(0);
+            getZone(ZoneType.PlanarDeck).remove(firstPlane);
             if(firstPlane.getType().contains("Phenomenon"))
             {
-                planarDeck.add(firstPlane);
+                getZone(ZoneType.PlanarDeck).add(firstPlane);
             }
             else
             {

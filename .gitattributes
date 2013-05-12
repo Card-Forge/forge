@@ -7669,6 +7669,7 @@ res/cardsfolder/o/orzhov_guildmage.txt svneol=native#text/plain
 res/cardsfolder/o/orzhov_keyrune.txt -text
 res/cardsfolder/o/orzhov_pontiff.txt -text
 res/cardsfolder/o/orzhov_signet.txt svneol=native#text/plain
+res/cardsfolder/o/orzhova.txt -text
 res/cardsfolder/o/orzhova_the_church_of_deals.txt svneol=native#text/plain
 res/cardsfolder/o/osai_vultures.txt -text svneol=unset#text/plain
 res/cardsfolder/o/ostiary_thrull.txt svneol=native#text/plain

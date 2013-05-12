@@ -571,47 +571,6 @@ public class GameState {
     public void setActivePlane(Card activePlane0) {
         this.activePlane = activePlane0;
     }
-    
-    /**
-     * 
-     * Currently unused. Base for the Single Planar deck option. (Rule 901.15)
-     */
-    public void setCommunalPlaneDeck(List<Card> deck) {
-        communalPlanarDeck.clear();
-        communalPlanarDeck.addAll(deck);
-        CardLists.shuffle(communalPlanarDeck);
-        
-        for(Player p : roIngamePlayers)
-        {
-            p.setPlanarDeck(communalPlanarDeck);
-        }
-    }
-        
-    /**
-     * 
-     * Currently unused. Base for the Single Planar deck option. (Rule 901.15)
-     */
-    public void initCommunalPlane()
-    {
-        getTriggerHandler().suppressMode(TriggerType.PlaneswalkedTo);
-        Card firstPlane = null;
-        while(true)
-        {
-            firstPlane = communalPlanarDeck.get(0);
-            communalPlanarDeck.remove(0);
-            if(firstPlane.getType().contains("Phenomenon"))
-            {
-                communalPlanarDeck.add(firstPlane);
-            }
-            else
-            {
-                this.getPhaseHandler().getPlayerTurn().getZone(ZoneType.Command).add(firstPlane);
-                break;
-            }
-        }
-
-        getTriggerHandler().clearSuppression(TriggerType.PlaneswalkedTo);
-    }
 
     public void archenemy904_10() {
         //904.10. If a non-ongoing scheme card is face up in the

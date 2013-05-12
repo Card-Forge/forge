@@ -372,4 +372,8 @@ public class Zone extends MyObservable implements IZone, Observer, java.io.Seria
     public void updateLabelObservers() {
     }
 
+    public void shuffle()
+    {
+        Collections.shuffle(cardList);
+    }
 }
