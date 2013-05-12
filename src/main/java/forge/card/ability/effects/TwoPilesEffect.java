@@ -112,14 +112,13 @@ public class TwoPilesEffect extends SpellAbilityEffect {
                     for (Card c : pool) {
                         if (c.getCMC() >= biggest.getCMC()) {
                             biggest = c;
-                        }
-                        if (c.getCMC() <= smallest.getCMC()) {
+                        } else if (c.getCMC() <= smallest.getCMC()) {
                             smallest = c;
                         }
                     }
                     pile1.add(biggest);
 
-                    if (size > 3) {
+                    if (size > 3 && !pile1.contains(smallest)) {
                         pile1.add(smallest);
                     }
                     for (Card c : pool) {
