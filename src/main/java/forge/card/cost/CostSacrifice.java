@@ -28,7 +28,6 @@ import forge.control.input.InputSelectCards;
 import forge.control.input.InputSelectCardsFromList;
 import forge.game.GameState;
 import forge.game.ai.ComputerUtil;
-import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiDialog;
@@ -191,7 +190,7 @@ public class CostSacrifice extends CostPartWithList {
      * @see forge.card.cost.CostPart#decideAIPayment(forge.game.player.AIPlayer, forge.card.spellability.SpellAbility, forge.Card)
      */
     @Override
-    public PaymentDecision decideAIPayment(AIPlayer ai, SpellAbility ability, Card source) {
+    public PaymentDecision decideAIPayment(Player ai, SpellAbility ability, Card source) {
 
         if (this.payCostFromSource()) {
             return new PaymentDecision(source);

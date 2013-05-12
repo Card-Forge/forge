@@ -17,7 +17,6 @@ import forge.card.spellability.Target;
 import forge.card.spellability.TargetChoices;
 import forge.game.GameState;
 import forge.game.ai.ComputerUtil;
-import forge.game.player.AIPlayer;
 import forge.game.player.HumanPlay;
 import forge.game.player.Player;
 import forge.gui.GuiDialog;
@@ -144,7 +143,7 @@ public class WrappedAbility extends Ability implements ISpellAbility {
     }
 
     @Override
-    public boolean doTrigger(final boolean mandatory, AIPlayer ai) {
+    public boolean doTrigger(final boolean mandatory, Player ai) {
         return sa.doTrigger(mandatory, ai);
     }
 
@@ -370,7 +369,7 @@ public class WrappedAbility extends Ability implements ISpellAbility {
             // commented out because i don't think this should be called
             // again here
             // sa.doTrigger(isMandatory);
-            ComputerUtil.playNoStack((AIPlayer)getActivatingPlayer(), sa, game);
+            ComputerUtil.playNoStack(getActivatingPlayer(), sa, game);
         }
 
         // Add eventual delayed trigger.
@@ -416,7 +415,7 @@ public class WrappedAbility extends Ability implements ISpellAbility {
                 }
                 // There is no way this doTrigger here will have the same target as stored above
                 // So it's possible it's making a different decision here than will actually happen
-                if (!sa.doTrigger(this.isMandatory(), (AIPlayer) decider)) {
+                if (!sa.doTrigger(this.isMandatory(), decider)) {
                     return false;
                 }
                 if (storeChoices) {

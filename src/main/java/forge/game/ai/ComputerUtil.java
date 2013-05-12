@@ -49,7 +49,6 @@ import forge.game.phase.Combat;
 import forge.game.phase.CombatUtil;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
-import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 import forge.game.player.PlayerControllerAi;
 import forge.game.zone.ZoneType;
@@ -77,7 +76,7 @@ public class ComputerUtil {
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
-    public static boolean handlePlayingSpellAbility(final AIPlayer ai, final SpellAbility sa, final GameState game) {
+    public static boolean handlePlayingSpellAbility(final Player ai, final SpellAbility sa, final GameState game) {
         
         if (sa instanceof AbilityStatic) {
             final Cost cost = sa.getPayCosts();
@@ -220,7 +219,7 @@ public class ComputerUtil {
      * @param sa
      *            a {@link forge.card.spellability.SpellAbility} object.
      */
-    public static final void playStack(final SpellAbility sa, final AIPlayer ai, final GameState game) {
+    public static final void playStack(final SpellAbility sa, final Player ai, final GameState game) {
         sa.setActivatingPlayer(ai);
         if (!ComputerUtilCost.canPayCost(sa, ai)) 
             return;
@@ -268,7 +267,7 @@ public class ComputerUtil {
      * @param sa
      *            a {@link forge.card.spellability.SpellAbility} object.
      */
-    public static final void playSpellAbilityWithoutPayingManaCost(final AIPlayer ai, final SpellAbility sa, final GameState game) {
+    public static final void playSpellAbilityWithoutPayingManaCost(final Player ai, final SpellAbility sa, final GameState game) {
         final SpellAbility newSA = sa.copyWithNoManaCost();
         newSA.setActivatingPlayer(ai);
 
@@ -295,7 +294,7 @@ public class ComputerUtil {
      * @param sa
      *            a {@link forge.card.spellability.SpellAbility} object.
      */
-    public static final void playNoStack(final AIPlayer ai, final SpellAbility sa, final GameState game) {
+    public static final void playNoStack(final Player ai, final SpellAbility sa, final GameState game) {
         sa.setActivatingPlayer(ai);
         // TODO: We should really restrict what doesn't use the Stack
         if (ComputerUtilCost.canPayCost(sa, ai)) {
@@ -309,7 +308,7 @@ public class ComputerUtil {
                 ComputerUtilMana.payManaCost(ai, sa);
             } else {
                 final CostPayment pay = new CostPayment(cost, sa);
-                pay.payComputerCosts((AIPlayer)ai, game);
+                pay.payComputerCosts(ai, game);
             }
 
             AbilityUtils.resolve(sa, false);
@@ -1236,7 +1235,7 @@ public class ComputerUtil {
 
     // Computer mulligans if there are no cards with converted mana cost of
     // 0 in its hand
-    public static boolean wantMulligan(AIPlayer ai) {
+    public static boolean wantMulligan(Player ai) {
         final List<Card> handList = ai.getCardsIn(ZoneType.Hand);
         final boolean hasLittleCmc0Cards = CardLists.getValidCards(handList, "Card.cmcEQ0", ai, null).size() < 2;
         final AiController aic = ((PlayerControllerAi)ai.getController()).getAi();
@@ -1244,7 +1243,7 @@ public class ComputerUtil {
 
     }
     
-    public static List<Card> getPartialParisCandidates(AIPlayer ai) {
+    public static List<Card> getPartialParisCandidates(Player ai) {
         final List<Card> candidates = new ArrayList<Card>();
         final List<Card> handList = ai.getCardsIn(ZoneType.Hand);
         
@@ -1304,7 +1303,7 @@ public class ComputerUtil {
     }
 
 
-    public static boolean scryWillMoveCardToBottomOfLibrary(AIPlayer player, Card c) {
+    public static boolean scryWillMoveCardToBottomOfLibrary(Player player, Card c) {
         boolean bottom = false;
         if (c.isBasicLand()) {
             List<Card> bl = player.getCardsIn(ZoneType.Battlefield);
@@ -1327,7 +1326,7 @@ public class ComputerUtil {
      * @param min
      * @return
      */
-    public static List<Card> getCardsToDiscardFromOpponent(AIPlayer chooser, Player discarder, SpellAbility sa, List<Card> validCards, int min, int max) {
+    public static List<Card> getCardsToDiscardFromOpponent(Player chooser, Player discarder, SpellAbility sa, List<Card> validCards, int min, int max) {
         List<Card> goodChoices = CardLists.filter(validCards, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
@@ -1368,8 +1367,8 @@ public class ComputerUtil {
      * @param min
      * @return
      */
-    public static List<Card> getCardsToDiscardFromFriend(AIPlayer aiChooser, Player p, SpellAbility sa, List<Card> validCards, int min, int max) {
-        if (p instanceof AIPlayer) { // ask that ai player what he would like to discard
+    public static List<Card> getCardsToDiscardFromFriend(Player aiChooser, Player p, SpellAbility sa, List<Card> validCards, int min, int max) {
+        if (p.isComputer()) { // ask that ai player what he would like to discard
             final AiController aic = ((PlayerControllerAi)p.getController()).getAi();
             return aic.getCardsToDiscard(min, max, validCards, sa);
         } 

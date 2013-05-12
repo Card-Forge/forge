@@ -53,7 +53,6 @@ import forge.game.ai.ComputerUtilCard;
 import forge.game.ai.ComputerUtilCost;
 import forge.game.event.SpellResolvedEvent;
 import forge.game.phase.PhaseType;
-import forge.game.player.AIPlayer;
 import forge.game.player.HumanPlay;
 import forge.game.player.Player;
 import forge.gui.GuiChoose;
@@ -403,7 +402,7 @@ public class MagicStack extends MyObservable {
                     };
 
                     while (ComputerUtilCost.canPayCost(abilityIncreaseMultikicker, activating)) {
-                        ComputerUtil.playNoStack((AIPlayer)activating, abilityIncreaseMultikicker, game);
+                        ComputerUtil.playNoStack(activating, abilityIncreaseMultikicker, game);
                     }
                 }
                 this.push(sa);
@@ -446,7 +445,7 @@ public class MagicStack extends MyObservable {
                 } else {
                     // computer
                     while (ComputerUtilCost.canPayCost(ability, controller)) {
-                        ComputerUtil.playNoStack((AIPlayer)controller, ability, game);
+                        ComputerUtil.playNoStack(controller, ability, game);
                     }
 
                     this.push(sa);
@@ -1050,8 +1049,8 @@ public class MagicStack extends MyObservable {
 
         if (activePlayer.isComputer()) {
             for (final SpellAbility sa : activePlayerSAs) {
-                sa.doTrigger(sa.isMandatory(), (AIPlayer) activePlayer);
-                ComputerUtil.playStack(sa, (AIPlayer) activePlayer, game);
+                sa.doTrigger(sa.isMandatory(), activePlayer);
+                ComputerUtil.playStack(sa, activePlayer, game);
             }
         } else {
             List<SpellAbility> orderedSAs = activePlayerSAs;

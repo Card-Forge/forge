@@ -2,7 +2,7 @@ package forge.card.ability.ai;
 
 import forge.card.ability.SpellAbilityAi;
 import forge.card.spellability.SpellAbility;
-import forge.game.player.AIPlayer;
+import forge.game.player.Player;
 
 public class FlipACoinAi extends SpellAbilityAi {
 
@@ -10,7 +10,7 @@ public class FlipACoinAi extends SpellAbilityAi {
      * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
      */
     @Override
-    protected boolean canPlayAI(AIPlayer ai, SpellAbility sa) {
+    protected boolean canPlayAI(Player ai, SpellAbility sa) {
 
         if (sa.hasParam("AILogic")) {
             if (sa.getParam("AILogic").equals("Never")) {
@@ -21,7 +21,7 @@ public class FlipACoinAi extends SpellAbilityAi {
     }
 
     @Override
-    public boolean chkAIDrawback(SpellAbility sa, AIPlayer ai) {
+    public boolean chkAIDrawback(SpellAbility sa, Player ai) {
         return canPlayAI(ai, sa);
     }
 }

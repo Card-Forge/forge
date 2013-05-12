@@ -10,13 +10,12 @@ import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
-import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 import forge.util.MyRandom;
 
 public class TapAi extends TapAiBase {
     @Override
-    protected boolean canPlayAI(AIPlayer ai, SpellAbility sa) {
+    protected boolean canPlayAI(Player ai, SpellAbility sa) {
 
         final PhaseHandler phase = ai.getGame().getPhaseHandler();
         final Player turn = phase.getPlayerTurn();

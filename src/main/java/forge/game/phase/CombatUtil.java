@@ -52,7 +52,6 @@ import forge.game.GlobalRuleChange;
 import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilCard;
 import forge.game.ai.ComputerUtilCost;
-import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
@@ -1082,7 +1081,7 @@ public class CombatUtil {
                 hasPaid = GameActionUtil.payCostDuringAbilityResolve(ability, attackCost, null, game);
             } else { // computer
                 if (ComputerUtilCost.canPayCost(ability, c.getController())) {
-                    ComputerUtil.playNoStack((AIPlayer)c.getController(), ability, game);
+                    ComputerUtil.playNoStack(c.getController(), ability, game);
                     hasPaid = true;
                 }
             }

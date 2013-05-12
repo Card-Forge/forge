@@ -28,7 +28,6 @@ import forge.control.input.InputSelectCards;
 import forge.control.input.InputSelectCardsFromList;
 import forge.game.GameState;
 import forge.game.ai.ComputerUtil;
-import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiDialog;
@@ -169,7 +168,7 @@ public class CostReturn extends CostPartWithList {
      * , forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final PaymentDecision decideAIPayment(final AIPlayer ai, final SpellAbility ability, final Card source) {
+    public final PaymentDecision decideAIPayment(final Player ai, final SpellAbility ability, final Card source) {
         if (this.payCostFromSource())
             return new PaymentDecision(source);
         
@@ -202,7 +201,7 @@ public class CostReturn extends CostPartWithList {
      * @see forge.card.cost.CostPart#payAI(forge.card.cost.PaymentDecision, forge.game.player.AIPlayer, forge.card.spellability.SpellAbility, forge.Card)
      */
     @Override
-    public void payAI(PaymentDecision decision, AIPlayer ai, SpellAbility ability, Card source) {
+    public void payAI(PaymentDecision decision, Player ai, SpellAbility ability, Card source) {
         for (final Card c : decision.cards) {
             executePayment(ability, c);
         }

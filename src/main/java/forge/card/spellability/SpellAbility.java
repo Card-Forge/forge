@@ -35,7 +35,6 @@ import forge.card.cost.CostPartMana;
 import forge.card.mana.Mana;
 import forge.card.mana.ManaCost;
 import forge.game.GameState;
-import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 import forge.util.TextUtil;
 
@@ -214,7 +213,7 @@ public abstract class SpellAbility implements ISpellAbility {
      * @param ai TODO
      * @return a boolean.
      */
-    public boolean doTrigger(final boolean mandatory, AIPlayer ai) {
+    public boolean doTrigger(final boolean mandatory, Player ai) {
         return false;
     }
 

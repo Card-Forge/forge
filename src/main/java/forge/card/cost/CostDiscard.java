@@ -31,7 +31,6 @@ import forge.control.input.InputSelectCards;
 import forge.control.input.InputSelectCardsFromList;
 import forge.game.GameState;
 import forge.game.ai.AiController;
-import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 import forge.game.player.PlayerControllerAi;
 import forge.game.zone.ZoneType;
@@ -243,7 +242,7 @@ public class CostDiscard extends CostPartWithList {
      * @see forge.card.cost.CostPart#decideAIPayment(forge.game.player.AIPlayer, forge.card.spellability.SpellAbility, forge.Card)
      */
     @Override
-    public PaymentDecision decideAIPayment(AIPlayer ai, SpellAbility ability, Card source) {
+    public PaymentDecision decideAIPayment(Player ai, SpellAbility ability, Card source) {
         final String type = this.getType();
 
         final List<Card> hand = ai.getCardsIn(ZoneType.Hand);
@@ -306,7 +305,7 @@ public class CostDiscard extends CostPartWithList {
      * @see forge.card.cost.CostPart#payAI(forge.card.cost.PaymentDecision, forge.game.player.AIPlayer, forge.card.spellability.SpellAbility, forge.Card)
      */
     @Override
-    public void payAI(PaymentDecision decision, AIPlayer ai, SpellAbility ability, Card source) {
+    public void payAI(PaymentDecision decision, Player ai, SpellAbility ability, Card source) {
         executePayment(ability, decision.cards);
     }
 

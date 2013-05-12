@@ -23,7 +23,6 @@ import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
-import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 
 /**
@@ -38,7 +37,7 @@ public class AddTurnAi extends SpellAbilityAi {
 
 
     @Override
-    protected boolean doTriggerAINoCost(AIPlayer ai, SpellAbility sa, boolean mandatory) {
+    protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
         final Player opp = ai.getWeakestOpponent();
         final Target tgt = sa.getTarget();
 
@@ -76,7 +75,7 @@ public class AddTurnAi extends SpellAbilityAi {
      * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
      */
     @Override
-    protected boolean canPlayAI(AIPlayer aiPlayer, SpellAbility sa) {
+    protected boolean canPlayAI(Player aiPlayer, SpellAbility sa) {
         return doTriggerAINoCost(aiPlayer, sa, false);
     }
 

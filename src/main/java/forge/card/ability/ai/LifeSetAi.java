@@ -10,14 +10,13 @@ import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.game.ai.ComputerUtilMana;
 import forge.game.phase.PhaseType;
-import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 import forge.util.MyRandom;
 
 public class LifeSetAi extends SpellAbilityAi {
 
     @Override
-    protected boolean canPlayAI(AIPlayer ai, SpellAbility sa) {
+    protected boolean canPlayAI(Player ai, SpellAbility sa) {
         final Random r = MyRandom.getRandom();
         // Ability_Cost abCost = sa.getPayCosts();
         final Card source = sa.getSourceCard();
@@ -102,7 +101,7 @@ public class LifeSetAi extends SpellAbilityAi {
     }
 
     @Override
-    protected boolean doTriggerAINoCost(AIPlayer ai, SpellAbility sa, boolean mandatory) {
+    protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
         final int myLife = ai.getLife();
         final Player opponent = ai.getOpponent();
         final int hlife = opponent.getLife();

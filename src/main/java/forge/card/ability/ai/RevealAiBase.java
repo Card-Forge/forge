@@ -4,7 +4,6 @@ package forge.card.ability.ai;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
-import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
@@ -38,7 +37,7 @@ public abstract class RevealAiBase extends SpellAbilityAi {
      * @see forge.card.abilityfactory.SpellAiLogic#chkAIDrawback(java.util.Map, forge.card.spellability.SpellAbility, forge.game.player.Player)
      */
     @Override
-    public boolean chkAIDrawback(SpellAbility sa, AIPlayer ai) {
+    public boolean chkAIDrawback(SpellAbility sa, Player ai) {
         revealHandTargetAI(ai, sa);
         return true;
     }

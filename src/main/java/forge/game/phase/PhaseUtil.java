@@ -36,7 +36,6 @@ import forge.game.GameActionUtil;
 import forge.game.GameState;
 import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilCost;
-import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.match.CMatchUI;
@@ -229,7 +228,7 @@ public class PhaseUtil {
                         hasPaid = GameActionUtil.payCostDuringAbilityResolve(ability, blockCost, null, game);
                     } else { // computer
                         if (ComputerUtilCost.canPayCost(ability, blocker.getController())) {
-                            ComputerUtil.playNoStack((AIPlayer)blocker.getController(), ability, game);
+                            ComputerUtil.playNoStack(blocker.getController(), ability, game);
                             hasPaid = true;
                         }
                     }

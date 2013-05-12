@@ -29,7 +29,6 @@ import forge.card.ability.AbilityUtils;
 import forge.card.spellability.SpellAbility;
 import forge.game.GameState;
 import forge.game.ai.ComputerUtil;
-import forge.game.player.AIPlayer;
 import forge.game.player.HumanPlay;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
@@ -225,7 +224,7 @@ public class ReplacementHandler {
                 }
             } else {
                 // AI-logic
-                if (!replacementEffect.aiShouldRun(effectSA, (AIPlayer) optDecider)) {
+                if (!replacementEffect.aiShouldRun(effectSA, optDecider)) {
                     return ReplacementResult.NotReplaced;
                 }
             }
@@ -242,7 +241,7 @@ public class ReplacementHandler {
         if (player.isHuman()) {
             HumanPlay.playSpellAbilityNoStack(player, effectSA);
         } else {
-            ComputerUtil.playNoStack((AIPlayer) player, effectSA, game);
+            ComputerUtil.playNoStack(player, effectSA, game);
         }
 
         return ReplacementResult.Replaced;

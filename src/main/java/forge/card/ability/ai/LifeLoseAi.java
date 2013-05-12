@@ -13,14 +13,13 @@ import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilCost;
 import forge.game.ai.ComputerUtilMana;
 import forge.game.phase.PhaseType;
-import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 import forge.util.MyRandom;
 
 public class LifeLoseAi extends SpellAbilityAi {
 
     @Override
-    public boolean chkAIDrawback(SpellAbility sa, AIPlayer ai) {
+    public boolean chkAIDrawback(SpellAbility sa, Player ai) {
 
         final Target tgt = sa.getTarget();
         List<Player> tgtPlayers;
@@ -52,7 +51,7 @@ public class LifeLoseAi extends SpellAbilityAi {
      * @see forge.card.abilityfactory.AbilityFactoryAlterLife.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
      */
     @Override
-    protected boolean canPlayAI(AIPlayer ai, SpellAbility sa) {
+    protected boolean canPlayAI(Player ai, SpellAbility sa) {
 
         final Random r = MyRandom.getRandom();
         final Cost abCost = sa.getPayCosts();
@@ -139,7 +138,7 @@ public class LifeLoseAi extends SpellAbilityAi {
     }
 
     @Override
-    protected boolean doTriggerAINoCost(final AIPlayer ai, final SpellAbility sa,
+    protected boolean doTriggerAINoCost(final Player ai, final SpellAbility sa,
     final boolean mandatory) {
         final Target tgt = sa.getTarget();
         if (tgt != null) {

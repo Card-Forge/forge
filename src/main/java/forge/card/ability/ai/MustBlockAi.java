@@ -15,25 +15,25 @@ import forge.game.ai.ComputerUtilCard;
 import forge.game.ai.ComputerUtilCombat;
 import forge.game.phase.CombatUtil;
 import forge.game.phase.PhaseType;
-import forge.game.player.AIPlayer;
+import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
 public class MustBlockAi extends SpellAbilityAi {
 
     @Override
-    protected boolean canPlayAI(AIPlayer aiPlayer, SpellAbility sa) {
+    protected boolean canPlayAI(Player aiPlayer, SpellAbility sa) {
         // disabled for the AI until he/she can make decisions about who to make
         // block
         return false;
     }
 
     @Override
-    public boolean chkAIDrawback(SpellAbility sa, AIPlayer aiPlayer) {
+    public boolean chkAIDrawback(SpellAbility sa, Player aiPlayer) {
         return false;
     }
 
     @Override
-    protected boolean doTriggerAINoCost(final AIPlayer ai, SpellAbility sa, boolean mandatory) {
+    protected boolean doTriggerAINoCost(final Player ai, SpellAbility sa, boolean mandatory) {
         final Card source = sa.getSourceCard();
         final Target abTgt = sa.getTarget();
 

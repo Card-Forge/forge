@@ -2,7 +2,7 @@ package forge.card.ability.ai;
 
 import forge.card.ability.SpellAbilityAi;
 import forge.card.spellability.SpellAbility;
-import forge.game.player.AIPlayer;
+import forge.game.player.Player;
 
 public class RestartGameAi extends SpellAbilityAi {
 
@@ -15,7 +15,7 @@ public class RestartGameAi extends SpellAbilityAi {
      * forge.card.spellability.SpellAbility)
      */
     @Override
-    protected boolean canPlayAI(AIPlayer ai, SpellAbility sa) {
+    protected boolean canPlayAI(Player ai, SpellAbility sa) {
         // The only card that uses this is Karn Liberated
 
         // TODO Add Logic, check if AI is losing game state, or life
@@ -26,7 +26,7 @@ public class RestartGameAi extends SpellAbilityAi {
     }
 
     @Override
-    protected boolean doTriggerAINoCost(AIPlayer aiPlayer, SpellAbility sa, boolean mandatory) {
+    protected boolean doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
         // This trigger AI is completely unused, but return true just in case
         return true;
     }

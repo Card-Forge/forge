@@ -14,7 +14,6 @@ import forge.game.ai.ComputerUtilCost;
 import forge.game.ai.ComputerUtilMana;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
-import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
@@ -65,7 +64,7 @@ public class TokenAi extends SpellAbilityAi {
     }
 
     @Override
-    protected boolean canPlayAI(AIPlayer ai, SpellAbility sa) {
+    protected boolean canPlayAI(Player ai, SpellAbility sa) {
         final Cost cost = sa.getPayCosts();
         final GameState game = ai.getGame();
         readParameters(sa);
@@ -181,7 +180,7 @@ public class TokenAi extends SpellAbilityAi {
     }
 
     @Override
-    protected boolean doTriggerAINoCost(AIPlayer ai, SpellAbility sa, boolean mandatory) {
+    protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
         readParameters(sa);
         final Card source = sa.getSourceCard();
         final Target tgt = sa.getTarget();

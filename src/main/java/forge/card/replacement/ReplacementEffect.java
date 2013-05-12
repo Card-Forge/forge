@@ -28,7 +28,7 @@ import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
 import forge.game.GameState;
 import forge.game.phase.PhaseType;
-import forge.game.player.AIPlayer;
+import forge.game.player.Player;
 import forge.util.Expressions;
 
 /**
@@ -67,7 +67,7 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
      * @param ai 
      * @return true, if successful
      */
-    public final boolean aiShouldRun(final SpellAbility sa, AIPlayer ai) {
+    public final boolean aiShouldRun(final SpellAbility sa, Player ai) {
         if (this.mapParams.containsKey("AICheckSVar")) {
             System.out.println("aiShouldRun?" + sa);
             final String svarToCheck = this.mapParams.get("AICheckSVar");

@@ -12,7 +12,7 @@ import forge.card.cost.Cost;
 import forge.card.spellability.AbilityActivated;
 import forge.card.spellability.AbilityManaPart;
 import forge.card.spellability.Target;
-import forge.game.player.AIPlayer;
+import forge.game.player.Player;
 
 public class AbilityApiBased extends AbilityActivated {
     private final SpellAbilityEffect effect;
@@ -64,11 +64,11 @@ public class AbilityApiBased extends AbilityActivated {
 
     @Override
     public boolean canPlayAI() {
-        return ai.canPlayAIWithSubs((AIPlayer)getActivatingPlayer(), this);
+        return ai.canPlayAIWithSubs(getActivatingPlayer(), this);
     }
 
     @Override
-    public boolean doTrigger(final boolean mandatory, AIPlayer aiPlayer) {
+    public boolean doTrigger(final boolean mandatory, Player aiPlayer) {
         return ai.doTriggerAI(aiPlayer, this, mandatory);
     }
 }

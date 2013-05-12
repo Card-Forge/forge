@@ -14239,7 +14239,6 @@ src/main/java/forge/game/phase/PhaseUtil.java svneol=native#text/plain
 src/main/java/forge/game/phase/Untap.java -text
 src/main/java/forge/game/phase/Upkeep.java svneol=native#text/plain
 src/main/java/forge/game/phase/package-info.java svneol=native#text/plain
-src/main/java/forge/game/player/AIPlayer.java svneol=native#text/plain
 src/main/java/forge/game/player/GameLossReason.java -text
 src/main/java/forge/game/player/HumanPlay.java -text
 src/main/java/forge/game/player/LobbyPlayer.java -text

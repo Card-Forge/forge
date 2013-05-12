@@ -10,12 +10,12 @@ import forge.card.spellability.Target;
 import forge.game.GameState;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
-import forge.game.player.AIPlayer;
+import forge.game.player.Player;
 
 public class CloneAi extends SpellAbilityAi {
 
     @Override
-    protected boolean canPlayAI(AIPlayer ai, SpellAbility sa) {
+    protected boolean canPlayAI(Player ai, SpellAbility sa) {
         final Target tgt = sa.getTarget();
         final Card source = sa.getSourceCard();
         final GameState game = source.getGame();
@@ -93,7 +93,7 @@ public class CloneAi extends SpellAbilityAi {
     } // end cloneCanPlayAI()
 
     @Override
-    public boolean chkAIDrawback(SpellAbility sa, AIPlayer aiPlayer) {
+    public boolean chkAIDrawback(SpellAbility sa, Player aiPlayer) {
         // AI should only activate this during Human's turn
         boolean chance = true;
 
@@ -106,7 +106,7 @@ public class CloneAi extends SpellAbilityAi {
     }
 
     @Override
-    protected boolean doTriggerAINoCost(AIPlayer aiPlayer, SpellAbility sa, boolean mandatory) {
+    protected boolean doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
 
         boolean chance = true;
 

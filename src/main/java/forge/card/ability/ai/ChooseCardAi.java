@@ -7,7 +7,7 @@ import forge.CardLists;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
-import forge.game.player.AIPlayer;
+import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
 public class ChooseCardAi extends SpellAbilityAi {
@@ -16,7 +16,7 @@ public class ChooseCardAi extends SpellAbilityAi {
      * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
      */
     @Override
-    protected boolean canPlayAI(AIPlayer ai, SpellAbility sa) {
+    protected boolean canPlayAI(Player ai, SpellAbility sa) {
         final Card host = sa.getSourceCard();
 
         final Target tgt = sa.getTarget();
@@ -62,7 +62,7 @@ public class ChooseCardAi extends SpellAbilityAi {
     }
 
     @Override
-    public boolean chkAIDrawback(SpellAbility sa, AIPlayer ai) {
+    public boolean chkAIDrawback(SpellAbility sa, Player ai) {
         return canPlayAI(ai, sa);
     }
 }

@@ -23,7 +23,7 @@ import org.apache.commons.lang3.StringUtils;
 import forge.Card;
 import forge.card.spellability.SpellAbility;
 import forge.game.GameState;
-import forge.game.player.AIPlayer;
+import forge.game.player.Player;
 
 /**
  * The Class CostPart.
@@ -163,7 +163,7 @@ public abstract class CostPart {
      *            {@link forge.card.cost.CostPayment}
      * @return true, if successful
      */
-    public abstract PaymentDecision decideAIPayment(final AIPlayer ai, SpellAbility ability, Card source);
+    public abstract PaymentDecision decideAIPayment(final Player ai, SpellAbility ability, Card source);
 
     /**
      * Pay ai.
@@ -178,7 +178,7 @@ public abstract class CostPart {
      *            {@link forge.card.cost.CostPayment}
      * @param game
      */
-    public abstract void payAI(final PaymentDecision decision, final AIPlayer ai, SpellAbility ability, Card source);
+    public abstract void payAI(final PaymentDecision decision, final Player ai, SpellAbility ability, Card source);
 
     /**
      * Pay human.

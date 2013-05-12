@@ -9,13 +9,13 @@ import forge.CardLists;
 import forge.CounterType;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.spellability.SpellAbility;
-import forge.game.player.AIPlayer;
+import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
 public class CountersProliferateAi extends SpellAbilityAi {
 
     @Override
-    protected boolean canPlayAI(AIPlayer ai, SpellAbility sa) {
+    protected boolean canPlayAI(Player ai, SpellAbility sa) {
         boolean chance = true;
 
         List<Card> cperms = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), new Predicate<Card>() {
@@ -49,7 +49,7 @@ public class CountersProliferateAi extends SpellAbilityAi {
     }
 
     @Override
-    protected boolean doTriggerAINoCost(AIPlayer aiPlayer, SpellAbility sa, boolean mandatory) {
+    protected boolean doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
         boolean chance = true;
 
         // TODO Make sure Human has poison counters or there are some counters
@@ -61,7 +61,7 @@ public class CountersProliferateAi extends SpellAbilityAi {
      * @see forge.card.abilityfactory.SpellAiLogic#chkAIDrawback(java.util.Map, forge.card.spellability.SpellAbility, forge.game.player.Player)
      */
     @Override
-    public boolean chkAIDrawback(SpellAbility sa, AIPlayer ai) {
+    public boolean chkAIDrawback(SpellAbility sa, Player ai) {
         return canPlayAI(ai, sa);
     }
 

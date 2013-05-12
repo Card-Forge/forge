@@ -59,7 +59,6 @@ import forge.game.ai.ComputerUtilCost;
 import forge.game.event.CardDestroyedEvent;
 import forge.game.event.CardRegeneratedEvent;
 import forge.game.event.CardSacrificedEvent;
-import forge.game.player.AIPlayer;
 import forge.game.player.GameLossReason;
 import forge.game.player.HumanPlay;
 import forge.game.player.Player;
@@ -529,7 +528,7 @@ public class GameAction {
                         exile(recoverable);
                 } else { // computer
                     if (ComputerUtilCost.canPayCost(abRecover, p)) {
-                        ComputerUtil.playNoStack((AIPlayer)p, abRecover, game);
+                        ComputerUtil.playNoStack(p, abRecover, game);
                     } else {
                         GameAction.this.exile(recoverable);
                     }
@@ -1453,9 +1452,9 @@ public class GameAction {
                                 final SpellAbility effect = AbilityFactory.getAbility(c.getSVar(effName), c);
                                 effect.setActivatingPlayer(p);
                                 // Is there a better way for the AI to decide this?
-                                if (effect.doTrigger(false, (AIPlayer)p)) {
+                                if (effect.doTrigger(false, p)) {
                                     GuiDialog.message("Computer reveals " + c.getName() + "(" + c.getUniqueNumber() + ").");
-                                    ComputerUtil.playNoStack((AIPlayer)p, effect, game);
+                                    ComputerUtil.playNoStack(p, effect, game);
                                 }
                             }
                         }

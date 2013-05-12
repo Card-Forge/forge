@@ -32,7 +32,6 @@ import forge.card.spellability.Target;
 import forge.game.GameState;
 import forge.game.ai.ComputerUtilCard;
 import forge.game.phase.PhaseType;
-import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
@@ -62,7 +61,7 @@ import forge.game.zone.ZoneType;
  */
 public class ControlGainAi extends SpellAbilityAi {
     @Override
-    protected boolean canPlayAI(AIPlayer ai, final SpellAbility sa) {
+    protected boolean canPlayAI(Player ai, final SpellAbility sa) {
         boolean hasCreature = false;
         boolean hasArtifact = false;
         boolean hasEnchantment = false;
@@ -170,7 +169,7 @@ public class ControlGainAi extends SpellAbilityAi {
     }
 
     @Override
-    protected boolean doTriggerAINoCost(AIPlayer ai, SpellAbility sa, boolean mandatory) {
+    protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
         if (sa.getTarget() == null) {
             if (mandatory) {
                 return true;
@@ -183,7 +182,7 @@ public class ControlGainAi extends SpellAbilityAi {
     }
 
     @Override
-    public boolean chkAIDrawback(SpellAbility sa, final AIPlayer ai) {
+    public boolean chkAIDrawback(SpellAbility sa, final Player ai) {
         final GameState game = ai.getGame();
         if ((sa.getTarget() == null) || !sa.getTarget().doesTarget()) {
             if (sa.hasParam("AllValid")) {

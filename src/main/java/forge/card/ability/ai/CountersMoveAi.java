@@ -11,7 +11,6 @@ import forge.card.ability.SpellAbilityAi;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.game.ai.ComputerUtilCard;
-import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
@@ -19,7 +18,7 @@ import forge.util.MyRandom;
 
 public class CountersMoveAi extends SpellAbilityAi {
     @Override
-    protected boolean canPlayAI(AIPlayer ai, SpellAbility sa) {
+    protected boolean canPlayAI(Player ai, SpellAbility sa) {
         // AI needs to be expanded, since this function can be pretty complex
         // based on what
         // the expected targets could be
@@ -47,7 +46,7 @@ public class CountersMoveAi extends SpellAbilityAi {
     } // moveCounterCanPlayAI
 
     @Override
-    protected boolean doTriggerAINoCost(AIPlayer ai, SpellAbility sa, boolean mandatory) {
+    protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
         final Card host = sa.getSourceCard();
         final Target abTgt = sa.getTarget();
         final String type = sa.getParam("CounterType");

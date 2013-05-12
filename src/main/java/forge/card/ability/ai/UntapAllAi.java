@@ -7,13 +7,13 @@ import forge.CardLists;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
-import forge.game.player.AIPlayer;
+import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
 public class UntapAllAi extends SpellAbilityAi {
 
     @Override
-    protected boolean canPlayAI(AIPlayer aiPlayer, SpellAbility sa) {
+    protected boolean canPlayAI(Player aiPlayer, SpellAbility sa) {
         final Card source = sa.getSourceCard();
 
         final AbilitySub abSub = sa.getSubAbility();
@@ -30,7 +30,7 @@ public class UntapAllAi extends SpellAbilityAi {
     }
 
     @Override
-    protected boolean doTriggerAINoCost(AIPlayer aiPlayer, SpellAbility sa, boolean mandatory) {
+    protected boolean doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
         return mandatory;
     }
 

@@ -13,7 +13,6 @@ import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilCost;
 import forge.game.ai.ComputerUtilMana;
 import forge.game.phase.PhaseType;
-import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
@@ -21,7 +20,7 @@ import forge.util.MyRandom;
 public class DiscardAi extends SpellAbilityAi {
 
     @Override
-    protected boolean canPlayAI(AIPlayer ai, SpellAbility sa) {
+    protected boolean canPlayAI(Player ai, SpellAbility sa) {
         final Target tgt = sa.getTarget();
         final Card source = sa.getSourceCard();
         final Cost abCost = sa.getPayCosts();
@@ -130,7 +129,7 @@ public class DiscardAi extends SpellAbilityAi {
 
 
     @Override
-    protected boolean doTriggerAINoCost(AIPlayer ai, SpellAbility sa, boolean mandatory) {
+    protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
         final Target tgt = sa.getTarget();
         if (tgt != null) {
             Player opp = ai.getOpponent();
@@ -156,7 +155,7 @@ public class DiscardAi extends SpellAbilityAi {
     } // discardTrigger()
 
     @Override
-    public boolean chkAIDrawback(SpellAbility sa, AIPlayer ai) {
+    public boolean chkAIDrawback(SpellAbility sa, Player ai) {
         // Drawback AI improvements
         // if parent draws cards, make sure cards in hand + cards drawn > 0
         final Target tgt = sa.getTarget();

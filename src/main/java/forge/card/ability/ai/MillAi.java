@@ -13,7 +13,6 @@ import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilCost;
 import forge.game.ai.ComputerUtilMana;
 import forge.game.phase.PhaseType;
-import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
@@ -21,7 +20,7 @@ import forge.util.MyRandom;
 public class MillAi extends SpellAbilityAi {
 
     @Override
-    protected boolean canPlayAI(AIPlayer ai, SpellAbility sa) {
+    protected boolean canPlayAI(Player ai, SpellAbility sa) {
         final Card source = sa.getSourceCard();
         final Cost abCost = sa.getPayCosts();
 
@@ -135,13 +134,13 @@ public class MillAi extends SpellAbilityAi {
     }
 
     @Override
-    public boolean chkAIDrawback(SpellAbility sa, AIPlayer aiPlayer) {
+    public boolean chkAIDrawback(SpellAbility sa, Player aiPlayer) {
         return targetAI(aiPlayer, sa, true);
     }
 
 
     @Override
-    protected boolean doTriggerAINoCost(AIPlayer aiPlayer, SpellAbility sa, boolean mandatory) {
+    protected boolean doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
         if (!targetAI(aiPlayer, sa, mandatory)) {
             return false;
         }

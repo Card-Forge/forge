@@ -73,7 +73,6 @@ import forge.control.input.InputSelectCardsFromList;
 import forge.game.ai.AiController;
 import forge.game.event.CardDamagedEvent;
 import forge.game.event.LifeLossEvent;
-import forge.game.player.AIPlayer;
 import forge.game.player.HumanPlay;
 import forge.game.player.Player;
 import forge.game.player.PlayerControllerAi;

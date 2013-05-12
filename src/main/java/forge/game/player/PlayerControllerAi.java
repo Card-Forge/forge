@@ -46,14 +46,14 @@ public class PlayerControllerAi extends PlayerController {
     private Input autoPassPriorityInput;
     
     private final AiController brains;
-    private final AIPlayer player;
+    private final Player player;
     
 
     public final Input getDefaultInput() {
         return defaultInput;
     }
 
-    public PlayerControllerAi(GameState game, AIPlayer p) {
+    public PlayerControllerAi(GameState game, Player p) {
         super(game);
         player = p;
         

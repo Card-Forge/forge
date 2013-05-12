@@ -25,7 +25,6 @@ import forge.Card;
 import forge.card.mana.ManaCost;
 import forge.card.spellability.SpellAbility;
 import forge.game.GameState;
-import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 
 /**
@@ -169,7 +168,7 @@ public class CostPayment {
      * 
      * @return a boolean.
      */
-    public final boolean payComputerCosts(final AIPlayer ai, final GameState game) {
+    public final boolean payComputerCosts(final Player ai, final GameState game) {
         // canPayAdditionalCosts now Player Agnostic
 
         // Just in case it wasn't set, but honestly it shouldn't have gotten

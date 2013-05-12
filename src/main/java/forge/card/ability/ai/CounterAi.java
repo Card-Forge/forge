@@ -11,13 +11,13 @@ import forge.game.GameState;
 import forge.game.ai.ComputerUtilCard;
 import forge.game.ai.ComputerUtilCost;
 import forge.game.ai.ComputerUtilMana;
-import forge.game.player.AIPlayer;
+import forge.game.player.Player;
 import forge.util.MyRandom;
 
 public class CounterAi extends SpellAbilityAi {
 
     @Override
-    protected boolean canPlayAI(AIPlayer ai, SpellAbility sa) {
+    protected boolean canPlayAI(Player ai, SpellAbility sa) {
         boolean toReturn = true;
         final Cost abCost = sa.getPayCosts();
         final Card source = sa.getSourceCard();
@@ -102,12 +102,12 @@ public class CounterAi extends SpellAbilityAi {
     }
 
     @Override
-    public boolean chkAIDrawback(SpellAbility sa, AIPlayer aiPlayer) {
+    public boolean chkAIDrawback(SpellAbility sa, Player aiPlayer) {
         return doTriggerAINoCost(aiPlayer, sa, true);
     }
 
     @Override
-    protected boolean doTriggerAINoCost(AIPlayer ai, SpellAbility sa, boolean mandatory) {
+    protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
 
         final Target tgt = sa.getTarget();
         if (tgt != null) {

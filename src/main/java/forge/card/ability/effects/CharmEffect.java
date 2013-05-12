@@ -9,7 +9,6 @@ import forge.card.ability.SpellAbilityEffect;
 import forge.card.ability.ai.CharmAi;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
-import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 import forge.gui.GuiChoose;
 
@@ -65,7 +64,7 @@ public class CharmEffect extends SpellAbilityEffect {
                 chooser = opponents.get(0);
             } else {
                 if (activator.isComputer()) {
-                    chooser = CharmAi.determineOpponentChooser((AIPlayer)activator, sa, opponents);
+                    chooser = CharmAi.determineOpponentChooser(activator, sa, opponents);
                 } else {
                     chooser = GuiChoose.one("Choose an opponent", opponents);
                 }
@@ -91,7 +90,7 @@ public class CharmEffect extends SpellAbilityEffect {
                 chosen.add(a);
             }
         } else {
-            chosen = CharmAi.chooseOptionsAi((AIPlayer)chooser, sa.isTrigger(), choices, num, min, !chooser.equals(activator));
+            chosen = CharmAi.chooseOptionsAi(chooser, sa.isTrigger(), choices, num, min, !chooser.equals(activator));
         }
 
         chainAbilities(sa, chosen);

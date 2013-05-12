@@ -18,7 +18,6 @@ import forge.game.ai.ComputerUtilCard;
 import forge.game.phase.CombatUtil;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
-import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
@@ -279,7 +278,7 @@ public abstract class TapAiBase extends SpellAbilityAi  {
     }
 
     @Override
-    protected boolean doTriggerAINoCost(AIPlayer ai, SpellAbility sa, boolean mandatory) {
+    protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
 
         final Target tgt = sa.getTarget();
         final Card source = sa.getSourceCard();
@@ -305,7 +304,7 @@ public abstract class TapAiBase extends SpellAbilityAi  {
     }
 
     @Override
-    public boolean chkAIDrawback(SpellAbility sa, AIPlayer ai) {
+    public boolean chkAIDrawback(SpellAbility sa, Player ai) {
         final Target tgt = sa.getTarget();
         final Card source = sa.getSourceCard();
 

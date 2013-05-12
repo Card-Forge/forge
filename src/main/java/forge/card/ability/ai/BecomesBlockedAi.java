@@ -11,13 +11,13 @@ import forge.card.spellability.Target;
 import forge.game.GameState;
 import forge.game.ai.ComputerUtilCard;
 import forge.game.phase.PhaseType;
-import forge.game.player.AIPlayer;
+import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
 public class BecomesBlockedAi extends SpellAbilityAi {
 
     @Override
-    protected boolean canPlayAI(AIPlayer aiPlayer, SpellAbility sa) {
+    protected boolean canPlayAI(Player aiPlayer, SpellAbility sa) {
         final Card source = sa.getSourceCard();
         final Target tgt = sa.getTarget();
         final GameState game = aiPlayer.getGame();
@@ -52,7 +52,7 @@ public class BecomesBlockedAi extends SpellAbilityAi {
     }
 
     @Override
-    public boolean chkAIDrawback(SpellAbility sa, AIPlayer aiPlayer) {
+    public boolean chkAIDrawback(SpellAbility sa, Player aiPlayer) {
 
         // TODO - implement AI
         return false;
@@ -62,7 +62,7 @@ public class BecomesBlockedAi extends SpellAbilityAi {
      * @see forge.card.abilityfactory.SpellAiLogic#doTriggerAINoCost(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility, boolean)
      */
     @Override
-    protected boolean doTriggerAINoCost(AIPlayer aiPlayer, SpellAbility sa, boolean mandatory) {
+    protected boolean doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
         boolean chance;
 
         // TODO - implement AI

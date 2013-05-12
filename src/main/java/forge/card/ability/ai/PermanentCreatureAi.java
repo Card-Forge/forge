@@ -12,7 +12,7 @@ import forge.card.spellability.SpellAbility;
 import forge.game.GameState;
 import forge.game.ai.ComputerUtil;
 import forge.game.phase.PhaseType;
-import forge.game.player.AIPlayer;
+import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
 /** 
@@ -25,7 +25,7 @@ public class PermanentCreatureAi extends SpellAbilityAi {
      * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, forge.card.spellability.SpellAbility)
      */
     @Override
-    protected boolean canPlayAI(AIPlayer aiPlayer, SpellAbility sa) {
+    protected boolean canPlayAI(Player aiPlayer, SpellAbility sa) {
         String logic = sa.getParam("AILogic");
         GameState game = aiPlayer.getGame();
 

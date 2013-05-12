@@ -24,7 +24,6 @@ import forge.Card;
 import forge.card.ability.AbilityUtils;
 import forge.card.spellability.SpellAbility;
 import forge.game.GameState;
-import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 import forge.gui.GuiChoose;
 
@@ -99,7 +98,7 @@ public class CostGainLife extends CostPart {
      * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final void payAI(final PaymentDecision decision, final AIPlayer ai, SpellAbility ability, Card source) {
+    public final void payAI(final PaymentDecision decision, final Player ai, SpellAbility ability, Card source) {
         int playersLeft = cntPlayers;
         for (final Player opp : getPotentialTargets(ai, source)) {
             if (opp.canGainLife() && playersLeft > 0) {
@@ -170,7 +169,7 @@ public class CostGainLife extends CostPart {
      * , forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final PaymentDecision decideAIPayment(final AIPlayer ai, final SpellAbility ability, final Card source) {
+    public final PaymentDecision decideAIPayment(final Player ai, final SpellAbility ability, final Card source) {
         Integer c = this.convertAmount();
         if (c == null) {
             final String sVar = ability.getSVar(this.getAmount());

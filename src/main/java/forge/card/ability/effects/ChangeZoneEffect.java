@@ -23,7 +23,6 @@ import forge.card.trigger.TriggerType;
 import forge.control.input.InputSelectCardsFromList;
 import forge.game.GameState;
 import forge.game.ai.ComputerUtilCard;
-import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
@@ -595,7 +594,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             if (decider == null) {
                 decider = player;
             }
-            if (decider instanceof AIPlayer) {
+            if (decider.isComputer()) {
                 ChangeZoneAi.hiddenOriginResolveAI(decider, sa, player);
             } else {
                 changeHiddenOriginResolveHuman(decider, sa, player);

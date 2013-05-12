@@ -9,7 +9,6 @@ import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.game.ai.ComputerUtilMana;
-import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
@@ -17,7 +16,7 @@ import forge.util.MyRandom;
 public class DigUntilAi extends SpellAbilityAi {
 
     @Override
-    protected boolean canPlayAI(AIPlayer ai, SpellAbility sa) {
+    protected boolean canPlayAI(Player ai, SpellAbility sa) {
         Card source = sa.getSourceCard();
         double chance = .4; // 40 percent chance with instant speed stuff
         if (SpellAbilityAi.isSorcerySpeed(sa)) {
@@ -69,7 +68,7 @@ public class DigUntilAi extends SpellAbilityAi {
     }
 
     @Override
-    protected boolean doTriggerAINoCost(AIPlayer ai, SpellAbility sa, boolean mandatory) {
+    protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
 
         final Target tgt = sa.getTarget();
 

@@ -6,12 +6,11 @@ import forge.card.spellability.SpellAbility;
 import forge.game.ai.ComputerUtilCost;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
-import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 
 public abstract class SpellAbilityAi {
 
-    public final boolean canPlayAIWithSubs(final AIPlayer aiPlayer, final SpellAbility sa) {
+    public final boolean canPlayAIWithSubs(final Player aiPlayer, final SpellAbility sa) {
         if (!canPlayAI(aiPlayer, sa)) {
             return false;
         }
@@ -19,9 +18,9 @@ public abstract class SpellAbilityAi {
         return subAb == null || chkDrawbackWithSubs(aiPlayer,  subAb);
     }
 
-    protected abstract boolean canPlayAI(final AIPlayer aiPlayer, final SpellAbility sa);
+    protected abstract boolean canPlayAI(final Player aiPlayer, final SpellAbility sa);
 
-    public final boolean doTriggerAI(final AIPlayer aiPlayer, final SpellAbility sa, final boolean mandatory) {
+    public final boolean doTriggerAI(final Player aiPlayer, final SpellAbility sa, final boolean mandatory) {
         if (!ComputerUtilCost.canPayCost(sa, aiPlayer) && !mandatory) {
             return false;
         }
@@ -29,7 +28,7 @@ public abstract class SpellAbilityAi {
         return doTriggerNoCostWithSubs(aiPlayer, sa, mandatory);
     }
 
-    public final boolean doTriggerNoCostWithSubs(final AIPlayer aiPlayer, final SpellAbility sa, final boolean mandatory)
+    public final boolean doTriggerNoCostWithSubs(final Player aiPlayer, final SpellAbility sa, final boolean mandatory)
     {
         if (!doTriggerAINoCost(aiPlayer, sa, mandatory)) {
             return false;
@@ -38,11 +37,11 @@ public abstract class SpellAbilityAi {
         return subAb == null || chkDrawbackWithSubs(aiPlayer,  subAb) || mandatory;
     }
 
-    protected boolean doTriggerAINoCost(final AIPlayer aiPlayer, final SpellAbility sa, final boolean mandatory) {
+    protected boolean doTriggerAINoCost(final Player aiPlayer, final SpellAbility sa, final boolean mandatory) {
         return canPlayAI(aiPlayer, sa) || mandatory;
     }
 
-    public boolean chkAIDrawback(final SpellAbility sa, final AIPlayer aiPlayer) {
+    public boolean chkAIDrawback(final SpellAbility sa, final Player aiPlayer) {
         return true;
     }
 
@@ -100,7 +99,7 @@ public abstract class SpellAbilityAi {
      * @param subAb
      * @return
      */
-    public boolean chkDrawbackWithSubs(AIPlayer aiPlayer, AbilitySub ab) {
+    public boolean chkDrawbackWithSubs(Player aiPlayer, AbilitySub ab) {
         final AbilitySub subAb = ab.getSubAbility();
         return ab.getAi().chkAIDrawback(ab, aiPlayer) && (subAb == null || chkDrawbackWithSubs(aiPlayer, subAb));  
     }

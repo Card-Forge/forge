@@ -5,12 +5,12 @@ import forge.card.ability.SpellAbilityAi;
 import forge.card.spellability.SpellAbility;
 import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilCombat;
-import forge.game.player.AIPlayer;
+import forge.game.player.Player;
 
 public class StoreSVarAi extends SpellAbilityAi {
 
     @Override
-    protected boolean canPlayAI(AIPlayer ai, SpellAbility sa) {
+    protected boolean canPlayAI(Player ai, SpellAbility sa) {
         //Tree of Redemption
 
         final Card source = sa.getSourceCard();
@@ -23,7 +23,7 @@ public class StoreSVarAi extends SpellAbilityAi {
     }
 
     @Override
-    protected boolean doTriggerAINoCost(AIPlayer aiPlayer, SpellAbility sa, boolean mandatory) {
+    protected boolean doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
 
         return true;
     }

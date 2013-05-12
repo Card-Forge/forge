@@ -10,7 +10,7 @@ import forge.card.ability.SpellAbilityAi;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.game.GameState;
-import forge.game.player.AIPlayer;
+import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
 
@@ -20,7 +20,7 @@ public class PhasesAi extends SpellAbilityAi {
      * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
      */
     @Override
-    protected boolean canPlayAI(AIPlayer aiPlayer, SpellAbility sa) {
+    protected boolean canPlayAI(Player aiPlayer, SpellAbility sa) {
         // This still needs to be fleshed out
         final Target tgt = sa.getTarget();
         final Card source = sa.getSourceCard();
@@ -50,7 +50,7 @@ public class PhasesAi extends SpellAbilityAi {
     }
 
     @Override
-    protected boolean doTriggerAINoCost(AIPlayer aiPlayer, SpellAbility sa, boolean mandatory) {
+    protected boolean doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
         final Target tgt = sa.getTarget();
 
         if (tgt == null) {
@@ -68,7 +68,7 @@ public class PhasesAi extends SpellAbilityAi {
     }
 
     @Override
-    public boolean chkAIDrawback(SpellAbility sa, AIPlayer aiPlayer) {
+    public boolean chkAIDrawback(SpellAbility sa, Player aiPlayer) {
         final Target tgt = sa.getTarget();
 
         boolean randomReturn = true;

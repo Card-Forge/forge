@@ -18,14 +18,13 @@ import forge.game.ai.ComputerUtilCombat;
 import forge.game.ai.ComputerUtilCost;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
-import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
 public class DamagePreventAi extends SpellAbilityAi {
 
     @Override
-    protected boolean canPlayAI(AIPlayer ai, SpellAbility sa) {
+    protected boolean canPlayAI(Player ai, SpellAbility sa) {
         final Card hostCard = sa.getSourceCard();
         final GameState game = ai.getGame();
         boolean chance = false;
@@ -150,7 +149,7 @@ public class DamagePreventAi extends SpellAbilityAi {
     }
 
     @Override
-    protected boolean doTriggerAINoCost(AIPlayer ai, SpellAbility sa, boolean mandatory) {
+    protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
         boolean chance = false;
         final Target tgt = sa.getTarget();
         if (tgt == null) {

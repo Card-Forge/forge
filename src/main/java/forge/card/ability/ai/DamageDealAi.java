@@ -22,14 +22,13 @@ import forge.game.ai.ComputerUtilCost;
 import forge.game.ai.ComputerUtilMana;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
-import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
 
 public class DamageDealAi extends DamageAiBase {
     @Override
-    public boolean chkAIDrawback(SpellAbility sa, AIPlayer ai) {
+    public boolean chkAIDrawback(SpellAbility sa, Player ai) {
         final String damage = sa.getParam("NumDmg");
         int dmg = AbilityUtils.calculateAmount(sa.getSourceCard(), damage, sa);
 
@@ -47,7 +46,7 @@ public class DamageDealAi extends DamageAiBase {
     }
 
     @Override
-    protected boolean canPlayAI(AIPlayer ai, SpellAbility sa) {
+    protected boolean canPlayAI(Player ai, SpellAbility sa) {
 
         final Cost abCost = sa.getPayCosts();
         final Card source = sa.getSourceCard();
@@ -204,7 +203,7 @@ public class DamageDealAi extends DamageAiBase {
      *            a int.
      * @return a boolean.
      */
-    private boolean damageTargetAI(final AIPlayer ai, final SpellAbility saMe, final int dmg) {
+    private boolean damageTargetAI(final Player ai, final SpellAbility saMe, final int dmg) {
         final Target tgt = saMe.getTarget();
 
         if (tgt == null) {
@@ -354,7 +353,7 @@ public class DamageDealAi extends DamageAiBase {
      *            a int.
      * @return a boolean.
      */
-    private boolean damageChooseNontargeted(AIPlayer ai, final SpellAbility saMe, final int dmg) {
+    private boolean damageChooseNontargeted(Player ai, final SpellAbility saMe, final int dmg) {
         // TODO: Improve circumstances where the Defined Damage is unwanted
         final ArrayList<Object> objects = AbilityUtils.getDefinedObjects(saMe.getSourceCard(), saMe.getParam("Defined"), saMe);
         boolean urgent = false; // can it wait?
@@ -451,7 +450,7 @@ public class DamageDealAi extends DamageAiBase {
     }
 
     @Override
-    protected boolean doTriggerAINoCost(AIPlayer ai, SpellAbility sa, boolean mandatory) {
+    protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
 
         final Card source = sa.getSourceCard();
         final String damage = sa.getParam("NumDmg");

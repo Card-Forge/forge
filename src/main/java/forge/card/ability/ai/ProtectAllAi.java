@@ -6,12 +6,12 @@ import forge.card.ability.SpellAbilityAi;
 import forge.card.cost.Cost;
 import forge.card.spellability.SpellAbility;
 import forge.game.ai.ComputerUtilCost;
-import forge.game.player.AIPlayer;
+import forge.game.player.Player;
 
 public class ProtectAllAi extends SpellAbilityAi {
 
     @Override
-    protected boolean canPlayAI(AIPlayer ai, SpellAbility sa) {
+    protected boolean canPlayAI(Player ai, SpellAbility sa) {
         final Card hostCard = sa.getSourceCard();
         // if there is no target and host card isn't in play, don't activate
         if ((sa.getTarget() == null) && !hostCard.isInPlay()) {
@@ -42,7 +42,7 @@ public class ProtectAllAi extends SpellAbilityAi {
 
 
     @Override
-    protected boolean doTriggerAINoCost(AIPlayer aiPlayer, SpellAbility sa, boolean mandatory) {
+    protected boolean doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
         return true;
     }
 }

@@ -46,7 +46,6 @@ import forge.game.GameActionUtil;
 import forge.game.GameState;
 import forge.game.phase.CombatUtil;
 import forge.game.phase.PhaseType;
-import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
@@ -63,14 +62,14 @@ import forge.util.MyRandom;
  */
 public class AiController {
 
-    private final AIPlayer player;
+    private final Player player;
     private final GameState game;
     public GameState getGame()
     {
         return game;
     }
 
-    public AIPlayer getPlayer()
+    public Player getPlayer()
     {
         return player;
     }
@@ -80,7 +79,7 @@ public class AiController {
      * Constructor for ComputerAI_General.
      * </p>
      */
-    public AiController(final AIPlayer computerPlayer, final GameState game0) {
+    public AiController(final Player computerPlayer, final GameState game0) {
         player = computerPlayer;
         game = game0;
     }

@@ -26,7 +26,6 @@ import forge.game.GameState;
 import forge.game.GameType;
 import forge.game.MatchController;
 import forge.game.ai.ComputerUtil;
-import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
@@ -100,12 +99,11 @@ public class InputMulligan extends InputBase {
         // Computer mulligan
         final GameState game = match.getCurrentGame();
         for (Player p : game.getPlayers()) {
-            if (!(p instanceof AIPlayer)) {
+            if (!p.isComputer()) {
                 continue;
             }
-            AIPlayer ai = (AIPlayer) p;
-            while (ComputerUtil.wantMulligan(ai)) {
-                ai.doMulligan();
+            while (ComputerUtil.wantMulligan(p)) {
+                p.doMulligan();
             }
         }
 

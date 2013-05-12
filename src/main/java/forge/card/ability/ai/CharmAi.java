@@ -10,14 +10,13 @@ import forge.card.ability.SpellAbilityAi;
 import forge.card.ability.effects.CharmEffect;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
-import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 import forge.util.MyRandom;
 
 public class CharmAi extends SpellAbilityAi {
 
     @Override
-    protected boolean canPlayAI(AIPlayer ai, SpellAbility sa) {
+    protected boolean canPlayAI(Player ai, SpellAbility sa) {
         final Random r = MyRandom.getRandom();
 
         final int num = Integer.parseInt(sa.hasParam("CharmNum") ? sa.getParam("CharmNum") : "1");
@@ -35,7 +34,7 @@ public class CharmAi extends SpellAbilityAi {
         return r.nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn());
     }
 
-    public static List<AbilitySub> chooseOptionsAi(final AIPlayer ai, boolean playNow, List<AbilitySub> choices, int num, int min, boolean opponentChoser) {
+    public static List<AbilitySub> chooseOptionsAi(final Player ai, boolean playNow, List<AbilitySub> choices, int num, int min, boolean opponentChoser) {
         List<AbilitySub> chosenList = new ArrayList<AbilitySub>();
 
         if (opponentChoser) {
@@ -69,7 +68,7 @@ public class CharmAi extends SpellAbilityAi {
         return chosenList.size() >= min ? chosenList : null;
     }
     
-    public static Player determineOpponentChooser(AIPlayer ai, SpellAbility sa, List<Player> opponents) {
+    public static Player determineOpponentChooser(Player ai, SpellAbility sa, List<Player> opponents) {
         return opponents.get(RandomUtils.nextInt(opponents.size()));
     }
     

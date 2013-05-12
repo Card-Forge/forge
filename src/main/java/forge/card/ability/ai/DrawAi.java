@@ -36,7 +36,6 @@ import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilCost;
 import forge.game.ai.ComputerUtilMana;
 import forge.game.phase.PhaseType;
-import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
@@ -44,7 +43,7 @@ import forge.util.MyRandom;
 public class DrawAi extends SpellAbilityAi {
 
     @Override
-    public boolean chkAIDrawback(SpellAbility sa, AIPlayer ai) {
+    public boolean chkAIDrawback(SpellAbility sa, Player ai) {
         return targetAI(ai, sa, false);
     }
 
@@ -52,7 +51,7 @@ public class DrawAi extends SpellAbilityAi {
      * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
      */
     @Override
-    protected boolean canPlayAI(AIPlayer ai, SpellAbility sa) {
+    protected boolean canPlayAI(Player ai, SpellAbility sa) {
         final Target tgt = sa.getTarget();
         final Card source = sa.getSourceCard();
         final Cost abCost = sa.getPayCosts();
@@ -72,7 +71,7 @@ public class DrawAi extends SpellAbilityAi {
                 for (final CostPart part : abCost.getCostParts()) {
                     if (part instanceof CostDiscard) {
                         CostDiscard cd = (CostDiscard) part;
-                        PaymentDecision decision = cd.decideAIPayment((AIPlayer) ai, sa, sa.getSourceCard());
+                        PaymentDecision decision = cd.decideAIPayment(ai, sa, sa.getSourceCard());
                         if ( null == decision )
                             return false;
                         for (Card discard : decision.cards) {
@@ -265,7 +264,7 @@ public class DrawAi extends SpellAbilityAi {
 
 
     @Override
-    protected boolean doTriggerAINoCost(AIPlayer ai, SpellAbility sa, boolean mandatory) {
+    protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
         return targetAI(ai, sa, mandatory);
     }
 

@@ -11,7 +11,7 @@ import forge.card.ability.SpellAbilityAi;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.game.ai.ComputerUtilCombat;
-import forge.game.player.AIPlayer;
+import forge.game.player.Player;
 import forge.util.MyRandom;
 
 public class FightAi extends SpellAbilityAi {
@@ -20,7 +20,7 @@ public class FightAi extends SpellAbilityAi {
      * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
      */
     @Override
-    protected boolean canPlayAI(AIPlayer ai, SpellAbility sa) {
+    protected boolean canPlayAI(Player ai, SpellAbility sa) {
         Target tgt = sa.getTarget();
         tgt.resetTargets();
 
@@ -87,7 +87,7 @@ public class FightAi extends SpellAbilityAi {
      * @see forge.card.abilityfactory.SpellAiLogic#doTriggerAINoCost(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility, boolean)
      */
     @Override
-    protected boolean doTriggerAINoCost(AIPlayer aiPlayer, SpellAbility sa, boolean mandatory) {
+    protected boolean doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
         return false;
     }
 

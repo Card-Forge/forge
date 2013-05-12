@@ -27,7 +27,6 @@ import forge.card.spellability.SpellAbility;
 import forge.control.input.InputPayment;
 import forge.game.GameState;
 import forge.game.ai.ComputerUtilCard;
-import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.match.CMatchUI;
@@ -215,7 +214,7 @@ public class CostPutCounter extends CostPartWithList {
      * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public void payAI(PaymentDecision decision, AIPlayer ai, SpellAbility ability, Card source) {
+    public void payAI(PaymentDecision decision, Player ai, SpellAbility ability, Card source) {
         Integer c = getNumberOfCounters(ability);
 
         if (this.payCostFromSource()) {
@@ -285,7 +284,7 @@ public class CostPutCounter extends CostPartWithList {
      * @see forge.card.cost.CostPart#decideAIPayment(forge.game.player.AIPlayer, forge.card.spellability.SpellAbility, forge.Card)
      */
     @Override
-    public PaymentDecision decideAIPayment(AIPlayer ai, SpellAbility ability, Card source) {
+    public PaymentDecision decideAIPayment(Player ai, SpellAbility ability, Card source) {
 
         if (this.payCostFromSource()) {
             return new PaymentDecision(source);

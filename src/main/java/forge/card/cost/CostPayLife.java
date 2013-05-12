@@ -21,7 +21,6 @@ import forge.Card;
 import forge.card.ability.AbilityUtils;
 import forge.card.spellability.SpellAbility;
 import forge.game.GameState;
-import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 import forge.gui.GuiDialog;
 
@@ -98,7 +97,7 @@ public class CostPayLife extends CostPart {
      * @see forge.card.cost.CostPart#payAI(forge.card.cost.PaymentDecision, forge.game.player.AIPlayer, forge.card.spellability.SpellAbility, forge.Card)
      */
     @Override
-    public void payAI(PaymentDecision decision, AIPlayer ai, SpellAbility ability, Card source) {
+    public void payAI(PaymentDecision decision, Player ai, SpellAbility ability, Card source) {
         // TODO Auto-generated method stub
         paidAmount = decision.c;
         ai.payLife(paidAmount, null);
@@ -150,7 +149,7 @@ public class CostPayLife extends CostPart {
      * @see forge.card.cost.CostPart#decideAIPayment(forge.game.player.AIPlayer, forge.card.spellability.SpellAbility, forge.Card)
      */
     @Override
-    public PaymentDecision decideAIPayment(AIPlayer ai, SpellAbility ability, Card source) {
+    public PaymentDecision decideAIPayment(Player ai, SpellAbility ability, Card source) {
         Integer c = this.convertAmount();
         if (c == null) {
             final String sVar = ability.getSVar(this.getAmount());

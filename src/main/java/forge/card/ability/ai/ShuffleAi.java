@@ -2,11 +2,11 @@ package forge.card.ability.ai;
 
 import forge.card.ability.SpellAbilityAi;
 import forge.card.spellability.SpellAbility;
-import forge.game.player.AIPlayer;
+import forge.game.player.Player;
 
 public class ShuffleAi extends SpellAbilityAi {
     @Override
-    protected boolean canPlayAI(AIPlayer aiPlayer, SpellAbility sa) {
+    protected boolean canPlayAI(Player aiPlayer, SpellAbility sa) {
         // not really sure when the compy would use this; maybe only after a
         // human
         // deliberately put a card on top of their library
@@ -27,7 +27,7 @@ public class ShuffleAi extends SpellAbilityAi {
     }
 
     @Override
-    public boolean chkAIDrawback(SpellAbility sa, AIPlayer aiPlayer) {
+    public boolean chkAIDrawback(SpellAbility sa, Player aiPlayer) {
         return shuffleTargetAI(/*sa, false, false*/);
     }
 
@@ -40,7 +40,7 @@ public class ShuffleAi extends SpellAbilityAi {
     } // shuffleTargetAI()
 
     @Override
-    protected boolean doTriggerAINoCost(AIPlayer aiPlayer, SpellAbility sa, boolean mandatory) {
+    protected boolean doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
         if (!shuffleTargetAI(/*sa, false, mandatory*/)) {
             return false;
         }

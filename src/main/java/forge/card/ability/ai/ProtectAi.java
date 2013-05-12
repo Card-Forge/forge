@@ -18,7 +18,6 @@ import forge.game.ai.ComputerUtilCard;
 import forge.game.ai.ComputerUtilCombat;
 import forge.game.ai.ComputerUtilCost;
 import forge.game.phase.PhaseType;
-import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
@@ -110,7 +109,7 @@ public class ProtectAi extends SpellAbilityAi {
     } // getProtectCreatures()
 
     @Override
-    protected boolean canPlayAI(AIPlayer ai, SpellAbility sa) {
+    protected boolean canPlayAI(Player ai, SpellAbility sa) {
         final Card hostCard = sa.getSourceCard();
         final GameState game = ai.getGame();
         // if there is no target and host card isn't in play, don't activate
@@ -344,7 +343,7 @@ public class ProtectAi extends SpellAbilityAi {
     } // protectMandatoryTarget()
 
     @Override
-    protected boolean doTriggerAINoCost(AIPlayer ai, SpellAbility sa, boolean mandatory) {
+    protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
         if (sa.getTarget() == null) {
             if (mandatory) {
                 return true;
@@ -357,7 +356,7 @@ public class ProtectAi extends SpellAbilityAi {
     } // protectTriggerAI
 
     @Override
-    public boolean chkAIDrawback(SpellAbility sa, AIPlayer ai) {
+    public boolean chkAIDrawback(SpellAbility sa, Player ai) {
         final Card host = sa.getSourceCard();
         if ((sa.getTarget() == null) || !sa.getTarget().doesTarget()) {
             if (host.isCreature()) {

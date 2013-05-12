@@ -25,7 +25,6 @@ import forge.game.GameActionUtil;
 import forge.game.GameState;
 import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilCost;
-import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.util.Expressions;
@@ -1109,7 +1108,7 @@ public class AbilityUtils {
             ability.setActivatingPlayer(payer);
             if (payer.isComputer()) {
                 if (ComputerUtilCost.willPayUnlessCost(sa, payer, ability, paid, payers)) {
-                    ComputerUtil.playNoStack((AIPlayer) payer, ability, game); // Unless cost was payed - no resolve
+                    ComputerUtil.playNoStack(payer, ability, game); // Unless cost was payed - no resolve
                     paid = true;
                 }
             } else {

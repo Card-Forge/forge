@@ -3,7 +3,7 @@ package forge.card.ability.ai;
 
 import forge.card.ability.SpellAbilityAi;
 import forge.card.spellability.SpellAbility;
-import forge.game.player.AIPlayer;
+import forge.game.player.Player;
 
 public class CanPlayAsDrawbackAi extends SpellAbilityAi {
 
@@ -11,7 +11,7 @@ public class CanPlayAsDrawbackAi extends SpellAbilityAi {
      * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
      */
     @Override
-    protected boolean canPlayAI(AIPlayer aiPlayer, SpellAbility sa) {
+    protected boolean canPlayAI(Player aiPlayer, SpellAbility sa) {
         return false;
     }
 
@@ -29,7 +29,7 @@ public class CanPlayAsDrawbackAi extends SpellAbilityAi {
      * @return a boolean.
      */
     @Override
-    protected boolean doTriggerAINoCost(AIPlayer aiPlayer, SpellAbility sa, boolean mandatory) {
+    protected boolean doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
         return false;
     }
 

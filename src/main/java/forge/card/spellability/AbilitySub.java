@@ -30,7 +30,7 @@ import forge.card.ability.effects.ManaEffect;
 import forge.card.ability.effects.ManaReflectedEffect;
 import forge.card.cardfactory.CardFactory;
 import forge.card.cost.Cost;
-import forge.game.player.AIPlayer;
+import forge.game.player.Player;
 
 /**
  * <p>
@@ -122,7 +122,7 @@ public final class AbilitySub extends SpellAbility implements java.io.Serializab
 
     @Override
     public boolean canPlayAI() {
-        return ai.canPlayAIWithSubs((AIPlayer)getActivatingPlayer(), this);
+        return ai.canPlayAIWithSubs(getActivatingPlayer(), this);
     }
 
     @Override
@@ -131,7 +131,7 @@ public final class AbilitySub extends SpellAbility implements java.io.Serializab
     }
 
     @Override
-    public boolean doTrigger(final boolean mandatory, AIPlayer aiPlayer) {
+    public boolean doTrigger(final boolean mandatory, Player aiPlayer) {
         return ai.doTriggerAI(aiPlayer, this, mandatory);
     }
 }

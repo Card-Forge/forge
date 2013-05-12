@@ -43,7 +43,6 @@ import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilCost;
 import forge.game.ai.ComputerUtilMana;
 import forge.game.phase.PhaseType;
-import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
@@ -144,7 +143,7 @@ public class SpellPermanent extends Spell {
         if (mandatory) {
             return true;
         }
-        final AIPlayer ai = (AIPlayer) getActivatingPlayer();
+        final Player ai = getActivatingPlayer();
         final Card card = this.getSourceCard();
         ManaCost mana = this.getPayCosts().getTotalMana();
         final Cost cost = this.getPayCosts();
@@ -210,11 +209,11 @@ public class SpellPermanent extends Spell {
         return super.canPlayAI();
     }
 
-    public static boolean checkETBEffects(final Card card, final AIPlayer ai) {
+    public static boolean checkETBEffects(final Card card, final Player ai) {
         return checkETBEffects(card, null, null, ai);
     }
 
-    public static boolean checkETBEffects(final Card card, final SpellAbility sa, final ApiType api, final AIPlayer ai) {
+    public static boolean checkETBEffects(final Card card, final SpellAbility sa, final ApiType api, final Player ai) {
         boolean rightapi = false;
         final GameState game = ai.getGame();
 

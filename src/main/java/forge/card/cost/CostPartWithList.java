@@ -23,7 +23,7 @@ import java.util.List;
 import forge.Card;
 import forge.CardUtil;
 import forge.card.spellability.SpellAbility;
-import forge.game.player.AIPlayer;
+import forge.game.player.Player;
 
 /**
  * The Class CostPartWithList.
@@ -122,7 +122,7 @@ public abstract class CostPartWithList extends CostPart {
     public abstract String getHashForList();
     
     @Override
-    public void payAI(PaymentDecision decision, AIPlayer ai, SpellAbility ability, Card source) {
+    public void payAI(PaymentDecision decision, Player ai, SpellAbility ability, Card source) {
         executePayment(ability, decision.cards);
         reportPaidCardsTo(ability);
     }

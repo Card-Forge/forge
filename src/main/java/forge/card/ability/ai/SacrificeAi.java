@@ -11,7 +11,6 @@ import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.game.ai.ComputerUtilCard;
 import forge.game.ai.ComputerUtilMana;
-import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
@@ -21,20 +20,20 @@ public class SacrificeAi extends SpellAbilityAi {
     // **************************************************************
 
     @Override
-    protected boolean canPlayAI(AIPlayer ai, SpellAbility sa) {
+    protected boolean canPlayAI(Player ai, SpellAbility sa) {
 
         return sacrificeTgtAI(ai, sa);
     }
 
     @Override
-    public boolean chkAIDrawback(SpellAbility sa, AIPlayer ai) {
+    public boolean chkAIDrawback(SpellAbility sa, Player ai) {
         // AI should only activate this during Human's turn
 
         return sacrificeTgtAI(ai, sa);
     }
 
     @Override
-    protected boolean doTriggerAINoCost(AIPlayer ai, SpellAbility sa, boolean mandatory) {
+    protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
         // AI should only activate this during Human's turn
         boolean chance = sacrificeTgtAI(ai, sa);
 

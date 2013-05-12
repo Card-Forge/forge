@@ -23,7 +23,6 @@ import forge.Card;
 import forge.CardLists;
 import forge.card.spellability.SpellAbility;
 import forge.game.GameState;
-import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 import forge.gui.GuiDialog;
 
@@ -146,7 +145,7 @@ public class CostUnattach extends CostPartWithList {
      * @see forge.card.cost.CostPart#decideAIPayment(forge.game.player.AIPlayer, forge.card.spellability.SpellAbility, forge.Card)
      */
     @Override
-    public PaymentDecision decideAIPayment(AIPlayer ai, SpellAbility ability, Card source) {
+    public PaymentDecision decideAIPayment(Player ai, SpellAbility ability, Card source) {
         Card cardToUnattach = findCardToUnattach(source, (Player) ai, ability);
         if (cardToUnattach == null) {
             // We really shouldn't be able to get here if there's nothing to unattach

@@ -11,14 +11,13 @@ import forge.card.ability.SpellAbilityAi;
 import forge.card.spellability.SpellAbility;
 import forge.game.phase.CombatUtil;
 import forge.game.phase.PhaseType;
-import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
 
 public class DebuffAllAi extends SpellAbilityAi {
     @Override
-    protected boolean canPlayAI(AIPlayer ai, SpellAbility sa) {
+    protected boolean canPlayAI(Player ai, SpellAbility sa) {
         String valid = "";
         final Random r = MyRandom.getRandom();
         // final Card source = sa.getSourceCard();
@@ -60,7 +59,7 @@ public class DebuffAllAi extends SpellAbilityAi {
     } // debuffAllCanPlayAI()
 
     @Override
-    protected boolean doTriggerAINoCost(AIPlayer aiPlayer, SpellAbility sa, boolean mandatory) {
+    protected boolean doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
         return true;
     }
 }

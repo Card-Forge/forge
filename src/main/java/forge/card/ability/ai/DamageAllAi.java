@@ -17,7 +17,6 @@ import forge.game.ai.ComputerUtilCard;
 import forge.game.ai.ComputerUtilCombat;
 import forge.game.ai.ComputerUtilCost;
 import forge.game.ai.ComputerUtilMana;
-import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
@@ -25,7 +24,7 @@ import forge.util.MyRandom;
 public class  DamageAllAi extends SpellAbilityAi {
 
     @Override
-    protected boolean canPlayAI(AIPlayer ai, SpellAbility sa) {
+    protected boolean canPlayAI(Player ai, SpellAbility sa) {
         // AI needs to be expanded, since this function can be pretty complex
         // based on what the expected targets could be
         final Random r = MyRandom.getRandom();
@@ -104,7 +103,7 @@ public class  DamageAllAi extends SpellAbilityAi {
     }
 
     @Override
-    public boolean chkAIDrawback(SpellAbility sa, AIPlayer ai) {
+    public boolean chkAIDrawback(SpellAbility sa, Player ai) {
         final Card source = sa.getSourceCard();
         String validP = "";
 
@@ -188,7 +187,7 @@ public class  DamageAllAi extends SpellAbilityAi {
     }
 
     @Override
-    protected boolean doTriggerAINoCost(AIPlayer ai, SpellAbility sa, boolean mandatory) {
+    protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
         final Card source = sa.getSourceCard();
         String validP = "";
 

@@ -17,7 +17,6 @@ import forge.game.ai.ComputerUtilCard;
 import forge.game.ai.ComputerUtilCombat;
 import forge.game.phase.CombatUtil;
 import forge.game.phase.PhaseType;
-import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
@@ -27,7 +26,7 @@ public class PumpAllAi extends PumpAiBase {
      * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
      */
     @Override
-    protected boolean canPlayAI(final AIPlayer ai, final SpellAbility sa) {
+    protected boolean canPlayAI(final Player ai, final SpellAbility sa) {
         String valid = "";
         final Card source = sa.getSourceCard();
         final GameState game = ai.getGame();
@@ -146,7 +145,7 @@ public class PumpAllAi extends PumpAiBase {
     } // pumpAllCanPlayAI()
 
     @Override
-    public boolean chkAIDrawback(SpellAbility sa, AIPlayer aiPlayer) {
+    public boolean chkAIDrawback(SpellAbility sa, Player aiPlayer) {
         return true;
     }
 
@@ -154,7 +153,7 @@ public class PumpAllAi extends PumpAiBase {
      * @see forge.card.abilityfactory.SpellAiLogic#doTriggerAINoCost(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility, boolean)
      */
     @Override
-    protected boolean doTriggerAINoCost(AIPlayer aiPlayer, SpellAbility sa, boolean mandatory) {
+    protected boolean doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
         return true;
     }
 

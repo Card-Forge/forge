@@ -31,7 +31,6 @@ import forge.control.input.InputSelectCards;
 import forge.control.input.InputSelectCardsFromList;
 import forge.game.GameState;
 import forge.game.ai.ComputerUtil;
-import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 import forge.game.zone.MagicStack;
 import forge.game.zone.ZoneType;
@@ -453,7 +452,7 @@ public class CostExile extends CostPartWithList {
      * @see forge.card.cost.CostPart#decideAIPayment(forge.game.player.AIPlayer, forge.card.spellability.SpellAbility, forge.Card)
      */
     @Override
-    public PaymentDecision decideAIPayment(AIPlayer ai, SpellAbility ability, Card source) {
+    public PaymentDecision decideAIPayment(Player ai, SpellAbility ability, Card source) {
         if (this.payCostFromSource()) {
             return new PaymentDecision(source);
         } 
@@ -488,7 +487,7 @@ public class CostExile extends CostPartWithList {
      * @see forge.card.cost.CostPart#payAI(forge.card.cost.PaymentDecision, forge.game.player.AIPlayer, forge.card.spellability.SpellAbility, forge.Card)
      */
     @Override
-    public void payAI(PaymentDecision decision, AIPlayer ai, SpellAbility ability, Card source) {
+    public void payAI(PaymentDecision decision, Player ai, SpellAbility ability, Card source) {
         for (final Card c : decision.cards) {
             executePayment(ability, c);
             if (this.from.equals(ZoneType.Stack)) {

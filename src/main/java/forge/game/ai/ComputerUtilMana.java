@@ -28,7 +28,6 @@ import forge.card.spellability.AbilityManaPart;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.game.GameActionUtil;
-import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
@@ -206,7 +205,7 @@ public class ComputerUtilMana {
                     // Pay additional costs
                     if (ma.getPayCosts() != null) {
                         final CostPayment pay = new CostPayment(ma.getPayCosts(), ma);
-                        if (!pay.payComputerCosts((AIPlayer)ai, ai.getGame())) {
+                        if (!pay.payComputerCosts(ai, ai.getGame())) {
                             continue;
                         }
                     } else {
@@ -262,7 +261,7 @@ public class ComputerUtilMana {
     } // payManaCost()
 
     // TODO: this code is disconnected now, it was moved here from MagicStack, where X cost is not processed any more
-    public static void computerPayX(final SpellAbility sa, AIPlayer player, int xCost) {
+    public static void computerPayX(final SpellAbility sa, Player player, int xCost) {
         final int neededDamage = CardFactoryUtil.getNeededXDamage(sa);
         final Ability ability = new Ability(sa.getSourceCard(), ManaCost.get(xCost)) {
             @Override
@@ -544,7 +543,7 @@ public class ComputerUtilMana {
                 // don't use abilities with dangerous drawbacks
                 AbilitySub sub = m.getSubAbility(); 
                 if (sub != null && !card.getName().equals("Pristine Talisman")) {
-                    if (ai instanceof AIPlayer && !sub.getAi().chkDrawbackWithSubs((AIPlayer)ai, sub)) {
+                    if (!sub.getAi().chkDrawbackWithSubs(ai, sub)) {
                         continue;
                     }
                     needsLimitedResources = true; // TODO: check for good drawbacks (gainLife)
@@ -618,7 +617,7 @@ public class ComputerUtilMana {
                 // don't use abilities with dangerous drawbacks
                 AbilitySub sub = m.getSubAbility(); 
                 if (sub != null) {
-                    if (ai instanceof AIPlayer && !sub.getAi().chkDrawbackWithSubs((AIPlayer)ai, sub)) {
+                    if (!sub.getAi().chkDrawbackWithSubs(ai, sub)) {
                         continue;
                     }
                 }

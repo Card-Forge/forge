@@ -48,7 +48,6 @@ import forge.game.ai.ComputerUtilCard;
 import forge.game.ai.ComputerUtilCombat;
 import forge.game.ai.ComputerUtilCost;
 import forge.game.ai.ComputerUtilMana;
-import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
@@ -188,7 +187,7 @@ public class Upkeep extends Phase {
 
                         } else { // computer
                             if (ComputerUtilCost.canPayCost(blankAbility, controller)) {
-                                ComputerUtil.playNoStack((AIPlayer)controller, blankAbility, game);
+                                ComputerUtil.playNoStack(controller, blankAbility, game);
                             } else {
                                 game.getAction().sacrifice(c, null);
                             }
@@ -279,7 +278,7 @@ public class Upkeep extends Phase {
                                 Ability aiPaid = Upkeep.getBlankAbility(c, upkeepCost.toString());
                                 isUpkeepPaid = ComputerUtilCost.canPayCost(aiPaid, controller) && !c.hasKeyword("Indestructible"); 
                                 if (isUpkeepPaid) {
-                                    ComputerUtil.playNoStack((AIPlayer)controller, aiPaid, game);
+                                    ComputerUtil.playNoStack(controller, aiPaid, game);
                                 }
                             }
                             if( !isUpkeepPaid ) {
@@ -329,7 +328,7 @@ public class Upkeep extends Phase {
                                     game.getAction().sacrifice(c, null);
                             } else { // computer
                                 if (ComputerUtilCost.shouldPayCost(controller, c, upkeepCost) && ComputerUtilCost.canPayCost(blankAbility, controller)) {
-                                    ComputerUtil.playNoStack((AIPlayer)controller, blankAbility, game); // this makes AI pay
+                                    ComputerUtil.playNoStack(controller, blankAbility, game); // this makes AI pay
                                 } else {
                                     game.getAction().sacrifice(c, null);
                                 }
@@ -363,7 +362,7 @@ public class Upkeep extends Phase {
                             } else { // computers
                                 final Ability aiPaid = Upkeep.getBlankAbility(c, upkeepCost.toString());
                                 if (ComputerUtilCost.canPayCost(aiPaid, controller) && ComputerUtilCombat.predictDamageTo(controller, upkeepDamage, c, false) > 0) {
-                                    ComputerUtil.playNoStack((AIPlayer)controller, aiPaid, game);
+                                    ComputerUtil.playNoStack(controller, aiPaid, game);
                                     isUpkeepPaid = true;
                                 }
                             }
@@ -611,7 +610,7 @@ public class Upkeep extends Phase {
             } // end human
             else { // computer
                 unpaidHordesAb.setActivatingPlayer(cp);
-                if (ComputerUtilCost.canPayCost(cost, (AIPlayer) cp)) {
+                if (ComputerUtilCost.canPayCost(cost, cp)) {
                     final Ability computerPay = new Ability(c, ManaCost.ZERO) {
                         @Override
                         public void resolve() {

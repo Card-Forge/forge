@@ -35,7 +35,6 @@ import forge.control.input.InputSelectCards;
 import forge.control.input.InputSelectCardsFromList;
 import forge.game.GameState;
 import forge.game.ai.AiController;
-import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 import forge.game.player.PlayerControllerAi;
 import forge.game.zone.ZoneType;

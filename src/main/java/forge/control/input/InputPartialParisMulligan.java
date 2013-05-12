@@ -26,7 +26,6 @@ import forge.game.GameState;
 import forge.game.GameType;
 import forge.game.MatchController;
 import forge.game.ai.ComputerUtil;
-import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
@@ -101,14 +100,14 @@ public class InputPartialParisMulligan extends InputBase {
         
         final List<Card> aiAllExiled = new ArrayList<Card>();
         for (Player p : game.getPlayers()) {
-            if (!(p instanceof AIPlayer)) {
+            if (!(p.isComputer())) {
                 continue;
             }
             int ppcandidates = -1;
-            AIPlayer ai = (AIPlayer) p;
+
             
-            while (ComputerUtil.wantMulligan(ai) && ppcandidates != 0) {
-                List<Card> cand = ComputerUtil.getPartialParisCandidates(ai);
+            while (ComputerUtil.wantMulligan(p) && ppcandidates != 0) {
+                List<Card> cand = ComputerUtil.getPartialParisCandidates(p);
                 ppcandidates = cand.size();
                 if(ppcandidates != 0)
                 {
@@ -117,7 +116,7 @@ public class InputPartialParisMulligan extends InputBase {
                     {
                         game.action.exile(c);
                     }
-                    ai.drawCards(ppcandidates-1);
+                    p.drawCards(ppcandidates-1);
                 }
             }
         }
@@ -140,14 +139,13 @@ public class InputPartialParisMulligan extends InputBase {
         // Computer mulligan
         final List<Card> aiAllExiled = new ArrayList<Card>();
         for (Player p : game.getPlayers()) {
-            if (!(p instanceof AIPlayer)) {
+            if (!(p.isComputer())) {
                 continue;
             }
             int ppcandidates = -1;
-            AIPlayer ai = (AIPlayer) p;
             
-            while (ComputerUtil.wantMulligan(ai) && ppcandidates != 0) {
-                List<Card> cand = ComputerUtil.getPartialParisCandidates(ai);
+            while (ComputerUtil.wantMulligan(p) && ppcandidates != 0) {
+                List<Card> cand = ComputerUtil.getPartialParisCandidates(p);
                 ppcandidates = cand.size();
                 if(ppcandidates != 0)
                 {
@@ -156,7 +154,7 @@ public class InputPartialParisMulligan extends InputBase {
                     {
                         game.action.exile(c);
                     }
-                    ai.drawCards(ppcandidates-1);
+                    p.drawCards(ppcandidates-1);
                 }
             }
         }

@@ -37,7 +37,6 @@ import forge.game.ai.ComputerUtilCost;
 import forge.game.ai.ComputerUtilMana;
 import forge.game.phase.Combat;
 import forge.game.phase.PhaseType;
-import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
@@ -58,7 +57,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
      * @return a boolean.
      */
     @Override
-    protected boolean canPlayAI(AIPlayer aiPlayer, SpellAbility sa) {
+    protected boolean canPlayAI(Player aiPlayer, SpellAbility sa) {
         String origin = null;
         if (sa.hasParam("Origin")) {
             origin = sa.getParam("Origin");
@@ -88,7 +87,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
      * @return a boolean.
      */
     @Override
-    public boolean chkAIDrawback(SpellAbility sa, AIPlayer aiPlayer) {
+    public boolean chkAIDrawback(SpellAbility sa, Player aiPlayer) {
         String origin = null;
         if (sa.hasParam("Origin")) {
             origin = sa.getParam("Origin");
@@ -116,7 +115,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
      * @return a boolean.
      */
     @Override
-    protected boolean doTriggerAINoCost(AIPlayer aiPlayer, SpellAbility sa, boolean mandatory) {
+    protected boolean doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
         String origin = null;
         if (sa.hasParam("Origin")) {
             origin = sa.getParam("Origin");
@@ -152,7 +151,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
-    private static boolean hiddenOriginCanPlayAI(final AIPlayer ai, final SpellAbility sa) {
+    private static boolean hiddenOriginCanPlayAI(final Player ai, final SpellAbility sa) {
         // Fetching should occur fairly often as it helps cast more spells, and
         // have access to more mana
         final Cost abCost = sa.getPayCosts();
@@ -535,7 +534,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
-    private static boolean knownOriginCanPlayAI(final AIPlayer ai, final SpellAbility sa) {
+    private static boolean knownOriginCanPlayAI(final Player ai, final SpellAbility sa) {
         // Retrieve either this card, or target Cards in Graveyard
         final Cost abCost = sa.getPayCosts();
         final Card source = sa.getSourceCard();
@@ -650,7 +649,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
-    private static boolean knownOriginPlayDrawbackAI(final AIPlayer aiPlayer, final SpellAbility sa) {
+    private static boolean knownOriginPlayDrawbackAI(final Player aiPlayer, final SpellAbility sa) {
         if (sa.getTarget() == null) {
             return true;
         }
@@ -671,7 +670,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
      *            a boolean.
      * @return a boolean.
      */
-    private static boolean isPreferredTarget(final AIPlayer ai, final SpellAbility sa, final boolean mandatory) {
+    private static boolean isPreferredTarget(final Player ai, final SpellAbility sa, final boolean mandatory) {
         final Card source = sa.getSourceCard();
         final ZoneType origin = ZoneType.listValueOf(sa.getParam("Origin")).get(0);
         final ZoneType destination = ZoneType.smartValueOf(sa.getParam("Destination"));
@@ -1029,7 +1028,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
      *            a boolean.
      * @return a boolean.
      */
-    private static boolean knownOriginTriggerAI(final AIPlayer ai, final SpellAbility sa,
+    private static boolean knownOriginTriggerAI(final Player ai, final SpellAbility sa,
             final boolean mandatory) {
 
         if (sa.getTarget() == null) {

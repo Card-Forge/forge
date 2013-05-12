@@ -24,9 +24,9 @@ import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.game.phase.PhaseHandler;
-import forge.game.player.AIPlayer;
 import forge.game.player.LobbyPlayer;
 import forge.game.player.Player;
+import forge.game.player.PlayerType;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiDialog;
@@ -261,7 +261,7 @@ public class GameNew {
                 preparePlayerLibrary(player, ZoneType.Sideboard, myDeck.get(DeckSection.Sideboard), canRandomFoil, generator);
             
             // Shuffling
-            if (player instanceof AIPlayer && preferences.getPrefBoolean(FPref.UI_SMOOTH_LAND)) {
+            if (player.getLobbyPlayer().getType() == PlayerType.COMPUTER && preferences.getPrefBoolean(FPref.UI_SMOOTH_LAND)) {
                 // AI may do this instead of shuffling its deck
                 final Iterable<Card> c1 = GameNew.smoothComputerManaCurve(player.getCardsIn(ZoneType.Library));
                 player.getZone(ZoneType.Library).setCards(c1);
@@ -269,7 +269,7 @@ public class GameNew {
                 player.shuffle();
             }
             
-            if(player instanceof AIPlayer) {
+            if(player.getLobbyPlayer().getType() == PlayerType.COMPUTER) {
                 rAICards.addAll(getCardsAiCantPlayWell(myDeck));
             }
 

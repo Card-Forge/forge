@@ -13,14 +13,14 @@ import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.game.ai.ComputerUtilCard;
 import forge.game.ai.ComputerUtilCost;
-import forge.game.player.AIPlayer;
+import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
 
 public class PlayAi extends SpellAbilityAi {
 
     @Override
-    protected boolean canPlayAI(AIPlayer ai, SpellAbility sa) {
+    protected boolean canPlayAI(Player ai, SpellAbility sa) {
         final Cost abCost = sa.getPayCosts();
         final Card source = sa.getSourceCard();
 
@@ -85,7 +85,7 @@ public class PlayAi extends SpellAbilityAi {
      * @return a boolean.
      */
     @Override
-    protected boolean doTriggerAINoCost(final AIPlayer ai, final SpellAbility sa, final boolean mandatory) {
+    protected boolean doTriggerAINoCost(final Player ai, final SpellAbility sa, final boolean mandatory) {
 
         final Target tgt = sa.getTarget();
         if (tgt != null) {

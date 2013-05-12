@@ -8,7 +8,6 @@ import forge.Card;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.game.GameState;
-import forge.game.player.AIPlayer;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityStackInstance;
 import forge.card.spellability.SpellPermanent;
@@ -146,7 +145,7 @@ public class CounterEffect extends SpellAbilityEffect {
         String destination =  srcSA.hasParam("Destination") ? srcSA.getParam("Destination") : "Graveyard";
         if (srcSA.hasParam("DestinationChoice")) {//Hinder
             final String[] pos = srcSA.getParam("DestinationChoice").split(",");
-            if (srcSA.getActivatingPlayer() instanceof AIPlayer) {
+            if (srcSA.getActivatingPlayer().isComputer()) {
                 destination = pos[0];
             } else {
                 final String prompt = "Select a destination to remove";

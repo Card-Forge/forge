@@ -10,7 +10,7 @@ import forge.card.spellability.SpellPermanent;
 import forge.game.GameState;
 import forge.game.ai.ComputerUtilCard;
 import forge.game.ai.ComputerUtilCost;
-import forge.game.player.AIPlayer;
+import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 
@@ -48,7 +48,7 @@ public class CostExileAndPay extends CostPartWithList {
      * @see forge.card.cost.CostPart#decideAIPayment(forge.game.player.AIPlayer, forge.card.spellability.SpellAbility, forge.Card)
      */
     @Override
-    public PaymentDecision decideAIPayment(AIPlayer ai, SpellAbility ability, Card source) {
+    public PaymentDecision decideAIPayment(Player ai, SpellAbility ability, Card source) {
         List<Card> validGrave = CardLists.getValidCards(ability.getActivatingPlayer().getZone(ZoneType.Graveyard), "Creature", ability.getActivatingPlayer(), ability.getSourceCard());
 
         if(validGrave.size() == 0)
@@ -142,7 +142,7 @@ public class CostExileAndPay extends CostPartWithList {
      * @see forge.card.cost.CostPart#payAI(forge.card.cost.PaymentDecision, forge.game.player.AIPlayer, forge.card.spellability.SpellAbility, forge.Card)
      */
     @Override
-    public void payAI(PaymentDecision decision, AIPlayer ai, SpellAbility ability, Card source) {
+    public void payAI(PaymentDecision decision, Player ai, SpellAbility ability, Card source) {
         for (final Card c : decision.cards) {
             executePayment(ability, c);
             for(SpellAbility sa : c.getSpellAbilities())

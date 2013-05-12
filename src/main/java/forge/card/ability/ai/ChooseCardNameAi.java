@@ -6,12 +6,12 @@ import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilMana;
-import forge.game.player.AIPlayer;
+import forge.game.player.Player;
 
 public class ChooseCardNameAi extends SpellAbilityAi {
 
     @Override
-    protected boolean canPlayAI(AIPlayer ai, SpellAbility sa) {
+    protected boolean canPlayAI(Player ai, SpellAbility sa) {
         Card source = sa.getSourceCard();
         if (sa.hasParam("AILogic")) {
             // Don't tap creatures that may be able to block
@@ -58,7 +58,7 @@ public class ChooseCardNameAi extends SpellAbilityAi {
     }
 
     @Override
-    protected boolean doTriggerAINoCost(AIPlayer aiPlayer, SpellAbility sa, boolean mandatory) {
+    protected boolean doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
         // TODO - there is no AILogic implemented yet
         return false;
     }
