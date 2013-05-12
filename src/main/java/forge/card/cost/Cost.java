@@ -416,6 +416,23 @@ public class Cost {
 
         return this.isAbility;
     }
+    
+    /**
+     * <p>
+     * isRenewableResource.
+     * </p>
+     * 
+     * @return a boolean.
+     */
+    public final boolean isRenewableResource() {
+        for (final CostPart part : this.costParts) {
+            if (!part.isRenewable()) {
+                return false;
+            }
+        }
+
+        return this.isAbility;
+    }
 
     /**
      * <p>

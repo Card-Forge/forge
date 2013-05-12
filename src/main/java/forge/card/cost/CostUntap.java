@@ -38,6 +38,9 @@ public class CostUntap extends CostPart {
 
     @Override
     public boolean isUndoable() { return true; }
+    
+    @Override
+    public boolean isRenewable() { return true; }
 
     
     /*

@@ -170,12 +170,11 @@ public abstract class InputPayManaBase extends InputSyncronizedBase implements I
             ma.setActivatingPlayer(player);
             AbilityManaPart m = null;
             SpellAbility tail = ma;
-            while(m == null && tail != null)
-            {
+            while (m == null && tail != null) {
                 m = tail.getManaPart();
                 tail = tail.getSubAbility();
             }
-            if(m == null) {
+            if (m == null) {
                 continue;
             } else if (!ma.canPlay()) {
                 continue;
@@ -186,15 +185,18 @@ public abstract class InputPayManaBase extends InputSyncronizedBase implements I
             } else if (!m.meetsManaRestrictions(saPaidFor)) {
                 continue;
             }
-    
+
             abilities.add(ma);
-    
+
             if (!skipExpress) {
-                // skip express mana if the ability is not undoable
+                // skip express mana if the ability is not undoable or reusable
                 if (!ma.isUndoable()) {
                     skipExpress = true;
                     continue;
-                }
+                } else if (!ma.getPayCosts().isRenewableResource()) {
+                    skipExpress = true;
+                    continue;
+                } 
             }
         }
         if (abilities.isEmpty()) {

@@ -57,6 +57,8 @@ public class CostUntapType extends CostPartWithList {
     @Override
     public boolean isReusable() { return true; }
 
+    @Override
+    public boolean isRenewable() { return true; }
     
     /*
      * (non-Javadoc)

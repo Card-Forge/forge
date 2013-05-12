@@ -40,6 +40,8 @@ public class CostTap extends CostPart {
     @Override
     public boolean isReusable() { return true; }
 
+    @Override
+    public boolean isRenewable() { return true; }
     
     /*
      * (non-Javadoc)

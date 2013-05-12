@@ -106,6 +106,15 @@ public abstract class CostPart {
     public boolean isReusable() {
         return false;
     }
+    
+    /**
+     * Checks if is renewable.
+     * 
+     * @return true, if is renewable
+     */
+    public boolean isRenewable() {
+        return false;
+    }
 
     /**
      * Checks if is undoable.
