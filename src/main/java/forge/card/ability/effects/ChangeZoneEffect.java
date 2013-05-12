@@ -24,7 +24,6 @@ import forge.control.input.InputSelectCardsFromList;
 import forge.game.GameState;
 import forge.game.ai.ComputerUtilCard;
 import forge.game.player.AIPlayer;
-import forge.game.player.HumanPlayer;
 import forge.game.player.Player;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
@@ -599,7 +598,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             if (decider instanceof AIPlayer) {
                 ChangeZoneAi.hiddenOriginResolveAI(decider, sa, player);
             } else {
-                changeHiddenOriginResolveHuman((HumanPlayer) decider, sa, player);
+                changeHiddenOriginResolveHuman(decider, sa, player);
             }
         }
     }
@@ -616,7 +615,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
      * @param player
      *            a {@link forge.game.player.Player} object.
      */
-    private static void changeHiddenOriginResolveHuman(final HumanPlayer decider, final SpellAbility sa, Player player) {
+    private static void changeHiddenOriginResolveHuman(final Player decider, final SpellAbility sa, Player player) {
         final Card card = sa.getSourceCard();
         final List<Card> movedCards = new ArrayList<Card>();
         final boolean defined = sa.hasParam("Defined");

@@ -8,7 +8,6 @@ import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
-import forge.game.player.HumanPlayer;
 import forge.game.player.Player;
 import forge.gui.GuiChoose;
 
@@ -38,7 +37,7 @@ public class LifeSetEffect extends SpellAbilityEffect {
                     p.setLife(lifeAmount, sa.getSourceCard());
                 } else {
                     int life;
-                    if (sa.getActivatingPlayer() instanceof HumanPlayer) {
+                    if (sa.getActivatingPlayer().isHuman()) {
                         life = GuiChoose.one("Life Total: " + p, lifetotals);
                     } else {//AI
                         if (p.equals(sa.getSourceCard().getController())) {

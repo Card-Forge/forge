@@ -27,7 +27,6 @@ import forge.game.GameType;
 import forge.game.MatchController;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
-import forge.game.player.HumanPlayer;
 import forge.game.player.Player;
 import forge.game.player.PlayerController;
 import forge.game.zone.MagicStack;
@@ -127,7 +126,7 @@ public class InputQueue extends MyObservable implements java.io.Serializable {
     public final Input getActualInput(GameState game) {
         GameAge age = game.getAge();
         if ( age == GameAge.Mulligan ) {
-            HumanPlayer human = Singletons.getControl().getPlayer();
+            Player human = Singletons.getControl().getPlayer();
             return game.getType() == GameType.Commander ? new InputPartialParisMulligan(match, human) : new InputMulligan(match, human);
         }
 

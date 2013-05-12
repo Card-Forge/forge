@@ -26,7 +26,6 @@ import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.game.GameState;
 import forge.game.ai.ComputerUtilCard;
-import forge.game.player.HumanPlayer;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
@@ -212,7 +211,7 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
                         }
                         if (!list.isEmpty()) {
                             Card attachedTo = null;
-                            if (sa.getActivatingPlayer() instanceof HumanPlayer) {
+                            if (sa.getActivatingPlayer().isHuman()) {
                                 if (list.size() > 1) {
                                     attachedTo = GuiChoose.one(copy + " - Select a card to attach to.", list);
                                 } else {

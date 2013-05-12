@@ -39,7 +39,6 @@ import forge.control.input.Input;
 import forge.control.input.InputPayManaBase;
 import forge.game.GameState;
 import forge.game.player.HumanPlay;
-import forge.game.player.HumanPlayer;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.ForgeAction.MatchConstants;
@@ -55,7 +54,7 @@ public class CField implements ICDoc {
     // The one who owns cards on this side of table
     private final Player player;
     // Tho one who looks at screen and 'performs actions'
-    private final HumanPlayer playerViewer;
+    private final Player playerViewer;
     private final VField view;
     private boolean initializedAlready = false;
 
@@ -129,7 +128,7 @@ public class CField implements ICDoc {
      * @param playerViewer 
      */
     @SuppressWarnings("serial")
-    public CField(final Player p0, final VField v0, HumanPlayer playerViewer) {
+    public CField(final Player p0, final VField v0, Player playerViewer) {
         this.player = p0;
         this.playerViewer = playerViewer;
         this.view = v0;

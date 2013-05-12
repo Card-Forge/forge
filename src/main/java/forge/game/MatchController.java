@@ -19,7 +19,6 @@ import forge.deck.Deck;
 import forge.error.BugReporter;
 import forge.game.event.DuelOutcomeEvent;
 import forge.game.event.FlipCoinEvent;
-import forge.game.player.HumanPlayer;
 import forge.game.player.LobbyPlayer;
 import forge.game.player.LobbyPlayerHuman;
 import forge.game.player.Player;
@@ -166,11 +165,11 @@ public class MatchController {
         GameState currentGame = match.getCurrentGame();
         currentGame.getEvents().register(Singletons.getControl().getSoundSystem());
         
-        HumanPlayer localHuman = null;
+        Player localHuman = null;
         for(Player p : currentGame.getPlayers()) {
             if ( p.getLobbyPlayer() != humanLobbyPlayer)
                 continue;
-            localHuman = (HumanPlayer) p;
+            localHuman = p;
             break;
         }
         if (null == localHuman)
