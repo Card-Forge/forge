@@ -110,8 +110,9 @@ public enum VMatchUI implements IVTopLevelUI {
         // Add extra hands to existing hand panel.
         for (int i = 0; i < lstHands.size(); i++) {
             // If already in layout, no need to add again.
-            if (lstHands.get(i).getParentCell() == null) {
-                lstHands.get(0).getParentCell().addDoc(lstHands.get(i));
+            if (lstHands.get(i).getParentCell() == null) { // if i == 0, we get NPE in two lines
+                DragCell cellWithHand = lstHands.get(0).getParentCell();
+                cellWithHand.addDoc(lstHands.get(i));
             }
         }
 
@@ -149,11 +150,6 @@ public enum VMatchUI implements IVTopLevelUI {
     /** @param lst0 List<VField> */
     public void setHandViews(final List<VHand> lst0) {
         this.lstHands = lst0;
-    }
-
-    /** @return {@link java.util.List}<{@link forge.gui.match.nonsigleton.VHand}> */
-    public List<VHand> getHandViews() {
-        return lstHands;
     }
 
     /** @return {@link javax.swing.JButton} */
