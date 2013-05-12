@@ -686,7 +686,14 @@ public final class GuiDisplayUtil {
         
         PlanarDice.roll(p, res);
         
-        p.getGame().getStack().chooseOrderOfSimultaneousStackEntryAll();
+        FThreads.invokeInNewThread(new Runnable() {
+            @Override
+            public void run() {
+                p.getGame().getStack().chooseOrderOfSimultaneousStackEntryAll();
+            }
+        });
+        
+        
     }
     
     private static GameState getGame() {
