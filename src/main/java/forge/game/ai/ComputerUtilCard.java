@@ -10,6 +10,9 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Random;
 
+import org.apache.commons.lang3.tuple.MutablePair;
+import org.apache.commons.lang3.tuple.Pair;
+
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
@@ -246,13 +249,11 @@ public class ComputerUtilCard {
     public static Card getBestAI(final List<Card> list) {
         // Get Best will filter by appropriate getBest list if ALL of the list
         // is of that type
-        if (CardLists.getNotType(list, "Creature").isEmpty()) {
+        if (Iterables.all(list, CardPredicates.Presets.CREATURES))
             return ComputerUtilCard.getBestCreatureAI(list);
-        }
     
-        if (CardLists.getNotType(list, "Land").isEmpty()) {
+        if (Iterables.all(list, CardPredicates.Presets.LANDS))
             return getBestLandAI(list);
-        }
     
         // TODO - Once we get an EvaluatePermanent this should call
         // getBestPermanent()
@@ -283,26 +284,16 @@ public class ComputerUtilCard {
      */
     public static Card getBestCreatureToBounceAI(final List<Card> list) {
         final int tokenBonus = 40;
-        List<Card> all = CardLists.filter(list, CardPredicates.Presets.CREATURES);
-        Card biggest = null; // returns null if list.size() == 0
-        int biggestvalue = 0;
-        int newvalue = 0;
-    
-        if (all.size() != 0) {
-            biggest = all.get(0);
-    
-            for (int i = 0; i < all.size(); i++) {
-                biggestvalue = ComputerUtilCard.evaluateCreature(biggest);
-                if (biggest.isToken()) {
-                    biggestvalue += tokenBonus; // raise the value of tokens
-                }
-                newvalue = ComputerUtilCard.evaluateCreature(all.get(i));
-                if (all.get(i).isToken()) {
-                    newvalue += tokenBonus; // raise the value of tokens
-                }
-                if (biggestvalue < newvalue) {
-                    biggest = all.get(i);
-                }
+        Card biggest = null;
+        int biggestvalue = -1;
+
+        for(Card card : CardLists.filter(list, CardPredicates.Presets.CREATURES)) {
+            int newvalue = ComputerUtilCard.evaluateCreature(card);
+            newvalue += card.isToken() ? tokenBonus : 0; // raise the value of tokens
+
+            if (biggestvalue < newvalue) {
+                biggest = card;
+                biggestvalue = newvalue;
             }
         }
         return biggest;
@@ -645,12 +636,7 @@ public class ComputerUtilCard {
      * @return a int.
      */
     public static int evaluateCreatureList(final List<Card> list) {
-        int value = 0;
-        for (int i = 0; i < list.size(); i++) {
-            value += evaluateCreature(list.get(i));
-        }
-    
-        return value;
+        return Aggregates.sum(list, fnEvaluateCreature);
     }
 
     /**
@@ -670,26 +656,6 @@ public class ComputerUtilCard {
         return att.contains(card);
     }
 
-    // may return null
-    /**
-     * <p>
-     * getRandomCard.
-     * </p>
-     * 
-     * @param list
-     *            a {@link forge.CardList} object.
-     * @return a {@link forge.Card} object.
-     */
-    public static Card getRandomCard(final List<Card> list) {
-        if (list.size() == 0) {
-            return null;
-        }
-    
-        final int index = ComputerUtilCard.random.nextInt(list.size());
-        return list.get(index);
-    }
-
-    public static Random random = MyRandom.getRandom();
     /**
      * getMostExpensivePermanentAI.
      * 
@@ -698,15 +664,10 @@ public class ComputerUtilCard {
      * @return the card
      */
     public static Card getMostExpensivePermanentAI(final List<Card> all) {
-        if (all.size() == 0) {
-            return null;
-        }
         Card biggest = null;
-        biggest = all.get(0);
     
-        int bigCMC = 0;
-        for (int i = 0; i < all.size(); i++) {
-            final Card card = all.get(i);
+        int bigCMC = -1;
+        for (final Card card : all) {
             int curCMC = card.getCMC();
     
             // Add all cost of all auras with the same controller
@@ -715,7 +676,7 @@ public class ComputerUtilCard {
     
             if (curCMC >= bigCMC) {
                 bigCMC = curCMC;
-                biggest = all.get(i);
+                biggest = card;
             }
         }
     
@@ -827,33 +788,32 @@ public class ComputerUtilCard {
 
     public static List<String> getColorByProminence(final List<Card> list) {
         int cntColors = MagicColor.WUBRG.length;
-        final int[] map = new int[cntColors];
-        for(int i = 0; i < map.length; i++) {
-            map[i] = 0;
+        final List<Pair<Byte,Integer>> map = new ArrayList<Pair<Byte,Integer>>();
+        for(int i = 0; i < cntColors; i++) {
+            map.add(MutablePair.of(MagicColor.WUBRG[i], 0));
         }
 
         for (final Card crd : list) {
             ColorSet color = CardUtil.getColors(crd);
-            for(int i = 0; i < cntColors; i++) {
-                if( color.hasAnyColor(MagicColor.WUBRG[i]))
-                    map[i]++;
-            }
+            if (color.hasWhite()) map.get(0).setValue(Integer.valueOf(map.get(0).getValue()+1));
+            if (color.hasBlue()) map.get(1).setValue(Integer.valueOf(map.get(1).getValue()+1));
+            if (color.hasBlack()) map.get(2).setValue(Integer.valueOf(map.get(2).getValue()+1));
+            if (color.hasRed()) map.get(3).setValue(Integer.valueOf(map.get(3).getValue()+1));
+            if (color.hasGreen()) map.get(4).setValue(Integer.valueOf(map.get(4).getValue()+1));
         } // for
 
-        int[] indices = new int[cntColors];
-        for(int i = 0; i < cntColors; i++)
-            indices[i] = Integer.valueOf(i);
-
-        // sort indices for WUBRG array
-        Arrays.sort(indices);
+        Collections.sort(map, new Comparator<Pair<Byte,Integer>>() {
+            @Override public int compare(Pair<Byte, Integer> o1, Pair<Byte, Integer> o2) {
+                return o2.getValue() - o1.getValue();
+            }
+        });
     
-        // fetch color names in the same order
+        // will this part be once dropped?
         List<String> result = new ArrayList<String>(cntColors);
-        for(int idx : indices) {
-            result.add(MagicColor.toLongString(MagicColor.WUBRG[idx]));
+        for(Pair<Byte, Integer> idx : map) { // fetch color names in the same order
+            result.add(MagicColor.toLongString(idx.getKey()));
         }
         // reverse to get indices for most prominent colors first.
-        Collections.reverse(result);
         return result;
     }
 

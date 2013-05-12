@@ -25,6 +25,7 @@ import forge.Card;
 import forge.CardLists;
 import forge.CounterType;
 import forge.game.ai.ComputerUtilCard;
+import forge.util.Aggregates;
 
 
 /**
@@ -68,7 +69,7 @@ public abstract class CountersAi {
             }
         } else {
             // improve random choice here
-            choice = ComputerUtilCard.getRandomCard(list);
+            choice = Aggregates.random(list);
         }
         return choice;
     }
@@ -100,7 +101,7 @@ public abstract class CountersAi {
             // The AI really should put counters on cards that can use it.
             // Charge counters on things with Charge abilities, etc. Expand
             // these above
-            choice = ComputerUtilCard.getRandomCard(list);
+            choice = Aggregates.random(list);
         }
         return choice;
     }

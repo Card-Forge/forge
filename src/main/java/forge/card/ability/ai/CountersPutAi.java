@@ -22,6 +22,7 @@ import forge.game.phase.PhaseType;
 import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
+import forge.util.Aggregates;
 import forge.util.MyRandom;
 
 public class CountersPutAi extends SpellAbilityAi {
@@ -292,7 +293,7 @@ public class CountersPutAi extends SpellAbilityAi {
                     if (type.equals("M1M1")) {
                         choice = ComputerUtilCard.getWorstCreatureAI(list);
                     } else {
-                        choice = ComputerUtilCard.getRandomCard(list);
+                        choice = Aggregates.random(list);
                     }
                 }
             } else {
@@ -304,7 +305,7 @@ public class CountersPutAi extends SpellAbilityAi {
                     if (type.equals("P1P1")) {
                         choice = ComputerUtilCard.getWorstCreatureAI(list);
                     } else {
-                        choice = ComputerUtilCard.getRandomCard(list);
+                        choice = Aggregates.random(list);
                     }
                 }
                 if (choice !=  null && divided) {
