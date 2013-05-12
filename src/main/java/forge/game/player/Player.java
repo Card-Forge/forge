@@ -135,6 +135,11 @@ public class Player extends GameEntity implements Comparable<Player> {
     
     /** The slowtrip list. */
     private List<Card> slowtripList = new ArrayList<Card>();
+    
+    /** A list of tokens not in play, but on their way.
+     * This list is kept in order to not break ETB-replacement
+     * on tokens. */
+    private List<Card> inboundTokens = new ArrayList<Card>();
 
     /** The keywords. */
     private ArrayList<String> keywords = new ArrayList<String>();
@@ -1517,6 +1522,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     public final List<Card> getAllCards() {
         List<Card> allExcStack = this.getCardsIn(Player.ALL_ZONES);
         allExcStack.addAll(getCardsIn(ZoneType.Stack));
+        allExcStack.addAll(inboundTokens);
         return allExcStack;
     }
 
@@ -3094,6 +3100,16 @@ public class Player extends GameEntity implements Comparable<Player> {
         }
     
         return false;
+    }
+    
+    public void addInboundToken(Card c)
+    {
+        inboundTokens.add(c);
+    }
+    
+    public void removeInboundToken(Card c)
+    {
+        inboundTokens.remove(c);
     }
 
     /** 

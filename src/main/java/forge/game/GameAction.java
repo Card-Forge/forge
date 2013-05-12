@@ -169,6 +169,9 @@ public class GameAction {
         }
 
         if (!suppress) {
+            if(zoneFrom == null)
+                copied.getOwner().addInboundToken(copied);
+            
             HashMap<String, Object> repParams = new HashMap<String, Object>();
             repParams.put("Event", "Moved");
             repParams.put("Affected", copied);
@@ -183,6 +186,8 @@ public class GameAction {
                 return c;
             }
         }
+        
+        copied.getOwner().removeInboundToken(copied);
 
         if (c.wasSuspendCast()) {
             copied = GameAction.addSuspendTriggers(c);
