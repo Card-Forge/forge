@@ -1435,7 +1435,7 @@ public class GameAction {
                             if (GuiDialog.confirm(c, "Use " + c +"'s  ability?")) {
                                 // If we ever let the AI memorize cards in the players
                                 // hand, this would be a place to do so.
-                                ((HumanPlayer)p).playSpellAbilityNoStack(effect);
+                                HumanPlayer.playSpellAbilityNoStack(p, effect);
                             }
                         }
                     }

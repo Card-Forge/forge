@@ -240,7 +240,7 @@ public class ReplacementHandler {
         Player player = replacementEffect.getHostCard().getController();
         //player.getController().playNoStack()
         if (player.isHuman()) {
-            ((HumanPlayer)player).playSpellAbilityNoStack(effectSA);
+            HumanPlayer.playSpellAbilityNoStack(player, effectSA);
         } else {
             ComputerUtil.playNoStack((AIPlayer) player, effectSA, game);
         }

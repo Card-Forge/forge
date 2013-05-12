@@ -365,7 +365,7 @@ public class WrappedAbility extends Ability implements ISpellAbility {
             return;
 
         if (getActivatingPlayer().isHuman()) {
-            ((HumanPlayer)getActivatingPlayer()).playSpellAbilityNoStack(sa, true);
+            HumanPlayer.playSpellAbilityNoStack(getActivatingPlayer(), sa, true);
         } else {
             // commented out because i don't think this should be called
             // again here

@@ -430,7 +430,7 @@ public class TriggerHandler {
 
         if (regtrig.isStatic()) {
             if (wrapperAbility.getActivatingPlayer().isHuman()) {
-                ((HumanPlayer)wrapperAbility.getActivatingPlayer()).playSpellAbilityNoStack(wrapperAbility);
+                HumanPlayer.playSpellAbilityNoStack(wrapperAbility.getActivatingPlayer(), wrapperAbility);
             } else {
                 wrapperAbility.doTrigger(isMandatory, (AIPlayer)wrapperAbility.getActivatingPlayer());
                 ComputerUtil.playNoStack((AIPlayer)wrapperAbility.getActivatingPlayer(), wrapperAbility, game);

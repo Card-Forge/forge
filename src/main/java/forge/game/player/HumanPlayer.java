@@ -155,6 +155,58 @@ public class HumanPlayer extends Player {
     }
 
     /**
+     * TODO: Write javadoc for this method.
+     * @param humanPlayer
+     * @param c
+     */
+    public static final void playCardWithoutPayingManaCost(Player player, Card c) {
+        final List<SpellAbility> choices = c.getBasicSpells();
+        // TODO add Buyback, Kicker, ... , spells here
+    
+        SpellAbility sa = player.getController().getAbilityToPlay(choices);
+    
+        if (sa != null) {
+            sa.setActivatingPlayer(player);
+            playSaWithoutPayingManaCost(player, sa);
+        }
+    }
+
+    /**
+     * <p>
+     * playSpellAbilityForFree.
+     * </p>
+     * 
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
+     */
+    public static final void playSaWithoutPayingManaCost(final Player player, final SpellAbility sa) {
+        FThreads.assertExecutedByEdt(false);
+        final Card source = sa.getSourceCard();
+        
+        source.setSplitStateToPlayAbility(sa);
+    
+        if (sa.getPayCosts() != null) {
+            if (sa.getApi() == ApiType.Charm && !sa.isWrapper()) {
+                CharmEffect.makeChoices(sa);
+            }
+            final CostPayment payment = new CostPayment(sa.getPayCosts(), sa);
+    
+            final HumanPlaySpellAbility req = new HumanPlaySpellAbility(sa, payment);
+            req.fillRequirements(false, true, false);
+        } else {
+            if (sa.isSpell()) {
+                final Card c = sa.getSourceCard();
+                if (!c.isCopiedSpell()) {
+                    sa.setSourceCard(player.getGame().getAction().moveToStack(c));
+                }
+            }
+            boolean x = sa.getSourceCard().getManaCost().getShardCount(ManaCostShard.X) > 0;
+    
+            player.getGame().getStack().add(sa, x);
+        }
+    }
+
+    /**
      * <p>
      * playSpellAbility_NoStack.
      * </p>
@@ -164,70 +216,22 @@ public class HumanPlayer extends Player {
      * @param skipTargeting
      *            a boolean.
      */
-    public final void playSpellAbilityNoStack( final SpellAbility sa) {
-        playSpellAbilityNoStack(sa, false);
+    public final static void playSpellAbilityNoStack(final Player player, final SpellAbility sa) {
+        playSpellAbilityNoStack(player, sa, false);
     }
-    public final void playSpellAbilityNoStack(final SpellAbility sa, boolean useOldTargets) {
-        sa.setActivatingPlayer(this);
+    
+    public final static void playSpellAbilityNoStack(final Player player, final SpellAbility sa, boolean useOldTargets) {
+        sa.setActivatingPlayer(player);
 
         if (sa.getPayCosts() != null) {
             final HumanPlaySpellAbility req = new HumanPlaySpellAbility(sa, new CostPayment(sa.getPayCosts(), sa));
             
             req.fillRequirements(useOldTargets, false, true);
         } else {
-            if (payManaCostIfNeeded(this, sa)) {
+            if (payManaCostIfNeeded(player, sa)) {
                 AbilityUtils.resolve(sa, false);
             }
 
-        }
-    }
-
-    public final void playCardWithoutManaCost(final Card c) {
-        final List<SpellAbility> choices = c.getBasicSpells();
-        // TODO add Buyback, Kicker, ... , spells here
-
-        SpellAbility sa = controller.getAbilityToPlay(choices);
-
-        if (sa == null) {
-            return;
-        }
-
-        sa.setActivatingPlayer(this);
-        this.playSpellAbilityWithoutPayingManaCost(sa);
-    }
-    
-    /**
-     * <p>
-     * playSpellAbilityForFree.
-     * </p>
-     * 
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     */
-    public final void playSpellAbilityWithoutPayingManaCost(final SpellAbility sa) {
-        FThreads.assertExecutedByEdt(false);
-        final Card source = sa.getSourceCard();
-        
-        source.setSplitStateToPlayAbility(sa);
-
-        if (sa.getPayCosts() != null) {
-            if (sa.getApi() == ApiType.Charm && !sa.isWrapper()) {
-                CharmEffect.makeChoices(sa);
-            }
-            final CostPayment payment = new CostPayment(sa.getPayCosts(), sa);
-
-            final HumanPlaySpellAbility req = new HumanPlaySpellAbility(sa, payment);
-            req.fillRequirements(false, true, false);
-        } else {
-            if (sa.isSpell()) {
-                final Card c = sa.getSourceCard();
-                if (!c.isCopiedSpell()) {
-                    sa.setSourceCard(game.getAction().moveToStack(c));
-                }
-            }
-            boolean x = sa.getSourceCard().getManaCost().getShardCount(ManaCostShard.X) > 0;
-
-            game.getStack().add(sa, x);
         }
     }
 
