@@ -246,10 +246,16 @@ public abstract class TapAiBase extends SpellAbilityAi  {
         List<Card> list = game.getCardsIn(ZoneType.Battlefield);
         list = CardLists.getValidCards(list, tgt.getValidTgts(), source.getController(), source);
         list = CardLists.getTargetableCards(list, sa);
+        
+        // try to tap anything controlled by the computer
+        List<Card> tapList = CardLists.filterControlledBy(list, ai.getOpponents());
+        if (tapTargetList(ai, sa, tapList, mandatory)) {
+            return true;
+        }
 
         // filter by enchantments and planeswalkers, their tapped state doesn't matter.
         final String[] tappablePermanents = { "Enchantment", "Planeswalker" };
-        List<Card> tapList = CardLists.getValidCards(list, tappablePermanents, source.getController(), source);
+        tapList = CardLists.getValidCards(list, tappablePermanents, source.getController(), source);
 
         if (tapTargetList(ai, sa, tapList, mandatory)) {
             return true;
