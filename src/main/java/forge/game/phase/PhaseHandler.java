@@ -552,11 +552,13 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
         SDisplayUtil.showTab(nextField);
 
         if (game.getType() == GameType.Planechase) {
-            Card p = game.getActivePlane();
-            if (p != null) {
-                p.setController(next, 0);
-                game.getAction().controllerChangeZoneCorrection(p);
-            }
+            for(Card p :game.getActivePlanes())
+            {
+                if (p != null) {
+                    p.setController(next, 0);
+                    game.getAction().controllerChangeZoneCorrection(p);
+                }
+            }            
         }
 
         return next;

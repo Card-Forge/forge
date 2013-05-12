@@ -1,5 +1,9 @@
 package forge.card.ability.effects;
 
+import java.util.List;
+
+import forge.Card;
+import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
 import forge.game.GameState;
@@ -24,7 +28,15 @@ public class PlaneswalkEffect extends SpellAbilityEffect {
         {
             p.leaveCurrentPlane();
         }
-        sa.getActivatingPlayer().planeswalk();
+        if(sa.hasParam("Defined")) {
+            List<Card> destinations = AbilityUtils.getDefinedCards(sa.getSourceCard(), sa.getParam("Defined"), sa);
+            sa.getActivatingPlayer().planeswalkTo(destinations);
+        }
+        else
+        {
+            sa.getActivatingPlayer().planeswalk();
+        }
+        
     }
 
 }

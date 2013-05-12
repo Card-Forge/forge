@@ -61,8 +61,7 @@ public class GameState {
     private final List<Player> allPlayers;
     private final List<Player> ingamePlayers = new ArrayList<Player>();
     
-    private final List<Card> communalPlanarDeck = new ArrayList<Card>();
-    private Card activePlane = null;
+    private List<Card> activePlanes = null;
     
     public final Cleanup cleanup;
     public final EndOfTurn endOfTurn;
@@ -561,15 +560,15 @@ public class GameState {
     /**
      * @return the activePlane
      */
-    public Card getActivePlane() {
-        return activePlane;
+    public List<Card> getActivePlanes() {
+        return activePlanes;
     }
 
     /**
      * @param activePlane0 the activePlane to set
      */
-    public void setActivePlane(Card activePlane0) {
-        this.activePlane = activePlane0;
+    public void setActivePlanes(List<Card> activePlane0) {
+        this.activePlanes = activePlane0;
     }
 
     public void archenemy904_10() {

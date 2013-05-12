@@ -2,7 +2,7 @@ Name:Panopticon
 ManaCost:no cost
 Types:Plane Mirrodin
 T:Mode$ PlaneswalkedTo | ValidCard$ Card.Self | TriggerZones$ Command | Execute$ PanopticonDraw | TriggerDescription$ When you planeswalk to CARDNAME, draw a card.
-T:Mode$ Phase | Phase$ Draw | ValidPlayer$ You | Execute$ PanopticonDraw | TriggerDescription$ At the beginning of your draw step, draw an additional card.
+T:Mode$ Phase | Phase$ Draw | ValidPlayer$ You | Execute$ PanopticonDraw | TriggerZones$ Command | TriggerDescription$ At the beginning of your draw step, draw an additional card.
 T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ PanopticonDraw | TriggerDescription$ Whenever you roll Chaos, draw a card.
 SVar:PanopticonDraw:AB$ Draw | Cost$ 0 | Defined$ You | NumCards$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/panopticon.jpg

@@ -1,5 +1,6 @@
 package forge.card.trigger;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 import forge.Card;
@@ -33,11 +34,14 @@ public class TriggerPlaneswalkedTo extends Trigger {
     @Override
     public boolean performTest(Map<String, Object> runParams2) {
         if (this.mapParams.containsKey("ValidCard")) {
-            final Card moved = (Card) runParams2.get("Card");
-            if (!moved.isValid(this.mapParams.get("ValidCard").split(","), this.getHostCard().getController(),
-                    this.getHostCard())) {
-                return false;
+            for(Card moved : (ArrayList<Card>)runParams2.get("Card"))
+            {
+                if (moved.isValid(this.mapParams.get("ValidCard").split(","), this.getHostCard().getController(),
+                        this.getHostCard())) {
+                    return true;
+                }
             }
+            return false;
         }
         
         return true;

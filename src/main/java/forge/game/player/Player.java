@@ -159,7 +159,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     /** The zones. */
     private final Map<ZoneType, PlayerZone> zones = new EnumMap<ZoneType, PlayerZone>(ZoneType.class);
 
-    private Card currentPlane = null;
+    private List<Card> currentPlanes = new ArrayList<Card>();
 
     private PlayerStatistics stats = new PlayerStatistics();
     protected PlayerController controller;
@@ -2948,38 +2948,51 @@ public class Player extends GameEntity implements Comparable<Player> {
      * Then runs triggers. 
      */
     public void planeswalk()
+    {        
+        planeswalkTo(Arrays.asList(getZone(ZoneType.PlanarDeck).get(0)));
+    }
+    
+    /**
+     * Puts the planes in the argument and puts them face up in the command zone.
+     * Then runs triggers.
+     * 
+     * @param destinations The planes to planeswalk to.
+     */
+    public void planeswalkTo(final List<Card> destinations)
     {
-        
-        currentPlane = getZone(ZoneType.PlanarDeck).get(0);
+        currentPlanes = destinations;
 
-        getZone(ZoneType.PlanarDeck).remove(currentPlane);
-        getZone(ZoneType.Command).add(currentPlane);
+        for(Card c : currentPlanes) {
+            getZone(ZoneType.PlanarDeck).remove(c);
+            getZone(ZoneType.Command).add(c);
+        }        
         
-        game.setActivePlane(currentPlane);
+        game.setActivePlanes(currentPlanes);
         //Run PlaneswalkedTo triggers here.
         HashMap<String,Object> runParams = new HashMap<String,Object>();
-        runParams.put("Card", currentPlane);
+        runParams.put("Card", currentPlanes);
         game.getTriggerHandler().runTrigger(TriggerType.PlaneswalkedTo, runParams,false);
     }
     
     /**
      * 
-     * Puts my currently active plane, if any, at the bottom of my planar deck.
+     * Puts my currently active planes, if any, at the bottom of my planar deck.
      */
     public void leaveCurrentPlane()
     {        
-        if(currentPlane != null)
+        if(!currentPlanes.isEmpty())
         {
           //Run PlaneswalkedFrom triggers here.
             HashMap<String,Object> runParams = new HashMap<String,Object>();
-            runParams.put("Card", currentPlane);
+            runParams.put("Card", currentPlanes);
             game.getTriggerHandler().runTrigger(TriggerType.PlaneswalkedFrom, runParams,false);
             
-            Zone com = game.getZoneOf(currentPlane);
-            com.remove(currentPlane);
-            currentPlane.clearControllers();
-            getZone(ZoneType.PlanarDeck).add(currentPlane);
-            currentPlane = null;
+            for(Card c : currentPlanes) {
+                getZone(ZoneType.Command).remove(c);
+                c.clearControllers();
+                getZone(ZoneType.PlanarDeck).add(c);
+            }
+            currentPlanes.clear();
         }
     }
     
@@ -3000,13 +3013,13 @@ public class Player extends GameEntity implements Comparable<Player> {
             }
             else
             {
-                currentPlane = firstPlane;
+                currentPlanes.add(firstPlane);
                 getZone(ZoneType.Command).add(firstPlane);
                 break;
             }
         }
         
-        game.setActivePlane(currentPlane);
+        game.setActivePlanes(currentPlanes);
     }
 
     /**
