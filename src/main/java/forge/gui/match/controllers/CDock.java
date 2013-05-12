@@ -303,49 +303,31 @@ public enum CDock implements ICDoc {
         refreshArcStateDisplay();
 
         VDock.SINGLETON_INSTANCE.getBtnConcede()
-            .addMouseListener(new MouseAdapter() { @Override
-                public void mousePressed(final MouseEvent e) {
-                    concede(); } });
+        .addMouseListener(new MouseAdapter() { @Override public void mousePressed(final MouseEvent e) { concede(); } });
 
         VDock.SINGLETON_INSTANCE.getBtnSettings()
-            .addMouseListener(new MouseAdapter() { @Override
-                public void mousePressed(final MouseEvent e) {
-                    SOverlayUtils.showOverlay(); } });
+        .addMouseListener(new MouseAdapter() { @Override public void mousePressed(final MouseEvent e) { SOverlayUtils.showOverlay(); } });
 
         VDock.SINGLETON_INSTANCE.getBtnEndTurn()
-            .addMouseListener(new MouseAdapter() { @Override
-                public void mousePressed(final MouseEvent e) {
-                    endTurn(); } });
+        .addMouseListener(new MouseAdapter() { @Override public void mousePressed(final MouseEvent e) { endTurn(); } });
 
         VDock.SINGLETON_INSTANCE.getBtnViewDeckList()
-            .addMouseListener(new MouseAdapter() { @Override
-                public void mousePressed(final MouseEvent e) {
-                    viewDeckList(); } });
+        .addMouseListener(new MouseAdapter() { @Override public void mousePressed(final MouseEvent e) { viewDeckList(); } });
 
         VDock.SINGLETON_INSTANCE.getBtnRevertLayout()
-        .addMouseListener(new MouseAdapter() { @Override
-            public void mousePressed(final MouseEvent e) {
-                revertLayout(); } });
+        .addMouseListener(new MouseAdapter() { @Override public void mousePressed(final MouseEvent e) { revertLayout(); } });
 
         VDock.SINGLETON_INSTANCE.getBtnOpenLayout()
-        .addMouseListener(new MouseAdapter() { @Override
-            public void mousePressed(final MouseEvent e) {
-                openLayout(); } });
+        .addMouseListener(new MouseAdapter() { @Override public void mousePressed(final MouseEvent e) { openLayout(); } });
 
         VDock.SINGLETON_INSTANCE.getBtnSaveLayout()
-        .addMouseListener(new MouseAdapter() { @Override
-            public void mousePressed(final MouseEvent e) {
-                saveLayout(); } });
+        .addMouseListener(new MouseAdapter() { @Override public void mousePressed(final MouseEvent e) { saveLayout(); } });
 
         VDock.SINGLETON_INSTANCE.getBtnAlphaStrike()
-        .addMouseListener(new MouseAdapter() { @Override
-            public void mousePressed(final MouseEvent e) {
-                alphaStrike(); } });
+        .addMouseListener(new MouseAdapter() { @Override public void mousePressed(final MouseEvent e) { alphaStrike(); } });
 
         VDock.SINGLETON_INSTANCE.getBtnTargeting()
-        .addMouseListener(new MouseAdapter() { @Override
-            public void mousePressed(final MouseEvent e) {
-                toggleTargeting(); } });
+        .addMouseListener(new MouseAdapter() { @Override public void mousePressed(final MouseEvent e) { toggleTargeting(); } });
     }
 
     /* (non-Javadoc)

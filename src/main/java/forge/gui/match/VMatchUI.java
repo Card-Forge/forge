@@ -121,7 +121,7 @@ public enum VMatchUI implements IVTopLevelUI {
             @Override
             public void run() {
                 for (final DragCell c : FView.SINGLETON_INSTANCE.getDragCells()) {
-                    if (c.getDocs().size() == 0) {
+                    if (c.getDocs().isEmpty()) {
                         SRearrangingUtil.fillGap(c);
                         FView.SINGLETON_INSTANCE.removeDragCell(c);
                     }
