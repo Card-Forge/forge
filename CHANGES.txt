@@ -36,6 +36,7 @@ Land's Edge
 Locket of Yesterdays
 Mana Skimmer
 Mana Maze
+Thrull Wizard
 
 
 ----------
