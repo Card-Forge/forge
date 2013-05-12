@@ -15,7 +15,9 @@ public class LobbyPlayerHuman extends LobbyPlayer {
 
     @Override
     public Player getPlayer(GameState game) {
-        return new HumanPlayer(this, game);
+        Player player = new Player(this, game);
+        player.setController(new PlayerControllerHuman(game, player));
+        return player;
     }
 
     public void hear(LobbyPlayer player, String message) {

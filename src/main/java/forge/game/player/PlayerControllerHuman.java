@@ -49,13 +49,13 @@ public class PlayerControllerHuman extends PlayerController {
     private final Input blockInput;
     private final Input cleanupInput;
     private final Input autoPassPriorityInput;
-    private final HumanPlayer player;
+    private final Player player;
 
     public final Input getDefaultInput() {
         return defaultInput;
     }
 
-    public PlayerControllerHuman(GameState game0, HumanPlayer p) {
+    public PlayerControllerHuman(GameState game0, Player p) {
         super(game0);
         player = p;
         
@@ -106,7 +106,7 @@ public class PlayerControllerHuman extends PlayerController {
      */
     public void playFromSuspend(Card c) {
         c.setSuspendCast(true);
-        HumanPlayer.playCardWithoutPayingManaCost(player, c);
+        HumanPlay.playCardWithoutPayingManaCost(player, c);
     }
 
     /* (non-Javadoc)
@@ -124,7 +124,7 @@ public class PlayerControllerHuman extends PlayerController {
 
         boolean result = GuiDialog.confirm(cascadedCard, question.toString());
         if ( result )
-            HumanPlayer.playCardWithoutPayingManaCost(player, cascadedCard);
+            HumanPlay.playCardWithoutPayingManaCost(player, cascadedCard);
         return result;
     }
 
@@ -133,7 +133,7 @@ public class PlayerControllerHuman extends PlayerController {
      */
     @Override
     public void playSpellAbilityForFree(SpellAbility copySA) {
-        HumanPlayer.playSaWithoutPayingManaCost(player, copySA);
+        HumanPlay.playSaWithoutPayingManaCost(player, copySA);
     }
 
     /**
@@ -373,14 +373,14 @@ public class PlayerControllerHuman extends PlayerController {
     @Override
     public void playMiracle(SpellAbility miracle, Card card) {
         if (GuiDialog.confirm(card, card + " - Drawn. Play for Miracle Cost?")) {
-            HumanPlayer.playSpellAbility(player, miracle);
+            HumanPlay.playSpellAbility(player, miracle);
         }
     }
 
     @Override
     public void playMadness(SpellAbility madness) {
         if (GuiDialog.confirm(madness.getSourceCard(), madness.getSourceCard() + " - Discarded. Pay Madness Cost?")) {
-           HumanPlayer.playSpellAbility(player, madness);
+           HumanPlay.playSpellAbility(player, madness);
         }
     }
 

@@ -38,6 +38,7 @@ import forge.card.spellability.SpellAbility;
 import forge.control.input.Input;
 import forge.control.input.InputPayManaBase;
 import forge.game.GameState;
+import forge.game.player.HumanPlay;
 import forge.game.player.HumanPlayer;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
@@ -150,7 +151,7 @@ public class CField implements ICDoc {
                 final SpellAbility ab = CField.this.playerViewer.getController().getAbilityToPlay(game.getAbilitesOfCard(c, CField.this.playerViewer));
                 if ( null != ab) {
                     FThreads.invokeInNewThread(new Runnable(){ @Override public void run(){
-                        HumanPlayer.playSpellAbility(CField.this.playerViewer, c, ab);
+                        HumanPlay.playSpellAbility(CField.this.playerViewer, c, ab);
                     }});
                 }
             }

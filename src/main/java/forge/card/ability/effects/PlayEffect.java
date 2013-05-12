@@ -23,7 +23,7 @@ import forge.game.GameState;
 import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilCard;
 import forge.game.player.AIPlayer;
-import forge.game.player.HumanPlayer;
+import forge.game.player.HumanPlay;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
@@ -245,7 +245,7 @@ public class PlayEffect extends SpellAbilityEffect {
             boolean noManaCost = sa.hasParam("WithoutManaCost"); 
             if (controller.isHuman()) {
                 SpellAbility newSA = noManaCost ? tgtSA.copyWithNoManaCost() : tgtSA;
-                HumanPlayer.playSpellAbility(activator, newSA);
+                HumanPlay.playSpellAbility(activator, newSA);
             } else {
                 if (tgtSA instanceof Spell) { // Isn't it ALWAYS a spell?
                     Spell spell = (Spell) tgtSA;

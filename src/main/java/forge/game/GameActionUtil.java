@@ -73,6 +73,7 @@ import forge.control.input.InputSelectCardsFromList;
 import forge.game.event.CardDamagedEvent;
 import forge.game.event.LifeLossEvent;
 import forge.game.player.AIPlayer;
+import forge.game.player.HumanPlay;
 import forge.game.player.HumanPlayer;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
@@ -282,7 +283,7 @@ public final class GameActionUtil {
     
                     if (p.isHuman()) {
                         if (GuiDialog.confirm(rippledCards[i], "Cast " + rippledCards[i].getName() + "?")) {
-                            HumanPlayer.playCardWithoutPayingManaCost(((HumanPlayer)p), rippledCards[i]);
+                            HumanPlay.playCardWithoutPayingManaCost(((HumanPlayer)p), rippledCards[i]);
                             revealed.remove(rippledCards[i]);
                         }
                     } else {

@@ -21,7 +21,8 @@ import forge.Card;
 import forge.FThreads;
 import forge.card.spellability.SpellAbility;
 import forge.game.phase.PhaseHandler;
-import forge.game.player.HumanPlayer;
+import forge.game.player.HumanPlay;
+import forge.game.player.Player;
 import forge.gui.GuiDisplayUtil;
 import forge.gui.framework.SDisplayUtil;
 import forge.gui.match.CMatchUI;
@@ -44,7 +45,7 @@ public class InputPassPriority extends InputBase {
      * TODO: Write javadoc for Constructor.
      * @param player
      */
-    public InputPassPriority(HumanPlayer human) {
+    public InputPassPriority(Player human) {
         super(human);
     }
 
@@ -86,7 +87,7 @@ public class InputPassPriority extends InputBase {
             Runnable execAbility = new Runnable() {
                 @Override
                 public void run() {
-                    HumanPlayer.playSpellAbility(player, card, ab);
+                    HumanPlay.playSpellAbility(player, card, ab);
                 }
             };
             

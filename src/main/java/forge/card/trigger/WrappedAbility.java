@@ -18,7 +18,7 @@ import forge.card.spellability.TargetChoices;
 import forge.game.GameState;
 import forge.game.ai.ComputerUtil;
 import forge.game.player.AIPlayer;
-import forge.game.player.HumanPlayer;
+import forge.game.player.HumanPlay;
 import forge.game.player.Player;
 import forge.gui.GuiDialog;
 
@@ -365,7 +365,7 @@ public class WrappedAbility extends Ability implements ISpellAbility {
             return;
 
         if (getActivatingPlayer().isHuman()) {
-            HumanPlayer.playSpellAbilityNoStack(getActivatingPlayer(), sa, true);
+            HumanPlay.playSpellAbilityNoStack(getActivatingPlayer(), sa, true);
         } else {
             // commented out because i don't think this should be called
             // again here

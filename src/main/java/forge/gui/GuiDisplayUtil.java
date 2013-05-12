@@ -52,6 +52,7 @@ import forge.card.spellability.SpellAbility;
 import forge.card.trigger.TriggerType;
 import forge.game.GameState;
 import forge.game.PlanarDice;
+import forge.game.player.HumanPlay;
 import forge.game.player.HumanPlayer;
 import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
@@ -637,7 +638,7 @@ public final class GuiDisplayUtil {
                     game.getAction().moveToHand(forgeCard); // this is really needed (for rollbacks at least) 
                     // Human player is choosing targets for an ability controlled by chosen player. 
                     sa.setActivatingPlayer(p);
-                    HumanPlayer.playSaWithoutPayingManaCost(Singletons.getControl().getPlayer(), sa);
+                    HumanPlay.playSaWithoutPayingManaCost(Singletons.getControl().getPlayer(), sa);
                 }
             });
         }

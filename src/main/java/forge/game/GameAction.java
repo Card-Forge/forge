@@ -61,7 +61,7 @@ import forge.game.event.CardRegeneratedEvent;
 import forge.game.event.CardSacrificedEvent;
 import forge.game.player.AIPlayer;
 import forge.game.player.GameLossReason;
-import forge.game.player.HumanPlayer;
+import forge.game.player.HumanPlay;
 import forge.game.player.Player;
 import forge.game.player.PlayerType;
 import forge.game.zone.PlayerZone;
@@ -1435,7 +1435,7 @@ public class GameAction {
                             if (GuiDialog.confirm(c, "Use " + c +"'s  ability?")) {
                                 // If we ever let the AI memorize cards in the players
                                 // hand, this would be a place to do so.
-                                HumanPlayer.playSpellAbilityNoStack(p, effect);
+                                HumanPlay.playSpellAbilityNoStack(p, effect);
                             }
                         }
                     }
