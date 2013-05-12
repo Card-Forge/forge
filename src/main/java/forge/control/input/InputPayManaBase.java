@@ -292,7 +292,7 @@ public abstract class InputPayManaBase extends InputSyncronizedBase implements I
         Runnable proc = new Runnable() {
             @Override
             public void run() {
-                ((HumanPlayer)chosen.getActivatingPlayer()).playSpellAbility(chosen);
+                HumanPlayer.playSpellAbility(chosen.getActivatingPlayer(), chosen);
                 onManaAbilityPlayed(chosen); 
             }
         };

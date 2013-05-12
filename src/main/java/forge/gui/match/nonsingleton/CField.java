@@ -150,7 +150,7 @@ public class CField implements ICDoc {
                 final SpellAbility ab = CField.this.playerViewer.getController().getAbilityToPlay(game.getAbilitesOfCard(c, CField.this.playerViewer));
                 if ( null != ab) {
                     FThreads.invokeInNewThread(new Runnable(){ @Override public void run(){
-                        CField.this.playerViewer.playSpellAbility(c, ab);
+                        HumanPlayer.playSpellAbility(CField.this.playerViewer, c, ab);
                     }});
                 }
             }

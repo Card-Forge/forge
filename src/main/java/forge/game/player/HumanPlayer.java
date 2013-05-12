@@ -53,13 +53,13 @@ public class HumanPlayer extends Player {
      * @param card
      * @param ab
      */
-    public void playSpellAbility(Card c, SpellAbility ab) {
+    public static void playSpellAbility(Player p, Card c, SpellAbility ab) {
         if (ab == Ability.PLAY_LAND_SURROGATE)
-            this.playLand(c);
+            p.playLand(c);
         else {
-            this.playSpellAbility(ab);
+            HumanPlayer.playSpellAbility(p, ab);
         }
-        game.getPhaseHandler().setPriority(this);
+        p.getGame().getPhaseHandler().setPriority(p);
     }
 
     @Override
@@ -76,9 +76,9 @@ public class HumanPlayer extends Player {
      * @param sa
      *            a {@link forge.card.spellability.SpellAbility} object.
      */
-    public final void playSpellAbility(SpellAbility sa) {
+    public final static void playSpellAbility(Player p, SpellAbility sa) {
         FThreads.assertExecutedByEdt(false);
-        sa.setActivatingPlayer(this);
+        sa.setActivatingPlayer(p);
 
         final Card source = sa.getSourceCard();
         
@@ -88,7 +88,7 @@ public class HumanPlayer extends Player {
             CharmEffect.makeChoices(sa);
         }
 
-        sa = chooseOptionalAdditionalCosts(sa);
+        sa = chooseOptionalAdditionalCosts(p, sa);
 
         if (sa == null) {
             return;
@@ -116,13 +116,51 @@ public class HumanPlayer extends Player {
             final HumanPlaySpellAbility req = new HumanPlaySpellAbility(sa, payment);
             req.fillRequirements(false, false, false);
         } else {
-            if (payManaCostIfNeeded(sa)) {
+            if (payManaCostIfNeeded(p, sa)) {
                 if (sa.isSpell() && !source.isCopiedSpell()) {
-                    sa.setSourceCard(game.getAction().moveToStack(source));
+                    sa.setSourceCard(p.getGame().getAction().moveToStack(source));
                 }
-                game.getStack().add(sa);
+                p.getGame().getStack().add(sa);
             } 
         }
+    }
+
+    /**
+     * choose optional additional costs. For HUMAN only
+     * @param activator 
+     * 
+     * @param original
+     *            the original sa
+     * @return an ArrayList<SpellAbility>.
+     */
+    private static SpellAbility chooseOptionalAdditionalCosts(Player p, final SpellAbility original) {
+        //final HashMap<String, SpellAbility> map = new HashMap<String, SpellAbility>();
+        final List<SpellAbility> abilities = GameActionUtil.getOptionalCosts(original);
+        
+        if (!original.isSpell()) {
+            return original;
+        }
+    
+        return p.getController().getAbilityToPlay(abilities);
+    }
+
+    private static boolean payManaCostIfNeeded(final Player p, final SpellAbility sa) {
+        final ManaCostBeingPaid manaCost; 
+        if (sa.getSourceCard().isCopiedSpell() && sa.isSpell()) {
+            manaCost = new ManaCostBeingPaid(ManaCost.ZERO);
+        } else {
+            manaCost = new ManaCostBeingPaid(sa.getPayCosts().getTotalMana());
+            manaCost.applySpellCostChange(sa);
+        }
+    
+        boolean isPaid = manaCost.isPaid();
+    
+        if( !isPaid ) {
+            InputPayManaBase inputPay = new InputPayManaSimple(p.getGame(), sa, manaCost);
+            FThreads.setInputAndWait(inputPay);
+            isPaid = inputPay.isPaid();
+        }
+        return isPaid;
     }
 
     /**
@@ -146,51 +184,12 @@ public class HumanPlayer extends Player {
             
             req.fillRequirements(useOldTargets, false, true);
         } else {
-            if (payManaCostIfNeeded(sa)) {
+            if (payManaCostIfNeeded(this, sa)) {
                 AbilityUtils.resolve(sa, false);
             }
 
         }
     }
-
-    private boolean payManaCostIfNeeded(final SpellAbility sa) {
-        final ManaCostBeingPaid manaCost; 
-        if (sa.getSourceCard().isCopiedSpell() && sa.isSpell()) {
-            manaCost = new ManaCostBeingPaid(ManaCost.ZERO);
-        } else {
-            manaCost = new ManaCostBeingPaid(sa.getPayCosts().getTotalMana());
-            manaCost.applySpellCostChange(sa);
-        }
-    
-        boolean isPaid = manaCost.isPaid();
-    
-        if( !isPaid ) {
-            InputPayManaBase inputPay = new InputPayManaSimple(game, sa, manaCost);
-            FThreads.setInputAndWait(inputPay);
-            isPaid = inputPay.isPaid();
-        }
-        return isPaid;
-    }
-
-    /**
-     * choose optional additional costs. For HUMAN only
-     * @param activator 
-     * 
-     * @param original
-     *            the original sa
-     * @return an ArrayList<SpellAbility>.
-     */
-    public SpellAbility chooseOptionalAdditionalCosts(final SpellAbility original) {
-        //final HashMap<String, SpellAbility> map = new HashMap<String, SpellAbility>();
-        final List<SpellAbility> abilities = GameActionUtil.getOptionalCosts(original);
-        
-        if (!original.isSpell()) {
-            return original;
-        }
-
-        return getController().getAbilityToPlay(abilities);
-    }
-
 
     public final void playCardWithoutManaCost(final Card c) {
         final List<SpellAbility> choices = c.getBasicSpells();

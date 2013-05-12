@@ -426,7 +426,5 @@ public abstract class GameEntity extends MyObservable {
         return this.name;
     }
 
-    public GameState getGame() {
-        return null;
-    }
+    public abstract GameState getGame();
 }

@@ -373,14 +373,14 @@ public class PlayerControllerHuman extends PlayerController {
     @Override
     public void playMiracle(SpellAbility miracle, Card card) {
         if (GuiDialog.confirm(card, card + " - Drawn. Play for Miracle Cost?")) {
-            player.playSpellAbility(miracle);
+            HumanPlayer.playSpellAbility(player, miracle);
         }
     }
 
     @Override
     public void playMadness(SpellAbility madness) {
         if (GuiDialog.confirm(madness.getSourceCard(), madness.getSourceCard() + " - Discarded. Pay Madness Cost?")) {
-            player.playSpellAbility(madness);
+           HumanPlayer.playSpellAbility(player, madness);
         }
     }
 
