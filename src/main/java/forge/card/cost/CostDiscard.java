@@ -30,8 +30,10 @@ import forge.card.spellability.SpellAbility;
 import forge.control.input.InputSelectCards;
 import forge.control.input.InputSelectCardsFromList;
 import forge.game.GameState;
+import forge.game.ai.AiController;
 import forge.game.player.AIPlayer;
 import forge.game.player.Player;
+import forge.game.player.PlayerControllerAi;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
 
@@ -279,7 +281,8 @@ public class CostDiscard extends CostPartWithList {
         if (type.equals("Random")) {
             return new PaymentDecision(CardLists.getRandomSubList(hand, c));
         } else {
-            return new PaymentDecision(ai.getAi().getCardsToDiscard(c, type.split(";"), ability));
+            final AiController aic = ((PlayerControllerAi)ai.getController()).getAi();
+            return new PaymentDecision(aic.getCardsToDiscard(c, type.split(";"), ability));
         }
     }
 

@@ -34,8 +34,10 @@ import forge.control.input.InputPayManaExecuteCommands;
 import forge.control.input.InputSelectCards;
 import forge.control.input.InputSelectCardsFromList;
 import forge.game.GameState;
+import forge.game.ai.AiController;
 import forge.game.player.AIPlayer;
 import forge.game.player.Player;
+import forge.game.player.PlayerControllerAi;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 
@@ -106,7 +108,8 @@ public class CardFactorySorceries {
                 for( Card c : sc.getSelected())
                     p.discard(c, spell);
             } else {
-                final List<Card> toDiscard = ((AIPlayer)p).getAi().getCardsToDiscard(sac, (String[])null, spell);
+                final AiController ai = ((PlayerControllerAi)p.getController()).getAi();
+                final List<Card> toDiscard = ai.getCardsToDiscard(sac, (String[])null, spell);
                 for (int i = 0; i < toDiscard.size(); i++) {
                     p.discard(toDiscard.get(i), spell);
                 }

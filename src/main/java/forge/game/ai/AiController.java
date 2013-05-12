@@ -804,7 +804,7 @@ public class AiController {
                         if (!player.isUnlimitedHandSize()) {
                             int max = Math.min(player.getZone(ZoneType.Hand).size(), size - player.getMaxHandSize());
                             if( max > 0) {
-                                final List<Card> toDiscard = player.getAi().getCardsToDiscard(max, (String[])null, null);
+                                final List<Card> toDiscard = getCardsToDiscard(max, (String[])null, null);
                                 for (int i = 0; i < toDiscard.size(); i++) {
                                     player.discard(toDiscard.get(i), null);
                                 }

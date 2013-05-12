@@ -42,9 +42,4 @@ public class AIPlayer extends Player {
         super(player, game);
         controller = new PlayerControllerAi(game, this);
     }
-
-    public AiController getAi() { 
-        return controller instanceof PlayerControllerAi ? ((PlayerControllerAi) controller).getAi() : null;
-    }
-    
 } // end AIPlayer class

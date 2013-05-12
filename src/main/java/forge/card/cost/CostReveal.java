@@ -31,8 +31,10 @@ import forge.card.spellability.SpellAbility;
 import forge.control.input.InputSelectCards;
 import forge.control.input.InputSelectCardsFromList;
 import forge.game.GameState;
+import forge.game.ai.AiController;
 import forge.game.player.AIPlayer;
 import forge.game.player.Player;
+import forge.game.player.PlayerControllerAi;
 import forge.game.zone.ZoneType;
 
 /**
@@ -128,7 +130,8 @@ public class CostReveal extends CostPartWithList {
             }
         }
 
-        return new PaymentDecision(ai.getAi().getCardsToDiscard(c, type.split(";"), ability));
+        final AiController aic = ((PlayerControllerAi)ai.getController()).getAi();
+        return new PaymentDecision(aic.getCardsToDiscard(c, type.split(";"), ability));
     }
 
     /*

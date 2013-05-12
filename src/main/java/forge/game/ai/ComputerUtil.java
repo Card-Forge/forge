@@ -51,6 +51,7 @@ import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.AIPlayer;
 import forge.game.player.Player;
+import forge.game.player.PlayerControllerAi;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 import forge.util.Aggregates;
@@ -1238,7 +1239,8 @@ public class ComputerUtil {
     public static boolean wantMulligan(AIPlayer ai) {
         final List<Card> handList = ai.getCardsIn(ZoneType.Hand);
         final boolean hasLittleCmc0Cards = CardLists.getValidCards(handList, "Card.cmcEQ0", ai, null).size() < 2;
-        return (handList.size() > ai.getAi().getIntProperty(AiProps.AI_MULLIGAN_THRESHOLD)) && hasLittleCmc0Cards;
+        final AiController aic = ((PlayerControllerAi)ai.getController()).getAi();
+        return (handList.size() > aic.getIntProperty(AiProps.AI_MULLIGAN_THRESHOLD)) && hasLittleCmc0Cards;
 
     }
     
@@ -1368,7 +1370,8 @@ public class ComputerUtil {
      */
     public static List<Card> getCardsToDiscardFromFriend(AIPlayer aiChooser, Player p, SpellAbility sa, List<Card> validCards, int min, int max) {
         if (p instanceof AIPlayer) { // ask that ai player what he would like to discard
-            return ((AIPlayer) p).getAi().getCardsToDiscard(min, max, validCards, sa);
+            final AiController aic = ((PlayerControllerAi)p.getController()).getAi();
+            return aic.getCardsToDiscard(min, max, validCards, sa);
         } 
         // no special options for human or remote friends
         return getCardsToDiscardFromOpponent(aiChooser, p, sa, validCards, min, max);

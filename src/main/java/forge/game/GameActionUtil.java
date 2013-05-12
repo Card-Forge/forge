@@ -70,11 +70,13 @@ import forge.control.input.InputPayManaExecuteCommands;
 import forge.control.input.InputPayment;
 import forge.control.input.InputSelectCards;
 import forge.control.input.InputSelectCardsFromList;
+import forge.game.ai.AiController;
 import forge.game.event.CardDamagedEvent;
 import forge.game.event.LifeLossEvent;
 import forge.game.player.AIPlayer;
 import forge.game.player.HumanPlay;
 import forge.game.player.Player;
+import forge.game.player.PlayerControllerAi;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 import forge.gui.GuiDialog;
@@ -286,8 +288,8 @@ public final class GameActionUtil {
                             revealed.remove(rippledCards[i]);
                         }
                     } else {
-                        AIPlayer ai = (AIPlayer) p;
-                        SpellAbility saPlayed = ai.getAi().chooseAndPlaySa(rippledCards[i].getBasicSpells(), false, true);
+                        final AiController aic = ((PlayerControllerAi)p.getController()).getAi();
+                        SpellAbility saPlayed = aic.chooseAndPlaySa(rippledCards[i].getBasicSpells(), false, true);
                         if ( saPlayed != null )
                             revealed.remove(rippledCards[i]);
                     }
