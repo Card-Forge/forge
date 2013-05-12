@@ -212,30 +212,6 @@ public class ComputerUtilCard {
     
     }
 
-    // for Sarkhan the Mad
-    /**
-     * <p>
-     * getCheapestCreatureAI.
-     * </p>
-     * 
-     * @param list
-     *            a {@link forge.CardList} object.
-     * @param spell
-     *            a {@link forge.Card} object.
-     * @param targeted
-     *            a boolean.
-     * @return a {@link forge.Card} object.
-     */
-    public static Card getCheapestCreatureAI(List<Card> list, final SpellAbility spell, final boolean targeted) {
-        list = CardLists.filter(list, new Predicate<Card>() {
-            @Override
-            public boolean apply(final Card c) {
-                return c.isCreature();
-            }
-        });
-        return getCheapestPermanentAI(list, spell, targeted);
-    }
-
     // returns null if list.size() == 0
     /**
      * <p>
@@ -268,8 +244,20 @@ public class ComputerUtilCard {
      * @return the card
      */
     public static Card getBestCreatureAI(final List<Card> list) {
-        List<Card> all = CardLists.filter(list, CardPredicates.Presets.CREATURES);
-        return Aggregates.itemWithMax(all, ComputerUtilCard.fnEvaluateCreature);
+        return Aggregates.itemWithMax(Iterables.filter(list, CardPredicates.Presets.CREATURES), ComputerUtilCard.fnEvaluateCreature);
+    }
+
+    /**
+     * <p>
+     * getWorstCreatureAI.
+     * </p>
+     * 
+     * @param list
+     *            a {@link forge.CardList} object.
+     * @return a {@link forge.Card} object.
+     */
+    public static Card getWorstCreatureAI(final List<Card> list) {
+        return Aggregates.itemWithMin(Iterables.filter(list, CardPredicates.Presets.CREATURES), ComputerUtilCard.fnEvaluateCreature);
     }
 
     // This selection rates tokens higher
@@ -312,22 +300,6 @@ public class ComputerUtilCard {
         return ComputerUtilCard.getWorstPermanentAI(list, false, false, false, false);
     }
 
-    // returns null if list.size() == 0
-    /**
-     * <p>
-     * getWorstCreatureAI.
-     * </p>
-     * 
-     * @param list
-     *            a {@link forge.CardList} object.
-     * @return a {@link forge.Card} object.
-     */
-    public static Card getWorstCreatureAI(final List<Card> list) {
-        List<Card> all = CardLists.filter(list, CardPredicates.Presets.CREATURES);
-        // get smallest creature
-        return Aggregates.itemWithMin(all, ComputerUtilCard.fnEvaluateCreature);
-    }
-
     /**
      * <p>
      * getWorstPermanentAI.
@@ -350,20 +322,23 @@ public class ComputerUtilCard {
         if (list.size() == 0) {
             return null;
         }
-    
-        if (biasEnch && Iterables.any(list, CardPredicates.Presets.ENCHANTMENTS)) {
+        
+        final boolean hasEnchantmants = Iterables.any(list, CardPredicates.Presets.ENCHANTMENTS);
+        if (biasEnch && hasEnchantmants) {
             return getCheapestPermanentAI(CardLists.filter(list, CardPredicates.Presets.ENCHANTMENTS), null, false);
         }
     
-        if (biasArt && Iterables.any(list, CardPredicates.Presets.ARTIFACTS)) {
+        final boolean hasArtifacts = Iterables.any(list, CardPredicates.Presets.ARTIFACTS); 
+        if (biasArt && hasArtifacts) {
             return getCheapestPermanentAI(CardLists.filter(list, CardPredicates.Presets.ARTIFACTS), null, false);
         }
-    
+
         if (biasLand && Iterables.any(list, CardPredicates.Presets.LANDS)) {
             return ComputerUtilCard.getWorstLand(CardLists.filter(list, CardPredicates.Presets.LANDS));
         }
     
-        if (biasCreature && Iterables.any(list, CardPredicates.Presets.CREATURES)) {
+        final boolean hasCreatures = Iterables.any(list, CardPredicates.Presets.CREATURES);
+        if (biasCreature && hasCreatures) {
             return getWorstCreatureAI(CardLists.filter(list, CardPredicates.Presets.CREATURES));
         }
     
@@ -372,17 +347,13 @@ public class ComputerUtilCard {
             return ComputerUtilCard.getWorstLand(lands);
         }
     
-        if ((CardLists.getType(list, "Artifact").size() > 0) || (CardLists.getType(list, "Enchantment").size() > 0)) {
-            return getCheapestPermanentAI(CardLists.filter(list, new Predicate<Card>() {
-                @Override
-                public boolean apply(final Card c) {
-                    return c.isArtifact() || c.isEnchantment();
-                }
-            }), null, false);
+        if (hasEnchantmants || hasArtifacts) {
+            final List<Card> ae = CardLists.filter(list, Predicates.<Card>or(CardPredicates.Presets.ARTIFACTS, CardPredicates.Presets.ENCHANTMENTS));
+            return getCheapestPermanentAI(ae, null, false);
         }
     
-        if (CardLists.getType(list, "Creature").size() > 0) {
-            return getWorstCreatureAI(CardLists.getType(list, "Creature"));
+        if (hasCreatures) {
+            return getWorstCreatureAI(CardLists.filter(list, CardPredicates.Presets.CREATURES));
         }
     
         // Planeswalkers fall through to here, lands will fall through if there

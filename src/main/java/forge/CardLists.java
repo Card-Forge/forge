@@ -237,9 +237,7 @@ public class CardLists {
     }    
     
     public static List<Card> createCardList(Card c) {
-        List<Card> res = new ArrayList<Card>();
-        res.add(c);
-        return res;
+        return Lists.newArrayList(c);
     }
 
     /**

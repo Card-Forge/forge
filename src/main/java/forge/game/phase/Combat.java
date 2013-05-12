@@ -26,6 +26,8 @@ import java.util.Map.Entry;
 import java.util.Set;
 import java.util.TreeMap;
 
+import com.google.common.collect.Lists;
+
 import forge.Card;
 import forge.CardLists;
 import forge.CardPredicates;
@@ -368,9 +370,8 @@ public class Combat {
         this.blocked.add(attacker);
         this.attackerMap.get(attacker).add(blocker);
         if (!this.blockerMap.containsKey(blocker)) {
-            this.blockerMap.put(blocker, CardLists.createCardList(attacker));
-        }
-        else {
+            this.blockerMap.put(blocker, Lists.newArrayList(attacker));
+        } else {
             this.blockerMap.get(blocker).add(attacker);
         }
         attacker.getGame().getEvents().post(new BlockerAssignedEvent());
