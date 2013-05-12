@@ -599,7 +599,7 @@ public class GameState {
                     i--;
                     getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
 
-                    c.getController().getSchemeDeck().add(c);
+                    c.getController().getZone(ZoneType.SchemeDeck).add(c);
                 }
             }
 

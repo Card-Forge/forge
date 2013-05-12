@@ -159,14 +159,12 @@ public class Player extends GameEntity implements Comparable<Player> {
     /** The zones. */
     private final Map<ZoneType, PlayerZone> zones = new EnumMap<ZoneType, PlayerZone>(ZoneType.class);
 
-    private List<Card> planarDeck = new ArrayList<Card>();
     private Card currentPlane = null;
 
     private PlayerStatistics stats = new PlayerStatistics();
     protected PlayerController controller;
     private final LobbyPlayer lobbyPlayer;
     
-    private final List<Card> schemeDeck = new ArrayList<Card>();
     private Card activeScheme = null;
 
     /** The Constant ALL_ZONES. */
@@ -221,26 +219,10 @@ public class Player extends GameEntity implements Comparable<Player> {
         return getLobbyPlayer().getType();
     }
 
-    public List<Card> getSchemeDeck() {
-
-        return schemeDeck;
-    }
-
-    public void setSchemeDeck(Iterable<Card> sd) {
-
-        schemeDeck.clear();
-        for (Card c : sd) {
-
-            schemeDeck.add(c);
-            c.setOwner(this);
-        }
-        CardLists.shuffle(schemeDeck);
-    }
-
     public boolean isArchenemy() {
 
         //Only the archenemy has schemes.
-        return schemeDeck.size() > 0;
+        return getZone(ZoneType.SchemeDeck).size() > 0;
     }
 
     public void setSchemeInMotion() {
@@ -261,9 +243,9 @@ public class Player extends GameEntity implements Comparable<Player> {
 
         game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
 
-        activeScheme = schemeDeck.get(0);
+        activeScheme = getZone(ZoneType.SchemeDeck).get(0);
 
-        schemeDeck.remove(0);
+        getZone(ZoneType.SchemeDeck).remove(activeScheme);
 
         this.getZone(ZoneType.Command).add(activeScheme);
 

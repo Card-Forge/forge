@@ -25,7 +25,7 @@ public class AbandonEffect extends SpellAbilityEffect {
         controller.getZone(ZoneType.Command).remove(source);
         game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
 
-        controller.getSchemeDeck().add(source);
+        controller.getZone(ZoneType.SchemeDeck).add(source);
     }
 
 }
