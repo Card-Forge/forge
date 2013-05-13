@@ -1435,7 +1435,8 @@ public class CardFactoryUtil {
             }
             return doXMath(cCount, m, c);
         }
-        
+
+        if (sq[0].contains("CardTypes"))    return doXMath(getCardTypesFromList(game.getCardsIn(ZoneType.smartValueOf(sq[1]))), m, c);
 
         if (sq[0].contains("BushidoPoint"))     return doXMath(c.getKeywordMagnitude("Bushido"), m, c);
         if (sq[0].contains("TimesKicked"))      return doXMath(c.getKickerMagnitude(), m, c);
@@ -1965,6 +1966,68 @@ public class CardFactoryUtil {
             }
         }
         return filteredkw;
+    }
+
+    /**
+     * <p>
+     * getCardTypesFromList.
+     * </p>
+     * 
+     * @param list
+     *            a {@link forge.CardList} object.
+     * @return a int.
+     */
+    public static int getCardTypesFromList(final List<Card> list) {
+        int count = 0;
+        for (Card c1 : list) {
+            if (c1.isCreature()) {
+                count++;
+                break;
+            }
+        }
+        for (Card c1 : list) {
+            if (c1.isSorcery()) {
+                count++;
+                break;
+            }
+        }
+        for (Card c1 : list) {
+            if (c1.isInstant()) {
+                count++;
+                break;
+            }
+        }
+        for (Card c1 : list) {
+            if (c1.isArtifact()) {
+                count++;
+                break;
+            }
+        }
+        for (Card c1 : list) {
+            if (c1.isEnchantment()) {
+                count++;
+                break;
+            }
+        }
+        for (Card c1 : list) {
+            if (c1.isLand()) {
+                count++;
+                break;
+            }
+        }
+        for (Card c1 : list) {
+            if (c1.isPlaneswalker()) {
+                count++;
+                break;
+            }
+        }
+        for (Card c1 : list) {
+            if (c1.isTribal()) {
+                count++;
+                break;
+            }
+        }
+        return count;
     }
 
     /**

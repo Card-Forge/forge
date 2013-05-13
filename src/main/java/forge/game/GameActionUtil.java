@@ -999,81 +999,6 @@ public final class GameActionUtil {
 
     }; // Liu_Bei
 
-    /** Constant <code>Tarmogoyf</code>. */
-    private static Function<GameState, ?> tarmogoyf = new Function<GameState, Object>() {
-        @Override
-        public Object apply(GameState game) {
-            // get all creatures
-            final List<Card> list = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Tarmogoyf"));
-
-            for (int i = 0; i < list.size(); i++) {
-                final Card c = list.get(i);
-                c.setBaseAttack(this.countDiffTypes(game));
-                c.setBaseDefense(c.getBaseAttack() + 1);
-            }
-            return null;
-        } // execute()
-
-        private int countDiffTypes(GameState game) {
-            final List<Card> list = game.getCardsIn(ZoneType.Graveyard);
-
-            int count = 0;
-            for (Card c : list) {
-                if (c.isCreature()) {
-                    count++;
-                    break;
-                }
-            }
-            for (Card c : list) {
-                if (c.isSorcery()) {
-                    count++;
-                    break;
-                }
-            }
-            for (Card c : list) {
-                if (c.isInstant()) {
-                    count++;
-                    break;
-                }
-            }
-            for (Card c : list) {
-                if (c.isArtifact()) {
-                    count++;
-                    break;
-                }
-            }
-
-            for (Card c : list) {
-                if (c.isEnchantment()) {
-                    count++;
-                    break;
-                }
-            }
-
-            for (Card c : list) {
-                if (c.isLand()) {
-                    count++;
-                    break;
-                }
-            }
-
-            for (Card c : list) {
-                if (c.isPlaneswalker()) {
-                    count++;
-                    break;
-                }
-            }
-
-            for (Card c : list) {
-                if (c.isTribal()) {
-                    count++;
-                    break;
-                }
-            }
-            return count;
-        }
-    };
-
     /** Constant <code>commands</code>. */
     private final static HashMap<String, Function<GameState, ?>> commands = new HashMap<String, Function<GameState, ?>>();
 
@@ -1082,7 +1007,6 @@ public final class GameActionUtil {
 
         GameActionUtil.getCommands().put("Liu_Bei", GameActionUtil.liuBei);
         GameActionUtil.getCommands().put("Old_Man_of_the_Sea", GameActionUtil.oldManOfTheSea);
-        GameActionUtil.getCommands().put("Tarmogoyf", GameActionUtil.tarmogoyf);
         GameActionUtil.getCommands().put("Umbra_Stalker", GameActionUtil.umbraStalker);
 
         // The commands above are in alphabetical order by cardname.
