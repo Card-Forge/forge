@@ -24,8 +24,8 @@ public class CounterEffect extends SpellAbilityEffect {
 
         if (sa.hasParam("AllType")) {
             sas = new ArrayList<SpellAbility>();
-            for (int i = 0; i < game.getStack().size(); i++) {
-                SpellAbility spell = game.getStack().peekAbility(i);
+            for (SpellAbilityStackInstance si : game.getStack()) {
+                SpellAbility spell = si.getSpellAbility();
                 if (sa.getParam("AllType").equals("Spell") && !spell.isSpell()) {
                     continue;
                 }
@@ -69,8 +69,8 @@ public class CounterEffect extends SpellAbilityEffect {
 
         if (sa.hasParam("AllType")) {
             sas = new ArrayList<SpellAbility>();
-            for (int i = 0; i < game.getStack().size(); i++) {
-                SpellAbility spell = game.getStack().peekAbility(i);
+            for (SpellAbilityStackInstance si : game.getStack()) {
+                SpellAbility spell = si.getSpellAbility();
                 if (sa.getParam("AllType").equals("Spell") && !spell.isSpell()) {
                     continue;
                 }

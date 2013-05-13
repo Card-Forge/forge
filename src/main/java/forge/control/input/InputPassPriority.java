@@ -61,7 +61,7 @@ public class InputPassPriority extends InputBase {
         sb.append("Turn : ").append(ph.getPlayerTurn()).append("\n");
         sb.append("Phase: ").append(ph.getPhase().Name).append("\n");
         sb.append("Stack: ");
-        if (player.getGame().getStack().size() != 0) {
+        if (!player.getGame().getStack().isEmpty()) {
             sb.append(player.getGame().getStack().size()).append(" to Resolve.");
         } else {
             sb.append("Empty");

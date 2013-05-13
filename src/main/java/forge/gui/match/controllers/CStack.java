@@ -5,6 +5,7 @@ import java.util.Observer;
 
 import forge.Command;
 import forge.FThreads;
+import forge.game.player.Player;
 import forge.game.zone.MagicStack;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.ICDoc;
@@ -22,6 +23,7 @@ public enum CStack implements ICDoc, Observer {
     SINGLETON_INSTANCE;
     
     private MagicStack model;
+    private Player viewer;
 
     /* (non-Javadoc)
      * @see forge.gui.framework.ICDoc#getCommandOnSelect()
@@ -40,7 +42,7 @@ public enum CStack implements ICDoc, Observer {
 
     private final Runnable upd = new Runnable() { @Override public void run() {
         SDisplayUtil.showTab(EDocID.REPORT_STACK.getDoc());
-        VStack.SINGLETON_INSTANCE.updateStack(model); 
+        VStack.SINGLETON_INSTANCE.updateStack(model, viewer); 
     } };
 
     /* (non-Javadoc)
@@ -59,6 +61,9 @@ public enum CStack implements ICDoc, Observer {
         FThreads.invokeInEdtNowOrLater(upd);
     }
     
-    public void setModel(MagicStack model) { this.model = model; }
+    public void setModel(MagicStack model, Player guiPlayer) { 
+        this.model = model; 
+        this.viewer = guiPlayer;
+    }
 
 }

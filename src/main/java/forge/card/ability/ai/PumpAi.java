@@ -83,13 +83,13 @@ public class PumpAi extends PumpAiBase {
         }
 
         // Phase Restrictions
-        if ((game.getStack().size() == 0) && ph.getPhase().isBefore(PhaseType.COMBAT_BEGIN)) {
+        if (game.getStack().isEmpty() && ph.getPhase().isBefore(PhaseType.COMBAT_BEGIN)) {
             // Instant-speed pumps should not be cast outside of combat when the
             // stack is empty
             if (!sa.isCurse() && !SpellAbilityAi.isSorcerySpeed(sa)) {
                 return false;
             }
-        } else if (game.getStack().size() > 0) {
+        } else if (!game.getStack().isEmpty()) {
             if (!keywords.contains("Shroud") && !keywords.contains("Hexproof")) {
                 return false;
             }
@@ -228,7 +228,7 @@ public class PumpAi extends PumpAiBase {
         }
 
         list = CardLists.getValidCards(list, tgt.getValidTgts(), ai, sa.getSourceCard());
-        if (game.getStack().size() == 0) {
+        if (game.getStack().isEmpty()) {
             // If the cost is tapping, don't activate before declare
             // attack/block
             if ((sa.getPayCosts() != null) && sa.getPayCosts().hasTapCost()) {

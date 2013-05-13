@@ -38,7 +38,7 @@ public class DamagePreventAllAi extends SpellAbilityAi {
             return false;
         }
 
-        if (ai.getGame().getStack().size() > 0) {
+        if (!ai.getGame().getStack().isEmpty()) {
             // TODO check stack for something on the stack will kill anything i
             // control
 

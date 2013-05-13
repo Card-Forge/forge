@@ -178,34 +178,35 @@ public class ChooseSourceEffect extends SpellAbilityEffect {
     }
 
     private Card ChooseCardOnStack(SpellAbility sa, Player ai, GameState game) {
-        int size = game.getStack().size();
-        for (int i = 0; i < size; i++) {
-            final SpellAbility topStack = game.getStack().peekAbility(i);
-            if (sa.hasParam("Choices") && !topStack.getSourceCard().isValid(sa.getParam("Choices"), ai, sa.getSourceCard())) {
+        for (SpellAbilityStackInstance si : game.getStack()) {
+            final Card source = si.getSourceCard();
+            final SpellAbility abilityOnStack = si.getSpellAbility();
+            
+            if (sa.hasParam("Choices") && !abilityOnStack.getSourceCard().isValid(sa.getParam("Choices"), ai, sa.getSourceCard())) {
                 continue;
             }
-            final ApiType threatApi = topStack.getApi();
+            final ApiType threatApi = abilityOnStack.getApi();
             if (threatApi != ApiType.DealDamage && threatApi != ApiType.DamageAll) {
                 continue;
             }
     
-            final Card source = topStack.getSourceCard();
+            
             ArrayList<Object> objects = new ArrayList<Object>();
-            final Target threatTgt = topStack.getTarget();
+            final Target threatTgt = abilityOnStack.getTarget();
     
             if (threatTgt == null) {
-                if (topStack.hasParam("Defined")) {
-                    objects = AbilityUtils.getDefinedObjects(source, topStack.getParam("Defined"), topStack);
-                } else if (topStack.hasParam("ValidPlayers")) {
-                    objects.addAll(AbilityUtils.getDefinedPlayers(source, topStack.getParam("ValidPlayers"), topStack));
+                if (abilityOnStack.hasParam("Defined")) {
+                    objects = AbilityUtils.getDefinedObjects(source, abilityOnStack.getParam("Defined"), abilityOnStack);
+                } else if (abilityOnStack.hasParam("ValidPlayers")) {
+                    objects.addAll(AbilityUtils.getDefinedPlayers(source, abilityOnStack.getParam("ValidPlayers"), abilityOnStack));
                 }
             } else {
                 objects.addAll(threatTgt.getTargetPlayers());
             }
-            if (!objects.contains(ai) || topStack.hasParam("NoPrevention")) {
+            if (!objects.contains(ai) || abilityOnStack.hasParam("NoPrevention")) {
                 continue;
             }
-            int dmg = AbilityUtils.calculateAmount(source, topStack.getParam("NumDmg"), topStack);
+            int dmg = AbilityUtils.calculateAmount(source, abilityOnStack.getParam("NumDmg"), abilityOnStack);
             if (ComputerUtilCombat.predictDamageTo(ai, dmg, source, false) <= 0) {
                 continue;
             }

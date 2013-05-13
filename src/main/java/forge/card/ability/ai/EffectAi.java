@@ -49,7 +49,7 @@ public class EffectAi extends SpellAbilityAi {
                 if (!game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
                     return false;
                 }
-                if (game.getStack().size() != 0) {
+                if (!game.getStack().isEmpty()) {
                     return false;
                 }
                 if (game.getPhaseHandler().isPreventCombatDamageThisTurn()) {

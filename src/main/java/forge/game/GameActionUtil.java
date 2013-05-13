@@ -22,7 +22,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
@@ -36,27 +35,12 @@ import forge.CardUtil;
 import forge.Command;
 import forge.Constant;
 import forge.CounterType;
-import forge.FThreads;
 import forge.card.ability.AbilityFactory;
 import forge.card.ability.AbilityFactory.AbilityRecordType;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.ApiType;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
-import forge.card.cost.CostDamage;
-import forge.card.cost.CostDiscard;
-import forge.card.cost.CostExile;
-import forge.card.cost.CostMill;
-import forge.card.cost.CostPart;
-import forge.card.cost.CostPartMana;
-import forge.card.cost.CostPartWithList;
-import forge.card.cost.CostPayLife;
-import forge.card.cost.CostPutCounter;
-import forge.card.cost.CostRemoveCounter;
-import forge.card.cost.CostReturn;
-import forge.card.cost.CostReveal;
-import forge.card.cost.CostSacrifice;
-import forge.card.cost.CostTapType;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostBeingPaid;
 import forge.card.spellability.Ability;
@@ -66,13 +50,7 @@ import forge.card.spellability.AbilitySub;
 import forge.card.spellability.OptionalCost;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityRestriction;
-import forge.control.input.InputPayManaExecuteCommands;
-import forge.control.input.InputPayment;
-import forge.control.input.InputSelectCards;
-import forge.control.input.InputSelectCardsFromList;
 import forge.game.ai.AiController;
-import forge.game.event.CardDamagedEvent;
-import forge.game.event.LifeLossEvent;
 import forge.game.player.HumanPlay;
 import forge.game.player.Player;
 import forge.game.player.PlayerControllerAi;
@@ -92,32 +70,7 @@ import forge.util.TextUtil;
  * @version $Id$
  */
 public final class GameActionUtil {
-
     
-    /** 
-     * TODO: Write javadoc for this type.
-     *
-     */
-    private static final class AbilityDestroy extends Ability {
-        private final Card affected;
-        private final boolean canRegenerate;
-
-        public AbilityDestroy(Card sourceCard, Card affected, boolean canRegenerate) {
-            super(sourceCard, ManaCost.ZERO);
-            this.affected = affected;
-            this.canRegenerate = canRegenerate;
-        }
-
-        @Override
-        public void resolve() {
-            final GameState game = affected.getGame(); 
-            if ( canRegenerate )
-                game.getAction().destroy(affected, this);
-            else
-                game.getAction().destroyNoRegeneration(affected, this);
-        }
-    }
-
     private static final class CascadeAbility extends Ability {
         private final Player controller;
         private final Card cascCard;
@@ -368,314 +321,13 @@ public final class GameActionUtil {
      *            a {@link forge.card.spellability.SpellAbility} object.
      */
     public static void executePlayCardEffects(final SpellAbility sa) {
-        // (called in MagicStack.java)
+        // (called from MagicStack.java)
 
         final GameState game = sa.getActivatingPlayer().getGame(); 
         final Command cascade = new CascadeExecutor(sa.getActivatingPlayer(), sa.getSourceCard(), game);
         cascade.run();
         final Command ripple = new RippleExecutor(sa.getActivatingPlayer(), sa.getSourceCard());
         ripple.run();
-    }
-
-    private static int getAmountFromPart(CostPart part, Card source, SpellAbility sourceAbility) {
-        String amountString = part.getAmount();
-        return StringUtils.isNumeric(amountString) ? Integer.parseInt(amountString) : AbilityUtils.calculateAmount(source, amountString, sourceAbility);
-    }
-    
-    /**
-     * TODO: Write javadoc for this method.
-     * @param part
-     * @param source
-     * @param sourceAbility
-     * @return
-     */
-    private static int getAmountFromPartX(CostPart part, Card source, SpellAbility sourceAbility) {
-        String amountString = part.getAmount();
-        return StringUtils.isNumeric(amountString) ? Integer.parseInt(amountString) : CardFactoryUtil.xCount(source, source.getSVar(amountString));
-    }
-
-    /**
-     * <p>
-     * payCostDuringAbilityResolve.
-     * </p>
-     * 
-     * @param ability
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @param cost
-     *            a {@link forge.card.cost.Cost} object.
-     * @param paid
-     *            a {@link forge.Command} object.
-     * @param unpaid
-     *            a {@link forge.Command} object.
-     * @param sourceAbility TODO
-     */
-    public static boolean payCostDuringAbilityResolve(final SpellAbility ability, final Cost cost, SpellAbility sourceAbility, final GameState game) {
-        
-        // Only human player pays this way
-        final Player p = ability.getActivatingPlayer();
-        final Card source = ability.getSourceCard();
-        Card current = null; // Used in spells with RepeatEach effect to distinguish cards, Cut the Tethers
-        if (!source.getRemembered().isEmpty()) {
-            if (source.getRemembered().get(0) instanceof Card) { 
-                current = (Card) source.getRemembered().get(0);
-            }
-        }
-        if (!source.getImprinted().isEmpty()) {
-            current = source.getImprinted().get(0);
-        }
-        
-        final List<CostPart> parts =  cost.getCostParts();
-        ArrayList<CostPart> remainingParts =  new ArrayList<CostPart>(cost.getCostParts());
-        CostPart costPart = null;
-        if (!parts.isEmpty()) {
-            costPart = parts.get(0);
-        }
-        final String orString = sourceAbility == null ? "" : " (or: " + sourceAbility.getStackDescription() + ")";
-        
-        if (parts.isEmpty() || costPart.getAmount().equals("0")) {
-            return GuiDialog.confirm(source, "Do you want to pay 0?" + orString);
-        }
-        
-        //the following costs do not need inputs
-        for (CostPart part : parts) {
-            boolean mayRemovePart = true;
-            
-            if (part instanceof CostPayLife) {
-                final int amount = getAmountFromPart(part, source, sourceAbility);
-                if (!p.canPayLife(amount))
-                    return false;
-
-                if (false == GuiDialog.confirm(source, "Do you want to pay " + amount + " life?" + orString))
-                    return false;
-
-                p.payLife(amount, null);
-            }
-
-            else if (part instanceof CostMill) {
-                final int amount = getAmountFromPart(part, source, sourceAbility);
-                final List<Card> list = p.getCardsIn(ZoneType.Library);
-                if (list.size() < amount) return false;
-                if (!GuiDialog.confirm(source, "Do you want to mill " + amount + " card(s)?" + orString))
-                    return false;
-                List<Card> listmill = p.getCardsIn(ZoneType.Library, amount);
-                ((CostMill) part).executePayment(sourceAbility, listmill);
-            }
-
-            else if (part instanceof CostDamage) {
-                int amount = getAmountFromPartX(part, source, sourceAbility);
-                if (!p.canPayLife(amount))
-                    return false;
-
-                if (false == GuiDialog.confirm(source, "Do you want " + source + " to deal " + amount + " damage to you?"))
-                    return false;
-                
-                p.addDamage(amount, source);
-            }
-
-            else if (part instanceof CostPutCounter) {
-                CounterType counterType = ((CostPutCounter) part).getCounter();
-                int amount = getAmountFromPartX(part, source, sourceAbility);
-                
-                if (false == source.canReceiveCounters(counterType)) {
-                    String message = String.format("Won't be able to pay upkeep for %s but it can't have %s counters put on it.", source, counterType.getName());
-                    p.getGame().getGameLog().add("ResolveStack", message, 2);
-                    return false;
-                }
-                
-                String plural = amount > 1 ? "s" : "";
-                if (false == GuiDialog.confirm(source, "Do you want to put " + amount + " " + counterType.getName() + " counter" + plural + " on " + source + "?")) 
-                    return false;
-                
-                source.addCounter(counterType, amount, false);
-            }
-
-            else if (part instanceof CostRemoveCounter) {
-                CounterType counterType = ((CostRemoveCounter) part).getCounter();
-                int amount = getAmountFromPartX(part, source, sourceAbility);
-                String plural = amount > 1 ? "s" : "";
-                
-                if (!part.canPay(sourceAbility))
-                    return false;
-
-                if ( false == GuiDialog.confirm(source, "Do you want to remove " + amount + " " + counterType.getName() + " counter" + plural + " from " + source + "?"))
-                    return false;
-
-                source.subtractCounter(counterType, amount);
-            }
-
-            else if (part instanceof CostExile) {
-                if ("All".equals(part.getType())) {
-                    if (false == GuiDialog.confirm(source, "Do you want to exile all cards in your graveyard?"))
-                        return false;
-                        
-                    List<Card> cards = new ArrayList<Card>(p.getCardsIn(ZoneType.Graveyard));
-                    for (final Card card : cards) {
-                        p.getGame().getAction().exile(card);
-                    }
-                } else {
-                    CostExile costExile = (CostExile) part;
-                    ZoneType from = costExile.getFrom();
-                    List<Card> list = CardLists.getValidCards(p.getCardsIn(from), part.getType().split(";"), p, source);
-                    final int nNeeded = AbilityUtils.calculateAmount(source, part.getAmount(), ability);
-                    if (list.size() < nNeeded)
-                        return false;
-
-                    // replace this with input
-                    for (int i = 0; i < nNeeded; i++) {
-                        final Card c = GuiChoose.oneOrNone("Exile from " + from, list);
-                        if (c == null)
-                            return false;
-                            
-                        list.remove(c);
-                        p.getGame().getAction().exile(c);
-                    }
-                }
-            }
-
-            else if (part instanceof CostSacrifice) {
-                int amount = Integer.parseInt(((CostSacrifice)part).getAmount());
-                List<Card> list = CardLists.getValidCards(p.getCardsIn(ZoneType.Battlefield), part.getType(), p, source);
-                boolean hasPaid = payCostPart(sourceAbility, (CostPartWithList)part, amount, list, "sacrifice." + orString);
-                if(!hasPaid) return false;
-            } else if (part instanceof CostReturn) {
-                List<Card> list = CardLists.getValidCards(p.getCardsIn(ZoneType.Battlefield), part.getType(), p, source);
-                int amount = getAmountFromPartX(part, source, sourceAbility);
-                boolean hasPaid = payCostPart(sourceAbility, (CostPartWithList)part, amount, list, "return to hand." + orString);
-                if(!hasPaid) return false;
-            } else if (part instanceof CostDiscard) {
-                List<Card> list = CardLists.getValidCards(p.getCardsIn(ZoneType.Hand), part.getType(), p, source);
-                int amount = getAmountFromPartX(part, source, sourceAbility);
-                boolean hasPaid = payCostPart(sourceAbility, (CostPartWithList)part, amount, list, "discard." + orString);
-                if(!hasPaid) return false;
-            } else if (part instanceof CostReveal) {
-                List<Card> list = CardLists.getValidCards(p.getCardsIn(ZoneType.Hand), part.getType(), p, source);
-                int amount = getAmountFromPartX(part, source, sourceAbility);
-                boolean hasPaid = payCostPart(sourceAbility, (CostPartWithList)part, amount, list, "reveal." + orString);
-                if(!hasPaid) return false;
-            } else if (part instanceof CostTapType) {
-                List<Card> list = CardLists.getValidCards(p.getCardsIn(ZoneType.Battlefield), part.getType(), p, source);
-                list = CardLists.filter(list, Presets.UNTAPPED);
-                int amount = getAmountFromPartX(part, source, sourceAbility);
-                boolean hasPaid = payCostPart(sourceAbility, (CostPartWithList)part, amount, list, "tap." + orString);
-                if(!hasPaid) return false;
-            }
-            
-            else if (part instanceof CostPartMana ) {
-                if (!((CostPartMana) part).getManaToPay().isZero()) // non-zero costs require input
-                    mayRemovePart = false; 
-            } else
-                throw new RuntimeException("GameActionUtil.payCostDuringAbilityResolve - An unhandled type of cost was met: " + part.getClass());
-
-            if( mayRemovePart )
-                remainingParts.remove(part);
-        }
-
-
-        if (remainingParts.isEmpty()) {
-            return true;
-        }
-        if (remainingParts.size() > 1) {
-            throw new RuntimeException("GameActionUtil.payCostDuringAbilityResolve - Too many payment types - " + source);
-        }
-        costPart = remainingParts.get(0);
-        // check this is a mana cost
-        if (!(costPart instanceof CostPartMana ))
-            throw new RuntimeException("GameActionUtil.payCostDuringAbilityResolve - The remaining payment type is not Mana.");
-
-        InputPayment toSet = current == null 
-                ? new InputPayManaExecuteCommands(p, source + "\r\n", cost.getCostMana().getManaToPay())
-                : new InputPayManaExecuteCommands(p, source + "\r\n" + "Current Card: " + current + "\r\n" , cost.getCostMana().getManaToPay());
-        FThreads.setInputAndWait(toSet);
-        return toSet.isPaid();
-    }
-
-    private static boolean payCostPart(SpellAbility sourceAbility, CostPartWithList cpl, int amount, List<Card> list, String actionName) {
-        if (list.size() < amount) return false;                     // unable to pay (not enough cards)
-
-        InputSelectCards inp = new InputSelectCardsFromList(amount, amount, list);
-        inp.setMessage("Select %d " + cpl.getDescriptiveType() + " card(s) to " + actionName);
-        inp.setCancelAllowed(true);
-        
-        FThreads.setInputAndWait(inp);
-        if( inp.hasCancelled() || inp.getSelected().size() != amount)
-            return false;
-
-        for(Card c : inp.getSelected()) {
-            cpl.executePayment(sourceAbility, c);
-        }
-        if (sourceAbility != null) {
-            cpl.reportPaidCardsTo(sourceAbility);
-        }
-        return true;
-    }
-
-    // not restricted to combat damage, not restricted to dealing damage to
-    // creatures/players
-    /**
-     * <p>
-     * executeDamageDealingEffects.
-     * </p>
-     * 
-     * @param source
-     *            a {@link forge.Card} object.
-     * @param damage
-     *            a int.
-     */
-    public static void executeDamageDealingEffects(final Card source, final int damage) {
-
-        if (damage <= 0) {
-            return;
-        }
-
-        if (source.hasKeyword("Lifelink")) {
-            source.getController().gainLife(damage, source);
-        }
-
-    }
-
-    // not restricted to combat damage, restricted to dealing damage to
-    // creatures
-    /**
-     * <p>
-     * executeDamageToCreatureEffects.
-     * </p>
-     * 
-     * @param source
-     *            a {@link forge.Card} object.
-     * @param affected
-     *            a {@link forge.Card} object.
-     * @param damage
-     *            a int.
-     */
-    public static void executeDamageToCreatureEffects(final Card source, final Card affected, final int damage) {
-
-        if (damage <= 0) {
-            return;
-        }
-        final GameState game = source.getGame();
-
-        if (affected.hasStartOfKeyword("When CARDNAME is dealt damage, destroy it.")) {
-            final Ability ability = new AbilityDestroy(source, affected, true);
-            final Ability ability2 = new AbilityDestroy(source, affected, false);
-
-            final StringBuilder sb = new StringBuilder();
-            sb.append(affected).append(" - destroy");
-            ability.setStackDescription(sb.toString());
-            ability2.setStackDescription(sb.toString());
-            final int amount = affected.getAmountOfKeyword("When CARDNAME is dealt damage, destroy it. It can't be regenerated.");
-
-            for (int i = 0; i < amount; i++) {
-                game.getStack().addSimultaneousStackEntry(ability2);
-            }
-            final int amount2 = affected.getAmountOfKeyword("When CARDNAME is dealt damage, destroy it.");
-
-            for (int i = 0; i < amount2; i++) {
-                game.getStack().addSimultaneousStackEntry(ability);
-            }
-        }
-
-        // Play the Damage sound
-        game.getEvents().post(new CardDamagedEvent());
     }
 
     // this is for cards like Sengir Vampire
@@ -723,30 +375,6 @@ public final class GameActionUtil {
         }
     }
 
-    // not restricted to just combat damage, restricted to players
-    /**
-     * <p>
-     * executeDamageToPlayerEffects.
-     * </p>
-     * 
-     * @param player
-     *            a {@link forge.game.player.Player} object.
-     * @param c
-     *            a {@link forge.Card} object.
-     * @param damage
-     *            a int.
-     */
-    public static void executeDamageToPlayerEffects(final Player player, final Card c, final int damage) {
-        if (damage <= 0) {
-            return;
-        }
-
-        c.getDamageHistory().registerDamage(player);
-
-        // Play the Life Loss sound
-        player.getGame().getEvents().post(new LifeLossEvent());
-    }
-
     // restricted to combat damage, restricted to players
     /**
      * <p>
@@ -771,14 +399,11 @@ public final class GameActionUtil {
             final String parse = c.getKeyword().get(keywordPosition).toString();
             final String[] k = parse.split(" ");
             final int poison = Integer.parseInt(k[1]);
-            final Card crd = c;
 
             final Ability ability = new Ability(c, ManaCost.ZERO) {
                 @Override
                 public void resolve() {
-                    final Player player = crd.getController();
-                    final Player opponent = player.getOpponent();
-                    opponent.addPoisonCounters(poison, c);
+                    player.addPoisonCounters(poison, c);
                 }
             };
 
@@ -786,9 +411,7 @@ public final class GameActionUtil {
             sb.append(c);
             sb.append(" - Poisonous: ");
             sb.append(c.getController().getOpponent());
-            sb.append(" gets ");
-            sb.append(poison);
-            sb.append(" poison counter");
+            sb.append(" gets ").append(poison).append(" poison counter");
             if (poison != 1) {
                 sb.append("s");
             }

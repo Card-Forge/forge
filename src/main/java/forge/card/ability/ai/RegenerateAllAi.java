@@ -56,7 +56,7 @@ public class RegenerateAllAi extends SpellAbilityAi {
         }
 
         int numSaved = 0;
-        if (game.getStack().size() > 0) {
+        if (!game.getStack().isEmpty()) {
             final ArrayList<Object> objects = ComputerUtil.predictThreatenedObjects(sa.getActivatingPlayer(), sa);
 
             for (final Card c : list) {

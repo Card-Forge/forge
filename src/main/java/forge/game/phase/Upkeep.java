@@ -41,13 +41,13 @@ import forge.control.input.InputPayManaExecuteCommands;
 import forge.control.input.InputPayment;
 import forge.control.input.InputSelectCards;
 import forge.control.input.InputSelectCardsFromList;
-import forge.game.GameActionUtil;
 import forge.game.GameState;
 import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilCard;
 import forge.game.ai.ComputerUtilCombat;
 import forge.game.ai.ComputerUtilCost;
 import forge.game.ai.ComputerUtilMana;
+import forge.game.player.HumanPlay;
 import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
@@ -182,7 +182,7 @@ public class Upkeep extends Phase {
                         Player controller = c.getController();
                         if (controller.isHuman()) {
                             Cost cost = new Cost(c.getEchoCost().trim(), true);
-                            if ( !GameActionUtil.payCostDuringAbilityResolve(blankAbility, cost, null, game) )
+                            if ( !HumanPlay.payCostDuringAbilityResolve(blankAbility, cost, null, game) )
                                 game.getAction().sacrifice(c, null);;
 
                         } else { // computer
@@ -324,7 +324,7 @@ public class Upkeep extends Phase {
                         @Override
                         public void resolve() {
                             if (controller.isHuman()) {
-                                if ( !GameActionUtil.payCostDuringAbilityResolve(blankAbility, blankAbility.getPayCosts(), this, game))
+                                if ( !HumanPlay.payCostDuringAbilityResolve(blankAbility, blankAbility.getPayCosts(), this, game))
                                     game.getAction().sacrifice(c, null);
                             } else { // computer
                                 if (ComputerUtilCost.shouldPayCost(controller, c, upkeepCost) && ComputerUtilCost.canPayCost(blankAbility, controller)) {

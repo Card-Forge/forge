@@ -42,6 +42,7 @@ import forge.card.cost.CostPayment;
 import forge.card.spellability.AbilityManaPart;
 import forge.card.spellability.AbilityStatic;
 import forge.card.spellability.SpellAbility;
+import forge.card.spellability.SpellAbilityStackInstance;
 import forge.card.spellability.Target;
 import forge.error.BugReporter;
 import forge.game.GameState;
@@ -271,7 +272,7 @@ public class ComputerUtil {
         final SpellAbility newSA = sa.copyWithNoManaCost();
         newSA.setActivatingPlayer(ai);
 
-        if (!ComputerUtilCost.canPayAdditionalCosts(newSA, ai)) {
+        if (!CostPayment.canPayAdditionalCosts(newSA.getPayCosts(), newSA)) {
             return;
         }
 
@@ -462,13 +463,14 @@ public class ComputerUtil {
         final GameState game = ai.getGame();
         List<Card> typeList = new ArrayList<Card>();
         if (zone.equals(ZoneType.Stack)) {
-            for (int i = 0; i < game.getStack().size(); i++) {
-                typeList.add(game.getStack().peekAbility(i).getSourceCard());
-                typeList = CardLists.getValidCards(typeList, type.split(","), activate.getController(), activate);
+            for (SpellAbilityStackInstance si : game.getStack()) {
+                typeList.add(si.getSourceCard());
             }
         } else {
-            typeList = CardLists.getValidCards(ai.getCardsIn(zone), type.split(","), activate.getController(), activate);
+            typeList = ai.getCardsIn(zone);
         }
+        typeList = CardLists.getValidCards(typeList, type.split(","), activate.getController(), activate);
+        
         if ((target != null) && target.getController() == ai && typeList.contains(target)) {
             typeList.remove(target); // don't exile the card we're pumping
         }

@@ -588,7 +588,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
             // in general this should only be used to protect from Imminent Harm
             // (dying or losing control of)
             if (origin.equals(ZoneType.Battlefield)) {
-                if (ai.getGame().getStack().size() == 0) {
+                if (ai.getGame().getStack().isEmpty()) {
                     return false;
                 }
 
@@ -720,7 +720,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
 
                 // check stack for something on the stack that will kill
                 // anything i control
-                if (ai.getGame().getStack().size() > 0) {
+                if (!ai.getGame().getStack().isEmpty()) {
                     final ArrayList<Object> objects = ComputerUtil.predictThreatenedObjects(ai, sa);
 
                     final List<Card> threatenedTargets = new ArrayList<Card>();

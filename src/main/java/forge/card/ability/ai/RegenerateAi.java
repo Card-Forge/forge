@@ -83,7 +83,7 @@ public class RegenerateAi extends SpellAbilityAi {
             // them
             final List<Card> list = AbilityUtils.getDefinedCards(hostCard, sa.getParam("Defined"), sa);
 
-            if (game.getStack().size() > 0) {
+            if (!game.getStack().isEmpty()) {
                 final List<Object> objects = ComputerUtil.predictThreatenedObjects(sa.getActivatingPlayer(), sa);
 
                 for (final Card c : list) {
@@ -117,7 +117,7 @@ public class RegenerateAi extends SpellAbilityAi {
                 return false;
             }
 
-            if (game.getStack().size() > 0) {
+            if (!game.getStack().isEmpty()) {
                 // check stack for something on the stack will kill anything i
                 // control
                 final ArrayList<Object> objects = ComputerUtil.predictThreatenedObjects(sa.getActivatingPlayer(), sa);

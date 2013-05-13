@@ -20,6 +20,7 @@ package forge.game.zone;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Stack;
 import com.esotericsoftware.minlog.Log;
@@ -66,7 +67,7 @@ import forge.util.MyObservable;
  * @author Forge
  * @version $Id$
  */
-public class MagicStack extends MyObservable {
+public class MagicStack extends MyObservable implements Iterable<SpellAbilityStackInstance> {
     private final List<SpellAbility> simultaneousStackEntryList = new ArrayList<SpellAbility>();
 
     private final Stack<SpellAbilityStackInstance> stack = new Stack<SpellAbilityStackInstance>();
@@ -539,7 +540,7 @@ public class MagicStack extends MyObservable {
      * @return a boolean.
      */
     public final boolean isEmpty() {
-        return this.getStack().size() == 0;
+        return this.getStack().isEmpty();
     }
 
     // Push should only be used by add.
@@ -854,51 +855,10 @@ public class MagicStack extends MyObservable {
         }
     }
 
-    public final SpellAbility top() {
+    private final SpellAbility top() {
         final SpellAbilityStackInstance si = this.getStack().peek();
         final SpellAbility sa = si.getSpellAbility();
         return sa;
-    }
-
-    // CAREFUL! Peeking while an SAs Targets are being choosen may cause issues
-    // index = 0 is the top, index = 1 is the next to top, etc...
-    /**
-     * <p>
-     * peekInstance.
-     * </p>
-     * 
-     * @param index
-     *            a int.
-     * @return a {@link forge.card.spellability.SpellAbilityStackInstance}
-     *         object.
-     */
-    public final SpellAbilityStackInstance peekInstance(final int index) {
-        return this.getStack().get(index);
-    }
-
-    /**
-     * <p>
-     * peekAbility.
-     * </p>
-     * 
-     * @param index
-     *            a int.
-     * @return a {@link forge.card.spellability.SpellAbility} object.
-     */
-    public final SpellAbility peekAbility(final int index) {
-        return this.getStack().get(index).getSpellAbility();
-    }
-
-    /**
-     * <p>
-     * peekInstance.
-     * </p>
-     * 
-     * @return a {@link forge.card.spellability.SpellAbilityStackInstance}
-     *         object.
-     */
-    public final SpellAbilityStackInstance peekInstance() {
-        return this.getStack().peek();
     }
 
     /**
@@ -1167,5 +1127,14 @@ public class MagicStack extends MyObservable {
         }
 
         return c.equals(this.curResolvingCard);
+    }
+
+    /* (non-Javadoc)
+     * @see java.lang.Iterable#iterator()
+     */
+    @Override
+    public Iterator<SpellAbilityStackInstance> iterator() {
+        // TODO Auto-generated method stub
+        return stack.iterator();
     }
 }

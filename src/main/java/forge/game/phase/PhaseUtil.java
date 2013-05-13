@@ -32,10 +32,10 @@ import forge.card.spellability.Ability;
 import forge.card.spellability.AbilityStatic;
 import forge.card.staticability.StaticAbility;
 import forge.card.trigger.TriggerType;
-import forge.game.GameActionUtil;
 import forge.game.GameState;
 import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilCost;
+import forge.game.player.HumanPlay;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.match.CMatchUI;
@@ -225,7 +225,7 @@ public class PhaseUtil {
                     ability.setActivatingPlayer(blocker.getController());
 
                     if (blocker.getController().isHuman()) {
-                        hasPaid = GameActionUtil.payCostDuringAbilityResolve(ability, blockCost, null, game);
+                        hasPaid = HumanPlay.payCostDuringAbilityResolve(ability, blockCost, null, game);
                     } else { // computer
                         if (ComputerUtilCost.canPayCost(ability, blocker.getController())) {
                             ComputerUtil.playNoStack(blocker.getController(), ability, game);

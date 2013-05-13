@@ -51,9 +51,6 @@ public class SpellAbilityStackInstance {
     private TargetChoices tc = null;
     private List<Card> splicedCards = null;
 
-    /** The activating player. */
-    private Player activatingPlayer = null;
-
     /** The stack description. */
     private String stackDescription = null;
 
@@ -89,7 +86,6 @@ public class SpellAbilityStackInstance {
         // Base SA info
         this.ability = sa;
         this.stackDescription = this.ability.getStackDescription();
-        this.activatingPlayer = sa.getActivatingPlayer();
 
         // Payment info
         this.paidHash = this.ability.getPaidHash();
@@ -140,7 +136,6 @@ public class SpellAbilityStackInstance {
             this.ability.getTarget().resetTargets();
             this.ability.getTarget().setTargetChoices(this.tc);
         }
-        this.ability.setActivatingPlayer(this.activatingPlayer);
 
         // Saved sub-SA needs to be reset on the way out
         if (this.subInstace != null) {
@@ -189,17 +184,6 @@ public class SpellAbilityStackInstance {
      */
     public final Card getSourceCard() {
         return this.ability.getSourceCard();
-    }
-
-    /**
-     * <p>
-     * Getter for the field <code>activatingPlayer</code>.
-     * </p>
-     * 
-     * @return a {@link forge.game.player.Player} object.
-     */
-    public final Player getActivatingPlayer() {
-        return this.activatingPlayer;
     }
 
     /**

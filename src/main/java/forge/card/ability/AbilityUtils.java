@@ -21,10 +21,10 @@ import forge.card.spellability.Ability;
 import forge.card.spellability.AbilityStatic;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
-import forge.game.GameActionUtil;
 import forge.game.GameState;
 import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilCost;
+import forge.game.player.HumanPlay;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.util.Expressions;
@@ -1107,13 +1107,13 @@ public class AbilityUtils {
         for (Player payer : payers) {
             ability.setActivatingPlayer(payer);
             if (payer.isComputer()) {
-                if (ComputerUtilCost.willPayUnlessCost(sa, payer, ability, paid, payers)) {
+                if (ComputerUtilCost.willPayUnlessCost(sa, payer, ability, paid, payers) && ComputerUtilCost.canPayCost(ability, payer)) {
                     ComputerUtil.playNoStack(payer, ability, game); // Unless cost was payed - no resolve
                     paid = true;
                 }
             } else {
                 // if it's paid by the AI already the human can pay, but it won't change anything
-                paid |= GameActionUtil.payCostDuringAbilityResolve(ability, cost, sa, game);
+                paid |= HumanPlay.payCostDuringAbilityResolve(ability, cost, sa, game);
             }
         }
 

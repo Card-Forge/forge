@@ -522,7 +522,7 @@ public class GameAction {
                 Player p = recoverable.getController();
 
                 if (p.isHuman()) {
-                    if ( GameActionUtil.payCostDuringAbilityResolve(abRecover, abRecover.getPayCosts(), null, game) )
+                    if ( HumanPlay.payCostDuringAbilityResolve(abRecover, abRecover.getPayCosts(), null, game) )
                         moveToHand(recoverable);
                     else
                         exile(recoverable);

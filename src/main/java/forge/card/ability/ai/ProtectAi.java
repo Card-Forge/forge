@@ -137,13 +137,13 @@ public class ProtectAi extends SpellAbilityAi {
         }
 
         // Phase Restrictions
-        if ((game.getStack().size() == 0) && game.getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_FIRST_STRIKE_DAMAGE)) {
+        if (game.getStack().isEmpty() && game.getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_FIRST_STRIKE_DAMAGE)) {
             // Instant-speed protections should not be cast outside of combat
             // when the stack is empty
             if (!SpellAbilityAi.isSorcerySpeed(sa)) {
                 return false;
             }
-        } else if (game.getStack().size() > 0) {
+        } else if (!game.getStack().isEmpty()) {
             // TODO protection something only if the top thing on the stack will
             // kill it via damage or destroy
             return false;

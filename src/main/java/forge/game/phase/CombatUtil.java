@@ -46,12 +46,12 @@ import forge.card.spellability.Ability;
 import forge.card.spellability.AbilityStatic;
 import forge.card.staticability.StaticAbility;
 import forge.card.trigger.TriggerType;
-import forge.game.GameActionUtil;
 import forge.game.GameState;
 import forge.game.GlobalRuleChange;
 import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilCard;
 import forge.game.ai.ComputerUtilCost;
+import forge.game.player.HumanPlay;
 import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
@@ -1078,7 +1078,7 @@ public class CombatUtil {
             ability.setActivatingPlayer(c.getController());
 
             if (c.getController().isHuman()) {
-                hasPaid = GameActionUtil.payCostDuringAbilityResolve(ability, attackCost, null, game);
+                hasPaid = HumanPlay.payCostDuringAbilityResolve(ability, attackCost, null, game);
             } else { // computer
                 if (ComputerUtilCost.canPayCost(ability, c.getController())) {
                     ComputerUtil.playNoStack(c.getController(), ability, game);

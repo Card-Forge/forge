@@ -91,7 +91,7 @@ public class TriggerSpellAbilityCast extends Trigger {
         }
 
         if (this.mapParams.containsKey("ValidActivatingPlayer")) {
-            if (si == null || !matchesValid(si.getActivatingPlayer(), this.mapParams.get("ValidActivatingPlayer")
+            if (si == null || !matchesValid(si.getSpellAbility().getActivatingPlayer(), this.mapParams.get("ValidActivatingPlayer")
                     .split(","), this.getHostCard())) {
                 return false;
             }

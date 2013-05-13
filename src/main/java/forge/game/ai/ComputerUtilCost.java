@@ -364,30 +364,8 @@ public class ComputerUtilCost {
             return false;
         }
     
-        return ComputerUtilCost.canPayAdditionalCosts(sa, player);
-    } // canPayCost()
-
-    /**
-     * <p>
-     * canPayAdditionalCosts.
-     * </p>
-     * 
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @param player
-     *            a {@link forge.game.player.Player} object.
-     * @return a boolean.
-     */
-    public static boolean canPayAdditionalCosts(final SpellAbility sa, final Player player) {
-        if (sa.getActivatingPlayer() == null) {
-            final StringBuilder sb = new StringBuilder();
-            sb.append(sa.getSourceCard());
-            sb.append(" in ComputerUtil.canPayAdditionalCosts() without an activating player");
-            System.out.println(sb.toString());
-            sa.setActivatingPlayer(player);
-        }
         return CostPayment.canPayAdditionalCosts(sa.getPayCosts(), sa);
-    }
+    } // canPayCost()
 
     public static boolean willPayUnlessCost(SpellAbility sa, Player payer, SpellAbility ability, boolean alreadyPaid, List<Player> payers) {
         final Card source = sa.getSourceCard();
@@ -426,20 +404,17 @@ public class ComputerUtilCost {
         if (alreadyPaid || (payers.size() > 1 && (isMine && !payForOwnOnly))) {
             return false;
         }
-        if (canPayCost(ability, payer)
-                && checkLifeCost(payer, ability.getPayCosts(), source, 4, sa)
-                && checkDamageCost(payer, ability.getPayCosts(), source, 4)
-                && (isMine || checkDiscardCost(payer, ability.getPayCosts(), source))
-                && (!source.getName().equals("Tyrannize") || payer.getCardsIn(ZoneType.Hand).size() > 2)
-                && (!source.getName().equals("Perplex") || payer.getCardsIn(ZoneType.Hand).size() < 2)
-                && (!source.getName().equals("Breaking Point") || payer.getCreaturesInPlay().size() > 1)
-                && (!source.getName().equals("Chain of Vapor")
-                        || (payer.getOpponent().getCreaturesInPlay().size() > 0 && payer.getLandsInPlay().size() > 3))) {
-            // AI was crashing because the blank ability used to pay costs
-            // Didn't have any of the data on the original SA to pay dependant costs
-            return true;
-        }
-        return false;
+        
+        // AI was crashing because the blank ability used to pay costs
+        // Didn't have any of the data on the original SA to pay dependant costs
+
+        return checkLifeCost(payer, ability.getPayCosts(), source, 4, sa)
+            && checkDamageCost(payer, ability.getPayCosts(), source, 4)
+            && (isMine || checkDiscardCost(payer, ability.getPayCosts(), source))
+            && (!source.getName().equals("Tyrannize") || payer.getCardsIn(ZoneType.Hand).size() > 2)
+            && (!source.getName().equals("Perplex") || payer.getCardsIn(ZoneType.Hand).size() < 2)
+            && (!source.getName().equals("Breaking Point") || payer.getCreaturesInPlay().size() > 1)
+            && (!source.getName().equals("Chain of Vapor") || (payer.getOpponent().getCreaturesInPlay().size() > 0 && payer.getLandsInPlay().size() > 3));
     }
 
 }

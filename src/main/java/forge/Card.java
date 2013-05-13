@@ -53,6 +53,7 @@ import forge.card.mana.ManaCost;
 import forge.card.replacement.ReplaceMoved;
 import forge.card.replacement.ReplacementEffect;
 import forge.card.replacement.ReplacementResult;
+import forge.card.spellability.Ability;
 import forge.card.spellability.AbilityTriggered;
 import forge.card.spellability.OptionalCost;
 import forge.card.spellability.SpellAbility;
@@ -62,9 +63,9 @@ import forge.card.staticability.StaticAbility;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerType;
 import forge.card.trigger.ZCTrigger;
-import forge.game.GameActionUtil;
 import forge.game.GameState;
 import forge.game.GlobalRuleChange;
+import forge.game.event.CardDamagedEvent;
 import forge.game.event.CardEquippedEvent;
 import forge.game.event.CounterAddedEvent;
 import forge.game.event.CounterRemovedEvent;
@@ -7406,7 +7407,9 @@ public class Card extends GameEntity implements Comparable<Card> {
         this.addReceivedDamageFromThisTurn(source, damageToAdd);
         source.addDealtDamageToThisTurn(this, damageToAdd);
 
-        GameActionUtil.executeDamageDealingEffects(source, damageToAdd);
+        if (source.hasKeyword("Lifelink")) {
+            source.getController().gainLife(damageToAdd, source);
+        }
 
         // Run triggers
         final Map<String, Object> runParams = new TreeMap<String, Object>();
@@ -7421,25 +7424,57 @@ public class Card extends GameEntity implements Comparable<Card> {
             this.subtractCounter(CounterType.LOYALTY, damageToAdd);
             additionalLog = String.format("(Removing %d Loyalty Counters)", damageToAdd);
         } else {
+
+            final GameState game = source.getGame();
+            
+                final String s = this + " - destroy";
+
+                final int amount = this.getAmountOfKeyword("When CARDNAME is dealt damage, destroy it.");
+                if(amount > 0) {
+                    final Ability abDestroy = new Ability(source, ManaCost.ZERO){ 
+                        @Override public void resolve() { game.getAction().destroy(Card.this, this); }
+                    };
+                    abDestroy.setStackDescription(s + ", it cannot be regenerated.");
+    
+                    for (int i = 0; i < amount; i++) {
+                        game.getStack().addSimultaneousStackEntry(abDestroy);
+                    }
+                }
+            
+                final int amount2 = this.getAmountOfKeyword("When CARDNAME is dealt damage, destroy it. It can't be regenerated.");
+                if( amount2 > 0 ) {
+                    final Ability abDestoryNoRegen = new Ability(source, ManaCost.ZERO){ 
+                        @Override public void resolve() { game.getAction().destroyNoRegeneration(Card.this, this); }
+                    };
+                    abDestoryNoRegen.setStackDescription(s);
+                
+                    for (int i = 0; i < amount2; i++) {
+                        game.getStack().addSimultaneousStackEntry(abDestoryNoRegen);
+                    }
+                }
+            
+
             boolean wither = (getGame().getStaticEffects().getGlobalRuleChange(GlobalRuleChange.alwaysWither)
                     || source.hasKeyword("Wither") || source.hasKeyword("Infect"));
 
-            GameActionUtil.executeDamageToCreatureEffects(source, this, damageToAdd);
-
-            if (this.isInPlay() && wither) {
-                this.addCounter(CounterType.M1M1, damageToAdd, true);
-                additionalLog = "(As -1/-1 Counters)";
+            if (this.isInPlay()) {
+                if (wither) {
+                    this.addCounter(CounterType.M1M1, damageToAdd, true);
+                    additionalLog = "(As -1/-1 Counters)";
+                } else
+                    this.damage += damageToAdd;
             }
+            
             if (source.hasKeyword("Deathtouch") && this.isCreature()) {
                 getGame().getAction().destroy(this, null);
                 additionalLog = "(Deathtouch)";
-            } else if (this.isInPlay() && !wither) {
-                this.damage += damageToAdd;
-            }
+            } 
+
+            // Play the Damage sound
+            game.getEvents().post(new CardDamagedEvent());
         }
 
-        getGame().getGameLog().add("Damage", String.format("Dealing %d damage to %s. %s", 
-                damageToAdd, this.getName(), additionalLog), 3);
+        getGame().getGameLog().add("Damage", String.format("Dealing %d damage to %s. %s", damageToAdd, this.getName(), additionalLog), 3);
         return true;
     }
 

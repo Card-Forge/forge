@@ -131,7 +131,7 @@ public class ComputerUtilMana {
                 ma.setActivatingPlayer(ai);
                 // if the AI can't pay the additional costs skip the mana ability
                 if (ma.getPayCosts() != null && checkPlayable) {
-                    if (!ComputerUtilCost.canPayAdditionalCosts(ma, ai)) {
+                    if (!CostPayment.canPayAdditionalCosts(ma.getPayCosts(), ma)) {
                         continue;
                     }
                 } else if (sourceCard.isTapped() && checkPlayable) {
@@ -535,7 +535,7 @@ public class ComputerUtilMana {
                 // ability
                 m.setActivatingPlayer(ai);
                 if (cost != null) {
-                    if (!ComputerUtilCost.canPayAdditionalCosts(m, ai)) {
+                    if (!CostPayment.canPayAdditionalCosts(m.getPayCosts(), m)) {
                         continue;
                     }
                 }

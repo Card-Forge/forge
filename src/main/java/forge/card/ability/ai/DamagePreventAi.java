@@ -56,7 +56,7 @@ public class DamagePreventAi extends SpellAbilityAi {
                     sa.getParam("Defined"), sa);
 
             // react to threats on the stack
-            if (game.getStack().size() > 0) {
+            if (!game.getStack().isEmpty()) {
                 final ArrayList<Object> threatenedObjects = ComputerUtil.predictThreatenedObjects(sa.getActivatingPlayer(), sa);
                 for (final Object o : objects) {
                     if (threatenedObjects.contains(o)) {
@@ -90,7 +90,7 @@ public class DamagePreventAi extends SpellAbilityAi {
         } // targeted
 
         // react to threats on the stack
-        else if (game.getStack().size() > 0) {
+        else if (!game.getStack().isEmpty()) {
             tgt.resetTargets();
             // check stack for something on the stack will kill anything i
             // control

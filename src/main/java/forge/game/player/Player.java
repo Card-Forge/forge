@@ -612,7 +612,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     public final boolean addDamageAfterPrevention(final int damage, final Card source, final boolean isCombat) {
         final int damageToDo = damage;
 
-        if (damageToDo == 0) {
+        if (damageToDo <= 0) {
             return false;
         }
         String additionalLog = "";
@@ -639,8 +639,11 @@ public class Player extends GameEntity implements Comparable<Player> {
         }
 
         this.assignedDamage.put(source, damageToDo);
-        GameActionUtil.executeDamageDealingEffects(source, damageToDo);
-        GameActionUtil.executeDamageToPlayerEffects(this, source, damageToDo);
+        if (source.hasKeyword("Lifelink")) {
+            source.getController().gainLife(damageToDo, source);
+        }
+        source.getDamageHistory().registerDamage(this);
+        this.getGame().getEvents().post(new LifeLossEvent());
 
         if (isCombat) {
             final ArrayList<String> types = source.getType();
@@ -2822,7 +2825,7 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     public boolean canCastSorcery() {
         PhaseHandler now = game.getPhaseHandler();
-        return now.isPlayerTurn(this) && now.getPhase().isMain() && game.getStack().size() == 0;
+        return now.isPlayerTurn(this) && now.getPhase().isMain() && game.getStack().isEmpty();
     }
 
 

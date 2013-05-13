@@ -429,7 +429,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
         this.setPlayersPriorityPermission(true); //  PlayerPriorityAllowed = false;
 
         // If the Stack isn't empty why is nextPhase being called?
-        if (game.getStack().size() != 0) {
+        if (!game.getStack().isEmpty()) {
             Log.debug("Phase.nextPhase() is called, but Stack isn't empty.");
             return;
         }

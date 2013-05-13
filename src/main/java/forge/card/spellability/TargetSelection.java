@@ -310,14 +310,14 @@ public class TargetSelection {
         final List<Object> selectOptions = new ArrayList<Object>();
 
         final GameState game = ability.getActivatingPlayer().getGame();
-        for (int i = 0; i < game.getStack().size(); i++) {
-            SpellAbility stackItem = game.getStack().peekAbility(i);
-            if (ability.equals(stackItem)) {
+        for (SpellAbilityStackInstance si : game.getStack()) {
+            SpellAbility abilityOnStack = si.getSpellAbility();
+            if (ability.equals(abilityOnStack)) {
                 // By peeking at stack item, target is set to its SI state. So set it back before adding targets
                 tgt.resetTargets();
             }
-            else if (ability.canTargetSpellAbility(stackItem)) {
-                selectOptions.add(stackItem);
+            else if (ability.canTargetSpellAbility(abilityOnStack)) {
+                selectOptions.add(abilityOnStack);
             }
         }
 

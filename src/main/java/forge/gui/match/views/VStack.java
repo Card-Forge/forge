@@ -23,6 +23,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.swing.JCheckBoxMenuItem;
@@ -35,6 +36,7 @@ import net.miginfocom.swing.MigLayout;
 import forge.CardUtil;
 import forge.card.spellability.SpellAbilityStackInstance;
 import forge.control.FControl;
+import forge.game.player.Player;
 import forge.game.player.PlayerController;
 import forge.game.zone.MagicStack;
 import forge.gui.framework.DragCell;
@@ -115,14 +117,15 @@ public enum VStack implements IVDoc<CStack> {
     //========== Observer update methods
 
     /**
-     * @param stack  */
-    public void updateStack(final MagicStack stack) {
+     * @param stack  
+     * @param viewer */
+    public void updateStack(final MagicStack stack, Player viewer) {
         // No need to update this unless it's showing
         if (!parentCell.getSelected().equals(this)) { return; }
 
         int count = 1;
-        JTextArea tar;
-        String txt, isOptional;
+        
+        List<JTextArea> list = new ArrayList<JTextArea>();
 
         parentCell.getBody().removeAll();
         parentCell.getBody().setLayout(new MigLayout("insets 1%, gap 1%, wrap"));
@@ -133,15 +136,13 @@ public enum VStack implements IVDoc<CStack> {
         Color[] scheme;
 
         stackTARs.clear();
-        for (int i = stack.size() - 1; 0 <= i; i--) {
-            final SpellAbilityStackInstance spell = stack.peekInstance(i);
-
+        boolean isFirst = true;
+        for (final SpellAbilityStackInstance spell : stack) {
             scheme = getSpellColor(spell);
 
-            isOptional = stack.peekAbility(i).isOptionalTrigger()
-                    && stack.peekAbility(i).getSourceCard().getController().isHuman() ? "(OPTIONAL) " : "";
-            txt = (count++) + ". " + isOptional + spell.getStackDescription();
-            tar = new JTextArea(txt);
+            String isOptional = spell.getSpellAbility().isOptionalTrigger() && spell.getSourceCard().getController().equals(viewer) ? "(OPTIONAL) " : "";
+            String txt = (count++) + ". " + isOptional + spell.getStackDescription();
+            JTextArea tar = new JTextArea(txt);
             tar.setToolTipText(txt);
             tar.setOpaque(true);
             tar.setBorder(border);
@@ -183,17 +184,23 @@ public enum VStack implements IVDoc<CStack> {
                     }
                 });
             }
-
+            list.add(tar);
+            
             /*
              * This updates the Card Picture/Detail when the spell is added to
              * the stack. This functionality was not present in v 1.1.8.
              * 
              * Problem is described in TODO right above this.
              */
-            if (i == 0 && !spell.getStackDescription().startsWith("Morph ")) {
+            if (isFirst && !spell.getStackDescription().startsWith("Morph ")) {
                 CMatchUI.SINGLETON_INSTANCE.setCard(spell.getSourceCard());
             }
-
+            isFirst = false;
+        }
+        
+        Collections.reverse(list);
+        
+        for(JTextArea tar : list) {
             parentCell.getBody().add(tar, "w 98%!");
             stackTARs.add(tar);
         }

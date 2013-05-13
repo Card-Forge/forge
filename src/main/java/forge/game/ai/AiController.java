@@ -86,7 +86,7 @@ public class AiController {
 
     public final SpellAbility getSpellAbilityToPlay() {
         // if top of stack is owned by me
-        if (!game.getStack().isEmpty() && game.getStack().peekInstance().getActivatingPlayer().equals(player)) {
+        if (!game.getStack().isEmpty() && game.getStack().peekAbility().getActivatingPlayer().equals(player)) {
             // probably should let my stuff resolve
             return null;
         }
@@ -792,7 +792,7 @@ public class AiController {
     public void onPriorityRecieved() {
         final PhaseType phase = game.getPhaseHandler().getPhase();
         
-        if (game.getStack().size() > 0) {
+        if (!game.getStack().isEmpty()) {
             playSpellAbilities(game);
         } else {
             switch(phase) {

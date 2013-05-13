@@ -32,7 +32,6 @@ import forge.control.input.InputSelectCardsFromList;
 import forge.game.GameState;
 import forge.game.ai.ComputerUtil;
 import forge.game.player.Player;
-import forge.game.zone.MagicStack;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 import forge.gui.GuiDialog;
@@ -162,8 +161,8 @@ public class CostExile extends CostPartWithList {
             return true; // this will always work
         }
         if (this.getFrom().equals(ZoneType.Stack)) {
-            for (int i = 0; i < game.getStack().size(); i++) {
-                typeList.add(game.getStack().peekAbility(i).getSourceCard());
+            for (SpellAbilityStackInstance si : game.getStack()) {
+                typeList.add(si.getSourceCard());
             }
         } else {
             if (this.sameZone) {
@@ -336,13 +335,13 @@ public class CostExile extends CostPartWithList {
             return true;
         }
     
+        final GameState game = sa.getActivatingPlayer().getGame();
         ArrayList<SpellAbility> saList = new ArrayList<SpellAbility>();
         ArrayList<String> descList = new ArrayList<String>();
-        final MagicStack stack = sa.getActivatingPlayer().getGame().getStack();
-    
-        for (int i = 0; i < stack.size(); i++) {
-            final Card stC = stack.peekAbility(i).getSourceCard();
-            final SpellAbility stSA = stack.peekAbility(i).getRootAbility();
+        
+        for (SpellAbilityStackInstance si : game.getStack()) {
+            final Card stC = si.getSourceCard();
+            final SpellAbility stSA = si.getSpellAbility().getRootAbility();
             if (stC.isValid(getType().split(";"), sa.getActivatingPlayer(), sa.getSourceCard()) && stSA.isSpell()) {
                 saList.add(stSA);
                 if (stC.isCopiedSpell()) {
@@ -373,8 +372,8 @@ public class CostExile extends CostPartWithList {
                 } else {
                     addToList(c);
                 }
-                final SpellAbilityStackInstance si = stack.getInstanceFromSpellAbility(toExile);
-                stack.remove(si);
+                final SpellAbilityStackInstance si = game.getStack().getInstanceFromSpellAbility(toExile);
+                game.getStack().remove(si);
             } else {
                 return false;
             }
