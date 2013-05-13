@@ -37,6 +37,8 @@ Locket of Yesterdays
 Mana Skimmer
 Mana Maze
 Thrull Wizard
+Logic Knot
+Goblin Flotilla
 
 
 ----------
@@ -45,6 +47,8 @@ New Planes
 
 Grixis
 Orzhova
+Naar Isle
+Selesnya Loft Gardens
 
 
 ------------
