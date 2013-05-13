@@ -365,15 +365,13 @@ public class CostExile extends CostPartWithList {
                 final SpellAbility toExile = saList.get(descList.indexOf(o));
                 final Card c = toExile.getSourceCard();
                 
-    
                 saList.remove(toExile);
+                descList.remove(o);
+
                 if (!c.isCopiedSpell()) {
                     executePayment(sa, c);
-                } else
+                } else {
                     addToList(c);
-    
-                if (i == (nNeeded - 1)) {
-                    return true;
                 }
                 final SpellAbilityStackInstance si = stack.getInstanceFromSpellAbility(toExile);
                 stack.remove(si);
