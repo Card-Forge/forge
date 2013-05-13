@@ -97,13 +97,14 @@ public class DigUntilEffect extends SpellAbilityEffect {
         final int foundLibPos = AbilityUtils.calculateAmount(host, sa.getParam("FoundLibraryPosition"), sa);
         final ZoneType revealedDest = ZoneType.smartValueOf(sa.getParam("RevealedDestination"));
         final int revealedLibPos = AbilityUtils.calculateAmount(host, sa.getParam("RevealedLibraryPosition"), sa);
-
+        final ZoneType digSite = sa.hasParam("DigZone") ? ZoneType.smartValueOf(sa.getParam("DigZone")) : ZoneType.Library;
+        
         for (final Player p : getTargetPlayers(sa)) {
             if ((tgt == null) || p.canBeTargetedBy(sa)) {
                 final List<Card> found = new ArrayList<Card>();
                 final List<Card> revealed = new ArrayList<Card>();
 
-                final PlayerZone library = p.getZone(ZoneType.Library);
+                final PlayerZone library = p.getZone(digSite);
 
                 final int maxToDig = maxRevealed != null ? maxRevealed : library.size();
 

@@ -869,7 +869,9 @@ public class MagicStack extends MyObservable implements Iterable<SpellAbilitySta
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public final SpellAbility peekAbility() {
-        return this.getStack().peek().getSpellAbility();
+        synchronized(this.stack) {
+            return this.getStack().peek().getSpellAbility();
+        }
     }
 
     /**

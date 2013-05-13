@@ -684,6 +684,12 @@ public final class GuiDisplayUtil {
         if(res == null)
             return;
         
+        System.out.println("Rigging planar dice roll: " + res.toString());
+
+        //DBG
+        //System.out.println("ActivePlanes: " + getGame().getActivePlanes());
+        //System.out.println("CommandPlanes: " + getGame().getCardsIn(ZoneType.Command));
+        
         PlanarDice.roll(p, res);
         
         FThreads.invokeInNewThread(new Runnable() {

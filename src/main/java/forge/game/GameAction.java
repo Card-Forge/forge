@@ -736,6 +736,8 @@ public class GameAction {
             case Exile:         return this.exile(c);
             case Ante:          return this.moveTo(c.getOwner().getZone(ZoneType.Ante), c);
             case Command:       return this.moveTo(c.getOwner().getZone(ZoneType.Command), c);
+            case PlanarDeck:    return this.moveTo(c.getOwner().getZone(ZoneType.PlanarDeck), c);
+            case SchemeDeck:    return this.moveTo(c.getOwner().getZone(ZoneType.SchemeDeck), c);
             default:            return this.moveToStack(c);
         }
     }

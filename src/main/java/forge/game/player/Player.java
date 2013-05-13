@@ -2954,7 +2954,7 @@ public class Player extends GameEntity implements Comparable<Player> {
      * Then runs triggers. 
      */
     public void planeswalk()
-    {        
+    {
         planeswalkTo(Arrays.asList(getZone(ZoneType.PlanarDeck).get(0)));
     }
     
@@ -2966,12 +2966,18 @@ public class Player extends GameEntity implements Comparable<Player> {
      */
     public void planeswalkTo(final List<Card> destinations)
     {
-        currentPlanes = destinations;
+        System.out.println(this.getName() + ": planeswalk to " + destinations.toString());
+        currentPlanes.addAll(destinations);
 
         for(Card c : currentPlanes) {
             getZone(ZoneType.PlanarDeck).remove(c);
             getZone(ZoneType.Command).add(c);
-        }        
+        }
+        
+        //DBG
+        //System.out.println("CurrentPlanes: " + currentPlanes);
+        //System.out.println("ActivePlanes: " + game.getActivePlanes());
+        //System.out.println("CommandPlanes: " + getZone(ZoneType.Command).getCards());
         
         game.setActivePlanes(currentPlanes);
         //Run PlaneswalkedTo triggers here.
@@ -2985,7 +2991,7 @@ public class Player extends GameEntity implements Comparable<Player> {
      * Puts my currently active planes, if any, at the bottom of my planar deck.
      */
     public void leaveCurrentPlane()
-    {        
+    {
         if(!currentPlanes.isEmpty())
         {
           //Run PlaneswalkedFrom triggers here.
@@ -2994,12 +3000,17 @@ public class Player extends GameEntity implements Comparable<Player> {
             game.getTriggerHandler().runTrigger(TriggerType.PlaneswalkedFrom, runParams,false);
             
             for(Card c : currentPlanes) {
-                getZone(ZoneType.Command).remove(c);
+                game.getZoneOf(c).remove(c);
                 c.clearControllers();
                 getZone(ZoneType.PlanarDeck).add(c);
             }
             currentPlanes.clear();
         }
+
+        //DBG
+        //System.out.println("CurrentPlanes: " + currentPlanes);
+        //System.out.println("ActivePlanes: " + game.getActivePlanes());
+        //System.out.println("CommandPlanes: " + getZone(ZoneType.Command).getCards());
     }
     
     /**

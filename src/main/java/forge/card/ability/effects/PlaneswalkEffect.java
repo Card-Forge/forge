@@ -22,8 +22,6 @@ public class PlaneswalkEffect extends SpellAbilityEffect {
     public void resolve(SpellAbility sa) {
         GameState game = sa.getActivatingPlayer().getGame();
         
-        System.out.println("AF Planeswalking!");
-        
         for(Player p : game.getPlayers())
         {
             p.leaveCurrentPlane();
