@@ -1,0 +1,13 @@
+Name:Ether Well
+ManaCost:3 U
+Types:Instant
+A:SP$ Pump | Cost$ 3 U | ValidTgts$ Creature | IsCurse$ True | RememberObjects$ Targeted | SubAbility$ DBDefaultAction | StackDescription$ SpellDescription | SpellDescription$ Put target creature on top of its owner's library. If that creature is red, you may put it on the bottom of its owner's library instead.
+SVar:DBDefaultAction:DB$ ChangeZone | Cost$ 0 | Defined$ Remembered | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 0 | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0 | SubAbility$ DBChoose
+SVar:DBChoose:DB$ GenericChoice | Cost$ 0 | Choices$ DBBottomLibChoice,DBTopLibChoice | Defined$ You | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | SubAbility$ DBCleanup
+SVar:DBTopLibChoice:DB$ ChangeZone | Cost$ 0 | Defined$ Remembered | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 0 | ChoiceDescription$ Put target creature on top of its owner's library.
+SVar:DBBottomLibChoice:DB$ ChangeZone | Cost$ 0 | Defined$ Remembered | Origin$ Battlefield | Destination$ Library | LibraryPosition$ -1 | ChoiceDescription$ If that creature is red, you may put it on the bottom of its owner's library instead.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$Valid Creature.IsRemembered+Red
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ether_well.jpg
+Oracle:Put target creature on top of its owner's library. If that creature is red, you may put it on the bottom of its owner's library instead.
+SetInfo:MIR Uncommon
