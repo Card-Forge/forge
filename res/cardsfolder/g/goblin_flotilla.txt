@@ -1,0 +1,13 @@
+Name:Goblin Flotilla
+ManaCost:2 R
+Types:Creature Goblin
+PT:2/2
+K:Islandwalk
+T:Mode$ Phase | Phase$ BeginCombat | TriggerZones$ Battlefield | Execute$ AnimateDB | TriggerDescription$ At the beginning of each combat, unless you pay R, whenever CARDNAME blocks or becomes blocked by a creature this combat, that creature gains first strike until end of turn.
+SVar:AnimateDB:DB$Animate | Triggers$ AttackerBlocked,Blocks | UnlessCost$ R | UnlessPayer$ You
+SVar:AttackerBlocked:Mode$ AttackerBlocked | ValidCard$ Card.Self | Execute$ PumpOthers | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked by a creature this combat, that creature gains first strike until end of turn.
+SVar:Blocks:Mode$ Blocks | ValidCard$ Card.Self | Execute$ PumpOthers | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked by a creature this combat, that creature gains first strike until end of turn.
+SVar:PumpOthers:DB$PumpAll | ValidCards$ Creature.blockingSource,Creature.blockedBySource | KW$ First Strike
+SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_flotilla.jpg
+Oracle:Islandwalk\nAt the beginning of each combat, unless you pay R, whenever Goblin Flotilla blocks or becomes blocked by a creature this combat, that creature gains first strike until end of turn.
+SetInfo:FEM Rare
