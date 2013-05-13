@@ -1,0 +1,23 @@
+[duel]
+[metadata]
+Name=Lex Luthor 2
+Title=Lex Luthor
+Difficulty=medium
+Description=Mono B Zombie/Skeleton deck with Death Baron and Pontiff of Blight
+Icon=Lex Luthor.jpg
+Deck Type=constructed
+[main]
+4 Blood Scrivener
+4 Death Baron
+2 Diregraf Ghoul
+2 Drudge Skeletons
+4 Duty-Bound Dead
+4 Pontiff of Blight
+2 Restless Dead
+4 Rimebound Dead
+3 Sanguine Guard
+24 Snow-Covered Swamp
+2 Unworthy Dead
+3 Urborg Skeleton
+2 Walking Dead
+[sideboard]
