@@ -6268,6 +6268,7 @@ res/cardsfolder/l/locust_swarm.txt svneol=native#text/plain
 res/cardsfolder/l/lodestone_bauble.txt svneol=native#text/plain
 res/cardsfolder/l/lodestone_golem.txt svneol=native#text/plain
 res/cardsfolder/l/lodestone_myr.txt svneol=native#text/plain
+res/cardsfolder/l/logic_knot.txt -text
 res/cardsfolder/l/lone_missionary.txt svneol=native#text/plain
 res/cardsfolder/l/lone_revenant.txt -text
 res/cardsfolder/l/lone_wolf.txt -text
@@ -7183,6 +7184,7 @@ res/cardsfolder/m/mystical_tutor.txt svneol=native#text/plain
 res/cardsfolder/m/mystifying_maze.txt svneol=native#text/plain
 res/cardsfolder/m/mythic_proportions.txt svneol=native#text/plain
 res/cardsfolder/mkzip.sh svneol=native#text/x-sh
+res/cardsfolder/n/naar_isle.txt -text
 res/cardsfolder/n/nacatl_hunt_pride.txt svneol=native#text/plain
 res/cardsfolder/n/nacatl_outlander.txt svneol=native#text/plain
 res/cardsfolder/n/nacatl_savage.txt svneol=native#text/plain
@@ -9464,6 +9466,7 @@ res/cardsfolder/s/selesnya_evangel.txt svneol=native#text/plain
 res/cardsfolder/s/selesnya_guildgate.txt -text
 res/cardsfolder/s/selesnya_guildmage.txt svneol=native#text/plain
 res/cardsfolder/s/selesnya_keyrune.txt -text
+res/cardsfolder/s/selesnya_loft_gardens.txt -text
 res/cardsfolder/s/selesnya_sagittars.txt -text
 res/cardsfolder/s/selesnya_sanctuary.txt svneol=native#text/plain
 res/cardsfolder/s/selesnya_sentry.txt -text

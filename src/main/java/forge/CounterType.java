@@ -32,6 +32,8 @@ public enum CounterType {
 
     AGE(),
 
+    AIM(),
+
     ARROW(),
 
     ARROWHEAD(),
@@ -70,7 +72,11 @@ public enum CounterType {
 
     DIVINITY(),
 
+    DREAM(),
+
     DOOM(),
+
+    ECHO(),    
 
     ELIXIR(),
 
@@ -87,6 +93,8 @@ public enum CounterType {
     FEATHER(),
 
     FILIBUSTER(),
+
+    FLAME(),
 
     FLOOD(),
 
@@ -107,6 +115,8 @@ public enum CounterType {
     HOOFPRINT(),
 
     HOURGLASS(),
+
+    HUNGER(),
 
     ICE(),
 
@@ -134,6 +144,8 @@ public enum CounterType {
 
     M2M2("-2/-2"),
 
+    MAGNET(),
+
     MANA(),
 
     MANNEQUIN(),
@@ -149,6 +161,8 @@ public enum CounterType {
     MUSIC(),
 
     MUSTER(),
+    
+    NET(),
 
     OMEN(),
 
@@ -178,9 +192,13 @@ public enum CounterType {
 
     P0P1("+0/+1"),
 
+    P0P2("+0/+2"),
+
     P1P0("+1/+0"),
 
     P1P2("+1/+2"),
+    
+    P2P0("+2/+0"),
 
     P2P2("+2/+2"),
 

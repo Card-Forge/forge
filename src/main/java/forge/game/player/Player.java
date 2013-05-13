@@ -2790,7 +2790,9 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public int getCounterDoublersMagnitude(final CounterType type) {
-        int counterDoublers = getCardsIn(ZoneType.Battlefield, "Doubling Season").size();
+        int counterDoublers = getCardsIn(ZoneType.Battlefield, "Doubling Season").size()
+                + CardLists.filter(getGame().getCardsIn(ZoneType.Command), 
+                        CardPredicates.nameEquals("Selesnya Loft Gardens")).size();
         if (type == CounterType.P1P1) {
             counterDoublers += getCardsIn(ZoneType.Battlefield, "Corpsejack Menace").size();
         }
@@ -2799,7 +2801,9 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     public int getTokenDoublersMagnitude() {
         final int tokenDoublers = getCardsIn(ZoneType.Battlefield, "Parallel Lives").size()
-                + getCardsIn(ZoneType.Battlefield, "Doubling Season").size();
+                + getCardsIn(ZoneType.Battlefield, "Doubling Season").size()
+                + CardLists.filter(getGame().getCardsIn(ZoneType.Command), 
+                        CardPredicates.nameEquals("Selesnya Loft Gardens")).size();;
         return 1 << tokenDoublers; // pow(a,0) = 1; pow(a,1) = a
     }
 
