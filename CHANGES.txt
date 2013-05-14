@@ -16,6 +16,10 @@ The devs are discussing a plan to update the battlefield display code with Java 
 We have an informative topic at CCGH which explains how you can create "fantasy blocks" and the greatly increased flexibility you have when you are building your own blocks. Please see the topic http://www.slightlymagic.net/forum/viewtopic.php?f=26&t=8164 for more information. Also note that the syntax was recently changed, see message http://www.slightlymagic.net/forum/viewtopic.php?f=26&t=8164&view=unread#p117389 for additional information.
 
 
+- Dragon's Maze -
+The Dragon's Maze set pictures should now be available via the "Download LQ Set Pictures" button. The Dragon's Maze booster images should also be available.
+
+
 ---------
 New Cards
 ---------
