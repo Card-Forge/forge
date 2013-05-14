@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.Card;
+import forge.card.ColorSet;
 import forge.card.mana.ManaCostBeingPaid;
 import forge.card.spellability.SpellAbility;
 import forge.view.ButtonUtil;
@@ -13,7 +14,7 @@ import forge.view.ButtonUtil;
 public class InputPayManaX extends InputPayManaBase {
     private static final long serialVersionUID = -6900234444347364050L;
     private int xPaid = 0;
-    private String colorsPaid;
+    private byte colorsPaid;
     private final String manaCostStr;
     private final boolean xCanBe0;
     private boolean canceled = false;
@@ -85,9 +86,7 @@ public class InputPayManaX extends InputPayManaBase {
     @Override
     protected void onManaAbilityPaid() {
         if (this.manaCost.isPaid()) {
-            if (!this.colorsPaid.contains(this.manaCost.getColorsPaid())) {
-                this.colorsPaid += this.manaCost.getColorsPaid();
-            }
+            this.colorsPaid |= manaCost.getColorsPaid();
             this.manaCost = new ManaCostBeingPaid(manaCostStr);
             this.xPaid++;
         }
@@ -116,7 +115,7 @@ public class InputPayManaX extends InputPayManaBase {
         final Card card = saPaidFor.getSourceCard();
         card.setXManaCostPaid(this.xPaid);
         card.setColorsPaid(this.colorsPaid);
-        card.setSunburstValue(this.colorsPaid.length());
+        card.setSunburstValue(ColorSet.fromMask(this.colorsPaid).countColors());
         this.stop();
     }
 }

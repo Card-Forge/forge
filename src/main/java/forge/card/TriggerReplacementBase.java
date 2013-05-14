@@ -294,19 +294,21 @@ public abstract class TriggerReplacementBase {
         }
     
         if (params.containsKey("ManaSpent")) {
-            if (!this.getHostCard().getColorsPaid().contains(params.get("ManaSpent"))) {
+            byte spent = MagicColor.fromName(params.get("ManaSpent"));
+            if ( 0 == (this.getHostCard().getColorsPaid() & spent)) {
                 return false;
             }
         }
 
         if (params.containsKey("ManaNotSpent")) {
-            if (this.getHostCard().getColorsPaid().contains(params.get("ManaNotSpent"))) {
+            byte spent = MagicColor.fromName(params.get("ManaSpent"));
+            if ( 0 != (this.getHostCard().getColorsPaid() & spent)) {
                 return false;
             }
         }
 
         if (params.containsKey("WerewolfTransformCondition")) {
-            if (CardUtil.getLastTurnCast("Card", this.getHostCard()).size() > 0) {
+            if (!CardUtil.getLastTurnCast("Card", this.getHostCard()).isEmpty()) {
                 return false;
             }
         }

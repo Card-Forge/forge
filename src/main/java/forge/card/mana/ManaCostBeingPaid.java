@@ -102,7 +102,7 @@ public class ManaCostBeingPaid {
     // holds Mana_Part objects
     // ManaPartColor is stored before ManaPartColorless
     private final HashMap<ManaCostShard, Integer> unpaidShards = new HashMap<ManaCostShard, Integer>();
-    private final HashMap<String, Integer> sunburstMap = new HashMap<String, Integer>();
+    private byte sunburstMap = 0;
     private int cntX = 0;
     private final String sourceRestriction;
     
@@ -146,9 +146,7 @@ public class ManaCostBeingPaid {
      * @return a int.
      */
     public final int getSunburst() {
-        final int ret = this.sunburstMap.size();
-        this.sunburstMap.clear();
-        return ret;
+        return ColorSet.fromMask(sunburstMap).countColors();
     }
 
     /**
@@ -158,26 +156,8 @@ public class ManaCostBeingPaid {
      * 
      * @return a String.
      */
-    public final String getColorsPaid() {
-        String s = "";
-        for (final String key : this.sunburstMap.keySet()) {
-            if (key.equalsIgnoreCase("black") || key.equalsIgnoreCase("B")) {
-                s += "B";
-            }
-            if (key.equalsIgnoreCase("blue") || key.equalsIgnoreCase("U")) {
-                s += "U";
-            }
-            if (key.equalsIgnoreCase("green") || key.equalsIgnoreCase("G")) {
-                s += "G";
-            }
-            if (key.equalsIgnoreCase("red") || key.equalsIgnoreCase("R")) {
-                s += "R";
-            }
-            if (key.equalsIgnoreCase("white") || key.equalsIgnoreCase("W")) {
-                s += "W";
-            }
-        }
-        return s;
+    public final byte getColorsPaid() {
+        return sunburstMap;
     }
 
     /**
@@ -470,13 +450,7 @@ public class ManaCostBeingPaid {
             this.increaseColorlessMana(1);
         }
 
-        if (!mana.equals(Constant.Color.COLORLESS)) {
-            if (this.sunburstMap.containsKey(mana)) {
-                this.sunburstMap.put(mana, this.sunburstMap.get(mana) + 1);
-            } else {
-                this.sunburstMap.put(mana, 1);
-            }
-        }
+        this.sunburstMap |= colorMask;
         return true;
     }
 
@@ -550,20 +524,13 @@ public class ManaCostBeingPaid {
             return false;
         }
 
-        String manaColor = mana.getColor();
 
         decreaseShard(choice, 1);
         if (choice.isOr2Colorless() && choice.getColorMask() != mana.getColorCode() ) {
             this.increaseColorlessMana(1);
         }
 
-        if (!mana.isColor(Constant.Color.COLORLESS)) {
-            if (this.sunburstMap.containsKey(manaColor)) {
-                this.sunburstMap.put(manaColor, this.sunburstMap.get(manaColor) + 1);
-            } else {
-                this.sunburstMap.put(manaColor, 1);
-            }
-        }
+        this.sunburstMap |= mana.getColorCode();
         return true;
     }
 

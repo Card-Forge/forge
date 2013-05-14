@@ -190,7 +190,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     private int replicateMagnitude = 0;
 
     private int sunburstValue = 0;
-    private String colorsPaid = "";
+    private byte colorsPaid = 0;
 
     private Player owner = null;
     private Player controller = null;
@@ -876,7 +876,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
 
     // TODO: Append colors instead of replacing
-    public final void setColorsPaid(final String s) {
+    public final void setColorsPaid(final byte s) {
         this.colorsPaid = s;
     }
 
@@ -887,7 +887,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * 
      * @return a String.
      */
-    public final String getColorsPaid() {
+    public final byte getColorsPaid() {
         return this.colorsPaid;
     }
 

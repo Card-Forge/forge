@@ -21,8 +21,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
+
 import forge.Card;
 import forge.CardLists;
+import forge.card.MagicColor;
 import forge.card.ability.AbilityUtils;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.game.GameState;
@@ -315,10 +318,10 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
             }
         }
 
-        if (null != this.getManaSpent()) {
-            if (!sa.getSourceCard().getColorsPaid().contains(this.getManaSpent())) {
+        if (StringUtils.isNotEmpty(this.getManaSpent())) {
+            byte manaSpent = MagicColor.fromName(getManaSpent()); // they always check for single color
+            if( 0 == (manaSpent & sa.getSourceCard().getColorsPaid())) // no match of colors
                 return false;
-            }
         }
 
         if (this.getsVarToCheck() != null) {
