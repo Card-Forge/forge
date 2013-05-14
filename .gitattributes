@@ -14004,6 +14004,7 @@ src/main/java/forge/card/cost/PaymentDecision.java -text
 src/main/java/forge/card/cost/package-info.java svneol=native#text/plain
 src/main/java/forge/card/mana/IParserManaCost.java -text
 src/main/java/forge/card/mana/Mana.java svneol=native#text/plain
+src/main/java/forge/card/mana/ManaAtom.java -text
 src/main/java/forge/card/mana/ManaCost.java -text
 src/main/java/forge/card/mana/ManaCostBeingPaid.java svneol=native#text/plain
 src/main/java/forge/card/mana/ManaCostParser.java -text
@@ -14600,6 +14601,12 @@ src/main/java/forge/util/PredicateString.java -text
 src/main/java/forge/util/ReflectionUtil.java -text
 src/main/java/forge/util/TextUtil.java -text
 src/main/java/forge/util/XmlUtil.java -text
+src/main/java/forge/util/maps/CollectionSuppliers.java -text
+src/main/java/forge/util/maps/EnumMapOfLists.java -text
+src/main/java/forge/util/maps/HashMapOfLists.java -text
+src/main/java/forge/util/maps/MapOfLists.java -text
+src/main/java/forge/util/maps/TreeMapOfLists.java -text
+src/main/java/forge/util/maps/package-info.java -text
 src/main/java/forge/util/package-info.java -text
 src/main/java/forge/util/storage/IStorage.java -text
 src/main/java/forge/util/storage/IStorageView.java -text

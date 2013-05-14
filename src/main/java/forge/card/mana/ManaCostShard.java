@@ -24,7 +24,47 @@ import forge.util.BinaryUtil;
 /**
  * The Class CardManaCostShard.
  */
-public class ManaCostShard {
+public enum ManaCostShard {
+
+    
+    COLORLESS(ManaAtom.COLORLESS, "1"),
+    
+    X(ManaAtom.IS_X, "X"),
+    S(ManaAtom.IS_SNOW, "S"),
+    
+    /* Pure colors */
+    WHITE(ManaAtom.WHITE, "W"),
+    BLUE(ManaAtom.BLUE, "U"),
+    BLACK(ManaAtom.BLACK, "B"),
+    RED(ManaAtom.RED, "R"),
+    GREEN(ManaAtom.GREEN, "G"),
+
+    /* Hybrid */
+    WU(ManaAtom.WHITE | ManaAtom.BLUE, "W/U", "WU"),
+    WB(ManaAtom.WHITE | ManaAtom.BLACK, "W/B", "WB"),
+    WR(ManaAtom.WHITE | ManaAtom.RED, "W/R", "RW"),
+    WG(ManaAtom.WHITE | ManaAtom.GREEN, "W/G", "GW"),
+    UB(ManaAtom.BLUE | ManaAtom.BLACK, "U/B", "UB"),
+    UR(ManaAtom.BLUE | ManaAtom.RED, "U/R", "UR"),
+    UG(ManaAtom.BLUE | ManaAtom.GREEN, "U/G", "GU"),
+    BR(ManaAtom.BLACK | ManaAtom.RED, "B/R", "BR"),
+    BG(ManaAtom.BLACK | ManaAtom.GREEN, "B/G", "BG"),
+    RG(ManaAtom.RED | ManaAtom.GREEN, "R/G", "RG"),
+
+    /* Phyrexian */ 
+    PW(ManaAtom.WHITE | ManaAtom.OR_2_LIFE, "W/P", "PW"),
+    PU(ManaAtom.BLUE | ManaAtom.OR_2_LIFE, "U/P", "PU"),
+    PB(ManaAtom.BLACK | ManaAtom.OR_2_LIFE, "B/P", "PB"),
+    PR(ManaAtom.RED | ManaAtom.OR_2_LIFE, "R/P", "PR"),
+    PG(ManaAtom.GREEN | ManaAtom.OR_2_LIFE, "G/P", "PG"),
+
+    /* Or 2 colorless */
+    W2(ManaAtom.WHITE | ManaAtom.OR_2_COLORLESS, "2/W", "2W"),
+    U2(ManaAtom.BLUE | ManaAtom.OR_2_COLORLESS, "2/U", "2U"),
+    B2(ManaAtom.BLACK | ManaAtom.OR_2_COLORLESS, "2/B", "2B"),
+    R2(ManaAtom.RED | ManaAtom.OR_2_COLORLESS, "2/R", "2R"),
+    G2(ManaAtom.GREEN | ManaAtom.OR_2_COLORLESS, "2/G", "2G");
+
 
     private final int shard;
 
@@ -46,7 +86,7 @@ public class ManaCostShard {
      * @param sValue
      *            the s value
      */
-    protected ManaCostShard(final int value, final String sValue) {
+    private ManaCostShard(final int value, final String sValue) {
         this(value, sValue, sValue);
     }
 
@@ -60,7 +100,7 @@ public class ManaCostShard {
      * @param imgKey
      *            the img key
      */
-    protected ManaCostShard(final int value, final String sValue, final String imgKey) {
+    private ManaCostShard(final int value, final String sValue, final String imgKey) {
         this.shard = value;
         this.cmc = this.getCMC();
         this.cmpc = this.getCmpCost();
@@ -68,147 +108,16 @@ public class ManaCostShard {
         this.imageKey = imgKey;
     }
 
-    /** A bitmask to represent any mana symbol as an integer. */
-    public abstract static class Atom {
-        public static final int COLORLESS = 1 << 0;
 
-        /** The Constant WHITE. */
-        public static final int WHITE = MagicColor.WHITE; // 1 << 1;
 
-        /** The Constant BLUE. */
-        public static final int BLUE = MagicColor.BLUE; // 1 << 2;
+    public static final int COLORS_SUPERPOSITION = ManaAtom.WHITE | ManaAtom.BLUE | ManaAtom.BLACK | ManaAtom.RED | ManaAtom.GREEN;
 
-        /** The Constant BLACK. */
-        public static final int BLACK = MagicColor.BLACK; // 1 << 3;
-
-        /** The Constant RED. */
-        public static final int RED = MagicColor.RED; // 1 << 4;
-
-        /** The Constant GREEN. */
-        public static final int GREEN = MagicColor.GREEN; // 1 << 5;
-
-        /** The Constant IS_X. */
-        public static final int IS_X = 1 << 8;
-
-        /** The Constant OR_2_COLORLESS. */
-        public static final int OR_2_COLORLESS = 1 << 9;
-
-        /** The Constant OR_2_LIFE. */
-        public static final int OR_2_LIFE = 1 << 10;
-
-        /** The Constant IS_SNOW. */
-        public static final int IS_SNOW = 1 << 11;
-    }
-
-    public static final int COLORS_SUPERPOSITION = Atom.WHITE | Atom.BLUE | Atom.BLACK | Atom.RED | Atom.GREEN;
-
-    /*
-     * Why boxed values are here? They is meant to be constant and require no
-     * further boxing if added into an arraylist or something else, with generic
-     * parameters that would require Object's descendant.
-     * 
-     * Choosing between "let's have some boxing" and "let's have some unboxing",
-     * I choose the latter, because memory for boxed objects will be taken from
-     * heap, while unboxed values will lay on stack, which is faster
-     */
-
-    public static final ManaCostShard COLORLESS = new ManaCostShard(Atom.COLORLESS, "1");
-
-    /** The Constant X. */
-    public static final ManaCostShard X = new ManaCostShard(Atom.IS_X, "X");
-
-    /** The Constant S. */
-    public static final ManaCostShard S = new ManaCostShard(Atom.IS_SNOW, "S");
-
-    /** The Constant WHITE. */
-    public static final ManaCostShard WHITE = new ManaCostShard(Atom.WHITE, "W");
-
-    /** The Constant BLUE. */
-    public static final ManaCostShard BLUE = new ManaCostShard(Atom.BLUE, "U");
-
-    /** The Constant BLACK. */
-    public static final ManaCostShard BLACK = new ManaCostShard(Atom.BLACK, "B");
-
-    /** The Constant RED. */
-    public static final ManaCostShard RED = new ManaCostShard(Atom.RED, "R");
-
-    /** The Constant GREEN. */
-    public static final ManaCostShard GREEN = new ManaCostShard(Atom.GREEN, "G");
-
-    /** The Constant PW. */
-    public static final ManaCostShard PW = new ManaCostShard(Atom.WHITE | Atom.OR_2_LIFE, "W/P", "PW");
-
-    /** The Constant PU. */
-    public static final ManaCostShard PU = new ManaCostShard(Atom.BLUE | Atom.OR_2_LIFE, "U/P", "PU");
-
-    /** The Constant PB. */
-    public static final ManaCostShard PB = new ManaCostShard(Atom.BLACK | Atom.OR_2_LIFE, "B/P", "PB");
-
-    /** The Constant PR. */
-    public static final ManaCostShard PR = new ManaCostShard(Atom.RED | Atom.OR_2_LIFE, "R/P", "PR");
-
-    /** The Constant PG. */
-    public static final ManaCostShard PG = new ManaCostShard(Atom.GREEN | Atom.OR_2_LIFE, "G/P", "PG");
-
-    /** The Constant WU. */
-    public static final ManaCostShard WU = new ManaCostShard(Atom.WHITE | Atom.BLUE, "W/U", "WU");
-
-    /** The Constant WB. */
-    public static final ManaCostShard WB = new ManaCostShard(Atom.WHITE | Atom.BLACK, "W/B", "WB");
-
-    /** The Constant WR. */
-    public static final ManaCostShard WR = new ManaCostShard(Atom.WHITE | Atom.RED, "W/R", "RW");
-
-    /** The Constant WG. */
-    public static final ManaCostShard WG = new ManaCostShard(Atom.WHITE | Atom.GREEN, "W/G", "GW");
-
-    /** The Constant UB. */
-    public static final ManaCostShard UB = new ManaCostShard(Atom.BLUE | Atom.BLACK, "U/B", "UB");
-
-    /** The Constant UR. */
-    public static final ManaCostShard UR = new ManaCostShard(Atom.BLUE | Atom.RED, "U/R", "UR");
-
-    /** The Constant UG. */
-    public static final ManaCostShard UG = new ManaCostShard(Atom.BLUE | Atom.GREEN, "U/G", "GU");
-
-    /** The Constant BR. */
-    public static final ManaCostShard BR = new ManaCostShard(Atom.BLACK | Atom.RED, "B/R", "BR");
-
-    /** The Constant BG. */
-    public static final ManaCostShard BG = new ManaCostShard(Atom.BLACK | Atom.GREEN, "B/G", "BG");
-
-    /** The Constant RG. */
-    public static final ManaCostShard RG = new ManaCostShard(Atom.RED | Atom.GREEN, "R/G", "RG");
-
-    /** The Constant W2. */
-    public static final ManaCostShard W2 = new ManaCostShard(Atom.WHITE | Atom.OR_2_COLORLESS, "2/W", "2W");
-
-    /** The Constant U2. */
-    public static final ManaCostShard U2 = new ManaCostShard(Atom.BLUE | Atom.OR_2_COLORLESS, "2/U", "2U");
-
-    /** The Constant B2. */
-    public static final ManaCostShard B2 = new ManaCostShard(Atom.BLACK | Atom.OR_2_COLORLESS, "2/B", "2B");
-
-    /** The Constant R2. */
-    public static final ManaCostShard R2 = new ManaCostShard(Atom.RED | Atom.OR_2_COLORLESS, "2/R", "2R");
-
-    /** The Constant G2. */
-    public static final ManaCostShard G2 = new ManaCostShard(Atom.GREEN | Atom.OR_2_COLORLESS, "2/G", "2G");
-
-    private static final ManaCostShard[] ALL_POSSIBLE = new ManaCostShard[] { ManaCostShard.X, ManaCostShard.COLORLESS,
-            ManaCostShard.WHITE, ManaCostShard.BLUE, ManaCostShard.BLACK, ManaCostShard.RED,
-            ManaCostShard.GREEN, ManaCostShard.PW, ManaCostShard.PU, ManaCostShard.PB,
-            ManaCostShard.PR, ManaCostShard.PG, ManaCostShard.WU, ManaCostShard.WB,
-            ManaCostShard.WR, ManaCostShard.WG, ManaCostShard.UB, ManaCostShard.UR,
-            ManaCostShard.UG, ManaCostShard.BR, ManaCostShard.BG, ManaCostShard.RG,
-            ManaCostShard.W2, ManaCostShard.U2, ManaCostShard.B2, ManaCostShard.R2,
-            ManaCostShard.G2, ManaCostShard.S };
-
+    
     private int getCMC() {
-        if (0 != (this.shard & Atom.IS_X)) {
+        if (0 != (this.shard & ManaAtom.IS_X)) {
             return 0;
         }
-        if (0 != (this.shard & Atom.OR_2_COLORLESS)) {
+        if (0 != (this.shard & ManaAtom.OR_2_COLORLESS)) {
             return 2;
         }
         return 1;
@@ -223,27 +132,27 @@ public class ManaCostShard {
      *         cost + 0.00001 * the number of X's in the cost
      */
     private float getCmpCost() {
-        if (0 != (this.shard & Atom.IS_X)) {
+        if (0 != (this.shard & ManaAtom.IS_X)) {
             return 0.0001f;
         }
-        float cost = 0 != (this.shard & Atom.OR_2_COLORLESS) ? 2 : 1;
+        float cost = 0 != (this.shard & ManaAtom.OR_2_COLORLESS) ? 2 : 1;
         // yes, these numbers are magic, slightly-magic
-        if (0 != (this.shard & Atom.WHITE)) {
+        if (0 != (this.shard & ManaAtom.WHITE)) {
             cost += 0.0005f;
         }
-        if (0 != (this.shard & Atom.BLUE)) {
+        if (0 != (this.shard & ManaAtom.BLUE)) {
             cost += 0.0020f;
         }
-        if (0 != (this.shard & Atom.BLACK)) {
+        if (0 != (this.shard & ManaAtom.BLACK)) {
             cost += 0.0080f;
         }
-        if (0 != (this.shard & Atom.RED)) {
+        if (0 != (this.shard & ManaAtom.RED)) {
             cost += 0.0320f;
         }
-        if (0 != (this.shard & Atom.GREEN)) {
+        if (0 != (this.shard & ManaAtom.GREEN)) {
             cost += 0.1280f;
         }
-        if (0 != (this.shard & Atom.OR_2_LIFE)) {
+        if (0 != (this.shard & ManaAtom.OR_2_LIFE)) {
             cost += 0.00003f;
         }
         return cost;
@@ -255,23 +164,7 @@ public class ManaCostShard {
      * @return the color mask
      */
     public final byte getColorMask() {
-        byte result = 0;
-        if (0 != (this.shard & Atom.WHITE)) {
-            result |= MagicColor.WHITE;
-        }
-        if (0 != (this.shard & Atom.BLUE)) {
-            result |= MagicColor.BLUE;
-        }
-        if (0 != (this.shard & Atom.BLACK)) {
-            result |= MagicColor.BLACK;
-        }
-        if (0 != (this.shard & Atom.RED)) {
-            result |= MagicColor.RED;
-        }
-        if (0 != (this.shard & Atom.GREEN)) {
-            result |= MagicColor.GREEN;
-        }
-        return result;
+        return (byte)(this.shard & COLORS_SUPERPOSITION);
     }
 
     /**
@@ -283,7 +176,7 @@ public class ManaCostShard {
      */
     public static ManaCostShard valueOf(final int atoms) {
         if ( atoms == 0 ) return ManaCostShard.COLORLESS;
-        for (final ManaCostShard element : ManaCostShard.ALL_POSSIBLE) {
+        for (final ManaCostShard element : ManaCostShard.values()) {
             if (element.shard == atoms) {
                 return element;
             }
@@ -298,25 +191,25 @@ public class ManaCostShard {
         for (int iChar = 0; iChar < unparsed.length(); iChar++) {
             char c = unparsed.charAt(iChar);
             switch (c) {
-                case 'W': atoms |= Atom.WHITE;          break;
-                case 'U': atoms |= Atom.BLUE;           break;
-                case 'B': atoms |= Atom.BLACK;          break;
-                case 'R': atoms |= Atom.RED;            break;
-                case 'G': atoms |= Atom.GREEN;          break;
-                case 'P': atoms |= Atom.OR_2_LIFE;      break;
-                case 'S': atoms |= Atom.IS_SNOW;        break;
-                case 'X': atoms |= Atom.IS_X;           break;
-                case '2': atoms |= Atom.OR_2_COLORLESS; break;
+                case 'W': atoms |= ManaAtom.WHITE;          break;
+                case 'U': atoms |= ManaAtom.BLUE;           break;
+                case 'B': atoms |= ManaAtom.BLACK;          break;
+                case 'R': atoms |= ManaAtom.RED;            break;
+                case 'G': atoms |= ManaAtom.GREEN;          break;
+                case 'P': atoms |= ManaAtom.OR_2_LIFE;      break;
+                case 'S': atoms |= ManaAtom.IS_SNOW;        break;
+                case 'X': atoms |= ManaAtom.IS_X;           break;
+                case '2': atoms |= ManaAtom.OR_2_COLORLESS; break;
                 default:
                     if (c <= '9' && c >= '0') {
-                        atoms |= Atom.COLORLESS;
+                        atoms |= ManaAtom.COLORLESS;
                     }
                     break;
             }
         }
         // for cases when unparsed equals '2' or unparsed is like '12' or '20'
-        if (atoms == Atom.OR_2_COLORLESS || atoms == (Atom.OR_2_COLORLESS | Atom.COLORLESS)) {
-            atoms = Atom.COLORLESS;
+        if (atoms == ManaAtom.OR_2_COLORLESS || atoms == (ManaAtom.OR_2_COLORLESS | ManaAtom.COLORLESS)) {
+            atoms = ManaAtom.COLORLESS;
         }
         return ManaCostShard.valueOf(atoms);
     }
@@ -363,7 +256,7 @@ public class ManaCostShard {
      * @return
      */
     public boolean isPhyrexian() {
-        return (this.shard & Atom.OR_2_LIFE) != 0;
+        return (this.shard & ManaAtom.OR_2_LIFE) != 0;
     }
 
     /**
@@ -371,17 +264,16 @@ public class ManaCostShard {
      * @return
      */
     public boolean isSnow() {
-        return (this.shard & Atom.IS_SNOW) != 0;
+        return (this.shard & ManaAtom.IS_SNOW) != 0;
     }
 
     public boolean isMonoColor() {
-        int colormask = this.shard & COLORS_SUPERPOSITION;
-        return BinaryUtil.bitCount(colormask) == 1;
+        return BinaryUtil.bitCount(this.shard & COLORS_SUPERPOSITION) == 1;
 
     }
 
     public boolean isOr2Colorless() {
-        return (this.shard & Atom.OR_2_COLORLESS) != 0;
+        return (this.shard & ManaAtom.OR_2_COLORLESS) != 0;
     }
     /**
      * TODO: Can pay for this shard with unlimited mana of given color combination?
