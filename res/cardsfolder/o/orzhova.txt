@@ -1,7 +1,6 @@
 Name:Orzhova
 ManaCost:no cost
 Types:Plane Ravnica
-Text:no text
 T:Mode$ PlaneswalkedFrom | ValidCard$ Plane.Self | Execute$ OrzhovaDeal | TriggerDescription$ When you planeswalk away from CARDNAME, each player returns all creature cards from his or her graveyard to the battlefield.
 SVar:OrzhovaDeal:DB$ ChangeZoneAll | Origin$ Graveyard | Destination$ Battlefield | ChangeType$ Creature
 T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever you roll Chaos, for each opponent, exile up to one target creature card from that player's graveyard.
