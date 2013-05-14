@@ -66,6 +66,9 @@ http://www.cardforge.org/fpics/products/boosters/CHR.jpg
 http://www.cardforge.org/fpics/products/boosters/CSP_1.jpg
 http://www.cardforge.org/fpics/products/boosters/CSP_2.jpg
 http://www.cardforge.org/fpics/products/boosters/CSP_3.jpg
+http://www.cardforge.org/fpics/products/boosters/DGM_1.jpg
+http://www.cardforge.org/fpics/products/boosters/DGM_2.jpg
+http://www.cardforge.org/fpics/products/boosters/DGM_3.jpg
 http://www.cardforge.org/fpics/products/boosters/DIS_1.jpg
 http://www.cardforge.org/fpics/products/boosters/DIS_2.jpg
 http://www.cardforge.org/fpics/products/boosters/DIS_3.jpg
