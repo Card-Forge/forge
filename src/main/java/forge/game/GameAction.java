@@ -734,11 +734,9 @@ public class GameAction {
             case Battlefield:   return this.moveToPlay(c);
             case Graveyard:     return this.moveToGraveyard(c);
             case Exile:         return this.exile(c);
-            case Ante:          return this.moveTo(c.getOwner().getZone(ZoneType.Ante), c);
-            case Command:       return this.moveTo(c.getOwner().getZone(ZoneType.Command), c);
-            case PlanarDeck:    return this.moveTo(c.getOwner().getZone(ZoneType.PlanarDeck), c);
-            case SchemeDeck:    return this.moveTo(c.getOwner().getZone(ZoneType.SchemeDeck), c);
-            default:            return this.moveToStack(c);
+            case Stack:         return this.moveToStack(c);
+            default: // sideboard will also get there
+                return this.moveTo(c.getOwner().getZone(name), c);
         }
     }
 
