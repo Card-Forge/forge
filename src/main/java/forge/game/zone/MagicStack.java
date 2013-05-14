@@ -844,7 +844,6 @@ public class MagicStack extends MyObservable implements Iterable<SpellAbilitySta
     public final SpellAbility peekAbility() {
         return this.stack.peekFirst().getSpellAbility();
     }
-    }
 
     /**
      * <p>

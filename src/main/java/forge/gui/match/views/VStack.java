@@ -136,8 +136,7 @@ public enum VStack implements IVDoc<CStack> {
 
         stackTARs.clear();
         boolean isFirst = true;
-        for (int i = 0;i<stack.size();i++) {
-            final SpellAbilityStackInstance spell = stack.getStack().get(i);
+        for (final SpellAbilityStackInstance spell : stack) {
             scheme = getSpellColor(spell);
 
             String isOptional = spell.getSpellAbility().isOptionalTrigger() && spell.getSourceCard().getController().equals(viewer) ? "(OPTIONAL) " : "";
