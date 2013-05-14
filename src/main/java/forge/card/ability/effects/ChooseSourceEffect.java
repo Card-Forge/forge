@@ -2,8 +2,6 @@ package forge.card.ability.effects;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Stack;
-
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.base.Predicate;
@@ -46,7 +44,6 @@ public class ChooseSourceEffect extends SpellAbilityEffect {
         final Target tgt = sa.getTarget();
         final List<Player> tgtPlayers = getTargetPlayers(sa);
 
-        Stack<SpellAbilityStackInstance> stack = game.getStack().getStack();
 
         List<Card> permanentSources = new ArrayList<Card>();
         List<Card> stackSources = new ArrayList<Card>();
@@ -58,36 +55,36 @@ public class ChooseSourceEffect extends SpellAbilityEffect {
         permanentSources = game.getCardsIn(ZoneType.Battlefield);
 
         // Get the list of cards that produce effects on the stack
-        if (stack != null) {
-            for (SpellAbilityStackInstance stackinst : stack) {
-                if (!stackSources.contains(stackinst.getSourceCard())) {
-                    stackSources.add(stackinst.getSourceCard());
-                }
-                // Get the list of cards that are referenced by effects on the stack
-                if (null != stackinst.getSpellAbility().getTriggeringObjects()) {
-                    for (Object c : stackinst.getSpellAbility().getTriggeringObjects().values()) {
-                        if (c instanceof Card) {
-                            if (!stackSources.contains((Card) c)) {
-                                referencedSources.add((Card) c);
-                            }
+
+        for (SpellAbilityStackInstance stackinst : game.getStack()) {
+            if (!stackSources.contains(stackinst.getSourceCard())) {
+                stackSources.add(stackinst.getSourceCard());
+            }
+            // Get the list of cards that are referenced by effects on the stack
+            if (null != stackinst.getSpellAbility().getTriggeringObjects()) {
+                for (Object c : stackinst.getSpellAbility().getTriggeringObjects().values()) {
+                    if (c instanceof Card) {
+                        if (!stackSources.contains((Card) c)) {
+                            referencedSources.add((Card) c);
                         }
                     }
                 }
-                if (null != stackinst.getSpellAbility().getTargetCard()) {
-                    referencedSources.add(stackinst.getSpellAbility().getTargetCard());
-                }
-                // TODO: is this necessary?
-                if (null != stackinst.getSpellAbility().getReplacingObjects()) {
-                    for (Object c : stackinst.getSpellAbility().getReplacingObjects().values()) {
-                        if (c instanceof Card) {
-                            if (!stackSources.contains((Card) c)) {
-                                referencedSources.add((Card) c);
-                            }
+            }
+            if (null != stackinst.getSpellAbility().getTargetCard()) {
+                referencedSources.add(stackinst.getSpellAbility().getTargetCard());
+            }
+            // TODO: is this necessary?
+            if (null != stackinst.getSpellAbility().getReplacingObjects()) {
+                for (Object c : stackinst.getSpellAbility().getReplacingObjects().values()) {
+                    if (c instanceof Card) {
+                        if (!stackSources.contains((Card) c)) {
+                            referencedSources.add((Card) c);
                         }
                     }
                 }
             }
         }
+
 
         if (sa.hasParam("Choices")) {
             permanentSources = CardLists.getValidCards(permanentSources, sa.getParam("Choices"), host.getController(), host);

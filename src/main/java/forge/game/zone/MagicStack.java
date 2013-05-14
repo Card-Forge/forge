@@ -18,11 +18,15 @@
 package forge.game.zone;
 
 import java.util.ArrayList;
+import java.util.Deque;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Stack;
+import java.util.concurrent.LinkedBlockingDeque;
+
+
 import com.esotericsoftware.minlog.Log;
 
 import forge.Card;
@@ -70,7 +74,8 @@ import forge.util.MyObservable;
 public class MagicStack extends MyObservable implements Iterable<SpellAbilityStackInstance> {
     private final List<SpellAbility> simultaneousStackEntryList = new ArrayList<SpellAbility>();
 
-    private final Stack<SpellAbilityStackInstance> stack = new Stack<SpellAbilityStackInstance>();
+    // They don't provide a LIFO queue, so had to use a deque
+    private final Deque<SpellAbilityStackInstance> stack = new LinkedBlockingDeque<SpellAbilityStackInstance>();
     private final Stack<SpellAbilityStackInstance> frozenStack = new Stack<SpellAbilityStackInstance>();
 
     private boolean frozen = false;
@@ -119,7 +124,7 @@ public class MagicStack extends MyObservable implements Iterable<SpellAbilitySta
      * </p>
      */
     public final void reset() {
-        this.getStack().clear();
+        this.clear();
         this.simultaneousStackEntryList.clear();
         this.frozen = false;
         this.lastTurnCast.clear();
@@ -137,7 +142,7 @@ public class MagicStack extends MyObservable implements Iterable<SpellAbilitySta
      * @return a boolean.
      */
     public final boolean isSplitSecondOnStack() {
-        for(SpellAbilityStackInstance si : this.getStack()) {
+        for(SpellAbilityStackInstance si : this.stack) {
             if (si.isSpell() && si.getSourceCard().hasKeyword("Split second")) {
                 return true;
             }
@@ -529,7 +534,7 @@ public class MagicStack extends MyObservable implements Iterable<SpellAbilitySta
      * @return a int.
      */
     public final int size() {
-        return this.getStack().size();
+        return this.stack.size();
     }
 
     /**
@@ -540,18 +545,10 @@ public class MagicStack extends MyObservable implements Iterable<SpellAbilitySta
      * @return a boolean.
      */
     public final boolean isEmpty() {
-        return this.getStack().isEmpty();
+        return this.stack.isEmpty();
     }
 
     // Push should only be used by add.
-    /**
-     * <p>
-     * push.
-     * </p>
-     * 
-     * @param sp
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     */
     private void push(final SpellAbility sp) {
         if (null == sp.getActivatingPlayer()) {
             sp.setActivatingPlayer(sp.getSourceCard().getController());
@@ -560,9 +557,7 @@ public class MagicStack extends MyObservable implements Iterable<SpellAbilitySta
 
         final SpellAbilityStackInstance si = new SpellAbilityStackInstance(sp);
         
-        synchronized (this.stack) {
-            this.getStack().push(si);
-        }
+        this.stack.addFirst(si);
 
         // 2012-07-21 the following comparison needs to move below the pushes but somehow screws up priority
         // When it's down there. That makes absolutely no sense to me, so i'm putting it back for now
@@ -597,7 +592,7 @@ public class MagicStack extends MyObservable implements Iterable<SpellAbilitySta
 
         // The SpellAbility isn't removed from the Stack until it finishes resolving
         // temporarily reverted removing SAs after resolution
-        final SpellAbility sa = this.top();
+        final SpellAbility sa = this.peekAbility();
         //final SpellAbility sa = this.pop();
 
         // ActivePlayer gains priority first after Resolve
@@ -841,37 +836,14 @@ public class MagicStack extends MyObservable implements Iterable<SpellAbilitySta
 
     /**
      * <p>
-     * pop.
-     * </p>
-     * 
-     * @return a {@link forge.card.spellability.SpellAbility} object.
-     */
-    public final SpellAbility pop() {
-        synchronized(this.stack)
-        {
-            final SpellAbilityStackInstance si = this.getStack().pop();
-            final SpellAbility sp = si.getSpellAbility();
-            return sp;
-        }
-    }
-
-    private final SpellAbility top() {
-        final SpellAbilityStackInstance si = this.getStack().peek();
-        final SpellAbility sa = si.getSpellAbility();
-        return sa;
-    }
-
-    /**
-     * <p>
      * peekAbility.
      * </p>
      * 
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public final SpellAbility peekAbility() {
-        synchronized(this.stack) {
-            return this.getStack().peek().getSpellAbility();
-        }
+        return this.stack.peekFirst().getSpellAbility();
+    }
     }
 
     /**
@@ -902,10 +874,7 @@ public class MagicStack extends MyObservable implements Iterable<SpellAbilitySta
      *            object.
      */
     public final void remove(final SpellAbilityStackInstance si) {
-        synchronized (this.stack) {
-            this.getStack().remove(si);
-        }
-
+        this.stack.remove(si);
         this.getFrozenStack().remove(si);
         this.updateObservers();
     }
@@ -922,7 +891,7 @@ public class MagicStack extends MyObservable implements Iterable<SpellAbilitySta
      */
     public final SpellAbilityStackInstance getInstanceFromSpellAbility(final SpellAbility sa) {
         // TODO: Confirm this works!
-        for (final SpellAbilityStackInstance si : this.getStack()) {
+        for (final SpellAbilityStackInstance si : this.stack) {
             if (si.compareToSpellAbility(sa)) {
                 return si;
             }
@@ -1040,7 +1009,7 @@ public class MagicStack extends MyObservable implements Iterable<SpellAbilitySta
      * @return true, if successful
      */
     public final boolean hasStateTrigger(final int triggerID) {
-        for (final SpellAbilityStackInstance sasi : this.getStack()) {
+        for (final SpellAbilityStackInstance sasi : this.stack) {
             if (sasi.isStateTrigger(triggerID)) {
                 return true;
             }
@@ -1062,17 +1031,6 @@ public class MagicStack extends MyObservable implements Iterable<SpellAbilitySta
      */
     public final List<SpellAbility> getSimultaneousStackEntryList() {
         return this.simultaneousStackEntryList;
-    }
-
-    /**
-     * Gets the stack.
-     * 
-     * @return the stack
-     */
-    public final Stack<SpellAbilityStackInstance> getStack() {
-        synchronized(this.stack) {
-            return this.stack;
-        }        
     }
 
     /**
@@ -1138,5 +1096,12 @@ public class MagicStack extends MyObservable implements Iterable<SpellAbilitySta
     public Iterator<SpellAbilityStackInstance> iterator() {
         // TODO Auto-generated method stub
         return stack.iterator();
+    }
+
+    /**
+     * TODO: Write javadoc for this method.
+     */
+    public void clear() {
+        stack.clear();
     }
 }

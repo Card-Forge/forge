@@ -23,7 +23,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import javax.swing.JCheckBoxMenuItem;
@@ -197,11 +196,7 @@ public enum VStack implements IVDoc<CStack> {
                 CMatchUI.SINGLETON_INSTANCE.setCard(spell.getSourceCard());
             }
             isFirst = false;
-        }
-        
-        Collections.reverse(list);
-        
-        for(JTextArea tar : list) {
+
             parentCell.getBody().add(tar, "w 98%!");
             stackTARs.add(tar);
         }

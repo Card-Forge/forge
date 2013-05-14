@@ -584,7 +584,7 @@ public class GameState {
             if (c.isScheme() && !c.isType("Ongoing")) {
 
                 boolean foundonstack = false;
-                for (SpellAbilityStackInstance si : getStack().getStack()) {
+                for (SpellAbilityStackInstance si : getStack()) {
                     if (si.getSourceCard().equals(c)) {
 
                         foundonstack = true;
