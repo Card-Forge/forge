@@ -20,6 +20,11 @@ We have an informative topic at CCGH which explains how you can create "fantasy 
 The Dragon's Maze set pictures should now be available via the "Download LQ Set Pictures" button. The Dragon's Maze booster images should also be available.
 
 
+- Custom Cube -
+1. You can create and save your cube as a constructed deck. Place the .dck file in the /res/cube directory.
+2. To create a description file in the /res/draft folder you need to make a copy of any existing *.draft file and the adjust the deckfile and booster structure to meet your needs.
+
+
 ---------
 New Cards
 ---------
@@ -44,6 +49,7 @@ Thrull Wizard
 Logic Knot
 Goblin Flotilla
 Ether Well
+War Tax
 
 
 ---------------
