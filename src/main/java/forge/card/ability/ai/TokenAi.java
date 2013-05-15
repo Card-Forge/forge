@@ -105,7 +105,8 @@ public class TokenAi extends SpellAbilityAi {
         // Don't generate tokens without haste before main 2 if possible
         if (ph.getPhase().isBefore(PhaseType.MAIN2)
                 && ph.isPlayerTurn(ai) && !haste
-                && !sa.hasParam("ActivationPhases")) {
+                && !sa.hasParam("ActivationPhases")
+                && !ComputerUtil.castSpellInMain1(ai, sa)) {
             return false;
         }
         if ((ph.isPlayerTurn(ai)

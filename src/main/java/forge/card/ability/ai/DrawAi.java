@@ -89,9 +89,7 @@ public class DrawAi extends SpellAbilityAi {
 
         }
 
-        final boolean bFlag = targetAI(ai, sa, false);
-
-        if (!bFlag) {
+        if (!targetAI(ai, sa, false)) {
             return false;
         }
 
@@ -104,7 +102,7 @@ public class DrawAi extends SpellAbilityAi {
 
         // Don't use draw abilities before main 2 if possible
         if (game.getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2)
-                && !sa.hasParam("ActivationPhases")) {
+                && !sa.hasParam("ActivationPhases") && !ComputerUtil.castSpellInMain1(ai, sa)) {
             return false;
         }
         if ((!game.getPhaseHandler().getNextTurn().equals(ai)

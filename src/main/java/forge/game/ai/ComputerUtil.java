@@ -1000,6 +1000,41 @@ public class ComputerUtil {
                 && (ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)
                  || !ph.getNextTurn().equals(sa.getActivatingPlayer())));
     }
+    
+    /**
+     * <p>
+     * castSpellMain1.
+     * </p>
+     * 
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
+     * @return a boolean (returns true if it's better to wait until blockers are declared).
+     */
+    public static boolean castSpellInMain1(final Player ai, final SpellAbility sa) {
+        final Card source = sa.getSourceCard();
+        final SpellAbility sub = sa.getSubAbility();
+
+        // Cipher spells
+        if (sub != null && ApiType.Encode == sa.getSubAbility().getApi() && !ai.getCreaturesInPlay().isEmpty()) {
+            return true;
+        }
+        final List<Card> buffed = ai.getCardsIn(ZoneType.Battlefield);
+        for (Card buffedcard : buffed) {
+            if (buffedcard.hasSVar("BuffedBy")) {
+                final String buffedby = buffedcard.getSVar("BuffedBy");
+                final String[] bffdby = buffedby.split(",");
+                if (source.isValid(bffdby, buffedcard.getController(), buffedcard)) {
+                    return true;
+                }
+            }
+        }
+        
+        if (sub != null) { 
+            return castSpellInMain1(ai, sub);
+        }
+        
+        return false;
+    }
 
     // returns true if the AI should stop using the ability
     /**

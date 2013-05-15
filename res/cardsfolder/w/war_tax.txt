@@ -7,6 +7,7 @@ SVar:AttackTax:Mode$ CantAttackUnless | ValidCard$ Creature | EffectZone$ Comman
 SVar:DBReset:DB$ StoreSVar | SVar$ Y | Type$ Number | Expression$ 0
 SVar:X:Count$xPaid
 SVar:Y:Number$0
+SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/war_tax.jpg
 Oracle:X U:This turn, creatures can't attack unless their controller pays X for each attacking creature he or she controls.
 SetInfo:MMQ Uncommon
