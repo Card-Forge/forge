@@ -21,6 +21,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import forge.Card;
+import forge.game.player.Player;
 
 /**
  * <p>
@@ -44,6 +45,7 @@ public class SpellAbilityStackInstance {
 
     /** The sub instace. */
     private SpellAbilityStackInstance subInstace = null;
+    private final Player activator;
 
     // When going to a SubAbility that SA has a Instance Choice object
     /** The tc. */
@@ -85,7 +87,8 @@ public class SpellAbilityStackInstance {
         // Base SA info
         this.ability = sa;
         this.stackDescription = this.ability.getStackDescription();
-
+        this.activator = sa.getActivatingPlayer();
+        
         // Payment info
         this.paidHash = this.ability.getPaidHash();
         this.ability.resetPaidHash();
@@ -135,6 +138,7 @@ public class SpellAbilityStackInstance {
             this.ability.getTarget().resetTargets();
             this.ability.getTarget().setTargetChoices(this.tc);
         }
+        this.ability.setActivatingPlayer(activator);
 
         // Saved sub-SA needs to be reset on the way out
         if (this.subInstace != null) {
