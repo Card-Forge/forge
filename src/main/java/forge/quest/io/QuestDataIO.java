@@ -669,8 +669,9 @@ public class QuestDataIO {
             final String sIndex = reader.getAttribute("i");
             final short index = StringUtils.isNumeric(sIndex) ? Short.parseShort(sIndex) : 0;
             final boolean foil = "1".equals(reader.getAttribute("foil"));
-            final CardPrinted card = CardDb.instance().getCard(name, set, index);
-            return foil ? CardPrinted.makeFoiled(card) : card;
+            CardPrinted c = CardDb.instance().tryGetCard(name, set, index);
+            if ( null == c ) c = CardDb.instance().getCard(name);
+            return foil ? CardPrinted.makeFoiled(c) : c;
         }
     }
 }

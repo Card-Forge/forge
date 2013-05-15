@@ -150,14 +150,18 @@ public final class CardDb {
     }
 
     public CardPrinted tryGetCard(final String cardName, String setName) {
+        return tryGetCard(cardName, setName, 0);
+    }
+    
+    public CardPrinted tryGetCard(final String cardName, String setName, int index) {
         // Set exists?
-        final Map<String, CardPrinted[]> cardsFromset = this.allCardsBySet.get(setName.toUpperCase());
+        final Map<String, CardPrinted[]> cardsFromset = this.allCardsBySet.get(setName);
         if (cardsFromset == null) {
             return null;
         }
         // Card exists?
-        final CardPrinted[] cardCopies = cardsFromset.get(cardName.toLowerCase());
-        return cardCopies != null ? cardCopies[0] : null;
+        final CardPrinted[] cardCopies = cardsFromset.get(cardName);
+        return cardCopies != null && index < cardCopies.length ? cardCopies[index] : null;
     }
 
     // Single fetch
