@@ -113,19 +113,17 @@ public class ProtectEffect extends SpellAbilityEffect {
             } else {
                 Player ai = sa.getActivatingPlayer();
                 String choice = choices.get(0);
-                if (sa.hasParam("AILogic")) {
-                    final String logic = sa.getParam("AILogic");
-                    if (logic.equals("MostProminentHumanCreatures")) {
-                        List<Card> list = new ArrayList<Card>();
-                        for (Player opp : ai.getOpponents()) {
-                            list.addAll(opp.getCreaturesInPlay());
-                        }
-                        if (list.isEmpty()) {
-                            list = CardLists.filterControlledBy(game.getCardsInGame(), ai.getOpponents());
-                        }
-                        if (!list.isEmpty()) {
-                            choice = ComputerUtilCard.getMostProminentColor(list);
-                        }
+                final String logic = sa.getParam("AILogic");
+                if (logic == null || logic.equals("MostProminentHumanCreatures")) {
+                    List<Card> list = new ArrayList<Card>();
+                    for (Player opp : ai.getOpponents()) {
+                        list.addAll(opp.getCreaturesInPlay());
+                    }
+                    if (list.isEmpty()) {
+                        list = CardLists.filterControlledBy(game.getCardsInGame(), ai.getOpponents());
+                    }
+                    if (!list.isEmpty()) {
+                        choice = ComputerUtilCard.getMostProminentColor(list);
                     }
                 }
                 gains.add(choice);
