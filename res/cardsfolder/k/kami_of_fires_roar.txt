@@ -3,7 +3,8 @@ ManaCost:3 R
 Types:Creature Spirit
 PT:2/3
 T:Mode$ SpellCast | ValidCard$ Spirit,Arcane | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigCurse | TriggerDescription$ Whenever you cast a Spirit or Arcane spell, target creature can't block this turn.
-SVar:TrigCurse:AB$Pump | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature | IsCurse$ True | KW$ CARDNAME can't block.
+SVar:TrigCurse:AB$ Pump | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature | IsCurse$ True | KW$ HIDDEN CARDNAME can't block.
+SVar:BuffedBy:Spirit,Arcane
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kami_of_fires_roar.jpg
 Oracle:Whenever you cast a Spirit or Arcane spell, target creature can't block this turn.
 SetInfo:CHK Common
