@@ -24,6 +24,15 @@ The Dragon's Maze set pictures should now be available via the "Download LQ Set 
 1. You can create and save your cube as a constructed deck. Place the .dck file in the /res/cube directory.
 2. To create a description file in the /res/draft folder you need to make a copy of any existing *.draft file and the adjust the deckfile and booster structure to meet your needs.
 
+This file format is outdated. "NumCards" is no longer used. Instead there should be a line describing a booster.
+
+Find some examples below:
+
+Booster: 1 Rare, 11 Common, 3 Uncommon
+Booster: 5 Common, 5 Uncommon, 5 Rare, 1 Mythic
+Booster: 16 Any
+Booster: 10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand
+
 
 ---------
 New Cards
