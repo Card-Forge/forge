@@ -4,6 +4,7 @@ Types:Artifact
 T:Mode$ SpellCast | ValidCard$ Card.CostsPhyrexianMana | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDealDamage | TriggerDescription$ Whenever you cast a spell with P in its mana cost, CARDNAME deals damage equal to that spell's converted mana cost to target creature or player.
 SVar:TrigDealDamage:AB$DealDamage | Cost$ 0 | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ X | References$ X
 SVar:X:TriggeredCard$CardManaCost
+SVar:BuffedBy:Card.CostsPhyrexianMana
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rage_extractor.jpg
 Oracle:({R/P} can be paid with either {R} or 2 life.)\nWhenever you cast a spell with {P} in its mana cost, Rage Extractor deals damage equal to that spell's converted mana cost to target creature or player.
