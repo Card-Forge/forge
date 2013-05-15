@@ -1063,7 +1063,7 @@ public class CombatUtil {
     public static void checkPropagandaEffects(final GameState game, final Card c) {
         Cost attackCost = new Cost(ManaCost.ZERO, true);
         // Sort abilities to apply them in proper order
-        for (Card card : game.getCardsIn(ZoneType.Battlefield)) {
+        for (Card card : game.getCardsIn(ZoneType.listValueOf("Battlefield,Command"))) {
             final ArrayList<StaticAbility> staticAbilities = card.getStaticAbilities();
             for (final StaticAbility stAb : staticAbilities) {
                 Cost additionalCost = stAb.getAttackCost(c, game.getCombat().getDefenderByAttacker(c));
