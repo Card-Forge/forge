@@ -129,7 +129,7 @@ public class TokenAi extends SpellAbilityAi {
         final Target tgt = sa.getTarget();
         if (tgt != null) {
             tgt.resetTargets();
-            if (tgt.canOnlyTgtOpponent()) {
+            if (tgt.canOnlyTgtOpponent() || "Opponent".equals(sa.getParam("AITgts"))) {
                 tgt.addTarget(opp);
             } else {
                 tgt.addTarget(ai);
