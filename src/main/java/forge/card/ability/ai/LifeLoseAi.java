@@ -109,7 +109,8 @@ public class LifeLoseAi extends SpellAbilityAi {
 
         // Don't use loselife before main 2 if possible
         if (ai.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2)
-                && !sa.hasParam("ActivationPhases") && !priority) {
+                && !sa.hasParam("ActivationPhases") && !priority
+                && !ComputerUtil.castSpellInMain1(ai, sa)) {
             return false;
         }
 
@@ -129,12 +130,13 @@ public class LifeLoseAi extends SpellAbilityAi {
             }
         }
 
-        boolean randomReturn = r.nextFloat() <= .6667;
-        if (priority || SpellAbilityAi.playReusable(ai, sa)) {
-            randomReturn = true;
+        if (priority || SpellAbilityAi.isSorcerySpeed(sa) 
+                || sa.hasParam("ActivationPhases") 
+                || SpellAbilityAi.playReusable(ai, sa)) {
+            return true;
         }
 
-        return (randomReturn);
+        return false;
     }
 
     @Override
