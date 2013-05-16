@@ -19,6 +19,7 @@ package forge.card.spellability;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import forge.Card;
@@ -306,10 +307,9 @@ public class AbilityManaPart implements java.io.Serializable {
             return true;
         }
 
-        if (this.getOrigProduced().contains("Chosen")) {
-            if (this.getSourceCard() != null && !this.getSourceCard().getChosenColor().isEmpty()
-                    && MagicColor.toShortString(this.getSourceCard().getChosenColor().get(0))
-                    .contains(s)) {
+        if (this.getOrigProduced().contains("Chosen") && this.getSourceCard() == null ) { 
+            List<String> chosenCol = this.getSourceCard().getChosenColor();
+            if ( !chosenCol.isEmpty() && MagicColor.toShortString(chosenCol.get(0)).contains(s)) {
                 return true;
             }
         }

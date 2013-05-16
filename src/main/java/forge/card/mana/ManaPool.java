@@ -560,27 +560,17 @@ public class ManaPool {
         this.owner.updateObservers();
     }
 
-    /**
-     * <p>
-     * accountFor.
-     * </p>
-     * 
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @param ma
-     *            a {@link forge.card.spellability.AbilityMana} object.
-     * @return a boolean.
-     */
+
     private boolean accountFor(final SpellAbility sa, final AbilityManaPart ma) {
         final ArrayList<Mana> manaPaid = sa.getPayingMana();
-
+    
         if ((manaPaid.size() == 0) && (this.floatingMana.size() == 0)) {
           return false;
         }
-
+    
         final ArrayList<Mana> removePaying = new ArrayList<Mana>();
         final ArrayList<Mana> removeFloating = new ArrayList<Mana>();
-
+    
         boolean manaNotAccountedFor = false;
         // loop over mana produced by mana ability
         for (Mana mana : ma.getLastProduced()) {
@@ -595,13 +585,13 @@ public class ManaPool {
                 break;
             }
         }
-
+    
         // When is it legitimate for all the mana not to be accountable?
         // Does this condition really indicate an bug in Forge?
         if (manaNotAccountedFor) {
             return false;
         }
-
+    
         for (int k = 0; k < removePaying.size(); k++) {
             this.removeManaFrom(manaPaid, removePaying.get(k));
         }
@@ -611,23 +601,10 @@ public class ManaPool {
         return true;
     }
 
-    /**
-     * <p>
-     * refundManaPaid.
-     * </p>
-     * 
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @param untap
-     *            a boolean.
-     */
     public final void refundManaPaid(final SpellAbility sa, final boolean untap) {
-        // TODO having some crash in here related to undo and not tracking
-        // abilities properly
-        final List<SpellAbility> payAbs = sa.getPayingManaAbilities();
-
-        // go through paidAbilities if they are undoable
-        for (final SpellAbility am : payAbs) {
+        // TODO having some crash in here related to undo and not tracking abilities properly
+        
+        for (final SpellAbility am : sa.getPayingManaAbilities()) { // go through paidAbilities if they are undoable
             AbilityManaPart m = am.getManaPart();
             if (am.isUndoable()) {
                 if (this.accountFor(sa, m)) {
@@ -636,7 +613,7 @@ public class ManaPool {
                 // else can't account let clearPay move paying back to floating
             }
         }
-
+    
         // move leftover pay back to floating
         this.clearManaPaid(sa, true);
     }
