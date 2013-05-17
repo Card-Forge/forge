@@ -16,7 +16,7 @@ ONS: 32 Common, 10 Uncommon, 3 Rare, 30 BasicLand
 MRD: 32 Common, 10 Uncommon, 3 Rare, 30 BasicLand
 CHK: 32 Common, 10 Uncommon, 3 Rare, 30 BasicLand
 RAV: 32 Common, 10 Uncommon, 3 Rare, 30 BasicLand
-TSP: 29 Common, 10 Uncommon, 3 Rare, 3 Special TSB, 30 BasicLand
+TSP: 29 Common, 10 Uncommon, 3 Rare, 3 TimeShifted TSB, 30 BasicLand
 LRW: 32 Common, 10 Uncommon, 3 Rare, 30 BasicLand
 SHM: 32 Common, 10 Uncommon, 3 Rare, 30 BasicLand
 ALA: 32 Common, 10 Uncommon, 3 RareMythic, 30 BasicLand
