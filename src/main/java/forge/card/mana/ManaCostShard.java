@@ -17,21 +17,14 @@
  */
 package forge.card.mana;
 
-import forge.card.ColorSet;
-import forge.card.MagicColor;
 import forge.util.BinaryUtil;
 
 /**
  * The Class CardManaCostShard.
  */
-public enum ManaCostShard {
+public enum ManaCostShard implements Comparable<ManaCostShard> {
+    // declaration order matters! Place the shards that offer least ways to be paid for first 
 
-    
-    COLORLESS(ManaAtom.COLORLESS, "1"),
-    
-    X(ManaAtom.IS_X, "X"),
-    S(ManaAtom.IS_SNOW, "S"),
-    
     /* Pure colors */
     WHITE(ManaAtom.WHITE, "W"),
     BLUE(ManaAtom.BLUE, "U"),
@@ -51,6 +44,17 @@ public enum ManaCostShard {
     BG(ManaAtom.BLACK | ManaAtom.GREEN, "B/G", "BG"),
     RG(ManaAtom.RED | ManaAtom.GREEN, "R/G", "RG"),
 
+    /* Or 2 colorless */
+    W2(ManaAtom.WHITE | ManaAtom.OR_2_COLORLESS, "2/W", "2W"),
+    U2(ManaAtom.BLUE | ManaAtom.OR_2_COLORLESS, "2/U", "2U"),
+    B2(ManaAtom.BLACK | ManaAtom.OR_2_COLORLESS, "2/B", "2B"),
+    R2(ManaAtom.RED | ManaAtom.OR_2_COLORLESS, "2/R", "2R"),
+    G2(ManaAtom.GREEN | ManaAtom.OR_2_COLORLESS, "2/G", "2G"),
+
+    // Snow and colorless
+    S(ManaAtom.IS_SNOW, "S"),
+    COLORLESS(ManaAtom.COLORLESS, "1"),
+
     /* Phyrexian */ 
     PW(ManaAtom.WHITE | ManaAtom.OR_2_LIFE, "W/P", "PW"),
     PU(ManaAtom.BLUE | ManaAtom.OR_2_LIFE, "U/P", "PU"),
@@ -58,13 +62,7 @@ public enum ManaCostShard {
     PR(ManaAtom.RED | ManaAtom.OR_2_LIFE, "R/P", "PR"),
     PG(ManaAtom.GREEN | ManaAtom.OR_2_LIFE, "G/P", "PG"),
 
-    /* Or 2 colorless */
-    W2(ManaAtom.WHITE | ManaAtom.OR_2_COLORLESS, "2/W", "2W"),
-    U2(ManaAtom.BLUE | ManaAtom.OR_2_COLORLESS, "2/U", "2U"),
-    B2(ManaAtom.BLACK | ManaAtom.OR_2_COLORLESS, "2/B", "2B"),
-    R2(ManaAtom.RED | ManaAtom.OR_2_COLORLESS, "2/R", "2R"),
-    G2(ManaAtom.GREEN | ManaAtom.OR_2_COLORLESS, "2/G", "2G");
-
+    X(ManaAtom.IS_X, "X");
 
     private final int shard;
 
@@ -274,23 +272,6 @@ public enum ManaCostShard {
 
     public boolean isOr2Colorless() {
         return (this.shard & ManaAtom.OR_2_COLORLESS) != 0;
-    }
-    /**
-     * TODO: Can pay for this shard with unlimited mana of given color combination?
-     * @param color
-     * @return
-     */
-    public boolean canBePaidWithAvaliable(ColorSet color) {
-        // can pay with life?
-        if (this.isPhyrexian()) {
-            return true;
-        }
-        // can pay with any color?
-        if (this.isOr2Colorless()) {
-            return true;
-        }
-        // either colored part is empty, or there are same colors in shard and mana source
-        return (COLORS_SUPERPOSITION & this.shard) == 0 || (color.getColor() & this.shard) > 0;
     }
 
     public boolean canBePaidWithManaOfColor(byte colorCode) {

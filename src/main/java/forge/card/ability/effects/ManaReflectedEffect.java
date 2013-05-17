@@ -1,11 +1,8 @@
 package forge.card.ability.effects;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.List;
 
-import forge.Card;
 import forge.CardUtil;
 import forge.card.MagicColor;
 import forge.card.ability.AbilityUtils;
@@ -27,7 +24,7 @@ public class ManaReflectedEffect extends SpellAbilityEffect {
         AbilityManaPart ma = sa.getManaPart();
         sa.setUndoable(sa.isAbility() && sa.isUndoable());
 
-        final Collection<String> colors = CardUtil.getReflectableManaColors(sa, sa, new HashSet<String>(), new ArrayList<Card>());
+        final Collection<String> colors = CardUtil.getReflectableManaColors(sa);
 
         final List<Player> tgtPlayers = getTargetPlayers(sa);
         for (final Player player : tgtPlayers) {

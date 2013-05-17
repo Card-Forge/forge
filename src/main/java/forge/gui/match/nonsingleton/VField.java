@@ -384,7 +384,7 @@ public class VField implements IVDoc<CField> {
     public void updateManaPool(final Player p0) {
         ManaPool m = p0.getManaPool();
         for(Pair<FLabel, Byte> label : manaLabels)
-            label.getKey().setText(Integer.toString(m.getAmountOfColor(MagicColor.toLongString(label.getRight()))));
+            label.getKey().setText(Integer.toString(m.getAmountOfColor(label.getRight())));
     }
 
     //========= Retrieval methods

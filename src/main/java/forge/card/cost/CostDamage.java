@@ -65,7 +65,7 @@ public class CostDamage extends CostPart {
      */
     @Override
     public final void payAI(final PaymentDecision decision, final Player ai, SpellAbility ability, Card source) {
-        ability.getActivatingPlayer().addDamage(decision.c, source);
+        ai.addDamage(decision.c, source);
     }
 
     /*

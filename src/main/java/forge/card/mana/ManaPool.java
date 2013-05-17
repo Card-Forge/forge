@@ -18,21 +18,20 @@
 package forge.card.mana;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
+import java.util.Collection;
 import java.util.List;
-import java.util.Map;
-
+import java.util.Set;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
-import forge.Constant;
+import com.google.common.base.Supplier;
+import forge.card.MagicColor;
 import forge.card.spellability.AbilityManaPart;
 import forge.card.spellability.SpellAbility;
 import forge.game.GlobalRuleChange;
 import forge.game.player.Player;
-import forge.gui.GuiChoose;
+import forge.util.maps.MapOfLists;
+import forge.util.maps.TreeMapOfLists;
 
 /**
  * <p>
@@ -43,14 +42,14 @@ import forge.gui.GuiChoose;
  * @version $Id$
  */
 public class ManaPool {
-    // current paying moved to SpellAbility
 
-    private final ArrayList<Mana> floatingMana = new ArrayList<Mana>();
-    private final int[] floatingTotals = new int[6]; // WUBRGC
-    private final int[] floatingSnowTotals = new int[6]; // WUBRGC
+    private final static Supplier<List<Mana>> listFactory = new Supplier<List<Mana>>(){ 
+        @Override public List<Mana> get() { return new ArrayList<Mana>(); }
+    };
+
+    private final MapOfLists<Byte, Mana> floatingMana = new TreeMapOfLists<Byte, Mana>(listFactory);
 
     /** Constant <code>map</code>. */
-    private static final Map<String, Integer> MAP = new HashMap<String, Integer>();
     private final Player owner;
 
     /**
@@ -63,91 +62,15 @@ public class ManaPool {
      */
     public ManaPool(final Player player) {
         owner = player;
-        ManaPool.MAP.put(Constant.Color.WHITE, 0);
-        ManaPool.MAP.put(Constant.Color.BLUE, 1);
-        ManaPool.MAP.put(Constant.Color.BLACK, 2);
-        ManaPool.MAP.put(Constant.Color.RED, 3);
-        ManaPool.MAP.put(Constant.Color.GREEN, 4);
-        ManaPool.MAP.put(Constant.Color.COLORLESS, 5);
     }
 
-    /**
-     * <p>
-     * calculatManaTotals for the Player panel.
-     * </p>
-     * 
-     */
-    private void calculateManaTotals() {
-        for (int i = 0; i < floatingTotals.length; i++) {
-            floatingTotals[i] = 0;
-            floatingSnowTotals[i] = 0;
-        }
-
-        for (final Mana m : this.floatingMana) {
-            if (m.isSnow()) {
-                floatingSnowTotals[ManaPool.MAP.get(m.getColor())]++;
-            } else {
-                floatingTotals[ManaPool.MAP.get(m.getColor())]++;
-            }
-        }
+    public final int getAmountOfColor(final byte color) {
+        Collection<Mana> ofColor = floatingMana.get(color);
+        return ofColor == null ? 0 : ofColor.size();
     }
 
-    /**
-     * <p>
-     * getAmountOfColor.
-     * </p>
-     * 
-     * @param color
-     *            a {@link java.lang.String} object.
-     * @return a int.
-     */
-    public final int getAmountOfColor(final String color) {
-        if (color.equals(Constant.Color.SNOW)) {
-            // If looking for Snow mana return total Snow
-            int total = 0;
-            for (int i : this.floatingSnowTotals) {
-                total += i;
-            }
-            return total;
-        }
-
-        // If looking for Color/Colorless total Snow and non-Snow
-        int i = ManaPool.MAP.get(color);
-        return this.floatingTotals[i] + this.floatingSnowTotals[i];
-    }
-
-    /**
-     * <p>
-     * isEmpty.
-     * </p>
-     * 
-     * @return a boolean.
-     */
-    private boolean isEmpty() {
-        return this.floatingMana.size() == 0;
-    }
-
-    /**
-     * <p>
-     * addManaToPool.
-     * </p>
-     * 
-     * @param pool
-     *            a {@link java.util.ArrayList} object.
-     * @param mana
-     *            a {@link forge.card.mana.Mana} object.
-     */
-    private void addManaToPool(final ArrayList<Mana> pool, final Mana mana) {
-        pool.add(mana);
-        if (pool.equals(this.floatingMana)) {
-            int i = ManaPool.MAP.get(mana.getColor());
-            if (mana.isSnow()) {
-                this.floatingSnowTotals[i]++;
-            }
-            else {
-                this.floatingTotals[i]++;
-            }
-        }
+    private void addMana(final Mana mana) {
+        floatingMana.add(mana.getColorCode(), mana);
         owner.updateObservers();
     }
 
@@ -159,9 +82,9 @@ public class ManaPool {
      * @param manaList
      *           a {@link java.util.ArrayList} object.
      */
-    public final void addManaToFloating(final ArrayList<Mana> manaList) {
+    public final void add(final Iterable<Mana> manaList) {
         for (final Mana m : manaList) {
-            this.addManaToPool(this.floatingMana, m);
+            this.addMana(m);
         }
         owner.getGame().getAction().checkStateEffects();
         owner.updateObservers();
@@ -175,36 +98,24 @@ public class ManaPool {
      * </p>
      */
     public final int clearPool(boolean isEndOfPhase) {
-        int numRemoved = 0;
+        // isEndOfPhase parameter: true = end of phase, false = mana drain effect
+        if (this.floatingMana.isEmpty()) { return 0; }
 
         if (isEndOfPhase && owner.getGame().getStaticEffects().getGlobalRuleChange(GlobalRuleChange.manapoolsDontEmpty)) {
-            return numRemoved;
+            return 0;
         }
 
-        if (this.floatingMana.isEmpty()) {
-            this.calculateManaTotals();
-            //this.owner.updateObservers();
-            return numRemoved;
-        }
+        int numRemoved = 0;
+        boolean keepGreenMana = isEndOfPhase && this.owner.hasKeyword("Green mana doesn't empty from your mana pool as steps and phases end."); 
 
-        if (isEndOfPhase && this.owner.hasKeyword("Green mana doesn't empty from your mana pool as steps and phases end.")) {
-            // Omnath in play, clear all non-green mana
-            int i = 0;
-            while (i < this.floatingMana.size()) {
-                if (this.floatingMana.get(i).isColor(Constant.Color.GREEN)) {
-                    i++;
-                    continue;
-                }
-                numRemoved++;
-                this.floatingMana.remove(i);
-            }
-        } else {
-            numRemoved = this.floatingMana.size();
-            this.floatingMana.clear();
+        Set<Byte> keys = floatingMana.keySet();
+        if ( keepGreenMana )
+            keys.remove(Byte.valueOf(MagicColor.GREEN));
+        
+        for(Byte b : keys) {
+            numRemoved += floatingMana.get(b).size();
+            floatingMana.get(b).clear();
         }
-        this.calculateManaTotals();
-        //this.owner.updateObservers();
-
         return numRemoved;
     }
 
@@ -221,166 +132,86 @@ public class ManaPool {
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a {@link forge.card.mana.Mana} object.
      */
-    private Mana getMana(final String manaStr, final SpellAbility saBeingPaidFor, String restriction) {
-        final ArrayList<Mana> pool = this.floatingMana;
-        
-        //System.out.format("ManaStr='%s' ...", manaStr);
-        ManaCostShard shard = ManaCostShard.parseNonGeneric(manaStr);
-        //System.out.format("Shard=%s (%d)", shard.toString(), shard.getColorMask() );
-        //System.out.println();
-
-        // What are the available options?
-        final List<Pair<Mana, Integer>> weightedOptions = new ArrayList<Pair<Mana, Integer>>();
-        for (final Mana thisMana : pool) {
-
-            if (!thisMana.getManaAbility().meetsManaRestrictions(saBeingPaidFor)) {
-                continue;
-            }
-
-            boolean canPay = shard.canBePaidWithManaOfColor(thisMana.getColorCode());
-            if (!canPay || (shard.isSnow() && !thisMana.isSnow())) {
-                continue;
-            }
-
-            if( StringUtils.isNotBlank(restriction) && !thisMana.getSourceCard().isType(restriction) )
-                continue;
-
-            // prefer colorless mana to spend
-            int weight = thisMana.isColorless() ? 5 : 0;
-
-            // prefer restricted mana to spend
-            if (thisMana.isRestricted()) {
-                weight += 2;
-            }
-
-            // Spend non-snow mana first
-            if (!thisMana.isSnow()) {
-                weight += 1;
-            }
-
-            weightedOptions.add(Pair.of(thisMana, weight));
-        }
+    private Mana getMana(final ManaCostShard shard, final SpellAbility saBeingPaidFor, String restriction) {
+        final List<Pair<Mana, Integer>> weightedOptions = selectManaToPayFor(shard, saBeingPaidFor, restriction);
 
         // Exclude border case
         if (weightedOptions.isEmpty()) {
-
             return null; // There is no matching mana in the pool
         }
 
-        // have at least one option at this moment
-        int maxWeight = Integer.MIN_VALUE;
-        int equalWeights = 0;
-        Mana toPay = null;
+        // select equal weight possibilities
+        List<Mana> manaChoices = new ArrayList<Mana>();
+        int bestWeight = Integer.MIN_VALUE; 
         for (Pair<Mana, Integer> option : weightedOptions) {
             int thisWeight = option.getRight();
-            if (thisWeight > maxWeight) {
-                maxWeight = thisWeight;
-                equalWeights = 1;
-                toPay = option.getLeft();
-            } else if (thisWeight == maxWeight) {
-                equalWeights++;
+            Mana thisMana = option.getLeft();
+
+            if (thisWeight > bestWeight) {
+                manaChoices.clear();
+                bestWeight = thisWeight;
+            }
+
+            if (thisWeight == bestWeight) {
+                // add only distinct Mana-s
+                boolean haveDuplicate = false;
+                for(Mana m : manaChoices) {
+                    if(m.equals(thisMana) ) {
+                        haveDuplicate = true;
+                        break;
+                    }
+                }
+                if(!haveDuplicate)
+                    manaChoices.add(thisMana);
             }
         }
 
         // got an only one best option?
-        if (equalWeights == 1) {
-            return toPay;
+        if (manaChoices.size() == 1) {
+            return manaChoices.get(0);
         }
 
-        // select equal weight possibilities
-        List<Mana> options = new ArrayList<Mana>();
-        for (Pair<Mana, Integer> option : weightedOptions) {
-            int thisWeight = option.getRight();
-            if (maxWeight == thisWeight) {
-                options.add(option.getLeft());
-            }
-        }
+        // Let them choose then
+        return owner.getController().chooseManaFromPool(manaChoices);
+    }
 
-        // if the options are equal, there is no difference on which to spend
-        toPay = options.get(0);
-        boolean allAreEqual = true;
-        for (int i = 1; i < options.size(); i++) {
-            if (!toPay.equals(options.get(i))) {
-
-                allAreEqual = false;
-                break;
-            }
-        }
-
-        if (allAreEqual) {
-            return toPay;
-        }
-
-        // Not found a good one - then let them choose
-        final List<Mana> manaChoices = options;
-        Mana payment = null;
-
-        final int[] normalMana = { 0, 0, 0, 0, 0, 0 };
-        final int[] snowMana = { 0, 0, 0, 0, 0, 0 };
-
-        // loop through manaChoices adding
-        for (final Mana m : manaChoices) {
-            if (m.isSnow()) {
-                snowMana[ManaPool.MAP.get(m.getColor())]++;
-            } else {
-                normalMana[ManaPool.MAP.get(m.getColor())]++;
-            }
-        }
-
-        int totalMana = 0;
-        final ArrayList<String> alChoice = new ArrayList<String>();
-        for (int i = 0; i < normalMana.length; i++) {
-            totalMana += normalMana[i];
-            totalMana += snowMana[i];
-            if (normalMana[i] > 0) {
-                alChoice.add(Constant.Color.COLORS.get(i) + "(" + normalMana[i] + ")");
-            }
-            if (snowMana[i] > 0) {
-                alChoice.add("{S}" + Constant.Color.COLORS.get(i) + "(" + snowMana[i] + ")");
-            }
-        }
-
-        if (alChoice.size() == 1) {
-            payment = manaChoices.get(0);
-            return payment;
-        }
-
-        int numColorless = 0;
-        if (StringUtils.isNumeric(manaStr)) {
-            numColorless = Integer.parseInt(manaStr);
-        }
-        if (numColorless >= totalMana) {
-            payment = manaChoices.get(0);
-            return payment;
-        }
-
-        Object o;
-
-        if (this.owner.isHuman()) {
-            o = GuiChoose.oneOrNone("Pay Mana from Mana Pool", alChoice);
-        } else {
-            o = alChoice.get(0); // owner is computer
-        }
-
-        if (o != null) {
-            String ch = o.toString();
-            final boolean grabSnow = ch.startsWith("{S}");
-            ch = ch.replace("{S}", "");
-
-            ch = ch.substring(0, ch.indexOf("("));
-
-            for (final Mana m : manaChoices) {
-                if (m.isColor(ch) && (!grabSnow || (grabSnow && m.isSnow()))) {
-                    if (payment == null) {
-                        payment = m;
-                    } else if (payment.isSnow() && !m.isSnow()) {
-                        payment = m;
-                    }
+    private List<Pair<Mana, Integer>> selectManaToPayFor(final ManaCostShard shard, final SpellAbility saBeingPaidFor,
+            String restriction) {
+        final List<Pair<Mana, Integer>> weightedOptions = new ArrayList<Pair<Mana, Integer>>();
+        for (final Byte manaKey : this.floatingMana.keySet()) {
+            if(!shard.canBePaidWithManaOfColor(manaKey.byteValue()))
+                continue;
+            
+            for(final Mana thisMana : this.floatingMana.get(manaKey)) {
+                if (!thisMana.getManaAbility().meetsManaRestrictions(saBeingPaidFor)) {
+                    continue;
                 }
+    
+                boolean canPay = shard.canBePaidWithManaOfColor(thisMana.getColorCode());
+                if (!canPay || (shard.isSnow() && !thisMana.isSnow())) {
+                    continue;
+                }
+    
+                if( StringUtils.isNotBlank(restriction) && !thisMana.getSourceCard().isType(restriction) )
+                    continue;
+    
+                // prefer colorless mana to spend
+                int weight = thisMana.isColorless() ? 5 : 0;
+    
+                // prefer restricted mana to spend
+                if (thisMana.isRestricted()) {
+                    weight += 2;
+                }
+    
+                // Spend non-snow mana first
+                if (!thisMana.isSnow()) {
+                    weight += 1;
+                }
+    
+                weightedOptions.add(Pair.of(thisMana, weight));
             }
         }
-
-        return payment;
+        return weightedOptions;
     }
 
     /**
@@ -393,87 +224,27 @@ public class ManaPool {
      * @param choice
      *            a {@link forge.card.mana.Mana} object.
      */
-    private void removeManaFrom(final ArrayList<Mana> pool, final Mana choice) {
-        if (choice != null && pool.contains(choice)) {
-            pool.remove(choice);
-            if (pool.equals(this.floatingMana)) {
-                int i = ManaPool.MAP.get(choice.getColor());
-                if (choice.isSnow()) {
-                    this.floatingSnowTotals[i]--;
-                }
-                else {
-                    this.floatingTotals[i]--;
-                }
-            }
+    private void removeMana(final Mana mana) {
+        Collection<Mana> cm = floatingMana.get(mana.getColorCode());
+        if (cm.remove(mana)) {
             owner.updateObservers();
         }
     }
 
-    /**
-     * <p>
-     * payManaFromPool.
-     * </p>
-     * 
-     * @param saBeingPaidFor
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @param manaCost
-     *            a {@link forge.card.mana.ManaCostBeingPaid} object.
-     * @return a {@link forge.card.mana.ManaCostBeingPaid} object.
-     */
-    public final void payManaFromPool(final SpellAbility saBeingPaidFor, ManaCostBeingPaid manaCost) {
-
-        // paying from Mana Pool
-        if (manaCost.isPaid() || this.isEmpty()) {
-            return;
-        }
-
-        final ArrayList<Mana> manaPaid = saBeingPaidFor.getPayingMana();
-
-        List<String> splitCost = Arrays.asList(manaCost.toString().replace("X ", "").replace("P", "").split(" "));
-        Collections.reverse(splitCost); // reverse to pay colorful parts first with matching-color mana while it lasts. 
-        for(String part : splitCost) {
-            int loops = StringUtils.isNumeric(part) ? Integer.parseInt(part) : 1;
-            for(int i = 0; i < loops; i++ ) {
-                final Mana mana = this.getMana(part, saBeingPaidFor, manaCost.getSourceRestriction());
-                if (mana != null) {
-                    manaCost.payMana(mana);
-                    manaPaid.add(mana);
-                    this.removeManaFrom(this.floatingMana, mana);
-                    if (mana.addsNoCounterMagic() && saBeingPaidFor.getSourceCard() != null) {
-                        saBeingPaidFor.getSourceCard().setCanCounter(false);
-                    }
-                }
-            }
-        }
-    }
-
-    /**
-     * <p>
-     * payManaFromPool.
-     * </p>
-     * 
-     * @param saBeingPaidFor
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @param manaCost
-     *            a {@link forge.card.mana.ManaCostBeingPaid} object.
-     * @param manaStr
-     *            a {@link java.lang.String} object.
-     * @return a {@link forge.card.mana.ManaCostBeingPaid} object.
-     */
-    public final void payManaFromPool(final SpellAbility saBeingPaidFor, final ManaCostBeingPaid manaCost, final String manaStr) {
-        if (manaStr.trim().equals("") || manaCost.isPaid()) {
+    public final void payManaFromPool(final SpellAbility saBeingPaidFor, final ManaCostBeingPaid manaCost, final ManaCostShard manaShard) {
+        if (manaCost.isPaid()) {
             return;
         }
 
         // get a mana of this type from floating, bail if none available
-        final Mana mana = this.getMana(manaStr, saBeingPaidFor, manaCost.getSourceRestriction());
+        final Mana mana = this.getMana(manaShard, saBeingPaidFor, manaCost.getSourceRestriction());
         if (mana == null) {
             return; // no matching mana in the pool
         }
         else if (manaCost.isNeeded(mana)) {
             manaCost.payMana(mana);
             saBeingPaidFor.getPayingMana().add(mana);
-            this.removeManaFrom(this.floatingMana, mana);
+            this.removeMana( mana);
             if (mana.addsNoCounterMagic() && saBeingPaidFor.getSourceCard() != null) {
                 saBeingPaidFor.getSourceCard().setCanCounter(false);
             }
@@ -508,11 +279,11 @@ public class ManaPool {
         }
 
         paidAbs.add(ma); // assumes some part on the mana produced by the ability will get used
-        for (final Mana mana : abManaPart.getLastProduced()) {
+        for (final Mana mana : abManaPart.getLastManaProduced()) {
             if (manaCost.isNeeded(mana)) {
                 manaCost.payMana(mana);
                 manaPaid.add(mana);
-                this.removeManaFrom(this.floatingMana, mana);
+                this.removeMana(mana);
                 if (mana.addsNoCounterMagic() && sa.getSourceCard() != null) {
                     sa.getSourceCard().setCanCounter(false);
                 }
@@ -551,33 +322,35 @@ public class ManaPool {
                 ability.getSourceCard().setCanCounter(true);
             }
             for (final Mana m : manaPaid) {
-                this.addManaToPool(this.floatingMana, m);
+                this.addMana(m);
             }
         }
 
         manaPaid.clear();
-        this.calculateManaTotals();
         this.owner.updateObservers();
     }
 
 
     private boolean accountFor(final SpellAbility sa, final AbilityManaPart ma) {
-        final ArrayList<Mana> manaPaid = sa.getPayingMana();
+        final List<Mana> manaPaid = sa.getPayingMana();
     
-        if ((manaPaid.size() == 0) && (this.floatingMana.size() == 0)) {
+        if (manaPaid.isEmpty() && this.floatingMana.isEmpty()) {
           return false;
         }
     
         final ArrayList<Mana> removePaying = new ArrayList<Mana>();
         final ArrayList<Mana> removeFloating = new ArrayList<Mana>();
     
+ 
         boolean manaNotAccountedFor = false;
         // loop over mana produced by mana ability
-        for (Mana mana : ma.getLastProduced()) {
+        for (Mana mana : ma.getLastManaProduced()) {
+            Collection<Mana> poolLane = this.floatingMana.get(mana.getColorCode());
+            
             if (manaPaid.contains(mana)) {
                 removePaying.add(mana);
             }
-            else if (this.floatingMana.contains(mana)) {
+            else if (poolLane != null && poolLane.contains(mana)) {
                 removeFloating.add(mana);
             }
             else {
@@ -593,10 +366,10 @@ public class ManaPool {
         }
     
         for (int k = 0; k < removePaying.size(); k++) {
-            this.removeManaFrom(manaPaid, removePaying.get(k));
+            manaPaid.remove(removePaying.get(k));
         }
         for (int k = 0; k < removeFloating.size(); k++) {
-            this.removeManaFrom(this.floatingMana, removeFloating.get(k));
+            this.removeMana(removeFloating.get(k));
         }
         return true;
     }

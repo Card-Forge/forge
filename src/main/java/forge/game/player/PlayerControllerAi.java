@@ -14,6 +14,7 @@ import forge.Card;
 import forge.CardLists;
 import forge.CardPredicates;
 import forge.GameEntity;
+import forge.card.mana.Mana;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
@@ -315,6 +316,12 @@ public class PlayerControllerAi extends PlayerController {
             return Lists.newArrayList(toDiscard);
         }
         return getAi().getCardsToDiscard(num, (String[])null, sa);
+    }
+
+
+    @Override
+    public Mana chooseManaFromPool(List<Mana> manaChoices) {
+        return manaChoices.get(0); // no brains used
     }
 
 

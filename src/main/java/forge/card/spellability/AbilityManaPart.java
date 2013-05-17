@@ -22,7 +22,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
+
 import forge.Card;
+import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.card.mana.Mana;
 import forge.card.mana.ManaPool;
@@ -44,7 +47,7 @@ public class AbilityManaPart implements java.io.Serializable {
     private String origProduced;
     private String lastExpressChoice = "";
     private String manaRestrictions = "";
-    private transient ArrayList<Mana> lastProduced = new ArrayList<Mana>();
+    private transient ArrayList<Mana> lastManaProduced = new ArrayList<Mana>();
 
     /** The canceled. */
     private boolean canceled = false;
@@ -106,22 +109,20 @@ public class AbilityManaPart implements java.io.Serializable {
         final ManaPool manaPool = player.getManaPool();
 
         //clear lastProduced
-        this.lastProduced.clear();
+        this.lastManaProduced.clear();
 
         // loop over mana produced string
         for (final String c : produced.split(" ")) {
-            try {
-                int colorlessAmount = Integer.parseInt(c);
-                for (int i = 0; i < colorlessAmount; i++) {
-                    this.lastProduced.add(new Mana(c, source, this));
+            if(StringUtils.isNumeric(c)) 
+                for(int i = Integer.parseInt(c); i > 0; i--) {
+                    this.lastManaProduced.add(new Mana((byte)0, source, this));
                 }
-            } catch (NumberFormatException e) {
-                this.lastProduced.add(new Mana(c, source, this));
-            }
+            else
+                this.lastManaProduced.add(new Mana(MagicColor.fromName(c), source, this));
         }
 
         // add the mana produced to the mana pool
-        manaPool.addManaToFloating(this.lastProduced);
+        manaPool.add(this.lastManaProduced);
 
         // Run triggers
         final HashMap<String, Object> runParams = new HashMap<String, Object>();
@@ -228,6 +229,16 @@ public class AbilityManaPart implements java.io.Serializable {
         this.lastExpressChoice = s;
     }
 
+    public void setExpressChoice(ColorSet cs) {
+        StringBuilder sb = new StringBuilder();
+        if(cs.hasBlack()) sb.append("B ");
+        if(cs.hasBlue()) sb.append("U ");
+        if(cs.hasWhite()) sb.append("W ");
+        if(cs.hasRed()) sb.append("R ");
+        if(cs.hasGreen()) sb.append("G ");
+        this.lastExpressChoice = cs.toString();
+    }    
+    
     /**
      * <p>
      * Getter for the field <code>lastAnyChoice</code>.
@@ -256,8 +267,8 @@ public class AbilityManaPart implements java.io.Serializable {
      *
      * @return a {@link java.lang.String} object.
      */
-    public ArrayList<Mana> getLastProduced() {
-        return this.lastProduced;
+    public ArrayList<Mana> getLastManaProduced() {
+        return this.lastManaProduced;
     }
 
     /**

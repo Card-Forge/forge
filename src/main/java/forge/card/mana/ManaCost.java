@@ -266,7 +266,7 @@ public final class ManaCost implements Comparable<ManaCost> {
 
     public boolean canBePaidWithAvaliable(ColorSet color) {
         for (ManaCostShard shard : shards) {
-            if (!shard.canBePaidWithAvaliable(color)) {
+            if (!shard.isPhyrexian() && !shard.canBePaidWithManaOfColor(color.getColor())) {
                 return false;
             }
         }

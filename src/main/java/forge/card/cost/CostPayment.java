@@ -22,7 +22,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import forge.Card;
-import forge.card.mana.ManaCost;
 import forge.card.spellability.SpellAbility;
 import forge.game.GameState;
 import forge.game.player.Player;
@@ -177,10 +176,6 @@ public class CostPayment {
 
         final Card source = this.ability.getSourceCard();
         final List<CostPart> parts = this.cost.getCostParts();
-
-        if (this.getCost().getCostMana() == null) {
-            parts.add(new CostPartMana(ManaCost.ZERO, null, false));
-        }
 
         Map<Class<? extends CostPart>, PaymentDecision> decisions = new HashMap<Class<? extends CostPart>, PaymentDecision>();
         

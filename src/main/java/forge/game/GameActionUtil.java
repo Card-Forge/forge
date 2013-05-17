@@ -22,6 +22,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang.StringUtils;
+
 
 import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
@@ -1082,17 +1084,12 @@ public final class GameActionUtil {
             sb.append(baseMana);
         }
         else {
-            try {
-                // if baseMana is an integer(colorless), just multiply amount
-                // and baseMana
-                final int base = Integer.parseInt(baseMana);
-                sb.append(base * amount);
-            } catch (final NumberFormatException e) {
-                for (int i = 0; i < amount; i++) {
-                    if (i != 0) {
-                        sb.append(" ");
-                    }
-                    sb.append(baseMana);
+            if(StringUtils.isNumeric(baseMana)) {
+                sb.append(amount * Integer.parseInt(baseMana));
+            } else {
+                sb.append(baseMana);
+                for (int i = 1; i < amount; i++) {
+                    sb.append(" ").append(baseMana);
                 }
             }
         }

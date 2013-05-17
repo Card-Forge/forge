@@ -29,7 +29,6 @@ import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.game.player.Player;
-import forge.game.zone.ZoneType;
 import forge.item.CardPrinted;
 import forge.util.Aggregates;
 
@@ -784,31 +783,6 @@ public class ComputerUtilCard {
         return result;
     }
 
-    /**
-     * <p>
-     * getUsableManaSources.
-     * </p>
-     * 
-     * @param player
-     *            a {@link forge.game.player.Player} object.
-     * @return a int.
-     */
-    public static int getUsableManaSources(final Player player) {
-        List<Card> list = CardLists.filter(player.getCardsIn(ZoneType.Battlefield), new Predicate<Card>() {
-            @Override
-            public boolean apply(final Card c) {
-                for (final SpellAbility am : ComputerUtilMana.getAIPlayableMana(c)) {
-                    am.setActivatingPlayer(player);
-                    if (am.canPlay()) {
-                        return true;
-                    }
-                }
-                return false;
-            }
-        });
-    
-        return list.size();
-    }
 
     /**
      * <p>

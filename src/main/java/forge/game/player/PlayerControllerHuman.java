@@ -14,6 +14,7 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
 import forge.Card;
 import forge.FThreads;
 import forge.GameEntity;
+import forge.card.mana.Mana;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.card.spellability.TargetSelection;
@@ -36,6 +37,7 @@ import forge.gui.GuiDialog;
 import forge.gui.GuiUtils;
 import forge.gui.match.CMatchUI;
 import forge.item.CardPrinted;
+import forge.util.TextUtil;
 
 
 /** 
@@ -498,6 +500,21 @@ public class PlayerControllerHuman extends PlayerController {
         target.setMessage("Select %d cards to discard, unless you discard a " + uType + ".");
         FThreads.setInputAndWait(target);
         return target.getSelected();
+    }
+
+    /* (non-Javadoc)
+     * @see forge.game.player.PlayerController#chooseManaFromPool(java.util.List)
+     */
+    @Override
+    public Mana chooseManaFromPool(List<Mana> manaChoices) {
+        List<String> options = new ArrayList<String>();
+        for(int i = 0; i < manaChoices.size(); i++) {
+            Mana m = manaChoices.get(i);
+            options.add(String.format("%d. %s mana from %s", 1+i, m.getColor(), m.getSourceCard() ));
+        }
+        String chosen = GuiChoose.one("Pay Mana from Mana Pool", options);
+        String idx = TextUtil.split(chosen, '.')[0];
+        return manaChoices.get(Integer.parseInt(idx)-1);
     }
 
 }

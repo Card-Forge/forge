@@ -31,42 +31,18 @@ import forge.card.spellability.AbilityManaPart;
  * @version $Id$
  */
 public class Mana {
-    private byte color;
-    private Card sourceCard = null;
-    private AbilityManaPart manaAbility = null;
-    private boolean hasRestrictions = false;
-    private boolean pumpCounterMagic = false;
-
-    /**
-     * <p>
-     * Constructor for Mana.
-     * </p>
-     * 
-     * @param col
-     *            a {@link java.lang.String} object.
-     * @param source
-     *            a {@link forge.Card} object.
-     * @param manaAbility
-     *            a {@link forge.card.spellability.AbilityMana} object
-     */
-    public Mana(final String col, final Card source, final AbilityManaPart manaAbility) {
-        this.color = MagicColor.fromName(col);
-        if (manaAbility != null) {
-          this.manaAbility = manaAbility;
-          if (!manaAbility.getManaRestrictions().isEmpty()) {
-              this.hasRestrictions = true;
-          }
-          if (manaAbility.cannotCounterPaidWith()) {
-              this.pumpCounterMagic = true;
-          }
-        }
-        if (source == null) {
-            return;
-        }
-
-
-        this.sourceCard = source;
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + color;
+        result = prime * result + (hasRestrictions ? 1231 : 1237);
+        result = prime * result + ((manaAbility == null) ? 0 : manaAbility.hashCode());
+        result = prime * result + (pumpCounterMagic ? 1231 : 1237);
+        result = prime * result + ((sourceCard == null) ? 0 : sourceCard.hashCode());
+        return result;
     }
+
 
     @Override
     public boolean equals(Object other) {
@@ -87,6 +63,45 @@ public class Mana {
 
         return mp == mp2 || mp.getManaRestrictions().equals(mp2.getManaRestrictions());
     }
+
+
+    private byte color;
+    private Card sourceCard = null;
+    private AbilityManaPart manaAbility = null;
+    private boolean hasRestrictions = false;
+    private boolean pumpCounterMagic = false;
+
+    /**
+     * <p>
+     * Constructor for Mana.
+     * </p>
+     * 
+     * @param col
+     *            a {@link java.lang.String} object.
+     * @param source
+     *            a {@link forge.Card} object.
+     * @param manaAbility
+     *            a {@link forge.card.spellability.AbilityMana} object
+     */
+    public Mana(final byte color, final Card source, final AbilityManaPart manaAbility) {
+        this.color = color;
+        if (manaAbility != null) {
+          this.manaAbility = manaAbility;
+          if (!manaAbility.getManaRestrictions().isEmpty()) {
+              this.hasRestrictions = true;
+          }
+          if (manaAbility.cannotCounterPaidWith()) {
+              this.pumpCounterMagic = true;
+          }
+        }
+        if (source == null) {
+            return;
+        }
+
+
+        this.sourceCard = source;
+    }
+
 
     /**
      * <p>

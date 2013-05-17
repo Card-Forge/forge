@@ -18,6 +18,7 @@
 package forge;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -192,7 +193,12 @@ public final class CardUtil {
         return ret;
     }
 
-    public static Set<String> getReflectableManaColors(final SpellAbility abMana, final SpellAbility sa,
+    // a nice entry point with minimum parameters
+    public static Set<String> getReflectableManaColors(final SpellAbility sa) {
+        return getReflectableManaColors(sa, sa, new HashSet<String>(), new ArrayList<Card>());
+    }
+    
+    private static Set<String> getReflectableManaColors(final SpellAbility abMana, final SpellAbility sa,
             Set<String> colors, final List<Card> parents) {
         // Here's the problem with reflectable Mana. If more than one is out,
         // they need to Reflect each other,
@@ -266,14 +272,14 @@ public final class CardUtil {
                 colors.add(Constant.Color.COLORLESS);
             }
         } else if (reflectProperty.equals("Produce")) {
-            final ArrayList<SpellAbility> abilities = new ArrayList<SpellAbility>();
+            final List<SpellAbility> abilities = new ArrayList<SpellAbility>();
             for (final Card c : cards) {
                 abilities.addAll(c.getManaAbility());
             }
             // currently reflected mana will ignore other reflected mana
             // abilities
 
-            final ArrayList<SpellAbility> reflectAbilities = new ArrayList<SpellAbility>();
+            final List<SpellAbility> reflectAbilities = new ArrayList<SpellAbility>();
 
             for (final SpellAbility ab : abilities) {
                 if (maxChoices == colors.size()) {

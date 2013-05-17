@@ -1133,7 +1133,7 @@ public class CardFactoryUtil {
             if (color.equals("All")) {
                 return cc.getManaPool().totalMana();
             } else {
-                return cc.getManaPool().getAmountOfColor(color);
+                return cc.getManaPool().getAmountOfColor(MagicColor.fromName(color));
             }
         }
 

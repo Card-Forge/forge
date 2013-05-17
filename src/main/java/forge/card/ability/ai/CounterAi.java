@@ -8,7 +8,6 @@ import forge.card.cost.Cost;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.game.GameState;
-import forge.game.ai.ComputerUtilCard;
 import forge.game.ai.ComputerUtilCost;
 import forge.game.ai.ComputerUtilMana;
 import forge.game.player.Player;
@@ -63,7 +62,7 @@ public class CounterAi extends SpellAbilityAi {
 
         if (unlessCost != null && !unlessCost.endsWith(">")) {
             // Is this Usable Mana Sources? Or Total Available Mana?
-            final int usableManaSources = ComputerUtilCard.getUsableManaSources(ai.getOpponent());
+            final int usableManaSources = ComputerUtilMana.getAvailableMana(ai.getOpponent(), true).size();
             int toPay = 0;
             boolean setPayX = false;
             if (unlessCost.equals("X") && source.getSVar(unlessCost).equals("Count$xPaid")) {
@@ -132,7 +131,7 @@ public class CounterAi extends SpellAbilityAi {
             final Card source = sa.getSourceCard();
             if (unlessCost != null) {
                 // Is this Usable Mana Sources? Or Total Available Mana?
-                final int usableManaSources = ComputerUtilCard.getUsableManaSources(ai.getOpponent());
+                final int usableManaSources = ComputerUtilMana.getAvailableMana(ai.getOpponent(), true).size();
                 int toPay = 0;
                 boolean setPayX = false;
                 if (unlessCost.equals("X") && source.getSVar(unlessCost).equals("Count$xPaid")) {

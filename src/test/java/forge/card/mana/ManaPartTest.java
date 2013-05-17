@@ -3,7 +3,7 @@ package forge.card.mana;
 import org.testng.annotations.Test;
 
 import forge.Card;
-import forge.Constant;
+import forge.card.MagicColor;
 
 /**
  * <p>
@@ -66,277 +66,277 @@ public class ManaPartTest {
 
         final ManaCostBeingPaid p1 = new ManaCostBeingPaid("2/U");
 
-        this.check(0.3, p1.isNeeded("G"));
-        this.check(0.4, p1.isNeeded("U"));
-        this.check(0.5, p1.isNeeded("B"));
-        this.check(0.6, p1.isNeeded("W"));
-        this.check(0.7, p1.isNeeded("R"));
-        this.check(0.8, p1.isNeeded("1"));
+        this.check(0.3, p1.isAnyPartPayableWith(MagicColor.GREEN));
+        this.check(0.4, p1.isAnyPartPayableWith(MagicColor.BLUE));
+        this.check(0.5, p1.isAnyPartPayableWith(MagicColor.BLACK));
+        this.check(0.6, p1.isAnyPartPayableWith(MagicColor.WHITE));
+        this.check(0.7, p1.isAnyPartPayableWith(MagicColor.RED));
+        this.check(0.8, p1.isAnyPartPayableWith((byte) 0));
 
-        p1.addMana("U");
+        p1.payMana("U");
         this.check(0.9, p1.isPaid());
 
-        this.check(0.91, !p1.isNeeded("R"));
+        this.check(0.91, !p1.isAnyPartPayableWith(MagicColor.RED));
 
         final ManaCostBeingPaid p2 = new ManaCostBeingPaid("G");
-        this.check(1, p2.isNeeded("G"));
+        this.check(1, p2.isAnyPartPayableWith(MagicColor.GREEN));
 
-        this.check(1.1, !p2.isNeeded("U"));
-        this.check(1.2, !p2.isNeeded("B"));
-        this.check(1.3, !p2.isNeeded("W"));
-        this.check(1.4, !p2.isNeeded("R"));
-        this.check(1.5, !p2.isNeeded("1"));
+        this.check(1.1, !p2.isAnyPartPayableWith(MagicColor.BLUE));
+        this.check(1.2, !p2.isAnyPartPayableWith(MagicColor.BLACK));
+        this.check(1.3, !p2.isAnyPartPayableWith(MagicColor.WHITE));
+        this.check(1.4, !p2.isAnyPartPayableWith(MagicColor.RED));
+        this.check(1.5, !p2.isAnyPartPayableWith((byte) 0));
 
-        p2.addMana("G");
+        p2.payMana("G");
         this.check(2, p2.isPaid());
 
-        this.check(2.1, !p2.isNeeded("G"));
+        this.check(2.1, !p2.isAnyPartPayableWith(MagicColor.GREEN));
 
         final ManaCostBeingPaid p4 = new ManaCostBeingPaid("1");
 
-        this.check(3, p4.isNeeded("G"));
-        this.check(4, p4.isNeeded("U"));
-        this.check(5, p4.isNeeded("B"));
-        this.check(6, p4.isNeeded("W"));
-        this.check(7, p4.isNeeded("R"));
-        this.check(8, p4.isNeeded("1"));
+        this.check(3, p4.isAnyPartPayableWith(MagicColor.GREEN));
+        this.check(4, p4.isAnyPartPayableWith(MagicColor.BLUE));
+        this.check(5, p4.isAnyPartPayableWith(MagicColor.BLACK));
+        this.check(6, p4.isAnyPartPayableWith(MagicColor.WHITE));
+        this.check(7, p4.isAnyPartPayableWith(MagicColor.RED));
+        this.check(8, p4.isAnyPartPayableWith((byte) 0));
 
-        p4.addMana("B");
+        p4.payMana("B");
         this.check(9, p4.isPaid());
 
-        this.check(9.1, !p4.isNeeded("R"));
+        this.check(9.1, !p4.isAnyPartPayableWith(MagicColor.RED));
 
         final ManaCostBeingPaid p5 = new ManaCostBeingPaid("GW");
 
-        this.check(10, p5.isNeeded("G"));
-        this.check(13, p5.isNeeded("W"));
+        this.check(10, p5.isAnyPartPayableWith(MagicColor.GREEN));
+        this.check(13, p5.isAnyPartPayableWith(MagicColor.WHITE));
 
-        this.check(11, !p5.isNeeded("U"));
-        this.check(12, !p5.isNeeded("B"));
-        this.check(14, !p5.isNeeded("R"));
-        this.check(15, !p5.isNeeded("1"));
+        this.check(11, !p5.isAnyPartPayableWith(MagicColor.BLUE));
+        this.check(12, !p5.isAnyPartPayableWith(MagicColor.BLACK));
+        this.check(14, !p5.isAnyPartPayableWith(MagicColor.RED));
+        this.check(15, !p5.isAnyPartPayableWith((byte) 0));
 
-        p5.addMana("W");
+        p5.payMana("W");
         this.check(16, p5.isPaid());
 
-        this.check(17, !p5.isNeeded("W"));
+        this.check(17, !p5.isAnyPartPayableWith(MagicColor.WHITE));
 
         final ManaCostBeingPaid p6 = new ManaCostBeingPaid("BR");
 
-        this.check(17.1, p6.isNeeded("B"));
-        this.check(17.2, p6.isNeeded("R"));
+        this.check(17.1, p6.isAnyPartPayableWith(MagicColor.BLACK));
+        this.check(17.2, p6.isAnyPartPayableWith(MagicColor.RED));
 
-        this.check(17.3, !p6.isNeeded("U"));
-        this.check(17.4, !p6.isNeeded("W"));
-        this.check(17.5, !p6.isNeeded("G"));
-        this.check(17.6, !p6.isNeeded("1"));
+        this.check(17.3, !p6.isAnyPartPayableWith(MagicColor.BLUE));
+        this.check(17.4, !p6.isAnyPartPayableWith(MagicColor.WHITE));
+        this.check(17.5, !p6.isAnyPartPayableWith(MagicColor.GREEN));
+        this.check(17.6, !p6.isAnyPartPayableWith((byte) 0));
 
-        p6.addMana("R");
+        p6.payMana("R");
         this.check(17.7, p6.isPaid());
 
-        this.check(17.8, !p6.isNeeded("R"));
+        this.check(17.8, !p6.isAnyPartPayableWith(MagicColor.RED));
 
         final ManaCostBeingPaid p7 = new ManaCostBeingPaid("1 G G");
 
-        p7.addMana("G");
+        p7.payMana("G");
 
-        this.check(18.1, p7.isNeeded("G"));
-        this.check(18.2, p7.isNeeded("W"));
-        this.check(18.3, p7.isNeeded("U"));
-        this.check(18.4, p7.isNeeded("B"));
-        this.check(18.5, p7.isNeeded("R"));
-        this.check(18.6, p7.isNeeded("1"));
+        this.check(18.1, p7.isAnyPartPayableWith(MagicColor.GREEN));
+        this.check(18.2, p7.isAnyPartPayableWith(MagicColor.WHITE));
+        this.check(18.3, p7.isAnyPartPayableWith(MagicColor.BLUE));
+        this.check(18.4, p7.isAnyPartPayableWith(MagicColor.BLACK));
+        this.check(18.5, p7.isAnyPartPayableWith(MagicColor.RED));
+        this.check(18.6, p7.isAnyPartPayableWith((byte) 0));
 
-        p7.addMana("1");
-        p7.addMana("G");
+        p7.payMana("1");
+        p7.payMana("G");
 
         this.check(18.7, p7.isPaid());
 
-        this.check(18.8, !p7.isNeeded("W"));
+        this.check(18.8, !p7.isAnyPartPayableWith(MagicColor.WHITE));
 
         final ManaCostBeingPaid p8 = new ManaCostBeingPaid("0");
 
-        this.check(19.1, !p8.isNeeded("1"));
-        this.check(19.2, !p8.isNeeded("G"));
-        this.check(19.3, !p8.isNeeded("U"));
+        this.check(19.1, !p8.isAnyPartPayableWith((byte) 0));
+        this.check(19.2, !p8.isAnyPartPayableWith(MagicColor.GREEN));
+        this.check(19.3, !p8.isAnyPartPayableWith(MagicColor.BLUE));
 
         this.check(19.4, p8.isPaid());
 
-        this.check(19.5, !p8.isNeeded("R"));
+        this.check(19.5, !p8.isAnyPartPayableWith(MagicColor.RED));
 
         final ManaCostBeingPaid p9 = new ManaCostBeingPaid("G G");
 
-        this.check(20.1, !p9.isNeeded("1"));
-        this.check(20.2, p9.isNeeded("G"));
+        this.check(20.1, !p9.isAnyPartPayableWith((byte) 0));
+        this.check(20.2, p9.isAnyPartPayableWith(MagicColor.GREEN));
 
-        this.check(20.3, !p9.isNeeded("U"));
+        this.check(20.3, !p9.isAnyPartPayableWith(MagicColor.BLUE));
 
-        p9.addMana("G");
-        p9.addMana("G");
+        p9.payMana("G");
+        p9.payMana("G");
 
         this.check(20.4, p9.isPaid());
 
-        this.check(20.5, !p9.isNeeded("B"));
+        this.check(20.5, !p9.isAnyPartPayableWith(MagicColor.BLACK));
 
         final ManaCostBeingPaid p10 = new ManaCostBeingPaid("G G G");
 
-        this.check(21.1, !p10.isNeeded("W"));
-        this.check(21.2, p10.isNeeded("G"));
+        this.check(21.1, !p10.isAnyPartPayableWith(MagicColor.WHITE));
+        this.check(21.2, p10.isAnyPartPayableWith(MagicColor.GREEN));
 
-        this.check(21.3, !p10.isNeeded("R"));
+        this.check(21.3, !p10.isAnyPartPayableWith(MagicColor.RED));
 
-        p10.addMana("G");
-        p10.addMana("G");
-        p10.addMana("G");
+        p10.payMana("G");
+        p10.payMana("G");
+        p10.payMana("G");
 
         this.check(21.4, p10.isPaid());
 
-        this.check(21.5, !p10.isNeeded("U"));
+        this.check(21.5, !p10.isAnyPartPayableWith(MagicColor.BLUE));
 
         final ManaCostBeingPaid p11 = new ManaCostBeingPaid("G G G G");
 
-        this.check(22.1, !p11.isNeeded("W"));
-        this.check(22.2, p11.isNeeded("G"));
+        this.check(22.1, !p11.isAnyPartPayableWith(MagicColor.WHITE));
+        this.check(22.2, p11.isAnyPartPayableWith(MagicColor.GREEN));
 
-        this.check(22.3, !p11.isNeeded("R"));
+        this.check(22.3, !p11.isAnyPartPayableWith(MagicColor.RED));
 
-        p11.addMana("G");
-        p11.addMana("G");
-        p11.addMana("G");
-        p11.addMana("G");
+        p11.payMana("G");
+        p11.payMana("G");
+        p11.payMana("G");
+        p11.payMana("G");
 
         this.check(22.4, p11.isPaid());
 
-        this.check(22.5, !p11.isNeeded("G"));
+        this.check(22.5, !p11.isAnyPartPayableWith(MagicColor.GREEN));
 
         final ManaCostBeingPaid p12 = new ManaCostBeingPaid("GW");
 
-        this.check(23.1, p12.isNeeded("W"));
-        this.check(23.2, p12.isNeeded("G"));
-        this.check(23.3, !p12.isNeeded("R"));
+        this.check(23.1, p12.isAnyPartPayableWith(MagicColor.WHITE));
+        this.check(23.2, p12.isAnyPartPayableWith(MagicColor.GREEN));
+        this.check(23.3, !p12.isAnyPartPayableWith(MagicColor.RED));
 
-        p12.addMana("G");
+        p12.payMana("G");
 
         this.check(23.4, p12.isPaid());
 
-        this.check(23.5, !p12.isNeeded("G"));
+        this.check(23.5, !p12.isAnyPartPayableWith(MagicColor.GREEN));
 
         final ManaCostBeingPaid p13 = new ManaCostBeingPaid("GW");
 
-        this.check(24.1, p13.isNeeded("W"));
-        this.check(24.2, p13.isNeeded("G"));
-        this.check(24.3, !p13.isNeeded("U"));
+        this.check(24.1, p13.isAnyPartPayableWith(MagicColor.WHITE));
+        this.check(24.2, p13.isAnyPartPayableWith(MagicColor.GREEN));
+        this.check(24.3, !p13.isAnyPartPayableWith(MagicColor.BLUE));
 
-        p13.addMana("W");
+        p13.payMana("W");
 
         this.check(24.4, p13.isPaid());
 
-        this.check(24.5, !p13.isNeeded("W"));
+        this.check(24.5, !p13.isAnyPartPayableWith(MagicColor.WHITE));
 
         final ManaCostBeingPaid p14 = new ManaCostBeingPaid("3 GW GW");
 
-        this.check(25.1, p14.isNeeded("W"));
-        this.check(25.2, p14.isNeeded("G"));
-        this.check(25.3, p14.isNeeded("U"));
+        this.check(25.1, p14.isAnyPartPayableWith(MagicColor.WHITE));
+        this.check(25.2, p14.isAnyPartPayableWith(MagicColor.GREEN));
+        this.check(25.3, p14.isAnyPartPayableWith(MagicColor.BLUE));
 
-        p14.addMana("1");
-        p14.addMana("1");
-        p14.addMana("1");
+        p14.payMana("1");
+        p14.payMana("1");
+        p14.payMana("1");
 
-        this.check(25.4, p14.isNeeded("W"));
-        this.check(25.5, p14.isNeeded("G"));
-        this.check(25.6, !p14.isNeeded("U"));
+        this.check(25.4, p14.isAnyPartPayableWith(MagicColor.WHITE));
+        this.check(25.5, p14.isAnyPartPayableWith(MagicColor.GREEN));
+        this.check(25.6, !p14.isAnyPartPayableWith(MagicColor.BLUE));
 
-        p14.addMana("G");
-        p14.addMana("W");
+        p14.payMana("G");
+        p14.payMana("W");
 
         this.check(25.7, p14.isPaid());
 
-        this.check(25.8, !p14.isNeeded("W"));
-        this.check(25.9, !p14.isNeeded("G"));
-        this.check(25.10, !p14.isNeeded("1"));
-        this.check(25.11, !p14.isNeeded("R"));
+        this.check(25.8, !p14.isAnyPartPayableWith(MagicColor.WHITE));
+        this.check(25.9, !p14.isAnyPartPayableWith(MagicColor.GREEN));
+        this.check(25.10, !p14.isAnyPartPayableWith((byte) 0));
+        this.check(25.11, !p14.isAnyPartPayableWith(MagicColor.RED));
 
         final ManaCostBeingPaid p15 = new ManaCostBeingPaid("4");
 
-        this.check(26.1, p15.isNeeded("W"));
-        this.check(26.2, p15.isNeeded("G"));
-        this.check(26.3, p15.isNeeded("U"));
+        this.check(26.1, p15.isAnyPartPayableWith(MagicColor.WHITE));
+        this.check(26.2, p15.isAnyPartPayableWith(MagicColor.GREEN));
+        this.check(26.3, p15.isAnyPartPayableWith(MagicColor.BLUE));
 
-        p15.addMana("1");
-        p15.addMana("1");
-        p15.addMana("1");
-        p15.addMana("1");
+        p15.payMana("1");
+        p15.payMana("1");
+        p15.payMana("1");
+        p15.payMana("1");
 
         this.check(26.4, p15.isPaid());
 
         final ManaCostBeingPaid p16 = new ManaCostBeingPaid("10");
 
-        p16.addMana("G");
-        p16.addMana("W");
-        p16.addMana("R");
-        p16.addMana("U");
-        p16.addMana("B");
+        p16.payMana("G");
+        p16.payMana("W");
+        p16.payMana("R");
+        p16.payMana("U");
+        p16.payMana("B");
 
-        p16.addMana("1");
+        p16.payMana("1");
 
-        p16.addMana("W");
-        p16.addMana("R");
-        p16.addMana("U");
-        p16.addMana("B");
+        p16.payMana("W");
+        p16.payMana("R");
+        p16.payMana("U");
+        p16.payMana("B");
 
         this.check(27, p16.isPaid());
 
         final ManaCostBeingPaid p17 = new ManaCostBeingPaid("12 G GW");
 
         for (int i = 0; i < 12; i++) {
-            p17.addMana("R");
+            p17.payMana("R");
         }
 
-        p17.addMana("G");
-        p17.addMana("W");
+        p17.payMana("G");
+        p17.payMana("W");
 
         this.check(28, p17.isPaid());
 
         final ManaCostBeingPaid p18 = new ManaCostBeingPaid("2 W B U R G");
 
         for (int i = 0; i < 1; i++) {
-            p18.addMana("R");
+            p18.payMana("R");
         }
 
         for (int i = 0; i < 2; i++) {
-            p18.addMana("1");
+            p18.payMana("1");
         }
 
         for (int i = 0; i < 1; i++) {
-            p18.addMana("G");
-            p18.addMana("W");
-            p18.addMana("B");
-            p18.addMana("U");
+            p18.payMana("G");
+            p18.payMana("W");
+            p18.payMana("B");
+            p18.payMana("U");
 
         }
         this.check(29, p18.isPaid());
 
         final ManaCostBeingPaid p19 = new ManaCostBeingPaid("W B U R G W");
 
-        p19.addMana("R");
-        p19.addMana("G");
-        p19.addMana("B");
-        p19.addMana("U");
+        p19.payMana("R");
+        p19.payMana("G");
+        p19.payMana("B");
+        p19.payMana("U");
 
-        p19.addMana("W");
-        p19.addMana("W");
+        p19.payMana("W");
+        p19.payMana("W");
 
         this.check(30, p19.isPaid());
 
         final ManaCostBeingPaid p20 = new ManaCostBeingPaid("W B U R G W B U R G");
 
         for (int i = 0; i < 2; i++) {
-            p20.addMana("W");
-            p20.addMana("R");
-            p20.addMana("G");
-            p20.addMana("B");
-            p20.addMana("U");
+            p20.payMana("W");
+            p20.payMana("R");
+            p20.payMana("G");
+            p20.payMana("B");
+            p20.payMana("U");
         }
 
         this.check(31, p20.isPaid());
@@ -344,68 +344,68 @@ public class ManaPartTest {
         final ManaCostBeingPaid p21 = new ManaCostBeingPaid("2 W B U R G W B U R G G");
 
         for (int i = 0; i < 2; i++) {
-            p21.addMana("W");
-            p21.addMana("R");
-            p21.addMana("G");
-            p21.addMana("B");
-            p21.addMana("U");
+            p21.payMana("W");
+            p21.payMana("R");
+            p21.payMana("G");
+            p21.payMana("B");
+            p21.payMana("U");
         }
 
-        p21.addMana("1");
-        p21.addMana("1");
-        p21.addMana("G");
+        p21.payMana("1");
+        p21.payMana("1");
+        p21.payMana("G");
 
         this.check(32, p21.isPaid());
 
         final ManaCostBeingPaid p22 = new ManaCostBeingPaid("1 B R");
 
-        p22.addMana("B");
-        p22.addMana("1");
-        p22.addMana("R");
+        p22.payMana("B");
+        p22.payMana("1");
+        p22.payMana("R");
 
         this.check(33, p22.isPaid());
 
         final ManaCostBeingPaid p23 = new ManaCostBeingPaid("B R");
 
-        p23.addMana("B");
-        p23.addMana("R");
+        p23.payMana("B");
+        p23.payMana("R");
 
         this.check(34, p23.isPaid());
 
         final ManaCostBeingPaid p24 = new ManaCostBeingPaid("2/B 2/B 2/B");
 
-        this.check(35, p24.isNeeded("G"));
+        this.check(35, p24.isAnyPartPayableWith(MagicColor.GREEN));
 
-        p24.addMana("B");
+        p24.payMana("B");
         this.check(36, p24.toString().equals("2/B 2/B"));
 
-        p24.addMana("B");
+        p24.payMana("B");
         this.check(37, p24.toString().equals("2/B"));
 
-        p24.addMana("B");
+        p24.payMana("B");
         this.check(38, p24.isPaid());
 
         final ManaCostBeingPaid p25 = new ManaCostBeingPaid("2/G");
 
-        p25.addMana("1");
+        p25.payMana("1");
         this.check(39, p25.toString().equals("1"));
 
-        p25.addMana("W");
+        p25.payMana("W");
         this.check(40, p25.isPaid());
 
         final ManaCostBeingPaid p27 = new ManaCostBeingPaid("2/R 2/R");
 
-        p27.addMana("1");
+        p27.payMana("1");
         this.check(41, p27.toString().equals("2/R 1"));
 
-        p27.addMana("W");
+        p27.payMana("W");
         this.check(42, p27.toString().equals("2/R"));
 
         final ManaCostBeingPaid p26 = new ManaCostBeingPaid("2/W 2/W");
 
         for (int i = 0; i < 4; i++) {
             this.check(43, !p26.isPaid());
-            p26.addMana("1");
+            p26.payMana("1");
         }
 
         this.check(44, p26.isPaid());
@@ -413,11 +413,11 @@ public class ManaPartTest {
         final ManaCostBeingPaid p28 = new ManaCostBeingPaid("2/W 2/B 2/U 2/R 2/G");
         this.check(45, !p28.isPaid());
 
-        p28.addMana("B");
-        p28.addMana("R");
-        p28.addMana("G");
-        p28.addMana("W");
-        p28.addMana("U");
+        p28.payMana("B");
+        p28.payMana("R");
+        p28.payMana("G");
+        p28.payMana("W");
+        p28.payMana("U");
 
         this.check(45.1, p28.isPaid(), p28);
 
@@ -426,11 +426,11 @@ public class ManaPartTest {
 
         final Card c = new Card();
 
-        p29.addMana(new Mana(Constant.Color.BLACK, c, null));
-        p29.addMana(new Mana(Constant.Color.RED, c, null));
-        p29.addMana(new Mana(Constant.Color.GREEN, c, null));
-        p29.addMana(new Mana(Constant.Color.WHITE, c,  null));
-        p29.addMana(new Mana(Constant.Color.BLUE, c, null));
+        p29.payMana(new Mana(MagicColor.BLACK, c, null));
+        p29.payMana(new Mana(MagicColor.RED, c, null));
+        p29.payMana(new Mana(MagicColor.GREEN, c, null));
+        p29.payMana(new Mana(MagicColor.WHITE, c,  null));
+        p29.payMana(new Mana(MagicColor.BLUE, c, null));
 
         this.check(46.1, p29.isPaid(), p29);
 

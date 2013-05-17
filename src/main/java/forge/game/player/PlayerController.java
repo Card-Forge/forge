@@ -8,6 +8,7 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
 
 import forge.Card;
 import forge.GameEntity;
+import forge.card.mana.Mana;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.control.input.Input;
@@ -126,4 +127,5 @@ public abstract class PlayerController {
     public abstract void playMadness(SpellAbility madness);
     public abstract List<Card> chooseCardsToDelve(int colorLessAmount, List<Card> grave);
     public abstract List<Card> chooseCardsToDiscardUnlessType(int min, List<Card> hand, String param, SpellAbility sa);
+    public abstract Mana chooseManaFromPool(List<Mana> manaChoices);
 }
