@@ -725,7 +725,6 @@ public class ComputerUtil {
                         continue; // Not a Regenerate ability
                     }
                     sa.setActivatingPlayer(controller);
-                    // sa.setActivatingPlayer(controller);
                     if (!(sa.canPlay() && ComputerUtilCost.canPayCost(sa, controller))) {
                         continue; // Can't play ability
                     }
@@ -733,7 +732,6 @@ public class ComputerUtil {
                     if (controller == ai) {
                         final Cost abCost = sa.getPayCosts();
                         if (abCost != null) {
-                            // AI currently disabled for these costs
                             if (!ComputerUtilCost.checkLifeCost(controller, abCost, c, 4, null)) {
                                 continue; // Won't play ability
                             }
@@ -758,8 +756,7 @@ public class ComputerUtil {
                     }
 
                 } catch (final Exception ex) {
-                    BugReporter.reportException(ex, "There is an error in the card code for %s:%n", c.getName(),
-                            ex.getMessage());
+                    BugReporter.reportException(ex, "There is an error in the card code for %s:%n", c.getName(), ex.getMessage());
                 }
             }
         }
@@ -883,9 +880,8 @@ public class ComputerUtil {
 
         // get all cards the human controls with AntiBuffedBy
         final List<Card> antibuffed = ai.getOpponent().getCardsIn(ZoneType.Battlefield);
-        for (int k = 0; k < antibuffed.size(); k++) {
-            final Card buffedcard = antibuffed.get(k);
-            if (buffedcard.getSVar("AntiBuffedBy").length() > 0) {
+        for (Card buffedcard : antibuffed) {
+            if (buffedcard.hasSVar("AntiBuffedBy")) {
                 final String buffedby = buffedcard.getSVar("AntiBuffedBy");
                 final String[] bffdby = buffedby.split(",");
                 if (card.isValid(bffdby, buffedcard.getController(), buffedcard)) {
@@ -894,7 +890,7 @@ public class ComputerUtil {
             }
         } // AntiBuffedBy
         final List<Card> vengevines = ai.getCardsIn(ZoneType.Graveyard, "Vengevine");
-        if (vengevines.size() > 0) {
+        if (!vengevines.isEmpty()) {
             final List<Card> creatures = ai.getCardsIn(ZoneType.Hand);
             final List<Card> creatures2 = new ArrayList<Card>();
             for (int i = 0; i < creatures.size(); i++) {
@@ -1015,7 +1011,7 @@ public class ComputerUtil {
         final SpellAbility sub = sa.getSubAbility();
 
         // Cipher spells
-        if (sub != null && ApiType.Encode == sa.getSubAbility().getApi() && !ai.getCreaturesInPlay().isEmpty()) {
+        if (sub != null && ApiType.Encode == sub.getApi() && !ai.getCreaturesInPlay().isEmpty()) {
             return true;
         }
         final List<Card> buffed = ai.getCardsIn(ZoneType.Battlefield);
@@ -1028,6 +1024,18 @@ public class ComputerUtil {
                 }
             }
         }
+
+        // get all cards the human controls with AntiBuffedBy
+        final List<Card> antibuffed = ai.getOpponent().getCardsIn(ZoneType.Battlefield);
+        for (Card buffedcard : antibuffed) {
+            if (buffedcard.hasSVar("AntiBuffedBy")) {
+                final String buffedby = buffedcard.getSVar("AntiBuffedBy");
+                final String[] bffdby = buffedby.split(",");
+                if (source.isValid(bffdby, buffedcard.getController(), buffedcard)) {
+                    return true;
+                }
+            }
+        } // AntiBuffedBy
         
         if (sub != null) { 
             return castSpellInMain1(ai, sub);
@@ -1344,7 +1352,7 @@ public class ComputerUtil {
         boolean bottom = false;
         if (c.isBasicLand()) {
             List<Card> bl = player.getCardsIn(ZoneType.Battlefield);
-            int nBasicLands = Iterables.size(Iterables.filter(bl, CardPredicates.Presets.BASIC_LANDS));
+            int nBasicLands = Iterables.size(Iterables.filter(bl, CardPredicates.Presets.LANDS));
             bottom = nBasicLands > 5; // if control more than 5 Basic land, probably don't need more
         } else if (c.isCreature()) {
             List<Card> cl = player.getCardsIn(ZoneType.Battlefield);
@@ -1405,7 +1413,7 @@ public class ComputerUtil {
      * @return
      */
     public static List<Card> getCardsToDiscardFromFriend(Player aiChooser, Player p, SpellAbility sa, List<Card> validCards, int min, int max) {
-        if (p.isComputer()) { // ask that ai player what he would like to discard
+        if (p == aiChooser) { // ask that ai player what he would like to discard
             final AiController aic = ((PlayerControllerAi)p.getController()).getAi();
             return aic.getCardsToDiscard(min, max, validCards, sa);
         } 
