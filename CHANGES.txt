@@ -34,6 +34,10 @@ Booster: 16 Any
 Booster: 10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand
 
 
+- New M14 cards -
+We have added a branch to our SVN for the new cards that are currently being scripted. These cards are not yet available in this build of forge. Please be patient and they will soon become available.
+
+
 ---------
 New Cards
 ---------
@@ -76,6 +80,26 @@ Grixis
 Orzhova
 Naar Isle
 Selesnya Loft Gardens
+
+
+--------------------
+New M14 branch Cards
+--------------------
+
+Battle Sliver
+Blur Sliver
+Groundshaker Sliver
+Sentinel Sliver
+Steelform Sliver
+Striking Sliver
+Kalonian Tusker
+Regathan Firecat
+Staff of the Wild Magus
+Advocate of the Beast
+Archangel of Thune
+Dawnstrike Paladin
+Enlarge
+Megantic Sliver
 
 
 ------------
