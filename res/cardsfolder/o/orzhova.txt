@@ -7,5 +7,5 @@ T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChao
 SVar:RolledChaos:AB$ ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature each opponent controls. | TargetMin$ 0 | TargetMax$ OneEach | References$ OneEach | TargetsWithDifferentControllers$ True
 SVar:OneEach:PlayerCountOpponents$Amount
 SVar:Picture:http://www.wizards.com/global/images/magic/general/orzhova.jpg
-SetInfo:PC2 Common
 Oracle:When you planeswalk away from Orzhova, each player returns all creature cards from his or her graveyard to the battlefield.\nWhenever you roll {C}, for each opponent, exile up to one target creature card from that player's graveyard.
+SetInfo:PC2 Common
