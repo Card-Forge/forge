@@ -1,7 +1,7 @@
-Forge Beta: 05-##-2013 ver 1.3.16
+Forge Beta: 05-17-2013 ver 1.3.16
 
 
-12### cards in total.
+12720 cards in total.
 
 
 -------------
@@ -42,26 +42,26 @@ We have added a branch to our SVN for the new cards that are currently being scr
 New Cards
 ---------
 
-Bane Alley Broker
 Aven Mindcensor
-Tidal Flats
-Leonin Shikari
+Bane Alley Broker
 Brothers Yamazaki
-Tunnel Ignus
-Inferno Trap
 Daughter of Autumn
-Pyrewild Shaman
-Nature's Will
-Thunderblade Charge
+Ether Well
+Goblin Flotilla
+Inferno Trap
 Kentaro, the Smiling Cat
 Land's Edge
+Leonin Shikari
 Locket of Yesterdays
-Mana Skimmer
-Mana Maze
-Thrull Wizard
 Logic Knot
-Goblin Flotilla
-Ether Well
+Mana Maze
+Mana Skimmer
+Nature's Will
+Pyrewild Shaman
+Thrull Wizard
+Thunderblade Charge
+Tidal Flats
+Tunnel Ignus
 War Tax
 
 
@@ -77,8 +77,8 @@ New Planes
 ----------
 
 Grixis
-Orzhova
 Naar Isle
+Orzhova
 Selesnya Loft Gardens
 
 
@@ -86,20 +86,20 @@ Selesnya Loft Gardens
 New M14 branch Cards
 --------------------
 
-Battle Sliver
-Blur Sliver
-Groundshaker Sliver
-Sentinel Sliver
-Steelform Sliver
-Striking Sliver
-Kalonian Tusker
-Regathan Firecat
-Staff of the Wild Magus
 Advocate of the Beast
 Archangel of Thune
+Battle Sliver
+Blur Sliver
 Dawnstrike Paladin
 Enlarge
+Groundshaker Sliver
+Kalonian Tusker
 Megantic Sliver
+Regathan Firecat
+Sentinel Sliver
+Staff of the Wild Magus
+Steelform Sliver
+Striking Sliver
 
 
 ------------
@@ -142,7 +142,22 @@ Some people use the Windows application 7zip. This utility can be found at http:
 Contributors to This Release
 ----------------------------
 
-
+Asepetci
+Dave
+Gos
+Hellfish
+juzamjedi
+Marc
+Max
+Nordos
+RedDeckWins
+Sagephoenix
+Sloth
+Slowe
+Sol
+Swordshine
+Zirbert
+Chris H
 
 
 (Quest icons used created by Teekatas, from his Legendora set http://raindropmemory.deviantart.com)
