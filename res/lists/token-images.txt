@@ -130,6 +130,7 @@ gu_1_1_snake.jpg                       http://www.cardforge.org/fpics/tokens/gu_
 gw_1_1_elf_warrior.jpg                 http://www.cardforge.org/fpics/tokens/gw_1_1_elf_warrior.jpg
 gw_2_2_voja.jpg                        http://www.cardforge.org/fpics/tokens/gw_2_2_voja.jpg
 gw_8_8_elemental_rtr.jpg               http://www.cardforge.org/fpics/tokens/RTR/gw_8_8_elemental_rtr.jpg
+gw_x_x_elemental.jpg                   http://www.cardforge.org/fpics/tokens/DGM/gw_x_x_elemental.jpg
 r_0_1_kobolds_of_kher_keep.jpg         http://www.cardforge.org/fpics/tokens/r_0_1_kobolds_of_kher_keep.jpg
 r_1_1_elemental_cat.jpg                http://www.cardforge.org/fpics/tokens/r_1_1_elemental_cat.jpg
 r_1_1_elemental.jpg                    http://www.cardforge.org/fpics/tokens/r_1_1_elemental.jpg

@@ -106,6 +106,7 @@ http://www.cardforge.org/fpics/questAvatars/Hans.jpg
 http://www.cardforge.org/fpics/questAvatars/Harry%20Potter.jpg
 http://www.cardforge.org/fpics/questAvatars/Hellboy.jpg
 http://www.cardforge.org/fpics/questAvatars/Hercules.jpg
+http://www.cardforge.org/fpics/questAvatars/Hermes%20Conrad.jpg
 http://www.cardforge.org/fpics/questAvatars/Hermione%20Granger.jpg
 http://www.cardforge.org/fpics/questAvatars/Higgins.jpg
 http://www.cardforge.org/fpics/questAvatars/Hobbes.jpg
@@ -134,6 +135,7 @@ http://www.cardforge.org/fpics/questAvatars/Kojak.jpg
 http://www.cardforge.org/fpics/questAvatars/Krypto.jpg
 http://www.cardforge.org/fpics/questAvatars/LeChuck.jpg
 http://www.cardforge.org/fpics/questAvatars/Leprechaun.jpg
+http://www.cardforge.org/fpics/questAvatars/Lex%20Luthor.jpg
 http://www.cardforge.org/fpics/questAvatars/Lisa%20Simpson.jpg
 http://www.cardforge.org/fpics/questAvatars/Luke%20Skywalker.jpg
 http://www.cardforge.org/fpics/questAvatars/Lupin%20the%20Third.jpg
@@ -230,6 +232,7 @@ http://www.cardforge.org/fpics/questAvatars/The%20Shade.jpg
 http://www.cardforge.org/fpics/questAvatars/The%20Spectre.jpg
 http://www.cardforge.org/fpics/questAvatars/The%20Thing.jpg
 http://www.cardforge.org/fpics/questAvatars/The%20Torpor%20Orb.jpg
+http://www.cardforge.org/fpics/questAvatars/The%20Very%20Hungry%20Caterpillar.jpg
 http://www.cardforge.org/fpics/questAvatars/The%20Zombie.jpg
 http://www.cardforge.org/fpics/questAvatars/Tom%20Bombadil.jpg
 http://www.cardforge.org/fpics/questAvatars/Tombstone.jpg

@@ -4,7 +4,7 @@ Types:Creature Elemental
 PT:2/2
 T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ Opponent | TriggerZones$ Battlefield | PlayerTurn$ True | Execute$ TrigToken | TriggerDescription$ Whenever an opponent casts a spell during your turn, or whenever CARDNAME dies, put a green and white Elemental creature token onto the battlefield with "This creature's power and toughness are each equal to the number of creatures you control."
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | Secondary$ True | TriggerDescription$ Whenever an opponent casts a spell during your turn, or whenever CARDNAME dies, put a green and white Elemental creature token onto the battlefield with "This creature's power and toughness are each equal to the number of creatures you control."
-SVar:TrigToken:AB$ Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Elemental | TokenTypes$ Creature,Elemental | TokenOwner$ You | TokenColors$ Green,White | TokenStaticAbilities$ TokenPT | TokenSVars$ TokenX
+SVar:TrigToken:AB$ Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Elemental | TokenTypes$ Creature,Elemental | TokenOwner$ You | TokenColors$ Green,White | TokenStaticAbilities$ TokenPT | TokenSVars$ TokenX | TokenImage$ gw x x elemental
 SVar:TokenPT:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ TokenX | SetToughness$ TokenX | Description$ CARDNAME's power and toughness are each equal to the number of creatures you control.
 SVar:TokenX:Count$Valid Creature.YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/voice_of_resurgence.jpg
