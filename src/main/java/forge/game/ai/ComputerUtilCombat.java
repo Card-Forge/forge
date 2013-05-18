@@ -1399,6 +1399,9 @@ public class ComputerUtilCombat {
         if (checkDestroyAttackerTrigger(attacker, defender) && !attacker.hasKeyword("Indestructible")) {
             return true;
         }
+        if (attacker.hasKeyword("PreventAllDamageBy Creature.blockingSource")) {
+            return false;
+        }
 
         int defenderDamage = defender.getNetAttack()
                 + ComputerUtilCombat.predictPowerBonusOfBlocker(attacker, defender, withoutAbilities);
