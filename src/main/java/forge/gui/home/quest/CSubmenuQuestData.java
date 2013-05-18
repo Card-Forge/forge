@@ -177,16 +177,9 @@ public enum CSubmenuQuestData implements ICDoc {
                 fmtStartPool = customFormatCodes.isEmpty() ? null : new GameFormatQuest("Custom", customFormatCodes, null); // chosen sets and no banend cards
                 break;
 
-            case SealedDeck:
-                dckStartPool = view.getSelectedDeck();
-                if (null == dckStartPool) {
-
-                    JOptionPane.showMessageDialog(null, "You have not selected a deck to start", "Cannot start a quest", JOptionPane.ERROR_MESSAGE);
-                    return;
-                }
-                break;
-
             case DraftDeck:
+            case SealedDeck:
+            case Cube:
                 dckStartPool = view.getSelectedDeck();
                 if (null == dckStartPool) {
 

@@ -6,7 +6,8 @@ public enum StartingPoolType {
     CustomFormat("Custom format"),
     Precon("Event or starter deck"),
     SealedDeck("My sealed deck"),
-    DraftDeck("My draft deck");
+    DraftDeck("My draft deck"),
+    Cube("Predefined cube");
 
     private final String caption;
 

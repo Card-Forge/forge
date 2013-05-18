@@ -131,15 +131,24 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
 
             btnDefineCustomFormat.setVisible(newVal == StartingPoolType.CustomFormat);
 
-            lblCustomDeck.setVisible(newVal == StartingPoolType.SealedDeck || newVal == StartingPoolType.DraftDeck);
-            cbxCustomDeck.setVisible(newVal == StartingPoolType.SealedDeck || newVal == StartingPoolType.DraftDeck);
 
-            if (newVal == StartingPoolType.SealedDeck || newVal == StartingPoolType.DraftDeck) {
+            boolean usesDeckList = newVal == StartingPoolType.SealedDeck || newVal == StartingPoolType.DraftDeck || newVal == StartingPoolType.Cube;
+            lblCustomDeck.setVisible(usesDeckList);
+            cbxCustomDeck.setVisible(usesDeckList);
+
+            if (usesDeckList) {
                 cbxCustomDeck.removeAllItems();
                 CardCollections decks = Singletons.getModel().getDecks();
-                IStorage<DeckGroup> storage = newVal == StartingPoolType.SealedDeck ? decks.getSealed() : decks.getDraft();
-                for (DeckGroup d : storage) {
-                    cbxCustomDeck.addItem(d.getHumanDeck());
+                switch(newVal) { 
+                    case SealedDeck: 
+                        for (DeckGroup d : decks.getSealed()) { cbxCustomDeck.addItem(d.getHumanDeck()); }
+                        break;
+                    case DraftDeck: 
+                        for (DeckGroup d : decks.getDraft()) { cbxCustomDeck.addItem(d.getHumanDeck()); }
+                        break;
+                    case Cube: 
+                        for (Deck d : decks.getCubes()) { cbxCustomDeck.addItem(d); }
+                        break;
                 }
             }
         }
@@ -208,6 +217,7 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
         cbxStartingPool.addItem(StartingPoolType.Precon);
         cbxStartingPool.addItem(StartingPoolType.DraftDeck);
         cbxStartingPool.addItem(StartingPoolType.SealedDeck);
+        cbxStartingPool.addItem(StartingPoolType.Cube);
         cbxStartingPool.addActionListener(alStartingPool);
 
         // initial adjustment
