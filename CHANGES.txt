@@ -1,7 +1,7 @@
-Forge Beta: 05-17-2013 ver 1.3.16
+Forge Beta: 05-##-2013 ver 1.3.17
 
 
-12720 cards in total.
+12### cards in total.
 
 
 -------------
@@ -12,28 +12,6 @@ Release Notes
 The devs are discussing a plan to update the battlefield display code with Java FX 2.2 and this should help to improve a few things. Java FX 2.2 requires Java 7 so it is important for members of our user base to update in the near future as Forge at the time of the update will no longer run under Java 6.
 
 
-- Customize your Sealed Deck games with fantasy blocks -
-We have an informative topic at CCGH which explains how you can create "fantasy blocks" and the greatly increased flexibility you have when you are building your own blocks. Please see the topic http://www.slightlymagic.net/forum/viewtopic.php?f=26&t=8164 for more information. Also note that the syntax was recently changed, see message http://www.slightlymagic.net/forum/viewtopic.php?f=26&t=8164&view=unread#p117389 for additional information.
-
-
-- Dragon's Maze -
-The Dragon's Maze set pictures should now be available via the "Download LQ Set Pictures" button. The Dragon's Maze booster images should also be available.
-
-
-- Custom Cube -
-1. You can create and save your cube as a constructed deck. Place the .dck file in the /res/cube directory.
-2. To create a description file in the /res/draft folder you need to make a copy of any existing *.draft file and the adjust the deckfile and booster structure to meet your needs.
-
-This file format is outdated. "NumCards" is no longer used. Instead there should be a line describing a booster.
-
-Find some examples below:
-
-Booster: 1 Rare, 11 Common, 3 Uncommon
-Booster: 5 Common, 5 Uncommon, 5 Rare, 1 Mythic
-Booster: 16 Any
-Booster: 10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand
-
-
 - New M14 cards -
 We have added a branch to our SVN for the new cards that are currently being scripted. These cards are not yet available in this build of forge. Please be patient and they will soon become available.
 
@@ -42,44 +20,7 @@ We have added a branch to our SVN for the new cards that are currently being scr
 New Cards
 ---------
 
-Aven Mindcensor
-Bane Alley Broker
-Brothers Yamazaki
-Daughter of Autumn
-Ether Well
-Goblin Flotilla
-Inferno Trap
-Kentaro, the Smiling Cat
-Land's Edge
-Leonin Shikari
-Locket of Yesterdays
-Logic Knot
-Mana Maze
-Mana Skimmer
-Nature's Will
-Pyrewild Shaman
-Thrull Wizard
-Thunderblade Charge
-Tidal Flats
-Tunnel Ignus
-War Tax
 
-
----------------
-New Phenomenons
----------------
-
-Spatial Merging
-
-
-----------
-New Planes
-----------
-
-Grixis
-Naar Isle
-Orzhova
-Selesnya Loft Gardens
 
 
 --------------------
@@ -142,22 +83,7 @@ Some people use the Windows application 7zip. This utility can be found at http:
 Contributors to This Release
 ----------------------------
 
-Asepetci
-Dave
-Gos
-Hellfish
-juzamjedi
-Marc
-Max
-Nordos
-RedDeckWins
-Sagephoenix
-Sloth
-Slowe
-Sol
-Swordshine
-Zirbert
-Chris H
+
 
 
 (Quest icons used created by Teekatas, from his Legendora set http://raindropmemory.deviantart.com)

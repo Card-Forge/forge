@@ -630,8 +630,32 @@ Quest challenge start in play cards:
 We have received reports that the quest challenge start in play cards are not appearing on the battlefield for people who were playing the classic mode rather than the fantasy mode. This should now be fixed.
 
 
-- Commander -
+Commander:
+----------
+
 We are taking baby steps toward Commander but there are some hurdles left before we get there. We need to implement the replacement effect that moves the commander back to your command zone; the cost-changing depending on how many times you've cast your commander; generating colorless mana if you try to generate mana outside your commanders color identity and AI for all the above.
+
+
+Customize your Sealed Deck games with fantasy blocks:
+-----------------------------------------------------
+
+We have an informative topic at CCGH which explains how you can create "fantasy blocks" and the greatly increased flexibility you have when you are building your own blocks. Please see the topic http://www.slightlymagic.net/forum/viewtopic.php?f=26&t=8164 for more information. Also note that the syntax was recently changed, see message http://www.slightlymagic.net/forum/viewtopic.php?f=26&t=8164&view=unread#p117389 for additional information.
+
+
+Custom Cube:
+------------
+
+1. You can create and save your cube as a constructed deck. Place the .dck file in the /res/cube directory.
+2. To create a description file in the /res/draft folder you need to make a copy of any existing *.draft file and the adjust the deckfile and booster structure to meet your needs.
+
+This file format is outdated. "NumCards" is no longer used. Instead there should be a line describing a booster.
+
+Find some examples below:
+
+Booster: 1 Rare, 11 Common, 3 Uncommon
+Booster: 5 Common, 5 Uncommon, 5 Rare, 1 Mythic
+Booster: 16 Any
+Booster: 10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand
 
 
 Our Lawyers Made Us Do This:
