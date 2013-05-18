@@ -20,6 +20,7 @@ public class MagicColor {
     public static final byte[] WUBRG = new byte[] { WHITE, BLUE, BLACK, RED, GREEN }; 
     
     public static byte fromName(String s) {
+        if( s == null ) return 0;
         if (s.equalsIgnoreCase(Constant.Color.WHITE) || s.equalsIgnoreCase("w")) {
             return MagicColor.WHITE;
         }

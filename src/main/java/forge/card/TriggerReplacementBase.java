@@ -301,7 +301,7 @@ public abstract class TriggerReplacementBase {
         }
 
         if (params.containsKey("ManaNotSpent")) {
-            byte spent = MagicColor.fromName(params.get("ManaSpent"));
+            byte spent = MagicColor.fromName(params.get("ManaNotSpent"));
             if ( 0 != (this.getHostCard().getColorsPaid() & spent)) {
                 return false;
             }
