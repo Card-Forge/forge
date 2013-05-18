@@ -248,7 +248,7 @@ public enum DeckFormat {
         if (maxCopies < Integer.MAX_VALUE) {
             //Must contain no more than 4 of the same card
             //shared among the main deck and sideboard, except
-            //basic lands and Relentless Rats
+            //basic lands, Shadowborn Apostle and Relentless Rats
 
             CardPool tmp = new CardPool(deck.getMain());
             if ( deck.has(DeckSection.Sideboard))
@@ -256,7 +256,7 @@ public enum DeckFormat {
             if ( deck.has(DeckSection.Commander) && this == Commander)
                 tmp.addAll(deck.get(DeckSection.Commander));
 
-            List<String> limitExceptions = Arrays.asList("Relentless Rats");
+            List<String> limitExceptions = Arrays.asList(new String[]{"Relentless Rats", "Shadowborn Apostle"});
 
             // should group all cards by name, so that different editions of same card are really counted as the same card
             for (Entry<String, Integer> cp : Aggregates.groupSumBy(tmp, CardPrinted.FN_GET_NAME)) {
