@@ -19,6 +19,8 @@ package forge.game.zone;
 
 import java.util.List;
 
+import com.google.common.base.Predicate;
+
 import forge.Card;
 
 /**
@@ -121,6 +123,7 @@ interface IZone {
      * @return true, if successful
      */
     boolean contains(Card c);
+    boolean contains(final Predicate<Card> condition);
     /**
      * isEmpty returns true if given zone contains no cards.
      * 

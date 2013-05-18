@@ -1452,9 +1452,7 @@ public class CardFactoryUtil {
 
         // Count$M12Empires.<numIf>.<numIfNot>
         if (sq[0].contains("AllM12Empires")) {
-            boolean has = c.getController().isCardInPlay("Crown of Empires");
-            has &= c.getController().isCardInPlay("Scepter of Empires");
-            has &= c.getController().isCardInPlay("Throne of Empires");
+            boolean has = cc.isCardInPlay("Crown of Empires") && cc.isCardInPlay("Scepter of Empires") && cc.isCardInPlay("Throne of Empires");
             return doXMath(Integer.parseInt(sq[has ? 1 : 2]), m, c);
         }
 

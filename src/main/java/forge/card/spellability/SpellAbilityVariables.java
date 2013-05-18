@@ -82,8 +82,6 @@ public class SpellAbilityVariables {
         this.lifeAmount = sav.getLifeAmount();
         this.manaSpent = sav.getManaSpent();
         this.pwAbility = sav.isPwAbility();
-        this.allM12Empires = sav.isAllM12Empires();
-        this.notAllM12Empires = sav.isNotAllM12Empires();
     }
 
     // default values for Sorcery speed abilities
@@ -174,62 +172,9 @@ public class SpellAbilityVariables {
     /** The pw ability. */
     private boolean pwAbility = false;
 
-    /** The all m12 empires. */
-    private boolean allM12Empires = false;
-
-    /** The not all m12 empires. */
-    private boolean notAllM12Empires = false;
-
     /** The chosen colors string. */
     private String chosenColors = null;
 
-
-
-    /**
-     * <p>
-     * Setter for the field <code>notAllM12Empires</code>.
-     * </p>
-     * 
-     * @param b
-     *            a boolean
-     */
-    public final void setNotAllM12Empires(final boolean b) {
-        this.notAllM12Empires = b;
-    }
-
-    /**
-     * <p>
-     * Getter for the field <code>notAllM12Empires</code>.
-     * </p>
-     * 
-     * @return a boolean
-     */
-    public final boolean getNotAllM12Empires() {
-        return this.isNotAllM12Empires();
-    }
-
-    /**
-     * <p>
-     * Setter for the field <code>allM12Empires</code>.
-     * </p>
-     * 
-     * @param b
-     *            a boolean
-     */
-    public final void setAllM12Empires(final boolean b) {
-        this.allM12Empires = b;
-    }
-
-    /**
-     * <p>
-     * Getter for the field <code>allM12Empires</code>.
-     * </p>
-     * 
-     * @return a boolean
-     */
-    public final boolean getAllM12Empires() {
-        return this.isAllM12Empires();
-    }
 
     /**
      * <p>
@@ -819,25 +764,6 @@ public class SpellAbilityVariables {
     public final String getPresentDefined() {
         return this.presentDefined;
     }
-
-    /**
-     * Checks if is all m12 empires.
-     * 
-     * @return the allM12Empires
-     */
-    public final boolean isAllM12Empires() {
-        return this.allM12Empires;
-    }
-
-    /**
-     * Checks if is not all m12 empires.
-     * 
-     * @return the notAllM12Empires
-     */
-    public final boolean isNotAllM12Empires() {
-        return this.notAllM12Empires;
-    }
-
     /**
      * Gets the s var operand.
      * 

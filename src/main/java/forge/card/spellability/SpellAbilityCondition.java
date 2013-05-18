@@ -116,13 +116,6 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
             this.setPhases(PhaseType.parseRange(params.get("ConditionPhases")));
         }
 
-        if (params.containsKey("ConditionAllM12Empires")) {
-            this.setAllM12Empires(true);
-        }
-        if (params.containsKey("ConditionNotAllM12Empires")) {
-            this.setNotAllM12Empires(true);
-        }
-
         if (params.containsKey("ConditionChosenColor")) {
             this.setColorToCheck(params.get("ConditionChosenColor"));
         }
@@ -229,25 +222,6 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
             }
 
             if (!isPhase) {
-                return false;
-            }
-        }
-
-        if (this.isAllM12Empires()) {
-            final Player p = sa.getSourceCard().getController();
-            boolean has = p.isCardInPlay("Crown of Empires");
-            has &= p.isCardInPlay("Scepter of Empires");
-            has &= p.isCardInPlay("Throne of Empires");
-            if (!has) {
-                return false;
-            }
-        }
-        if (this.isNotAllM12Empires()) {
-            final Player p = sa.getSourceCard().getController();
-            boolean has = p.isCardInPlay("Crown of Empires");
-            has &= p.isCardInPlay("Scepter of Empires");
-            has &= p.isCardInPlay("Throne of Empires");
-            if (has) {
                 return false;
             }
         }

@@ -84,7 +84,7 @@ public class AiController {
         game = game0;
     }
 
-    public final SpellAbility getSpellAbilityToPlay() {
+    private final SpellAbility getSpellAbilityToPlay() {
         // if top of stack is owned by me
         if (!game.getStack().isEmpty() && game.getStack().peekAbility().getActivatingPlayer().equals(player)) {
             // probably should let my stuff resolve

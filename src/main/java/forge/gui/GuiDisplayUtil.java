@@ -412,7 +412,7 @@ public final class GuiDisplayUtil {
      *            a {@link forge.game.player.Player} object.
      * @return a {@link forge.CardList} object.
      */
-    public static List<Card> devProcessCardsForZone(final String[] data, final Player player) {
+    private static List<Card> devProcessCardsForZone(final String[] data, final Player player) {
         final List<Card> cl = new ArrayList<Card>();
         for (final String element : data) {
             final String[] cardinfo = element.trim().split("\\|");

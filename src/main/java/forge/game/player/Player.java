@@ -2771,11 +2771,11 @@ public class Player extends GameEntity implements Comparable<Player> {
         return CardLists.filter(getCardsIn(ZoneType.Battlefield), Presets.LANDS);
     }
     public boolean isCardInPlay(final String cardName) {
-        return Iterables.any(getZone(ZoneType.Battlefield), CardPredicates.nameEquals(cardName));
+        return getZone(ZoneType.Battlefield).contains(CardPredicates.nameEquals(cardName));
     }
 
     public boolean isCardInCommand(final String cardName) {
-        return Iterables.any(getZone(ZoneType.Command), CardPredicates.nameEquals(cardName));
+        return getZone(ZoneType.Command).contains(CardPredicates.nameEquals(cardName));
     }
 
     public List<Card> getColoredCardsInPlay(final String color) {

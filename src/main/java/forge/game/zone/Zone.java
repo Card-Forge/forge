@@ -25,6 +25,9 @@ import java.util.Observable;
 import java.util.Observer;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
+
 import forge.Card;
 import forge.game.player.Player;
 import forge.util.MyObservable;
@@ -169,6 +172,10 @@ public class Zone extends MyObservable implements IZone, Observer, java.io.Seria
     @Override
     public final boolean contains(final Card c) {
         return this.cardList.contains(c);
+    }
+    
+    public final boolean contains(final Predicate<Card> condition) {
+        return Iterables.any(this.cardList, condition);
     }
 
     public final int getPosition(final Card c) {

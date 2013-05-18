@@ -54,14 +54,4 @@ public class MyRandom {
     public static Random getRandom() {
         return MyRandom.random;
     }
-
-    /**
-     * Sets the random.
-     * 
-     * @param random0
-     *            the random to set
-     */
-    public static void setRandom(final Random random0) {
-        MyRandom.random = random0;
-    }
 }
