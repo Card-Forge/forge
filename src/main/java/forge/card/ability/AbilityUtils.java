@@ -1040,11 +1040,13 @@ public class AbilityUtils {
             // every resolving spellAbility will end here
             if (usedStack) {
                 SpellAbility root = sa.getRootAbility();
+                // static abilities will get refreshed from SBE check.
                 game.getStack().finishResolving(root, false);
             }
             return;
         }
-        // check conditions
+
+        game.getAction().checkStaticAbilities(); // this will refresh continuous abilities for players and permanents.
         AbilityUtils.resolveApiAbility(abSub, usedStack, game);
     }
 
