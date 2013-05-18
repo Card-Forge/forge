@@ -123,10 +123,6 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
             this.setNotAllM12Empires(true);
         }
 
-        if (params.containsKey("ConditionCardsInHand")) {
-            this.setActivateCardsInHand(Integer.parseInt(params.get("ConditionCardsInHand")));
-        }
-
         if (params.containsKey("ConditionChosenColor")) {
             this.setColorToCheck(params.get("ConditionChosenColor"));
         }
