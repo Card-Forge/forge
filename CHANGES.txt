@@ -20,7 +20,7 @@ We have added a branch to our SVN for the new cards that are currently being scr
 New Cards
 ---------
 
-
+Sand Golem
 
 
 --------------------
@@ -41,6 +41,9 @@ Sentinel Sliver
 Staff of the Wild Magus
 Steelform Sliver
 Striking Sliver
+
+Shadowborn Apostle
+Shadowborn Demon
 
 
 ------------
