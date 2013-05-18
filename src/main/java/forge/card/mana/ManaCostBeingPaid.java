@@ -235,7 +235,7 @@ public class ManaCostBeingPaid {
      * @return a boolean.
      */
     public final String payMultipleMana(String mana) {
-        List<String> unused = new ArrayList<>(4);
+        List<String> unused = new ArrayList<String>(4);
         for (String manaPart : TextUtil.split(mana, ' ')) {
             if (StringUtils.isNumeric(manaPart)) {
                 for(int i = Integer.parseInt(manaPart); i > 0; i--) {

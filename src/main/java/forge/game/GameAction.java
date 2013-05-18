@@ -871,19 +871,11 @@ public class GameAction {
         final Comparator<StaticAbility> comp = new Comparator<StaticAbility>() {
             @Override
             public int compare(final StaticAbility a, final StaticAbility b) {
-                if (a.getLayer() > b.getLayer()) {
-                    return 1;
-                }
-                if (a.getLayer() < b.getLayer()) {
-                    return -1;
-                }
-                if (a.getHostCard().getTimestamp() > b.getHostCard().getTimestamp()) {
-                    return 1;
-                }
-                if (a.getHostCard().getTimestamp() < b.getHostCard().getTimestamp()) {
-                    return -1;
-                }
-                return 0;
+                int layerDelta = a.getLayer() - b.getLayer();
+                if( layerDelta != 0) return layerDelta;
+
+                long tsDelta = a.getHostCard().getTimestamp() - b.getHostCard().getTimestamp();
+                return tsDelta == 0 ? 0 : tsDelta > 0 ? 1 : -1;
             }
         };
         Collections.sort(staticAbilities, comp);

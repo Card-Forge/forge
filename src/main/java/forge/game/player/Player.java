@@ -1062,16 +1062,6 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     /**
-     * Sets the keywords.
-     * 
-     * @param keywords
-     *            the new keywords
-     */
-    public final void setKeywords(final ArrayList<String> keywords) {
-        this.keywords = keywords;
-    }
-
-    /**
      * Adds the keyword.
      * 
      * @param keyword
