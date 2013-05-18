@@ -23,6 +23,7 @@ import forge.card.spellability.SpellAbility;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
+import forge.util.TextUtil;
 
 /** 
  * TODO: Write javadoc for this type.
@@ -346,25 +347,25 @@ public class ComputerUtilCost {
         // Check for stuff like Nether Void
         int extraManaNeeded = 0;
         if (sa instanceof Spell) {
-            for (Player opp : player.getOpponents()) {
-                for (Card c : opp.getCardsIn(ZoneType.Battlefield)) {
-                    final String snem = c.getSVar("SpellsNeedExtraMana");
-                    if (!StringUtils.isBlank(snem)) {
-                        try {
-                            extraManaNeeded += Integer.parseInt(snem);
-                        } catch (final NumberFormatException e) {
-                            System.out.println("wrong SpellsNeedExtraMana SVar format on " + c);
-                        }
+            for (Card c : player.getGame().getCardsIn(ZoneType.Battlefield)) {
+                final String snem = c.getSVar("AI_SpellsNeedExtraMana");
+                if (!StringUtils.isBlank(snem)) {
+                    String[] parts = TextUtil.split(snem, ' ');
+                    boolean meetsRestriction = parts.length == 1 || player.isValid(parts[1], c.getController(), c);
+                    if(!meetsRestriction)
+                        continue;
+
+                    try {
+                        extraManaNeeded += Integer.parseInt(snem);
+                    } catch (final NumberFormatException e) {
+                        System.out.println("wrong SpellsNeedExtraMana SVar format on " + c);
                     }
                 }
             }
         }
-    
-        if (!ComputerUtilMana.payManaCost(sa, player, true, extraManaNeeded, true)) {
-            return false;
-        }
-    
-        return CostPayment.canPayAdditionalCosts(sa.getPayCosts(), sa);
+
+        return ComputerUtilMana.canPayManaCost(sa, player, extraManaNeeded) 
+            && CostPayment.canPayAdditionalCosts(sa.getPayCosts(), sa);
     } // canPayCost()
 
     public static boolean willPayUnlessCost(SpellAbility sa, Player payer, SpellAbility ability, boolean alreadyPaid, List<Player> payers) {

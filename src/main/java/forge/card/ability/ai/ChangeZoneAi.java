@@ -489,7 +489,6 @@ public class ChangeZoneAi extends SpellAbilityAi {
      * @return Card
      */
     private static Card chooseCreature(final Player ai, List<Card> list) {
-        Card card = null;
         Combat combat = new Combat();
         combat.initiatePossibleDefenders(ai);
         List<Card> attackers = ai.getOpponent().getCreaturesInPlay();
@@ -504,16 +503,14 @@ public class ChangeZoneAi extends SpellAbilityAi {
             for (Card c : list) {
                 SpellAbility spell = c.getFirstSpellAbility();
                 spell.setActivatingPlayer(ai);
-               if (ComputerUtilMana.payManaCost(spell, ai, true, 0, false)) {
-                   card = c;
-                   break;
-               }
+                if (ComputerUtilMana.hasEnoughManaSourcesToCast(spell, ai))
+                   return c;
             }
-        } else {
-            // not urgent, get the largest creature possible
-            card = ComputerUtilCard.getBestCreatureAI(list);
+            return null;
         }
-        return card;
+
+        // not urgent, get the largest creature possible
+        return ComputerUtilCard.getBestCreatureAI(list);
     }
 
     // *************************************************************************************
@@ -865,7 +862,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                             System.out.println("5 Life or less, trying to find something castable.");
                             CardLists.sortByCmcDesc(nonLands);
                             for (Card potentialCard : nonLands) {
-                               if (ComputerUtilMana.payManaCost(potentialCard.getFirstSpellAbility(), ai, true, 0, false)) {
+                               if (ComputerUtilMana.hasEnoughManaSourcesToCast(potentialCard.getFirstSpellAbility(), ai)) {
                                    choice = potentialCard;
                                    break;
                                }
@@ -976,7 +973,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                             System.out.println("5 Life or less, trying to find something castable.");
                             CardLists.sortByCmcDesc(nonLands);
                             for (Card potentialCard : nonLands) {
-                               if (ComputerUtilMana.payManaCost(potentialCard.getFirstSpellAbility(), ai, true, 0, false)) {
+                               if (ComputerUtilMana.hasEnoughManaSourcesToCast(potentialCard.getFirstSpellAbility(), ai)) {
                                    choice = potentialCard;
                                    break;
                                }
@@ -1210,7 +1207,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                         for (Card cardInHand : hand) {
                             final SpellAbility spell = cardInHand.getFirstSpellAbility();
                             spell.setActivatingPlayer(ai);
-                            canCastSomething |= ComputerUtilMana.payManaCost(spell, ai, true, 0, false);
+                            canCastSomething |= ComputerUtilMana.hasEnoughManaSourcesToCast(spell, ai);
                         }
                         if (!canCastSomething) {
                             System.out.println("Pulling a land as there are none in hand, less than 4 on the board, and nothing in hand is castable.");
@@ -1229,7 +1226,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                             System.out.println("5 Life or less, trying to find something castable.");
                             CardLists.sortByCmcDesc(fetchList);
                             for (Card potentialCard : fetchList) {
-                               if (ComputerUtilMana.payManaCost(potentialCard.getFirstSpellAbility(), ai, true, 0, false)) {
+                               if (ComputerUtilMana.hasEnoughManaSourcesToCast(potentialCard.getFirstSpellAbility(), ai)) {
                                    c = potentialCard;
                                    break;
                                }

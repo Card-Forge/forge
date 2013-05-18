@@ -8,8 +8,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import org.apache.commons.lang3.StringUtils;
-
 import com.google.common.base.Predicate;
 import forge.Card;
 import forge.CardLists;
@@ -44,6 +42,19 @@ import forge.util.maps.TreeMapOfLists;
  */
 public class ComputerUtilMana {
 
+    public static boolean canPayManaCost(final SpellAbility sa, final Player ai, final int extraMana) {
+        return payManaCost(sa, ai, true, extraMana, true);
+    }
+
+    // Does not check if mana sources can be used right now, just checks for potential chance.
+    public static boolean hasEnoughManaSourcesToCast(final SpellAbility sa, final Player ai) {
+        return payManaCost(sa, ai, true, 0, false);
+    }    
+    
+    public static boolean payManaCost(final Player ai, final SpellAbility sa) {
+        return payManaCost(sa, ai, false, 0, true);
+    }
+
     /**
      * <p>
      * payManaCost.
@@ -62,7 +73,7 @@ public class ComputerUtilMana {
      * @return a boolean.
      * @since 1.0.15
      */
-    public static boolean payManaCost(final SpellAbility sa, final Player ai, final boolean test, final int extraMana, boolean checkPlayable) {
+    private static boolean payManaCost(final SpellAbility sa, final Player ai, final boolean test, final int extraMana, boolean checkPlayable) {
         ManaCostBeingPaid cost = ComputerUtilMana.calculateManaCost(sa, test, extraMana);
         
         final Card card = sa.getSourceCard();
@@ -364,18 +375,6 @@ public class ComputerUtilMana {
     }
     
     /**
-     * <p>
-     * payManaCost.
-     * </p>
-     * 
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     */
-    public static boolean payManaCost(final Player ai, final SpellAbility sa) {
-        return payManaCost(sa, ai, false, 0, true);
-    }
-
-    /**
      * Find all mana sources.
      * @param manaAbilityMap
      * @param partSources
@@ -634,17 +633,11 @@ public class ComputerUtilMana {
      * @since 1.0.15
      */
     public static int determineLeftoverMana(final SpellAbility sa, final Player player) {
-    
-        int xMana = 0;
-    
-        for (int i = 1; i < 99; i++) {
-            if (!payManaCost(sa, player, true, i, true)) {
-                break;
-            }
-            xMana = i;
-        }
-    
-        return xMana;
+        for (int i = 1; i < 100; i++)
+            if (!canPayManaCost(sa, player, i))
+                return i - 1;
+
+        return 99;
     }
 
     // Returns basic mana abilities plus "reflected mana" abilities
@@ -655,7 +648,7 @@ public class ComputerUtilMana {
      * 
      * @return a {@link java.util.ArrayList} object.
      */
-    public static final ArrayList<SpellAbility> getAIPlayableMana(Card c) {
+    private static final ArrayList<SpellAbility> getAIPlayableMana(Card c) {
         final ArrayList<SpellAbility> res = new ArrayList<SpellAbility>();
         for (final SpellAbility a : c.getManaAbility()) {
     
