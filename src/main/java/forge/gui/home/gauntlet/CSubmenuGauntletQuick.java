@@ -170,7 +170,7 @@ public enum CSubmenuGauntletQuick implements ICDoc {
             eventNames.add(e.getEventDeck().getName());
         }
 
-        for (final QuestEvent e : quest.getChallengesManager().getAllChallenges()) {
+        for (final QuestEvent e : quest.getChallenges()) {
             eventNames.add(e.getEventDeck().getName());
         }
 
@@ -279,18 +279,14 @@ public enum CSubmenuGauntletQuick implements ICDoc {
             lstGauntletDecks.add(tempDeck);
         }
 
-        FModel.SINGLETON_INSTANCE.getGauntletData()
-            .setDecks(lstGauntletDecks);
-        FModel.SINGLETON_INSTANCE.getGauntletData()
-            .setEventNames(lstEventNames);
+        final GauntletData gd = FModel.SINGLETON_INSTANCE.getGauntletData();
+        gd.setDecks(lstGauntletDecks);
+        gd.setEventNames(lstEventNames);
 
         // Reset all variable fields to 0, stamps and saves automatically.
-        FModel.SINGLETON_INSTANCE.getGauntletData().reset();
+        gd.reset();
+        gd.setUserDeck(userDeck);
 
-        FModel.SINGLETON_INSTANCE.getGauntletData().setUserDeck(userDeck);
-
-
-        final GauntletData gd = FModel.SINGLETON_INSTANCE.getGauntletData();
         final Deck aiDeck = gd.getDecks().get(gd.getCompleted());
 
         MatchStartHelper starter = new MatchStartHelper();

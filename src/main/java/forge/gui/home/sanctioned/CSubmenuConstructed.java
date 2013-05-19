@@ -9,10 +9,10 @@ import forge.Command;
 import forge.FThreads;
 import forge.Singletons;
 import forge.control.Lobby;
-import forge.deck.Deck;
 import forge.game.GameType;
 import forge.game.MatchController;
 import forge.game.MatchStartHelper;
+import forge.game.PlayerStartConditions;
 import forge.gui.SOverlayUtils;
 import forge.gui.framework.ICDoc;
 import forge.properties.ForgePreferences;
@@ -96,15 +96,15 @@ public enum CSubmenuConstructed implements ICDoc {
      * @param gameType
      */
     private void startGame(final GameType gameType) {
-        Deck humanDeck = VSubmenuConstructed.SINGLETON_INSTANCE.getDcHuman().getDeck();
-        String humanDeckErrorMessage = gameType.getDecksFormat().getDeckConformanceProblem(humanDeck);
+        PlayerStartConditions humanPsc = VSubmenuConstructed.SINGLETON_INSTANCE.getDcHuman().getDeck();
+        String humanDeckErrorMessage = gameType.getDecksFormat().getDeckConformanceProblem(humanPsc.getOriginalDeck());
         if (null != humanDeckErrorMessage) {
             JOptionPane.showMessageDialog(null, "Your deck " + humanDeckErrorMessage, "Invalid deck", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
-        Deck aiDeck = VSubmenuConstructed.SINGLETON_INSTANCE.getDcAi().getDeck();
-        String aiDeckErrorMessage = gameType.getDecksFormat().getDeckConformanceProblem(aiDeck);
+        PlayerStartConditions aiDeck = VSubmenuConstructed.SINGLETON_INSTANCE.getDcAi().getDeck();
+        String aiDeckErrorMessage = gameType.getDecksFormat().getDeckConformanceProblem(aiDeck.getOriginalDeck());
         if (null != aiDeckErrorMessage) {
             JOptionPane.showMessageDialog(null, "AI deck " + aiDeckErrorMessage, "Invalid deck", JOptionPane.ERROR_MESSAGE);
             return;
@@ -115,7 +115,7 @@ public enum CSubmenuConstructed implements ICDoc {
 
         final MatchStartHelper starter = new MatchStartHelper();
         Lobby lobby = Singletons.getControl().getLobby();
-        starter.addPlayer(lobby.getGuiPlayer(), humanDeck);
+        starter.addPlayer(lobby.getGuiPlayer(), humanPsc);
         starter.addPlayer(lobby.getAiPlayer(), aiDeck);
         final MatchController mc = new MatchController(gameType, starter.getPlayerMap());
         

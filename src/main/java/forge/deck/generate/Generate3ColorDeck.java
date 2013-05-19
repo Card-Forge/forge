@@ -29,6 +29,7 @@ import forge.deck.generate.GenerateDeckUtil.FilterCMC;
 import forge.game.player.PlayerType;
 import forge.item.CardPrinted;
 import forge.item.ItemPoolView;
+import forge.util.MyRandom;
 
 /**
  * <p>
@@ -59,13 +60,40 @@ public class Generate3ColorDeck extends GenerateColoredDeckBase {
      *            a {@link java.lang.String} object.
      */
     public Generate3ColorDeck(final String clr1, final String clr2, final String clr3) {
-        if (clr1.equals("AI")) {
-            int color1 = r.nextInt(5);
-            int color2 = (color1 + 1 + r.nextInt(4)) % 5;
-            colors = ColorSet.fromMask(MagicColor.WHITE << color1 | MagicColor.WHITE << color2).inverse();
-        } else {
-            colors = ColorSet.fromNames(clr1, clr2, clr3);
+        int c1 = MagicColor.fromName(clr1);
+        int c2 = MagicColor.fromName(clr2);
+        int c3 = MagicColor.fromName(clr3);
+        
+        int rc = 0;
+        int combo = c1 | c2 | c3;
+
+        ColorSet param = ColorSet.fromMask(combo);
+        switch(param.countColors()) {
+            case 3:
+                colors = param;
+                return;
+
+            case 0:
+                int color1 = r.nextInt(5);
+                int color2 = (color1 + 1 + r.nextInt(4)) % 5;
+                colors = ColorSet.fromMask(MagicColor.WHITE << color1 | MagicColor.WHITE << color2).inverse();
+                return;
+
+            case 1:
+                do {
+                    rc = MagicColor.WHITE << MyRandom.getRandom().nextInt(5); 
+                } while ( rc == combo );
+                combo |= rc;
+                // fall-through
+
+            case 2:
+                do {
+                    rc = MagicColor.WHITE << MyRandom.getRandom().nextInt(5); 
+                } while ( (rc & combo) != 0 );
+                combo |= rc;
+                break;
         }
+        colors = ColorSet.fromMask(combo);
     }
 
     /**

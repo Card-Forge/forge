@@ -46,7 +46,7 @@ import forge.util.IItemReader;
 public abstract class StorageReaderFolder<T> implements IItemReader<T> {
 
     private final File directory;
-    private final Function<T, String> keySelector;
+    private final Function<? super T, String> keySelector;
 
     /**
      * Gets the directory.
@@ -62,7 +62,7 @@ public abstract class StorageReaderFolder<T> implements IItemReader<T> {
      *
      * @param deckDir0 the deck dir0
      */
-    public StorageReaderFolder(final File deckDir0, Function<T, String> keySelector0) {
+    public StorageReaderFolder(final File deckDir0, Function<? super T, String> keySelector0) {
 
         this.directory = deckDir0;
         keySelector = keySelector0;

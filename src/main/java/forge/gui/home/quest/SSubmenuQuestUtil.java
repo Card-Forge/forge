@@ -60,7 +60,7 @@ public class SSubmenuQuestUtil {
         final int challengesPlayed = qData.getAchievements().getChallengesPlayed();
 
         final int wins = qData.getAchievements().getWin();
-        final int turnsToUnlock = Singletons.getModel().getQuest().getChallengesManager().getTurnsToUnlockChallenge();
+        final int turnsToUnlock = Singletons.getModel().getQuest().getTurnsToUnlockChallenge();
         final int delta;
 
         // First challenge unlocks after minimum wins reached.
@@ -341,7 +341,6 @@ public class SSubmenuQuestUtil {
             // (OTOH, you can 'swap' opponents even more easily  by simply selecting a different quest data file and
             // then re-selecting your current quest data file.)
             qCtrl.getDuelsManager().randomizeOpponents();
-            qCtrl.getChallengesManager().randomizeOpponents();
             qCtrl.getCards().clearShopList();
             qCtrl.save();
         }
@@ -379,8 +378,6 @@ public class SSubmenuQuestUtil {
         final SwingWorker<Object, Void> worker = new SwingWorker<Object, Void>() {
             @Override
             public Object doInBackground() {
-
-                qData.getChallengesManager().randomizeOpponents();
                 qData.getDuelsManager().randomizeOpponents();
                 qData.setCurrentEvent(event);
                 qData.save();
@@ -394,8 +391,6 @@ public class SSubmenuQuestUtil {
             }
         };
         worker.execute();
-        PlayerStartConditions humanStart = new PlayerStartConditions(SSubmenuQuestUtil.getCurrentDeck());
-        PlayerStartConditions aiStart = new PlayerStartConditions(event.getEventDeck());
         
         int extraLifeHuman = 0;
         int lifeAI = 20;
@@ -406,10 +401,13 @@ public class SSubmenuQuestUtil {
                 extraLifeHuman = 3;
             }
         }
-        humanStart.setStartingLife(qData.getAssets().getLife(qData.getMode()) + extraLifeHuman);
-        aiStart.setStartingLife(lifeAI);
 
+        PlayerStartConditions humanStart = new PlayerStartConditions(SSubmenuQuestUtil.getCurrentDeck());
+        humanStart.setStartingLife(qData.getAssets().getLife(qData.getMode()) + extraLifeHuman);
         humanStart.setCardsOnBattlefield(QuestUtil.getHumanStartingCards(qData, event));
+
+        PlayerStartConditions aiStart = new PlayerStartConditions(event.getEventDeck());
+        aiStart.setStartingLife(lifeAI);
         aiStart.setCardsOnBattlefield(QuestUtil.getComputerStartingCards(event));
         
         MatchStartHelper msh = new MatchStartHelper();

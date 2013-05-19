@@ -40,7 +40,6 @@ import forge.item.PreconDeck;
 import forge.quest.QuestController;
 import forge.quest.QuestWorld;
 import forge.quest.StartingPoolType;
-import forge.util.storage.IStorage;
 import forge.util.storage.IStorageView;
 
 /**
@@ -118,6 +117,7 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
 
     /* Listeners */
     private final ActionListener alStartingPool = new ActionListener() {
+        @SuppressWarnings("incomplete-switch")
         @Override
         public void actionPerformed(ActionEvent e) {
             StartingPoolType newVal = getStartingPoolType();

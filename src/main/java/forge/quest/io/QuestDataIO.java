@@ -121,7 +121,6 @@ public class QuestDataIO {
             QuestData data = null;
 
             final GZIPInputStream zin = new GZIPInputStream(new FileInputStream(xmlSaveFile));
-
             final StringBuilder xml = new StringBuilder();
             final char[] buf = new char[1024];
             final InputStreamReader reader = new InputStreamReader(zin);
@@ -134,12 +133,13 @@ public class QuestDataIO {
             }
 
             zin.close();
-
-            data = (QuestData) QuestDataIO.getSerializer(true).fromXML(xml.toString());
+            
+            String bigXML = xml.toString();
+            data = (QuestData) QuestDataIO.getSerializer(true).fromXML(bigXML);
 
             if (data.getVersionNumber() != QuestData.CURRENT_VERSION_NUMBER) {
                 try {
-                    QuestDataIO.updateSaveFile(data, xml.toString(), xmlSaveFile.getName().replace(".dat", ""));
+                    QuestDataIO.updateSaveFile(data, bigXML, xmlSaveFile.getName().replace(".dat", ""));
                 } catch (final Exception e) {
                     forge.error.BugReporter.reportException(e);
                 }
@@ -204,9 +204,10 @@ public class QuestDataIO {
         }
         
         final QuestAssets qS = newData.getAssets();
+        final QuestAchievements qA = newData.getAchievements();
 
         switch (saveVersion) {
-        // There should be a fall-through b/w the cases so that each
+        // There should be a fall-through between the cases so that each
         // version's changes get applied progressively
         case 0:
             // First beta release with new file format,
@@ -234,7 +235,6 @@ public class QuestDataIO {
                 QuestDataIO.setFinalField(QuestData.class, "name", newData, filename);
             }
 
-            final QuestAchievements qA = newData.getAchievements();
             QuestDataIO.setFinalField(QuestAchievements.class, "win", qA, Integer.parseInt(document.getElementsByTagName("win").item(0).getTextContent()));
             QuestDataIO.setFinalField(QuestAchievements.class, "lost", qA, Integer.parseInt(document.getElementsByTagName("lost").item(0).getTextContent()));
 
@@ -318,6 +318,19 @@ public class QuestDataIO {
             }
 
             // pet manager will be re-engineered here
+
+        case 6:
+            // have to convert completed challenges list members to strings.
+            for(int i = qA.getLockedChallenges().size()-1; i >= 0; i-- ) {
+                Object lc = qA.getLockedChallenges().get(i);
+                if (!(lc instanceof String))
+                    qA.getLockedChallenges().set(i, lc.toString());
+            }
+            for(int i = qA.getCurrentChallenges().size()-1; i >= 0; i-- ) {
+                Object lc = qA.getCurrentChallenges().get(i);
+                if (!(lc instanceof String))
+                    qA.getCurrentChallenges().set(i, lc.toString());
+            }
 
         default:
             break;

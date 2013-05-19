@@ -17,6 +17,7 @@
  */
 package forge.deck.generate;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.apache.commons.lang3.tuple.ImmutablePair;
@@ -68,13 +69,20 @@ public class Generate2ColorDeck extends GenerateColoredDeckBase {
      *            a {@link java.lang.String} object.
      */
     public Generate2ColorDeck(final String clr1, final String clr2) {
-
-        if (clr1.equals("AI")) {
+        int c1 = MagicColor.fromName(clr1);
+        int c2 = MagicColor.fromName(clr2);
+        
+        if( c1 == 0 && c2 == 0) {
             int color1 = r.nextInt(5);
             int color2 = (color1 + 1 + r.nextInt(4)) % 5;
             colors = ColorSet.fromMask(MagicColor.WHITE << color1 | MagicColor.WHITE << color2);
+        } else if ( c1 == 0 || c2 == 0 ) {
+            byte knownColor = (byte) (c1 | c2);
+            int color1 = Arrays.binarySearch(MagicColor.WUBRG, knownColor);
+            int color2 = (color1 + 1 + r.nextInt(4)) % 5;
+            colors = ColorSet.fromMask(MagicColor.WHITE << color1 | MagicColor.WHITE << color2);
         } else {
-            colors = ColorSet.fromNames(clr1, clr2);
+            colors = ColorSet.fromMask(c1 | c2);
         }
     }
 

@@ -32,4 +32,15 @@ public class BinaryUtil {
         }
         return c;
     } // bit count
+    
+    public static int getLeastImportantBitIndex(final byte num) {
+        if( num == 0 ) return -1;
+        byte mask = 1;
+        for(int i = 0; mask != 0; i++) {
+            if( (mask & num) != 0)
+                return i;
+            mask = (byte) (mask << 1);
+        }
+        return -1;
+    }
 }

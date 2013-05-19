@@ -25,9 +25,12 @@ import forge.Singletons;
 import forge.deck.Deck;
 import forge.deck.DeckgenUtil;
 import forge.deck.generate.GenerateThemeDeck;
+import forge.game.PlayerStartConditions;
 import forge.game.player.PlayerType;
 import forge.quest.QuestController;
 import forge.quest.QuestEvent;
+import forge.quest.QuestEventChallenge;
+import forge.quest.QuestUtil;
 import forge.util.storage.IStorage;
 
 @SuppressWarnings("serial")
@@ -176,11 +179,11 @@ public class FDeckChooser extends JPanel {
 
         QuestController quest = Singletons.getModel().getQuest();
         for (QuestEvent e : quest.getDuelsManager().getAllDuels()) {
-            eventNames.add(e.getEventDeck().getName());
+            eventNames.add(e.getName());
         }
 
-        for (QuestEvent e : quest.getChallengesManager().getAllChallenges()) {
-            eventNames.add(e.getEventDeck().getName());
+        for (QuestEvent e : quest.getChallenges()) {
+            eventNames.add(e.getTitle());
         }
 
         lst.setListData(eventNames.toArray(ArrayUtils.EMPTY_STRING_ARRAY));
@@ -196,24 +199,35 @@ public class FDeckChooser extends JPanel {
     }
 
     /** Generates deck from current list selection(s). */
-    public Deck getDeck() {
+    public PlayerStartConditions getDeck() {
+
+        
         JList lst0 = getLstDecks();
         final String[] selection = Arrays.copyOf(lst0.getSelectedValues(), lst0.getSelectedValues().length, String[].class);
 
         if (selection.length == 0) { return null; }
 
-        if (lst0.getName().equals(DeckgenUtil.DeckTypes.COLORS.toString()) && DeckgenUtil.colorCheck(selection)) {
-            return DeckgenUtil.buildColorDeck(selection, getPlayerType());
-        } else if (lst0.getName().equals(DeckgenUtil.DeckTypes.THEMES.toString())) {
-            return DeckgenUtil.buildThemeDeck(selection);
-        } else if (lst0.getName().equals(DeckgenUtil.DeckTypes.QUESTEVENTS.toString())) {
-            return DeckgenUtil.buildQuestDeck(selection);
-        } else if (lst0.getName().equals(DeckgenUtil.DeckTypes.CUSTOM.toString())) {
-            return DeckgenUtil.getConstructedDeck(selection);
+        // Special branch for quest events
+        if (lst0.getName().equals(DeckgenUtil.DeckTypes.QUESTEVENTS.toString())) {
+            QuestEvent event = DeckgenUtil.getQuestEvent(selection[0]); 
+            PlayerStartConditions result = new PlayerStartConditions(event.getEventDeck());
+            if( event instanceof QuestEventChallenge ) {
+                result.setStartingLife(((QuestEventChallenge) event).getAiLife());
+            }
+            result.setCardsOnBattlefield(QuestUtil.getComputerStartingCards(event));
+            return result;
         }
 
-        // Failure, for some reason
-        return null;
+        Deck deck = null;
+        if (lst0.getName().equals(DeckgenUtil.DeckTypes.COLORS.toString()) && DeckgenUtil.colorCheck(selection)) {
+            deck = DeckgenUtil.buildColorDeck(selection, getPlayerType());
+        } else if (lst0.getName().equals(DeckgenUtil.DeckTypes.THEMES.toString())) {
+            deck = DeckgenUtil.buildThemeDeck(selection);
+        } else if (lst0.getName().equals(DeckgenUtil.DeckTypes.CUSTOM.toString())) {
+            deck = DeckgenUtil.getConstructedDeck(selection);
+        }
+
+        return new PlayerStartConditions(deck);
     }
 
     private PlayerType getPlayerType() {

@@ -22,6 +22,9 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
+
 import forge.deck.Deck;
 import forge.util.storage.IStorage;
 
@@ -123,6 +126,14 @@ public class QuestDeckMap implements IStorage<Deck> {
     @Override
     public int size() {
         return map.size();
+    }
+
+    /* (non-Javadoc)
+     * @see forge.util.storage.IStorageView#find(com.google.common.base.Predicate)
+     */
+    @Override
+    public Deck find(Predicate<Deck> condition) {
+        return Iterables.tryFind(map.values(), condition).orNull();
     }
 
 }

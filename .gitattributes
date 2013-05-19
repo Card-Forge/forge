@@ -14540,7 +14540,7 @@ src/main/java/forge/quest/QuestEvent.java -text
 src/main/java/forge/quest/QuestEventChallenge.java svneol=native#text/plain
 src/main/java/forge/quest/QuestEventDifficulty.java -text
 src/main/java/forge/quest/QuestEventDuel.java svneol=native#text/plain
-src/main/java/forge/quest/QuestEventManager.java svneol=native#text/plain
+src/main/java/forge/quest/QuestEventDuelManager.java -text
 src/main/java/forge/quest/QuestMode.java -text
 src/main/java/forge/quest/QuestRewardCard.java -text
 src/main/java/forge/quest/QuestRewardCardDuplicate.java -text
@@ -14572,7 +14572,9 @@ src/main/java/forge/quest/data/QuestItemCondition.java -text
 src/main/java/forge/quest/data/QuestPreferences.java svneol=native#text/plain
 src/main/java/forge/quest/data/package-info.java svneol=native#text/plain
 src/main/java/forge/quest/io/PreconReader.java -text
+src/main/java/forge/quest/io/QuestChallengeReader.java -text
 src/main/java/forge/quest/io/QuestDataIO.java svneol=native#text/plain
+src/main/java/forge/quest/io/QuestDuelReader.java -text
 src/main/java/forge/quest/io/ReadPriceList.java svneol=native#text/plain
 src/main/java/forge/quest/io/package-info.java svneol=native#text/plain
 src/main/java/forge/quest/package-info.java svneol=native#text/plain

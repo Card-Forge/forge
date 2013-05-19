@@ -18,6 +18,9 @@
 package forge.quest;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
@@ -40,6 +43,7 @@ import forge.quest.data.QuestAssets;
 import forge.quest.data.QuestData;
 import forge.quest.data.QuestPreferences.DifficultyPrefs;
 import forge.quest.io.PreconReader;
+import forge.quest.io.QuestChallengeReader;
 import forge.util.storage.IStorage;
 import forge.util.storage.IStorageView;
 import forge.util.storage.StorageView;
@@ -65,8 +69,8 @@ public class QuestController {
     /** The decks. */
     private transient IStorage<Deck> decks;
 
-    private QuestEventManager duelManager = null;
-    private QuestEventManager challengesManager = null;
+    private QuestEventDuelManager duelManager = null;
+    private IStorageView<QuestEventChallenge> allChallenges = null;
 
     private QuestBazaarManager bazaar = null;
 
@@ -193,7 +197,6 @@ public class QuestController {
 
         this.resetDuelsManager();
         this.resetChallengesManager();
-        this.getChallengesManager().randomizeOpponents();
         this.getDuelsManager().randomizeOpponents();
     }
 
@@ -352,7 +355,7 @@ public class QuestController {
      *
      * @return the event manager
      */
-    public QuestEventManager getDuelsManager() {
+    public QuestEventDuelManager getDuelsManager() {
         if (this.duelManager == null) {
             resetDuelsManager();
         }
@@ -364,11 +367,11 @@ public class QuestController {
      * TODO: Write javadoc for this method.
      * @return QuestEventManager
      */
-    public QuestEventManager getChallengesManager() {
-        if (this.challengesManager == null) {
+    public IStorageView<QuestEventChallenge> getChallenges() {
+        if (this.allChallenges == null) {
             resetChallengesManager();
         }
-        return this.challengesManager;
+        return this.allChallenges;
     }
 
     /**
@@ -376,17 +379,9 @@ public class QuestController {
      * Reset the duels manager.
      */
     public void resetDuelsManager() {
-        if (this.model == null || this.model.getWorldId() == null) {
-            this.duelManager = new QuestEventManager(new File(NewConstants.DEFAULT_DUELS_DIR));
-        } else {
-            QuestWorld world = Singletons.getModel().getWorlds().get(this.model.getWorldId());
-
-            if (world == null || world.getDuelsDir() == null) {
-                this.duelManager = new QuestEventManager(new File(NewConstants.DEFAULT_DUELS_DIR));
-            } else {
-                this.duelManager = new QuestEventManager(new File("res/quest/world/" + world.getDuelsDir()));
-            }
-        }
+        QuestWorld world = getWorld();
+        String path = world == null || world.getDuelsDir() == null ? NewConstants.DEFAULT_DUELS_DIR : "res/quest/world/" + world.getDuelsDir();
+        this.duelManager = new QuestEventDuelManager(new File(path));
     }
 
     /**
@@ -394,18 +389,9 @@ public class QuestController {
      * Reset the challenges manager.
      */
     public void resetChallengesManager() {
-        if (this.model == null || this.model.getWorldId() == null) {
-            this.challengesManager = new QuestEventManager(new File(NewConstants.DEFAULT_CHALLENGES_DIR));
-        }
-        else {
-            QuestWorld world = Singletons.getModel().getWorlds().get(this.model.getWorldId());
-
-            if (world == null || world.getChallengesDir() == null) {
-                this.challengesManager = new QuestEventManager(new File(NewConstants.DEFAULT_CHALLENGES_DIR));
-            } else {
-                this.challengesManager = new QuestEventManager(new File("res/quest/world/" + world.getChallengesDir()));
-            }
-        }
+        QuestWorld world = getWorld();
+        String path = world == null || world.getChallengesDir() == null ? NewConstants.DEFAULT_CHALLENGES_DIR : "res/quest/world/" + world.getChallengesDir();
+        this.allChallenges = new StorageView<QuestEventChallenge>(new QuestChallengeReader(new File(path)));
     }
 
     /**
@@ -450,5 +436,51 @@ public class QuestController {
             }
         }
     }
+    
+    
+    public int getTurnsToUnlockChallenge() {
+        if (Singletons.getModel().getQuest().getAssets().hasItem(QuestItemType.ZEPPELIN)) {
+            return 8;
+        }
+        // User may have MAP and ZEPPELIN, so MAP must be tested second.
+        else if (Singletons.getModel().getQuest().getAssets().hasItem(QuestItemType.MAP)) {
+            return 9;
+        }
 
+        return 10;
+    }
+
+    
+    public final void regenerateChallenges() {
+        final QuestAchievements achievements = model.getAchievements();
+        final List<String> unlockedChallengeIds = new ArrayList<String>();
+        final List<String> availableChallengeIds = achievements.getCurrentChallenges();
+    
+        int maxChallenges = achievements.getWin() / getTurnsToUnlockChallenge() - achievements.getChallengesPlayed();
+        if (maxChallenges > 5) {
+            maxChallenges = 5;
+        }
+    
+        // Generate IDs as needed.
+        if (achievements.getCurrentChallenges().size() < maxChallenges) {
+            for (final QuestEventChallenge qc : allChallenges) {
+                if( qc.getWinsReqd() > achievements.getWin()) continue;
+                if( !qc.isRepeatable() && achievements.getLockedChallenges().contains(qc.getId())) continue;
+                if (!availableChallengeIds.contains(qc.getId())) {
+                    unlockedChallengeIds.add(qc.getId());
+                }
+            }
+    
+            Collections.shuffle(unlockedChallengeIds);
+    
+            maxChallenges = Math.min(maxChallenges, unlockedChallengeIds.size());
+    
+            for (int i = availableChallengeIds.size(); i < maxChallenges; i++) {
+                availableChallengeIds.add(unlockedChallengeIds.get(i));
+            }
+        }
+
+        achievements.setCurrentChallenges(availableChallengeIds);
+        save();
+    }
 }

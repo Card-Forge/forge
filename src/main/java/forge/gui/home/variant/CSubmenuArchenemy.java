@@ -20,6 +20,7 @@ import forge.deck.DeckgenUtil;
 import forge.game.GameType;
 import forge.game.MatchController;
 import forge.game.MatchStartHelper;
+import forge.game.PlayerStartConditions;
 import forge.game.player.LobbyPlayer;
 import forge.gui.GuiDialog;
 import forge.gui.SOverlayUtils;
@@ -162,14 +163,14 @@ public enum CSubmenuArchenemy implements ICDoc {
 
         List<Deck> playerDecks = new ArrayList<Deck>();
         for (int i = 0; i < view.getNumPlayers(); i++) {
-            Deck d = view.getDeckChoosers().get(i).getDeck();
+            PlayerStartConditions d = view.getDeckChoosers().get(i).getDeck();
 
             if (d == null) {
                 //ERROR!
                 GuiDialog.message("No deck selected for player " + (i + 1));
                 return;
             }
-            playerDecks.add(d);
+            playerDecks.add(d.getOriginalDeck());
         }
 
         List<CardPrinted> schemes = null;

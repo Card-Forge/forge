@@ -30,6 +30,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
+import org.apache.commons.lang.StringUtils;
+
 import forge.Card;
 import forge.Singletons;
 import forge.card.BoosterTemplate;
@@ -63,6 +65,7 @@ import forge.quest.IQuestRewardCard;
 import forge.quest.QuestController;
 import forge.quest.QuestEvent;
 import forge.quest.QuestEventChallenge;
+import forge.quest.QuestEventDifficulty;
 import forge.quest.bazaar.QuestItemType;
 import forge.quest.data.QuestPreferences;
 import forge.quest.data.QuestPreferences.DifficultyPrefs;
@@ -185,7 +188,7 @@ public class QuestWinLose extends ControlWinLose {
             else {
                 awardSpecialReward("Special bonus reward:"); // If any
                 // Random rare for winning against a very hard deck
-                if (qEvent.getDifficulty().toLowerCase().equals("very hard")) {
+                if (qEvent.getDifficulty() == QuestEventDifficulty.EXPERT) {
                     this.awardRandomRare("You've won a random rare for winning against a very hard deck.");
                 }
             }
@@ -279,18 +282,9 @@ public class QuestWinLose extends ControlWinLose {
         }
 
         if (qEvent instanceof QuestEventChallenge) {
-            final int id = ((QuestEventChallenge) qEvent).getId();
-            final int size = qData.getAchievements().getCurrentChallenges().size();
-            for (int i = 0; i < size; i++) {
-                if (qData.getAchievements().getCurrentChallenges().get(i) == id) {
-                    qData.getAchievements().getCurrentChallenges().remove(i);
-                    break;
-                }
-            }
-
-            if (!((QuestEventChallenge) qEvent).isRepeatable()) {
-                qData.getAchievements().addLockedChallenge(((QuestEventChallenge) qEvent).getId());
-            }
+            final String id = ((QuestEventChallenge) qEvent).getId();
+            qData.getAchievements().getCurrentChallenges().remove(id);
+            qData.getAchievements().addLockedChallenge(id);
 
             // Increment challenge counter to limit challenges available
             qData.getAchievements().addChallengesPlayed();
@@ -331,23 +325,20 @@ public class QuestWinLose extends ControlWinLose {
         final int base = Singletons.getModel().getQuestPreferences().getPrefInt(QPref.REWARDS_BASE);
         double multiplier = 1;
 
-        String diff = qEvent.getDifficulty();
-        diff = diff.substring(0, 1).toUpperCase() + diff.substring(1);
 
-        if (diff.equalsIgnoreCase("medium")) {
-            multiplier = 1.5;
-        } else if (diff.equalsIgnoreCase("hard")) {
-            multiplier = 2;
-        } else if (diff.equalsIgnoreCase("very hard")) {
-            multiplier = 2.5;
-        } else if (diff.equalsIgnoreCase("expert")) {
-            multiplier = 3;
+        switch(qEvent.getDifficulty()) {
+            case EASY: multiplier = 1; break;
+            case MEDIUM: multiplier = 1.5; break;
+            case HARD: multiplier = 2; break;
+            case EXPERT: multiplier = 3; break;
         }
 
         credBase += (int) ((base * multiplier) + (Double.parseDouble(Singletons.getModel().getQuestPreferences()
                 .getPref(QPref.REWARDS_WINS_MULTIPLIER)) * qData.getAchievements().getWin()));
 
-        sb.append(diff + " opponent: " + credBase + " credits.<br>");
+        sb.append(StringUtils.capitalize(qEvent.getDifficulty().getTitle()));
+        sb.append(" opponent: ").append(credBase).append(" credits.<br>");
+        
         // Gameplay bonuses (for each game win)
         boolean hasNeverLost = true;
 

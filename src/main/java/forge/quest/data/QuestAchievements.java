@@ -15,10 +15,9 @@ public class QuestAchievements {
     // Challenge history
     /** The challenges played. */
     private int challengesPlayed = 0;
-    /** */
-    private List<Integer> completedChallenges = new ArrayList<Integer>();
-    /** */
-    private List<Integer> currentChallenges = new ArrayList<Integer>();
+
+    private List<String> completedChallenges = new ArrayList<String>();
+    private List<String> currentChallenges = new ArrayList<String>();
 
     private int win;
     private int winstreakBest = 0;
@@ -75,7 +74,7 @@ public class QuestAchievements {
      * 
      * @return List<Integer>
      */
-    public List<Integer> getLockedChallenges() {
+    public List<String> getLockedChallenges() {
         return this.completedChallenges;
     }
 
@@ -88,7 +87,7 @@ public class QuestAchievements {
      * @param i
      *            the i
      */
-    public void addLockedChallenge(final int i) {
+    public void addLockedChallenge(final String i) {
         this.completedChallenges.add(i);
     }
 
@@ -97,9 +96,9 @@ public class QuestAchievements {
      * 
      * @return List<Integer>
      */
-    public List<Integer> getCurrentChallenges() {
+    public List<String> getCurrentChallenges() {
         if (this.currentChallenges == null) {
-            this.currentChallenges = new ArrayList<Integer>();
+            this.currentChallenges = new ArrayList<String>();
         }
 
         return this.currentChallenges;
@@ -110,7 +109,7 @@ public class QuestAchievements {
      * 
      * @param lst0 List<Integer>
      */
-    public void setCurrentChallenges(final List<Integer> lst0) {
+    public void setCurrentChallenges(final List<String> lst0) {
         this.currentChallenges = lst0;
     }
 

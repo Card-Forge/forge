@@ -19,6 +19,8 @@ package forge.util.storage;
 
 import java.util.Collection;
 
+import com.google.common.base.Predicate;
+
 /**
  * TODO: Write javadoc for this type.
  *
@@ -35,7 +37,9 @@ public interface IStorageView<T> extends Iterable<T> {
      * @return a {@link forge.deck.Deck} object.
      */
     T get(final String name);
-
+    
+    T find(final Predicate<T> condition);
+    
     /**
      * Get names of decks.
      *

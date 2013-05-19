@@ -22,6 +22,9 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.Map;
 
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
+
 import forge.util.IItemReader;
 
 //reads and writeDeck Deck objects
@@ -57,6 +60,7 @@ public class StorageView<T> implements IStorageView<T> {
     public T get(final String name) {
         return this.map.get(name);
     }
+    
 
     /*
      * (non-Javadoc)
@@ -93,5 +97,10 @@ public class StorageView<T> implements IStorageView<T> {
     @Override
     public int size() {
         return this.map.size();
+    }
+
+    @Override
+    public T find(Predicate<T> condition) {
+        return Iterables.tryFind(map.values(), condition).orNull();
     }
 }

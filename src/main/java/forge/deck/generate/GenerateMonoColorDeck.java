@@ -69,8 +69,7 @@ public class GenerateMonoColorDeck extends GenerateColoredDeckBase {
      *            a {@link java.lang.String} object.
      */
     public GenerateMonoColorDeck(final String clr1) {
-
-        if (clr1.equals("AI")) {
+        if (MagicColor.fromName(clr1) == 0) {
             int color1 = r.nextInt(5);
             colors = ColorSet.fromMask(MagicColor.WHITE << color1);
         } else {

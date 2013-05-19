@@ -1,12 +1,10 @@
-package forge.deck;
+package     forge.deck;
 
 import java.awt.Toolkit;
 import java.awt.datatransfer.StringSelection;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Random;
 
@@ -14,6 +12,9 @@ import javax.swing.JList;
 import javax.swing.JOptionPane;
 
 import org.apache.commons.lang3.ArrayUtils;
+
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
 
 import forge.Singletons;
 import forge.deck.generate.Generate2ColorDeck;
@@ -26,9 +27,12 @@ import forge.game.player.PlayerType;
 import forge.item.CardDb;
 import forge.item.CardPrinted;
 import forge.item.ItemPoolView;
+import forge.quest.QuestController;
 import forge.quest.QuestEvent;
-import forge.quest.QuestEventManager;
+import forge.quest.QuestEventChallenge;
+import forge.quest.QuestEventDuel;
 import forge.util.Aggregates;
+import forge.util.Lang;
 import forge.util.MyRandom;
 import forge.util.storage.IStorage;
 
@@ -42,21 +46,6 @@ import forge.util.storage.IStorage;
 // TODO This class can be used for home menu constructed deck generation as well.
 public class DeckgenUtil {
     /** */
-    public static final Map<String, String> COLOR_VALS = new HashMap<String, String>();
-
-    static {
-        COLOR_VALS.clear();
-        COLOR_VALS.put("Random 1", "AI");
-        COLOR_VALS.put("Random 2", "AI");
-        COLOR_VALS.put("Random 3", "AI");
-        COLOR_VALS.put("Random 4", "AI");
-        COLOR_VALS.put("Black", "black");
-        COLOR_VALS.put("Blue", "blue");
-        COLOR_VALS.put("Green", "green");
-        COLOR_VALS.put("Red", "red");
-        COLOR_VALS.put("White", "white");
-    }
-
     public enum DeckTypes {
         COLORS,
         THEMES,
@@ -71,12 +60,8 @@ public class DeckgenUtil {
     public static Deck buildColorDeck(final String[] selection, PlayerType pt) {
         
         final Deck deck;
-
-        // Replace "random" with "AI" for deck generation code
-        for (int i = 0; i < selection.length; i++) {
-            selection[i] = COLOR_VALS.get(selection[i]);
-        }
-
+        String deckName = null;  
+        
         GenerateColoredDeckBase gen = null;
         
         if (selection.length == 1) {
@@ -87,12 +72,16 @@ public class DeckgenUtil {
             gen = new Generate3ColorDeck(selection[0], selection[1], selection[2]);
         } else {
             gen = new Generate5ColorDeck();
+            deckName = "5 colors";
         }
         
         ItemPoolView<CardPrinted> cards = gen == null ? null : gen.getDeck(60, pt);
         
+        if(null == deckName)
+            deckName = Lang.joinHomogenous(Arrays.asList(selection));
+        
         // After generating card lists, build deck.
-        deck = new Deck();
+        deck = new Deck("Random deck : " + deckName);
         deck.getMain().addAll(cards);
 
         return deck;
@@ -127,7 +116,18 @@ public class DeckgenUtil {
      * @return {@link forge.deck.Deck}
      */
     public static Deck buildQuestDeck(final String[] selection) {
-        return Singletons.getModel().getQuest().getDuelsManager().getEvent(selection[0]).getEventDeck();
+        return getQuestEvent(selection[0]).getEventDeck();
+    }
+
+    public static QuestEvent getQuestEvent(final String name) {
+        QuestController qCtrl = Singletons.getModel().getQuest();
+        QuestEventChallenge challenge = qCtrl.getChallenges().get(name);
+        if( null != challenge ) return challenge;
+
+        QuestEventDuel duel = Iterables.find(qCtrl.getDuelsManager().getAllDuels(), new Predicate<QuestEventDuel>() {
+            @Override public boolean apply(QuestEventDuel in) { return in.getName().equals(name); } 
+        });
+        return duel;
     }
 
     /** @return {@link forge.deck.Deck} */
@@ -161,13 +161,14 @@ public class DeckgenUtil {
     /** @return {@link forge.deck.Deck} */
     public static Deck getRandomQuestDeck() {
         final List<Deck> allQuestDecks = new ArrayList<Deck>();
-        final QuestEventManager manager = Singletons.getModel().getQuest().getDuelsManager();
+        QuestController qCtrl = Singletons.getModel().getQuest();
 
-        for (final QuestEvent e : manager.getAllDuels()) {
+
+        for (final QuestEvent e : qCtrl.getDuelsManager().getAllDuels()) {
             allQuestDecks.add(e.getEventDeck());
         }
 
-        for (final QuestEvent e : manager.getAllChallenges()) {
+        for (final QuestEvent e : qCtrl.getChallenges()) {
             allQuestDecks.add(e.getEventDeck());
         }
 
@@ -227,10 +228,8 @@ public class DeckgenUtil {
         // Retrieve from custom or quest deck maps
         if (lst0.getName().equals(DeckTypes.CUSTOM.toString())) {
             deck = Singletons.getModel().getDecks().getConstructed().get(deckName);
-        }
-        else {
-            deck = Singletons.getModel().getQuest().getDuelsManager().getEvent(deckName).getEventDeck();
-        }
+        } else 
+            deck = getQuestEvent(deckName).getEventDeck();
 
         // Dump into map and display.
         final String nl = System.getProperty("line.separator");

@@ -2,17 +2,15 @@ package forge.gui.home.gauntlet;
 
 import java.awt.Font;
 
-import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JPanel;
-import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
 
 import net.miginfocom.swing.MigLayout;
+import forge.game.player.PlayerType;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
@@ -20,9 +18,8 @@ import forge.gui.home.EMenuGroup;
 import forge.gui.home.IVSubmenu;
 import forge.gui.home.StartButton;
 import forge.gui.home.VHomeUI;
+import forge.gui.toolbox.FDeckChooser;
 import forge.gui.toolbox.FLabel;
-import forge.gui.toolbox.FList;
-import forge.gui.toolbox.FRadioButton;
 import forge.gui.toolbox.FScrollPane;
 import forge.gui.toolbox.FSkin;
 
@@ -54,18 +51,11 @@ public enum VSubmenuGauntletContests implements IVSubmenu<CSubmenuGauntletContes
     private final JPanel pnlDecks = new JPanel();
 
     private final ContestGauntletLister gauntletList = new ContestGauntletLister();
-    private final JList lstDecks = new FList();
+    private final FDeckChooser lstDecks = new FDeckChooser("Deck", PlayerType.HUMAN);
 
     private final JScrollPane scrLeft  = new FScrollPane(gauntletList,
             ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
-    private final JScrollPane scrRight  = new FScrollPane(lstDecks,
-            ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-
-    private final JRadioButton radUserDecks = new FRadioButton("Custom user decks");
-    private final JRadioButton radQuestDecks = new FRadioButton("Quest Decks");
-    private final JRadioButton radColorDecks = new FRadioButton("Fully random color decks");
-    private final JRadioButton radThemeDecks = new FRadioButton("Semi-random theme decks");
 
     private final JLabel lblDeck = new FLabel.Builder().fontSize(16)
             .fontStyle(Font.BOLD).text("DECK").fontAlign(SwingConstants.CENTER).build();
@@ -78,14 +68,7 @@ public enum VSubmenuGauntletContests implements IVSubmenu<CSubmenuGauntletContes
     private VSubmenuGauntletContests() {
         lblTitle.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
 
-        // Radio button grouping
-        final ButtonGroup grpRight = new ButtonGroup();
-        grpRight.add(radUserDecks);
-        grpRight.add(radQuestDecks);
-        grpRight.add(radColorDecks);
-        grpRight.add(radThemeDecks);
 
-        scrLeft.setBorder(null);
         pnlLoad.setLayout(new MigLayout("insets 0, gap 0, wrap"));
         pnlLoad.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
         pnlLoad.add(lblLoad, "h 30px!, w 94%!, gap 1% 0 0 5px, ax center");
@@ -97,12 +80,8 @@ public enum VSubmenuGauntletContests implements IVSubmenu<CSubmenuGauntletContes
         pnlDecks.setLayout(new MigLayout("insets 0, gap 0, wrap"));
         pnlDecks.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
         pnlDecks.add(lblDeck, "h 30px!, w 94%!, gap 1% 0 0 5px, ax center");
-        pnlDecks.add(radUserDecks, "w 96%!, h 30px!, gap 2% 0 0 5px");
-        pnlDecks.add(radQuestDecks, "w 96%!, h 30px!, gap 2% 0 0 5px");
-        pnlDecks.add(radColorDecks, "w 96%!, h 30px!, gap 2% 0 0 5px");
-        pnlDecks.add(radThemeDecks, "w 96%!, h 30px!, gap 2% 0 0 5px");
         pnlDecks.add(btnRandom, "h 30px!, w 200px!, gap 25% 0 0 10px");
-        pnlDecks.add(scrRight, "w 94%!, pushy, growy, gap 3% 0 0 10px");
+        pnlDecks.add(lstDecks, "w 94%!, pushy, growy, gap 3% 0 0 10px");
     }
 
     /* (non-Javadoc)
@@ -164,28 +143,8 @@ public enum VSubmenuGauntletContests implements IVSubmenu<CSubmenuGauntletContes
     }
 
     /** @return {@link javax.swing.JList} */
-    public JList getLstDecks() {
+    public FDeckChooser getLstDecks() {
         return this.lstDecks;
-    }
-
-    /** @return {@link javax.swing.JRadioButton} */
-    public JRadioButton getRadUserDecks() {
-        return this.radUserDecks;
-    }
-
-    /** @return {@link javax.swing.JRadioButton} */
-    public JRadioButton getRadQuestDecks() {
-        return this.radQuestDecks;
-    }
-
-    /** @return {@link javax.swing.JRadioButton} */
-    public JRadioButton getRadColorDecks() {
-        return this.radColorDecks;
-    }
-
-    /** @return {@link javax.swing.JRadioButton} */
-    public JRadioButton getRadThemeDecks() {
-        return this.radThemeDecks;
     }
 
     //========== Overridden from IVDoc

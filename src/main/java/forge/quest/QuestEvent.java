@@ -21,6 +21,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import com.google.common.base.Function;
+
 import forge.deck.Deck;
 import forge.game.player.IHasIcon;
 import forge.item.InventoryItem;
@@ -38,12 +40,21 @@ public abstract class QuestEvent implements IHasIcon {
     private Deck eventDeck = null;
     private String title = "Mystery Event";
     private String description = "";
-    private String difficulty = "Medium";
+    private QuestEventDifficulty difficulty = QuestEventDifficulty.MEDIUM;
     private String imageKey = "";
     private String name = "Noname";
     private String cardReward = null;
     private List<InventoryItem> cardRewardList = null;
 
+    
+    public static final Function<QuestEvent, String> FN_GET_NAME = new Function<QuestEvent, String>() {
+        @Override public final String apply(QuestEvent qe) { return qe.name; }  
+    };
+    public static final Function<QuestEvent, String> FN_GET_TITLE = new Function<QuestEvent, String>() {
+        @Override public final String apply(QuestEvent qe) { return qe.title; }  
+    };
+
+    
     public final String getTitle() {
         return this.title;
     }
@@ -55,7 +66,7 @@ public abstract class QuestEvent implements IHasIcon {
         return null;
     }
 
-    public final String getDifficulty() {
+    public final QuestEventDifficulty getDifficulty() {
         return this.difficulty;
     }
 
@@ -84,7 +95,7 @@ public abstract class QuestEvent implements IHasIcon {
         this.title = title0;
     }
 
-    public void setDifficulty(final String difficulty0) {
+    public void setDifficulty(final QuestEventDifficulty difficulty0) {
         this.difficulty = difficulty0;
     }
 

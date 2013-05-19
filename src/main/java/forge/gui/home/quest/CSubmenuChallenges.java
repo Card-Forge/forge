@@ -7,6 +7,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JRadioButton;
@@ -126,45 +127,54 @@ public enum CSubmenuChallenges implements ICDoc {
         final VSubmenuChallenges view = VSubmenuChallenges.SINGLETON_INSTANCE;
         final QuestController qCtrl = Singletons.getModel().getQuest();
 
-        if (qCtrl.getAchievements() != null) {
-            view.getLblTitle().setText("Challenges: " + qCtrl.getRank());
+        if (qCtrl.getAchievements() == null) return;
+        
+        view.getLblTitle().setText("Challenges: " + qCtrl.getRank());
 
-            view.getPnlChallenges().removeAll();
-            final List<QuestEventChallenge> challenges = qCtrl.getChallengesManager().generateChallenges();
-
-            JXButtonPanel grpPanel = new JXButtonPanel();
-
-            for (int i = 0; i < challenges.size(); i++) {
-                final PnlEvent temp = new PnlEvent(challenges.get(i));
-                final JRadioButton rad = temp.getRad();
-                if (i == 0) {
-                    rad.setSelected(true);
-                    SwingUtilities.invokeLater(new Runnable() {
-                        @Override public void run() { rad.requestFocusInWindow(); }
-                    });
-                }
-                rad.addKeyListener(_startOnEnter);
-                rad.addMouseListener(_startOnDblClick);
-                grpPanel.add(temp, rad, "w 100%!, h 135px!, gap 2% 0 15px 15px");
-            }
-            view.getPnlChallenges().add(grpPanel, "w 96%!");
-
-            if (challenges.size() == 0) {
-                final FLabel lbl = new FLabel.Builder()
-                    .text(VSubmenuChallenges.SINGLETON_INSTANCE.getLblNextChallengeInWins().getText())
-                    .fontAlign(SwingConstants.CENTER).build();
-                lbl.setForeground(Color.red);
-                lbl.setBackground(Color.white);
-                lbl.setBorder(new EmptyBorder(10, 10, 10, 10));
-                lbl.setOpaque(true);
-                view.getPnlChallenges().add(lbl, "w 50%!, h 30px!, gap 25% 0 50px 0");
-                SwingUtilities.invokeLater(new Runnable() {
-                    @Override public void run() { view.getBtnTravel().requestFocusInWindow(); }
-                });
-            }
-
-            Singletons.getView().getFrame().validate();
+        view.getPnlChallenges().removeAll();
+        qCtrl.regenerateChallenges();
+        final List<String> ids = qCtrl.getAchievements().getCurrentChallenges();
+        final List<QuestEventChallenge> challenges = new ArrayList<QuestEventChallenge>();
+        for(final QuestEventChallenge qc : qCtrl.getChallenges()) {
+            if(ids.contains(qc.getId()))
+            challenges.add(qc);
         }
+
+        JXButtonPanel grpPanel = new JXButtonPanel();
+
+        boolean haveAnyChallenges = true;
+        for (QuestEventChallenge qc : challenges) {
+            final PnlEvent temp = new PnlEvent(qc);
+            final JRadioButton rad = temp.getRad();
+            if (haveAnyChallenges) {
+                rad.setSelected(true);
+                SwingUtilities.invokeLater(new Runnable() {
+                    @Override public void run() { rad.requestFocusInWindow(); }
+                });
+                haveAnyChallenges = false;
+            }
+            rad.addKeyListener(_startOnEnter);
+            rad.addMouseListener(_startOnDblClick);
+            grpPanel.add(temp, rad, "w 100%!, h 135px!, gap 2% 0 15px 15px");
+        }
+        view.getPnlChallenges().add(grpPanel, "w 96%!");
+
+        if (!haveAnyChallenges) {
+            final FLabel lbl = new FLabel.Builder()
+                .text(VSubmenuChallenges.SINGLETON_INSTANCE.getLblNextChallengeInWins().getText())
+                .fontAlign(SwingConstants.CENTER).build();
+            lbl.setForeground(Color.red);
+            lbl.setBackground(Color.white);
+            lbl.setBorder(new EmptyBorder(10, 10, 10, 10));
+            lbl.setOpaque(true);
+            view.getPnlChallenges().add(lbl, "w 50%!, h 30px!, gap 25% 0 50px 0");
+            SwingUtilities.invokeLater(new Runnable() {
+                @Override public void run() { view.getBtnTravel().requestFocusInWindow(); }
+            });
+        }
+
+        Singletons.getView().getFrame().validate();
+        
     }
 
     /* (non-Javadoc)

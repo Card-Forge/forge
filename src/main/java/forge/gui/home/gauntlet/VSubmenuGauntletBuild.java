@@ -2,18 +2,17 @@ package forge.gui.home.gauntlet;
 
 import java.awt.Color;
 
-import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
-import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
 
 import net.miginfocom.swing.MigLayout;
+import forge.game.player.PlayerType;
 import forge.gauntlet.GauntletIO;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
@@ -21,9 +20,9 @@ import forge.gui.framework.EDocID;
 import forge.gui.home.EMenuGroup;
 import forge.gui.home.IVSubmenu;
 import forge.gui.home.VHomeUI;
+import forge.gui.toolbox.FDeckChooser;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FList;
-import forge.gui.toolbox.FRadioButton;
 import forge.gui.toolbox.FScrollPane;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FTextField;
@@ -48,30 +47,19 @@ public enum VSubmenuGauntletBuild implements IVSubmenu<CSubmenuGauntletBuild> {
         .opaque(true).fontSize(16).build();
 
     private final JPanel pnlFileHandling = new JPanel(new MigLayout("insets 0, gap 0, align center"));
-    private final JPanel pnlRadios = new JPanel(new MigLayout("insets 0, gap 0, wrap"));
     private final JPanel pnlButtons = new JPanel();
     private final JPanel pnlStrut = new JPanel();
     private final JPanel pnlDirections = new JPanel();
 
-    private final JRadioButton radUserDecks = new FRadioButton("Custom user decks");
-    private final JRadioButton radQuestDecks = new FRadioButton("Quest Decks");
-    private final JRadioButton radColorDecks = new FRadioButton("Fully random color decks");
-    private final JRadioButton radThemeDecks = new FRadioButton("Semi-random theme decks");
-
-    private final JList lstLeft = new FList();
+    private final FDeckChooser lstLeft = new FDeckChooser("Deck", PlayerType.HUMAN);
     private final JList lstRight = new FList();
-
-    private final JScrollPane scrLeft  = new FScrollPane(lstLeft,
-            ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
     private final JScrollPane scrRight  = new FScrollPane(lstRight,
             ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
     private final JTextField txfFilename = new FTextField.Builder().text(GauntletIO.TXF_PROMPT).build();
 
-    private final FLabel lblDesc1 = new FLabel.Builder()
-        .text("Left/right arrows add or remove decks.")
-        .fontSize(12).build();
+    private final FLabel lblDesc1 = new FLabel.Builder().text("Left/right arrows add or remove decks.").fontSize(12).build();
 
     private final FLabel lblDesc2 = new FLabel.Builder()
         .text("Up/down arrows change opponent order.")
@@ -131,12 +119,6 @@ public enum VSubmenuGauntletBuild implements IVSubmenu<CSubmenuGauntletBuild> {
     private VSubmenuGauntletBuild() {
         lblTitle.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
 
-        // Radio button grouping
-        final ButtonGroup grpRadios = new ButtonGroup();
-        grpRadios.add(radUserDecks);
-        grpRadios.add(radQuestDecks);
-        grpRadios.add(radColorDecks);
-        grpRadios.add(radThemeDecks);
 
         // File handling panel
         final FLabel lblFilename = new FLabel.Builder()
@@ -147,13 +129,6 @@ public enum VSubmenuGauntletBuild implements IVSubmenu<CSubmenuGauntletBuild> {
         pnlFileHandling.add(btnSave, "h 30px!, w 30px!, gap 0 5px 0 0");
         pnlFileHandling.add(btnNew, "h 30px!, w 30px!, gap 0 5px 0 0");
         pnlFileHandling.add(btnOpen, "h 30px!, w 30px!, gap 0 5px 0 0");
-
-        // Radios panel
-        pnlRadios.setOpaque(false);
-        pnlRadios.add(radUserDecks, "h 30px!, gap 0 0 0 5px");
-        pnlRadios.add(radQuestDecks, "h 30px!, gap 0 0 0 5px");
-        pnlRadios.add(radColorDecks, "h 30px!, gap 0 0 0 5px");
-        pnlRadios.add(radThemeDecks, "h 30px!, gap 0 0 0 5px");
 
         // Directions panel
         final JPanel pnlSpacer = new JPanel();
@@ -211,15 +186,18 @@ public enum VSubmenuGauntletBuild implements IVSubmenu<CSubmenuGauntletBuild> {
      */
     @Override
     public void populate() {
+        
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().removeAll();
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().setLayout(new MigLayout("insets 0, gap 0, wrap 3"));
 
+        lstLeft.populate();
+
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(lblTitle, "w 98%!, h 30px!, gap 1% 0 15px 15px, span 3");
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(pnlFileHandling, "w 98%!, gap 1% 0 1% 5px, span 3");
-        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(pnlRadios, "w 48% - 20px!, gap 1% 0 0 15px");
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(lstLeft, "w 48% - 20px!, gap 1% 0 0 25px, spany 2, growy");
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(pnlStrut, "w 40px!, gap 1% 1% 0 15px");
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(pnlDirections, "w 48% - 20px!, gap 0 0 0 15px");
-        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(scrLeft, "w 48% - 20px!, gap 1% 0 0 25px, pushy, growy");
+//        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(lstLeft, "w 48% - 20px!, gap 1% 0 0 25px, pushy, growy");
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(pnlButtons, "w 40px!, gap 1% 1% 0 25px, pushy, growy");
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(scrRight, "w 48% - 20px!, gap 0 0 0 25px, pushy, growy");
 
@@ -228,33 +206,13 @@ public enum VSubmenuGauntletBuild implements IVSubmenu<CSubmenuGauntletBuild> {
     }
 
     /** @return {@link javax.swing.JList} */
-    public JList getLstLeft() {
+    public FDeckChooser getLstLeft() {
         return this.lstLeft;
     }
 
     /** @return {@link javax.swing.JList} */
     public JList getLstRight() {
         return this.lstRight;
-    }
-
-    /** @return {@link javax.swing.JRadioButton} */
-    public JRadioButton getRadUserDecks() {
-        return this.radUserDecks;
-    }
-
-    /** @return {@link javax.swing.JRadioButton} */
-    public JRadioButton getRadQuestDecks() {
-        return this.radQuestDecks;
-    }
-
-    /** @return {@link javax.swing.JRadioButton} */
-    public JRadioButton getRadColorDecks() {
-        return this.radColorDecks;
-    }
-
-    /** @return {@link javax.swing.JRadioButton} */
-    public JRadioButton getRadThemeDecks() {
-        return this.radThemeDecks;
     }
 
     /** @return {@link forge.gui.toolbox.FLabel} */

@@ -37,10 +37,6 @@ public class PreconDeck implements InventoryItemFromSet {
 
     private final Deck deck;
     private final String imageFilename;
-    public final String getImageFilename() {
-        return imageFilename;
-    }
-
     private final String set;
     private final String description;
 
@@ -105,6 +101,10 @@ public class PreconDeck implements InventoryItemFromSet {
      */
     public final SellRules getRecommendedDeals() {
         return this.recommendedDeals;
+    }
+
+    public final String getImageFilename() {
+        return imageFilename;
     }
 
     /*

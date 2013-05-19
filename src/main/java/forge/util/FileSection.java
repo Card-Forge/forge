@@ -104,6 +104,14 @@ public class FileSection {
     public String get(final String fieldName) {
         return this.lines.get(fieldName);
     }
+    
+    public String get(final String fieldName, final String defaultValue) {
+        return lines.containsKey(fieldName) ? this.lines.get(fieldName) : defaultValue;
+    }
+
+    public boolean contains(String keyName) { 
+        return lines.containsKey(keyName);
+    }
 
     /**
      * Gets the int.

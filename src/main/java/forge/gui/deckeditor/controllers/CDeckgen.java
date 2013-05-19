@@ -106,11 +106,11 @@ public enum CDeckgen implements ICDoc {
         switch (colorCount0) {
             case 2:
                 genConstructed.getMain().addAll(
-                        (new Generate2ColorDeck("AI", "AI")).getDeck(60, PlayerType.HUMAN));
+                        (new Generate2ColorDeck(null, null)).getDeck(60, PlayerType.HUMAN));
                 break;
             case 3:
                 genConstructed.getMain().addAll(
-                        (new Generate3ColorDeck("AI", "AI", "AI")).getDeck(60, PlayerType.HUMAN));
+                        (new Generate3ColorDeck(null, null, null)).getDeck(60, PlayerType.HUMAN));
                 break;
             case 5:
                 genConstructed.getMain().addAll(

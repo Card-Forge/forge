@@ -40,7 +40,7 @@ import forge.quest.io.QuestDataIO;
 public final class QuestData {
 
     /** Holds the latest version of the Quest Data. */
-    public static final int CURRENT_VERSION_NUMBER = 6;
+    public static final int CURRENT_VERSION_NUMBER = 7;
 
     // This field places the version number into QD instance,
     // but only when the object is created through the constructor

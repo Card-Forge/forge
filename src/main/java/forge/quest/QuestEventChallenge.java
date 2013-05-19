@@ -32,7 +32,7 @@ import java.util.List;
 public class QuestEventChallenge extends QuestEvent {
     // ID (default -1, should be explicitly set at later time.)
     /** The id. */
-    private int id = -1;
+    private String id = "-1";
 
     // Opponent name if different from the challenge name
     private String opponentName = null;
@@ -94,7 +94,7 @@ public class QuestEventChallenge extends QuestEvent {
      * 
      * @return {@link java.lang.Integer}.
      */
-    public final int getId() {
+    public final String getId() {
         return this.id;
     }
 
@@ -161,7 +161,7 @@ public class QuestEventChallenge extends QuestEvent {
      * @param id0
      *            the id to set
      */
-    public void setId(final int id0) {
+    public void setId(final String id0) {
         this.id = id0;
     }
 
