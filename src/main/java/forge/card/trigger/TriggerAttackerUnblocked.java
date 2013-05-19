@@ -68,18 +68,6 @@ public class TriggerAttackerUnblocked extends Trigger {
 
     /** {@inheritDoc} */
     @Override
-    public final Trigger getCopy() {
-        final Trigger copy = new TriggerAttackerUnblocked(this.mapParams, this.getHostCard(), this.isIntrinsic());
-        if (this.getOverridingAbility() != null) {
-            copy.setOverridingAbility(this.getOverridingAbility());
-        }
-
-        copyFieldsTo(copy);
-        return copy;
-    }
-
-    /** {@inheritDoc} */
-    @Override
     public final void setTriggeringObjects(final SpellAbility sa) {
         sa.setTriggeringObject("Attacker", this.getRunParams().get("Attacker"));
         sa.setTriggeringObject("Defender", this.getRunParams().get("Defender"));

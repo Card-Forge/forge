@@ -81,6 +81,16 @@ public enum TriggerType {
 
         throw new RuntimeException("Element " + value + " not found in TriggerType enum");
     }
+    
+    public static TriggerType getTypeFor(Trigger t) {
+        final Class<? extends Trigger> cls = t.getClass();
+        for (final TriggerType v : TriggerType.values()) {
+            if (v.classTrigger.equals(cls)) {
+                return v;
+            }
+        }
+        return null;
+    }
 
     /**
      * TODO: Write javadoc for this method.

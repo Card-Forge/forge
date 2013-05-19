@@ -722,30 +722,8 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @return a {@link forge.card.trigger.Trigger} object.
      */
     public final Trigger addTrigger(final Trigger t) {
-        final Trigger newtrig = t.getCopy();
-        newtrig.setHostCard(this);
+        final Trigger newtrig = t.getCopyForHostCard(this);
         this.getCharacteristics().getTriggers().add(newtrig);
-        return newtrig;
-    }
-
-    /**
-     * <p>
-     * addTrigger.
-     * </p>
-     * 
-     * @param t
-     *            a {@link forge.card.trigger.Trigger} object.
-     *
-     * @param state
-     *            a {@link forge.CardCharacteristicName} object.
-     *
-     * @return a {@link forge.card.trigger.Trigger} object.
-     */
-    public final Trigger addTrigger(final Trigger t, final CardCharacteristicName state) {
-        final Trigger newtrig = t.getCopy();
-        newtrig.setHostCard(this);
-        CardCharacteristics stateCharacteristics = this.getState(state);
-        stateCharacteristics.getTriggers().add(newtrig);
         return newtrig;
     }
 
@@ -833,9 +811,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         final List<Trigger> copyList = new CopyOnWriteArrayList<Trigger>();
         for (final Trigger t : trigs) {
             if (t.isIntrinsic()) {
-                final Trigger newtrig = t.getCopy();
-                newtrig.setHostCard(this);
-                copyList.add(newtrig);
+                copyList.add(t.getCopyForHostCard(this));
             }
         }
 

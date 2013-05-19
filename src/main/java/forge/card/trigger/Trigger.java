@@ -388,15 +388,6 @@ public abstract class Trigger extends TriggerReplacementBase {
 
     /**
      * <p>
-     * getCopy.
-     * </p>
-     * 
-     * @return a {@link forge.card.trigger.Trigger} object.
-     */
-    public abstract Trigger getCopy();
-
-    /**
-     * <p>
      * setTriggeringObjects.
      * </p>
      * 
@@ -523,18 +514,22 @@ public abstract class Trigger extends TriggerReplacementBase {
     void setMode(TriggerType triggerType) {
         mode = triggerType;
     }
+    
 
-    /**
-     * TODO: Write javadoc for this method.
-     * @param triggerAlways
-     * @return
-     */
-    public void copyFieldsTo(Trigger copy) {
+    public final Trigger getCopyForHostCard(Card newHost) {
+        TriggerType tt = TriggerType.getTypeFor(this);
+        Trigger copy = tt.createTrigger(mapParams, newHost, isIntrinsic); 
+
+        if (this.getOverridingAbility() != null) {
+            copy.setOverridingAbility(this.getOverridingAbility());
+        }
+        
         copy.setName(this.getName());
         copy.setID(this.getId());
         copy.setMode(this.getMode());
         copy.setTriggerPhases(this.validPhases);
         copy.setActiveZone(validHostZones);
+        return copy;
     }
 
     public boolean isStatic() {

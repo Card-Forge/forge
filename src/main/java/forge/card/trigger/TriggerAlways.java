@@ -56,18 +56,6 @@ public class TriggerAlways extends Trigger {
 
     /** {@inheritDoc} */
     @Override
-    public final Trigger getCopy() {
-        final Trigger copy = new TriggerAlways(this.mapParams, this.getHostCard(), this.isIntrinsic());
-        if (this.getOverridingAbility() != null) {
-            copy.setOverridingAbility(this.getOverridingAbility());
-        }
-
-        copyFieldsTo(copy);
-        return copy;
-    }
-
-    /** {@inheritDoc} */
-    @Override
     public void setTriggeringObjects(final SpellAbility sa) {
     }
 }

@@ -37,25 +37,6 @@ public class TriggerLandPlayed extends Trigger {
      * Constructor for Trigger_LandPlayed.
      * </p>
      * 
-     * @param n
-     *            a {@link java.lang.String} object.
-     * @param params
-     *            a {@link java.util.HashMap} object.
-     * @param host
-     *            a {@link forge.Card} object.
-     * @param intrinsic
-     *            the intrinsic
-     */
-    public TriggerLandPlayed(final String n, final java.util.Map<String, String> params, final Card host,
-            final boolean intrinsic) {
-        super(n, params, host, intrinsic);
-    }
-
-    /**
-     * <p>
-     * Constructor for Trigger_LandPlayed.
-     * </p>
-     * 
      * @param params
      *            a {@link java.util.HashMap} object.
      * @param host
@@ -65,20 +46,6 @@ public class TriggerLandPlayed extends Trigger {
      */
     public TriggerLandPlayed(final Map<String, String> params, final Card host, final boolean intrinsic) {
         super(params, host, intrinsic);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Trigger getCopy() {
-        final Trigger copy = new TriggerLandPlayed(this.getName(), this.mapParams, this.getHostCard(),
-                this.isIntrinsic());
-
-        if (this.getOverridingAbility() != null) {
-            copy.setOverridingAbility(this.getOverridingAbility());
-        }
-
-        copyFieldsTo(copy);
-        return copy;
     }
 
     /** {@inheritDoc} */

@@ -100,18 +100,6 @@ public class TriggerDamageDone extends Trigger {
 
     /** {@inheritDoc} */
     @Override
-    public final Trigger getCopy() {
-        final Trigger copy = new TriggerDamageDone(this.mapParams, this.getHostCard(), this.isIntrinsic());
-        if (this.getOverridingAbility() != null) {
-            copy.setOverridingAbility(this.getOverridingAbility());
-        }
-
-        copyFieldsTo(copy);
-        return copy;
-    }
-
-    /** {@inheritDoc} */
-    @Override
     public final void setTriggeringObjects(final SpellAbility sa) {
         sa.setTriggeringObject("Source", this.getRunParams().get("DamageSource"));
         sa.setTriggeringObject("Target", this.getRunParams().get("DamageTarget"));

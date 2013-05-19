@@ -59,17 +59,6 @@ public class TriggerSetInMotion extends Trigger {
         return true;
     }
 
-    /** {@inheritDoc} */
-    @Override
-    public final Trigger getCopy() {
-        final Trigger copy = new TriggerSetInMotion(this.mapParams, this.getHostCard(), this.isIntrinsic());
-        if (this.getOverridingAbility() != null) {
-            copy.setOverridingAbility(this.getOverridingAbility());
-        }
-
-        copyFieldsTo(copy);
-        return copy;
-    }
 
     /** {@inheritDoc} */
     @Override

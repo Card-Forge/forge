@@ -187,18 +187,6 @@ public class TriggerSpellAbilityCast extends Trigger {
 
     /** {@inheritDoc} */
     @Override
-    public final Trigger getCopy() {
-        final Trigger copy = new TriggerSpellAbilityCast(this.mapParams, this.getHostCard(), this.isIntrinsic());
-        if (this.getOverridingAbility() != null) {
-            copy.setOverridingAbility(this.getOverridingAbility());
-        }
-
-        copyFieldsTo(copy);
-        return copy;
-    }
-
-    /** {@inheritDoc} */
-    @Override
     public final void setTriggeringObjects(final SpellAbility sa) {
         sa.setTriggeringObject("Card", ((SpellAbility) this.getRunParams().get("CastSA")).getSourceCard());
         sa.setTriggeringObject("SpellAbility", this.getRunParams().get("CastSA"));

@@ -82,18 +82,6 @@ public class TriggerBecomesTarget extends Trigger {
 
     /** {@inheritDoc} */
     @Override
-    public final Trigger getCopy() {
-        final Trigger copy = new TriggerBecomesTarget(this.mapParams, this.getHostCard(), this.isIntrinsic());
-        if (this.getOverridingAbility() != null) {
-            copy.setOverridingAbility(this.getOverridingAbility());
-        }
-
-        copyFieldsTo(copy);
-        return copy;
-    }
-
-    /** {@inheritDoc} */
-    @Override
     public final void setTriggeringObjects(final SpellAbility sa) {
         sa.setTriggeringObject("SourceSA", this.getRunParams().get("SourceSA"));
         sa.setTriggeringObject("Source", ((SpellAbility) this.getRunParams().get("SourceSA")).getSourceCard());

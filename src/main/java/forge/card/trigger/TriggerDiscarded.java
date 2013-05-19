@@ -75,17 +75,6 @@ public class TriggerDiscarded extends Trigger {
         return true;
     }
 
-    /** {@inheritDoc} */
-    @Override
-    public final Trigger getCopy() {
-        final Trigger copy = new TriggerDiscarded(this.mapParams, this.getHostCard(), this.isIntrinsic());
-        if (this.getOverridingAbility() != null) {
-            copy.setOverridingAbility(this.getOverridingAbility());
-        }
-
-        copyFieldsTo(copy);
-        return copy;
-    }
 
     /** {@inheritDoc} */
     @Override

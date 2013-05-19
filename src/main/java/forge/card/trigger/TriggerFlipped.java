@@ -68,18 +68,6 @@ public class TriggerFlipped extends Trigger {
 
     /** {@inheritDoc} */
     @Override
-    public final Trigger getCopy() {
-        final Trigger copy = new TriggerFlipped(this.mapParams, this.getHostCard(), this.isIntrinsic());
-        if (this.getOverridingAbility() != null) {
-            copy.setOverridingAbility(this.getOverridingAbility());
-        }
-
-        copyFieldsTo(copy);
-        return copy;
-    }
-
-    /** {@inheritDoc} */
-    @Override
     public final void setTriggeringObjects(final SpellAbility sa) {
         sa.setTriggeringObject("Player", this.getRunParams().get("Player"));
     }

@@ -48,20 +48,6 @@ public class TriggerPlaneswalkedTo extends Trigger {
     }
 
     /* (non-Javadoc)
-     * @see forge.card.trigger.Trigger#getCopy()
-     */
-    @Override
-    public Trigger getCopy() {
-        final Trigger copy = new TriggerPlaneswalkedTo(this.mapParams, this.getHostCard(), this.isIntrinsic());
-        if (this.getOverridingAbility() != null) {
-            copy.setOverridingAbility(this.getOverridingAbility());
-        }
-
-        copyFieldsTo(copy);
-        return copy;
-    }
-
-    /* (non-Javadoc)
      * @see forge.card.trigger.Trigger#setTriggeringObjects(forge.card.spellability.SpellAbility)
      */
     @Override

@@ -54,20 +54,6 @@ public class TriggerTransformed extends Trigger {
         return true;
     }
 
-    /* (non-Javadoc)
-     * @see forge.card.trigger.Trigger#getCopy()
-     */
-    @Override
-    public final Trigger getCopy() {
-        final Trigger copy = new TriggerTransformed(this.mapParams, this.getHostCard(), this.isIntrinsic());
-
-        if (this.getOverridingAbility() != null) {
-            copy.setOverridingAbility(this.getOverridingAbility());
-        }
-
-        copyFieldsTo(copy);
-        return copy;
-    }
 
     /* (non-Javadoc)
      * @see forge.card.trigger.Trigger#setTriggeringObjects(forge.card.spellability.SpellAbility)
