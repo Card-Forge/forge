@@ -62,44 +62,6 @@ public abstract class InputPayManaBase extends InputSyncronizedBase implements I
 
     /**
      * <p>
-     * canMake.  color is like "G", returns "Green".
-     * </p>
-     * 
-     * @param am
-     *            a {@link forge.card.spellability.AbilityMana} object.
-     * @param mana
-     *            a {@link java.lang.String} object.
-     * @return a boolean.
-     */
-    private static boolean canMake(final SpellAbility am, final byte colorMask) {
-        if (colorMask == 0) {
-            return true;
-        }
-        AbilityManaPart m = am.getManaPart();
-
-        if (m.isAnyMana()) {
-            return true;
-        }
-        if (am.getApi() == ApiType.ManaReflected) {
-            final Iterable<String> reflectableColors = CardUtil.getReflectableManaColors(am);
-            for (final String color : reflectableColors) {
-                if (0 != (colorMask & MagicColor.fromName(color))) {
-                    return true;
-                }
-            }
-        } else {
-            String colorsProduced = m.isComboMana() ? m.getComboColors() : m.getOrigProduced();
-            for (final String color : colorsProduced.split(" ")) {
-                if (0 != (colorMask & MagicColor.fromName(color))) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    /**
-     * <p>
      * activateManaAbility.
      * </p>
      * @param color a String that represents the Color the mana is coming from
@@ -164,7 +126,7 @@ public abstract class InputPayManaBase extends InputSyncronizedBase implements I
             }
             
             if (m == null || !ma.canPlay())                                     continue;
-            if (!canUseColorless && !InputPayManaBase.canMake(ma, colorCanUse)) continue;
+            if (!canUseColorless && !abilityProducesManaColor(ma, colorCanUse)) continue;
             if (ma.isAbility() && ma.getRestrictions().isInstantSpeed())        continue;
             if (!m.meetsManaRestrictions(saPaidFor))                            continue;
 
@@ -204,7 +166,7 @@ public abstract class InputPayManaBase extends InputSyncronizedBase implements I
             // express Mana Choice
             final ArrayList<SpellAbility> colorMatches = new ArrayList<SpellAbility>();
             for (SpellAbility sa : abilities) {
-                if (abilityProducesManaOfColor(sa, colorNeeded))
+                if (abilityProducesManaColor(sa, colorNeeded))
                     colorMatches.add(sa);
             }
             
@@ -241,29 +203,44 @@ public abstract class InputPayManaBase extends InputSyncronizedBase implements I
     }
 
 
-    private static boolean abilityProducesManaOfColor(SpellAbility am, byte neededColor) {
+    /**
+     * <p>
+     * canMake.  color is like "G", returns "Green".
+     * </p>
+     * 
+     * @param am
+     *            a {@link forge.card.spellability.AbilityMana} object.
+     * @param mana
+     *            a {@link java.lang.String} object.
+     * @return a boolean.
+     */
+    private static boolean abilityProducesManaColor(final SpellAbility am, final byte neededColor) {
+        if (neededColor == 0) {
+            return true;
+        }
         AbilityManaPart m = am.getManaPart();
+    
+        if (m.isAnyMana()) {
+            return true;
+        }
         if (am.getApi() == ApiType.ManaReflected) {
             final Iterable<String> reflectableColors = CardUtil.getReflectableManaColors(am);
             for (final String color : reflectableColors) {
-                if ((neededColor & MagicColor.fromName(color)) != 0) {
+                if (0 != (neededColor & MagicColor.fromName(color))) {
                     return true;
                 }
             }
-        } else if (m.isAnyMana()) {
-            return true;
         } else {
-            String colorsProduced = m.isComboMana() ?  m.getComboColors() : m.getOrigProduced();
+            String colorsProduced = m.isComboMana() ? m.getComboColors() : m.getOrigProduced();
             for (final String color : colorsProduced.split(" ")) {
-                if ((neededColor & MagicColor.fromName(color)) != 0) {
-                    // checking if color
+                if (0 != (neededColor & MagicColor.fromName(color))) {
                     return true;
                 }
             }
         }
         return false;
     }
-    
+
     public void onManaAbilityPlayed(final SpellAbility saPaymentSrc) { 
         if ( saPaymentSrc != null) // null comes when they've paid from pool
             player.getManaPool().payManaFromAbility(saPaidFor, manaCost, saPaymentSrc);
