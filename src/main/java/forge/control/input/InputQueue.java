@@ -127,7 +127,7 @@ public class InputQueue extends MyObservable implements java.io.Serializable {
         GameAge age = game.getAge();
         if ( age == GameAge.Mulligan ) {
             Player human = Singletons.getControl().getPlayer();
-            return game.getType() == GameType.Commander ? new InputPartialParisMulligan(match, human) : new InputMulligan(match, human);
+            return game.getType() == GameType.Commander ? new InputMulliganPartialParis(match, human) : new InputMulligan(match, human);
         }
 
         if ( age != GameAge.Play ) 

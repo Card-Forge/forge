@@ -43,7 +43,7 @@ import forge.view.ButtonUtil;
   * @author Forge
   * @version $Id: InputMulligan.java 20698 2013-04-01 09:56:12Z Max mtg $
   */
-public class InputPartialParisMulligan extends InputBase {
+public class InputMulliganPartialParis extends InputBase {
     /** Constant <code>serialVersionUID=-8112954303001155622L</code>. */
     private static final long serialVersionUID = -8112954303001155622L;
     
@@ -53,7 +53,7 @@ public class InputPartialParisMulligan extends InputBase {
     private final List<Card> lastExiled = new ArrayList<Card>();
     private final List<Card> allExiled = new ArrayList<Card>();
     
-    public InputPartialParisMulligan(MatchController match0, Player humanPlayer) {
+    public InputMulliganPartialParis(MatchController match0, Player humanPlayer) {
         super(humanPlayer);
         match = match0;
         game = match.getCurrentGame();
