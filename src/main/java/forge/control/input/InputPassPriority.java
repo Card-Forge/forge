@@ -25,7 +25,6 @@ import forge.game.player.HumanPlay;
 import forge.game.player.Player;
 import forge.gui.GuiDisplayUtil;
 import forge.gui.framework.SDisplayUtil;
-import forge.gui.match.CMatchUI;
 import forge.gui.match.views.VMessage;
 import forge.view.ButtonUtil;
 
@@ -69,7 +68,7 @@ public class InputPassPriority extends InputBase {
         sb.append("\n");
         sb.append("Priority: ").append(player);
 
-        CMatchUI.SINGLETON_INSTANCE.showMessage(sb.toString());
+        showMessage(sb.toString());
     }
 
 

@@ -22,14 +22,15 @@ import forge.Card;
 import forge.CardLists;
 import forge.CounterType;
 import forge.FThreads;
+import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.spellability.SpellAbility;
 import forge.control.input.InputPayment;
+import forge.control.input.InputSyncronizedBase;
 import forge.game.GameState;
 import forge.game.ai.ComputerUtilCard;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
-import forge.gui.match.CMatchUI;
 import forge.view.ButtonUtil;
 
 /**
@@ -40,7 +41,7 @@ public class CostPutCounter extends CostPartWithList {
      * TODO: Write javadoc for this type.
      *
      */
-    public static final class InputPayCostPutCounter extends InputPayCostBase {
+    public static final class InputPayCostPutCounter extends InputSyncronizedBase implements InputPayment {
         private final String type;
         private final CostPutCounter costPutCounter;
         private final int nNeeded;
@@ -58,6 +59,7 @@ public class CostPutCounter extends CostPartWithList {
          * @param sa
          */
         public InputPayCostPutCounter(String type, CostPutCounter costPutCounter, int nNeeded, SpellAbility sa) {
+            super(Singletons.getControl().getPlayer());
             this.type = type;
             this.costPutCounter = costPutCounter;
             this.nNeeded = nNeeded;
@@ -81,7 +83,7 @@ public class CostPutCounter extends CostPartWithList {
             }
 
             this.typeList = CardLists.getValidCards(sa.getActivatingPlayer().getCardsIn(ZoneType.Battlefield), type.split(";"), sa.getActivatingPlayer(), sa.getSourceCard());
-            CMatchUI.SINGLETON_INSTANCE.showMessage(msg.toString());
+            showMessage(msg.toString());
             ButtonUtil.enableOnlyCancel();
         }
 
@@ -97,6 +99,20 @@ public class CostPutCounter extends CostPartWithList {
                 }
             }
         }
+        
+        boolean bPaid = false;
+        
+        final protected void done() {
+            bPaid = true;
+            this.stop();
+        }
+
+        @Override
+        final protected void onCancel() {
+            this.stop();
+        }
+        
+        final public boolean isPaid() { return bPaid; }
     }
 
     // Put Counter doesn't really have a "Valid" portion of the cost

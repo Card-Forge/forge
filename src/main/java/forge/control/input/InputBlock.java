@@ -29,7 +29,6 @@ import forge.game.player.Player;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.gui.framework.SDisplayUtil;
-import forge.gui.match.CMatchUI;
 import forge.gui.match.views.VMessage;
 import forge.view.ButtonUtil;
 
@@ -73,14 +72,14 @@ public class InputBlock extends InputBase {
             final StringBuilder sb = new StringBuilder();
             sb.append("To Block, click on your Opponents attacker first, then your blocker(s). ");
             sb.append("To cancel a block right-click on your blocker");
-            CMatchUI.SINGLETON_INSTANCE.showMessage(sb.toString());
+            showMessage(sb.toString());
         } else {
             final String attackerName = this.currentAttacker.isFaceDown() ? "Morph" : this.currentAttacker.getName();
             final StringBuilder sb = new StringBuilder();
             sb.append("Select a creature to block ").append(attackerName).append(" (");
             sb.append(this.currentAttacker.getUniqueNumber()).append("). ");
             sb.append("To cancel a block right-click on your blocker");
-            CMatchUI.SINGLETON_INSTANCE.showMessage(sb.toString());
+            showMessage(sb.toString());
         }
 
         CombatUtil.showCombat(game);
