@@ -5615,6 +5615,18 @@ public class Card extends GameEntity implements Comparable<Card> {
             if (!this.dealtDamageToThisTurn.containsKey(source)) {
                 return false;
             }
+        } else if (property.startsWith("IsTargetingSource")) {
+            for (final SpellAbility sa : this.getCharacteristics().getSpellAbility()) {
+                final SpellAbility saTargeting = sa.getSATargetingCard();
+                if (saTargeting != null) {
+                    for (final Card c : saTargeting.getTarget().getTargetCards()) {
+                        if (c.equals(source)) {
+                            return true;
+                        }
+                    }
+                }
+            }
+            return false;
         } else if (property.startsWith("SharesColorWith")) {
             if (property.equals("SharesColorWith")) {
                 if (!this.sharesColorWith(source)) {
