@@ -187,8 +187,11 @@ public abstract class InputPayManaBase extends InputSyncronizedBase implements I
             subchosen = subchosen.getSubAbility();
         }
     
-        // save off color needed for use by any mana and reflected mana
-        subchosen.getManaPart().setExpressChoice(ColorSet.fromMask(colorCanUse));
+        if( 0 == colorNeeded ) {
+            subchosen.getManaPart().setExpressChoice(ColorSet.fromMask(colorCanUse));
+        } else {
+            subchosen.getManaPart().setExpressChoice(ColorSet.fromMask(colorNeeded));
+        }
         
         // System.out.println("Chosen sa=" + chosen + " of " + chosen.getSourceCard() + " to pay mana");
         Runnable proc = new Runnable() {

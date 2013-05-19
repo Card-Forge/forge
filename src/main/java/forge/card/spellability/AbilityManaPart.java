@@ -236,7 +236,7 @@ public class AbilityManaPart implements java.io.Serializable {
         if(cs.hasWhite()) sb.append("W ");
         if(cs.hasRed()) sb.append("R ");
         if(cs.hasGreen()) sb.append("G ");
-        this.lastExpressChoice = cs.toString();
+        this.lastExpressChoice = sb.toString().trim();
     }    
     
     /**
