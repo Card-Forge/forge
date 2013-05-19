@@ -54,14 +54,12 @@ public class CostRemoveCounter extends CostPartWithList {
         
         private final Map<Card,Integer> cardsChosen;
         private final CounterType counterType;
-        private final int nNeeded;
         private final List<Card> validChoices;
         
         public InputSelectCardToRemoveCounter(int cntCounters, CounterType cType, List<Card> validCards) {
             super(cntCounters, cntCounters);
             this.validChoices = validCards;
             counterType = cType;
-            nNeeded = cntCounters;
             cardsChosen = cntCounters > 1 ? new HashMap<Card, Integer>() : null; 
         }
 
@@ -89,19 +87,19 @@ public class CostRemoveCounter extends CostPartWithList {
         @Override
         protected boolean hasAllTargets() {
             int sum = getDistibutedCounters();
-            return sum >= nNeeded;
+            return sum >= max;
         }
         
         protected String getMessage() {
             return max == Integer.MAX_VALUE
                 ? String.format(message, getDistibutedCounters())
-                : String.format(message, nNeeded - getDistibutedCounters());
+                : String.format(message, max - getDistibutedCounters());
         }
 
         private int getDistibutedCounters() {
             int sum = 0;
             for(Card c : selected) {
-                sum += nNeeded == 1 || cardsChosen.get(c) == null ? 1 : cardsChosen.get(c).intValue();
+                sum += max == 1 || cardsChosen.get(c) == null ? 1 : cardsChosen.get(c).intValue();
             }
             return sum;
         }
@@ -112,7 +110,7 @@ public class CostRemoveCounter extends CostPartWithList {
         }
 
         public int getTimesSelected(Card c) {
-            return selected.contains(c) ? nNeeded == 1 || cardsChosen.get(c) == null ? 1 : cardsChosen.get(c).intValue() : 0;
+            return selected.contains(c) ? max == 1 || cardsChosen.get(c) == null ? 1 : cardsChosen.get(c).intValue() : 0;
         }
     }
 

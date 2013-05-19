@@ -17,21 +17,21 @@
  */
 package forge.card.cost;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import forge.Card;
 import forge.CardLists;
 import forge.CounterType;
 import forge.FThreads;
-import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.spellability.SpellAbility;
-import forge.control.input.InputPayment;
-import forge.control.input.InputSyncronizedBase;
+import forge.control.input.InputSelectCards;
 import forge.game.GameState;
 import forge.game.ai.ComputerUtilCard;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
-import forge.view.ButtonUtil;
 
 /**
  * The Class CostPutCounter.
@@ -41,14 +41,11 @@ public class CostPutCounter extends CostPartWithList {
      * TODO: Write javadoc for this type.
      *
      */
-    public static final class InputPayCostPutCounter extends InputSyncronizedBase implements InputPayment {
-        private final String type;
-        private final CostPutCounter costPutCounter;
-        private final int nNeeded;
-        private final SpellAbility sa;
+    public static final class InputPayCostPutCounter extends InputSelectCards {
+
         private static final long serialVersionUID = 2685832214519141903L;
-        private List<Card> typeList;
-        private int nPut = 0;
+        private List<Card> validChoices;
+        private final Map<Card,Integer> cardsChosen;
 
         /**
          * TODO: Write javadoc for Constructor.
@@ -58,61 +55,63 @@ public class CostPutCounter extends CostPartWithList {
          * @param payment
          * @param sa
          */
-        public InputPayCostPutCounter(String type, CostPutCounter costPutCounter, int nNeeded, SpellAbility sa) {
-            super(Singletons.getControl().getPlayer());
-            this.type = type;
-            this.costPutCounter = costPutCounter;
-            this.nNeeded = nNeeded;
-            this.sa = sa;
+        public InputPayCostPutCounter(int cntCounters, List<Card> targets) {
+            super(cntCounters, cntCounters);
+            validChoices = targets;
+            cardsChosen = cntCounters > 1 ? new HashMap<Card, Integer>() : null;
+        }
+        
+        protected String getMessage() {
+            return max == Integer.MAX_VALUE
+                ? String.format(message, getDistibutedCounters())
+                : String.format(message, max - getDistibutedCounters());
+        }
+        
+        private int getDistibutedCounters() {
+            int sum = 0;
+            for(Card c : selected) {
+                sum += max == 1 || cardsChosen.get(c) == null ? 1 : cardsChosen.get(c).intValue();
+            }
+            return sum;
+        }
+
+
+        @Override
+        protected boolean selectEntity(Card c) {
+            if (!isValidChoice(c)) {
+                return false;
+            }
+
+            int tc = getTimesSelected(c);
+            if( tc == 0)
+                selected.add(c);
+            else
+                cardsChosen.put(c, tc+1);
+            
+            onSelectStateChanged(c, true);
+            return true;
         }
 
         @Override
-        public void showMessage() {
-            if ((nNeeded == 0) || (nNeeded == this.nPut)) {
-                this.done();
-            }
-
-            final StringBuilder msg = new StringBuilder("Put ");
-            final int nLeft = nNeeded - this.nPut;
-            msg.append(nLeft).append(" ");
-            msg.append(costPutCounter.getCounter()).append(" on ");
-
-            msg.append(costPutCounter.getDescriptiveType());
-            if (nLeft > 1) {
-                msg.append("s");
-            }
-
-            this.typeList = CardLists.getValidCards(sa.getActivatingPlayer().getCardsIn(ZoneType.Battlefield), type.split(";"), sa.getActivatingPlayer(), sa.getSourceCard());
-            showMessage(msg.toString());
-            ButtonUtil.enableOnlyCancel();
+        protected boolean hasEnoughTargets() {
+            return hasAllTargets();
         }
 
         @Override
-        protected void onCardSelected(Card card) {
-            if (this.typeList.contains(card)) {
-                this.nPut++;
-                costPutCounter.executePayment(sa, card);
-                if (nNeeded == this.nPut) {
-                    this.done();
-                } else {
-                    this.showMessage();
-                }
-            }
-        }
-        
-        boolean bPaid = false;
-        
-        final protected void done() {
-            bPaid = true;
-            this.stop();
+        protected boolean hasAllTargets() {
+            int sum = getDistibutedCounters();
+            return sum >= max;
         }
 
         @Override
-        final protected void onCancel() {
-            this.stop();
+        protected final boolean isValidChoice(Card choice) {
+            return validChoices.contains(choice);
+        }
+
+        public int getTimesSelected(Card c) {
+            return selected.contains(c) ? max == 1 || cardsChosen.get(c) == null ? 1 : cardsChosen.get(c).intValue() : 0;
         }
         
-        final public boolean isPaid() { return bPaid; }
     }
 
     // Put Counter doesn't really have a "Valid" portion of the cost
@@ -255,11 +254,30 @@ public class CostPutCounter extends CostPartWithList {
 
         if (this.payCostFromSource()) {
             executePayment(ability, source, c);
+            lastPaidAmount = c; 
             return true;
         } else {
-            InputPayment inp = new InputPayCostPutCounter(this.getType(), this, c, ability);
+            // Cards to use this branch: Scarscale Ritual, Wandering Mage - each adds only one counter 
+            final Player actor = ability.getActivatingPlayer();
+            List<Card> typeList = CardLists.getValidCards(actor.getCardsIn(ZoneType.Battlefield), getType().split(";"), actor, ability.getSourceCard());
+            
+            InputPayCostPutCounter inp = new InputPayCostPutCounter(c, typeList);
+            inp.setMessage("Put %d " + getCounter().getName() + " counter on " + getDescriptiveType());
+            inp.setCancelAllowed(true);
             FThreads.setInputAndWait(inp);
-            return inp.isPaid();
+            
+            if(inp.hasCancelled())
+                return false;
+
+            int sum = 0;
+            for(Card crd : inp.getSelected()) {
+                int added = inp.getTimesSelected(crd);
+                sum += added;
+                executePayment(ability, crd, added);
+            }
+            source.setSVar("CostCountersAdded", Integer.toString(sum));
+            lastPaidAmount = sum;
+            return true;
         }
     }
 
