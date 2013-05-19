@@ -1,0 +1,37 @@
+[quest]
+id=4010
+OpponentName=Jarad
+AILife=30
+Repeat=true
+Wins=20
+Card Reward=2 multicolor rares;Overgrown Tomb|RAV
+Credit Reward=200
+HumanExtras=Trained Caracal 
+AIExtras=Jarad, Golgari Lich Lord|Savra, Queen of the Golgari
+[metadata]
+Name=quest4010
+Title=Jarad
+Difficulty=hard
+Description=Glorified Sacrifice
+Icon=Jarad.jpg
+Deck Type=constructed
+[main]
+4 Abrupt Decay|RTR
+4 Birds of Paradise|M12
+2 Crypt Champion|DIS
+3 Dimir House Guard|RAV
+1 Drooling Groodion|RAV
+6 Forest|RTR
+4 Golgari Guildgate|RTR
+2 Golgari Guildmage|COM
+4 Grave-Shell Scarab|RAV
+4 Grisly Salvage|RTR
+4 Overgrown Tomb|RTR
+4 Plagued Rusalka|GPT
+4 Putrefy|RAV
+4 Shambling Shell|RAV
+4 Skeletal Vampire|GPT
+6 Swamp|RTR
+[sideboard]
+[planes]
+[schemes]

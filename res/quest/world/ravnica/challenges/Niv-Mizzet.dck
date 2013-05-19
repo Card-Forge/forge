@@ -1,0 +1,35 @@
+[quest]
+id=4009
+OpponentName=Niv-Mizzet
+AILife=30
+Repeat=true
+Wins=20
+Card Reward=2 multicolor rares;Steam Vents|GPT
+Credit Reward=200
+HumanExtras=Minister of Impediments 
+AIExtras=Goblin Electromancer|Guttersnipe
+[metadata]
+Name=quest4009
+Title=Niv-Mizzet
+Difficulty=hard
+Description=Instant karma is gonna get you
+Icon=Niv-Mizzet.jpg
+Deck Type=constructed
+[main]
+4 Cackling Flames|DIS
+4 Char|RAV
+4 Compulsive Research|RAV
+2 Cyclonic Rift|RTR
+4 Electrolyze|COM
+4 Train of Thought|GPT
+3 Goblin Electromancer|RTR
+3 Guttersnipe|RTR
+8 Island|RTR
+4 Izzet Guildgate|RTR
+4 Pyromatics|GPT
+4 Mizzium Mortars|RTR
+8 Mountain|RTR
+4 Steam Vents|RTR
+[sideboard]
+[planes]
+[schemes]

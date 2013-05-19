@@ -1,0 +1,35 @@
+[quest]
+id=4007
+OpponentName=Momir Vig
+AILife=30
+Repeat=true
+Wins=20
+Card Reward=2 multicolor rares;Breeding Pool|DIS
+Credit Reward=200
+HumanExtras=Vigean Hydropon|Thrull Parasite
+AIExtras=Momir Vig, Simic Visionary|Doubling Season
+[metadata]
+Name=quest4007
+Title=Momir Vig
+Difficulty=hard
+Description=Double trouble
+Icon=Momir.jpg
+Deck Type=constructed
+[main]
+4 Breeding Pool|GTC
+4 Brushstrider|RTR
+4 Cloudfin Raptor|GTC
+4 Drakewing Krasis|GTC
+4 Elusive Krasis|GTC
+4 Experiment One|GTC
+9 Forest|RTR
+9 Island|RTR
+2 Simic Guildgate|GTC
+2 Remand|RAV
+3 Shambleshark|GTC
+3 Simic Charm|GTC
+4 Spell Snare|DIS
+4 Zameck Guildmage|GTC
+[sideboard]
+[planes]
+[schemes]
