@@ -105,6 +105,8 @@ public class ComputerUtilMana {
         Map<ManaCostShard, Collection<SpellAbility>> sourcesForShards = ComputerUtilMana.groupAndOrderToPayShards(ai, manaAbilityMap, cost);
         
         // Loop over mana needed
+        List<Card> cardsUsed = test ? new ArrayList<Card>() : null;
+        
         ManaCostShard toPay = null;
         while (!cost.isPaid()) {
             toPay = getNextShardToPay(cost, sourcesForShards);
@@ -113,6 +115,8 @@ public class ComputerUtilMana {
             List<SpellAbility> payableSources = new ArrayList<SpellAbility>();
             if( saList != null  ) { 
                 for (final SpellAbility ma : saList) { 
+                    if( test && cardsUsed.contains(ma.getSourceCard()) )
+                        continue;
                     if( canPayShardWithSpellAbility(toPay, ai, ma, sa, checkPlayable || !test ) ) {
                         payableSources.add(ma);
                     }
@@ -144,6 +148,7 @@ public class ComputerUtilMana {
                 for(Collection<SpellAbility> kv : sourcesForShards.values()) {
                     kv.remove(saPayment);
                 }
+                cardsUsed.add(saPayment.getSourceCard());
             } else {
                 if (saPayment.getPayCosts() != null) {
                     final CostPayment pay = new CostPayment(saPayment.getPayCosts(), saPayment);
