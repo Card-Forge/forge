@@ -50,10 +50,6 @@ public abstract class QuestEvent implements IHasIcon {
     public static final Function<QuestEvent, String> FN_GET_NAME = new Function<QuestEvent, String>() {
         @Override public final String apply(QuestEvent qe) { return qe.name; }  
     };
-    public static final Function<QuestEvent, String> FN_GET_TITLE = new Function<QuestEvent, String>() {
-        @Override public final String apply(QuestEvent qe) { return qe.title; }  
-    };
-
     
     public final String getTitle() {
         return this.title;

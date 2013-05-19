@@ -133,11 +133,9 @@ public enum CSubmenuChallenges implements ICDoc {
 
         view.getPnlChallenges().removeAll();
         qCtrl.regenerateChallenges();
-        final List<String> ids = qCtrl.getAchievements().getCurrentChallenges();
         final List<QuestEventChallenge> challenges = new ArrayList<QuestEventChallenge>();
-        for(final QuestEventChallenge qc : qCtrl.getChallenges()) {
-            if(ids.contains(qc.getId()))
-            challenges.add(qc);
+        for(String id : qCtrl.getAchievements().getCurrentChallenges()) {
+            challenges.add(qCtrl.getChallenges().get(id));
         }
 
         JXButtonPanel grpPanel = new JXButtonPanel();

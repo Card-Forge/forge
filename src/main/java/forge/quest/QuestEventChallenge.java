@@ -20,6 +20,8 @@ package forge.quest;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.common.base.Function;
+
 /**
  * <p>
  * QuestQuest class.
@@ -30,6 +32,10 @@ import java.util.List;
  * 
  */
 public class QuestEventChallenge extends QuestEvent {
+    public static final Function<QuestEventChallenge, String> FN_GET_ID = new Function<QuestEventChallenge, String>() {
+        @Override public final String apply(QuestEventChallenge qe) { return qe.id; }  
+    };
+
     // ID (default -1, should be explicitly set at later time.)
     /** The id. */
     private String id = "-1";

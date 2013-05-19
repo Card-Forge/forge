@@ -9,7 +9,6 @@ import java.util.Map;
 import forge.ImageCache;
 import forge.deck.Deck;
 import forge.deck.io.DeckSerializer;
-import forge.quest.QuestEvent;
 import forge.quest.QuestEventChallenge;
 import forge.quest.QuestEventDifficulty;
 import forge.util.FileSection;
@@ -19,7 +18,7 @@ import forge.util.storage.StorageReaderFolder;
 
 public class QuestChallengeReader extends StorageReaderFolder<QuestEventChallenge> {
     public QuestChallengeReader(File deckDir0) {
-        super(deckDir0, QuestEvent.FN_GET_TITLE);
+        super(deckDir0, QuestEventChallenge.FN_GET_ID);
         // TODO Auto-generated constructor stub
     }
 

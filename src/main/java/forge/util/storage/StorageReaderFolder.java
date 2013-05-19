@@ -104,7 +104,11 @@ public abstract class StorageReaderFolder<T> implements IItemReader<T> {
                     JOptionPane.showMessageDialog(null, msg);
                     continue;
                 }
-                result.put(keySelector.apply(newDeck), newDeck);
+                String newKey = keySelector.apply(newDeck);
+                if( result.containsKey(newKey))
+                    System.err.println("StorageReader: Overwriting an object with key " + newKey);
+                
+                result.put(newKey, newDeck);
             } catch (final OldDeckFileFormatException ex) {
                 if (!hasWarnedOfOldFormat) {
                     JOptionPane

@@ -109,20 +109,12 @@ public class DeckgenUtil {
         return Singletons.getModel().getDecks().getConstructed().get(selection[0]);
     }
 
-    /**
-     * Gets a quest deck.
-     * 
-     * @param selection {java.lang.String}
-     * @return {@link forge.deck.Deck}
-     */
-    public static Deck buildQuestDeck(final String[] selection) {
-        return getQuestEvent(selection[0]).getEventDeck();
-    }
-
     public static QuestEvent getQuestEvent(final String name) {
         QuestController qCtrl = Singletons.getModel().getQuest();
-        QuestEventChallenge challenge = qCtrl.getChallenges().get(name);
-        if( null != challenge ) return challenge;
+        for(QuestEventChallenge challenge : qCtrl.getChallenges()) {
+            if( challenge.getTitle().equals(name) )
+                return challenge;
+        }
 
         QuestEventDuel duel = Iterables.find(qCtrl.getDuelsManager().getAllDuels(), new Predicate<QuestEventDuel>() {
             @Override public boolean apply(QuestEventDuel in) { return in.getName().equals(name); } 

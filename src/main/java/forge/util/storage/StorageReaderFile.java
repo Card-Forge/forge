@@ -84,7 +84,11 @@ public abstract class StorageReaderFile<T> implements IItemReader<T> {
             }
 
             idx++;
-            result.put(this.keySelector.apply(item), item);
+            String newKey = keySelector.apply(item);
+            if( result.containsKey(newKey))
+                System.err.println("StorageReader: Overwriting an object with key " + newKey);
+            
+            result.put(newKey, item);
         }
 
         return result;
