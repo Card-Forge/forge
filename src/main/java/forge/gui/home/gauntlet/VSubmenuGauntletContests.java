@@ -44,11 +44,8 @@ public enum VSubmenuGauntletContests implements IVSubmenu<CSubmenuGauntletContes
 
     private final StartButton btnStart  = new StartButton();
 
-    private final FLabel btnRandom = new FLabel.Builder()
-        .text("Random").hoverable(true).build();
 
     private final JPanel pnlLoad = new JPanel(new MigLayout("insets 0, gap 0, wrap"));
-    private final JPanel pnlDecks = new JPanel();
 
     private final ContestGauntletLister gauntletList = new ContestGauntletLister();
     private final FDeckChooser lstDecks = new FDeckChooser("Deck", PlayerType.HUMAN);
@@ -56,9 +53,6 @@ public enum VSubmenuGauntletContests implements IVSubmenu<CSubmenuGauntletContes
     private final JScrollPane scrLeft  = new FScrollPane(gauntletList,
             ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
-
-    private final JLabel lblDeck = new FLabel.Builder().fontSize(16)
-            .fontStyle(Font.BOLD).text("DECK").fontAlign(SwingConstants.CENTER).build();
     private final JLabel lblLoad = new FLabel.Builder().fontSize(16)
             .fontStyle(Font.BOLD).text("PICK A CONTEST").fontAlign(SwingConstants.CENTER).build();
 
@@ -75,13 +69,6 @@ public enum VSubmenuGauntletContests implements IVSubmenu<CSubmenuGauntletContes
        // pnlLoad.add(new FLabel.Builder().text("If a gauntlet has been started, its deck is frozen.").build(),
          //       "gap 0 0 0 5px, ax center");
         pnlLoad.add(scrLeft, "w 94%!, pushy, growy, gap 3% 0 0 10px");
-
-        btnRandom.setOpaque(true);
-        pnlDecks.setLayout(new MigLayout("insets 0, gap 0, wrap"));
-        pnlDecks.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
-        pnlDecks.add(lblDeck, "h 30px!, w 94%!, gap 1% 0 0 5px, ax center");
-        pnlDecks.add(btnRandom, "h 30px!, w 200px!, gap 25% 0 0 10px");
-        pnlDecks.add(lstDecks, "w 94%!, pushy, growy, gap 3% 0 0 10px");
     }
 
     /* (non-Javadoc)
@@ -119,8 +106,10 @@ public enum VSubmenuGauntletContests implements IVSubmenu<CSubmenuGauntletContes
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(lblTitle, "w 98%!, h 30px!, gap 1% 0 15px 15px, span 2");
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(lblDesc1, "gap 0 0 0 15px, ax center, span 2");
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(pnlLoad, "w 56%!, gap 1% 2% 0 15px, pushy, growy");
-        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(pnlDecks, "w 40%!, gap 0 0 0 15px, pushy, growy");
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(lstDecks, "w 40%!, gap 0 0 0 15px, pushy, growy");
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(btnStart, "w 98%!, ax center, gap 1% 0 20px 20px, span 2");
+        
+        lstDecks.populate();
 
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().repaintSelf();
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().revalidate();
@@ -130,11 +119,6 @@ public enum VSubmenuGauntletContests implements IVSubmenu<CSubmenuGauntletContes
     /** @return {@link javax.swing.JButton} */
     public JButton getBtnStart() {
         return this.btnStart;
-    }
-
-    /** @return {@link forge.gui.toolbox.FLabel} */
-    public FLabel getBtnRandom() {
-        return this.btnRandom;
     }
 
     /** @return {@link forge.gui.home.gauntlet.ContestGauntletLister} */
