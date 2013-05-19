@@ -2,20 +2,13 @@ package forge.gui.home.gauntlet;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import javax.swing.JList;
-import javax.swing.ListSelectionModel;
 import javax.swing.SwingUtilities;
-import org.apache.commons.lang3.ArrayUtils;
-
 import forge.Command;
 import forge.FThreads;
 import forge.Singletons;
@@ -23,7 +16,6 @@ import forge.control.Lobby;
 import forge.deck.Deck;
 import forge.deck.DeckgenUtil;
 import forge.deck.DeckgenUtil.DeckTypes;
-import forge.deck.generate.GenerateThemeDeck;
 import forge.game.GameType;
 import forge.game.MatchController;
 import forge.game.MatchStartHelper;
@@ -33,9 +25,6 @@ import forge.gauntlet.GauntletIO;
 import forge.gui.SOverlayUtils;
 import forge.gui.framework.ICDoc;
 import forge.model.FModel;
-import forge.quest.QuestController;
-import forge.quest.QuestEvent;
-import forge.util.storage.IStorage;
 
 /** 
  * Controls the "quick gauntlet" submenu in the home UI.
@@ -48,31 +37,6 @@ import forge.util.storage.IStorage;
 public enum CSubmenuGauntletQuick implements ICDoc {
     /** */
     SINGLETON_INSTANCE;
-
-    private final MouseAdapter madDecklist = new MouseAdapter() {
-        @Override
-        public void mouseClicked(final MouseEvent e) {
-            if (e.getClickCount() == 2) {
-                if (view.getRadColorDecks().isSelected()) { return; }
-                if (view.getRadThemeDecks().isSelected()) { return; }
-
-                DeckgenUtil.showDecklist(((JList) e.getSource())); }
-        }
-    };
-
-    private final Command cmdRandomRegular = new Command() {
-        @Override
-        public void run() {
-            DeckgenUtil.randomSelect(view.getLstDecks());
-        }
-    };
-
-    private final Command cmdRandomColors = new Command() {
-        @Override
-        public void run() {
-            view.getLstDecks().setSelectedIndices(DeckgenUtil.randomSelectColors());
-        }
-    };
 
     private final ActionListener actStartGame = new ActionListener() { @Override
         public void actionPerformed(ActionEvent arg0) { startGame(); } };
@@ -94,48 +58,14 @@ public enum CSubmenuGauntletQuick implements ICDoc {
      */
     @Override
     public void initialize() {
-        final ActionListener deckUpdate = new ActionListener() {
-            @Override
-            public void actionPerformed(final ActionEvent arg0) {
-            updateDecks(); }
-        };
-
         view.getBtnStart().addActionListener(actStartGame);
-        view.getLstDecks().addMouseListener(madDecklist);
 
-        // Deck list and radio button event handling
-        view.getRadUserDecks().setSelected(true);
-
-        view.getRadQuestDecks().addActionListener(deckUpdate);
-        view.getRadColorDecks().addActionListener(deckUpdate);
-        view.getRadThemeDecks().addActionListener(deckUpdate);
-        view.getRadUserDecks().addActionListener(deckUpdate);
-
-        updateDecks();
         updateData();
 
         view.getGauntletLister().setSelectedIndex(0);
+        view.getLstDecks().initialize();
     }
 
-    /** Handles all control for "custom" radio button click. */
-    private void updateDecks() {
-        if (view.getRadUserDecks().isSelected()) {
-            view.getBtnRandom().setCommand(cmdRandomRegular);
-            updateUserDecks();
-        }
-        else if (view.getRadQuestDecks().isSelected()) {
-            view.getBtnRandom().setCommand(cmdRandomRegular);
-            updateQuestDecks();
-        }
-        else if (view.getRadThemeDecks().isSelected()) {
-            view.getBtnRandom().setCommand(cmdRandomRegular);
-            updateThemeDecks();
-        }
-        else if (view.getRadColorDecks().isSelected()) {
-            view.getBtnRandom().setCommand(cmdRandomColors);
-            updateColorDecks();
-        }
-    }
 
     private void updateData() {
         final File[] files = GauntletIO.getGauntletFilesUnlocked();
@@ -146,64 +76,6 @@ public enum CSubmenuGauntletQuick implements ICDoc {
         }
 
         view.getGauntletLister().setGauntlets(data);
-    }
-
-    private void updateUserDecks() {
-        final List<String> customNames = new ArrayList<String>();
-        final IStorage<Deck> allDecks = Singletons.getModel().getDecks().getConstructed();
-        for (final Deck d : allDecks) { customNames.add(d.getName()); }
-
-        view.getLstDecks().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        view.getLstDecks().setListData(customNames.toArray(ArrayUtils.EMPTY_STRING_ARRAY));
-        view.getLstDecks().setName(DeckTypes.CUSTOM.toString());
-
-        // Init first in list
-        view.getLstDecks().setSelectedIndex(0);
-    }
-
-    /** Handles all control for "quest event" radio button click. */
-    private void updateQuestDecks() {
-        final List<String> eventNames = new ArrayList<String>();
-        QuestController quest = Singletons.getModel().getQuest();
-
-        for (final QuestEvent e : quest.getDuelsManager().getAllDuels()) {
-            eventNames.add(e.getEventDeck().getName());
-        }
-
-        for (final QuestEvent e : quest.getChallenges()) {
-            eventNames.add(e.getEventDeck().getName());
-        }
-
-        view.getLstDecks().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        view.getLstDecks().setListData(eventNames.toArray(ArrayUtils.EMPTY_STRING_ARRAY));
-        view.getLstDecks().setName(DeckTypes.QUESTEVENTS.toString());
-
-        // Init first in list
-        view.getLstDecks().setSelectedIndex(0);
-    }
-
-    /** Handles all control for "themes" radio button click. */
-    private void updateThemeDecks() {
-        final List<String> themeNames = new ArrayList<String>();
-        for (final String s : GenerateThemeDeck.getThemeNames()) { themeNames.add(s); }
-
-        view.getLstDecks().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        view.getLstDecks().setListData(themeNames.toArray(ArrayUtils.EMPTY_STRING_ARRAY));
-        view.getLstDecks().setName(DeckTypes.THEMES.toString());
-
-        // Init first in list
-        view.getLstDecks().setSelectedIndex(0);
-    }
-
-    /** Handles all control for "colors" radio button click. */
-    private void updateColorDecks() {
-        view.getLstDecks().setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-        view.getLstDecks().setListData(new String[] {"Random 1", "Random 2", "Random 3",
-                "Random 4", "Black", "Blue", "Green", "Red", "White"});
-        view.getLstDecks().setName(DeckTypes.COLORS.toString());
-
-        // Init basic two color deck
-        view.getLstDecks().setSelectedIndices(new int[]{0, 1});
     }
 
     private void startGame() {
@@ -226,23 +98,7 @@ public enum CSubmenuGauntletQuick implements ICDoc {
         FModel.SINGLETON_INSTANCE.getGauntletData().setName(GauntletIO.PREFIX_QUICK + num);
 
         // Pull user deck
-        final Deck userDeck;
-        final String[] selection = Arrays.asList(
-                view.getLstDecks().getSelectedValues()).toArray(new String[0]);
-
-        if (view.getRadColorDecks().isSelected()) {
-            if (!DeckgenUtil.colorCheck(selection)) { return; }
-            userDeck = DeckgenUtil.buildColorDeck(selection, PlayerType.HUMAN);
-        }
-        else if (view.getRadQuestDecks().isSelected()) {
-            userDeck = DeckgenUtil.buildQuestDeck(selection);
-        }
-        else if (view.getRadThemeDecks().isSelected()) {
-            userDeck = DeckgenUtil.buildThemeDeck(selection);
-        }
-        else {
-            userDeck = DeckgenUtil.getConstructedDeck(selection);
-        }
+        final Deck userDeck = view.getLstDecks().getDeck().getOriginalDeck(); 
 
         // Generate gauntlet decks
         final int numOpponents = view.getSliOpponents().getValue();

@@ -2,19 +2,16 @@ package forge.gui.home.gauntlet;
 
 import java.awt.Font;
 
-import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
-import javax.swing.JList;
-import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JSlider;
-import javax.swing.ListSelectionModel;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
 
 import net.miginfocom.swing.MigLayout;
+import forge.game.player.PlayerType;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
@@ -23,11 +20,9 @@ import forge.gui.home.IVSubmenu;
 import forge.gui.home.StartButton;
 import forge.gui.home.VHomeUI;
 import forge.gui.toolbox.FCheckBox;
+import forge.gui.toolbox.FDeckChooser;
 import forge.gui.toolbox.FLabel;
-import forge.gui.toolbox.FList;
 import forge.gui.toolbox.FPanel;
-import forge.gui.toolbox.FRadioButton;
-import forge.gui.toolbox.FScrollPane;
 import forge.gui.toolbox.FSkin;
 
 /** 
@@ -46,7 +41,6 @@ public enum VSubmenuGauntletQuick implements IVSubmenu<CSubmenuGauntletQuick> {
 
     // Other fields
     private final FPanel pnlOptions = new FPanel(new MigLayout("insets 0, gap 0, wrap"));
-    private final FPanel pnlDecks = new FPanel();
     private final FLabel lblTitle = new FLabel.Builder()
         .text("Quick Gauntlet Builder").fontAlign(SwingConstants.CENTER)
         .opaque(true).fontSize(16).build();
@@ -63,24 +57,14 @@ public enum VSubmenuGauntletQuick implements IVSubmenu<CSubmenuGauntletQuick> {
     private final JCheckBox boxColorDecks = new FCheckBox("Fully random color Decks");
     private final JCheckBox boxThemeDecks = new FCheckBox("Semi-random theme Decks");
 
-    private final JRadioButton radUserDecks = new FRadioButton("Custom user decks");
-    private final JRadioButton radQuestDecks = new FRadioButton("Quest Events");
-    private final JRadioButton radRandomColor = new FRadioButton("Fully random colors");
-    private final JRadioButton radThemeDecks = new FRadioButton("Semi-random themes");
-
-    private final JList lstDecks = new FList();
+    private final FDeckChooser lstDecks = new FDeckChooser("Deck", PlayerType.HUMAN);
     private final QuickGauntletLister gauntletList = new QuickGauntletLister();
 
     private final JLabel lblOptions = new FLabel.Builder().fontSize(16)
             .fontStyle(Font.BOLD).text("OPTIONS").fontAlign(SwingConstants.CENTER).build();
 
-    private final JLabel lblDeck = new FLabel.Builder().fontSize(16)
-            .fontStyle(Font.BOLD).text("DECK").fontAlign(SwingConstants.CENTER).build();
 
-    private final FLabel btnRandom = new FLabel.Builder()
-            .text("Random").hoverable(true).build();
 
-    private final JScrollPane scrDecks = new FScrollPane(lstDecks);
     private final JScrollPane scrLoad = new JScrollPane(gauntletList,
             ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
             ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
@@ -105,6 +89,7 @@ public enum VSubmenuGauntletQuick implements IVSubmenu<CSubmenuGauntletQuick> {
         boxThemeDecks.setSelected(true);
         boxColorDecks.setSelected(true);
 
+
         sliOpponents.setMajorTickSpacing(5);
         sliOpponents.setMinorTickSpacing(0);
         sliOpponents.setPaintTicks(false);
@@ -114,20 +99,11 @@ public enum VSubmenuGauntletQuick implements IVSubmenu<CSubmenuGauntletQuick> {
         sliOpponents.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
         sliOpponents.setFont(FSkin.getFont(12));
 
-        btnRandom.setOpaque(true);
+
 
         scrLoad.setOpaque(false);
         scrLoad.getViewport().setOpaque(false);
         scrLoad.setBorder(null);
-
-        // Radio button grouping
-        final ButtonGroup grpRadDecks = new ButtonGroup();
-        grpRadDecks.add(radUserDecks);
-        grpRadDecks.add(radQuestDecks);
-        grpRadDecks.add(radRandomColor);
-        grpRadDecks.add(radThemeDecks);
-
-        lstDecks.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
         pnlOptions.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
         pnlOptions.add(lblOptions, "h 30px!, w 96%!, gap 2% 0 0 5px");
@@ -139,17 +115,6 @@ public enum VSubmenuGauntletQuick implements IVSubmenu<CSubmenuGauntletQuick> {
         pnlOptions.add(boxQuestDecks, "w 96%!, h 30px!, gap 2% 0 0 5px");
         pnlOptions.add(boxThemeDecks, "w 96%!, h 30px!, gap 2% 0 0 5px");
         pnlOptions.add(boxColorDecks, "w 96%!, h 30px!, gap 2% 0 0 0");
-
-        pnlDecks.setLayout(new MigLayout("insets 0, gap 0, wrap"));
-        pnlDecks.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
-        pnlDecks.setCornerDiameter(0);
-        pnlDecks.add(lblDeck, "h 30px!, w 94%!, gap 1% 0 0 5px, ax center");
-        pnlDecks.add(radUserDecks, "w 96%!, h 30px!, gap 2% 0 0 5px");
-        pnlDecks.add(radQuestDecks, "w 96%!, h 30px!, gap 2% 0 0 5px");
-        pnlDecks.add(radRandomColor, "w 96%!, h 30px!, gap 2% 0 0 5px");
-        pnlDecks.add(radThemeDecks, "w 96%!, h 30px!, gap 2% 0 0 5px");
-        pnlDecks.add(btnRandom, "h 30px!, w 200px!, gap 25% 0 0 10px");
-        pnlDecks.add(scrDecks, "w 94%!, pushy, growy, gap 3% 0 0 10px");
     }
 
     /* (non-Javadoc)
@@ -188,15 +153,17 @@ public enum VSubmenuGauntletQuick implements IVSubmenu<CSubmenuGauntletQuick> {
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(lblDesc, "ax center, gap 0 0 0 5px, span 2");
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(lblDecklist, "ax center, gap 0 0 0 15px, span 2");
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(pnlOptions, "w 40%!, gap 1% 1% 0 0, pushy, growy");
-        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(pnlDecks, "w 57%!, pushy, growy");
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(lstDecks, "w 57%!, pushy, growy");
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(btnStart, "w 98%!, ax center, gap 1% 0 20px 20px, span 2");
 
+        getLstDecks().populate();
+        
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().repaintSelf();
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().revalidate();
     }
 
     /** @return {@link javax.swing.JList} */
-    public JList getLstDecks() {
+    public FDeckChooser getLstDecks() {
         return this.lstDecks;
     }
 
@@ -224,35 +191,9 @@ public enum VSubmenuGauntletQuick implements IVSubmenu<CSubmenuGauntletQuick> {
     public JCheckBox getBoxThemeDecks() {
         return boxThemeDecks;
     }
-
-    /** @return {@link javax.swing.JRadioButton} */
-    public JRadioButton getRadUserDecks() {
-        return this.radUserDecks;
-    }
-
-    /** @return {@link javax.swing.JRadioButton} */
-    public JRadioButton getRadQuestDecks() {
-        return this.radQuestDecks;
-    }
-
-    /** @return {@link javax.swing.JRadioButton} */
-    public JRadioButton getRadColorDecks() {
-        return this.radRandomColor;
-    }
-
-    /** @return {@link javax.swing.JRadioButton} */
-    public JRadioButton getRadThemeDecks() {
-        return this.radThemeDecks;
-    }
-
     /** @return {@link javax.swing.JSlider} */
     public JSlider getSliOpponents() {
         return this.sliOpponents;
-    }
-
-    /** @return {@link forge.gui.toolbox.FLabel} */
-    public FLabel getBtnRandom() {
-        return this.btnRandom;
     }
 
     /** @return {@link javax.swing.JButton} */
