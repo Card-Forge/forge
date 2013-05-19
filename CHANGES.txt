@@ -16,11 +16,16 @@ The devs are discussing a plan to update the battlefield display code with Java 
 We have added a branch to our SVN for the new cards that are currently being scripted. These cards are not yet available in this build of forge. Please be patient and they will soon become available.
 
 
+- Blank screen when starting a match -
+This problem should be fixed. At least you'll see an exception/crash report describing why the match didn't start instead of a blank screen.
+
+
 ---------
 New Cards
 ---------
 
 Sand Golem
+Bronze Horse
 
 
 --------------------
@@ -44,6 +49,23 @@ Striking Sliver
 
 Shadowborn Apostle
 Shadowborn Demon
+Awaken the Ancient
+Staff of the Flame Magus
+Staff of the Mind Magus
+Hive Stirrings
+Sliver Construct
+Bonescythe Sliver
+Master of Diversion
+Predatory Sliver
+Staff of the Death Magus
+Charging Grffin
+Glimpse the Future
+Ogre Battledriver
+Rise of the Dark Realms
+Seraph of the Sword
+Young Pyromancer
+Ajani's Chosen
+Devout Invocation
 
 
 ------------
