@@ -87,7 +87,7 @@ public abstract class InputSelectManyBase<T extends GameEntity> extends InputSyn
     }
 
     public void setMessage(String message0) {
-        this.message = message0; // TODO: Add 0 to parameter's name.
+        this.message = message0;
     }
 
     // must define these

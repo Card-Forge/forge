@@ -48,7 +48,6 @@ import forge.game.ai.ComputerUtilCard;
 import forge.game.ai.ComputerUtilCombat;
 import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
-import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 import forge.util.Aggregates;
@@ -62,6 +61,42 @@ import forge.util.Aggregates;
  * @version $Id$
  */
 public class CardFactoryCreatures {
+    /** 
+     * TODO: Write javadoc for this type.
+     *
+     */
+    public static final class InputSelectCardsForDreadnought extends InputSelectCards {
+        private static final long serialVersionUID = 2698036349873486664L;
+
+        public InputSelectCardsForDreadnought(int min, int max) {
+            super(min, max);
+        }
+
+        @Override
+        protected String getMessage() {
+            return String.format(message, selected.size(), getTotalPower());
+        }
+
+        @Override
+        protected boolean isValidChoice(Card c) {
+            return c.isCreature() && player.getZone(ZoneType.Battlefield).contains(c);
+        } // selectCard()
+
+        @Override
+        protected boolean hasEnoughTargets() {
+            return getTotalPower() >= 12;
+        }
+
+        private int getTotalPower() {
+            int sum = 0;
+            for (final Card c : selected) {
+                sum += c.getNetAttack();
+            }
+            return sum;
+        }
+    }
+
+
     private static void getCard_SphinxJwar(final Card card) {
         final SpellAbility ability1 = new AbilityStatic(card, ManaCost.ZERO) {
             @Override
@@ -308,37 +343,10 @@ public class CardFactoryCreatures {
             public void resolve() {
                 final GameState game = player.getGame();
                 if (player.isHuman()) {
-                    final InputSelectCards target = new InputSelectCards(0, Integer.MAX_VALUE) {
-                        private static final long serialVersionUID = 2698036349873486664L;
-                        
-                        @Override
-                        public String getMessage() {
-                            String toDisplay = cardName + " - Select any number of creatures to sacrifice.  ";
-                            toDisplay += "Currently, (" + selected.size() + ") selected with a total power of: " + getTotalPower();
-                            toDisplay += "  Click OK when Done.";
-                            return toDisplay;
-                        }
-
-                        @Override
-                        protected boolean isValidChoice(Card c) {
-                            Zone zone = game.getZoneOf(c);
-                            return c.isCreature() && zone.is(ZoneType.Battlefield, player);
-                        } // selectCard()
-
-                        @Override
-                        protected boolean hasEnoughTargets() {
-                            return getTotalPower() >= 12;
-                        };
-
-                        private int getTotalPower() {
-                            int sum = 0;
-                            for (final Card c : selected) {
-                                sum += c.getNetAttack();
-                            }
-                            return sum;
-                        }
-                    }; // Input
-
+                    final InputSelectCards target = new InputSelectCardsForDreadnought(0, Integer.MAX_VALUE); // Input
+                    String toDisplay = cardName + " - Select any number of creatures to sacrifice.\n" +
+                            "Currently, (%d) selected with a total power of: %d\n\n" + "Click OK when Done.";
+                    target.setMessage(toDisplay);
                     target.setCancelAllowed(true);
                     FThreads.setInputAndWait(target);
                     if(!target.hasCancelled()) {

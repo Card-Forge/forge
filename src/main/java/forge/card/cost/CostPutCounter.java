@@ -41,7 +41,7 @@ public class CostPutCounter extends CostPartWithList {
      * TODO: Write javadoc for this type.
      *
      */
-    public static final class InputPayCostPutCounter extends InputSelectCards {
+    public static final class InputSelectCardToPutCounter extends InputSelectCards {
 
         private static final long serialVersionUID = 2685832214519141903L;
         private List<Card> validChoices;
@@ -55,7 +55,7 @@ public class CostPutCounter extends CostPartWithList {
          * @param payment
          * @param sa
          */
-        public InputPayCostPutCounter(int cntCounters, List<Card> targets) {
+        public InputSelectCardToPutCounter(int cntCounters, List<Card> targets) {
             super(cntCounters, cntCounters);
             validChoices = targets;
             cardsChosen = cntCounters > 1 ? new HashMap<Card, Integer>() : null;
@@ -261,7 +261,7 @@ public class CostPutCounter extends CostPartWithList {
             final Player actor = ability.getActivatingPlayer();
             List<Card> typeList = CardLists.getValidCards(actor.getCardsIn(ZoneType.Battlefield), getType().split(";"), actor, ability.getSourceCard());
             
-            InputPayCostPutCounter inp = new InputPayCostPutCounter(c, typeList);
+            InputSelectCardToPutCounter inp = new InputSelectCardToPutCounter(c, typeList);
             inp.setMessage("Put %d " + getCounter().getName() + " counter on " + getDescriptiveType());
             inp.setCancelAllowed(true);
             FThreads.setInputAndWait(inp);
