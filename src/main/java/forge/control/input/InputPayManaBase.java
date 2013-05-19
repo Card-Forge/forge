@@ -166,7 +166,7 @@ public abstract class InputPayManaBase extends InputSyncronizedBase implements I
             // express Mana Choice
             final ArrayList<SpellAbility> colorMatches = new ArrayList<SpellAbility>();
             for (SpellAbility sa : abilities) {
-                if (abilityProducesManaColor(sa, colorNeeded))
+                if (colorNeeded != 0 && abilityProducesManaColor(sa, colorNeeded))
                     colorMatches.add(sa);
             }
             
@@ -187,11 +187,8 @@ public abstract class InputPayManaBase extends InputSyncronizedBase implements I
             subchosen = subchosen.getSubAbility();
         }
     
-        if( 0 == colorNeeded ) {
-            subchosen.getManaPart().setExpressChoice(ColorSet.fromMask(colorCanUse));
-        } else {
-            subchosen.getManaPart().setExpressChoice(ColorSet.fromMask(colorNeeded));
-        }
+        ColorSet colors = ColorSet.fromMask(0 == colorNeeded ? colorCanUse : colorNeeded);
+        subchosen.getManaPart().setExpressChoice(colors);
         
         // System.out.println("Chosen sa=" + chosen + " of " + chosen.getSourceCard() + " to pay mana");
         Runnable proc = new Runnable() {
