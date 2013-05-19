@@ -101,13 +101,6 @@ public class TriggerHandler {
         this.suppressedModes.remove(mode);
     }
 
-    public static Trigger parseTrigger(final String name, final String trigParse, final Card host,
-            final boolean intrinsic) {
-        final Trigger ret = TriggerHandler.parseTrigger(trigParse, host, intrinsic);
-        ret.setName(name);
-        return ret;
-    }
-
     public static Trigger parseTrigger(final String trigParse, final Card host, final boolean intrinsic) {
         final HashMap<String, String> mapParams = TriggerHandler.parseParams(trigParse);
         return TriggerHandler.parseTrigger(mapParams, host, intrinsic);

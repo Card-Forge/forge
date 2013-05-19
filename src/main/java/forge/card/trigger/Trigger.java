@@ -35,7 +35,7 @@ import forge.game.zone.ZoneType;
 
 /**
  * <p>
- * Abstract Trigger class.
+ * Abstract Trigger class. Constructed by reflection only
  * </p>
  * 
  * @author Forge
@@ -57,32 +57,6 @@ public abstract class Trigger extends TriggerReplacementBase {
 
     /** The ID. */
     private int id = Trigger.nextID++;
-
-    /** The name. */
-    private String name;
-
-    /**
-     * <p>
-     * Getter for the field <code>name</code>.
-     * </p>
-     * 
-     * @return a {@link java.lang.String} object.
-     */
-    public final String getName() {
-        return this.name;
-    }
-
-    /**
-     * <p>
-     * Setter for the field <code>name</code>.
-     * </p>
-     * 
-     * @param n
-     *            a {@link java.lang.String} object.
-     */
-    public final void setName(final String n) {
-        this.name = n;
-    }
 
     /**
      * <p>
@@ -143,32 +117,9 @@ public abstract class Trigger extends TriggerReplacementBase {
     }
 
     /** The is intrinsic. */
-    private boolean isIntrinsic;
+    private final boolean intrinsic;
 
     private List<PhaseType> validPhases;
-
-    /**
-     * <p>
-     * Constructor for Trigger.
-     * </p>
-     * 
-     * @param n
-     *            a {@link java.lang.String} object.
-     * @param params
-     *            a {@link java.util.HashMap} object.
-     * @param host
-     *            a {@link forge.Card} object.
-     * @param intrinsic
-     *            the intrinsic
-     */
-    public Trigger(final String n, final Map<String, String> params, final Card host, final boolean intrinsic) {
-        this.name = n;
-        this.setRunParams(new HashMap<String, Object>());
-        this.mapParams.putAll(params);
-        this.setHostCard(host);
-
-        this.setIntrinsic(intrinsic);
-    }
 
     /**
      * <p>
@@ -187,7 +138,7 @@ public abstract class Trigger extends TriggerReplacementBase {
         this.mapParams.putAll(params);
         this.setHostCard(host);
 
-        this.setIntrinsic(intrinsic);
+        this.intrinsic = intrinsic;
     }
 
     /**
@@ -424,18 +375,9 @@ public abstract class Trigger extends TriggerReplacementBase {
      * @return the isIntrinsic
      */
     public boolean isIntrinsic() {
-        return this.isIntrinsic;
+        return this.intrinsic;
     }
 
-    /**
-     * Sets the intrinsic.
-     * 
-     * @param isIntrinsic0
-     *            the isIntrinsic to set
-     */
-    public void setIntrinsic(final boolean isIntrinsic0) {
-        this.isIntrinsic = isIntrinsic0;
-    }
 
     /**
      * Gets the run params.
@@ -518,13 +460,12 @@ public abstract class Trigger extends TriggerReplacementBase {
 
     public final Trigger getCopyForHostCard(Card newHost) {
         TriggerType tt = TriggerType.getTypeFor(this);
-        Trigger copy = tt.createTrigger(mapParams, newHost, isIntrinsic); 
+        Trigger copy = tt.createTrigger(mapParams, newHost, intrinsic); 
 
         if (this.getOverridingAbility() != null) {
             copy.setOverridingAbility(this.getOverridingAbility());
         }
         
-        copy.setName(this.getName());
         copy.setID(this.getId());
         copy.setMode(this.getMode());
         copy.setTriggerPhases(this.validPhases);

@@ -782,25 +782,6 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     /**
      * <p>
-     * getNamedTrigger.
-     * </p>
-     * 
-     * @param name
-     *            a {@link java.lang.String} object.
-     * @return a {@link forge.card.trigger.Trigger} object.
-     */
-    public final Trigger getNamedTrigger(final String name) {
-        for (final Trigger t : this.getCharacteristics().getTriggers()) {
-            if ((t.getName() != null) && t.getName().equals(name)) {
-                return t;
-            }
-        }
-
-        return null;
-    }
-
-    /**
-     * <p>
      * Setter for the field <code>triggers</code>.
      * </p>
      * 
