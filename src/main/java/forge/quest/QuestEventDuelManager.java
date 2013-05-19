@@ -49,7 +49,7 @@ public class QuestEventDuelManager {
     /** Instantiate all events and difficulty lists.
      * @param dir &emsp; File object */
     public QuestEventDuelManager(final File dir) {
-        allDuels = new StorageView<>(new QuestDuelReader(dir));
+        allDuels = new StorageView<QuestEventDuel>(new QuestDuelReader(dir));
         assembleDuelDifficultyLists();
     } // End assembleAllEvents()
 
