@@ -1,8 +1,6 @@
 package forge.card.ability.ai;
 
 import java.util.List;
-import java.util.Random;
-
 import forge.Card;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityAi;
@@ -14,7 +12,6 @@ import forge.game.ai.ComputerUtilCost;
 import forge.game.ai.ComputerUtilMana;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
-import forge.util.MyRandom;
 
 public class LifeLoseAi extends SpellAbilityAi {
 
@@ -53,7 +50,6 @@ public class LifeLoseAi extends SpellAbilityAi {
     @Override
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
 
-        final Random r = MyRandom.getRandom();
         final Cost abCost = sa.getPayCosts();
         final Card source = sa.getSourceCard();
         boolean priority = false;

@@ -33,7 +33,6 @@ import forge.model.FModel;
  *
  */
 
-@SuppressWarnings("serial")
 public enum CSubmenuGauntletQuick implements ICDoc {
     /** */
     SINGLETON_INSTANCE;
