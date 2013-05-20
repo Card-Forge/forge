@@ -256,43 +256,6 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     /* (non-Javadoc)
-     * @see forge.game.player.PlayerController#shouldAlwaysAcceptTrigger(java.lang.Integer)
-     */
-    @Override
-    public boolean shouldAlwaysAcceptTrigger(Integer trigger) {
-        return false;
-    }
-
-    /* (non-Javadoc)
-     * @see forge.game.player.PlayerController#shouldAlwaysDeclineTrigger(java.lang.Integer)
-     */
-    @Override
-    public boolean shouldAlwaysDeclineTrigger(Integer trigger) {
-        return false;
-    }
-
-    /* (non-Javadoc)
-     * @see forge.game.player.PlayerController#setShouldAlwaysAcceptTrigger(java.lang.Integer)
-     */
-    @Override
-    public void setShouldAlwaysAcceptTrigger(Integer trigger) {
-    }
-
-    /* (non-Javadoc)
-     * @see forge.game.player.PlayerController#setShouldAlwaysDeclineTrigger(java.lang.Integer)
-     */
-    @Override
-    public void setShouldAlwaysDeclineTrigger(Integer trigger) {
-    }
-
-    /* (non-Javadoc)
-     * @see forge.game.player.PlayerController#setShouldAlwaysAskTrigger(java.lang.Integer)
-     */
-    @Override
-    public void setShouldAlwaysAskTrigger(Integer trigger) {
-    }
-
-    /* (non-Javadoc)
      * @see forge.game.player.PlayerController#chooseCardsToDiscardUnlessType(int, java.util.List, java.lang.String, forge.card.spellability.SpellAbility)
      */
     @Override

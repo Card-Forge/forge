@@ -1,6 +1,8 @@
 package forge.game.player;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -45,12 +47,6 @@ public abstract class PlayerController {
     public abstract Input getCleanupInput();
     public final Input getAutoPassPriorityInput() { return autoPassPriorityInput; }
 
-    public abstract boolean shouldAlwaysAcceptTrigger(Integer trigger);
-    public abstract boolean shouldAlwaysDeclineTrigger(Integer trigger);
-    public abstract void setShouldAlwaysAcceptTrigger(Integer trigger);
-    public abstract void setShouldAlwaysDeclineTrigger(Integer trigger);
-    public abstract void setShouldAlwaysAskTrigger(Integer trigger);
-
     /**
      * TODO: Write javadoc for this method.
      * @param cleanup
@@ -62,15 +58,26 @@ public abstract class PlayerController {
         autoPassUntil = null;
     }
 
-
     public boolean mayAutoPass(PhaseType phase) {
         return phase.isBefore(autoPassUntil);
     }
 
-
     public boolean isUiSetToSkipPhase(final Player turn, final PhaseType phase) {
         return false; // human has it's overload
     }
+
+    // Triggers preliminary choice: ask, decline or play
+    private Map<Integer, Boolean> triggersAlwaysAccept = new HashMap<Integer, Boolean>();
+
+    public final  boolean shouldAlwaysAcceptTrigger(Integer trigger) { return Boolean.TRUE.equals(triggersAlwaysAccept.get(trigger)); }
+    public final boolean shouldAlwaysDeclineTrigger(Integer trigger) { return Boolean.FALSE.equals(triggersAlwaysAccept.get(trigger)); }
+
+    public final void setShouldAlwaysAcceptTrigger(Integer trigger) { triggersAlwaysAccept.put(trigger, true); }
+    public final void setShouldAlwaysDeclineTrigger(Integer trigger) { triggersAlwaysAccept.put(trigger, false); }
+    public final void setShouldAlwaysAskTrigger(Integer trigger) { triggersAlwaysAccept.remove(trigger); }
+
+    // End of Triggers preliminary choice
+
 
     /**
      * Uses GUI to learn which spell the player (human in our case) would like to play

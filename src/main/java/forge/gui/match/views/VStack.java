@@ -33,6 +33,7 @@ import javax.swing.border.EmptyBorder;
 
 import net.miginfocom.swing.MigLayout;
 import forge.CardUtil;
+import forge.Singletons;
 import forge.card.spellability.SpellAbilityStackInstance;
 import forge.control.FControl;
 import forge.game.player.Player;
@@ -118,7 +119,7 @@ public enum VStack implements IVDoc<CStack> {
     /**
      * @param stack  
      * @param viewer */
-    public void updateStack(final MagicStack stack, Player viewer) {
+    public void updateStack(final MagicStack stack, final Player viewer) {
         // No need to update this unless it's showing
         if (!parentCell.getSelected().equals(this)) { return; }
 
@@ -133,7 +134,7 @@ public enum VStack implements IVDoc<CStack> {
 
         final Border border = new EmptyBorder(5, 5, 5, 5);
         Color[] scheme;
-
+        
         stackTARs.clear();
         boolean isFirst = true;
         for (final SpellAbilityStackInstance spell : stack) {
@@ -171,13 +172,13 @@ public enum VStack implements IVDoc<CStack> {
                 }
             });
             
-            if(spell.getSpellAbility().isOptionalTrigger()) {
+            if(spell.getSpellAbility().isOptionalTrigger() && spell.getSpellAbility().getActivatingPlayer() == viewer) {
                 tar.addMouseListener(new MouseAdapter() {
                     @Override
                     public void mouseClicked(MouseEvent e){
                         if (e.getButton() == MouseEvent.BUTTON3)
                         {
-                            otMenu.setStackInstance(spell);
+                            otMenu.setStackInstance(spell, viewer);
                             otMenu.show(e.getComponent(), e.getX(), e.getY());
                         }
                     }
@@ -272,10 +273,9 @@ public enum VStack implements IVDoc<CStack> {
             add(jmiAsk);
         }
         
-        public void setStackInstance(final SpellAbilityStackInstance SI)
+        public void setStackInstance(final SpellAbilityStackInstance SI, Player viewer)
         {
-            if(localPlayer == null)
-                localPlayer = FControl.SINGLETON_INSTANCE.getPlayer().getController();
+            localPlayer = viewer.getController();
             
             triggerID = SI.getSpellAbility().getSourceTrigger();
             

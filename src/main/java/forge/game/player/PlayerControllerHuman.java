@@ -412,54 +412,6 @@ public class PlayerControllerHuman extends PlayerController {
             return oldTarget;
         }
     }
-    
-    private List<Integer> triggersAlwaysAccept = new ArrayList<Integer>();
-    private List<Integer> triggersAlwaysDecline = new ArrayList<Integer>();
-
-    /* (non-Javadoc)
-     * @see forge.game.player.PlayerController#shouldAlwaysAcceptTrigger(int)
-     */
-    @Override
-    public boolean shouldAlwaysAcceptTrigger(Integer trigger) {
-        return triggersAlwaysAccept.contains(trigger);
-    }
-
-    /* (non-Javadoc)
-     * @see forge.game.player.PlayerController#shouldAlwaysDeclineTrigger(int)
-     */
-    @Override
-    public boolean shouldAlwaysDeclineTrigger(Integer trigger) {
-        return triggersAlwaysDecline.contains(trigger);
-    }
-
-    /* (non-Javadoc)
-     * @see forge.game.player.PlayerController#setShouldAlwaysAcceptTrigger(int)
-     */
-    @Override
-    public void setShouldAlwaysAcceptTrigger(Integer trigger) {
-        if(!triggersAlwaysAccept.contains(trigger))
-            triggersAlwaysAccept.add(trigger);
-        triggersAlwaysDecline.remove((Object)trigger);
-    }
-
-    /* (non-Javadoc)
-     * @see forge.game.player.PlayerController#setShouldAlwaysDeclineTrigger(int)
-     */
-    @Override
-    public void setShouldAlwaysDeclineTrigger(Integer trigger) {
-        if(!triggersAlwaysDecline.contains(trigger))
-            triggersAlwaysDecline.add(trigger);
-        triggersAlwaysAccept.remove((Object)trigger);
-    }
-
-    /* (non-Javadoc)
-     * @see forge.game.player.PlayerController#setShouldAlwaysAskTrigger(java.lang.Integer)
-     */
-    @Override
-    public void setShouldAlwaysAskTrigger(Integer trigger) {
-        triggersAlwaysAccept.remove((Object)trigger);
-        triggersAlwaysDecline.remove((Object)trigger);
-    }
 
     /* (non-Javadoc)
      * @see forge.game.player.PlayerController#chooseCardsToDiscardUnlessType(int, java.lang.String, forge.card.spellability.SpellAbility)

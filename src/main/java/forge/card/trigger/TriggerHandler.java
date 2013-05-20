@@ -24,7 +24,6 @@ import java.util.List;
 import java.util.Map;
 
 import forge.Card;
-import forge.CardLists;
 import forge.card.ability.AbilityFactory;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.ApiType;
@@ -71,7 +70,6 @@ public class TriggerHandler {
                 c.getTriggers().get(i).setTemporarilySuppressed(false);
             }
         }
-
     }
 
     public final void registerDelayedTrigger(final Trigger trig) {
