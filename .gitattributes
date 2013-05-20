@@ -14267,6 +14267,7 @@ src/main/java/forge/game/player/LobbyPlayerAi.java -text
 src/main/java/forge/game/player/LobbyPlayerHuman.java -text
 src/main/java/forge/game/player/LobbyPlayerRemote.java -text
 src/main/java/forge/game/player/Player.java svneol=native#text/plain
+src/main/java/forge/game/player/PlayerActionConfirmMode.java -text
 src/main/java/forge/game/player/PlayerController.java -text
 src/main/java/forge/game/player/PlayerControllerAi.java -text
 src/main/java/forge/game/player/PlayerControllerHuman.java -text

@@ -14,6 +14,7 @@ import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.game.player.Player;
+import forge.game.player.PlayerActionConfirmMode;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
 
@@ -141,7 +142,7 @@ public class DiscardEffect extends RevealEffectBase {
 
                 if (mode.equals("Random")) {
                     String message = "Would you like to discard " + numCards + " random card(s)?";
-                    boolean runDiscard = !sa.hasParam("Optional") || p.getController().confirmAction(sa, mode, message);
+                    boolean runDiscard = !sa.hasParam("Optional") || p.getController().confirmAction(sa, PlayerActionConfirmMode.Random, message);
 
                     if (runDiscard) {
                         final String valid = sa.hasParam("DiscardValid") ? sa.getParam("DiscardValid") : "Card";

@@ -46,20 +46,30 @@ public class PlayerControllerAi extends PlayerController {
    
     private final AiController brains;
 
-    
-
-    public final Input getDefaultInput() {
-        return defaultInput;
-    }
-
     public PlayerControllerAi(GameState game, Player p) {
         super(game, p);
 
         brains = new AiController(p, game); 
         
         defaultInput = new AiInputCommon(brains);
-        blockInput = new AiInputBlock(getPlayer());
+        blockInput = new AiInputBlock(player);
         cleanupInput = getDefaultInput();
+    }
+
+    public final Input getDefaultInput() {
+        return defaultInput;
+    }
+
+    /** Input to use when player has to declare blockers */
+    public Input getBlockInput() {
+        return blockInput;
+    }
+
+    /**
+     * @return the cleanupInput
+     */
+    public Input getCleanupInput() {
+        return cleanupInput;
     }
 
     /**
@@ -73,19 +83,6 @@ public class PlayerControllerAi extends PlayerController {
         } else {
             return GuiChoose.oneOrNone("Choose ability for AI to play", abilities); // some day network interaction will be here
         }
-    }
-
-    /** Input to use when player has to declare blockers */
-    public Input getBlockInput() {
-        return blockInput;
-    }
-
-
-    /**
-     * @return the cleanupInput
-     */
-    public Input getCleanupInput() {
-        return cleanupInput;
     }
 
     /**
@@ -123,11 +120,11 @@ public class PlayerControllerAi extends PlayerController {
         if (copySA instanceof Spell) {
             Spell spell = (Spell) copySA;
             if (spell.canPlayFromEffectAI(true, true)) {
-                ComputerUtil.playStackFree(getPlayer(), copySA);
+                ComputerUtil.playStackFree(player, copySA);
             }
         } else {
             copySA.canPlayAI();
-            ComputerUtil.playStackFree(getPlayer(), copySA);
+            ComputerUtil.playStackFree(player, copySA);
         }
     }
 
@@ -159,7 +156,7 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public boolean confirmAction(SpellAbility sa, String mode, String message) {
+    public boolean confirmAction(SpellAbility sa, PlayerActionConfirmMode mode, String message) {
         return getAi().confirmAction(sa, mode, message);
     }
 
@@ -215,7 +212,7 @@ public class PlayerControllerAi extends PlayerController {
 
     @Override
     public List<Card> chooseCardsToDiscardFrom(Player p, SpellAbility sa, List<Card> validCards, int min, int max) {
-        boolean isTargetFriendly = !p.isOpponentOf(getPlayer());
+        boolean isTargetFriendly = !p.isOpponentOf(player);
         
         return isTargetFriendly
                ? ComputerUtil.getCardsToDiscardFromFriend(player, p, sa, validCards, min, max)
@@ -272,6 +269,14 @@ public class PlayerControllerAi extends PlayerController {
     @Override
     public Mana chooseManaFromPool(List<Mana> manaChoices) {
         return manaChoices.get(0); // no brains used
+    }
+
+    /* (non-Javadoc)
+     * @see forge.game.player.PlayerController#ChooseSomeType(java.lang.String, java.util.List, java.util.List)
+     */
+    @Override
+    public String chooseSomeType(String kindOfType, String aiLogic, List<String> validTypes, List<String> invalidTypes) {
+        return ComputerUtil.chooseSomeType(player, kindOfType, aiLogic, invalidTypes);
     }
 
 

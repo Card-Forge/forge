@@ -50,18 +50,30 @@ public class PlayerControllerHuman extends PlayerController {
     private final Input blockInput;
     private final Input cleanupInput;
 
-    public final Input getDefaultInput() {
-        return defaultInput;
-    }
-
     public PlayerControllerHuman(GameState game0, Player p) {
         super(game0, p);
         defaultInput = new InputPassPriority(player);
-        blockInput = new InputBlock(getPlayer(), game0);
-        cleanupInput = new InputCleanup(getPlayer());
+        blockInput = new InputBlock(player, game0);
+        cleanupInput = new InputCleanup(player);
     }
 
-	@Override
+	public final Input getDefaultInput() {
+        return defaultInput;
+    }
+
+    /** Input to use when player has to declare blockers */
+    public Input getBlockInput() {
+        return blockInput;
+    }
+
+    /**
+     * @return the cleanupInput
+     */
+    public Input getCleanupInput() {
+        return cleanupInput;
+    }
+
+    @Override
     public boolean isUiSetToSkipPhase(final Player turn, final PhaseType phase) {
         return !CMatchUI.SINGLETON_INSTANCE.stopAtPhase(turn, phase);
     }
@@ -77,18 +89,6 @@ public class PlayerControllerHuman extends PlayerController {
         } else {
             return GuiChoose.oneOrNone("Choose", abilities); // some day network interaction will be here
         }
-    }
-
-    /** Input to use when player has to declare blockers */
-    public Input getBlockInput() {
-        return blockInput;
-    }
-
-    /**
-     * @return the cleanupInput
-     */
-    public Input getCleanupInput() {
-        return cleanupInput;
     }
 
     /**
@@ -260,7 +260,7 @@ public class PlayerControllerHuman extends PlayerController {
      * @see forge.game.player.PlayerController#confirmAction(forge.card.spellability.SpellAbility, java.lang.String, java.lang.String)
      */
     @Override
-    public boolean confirmAction(SpellAbility sa, String mode, String message) {
+    public boolean confirmAction(SpellAbility sa, PlayerActionConfirmMode mode, String message) {
         return GuiDialog.confirm(sa.getSourceCard(), message);
     }
 
@@ -334,7 +334,7 @@ public class PlayerControllerHuman extends PlayerController {
 
     @Override
     public List<Card> chooseCardsToDiscardFrom(Player p, SpellAbility sa, List<Card> valid, int min, int max) {
-        if ( p != getPlayer() ) {
+        if ( p != player ) {
             int cntToKeepInHand =  min == 0 ? -1 : valid.size() - min;
             return GuiChoose.order("Choose cards to Discard", "Discarded", cntToKeepInHand, valid, null, null);
         }
@@ -448,6 +448,14 @@ public class PlayerControllerHuman extends PlayerController {
         String chosen = GuiChoose.one("Pay Mana from Mana Pool", options);
         String idx = TextUtil.split(chosen, '.')[0];
         return manaChoices.get(Integer.parseInt(idx)-1);
+    }
+
+    /* (non-Javadoc)
+     * @see forge.game.player.PlayerController#chooseSomeType(java.lang.String, java.lang.String, java.util.List, java.util.List, java.lang.String)
+     */
+    @Override
+    public String chooseSomeType(String kindOfType, String aiLogic, List<String> validTypes, List<String> invalidTypes) {
+        return GuiChoose.one("Choose a " + kindOfType.toLowerCase() + " type", validTypes);
     }
 
 }

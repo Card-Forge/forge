@@ -49,6 +49,7 @@ import forge.game.ai.ComputerUtilCost;
 import forge.game.ai.ComputerUtilMana;
 import forge.game.player.HumanPlay;
 import forge.game.player.Player;
+import forge.game.player.PlayerActionConfirmMode;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
@@ -133,9 +134,7 @@ public class Upkeep extends Phase {
                     Map<String, String> produced = new HashMap<String, String>();
                     produced.put("Produced", rs.toString());
                     final AbilityManaPart abMana = new AbilityManaPart(c, produced);
-                    if (player.isComputer()) {
-                        abMana.produceMana(this);
-                    } else if (GuiDialog.confirm(c, sb.toString())) {
+                    if( player.getController().confirmAction(this, PlayerActionConfirmMode.BraidOfFire, sb.toString())) {
                         abMana.produceMana(this);
                     } else {
                         game.getAction().sacrifice(c, null);
@@ -493,48 +492,17 @@ public class Upkeep extends Phase {
                     final List<Card> creatures = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), Presets.CREATURES);
                     if (creatures.size() > 0) {
                         CardLists.sortByPowerAsc(creatures);
+                        final List<Card> lowest = new ArrayList<Card>();
                         final int power = creatures.get(0).getNetAttack();
-                        if (player.isHuman()) {
-                            InputSelectCards inp = new InputSelectCardsFromList(1,1,this.getLowestPowerList(creatures));
-                            inp.setMessage("Select creature with power: " + power + " to sacrifice.");
-                            FThreads.setInputAndWait(inp);
-                            if(!inp.hasCancelled())
-                                game.getAction().destroyNoRegeneration(inp.getSelected().get(0), this);
-
-                        } else { // computer
-                            final Card compyTarget = this.getCompyCardToDestroy(creatures);
-                            game.getAction().destroyNoRegeneration(compyTarget, this);
+                        for(Card c : creatures) {
+                            if (c.getNetAttack() > power) break;
+                            lowest.add(c);
                         }
+
+                        List<Card> toSac = player.getController().choosePermanentsToSacrifice(lowest, "Select creature with power: " + power + " to destroy.", 1, this, true, false);
+                        game.getAction().destroyNoRegeneration(toSac.get(0), this);
                     }
                 } // resolve
-
-                private List<Card> getLowestPowerList(final List<Card> original) {
-                    final List<Card> lowestPower = new ArrayList<Card>();
-                    final int power = original.get(0).getNetAttack();
-                    int i = 0;
-                    while ((i < original.size()) && (original.get(i).getNetAttack() == power)) {
-                        lowestPower.add(original.get(i));
-                        i++;
-                    }
-                    return lowestPower;
-                }
-
-                private Card getCompyCardToDestroy(final List<Card> original) {
-                    final List<Card> options = this.getLowestPowerList(original);
-                    final List<Card> humanCreatures = CardLists.filter(options, new Predicate<Card>() {
-                        @Override
-                        public boolean apply(final Card c) {
-                            return c.getController().isHuman();
-                        }
-                    });
-                    if (humanCreatures.isEmpty()) {
-                        CardLists.shuffle(options);
-                        return options.get(0);
-                    } else {
-                        CardLists.shuffle(humanCreatures);
-                        return humanCreatures.get(0);
-                    }
-                }
             }; // Ability
 
             final StringBuilder sb = new StringBuilder();

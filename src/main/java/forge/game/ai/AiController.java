@@ -47,6 +47,7 @@ import forge.game.GameState;
 import forge.game.phase.CombatUtil;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
+import forge.game.player.PlayerActionConfirmMode;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
 import forge.util.Expressions;
@@ -699,15 +700,18 @@ public class AiController {
     }
 
 
-    public boolean confirmAction(SpellAbility sa, String mode, String message) {
+    @SuppressWarnings("incomplete-switch")
+    public boolean confirmAction(SpellAbility sa, PlayerActionConfirmMode mode, String message) {
         ApiType api = sa.getApi();
+
+        // Abilities without api may also use this routine, However they should provide a unique mode value
         if ( null == api ) {
-            throw new InvalidParameterException("SA is not api-based, this is not supported yet");
-        }
-        
-        switch(api) {
+            if( mode != null ) switch (mode) {
+                case BraidOfFire: return true;
+            }
+        } else switch(api) {
             case Discard:
-                if ( mode.startsWith("Random") ) { //
+                if ( mode == PlayerActionConfirmMode.Random ) { //
                     // TODO For now AI will always discard Random used currently with: Balduvian Horde and similar cards
                     return true;
                 }
@@ -718,7 +722,7 @@ public class AiController {
                 
             default: 
         }
-        String exMsg = String.format("AI confirmAction does not know what to decide about %s with %s mode.", api, mode);
+        String exMsg = String.format("AI confirmAction does not know what to decide about %s API with %s mode.", api, mode);
         throw new InvalidParameterException(exMsg);
     }
 

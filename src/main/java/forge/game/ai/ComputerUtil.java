@@ -22,14 +22,18 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
+import org.apache.commons.lang.StringUtils;
+
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 
 import forge.Card;
 import forge.CardLists;
 import forge.CardPredicates;
+import forge.Constant;
 import forge.CardPredicates.Presets;
 import forge.CardUtil;
+import forge.card.CardType;
 import forge.card.MagicColor;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.ApiType;
@@ -658,6 +662,12 @@ public class ComputerUtil {
 
     // Precondition it wants: remaining are reverse-sorted by CMC
     private static Card chooseCardToSacrifice(final List<Card> remaining, final Player ai, final boolean destroy) {
+        // If somehow ("Drop of Honey") they suggest to destroy opponent's card - use the chance!
+        for(Card c : remaining) { // first compare is fast, second is precise
+            if (c.getController() != ai && ai.getOpponents().contains(c.getController()) )
+                return c;
+        }
+        
         if (destroy) {
             final List<Card> indestructibles = CardLists.getKeyword(remaining, "Indestructible");
             if (!indestructibles.isEmpty()) {
@@ -1419,5 +1429,100 @@ public class ComputerUtil {
         } 
         // no special options for human or remote friends
         return getCardsToDiscardFromOpponent(aiChooser, p, sa, validCards, min, max);
+    }
+
+    public static String chooseSomeType(Player ai, String kindOfType, String logic, List<String> invalidTypes) {
+        final GameState game = ai.getGame();
+        String chosen = "";
+        if( kindOfType.equals("Card")) {
+            // TODO
+            // computer will need to choose a type
+            // based on whether it needs a creature or land,
+            // otherwise, lib search for most common type left
+            // then, reveal chosenType to Human
+        } else if (kindOfType.equals("Creature")) {
+            Player opp = ai.getOpponent();
+            if (logic != null ) {
+                if (logic.equals("MostProminentOnBattlefield")) {
+                    chosen = ComputerUtilCard.getMostProminentCreatureType(game.getCardsIn(ZoneType.Battlefield));
+                }
+                else if (logic.equals("MostProminentComputerControls")) {
+                    chosen = ComputerUtilCard.getMostProminentCreatureType(ai.getCardsIn(ZoneType.Battlefield));
+                }
+                else if (logic.equals("MostProminentHumanControls")) {
+                    chosen = ComputerUtilCard.getMostProminentCreatureType(opp.getCardsIn(ZoneType.Battlefield));
+                    if (!CardType.isACreatureType(chosen) || invalidTypes.contains(chosen)) {
+                        chosen = ComputerUtilCard.getMostProminentCreatureType(CardLists.filterControlledBy(game.getCardsInGame(), opp));
+                    }
+                }
+                else if (logic.equals("MostProminentInComputerDeck")) {
+                    chosen = ComputerUtilCard.getMostProminentCreatureType(CardLists.filterControlledBy(game.getCardsInGame(), ai));
+                }
+                else if (logic.equals("MostProminentInComputerGraveyard")) {
+                    chosen = ComputerUtilCard.getMostProminentCreatureType(ai.getCardsIn(ZoneType.Graveyard));
+                }
+            }
+            if (!CardType.isACreatureType(chosen) || invalidTypes.contains(chosen)) {
+                chosen = "Sliver";
+            }
+
+        } else if ( kindOfType.equals("Basic Land")) {
+            if (logic != null) {
+                if (logic.equals("MostNeededType")) {
+                    // Choose a type that is in the deck, but not in hand or on the battlefield 
+                    final ArrayList<String> basics = new ArrayList<String>();
+                    basics.addAll(Constant.CardTypes.BASIC_TYPES);
+                    List<Card> presentCards = ai.getCardsIn(ZoneType.Battlefield);
+                    presentCards.addAll(ai.getCardsIn(ZoneType.Hand));
+                    List<Card> possibleCards = ai.getAllCards();
+                    
+                    for (String b : basics) {
+                        if(!Iterables.any(presentCards, CardPredicates.isType(b)) && Iterables.any(possibleCards, CardPredicates.isType(b))) {
+                            chosen = b;
+                        }
+                    }
+                    if (chosen.equals("")) {
+                        for (String b : basics) {
+                            if(Iterables.any(possibleCards, CardPredicates.isType(b))) {
+                                chosen = b;
+                            }
+                        }
+                    }
+                } else if (logic.equals("ChosenLandwalk")) {
+                    for (Card c : ai.getOpponent().getLandsInPlay()) {
+                        for (String t : c.getType()) {
+                            if (!invalidTypes.contains(t) && CardType.isABasicLandType(t)) {
+                                chosen = t;
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+
+            if (!CardType.isABasicLandType(chosen) || invalidTypes.contains(chosen)) {
+                chosen = "Island";
+            }
+
+        } else if( kindOfType.equals("Land") ) {
+            if (logic != null) {
+                if (logic.equals("ChosenLandwalk")) {
+                    for (Card c : ai.getOpponent().getLandsInPlay()) {
+                        for (String t : c.getType()) {
+                            if (!invalidTypes.contains(t) && CardType.isALandType(t)) {
+                                chosen = t;
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+            if( StringUtils.isEmpty(chosen))
+                chosen = "Island";
+        }
+
+
+        GuiChoose.one("Computer picked: ", new String[]{chosen});
+        return chosen;
     }
 }

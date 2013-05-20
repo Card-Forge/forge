@@ -1,6 +1,5 @@
 package forge.game.player;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
@@ -35,11 +34,11 @@ public abstract class PlayerController {
     private PhaseType autoPassUntil = null;
     private final Input autoPassPriorityInput;
     protected final Player player;
-    
+
     public PlayerController(GameState game0, Player p) {
         game = game0;
         player = p;
-        autoPassPriorityInput = new InputAutoPassPriority(getPlayer());
+        autoPassPriorityInput = new InputAutoPassPriority(player);
     }
     
     public abstract Input getDefaultInput();
@@ -66,6 +65,16 @@ public abstract class PlayerController {
         return false; // human has it's overload
     }
 
+    /**
+     * TODO: Write javadoc for this method.
+     */
+    public void passPriority() {
+        PhaseHandler handler = game.getPhaseHandler();
+    
+        if ( handler.getPriorityPlayer() == player )
+            game.getPhaseHandler().passPriority();
+    }
+
     // Triggers preliminary choice: ask, decline or play
     private Map<Integer, Boolean> triggersAlwaysAccept = new HashMap<Integer, Boolean>();
 
@@ -86,26 +95,13 @@ public abstract class PlayerController {
 
     /**
      * TODO: Write javadoc for this method.
-     */
-    public void passPriority() {
-        PhaseHandler handler = game.getPhaseHandler();
-
-        if ( handler.getPriorityPlayer() == getPlayer() )
-            game.getPhaseHandler().passPriority();
-    }
-
-    /**
-     * TODO: Write javadoc for this method.
      * @param c
      */
     public abstract void playFromSuspend(Card c);
     public abstract boolean playCascade(Card cascadedCard, Card sourceCard);
     public abstract void playSpellAbilityForFree(SpellAbility copySA);
-    /**
-     * @return the player
-     */
-    protected final Player getPlayer(){ return player; }
-    
+
+   
     
     public abstract Deck sideboard(final Deck deck, GameType gameType);
 
@@ -118,7 +114,7 @@ public abstract class PlayerController {
 
     public Card chooseSingleCardForEffect(List<Card> sourceList, SpellAbility sa, String title) { return chooseSingleCardForEffect(sourceList, sa, title, false); }
     public abstract Card chooseSingleCardForEffect(List<Card> sourceList, SpellAbility sa, String title, boolean isOptional);
-    public abstract boolean confirmAction(SpellAbility sa, String mode, String message);
+    public abstract boolean confirmAction(SpellAbility sa, PlayerActionConfirmMode mode, String message);
     public abstract boolean getWillPlayOnFirstTurn(String message);
     public abstract boolean confirmStaticApplication(Card hostCard, GameEntity affected, String logic, String message);
 
@@ -139,4 +135,6 @@ public abstract class PlayerController {
     public abstract List<Card> chooseCardsToDelve(int colorLessAmount, List<Card> grave);
     public abstract List<Card> chooseCardsToDiscardUnlessType(int min, List<Card> hand, String param, SpellAbility sa);
     public abstract Mana chooseManaFromPool(List<Mana> manaChoices);
+    
+    public abstract String chooseSomeType(String kindOfType, String aiLogic, List<String> validTypes, List<String> invalidTypes);
 }

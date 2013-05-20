@@ -33,9 +33,7 @@ import javax.swing.border.EmptyBorder;
 
 import net.miginfocom.swing.MigLayout;
 import forge.CardUtil;
-import forge.Singletons;
 import forge.card.spellability.SpellAbilityStackInstance;
-import forge.control.FControl;
 import forge.game.player.Player;
 import forge.game.player.PlayerController;
 import forge.game.zone.MagicStack;
