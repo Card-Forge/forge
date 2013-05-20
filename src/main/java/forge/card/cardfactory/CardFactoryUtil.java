@@ -2751,7 +2751,6 @@ public class CardFactoryUtil {
                 // need to do it this way because I don't know quite how to
                 // make TriggerHandler respect BeforePayMana.
                 if (card.getController().isHuman()) {
-                    
                     final InputSelectCards target = new InputSelectCards(1, 1) {
                         private static final long serialVersionUID = 1981791992623774490L;
                         @Override
@@ -3141,54 +3140,46 @@ public class CardFactoryUtil {
                 final String magnitude = k[1];
 
                 // final String player = card.getController();
-                final int[] numCreatures = new int[1];
-
+                
+                final GameState game = card.getGame();
                 final Command intoPlay = new Command() {
                     private static final long serialVersionUID = -7530312713496897814L;
 
+                    private void devour(Card eater, Card dinner) {
+                        eater.addDevoured(dinner);
+                        game.getAction().sacrifice(dinner, null);
+                        final HashMap<String, Object> runParams = new HashMap<String, Object>();
+                        runParams.put("Devoured", dinner);
+                        game.getTriggerHandler().runTrigger(TriggerType.Devoured, runParams, false);
+                    }
+                    
                     @Override
                     public void run() {
                         final List<Card> creats = card.getController().getCreaturesInPlay();
-                        final GameState game = card.getGame();
+
                         creats.remove(card);
+                        card.clearDevoured();
                         // System.out.println("Creats size: " + creats.size());
 
-                        card.clearDevoured();
+                        List<Card> selection = new ArrayList<Card>();
+
                         if (card.getController().isHuman()) {
                             if (creats.size() > 0) {
-                                final List<Card> selection = GuiChoose.order("Devour", "Devouring", -1, creats, null, card);
-                                numCreatures[0] = selection.size();
+                                selection = GuiChoose.order("Devour", "Devouring", -1, creats, null, card);
+                            }
+                        } else {
+                            for(Card c : creats) {
+                                if ((c.getNetAttack() <= 1) && ((c.getNetAttack() + c.getNetDefense()) <= 3))
+                                    selection.add(c);
+                            }
+                        }
 
-                                for (Object o : selection) {
-                                    Card dinner = (Card) o;
-                                    card.addDevoured(dinner);
-                                    game.getAction().sacrifice(dinner, null);
-                                    final HashMap<String, Object> runParams = new HashMap<String, Object>();
-                                    runParams.put("Devoured", dinner);
-                                    card.getController().getGame().getTriggerHandler()
-                                    .runTrigger(TriggerType.Devoured, runParams, false);
-                                }
-                            }
-                        } // human
-                        else {
-                            int count = 0;
-                            for (int i = 0; i < creats.size(); i++) {
-                                final Card c = creats.get(i);
-                                if ((c.getNetAttack() <= 1) && ((c.getNetAttack() + c.getNetDefense()) <= 3)) {
-                                    card.addDevoured(c);
-                                    game.getAction().sacrifice(c, null);
-                                    final HashMap<String, Object> runParams = new HashMap<String, Object>();
-                                    runParams.put("Devoured", c);
-                                    card.getController().getGame().getTriggerHandler()
-                                    .runTrigger(TriggerType.Devoured, runParams, false);
-                                    count++;
-                                }
-                            }
-                            numCreatures[0] = count;
+                        for (Card dinner : selection) {
+                            devour(card, dinner);
                         }
                         final int multiplier = magnitude.equals("X") ? AbilityUtils.calculateAmount(card, magnitude, null)
                                 : Integer.parseInt(magnitude);
-                        final int totalCounters = numCreatures[0] * multiplier;
+                        final int totalCounters = selection.size() * multiplier;
 
                         card.addCounter(CounterType.P1P1, totalCounters, true);
 

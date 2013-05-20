@@ -33,7 +33,6 @@ import forge.game.player.HumanPlay;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
-import forge.gui.GuiDialog;
 import forge.util.FileSection;
 
 /**
@@ -213,20 +212,11 @@ public class ReplacementHandler {
                         mapParams.get("OptionalDecider"), effectSA).get(0);
             }
 
-            if (optDecider.isHuman()) {
-                final StringBuilder buildQuestion = new StringBuilder("Apply replacement effect of ");
-                buildQuestion.append(replacementEffect.getHostCard());
-                buildQuestion.append("?\r\n(");
-                buildQuestion.append(replacementEffect.toString().replace("CARDNAME", replacementEffect.getHostCard().getName()));
-                buildQuestion.append(")");
-                if (!GuiDialog.confirm(replacementEffect.getHostCard(), buildQuestion.toString())) {
-                    return ReplacementResult.NotReplaced;
-                }
-            } else {
-                // AI-logic
-                if (!replacementEffect.aiShouldRun(effectSA, optDecider)) {
-                    return ReplacementResult.NotReplaced;
-                }
+            String effectDesc = replacementEffect.toString().replace("CARDNAME", replacementEffect.getHostCard().getName());
+            final String question = String.format("Apply replacement effect of %s?\r\n(%s)", replacementEffect.getHostCard(), effectDesc);
+            boolean confirmed = optDecider.getController().confirmReplacementEffect(replacementEffect, effectSA, question);
+            if (!confirmed) {
+                return ReplacementResult.NotReplaced;
             }
         }
 

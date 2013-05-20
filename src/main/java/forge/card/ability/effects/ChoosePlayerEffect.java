@@ -39,35 +39,33 @@ public class ChoosePlayerEffect extends SpellAbilityEffect {
 
         for (final Player p : tgtPlayers) {
             if ((tgt == null) || p.canBeTargetedBy(sa)) {
+                Player chosen = null;
                 if (p.isHuman()) {
                     // Was if (sa.getActivatingPlayer().isHuman()) but defined player was being
                     // overwritten by activatingPlayer (or controller if no activator was set).
                     // Revert if it causes issues and remove Goblin Festival from card database.
-                    final Object o = GuiChoose.one(choiceDesc, choices);
-                    if (null == o) {
-                        return;
-                    }
-                    final Player chosen = (Player) o;
-                    card.setChosenPlayer(chosen);
-
+                    chosen = GuiChoose.one(choiceDesc, choices);
                 } else {
                     if ("Curse".equals(sa.getParam("AILogic"))) {
                         for (Player pc : choices) {
                             if (pc.isOpponentOf(p)) {
-                                card.setChosenPlayer(pc);
+                                chosen = pc;
                                 break;
                             }
                         }
-                        if (card.getChosenPlayer() == null) {
+                        if (chosen == null) {
                             System.out.println("No good curse choices. Picking first available: " + choices.get(0));
-                            card.setChosenPlayer(choices.get(0));
+                            chosen = choices.get(0);
                         }
                     } else if ("Pump".equals(sa.getParam("AILogic"))) {
-                        card.setChosenPlayer(choices.contains(p) ? p : choices.get(0));
+                        chosen = choices.contains(p) ? p : choices.get(0);
                     } else {
-                        card.setChosenPlayer(p);
+                        chosen = p;
                     }
                 }
+
+                if( null != chosen )
+                    card.setChosenPlayer(chosen);
             }
         }
     }

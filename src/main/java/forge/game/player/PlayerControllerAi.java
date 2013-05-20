@@ -15,6 +15,7 @@ import forge.CardLists;
 import forge.CardPredicates;
 import forge.GameEntity;
 import forge.card.mana.Mana;
+import forge.card.replacement.ReplacementEffect;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
@@ -276,6 +277,14 @@ public class PlayerControllerAi extends PlayerController {
     @Override
     public String chooseSomeType(String kindOfType, String aiLogic, List<String> validTypes, List<String> invalidTypes) {
         return ComputerUtil.chooseSomeType(player, kindOfType, aiLogic, invalidTypes);
+    }
+
+    /* (non-Javadoc)
+     * @see forge.game.player.PlayerController#confirmReplacementEffect(forge.card.replacement.ReplacementEffect, forge.card.spellability.SpellAbility, java.lang.String)
+     */
+    @Override
+    public boolean confirmReplacementEffect(ReplacementEffect replacementEffect, SpellAbility effectSA, String question) {
+        return ReplacementEffect.aiShouldRun(replacementEffect, effectSA, player);
     }
 
 

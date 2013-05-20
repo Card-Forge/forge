@@ -733,6 +733,8 @@ public class AiController {
                 AbilitySub subAb = sa.getSubAbility();
                 return subAb != null && subAb.getAi().chkDrawbackWithSubs(player, subAb);
 
+            case Shuffle: // ai could analyze parameter denoting the player to shuffle
+                return true;
                 
             default: 
         }

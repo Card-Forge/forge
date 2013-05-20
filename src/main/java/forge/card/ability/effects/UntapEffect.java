@@ -88,16 +88,10 @@ public class UntapEffect extends SpellAbilityEffect {
                     for( Card c : sc.getSelected() ) 
                         c.untap();
             } else {
-
-                int count = 0;
-                while ((list.size() != 0) && (count < num)) {
-                    for (int i = 0; (i < list.size()) && (count < num); i++) {
-
-                        final Card c = ComputerUtilCard.getBestLandAI(list);
-                        c.untap();
-                        list.remove(c);
-                        count++;
-                    }
+                for (int count = 0; !list.isEmpty() && count < num; count++) {
+                    final Card c = ComputerUtilCard.getBestLandAI(list);
+                    c.untap();
+                    list.remove(c);
                 }
             }
         }

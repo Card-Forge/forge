@@ -38,7 +38,6 @@ public class ChooseSourceEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
         final Card host = sa.getSourceCard();
-        final ArrayList<Card> chosen = new ArrayList<Card>();
         final GameState game = sa.getActivatingPlayer().getGame();
 
         final Target tgt = sa.getTarget();
@@ -126,6 +125,7 @@ public class ChooseSourceEffect extends SpellAbilityEffect {
         final int validAmount = StringUtils.isNumeric(numericAmount) ? Integer.parseInt(numericAmount) : CardFactoryUtil.xCount(host, host.getSVar(numericAmount));
 
         for (final Player p : tgtPlayers) {
+            final List<Card> chosen = new ArrayList<Card>();
             if ((tgt == null) || p.canBeTargetedBy(sa)) {
                 for (int i = 0; i < validAmount; i++) {
                     if (p.isHuman()) {

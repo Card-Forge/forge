@@ -1753,7 +1753,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @param c
      *            an ArrayList<String> object.
      */
-    public final void setChosenCard(final ArrayList<Card> c) {
+    public final void setChosenCard(final List<Card> c) {
         this.chosenCard = c;
     }
 

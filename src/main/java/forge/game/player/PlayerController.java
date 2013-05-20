@@ -10,6 +10,7 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
 import forge.Card;
 import forge.GameEntity;
 import forge.card.mana.Mana;
+import forge.card.replacement.ReplacementEffect;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.control.input.Input;
@@ -137,4 +138,5 @@ public abstract class PlayerController {
     public abstract Mana chooseManaFromPool(List<Mana> manaChoices);
     
     public abstract String chooseSomeType(String kindOfType, String aiLogic, List<String> validTypes, List<String> invalidTypes);
+    public abstract boolean confirmReplacementEffect(ReplacementEffect replacementEffect, SpellAbility effectSA, String question);
 }

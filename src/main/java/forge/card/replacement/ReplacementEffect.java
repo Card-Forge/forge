@@ -57,7 +57,7 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
      * @return true, if is secondary
      */
     public final boolean isSecondary() {
-        return this.mapParams.containsKey("Secondary");
+        return this.getMapParams().containsKey("Secondary");
     }
 
     /**
@@ -67,24 +67,24 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
      * @param ai 
      * @return true, if successful
      */
-    public final boolean aiShouldRun(final SpellAbility sa, Player ai) {
-        if (this.mapParams.containsKey("AICheckSVar")) {
+    public final static boolean aiShouldRun(final ReplacementEffect effect, final SpellAbility sa, Player ai) {
+        if (effect.getMapParams().containsKey("AICheckSVar")) {
             System.out.println("aiShouldRun?" + sa);
-            final String svarToCheck = this.mapParams.get("AICheckSVar");
+            final String svarToCheck = effect.getMapParams().get("AICheckSVar");
             String comparator = "GE";
             int compareTo = 1;
 
-            if (this.mapParams.containsKey("AISVarCompare")) {
-                final String fullCmp = this.mapParams.get("AISVarCompare");
+            if (effect.getMapParams().containsKey("AISVarCompare")) {
+                final String fullCmp = effect.getMapParams().get("AISVarCompare");
                 comparator = fullCmp.substring(0, 2);
                 final String strCmpTo = fullCmp.substring(2);
                 try {
                     compareTo = Integer.parseInt(strCmpTo);
                 } catch (final Exception ignored) {
                     if (sa == null) {
-                        compareTo = CardFactoryUtil.xCount(this.hostCard, this.hostCard.getSVar(strCmpTo));
+                        compareTo = CardFactoryUtil.xCount(effect.hostCard, effect.hostCard.getSVar(strCmpTo));
                     } else {
-                        compareTo = AbilityUtils.calculateAmount(this.hostCard, this.hostCard.getSVar(strCmpTo), sa);
+                        compareTo = AbilityUtils.calculateAmount(effect.hostCard, effect.hostCard.getSVar(strCmpTo), sa);
                     }
                 }
             }
@@ -92,9 +92,9 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
             int left = 0;
 
             if (sa == null) {
-                left = CardFactoryUtil.xCount(this.hostCard, this.hostCard.getSVar(svarToCheck));
+                left = CardFactoryUtil.xCount(effect.hostCard, effect.hostCard.getSVar(svarToCheck));
             } else {
-                left = AbilityUtils.calculateAmount(this.hostCard, svarToCheck, sa);
+                left = AbilityUtils.calculateAmount(effect.hostCard, svarToCheck, sa);
             }
             System.out.println("aiShouldRun?" + left + comparator + compareTo);
             if (Expressions.compare(left, comparator, compareTo)) {
