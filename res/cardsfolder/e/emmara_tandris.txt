@@ -1,6 +1,6 @@
 Name:Emmara Tandris
 ManaCost:5 G W
-Types:Creature Elf Shaman
+Types:Legendary Creature Elf Shaman
 PT:5/7
 S:Mode$ PreventDamage | Target$ Creature.token+YouCtrl | Description$ Prevent all damage that would be dealt to creature tokens you control.
 SVar:PlayMain1:TRUE
