@@ -12,6 +12,7 @@ import forge.card.mana.Mana;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.control.input.Input;
+import forge.control.input.InputAutoPassPriority;
 import forge.deck.Deck;
 import forge.game.GameState;
 import forge.game.GameType;
@@ -30,16 +31,19 @@ public abstract class PlayerController {
     protected final GameState game;
     
     private PhaseType autoPassUntil = null;
-
-    public PlayerController(GameState game0) {
+    private final Input autoPassPriorityInput;
+    protected final Player player;
+    
+    public PlayerController(GameState game0, Player p) {
         game = game0;
-
+        player = p;
+        autoPassPriorityInput = new InputAutoPassPriority(getPlayer());
     }
     
     public abstract Input getDefaultInput();
     public abstract Input getBlockInput();
     public abstract Input getCleanupInput();
-    public abstract Input getAutoPassPriorityInput();
+    public final Input getAutoPassPriorityInput() { return autoPassPriorityInput; }
 
     public abstract boolean shouldAlwaysAcceptTrigger(Integer trigger);
     public abstract boolean shouldAlwaysDeclineTrigger(Integer trigger);
@@ -93,7 +97,7 @@ public abstract class PlayerController {
     /**
      * @return the player
      */
-    protected abstract Player getPlayer();
+    protected final Player getPlayer(){ return player; }
     
     
     public abstract Deck sideboard(final Deck deck, GameType gameType);

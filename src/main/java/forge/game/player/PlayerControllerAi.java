@@ -19,7 +19,6 @@ import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.control.input.Input;
-import forge.control.input.InputAutoPassPriority;
 import forge.deck.Deck;
 import forge.game.GameState;
 import forge.game.GameType;
@@ -44,10 +43,9 @@ public class PlayerControllerAi extends PlayerController {
     private Input defaultInput;
     private Input blockInput;
     private Input cleanupInput;
-    private Input autoPassPriorityInput;
-    
+   
     private final AiController brains;
-    private final Player player;
+
     
 
     public final Input getDefaultInput() {
@@ -55,15 +53,13 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     public PlayerControllerAi(GameState game, Player p) {
-        super(game);
-        player = p;
-        
+        super(game, p);
+
         brains = new AiController(p, game); 
         
         defaultInput = new AiInputCommon(brains);
         blockInput = new AiInputBlock(getPlayer());
         cleanupInput = getDefaultInput();
-        autoPassPriorityInput = new InputAutoPassPriority(getPlayer());
     }
 
     /**
@@ -84,10 +80,6 @@ public class PlayerControllerAi extends PlayerController {
         return blockInput;
     }
 
-    @Override
-    public Input getAutoPassPriorityInput() {
-        return autoPassPriorityInput;
-    }
 
     /**
      * @return the cleanupInput
@@ -137,11 +129,6 @@ public class PlayerControllerAi extends PlayerController {
             copySA.canPlayAI();
             ComputerUtil.playStackFree(getPlayer(), copySA);
         }
-    }
-
-    @Override
-    protected Player getPlayer() {
-        return player;
     }
 
     @Override

@@ -19,7 +19,6 @@ import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.card.spellability.TargetSelection;
 import forge.control.input.Input;
-import forge.control.input.InputAutoPassPriority;
 import forge.control.input.InputBlock;
 import forge.control.input.InputCleanup;
 import forge.control.input.InputPassPriority;
@@ -50,21 +49,16 @@ public class PlayerControllerHuman extends PlayerController {
     private final Input defaultInput;
     private final Input blockInput;
     private final Input cleanupInput;
-    private final Input autoPassPriorityInput;
-    private final Player player;
 
     public final Input getDefaultInput() {
         return defaultInput;
     }
 
     public PlayerControllerHuman(GameState game0, Player p) {
-        super(game0);
-        player = p;
-        
+        super(game0, p);
         defaultInput = new InputPassPriority(player);
         blockInput = new InputBlock(getPlayer(), game0);
         cleanupInput = new InputCleanup(getPlayer());
-        autoPassPriorityInput = new InputAutoPassPriority(getPlayer());
     }
 
 	@Override
@@ -88,11 +82,6 @@ public class PlayerControllerHuman extends PlayerController {
     /** Input to use when player has to declare blockers */
     public Input getBlockInput() {
         return blockInput;
-    }
-
-    @Override
-    public Input getAutoPassPriorityInput() {
-        return autoPassPriorityInput;
     }
 
     /**
@@ -136,14 +125,6 @@ public class PlayerControllerHuman extends PlayerController {
     @Override
     public void playSpellAbilityForFree(SpellAbility copySA) {
         HumanPlay.playSaWithoutPayingManaCost(player, copySA);
-    }
-
-    /**
-     * @return the player
-     */
-    @Override
-    public Player getPlayer() {
-        return player;
     }
 
     /* (non-Javadoc)

@@ -407,16 +407,6 @@ public abstract class Trigger extends TriggerReplacementBase {
         return this.id;
     }
 
-    /**
-     * Sets the id.
-     * 
-     * @param id0
-     *            the id to set
-     */
-    public void setId(final int id0) {
-        this.id = id0;
-    }
-
     private Ability triggeredSA;
 
     /**
