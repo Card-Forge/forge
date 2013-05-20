@@ -221,18 +221,21 @@ public enum CSubmenuArchenemy implements ICDoc {
 
         Lobby lobby = Singletons.getControl().getLobby();
         MatchStartHelper helper = new MatchStartHelper();
+        List<LobbyPlayer> allies = new ArrayList<LobbyPlayer>();
         for (int i = 0; i < view.getNumPlayers(); i++) {
-            LobbyPlayer player = i == 0 ? lobby.getGuiPlayer() : lobby.getAiPlayer();
-
             if (i == 0) {
-
+                LobbyPlayer player = lobby.getGuiPlayer();
                 helper.addArchenemy(player, playerDecks.get(i), schemes);
                 helper.getPlayerMap().get(player).setStartingLife(10 + (10 * (view.getNumPlayers() - 1)));
             } else {
-
+                LobbyPlayer player = lobby.getAiPlayer();
+                allies.add(player);
                 helper.addPlayer(player, playerDecks.get(i));
             }
         }
+        for(int i = 0; i < allies.size(); i++)
+            for(int j = i+1; i < allies.size(); j++)
+                helper.setAllies(allies.get(i), allies.get(j));
         
         final MatchController mc = new MatchController(GameType.Archenemy, helper.getPlayerMap());
         FThreads.invokeInEdtLater(new Runnable(){

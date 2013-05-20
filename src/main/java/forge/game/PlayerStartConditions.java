@@ -2,8 +2,10 @@ package forge.game;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 import forge.deck.Deck;
+import forge.game.player.LobbyPlayer;
 import forge.game.player.Player;
 import forge.item.CardPrinted;
 import forge.item.IPaperCard;
@@ -20,6 +22,7 @@ public class PlayerStartConditions {
     private Iterable<? extends IPaperCard> cardsInCommand = null;
     private Iterable<? extends IPaperCard> schemes = null;
     private Iterable<CardPrinted> planes = null;
+    private List<LobbyPlayer> allies = new ArrayList<LobbyPlayer>();
 
     public PlayerStartConditions(Deck deck0) {
         originalDeck = deck0;
@@ -82,6 +85,11 @@ public class PlayerStartConditions {
         this.cardsInCommand = function;
     }
 
+    public void addAlly(LobbyPlayer ally) {
+        if(!allies.contains(ally))
+            allies.add(ally);
+    }
+    
     /**
      * @return the schemes
      */

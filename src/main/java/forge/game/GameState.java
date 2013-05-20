@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.TreeMap;
 
 import com.google.common.eventbus.EventBus;
@@ -87,16 +88,16 @@ public class GameState {
 
     /**
      * Constructor.
-     * @param players2
+     * @param players2.entrySet()
      * @param match0 
      * @param input 
      */
-    public GameState(Iterable<LobbyPlayer> players2, GameType t, MatchController match0) { /* no more zones to map here */
+    public GameState(Map<LobbyPlayer, PlayerStartConditions> players2, GameType t, MatchController match0) { /* no more zones to map here */
         type = t;
         match = match0;
         List<Player> players = new ArrayList<Player>();
-        for (LobbyPlayer p : players2) {
-            Player pl = p.getPlayer(this);
+        for (Entry<LobbyPlayer, PlayerStartConditions> kv : players2.entrySet()) {
+            Player pl = kv.getKey().getPlayer(this);
             players.add(pl);
             ingamePlayers.add(pl);
         }

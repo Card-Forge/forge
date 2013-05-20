@@ -26,7 +26,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
@@ -54,6 +53,7 @@ import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.card.staticability.StaticAbility;
 import forge.card.trigger.TriggerType;
+import forge.control.FControl;
 import forge.game.GameActionUtil;
 import forge.game.GameState;
 import forge.game.GlobalRuleChange;
@@ -163,6 +163,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     private PlayerStatistics stats = new PlayerStatistics();
     protected PlayerController controller;
     private final LobbyPlayer lobbyPlayer;
+    private final List<LobbyPlayer> allies = new ArrayList<LobbyPlayer>();
     
     private Card activeScheme = null;
 
@@ -214,7 +215,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     public boolean isHuman() { return getType() == PlayerType.HUMAN; }
     @Deprecated
     public boolean isComputer() { return getType() == PlayerType.COMPUTER; }
-    public PlayerType getType() {
+    private PlayerType getType() {
         return getLobbyPlayer().getType();
     }
 
@@ -264,18 +265,11 @@ public class Player extends GameEntity implements Comparable<Player> {
      * @return a {@link forge.game.player.Player} object.
      */
     public final Player getOpponent() {
-        Player otherType = null;
-        Player justAnyone = null;
         for (Player p : game.getPlayers()) {
-            if (p == this) {
-                continue;
-            }
-            justAnyone = p;
-            if (otherType == null && p.getType() != this.getType()) {
-                otherType = p;
-            }
+            if (p == this || allies.contains(p.getLobbyPlayer())) { continue; }
+            return p;
         }
-        return otherType != null ? otherType : justAnyone;
+        throw new IllegalStateException("No opponents left ingame for " + this);
     }
 
     /**
@@ -287,9 +281,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     public final List<Player> getOpponents() {
         List<Player> result = new ArrayList<Player>();
         for (Player p : game.getPlayers()) {
-            if (p == this || p.getType() == this.getType()) {
-                continue;
-            }
+            if (p == this || allies.contains(p.getLobbyPlayer())) { continue; }
             result.add(p);
         }
         return result;
@@ -303,10 +295,8 @@ public class Player extends GameEntity implements Comparable<Player> {
     public final List<Player> getAllies() {
         List<Player> result = new ArrayList<Player>();
         for (Player p : game.getPlayers()) {
-            if (p == this || p.getType() != this.getType()) {
-                continue;
-            }
-            result.add(p);
+            if( allies.contains(p.getLobbyPlayer()))
+                result.add(p);
         }
         return result;
     }
@@ -1814,7 +1804,8 @@ public class Player extends GameEntity implements Comparable<Player> {
         }
 
         // Dev Mode
-        if (Singletons.getModel().getPreferences().getPrefBoolean(FPref.DEV_UNLIMITED_LAND) && this.getType() == PlayerType.HUMAN && Preferences.DEV_MODE) {
+        if (this == FControl.SINGLETON_INSTANCE.getPlayer() && Preferences.DEV_MODE &&
+            Singletons.getModel().getPreferences().getPrefBoolean(FPref.DEV_UNLIMITED_LAND)) {
             return true;
         }
 
@@ -2703,13 +2694,6 @@ public class Player extends GameEntity implements Comparable<Player> {
             }
         };
 
-        public static Function<Player, PlayerType> FN_GET_TYPE = new Function<Player, PlayerType>() {
-            @Override
-            public PlayerType apply(Player input) {
-                return input.getType();
-            }
-        };
-
         public static Function<Player, String> FN_GET_NAME = new Function<Player, String>() {
             @Override
             public String apply(Player input) {
@@ -2920,11 +2904,7 @@ public class Player extends GameEntity implements Comparable<Player> {
      * @return
      */
     public boolean isOpponentOf(Player other) {
-        if (other.equals(getOpponent())) {
-            return true;
-        }
-
-        return other.getType() != this.getType();
+        return other != this && !allies.contains(other.getLobbyPlayer());
     }
 
 

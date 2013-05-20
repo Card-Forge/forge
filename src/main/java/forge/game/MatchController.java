@@ -139,7 +139,7 @@ public class MatchController {
     public void startRound() {
 
         inputQueue = new InputQueue(this);
-        currentGame = new GameState(players.keySet(), gameType, this);
+        currentGame = new GameState(players, gameType, this);
 
         try {
             attachUiToMatch(this, FControl.SINGLETON_INSTANCE.getLobby().getGuiPlayer());

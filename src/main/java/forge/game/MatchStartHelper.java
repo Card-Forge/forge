@@ -60,5 +60,13 @@ public class MatchStartHelper {
 
         return players;
     }
+    
+    public void setAllies(final LobbyPlayer p1, final LobbyPlayer p2) {
+        PlayerStartConditions psc1 = players.get(p1);
+        PlayerStartConditions psc2 = players.get(p2);
+        
+        psc1.addAlly(p2);
+        psc2.addAlly(p1);
+    }
 
 }
