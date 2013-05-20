@@ -19,7 +19,7 @@ import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
-import forge.gui.GuiDialog;
+import forge.util.Lang;
 import forge.util.MyRandom;
 
 public class DigEffect extends SpellAbilityEffect {
@@ -116,21 +116,18 @@ public class DigEffect extends SpellAbilityEffect {
                 final Card dummy = new Card();
                 dummy.setName("[No valid cards]");
 
+                boolean hasRevealed = true;
                 if (sa.hasParam("Reveal")) {
                     GuiChoose.one("Revealing cards from library", top);
                     // Singletons.getModel().getGameAction().revealToCopmuter(top.toArray());
                     // - for when it exists
                 } else if (sa.hasParam("RevealOptional")) {
-                    String question = "Reveal: ";
-                    for (final Card c : top) {
-                        question += c + " ";
-                    }
-                    if (p.isHuman() && GuiDialog.confirm(host, question)) {
-                        GuiChoose.one(host + "Revealing cards from library", top);
-                        // Singletons.getModel().getGameAction().revealToCopmuter(top.toArray());
-                    } else if (p.isComputer() && (top.get(0).isInstant() || top.get(0).isSorcery())) {
-                        GuiChoose.one(host + "Revealing cards from library", top);
-                    }
+                    String question = "Reveal: " + Lang.joinHomogenous(top) +"?";
+                    
+                    hasRevealed = p.getController().confirmAction(sa, null, question);
+                    if ( hasRevealed )
+                        p.getGame().getAction().reveal(top, p);
+                    
                 } else if (sa.hasParam("RevealValid")) {
                     final String revealValid = sa.getParam("RevealValid");
                     final List<Card> toReveal = CardLists.getValidCards(top, revealValid, host.getController(), host);
@@ -149,7 +146,7 @@ public class DigEffect extends SpellAbilityEffect {
                     choser.getController().reveal("Looking at cards from library", top, library.getZoneType(), library.getPlayer());
                 }
 
-                if ((sa.hasParam("RememberRevealed")) && !sa.hasParam("RevealValid")) {
+                if ((sa.hasParam("RememberRevealed")) && !sa.hasParam("RevealValid") && hasRevealed) {
                     for (final Card one : top) {
                         host.addRemembered(one);
                     }
@@ -317,14 +314,15 @@ public class DigEffect extends SpellAbilityEffect {
                     // now, move the rest to destZone2
                     if (destZone2.equals(ZoneType.Library)) {
                         if (choser.isHuman()) {
+                            String prompt = "Put the rest on top of the library in any order";
+                            if (libraryPosition2 == -1) {
+                                prompt = "Put the rest on the bottom of the library in any order";
+                            }
                             // put them in any order
                             while (rest.size() > 0) {
                                 Card chosen;
                                 if (!skipReorder && rest.size() > 1) {
-                                    String prompt = "Put the rest on top of the library in any order";
-                                    if (libraryPosition2 == -1) {
-                                        prompt = "Put the rest on the bottom of the library in any order";
-                                    }
+          
                                     chosen = GuiChoose.one(prompt, rest);
                                 } else {
                                     chosen = rest.get(0);

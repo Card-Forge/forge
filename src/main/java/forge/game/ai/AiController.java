@@ -720,6 +720,10 @@ public class AiController {
             case Encode:
                 return true;
                 
+            case Dig:
+                Card topc = player.getZone(ZoneType.Library).get(0);
+                return topc.isInstant() || topc.isSorcery();
+                
             default: 
         }
         String exMsg = String.format("AI confirmAction does not know what to decide about %s API with %s mode.", api, mode);

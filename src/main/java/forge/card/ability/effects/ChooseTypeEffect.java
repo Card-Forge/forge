@@ -1,5 +1,6 @@
 package forge.card.ability.effects;
 
+import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -37,31 +38,33 @@ public class ChooseTypeEffect extends SpellAbilityEffect {
             validTypes.addAll(Arrays.asList(sa.getParam("ValidTypes").split(",")));
         }
 
+        if (type.equals("Card")) {
+            if (validTypes.isEmpty()) validTypes.addAll(Constant.CardTypes.CARD_TYPES);
+        } else if (type.equals("Creature")) {
+            if (validTypes.isEmpty()) validTypes.addAll(CardType.getCreatureTypes());
+        } else if (type.equals("Basic Land")) {
+            if (validTypes.isEmpty()) validTypes.addAll(CardType.getBasicTypes());
+        } else if (type.equals("Land")) {
+            if (validTypes.isEmpty()) validTypes.addAll(CardType.getLandTypes());
+        } // end if-else if
+
+        for (final String s : invalidTypes) {
+            validTypes.remove(s);
+        }
+
+        
         final Target tgt = sa.getTarget();
         final List<Player> tgtPlayers = getTargetPlayers(sa);
 
-        for (final Player p : tgtPlayers) {
-            if ((tgt == null) || p.canBeTargetedBy(sa)) {
-                if (type.equals("Card")) {
-                    if (validTypes.isEmpty()) validTypes.addAll(Constant.CardTypes.CARD_TYPES);
-                } else if (type.equals("Creature")) {
-                    if (validTypes.isEmpty()) validTypes.addAll(CardType.getCreatureTypes());
-                } else if (type.equals("Basic Land")) {
-                    if (validTypes.isEmpty()) validTypes.addAll(CardType.getBasicTypes());
-                } else if (type.equals("Land")) {
-                    if (validTypes.isEmpty()) validTypes.addAll(CardType.getLandTypes());
-                } // end if-else if
-
-                if( !validTypes.isEmpty()) {
-                    for (final String s : invalidTypes) {
-                        validTypes.remove(s);
-                    }
+        if( !validTypes.isEmpty()) {
+            for (final Player p : tgtPlayers) {
+                if ((tgt == null) || p.canBeTargetedBy(sa)) {
                     String choice = p.getController().chooseSomeType(type, sa.getParam("AILogic"), validTypes, invalidTypes);
                     card.setChosenType(choice);
                 }
-
             }
-        }
+        } else 
+            throw new InvalidParameterException(sa.getSourceCard() + "'s ability resulted in no types to choose from");
     }
 
 }

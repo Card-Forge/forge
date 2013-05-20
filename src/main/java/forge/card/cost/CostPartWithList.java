@@ -18,7 +18,6 @@
 package forge.card.cost;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import forge.Card;
 import forge.CardUtil;
@@ -99,7 +98,7 @@ public abstract class CostPartWithList extends CostPart {
     }
 
     // always returns true, made this to inline with return
-    public final boolean executePayment(SpellAbility ability, Collection<Card> targetCards) {
+    public final boolean executePayment(SpellAbility ability, List<Card> targetCards) {
         if(canPayListAtOnce()) { // This is used by reveal. Without it when opponent would reveal hand, you'll get N message boxes. 
             this.list.addAll(targetCards);
             doListPayment(ability, targetCards);
@@ -113,7 +112,7 @@ public abstract class CostPartWithList extends CostPart {
     protected abstract void doPayment(SpellAbility ability, Card targetCard);
     // Overload these two only together, set to true and perform payment on list
     protected boolean canPayListAtOnce() { return false; }
-    protected void doListPayment(SpellAbility ability, Collection<Card> targetCards) { };
+    protected void doListPayment(SpellAbility ability, List<Card> targetCards) { };
 
     /**
      * TODO: Write javadoc for this method.

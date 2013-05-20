@@ -18,7 +18,6 @@
 package forge.card.cost;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import com.google.common.collect.Lists;
@@ -222,7 +221,7 @@ public class CostReveal extends CostPartWithList {
     
     @Override protected boolean canPayListAtOnce() { return true; }
     @Override
-    protected void doListPayment(SpellAbility ability, Collection<Card> targetCards) {
+    protected void doListPayment(SpellAbility ability, List<Card> targetCards) {
         ability.getActivatingPlayer().getGame().getAction().reveal(targetCards, ability.getActivatingPlayer());
     }    
     
