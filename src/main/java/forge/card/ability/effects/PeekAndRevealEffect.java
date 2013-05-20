@@ -8,13 +8,10 @@ import forge.CardLists;
 import forge.CardUtil;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
-import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
-import forge.gui.GuiChoose;
-import forge.gui.GuiDialog;
 
 /** 
  * PeeakAndReveal is a simplified why of handling something that could
@@ -32,7 +29,6 @@ public class PeekAndRevealEffect extends SpellAbilityEffect {
     public void resolve(SpellAbility sa) {
         //RevealValid$ Card.sharesCreatureTypeWith | RevealOptional$ True | RememberRevealed$ True
         Card source = sa.getSourceCard();
-        boolean revealOptional = sa.hasParam("RevealOptional");
         boolean rememberRevealed = sa.hasParam("RememberRevealed");
         String revealValid = sa.hasParam("RevealValid") ? sa.getParam("RevealValid") : "Card";
         String peekAmount = sa.hasParam("PeekAmount") ? sa.getParam("PeekAmount") : "1";
@@ -53,29 +49,16 @@ public class PeekAndRevealEffect extends SpellAbilityEffect {
             
             List<Card> revealableCards = CardLists.getValidCards(peekCards, revealValid, sa.getActivatingPlayer(), sa.getSourceCard());
             boolean doReveal = !sa.hasParam("NoReveal") && !revealableCards.isEmpty();
-            
-            //peekingPlayer.showCards(peekCards)
-            if (peekingPlayer.isHuman()) {
-                if (!sa.hasParam("NoPeek")) {
-                    GuiChoose.one(source + "Revealing cards from library", peekCards);
-                }
-                if (doReveal && revealOptional) {
-                    StringBuilder question = new StringBuilder();
-                    question.append("Reveal cards to other players?");
-                    doReveal = GuiDialog.confirm(source, question.toString());
-                }
-            } else {
-                if (doReveal && revealOptional) {
-                    // If 
-                    AbilitySub subAb = sa.getSubAbility();
-                    doReveal = subAb != null && subAb.getAi().chkDrawbackWithSubs(peekingPlayer, subAb);
-                }
+            if (!sa.hasParam("NoPeek")) {
+                peekingPlayer.getController().reveal(source + "Revealing cards from library", peekCards, ZoneType.Library, peekingPlayer);
             }
             
+            if( doReveal && sa.hasParam("RevealOptional") )
+                doReveal = peekingPlayer.getController().confirmAction(sa, null, "Reveal cards to other players?");
+            
             if (doReveal) {
-                if (!peekingPlayer.isHuman()) {
-                    GuiChoose.one(source + "Revealing cards from library", revealableCards);
-                }
+                peekingPlayer.getGame().getAction().reveal(revealableCards, peekingPlayer);
+
                 // Singletons.getModel().getGameAction().revealCardsToOtherPlayers(peekingPlayer, revealableCards);
                 if (rememberRevealed) {
                     for(Card c : revealableCards) {

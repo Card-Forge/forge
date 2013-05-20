@@ -14,7 +14,6 @@ import forge.card.spellability.SpellAbility;
 import forge.game.GameState;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
-import forge.gui.GuiDialog;
 import forge.util.Expressions;
 
 public class RepeatEffect extends SpellAbilityEffect {
@@ -124,16 +123,7 @@ public class RepeatEffect extends SpellAbilityEffect {
         }
 
         if (sa.hasParam("RepeatOptional")) {
-            if (sa.getActivatingPlayer().isComputer()) {
-                //TODO add logic to have computer make better choice (ArsenalNut)
-                return false;
-            } else {
-                final StringBuilder sb = new StringBuilder();
-                sb.append("Do you want to repeat this process again?");
-                if (!GuiDialog.confirm(sa.getSourceCard(), sb.toString())) {
-                    return false;
-                }
-            }
+            return sa.getActivatingPlayer().getController().confirmAction(sa, null, "Do you want to repeat this process again?");
         }
 
         return true;

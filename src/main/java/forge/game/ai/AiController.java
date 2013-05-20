@@ -39,6 +39,7 @@ import forge.card.ability.ApiType;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.CostDiscard;
 import forge.card.cost.CostPart;
+import forge.card.spellability.AbilitySub;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellPermanent;
@@ -723,6 +724,15 @@ public class AiController {
             case Dig:
                 Card topc = player.getZone(ZoneType.Library).get(0);
                 return topc.isInstant() || topc.isSorcery();
+                
+            case Repeat:
+                //TODO add logic to have computer make better choice (ArsenalNut)
+                return false;
+
+            case PeekAndReveal:
+                AbilitySub subAb = sa.getSubAbility();
+                return subAb != null && subAb.getAi().chkDrawbackWithSubs(player, subAb);
+
                 
             default: 
         }

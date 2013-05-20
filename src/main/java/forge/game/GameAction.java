@@ -1406,7 +1406,7 @@ public class GameAction {
     public void reveal(List<Card> cards, Player cardOwner) {
         ZoneType zt = cards.isEmpty() ? ZoneType.Hand : game.getZoneOf(cards.get(0)).getZoneType(); 
         for(Player p : game.getPlayers()) {
-            if (cardOwner == p /*&& zt.isKnown()*/) continue;
+            if (cardOwner == p /* && zt.isKnown() */) continue;
             p.getController().reveal(cardOwner + " reveals card from " + zt, cards, zt, cardOwner);
         }
     }
