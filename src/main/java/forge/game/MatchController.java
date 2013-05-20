@@ -373,6 +373,7 @@ public class MatchController {
      * @return 
      */
     private Player seeWhoPlaysFirstDice(final GameState game) {
+        
         // Play the Flip Coin sound
         game.getEvents().post(new FlipCoinEvent());
 

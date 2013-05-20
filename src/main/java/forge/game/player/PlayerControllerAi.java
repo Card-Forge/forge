@@ -29,7 +29,6 @@ import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilBlock;
 import forge.game.ai.ComputerUtilCombat;
 import forge.game.zone.ZoneType;
-import forge.gui.GuiChoose;
 import forge.util.Aggregates;
 
 
@@ -78,11 +77,11 @@ public class PlayerControllerAi extends PlayerController {
     public SpellAbility getAbilityToPlay(List<SpellAbility> abilities) {
         if (abilities.size() == 0) {
             return null;
-        } else if (abilities.size() == 1) {
+        } else 
             return abilities.get(0);
-        } else {
-            return GuiChoose.oneOrNone("Choose ability for AI to play", abilities); // some day network interaction will be here
-        }
+//        } else {
+//            return GuiChoose.oneOrNone("Choose ability for AI to play", abilities); // some day network interaction will be here
+//        }
     }
 
     /**

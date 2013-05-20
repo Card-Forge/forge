@@ -148,19 +148,15 @@ public class PlayEffect extends SpellAbilityEffect {
                     tgtCards = CardLists.filter(tgtCards, new Predicate<Card>() {
                         @Override
                         public boolean apply(final Card c) {
-                            List<SpellAbility> sas = new ArrayList<SpellAbility>();
                             for (SpellAbility s : c.getBasicSpells()) {
                                 Spell spell = (Spell) s;
                                 s.setActivatingPlayer(controller);
                                 // timing restrictions still apply
                                 if (s.getRestrictions().checkTimingRestrictions(c, s) && spell.canPlayFromEffectAI(false, true)) {
-                                    sas.add(s);
+                                    return true;
                                 }
                             }
-                            if (sas.isEmpty()) {
-                                return false;
-                            }
-                            return true;
+                            return false;
                         }
                     });
                     tgtCard = ComputerUtilCard.getBestAI(tgtCards);
@@ -175,8 +171,7 @@ public class PlayEffect extends SpellAbilityEffect {
             }
             final StringBuilder sb = new StringBuilder();
             sb.append("Do you want to play " + tgtCard + "?");
-            if (controller.isHuman() && optional
-                    && !GuiDialog.confirm(source, sb.toString())) {
+            if (controller.isHuman() && optional && !GuiDialog.confirm(source, sb.toString())) {
                 // i--;  // This causes an infinite loop (ArsenalNut)
                 if (wasFaceDown) {
                     tgtCard.setState(CardCharacteristicName.FaceDown);
@@ -229,13 +224,7 @@ public class PlayEffect extends SpellAbilityEffect {
             tgtCards.remove(tgtCard);
             SpellAbility tgtSA = null;
             // only one mode can be used
-            if (sas.size() == 1) {
-                tgtSA = sas.get(0);
-            } else if (sa.getActivatingPlayer().isHuman()) {
-                tgtSA = GuiChoose.one("Select a spell to cast", sas);
-            } else {
-                tgtSA = sas.get(0);
-            }
+            tgtSA = sa.getActivatingPlayer().getController().getAbilityToPlay(sas);
 
             if (tgtSA.getTarget() != null && !optional) {
                 tgtSA.getTarget().setMandatory(true);
