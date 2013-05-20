@@ -21,4 +21,10 @@ public class TriggerWaiting {
     public Map<String, Object> getParams() {
         return params;
     }
+    
+
+    @Override
+    public String toString() {
+        return String.format("Waiting trigger: %s with %s", mode, params);
+    }
 }

@@ -213,11 +213,10 @@ public class TriggerHandler {
 
         // Static triggers
         for (final Card c : allCards) {
-            ArrayList<Trigger> triggers = new ArrayList<Trigger>();
-            triggers.addAll(c.getTriggers());
-            for (final Trigger t : triggers) {
-                if (t.isStatic()) {
-                    checkStatics |= this.runSingleTrigger(t, mode, runParams);
+            for (final Trigger t : c.getTriggers()) {
+                if (t.isStatic() && canRunTrigger(t, mode, runParams)) {
+                    this.runSingleTrigger(t, runParams);
+                    checkStatics = true;
                 }
             }
         }
@@ -228,75 +227,55 @@ public class TriggerHandler {
             checkStatics |= type.equals("Battlefield");
         }
 
-        // AP
-        allCards = playerAP.getAllCards();
-        allCards.addAll(CardLists.filterControlledBy(game.getCardsIn(ZoneType.Stack), playerAP));
-        // add cards that move to hidden zones
-        if (runParams.containsKey("Destination") && runParams.containsKey("Card")) {
-            Card card = (Card) runParams.get("Card");
-            if (playerAP.equals(card.getController()) && !allCards.contains(card)
-                    && (game.getZoneOf(card) == null || game.getZoneOf(card).getZoneType().isHidden())) {
-                allCards.add(card);
-            }
-        }
-        for (final Card c : allCards) {
-            for (final Trigger t : c.getTriggers()) {
-                if (!t.isStatic()) {
-                    checkStatics |= this.runSingleTrigger(t, mode, runParams);
-                }
-            }
-        }
-        for (Trigger deltrig : delayedTriggersWorkingCopy) {
-            if (deltrig.getHostCard().getController().equals(playerAP)) {
-                if (this.runSingleTrigger(deltrig, mode, runParams)) {
-                    this.delayedTriggers.remove(deltrig);
-                }
-            }
-        }
+        // AP 
+        checkStatics |= runNonStaticTriggersForPlayer(playerAP, mode, runParams, delayedTriggersWorkingCopy);
 
         // NAPs
-
         for (Player nap : game.getPlayers()) {
-
-            if (nap.equals(playerAP)) {
-                continue;
-            }
-
-            allCards = nap.getAllCards();
-            allCards.addAll(CardLists.filterControlledBy(game.getCardsIn(ZoneType.Stack), nap));
-            // add cards that move to hidden zones
-            if (runParams.containsKey("Destination") && runParams.containsKey("Card")) {
-                Card card = (Card) runParams.get("Card");
-                if (!playerAP.equals(card.getController()) && !allCards.contains(card)
-                        && (game.getZoneOf(card) == null || game.getZoneOf(card).getZoneType().isHidden())) {
-                    allCards.add(card);
-                }
-            }
-            for (final Card c : allCards) {
-                for (final Trigger t : c.getTriggers()) {
-                    if (!t.isStatic()) {
-                        checkStatics |= this.runSingleTrigger(t, mode, runParams);
-                    }
-                }
-            }
-            for (Trigger deltrig : delayedTriggersWorkingCopy) {
-                if (deltrig.getHostCard().getController().equals(nap)) {
-                    if (this.runSingleTrigger(deltrig, mode, runParams)) {
-                        this.delayedTriggers.remove(deltrig);
-                    }
-                }
-            }
+            if (!nap.equals(playerAP))
+                checkStatics |= runNonStaticTriggersForPlayer(nap, mode, runParams, delayedTriggersWorkingCopy);
         }
 
         return checkStatics;
     }
 
-    // Checks if the conditions are right for a single trigger to go off, and
-    // runs it if so.
-    // Return true if the trigger went off, false otherwise.
-    private boolean runSingleTrigger(final Trigger regtrig, final TriggerType mode, final Map<String, Object> runParams) {
-        final Map<String, String> triggerParams = regtrig.mapParams;
+    private boolean runNonStaticTriggersForPlayer(final Player player, final TriggerType mode, 
+            final Map<String, Object> runParams, final ArrayList<Trigger> delayedTriggersWorkingCopy ) {
+        
+        boolean checkStatics = false;
+        List<Card> playerCards = player.getAllCards();
+        
+        // add cards that move to hidden zones
+        if (runParams.containsKey("Destination") && runParams.containsKey("Card")) {
+            Card card = (Card) runParams.get("Card");
+            if( !playerCards.contains(card) && player.equals(card.getController())) {
+                if (game.getZoneOf(card) == null || game.getZoneOf(card).getZoneType().isHidden()) {
+                    playerCards.add(card);
+                }
+            }
+        }
 
+        for (final Card c : playerCards) {
+            for (final Trigger t : c.getTriggers()) {
+                if (!t.isStatic() && canRunTrigger(t, mode, runParams)) {
+                    this.runSingleTrigger(t, runParams);
+                    checkStatics = true;
+                }
+            }
+        }
+
+        for (Trigger deltrig : delayedTriggersWorkingCopy) {
+            if (deltrig.getHostCard().getController().equals(player)) {
+                if (this.canRunTrigger(deltrig, mode, runParams)) {
+                    this.runSingleTrigger(deltrig, runParams);
+                    this.delayedTriggers.remove(deltrig);
+                }
+            }
+        }
+        return checkStatics;
+    }
+
+    private boolean canRunTrigger(final Trigger regtrig, final TriggerType mode, final Map<String, Object> runParams) {
         if (regtrig.getMode() != mode) {
             return false; // Not the right mode.
         }
@@ -341,7 +320,16 @@ public class TriggerHandler {
                 }
             }
         } // Torpor Orb check
-
+        return true;
+    }
+    
+    
+    // Checks if the conditions are right for a single trigger to go off, and
+    // runs it if so.
+    // Return true if the trigger went off, false otherwise.
+    private void runSingleTrigger(final Trigger regtrig, final Map<String, Object> runParams) {
+        final Map<String, String> triggerParams = regtrig.mapParams;
+        
         // Any trigger should cause the phase not to skip
         for (Player p : game.getPlayers()) {
             p.getController().autoPassCancel();
@@ -431,6 +419,5 @@ public class TriggerHandler {
             game.getStack().addSimultaneousStackEntry(wrapperAbility);
         }
         regtrig.setTriggeredSA(wrapperAbility);
-        return true;
     }
 }
