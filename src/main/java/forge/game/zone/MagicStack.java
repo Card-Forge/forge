@@ -936,8 +936,9 @@ public class MagicStack extends MyObservable implements Iterable<SpellAbilitySta
         this.chooseOrderOfSimultaneousStackEntry(playerTurn);
 
         if (playerTurn != null) {
-            for (final Player otherP : playerTurn.getAllOtherPlayers()) {
-                this.chooseOrderOfSimultaneousStackEntry(otherP);
+            for(final Player other : playerTurn.getGame().getPlayers()) {
+                if ( other == playerTurn ) continue;
+                this.chooseOrderOfSimultaneousStackEntry(other);
             }
         }
     }
@@ -951,11 +952,11 @@ public class MagicStack extends MyObservable implements Iterable<SpellAbilitySta
      *            a {@link forge.game.player.Player} object.
      */
     public final void chooseOrderOfSimultaneousStackEntry(final Player activePlayer) {
-        if (this.getSimultaneousStackEntryList().size() == 0) {
+        if (this.getSimultaneousStackEntryList().isEmpty()) {
             return;
         }
 
-        final ArrayList<SpellAbility> activePlayerSAs = new ArrayList<SpellAbility>();
+        final List<SpellAbility> activePlayerSAs = new ArrayList<SpellAbility>();
         for (int i = 0; i < this.getSimultaneousStackEntryList().size(); i++) {
             SpellAbility sa = this.getSimultaneousStackEntryList().get(i);
             Player activator = sa.getActivatingPlayer();

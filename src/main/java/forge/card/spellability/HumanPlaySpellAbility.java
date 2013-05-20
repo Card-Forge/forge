@@ -63,6 +63,7 @@ public class HumanPlaySpellAbility {
 
         // freeze Stack. No abilities should go onto the stack while I'm filling requirements.
         game.getStack().freezeStack();
+        game.getMatch().getInput().lock();
 
         // Announce things like how many times you want to Multikick or the value of X
         if (!this.announceRequirements()) {
@@ -88,6 +89,7 @@ public class HumanPlaySpellAbility {
                 }
                 beingTargeted = beingTargeted.getSubAbility();
             } while (beingTargeted != null);
+            
         }
         
         // Payment
@@ -101,19 +103,21 @@ public class HumanPlaySpellAbility {
             rollbackAbility(fromZone, zonePosition);
             return;
         }
+        else {
+            game.getMatch().getInput().unlock();
+            if (isFree || this.payment.isFullyPaid()) {
+                if (skipStack) {
+                    AbilityUtils.resolve(this.ability, false);
+                } else {
+                    this.enusureAbilityHasDescription(this.ability);
+                    this.ability.getActivatingPlayer().getManaPool().clearManaPaid(this.ability, false);
+                    game.getStack().addAndUnfreeze(this.ability);
+                }
         
-        else if (isFree || this.payment.isFullyPaid()) {
-            if (skipStack) {
-                AbilityUtils.resolve(this.ability, false);
-            } else {
-                this.enusureAbilityHasDescription(this.ability);
-                this.ability.getActivatingPlayer().getManaPool().clearManaPaid(this.ability, false);
-                game.getStack().addAndUnfreeze(this.ability);
+                // no worries here. The same thread must resolve, and by this moment ability will have been resolved already
+                clearTargets(ability);
+                game.getAction().checkStateEffects();
             }
-    
-            // no worries here. The same thread must resolve, and by this moment ability will have been resolved already
-            clearTargets(ability);
-            game.getAction().checkStateEffects();
         }
     }
 
@@ -145,6 +149,7 @@ public class HumanPlaySpellAbility {
         this.ability.resetOnceResolved();
         this.payment.refundPayment();
         game.getStack().clearFrozen();
+        game.getMatch().getInput().unlock();
         // Singletons.getModel().getGame().getStack().removeFromFrozenStack(this.ability);
     }
     

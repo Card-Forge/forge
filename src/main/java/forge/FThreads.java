@@ -106,8 +106,17 @@ public class FThreads {
     public static void invokeInNewThread(final Runnable proc, boolean lockUI) {
         Runnable toRun = proc;
         final InputQueue iq = Singletons.getControl().getMatch().getInput();
+        //final GameState game = Singletons.getControl().getMatch().getCurrentGame();
+        //final InputQueue iq = game.getMatch().getInput();
         if( lockUI ) {
-            // checkEDT("FThreads.invokeInNewthread", true)
+
+//          StackTraceElement[] trace = Thread.currentThread().getStackTrace();
+//          System.out.printf("%s > Invoke in new thread during %s called from %s%n", FThreads.isEDT() ? "EDT" : "TRD", game.getPhaseHandler().getPhase(), trace[2].toString());
+//          if( trace[2].toString().contains("InputBase.stop"))
+//              for(StackTraceElement se : trace) {
+//                  System.out.println(se.toString());
+//              }
+
             iq.lock();
             toRun = new Runnable() {
                 @Override
