@@ -242,6 +242,7 @@ public enum VStack implements IVDoc<CStack> {
 
                 @Override
                 public void actionPerformed(ActionEvent arg0) {
+                    if ( localPlayer == null ) return;
                     localPlayer.setShouldAlwaysAcceptTrigger(triggerID);
                 }
                 
@@ -251,6 +252,7 @@ public enum VStack implements IVDoc<CStack> {
 
                 @Override
                 public void actionPerformed(ActionEvent arg0) {
+                    if ( localPlayer == null ) return;
                     localPlayer.setShouldAlwaysDeclineTrigger(triggerID);
                 }
                 
@@ -260,7 +262,7 @@ public enum VStack implements IVDoc<CStack> {
 
                 @Override
                 public void actionPerformed(ActionEvent arg0) {
-                    System.out.println("ask");
+                    if ( localPlayer == null ) return;
                     localPlayer.setShouldAlwaysAskTrigger(triggerID);
                 }
                 
@@ -273,7 +275,7 @@ public enum VStack implements IVDoc<CStack> {
         
         public void setStackInstance(final SpellAbilityStackInstance SI, Player viewer)
         {
-            localPlayer = viewer.getController();
+            localPlayer = viewer == null ? null : viewer.getController();
             
             triggerID = SI.getSpellAbility().getSourceTrigger();
             

@@ -156,7 +156,6 @@ public class MatchController {
         } catch (Exception e) {
             BugReporter.reportException(e);
         }
-
     }
 
     public static void attachUiToMatch(MatchController match, LobbyPlayerHuman humanLobbyPlayer) {

@@ -100,6 +100,12 @@ public class GameState {
             Player pl = kv.getKey().getPlayer(this);
             players.add(pl);
             ingamePlayers.add(pl);
+            
+            PlayerStartConditions psc = kv.getValue();
+            pl.setStartingLife(psc.getStartingLife());
+            pl.setMaxHandSize(psc.getStartingHand());
+            pl.setStartingHandSize(psc.getStartingHand());
+            pl.setAllies(psc.getAllies());
         }
 
         allPlayers = Collections.unmodifiableList(players);

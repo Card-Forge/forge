@@ -210,6 +210,12 @@ public class Player extends GameEntity implements Comparable<Player> {
     public final PlayerStatistics getStats() {
         return stats;
     }
+    
+    public final void setAllies(Iterable<LobbyPlayer> allys) {
+        for(LobbyPlayer a : allys) {
+            allies.add(a);
+        }
+    }
 
     @Deprecated
     public boolean isHuman() { return getType() == PlayerType.HUMAN; }
@@ -242,13 +248,10 @@ public class Player extends GameEntity implements Comparable<Player> {
         }
 
         game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
-
         activeScheme = getZone(ZoneType.SchemeDeck).get(0);
-
+        // gameAction moveTo ? 
         getZone(ZoneType.SchemeDeck).remove(activeScheme);
-
         this.getZone(ZoneType.Command).add(activeScheme);
-
         game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
 
         // Run triggers

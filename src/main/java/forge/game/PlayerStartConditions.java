@@ -23,7 +23,7 @@ public class PlayerStartConditions {
     private Iterable<? extends IPaperCard> schemes = null;
     private Iterable<CardPrinted> planes = null;
     private List<LobbyPlayer> allies = new ArrayList<LobbyPlayer>();
-
+    
     public PlayerStartConditions(Deck deck0) {
         originalDeck = deck0;
         currentDeck = originalDeck;
@@ -41,6 +41,9 @@ public class PlayerStartConditions {
         this.currentDeck = currentDeck0; 
     }
     
+    public Iterable<LobbyPlayer> getAllies() {
+        return allies;
+    }
     
     public final int getStartingLife() {
         return startingLife;

@@ -237,9 +237,6 @@ public class GameNew {
         final Map<LobbyPlayer, PlayerStartConditions> playersConditions = game.getMatch().getPlayers();
         for (Player player : game.getPlayers()) {
             final PlayerStartConditions psc = playersConditions.get(player.getLobbyPlayer());
-            player.setStartingLife(psc.getStartingLife());
-            player.setMaxHandSize(psc.getStartingHand());
-            player.setStartingHandSize(psc.getStartingHand());
 
             putCardsOnBattlefield(player, psc.getCardsOnBattlefield(player));
             initVariantsZones(player, psc);
