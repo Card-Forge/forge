@@ -35,13 +35,14 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
     /** */
     private final LblHeader lblTitle = new LblHeader("Sanctioned Format: Constructed");
 
-    private final JPanel pnlStart = new JPanel(new MigLayout("insets 0, gap 0, wrap 2"));
+    private final JPanel pnlStart = new JPanel(new MigLayout("insets 0, gap 0, wrap 3"));
 
     private final StartButton btnStart  = new StartButton();
 
     private final JCheckBox cbSingletons = new FCheckBox("Singleton Mode");
     private final JCheckBox cbArtifacts = new FCheckBox("Remove Artifacts");
     private final JCheckBox cbRemoveSmall = new FCheckBox("Remove Small Creatures");
+    private final JCheckBox cbAiVsAi = new FCheckBox("Spectate AI vs AI match");
 
     private final FDeckChooser dcHuman = new FDeckChooser("Select your deck:", PlayerType.HUMAN);
     private final FDeckChooser dcAi = new FDeckChooser("Select AI deck:", PlayerType.COMPUTER);
@@ -51,12 +52,15 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
         lblTitle.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
 
 
-        final String strCheckboxConstraints = "h 30px!, gap 0 20px 0 0";
+        final String strCheckboxConstraints = "pushy, gap 0 20px 0 0";
+        final String strCheckboxConstraintsTop = "pushy, gap 0 20px 20px 0";
         pnlStart.setOpaque(false);
-        pnlStart.add(cbSingletons, strCheckboxConstraints);
-        pnlStart.add(btnStart, "span 1 3, growx, pushx, align center");
+        pnlStart.add(cbSingletons, strCheckboxConstraintsTop);
+        pnlStart.add(cbAiVsAi, strCheckboxConstraintsTop);
+        pnlStart.add(btnStart, "span 1 2, growx, pushx, align center");
         pnlStart.add(cbArtifacts, strCheckboxConstraints);
         pnlStart.add(cbRemoveSmall, strCheckboxConstraints);
+
     }
 
     /* (non-Javadoc)
@@ -106,7 +110,7 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
         dcHuman.populate();
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(dcAi, "w 44%!, gap 0 0 20px 20px, growy, pushy");
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(dcHuman, "w 44%!, gap 4% 4% 20px 20px, growy, pushy");
-        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(pnlStart, "span 2, gap 0 0 3.5%! 3.5%!, ax center");
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(pnlStart, "span 2, gap 0 0 2.5%! 3.5%!, ax center");
 
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().revalidate();
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().repaintSelf();
@@ -134,6 +138,11 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
         return cbRemoveSmall;
     }
 
+    /** @return {@link javax.swing.JCheckBox} */
+    public JCheckBox getCbSpectate() {
+        return cbAiVsAi;
+    }
+    
     //========== Overridden from IVDoc
 
     /* (non-Javadoc)

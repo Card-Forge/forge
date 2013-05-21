@@ -58,8 +58,7 @@ public class VHand implements IVDoc<CHand> {
 
         if (player0 == null) {
             tab.setText("NO PLAYER Hand");
-        }
-        else {
+        } else {
             tab.setText(player0.getName() + " Hand");
         }
 

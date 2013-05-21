@@ -18,11 +18,15 @@
 package forge.gui.match;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.swing.ImageIcon;
+
+import com.google.common.collect.Lists;
+
 import forge.Card;
 import forge.FThreads;
 import forge.GameEntity;
@@ -86,29 +90,35 @@ public enum CMatchUI {
         // Instantiate all required field slots (user at 0) <-- that's not guaranteed
         final List<VField> fields = new ArrayList<VField>();
         final List<VCommand> commands = new ArrayList<VCommand>();
-
-        VField humanField = new VField(EDocID.valueOf("FIELD_0"), localPlayer, localPlayer);
-        VCommand humanCommand = new VCommand(EDocID.COMMAND_0, localPlayer);
-        fields.add(0, humanField);
-        commands.add(0, humanCommand);
-        setAvatar(humanField, new ImageIcon(FSkin.getAvatars().get(Integer.parseInt(indices[0]))));
-        humanField.getLayoutControl().initialize();
-        humanCommand.getLayoutControl().initialize();
-
-        int i = 1;
-        for (Player p : players) {
-            if (p.equals(localPlayer)) {
-                continue;
+        
+        List<Player> sortedPlayers = Lists.newArrayList(players);
+        
+        int ixLocal = -1;
+        for(int i = 0; i < players.size(); i++) {
+            if( sortedPlayers.get(i) == localPlayer ) {
+                ixLocal = i;
+                break;
             }
+        }
+        if( ixLocal > 0 ) {
+            Player p0 = sortedPlayers.remove(ixLocal);
+            sortedPlayers.add(0, p0);
+        }
+
+
+        int i = 0;
+        for (Player p : sortedPlayers) {
             // A field must be initialized after it's instantiated, to update player info.
             // No player, no init.
             VField f = new VField(EDocID.valueOf("FIELD_" + i), p, localPlayer);
-            setAvatar(f, getPlayerAvatar(p, Integer.parseInt(indices[1])));
-            f.getLayoutControl().initialize();
-            fields.add(f);
             VCommand c = new VCommand(EDocID.valueOf("COMMAND_" + i), p);
-            c.getLayoutControl().initialize();
+            fields.add(f);
             commands.add(c);
+
+            //setAvatar(f, new ImageIcon(FSkin.getAvatars().get()));
+            setAvatar(f, getPlayerAvatar(p, Integer.parseInt(indices[i > 2 ? 1 : 0])));
+            f.getLayoutControl().initialize();
+            c.getLayoutControl().initialize();
             i++;
         }
 

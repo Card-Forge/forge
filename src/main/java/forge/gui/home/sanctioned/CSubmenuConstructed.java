@@ -13,6 +13,7 @@ import forge.game.GameType;
 import forge.game.MatchController;
 import forge.game.MatchStartHelper;
 import forge.game.PlayerStartConditions;
+import forge.game.player.LobbyPlayer;
 import forge.gui.SOverlayUtils;
 import forge.gui.framework.ICDoc;
 import forge.properties.ForgePreferences;
@@ -96,14 +97,14 @@ public enum CSubmenuConstructed implements ICDoc {
      * @param gameType
      */
     private void startGame(final GameType gameType) {
-        PlayerStartConditions humanPsc = VSubmenuConstructed.SINGLETON_INSTANCE.getDcHuman().getDeck();
+        PlayerStartConditions humanPsc = view.getDcHuman().getDeck();
         String humanDeckErrorMessage = gameType.getDecksFormat().getDeckConformanceProblem(humanPsc.getOriginalDeck());
         if (null != humanDeckErrorMessage) {
             JOptionPane.showMessageDialog(null, "Your deck " + humanDeckErrorMessage, "Invalid deck", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
-        PlayerStartConditions aiDeck = VSubmenuConstructed.SINGLETON_INSTANCE.getDcAi().getDeck();
+        PlayerStartConditions aiDeck = view.getDcAi().getDeck();
         String aiDeckErrorMessage = gameType.getDecksFormat().getDeckConformanceProblem(aiDeck.getOriginalDeck());
         if (null != aiDeckErrorMessage) {
             JOptionPane.showMessageDialog(null, "AI deck " + aiDeckErrorMessage, "Invalid deck", JOptionPane.ERROR_MESSAGE);
@@ -115,7 +116,8 @@ public enum CSubmenuConstructed implements ICDoc {
 
         final MatchStartHelper starter = new MatchStartHelper();
         Lobby lobby = Singletons.getControl().getLobby();
-        starter.addPlayer(lobby.getGuiPlayer(), humanPsc);
+        LobbyPlayer firstPlayer = view.getCbSpectate().isSelected() ? lobby.getAiPlayer() : lobby.getGuiPlayer();
+        starter.addPlayer(firstPlayer, humanPsc);
         starter.addPlayer(lobby.getAiPlayer(), aiDeck);
         final MatchController mc = new MatchController(gameType, starter.getPlayerMap());
         

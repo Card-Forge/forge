@@ -95,6 +95,8 @@ public final class GameOutcome implements Iterable<Entry<LobbyPlayer, PlayerStat
      */
     public boolean isWinner(final LobbyPlayer who) {
         PlayerStatistics stats =  playerRating.get(who);
+        if ( stats == null ) 
+            return false;
         return stats.getOutcome().hasWon();
     }
 

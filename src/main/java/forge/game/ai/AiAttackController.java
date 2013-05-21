@@ -465,6 +465,9 @@ public class AiAttackController {
         }
     }
 
+    final boolean LOG_AI_ATTACKS = false;
+
+
     /**
      * <p>
      * Getter for the field <code>attackers</code>.
@@ -522,7 +525,8 @@ public class AiAttackController {
             return combat;
         }
         if (bAssault) {
-            System.out.println("Assault");
+            if ( LOG_AI_ATTACKS )
+                System.out.println("Assault");
             CardLists.sortByPowerDesc(attackersLeft);
             for (Card attacker : attackersLeft) {
                 if (CombatUtil.canAttack(attacker, defender, combat) && this.isEffectiveAttacker(ai, attacker, combat)) {
@@ -556,7 +560,8 @@ public class AiAttackController {
             }
             if (exalted) {
                 CardLists.sortByPowerDesc(this.attackers);
-                System.out.println("Exalted");
+                if ( LOG_AI_ATTACKS )
+                    System.out.println("Exalted");
                 this.aiAggression = 6;
                 for (Card attacker : this.attackers) {
                     if (CombatUtil.canAttack(attacker, defender, combat) && this.shouldAttack(ai, attacker, this.blockers, combat)) {
@@ -752,13 +757,16 @@ public class AiAttackController {
         } else {
             this.aiAggression = 0;
         } // stay at home to block
-        System.out.println(String.valueOf(this.aiAggression) + " = ai aggression");
+
+        if ( LOG_AI_ATTACKS )
+            System.out.println(String.valueOf(this.aiAggression) + " = ai aggression");
 
         // ****************
         // Evaluation the end
         // ****************
 
-        System.out.println("Normal attack");
+        if ( LOG_AI_ATTACKS )
+            System.out.println("Normal attack");
 
         attackersLeft = this.notNeededAsBlockers(ai, attackersLeft);
         attackersLeft = this.sortAttackers(attackersLeft);
@@ -858,6 +866,7 @@ public class AiAttackController {
         boolean isWorthLessThanAllKillers = true;
         boolean canBeBlocked = false;
         int numberOfPossibleBlockers = 0;
+        
 
         if (!this.isEffectiveAttacker(ai, attacker, combat)) {
             return false;
@@ -921,8 +930,8 @@ public class AiAttackController {
         // if the creature cannot block and can kill all opponents they might as
         // well attack, they do nothing staying back
         if (canKillAll && isWorthLessThanAllKillers && !CombatUtil.canBlock(attacker)) {
-            System.out.println(attacker.getName()
-                    + " = attacking because they can't block, expecting to kill or damage player");
+            if ( LOG_AI_ATTACKS )
+                System.out.println(attacker.getName() + " = attacking because they can't block, expecting to kill or damage player");
             return true;
         }
 
@@ -938,16 +947,19 @@ public class AiAttackController {
         switch (this.aiAggression) {
         case 6: // Exalted: expecting to at least kill a creature of equal value or not be blocked
             if ((canKillAll && isWorthLessThanAllKillers) || !canBeBlocked) {
-                System.out.println(attacker.getName() + " = attacking expecting to kill creature, or is unblockable");
+                if ( LOG_AI_ATTACKS )
+                    System.out.println(attacker.getName() + " = attacking expecting to kill creature, or is unblockable");
                 return true;
             }
             break;
         case 5: // all out attacking
-            System.out.println(attacker.getName() + " = all out attacking");
+            if ( LOG_AI_ATTACKS )
+                System.out.println(attacker.getName() + " = all out attacking");
             return true;
         case 4: // expecting to at least trade with something
             if (canKillAll || (canKillAllDangerous && !canBeKilledByOne) || !canBeBlocked) {
-                System.out.println(attacker.getName() + " = attacking expecting to at least trade with something");
+                if ( LOG_AI_ATTACKS )
+                    System.out.println(attacker.getName() + " = attacking expecting to at least trade with something");
                 return true;
             }
             break;
@@ -956,21 +968,23 @@ public class AiAttackController {
             if ((canKillAll && isWorthLessThanAllKillers)
                     || ((canKillAllDangerous || hasAttackEffect || hasCombatEffect) && !canBeKilledByOne)
                     || !canBeBlocked) {
-                System.out.println(attacker.getName()
-                        + " = attacking expecting to kill creature or cause damage, or is unblockable");
+                if ( LOG_AI_ATTACKS )
+                    System.out.println(attacker.getName() + " = attacking expecting to kill creature or cause damage, or is unblockable");
                 return true;
             }
             break;
         case 2: // attack expecting to attract a group block or destroying a
                 // single blocker and surviving
             if (((canKillAll || hasAttackEffect || hasCombatEffect) && !canBeKilledByOne) || !canBeBlocked) {
-                System.out.println(attacker.getName() + " = attacking expecting to survive or attract group block");
+                if ( LOG_AI_ATTACKS )
+                    System.out.println(attacker.getName() + " = attacking expecting to survive or attract group block");
                 return true;
             }
             break;
         case 1: // unblockable creatures only
             if (!canBeBlocked || (numberOfPossibleBlockers == 1 && canKillAll && !canBeKilledByOne)) {
-                System.out.println(attacker.getName() + " = attacking expecting not to be blocked");
+                if ( LOG_AI_ATTACKS )
+                    System.out.println(attacker.getName() + " = attacking expecting not to be blocked");
                 return true;
             }
             break;

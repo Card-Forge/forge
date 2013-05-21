@@ -171,8 +171,6 @@ public class MatchController {
             localHuman = p;
             break;
         }
-        if (null == localHuman)
-            throw new IllegalStateException("Cannot start a game without a human yet!");
 
         FControl.SINGLETON_INSTANCE.setPlayer(localHuman);
 

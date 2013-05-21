@@ -840,9 +840,11 @@ public class GameAction {
         }
 
         // ai's cannot finish their game without human yet - so terminate a game if human has left.
+        /*
         if (reason == null && !Iterables.any(game.getPlayers(), Predicates.and(Player.Predicates.NOT_LOST, Player.Predicates.isType(PlayerType.HUMAN)))) {
             reason = GameEndReason.AllHumansLost;
         }
+        */
         return reason;
     }
 
