@@ -1021,8 +1021,17 @@ public class ComputerUtil {
         final SpellAbility sub = sa.getSubAbility();
 
         // Cipher spells
-        if (sub != null && ApiType.Encode == sub.getApi() && !ai.getCreaturesInPlay().isEmpty()) {
-            return true;
+        if (sub != null) {
+            final ApiType api = sub.getApi();
+            if (ApiType.Encode == api && !ai.getCreaturesInPlay().isEmpty()) {
+                return true;
+            }
+            if (ApiType.PumpAll == api && !ai.getCreaturesInPlay().isEmpty()) {
+                return true;
+            }
+            if (ApiType.Pump == api) {
+                return true;
+            }
         }
         final List<Card> buffed = ai.getCardsIn(ZoneType.Battlefield);
         for (Card buffedcard : buffed) {

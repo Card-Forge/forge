@@ -48,10 +48,9 @@ public class MillAi extends SpellAbilityAi {
             return false;
         }
 
-        final Random r = MyRandom.getRandom();
-
         // Don't use draw abilities before main 2 if possible
-        if (ai.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2) && !sa.hasParam("ActivationPhases")) {
+        if (ai.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2) && !sa.hasParam("ActivationPhases")
+                && !ComputerUtil.castSpellInMain1(ai, sa)) {
             return false;
         }
 
@@ -67,10 +66,11 @@ public class MillAi extends SpellAbilityAi {
         }
 
         if ((ai.getGame().getPhaseHandler().is(PhaseType.END_OF_TURN) && ai.getGame().getPhaseHandler().getNextTurn().equals(ai))) {
-            chance = .9; // 90% for end of opponents turn
+            chance = .95; // 90% for end of opponents turn
         }
 
-        boolean randomReturn = r.nextFloat() <= Math.pow(chance, sa.getActivationsThisTurn() + 1);
+        final Random r = MyRandom.getRandom();
+        boolean randomReturn = r.nextFloat() <= Math.pow(chance, sa.getActivationsThisTurn());
 
         if ((sa.getParam("NumCards").equals("X") || sa.getParam("NumCards").equals("Z")) && source.getSVar("X").startsWith("Count$xPaid")) {
             // Set PayX here to maximum value.
