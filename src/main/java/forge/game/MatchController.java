@@ -357,13 +357,18 @@ public class MatchController {
      */
     private Player determineFirstTurnPlayer(final GameOutcome lastGameOutcome, final GameState game) {
         // Only cut/coin toss if it's the first game of the match
-        Player goesFirst;
+        Player goesFirst = null;
         Player humanPlayer = Singletons.getControl().getPlayer();
         boolean isFirstGame = lastGameOutcome == null;
         if (isFirstGame) {
             goesFirst = seeWhoPlaysFirstDice(game);
         } else {
-            goesFirst = lastGameOutcome.isWinner(humanPlayer.getLobbyPlayer()) ? humanPlayer.getOpponent() : humanPlayer;
+            for(Player p : game.getPlayers()) {
+                if(lastGameOutcome.isWinner(p.getLobbyPlayer())) {
+                    goesFirst = p.getOpponent();
+                    break;
+                }
+            }
         }
         String message = goesFirst + ( isFirstGame ? " has won the coin toss." : " lost the last game.");
         boolean willPlay = goesFirst.getController().getWillPlayOnFirstTurn(message);
