@@ -5890,6 +5890,19 @@ public class Card extends GameEntity implements Comparable<Card> {
                 }
             }
             return false;
+        } else if (property.startsWith("ThisTurnEntered")) {
+            final String restrictions = property.split("ThisTurnEntered_")[1];
+            final String[] res = restrictions.split("_");
+            final ZoneType destination = ZoneType.smartValueOf(res[0]);
+            ZoneType origin = null;
+            if (res[1].equals("from")) {
+                origin = ZoneType.smartValueOf(res[2]);
+            }
+            List<Card> list = CardUtil.getThisTurnEntered(destination,
+                    origin, "Card", source);
+            if (!list.contains(this)) {
+                return false;
+            }
         } else if (property.startsWith("sharesTypeWith")) {
             if (property.equals("sharesTypeWith")) {
                 if (!this.sharesTypeWith(source)) {
