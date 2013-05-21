@@ -114,7 +114,7 @@ public class ComputerUtilMana {
         while (!cost.isPaid()) {
             toPay = getNextShardToPay(cost, sourcesForShards);
 
-            List<SpellAbility> saList = (List<SpellAbility>) sourcesForShards.get(toPay);
+            Collection<SpellAbility> saList = sourcesForShards.get(toPay);
             SpellAbility saPayment = null;
             if( saList != null  ) { 
                 for (final SpellAbility ma : saList) { 
@@ -165,7 +165,8 @@ public class ComputerUtilMana {
                 // subtract mana from mana pool
                 manapool.payManaFromAbility(sa, cost, saPayment);
 
-                // no need remove abilities from resource map, once their costs are paid and consume resources, they can not be used again
+                // no need to remove abilities from resource map, 
+                // once their costs are paid and consume resources, they can not be used again
             }
         }
 
