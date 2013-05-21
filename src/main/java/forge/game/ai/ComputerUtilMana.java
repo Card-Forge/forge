@@ -105,7 +105,10 @@ public class ComputerUtilMana {
         Map<ManaCostShard, Collection<SpellAbility>> sourcesForShards = ComputerUtilMana.groupAndOrderToPayShards(ai, manaAbilityMap, cost);
         
         // Loop over mana needed
-        List<Card> cardsUsed = test ? new ArrayList<Card>() : null;
+        List<Card> cardsUsed = new ArrayList<Card>();
+
+        //don't use a card to pay for itself - miscalculations!
+        cardsUsed.add(sa.getSourceCard());
         
         ManaCostShard toPay = null;
         while (!cost.isPaid()) {
@@ -415,6 +418,8 @@ public class ComputerUtilMana {
 
         if (cost.getColorlessManaAmount() > 0 && manaAbilityMap.containsKey(ManaAtom.COLORLESS))
             res.addAll(ManaCostShard.COLORLESS, manaAbilityMap.get(ManaAtom.COLORLESS));
+        
+        System.out.println("groupAndOrderToPayShards " + res);
 
         return res;
     }
@@ -465,7 +470,7 @@ public class ComputerUtilMana {
         return cost;
     }
 
-    //This method is currently used by AI to estimate human's available mana
+    //This method is currently used by AI to estimate available mana
     public static List<Card> getAvailableMana(final Player ai, final boolean checkPlayable) {
         final List<Card> list = ai.getCardsIn(ZoneType.Battlefield);
         list.addAll(ai.getCardsIn(ZoneType.Hand));
@@ -573,11 +578,12 @@ public class ComputerUtilMana {
         CardLists.sortByEvaluateCreature(otherManaSources);
         Collections.reverse(otherManaSources);
         sortedManaSources.addAll(otherManaSources);
+        System.out.println("getAvailableMana " + sortedManaSources);
         return sortedManaSources;
     } // getAvailableMana()
 
     
-    //This method is currently used by AI to estimate mana available to human
+    //This method is currently used by AI to estimate mana available
     private static MapOfLists<Integer, SpellAbility> groupSourcesByManaColor(final Player ai, boolean checkPlayable) {
         final MapOfLists<Integer, SpellAbility> manaMap = new TreeMapOfLists<Integer, SpellAbility>(CollectionSuppliers.<SpellAbility>arrayLists());
 
@@ -622,6 +628,7 @@ public class ComputerUtilMana {
             } // end of mana abilities loop
         } // end of mana sources loop
 
+        System.out.println("groupSourcesByManaColor " + manaMap);
         return manaMap;
     }
 
