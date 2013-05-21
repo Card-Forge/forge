@@ -523,10 +523,9 @@ public class ComputerUtilMana {
                     needsLimitedResources |= !cost.isReusuableResource();
                 }
     
-                // if the AI can't pay the additional costs skip the mana
-                // ability
-                m.setActivatingPlayer(ai);
+                // if the AI can't pay the additional costs skip the mana ability
                 if (cost != null) {
+                    m.setActivatingPlayer(ai);
                     if (!CostPayment.canPayAdditionalCosts(m.getPayCosts(), m)) {
                         continue;
                     }
@@ -534,7 +533,7 @@ public class ComputerUtilMana {
     
                 // don't use abilities with dangerous drawbacks
                 AbilitySub sub = m.getSubAbility(); 
-                if (sub != null && !card.getName().equals("Pristine Talisman")) {
+                if (sub != null && !card.getName().equals("Pristine Talisman") && !card.getName().equals("Zhur-Taa Druid")) {
                     if (!sub.getAi().chkDrawbackWithSubs(ai, sub)) {
                         continue;
                     }
@@ -624,7 +623,6 @@ public class ComputerUtilMana {
             } // end of mana abilities loop
         } // end of mana sources loop
 
-        System.out.println("groupSourcesByManaColor " + manaMap);
         return manaMap;
     }
 
@@ -667,8 +665,7 @@ public class ComputerUtilMana {
                 continue;
             }
     
-            //AbilityManaPart am = a.getManaPart();
-            if (/*am.isBasic() && */!res.contains(a)) {
+            if (!res.contains(a)) {
                 res.add(a);
             }
     
