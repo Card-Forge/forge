@@ -24,12 +24,17 @@ This problem should be fixed. At least you'll see an exception/crash report desc
 This problem has now been fixed. (Mana Vortex required 2 lands, Emrakul gave 2 extra turns, Empty the Warrens creatures two Storm triggers instead of one.)
 
 
+- Constructed mode AI vs AI matches -
+Added support for AI vs AI matches. There is a checkbox which allows you to view the AI vs AI match. This is a work in progress and is not finished. While it appears to work OK there is still a need for a few UI changes. Please be patient. These AI vs AI matches will not be a good way to test out various deck types against one another as the AI does not understand card combos and the AI is still limited at this time.
+
+
 ---------
 New Cards
 ---------
 
 Sand Golem
 Bronze Horse
+Boros Battleshaper
 
 
 --------------------
@@ -70,6 +75,9 @@ Seraph of the Sword
 Young Pyromancer
 Ajani's Chosen
 Devout Invocation
+Grim Return
+Scourge of Valkas
+Windreader Sphinx
 
 
 ------------
