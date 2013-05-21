@@ -102,7 +102,7 @@ public class ComputerUtilMana {
         }
         
         // select which abilities may be used for each shard
-        Map<ManaCostShard, Collection<SpellAbility>> sourcesForShards = ComputerUtilMana.groupAndOrderToPayShards(ai, manaAbilityMap, cost);
+        MapOfLists<ManaCostShard, SpellAbility> sourcesForShards = ComputerUtilMana.groupAndOrderToPayShards(ai, manaAbilityMap, cost);
         
         // Loop over mana needed
         List<Card> cardsUsed = new ArrayList<Card>();
@@ -114,19 +114,20 @@ public class ComputerUtilMana {
         while (!cost.isPaid()) {
             toPay = getNextShardToPay(cost, sourcesForShards);
 
-            Collection<SpellAbility> saList = sourcesForShards.get(toPay);
-            List<SpellAbility> payableSources = new ArrayList<SpellAbility>();
+            List<SpellAbility> saList = (List<SpellAbility>) sourcesForShards.get(toPay);
+            SpellAbility saPayment = null;
             if( saList != null  ) { 
                 for (final SpellAbility ma : saList) { 
-                    if( test && cardsUsed.contains(ma.getSourceCard()) )
+                    if(cardsUsed.contains(ma.getSourceCard()) )
                         continue;
                     if( canPayShardWithSpellAbility(toPay, ai, ma, sa, checkPlayable || !test ) ) {
-                        payableSources.add(ma);
+                        saPayment = ma;
+                        break;
                     }
                 }
             }
             
-            if( payableSources.isEmpty() ) {
+            if( saPayment == null ) {
                 if(!toPay.isPhyrexian() || !ai.canPayLife(2))
                     break; // cannot pay
                 
@@ -135,9 +136,6 @@ public class ComputerUtilMana {
                     ai.payLife(2, sa.getSourceCard());
                 continue;
             } 
-            
-            // choose the best SA.
-            SpellAbility saPayment = payableSources.get(0);
 
             setExpressColorChoice(sa, ai, cost, toPay, saPayment);
 
@@ -392,7 +390,7 @@ public class ComputerUtilMana {
      * @return Were all mana sources found?
      */
     private static MapOfLists<ManaCostShard, SpellAbility> groupAndOrderToPayShards(final Player ai, final MapOfLists<Integer, SpellAbility> manaAbilityMap, final ManaCostBeingPaid cost) {
-        MapOfLists<ManaCostShard, SpellAbility> res = new EnumMapOfLists<ManaCostShard, SpellAbility>(ManaCostShard.class, CollectionSuppliers.<SpellAbility>hashSets());
+        MapOfLists<ManaCostShard, SpellAbility> res = new EnumMapOfLists<ManaCostShard, SpellAbility>(ManaCostShard.class, CollectionSuppliers.<SpellAbility>arrayLists());
 
         // loop over cost parts
         for (ManaCostShard shard : cost.getDistinctShards() ) {
@@ -418,8 +416,6 @@ public class ComputerUtilMana {
 
         if (cost.getColorlessManaAmount() > 0 && manaAbilityMap.containsKey(ManaAtom.COLORLESS))
             res.addAll(ManaCostShard.COLORLESS, manaAbilityMap.get(ManaAtom.COLORLESS));
-        
-        System.out.println("groupAndOrderToPayShards " + res);
 
         return res;
     }
@@ -479,7 +475,7 @@ public class ComputerUtilMana {
             public boolean apply(final Card c) {
                 for (final SpellAbility am : getAIPlayableMana(c)) {
                     am.setActivatingPlayer(ai);
-                    if (am.canPlay() || !checkPlayable) {
+                    if (!checkPlayable || am.canPlay()) {
                         return true;
                     }
                 }
@@ -578,7 +574,6 @@ public class ComputerUtilMana {
         CardLists.sortByEvaluateCreature(otherManaSources);
         Collections.reverse(otherManaSources);
         sortedManaSources.addAll(otherManaSources);
-        System.out.println("getAvailableMana " + sortedManaSources);
         return sortedManaSources;
     } // getAvailableMana()
 
@@ -591,7 +586,7 @@ public class ComputerUtilMana {
         for (final Card sourceCard : getAvailableMana(ai, checkPlayable)) {
             for (final SpellAbility m : getAIPlayableMana(sourceCard)) {
                 m.setActivatingPlayer(ai);
-                if (!m.canPlay() && checkPlayable) {
+                if (checkPlayable && !m.canPlay()) {
                     continue;
                 }
     
