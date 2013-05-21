@@ -287,5 +287,14 @@ public class PlayerControllerAi extends PlayerController {
         return ReplacementEffect.aiShouldRun(replacementEffect, effectSA, player);
     }
 
+    @Override
+    public List<Card> getCardsToMulligan(boolean isCommander)  { 
+        if( !ComputerUtil.wantMulligan(player) )
+            return null;
 
+        if (!isCommander) 
+            return player.getCardsIn(ZoneType.Hand);
+        else
+            return ComputerUtil.getPartialParisCandidates(player);
+    }
 }

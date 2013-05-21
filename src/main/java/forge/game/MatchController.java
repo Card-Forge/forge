@@ -138,7 +138,7 @@ public class MatchController {
      */
     public void startRound() {
 
-        inputQueue = new InputQueue(this);
+        inputQueue = new InputQueue();
         currentGame = new GameState(players, gameType, this);
 
         try {
@@ -146,16 +146,38 @@ public class MatchController {
 
             final boolean canRandomFoil = Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_RANDOM_FOIL) && gameType == GameType.Constructed;
             GameNew.newGame(currentGame, canRandomFoil);
-            determineFirstTurnPlayer(getLastGameOutcome(), currentGame);
 
             currentGame.setAge(GameAge.Mulligan);
-            getInput().clearInput();
-
-            // Update observers
-            currentGame.getGameLog().updateObservers();
         } catch (Exception e) {
             BugReporter.reportException(e);
         }
+            
+        final Player firstPlayer = determineFirstTurnPlayer(getLastGameOutcome(), currentGame);
+
+        getInput().clearInput();
+        if(currentGame.getType() == GameType.Planechase)
+            firstPlayer.initPlane();
+
+        //Set Field shown to current player.
+        VField nextField = CMatchUI.SINGLETON_INSTANCE.getFieldViewFor(firstPlayer);
+        SDisplayUtil.showTab(nextField);
+
+        // Update observers
+        currentGame.getGameLog().updateObservers();
+
+        // This code was run from EDT.
+        FThreads.invokeInNewThread( new Runnable() {
+            @Override
+            public void run() {
+                currentGame.getAction().performMulligans(firstPlayer, currentGame.getType() == GameType.Commander);
+                currentGame.getAction().handleLeylinesAndChancellors();
+                // Run Trigger beginning of the game
+                final HashMap<String, Object> runParams = new HashMap<String, Object>();
+                currentGame.getTriggerHandler().runTrigger(TriggerType.NewGame, runParams, false);
+                currentGame.setAge(GameAge.Play);
+                getInput().clearInput();
+            }
+        });
     }
 
     public static void attachUiToMatch(MatchController match, LobbyPlayerHuman humanLobbyPlayer) {
@@ -328,22 +350,12 @@ public class MatchController {
         return 10;
     }
     
-    public void afterMulligans()
-    {
-        currentGame.getAction().handleLeylinesAndChancellors();
-        // Run Trigger beginning of the game
-        final HashMap<String, Object> runParams = new HashMap<String, Object>();
-        currentGame.getTriggerHandler().runTrigger(TriggerType.NewGame, runParams, false);
-        currentGame.setAge(GameAge.Play);
-        getInput().clearInput();
-    }
-
     /**
      * TODO: Write javadoc for this method.
      * @param match
      * @param game
      */
-    private void determineFirstTurnPlayer(final GameOutcome lastGameOutcome, final GameState game) {
+    private Player determineFirstTurnPlayer(final GameOutcome lastGameOutcome, final GameState game) {
         // Only cut/coin toss if it's the first game of the match
         Player goesFirst;
         Player humanPlayer = Singletons.getControl().getPlayer();
@@ -360,6 +372,7 @@ public class MatchController {
         }
         goesFirst = willPlay ? goesFirst : goesFirst.getOpponent();
         game.getPhaseHandler().setPlayerTurn(goesFirst);
+        return goesFirst;
     }
     
     // decides who goes first when starting another game, used by newGame()

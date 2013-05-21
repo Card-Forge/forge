@@ -22,6 +22,7 @@ import forge.card.spellability.TargetSelection;
 import forge.control.input.Input;
 import forge.control.input.InputBlock;
 import forge.control.input.InputCleanup;
+import forge.control.input.InputConfirmMulligan;
 import forge.control.input.InputPassPriority;
 import forge.control.input.InputSelectCards;
 import forge.control.input.InputSelectCardsFromList;
@@ -467,4 +468,11 @@ public class PlayerControllerHuman extends PlayerController {
         return GuiDialog.confirm(replacementEffect.getHostCard(), question);
     }
 
+
+    @Override
+    public List<Card> getCardsToMulligan(boolean isCommander) {
+        final InputConfirmMulligan inp = new InputConfirmMulligan(player, isCommander);
+        FThreads.setInputAndWait(inp);
+        return inp.isKeepHand() ? null : inp.getSelectedCards();
+    }
 }

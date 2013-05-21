@@ -19,12 +19,8 @@ package forge.control.input;
 
 import java.util.concurrent.BlockingDeque;
 import java.util.concurrent.LinkedBlockingDeque;
-
-import forge.Singletons;
 import forge.game.GameAge;
 import forge.game.GameState;
-import forge.game.GameType;
-import forge.game.MatchController;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -46,10 +42,8 @@ public class InputQueue extends MyObservable implements java.io.Serializable {
 
     private final BlockingDeque<Input> inputStack = new LinkedBlockingDeque<Input>();
 
-    private final MatchController match;
-    public InputQueue(MatchController matchController) {
-        match = matchController;
-    }
+
+    public InputQueue() {}
 
     /**
      * <p>
@@ -125,12 +119,7 @@ public class InputQueue extends MyObservable implements java.io.Serializable {
      */
     public final Input getActualInput(GameState game) {
         GameAge age = game.getAge();
-        if ( age == GameAge.Mulligan ) {
-            Player human = Singletons.getControl().getPlayer();
-            return game.getType() == GameType.Commander ? new InputMulliganPartialParis(match, human) : new InputMulligan(match, human);
-        }
-
-        if ( age != GameAge.Play ) 
+        if ( age != GameAge.Play  && age != GameAge.Mulligan)
             return inputLock;
 
         Input topMost = inputStack.peek(); // incoming input to Control

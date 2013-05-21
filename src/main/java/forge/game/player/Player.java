@@ -1205,6 +1205,10 @@ public class Player extends GameEntity implements Comparable<Player> {
         return this.drawCards(1);
     }
 
+    
+    public boolean canMulligan() { 
+        return !getZone(ZoneType.Hand).isEmpty();
+    }
     /**
      * 
      * TODO Write javadoc for this method.
@@ -3122,5 +3126,16 @@ public class Player extends GameEntity implements Comparable<Player> {
     private boolean highlited = false; 
     public final void setHighlited(boolean value) { highlited = value; }
     public final boolean isHighlited() { return highlited; }
+
+    /**
+     * TODO: Write javadoc for this method.
+     */
+    public void onMulliganned() {
+        game.getEvents().post(new MulliganEvent(this)); // quest listener may interfere here
+        final int newHand = getCardsIn(ZoneType.Hand).size();
+        game.getGameLog().add("Mulligan", this + " has mulliganed down to " + newHand + " cards.", 0);
+        stats.notifyHasMulliganed();
+        stats.notifyOpeningHandSize(newHand);
+    }
 
 }

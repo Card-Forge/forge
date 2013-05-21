@@ -139,4 +139,5 @@ public abstract class PlayerController {
     
     public abstract String chooseSomeType(String kindOfType, String aiLogic, List<String> validTypes, List<String> invalidTypes);
     public abstract boolean confirmReplacementEffect(ReplacementEffect replacementEffect, SpellAbility effectSA, String question);
+    public abstract List<Card> getCardsToMulligan(boolean isCommander);
 }

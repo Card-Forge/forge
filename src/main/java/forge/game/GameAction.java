@@ -18,15 +18,17 @@
 package forge.game;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map.Entry;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 
 import forge.Card;
 import forge.CardCharacteristicName;
@@ -61,13 +63,15 @@ import forge.game.event.CardSacrificedEvent;
 import forge.game.player.GameLossReason;
 import forge.game.player.HumanPlay;
 import forge.game.player.Player;
-import forge.game.player.PlayerType;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.PlayerZoneBattlefield;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 import forge.gui.GuiDialog;
+import forge.util.maps.CollectionSuppliers;
+import forge.util.maps.HashMapOfLists;
+import forge.util.maps.MapOfLists;
 
 /**
  * Methods for common actions performed during a game.
@@ -1466,13 +1470,56 @@ public class GameAction {
         game.getAction().checkStateEffects();
     }
 
-    /**
-     * <p>
-     * playCardWithoutManaCost.
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.Card} object.
-     */
+    public void performMulligans(final Player firstPlayer, final boolean isCommander) {
+        List<Player> whoCanMulligan = Lists.newArrayList(game.getPlayers());
+        int offset = whoCanMulligan.indexOf(firstPlayer);
+    
+        // Have to cycle-shift the list to get the first player on index 0 
+        for( int i = 0; i < offset; i++ ) {
+            whoCanMulligan.add(whoCanMulligan.remove(0));
+        }
+    
+        MapOfLists<Player, Card> exiledDuringMulligans = new HashMapOfLists<Player, Card>(CollectionSuppliers.<Card>arrayLists());
+        
+        do {
+            for (int i = 0; i < whoCanMulligan.size(); i++) {
+                Player p = whoCanMulligan.get(i);
+                List<Card> toMulligan = p.canMulligan() ? p.getController().getCardsToMulligan(isCommander) : null; 
+                if ( toMulligan != null ) {
+                    if( !isCommander ) {
+                        toMulligan = new ArrayList<Card>(p.getCardsIn(ZoneType.Hand));
+                        for (final Card c : toMulligan) {
+                            moveToLibrary(c);
+                        }
+                        p.shuffle();
+                        p.drawCards(toMulligan.size() - 1);
+                        
+                    } else if ( !toMulligan.isEmpty() ){ 
+                        List<Card> toExile = Lists.newArrayList(toMulligan);
+                        for(Card c : toExile) {
+                            exile(c);
+                        }
+                        exiledDuringMulligans.addAll(p, toExile);
+                        p.drawCards(toExile.size() - 1);
+                    } else 
+                        continue;
+
+                    p.onMulliganned();
+                } else {
+                    whoCanMulligan.remove(i--);
+                }
+            }
+        } while( !whoCanMulligan.isEmpty() );
+        
+        if( isCommander )
+            for(Entry<Player, Collection<Card>> kv : exiledDuringMulligans.entrySet() ) {
+                Player p = kv.getKey();
+                Collection<Card> cc = kv.getValue();
+                for(Card c : cc) {
+                    moveToLibrary(c);
+                }
+                p.shuffle();
+            }
+    }
 
 }
