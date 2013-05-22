@@ -403,18 +403,19 @@ public class SSubmenuQuestUtil {
         int extraLifeHuman = 0;
         Integer lifeHuman = null;
         boolean useBazaar = true;
-        Boolean forceAnte = false;
+        boolean forceAnte = false;
         int lifeAI = 20;
         if (event instanceof QuestEventChallenge) {
-            lifeAI = ((QuestEventChallenge) event).getAILife();
-            lifeHuman = ((QuestEventChallenge) event).getHumanLife();
+            QuestEventChallenge qc = ((QuestEventChallenge) event);
+            lifeAI = qc.getAILife();
+            lifeHuman = qc.getHumanLife();
 
             if (qData.getAssets().hasItem(QuestItemType.ZEPPELIN)) {
                 extraLifeHuman = 3;
             }
 
-            useBazaar = ((QuestEventChallenge) event).isUseBazaar();
-            forceAnte = ((QuestEventChallenge) event).isForceAnte();
+            useBazaar = qc.isUseBazaar();
+            forceAnte = qc.isForceAnte();
         }
 
         PlayerStartConditions humanStart = new PlayerStartConditions(deck);
