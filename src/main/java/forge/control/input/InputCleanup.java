@@ -18,7 +18,6 @@
 package forge.control.input;
 
 import forge.Card;
-import forge.FThreads;
 import forge.Singletons;
 import forge.game.GameState;
 import forge.game.player.Player;
@@ -78,11 +77,11 @@ public class InputCleanup extends InputBase {
         if (!zone.is(ZoneType.Hand, Singletons.getControl().getPlayer())) 
             return;
             
-        FThreads.invokeInNewThread(new Runnable() {
+        game.getMatch().getInput().LockAndInvokeGameAction(new Runnable() {
             @Override
             public void run() {
                 card.getController().discard(card, null);
             }
-        }, true);
+        });
     }
 }

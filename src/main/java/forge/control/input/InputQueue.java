@@ -20,6 +20,7 @@ package forge.control.input;
 import java.util.concurrent.BlockingDeque;
 import java.util.concurrent.LinkedBlockingDeque;
 
+import forge.FThreads;
 import forge.game.GameAge;
 import forge.game.GameState;
 import forge.game.phase.PhaseHandler;
@@ -202,4 +203,28 @@ public class InputQueue extends MyObservable implements java.io.Serializable {
         return inputStack.toString();
     }
 
+    public void LockAndInvokeGameAction(final Runnable proc) {
+
+        //final GameState game = Singletons.getControl().getMatch().getCurrentGame();
+        //final InputQueue iq = game.getMatch().getInput();
+
+            
+//          StackTraceElement[] trace = Thread.currentThread().getStackTrace();
+//          System.out.printf("%s > Invoke in new thread during %s called from %s%n", FThreads.isEDT() ? "EDT" : "TRD", game.getPhaseHandler().getPhase(), trace[2].toString());
+//          if( trace[2].toString().contains("InputBase.stop"))
+//              for(StackTraceElement se : trace) {
+//                  System.out.println(se.toString());
+//              }
+
+        this.lock();
+        Runnable toRun = new Runnable() {
+            @Override
+            public void run() {
+                proc.run();
+                InputQueue.this.unlock();
+            }
+        };
+        FThreads.invokeInNewThread(toRun);
+    }
+    
 } // InputControl

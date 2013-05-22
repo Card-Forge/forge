@@ -18,7 +18,6 @@
 package forge.control.input;
 
 import forge.Card;
-import forge.FThreads;
 import forge.card.spellability.SpellAbility;
 import forge.game.phase.PhaseHandler;
 import forge.game.player.HumanPlay;
@@ -90,7 +89,7 @@ public class InputPassPriority extends InputBase {
                 }
             };
             
-            FThreads.invokeInNewThread(execAbility, true);
+            player.getGame().getMatch().getInput().LockAndInvokeGameAction(execAbility);
         }
         else {
             SDisplayUtil.remind(VMessage.SINGLETON_INSTANCE);

@@ -7,7 +7,6 @@ import org.apache.commons.lang3.StringUtils;
 
 import forge.Card;
 import forge.CardUtil;
-import forge.FThreads;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.card.ability.ApiType;
@@ -198,7 +197,7 @@ public abstract class InputPayManaBase extends InputSyncronizedBase implements I
                 onManaAbilityPlayed(chosen); 
             }
         };
-        FThreads.invokeInNewThread(proc, true);
+        game.getMatch().getInput().LockAndInvokeGameAction(proc);
         // EDT that removes lockUI from input stack will call our showMessage() method
     }
 

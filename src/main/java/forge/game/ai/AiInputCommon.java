@@ -17,7 +17,6 @@
  */
 package forge.game.ai;
 
-import forge.FThreads;
 import forge.control.input.InputBase;
 
 /**
@@ -63,7 +62,7 @@ public class AiInputCommon extends InputBase implements AiInput {
          * \"Detailed Error Trace\" to the Forge forum.");
          */
         
-        FThreads.invokeInNewThread(aiActions, true);
+        computer.getGame().getMatch().getInput().LockAndInvokeGameAction(aiActions);
         
     } // getMessage();
 

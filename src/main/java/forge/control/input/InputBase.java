@@ -65,9 +65,7 @@ public abstract class InputBase implements java.io.Serializable, Input {
     }
 
     protected void afterStop() { }
-    
-    
-    
+
     protected void passPriority() {
         final Runnable pass = new Runnable() {
             @Override public void run() {
@@ -75,7 +73,7 @@ public abstract class InputBase implements java.io.Serializable, Input {
             }
         };
         if( FThreads.isEDT() )
-            FThreads.invokeInNewThread(pass, true);
+            player.getGame().getMatch().getInput().LockAndInvokeGameAction(pass);
         else 
             pass.run();
     }

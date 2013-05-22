@@ -751,7 +751,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
                 };
                 
                 if ( FThreads.isEDT() )
-                    FThreads.invokeInNewThread(proc, true);
+                    game.getMatch().getInput().LockAndInvokeGameAction(proc);
                 else
                     proc.run();
             }

@@ -58,7 +58,7 @@ public class QuestEventChallenge extends QuestEvent {
     private boolean repeatable = false;
 
     private boolean useBazaar = true;
-    private Boolean forceAnte = false;
+    private Boolean forceAnte = null;
 
     /** The wins reqd. */
     private int winsReqd = 20;
