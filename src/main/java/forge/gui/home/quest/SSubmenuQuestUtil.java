@@ -403,7 +403,7 @@ public class SSubmenuQuestUtil {
         int extraLifeHuman = 0;
         Integer lifeHuman = null;
         boolean useBazaar = true;
-        boolean forceAnte = false;
+        Boolean forceAnte = null;
         int lifeAI = 20;
         if (event instanceof QuestEventChallenge) {
             QuestEventChallenge qc = ((QuestEventChallenge) event);

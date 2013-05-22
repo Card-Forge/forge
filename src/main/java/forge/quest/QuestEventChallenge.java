@@ -58,7 +58,7 @@ public class QuestEventChallenge extends QuestEvent {
     private boolean repeatable = false;
 
     private boolean useBazaar = true;
-    private boolean forceAnte = false;
+    private Boolean forceAnte = false;
 
     /** The wins reqd. */
     private int winsReqd = 20;
@@ -289,14 +289,14 @@ public class QuestEventChallenge extends QuestEvent {
     /**
      * @return the forceAnte
      */
-    public boolean isForceAnte() {
+    public Boolean isForceAnte() {
         return forceAnte;
     }
 
     /**
      * @param forceAnte the forceAnte to set
      */
-    public void setForceAnte(boolean forceAnte) {
+    public void setForceAnte(Boolean forceAnte) {
         this.forceAnte = forceAnte;
     }
 

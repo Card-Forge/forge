@@ -68,9 +68,10 @@ public class MatchController {
         gameType = type;
     }
     
-    public MatchController(GameType type, Map<LobbyPlayer, PlayerStartConditions> map, boolean forceAnte) {
+    public MatchController(GameType type, Map<LobbyPlayer, PlayerStartConditions> map, Boolean forceAnte) {
         this(type, map);
-        this.useAnte |= forceAnte;
+        if( forceAnte != null )
+            this.useAnte |= forceAnte.booleanValue();
     }
 
     /**
