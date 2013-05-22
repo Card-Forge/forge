@@ -44,12 +44,12 @@ public class QuestChallengeReader extends StorageReaderFolder<QuestEventChalleng
         if (humanLife != 0) {
             qc.setHumanLife(humanLife);
         }
-        qc.setUseBazaar(sectionQuest.getBoolean("UseBazaar", qc.isUseBazaar()));
+        qc.setUseBazaar(sectionQuest.getBoolean("UseBazaar", true));
         qc.setForceAnte(sectionQuest.getBoolean("ForceAnte", false));
 
         String humanDeck = sectionQuest.get("HumanDeck", null);
         if (humanDeck != null) {
-            File humanFile = new File(NewConstants.DEFAULT_CHALLENGES_DIR, humanDeck);
+            File humanFile = new File(NewConstants.DEFAULT_CHALLENGES_DIR, humanDeck); // Won't work in other worlds!
             qc.setHumanDeck(Deck.fromFile(humanFile));
         }
 
