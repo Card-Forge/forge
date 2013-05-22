@@ -246,6 +246,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
         switch(this.getPhase()) {
             case UNTAP:
                 //SDisplayUtil.showTab(EDocID.REPORT_STACK.getDoc());
+                game.getPhaseHandler().setPlayersPriorityPermission(false);
                 updateObservers();
                 PhaseUtil.handleUntap(game);
                 break;

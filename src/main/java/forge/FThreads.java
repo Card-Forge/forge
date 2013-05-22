@@ -1,5 +1,6 @@
 package forge;
 
+import java.io.PrintStream;
 import java.lang.reflect.InvocationTargetException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -103,13 +104,24 @@ public class FThreads {
         getCachedPool().execute(toRun);
     }
     
+    public static void dumpStackTrace(PrintStream stream) {
+      StackTraceElement[] trace = Thread.currentThread().getStackTrace();
+      stream.printf("%s > %s called from %s%n", debugGetCurrThreadId(), trace[2].getClassName()+"."+trace[2].getMethodName(), trace[3].toString());
+      int i = 0;
+      for(StackTraceElement se : trace) {
+          if(i<2) i++;
+          else stream.println(se.toString());
+
+      }
+    }
+    
     public static void invokeInNewThread(final Runnable proc, boolean lockUI) {
         Runnable toRun = proc;
         final InputQueue iq = Singletons.getControl().getMatch().getInput();
         //final GameState game = Singletons.getControl().getMatch().getCurrentGame();
         //final InputQueue iq = game.getMatch().getInput();
         if( lockUI ) {
-
+            
 //          StackTraceElement[] trace = Thread.currentThread().getStackTrace();
 //          System.out.printf("%s > Invoke in new thread during %s called from %s%n", FThreads.isEDT() ? "EDT" : "TRD", game.getPhaseHandler().getPhase(), trace[2].toString());
 //          if( trace[2].toString().contains("InputBase.stop"))

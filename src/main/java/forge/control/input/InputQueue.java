@@ -19,6 +19,7 @@ package forge.control.input;
 
 import java.util.concurrent.BlockingDeque;
 import java.util.concurrent.LinkedBlockingDeque;
+
 import forge.game.GameAge;
 import forge.game.GameState;
 import forge.game.phase.PhaseHandler;
@@ -134,7 +135,6 @@ public class InputQueue extends MyObservable implements java.io.Serializable {
             throw new RuntimeException("No player has priority!");
         PlayerController pc = priority.getController();
 
-        
         // If the Phase we're in doesn't allow for Priority, move to next phase
         if (!handler.isPlayerPriorityAllowed()) {
             return pc.getAutoPassPriorityInput();

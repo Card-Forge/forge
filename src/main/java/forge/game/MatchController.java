@@ -7,8 +7,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import javax.swing.JOptionPane;
-
 import forge.Constant.Preferences;
 import forge.FThreads;
 import forge.Singletons;
@@ -23,6 +21,7 @@ import forge.game.player.LobbyPlayer;
 import forge.game.player.LobbyPlayerHuman;
 import forge.game.player.Player;
 import forge.game.player.PlayerStatistics;
+import forge.gui.GuiDialog;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.SDisplayUtil;
 import forge.gui.match.CMatchUI;
@@ -365,22 +364,25 @@ public class MatchController {
     private Player determineFirstTurnPlayer(final GameOutcome lastGameOutcome, final GameState game) {
         // Only cut/coin toss if it's the first game of the match
         Player goesFirst = null;
-        Player humanPlayer = Singletons.getControl().getPlayer();
+        final String message;
+        //Player humanPlayer = Singletons.getControl().getPlayer();
         boolean isFirstGame = lastGameOutcome == null;
         if (isFirstGame) {
             goesFirst = seeWhoPlaysFirstDice(game);
+            message = goesFirst + " has won the coin toss.";    
         } else {
             for(Player p : game.getPlayers()) {
-                if(lastGameOutcome.isWinner(p.getLobbyPlayer())) {
-                    goesFirst = p.getOpponent();
+                if(!lastGameOutcome.isWinner(p.getLobbyPlayer())) { 
+                    goesFirst = p;
                     break;
                 }
             }
+            message = goesFirst + " lost the last game.";
         }
-        String message = goesFirst + ( isFirstGame ? " has won the coin toss." : " lost the last game.");
+        
         boolean willPlay = goesFirst.getController().getWillPlayOnFirstTurn(message);
-        if ( goesFirst != humanPlayer ) {
-            JOptionPane.showMessageDialog(null, message + "\nComputer Going First", "You are drawing", JOptionPane.INFORMATION_MESSAGE);
+        if ( goesFirst != FControl.SINGLETON_INSTANCE.getPlayer() ) {
+            GuiDialog.message(message + "\nComputer Going First");
         }
         goesFirst = willPlay ? goesFirst : goesFirst.getOpponent();
         game.getPhaseHandler().setPlayerTurn(goesFirst);

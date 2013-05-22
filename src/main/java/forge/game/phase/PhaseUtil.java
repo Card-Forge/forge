@@ -103,7 +103,6 @@ public class PhaseUtil {
         // phase is skipped
 
         if (PhaseUtil.skipUntap(turn)) {
-            game.getPhaseHandler().setPlayersPriorityPermission(false);
             return;
         }
 
@@ -112,8 +111,6 @@ public class PhaseUtil {
 
         // otherwise land seems to stay tapped when it is really untapped
         // AllZone.getHumanPlayer().getZone(ZoneType.Battlefield).updateObservers();
-
-        game.getPhaseHandler().setPlayersPriorityPermission(false);
     }
 
     
