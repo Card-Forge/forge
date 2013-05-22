@@ -173,6 +173,7 @@ res/cardsfolder/a/akki_raider.txt svneol=native#text/plain
 res/cardsfolder/a/akki_rockspeaker.txt svneol=native#text/plain
 res/cardsfolder/a/akki_underling.txt svneol=native#text/plain
 res/cardsfolder/a/akki_underminer.txt svneol=native#text/plain
+res/cardsfolder/a/akoum.txt -text
 res/cardsfolder/a/akoum_battlesinger.txt svneol=native#text/plain
 res/cardsfolder/a/akoum_boulderfoot.txt svneol=native#text/plain
 res/cardsfolder/a/akoum_refuge.txt svneol=native#text/plain
@@ -4674,6 +4675,7 @@ res/cardsfolder/g/groundling_pouncer.txt svneol=native#text/plain
 res/cardsfolder/g/groundskeeper.txt svneol=native#text/plain
 res/cardsfolder/g/groundswell.txt svneol=native#text/plain
 res/cardsfolder/g/grove_of_the_burnwillows.txt svneol=native#text/plain
+res/cardsfolder/g/grove_of_the_dreampods.txt -text
 res/cardsfolder/g/grove_of_the_guardian.txt -text
 res/cardsfolder/g/growing_ranks.txt -text
 res/cardsfolder/g/growth_spasm.txt svneol=native#text/plain

@@ -1,8 +1,10 @@
 package forge.card.ability.effects;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Random;
 
 import forge.Card;
 import forge.card.ability.AbilityUtils;
@@ -14,6 +16,7 @@ import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
+import forge.util.MyRandom;
 
 public class DigUntilEffect extends SpellAbilityEffect {
 
@@ -153,6 +156,10 @@ public class DigUntilEffect extends SpellAbilityEffect {
                     for (final Card c : revealed) {
                         host.addImprinted(c);
                     }
+                }
+                if (sa.hasParam("RevealRandomOrder")) {
+                    final Random random = MyRandom.getRandom();
+                    Collections.shuffle(revealed, random);
                 }
 
                 // TODO Use getOrderChoices before this moveTo call for the Human
