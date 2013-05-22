@@ -3,7 +3,7 @@ ManaCost:no cost
 Types:Legandary Land
 K:CARDNAME enters the battlefield tapped.
 A:AB$ Mana | Cost$ T PayLife<2> | Produced$ 1 | AddsNoCounter$ !Permanent | SpellDescription$ Add {1} to your mana pool. If that mana is spent on an instant or sorcery spell, that spell can't be countered by spells or abilities.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/boseju_who_shelters_all.jpg
+SVar:Picture:http://www.wizards.com/global/images/magic/general/boseiju_who_shelters_all.jpg
 Oracle:Boseiju, Who Shelters All enters the battlefield tapped.\n{T}, Pay 2 life: Add {1} to your mana pool. If that mana is spent on an instant or sorcery spell, that spell can't be countered by spells or abilities.{T}, Pay 1 life: Add {G} or {W} to your mana pool.\n{1}, {T}, Sacrifice Horizon Canopy: Draw a card.
 SetInfo:V12 Mythic
 SetInfo:CHK Rare
