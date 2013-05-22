@@ -5101,15 +5101,21 @@ public class Card extends GameEntity implements Comparable<Card> {
         // Inclusive restrictions are Card types
         final String[] incR = restriction.split("\\.", 2);
 
+        boolean testFailed = false;
+        if(incR[0].startsWith("!")) {
+            testFailed = true; // a bit counter logical ))
+            incR[0] = incR[0].substring(1); // consume negation sign
+        }
+
         if (incR[0].equals("Spell") && !this.isSpell()) {
-            return false;
+            return testFailed;
         }
         if (incR[0].equals("Permanent") && (this.isInstant() || this.isSorcery())) {
-            return false;
+            return testFailed;
         }
         if (!incR[0].equals("card") && !incR[0].equals("Card") && !incR[0].equals("Spell")
                 && !incR[0].equals("Permanent") && !(this.isType(incR[0]))) {
-            return false; // Check for wrong type
+            return testFailed; // Check for wrong type
         }
 
         if (incR.length > 1) {
@@ -5117,11 +5123,11 @@ public class Card extends GameEntity implements Comparable<Card> {
             final String[] exR = excR.split("\\+"); // Exclusive Restrictions are ...
             for (int j = 0; j < exR.length; j++) {
                 if (!this.hasProperty(exR[j], sourceController, source)) {
-                    return false;
+                    return testFailed;
                 }
             }
         }
-        return true;
+        return !testFailed;
     } // isValid(String Restriction)
 
     // Takes arguments like Blue or withFlying

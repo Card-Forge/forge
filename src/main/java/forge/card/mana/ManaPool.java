@@ -240,15 +240,8 @@ public class ManaPool {
         final Mana mana = this.getMana(manaShard, saBeingPaidFor, manaCost.getSourceRestriction());
         if (mana == null) {
             return; // no matching mana in the pool
-        }
-        else if (manaCost.isNeeded(mana)) {
-            manaCost.payMana(mana);
-            saBeingPaidFor.getPayingMana().add(mana);
-            this.removeMana( mana);
-            if (mana.addsNoCounterMagic() && saBeingPaidFor.getSourceCard() != null) {
-                saBeingPaidFor.getSourceCard().setCanCounter(false);
-            }
-        }
+        } else
+            tryPayCostWithMana(saBeingPaidFor, manaCost, mana);
     }
 
     /**
@@ -268,25 +261,26 @@ public class ManaPool {
         // Mana restriction must be checked before this method is called
 
         final List<SpellAbility> paidAbs = sa.getPayingManaAbilities();
-        final List<Mana> manaPaid = sa.getPayingMana();
-        
         SpellAbility tail = ma;
         AbilityManaPart abManaPart = null;
-        while(abManaPart == null && tail != null)
-        {
+        while(abManaPart == null && tail != null) {
             abManaPart = tail.getManaPart();
             tail = tail.getSubAbility();
         }
 
         paidAbs.add(ma); // assumes some part on the mana produced by the ability will get used
         for (final Mana mana : abManaPart.getLastManaProduced()) {
-            if (manaCost.isNeeded(mana)) {
-                manaCost.payMana(mana);
-                manaPaid.add(mana);
-                this.removeMana(mana);
-                if (mana.addsNoCounterMagic() && sa.getSourceCard() != null) {
-                    sa.getSourceCard().setCanCounter(false);
-                }
+            tryPayCostWithMana(sa, manaCost, mana);
+        }
+    }
+
+    private void tryPayCostWithMana(final SpellAbility sa, ManaCostBeingPaid manaCost, final Mana mana) {
+        if (manaCost.isNeeded(mana)) {
+            manaCost.payMana(mana);
+            sa.getPayingMana().add(mana);
+            this.removeMana(mana);
+            if (mana.addsNoCounterMagic(sa) && sa.getSourceCard() != null) {
+                sa.getSourceCard().setCanCounter(false);
             }
         }
     }

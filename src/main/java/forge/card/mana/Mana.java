@@ -20,6 +20,7 @@ package forge.card.mana;
 import forge.Card;
 import forge.card.MagicColor;
 import forge.card.spellability.AbilityManaPart;
+import forge.card.spellability.SpellAbility;
 
 /**
  * <p>
@@ -38,7 +39,6 @@ public class Mana {
         result = prime * result + color;
         result = prime * result + (hasRestrictions ? 1231 : 1237);
         result = prime * result + ((manaAbility == null) ? 0 : manaAbility.hashCode());
-        result = prime * result + (pumpCounterMagic ? 1231 : 1237);
         result = prime * result + ((sourceCard == null) ? 0 : sourceCard.hashCode());
         return result;
     }
@@ -69,7 +69,6 @@ public class Mana {
     private Card sourceCard = null;
     private AbilityManaPart manaAbility = null;
     private boolean hasRestrictions = false;
-    private boolean pumpCounterMagic = false;
 
     /**
      * <p>
@@ -89,9 +88,6 @@ public class Mana {
           this.manaAbility = manaAbility;
           if (!manaAbility.getManaRestrictions().isEmpty()) {
               this.hasRestrictions = true;
-          }
-          if (manaAbility.cannotCounterPaidWith()) {
-              this.pumpCounterMagic = true;
           }
         }
         if (source == null) {
@@ -144,8 +140,8 @@ public class Mana {
      * 
      * @return a boolean.
      */
-    public final boolean addsNoCounterMagic() {
-        return this.pumpCounterMagic;
+    public final boolean addsNoCounterMagic(SpellAbility saBeingPaid) {
+        return this.manaAbility != null && manaAbility.cannotCounterPaidWith(saBeingPaid);
     }
 
     /**

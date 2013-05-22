@@ -55,7 +55,7 @@ public class AbilityManaPart implements java.io.Serializable {
     private final transient Card sourceCard;
 
     // Spells paid with this mana spell can't be countered.
-    private boolean cannotCounterSpell;
+    private String cannotCounterSpell;
 
     /**
      * <p>
@@ -79,7 +79,7 @@ public class AbilityManaPart implements java.io.Serializable {
             this.manaRestrictions = params.get("RestrictValid");
         }
 
-        this.cannotCounterSpell = params.containsKey("AddsNoCounter");
+        this.cannotCounterSpell = params.get("AddsNoCounter");
 
     }
 
@@ -139,11 +139,17 @@ public class AbilityManaPart implements java.io.Serializable {
      * <p>
      * cannotCounterPaidWith.
      * </p>
+     * @param saBeingPaid 
      * 
      * @return a {@link java.lang.String} object.
      */
-    public boolean cannotCounterPaidWith() {
-        return cannotCounterSpell;
+    public boolean cannotCounterPaidWith(SpellAbility saBeingPaid) {
+        if (null == cannotCounterSpell) return false;
+        if ("True".equalsIgnoreCase(cannotCounterSpell)) return true;
+
+        Card source = saBeingPaid.getSourceCard();
+        if (source == null) return false;
+        return source.isValid(cannotCounterSpell, sourceCard.getController(), sourceCard);
     }
 
     /**
