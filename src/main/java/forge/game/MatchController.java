@@ -69,7 +69,7 @@ public class MatchController {
     public MatchController(GameType type, Map<LobbyPlayer, PlayerStartConditions> map, Boolean forceAnte) {
         this(type, map);
         if( forceAnte != null )
-            this.useAnte |= forceAnte.booleanValue();
+            this.useAnte = forceAnte.booleanValue();
     }
 
     /**
@@ -129,7 +129,7 @@ public class MatchController {
 
 
         FThreads.invokeInEdtNowOrLater(new Runnable() { @Override public void run() {
-            String title = result.isWinner(human) ? "You Win" : "You Lost";
+            String title = result.getWinner().getName() + " Won!";
             ViewWinLose v = new ViewWinLose(MatchController.this);
             v.setTitle(title);
             v.setOutcomes(outcomes);
