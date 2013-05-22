@@ -319,7 +319,7 @@ public class ComputerUtil {
             AbilityUtils.resolve(sa, false);
 
             // destroys creatures if they have lethal damage, etc..
-            game.getAction().checkStateEffects();
+            //game.getAction().checkStateEffects();
         }
     } // play()
 

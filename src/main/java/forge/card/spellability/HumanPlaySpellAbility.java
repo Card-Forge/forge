@@ -116,7 +116,7 @@ public class HumanPlaySpellAbility {
         
                 // no worries here. The same thread must resolve, and by this moment ability will have been resolved already
                 clearTargets(ability);
-                game.getAction().checkStateEffects();
+                //game.getAction().checkStateEffects();
             }
         }
     }
