@@ -145,6 +145,10 @@ public class CField implements ICDoc {
 
             @Override
             protected void doAction(final Card c) {
+                // activate opponents cards only via your own flashback button
+                if (player != CField.this.playerViewer) {
+                    return;
+                }
                 final GameState game = player.getGame();
                 // should I check for who owns these cards? Are there any abilities to be played from opponent's graveyard? 
                 final SpellAbility ab = CField.this.playerViewer.getController().getAbilityToPlay(game.getAbilitesOfCard(c, CField.this.playerViewer));
