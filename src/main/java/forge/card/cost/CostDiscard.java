@@ -24,7 +24,6 @@ import com.google.common.base.Predicate;
 import forge.Card;
 import forge.CardLists;
 import forge.CardPredicates;
-import forge.FThreads;
 import forge.card.ability.AbilityUtils;
 import forge.card.spellability.SpellAbility;
 import forge.control.input.InputSelectCards;
@@ -230,7 +229,7 @@ public class CostDiscard extends CostPartWithList {
             InputSelectCards inp = new InputSelectCardsFromList(c, c, handList);
             inp.setMessage("Select %d more " + getDescriptiveType() + " to discard.");
             //InputPayment inp = new InputPayCostDiscard(ability, handList, this, c, discardType);
-            FThreads.setInputAndWait(inp);
+            game.getInputQueue().setInputAndWait(inp);
             if( inp.hasCancelled() || inp.getSelected().size() != c)
                 return false;
             

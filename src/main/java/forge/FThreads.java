@@ -9,8 +9,6 @@ import java.util.concurrent.TimeUnit;
 
 import javax.swing.SwingUtilities;
 
-import forge.control.input.InputSynchronized;
-
 /** 
  * TODO: Write javadoc for this type.
  *
@@ -114,10 +112,6 @@ public class FThreads {
       }
     }
     
-    public static void setInputAndWait(InputSynchronized input) {
-        Singletons.getControl().getMatch().getInput().setInput(input);
-        input.awaitLatchRelease();
-    }
 
     /**
      * TODO: Write javadoc for this method.

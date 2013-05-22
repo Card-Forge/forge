@@ -25,7 +25,6 @@ import java.util.Map;
 import forge.Card;
 import forge.CardLists;
 import forge.CounterType;
-import forge.FThreads;
 import forge.card.ability.AbilityUtils;
 import forge.card.spellability.SpellAbility;
 import forge.control.input.InputSelectCards;
@@ -150,7 +149,7 @@ public class CostRemoveCounter extends CostPartWithList {
             final InputSelectCardToRemoveCounter inp = new InputSelectCardToRemoveCounter(cntRemoved, getCounter(), validCards);
             inp.setMessage("Remove %d " + getCounter().getName() + " counters from " + getDescriptiveType());
             inp.setCancelAllowed(true);
-            FThreads.setInputAndWait(inp);
+            ability.getActivatingPlayer().getGame().getInputQueue().setInputAndWait(inp);
             if(inp.hasCancelled())
                 return false;
 

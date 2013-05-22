@@ -197,7 +197,7 @@ public abstract class InputPayManaBase extends InputSyncronizedBase implements I
                 onManaAbilityPlayed(chosen); 
             }
         };
-        game.getMatch().getInput().LockAndInvokeGameAction(proc);
+        game.getInputQueue().LockAndInvokeGameAction(proc);
         // EDT that removes lockUI from input stack will call our showMessage() method
     }
 

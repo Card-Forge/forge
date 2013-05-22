@@ -25,7 +25,6 @@ import com.google.common.base.Predicate;
 import forge.Card;
 import forge.CardLists;
 import forge.CardPredicates.Presets;
-import forge.FThreads;
 import forge.card.ability.AbilityUtils;
 import forge.card.spellability.SpellAbility;
 import forge.control.input.InputSelectCards;
@@ -199,7 +198,7 @@ public class CostTapType extends CostPartWithList {
         
         InputSelectCards inp = new InputSelectCardsFromList(c, c, typeList);
         inp.setMessage("Select a " + getDescriptiveType() + " to tap (%d left)");
-        FThreads.setInputAndWait(inp);
+        game.getInputQueue().setInputAndWait(inp);
         if ( inp.hasCancelled() )
             return false;
 

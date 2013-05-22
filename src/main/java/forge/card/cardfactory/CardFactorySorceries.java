@@ -24,7 +24,6 @@ import java.util.List;
 import forge.Card;
 import forge.CardLists;
 import forge.CardPredicates;
-import forge.FThreads;
 import forge.CardPredicates.Presets;
 import forge.card.cost.Cost;
 import forge.card.mana.ManaCost;
@@ -81,7 +80,7 @@ public class CardFactorySorceries {
 
                 InputSelectCards inp = new InputSelectCardsFromList(sac, sac, list);
                 inp.setMessage("Select %d more land(s) to sacrifice");
-                FThreads.setInputAndWait(inp);
+                p.getGame().getInputQueue().setInputAndWait(inp);
                 for( Card crd : inp.getSelected() )
                     p.getGame().getAction().sacrifice(crd, card);
             }
@@ -103,7 +102,7 @@ public class CardFactorySorceries {
             if (p.isHuman()) {
                 InputSelectCards sc = new InputSelectCardsFromList(sac, sac, hand);
                 sc.setMessage("Select %d more card(s) to discard");
-                FThreads.setInputAndWait(sc);
+                p.getGame().getInputQueue().setInputAndWait(sc);
                 for( Card c : sc.getSelected())
                     p.discard(c, spell);
             } else {
@@ -146,7 +145,7 @@ public class CardFactorySorceries {
                 final List<Card> list = CardLists.getType(p.getCardsIn(ZoneType.Battlefield), "Creature");
                 InputSelectCards inp = new InputSelectCardsFromList(sac, sac, list);
                 inp.setMessage("Select %d more creature(s) to sacrifice");
-                FThreads.setInputAndWait(inp);
+                p.getGame().getInputQueue().setInputAndWait(inp);
                 for( Card crd : inp.getSelected() )
                     p.getGame().getAction().sacrifice(crd, card);
 
@@ -245,7 +244,7 @@ public class CardFactorySorceries {
                 } else {
                     final int diffCost = newCMC - baseCMC;
                     InputPayManaExecuteCommands inp = new InputPayManaExecuteCommands(p, "Pay difference in artifacts CMC", ManaCost.get(diffCost));
-                    FThreads.setInputAndWait(inp);
+                    p.getGame().getInputQueue().setInputAndWait(inp);
                     if ( inp.isPaid() )
                         game.getAction().moveToPlay(newArtifact[0]);
                     else

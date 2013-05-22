@@ -21,7 +21,6 @@ import java.util.ArrayList;
 import java.util.List;
 import forge.Card;
 import forge.CardLists;
-import forge.FThreads;
 import forge.card.ability.AbilityUtils;
 import forge.card.spellability.SpellAbility;
 import forge.control.input.InputSelectCards;
@@ -149,7 +148,7 @@ public class CostReturn extends CostPartWithList {
 
             InputSelectCards inp = new InputSelectCardsFromList(c, c, validCards);
             inp.setMessage("Return %d " + this.getType() + " " + this.getType() + " card(s) to hand");
-            FThreads.setInputAndWait(inp);
+            game.getInputQueue().setInputAndWait(inp);
             if (inp.hasCancelled())
                 return false;
             

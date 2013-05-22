@@ -23,7 +23,6 @@ import java.util.List;
 import forge.Card;
 import forge.CardLists;
 import forge.CardPredicates;
-import forge.FThreads;
 import forge.card.ability.AbilityUtils;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityStackInstance;
@@ -246,7 +245,7 @@ public class CostExile extends CostPartWithList {
             InputSelectCards inp = new InputSelectCardsFromList(c, c, validCards);
             inp.setMessage("Exile %d card(s) from your" + from );
             inp.setCancelAllowed(true);
-            FThreads.setInputAndWait(inp);
+            game.getInputQueue().setInputAndWait(inp);
             return !inp.hasCancelled() && executePayment(ability, inp.getSelected());
         }
 

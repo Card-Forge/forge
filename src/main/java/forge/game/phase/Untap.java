@@ -28,7 +28,6 @@ import forge.CardLists;
 import forge.CardPredicates;
 import forge.CardPredicates.Presets;
 import forge.CounterType;
-import forge.FThreads;
 import forge.GameEntity;
 import forge.control.input.InputSelectCards;
 import forge.control.input.InputSelectCardsFromList;
@@ -213,7 +212,7 @@ public class Untap extends Phase {
                 } else {
                     final InputSelectCards target = new InputSelectCardsFromList(1,1, landList);
                     target.setMessage("Select one tapped land to untap");
-                    FThreads.setInputAndWait(target);
+                    player.getGame().getInputQueue().setInputAndWait(target);
                     if( !target.hasCancelled() && !target.getSelected().isEmpty())
                         target.getSelected().get(0).untap();
                 }
@@ -229,7 +228,7 @@ public class Untap extends Phase {
                 } else {
                     final InputSelectCards target = new InputSelectCardsFromList(1,1, artList);
                     target.setMessage("Select one tapped artifact to untap");
-                    FThreads.setInputAndWait(target);
+                    turnOwner.getGame().getInputQueue().setInputAndWait(target);
                     if( !target.hasCancelled() && !target.getSelected().isEmpty())
                         target.getSelected().get(0).untap();
                 }
@@ -243,7 +242,7 @@ public class Untap extends Phase {
                 } else {
                     final InputSelectCards target = new InputSelectCardsFromList(1, 1, creatures);
                     target.setMessage("Select one creature to untap");
-                    FThreads.setInputAndWait(target);
+                    player.getGame().getInputQueue().setInputAndWait(target);
                     if( !target.hasCancelled() && !target.getSelected().isEmpty())
                         target.getSelected().get(0).untap();
                 }

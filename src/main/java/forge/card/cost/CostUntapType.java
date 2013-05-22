@@ -21,7 +21,6 @@ import java.util.List;
 import forge.Card;
 import forge.CardLists;
 import forge.CardPredicates.Presets;
-import forge.FThreads;
 import forge.card.ability.AbilityUtils;
 import forge.card.spellability.SpellAbility;
 import forge.control.input.InputSelectCards;
@@ -153,7 +152,7 @@ public class CostUntapType extends CostPartWithList {
         }
         InputSelectCards inp = new InputSelectCardsFromList(c, c, typeList);
         inp.setMessage("Select a " + getDescriptiveType() + " to untap (%d left)");
-        FThreads.setInputAndWait(inp);
+        game.getInputQueue().setInputAndWait(inp);
         if( inp.hasCancelled() || inp.getSelected().size() != c )
             return false;
             

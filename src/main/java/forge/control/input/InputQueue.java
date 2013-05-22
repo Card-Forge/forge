@@ -43,9 +43,16 @@ public class InputQueue extends MyObservable implements java.io.Serializable {
     private static final long serialVersionUID = 3955194449319994301L;
 
     private final BlockingDeque<Input> inputStack = new LinkedBlockingDeque<Input>();
+    private final GameState game; 
+    
+
+    private final InputLockUI inputLock;
 
 
-    public InputQueue() {}
+    public InputQueue(GameState game0) {
+        game = game0;
+        inputLock = new InputLockUI(this);
+    }
 
     /**
      * <p>
@@ -119,7 +126,7 @@ public class InputQueue extends MyObservable implements java.io.Serializable {
      * 
      * @return a {@link forge.control.input.InputBase} object.
      */
-    public final Input getActualInput(GameState game) {
+    public final Input getActualInput() {
         GameAge age = game.getAge();
         if ( age != GameAge.Play  && age != GameAge.Mulligan)
             return inputLock;
@@ -187,7 +194,6 @@ public class InputQueue extends MyObservable implements java.io.Serializable {
     } // getInput()
 
 
-    private final static InputLockUI inputLock = new InputLockUI();
     public void lock() {
         setInput(inputLock);
     }
@@ -202,20 +208,13 @@ public class InputQueue extends MyObservable implements java.io.Serializable {
     public String printInputStack() {
         return inputStack.toString();
     }
+    
+    public void setInputAndWait(InputSynchronized input) {
+        this.setInput(input);
+        input.awaitLatchRelease();
+    }
 
     public void LockAndInvokeGameAction(final Runnable proc) {
-
-        //final GameState game = Singletons.getControl().getMatch().getCurrentGame();
-        //final InputQueue iq = game.getMatch().getInput();
-
-            
-//          StackTraceElement[] trace = Thread.currentThread().getStackTrace();
-//          System.out.printf("%s > Invoke in new thread during %s called from %s%n", FThreads.isEDT() ? "EDT" : "TRD", game.getPhaseHandler().getPhase(), trace[2].toString());
-//          if( trace[2].toString().contains("InputBase.stop"))
-//              for(StackTraceElement se : trace) {
-//                  System.out.println(se.toString());
-//              }
-
         this.lock();
         Runnable toRun = new Runnable() {
             @Override
@@ -224,7 +223,11 @@ public class InputQueue extends MyObservable implements java.io.Serializable {
                 InputQueue.this.unlock();
             }
         };
-        FThreads.invokeInNewThread(toRun);
+        if(FThreads.isEDT()) {
+            FThreads.invokeInNewThread(toRun);
+        } else { // this branch is experimental
+            toRun.run();
+        }
     }
     
 } // InputControl

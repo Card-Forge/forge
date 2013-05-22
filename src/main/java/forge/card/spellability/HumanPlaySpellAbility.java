@@ -63,7 +63,7 @@ public class HumanPlaySpellAbility {
 
         // freeze Stack. No abilities should go onto the stack while I'm filling requirements.
         game.getStack().freezeStack();
-        game.getMatch().getInput().lock();
+        game.getInputQueue().lock();
 
         // Announce things like how many times you want to Multikick or the value of X
         if (!this.announceRequirements()) {
@@ -104,7 +104,7 @@ public class HumanPlaySpellAbility {
             return;
         }
         else {
-            game.getMatch().getInput().unlock();
+            game.getInputQueue().unlock();
             if (isFree || this.payment.isFullyPaid()) {
                 if (skipStack) {
                     AbilityUtils.resolve(this.ability, false);
@@ -149,7 +149,7 @@ public class HumanPlaySpellAbility {
         this.ability.resetOnceResolved();
         this.payment.refundPayment();
         game.getStack().clearFrozen();
-        game.getMatch().getInput().unlock();
+        game.getInputQueue().unlock();
         // Singletons.getModel().getGame().getStack().removeFromFrozenStack(this.ability);
     }
     

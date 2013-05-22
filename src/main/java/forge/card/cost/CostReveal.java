@@ -24,7 +24,6 @@ import com.google.common.collect.Lists;
 
 import forge.Card;
 import forge.CardLists;
-import forge.FThreads;
 import forge.card.ability.AbilityUtils;
 import forge.card.spellability.SpellAbility;
 import forge.control.input.InputSelectCards;
@@ -169,7 +168,7 @@ public class CostReveal extends CostPartWithList {
             if ( num == 0 ) return true;
             InputSelectCards inp = new InputSelectCardsFromList(num, num, handList);
             inp.setMessage("Select %d more " + getDescriptiveType() + " card(s) to reveal.");
-            FThreads.setInputAndWait(inp);
+            game.getInputQueue().setInputAndWait(inp);
             if ( inp.hasCancelled() )
                 return false;
 

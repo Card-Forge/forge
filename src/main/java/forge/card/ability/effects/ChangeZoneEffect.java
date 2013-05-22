@@ -10,7 +10,6 @@ import forge.Card;
 import forge.CardCharacteristicName;
 import forge.CardLists;
 import forge.CardPredicates;
-import forge.FThreads;
 import forge.GameEntity;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
@@ -747,7 +746,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     InputSelectCardsFromList inp = new InputSelectCardsFromList(1, 1, fetchList);
                     inp.setCancelAllowed(!mustChoose);
                     inp.setMessage(selectPrompt);
-                    FThreads.setInputAndWait(inp);
+                    game.getInputQueue().setInputAndWait(inp);
                     c = inp.hasCancelled() ? null : inp.getSelected().get(0);
                 }
                 else {

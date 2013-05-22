@@ -26,7 +26,6 @@ import com.google.common.base.Predicate;
 import forge.Card;
 import forge.CardLists;
 import forge.CardPredicates;
-import forge.FThreads;
 import forge.CardPredicates.Presets;
 import forge.CounterType;
 import forge.card.cardfactory.CardFactoryUtil;
@@ -271,7 +270,7 @@ public class Upkeep extends Phase {
                             final boolean isUpkeepPaid;
                             if (controller.isHuman()) {
                                 InputPayManaExecuteCommands inp = new InputPayManaExecuteCommands(controller, sb, upkeepCost);
-                                FThreads.setInputAndWait(inp);
+                                controller.getGame().getInputQueue().setInputAndWait(inp);
                                 isUpkeepPaid = inp.isPaid();
                             } else { // computer
                                 Ability aiPaid = Upkeep.getBlankAbility(c, upkeepCost.toString());
@@ -356,7 +355,7 @@ public class Upkeep extends Phase {
                             boolean isUpkeepPaid = false;
                             if (controller.isHuman()) {
                                 InputPayManaExecuteCommands inp = new InputPayManaExecuteCommands(controller, sb, upkeepCost);
-                                FThreads.setInputAndWait(inp);
+                                controller.getGame().getInputQueue().setInputAndWait(inp);
                                 isUpkeepPaid = inp.isPaid();
                             } else { // computers
                                 final Ability aiPaid = Upkeep.getBlankAbility(c, upkeepCost.toString());
@@ -436,7 +435,7 @@ public class Upkeep extends Phase {
                             };
                         };
                         chooseArt.setMessage(abyss.getName() + " - Select one nonartifact creature to destroy");
-                        FThreads.setInputAndWait(chooseArt); // Input
+                        player.getGame().getInputQueue().setInputAndWait(chooseArt); // Input
                         if (!chooseArt.hasCancelled()) {
                             game.getAction().destroyNoRegeneration(chooseArt.getSelected().get(0), this);
                         }
@@ -565,7 +564,7 @@ public class Upkeep extends Phase {
                     public void resolve() {
                         if (game.getZoneOf(c).is(ZoneType.Battlefield)) {
                             InputPayment inp = new InputPayManaExecuteCommands(cp, "Pay Demonic Hordes upkeep cost", cost.getPayCosts().getTotalMana() /*, true */);
-                            FThreads.setInputAndWait(inp);
+                            cp.getGame().getInputQueue().setInputAndWait(inp);
                             if ( !inp.isPaid() ) 
                                 unpaidHordesAb.resolve();
                         }
@@ -923,7 +922,7 @@ public class Upkeep extends Phase {
                     } else {
                         InputSelectCards inp = new InputSelectCardsFromList(num, num, list);
                         inp.setMessage(source.getName() + " - Select %d untapped artifact(s), creature(s), or land(s) you control");
-                        FThreads.setInputAndWait(inp);
+                        player.getGame().getInputQueue().setInputAndWait(inp);
                         for(Card crd : inp.getSelected())
                             crd.tap();
                     }

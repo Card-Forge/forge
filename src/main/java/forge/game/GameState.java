@@ -39,6 +39,7 @@ import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityStackInstance;
 import forge.card.trigger.TriggerHandler;
 import forge.card.trigger.TriggerType;
+import forge.control.input.InputQueue;
 import forge.game.phase.Cleanup;
 import forge.game.phase.Combat;
 import forge.game.phase.EndOfCombat;
@@ -86,6 +87,8 @@ public class GameState {
     private final MatchController match;
     private GameAge age = GameAge.BeforeMulligan;
 
+    private final InputQueue inputQueue;
+    
     /**
      * Constructor.
      * @param players2.entrySet()
@@ -119,7 +122,9 @@ public class GameState {
         cleanup = new Cleanup(this);
         endOfTurn = new EndOfTurn(this);
         endOfCombat = new EndOfCombat(this);
-
+        
+        inputQueue = new InputQueue(this);
+        
         if ( match0.getGameType() == GameType.Quest)
             events.register(Singletons.getModel().getQuest()); // this one listens to player's mulligans ATM
 
@@ -618,5 +623,10 @@ public class GameState {
 
     void setAge(GameAge value) {
         age = value;
+    }
+
+
+    public InputQueue getInputQueue() {
+        return inputQueue;
     }
 }

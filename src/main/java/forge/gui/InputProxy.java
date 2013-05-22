@@ -25,7 +25,6 @@ import forge.Card;
 import forge.FThreads;
 import forge.control.input.Input;
 import forge.game.GameState;
-import forge.game.MatchController;
 import forge.game.phase.PhaseHandler;
 import forge.game.player.Player;
 
@@ -41,26 +40,25 @@ public class InputProxy implements Observer {
 
     /** The input. */
     private AtomicReference<Input> input = new AtomicReference<Input>();
-    private MatchController match = null;
+    private GameState game = null;
 
     private static final boolean INPUT_DEBUG = false;
     
-    public void setMatch(MatchController match0) {
-        match = match0;
-        match.getCurrentGame().getStack().addObserver(this);
-        match.getCurrentGame().getPhaseHandler().addObserver(this);
-        match.getInput().addObserver(this);
+    public void setGame(GameState game0) {
+        game = game0;
+        game.getStack().addObserver(this);
+        game.getPhaseHandler().addObserver(this);
+        game.getInputQueue().addObserver(this);
     }
     
     @Override
     public final synchronized void update(final Observable observable, final Object obj) {
-        final GameState game = match.getCurrentGame();
         final PhaseHandler ph = game.getPhaseHandler();
         
         if(INPUT_DEBUG)
             System.out.printf("%s > InputProxy.update() =>%n", FThreads.debugGetCurrThreadId());
         
-        if ( match.getInput().isEmpty() && ph.hasPhaseEffects()) {
+        if ( game.getInputQueue().isEmpty() && ph.hasPhaseEffects()) {
             Runnable rPhase = new Runnable() {
                 @Override
                 public void run() {
@@ -74,10 +72,10 @@ public class InputProxy implements Observer {
             return;
         }
         
-        final Input nextInput = match.getInput().getActualInput(game);
+        final Input nextInput = game.getInputQueue().getActualInput();
         
         if(INPUT_DEBUG)
-            System.out.printf("\tinput is %s during %s, \tstack = %s%n", nextInput == null ? "null" : nextInput.getClass().getSimpleName(), ph.debugPrintState(), match.getInput().printInputStack());
+            System.out.printf("\tinput is %s during %s, \tstack = %s%n", nextInput == null ? "null" : nextInput.getClass().getSimpleName(), ph.debugPrintState(), game.getInputQueue().printInputStack());
 
         this.input.set(nextInput);
         Runnable showMessage = new Runnable() {

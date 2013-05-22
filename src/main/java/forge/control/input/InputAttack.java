@@ -26,7 +26,6 @@ import com.google.common.collect.Iterables;
 import forge.Card;
 import forge.CardPredicates;
 import forge.GameEntity;
-import forge.Singletons;
 import forge.game.GameState;
 import forge.game.phase.CombatUtil;
 import forge.game.player.Player;
@@ -102,7 +101,7 @@ public class InputAttack extends InputBase {
         
         game.getPhaseHandler().setCombat(!game.getCombat().getAttackers().isEmpty());
         game.getPhaseHandler().setPlayersPriorityPermission(false);
-        Singletons.getControl().getMatch().getInput().updateObservers();
+        game.getInputQueue().updateObservers();
     }
 
     @Override

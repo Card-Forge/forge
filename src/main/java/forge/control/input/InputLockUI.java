@@ -4,7 +4,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import forge.Card;
 import forge.FThreads;
-import forge.Singletons;
 import forge.game.player.Player;
 import forge.gui.match.CMatchUI;
 import forge.view.ButtonUtil;
@@ -15,7 +14,15 @@ import forge.view.ButtonUtil;
  */
 public class InputLockUI implements Input  {
     private final AtomicInteger iCall = new AtomicInteger();
-    
+    private final InputQueue iq;
+    /**
+     * TODO: Write javadoc for Constructor.
+     * @param inputQueue
+     */
+    public InputLockUI(InputQueue inputQueue) {
+        iq = inputQueue;
+    }
+
     public void showMessage() {
         int ixCall = 1 + iCall.getAndIncrement();
         FThreads.delay(500, new InputUpdater(ixCall));
@@ -51,7 +58,7 @@ public class InputLockUI implements Input  {
     };
     
     protected final boolean isActive() {
-        return Singletons.getControl().getMatch().getInput().getInput() == this;
+        return iq.getInput() == this;
     }
 
     protected void showMessage(String message) { 

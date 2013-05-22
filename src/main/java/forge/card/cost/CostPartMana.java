@@ -18,7 +18,6 @@
 package forge.card.cost;
 
 import forge.Card;
-import forge.FThreads;
 import forge.card.MagicColor;
 import forge.card.ability.AbilityUtils;
 import forge.card.mana.ManaCost;
@@ -130,7 +129,7 @@ public class CostPartMana extends CostPart {
         toPay.applySpellCostChange(ability);
         if (!toPay.isPaid()) {
             InputPayment inpPayment = new InputPayManaOfCostPayment(toPay, ability);
-            FThreads.setInputAndWait(inpPayment);
+            game.getInputQueue().setInputAndWait(inpPayment);
             if(!inpPayment.isPaid())
                 return false;
 
@@ -141,7 +140,7 @@ public class CostPartMana extends CostPart {
             if( !ability.isAnnouncing("X") && !xWasBilled) {
                 source.setXManaCostPaid(0);
                 InputPayment inpPayment = new InputPayManaX(ability, this.getAmountOfX(), this.canXbe0());
-                FThreads.setInputAndWait(inpPayment);
+                game.getInputQueue().setInputAndWait(inpPayment);
                 if(!inpPayment.isPaid())
                     return false;
             } else {

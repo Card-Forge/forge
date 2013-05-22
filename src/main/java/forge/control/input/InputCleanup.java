@@ -77,7 +77,7 @@ public class InputCleanup extends InputBase {
         if (!zone.is(ZoneType.Hand, Singletons.getControl().getPlayer())) 
             return;
             
-        game.getMatch().getInput().LockAndInvokeGameAction(new Runnable() {
+        game.getInputQueue().LockAndInvokeGameAction(new Runnable() {
             @Override
             public void run() {
                 card.getController().discard(card, null);

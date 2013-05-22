@@ -32,7 +32,6 @@ import forge.Card;
 import forge.Command;
 import forge.FThreads;
 import forge.Constant.Preferences;
-import forge.Singletons;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
 import forge.control.input.Input;
@@ -201,7 +200,7 @@ public class CField implements ICDoc {
     /** */
     private void manaAction(byte colorCode) {
         if (CField.this.player == CField.this.playerViewer) {
-            final Input in = Singletons.getControl().getMatch().getInput().getInput();
+            final Input in = CField.this.player.getGame().getInputQueue().getInput();
             if (in instanceof InputPayManaBase) {
                 // Do something
                 ((InputPayManaBase) in).selectManaPool(colorCode);

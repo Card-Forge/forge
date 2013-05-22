@@ -12,7 +12,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
 import forge.Card;
-import forge.FThreads;
 import forge.GameEntity;
 import forge.card.mana.Mana;
 import forge.card.replacement.ReplacementEffect;
@@ -243,7 +242,7 @@ public class PlayerControllerHuman extends PlayerController {
         // TODO: Either compose a message here, or pass it as parameter from caller. 
         inp.setMessage("Select %d " + validMessage + "(s) to sacrifice");
         
-        FThreads.setInputAndWait(inp);
+        player.getGame().getInputQueue().setInputAndWait(inp);
         if( inp.hasCancelled() )
             return new ArrayList<Card>();
         else return inp.getSelected(); 
@@ -343,7 +342,7 @@ public class PlayerControllerHuman extends PlayerController {
 
         InputSelectCards inp = new InputSelectCardsFromList(min, max, valid);
         inp.setMessage("Discard %d cards");
-        FThreads.setInputAndWait(inp);
+        player.getGame().getInputQueue().setInputAndWait(inp);
         return inp.getSelected();
     }
 
@@ -433,7 +432,7 @@ public class PlayerControllerHuman extends PlayerController {
             }
         };
         target.setMessage("Select %d cards to discard, unless you discard a " + uType + ".");
-        FThreads.setInputAndWait(target);
+        player.getGame().getInputQueue().setInputAndWait(target);
         return target.getSelected();
     }
 
@@ -472,7 +471,7 @@ public class PlayerControllerHuman extends PlayerController {
     @Override
     public List<Card> getCardsToMulligan(boolean isCommander) {
         final InputConfirmMulligan inp = new InputConfirmMulligan(player, isCommander);
-        FThreads.setInputAndWait(inp);
+        player.getGame().getInputQueue().setInputAndWait(inp);
         return inp.isKeepHand() ? null : inp.getSelectedCards();
     }
 }

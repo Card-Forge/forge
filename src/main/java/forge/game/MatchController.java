@@ -12,7 +12,6 @@ import forge.FThreads;
 import forge.Singletons;
 import forge.card.trigger.TriggerType;
 import forge.control.FControl;
-import forge.control.input.InputQueue;
 import forge.deck.Deck;
 import forge.error.BugReporter;
 import forge.game.event.DuelOutcomeEvent;
@@ -56,8 +55,6 @@ public class MatchController {
 
     private final List<GameOutcome> gamesPlayed = new ArrayList<GameOutcome>();
     private final List<GameOutcome> gamesPlayedRo;
-
-    private InputQueue inputQueue;
 
     /**
      * This should become constructor once.
@@ -145,7 +142,6 @@ public class MatchController {
      */
     public void startRound() {
 
-        inputQueue = new InputQueue();
         currentGame = new GameState(players, gameType, this);
 
         try {
@@ -161,7 +157,7 @@ public class MatchController {
             
         final Player firstPlayer = determineFirstTurnPlayer(getLastGameOutcome(), currentGame);
 
-        getInput().clearInput();
+        currentGame.getInputQueue().clearInput();
         if(currentGame.getType() == GameType.Planechase)
             firstPlayer.initPlane();
 
@@ -182,7 +178,7 @@ public class MatchController {
                 final HashMap<String, Object> runParams = new HashMap<String, Object>();
                 currentGame.getTriggerHandler().runTrigger(TriggerType.NewGame, runParams, false);
                 currentGame.setAge(GameAge.Play);
-                getInput().clearInput();
+                currentGame.getInputQueue().clearInput();
             }
         });
     }
@@ -216,7 +212,7 @@ public class MatchController {
         Singletons.getControl().changeState(FControl.Screens.MATCH_SCREEN);
         SDisplayUtil.showTab(EDocID.REPORT_LOG.getDoc());
 
-        CMessage.SINGLETON_INSTANCE.getInputControl().setMatch(match);
+        CMessage.SINGLETON_INSTANCE.getInputControl().setGame(currentGame);
 
         // models shall notify controllers of changes
         
@@ -343,10 +339,6 @@ public class MatchController {
     
     public Map<LobbyPlayer, PlayerStartConditions> getPlayers() {
         return players;
-    }
-
-    public final InputQueue getInput() {
-        return inputQueue;
     }
 
     /**

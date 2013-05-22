@@ -62,7 +62,7 @@ public class AiInputCommon extends InputBase implements AiInput {
          * \"Detailed Error Trace\" to the Forge forum.");
          */
         
-        computer.getGame().getMatch().getInput().LockAndInvokeGameAction(aiActions);
+        computer.getGame().getInputQueue().LockAndInvokeGameAction(aiActions);
         
     } // getMessage();
 

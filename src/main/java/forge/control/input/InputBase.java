@@ -19,7 +19,6 @@ package forge.control.input;
 
 import forge.Card;
 import forge.FThreads;
-import forge.Singletons;
 import forge.game.player.Player;
 import forge.gui.match.CMatchUI;
 
@@ -60,7 +59,7 @@ public abstract class InputBase implements java.io.Serializable, Input {
     // Removes this input from the stack and releases any latches (in synchronous imports)
     protected final void stop() {
         // clears a "temp" Input like Input_PayManaCost if there is one
-        Singletons.getControl().getMatch().getInput().removeInput(this);
+        player.getGame().getInputQueue().removeInput(this);
         afterStop(); // sync inputs will release their latch there
     }
 
@@ -73,7 +72,7 @@ public abstract class InputBase implements java.io.Serializable, Input {
             }
         };
         if( FThreads.isEDT() )
-            player.getGame().getMatch().getInput().LockAndInvokeGameAction(pass);
+            player.getGame().getInputQueue().LockAndInvokeGameAction(pass);
         else 
             pass.run();
     }

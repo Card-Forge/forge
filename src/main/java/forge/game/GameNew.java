@@ -329,9 +329,8 @@ public class GameNew {
     }
 
     // ultimate of Karn the Liberated
-    public static void restartGame(final MatchController match, final GameState game, final Player startingTurn, Map<Player, List<Card>> playerLibraries) {
-    
-        Map<LobbyPlayer, PlayerStartConditions> players = match.getPlayers();
+    public static void restartGame( final GameState game, final Player startingTurn, Map<Player, List<Card>> playerLibraries) {
+        final Map<LobbyPlayer, PlayerStartConditions> players = game.getMatch().getPlayers();
         Map<Player, PlayerStartConditions> playersConditions = new HashMap<Player, PlayerStartConditions>();
     
         for (Player p : game.getPlayers()) {
@@ -339,7 +338,8 @@ public class GameNew {
         }
     
         game.setAge(GameAge.Mulligan);
-        match.getInput().clearInput();
+        // TODO: Apply new mulligan code here
+        game.getInputQueue().clearInput();
     
         //Card.resetUniqueNumber();
         // need this code here, otherwise observables fail

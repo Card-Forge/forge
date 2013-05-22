@@ -165,7 +165,7 @@ public class HumanPlay {
     
         if( !isPaid ) {
             InputPayManaBase inputPay = new InputPayManaSimple(p.getGame(), sa, manaCost);
-            FThreads.setInputAndWait(inputPay);
+            p.getGame().getInputQueue().setInputAndWait(inputPay);
             isPaid = inputPay.isPaid();
         }
         return isPaid;
@@ -462,7 +462,7 @@ public class HumanPlay {
         InputPayment toSet = current == null 
                 ? new InputPayManaExecuteCommands(p, source + "\r\n", cost.getCostMana().getManaToPay())
                 : new InputPayManaExecuteCommands(p, source + "\r\n" + "Current Card: " + current + "\r\n" , cost.getCostMana().getManaToPay());
-        FThreads.setInputAndWait(toSet);
+        game.getInputQueue().setInputAndWait(toSet);
         return toSet.isPaid();
     }
 
@@ -473,7 +473,8 @@ public class HumanPlay {
         inp.setMessage("Select %d " + cpl.getDescriptiveType() + " card(s) to " + actionName);
         inp.setCancelAllowed(true);
         
-        FThreads.setInputAndWait(inp);
+        GameState game = sourceAbility.getActivatingPlayer().getGame();
+        game.getInputQueue().setInputAndWait(inp);
         if( inp.hasCancelled() || inp.getSelected().size() != amount)
             return false;
     

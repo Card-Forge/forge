@@ -89,7 +89,7 @@ public class InputPassPriority extends InputBase {
                 }
             };
             
-            player.getGame().getMatch().getInput().LockAndInvokeGameAction(execAbility);
+            player.getGame().getInputQueue().LockAndInvokeGameAction(execAbility);
         }
         else {
             SDisplayUtil.remind(VMessage.SINGLETON_INSTANCE);

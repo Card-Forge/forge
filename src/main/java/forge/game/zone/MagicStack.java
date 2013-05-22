@@ -392,7 +392,7 @@ public class MagicStack extends MyObservable implements Iterable<SpellAbilitySta
                         int mkMagnitude = sa.getSourceCard().getKickerMagnitude();
                         String prompt = String.format("Multikicker for %s\r\nTimes Kicked: %d\r\n", sa.getSourceCard(), mkMagnitude );
                         InputPayManaExecuteCommands toSet = new InputPayManaExecuteCommands(activating, prompt, sp.getMultiKickerManaCost());
-                        FThreads.setInputAndWait(toSet);
+                        activating.getGame().getInputQueue().setInputAndWait(toSet);
                         if ( !toSet.isPaid() )
                             break;
                         
@@ -437,7 +437,7 @@ public class MagicStack extends MyObservable implements Iterable<SpellAbilitySta
                             ability.resolve();
                             String prompt = String.format("Replicate for %s\r\nTimes Replicated: %d\r\n", sa.getSourceCard(), sa.getSourceCard().getReplicateMagnitude());
                             InputPayManaExecuteCommands toSet = new InputPayManaExecuteCommands(controller, prompt, sp.getReplicateManaCost());
-                            FThreads.setInputAndWait(toSet);
+                            controller.getGame().getInputQueue().setInputAndWait(toSet);
                             if ( toSet.isPaid() ) { 
                                 this.run();
                             } else {
@@ -643,7 +643,7 @@ public class MagicStack extends MyObservable implements Iterable<SpellAbilitySta
                 if (source.getController().isHuman()) {
                     final InputSelectCards targetHaunted = new InputSelectCardsFromList(1,1, creats);
                     targetHaunted.setMessage("Choose target creature to haunt.");
-                    FThreads.setInputAndWait(targetHaunted);
+                    source.getGame().getInputQueue().setInputAndWait(targetHaunted);
                     haunterDiesWork.setTargetCard(targetHaunted.getSelected().get(0));
                     MagicStack.this.add(haunterDiesWork);
                 } else {
