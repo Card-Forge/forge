@@ -45,7 +45,7 @@ public class QuestChallengeReader extends StorageReaderFolder<QuestEventChalleng
             qc.setHumanLife(humanLife);
         }
         qc.setUseBazaar(sectionQuest.getBoolean("UseBazaar", true));
-        qc.setForceAnte(sectionQuest.getBoolean("ForceAnte", false));
+        qc.setForceAnte(sectionQuest.contains("ForceAnte") ? sectionQuest.getBoolean("ForceAnte") : null);
 
         String humanDeck = sectionQuest.get("HumanDeck", null);
         if (humanDeck != null) {
