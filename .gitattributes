@@ -6504,6 +6504,7 @@ res/cardsfolder/m/manabarbs.txt svneol=native#text/plain
 res/cardsfolder/m/manabond.txt svneol=native#text/plain
 res/cardsfolder/m/manacles_of_decay.txt svneol=native#text/plain
 res/cardsfolder/m/manaforce_mace.txt svneol=native#text/plain
+res/cardsfolder/m/manaforge_cinder.txt -text
 res/cardsfolder/m/manakin.txt svneol=native#text/plain
 res/cardsfolder/m/manalith.txt svneol=native#text/plain
 res/cardsfolder/m/manamorphose.txt -text
