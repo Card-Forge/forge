@@ -270,6 +270,7 @@ public class TokenEffect extends SpellAbilityEffect {
                     for (final String s : this.tokenStaticAbilities) {
                         final String actualAbility = host.getSVar(s);
                         for (final Card c : tokens) {
+                            c.addStaticAbilityString(actualAbility);
                             c.addStaticAbility(actualAbility);
                         }
                     }

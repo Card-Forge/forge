@@ -173,6 +173,9 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
                         copy.setBaseDefense(c.getBaseDefense());
 
                         CardFactoryUtil.addAbilityFactoryAbilities(copy);
+                        for (String s : copy.getStaticAbilityStrings()) {
+                            copy.addStaticAbility(s);
+                        }
                     }
 
                     // add keywords from sa
