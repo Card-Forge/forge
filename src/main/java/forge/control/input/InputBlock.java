@@ -105,7 +105,7 @@ public class InputBlock extends InputBase {
 
 
         if (isMetaDown) {
-            if (card.getController() == Singletons.getControl().getPlayer() ) {
+            if (card.getController() == player ) {
                 game.getCombat().removeFromCombat(card);
             }
             removeFromAllBlocking(card);

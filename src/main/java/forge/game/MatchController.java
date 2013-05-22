@@ -20,6 +20,7 @@ import forge.game.player.LobbyPlayer;
 import forge.game.player.LobbyPlayerHuman;
 import forge.game.player.Player;
 import forge.game.player.PlayerStatistics;
+import forge.game.player.PlayerType;
 import forge.gui.GuiDialog;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.SDisplayUtil;
@@ -374,7 +375,7 @@ public class MatchController {
         }
         
         boolean willPlay = goesFirst.getController().getWillPlayOnFirstTurn(message);
-        if ( goesFirst != FControl.SINGLETON_INSTANCE.getPlayer() ) {
+        if ( goesFirst.getLobbyPlayer().getType() == PlayerType.COMPUTER ) {
             GuiDialog.message(message + "\nComputer Going First");
         }
         goesFirst = willPlay ? goesFirst : goesFirst.getOpponent();

@@ -1811,7 +1811,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         }
 
         // Dev Mode
-        if (this == FControl.SINGLETON_INSTANCE.getPlayer() && Preferences.DEV_MODE &&
+        if (this.getLobbyPlayer().getType() == PlayerType.HUMAN && Preferences.DEV_MODE &&
             Singletons.getModel().getPreferences().getPrefBoolean(FPref.DEV_UNLIMITED_LAND)) {
             return true;
         }

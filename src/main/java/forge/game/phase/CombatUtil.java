@@ -387,7 +387,7 @@ public class CombatUtil {
      */
     public static boolean finishedMandatoryBlocks(final Combat combat, final Player defending) {
 
-        final List<Card> blockers = Singletons.getControl().getPlayer().getCreaturesInPlay();
+        final List<Card> blockers = defending.getCreaturesInPlay();
         final List<Card> attackers = combat.getAttackers();
 
         // if a creature does not block but should, return false

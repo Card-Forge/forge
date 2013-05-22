@@ -120,8 +120,7 @@ public final class GuiDisplayUtil {
 
     public static void devModeGenerateMana() {
         final Card dummy = new Card();
-        final Player human = Singletons.getControl().getPlayer();
-        dummy.setOwner(human);
+        dummy.setOwner(getPlayer());
         Map<String, String> produced = new HashMap<String, String>();
         produced.put("Produced", "W W W W W W W U U U U U U U B B B B B B B G G G G G G G R R R R R R R 7");
         final AbilityManaPart abMana = new AbilityManaPart(dummy, produced);
@@ -287,7 +286,7 @@ public final class GuiDisplayUtil {
         List<Card> humanDevExileSetup = new ArrayList<Card>();
         List<Card> computerDevExileSetup = new ArrayList<Card>();
 
-        final Player human = Singletons.getControl().getPlayer();
+        final Player human = getPlayer();
         final Player ai = human.getOpponents().get(0);
 
         if (!tChangePlayer.trim().toLowerCase().equals("none")) {
@@ -455,7 +454,7 @@ public final class GuiDisplayUtil {
      * @since 1.0.15
      */
     public static void devModeTutor() {
-        final List<Card> lib = Singletons.getControl().getPlayer().getCardsIn(ZoneType.Library);
+        final List<Card> lib = getPlayer().getCardsIn(ZoneType.Library);
         final Object o = GuiChoose.oneOrNone("Choose a card", lib);
         if (null == o) {
             return;
@@ -540,7 +539,7 @@ public final class GuiDisplayUtil {
      * @since 1.0.16
      */
     public static void devModeUnlimitedLand() {
-        Singletons.getControl().getPlayer().addMaxLandsToPlay(100);
+        getPlayer().addMaxLandsToPlay(100);
     }
 
     /**
@@ -637,7 +636,7 @@ public final class GuiDisplayUtil {
                     game.getAction().moveToHand(forgeCard); // this is really needed (for rollbacks at least) 
                     // Human player is choosing targets for an ability controlled by chosen player. 
                     sa.setActivatingPlayer(p);
-                    HumanPlay.playSaWithoutPayingManaCost(Singletons.getControl().getPlayer(), sa);
+                    HumanPlay.playSaWithoutPayingManaCost(getPlayer(), sa);
                 }
             });
         }
@@ -704,6 +703,10 @@ public final class GuiDisplayUtil {
     
     private static GameState getGame() {
         return Singletons.getControl().getMatch().getCurrentGame();
+    }
+    
+    private static Player getPlayer() {
+        return Singletons.getControl().getPlayer();
     }
 
 } // end class GuiDisplayUtil
