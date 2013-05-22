@@ -353,7 +353,15 @@ public class SSubmenuQuestUtil {
         }
         final QuestController qData = Singletons.getModel().getQuest();
 
-        Deck deck = SSubmenuQuestUtil.getCurrentDeck();
+        Deck deck = null;
+        if (event instanceof QuestEventChallenge) {
+            // Predefined HumanDeck
+            deck = ((QuestEventChallenge) event).getHumanDeck();
+        }
+        if (deck == null) {
+            // If no predefined Deck, use the Player's Deck
+            deck = SSubmenuQuestUtil.getCurrentDeck();
+        }
         if (deck == null) {
             String msg = "Please select a Quest Deck.";
             JOptionPane.showMessageDialog(null, msg, "No Deck", JOptionPane.ERROR_MESSAGE);
@@ -393,23 +401,37 @@ public class SSubmenuQuestUtil {
         worker.execute();
         
         int extraLifeHuman = 0;
+        Integer lifeHuman = null;
+        boolean useBazaar = true;
+        Boolean forceAnte = false;
         int lifeAI = 20;
         if (event instanceof QuestEventChallenge) {
             lifeAI = ((QuestEventChallenge) event).getAILife();
+            lifeHuman = ((QuestEventChallenge) event).getHumanLife();
 
             if (qData.getAssets().hasItem(QuestItemType.ZEPPELIN)) {
                 extraLifeHuman = 3;
             }
+
+            useBazaar = ((QuestEventChallenge) event).isUseBazaar();
+            forceAnte = ((QuestEventChallenge) event).isForceAnte();
         }
 
-        PlayerStartConditions humanStart = new PlayerStartConditions(SSubmenuQuestUtil.getCurrentDeck());
-        humanStart.setStartingLife(qData.getAssets().getLife(qData.getMode()) + extraLifeHuman);
-        humanStart.setCardsOnBattlefield(QuestUtil.getHumanStartingCards(qData, event));
-
+        PlayerStartConditions humanStart = new PlayerStartConditions(deck);
         PlayerStartConditions aiStart = new PlayerStartConditions(event.getEventDeck());
-        aiStart.setStartingLife(lifeAI);
-        aiStart.setCardsOnBattlefield(QuestUtil.getComputerStartingCards(event));
         
+        if (lifeHuman != null) {
+            humanStart.setStartingLife(lifeHuman);
+        } else {
+            humanStart.setStartingLife(qData.getAssets().getLife(qData.getMode()) + extraLifeHuman);
+        }
+
+        if (useBazaar) {
+            humanStart.setCardsOnBattlefield(QuestUtil.getHumanStartingCards(qData, event));
+            aiStart.setStartingLife(lifeAI);  
+            aiStart.setCardsOnBattlefield(QuestUtil.getComputerStartingCards(event));
+        }
+
         MatchStartHelper msh = new MatchStartHelper();
         msh.addPlayer(Singletons.getControl().getLobby().getQuestPlayer(), humanStart);
 
@@ -417,7 +439,7 @@ public class SSubmenuQuestUtil {
         aiPlayer.setIconImageKey(event.getIconImageKey());
         msh.addPlayer(aiPlayer, aiStart);
 
-        final MatchController mc = new MatchController(GameType.Quest, msh.getPlayerMap());
+        final MatchController mc = new MatchController(GameType.Quest, msh.getPlayerMap(), forceAnte);
         FThreads.invokeInEdtLater(new Runnable(){
             @Override
             public void run() {

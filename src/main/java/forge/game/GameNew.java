@@ -215,8 +215,9 @@ public class GameNew {
      * 
      * TODO: Accept something like match state as parameter. Match should be aware of players,
      * their decks and other special starting conditions.
+     * @param forceAnte Forces ante on or off no matter what your preferences
      */
-    public static void newGame(final GameState game, final boolean canRandomFoil) {
+    public static void newGame(final GameState game, final boolean canRandomFoil, Boolean forceAnte) {
 
         Card.resetUniqueNumber();
         // need this code here, otherwise observables fail
@@ -225,7 +226,7 @@ public class GameNew {
         trigHandler.clearDelayedTrigger();
 
         // friendliness
-        boolean useAnte = preferences.getPrefBoolean(FPref.UI_ANTE);
+        boolean useAnte = forceAnte != null ? forceAnte : preferences.getPrefBoolean(FPref.UI_ANTE);
         final Set<CardPrinted> rAICards = new HashSet<CardPrinted>();
 
         Map<Player, Set<CardPrinted>> removedAnteCards = new HashMap<Player, Set<CardPrinted>>();

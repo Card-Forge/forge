@@ -9,6 +9,7 @@ import java.util.Map;
 import forge.ImageCache;
 import forge.deck.Deck;
 import forge.deck.io.DeckSerializer;
+import forge.properties.NewConstants;
 import forge.quest.QuestEventChallenge;
 import forge.quest.QuestEventDifficulty;
 import forge.util.FileSection;
@@ -38,6 +39,23 @@ public class QuestChallengeReader extends StorageReaderFolder<QuestEventChalleng
         qc.setCardReward(sectionQuest.get("Card Reward"));
         qc.setHumanExtraCards(Arrays.asList(TextUtil.split(sectionQuest.get("HumanExtras", ""), '|')));
         qc.setAiExtraCards(Arrays.asList(TextUtil.split(sectionQuest.get("AIExtras", ""), '|')));
+        // Less common properties
+        int humanLife = sectionQuest.getInt("HumanLife", 0);
+        if (humanLife != 0) {
+            qc.setHumanLife(humanLife);
+        }
+        qc.setUseBazaar(sectionQuest.getBoolean("UseBazaar", qc.isUseBazaar()));
+
+        String force = sectionQuest.get("ForceAnte", null);
+        if (force != null) {
+            qc.setForceAnte(Boolean.valueOf(force));
+        }
+
+        String humanDeck = sectionQuest.get("HumanDeck", null);
+        if (humanDeck != null) {
+            File humanFile = new File(NewConstants.DEFAULT_CHALLENGES_DIR, humanDeck);
+            qc.setHumanDeck(Deck.fromFile(humanFile));
+        }
 
         // Common properties
         FileSection sectionMeta = FileSection.parse(contents.get("metadata"), "=");

@@ -22,6 +22,8 @@ import java.util.List;
 
 import com.google.common.base.Function;
 
+import forge.deck.Deck;
+
 /**
  * <p>
  * QuestQuest class.
@@ -47,11 +49,17 @@ public class QuestEventChallenge extends QuestEvent {
     /** The ai life. */
     private int aiLife = 25;
 
+    private Integer humanLife = null;
+
     /** The credits reward. */
     private int creditsReward = 100;
 
     /** The repeatable. */
     private boolean repeatable = false;
+
+    private boolean useBazaar = true;
+
+    private Boolean forceAnte = null;
 
     /** The wins reqd. */
     private int winsReqd = 20;
@@ -62,6 +70,8 @@ public class QuestEventChallenge extends QuestEvent {
 
     /** The ai extra cards. */
     private List<String> aiExtraCards = new ArrayList<String>();
+
+    private Deck humanDeck = null;
 
     /**
      * Instantiates a new quest challenge.
@@ -247,5 +257,61 @@ public class QuestEventChallenge extends QuestEvent {
      */
     public void setHumanExtraCards(final List<String> humanExtraCards0) {
         this.humanExtraCards = humanExtraCards0;
+    }
+
+    /**
+     * @return the humanLife
+     */
+    public Integer getHumanLife() {
+        return humanLife;
+    }
+
+    /**
+     * @param humanLife the humanLife to set
+     */
+    public void setHumanLife(Integer humanLife) {
+        this.humanLife = humanLife;
+    }
+
+    /**
+     * @return the useBazaar
+     */
+    public boolean isUseBazaar() {
+        return useBazaar;
+    }
+
+    /**
+     * @param useBazaar the useBazaar to set
+     */
+    public void setUseBazaar(boolean useBazaar) {
+        this.useBazaar = useBazaar; 
+    }
+
+    /**
+     * @return the forceAnte
+     */
+    public Boolean isForceAnte() {
+        return forceAnte;
+    }
+
+    /**
+     * @param forceAnte the forceAnte to set
+     */
+    public void setForceAnte(Boolean forceAnte) {
+        this.forceAnte = forceAnte;
+    }
+
+    /**
+     * @return the humanDeck
+     */
+    public Deck getHumanDeck() {
+        return humanDeck;
+    }
+
+    /**
+     * @param humanDeck the humanDeck to set
+     */
+    public void setHumanDeck(Deck humanDeck) {
+        this.humanDeck = humanDeck;
     }
 }

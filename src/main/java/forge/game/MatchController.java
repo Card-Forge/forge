@@ -50,6 +50,8 @@ public class MatchController {
 
     private int gamesPerMatch = 3;
     private int gamesToWinMatch = 2;
+    
+    private Boolean forceAnte = false;
 
     private GameState currentGame = null;
 
@@ -65,6 +67,11 @@ public class MatchController {
         gamesPlayedRo = Collections.unmodifiableList(gamesPlayed);
         players.putAll(map);
         gameType = type;
+    }
+    
+    public MatchController(GameType type, Map<LobbyPlayer, PlayerStartConditions> map, Boolean forceAnte) {
+        this(type, map);
+        this.forceAnte = forceAnte;
     }
 
     /**
@@ -145,7 +152,7 @@ public class MatchController {
             attachUiToMatch(this, FControl.SINGLETON_INSTANCE.getLobby().getGuiPlayer());
 
             final boolean canRandomFoil = Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_RANDOM_FOIL) && gameType == GameType.Constructed;
-            GameNew.newGame(currentGame, canRandomFoil);
+            GameNew.newGame(currentGame, canRandomFoil, this.forceAnte);
 
             currentGame.setAge(GameAge.Mulligan);
         } catch (Exception e) {
