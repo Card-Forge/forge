@@ -378,6 +378,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
                     c.onCleanupPhase(playerTurn);
                 }
 
+                game.getEndOfCombat().executeUntil(); //Repeat here in case Time Stop et. al. ends combat early
                 game.getEndOfTurn().executeUntil();
 
                 for (Player player : game.getPlayers()) {
