@@ -52,6 +52,7 @@ public class TriggerCounterRemoved extends Trigger {
     public final boolean performTest(final java.util.Map<String, Object> runParams2) {
         final Card addedTo = (Card) runParams2.get("Card");
         final CounterType addedType = (CounterType) runParams2.get("CounterType");
+        final Integer addedNewCounterAmount = (Integer) runParams2.get("NewCounterAmount");
 
         if (this.mapParams.containsKey("ValidCard")) {
             if (!addedTo.isValid(this.mapParams.get("ValidCard").split(","), this.getHostCard().getController(),
@@ -63,6 +64,14 @@ public class TriggerCounterRemoved extends Trigger {
         if (this.mapParams.containsKey("CounterType")) {
             final String type = this.mapParams.get("CounterType");
             if (!type.equals(addedType.toString())) {
+                return false;
+            }
+        }
+
+        if (this.mapParams.containsKey("NewCounterAmount")) {
+            final String amtString = this.mapParams.get("NewCounterAmount");
+            int amt = Integer.parseInt(amtString);
+            if(amt != addedNewCounterAmount.intValue()) {
                 return false;
             }
         }

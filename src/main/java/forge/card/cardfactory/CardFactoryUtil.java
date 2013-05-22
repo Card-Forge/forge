@@ -2348,6 +2348,21 @@ public class CardFactoryUtil {
                 final String cost = k[2];
                 card.addSpellAbility(abilitySuspend(card, cost, timeCounters));
             }
+
+            StringBuilder trig = new StringBuilder();
+            trig.append("Mode$ CounterRemoved | TriggerZones$ Exile | ValidCard$ Card.Self | NewCounterAmount$ 0 | Execute$ DBPlay | Secondary$ True | ");
+            trig.append("TriggerDescription$ When the last time counter is removed from this card, if it's exiled, play it without paying its mana cost if able.  ");
+            trig.append("If you can't, it remains exiled. If you cast a creature spell this way, it gains haste until you lose control of the spell or the permanent it becomes.");
+
+            StringBuilder playWithoutCost = new StringBuilder();
+            playWithoutCost.append("DB$ Play | Defined$ Self | WithoutManaCost$ True | SuspendCast$ True");
+
+            final Trigger parsedTrigger = TriggerHandler.parseTrigger(trig.toString(), card, true);
+            card.addTrigger(parsedTrigger);
+
+            card.setSVar("DBPlay",playWithoutCost.toString());
+
+
         } // Suspend
 
         if (hasKeyword(card, "Fading") != -1) {

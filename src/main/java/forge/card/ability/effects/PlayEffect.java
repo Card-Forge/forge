@@ -191,6 +191,9 @@ public class PlayEffect extends SpellAbilityEffect {
                     tgtCard.setSVar("IsEncoded", "Number$1");
                 }
             }
+            if(sa.hasParam("SuspendCast")) {
+                tgtCard.setSuspendCast(true);
+            }
             // lands will be played
             if (tgtCard.isLand()) {
                 controller.playLand(tgtCard);
@@ -230,7 +233,7 @@ public class PlayEffect extends SpellAbilityEffect {
                 tgtSA.getTarget().setMandatory(true);
             }
 
-            boolean noManaCost = sa.hasParam("WithoutManaCost"); 
+            boolean noManaCost = sa.hasParam("WithoutManaCost");
             if (controller.isHuman()) {
                 SpellAbility newSA = noManaCost ? tgtSA.copyWithNoManaCost() : tgtSA;
                 HumanPlay.playSpellAbility(activator, newSA);

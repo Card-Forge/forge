@@ -96,10 +96,10 @@ public class PlayerControllerHuman extends PlayerController {
      * TODO: Write javadoc for this method.
      * @param c
      */
-    public void playFromSuspend(Card c) {
+    /**public void playFromSuspend(Card c) {
         c.setSuspendCast(true);
         HumanPlay.playCardWithoutPayingManaCost(player, c);
-    }
+    }**/
 
     /* (non-Javadoc)
      * @see forge.game.player.PlayerController#playCascade(java.util.List, forge.Card)

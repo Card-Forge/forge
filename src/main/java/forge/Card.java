@@ -1224,6 +1224,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         final Map<String, Object> runParams = new TreeMap<String, Object>();
         runParams.put("Card", this);
         runParams.put("CounterType", counterName);
+        runParams.put("NewCounterAmount", newValue > 0 ? newValue : 0);
         for (int i = 0; i < delta; i++) {
             getGame().getTriggerHandler().runTrigger(TriggerType.CounterRemoved, runParams, false);
         }
@@ -1235,9 +1236,6 @@ public class Card extends GameEntity implements Comparable<Card> {
                 getGame().getAction().sacrifice(this, null);
             }
 
-            if (this.hasSuspend() && getGame().isCardExiled(this)) {
-                getOwner().getController().playFromSuspend(this);
-            }
         }
 
         // Play the Subtract Counter sound

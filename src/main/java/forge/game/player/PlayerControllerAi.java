@@ -89,11 +89,11 @@ public class PlayerControllerAi extends PlayerController {
      * TODO: Write javadoc for this method.
      * @param c
      */
-    public void playFromSuspend(Card c) {
+    /**public void playFromSuspend(Card c) {
         final List<SpellAbility> choices = c.getBasicSpells();
         c.setSuspendCast(true);
         getAi().chooseAndPlaySa(choices, true, true);
-    }
+    }**/
 
     /* (non-Javadoc)
      * @see forge.game.player.PlayerController#playCascade(java.util.List, forge.Card)

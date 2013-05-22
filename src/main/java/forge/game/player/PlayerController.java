@@ -98,7 +98,7 @@ public abstract class PlayerController {
      * TODO: Write javadoc for this method.
      * @param c
      */
-    public abstract void playFromSuspend(Card c);
+    //public abstract void playFromSuspend(Card c);
     public abstract boolean playCascade(Card cascadedCard, Card sourceCard);
     public abstract void playSpellAbilityForFree(SpellAbility copySA);
 
