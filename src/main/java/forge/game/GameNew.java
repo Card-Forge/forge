@@ -217,7 +217,7 @@ public class GameNew {
      * their decks and other special starting conditions.
      * @param forceAnte Forces ante on or off no matter what your preferences
      */
-    public static void newGame(final GameState game, final boolean canRandomFoil, Boolean forceAnte) {
+    public static void newGame(final GameState game, final boolean canRandomFoil, boolean useAnte) {
 
         Card.resetUniqueNumber();
         // need this code here, otherwise observables fail
@@ -226,7 +226,6 @@ public class GameNew {
         trigHandler.clearDelayedTrigger();
 
         // friendliness
-        boolean useAnte = forceAnte != null ? forceAnte : preferences.getPrefBoolean(FPref.UI_ANTE);
         final Set<CardPrinted> rAICards = new HashSet<CardPrinted>();
 
         Map<Player, Set<CardPrinted>> removedAnteCards = new HashMap<Player, Set<CardPrinted>>();
@@ -302,7 +301,7 @@ public class GameNew {
         }
 
         // Deciding which cards go to ante
-        if (preferences.getPrefBoolean(FPref.UI_ANTE)) {
+        if (useAnte) {
             final String nl = System.getProperty("line.separator");
             final StringBuilder msg = new StringBuilder();
             for (final Player p : game.getPlayers()) {
