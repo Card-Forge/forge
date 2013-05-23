@@ -31,6 +31,7 @@ import com.google.common.collect.Lists;
 import forge.Singletons;
 import forge.card.CardRules;
 import forge.card.CardRulesPredicates;
+import forge.card.MagicColor;
 import forge.item.BoosterPack;
 import forge.item.CardDb;
 import forge.item.CardPrinted;
@@ -81,11 +82,11 @@ public final class BoosterUtils {
                 colorFilters.add(CardRulesPredicates.Presets.IS_COLORLESS);
             }
 
-            colorFilters.add(Predicates.and(CardRulesPredicates.Presets.IS_MONOCOLOR, CardRulesPredicates.Presets.IS_WHITE));
-            colorFilters.add(Predicates.and(CardRulesPredicates.Presets.IS_MONOCOLOR, CardRulesPredicates.Presets.IS_RED));
-            colorFilters.add(Predicates.and(CardRulesPredicates.Presets.IS_MONOCOLOR, CardRulesPredicates.Presets.IS_BLUE));
-            colorFilters.add(Predicates.and(CardRulesPredicates.Presets.IS_MONOCOLOR, CardRulesPredicates.Presets.IS_BLACK));
-            colorFilters.add(Predicates.and(CardRulesPredicates.Presets.IS_MONOCOLOR, CardRulesPredicates.Presets.IS_GREEN));
+            colorFilters.add(CardRulesPredicates.isMonoColor(MagicColor.WHITE));
+            colorFilters.add(CardRulesPredicates.isMonoColor(MagicColor.RED));
+            colorFilters.add(CardRulesPredicates.isMonoColor(MagicColor.BLUE));
+            colorFilters.add(CardRulesPredicates.isMonoColor(MagicColor.BLACK));
+            colorFilters.add(CardRulesPredicates.isMonoColor(MagicColor.GREEN));
         }
 
         // This will save CPU time when sets are limited
@@ -183,35 +184,21 @@ public final class BoosterUtils {
         if (null == input || "random".equalsIgnoreCase(input))
             return Predicates.alwaysTrue();
 
-        if (input.equalsIgnoreCase("black")) {
-            return CardRulesPredicates.Presets.IS_BLACK;
-        } else if (input.equalsIgnoreCase("blue")) {
-            return CardRulesPredicates.Presets.IS_BLUE;
-        } else if (input.equalsIgnoreCase("colorless")) {
-            return CardRulesPredicates.Presets.IS_COLORLESS;
-        } else if (input.equalsIgnoreCase("green")) {
-            return CardRulesPredicates.Presets.IS_GREEN;
-        } else if (input.equalsIgnoreCase("multicolor")) {
-            return CardRulesPredicates.Presets.IS_MULTICOLOR;
-        } else if (input.equalsIgnoreCase("red")) {
-            return CardRulesPredicates.Presets.IS_RED;
-        } else if (input.equalsIgnoreCase("white")) {
-            return CardRulesPredicates.Presets.IS_WHITE;
-        } else if (input.equalsIgnoreCase("land")) {
-            return CardRulesPredicates.Presets.IS_LAND;
-        } else if (input.equalsIgnoreCase("creature")) {
-            return CardRulesPredicates.Presets.IS_CREATURE;
-        } else if (input.equalsIgnoreCase("artifact")) {
-            return CardRulesPredicates.Presets.IS_ARTIFACT;
-        } else if (input.equalsIgnoreCase("planeswalker")) {
-            return CardRulesPredicates.Presets.IS_PLANESWALKER;
-        } else if (input.equalsIgnoreCase("instant")) {
-            return CardRulesPredicates.Presets.IS_INSTANT;
-        } else if (input.equalsIgnoreCase("sorcery")) {
-            return CardRulesPredicates.Presets.IS_SORCERY;
-        } else if (input.equalsIgnoreCase("enchantment")) {
-            return CardRulesPredicates.Presets.IS_ENCHANTMENT;
-        }
+        if (input.equalsIgnoreCase("black"))          return CardRulesPredicates.Presets.IS_BLACK;
+        if (input.equalsIgnoreCase("blue"))           return CardRulesPredicates.Presets.IS_BLUE;
+        if (input.equalsIgnoreCase("green"))          return CardRulesPredicates.Presets.IS_GREEN;
+        if (input.equalsIgnoreCase("red"))            return CardRulesPredicates.Presets.IS_RED;
+        if (input.equalsIgnoreCase("white"))          return CardRulesPredicates.Presets.IS_WHITE;
+        if (input.equalsIgnoreCase("colorless"))      return CardRulesPredicates.Presets.IS_COLORLESS;
+        if (input.equalsIgnoreCase("multicolor"))     return CardRulesPredicates.Presets.IS_MULTICOLOR;
+
+        if (input.equalsIgnoreCase("land"))           return CardRulesPredicates.Presets.IS_LAND;
+        if (input.equalsIgnoreCase("creature"))       return CardRulesPredicates.Presets.IS_CREATURE;
+        if (input.equalsIgnoreCase("artifact"))       return CardRulesPredicates.Presets.IS_ARTIFACT;
+        if (input.equalsIgnoreCase("planeswalker"))   return CardRulesPredicates.Presets.IS_PLANESWALKER;
+        if (input.equalsIgnoreCase("instant"))        return CardRulesPredicates.Presets.IS_INSTANT;
+        if (input.equalsIgnoreCase("sorcery"))        return CardRulesPredicates.Presets.IS_SORCERY;
+        if (input.equalsIgnoreCase("enchantment"))    return CardRulesPredicates.Presets.IS_ENCHANTMENT;
 
         throw new IllegalArgumentException("No CardRules limitations could be parsed from: " + input);
     }
@@ -226,24 +213,27 @@ public final class BoosterUtils {
         String[] temp = s.split(" ");
         List<InventoryItem> rewards = new ArrayList<InventoryItem>();
 
-        if ((temp.length > 2 && (temp[2].equalsIgnoreCase("rare") || temp[2].equalsIgnoreCase("rares")))
-                || (temp.length > 1 && (temp[1].equalsIgnoreCase("rare") || temp[1].equalsIgnoreCase("rares")))) {
-            // Type 1: 'n (color) rares'
+        // last word starts with 'rare' ignore case
+        if (temp.length > 1 && temp[temp.length-1].regionMatches(true, 0, "rare", 0, 4)) {
+            // Type 1: 'n [color] rares'
             final int qty = Integer.parseInt(temp[0]);
-            // Determine rarity
-            final Predicate<CardPrinted> rar = IPaperCard.Predicates.Presets.IS_RARE_OR_MYTHIC;
 
-            // Determine color ("random" defaults to null color)
-            Predicate<CardRules> col = parseRulesLimitation(temp[1]);
+            List<Predicate<CardPrinted>> preds = new ArrayList<Predicate<CardPrinted>>();
+            preds.add(IPaperCard.Predicates.Presets.IS_RARE_OR_MYTHIC); // Determine rarity
 
-            Predicate<CardPrinted> colorPred = Predicates.compose(col, CardPrinted.FN_GET_RULES);
-            Predicate<CardPrinted> rarAndColor = Predicates.and(rar, colorPred);
+            if (temp.length > 2) {
+                Predicate<CardRules> cr = parseRulesLimitation(temp[1]);
+                if(Predicates.alwaysTrue() != (Object)cr) // guava has a single instance for always-const predicates
+                    preds.add(Predicates.compose(cr, CardPrinted.FN_GET_RULES));
+            }
+            
             if (Singletons.getModel().getQuest().getFormat() != null) {
-                rarAndColor = Predicates.and(Singletons.getModel().getQuest().getFormat().getFilterPrinted(), rarAndColor);
+                preds.add(Singletons.getModel().getQuest().getFormat().getFilterPrinted());
             }
 
             PrintSheet ps = new PrintSheet("Quest rewards");
-            ps.addAll(Iterables.filter(CardDb.instance().getAllCards(), rarAndColor));
+            Predicate<CardPrinted> predicate = preds.size() == 1 ? preds.get(0) : Predicates.and(preds);  
+            ps.addAll(Iterables.filter(CardDb.instance().getAllCards(), predicate));
             rewards.addAll(ps.random(qty, true));
         } else if (temp.length == 2 && temp[0].equalsIgnoreCase("duplicate") && temp[1].equalsIgnoreCase("card")) {
             // Type 2: a duplicate card of the players choice
