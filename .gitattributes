@@ -3568,6 +3568,7 @@ res/cardsfolder/f/fatal_frenzy.txt svneol=native#text/plain
 res/cardsfolder/f/fatal_fumes.txt -text
 res/cardsfolder/f/fatal_lore.txt -text
 res/cardsfolder/f/fatal_mutation.txt svneol=native#text/plain
+res/cardsfolder/f/fate_transfer.txt -text
 res/cardsfolder/f/fatestitcher.txt svneol=native#text/plain
 res/cardsfolder/f/fathom_mage.txt -text
 res/cardsfolder/f/fathom_seer.txt svneol=native#text/plain
