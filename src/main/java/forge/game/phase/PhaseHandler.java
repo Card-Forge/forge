@@ -61,6 +61,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
     private final transient Stack<ExtraTurn> extraTurns = new Stack<ExtraTurn>();
     private final transient Map<PhaseType, Stack<PhaseType>> extraPhases = new HashMap<PhaseType, Stack<PhaseType>>();
 
+    private int nUpkeepsThisTurn = 0;
     private int nCombatsThisTurn = 0;
     private boolean bPreventCombatDamageThisTurn  = false;
     private int planarDiceRolledthisTurn = 0;
@@ -252,6 +253,8 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
                 break;
 
             case UPKEEP:
+                this.nUpkeepsThisTurn++;
+                System.out.println("Current upkeep: " + nUpkeepsThisTurn);
                 if (this.getPlayerTurn().hasKeyword("Skip your upkeep step.")) {
                     // Slowtrips all say "on the next turn's upkeep" if there is no
                     // upkeep next turn, the trigger will never occur.
@@ -387,6 +390,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
                 }
                 this.getPlayerTurn().removeKeyword("Skip all combat phases of this turn.");
                 game.getCleanup().executeUntil(this.getNextTurn());
+                this.nUpkeepsThisTurn = 0;
                 break;
 
             default:
@@ -708,6 +712,17 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
      */
     public final boolean isFirstCombat() {
         return (this.nCombatsThisTurn == 1);
+    }
+
+    /**
+     * <p>
+     * isFirstUpkeep.
+     * </p>
+     * 
+     * @return a boolean.
+     */
+    public final boolean isFirstUpkeep() {
+        return (this.nUpkeepsThisTurn == 1);
     }
 
     /**
