@@ -73,8 +73,12 @@ public class ChooseCardNameEffect extends SpellAbilityEffect {
                         List<CardPrinted> cards = Lists.newArrayList(CardDb.instance().getUniqueCards());
                         Predicate<CardPrinted> cpp = Predicates.and(Predicates.compose(baseRule, CardPrinted.FN_GET_RULES), 
                                 Predicates.compose(additionalRule, CardPrinted.FN_GET_RULES));
-                        cards = Lists.newArrayList(Iterables.filter(cards, cpp));                        
-                        host.setNamedCard(Aggregates.random(cards).getName());
+                        cards = Lists.newArrayList(Iterables.filter(cards, cpp));
+                        if (!cards.isEmpty()) {
+                            host.setNamedCard(Aggregates.random(cards).getName());
+                        } else {
+                            host.setNamedCard("");
+                        }
                         ok = true;
                     } else if (p.isHuman()) {
                         final String message = validDesc.equals("card") ? "Name a card" : "Name a " + validDesc + " card.";
