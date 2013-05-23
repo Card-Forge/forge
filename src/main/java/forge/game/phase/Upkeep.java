@@ -602,7 +602,7 @@ public class Upkeep extends Phase {
      * <p>
      * upkeepSuspend.
      * </p>
-     */
+     */ /*
     private static void upkeepSuspend(final GameState game) {
         final Player player = game.getPhaseHandler().getPlayerTurn();
 
@@ -626,7 +626,7 @@ public class Upkeep extends Phase {
             }
         }
     } // suspend
-
+*/
     /**
      * <p>
      * upkeepVanishing.

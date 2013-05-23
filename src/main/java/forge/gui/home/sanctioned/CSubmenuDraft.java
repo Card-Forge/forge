@@ -8,6 +8,9 @@ import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
+
+import org.apache.commons.lang3.tuple.Pair;
+
 import forge.Command;
 import forge.FThreads;
 import forge.Singletons;
@@ -17,9 +20,10 @@ import forge.deck.Deck;
 import forge.deck.DeckGroup;
 import forge.game.GameType;
 import forge.game.MatchController;
-import forge.game.MatchStartHelper;
+import forge.game.PlayerStartConditions;
 import forge.game.limited.BoosterDraft;
 import forge.game.limited.LimitedPoolType;
+import forge.game.player.LobbyPlayer;
 import forge.gui.GuiChoose;
 import forge.gui.SOverlayUtils;
 import forge.gui.deckeditor.CDeckEditorUI;
@@ -130,12 +134,12 @@ public enum CSubmenuDraft implements ICDoc {
             throw new IllegalStateException("Draft: Computer deck is null!");
         }
 
-        MatchStartHelper starter = new MatchStartHelper();
+        List<Pair<LobbyPlayer, PlayerStartConditions>> starter = new ArrayList<Pair<LobbyPlayer, PlayerStartConditions>>();
         Lobby lobby = Singletons.getControl().getLobby();
-        starter.addPlayer(lobby.getGuiPlayer(), humanDeck);
-        starter.addPlayer(lobby.getAiPlayer(), aiDeck);
+        starter.add(Pair.of(lobby.getGuiPlayer(), PlayerStartConditions.fromDeck(humanDeck)));
+        starter.add(Pair.of(lobby.getAiPlayer(), PlayerStartConditions.fromDeck(aiDeck)));
 
-        final MatchController mc = new MatchController(GameType.Draft, starter.getPlayerMap());
+        final MatchController mc = new MatchController(GameType.Draft, starter);
         FThreads.invokeInEdtLater(new Runnable(){
             @Override
             public void run() {

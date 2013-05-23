@@ -162,7 +162,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     private PlayerStatistics stats = new PlayerStatistics();
     protected PlayerController controller;
     private final LobbyPlayer lobbyPlayer;
-    private final List<LobbyPlayer> allies = new ArrayList<LobbyPlayer>();
+    private int teamNumber = -1;
     
     private Card activeScheme = null;
 
@@ -210,11 +210,14 @@ public class Player extends GameEntity implements Comparable<Player> {
         return stats;
     }
     
-    public final void setAllies(Iterable<LobbyPlayer> allys) {
-        for(LobbyPlayer a : allys) {
-            allies.add(a);
-        }
+    public final void setTeam(int iTeam) {
+        teamNumber = iTeam;
     }
+    public final int getTeam() {
+        return teamNumber;
+    }
+
+    
 
     @Deprecated
     public boolean isHuman() { return getType() == PlayerType.HUMAN; }
@@ -268,8 +271,8 @@ public class Player extends GameEntity implements Comparable<Player> {
      */
     public final Player getOpponent() {
         for (Player p : game.getPlayers()) {
-            if (p == this || allies.contains(p.getLobbyPlayer())) { continue; }
-            return p;
+            if (p.isOpponentOf(this))
+                return p;
         }
         throw new IllegalStateException("No opponents left ingame for " + this);
     }
@@ -283,8 +286,8 @@ public class Player extends GameEntity implements Comparable<Player> {
     public final List<Player> getOpponents() {
         List<Player> result = new ArrayList<Player>();
         for (Player p : game.getPlayers()) {
-            if (p == this || allies.contains(p.getLobbyPlayer())) { continue; }
-            result.add(p);
+            if (p.isOpponentOf(this))
+                result.add(p);
         }
         return result;
     }
@@ -297,7 +300,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     public final List<Player> getAllies() {
         List<Player> result = new ArrayList<Player>();
         for (Player p : game.getPlayers()) {
-            if( allies.contains(p.getLobbyPlayer()))
+            if (!p.isOpponentOf(this))
                 result.add(p);
         }
         return result;
@@ -320,15 +323,21 @@ public class Player extends GameEntity implements Comparable<Player> {
      * @return
      */
     public final Player getWeakestOpponent() {
-        Player weakest = this.getOpponents().get(0);
-        for (int i = 1; i < this.getOpponents().size(); i++) {
-            if (weakest.getLife() > this.getOpponents().get(i).getLife()) {
-                weakest = this.getOpponents().get(i);
+        List<Player> opponnets = this.getOpponents();
+        Player weakest = opponnets.get(0);
+        for (int i = 1; i < opponnets.size(); i++) {
+            if (weakest.getLife() > opponnets.get(i).getLife()) {
+                weakest = opponnets.get(i);
             }
         }
         return weakest;
     }
 
+    public boolean isOpponentOf(Player other) {
+        return other != this && ( other.teamNumber < 0 || other.teamNumber != this.teamNumber );
+    }
+
+    
 
 
     // ////////////////////////
@@ -2167,13 +2176,10 @@ public class Player extends GameEntity implements Comparable<Player> {
         return false;
     }
 
-    /**
-     * <p>
-     * hasWon.
-     * </p>
-     * 
-     * @return a boolean.
-     */
+    public final boolean hasLost() { 
+        return this.getOutcome() != null && this.getOutcome().lossState != null;
+    }
+
     public final boolean hasWon() {
         if (this.cantWin()) {
             return false;
@@ -2903,16 +2909,6 @@ public class Player extends GameEntity implements Comparable<Player> {
         }
         return false;
     }
-
-    /**
-     * TODO: Write javadoc for this method.
-     * @param playerTurn
-     * @return
-     */
-    public boolean isOpponentOf(Player other) {
-        return other != this && !allies.contains(other.getLobbyPlayer());
-    }
-
 
     public int getStartingHandSize() {
 

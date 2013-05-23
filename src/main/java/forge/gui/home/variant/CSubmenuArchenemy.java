@@ -7,6 +7,10 @@ import java.util.List;
 import java.util.Vector;
 
 import javax.swing.SwingUtilities;
+
+import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.apache.commons.lang3.tuple.Pair;
+
 import com.google.common.base.Predicate;
 
 import forge.Command;
@@ -19,7 +23,6 @@ import forge.deck.DeckSection;
 import forge.deck.DeckgenUtil;
 import forge.game.GameType;
 import forge.game.MatchController;
-import forge.game.MatchStartHelper;
 import forge.game.PlayerStartConditions;
 import forge.game.player.LobbyPlayer;
 import forge.gui.GuiDialog;
@@ -220,24 +223,22 @@ public enum CSubmenuArchenemy implements ICDoc {
         SOverlayUtils.showOverlay();
 
         Lobby lobby = Singletons.getControl().getLobby();
-        MatchStartHelper helper = new MatchStartHelper();
-        List<LobbyPlayer> allies = new ArrayList<LobbyPlayer>();
+
+        List<Pair<LobbyPlayer, PlayerStartConditions>> players = new ArrayList<Pair<LobbyPlayer,PlayerStartConditions>>();
         for (int i = 0; i < view.getNumPlayers(); i++) {
             if (i == 0) {
-                LobbyPlayer player = lobby.getGuiPlayer();
-                helper.addArchenemy(player, playerDecks.get(i), schemes);
-                helper.getPlayerMap().get(player).setStartingLife(10 + (10 * (view.getNumPlayers() - 1)));
+                
+                PlayerStartConditions psc = PlayerStartConditions.forArchenemy(playerDecks.get(i), schemes);
+                psc.setStartingLife(10 + (10 * (view.getNumPlayers() - 1)));
+                players.add(ImmutablePair.of(lobby.getGuiPlayer(), psc));
             } else {
-                LobbyPlayer player = lobby.getAiPlayer();
-                allies.add(player);
-                helper.addPlayer(player, playerDecks.get(i));
+                PlayerStartConditions psc = PlayerStartConditions.fromDeck(playerDecks.get(i));
+                psc.setTeamNumber(0);
+                players.add(ImmutablePair.of(lobby.getAiPlayer(), psc));
             }
         }
-        for(int i = 0; i < allies.size(); i++)
-            for(int j = i+1; i < allies.size(); j++)
-                helper.setAllies(allies.get(i), allies.get(j));
-        
-        final MatchController mc = new MatchController(GameType.Archenemy, helper.getPlayerMap());
+
+        final MatchController mc = new MatchController(GameType.Archenemy, players);
         FThreads.invokeInEdtLater(new Runnable(){
             @Override
             public void run() {

@@ -1417,7 +1417,7 @@ public class GameAction {
         }
     }
 
-    void handleLeylinesAndChancellors() {
+    private void handleLeylinesAndChancellors() {
         for (Player p : game.getPlayers()) {
             final List<Card> openingHand = new ArrayList<Card>(p.getCardsIn(ZoneType.Hand));
     
@@ -1470,7 +1470,17 @@ public class GameAction {
         game.getAction().checkStateEffects();
     }
 
-    public void performMulligans(final Player firstPlayer, final boolean isCommander) {
+    public void mulligan(final Player firstPlayer) {
+        performMulligans(firstPlayer, game.getType() == GameType.Commander);
+        handleLeylinesAndChancellors();
+        // Run Trigger beginning of the game
+        final HashMap<String, Object> runParams = new HashMap<String, Object>();
+        game.getTriggerHandler().runTrigger(TriggerType.NewGame, runParams, false);
+        game.setAge(GameAge.Play);
+        game.getInputQueue().clearInput();
+    }
+    
+    private void performMulligans(final Player firstPlayer, final boolean isCommander) {
         List<Player> whoCanMulligan = Lists.newArrayList(game.getPlayers());
         int offset = whoCanMulligan.indexOf(firstPlayer);
     

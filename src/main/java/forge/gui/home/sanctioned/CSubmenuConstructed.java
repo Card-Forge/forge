@@ -2,16 +2,20 @@ package forge.gui.home.sanctioned;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
+
+import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.apache.commons.lang3.tuple.Pair;
+
 import forge.Command;
 import forge.FThreads;
 import forge.Singletons;
 import forge.control.Lobby;
 import forge.game.GameType;
 import forge.game.MatchController;
-import forge.game.MatchStartHelper;
 import forge.game.PlayerStartConditions;
 import forge.game.player.LobbyPlayer;
 import forge.gui.SOverlayUtils;
@@ -114,13 +118,16 @@ public enum CSubmenuConstructed implements ICDoc {
         SOverlayUtils.startGameOverlay();
         SOverlayUtils.showOverlay();
 
-        final MatchStartHelper starter = new MatchStartHelper();
+
+        
         Lobby lobby = Singletons.getControl().getLobby();
         LobbyPlayer firstPlayer = view.getCbSpectate().isSelected() ? lobby.getAiPlayer() : lobby.getGuiPlayer();
-        starter.addPlayer(firstPlayer, humanPsc);
-        starter.addPlayer(lobby.getAiPlayer(), aiDeck);
-        final MatchController mc = new MatchController(gameType, starter.getPlayerMap());
         
+        List<Pair<LobbyPlayer, PlayerStartConditions>> players = new ArrayList<Pair<LobbyPlayer, PlayerStartConditions>>();
+        players.add(ImmutablePair.of(firstPlayer, humanPsc));
+        players.add(ImmutablePair.of(lobby.getAiPlayer(), aiDeck));
+
+        final MatchController mc = new MatchController(gameType, players);
         FThreads.invokeInEdtLater(new Runnable(){
             @Override
             public void run() {

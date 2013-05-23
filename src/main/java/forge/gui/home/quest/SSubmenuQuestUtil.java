@@ -10,15 +10,16 @@ import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
 
 import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.apache.commons.lang3.tuple.Pair;
 
 import forge.FThreads;
 import forge.Singletons;
 import forge.card.CardEdition;
 import forge.control.FControl;
+import forge.control.Lobby;
 import forge.deck.Deck;
 import forge.game.GameType;
 import forge.game.MatchController;
-import forge.game.MatchStartHelper;
 import forge.game.PlayerStartConditions;
 import forge.game.player.LobbyPlayer;
 import forge.gui.GuiChoose;
@@ -433,14 +434,15 @@ public class SSubmenuQuestUtil {
             aiStart.setCardsOnBattlefield(QuestUtil.getComputerStartingCards(event));
         }
 
-        MatchStartHelper msh = new MatchStartHelper();
-        msh.addPlayer(Singletons.getControl().getLobby().getQuestPlayer(), humanStart);
+        List<Pair<LobbyPlayer, PlayerStartConditions>> starter = new ArrayList<Pair<LobbyPlayer,PlayerStartConditions>>();
+        Lobby lobby = Singletons.getControl().getLobby();
+        starter.add(Pair.of(lobby.getQuestPlayer(), humanStart));
 
         LobbyPlayer aiPlayer = Singletons.getControl().getLobby().getAiPlayer(event.getOpponent() == null ? event.getTitle() : event.getOpponent());
         aiPlayer.setIconImageKey(event.getIconImageKey());
-        msh.addPlayer(aiPlayer, aiStart);
+        starter.add(Pair.of(aiPlayer, aiStart));
 
-        final MatchController mc = new MatchController(GameType.Quest, msh.getPlayerMap(), forceAnte);
+        final MatchController mc = new MatchController(GameType.Quest, starter, forceAnte);
         FThreads.invokeInEdtLater(new Runnable(){
             @Override
             public void run() {

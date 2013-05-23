@@ -2,22 +2,21 @@ package forge.game;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Map.Entry;
+
+import org.apache.commons.lang3.tuple.Pair;
+
+import com.google.common.collect.Lists;
 
 import forge.Constant.Preferences;
 import forge.FThreads;
 import forge.Singletons;
-import forge.card.trigger.TriggerType;
 import forge.control.FControl;
-import forge.deck.Deck;
 import forge.error.BugReporter;
 import forge.game.event.DuelOutcomeEvent;
 import forge.game.event.FlipCoinEvent;
 import forge.game.player.LobbyPlayer;
-import forge.game.player.LobbyPlayerHuman;
 import forge.game.player.Player;
 import forge.game.player.PlayerStatistics;
 import forge.gui.framework.EDocID;
@@ -42,7 +41,7 @@ import forge.util.MyRandom;
 
 public class MatchController {
 
-    private final Map<LobbyPlayer, PlayerStartConditions> players = new HashMap<LobbyPlayer, PlayerStartConditions>();
+    private final List<Pair<LobbyPlayer, PlayerStartConditions>> players;
     private final GameType gameType;
 
     private int gamesPerMatch = 3;
@@ -58,14 +57,14 @@ public class MatchController {
     /**
      * This should become constructor once.
      */
-    public MatchController(GameType type, Map<LobbyPlayer, PlayerStartConditions> map) {
+    public MatchController(GameType type, List<Pair<LobbyPlayer, PlayerStartConditions>> players0) {
         gamesPlayedRo = Collections.unmodifiableList(gamesPlayed);
-        players.putAll(map);
+        players = Collections.unmodifiableList(Lists.newArrayList(players0));
         gameType = type;
     }
     
-    public MatchController(GameType type, Map<LobbyPlayer, PlayerStartConditions> map, Boolean forceAnte) {
-        this(type, map);
+    public MatchController(GameType type, List<Pair<LobbyPlayer, PlayerStartConditions>> players0, Boolean forceAnte) {
+        this(type, players0);
         if( forceAnte != null )
             this.useAnte = forceAnte.booleanValue();
     }
@@ -109,7 +108,7 @@ public class MatchController {
         game.getGameLog().add("Final", result.getWinner() + " won", 0);
 
         // add result entries to the game log
-        final LobbyPlayerHuman human = Singletons.getControl().getLobby().getGuiPlayer();
+        final LobbyPlayer human = Singletons.getControl().getLobby().getGuiPlayer();
         
 
         final List<String> outcomes = new ArrayList<String>();
@@ -171,18 +170,12 @@ public class MatchController {
         FThreads.invokeInNewThread( new Runnable() {
             @Override
             public void run() {
-                currentGame.getAction().performMulligans(firstPlayer, currentGame.getType() == GameType.Commander);
-                currentGame.getAction().handleLeylinesAndChancellors();
-                // Run Trigger beginning of the game
-                final HashMap<String, Object> runParams = new HashMap<String, Object>();
-                currentGame.getTriggerHandler().runTrigger(TriggerType.NewGame, runParams, false);
-                currentGame.setAge(GameAge.Play);
-                currentGame.getInputQueue().clearInput();
+                currentGame.getAction().mulligan(firstPlayer);
             }
         });
     }
 
-    public static void attachUiToMatch(MatchController match, LobbyPlayerHuman humanLobbyPlayer) {
+    public static void attachUiToMatch(MatchController match, LobbyPlayer humanLobbyPlayer) {
         FControl.SINGLETON_INSTANCE.setMatch(match);
         
         GameState currentGame = match.getCurrentGame();
@@ -272,8 +265,8 @@ public class MatchController {
         for (GameOutcome go : gamesPlayed) {
             LobbyPlayer winner = go.getWinner();
             int i = 0;
-            for (LobbyPlayer p : players.keySet()) {
-                if (p.equals(winner)) {
+            for (Pair<LobbyPlayer, PlayerStartConditions> p : players) {
+                if (p.getLeft().equals(winner)) {
                     victories[i]++;
                     break; // can't have 2 winners per game
                 }
@@ -315,24 +308,7 @@ public class MatchController {
         return getGamesWonBy(questPlayer) >= gamesToWinMatch;
     }
 
-    /**
-     * TODO: Write javadoc for this method.
-     * 
-     * @param lobbyPlayer
-     * @return
-     */
-    public Deck getPlayersDeck(LobbyPlayer lobbyPlayer) {
-        PlayerStartConditions cond = players.get(lobbyPlayer);
-        return cond == null ? null : cond.getCurrentDeck();
-    }
-
-    public Deck getPlayersOriginalDeck(LobbyPlayer lobbyPlayer) {
-        PlayerStartConditions cond = players.get(lobbyPlayer);
-        return cond == null ? null : cond.getOriginalDeck();
-    }    
-    
-    
-    public Map<LobbyPlayer, PlayerStartConditions> getPlayers() {
+    public List<Pair<LobbyPlayer, PlayerStartConditions>> getPlayers() {
         return players;
     }
 

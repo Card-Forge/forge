@@ -64,7 +64,7 @@ public class Lobby {
     private final LobbyPlayerHuman guiPlayer = new LobbyPlayerHuman("Human");
     private final LobbyPlayerAi system = new LobbyPlayerAi("System");
 
-    public final LobbyPlayerHuman getGuiPlayer() {
+    public final LobbyPlayer getGuiPlayer() {
         return guiPlayer;
     }
 

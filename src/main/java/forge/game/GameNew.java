@@ -9,6 +9,8 @@ import java.util.Map.Entry;
 import java.util.Random;
 import java.util.Set;
 
+import org.apache.commons.lang3.tuple.Pair;
+
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
@@ -234,9 +236,10 @@ public class GameNew {
         boolean isFirstGame = game.getMatch().getPlayedGames().isEmpty();
         boolean canSideBoard = !isFirstGame && gameType.isSideboardingAllowed();
         
-        final Map<LobbyPlayer, PlayerStartConditions> playersConditions = game.getMatch().getPlayers();
-        for (Player player : game.getPlayers()) {
-            final PlayerStartConditions psc = playersConditions.get(player.getLobbyPlayer());
+        final List<Pair<LobbyPlayer, PlayerStartConditions>> playersConditions = game.getMatch().getPlayers();
+        for (int i = 0; i < playersConditions.size(); i++) {
+            Player player = game.getPlayers().get(i);
+            final PlayerStartConditions psc = playersConditions.get(i).getRight();
 
             putCardsOnBattlefield(player, psc.getCardsOnBattlefield(player));
             initVariantsZones(player, psc);
@@ -329,18 +332,11 @@ public class GameNew {
     }
 
     // ultimate of Karn the Liberated
-    public static void restartGame( final GameState game, final Player startingTurn, Map<Player, List<Card>> playerLibraries) {
-        final Map<LobbyPlayer, PlayerStartConditions> players = game.getMatch().getPlayers();
-        Map<Player, PlayerStartConditions> playersConditions = new HashMap<Player, PlayerStartConditions>();
-    
-        for (Player p : game.getPlayers()) {
-            playersConditions.put(p, players.get(p.getLobbyPlayer()));
-        }
-    
+    public static void restartGame(final GameState game, final Player startingTurn, Map<Player, List<Card>> playerLibraries) {
+
         game.setAge(GameAge.Mulligan);
-        // TODO: Apply new mulligan code here
-        game.getInputQueue().clearInput();
-    
+        game.getAction().mulligan(startingTurn);
+        
         //Card.resetUniqueNumber();
         // need this code here, otherwise observables fail
         forge.card.trigger.Trigger.resetIDs();
@@ -348,16 +344,21 @@ public class GameNew {
         trigHandler.clearDelayedTrigger();
         trigHandler.cleanUpTemporaryTriggers();
         trigHandler.suppressMode(TriggerType.ChangesZone);
-    
+
         game.getStack().reset();
         GameAction action = game.getAction();
     
-    
-        for (Entry<Player, PlayerStartConditions> p : playersConditions.entrySet()) {
-            final Player player = p.getKey();
-            player.setStartingLife(p.getValue().getStartingLife());
+        List<Player> gamePlayers = game.getRegisteredPlayers();
+        for( int i = 0; i < gamePlayers.size(); i++ ) {
+
+            final Player player = gamePlayers.get(i);
+            if( player.hasLost()) continue;
+            
+            PlayerStartConditions psc = game.getMatch().getPlayers().get(i).getValue();
+            
+            player.setStartingLife(psc.getStartingLife());
             player.setNumLandsPlayed(0);
-            putCardsOnBattlefield(player, p.getValue().getCardsOnBattlefield(player));
+            putCardsOnBattlefield(player, psc.getCardsOnBattlefield(player));
     
             PlayerZone library = player.getZone(ZoneType.Library);
             List<Card> newLibrary = playerLibraries.get(player);

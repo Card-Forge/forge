@@ -14,6 +14,7 @@ import forge.deck.Deck;
 import forge.game.GameOutcome;
 import forge.game.GameType;
 import forge.game.MatchController;
+import forge.game.PlayerStartConditions;
 import forge.game.player.Player;
 import forge.game.player.PlayerType;
 import forge.game.zone.ZoneType;
@@ -114,50 +115,49 @@ public class ControlWinLose {
     private void executeAnte() {
         List<GameOutcome> games = match.getPlayedGames();
 
-
-        GameOutcome lastGame = match.getLastGameOutcome();
         if (games.isEmpty()) {
             return;
         }
 
-        for (Player p : match.getCurrentGame().getRegisteredPlayers()) {
-            if (!p.getLobbyPlayer().equals(lastGame.getWinner())) {
-                continue;
+        // remove all the lost cards from owners' decks
+        List<CardPrinted> losses = new ArrayList<CardPrinted>();
+        int cntPlayers = match.getPlayers().size();
+        for (int i = 0; i < cntPlayers; i++ ) {
+            Player fromGame = match.getCurrentGame().getRegisteredPlayers().get(i);
+            if( !fromGame.hasLost()) continue; // not a loser
+            
+
+            List<Card> compAntes = new ArrayList<Card>(fromGame.getCardsIn(ZoneType.Ante));
+            PlayerStartConditions psc = match.getPlayers().get(i).getValue();
+            Deck cDeck = psc.getCurrentDeck();
+            Deck oDeck = psc.getOriginalDeck();
+
+            for (Card c : compAntes) {
+                CardPrinted toRemove = CardDb.getCard(c);
+                cDeck.getMain().remove(toRemove);
+                if ( cDeck != oDeck )
+                    oDeck.getMain().remove(toRemove);
+                losses.add(toRemove);
             }
-            // p is winner by this point
+        }
 
-            // remove all the lost cards from owners' decks
-            List<CardPrinted> losses = new ArrayList<CardPrinted>();
-            for (Player loser : match.getCurrentGame().getRegisteredPlayers()) {
-                if (loser.equals(p)) {
-                    continue; // not a loser
-                }
-
-                List<Card> compAntes = new ArrayList<Card>(loser.getCardsIn(ZoneType.Ante));
-                Deck cDeck = match.getPlayersDeck(loser.getLobbyPlayer());
-                Deck oDeck = match.getPlayersOriginalDeck(loser.getLobbyPlayer());
-
-                for (Card c : compAntes) {
-                    CardPrinted toRemove = CardDb.getCard(c);
-                    cDeck.getMain().remove(toRemove);
-                    if ( cDeck != oDeck )
-                        oDeck.getMain().remove(toRemove);
-                    losses.add(toRemove);
-                }
-            }
-
+        for (int i = 0; i < cntPlayers; i++ ) {
+            Player fromGame = match.getCurrentGame().getRegisteredPlayers().get(i);
+            if( !fromGame.hasWon()) continue; // not a loser
+            
             // offer to winner, if he is local human
-            if (p.getLobbyPlayer().getType() == PlayerType.HUMAN) {
+            if (fromGame.getLobbyPlayer().getType() == PlayerType.HUMAN) {
                 List<CardPrinted> chosen = GuiChoose.noneOrMany("Select cards to add to your deck", losses);
                 if (null != chosen) {
-                    Deck d = match.getPlayersDeck(p.getLobbyPlayer());
+                    PlayerStartConditions psc = match.getPlayers().get(i).getValue();
+                    Deck cDeck = psc.getCurrentDeck();
+                    //Deck oDeck = psc.getOriginalDeck();
                     for (CardPrinted c : chosen) {
-                        d.getMain().add(c);
+                        cDeck.getMain().add(c);
+                        //oDeck.getMain().add(c);
                     }
                 }
             }
-
-            break; // expect no other winners
         }
 
     }

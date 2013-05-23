@@ -7,6 +7,9 @@ import java.util.List;
 import java.util.Random;
 
 import javax.swing.SwingUtilities;
+
+import org.apache.commons.lang3.tuple.Pair;
+
 import com.google.common.collect.Iterables;
 
 import forge.Command;
@@ -17,7 +20,6 @@ import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.game.GameType;
 import forge.game.MatchController;
-import forge.game.MatchStartHelper;
 import forge.game.PlayerStartConditions;
 import forge.game.player.LobbyPlayer;
 import forge.gui.GuiDialog;
@@ -172,13 +174,12 @@ public enum CSubmenuVanguard implements ICDoc {
         }
 
         Lobby lobby = Singletons.getControl().getLobby();
-        MatchStartHelper helper = new MatchStartHelper();
+        List<Pair<LobbyPlayer, PlayerStartConditions>> helper = new ArrayList<Pair<LobbyPlayer, PlayerStartConditions>>();
         for (int i = 0; i < view.getNumPlayers(); i++) {
             LobbyPlayer player = i == 0 ? lobby.getGuiPlayer() : lobby.getAiPlayer();
-
-            helper.addVanguardPlayer(player, playerDecks.get(i), playerAvatars.get(i));
+            helper.add(Pair.of(player, PlayerStartConditions.forVanguard(playerDecks.get(i), playerAvatars.get(i))));
         }
-        final MatchController mc = new MatchController(GameType.Vanguard, helper.getPlayerMap());
+        final MatchController mc = new MatchController(GameType.Vanguard, helper);
         FThreads.invokeInEdtLater(new Runnable(){
             @Override
             public void run() {

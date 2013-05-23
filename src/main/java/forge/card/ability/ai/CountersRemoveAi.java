@@ -1,7 +1,5 @@
 package forge.card.ability.ai;
 
-import java.util.Random;
-
 import forge.Card;
 import forge.CounterType;
 import forge.card.ability.SpellAbilityAi;
@@ -12,7 +10,6 @@ import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilCost;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
-import forge.util.MyRandom;
 
 public class CountersRemoveAi extends SpellAbilityAi {
 
@@ -21,7 +18,6 @@ public class CountersRemoveAi extends SpellAbilityAi {
         // AI needs to be expanded, since this function can be pretty complex
         // based on what
         // the expected targets could be
-        final Random r = MyRandom.getRandom();
         final Cost abCost = sa.getPayCosts();
         Target abTgt = sa.getTarget();
         final Card source = sa.getSourceCard();

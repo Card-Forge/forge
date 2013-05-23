@@ -7,6 +7,9 @@ import java.util.List;
 import java.util.Vector;
 
 import javax.swing.SwingUtilities;
+
+import org.apache.commons.lang3.tuple.Pair;
+
 import com.google.common.base.Predicate;
 
 import forge.Command;
@@ -19,7 +22,6 @@ import forge.deck.DeckSection;
 import forge.deck.DeckgenUtil;
 import forge.game.GameType;
 import forge.game.MatchController;
-import forge.game.MatchStartHelper;
 import forge.game.PlayerStartConditions;
 import forge.game.player.LobbyPlayer;
 import forge.gui.GuiDialog;
@@ -150,7 +152,7 @@ public enum CSubmenuPlanechase implements ICDoc {
     /** @param lists0 &emsp; {@link java.util.List}<{@link javax.swing.JList}> */
     private void startGame() {
         Lobby lobby = Singletons.getControl().getLobby();
-        MatchStartHelper helper = new MatchStartHelper();
+        List<Pair<LobbyPlayer, PlayerStartConditions>> helper = new ArrayList<Pair<LobbyPlayer,PlayerStartConditions>>();
         List<Deck> playerDecks = new ArrayList<Deck>();
         for (int i = 0; i < view.getNumPlayers(); i++) {
             PlayerStartConditions d = view.getDeckChoosers().get(i).getDeck();
@@ -209,13 +211,13 @@ public enum CSubmenuPlanechase implements ICDoc {
                 GuiDialog.message("Player " + (i+1) + " will use a default planar deck.");
             }
             LobbyPlayer player = i == 0 ? lobby.getGuiPlayer() : lobby.getAiPlayer();
-            helper.addPlanechasePlayer(player, playerDecks.get(i), planes);
+            helper.add(Pair.of(player, PlayerStartConditions.forPlanechase(playerDecks.get(i), planes)));
         }
 
         SOverlayUtils.startGameOverlay();
         SOverlayUtils.showOverlay();
                 
-        final MatchController mc = new MatchController(GameType.Planechase, helper.getPlayerMap());
+        final MatchController mc = new MatchController(GameType.Planechase, helper);
         FThreads.invokeInEdtLater(new Runnable(){
             @Override
             public void run() {

@@ -227,7 +227,7 @@ public class FDeckChooser extends JPanel {
             deck = DeckgenUtil.getConstructedDeck(selection);
         }
 
-        return new PlayerStartConditions(deck);
+        return PlayerStartConditions.fromDeck(deck);
     }
 
     private PlayerType getPlayerType() {

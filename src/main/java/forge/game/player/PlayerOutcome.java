@@ -5,11 +5,8 @@ package forge.game.player;
  * TODO: Write javadoc for this type.
  */
 public class PlayerOutcome {
-    /** The alt win source name. */
     public final String altWinSourceName;
-    /** The loss state. */
     public final GameLossReason lossState;
-    /** The lose condition spell. */
     public final String loseConditionSpell;
 
     private PlayerOutcome(String altWinSourceName, GameLossReason lossState, String loseConditionSpell) {

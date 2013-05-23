@@ -22,14 +22,16 @@ import java.util.List;
 
 import javax.swing.SwingUtilities;
 
+import org.apache.commons.lang3.tuple.Pair;
+
 import forge.FThreads;
 import forge.Singletons;
 import forge.control.Lobby;
 import forge.deck.Deck;
 import forge.game.GameType;
 import forge.game.MatchController;
-import forge.game.MatchStartHelper;
 import forge.game.PlayerStartConditions;
+import forge.game.player.LobbyPlayer;
 import forge.gui.SOverlayUtils;
 
 /**
@@ -162,12 +164,12 @@ public class GauntletMini {
             }
         });
 
-        final MatchStartHelper starter = new MatchStartHelper();
+        
+        List<Pair<LobbyPlayer, PlayerStartConditions>> starter = new ArrayList<Pair<LobbyPlayer,PlayerStartConditions>>();
         Lobby lobby = Singletons.getControl().getLobby();
-        starter.addPlayer(lobby.getGuiPlayer(), humanDeck);
-        starter.addPlayer(lobby.getAiPlayer(), aiOpponents.get(currentRound - 1));
-
-        final MatchController mc = new MatchController(gauntletType, starter.getPlayerMap());
+        starter.add(Pair.of(lobby.getGuiPlayer(), PlayerStartConditions.fromDeck(humanDeck)));
+        starter.add(Pair.of(lobby.getAiPlayer(), aiOpponents.get(currentRound - 1)));
+        final MatchController mc = new MatchController(gauntletType, starter);
         FThreads.invokeInEdtLater(new Runnable(){
             @Override
             public void run() {

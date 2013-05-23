@@ -9,6 +9,9 @@ import java.util.List;
 import java.util.Set;
 
 import javax.swing.SwingUtilities;
+
+import org.apache.commons.lang3.tuple.Pair;
+
 import forge.Command;
 import forge.FThreads;
 import forge.Singletons;
@@ -18,7 +21,8 @@ import forge.deck.DeckgenUtil;
 import forge.deck.DeckgenUtil.DeckTypes;
 import forge.game.GameType;
 import forge.game.MatchController;
-import forge.game.MatchStartHelper;
+import forge.game.PlayerStartConditions;
+import forge.game.player.LobbyPlayer;
 import forge.game.player.PlayerType;
 import forge.gauntlet.GauntletData;
 import forge.gauntlet.GauntletIO;
@@ -144,13 +148,12 @@ public enum CSubmenuGauntletQuick implements ICDoc {
 
         final Deck aiDeck = gd.getDecks().get(gd.getCompleted());
 
-        MatchStartHelper starter = new MatchStartHelper();
+        List<Pair<LobbyPlayer, PlayerStartConditions>> starter = new ArrayList<Pair<LobbyPlayer,PlayerStartConditions>>();
         Lobby lobby = Singletons.getControl().getLobby();
-
-        starter.addPlayer(lobby.getGuiPlayer(), gd.getUserDeck());
-        starter.addPlayer(lobby.getAiPlayer(), aiDeck);
-
-        final MatchController mc = new MatchController(GameType.Gauntlet, starter.getPlayerMap());
+        starter.add(Pair.of(lobby.getGuiPlayer(), PlayerStartConditions.fromDeck(gd.getUserDeck())));
+        starter.add(Pair.of(lobby.getAiPlayer(), PlayerStartConditions.fromDeck(aiDeck)));
+        
+        final MatchController mc = new MatchController(GameType.Gauntlet, starter);
         FThreads.invokeInEdtLater(new Runnable(){
             @Override
             public void run() {
