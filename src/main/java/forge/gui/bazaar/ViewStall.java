@@ -31,7 +31,6 @@ import javax.swing.text.StyledDocument;
 
 import net.miginfocom.swing.MigLayout;
 import forge.Singletons;
-import forge.control.bazaar.ControlStall;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FScrollPane;
 import forge.gui.toolbox.FSkin;
@@ -55,7 +54,6 @@ public class ViewStall extends JPanel {
     private final JTextPane tpnFluff;
     private final JPanel pnlInventory;
     private final FScrollPane scrInventory;
-    private final ControlStall control;
     private final ViewBazaarUI parentView;
     private final List<ViewItem> lstItemPanels;
     private QuestStallDefinition stall;
@@ -74,7 +72,6 @@ public class ViewStall extends JPanel {
         this.tpnFluff = new JTextPane();
         this.pnlInventory = new JPanel();
         this.scrInventory = new FScrollPane(this.pnlInventory);
-        this.control = new ControlStall(this);
         this.parentView = v0;
         this.lstItemPanels = new ArrayList<ViewItem>();
 
@@ -128,11 +125,6 @@ public class ViewStall extends JPanel {
     /** @return {@link forge.gui.toolbox.FScrollPane} */
     public FScrollPane getScrInventory() {
         return this.scrInventory;
-    }
-
-    /** @return {@link forge.control.bazaar.ControlStall} */
-    public ControlStall getController() {
-        return this.control;
     }
 
     /**
