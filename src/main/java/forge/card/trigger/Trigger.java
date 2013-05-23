@@ -185,7 +185,6 @@ public abstract class Trigger extends TriggerReplacementBase {
         }
 
         if (this.mapParams.containsKey("FirstUpkeep")) {
-        	System.out.println("Upkeep condition: " + phaseHandler.isFirstUpkeep());
             if (!phaseHandler.isFirstUpkeep()) {
                 return false;
             }
