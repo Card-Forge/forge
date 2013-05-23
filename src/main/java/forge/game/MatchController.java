@@ -20,8 +20,6 @@ import forge.game.player.LobbyPlayer;
 import forge.game.player.LobbyPlayerHuman;
 import forge.game.player.Player;
 import forge.game.player.PlayerStatistics;
-import forge.game.player.PlayerType;
-import forge.gui.GuiDialog;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.SDisplayUtil;
 import forge.gui.match.CMatchUI;
@@ -144,7 +142,7 @@ public class MatchController {
     public void startRound() {
 
         currentGame = new GameState(players, gameType, this);
-
+        
         try {
             attachUiToMatch(this, FControl.SINGLETON_INSTANCE.getLobby().getGuiPlayer());
 
@@ -155,9 +153,9 @@ public class MatchController {
         } catch (Exception e) {
             BugReporter.reportException(e);
         }
-            
-        final Player firstPlayer = determineFirstTurnPlayer(getLastGameOutcome(), currentGame);
 
+        final Player firstPlayer = determineFirstTurnPlayer(getLastGameOutcome(), currentGame);
+        
         currentGame.getInputQueue().clearInput();
         if(currentGame.getType() == GameType.Planechase)
             firstPlayer.initPlane();
@@ -233,17 +231,13 @@ public class MatchController {
         // per player observers were set in CMatchUI.SINGLETON_INSTANCE.initMatch
     }
 
-    /**
-     * TODO: Write javadoc for this method.
-     */
-    public void replayRound() {
-        gamesPlayed.remove(gamesPlayed.size() - 1);
-        startRound();
-    }
 
-    public void replay() {
+    public void clearGamesPlayed() {
         gamesPlayed.clear();
-        startRound();
+    }
+    
+    public void clearLastGame() {
+        gamesPlayed.remove(gamesPlayed.size() - 1);
     }
 
     /**
@@ -375,9 +369,6 @@ public class MatchController {
         }
         
         boolean willPlay = goesFirst.getController().getWillPlayOnFirstTurn(message);
-        if ( goesFirst.getLobbyPlayer().getType() == PlayerType.COMPUTER ) {
-            GuiDialog.message(message + "\nComputer Going First");
-        }
         goesFirst = willPlay ? goesFirst : goesFirst.getOpponent();
         game.getPhaseHandler().setPlayerTurn(goesFirst);
         return goesFirst;

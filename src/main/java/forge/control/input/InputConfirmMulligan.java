@@ -44,24 +44,25 @@ public class InputConfirmMulligan extends InputSyncronizedBase {
     boolean keepHand = false;
     final boolean isCommander;
     final List<Card> selected = new ArrayList<Card>();
+    final private Player startingPlayer;
     
-    public InputConfirmMulligan(Player humanPlayer, boolean commander) {
+    public InputConfirmMulligan(Player humanPlayer, Player startsGame, boolean commander) {
         super(humanPlayer);
         isCommander = commander;
+        startingPlayer = startsGame; 
     }
     
     /** {@inheritDoc} */
     @Override
     public final void showMessage() {
         GameState game = player.getGame();
-        Player startingPlayer = game.getPhaseHandler().getPlayerTurn();
 
         StringBuilder sb = new StringBuilder();
         if( startingPlayer == player ) {
-            sb.append("You are going first.\n");
+            sb.append("You are going first!\n\n");
         } else {
-            sb.append(startingPlayer.getName()).append(" is going first. ");
-            sb.append("You are going ").append(Lang.getOrdinal(game.getPosition(player, startingPlayer))).append(".\n");
+            sb.append(startingPlayer.getName()).append(" is going first.\n");
+            sb.append("You are going ").append(Lang.getOrdinal(game.getPosition(player, startingPlayer))).append(".\n\n");
         }
 
         if ( isCommander ) {

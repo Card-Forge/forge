@@ -35,7 +35,6 @@ import forge.CardPredicates;
 import forge.Command;
 import forge.Constant;
 import forge.GameEntity;
-import forge.Singletons;
 import forge.card.CardType;
 import forge.card.MagicColor;
 import forge.card.ability.ApiType;

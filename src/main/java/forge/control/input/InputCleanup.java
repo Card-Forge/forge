@@ -18,10 +18,8 @@
 package forge.control.input;
 
 import forge.Card;
-import forge.Singletons;
 import forge.game.GameState;
 import forge.game.player.Player;
-import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.view.ButtonUtil;
 

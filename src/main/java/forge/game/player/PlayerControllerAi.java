@@ -288,7 +288,7 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public List<Card> getCardsToMulligan(boolean isCommander)  { 
+    public List<Card> getCardsToMulligan(boolean isCommander, Player firstPlayer)  { 
         if( !ComputerUtil.wantMulligan(player) )
             return null;
 

@@ -1484,7 +1484,7 @@ public class GameAction {
         do {
             for (int i = 0; i < whoCanMulligan.size(); i++) {
                 Player p = whoCanMulligan.get(i);
-                List<Card> toMulligan = p.canMulligan() ? p.getController().getCardsToMulligan(isCommander) : null; 
+                List<Card> toMulligan = p.canMulligan() ? p.getController().getCardsToMulligan(isCommander, firstPlayer) : null; 
                 if ( toMulligan != null ) {
                     if( !isCommander ) {
                         toMulligan = new ArrayList<Card>(p.getCardsIn(ZoneType.Hand));

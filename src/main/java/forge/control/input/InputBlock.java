@@ -22,7 +22,6 @@ import java.util.HashMap;
 import java.util.List;
 
 import forge.Card;
-import forge.Singletons;
 import forge.game.GameState;
 import forge.game.phase.CombatUtil;
 import forge.game.player.Player;

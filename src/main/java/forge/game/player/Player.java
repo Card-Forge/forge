@@ -53,7 +53,6 @@ import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.card.staticability.StaticAbility;
 import forge.card.trigger.TriggerType;
-import forge.control.FControl;
 import forge.game.GameActionUtil;
 import forge.game.GameState;
 import forge.game.GlobalRuleChange;

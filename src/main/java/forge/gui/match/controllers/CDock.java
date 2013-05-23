@@ -33,7 +33,6 @@ import forge.Card;
 import forge.CardLists;
 import forge.CardPredicates.Presets;
 import forge.Command;
-import forge.Singletons;
 import forge.deck.Deck;
 import forge.game.GameState;
 import forge.game.phase.CombatUtil;

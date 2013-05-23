@@ -469,8 +469,8 @@ public class PlayerControllerHuman extends PlayerController {
 
 
     @Override
-    public List<Card> getCardsToMulligan(boolean isCommander) {
-        final InputConfirmMulligan inp = new InputConfirmMulligan(player, isCommander);
+    public List<Card> getCardsToMulligan(boolean isCommander, Player firstPlayer) {
+        final InputConfirmMulligan inp = new InputConfirmMulligan(player, firstPlayer, isCommander);
         player.getGame().getInputQueue().setInputAndWait(inp);
         return inp.isKeepHand() ? null : inp.getSelectedCards();
     }

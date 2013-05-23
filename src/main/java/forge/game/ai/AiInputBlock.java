@@ -3,7 +3,6 @@ package forge.game.ai;
 import java.util.List;
 
 import forge.Card;
-import forge.Singletons;
 import forge.control.input.InputBase;
 import forge.game.GameState;
 import forge.game.phase.CombatUtil;
