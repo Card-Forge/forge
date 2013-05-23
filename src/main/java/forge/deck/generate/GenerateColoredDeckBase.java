@@ -38,7 +38,6 @@ import forge.card.CardRulesPredicates;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.deck.generate.GenerateDeckUtil.FilterCMC;
-import forge.game.player.PlayerType;
 import forge.item.CardDb;
 import forge.item.CardPrinted;
 import forge.item.ItemPool;
@@ -75,10 +74,10 @@ public abstract class GenerateColoredDeckBase {
         tDeck = new ItemPool<CardPrinted>(CardPrinted.class);
     }
 
-    protected void addCreaturesAndSpells(int size, List<ImmutablePair<FilterCMC, Integer>> cmcLevels, PlayerType pt) {
+    protected void addCreaturesAndSpells(int size, List<ImmutablePair<FilterCMC, Integer>> cmcLevels, boolean forAi) {
         tmpDeck.append("Building deck of ").append(size).append("cards\n");
         
-        final Iterable<CardPrinted> cards = selectCardsOfMatchingColorForPlayer(pt);
+        final Iterable<CardPrinted> cards = selectCardsOfMatchingColorForPlayer(forAi);
         // build subsets based on type
 
         final Iterable<CardPrinted> creatures = Iterables.filter(cards, Predicates.compose(CardRulesPredicates.Presets.IS_CREATURE, CardPrinted.FN_GET_RULES));
@@ -95,7 +94,7 @@ public abstract class GenerateColoredDeckBase {
         tmpDeck.append(String.format("Current deck size: %d... should be %f%n", tDeck.countAll(), size * (getCreatPercentage() + getSpellPercentage())));
     }
 
-    public ItemPoolView<CardPrinted> getDeck(final int size, final PlayerType pt) {
+    public ItemPoolView<CardPrinted> getDeck(final int size, final boolean forAi) {
         return null; // all but theme deck do override this method
     }
 
@@ -231,11 +230,11 @@ public abstract class GenerateColoredDeckBase {
         }
     }
 
-    protected Iterable<CardPrinted> selectCardsOfMatchingColorForPlayer(PlayerType pt) {
+    protected Iterable<CardPrinted> selectCardsOfMatchingColorForPlayer(boolean forAi) {
 
         // start with all cards
         // remove cards that generated decks don't like
-        Predicate<CardRules> canPlay = pt == PlayerType.HUMAN ? GenerateDeckUtil.HUMAN_CAN_PLAY : GenerateDeckUtil.AI_CAN_PLAY;
+        Predicate<CardRules> canPlay = forAi ? GenerateDeckUtil.HUMAN_CAN_PLAY : GenerateDeckUtil.AI_CAN_PLAY;
         Predicate<CardRules> hasColor = new GenerateDeckUtil.MatchColorIdentity(colors);
 
         if (!Singletons.getModel().getPreferences().getPrefBoolean(FPref.DECKGEN_ARTIFACTS)) {

@@ -15,7 +15,6 @@ import javax.swing.ScrollPaneConstants;
 
 import net.miginfocom.swing.MigLayout;
 import forge.deck.Deck;
-import forge.game.player.PlayerType;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
@@ -125,7 +124,7 @@ public enum VSubmenuPlanechase implements IVSubmenu<CSubmenuPlanechase> {
             tempPanel = new FPanel();
             tempPanel.setLayout(new MigLayout("insets 0, gap 0 , wrap 2, flowy, ax center"));
 
-            tempChooser = new FDeckChooser("Select deck:", i == 0 ? PlayerType.HUMAN : PlayerType.COMPUTER);
+            tempChooser = new FDeckChooser("Select deck:", i != 0);
             tempChooser.initialize();
 
             deckChoosers.add(tempChooser);

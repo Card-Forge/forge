@@ -17,7 +17,6 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import net.miginfocom.swing.MigLayout;
-import forge.game.player.PlayerType;
 import forge.gui.CardDetailPanel;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
@@ -171,7 +170,7 @@ public enum VSubmenuVanguard implements IVSubmenu<CSubmenuVanguard> {
             tempPanel = new FPanel();
             tempPanel.setLayout(new MigLayout("insets 0, gap 0 , wrap 2, flowy, ax center"));
 
-            tempChooser = new FDeckChooser("Select deck:", i == 0 ? PlayerType.HUMAN : PlayerType.COMPUTER);
+            tempChooser = new FDeckChooser("Select deck:", i != 0);
             tempChooser.initialize();
 
             tempList = new FList();

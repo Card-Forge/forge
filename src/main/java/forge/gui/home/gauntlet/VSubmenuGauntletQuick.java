@@ -11,7 +11,6 @@ import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
 
 import net.miginfocom.swing.MigLayout;
-import forge.game.player.PlayerType;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
@@ -57,7 +56,7 @@ public enum VSubmenuGauntletQuick implements IVSubmenu<CSubmenuGauntletQuick> {
     private final JCheckBox boxColorDecks = new FCheckBox("Fully random color Decks");
     private final JCheckBox boxThemeDecks = new FCheckBox("Semi-random theme Decks");
 
-    private final FDeckChooser lstDecks = new FDeckChooser("Deck", PlayerType.HUMAN);
+    private final FDeckChooser lstDecks = new FDeckChooser("Deck", false);
     private final QuickGauntletLister gauntletList = new QuickGauntletLister();
 
     private final JLabel lblOptions = new FLabel.Builder().fontSize(16)

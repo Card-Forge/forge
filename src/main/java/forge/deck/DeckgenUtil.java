@@ -11,8 +11,6 @@ import java.util.Random;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 
-import org.apache.commons.lang3.ArrayUtils;
-
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 
@@ -23,7 +21,6 @@ import forge.deck.generate.Generate5ColorDeck;
 import forge.deck.generate.GenerateColoredDeckBase;
 import forge.deck.generate.GenerateMonoColorDeck;
 import forge.deck.generate.GenerateThemeDeck;
-import forge.game.player.PlayerType;
 import forge.item.CardDb;
 import forge.item.CardPrinted;
 import forge.item.ItemPoolView;
@@ -57,7 +54,7 @@ public class DeckgenUtil {
      * @param selection {@link java.lang.String} array
      * @return {@link forge.deck.Deck}
      */
-    public static Deck buildColorDeck(final String[] selection, PlayerType pt) {
+    public static Deck buildColorDeck(final String[] selection, boolean forAi) {
         
         final Deck deck;
         String deckName = null;  
@@ -75,7 +72,7 @@ public class DeckgenUtil {
             deckName = "5 colors";
         }
         
-        ItemPoolView<CardPrinted> cards = gen == null ? null : gen.getDeck(60, pt);
+        ItemPoolView<CardPrinted> cards = gen == null ? null : gen.getDeck(60, forAi);
         
         if(null == deckName)
             deckName = Lang.joinHomogenous(Arrays.asList(selection));
@@ -123,7 +120,7 @@ public class DeckgenUtil {
     }
 
     /** @return {@link forge.deck.Deck} */
-    public static Deck getRandomColorDeck(PlayerType pt) {
+    public static Deck getRandomColorDeck(boolean forAi) {
         final int[] colorCount = new int[] {1, 2, 3, 5};
         final int count = colorCount[MyRandom.getRandom().nextInt(colorCount.length)];
         final String[] selection = new String[count];
@@ -131,7 +128,7 @@ public class DeckgenUtil {
         // A simulated selection of "random 1" will trigger the AI selection process.
         for (int i = 0; i < count; i++) { selection[i] = "Random 1"; }
 
-        return DeckgenUtil.buildColorDeck(selection, pt);
+        return DeckgenUtil.buildColorDeck(selection, forAi);
     }
 
     /** @return {@link forge.deck.Deck} */
@@ -168,33 +165,25 @@ public class DeckgenUtil {
         return allQuestDecks.get(rand);
     }
 
-    /**
-     * Returns random selection of colors from a nine-value list
-     * (BGRUW, rand 1-4) within Forge support limitations (only 2, 3, 5 color deckgen).
-     * Used for random color deck generation.
-     * @return int[] */
-    public static int[] randomSelectColors() {
-        // Color select algorithm
-        int x = -1;
-        // HACK because 1 and 4 color decks are not supported yet. :(
-        while (x == -1 || x == 1 || x == 4) {
-            x = (int) Math.ceil(Math.random() * 5);
-        }
-        final Integer colorCount = x;
-        final int maxCount = 9;
-        Integer[] selectedIndices = new Integer[colorCount];
+    public static int[] randomSelectColors(int maxColors) {
+        int nColors = MyRandom.getRandom().nextInt(3) + 1;
+        int[] result = new int[nColors];
+        for(int i = 0; i < nColors; i++) {
+            int next = MyRandom.getRandom().nextInt(maxColors);
 
-        x = -1;
-        for (int i = 0; i < colorCount; i++) {
-            while (x == -1) {
-                x = (int) Math.floor(Math.random() * maxCount);
-                if (Arrays.asList(selectedIndices).contains(x)) { x = -1; }
-                else { selectedIndices[i] = x; }
+            boolean isUnique = true;
+            for(int j = 0; j < i; j++) {
+                if(result[j] == next) {
+                    isUnique = false;
+                    break;
+                }
             }
-            x = -1;
+            if(isUnique)
+                result[i] = next;
+            else
+                i--; // try over with this number 
         }
-
-       return ArrayUtils.toPrimitive(selectedIndices);
+        return result;
     }
 
     /** @param lst0 {@link javax.swing.JList} */

@@ -15,7 +15,6 @@ import javax.swing.ScrollPaneConstants;
 import net.miginfocom.swing.MigLayout;
 import forge.Singletons;
 import forge.deck.Deck;
-import forge.game.player.PlayerType;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
@@ -122,7 +121,7 @@ public enum VSubmenuArchenemy implements IVSubmenu<CSubmenuArchenemy> {
             FPanel tempPanel = new FPanel();
             tempPanel.setLayout(new MigLayout("insets 0, gap 0 , wrap 2, flowy, ax center"));
 
-            FDeckChooser tempChooser = new FDeckChooser("Select deck:", i == 0 ? PlayerType.HUMAN : PlayerType.COMPUTER);
+            FDeckChooser tempChooser = new FDeckChooser("Select deck:", i != 0);
             tempChooser.initialize();
 
             deckChoosers.add(tempChooser);

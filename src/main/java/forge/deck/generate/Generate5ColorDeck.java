@@ -25,7 +25,6 @@ import com.google.common.collect.Lists;
 
 import forge.card.ColorSet;
 import forge.deck.generate.GenerateDeckUtil.FilterCMC;
-import forge.game.player.PlayerType;
 import forge.item.CardPrinted;
 import forge.item.ItemPoolView;
 
@@ -58,19 +57,10 @@ public class Generate5ColorDeck extends GenerateColoredDeckBase {
         colors = ColorSet.fromMask(0).inverse();
     }
 
-    /**
-     * <p>
-     * get3ColorDeck.
-     * </p>
-     * 
-     * @param deckSize
-     *            a int.
-     * @param playerType
-     *            a PlayerType
-     * @return a {@link forge.CardList} object.
-     */
-    public final ItemPoolView<CardPrinted> getDeck(final int size, final PlayerType pt) {
-        addCreaturesAndSpells(size, cmcLevels, pt);
+
+    @Override
+    public final ItemPoolView<CardPrinted> getDeck(final int size, final boolean forAi) {
+        addCreaturesAndSpells(size, cmcLevels, forAi);
 
         // Add lands
         int numLands = Math.round(size * getLandsPercentage());

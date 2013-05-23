@@ -26,7 +26,6 @@ import com.google.common.collect.Lists;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.deck.generate.GenerateDeckUtil.FilterCMC;
-import forge.game.player.PlayerType;
 import forge.item.CardPrinted;
 import forge.item.ItemPoolView;
 
@@ -78,8 +77,9 @@ public class GenerateMonoColorDeck extends GenerateColoredDeckBase {
     }
 
 
-    public final ItemPoolView<CardPrinted> getDeck(final int size, final PlayerType pt) {
-        addCreaturesAndSpells(size, cmcLevels, pt);
+    @Override
+    public final ItemPoolView<CardPrinted> getDeck(final int size, final boolean forAi) {
+        addCreaturesAndSpells(size, cmcLevels, forAi);
 
         // Add lands
         int numLands = (int) (getLandsPercentage() * size);

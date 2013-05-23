@@ -5,7 +5,6 @@ import javax.swing.JCheckBox;
 import javax.swing.JPanel;
 
 import net.miginfocom.swing.MigLayout;
-import forge.game.player.PlayerType;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
@@ -35,31 +34,32 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
     /** */
     private final LblHeader lblTitle = new LblHeader("Sanctioned Format: Constructed");
 
-    private final JPanel pnlStart = new JPanel(new MigLayout("insets 0, gap 0, wrap 3"));
+    private final JPanel pnlStart;
 
     private final StartButton btnStart  = new StartButton();
 
     private final JCheckBox cbSingletons = new FCheckBox("Singleton Mode");
     private final JCheckBox cbArtifacts = new FCheckBox("Remove Artifacts");
     private final JCheckBox cbRemoveSmall = new FCheckBox("Remove Small Creatures");
-    private final JCheckBox cbAiVsAi = new FCheckBox("Spectate AI vs AI match");
 
-    private final FDeckChooser dcHuman = new FDeckChooser("Select your deck:", PlayerType.HUMAN);
-    private final FDeckChooser dcAi = new FDeckChooser("Select AI deck:", PlayerType.COMPUTER);
+    private final FDeckChooser dcLeft = new FDeckChooser("Select AI deck:", true);
+    private final FDeckChooser dcRight = new FDeckChooser("Select your deck:", false);
+    
 
     private VSubmenuConstructed() {
 
         lblTitle.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
 
-
+        pnlStart = new JPanel(new MigLayout("insets 0, gap 0, wrap 2"));
         final String strCheckboxConstraints = "pushy, gap 0 20px 0 0";
-        final String strCheckboxConstraintsTop = "pushy, gap 0 20px 20px 0";
+        //final String strCheckboxConstraintsTop = "pushy, gap 0 20px 20px 0";
         pnlStart.setOpaque(false);
-        pnlStart.add(cbSingletons, strCheckboxConstraintsTop);
-        pnlStart.add(cbAiVsAi, strCheckboxConstraintsTop);
-        pnlStart.add(btnStart, "span 1 2, growx, pushx, align center");
+        pnlStart.add(cbSingletons, strCheckboxConstraints);
+        pnlStart.add(btnStart, "growx, pushx, align center, sy 3");
+        //pnlStart.add(cbAiVsAi, strCheckboxConstraintsTop);
         pnlStart.add(cbArtifacts, strCheckboxConstraints);
         pnlStart.add(cbRemoveSmall, strCheckboxConstraints);
+        
 
     }
 
@@ -71,12 +71,12 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
         return EMenuGroup.SANCTIONED;
     }
 
-    public final FDeckChooser getDcHuman() {
-        return dcHuman;
+    public final FDeckChooser getDcRight() {
+        return dcRight;
     }
 
-    public final FDeckChooser getDcAi() {
-        return dcAi;
+    public final FDeckChooser getDcLeft() {
+        return dcLeft;
     }
 
 
@@ -106,11 +106,11 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
 
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(lblTitle, "w 80%!, h 40px!, gap 0 0 15px 15px, span 2, ax right");
 
-        dcAi.populate();
-        dcHuman.populate();
-        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(dcAi, "w 44%!, gap 0 0 20px 20px, growy, pushy");
-        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(dcHuman, "w 44%!, gap 4% 4% 20px 20px, growy, pushy");
-        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(pnlStart, "span 2, gap 0 0 2.5%! 3.5%!, ax center");
+        dcLeft.populate();
+        dcRight.populate();
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(dcLeft, "w 44%!, gap 0 0 20px 20px, growy, pushy");
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(dcRight, "w 44%!, gap 4% 4% 20px 20px, growy, pushy");
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(pnlStart, "span 2, gap 0 0 2.0%! 3.5%!, ax center");
 
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().revalidate();
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().repaintSelf();
@@ -139,9 +139,13 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
     }
 
     /** @return {@link javax.swing.JCheckBox} */
-    public JCheckBox getCbSpectate() {
-        return cbAiVsAi;
+    public boolean isLeftPlayerAi() {
+        return true;
     }
+    public boolean isRightPlayerAi() {
+        return false;
+    }
+
     
     //========== Overridden from IVDoc
 

@@ -23,7 +23,6 @@ import forge.game.GameType;
 import forge.game.MatchController;
 import forge.game.PlayerStartConditions;
 import forge.game.player.LobbyPlayer;
-import forge.game.player.PlayerType;
 import forge.gauntlet.GauntletData;
 import forge.gauntlet.GauntletIO;
 import forge.gui.SOverlayUtils;
@@ -119,7 +118,7 @@ public enum CSubmenuGauntletQuick implements ICDoc {
         for (int i = 0; i < numOpponents; i++) {
             randType = (int) Math.round(Math.random() * (lstDecktypes.size() - 1));
             if (lstDecktypes.get(randType).equals(DeckTypes.COLORS)) {
-                tempDeck = DeckgenUtil.getRandomColorDeck(PlayerType.COMPUTER);
+                tempDeck = DeckgenUtil.getRandomColorDeck(true);
                 lstEventNames.add("Random colors deck");
             }
             else if (lstDecktypes.get(randType).equals(DeckTypes.THEMES)) {

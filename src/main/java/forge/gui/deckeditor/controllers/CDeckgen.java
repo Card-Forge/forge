@@ -11,7 +11,6 @@ import forge.deck.DeckBase;
 import forge.deck.generate.Generate2ColorDeck;
 import forge.deck.generate.Generate3ColorDeck;
 import forge.deck.generate.Generate5ColorDeck;
-import forge.game.player.PlayerType;
 import forge.gui.deckeditor.CDeckEditorUI;
 import forge.gui.deckeditor.SEditorIO;
 import forge.gui.deckeditor.views.VDeckgen;
@@ -105,16 +104,13 @@ public enum CDeckgen implements ICDoc {
 
         switch (colorCount0) {
             case 2:
-                genConstructed.getMain().addAll(
-                        (new Generate2ColorDeck(null, null)).getDeck(60, PlayerType.HUMAN));
+                genConstructed.getMain().addAll((new Generate2ColorDeck(null, null)).getDeck(60, false));
                 break;
             case 3:
-                genConstructed.getMain().addAll(
-                        (new Generate3ColorDeck(null, null, null)).getDeck(60, PlayerType.HUMAN));
+                genConstructed.getMain().addAll((new Generate3ColorDeck(null, null, null)).getDeck(60, false));
                 break;
             case 5:
-                genConstructed.getMain().addAll(
-                        (new Generate5ColorDeck()).getDeck(60, PlayerType.HUMAN));
+                genConstructed.getMain().addAll((new Generate5ColorDeck()).getDeck(60, false));
                 break;
             default:
         }

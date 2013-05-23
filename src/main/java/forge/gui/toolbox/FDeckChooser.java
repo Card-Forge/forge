@@ -26,7 +26,6 @@ import forge.deck.Deck;
 import forge.deck.DeckgenUtil;
 import forge.deck.generate.GenerateThemeDeck;
 import forge.game.PlayerStartConditions;
-import forge.game.player.PlayerType;
 import forge.quest.QuestController;
 import forge.quest.QuestEvent;
 import forge.quest.QuestEventChallenge;
@@ -46,10 +45,10 @@ public class FDeckChooser extends JPanel {
     private final JScrollPane scrDecks =
             new FScrollPane(lstDecks, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
-    private final FLabel lblDecklist = new FLabel.Builder().text("Double click a non-random deck for its decklist.").fontSize(12).build();
+    private final FLabel lblDecklist = new FLabel.Builder().text("Double click any non-random deck for its decklist.").fontSize(12).build();
 
-    private final JPanel pnlRadios = new JPanel(new MigLayout("insets 0, gap 0, wrap"));
-    private final PlayerType playerType;
+    private final JPanel pnlRadios = new JPanel(new MigLayout("insets 0, gap 0, wrap 2"));
+    private boolean isAi;
 
     private final MouseAdapter madDecklist = new MouseAdapter() {
         @Override
@@ -62,12 +61,12 @@ public class FDeckChooser extends JPanel {
         }
     };
 
-    public FDeckChooser(String titleText, PlayerType pt) {
+    public FDeckChooser(String titleText, boolean forAi) {
         setOpaque(false);
-        playerType = pt;
+        isAi = forAi;
 
         // Radio button group
-        final String strRadioConstraints = "w 100%!, h 30px!";
+        final String strRadioConstraints = "h 28px!";
         JXButtonPanel grpRadios = new JXButtonPanel();
         grpRadios.add(radCustom, strRadioConstraints);
         grpRadios.add(radQuests, strRadioConstraints);
@@ -75,10 +74,9 @@ public class FDeckChooser extends JPanel {
         grpRadios.add(radThemes, strRadioConstraints);
 
         pnlRadios.setOpaque(false);
-        pnlRadios.add(new FLabel.Builder().text(titleText).fontStyle(Font.BOLD).fontSize(16).build());
-        pnlRadios.add(lblDecklist, "h 20px!, gap 0 0 0 10px");
-        pnlRadios.add(grpRadios, "w 100%");
-        pnlRadios.add(btnRandom, "w 200px!, h 30px!, gap 0 0 10px 0, ax center");
+        pnlRadios.add(new FLabel.Builder().text(titleText).fontStyle(Font.BOLD).fontSize(16).build(), "sx 2");
+        pnlRadios.add(grpRadios, "pushx, growx");
+        pnlRadios.add(btnRandom, "w 160px!, h 30px!, gap 10px 0 0 0, ax center, ay bottom");
     }
 
     private void _listen(final JRadioButton btn, final Runnable onSelect) {
@@ -102,26 +100,25 @@ public class FDeckChooser extends JPanel {
     }
 
 
-    public JList        getLstDecks()  { return lstDecks;  }
-    public FLabel       getBtnRandom() { return btnRandom; }
-    public JRadioButton getRadColors() { return radColors; }
-    public JRadioButton getRadThemes() { return radThemes; }
-    public JRadioButton getRadCustom() { return radCustom; }
-    public JRadioButton getRadQuests() { return radQuests; }
+    private JList        getLstDecks()  { return lstDecks;  }
+    private FLabel       getBtnRandom() { return btnRandom; }
+    private JRadioButton getRadColors() { return radColors; }
+    private JRadioButton getRadThemes() { return radThemes; }
+    private JRadioButton getRadCustom() { return radCustom; }
+    private JRadioButton getRadQuests() { return radQuests; }
 
     /** Handles all control for "colors" radio button click. */
     private void updateColors() {
         final JList lst = getLstDecks();
         lst.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 
-        lst.setListData(new String[] {"Random 1", "Random 2", "Random 3",
-                "Random 4", "Black", "Blue", "Green", "Red", "White"});
+        lst.setListData(new String[] {"Random 1", "Random 2", "Random 3", "Black", "Blue", "Green", "Red", "White"});
         lst.setName(DeckgenUtil.DeckTypes.COLORS.toString());
         lst.removeMouseListener(madDecklist);
         lst.addMouseListener(madDecklist);
 
         getBtnRandom().setCommand(new Command() {
-            @Override public void run() { lst.setSelectedIndices(DeckgenUtil.randomSelectColors()); } });
+            @Override public void run() { lst.setSelectedIndices(DeckgenUtil.randomSelectColors(8)); } });
 
         // Init basic two color deck
         lst.setSelectedIndices(new int[]{0, 1});
@@ -220,7 +217,7 @@ public class FDeckChooser extends JPanel {
 
         Deck deck = null;
         if (lst0.getName().equals(DeckgenUtil.DeckTypes.COLORS.toString()) && DeckgenUtil.colorCheck(selection)) {
-            deck = DeckgenUtil.buildColorDeck(selection, getPlayerType());
+            deck = DeckgenUtil.buildColorDeck(selection, isAi);
         } else if (lst0.getName().equals(DeckgenUtil.DeckTypes.THEMES.toString())) {
             deck = DeckgenUtil.buildThemeDeck(selection);
         } else if (lst0.getName().equals(DeckgenUtil.DeckTypes.CUSTOM.toString())) {
@@ -230,14 +227,12 @@ public class FDeckChooser extends JPanel {
         return PlayerStartConditions.fromDeck(deck);
     }
 
-    private PlayerType getPlayerType() {
-        return playerType;
-    }
 
     public void populate() {
         this.setLayout(new MigLayout("insets 0, gap 0, flowy, ax right"));
 
-        this.add(pnlRadios, "w 100%!, gap 0 0 20px 20px");
+        this.add(pnlRadios, "w 100%!, gap 0 0 0 12px");
         this.add(scrDecks, "w 100%!, growy, pushy");
+        this.add(lblDecklist, "w 100%!, h 20px!");
     }
 }

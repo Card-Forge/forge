@@ -12,7 +12,6 @@ import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
 
 import net.miginfocom.swing.MigLayout;
-import forge.game.player.PlayerType;
 import forge.gauntlet.GauntletIO;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
@@ -51,7 +50,7 @@ public enum VSubmenuGauntletBuild implements IVSubmenu<CSubmenuGauntletBuild> {
     private final JPanel pnlStrut = new JPanel();
     private final JPanel pnlDirections = new JPanel();
 
-    private final FDeckChooser lstLeft = new FDeckChooser("Deck", PlayerType.HUMAN);
+    private final FDeckChooser lstLeft = new FDeckChooser("Deck", false);
     private final JList lstRight = new FList();
 
     private final JScrollPane scrRight  = new FScrollPane(lstRight,

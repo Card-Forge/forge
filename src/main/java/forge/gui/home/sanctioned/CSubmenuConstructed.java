@@ -51,8 +51,8 @@ public enum CSubmenuConstructed implements ICDoc {
     @Override
     public void initialize() {
         final ForgePreferences prefs = Singletons.getModel().getPreferences();
-        view.getDcAi().initialize();
-        view.getDcHuman().initialize();
+        view.getDcLeft().initialize();
+        view.getDcRight().initialize();
 
         // Checkbox event handling
         view.getBtnStart().addActionListener(new ActionListener() {
@@ -84,8 +84,7 @@ public enum CSubmenuConstructed implements ICDoc {
         view.getCbRemoveSmall().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent arg0) {
-                prefs.setPref(
-                        FPref.DECKGEN_NOSMALL, String.valueOf(view.getCbRemoveSmall().isSelected()));
+                prefs.setPref(FPref.DECKGEN_NOSMALL, String.valueOf(view.getCbRemoveSmall().isSelected()));
                 prefs.save();
             }
         });
@@ -101,33 +100,34 @@ public enum CSubmenuConstructed implements ICDoc {
      * @param gameType
      */
     private void startGame(final GameType gameType) {
-        PlayerStartConditions humanPsc = view.getDcHuman().getDeck();
-        String humanDeckErrorMessage = gameType.getDecksFormat().getDeckConformanceProblem(humanPsc.getOriginalDeck());
-        if (null != humanDeckErrorMessage) {
-            JOptionPane.showMessageDialog(null, "Your deck " + humanDeckErrorMessage, "Invalid deck", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-        PlayerStartConditions aiDeck = view.getDcAi().getDeck();
-        String aiDeckErrorMessage = gameType.getDecksFormat().getDeckConformanceProblem(aiDeck.getOriginalDeck());
-        if (null != aiDeckErrorMessage) {
-            JOptionPane.showMessageDialog(null, "AI deck " + aiDeckErrorMessage, "Invalid deck", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-        SOverlayUtils.startGameOverlay();
-        SOverlayUtils.showOverlay();
-
-
+        PlayerStartConditions pscLeft = view.getDcLeft().getDeck();
+        PlayerStartConditions pscRight = view.getDcRight().getDeck();
         
+        String humanDeckErrorMessage = gameType.getDecksFormat().getDeckConformanceProblem(pscRight.getOriginalDeck());
+        if (null != humanDeckErrorMessage) {
+            JOptionPane.showMessageDialog(null, "Right-side deck " + humanDeckErrorMessage, "Invalid deck", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        String aiDeckErrorMessage = gameType.getDecksFormat().getDeckConformanceProblem(pscLeft.getOriginalDeck());
+        if (null != aiDeckErrorMessage) {
+            JOptionPane.showMessageDialog(null, "Left-side deck " + aiDeckErrorMessage, "Invalid deck", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
         Lobby lobby = Singletons.getControl().getLobby();
-        LobbyPlayer firstPlayer = view.getCbSpectate().isSelected() ? lobby.getAiPlayer() : lobby.getGuiPlayer();
+        LobbyPlayer rightPlayer = view.isRightPlayerAi() ? lobby.getAiPlayer() : lobby.getGuiPlayer();
+        LobbyPlayer leftPlayer = view.isLeftPlayerAi() ? lobby.getAiPlayer() : lobby.getGuiPlayer();
         
         List<Pair<LobbyPlayer, PlayerStartConditions>> players = new ArrayList<Pair<LobbyPlayer, PlayerStartConditions>>();
-        players.add(ImmutablePair.of(firstPlayer, humanPsc));
-        players.add(ImmutablePair.of(lobby.getAiPlayer(), aiDeck));
-
+        players.add(ImmutablePair.of(rightPlayer, pscRight));
+        players.add(ImmutablePair.of(leftPlayer, pscLeft));
         final MatchController mc = new MatchController(gameType, players);
+        
+        SOverlayUtils.startGameOverlay();
+        SOverlayUtils.showOverlay();
+        
+
         FThreads.invokeInEdtLater(new Runnable(){
             @Override
             public void run() {
