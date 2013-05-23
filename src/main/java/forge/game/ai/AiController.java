@@ -257,6 +257,7 @@ public class AiController {
             List<Card> cardsInPlay = player.getCardsIn(ZoneType.Battlefield);
             List<Card> landsInPlay = CardLists.filter(cardsInPlay, Presets.LANDS);
             List<Card> allCards = new ArrayList<Card>(player.getCardsIn(ZoneType.Graveyard));
+            allCards.addAll(player.getCardsIn(ZoneType.Command));
             allCards.addAll(cardsInPlay);
             int maxCmcInHand = Aggregates.max(hand, CardPredicates.Accessors.fnGetCmc);
             int max = Math.max(maxCmcInHand, 6);

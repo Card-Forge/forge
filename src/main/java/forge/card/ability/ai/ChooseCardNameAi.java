@@ -6,6 +6,7 @@ import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilMana;
+import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 
 public class ChooseCardNameAi extends SpellAbilityAi {
@@ -21,25 +22,21 @@ public class ChooseCardNameAi extends SpellAbilityAi {
 
             String logic = sa.getParam("AILogic");
             if (logic.equals("MomirAvatar")) {
+                if (source.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN1)) {
+                    return false;
+                }
                 // Set PayX here to maximum value.
                 int tokenSize = ComputerUtilMana.determineLeftoverMana(sa, ai);
                 
-                // Some basic strategy for Momir
-                if (tokenSize >= 11) {
-                    tokenSize = 11;
-                } else if (tokenSize >= 9) {
-                    tokenSize = 9;
-                } else if (tokenSize >= 8) {
-                    tokenSize = 8;
-                } else if (tokenSize >= 6) {
-                    tokenSize = 6;
-                } else if (tokenSize >= 4) {
-                    tokenSize = 4; 
-                } else if (tokenSize >= 2) {
-                   tokenSize = 2;
-                } else {
+             // Some basic strategy for Momir
+                if (tokenSize < 2) {
                     return false;
                 }
+
+                if (tokenSize > 11) {
+                    tokenSize = 11;
+                }
+
                 source.setSVar("PayX", Integer.toString(tokenSize));
             }
 
