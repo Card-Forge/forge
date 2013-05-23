@@ -57,10 +57,10 @@ public class InputConfirmMulligan extends InputSyncronizedBase {
 
         StringBuilder sb = new StringBuilder();
         if( startingPlayer == player ) {
-            sb.append("You are going first!\n\n");
+            sb.append(player).append(", you are going first!\n\n");
         } else {
             sb.append(startingPlayer.getName()).append(" is going first.\n");
-            sb.append("You are going ").append(Lang.getOrdinal(game.getPosition(player, startingPlayer))).append(".\n\n");
+            sb.append(player).append(", you are going ").append(Lang.getOrdinal(game.getPosition(player, startingPlayer))).append(".\n\n");
         }
 
         if ( isCommander ) {

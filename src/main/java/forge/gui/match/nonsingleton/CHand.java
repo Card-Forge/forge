@@ -32,6 +32,7 @@ import javax.swing.SwingUtilities;
 
 import forge.Card;
 import forge.Command;
+import forge.FThreads;
 import forge.Singletons;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
@@ -50,8 +51,6 @@ public class CHand implements ICDoc, Observer {
     private final Player player;
     private final VHand view;
     private boolean initializedAlready = false;
-
-    private final List<Card> cardsInPanel = new ArrayList<Card>();
 
     private final MouseListener madCardClick = new MouseAdapter() { @Override
         public void mousePressed(final MouseEvent e) {
@@ -110,28 +109,6 @@ public class CHand implements ICDoc, Observer {
         });
     }
 
-    /**
-     * Adds the card.
-     * 
-     * @param c
-     *            &emsp; Card object
-     */
-    public void addCard(final Card c) {
-        this.cardsInPanel.add(c);
-        //this.view.refreshLayout();
-    }
-
-    /**
-     * Adds the cards.
-     * 
-     * @param c
-     *            &emsp; List of Card objects
-     */
-    public void addCards(final List<Card> c) {
-        this.cardsInPanel.addAll(c);
-        //this.view.refreshLayout();
-    }
-
     private void cardclickAction(final MouseEvent e) {
         if (e.getButton() != MouseEvent.BUTTON1) {
             return;
@@ -143,17 +120,28 @@ public class CHand implements ICDoc, Observer {
     }
 
     public void update(final Observable a, final Object b) {
+        FThreads.invokeInEdtNowOrLater(updateRoutine);
+    }
+    
+    private final Runnable updateRoutine = new Runnable() { 
+        @Override public void run() { updateHand(); }
+    };
+    
+    public void updateHand() {
+        FThreads.assertExecutedByEdt(true);
+        
         final HandArea p = view.getHandArea();
-        final Rectangle rctLibraryLabel = CMatchUI.SINGLETON_INSTANCE
-                .getFieldControls().get(0)
-                .getView().getLblLibrary().getBounds();
-        final List<Card> c = player.getZone(ZoneType.Hand).getCards();
+
+        VField vf = CMatchUI.SINGLETON_INSTANCE.getFieldViewFor(player);
+        final Rectangle rctLibraryLabel = vf.getLblLibrary().getBounds();
+        final List<Card> cc = player.getZone(ZoneType.Hand).getCards();
 
         // Animation starts from the library label and runs to the hand panel.
         // This check prevents animation running if label hasn't been realized yet.
-        if (rctLibraryLabel.isEmpty() || p.getWidth() <= 0) {
+        if (rctLibraryLabel.isEmpty() ) {
             return;
         }
+/* || p.getWidth() <= 0 */
 
         List<Card> tmp, diff;
         tmp = new ArrayList<Card>();
@@ -161,7 +149,7 @@ public class CHand implements ICDoc, Observer {
             tmp.add(cpa.getGameCard());
         }
         diff = new ArrayList<Card>(tmp);
-        diff.removeAll(c);
+        diff.removeAll(cc);
         if (diff.size() == p.getCardPanels().size()) {
             p.clear();
         } else {
@@ -169,15 +157,13 @@ public class CHand implements ICDoc, Observer {
                 p.removeCardPanel(p.getCardPanel(card.getUniqueNumber()));
             }
         }
-        diff = new ArrayList<Card>(c);
+        diff = new ArrayList<Card>(cc);
         diff.removeAll(tmp);
 
         JLayeredPane layeredPane = Singletons.getView().getFrame().getLayeredPane();
         int fromZoneX = 0, fromZoneY = 0;
 
-        final Point zoneLocation = SwingUtilities.convertPoint(CMatchUI.SINGLETON_INSTANCE
-                .getFieldControls()
-                .get(1).getView().getLblLibrary(),
+        final Point zoneLocation = SwingUtilities.convertPoint(vf.getLblLibrary(),
                 Math.round(rctLibraryLabel.width / 2.0f), Math.round(rctLibraryLabel.height / 2.0f), layeredPane);
         fromZoneX = zoneLocation.x;
         fromZoneY = zoneLocation.y;
@@ -187,13 +173,11 @@ public class CHand implements ICDoc, Observer {
         startY = fromZoneY - Math.round(Math.round(startWidth * forge.view.arcane.CardPanel.ASPECT_RATIO) / 2.0f);
 
         int endWidth, endX, endY;
-        forge.view.arcane.CardPanel toPanel = null;
 
         for (final Card card : diff) {
-            toPanel = p.addCard(card);
+            CardPanel toPanel = p.addCard(card);
             endWidth = toPanel.getCardWidth();
-            final Point toPos = SwingUtilities.convertPoint(view.getHandArea(),
-                    toPanel.getCardLocation(), layeredPane);
+            final Point toPos = SwingUtilities.convertPoint(view.getHandArea(), toPanel.getCardLocation(), layeredPane);
             endX = toPos.x;
             endY = toPos.y;
 

@@ -556,6 +556,25 @@ public class VField implements IVDoc<CField> {
     }
 
     /**
+     * Resets all phase buttons to "inactive", so highlight won't be drawn on
+     * them. "Enabled" state remains the same.
+     */
+    public void resetPhaseButtons() {
+        getLblUpkeep().setActive(false);
+        getLblDraw().setActive(false);
+        getLblMain1().setActive(false);
+        getLblBeginCombat().setActive(false);
+        getLblDeclareAttackers().setActive(false);
+        getLblDeclareBlockers().setActive(false);
+        getLblFirstStrike().setActive(false);
+        getLblCombatDamage().setActive(false);
+        getLblEndCombat().setActive(false);
+        getLblMain2().setActive(false);
+        getLblEndTurn().setActive(false);
+        getLblCleanup().setActive(false);
+    }
+
+    /**
      * Shows phase labels, handles repainting and on/off states. A PhaseLabel
      * has "skip" and "active" states, meaning "this phase is (not) skipped" and
      * "this is the current phase".

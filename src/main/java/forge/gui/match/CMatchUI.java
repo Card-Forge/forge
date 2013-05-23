@@ -38,7 +38,6 @@ import forge.gui.framework.EDocID;
 import forge.gui.match.controllers.CDetail;
 import forge.gui.match.controllers.CMessage;
 import forge.gui.match.controllers.CPicture;
-import forge.gui.match.nonsingleton.CField;
 import forge.gui.match.nonsingleton.VCommand;
 import forge.gui.match.nonsingleton.VField;
 import forge.gui.match.nonsingleton.VHand;
@@ -137,6 +136,7 @@ public enum CMatchUI {
         VMatchUI.SINGLETON_INSTANCE.setCommandViews(commands);
         VMatchUI.SINGLETON_INSTANCE.setFieldViews(fields);
         VMatchUI.SINGLETON_INSTANCE.setHandViews(hands);
+        VMatchUI.SINGLETON_INSTANCE.setPlayers(sortedPlayers);
         
         VPlayers.SINGLETON_INSTANCE.init(players);
     }
@@ -148,8 +148,8 @@ public enum CMatchUI {
     // This method is in the top-level controller because it affects ALL fields
     // (not just one).
     public void resetAllPhaseButtons() {
-        for (final CField c : CMatchUI.this.getFieldControls()) {
-            c.resetPhaseButtons();
+        for (final VField v : VMatchUI.SINGLETON_INSTANCE.getFieldViews()) {
+            v.resetPhaseButtons();
         }
     }
 
@@ -158,28 +158,9 @@ public enum CMatchUI {
         CMessage.SINGLETON_INSTANCE.setMessage(s0);
     }
 
-    /**
-     * Gets the field controllers.
-     * 
-     * @return List<CField>
-     */
-    public List<CField> getFieldControls() {
-        final List<CField> controllers = new ArrayList<CField>();
-
-        for (final VField f : VMatchUI.SINGLETON_INSTANCE.getFieldViews()) {
-            controllers.add(f.getLayoutControl());
-        }
-
-        return controllers;
-    }
-
     public VField getFieldViewFor(Player p) {
-        for (final VField f : VMatchUI.SINGLETON_INSTANCE.getFieldViews()) {
-            if (f.getLayoutControl().getPlayer().equals(p)) {
-                return f;
-            }
-        }
-        return null;
+        int idx = VMatchUI.SINGLETON_INSTANCE.getPlayerIndex(p);
+        return idx < 0 ? null : VMatchUI.SINGLETON_INSTANCE.getFieldViews().get(idx);
     }
 
     /**

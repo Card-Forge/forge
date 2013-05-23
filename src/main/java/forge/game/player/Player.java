@@ -71,6 +71,7 @@ import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 import forge.gui.GuiDialog;
 import forge.properties.ForgePreferences.FPref;
+import forge.util.Lang;
 import forge.util.MyRandom;
 
 /**
@@ -197,8 +198,25 @@ public class Player extends GameEntity implements Comparable<Player> {
                     : new PlayerZone(z, this);
             this.zones.put(z, toPut);
         }
-        this.setName(lobby.getName());
+        this.setName(chooseName(lobby));
         this.lobbyPlayer = lobby;
+    }
+
+    private String chooseName(LobbyPlayer lobby) {
+        String nameCandidate = lobby.getName();
+        for( int i = 2; i <= 8; i++) { // several tries, not matter how many
+            boolean haveDuplicates = false;
+            for( Player p : game.getPlayers()) {
+                if( p.getName().equals(nameCandidate)) {
+                    haveDuplicates = true;
+                    break;
+                }
+            }
+            if(!haveDuplicates)
+                return nameCandidate;
+            nameCandidate = Lang.getOrdinal(i) + " " + lobby.getName();
+        }
+        return nameCandidate;
     }
 
     @Override

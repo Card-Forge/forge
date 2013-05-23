@@ -272,25 +272,6 @@ public class CField implements ICDoc {
         return this.view;
     }
 
-    /**
-     * Resets all phase buttons to "inactive", so highlight won't be drawn on
-     * them. "Enabled" state remains the same.
-     */
-    public void resetPhaseButtons() {
-        this.view.getLblUpkeep().setActive(false);
-        this.view.getLblDraw().setActive(false);
-        this.view.getLblMain1().setActive(false);
-        this.view.getLblBeginCombat().setActive(false);
-        this.view.getLblDeclareAttackers().setActive(false);
-        this.view.getLblDeclareBlockers().setActive(false);
-        this.view.getLblFirstStrike().setActive(false);
-        this.view.getLblCombatDamage().setActive(false);
-        this.view.getLblEndCombat().setActive(false);
-        this.view.getLblMain2().setActive(false);
-        this.view.getLblEndTurn().setActive(false);
-        this.view.getLblCleanup().setActive(false);
-    }
-
     /* (non-Javadoc)
      * @see forge.gui.framework.ICDoc#getCommandOnSelect()
      */

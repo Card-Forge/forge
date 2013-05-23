@@ -101,6 +101,9 @@ public class GameState {
         type = t;
         match = match0;
         List<Player> players = new ArrayList<Player>();
+        allPlayers = Collections.unmodifiableList(players);
+        roIngamePlayers = Collections.unmodifiableList(ingamePlayers);
+        
         for (Entry<LobbyPlayer, PlayerStartConditions> kv : players0) {
             Player pl = kv.getKey().getPlayer(this);
             players.add(pl);
@@ -113,8 +116,8 @@ public class GameState {
             pl.setTeam(psc.getTeamNumber());
         }
 
-        allPlayers = Collections.unmodifiableList(players);
-        roIngamePlayers = Collections.unmodifiableList(ingamePlayers);
+        
+        
         action = new GameAction(this);
         stack = new MagicStack(this);
         phaseHandler = new PhaseHandler(this);

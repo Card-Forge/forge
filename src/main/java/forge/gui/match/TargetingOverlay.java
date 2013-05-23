@@ -38,7 +38,7 @@ import forge.Singletons;
 import forge.control.FControl;
 import forge.game.phase.Combat;
 import forge.gui.match.controllers.CDock;
-import forge.gui.match.nonsingleton.CField;
+import forge.gui.match.nonsingleton.VField;
 import forge.gui.toolbox.FSkin;
 import forge.view.FView;
 import forge.view.arcane.CardPanel;
@@ -89,9 +89,9 @@ public enum TargetingOverlay {
             case 1:
                 // Draw only hovered card
                 activePanel = null;
-                for (CField f : CMatchUI.SINGLETON_INSTANCE.getFieldControls()) {
-                    cardPanels.addAll(f.getView().getTabletop().getCardPanels());
-                    List<CardPanel> cPanels = f.getView().getTabletop().getCardPanels();
+                for (VField f : VMatchUI.SINGLETON_INSTANCE.getFieldViews()) {
+                    cardPanels.addAll(f.getTabletop().getCardPanels());
+                    List<CardPanel> cPanels = f.getTabletop().getCardPanels();
                     for (CardPanel c : cPanels) {
                         if (c.isSelected()) {
                             activePanel = c;
@@ -103,8 +103,8 @@ public enum TargetingOverlay {
                 break;
             default:
                 // Draw all
-                for (CField f : CMatchUI.SINGLETON_INSTANCE.getFieldControls()) {
-                    cardPanels.addAll(f.getView().getTabletop().getCardPanels());
+                for (VField f : VMatchUI.SINGLETON_INSTANCE.getFieldViews()) {
+                    cardPanels.addAll(f.getTabletop().getCardPanels());
                 }
         }
 

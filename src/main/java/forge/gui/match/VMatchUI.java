@@ -7,6 +7,7 @@ import javax.swing.JButton;
 import javax.swing.SwingUtilities;
 
 import forge.Singletons;
+import forge.game.player.Player;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.IVTopLevelUI;
@@ -35,6 +36,7 @@ public enum VMatchUI implements IVTopLevelUI {
     private List<VCommand> lstCommands = new ArrayList<VCommand>();
     private List<VField> lstFields = new ArrayList<VField>();
     private List<VHand> lstHands = new ArrayList<VHand>();
+    private List<Player> lstPlayers = new ArrayList<Player>();
 
     // Other instantiations
     private final CMatchUI control = null;
@@ -128,6 +130,11 @@ public enum VMatchUI implements IVTopLevelUI {
     public void setFieldViews(final List<VField> lst0) {
         this.lstFields = lst0;
     }
+    
+    /** @param lst0 List<VField> */
+    public void setPlayers(final List<Player> lst0) {
+        this.lstPlayers = lst0;
+    }
 
     /** @return {@link java.util.List}<{@link forge.gui.match.nonsigleton.VHand}> */
     public List<VField> getFieldViews() {
@@ -161,5 +168,10 @@ public enum VMatchUI implements IVTopLevelUI {
      */
     public void setCommandViews(List<VCommand> lstCommands0) {
         this.lstCommands = lstCommands0;
+    }
+
+ 
+    public int getPlayerIndex(Player player) {
+        return lstPlayers.indexOf(player);
     }
 }

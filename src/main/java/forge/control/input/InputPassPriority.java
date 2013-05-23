@@ -54,6 +54,7 @@ public class InputPassPriority extends InputBase {
         final PhaseHandler ph = player.getGame().getPhaseHandler();
         final StringBuilder sb = new StringBuilder();
 
+        sb.append("Priority: ").append(player).append("\n").append("\n");
         sb.append("Turn : ").append(ph.getPlayerTurn()).append("\n");
         sb.append("Phase: ").append(ph.getPhase().Name).append("\n");
         sb.append("Stack: ");
@@ -63,7 +64,7 @@ public class InputPassPriority extends InputBase {
             sb.append("Empty");
         }
         sb.append("\n");
-        sb.append("Priority: ").append(player);
+        
 
         showMessage(sb.toString());
     }
