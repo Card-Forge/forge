@@ -294,8 +294,8 @@ public class ManaPool {
      */
     public final int totalMana() {
         int total = 0;
-        for (byte i : MagicColor.WUBRG) {
-            total += this.getAmountOfColor(i);
+        for (Collection<Mana> cm : floatingMana.values()) {
+            total += cm.size();
         }
         return total;
     }
