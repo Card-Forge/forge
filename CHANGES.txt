@@ -42,6 +42,9 @@ Boros Battleshaper
 Boseiju, Who Shelters All
 Manaforge Cinder
 Chain of Plasma
+Fate Transfer
+Jinxed Choker
+Paradox Haze
 
 
 ----------
@@ -95,6 +98,9 @@ Scourge of Valkas
 Windreader Sphinx
 Primeval Bounty
 Hunt the Weak
+Guardian of the Ages
+Ring of Three Wishes
+Vial of Poison
 
 
 ------------
