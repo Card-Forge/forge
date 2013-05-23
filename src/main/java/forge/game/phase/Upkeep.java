@@ -96,7 +96,7 @@ public class Upkeep extends Phase {
 
         Upkeep.upkeepOathOfDruids(game);
         Upkeep.upkeepOathOfGhouls(game);
-        Upkeep.upkeepSuspend(game);
+        //Upkeep.upkeepSuspend(game);
         Upkeep.upkeepVanishing(game);
         Upkeep.upkeepFading(game);
         Upkeep.upkeepBlazeCounters(game);
