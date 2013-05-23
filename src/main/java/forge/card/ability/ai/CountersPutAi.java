@@ -46,19 +46,8 @@ public class CountersPutAi extends SpellAbilityAi {
             return false;
         }
 
-        list = CardLists.filter(player.getCardsIn(ZoneType.Battlefield), new Predicate<Card>() {
-            @Override
-            public boolean apply(final Card c) {
-                return c.canBeTargetedBy(sa) && c.canReceiveCounters(CounterType.valueOf(type));
-            }
-        });
-
-        if (abTgt != null) {
-            list = CardLists.getValidCards(list, abTgt.getValidTgts(), source.getController(), source);
-
-            if (list.size() < abTgt.getMinTargets(source, sa)) {
-                return false;
-            }
+        if ("Never".equals(sa.getParam("AILogic"))) {
+            return false;
         }
 
         if (abCost != null) {
@@ -102,8 +91,21 @@ public class CountersPutAi extends SpellAbilityAi {
         if (abTgt != null) {
             abTgt.resetTargets();
             // target loop
+
+            list = CardLists.filter(player.getCardsIn(ZoneType.Battlefield), new Predicate<Card>() {
+                @Override
+                public boolean apply(final Card c) {
+                    return c.canBeTargetedBy(sa) && c.canReceiveCounters(CounterType.valueOf(type));
+                }
+            });
+
+            list = CardLists.getValidCards(list, abTgt.getValidTgts(), source.getController(), source);
+
+            if (list.size() < abTgt.getMinTargets(source, sa)) {
+                return false;
+            }
             while (abTgt.getNumTargeted() < abTgt.getMaxTargets(sa.getSourceCard(), sa)) {
-                if (list.size() == 0) {
+                if (list.isEmpty()) {
                     if ((abTgt.getNumTargeted() < abTgt.getMinTargets(sa.getSourceCard(), sa))
                             || (abTgt.getNumTargeted() == 0)) {
                         abTgt.resetTargets();

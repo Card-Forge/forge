@@ -8,6 +8,7 @@ import forge.card.ability.SpellAbilityAi;
 import forge.card.cost.Cost;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
+import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilCost;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -53,12 +54,20 @@ public class CountersRemoveAi extends SpellAbilityAi {
                 return false;
             }
         }
+        
+
+        if ("EndOfOpponentsTurn".equals(sa.getParam("AILogic"))) {
+            if (!source.getGame().getPhaseHandler().is(PhaseType.END_OF_TURN) || source.getGame().getPhaseHandler().getNextTurn() != ai) {
+                return false;
+            }
+        }
 
         // TODO handle proper calculation of X values based on Cost
         // final int amount = calculateAmount(sa.getSourceCard(), amountStr, sa);
 
-        // prevent run-away activations - first time will always return true
-        boolean chance = r.nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn());
+        if (ComputerUtil.preventRunAwayActivations(sa)) {
+            return false;
+        }
 
         // currently, not targeted
         if (abTgt != null) {
@@ -78,7 +87,7 @@ public class CountersRemoveAi extends SpellAbilityAi {
             }
         }
 
-        return ((r.nextFloat() < .6667) && chance);
+        return true;
     }
 
     @Override
