@@ -101,6 +101,10 @@ public enum EDocID { /** */
     HAND_1 (null), /** */
     HAND_2 (null), /** */
     HAND_3 (null), /** */
+    HAND_4 (null), /** */
+    HAND_5 (null), /** */
+    HAND_6 (null), /** */
+    HAND_7 (null), /** */
 
     COMMAND_0 (null), /** */
     COMMAND_1 (null), /** */
@@ -110,6 +114,10 @@ public enum EDocID { /** */
     COMMAND_5 (null), /** */
     COMMAND_6 (null), /** */
     COMMAND_7 (null); /** */
+
+    public final static EDocID[] Commands = new EDocID[] {COMMAND_0, COMMAND_1, COMMAND_2, COMMAND_3, COMMAND_4, COMMAND_5, COMMAND_6, COMMAND_7};
+    public final static EDocID[] Fields = new EDocID[] {FIELD_0, FIELD_1, FIELD_2, FIELD_3, FIELD_4, FIELD_5, FIELD_6, FIELD_7};
+    public final static EDocID[] Hands = new EDocID[] {HAND_0, HAND_1, HAND_2, HAND_3, HAND_4, HAND_5, HAND_6, HAND_7};
 
     // End enum declarations, start enum methods.
     private IVDoc<? extends ICDoc> vDoc;

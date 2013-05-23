@@ -81,7 +81,7 @@ public enum CMatchUI {
      * @param numFieldPanels int
      * @param numHandPanels int
      */
-    public void initMatch(final List<Player> players, Player localPlayer) {
+    public void initMatch(final List<Player> players, LobbyPlayer localPlayer) {
         // TODO fix for use with multiplayer
 
         final String[] indices = Singletons.getModel().getPreferences().getPref(FPref.UI_AVATARS).split(",");
@@ -89,19 +89,19 @@ public enum CMatchUI {
         // Instantiate all required field slots (user at 0) <-- that's not guaranteed
         final List<VField> fields = new ArrayList<VField>();
         final List<VCommand> commands = new ArrayList<VCommand>();
+        final List<VHand> hands = new ArrayList<VHand>();
         
+        // get an arranged list so that the first local player is at index 0
         List<Player> sortedPlayers = Lists.newArrayList(players);
-        
-        int ixLocal = -1;
+        int ixFirstHuman = -1;
         for(int i = 0; i < players.size(); i++) {
-            if( sortedPlayers.get(i) == localPlayer ) {
-                ixLocal = i;
+            if( sortedPlayers.get(i).getLobbyPlayer() == localPlayer ) {
+                ixFirstHuman = i;
                 break;
             }
         }
-        if( ixLocal > 0 ) {
-            Player p0 = sortedPlayers.remove(ixLocal);
-            sortedPlayers.add(0, p0);
+        if( ixFirstHuman > 0 ) {
+            sortedPlayers.add(0, sortedPlayers.remove(ixFirstHuman));
         }
 
 
@@ -109,8 +109,8 @@ public enum CMatchUI {
         for (Player p : sortedPlayers) {
             // A field must be initialized after it's instantiated, to update player info.
             // No player, no init.
-            VField f = new VField(EDocID.valueOf("FIELD_" + i), p, localPlayer);
-            VCommand c = new VCommand(EDocID.valueOf("COMMAND_" + i), p);
+            VField f = new VField(EDocID.Fields[i], p, localPlayer);
+            VCommand c = new VCommand(EDocID.Commands[i], p);
             fields.add(f);
             commands.add(c);
 
@@ -118,22 +118,20 @@ public enum CMatchUI {
             setAvatar(f, getPlayerAvatar(p, Integer.parseInt(indices[i > 2 ? 1 : 0])));
             f.getLayoutControl().initialize();
             c.getLayoutControl().initialize();
+            
+            if (p.getLobbyPlayer() == localPlayer) {
+                VHand newHand = new VHand(EDocID.Hands[i], p);
+                newHand.getLayoutControl().initialize();
+                hands.add(newHand);
+            }
             i++;
         }
-
-
-        // Instantiate all required hand slots (user at 0)
-        final List<VHand> hands = new ArrayList<VHand>();
-        VHand newHand = new VHand(EDocID.HAND_0, localPlayer);
-        newHand.getLayoutControl().initialize();
-        hands.add(newHand);
-
-// Max: 2+ hands are needed at 2HG (but this is quite far from now) - yet it's nice to have this possibility
-//        for (int i = 0; i < numHandPanels; i++) {
-//            switch (i) {
-//                    hands.add(i, new VHand(EDocID.valueOf("HAND_" + i), null));
-//            }
-//        }
+        
+        if(hands.isEmpty()) { // add empty hand for matches without human
+            VHand newHand = new VHand(EDocID.Hands[0], null);
+            newHand.getLayoutControl().initialize();
+            hands.add(newHand);
+        }
 
         // Replace old instances
         VMatchUI.SINGLETON_INSTANCE.setCommandViews(commands);

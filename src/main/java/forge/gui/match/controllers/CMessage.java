@@ -46,6 +46,7 @@ public enum CMessage implements ICDoc, Observer {
 
     private InputProxy inputControl = new InputProxy();
     private Component lastFocusedButton = null;
+    private VMessage view = VMessage.SINGLETON_INSTANCE;
     
     private final ActionListener actCancel = new ActionListener() {
         @Override
@@ -63,7 +64,7 @@ public enum CMessage implements ICDoc, Observer {
     private final FocusListener onFocus = new FocusAdapter() {
         @Override
         public void focusGained(FocusEvent e) {
-            if (null != VMessage.SINGLETON_INSTANCE.getParentCell() && VMessage.SINGLETON_INSTANCE == VMessage.SINGLETON_INSTANCE.getParentCell().getSelected()) {
+            if (null != view.getParentCell() && view == view.getParentCell().getSelected()) {
                 // only record focus changes when we're showing -- otherwise it is due to a tab visibility change
                 lastFocusedButton = e.getComponent();
             }
@@ -81,8 +82,8 @@ public enum CMessage implements ICDoc, Observer {
     
     @Override
     public void initialize() {
-        _initButton(VMessage.SINGLETON_INSTANCE.getBtnCancel(), actCancel);
-        _initButton(VMessage.SINGLETON_INSTANCE.getBtnOK(), actOK);
+        _initButton(view.getBtnCancel(), actCancel);
+        _initButton(view.getBtnOK(), actOK);
     }
 
     /**
@@ -96,12 +97,12 @@ public enum CMessage implements ICDoc, Observer {
 
     /** @param s0 &emsp; {@link java.lang.String} */
     public void setMessage(String s0) {
-        VMessage.SINGLETON_INSTANCE.getTarMessage().setText(s0);
+        view.getTarMessage().setText(s0);
     }
 
     /** Flashes animation on input panel if play is currently waiting on input. */
     public void remind() {
-        SDisplayUtil.remind(VMessage.SINGLETON_INSTANCE);
+        SDisplayUtil.remind(view);
     }
 
     /* (non-Javadoc)
@@ -117,7 +118,7 @@ public enum CMessage implements ICDoc, Observer {
      */
     @Override
     public void update(Observable o, Object arg) {
-        VMessage.SINGLETON_INSTANCE.getLblGames().setText(
+        view.getLblGames().setText(
                 match.getGameType().toString() + ": Game #"
                 + (match.getPlayedGames().size() + 1)
                 + " of " + match.getGamesPerMatch()

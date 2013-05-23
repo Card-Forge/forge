@@ -141,28 +141,31 @@ public final class SResizingUtil {
         // 10% = 9.8px -> 10px -> x 3 = 30px
         // 30% = 29.4px -> 29px (!)
         for (final DragCell cellA : cells) {
-            roughVal = cellA.getRoughX() * w + cellA.getRoughW() * w;
+            RectangleOfDouble cellSizeA = cellA.getRoughBounds();
+            roughVal = cellSizeA.getX() * w + cellSizeA.getW() * w;
 
             smoothVal = (int) Math.round(roughVal);
             for (final DragCell cellB : cells) {
-                if ((cellB.getRoughX() * w + cellB.getRoughW() * w) == roughVal) {
-                    cellB.setSmoothW(smoothVal - (int) Math.round(cellB.getRoughX() * w));
+                RectangleOfDouble cellSizeB = cellB.getRoughBounds();
+                if ((cellSizeB.getX() * w + cellSizeB.getW() * w) == roughVal) {
+                    cellB.setSmoothW(smoothVal - (int) Math.round(cellSizeB.getX() * w));
                 }
             }
-            cellA.setSmoothW(smoothVal - (int) Math.round(cellA.getRoughX() * w));
+            cellA.setSmoothW(smoothVal - (int) Math.round(cellSizeA.getX() * w));
 
-            roughVal = cellA.getRoughY() * h + cellA.getRoughH() * h;
+            roughVal = cellSizeA.getY() * h + cellSizeA.getH() * h;
             smoothVal = (int) Math.round(roughVal);
             for (final DragCell cellB : cells) {
-                if (cellB.getRoughY() * h + cellB.getRoughH() * h == roughVal) {
-                    cellB.setSmoothH(smoothVal - (int) Math.round(cellB.getRoughY() * h));
+                RectangleOfDouble cellSizeB = cellB.getRoughBounds();
+                if (cellSizeB.getY() * h + cellSizeB.getH() * h == roughVal) {
+                    cellB.setSmoothH(smoothVal - (int) Math.round(cellSizeB.getY() * h));
                 }
             }
-            cellA.setSmoothH(smoothVal - (int) Math.round(cellA.getRoughY() * h));
+            cellA.setSmoothH(smoothVal - (int) Math.round(cellSizeA.getY() * h));
 
             // X and Y coordinate can be rounded as usual.
-            cellA.setSmoothX((int) Math.round(cellA.getRoughX() * w));
-            cellA.setSmoothY((int) Math.round(cellA.getRoughY() * h));
+            cellA.setSmoothX((int) Math.round(cellSizeA.getX() * w));
+            cellA.setSmoothY((int) Math.round(cellSizeA.getY() * h));
 
             // only add component if not already in container; otherwise the keyboard focus
             // jumps around to the most recenly added component 

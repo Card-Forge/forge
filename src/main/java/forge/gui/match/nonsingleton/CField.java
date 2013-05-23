@@ -38,6 +38,7 @@ import forge.control.input.Input;
 import forge.control.input.InputPayManaBase;
 import forge.game.GameState;
 import forge.game.player.HumanPlay;
+import forge.game.player.LobbyPlayer;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.ForgeAction.MatchConstants;
@@ -53,7 +54,7 @@ public class CField implements ICDoc {
     // The one who owns cards on this side of table
     private final Player player;
     // Tho one who looks at screen and 'performs actions'
-    private final Player playerViewer;
+    private final LobbyPlayer viewer;
     private final VField view;
     private boolean initializedAlready = false;
 
@@ -127,9 +128,9 @@ public class CField implements ICDoc {
      * @param playerViewer 
      */
     @SuppressWarnings("serial")
-    public CField(final Player p0, final VField v0, Player playerViewer) {
+    public CField(final Player p0, final VField v0, LobbyPlayer playerViewer) {
         this.player = p0;
-        this.playerViewer = playerViewer;
+        this.viewer = playerViewer;
         this.view = v0;
 
         handAction = new ZoneAction(player.getZone(ZoneType.Hand), MatchConstants.HUMANHAND);
@@ -144,16 +145,18 @@ public class CField implements ICDoc {
 
             @Override
             protected void doAction(final Card c) {
-                // activate opponents cards only via your own flashback button
-                if (player != CField.this.playerViewer) {
+                // activate cards only via your own flashback button
+                if (player.getLobbyPlayer() != CField.this.viewer) {
                     return;
                 }
                 final GameState game = player.getGame();
+                // TODO: "can play" check needed!
+
                 // should I check for who owns these cards? Are there any abilities to be played from opponent's graveyard? 
-                final SpellAbility ab = CField.this.playerViewer.getController().getAbilityToPlay(game.getAbilitesOfCard(c, CField.this.playerViewer));
+                final SpellAbility ab = player.getController().getAbilityToPlay(game.getAbilitesOfCard(c, player));
                 if ( null != ab) {
                     FThreads.invokeInNewThread(new Runnable(){ @Override public void run(){
-                        HumanPlay.playSpellAbility(CField.this.playerViewer, c, ab);
+                        HumanPlay.playSpellAbility(player, c, ab);
                     }});
                 }
             }
@@ -161,7 +164,7 @@ public class CField implements ICDoc {
     }
 
     private void handClicked() {
-        if ( player == playerViewer || Preferences.DEV_MODE || player.hasKeyword("Play with your hand revealed.")) {
+        if ( player.getLobbyPlayer() == viewer || Preferences.DEV_MODE || player.hasKeyword("Play with your hand revealed.")) {
             handAction.actionPerformed(null);
         }
     }
@@ -199,7 +202,7 @@ public class CField implements ICDoc {
 
     /** */
     private void manaAction(byte colorCode) {
-        if (CField.this.player == CField.this.playerViewer) {
+        if (CField.this.player.getLobbyPlayer() == CField.this.viewer) {
             final Input in = CField.this.player.getGame().getInputQueue().getInput();
             if (in instanceof InputPayManaBase) {
                 // Do something

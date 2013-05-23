@@ -178,11 +178,11 @@ public class MatchController {
     public static void attachUiToMatch(MatchController match, LobbyPlayer humanLobbyPlayer) {
         FControl.SINGLETON_INSTANCE.setMatch(match);
         
-        GameState currentGame = match.getCurrentGame();
-        currentGame.getEvents().register(Singletons.getControl().getSoundSystem());
+        GameState game = match.getCurrentGame();
+        game.getEvents().register(Singletons.getControl().getSoundSystem());
         
         Player localHuman = null;
-        for(Player p : currentGame.getPlayers()) {
+        for(Player p : game.getPlayers()) {
             if ( p.getLobbyPlayer() != humanLobbyPlayer)
                 continue;
             localHuman = p;
@@ -192,11 +192,11 @@ public class MatchController {
         FControl.SINGLETON_INSTANCE.setPlayer(localHuman);
 
         // The UI controls should use these game data as models
-        CMatchUI.SINGLETON_INSTANCE.initMatch(currentGame.getRegisteredPlayers(), localHuman);
-        CDock.SINGLETON_INSTANCE.setModel(currentGame, localHuman);
-        CStack.SINGLETON_INSTANCE.setModel(currentGame.getStack(), localHuman);
-        CLog.SINGLETON_INSTANCE.setModel(currentGame.getGameLog());
-        CCombat.SINGLETON_INSTANCE.setModel(currentGame);
+        CMatchUI.SINGLETON_INSTANCE.initMatch(game.getRegisteredPlayers(), humanLobbyPlayer);
+        CDock.SINGLETON_INSTANCE.setModel(game, localHuman);
+        CStack.SINGLETON_INSTANCE.setModel(game.getStack(), localHuman);
+        CLog.SINGLETON_INSTANCE.setModel(game.getGameLog());
+        CCombat.SINGLETON_INSTANCE.setModel(game);
         CMessage.SINGLETON_INSTANCE.setModel(match);
 
 
@@ -204,18 +204,18 @@ public class MatchController {
         Singletons.getControl().changeState(FControl.Screens.MATCH_SCREEN);
         SDisplayUtil.showTab(EDocID.REPORT_LOG.getDoc());
 
-        CMessage.SINGLETON_INSTANCE.getInputControl().setGame(currentGame);
+        CMessage.SINGLETON_INSTANCE.getInputControl().setGame(game);
 
         // models shall notify controllers of changes
         
-        currentGame.getStack().addObserver(CStack.SINGLETON_INSTANCE);
-        currentGame.getGameLog().addObserver(CLog.SINGLETON_INSTANCE);
+        game.getStack().addObserver(CStack.SINGLETON_INSTANCE);
+        game.getGameLog().addObserver(CLog.SINGLETON_INSTANCE);
         // some observers were set in CMatchUI.initMatch
 
         // black magic still
         
         
-        VAntes.SINGLETON_INSTANCE.setModel(currentGame.getRegisteredPlayers());
+        VAntes.SINGLETON_INSTANCE.setModel(game.getRegisteredPlayers());
 
         for (final VField field : VMatchUI.SINGLETON_INSTANCE.getFieldViews()) {
             field.getLblLibrary().setHoverable(Preferences.DEV_MODE);

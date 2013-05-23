@@ -50,16 +50,16 @@ public class VHand implements IVDoc<CHand> {
      * Assembles Swing components of a player hand instance.
      * 
      * @param id0 &emsp; {@link forge.gui.framework.EDocID}
-     * @param player0 &emsp; {@link forge.game.player.Player}
+     * @param owner &emsp; {@link forge.game.player.Player}
      */
-    public VHand(final EDocID id0, final Player player0) {
+    public VHand(final EDocID id0, final Player owner) {
         docID = id0;
         id0.setDoc(this);
 
-        if (player0 == null) {
+        if (owner == null) {
             tab.setText("NO PLAYER Hand");
         } else {
-            tab.setText(player0.getName() + " Hand");
+            tab.setText(owner.getName() + " Hand");
         }
 
         scroller.setBorder(null);
@@ -69,7 +69,7 @@ public class VHand implements IVDoc<CHand> {
 
         hand.setOpaque(false);
 
-        control = new CHand(player0, this);
+        control = new CHand(owner, this);
     }
 
     //========= Overridden methods

@@ -296,8 +296,8 @@ public final class SRearrangingUtil {
             FView.SINGLETON_INSTANCE.removeDragCell(cellSrc);
         }
 
-        cellNew.setRoughBounds();
-        cellTarget.setRoughBounds();
+        cellNew.updateRoughBounds();
+        cellTarget.updateRoughBounds();
 
         cellSrc.setSelected(srcSelectedDoc);
         cellSrc.refresh();
@@ -351,7 +351,7 @@ public final class SRearrangingUtil {
         if (foundT && foundB) {
             for (final DragCell cell : cellsToResize) {
                 cell.setBounds(cell.getX(), cell.getY(), cell.getW() + srcW, cell.getH());
-                cell.setRoughBounds();
+                cell.updateRoughBounds();
             }
             return;
         }
@@ -377,7 +377,7 @@ public final class SRearrangingUtil {
         if (foundT && foundB) {
             for (final DragCell cell : cellsToResize) {
                 cell.setBounds(cellSrc.getX(), cell.getY(), cell.getW() + srcW, cell.getH());
-                cell.setRoughBounds();
+                cell.updateRoughBounds();
             }
             return;
         }
@@ -404,7 +404,7 @@ public final class SRearrangingUtil {
             for (final DragCell cell : cellsToResize) {
                 cell.setBounds(cell.getX(), cellSrc.getY(), cell.getW(), cell.getH() + srcH);
 
-                cell.setRoughBounds();
+                cell.updateRoughBounds();
             }
             return;
         }
@@ -431,7 +431,7 @@ public final class SRearrangingUtil {
             for (final DragCell cell : cellsToResize) {
                 cell.setBounds(cell.getX(), cell.getY(), cell.getW(), cell.getH() + srcH);
 
-                cell.setRoughBounds();
+                cell.updateRoughBounds();
             }
             return;
         }

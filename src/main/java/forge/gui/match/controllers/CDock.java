@@ -27,10 +27,9 @@ import java.util.Map.Entry;
 import java.util.TreeMap;
 
 import javax.swing.JOptionPane;
-import javax.swing.SwingWorker;
-
 import forge.Card;
 import forge.CardLists;
+import forge.FThreads;
 import forge.CardPredicates.Presets;
 import forge.Command;
 import forge.deck.Deck;
@@ -94,54 +93,44 @@ public enum CDock implements ICDoc {
         SOverlayUtils.genericOverlay();
         FView.SINGLETON_INSTANCE.getPnlContent().removeAll();
 
-        final SwingWorker<Void, Void> w = new SwingWorker<Void, Void>() {
-            @Override
-            public Void doInBackground() {
+        FThreads.invokeInEdtLater(new Runnable(){
+            @Override public void run() {
                 SLayoutIO.loadLayout(null);
                 SOverlayUtils.hideOverlay();
-                return null;
             }
-        };
-        w.execute();
+        });
+
     }
 
     private void saveLayout() {
-        final SwingWorker<Void, Void> w = new SwingWorker<Void, Void>() {
-            @Override
-            public Void doInBackground() {
-                final SaveOpenDialog dlgSave = new SaveOpenDialog();
-                final File defFile = new File(SLayoutIO.getFilePreferred());
-                final File saveFile = dlgSave.SaveDialog(defFile, Filetypes.LAYOUT);
-                if (saveFile != null) {
-                    SLayoutIO.saveLayout(saveFile);
-                }
-                return null;
-            }
-        };
-        w.execute();
+        final SaveOpenDialog dlgSave = new SaveOpenDialog();
+        final File defFile = new File(SLayoutIO.getFilePreferred());
+        final File saveFile = dlgSave.SaveDialog(defFile, Filetypes.LAYOUT);
+        if (saveFile != null) {
+            SLayoutIO.saveLayout(saveFile);
+        }
     }
 
     private void openLayout() {
         SOverlayUtils.genericOverlay();
+
+        final SaveOpenDialog dlgOpen = new SaveOpenDialog();
+        final File defFile = new File(SLayoutIO.getFilePreferred());
+        final File loadFile = dlgOpen.OpenDialog(defFile, Filetypes.LAYOUT);
+
         FView.SINGLETON_INSTANCE.getPnlContent().removeAll();
-
-        final SwingWorker<Void, Void> w = new SwingWorker<Void, Void>() {
+        // let it redraw everything first
+        
+        FThreads.invokeInEdtLater(new Runnable() {
             @Override
-            public Void doInBackground() {
-                final SaveOpenDialog dlgOpen = new SaveOpenDialog();
-                final File defFile = new File(SLayoutIO.getFilePreferred());
-                final File loadFile = dlgOpen.OpenDialog(defFile, Filetypes.LAYOUT);
-
+            public void run() {
                 if (loadFile != null) {
                     SLayoutIO.loadLayout(loadFile);
                     SLayoutIO.saveLayout(null);
                 }
-
                 SOverlayUtils.hideOverlay();
-                return null;
             }
-        };
-        w.execute();
+        });
     }
 
     /**

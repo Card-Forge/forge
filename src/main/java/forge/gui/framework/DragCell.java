@@ -31,10 +31,7 @@ import forge.view.FView;
 @SuppressWarnings("serial")
 public final class DragCell extends JPanel implements ILocalRepaint {
     // Layout creation worker vars
-    private double roughX = 0;
-    private double roughY = 0;
-    private double roughW = 0;
-    private double roughH = 0;
+    private RectangleOfDouble roughSize;
     private int smoothX = 0;
     private int smoothY = 0;
     private int smoothW = 0;
@@ -196,12 +193,13 @@ public final class DragCell extends JPanel implements ILocalRepaint {
 
     /**
      * Automatically calculates rough bounds of this cell.
+     * @param rectangleOfDouble 
      */
-    public void setRoughBounds() {
+    public void updateRoughBounds() {
         final double contentW = FView.SINGLETON_INSTANCE.getPnlContent().getWidth();
         final double contentH = FView.SINGLETON_INSTANCE.getPnlContent().getHeight();
 
-        setRoughBounds(this.getX() / contentW, this.getY()  / contentH,
+        this.roughSize = new RectangleOfDouble(this.getX() / contentW, this.getY()  / contentH,
                 this.getW() / contentW, this.getH() / contentH);
     }
 
@@ -212,36 +210,16 @@ public final class DragCell extends JPanel implements ILocalRepaint {
      *  @param w0 &emsp; double
      *  @param h0 &emsp; double
      */
-    public void setRoughBounds(final double x0, final double y0, final double w0, final double h0) {
-        if (x0 > 1) { throw new IllegalArgumentException("X value greater than 100%!"); }
-        if (y0 > 1) { throw new IllegalArgumentException("Y value greater than 100%!"); }
-        if (w0 > 1) { throw new IllegalArgumentException("W value greater than 100%!"); }
-        if (h0 > 1) { throw new IllegalArgumentException("H value greater than 100%!"); }
-
-        this.roughX = x0;
-        this.roughY = y0;
-        this.roughW = w0;
-        this.roughH = h0;
+    public void setRoughBounds(RectangleOfDouble rectangleOfDouble) {
+        this.roughSize = rectangleOfDouble;
     }
 
-    /** @return double */
-    public double getRoughX() {
-        return this.roughX;
-    }
-
-    /** @return double */
-    public double getRoughY() {
-        return this.roughY;
-    }
-
-    /** @return double */
-    public double getRoughW() {
-        return this.roughW;
-    }
-
-    /** @return double */
-    public double getRoughH() {
-        return this.roughH;
+    /**
+     * TODO: Write javadoc for this method.
+     * @return
+     */
+    public RectangleOfDouble getRoughBounds() {
+        return roughSize;
     }
 
     /** Sets bounds in superclass using smoothed values from this class. */

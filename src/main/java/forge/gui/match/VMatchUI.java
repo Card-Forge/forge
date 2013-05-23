@@ -40,23 +40,10 @@ public enum VMatchUI implements IVTopLevelUI {
     private final CMatchUI control = null;
 
     private VMatchUI() {
-        // Create empty docs for all field slots
-        for (int i = 0; i < 8; i++) {
-            EDocID.valueOf("FIELD_" + i).setDoc(
-                    new VEmptyDoc(EDocID.valueOf("FIELD_" + i)));
-        }
-
-     // Create empty docs for all field slots
-        for (int i = 0; i < 8; i++) {
-            EDocID.valueOf("COMMAND_" + i).setDoc(
-                    new VEmptyDoc(EDocID.valueOf("COMMAND_" + i)));
-        }
-
-        // Create empty docs for all hand slots
-        for (int i = 0; i < 4; i++) {
-            EDocID.valueOf("HAND_" + i).setDoc(
-                    new VEmptyDoc(EDocID.valueOf("HAND_" + i)));
-        }
+        // Create empty docs for all slots
+        for (int i = 0; i < 8; i++) EDocID.Fields[i].setDoc(new VEmptyDoc(EDocID.Fields[i]));
+        for (int i = 0; i < 8; i++) EDocID.Commands[i].setDoc(new VEmptyDoc(EDocID.Commands[i]));
+        for (int i = 0; i < 8; i++) EDocID.Hands[i].setDoc(new VEmptyDoc(EDocID.Hands[i]));
     }
 
     /** */
@@ -108,7 +95,7 @@ public enum VMatchUI implements IVTopLevelUI {
         }
 
         // Add extra hands to existing hand panel.
-        for (int i = 0; i < lstHands.size(); i++) {
+        for (int i = 1; i < lstHands.size(); i++) {
             // If already in layout, no need to add again.
             if (lstHands.get(i).getParentCell() == null) { // if i == 0, we get NPE in two lines
                 DragCell cellWithHand = lstHands.get(0).getParentCell();

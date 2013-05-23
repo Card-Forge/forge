@@ -4,10 +4,11 @@ import java.awt.BorderLayout;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map.Entry;
 
-import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 import javax.xml.stream.XMLEventFactory;
@@ -21,8 +22,12 @@ import javax.xml.stream.events.StartElement;
 import javax.xml.stream.events.XMLEvent;
 
 import forge.control.FControl;
+import forge.control.FControl.Screens;
 import forge.properties.FileLocation;
 import forge.properties.NewConstants;
+import forge.util.maps.CollectionSuppliers;
+import forge.util.maps.HashMapOfLists;
+import forge.util.maps.MapOfLists;
 import forge.view.FView;
 
 
@@ -33,15 +38,14 @@ import forge.view.FView;
  */
 public final class SLayoutIO {
     /** Each cell must save these elements of its display. */
-    private enum Property {
-        x,
-        y,
-        w,
-        h,
-        doc
+    private static class Property {
+        public final static String x = "x"; 
+        public final static String y = "y";
+        public final static String w = "w";
+        public final static String h = "h";
+        public final static String doc = "doc";
     }
 
-    private static FileLocation file = null;
     private static final XMLEventFactory EF = XMLEventFactory.newInstance();
     private static final XMLEvent NEWLINE = EF.createDTD("\n");
     private static final XMLEvent TAB = EF.createDTD("\t");
@@ -51,7 +55,7 @@ public final class SLayoutIO {
      * @return {@link java.lang.String}
      */
     public static String getFilePreferred() {
-        return null == file ? null : file.userPrefLoc;
+        return SLayoutIO.getFileForState(FControl.SINGLETON_INSTANCE.getState()).userPrefLoc;
     }
 
     /** Publicly-accessible save method, to neatly handle exception handling.
@@ -69,18 +73,9 @@ public final class SLayoutIO {
 
     }
 
-    /**
-     * Publicly-accessible load method, to neatly handle exception handling.
-     * @param f0 &emsp; {@link java.io.File}
-     */
-    public static void loadLayout(final File f0) {
-        try { load(f0); }
-        catch (final Exception e) { e.printStackTrace(); }
-    }
-
     private synchronized static void save(final File f0) throws Exception {
         final String fWriteTo;
-        SLayoutIO.setFilesForState();
+        FileLocation file = SLayoutIO.getFileForState(FControl.SINGLETON_INSTANCE.getState());
 
         if (f0 == null) {
             if (null == file) {
@@ -95,8 +90,6 @@ public final class SLayoutIO {
         final XMLOutputFactory out = XMLOutputFactory.newInstance();
         final XMLEventWriter writer = out.createXMLEventWriter(new FileOutputStream(fWriteTo));
         final List<DragCell> cells = FView.SINGLETON_INSTANCE.getDragCells();
-        final JPanel pnl = FView.SINGLETON_INSTANCE.getPnlContent();
-        double x0, y0, w0, h0;
 
         writer.add(EF.createStartDocument());
         writer.add(NEWLINE);
@@ -104,19 +97,15 @@ public final class SLayoutIO {
         writer.add(NEWLINE);
 
         for (final DragCell cell : cells) {
-            x0 = ((double) Math.round(((double) cell.getX() / (double) pnl.getWidth()) * 100000)) / 100000;
-            y0 = ((double) Math.round(((double) cell.getY() / (double) pnl.getHeight()) * 100000)) / 100000;
-            w0 = ((double) Math.round(((double) cell.getW() / (double) pnl.getWidth()) * 100000)) / 100000;
-            h0 = ((double) Math.round(((double) cell.getH() / (double) pnl.getHeight()) * 100000)) / 100000;
-
-            //cell.setRoughBounds(x, y, w, h);
-
+            cell.updateRoughBounds();
+            RectangleOfDouble bounds = cell.getRoughBounds();
+            
             writer.add(TAB);
             writer.add(EF.createStartElement("", "", "cell"));
-            writer.add(EF.createAttribute(Property.x.toString(), String.valueOf(x0)));
-            writer.add(EF.createAttribute(Property.y.toString(), String.valueOf(y0)));
-            writer.add(EF.createAttribute(Property.w.toString(), String.valueOf(w0)));
-            writer.add(EF.createAttribute(Property.h.toString(), String.valueOf(h0)));
+            writer.add(EF.createAttribute(Property.x.toString(), String.valueOf(Math.rint(bounds.getX() * 100000) / 100000)));
+            writer.add(EF.createAttribute(Property.y.toString(), String.valueOf(Math.rint(bounds.getY() * 100000) / 100000)));
+            writer.add(EF.createAttribute(Property.w.toString(), String.valueOf(Math.rint(bounds.getW() * 100000) / 100000)));
+            writer.add(EF.createAttribute(Property.h.toString(), String.valueOf(Math.rint(bounds.getH() * 100000) / 100000)));
             writer.add(NEWLINE);
 
             for (final IVDoc<? extends ICDoc> vDoc : cell.getDocs()) {
@@ -133,36 +122,65 @@ public final class SLayoutIO {
         writer.close();
     }
 
-    private static void load(final File f) throws Exception {
+    public static void loadLayout(final File f) {
         final FView view = FView.SINGLETON_INSTANCE;
         final XMLInputFactory inputFactory = XMLInputFactory.newInstance();
-        SLayoutIO.setFilesForState();
+        FileLocation file = SLayoutIO.getFileForState(FControl.SINGLETON_INSTANCE.getState());
 
         view.getPnlInsets().removeAll();
         view.getPnlInsets().setLayout(new BorderLayout());
         view.getPnlInsets().add(view.getPnlContent(), BorderLayout.CENTER);
-        view.getPnlInsets().setBorder(new EmptyBorder(
-                SLayoutConstants.BORDER_T, SLayoutConstants.BORDER_T, 0, 0));
-
-        final XMLEventReader reader;
-        if (f != null && f.exists()) {
-            reader = inputFactory.createXMLEventReader(new FileInputStream(f));
-        } else if (null == file) {
-            reader = null;
-        } else if (new File(file.userPrefLoc).exists()) {
-            reader = inputFactory.createXMLEventReader(new FileInputStream(file.userPrefLoc));
-        } else {
-            reader = inputFactory.createXMLEventReader(new FileInputStream(file.defaultLoc));
-        }
+        view.getPnlInsets().setBorder(new EmptyBorder(SLayoutConstants.BORDER_T, SLayoutConstants.BORDER_T, 0, 0));
 
         view.removeAllDragCells();
+        
+        // Read a model for new layout
+        MapOfLists<RectangleOfDouble, EDocID> model = null;
+        try {
+            FileInputStream fis = null;
+            if (f != null && f.exists()) 
+                fis = new FileInputStream(f);
+            else {
+                File userSetting = new File(file.userPrefLoc);
+                fis = userSetting.exists() ? new FileInputStream(userSetting) : new FileInputStream(file.defaultLoc);
+            }
+    
+            model = readLayout(inputFactory.createXMLEventReader(fis));
+        } catch (final Exception e) { e.printStackTrace(); }
+        
+        // Apply new layout
+        DragCell cell = null;
+        for(Entry<RectangleOfDouble, Collection<EDocID>> kv : model.entrySet()) {
+            cell = new DragCell();
+            cell.setRoughBounds(kv.getKey());
+            FView.SINGLETON_INSTANCE.addDragCell(cell); 
+            for(EDocID edoc : kv.getValue()) {
+                try {
+//                    System.out.println(String.format("adding doc %s -> %s",  edoc, edoc.getDoc()));
+                    cell.addDoc(edoc.getDoc());
+                } catch (IllegalArgumentException e) {
+                    System.err.println("Failed to get doc for " + edoc); 
+                }
+                
+            }
+            
+        }
+
+        // Rough bounds are all in place; resize the window.
+        SResizingUtil.resizeWindow();
+    }
+
+    private static MapOfLists<RectangleOfDouble, EDocID> readLayout(final XMLEventReader reader)
+            throws XMLStreamException {
         XMLEvent event;
         StartElement element;
         Iterator<?> attributes;
         Attribute attribute;
-        DragCell cell = null;
         double x0 = 0, y0 = 0, w0 = 0, h0 = 0;
-
+        
+        MapOfLists<RectangleOfDouble, EDocID> model = new HashMapOfLists<RectangleOfDouble, EDocID>(CollectionSuppliers.<EDocID>arrayLists());
+        
+        RectangleOfDouble currentKey = null;
         while (null != reader && reader.hasNext()) {
             event = reader.nextEvent();
 
@@ -173,72 +191,59 @@ public final class SLayoutIO {
                     attributes = element.getAttributes();
                     while (attributes.hasNext()) {
                         attribute = (Attribute) attributes.next();
-                        if (attribute.getName().toString().equals(Property.x.toString())) {
-                            x0 = Double.valueOf(attribute.getValue());
-                        }
-                        else if (attribute.getName().toString().equals(Property.y.toString())) {
-                            y0 = Double.valueOf(attribute.getValue());
-                        }
-                        else if (attribute.getName().toString().equals(Property.w.toString())) {
-                            w0 = Double.valueOf(attribute.getValue());
-                        }
-                        else if (attribute.getName().toString().equals(Property.h.toString())) {
-                            h0 = Double.valueOf(attribute.getValue());
-                        }
-                    }
+                        double val = Double.parseDouble(attribute.getValue());
+                        String atrName = attribute.getName().toString();
 
-                    cell = new DragCell();
-                    cell.setRoughBounds(x0, y0, w0, h0);
-                    FView.SINGLETON_INSTANCE.addDragCell(cell);
+                        if (atrName.equals(Property.x))      x0 = val;
+                        else if (atrName.equals(Property.y)) y0 = val;
+                        else if (atrName.equals(Property.w)) w0 = val;
+                        else if (atrName.equals(Property.h)) h0 = val;
+                    }
+                    currentKey = new RectangleOfDouble(x0, y0, w0, h0);
                 }
-                else if (element.getName().getLocalPart().equals("doc")) {
+                else if (element.getName().getLocalPart().equals(Property.doc)) {
                     event = reader.nextEvent();
-                    try {
-                        cell.addDoc(EDocID.valueOf(event.asCharacters().getData()).getDoc());
-                    } catch (IllegalArgumentException e) { /* ignore; just don't add invalid element */ }
+                    model.add(currentKey, EDocID.valueOf(event.asCharacters().getData()));
                 }
             }
         }
-
-        // Rough bounds are all in place; resize the window.
-        SResizingUtil.resizeWindow();
+        return model;
     }
 
-    private static void createNode(final XMLEventWriter writer0, final Property name0,
-            final String val0) throws XMLStreamException {
-
+    private static void createNode(final XMLEventWriter writer0, final String propertyName, final String value) throws XMLStreamException {
         writer0.add(TAB);
         writer0.add(TAB);
-        writer0.add(EF.createStartElement("", "", name0.toString()));
-        writer0.add(EF.createCharacters(val0));
-        writer0.add(EF.createEndElement("", "", name0.toString()));
+        writer0.add(EF.createStartElement("", "", propertyName));
+        writer0.add(EF.createCharacters(value));
+        writer0.add(EF.createEndElement("", "", propertyName));
         writer0.add(NEWLINE);
     }
 
     /**
      * Updates preferred / default layout addresses particular to each UI state.
      * Always called before a load or a save, to ensure file addresses are correct.
+     * @return 
      */
-    private static void setFilesForState() {
-        switch(FControl.SINGLETON_INSTANCE.getState()) {
+    private static FileLocation getFileForState(Screens state) {
+        switch(state) {
             case HOME_SCREEN:
-                file = NewConstants.HOME_LAYOUT_FILE;
-                break;
+                return NewConstants.HOME_LAYOUT_FILE;
             case MATCH_SCREEN:
-                file = NewConstants.MATCH_LAYOUT_FILE;
-                break;
+                return NewConstants.MATCH_LAYOUT_FILE;
+
             case DECK_EDITOR_CONSTRUCTED:
             case DECK_EDITOR_LIMITED:
             case DECK_EDITOR_QUEST:
             case DRAFTING_PROCESS:
             case QUEST_CARD_SHOP:
-                file = NewConstants.EDITOR_LAYOUT_FILE;
-                break;
+                return NewConstants.EDITOR_LAYOUT_FILE;
+
             case QUEST_BAZAAR:
-                file = null;
-                break;
+                return null;
+
             default:
                 throw new IllegalStateException("Layout load failed; UI state unknown.");
         }
     }
 }
+ 

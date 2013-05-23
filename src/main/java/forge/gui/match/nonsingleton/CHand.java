@@ -34,7 +34,6 @@ import forge.Card;
 import forge.Command;
 import forge.Singletons;
 import forge.game.player.Player;
-import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 import forge.gui.framework.ICDoc;
 import forge.gui.match.CMatchUI;
@@ -47,7 +46,7 @@ import forge.view.arcane.util.Animation;
  * Controls Swing components of a player's hand instance.
  * 
  */
-public class CHand implements ICDoc {
+public class CHand implements ICDoc, Observer {
     private final Player player;
     private final VHand view;
     private boolean initializedAlready = false;
@@ -58,9 +57,6 @@ public class CHand implements ICDoc {
         public void mousePressed(final MouseEvent e) {
             cardclickAction(e); } };
 
-    private final Observer o1 = new Observer() { @Override
-        public void update(final Observable a, final Object b) {
-            observerAction(a); } };
 
     /**
      * Controls Swing components of a player's hand instance.
@@ -78,8 +74,8 @@ public class CHand implements ICDoc {
         if (initializedAlready) { return; }
         initializedAlready = true;
 
-        if ( player != null)
-            player.getZone(ZoneType.Hand).addObserver(o1);
+        if (player != null)
+            player.getZone(ZoneType.Hand).addObserver(this);
 
         view.getHandArea().addMouseListener(madCardClick);
     }
@@ -136,48 +132,6 @@ public class CHand implements ICDoc {
         //this.view.refreshLayout();
     }
 
-    /**
-     * Gets the cards.
-     * 
-     * @return List<Card>
-     */
-    public List<Card> getCards() {
-        return this.cardsInPanel;
-    }
-
-    /**
-     * Removes the card.
-     * 
-     * @param c
-     *            &emsp; Card object
-     */
-    public void removeCard(final Card c) {
-        this.cardsInPanel.remove(c);
-        //this.view.refreshLayout();
-    }
-
-    /**
-     * Removes the cards.
-     * 
-     * @param c
-     *            &emsp; List of Card objects
-     */
-    public void removeCards(final List<Card> c) {
-        this.cardsInPanel.removeAll(c);
-        //this.view.refreshLayout();
-    }
-
-    /**
-     * Reset cards.
-     * 
-     * @param c
-     *            &emsp; List of Card objects
-     */
-    public void resetCards(final List<Card> c) {
-        this.cardsInPanel.clear();
-        this.addCards(c);
-    }
-
     private void cardclickAction(final MouseEvent e) {
         if (e.getButton() != MouseEvent.BUTTON1) {
             return;
@@ -188,13 +142,12 @@ public class CHand implements ICDoc {
         }
     }
 
-    private void observerAction(final Observable a) {
-        final PlayerZone pZone = (PlayerZone) a;
+    public void update(final Observable a, final Object b) {
         final HandArea p = view.getHandArea();
         final Rectangle rctLibraryLabel = CMatchUI.SINGLETON_INSTANCE
                 .getFieldControls().get(0)
                 .getView().getLblLibrary().getBounds();
-        final List<Card> c = pZone.getCards();
+        final List<Card> c = player.getZone(ZoneType.Hand).getCards();
 
         // Animation starts from the library label and runs to the hand panel.
         // This check prevents animation running if label hasn't been realized yet.
