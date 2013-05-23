@@ -3173,12 +3173,13 @@ public class CardFactoryUtil {
                 final String magnitude = k[1];
 
                 // final String player = card.getController();
-                
-                final GameState game = card.getGame();
+
                 final Command intoPlay = new Command() {
                     private static final long serialVersionUID = -7530312713496897814L;
 
+
                     private void devour(Card eater, Card dinner) {
+                        final GameState game = eater.getGame();
                         eater.addDevoured(dinner);
                         game.getAction().sacrifice(dinner, null);
                         final HashMap<String, Object> runParams = new HashMap<String, Object>();
