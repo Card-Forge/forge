@@ -26,6 +26,7 @@ import forge.deck.Deck;
 import forge.deck.DeckgenUtil;
 import forge.deck.generate.GenerateThemeDeck;
 import forge.game.PlayerStartConditions;
+import forge.gui.toolbox.FSkin.SkinProp;
 import forge.quest.QuestController;
 import forge.quest.QuestEvent;
 import forge.quest.QuestEventChallenge;
@@ -41,15 +42,20 @@ public class FDeckChooser extends JPanel {
 
     private final JList  lstDecks  = new FList();
     private final FLabel btnRandom = new FLabel.ButtonBuilder().text("Random").fontSize(16).build();
-
+    private final FLabel btnChange = new FLabel.ButtonBuilder().text("Change player type").fontSize(16).build();
+    
     private final JScrollPane scrDecks =
             new FScrollPane(lstDecks, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
     private final FLabel lblDecklist = new FLabel.Builder().text("Double click any non-random deck for its decklist.").fontSize(12).build();
 
     private final JPanel pnlRadios = new JPanel(new MigLayout("insets 0, gap 0, wrap 2"));
+    
+    private final FLabel titleLabel;
+    private final String titleTextTemplate;
+    private final boolean canChoosePlayerType;
     private boolean isAi;
-
+    
     private final MouseAdapter madDecklist = new MouseAdapter() {
         @Override
         public void mouseClicked(final MouseEvent e) {
@@ -61,22 +67,24 @@ public class FDeckChooser extends JPanel {
         }
     };
 
-    public FDeckChooser(String titleText, boolean forAi) {
+    
+    public FDeckChooser(final String titleText, boolean forAi, boolean canSwitchType) {
         setOpaque(false);
         isAi = forAi;
+        titleTextTemplate = titleText;
+        canChoosePlayerType = canSwitchType;
+        titleLabel = new FLabel.Builder().text(titleText).fontStyle(Font.BOLD).fontSize(16).build();
+        if( canChoosePlayerType )
+            updateTitle();
+    }
+    
+    private void updateTitle() {
+        String title = canChoosePlayerType ? String.format(titleTextTemplate, isAi ? "AI" : "player's" ) : titleTextTemplate;
+        titleLabel.setText(title);
+    }
 
-        // Radio button group
-        final String strRadioConstraints = "h 28px!";
-        JXButtonPanel grpRadios = new JXButtonPanel();
-        grpRadios.add(radCustom, strRadioConstraints);
-        grpRadios.add(radQuests, strRadioConstraints);
-        grpRadios.add(radColors, strRadioConstraints);
-        grpRadios.add(radThemes, strRadioConstraints);
-
-        pnlRadios.setOpaque(false);
-        pnlRadios.add(new FLabel.Builder().text(titleText).fontStyle(Font.BOLD).fontSize(16).build(), "sx 2");
-        pnlRadios.add(grpRadios, "pushx, growx");
-        pnlRadios.add(btnRandom, "w 160px!, h 30px!, gap 10px 0 0 0, ax center, ay bottom");
+    public FDeckChooser(String titleText, boolean forAi) {
+        this(titleText, forAi, false);
     }
 
     private void _listen(final JRadioButton btn, final Runnable onSelect) {
@@ -89,6 +97,27 @@ public class FDeckChooser extends JPanel {
     }
     
     public void initialize() {
+        // Radio button group
+        final String strRadioConstraints = "h 28px!";
+        JXButtonPanel grpRadios = new JXButtonPanel();
+        grpRadios.add(radCustom, strRadioConstraints);
+        grpRadios.add(radQuests, strRadioConstraints);
+        grpRadios.add(radColors, strRadioConstraints);
+        grpRadios.add(radThemes, strRadioConstraints);
+
+        pnlRadios.setOpaque(false);
+        pnlRadios.add(titleLabel, canChoosePlayerType ? "split 2, sx 2, pushx, growx, h 28px!" : "sx 2");
+        if(canChoosePlayerType) {
+            //titleLabel.setHoverable(true);
+            titleLabel.setOpaque(true);
+            titleLabel.setSelected(true);
+            //titleLabel.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME));
+            //titleLabel.setBorder(null);
+            pnlRadios.add(btnChange, "w 180px!, h 28px!, gap 10px 0 0 5px, ax right");
+        }
+        pnlRadios.add(grpRadios, "pushx, growx");
+        pnlRadios.add(btnRandom, "w 180px!, h 30px!, gap 10px 0 0 0, ax center, ay bottom");
+        
         // Radio button event handling
         _listen(getRadColors(), new Runnable() { @Override public void run() { updateColors();      } });
         _listen(getRadThemes(), new Runnable() { @Override public void run() { updateThemes();      } });
@@ -97,6 +126,10 @@ public class FDeckChooser extends JPanel {
 
         // First run: colors
         getRadColors().setSelected(true);
+        
+        btnChange.setCommand(new Command() {
+            @Override public void run() { isAi = !isAi; updateTitle(); } });
+
     }
 
 
@@ -117,6 +150,7 @@ public class FDeckChooser extends JPanel {
         lst.removeMouseListener(madDecklist);
         lst.addMouseListener(madDecklist);
 
+        getBtnRandom().setText("Random colors");
         getBtnRandom().setCommand(new Command() {
             @Override public void run() { lst.setSelectedIndices(DeckgenUtil.randomSelectColors(8)); } });
 
@@ -139,6 +173,7 @@ public class FDeckChooser extends JPanel {
         lst.setName(DeckgenUtil.DeckTypes.THEMES.toString());
         lst.removeMouseListener(madDecklist);
 
+        getBtnRandom().setText("Random deck");
         getBtnRandom().setCommand(new Command() {
             @Override public void run() { DeckgenUtil.randomSelect(lst); } });
 
@@ -160,6 +195,7 @@ public class FDeckChooser extends JPanel {
         lst.removeMouseListener(madDecklist);
         lst.addMouseListener(madDecklist);
 
+        getBtnRandom().setText("Random deck");
         getBtnRandom().setCommand(new Command() {
             @Override public void run() { DeckgenUtil.randomSelect(lst); } });
 
@@ -188,6 +224,7 @@ public class FDeckChooser extends JPanel {
         lst.removeMouseListener(madDecklist);
         lst.addMouseListener(madDecklist);
 
+        getBtnRandom().setText("Random event");
         getBtnRandom().setCommand(new Command() {
             @Override public void run() { DeckgenUtil.randomSelect(lst); } });
 
@@ -227,6 +264,10 @@ public class FDeckChooser extends JPanel {
         return PlayerStartConditions.fromDeck(deck);
     }
 
+
+    public final boolean isAi() {
+        return isAi;
+    }
 
     public void populate() {
         this.setLayout(new MigLayout("insets 0, gap 0, flowy, ax right"));

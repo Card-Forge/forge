@@ -42,8 +42,8 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
     private final JCheckBox cbArtifacts = new FCheckBox("Remove Artifacts");
     private final JCheckBox cbRemoveSmall = new FCheckBox("Remove Small Creatures");
 
-    private final FDeckChooser dcLeft = new FDeckChooser("Select AI deck:", true);
-    private final FDeckChooser dcRight = new FDeckChooser("Select your deck:", false);
+    private final FDeckChooser dcLeft = new FDeckChooser("Select %s deck:", true, true);
+    private final FDeckChooser dcRight = new FDeckChooser("Select %s deck:", false, true);
     
 
     private VSubmenuConstructed() {
@@ -140,10 +140,10 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
 
     /** @return {@link javax.swing.JCheckBox} */
     public boolean isLeftPlayerAi() {
-        return true;
+        return dcLeft.isAi();
     }
     public boolean isRightPlayerAi() {
-        return false;
+        return dcRight.isAi();
     }
 
     
