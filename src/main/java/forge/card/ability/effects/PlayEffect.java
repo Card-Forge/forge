@@ -228,15 +228,15 @@ public class PlayEffect extends SpellAbilityEffect {
             SpellAbility tgtSA = null;
             // only one mode can be used
             tgtSA = sa.getActivatingPlayer().getController().getAbilityToPlay(sas);
+            boolean noManaCost = sa.hasParam("WithoutManaCost");
+            tgtSA = noManaCost ? tgtSA.copyWithNoManaCost() : tgtSA;
 
             if (tgtSA.getTarget() != null && !optional) {
                 tgtSA.getTarget().setMandatory(true);
             }
 
-            boolean noManaCost = sa.hasParam("WithoutManaCost");
             if (controller.isHuman()) {
-                SpellAbility newSA = noManaCost ? tgtSA.copyWithNoManaCost() : tgtSA;
-                HumanPlay.playSpellAbility(activator, newSA);
+                HumanPlay.playSpellAbility(activator, tgtSA);
             } else {
                 if (tgtSA instanceof Spell) { // Isn't it ALWAYS a spell?
                     Spell spell = (Spell) tgtSA;
