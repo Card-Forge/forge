@@ -31,8 +31,6 @@ import forge.game.phase.CombatUtil;
 import forge.game.player.Player;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
-import forge.gui.framework.SDisplayUtil;
-import forge.gui.match.views.VMessage;
 import forge.util.MyObservable;
 import forge.view.ButtonUtil;
 
@@ -109,7 +107,7 @@ public class InputAttack extends InputBase {
         if(defenders.contains(selected))
             setCurrentDefender(selected);
         else
-            SDisplayUtil.remind(VMessage.SINGLETON_INSTANCE); // cannot attack that player
+            flashIncorrectAction(); // cannot attack that player
     }
     
     /** {@inheritDoc} */
@@ -142,7 +140,7 @@ public class InputAttack extends InputBase {
             showCombat();
         }
         else {
-            SDisplayUtil.remind(VMessage.SINGLETON_INSTANCE);
+            flashIncorrectAction();
         }
     } // selectCard()
 

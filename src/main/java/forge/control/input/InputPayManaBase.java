@@ -18,8 +18,6 @@ import forge.game.GameState;
 import forge.game.player.HumanPlay;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
-import forge.gui.framework.SDisplayUtil;
-import forge.gui.match.views.VMessage;
 
 /** 
  * TODO: Write javadoc for this type.
@@ -48,7 +46,7 @@ public abstract class InputPayManaBase extends InputSyncronizedBase implements I
     @Override
     protected void onCardSelected(Card card) {
         if (card.getManaAbility().isEmpty() || card.isInZone(ZoneType.Hand)) {
-            SDisplayUtil.remind(VMessage.SINGLETON_INSTANCE);
+            flashIncorrectAction();
             return;
         }
         // only tap card if the mana is needed

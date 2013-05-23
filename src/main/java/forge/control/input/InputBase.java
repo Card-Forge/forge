@@ -20,7 +20,9 @@ package forge.control.input;
 import forge.Card;
 import forge.FThreads;
 import forge.game.player.Player;
+import forge.gui.framework.SDisplayUtil;
 import forge.gui.match.CMatchUI;
+import forge.gui.match.views.VMessage;
 
 /**
  * <p>
@@ -75,5 +77,10 @@ public abstract class InputBase implements java.io.Serializable, Input {
             player.getGame().getInputQueue().LockAndInvokeGameAction(pass);
         else 
             pass.run();
+    }
+    
+    
+    protected final void flashIncorrectAction() {
+        SDisplayUtil.remind(VMessage.SINGLETON_INSTANCE);
     }
 }

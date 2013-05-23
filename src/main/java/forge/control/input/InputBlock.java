@@ -27,8 +27,6 @@ import forge.game.phase.CombatUtil;
 import forge.game.player.Player;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
-import forge.gui.framework.SDisplayUtil;
-import forge.gui.match.views.VMessage;
 import forge.view.ButtonUtil;
 
 /**
@@ -139,7 +137,7 @@ public class InputBlock extends InputBase {
         }
 
         if (reminder) {
-            SDisplayUtil.remind(VMessage.SINGLETON_INSTANCE);
+            flashIncorrectAction();
         }
 
         this.showMessage();

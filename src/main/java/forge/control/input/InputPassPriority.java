@@ -23,8 +23,6 @@ import forge.game.phase.PhaseHandler;
 import forge.game.player.HumanPlay;
 import forge.game.player.Player;
 import forge.gui.GuiDisplayUtil;
-import forge.gui.framework.SDisplayUtil;
-import forge.gui.match.views.VMessage;
 import forge.view.ButtonUtil;
 
 /**
@@ -92,7 +90,7 @@ public class InputPassPriority extends InputBase {
             player.getGame().getInputQueue().LockAndInvokeGameAction(execAbility);
         }
         else {
-            SDisplayUtil.remind(VMessage.SINGLETON_INSTANCE);
+            flashIncorrectAction();
         }
     } // selectCard()
 }

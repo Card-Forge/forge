@@ -25,8 +25,6 @@ import forge.game.GameState;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiDialog;
-import forge.gui.framework.SDisplayUtil;
-import forge.gui.match.views.VMessage;
 import forge.util.Lang;
 import forge.view.ButtonUtil;
  /**
@@ -104,7 +102,7 @@ public class InputConfirmMulligan extends InputSyncronizedBase {
         boolean isSerumPowder = c0.getName().equals("Serum Powder");
         boolean isLegalChoice = fromHand && (isCommander || isSerumPowder);
         if ( !isLegalChoice ) {
-            SDisplayUtil.remind(VMessage.SINGLETON_INSTANCE);
+            flashIncorrectAction();
             return;
         }
         
