@@ -293,7 +293,11 @@ public class ManaPool {
      * @return a int.
      */
     public final int totalMana() {
-        return this.floatingMana.size();
+        int total = 0;
+        for (byte i : MagicColor.WUBRG) {
+            total += this.getAmountOfColor(i);
+        }
+        return total;
     }
 
     /**
