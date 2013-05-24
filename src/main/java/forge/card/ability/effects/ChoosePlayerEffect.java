@@ -60,7 +60,8 @@ public class ChoosePlayerEffect extends SpellAbilityEffect {
                     } else if ("Pump".equals(sa.getParam("AILogic"))) {
                         chosen = choices.contains(p) ? p : choices.get(0);
                     } else {
-                        chosen = p;
+                        System.out.println("Default player choice logic.");
+                        chosen = choices.contains(p) ? p : choices.get(0);
                     }
                 }
 

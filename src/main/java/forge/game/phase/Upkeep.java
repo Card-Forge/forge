@@ -91,7 +91,7 @@ public class Upkeep extends Phase {
 
         Upkeep.upkeepTheAbyss(game);
         Upkeep.upkeepDropOfHoney(game);
-        Upkeep.upkeepDemonicHordes(game);
+        //Upkeep.upkeepDemonicHordes(game);
         Upkeep.upkeepTangleWire(game);
 
         Upkeep.upkeepOathOfDruids(game);
