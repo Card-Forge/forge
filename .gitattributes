@@ -8277,6 +8277,7 @@ res/cardsfolder/p/psychotic_haze.txt svneol=native#text/plain
 res/cardsfolder/p/psychotrope_thallid.txt svneol=native#text/plain
 res/cardsfolder/p/pteron_ghost.txt svneol=native#text/plain
 res/cardsfolder/p/public_execution.txt -text
+res/cardsfolder/p/pucas_mischief.txt -text
 res/cardsfolder/p/puffer_extract.txt svneol=native#text/plain
 res/cardsfolder/p/pull_from_eternity.txt -text
 res/cardsfolder/p/pull_under.txt svneol=native#text/plain
@@ -10227,6 +10228,7 @@ res/cardsfolder/s/sparring_collar.txt -text
 res/cardsfolder/s/sparring_golem.txt svneol=native#text/plain
 res/cardsfolder/s/spatial_merging.txt -text
 res/cardsfolder/s/spawn_of_rix_maadi.txt -text
+res/cardsfolder/s/spawnbroker.txt -text
 res/cardsfolder/s/spawning_breath.txt svneol=native#text/plain
 res/cardsfolder/s/spawning_pit.txt svneol=native#text/plain
 res/cardsfolder/s/spawning_pool.txt svneol=native#text/plain

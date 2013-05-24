@@ -65,6 +65,7 @@ public class Target {
     private boolean singleTarget = false;
     private boolean randomTarget = false;
     private String definedController = null;
+    private String relatedProperty = null;
 
     // How many can be targeted?
     private String minTargets;
@@ -107,7 +108,9 @@ public class Target {
         this.sameController = target.isSameController();
         this.withoutSameCreatureType = target.isWithoutSameCreatureType();
         this.definedController = target.getDefinedController();
+        this.relatedProperty = target.getRelatedProperty();
         this.singleTarget = target.isSingleTarget();
+        this.randomTarget = target.isRandomTarget();
         this.choice = target.getTargetChoices();
     }
 
@@ -887,6 +890,20 @@ public class Target {
      */
     public void setDefinedController(String defined) {
         this.definedController = defined;
+    }
+    
+    /**
+     * @return the relatedProperty
+     */
+    public String getRelatedProperty() {
+        return relatedProperty;
+    }
+
+    /**
+     * @param related the relatedProperty to set
+     */
+    public void setRelatedProperty(String related) {
+        this.relatedProperty = related;
     }
 
     /**

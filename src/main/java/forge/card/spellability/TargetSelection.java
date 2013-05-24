@@ -183,7 +183,35 @@ public class TargetSelection {
                 });
             }
         }
-
+        // If second target has properties related to the first
+        if (tgt.getRelatedProperty() != null && !targetedObjects.isEmpty()) {
+            final List<Card> list = new ArrayList<Card>();
+            final String related = tgt.getRelatedProperty();
+            for (final Object o : targetedObjects) {
+                if (o instanceof Card) {
+                    list.add((Card) o);
+                }
+            }
+            if (!list.isEmpty()) {
+                final Card card = list.get(0);
+                if ("LEPower".equals(related)) {
+                    choices = CardLists.filter(choices, new Predicate<Card>() {
+                        @Override
+                        public boolean apply(final Card c) {
+                            return c.getCurrentPower() <= card.getCurrentPower();
+                        }
+                    });
+                } 
+                if ("LECMC".equals(related)) {
+                    choices = CardLists.filter(choices, new Predicate<Card>() {
+                        @Override
+                        public boolean apply(final Card c) {
+                            return c.getCMC() <= card.getCMC();
+                        }
+                    });
+                }
+            }
+        }
         // If all cards must be from the same zone
         if (tgt.isSingleZone() && !targeted.isEmpty()) {
             choices = CardLists.filterControlledBy(choices, targeted.get(0).getController());

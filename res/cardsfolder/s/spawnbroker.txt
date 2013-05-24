@@ -1,0 +1,11 @@
+Name:Spawnbroker
+ManaCost:2 U
+Types:Creature Human Wizard
+PT:1/1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ TrigExchange | TriggerDescription$ When CARDNAME enters the battlefield, you may exchange control of target creature you control and target creature with power less than or equal to that creature's power an opponent controls.
+SVar:TrigExchange:AB$ Pump | Cost$ 0 | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | SubAbility$ DBExchange
+SVar:DBExchange:DB$ ExchangeControl | Defined$ ParentTarget | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls with less or equal power | TargetsWithRelatedProperty$ LEPower
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/spawnbroker.jpg
+Oracle:When Spawnbroker enters the battlefield, you may exchange control of target creature you control and target creature with power less than or equal to that creature's power an opponent controls.
+SetInfo:RAV Rare
