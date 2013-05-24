@@ -61,9 +61,9 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
                 cards.addAll(p.getCardsIn(origin));
             }
         }
-        if (sa.getActivatingPlayer().isHuman() && origin.contains(ZoneType.Library) 
+        if (sa.getActivatingPlayer().isHuman() && origin.contains(ZoneType.Library)
                 && sa.hasParam("Search")) {
-            GuiChoose.oneOrNone("Looking at the Library", 
+            GuiChoose.oneOrNone("Looking at the Library",
                     CardLists.getValidCards(cards, "Card.inZoneLibrary", sa.getActivatingPlayer(), sa.getSourceCard()));
         }
         cards = AbilityUtils.filterListByType(cards, sa.getParam("ChangeType"), sa);
@@ -79,9 +79,8 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
 
         final int libraryPos = sa.hasParam("LibraryPosition") ? Integer.parseInt(sa.getParam("LibraryPosition")) : 0;
 
-        if (sa.getActivatingPlayer().isHuman() && destination.equals(ZoneType.Library) && !sa.hasParam("Shuffle")
-                && cards.size() >= 2 && !random) {
-            cards = GuiChoose.order("Choose order of cards to put into the library", "Put first", 0, cards, null, null);
+        if (destination.equals(ZoneType.Library) && !sa.hasParam("Shuffle") && cards.size() >= 2 && !random) {
+            cards = sa.getActivatingPlayer().getController().orderMoveToZoneList(cards, destination);
         }
 
         if (destination.equals(ZoneType.Library) && random) {

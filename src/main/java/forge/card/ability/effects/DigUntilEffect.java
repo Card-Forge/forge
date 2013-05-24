@@ -134,7 +134,6 @@ public class DigUntilEffect extends SpellAbilityEffect {
                     // Allow ordering of found cards
                     if ((foundDest.isKnown()) && found.size() >= 2) {
                         found = p.getController().orderMoveToZoneList(found, foundDest);
-                        // should possibly use host.getController().getController()... for these instead of p.getController?
                     }
 
                     final Iterator<Card> itr = found.iterator();
