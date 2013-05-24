@@ -92,7 +92,7 @@ public class RepeatEachEffect extends SpellAbilityEffect {
         if (sa.hasParam("RepeatCounters")) {
             Card target = sa.getTargetCard();
             if (target == null) {
-                target = AbilityUtils.getDefinedCards(sa.getSourceCard(), sa.getParam("Defined"), sa).get(0);
+                target = AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa).get(0);
             }
             Set<CounterType> types = new HashSet<CounterType>(target.getCounters().keySet());
             for (CounterType type : types) {

@@ -1,0 +1,12 @@
+Name:Reins of Power
+ManaCost:2 U U
+Types:Instant
+A:SP$ UntapAll | Cost$ 2 U U | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | ValidCards$ Creature | RememberTargets$ True | RememberUntapped$ True | SubAbility$ DBUnTapYours | SpellDescription$ Untap all creatures you control and all creatures target opponent controls. You and that opponent each gain control of all creatures the other controls until end of turn. Those creatures gain haste until end of turn.
+SVar:DBUnTapYours:DB$ UntapAll | ValidCards$ Creature.YouCtrl | RememberUntapped$ True | SubAbility$ DBGainCtrl
+SVar:DBGainCtrl:DB$ GainControl | AllValid$ Creature.IsRemembered+RememberedPlayerCtrl | AddKWs$ Haste | NewController$ You | LoseControl$ EOT | ForgetControlled$ True | StackDescription$ None | SubAbility$ DBGainCtrlOpp
+SVar:DBGainCtrlOpp:DB$ GainControl | AllValid$ Creature.IsRemembered+YouCtrl | AddKWs$ Haste | NewController$ Player.IsRemembered | LoseControl$ EOT | StackDescription$ None | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/reins_of_power.jpg
+Oracle:Untap all creatures you control and all creatures target opponent controls. You and that opponent each gain control of all creatures the other controls until end of turn. Those creatures gain haste until end of turn.
+SetInfo:COM Rare
+SetInfo:STH Rare

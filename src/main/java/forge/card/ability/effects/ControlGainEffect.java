@@ -80,6 +80,8 @@ public class ControlGainEffect extends SpellAbilityEffect {
         final boolean bUntap = sa.hasParam("Untap");
         final boolean bTapOnLose = sa.hasParam("TapOnLose");
         final boolean bNoRegen = sa.hasParam("NoRegen");
+        final boolean remember = sa.hasParam("RememberControlled");
+        final boolean forget = sa.hasParam("ForgetControlled");
         final List<String> destroyOn = sa.hasParam("DestroyTgt") ? Arrays.asList(sa.getParam("DestroyTgt").split(",")) : null;
         final List<String> kws = sa.hasParam("AddKWs") ? Arrays.asList(sa.getParam("AddKWs").split(" & ")) : null;
         final List<String> lose = sa.hasParam("LoseControl") ? Arrays.asList(sa.getParam("LoseControl").split(",")) : null;
@@ -140,6 +142,14 @@ public class ControlGainEffect extends SpellAbilityEffect {
                 for (final String kw : kws) {
                     tgtC.addExtrinsicKeyword(kw);
                 }
+            }
+
+            if (remember && !sa.getSourceCard().getRemembered().contains(tgtC)) {
+                sa.getSourceCard().addRemembered(tgtC);
+            }
+
+            if (forget && sa.getSourceCard().getRemembered().contains(tgtC)) {
+                sa.getSourceCard().removeRemembered(tgtC);
             }
 
             if (lose != null) {
