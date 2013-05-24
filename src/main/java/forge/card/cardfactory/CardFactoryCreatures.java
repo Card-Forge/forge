@@ -66,9 +66,11 @@ public class CardFactoryCreatures {
      */
     public static final class InputSelectCardsForDreadnought extends InputSelectCards {
         private static final long serialVersionUID = 2698036349873486664L;
-
-        public InputSelectCardsForDreadnought(int min, int max) {
+        protected final Player player;
+        
+        public InputSelectCardsForDreadnought(Player p, int min, int max) {
             super(min, max);
+            player = p;
         }
 
         @Override
@@ -342,7 +344,7 @@ public class CardFactoryCreatures {
             public void resolve() {
                 final GameState game = player.getGame();
                 if (player.isHuman()) {
-                    final InputSelectCards target = new InputSelectCardsForDreadnought(0, Integer.MAX_VALUE); // Input
+                    final InputSelectCards target = new InputSelectCardsForDreadnought(player, 0, Integer.MAX_VALUE); // Input
                     String toDisplay = cardName + " - Select any number of creatures to sacrifice.\n" +
                             "Currently, (%d) selected with a total power of: %d\n\n" + "Click OK when Done.";
                     target.setMessage(toDisplay);
