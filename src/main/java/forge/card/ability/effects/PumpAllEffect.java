@@ -56,8 +56,10 @@ public class PumpAllEffect extends SpellAbilityEffect {
             for (String kw : hiddenkws) {
                 tgtC.addHiddenExtrinsicKeyword(kw);
             }
-            if (suspend) {
+            if (suspend && !tgtC.hasSuspend()) {
                 tgtC.setSuspend(true);
+                CardFactoryUtil.addSuspendUpkeepTrigger(tgtC);
+                CardFactoryUtil.addSuspendPlayTrigger(tgtC);
             }
 
             if (sa.hasParam("RememberAllPumped")) {

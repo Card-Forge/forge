@@ -10,6 +10,7 @@ import forge.Command;
 import forge.GameEntity;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
+import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.game.GameState;
@@ -35,8 +36,10 @@ public class PumpEffect extends SpellAbilityEffect {
                 applyTo.addHiddenExtrinsicKeyword(kw);
             } else {
                 kws.add(kw);
-                if (kw.equals("Suspend")) {
+                if (kw.equals("Suspend") && !applyTo.hasSuspend()) {
                     applyTo.setSuspend(true);
+                    CardFactoryUtil.addSuspendUpkeepTrigger(applyTo);
+                    CardFactoryUtil.addSuspendPlayTrigger(applyTo);
                 }
             }
         }

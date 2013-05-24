@@ -386,7 +386,7 @@ public class CardFactoryUtil {
 
     /**
      * <p>
-     * abilitySuspend.
+     * abilitySuspendStatic.
      * </p>
      * 
      * @param sourceCard
@@ -397,7 +397,7 @@ public class CardFactoryUtil {
      *            a int.
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
-    public static SpellAbility abilitySuspend(final Card sourceCard, final String suspendCost, final String timeCounters) {
+    public static SpellAbility abilitySuspendStatic(final Card sourceCard, final String suspendCost, final String timeCounters) {
         // be careful with Suspend ability, it will not hit the stack
         Cost cost = new Cost(suspendCost, true);
         final SpellAbility suspend = new AbilityStatic(sourceCard, cost, null) {
@@ -449,7 +449,47 @@ public class CardFactoryUtil {
 
         suspend.getRestrictions().setZone(ZoneType.Hand);
         return suspend;
-    } // abilitySuspend()
+    } // abilitySuspendStatic()
+
+    public static void addSuspendUpkeepTrigger(Card card) {
+        //upkeep trigger
+        StringBuilder upkeepTrig = new StringBuilder();
+        UUID triggerSvar = UUID.randomUUID();
+        UUID removeCounterSvar = UUID.randomUUID();
+
+        upkeepTrig.append("Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Exile | CheckSVar$ ");
+        upkeepTrig.append(triggerSvar);
+        upkeepTrig.append(" | SVarCompare$ GE1 | References$ ");
+        upkeepTrig.append(triggerSvar);
+        upkeepTrig.append(" | Execute$ ");
+        upkeepTrig.append(removeCounterSvar);
+        upkeepTrig.append(" | TriggerDescription$ At the beginning of your upkeep, if this card is suspended, remove a time counter from it");
+
+        card.setSVar(removeCounterSvar.toString(), "DB$ RemoveCounter | Defined$ Self | CounterType$ TIME | CounterNum$ 1");
+        card.setSVar(triggerSvar.toString(),"Count$ValidExile Card.Self+suspended");
+
+        final Trigger parsedUpkeepTrig = TriggerHandler.parseTrigger(upkeepTrig.toString(), card, true);
+        card.addTrigger(parsedUpkeepTrig);
+    }
+
+    public static void addSuspendPlayTrigger(Card card) {
+        //play trigger
+        StringBuilder playTrig = new StringBuilder();
+        UUID playSvar = UUID.randomUUID();
+
+        playTrig.append("Mode$ CounterRemoved | TriggerZones$ Exile | ValidCard$ Card.Self | NewCounterAmount$ 0 | Secondary$ True | Execute$ ");
+        playTrig.append(playSvar.toString());
+        playTrig.append(" | TriggerDescription$ When the last time counter is removed from this card, if it's exiled, play it without paying its mana cost if able.  ");
+        playTrig.append("If you can't, it remains exiled. If you cast a creature spell this way, it gains haste until you lose control of the spell or the permanent it becomes.");
+
+        StringBuilder playWithoutCost = new StringBuilder();
+        playWithoutCost.append("DB$ Play | Defined$ Self | WithoutManaCost$ True | SuspendCast$ True");
+
+        final Trigger parsedPlayTrigger = TriggerHandler.parseTrigger(playTrig.toString(), card, true);
+        card.addTrigger(parsedPlayTrigger);
+
+        card.setSVar(playSvar.toString(),playWithoutCost.toString());
+    }
 
     /**
      * <p>
@@ -2342,46 +2382,10 @@ public class CardFactoryUtil {
 
                 final String timeCounters = k[1];
                 final String cost = k[2];
-                card.addSpellAbility(abilitySuspend(card, cost, timeCounters));
+                card.addSpellAbility(abilitySuspendStatic(card, cost, timeCounters));
+                addSuspendUpkeepTrigger(card);
+                addSuspendPlayTrigger(card);
             }
-
-            //upkeep trigger
-            StringBuilder upkeepTrig = new StringBuilder();
-            UUID triggerSvar = UUID.randomUUID();
-            UUID removeCounterSvar = UUID.randomUUID();
-
-            upkeepTrig.append("Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Exile | CheckSVar$ ");
-            upkeepTrig.append(triggerSvar);
-            upkeepTrig.append(" | SVarCompare$ GE1 | References$ ");
-            upkeepTrig.append(triggerSvar);
-            upkeepTrig.append(" | Execute$ ");
-            upkeepTrig.append(removeCounterSvar);
-            upkeepTrig.append(" | TriggerDescription$ At the beginning of your upkeep, if this card is suspended, remove a time counter from it");
-
-            card.setSVar(removeCounterSvar.toString(), "DB$ RemoveCounter | Defined$ Self | CounterType$ TIME | CounterNum$ 1");
-            card.setSVar(triggerSvar.toString(),"Count$ValidExile Card.Self+suspended");
-
-            final Trigger parsedUpkeepTrig = TriggerHandler.parseTrigger(upkeepTrig.toString(), card, true);
-            card.addTrigger(parsedUpkeepTrig);
-
-            //play trigger
-            StringBuilder playTrig = new StringBuilder();
-            UUID playSvar = UUID.randomUUID();
-
-            playTrig.append("Mode$ CounterRemoved | TriggerZones$ Exile | ValidCard$ Card.Self | NewCounterAmount$ 0 | Secondary$ True | Execute$ ");
-            playTrig.append(playSvar.toString());
-            playTrig.append(" | TriggerDescription$ When the last time counter is removed from this card, if it's exiled, play it without paying its mana cost if able.  ");
-            playTrig.append("If you can't, it remains exiled. If you cast a creature spell this way, it gains haste until you lose control of the spell or the permanent it becomes.");
-
-            StringBuilder playWithoutCost = new StringBuilder();
-            playWithoutCost.append("DB$ Play | Defined$ Self | WithoutManaCost$ True | SuspendCast$ True");
-
-            final Trigger parsedPlayTrigger = TriggerHandler.parseTrigger(playTrig.toString(), card, true);
-            card.addTrigger(parsedPlayTrigger);
-
-            card.setSVar(playSvar.toString(),playWithoutCost.toString());
-
-
         } // Suspend
 
         if (hasKeyword(card, "Fading") != -1) {
