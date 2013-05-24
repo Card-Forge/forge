@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=The Great Gatsby 1
+Title=The Great Gatsby
+Difficulty=easy
+Description=WUBRG Gate deck
+Icon=The Great Gatsby.jpg
+Deck Type=constructed
+[main]
+3 Amulet of Vigor
+1 Armory Guard
+1 Azorius Guildgate
+1 Boros Guildgate
+1 Crackling Perimeter
+2 Dimir Guildgate
+4 Gatecreeper Vine
+4 Gateway Shade
+4 Golgari Guildgate
+3 Gruul Guildgate
+2 Hold the Gates
+1 Izzet Guildgate
+4 Maze's End
+1 Ogre Jailbreaker
+4 Opal Lake Gatekeepers
+2 Orzhov Guildgate
+2 Rakdos Guildgate
+1 Root Maze
+4 Saruli Gatekeepers
+2 Selesnya Guildgate
+2 Simic Guildgate
+4 Smelt-Ward Gatekeepers
+3 Sunspire Gatekeepers
+3 Ubul Sar Gatekeepers
+1 Way of the Thief
+[sideboard]
