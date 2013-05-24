@@ -1853,7 +1853,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         final int adjCheck = this.maxLandsToPlay + adjMax;
         // System.out.println("Max lands for player " + this.getName() + ": " + adjCheck);
 
-        return this.numLandsPlayed < adjCheck || this.isCardInPlay("Fastbond");
+        return this.numLandsPlayed < adjCheck || this.isCardInPlay("Fastbond") || this.isCardInCommand("Naya");
     }
 
     /**

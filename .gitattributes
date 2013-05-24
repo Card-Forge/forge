@@ -7250,6 +7250,7 @@ res/cardsfolder/n/natures_will.txt -text
 res/cardsfolder/n/natures_wrath.txt svneol=native#text/plain
 res/cardsfolder/n/nausea.txt svneol=native#text/plain
 res/cardsfolder/n/nav_squad_commandos.txt -text
+res/cardsfolder/n/naya.txt -text
 res/cardsfolder/n/naya_battlemage.txt svneol=native#text/plain
 res/cardsfolder/n/naya_charm.txt -text
 res/cardsfolder/n/naya_hushblade.txt svneol=native#text/plain
@@ -9177,6 +9178,7 @@ res/cardsfolder/s/sanctuary_cat.txt -text
 res/cardsfolder/s/sanctum_custodian.txt svneol=native#text/plain
 res/cardsfolder/s/sanctum_gargoyle.txt svneol=native#text/plain
 res/cardsfolder/s/sanctum_guardian.txt -text
+res/cardsfolder/s/sanctum_of_serra.txt -text
 res/cardsfolder/s/sanctum_plowbeast.txt svneol=native#text/plain
 res/cardsfolder/s/sand_golem.txt -text
 res/cardsfolder/s/sand_silos.txt svneol=native#text/plain
