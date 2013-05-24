@@ -22,6 +22,7 @@ import java.util.List;
 import forge.Card;
 import forge.card.MagicColor;
 import forge.card.spellability.SpellAbility;
+import forge.game.player.Player;
 
 /**
  * <p>
@@ -52,17 +53,26 @@ public class TriggerTapsForMana extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final boolean performTest(final java.util.Map<String, Object> runParams2) {
-        final Card tapper = (Card) runParams2.get("Card");
-        final SpellAbility manaAbility = (SpellAbility) runParams2.get("AbilityMana");
         
         //Check for tapping
-        if (manaAbility == null || manaAbility.getPayCosts() == null || !manaAbility.getPayCosts().hasTapCost()) {
-            return false;
+        if (!mapParams.containsKey("NoTapCheck")) {
+            final SpellAbility manaAbility = (SpellAbility) runParams2.get("AbilityMana");
+            if (manaAbility == null || manaAbility.getPayCosts() == null || !manaAbility.getPayCosts().hasTapCost()) {
+                return false;
+            }
         }
 
         if (this.mapParams.containsKey("ValidCard")) {
+            final Card tapper = (Card) runParams2.get("Card");
             if (!tapper.isValid(this.mapParams.get("ValidCard").split(","), this.getHostCard().getController(),
                     this.getHostCard())) {
+                return false;
+            }
+        }
+
+        if (this.mapParams.containsKey("Player")) {
+            final Player player = (Player) runParams2.get("Player");
+            if (!player.isValid(this.mapParams.get("Player").split(","), this.getHostCard().getController(), this.getHostCard())) {
                 return false;
             }
         }
