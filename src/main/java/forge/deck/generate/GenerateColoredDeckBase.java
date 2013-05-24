@@ -234,7 +234,7 @@ public abstract class GenerateColoredDeckBase {
 
         // start with all cards
         // remove cards that generated decks don't like
-        Predicate<CardRules> canPlay = forAi ? GenerateDeckUtil.HUMAN_CAN_PLAY : GenerateDeckUtil.AI_CAN_PLAY;
+        Predicate<CardRules> canPlay = forAi ? GenerateDeckUtil.AI_CAN_PLAY : GenerateDeckUtil.HUMAN_CAN_PLAY;
         Predicate<CardRules> hasColor = new GenerateDeckUtil.MatchColorIdentity(colors);
 
         if (!Singletons.getModel().getPreferences().getPrefBoolean(FPref.DECKGEN_ARTIFACTS)) {
