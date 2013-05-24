@@ -69,7 +69,7 @@ public class HumanPlay {
      */
     public static void playSpellAbility(Player p, Card c, SpellAbility ab) {
         if (ab == Ability.PLAY_LAND_SURROGATE)
-            p.playLand(c);
+            p.playLand(c, false);
         else {
             HumanPlay.playSpellAbility(p, ab);
         }

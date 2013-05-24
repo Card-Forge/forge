@@ -1786,9 +1786,9 @@ public class Player extends GameEntity implements Comparable<Player> {
      * @param land
      *            a {@link forge.Card} object.
      */
-    public final void playLand(final Card land) {
+    public final boolean playLand(final Card land, final boolean ignoreTiming) {
         FThreads.assertExecutedByEdt(false);
-        if (this.canPlayLand(land)) {
+        if (this.canPlayLand(land, ignoreTiming)) {
             land.setController(this, 0);
             game.getAction().moveTo(this.getZone(ZoneType.Battlefield), land);
             CardFactoryUtil.playLandEffects(land);
@@ -1808,9 +1808,12 @@ public class Player extends GameEntity implements Comparable<Player> {
             final HashMap<String, Object> runParams = new HashMap<String, Object>();
             runParams.put("Card", land);
             game.getTriggerHandler().runTrigger(TriggerType.LandPlayed, runParams, false);
+            game.getStack().unfreezeStack();
+            return true;
         }
 
         game.getStack().unfreezeStack();
+        return false;
     }
 
     /**
@@ -1820,9 +1823,19 @@ public class Player extends GameEntity implements Comparable<Player> {
      * 
      * @return a boolean.
      */
-    public final boolean canPlayLand(Card land) {
+    public final boolean canPlayLand(final Card land) {
+        return canPlayLand(land, false);
+    }
+    /**
+     * <p>
+     * canPlayLand.
+     * </p>
+     * 
+     * @return a boolean.
+     */
+    public final boolean canPlayLand(Card land, final boolean ignoreTiming) {
 
-        if (!this.canCastSorcery()) {
+        if (!ignoreTiming && !this.canCastSorcery()) {
             return false;
         }
 
