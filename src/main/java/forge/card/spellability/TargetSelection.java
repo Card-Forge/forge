@@ -198,7 +198,7 @@ public class TargetSelection {
                     choices = CardLists.filter(choices, new Predicate<Card>() {
                         @Override
                         public boolean apply(final Card c) {
-                            return c.getCurrentPower() <= card.getCurrentPower();
+                            return c.getNetAttack() <= card.getNetAttack();
                         }
                     });
                 } 
