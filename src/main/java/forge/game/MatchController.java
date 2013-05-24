@@ -193,8 +193,8 @@ public class MatchController {
 
         // The UI controls should use these game data as models
         CMatchUI.SINGLETON_INSTANCE.initMatch(game.getRegisteredPlayers(), humanLobbyPlayer);
-        CDock.SINGLETON_INSTANCE.setModel(game, localHuman);
-        CStack.SINGLETON_INSTANCE.setModel(game.getStack(), localHuman);
+        CDock.SINGLETON_INSTANCE.setModel(game, humanLobbyPlayer);
+        CStack.SINGLETON_INSTANCE.setModel(game.getStack(), humanLobbyPlayer);
         CLog.SINGLETON_INSTANCE.setModel(game.getGameLog());
         CCombat.SINGLETON_INSTANCE.setModel(game);
         CMessage.SINGLETON_INSTANCE.setModel(match);

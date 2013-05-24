@@ -135,7 +135,7 @@ public class PlayerStartConditions {
     
     public static PlayerStartConditions fromDeck(final Deck deck) {
         PlayerStartConditions start = new PlayerStartConditions(deck);
-        if( deck.has(DeckSection.Commander)) {
+        if( deck != null && deck.has(DeckSection.Commander)) {
             start.setStartingLife(40);
             start.addCardsInCommand(deck.get(DeckSection.Commander).toFlatList());
         }

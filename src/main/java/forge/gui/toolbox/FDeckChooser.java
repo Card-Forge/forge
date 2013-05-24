@@ -26,7 +26,6 @@ import forge.deck.Deck;
 import forge.deck.DeckgenUtil;
 import forge.deck.generate.GenerateThemeDeck;
 import forge.game.PlayerStartConditions;
-import forge.gui.toolbox.FSkin.SkinProp;
 import forge.quest.QuestController;
 import forge.quest.QuestEvent;
 import forge.quest.QuestEventChallenge;
@@ -113,7 +112,7 @@ public class FDeckChooser extends JPanel {
             titleLabel.setSelected(true);
             //titleLabel.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME));
             //titleLabel.setBorder(null);
-            pnlRadios.add(btnChange, "w 180px!, h 28px!, gap 10px 0 0 5px, ax right");
+            pnlRadios.add(btnChange, "w 180px!, h 28px!, gap 10px 0 0 4px, ax right");
         }
         pnlRadios.add(grpRadios, "pushx, growx");
         pnlRadios.add(btnRandom, "w 180px!, h 30px!, gap 10px 0 0 0, ax center, ay bottom");

@@ -37,6 +37,7 @@ import forge.game.GameState;
 import forge.game.phase.CombatUtil;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
+import forge.game.player.LobbyPlayer;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.SOverlayUtils;
@@ -63,22 +64,38 @@ public enum CDock implements ICDoc {
 
     private int arcState;
     private GameState game;
-    private Player player;
+    private LobbyPlayer player;
 
-    public void setModel(GameState game0, Player player0) {
+    public void setModel(GameState game0, LobbyPlayer player0) {
 
         game = game0;
         player = player0;
     }
 
+    private Player findAffectedPlayer() { 
+        // try current priority
+        Player currentPriority = game.getPhaseHandler().getPriorityPlayer();
+        if( currentPriority.getLobbyPlayer() == player ) return currentPriority;
+        
+        // otherwise find just any player, belonging to this lobbyplayer
+        for(Player p : game.getPlayers())
+            if(p.getLobbyPlayer() == player )
+                return p;
+        
+        return null;
+    }
 
     /** Concede game, bring up WinLose UI. */
     public void concede() {
         if (FOverlay.SINGLETON_INSTANCE.getPanel().isShowing()) {
             return;
         }
+        
+        Player p = findAffectedPlayer();
+        if( p == null ) return;
+        // if( c.isMindSlaved() ) return
 
-        player.concede();
+        p.concede();
         game.getAction().checkStateEffects();
     }
 
@@ -86,7 +103,10 @@ public enum CDock implements ICDoc {
      * End turn.
      */
     public void endTurn() {
-        player.getController().autoPassTo(PhaseType.CLEANUP);
+        Player p = findAffectedPlayer();
+
+        if( p != null ) 
+            p.getController().autoPassTo(PhaseType.CLEANUP);
     }
 
     private void revertLayout() {
@@ -137,7 +157,8 @@ public enum CDock implements ICDoc {
      * View deck list.
      */
     private void viewDeckList() {
-        showDeck(player.getGame().getMatch().getPlayers().get(0).getValue().getCurrentDeck());
+        
+        showDeck(game.getMatch().getPlayers().get(0).getValue().getCurrentDeck());
     }
 
     /**
@@ -179,10 +200,11 @@ public enum CDock implements ICDoc {
     public void alphaStrike() {
         final PhaseHandler ph = game.getPhaseHandler();
 
-        if (ph.is(PhaseType.COMBAT_DECLARE_ATTACKERS, player)) {
-            List<Player> defenders = player.getOpponents();
+        Player p = findAffectedPlayer();
+        if (ph.is(PhaseType.COMBAT_DECLARE_ATTACKERS, p)) { // ph.is(...) includes null check
+            List<Player> defenders = p.getOpponents();
             
-            for (Card c : CardLists.filter(player.getCardsIn(ZoneType.Battlefield), Presets.CREATURES)) {
+            for (Card c : CardLists.filter(p.getCardsIn(ZoneType.Battlefield), Presets.CREATURES)) {
                 if (c.isAttacking())
                     continue;
                 
@@ -238,8 +260,8 @@ public enum CDock implements ICDoc {
             deckList.append(s.getValue() + " x " + s.getKey() + nl);
         }
 
-        int rcMsg = -1138;
-        String ttl = "Human's Decklist";
+        
+        String ttl = "Decklist";
         if (dName != null) {
             ttl += " - " + dName;
         }
@@ -253,7 +275,7 @@ public enum CDock implements ICDoc {
 
         msg.append("Copy Decklist to Clipboard?");
 
-        rcMsg = JOptionPane.showConfirmDialog(null, msg, ttl, JOptionPane.OK_CANCEL_OPTION);
+        int rcMsg = JOptionPane.showConfirmDialog(null, msg, ttl, JOptionPane.OK_CANCEL_OPTION);
 
         if (rcMsg == JOptionPane.OK_OPTION) {
             final StringSelection ss = new StringSelection(deckList.toString());

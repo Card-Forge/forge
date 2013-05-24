@@ -34,7 +34,7 @@ import javax.swing.border.EmptyBorder;
 import net.miginfocom.swing.MigLayout;
 import forge.CardUtil;
 import forge.card.spellability.SpellAbilityStackInstance;
-import forge.game.player.Player;
+import forge.game.player.LobbyPlayer;
 import forge.game.player.PlayerController;
 import forge.game.zone.MagicStack;
 import forge.gui.framework.DragCell;
@@ -117,7 +117,7 @@ public enum VStack implements IVDoc<CStack> {
     /**
      * @param stack  
      * @param viewer */
-    public void updateStack(final MagicStack stack, final Player viewer) {
+    public void updateStack(final MagicStack stack, final LobbyPlayer viewer) {
         // No need to update this unless it's showing
         if (!parentCell.getSelected().equals(this)) { return; }
 
@@ -170,13 +170,13 @@ public enum VStack implements IVDoc<CStack> {
                 }
             });
             
-            if(spell.getSpellAbility().isOptionalTrigger() && spell.getSpellAbility().getActivatingPlayer() == viewer) {
+            if(spell.getSpellAbility().isOptionalTrigger() && spell.getSpellAbility().getActivatingPlayer().getLobbyPlayer() == viewer) {
                 tar.addMouseListener(new MouseAdapter() {
                     @Override
                     public void mouseClicked(MouseEvent e){
                         if (e.getButton() == MouseEvent.BUTTON3)
                         {
-                            otMenu.setStackInstance(spell, viewer);
+                            otMenu.setStackInstance(spell);
                             otMenu.show(e.getComponent(), e.getX(), e.getY());
                         }
                     }
@@ -273,9 +273,9 @@ public enum VStack implements IVDoc<CStack> {
             add(jmiAsk);
         }
         
-        public void setStackInstance(final SpellAbilityStackInstance SI, Player viewer)
+        public void setStackInstance(final SpellAbilityStackInstance SI)
         {
-            localPlayer = viewer == null ? null : viewer.getController();
+            localPlayer = SI.getSpellAbility().getActivatingPlayer().getController();
             
             triggerID = SI.getSpellAbility().getSourceTrigger();
             
