@@ -17,7 +17,10 @@
  */
 package forge.card.trigger;
 
+import java.util.List;
+
 import forge.Card;
+import forge.card.MagicColor;
 import forge.card.spellability.SpellAbility;
 
 /**
@@ -55,6 +58,20 @@ public class TriggerTapsForMana extends Trigger {
             if (!tapper.isValid(this.mapParams.get("ValidCard").split(","), this.getHostCard().getController(),
                     this.getHostCard())) {
                 return false;
+            }
+        }
+
+        if (this.mapParams.containsKey("Produced")) {
+            Object prod = runParams2.get("Produced");
+            if (prod == null || !(prod instanceof String)) {
+                return false;
+            }
+            String produced = (String) prod;
+            if ("ChosenColor".equals(mapParams.get("Produced"))) {
+                List<String> colors = this.getHostCard().getChosenColor();
+                if (colors.isEmpty() || !produced.contains(MagicColor.toShortString(colors.get(0)))) {
+                    return false;
+                }
             }
         }
 

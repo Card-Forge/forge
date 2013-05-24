@@ -1,0 +1,11 @@
+Name:Gauntlet of Power
+ManaCost:5
+Types:Artifact
+K:ETBReplacement:Other:ChooseColor
+SVar:ChooseColor:DB$ ChooseColor | Defined$ You | AILogic$ MostProminentInComputerDeck | SpellDescription$ As CARDNAME enters the battlefield, choose a color.
+S:Mode$ Continuous | Affected$ Creature.ChosenColor | AddPower$ 1 | AddToughness$ 1 | Description$ Creatures of the chosen color get +1/+1.
+T:Mode$ TapsForMana | ValidCard$ Land.Basic | Produced$ ChosenColor | Execute$ TrigMana | TriggerZones$ Battlefield | Static$ True | TriggerDescription$ Whenever a basic land is tapped for mana of the chosen color, its controller adds one mana of that color to his or her mana pool (in addition to the mana the land produces).
+SVar:TrigMana:AB$ Mana | Cost$ 0 | Produced$ Chosen | Amount$ 1 | Defined$ TriggeredPlayer
+SVar:Picture:http://www.wizards.com/global/images/magic/general/gauntlet_of_power.jpg
+Oracle:As Gauntlet of Power enters the battlefield, choose a color.\nCreatures of the chosen color get +1/+1.\nWhenever a basic land is tapped for mana of the chosen color, its controller adds one mana of that color to his or her mana pool . (in addition to the mana the land produces)
+SetInfo:TSP Rare
