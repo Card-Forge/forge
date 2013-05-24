@@ -31,6 +31,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.WindowConstants;
 
+import forge.Card;
 import forge.Singletons;
 import forge.control.KeyboardShortcuts.Shortcut;
 import forge.game.MatchController;
@@ -284,12 +285,6 @@ public enum FControl {
         if (children.length != 0) { children[0].setSize(display.getSize()); }
     }
 
-    /** @return {@link forge.game.player.Player} */
-    private Player localPlayer;
-    public Player getPlayer() {
-        return localPlayer;
-    }
-
     /**
      * TODO: Write javadoc for this method.
      * @return
@@ -301,13 +296,10 @@ public enum FControl {
         }
         return lobby;
     }
-
-    /**
-     * TODO: Write javadoc for this method.
-     * @param localHuman
-     */
-    public void setPlayer(Player localHuman) {
-        localPlayer = localHuman;
+    
+    public boolean mayShowCard(Card c) {
+        Player p = match.getCurrentGame().getPhaseHandler().getPriorityPlayer();
+        return c.canBeShownTo(p);
     }
 
     /**

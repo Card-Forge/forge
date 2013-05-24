@@ -41,6 +41,7 @@ import forge.CounterType;
 import forge.GameEntity;
 import forge.Singletons;
 import forge.card.CardEdition;
+import forge.control.FControl;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.toolbox.FLabel;
@@ -211,7 +212,7 @@ public class CardDetailPanel extends FPanel {
             return;
         }
             
-        final boolean canShowThis = card.canBeShownTo(Singletons.getControl().getPlayer());
+        final boolean canShowThis = FControl.SINGLETON_INSTANCE.mayShowCard(card);
         if (canShowThis) {
             if (card.getManaCost().isNoCost()) {
                 this.nameCostLabel.setText(card.getName());
@@ -488,7 +489,7 @@ public class CardDetailPanel extends FPanel {
 
             if (entity instanceof Card) {
                 final Card c = (Card) entity;
-                if (!c.canBeShownTo(Singletons.getControl().getPlayer())) {
+                if (!FControl.SINGLETON_INSTANCE.mayShowCard(c)) {
                     area.append("Morph (");
                     area.append(card.getUniqueNumber());
                     area.append(")");

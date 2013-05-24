@@ -58,7 +58,7 @@ public class LimitedWinLose extends ControlWinLose {
         super(view0, match);
         this.view = view0;
         gauntlet = Singletons.getModel().getGauntletMini();
-        this.wonMatch = match.isWonBy(Singletons.getControl().getPlayer().getLobbyPlayer());
+        this.wonMatch = match.isWonBy(Singletons.getControl().getLobby().getGuiPlayer());
     }
 
 
@@ -80,8 +80,7 @@ public class LimitedWinLose extends ControlWinLose {
         nextRound = false;
 
 
-
-        if (match.getLastGameOutcome().isWinner(Singletons.getControl().getPlayer().getLobbyPlayer())) {
+        if (match.getLastGameOutcome().isWinner(Singletons.getControl().getLobby().getGuiPlayer())) {
             gauntlet.addWin();
         } else {
             gauntlet.addLoss();

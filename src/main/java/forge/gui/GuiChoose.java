@@ -19,7 +19,7 @@ import javax.swing.event.ListSelectionListener;
 
 import forge.Card;
 import forge.FThreads;
-import forge.Singletons;
+import forge.control.FControl;
 import forge.gui.match.CMatchUI;
 import forge.item.InventoryItem;
 
@@ -120,7 +120,7 @@ public class GuiChoose {
                     public void valueChanged(final ListSelectionEvent ev) {
                         if (list.getSelectedValue() instanceof Card) {
                             Card card = (Card) list.getSelectedValue();
-                            if (card.isFaceDown() && card.canBeShownTo(Singletons.getControl().getPlayer())) {
+                            if (card.isFaceDown() && FControl.SINGLETON_INSTANCE.mayShowCard(card)) {
                                 CMatchUI.SINGLETON_INSTANCE.setCard(card, true);
                             } else {
                                 CMatchUI.SINGLETON_INSTANCE.setCard(card);

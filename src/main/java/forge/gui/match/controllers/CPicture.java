@@ -22,7 +22,7 @@ import java.awt.event.MouseEvent;
 import forge.Card;
 import forge.CardCharacteristicName;
 import forge.Command;
-import forge.Singletons;
+import forge.control.FControl;
 import forge.gui.framework.ICDoc;
 import forge.gui.match.views.VPicture;
 import forge.item.IPaperCard;
@@ -48,7 +48,7 @@ public enum CPicture implements ICDoc {
      *            &emsp; Card object
      */
     public void showCard(final Card c, boolean showFlipped) {
-        cameFaceDown = c.isFaceDown() && c.canBeShownTo(Singletons.getControl().getPlayer());
+        cameFaceDown = c.isFaceDown() && FControl.SINGLETON_INSTANCE.mayShowCard(c);
         canFlip = c.isDoubleFaced() || c.isFlipCard() || cameFaceDown;
         currentCard = c;
         flipped = canFlip && (c.getCurState() == CardCharacteristicName.Transformed ||

@@ -181,16 +181,6 @@ public class MatchController {
         GameState game = match.getCurrentGame();
         game.getEvents().register(Singletons.getControl().getSoundSystem());
         
-        Player localHuman = null;
-        for(Player p : game.getPlayers()) {
-            if ( p.getLobbyPlayer() != humanLobbyPlayer)
-                continue;
-            localHuman = p;
-            break;
-        }
-
-        FControl.SINGLETON_INSTANCE.setPlayer(localHuman);
-
         // The UI controls should use these game data as models
         CMatchUI.SINGLETON_INSTANCE.initMatch(game.getRegisteredPlayers(), humanLobbyPlayer);
         CDock.SINGLETON_INSTANCE.setModel(game, humanLobbyPlayer);

@@ -120,7 +120,7 @@ public final class GuiDisplayUtil {
 
     public static void devModeGenerateMana() {
         final Card dummy = new Card();
-        dummy.setOwner(getPlayer());
+        dummy.setOwner(getGame().getPhaseHandler().getPriorityPlayer());
         Map<String, String> produced = new HashMap<String, String>();
         produced.put("Produced", "W W W W W W W U U U U U U U B B B B B B B G G G G G G G R R R R R R R 7");
         final AbilityManaPart abMana = new AbilityManaPart(dummy, produced);
@@ -286,8 +286,8 @@ public final class GuiDisplayUtil {
         List<Card> humanDevExileSetup = new ArrayList<Card>();
         List<Card> computerDevExileSetup = new ArrayList<Card>();
 
-        final Player human = getPlayer();
-        final Player ai = human.getOpponents().get(0);
+        final Player human = getGame().getPlayers().get(0);
+        final Player ai = getGame().getPlayers().get(1);
 
         if (!tChangePlayer.trim().toLowerCase().equals("none")) {
             if (tChangePlayer.trim().toLowerCase().equals("human")) {
@@ -454,7 +454,7 @@ public final class GuiDisplayUtil {
      * @since 1.0.15
      */
     public static void devModeTutor() {
-        final List<Card> lib = getPlayer().getCardsIn(ZoneType.Library);
+        final List<Card> lib = getGame().getPhaseHandler().getPriorityPlayer().getCardsIn(ZoneType.Library);
         final Object o = GuiChoose.oneOrNone("Choose a card", lib);
         if (null == o) {
             return;
@@ -531,16 +531,6 @@ public final class GuiDisplayUtil {
         }
     }
 
-    /**
-     * <p>
-     * devModeUnlimitedLand.
-     * </p>
-     * 
-     * @since 1.0.16
-     */
-    public static void devModeUnlimitedLand() {
-        getPlayer().addMaxLandsToPlay(100);
-    }
 
     /**
      * <p>
@@ -636,7 +626,7 @@ public final class GuiDisplayUtil {
                     game.getAction().moveToHand(forgeCard); // this is really needed (for rollbacks at least) 
                     // Human player is choosing targets for an ability controlled by chosen player. 
                     sa.setActivatingPlayer(p);
-                    HumanPlay.playSaWithoutPayingManaCost(getPlayer(), sa);
+                    HumanPlay.playSaWithoutPayingManaCost(game.getPhaseHandler().getPriorityPlayer(), sa);
                 }
             });
         }
@@ -704,9 +694,6 @@ public final class GuiDisplayUtil {
     private static GameState getGame() {
         return Singletons.getControl().getMatch().getCurrentGame();
     }
-    
-    private static Player getPlayer() {
-        return Singletons.getControl().getPlayer();
-    }
+
 
 } // end class GuiDisplayUtil
