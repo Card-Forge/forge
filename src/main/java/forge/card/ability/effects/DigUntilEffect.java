@@ -101,11 +101,11 @@ public class DigUntilEffect extends SpellAbilityEffect {
         final ZoneType revealedDest = ZoneType.smartValueOf(sa.getParam("RevealedDestination"));
         final int revealedLibPos = AbilityUtils.calculateAmount(host, sa.getParam("RevealedLibraryPosition"), sa);
         final ZoneType digSite = sa.hasParam("DigZone") ? ZoneType.smartValueOf(sa.getParam("DigZone")) : ZoneType.Library;
-        
+
         for (final Player p : getTargetPlayers(sa)) {
             if ((tgt == null) || p.canBeTargetedBy(sa)) {
                 final List<Card> found = new ArrayList<Card>();
-                final List<Card> revealed = new ArrayList<Card>();
+                List<Card> revealed = new ArrayList<Card>();
 
                 final PlayerZone library = p.getZone(digSite);
 
@@ -130,7 +130,11 @@ public class DigUntilEffect extends SpellAbilityEffect {
                 }
                 final GameState game = p.getGame();
 
-                // TODO Allow Human to choose the order
+                if (revealedDest == ZoneType.Battlefield && revealed.size() >= 2) {
+                    revealed = p.getController().orderMoveToZoneList(revealed, revealedDest);
+                    // should possibly use host.getController().getController()... above instead of p.getController?
+                }
+
                 if (foundDest != null) {
                     final Iterator<Card> itr = found.iterator();
                     while (itr.hasNext()) {
@@ -162,7 +166,11 @@ public class DigUntilEffect extends SpellAbilityEffect {
                     Collections.shuffle(revealed, random);
                 }
 
-                // TODO Use getOrderChoices before this moveTo call for the Human
+                if (revealedDest == ZoneType.Library && !sa.hasParam("Shuffle") && revealed.size() >= 2) {
+                    revealed = p.getController().orderMoveToZoneList(revealed, revealedDest);
+                    // should possibly use host.getController().getController()... above instead of p.getController?
+                }
+
                 final Iterator<Card> itr = revealed.iterator();
                 while (itr.hasNext()) {
                     final Card c = itr.next();

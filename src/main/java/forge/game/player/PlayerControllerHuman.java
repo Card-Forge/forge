@@ -334,6 +334,16 @@ public class PlayerControllerHuman extends PlayerController {
     }
 
     @Override
+    public List<Card> orderMoveToZoneList(List<Card> revealed, ZoneType destinationZone) {
+        if (destinationZone == ZoneType.Library) {
+            return GuiChoose.order("Choose order of cards to put into the library", "Closest to top", 0, revealed, null, null);
+        } else if (destinationZone == ZoneType.Battlefield) {
+            return GuiChoose.order("Choose order of cards to put onto the battlefield", "Put first", 0, revealed, null, null);
+        }
+        return revealed;
+    }
+
+    @Override
     public List<Card> chooseCardsToDiscardFrom(Player p, SpellAbility sa, List<Card> valid, int min, int max) {
         if ( p != player ) {
             int cntToKeepInHand =  min == 0 ? -1 : valid.size() - min;

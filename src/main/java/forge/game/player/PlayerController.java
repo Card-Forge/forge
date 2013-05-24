@@ -126,6 +126,7 @@ public abstract class PlayerController {
     public abstract void reveal(String string, Collection<Card> cards, ZoneType zone, Player owner);
     public abstract ImmutablePair<List<Card>, List<Card>> arrangeForScry(List<Card> topN);
     public abstract boolean willPutCardOnTop(Card c);
+    public abstract List<Card> orderMoveToZoneList(List<Card> revealed, ZoneType destinationZone);
     
     /** p = target player, validCards - possible discards, min cards to discard */
     public abstract List<Card> chooseCardsToDiscardFrom(Player playerDiscard, SpellAbility sa, List<Card> validCards, int min, int max);

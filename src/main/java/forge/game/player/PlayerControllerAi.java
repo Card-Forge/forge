@@ -211,6 +211,12 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
+    public List<Card> orderMoveToZoneList(List<Card> revealed, ZoneType destinationZone) {
+        //TODO Add logic for AI ordering here
+        return revealed;
+    }
+
+    @Override
     public List<Card> chooseCardsToDiscardFrom(Player p, SpellAbility sa, List<Card> validCards, int min, int max) {
         boolean isTargetFriendly = !p.isOpponentOf(player);
         
