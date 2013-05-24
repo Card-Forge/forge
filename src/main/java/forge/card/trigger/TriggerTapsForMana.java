@@ -53,6 +53,12 @@ public class TriggerTapsForMana extends Trigger {
     @Override
     public final boolean performTest(final java.util.Map<String, Object> runParams2) {
         final Card tapper = (Card) runParams2.get("Card");
+        final SpellAbility manaAbility = (SpellAbility) runParams2.get("AbilityMana");
+        
+        //Check for tapping
+        if (manaAbility == null || manaAbility.getPayCosts() == null || !manaAbility.getPayCosts().hasTapCost()) {
+            return false;
+        }
 
         if (this.mapParams.containsKey("ValidCard")) {
             if (!tapper.isValid(this.mapParams.get("ValidCard").split(","), this.getHostCard().getController(),
