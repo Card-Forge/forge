@@ -39,13 +39,16 @@ public class InputConfirmMulligan extends InputSyncronizedBase {
     /** Constant <code>serialVersionUID=-8112954303001155622L</code>. */
     private static final long serialVersionUID = -8112954303001155622L;
     
+    
     boolean keepHand = false;
     final boolean isCommander;
-    final List<Card> selected = new ArrayList<Card>();
-    final private Player startingPlayer;
+    
+    private final List<Card> selected = new ArrayList<Card>();
+    private final Player player;
+    private final Player startingPlayer;
     
     public InputConfirmMulligan(Player humanPlayer, Player startsGame, boolean commander) {
-        super(humanPlayer);
+        player = humanPlayer;
         isCommander = commander;
         startingPlayer = startsGame; 
     }

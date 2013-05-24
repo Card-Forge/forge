@@ -43,7 +43,6 @@ public final class InputSelectTargets extends InputSyncronizedBase {
      * @param mandatory
      */
     public InputSelectTargets(List<Card> choices, SpellAbility sa, boolean mandatory) {
-        super(sa.getActivatingPlayer());
         this.choices = choices;
         this.tgt = sa.getTarget();
         this.sa = sa;

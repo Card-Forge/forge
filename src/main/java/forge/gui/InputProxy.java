@@ -82,7 +82,7 @@ public class InputProxy implements Observer {
             @Override public void run() { 
                 if(INPUT_DEBUG)
                     System.out.printf("%s > showMessage @ %s during %s%n", FThreads.debugGetCurrThreadId(), nextInput.getClass().getSimpleName(), ph.debugPrintState());
-                nextInput.showMessage(); 
+                nextInput.showMessage(game.getInputQueue()); 
             }
         };
 //            if( nextInput instanceof AiInput )

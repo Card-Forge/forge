@@ -15,15 +15,12 @@ import forge.view.ButtonUtil;
 public class InputLockUI implements Input  {
     private final AtomicInteger iCall = new AtomicInteger();
     private final InputQueue iq;
-    /**
-     * TODO: Write javadoc for Constructor.
-     * @param inputQueue
-     */
+
     public InputLockUI(InputQueue inputQueue) {
         iq = inputQueue;
     }
 
-    public void showMessage() {
+    public void showMessage(InputQueue iq) {
         int ixCall = 1 + iCall.getAndIncrement();
         FThreads.delay(500, new InputUpdater(ixCall));
     }

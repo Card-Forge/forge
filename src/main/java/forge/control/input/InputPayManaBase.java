@@ -16,6 +16,7 @@ import forge.card.spellability.AbilityManaPart;
 import forge.card.spellability.SpellAbility;
 import forge.game.GameState;
 import forge.game.player.HumanPlay;
+import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 
@@ -29,6 +30,7 @@ public abstract class InputPayManaBase extends InputSyncronizedBase implements I
 
     protected int phyLifeToLose = 0;
     
+    protected final Player player;
     protected final GameState game;
     protected ManaCostBeingPaid manaCost;
     protected final SpellAbility saPaidFor;
@@ -36,7 +38,7 @@ public abstract class InputPayManaBase extends InputSyncronizedBase implements I
     boolean bPaid = false;
     
     protected InputPayManaBase(SpellAbility saToPayFor) {
-        super(saToPayFor.getActivatingPlayer());
+        this.player = saToPayFor.getActivatingPlayer();
         this.game = player.getGame();
         this.saPaidFor = saToPayFor;
     }

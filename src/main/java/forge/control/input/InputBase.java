@@ -18,7 +18,6 @@
 package forge.control.input;
 
 import forge.Card;
-import forge.FThreads;
 import forge.game.player.Player;
 import forge.gui.framework.SDisplayUtil;
 import forge.gui.match.CMatchUI;
@@ -35,14 +34,16 @@ import forge.gui.match.views.VMessage;
 public abstract class InputBase implements java.io.Serializable, Input {
     /** Constant <code>serialVersionUID=-6539552513871194081L</code>. */
     private static final long serialVersionUID = -6539552513871194081L;
-    protected final Player player;  
-    public InputBase(Player player) {
-        this.player = player;
-    }
+    private InputQueue queue;
     
     // showMessage() is always the first method called
     @Override
-    public abstract void showMessage();
+    public final void showMessage(InputQueue iq) {
+        queue = iq;
+        showMessage();
+    }
+    
+    protected abstract void showMessage();
 
     @Override
     public void selectCard(final Card c, boolean isMetaDown) {   }
@@ -61,23 +62,13 @@ public abstract class InputBase implements java.io.Serializable, Input {
     // Removes this input from the stack and releases any latches (in synchronous imports)
     protected final void stop() {
         // clears a "temp" Input like Input_PayManaCost if there is one
-        player.getGame().getInputQueue().removeInput(this);
+        queue.removeInput(this);
         afterStop(); // sync inputs will release their latch there
     }
 
     protected void afterStop() { }
 
-    protected void passPriority() {
-        final Runnable pass = new Runnable() {
-            @Override public void run() {
-                player.getController().passPriority();
-            }
-        };
-        if( FThreads.isEDT() )
-            player.getGame().getInputQueue().LockAndInvokeGameAction(pass);
-        else 
-            pass.run();
-    }
+
     
     
     protected final void flashIncorrectAction() {

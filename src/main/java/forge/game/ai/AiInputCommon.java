@@ -17,7 +17,7 @@
  */
 package forge.game.ai;
 
-import forge.control.input.InputBase;
+import forge.control.input.InputNonSyncBase;
 
 /**
  * <p>
@@ -27,7 +27,7 @@ import forge.control.input.InputBase;
  * @author Forge
  * @version $Id$
  */
-public class AiInputCommon extends InputBase implements AiInput {
+public class AiInputCommon extends InputNonSyncBase implements AiInput {
     /** Constant <code>serialVersionUID=-3091338639571662216L</code>. */
     private static final long serialVersionUID = -3091338639571662216L;
 

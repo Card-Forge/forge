@@ -3,7 +3,7 @@ package forge.game.ai;
 import java.util.List;
 
 import forge.Card;
-import forge.control.input.InputBase;
+import forge.control.input.InputNonSyncBase;
 import forge.game.GameState;
 import forge.game.phase.CombatUtil;
 import forge.game.player.Player;
@@ -12,7 +12,7 @@ import forge.game.player.Player;
  * TODO: Write javadoc for this type.
  *
  */
-public class AiInputBlock extends InputBase {
+public class AiInputBlock extends InputNonSyncBase {
     private final GameState game;
     /**
      * TODO: Write javadoc for Constructor.

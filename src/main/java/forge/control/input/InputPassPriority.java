@@ -33,7 +33,7 @@ import forge.view.ButtonUtil;
  * @author Forge
  * @version $Id$
  */
-public class InputPassPriority extends InputBase {
+public class InputPassPriority extends InputNonSyncBase {
     /** Constant <code>serialVersionUID=-581477682214137181L</code>. */
     private static final long serialVersionUID = -581477682214137181L;
 

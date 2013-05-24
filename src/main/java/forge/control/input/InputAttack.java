@@ -42,7 +42,7 @@ import forge.view.ButtonUtil;
  * @author Forge
  * @version $Id$
  */
-public class InputAttack extends InputBase {
+public class InputAttack extends InputNonSyncBase {
     /** Constant <code>serialVersionUID=7849903731842214245L</code>. */
     private static final long serialVersionUID = 7849903731842214245L;
 
