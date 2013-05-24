@@ -211,9 +211,9 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public List<Card> orderMoveToZoneList(List<Card> revealed, ZoneType destinationZone) {
+    public List<Card> orderMoveToZoneList(List<Card> cards, ZoneType destinationZone) {
         //TODO Add logic for AI ordering here
-        return revealed;
+        return cards;
     }
 
     @Override

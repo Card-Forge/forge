@@ -334,13 +334,15 @@ public class PlayerControllerHuman extends PlayerController {
     }
 
     @Override
-    public List<Card> orderMoveToZoneList(List<Card> revealed, ZoneType destinationZone) {
+    public List<Card> orderMoveToZoneList(List<Card> cards, ZoneType destinationZone) {
         if (destinationZone == ZoneType.Library) {
-            return GuiChoose.order("Choose order of cards to put into the library", "Closest to top", 0, revealed, null, null);
+            return GuiChoose.order("Choose order of cards to put into the library", "Closest to top", 0, cards, null, null);
         } else if (destinationZone == ZoneType.Battlefield) {
-            return GuiChoose.order("Choose order of cards to put onto the battlefield", "Put first", 0, revealed, null, null);
+            return GuiChoose.order("Choose order of cards to put onto the battlefield", "Put first", 0, cards, null, null);
+        } else if (destinationZone == ZoneType.Graveyard) {
+            return GuiChoose.order("Choose order of cards to put into the graveyard", "Closest to top", 0, cards, null, null);
         }
-        return revealed;
+        return cards;
     }
 
     @Override
