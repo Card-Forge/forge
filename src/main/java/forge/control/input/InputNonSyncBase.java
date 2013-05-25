@@ -18,7 +18,8 @@ public abstract class InputNonSyncBase extends InputBase {
             }
         };
         if( FThreads.isEDT() )
-            player.getGame().getInputQueue().LockAndInvokeGameAction(pass);
+            FThreads.invokeInNewThread(pass);
+//            player.getGame().getInputQueue().LockAndInvokeGameAction(pass);
         else 
             pass.run();
     }

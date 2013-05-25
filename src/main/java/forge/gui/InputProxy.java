@@ -53,6 +53,8 @@ public class InputProxy implements Observer {
     
     @Override
     public final synchronized void update(final Observable observable, final Object obj) {
+        //synchronized(this) {} // want to update all changes to memory
+
         final PhaseHandler ph = game.getPhaseHandler();
         
         if(INPUT_DEBUG)
