@@ -2110,6 +2110,7 @@ public class Player extends GameEntity implements Comparable<Player> {
      * Concede.
      */
     public final void concede() { // No cantLose checks - just lose
+        FThreads.assertExecutedByEdt(false);
         setOutcome(PlayerOutcome.concede());
     }
 

@@ -91,12 +91,20 @@ public enum CDock implements ICDoc {
             return;
         }
         
-        Player p = findAffectedPlayer();
+        final Player p = findAffectedPlayer();
         if( p == null ) return;
         // if( c.isMindSlaved() ) return
 
-        p.concede();
-        game.getAction().checkStateEffects();
+        FThreads.invokeInNewThread(new Runnable() {
+            
+            @Override
+            public void run() {
+                p.concede();
+                p.getGame().getAction().checkStateEffects();
+            }
+        });
+        game = null; // no second entry possible;
+
     }
 
     /**
