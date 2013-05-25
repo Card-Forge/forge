@@ -231,17 +231,30 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
         this.bRepeat = true;
     }
 
+    public final void handleBeginPhase() {
+        this.setPhaseEffects(false);
+        if ( FThreads.isEDT() ) {
+            System.out.printf("Handle begin %s phase of %s turn from EDT%n", phase, playerTurn);
+            FThreads.invokeInNewThread(beginPhase);
+        } else {
+            beginPhase.run();
+        }
+    }
+
+    private final Runnable beginPhase = new Runnable() { @Override public void run() { 
+        doBeginPhase();
+        updateObservers();
+    } };
+    
     /**
      * <p>
      * handleBeginPhase.
      * </p>
      */
-    public final void handleBeginPhase() {
+    private final void doBeginPhase() {
         if (null == playerTurn) {
             return;
         }
-
-        this.setPhaseEffects(false);
         // Handle effects that happen at the beginning of phases
         game.getAction().checkStateEffects();
 
@@ -823,7 +836,8 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
      */
     public final void setPhaseState(final PhaseType phase0) {
         this.phase = phase0;
-        this.handleBeginPhase();
+        this.setPhaseEffects(false);
+        this.doBeginPhase();
     }
 
     /**

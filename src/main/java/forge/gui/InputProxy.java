@@ -59,16 +59,9 @@ public class InputProxy implements Observer {
             System.out.printf("%s > InputProxy.update() =>%n", FThreads.debugGetCurrThreadId());
         
         if ( game.getInputQueue().isEmpty() && ph.hasPhaseEffects()) {
-            Runnable rPhase = new Runnable() {
-                @Override
-                public void run() {
-                    if(INPUT_DEBUG)
-                        System.out.printf("\t%s > handle begin phase during %s%n", FThreads.debugGetCurrThreadId(), ph.debugPrintState());
-                    ph.handleBeginPhase();
-                    update(null, null); 
-                }
-            };
-            FThreads.invokeInNewThread(rPhase);
+            if(INPUT_DEBUG)
+                System.out.printf("\t%s > handle begin phase during %s%n", FThreads.debugGetCurrThreadId(), ph.debugPrintState());
+            ph.handleBeginPhase();
             return;
         }
         

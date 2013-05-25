@@ -5,6 +5,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.TimeUnit;
 
 import javax.swing.SwingUtilities;
@@ -19,11 +20,24 @@ public class FThreads {
         System.out.printf("(FThreads static ctor): Running on a machine with %d cpu core(s)%n", Runtime.getRuntime().availableProcessors() );
     }
     
+    private static class WorkerThreadFactory implements ThreadFactory {
+        private int countr = 0;
+        private String prefix = "";
+
+        public WorkerThreadFactory(String prefix) {
+            this.prefix = prefix;
+        }
+
+        public Thread newThread(Runnable r) {
+            return new Thread(r, prefix + "-" + countr++);
+        }
+    }
+    
     private FThreads() { } // no instances supposed
     
-    private final static ExecutorService cachedPool = Executors.newCachedThreadPool();
+    private final static ExecutorService cachedPool = Executors.newCachedThreadPool(new WorkerThreadFactory("Game"));
     private static ExecutorService getCachedPool() { return cachedPool; }
-    private final static ScheduledExecutorService scheduledPool = Executors.newScheduledThreadPool(2);
+    private final static ScheduledExecutorService scheduledPool = Executors.newScheduledThreadPool(2, new WorkerThreadFactory("Delayed"));
     private static ScheduledExecutorService getScheduledPool() { return scheduledPool; }
 
     // This pool is designed to parallel CPU or IO intensive tasks like parse cards or download images, assuming a load factor of 0.5
