@@ -2,6 +2,7 @@ package forge.game;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map.Entry;
 
@@ -119,9 +120,7 @@ public class MatchController {
             game.getGameLog().add("Final", outcome, 0);
         }
         
-        int humanWins = getGamesWonBy(human);
-        int humanLosses = getPlayedGames().size() - humanWins;
-        final String statsSummary = "Won: " + humanWins + ", Lost: " + humanLosses;
+        final String statsSummary = generateSummary();
         game.getGameLog().add("Final", statsSummary, 0);
 
 
@@ -286,6 +285,29 @@ public class MatchController {
             }
         }
         return sum;
+    }
+
+    public String generateSummary() {
+        HashMap<LobbyPlayer, Integer> playerWins = new HashMap<LobbyPlayer, Integer>();
+
+        for(Pair<LobbyPlayer, PlayerStartConditions> playerPair : this.players) {
+            playerWins.put(playerPair.getKey(), 0);
+        }
+
+        for (GameOutcome go : gamesPlayed) {
+            LobbyPlayer p = go.getWinner();
+            if (p != null) {
+                int incrementWins = playerWins.get(p) + 1;
+                playerWins.put(p, incrementWins);
+            }
+        }
+
+        StringBuilder sb = new StringBuilder("");
+        for(LobbyPlayer p : playerWins.keySet()) {
+            sb.append(p.getName()).append(": ");
+            sb.append(playerWins.get(p)).append(" ");
+        }
+        return sb.toString();
     }
 
     /**
