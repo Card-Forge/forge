@@ -12317,6 +12317,7 @@ res/cardsfolder/w/weathered_bodyguards.txt -text
 res/cardsfolder/w/weathered_wayfarer.txt svneol=native#text/plain
 res/cardsfolder/w/weatherseed_elf.txt svneol=native#text/plain
 res/cardsfolder/w/weatherseed_faeries.txt svneol=native#text/plain
+res/cardsfolder/w/weatherseed_totem.txt -text
 res/cardsfolder/w/weatherseed_treefolk.txt svneol=native#text/plain
 res/cardsfolder/w/weaver_of_lies.txt -text svneol=unset#text/plain
 res/cardsfolder/w/web.txt svneol=native#text/plain
