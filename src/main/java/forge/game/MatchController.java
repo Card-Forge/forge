@@ -7,16 +7,16 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.collect.Lists;
 
+import forge.Card;
 import forge.FThreads;
 import forge.Singletons;
 import forge.control.FControl;
 import forge.error.BugReporter;
+import forge.game.event.CardsAntedEvent;
 import forge.game.event.DuelOutcomeEvent;
 import forge.game.event.FlipCoinEvent;
 import forge.game.player.LobbyPlayer;
 import forge.game.player.Player;
-import forge.gui.SOverlayUtils;
-import forge.gui.match.ViewWinLose;
 import forge.properties.ForgePreferences.FPref;
 import forge.util.MyRandom;
 
@@ -49,10 +49,10 @@ public class MatchController {
         gameType = type;
     }
     
-    public MatchController(GameType type, List<Pair<LobbyPlayer, PlayerStartConditions>> players0, Boolean forceAnte) {
+    public MatchController(GameType type, List<Pair<LobbyPlayer, PlayerStartConditions>> players0, Boolean overrideAnte) {
         this(type, players0);
-        if( forceAnte != null )
-            this.useAnte = forceAnte.booleanValue();
+        if( overrideAnte != null )
+            this.useAnte = overrideAnte.booleanValue();
     }
 
     /**
@@ -91,11 +91,6 @@ public class MatchController {
 
         // The log shall listen to events and generate text internally
         game.getEvents().post(new DuelOutcomeEvent(result, gamesPlayedRo));
-
-        FThreads.invokeInEdtNowOrLater(new Runnable() { @Override public void run() {
-            ViewWinLose v = new ViewWinLose(MatchController.this);
-            SOverlayUtils.showOverlay();
-        } });
     }
     
 
@@ -112,6 +107,17 @@ public class MatchController {
             final boolean canRandomFoil = Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_RANDOM_FOIL) && gameType == GameType.Constructed;
             GameNew.newGame(currentGame, canRandomFoil, this.useAnte);
 
+            if (useAnte) {  // Deciding which cards go to ante
+                List<Pair<Player, Card>> list = GameNew.chooseCardsForAnte(currentGame);
+                GameNew.moveCardsToAnte(list);
+                currentGame.getEvents().post(new CardsAntedEvent(list));
+            }
+            
+            // Draw <handsize> cards
+            for (final Player p1 : currentGame.getPlayers()) {
+                p1.drawCards(p1.getMaxHandSize());
+            }
+
             currentGame.setAge(GameAge.Mulligan);
         } catch (Exception e) {
             BugReporter.reportException(e);
@@ -122,9 +128,6 @@ public class MatchController {
         currentGame.getInputQueue().clearInput();
         if(currentGame.getType() == GameType.Planechase)
             firstPlayer.initPlane();
-
-        // Update observers
-        currentGame.getGameLog().updateObservers();
 
         // This code was run from EDT.
         FThreads.invokeInNewThread( new Runnable() {

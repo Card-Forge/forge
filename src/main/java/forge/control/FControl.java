@@ -31,14 +31,23 @@ import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.WindowConstants;
 
+import org.apache.commons.lang3.tuple.Pair;
+
+import com.google.common.eventbus.Subscribe;
+
 import forge.Card;
+import forge.FThreads;
 import forge.Constant.Preferences;
 import forge.Singletons;
 import forge.control.KeyboardShortcuts.Shortcut;
 import forge.game.GameState;
 import forge.game.ai.AiProfileUtil;
+import forge.game.event.CardsAntedEvent;
+import forge.game.event.DuelOutcomeEvent;
+import forge.game.event.Event;
 import forge.game.player.LobbyPlayer;
 import forge.game.player.Player;
+import forge.gui.GuiDialog;
 import forge.gui.SOverlayUtils;
 import forge.gui.deckeditor.CDeckEditorUI;
 import forge.gui.deckeditor.VDeckEditorUI;
@@ -50,6 +59,7 @@ import forge.gui.home.CHomeUI;
 import forge.gui.home.VHomeUI;
 import forge.gui.match.CMatchUI;
 import forge.gui.match.VMatchUI;
+import forge.gui.match.ViewWinLose;
 import forge.gui.match.controllers.CCombat;
 import forge.gui.match.controllers.CDock;
 import forge.gui.match.controllers.CLog;
@@ -365,7 +375,8 @@ public enum FControl {
         game.getGameLog().addObserver(CLog.SINGLETON_INSTANCE);
         // some observers were set in CMatchUI.initMatch
     
-        // black magic still
+        // Listen to DuelOutcome event to show ViewWinLose
+        game.getEvents().register(this);
         
         
         VAntes.SINGLETON_INSTANCE.setModel(game.getRegisteredPlayers());
@@ -378,5 +389,24 @@ public enum FControl {
         //Set Field shown to current player.
         VField nextField = CMatchUI.SINGLETON_INSTANCE.getFieldViewFor(game.getPlayers().get(0));
         SDisplayUtil.showTab(nextField);
-    }    
+    }
+    
+    @Subscribe
+    public void receiveGameEvent(Event ev) { 
+
+        if( ev instanceof DuelOutcomeEvent ) {
+            FThreads.invokeInEdtNowOrLater(new Runnable() { @Override public void run() {
+                new ViewWinLose(game.getMatch());
+                SOverlayUtils.showOverlay();
+            } });
+        } else if ( ev instanceof CardsAntedEvent ) {
+            // Require EDT here? 
+            final String nl = System.getProperty("line.separator");
+            final StringBuilder msg = new StringBuilder();
+            for (final Pair<Player, Card> kv : ((CardsAntedEvent) ev).cards) {
+                msg.append(kv.getKey().getName()).append(" ante: ").append(kv.getValue()).append(nl);
+            }
+            GuiDialog.message(msg.toString(), "Ante");
+        }
+    }
 }

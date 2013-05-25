@@ -14236,6 +14236,7 @@ src/main/java/forge/game/event/CardDiscardedEvent.java -text
 src/main/java/forge/game/event/CardEquippedEvent.java -text
 src/main/java/forge/game/event/CardRegeneratedEvent.java -text
 src/main/java/forge/game/event/CardSacrificedEvent.java -text
+src/main/java/forge/game/event/CardsAntedEvent.java -text
 src/main/java/forge/game/event/CounterAddedEvent.java -text
 src/main/java/forge/game/event/CounterRemovedEvent.java -text
 src/main/java/forge/game/event/DrawCardEvent.java -text

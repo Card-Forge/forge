@@ -1,7 +1,7 @@
 package forge.game;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -41,6 +41,9 @@ import forge.properties.ForgePreferences.FPref;
 import forge.util.Aggregates;
 import forge.util.MyRandom;
 import forge.util.TextUtil;
+import forge.util.maps.CollectionSuppliers;
+import forge.util.maps.HashMapOfLists;
+import forge.util.maps.MapOfLists;
 
 /** 
  * Methods for all things related to starting a new game.
@@ -231,7 +234,7 @@ public class GameNew {
         // friendliness
         final Set<CardPrinted> rAICards = new HashSet<CardPrinted>();
 
-        Map<Player, Set<CardPrinted>> removedAnteCards = new HashMap<Player, Set<CardPrinted>>();
+        MapOfLists<Player, CardPrinted> removedAnteCards = new HashMapOfLists<Player, CardPrinted>(CollectionSuppliers.<CardPrinted>hashSets());
 
         GameType gameType = game.getType();
         boolean isFirstGame = game.getMatch().getPlayedGames().isEmpty();
@@ -281,10 +284,10 @@ public class GameNew {
             player.getZone(ZoneType.Battlefield).updateObservers();
             
             if( myRemovedAnteCards != null && !myRemovedAnteCards.isEmpty() )
-                removedAnteCards.put(player, myRemovedAnteCards);
+                removedAnteCards.addAll(player, myRemovedAnteCards);
         }
 
-        if (rAICards.size() > 0) {
+        if (!rAICards.isEmpty()) {
             String message = TextUtil.buildFourColumnList("AI deck contains the following cards that it can't play or may be buggy:", rAICards);
             if (GameType.Quest == game.getType() || GameType.Sealed == game.getType() || GameType.Draft == game.getType()) {
                 // log, but do not visually warn.  quest decks are supposedly already vetted by the quest creator,
@@ -298,38 +301,35 @@ public class GameNew {
 
         if (!removedAnteCards.isEmpty()) {
             StringBuilder ante = new StringBuilder("The following ante cards were removed:\n\n");
-            for (Entry<Player, Set<CardPrinted>> ants : removedAnteCards.entrySet()) {
+            for (Entry<Player, Collection<CardPrinted>> ants : removedAnteCards.entrySet()) {
                 ante.append(TextUtil.buildFourColumnList("From the " + ants.getKey().getName() + "'s deck:", ants.getValue()));
             }
             GuiDialog.message(ante.toString());
         }
+    }
 
-        // Deciding which cards go to ante
-        if (useAnte) {
-            final String nl = System.getProperty("line.separator");
-            final StringBuilder msg = new StringBuilder();
-            for (final Player p : game.getPlayers()) {
+    static List<Pair<Player, Card>> chooseCardsForAnte(final GameState game) {
+        List<Pair<Player, Card>> anteed = new ArrayList<Pair<Player,Card>>();
 
-                final List<Card> lib = p.getCardsIn(ZoneType.Library);
-                Predicate<Card> goodForAnte = Predicates.not(CardPredicates.Presets.BASIC_LANDS);
-                Card ante = Aggregates.random(Iterables.filter(lib, goodForAnte));
-                if (ante == null) {
-                    game.getGameLog().add(GameEventType.ANTE, "Only basic lands found. Will ante one of them");
-                    ante = Aggregates.random(lib);
-                }
-                game.getGameLog().add(GameEventType.ANTE, p + " anted " + ante);
-                game.getAction().moveTo(ZoneType.Ante, ante);
-                msg.append(p.getName()).append(" ante: ").append(ante).append(nl);
+        for (final Player p : game.getPlayers()) {
+            final List<Card> lib = p.getCardsIn(ZoneType.Library);
+            Predicate<Card> goodForAnte = Predicates.not(CardPredicates.Presets.BASIC_LANDS);
+            Card ante = Aggregates.random(Iterables.filter(lib, goodForAnte));
+            if (ante == null) {
+                game.getGameLog().add(GameEventType.ANTE, "Only basic lands found. Will ante one of them");
+                ante = Aggregates.random(lib);
             }
-            GuiDialog.message(msg.toString(), "Ante");
+            anteed.add(Pair.of(p, ante));
         }
-
-        // Draw <handsize> cards
-        for (final Player p1 : game.getPlayers()) {
-            p1.drawCards(p1.getMaxHandSize());
+        return anteed;
+    }
+    
+    static void moveCardsToAnte(List<Pair<Player, Card>> cards) {
+        for(Pair<Player, Card> kv : cards) {
+            Player p = kv.getKey();
+            p.getGame().getAction().moveTo(ZoneType.Ante, kv.getValue());
+            p.getGame().getGameLog().add(GameEventType.ANTE, p + " anted " + kv.getValue());
         }
-
-
     }
 
     // ultimate of Karn the Liberated
