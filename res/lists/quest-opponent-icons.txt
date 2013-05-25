@@ -35,6 +35,7 @@ http://www.cardforge.org/fpics/questAvatars/Carnage.jpg
 http://www.cardforge.org/fpics/questAvatars/Captain%20America.jpg
 http://www.cardforge.org/fpics/questAvatars/Catwoman.jpg
 http://www.cardforge.org/fpics/questAvatars/Cave%20Troll.jpg
+http://www.cardforge.org/fpics/questAvatars/Chewbacca.jpg
 http://www.cardforge.org/fpics/questAvatars/Chief_Wiggum.jpg
 http://www.cardforge.org/fpics/questAvatars/Cipher.jpg
 http://www.cardforge.org/fpics/questAvatars/Comic%20Book%20Guy.jpg
@@ -224,6 +225,7 @@ http://www.cardforge.org/fpics/questAvatars/Terminator.jpg
 http://www.cardforge.org/fpics/questAvatars/The%20Backlash%20Machine.jpg
 http://www.cardforge.org/fpics/questAvatars/The%20Court%20Jester.jpg
 http://www.cardforge.org/fpics/questAvatars/The%20Desert%20Caravan.jpg
+http://www.cardforge.org/fpics/questAvatars/The%20Great%20Gatsby.jpg
 http://www.cardforge.org/fpics/questAvatars/The%20Great%20Gazoo.jpg
 http://www.cardforge.org/fpics/questAvatars/The%20Kings%20Contest.jpg
 http://www.cardforge.org/fpics/questAvatars/The%20Mac%20Nac%20Feegle.jpg
