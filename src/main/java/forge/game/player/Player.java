@@ -1825,7 +1825,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             }
         }
         
-        if( land.getOwner() != this )
+        if( land != null && land.getOwner() != this )
             return false;
 
         // Dev Mode
