@@ -8,3 +8,4 @@ T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ Player |
 SVar:TrigCopy:AB$ CopySpellAbility | Cost$ 0 | Defined$ TriggeredSpellAbility | Controller$ You | CopyForEachCanTarget$ Golem
 SVar:Picture:http://www.wizards.com/global/images/magic/general/precursor_golem.jpg
 Oracle:When Precursor Golem enters the battlefield, put two 3/3 colorless Golem artifact creature tokens onto the battlefield.\nWhenever a player casts an instant or sorcery spell that targets only a single Golem, that player copies that spell for each other Golem that spell could target. Each copy targets a different one of those Golems.
+SetInfo:SOM Rare
