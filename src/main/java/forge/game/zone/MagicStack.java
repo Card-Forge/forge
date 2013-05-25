@@ -442,7 +442,7 @@ public class MagicStack extends MyObservable implements Iterable<SpellAbilitySta
                                 this.run();
                             } else {
                                 for (int i = 0; i < sp.getSourceCard().getReplicateMagnitude(); i++) {
-                                    CardFactory.copySpellontoStack(sp.getSourceCard(), sp.getSourceCard(), sp, false);
+                                    CardFactory.copySpellontoStack(sp.getSourceCard(), sp.getSourceCard(), sp, false, null);
                                 }
                             }
                         }

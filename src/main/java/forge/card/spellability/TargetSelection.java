@@ -94,10 +94,13 @@ public class TargetSelection {
         
         final boolean choiceResult;
         final boolean random = tgt.isRandomTarget();
+        final Object defined = tgt.getDefinedTarget();
         if (random) {
             List<Object> candidates = tgt.getAllCandidates(this.ability, true);
             Object choice = Aggregates.random(candidates);
             return tgt.addTarget(choice);
+        } else if (defined != null) {
+            return tgt.addTarget(defined);
         } else if (zone.size() == 1 && zone.get(0) == ZoneType.Stack) {
             // If Zone is Stack, the choices are handled slightly differently.
             // Handle everything inside function due to interaction with StackInstance

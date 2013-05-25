@@ -163,6 +163,11 @@ public class TriggerSpellAbilityCast extends Trigger {
                 return false;
             }
         }
+        if (this.mapParams.containsKey("IsSingleTarget")) {
+            if (spellAbility.getTarget().getTargets().size() != 1) {
+                return false;
+            }
+        }
 
         if (this.mapParams.containsKey("SpellSpeed")) {
             if (this.mapParams.get("SpellSpeed").equals("NotSorcerySpeed")) {

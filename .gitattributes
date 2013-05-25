@@ -5365,6 +5365,7 @@ res/cardsfolder/i/initiates_of_the_ebon_hand.txt svneol=native#text/plain
 res/cardsfolder/i/ink_dissolver.txt svneol=native#text/plain
 res/cardsfolder/i/ink_eyes_servant_of_oni.txt svneol=native#text/plain
 res/cardsfolder/i/ink_eyes_servant_of_oni_avatar.txt -text
+res/cardsfolder/i/ink_treader_nephilim.txt -text
 res/cardsfolder/i/inkfathom_divers.txt svneol=native#text/plain
 res/cardsfolder/i/inkfathom_infiltrator.txt svneol=native#text/plain
 res/cardsfolder/i/inkfathom_witch.txt -text svneol=unset#text/plain
@@ -8144,6 +8145,7 @@ res/cardsfolder/p/praetors_grasp.txt -text
 res/cardsfolder/p/prahv_spires_of_order.txt -text
 res/cardsfolder/p/precinct_captain.txt -text
 res/cardsfolder/p/precognition.txt svneol=native#text/plain
+res/cardsfolder/p/precursor_golem.txt -text
 res/cardsfolder/p/predator_dragon.txt svneol=native#text/plain
 res/cardsfolder/p/predator_flagship.txt svneol=native#text/plain
 res/cardsfolder/p/predator_ooze.txt -text

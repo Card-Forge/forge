@@ -5,6 +5,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import forge.Card;
+import forge.CardLists;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.cardfactory.CardFactory;
@@ -99,7 +100,35 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
             for (final SpellAbility chosenSAcopy : chosenSAs) {
                 chosenSAcopy.setActivatingPlayer(controller);
                 for (int i = 0; i < amount; i++) {
-                    CardFactory.copySpellontoStack(card, chosenSAcopy.getSourceCard(), chosenSAcopy, true);
+                    CardFactory.copySpellontoStack(card, chosenSAcopy.getSourceCard(), chosenSAcopy, true, null);
+                }
+            }
+        }
+        else if (sa.hasParam("CopyForEachCanTarget")) {
+            SpellAbility chosenSA = null;
+            if (tgtSpells.size() == 1 || sa.getActivatingPlayer().isComputer()) {
+                chosenSA = tgtSpells.get(0);
+            } else {
+                chosenSA = GuiChoose.one("Select a spell to copy", tgtSpells);
+            }
+            chosenSA.setActivatingPlayer(controller);
+            List<Object> candidates = chosenSA.getTarget().getAllCandidates(chosenSA, true);
+            if (sa.hasParam("CanTargetPlayer")) {// Radiate
+                for (Object o : candidates) {
+                    CardFactory.copySpellontoStack(card, chosenSA.getSourceCard(), chosenSA, true, o);
+                }
+            } else {// Precursor Golem, Ink-Treader Nephilim
+                final String type = sa.getParam("CopyForEachCanTarget");
+                List<Card> valid = new ArrayList<Card>();
+                for (final Object o : candidates) {
+                    if (o instanceof Card) {
+                        valid.add((Card) o);
+                    }
+                }
+                valid = CardLists.getValidCards(valid, type, chosenSA.getActivatingPlayer(),
+                        chosenSA.getSourceCard());
+                for (Card c : valid) {
+                    CardFactory.copySpellontoStack(card, chosenSA.getSourceCard(), chosenSA, true, c);
                 }
             }
         }
@@ -115,7 +144,7 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
 
             chosenSA.setActivatingPlayer(controller);
             for (int i = 0; i < amount; i++) {
-                CardFactory.copySpellontoStack(card, chosenSA.getSourceCard(), chosenSA, true);
+                CardFactory.copySpellontoStack(card, chosenSA.getSourceCard(), chosenSA, true, null);
             }
         }
     } // end resolve

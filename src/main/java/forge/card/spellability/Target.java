@@ -66,6 +66,7 @@ public class Target {
     private boolean randomTarget = false;
     private String definedController = null;
     private String relatedProperty = null;
+    private Object definedTarget = null;
 
     // How many can be targeted?
     private String minTargets;
@@ -111,6 +112,7 @@ public class Target {
         this.relatedProperty = target.getRelatedProperty();
         this.singleTarget = target.isSingleTarget();
         this.randomTarget = target.isRandomTarget();
+        this.definedTarget = target.getDefinedTarget();
         this.choice = target.getTargetChoices();
     }
 
@@ -904,6 +906,20 @@ public class Target {
      */
     public void setRelatedProperty(String related) {
         this.relatedProperty = related;
+    }
+
+    /**
+     * @return the definedTarget
+     */
+    public Object getDefinedTarget() {
+        return definedTarget;
+    }
+
+    /**
+     * @param defined the definedTarget to set
+     */
+    public void setDefinedTarget(Object defined) {
+        this.definedTarget = defined;
     }
 
     /**

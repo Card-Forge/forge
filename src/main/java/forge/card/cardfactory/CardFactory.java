@@ -136,7 +136,7 @@ public class CardFactory {
      *            a boolean.
      */
     public final static void copySpellontoStack(final Card source, final Card original, final SpellAbility sa,
-            final boolean bCopyDetails) {
+            final boolean bCopyDetails, final Object definedTarget) {
         //Player originalController = original.getController();
         Player controller = sa.getActivatingPlayer();
         final Card c = copyCard(original);
@@ -186,7 +186,12 @@ public class CardFactory {
         copySA.setCopied(true);
         //remove all costs
         copySA.setPayCosts(new Cost("", sa.isAbility()));
-        if (sa.getTarget() != null) {
+        if (definedTarget != null) {
+            Target target = new Target(c, null, "");
+            target.setDefinedTarget(definedTarget);
+            copySA.setTarget(target);
+        }
+        else if (sa.getTarget() != null) {
             Target target = new Target(sa.getTarget());
             target.setSourceCard(c);
             copySA.setTarget(target);
