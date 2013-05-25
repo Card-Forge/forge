@@ -298,6 +298,10 @@ public enum FControl {
     }
     
     public boolean mayShowCard(Card c) {
+        if (match == null) {
+            return true;
+        }
+
         Player p = match.getCurrentGame().getPhaseHandler().getPriorityPlayer();
         return c.canBeShownTo(p);
     }
