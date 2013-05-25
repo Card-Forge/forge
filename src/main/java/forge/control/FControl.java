@@ -32,20 +32,31 @@ import javax.swing.UIManager;
 import javax.swing.WindowConstants;
 
 import forge.Card;
+import forge.Constant.Preferences;
 import forge.Singletons;
 import forge.control.KeyboardShortcuts.Shortcut;
-import forge.game.MatchController;
+import forge.game.GameState;
 import forge.game.ai.AiProfileUtil;
+import forge.game.player.LobbyPlayer;
 import forge.game.player.Player;
 import forge.gui.SOverlayUtils;
 import forge.gui.deckeditor.CDeckEditorUI;
 import forge.gui.deckeditor.VDeckEditorUI;
+import forge.gui.framework.EDocID;
+import forge.gui.framework.SDisplayUtil;
 import forge.gui.framework.SOverflowUtil;
 import forge.gui.framework.SResizingUtil;
 import forge.gui.home.CHomeUI;
 import forge.gui.home.VHomeUI;
+import forge.gui.match.CMatchUI;
 import forge.gui.match.VMatchUI;
+import forge.gui.match.controllers.CCombat;
 import forge.gui.match.controllers.CDock;
+import forge.gui.match.controllers.CLog;
+import forge.gui.match.controllers.CMessage;
+import forge.gui.match.controllers.CStack;
+import forge.gui.match.nonsingleton.VField;
+import forge.gui.match.views.VAntes;
 import forge.gui.toolbox.CardFaceSymbols;
 import forge.gui.toolbox.FSkin;
 import forge.net.NetServer;
@@ -114,7 +125,7 @@ public enum FControl {
             public void windowClosing(final WindowEvent e) {
                 Singletons.getView().getFrame().setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 
-                if (!getMatch().getCurrentGame().isGameOver())
+                if (!FControl.this.game.isGameOver())
                     CDock.SINGLETON_INSTANCE.concede();
                 else {
                     Singletons.getControl().changeState(FControl.Screens.HOME_SCREEN);
@@ -298,11 +309,8 @@ public enum FControl {
     }
     
     public boolean mayShowCard(Card c) {
-        if (match == null) {
-            return true;
-        }
-
-        Player p = match.getCurrentGame().getPhaseHandler().getPriorityPlayer();
+        if ( game == null ) return true;
+        Player p = game.getPhaseHandler().getPriorityPlayer();
         return c.canBeShownTo(p);
     }
 
@@ -324,11 +332,48 @@ public enum FControl {
         return server;
     }
 
-    private MatchController match;
-    public MatchController getMatch() {
-        return match;
+    private GameState game;
+    public GameState getObservedGame() {
+        return game;
     }
-    public void setMatch(MatchController newMatch) {
-        match = newMatch;
+
+    public void attachToGame(GameState game0) {
+        // TODO: Detach from other game we might be looking at
+        
+        this.game = game0;
+        game.getEvents().register(Singletons.getControl().getSoundSystem());
+        
+        LobbyPlayer humanLobbyPlayer = getLobby().getGuiPlayer();
+        // The UI controls should use these game data as models
+        CMatchUI.SINGLETON_INSTANCE.initMatch(game.getRegisteredPlayers(), humanLobbyPlayer);
+        CDock.SINGLETON_INSTANCE.setModel(game, humanLobbyPlayer);
+        CStack.SINGLETON_INSTANCE.setModel(game.getStack(), humanLobbyPlayer);
+        CLog.SINGLETON_INSTANCE.setModel(game.getGameLog());
+        CCombat.SINGLETON_INSTANCE.setModel(game);
+        CMessage.SINGLETON_INSTANCE.setModel(game);
+    
+    
+        Singletons.getModel().getPreferences().actuateMatchPreferences();
+        Singletons.getControl().changeState(Screens.MATCH_SCREEN);
+        SDisplayUtil.showTab(EDocID.REPORT_LOG.getDoc());
+    
+        CMessage.SINGLETON_INSTANCE.getInputControl().setGame(game);
+    
+        // models shall notify controllers of changes
+        
+        game.getStack().addObserver(CStack.SINGLETON_INSTANCE);
+        game.getGameLog().addObserver(CLog.SINGLETON_INSTANCE);
+        // some observers were set in CMatchUI.initMatch
+    
+        // black magic still
+        
+        
+        VAntes.SINGLETON_INSTANCE.setModel(game.getRegisteredPlayers());
+    
+        for (final VField field : VMatchUI.SINGLETON_INSTANCE.getFieldViews()) {
+            field.getLblLibrary().setHoverable(Preferences.DEV_MODE);
+        }
+    
+        // per player observers were set in CMatchUI.SINGLETON_INSTANCE.initMatch
     }    
 }

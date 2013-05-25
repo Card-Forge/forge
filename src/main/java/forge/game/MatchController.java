@@ -10,7 +10,6 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.collect.Lists;
 
-import forge.Constant.Preferences;
 import forge.FThreads;
 import forge.Singletons;
 import forge.control.FControl;
@@ -20,18 +19,10 @@ import forge.game.event.FlipCoinEvent;
 import forge.game.player.LobbyPlayer;
 import forge.game.player.Player;
 import forge.game.player.PlayerStatistics;
-import forge.gui.framework.EDocID;
 import forge.gui.framework.SDisplayUtil;
 import forge.gui.match.CMatchUI;
-import forge.gui.match.VMatchUI;
 import forge.gui.match.ViewWinLose;
-import forge.gui.match.controllers.CCombat;
-import forge.gui.match.controllers.CDock;
-import forge.gui.match.controllers.CLog;
-import forge.gui.match.controllers.CMessage;
-import forge.gui.match.controllers.CStack;
 import forge.gui.match.nonsingleton.VField;
-import forge.gui.match.views.VAntes;
 import forge.properties.ForgePreferences.FPref;
 import forge.util.MyRandom;
 
@@ -142,7 +133,7 @@ public class MatchController {
         currentGame = new GameState(players, gameType, this);
         
         try {
-            attachUiToMatch(this, FControl.SINGLETON_INSTANCE.getLobby().getGuiPlayer());
+            FControl.SINGLETON_INSTANCE.attachToGame(currentGame);
 
             final boolean canRandomFoil = Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_RANDOM_FOIL) && gameType == GameType.Constructed;
             GameNew.newGame(currentGame, canRandomFoil, this.useAnte);
@@ -173,46 +164,6 @@ public class MatchController {
             }
         });
     }
-
-    public static void attachUiToMatch(MatchController match, LobbyPlayer humanLobbyPlayer) {
-        FControl.SINGLETON_INSTANCE.setMatch(match);
-        
-        GameState game = match.getCurrentGame();
-        game.getEvents().register(Singletons.getControl().getSoundSystem());
-        
-        // The UI controls should use these game data as models
-        CMatchUI.SINGLETON_INSTANCE.initMatch(game.getRegisteredPlayers(), humanLobbyPlayer);
-        CDock.SINGLETON_INSTANCE.setModel(game, humanLobbyPlayer);
-        CStack.SINGLETON_INSTANCE.setModel(game.getStack(), humanLobbyPlayer);
-        CLog.SINGLETON_INSTANCE.setModel(game.getGameLog());
-        CCombat.SINGLETON_INSTANCE.setModel(game);
-        CMessage.SINGLETON_INSTANCE.setModel(match);
-
-
-        Singletons.getModel().getPreferences().actuateMatchPreferences();
-        Singletons.getControl().changeState(FControl.Screens.MATCH_SCREEN);
-        SDisplayUtil.showTab(EDocID.REPORT_LOG.getDoc());
-
-        CMessage.SINGLETON_INSTANCE.getInputControl().setGame(game);
-
-        // models shall notify controllers of changes
-        
-        game.getStack().addObserver(CStack.SINGLETON_INSTANCE);
-        game.getGameLog().addObserver(CLog.SINGLETON_INSTANCE);
-        // some observers were set in CMatchUI.initMatch
-
-        // black magic still
-        
-        
-        VAntes.SINGLETON_INSTANCE.setModel(game.getRegisteredPlayers());
-
-        for (final VField field : VMatchUI.SINGLETON_INSTANCE.getFieldViews()) {
-            field.getLblLibrary().setHoverable(Preferences.DEV_MODE);
-        }
-
-        // per player observers were set in CMatchUI.SINGLETON_INSTANCE.initMatch
-    }
-
 
     public void clearGamesPlayed() {
         gamesPlayed.clear();

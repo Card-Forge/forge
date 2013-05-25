@@ -692,7 +692,7 @@ public final class GuiDisplayUtil {
     }
     
     private static GameState getGame() {
-        return Singletons.getControl().getMatch().getCurrentGame();
+        return Singletons.getControl().getObservedGame();
     }
 
 

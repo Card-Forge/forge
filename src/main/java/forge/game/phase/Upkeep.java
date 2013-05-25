@@ -37,7 +37,6 @@ import forge.card.spellability.AbilityManaPart;
 import forge.card.spellability.AbilityStatic;
 import forge.card.spellability.SpellAbility;
 import forge.control.input.InputPayManaExecuteCommands;
-import forge.control.input.InputPayment;
 import forge.control.input.InputSelectCards;
 import forge.control.input.InputSelectCardsFromList;
 import forge.game.GameState;
@@ -45,7 +44,6 @@ import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilCard;
 import forge.game.ai.ComputerUtilCombat;
 import forge.game.ai.ComputerUtilCost;
-import forge.game.ai.ComputerUtilMana;
 import forge.game.player.HumanPlay;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
@@ -520,12 +518,13 @@ public class Upkeep extends Phase {
      * upkeepDemonicHordes.
      * </p>
      */
+    /*
     private static void upkeepDemonicHordes(final GameState game) {
 
         /*
          * At the beginning of your upkeep, unless you pay BBB, tap Demonic
          * Hordes and sacrifice a land of an opponent's choice.
-         */
+         *-/
 
         final Player player = game.getPhaseHandler().getPlayerTurn();
         final List<Card> cards = player.getCardsIn(ZoneType.Battlefield, "Demonic Hordes");
@@ -563,7 +562,7 @@ public class Upkeep extends Phase {
                     @Override
                     public void resolve() {
                         if (game.getZoneOf(c).is(ZoneType.Battlefield)) {
-                            InputPayment inp = new InputPayManaExecuteCommands(cp, "Pay Demonic Hordes upkeep cost", cost.getPayCosts().getTotalMana() /*, true */);
+                            InputPayment inp = new InputPayManaExecuteCommands(cp, "Pay Demonic Hordes upkeep cost", cost.getPayCosts().getTotalMana());
                             cp.getGame().getInputQueue().setInputAndWait(inp);
                             if ( !inp.isPaid() ) 
                                 unpaidHordesAb.resolve();
@@ -597,7 +596,7 @@ public class Upkeep extends Phase {
         } // end for loop
 
     } // upkeepDemonicHordes
-
+*/
     /**
      * <p>
      * upkeepSuspend.
