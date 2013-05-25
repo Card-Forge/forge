@@ -22,7 +22,7 @@ import forge.card.spellability.SpellAbility;
 import forge.game.phase.PhaseHandler;
 import forge.game.player.HumanPlay;
 import forge.game.player.Player;
-import forge.gui.GuiDisplayUtil;
+import forge.game.zone.ZoneType;
 import forge.view.ButtonUtil;
 
 /**
@@ -36,7 +36,8 @@ import forge.view.ButtonUtil;
 public class InputPassPriority extends InputNonSyncBase {
     /** Constant <code>serialVersionUID=-581477682214137181L</code>. */
     private static final long serialVersionUID = -581477682214137181L;
-
+    private boolean canUse = false; 
+    
     /**
      * TODO: Write javadoc for Constructor.
      * @param player
@@ -48,8 +49,11 @@ public class InputPassPriority extends InputNonSyncBase {
     /** {@inheritDoc} */
     @Override
     public final void showMessage() {
-        GuiDisplayUtil.updateGUI();
+        for (Player p : player.getGame().getRegisteredPlayers()) {
+            p.getZone(ZoneType.Battlefield).updateObservers();
+        }
         ButtonUtil.enableOnlyOk();
+        canUse = true;
 
         final PhaseHandler ph = player.getGame().getPhaseHandler();
         final StringBuilder sb = new StringBuilder();
@@ -73,7 +77,11 @@ public class InputPassPriority extends InputNonSyncBase {
     /** {@inheritDoc} */
     @Override
     public final void selectButtonOK() {
-        passPriority(); 
+        if( canUse ) {
+            canUse = false;
+            passPriority();
+        }
+        
     }
 
     /** {@inheritDoc} */

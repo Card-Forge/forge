@@ -17,7 +17,6 @@
  */
 package forge.gui;
 
-import java.awt.Color;
 import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.FileInputStream;
@@ -29,11 +28,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.swing.BorderFactory;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
-import javax.swing.border.Border;
-
 import com.google.common.base.Predicates;
 import com.google.common.collect.Lists;
 
@@ -41,12 +37,9 @@ import forge.Card;
 import forge.CardCharacteristicName;
 import forge.CardLists;
 import forge.CardPredicates;
-import forge.CardUtil;
 import forge.CounterType;
 import forge.FThreads;
 import forge.Singletons;
-import forge.card.CardType;
-import forge.card.ColorSet;
 import forge.card.spellability.AbilityManaPart;
 import forge.card.spellability.SpellAbility;
 import forge.card.trigger.TriggerType;
@@ -65,59 +58,6 @@ public final class GuiDisplayUtil {
         throw new AssertionError();
     }
 
-    public static Border getBorder(final Card card) {
-        // color info
-        if (card == null) {
-            return BorderFactory.createEmptyBorder(2, 2, 2, 2);
-        }
-        java.awt.Color color;
-        final ColorSet list = CardUtil.getColors(card);
-
-        if (card.isFaceDown()) {
-            color = Color.gray;
-        } else if (list.isMulticolor()) {
-            color = Color.orange;
-        } else if (list.hasBlack()) {
-            color = Color.black;
-        } else if (list.hasGreen()) {
-            color = new Color(0, 220, 39);
-        } else if (list.hasWhite()) {
-            color = Color.white;
-        } else if (list.hasRed()) {
-            color = Color.red;
-        } else if (list.hasBlue()) {
-            color = Color.blue;
-        } else if (list.isColorless()) {
-            color = Color.gray;
-        } else {
-            color = new Color(200, 0, 230); // If your card has a violet border,
-                                            // something is wrong
-        }
-
-        if (color != Color.gray) {
-
-            int r = color.getRed();
-            int g = color.getGreen();
-            int b = color.getBlue();
-
-            final int shade = 10;
-
-            r -= shade;
-            g -= shade;
-            b -= shade;
-
-            r = Math.max(0, r);
-            g = Math.max(0, g);
-            b = Math.max(0, b);
-
-            color = new Color(r, g, b);
-
-            return BorderFactory.createLineBorder(color, 2);
-        } else {
-            return BorderFactory.createLineBorder(Color.gray, 2);
-        }
-    }
-
     public static void devModeGenerateMana() {
         final Card dummy = new Card();
         dummy.setOwner(getGame().getPhaseHandler().getPriorityPlayer());
@@ -125,57 +65,6 @@ public final class GuiDisplayUtil {
         produced.put("Produced", "W W W W W W W U U U U U U U B B B B B B B G G G G G G G R R R R R R R 7");
         final AbilityManaPart abMana = new AbilityManaPart(dummy, produced);
         abMana.produceMana(null);
-    }
-
-    public static String formatCardType(final Card card) {
-        final ArrayList<String> list = card.getType();
-        final StringBuilder sb = new StringBuilder();
-
-        final ArrayList<String> superTypes = new ArrayList<String>();
-        final ArrayList<String> cardTypes = new ArrayList<String>();
-        final ArrayList<String> subTypes = new ArrayList<String>();
-        final boolean allCreatureTypes = list.contains("AllCreatureTypes");
-
-        for (final String t : list) {
-            if (allCreatureTypes && t.equals("AllCreatureTypes")) {
-                continue;
-            }
-            if (CardType.isASuperType(t) && !superTypes.contains(t)) {
-                superTypes.add(t);
-            }
-            if (CardType.isACardType(t) && !cardTypes.contains(t)) {
-                cardTypes.add(t);
-            }
-            if (CardType.isASubType(t) && !subTypes.contains(t) && (!allCreatureTypes || !CardType.isACreatureType(t))) {
-                subTypes.add(t);
-            }
-        }
-
-        for (final String type : superTypes) {
-            sb.append(type).append(" ");
-        }
-        for (final String type : cardTypes) {
-            sb.append(type).append(" ");
-        }
-        if (!subTypes.isEmpty() || allCreatureTypes) {
-            sb.append("- ");
-        }
-        if (allCreatureTypes) {
-            sb.append("All creature types ");
-        }
-        for (final String type : subTypes) {
-            sb.append(type).append(" ");
-        }
-
-        return sb.toString();
-    }
-
-    public static void updateGUI() {
-        for (Player p : getGame().getRegisteredPlayers()) {
-
-            // why was it written twice?
-            p.getZone(ZoneType.Battlefield).updateObservers();
-        }
     }
 
     public static void devSetupGameState() {
@@ -397,7 +286,9 @@ public final class GuiDisplayUtil {
 
         game.getAction().checkStateEffects();
         game.getPhaseHandler().updateObservers();
-        updateGUI();
+        for (Player p : game.getRegisteredPlayers()) {
+            p.getZone(ZoneType.Battlefield).updateObservers();
+        }
     }
 
     /**

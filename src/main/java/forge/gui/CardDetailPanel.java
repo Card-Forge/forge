@@ -22,6 +22,7 @@ import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.util.ArrayList;
 import java.util.Iterator;
 
 import javax.swing.BorderFactory;
@@ -30,6 +31,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
+import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
 
@@ -37,10 +39,13 @@ import org.apache.commons.lang3.StringUtils;
 
 import forge.Card;
 import forge.CardCharacteristicName;
+import forge.CardUtil;
 import forge.CounterType;
 import forge.GameEntity;
 import forge.Singletons;
 import forge.card.CardEdition;
+import forge.card.CardType;
+import forge.card.ColorSet;
 import forge.control.FControl;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
@@ -49,6 +54,7 @@ import forge.gui.toolbox.FPanel;
 import forge.gui.toolbox.FScrollPane;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FTextArea;
+import forge.item.IPaperCard;
 import forge.item.InventoryItemFromSet;
 import forge.item.OpenablePack;
 import forge.item.PreconDeck;
@@ -165,7 +171,7 @@ public class CardDetailPanel extends FPanel {
         powerToughnessLabel.setVisible(false);
         idLabel.setText(null);
         cdArea.setText(getItemDescription(item));
-        setBorder(GuiDisplayUtil.getBorder(null));
+        setBorder(getBorder(item instanceof IPaperCard ? ((IPaperCard)item).getRules().getColor() : null, false));
 
         String set = item.getEdition();
         setInfoLabel.setText(set);
@@ -206,11 +212,12 @@ public class CardDetailPanel extends FPanel {
         this.setInfoLabel.setOpaque(false);
         this.setInfoLabel.setBorder(null);
         this.cdArea.setText("");
-        this.setBorder(GuiDisplayUtil.getBorder(card));
-
-        if (null == card) {
+        if( card == null ) {
+            this.setBorder(getBorder(null, false));
             return;
         }
+
+        this.setBorder(getBorder(CardUtil.getColors(card), card.isFaceDown()));
             
         final boolean canShowThis = FControl.SINGLETON_INSTANCE.mayShowCard(card);
         if (canShowThis) {
@@ -223,7 +230,7 @@ public class CardDetailPanel extends FPanel {
                 }
                 this.nameCostLabel.setText(card.getName() + " - " + manaCost);
             }
-            this.typeLabel.setText(GuiDisplayUtil.formatCardType(card));
+            this.typeLabel.setText(formatCardType(card));
             
             String set = card.getCurSetCode();
             this.setInfoLabel.setText(set);
@@ -596,4 +603,101 @@ public class CardDetailPanel extends FPanel {
     public JTextArea getCDArea() {
         return this.cdArea;
     }
+
+    public static String formatCardType(final Card card) {
+        final ArrayList<String> list = card.getType();
+        final StringBuilder sb = new StringBuilder();
+    
+        final ArrayList<String> superTypes = new ArrayList<String>();
+        final ArrayList<String> cardTypes = new ArrayList<String>();
+        final ArrayList<String> subTypes = new ArrayList<String>();
+        final boolean allCreatureTypes = list.contains("AllCreatureTypes");
+    
+        for (final String t : list) {
+            if (allCreatureTypes && t.equals("AllCreatureTypes")) {
+                continue;
+            }
+            if (CardType.isASuperType(t) && !superTypes.contains(t)) {
+                superTypes.add(t);
+            }
+            if (CardType.isACardType(t) && !cardTypes.contains(t)) {
+                cardTypes.add(t);
+            }
+            if (CardType.isASubType(t) && !subTypes.contains(t) && (!allCreatureTypes || !CardType.isACreatureType(t))) {
+                subTypes.add(t);
+            }
+        }
+    
+        for (final String type : superTypes) {
+            sb.append(type).append(" ");
+        }
+        for (final String type : cardTypes) {
+            sb.append(type).append(" ");
+        }
+        if (!subTypes.isEmpty() || allCreatureTypes) {
+            sb.append("- ");
+        }
+        if (allCreatureTypes) {
+            sb.append("All creature types ");
+        }
+        for (final String type : subTypes) {
+            sb.append(type).append(" ");
+        }
+    
+        return sb.toString();
+    }
+    
+
+    public static Border getBorder(ColorSet list, boolean faceDown) {
+        // color info
+        if (list == null) {
+            return BorderFactory.createEmptyBorder(2, 2, 2, 2);
+        }
+        java.awt.Color color;
+
+        if (faceDown) {
+            color = Color.gray;
+        } else if (list.isMulticolor()) {
+            color = Color.orange;
+        } else if (list.hasBlack()) {
+            color = Color.black;
+        } else if (list.hasGreen()) {
+            color = new Color(0, 220, 39);
+        } else if (list.hasWhite()) {
+            color = Color.white;
+        } else if (list.hasRed()) {
+            color = Color.red;
+        } else if (list.hasBlue()) {
+            color = Color.blue;
+        } else if (list.isColorless()) {
+            color = Color.gray;
+        } else {
+            color = new Color(200, 0, 230); // If your card has a violet border,
+                                            // something is wrong
+        }
+
+        if (color != Color.gray) {
+
+            int r = color.getRed();
+            int g = color.getGreen();
+            int b = color.getBlue();
+
+            final int shade = 10;
+
+            r -= shade;
+            g -= shade;
+            b -= shade;
+
+            r = Math.max(0, r);
+            g = Math.max(0, g);
+            b = Math.max(0, b);
+
+            color = new Color(r, g, b);
+
+            return BorderFactory.createLineBorder(color, 2);
+        } else {
+            return BorderFactory.createLineBorder(Color.gray, 2);
+        }
+    }
+
 }
