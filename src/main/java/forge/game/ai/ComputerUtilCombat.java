@@ -1863,6 +1863,10 @@ public class ComputerUtilCombat {
                 if (!"DamageDone".equals(params.get("Event")) || !params.containsKey("PreventionEffect")) {
                     continue;
                 }
+                // Immortal Coil prevents the damage but has a similar negative effect
+                if ("Immortal Coil".equals(ca.getName())) {
+                    continue;
+                }
                 if (params.containsKey("ValidSource")
                         && !source.isValid(params.get("ValidSource"), ca.getController(), ca)) {
                     continue;
