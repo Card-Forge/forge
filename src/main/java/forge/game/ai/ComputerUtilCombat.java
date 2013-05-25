@@ -792,6 +792,10 @@ public class ComputerUtilCombat {
                 continue;
             }
 
+            if (ability.hasParam("ActivationPhases") || ability.hasParam("SorcerySpeed")) {
+                continue;
+            }
+
             if (!ability.hasParam("NumAtt")) {
                 continue;
             }
@@ -905,6 +909,10 @@ public class ComputerUtilCombat {
             }
 
             if (ability.getApi() != ApiType.Pump || !ability.hasParam("NumDef")) {
+                continue;
+            }
+
+            if (ability.hasParam("ActivationPhases") || ability.hasParam("SorcerySpeed")) {
                 continue;
             }
 
@@ -1058,6 +1066,10 @@ public class ComputerUtilCombat {
                 continue;
             }
             if (ability.getApi() != ApiType.Pump) {
+                continue;
+            }
+
+            if (ability.hasParam("ActivationPhases") || ability.hasParam("SorcerySpeed")) {
                 continue;
             }
 
@@ -1226,6 +1238,10 @@ public class ComputerUtilCombat {
             }
 
             if (ability.getApi() != ApiType.Pump || !ability.hasParam("NumDef")) {
+                continue;
+            }
+
+            if (ability.hasParam("ActivationPhases") || ability.hasParam("SorcerySpeed")) {
                 continue;
             }
 
