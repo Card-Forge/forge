@@ -1338,8 +1338,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
             }
         }
 
-        if ((origin.contains(ZoneType.Library) && !destination.equals(ZoneType.Library) && !defined)
-                || (sa.hasParam("Shuffle") && "True".equals(sa.getParam("Shuffle")))) {
+        if ("True".equals(sa.getParam("Shuffle"))) {
             player.shuffle();
         }
 
