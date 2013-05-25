@@ -67,7 +67,6 @@ public enum CDock implements ICDoc {
     private LobbyPlayer player;
 
     public void setModel(GameState game0, LobbyPlayer player0) {
-
         game = game0;
         player = player0;
     }
@@ -75,7 +74,8 @@ public enum CDock implements ICDoc {
     private Player findAffectedPlayer() { 
         // try current priority
         Player currentPriority = game.getPhaseHandler().getPriorityPlayer();
-        if( currentPriority.getLobbyPlayer() == player ) return currentPriority;
+        if( currentPriority.getLobbyPlayer() == player ) 
+            return currentPriority;
         
         // otherwise find just any player, belonging to this lobbyplayer
         for(Player p : game.getPlayers())

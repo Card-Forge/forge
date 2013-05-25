@@ -1824,6 +1824,9 @@ public class Player extends GameEntity implements Comparable<Player> {
                 }
             }
         }
+        
+        if( land.getOwner() != this )
+            return false;
 
         // Dev Mode
         if (this.getLobbyPlayer().getType() == PlayerType.HUMAN && Preferences.DEV_MODE &&
