@@ -1346,10 +1346,12 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 || (sa.hasParam("Reveal") && !fetched.isEmpty()))
                 && !sa.hasParam("NoReveal")) {
             final String picked = player + " picked:";
-            if (fetched.size() > 0) {
-                GuiChoose.one(picked, fetched);
-            } else {
-                GuiChoose.one(picked, new String[] { "<Nothing>" });
+
+            List<Player> otherPlayers = game.getPlayers();
+            for (Player p : otherPlayers) {
+                if (!p.equals(player)) {
+                    p.getController().reveal(picked, fetched, destination, player);
+                }
             }
         }
     } // end changeHiddenOriginResolveAI
