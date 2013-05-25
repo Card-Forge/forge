@@ -11,13 +11,18 @@ import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 
+import org.apache.commons.lang3.tuple.Pair;
+
 import net.miginfocom.swing.MigLayout;
 import forge.Command;
 import forge.GameLog;
 import forge.GameLogEntry;
-import forge.GameLogLevel;
+import forge.GameEventType;
 import forge.Singletons;
+import forge.control.FControl;
 import forge.game.MatchController;
+import forge.game.player.LobbyPlayer;
+import forge.game.player.PlayerStatistics;
 import forge.gui.toolbox.FButton;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FOverlay;
@@ -175,15 +180,27 @@ public class ViewWinLose {
             }
         });
         
-        lblTitle.setText(match.getLastGameOutcome().getWinner().getName() + " Won!");
+        lblTitle.setText(composeTitle(match));
 
         GameLog log = match.getCurrentGame().getGameLog();
 
-        for (GameLogEntry o : log.getLogEntriesExact(GameLogLevel.GAME_OUTCOME)) 
+        for (GameLogEntry o : log.getLogEntriesExact(GameEventType.GAME_OUTCOME)) 
             pnlOutcomes.add(new FLabel.Builder().text(o.message).fontSize(14).build(), "h 20!");
 
-        for (GameLogEntry o : log.getLogEntriesExact(GameLogLevel.MATCH_RESULTS))
+        for (GameLogEntry o : log.getLogEntriesExact(GameEventType.MATCH_RESULTS))
             lblStats.setText(o.message);
+    }
+
+    private String composeTitle(MatchController match) {
+        LobbyPlayer guiPlayer = FControl.SINGLETON_INSTANCE.getLobby().getGuiPlayer();
+        int nHumansInGame = 0;
+        for(Pair<LobbyPlayer, PlayerStatistics> pps : match.getLastGameOutcome()) {
+            if( pps.getKey() == guiPlayer )
+                nHumansInGame++;
+        }
+        LobbyPlayer winner = match.getLastGameOutcome().getWinner();
+        String title = nHumansInGame == 1 ? "You " + (winner == guiPlayer ? "won!" : "lost!") : winner.getName() + " Won!";
+        return title;
     }
 
     /** @return {@link forge.gui.toolbox.FButton} */

@@ -35,7 +35,7 @@ import forge.Command;
 import forge.Constant;
 import forge.CounterType;
 import forge.GameEntity;
-import forge.GameLogLevel;
+import forge.GameEventType;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.card.ability.AbilityFactory;
@@ -205,10 +205,8 @@ public class CardFactoryUtil {
             @Override
             public void resolve() {
                 if (sourceCard.turnFaceUp()) {
-                    StringBuilder sb = new StringBuilder();
-                    sb.append(this.getActivatingPlayer()).append(" has unmorphed ");
-                    sb.append(sourceCard.getName());
-                    sourceCard.getGame().getGameLog().add("ResolveStack", sb.toString(), GameLogLevel.STACK);
+                    String sb = this.getActivatingPlayer() + " has unmorphed " + sourceCard.getName();
+                    sourceCard.getGame().getGameLog().add(GameEventType.STACK_RESOLVE, sb);
                 }
             }
 
@@ -429,12 +427,9 @@ public class CardFactoryUtil {
 
                 int counters = AbilityUtils.calculateAmount(c, timeCounters, this);
                 c.addCounter(CounterType.TIME, counters, true);
-
-                StringBuilder sb = new StringBuilder();
-                sb.append(this.getActivatingPlayer()).append(" has suspended ");
-                sb.append(c.getName()).append("with ");
-                sb.append(counters).append(" time counters on it.");
-                game.getGameLog().add("ResolveStack", sb.toString(), GameLogLevel.STACK);
+                
+                String sb = String.format("%s has suspended %s with %d time counters on it.", this.getActivatingPlayer(), c.getName(), counters);
+                game.getGameLog().add(GameEventType.STACK_RESOLVE, sb);
             }
         };
         final StringBuilder sbDesc = new StringBuilder();

@@ -26,7 +26,6 @@ import com.google.common.base.Predicate;
 import forge.Card;
 import forge.CardLists;
 import forge.CardPredicates.Presets;
-import forge.GameLogLevel;
 import forge.card.cost.Cost;
 import forge.card.mana.ManaCost;
 import forge.card.spellability.Ability;
@@ -176,7 +175,7 @@ public class PhaseUtil {
 
         }
 
-        game.getGameLog().add("Combat", CombatUtil.getCombatAttackForLog(game.getCombat()), GameLogLevel.COMBAT);
+        game.getGameLog().addCombatAttackers(game.getCombat());
 
         final HashMap<String, Object> runParams = new HashMap<String, Object>();
         runParams.put("Attackers", list);
@@ -272,7 +271,7 @@ public class PhaseUtil {
 
         game.getStack().unfreezeStack();
 
-        game.getGameLog().add("Combat", CombatUtil.getCombatBlockForLog(game.getCombat()), GameLogLevel.COMBAT);
+        game.getGameLog().addCombatBlockers(game.getCombat());
     }
 
 

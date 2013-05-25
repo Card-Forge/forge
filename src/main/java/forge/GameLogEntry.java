@@ -1,22 +1,18 @@
 package forge;
 
 public class GameLogEntry {
-    public final String type;
     public final String message;
-    public final GameLogLevel level;
+    public final GameEventType type;
+    // might add here date and some other fields
 
-    GameLogEntry(final String typeIn, final String messageIn, final GameLogLevel levelIn) {
-        type = typeIn;
+    GameLogEntry(final GameEventType type0, final String messageIn) {
+        type = type0;
         message = messageIn;
-        level = levelIn;
     }
     
-    /* (non-Javadoc)
-     * @see java.lang.Object#toString()
-     */
     @Override
     public String toString() {
         // TODO Auto-generated method stub
-        return type + ": " + message;
+        return type.getCaption() + ": " + message;
     }
 }

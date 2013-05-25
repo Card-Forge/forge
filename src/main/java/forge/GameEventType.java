@@ -1,21 +1,23 @@
 package forge;
 
-public enum GameLogLevel {
+public enum GameEventType {
     GAME_OUTCOME("Game outcome"),
     MATCH_RESULTS("Match result"),
     TURN("Turn"),
     MULLIGAN("Mulligan"),
     ANTE("Ante"),
     COMBAT("Combat"),
-    EFFECT_REPLACED("ReplacementEffect"),
+    EFFECT_REPLACED("Replacement Effect"),
     LAND("Land"),
-    STACK("Stack"),
+    STACK_RESOLVE("Resolve stack"),
+    STACK_ADD("Add to stack"),
     DAMAGE("Damage"),
+    DAMAGE_POISON("Poison"),
     MANA("Mana"),
     PHASE("Phase");
     
     private final String caption; 
-    private GameLogLevel(String name) {
+    private GameEventType(String name) {
         this.caption = name;
     }
 

@@ -26,7 +26,7 @@ import com.esotericsoftware.minlog.Log;
 
 import forge.Card;
 import forge.FThreads;
-import forge.GameLogLevel;
+import forge.GameEventType;
 import forge.Singletons;
 import forge.card.trigger.TriggerType;
 import forge.game.GameState;
@@ -39,6 +39,7 @@ import forge.gui.framework.SDisplayUtil;
 import forge.gui.match.CMatchUI;
 import forge.gui.match.nonsingleton.VField;
 import forge.properties.ForgePreferences.FPref;
+import forge.util.Lang;
 import forge.util.MyObservable;
 
 
@@ -486,10 +487,10 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
             default: // no action
         }
 
-        StringBuilder sb = new StringBuilder();
+        String phaseType = "";
         if (this.bRepeat) { // for when Cleanup needs to repeat itself
             this.bRepeat = false;
-            sb.append("Repeat Phase");
+            phaseType = "Repeat ";
         } else {
             // If the phase that's ending has a stack of additional phases
             // Take the LIFO one and move to that instead of the normal one
@@ -501,23 +502,20 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
                     this.extraPhases.remove(phase);
                 }
                 this.phase = nextPhase;
-                sb.append("Additional Phase");
+                phaseType = "Additional ";
             } else {
                 this.phase = phase.getNextPhase();
-                sb.append("Phase");
             }
         }
-
-        
 
         // **** Anything BELOW Here is actually in the next phase. Maybe move
         // this to handleBeginPhase
         if (this.phase == PhaseType.UNTAP) {
             this.turn++;
-            game.getGameLog().add("Turn", "Turn " + this.turn + " (" + this.getPlayerTurn() + ")", GameLogLevel.TURN);
+            game.getGameLog().add(GameEventType.TURN, "Turn " + this.turn + " (" + this.getPlayerTurn() + ")");
         }
         
-        game.getGameLog().add(sb.toString(), this.getPlayerTurn() + " " + this.getPhase().Name, GameLogLevel.PHASE);
+        game.getGameLog().add(GameEventType.PHASE, phaseType + Lang.getPossesive(this.getPlayerTurn().getName()) + " " + this.getPhase().Name);
         PhaseUtil.visuallyActivatePhase(this.getPlayerTurn(), this.getPhase());
 
         // When consecutively skipping phases (like in combat) this section

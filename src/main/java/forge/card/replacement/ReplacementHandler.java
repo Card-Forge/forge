@@ -24,7 +24,7 @@ import java.util.List;
 import java.util.Map;
 
 import forge.Card;
-import forge.GameLogLevel;
+import forge.GameEventType;
 import forge.card.ability.AbilityFactory;
 import forge.card.ability.AbilityUtils;
 import forge.card.spellability.SpellAbility;
@@ -150,7 +150,7 @@ public class ReplacementHandler {
             ReplacementResult res = this.executeReplacement(runParams, chosenRE, decider, game);
             if (res != ReplacementResult.NotReplaced) {
                 chosenRE.setHasRun(false);
-                game.getGameLog().add("ReplacementEffect", chosenRE.toString(), GameLogLevel.EFFECT_REPLACED);
+                game.getGameLog().add(GameEventType.EFFECT_REPLACED, chosenRE.toString());
                 return res;
             } else {
                 if (possibleReplacers.size() == 0) {

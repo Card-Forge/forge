@@ -27,7 +27,7 @@ import javax.swing.border.EmptyBorder;
 import net.miginfocom.swing.MigLayout;
 import forge.GameLog;
 import forge.GameLogEntry;
-import forge.GameLogLevel;
+import forge.GameEventType;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
@@ -119,7 +119,7 @@ public enum VLog implements IVDoc<CLog> {
 
         // TODO - some option to make this configurable is probably desirable
         // By default, grab everything log level 3 or less.
-        final List<GameLogEntry> data = model.getLogEntries(GameLogLevel.DAMAGE);
+        final List<GameLogEntry> data = model.getLogEntries(GameEventType.DAMAGE);
         final int size = data.size();
 
         pnl.removeAll();

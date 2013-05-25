@@ -28,8 +28,10 @@ import com.google.common.eventbus.Subscribe;
 import forge.game.GameOutcome;
 import forge.game.event.DuelOutcomeEvent;
 import forge.game.event.Event;
+import forge.game.phase.Combat;
 import forge.game.player.LobbyPlayer;
 import forge.game.player.PlayerStatistics;
+import forge.util.Lang;
 import forge.util.MyObservable;
 
 
@@ -60,6 +62,63 @@ public class GameLog extends MyObservable {
 
     }
 
+    /**
+     * Adds the.
+     *
+     * @param type the type
+     * @param message the message
+     * @param type the level
+     */
+    public void add(final GameEventType type, final String message) {
+        log.add(new GameLogEntry(type, message));
+        this.updateObservers();
+    }
+
+    /**
+     * Gets the log text.
+     *
+     * @return the log text
+     */
+    public String getLogText() {
+        return getLogText(null);
+    }
+
+    public String getLogText(final GameEventType logLevel) { 
+        List<GameLogEntry> filteredAndReversed = getLogEntries(logLevel);
+        return StringUtils.join(filteredAndReversed, "\r\n");
+    }
+
+    /**
+     * Gets the log entries below a certain level as a list.
+     *
+     * @param logLevel the log level
+     * @return the log text
+     */
+    public List<GameLogEntry> getLogEntries(final GameEventType logLevel) { // null to fetch all
+        final List<GameLogEntry> result = new ArrayList<GameLogEntry>();
+    
+        for (int i = log.size() - 1; i >= 0; i--) {
+            GameLogEntry le = log.get(i);
+            if(logLevel == null || le.type.compareTo(logLevel) <= 0 )
+                result.add(le);
+        }
+        return result;
+    }
+
+    public List<GameLogEntry> getLogEntriesExact(final GameEventType logLevel) { // null to fetch all
+        final List<GameLogEntry> result = new ArrayList<GameLogEntry>();
+    
+        for (int i = log.size() - 1; i >= 0; i--) {
+            GameLogEntry le = log.get(i);
+            if(logLevel == null || le.type.compareTo(logLevel) == 0 )
+                result.add(le);
+        }
+        return result;
+    }
+
+
+    // Special methods
+    
     @Subscribe
     public void receiveGameEvent(Event ev) { 
         if(ev instanceof DuelOutcomeEvent) {
@@ -67,6 +126,7 @@ public class GameLog extends MyObservable {
         }
     }
 
+    
     /**
      * Generates and adds 
      */
@@ -81,11 +141,11 @@ public class GameLog extends MyObservable {
             String whoHas = p.getKey().equals(human) ? "You have" : p.getKey().getName() + " has";
             String outcome = String.format("%s %s", whoHas, p.getValue().getOutcome().toString());
             outcomes.add(outcome);
-            this.add("Final", outcome, GameLogLevel.GAME_OUTCOME);
+            this.add(GameEventType.GAME_OUTCOME, outcome);
         }
         
         final String statsSummary = generateSummary(history);
-        this.add("Final", statsSummary, GameLogLevel.MATCH_RESULTS);
+        this.add(GameEventType.MATCH_RESULTS, statsSummary);
     }
     
     private static String generateSummary(List<GameOutcome> gamesPlayed) {
@@ -111,60 +171,77 @@ public class GameLog extends MyObservable {
         return sb.toString();
     }
     
+    
 
-    /**
-     * Adds the.
-     *
-     * @param type the type
-     * @param message the message
-     * @param level the level
-     */
-    public void add(final String type, final String message, final GameLogLevel level) {
-        log.add(new GameLogEntry(type, message, level));
-        this.updateObservers();
+    public void addCombatAttackers(Combat combat) {
+        this.add(GameEventType.COMBAT, describeAttack(combat)); 
     }
-
-    /**
-     * Gets the log text.
-     *
-     * @return the log text
-     */
-    public String getLogText() {
-        return getLogText(null);
+    public void addCombatBlockers(Combat combat) {
+        this.add(GameEventType.COMBAT, describeBlock(combat)); 
     }
+    // Special methods
 
 
-    public String getLogText(final GameLogLevel logLevel) { 
-        List<GameLogEntry> filteredAndReversed = getLogEntries(logLevel);
-        return StringUtils.join(filteredAndReversed, "\r\n");
-    }
+    private static String describeAttack(final Combat combat) {
+        final StringBuilder sb = new StringBuilder();
 
-    /**
-     * Gets the log entries below a certain level as a list.
-     *
-     * @param logLevel the log level
-     * @return the log text
-     */
-    public List<GameLogEntry> getLogEntries(final GameLogLevel logLevel) { // null to fetch all
-        final List<GameLogEntry> result = new ArrayList<GameLogEntry>();
+        // Loop through Defenders
+        // Append Defending Player/Planeswalker
 
-        for (int i = log.size() - 1; i >= 0; i--) {
-            GameLogEntry le = log.get(i);
-            if(logLevel == null || le.level.compareTo(logLevel) <= 0 )
-                result.add(le);
+        
+
+        // Not a big fan of the triple nested loop here
+        for (GameEntity defender : combat.getDefenders()) {
+            List<Card> attackers = combat.getAttackersOf(defender);
+            if (attackers == null || attackers.isEmpty()) {
+                continue;
+            }
+            if ( sb.length() > 0 ) sb.append("\n");
+
+            sb.append(combat.getAttackingPlayer()).append(" declared ").append(Lang.joinHomogenous(attackers));
+            sb.append(" to attack ").append(defender.toString()).append(".");
         }
-        return result;
+
+        return sb.toString();
+    }
+
+
+    private static String describeBlock(final Combat combat) {
+        final StringBuilder sb = new StringBuilder();
+
+        // Loop through Defenders
+        // Append Defending Player/Planeswalker
+        
+        List<Card> blockers = null;
+        
+
+        for (GameEntity defender : combat.getDefenders()) {
+            List<Card> attackers = combat.getAttackersOf(defender);
+            if (attackers == null || attackers.isEmpty()) {
+                continue;
+            }
+            if ( sb.length() > 0 ) sb.append("\n");
+
+            String controllerName = defender instanceof Card ? ((Card)defender).getController().getName() : defender.getName();
+            boolean firstAttacker = true;
+            for (final Card attacker : attackers) {
+                if ( !firstAttacker ) sb.append("\n");
+                
+                blockers = combat.getBlockers(attacker);
+                if ( blockers.isEmpty() ) {
+                    sb.append(controllerName).append(" didn't block ");
+                } else {
+                    sb.append(controllerName).append(" assigned ").append(Lang.joinHomogenous(blockers)).append(" to block ");
+                }
+                
+                sb.append(attacker).append(".");
+                firstAttacker = false;
+            }
+        }
+
+        return sb.toString();
     }
     
-    public List<GameLogEntry> getLogEntriesExact(final GameLogLevel logLevel) { // null to fetch all
-        final List<GameLogEntry> result = new ArrayList<GameLogEntry>();
-
-        for (int i = log.size() - 1; i >= 0; i--) {
-            GameLogEntry le = log.get(i);
-            if(logLevel == null || le.level.compareTo(logLevel) == 0 )
-                result.add(le);
-        }
-        return result;
-    }
+    
     
 } // end class GameLog

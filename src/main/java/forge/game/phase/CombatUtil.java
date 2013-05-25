@@ -59,7 +59,6 @@ import forge.gui.GuiDialog;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.SDisplayUtil;
 import forge.gui.match.controllers.CCombat;
-import forge.util.Lang;
 
 
 /**
@@ -963,77 +962,6 @@ public class CombatUtil {
 
         return true;
     } // canAttack()
-
-
-    /**
-     * gets a string for the GameLog regarding attackers.
-     * 
-     * @return a String
-     */
-    public static String getCombatAttackForLog(final Combat combat) {
-        final StringBuilder sb = new StringBuilder();
-
-        // Loop through Defenders
-        // Append Defending Player/Planeswalker
-
-        
-
-        // Not a big fan of the triple nested loop here
-        for (GameEntity defender : combat.getDefenders()) {
-            List<Card> attackers = combat.getAttackersOf(defender);
-            if (attackers == null || attackers.isEmpty()) {
-                continue;
-            }
-            if ( sb.length() > 0 ) sb.append("\n");
-
-            sb.append(combat.getAttackingPlayer()).append(" declared ").append(Lang.joinHomogenous(attackers));
-            sb.append(" to attack ").append(defender.toString()).append(".");
-        }
-
-        return sb.toString();
-    }
-
-    /**
-     * gets a string for the GameLog regarding assigned blockers.
-     * @param game 
-     * 
-     * @return a String
-     */
-    public static String getCombatBlockForLog(final Combat combat) {
-        final StringBuilder sb = new StringBuilder();
-
-        // Loop through Defenders
-        // Append Defending Player/Planeswalker
-        
-        List<Card> blockers = null;
-        
-
-        for (GameEntity defender : combat.getDefenders()) {
-            List<Card> attackers = combat.getAttackersOf(defender);
-            if (attackers == null || attackers.isEmpty()) {
-                continue;
-            }
-            if ( sb.length() > 0 ) sb.append("\n");
-
-            String controllerName = defender instanceof Card ? ((Card)defender).getController().getName() : defender.getName();
-            boolean firstAttacker = true;
-            for (final Card attacker : attackers) {
-                if ( !firstAttacker ) sb.append("\n");
-                
-                blockers = combat.getBlockers(attacker);
-                if ( blockers.isEmpty() ) {
-                    sb.append(controllerName).append(" didn't block ");
-                } else {
-                    sb.append(controllerName).append(" assigned ").append(Lang.joinHomogenous(blockers)).append(" to block ");
-                }
-                
-                sb.append(attacker).append(".");
-                firstAttacker = false;
-            }
-        }
-
-        return sb.toString();
-    }
 
 
     /**
