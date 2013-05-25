@@ -57,17 +57,17 @@ public class AiInputCommon extends InputPassPriorityBase implements AiInput {
         /*
          * //put this back in ButtonUtil.disableAll();
          * AllZone.getDisplay().showMessage("Phase: " +
-         * Singletons.getModel().getGameState().getPhaseHandler().getPhase() + "\nAn error may have occurred. Please
-         * send the \"Stack Report\" and the
-         * \"Detailed Error Trace\" to the Forge forum.");
+         * Singletons.getModel().getGameState().getPhaseHandler().getPhase() +
+         * "\nAn error may have occurred. Please send the \"Stack Report\" and
+         * the \"Detailed Error Trace\" to the Forge forum.");
          */
-        
+
         computer.getGame().getInputQueue().LockAndInvokeGameAction(aiActions);
-        
+
     } // getMessage();
 
     final Runnable aiActions = new Runnable() {
-        
+
         @Override
         public void run() {
             computer.onPriorityRecieved();

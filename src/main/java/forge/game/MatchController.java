@@ -13,6 +13,7 @@ import forge.Singletons;
 import forge.control.FControl;
 import forge.error.BugReporter;
 import forge.game.event.CardsAntedEvent;
+import forge.game.event.DuelFinishedEvent;
 import forge.game.event.DuelOutcomeEvent;
 import forge.game.event.FlipCoinEvent;
 import forge.game.player.LobbyPlayer;
@@ -91,6 +92,9 @@ public class MatchController {
 
         // The log shall listen to events and generate text internally
         game.getEvents().post(new DuelOutcomeEvent(result, gamesPlayedRo));
+        
+        // will pull UI 
+        game.getEvents().post(new DuelFinishedEvent());
     }
     
 

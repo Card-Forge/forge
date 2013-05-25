@@ -14241,6 +14241,7 @@ src/main/java/forge/game/event/CardsAntedEvent.java -text
 src/main/java/forge/game/event/CounterAddedEvent.java -text
 src/main/java/forge/game/event/CounterRemovedEvent.java -text
 src/main/java/forge/game/event/DrawCardEvent.java -text
+src/main/java/forge/game/event/DuelFinishedEvent.java -text
 src/main/java/forge/game/event/DuelOutcomeEvent.java -text
 src/main/java/forge/game/event/EndOfTurnEvent.java -text
 src/main/java/forge/game/event/Event.java -text

@@ -752,17 +752,8 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
                 nextPhase();
                 return;
             } else if (!game.getStack().hasSimultaneousStackEntries()) {
-                Runnable proc = new Runnable(){ 
-                    @Override public void run() {
-                        game.getStack().resolveStack();
-                        game.getStack().chooseOrderOfSimultaneousStackEntryAll();
-                    }
-                };
-                
-                if ( FThreads.isEDT() )
-                    game.getInputQueue().LockAndInvokeGameAction(proc);
-                else
-                    proc.run();
+                game.getStack().resolveStack();
+                game.getStack().chooseOrderOfSimultaneousStackEntryAll();
             }
         } else {
             // pass the priority to other player

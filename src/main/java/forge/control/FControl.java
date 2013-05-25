@@ -43,7 +43,7 @@ import forge.control.KeyboardShortcuts.Shortcut;
 import forge.game.GameState;
 import forge.game.ai.AiProfileUtil;
 import forge.game.event.CardsAntedEvent;
-import forge.game.event.DuelOutcomeEvent;
+import forge.game.event.DuelFinishedEvent;
 import forge.game.event.Event;
 import forge.game.player.LobbyPlayer;
 import forge.game.player.Player;
@@ -394,7 +394,7 @@ public enum FControl {
     @Subscribe
     public void receiveGameEvent(Event ev) { 
 
-        if( ev instanceof DuelOutcomeEvent ) {
+        if( ev instanceof DuelFinishedEvent ) {
             FThreads.invokeInEdtNowOrLater(new Runnable() { @Override public void run() {
                 new ViewWinLose(game.getMatch());
                 SOverlayUtils.showOverlay();
