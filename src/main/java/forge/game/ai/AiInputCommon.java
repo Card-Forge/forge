@@ -17,7 +17,7 @@
  */
 package forge.game.ai;
 
-import forge.control.input.InputNonSyncBase;
+import forge.control.input.InputPassPriorityBase;
 
 /**
  * <p>
@@ -27,7 +27,7 @@ import forge.control.input.InputNonSyncBase;
  * @author Forge
  * @version $Id$
  */
-public class AiInputCommon extends InputNonSyncBase implements AiInput {
+public class AiInputCommon extends InputPassPriorityBase implements AiInput {
     /** Constant <code>serialVersionUID=-3091338639571662216L</code>. */
     private static final long serialVersionUID = -3091338639571662216L;
 
@@ -71,6 +71,7 @@ public class AiInputCommon extends InputNonSyncBase implements AiInput {
         @Override
         public void run() {
             computer.onPriorityRecieved();
+            pass();
         }
     };
 }

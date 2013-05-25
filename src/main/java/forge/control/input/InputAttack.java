@@ -42,7 +42,7 @@ import forge.view.ButtonUtil;
  * @author Forge
  * @version $Id$
  */
-public class InputAttack extends InputNonSyncBase {
+public class InputAttack extends InputPassPriorityBase {
     /** Constant <code>serialVersionUID=7849903731842214245L</code>. */
     private static final long serialVersionUID = 7849903731842214245L;
 
@@ -96,10 +96,10 @@ public class InputAttack extends InputNonSyncBase {
     public final void selectButtonOK() {
         // Propaganda costs could have been paid here.
         setCurrentDefender(null); // remove highlights
-        
         game.getPhaseHandler().setCombat(!game.getCombat().getAttackers().isEmpty());
         game.getPhaseHandler().setPlayersPriorityPermission(false);
-        game.getInputQueue().updateObservers();
+
+        pass();
     }
 
     @Override

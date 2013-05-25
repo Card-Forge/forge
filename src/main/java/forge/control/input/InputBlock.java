@@ -37,7 +37,7 @@ import forge.view.ButtonUtil;
  * @author Forge
  * @version $Id$
  */
-public class InputBlock extends InputNonSyncBase {
+public class InputBlock extends InputPassPriorityBase {
     /** Constant <code>serialVersionUID=6120743598368928128L</code>. */
     private static final long serialVersionUID = 6120743598368928128L;
 
@@ -92,7 +92,7 @@ public class InputBlock extends InputNonSyncBase {
             currentAttacker = null;
             allBlocking.clear();
 
-            passPriority();
+            pass();
         }
     }
 

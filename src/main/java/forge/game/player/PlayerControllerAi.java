@@ -65,6 +65,11 @@ public class PlayerControllerAi extends PlayerController {
         return blockInput;
     }
 
+    @Override
+    public Input getAttackInput() {
+        return defaultInput;
+    }
+
     /**
      * @return the cleanupInput
      */

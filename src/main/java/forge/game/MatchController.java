@@ -124,15 +124,15 @@ public class MatchController {
         }
 
         final Player firstPlayer = determineFirstTurnPlayer(getLastGameOutcome(), currentGame);
-        
-        currentGame.getInputQueue().clearInput();
-        if(currentGame.getType() == GameType.Planechase)
-            firstPlayer.initPlane();
 
         // This code was run from EDT.
         FThreads.invokeInNewThread( new Runnable() {
             @Override
             public void run() {
+                currentGame.getInputQueue().clearInput();
+                if(currentGame.getType() == GameType.Planechase)
+                    firstPlayer.initPlane();
+
                 currentGame.getAction().mulligan(firstPlayer);
             }
         });

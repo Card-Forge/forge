@@ -100,6 +100,8 @@ public class InputQueue extends MyObservable implements java.io.Serializable {
      *            a boolean.
      */
     public final void removeInput(Input inp) {
+        FThreads.assertExecutedByEdt(false);
+        
         Input topMostInput = inputStack.isEmpty() ? null : inputStack.pop();
         
 //        StackTraceElement[] trace = Thread.currentThread().getStackTrace();
@@ -153,9 +155,9 @@ public class InputQueue extends MyObservable implements java.io.Serializable {
         switch (phase) {
             case COMBAT_DECLARE_ATTACKERS:
                 stack.freezeStack();
-                if (playerTurn.isHuman() && !playerTurn.getController().mayAutoPass(phase)) {
+                if (!playerTurn.getController().mayAutoPass(phase)) {
                     game.getCombat().initiatePossibleDefenders(playerTurn.getOpponents());
-                    return new InputAttack(playerTurn);
+                    return playerTurn.getController().getAttackInput();
                 }
                 break;
 
@@ -215,10 +217,10 @@ public class InputQueue extends MyObservable implements java.io.Serializable {
     }
 
     public void LockAndInvokeGameAction(final Runnable proc) {
-        this.lock();
         Runnable toRun = new Runnable() {
             @Override
             public void run() {
+                InputQueue.this.lock();
                 proc.run();
                 InputQueue.this.unlock();
             }

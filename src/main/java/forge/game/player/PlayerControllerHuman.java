@@ -19,6 +19,7 @@ import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.card.spellability.TargetSelection;
 import forge.control.input.Input;
+import forge.control.input.InputAttack;
 import forge.control.input.InputBlock;
 import forge.control.input.InputCleanup;
 import forge.control.input.InputConfirmMulligan;
@@ -66,6 +67,9 @@ public class PlayerControllerHuman extends PlayerController {
     public Input getBlockInput() {
         return blockInput;
     }
+
+    @Override
+    public Input getAttackInput() { return new InputAttack(player); }
 
     /**
      * @return the cleanupInput

@@ -54,7 +54,8 @@ public class InputProxy implements Observer {
     @Override
     public final synchronized void update(final Observable observable, final Object obj) {
         //synchronized(this) {} // want to update all changes to memory
-
+        FThreads.assertExecutedByEdt(false);
+        
         final PhaseHandler ph = game.getPhaseHandler();
         
         if(INPUT_DEBUG)
@@ -62,9 +63,8 @@ public class InputProxy implements Observer {
         
         if ( game.getInputQueue().isEmpty() && ph.hasPhaseEffects()) {
             if(INPUT_DEBUG)
-                System.out.printf("\t%s > handle begin phase during %s%n", FThreads.debugGetCurrThreadId(), ph.debugPrintState());
+                System.out.printf("\t%s > handle begin phase for %s%n", FThreads.debugGetCurrThreadId(), ph.debugPrintState());
             ph.handleBeginPhase();
-            return;
         }
         
         final Input nextInput = game.getInputQueue().getActualInput();

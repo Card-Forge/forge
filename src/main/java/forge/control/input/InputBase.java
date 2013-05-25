@@ -35,11 +35,15 @@ public abstract class InputBase implements java.io.Serializable, Input {
     /** Constant <code>serialVersionUID=-6539552513871194081L</code>. */
     private static final long serialVersionUID = -6539552513871194081L;
     private InputQueue queue;
+    private boolean finished = false;
+    protected final boolean isFinished() { return finished; }
+    protected final void setFinished() { finished = true; }
     
     // showMessage() is always the first method called
     @Override
     public final void showMessage(InputQueue iq) {
         queue = iq;
+        finished = false;
         showMessage();
     }
     
@@ -55,23 +59,18 @@ public abstract class InputBase implements java.io.Serializable, Input {
     public void selectButtonCancel() {    }
 
     // to remove need for CMatchUI dependence
-    protected void showMessage(String message) { 
+    protected final void showMessage(String message) { 
         CMatchUI.SINGLETON_INSTANCE.showMessage(message);
     }
     
-    // Removes this input from the stack and releases any latches (in synchronous imports)
-    protected final void stop() {
-        // clears a "temp" Input like Input_PayManaCost if there is one
-        queue.removeInput(this);
-        afterStop(); // sync inputs will release their latch there
-    }
 
     protected void afterStop() { }
 
-
-    
-    
     protected final void flashIncorrectAction() {
         SDisplayUtil.remind(VMessage.SINGLETON_INSTANCE);
+    }
+
+    protected InputQueue getQueue() {
+        return queue;
     }
 }

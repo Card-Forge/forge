@@ -9,7 +9,7 @@ import forge.error.BugReporter;
 public abstract class InputSyncronizedBase extends InputBase implements InputSynchronized { 
     private static final long serialVersionUID = 8756177361251703052L;
     
-    private boolean finished = false;
+
     private final CountDownLatch cdlDone;
 
     
@@ -26,33 +26,36 @@ public abstract class InputSyncronizedBase extends InputBase implements InputSyn
         }
     }
     
-
-    @Override
-    protected void afterStop() {
-        finished = true;
-        cdlDone.countDown();
-    }
     
+    protected final void stop() {
+        setFinished();
+        FThreads.invokeInNewThread(new Runnable() {
+            @Override
+            public void run() {
+                getQueue().removeInput(InputSyncronizedBase.this);
+                cdlDone.countDown();
+            }
+        });
+    }
 
     @Override
     public final void selectButtonCancel() {
-        if( finished ) return;
+        if( isFinished() ) return;
         onCancel();
     }
 
     @Override
     public final void selectButtonOK() {
-        if( finished ) return;
+        if( isFinished() ) return;
         onOk();
     }
 
     @Override
     public final void selectCard(Card c, boolean isMetaDown) {
-        if( finished ) return;
+        if( isFinished() ) return;
         onCardSelected(c);
     }
 
-    protected final boolean isFinished() { return finished; }
     protected void onCardSelected(Card c) {}
     protected void onCancel() {}
     protected void onOk() {}

@@ -848,7 +848,6 @@ public class AiController {
                     break;
             }
         }
-        player.getController().passPriority();
     }
     
 

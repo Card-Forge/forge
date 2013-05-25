@@ -45,6 +45,8 @@ public abstract class PlayerController {
     public abstract Input getDefaultInput();
     public abstract Input getBlockInput();
     public abstract Input getCleanupInput();
+    public abstract Input getAttackInput();
+
     public final Input getAutoPassPriorityInput() { return autoPassPriorityInput; }
 
     /**

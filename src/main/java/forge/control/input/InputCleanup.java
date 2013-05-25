@@ -31,7 +31,7 @@ import forge.view.ButtonUtil;
  * @author Forge
  * @version $Id$
  */
-public class InputCleanup extends InputNonSyncBase {
+public class InputCleanup extends InputPassPriorityBase {
     /** Constant <code>serialVersionUID=-4164275418971547948L</code>. */
     private static final long serialVersionUID = -4164275418971547948L;
     private final GameState game;
@@ -55,7 +55,7 @@ public class InputCleanup extends InputNonSyncBase {
         final int max = active.getMaxHandSize();
         // goes to the next phase
         if (active.isUnlimitedHandSize() || n <= max || n <= 0 || active != turnOwner) {
-            passPriority();
+            pass();
             return;
         }
         ButtonUtil.disableAll();

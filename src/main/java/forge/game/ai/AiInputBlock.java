@@ -3,7 +3,7 @@ package forge.game.ai;
 import java.util.List;
 
 import forge.Card;
-import forge.control.input.InputNonSyncBase;
+import forge.control.input.InputPassPriorityBase;
 import forge.game.GameState;
 import forge.game.phase.CombatUtil;
 import forge.game.player.Player;
@@ -12,7 +12,7 @@ import forge.game.player.Player;
  * TODO: Write javadoc for this type.
  *
  */
-public class AiInputBlock extends InputNonSyncBase {
+public class AiInputBlock extends InputPassPriorityBase {
     private final GameState game;
     /**
      * TODO: Write javadoc for Constructor.
@@ -32,9 +32,6 @@ public class AiInputBlock extends InputNonSyncBase {
         final List<Card> blockers = player.getCreaturesInPlay();
         game.setCombat(ComputerUtilBlock.getBlockers(player, game.getCombat(), blockers));
         CombatUtil.orderMultipleCombatants(game);
-        game.getPhaseHandler().setPlayersPriorityPermission(false);
-        
-        // was not added to stack, so will be replaced by plain update
-        game.getInputQueue().updateObservers();
+        pass();
     }
 }

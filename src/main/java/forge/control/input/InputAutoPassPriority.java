@@ -6,7 +6,7 @@ import forge.game.player.Player;
  * TODO: Write javadoc for this type.
  *
  */
-public class InputAutoPassPriority extends InputNonSyncBase {
+public class InputAutoPassPriority extends InputPassPriorityBase {
     private static final long serialVersionUID = -7520803307255234647L;
 
     public InputAutoPassPriority(Player player) {
@@ -15,7 +15,7 @@ public class InputAutoPassPriority extends InputNonSyncBase {
 
     @Override
     public void showMessage() {
-        passPriority();
+        pass();
     }
 
 }

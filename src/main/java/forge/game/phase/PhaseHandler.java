@@ -232,29 +232,11 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
     }
 
     public final void handleBeginPhase() {
-        this.setPhaseEffects(false);
-        if ( FThreads.isEDT() ) {
-            System.out.printf("Handle begin %s phase of %s turn from EDT%n", phase, playerTurn);
-            FThreads.invokeInNewThread(beginPhase);
-        } else {
-            beginPhase.run();
-        }
-    }
-
-    private final Runnable beginPhase = new Runnable() { @Override public void run() { 
-        doBeginPhase();
-        updateObservers();
-    } };
-    
-    /**
-     * <p>
-     * handleBeginPhase.
-     * </p>
-     */
-    private final void doBeginPhase() {
         if (null == playerTurn) {
             return;
         }
+        this.setPhaseEffects(false);
+        
         // Handle effects that happen at the beginning of phases
         game.getAction().checkStateEffects();
 
@@ -263,7 +245,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
             case UNTAP:
                 //SDisplayUtil.showTab(EDocID.REPORT_STACK.getDoc());
                 game.getPhaseHandler().setPlayersPriorityPermission(false);
-                updateObservers();
+                //updateObservers();
                 PhaseUtil.handleUntap(game);
                 break;
 
@@ -307,7 +289,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
                 if (playerTurn.isSkippingCombat()) {
                     this.setPlayersPriorityPermission(false);
                     playerTurn.removeKeyword("Skip your next combat phase.");
-                }
+                } /* else game.getInputQueue().setInput(playerTurn.getController().getAttackInput());*/
                 break;
 
             case COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY:
@@ -836,8 +818,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
      */
     public final void setPhaseState(final PhaseType phase0) {
         this.phase = phase0;
-        this.setPhaseEffects(false);
-        this.doBeginPhase();
+        this.handleBeginPhase();
     }
 
     /**

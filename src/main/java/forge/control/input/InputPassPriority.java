@@ -33,10 +33,9 @@ import forge.view.ButtonUtil;
  * @author Forge
  * @version $Id$
  */
-public class InputPassPriority extends InputNonSyncBase {
+public class InputPassPriority extends InputPassPriorityBase {
     /** Constant <code>serialVersionUID=-581477682214137181L</code>. */
     private static final long serialVersionUID = -581477682214137181L;
-    private boolean canUse = false; 
     
     /**
      * TODO: Write javadoc for Constructor.
@@ -53,7 +52,6 @@ public class InputPassPriority extends InputNonSyncBase {
             p.getZone(ZoneType.Battlefield).updateObservers();
         }
         ButtonUtil.enableOnlyOk();
-        canUse = true;
 
         final PhaseHandler ph = player.getGame().getPhaseHandler();
         final StringBuilder sb = new StringBuilder();
@@ -77,11 +75,8 @@ public class InputPassPriority extends InputNonSyncBase {
     /** {@inheritDoc} */
     @Override
     public final void selectButtonOK() {
-        if( canUse ) {
-            canUse = false;
-            passPriority();
-        }
-        
+        if( isFinished() ) return;
+        pass();
     }
 
     /** {@inheritDoc} */

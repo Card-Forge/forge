@@ -522,7 +522,7 @@ public class MagicStack extends MyObservable implements Iterable<SpellAbilitySta
             }
         }
 
-        if (this.getSimultaneousStackEntryList().size() > 0) {
+        if (!this.getSimultaneousStackEntryList().isEmpty()) {
             game.getPhaseHandler().passPriority();
         }
     }
