@@ -2,10 +2,7 @@ package forge.game;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map.Entry;
-
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.collect.Lists;
@@ -18,11 +15,8 @@ import forge.game.event.DuelOutcomeEvent;
 import forge.game.event.FlipCoinEvent;
 import forge.game.player.LobbyPlayer;
 import forge.game.player.Player;
-import forge.game.player.PlayerStatistics;
-import forge.gui.framework.SDisplayUtil;
-import forge.gui.match.CMatchUI;
+import forge.gui.SOverlayUtils;
 import forge.gui.match.ViewWinLose;
-import forge.gui.match.nonsingleton.VField;
 import forge.properties.ForgePreferences.FPref;
 import forge.util.MyRandom;
 
@@ -95,32 +89,12 @@ public class MatchController {
         result.setTurnsPlayed(game.getPhaseHandler().getTurn());
         gamesPlayed.add(result);
 
-        // Play the win/lose sound
-        game.getEvents().post(new DuelOutcomeEvent(result.getWinner()));
-        game.getGameLog().add("Final", result.getWinner() + " won", 0);
-
-        // add result entries to the game log
-        final LobbyPlayer human = Singletons.getControl().getLobby().getGuiPlayer();
-        
-
-        final List<String> outcomes = new ArrayList<String>();
-        for (Entry<LobbyPlayer, PlayerStatistics> p : result) {
-            String whoHas = p.getKey().equals(human) ? "You have" : p.getKey().getName() + " has";
-            String outcome = String.format("%s %s", whoHas, p.getValue().getOutcome().toString());
-            outcomes.add(outcome);
-            game.getGameLog().add("Final", outcome, 0);
-        }
-        
-        final String statsSummary = generateSummary();
-        game.getGameLog().add("Final", statsSummary, 0);
-
+        // The log shall listen to events and generate text internally
+        game.getEvents().post(new DuelOutcomeEvent(result, gamesPlayedRo));
 
         FThreads.invokeInEdtNowOrLater(new Runnable() { @Override public void run() {
-            String title = result.getWinner().getName() + " Won!";
             ViewWinLose v = new ViewWinLose(MatchController.this);
-            v.setTitle(title);
-            v.setOutcomes(outcomes);
-            v.setStatsSummary(statsSummary);
+            SOverlayUtils.showOverlay();
         } });
     }
     
@@ -148,10 +122,6 @@ public class MatchController {
         currentGame.getInputQueue().clearInput();
         if(currentGame.getType() == GameType.Planechase)
             firstPlayer.initPlane();
-
-        //Set Field shown to current player.
-        VField nextField = CMatchUI.SINGLETON_INSTANCE.getFieldViewFor(firstPlayer);
-        SDisplayUtil.showTab(nextField);
 
         // Update observers
         currentGame.getGameLog().updateObservers();
@@ -189,6 +159,10 @@ public class MatchController {
      */
     public GameOutcome getLastGameOutcome() {
         return gamesPlayed.isEmpty() ? null : gamesPlayed.get(gamesPlayed.size() - 1);
+    }
+    
+    public Iterable<GameOutcome> getOutcomes() {
+        return gamesPlayedRo;
     }
 
     public GameState getCurrentGame() {
@@ -236,29 +210,6 @@ public class MatchController {
             }
         }
         return sum;
-    }
-
-    public String generateSummary() {
-        HashMap<LobbyPlayer, Integer> playerWins = new HashMap<LobbyPlayer, Integer>();
-
-        for(Pair<LobbyPlayer, PlayerStartConditions> playerPair : this.players) {
-            playerWins.put(playerPair.getKey(), 0);
-        }
-
-        for (GameOutcome go : gamesPlayed) {
-            LobbyPlayer p = go.getWinner();
-            if (p != null) {
-                int incrementWins = playerWins.get(p) + 1;
-                playerWins.put(p, incrementWins);
-            }
-        }
-
-        StringBuilder sb = new StringBuilder("");
-        for(LobbyPlayer p : playerWins.keySet()) {
-            sb.append(p.getName()).append(": ");
-            sb.append(playerWins.get(p)).append(" ");
-        }
-        return sb.toString();
     }
 
     /**

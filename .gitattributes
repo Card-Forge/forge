@@ -13759,6 +13759,8 @@ src/main/java/forge/CounterType.java svneol=native#text/plain
 src/main/java/forge/FThreads.java -text
 src/main/java/forge/GameEntity.java -text
 src/main/java/forge/GameLog.java -text
+src/main/java/forge/GameLogEntry.java -text
+src/main/java/forge/GameLogLevel.java -text
 src/main/java/forge/ImageCache.java svneol=native#text/plain
 src/main/java/forge/ImageLoader.java -text
 src/main/java/forge/Singletons.java svneol=native#text/plain

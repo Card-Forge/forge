@@ -26,6 +26,7 @@ import com.esotericsoftware.minlog.Log;
 
 import forge.Card;
 import forge.FThreads;
+import forge.GameLogLevel;
 import forge.Singletons;
 import forge.card.trigger.TriggerType;
 import forge.game.GameState;
@@ -507,15 +508,16 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
             }
         }
 
-        game.getGameLog().add(sb.toString(), this.getPlayerTurn() + " " + this.getPhase().Name, 6);
+        
 
         // **** Anything BELOW Here is actually in the next phase. Maybe move
         // this to handleBeginPhase
         if (this.phase == PhaseType.UNTAP) {
             this.turn++;
-            game.getGameLog().add("Turn", "Turn " + this.turn + " (" + this.getPlayerTurn() + ")", 0);
+            game.getGameLog().add("Turn", "Turn " + this.turn + " (" + this.getPlayerTurn() + ")", GameLogLevel.TURN);
         }
-
+        
+        game.getGameLog().add(sb.toString(), this.getPlayerTurn() + " " + this.getPhase().Name, GameLogLevel.PHASE);
         PhaseUtil.visuallyActivatePhase(this.getPlayerTurn(), this.getPhase());
 
         // When consecutively skipping phases (like in combat) this section

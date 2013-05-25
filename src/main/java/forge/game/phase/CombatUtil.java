@@ -970,12 +970,12 @@ public class CombatUtil {
      * 
      * @return a String
      */
-    public static String getCombatAttackForLog(GameState game) {
+    public static String getCombatAttackForLog(final Combat combat) {
         final StringBuilder sb = new StringBuilder();
 
         // Loop through Defenders
         // Append Defending Player/Planeswalker
-        final Combat combat = game.getCombat();
+
         
 
         // Not a big fan of the triple nested loop here
@@ -999,12 +999,12 @@ public class CombatUtil {
      * 
      * @return a String
      */
-    public static String getCombatBlockForLog(GameState game) {
+    public static String getCombatBlockForLog(final Combat combat) {
         final StringBuilder sb = new StringBuilder();
 
         // Loop through Defenders
         // Append Defending Player/Planeswalker
-        final Combat combat = game.getCombat();
+        
         List<Card> blockers = null;
         
 
@@ -1020,7 +1020,7 @@ public class CombatUtil {
             for (final Card attacker : attackers) {
                 if ( !firstAttacker ) sb.append("\n");
                 
-                blockers = game.getCombat().getBlockers(attacker);
+                blockers = combat.getBlockers(attacker);
                 if ( blockers.isEmpty() ) {
                     sb.append(controllerName).append(" didn't block ");
                 } else {

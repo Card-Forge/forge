@@ -5,8 +5,6 @@ import java.awt.Font;
 import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.datatransfer.StringSelection;
-import java.util.List;
-
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -15,9 +13,11 @@ import javax.swing.SwingUtilities;
 
 import net.miginfocom.swing.MigLayout;
 import forge.Command;
+import forge.GameLog;
+import forge.GameLogEntry;
+import forge.GameLogLevel;
 import forge.Singletons;
 import forge.game.MatchController;
-import forge.gui.SOverlayUtils;
 import forge.gui.toolbox.FButton;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FOverlay;
@@ -37,8 +37,6 @@ public class ViewWinLose {
     private final JLabel lblStats = new JLabel("WinLoseFrame > lblStats needs updating.");
     private final JPanel pnlOutcomes = new JPanel(new MigLayout("wrap, align center"));
     
-    /**
-     * @param match  */
     @SuppressWarnings("serial")
     public ViewWinLose(MatchController match) {
         final JPanel overlay = FOverlay.SINGLETON_INSTANCE.getPanel();
@@ -177,23 +175,17 @@ public class ViewWinLose {
             }
         });
         
-        SOverlayUtils.showOverlay();
+        lblTitle.setText(match.getLastGameOutcome().getWinner().getName() + " Won!");
+
+        GameLog log = match.getCurrentGame().getGameLog();
+
+        for (GameLogEntry o : log.getLogEntriesExact(GameLogLevel.GAME_OUTCOME)) 
+            pnlOutcomes.add(new FLabel.Builder().text(o.message).fontSize(14).build(), "h 20!");
+
+        for (GameLogEntry o : log.getLogEntriesExact(GameLogLevel.MATCH_RESULTS))
+            lblStats.setText(o.message);
     }
 
-    public void setTitle(String title) {
-        lblTitle.setText(title);
-    }
-    
-    public void setOutcomes(List<String> outcomes) {
-        for (String o : outcomes) {
-            pnlOutcomes.add(new FLabel.Builder().text(o).fontSize(14).build(), "h 20!");
-        }
-    }
-    
-    public void setStatsSummary(String statsSummary) {
-        lblStats.setText(statsSummary);
-    }
-    
     /** @return {@link forge.gui.toolbox.FButton} */
     public FButton getBtnContinue() {
         return this.btnContinue;

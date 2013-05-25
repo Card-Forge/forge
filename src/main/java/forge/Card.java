@@ -3169,7 +3169,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     public final void equipCard(final Card c) {
         if (c.hasKeyword("CARDNAME can't be equipped.")) {
             getGame().getGameLog().add("ResolveStack", "Trying to equip " + c.getName()
-            + " but it can't be equipped.", 2);
+            + " but it can't be equipped.", GameLogLevel.STACK);
             return;
         }
         if (this.hasStartOfKeyword("CantEquip")) {
@@ -3179,7 +3179,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             final String[] restrictions = k[1].split(",");
             if (c.isValid(restrictions, this.getController(), this)) {
                 getGame().getGameLog().add("ResolveStack", "Trying to equip " + c.getName()
-                        + " but it can't be equipped.", 2);
+                        + " but it can't be equipped.", GameLogLevel.STACK);
                 return;
             }
         }
@@ -3372,7 +3372,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     public final void enchantEntity(final GameEntity entity) {
         if (entity.hasKeyword("CARDNAME can't be enchanted.")) {
             getGame().getGameLog().add("ResolveStack", "Trying to enchant " + entity.getName()
-            + " but it can't be enchanted.", 2);
+            + " but it can't be enchanted.", GameLogLevel.STACK);
             return;
         }
         this.addEnchanting(entity);
@@ -7460,7 +7460,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             game.getEvents().post(new CardDamagedEvent());
         }
 
-        getGame().getGameLog().add("Damage", String.format("Dealing %d damage to %s. %s", damageToAdd, this.getName(), additionalLog), 3);
+        getGame().getGameLog().add("Damage", String.format("Dealing %d damage to %s. %s", damageToAdd, this.getName(), additionalLog), GameLogLevel.DAMAGE);
         return true;
     }
 

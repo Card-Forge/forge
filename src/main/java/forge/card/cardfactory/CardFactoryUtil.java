@@ -35,6 +35,7 @@ import forge.Command;
 import forge.Constant;
 import forge.CounterType;
 import forge.GameEntity;
+import forge.GameLogLevel;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.card.ability.AbilityFactory;
@@ -207,7 +208,7 @@ public class CardFactoryUtil {
                     StringBuilder sb = new StringBuilder();
                     sb.append(this.getActivatingPlayer()).append(" has unmorphed ");
                     sb.append(sourceCard.getName());
-                    sourceCard.getGame().getGameLog().add("ResolveStack", sb.toString(), 2);
+                    sourceCard.getGame().getGameLog().add("ResolveStack", sb.toString(), GameLogLevel.STACK);
                 }
             }
 
@@ -433,7 +434,7 @@ public class CardFactoryUtil {
                 sb.append(this.getActivatingPlayer()).append(" has suspended ");
                 sb.append(c.getName()).append("with ");
                 sb.append(counters).append(" time counters on it.");
-                game.getGameLog().add("ResolveStack", sb.toString(), 2);
+                game.getGameLog().add("ResolveStack", sb.toString(), GameLogLevel.STACK);
             }
         };
         final StringBuilder sbDesc = new StringBuilder();

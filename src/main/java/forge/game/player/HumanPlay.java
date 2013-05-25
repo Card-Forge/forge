@@ -10,6 +10,7 @@ import forge.CardLists;
 import forge.CardPredicates.Presets;
 import forge.CounterType;
 import forge.FThreads;
+import forge.GameLogLevel;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.ApiType;
 import forge.card.ability.effects.CharmEffect;
@@ -355,7 +356,7 @@ public class HumanPlay {
                 
                 if (false == source.canReceiveCounters(counterType)) {
                     String message = String.format("Won't be able to pay upkeep for %s but it can't have %s counters put on it.", source, counterType.getName());
-                    p.getGame().getGameLog().add("ResolveStack", message, 2);
+                    p.getGame().getGameLog().add("ResolveStack", message, GameLogLevel.STACK);
                     return false;
                 }
                 

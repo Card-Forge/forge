@@ -375,5 +375,8 @@ public enum FControl {
         }
     
         // per player observers were set in CMatchUI.SINGLETON_INSTANCE.initMatch
+        //Set Field shown to current player.
+        VField nextField = CMatchUI.SINGLETON_INSTANCE.getFieldViewFor(game.getPlayers().get(0));
+        SDisplayUtil.showTab(nextField);
     }    
 }

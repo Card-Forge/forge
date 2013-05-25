@@ -81,7 +81,7 @@ public class EventVisualizer {
             return getSoundEffectForTapState(((SetTappedEvent) evt).Tapped);
         }
         if (evt instanceof DuelOutcomeEvent) {
-            return getSoundEffectForDuelOutcome(((DuelOutcomeEvent) evt).winner.getType() == PlayerType.HUMAN);
+            return getSoundEffectForDuelOutcome(((DuelOutcomeEvent) evt).result.getWinner().getType() == PlayerType.HUMAN);
         }
 
         return fromMap;

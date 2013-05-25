@@ -1,11 +1,15 @@
 package forge.game.event;
 
-import forge.game.player.LobbyPlayer;
+import java.util.List;
+
+import forge.game.GameOutcome;
 
 public class DuelOutcomeEvent extends Event {
-    public final LobbyPlayer winner;
+    public final GameOutcome result;
+    public final List<GameOutcome> history;
 
-    public DuelOutcomeEvent(LobbyPlayer winner) {
-        this.winner = winner;
+    public DuelOutcomeEvent(GameOutcome lastOne, List<GameOutcome> history) {
+        this.result = lastOne;
+        this.history = history;
     }
 }

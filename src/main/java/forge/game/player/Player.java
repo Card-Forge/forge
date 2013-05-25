@@ -39,6 +39,7 @@ import forge.Constant.Preferences;
 import forge.CounterType;
 import forge.FThreads;
 import forge.GameEntity;
+import forge.GameLogLevel;
 import forge.Singletons;
 import forge.card.MagicColor;
 import forge.card.ability.AbilityFactory;
@@ -680,7 +681,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         game.getTriggerHandler().runTrigger(TriggerType.DamageDone, runParams, false);
 
         game.getGameLog().add("Damage", String.format("Dealing %d damage to %s. %s", 
-                damageToDo, this.getName(), additionalLog), 3);
+                damageToDo, this.getName(), additionalLog), GameLogLevel.DAMAGE);
 
         return true;
     }
@@ -1028,7 +1029,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             this.poisonCounters += num;
 
             game.getEvents().post(new PoisonCounterEvent(this, source, num));
-            game.getGameLog().add("Poison", this + " receives a poison counter from " + source, 3);
+            game.getGameLog().add("Poison", this + " receives a poison counter from " + source, GameLogLevel.DAMAGE);
 
             this.updateObservers();
         }
@@ -1255,7 +1256,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         
         game.getEvents().post(new MulliganEvent(this)); // quest listener may interfere here
         final int newHand = getCardsIn(ZoneType.Hand).size();
-        game.getGameLog().add("Mulligan", this + " has mulliganed down to " + newHand + " cards.", 0);
+        game.getGameLog().add("Mulligan", this + " has mulliganed down to " + newHand + " cards.", GameLogLevel.MULLIGAN);
         stats.notifyHasMulliganed();
         stats.notifyOpeningHandSize(newHand);
     }
@@ -1799,7 +1800,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             game.getAction().checkStateEffects();
 
             // add to log
-            game.getGameLog().add("Land", this + " played " + land, 2);
+            game.getGameLog().add("Land", this + " played " + land, GameLogLevel.LAND);
 
             // play a sound
             game.getEvents().post(new LandPlayedEvent(this, land));
@@ -3159,7 +3160,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     public void onMulliganned() {
         game.getEvents().post(new MulliganEvent(this)); // quest listener may interfere here
         final int newHand = getCardsIn(ZoneType.Hand).size();
-        game.getGameLog().add("Mulligan", this + " has mulliganed down to " + newHand + " cards.", 0);
+        game.getGameLog().add("Mulligan", this + " has mulliganed down to " + newHand + " cards.", GameLogLevel.MULLIGAN);
         stats.notifyHasMulliganed();
         stats.notifyOpeningHandSize(newHand);
     }

@@ -17,14 +17,16 @@
  */
 package forge.game;
 
-import java.util.Arrays;
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.Map;
+import java.util.List;
 import java.util.Map.Entry;
+
+import org.apache.commons.lang3.tuple.Pair;
 
 import forge.game.player.LobbyPlayer;
 import forge.game.player.Player;
+import forge.game.player.PlayerOutcome;
 import forge.game.player.PlayerStatistics;
 
 /**
@@ -39,7 +41,7 @@ import forge.game.player.PlayerStatistics;
 // This class might be divided in two parts: the very summary (immutable with
 // only getters) and
 // GameObserver class - who should be notified of any considerable ingame event
-public final class GameOutcome implements Iterable<Entry<LobbyPlayer, PlayerStatistics>>  {
+public final class GameOutcome implements Iterable<Pair<LobbyPlayer, PlayerStatistics>>  {
 
 
     /** The player got first turn. */
@@ -49,55 +51,32 @@ public final class GameOutcome implements Iterable<Entry<LobbyPlayer, PlayerStat
     private int lastTurnNumber = 0;
 
     /** The player rating. */
-    private final Map<LobbyPlayer, PlayerStatistics> playerRating = new HashMap<LobbyPlayer, PlayerStatistics>(4);
+    private final List<Pair<LobbyPlayer, PlayerStatistics>> playerRating = new ArrayList<Pair<LobbyPlayer, PlayerStatistics>>(2);
 
     private GameEndReason winCondition;
-
-    /**
-     * Instantiates a new game summary.
-     * 
-     * @param names
-     *            the names
-     */
-    public GameOutcome(GameEndReason reason, final Player... names) {
-        this(reason, Arrays.asList(names));
-    }
 
     public GameOutcome(GameEndReason reason, final Iterable<Player> list) {
         winCondition = reason;
         for (final Player n : list) {
-            this.playerRating.put(n.getLobbyPlayer(), n.getStats());
+            this.playerRating.add(Pair.of(n.getLobbyPlayer(), n.getStats()));
         }
     }
 
-
-    /**
-     * Checks if is draw.
-     * 
-     * @return true, if is draw
-     */
     public boolean isDraw() {
-        for (PlayerStatistics pv : playerRating.values()) {
-
-            if (pv.getOutcome().hasWon()) {
+        for (Pair<LobbyPlayer, PlayerStatistics> pv : playerRating) {
+            if (pv.getValue().getOutcome().hasWon()) {
                 return false;
             }
         }
         return true;
     }
 
-    /**
-     * Checks if is winner.
-     * 
-     * @param name
-     *            the name
-     * @return true, if is winner
-     */
+
     public boolean isWinner(final LobbyPlayer who) {
-        PlayerStatistics stats =  playerRating.get(who);
-        if ( stats == null ) 
-            return false;
-        return stats.getOutcome().hasWon();
+        for (Pair<LobbyPlayer, PlayerStatistics> pv : playerRating)
+            if (pv.getValue().getOutcome().hasWon() && pv.getKey() == who )
+                return true;
+        return false;
     }
 
     /**
@@ -106,8 +85,7 @@ public final class GameOutcome implements Iterable<Entry<LobbyPlayer, PlayerStat
      * @return the winner
      */
     public LobbyPlayer getWinner() {
-        for (Entry<LobbyPlayer, PlayerStatistics> ps : playerRating.entrySet()) {
-
+        for (Entry<LobbyPlayer, PlayerStatistics> ps : playerRating) {
             if (ps.getValue().getOutcome().hasWon()) {
                 return ps.getKey();
             }
@@ -122,17 +100,6 @@ public final class GameOutcome implements Iterable<Entry<LobbyPlayer, PlayerStat
      */
     public GameEndReason getWinCondition() {
         return this.winCondition;
-    }
-
-    /**
-     * Gets the player rating.
-     * 
-     * @param name
-     *            the name
-     * @return the player rating
-     */
-    public PlayerStatistics getStatistics(final LobbyPlayer name) {
-        return this.playerRating.get(name);
     }
 
     /**
@@ -159,10 +126,10 @@ public final class GameOutcome implements Iterable<Entry<LobbyPlayer, PlayerStat
      * @return the win spell effect
      */
     public String getWinSpellEffect() {
-        for (PlayerStatistics pv : playerRating.values()) {
-
-            if (pv.getOutcome().hasWon()) {
-                return pv.getOutcome().altWinSourceName;
+        for (Pair<LobbyPlayer, PlayerStatistics> pv : playerRating) {
+            PlayerOutcome po = pv.getValue().getOutcome();
+            if (po.hasWon()) {
+                return po.altWinSourceName;
             }
         }
         return null;
@@ -172,8 +139,8 @@ public final class GameOutcome implements Iterable<Entry<LobbyPlayer, PlayerStat
      * @see java.lang.Iterable#iterator()
      */
     @Override
-    public Iterator<Entry<LobbyPlayer, PlayerStatistics>> iterator() {
-        return playerRating.entrySet().iterator();
+    public Iterator<Pair<LobbyPlayer, PlayerStatistics>> iterator() {
+        return playerRating.iterator();
     }
 
     /**
@@ -182,6 +149,14 @@ public final class GameOutcome implements Iterable<Entry<LobbyPlayer, PlayerStat
      */
     public void setTurnsPlayed(int turnNumber) {
         lastTurnNumber = turnNumber;
+    }
+
+    /**
+     * TODO: Write javadoc for this method.
+     * @return
+     */
+    public int getNumPlayers() {
+        return playerRating.size();
     }
 
 }

@@ -19,6 +19,7 @@ import com.google.common.collect.Lists;
 import forge.Card;
 import forge.CardLists;
 import forge.CardPredicates;
+import forge.GameLogLevel;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerHandler;
 import forge.card.trigger.TriggerType;
@@ -313,10 +314,10 @@ public class GameNew {
                 Predicate<Card> goodForAnte = Predicates.not(CardPredicates.Presets.BASIC_LANDS);
                 Card ante = Aggregates.random(Iterables.filter(lib, goodForAnte));
                 if (ante == null) {
-                    game.getGameLog().add("Ante", "Only basic lands found. Will ante one of them", 0);
+                    game.getGameLog().add("Ante", "Only basic lands found. Will ante one of them", GameLogLevel.ANTE);
                     ante = Aggregates.random(lib);
                 }
-                game.getGameLog().add("Ante", p + " anted " + ante, 0);
+                game.getGameLog().add("Ante", p + " anted " + ante, GameLogLevel.ANTE);
                 game.getAction().moveTo(ZoneType.Ante, ante);
                 msg.append(p.getName()).append(" ante: ").append(ante).append(nl);
             }
