@@ -58,6 +58,7 @@ Caged Sun
 Ink-Treader Nephilim
 Precursor Golem
 Weatherseed Totem
+Psychogenic Probe
 
 
 ----------
@@ -119,6 +120,9 @@ Vial of Poison
 Jace's Mindseeker
 Liliana's Reaver
 Thorncaster Sliver
+Undead Minotaur
+Molten Birth
+Vastwood Hydra
 
 
 ------------
