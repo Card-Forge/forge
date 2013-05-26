@@ -3,7 +3,7 @@ ManaCost:no cost
 Types:Basic Land Island
 SVar:PicCount:4
 SVar:Picture:http://resources.wizards.com/magic/cards/unh/en-us/card73951.jpg\http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=159281\http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=159282\http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=25964
-Oracle:U
+Oracle:({T}: Add {U} to your mana pool.)
 SetInfo:8ED Land x4
 SetInfo:H09 Land
 SetInfo:S99 Land x4

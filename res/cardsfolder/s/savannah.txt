@@ -2,7 +2,7 @@ Name:Savannah
 ManaCost:no cost
 Types:Land Forest Plains
 SVar:Picture:http://www.wizards.com/global/images/magic/general/savannah.jpg
-Oracle:
+Oracle:({T}: Add {G} or {W} to your mana pool.)
 SetInfo:2ED Rare
 SetInfo:LEB Rare
 SetInfo:LEA Rare

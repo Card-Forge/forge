@@ -2,7 +2,7 @@ Name:Tropical Island
 ManaCost:no cost
 Types:Land Forest Island
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tropical_island.jpg
-Oracle:
+Oracle:({T}: Add {G} or {U} to your mana pool.)
 SetInfo:2ED Rare
 SetInfo:LEB Rare
 SetInfo:LEA Rare

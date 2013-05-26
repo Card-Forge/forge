@@ -2,7 +2,7 @@ Name:Badlands
 ManaCost:no cost
 Types:Land Swamp Mountain
 SVar:Picture:http://www.wizards.com/global/images/magic/general/badlands.jpg
-Oracle:
+Oracle:({T}: Add {B} or {R} to your mana pool.)
 SetInfo:2ED Rare
 SetInfo:LEB Rare
 SetInfo:LEA Rare

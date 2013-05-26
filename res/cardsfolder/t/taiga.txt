@@ -2,7 +2,7 @@ Name:Taiga
 ManaCost:no cost
 Types:Land Mountain Forest
 SVar:Picture:http://www.wizards.com/global/images/magic/general/taiga.jpg
-Oracle:
+Oracle:({T}: Add {R} or {G} to your mana pool.)
 SetInfo:2ED Rare
 SetInfo:LEB Rare
 SetInfo:LEA Rare

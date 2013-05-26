@@ -2,7 +2,7 @@ Name:Scrubland
 ManaCost:no cost
 Types:Land Plains Swamp
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scrubland.jpg
-Oracle:
+Oracle:({T}: Add {W} or {B} to your mana pool.)
 SetInfo:2ED Rare
 SetInfo:LEB Rare
 SetInfo:LEA Rare

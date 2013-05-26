@@ -2,7 +2,7 @@ Name:Bayou
 ManaCost:no cost
 Types:Land Swamp Forest
 SVar:Picture:http://resources.wizards.com/magic/cards/1e/en-us/card280.jpg
-Oracle:
+Oracle:({T}: Add {B} or {G} to your mana pool.)
 SetInfo:2ED Rare
 SetInfo:LEB Rare
 SetInfo:LEA Rare
