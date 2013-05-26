@@ -24,9 +24,11 @@ import java.io.FileNotFoundException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -68,18 +70,12 @@ public final class GuiDisplayUtil {
     }
 
     public static void devSetupGameState() {
-        String tHumanLife = "-1";
-        String tComputerLife = "-1";
-        String tHumanSetupCardsInPlay = "NONE";
-        String tComputerSetupCardsInPlay = "NONE";
-        String tHumanSetupCardsInHand = "NONE";
-        String tComputerSetupCardsInHand = "NONE";
-        String tHumanSetupGraveyard = "NONE";
-        String tComputerSetupGraveyard = "NONE";
-        String tHumanSetupLibrary = "NONE";
-        String tComputerSetupLibrary = "NONE";
-        String tHumanSetupExile = "NONE";
-        String tComputerSetupExile = "NONE";
+        int humanLife = -1;
+        int computerLife = -1;
+        
+        final Map<ZoneType, String> humanCardTexts = new EnumMap<ZoneType, String>(ZoneType.class);
+        final Map<ZoneType, String> aiCardTexts = new EnumMap<ZoneType, String>(ZoneType.class);
+
         String tChangePlayer = "NONE";
         String tChangePhase = "NONE";
 
@@ -89,7 +85,6 @@ public final class GuiDisplayUtil {
         if (rc != JFileChooser.APPROVE_OPTION) {
             return;
         }
-        final GameState game = getGame();
 
         try {
             final FileInputStream fstream = new FileInputStream(fc.getSelectedFile().getAbsolutePath());
@@ -99,47 +94,32 @@ public final class GuiDisplayUtil {
             String temp = "";
 
             while ((temp = br.readLine()) != null) {
+
                 final String[] tempData = temp.split("=");
-
-                if (tempData.length < 2) {
-                    continue;
-                }
-                if (tempData[0].toCharArray()[0] == '#') {
+                if (tempData.length < 2 || temp.charAt(0) == '#') {
                     continue;
                 }
 
-                final String categoryName = tempData[0];
+                final String categoryName = tempData[0].toLowerCase();
                 final String categoryValue = tempData[1];
 
-                if (categoryName.toLowerCase().equals("humanlife")) {
-                    tHumanLife = categoryValue;
-                } else if (categoryName.toLowerCase().equals("ailife")) {
-                    tComputerLife = categoryValue;
-                } else if (categoryName.toLowerCase().equals("humancardsinplay")) {
-                    tHumanSetupCardsInPlay = categoryValue;
-                } else if (categoryName.toLowerCase().equals("aicardsinplay")) {
-                    tComputerSetupCardsInPlay = categoryValue;
-                } else if (categoryName.toLowerCase().equals("humancardsinhand")) {
-                    tHumanSetupCardsInHand = categoryValue;
-                } else if (categoryName.toLowerCase().equals("aicardsinhand")) {
-                    tComputerSetupCardsInHand = categoryValue;
-                } else if (categoryName.toLowerCase().equals("humancardsingraveyard")) {
-                    tHumanSetupGraveyard = categoryValue;
-                } else if (categoryName.toLowerCase().equals("aicardsingraveyard")) {
-                    tComputerSetupGraveyard = categoryValue;
-                } else if (categoryName.toLowerCase().equals("humancardsinlibrary")) {
-                    tHumanSetupLibrary = categoryValue;
-                } else if (categoryName.toLowerCase().equals("aicardsinlibrary")) {
-                    tComputerSetupLibrary = categoryValue;
-                } else if (categoryName.toLowerCase().equals("humancardsinexile")) {
-                    tHumanSetupExile = categoryValue;
-                } else if (categoryName.toLowerCase().equals("aicardsinexile")) {
-                    tComputerSetupExile = categoryValue;
-                } else if (categoryName.toLowerCase().equals("activeplayer")) {
-                    tChangePlayer = categoryValue;
-                } else if (categoryName.toLowerCase().equals("activephase")) {
-                    tChangePhase = categoryValue;
-                }
+                if (categoryName.equals("humanlife"))                   humanLife = Integer.parseInt(categoryValue);
+                else if (categoryName.equals("ailife"))                 computerLife = Integer.parseInt(categoryValue);
+
+                else if (categoryName.equals("activeplayer"))           tChangePlayer = categoryValue.trim().toLowerCase();
+                else if (categoryName.equals("activephase"))            tChangePhase = categoryValue;
+
+                else if (categoryName.equals("humancardsinplay"))       humanCardTexts.put(ZoneType.Battlefield, categoryValue);
+                else if (categoryName.equals("aicardsinplay"))          aiCardTexts.put(ZoneType.Battlefield, categoryValue);
+                else if (categoryName.equals("humancardsinhand"))       humanCardTexts.put(ZoneType.Hand, categoryValue);
+                else if (categoryName.equals("aicardsinhand"))          aiCardTexts.put(ZoneType.Hand, categoryValue);
+                else if (categoryName.equals("humancardsingraveyard"))  humanCardTexts.put(ZoneType.Graveyard, categoryValue);
+                else if (categoryName.equals("aicardsingraveyard"))     aiCardTexts.put(ZoneType.Graveyard, categoryValue);
+                else if (categoryName.equals("humancardsinlibrary"))    humanCardTexts.put(ZoneType.Library, categoryValue);
+                else if (categoryName.equals("aicardsinlibrary"))       aiCardTexts.put(ZoneType.Library, categoryValue);
+                else if (categoryName.equals("humancardsinexile"))      humanCardTexts.put(ZoneType.Exile, categoryValue);
+                else if (categoryName.equals("aicardsinexile"))         aiCardTexts.put(ZoneType.Exile, categoryValue);
+                
             }
 
             in.close();
@@ -150,144 +130,64 @@ public final class GuiDisplayUtil {
             return;
         }
 
-        final int setHumanLife = Integer.parseInt(tHumanLife);
-        final int setComputerLife = Integer.parseInt(tComputerLife);
+        setupGameState(humanLife, computerLife, humanCardTexts, aiCardTexts, tChangePlayer, tChangePhase);
+    }
 
-        final String[] humanSetupCardsInPlay = tHumanSetupCardsInPlay.split(";");
-        final String[] computerSetupCardsInPlay = tComputerSetupCardsInPlay.split(";");
-        final String[] humanSetupCardsInHand = tHumanSetupCardsInHand.split(";");
-        final String[] computerSetupCardsInHand = tComputerSetupCardsInHand.split(";");
-        final String[] humanSetupGraveyard = tHumanSetupGraveyard.split(";");
-        final String[] computerSetupGraveyard = tComputerSetupGraveyard.split(";");
-        final String[] humanSetupLibrary = tHumanSetupLibrary.split(";");
-        final String[] computerSetupLibrary = tComputerSetupLibrary.split(";");
-        final String[] humanSetupExile = tHumanSetupExile.split(";");
-        final String[] computerSetupExile = tComputerSetupExile.split(";");
+    private static void setupGameState(final int humanLife, final int computerLife, final Map<ZoneType, String> humanCardTexts,
+            final Map<ZoneType, String> aiCardTexts, final String tChangePlayer, final String tChangePhase) {
+        
+        FThreads.invokeInNewThread(new Runnable() {
+            @Override
+            public void run() {
+                final GameState game = getGame();
+                final Player human = game.getPlayers().get(0);
+                final Player ai = game.getPlayers().get(1);
 
-        List<Card> humanDevSetup = new ArrayList<Card>();
-        List<Card> computerDevSetup = new ArrayList<Card>();
-        List<Card> humanDevHandSetup = new ArrayList<Card>();
-        List<Card> computerDevHandSetup = new ArrayList<Card>();
-        List<Card> humanDevGraveyardSetup = new ArrayList<Card>();
-        List<Card> computerDevGraveyardSetup = new ArrayList<Card>();
-        List<Card> humanDevLibrarySetup = new ArrayList<Card>();
-        List<Card> computerDevLibrarySetup = new ArrayList<Card>();
-        List<Card> humanDevExileSetup = new ArrayList<Card>();
-        List<Card> computerDevExileSetup = new ArrayList<Card>();
-
-        final Player human = getGame().getPlayers().get(0);
-        final Player ai = getGame().getPlayers().get(1);
-
-        if (!tChangePlayer.trim().toLowerCase().equals("none")) {
-            if (tChangePlayer.trim().toLowerCase().equals("human")) {
-                game.getPhaseHandler().setPlayerTurn(human);
+                if (tChangePlayer.equals("human")) {
+                    game.getPhaseHandler().setPlayerTurn(human);
+                } else if (tChangePlayer.equals("ai")) {
+                    game.getPhaseHandler().setPlayerTurn(ai);
+                }
+              
+                if (!tChangePhase.trim().equalsIgnoreCase("none")) {
+                    game.getPhaseHandler().setDevPhaseState(forge.game.phase.PhaseType.smartValueOf(tChangePhase));
+                }
+              
+                game.getCombat().reset(game.getPhaseHandler().getPlayerTurn());
+                game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
+              
+                devSetupPlayerState(humanLife, humanCardTexts, human);
+                devSetupPlayerState(computerLife, aiCardTexts, ai);
+              
+                game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
+              
+              
+                game.getAction().checkStateEffects();
+                game.getPhaseHandler().updateObservers();
+                for (Player p : game.getRegisteredPlayers()) {
+                    p.getZone(ZoneType.Battlefield).updateObservers();
+                }
             }
-            if (tChangePlayer.trim().toLowerCase().equals("ai")) {
-                game.getPhaseHandler().setPlayerTurn(ai);
+        });
+    }
+
+    private static void devSetupPlayerState(int life, Map<ZoneType, String> cardTexts, final Player p) {
+        Map<ZoneType, List<Card>> humanCards = new EnumMap<ZoneType, List<Card>>(ZoneType.class);
+        for(Entry<ZoneType, String> kv : cardTexts.entrySet()) {
+            humanCards.put(kv.getKey(), GuiDisplayUtil.devProcessCardsForZone(kv.getValue().split(";"), p));
+        }
+
+        if (life > 0) p.setLife(life, null);
+        for (Entry<ZoneType, List<Card>> kv : humanCards.entrySet()) {
+            if (kv.getKey() == ZoneType.Battlefield) {
+                for (final Card c : kv.getValue()) {
+                    p.getZone(ZoneType.Hand).add(c);
+                    p.getGame().getAction().moveToPlay(c);
+                    c.setSickness(false);
+                }
+            } else {
+                p.getZone(kv.getKey()).setCards(kv.getValue());
             }
-        }
-
-
-
-        if (!tChangePhase.trim().toLowerCase().equals("none")) {
-            game.getPhaseHandler().setDevPhaseState(forge.game.phase.PhaseType.smartValueOf(tChangePhase));
-        }
-
-        if (!tHumanSetupCardsInPlay.trim().toLowerCase().equals("none")) {
-            humanDevSetup = GuiDisplayUtil.devProcessCardsForZone(humanSetupCardsInPlay, human);
-        }
-
-        if (!tHumanSetupCardsInHand.trim().toLowerCase().equals("none")) {
-            humanDevHandSetup = GuiDisplayUtil.devProcessCardsForZone(humanSetupCardsInHand, human);
-        }
-
-        if (!tComputerSetupCardsInPlay.trim().toLowerCase().equals("none")) {
-            computerDevSetup = GuiDisplayUtil.devProcessCardsForZone(computerSetupCardsInPlay, ai);
-        }
-
-        if (!tComputerSetupCardsInHand.trim().toLowerCase().equals("none")) {
-            computerDevHandSetup = GuiDisplayUtil.devProcessCardsForZone(computerSetupCardsInHand, ai);
-        }
-
-        if (!tComputerSetupGraveyard.trim().toLowerCase().equals("none")) {
-            computerDevGraveyardSetup = GuiDisplayUtil.devProcessCardsForZone(computerSetupGraveyard, ai);
-        }
-
-        if (!tHumanSetupGraveyard.trim().toLowerCase().equals("none")) {
-            humanDevGraveyardSetup = GuiDisplayUtil.devProcessCardsForZone(humanSetupGraveyard, human);
-        }
-
-        if (!tHumanSetupLibrary.trim().toLowerCase().equals("none")) {
-            humanDevLibrarySetup = GuiDisplayUtil.devProcessCardsForZone(humanSetupLibrary, human);
-        }
-
-        if (!tComputerSetupLibrary.trim().toLowerCase().equals("none")) {
-            computerDevLibrarySetup = GuiDisplayUtil.devProcessCardsForZone(computerSetupLibrary, ai);
-        }
-
-        if (!tHumanSetupExile.trim().toLowerCase().equals("none")) {
-            humanDevExileSetup = GuiDisplayUtil.devProcessCardsForZone(humanSetupExile, human);
-        }
-
-        if (!tComputerSetupExile.trim().toLowerCase().equals("none")) {
-            computerDevExileSetup = GuiDisplayUtil.devProcessCardsForZone(computerSetupExile, ai);
-        }
-
-        game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
-        game.getCombat().reset(game.getPhaseHandler().getPlayerTurn());
-        for (final Card c : humanDevSetup) {
-            human.getZone(ZoneType.Hand).add(c);
-            game.getAction().moveToPlay(c);
-            c.setSickness(false);
-        }
-
-        for (final Card c : computerDevSetup) {
-            ai.getZone(ZoneType.Hand).add(c);
-            game.getAction().moveToPlay(c);
-            c.setSickness(false);
-        }
-
-        if (computerDevGraveyardSetup.size() > 0) {
-            ai.getZone(ZoneType.Graveyard).setCards(computerDevGraveyardSetup);
-        }
-        if (humanDevGraveyardSetup.size() > 0) {
-            human.getZone(ZoneType.Graveyard).setCards(humanDevGraveyardSetup);
-        }
-
-        if (computerDevHandSetup.size() > 0) {
-            ai.getZone(ZoneType.Hand).setCards(computerDevHandSetup);
-        }
-        if (humanDevHandSetup.size() > 0) {
-            human.getZone(ZoneType.Hand).setCards(humanDevHandSetup);
-        }
-
-        if (humanDevLibrarySetup.size() > 0) {
-            human.getZone(ZoneType.Library).setCards(humanDevLibrarySetup);
-        }
-        if (computerDevLibrarySetup.size() > 0) {
-            ai.getZone(ZoneType.Library).setCards(computerDevLibrarySetup);
-        }
-
-        if (humanDevExileSetup.size() > 0) {
-            human.getZone(ZoneType.Exile).setCards(humanDevExileSetup);
-        }
-        if (computerDevExileSetup.size() > 0) {
-            ai.getZone(ZoneType.Exile).setCards(computerDevExileSetup);
-        }
-
-        game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
-
-        if (setComputerLife > 0) {
-            ai.setLife(setComputerLife, null);
-        }
-        if (setHumanLife > 0) {
-            human.setLife(setHumanLife, null);
-        }
-
-        game.getAction().checkStateEffects();
-        game.getPhaseHandler().updateObservers();
-        for (Player p : game.getRegisteredPlayers()) {
-            p.getZone(ZoneType.Battlefield).updateObservers();
         }
     }
 
