@@ -47,7 +47,7 @@ public class InputProxy implements Observer {
     
     public void setGame(GameState game0) {
         game = game0;
-        game.getStack().addObserver(this);
+        // game.getStack().addObserver(this);
         game.getPhaseHandler().addObserver(this);
         game.getInputQueue().addObserver(this);
     }
@@ -63,14 +63,14 @@ public class InputProxy implements Observer {
         
         if(INPUT_DEBUG) { 
             System.out.print(FThreads.debugGetStackTraceItem(6, true) + " ... ");
-            System.out.printf("\tinput is %s during %s, \tstack = %s%n", nextInput == null ? "null" : nextInput.getClass().getSimpleName(), ph.debugPrintState(), game.getInputQueue().printInputStack());
+            System.out.printf("\t%s on %s, \tstack = %s%n", nextInput == null ? "null" : nextInput.getClass().getSimpleName(), ph.debugPrintState(), game.getInputQueue().printInputStack());
         }
 
         this.input.set(nextInput);
         Runnable showMessage = new Runnable() {
             @Override public void run() { 
-                if(INPUT_DEBUG)
-                    System.out.printf("%s > showMessage @ %s/%s during %s%n%n", FThreads.debugGetCurrThreadId(), nextInput.getClass().getSimpleName(), getInput().getClass().getSimpleName(), ph.debugPrintState());
+                //if(INPUT_DEBUG)
+                //    System.out.printf("%s > showMessage @ %s/%s during %s%n%n", FThreads.debugGetCurrThreadId(), nextInput.getClass().getSimpleName(), getInput().getClass().getSimpleName(), ph.debugPrintState());
                 getInput().showMessage(game.getInputQueue()); 
             }
         };

@@ -724,6 +724,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
             } else if (!game.getStack().hasSimultaneousStackEntries()) {
                 game.getStack().resolveStack();
                 game.getStack().chooseOrderOfSimultaneousStackEntryAll();
+                updateObservers();
             }
         } else {
             // pass the priority to other player
@@ -806,7 +807,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
     }
     
     public String debugPrintState() {
-        return String.format("%s's %s, priority of %s [%sP]", getPlayerTurn(), getPhase(), getPriorityPlayer(), isPlayerPriorityAllowed() ? "+" : "-");
+        return String.format("%s's %s [%sP] %s", getPlayerTurn(), getPhase(), isPlayerPriorityAllowed() ? "+" : "-", getPriorityPlayer());
     }
 
 
