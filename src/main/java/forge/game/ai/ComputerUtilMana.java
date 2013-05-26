@@ -3,6 +3,7 @@ package forge.game.ai;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -105,11 +106,7 @@ public class ComputerUtilMana {
         MapOfLists<ManaCostShard, SpellAbility> sourcesForShards = ComputerUtilMana.groupAndOrderToPayShards(ai, manaAbilityMap, cost);
         
         // Loop over mana needed
-        List<Card> cardsUsed = new ArrayList<Card>();
 
-        //don't use a card to pay for itself - miscalculations!
-        cardsUsed.add(sa.getSourceCard());
-        
         ManaCostShard toPay = null;
         while (!cost.isPaid()) {
             toPay = getNextShardToPay(cost, sourcesForShards);
@@ -118,7 +115,7 @@ public class ComputerUtilMana {
             SpellAbility saPayment = null;
             if( saList != null  ) { 
                 for (final SpellAbility ma : saList) { 
-                    if(cardsUsed.contains(ma.getSourceCard()) )
+                    if(ma.getSourceCard() == sa.getSourceCard())
                         continue;
                     if( canPayShardWithSpellAbility(toPay, ai, ma, sa, checkPlayable || !test ) ) {
                         saPayment = ma;
@@ -147,9 +144,13 @@ public class ComputerUtilMana {
                 
                 // remove from available lists
                 for(Collection<SpellAbility> kv : sourcesForShards.values()) {
-                    kv.remove(saPayment);
+                    Iterator<SpellAbility> itSa = kv.iterator();
+                    while(itSa.hasNext()) {
+                        SpellAbility srcSa = itSa.next();
+                        if( srcSa.getSourceCard().equals(saPayment.getSourceCard()) )
+                            itSa.remove();
+                    }
                 }
-                cardsUsed.add(saPayment.getSourceCard());
             } else {
                 if (saPayment.getPayCosts() != null) {
                     final CostPayment pay = new CostPayment(saPayment.getPayCosts(), saPayment);
