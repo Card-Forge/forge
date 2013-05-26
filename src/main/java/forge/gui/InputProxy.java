@@ -53,8 +53,8 @@ public class InputProxy implements Observer {
     }
     
     @Override
-    public final synchronized void update(final Observable observable, final Object obj) {
-        //synchronized(this) {} // want to update all changes to memory
+    public final void update(final Observable observable, final Object obj) {
+        synchronized(this) {} // want to update all changes to memory
         FThreads.assertExecutedByEdt(false);
         
         final PhaseHandler ph = game.getPhaseHandler();
@@ -76,7 +76,7 @@ public class InputProxy implements Observer {
         };
         
         if( nextInput instanceof InputAutoPassPriority )
-            nextInput.showMessage(game.getInputQueue());
+            ph.getPriorityPlayer().getController().passPriority();
         else
             FThreads.invokeInEdtLater(showMessage);
     }

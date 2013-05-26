@@ -62,7 +62,7 @@ public class InputQueue extends MyObservable implements java.io.Serializable {
      * @param in
      *            a {@link forge.control.input.InputBase} object.
      */
-    public final void setInput(final Input in) {
+    private final void setInput(final Input in) {
         //System.out.println(in.getClass().getName());
         this.inputStack.push(in);
         // System.out.print("Current: " + input + "; Stack = " + inputStack);
@@ -99,7 +99,7 @@ public class InputQueue extends MyObservable implements java.io.Serializable {
      * @param update
      *            a boolean.
      */
-    public final void removeInput(Input inp) {
+    final void removeInput(Input inp) {
         FThreads.assertExecutedByEdt(false);
         
         Input topMostInput = inputStack.isEmpty() ? null : inputStack.pop();
