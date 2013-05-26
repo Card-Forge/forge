@@ -1103,9 +1103,46 @@ public class ComputerUtil {
                 }
             }
         }
-    
         return false;
     } // hasACardGivingHaste
+
+    /**
+     * TODO: Write javadoc for this method.
+     * @param ai
+     * @return
+     */
+    public static int possibleNonCombatDamage(Player ai) {
+        int damage = 0;
+        final List<Card> all = new ArrayList<Card>(ai.getCardsIn(ZoneType.Battlefield));
+        all.addAll(CardFactoryUtil.getExternalZoneActivationCards(ai));
+        all.addAll(ai.getCardsIn(ZoneType.Hand));
+    
+        for (final Card c : all) {
+            for (final SpellAbility sa : c.getSpellAbilities()) {
+                if (sa.getApi() != ApiType.DealDamage) {
+                    continue;
+                }
+                final String numDam = sa.getParam("NumDmg");
+                int dmg = AbilityUtils.calculateAmount(sa.getSourceCard(), numDam, sa);
+                if (dmg <= damage) {
+                    continue;
+                }
+                final Target tgt = sa.getTarget();
+                if (tgt == null) {
+                    continue;
+                }
+                final Player enemy = ai.getOpponent();
+                if (!sa.canTarget(enemy)) {
+                    continue;
+                }
+                if (!ComputerUtilCost.canPayCost(sa, ai)) {
+                    continue;
+                }
+                damage = dmg;
+            }
+        }
+        return damage;
+    }
 
     /**
      * <p>

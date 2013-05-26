@@ -422,7 +422,7 @@ public class AiAttackController {
         }
         unblockedAttackers.addAll(remainingAttackers);
 
-        if ((ComputerUtilCombat.sumDamageIfUnblocked(remainingAttackers, opp) >= opp.getLife())
+        if (ComputerUtilCombat.sumDamageIfUnblocked(remainingAttackers, opp) + ComputerUtil.possibleNonCombatDamage(ai) >= opp.getLife()
                 && !((opp.cantLoseForZeroOrLessLife() || ai.cantWin()) && (opp.getLife() < 1))) {
             return true;
         }
@@ -620,14 +620,13 @@ public class AiAttackController {
                     candidateUnblockedDamage += ComputerUtilCombat.damageIfUnblocked(pCard, opp, null);
                     computerForces += 1;
                 }
-
             }
         }
 
         // find the potential damage ratio the AI can cause
         double humanLifeToDamageRatio = 1000000;
         if (candidateUnblockedDamage > 0) {
-            humanLifeToDamageRatio = (double) opp.getLife() / candidateUnblockedDamage;
+            humanLifeToDamageRatio = (double) (opp.getLife() - ComputerUtil.possibleNonCombatDamage(ai)) / candidateUnblockedDamage;
         }
 
         // determine if the ai outnumbers the player
