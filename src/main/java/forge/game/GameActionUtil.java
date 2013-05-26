@@ -37,6 +37,7 @@ import forge.CardUtil;
 import forge.Command;
 import forge.Constant;
 import forge.CounterType;
+import forge.card.MagicColor;
 import forge.card.ability.AbilityFactory;
 import forge.card.ability.AbilityFactory.AbilityRecordType;
 import forge.card.ability.AbilityUtils;
@@ -653,7 +654,6 @@ public final class GameActionUtil {
      * @return the stLandManaAbilities
      */
     public static void grantBasicLandsManaAbilities(GameState game) {
-        final HashMap<String, String> produces = new HashMap<String, String>();
         /*
          * for future use boolean naked =
          * AllZoneUtil.isCardInPlay("Naked Singularity"); boolean twist =
@@ -666,39 +666,34 @@ public final class GameActionUtil {
          * if(naked) produces.put("Swamp", "W"); else if(twist)
          * produces.put("Swamp", "G"); else produces.put("Swamp", "B");
          */
-        produces.put("Forest", "G");
-        produces.put("Island", "U");
-        produces.put("Mountain", "R");
-        produces.put("Plains", "W");
-        produces.put("Swamp", "B");
 
         List<Card> lands = game.getCardsIn(ZoneType.Battlefield);
         lands = CardLists.filter(lands, Presets.LANDS);
 
         // remove all abilities granted by this Command
         for (final Card land : lands) {
-            List<SpellAbility> manaAbs = Lists.newArrayList(land.getManaAbility());
+            List<SpellAbility> origManaAbs = Lists.newArrayList(land.getManaAbility());
+            List<SpellAbility> manaAbs = land.getCharacteristics().getManaAbility();
             // will get comodification exception without a different list
-            for (final SpellAbility sa : manaAbs) {
+            for (final SpellAbility sa : origManaAbs) {
                 if (sa.getType().equals("BasicLandTypeMana")) {
-                    land.removeSpellAbility(sa);
+                    manaAbs.remove(sa);
                 }
             }
         }
 
         // add all appropriate mana abilities based on current types
-        for (final Card land : lands) {
-            for (String landType : Constant.Color.BASIC_LANDS) {
-
+        for (String landType : Constant.Color.BASIC_LANDS) {
+            String color = MagicColor.toShortString(Constant.Color.BASIC_LAND_TYPE_TO_COLOR_MAP.get(landType));
+            String abString = "AB$ Mana | Cost$ T | Produced$ " + color + " | SpellDescription$ Add " + color + " to your mana pool.";
+            for (final Card land : lands) {
                 if (land.isType(landType)) {
-                    final SpellAbility sa = AbilityFactory.getAbility("AB$ Mana | Cost$ T | Produced$ " + produces.get(landType)
-                            + " | SpellDescription$ Add " + produces.get(landType) + " to your mana pool.", land);
+                    final SpellAbility sa = AbilityFactory.getAbility(abString, land);
                     sa.setType("BasicLandTypeMana");
-                    land.addSpellAbility(sa);
+                    land.getCharacteristics().getManaAbility().add(sa);
                 }
             }
         }
-
     } // stLandManaAbilities
 
     /**

@@ -111,6 +111,20 @@ public final class Constant {
             
             COLOR_TO_BASIC_LAND_TYPE_MAP = Collections.unmodifiableMap(colToType);
         }
+        
+        public static final Map<String, String> BASIC_LAND_TYPE_TO_COLOR_MAP;
+        
+        static
+        {
+            Map<String, String> TypeTocol = new HashMap<String, String>();
+            TypeTocol.put("Plains", Color.WHITE);
+            TypeTocol.put("Island", Color.BLUE);
+            TypeTocol.put("Swamp", Color.BLACK);
+            TypeTocol.put("Mountain", Color.RED);
+            TypeTocol.put("Forest", Color.GREEN);
+            
+            BASIC_LAND_TYPE_TO_COLOR_MAP = Collections.unmodifiableMap(TypeTocol);
+        }
     }
 
     /**
