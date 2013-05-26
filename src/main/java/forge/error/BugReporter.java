@@ -79,6 +79,7 @@ public class BugReporter {
         if (message != null) {
             System.err.printf("%s > %s%n", FThreads.debugGetCurrThreadId(), message);
         }
+        System.err.print( FThreads.debugGetCurrThreadId() + " > " );
         ex.printStackTrace();
         
         StringBuilder sb = new StringBuilder();

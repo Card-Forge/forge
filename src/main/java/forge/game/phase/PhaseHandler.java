@@ -74,9 +74,8 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
 
     private Player pPlayerPriority = null;
     private Player pFirstPriority = null;
-    private boolean bPhaseEffects = true;
     private AtomicBoolean bCombat = new AtomicBoolean(false);
-    private boolean bRepeat = false;
+    private boolean bRepeatCleanup = false;
 
     /** The need to next phase. */
     private boolean isPlayerPriorityAllowed = false;
@@ -178,29 +177,6 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
 
     /**
      * <p>
-     * doPhaseEffects.
-     * </p>
-     * 
-     * @return a boolean.
-     */
-    public final boolean hasPhaseEffects() {
-        return this.bPhaseEffects;
-    }
-
-    /**
-     * <p>
-     * setPhaseEffects.
-     * </p>
-     * 
-     * @param b
-     *            a boolean.
-     */
-    private final void setPhaseEffects(final boolean b) {
-        this.bPhaseEffects = b;
-    }
-
-    /**
-     * <p>
      * inCombat.
      * </p>
      * 
@@ -228,14 +204,104 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
      * </p>
      */
     public final void repeatPhase() {
-        this.bRepeat = true;
+        this.bRepeatCleanup = true;
     }
 
-    public final void handleBeginPhase() {
+    /**
+     * <p>
+     * nextPhase.
+     * </p>
+     */
+    private final void nextPhase() {
+        this.setPlayersPriorityPermission(true); //  PlayerPriorityAllowed = false;
+    
+        // If the Stack isn't empty why is nextPhase being called?
+        if (!game.getStack().isEmpty()) {
+            Log.debug("Phase.nextPhase() is called, but Stack isn't empty.");
+            return;
+        }
+    
+        for (Player p : game.getPlayers()) {
+            int burn = p.getManaPool().clearPool(true);
+            if (Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_MANABURN)) {
+                p.loseLife(burn);
+    
+                // Play the Mana Burn sound
+                game.getEvents().post(new ManaBurnEvent());
+            }
+            p.updateObservers();
+        }
+    
+        switch (this.phase) {
+            case UNTAP:
+                this.nCombatsThisTurn = 0;
+                break;
+    
+            case COMBAT_DECLARE_ATTACKERS:
+                game.getStack().unfreezeStack();
+                this.nCombatsThisTurn++;
+                break;
+    
+            case COMBAT_DECLARE_BLOCKERS:
+                game.getStack().unfreezeStack();
+                break;
+    
+            case COMBAT_END:
+                //SDisplayUtil.showTab(EDocID.REPORT_STACK.getDoc());
+                game.getCombat().reset(playerTurn);
+                this.getPlayerTurn().resetAttackedThisCombat();
+                this.bCombat.set(false);
+    
+                break;
+    
+            case CLEANUP:
+                this.bPreventCombatDamageThisTurn = false;
+                if (!this.bRepeatCleanup) {
+                    this.setPlayerTurn(this.handleNextTurn());
+                }
+                this.planarDiceRolledthisTurn = 0;
+                // Play the End Turn sound
+                game.getEvents().post(new EndOfTurnEvent());
+                break;
+            default: // no action
+        }
+    
+        String phaseType = "";
+        if (this.bRepeatCleanup) { // for when Cleanup needs to repeat itself
+            this.bRepeatCleanup = false;
+            phaseType = "Repeat ";
+        } else {
+            // If the phase that's ending has a stack of additional phases
+            // Take the LIFO one and move to that instead of the normal one
+            if (this.extraPhases.containsKey(phase)) {
+                PhaseType nextPhase = this.extraPhases.get(phase).pop();
+                // If no more additional phases are available, remove it from the map
+                // and let the next add, reput the key
+                if (this.extraPhases.get(phase).isEmpty()) {
+                    this.extraPhases.remove(phase);
+                }
+                this.phase = nextPhase;
+                phaseType = "Additional ";
+            } else {
+                this.phase = phase.getNextPhase();
+            }
+        }
+    
+        // **** Anything BELOW Here is actually in the next phase. Maybe move
+        // this to handleBeginPhase
+        if (this.phase == PhaseType.UNTAP) {
+            this.turn++;
+            game.getGameLog().add(GameEventType.TURN, "Turn " + this.turn + " (" + this.getPlayerTurn() + ")");
+        }
+        
+        game.getGameLog().add(GameEventType.PHASE, phaseType + Lang.getPossesive(this.getPlayerTurn().getName()) + " " + this.getPhase().Name);
+        PhaseUtil.visuallyActivatePhase(this.getPlayerTurn(), this.getPhase());
+    }
+
+    private final void handleBeginPhase() {
         if (null == playerTurn) {
             return;
         }
-        this.setPhaseEffects(false);
         
         // Handle effects that happen at the beginning of phases
         game.getAction().checkStateEffects();
@@ -245,7 +311,6 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
             case UNTAP:
                 //SDisplayUtil.showTab(EDocID.REPORT_STACK.getDoc());
                 game.getPhaseHandler().setPlayersPriorityPermission(false);
-                //updateObservers();
                 PhaseUtil.handleUntap(game);
                 break;
 
@@ -399,7 +464,6 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
             runParams.put("Phase", this.getPhase().Name);
             runParams.put("Player", this.getPlayerTurn());
             game.getTriggerHandler().runTrigger(TriggerType.Phase, runParams, false);
-
         }
 
         // This line fixes Combat Damage triggers not going off when they should
@@ -419,104 +483,6 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
      */
     public final boolean isPreventCombatDamageThisTurn() {
         return this.bPreventCombatDamageThisTurn;
-    }
-
-    /**
-     * <p>
-     * nextPhase.
-     * </p>
-     */
-    public final void nextPhase() {
-
-        this.setPlayersPriorityPermission(true); //  PlayerPriorityAllowed = false;
-
-        // If the Stack isn't empty why is nextPhase being called?
-        if (!game.getStack().isEmpty()) {
-            Log.debug("Phase.nextPhase() is called, but Stack isn't empty.");
-            return;
-        }
-        setPhaseEffects(true);
-
-        for (Player p : game.getPlayers()) {
-            int burn = p.getManaPool().clearPool(true);
-            if (Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_MANABURN)) {
-                p.loseLife(burn);
-
-                // Play the Mana Burn sound
-                game.getEvents().post(new ManaBurnEvent());
-            }
-            p.updateObservers();
-        }
-
-        switch (this.phase) {
-            case UNTAP:
-                this.nCombatsThisTurn = 0;
-                break;
-
-            case COMBAT_DECLARE_ATTACKERS:
-                game.getStack().unfreezeStack();
-                this.nCombatsThisTurn++;
-                break;
-
-            case COMBAT_DECLARE_BLOCKERS:
-                game.getStack().unfreezeStack();
-                break;
-
-            case COMBAT_END:
-                //SDisplayUtil.showTab(EDocID.REPORT_STACK.getDoc());
-                game.getCombat().reset(playerTurn);
-                this.getPlayerTurn().resetAttackedThisCombat();
-                this.bCombat.set(false);
-
-                break;
-
-            case CLEANUP:
-                this.bPreventCombatDamageThisTurn = false;
-                if (!this.bRepeat) {
-                    this.setPlayerTurn(this.handleNextTurn());
-                }
-                this.planarDiceRolledthisTurn = 0;
-                // Play the End Turn sound
-                game.getEvents().post(new EndOfTurnEvent());
-                break;
-            default: // no action
-        }
-
-        String phaseType = "";
-        if (this.bRepeat) { // for when Cleanup needs to repeat itself
-            this.bRepeat = false;
-            phaseType = "Repeat ";
-        } else {
-            // If the phase that's ending has a stack of additional phases
-            // Take the LIFO one and move to that instead of the normal one
-            if (this.extraPhases.containsKey(phase)) {
-                PhaseType nextPhase = this.extraPhases.get(phase).pop();
-                // If no more additional phases are available, remove it from the map
-                // and let the next add, reput the key
-                if (this.extraPhases.get(phase).isEmpty()) {
-                    this.extraPhases.remove(phase);
-                }
-                this.phase = nextPhase;
-                phaseType = "Additional ";
-            } else {
-                this.phase = phase.getNextPhase();
-            }
-        }
-
-        // **** Anything BELOW Here is actually in the next phase. Maybe move
-        // this to handleBeginPhase
-        if (this.phase == PhaseType.UNTAP) {
-            this.turn++;
-            game.getGameLog().add(GameEventType.TURN, "Turn " + this.turn + " (" + this.getPlayerTurn() + ")");
-        }
-        
-        game.getGameLog().add(GameEventType.PHASE, phaseType + Lang.getPossesive(this.getPlayerTurn().getName()) + " " + this.getPhase().Name);
-        PhaseUtil.visuallyActivatePhase(this.getPlayerTurn(), this.getPhase());
-
-        // When consecutively skipping phases (like in combat) this section
-        // pushes through that block
-        this.updateObservers();
-        // it no longer does.
     }
 
     /**
@@ -750,7 +716,11 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
                 // end phase
                 setPlayersPriorityPermission(true);
                 nextPhase();
-                return;
+                // When consecutively skipping phases (like in combat) this section
+                // pushes through that block
+                handleBeginPhase();
+                // it no longer does.
+                updateObservers();
             } else if (!game.getStack().hasSimultaneousStackEntries()) {
                 game.getStack().resolveStack();
                 game.getStack().chooseOrderOfSimultaneousStackEntryAll();

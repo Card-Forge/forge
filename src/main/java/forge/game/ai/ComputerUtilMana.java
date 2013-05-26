@@ -106,6 +106,8 @@ public class ComputerUtilMana {
         MapOfLists<ManaCostShard, SpellAbility> sourcesForShards = ComputerUtilMana.groupAndOrderToPayShards(ai, manaAbilityMap, cost);
         
         // Loop over mana needed
+        
+        //List<String> paymentPlan = new ArrayList<String>();
 
         ManaCostShard toPay = null;
         while (!cost.isPaid()) {
@@ -123,6 +125,8 @@ public class ComputerUtilMana {
                     }
                 }
             }
+            
+            //paymentPlan.add(String.format("%s : (%s) %s", toPay, saPayment == null ? "LIFE" : saPayment.getSourceCard(), saPayment));
             
             if( saPayment == null ) {
                 if(!toPay.isPhyrexian() || !ai.canPayLife(2))
@@ -172,6 +176,8 @@ public class ComputerUtilMana {
         }
 
         manapool.clearManaPaid(sa, test);
+        
+        //System.err.printf("[%s] payment %s for (%s)+%d %s:%n\t%s%n%n", test ? "test" : "PROD", cost.isPaid() ? "*PAID*" : "failed", sa.getSourceCard(), extraMana, sa.toUnsuppressedString(), StringUtils.join(paymentPlan, "\n\t") );
         if(!cost.isPaid()) {
             if( test )
                 return false;

@@ -26,7 +26,6 @@ import javax.swing.SwingConstants;
 import javax.swing.border.MatteBorder;
 
 import net.miginfocom.swing.MigLayout;
-import forge.Constant.Preferences;
 import forge.Singletons;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
