@@ -9,11 +9,14 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import org.apache.commons.lang.StringUtils;
+
 import com.google.common.base.Predicate;
 import forge.Card;
 import forge.CardLists;
 import forge.CardUtil;
 import forge.Constant;
+import forge.FThreads;
 import forge.card.MagicColor;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.ApiType;
@@ -43,6 +46,8 @@ import forge.util.maps.TreeMapOfLists;
  */
 public class ComputerUtilMana {
 
+    private final static boolean DEBUG_MANA_PAYMENT = false; 
+    
     public static boolean canPayManaCost(final SpellAbility sa, final Player ai, final int extraMana) {
         return payManaCost(sa, ai, true, extraMana, true);
     }
@@ -107,8 +112,19 @@ public class ComputerUtilMana {
         
         // Loop over mana needed
         
-        //List<String> paymentPlan = new ArrayList<String>();
+        if ( DEBUG_MANA_PAYMENT ) {
+            System.out.println((test ? "test -- " : "PROD -- ") + FThreads.debugGetStackTraceItem(5, true));
+            for(Entry<ManaCostShard, Collection<SpellAbility>> src : sourcesForShards.entrySet()) {
+                System.out.println("\t" +src.getKey() + " : " + src.getValue().size() + " source(s)");
+                for(SpellAbility sss : src.getValue()) {
+                    System.out.printf("\t\t%s - %s%n", sss.getSourceCard(), sss);
+                }
+            }
+        }
+        
+        List<String> paymentPlan = new ArrayList<String>();
 
+        String originalCost = cost.toString(false);
         ManaCostShard toPay = null;
         while (!cost.isPaid()) {
             toPay = getNextShardToPay(cost, sourcesForShards);
@@ -126,7 +142,8 @@ public class ComputerUtilMana {
                 }
             }
             
-            //paymentPlan.add(String.format("%s : (%s) %s", toPay, saPayment == null ? "LIFE" : saPayment.getSourceCard(), saPayment));
+            if( DEBUG_MANA_PAYMENT )
+                paymentPlan.add(String.format("%s : (%s) %s", toPay, saPayment == null ? "LIFE" : saPayment.getSourceCard(), saPayment));
             
             if( saPayment == null ) {
                 if(!toPay.isPhyrexian() || !ai.canPayLife(2))
@@ -176,8 +193,10 @@ public class ComputerUtilMana {
         }
 
         manapool.clearManaPaid(sa, test);
+
+        if( DEBUG_MANA_PAYMENT )
+            System.err.printf("%s > [%s] payment has %s (%s +%d) for (%s) %s:%n\t%s%n%n", FThreads.debugGetCurrThreadId(), test ? "test" : "PROD", cost.isPaid() ? "*PAID*" : "failed", originalCost, extraMana, sa.getSourceCard(), sa.toUnsuppressedString(), StringUtils.join(paymentPlan, "\n\t") );
         
-        //System.err.printf("[%s] payment %s for (%s)+%d %s:%n\t%s%n%n", test ? "test" : "PROD", cost.isPaid() ? "*PAID*" : "failed", sa.getSourceCard(), extraMana, sa.toUnsuppressedString(), StringUtils.join(paymentPlan, "\n\t") );
         if(!cost.isPaid()) {
             if( test )
                 return false;
@@ -398,7 +417,7 @@ public class ComputerUtilMana {
      * @return Were all mana sources found?
      */
     private static MapOfLists<ManaCostShard, SpellAbility> groupAndOrderToPayShards(final Player ai, final MapOfLists<Integer, SpellAbility> manaAbilityMap, final ManaCostBeingPaid cost) {
-        MapOfLists<ManaCostShard, SpellAbility> res = new EnumMapOfLists<ManaCostShard, SpellAbility>(ManaCostShard.class, CollectionSuppliers.<SpellAbility>arrayLists());
+        MapOfLists<ManaCostShard, SpellAbility> res = new EnumMapOfLists<ManaCostShard, SpellAbility>(ManaCostShard.class, CollectionSuppliers.<SpellAbility>hashSets());
 
         // loop over cost parts
         for (ManaCostShard shard : cost.getDistinctShards() ) {
