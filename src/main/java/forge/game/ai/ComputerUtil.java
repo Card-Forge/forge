@@ -93,6 +93,7 @@ public class ComputerUtil {
                     sa.resolve();
                 }
             }
+            // Why?
             game.getPhaseHandler().setPriority(ai);
             return false;
         }
