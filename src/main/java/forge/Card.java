@@ -37,7 +37,6 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.esotericsoftware.minlog.Log;
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Iterables;
 
 import forge.CardPredicates.Presets;
 import forge.card.CardCharacteristics;
@@ -109,8 +108,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     // which equipment cards are equipping this card?
     private ArrayList<Card> equippedBy = new ArrayList<Card>();
     // equipping size will always be 0 or 1
-    // if this card is of the type equipment, what card is it currently
-    // equipping?
+    // if this card is of the type equipment, what card is it currently equipping?
     private ArrayList<Card> equipping = new ArrayList<Card>();
     // which auras enchanted this card?
 
@@ -197,13 +195,11 @@ public class Card extends GameEntity implements Comparable<Card> {
     private long controllerTimestamp = 0;
     private TreeMap<Long, Player> tempControllers = new TreeMap<Long, Player>();
 
-    // private String rarity = "";
     private String text = "";
     private String echoCost = "";
     private String madnessCost = null;
     private String miracleCost = null;
     private String chosenType = "";
-    // private String chosenColor = "";
     private List<String> chosenColor = new ArrayList<String>();
     private String namedCard = "";
     private int chosenNumber;
@@ -4323,8 +4319,6 @@ public class Card extends GameEntity implements Comparable<Card> {
     public final void addIntrinsicKeyword(final String s) {
         if (s.trim().length() != 0) {
             this.getCharacteristics().getIntrinsicKeyword().add(s);
-            // intrinsicKeyword.add((getName().trim().length()== 0 ? s
-            // :s.replaceAll(getName(), "CARDNAME")));
         }
     }
 
@@ -4387,14 +4381,10 @@ public class Card extends GameEntity implements Comparable<Card> {
      *            a {@link java.lang.String} object.
      */
     public void addExtrinsicKeyword(final String s) {
-        // if(!hasKeyword(s)){
         if (s.startsWith("HIDDEN")) {
             this.addHiddenExtrinsicKeyword(s);
         } else {
             this.extrinsicKeyword.add(s);
-            // extrinsicKeyword.add((getName().trim().length()==0 ? s
-            // :s.replaceAll(getName(), "CARDNAME")));
-            // }
         }
     }
 
@@ -4470,7 +4460,6 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     public final void removeHiddenExtrinsicKeyword(final String s) {
         this.hiddenExtrinsicKeyword.remove(s);
-        // this.updateObservers();
     }
 
     /**
@@ -6716,8 +6705,6 @@ public class Card extends GameEntity implements Comparable<Card> {
     //
     // ////////////////////////
 
-    // all damage to cards is now handled in Card.java, no longer
-    // getGameAction()...
     /**
      * <p>
      * addReceivedDamageFromThisTurn.
@@ -6888,9 +6875,6 @@ public class Card extends GameEntity implements Comparable<Card> {
      *            a int.
      */
     public final void setDamage(final int n) {
-        // if
-        // (this.hasKeyword("Prevent all damage that would be dealt to CARDNAME."))
-        // n = 0;
         this.damage = n;
     }
 
@@ -7008,8 +6992,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         }
     }
 
-    // This should be also usable by the AI to forecast an effect (so it must
-    // not change the game state)
+    // This should be also usable by the AI to forecast an effect (so it must not change the game state)
     /**
      * <p>
      * staticDamagePrevention.
@@ -7069,8 +7052,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         return restDamage;
     }
 
-    // This should be also usable by the AI to forecast an effect (so it must
-    // not change the game state)
+    // This should be also usable by the AI to forecast an effect (so it must not change the game state)
     /**
      * <p>
      * staticDamagePrevention.
@@ -7236,8 +7218,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         return restDamage;
     }
 
-    // This should be also usable by the AI to forecast an effect (so it must
-    // not change the game state)
+    // This should be also usable by the AI to forecast an effect (so it must not change the game state)
     /**
      * <p>
      * staticReplaceDamage.
