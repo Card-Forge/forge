@@ -20,10 +20,7 @@ package forge;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
 import com.google.common.collect.ImmutableList;
 
 /**
@@ -82,8 +79,6 @@ public final class Constant {
         /** The Colorless. */
         public static final String COLORLESS = "colorless";
         // color order "wubrg"
-        /** The Colors. */
-        public static final ImmutableList<String> COLORS = ImmutableList.of(Color.WHITE, Color.BLUE, Color.BLACK, Color.RED, Color.GREEN, Color.COLORLESS);
 
         /** The only colors. */
         public static final ImmutableList<String> ONLY_COLORS = ImmutableList.of(Color.WHITE, Color.BLUE, Color.BLACK, Color.RED, Color.GREEN);
@@ -91,26 +86,8 @@ public final class Constant {
         /** The Snow. */
         public static final String SNOW = "snow";
 
-        /** The Mana colors. */
-        public static final String[] MANA_COLORS = { Color.WHITE, Color.BLUE, Color.BLACK, Color.RED, Color.GREEN,
-                Color.COLORLESS, Color.SNOW };
-
         /** The Basic lands. */
         public static final List<String> BASIC_LANDS = Collections.unmodifiableList(Arrays.asList("Plains", "Island", "Swamp", "Mountain", "Forest"));
-        
-        public static final Map<String, String> BASIC_LAND_TYPE_TO_COLOR_MAP;
-        
-        static
-        {
-            Map<String, String> TypeTocol = new HashMap<String, String>();
-            TypeTocol.put("Plains", Color.WHITE);
-            TypeTocol.put("Island", Color.BLUE);
-            TypeTocol.put("Swamp", Color.BLACK);
-            TypeTocol.put("Mountain", Color.RED);
-            TypeTocol.put("Forest", Color.GREEN);
-            
-            BASIC_LAND_TYPE_TO_COLOR_MAP = Collections.unmodifiableMap(TypeTocol);
-        }
     }
 
     /**

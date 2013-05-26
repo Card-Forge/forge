@@ -683,8 +683,9 @@ public final class GameActionUtil {
         }
 
         // add all appropriate mana abilities based on current types
-        for (String landType : Constant.Color.BASIC_LANDS) {
-            String color = MagicColor.toShortString(Constant.Color.BASIC_LAND_TYPE_TO_COLOR_MAP.get(landType));
+        for(int i = 0; i < MagicColor.WUBRG.length; i++ ) {
+            String landType = Constant.Color.BASIC_LANDS.get(i);
+            String color = MagicColor.toShortString(MagicColor.WUBRG[i]);
             String abString = "AB$ Mana | Cost$ T | Produced$ " + color + " | SpellDescription$ Add " + color + " to your mana pool.";
             for (final Card land : lands) {
                 if (land.isType(landType)) {

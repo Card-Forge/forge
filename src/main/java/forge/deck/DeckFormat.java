@@ -24,11 +24,9 @@ import java.util.Map.Entry;
 
 import org.apache.commons.lang.math.IntRange;
 
-import forge.Constant;
 import forge.Singletons;
 import forge.card.CardCoreType;
 import forge.card.ColorSet;
-import forge.card.MagicColor;
 import forge.item.CardDb;
 import forge.item.CardPrinted;
 import forge.item.IPaperCard;
