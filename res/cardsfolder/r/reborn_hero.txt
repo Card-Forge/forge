@@ -1,0 +1,11 @@
+Name:Reborn Hero
+ManaCost:2 W
+Types:Creature Human Soldier
+PT:2/2
+K:Vigilance
+S:Mode$ Continuous | Affected$ Card.Self | AddTrigger$ TriggerBounce | Condition$ Threshold | Description$ Threshold - As long as seven or more cards are in your graveyard, CARDNAME has "When CARDNAME dies, you may pay W W. If you do, return Reborn Hero to the battlefield under your control."
+SVar:TriggerBounce:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Graveyard | Execute$ TriggeredBounce | Secondary$ True | TriggerDescription$ When CARDNAME dies, you may pay W W. If you do, return Reborn Hero to the battlefield under your control.
+SVar:TriggeredBounce:AB$ ChangeZone | Cost$ W W | ValidCard$ Card.Self | Origin$ Graveyard | Destination$ Battlefield
+SVar:Picture:http://www.wizards.com/global/images/magic/general/reborn_hero.jpg
+Oracle:Vigilance\nThreshold - As long as seven or more cards are in your graveyard, Reborn Hero has "When Reborn Hero dies, you may pay {W}{W}. If you do, return Reborn Hero to the battlefield under your control."
+SetInfo:TOR Rare
