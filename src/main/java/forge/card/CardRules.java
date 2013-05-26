@@ -80,7 +80,7 @@ public final class CardRules implements ICardCharacteristics {
         for(int i = 0; i < len; i++) {
             char c = oracleText.charAt(i); // This is to avoid needless allocations performed by toCharArray()
             switch(c) {
-                case('('): isReminder = true; break;
+                case('('): isReminder = i > 0; break; // if oracle has only reminder, consider it valid rules (basic and true lands need this)
                 case(')'): isReminder = false; break;
                 case('{'): isSymbol = true; break;
                 case('}'): isSymbol = false; break;
