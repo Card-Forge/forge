@@ -54,6 +54,8 @@ public class AiInputCommon extends InputPassPriorityBase implements AiInput {
             return;
         }
 
+        showMessage(getTurnPhasePriorityMessage());
+        
         /*
          * //put this back in ButtonUtil.disableAll();
          * AllZone.getDisplay().showMessage("Phase: " +

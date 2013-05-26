@@ -1,6 +1,7 @@
 package forge.control.input;
 
 import forge.FThreads;
+import forge.game.phase.PhaseHandler;
 import forge.game.player.Player;
 
 public abstract class InputPassPriorityBase extends InputBase {
@@ -19,11 +20,28 @@ public abstract class InputPassPriorityBase extends InputBase {
     
     protected final void pass() { // no futher overloads possible
         setFinished();
-        
 
         if( FThreads.isEDT() )
             FThreads.invokeInNewThread(passPriority);
         else 
             passPriority.run();
+    }
+
+    protected String getTurnPhasePriorityMessage() {
+        final PhaseHandler ph = player.getGame().getPhaseHandler();
+        final StringBuilder sb = new StringBuilder();
+    
+        sb.append("Priority: ").append(player).append("\n").append("\n");
+        sb.append("Turn : ").append(ph.getPlayerTurn()).append("\n");
+        sb.append("Phase: ").append(ph.getPhase().Name).append("\n");
+        sb.append("Stack: ");
+        if (!player.getGame().getStack().isEmpty()) {
+            sb.append(player.getGame().getStack().size()).append(" to Resolve.");
+        } else {
+            sb.append("Empty");
+        }
+        sb.append("\n");
+        String message = sb.toString();
+        return message;
     }
 }

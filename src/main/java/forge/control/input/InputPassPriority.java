@@ -19,7 +19,6 @@ package forge.control.input;
 
 import forge.Card;
 import forge.card.spellability.SpellAbility;
-import forge.game.phase.PhaseHandler;
 import forge.game.player.HumanPlay;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
@@ -51,26 +50,9 @@ public class InputPassPriority extends InputPassPriorityBase {
         for (Player p : player.getGame().getRegisteredPlayers()) {
             p.getZone(ZoneType.Battlefield).updateObservers();
         }
+        showMessage(getTurnPhasePriorityMessage());
         ButtonUtil.enableOnlyOk();
-
-        final PhaseHandler ph = player.getGame().getPhaseHandler();
-        final StringBuilder sb = new StringBuilder();
-
-        sb.append("Priority: ").append(player).append("\n").append("\n");
-        sb.append("Turn : ").append(ph.getPlayerTurn()).append("\n");
-        sb.append("Phase: ").append(ph.getPhase().Name).append("\n");
-        sb.append("Stack: ");
-        if (!player.getGame().getStack().isEmpty()) {
-            sb.append(player.getGame().getStack().size()).append(" to Resolve.");
-        } else {
-            sb.append("Empty");
-        }
-        sb.append("\n");
-        
-
-        showMessage(sb.toString());
     }
-
 
     /** {@inheritDoc} */
     @Override

@@ -39,7 +39,6 @@ import forge.game.phase.Combat;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
-import forge.gui.GuiChoose;
 import forge.util.Aggregates;
 import forge.util.MyRandom;
 

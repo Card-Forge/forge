@@ -15,6 +15,7 @@ public class InputAutoPassPriority extends InputPassPriorityBase {
 
     @Override
     public void showMessage() {
+        showMessage(getTurnPhasePriorityMessage());
         pass();
     }
 
