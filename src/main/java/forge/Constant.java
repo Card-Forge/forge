@@ -98,20 +98,6 @@ public final class Constant {
         /** The Basic lands. */
         public static final List<String> BASIC_LANDS = Collections.unmodifiableList(Arrays.asList("Plains", "Island", "Swamp", "Mountain", "Forest"));
         
-        public static final Map<String, String> COLOR_TO_BASIC_LAND_TYPE_MAP;
-        
-        static
-        {
-            Map<String, String> colToType = new HashMap<String, String>();
-            colToType.put(Color.WHITE, "Plains");
-            colToType.put(Color.BLUE,  "Island");
-            colToType.put(Color.BLACK, "Swamp");
-            colToType.put(Color.RED,   "Mountain");
-            colToType.put(Color.GREEN, "Forest");
-            
-            COLOR_TO_BASIC_LAND_TYPE_MAP = Collections.unmodifiableMap(colToType);
-        }
-        
         public static final Map<String, String> BASIC_LAND_TYPE_TO_COLOR_MAP;
         
         static
