@@ -64,6 +64,8 @@ public enum CStack implements ICDoc, Observer {
     public void setModel(MagicStack model, LobbyPlayer guiPlayer) { 
         this.model = model; 
         this.viewer = guiPlayer;
+        
+        model.addObserver(this);
     }
 
 }
