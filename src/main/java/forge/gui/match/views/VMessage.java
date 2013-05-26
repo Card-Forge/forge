@@ -78,7 +78,7 @@ public enum VMessage implements IVDoc<CMessage> {
      */
     @Override
     public void populate() {
-        parentCell.getBody().setLayout(new MigLayout("wrap 2, fill, insets 0 2% 5px 1%, gap 1% 0, debug 2000"));
+        parentCell.getBody().setLayout(new MigLayout("wrap 2, fill, insets 0 2% 5px 1%, gap 1% 0"));
 
         parentCell.getBody().add(lblGames, "span 2 1, w 96%!, h 30px, wrap");
         parentCell.getBody().add(tarMessage, "sx 2, gaptop 12px, h 70%, w 96%");
