@@ -9711,6 +9711,7 @@ res/cardsfolder/s/show_and_tell.txt svneol=native#text/plain
 res/cardsfolder/s/show_of_valor.txt -text
 res/cardsfolder/s/shower_of_coals.txt -text svneol=unset#text/plain
 res/cardsfolder/s/shower_of_sparks.txt svneol=native#text/plain
+res/cardsfolder/s/showstopper.txt -text
 res/cardsfolder/s/shrapnel_blast.txt svneol=native#text/plain
 res/cardsfolder/s/shred_memory.txt -text
 res/cardsfolder/s/shrewd_hatchling.txt svneol=native#text/plain

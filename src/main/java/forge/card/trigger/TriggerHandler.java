@@ -248,7 +248,7 @@ public class TriggerHandler {
             Card card = (Card) runParams.get("Card");
             if (card.getController() == player) {
                 for (final Trigger t : card.getTriggers()) {
-                    if (!t.isStatic() && t.isTemporary() && canRunTrigger(t, mode, runParams)) {
+                    if (!t.isStatic() && !t.isIntrinsic() && canRunTrigger(t, mode, runParams)) {
                         this.runSingleTrigger(t, runParams);
                         checkStatics = true;
                     }
