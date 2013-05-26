@@ -1,9 +1,13 @@
 Name:Treacherous Link
 ManaCost:1 B
 Types:Enchantment Aura
-Text:All damage that would be dealt to enchanted creature is dealt to its controller instead.
 K:Enchant creature
 A:SP$ Attach | Cost$ 1 B | ValidTgts$ Creature | AILogic$ Curse
+R:Event$ DamageDone | ActiveZones$ Battlefield | ValidTarget$ Card.EnchantedBy | ReplaceWith$ DmgEnchanted | IsCombat$ False | Description$ All damage that would be dealt to enchanted creature is dealt to its controller instead.
+R:Event$ DamageDone | ActiveZones$ Battlefield | ValidTarget$ Card.EnchantedBy | ReplaceWith$ DmgEnchantedCombat | IsCombat$ True | Secondary$ True | Description$ All damage that would be dealt to enchanted creature is dealt to its controller instead.
+SVar:DmgEnchanted:AB$ DealDamage | Cost$ 0 | Defined$ EnchantedOwner | DamageSource$ ReplacedSource | NumDmg$ X | References$ X
+SVar:DmgEnchantedCombat:AB$ DealDamage | Cost$ 0 | CombatDamage$ True | Defined$ EnchantedOwner | DamageSource$ ReplacedSource | NumDmg$ X | References$ X
+SVar:X:ReplaceCount$DamageAmount
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/treacherous_link.jpg
 Oracle:Enchant creature\nAll damage that would be dealt to enchanted creature is dealt to its controller instead.

@@ -7340,13 +7340,6 @@ public class Card extends GameEntity implements Comparable<Card> {
             return 0;
         }
 
-        final List<Card> auras = new ArrayList<Card>(this.getEnchantedBy());
-
-        if (Iterables.any(auras, CardPredicates.nameEquals("Treacherous Link"))) {
-            this.getController().addDamage(damageIn, source);
-            return 0;
-        }
-
         return damageIn;
     }
 
