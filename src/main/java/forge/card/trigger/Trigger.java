@@ -466,6 +466,7 @@ public abstract class Trigger extends TriggerReplacementBase {
         copy.setMode(this.getMode());
         copy.setTriggerPhases(this.validPhases);
         copy.setActiveZone(validHostZones);
+        copy.setTemporary(isTemporary());
         return copy;
     }
 

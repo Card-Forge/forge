@@ -784,10 +784,10 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @param trigs
      *            a {@link java.util.ArrayList} object.
      */
-    public final void setTriggers(final List<Trigger> trigs) {
+    public final void setTriggers(final List<Trigger> trigs, boolean intrinsicOnly) {
         final List<Trigger> copyList = new CopyOnWriteArrayList<Trigger>();
         for (final Trigger t : trigs) {
-            if (t.isIntrinsic()) {
+            if (!intrinsicOnly || t.isIntrinsic()) {
                 copyList.add(t.getCopyForHostCard(this));
             }
         }

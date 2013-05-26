@@ -495,7 +495,7 @@ public class CardFactory {
         to.setIntrinsicAbilities(from.getUnparsedAbilities());
     
         to.setImageKey(from.getImageKey());
-        to.setTriggers(from.getTriggers());
+        to.setTriggers(from.getTriggers(), true);
         to.setReplacementEffects(from.getReplacementEffects());
         to.setStaticAbilityStrings(from.getStaticAbilityStrings());
     
@@ -523,7 +523,7 @@ public class CardFactory {
         CardCharacteristics characteristics = from.getState(stateToCopy);
         to.getCharacteristics().copyFrom(characteristics);
         // handle triggers and replacement effect through Card class interface
-        to.setTriggers(characteristics.getTriggers());
+        to.setTriggers(characteristics.getTriggers(), true);
     }
 
     public static void copySpellAbility(SpellAbility from, SpellAbility to) {

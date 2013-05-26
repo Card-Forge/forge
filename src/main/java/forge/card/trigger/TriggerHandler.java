@@ -243,12 +243,15 @@ public class TriggerHandler {
         boolean checkStatics = false;
         List<Card> playerCards = player.getAllCards();
         
-        // add cards that move to hidden zones
+        // check LKI copies for triggers
         if (runParams.containsKey("Destination") && runParams.containsKey("Card")) {
             Card card = (Card) runParams.get("Card");
-            if( !playerCards.contains(card) && player.equals(card.getController())) {
-                if (game.getZoneOf(card) == null || game.getZoneOf(card).getZoneType().isHidden()) {
-                    playerCards.add(card);
+            if (card.getController() == player) {
+                for (final Trigger t : card.getTriggers()) {
+                    if (!t.isStatic() && t.isTemporary() && canRunTrigger(t, mode, runParams)) {
+                        this.runSingleTrigger(t, runParams);
+                        checkStatics = true;
+                    }
                 }
             }
         }
