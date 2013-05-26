@@ -17,6 +17,7 @@
  */
 package forge.card.trigger;
 
+import java.util.List;
 import java.util.Map;
 
 import forge.Card;
@@ -58,8 +59,16 @@ public class TriggerAttackerBlocked extends Trigger {
             }
         }
         if (this.mapParams.containsKey("ValidBlocker")) {
-            if (!matchesValid(runParams2.get("Blocker"), this.mapParams.get("ValidBlocker").split(","),
-                    this.getHostCard())) {
+            boolean valid = false;
+            @SuppressWarnings("unchecked")
+            List<Card> list = (List<Card>) runParams2.get("Blockers");
+            for (Card b : list) {
+                if (matchesValid(b, this.mapParams.get("ValidBlocker").split(","), this.getHostCard())) {
+                    valid = true;
+                    break;
+                }
+            }
+            if (!valid) {
                 return false;
             }
         }

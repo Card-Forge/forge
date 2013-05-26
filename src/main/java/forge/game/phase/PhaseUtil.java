@@ -263,10 +263,7 @@ public class PhaseUtil {
         CombatUtil.checkDeclareBlockers(game, list);
 
         for (final Card a : attList) {
-            final List<Card> blockList = combat.getBlockers(a);
-            for (final Card b : blockList) {
-                CombatUtil.checkBlockedAttackers(game, a, b);
-            }
+            CombatUtil.checkBlockedAttackers(game, a, combat.getBlockers(a));
         }
 
         game.getStack().unfreezeStack();

@@ -1179,20 +1179,18 @@ public class CombatUtil {
      * @param b
      *            a {@link forge.Card} object.
      */
-    public static void checkBlockedAttackers(final GameState game, final Card a, final Card b) {
+    public static void checkBlockedAttackers(final GameState game, final Card a, final List<Card> blockers) {
         // System.out.println(a.getName() + " got blocked by " + b.getName());
 
         // Run triggers
         final HashMap<String, Object> runParams = new HashMap<String, Object>();
         runParams.put("Attacker", a);
-        runParams.put("Blocker", b);
+        runParams.put("Blockers", blockers);
+        runParams.put("NumBlockers", blockers.size());
+        game.getTriggerHandler().runTrigger(TriggerType.AttackerBlocked, runParams, false);
         //game.getTriggerHandler().runTrigger(TriggerType.Blocks, runParams, false);
 
         if (!a.getDamageHistory().getCreatureGotBlockedThisCombat()) {
-            final int blockers = game.getCombat().getBlockers(a).size();
-            runParams.put("NumBlockers", blockers);
-            game.getTriggerHandler().runTrigger(TriggerType.AttackerBlocked, runParams, false);
-
             // Bushido
             for (final Ability ab : CardFactoryUtil.getBushidoEffects(a)) {
                 game.getStack().add(ab);
@@ -1215,57 +1213,59 @@ public class CombatUtil {
             } // end Rampage
         }
 
-        if (a.hasKeyword("Flanking") && !b.hasKeyword("Flanking")) {
-            int flankingMagnitude = 0;
-
-            for (String kw : a.getKeyword()) {
-                if (kw.equals("Flanking")) {
-                    flankingMagnitude++;
-                }
-            }
-            final int mag = flankingMagnitude;
-            final Card blocker = b;
-            final Ability ability2 = new Ability(b, ManaCost.ZERO) {
-                @Override
-                public void resolve() {
-
-                    final Command untilEOT = new Command() {
-
-                        private static final long serialVersionUID = 7662543891117427727L;
-
-                        @Override
-                        public void run() {
-                            if (blocker.isInPlay()) {
-                                blocker.addTempAttackBoost(mag);
-                                blocker.addTempDefenseBoost(mag);
-                            }
-                        }
-                    }; // Command
-
-                    if (blocker.isInPlay()) {
-                        blocker.addTempAttackBoost(-mag);
-                        blocker.addTempDefenseBoost(-mag);
-
-                        game.getEndOfTurn().addUntil(untilEOT);
-                        System.out.println("Flanking!");
+        for (Card b : blockers) {
+            if (a.hasKeyword("Flanking") && !b.hasKeyword("Flanking")) {
+                int flankingMagnitude = 0;
+    
+                for (String kw : a.getKeyword()) {
+                    if (kw.equals("Flanking")) {
+                        flankingMagnitude++;
                     }
-                } // resolve
+                }
+                final int mag = flankingMagnitude;
+                final Card blocker = b;
+                final Ability ability2 = new Ability(b, ManaCost.ZERO) {
+                    @Override
+                    public void resolve() {
+    
+                        final Command untilEOT = new Command() {
+    
+                            private static final long serialVersionUID = 7662543891117427727L;
+    
+                            @Override
+                            public void run() {
+                                if (blocker.isInPlay()) {
+                                    blocker.addTempAttackBoost(mag);
+                                    blocker.addTempDefenseBoost(mag);
+                                }
+                            }
+                        }; // Command
+    
+                        if (blocker.isInPlay()) {
+                            blocker.addTempAttackBoost(-mag);
+                            blocker.addTempDefenseBoost(-mag);
+    
+                            game.getEndOfTurn().addUntil(untilEOT);
+                            System.out.println("Flanking!");
+                        }
+                    } // resolve
+    
+                }; // ability
+    
+                final StringBuilder sb2 = new StringBuilder();
+                sb2.append(b.getName()).append(" - gets -").append(mag).append("/-").append(mag).append(" until EOT.");
+                ability2.setStackDescription(sb2.toString());
+                ability2.setDescription(sb2.toString());
+    
+                game.getStack().add(ability2);
+                Log.debug("Adding Flanking!");
+            } // flanking
 
-            }; // ability
-
-            final StringBuilder sb2 = new StringBuilder();
-            sb2.append(b.getName()).append(" - gets -").append(mag).append("/-").append(mag).append(" until EOT.");
-            ability2.setStackDescription(sb2.toString());
-            ability2.setDescription(sb2.toString());
-
-            game.getStack().add(ability2);
-            Log.debug("Adding Flanking!");
-
-        } // flanking
+            b.addBlockedThisTurn(a);
+            a.addBlockedByThisTurn(b);
+        }
 
         a.getDamageHistory().setCreatureGotBlockedThisCombat(true);
-        b.addBlockedThisTurn(a);
-        a.addBlockedByThisTurn(b);
     }
 
     /**
