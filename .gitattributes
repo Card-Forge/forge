@@ -11482,6 +11482,7 @@ res/cardsfolder/t/travelers_cloak.txt -text
 res/cardsfolder/t/treacherous_link.txt svneol=native#text/plain
 res/cardsfolder/t/treacherous_pit_dweller.txt -text
 res/cardsfolder/t/treacherous_urge.txt svneol=native#text/plain
+res/cardsfolder/t/treacherous_vampire.txt -text
 res/cardsfolder/t/treacherous_werewolf.txt -text
 res/cardsfolder/t/treachery.txt svneol=native#text/plain
 res/cardsfolder/t/treasure_hunt.txt -text
