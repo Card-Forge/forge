@@ -132,7 +132,6 @@ public class MatchController {
         currentGame.getInputQueue().invokeGameAction(new Runnable() {
             @Override
             public void run() {
-                currentGame.getInputQueue().clearInput();
                 if(currentGame.getType() == GameType.Planechase)
                     firstPlayer.initPlane();
 
@@ -266,7 +265,6 @@ public class MatchController {
         
         boolean willPlay = goesFirst.getController().getWillPlayOnFirstTurn(message);
         goesFirst = willPlay ? goesFirst : goesFirst.getOpponent();
-        game.getPhaseHandler().setPlayerTurn(goesFirst);
         return goesFirst;
     }
     

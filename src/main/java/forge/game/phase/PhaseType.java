@@ -106,9 +106,9 @@ public enum PhaseType {
      * Get the next PhaseType in turn order. 
      * @return
      */
-    public PhaseType getNextPhase() {
-        int iNext = ALL_PHASES.indexOf(this) + 1;
-        while (iNext >= ALL_PHASES.size()) {
+    public static PhaseType getNext(PhaseType current) {
+        int iNext = ALL_PHASES.indexOf(current) + 1;
+        if (iNext >= ALL_PHASES.size()) {
             iNext = 0;
         }
         return ALL_PHASES.get(iNext);

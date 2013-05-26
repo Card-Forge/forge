@@ -89,7 +89,7 @@ public class GameState {
     private final MatchController match;
     private GameAge age = GameAge.BeforeMulligan;
 
-    private final InputQueue inputQueue;
+    private final InputQueue inputQueue = new InputQueue();
     
     /**
      * Constructor.
@@ -127,8 +127,6 @@ public class GameState {
         cleanup = new Cleanup(this);
         endOfTurn = new EndOfTurn(this);
         endOfCombat = new EndOfCombat(this);
-        
-        inputQueue = new InputQueue(this);
         
         if ( match0.getGameType() == GameType.Quest)
             events.register(Singletons.getModel().getQuest()); // this one listens to player's mulligans ATM

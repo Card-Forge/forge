@@ -43,14 +43,10 @@ public class InputQueue extends MyObservable implements java.io.Serializable {
     private static final long serialVersionUID = 3955194449319994301L;
 
     private final BlockingDeque<Input> inputStack = new LinkedBlockingDeque<Input>();
-    private final GameState game; 
-    
-
     private final InputLockUI inputLock;
 
 
-    public InputQueue(GameState game0) {
-        game = game0;
+    public InputQueue() {
         inputLock = new InputLockUI(this);
     }
 
@@ -82,17 +78,6 @@ public class InputQueue extends MyObservable implements java.io.Serializable {
 
     /**
      * <p>
-     * clearInput.
-     * </p>
-     */
-    public final void clearInput() {
-        this.inputStack.clear();
-        this.updateObservers();
-    }
-
-
-    /**
-     * <p>
      * resetInput.
      * </p>
      * 
@@ -101,19 +86,11 @@ public class InputQueue extends MyObservable implements java.io.Serializable {
      */
     final void removeInput(Input inp) {
         FThreads.assertExecutedByEdt(false);
-        
         Input topMostInput = inputStack.isEmpty() ? null : inputStack.pop();
-        
-//        StackTraceElement[] trace = Thread.currentThread().getStackTrace();
-//        System.out.printf("%s > Remove input %s -- called from %s%n", FThreads.isEDT() ? "EDT" : "TRD", topMostInput,  trace[2].toString());
-//        if( trace[2].toString().contains("InputBase.stop"))
-//            for(StackTraceElement se : trace) {
-//                System.out.println(se.toString());
-//            }
-        
+
         if( topMostInput != inp )
             throw new RuntimeException("Inputs adding/removal into stack is imbalanced! Check your code again!");
-        
+
         this.updateObservers();
     }
 
@@ -128,7 +105,7 @@ public class InputQueue extends MyObservable implements java.io.Serializable {
      * 
      * @return a {@link forge.control.input.InputBase} object.
      */
-    public final Input getActualInput() {
+    public final Input getActualInput(GameState game) {
         GameAge age = game.getAge();
 
         if ( game.isGameOver() )
@@ -142,7 +119,7 @@ public class InputQueue extends MyObservable implements java.io.Serializable {
             return inputLock;
 
         final PhaseHandler handler = game.getPhaseHandler();
-        final PhaseType phase = handler.getPhase();
+
         final Player playerTurn = handler.getPlayerTurn();
         final Player priority = handler.getPriorityPlayer();
         if (priority == null) 
@@ -155,6 +132,7 @@ public class InputQueue extends MyObservable implements java.io.Serializable {
         }
 
         // Special Inputs needed for the following phases:
+        final PhaseType phase = handler.getPhase();
         final MagicStack stack = game.getStack();
         switch (phase) {
             case COMBAT_DECLARE_ATTACKERS:
@@ -168,12 +146,8 @@ public class InputQueue extends MyObservable implements java.io.Serializable {
             case COMBAT_DECLARE_BLOCKERS:
                 stack.freezeStack();
 
-                if (game.getCombat().isPlayerAttacked(priority)) {
-                    return pc.getBlockInput();
-                }
-
-                // noone attacks you
-                return pc.getAutoPassPriorityInput();
+                boolean isAttacked = game.getCombat().isPlayerAttacked(priority);
+                return isAttacked ? pc.getBlockInput() : pc.getAutoPassPriorityInput();
 
             case CLEANUP:
                 // discard

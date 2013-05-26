@@ -56,9 +56,10 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
     /** Constant <code>serialVersionUID=5207222278370963197L</code>. */
     private static final long serialVersionUID = 5207222278370963197L;
 
-    private PhaseType phase = PhaseType.UNTAP;
-    private int turn = 1;
-    // Start turn at 1, since first untap is where we start
+    // Start turn at 0, since we start even before first untap
+    private PhaseType phase = null;
+    private int turn = 0;
+
 
     private final transient Stack<ExtraTurn> extraTurns = new Stack<ExtraTurn>();
     private final transient Map<PhaseType, Stack<PhaseType>> extraPhases = new HashMap<PhaseType, Stack<PhaseType>>();
@@ -232,38 +233,39 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
             p.updateObservers();
         }
     
-        switch (this.phase) {
-            case UNTAP:
-                this.nCombatsThisTurn = 0;
-                break;
-    
-            case COMBAT_DECLARE_ATTACKERS:
-                game.getStack().unfreezeStack();
-                this.nCombatsThisTurn++;
-                break;
-    
-            case COMBAT_DECLARE_BLOCKERS:
-                game.getStack().unfreezeStack();
-                break;
-    
-            case COMBAT_END:
-                //SDisplayUtil.showTab(EDocID.REPORT_STACK.getDoc());
-                game.getCombat().reset(playerTurn);
-                this.getPlayerTurn().resetAttackedThisCombat();
-                this.bCombat.set(false);
-    
-                break;
-    
-            case CLEANUP:
-                this.bPreventCombatDamageThisTurn = false;
-                if (!this.bRepeatCleanup) {
-                    this.setPlayerTurn(this.handleNextTurn());
-                }
-                this.planarDiceRolledthisTurn = 0;
-                // Play the End Turn sound
-                game.getEvents().post(new EndOfTurnEvent());
-                break;
-            default: // no action
+        if( phase != null ) {
+            switch (this.phase) {
+                case UNTAP:
+                    this.nCombatsThisTurn = 0;
+                    break;
+        
+                case COMBAT_DECLARE_ATTACKERS:
+                    game.getStack().unfreezeStack();
+                    this.nCombatsThisTurn++;
+                    break;
+        
+                case COMBAT_DECLARE_BLOCKERS:
+                    game.getStack().unfreezeStack();
+                    break;
+        
+                case COMBAT_END:
+                    game.getCombat().reset(playerTurn);
+                    this.getPlayerTurn().resetAttackedThisCombat();
+                    this.bCombat.set(false);
+        
+                    break;
+        
+                case CLEANUP:
+                    this.bPreventCombatDamageThisTurn = false;
+                    if (!this.bRepeatCleanup) {
+                        this.setPlayerTurn(this.handleNextTurn());
+                    }
+                    this.planarDiceRolledthisTurn = 0;
+                    // Play the End Turn sound
+                    game.getEvents().post(new EndOfTurnEvent());
+                    break;
+                default: // no action
+            }
         }
     
         String phaseType = "";
@@ -283,7 +285,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
                 this.phase = nextPhase;
                 phaseType = "Additional ";
             } else {
-                this.phase = phase.getNextPhase();
+                this.phase = PhaseType.getNext(phase);
             }
         }
     
@@ -712,15 +714,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
         // System.out.println(String.format("%s %s: %s passes priority to %s", playerTurn, phase, actingPlayer, nextPlayer));
         if (firstAction.equals(nextPlayer)) {
             if (game.getStack().isEmpty()) {
-                this.setPriority(this.getPlayerTurn()); // this needs to be set early as we exit the phase
-                // end phase
-                setPlayersPriorityPermission(true);
-                nextPhase();
-                // When consecutively skipping phases (like in combat) this section
-                // pushes through that block
-                handleBeginPhase();
-                // it no longer does.
-                updateObservers();
+                advancePhase();
             } else if (!game.getStack().hasSimultaneousStackEntries()) {
                 game.getStack().resolveStack();
                 game.getStack().chooseOrderOfSimultaneousStackEntryAll();
@@ -732,6 +726,26 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
             updateObservers();
         }
         
+    }
+    
+    public void startFirstTurn(Player goesFirst) {
+        if(phase != null)
+            throw new IllegalStateException("Turns already started, call this only once per game"); 
+        setPlayerTurn(goesFirst);
+        advancePhase();
+    }
+
+    private void advancePhase() { // may be called externally only from gameAction after mulligans 
+
+        this.setPriority(this.getPlayerTurn()); // this needs to be set early as we exit the phase
+        // end phase
+        setPlayersPriorityPermission(true);
+        nextPhase();
+        // When consecutively skipping phases (like in combat) this section
+        // pushes through that block
+        handleBeginPhase();
+        // it no longer does.
+        updateObservers();
     }
 
     /**

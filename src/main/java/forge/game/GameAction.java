@@ -1476,12 +1476,16 @@ public class GameAction {
 
     public void mulligan(final Player firstPlayer) {
         performMulligans(firstPlayer, game.getType() == GameType.Commander);
-        handleLeylinesAndChancellors();
-        // Run Trigger beginning of the game
-        final HashMap<String, Object> runParams = new HashMap<String, Object>();
-        game.getTriggerHandler().runTrigger(TriggerType.NewGame, runParams, false);
         game.setAge(GameAge.Play);
-        game.getInputQueue().clearInput();
+        
+        // THIS CODE WILL WORK WITH PHASE = NULL {
+            handleLeylinesAndChancellors();
+            // Run Trigger beginning of the game
+            final HashMap<String, Object> runParams = new HashMap<String, Object>();
+            game.getTriggerHandler().runTrigger(TriggerType.NewGame, runParams, false);
+        // }
+
+        game.getPhaseHandler().startFirstTurn(firstPlayer);
     }
     
     private void performMulligans(final Player firstPlayer, final boolean isCommander) {

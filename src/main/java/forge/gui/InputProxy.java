@@ -43,11 +43,10 @@ public class InputProxy implements Observer {
     private AtomicReference<Input> input = new AtomicReference<Input>();
     private GameState game = null;
 
-    private static final boolean INPUT_DEBUG = false;
+    private static final boolean DEBUG_INPUT = false;
     
     public void setGame(GameState game0) {
         game = game0;
-        // game.getStack().addObserver(this);
         game.getPhaseHandler().addObserver(this);
         game.getInputQueue().addObserver(this);
     }
@@ -58,19 +57,15 @@ public class InputProxy implements Observer {
         FThreads.assertExecutedByEdt(false);
         
         final PhaseHandler ph = game.getPhaseHandler();
-        final Input nextInput = game.getInputQueue().getActualInput();
+        final Input nextInput = game.getInputQueue().getActualInput(game);
         
-        
-        if(INPUT_DEBUG) { 
-            System.out.print(FThreads.debugGetStackTraceItem(6, true) + " ... ");
-            System.out.printf("\t%s on %s, \tstack = %s%n", nextInput == null ? "null" : nextInput.getClass().getSimpleName(), ph.debugPrintState(), game.getInputQueue().printInputStack());
-        }
+        if(DEBUG_INPUT) 
+            System.out.printf("%s ... \t%s on %s, \tstack = %s%n", FThreads.debugGetStackTraceItem(6, true), nextInput == null ? "null" : nextInput.getClass().getSimpleName(), ph.debugPrintState(), game.getInputQueue().printInputStack());
 
         this.input.set(nextInput);
         Runnable showMessage = new Runnable() {
             @Override public void run() { 
-                //if(INPUT_DEBUG)
-                //    System.out.printf("%s > showMessage @ %s/%s during %s%n%n", FThreads.debugGetCurrThreadId(), nextInput.getClass().getSimpleName(), getInput().getClass().getSimpleName(), ph.debugPrintState());
+                // System.out.printf("%s > showMessage @ %s/%s during %s%n%n", FThreads.debugGetCurrThreadId(), nextInput.getClass().getSimpleName(), getInput().getClass().getSimpleName(), ph.debugPrintState());
                 getInput().showMessage(game.getInputQueue()); 
             }
         };
