@@ -132,9 +132,6 @@ public class MatchController {
         currentGame.getInputQueue().invokeGameAction(new Runnable() {
             @Override
             public void run() {
-                if(currentGame.getType() == GameType.Planechase)
-                    firstPlayer.initPlane();
-
                 currentGame.getAction().mulligan(firstPlayer);
             }
         });

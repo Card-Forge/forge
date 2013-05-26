@@ -488,6 +488,6 @@ public class PlayerControllerHuman extends PlayerController {
     public List<Card> getCardsToMulligan(boolean isCommander, Player firstPlayer) {
         final InputConfirmMulligan inp = new InputConfirmMulligan(player, firstPlayer, isCommander);
         player.getGame().getInputQueue().setInputAndWait(inp);
-        return inp.isKeepHand() ? null : inp.getSelectedCards();
+        return inp.isKeepHand() ? null : isCommander ? inp.getSelectedCards() : player.getCardsIn(ZoneType.Hand);
     }
 }

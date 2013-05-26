@@ -1479,6 +1479,9 @@ public class GameAction {
         game.setAge(GameAge.Play);
         
         // THIS CODE WILL WORK WITH PHASE = NULL {
+            if(game.getType() == GameType.Planechase)
+                firstPlayer.initPlane();
+
             handleLeylinesAndChancellors();
             // Run Trigger beginning of the game
             final HashMap<String, Object> runParams = new HashMap<String, Object>();
@@ -1496,39 +1499,55 @@ public class GameAction {
         for( int i = 0; i < offset; i++ ) {
             whoCanMulligan.add(whoCanMulligan.remove(0));
         }
+        
+        boolean[] hasKept = new boolean[whoCanMulligan.size()];
+        int[] handSize = new int[whoCanMulligan.size()];
+        for( int i = 0; i < whoCanMulligan.size(); i++) {
+            hasKept[i] = false;
+            handSize[i] = whoCanMulligan.get(i).getZone(ZoneType.Hand).size();
+        }
+        
     
         MapOfLists<Player, Card> exiledDuringMulligans = new HashMapOfLists<Player, Card>(CollectionSuppliers.<Card>arrayLists());
         
+        // rule 103.4b
+        boolean isMultiPlayer = game.getPlayers().size() > 2;
+        int mulliganDelta = isMultiPlayer ? 0 : 1; 
+        
+        boolean allKept;
         do {
+            allKept = true;
             for (int i = 0; i < whoCanMulligan.size(); i++) {
+                if( hasKept[i]) continue;
+                
                 Player p = whoCanMulligan.get(i);
                 List<Card> toMulligan = p.canMulligan() ? p.getController().getCardsToMulligan(isCommander, firstPlayer) : null; 
-                if ( toMulligan != null ) {
+                if ( toMulligan != null && !toMulligan.isEmpty()) {
                     if( !isCommander ) {
                         toMulligan = new ArrayList<Card>(p.getCardsIn(ZoneType.Hand));
                         for (final Card c : toMulligan) {
                             moveToLibrary(c);
                         }
                         p.shuffle();
-                        p.drawCards(toMulligan.size() - 1);
-                        
-                    } else if ( !toMulligan.isEmpty() ){ 
+                        p.drawCards(handSize[i] - mulliganDelta);
+                    } else { 
                         List<Card> toExile = Lists.newArrayList(toMulligan);
                         for(Card c : toExile) {
                             exile(c);
                         }
                         exiledDuringMulligans.addAll(p, toExile);
                         p.drawCards(toExile.size() - 1);
-                    } else 
-                        continue;
-
+                    } 
+                    
                     p.onMulliganned();
+                    allKept = false;
                 } else {
                     game.getGameLog().add(GameEventType.MULLIGAN, p.getName() + " has kept a hand of " + p.getZone(ZoneType.Hand).size() + " cards");
-                    whoCanMulligan.remove(i--);
+                    hasKept[i] = true;
                 }
             }
-        } while( !whoCanMulligan.isEmpty() );
+            mulliganDelta++;
+        } while( !allKept );
         
         if( isCommander )
             for(Entry<Player, Collection<Card>> kv : exiledDuringMulligans.entrySet() ) {
