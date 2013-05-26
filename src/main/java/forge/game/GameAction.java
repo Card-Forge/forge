@@ -243,12 +243,12 @@ public class GameAction {
 
         // remove all counters from the card if destination is not the battlefield
         // UNLESS we're dealing with Skullbriar, the Walking Grave
-        if (zoneTo.is(ZoneType.Hand) || zoneTo.is(ZoneType.Library) || 
-                (!zoneTo.is(ZoneType.Battlefield) && !c.getName().equals("Skullbriar, the Walking Grave"))) {
+        if (!c.isToken() && (zoneTo.is(ZoneType.Hand) || zoneTo.is(ZoneType.Library) || 
+                (!zoneTo.is(ZoneType.Battlefield) && !c.getName().equals("Skullbriar, the Walking Grave")))) {
             copied.clearCounters();
         }
 
-        if (!zoneTo.is(ZoneType.Battlefield)) {
+        if (!c.isToken() && !zoneTo.is(ZoneType.Battlefield)) {
             copied.getCharacteristics().resetCardColor();
         }
 
