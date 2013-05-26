@@ -67,6 +67,7 @@ public abstract class InputSelectManyBase<T extends GameEntity> extends InputSyn
     protected final void onCancel() {
         bCancelled = true;
         this.stop();
+        afterStop();
     }
 
     @Override
@@ -82,6 +83,7 @@ public abstract class InputSelectManyBase<T extends GameEntity> extends InputSyn
     @Override
     protected final void onOk() {
         this.stop();
+        afterStop();
     }
 
     public void setMessage(String message0) {
