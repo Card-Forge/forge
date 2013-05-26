@@ -39,6 +39,7 @@ import forge.Command;
 import forge.CounterType;
 import forge.FThreads;
 import forge.GameEntity;
+import forge.GameEventType;
 import forge.card.CardType;
 import forge.card.TriggerReplacementBase;
 import forge.card.ability.AbilityFactory;
@@ -1519,6 +1520,7 @@ public class GameAction {
 
                     p.onMulliganned();
                 } else {
+                    game.getGameLog().add(GameEventType.MULLIGAN, p.getName() + " has kept a hand of " + p.getZone(ZoneType.Hand).size() + " cards");
                     whoCanMulligan.remove(i--);
                 }
             }

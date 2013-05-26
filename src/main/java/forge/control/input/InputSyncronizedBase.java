@@ -32,6 +32,7 @@ public abstract class InputSyncronizedBase extends InputBase implements InputSyn
         FThreads.invokeInNewThread(new Runnable() {
             @Override
             public void run() {
+                // this will update input proxy, so there might be anything happening in the thread 
                 getQueue().removeInput(InputSyncronizedBase.this);
                 cdlDone.countDown();
             }
