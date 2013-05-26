@@ -40,7 +40,6 @@ import forge.CardCharacteristicName;
 import forge.CardLists;
 import forge.CardPredicates;
 import forge.CounterType;
-import forge.FThreads;
 import forge.Singletons;
 import forge.card.spellability.AbilityManaPart;
 import forge.card.spellability.SpellAbility;
@@ -136,10 +135,10 @@ public final class GuiDisplayUtil {
     private static void setupGameState(final int humanLife, final int computerLife, final Map<ZoneType, String> humanCardTexts,
             final Map<ZoneType, String> aiCardTexts, final String tChangePlayer, final String tChangePhase) {
         
-        FThreads.invokeInNewThread(new Runnable() {
+        final GameState game = getGame();
+        game.getInputQueue().invokeGameAction(new Runnable() {
             @Override
             public void run() {
-                final GameState game = getGame();
                 final Player human = game.getPlayers().get(0);
                 final Player ai = game.getPlayers().get(1);
 
@@ -411,7 +410,7 @@ public final class GuiDisplayUtil {
                 return; // happens if cancelled
             }
 
-            FThreads.invokeInNewThread(new Runnable() {
+            game.getInputQueue().invokeGameAction(new Runnable() {
                 @Override
                 public void run() {
                     game.getAction().moveToHand(forgeCard); // this is really needed (for rollbacks at least) 
@@ -472,7 +471,7 @@ public final class GuiDisplayUtil {
         
         PlanarDice.roll(p, res);
         
-        FThreads.invokeInNewThread(new Runnable() {
+        getGame().getInputQueue().invokeGameAction(new Runnable() {
             @Override
             public void run() {
                 p.getGame().getStack().chooseOrderOfSimultaneousStackEntryAll();

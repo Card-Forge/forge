@@ -64,7 +64,7 @@ public class AiInputCommon extends InputPassPriorityBase implements AiInput {
          * the \"Detailed Error Trace\" to the Forge forum.");
          */
 
-        computer.getGame().getInputQueue().LockAndInvokeGameAction(aiActions);
+        computer.getGame().getInputQueue().invokeGameAction(aiActions);
 
     } // getMessage();
 

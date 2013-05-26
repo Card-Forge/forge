@@ -95,8 +95,7 @@ public enum CDock implements ICDoc {
         if( p == null ) return;
         // if( c.isMindSlaved() ) return
 
-        FThreads.invokeInNewThread(new Runnable() {
-            
+        game.getInputQueue().invokeGameAction(new Runnable() {
             @Override
             public void run() {
                 p.concede();

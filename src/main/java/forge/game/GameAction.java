@@ -37,6 +37,7 @@ import forge.CardPredicates;
 import forge.CardUtil;
 import forge.Command;
 import forge.CounterType;
+import forge.FThreads;
 import forge.GameEntity;
 import forge.card.CardType;
 import forge.card.TriggerReplacementBase;
@@ -854,7 +855,8 @@ public class GameAction {
 
     /** */
     public final void checkStaticAbilities() {
-
+        FThreads.assertExecutedByEdt(false);
+        
         if (game.isGameOver())
             return;
 
@@ -903,6 +905,7 @@ public class GameAction {
      * </p>
      */
     public final void checkStateEffects() {
+        
 
         // sol(10/29) added for Phase updates, state effects shouldn't be
         // checked during Spell Resolution (except when persist-returning

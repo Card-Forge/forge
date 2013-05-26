@@ -130,13 +130,17 @@ public class InputQueue extends MyObservable implements java.io.Serializable {
      */
     public final Input getActualInput() {
         GameAge age = game.getAge();
-        if ( age != GameAge.Play  && age != GameAge.Mulligan)
-            return inputLock;
 
+        if ( game.isGameOver() )
+            return inputLock;
+        
         Input topMost = inputStack.peek(); // incoming input to Control
         if (topMost != null )
             return topMost;
-        
+
+        if ( age != GameAge.Play )
+            return inputLock;
+
         final PhaseHandler handler = game.getPhaseHandler();
         final PhaseType phase = handler.getPhase();
         final Player playerTurn = handler.getPlayerTurn();
@@ -216,7 +220,7 @@ public class InputQueue extends MyObservable implements java.io.Serializable {
         input.awaitLatchRelease();
     }
 
-    public void LockAndInvokeGameAction(final Runnable proc) {
+    public void lockAndInvokeGameAction(final Runnable proc) {
         Runnable toRun = new Runnable() {
             @Override
             public void run() {
@@ -225,10 +229,14 @@ public class InputQueue extends MyObservable implements java.io.Serializable {
                 InputQueue.this.unlock();
             }
         };
+        invokeGameAction(toRun);
+    }
+
+    public void invokeGameAction(final Runnable proc) {
         if(FThreads.isEDT()) {
-            FThreads.invokeInNewThread(toRun);
+            FThreads.invokeInNewThread(proc);
         } else { // this branch is experimental
-            toRun.run();
+            proc.run();
         }
     }
     

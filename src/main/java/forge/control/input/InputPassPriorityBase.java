@@ -1,6 +1,5 @@
 package forge.control.input;
 
-import forge.FThreads;
 import forge.game.phase.PhaseHandler;
 import forge.game.player.Player;
 
@@ -20,11 +19,7 @@ public abstract class InputPassPriorityBase extends InputBase {
     
     protected final void pass() { // no futher overloads possible
         setFinished();
-
-        if( FThreads.isEDT() )
-            FThreads.invokeInNewThread(passPriority);
-        else 
-            passPriority.run();
+        getQueue().invokeGameAction(passPriority);
     }
 
     protected String getTurnPhasePriorityMessage() {

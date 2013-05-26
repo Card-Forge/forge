@@ -8,7 +8,6 @@ import org.apache.commons.lang3.tuple.Pair;
 import com.google.common.collect.Lists;
 
 import forge.Card;
-import forge.FThreads;
 import forge.Singletons;
 import forge.control.FControl;
 import forge.error.BugReporter;
@@ -130,7 +129,7 @@ public class MatchController {
         final Player firstPlayer = determineFirstTurnPlayer(getLastGameOutcome(), currentGame);
 
         // This code was run from EDT.
-        FThreads.invokeInNewThread( new Runnable() {
+        currentGame.getInputQueue().invokeGameAction(new Runnable() {
             @Override
             public void run() {
                 currentGame.getInputQueue().clearInput();

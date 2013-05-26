@@ -115,18 +115,6 @@ public class FThreads {
         getCachedPool().execute(toRun);
     }
     
-    public static void dumpStackTrace(PrintStream stream) {
-      StackTraceElement[] trace = Thread.currentThread().getStackTrace();
-      stream.printf("%s > %s called from %s%n", debugGetCurrThreadId(), trace[2].getClassName()+"."+trace[2].getMethodName(), trace[3].toString());
-      int i = 0;
-      for(StackTraceElement se : trace) {
-          if(i<2) i++;
-          else stream.println(se.toString());
-
-      }
-    }
-    
-
     /**
      * TODO: Write javadoc for this method.
      * @return
@@ -150,7 +138,34 @@ public class FThreads {
     }
     
     public static String debugGetCurrThreadId() {
-        return isEDT() ? "EDT" : Long.toString(Thread.currentThread().getId());
+        return isEDT() ? "EDT" : Thread.currentThread().getName();
+    }
+
+    public static void dumpStackTrace(PrintStream stream) {
+      StackTraceElement[] trace = Thread.currentThread().getStackTrace();
+      stream.printf("%s > %s called from %s%n", debugGetCurrThreadId(), trace[2].getClassName()+"."+trace[2].getMethodName(), trace[3].toString());
+      int i = 0;
+      for(StackTraceElement se : trace) {
+          if(i<2) i++;
+          else stream.println(se.toString());
+      }
+    }
+
+    public static String debugGetStackTraceItem(int depth, boolean shorter) {
+        StackTraceElement[] trace = Thread.currentThread().getStackTrace();
+        String lastItem = trace[depth].toString();
+        if( shorter ) {
+            int lastPeriod = lastItem.lastIndexOf('.');
+            lastPeriod = lastItem.lastIndexOf('.', lastPeriod-1);
+            lastPeriod = lastItem.lastIndexOf('.', lastPeriod-1);
+            lastItem = lastItem.substring(lastPeriod+1);
+            return String.format("%s > from %s", debugGetCurrThreadId(), lastItem);
+        }
+        return String.format("%s > %s called from %s", debugGetCurrThreadId(), trace[2].getClassName()+"."+trace[2].getMethodName(), lastItem);
+    }
+
+    public static String debugGetStackTraceItem(int depth) {
+        return debugGetStackTraceItem(depth, false);
     }
    
 }

@@ -24,6 +24,7 @@ import java.util.concurrent.atomic.AtomicReference;
 import forge.Card;
 import forge.FThreads;
 import forge.control.input.Input;
+import forge.control.input.InputAutoPassPriority;
 import forge.game.GameState;
 import forge.game.phase.PhaseHandler;
 import forge.game.player.Player;
@@ -59,7 +60,7 @@ public class InputProxy implements Observer {
         final PhaseHandler ph = game.getPhaseHandler();
         
         if(INPUT_DEBUG)
-            System.out.printf("%s > InputProxy.update() =>%n", FThreads.debugGetCurrThreadId());
+            System.out.println(FThreads.debugGetStackTraceItem(6, true));
         
         if ( game.getInputQueue().isEmpty() && ph.hasPhaseEffects()) {
             if(INPUT_DEBUG)
@@ -76,14 +77,15 @@ public class InputProxy implements Observer {
         Runnable showMessage = new Runnable() {
             @Override public void run() { 
                 if(INPUT_DEBUG)
-                    System.out.printf("%s > showMessage @ %s during %s%n", FThreads.debugGetCurrThreadId(), nextInput.getClass().getSimpleName(), ph.debugPrintState());
-                nextInput.showMessage(game.getInputQueue()); 
+                    System.out.printf("%s > showMessage @ %s/%s during %s%n%n", FThreads.debugGetCurrThreadId(), nextInput.getClass().getSimpleName(), getInput().getClass().getSimpleName(), ph.debugPrintState());
+                getInput().showMessage(game.getInputQueue()); 
             }
         };
-//            if( nextInput instanceof AiInput )
-//                FThreads.invokeInNewThread(showMessage, true);
-//            else
-        FThreads.invokeInEdtLater(showMessage);
+        
+        if( nextInput instanceof InputAutoPassPriority )
+            nextInput.showMessage(game.getInputQueue());
+        else
+            FThreads.invokeInEdtLater(showMessage);
     }
     /**
      * <p>
