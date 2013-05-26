@@ -26,6 +26,8 @@ import javax.swing.SwingConstants;
 import javax.swing.border.MatteBorder;
 
 import net.miginfocom.swing.MigLayout;
+import forge.Constant.Preferences;
+import forge.Singletons;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
@@ -34,6 +36,7 @@ import forge.gui.match.controllers.CMessage;
 import forge.gui.toolbox.FButton;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FSkin;
+import forge.properties.ForgePreferences.FPref;
 
 /**
  * Assembles Swing components of message report.
@@ -75,12 +78,16 @@ public enum VMessage implements IVDoc<CMessage> {
      */
     @Override
     public void populate() {
-        parentCell.getBody().setLayout(new MigLayout("wrap 2, fill, insets 0, gap 0"));
+        parentCell.getBody().setLayout(new MigLayout("wrap 2, fill, insets 0 2% 5px 1%, gap 1% 0, debug 2000"));
 
-        parentCell.getBody().add(lblGames, "span 2 1, w 96%!, gapleft 2%, h 30px, wrap");
-        parentCell.getBody().add(tarMessage, "span 2 1, h 70%!, w 96%!, gap 2% 0 1% 0");
-        parentCell.getBody().add(btnOK, "w 47%!, gap 2% 1% 0 5px");
-        parentCell.getBody().add(btnCancel, "w 47%!, gap 0 1% 0 5px");
+        parentCell.getBody().add(lblGames, "span 2 1, w 96%!, h 30px, wrap");
+        parentCell.getBody().add(tarMessage, "sx 2, gaptop 12px, h 70%, w 96%");
+        
+        boolean largerButtons = Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_FOR_TOUCHSCREN);
+        String constraints = largerButtons ? "w 47%, h 40%" : "w 47%, hmin 24px"; 
+        
+        parentCell.getBody().add(btnOK, constraints);
+        parentCell.getBody().add(btnCancel, constraints);
     }
 
     /* (non-Javadoc)
