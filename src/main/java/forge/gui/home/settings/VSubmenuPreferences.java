@@ -97,6 +97,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final JCheckBox cbRandomizeArt = new OptionsCheckBox("Randomize Card Art");
     private final JCheckBox cbEnableSounds = new OptionsCheckBox("Enable Sounds");
     private final JCheckBox cbAltSoundSystem = new OptionsCheckBox("Use Alternate Sound System");
+    private final JCheckBox cbUiForTouchScreen = new OptionsCheckBox("Enchance UI for touchscreens");
 
     private final Map<FPref, KeyboardShortcutField> shortcutFields = new HashMap<FPref, KeyboardShortcutField>();
 
@@ -170,6 +171,9 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         pnlPrefs.add(cbScaleLarger, regularConstraints);
         pnlPrefs.add(new NoteLabel("Allows card pictures to be expanded larger than their original size."), regularConstraints);
 
+        pnlPrefs.add(cbUiForTouchScreen, regularConstraints);
+        pnlPrefs.add(new NoteLabel("Increases some UI elements to provide a better experience on touchscreen devices. (Needs restart)"), regularConstraints);
+
         pnlPrefs.add(cbTextMana, regularConstraints);
         pnlPrefs.add(new NoteLabel("Overlays each card with basic card-specific information."), regularConstraints);
 
@@ -179,8 +183,8 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         pnlPrefs.add(cbEnableSounds, regularConstraints);
         pnlPrefs.add(new NoteLabel("Enable sound effects during the game."), regularConstraints);
 
-	pnlPrefs.add(cbAltSoundSystem, regularConstraints);
-	pnlPrefs.add(new NoteLabel("Use the alternate sound system (only use in case your have issues with sound not playing or disappearing)"), regularConstraints);
+        pnlPrefs.add(cbAltSoundSystem, regularConstraints);
+        pnlPrefs.add(new NoteLabel("Use the alternate sound system (only use in case your have issues with sound not playing or disappearing)"), regularConstraints);
 	
         // Keyboard shortcuts
         final JLabel lblShortcuts = new SectionLabel("Keyboard Shortcuts");
@@ -471,6 +475,10 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     /** @return {@link javax.swing.JCheckBox} */
     public JCheckBox getCbAltSoundSystem() {
 	return cbAltSoundSystem;
+    }
+
+    public final JCheckBox getCbUiForTouchScreen() {
+        return cbUiForTouchScreen;
     }
 
     /** @return {@link forge.gui.toolbox.FLabel} */

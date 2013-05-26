@@ -54,6 +54,8 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         UI_RANDOM_CARD_ART ("false"),
         UI_CURRENT_AI_PROFILE (AiProfileUtil.AI_PROFILE_RANDOM_MATCH),
         UI_CLONE_MODE_SOURCE ("false"), /** */
+        
+        UI_FOR_TOUCHSCREN("false"),
 
         SUBMENU_CURRENTMENU (EMenuItem.CONSTRUCTED.toString()),
         SUBMENU_SANCTIONED ("false"),

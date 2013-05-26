@@ -5,9 +5,11 @@ import java.awt.event.ItemListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import javax.swing.JCheckBox;
 import javax.swing.SwingUtilities;
 
 import org.apache.commons.lang3.text.WordUtils;
+import org.apache.commons.lang3.tuple.Pair;
 
 import forge.Command;
 import forge.Constant.Preferences;
@@ -19,6 +21,7 @@ import forge.gui.toolbox.FSkin;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 import java.util.ArrayList;
+import java.util.List;
 
 /** 
  * Controls the preferences submenu in the home UI.
@@ -29,6 +32,9 @@ import java.util.ArrayList;
 public enum CSubmenuPreferences implements ICDoc {
     /** */
     SINGLETON_INSTANCE;
+    
+
+    private final List<Pair<JCheckBox, FPref>> lstControls = new ArrayList<Pair<JCheckBox,FPref>>();
 
     /* (non-Javadoc)
      * @see forge.control.home.IControlSubmenu#update()
@@ -53,33 +59,7 @@ public enum CSubmenuPreferences implements ICDoc {
             }
         });
 
-        view.getCbAnte().addItemListener(new ItemListener() {
-            @Override
-            public void itemStateChanged(final ItemEvent arg0) {
-                final boolean toggle = view.getCbAnte().isSelected();
-                prefs.setPref(FPref.UI_ANTE, String.valueOf(toggle));
-                prefs.save();
-            }
-        });
-
-        view.getCbManaBurn().addItemListener(new ItemListener() {
-            @Override
-            public void itemStateChanged(final ItemEvent arg0) {
-                final boolean toggle = view.getCbManaBurn().isSelected();
-                prefs.setPref(FPref.UI_MANABURN, String.valueOf(toggle));
-                prefs.save();
-            }
-        });
-
-        view.getCbScaleLarger().addItemListener(new ItemListener() {
-            @Override
-            public void itemStateChanged(final ItemEvent arg0) {
-                final boolean toggle = view.getCbScaleLarger().isSelected();
-                prefs.setPref(FPref.UI_SCALE_LARGER, String.valueOf(toggle));
-                prefs.save();
-            }
-        });
-
+        // This updates variable right now and is not standard 
         view.getCbDevMode().addItemListener(new ItemListener() {
             @Override
             public void itemStateChanged(final ItemEvent arg0) {
@@ -90,109 +70,33 @@ public enum CSubmenuPreferences implements ICDoc {
             }
         });
 
-        view.getCbEnforceDeckLegality().addItemListener(new ItemListener() {
-            @Override
-            public void itemStateChanged(final ItemEvent arg0) {
-                final boolean toggle = view.getCbEnforceDeckLegality().isSelected();
-                prefs.setPref(FPref.ENFORCE_DECK_LEGALITY, String.valueOf(toggle));
-                prefs.save();
-            }
-        });
+        lstControls.clear(); // just in case
+        lstControls.add(Pair.of(view.getCbAnte(), FPref.UI_ANTE));
+        lstControls.add(Pair.of(view.getCbManaBurn(), FPref.UI_MANABURN));
+        lstControls.add(Pair.of(view.getCbScaleLarger(), FPref.UI_SCALE_LARGER));
+        lstControls.add(Pair.of(view.getCbEnforceDeckLegality(), FPref.ENFORCE_DECK_LEGALITY));
+        lstControls.add(Pair.of(view.getCbCloneImgSource(), FPref.UI_CLONE_MODE_SOURCE));
+        lstControls.add(Pair.of(view.getCbRemoveSmall(), FPref.DECKGEN_NOSMALL));
+        lstControls.add(Pair.of(view.getCbRemoveArtifacts(), FPref.DECKGEN_ARTIFACTS));
+        lstControls.add(Pair.of(view.getCbSingletons(), FPref.DECKGEN_SINGLETONS));
+        lstControls.add(Pair.of(view.getCbUploadDraft(), FPref.UI_UPLOAD_DRAFT));
+        lstControls.add(Pair.of(view.getCbStackLand(), FPref.UI_SMOOTH_LAND));
+        lstControls.add(Pair.of(view.getCbRandomFoil(), FPref.UI_RANDOM_FOIL));
+        lstControls.add(Pair.of(view.getCbTextMana(), FPref.UI_CARD_OVERLAY));
+        lstControls.add(Pair.of(view.getCbRandomizeArt(), FPref.UI_RANDOM_CARD_ART));
+        lstControls.add(Pair.of(view.getCbEnableSounds(), FPref.UI_ENABLE_SOUNDS));
+        lstControls.add(Pair.of(view.getCbAltSoundSystem(), FPref.UI_ALT_SOUND_SYSTEM));
+        lstControls.add(Pair.of(view.getCbUiForTouchScreen(), FPref.UI_FOR_TOUCHSCREN));
 
-        view.getCbCloneImgSource().addItemListener(new ItemListener() {
-            @Override
-            public void itemStateChanged(final ItemEvent arg0) {
-                final boolean toggle = view.getCbCloneImgSource().isSelected();
-                prefs.setPref(FPref.UI_CLONE_MODE_SOURCE, String.valueOf(toggle));
-                prefs.save();
-            }
-        });
-
-        view.getCbRemoveSmall().addItemListener(new ItemListener() {
-            @Override
-            public void itemStateChanged(final ItemEvent arg0) {
-                final boolean toggle = view.getCbRemoveSmall().isSelected();
-                prefs.setPref(FPref.DECKGEN_NOSMALL, String.valueOf(toggle));
-                prefs.save();
-            }
-        });
-
-        view.getCbRemoveArtifacts().addItemListener(new ItemListener() {
-            @Override
-            public void itemStateChanged(final ItemEvent arg0) {
-                final boolean toggle = view.getCbRemoveArtifacts().isSelected();
-                prefs.setPref(FPref.DECKGEN_ARTIFACTS, String.valueOf(toggle));
-                prefs.save();
-            }
-        });
-
-        view.getCbSingletons().addItemListener(new ItemListener() {
-            @Override
-            public void itemStateChanged(final ItemEvent arg0) {
-                final boolean toggle = view.getCbSingletons().isSelected();
-                prefs.setPref(FPref.DECKGEN_SINGLETONS, String.valueOf(toggle));
-                prefs.save();
-            }
-        });
-
-        view.getCbUploadDraft().addItemListener(new ItemListener() {
-            @Override
-            public void itemStateChanged(final ItemEvent arg0) {
-                final boolean toggle = view.getCbUploadDraft().isSelected();
-                prefs.setPref(FPref.UI_UPLOAD_DRAFT , String.valueOf(toggle));
-                Preferences.UPLOAD_DRAFT = toggle;
-                prefs.save();
-            }
-        });
-
-        view.getCbStackLand().addItemListener(new ItemListener() {
-            @Override
-            public void itemStateChanged(final ItemEvent arg0) {
-                prefs.setPref(FPref.UI_SMOOTH_LAND, view.getCbRandomFoil().isSelected());
-                prefs.save();
-            }
-        });
-
-        view.getCbRandomFoil().addItemListener(new ItemListener() {
-            @Override
-            public void itemStateChanged(final ItemEvent arg0) {
-                prefs.setPref(FPref.UI_RANDOM_FOIL, view.getCbRandomFoil().isSelected());
-                prefs.save();
-            }
-        });
-
-        view.getCbTextMana().addItemListener(new ItemListener() {
-            @Override
-            public void itemStateChanged(final ItemEvent arg0) {
-                final boolean toggle = view.getCbTextMana().isSelected();
-                prefs.setPref(FPref.UI_CARD_OVERLAY, String.valueOf(toggle));
-                prefs.save();
-            }
-        });
-
-        view.getCbRandomizeArt().addItemListener(new ItemListener() {
-            @Override
-            public void itemStateChanged(final ItemEvent arg0) {
-                prefs.setPref(FPref.UI_RANDOM_CARD_ART, view.getCbRandomizeArt().isSelected());
-                prefs.save();
-            }
-        });
-
-        view.getCbEnableSounds().addItemListener(new ItemListener() {
-            @Override
-            public void itemStateChanged(final ItemEvent arg0) {
-                prefs.setPref(FPref.UI_ENABLE_SOUNDS, view.getCbEnableSounds().isSelected());
-                prefs.save();
-            }
-        });
-
-	view.getCbAltSoundSystem().addItemListener(new ItemListener() {
-	    @Override
-	    public void itemStateChanged(final ItemEvent arg0) {
-		prefs.setPref(FPref.UI_ALT_SOUND_SYSTEM, view.getCbAltSoundSystem().isSelected());
-		prefs.save();
-	    }
-	});
+        for(final Pair<JCheckBox, FPref> kv : lstControls) {
+            kv.getKey().addItemListener(new ItemListener() {
+                @Override
+                public void itemStateChanged(final ItemEvent arg0) {
+                    prefs.setPref(kv.getValue(), String.valueOf(kv.getKey().isSelected()));
+                    prefs.save();
+                }
+            });
+        }
 
         view.getBtnReset().setCommand(new Command() {
             @Override
@@ -215,22 +119,11 @@ public enum CSubmenuPreferences implements ICDoc {
         updateSkinNames();
         updateAIProfiles();
 
-        view.getCbRemoveSmall().setSelected(prefs.getPrefBoolean(FPref.DECKGEN_NOSMALL));
-        view.getCbSingletons().setSelected(prefs.getPrefBoolean(FPref.DECKGEN_SINGLETONS));
-        view.getCbRemoveArtifacts().setSelected(prefs.getPrefBoolean(FPref.DECKGEN_ARTIFACTS));
-        view.getCbAnte().setSelected(prefs.getPrefBoolean(FPref.UI_ANTE));
-        view.getCbManaBurn().setSelected(prefs.getPrefBoolean(FPref.UI_MANABURN));
-        view.getCbUploadDraft().setSelected(prefs.getPrefBoolean(FPref.UI_UPLOAD_DRAFT));
-        view.getCbStackLand().setSelected(prefs.getPrefBoolean(FPref.UI_SMOOTH_LAND));
         view.getCbDevMode().setSelected(prefs.getPrefBoolean(FPref.DEV_MODE_ENABLED));
-        view.getCbEnforceDeckLegality().setSelected(prefs.getPrefBoolean(FPref.ENFORCE_DECK_LEGALITY));
-        view.getCbCloneImgSource().setSelected(prefs.getPrefBoolean(FPref.UI_CLONE_MODE_SOURCE));
-        view.getCbRandomFoil().setSelected(prefs.getPrefBoolean(FPref.UI_RANDOM_FOIL));
-        view.getCbRandomizeArt().setSelected(prefs.getPrefBoolean(FPref.UI_RANDOM_CARD_ART));
-        view.getCbScaleLarger().setSelected(prefs.getPrefBoolean(FPref.UI_SCALE_LARGER));
-        view.getCbTextMana().setSelected(prefs.getPrefBoolean(FPref.UI_CARD_OVERLAY));
-        view.getCbEnableSounds().setSelected(prefs.getPrefBoolean(FPref.UI_ENABLE_SOUNDS));
-	view.getCbAltSoundSystem().setSelected(prefs.getPrefBoolean(FPref.UI_ALT_SOUND_SYSTEM));
+        
+        for(Pair<JCheckBox, FPref> kv: lstControls) {
+            kv.getKey().setSelected(prefs.getPrefBoolean(kv.getValue()));
+        }
         view.reloadShortcuts();
 
         SwingUtilities.invokeLater(new Runnable() {
