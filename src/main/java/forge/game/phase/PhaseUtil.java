@@ -60,7 +60,7 @@ public class PhaseUtil {
      *            a {@link forge.game.player.Player} object.
      * @return a boolean.
      */
-    private static boolean skipUntap(final Player p) {
+    static boolean isSkipUntap(final Player p) {
 
         if (p.hasKeyword("Skip your next untap step.")) {
             p.removeKeyword("Skip your next untap step.");
@@ -74,46 +74,6 @@ public class PhaseUtil {
         return false;
     }
 
-    /**
-     * <p>
-     * handleUntap.
-     * </p>
-     */
-    public static void handleUntap(GameState game) {
-        final PhaseHandler ph = game.getPhaseHandler();
-        final Player turn = ph.getPlayerTurn();
-
-        game.getCombat().reset(turn);
-
-        // Tokens starting game in play should suffer from Sum. Sickness
-        final List<Card> list = turn.getCardsIncludePhasingIn(ZoneType.Battlefield);
-        for (final Card c : list) {
-            if (turn.getTurn() > 0 || !c.isStartsGameInPlay()) {
-                c.setSickness(false);
-            }
-        }
-        turn.incrementTurn();
-
-        game.getAction().resetActivationsPerTurn();
-
-        final List<Card> lands = CardLists.filter(turn.getLandsInPlay(), Presets.UNTAPPED);
-        turn.setNumPowerSurgeLands(lands.size());
-
-        // anything before this point happens regardless of whether the Untap
-        // phase is skipped
-
-        if (PhaseUtil.skipUntap(turn)) {
-            return;
-        }
-
-        game.getUntap().executeUntil(turn);
-        game.getUntap().executeAt();
-
-        // otherwise land seems to stay tapped when it is really untapped
-        // AllZone.getHumanPlayer().getZone(ZoneType.Battlefield).updateObservers();
-    }
-
-    
 
     // ********* Declare Attackers ***********
 

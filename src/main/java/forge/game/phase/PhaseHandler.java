@@ -18,6 +18,7 @@
 package forge.game.phase;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Stack;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -25,9 +26,11 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import com.esotericsoftware.minlog.Log;
 
 import forge.Card;
+import forge.CardLists;
 import forge.FThreads;
 import forge.GameEventType;
 import forge.Singletons;
+import forge.CardPredicates.Presets;
 import forge.card.trigger.TriggerType;
 import forge.game.GameState;
 import forge.game.GameType;
@@ -313,7 +316,31 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
             case UNTAP:
                 //SDisplayUtil.showTab(EDocID.REPORT_STACK.getDoc());
                 game.getPhaseHandler().setPlayersPriorityPermission(false);
-                PhaseUtil.handleUntap(game);
+
+                game.getCombat().reset(playerTurn);
+
+                // Tokens starting game in play should suffer from Sum. Sickness
+                final List<Card> list = playerTurn.getCardsIncludePhasingIn(ZoneType.Battlefield);
+                for (final Card c : list) {
+                    if (playerTurn.getTurn() > 0 || !c.isStartsGameInPlay()) {
+                        c.setSickness(false);
+                    }
+                }
+                playerTurn.incrementTurn();
+
+                game.getAction().resetActivationsPerTurn();
+
+                final List<Card> lands = CardLists.filter(playerTurn.getLandsInPlay(), Presets.UNTAPPED);
+                playerTurn.setNumPowerSurgeLands(lands.size());
+
+                // anything before this point happens regardless of whether the Untap
+                // phase is skipped
+
+                if (!PhaseUtil.isSkipUntap(playerTurn)) {
+                    game.getUntap().executeUntil(playerTurn);
+                    game.getUntap().executeAt();
+                }
+
                 break;
 
             case UPKEEP:
