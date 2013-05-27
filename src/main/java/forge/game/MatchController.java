@@ -10,7 +10,6 @@ import com.google.common.collect.Lists;
 import forge.Card;
 import forge.Singletons;
 import forge.control.FControl;
-import forge.error.BugReporter;
 import forge.game.event.CardsAntedEvent;
 import forge.game.event.DuelFinishedEvent;
 import forge.game.event.DuelOutcomeEvent;
@@ -19,7 +18,6 @@ import forge.game.player.LobbyPlayer;
 import forge.game.player.Player;
 import forge.properties.ForgePreferences.FPref;
 import forge.util.Aggregates;
-import forge.util.MyRandom;
 
 /**
  * TODO: Write javadoc for this type.

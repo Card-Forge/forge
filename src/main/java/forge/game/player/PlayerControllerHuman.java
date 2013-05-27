@@ -12,7 +12,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
 import forge.Card;
-import forge.FThreads;
 import forge.GameEntity;
 import forge.card.mana.Mana;
 import forge.card.replacement.ReplacementEffect;
@@ -28,7 +27,6 @@ import forge.control.input.InputPassPriority;
 import forge.control.input.InputPlayOrDraw;
 import forge.control.input.InputSelectCards;
 import forge.control.input.InputSelectCardsFromList;
-import forge.control.input.InputSynchronized;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
