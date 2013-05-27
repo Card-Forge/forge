@@ -7,6 +7,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import forge.Card;
 import forge.CardUtil;
+import forge.FThreads;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.card.ability.ApiType;
@@ -184,10 +185,10 @@ public abstract class InputPayManaBase extends InputSyncronizedBase implements I
             public void run() {
                 HumanPlay.playSpellAbility(chosen.getActivatingPlayer(), chosen);
                 onManaAbilityPlayed(chosen);
+                FThreads.invokeInEdtLater(new Runnable() { @Override public void run() { showMessage(); } });
             }
         };
         game.getInputQueue().invokeGameAction(proc);
-        // EDT that removes lockUI from input stack will call our showMessage() method
     }
 
 

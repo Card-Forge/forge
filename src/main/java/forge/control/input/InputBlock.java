@@ -60,19 +60,18 @@ public class InputBlock extends InputPassPriorityBase {
 
     /** {@inheritDoc} */
     @Override
-    public final void showMessage() {
+    protected final void showMessage() {
         // could add "Reset Blockers" button
         ButtonUtil.enableOnlyOk();
+        final StringBuilder sb = new StringBuilder();
+        sb.append(player.getName() + ", declare blockers.\n\n");
 
         if (this.currentAttacker == null) {
-
-            final StringBuilder sb = new StringBuilder();
-            sb.append("To Block, click on your Opponents attacker first, then your blocker(s). ");
+            sb.append("To Block, click on your opponent's attacker first, then your blocker(s).\n");
             sb.append("To cancel a block right-click on your blocker");
             showMessage(sb.toString());
         } else {
             final String attackerName = this.currentAttacker.isFaceDown() ? "Morph" : this.currentAttacker.getName();
-            final StringBuilder sb = new StringBuilder();
             sb.append("Select a creature to block ").append(attackerName).append(" (");
             sb.append(this.currentAttacker.getUniqueNumber()).append("). ");
             sb.append("To cancel a block right-click on your blocker");
