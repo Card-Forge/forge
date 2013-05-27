@@ -59,6 +59,9 @@ Ink-Treader Nephilim
 Precursor Golem
 Weatherseed Totem
 Psychogenic Probe
+Treacherous Vampire
+Reborn Hero
+Showstopper
 
 
 ----------
@@ -123,6 +126,8 @@ Thorncaster Sliver
 Undead Minotaur
 Molten Birth
 Vastwood Hydra
+Sporemound
+Woodborn Behemoth
 
 
 ------------
