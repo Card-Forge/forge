@@ -49,6 +49,7 @@ public enum CLog implements ICDoc, Observer {
      */
     public void setModel(GameLog gameLog) {
         model = gameLog;
+        model.addObserver(this);
     }
 
     /* (non-Javadoc)

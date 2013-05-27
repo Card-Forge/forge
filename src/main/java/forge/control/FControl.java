@@ -384,7 +384,7 @@ public enum FControl {
     
         // models shall notify controllers of changes
         
-        game.getGameLog().addObserver(CLog.SINGLETON_INSTANCE);
+        
         // some observers were set in CMatchUI.initMatch
     
         // Listen to DuelOutcome event to show ViewWinLose
