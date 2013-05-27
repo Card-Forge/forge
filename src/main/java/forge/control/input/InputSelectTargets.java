@@ -214,19 +214,11 @@ public final class InputSelectTargets extends InputSyncronizedBase {
             this.showMessage();
     }
     
-    /* (non-Javadoc)
-     * @see forge.control.input.InputSyncronizedBase#afterStop()
-     */
-    @Override
-    protected void afterStop() {
+    private void done() {
         for(GameEntity c : targetDepth.keySet())
             if( c instanceof Card)
                 ((Card)c).setUsedToPay(false);
-        super.afterStop();
-
-    }
-    
-    private void done() {
+        
         this.stop();
     }
     
