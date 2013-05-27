@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import forge.Card;
+import forge.card.spellability.AbilityManaPart;
 import forge.card.spellability.SpellAbility;
 import forge.game.event.BlockerAssignedEvent;
 import forge.game.event.CardDamagedEvent;
@@ -167,7 +168,16 @@ public class EventVisualizer {
         final List<SpellAbility> manaProduced = land.getManaAbility();
 
         for (SpellAbility sa : manaProduced) {
-            String manaColors = sa.getManaPart().getOrigProduced();
+            
+            // Find mana ability if it is somewhere in tail
+            SpellAbility tail = sa;
+            AbilityManaPart m = null;
+            while (m == null && tail != null) {
+                m = tail.getManaPart();
+                tail = tail.getSubAbility();
+            }
+            
+            String manaColors = m.getOrigProduced();
 
             if (manaColors.contains("B")) {
                 return SoundEffectType.BlackLand;
