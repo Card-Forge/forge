@@ -39,7 +39,7 @@ public class ControlPlayerEffect extends SpellAbilityEffect {
                     pTarget.obeyNewMaster(activator.getLobbyPlayer().createControllerFor(pTarget));
                     
                     // on following cleanup release control
-                    game.getCleanup().addUntil(pTarget, new Command() {
+                    game.getCleanup().addAt(new Command() {
                         @Override
                         public void run() {
                             pTarget.releaseControl();

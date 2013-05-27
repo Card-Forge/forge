@@ -83,8 +83,10 @@ public enum CDock implements ICDoc {
         
         final Player p = findAffectedPlayer();
         if( p == null ) return;
-        if( p.isMindSlaved() ) 
-            GuiDialog.message("You cannot make concede a player you temporary control");
+        if( p.isMindSlaved() ) {
+            GuiDialog.message("You cannot make concede a player you temporarily control");
+            return;
+        }
 
         game.getInputQueue().invokeGameAction(new Runnable() {
             @Override
