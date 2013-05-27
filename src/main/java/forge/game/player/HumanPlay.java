@@ -219,7 +219,6 @@ public class HumanPlay {
                 }
             }
             boolean x = sa.getSourceCard().getManaCost().getShardCount(ManaCostShard.X) > 0;
-    
             game.getStack().add(sa, x);
         }
     }

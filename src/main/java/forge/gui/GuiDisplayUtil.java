@@ -40,7 +40,6 @@ import forge.CardCharacteristicName;
 import forge.CardLists;
 import forge.CardPredicates;
 import forge.CounterType;
-import forge.FThreads;
 import forge.Singletons;
 import forge.card.spellability.AbilityManaPart;
 import forge.card.spellability.SpellAbility;
@@ -433,7 +432,7 @@ public final class GuiDisplayUtil {
                     // Human player is choosing targets for an ability controlled by chosen player. 
                     sa.setActivatingPlayer(p);
                     HumanPlay.playSaWithoutPayingManaCost(game, sa);
-                    game.getInputQueue().updateObservers();
+                    game.getInputQueue().updateObservers(); // priority can be on AI side, need this update for that case
                 }
             });
         }
