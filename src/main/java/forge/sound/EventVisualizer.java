@@ -6,6 +6,7 @@ import java.util.Map;
 
 import forge.Card;
 import forge.card.spellability.SpellAbility;
+import forge.control.FControl;
 import forge.game.event.BlockerAssignedEvent;
 import forge.game.event.CardDamagedEvent;
 import forge.game.event.CardDestroyedEvent;
@@ -27,7 +28,6 @@ import forge.game.event.SetTappedEvent;
 import forge.game.event.ShuffleEvent;
 import forge.game.event.SpellResolvedEvent;
 import forge.game.event.TokenCreatedEvent;
-import forge.game.player.PlayerType;
 
 /** 
  * This class is in charge of converting any forge.game.event.Event to a SoundEffectType.
@@ -81,7 +81,7 @@ public class EventVisualizer {
             return getSoundEffectForTapState(((SetTappedEvent) evt).Tapped);
         }
         if (evt instanceof DuelOutcomeEvent) {
-            return getSoundEffectForDuelOutcome(((DuelOutcomeEvent) evt).result.getWinner().getType() == PlayerType.HUMAN);
+            return getSoundEffectForDuelOutcome(((DuelOutcomeEvent) evt).result.getWinner() == FControl.SINGLETON_INSTANCE.getLobby().getGuiPlayer());
         }
 
         return fromMap;

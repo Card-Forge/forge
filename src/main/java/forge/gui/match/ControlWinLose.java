@@ -16,7 +16,6 @@ import forge.game.GameType;
 import forge.game.MatchController;
 import forge.game.PlayerStartConditions;
 import forge.game.player.Player;
-import forge.game.player.PlayerType;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 import forge.gui.SOverlayUtils;
@@ -146,7 +145,7 @@ public class ControlWinLose {
             if( !fromGame.hasWon()) continue; // not a loser
             
             // offer to winner, if he is local human
-            if (fromGame.getLobbyPlayer().getType() == PlayerType.HUMAN) {
+            if (fromGame.isHuman()) {
                 List<CardPrinted> chosen = GuiChoose.noneOrMany("Select cards to add to your deck", losses);
                 if (null != chosen) {
                     PlayerStartConditions psc = match.getPlayers().get(i).getValue();

@@ -737,6 +737,10 @@ public class AiController {
             case Shuffle: // ai could analyze parameter denoting the player to shuffle
                 return true;
                 
+            case Pump:  //TODO Add logic here if necessary but I think the AI won't cast
+                //the spell in the first place if it would curse its own creature
+                //and the pump isn't mandatory
+                return true;
             default: 
         }
         String exMsg = String.format("AI confirmAction does not know what to decide about %s API with %s mode.", api, mode);
