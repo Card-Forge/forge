@@ -53,8 +53,8 @@ public class PlayerControllerHuman extends PlayerController {
     private final Input blockInput;
     private final Input cleanupInput;
 
-    public PlayerControllerHuman(GameState game0, Player p) {
-        super(game0, p);
+    public PlayerControllerHuman(GameState game0, Player p, LobbyPlayer lp) {
+        super(game0, p, lp);
         defaultInput = new InputPassPriority(player);
         blockInput = new InputBlock(player, game0);
         cleanupInput = new InputCleanup(player);

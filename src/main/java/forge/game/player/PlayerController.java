@@ -35,10 +35,12 @@ public abstract class PlayerController {
     private PhaseType autoPassUntil = null;
     private final Input autoPassPriorityInput;
     protected final Player player;
+    protected final LobbyPlayer lobbyPlayer;
 
-    public PlayerController(GameState game0, Player p) {
+    public PlayerController(GameState game0, Player p, LobbyPlayer lp) {
         game = game0;
         player = p;
+        lobbyPlayer = lp;
         autoPassPriorityInput = new InputAutoPassPriority(player);
     }
     
@@ -90,7 +92,8 @@ public abstract class PlayerController {
 
     // End of Triggers preliminary choice
 
-
+    public LobbyPlayer getLobbyPlayer() { return lobbyPlayer; }
+    
     /**
      * Uses GUI to learn which spell the player (human in our case) would like to play
      */

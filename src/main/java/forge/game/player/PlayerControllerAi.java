@@ -46,8 +46,8 @@ public class PlayerControllerAi extends PlayerController {
    
     private final AiController brains;
 
-    public PlayerControllerAi(GameState game, Player p) {
-        super(game, p);
+    public PlayerControllerAi(GameState game, Player p, LobbyPlayer lp) {
+        super(game, p, lp);
 
         brains = new AiController(p, game); 
         

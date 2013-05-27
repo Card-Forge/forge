@@ -81,8 +81,7 @@ public enum CDock implements ICDoc {
         }
         
         final Player p = findAffectedPlayer();
-        if( p == null ) return;
-        // if( c.isMindSlaved() ) return
+        if( p == null || p.isMindSlaved() ) return;
 
         game.getInputQueue().invokeGameAction(new Runnable() {
             @Override

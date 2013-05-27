@@ -28,7 +28,7 @@ public class LobbyPlayerAi extends LobbyPlayer {
     @Override
     public Player getPlayer(GameState game) {
         Player ai = new Player(this, game);
-        ai.setController(new PlayerControllerAi(game, ai));
+        ai.setController(new PlayerControllerAi(game, ai, this));
 
         String currentAiProfile = Singletons.getModel().getPreferences().getPref(FPref.UI_CURRENT_AI_PROFILE);
         String lastProfileChosen = game.getMatch().getPlayedGames().isEmpty() ? currentAiProfile : getAiProfile();

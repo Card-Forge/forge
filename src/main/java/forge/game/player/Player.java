@@ -163,7 +163,7 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     private PlayerStatistics stats = new PlayerStatistics();
     protected PlayerController controller;
-    private final LobbyPlayer lobbyPlayer;
+    private final LobbyPlayer lobbyPlayerCreator;
     private int teamNumber = -1;
     
     private Card activeScheme = null;
@@ -200,7 +200,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             this.zones.put(z, toPut);
         }
         this.setName(chooseName(lobby));
-        this.lobbyPlayer = lobby;
+        this.lobbyPlayerCreator = lobby;
     }
 
     private String chooseName(LobbyPlayer lobby) {
@@ -2739,7 +2739,11 @@ public class Player extends GameEntity implements Comparable<Player> {
      * @return
      */
     public final LobbyPlayer getLobbyPlayer() {
-        return lobbyPlayer;
+        return getController().getLobbyPlayer();
+    }
+    
+    public final boolean isMindSlaved() {
+        return getController().getLobbyPlayer() != lobbyPlayerCreator;
     }
 
     private void setOutcome(PlayerOutcome outcome) {
