@@ -40,10 +40,12 @@ import forge.CardCharacteristicName;
 import forge.CardLists;
 import forge.CardPredicates;
 import forge.CounterType;
+import forge.FThreads;
 import forge.Singletons;
 import forge.card.spellability.AbilityManaPart;
 import forge.card.spellability.SpellAbility;
 import forge.card.trigger.TriggerType;
+import forge.control.input.InputSelectCardsFromList;
 import forge.game.GameState;
 import forge.game.PlanarDice;
 import forge.game.player.HumanPlay;
@@ -295,14 +297,20 @@ public final class GuiDisplayUtil {
      * @since 1.0.15
      */
     public static void devModeTapPerm() {
-        final List<Card> play = getGame().getCardsIn(ZoneType.Battlefield);
-        final Object o = GuiChoose.oneOrNone("Choose a permanent", CardLists.filter(play, Predicates.not(CardPredicates.Presets.TAPPED)));
-        if (null == o) {
-            return;
-        } else {
-            final Card c = (Card) o;
-            c.tap();
-        }
+        final GameState game = getGame();
+        game.getInputQueue().invokeGameAction(new Runnable() {
+            @Override
+            public void run() {
+                final List<Card> untapped = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), Predicates.not(CardPredicates.Presets.TAPPED));
+                InputSelectCardsFromList inp = new InputSelectCardsFromList(0, Integer.MAX_VALUE, untapped);
+                inp.setCancelAllowed(true);
+                inp.setMessage("Choose permanents to tap");
+                game.getInputQueue().setInputAndWait(inp);
+                if( !inp.hasCancelled() )
+                    for(Card c : inp.getSelected())
+                        c.tap();
+            }
+        });
     }
 
     /**
@@ -313,14 +321,20 @@ public final class GuiDisplayUtil {
      * @since 1.0.15
      */
     public static void devModeUntapPerm() {
-        final List<Card> play = getGame().getCardsIn(ZoneType.Battlefield);
-        final Object o = GuiChoose.oneOrNone("Choose a permanent", CardLists.filter(play, CardPredicates.Presets.TAPPED));
-        if (null == o) {
-            return;
-        } else {
-            final Card c = (Card) o;
-            c.untap();
-        }
+        final GameState game = getGame();
+        game.getInputQueue().invokeGameAction(new Runnable() {
+            @Override
+            public void run() {
+                final List<Card> tapped = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.TAPPED);
+                InputSelectCardsFromList inp = new InputSelectCardsFromList(0, Integer.MAX_VALUE, tapped);
+                inp.setCancelAllowed(true);
+                inp.setMessage("Choose permanents to untap");
+                game.getInputQueue().setInputAndWait(inp);
+                if( !inp.hasCancelled() )
+                    for(Card c : inp.getSelected())
+                        c.untap();
+            }
+        });
     }
 
 
