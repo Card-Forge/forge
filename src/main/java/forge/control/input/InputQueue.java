@@ -89,7 +89,7 @@ public class InputQueue extends MyObservable implements java.io.Serializable {
         Input topMostInput = inputStack.isEmpty() ? null : inputStack.pop();
 
         if( topMostInput != inp )
-            throw new RuntimeException("Inputs adding/removal into stack is imbalanced! Check your code again!");
+            throw new RuntimeException("Cannot remove input " + inp.getClass().getSimpleName() + " because it's not on top of stack. Stack = " + inputStack );
 
         this.updateObservers();
     }
@@ -180,7 +180,7 @@ public class InputQueue extends MyObservable implements java.io.Serializable {
     
     public void unlock() { 
         if ( inputStack.isEmpty() || inputStack.peek() != inputLock )
-            throw new RuntimeException("Trying to unlock input which is not locked! Do check when your threads terminate!");
+            throw new RuntimeException("Trying to unlock input which is not locked (threading issue)! Input stack = " + inputStack);
         removeInput(inputLock);
     }
 
