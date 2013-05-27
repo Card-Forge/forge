@@ -273,7 +273,7 @@ public class GameNew {
                 player.shuffle();
             }
             
-            if(player.getLobbyPlayer().getType() == PlayerType.COMPUTER) {
+            if(isFirstGame && player.getLobbyPlayer().getType() == PlayerType.COMPUTER) {
                 rAICards.addAll(getCardsAiCantPlayWell(myDeck));
             }
 
