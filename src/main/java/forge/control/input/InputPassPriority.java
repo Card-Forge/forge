@@ -73,7 +73,7 @@ public class InputPassPriority extends InputPassPriorityBase {
                 }
             };
             
-            player.getGame().getInputQueue().lockAndInvokeGameAction(execAbility);
+            player.getGame().getInputQueue().invokeGameAction(execAbility);
         }
         else {
             flashIncorrectAction();
