@@ -45,6 +45,7 @@ import forge.game.ai.AiProfileUtil;
 import forge.game.event.CardsAntedEvent;
 import forge.game.event.DuelFinishedEvent;
 import forge.game.event.Event;
+import forge.game.event.PlayerControlEvent;
 import forge.game.player.LobbyPlayer;
 import forge.game.player.Player;
 import forge.gui.GuiDialog;
@@ -66,6 +67,7 @@ import forge.gui.match.controllers.CLog;
 import forge.gui.match.controllers.CMessage;
 import forge.gui.match.controllers.CStack;
 import forge.gui.match.nonsingleton.VField;
+import forge.gui.match.nonsingleton.VHand;
 import forge.gui.match.views.VAntes;
 import forge.gui.toolbox.CardFaceSymbols;
 import forge.gui.toolbox.FSkin;
@@ -419,6 +421,14 @@ public enum FControl {
                 msg.append(kv.getKey().getName()).append(" ante: ").append(kv.getValue()).append(nl);
             }
             GuiDialog.message(msg.toString(), "Ante");
+        } else if ( ev instanceof PlayerControlEvent ) {
+            FThreads.invokeInEdtNowOrLater(new Runnable() { @Override public void run() {
+                CMatchUI.SINGLETON_INSTANCE.initHandViews(getLobby().getGuiPlayer());
+                VMatchUI.SINGLETON_INSTANCE.populate();
+                for(VHand h : VMatchUI.SINGLETON_INSTANCE.getHands()) {
+                    h.getLayoutControl().updateHand();
+                }
+            } });
         }
     }
 }

@@ -34,6 +34,8 @@ import forge.Singletons;
 import forge.game.phase.PhaseType;
 import forge.game.player.LobbyPlayer;
 import forge.game.player.Player;
+import forge.game.zone.PlayerZone;
+import forge.game.zone.ZoneType;
 import forge.gui.framework.EDocID;
 import forge.gui.match.controllers.CDetail;
 import forge.gui.match.controllers.CMessage;
@@ -58,6 +60,7 @@ public enum CMatchUI {
     SINGLETON_INSTANCE;
 
     private List<Player> sortedPlayers;
+    private VMatchUI view;
 
     private ImageIcon getPlayerAvatar(final Player p, final int defaultIndex) {
         LobbyPlayer lp = p.getLobbyPlayer();
@@ -83,6 +86,8 @@ public enum CMatchUI {
      * @param numHandPanels int
      */
     public void initMatch(final List<Player> players, LobbyPlayer localPlayer) {
+        view = VMatchUI.SINGLETON_INSTANCE;
+        
         // TODO fix for use with multiplayer
 
         final String[] indices = Singletons.getModel().getPreferences().getPref(FPref.UI_AVATARS).split(",");
@@ -111,8 +116,8 @@ public enum CMatchUI {
         }
         
         // Replace old instances
-        VMatchUI.SINGLETON_INSTANCE.setCommandViews(commands);
-        VMatchUI.SINGLETON_INSTANCE.setFieldViews(fields);
+        view.setCommandViews(commands);
+        view.setFieldViews(fields);
         
         VPlayers.SINGLETON_INSTANCE.init(players);
         
@@ -121,9 +126,15 @@ public enum CMatchUI {
 
     public void initHandViews(LobbyPlayer localPlayer) { 
         final List<VHand> hands = new ArrayList<VHand>();
+        final Iterable<VHand> oldHands = view.getHands();
         
         int i = 0;
         for (Player p : sortedPlayers) {
+            
+            PlayerZone hand = p.getZone(ZoneType.Hand);
+            for(VHand vh : oldHands)
+                hand.deleteObserver(vh.getLayoutControl());
+            
             if (p.getLobbyPlayer() == localPlayer) {
                 VHand newHand = new VHand(EDocID.Hands[i], p);
                 newHand.getLayoutControl().initialize();
@@ -137,7 +148,7 @@ public enum CMatchUI {
             newHand.getLayoutControl().initialize();
             hands.add(newHand);
         }
-        VMatchUI.SINGLETON_INSTANCE.setHandViews(hands);
+        view.setHandViews(hands);
     }
 
     private List<Player> shiftPlayersPlaceLocalFirst(final List<Player> players, LobbyPlayer localPlayer) {
@@ -163,7 +174,7 @@ public enum CMatchUI {
     // This method is in the top-level controller because it affects ALL fields
     // (not just one).
     public void resetAllPhaseButtons() {
-        for (final VField v : VMatchUI.SINGLETON_INSTANCE.getFieldViews()) {
+        for (final VField v : view.getFieldViews()) {
             v.resetPhaseButtons();
         }
     }
@@ -175,7 +186,7 @@ public enum CMatchUI {
 
     public VField getFieldViewFor(Player p) {
         int idx = getPlayerIndex(p);
-        return idx < 0 ? null : VMatchUI.SINGLETON_INSTANCE.getFieldViews().get(idx);
+        return idx < 0 ? null :view.getFieldViews().get(idx);
     }
 
     /**

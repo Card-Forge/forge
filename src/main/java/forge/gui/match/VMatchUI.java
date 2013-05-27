@@ -162,4 +162,12 @@ public enum VMatchUI implements IVTopLevelUI {
     public void setCommandViews(List<VCommand> lstCommands0) {
         this.lstCommands = lstCommands0;
     }
+
+    /**
+     * TODO: Write javadoc for this method.
+     * @return
+     */
+    public Iterable<VHand> getHands() {
+        return lstHands;
+    }
 }

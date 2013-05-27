@@ -76,7 +76,8 @@ public class CHand implements ICDoc, Observer {
         if (player != null)
             player.getZone(ZoneType.Hand).addObserver(this);
 
-        view.getHandArea().addMouseListener(madCardClick);
+        HandArea area = view.getHandArea();
+        area.addMouseListener(madCardClick);
     }
 
     /**
