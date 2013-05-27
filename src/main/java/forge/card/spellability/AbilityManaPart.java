@@ -110,7 +110,7 @@ public class AbilityManaPart implements java.io.Serializable {
         for (final String c : produced.split(" ")) {
             if(StringUtils.isNumeric(c)) 
                 for(int i = Integer.parseInt(c); i > 0; i--) {
-                    this.lastManaProduced.add(new Mana((byte)0, source, this));
+                    this.lastManaProduced.add(new Mana(MagicColor.COLORLESS, source, this));
                 }
             else
                 this.lastManaProduced.add(new Mana(MagicColor.fromName(c), source, this));

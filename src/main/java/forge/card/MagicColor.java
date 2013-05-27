@@ -8,6 +8,7 @@ import forge.Constant;
  */
 public class MagicColor {
 
+    public static final byte COLORLESS = 0;
     public static final byte WHITE = 1 << 1;
     public static final byte BLUE = 1 << 2;
     public static final byte BLACK = 1 << 3;
