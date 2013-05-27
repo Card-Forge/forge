@@ -57,6 +57,8 @@ import forge.properties.ForgePreferences.FPref;
 public enum CMatchUI {
     SINGLETON_INSTANCE;
 
+    private List<Player> sortedPlayers;
+
     private ImageIcon getPlayerAvatar(final Player p, final int defaultIndex) {
         LobbyPlayer lp = p.getLobbyPlayer();
         if (null != lp.getIconImageKey()) {
@@ -85,25 +87,13 @@ public enum CMatchUI {
 
         final String[] indices = Singletons.getModel().getPreferences().getPref(FPref.UI_AVATARS).split(",");
 
-        // Instantiate all required field slots (user at 0) <-- that's not guaranteed
+        // Instantiate all required field slots (user at 0)
+        sortedPlayers = shiftPlayersPlaceLocalFirst(players, localPlayer);
+
+
         final List<VField> fields = new ArrayList<VField>();
         final List<VCommand> commands = new ArrayList<VCommand>();
-        final List<VHand> hands = new ArrayList<VHand>();
         
-        // get an arranged list so that the first local player is at index 0
-        List<Player> sortedPlayers = Lists.newArrayList(players);
-        int ixFirstHuman = -1;
-        for(int i = 0; i < players.size(); i++) {
-            if( sortedPlayers.get(i).getLobbyPlayer() == localPlayer ) {
-                ixFirstHuman = i;
-                break;
-            }
-        }
-        if( ixFirstHuman > 0 ) {
-            sortedPlayers.add(0, sortedPlayers.remove(ixFirstHuman));
-        }
-
-
         int i = 0;
         for (Player p : sortedPlayers) {
             // A field must be initialized after it's instantiated, to update player info.
@@ -117,7 +107,23 @@ public enum CMatchUI {
             setAvatar(f, getPlayerAvatar(p, Integer.parseInt(indices[i > 2 ? 1 : 0])));
             f.getLayoutControl().initialize();
             c.getLayoutControl().initialize();
-            
+            i++;
+        }
+        
+        // Replace old instances
+        VMatchUI.SINGLETON_INSTANCE.setCommandViews(commands);
+        VMatchUI.SINGLETON_INSTANCE.setFieldViews(fields);
+        
+        VPlayers.SINGLETON_INSTANCE.init(players);
+        
+        initHandViews(localPlayer);
+    }
+
+    public void initHandViews(LobbyPlayer localPlayer) { 
+        final List<VHand> hands = new ArrayList<VHand>();
+        
+        int i = 0;
+        for (Player p : sortedPlayers) {
             if (p.getLobbyPlayer() == localPlayer) {
                 VHand newHand = new VHand(EDocID.Hands[i], p);
                 newHand.getLayoutControl().initialize();
@@ -131,14 +137,23 @@ public enum CMatchUI {
             newHand.getLayoutControl().initialize();
             hands.add(newHand);
         }
-
-        // Replace old instances
-        VMatchUI.SINGLETON_INSTANCE.setCommandViews(commands);
-        VMatchUI.SINGLETON_INSTANCE.setFieldViews(fields);
         VMatchUI.SINGLETON_INSTANCE.setHandViews(hands);
-        VMatchUI.SINGLETON_INSTANCE.setPlayers(sortedPlayers);
-        
-        VPlayers.SINGLETON_INSTANCE.init(players);
+    }
+
+    private List<Player> shiftPlayersPlaceLocalFirst(final List<Player> players, LobbyPlayer localPlayer) {
+        // get an arranged list so that the first local player is at index 0
+        List<Player> sortedPlayers = Lists.newArrayList(players);
+        int ixFirstHuman = -1;
+        for(int i = 0; i < players.size(); i++) {
+            if( sortedPlayers.get(i).getLobbyPlayer() == localPlayer ) {
+                ixFirstHuman = i;
+                break;
+            }
+        }
+        if( ixFirstHuman > 0 ) {
+            sortedPlayers.add(0, sortedPlayers.remove(ixFirstHuman));
+        }
+        return sortedPlayers;
     }
 
     /**
@@ -159,7 +174,7 @@ public enum CMatchUI {
     }
 
     public VField getFieldViewFor(Player p) {
-        int idx = VMatchUI.SINGLETON_INSTANCE.getPlayerIndex(p);
+        int idx = getPlayerIndex(p);
         return idx < 0 ? null : VMatchUI.SINGLETON_INSTANCE.getFieldViews().get(idx);
     }
 
@@ -240,4 +255,8 @@ public enum CMatchUI {
         CDetail.SINGLETON_INSTANCE.showCard(c);
         CPicture.SINGLETON_INSTANCE.showCard(c);
     }
+    
+    private int getPlayerIndex(Player player) {
+        return sortedPlayers.indexOf(player);
+    }    
 }

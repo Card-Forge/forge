@@ -34,7 +34,6 @@ import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 import javax.swing.border.MatteBorder;
 
-import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 
 import net.miginfocom.swing.MigLayout;
@@ -126,12 +125,12 @@ public class VField implements IVDoc<CField> {
         if (playerOnwer != null) { tab.setText(playerOnwer.getName() + " Field"); }
         else { tab.setText("NO PLAYER FOR " + docID.toString()); }
 
-        manaLabels.add(ImmutablePair.of(getBuiltFLabel(FSkin.ManaImages.IMG_BLACK, "99", "Black mana"), MagicColor.BLACK));
-        manaLabels.add(ImmutablePair.of(getBuiltFLabel(FSkin.ManaImages.IMG_BLUE, "99", "Blue mana"), MagicColor.BLUE));
-        manaLabels.add(ImmutablePair.of(getBuiltFLabel(FSkin.ManaImages.IMG_GREEN, "99", "Green mana"), MagicColor.GREEN));
-        manaLabels.add(ImmutablePair.of(getBuiltFLabel(FSkin.ManaImages.IMG_RED, "99", "Red mana"), MagicColor.RED));
-        manaLabels.add(ImmutablePair.of(getBuiltFLabel(FSkin.ManaImages.IMG_WHITE, "99", "White mana"), MagicColor.WHITE));
-        manaLabels.add(ImmutablePair.of(getBuiltFLabel(FSkin.ManaImages.IMG_COLORLESS, "99", "Colorless mana"), (byte)0));
+        manaLabels.add(Pair.of(getBuiltFLabel(FSkin.ManaImages.IMG_BLACK, "99", "Black mana"), MagicColor.BLACK));
+        manaLabels.add(Pair.of(getBuiltFLabel(FSkin.ManaImages.IMG_BLUE, "99", "Blue mana"), MagicColor.BLUE));
+        manaLabels.add(Pair.of(getBuiltFLabel(FSkin.ManaImages.IMG_GREEN, "99", "Green mana"), MagicColor.GREEN));
+        manaLabels.add(Pair.of(getBuiltFLabel(FSkin.ManaImages.IMG_RED, "99", "Red mana"), MagicColor.RED));
+        manaLabels.add(Pair.of(getBuiltFLabel(FSkin.ManaImages.IMG_WHITE, "99", "White mana"), MagicColor.WHITE));
+        manaLabels.add(Pair.of(getBuiltFLabel(FSkin.ManaImages.IMG_COLORLESS, "99", "Colorless mana"), (byte)0));
 
         // TODO player is hard-coded into tabletop...should be dynamic
         // (haven't looked into it too deeply). Doublestrike 12-04-12
