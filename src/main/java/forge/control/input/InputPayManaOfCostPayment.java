@@ -40,7 +40,6 @@ public class InputPayManaOfCostPayment extends InputPayManaBase {
         // any mana tapabilities can't be used in payment as well as being tapped for convoke)
 
         handleConvokedCards(false);
-        stop();
     }
     
     @Override
@@ -67,7 +66,10 @@ public class InputPayManaOfCostPayment extends InputPayManaBase {
             msg.append("\n(Click on your life total to pay life for phyrexian mana.)");
         }
 
-        showMessage(msg.toString());
-        checkIfAlredyPaid();
+        if( isAlredyPaid() ) {
+            done();
+            stop();
+        } else
+            showMessage(msg.toString());
     }
 }

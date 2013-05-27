@@ -85,6 +85,7 @@ public class InputPayManaExecuteCommands extends InputPayManaBase {
 
             if (this.manaCost.isPaid()) {
                 this.done();
+                this.stop();
             } else {
                 this.showMessage();
             }
@@ -98,7 +99,6 @@ public class InputPayManaExecuteCommands extends InputPayManaBase {
         }
         player.getManaPool().clearManaPaid(this.saPaidFor, false);
         bPaid = true;
-        this.stop();
     }
 
     /** {@inheritDoc} */
@@ -126,7 +126,10 @@ public class InputPayManaExecuteCommands extends InputPayManaBase {
             msg.append("\n(Click on your life total to pay life for phyrexian mana.)");
         }
 
-        showMessage(msg.toString());
-        checkIfAlredyPaid();
+        if( isAlredyPaid() ) {
+            done();
+            stop();
+        } else
+            showMessage(msg.toString());
     }
 }

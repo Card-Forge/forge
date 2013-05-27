@@ -89,8 +89,6 @@ public class InputPayManaSimple extends InputPayManaBase {
 
             handleConvokedCards(false);
         }
-
-        stop();
     }
 
     /** {@inheritDoc} */
@@ -127,6 +125,7 @@ public class InputPayManaSimple extends InputPayManaBase {
         if (this.manaCost.isPaid() && !new ManaCostBeingPaid(this.originalManaCost).isPaid()) {
             this.originalCard.setSunburstValue(this.manaCost.getSunburst());
             this.done();
+            this.stop();
         }
 
     }

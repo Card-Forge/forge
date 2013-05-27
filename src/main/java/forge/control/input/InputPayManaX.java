@@ -102,6 +102,7 @@ public class InputPayManaX extends InputPayManaBase {
     @Override
     protected final void onOk() {
         done();
+        this.stop();
     }
 
     @Override
@@ -116,6 +117,5 @@ public class InputPayManaX extends InputPayManaBase {
         card.setXManaCostPaid(this.xPaid);
         card.setColorsPaid(this.colorsPaid);
         card.setSunburstValue(ColorSet.fromMask(this.colorsPaid).countColors());
-        this.stop();
     }
 }
