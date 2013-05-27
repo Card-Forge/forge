@@ -132,6 +132,7 @@ public enum ApiType {
     Clone (CloneEffect.class, CloneAi.class),
     CopyPermanent (CopyPermanentEffect.class, CopyPermanentAi.class),
     CopySpellAbility (CopySpellAbilityEffect.class, CanPlayAsDrawbackAi.class),
+    ControlPlayer(ControlPlayerEffect.class, CannotPlayAi.class),
     Counter (CounterEffect.class, CounterAi.class),
     DamageAll (DamageAllEffect.class, DamageAllAi.class),
     DealDamage (DamageDealEffect.class, DamageDealAi.class),

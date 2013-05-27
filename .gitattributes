@@ -13934,6 +13934,7 @@ src/main/java/forge/card/ability/effects/CleanUpEffect.java -text
 src/main/java/forge/card/ability/effects/CloneEffect.java -text
 src/main/java/forge/card/ability/effects/ControlExchangeEffect.java -text
 src/main/java/forge/card/ability/effects/ControlGainEffect.java -text
+src/main/java/forge/card/ability/effects/ControlPlayerEffect.java -text
 src/main/java/forge/card/ability/effects/CopyPermanentEffect.java -text
 src/main/java/forge/card/ability/effects/CopySpellAbilityEffect.java -text
 src/main/java/forge/card/ability/effects/CounterEffect.java -text

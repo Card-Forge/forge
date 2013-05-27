@@ -33,4 +33,13 @@ public class LobbyPlayerRemote extends LobbyPlayer {
     public void hear(LobbyPlayer player, String message) {
         connection.send(new ChatPacketClt(player.getName(), message));
     }
+
+    /* (non-Javadoc)
+     * @see forge.game.player.LobbyPlayer#createControllerFor(forge.game.player.Player)
+     */
+    @Override
+    public PlayerController createControllerFor(Player p) {
+        // Cannot create remote players yet 
+        throw new NotImplementedException();
+    }
 }

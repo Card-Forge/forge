@@ -41,6 +41,7 @@ import forge.game.phase.PhaseType;
 import forge.game.player.LobbyPlayer;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
+import forge.gui.GuiDialog;
 import forge.gui.SOverlayUtils;
 import forge.gui.framework.ICDoc;
 import forge.gui.framework.SLayoutIO;
@@ -81,7 +82,9 @@ public enum CDock implements ICDoc {
         }
         
         final Player p = findAffectedPlayer();
-        if( p == null || p.isMindSlaved() ) return;
+        if( p == null ) return;
+        if( p.isMindSlaved() ) 
+            GuiDialog.message("You cannot make concede a player you temporary control");
 
         game.getInputQueue().invokeGameAction(new Runnable() {
             @Override

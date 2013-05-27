@@ -163,7 +163,8 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     private PlayerStatistics stats = new PlayerStatistics();
     protected PlayerController controller;
-    private final LobbyPlayer lobbyPlayerCreator;
+    protected PlayerController controllerCreator = null;
+
     private int teamNumber = -1;
     
     private Card activeScheme = null;
@@ -191,7 +192,7 @@ public class Player extends GameEntity implements Comparable<Player> {
      * @param myPoisonCounters
      *            a int.
      */
-    public Player(LobbyPlayer lobby, GameState game0) {
+    public Player(String name, GameState game0) {
         game = game0;
         for (final ZoneType z : Player.ALL_ZONES) {
             final PlayerZone toPut = z == ZoneType.Battlefield
@@ -199,12 +200,11 @@ public class Player extends GameEntity implements Comparable<Player> {
                     : new PlayerZone(z, this);
             this.zones.put(z, toPut);
         }
-        this.setName(chooseName(lobby));
-        this.lobbyPlayerCreator = lobby;
+        this.setName(chooseName(name));
     }
 
-    private String chooseName(LobbyPlayer lobby) {
-        String nameCandidate = lobby.getName();
+    private String chooseName(String originalName) {
+        String nameCandidate = originalName;
         for( int i = 2; i <= 8; i++) { // several tries, not matter how many
             boolean haveDuplicates = false;
             for( Player p : game.getPlayers()) {
@@ -215,7 +215,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             }
             if(!haveDuplicates)
                 return nameCandidate;
-            nameCandidate = Lang.getOrdinal(i) + " " + lobby.getName();
+            nameCandidate = Lang.getOrdinal(i) + " " + originalName;
         }
         return nameCandidate;
     }
@@ -236,15 +236,10 @@ public class Player extends GameEntity implements Comparable<Player> {
         return teamNumber;
     }
 
-    
-
     @Deprecated
-    public boolean isHuman() { return getType() == PlayerType.HUMAN; }
+    public boolean isHuman() { return getLobbyPlayer().getType() == PlayerType.HUMAN; }
     @Deprecated
-    public boolean isComputer() { return getType() == PlayerType.COMPUTER; }
-    private PlayerType getType() {
-        return getLobbyPlayer().getType();
-    }
+    public boolean isComputer() { return getLobbyPlayer().getType() == PlayerType.COMPUTER; }
 
     public boolean isArchenemy() {
 
@@ -2691,25 +2686,9 @@ public class Player extends GameEntity implements Comparable<Player> {
                 return p.getOutcome() == null || p.getOutcome().hasWon();
             }
         };
-
-        public static Predicate<Player> isType(final PlayerType type) {
-            return new Predicate<Player>() {
-                @Override
-                public boolean apply(Player input) {
-                    return input.getType() == type;
-                }
-            };
-        }
     }
 
     public static class Accessors {
-        public static Function<Player, LobbyPlayer> FN_GET_LOBBY_PLAYER = new Function<Player, LobbyPlayer>() {
-            @Override
-            public LobbyPlayer apply(Player input) {
-                return input.getLobbyPlayer();
-            }
-        };
-
         public static Function<Player, Integer> FN_GET_LIFE = new Function<Player, Integer>() {
             @Override
             public Integer apply(Player input) {
@@ -2743,8 +2722,17 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
     
     public final boolean isMindSlaved() {
-        return getController().getLobbyPlayer() != lobbyPlayerCreator;
+        return controller.getLobbyPlayer() != controllerCreator.getLobbyPlayer();
     }
+    
+    public final void releaseControl() {
+        controller = controllerCreator;
+    }
+
+    public final void obeyNewMaster(PlayerController pc) {
+        controller = pc;
+    }
+
 
     private void setOutcome(PlayerOutcome outcome) {
         stats.setOutcome(outcome);
@@ -2868,8 +2856,10 @@ public class Player extends GameEntity implements Comparable<Player> {
     public final PlayerController getController() {
         return controller;
     }
-    public final void setController(PlayerController ctrlr) {
-        controller = ctrlr; 
+    public final void setFirstController(PlayerController ctrlr) {
+        if( null != controllerCreator ) throw new IllegalStateException("Controller creator already assigned");
+        controllerCreator = ctrlr; 
+        controller = ctrlr;
     }
     /**
      * <p>
