@@ -117,15 +117,10 @@ public abstract class InputPayManaBase extends InputSyncronizedBase implements I
         for (SpellAbility ma : card.getManaAbility()) {
             ma.setActivatingPlayer(player);
             
-            AbilityManaPart m = null;
-            SpellAbility tail = ma;
-            while (m == null && tail != null) {
-                m = tail.getManaPart();
-                tail = tail.getSubAbility();
-            }
-            
+
+            AbilityManaPart m = ma.getManaPartRecursive();
             if (m == null || !ma.canPlay())                                     continue;
-            if (!canUseColorless && !abilityProducesManaColor(ma, colorCanUse)) continue;
+            if (!canUseColorless && !abilityProducesManaColor(ma, m, colorCanUse)) continue;
             if (ma.isAbility() && ma.getRestrictions().isInstantSpeed())        continue;
             if (!m.meetsManaRestrictions(saPaidFor))                            continue;
 
@@ -165,7 +160,7 @@ public abstract class InputPayManaBase extends InputSyncronizedBase implements I
             // express Mana Choice
             final ArrayList<SpellAbility> colorMatches = new ArrayList<SpellAbility>();
             for (SpellAbility sa : abilities) {
-                if (colorNeeded != 0 && abilityProducesManaColor(sa, colorNeeded))
+                if (colorNeeded != 0 && abilityProducesManaColor(sa, sa.getManaPartRecursive(), colorNeeded))
                     colorMatches.add(sa);
             }
             
@@ -180,14 +175,8 @@ public abstract class InputPayManaBase extends InputSyncronizedBase implements I
         }
     
         final SpellAbility chosen = abilities.size() > 1 && choice ? GuiChoose.one("Choose mana ability", abilities) : abilities.get(0);
-        SpellAbility subchosen = chosen;
-        while(subchosen.getManaPart() == null)
-        {
-            subchosen = subchosen.getSubAbility();
-        }
-    
         ColorSet colors = ColorSet.fromMask(0 == colorNeeded ? colorCanUse : colorNeeded);
-        subchosen.getManaPart().setExpressChoice(colors);
+        chosen.getManaPartRecursive().setExpressChoice(colors);
         
         // System.out.println("Chosen sa=" + chosen + " of " + chosen.getSourceCard() + " to pay mana");
         Runnable proc = new Runnable() {
@@ -213,11 +202,10 @@ public abstract class InputPayManaBase extends InputSyncronizedBase implements I
      *            a {@link java.lang.String} object.
      * @return a boolean.
      */
-    private static boolean abilityProducesManaColor(final SpellAbility am, final byte neededColor) {
+    private static boolean abilityProducesManaColor(final SpellAbility am, AbilityManaPart m, final byte neededColor) {
         if (neededColor == 0) {
             return true;
         }
-        AbilityManaPart m = am.getManaPart();
     
         if (m.isAnyMana()) {
             return true;

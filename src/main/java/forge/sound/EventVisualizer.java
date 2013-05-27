@@ -170,14 +170,8 @@ public class EventVisualizer {
         for (SpellAbility sa : manaProduced) {
             
             // Find mana ability if it is somewhere in tail
-            SpellAbility tail = sa;
-            AbilityManaPart m = null;
-            while (m == null && tail != null) {
-                m = tail.getManaPart();
-                tail = tail.getSubAbility();
-            }
-            
-            String manaColors = m.getOrigProduced();
+
+            String manaColors = sa.getManaPartRecursive().getOrigProduced();
 
             if (manaColors.contains("B")) {
                 return SoundEffectType.BlackLand;

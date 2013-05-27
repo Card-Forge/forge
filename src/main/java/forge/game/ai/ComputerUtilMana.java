@@ -214,7 +214,9 @@ public class ComputerUtilMana {
 
     private static void setExpressColorChoice(final SpellAbility sa, final Player ai, ManaCostBeingPaid cost,
             ManaCostShard toPay, SpellAbility saPayment) {
-        if ( saPayment.getManaPart().isComboMana() )
+        
+        AbilityManaPart m = saPayment.getManaPart();
+        if ( m.isComboMana() )
             getComboManaChoice(ai, saPayment, sa, cost);
         else if (saPayment.getApi() == ApiType.ManaReflected) {
             System.out.println("Evaluate reflected mana of: " + saPayment.getSourceCard());
@@ -222,11 +224,11 @@ public class ComputerUtilMana {
 
             for(byte c : MagicColor.WUBRG) {
                 if (toPay.canBePaidWithManaOfColor(c) && reflected.contains(MagicColor.toLongString(c))) {
-                    saPayment.getManaPart().setExpressChoice(MagicColor.toShortString(c));
+                    m.setExpressChoice(MagicColor.toShortString(c));
                     return;
                 }
             }
-        } else if ( saPayment.getManaPart().isAnyMana()) {
+        } else if ( m.isAnyMana()) {
             byte colorChoice = 0;
             if (toPay.isOr2Colorless())
                 colorChoice = toPay.getColorMask();
@@ -236,7 +238,7 @@ public class ComputerUtilMana {
                     break;
                 }
             }
-            saPayment.getManaPart().setExpressChoice(MagicColor.toShortString(colorChoice));
+            m.setExpressChoice(MagicColor.toShortString(colorChoice));
         }
     }
 
@@ -625,25 +627,26 @@ public class ComputerUtilMana {
                 }
                 
                 manaMap.add(ManaAtom.COLORLESS, m); // add to colorless source list
+                AbilityManaPart mp = m.getManaPart();
 
                 Set<String> reflectedColors = CardUtil.getReflectableManaColors(m);
                 // find possible colors
-                if (m.getManaPart().canProduce("W") || reflectedColors.contains(Constant.Color.WHITE)) {
+                if (mp.canProduce("W") || reflectedColors.contains(Constant.Color.WHITE)) {
                     manaMap.add(ManaAtom.WHITE, m);
                 }
-                if (m.getManaPart().canProduce("U") || reflectedColors.contains(Constant.Color.BLUE)) {
+                if (mp.canProduce("U") || reflectedColors.contains(Constant.Color.BLUE)) {
                     manaMap.add(ManaAtom.BLUE, m);
                 }
-                if (m.getManaPart().canProduce("B") || reflectedColors.contains(Constant.Color.BLACK)) {
+                if (mp.canProduce("B") || reflectedColors.contains(Constant.Color.BLACK)) {
                     manaMap.add(ManaAtom.BLACK, m);
                 }
-                if (m.getManaPart().canProduce("R") || reflectedColors.contains(Constant.Color.RED)) {
+                if (mp.canProduce("R") || reflectedColors.contains(Constant.Color.RED)) {
                     manaMap.add(ManaAtom.RED, m);
                 }
-                if (m.getManaPart().canProduce("G") || reflectedColors.contains(Constant.Color.GREEN)) {
+                if (mp.canProduce("G") || reflectedColors.contains(Constant.Color.GREEN)) {
                     manaMap.add(ManaAtom.GREEN, m);
                 }
-                if (m.getManaPart().isSnow()) {
+                if (mp.isSnow()) {
                     manaMap.add(ManaAtom.IS_SNOW, m);
                 }
             } // end of mana abilities loop

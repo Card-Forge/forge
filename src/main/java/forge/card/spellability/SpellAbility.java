@@ -113,33 +113,25 @@ public abstract class SpellAbility implements ISpellAbility {
         return manaPart;
     }
 
-    public final boolean isManaAbility() {
+    public final AbilityManaPart getManaPartRecursive() {
         SpellAbility tail = this;
-        boolean manaProducing = false;
-        // Check whether spell or ability first
-        if (this.isSpell()) {
-            return false;
-        }
-        if(getRestrictions() != null)
-        {
-            if(getRestrictions().getPlaneswalker()) 
-            {
-                return false; //Loyalty ability, not a mana ability.
-            }
-        }
-        while(tail != null) {
-            if(tail.getTarget() != null) {
-                return false; //Targeted ability,not a mana ability.
-            }
-            if(tail.getManaPart() != null)
-            {
-                manaProducing = true; //Can add mana to a players mana pool, possible mana ability.
-            }            
-            
+        while (tail != null) {
+            if(tail.manaPart != null) 
+                return tail.manaPart;
             tail = tail.getSubAbility();
         }
-        
-        return manaProducing;
+        return null;
+    }
+    
+    public final boolean isManaAbility() {
+        // Check whether spell or ability first
+        if (this.isSpell()) 
+            return false;
+
+        if(getRestrictions() != null && getRestrictions().getPlaneswalker()) 
+            return false; //Loyalty ability, not a mana ability.
+
+        return getManaPartRecursive() != null;
     }
 
     protected final void setManaPart(AbilityManaPart manaPart) {

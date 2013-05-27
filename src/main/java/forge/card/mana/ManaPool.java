@@ -249,28 +249,23 @@ public class ManaPool {
      * subtractManaFromAbility.
      * </p>
      * 
-     * @param sa
+     * @param saPaidFor
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @param manaCost
      *            a {@link forge.card.mana.ManaCostBeingPaid} object.
-     * @param ma
+     * @param saPayment
      *            a {@link forge.card.spellability.AbilityMana} object.
      * @return a {@link forge.card.mana.ManaCostBeingPaid} object.
      */
-    public final void payManaFromAbility(final SpellAbility sa, ManaCostBeingPaid manaCost, final SpellAbility ma) {
+    public final void payManaFromAbility(final SpellAbility saPaidFor, ManaCostBeingPaid manaCost, final SpellAbility saPayment) {
         // Mana restriction must be checked before this method is called
 
-        final List<SpellAbility> paidAbs = sa.getPayingManaAbilities();
-        SpellAbility tail = ma;
-        AbilityManaPart abManaPart = null;
-        while(abManaPart == null && tail != null) {
-            abManaPart = tail.getManaPart();
-            tail = tail.getSubAbility();
-        }
+        final List<SpellAbility> paidAbs = saPaidFor.getPayingManaAbilities();
+        AbilityManaPart abManaPart = saPayment.getManaPartRecursive();
 
-        paidAbs.add(ma); // assumes some part on the mana produced by the ability will get used
+        paidAbs.add(saPayment); // assumes some part on the mana produced by the ability will get used
         for (final Mana mana : abManaPart.getLastManaProduced()) {
-            tryPayCostWithMana(sa, manaCost, mana);
+            tryPayCostWithMana(saPaidFor, manaCost, mana);
         }
     }
 
