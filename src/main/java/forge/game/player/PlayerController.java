@@ -78,6 +78,8 @@ public abstract class PlayerController {
     
         if ( handler.getPriorityPlayer() == player )
             game.getPhaseHandler().passPriority();
+/*        else // it is not our priority! - have to check if this works fine
+            game.getInputQueue().updateObservers(); */
     }
 
     // Triggers preliminary choice: ask, decline or play

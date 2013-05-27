@@ -185,7 +185,7 @@ public class HumanPlay {
     
         if (sa != null) {
             sa.setActivatingPlayer(player);
-            playSaWithoutPayingManaCost(player, sa);
+            playSaWithoutPayingManaCost(player.getGame(), sa);
         }
     }
 
@@ -197,7 +197,7 @@ public class HumanPlay {
      * @param sa
      *            a {@link forge.card.spellability.SpellAbility} object.
      */
-    public static final void playSaWithoutPayingManaCost(final Player player, final SpellAbility sa) {
+    public static final void playSaWithoutPayingManaCost(final GameState game, final SpellAbility sa) {
         FThreads.assertExecutedByEdt(false);
         final Card source = sa.getSourceCard();
         
@@ -215,12 +215,12 @@ public class HumanPlay {
             if (sa.isSpell()) {
                 final Card c = sa.getSourceCard();
                 if (!c.isCopiedSpell()) {
-                    sa.setSourceCard(player.getGame().getAction().moveToStack(c));
+                    sa.setSourceCard(game.getAction().moveToStack(c));
                 }
             }
             boolean x = sa.getSourceCard().getManaCost().getShardCount(ManaCostShard.X) > 0;
     
-            player.getGame().getStack().add(sa, x);
+            game.getStack().add(sa, x);
         }
     }
 

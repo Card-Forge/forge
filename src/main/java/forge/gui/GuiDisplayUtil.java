@@ -418,7 +418,8 @@ public final class GuiDisplayUtil {
                     game.getAction().moveToHand(forgeCard); // this is really needed (for rollbacks at least) 
                     // Human player is choosing targets for an ability controlled by chosen player. 
                     sa.setActivatingPlayer(p);
-                    HumanPlay.playSaWithoutPayingManaCost(game.getPhaseHandler().getPriorityPlayer(), sa);
+                    HumanPlay.playSaWithoutPayingManaCost(game, sa);
+                    game.getInputQueue().updateObservers();
                 }
             });
         }

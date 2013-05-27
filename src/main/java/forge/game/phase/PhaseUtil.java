@@ -25,7 +25,6 @@ import com.google.common.base.Predicate;
 
 import forge.Card;
 import forge.CardLists;
-import forge.CardPredicates.Presets;
 import forge.card.cost.Cost;
 import forge.card.mana.ManaCost;
 import forge.card.spellability.Ability;
