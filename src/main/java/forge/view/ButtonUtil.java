@@ -19,6 +19,7 @@ package forge.view;
 
 import javax.swing.JButton;
 
+import forge.FThreads;
 import forge.gui.SOverlayUtils;
 import forge.gui.match.VMatchUI;
 
@@ -62,7 +63,7 @@ public class ButtonUtil {
         
         // ensure we don't steal focus from an overlay
         if (!SOverlayUtils.overlayHasFocus()) {
-            button.requestFocusInWindow();
+            FThreads.invokeInEdtLater(new Runnable() { @Override public void run() { button.requestFocusInWindow(); } });
         }
     }
     
