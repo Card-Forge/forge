@@ -18,6 +18,7 @@ import forge.game.event.FlipCoinEvent;
 import forge.game.player.LobbyPlayer;
 import forge.game.player.Player;
 import forge.properties.ForgePreferences.FPref;
+import forge.util.Aggregates;
 import forge.util.MyRandom;
 
 /**
@@ -104,34 +105,29 @@ public class MatchController {
 
         currentGame = new GameState(players, gameType, this);
         
-        try {
-            FControl.SINGLETON_INSTANCE.attachToGame(currentGame);
+        FControl.SINGLETON_INSTANCE.attachToGame(currentGame);
 
-            final boolean canRandomFoil = Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_RANDOM_FOIL) && gameType == GameType.Constructed;
-            GameNew.newGame(currentGame, canRandomFoil, this.useAnte);
+        final boolean canRandomFoil = Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_RANDOM_FOIL) && gameType == GameType.Constructed;
+        GameNew.newGame(currentGame, canRandomFoil, this.useAnte);
 
-            if (useAnte) {  // Deciding which cards go to ante
-                List<Pair<Player, Card>> list = GameNew.chooseCardsForAnte(currentGame);
-                GameNew.moveCardsToAnte(list);
-                currentGame.getEvents().post(new CardsAntedEvent(list));
-            }
-            
-            // Draw <handsize> cards
-            for (final Player p1 : currentGame.getPlayers()) {
-                p1.drawCards(p1.getMaxHandSize());
-            }
-
-            currentGame.setAge(GameAge.Mulligan);
-        } catch (Exception e) {
-            BugReporter.reportException(e);
+        if (useAnte) {  // Deciding which cards go to ante
+            List<Pair<Player, Card>> list = GameNew.chooseCardsForAnte(currentGame);
+            GameNew.moveCardsToAnte(list);
+            currentGame.getEvents().post(new CardsAntedEvent(list));
         }
-
-        final Player firstPlayer = determineFirstTurnPlayer(getLastGameOutcome(), currentGame);
 
         // This code was run from EDT.
         currentGame.getInputQueue().invokeGameAction(new Runnable() {
             @Override
             public void run() {
+                final Player firstPlayer = determineFirstTurnPlayer(getLastGameOutcome(), currentGame);
+                
+                // Draw <handsize> cards
+                for (final Player p1 : currentGame.getPlayers()) {
+                    p1.drawCards(p1.getMaxHandSize());
+                }
+
+                currentGame.setAge(GameAge.Mulligan);
                 currentGame.getAction().mulligan(firstPlayer);
             }
         });
@@ -236,20 +232,15 @@ public class MatchController {
         return 10;
     }
     
-    /**
-     * TODO: Write javadoc for this method.
-     * @param match
-     * @param game
-     */
+
     private Player determineFirstTurnPlayer(final GameOutcome lastGameOutcome, final GameState game) {
         // Only cut/coin toss if it's the first game of the match
         Player goesFirst = null;
-        final String message;
-        //Player humanPlayer = Singletons.getControl().getPlayer();
+
         boolean isFirstGame = lastGameOutcome == null;
         if (isFirstGame) {
-            goesFirst = seeWhoPlaysFirstDice(game);
-            message = goesFirst + " has won the coin toss.";    
+            game.getEvents().post(new FlipCoinEvent()); // Play the Flip Coin sound
+            goesFirst = Aggregates.random(game.getPlayers());
         } else {
             for(Player p : game.getPlayers()) {
                 if(!lastGameOutcome.isWinner(p.getLobbyPlayer())) { 
@@ -257,28 +248,10 @@ public class MatchController {
                     break;
                 }
             }
-            message = goesFirst + " lost the last game.";
         }
-        
-        boolean willPlay = goesFirst.getController().getWillPlayOnFirstTurn(message);
+
+        boolean willPlay = goesFirst.getController().getWillPlayOnFirstTurn(isFirstGame);
         goesFirst = willPlay ? goesFirst : goesFirst.getOpponent();
         return goesFirst;
     }
-    
-    // decides who goes first when starting another game, used by newGame()
-    /**
-     * <p>
-     * seeWhoPlaysFirstCoinToss.
-     * </p>
-     * @return 
-     */
-    private Player seeWhoPlaysFirstDice(final GameState game) {
-        
-        // Play the Flip Coin sound
-        game.getEvents().post(new FlipCoinEvent());
-
-        List<Player> allPlayers = game.getPlayers();
-        return allPlayers.get(MyRandom.getRandom().nextInt(allPlayers.size()));
-    }
-
 }

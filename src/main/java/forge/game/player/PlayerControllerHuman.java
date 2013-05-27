@@ -12,6 +12,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
 import forge.Card;
+import forge.FThreads;
 import forge.GameEntity;
 import forge.card.mana.Mana;
 import forge.card.replacement.ReplacementEffect;
@@ -24,8 +25,10 @@ import forge.control.input.InputBlock;
 import forge.control.input.InputCleanup;
 import forge.control.input.InputConfirmMulligan;
 import forge.control.input.InputPassPriority;
+import forge.control.input.InputPlayOrDraw;
 import forge.control.input.InputSelectCards;
 import forge.control.input.InputSelectCardsFromList;
+import forge.control.input.InputSynchronized;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
@@ -275,14 +278,10 @@ public class PlayerControllerHuman extends PlayerController {
     }
 
     @Override
-    public boolean getWillPlayOnFirstTurn(String message) {
-        final String[] possibleValues = { "Play", "Draw" };
-
-        final Object playDraw = JOptionPane.showOptionDialog(null, message + "\n\nWould you like to play or draw?",
-                "Play or Draw?", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null,
-                possibleValues, possibleValues[0]);
-
-        return !playDraw.equals(1);
+    public boolean getWillPlayOnFirstTurn(boolean isFirstGame) {
+        InputPlayOrDraw inp = new InputPlayOrDraw(player, isFirstGame);
+        game.getInputQueue().setInputAndWait(inp);
+        return inp.isPlayingFirst();
     }
 
     @Override

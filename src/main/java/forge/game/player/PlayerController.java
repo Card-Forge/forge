@@ -118,7 +118,7 @@ public abstract class PlayerController {
     public Card chooseSingleCardForEffect(List<Card> sourceList, SpellAbility sa, String title) { return chooseSingleCardForEffect(sourceList, sa, title, false); }
     public abstract Card chooseSingleCardForEffect(List<Card> sourceList, SpellAbility sa, String title, boolean isOptional);
     public abstract boolean confirmAction(SpellAbility sa, PlayerActionConfirmMode mode, String message);
-    public abstract boolean getWillPlayOnFirstTurn(String message);
+    public abstract boolean getWillPlayOnFirstTurn(boolean isFirstGame);
     public abstract boolean confirmStaticApplication(Card hostCard, GameEntity affected, String logic, String message);
 
     public abstract List<Card> orderBlockers(Card attacker, List<Card> blockers);
