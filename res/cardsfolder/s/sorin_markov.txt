@@ -1,0 +1,12 @@
+Name:Sorin Markov
+ManaCost:3 B B B
+Types:Planeswalker Sorin
+Loyalty:4
+A:AB$ DealDamage | Cost$ AddCounter<2/LOYALTY> | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ 2 | SubAbility$ DBGainLife | SpellDescription$ CARDNAME deals 2 damage to target creature or player and you gain 2 life.
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ 2
+A:AB$ SetLife | Cost$ SubCounter<3/LOYALTY> | ValidTgts$ Player | TgtPrompt$ Select target player | LifeAmount$ 10 | SpellDescription$ Target player's life total becomes 10.
+A:AB$ ControlPlayer | Cost$ SubCounter<7/LOYALTY> | ValidTgts$ Player | TgtPrompt$ Select target player | SpellDescription$ You control target player during that player's next turn.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sorin_markov.jpg
+Oracle:[+2] Sorin Markov deals 2 damage to target creature or player and you gain 2 life.\n[-3] Target opponent's life total becomes 10.\n[-7] You control target player during that player's next turn.\n
+SetInfo:ZEN Mythic
+SetInfo:M12 Mythic
