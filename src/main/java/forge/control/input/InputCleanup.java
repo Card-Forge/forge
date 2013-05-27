@@ -74,7 +74,7 @@ public class InputCleanup extends InputPassPriorityBase {
         if (!player.getZone(ZoneType.Hand).contains(card)) 
             return;
             
-        game.getInputQueue().lockAndInvokeGameAction(new Runnable() {
+        game.getInputQueue().invokeGameAction(new Runnable() {
             @Override
             public void run() {
                 card.getController().discard(card, null);

@@ -183,10 +183,10 @@ public abstract class InputPayManaBase extends InputSyncronizedBase implements I
             @Override
             public void run() {
                 HumanPlay.playSpellAbility(chosen.getActivatingPlayer(), chosen);
-                onManaAbilityPlayed(chosen); 
+                onManaAbilityPlayed(chosen);
             }
         };
-        game.getInputQueue().lockAndInvokeGameAction(proc);
+        game.getInputQueue().invokeGameAction(proc);
         // EDT that removes lockUI from input stack will call our showMessage() method
     }
 

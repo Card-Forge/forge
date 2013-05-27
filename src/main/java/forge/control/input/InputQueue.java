@@ -199,18 +199,6 @@ public class InputQueue extends MyObservable implements java.io.Serializable {
         input.awaitLatchRelease();
     }
 
-    public void lockAndInvokeGameAction(final Runnable proc) {
-        Runnable toRun = new Runnable() {
-            @Override
-            public void run() {
-                InputQueue.this.lock();
-                proc.run();
-                InputQueue.this.unlock();
-            }
-        };
-        invokeGameAction(toRun);
-    }
-
     public void invokeGameAction(final Runnable proc) {
         if(FThreads.isEDT()) {
             FThreads.invokeInNewThread(proc);
