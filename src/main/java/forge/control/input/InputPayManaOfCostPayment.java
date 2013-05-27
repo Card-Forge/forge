@@ -4,7 +4,6 @@ import forge.Card;
 import forge.card.mana.ManaCostBeingPaid;
 import forge.card.spellability.SpellAbility;
 import forge.game.player.Player;
-import forge.view.ButtonUtil;
 
 public class InputPayManaOfCostPayment extends InputPayManaBase {
 
@@ -48,11 +47,7 @@ public class InputPayManaOfCostPayment extends InputPayManaBase {
         stop();
     }
 
-    @Override
-    public void showMessage() {
-        if ( isFinished() ) return; // 
-        
-        ButtonUtil.enableOnlyCancel();
+    protected void updateMessage() { 
         final String displayMana = manaCost.toString().replace("X", "").trim();
 
         final StringBuilder msg = new StringBuilder("Pay Mana Cost: " + displayMana);
@@ -65,11 +60,7 @@ public class InputPayManaOfCostPayment extends InputPayManaBase {
         if (manaCost.containsPhyrexianMana()) {
             msg.append("\n(Click on your life total to pay life for phyrexian mana.)");
         }
-
-        if( isAlredyPaid() ) {
-            done();
-            stop();
-        } else
-            showMessage(msg.toString());
+        
+        showMessage(msg.toString());
     }
 }

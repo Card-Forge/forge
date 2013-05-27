@@ -77,6 +77,9 @@ public class InputPayManaSimple extends InputPayManaBase {
      */
     @Override
     protected void done() {
+        
+        this.originalCard.setSunburstValue(this.manaCost.getSunburst());
+        
         if (this.phyLifeToLose > 0) {
             player.payLife(this.phyLifeToLose, this.originalCard);
         }
@@ -109,6 +112,20 @@ public class InputPayManaSimple extends InputPayManaBase {
         
         ButtonUtil.enableOnlyCancel();
 
+
+        if (this.manaCost.isPaid() && !new ManaCostBeingPaid(this.originalManaCost).isPaid()) {
+            this.done();
+            this.stop();
+        } else
+            updateMessage();
+
+    }
+
+    /* (non-Javadoc)
+     * @see forge.control.input.InputPayManaBase#updateMessage()
+     */
+    @Override
+    protected void updateMessage() {
         final StringBuilder msg = new StringBuilder("Pay Mana Cost: " + this.manaCost.toString());
         if (this.phyLifeToLose > 0) {
             msg.append(" (");
@@ -122,11 +139,6 @@ public class InputPayManaSimple extends InputPayManaBase {
 
         // has its own variant of checkIfPaid
         showMessage(msg.toString());
-        if (this.manaCost.isPaid() && !new ManaCostBeingPaid(this.originalManaCost).isPaid()) {
-            this.originalCard.setSunburstValue(this.manaCost.getSunburst());
-            this.done();
-            this.stop();
-        }
-
+        
     }
 }

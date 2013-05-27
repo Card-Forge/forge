@@ -65,7 +65,11 @@ public class InputPayManaX extends InputPayManaBase {
         } else {
             ButtonUtil.enableAllFocusOk();
         }
+        updateMessage();
+    }
 
+    @Override
+    protected void updateMessage() { 
         StringBuilder msg = new StringBuilder("Pay X Mana Cost for ");
         msg.append(saPaidFor.getSourceCard().getName()).append("\n").append(this.xPaid);
         msg.append(" Paid so far.");

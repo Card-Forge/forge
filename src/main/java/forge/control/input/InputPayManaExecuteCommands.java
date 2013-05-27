@@ -22,7 +22,6 @@ import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostBeingPaid;
 import forge.card.spellability.SpellAbility;
 import forge.game.player.Player;
-import forge.view.ButtonUtil;
 
 //if cost is paid, Command.execute() is called
 
@@ -109,12 +108,11 @@ public class InputPayManaExecuteCommands extends InputPayManaBase {
         this.stop();
     }
 
-    /** {@inheritDoc} */
+    /* (non-Javadoc)
+     * @see forge.control.input.InputPayManaBase#updateMessage()
+     */
     @Override
-    public final void showMessage() {
-        if ( isFinished() ) return;
-        
-        ButtonUtil.enableOnlyCancel();
+    protected void updateMessage() {
         final StringBuilder msg = new StringBuilder(this.message + "Pay Mana Cost: " + this.manaCost);
         if (this.phyLifeToLose > 0) {
             msg.append(" (");
@@ -125,11 +123,6 @@ public class InputPayManaExecuteCommands extends InputPayManaBase {
         if (this.manaCost.containsPhyrexianMana()) {
             msg.append("\n(Click on your life total to pay life for phyrexian mana.)");
         }
-
-        if( isAlredyPaid() ) {
-            done();
-            stop();
-        } else
-            showMessage(msg.toString());
+        showMessage(msg.toString());
     }
 }

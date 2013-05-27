@@ -20,6 +20,7 @@ import forge.game.player.HumanPlay;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
+import forge.view.ButtonUtil;
 
 /** 
  * TODO: Write javadoc for this type.
@@ -188,7 +189,8 @@ public abstract class InputPayManaBase extends InputSyncronizedBase implements I
                 if( isAlredyPaid() ) {
                     done();
                     stopNonEdt();
-                }
+                } else 
+                    FThreads.invokeInEdtLater(new Runnable() { @Override public void run(){ updateMessage(); }}); 
             }
         };
         game.getInputQueue().invokeGameAction(proc);
@@ -248,8 +250,23 @@ public abstract class InputPayManaBase extends InputSyncronizedBase implements I
         return bPaid;
     }
     
+    
+    /** {@inheritDoc} */
+    @Override
+    public void showMessage() {
+        if ( isFinished() ) return;
+        ButtonUtil.enableOnlyCancel();
+
+        if( isAlredyPaid() ) {
+            done();
+            stop();
+        } else
+            updateMessage();
+    }
+    
     protected void onManaAbilityPaid() {} // some inputs overload it
     protected abstract void done();
+    protected abstract void updateMessage();
 
     @Override
     public String toString() {
