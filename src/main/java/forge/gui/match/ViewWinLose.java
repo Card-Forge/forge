@@ -106,7 +106,7 @@ public class ViewWinLose {
 
         // Assemble game log scroller.
         final FTextArea txtLog = new FTextArea();
-        txtLog.setText(match.getCurrentGame().getGameLog().getLogText());
+        txtLog.setText(match.getCurrentGame().getGameLog().getLogText(null));
         txtLog.setFont(FSkin.getFont(14));
         txtLog.setFocusable(true); // allow highlighting and copying of log
         

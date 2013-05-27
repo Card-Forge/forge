@@ -6,6 +6,7 @@ public enum GameEventType {
     TURN("Turn"),
     MULLIGAN("Mulligan"),
     ANTE("Ante"),
+    PLAYER_CONROL("Player contol"),
     COMBAT("Combat"),
     EFFECT_REPLACED("Replacement Effect"),
     LAND("Land"),

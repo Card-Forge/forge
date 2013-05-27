@@ -1,9 +1,5 @@
 package forge.game.event;
 
-/** 
- * 
- *
- */
 public class CounterAddedEvent extends Event {
     public final int Amount;
 
@@ -11,4 +7,3 @@ public class CounterAddedEvent extends Event {
         Amount = n;
     }
 }
-

@@ -13766,6 +13766,7 @@ src/main/java/forge/GameEntity.java -text
 src/main/java/forge/GameEventType.java -text
 src/main/java/forge/GameLog.java -text
 src/main/java/forge/GameLogEntry.java -text
+src/main/java/forge/GameLogFormatter.java -text
 src/main/java/forge/ImageCache.java svneol=native#text/plain
 src/main/java/forge/ImageLoader.java -text
 src/main/java/forge/Singletons.java svneol=native#text/plain
@@ -14256,6 +14257,7 @@ src/main/java/forge/game/event/LandPlayedEvent.java -text
 src/main/java/forge/game/event/LifeLossEvent.java -text
 src/main/java/forge/game/event/ManaBurnEvent.java -text
 src/main/java/forge/game/event/MulliganEvent.java -text
+src/main/java/forge/game/event/PlayerControlEvent.java -text
 src/main/java/forge/game/event/PoisonCounterEvent.java -text
 src/main/java/forge/game/event/SetTappedEvent.java -text
 src/main/java/forge/game/event/ShuffleEvent.java -text

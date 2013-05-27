@@ -62,6 +62,7 @@ import forge.game.event.DrawCardEvent;
 import forge.game.event.LandPlayedEvent;
 import forge.game.event.LifeLossEvent;
 import forge.game.event.MulliganEvent;
+import forge.game.event.PlayerControlEvent;
 import forge.game.event.PoisonCounterEvent;
 import forge.game.event.ShuffleEvent;
 import forge.game.phase.PhaseHandler;
@@ -2727,10 +2728,13 @@ public class Player extends GameEntity implements Comparable<Player> {
     
     public final void releaseControl() {
         controller = controllerCreator;
+        game.getEvents().post(new PlayerControlEvent(this, getLobbyPlayer(), null));
     }
 
     public final void obeyNewMaster(PlayerController pc) {
+        LobbyPlayer oldController = getLobbyPlayer();
         controller = pc;
+        game.getEvents().post(new PlayerControlEvent(this, oldController, pc.getLobbyPlayer()));
     }
 
 

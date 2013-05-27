@@ -20,18 +20,12 @@ package forge;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map.Entry;
 
 import org.apache.commons.lang3.StringUtils;
 import com.google.common.eventbus.Subscribe;
 
-import forge.game.GameOutcome;
-import forge.game.event.DuelOutcomeEvent;
 import forge.game.event.Event;
 import forge.game.phase.Combat;
-import forge.game.player.LobbyPlayer;
-import forge.game.player.PlayerStatistics;
-import forge.util.Lang;
 import forge.util.MyObservable;
 
 
@@ -74,15 +68,11 @@ public class GameLog extends MyObservable {
         this.updateObservers();
     }
 
-    /**
-     * Gets the log text.
-     *
-     * @return the log text
-     */
-    public String getLogText() {
-        return getLogText(null);
-    }
-
+    private void add(GameLogEntry entry) {
+        log.add(entry);
+        this.updateObservers();
+    }    
+    
     public String getLogText(final GameEventType logLevel) { 
         List<GameLogEntry> filteredAndReversed = getLogEntries(logLevel);
         return StringUtils.join(filteredAndReversed, "\r\n");
@@ -121,127 +111,19 @@ public class GameLog extends MyObservable {
     
     @Subscribe
     public void receiveGameEvent(Event ev) { 
-        if(ev instanceof DuelOutcomeEvent) {
-            fillOutcome( ((DuelOutcomeEvent) ev).result, ((DuelOutcomeEvent) ev).history );
+        GameLogEntry record = GameLogFormatter.logEvent(ev, this);
+        if( null != record ) {
+            add(record);
         }
     }
 
     
-    /**
-     * Generates and adds 
-     */
-    private void fillOutcome(GameOutcome result, List<GameOutcome> history) {
-
-        // add result entries to the game log
-        final LobbyPlayer human = Singletons.getControl().getLobby().getGuiPlayer();
-        
-
-        final List<String> outcomes = new ArrayList<String>();
-        for (Entry<LobbyPlayer, PlayerStatistics> p : result) {
-            String whoHas = p.getKey().equals(human) ? "You have" : p.getKey().getName() + " has";
-            String outcome = String.format("%s %s", whoHas, p.getValue().getOutcome().toString());
-            outcomes.add(outcome);
-            this.add(GameEventType.GAME_OUTCOME, outcome);
-        }
-        
-        final String statsSummary = generateSummary(history);
-        this.add(GameEventType.MATCH_RESULTS, statsSummary);
-    }
-    
-    private static String generateSummary(List<GameOutcome> gamesPlayed) {
-        GameOutcome outcome1 = gamesPlayed.get(0);
-        int[] wins = new int[outcome1.getNumPlayers()];
-        LobbyPlayer[] players = new LobbyPlayer[outcome1.getNumPlayers()];
-        for(int i = 0; i < wins.length; wins[i++] = 0);
-        
-        for (GameOutcome go : gamesPlayed) {
-            int i = 0;
-            for(Entry<LobbyPlayer, PlayerStatistics> ps : go) {
-                players[i] = ps.getKey();
-                if( ps.getValue().getOutcome().hasWon() )
-                    wins[i]++;
-                i++;
-            }
-        }
-
-        StringBuilder sb = new StringBuilder();
-        for(int i = 0; i < wins.length; i++) {
-            sb.append(players[i].getName()).append(": ").append(wins[i]).append(" ");
-        }
-        return sb.toString();
-    }
-    
-    
-
     public void addCombatAttackers(Combat combat) {
-        this.add(GameEventType.COMBAT, describeAttack(combat)); 
+        this.add(GameLogFormatter.describeAttack(combat)); 
     }
     public void addCombatBlockers(Combat combat) {
-        this.add(GameEventType.COMBAT, describeBlock(combat)); 
+        this.add(GameLogFormatter.describeBlock(combat)); 
     }
     // Special methods
 
-
-    private static String describeAttack(final Combat combat) {
-        final StringBuilder sb = new StringBuilder();
-
-        // Loop through Defenders
-        // Append Defending Player/Planeswalker
-
-        
-
-        // Not a big fan of the triple nested loop here
-        for (GameEntity defender : combat.getDefenders()) {
-            List<Card> attackers = combat.getAttackersOf(defender);
-            if (attackers == null || attackers.isEmpty()) {
-                continue;
-            }
-            if ( sb.length() > 0 ) sb.append("\n");
-
-            sb.append(combat.getAttackingPlayer()).append(" declared ").append(Lang.joinHomogenous(attackers));
-            sb.append(" to attack ").append(defender.toString()).append(".");
-        }
-
-        return sb.toString();
-    }
-
-
-    private static String describeBlock(final Combat combat) {
-        final StringBuilder sb = new StringBuilder();
-
-        // Loop through Defenders
-        // Append Defending Player/Planeswalker
-        
-        List<Card> blockers = null;
-        
-
-        for (GameEntity defender : combat.getDefenders()) {
-            List<Card> attackers = combat.getAttackersOf(defender);
-            if (attackers == null || attackers.isEmpty()) {
-                continue;
-            }
-            if ( sb.length() > 0 ) sb.append("\n");
-
-            String controllerName = defender instanceof Card ? ((Card)defender).getController().getName() : defender.getName();
-            boolean firstAttacker = true;
-            for (final Card attacker : attackers) {
-                if ( !firstAttacker ) sb.append("\n");
-                
-                blockers = combat.getBlockers(attacker);
-                if ( blockers.isEmpty() ) {
-                    sb.append(controllerName).append(" didn't block ");
-                } else {
-                    sb.append(controllerName).append(" assigned ").append(Lang.joinHomogenous(blockers)).append(" to block ");
-                }
-                
-                sb.append(attacker).append(".");
-                firstAttacker = false;
-            }
-        }
-
-        return sb.toString();
-    }
-    
-    
-    
-} // end class GameLog
+}
