@@ -141,6 +141,10 @@ public class FThreads {
         return isEDT() ? "EDT" : Thread.currentThread().getName();
     }
 
+    public static String prependThreadId(String message) {
+        return debugGetCurrThreadId() + " > " + message;
+    }
+    
     public static void dumpStackTrace(PrintStream stream) {
       StackTraceElement[] trace = Thread.currentThread().getStackTrace();
       stream.printf("%s > %s called from %s%n", debugGetCurrThreadId(), trace[2].getClassName()+"."+trace[2].getMethodName(), trace[3].toString());

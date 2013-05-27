@@ -175,13 +175,18 @@ public class InputQueue extends MyObservable implements java.io.Serializable {
 
 
     public void lock() {
-        setInput(inputLock);
+        this.inputStack.push(inputLock);
+        this.updateObservers();
     }
     
     public void unlock() { 
+        FThreads.assertExecutedByEdt(false);
+        
         if ( inputStack.isEmpty() || inputStack.peek() != inputLock )
             throw new RuntimeException("Trying to unlock input which is not locked (threading issue)! Input stack = " + inputStack);
-        removeInput(inputLock);
+
+        inputStack.pop();
+        this.updateObservers();
     }
 
     // only for debug purposes
