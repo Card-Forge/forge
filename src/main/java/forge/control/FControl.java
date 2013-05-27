@@ -318,10 +318,23 @@ public enum FControl {
         return lobby;
     }
     
+    public Player getCurrentPlayer() { 
+        // try current priority
+        Player currentPriority = game.getPhaseHandler().getPriorityPlayer();
+        if( null != currentPriority && currentPriority.getLobbyPlayer() == getLobby().getGuiPlayer() ) 
+            return currentPriority;
+        
+        // otherwise find just any player, belonging to this lobbyplayer
+        for(Player p : game.getPlayers())
+            if(p.getLobbyPlayer() == getLobby().getGuiPlayer() )
+                return p;
+        
+        return null;
+    }
+    
     public boolean mayShowCard(Card c) {
         if ( game == null ) return true;
-        Player p = game.getPhaseHandler().getPriorityPlayer();
-        return c.canBeShownTo(p);
+        return c.canBeShownTo(getCurrentPlayer());
     }
 
     /**

@@ -32,6 +32,7 @@ import forge.CardLists;
 import forge.FThreads;
 import forge.CardPredicates.Presets;
 import forge.Command;
+import forge.control.FControl;
 import forge.deck.Deck;
 import forge.game.GameState;
 import forge.game.phase.CombatUtil;
@@ -64,25 +65,13 @@ public enum CDock implements ICDoc {
 
     private int arcState;
     private GameState game;
-    private LobbyPlayer player;
 
     public void setModel(GameState game0, LobbyPlayer player0) {
         game = game0;
-        player = player0;
     }
 
-    private Player findAffectedPlayer() { 
-        // try current priority
-        Player currentPriority = game.getPhaseHandler().getPriorityPlayer();
-        if( currentPriority.getLobbyPlayer() == player ) 
-            return currentPriority;
-        
-        // otherwise find just any player, belonging to this lobbyplayer
-        for(Player p : game.getPlayers())
-            if(p.getLobbyPlayer() == player )
-                return p;
-        
-        return null;
+    public Player findAffectedPlayer() { 
+        return FControl.SINGLETON_INSTANCE.getCurrentPlayer();
     }
 
     /** Concede game, bring up WinLose UI. */
