@@ -16,8 +16,8 @@ import forge.card.spellability.Target;
 import forge.game.GameState;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
-import forge.gui.GuiDialog;
 import forge.util.Aggregates;
+import forge.util.Lang;
 
 public class PumpEffect extends SpellAbilityEffect {
 
@@ -241,24 +241,11 @@ public class PumpEffect extends SpellAbilityEffect {
         }
         
         if (sa.hasParam("Optional")) {
-            if (sa.getActivatingPlayer().isHuman()) {
-                final StringBuilder targets = new StringBuilder();
-                for (final Card tc : tgtCards) {
-                    targets.append(tc);
-                }
-                final StringBuilder sb = new StringBuilder();
-                final String descBasic = "Apply pump to " + targets + "?";
-                final String pumpDesc = sa.hasParam("OptionQuestion")
-                        ? sa.getParam("OptionQuestion").replace("TARGETS", targets) : descBasic;
-                sb.append(pumpDesc);
-                if (!GuiDialog.confirm(sa.getSourceCard(), sb.toString())) {
-                   return;
-                }
-            } else { //Computer player
-                //TODO Add logic here if necessary but I think the AI won't cast
-                //the spell in the first place if it would curse its own creature
-                //and the pump isn't mandatory
-            }
+            final String targets = Lang.joinHomogenous(tgtCards);
+            final String message = sa.hasParam("OptionQuestion") ? sa.getParam("OptionQuestion").replace("TARGETS", targets) : "Apply pump to " + targets + "?";
+
+            if ( !sa.getActivatingPlayer().getController().confirmAction(sa, null, message) )
+                return;
         }
 
         if (sa.hasParam("RememberObjects")) {

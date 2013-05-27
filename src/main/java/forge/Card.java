@@ -3956,30 +3956,6 @@ public class Card extends GameEntity implements Comparable<Card> {
         this.tempDefenseBoost += n;
     }
 
-    /**
-     * <p>
-     * Setter for the field <code>tempAttackBoost</code>.
-     * </p>
-     * 
-     * @param n
-     *            a int.
-     */
-    public final void setTempAttackBoost(final int n) {
-        this.tempAttackBoost = n;
-    }
-
-    /**
-     * <p>
-     * Setter for the field <code>tempDefenseBoost</code>.
-     * </p>
-     * 
-     * @param n
-     *            a int.
-     */
-    public final void setTempDefenseBoost(final int n) {
-        this.tempDefenseBoost = n;
-    }
-
     // for cards like Glorious Anthem, etc.
     /**
      * <p>
