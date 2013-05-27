@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Map;
 
 import forge.Card;
-import forge.card.spellability.AbilityManaPart;
 import forge.card.spellability.SpellAbility;
 import forge.game.event.BlockerAssignedEvent;
 import forge.game.event.CardDamagedEvent;

@@ -29,12 +29,6 @@ public class ManaReflectedEffect extends SpellAbilityEffect {
         final List<Player> tgtPlayers = getTargetPlayers(sa);
         for (final Player player : tgtPlayers) {
             final String generated = generatedReflectedMana(sa, colors, player);
-            if (ma.getCanceled()) {
-                sa.undo();
-                ma.setCanceled(false);
-                return;
-            }
-
             ma.produceMana(generated, player, sa);
         }
 
@@ -71,14 +65,7 @@ public class ManaReflectedEffect extends SpellAbilityEffect {
             baseMana = MagicColor.toShortString(colors.iterator().next());
         } else {
             if (player.isHuman()) {
-                final Object o = GuiChoose.oneOrNone("Select Mana to Produce", colors);
-                if (o == null) {
-                    // User hit cancel
-                    sa.getManaPart().setCanceled(true);
-                    return "";
-                } else {
-                    baseMana = MagicColor.toShortString((String) o);
-                }
+                baseMana = GuiChoose.one("Select Mana to Produce", colors);
             } else {
                 // AI doesn't really have anything here yet
                 baseMana = sa.getManaPart().getExpressChoice();

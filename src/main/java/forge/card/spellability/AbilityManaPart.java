@@ -44,18 +44,17 @@ public class AbilityManaPart implements java.io.Serializable {
     /** Constant <code>serialVersionUID=-6816356991224950520L</code>. */
     private static final long serialVersionUID = -6816356991224950520L;
 
-    private String origProduced;
+    private final String origProduced;
     private String lastExpressChoice = "";
-    private String manaRestrictions = "";
+    private final String manaRestrictions;
+    private final String cannotCounterSpell;
+    
     private transient ArrayList<Mana> lastManaProduced = new ArrayList<Mana>();
-
-    /** The canceled. */
-    private boolean canceled = false;
 
     private final transient Card sourceCard;
 
     // Spells paid with this mana spell can't be countered.
-    private String cannotCounterSpell;
+
 
     /**
      * <p>
@@ -75,12 +74,8 @@ public class AbilityManaPart implements java.io.Serializable {
         this.sourceCard = sourceCard;
 
         origProduced = params.containsKey("Produced") ? params.get("Produced") : "1";
-        if (params.containsKey("RestrictValid")) {
-            this.manaRestrictions = params.get("RestrictValid");
-        }
-
+        this.manaRestrictions = params.containsKey("RestrictValid") ? params.get("RestrictValid") : "";
         this.cannotCounterSpell = params.get("AddsNoCounter");
-
     }
 
     /**
@@ -347,29 +342,6 @@ public class AbilityManaPart implements java.io.Serializable {
         }
 
         return true;
-    }
-
-    /**
-     * <p>
-     * Setter for the field <code>canceled</code>.
-     * </p>
-     * 
-     * @param bCancel
-     *            a boolean.
-     */
-    public final void setCanceled(final boolean bCancel) {
-        this.canceled = bCancel;
-    }
-
-    /**
-     * <p>
-     * Getter for the field <code>canceled</code>.
-     * </p>
-     * 
-     * @return a boolean.
-     */
-    public final boolean getCanceled() {
-        return this.canceled;
     }
 
     /** {@inheritDoc} */
