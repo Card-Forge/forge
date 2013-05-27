@@ -78,6 +78,7 @@ public class InputCleanup extends InputPassPriorityBase {
             @Override
             public void run() {
                 card.getController().discard(card, null);
+                game.getInputQueue().updateObservers();
             }
         });
     }
