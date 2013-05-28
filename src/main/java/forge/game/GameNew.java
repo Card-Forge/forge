@@ -27,7 +27,6 @@ import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.game.phase.PhaseHandler;
-import forge.game.player.LobbyPlayer;
 import forge.game.player.Player;
 import forge.game.player.PlayerType;
 import forge.game.zone.PlayerZone;
@@ -68,7 +67,7 @@ public class GameNew {
     
     }
 
-    private static void initVariantsZones(final Player player, final PlayerStartConditions psc) {
+    private static void initVariantsZones(final Player player, final RegisteredPlayer psc) {
         PlayerZone com = player.getZone(ZoneType.Command);
     
         // Mainly for avatar, but might find something else here
@@ -240,10 +239,10 @@ public class GameNew {
         boolean isFirstGame = game.getMatch().getPlayedGames().isEmpty();
         boolean canSideBoard = !isFirstGame && gameType.isSideboardingAllowed();
         
-        final List<Pair<LobbyPlayer, PlayerStartConditions>> playersConditions = game.getMatch().getPlayers();
+        final List<RegisteredPlayer> playersConditions = game.getMatch().getPlayers();
         for (int i = 0; i < playersConditions.size(); i++) {
             Player player = game.getPlayers().get(i);
-            final PlayerStartConditions psc = playersConditions.get(i).getRight();
+            final RegisteredPlayer psc = playersConditions.get(i);
 
             putCardsOnBattlefield(player, psc.getCardsOnBattlefield(player));
             initVariantsZones(player, psc);
@@ -355,7 +354,7 @@ public class GameNew {
             final Player player = gamePlayers.get(i);
             if( player.hasLost()) continue;
             
-            PlayerStartConditions psc = game.getMatch().getPlayers().get(i).getValue();
+            RegisteredPlayer psc = game.getMatch().getPlayers().get(i);
             
             player.setStartingLife(psc.getStartingLife());
             player.setNumLandsPlayed(0);

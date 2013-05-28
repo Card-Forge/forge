@@ -8,8 +8,6 @@ import java.util.Random;
 
 import javax.swing.SwingUtilities;
 
-import org.apache.commons.lang3.tuple.Pair;
-
 import com.google.common.collect.Iterables;
 
 import forge.Command;
@@ -20,7 +18,7 @@ import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.game.GameType;
 import forge.game.MatchState;
-import forge.game.PlayerStartConditions;
+import forge.game.RegisteredPlayer;
 import forge.game.player.LobbyPlayer;
 import forge.gui.GuiDialog;
 import forge.gui.SOverlayUtils;
@@ -123,7 +121,7 @@ public enum CSubmenuVanguard implements ICDoc {
 
         List<Deck> playerDecks = new ArrayList<Deck>();
         for (int i = 0; i < view.getNumPlayers(); i++) {
-            PlayerStartConditions d = view.getDeckChoosers().get(i).getDeck();
+            RegisteredPlayer d = view.getDeckChoosers().get(i).getDeck();
 
             if (d == null) {
                 //ERROR!
@@ -174,10 +172,10 @@ public enum CSubmenuVanguard implements ICDoc {
         }
 
         Lobby lobby = Singletons.getControl().getLobby();
-        List<Pair<LobbyPlayer, PlayerStartConditions>> helper = new ArrayList<Pair<LobbyPlayer, PlayerStartConditions>>();
+        List<RegisteredPlayer> helper = new ArrayList<RegisteredPlayer>();
         for (int i = 0; i < view.getNumPlayers(); i++) {
             LobbyPlayer player = i == 0 ? lobby.getGuiPlayer() : lobby.getAiPlayer();
-            helper.add(Pair.of(player, PlayerStartConditions.forVanguard(playerDecks.get(i), playerAvatars.get(i))));
+            helper.add(RegisteredPlayer.forVanguard(playerDecks.get(i), playerAvatars.get(i)).setPlayer(player));
         }
         final MatchState mc = new MatchState(GameType.Vanguard, helper);
         FThreads.invokeInEdtLater(new Runnable(){

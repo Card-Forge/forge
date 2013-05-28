@@ -7,16 +7,13 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
-import org.apache.commons.lang3.tuple.ImmutablePair;
-import org.apache.commons.lang3.tuple.Pair;
-
 import forge.Command;
 import forge.FThreads;
 import forge.Singletons;
 import forge.control.Lobby;
 import forge.game.GameType;
 import forge.game.MatchState;
-import forge.game.PlayerStartConditions;
+import forge.game.RegisteredPlayer;
 import forge.game.player.LobbyPlayer;
 import forge.gui.SOverlayUtils;
 import forge.gui.framework.ICDoc;
@@ -100,8 +97,8 @@ public enum CSubmenuConstructed implements ICDoc {
      * @param gameType
      */
     private void startGame(final GameType gameType) {
-        PlayerStartConditions pscLeft = view.getDcLeft().getDeck();
-        PlayerStartConditions pscRight = view.getDcRight().getDeck();
+        RegisteredPlayer pscLeft = view.getDcLeft().getDeck();
+        RegisteredPlayer pscRight = view.getDcRight().getDeck();
         
         String humanDeckErrorMessage = gameType.getDecksFormat().getDeckConformanceProblem(pscRight.getOriginalDeck());
         if (null != humanDeckErrorMessage) {
@@ -119,14 +116,13 @@ public enum CSubmenuConstructed implements ICDoc {
         LobbyPlayer rightPlayer = view.isRightPlayerAi() ? lobby.getAiPlayer() : lobby.getGuiPlayer();
         LobbyPlayer leftPlayer = view.isLeftPlayerAi() ? lobby.getAiPlayer() : lobby.getGuiPlayer();
         
-        List<Pair<LobbyPlayer, PlayerStartConditions>> players = new ArrayList<Pair<LobbyPlayer, PlayerStartConditions>>();
-        players.add(ImmutablePair.of(rightPlayer, pscRight));
-        players.add(ImmutablePair.of(leftPlayer, pscLeft));
+        List<RegisteredPlayer> players = new ArrayList<RegisteredPlayer>();
+        players.add(pscRight.setPlayer(rightPlayer));
+        players.add(pscLeft.setPlayer(leftPlayer));
         final MatchState mc = new MatchState(gameType, players);
         
         SOverlayUtils.startGameOverlay();
         SOverlayUtils.showOverlay();
-        
 
         FThreads.invokeInEdtLater(new Runnable(){
             @Override

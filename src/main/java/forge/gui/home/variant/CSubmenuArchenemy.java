@@ -8,9 +8,6 @@ import java.util.Vector;
 
 import javax.swing.SwingUtilities;
 
-import org.apache.commons.lang3.tuple.ImmutablePair;
-import org.apache.commons.lang3.tuple.Pair;
-
 import com.google.common.base.Predicate;
 
 import forge.Command;
@@ -23,8 +20,7 @@ import forge.deck.DeckSection;
 import forge.deck.DeckgenUtil;
 import forge.game.GameType;
 import forge.game.MatchState;
-import forge.game.PlayerStartConditions;
-import forge.game.player.LobbyPlayer;
+import forge.game.RegisteredPlayer;
 import forge.gui.GuiDialog;
 import forge.gui.SOverlayUtils;
 import forge.gui.deckeditor.CDeckEditorUI;
@@ -166,7 +162,7 @@ public enum CSubmenuArchenemy implements ICDoc {
 
         List<Deck> playerDecks = new ArrayList<Deck>();
         for (int i = 0; i < view.getNumPlayers(); i++) {
-            PlayerStartConditions d = view.getDeckChoosers().get(i).getDeck();
+            RegisteredPlayer d = view.getDeckChoosers().get(i).getDeck();
 
             if (d == null) {
                 //ERROR!
@@ -224,17 +220,17 @@ public enum CSubmenuArchenemy implements ICDoc {
 
         Lobby lobby = Singletons.getControl().getLobby();
 
-        List<Pair<LobbyPlayer, PlayerStartConditions>> players = new ArrayList<Pair<LobbyPlayer,PlayerStartConditions>>();
+        List<RegisteredPlayer> players = new ArrayList<RegisteredPlayer>();
         for (int i = 0; i < view.getNumPlayers(); i++) {
             if (i == 0) {
                 
-                PlayerStartConditions psc = PlayerStartConditions.forArchenemy(playerDecks.get(i), schemes);
+                RegisteredPlayer psc = RegisteredPlayer.forArchenemy(playerDecks.get(i), schemes);
                 psc.setStartingLife(10 + (10 * (view.getNumPlayers() - 1)));
-                players.add(ImmutablePair.of(lobby.getGuiPlayer(), psc));
+                players.add(psc.setPlayer(lobby.getGuiPlayer()));
             } else {
-                PlayerStartConditions psc = PlayerStartConditions.fromDeck(playerDecks.get(i));
+                RegisteredPlayer psc = RegisteredPlayer.fromDeck(playerDecks.get(i));
                 psc.setTeamNumber(0);
-                players.add(ImmutablePair.of(lobby.getAiPlayer(), psc));
+                players.add(psc.setPlayer(lobby.getAiPlayer()));
             }
         }
 

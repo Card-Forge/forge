@@ -14225,7 +14225,7 @@ src/main/java/forge/game/GameType.java -text
 src/main/java/forge/game/GlobalRuleChange.java -text
 src/main/java/forge/game/MatchState.java -text
 src/main/java/forge/game/PlanarDice.java -text
-src/main/java/forge/game/PlayerStartConditions.java -text
+src/main/java/forge/game/RegisteredPlayer.java -text
 src/main/java/forge/game/ai/AiAttackController.java svneol=native#text/plain
 src/main/java/forge/game/ai/AiController.java svneol=native#text/plain
 src/main/java/forge/game/ai/AiProfileUtil.java -text

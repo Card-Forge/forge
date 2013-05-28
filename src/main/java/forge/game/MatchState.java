@@ -25,7 +25,7 @@ import forge.util.Aggregates;
 
 public class MatchState {
 
-    private final List<Pair<LobbyPlayer, PlayerStartConditions>> players;
+    private final List<RegisteredPlayer> players;
     private final GameType gameType;
 
     private int gamesPerMatch = 3;
@@ -41,13 +41,13 @@ public class MatchState {
     /**
      * This should become constructor once.
      */
-    public MatchState(GameType type, List<Pair<LobbyPlayer, PlayerStartConditions>> players0) {
+    public MatchState(GameType type, List<RegisteredPlayer> players0) {
         gamesPlayedRo = Collections.unmodifiableList(gamesPlayed);
         players = Collections.unmodifiableList(Lists.newArrayList(players0));
         gameType = type;
     }
     
-    public MatchState(GameType type, List<Pair<LobbyPlayer, PlayerStartConditions>> players0, Boolean overrideAnte) {
+    public MatchState(GameType type, List<RegisteredPlayer> players0, Boolean overrideAnte) {
         this(type, players0);
         if( overrideAnte != null )
             this.useAnte = overrideAnte.booleanValue();
@@ -174,8 +174,8 @@ public class MatchState {
         for (GameOutcome go : gamesPlayed) {
             LobbyPlayer winner = go.getWinner();
             int i = 0;
-            for (Pair<LobbyPlayer, PlayerStartConditions> p : players) {
-                if (p.getLeft().equals(winner)) {
+            for (RegisteredPlayer p : players) {
+                if (p.getPlayer().equals(winner)) {
                     victories[i]++;
                     break; // can't have 2 winners per game
                 }
@@ -217,7 +217,7 @@ public class MatchState {
         return getGamesWonBy(questPlayer) >= gamesToWinMatch;
     }
 
-    public List<Pair<LobbyPlayer, PlayerStartConditions>> getPlayers() {
+    public List<RegisteredPlayer> getPlayers() {
         return players;
     }
 

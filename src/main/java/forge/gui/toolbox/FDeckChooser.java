@@ -25,7 +25,7 @@ import forge.Singletons;
 import forge.deck.Deck;
 import forge.deck.DeckgenUtil;
 import forge.deck.generate.GenerateThemeDeck;
-import forge.game.PlayerStartConditions;
+import forge.game.RegisteredPlayer;
 import forge.quest.QuestController;
 import forge.quest.QuestEvent;
 import forge.quest.QuestEventChallenge;
@@ -232,7 +232,7 @@ public class FDeckChooser extends JPanel {
     }
 
     /** Generates deck from current list selection(s). */
-    public PlayerStartConditions getDeck() {
+    public RegisteredPlayer getDeck() {
 
         
         JList lst0 = getLstDecks();
@@ -243,7 +243,7 @@ public class FDeckChooser extends JPanel {
         // Special branch for quest events
         if (lst0.getName().equals(DeckgenUtil.DeckTypes.QUESTEVENTS.toString())) {
             QuestEvent event = DeckgenUtil.getQuestEvent(selection[0]); 
-            PlayerStartConditions result = new PlayerStartConditions(event.getEventDeck());
+            RegisteredPlayer result = new RegisteredPlayer(event.getEventDeck());
             if( event instanceof QuestEventChallenge ) {
                 result.setStartingLife(((QuestEventChallenge) event).getAiLife());
             }
@@ -260,7 +260,7 @@ public class FDeckChooser extends JPanel {
             deck = DeckgenUtil.getConstructedDeck(selection);
         }
 
-        return PlayerStartConditions.fromDeck(deck);
+        return RegisteredPlayer.fromDeck(deck);
     }
 
 

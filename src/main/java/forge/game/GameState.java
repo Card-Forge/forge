@@ -22,10 +22,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.TreeMap;
-
-import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.eventbus.EventBus;
 
@@ -48,7 +45,6 @@ import forge.game.phase.EndOfTurn;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.Untap;
 import forge.game.phase.Upkeep;
-import forge.game.player.LobbyPlayer;
 import forge.game.player.Player;
 import forge.game.zone.MagicStack;
 import forge.game.zone.PlayerZone;
@@ -94,19 +90,18 @@ public class GameState {
      * @param match0 
      * @param input 
      */
-    public GameState(List<Pair<LobbyPlayer, PlayerStartConditions>> players0, GameType t, MatchState match0) { /* no more zones to map here */
+    public GameState(List<RegisteredPlayer> players0, GameType t, MatchState match0) { /* no more zones to map here */
         type = t;
         match = match0;
         List<Player> players = new ArrayList<Player>();
         allPlayers = Collections.unmodifiableList(players);
         roIngamePlayers = Collections.unmodifiableList(ingamePlayers);
         
-        for (Entry<LobbyPlayer, PlayerStartConditions> kv : players0) {
-            Player pl = kv.getKey().getPlayer(this);
+        for (RegisteredPlayer psc : players0) {
+            Player pl = psc.getPlayer().getPlayer(this);
             players.add(pl);
             ingamePlayers.add(pl);
-            
-            PlayerStartConditions psc = kv.getValue();
+
             pl.setStartingLife(psc.getStartingLife());
             pl.setMaxHandSize(psc.getStartingHand());
             pl.setStartingHandSize(psc.getStartingHand());

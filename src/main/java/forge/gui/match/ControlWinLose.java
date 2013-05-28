@@ -14,7 +14,7 @@ import forge.deck.Deck;
 import forge.game.GameOutcome;
 import forge.game.GameType;
 import forge.game.MatchState;
-import forge.game.PlayerStartConditions;
+import forge.game.RegisteredPlayer;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
@@ -127,7 +127,7 @@ public class ControlWinLose {
             
 
             List<Card> compAntes = new ArrayList<Card>(fromGame.getCardsIn(ZoneType.Ante));
-            PlayerStartConditions psc = match.getPlayers().get(i).getValue();
+            RegisteredPlayer psc = match.getPlayers().get(i);
             Deck cDeck = psc.getCurrentDeck();
             Deck oDeck = psc.getOriginalDeck();
 
@@ -148,7 +148,7 @@ public class ControlWinLose {
             if (fromGame.isHuman()) {
                 List<CardPrinted> chosen = GuiChoose.noneOrMany("Select cards to add to your deck", losses);
                 if (null != chosen) {
-                    PlayerStartConditions psc = match.getPlayers().get(i).getValue();
+                    RegisteredPlayer psc = match.getPlayers().get(i);
                     Deck cDeck = psc.getCurrentDeck();
                     //Deck oDeck = psc.getOriginalDeck();
                     for (CardPrinted c : chosen) {

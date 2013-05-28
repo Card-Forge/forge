@@ -9,8 +9,6 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
-import org.apache.commons.lang3.tuple.Pair;
-
 import forge.Command;
 import forge.FThreads;
 import forge.Singletons;
@@ -20,10 +18,9 @@ import forge.deck.Deck;
 import forge.deck.DeckGroup;
 import forge.game.GameType;
 import forge.game.MatchState;
-import forge.game.PlayerStartConditions;
+import forge.game.RegisteredPlayer;
 import forge.game.limited.BoosterDraft;
 import forge.game.limited.LimitedPoolType;
-import forge.game.player.LobbyPlayer;
 import forge.gui.GuiChoose;
 import forge.gui.SOverlayUtils;
 import forge.gui.deckeditor.CDeckEditorUI;
@@ -134,10 +131,10 @@ public enum CSubmenuDraft implements ICDoc {
             throw new IllegalStateException("Draft: Computer deck is null!");
         }
 
-        List<Pair<LobbyPlayer, PlayerStartConditions>> starter = new ArrayList<Pair<LobbyPlayer, PlayerStartConditions>>();
+        List<RegisteredPlayer> starter = new ArrayList<RegisteredPlayer>();
         Lobby lobby = Singletons.getControl().getLobby();
-        starter.add(Pair.of(lobby.getGuiPlayer(), PlayerStartConditions.fromDeck(humanDeck)));
-        starter.add(Pair.of(lobby.getAiPlayer(), PlayerStartConditions.fromDeck(aiDeck)));
+        starter.add(RegisteredPlayer.fromDeck(humanDeck).setPlayer(lobby.getGuiPlayer()));
+        starter.add(RegisteredPlayer.fromDeck(aiDeck).setPlayer(lobby.getAiPlayer()));
 
         final MatchState mc = new MatchState(GameType.Draft, starter);
         FThreads.invokeInEdtLater(new Runnable(){

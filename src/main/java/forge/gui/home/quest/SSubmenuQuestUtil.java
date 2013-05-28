@@ -10,8 +10,6 @@ import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
 
 import org.apache.commons.lang3.tuple.ImmutablePair;
-import org.apache.commons.lang3.tuple.Pair;
-
 import forge.FThreads;
 import forge.Singletons;
 import forge.card.CardEdition;
@@ -20,7 +18,7 @@ import forge.control.Lobby;
 import forge.deck.Deck;
 import forge.game.GameType;
 import forge.game.MatchState;
-import forge.game.PlayerStartConditions;
+import forge.game.RegisteredPlayer;
 import forge.game.player.LobbyPlayer;
 import forge.gui.GuiChoose;
 import forge.gui.SOverlayUtils;
@@ -419,8 +417,8 @@ public class SSubmenuQuestUtil {
             forceAnte = qc.isForceAnte();
         }
 
-        PlayerStartConditions humanStart = new PlayerStartConditions(deck);
-        PlayerStartConditions aiStart = new PlayerStartConditions(event.getEventDeck());
+        RegisteredPlayer humanStart = new RegisteredPlayer(deck);
+        RegisteredPlayer aiStart = new RegisteredPlayer(event.getEventDeck());
         
         if (lifeHuman != null) {
             humanStart.setStartingLife(lifeHuman);
@@ -434,13 +432,13 @@ public class SSubmenuQuestUtil {
             aiStart.setCardsOnBattlefield(QuestUtil.getComputerStartingCards(event));
         }
 
-        List<Pair<LobbyPlayer, PlayerStartConditions>> starter = new ArrayList<Pair<LobbyPlayer,PlayerStartConditions>>();
+        List<RegisteredPlayer> starter = new ArrayList<RegisteredPlayer>();
         Lobby lobby = Singletons.getControl().getLobby();
-        starter.add(Pair.of(lobby.getQuestPlayer(), humanStart));
+        starter.add(humanStart.setPlayer(lobby.getQuestPlayer()));
 
         LobbyPlayer aiPlayer = Singletons.getControl().getLobby().getAiPlayer(event.getOpponent() == null ? event.getTitle() : event.getOpponent());
         aiPlayer.setIconImageKey(event.getIconImageKey());
-        starter.add(Pair.of(aiPlayer, aiStart));
+        starter.add(aiStart.setPlayer(aiPlayer));
 
         final MatchState mc = new MatchState(GameType.Quest, starter, forceAnte);
         FThreads.invokeInEdtLater(new Runnable(){

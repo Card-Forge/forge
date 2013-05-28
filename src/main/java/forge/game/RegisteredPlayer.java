@@ -6,16 +6,20 @@ import java.util.List;
 
 import forge.deck.Deck;
 import forge.deck.DeckSection;
+import forge.game.player.LobbyPlayer;
 import forge.game.player.Player;
 import forge.item.CardPrinted;
 import forge.item.IPaperCard;
 
 
-public class PlayerStartConditions {
+public class RegisteredPlayer {
     private final Deck originalDeck;
     private Deck currentDeck;
 
     private static final Iterable<CardPrinted> EmptyList = Collections.unmodifiableList(new ArrayList<CardPrinted>());
+    
+    private LobbyPlayer player = null;
+    
     private int startingLife = 20;
     private int startingHand = 7;
     private Iterable<IPaperCard> cardsOnBattlefield = null;
@@ -24,7 +28,7 @@ public class PlayerStartConditions {
     private Iterable<CardPrinted> planes = null;
     private int teamNumber = -1; // members of teams with negative id will play FFA.
     
-    public PlayerStartConditions(Deck deck0) {
+    public RegisteredPlayer(Deck deck0) {
         originalDeck = deck0;
         currentDeck = originalDeck;
     }
@@ -133,17 +137,17 @@ public class PlayerStartConditions {
     }
 
     
-    public static PlayerStartConditions fromDeck(final Deck deck) {
-        PlayerStartConditions start = new PlayerStartConditions(deck);
+    public static RegisteredPlayer fromDeck(final Deck deck) {
+        RegisteredPlayer start = new RegisteredPlayer(deck);
         if( deck != null && deck.has(DeckSection.Commander)) {
             start.setStartingLife(40);
             start.addCardsInCommand(deck.get(DeckSection.Commander).toFlatList());
         }
-        return new PlayerStartConditions(deck);
+        return new RegisteredPlayer(deck);
     }
 
-    public static PlayerStartConditions forVanguard(final Deck deck, final CardPrinted avatar) {
-        PlayerStartConditions start = fromDeck(deck);
+    public static RegisteredPlayer forVanguard(final Deck deck, final CardPrinted avatar) {
+        RegisteredPlayer start = fromDeck(deck);
         start.setStartingLife(start.getStartingLife() + avatar.getRules().getLife());
         start.setStartingHand(start.getStartingHand() + avatar.getRules().getHand());
         start.addCardsInCommand(avatar);
@@ -151,16 +155,25 @@ public class PlayerStartConditions {
     }
 
 
-    public static PlayerStartConditions forArchenemy(final Deck deck, final Iterable<CardPrinted> schemes) {
-        PlayerStartConditions start = fromDeck(deck);
+    public static RegisteredPlayer forArchenemy(final Deck deck, final Iterable<CardPrinted> schemes) {
+        RegisteredPlayer start = fromDeck(deck);
         start.setSchemes(schemes);
         return start;
     }
     
-    public static PlayerStartConditions forPlanechase(final Deck deck, final Iterable<CardPrinted> planes) {
-        PlayerStartConditions start = fromDeck(deck);
+    public static RegisteredPlayer forPlanechase(final Deck deck, final Iterable<CardPrinted> planes) {
+        RegisteredPlayer start = fromDeck(deck);
         start.setPlanes(planes);
         return start;
+    }
+
+    public LobbyPlayer getPlayer() {
+        return player;
+    }
+
+    public RegisteredPlayer setPlayer(LobbyPlayer player0) {
+        this.player = player0;
+        return this;
     }
 
 

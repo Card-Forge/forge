@@ -22,16 +22,13 @@ import java.util.List;
 
 import javax.swing.SwingUtilities;
 
-import org.apache.commons.lang3.tuple.Pair;
-
 import forge.FThreads;
 import forge.Singletons;
 import forge.control.Lobby;
 import forge.deck.Deck;
 import forge.game.GameType;
 import forge.game.MatchState;
-import forge.game.PlayerStartConditions;
-import forge.game.player.LobbyPlayer;
+import forge.game.RegisteredPlayer;
 import forge.gui.SOverlayUtils;
 
 /**
@@ -52,7 +49,7 @@ public class GauntletMini {
     private int losses;
     private boolean gauntletDraft; // Means: Draft game is in Gauntlet-mode, not a single match
     private GameType gauntletType;
-    private List<PlayerStartConditions> aiOpponents = new ArrayList<PlayerStartConditions>();
+    private List<RegisteredPlayer> aiOpponents = new ArrayList<RegisteredPlayer>();
 
     // private final String humanName;
     /**
@@ -145,7 +142,7 @@ public class GauntletMini {
         aiOpponents.clear();
         for (int i = 0; i < Math.min(gameRounds, aiDecks.size()); i++) {
 
-            aiOpponents.add(new PlayerStartConditions(aiDecks.get(i)));
+            aiOpponents.add(new RegisteredPlayer(aiDecks.get(i)));
         }
 
         resetCurrentRound();
@@ -164,11 +161,10 @@ public class GauntletMini {
             }
         });
 
-        
-        List<Pair<LobbyPlayer, PlayerStartConditions>> starter = new ArrayList<Pair<LobbyPlayer,PlayerStartConditions>>();
+        List<RegisteredPlayer> starter = new ArrayList<RegisteredPlayer>();
         Lobby lobby = Singletons.getControl().getLobby();
-        starter.add(Pair.of(lobby.getGuiPlayer(), PlayerStartConditions.fromDeck(humanDeck)));
-        starter.add(Pair.of(lobby.getAiPlayer(), aiOpponents.get(currentRound - 1)));
+        starter.add(RegisteredPlayer.fromDeck(humanDeck).setPlayer(lobby.getGuiPlayer()));
+        starter.add(aiOpponents.get(currentRound - 1).setPlayer(lobby.getAiPlayer()));
         final MatchState mc = new MatchState(gauntletType, starter);
         FThreads.invokeInEdtLater(new Runnable(){
             @Override

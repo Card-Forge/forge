@@ -8,8 +8,6 @@ import java.util.Vector;
 
 import javax.swing.SwingUtilities;
 
-import org.apache.commons.lang3.tuple.Pair;
-
 import com.google.common.base.Predicate;
 
 import forge.Command;
@@ -22,7 +20,7 @@ import forge.deck.DeckSection;
 import forge.deck.DeckgenUtil;
 import forge.game.GameType;
 import forge.game.MatchState;
-import forge.game.PlayerStartConditions;
+import forge.game.RegisteredPlayer;
 import forge.game.player.LobbyPlayer;
 import forge.gui.GuiDialog;
 import forge.gui.SOverlayUtils;
@@ -152,10 +150,10 @@ public enum CSubmenuPlanechase implements ICDoc {
     /** @param lists0 &emsp; {@link java.util.List}<{@link javax.swing.JList}> */
     private void startGame() {
         Lobby lobby = Singletons.getControl().getLobby();
-        List<Pair<LobbyPlayer, PlayerStartConditions>> helper = new ArrayList<Pair<LobbyPlayer,PlayerStartConditions>>();
+        List<RegisteredPlayer> helper = new ArrayList<RegisteredPlayer>();
         List<Deck> playerDecks = new ArrayList<Deck>();
         for (int i = 0; i < view.getNumPlayers(); i++) {
-            PlayerStartConditions d = view.getDeckChoosers().get(i).getDeck();
+            RegisteredPlayer d = view.getDeckChoosers().get(i).getDeck();
 
             if (d == null) {
                 //ERROR!
@@ -211,7 +209,7 @@ public enum CSubmenuPlanechase implements ICDoc {
                 GuiDialog.message("Player " + (i+1) + " will use a default planar deck.");
             }
             LobbyPlayer player = i == 0 ? lobby.getGuiPlayer() : lobby.getAiPlayer();
-            helper.add(Pair.of(player, PlayerStartConditions.forPlanechase(playerDecks.get(i), planes)));
+            helper.add(RegisteredPlayer.forPlanechase(playerDecks.get(i), planes).setPlayer(player));
         }
 
         SOverlayUtils.startGameOverlay();
