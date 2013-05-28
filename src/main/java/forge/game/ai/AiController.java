@@ -880,6 +880,8 @@ public class AiController {
     {
         SpellAbility sa;
         do { 
+            if ( game.isGameOver() )
+                return;
             sa = getSpellAbilityToPlay();
             if ( sa == null ) break;
             //System.out.println("Playing sa: " + sa);
