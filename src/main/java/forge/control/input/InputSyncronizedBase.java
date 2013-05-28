@@ -30,16 +30,10 @@ public abstract class InputSyncronizedBase extends InputBase implements InputSyn
     protected final void stop() {
         // ensure input won't accept any user actions.
         FThreads.invokeInEdtNowOrLater(new Runnable() { @Override public void run() { setFinished(); } });
-            
-        // this will update input proxy, so there might be anything happening in the thread
-        getQueue().invokeGameAction( new Runnable() {
-            @Override
-            public void run() {
-                // this will update input proxy, so there might be anything happening in the thread 
-                getQueue().removeInput(InputSyncronizedBase.this);
-                cdlDone.countDown();
-            }
-        });
+
+        // thread irrelevant 
+        getQueue().removeInput(InputSyncronizedBase.this);
+        cdlDone.countDown();
     }
 
     @Override

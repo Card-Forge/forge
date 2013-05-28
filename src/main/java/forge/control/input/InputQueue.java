@@ -85,13 +85,10 @@ public class InputQueue extends MyObservable implements java.io.Serializable {
      *            a boolean.
      */
     final void removeInput(Input inp) {
-        FThreads.assertExecutedByEdt(false);
         Input topMostInput = inputStack.isEmpty() ? null : inputStack.pop();
 
         if( topMostInput != inp )
             throw new RuntimeException("Cannot remove input " + inp.getClass().getSimpleName() + " because it's not on top of stack. Stack = " + inputStack );
-
-        this.updateObservers();
     }
 
     public final boolean isEmpty() {
