@@ -186,11 +186,7 @@ public abstract class InputPayManaBase extends InputSyncronizedBase implements I
             public void run() {
                 HumanPlay.playSpellAbility(chosen.getActivatingPlayer(), chosen);
                 onManaAbilityPlayed(chosen);
-                if( isAlredyPaid() ) {
-                    done();
-                    stopNonEdt();
-                } else 
-                    FThreads.invokeInEdtLater(new Runnable() { @Override public void run(){ updateMessage(); }}); 
+                onStateChanged();
             }
         };
         game.getInputQueue().invokeGameAction(proc);
@@ -256,12 +252,15 @@ public abstract class InputPayManaBase extends InputSyncronizedBase implements I
     public void showMessage() {
         if ( isFinished() ) return;
         ButtonUtil.enableOnlyCancel();
-
+        onStateChanged();
+    }
+    
+    protected void onStateChanged() { 
         if( isAlredyPaid() ) {
             done();
             stop();
-        } else
-            updateMessage();
+        } else 
+            FThreads.invokeInEdtNowOrLater(new Runnable() { @Override public void run(){ updateMessage(); }});
     }
     
     protected void onManaAbilityPaid() {} // some inputs overload it

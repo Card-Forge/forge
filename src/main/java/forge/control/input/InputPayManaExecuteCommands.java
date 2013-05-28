@@ -81,13 +81,7 @@ public class InputPayManaExecuteCommands extends InputPayManaBase {
             if (player.canPayLife(this.phyLifeToLose + 2) && manaCost.payPhyrexian()) {
                 this.phyLifeToLose += 2;
             }
-
-            if (this.manaCost.isPaid()) {
-                this.done();
-                this.stop();
-            } else {
-                this.showMessage();
-            }
+            onStateChanged();
         }
     }
 

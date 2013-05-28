@@ -35,8 +35,8 @@ public class FThreads {
     
     private FThreads() { } // no instances supposed
     
-    private final static ExecutorService cachedPool = Executors.newCachedThreadPool(new WorkerThreadFactory("Game"));
-    private static ExecutorService getCachedPool() { return cachedPool; }
+    private final static ExecutorService gameThreadPool = Executors.newCachedThreadPool(new WorkerThreadFactory("Game"));
+    private static ExecutorService getGameThreadPool() { return gameThreadPool; }
     private final static ScheduledExecutorService scheduledPool = Executors.newScheduledThreadPool(2, new WorkerThreadFactory("Delayed"));
     private static ScheduledExecutorService getScheduledPool() { return scheduledPool; }
 
@@ -111,8 +111,8 @@ public class FThreads {
     }
     
     
-    public static void invokeInNewThread(Runnable toRun) {
-        getCachedPool().execute(toRun);
+    public static void invokeInGameThread(Runnable toRun) {
+        getGameThreadPool().execute(toRun);
     }
     
     /**
@@ -170,6 +170,10 @@ public class FThreads {
 
     public static String debugGetStackTraceItem(int depth) {
         return debugGetStackTraceItem(depth, false);
+    }
+
+    public static boolean isGameThread() {
+        return Thread.currentThread().getName().startsWith("Game");
     }
    
 }

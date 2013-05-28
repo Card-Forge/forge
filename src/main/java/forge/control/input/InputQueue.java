@@ -200,11 +200,10 @@ public class InputQueue extends MyObservable implements java.io.Serializable {
     }
 
     public void invokeGameAction(final Runnable proc) {
-        if(FThreads.isEDT()) {
-            FThreads.invokeInNewThread(proc);
-        } else { // this branch is experimental
+        if( FThreads.isGameThread() ) {
             proc.run();
-        }
+        } else
+            FThreads.invokeInGameThread(proc);
     }
     
 } // InputControl

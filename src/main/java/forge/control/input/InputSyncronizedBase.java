@@ -28,9 +28,11 @@ public abstract class InputSyncronizedBase extends InputBase implements InputSyn
     
     
     protected final void stop() {
-        
-        setFinished();
-        FThreads.invokeInNewThread(new Runnable() {
+        // ensure input won't accept any user actions.
+        FThreads.invokeInEdtNowOrLater(new Runnable() { @Override public void run() { setFinished(); } });
+            
+        // this will update input proxy, so there might be anything happening in the thread
+        getQueue().invokeGameAction( new Runnable() {
             @Override
             public void run() {
                 // this will update input proxy, so there might be anything happening in the thread 
@@ -38,18 +40,6 @@ public abstract class InputSyncronizedBase extends InputBase implements InputSyn
                 cdlDone.countDown();
             }
         });
-    }
-    
-    // This version does not need to be ran from EDT.
-    protected final void stopNonEdt() {
-        FThreads.assertExecutedByEdt(false);
-        
-        // ensure no clicks from EDT will be accepted
-        FThreads.invokeInEdtLater(new Runnable() { @Override public void run() { setFinished(); } }); 
-        
-        // this will update input proxy, so there might be anything happening in the thread 
-        getQueue().removeInput(InputSyncronizedBase.this);
-        cdlDone.countDown();
     }
 
     @Override
