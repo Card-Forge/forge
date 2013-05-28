@@ -301,7 +301,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
             game.getGameLog().add(GameEventType.TURN, "Turn " + this.turn + " (" + this.getPlayerTurn() + ")");
         }
         
-        game.getGameLog().add(GameEventType.PHASE, phaseType + Lang.getPossesive(this.getPlayerTurn().getName()) + " " + this.getPhase().Name);
+        game.getGameLog().add(GameEventType.PHASE, phaseType + Lang.getPossesive(this.getPlayerTurn().getName()) + " " + this.getPhase().NameForUi);
         PhaseUtil.visuallyActivatePhase(this.getPlayerTurn(), this.getPhase());
     }
 
@@ -492,7 +492,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
         if (this.isPlayerPriorityAllowed()) {
             // Run triggers if phase isn't being skipped
             final HashMap<String, Object> runParams = new HashMap<String, Object>();
-            runParams.put("Phase", this.getPhase().Name);
+            runParams.put("Phase", this.getPhase().NameForScripts);
             runParams.put("Player", this.getPlayerTurn());
             game.getTriggerHandler().runTrigger(TriggerType.Phase, runParams, false);
         }
@@ -786,6 +786,8 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
                 System.out.print(" >>\n");
             }
         }
+        
+        System.out.println(FThreads.prependThreadId("Thread exited game loop due to ... " + ( game.isGameOver() ? "game over" : "interrupt" )));
     }
     
 
@@ -875,7 +877,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
     }
     
     public String debugPrintState(boolean hasPriority) {
-        return String.format("%s's %s [%sP] %s", getPlayerTurn(), getPhase().Name, hasPriority ? "+" : "-", getPriorityPlayer());
+        return String.format("%s's %s [%sP] %s", getPlayerTurn(), getPhase().NameForUi, hasPriority ? "+" : "-", getPriorityPlayer());
     }
 
 

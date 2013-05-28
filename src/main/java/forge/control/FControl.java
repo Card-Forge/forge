@@ -418,6 +418,7 @@ public enum FControl {
 
         if( ev instanceof DuelFinishedEvent ) {
             FThreads.invokeInEdtNowOrLater(new Runnable() { @Override public void run() {
+                getInputQueue().onGameOver();
                 new ViewWinLose(game.getMatch());
                 SOverlayUtils.showOverlay();
             } });

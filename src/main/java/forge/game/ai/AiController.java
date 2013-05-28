@@ -86,26 +86,6 @@ public class AiController {
         game = game0;
     }
 
-    private final SpellAbility getSpellAbilityToPlay() {
-        // if top of stack is owned by me
-        if (!game.getStack().isEmpty() && game.getStack().peekAbility().getActivatingPlayer().equals(player)) {
-            // probably should let my stuff resolve
-            return null;
-        }
-        final List<Card> cards = getAvailableCards();
-    
-        if ( !game.getStack().isEmpty() ) {
-            SpellAbility counter = chooseCounterSpell(getPlayableCounters(cards));
-            if( counter != null ) return counter;
-    
-            SpellAbility counterETB = chooseSpellAbilyToPlay(this.getPossibleETBCounters(), false);
-            if( counterETB != null )
-                return counterETB;
-        }
-    
-        return chooseSpellAbilyToPlay(getSpellAbilities(cards), true);
-    }
-
     /**
      * <p>
      * getAvailableSpellAbilities.
@@ -907,6 +887,26 @@ public class AiController {
                 break;
             }
         } while ( sa != null );
+    }
+
+    private final SpellAbility getSpellAbilityToPlay() {
+        // if top of stack is owned by me
+        if (!game.getStack().isEmpty() && game.getStack().peekAbility().getActivatingPlayer().equals(player)) {
+            // probably should let my stuff resolve
+            return null;
+        }
+        final List<Card> cards = getAvailableCards();
+    
+        if ( !game.getStack().isEmpty() ) {
+            SpellAbility counter = chooseCounterSpell(getPlayableCounters(cards));
+            if( counter != null ) return counter;
+    
+            SpellAbility counterETB = chooseSpellAbilyToPlay(this.getPossibleETBCounters(), false);
+            if( counterETB != null )
+                return counterETB;
+        }
+    
+        return chooseSpellAbilyToPlay(getSpellAbilities(cards), true);
     }
 
     public List<Card> chooseCardsToDelve(int colorlessCost, List<Card> grave) {

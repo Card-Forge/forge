@@ -278,7 +278,8 @@ public class PlayerControllerAi extends PlayerController {
 
     @Override
     public void takePriority() {
+        if ( !game.isGameOver() )
+            brains.onPriorityRecieved();
         // use separate thread for AI?
-        brains.onPriorityRecieved();
     }
 }

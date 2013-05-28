@@ -26,6 +26,9 @@ public abstract class InputSyncronizedBase extends InputBase implements InputSyn
         }
     }
     
+    public final void relaseLatchWhenGameIsOver() {
+        cdlDone.countDown();
+    }
     
     protected final void stop() {
         // ensure input won't accept any user actions.

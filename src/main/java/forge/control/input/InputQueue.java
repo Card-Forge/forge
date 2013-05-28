@@ -35,27 +35,12 @@ public class InputQueue extends MyObservable implements java.io.Serializable {
     /** Constant <code>serialVersionUID=3955194449319994301L</code>. */
     private static final long serialVersionUID = 3955194449319994301L;
 
-    private final BlockingDeque<Input> inputStack = new LinkedBlockingDeque<Input>();
+    private final BlockingDeque<InputSynchronized> inputStack = new LinkedBlockingDeque<InputSynchronized>();
     private final InputLockUI inputLock;
 
 
     public InputQueue() {
         inputLock = new InputLockUI(this);
-    }
-
-    /**
-     * <p>
-     * Setter for the field <code>input</code>.
-     * </p>
-     * 
-     * @param in
-     *            a {@link forge.control.input.InputBase} object.
-     */
-    private final void setInput(final Input in) {
-        //System.out.println(in.getClass().getName());
-        this.inputStack.push(in);
-        // System.out.print("Current: " + input + "; Stack = " + inputStack);
-        this.updateObservers();
     }
 
     /**
@@ -106,8 +91,19 @@ public class InputQueue extends MyObservable implements java.io.Serializable {
     }
     
     public void setInputAndWait(InputSynchronized input) {
-        this.setInput(input);
+        this.inputStack.push(input);
+        this.updateObservers();
+        
         input.awaitLatchRelease();
+    }
+
+    /**
+     * TODO: Write javadoc for this method.
+     */
+    public void onGameOver() {
+        for(InputSynchronized inp : inputStack ) {
+            inp.relaseLatchWhenGameIsOver();
+        }
     }
     
 } // InputControl
