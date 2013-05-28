@@ -45,7 +45,7 @@ import forge.card.mana.ManaCost;
 import forge.gui.CardContainer;
 import forge.gui.toolbox.CardFaceSymbols;
 import forge.properties.ForgePreferences.FPref;
-import forge.view.arcane.util.GlowText;
+import forge.view.arcane.util.OutlinedLabel;
 
 /**
  * <p>
@@ -78,10 +78,7 @@ public class CardPanel extends JPanel implements CardContainer {
     private static final float SELECTED_BORDER_SIZE = 0.01f;
     /** Constant <code>BLACK_BORDER_SIZE=0.03f</code>. */
     private static final float BLACK_BORDER_SIZE = 0.03f;
-    /** Constant <code>TEXT_GLOW_SIZE=6</code>. */
-    private static final int TEXT_GLOW_SIZE = 6;
-    /** Constant <code>TEXT_GLOW_INTENSITY=3f</code>. */
-    private static final float TEXT_GLOW_INTENSITY = 3f;
+
     /**
      * Constant
      * <code>rotCenterToTopCorner=1.0295630140987000315797369464196f</code>.
@@ -118,8 +115,9 @@ public class CardPanel extends JPanel implements CardContainer {
      */
     private final ScaledImagePanel imagePanel;
 
-    private final GlowText titleText;
-    private final GlowText ptText;
+    private final OutlinedLabel titleText;
+    private final OutlinedLabel ptText;
+    private final OutlinedLabel damageText;
     private final List<CardPanel> imageLoadListeners = new ArrayList<CardPanel>(2);
     private boolean displayEnabled = true;
     private boolean isAnimationPanel;
@@ -141,19 +139,26 @@ public class CardPanel extends JPanel implements CardContainer {
         this.setBackground(Color.black);
         this.setOpaque(false);
 
-        this.titleText = new GlowText();
+        this.titleText = new OutlinedLabel();
         this.titleText.setFont(this.getFont().deriveFont(Font.BOLD, 13f));
         this.titleText.setForeground(Color.white);
-        this.titleText.setGlow(Color.black, CardPanel.TEXT_GLOW_SIZE, CardPanel.TEXT_GLOW_INTENSITY);
+        this.titleText.setGlow(Color.black);
         this.titleText.setWrap(true);
         this.add(this.titleText);
 
-        this.ptText = new GlowText();
+        this.ptText = new OutlinedLabel();
         this.ptText.setFont(this.getFont().deriveFont(Font.BOLD, 13f));
         this.ptText.setForeground(Color.white);
-        this.ptText.setGlow(Color.black, CardPanel.TEXT_GLOW_SIZE, CardPanel.TEXT_GLOW_INTENSITY);
+        this.ptText.setGlow(Color.black);
         this.add(this.ptText);
 
+        this.damageText = new OutlinedLabel();
+        this.damageText.setFont(this.getFont().deriveFont(Font.BOLD, 15f));
+        this.damageText.setForeground(new Color(160,0,0));
+        this.damageText.setGlow(Color.white);
+        this.add(this.damageText);
+        
+        
         this.imagePanel = new ScaledImagePanel();
         this.add(this.imagePanel);
         this.addComponentListener(new ComponentAdapter() {
@@ -451,26 +456,41 @@ public class CardPanel extends JPanel implements CardContainer {
     @Override
     public final void doLayout() {
         final int borderSize = Math.round(this.cardWidth * CardPanel.BLACK_BORDER_SIZE);
-        this.imagePanel.setLocation(this.cardXOffset + borderSize, this.cardYOffset + borderSize);
-        this.imagePanel.setSize(this.cardWidth - (borderSize * 2), this.cardHeight - (borderSize * 2));
+
+        final Point imgPos = new Point(this.cardXOffset + borderSize, this.cardYOffset + borderSize);
+        final Dimension imgSize = new Dimension(this.cardWidth - (borderSize * 2), this.cardHeight - (borderSize * 2));
+
+        this.imagePanel.setLocation(imgPos);
+        this.imagePanel.setSize(imgSize);
 
         final int fontHeight = Math.round(this.cardHeight * (27f / 680));
         final boolean showText = !this.imagePanel.hasImage() || (!this.isAnimationPanel && (fontHeight < 12));
         this.titleText.setVisible(showText);
         this.ptText.setVisible(showText);
+        this.damageText.setVisible(showText);
 
-        final int titleX = Math.round(this.cardWidth * (20f / 480));
-        final int titleY = Math.round(this.cardHeight * (9f / 680));
-        this.titleText.setBounds(this.cardXOffset + titleX, this.cardYOffset + titleY, this.cardWidth - titleX,
-                this.cardHeight);
+        final int TEXT_GLOW_SIZE = 1;
+        
+        final int titleX = Math.round(imgSize.width * (24f / 480));
+        final int titleY = Math.round(imgSize.height * (54f / 640)) - 15;
+        final int titleH = Math.round(imgSize.height * (360f / 640));
+        this.titleText.setBounds(imgPos.x + titleX, imgPos.y + titleY, imgSize.width - 2 * titleX, titleH - titleY);
+
+        final int rightLine = Math.round(imgSize.width * (412f / 480)); 
 
         final Dimension ptSize = this.ptText.getPreferredSize();
         this.ptText.setSize(ptSize.width, ptSize.height);
-        final int ptX = Math.round(this.cardWidth * (420f / 480)) - (ptSize.width / 2);
-        final int ptY = Math.round(this.cardHeight * (675f / 680)) - ptSize.height;
-        this.ptText.setLocation((this.cardXOffset + ptX) - (CardPanel.TEXT_GLOW_SIZE / 2), (this.cardYOffset + ptY)
-                - (CardPanel.TEXT_GLOW_SIZE / 2));
+        final int ptX = rightLine - ptSize.width/2;
+        final int ptY = Math.round(imgSize.height * (650f / 680)) - 13;
+        this.ptText.setLocation(imgPos.x + ptX, imgPos.y + ptY);
 
+        final Dimension dmgSize = this.damageText.getPreferredSize();
+        this.damageText.setSize(dmgSize.width, dmgSize.height);
+        final int dmgX = rightLine - dmgSize.width / 2;
+        final int dmgY =  ptY - 16;
+        this.damageText.setLocation(imgPos.x + dmgX, imgPos.y + dmgY);
+        
+        
     }
 
     /**
@@ -610,20 +630,20 @@ public class CardPanel extends JPanel implements CardContainer {
             this.showCastingCost = true;
         }
 
+        String sPt = "";
         if (card.isCreature() && card.isPlaneswalker()) {
-            this.ptText.setText(card.getNetAttack() + "/" + card.getNetDefense() + " ("
-                    + String.valueOf(card.getCounters(CounterType.LOYALTY)) + ")");
+            sPt = String.format("%d/%d (%d)", card.getNetAttack(), card.getNetDefense(), card.getCounters(CounterType.LOYALTY));
         } else if (card.isCreature()) {
-            this.ptText.setText(card.getNetAttack() + "/" + card.getNetDefense());
+            sPt = String.format("%d/%d", card.getNetAttack(), card.getNetDefense());
         } else if (card.isPlaneswalker()) {
             int loyalty = card.getCounters(CounterType.LOYALTY);
-            if (loyalty == 0) {
-                loyalty = card.getBaseLoyalty();
-            }
-            this.ptText.setText(String.valueOf(loyalty));
-        } else {
-            this.ptText.setText("");
+            sPt = String.valueOf(loyalty == 0 ? card.getBaseLoyalty() : loyalty);
         }
+        this.ptText.setText(sPt);
+        
+        int damage = card.getDamage();
+        this.damageText.setText(damage > 0 ? "\u00BB " + String.valueOf(damage) + " \u00AB" : "");
+
     }
 
     /**

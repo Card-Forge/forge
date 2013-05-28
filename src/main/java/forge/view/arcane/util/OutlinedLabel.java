@@ -42,18 +42,18 @@ import javax.swing.JLabel;
  * @author Forge
  * @version $Id$
  */
-public class GlowText extends JLabel {
+public class OutlinedLabel extends JLabel {
 
     /**
      * Instantiates a new glow text.
      */
-    public GlowText() {
+    public OutlinedLabel() {
     }
 
     /** Constant <code>serialVersionUID=-2868833097364223352L</code>. */
     private static final long serialVersionUID = -2868833097364223352L;
-    private int glowSize;
-    private Color glowColor;
+    private Color outlineColor;
+    private final static int outlineSize = 1; 
     private boolean wrap;
 
     /**
@@ -68,9 +68,8 @@ public class GlowText extends JLabel {
      * @param intensity
      *            a float.
      */
-    public final void setGlow(final Color glowColor, int size, float intensity) {
-        this.glowColor = glowColor;
-        this.glowSize = size;
+    public final void setGlow(final Color glowColor) {
+        this.outlineColor = glowColor;
     }
 
     /**
@@ -95,8 +94,8 @@ public class GlowText extends JLabel {
     @Override
     public final Dimension getPreferredSize() {
         Dimension size = super.getPreferredSize();
-        size.width += glowSize;
-        size.height += glowSize / 2;
+        size.width += outlineSize * 2;
+        size.height += outlineSize * 2;
         return size;
     }
 
@@ -113,21 +112,27 @@ public class GlowText extends JLabel {
             return;
         }
 
+        Dimension size = getSize();
+//
+//        if( size.width < 50 ) {
+//            g.setColor(Color.cyan);
+//            g.drawRect(0, 0, size.width-1, size.height-1);
+//        }
+        
         Graphics2D g2d = (Graphics2D) g;
+        
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g2d.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
 
-        Dimension size = getSize();
-        int textX = 0, textY = 0;
-        int wrapWidth = Math.max(0, wrap ? size.width - glowSize : Integer.MAX_VALUE);
+        int textX = outlineSize, textY = 0;
+        int wrapWidth = Math.max(0, wrap ? size.width - outlineSize * 2 : Integer.MAX_VALUE);
 
         AttributedString attributedString = new AttributedString(getText());
         attributedString.addAttribute(TextAttribute.FONT, getFont());
         AttributedCharacterIterator charIterator = attributedString.getIterator();
         FontRenderContext fontContext = g2d.getFontRenderContext();
 
-        LineBreakMeasurer measurer = new LineBreakMeasurer(charIterator, BreakIterator.getWordInstance(Locale.ENGLISH),
-                fontContext);
+        LineBreakMeasurer measurer = new LineBreakMeasurer(charIterator, BreakIterator.getWordInstance(Locale.ENGLISH), fontContext);
         int lineCount = 0;
         while (measurer.getPosition() < charIterator.getEndIndex()) {
             measurer.nextLayout(wrapWidth);
@@ -139,8 +144,7 @@ public class GlowText extends JLabel {
         charIterator.first();
         // Use char wrap if word wrap would cause more than two lines of text.
         if (lineCount > 2) {
-            measurer = new LineBreakMeasurer(charIterator, BreakIterator.getCharacterInstance(Locale.ENGLISH),
-                    fontContext);
+            measurer = new LineBreakMeasurer(charIterator, BreakIterator.getCharacterInstance(Locale.ENGLISH), fontContext);
         } else {
             measurer.setPosition(0);
         }
@@ -149,24 +153,21 @@ public class GlowText extends JLabel {
             float ascent = textLayout.getAscent();
             textY += ascent; // Move down to baseline.
 
-            g2d.setColor(glowColor);
+            g2d.setColor(outlineColor);
             g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.8f));
-            textLayout.draw(g2d, textX + glowSize / 2 + 1, textY + glowSize / 2 - 1);
-            textLayout.draw(g2d, textX + glowSize / 2 + 1, textY + glowSize / 2 + 1);
-            textLayout.draw(g2d, textX + glowSize / 2 - 1, textY + glowSize / 2 - 1);
-            textLayout.draw(g2d, textX + glowSize / 2 - 1, textY + glowSize / 2 + 1);
+            
+            
+            textLayout.draw(g2d, textX + outlineSize, textY - outlineSize);
+            textLayout.draw(g2d, textX + outlineSize, textY + outlineSize);
+            textLayout.draw(g2d, textX - outlineSize, textY - outlineSize);
+            textLayout.draw(g2d, textX - outlineSize, textY + outlineSize);
 
             g2d.setColor(getForeground());
             g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1.0f));
-            textLayout.draw(g2d, textX + glowSize / 2, textY + glowSize / 2);
+            textLayout.draw(g2d, textX, textY);
 
-            textY += textLayout.getDescent() + textLayout.getLeading(); // Move
-                                                                        // down
-                                                                        // to
-                                                                        // top
-                                                                        // of
-                                                                        // next
-                                                                        // line.
+            // Move down to top of next line.
+            textY += textLayout.getDescent() + textLayout.getLeading();
         }
     }
 }

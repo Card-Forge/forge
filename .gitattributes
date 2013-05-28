@@ -14689,7 +14689,7 @@ src/main/java/forge/view/arcane/ViewPanel.java svneol=native#text/plain
 src/main/java/forge/view/arcane/package-info.java svneol=native#text/plain
 src/main/java/forge/view/arcane/util/Animation.java svneol=native#text/plain
 src/main/java/forge/view/arcane/util/CardPanelMouseListener.java svneol=native#text/plain
-src/main/java/forge/view/arcane/util/GlowText.java svneol=native#text/plain
+src/main/java/forge/view/arcane/util/OutlinedLabel.java svneol=native#text/plain
 src/main/java/forge/view/arcane/util/package-info.java svneol=native#text/plain
 src/main/java/forge/view/package-info.java svneol=native#text/plain
 src/main/resources/no_card.jpg -text
