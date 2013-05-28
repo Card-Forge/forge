@@ -308,6 +308,7 @@ public final class GuiDisplayUtil {
                 if( !inp.hasCancelled() )
                     for(Card c : inp.getSelected())
                         c.tap();
+                game.getInputQueue().updateObservers();
             }
         });
     }
@@ -332,6 +333,7 @@ public final class GuiDisplayUtil {
                 if( !inp.hasCancelled() )
                     for(Card c : inp.getSelected())
                         c.untap();
+                game.getInputQueue().updateObservers();
             }
         });
     }
