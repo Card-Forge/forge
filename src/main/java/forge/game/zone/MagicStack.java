@@ -523,13 +523,11 @@ public class MagicStack extends MyObservable implements Iterable<SpellAbilitySta
             }
         }
         
-        chooseOrderOfSimultaneousStackEntryAll();
-        // WHAT DOES THIS DO?
-        /*
         if (!this.getSimultaneousStackEntryList().isEmpty()) {
-            game.getPhaseHandler().passPriority();
+            chooseOrderOfSimultaneousStackEntryAll();
+            // Why should we pass priority after adding something to a stack?
+            // game.getPhaseHandler().passPriority();
         }
-        */
     }
 
     /**
