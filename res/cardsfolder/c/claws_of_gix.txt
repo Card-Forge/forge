@@ -2,6 +2,7 @@ Name:Claws of Gix
 ManaCost:0
 Types:Artifact
 A:AB$ GainLife | Cost$ 1 Sac<1/Permanent> | LifeAmount$ 1 | SpellDescription$ You gain 1 life.
+SVar:NonStackingEffect:True
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/claws_of_gix.jpg
 Oracle:{1}, Sacrifice a permanent: You gain 1 life.

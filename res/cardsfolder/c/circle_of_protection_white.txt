@@ -6,6 +6,7 @@ SVar:DBEffect:DB$ Effect | ReplacementEffects$ RPreventNextFromSource | Remember
 SVar:RPreventNextFromSource:Event$ DamageDone | ValidSource$ Card.IsRemembered | ValidTarget$ You | ReplaceWith$ ExileEffect | PreventionEffect$ True | Description$ The next time the chosen source deals damage to you, prevent that damage.
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:NonStackingEffect:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/circle_of_protection_white.jpg
 Oracle:{1}: The next time a white source of your choice would deal damage to you this turn, prevent that damage.

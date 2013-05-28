@@ -3,6 +3,7 @@ ManaCost:3 B G
 Types:Enchantment
 A:AB$ Mana | Cost$ ExileFromHand<1/Card> | Produced$ B | Amount$ 2 | SpellDescription$ Add B B to your mana pool.
 A:AB$ Mana | Cost$ ExileFromHand<1/Card> | Produced$ G | Amount$ 2 | SpellDescription$ Add G G to your mana pool.
+SVar:NonStackingEffect:True
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cadaverous_bloom.jpg
 Oracle:Exile a card from your hand: Add {B}{B} or {G}{G} to your mana pool.

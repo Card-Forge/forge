@@ -3,6 +3,7 @@ ManaCost:2 W
 Types:Enchantment
 A:AB$ Destroy | Cost$ W Sac<1/Enchantment> | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment | SpellDescription$ Destroy target enchantment.
 A:AB$ Counter | Cost$ 3 U U | TargetType$ Spell | TgtPrompt$ Select target Enchantment | ValidTgts$ Enchantment | SpellDescription$ Counter target enchantment spell.
+SVar:NonStackingEffect:True
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/arensons_aura.jpg
 Oracle:{W}, Sacrifice an enchantment: Destroy target enchantment.\n{3}{U}{U}: Counter target enchantment spell.

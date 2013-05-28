@@ -6,7 +6,8 @@ SVar:DBEffect:DB$ Effect | ReplacementEffects$ RPreventNextFromCreature | Rememb
 SVar:RPreventNextFromCreature:Event$ DamageDone | ValidSource$ Card.IsRemembered | ValidTarget$ You | ReplaceWith$ ExileEffect | PreventionEffect$ True | Description$ The next time a creature of your choice with shadow would deal damage to you, prevent that damage.
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:RemAIDeck:True
+SVar:NonStackingEffect:True
+SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/circle_of_protection_shadow.jpg
 Oracle:{1}: The next time a creature of your choice with shadow would deal damage to you this turn, prevent that damage.
 SetInfo:TMP Common

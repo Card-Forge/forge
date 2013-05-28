@@ -4,6 +4,7 @@ Types:Enchantment
 A:AB$ ChangeZone | Cost$ R | Origin$ Hand | Destination$ Battlefield | ChangeType$ Creature.YouCtrl | SubAbility$ DBPump | RememberChanged$ True | ForgetOtherRemembered$ True | SpellDescription$ You may put a creature card from your hand onto the battlefield. That creature gains haste. Sacrifice the creature at the beginning of the next end step.
 SVar:DBPump:DB$ Pump | KW$ Haste & HIDDEN At the beginning of the end step, sacrifice CARDNAME. | Defined$ Remembered | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:NonStackingEffect:True
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sneak_attack.jpg
 Oracle:{R}: You may put a creature card from your hand onto the battlefield. That creature gains haste. Sacrifice the creature at the beginning of the next end step.

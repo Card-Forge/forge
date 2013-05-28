@@ -2,6 +2,7 @@ Name:Crackling Perimeter
 ManaCost:1 R
 Types:Enchantment
 A:AB$ DealDamage | Cost$ tapXType<1/Gate> | Defined$ Player.Opponent | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to each opponent.
+SVar:NonStackingEffect:True
 SVar:RemRandomDeck:True
 DeckNeeds:Type$Gate
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crackling_perimeter.jpg
