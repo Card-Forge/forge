@@ -2448,6 +2448,32 @@ public class Player extends GameEntity implements Comparable<Player> {
                     return false;
                 }
             }
+            else if (property.substring(8).startsWith("Type")) {
+                String type = property.split("Type")[1];
+                boolean checkOnly = false;
+                if (type.endsWith("Only")) {
+                    checkOnly = true;
+                    type = type.replace("Only", "");
+                }
+                int typeNum = 0;
+                List<Player> controlmost = new ArrayList<Player>();
+                for (final Player p : game.getPlayers()) {
+                    final int num = CardLists.getType(p.getCardsIn(ZoneType.Battlefield), type).size();
+                    if (num > typeNum) {
+                        typeNum = num;
+                        controlmost.clear();
+                    }
+                    if (num == typeNum) {
+                        controlmost.add(p);
+                    }
+                }
+                if (checkOnly && controlmost.size() != 1) {
+                    return false;
+                }
+                if (!controlmost.contains(this)) {
+                    return false;
+                }
+            }
         } else if (property.startsWith("withLowest")) {
             if (property.substring(10).equals("Life")) {
                 int lowestLife = 1000;

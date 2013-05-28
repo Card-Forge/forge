@@ -11186,6 +11186,7 @@ res/cardsfolder/t/thought_prison.txt -text svneol=unset#text/plain
 res/cardsfolder/t/thought_reflection.txt -text
 res/cardsfolder/t/thought_scour.txt -text
 res/cardsfolder/t/thoughtbind.txt svneol=native#text/plain
+res/cardsfolder/t/thoughtbound_primoc.txt -text
 res/cardsfolder/t/thoughtcast.txt svneol=native#text/plain
 res/cardsfolder/t/thoughtcutter_agent.txt svneol=native#text/plain
 res/cardsfolder/t/thoughtflare.txt -text
@@ -12422,6 +12423,7 @@ res/cardsfolder/w/wild_guess.txt -text
 res/cardsfolder/w/wild_hunger.txt -text
 res/cardsfolder/w/wild_jhovall.txt svneol=native#text/plain
 res/cardsfolder/w/wild_leotau.txt svneol=native#text/plain
+res/cardsfolder/w/wild_mammoth.txt -text
 res/cardsfolder/w/wild_might.txt -text
 res/cardsfolder/w/wild_mongrel.txt svneol=native#text/plain
 res/cardsfolder/w/wild_nacatl.txt svneol=native#text/plain

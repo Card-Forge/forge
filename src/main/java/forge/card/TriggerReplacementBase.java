@@ -278,6 +278,22 @@ public abstract class TriggerReplacementBase {
                 return false;
             }
         }
+
+        if (params.containsKey("CheckDefinedPlayer")) {
+            final String sIsPresent = params.get("CheckDefinedPlayer");
+            int playersize = AbilityUtils.getDefinedPlayers(game.getCardState(this.getHostCard()), sIsPresent, 
+                    this.getHostCard().getFirstSpellAbility()).size();
+            String comparator = "GE1";
+            if (params.containsKey("DefinedPlayerCompare")) {
+                comparator = params.get("DefinedPlayerCompare");
+            }
+            final String svarOperator = comparator.substring(0, 2);
+            final String svarOperand = comparator.substring(2);
+            final int operandValue = AbilityUtils.calculateAmount(game.getCardState(this.getHostCard()), svarOperand, null);
+            if (!Expressions.compare(playersize, svarOperator, operandValue)) {
+                return false;
+            }
+        }
     
         if (params.containsKey("CheckSVar")) {
             final int sVar = AbilityUtils.calculateAmount(game.getCardState(this.getHostCard()), params.get("CheckSVar"), null);

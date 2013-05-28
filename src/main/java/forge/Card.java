@@ -3773,7 +3773,7 @@ public class Card extends GameEntity implements Comparable<Card> {
 
         total += this.getCounters(CounterType.P1P1) + this.getCounters(CounterType.P1P2) + this.getCounters(CounterType.P1P0) 
                 - this.getCounters(CounterType.M1M1) + 2 * this.getCounters(CounterType.P2P2) - 2 * this.getCounters(CounterType.M2M1)
-                - 2 * this.getCounters(CounterType.M2M2) - this.getCounters(CounterType.M1M0);
+                - 2 * this.getCounters(CounterType.M2M2) - this.getCounters(CounterType.M1M0) + 2 * this.getCounters(CounterType.P2P0);
         return total;
     }
 
@@ -3827,7 +3827,8 @@ public class Card extends GameEntity implements Comparable<Card> {
 
         total += this.getCounters(CounterType.P1P1) + 2 * this.getCounters(CounterType.P1P2) - this.getCounters(CounterType.M1M1)
                 + this.getCounters(CounterType.P0P1) - 2 * this.getCounters(CounterType.M0M2) + 2 * this.getCounters(CounterType.P2P2)
-                - this.getCounters(CounterType.M0M1) - this.getCounters(CounterType.M2M1) - 2 * this.getCounters(CounterType.M2M2);
+                - this.getCounters(CounterType.M0M1) - this.getCounters(CounterType.M2M1) - 2 * this.getCounters(CounterType.M2M2)
+                + 2 * this.getCounters(CounterType.P0P2);
         return total;
     }
 
