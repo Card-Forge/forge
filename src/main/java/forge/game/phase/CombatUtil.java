@@ -1180,7 +1180,10 @@ public class CombatUtil {
      *            a {@link forge.Card} object.
      */
     public static void checkBlockedAttackers(final GameState game, final Card a, final List<Card> blockers) {
-        // System.out.println(a.getName() + " got blocked by " + b.getName());
+
+        if (blockers.isEmpty()) {
+            return;
+        }
 
         // Run triggers
         final HashMap<String, Object> runParams = new HashMap<String, Object>();
@@ -1188,7 +1191,6 @@ public class CombatUtil {
         runParams.put("Blockers", blockers);
         runParams.put("NumBlockers", blockers.size());
         game.getTriggerHandler().runTrigger(TriggerType.AttackerBlocked, runParams, false);
-        //game.getTriggerHandler().runTrigger(TriggerType.Blocks, runParams, false);
 
         if (!a.getDamageHistory().getCreatureGotBlockedThisCombat()) {
             // Bushido
