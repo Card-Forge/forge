@@ -1,10 +1,11 @@
 Name:Words of Wind
 ManaCost:2 U
 Types:Enchantment
-A:AB$ Effect | Cost$ 1 | Name$ Words of Wind Effect | ReplacementEffects$ DrawReplace | SVars$ ExileEffect,BounceYou,BounceOpp | SpellDescription$ The next time you would draw a card this turn, each player returns a permanent he or she controls to its owner's hand instead.
-SVar:DrawReplace:Event$ Draw | ValidPlayer$ You | ReplaceWith$ BounceYou | Description$ The next time you would draw a card this turn, each player returns a permanent he or she controls to its owner's hand instead.
-SVar:BounceYou:AB$ ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Hand | ChangeType$ Permanent.YouCtrl | ChangeNum$ 1 | Hidden$ True | IsCurse$ True | SubAbility$ BounceOpp
-SVar:BounceOpp:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | DefinedPlayer$ Opponent | ChangeType$ Permanent.YouDontCtrl | ChangeNum$ 1 | Hidden$ True | IsCurse$ True | SubAbility$ ExileEffect
+A:AB$ Effect | Cost$ 1 | Name$ Words of Wind Effect | ReplacementEffects$ DrawReplace | SVars$ Repeat,PlayChoose,BounceAll,ExileEffect | SpellDescription$ The next time you would draw a card this turn, each player returns a permanent he or she controls to its owner's hand instead.
+SVar:DrawReplace:Event$ Draw | ValidPlayer$ You | ReplaceWith$ Repeat | Description$ The next time you would draw a card this turn, each player returns a permanent he or she controls to its owner's hand instead.
+SVar:Repeat:DB$ RepeatEach | Cost$ 0 | RepeatPlayers$ Player | RepeatSubAbility$ PlayChoose | SubAbility$ BounceAll
+SVar:PlayChoose:DB$ ChooseCard | Defined$ Player.IsRemembered | Choices$ Permanent.RememberedPlayerCtrl | Amount$ 1 | Mandatory$ True | AILogic$ WorstCard | ChoiceTitle$ Choose a permanent you control | RememberChosen$ True
+SVar:BounceAll:DB$ ChangeZoneAll | Cost$ 0 | Origin$ Battlefield | Destination$ Hand | ChangeType$ Permanent.IsRemembered | SubAbility$ ExileEffect
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/words_of_wind.jpg
