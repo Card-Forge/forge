@@ -522,7 +522,8 @@ public class MagicStack extends MyObservable implements Iterable<SpellAbilitySta
                 game.getTriggerHandler().runTrigger(TriggerType.BecomesTarget, runParams, false);
             }
         }
-
+        
+        chooseOrderOfSimultaneousStackEntryAll();
         // WHAT DOES THIS DO?
         /*
         if (!this.getSimultaneousStackEntryList().isEmpty()) {
