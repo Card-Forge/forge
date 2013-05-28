@@ -49,7 +49,7 @@ public class RestartGameEffect extends SpellAbilityEffect {
         }
 
         GameNew.restartGame(game, sa.getActivatingPlayer(), playerLibraries);
-        game.getInputQueue().lock(); // restore the 'locked' state of the input, 
+ 
         // because the caller method (invokeInNewThread) will try to unlock input. Restart has removed that input state.
     }
 

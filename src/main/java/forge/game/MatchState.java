@@ -9,7 +9,6 @@ import com.google.common.collect.Lists;
 
 import forge.Card;
 import forge.Singletons;
-import forge.control.FControl;
 import forge.game.event.CardsAntedEvent;
 import forge.game.event.DuelFinishedEvent;
 import forge.game.event.DuelOutcomeEvent;
@@ -24,7 +23,7 @@ import forge.util.Aggregates;
  * 
  */
 
-public class MatchController {
+public class MatchState {
 
     private final List<Pair<LobbyPlayer, PlayerStartConditions>> players;
     private final GameType gameType;
@@ -42,13 +41,13 @@ public class MatchController {
     /**
      * This should become constructor once.
      */
-    public MatchController(GameType type, List<Pair<LobbyPlayer, PlayerStartConditions>> players0) {
+    public MatchState(GameType type, List<Pair<LobbyPlayer, PlayerStartConditions>> players0) {
         gamesPlayedRo = Collections.unmodifiableList(gamesPlayed);
         players = Collections.unmodifiableList(Lists.newArrayList(players0));
         gameType = type;
     }
     
-    public MatchController(GameType type, List<Pair<LobbyPlayer, PlayerStartConditions>> players0, Boolean overrideAnte) {
+    public MatchState(GameType type, List<Pair<LobbyPlayer, PlayerStartConditions>> players0, Boolean overrideAnte) {
         this(type, players0);
         if( overrideAnte != null )
             this.useAnte = overrideAnte.booleanValue();
@@ -103,7 +102,7 @@ public class MatchController {
 
         currentGame = new GameState(players, gameType, this);
         
-        FControl.SINGLETON_INSTANCE.attachToGame(currentGame);
+        Singletons.getControl().attachToGame(currentGame);
 
         final boolean canRandomFoil = Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_RANDOM_FOIL) && gameType == GameType.Constructed;
         GameNew.newGame(currentGame, canRandomFoil, this.useAnte);
@@ -115,7 +114,7 @@ public class MatchController {
         }
 
         // This code was run from EDT.
-        currentGame.getInputQueue().invokeGameAction(new Runnable() {
+        currentGame.getAction().invoke(new Runnable() {
             @Override
             public void run() {
                 final Player firstPlayer = determineFirstTurnPlayer(getLastGameOutcome(), currentGame);

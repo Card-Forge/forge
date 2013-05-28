@@ -66,7 +66,7 @@ public final class GuiDisplayUtil {
         Map<String, String> produced = new HashMap<String, String>();
         produced.put("Produced", "W W W W W W W U U U U U U U B B B B B B B G G G G G G G R R R R R R R 7");
         final AbilityManaPart abMana = new AbilityManaPart(dummy, produced);
-        getGame().getInputQueue().invokeGameAction(new Runnable() {
+        getGame().getAction().invoke(new Runnable() {
             @Override public void run() { abMana.produceMana(null); }
         });
     }
@@ -139,7 +139,7 @@ public final class GuiDisplayUtil {
             final Map<ZoneType, String> aiCardTexts, final String tChangePlayer, final String tChangePhase) {
         
         final GameState game = getGame();
-        game.getInputQueue().invokeGameAction(new Runnable() {
+        game.getAction().invoke(new Runnable() {
             @Override
             public void run() {
                 final Player human = game.getPlayers().get(0);
@@ -297,18 +297,17 @@ public final class GuiDisplayUtil {
      */
     public static void devModeTapPerm() {
         final GameState game = getGame();
-        game.getInputQueue().invokeGameAction(new Runnable() {
+        game.getAction().invoke(new Runnable() {
             @Override
             public void run() {
                 final List<Card> untapped = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), Predicates.not(CardPredicates.Presets.TAPPED));
                 InputSelectCardsFromList inp = new InputSelectCardsFromList(0, Integer.MAX_VALUE, untapped);
                 inp.setCancelAllowed(true);
                 inp.setMessage("Choose permanents to tap");
-                game.getInputQueue().setInputAndWait(inp);
+                Singletons.getControl().getInputQueue().setInputAndWait(inp);
                 if( !inp.hasCancelled() )
                     for(Card c : inp.getSelected())
                         c.tap();
-                game.getInputQueue().updateObservers();
             }
         });
     }
@@ -322,18 +321,20 @@ public final class GuiDisplayUtil {
      */
     public static void devModeUntapPerm() {
         final GameState game = getGame();
-        game.getInputQueue().invokeGameAction(new Runnable() {
+        
+        
+
+        game.getAction().invoke(new Runnable() {
             @Override
             public void run() {
                 final List<Card> tapped = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.TAPPED);
                 InputSelectCardsFromList inp = new InputSelectCardsFromList(0, Integer.MAX_VALUE, tapped);
                 inp.setCancelAllowed(true);
                 inp.setMessage("Choose permanents to untap");
-                game.getInputQueue().setInputAndWait(inp);
+                Singletons.getControl().getInputQueue().setInputAndWait(inp);
                 if( !inp.hasCancelled() )
                     for(Card c : inp.getSelected())
                         c.untap();
-                game.getInputQueue().updateObservers();
             }
         });
     }
@@ -427,14 +428,14 @@ public final class GuiDisplayUtil {
                 return; // happens if cancelled
             }
 
-            game.getInputQueue().invokeGameAction(new Runnable() {
+            game.getAction().invoke(new Runnable() {
                 @Override
                 public void run() {
                     game.getAction().moveToHand(forgeCard); // this is really needed (for rollbacks at least) 
                     // Human player is choosing targets for an ability controlled by chosen player. 
                     sa.setActivatingPlayer(p);
                     HumanPlay.playSaWithoutPayingManaCost(game, sa);
-                    game.getInputQueue().updateObservers(); // priority can be on AI side, need this update for that case
+                    Singletons.getControl().getInputQueue().updateObservers(); // priority can be on AI side, need this update for that case
                 }
             });
         }
@@ -489,7 +490,7 @@ public final class GuiDisplayUtil {
         
         PlanarDice.roll(p, res);
         
-        getGame().getInputQueue().invokeGameAction(new Runnable() {
+        getGame().getAction().invoke(new Runnable() {
             @Override
             public void run() {
                 p.getGame().getStack().chooseOrderOfSimultaneousStackEntryAll();

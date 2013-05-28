@@ -30,9 +30,9 @@ import javax.swing.JOptionPane;
 import forge.Card;
 import forge.CardLists;
 import forge.FThreads;
+import forge.Singletons;
 import forge.CardPredicates.Presets;
 import forge.Command;
-import forge.control.FControl;
 import forge.deck.Deck;
 import forge.game.GameState;
 import forge.game.phase.CombatUtil;
@@ -72,7 +72,7 @@ public enum CDock implements ICDoc {
     }
 
     public Player findAffectedPlayer() { 
-        return FControl.SINGLETON_INSTANCE.getCurrentPlayer();
+        return Singletons.getControl().getCurrentPlayer();
     }
 
     /** Concede game, bring up WinLose UI. */
@@ -88,7 +88,7 @@ public enum CDock implements ICDoc {
             return;
         }
 
-        game.getInputQueue().invokeGameAction(new Runnable() {
+        game.getAction().invoke(new Runnable() {
             @Override
             public void run() {
                 p.concede();

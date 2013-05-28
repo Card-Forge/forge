@@ -99,7 +99,7 @@ public class InputConfirmMulligan extends InputSyncronizedBase {
     }
 
     @Override
-    protected void onCardSelected(Card c0) { // the only place that would cause troubles - input is supposed only to confirm, not to fire abilities 
+    protected void onCardSelected(Card c0, boolean isRmb) { // the only place that would cause troubles - input is supposed only to confirm, not to fire abilities 
         
         boolean fromHand = player.getZone(ZoneType.Hand).contains(c0);
         boolean isSerumPowder = c0.getName().equals("Serum Powder");

@@ -40,6 +40,7 @@ import forge.FThreads;
 import forge.Constant.Preferences;
 import forge.Singletons;
 import forge.control.KeyboardShortcuts.Shortcut;
+import forge.control.input.InputQueue;
 import forge.game.GameState;
 import forge.game.ai.AiProfileUtil;
 import forge.game.event.CardsAntedEvent;
@@ -87,8 +88,7 @@ import forge.view.FView;
  * separately by each state's top level view class.
  */
 public enum FControl {
-    /** */
-    SINGLETON_INSTANCE;
+    instance; 
 
     private List<Shortcut> shortcuts;
     private JLayeredPane display;
@@ -362,8 +362,16 @@ public enum FControl {
         return game;
     }
 
+    private InputQueue inputQueue;
+    public InputQueue getInputQueue() {
+        return inputQueue;
+    }
+
+    
     public void attachToGame(GameState game0) {
         // TODO: Detach from other game we might be looking at
+        
+        inputQueue = new InputQueue();
         
         this.game = game0;
         game.getEvents().register(Singletons.getControl().getSoundSystem());

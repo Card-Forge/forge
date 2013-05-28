@@ -13,7 +13,7 @@ import forge.control.FControl;
 import forge.deck.Deck;
 import forge.game.GameOutcome;
 import forge.game.GameType;
-import forge.game.MatchController;
+import forge.game.MatchState;
 import forge.game.PlayerStartConditions;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
@@ -31,11 +31,11 @@ import forge.properties.ForgePreferences.FPref;
  */
 public class ControlWinLose {
     private final ViewWinLose view;
-    protected final MatchController match;
+    protected final MatchState match;
 
     /** @param v &emsp; ViewWinLose
      * @param match */
-    public ControlWinLose(final ViewWinLose v, MatchController match) {
+    public ControlWinLose(final ViewWinLose v, MatchState match) {
         this.view = v;
         this.match = match;
         addListeners();

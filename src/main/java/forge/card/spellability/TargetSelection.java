@@ -24,6 +24,7 @@ import com.google.common.base.Predicate;
 
 import forge.Card;
 import forge.CardLists;
+import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.control.input.InputSelectTargets;
 import forge.game.GameState;
@@ -109,7 +110,7 @@ public class TargetSelection {
             List<Card> validTargets = this.getValidCardsToTarget();
             if (zone.size() == 1 && zone.get(0) == ZoneType.Battlefield) {
                 InputSelectTargets inp = new InputSelectTargets(validTargets, ability, mandatory);
-                ability.getActivatingPlayer().getGame().getInputQueue().setInputAndWait(inp);
+                Singletons.getControl().getInputQueue().setInputAndWait(inp);
                 choiceResult = !inp.hasCancelled();
                 bTargetingDone = inp.hasPressedOk();
             } else {

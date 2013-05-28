@@ -19,7 +19,6 @@ package forge.control.input;
 
 import forge.Card;
 import forge.card.spellability.SpellAbility;
-import forge.game.player.HumanPlay;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.view.ButtonUtil;
@@ -32,16 +31,15 @@ import forge.view.ButtonUtil;
  * @author Forge
  * @version $Id$
  */
-public class InputPassPriority extends InputPassPriorityBase {
+public class InputPassPriority extends InputSyncronizedBase {
     /** Constant <code>serialVersionUID=-581477682214137181L</code>. */
     private static final long serialVersionUID = -581477682214137181L;
+    private final Player player;
     
-    /**
-     * TODO: Write javadoc for Constructor.
-     * @param player
-     */
+    private SpellAbility chosenSa;
+    
     public InputPassPriority(Player human) {
-        super(human);
+        player = human;
     }
 
     /** {@inheritDoc} */
@@ -50,33 +48,29 @@ public class InputPassPriority extends InputPassPriorityBase {
         for (Player p : player.getGame().getRegisteredPlayers()) {
             p.getZone(ZoneType.Battlefield).updateObservers();
         }
-        showMessage(getTurnPhasePriorityMessage());
+        showMessage(getTurnPhasePriorityMessage(player));
+        chosenSa = null;
         ButtonUtil.enableOnlyOk();
     }
 
     /** {@inheritDoc} */
     @Override
-    public final void selectButtonOK() {
-        if( isFinished() ) return;
-        pass();
+    protected final void onOk() {
+        stop();
     }
+    
+    public SpellAbility getChosenSa() { return chosenSa; }
 
-    /** {@inheritDoc} */
+
     @Override
-    public final void selectCard(final Card card, boolean isMetaDown) {
+    protected void onCardSelected(Card card, boolean isRmb) {
         final SpellAbility ab = player.getController().getAbilityToPlay(player.getGame().getAbilitesOfCard(card, player));
         if ( null != ab) {
-            Runnable execAbility = new Runnable() {
-                @Override
-                public void run() {
-                    HumanPlay.playSpellAbility(player, card, ab);
-                }
-            };
-            
-            player.getGame().getInputQueue().invokeGameAction(execAbility);
+            chosenSa = ab;
+            stop();
         }
         else {
             flashIncorrectAction();
         }
-    } // selectCard()
+    }
 }

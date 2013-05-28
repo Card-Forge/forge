@@ -11,6 +11,7 @@ import forge.CardCharacteristicName;
 import forge.CardLists;
 import forge.CardPredicates;
 import forge.GameEntity;
+import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.ability.ai.ChangeZoneAi;
@@ -746,7 +747,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     InputSelectCardsFromList inp = new InputSelectCardsFromList(1, 1, fetchList);
                     inp.setCancelAllowed(!mustChoose);
                     inp.setMessage(selectPrompt);
-                    game.getInputQueue().setInputAndWait(inp);
+                    Singletons.getControl().getInputQueue().setInputAndWait(inp);
                     c = inp.hasCancelled() ? null : inp.getSelected().get(0);
                 }
                 else {

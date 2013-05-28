@@ -5,8 +5,8 @@ import java.util.List;
 import java.util.Map;
 
 import forge.Card;
+import forge.Singletons;
 import forge.card.spellability.SpellAbility;
-import forge.control.FControl;
 import forge.game.event.BlockerAssignedEvent;
 import forge.game.event.CardDamagedEvent;
 import forge.game.event.CardDestroyedEvent;
@@ -81,7 +81,7 @@ public class EventVisualizer {
             return getSoundEffectForTapState(((SetTappedEvent) evt).Tapped);
         }
         if (evt instanceof DuelOutcomeEvent) {
-            return getSoundEffectForDuelOutcome(((DuelOutcomeEvent) evt).result.getWinner() == FControl.SINGLETON_INSTANCE.getLobby().getGuiPlayer());
+            return getSoundEffectForDuelOutcome(((DuelOutcomeEvent) evt).result.getWinner() == Singletons.getControl().getLobby().getGuiPlayer());
         }
 
         return fromMap;

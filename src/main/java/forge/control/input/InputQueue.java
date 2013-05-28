@@ -20,14 +20,7 @@ package forge.control.input;
 import java.util.concurrent.BlockingDeque;
 import java.util.concurrent.LinkedBlockingDeque;
 
-import forge.FThreads;
-import forge.game.GameAge;
 import forge.game.GameState;
-import forge.game.phase.PhaseHandler;
-import forge.game.phase.PhaseType;
-import forge.game.player.Player;
-import forge.game.player.PlayerController;
-import forge.game.zone.MagicStack;
 import forge.util.MyObservable;
 
 /**
@@ -89,12 +82,9 @@ public class InputQueue extends MyObservable implements java.io.Serializable {
 
         if( topMostInput != inp )
             throw new RuntimeException("Cannot remove input " + inp.getClass().getSimpleName() + " because it's not on top of stack. Stack = " + inputStack );
+        updateObservers();
     }
 
-    public final boolean isEmpty() {
-        return inputStack.isEmpty();
-    }
-    
     /**
      * <p>
      * updateInput.
@@ -103,88 +93,12 @@ public class InputQueue extends MyObservable implements java.io.Serializable {
      * @return a {@link forge.control.input.InputBase} object.
      */
     public final Input getActualInput(GameState game) {
-        GameAge age = game.getAge();
-
-        if ( game.isGameOver() )
-            return inputLock;
-        
         Input topMost = inputStack.peek(); // incoming input to Control
-        if (topMost != null )
+        if (topMost != null && !game.isGameOver() )
             return topMost;
 
-        if ( age != GameAge.Play )
-            return inputLock;
-
-        final PhaseHandler handler = game.getPhaseHandler();
-
-        final Player playerTurn = handler.getPlayerTurn();
-        final Player priority = handler.getPriorityPlayer();
-        if (priority == null) 
-            throw new RuntimeException("No player has priority!");
-        PlayerController pc = priority.getController();
-
-        // If the Phase we're in doesn't allow for Priority, move to next phase
-        if (!handler.isPlayerPriorityAllowed()) {
-            return pc.getAutoPassPriorityInput();
-        }
-
-        // Special Inputs needed for the following phases:
-        final PhaseType phase = handler.getPhase();
-        final MagicStack stack = game.getStack();
-        switch (phase) {
-            case COMBAT_DECLARE_ATTACKERS:
-                stack.freezeStack();
-                if (!playerTurn.getController().mayAutoPass(phase)) {
-                    game.getCombat().initiatePossibleDefenders(playerTurn.getOpponents());
-                    return playerTurn.getController().getAttackInput();
-                }
-                break;
-
-            case COMBAT_DECLARE_BLOCKERS:
-                stack.freezeStack();
-
-                boolean isAttacked = game.getCombat().isPlayerAttacked(priority);
-                return isAttacked ? pc.getBlockInput() : pc.getAutoPassPriorityInput();
-
-            case CLEANUP:
-                // discard
-                if (stack.isEmpty()) {
-                    // resolve things like Madness
-                    return pc.getCleanupInput();
-                }
-                break;
-            default:
-                break;
-        }
-
-        // *********************
-        // Special phases handled above, everything else is handled simply by
-        // priority
-
-        boolean maySkipPriority = pc.mayAutoPass(phase) || pc.isUiSetToSkipPhase(playerTurn, phase);
-        if (game.getStack().isEmpty() && maySkipPriority) {
-            return pc.getAutoPassPriorityInput();
-        } else
-            pc.autoPassCancel(); // probably cancel, since something has happened
-
-         return pc.getDefaultInput();
+        return inputLock;
     } // getInput()
-
-
-    public void lock() {
-        this.inputStack.push(inputLock);
-        this.updateObservers();
-    }
-    
-    public void unlock() { 
-        FThreads.assertExecutedByEdt(false);
-        
-        if ( inputStack.isEmpty() || inputStack.peek() != inputLock )
-            throw new RuntimeException("Trying to unlock input which is not locked (threading issue)! Input stack = " + inputStack);
-
-        inputStack.pop();
-        this.updateObservers();
-    }
 
     // only for debug purposes
     public String printInputStack() {
@@ -194,13 +108,6 @@ public class InputQueue extends MyObservable implements java.io.Serializable {
     public void setInputAndWait(InputSynchronized input) {
         this.setInput(input);
         input.awaitLatchRelease();
-    }
-
-    public void invokeGameAction(final Runnable proc) {
-        if( FThreads.isGameThread() ) {
-            proc.run();
-        } else
-            FThreads.invokeInGameThread(proc);
     }
     
 } // InputControl

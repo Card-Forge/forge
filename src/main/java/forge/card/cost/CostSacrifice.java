@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 import forge.Card;
 import forge.CardLists;
+import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.spellability.SpellAbility;
 import forge.control.input.InputSelectCards;
@@ -163,7 +164,7 @@ public class CostSacrifice extends CostPartWithList {
             InputSelectCards inp = new InputSelectCardsFromList(c, c, list);
             inp.setMessage("Select a " + this.getDescriptiveType() + " to sacrifice (%d left)");
             inp.setCancelAllowed(true);
-            game.getInputQueue().setInputAndWait(inp);
+            Singletons.getControl().getInputQueue().setInputAndWait(inp);
             if ( inp.hasCancelled() )
                 return false;
 

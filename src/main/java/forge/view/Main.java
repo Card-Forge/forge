@@ -35,7 +35,7 @@ public final class Main {
         // Start splash screen first, then data models, then controller.
         Singletons.setView(FView.SINGLETON_INSTANCE);
         Singletons.setModel(FModel.SINGLETON_INSTANCE);
-        Singletons.setControl(FControl.SINGLETON_INSTANCE);
+        Singletons.setControl(FControl.instance);
 
         // Controller can now step in and take over.
         Singletons.getControl().initialize();

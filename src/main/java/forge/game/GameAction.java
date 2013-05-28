@@ -922,6 +922,11 @@ public class GameAction {
         if (game.isGameOver())
             return;
 
+        // Max: I don't know where to put this! - but since it's a state based action, it must be in check state effects
+        if(game.getType() == GameType.Archenemy) 
+            game.archenemy904_10();
+
+        
         final boolean refreeze = game.getStack().isFrozen();
         game.getStack().setFrozen(true);
 
@@ -1558,6 +1563,13 @@ public class GameAction {
                 }
                 p.shuffle();
             }
+    }
+    
+    public void invoke(final Runnable proc) {
+        if( FThreads.isGameThread() ) {
+            proc.run();
+        } else
+            FThreads.invokeInGameThread(proc);
     }
 
 }

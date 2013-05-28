@@ -231,7 +231,7 @@ public class CEditorDraftingProcess extends ACEditorBase<CardPrinted, DeckGroup>
             Singletons.getModel().getDecks().getDraft().add(finishedDraft);
         }
 
-        FControl.SINGLETON_INSTANCE.changeState(FControl.Screens.HOME_SCREEN);
+        Singletons.getControl().changeState(FControl.Screens.HOME_SCREEN);
     }
 
     //========== Overridden from ACEditorBase

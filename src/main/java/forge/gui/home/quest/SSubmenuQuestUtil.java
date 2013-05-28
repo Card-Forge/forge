@@ -19,7 +19,7 @@ import forge.control.FControl;
 import forge.control.Lobby;
 import forge.deck.Deck;
 import forge.game.GameType;
-import forge.game.MatchController;
+import forge.game.MatchState;
 import forge.game.PlayerStartConditions;
 import forge.game.player.LobbyPlayer;
 import forge.gui.GuiChoose;
@@ -249,7 +249,7 @@ public class SSubmenuQuestUtil {
         if (!checkActiveQuest("visit the Spell Shop.")) {
             return;
         }
-        FControl.SINGLETON_INSTANCE.changeState(FControl.Screens.DECK_EDITOR_QUEST);
+        Singletons.getControl().changeState(FControl.Screens.DECK_EDITOR_QUEST);
         CDeckEditorUI.SINGLETON_INSTANCE.setCurrentEditorController(
                 new CEditorQuestCardShop(Singletons.getModel().getQuest()));
     }
@@ -442,7 +442,7 @@ public class SSubmenuQuestUtil {
         aiPlayer.setIconImageKey(event.getIconImageKey());
         starter.add(Pair.of(aiPlayer, aiStart));
 
-        final MatchController mc = new MatchController(GameType.Quest, starter, forceAnte);
+        final MatchState mc = new MatchState(GameType.Quest, starter, forceAnte);
         FThreads.invokeInEdtLater(new Runnable(){
             @Override
             public void run() {

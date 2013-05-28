@@ -469,8 +469,6 @@ public class CardPanel extends JPanel implements CardContainer {
         this.ptText.setVisible(showText);
         this.damageText.setVisible(showText);
 
-        final int TEXT_GLOW_SIZE = 1;
-        
         final int titleX = Math.round(imgSize.width * (24f / 480));
         final int titleY = Math.round(imgSize.height * (54f / 640)) - 15;
         final int titleH = Math.round(imgSize.height * (360f / 640));

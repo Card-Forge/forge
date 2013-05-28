@@ -29,7 +29,7 @@ import forge.Singletons;
 import forge.control.Lobby;
 import forge.deck.Deck;
 import forge.game.GameType;
-import forge.game.MatchController;
+import forge.game.MatchState;
 import forge.game.PlayerStartConditions;
 import forge.game.player.LobbyPlayer;
 import forge.gui.SOverlayUtils;
@@ -169,7 +169,7 @@ public class GauntletMini {
         Lobby lobby = Singletons.getControl().getLobby();
         starter.add(Pair.of(lobby.getGuiPlayer(), PlayerStartConditions.fromDeck(humanDeck)));
         starter.add(Pair.of(lobby.getAiPlayer(), aiOpponents.get(currentRound - 1)));
-        final MatchController mc = new MatchController(gauntletType, starter);
+        final MatchState mc = new MatchState(gauntletType, starter);
         FThreads.invokeInEdtLater(new Runnable(){
             @Override
             public void run() {

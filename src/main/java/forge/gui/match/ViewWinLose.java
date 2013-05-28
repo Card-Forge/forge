@@ -19,8 +19,7 @@ import forge.GameLog;
 import forge.GameLogEntry;
 import forge.GameEventType;
 import forge.Singletons;
-import forge.control.FControl;
-import forge.game.MatchController;
+import forge.game.MatchState;
 import forge.game.player.LobbyPlayer;
 import forge.game.player.PlayerStatistics;
 import forge.gui.toolbox.FButton;
@@ -43,7 +42,7 @@ public class ViewWinLose {
     private final JPanel pnlOutcomes = new JPanel(new MigLayout("wrap, align center"));
     
     @SuppressWarnings("serial")
-    public ViewWinLose(MatchController match) {
+    public ViewWinLose(MatchState match) {
         final JPanel overlay = FOverlay.SINGLETON_INSTANCE.getPanel();
 
         final JPanel pnlLeft = new JPanel();
@@ -191,8 +190,8 @@ public class ViewWinLose {
             lblStats.setText(o.message);
     }
 
-    private String composeTitle(MatchController match) {
-        LobbyPlayer guiPlayer = FControl.SINGLETON_INSTANCE.getLobby().getGuiPlayer();
+    private String composeTitle(MatchState match) {
+        LobbyPlayer guiPlayer = Singletons.getControl().getLobby().getGuiPlayer();
         int nHumansInGame = 0;
         for(Pair<LobbyPlayer, PlayerStatistics> pps : match.getLastGameOutcome()) {
             if( pps.getKey() == guiPlayer )

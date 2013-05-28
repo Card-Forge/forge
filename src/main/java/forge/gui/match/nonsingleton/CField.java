@@ -31,6 +31,7 @@ import org.apache.commons.lang3.tuple.Pair;
 import forge.Card;
 import forge.Command;
 import forge.FThreads;
+import forge.Singletons;
 import forge.Constant.Preferences;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
@@ -155,8 +156,8 @@ public class CField implements ICDoc {
                 // should I check for who owns these cards? Are there any abilities to be played from opponent's graveyard? 
                 final SpellAbility ab = player.getController().getAbilityToPlay(game.getAbilitesOfCard(c, player));
                 if ( null != ab) {
-                    game.getInputQueue().invokeGameAction(new Runnable(){ @Override public void run(){
-                        HumanPlay.playSpellAbility(player, c, ab);
+                    game.getAction().invoke(new Runnable(){ @Override public void run(){
+                        HumanPlay.playSpellAbility(player, ab);
                     }});
                 }
             }
@@ -203,7 +204,7 @@ public class CField implements ICDoc {
     /** */
     private void manaAction(byte colorCode) {
         if (CField.this.player.getLobbyPlayer() == CField.this.viewer) {
-            final Input in = CField.this.player.getGame().getInputQueue().getInput();
+            final Input in = Singletons.getControl().getInputQueue().getInput();
             if (in instanceof InputPayManaBase) {
                 // Do something
                 ((InputPayManaBase) in).selectManaPool(colorCode);

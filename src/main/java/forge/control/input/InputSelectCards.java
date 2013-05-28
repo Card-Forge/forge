@@ -10,7 +10,7 @@ public abstract class InputSelectCards extends InputSelectManyBase<Card> {
     }
 
     @Override
-    protected void onCardSelected(Card c) {
+    protected void onCardSelected(Card c, boolean isRmb) {
         if ( !selectEntity(c) )
             return;
         

@@ -22,7 +22,7 @@ import java.awt.event.MouseEvent;
 
 import forge.Card;
 import forge.Command;
-import forge.control.FControl;
+import forge.Singletons;
 import forge.gui.framework.ICDoc;
 import forge.gui.match.views.VDetail;
 import forge.item.IPaperCard;
@@ -45,7 +45,7 @@ public enum CDetail implements ICDoc {
      * @param c &emsp; Card object
      */
     public void showCard(final Card c) {
-        view.getLblFlipcard().setVisible(c != null && (c.isDoubleFaced() || c.isFlipCard() || c.isFaceDown() && FControl.SINGLETON_INSTANCE.mayShowCard(c)));
+        view.getLblFlipcard().setVisible(c != null && (c.isDoubleFaced() || c.isFlipCard() || c.isFaceDown() && Singletons.getControl().mayShowCard(c)));
         view.getPnlDetail().setCard(c);
         view.getParentCell().repaintSelf();
     }

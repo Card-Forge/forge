@@ -19,13 +19,10 @@ import forge.card.replacement.ReplacementEffect;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
-import forge.control.input.Input;
 import forge.deck.Deck;
 import forge.game.GameState;
 import forge.game.GameType;
 import forge.game.ai.AiController;
-import forge.game.ai.AiInputBlock;
-import forge.game.ai.AiInputCommon;
 import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilBlock;
 import forge.game.ai.ComputerUtilCombat;
@@ -39,42 +36,12 @@ import forge.util.Aggregates;
  * Handles phase skips for now.
  */
 public class PlayerControllerAi extends PlayerController {
-
-    private Input defaultInput;
-    private Input blockInput;
-    private Input cleanupInput;
-   
     private final AiController brains;
 
     public PlayerControllerAi(GameState game, Player p, LobbyPlayer lp) {
         super(game, p, lp);
 
         brains = new AiController(p, game); 
-        
-        defaultInput = new AiInputCommon(brains);
-        blockInput = new AiInputBlock(player);
-        cleanupInput = getDefaultInput();
-    }
-
-    public final Input getDefaultInput() {
-        return defaultInput;
-    }
-
-    /** Input to use when player has to declare blockers */
-    public Input getBlockInput() {
-        return blockInput;
-    }
-
-    @Override
-    public Input getAttackInput() {
-        return defaultInput;
-    }
-
-    /**
-     * @return the cleanupInput
-     */
-    public Input getCleanupInput() {
-        return cleanupInput;
     }
 
     /**
@@ -307,5 +274,11 @@ public class PlayerControllerAi extends PlayerController {
             return player.getCardsIn(ZoneType.Hand);
         else
             return ComputerUtil.getPartialParisCandidates(player);
+    }
+
+    @Override
+    public void takePriority() {
+        // use separate thread for AI?
+        brains.onPriorityRecieved();
     }
 }

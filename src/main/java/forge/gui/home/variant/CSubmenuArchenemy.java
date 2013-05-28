@@ -22,7 +22,7 @@ import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.deck.DeckgenUtil;
 import forge.game.GameType;
-import forge.game.MatchController;
+import forge.game.MatchState;
 import forge.game.PlayerStartConditions;
 import forge.game.player.LobbyPlayer;
 import forge.gui.GuiDialog;
@@ -103,7 +103,7 @@ public enum CSubmenuArchenemy implements ICDoc {
                     }
                 };
                 
-                FControl.SINGLETON_INSTANCE.changeState(FControl.Screens.DECK_EDITOR_CONSTRUCTED);
+                Singletons.getControl().changeState(FControl.Screens.DECK_EDITOR_CONSTRUCTED);
                 CDeckEditorUI.SINGLETON_INSTANCE.setCurrentEditorController(
                         new CEditorVariant(Singletons.getModel().getDecks().getScheme(),predSchemes,EDocID.HOME_ARCHENEMY));
             }
@@ -238,7 +238,7 @@ public enum CSubmenuArchenemy implements ICDoc {
             }
         }
 
-        final MatchController mc = new MatchController(GameType.Archenemy, players);
+        final MatchState mc = new MatchState(GameType.Archenemy, players);
         FThreads.invokeInEdtLater(new Runnable(){
             @Override
             public void run() {

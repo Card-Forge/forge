@@ -21,7 +21,7 @@ import forge.control.Lobby;
 import forge.deck.Deck;
 import forge.deck.DeckgenUtil;
 import forge.game.GameType;
-import forge.game.MatchController;
+import forge.game.MatchState;
 import forge.game.PlayerStartConditions;
 import forge.game.player.LobbyPlayer;
 import forge.gauntlet.GauntletData;
@@ -127,7 +127,7 @@ public enum CSubmenuGauntletContests implements ICDoc {
         starter.add(ImmutablePair.of(lobby.getGuiPlayer(), PlayerStartConditions.fromDeck(gd.getUserDeck())));
         starter.add(ImmutablePair.of(lobby.getAiPlayer(), PlayerStartConditions.fromDeck(aiDeck)));
 
-        final MatchController mc = new MatchController(GameType.Gauntlet, starter);
+        final MatchState mc = new MatchState(GameType.Gauntlet, starter);
         FThreads.invokeInEdtLater(new Runnable(){
             @Override
             public void run() {

@@ -39,7 +39,7 @@ import net.miginfocom.swing.MigLayout;
 import forge.Card;
 import forge.CounterType;
 import forge.GameEntity;
-import forge.game.MatchController;
+import forge.game.MatchState;
 import forge.game.player.Player;
 import forge.gui.SOverlayUtils;
 import forge.gui.toolbox.FButton;
@@ -431,7 +431,7 @@ public class VAssignDamage {
         if ( source == null ) {
             if ( defender instanceof Player ) {
                 Player p = (Player)defender;
-                lethalDamage = attackerHasInfect ? MatchController.getPoisonCountersAmountToLose() - p.getPoisonCounters() : p.getLife();
+                lethalDamage = attackerHasInfect ? MatchState.getPoisonCountersAmountToLose() - p.getPoisonCounters() : p.getLife();
             } else if ( defender instanceof Card ) { // planeswalker
                 Card pw = (Card)defender;
                 lethalDamage = pw.getCounters(CounterType.LOYALTY);

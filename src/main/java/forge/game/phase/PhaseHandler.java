@@ -23,6 +23,8 @@ import java.util.Map;
 import java.util.Stack;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+import org.apache.commons.lang.time.StopWatch;
+
 import com.esotericsoftware.minlog.Log;
 
 import forge.Card;
@@ -721,38 +723,62 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
      */
     public final void passPriority() {
         FThreads.assertExecutedByEdt(false);
-        // stop game if it's outcome is clear
-        if (game.isGameOver()) {
-            return;
-        }
-
-        if(game.getType() == GameType.Archenemy) 
-            game.archenemy904_10();
-
-        final Player actingPlayer = this.getPriorityPlayer();
-        final Player firstAction = this.getFirstPriority();
-
-        // actingPlayer is the player who may act
-        // the firstAction is the player who gained Priority First in this segment
-        // of Priority
-
-        Player nextPlayer = game.getNextPlayerAfter(actingPlayer);
-
-        // System.out.println(String.format("%s %s: %s passes priority to %s", playerTurn, phase, actingPlayer, nextPlayer));
-        if (firstAction.equals(nextPlayer)) {
-            if (game.getStack().isEmpty()) {
-                advancePhase();
-            } else if (!game.getStack().hasSimultaneousStackEntries()) {
-                game.getStack().resolveStack();
-                game.getStack().chooseOrderOfSimultaneousStackEntryAll();
+        StopWatch sw = new StopWatch();
+        
+        // This is main game loop. It will hang waiting for player's input.  
+        while (!game.isGameOver()) { // stop game if it's outcome is clear.
+            final Player actingPlayer = this.getPriorityPlayer();
+            final Player firstAction = this.getFirstPriority();
+    
+            // actingPlayer is the player who may act
+            // the firstAction is the player who gained Priority First in this segment
+            // of Priority
+    
+            Player nextPlayer = game.getNextPlayerAfter(actingPlayer);
+    
+            // System.out.println(String.format("%s %s: %s passes priority to %s", playerTurn, phase, actingPlayer, nextPlayer));
+            if (firstAction.equals(nextPlayer)) {
+                if (game.getStack().isEmpty()) {
+                    advancePhase();
+                } else if (!game.getStack().hasSimultaneousStackEntries()) {
+                    game.getStack().resolveStack();
+                    game.getStack().chooseOrderOfSimultaneousStackEntryAll();
+                    updateObservers();
+                }
+            } else {
+                // pass the priority to other player
+                this.pPlayerPriority = nextPlayer;
                 updateObservers();
             }
-        } else {
-            // pass the priority to other player
-            this.pPlayerPriority = nextPlayer;
-            updateObservers();
+            
+            
+            // Time to handle priority to next player.
+            if ( phase == PhaseType.COMBAT_DECLARE_ATTACKERS || phase == PhaseType.COMBAT_DECLARE_BLOCKERS)
+                game.getStack().freezeStack();
+            
+            boolean givePriority = isPlayerPriorityAllowed;
+            
+            if ( phase == PhaseType.COMBAT_DECLARE_BLOCKERS) {
+                givePriority = game.getCombat().isPlayerAttacked(pPlayerPriority);
+            }
+            if ( phase == PhaseType.COMBAT_DECLARE_ATTACKERS && playerTurn != pPlayerPriority )
+                givePriority = false;
+            
+            System.out.print(FThreads.prependThreadId(debugPrintState(givePriority)));
+
+            
+            if( givePriority ) {
+                sw.start();
+                
+                pPlayerPriority.getController().takePriority();
+                
+                sw.stop();
+                System.out.print("... passed in " + sw.getTime()/1000f + " ms\n");
+                sw.reset();
+            } else {
+                System.out.print(" >>\n");
+            }
         }
-        
     }
     
     public void startFirstTurn(Player goesFirst) {
@@ -760,6 +786,8 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
             throw new IllegalStateException("Turns already started, call this only once per game"); 
         setPlayerTurn(goesFirst);
         advancePhase();
+        pPlayerPriority.getController().takePriority();
+        passPriority();
     }
 
     private void advancePhase() { // may be called externally only from gameAction after mulligans 
@@ -847,8 +875,8 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
         this.planarDiceRolledthisTurn++;
     }
     
-    public String debugPrintState() {
-        return String.format("%s's %s [%sP] %s", getPlayerTurn(), getPhase(), isPlayerPriorityAllowed() ? "+" : "-", getPriorityPlayer());
+    public String debugPrintState(boolean hasPriority) {
+        return String.format("%s's %s [%sP] %s", getPlayerTurn(), getPhase().Name, hasPriority ? "+" : "-", getPriorityPlayer());
     }
 
 

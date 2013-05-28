@@ -32,6 +32,7 @@ import com.esotericsoftware.minlog.Log;
 import forge.Card;
 import forge.CardLists;
 import forge.FThreads;
+import forge.Singletons;
 import forge.CardPredicates.Presets;
 import forge.GameEventType;
 import forge.card.ability.AbilityUtils;
@@ -393,7 +394,7 @@ public class MagicStack extends MyObservable implements Iterable<SpellAbilitySta
                         int mkMagnitude = sa.getSourceCard().getKickerMagnitude();
                         String prompt = String.format("Multikicker for %s\r\nTimes Kicked: %d\r\n", sa.getSourceCard(), mkMagnitude );
                         InputPayManaExecuteCommands toSet = new InputPayManaExecuteCommands(activating, prompt, sp.getMultiKickerManaCost());
-                        activating.getGame().getInputQueue().setInputAndWait(toSet);
+                        Singletons.getControl().getInputQueue().setInputAndWait(toSet);
                         if ( !toSet.isPaid() )
                             break;
                         
@@ -438,7 +439,7 @@ public class MagicStack extends MyObservable implements Iterable<SpellAbilitySta
                             ability.resolve();
                             String prompt = String.format("Replicate for %s\r\nTimes Replicated: %d\r\n", sa.getSourceCard(), sa.getSourceCard().getReplicateMagnitude());
                             InputPayManaExecuteCommands toSet = new InputPayManaExecuteCommands(controller, prompt, sp.getReplicateManaCost());
-                            controller.getGame().getInputQueue().setInputAndWait(toSet);
+                            Singletons.getControl().getInputQueue().setInputAndWait(toSet);
                             if ( toSet.isPaid() ) { 
                                 this.run();
                             } else {
@@ -522,9 +523,12 @@ public class MagicStack extends MyObservable implements Iterable<SpellAbilitySta
             }
         }
 
+        // WHAT DOES THIS DO?
+        /*
         if (!this.getSimultaneousStackEntryList().isEmpty()) {
             game.getPhaseHandler().passPriority();
         }
+        */
     }
 
     /**
@@ -644,7 +648,7 @@ public class MagicStack extends MyObservable implements Iterable<SpellAbilitySta
                 if (source.getController().isHuman()) {
                     final InputSelectCards targetHaunted = new InputSelectCardsFromList(1,1, creats);
                     targetHaunted.setMessage("Choose target creature to haunt.");
-                    source.getGame().getInputQueue().setInputAndWait(targetHaunted);
+                    Singletons.getControl().getInputQueue().setInputAndWait(targetHaunted);
                     haunterDiesWork.setTargetCard(targetHaunted.getSelected().get(0));
                     MagicStack.this.add(haunterDiesWork);
                 } else {

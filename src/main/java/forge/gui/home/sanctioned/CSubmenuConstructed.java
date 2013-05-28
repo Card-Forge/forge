@@ -15,7 +15,7 @@ import forge.FThreads;
 import forge.Singletons;
 import forge.control.Lobby;
 import forge.game.GameType;
-import forge.game.MatchController;
+import forge.game.MatchState;
 import forge.game.PlayerStartConditions;
 import forge.game.player.LobbyPlayer;
 import forge.gui.SOverlayUtils;
@@ -122,7 +122,7 @@ public enum CSubmenuConstructed implements ICDoc {
         List<Pair<LobbyPlayer, PlayerStartConditions>> players = new ArrayList<Pair<LobbyPlayer, PlayerStartConditions>>();
         players.add(ImmutablePair.of(rightPlayer, pscRight));
         players.add(ImmutablePair.of(leftPlayer, pscLeft));
-        final MatchController mc = new MatchController(gameType, players);
+        final MatchState mc = new MatchState(gameType, players);
         
         SOverlayUtils.startGameOverlay();
         SOverlayUtils.showOverlay();

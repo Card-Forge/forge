@@ -13,12 +13,9 @@ import forge.card.mana.Mana;
 import forge.card.replacement.ReplacementEffect;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
-import forge.control.input.Input;
-import forge.control.input.InputAutoPassPriority;
 import forge.deck.Deck;
 import forge.game.GameState;
 import forge.game.GameType;
-import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.zone.ZoneType;
 
@@ -33,7 +30,6 @@ public abstract class PlayerController {
     protected final GameState game;
     
     private PhaseType autoPassUntil = null;
-    private final Input autoPassPriorityInput;
     protected final Player player;
     protected final LobbyPlayer lobbyPlayer;
 
@@ -41,15 +37,7 @@ public abstract class PlayerController {
         game = game0;
         player = p;
         lobbyPlayer = lp;
-        autoPassPriorityInput = new InputAutoPassPriority(player);
     }
-    
-    public abstract Input getDefaultInput();
-    public abstract Input getBlockInput();
-    public abstract Input getCleanupInput();
-    public abstract Input getAttackInput();
-
-    public final Input getAutoPassPriorityInput() { return autoPassPriorityInput; }
 
     /**
      * TODO: Write javadoc for this method.
@@ -68,18 +56,6 @@ public abstract class PlayerController {
 
     public boolean isUiSetToSkipPhase(final Player turn, final PhaseType phase) {
         return false; // human has it's overload
-    }
-
-    /**
-     * TODO: Write javadoc for this method.
-     */
-    public void passPriority() {
-        PhaseHandler handler = game.getPhaseHandler();
-    
-        if ( handler.getPriorityPlayer() == player )
-            game.getPhaseHandler().passPriority();
-/*        else // it is not our priority! - have to check if this works fine
-            game.getInputQueue().updateObservers(); */
     }
 
     // Triggers preliminary choice: ask, decline or play
@@ -148,4 +124,6 @@ public abstract class PlayerController {
     public abstract String chooseSomeType(String kindOfType, String aiLogic, List<String> validTypes, List<String> invalidTypes);
     public abstract boolean confirmReplacementEffect(ReplacementEffect replacementEffect, SpellAbility effectSA, String question);
     public abstract List<Card> getCardsToMulligan(boolean isCommander, Player firstPlayer);
+
+    public abstract void takePriority();
 }

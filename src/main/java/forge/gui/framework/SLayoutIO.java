@@ -21,7 +21,7 @@ import javax.xml.stream.events.Attribute;
 import javax.xml.stream.events.StartElement;
 import javax.xml.stream.events.XMLEvent;
 
-import forge.control.FControl;
+import forge.Singletons;
 import forge.control.FControl.Screens;
 import forge.properties.FileLocation;
 import forge.properties.NewConstants;
@@ -55,7 +55,7 @@ public final class SLayoutIO {
      * @return {@link java.lang.String}
      */
     public static String getFilePreferred() {
-        return SLayoutIO.getFileForState(FControl.SINGLETON_INSTANCE.getState()).userPrefLoc;
+        return SLayoutIO.getFileForState(Singletons.getControl().getState()).userPrefLoc;
     }
 
     /** Publicly-accessible save method, to neatly handle exception handling.
@@ -75,7 +75,7 @@ public final class SLayoutIO {
 
     private synchronized static void save(final File f0) throws Exception {
         final String fWriteTo;
-        FileLocation file = SLayoutIO.getFileForState(FControl.SINGLETON_INSTANCE.getState());
+        FileLocation file = SLayoutIO.getFileForState(Singletons.getControl().getState());
 
         if (f0 == null) {
             if (null == file) {
@@ -125,7 +125,7 @@ public final class SLayoutIO {
     public static void loadLayout(final File f) {
         final FView view = FView.SINGLETON_INSTANCE;
         final XMLInputFactory inputFactory = XMLInputFactory.newInstance();
-        FileLocation file = SLayoutIO.getFileForState(FControl.SINGLETON_INSTANCE.getState());
+        FileLocation file = SLayoutIO.getFileForState(Singletons.getControl().getState());
 
         view.getPnlInsets().removeAll();
         view.getPnlInsets().setLayout(new BorderLayout());

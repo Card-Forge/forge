@@ -37,20 +37,21 @@ import forge.view.ButtonUtil;
  * @author Forge
  * @version $Id$
  */
-public class InputBlock extends InputPassPriorityBase {
+public class InputBlock extends InputSyncronizedBase {
     /** Constant <code>serialVersionUID=6120743598368928128L</code>. */
     private static final long serialVersionUID = 6120743598368928128L;
 
     private Card currentAttacker = null;
     private final HashMap<Card, List<Card>> allBlocking = new HashMap<Card, List<Card>>();
-    private final GameState game; 
+    private final GameState game;
+    private final Player player;
     
     /**
      * TODO: Write javadoc for Constructor.
      * @param priority
      */
     public InputBlock(Player human, GameState game) {
-        super(human);
+        player = human;
         this.game = game;
     }
 
@@ -83,7 +84,7 @@ public class InputBlock extends InputPassPriorityBase {
 
     /** {@inheritDoc} */
     @Override
-    public final void selectButtonOK() {
+    public final void onOk() {
         if (CombatUtil.finishedMandatoryBlocks(game.getCombat(), player)) {
             // Done blocking
             ButtonUtil.reset();
@@ -91,14 +92,13 @@ public class InputBlock extends InputPassPriorityBase {
             currentAttacker = null;
             allBlocking.clear();
 
-            pass();
+            stop();
         }
     }
 
     /** {@inheritDoc} */
     @Override
-    public final void selectCard(final Card card, boolean isMetaDown) {
-
+    public final void onCardSelected(final Card card, boolean isMetaDown) {
 
         if (isMetaDown) {
             if (card.getController() == player ) {

@@ -66,7 +66,7 @@ public enum CHomeUI implements ICDoc {
         VHomeUI.SINGLETON_INSTANCE.getLblEditor().setCommand(new Command() {
             @Override
             public void run() {
-                FControl.SINGLETON_INSTANCE.changeState(FControl.Screens.DECK_EDITOR_CONSTRUCTED);
+                Singletons.getControl().changeState(FControl.Screens.DECK_EDITOR_CONSTRUCTED);
                 CDeckEditorUI.SINGLETON_INSTANCE.setCurrentEditorController(new CEditorConstructed());
             }
         });
@@ -81,7 +81,7 @@ public enum CHomeUI implements ICDoc {
         VHomeUI.SINGLETON_INSTANCE.getLblStartServer().setCommand(new Runnable() {
             @Override
             public void run() {
-                NetServer srv = FControl.SINGLETON_INSTANCE.getServer(); 
+                NetServer srv = Singletons.getControl().getServer(); 
                 srv.listen(NewConstants.SERVER_PORT_NUMBER);
 
                 VHomeUI.SINGLETON_INSTANCE.getLblStopServer().setEnabled(true);
@@ -94,7 +94,7 @@ public enum CHomeUI implements ICDoc {
         VHomeUI.SINGLETON_INSTANCE.getLblStopServer().setCommand(new Runnable() {
             @Override
             public void run() {
-                FControl.SINGLETON_INSTANCE.getServer().stop();
+                Singletons.getControl().getServer().stop();
                 VHomeUI.SINGLETON_INSTANCE.getLblStopServer().setEnabled(false);
                 VHomeUI.SINGLETON_INSTANCE.getLblStartServer().setEnabled(true);
 

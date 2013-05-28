@@ -6,8 +6,8 @@ import java.util.List;
 
 import forge.Card;
 import forge.CardCharacteristicName;
+import forge.Singletons;
 import forge.card.cardfactory.CardFactory;
-import forge.control.FControl;
 import forge.game.zone.PlayerZone;
 import forge.gui.ForgeAction;
 import forge.gui.GuiChoose;
@@ -54,7 +54,7 @@ class ZoneAction extends ForgeAction {
         for (Card crd : choices) {
             Card toAdd = crd;
             if (crd.isFaceDown()) {
-                if (FControl.SINGLETON_INSTANCE.mayShowCard(crd)) {
+                if (Singletons.getControl().mayShowCard(crd)) {
                     toAdd = CardFactory.copyCard(crd);
                     toAdd.setState(CardCharacteristicName.Original);
                 } else {

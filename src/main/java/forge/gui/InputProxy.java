@@ -23,10 +23,9 @@ import java.util.concurrent.atomic.AtomicReference;
 
 import forge.Card;
 import forge.FThreads;
+import forge.Singletons;
 import forge.control.input.Input;
-import forge.control.input.InputAutoPassPriority;
 import forge.game.GameState;
-import forge.game.phase.PhaseHandler;
 import forge.game.player.Player;
 
 /**
@@ -43,37 +42,34 @@ public class InputProxy implements Observer {
     private AtomicReference<Input> input = new AtomicReference<Input>();
     private GameState game = null;
 
-    private static final boolean DEBUG_INPUT = false;
+//    private static final boolean DEBUG_INPUT = true; // false;
     
     public void setGame(GameState game0) {
         game = game0;
-        game.getPhaseHandler().addObserver(this);
-        game.getInputQueue().addObserver(this);
+        Singletons.getControl().getInputQueue().addObserver(this);
     }
     
     @Override
     public final void update(final Observable observable, final Object obj) {
         synchronized(this) {} // want to update all changes to memory
-        FThreads.assertExecutedByEdt(false);
         
-        final PhaseHandler ph = game.getPhaseHandler();
-        final Input nextInput = game.getInputQueue().getActualInput(game);
+        final Input nextInput = Singletons.getControl().getInputQueue().getActualInput(game);
         
-        if(DEBUG_INPUT) 
-            System.out.printf("%s ... \t%s on %s, \tstack = %s%n", FThreads.debugGetStackTraceItem(6, true), nextInput == null ? "null" : nextInput.getClass().getSimpleName(), ph.debugPrintState(), game.getInputQueue().printInputStack());
-
+/*        if(DEBUG_INPUT) 
+            System.out.printf("%s ... \t%s on %s, \tstack = %s%n", 
+                    FThreads.debugGetStackTraceItem(6, true), nextInput == null ? "null" : nextInput.getClass().getSimpleName(), 
+                            game.getPhaseHandler().debugPrintState(), Singletons.getControl().getInputQueue().printInputStack());
+*/
         this.input.set(nextInput);
         Runnable showMessage = new Runnable() {
             @Override public void run() { 
-                // System.out.printf("%s > showMessage @ %s/%s during %s%n%n", FThreads.debugGetCurrThreadId(), nextInput.getClass().getSimpleName(), getInput().getClass().getSimpleName(), ph.debugPrintState());
-                getInput().showMessage(game.getInputQueue()); 
+                Input current = getInput(); 
+                //System.out.printf("\t%s > showMessage @ %s/%s during %s%n", FThreads.debugGetCurrThreadId(), nextInput.getClass().getSimpleName(), current.getClass().getSimpleName(), game.getPhaseHandler().debugPrintState());
+                current.showMessage(Singletons.getControl().getInputQueue()); 
             }
         };
         
-        if( nextInput instanceof InputAutoPassPriority )
-            ph.getPriorityPlayer().getController().passPriority();
-        else
-            FThreads.invokeInEdtLater(showMessage);
+        FThreads.invokeInEdtLater(showMessage);
     }
     /**
      * <p>

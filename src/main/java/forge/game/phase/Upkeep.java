@@ -26,6 +26,7 @@ import com.google.common.base.Predicate;
 import forge.Card;
 import forge.CardLists;
 import forge.CardPredicates;
+import forge.Singletons;
 import forge.CardPredicates.Presets;
 import forge.CounterType;
 import forge.card.cardfactory.CardFactoryUtil;
@@ -268,7 +269,7 @@ public class Upkeep extends Phase {
                             final boolean isUpkeepPaid;
                             if (controller.isHuman()) {
                                 InputPayManaExecuteCommands inp = new InputPayManaExecuteCommands(controller, sb, upkeepCost);
-                                controller.getGame().getInputQueue().setInputAndWait(inp);
+                                Singletons.getControl().getInputQueue().setInputAndWait(inp);
                                 isUpkeepPaid = inp.isPaid();
                             } else { // computer
                                 Ability aiPaid = Upkeep.getBlankAbility(c, upkeepCost.toString());
@@ -353,7 +354,7 @@ public class Upkeep extends Phase {
                             boolean isUpkeepPaid = false;
                             if (controller.isHuman()) {
                                 InputPayManaExecuteCommands inp = new InputPayManaExecuteCommands(controller, sb, upkeepCost);
-                                controller.getGame().getInputQueue().setInputAndWait(inp);
+                                Singletons.getControl().getInputQueue().setInputAndWait(inp);
                                 isUpkeepPaid = inp.isPaid();
                             } else { // computers
                                 final Ability aiPaid = Upkeep.getBlankAbility(c, upkeepCost.toString());
@@ -433,7 +434,7 @@ public class Upkeep extends Phase {
                             };
                         };
                         chooseArt.setMessage(abyss.getName() + " - Select one nonartifact creature to destroy");
-                        player.getGame().getInputQueue().setInputAndWait(chooseArt); // Input
+                        Singletons.getControl().getInputQueue().setInputAndWait(chooseArt); // Input
                         if (!chooseArt.hasCancelled()) {
                             game.getAction().destroyNoRegeneration(chooseArt.getSelected().get(0), this);
                         }
@@ -921,7 +922,7 @@ public class Upkeep extends Phase {
                     } else {
                         InputSelectCards inp = new InputSelectCardsFromList(num, num, list);
                         inp.setMessage(source.getName() + " - Select %d untapped artifact(s), creature(s), or land(s) you control");
-                        player.getGame().getInputQueue().setInputAndWait(inp);
+                        Singletons.getControl().getInputQueue().setInputAndWait(inp);
                         for(Card crd : inp.getSelected())
                             crd.tap();
                     }

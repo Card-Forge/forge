@@ -36,7 +36,6 @@ import com.mortennobel.imagescaling.ResampleOp;
 
 import forge.card.CardRules;
 import forge.card.CardSplitType;
-import forge.control.FControl;
 import forge.game.player.IHasIcon;
 import forge.gui.toolbox.FSkin;
 import forge.item.BoosterPack;
@@ -105,7 +104,7 @@ public class ImageCache {
      */
     public static BufferedImage getImage(Card card, int width, int height) {
         final String key;
-        if (!FControl.SINGLETON_INSTANCE.mayShowCard(card) || card.isFaceDown()) {
+        if (!Singletons.getControl().mayShowCard(card) || card.isFaceDown()) {
             key = TOKEN_PREFIX + NewConstants.CACHE_MORPH_IMAGE_FILE;
         } else {
             key = card.getImageKey();

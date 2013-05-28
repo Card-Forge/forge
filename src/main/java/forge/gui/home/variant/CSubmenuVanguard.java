@@ -19,7 +19,7 @@ import forge.control.Lobby;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.game.GameType;
-import forge.game.MatchController;
+import forge.game.MatchState;
 import forge.game.PlayerStartConditions;
 import forge.game.player.LobbyPlayer;
 import forge.gui.GuiDialog;
@@ -179,7 +179,7 @@ public enum CSubmenuVanguard implements ICDoc {
             LobbyPlayer player = i == 0 ? lobby.getGuiPlayer() : lobby.getAiPlayer();
             helper.add(Pair.of(player, PlayerStartConditions.forVanguard(playerDecks.get(i), playerAvatars.get(i))));
         }
-        final MatchController mc = new MatchController(GameType.Vanguard, helper);
+        final MatchState mc = new MatchState(GameType.Vanguard, helper);
         FThreads.invokeInEdtLater(new Runnable(){
             @Override
             public void run() {

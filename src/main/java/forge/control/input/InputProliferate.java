@@ -41,7 +41,7 @@ public final class InputProliferate extends InputSelectManyBase<GameEntity> {
     }
 
     @Override
-    protected void onCardSelected(Card card) {
+    protected void onCardSelected(Card card, boolean isRmb) {
         if( !selectEntity(card) )
             return;
         

@@ -20,7 +20,7 @@ public enum PhaseType {
     COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY("Declare Blockers - Play Instants and Abilities"),
     COMBAT_FIRST_STRIKE_DAMAGE("First Strike Damage"),
     COMBAT_DAMAGE("Combat Damage"),
-    COMBAT_END("EndCombat"),
+    COMBAT_END("End Combat"),
     MAIN2("Main2"),
     END_OF_TURN("End of Turn"),
     CLEANUP("Cleanup");

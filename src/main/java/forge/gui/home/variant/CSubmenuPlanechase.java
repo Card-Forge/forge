@@ -21,7 +21,7 @@ import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.deck.DeckgenUtil;
 import forge.game.GameType;
-import forge.game.MatchController;
+import forge.game.MatchState;
 import forge.game.PlayerStartConditions;
 import forge.game.player.LobbyPlayer;
 import forge.gui.GuiDialog;
@@ -95,7 +95,7 @@ public enum CSubmenuPlanechase implements ICDoc {
                     }
                 };
                 
-                FControl.SINGLETON_INSTANCE.changeState(FControl.Screens.DECK_EDITOR_CONSTRUCTED);
+                Singletons.getControl().changeState(FControl.Screens.DECK_EDITOR_CONSTRUCTED);
                 CDeckEditorUI.SINGLETON_INSTANCE.setCurrentEditorController(
                         new CEditorVariant(Singletons.getModel().getDecks().getPlane(), predPlanes, EDocID.HOME_PLANECHASE));
             }
@@ -217,7 +217,7 @@ public enum CSubmenuPlanechase implements ICDoc {
         SOverlayUtils.startGameOverlay();
         SOverlayUtils.showOverlay();
                 
-        final MatchController mc = new MatchController(GameType.Planechase, helper);
+        final MatchState mc = new MatchState(GameType.Planechase, helper);
         FThreads.invokeInEdtLater(new Runnable(){
             @Override
             public void run() {

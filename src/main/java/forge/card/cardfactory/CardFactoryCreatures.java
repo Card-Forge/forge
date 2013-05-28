@@ -27,6 +27,7 @@ import com.google.common.collect.Iterables;
 import forge.Card;
 import forge.CardLists;
 import forge.CardPredicates;
+import forge.Singletons;
 import forge.CardPredicates.Presets;
 import forge.Command;
 import forge.CounterType;
@@ -196,7 +197,7 @@ public class CardFactoryCreatures {
                     for (int x = 0; x < netAttack; x++) {
                         InputSelectCards inp = new InputSelectCardsFromList(1,1,wolves);
                         inp.setMessage("Select target wolf to damage for " + getSourceCard());
-                        target.getGame().getInputQueue().setInputAndWait(inp);
+                        Singletons.getControl().getInputQueue().setInputAndWait(inp);
                         inp.getSelected().get(0).addDamage(1, target);
                     }
                 } else { // AI Choose spread Damage
@@ -349,7 +350,7 @@ public class CardFactoryCreatures {
                             "Currently, (%d) selected with a total power of: %d\n\n" + "Click OK when Done.";
                     target.setMessage(toDisplay);
                     target.setCancelAllowed(true);
-                    player.getGame().getInputQueue().setInputAndWait(target);
+                    Singletons.getControl().getInputQueue().setInputAndWait(target);
                     if(!target.hasCancelled()) {
                         for (final Card sac : target.getSelected()) {
                             game.getAction().sacrifice(sac, null);

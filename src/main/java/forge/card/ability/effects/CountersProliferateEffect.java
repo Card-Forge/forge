@@ -9,6 +9,7 @@ import forge.Card;
 import forge.CardLists;
 import forge.CounterType;
 import forge.GameEntity;
+import forge.Singletons;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
 import forge.control.input.InputProliferate;
@@ -32,7 +33,7 @@ public class CountersProliferateEffect extends SpellAbilityEffect {
         if (controller.isHuman()) {
             InputProliferate inp = new InputProliferate();
             inp.setCancelAllowed(true);
-            controller.getGame().getInputQueue().setInputAndWait(inp);
+            Singletons.getControl().getInputQueue().setInputAndWait(inp);
             if ( inp.hasCancelled() )
                 return;
             

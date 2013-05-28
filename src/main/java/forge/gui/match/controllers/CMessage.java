@@ -30,7 +30,7 @@ import javax.swing.JButton;
 
 import forge.Command;
 import forge.game.GameState;
-import forge.game.MatchController;
+import forge.game.MatchState;
 import forge.gui.InputProxy;
 import forge.gui.framework.ICDoc;
 import forge.gui.framework.SDisplayUtil;
@@ -119,7 +119,7 @@ public enum CMessage implements ICDoc, Observer {
      */
     @Override
     public void update(Observable o, Object arg) {
-        MatchController match = game.getMatch();
+        MatchState match = game.getMatch();
         view.getLblGames().setText(
                 match.getGameType().toString() + ": Game #"
                 + (match.getPlayedGames().size() + 1)

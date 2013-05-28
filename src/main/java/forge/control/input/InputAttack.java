@@ -42,7 +42,7 @@ import forge.view.ButtonUtil;
  * @author Forge
  * @version $Id$
  */
-public class InputAttack extends InputPassPriorityBase {
+public class InputAttack extends InputSyncronizedBase {
     /** Constant <code>serialVersionUID=7849903731842214245L</code>. */
     private static final long serialVersionUID = 7849903731842214245L;
 
@@ -50,9 +50,10 @@ public class InputAttack extends InputPassPriorityBase {
     private final GameState game;
     private List<GameEntity> defenders;
     private GameEntity currentDefender;
+    private final Player player;
     
     public InputAttack(Player human) {
-        super(human);
+        player = human;
         game = human.getGame();
     }
     
@@ -87,19 +88,17 @@ public class InputAttack extends InputPassPriorityBase {
     
     private void showCombat() {
         player.getZone(ZoneType.Battlefield).updateObservers(); // redraw sword icons
-        game.getPhaseHandler().setCombat(!game.getCombat().getAttackers().isEmpty());
         CombatUtil.showCombat(game);
     }
     
     /** {@inheritDoc} */
     @Override
-    public final void selectButtonOK() {
+    protected final void onOk() {
         // Propaganda costs could have been paid here.
         setCurrentDefender(null); // remove highlights
         game.getPhaseHandler().setCombat(!game.getCombat().getAttackers().isEmpty());
-        game.getPhaseHandler().setPlayersPriorityPermission(false);
 
-        pass();
+        stop();
     }
 
     @Override
@@ -112,7 +111,7 @@ public class InputAttack extends InputPassPriorityBase {
     
     /** {@inheritDoc} */
     @Override
-    public final void selectCard(final Card card, boolean isMetaDown) {
+    protected final void onCardSelected(final Card card, boolean isMetaDown) {
         final List<Card> att = game.getCombat().getAttackers();
         if (isMetaDown && att.contains(card) && !card.hasKeyword("CARDNAME attacks each turn if able.")) {
             game.getCombat().removeFromCombat(card);

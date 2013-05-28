@@ -27,7 +27,7 @@ import javax.swing.SwingConstants;
 import net.miginfocom.swing.MigLayout;
 import forge.Singletons;
 import forge.deck.Deck;
-import forge.game.MatchController;
+import forge.game.MatchState;
 import forge.game.player.LobbyPlayer;
 import forge.gauntlet.GauntletData;
 import forge.gauntlet.GauntletIO;
@@ -46,7 +46,7 @@ public class GauntletWinLose extends ControlWinLose {
      * @param view0 ViewWinLose object
      * @param match
      */
-    public GauntletWinLose(final ViewWinLose view0, MatchController match) {
+    public GauntletWinLose(final ViewWinLose view0, MatchState match) {
         super(view0, match);
     }
 

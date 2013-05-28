@@ -13,26 +13,27 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
 
 import forge.Card;
 import forge.GameEntity;
+import forge.Singletons;
 import forge.card.mana.Mana;
 import forge.card.replacement.ReplacementEffect;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.card.spellability.TargetSelection;
-import forge.control.input.Input;
 import forge.control.input.InputAttack;
 import forge.control.input.InputBlock;
-import forge.control.input.InputCleanup;
 import forge.control.input.InputConfirmMulligan;
 import forge.control.input.InputPassPriority;
 import forge.control.input.InputPlayOrDraw;
 import forge.control.input.InputSelectCards;
 import forge.control.input.InputSelectCardsFromList;
+import forge.control.input.InputSynchronized;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.game.GameState;
 import forge.game.GameType;
 import forge.game.phase.PhaseType;
+import forge.game.zone.MagicStack;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 import forge.gui.GuiDialog;
@@ -42,6 +43,7 @@ import forge.item.CardPrinted;
 import forge.util.TextUtil;
 
 
+
 /** 
  * A prototype for player controller class
  * 
@@ -49,35 +51,11 @@ import forge.util.TextUtil;
  */
 public class PlayerControllerHuman extends PlayerController {
 
-    private final Input defaultInput;
-    private final Input blockInput;
-    private final Input cleanupInput;
 
     public PlayerControllerHuman(GameState game0, Player p, LobbyPlayer lp) {
         super(game0, p, lp);
-        defaultInput = new InputPassPriority(player);
-        blockInput = new InputBlock(player, game0);
-        cleanupInput = new InputCleanup(player);
     }
 
-	public final Input getDefaultInput() {
-        return defaultInput;
-    }
-
-    /** Input to use when player has to declare blockers */
-    public Input getBlockInput() {
-        return blockInput;
-    }
-
-    @Override
-    public Input getAttackInput() { return new InputAttack(player); }
-
-    /**
-     * @return the cleanupInput
-     */
-    public Input getCleanupInput() {
-        return cleanupInput;
-    }
 
     @Override
     public boolean isUiSetToSkipPhase(final Player turn, final PhaseType phase) {
@@ -247,7 +225,7 @@ public class PlayerControllerHuman extends PlayerController {
         // TODO: Either compose a message here, or pass it as parameter from caller. 
         inp.setMessage("Select %d " + validMessage + "(s) to sacrifice");
         
-        player.getGame().getInputQueue().setInputAndWait(inp);
+        Singletons.getControl().getInputQueue().setInputAndWait(inp);
         if( inp.hasCancelled() )
             return new ArrayList<Card>();
         else return inp.getSelected(); 
@@ -278,7 +256,7 @@ public class PlayerControllerHuman extends PlayerController {
     @Override
     public boolean getWillPlayOnFirstTurn(boolean isFirstGame) {
         InputPlayOrDraw inp = new InputPlayOrDraw(player, isFirstGame);
-        game.getInputQueue().setInputAndWait(inp);
+        Singletons.getControl().getInputQueue().setInputAndWait(inp);
         return inp.isPlayingFirst();
     }
 
@@ -355,7 +333,7 @@ public class PlayerControllerHuman extends PlayerController {
 
         InputSelectCards inp = new InputSelectCardsFromList(min, max, valid);
         inp.setMessage("Discard %d cards");
-        player.getGame().getInputQueue().setInputAndWait(inp);
+        Singletons.getControl().getInputQueue().setInputAndWait(inp);
         return inp.getSelected();
     }
 
@@ -445,7 +423,7 @@ public class PlayerControllerHuman extends PlayerController {
             }
         };
         target.setMessage("Select %d cards to discard, unless you discard a " + uType + ".");
-        player.getGame().getInputQueue().setInputAndWait(target);
+        Singletons.getControl().getInputQueue().setInputAndWait(target);
         return target.getSelected();
     }
 
@@ -484,7 +462,74 @@ public class PlayerControllerHuman extends PlayerController {
     @Override
     public List<Card> getCardsToMulligan(boolean isCommander, Player firstPlayer) {
         final InputConfirmMulligan inp = new InputConfirmMulligan(player, firstPlayer, isCommander);
-        player.getGame().getInputQueue().setInputAndWait(inp);
+        Singletons.getControl().getInputQueue().setInputAndWait(inp);
         return inp.isKeepHand() ? null : isCommander ? inp.getSelectedCards() : player.getCardsIn(ZoneType.Hand);
+    }
+
+
+    private void showDefaultInput() {
+        SpellAbility chosenSa = null;
+        do {
+            if (chosenSa != null) {
+                HumanPlay.playSpellAbility(player, chosenSa);
+            }
+            InputPassPriority defaultInput = new InputPassPriority(player);
+            Singletons.getControl().getInputQueue().setInputAndWait(defaultInput);
+            chosenSa = defaultInput.getChosenSa();
+        } while( chosenSa != null );
+    }
+    
+    
+    @Override
+    public void takePriority() {
+        PhaseType phase = game.getPhaseHandler().getPhase();
+        MagicStack stack = game.getStack();
+
+        boolean maySkipPriority = mayAutoPass(phase) || isUiSetToSkipPhase(game.getPhaseHandler().getPlayerTurn(), phase);
+        if (game.getStack().isEmpty() && maySkipPriority) {
+            return;
+        } else
+            autoPassCancel(); // probably cancel, since something has happened
+        
+        switch(phase) {
+
+            case COMBAT_DECLARE_ATTACKERS:
+                game.getCombat().initiatePossibleDefenders(player.getOpponents());
+                InputSynchronized inpAttack = new InputAttack(player);
+                Singletons.getControl().getInputQueue().setInputAndWait(inpAttack);
+                return;
+    
+            case COMBAT_DECLARE_BLOCKERS:
+                InputSynchronized inpBlock = new InputBlock(player, game);
+                Singletons.getControl().getInputQueue().setInputAndWait(inpBlock);
+                return;
+
+            case CLEANUP:
+                if( stack.isEmpty() ) {
+                    final int n = player.getZone(ZoneType.Hand).size();
+                    final int max = player.getMaxHandSize();
+                    // goes to the next phase
+                    int nDiscard = player.isUnlimitedHandSize() || n <= max || n == 0 ? 0 : n - max; 
+                    
+    
+                    if ( nDiscard > 0 ) {
+                        InputSelectCardsFromList inp = new InputSelectCardsFromList(nDiscard, nDiscard, player.getZone(ZoneType.Hand).getCards());
+                        String msgFmt = "Cleanup Phase: You can only have a maximum of %d cards, you currently have %d  cards in your hand - select %d card(s) to discard";
+                        String message = String.format(msgFmt, max, n, nDiscard);
+                        inp.setMessage(message);
+                        inp.setCancelAllowed(false);
+                        Singletons.getControl().getInputQueue().setInputAndWait(inp);
+                        for(Card c : inp.getSelected()){ 
+                            player.discard(c, null);
+                        }
+                    }
+                    break;
+                }
+                
+                // fallthough
+                
+            default:
+                showDefaultInput();
+        }
     }
 }

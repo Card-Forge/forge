@@ -841,6 +841,12 @@ public class AiController {
                 case COMBAT_DECLARE_ATTACKERS:
                     declareAttackers();
                     break;
+                    
+                case COMBAT_DECLARE_BLOCKERS:
+                    final List<Card> blockers = player.getCreaturesInPlay();
+                    game.setCombat(ComputerUtilBlock.getBlockers(player, game.getCombat(), blockers));
+                    CombatUtil.orderMultipleCombatants(game);
+                    break;
 
                 case MAIN1:
                 case MAIN2:
@@ -871,8 +877,6 @@ public class AiController {
         }
 
         player.getZone(ZoneType.Battlefield).updateObservers();
-
-        game.getPhaseHandler().setPlayersPriorityPermission(false);
 
         // ai is about to attack, cancel all phase skipping
         for (Player p : game.getPlayers()) {

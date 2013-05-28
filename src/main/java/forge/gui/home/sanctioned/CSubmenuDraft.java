@@ -19,7 +19,7 @@ import forge.control.Lobby;
 import forge.deck.Deck;
 import forge.deck.DeckGroup;
 import forge.game.GameType;
-import forge.game.MatchController;
+import forge.game.MatchState;
 import forge.game.PlayerStartConditions;
 import forge.game.limited.BoosterDraft;
 import forge.game.limited.LimitedPoolType;
@@ -139,7 +139,7 @@ public enum CSubmenuDraft implements ICDoc {
         starter.add(Pair.of(lobby.getGuiPlayer(), PlayerStartConditions.fromDeck(humanDeck)));
         starter.add(Pair.of(lobby.getAiPlayer(), PlayerStartConditions.fromDeck(aiDeck)));
 
-        final MatchController mc = new MatchController(GameType.Draft, starter);
+        final MatchState mc = new MatchState(GameType.Draft, starter);
         FThreads.invokeInEdtLater(new Runnable(){
             @Override
             public void run() {
@@ -161,7 +161,7 @@ public enum CSubmenuDraft implements ICDoc {
         final CEditorDraftingProcess draft = new CEditorDraftingProcess();
         draft.showGui(new BoosterDraft(o));
 
-        FControl.SINGLETON_INSTANCE.changeState(FControl.Screens.DRAFTING_PROCESS);
+        Singletons.getControl().changeState(FControl.Screens.DRAFTING_PROCESS);
         CDeckEditorUI.SINGLETON_INSTANCE.setCurrentEditorController(draft);
     }
 

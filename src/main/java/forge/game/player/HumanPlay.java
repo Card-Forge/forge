@@ -11,6 +11,7 @@ import forge.CardPredicates.Presets;
 import forge.CounterType;
 import forge.FThreads;
 import forge.GameEventType;
+import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.ApiType;
 import forge.card.ability.effects.CharmEffect;
@@ -64,20 +65,6 @@ public class HumanPlay {
     }
 
     /**
-     * TODO: Write javadoc for this method.
-     * @param card
-     * @param ab
-     */
-    public static void playSpellAbility(Player p, Card c, SpellAbility ab) {
-        if (ab == Ability.PLAY_LAND_SURROGATE)
-            p.playLand(c, false);
-        else {
-            HumanPlay.playSpellAbility(p, ab);
-        }
-        p.getGame().getPhaseHandler().setPriority(p);
-    }
-
-    /**
      * <p>
      * playSpellAbility.
      * </p>
@@ -87,6 +74,14 @@ public class HumanPlay {
      */
     public final static void playSpellAbility(Player p, SpellAbility sa) {
         FThreads.assertExecutedByEdt(false);
+
+        if (sa == Ability.PLAY_LAND_SURROGATE) {
+            p.playLand(sa.getSourceCard(), false);
+            p.getGame().getPhaseHandler().setPriority(p);
+            return;
+        }
+
+        
         sa.setActivatingPlayer(p);
     
         final Card source = sa.getSourceCard();
@@ -166,7 +161,7 @@ public class HumanPlay {
     
         if( !isPaid ) {
             InputPayManaBase inputPay = new InputPayManaSimple(p.getGame(), sa, manaCost);
-            p.getGame().getInputQueue().setInputAndWait(inputPay);
+            Singletons.getControl().getInputQueue().setInputAndWait(inputPay);
             isPaid = inputPay.isPaid();
         }
         return isPaid;
@@ -462,7 +457,7 @@ public class HumanPlay {
         InputPayment toSet = current == null 
                 ? new InputPayManaExecuteCommands(p, source + "\r\n", cost.getCostMana().getManaToPay())
                 : new InputPayManaExecuteCommands(p, source + "\r\n" + "Current Card: " + current + "\r\n" , cost.getCostMana().getManaToPay());
-        game.getInputQueue().setInputAndWait(toSet);
+        Singletons.getControl().getInputQueue().setInputAndWait(toSet);
         return toSet.isPaid();
     }
 
@@ -473,8 +468,7 @@ public class HumanPlay {
         inp.setMessage("Select %d " + cpl.getDescriptiveType() + " card(s) to " + actionName);
         inp.setCancelAllowed(true);
         
-        GameState game = sourceAbility.getActivatingPlayer().getGame();
-        game.getInputQueue().setInputAndWait(inp);
+        Singletons.getControl().getInputQueue().setInputAndWait(inp);
         if( inp.hasCancelled() || inp.getSelected().size() != amount)
             return false;
     

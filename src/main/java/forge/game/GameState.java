@@ -41,7 +41,6 @@ import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityStackInstance;
 import forge.card.trigger.TriggerHandler;
 import forge.card.trigger.TriggerType;
-import forge.control.input.InputQueue;
 import forge.game.phase.Cleanup;
 import forge.game.phase.Combat;
 import forge.game.phase.EndOfCombat;
@@ -86,18 +85,16 @@ public class GameState {
 
     private long timestamp = 0;
     public final GameAction action;
-    private final MatchController match;
+    private final MatchState match;
     private GameAge age = GameAge.BeforeMulligan;
 
-    private final InputQueue inputQueue = new InputQueue();
-    
     /**
      * Constructor.
      * @param players2.entrySet()
      * @param match0 
      * @param input 
      */
-    public GameState(List<Pair<LobbyPlayer, PlayerStartConditions>> players0, GameType t, MatchController match0) { /* no more zones to map here */
+    public GameState(List<Pair<LobbyPlayer, PlayerStartConditions>> players0, GameType t, MatchState match0) { /* no more zones to map here */
         type = t;
         match = match0;
         List<Player> players = new ArrayList<Player>();
@@ -473,7 +470,7 @@ public class GameState {
         return action;
     }
 
-    public final MatchController getMatch() {
+    public final MatchState getMatch() {
         return match;
     }
 
@@ -565,6 +562,7 @@ public class GameState {
 
         if (c.isLand() && player.canPlayLand(c)) {
             if (zone.is(ZoneType.Hand) || (!zone.is(ZoneType.Battlefield) && c.hasStartOfKeyword("May be played"))) {
+                Ability.PLAY_LAND_SURROGATE.setSourceCard(c);
                 abilities.add(Ability.PLAY_LAND_SURROGATE);
             }
         }
@@ -626,10 +624,5 @@ public class GameState {
 
     void setAge(GameAge value) {
         age = value;
-    }
-
-
-    public InputQueue getInputQueue() {
-        return inputQueue;
     }
 }

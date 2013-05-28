@@ -24,6 +24,7 @@ import java.util.Map;
 import forge.Card;
 import forge.CardLists;
 import forge.CounterType;
+import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.spellability.SpellAbility;
 import forge.control.input.InputSelectCards;
@@ -263,7 +264,7 @@ public class CostPutCounter extends CostPartWithList {
             InputSelectCardToPutCounter inp = new InputSelectCardToPutCounter(c, typeList);
             inp.setMessage("Put %d " + getCounter().getName() + " counter on " + getDescriptiveType());
             inp.setCancelAllowed(true);
-            actor.getGame().getInputQueue().setInputAndWait(inp);
+            Singletons.getControl().getInputQueue().setInputAndWait(inp);
             
             if(inp.hasCancelled())
                 return false;

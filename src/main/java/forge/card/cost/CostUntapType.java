@@ -20,6 +20,7 @@ package forge.card.cost;
 import java.util.List;
 import forge.Card;
 import forge.CardLists;
+import forge.Singletons;
 import forge.CardPredicates.Presets;
 import forge.card.ability.AbilityUtils;
 import forge.card.spellability.SpellAbility;
@@ -152,7 +153,7 @@ public class CostUntapType extends CostPartWithList {
         }
         InputSelectCards inp = new InputSelectCardsFromList(c, c, typeList);
         inp.setMessage("Select a " + getDescriptiveType() + " to untap (%d left)");
-        game.getInputQueue().setInputAndWait(inp);
+        Singletons.getControl().getInputQueue().setInputAndWait(inp);
         if( inp.hasCancelled() || inp.getSelected().size() != c )
             return false;
             

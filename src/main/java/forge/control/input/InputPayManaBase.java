@@ -48,7 +48,7 @@ public abstract class InputPayManaBase extends InputSyncronizedBase implements I
     
 
     @Override
-    protected void onCardSelected(Card card) {
+    protected void onCardSelected(Card card, boolean isRmb) {
         if (card.getManaAbility().isEmpty() || card.isInZone(ZoneType.Hand)) {
             flashIncorrectAction();
             return;
@@ -189,7 +189,7 @@ public abstract class InputPayManaBase extends InputSyncronizedBase implements I
                 onStateChanged();
             }
         };
-        game.getInputQueue().invokeGameAction(proc);
+        game.getAction().invoke(proc);
     }
 
 

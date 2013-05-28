@@ -36,6 +36,7 @@ import forge.Constant;
 import forge.CounterType;
 import forge.GameEntity;
 import forge.GameEventType;
+import forge.Singletons;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.card.ability.AbilityFactory;
@@ -2797,7 +2798,7 @@ public class CardFactoryUtil {
                     };
                     target.setMessage("Choose target creature to haunt.");
                     
-                    card.getGame().getInputQueue().setInputAndWait(target);
+                    Singletons.getControl().getInputQueue().setInputAndWait(target);
                     if (!target.hasCancelled()) {
                         haunterDiesWork.setTargetCard(target.getSelected().get(0));
                         game.getStack().add(haunterDiesWork);
@@ -3265,7 +3266,7 @@ public class CardFactoryUtil {
                             InputSelectCards inp = new InputSelectCardsFromList(1, 1, choices);
                             inp.setCancelAllowed(true);
                             inp.setMessage("Select target artifact creature to give it +1/+1 counters from the dead " + card);
-                            modularPlayer.getGame().getInputQueue().setInputAndWait(inp);
+                            Singletons.getControl().getInputQueue().setInputAndWait(inp);
                             if( !inp.hasCancelled() ) {
                                 card2 = inp.getSelected().get(0);
                             }
