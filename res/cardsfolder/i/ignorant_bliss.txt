@@ -3,7 +3,7 @@ ManaCost:1 R
 Types:Instant
 A:SP$ ChangeZoneAll | Cost$ 1 R | ChangeType$ Card.YouCtrl | Origin$ Hand | Destination$ Exile | ExileFaceDown$ True | RememberChanged$ True | SubAbility$ DelayedReturn | SpellDescription$ Exile all cards from your hand face down. At the beginning of the next end step, return those cards to your hand, then draw a card.
 SVar:DelayedReturn:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | Execute$ ReturnAll | TriggerDescription$ Return exiled cards to your hand, then draw a card.
-SVar:ReturnAll:DB$ ChangeZoneAll | Origin$ Exile | Destination$ Hand | Defined$ Remembered | SubAbility$ YouDraw
+SVar:ReturnAll:DB$ ChangeZoneAll | Origin$ Exile | Destination$ Hand | ChangeType$ Card.IsRemembered | SubAbility$ YouDraw
 SVar:YouDraw:DB$ Draw | Defined$ You | NumCards$ 1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
