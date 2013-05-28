@@ -716,14 +716,17 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
         return (this.nUpkeepsThisTurn == 1);
     }
 
-    /**
-     * <p>
-     * passPriority.
-     * </p>
-     */
-    public final void passPriority() {
+    private final static boolean DEBUG_PHASES = false;
+
+    public void startFirstTurn(Player goesFirst) {
         FThreads.assertExecutedByEdt(false);
         StopWatch sw = new StopWatch();
+
+        if(phase != null)
+            throw new IllegalStateException("Turns already started, call this only once per game"); 
+        setPlayerTurn(goesFirst);
+        advancePhase();
+        pPlayerPriority.getController().takePriority();
         
         // This is main game loop. It will hang waiting for player's input.  
         while (!game.isGameOver()) { // stop game if it's outcome is clear.
@@ -764,31 +767,27 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
             if ( phase == PhaseType.COMBAT_DECLARE_ATTACKERS && playerTurn != pPlayerPriority )
                 givePriority = false;
             
-            System.out.print(FThreads.prependThreadId(debugPrintState(givePriority)));
+            if( DEBUG_PHASES )
+                System.out.print(FThreads.prependThreadId(debugPrintState(givePriority)));
 
             
             if( givePriority ) {
-                sw.start();
+                if( DEBUG_PHASES )
+                    sw.start();
                 
                 pPlayerPriority.getController().takePriority();
                 
-                sw.stop();
-                System.out.print("... passed in " + sw.getTime()/1000f + " ms\n");
-                sw.reset();
-            } else {
+                if( DEBUG_PHASES ) {
+                    sw.stop();
+                    System.out.print("... passed in " + sw.getTime()/1000f + " ms\n");
+                    sw.reset(); 
+                }
+            } else if( DEBUG_PHASES ){
                 System.out.print(" >>\n");
             }
         }
     }
     
-    public void startFirstTurn(Player goesFirst) {
-        if(phase != null)
-            throw new IllegalStateException("Turns already started, call this only once per game"); 
-        setPlayerTurn(goesFirst);
-        advancePhase();
-        pPlayerPriority.getController().takePriority();
-        passPriority();
-    }
 
     private void advancePhase() { // may be called externally only from gameAction after mulligans 
 
