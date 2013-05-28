@@ -10,6 +10,7 @@ import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
 import forge.game.player.Player;
+import forge.util.Lang;
 
 public class DamageDealEffect extends SpellAbilityEffect {
 
@@ -25,52 +26,41 @@ public class DamageDealEffect extends SpellAbilityEffect {
 
 
         List<Object> tgts = getTargetObjects(sa);
-        if (tgts.size() > 0) {
+        if (tgts.isEmpty()) 
+            return "";
 
-            final List<Card> definedSources = AbilityUtils.getDefinedCards(sa.getSourceCard(), sa.getParam("DamageSource"), sa);
-            Card source = new Card();
-            if (!definedSources.isEmpty()) {
-                source = definedSources.get(0);
-            }
-
-            if (source != sa.getSourceCard()) {
-                sb.append(source.toString()).append(" deals");
-            } else {
-                sb.append("Deals");
-            }
-
-            sb.append(" ").append(dmg).append(" damage ");
-
-            if (sa.hasParam("DivideEvenly")) {
-                sb.append("divided evenly (rounded down) ");
-            } else if (sa.hasParam("DividedAsYouChoose")) {
-                sb.append("divided as you choose ");
-            }
-            sb.append("to ");
-
-            for (int i = 0; i < tgts.size(); i++) {
-                sb.append(" ");
-
-                final Object o = tgts.get(i);
-                if ((o instanceof Card) || (o instanceof Player)) {
-                    sb.append(o.toString());
-                }
-            }
-
-            if (sa.hasParam("Radiance")) {
-                sb.append(" and each other ").append(sa.getParam("ValidTgts"))
-                        .append(" that shares a color with ");
-                if (tgts.size() > 1) {
-                    sb.append("them");
-                } else {
-                    sb.append("it");
-                }
-            }
-
-            sb.append(". ");
-
+        final List<Card> definedSources = AbilityUtils.getDefinedCards(sa.getSourceCard(), sa.getParam("DamageSource"), sa);
+        Card source = new Card();
+        if (!definedSources.isEmpty()) {
+            source = definedSources.get(0);
         }
 
+        if (source != sa.getSourceCard()) {
+            sb.append(source.toString()).append(" deals");
+        } else {
+            sb.append("Deals");
+        }
+
+        sb.append(" ").append(dmg).append(" damage ");
+
+        if (sa.hasParam("DivideEvenly")) {
+            sb.append("divided evenly (rounded down) ");
+        } else if (sa.hasParam("DividedAsYouChoose")) {
+            sb.append("divided as you choose ");
+        }
+        sb.append("to ").append(Lang.joinHomogenous(tgts));
+
+        if (sa.hasParam("Radiance")) {
+            sb.append(" and each other ").append(sa.getParam("ValidTgts"))
+                    .append(" that shares a color with ");
+            if (tgts.size() > 1) {
+                sb.append("them");
+            } else {
+                sb.append("it");
+            }
+        }
+
+        sb.append(". ");
         return sb.toString();
     }
 
