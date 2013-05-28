@@ -7,8 +7,10 @@ import java.util.Map.Entry;
 import forge.game.GameOutcome;
 import forge.game.event.DuelOutcomeEvent;
 import forge.game.event.Event;
+import forge.game.event.PhaseEvent;
 import forge.game.event.PlayerControlEvent;
 import forge.game.phase.Combat;
+import forge.game.phase.PhaseType;
 import forge.game.player.LobbyPlayer;
 import forge.game.player.Player;
 import forge.game.player.PlayerStatistics;
@@ -32,6 +34,10 @@ public class GameLogFormatter {
                 message =  String.format("%s is controlled by %s", p.getName(), newController.getName());
             
             return new GameLogEntry(GameEventType.PLAYER_CONROL, message);
+        } else if ( ev instanceof PhaseEvent ) {
+            Player p = ((PhaseEvent) ev).playerTurn;
+            PhaseType ph = ((PhaseEvent) ev).phase;
+            return new GameLogEntry(GameEventType.PHASE, ((PhaseEvent) ev).phaseDesc + Lang.getPossesive(p.getName()) + " " + ph.NameForUi);
         }
         return null;
     }

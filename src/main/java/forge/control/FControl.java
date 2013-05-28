@@ -46,7 +46,10 @@ import forge.game.ai.AiProfileUtil;
 import forge.game.event.CardsAntedEvent;
 import forge.game.event.DuelFinishedEvent;
 import forge.game.event.Event;
+import forge.game.event.PhaseEvent;
 import forge.game.event.PlayerControlEvent;
+import forge.game.phase.PhaseType;
+import forge.game.phase.PhaseUtil;
 import forge.game.player.LobbyPlayer;
 import forge.game.player.Player;
 import forge.gui.GuiDialog;
@@ -414,7 +417,7 @@ public enum FControl {
     }
     
     @Subscribe
-    public void receiveGameEvent(Event ev) { 
+    public void receiveGameEvent(final Event ev) { 
 
         if( ev instanceof DuelFinishedEvent ) {
             FThreads.invokeInEdtNowOrLater(new Runnable() { @Override public void run() {
@@ -437,6 +440,12 @@ public enum FControl {
                 for(VHand h : VMatchUI.SINGLETON_INSTANCE.getHands()) {
                     h.getLayoutControl().updateHand();
                 }
+            } });
+        } else if ( ev instanceof PhaseEvent ) {
+            FThreads.invokeInEdtNowOrLater(new Runnable() { @Override public void run() {
+                Player p = ((PhaseEvent) ev).playerTurn;
+                PhaseType ph = ((PhaseEvent) ev).phase;
+                PhaseUtil.visuallyActivatePhase(p, ph);
             } });
         }
     }

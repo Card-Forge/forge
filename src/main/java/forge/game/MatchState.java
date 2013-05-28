@@ -118,13 +118,6 @@ public class MatchState {
             @Override
             public void run() {
                 final Player firstPlayer = determineFirstTurnPlayer(getLastGameOutcome(), currentGame);
-                
-                // Draw <handsize> cards
-                for (final Player p1 : currentGame.getPlayers()) {
-                    p1.drawCards(p1.getMaxHandSize());
-                }
-
-                currentGame.setAge(GameAge.Mulligan);
                 currentGame.getAction().startGame(firstPlayer);
             }
         });

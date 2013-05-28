@@ -1475,25 +1475,41 @@ public class GameAction {
                 }
             }
         }
-    
-        game.getAction().checkStateEffects();
     }
 
     public void startGame(final Player firstPlayer) {
-        performMulligans(firstPlayer, game.getType() == GameType.Commander);
-        game.setAge(GameAge.Play);
-        
-        // THIS CODE WILL WORK WITH PHASE = NULL {
-            if(game.getType() == GameType.Planechase)
-                firstPlayer.initPlane();
+        Player first = firstPlayer;
+        do { 
+            // Draw <handsize> cards
+            for (final Player p1 : game.getPlayers()) {
+                p1.drawCards(p1.getMaxHandSize());
+            }
 
-            handleLeylinesAndChancellors();
-            // Run Trigger beginning of the game
-            final HashMap<String, Object> runParams = new HashMap<String, Object>();
-            game.getTriggerHandler().runTrigger(TriggerType.NewGame, runParams, false);
-        // }
+            game.setAge(GameAge.Mulligan);
+            performMulligans(first, game.getType() == GameType.Commander);
+            
+            // should I restore everyting exiled by Karn here, or before Mulligans is fine?  
+            
+            game.setAge(GameAge.Play);
+            
+            // THIS CODE WILL WORK WITH PHASE = NULL {
+                if(game.getType() == GameType.Planechase)
+                    firstPlayer.initPlane();
 
-        game.getPhaseHandler().startFirstTurn(firstPlayer);
+                handleLeylinesAndChancellors();
+                checkStateEffects();
+
+                // Run Trigger beginning of the game
+                final HashMap<String, Object> runParams = new HashMap<String, Object>();
+                game.getTriggerHandler().runTrigger(TriggerType.NewGame, runParams, false);
+            // }
+    
+            game.getPhaseHandler().startFirstTurn(first);
+            
+            first = game.getPhaseHandler().getPlayerTurn();  // needed only for restart
+        } while( game.getAge() == GameAge.RestartedByKarn );
+
+        System.out.println(FThreads.prependThreadId("Thread exited game loop due to ... " + ( game.isGameOver() ? "game over" : "interrupt" )));
     }
     
     private void performMulligans(final Player firstPlayer, final boolean isCommander) {

@@ -302,6 +302,11 @@ public class GameState {
      */
     public synchronized void setGameOver(GameEndReason reason) {
         this.age = GameAge.GameOver;
+        for (Player p : allPlayers ) {
+            if (p.isMindSlaved()) 
+                p.releaseControl(); // for correct totals
+        }
+
         for (Player p : roIngamePlayers) {
             p.onGameOver();
         }
@@ -617,7 +622,7 @@ public class GameState {
         return age;
     }
 
-    void setAge(GameAge value) {
+    public void setAge(GameAge value) {
         age = value;
     }
 }

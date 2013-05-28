@@ -34,17 +34,19 @@ import forge.GameEventType;
 import forge.Singletons;
 import forge.CardPredicates.Presets;
 import forge.card.trigger.TriggerType;
+import forge.game.GameAge;
 import forge.game.GameState;
 import forge.game.GameType;
 import forge.game.event.EndOfTurnEvent;
+import forge.game.event.GameRestartedEvent;
 import forge.game.event.ManaBurnEvent;
+import forge.game.event.PhaseEvent;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.framework.SDisplayUtil;
 import forge.gui.match.CMatchUI;
 import forge.gui.match.nonsingleton.VField;
 import forge.properties.ForgePreferences.FPref;
-import forge.util.Lang;
 import forge.util.MyObservable;
 
 
@@ -300,9 +302,8 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
             this.turn++;
             game.getGameLog().add(GameEventType.TURN, "Turn " + this.turn + " (" + this.getPlayerTurn() + ")");
         }
-        
-        game.getGameLog().add(GameEventType.PHASE, phaseType + Lang.getPossesive(this.getPlayerTurn().getName()) + " " + this.getPhase().NameForUi);
-        PhaseUtil.visuallyActivatePhase(this.getPlayerTurn(), this.getPhase());
+
+        game.getEvents().post(new PhaseEvent(this.getPlayerTurn(), this.getPhase(), phaseType));
     }
 
     private final void handleBeginPhase() {
@@ -499,12 +500,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
 
         // This line fixes Combat Damage triggers not going off when they should
         game.getStack().unfreezeStack();
-        
-        // UNTAP
-        if (this.getPhase() != PhaseType.UNTAP) {
-            // during untap
-            this.resetPriority();
-        }
+
     }
 
     /**
@@ -726,10 +722,9 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
             throw new IllegalStateException("Turns already started, call this only once per game"); 
         setPlayerTurn(goesFirst);
         advancePhase();
-        pPlayerPriority.getController().takePriority();
+        // don't even offer priority, because it's untap of 1st turn now
         
-        // This is main game loop. It will hang waiting for player's input.  
-        while (!game.isGameOver()) { // stop game if it's outcome is clear.
+        while (!game.isGameOver()) { // loop only while is playing
             final Player actingPlayer = this.getPriorityPlayer();
             final Player firstAction = this.getFirstPriority();
     
@@ -752,6 +747,13 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
                 // pass the priority to other player
                 this.pPlayerPriority = nextPlayer;
                 updateObservers();
+            }
+            
+            // If ever the karn's ultimate resolved
+            if( game.getAge() == GameAge.RestartedByKarn) {
+                phase = null;
+                game.getEvents().post(new GameRestartedEvent(playerTurn));
+                return;
             }
             
             
@@ -786,8 +788,6 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
                 System.out.print(" >>\n");
             }
         }
-        
-        System.out.println(FThreads.prependThreadId("Thread exited game loop due to ... " + ( game.isGameOver() ? "game over" : "interrupt" )));
     }
     
 

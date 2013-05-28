@@ -11,9 +11,15 @@ import forge.CardLists;
 import forge.CardPredicates;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
+import forge.card.trigger.TriggerHandler;
+import forge.card.trigger.TriggerType;
+import forge.game.GameAction;
+import forge.game.GameAge;
 import forge.game.GameNew;
 import forge.game.GameState;
+import forge.game.RegisteredPlayer;
 import forge.game.player.Player;
+import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 
 public class RestartGameEffect extends SpellAbilityEffect {
@@ -47,10 +53,50 @@ public class RestartGameEffect extends SpellAbilityEffect {
             newLibrary.addAll(filteredCards);
             playerLibraries.put(p, newLibrary);
         }
+        
+        //Card.resetUniqueNumber();
+        // need this code here, otherwise observables fail
+        forge.card.trigger.Trigger.resetIDs();
+        TriggerHandler trigHandler = game.getTriggerHandler();
+        trigHandler.clearDelayedTrigger();
+        trigHandler.cleanUpTemporaryTriggers();
+        trigHandler.suppressMode(TriggerType.ChangesZone);
 
-        GameNew.restartGame(game, sa.getActivatingPlayer(), playerLibraries);
- 
-        // because the caller method (invokeInNewThread) will try to unlock input. Restart has removed that input state.
+        game.getStack().reset();
+        GameAction action = game.getAction();
+    
+        List<Player> gamePlayers = game.getRegisteredPlayers();
+        for( int i = 0; i < gamePlayers.size(); i++ ) {
+
+            final Player player = gamePlayers.get(i);
+            if( player.hasLost()) continue;
+            
+            RegisteredPlayer psc = game.getMatch().getPlayers().get(i);
+            
+            player.setStartingLife(psc.getStartingLife());
+            player.setNumLandsPlayed(0);
+            GameNew.putCardsOnBattlefield(player, psc.getCardsOnBattlefield(player));
+    
+            PlayerZone library = player.getZone(ZoneType.Library);
+            List<Card> newLibrary = playerLibraries.get(player);
+            for (Card c : newLibrary) {
+                action.moveTo(library, c);
+            }
+    
+            player.shuffle();
+            player.getZone(ZoneType.Battlefield).updateObservers();
+            player.updateObservers();
+            player.getZone(ZoneType.Hand).updateObservers();
+        }
+    
+        trigHandler.clearSuppression(TriggerType.ChangesZone);
+    
+        game.setAge(GameAge.RestartedByKarn);
+        game.getPhaseHandler().setPlayerTurn(sa.getActivatingPlayer());
+        
+        // Set turn number?
+        
+        // The rest is handled by phaseHandler 
     }
 
     /* (non-Javadoc)

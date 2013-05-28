@@ -4,5 +4,6 @@ public enum GameAge {
     BeforeMulligan,
     Mulligan,
     Play,
+    RestartedByKarn,
     GameOver
 }

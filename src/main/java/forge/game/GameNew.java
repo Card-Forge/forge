@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Random;
 import java.util.Set;
@@ -22,11 +21,9 @@ import forge.CardPredicates;
 import forge.GameEventType;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerHandler;
-import forge.card.trigger.TriggerType;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
-import forge.game.phase.PhaseHandler;
 import forge.game.player.Player;
 import forge.game.player.PlayerType;
 import forge.game.zone.PlayerZone;
@@ -52,7 +49,7 @@ public class GameNew {
     
     public static final ForgePreferences preferences = forge.Singletons.getModel().getPreferences();
 
-    private static void putCardsOnBattlefield(Player player, Iterable<? extends IPaperCard> cards) {
+    public static void putCardsOnBattlefield(Player player, Iterable<? extends IPaperCard> cards) {
         PlayerZone bf = player.getZone(ZoneType.Battlefield);
         if (cards != null) {
             for (final IPaperCard cp : cards) {
@@ -330,61 +327,6 @@ public class GameNew {
             p.getGame().getGameLog().add(GameEventType.ANTE, p + " anted " + kv.getValue());
         }
     }
-
-    // ultimate of Karn the Liberated
-    public static void restartGame(final GameState game, final Player startingTurn, Map<Player, List<Card>> playerLibraries) {
-
-        //Card.resetUniqueNumber();
-        // need this code here, otherwise observables fail
-        forge.card.trigger.Trigger.resetIDs();
-        TriggerHandler trigHandler = game.getTriggerHandler();
-        trigHandler.clearDelayedTrigger();
-        trigHandler.cleanUpTemporaryTriggers();
-        trigHandler.suppressMode(TriggerType.ChangesZone);
-
-        game.getStack().reset();
-        GameAction action = game.getAction();
-    
-        List<Player> gamePlayers = game.getRegisteredPlayers();
-        for( int i = 0; i < gamePlayers.size(); i++ ) {
-
-            final Player player = gamePlayers.get(i);
-            if( player.hasLost()) continue;
-            
-            RegisteredPlayer psc = game.getMatch().getPlayers().get(i);
-            
-            player.setStartingLife(psc.getStartingLife());
-            player.setNumLandsPlayed(0);
-            putCardsOnBattlefield(player, psc.getCardsOnBattlefield(player));
-    
-            PlayerZone library = player.getZone(ZoneType.Library);
-            List<Card> newLibrary = playerLibraries.get(player);
-            for (Card c : newLibrary) {
-                action.moveTo(library, c);
-            }
-    
-            player.shuffle();
-            player.getZone(ZoneType.Battlefield).updateObservers();
-            player.updateObservers();
-            player.getZone(ZoneType.Hand).updateObservers();
-        }
-    
-        trigHandler.clearSuppression(TriggerType.ChangesZone);
-    
-        PhaseHandler phaseHandler = game.getPhaseHandler();
-        phaseHandler.setPlayerTurn(startingTurn);
-
-        game.setAge(GameAge.Mulligan);
-        // Draw <handsize> cards
-        for (final Player p : game.getPlayers()) {
-            p.drawCards(p.getMaxHandSize());
-        }
-
-
-        game.getAction().startGame(startingTurn);
-    }
-
-    
 
  // this is where the computer cheats
     // changes AllZone.getComputerPlayer().getZone(Zone.Library)

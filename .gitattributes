@@ -14251,10 +14251,12 @@ src/main/java/forge/game/event/DuelOutcomeEvent.java -text
 src/main/java/forge/game/event/EndOfTurnEvent.java -text
 src/main/java/forge/game/event/Event.java -text
 src/main/java/forge/game/event/FlipCoinEvent.java -text
+src/main/java/forge/game/event/GameRestartedEvent.java -text
 src/main/java/forge/game/event/LandPlayedEvent.java -text
 src/main/java/forge/game/event/LifeLossEvent.java -text
 src/main/java/forge/game/event/ManaBurnEvent.java -text
 src/main/java/forge/game/event/MulliganEvent.java -text
+src/main/java/forge/game/event/PhaseEvent.java -text
 src/main/java/forge/game/event/PlayerControlEvent.java -text
 src/main/java/forge/game/event/PoisonCounterEvent.java -text
 src/main/java/forge/game/event/SetTappedEvent.java -text
