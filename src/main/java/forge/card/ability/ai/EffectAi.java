@@ -124,7 +124,18 @@ public class EffectAi extends SpellAbilityAi {
 
     @Override
     protected boolean doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
-        // TODO: Add targeting effects
+
+        final Target tgt = sa.getTarget();
+        final Player opp = aiPlayer.getOpponent();
+
+        if (sa.getTarget() != null) {
+            tgt.resetTargets();
+            if (mandatory && sa.canTarget(opp)) {
+                sa.getTarget().addTarget(opp);
+            } else if (mandatory && sa.canTarget(aiPlayer)) {
+                sa.getTarget().addTarget(aiPlayer);
+            }
+        }
 
         return true;
     }

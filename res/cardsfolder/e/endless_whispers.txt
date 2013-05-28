@@ -1,0 +1,14 @@
+Name:Endless Whispers
+ManaCost:2 B B
+Types:Enchantment
+S:Mode$ Continuous | Affected$ Creature | AddTrigger$ TrigEndlessDies | AddSVar$ EndlessDelayTrigReturn & TrigEndlessGain & EndlessRemoveEffect & EndlessReturn | Description$ Each creature has "When this creature dies, choose target opponent. That player puts this card from its owner's graveyard onto the battlefield under his or her control at the beginning of the next end step."
+SVar:TrigEndlessDies:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | TriggerController$ TriggeredCardController | Execute$ EndlessDelayTrigReturn | TriggerDescription$ When CARDNAME dies, choose target opponent. That player puts CARDNAME from its owner's graveyard onto the battlefield under his or her control at the beginning of the next end step.
+SVar:EndlessDelayTrigReturn:AB$ Effect | Cost$ 0 | ValidTgts$ Opponent | TgtPrompt$ Select target opponent to return this card under his or her control | EffectOwner$ Targeted | ImprintCards$ Self | Triggers$ TrigEndlessGain | SVars$ EndlessReturn,EndlessRemoveEffect | Duration$ Permanent
+SVar:TrigEndlessGain:Mode$ Phase | Phase$ End of Turn | Execute$ EndlessReturn | TriggerZones$ Command | TriggerDescription$ Return CARDNAME to the battlefield.
+SVar:EndlessReturn:AB$ ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Battlefield | Defined$ Imprinted | GainControl$ True | SubAbility$ EndlessRemoveEffect
+SVar:EndlessRemoveEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
+SVar:RemAIDeck:True
+SVar:RemRandomDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/endless_whispers.jpg
+Oracle:Each creature has "When this creature dies, choose target opponent. That player puts this card from its owner's graveyard onto the battlefield under his or her control at the beginning of the next end step."
+SetInfo:5DN Rare
