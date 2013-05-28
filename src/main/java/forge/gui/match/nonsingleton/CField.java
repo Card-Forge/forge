@@ -36,7 +36,7 @@ import forge.Constant.Preferences;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
 import forge.control.input.Input;
-import forge.control.input.InputPayManaBase;
+import forge.control.input.InputPayMana;
 import forge.game.GameState;
 import forge.game.player.HumanPlay;
 import forge.game.player.LobbyPlayer;
@@ -185,29 +185,21 @@ public class CField implements ICDoc {
         // Roujin's bug fix version dated 2-12-2012
         final Card c = CField.this.view.getTabletop().getHoveredCard(e);
 
-        final Input input = CMessage.SINGLETON_INSTANCE.getInputControl().getInput();
 
         if (c == null || !c.isInZone(ZoneType.Battlefield)) {
             return;
         }
 
-        //Yosei, the Morning Star required cards to be chosen on computer side
-        //earlier it was enforced that cards must be in player zone
-        //this can potentially break some other functionality
-        //(tapping lands works ok but some custom cards may not...)
-        if ( input != null ){
-            input.selectCard(c, e.isMetaDown());
-        }
-
+        CMessage.SINGLETON_INSTANCE.getInputControl().selectCard(c, e.isMetaDown());
     }
 
     /** */
     private void manaAction(byte colorCode) {
         if (CField.this.player.getLobbyPlayer() == CField.this.viewer) {
             final Input in = Singletons.getControl().getInputQueue().getInput();
-            if (in instanceof InputPayManaBase) {
+            if (in instanceof InputPayMana) {
                 // Do something
-                ((InputPayManaBase) in).selectManaPool(colorCode);
+                ((InputPayMana) in).selectManaPool(colorCode);
             }
         }
     }

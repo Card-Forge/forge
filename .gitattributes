@@ -14169,12 +14169,11 @@ src/main/java/forge/control/input/InputBlock.java svneol=native#text/plain
 src/main/java/forge/control/input/InputConfirmMulligan.java svneol=native#text/plain
 src/main/java/forge/control/input/InputLockUI.java -text
 src/main/java/forge/control/input/InputPassPriority.java svneol=native#text/plain
-src/main/java/forge/control/input/InputPayManaBase.java -text
+src/main/java/forge/control/input/InputPayMana.java -text
 src/main/java/forge/control/input/InputPayManaExecuteCommands.java svneol=native#text/plain
 src/main/java/forge/control/input/InputPayManaOfCostPayment.java -text
 src/main/java/forge/control/input/InputPayManaSimple.java svneol=native#text/plain
 src/main/java/forge/control/input/InputPayManaX.java -text
-src/main/java/forge/control/input/InputPayment.java -text
 src/main/java/forge/control/input/InputPlayOrDraw.java -text
 src/main/java/forge/control/input/InputProliferate.java -text
 src/main/java/forge/control/input/InputQueue.java svneol=native#text/plain

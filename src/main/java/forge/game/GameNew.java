@@ -334,9 +334,6 @@ public class GameNew {
     // ultimate of Karn the Liberated
     public static void restartGame(final GameState game, final Player startingTurn, Map<Player, List<Card>> playerLibraries) {
 
-        game.setAge(GameAge.Mulligan);
-        game.getAction().mulligan(startingTurn);
-        
         //Card.resetUniqueNumber();
         // need this code here, otherwise observables fail
         forge.card.trigger.Trigger.resetIDs();
@@ -376,11 +373,15 @@ public class GameNew {
     
         PhaseHandler phaseHandler = game.getPhaseHandler();
         phaseHandler.setPlayerTurn(startingTurn);
-    
+
+        game.setAge(GameAge.Mulligan);
         // Draw <handsize> cards
         for (final Player p : game.getPlayers()) {
             p.drawCards(p.getMaxHandSize());
         }
+
+
+        game.getAction().startGame(startingTurn);
     }
 
     

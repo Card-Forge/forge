@@ -116,7 +116,7 @@ public class CCommand implements ICDoc {
 
         if (c != null && c.isInZone(ZoneType.Command)) {
             //TODO: Cast commander/activate avatar/roll planar dice here.
-            CMessage.SINGLETON_INSTANCE.getInputControl().selectCard(c);
+            CMessage.SINGLETON_INSTANCE.getInputControl().selectCard(c, e.isMetaDown());
         }
     }
 

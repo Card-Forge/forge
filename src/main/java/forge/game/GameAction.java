@@ -1479,7 +1479,7 @@ public class GameAction {
         game.getAction().checkStateEffects();
     }
 
-    public void mulligan(final Player firstPlayer) {
+    public void startGame(final Player firstPlayer) {
         performMulligans(firstPlayer, game.getType() == GameType.Commander);
         game.setAge(GameAge.Play);
         

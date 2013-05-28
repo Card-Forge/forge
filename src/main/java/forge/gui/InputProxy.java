@@ -51,8 +51,6 @@ public class InputProxy implements Observer {
     
     @Override
     public final void update(final Observable observable, final Object obj) {
-        synchronized(this) {} // want to update all changes to memory
-        
         final Input nextInput = Singletons.getControl().getInputQueue().getActualInput(game);
         
 /*        if(DEBUG_INPUT) 
@@ -65,7 +63,7 @@ public class InputProxy implements Observer {
             @Override public void run() { 
                 Input current = getInput(); 
                 //System.out.printf("\t%s > showMessage @ %s/%s during %s%n", FThreads.debugGetCurrThreadId(), nextInput.getClass().getSimpleName(), current.getClass().getSimpleName(), game.getPhaseHandler().debugPrintState());
-                current.showMessage(Singletons.getControl().getInputQueue()); 
+                current.showMessageInitial(); 
             }
         };
         
@@ -117,10 +115,10 @@ public class InputProxy implements Observer {
      * @param zone
      *            a {@link forge.game.zone.PlayerZone} object.
      */
-    public final void selectCard(final Card card) {
+    public final void selectCard(final Card card, boolean isRightButton) {
         Input inp = getInput();
         if ( null != inp )
-            inp.selectCard(card, false);
+            inp.selectCard(card, isRightButton);
     }
 
     /** {@inheritDoc} */
@@ -131,7 +129,7 @@ public class InputProxy implements Observer {
     }
 
     /** @return {@link forge.gui.InputProxy.InputBase} */
-    public Input getInput() {
+    private Input getInput() {
         return this.input.get();
     }
 }

@@ -25,9 +25,9 @@ import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostBeingPaid;
 import forge.card.mana.ManaCostShard;
 import forge.card.spellability.SpellAbility;
+import forge.control.input.InputPayMana;
 import forge.control.input.InputPayManaOfCostPayment;
 import forge.control.input.InputPayManaX;
-import forge.control.input.InputPayment;
 import forge.game.GameState;
 import forge.game.ai.ComputerUtilMana;
 import forge.game.player.Player;
@@ -127,9 +127,10 @@ public class CostPartMana extends CostPart {
                 toPay.combineManaCost(mkCost);
         }
 
+        InputPayMana inpPayment;
         toPay.applySpellCostChange(ability);
         if (!toPay.isPaid()) {
-            InputPayment inpPayment = new InputPayManaOfCostPayment(toPay, ability);
+            inpPayment = new InputPayManaOfCostPayment(toPay, ability);
             Singletons.getControl().getInputQueue().setInputAndWait(inpPayment);
             if(!inpPayment.isPaid())
                 return false;
@@ -140,7 +141,7 @@ public class CostPartMana extends CostPart {
         if (this.getAmountOfX() > 0) {
             if( !ability.isAnnouncing("X") && !xWasBilled) {
                 source.setXManaCostPaid(0);
-                InputPayment inpPayment = new InputPayManaX(ability, this.getAmountOfX(), this.canXbe0());
+                inpPayment = new InputPayManaX(ability, this.getAmountOfX(), this.canXbe0());
                 Singletons.getControl().getInputQueue().setInputAndWait(inpPayment);
                 if(!inpPayment.isPaid())
                     return false;

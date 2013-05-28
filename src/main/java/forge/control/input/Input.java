@@ -10,7 +10,7 @@ import forge.game.player.Player;
 public interface Input {
 
     // showMessage() is always the first method called
-    void showMessage(InputQueue iq);
+    void showMessageInitial();
 
     void selectCard(Card c, boolean isMetaDown);
 

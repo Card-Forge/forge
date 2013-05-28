@@ -26,7 +26,7 @@ import forge.view.ButtonUtil;
  * TODO: Write javadoc for this type.
  *
  */
-public abstract class InputPayManaBase extends InputSyncronizedBase implements InputPayment {
+public abstract class InputPayMana extends InputSyncronizedBase {
 
     private static final long serialVersionUID = -9133423708688480255L;
 
@@ -39,7 +39,7 @@ public abstract class InputPayManaBase extends InputSyncronizedBase implements I
     
     boolean bPaid = false;
     
-    protected InputPayManaBase(SpellAbility saToPayFor) {
+    protected InputPayMana(SpellAbility saToPayFor) {
         this.player = saToPayFor.getActivatingPlayer();
         this.game = player.getGame();
         this.saPaidFor = saToPayFor;

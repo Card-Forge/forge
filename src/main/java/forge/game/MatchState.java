@@ -125,7 +125,7 @@ public class MatchState {
                 }
 
                 currentGame.setAge(GameAge.Mulligan);
-                currentGame.getAction().mulligan(firstPlayer);
+                currentGame.getAction().startGame(firstPlayer);
             }
         });
     }

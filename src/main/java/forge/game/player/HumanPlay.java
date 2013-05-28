@@ -39,10 +39,9 @@ import forge.card.spellability.Ability;
 import forge.card.spellability.HumanPlaySpellAbility;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
-import forge.control.input.InputPayManaBase;
+import forge.control.input.InputPayMana;
 import forge.control.input.InputPayManaExecuteCommands;
 import forge.control.input.InputPayManaSimple;
-import forge.control.input.InputPayment;
 import forge.control.input.InputSelectCards;
 import forge.control.input.InputSelectCardsFromList;
 import forge.game.GameActionUtil;
@@ -160,7 +159,7 @@ public class HumanPlay {
         boolean isPaid = manaCost.isPaid();
     
         if( !isPaid ) {
-            InputPayManaBase inputPay = new InputPayManaSimple(p.getGame(), sa, manaCost);
+            InputPayMana inputPay = new InputPayManaSimple(p.getGame(), sa, manaCost);
             Singletons.getControl().getInputQueue().setInputAndWait(inputPay);
             isPaid = inputPay.isPaid();
         }
@@ -454,7 +453,7 @@ public class HumanPlay {
         if (!(costPart instanceof CostPartMana ))
             throw new RuntimeException("GameActionUtil.payCostDuringAbilityResolve - The remaining payment type is not Mana.");
     
-        InputPayment toSet = current == null 
+        InputPayMana toSet = current == null 
                 ? new InputPayManaExecuteCommands(p, source + "\r\n", cost.getCostMana().getManaToPay())
                 : new InputPayManaExecuteCommands(p, source + "\r\n" + "Current Card: " + current + "\r\n" , cost.getCostMana().getManaToPay());
         Singletons.getControl().getInputQueue().setInputAndWait(toSet);

@@ -28,7 +28,7 @@ import forge.view.ButtonUtil;
 //pays the cost of a card played from the player's hand
 //the card is removed from the players hand if the cost is paid
 //CANNOT be used for ABILITIES
-public class InputPayManaSimple extends InputPayManaBase {
+public class InputPayManaSimple extends InputPayMana {
     // anything that uses this should be converted to Ability_Cost
     /** Constant <code>serialVersionUID=3467312982164195091L</code>. */
     private static final long serialVersionUID = 3467312982164195091L;

@@ -35,15 +35,13 @@ import forge.gui.match.views.VMessage;
 public abstract class InputBase implements java.io.Serializable, Input {
     /** Constant <code>serialVersionUID=-6539552513871194081L</code>. */
     private static final long serialVersionUID = -6539552513871194081L;
-    private InputQueue queue;
     private boolean finished = false;
     protected final boolean isFinished() { return finished; }
     protected final void setFinished() { finished = true; }
     
     // showMessage() is always the first method called
     @Override
-    public final void showMessage(InputQueue iq) {
-        queue = iq;
+    public final void showMessageInitial() {
         finished = false;
         showMessage();
     }
@@ -51,28 +49,39 @@ public abstract class InputBase implements java.io.Serializable, Input {
     protected abstract void showMessage();
 
     @Override
-    public void selectCard(final Card c, boolean isMetaDown) {   }
-    @Override
     public void selectPlayer(final Player player) {    }
+
+    
     @Override
-    public void selectButtonOK() {    }
+    public final void selectButtonCancel() {
+        if( isFinished() ) return;
+        onCancel();
+    }
+
     @Override
-    public void selectButtonCancel() {    }
+    public final void selectButtonOK() {
+        if( isFinished() ) return;
+        onOk();
+    }
+
+    @Override
+    public final void selectCard(Card c, boolean isMetaDown) {
+        if( isFinished() ) return;
+        onCardSelected(c, isMetaDown);
+    }
+
+    protected void onCardSelected(Card c, boolean isRmb) {}
+    protected void onCancel() {}
+    protected void onOk() {}
 
     // to remove need for CMatchUI dependence
     protected final void showMessage(String message) { 
         CMatchUI.SINGLETON_INSTANCE.showMessage(message);
     }
-    
 
-    protected void afterStop() { }
 
     protected final void flashIncorrectAction() {
         SDisplayUtil.remind(VMessage.SINGLETON_INSTANCE);
-    }
-
-    protected InputQueue getQueue() {
-        return queue;
     }
 
     protected String getTurnPhasePriorityMessage(Player player) {

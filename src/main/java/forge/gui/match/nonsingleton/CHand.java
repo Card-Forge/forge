@@ -105,7 +105,7 @@ public class CHand implements ICDoc, Observer {
             public void mousePressed(final MouseEvent e) {
                 if (e.getButton() != MouseEvent.BUTTON1) { return; }
 
-                CMessage.SINGLETON_INSTANCE.getInputControl().selectCard(cardobj);
+                CMessage.SINGLETON_INSTANCE.getInputControl().selectCard(cardobj, e.isMetaDown());
             }
         });
     }
@@ -116,7 +116,7 @@ public class CHand implements ICDoc, Observer {
         }
         final Card c = view.getHandArea().getHoveredCard(e);
         if (c != null) {
-            CMessage.SINGLETON_INSTANCE.getInputControl().selectCard(c);
+            CMessage.SINGLETON_INSTANCE.getInputControl().selectCard(c, e.isMetaDown());
         }
     }
 

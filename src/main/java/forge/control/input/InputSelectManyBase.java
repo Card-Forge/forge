@@ -126,9 +126,6 @@ public abstract class InputSelectManyBase<T extends GameEntity> extends InputSyn
         for(T c : selected)
             if( c instanceof Card)
                 ((Card)c).setUsedToPay(false);
-
-        super.afterStop(); // It's ultimatelly important to keep call to super class!
-    
    }
 
 

@@ -11,7 +11,7 @@ import forge.card.mana.ManaCostBeingPaid;
 import forge.card.spellability.SpellAbility;
 import forge.view.ButtonUtil;
 
-public class InputPayManaX extends InputPayManaBase {
+public class InputPayManaX extends InputPayMana {
     private static final long serialVersionUID = -6900234444347364050L;
     private int xPaid = 0;
     private byte colorsPaid;

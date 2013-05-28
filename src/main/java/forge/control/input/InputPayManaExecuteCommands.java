@@ -33,7 +33,7 @@ import forge.game.player.Player;
  * @author Forge
  * @version $Id$
  */
-public class InputPayManaExecuteCommands extends InputPayManaBase {
+public class InputPayManaExecuteCommands extends InputPayMana {
     /**
      * Constant <code>serialVersionUID=3836655722696348713L</code>.
      */
