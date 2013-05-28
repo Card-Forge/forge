@@ -62,6 +62,11 @@ Psychogenic Probe
 Treacherous Vampire
 Reborn Hero
 Showstopper
+Sorin Markov
+Mindslaver
+Gustha's Scepter
+Thoughtbound Primoc
+Wild Mammoth
 
 
 ----------
@@ -128,6 +133,8 @@ Molten Birth
 Vastwood Hydra
 Sporemound
 Woodborn Behemoth
+Soulmender
+Stonehorn Chanter
 
 
 ------------
