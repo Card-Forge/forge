@@ -84,7 +84,6 @@ public class Upkeep extends Phase {
         game.getStack().freezeStack();
         Upkeep.upkeepBraidOfFire(game);
 
-        Upkeep.upkeepSlowtrips(game); // for "Draw a card at the beginning of the next turn's upkeep."
         Upkeep.upkeepUpkeepCost(game); // sacrifice unless upkeep cost is paid
         Upkeep.upkeepEcho(game);
 
@@ -201,47 +200,6 @@ public class Upkeep extends Phase {
             }
         }
     } // echo
-
-    /**
-     * <p>
-     * upkeepSlowtrips. Draw a card at the beginning of the next turn's upkeep.
-     * </p>
-     */
-    private static void upkeepSlowtrips(final GameState game) {
-        Player turnOwner = game.getPhaseHandler().getPlayerTurn();
-
-        // does order matter here?
-        drawForSlowtrips(turnOwner, game);
-        for (Player p : game.getPlayers()) {
-            if (p == turnOwner) {
-                continue;
-            }
-            drawForSlowtrips(p, game);
-        }
-    }
-
-    public static void drawForSlowtrips(final Player player, final GameState game) {
-        List<Card> list = player.getSlowtripList();
-
-        for (Card card : list) {
-            // otherwise another slowtrip gets added
-            card.removeIntrinsicKeyword("Draw a card at the beginning of the next turn's upkeep.");
-
-            final Ability slowtrip = new Ability(card, ManaCost.ZERO) {
-                @Override
-                public void resolve() {
-                    player.drawCard();
-                }
-            };
-            slowtrip.setStackDescription(card + " - Draw a card.");
-            slowtrip.setDescription(card + " - Draw a card.");
-            slowtrip.setActivatingPlayer(player);
-
-            game.getStack().addSimultaneousStackEntry(slowtrip);
-
-        }
-        player.clearSlowtripList();
-    }
 
     /**
      * <p>

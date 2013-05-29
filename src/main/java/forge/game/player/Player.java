@@ -134,9 +134,6 @@ public class Player extends GameEntity implements Comparable<Player> {
     /** The num discarded this turn. */
     private int numDiscardedThisTurn = 0;
     
-    /** The slowtrip list. */
-    private List<Card> slowtripList = new ArrayList<Card>();
-    
     /** A list of tokens not in play, but on their way.
      * This list is kept in order to not break ETB-replacement
      * on tokens. */
@@ -1946,38 +1943,6 @@ public class Player extends GameEntity implements Comparable<Player> {
         final Card old = this.lastDrawnCard;
         this.lastDrawnCard = null;
         return old;
-    }
-
-    /**
-     * <p>
-     * Getter for the field <code>slowtripList</code>.
-     * </p>
-     * 
-     * @return a {@link forge.CardList} object.
-     */
-    public final List<Card> getSlowtripList() {
-        return this.slowtripList;
-    }
-
-    /**
-     * <p>
-     * clearSlowtripList.
-     * </p>
-     */
-    public final void clearSlowtripList() {
-        this.slowtripList.clear();
-    }
-
-    /**
-     * <p>
-     * addSlowtripList.
-     * </p>
-     * 
-     * @param card
-     *            a {@link forge.Card} object.
-     */
-    public final void addSlowtripList(final Card card) {
-        this.slowtripList.add(card);
     }
 
     /**

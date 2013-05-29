@@ -348,11 +348,6 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
 
             case UPKEEP:
                 if (this.getPlayerTurn().hasKeyword("Skip your upkeep step.")) {
-                    // Slowtrips all say "on the next turn's upkeep" if there is no
-                    // upkeep next turn, the trigger will never occur.
-                    for (Player p : game.getPlayers()) {
-                        p.clearSlowtripList();
-                    }
                     this.setPlayersPriorityPermission(false);
                 } else {
                     this.nUpkeepsThisTurn++;

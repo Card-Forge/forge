@@ -74,10 +74,6 @@ public class DrawEffect extends SpellAbilityEffect {
                         final StringBuilder sb = new StringBuilder();
                         sb.append("Do you want to draw ").append(numCards).append(" cards(s)");
 
-                        if (slowDraw) {
-                            sb.append(" next upkeep");
-                        }
-
                         sb.append("?");
 
                         if (!GuiDialog.confirm(sa.getSourceCard(), sb.toString())) {
@@ -85,11 +81,9 @@ public class DrawEffect extends SpellAbilityEffect {
                         }
                     }
                 }
-
+                //TODO: remove this deprecation exception
                 if (slowDraw) {
-                    for (int i = 0; i < numCards; i++) {
-                        p.addSlowtripList(source);
-                    }
+                    throw new RuntimeException("This api option is no longer supported.  Please file a bug report with the card that threw this error.");
                 } else {
                     final List<Card> drawn = p.drawCards(numCards);
                     if (sa.hasParam("Reveal")) {

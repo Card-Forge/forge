@@ -3,6 +3,7 @@ package forge.card.ability.effects;
 import java.util.HashMap;
 import java.util.Map;
 
+import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
 import forge.card.trigger.Trigger;
@@ -35,6 +36,19 @@ public class DelayedTriggerEffect extends SpellAbilityEffect {
         if (mapParams.containsKey("SpellDescription")) {
             mapParams.put("TriggerDescription", mapParams.get("SpellDescription"));
             mapParams.remove("SpellDescription");
+        }
+
+        String triggerRemembered = null;
+
+        // Set Remembered
+        if (sa.hasParam("RememberObjects")) {
+            triggerRemembered = sa.getParam("RememberObjects");
+        }
+
+        if (triggerRemembered != null) {
+            for (final Object o : AbilityUtils.getDefinedObjects(sa.getSourceCard(), triggerRemembered, sa)) {
+                sa.getSourceCard().addRemembered(o);
+            }
         }
 
         final Trigger delTrig = TriggerHandler.parseTrigger(mapParams, sa.getSourceCard(), true);
