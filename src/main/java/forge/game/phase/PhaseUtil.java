@@ -103,7 +103,12 @@ public class PhaseUtil {
 
 
         for (final Card c : list) {
-            CombatUtil.checkPropagandaEffects(game, c);
+            boolean canAttack = CombatUtil.checkPropagandaEffects(game, c);
+            if ( canAttack ) {
+                if (!c.hasKeyword("Vigilance")) { c.tap(); }
+            } else {
+                game.getCombat().removeFromCombat(c);
+            }
         }
         PhaseUtil.handleAttackingTriggers(game);
     }

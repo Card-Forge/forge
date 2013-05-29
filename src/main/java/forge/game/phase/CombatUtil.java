@@ -34,6 +34,7 @@ import forge.CardLists;
 import forge.CardPredicates;
 import forge.Command;
 import forge.Constant;
+import forge.FThreads;
 import forge.GameEntity;
 import forge.card.CardType;
 import forge.card.MagicColor;
@@ -426,14 +427,12 @@ public class CombatUtil {
         return true;
     }
 
-    public static void orderMultipleCombatants(final GameState game) {
-        final Combat combat = game.getCombat();
-
+    public static void orderMultipleCombatants(final Combat combat) {
         CombatUtil.orderMultipleBlockers(combat);
-        CombatUtil.showCombat(game);
+        CombatUtil.showCombat();
 
         CombatUtil.orderBlockingMultipleAttackers(combat);
-        CombatUtil.showCombat(game);
+        CombatUtil.showCombat();
     }
 
     private static void orderMultipleBlockers(final Combat combat) {
@@ -825,8 +824,7 @@ public class CombatUtil {
         final GameState game = c.getGame();
         if (c.isTapped() || c.isPhasedOut()
                 || (c.hasSickness() && !c.hasKeyword("CARDNAME can attack as though it had haste."))
-                || game.getPhaseHandler().getPhase()
-                    .isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
+                || game.getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
             return false;
         }
         return true;
@@ -969,11 +967,11 @@ public class CombatUtil {
      * showCombat.
      * </p>
      */
-    public static void showCombat(GameState game) {
-        if (game.getPhaseHandler().inCombat()) {
+    public static void showCombat() {
+        FThreads.invokeInEdtNowOrLater( new Runnable() { @Override public void run() {
             SDisplayUtil.showTab(EDocID.REPORT_COMBAT.getDoc());
-        }
-        CCombat.SINGLETON_INSTANCE.update();
+            CCombat.SINGLETON_INSTANCE.update();
+        } }); 
     } // showBlockers()
 
 
@@ -987,7 +985,7 @@ public class CombatUtil {
      * @param bLast
      *            a boolean.
      */
-    public static void checkPropagandaEffects(final GameState game, final Card c) {
+    public static boolean checkPropagandaEffects(final GameState game, final Card c) {
         Cost attackCost = new Cost(ManaCost.ZERO, true);
         // Sort abilities to apply them in proper order
         for (Card card : game.getCardsIn(ZoneType.listValueOf("Battlefield,Command"))) {
@@ -1013,12 +1011,7 @@ public class CombatUtil {
                 }
             }
         }
-
-        if ( hasPaid ) {
-            if (!c.hasKeyword("Vigilance")) { c.tap(); }
-        } else {
-            game.getCombat().removeFromCombat(c);
-        }
+        return hasPaid;
     }
 
     /**

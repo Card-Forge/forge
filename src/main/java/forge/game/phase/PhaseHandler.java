@@ -355,7 +355,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
             }
     
             if (inCombat()) {
-                CombatUtil.showCombat(game);
+                CombatUtil.showCombat();
             }
         }
     
@@ -365,7 +365,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
         if (this.givePriorityToPlayer) {
             // Run triggers if phase isn't being skipped
             final HashMap<String, Object> runParams = new HashMap<String, Object>();
-            runParams.put("Phase", this.getPhase().NameForScripts);
+            runParams.put("Phase", this.getPhase().nameForScripts);
             runParams.put("Player", this.getPlayerTurn());
             game.getTriggerHandler().runTrigger(TriggerType.Phase, runParams, false);
         }
@@ -795,7 +795,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
     }
     
     public String debugPrintState(boolean hasPriority) {
-        return String.format("%s's %s [%sP] %s", getPlayerTurn(), getPhase().NameForUi, hasPriority ? "+" : "-", getPriorityPlayer());
+        return String.format("%s's %s [%sP] %s", getPlayerTurn(), getPhase().nameForUi, hasPriority ? "+" : "-", getPriorityPlayer());
     }
 
 

@@ -12,7 +12,7 @@ public enum PhaseType {
     UNTAP("Untap"),
     UPKEEP("Upkeep"),
     DRAW("Draw"),
-    MAIN1("Main1"),
+    MAIN1("Main, precombat", "Main1"),
     COMBAT_BEGIN("Begin Combat", "BeginCombat"),
     COMBAT_DECLARE_ATTACKERS("Declare Attackers"),
     COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY("Declare Attackers - Play Instants and Abilities"),
@@ -21,7 +21,7 @@ public enum PhaseType {
     COMBAT_FIRST_STRIKE_DAMAGE("First Strike Damage"),
     COMBAT_DAMAGE("Combat Damage"),
     COMBAT_END("End Combat", "EndCombat"),
-    MAIN2("Main2"),
+    MAIN2("Main, postcombat", "Main2"),
     END_OF_TURN("End of Turn"),
     CLEANUP("Cleanup");
 
@@ -35,15 +35,15 @@ public enum PhaseType {
                     )
             );
 
-    public final String NameForUi;
-    public final String NameForScripts;
+    public final String nameForUi;
+    public final String nameForScripts;
     
     private PhaseType(String name) {
         this(name, name);
     }
     private PhaseType(String name, String name_for_scripts) {
-        NameForUi = name;
-        NameForScripts = name_for_scripts;
+        nameForUi = name;
+        nameForScripts = name_for_scripts;
     }
 
     
@@ -68,7 +68,7 @@ public enum PhaseType {
         }
         final String valToCompate = value.trim();
         for (final PhaseType v : PhaseType.values()) {
-            if (v.NameForScripts.compareToIgnoreCase(valToCompate) == 0) {
+            if (v.nameForScripts.compareToIgnoreCase(valToCompate) == 0) {
                 return v;
             }
         }

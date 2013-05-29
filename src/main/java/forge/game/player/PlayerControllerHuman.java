@@ -498,7 +498,7 @@ public class PlayerControllerHuman extends PlayerController {
                 return;
     
             case COMBAT_DECLARE_BLOCKERS:
-                InputSynchronized inpBlock = new InputBlock(player, game);
+                InputSynchronized inpBlock = new InputBlock(player, game.getCombat());
                 Singletons.getControl().getInputQueue().setInputAndWait(inpBlock);
                 return;
 

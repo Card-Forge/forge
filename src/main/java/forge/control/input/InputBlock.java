@@ -22,10 +22,9 @@ import java.util.HashMap;
 import java.util.List;
 
 import forge.Card;
-import forge.game.GameState;
+import forge.game.phase.Combat;
 import forge.game.phase.CombatUtil;
 import forge.game.player.Player;
-import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.view.ButtonUtil;
 
@@ -43,16 +42,16 @@ public class InputBlock extends InputSyncronizedBase {
 
     private Card currentAttacker = null;
     private final HashMap<Card, List<Card>> allBlocking = new HashMap<Card, List<Card>>();
-    private final GameState game;
+    private final Combat combat;
     private final Player player;
     
     /**
      * TODO: Write javadoc for Constructor.
      * @param priority
      */
-    public InputBlock(Player human, GameState game) {
+    public InputBlock(Player human, Combat combat) {
         player = human;
-        this.game = game;
+        this.combat = combat;
     }
 
     private  final void removeFromAllBlocking(final Card c) {
@@ -79,16 +78,16 @@ public class InputBlock extends InputSyncronizedBase {
             showMessage(sb.toString());
         }
 
-        CombatUtil.showCombat(game);
+        CombatUtil.showCombat();
     }
 
     /** {@inheritDoc} */
     @Override
     public final void onOk() {
-        if (CombatUtil.finishedMandatoryBlocks(game.getCombat(), player)) {
+        if (CombatUtil.finishedMandatoryBlocks(combat, player)) {
             // Done blocking
             ButtonUtil.reset();
-            CombatUtil.orderMultipleCombatants(game);
+            CombatUtil.orderMultipleCombatants(combat);
             currentAttacker = null;
             allBlocking.clear();
 
@@ -102,24 +101,22 @@ public class InputBlock extends InputSyncronizedBase {
 
         if (isMetaDown) {
             if (card.getController() == player ) {
-                game.getCombat().removeFromCombat(card);
+                combat.removeFromCombat(card);
             }
             removeFromAllBlocking(card);
-            CombatUtil.showCombat(game);
+            CombatUtil.showCombat();
             return;
         }
         
         // is attacking?
         boolean reminder = true;
 
-        if (game.getCombat().getAttackers().contains(card)) {
+        if (combat.getAttackers().contains(card)) {
             this.currentAttacker = card;
             reminder = false;
         } else {
-            Zone zone = game.getZoneOf(card);
             // Make sure this card is valid to even be a blocker
-            if (this.currentAttacker != null && card.isCreature() && card.getController().equals(player)
-                    && zone.is(ZoneType.Battlefield, player)) {
+            if (this.currentAttacker != null && card.isCreature() && player.getZone(ZoneType.Battlefield).contains(card)) {
                 // Create a new blockedBy list if it doesn't exist
                 if (!this.allBlocking.containsKey(card)) {
                     this.allBlocking.put(card, new ArrayList<Card>());
@@ -127,9 +124,9 @@ public class InputBlock extends InputSyncronizedBase {
 
                 List<Card> attackersBlocked = this.allBlocking.get(card);
                 if (!attackersBlocked.contains(this.currentAttacker)
-                        && CombatUtil.canBlock(this.currentAttacker, card, game.getCombat())) {
+                        && CombatUtil.canBlock(this.currentAttacker, card, combat)) {
                     attackersBlocked.add(this.currentAttacker);
-                    game.getCombat().addBlocker(this.currentAttacker, card);
+                    combat.addBlocker(this.currentAttacker, card);
                     reminder = false;
                 }
             }

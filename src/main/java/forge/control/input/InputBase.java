@@ -90,7 +90,7 @@ public abstract class InputBase implements java.io.Serializable, Input {
     
         sb.append("Priority: ").append(player).append("\n").append("\n");
         sb.append("Turn : ").append(ph.getPlayerTurn()).append("\n");
-        sb.append("Phase: ").append(ph.getPhase().NameForUi).append("\n");
+        sb.append("Phase: ").append(ph.getPhase().nameForUi).append("\n");
         sb.append("Stack: ");
         if (!player.getGame().getStack().isEmpty()) {
             sb.append(player.getGame().getStack().size()).append(" to Resolve.");

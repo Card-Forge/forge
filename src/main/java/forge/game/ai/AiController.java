@@ -796,30 +796,27 @@ public class AiController {
     
     public void onPriorityRecieved() {
         final PhaseType phase = game.getPhaseHandler().getPhase();
-        
-        if (!game.getStack().isEmpty()) {
-            playSpellAbilities(game);
-        } else {
-            switch(phase) {
-                case COMBAT_DECLARE_ATTACKERS:
-                    declareAttackers();
-                    break;
-                    
-                case COMBAT_DECLARE_BLOCKERS:
-                    final List<Card> blockers = player.getCreaturesInPlay();
-                    game.setCombat(ComputerUtilBlock.getBlockers(player, game.getCombat(), blockers));
-                    CombatUtil.orderMultipleCombatants(game);
-                    break;
+        switch(phase) {
+            case COMBAT_DECLARE_ATTACKERS:
+                declareAttackers();
+                break;
+                
+            case COMBAT_DECLARE_BLOCKERS:
+                final List<Card> blockers = player.getCreaturesInPlay();
+                game.setCombat(ComputerUtilBlock.getBlockers(player, game.getCombat(), blockers));
+                CombatUtil.orderMultipleCombatants(game.getCombat());
+                break;
 
-                case MAIN1:
-                case MAIN2:
-                    Log.debug("Computer " + phase.toString());
+            case MAIN1:
+            case MAIN2:
+                Log.debug("Computer " + phase.nameForUi);
+                
+                if (game.getStack().isEmpty())
                     playLands();
-                    // fall through is intended
-                default:
-                    playSpellAbilities(game);
-                    break;
-            }
+                // fall through is intended
+            default:
+                playSpellAbilities(game);
+                break;
         }
     }
     

@@ -37,7 +37,7 @@ public class GameLogFormatter {
         } else if ( ev instanceof PhaseEvent ) {
             Player p = ((PhaseEvent) ev).playerTurn;
             PhaseType ph = ((PhaseEvent) ev).phase;
-            return new GameLogEntry(GameEventType.PHASE, ((PhaseEvent) ev).phaseDesc + Lang.getPossesive(p.getName()) + " " + ph.NameForUi);
+            return new GameLogEntry(GameEventType.PHASE, ((PhaseEvent) ev).phaseDesc + Lang.getPossesive(p.getName()) + " " + ph.nameForUi);
         }
         return null;
     }
