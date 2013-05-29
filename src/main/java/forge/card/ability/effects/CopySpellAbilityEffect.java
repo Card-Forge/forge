@@ -113,7 +113,10 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
             }
             chosenSA.setActivatingPlayer(controller);
             List<Object> candidates = chosenSA.getTarget().getAllCandidates(chosenSA, true);
-            if (sa.hasParam("CanTargetPlayer")) {// Radiate
+            if (sa.hasParam("CanTargetPlayer")) {
+                // Radiate
+                // Remove targeted players because getAllCandidates include all the valid players
+                candidates.removeAll(chosenSA.getTarget().getTargetPlayers());
                 for (Object o : candidates) {
                     CardFactory.copySpellontoStack(card, chosenSA.getSourceCard(), chosenSA, true, o);
                 }
