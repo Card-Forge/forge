@@ -66,7 +66,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void, Void>
     @Override
     public Void visit(GameEventDuelOutcome ev, Void params) {
         FThreads.invokeInEdtNowOrLater(new Runnable() { @Override public void run() {
-            fc.getInputQueue().onGameOver();
+            fc.getInputQueue().onGameOver(); // this will unlock any game threads waiting for inputs to complete
         } });
         return null;
     }    

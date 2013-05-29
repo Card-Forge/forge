@@ -10,8 +10,6 @@ import com.google.common.collect.Lists;
 import forge.Card;
 import forge.Singletons;
 import forge.game.event.GameEventAnteCardsSelected;
-import forge.game.event.GameEventDuelFinished;
-import forge.game.event.GameEventDuelOutcome;
 import forge.game.event.GameEventFlipCoin;
 import forge.game.player.LobbyPlayer;
 import forge.game.player.Player;
@@ -72,23 +70,11 @@ public class MatchState {
         return gamesToWinMatch;
     }
 
-    /**
-     * TODO: Write javadoc for this method.
-     * @param reason
-     * 
-     * @param game
-     */
-    public void addGamePlayed(GameEndReason reason, GameState game) {
-        if (!game.isGameOver()) {
-            throw new RuntimeException("Game is not over yet.");
+    public void addGamePlayed(GameOutcome outcome) {
+        if (!currentGame.isGameOver()) {
+            throw new IllegalStateException("Game is not over yet.");
         }
-
-        final GameOutcome result = new GameOutcome(reason, game.getRegisteredPlayers());
-        result.setTurnsPlayed(game.getPhaseHandler().getTurn());
-        gamesPlayed.add(result);
-
-        // The log shall listen to events and generate text internally
-        game.fireEvent(new GameEventDuelOutcome(result, gamesPlayedRo));
+        gamesPlayed.add(outcome);
     }
     
 

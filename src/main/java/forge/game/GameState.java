@@ -39,6 +39,7 @@ import forge.card.spellability.SpellAbilityStackInstance;
 import forge.card.trigger.TriggerHandler;
 import forge.card.trigger.TriggerType;
 import forge.game.event.GameEvent;
+import forge.game.event.GameEventDuelOutcome;
 import forge.game.phase.Cleanup;
 import forge.game.phase.Combat;
 import forge.game.phase.EndOfCombat;
@@ -311,7 +312,14 @@ public class GameState {
         for (Player p : roIngamePlayers) {
             p.onGameOver();
         }
-        match.addGamePlayed(reason, this);
+        
+        final GameOutcome result = new GameOutcome(reason, getRegisteredPlayers());
+        result.setTurnsPlayed(getPhaseHandler().getTurn());
+
+        match.addGamePlayed(result);
+        
+        // The log shall listen to events and generate text internally
+        fireEvent(new GameEventDuelOutcome(result, match.getPlayedGames()));
     }
 
     public Zone getZoneOf(final Card c) {
