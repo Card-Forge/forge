@@ -2,6 +2,7 @@ Name:Douse
 ManaCost:2 U
 Types:Enchantment
 A:AB$ Counter | Cost$ 1 U | TargetType$ Spell | ValidTgts$ Card.Red | TgtPrompt$ Select target Red Spell | SpellDescription$ Counter target red spell.
+SVar:NonStackingEffect:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/douse.jpg
 Oracle:{1}{U}: Counter target red spell.

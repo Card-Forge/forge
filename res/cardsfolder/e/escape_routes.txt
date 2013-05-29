@@ -2,6 +2,7 @@ Name:Escape Routes
 ManaCost:2 U
 Types:Enchantment
 A:AB$ ChangeZone | Cost$ 2 U | ValidTgts$ Creature.White+YouCtrl,Creature.Black+YouCtrl | TgtPrompt$ Select target white or black creature you control | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target white or black creature you control to its owner's hand.
+SVar:NonStackingEffect:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/escape_routes.jpg
 Oracle:{2}{U}: Return target white or black creature you control to its owner's hand.

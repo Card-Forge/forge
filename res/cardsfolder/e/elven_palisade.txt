@@ -2,6 +2,7 @@ Name:Elven Palisade
 ManaCost:G
 Types:Enchantment
 A:AB$ Pump | Cost$ Sac<1/Forest> | NumAtt$ -3 | NumDef$ 0 | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking | SpellDescription$ Target attacking creature gets -3/-0 until end of turn.
+SVar:NonStackingEffect:True
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elven_palisade.jpg
 Oracle:Sacrifice a Forest: Target attacking creature gets -3/-0 until end of turn.
