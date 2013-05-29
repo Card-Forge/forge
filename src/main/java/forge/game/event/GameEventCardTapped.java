@@ -1,10 +1,14 @@
 package forge.game.event;
 
-public class GameEventCardTapped extends GameEvent {
-    public final boolean Tapped;
+import forge.Card;
 
-    public GameEventCardTapped(boolean tapped) {
-        Tapped = tapped;
+public class GameEventCardTapped extends GameEvent {
+    public final boolean tapped;
+    public final Card card;
+
+    public GameEventCardTapped(final Card card, final boolean tapped) {
+        this.tapped = tapped;
+        this.card = card;
     }
     
     

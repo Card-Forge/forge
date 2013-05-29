@@ -43,7 +43,7 @@ import forge.control.KeyboardShortcuts.Shortcut;
 import forge.control.input.InputQueue;
 import forge.game.GameState;
 import forge.game.ai.AiProfileUtil;
-import forge.game.event.GameEventCardsAnted;
+import forge.game.event.GameEventAnteCardsSelected;
 import forge.game.event.GameEventDuelFinished;
 import forge.game.event.GameEvent;
 import forge.game.event.GameEventTurnPhase;
@@ -377,7 +377,7 @@ public enum FControl {
         inputQueue = new InputQueue();
         
         this.game = game0;
-        game.getEvents().register(Singletons.getControl().getSoundSystem());
+        game.subscribeToEvents(Singletons.getControl().getSoundSystem());
         
         LobbyPlayer humanLobbyPlayer = getLobby().getGuiPlayer();
         // The UI controls should use these game data as models
@@ -401,7 +401,7 @@ public enum FControl {
         // some observers were set in CMatchUI.initMatch
     
         // Listen to DuelOutcome event to show ViewWinLose
-        game.getEvents().register(this);
+        game.subscribeToEvents(this);
         
         
         VAntes.SINGLETON_INSTANCE.setModel(game.getRegisteredPlayers());
@@ -425,11 +425,11 @@ public enum FControl {
                 new ViewWinLose(game.getMatch());
                 SOverlayUtils.showOverlay();
             } });
-        } else if ( ev instanceof GameEventCardsAnted ) {
+        } else if ( ev instanceof GameEventAnteCardsSelected ) {
             // Require EDT here? 
             final String nl = System.getProperty("line.separator");
             final StringBuilder msg = new StringBuilder();
-            for (final Pair<Player, Card> kv : ((GameEventCardsAnted) ev).cards) {
+            for (final Pair<Player, Card> kv : ((GameEventAnteCardsSelected) ev).cards) {
                 msg.append(kv.getKey().getName()).append(" ante: ").append(kv.getValue()).append(nl);
             }
             GuiDialog.message(msg.toString(), "Ante");

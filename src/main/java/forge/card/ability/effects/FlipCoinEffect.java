@@ -131,7 +131,7 @@ public class FlipCoinEffect extends SpellAbilityEffect {
     public static boolean flipCoinNoCall(final Card source, final Player flipper) {
         final boolean resultIsHeads = MyRandom.getRandom().nextBoolean();
 
-        flipper.getGame().getEvents().post(new GameEventFlipCoin());
+        flipper.getGame().fireEvent(new GameEventFlipCoin());
         final StringBuilder result = new StringBuilder();
         result.append(flipper.getName());
         result.append("'s flip comes up");

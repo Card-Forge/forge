@@ -38,6 +38,7 @@ import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityStackInstance;
 import forge.card.trigger.TriggerHandler;
 import forge.card.trigger.TriggerType;
+import forge.game.event.GameEvent;
 import forge.game.phase.Cleanup;
 import forge.game.phase.Combat;
 import forge.game.phase.EndOfCombat;
@@ -521,10 +522,14 @@ public class GameState {
     }
 
     /**
-     * @return the events
+     * Fire only the events after they became real for gamestate and won't get replaced.<br>
+     * The events are sent to UI, log and sound system. Network listeners are under development. 
      */
-    public EventBus getEvents() {
-        return events;
+    public void fireEvent(GameEvent event) {
+        events.post(event);
+    }
+    public void subscribeToEvents(Object subscriber) {
+        events.register(subscriber);
     }
 
     /**

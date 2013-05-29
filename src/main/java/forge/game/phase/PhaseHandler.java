@@ -200,7 +200,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
             game.getGameLog().add(GameEventType.TURN, "Turn " + this.turn + " (" + this.getPlayerTurn() + ")");
         }
 
-        game.getEvents().post(new GameEventTurnPhase(this.getPlayerTurn(), this.getPhase(), phaseType));
+        game.fireEvent(new GameEventTurnPhase(this.getPlayerTurn(), this.getPhase(), phaseType));
         
     }
 
@@ -393,7 +393,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
                 p.loseLife(burn);
     
                 // Play the Mana Burn sound
-                game.getEvents().post(new GameEventManaBurn());
+                game.fireEvent(new GameEventManaBurn());
             }
             p.updateObservers();
         }
@@ -426,7 +426,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
                 }
                 this.planarDiceRolledthisTurn = 0;
                 // Play the End Turn sound
-                game.getEvents().post(new GameEventEndOfTurn());
+                game.fireEvent(new GameEventEndOfTurn());
                 break;
             default: // no action
         }
@@ -716,7 +716,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
             // If ever the karn's ultimate resolved
             if( game.getAge() == GameAge.RestartedByKarn) {
                 phase = null;
-                game.getEvents().post(new GameEventGameRestarted(playerTurn));
+                game.fireEvent(new GameEventGameRestarted(playerTurn));
                 return;
             }
             

@@ -1154,7 +1154,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         }
 
         // play the Add Counter sound
-        getGame().getEvents().post(new GameEventCounterAdded(addAmount));
+        getGame().fireEvent(new GameEventCounterAdded(addAmount));
 
         this.updateObservers();
     }
@@ -1235,7 +1235,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         }
 
         // Play the Subtract Counter sound
-        getGame().getEvents().post(new GameEventCounterRemoved(delta));
+        getGame().fireEvent(new GameEventCounterRemoved(delta));
 
         this.updateObservers();
     }
@@ -3184,7 +3184,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         c.addEquippedBy(this);
 
         // Play the Equip sound
-        getGame().getEvents().post(new GameEventCardEquipped());
+        getGame().fireEvent(new GameEventCardEquipped());
         // run trigger
         final HashMap<String, Object> runParams = new HashMap<String, Object>();
         runParams.put("AttachSource", this);
@@ -4078,7 +4078,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         this.setTapped(true);
 
         // Play the Tap sound
-        getGame().getEvents().post(new GameEventCardTapped(true));
+        getGame().fireEvent(new GameEventCardTapped(this, true));
     }
 
     /**
@@ -4094,7 +4094,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             getGame().getTriggerHandler().runTrigger(TriggerType.Untaps, runParams, false);
 
             // Play the Untap sound
-            getGame().getEvents().post(new GameEventCardTapped(false));
+            getGame().fireEvent(new GameEventCardTapped(this, false));
         }
 
         for (final Command var : this.untapCommandList) {
@@ -7406,7 +7406,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             } 
 
             // Play the Damage sound
-            game.getEvents().post(new GameEventCardDamaged());
+            game.fireEvent(new GameEventCardDamaged());
         }
 
         getGame().getGameLog().add(GameEventType.DAMAGE, String.format("Dealing %d damage to %s. %s", damageToAdd, this.getName(), additionalLog));

@@ -374,7 +374,7 @@ public class Combat {
         } else {
             this.blockerMap.get(blocker).add(attacker);
         }
-        attacker.getGame().getEvents().post(new GameEventBlockerAssigned());
+        attacker.getGame().fireEvent(new GameEventBlockerAssigned());
     }
 
     public final void removeBlockAssignment(final Card attacker, final Card blocker) {

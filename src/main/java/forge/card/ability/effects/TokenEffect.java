@@ -209,7 +209,7 @@ public class TokenEffect extends SpellAbilityEffect {
                 for(Card tok : tokens) {
                     controller.getGame().getAction().moveToPlay(tok);
                 }
-                controller.getGame().getEvents().post(new GameEventTokenCreated());
+                controller.getGame().fireEvent(new GameEventTokenCreated());
                 
                 // Grant rule changes
                 if (this.tokenHiddenKeywords != null) {

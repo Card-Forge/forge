@@ -617,7 +617,7 @@ public class MagicStack extends MyObservable implements Iterable<SpellAbilitySta
         }
         sa.getSourceCard().setXManaCostPaid(0);
 
-        game.getEvents().post(new GameEventSpellResolved(source, sa));
+        game.fireEvent(new GameEventSpellResolved(source, sa));
 
         if (source.hasStartOfKeyword("Haunt") && !source.isCreature()
                 && game.getZoneOf(source).is(ZoneType.Graveyard)) {

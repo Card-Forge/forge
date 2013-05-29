@@ -78,7 +78,7 @@ public class EventVisualizer {
             }
         }
         if (evt instanceof GameEventCardTapped) {
-            return getSoundEffectForTapState(((GameEventCardTapped) evt).Tapped);
+            return getSoundEffectForTapState(((GameEventCardTapped) evt).tapped);
         }
         if (evt instanceof GameEventDuelOutcome) {
             return getSoundEffectForDuelOutcome(((GameEventDuelOutcome) evt).result.getWinner() == Singletons.getControl().getLobby().getGuiPlayer());

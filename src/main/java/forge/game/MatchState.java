@@ -9,7 +9,7 @@ import com.google.common.collect.Lists;
 
 import forge.Card;
 import forge.Singletons;
-import forge.game.event.GameEventCardsAnted;
+import forge.game.event.GameEventAnteCardsSelected;
 import forge.game.event.GameEventDuelFinished;
 import forge.game.event.GameEventDuelOutcome;
 import forge.game.event.GameEventFlipCoin;
@@ -88,10 +88,10 @@ public class MatchState {
         gamesPlayed.add(result);
 
         // The log shall listen to events and generate text internally
-        game.getEvents().post(new GameEventDuelOutcome(result, gamesPlayedRo));
+        game.fireEvent(new GameEventDuelOutcome(result, gamesPlayedRo));
         
         // will pull UI 
-        game.getEvents().post(new GameEventDuelFinished());
+        game.fireEvent(new GameEventDuelFinished());
     }
     
 
@@ -110,7 +110,7 @@ public class MatchState {
         if (useAnte) {  // Deciding which cards go to ante
             List<Pair<Player, Card>> list = GameNew.chooseCardsForAnte(currentGame);
             GameNew.moveCardsToAnte(list);
-            currentGame.getEvents().post(new GameEventCardsAnted(list));
+            currentGame.fireEvent(new GameEventAnteCardsSelected(list));
         }
 
         // This code was run from EDT.
@@ -229,7 +229,7 @@ public class MatchState {
 
         boolean isFirstGame = lastGameOutcome == null;
         if (isFirstGame) {
-            game.getEvents().post(new GameEventFlipCoin()); // Play the Flip Coin sound
+            game.fireEvent(new GameEventFlipCoin()); // Play the Flip Coin sound
             goesFirst = Aggregates.random(game.getPlayers());
         } else {
             for(Player p : game.getPlayers()) {

@@ -100,7 +100,7 @@ public class GuiDialog {
         final String winMsg = winFlip ? " wins flip." : " loses flip.";
     
         // Play the Flip A Coin sound
-        caller.getGame().getEvents().post(new GameEventFlipCoin());
+        caller.getGame().fireEvent(new GameEventFlipCoin());
     
         JOptionPane.showMessageDialog(null, source.getName() + " - " + caller + winMsg, source.getName(),
                 JOptionPane.PLAIN_MESSAGE);

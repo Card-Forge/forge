@@ -24,7 +24,6 @@ import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 
-
 import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -37,6 +36,7 @@ import forge.CardUtil;
 import forge.Command;
 import forge.Constant;
 import forge.CounterType;
+
 import forge.card.MagicColor;
 import forge.card.ability.AbilityFactory;
 import forge.card.ability.AbilityFactory.AbilityRecordType;
@@ -55,12 +55,12 @@ import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityRestriction;
 import forge.game.ai.AiController;
 import forge.game.player.HumanPlay;
+import forge.game.event.GameEventLifeLoss;
 import forge.game.player.Player;
 import forge.game.player.PlayerControllerAi;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 import forge.gui.GuiDialog;
-import forge.sound.SoundEffectType;
 import forge.util.TextUtil;
 
 
@@ -439,7 +439,7 @@ public final class GameActionUtil {
         c.getDamageHistory().registerCombatDamage(player);
 
         // Play the Life Loss sound
-        player.getGame().getEvents().post(SoundEffectType.LifeLoss);
+        player.getGame().fireEvent(new GameEventLifeLoss());
     } // executeCombatDamageToPlayerEffects
 
     /**
