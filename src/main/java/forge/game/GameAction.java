@@ -1545,7 +1545,11 @@ public class GameAction {
                 if( hasKept[i]) continue;
                 
                 Player p = whoCanMulligan.get(i);
-                List<Card> toMulligan = p.canMulligan() ? p.getController().getCardsToMulligan(isCommander, firstPlayer) : null; 
+                List<Card> toMulligan = p.canMulligan() ? p.getController().getCardsToMulligan(isCommander, firstPlayer) : null;
+                
+                if ( game.isGameOver()) // conceded on mulligan prompt
+                    return; 
+                
                 if ( toMulligan != null && !toMulligan.isEmpty()) {
                     if( !isCommander ) {
                         toMulligan = new ArrayList<Card>(p.getCardsIn(ZoneType.Hand));
