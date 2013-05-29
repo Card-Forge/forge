@@ -6,11 +6,11 @@ import forge.game.player.Player;
  * TODO: Write javadoc for this type.
  *
  */
-public class GameRestartedEvent extends Event {
+public class GameEventGameRestarted extends GameEvent {
 
     public final Player whoRestarted; 
     
-    public GameRestartedEvent(Player playerTurn) {
+    public GameEventGameRestarted(Player playerTurn) {
         whoRestarted = playerTurn;
     }
 

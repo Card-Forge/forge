@@ -10,7 +10,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import forge.Card;
 import forge.FThreads;
-import forge.game.event.FlipCoinEvent;
+import forge.game.event.GameEventFlipCoin;
 import forge.game.player.Player;
 import forge.gui.match.CMatchUI;
 import forge.util.MyRandom;
@@ -100,7 +100,7 @@ public class GuiDialog {
         final String winMsg = winFlip ? " wins flip." : " loses flip.";
     
         // Play the Flip A Coin sound
-        caller.getGame().getEvents().post(new FlipCoinEvent());
+        caller.getGame().getEvents().post(new GameEventFlipCoin());
     
         JOptionPane.showMessageDialog(null, source.getName() + " - " + caller + winMsg, source.getName(),
                 JOptionPane.PLAIN_MESSAGE);

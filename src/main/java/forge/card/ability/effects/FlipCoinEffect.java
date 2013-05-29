@@ -10,7 +10,7 @@ import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.card.trigger.TriggerType;
-import forge.game.event.FlipCoinEvent;
+import forge.game.event.GameEventFlipCoin;
 import forge.game.player.Player;
 import forge.gui.GuiDialog;
 import forge.util.MyRandom;
@@ -131,7 +131,7 @@ public class FlipCoinEffect extends SpellAbilityEffect {
     public static boolean flipCoinNoCall(final Card source, final Player flipper) {
         final boolean resultIsHeads = MyRandom.getRandom().nextBoolean();
 
-        flipper.getGame().getEvents().post(new FlipCoinEvent());
+        flipper.getGame().getEvents().post(new GameEventFlipCoin());
         final StringBuilder result = new StringBuilder();
         result.append(flipper.getName());
         result.append("'s flip comes up");

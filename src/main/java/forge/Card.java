@@ -64,11 +64,11 @@ import forge.card.trigger.TriggerType;
 import forge.card.trigger.ZCTrigger;
 import forge.game.GameState;
 import forge.game.GlobalRuleChange;
-import forge.game.event.CardDamagedEvent;
-import forge.game.event.CardEquippedEvent;
-import forge.game.event.CounterAddedEvent;
-import forge.game.event.CounterRemovedEvent;
-import forge.game.event.SetTappedEvent;
+import forge.game.event.GameEventCardDamaged;
+import forge.game.event.GameEventCardEquipped;
+import forge.game.event.GameEventCounterAdded;
+import forge.game.event.GameEventCounterRemoved;
+import forge.game.event.GameEventCardTapped;
 import forge.game.phase.Combat;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
@@ -1154,7 +1154,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         }
 
         // play the Add Counter sound
-        getGame().getEvents().post(new CounterAddedEvent(addAmount));
+        getGame().getEvents().post(new GameEventCounterAdded(addAmount));
 
         this.updateObservers();
     }
@@ -1235,7 +1235,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         }
 
         // Play the Subtract Counter sound
-        getGame().getEvents().post(new CounterRemovedEvent(delta));
+        getGame().getEvents().post(new GameEventCounterRemoved(delta));
 
         this.updateObservers();
     }
@@ -3184,7 +3184,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         c.addEquippedBy(this);
 
         // Play the Equip sound
-        getGame().getEvents().post(new CardEquippedEvent());
+        getGame().getEvents().post(new GameEventCardEquipped());
         // run trigger
         final HashMap<String, Object> runParams = new HashMap<String, Object>();
         runParams.put("AttachSource", this);
@@ -4078,7 +4078,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         this.setTapped(true);
 
         // Play the Tap sound
-        getGame().getEvents().post(new SetTappedEvent(true));
+        getGame().getEvents().post(new GameEventCardTapped(true));
     }
 
     /**
@@ -4094,7 +4094,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             getGame().getTriggerHandler().runTrigger(TriggerType.Untaps, runParams, false);
 
             // Play the Untap sound
-            getGame().getEvents().post(new SetTappedEvent(false));
+            getGame().getEvents().post(new GameEventCardTapped(false));
         }
 
         for (final Command var : this.untapCommandList) {
@@ -7406,7 +7406,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             } 
 
             // Play the Damage sound
-            game.getEvents().post(new CardDamagedEvent());
+            game.getEvents().post(new GameEventCardDamaged());
         }
 
         getGame().getGameLog().add(GameEventType.DAMAGE, String.format("Dealing %d damage to %s. %s", damageToAdd, this.getName(), additionalLog));

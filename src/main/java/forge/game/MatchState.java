@@ -9,10 +9,10 @@ import com.google.common.collect.Lists;
 
 import forge.Card;
 import forge.Singletons;
-import forge.game.event.CardsAntedEvent;
-import forge.game.event.DuelFinishedEvent;
-import forge.game.event.DuelOutcomeEvent;
-import forge.game.event.FlipCoinEvent;
+import forge.game.event.GameEventCardsAnted;
+import forge.game.event.GameEventDuelFinished;
+import forge.game.event.GameEventDuelOutcome;
+import forge.game.event.GameEventFlipCoin;
 import forge.game.player.LobbyPlayer;
 import forge.game.player.Player;
 import forge.properties.ForgePreferences.FPref;
@@ -88,10 +88,10 @@ public class MatchState {
         gamesPlayed.add(result);
 
         // The log shall listen to events and generate text internally
-        game.getEvents().post(new DuelOutcomeEvent(result, gamesPlayedRo));
+        game.getEvents().post(new GameEventDuelOutcome(result, gamesPlayedRo));
         
         // will pull UI 
-        game.getEvents().post(new DuelFinishedEvent());
+        game.getEvents().post(new GameEventDuelFinished());
     }
     
 
@@ -110,7 +110,7 @@ public class MatchState {
         if (useAnte) {  // Deciding which cards go to ante
             List<Pair<Player, Card>> list = GameNew.chooseCardsForAnte(currentGame);
             GameNew.moveCardsToAnte(list);
-            currentGame.getEvents().post(new CardsAntedEvent(list));
+            currentGame.getEvents().post(new GameEventCardsAnted(list));
         }
 
         // This code was run from EDT.
@@ -229,7 +229,7 @@ public class MatchState {
 
         boolean isFirstGame = lastGameOutcome == null;
         if (isFirstGame) {
-            game.getEvents().post(new FlipCoinEvent()); // Play the Flip Coin sound
+            game.getEvents().post(new GameEventFlipCoin()); // Play the Flip Coin sound
             goesFirst = Aggregates.random(game.getPlayers());
         } else {
             for(Player p : game.getPlayers()) {

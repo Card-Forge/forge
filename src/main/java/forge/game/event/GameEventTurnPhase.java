@@ -7,13 +7,13 @@ import forge.game.player.Player;
  * TODO: Write javadoc for this type.
  *
  */
-public class PhaseEvent extends Event {
+public class GameEventTurnPhase extends GameEvent {
 
     public final Player playerTurn;
     public final PhaseType phase;
     public final String phaseDesc;
 
-    public PhaseEvent(Player player, PhaseType ph, String desc) {
+    public GameEventTurnPhase(Player player, PhaseType ph, String desc) {
         playerTurn = player;
         phase = ph;
         phaseDesc = desc;

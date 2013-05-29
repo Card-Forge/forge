@@ -5,10 +5,10 @@ import java.util.List;
 import java.util.Map.Entry;
 
 import forge.game.GameOutcome;
-import forge.game.event.DuelOutcomeEvent;
-import forge.game.event.Event;
-import forge.game.event.PhaseEvent;
-import forge.game.event.PlayerControlEvent;
+import forge.game.event.GameEventDuelOutcome;
+import forge.game.event.GameEvent;
+import forge.game.event.GameEventTurnPhase;
+import forge.game.event.GameEventPlayerControl;
 import forge.game.phase.Combat;
 import forge.game.phase.PhaseType;
 import forge.game.player.LobbyPlayer;
@@ -19,13 +19,13 @@ import forge.util.Lang;
 public class GameLogFormatter { 
     
     // Some events produce several log entries. I've let them added into log directly
-    static GameLogEntry logEvent(Event ev, GameLog log) {
-        if(ev instanceof DuelOutcomeEvent) {
-            return GameLogFormatter.fillOutcome(log, ((DuelOutcomeEvent) ev).result, ((DuelOutcomeEvent) ev).history );
+    static GameLogEntry logEvent(GameEvent ev, GameLog log) {
+        if(ev instanceof GameEventDuelOutcome) {
+            return GameLogFormatter.fillOutcome(log, ((GameEventDuelOutcome) ev).result, ((GameEventDuelOutcome) ev).history );
             
-        } else if ( ev instanceof PlayerControlEvent ) {
-            LobbyPlayer newController = ((PlayerControlEvent) ev).getNewController();
-            Player p = ((PlayerControlEvent) ev).getPlayer();
+        } else if ( ev instanceof GameEventPlayerControl ) {
+            LobbyPlayer newController = ((GameEventPlayerControl) ev).newController;
+            Player p = ((GameEventPlayerControl) ev).player;
 
             final String message;
             if( newController == null )
@@ -34,10 +34,10 @@ public class GameLogFormatter {
                 message =  String.format("%s is controlled by %s", p.getName(), newController.getName());
             
             return new GameLogEntry(GameEventType.PLAYER_CONROL, message);
-        } else if ( ev instanceof PhaseEvent ) {
-            Player p = ((PhaseEvent) ev).playerTurn;
-            PhaseType ph = ((PhaseEvent) ev).phase;
-            return new GameLogEntry(GameEventType.PHASE, ((PhaseEvent) ev).phaseDesc + Lang.getPossesive(p.getName()) + " " + ph.nameForUi);
+        } else if ( ev instanceof GameEventTurnPhase ) {
+            Player p = ((GameEventTurnPhase) ev).playerTurn;
+            PhaseType ph = ((GameEventTurnPhase) ev).phase;
+            return new GameLogEntry(GameEventType.PHASE, ((GameEventTurnPhase) ev).phaseDesc + Lang.getPossesive(p.getName()) + " " + ph.nameForUi);
         }
         return null;
     }

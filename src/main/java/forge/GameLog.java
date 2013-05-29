@@ -24,7 +24,7 @@ import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 import com.google.common.eventbus.Subscribe;
 
-import forge.game.event.Event;
+import forge.game.event.GameEvent;
 import forge.game.phase.Combat;
 import forge.util.MyObservable;
 
@@ -110,7 +110,7 @@ public class GameLog extends MyObservable {
     // Special methods
     
     @Subscribe
-    public void receiveGameEvent(Event ev) { 
+    public void receiveGameEvent(GameEvent ev) { 
         GameLogEntry record = GameLogFormatter.logEvent(ev, this);
         if( null != record ) {
             add(record);

@@ -33,10 +33,10 @@ import forge.card.trigger.TriggerType;
 import forge.game.GameAge;
 import forge.game.GameState;
 import forge.game.GameType;
-import forge.game.event.EndOfTurnEvent;
-import forge.game.event.GameRestartedEvent;
-import forge.game.event.ManaBurnEvent;
-import forge.game.event.PhaseEvent;
+import forge.game.event.GameEventEndOfTurn;
+import forge.game.event.GameEventGameRestarted;
+import forge.game.event.GameEventManaBurn;
+import forge.game.event.GameEventTurnPhase;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.framework.SDisplayUtil;
@@ -200,7 +200,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
             game.getGameLog().add(GameEventType.TURN, "Turn " + this.turn + " (" + this.getPlayerTurn() + ")");
         }
 
-        game.getEvents().post(new PhaseEvent(this.getPlayerTurn(), this.getPhase(), phaseType));
+        game.getEvents().post(new GameEventTurnPhase(this.getPlayerTurn(), this.getPhase(), phaseType));
         
     }
 
@@ -393,7 +393,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
                 p.loseLife(burn);
     
                 // Play the Mana Burn sound
-                game.getEvents().post(new ManaBurnEvent());
+                game.getEvents().post(new GameEventManaBurn());
             }
             p.updateObservers();
         }
@@ -426,7 +426,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
                 }
                 this.planarDiceRolledthisTurn = 0;
                 // Play the End Turn sound
-                game.getEvents().post(new EndOfTurnEvent());
+                game.getEvents().post(new GameEventEndOfTurn());
                 break;
             default: // no action
         }
@@ -716,7 +716,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
             // If ever the karn's ultimate resolved
             if( game.getAge() == GameAge.RestartedByKarn) {
                 phase = null;
-                game.getEvents().post(new GameRestartedEvent(playerTurn));
+                game.getEvents().post(new GameEventGameRestarted(playerTurn));
                 return;
             }
             

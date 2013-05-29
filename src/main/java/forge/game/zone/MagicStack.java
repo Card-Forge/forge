@@ -58,7 +58,7 @@ import forge.game.GameState;
 import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilCard;
 import forge.game.ai.ComputerUtilCost;
-import forge.game.event.SpellResolvedEvent;
+import forge.game.event.GameEventSpellResolved;
 import forge.game.player.HumanPlay;
 import forge.game.player.Player;
 import forge.gui.GuiChoose;
@@ -617,7 +617,7 @@ public class MagicStack extends MyObservable implements Iterable<SpellAbilitySta
         }
         sa.getSourceCard().setXManaCostPaid(0);
 
-        game.getEvents().post(new SpellResolvedEvent(source, sa));
+        game.getEvents().post(new GameEventSpellResolved(source, sa));
 
         if (source.hasStartOfKeyword("Haunt") && !source.isCreature()
                 && game.getZoneOf(source).is(ZoneType.Graveyard)) {

@@ -31,7 +31,7 @@ import forge.card.spellability.SpellAbility;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerHandler;
 import forge.game.GameState;
-import forge.game.event.TokenCreatedEvent;
+import forge.game.event.GameEventTokenCreated;
 import forge.game.player.Player;
 import forge.gui.GuiChoose;
 import forge.item.CardToken;
@@ -209,7 +209,7 @@ public class TokenEffect extends SpellAbilityEffect {
                 for(Card tok : tokens) {
                     controller.getGame().getAction().moveToPlay(tok);
                 }
-                controller.getGame().getEvents().post(new TokenCreatedEvent());
+                controller.getGame().getEvents().post(new GameEventTokenCreated());
                 
                 // Grant rule changes
                 if (this.tokenHiddenKeywords != null) {

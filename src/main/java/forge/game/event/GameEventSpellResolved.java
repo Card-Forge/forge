@@ -7,7 +7,7 @@ import forge.card.spellability.SpellAbility;
  * TODO: Write javadoc for this type.
  *
  */
-public class SpellResolvedEvent extends Event {
+public class GameEventSpellResolved extends GameEvent {
 
     public final Card Source;
     public final SpellAbility Spell;
@@ -17,7 +17,7 @@ public class SpellResolvedEvent extends Event {
      * @param source
      * @param sa
      */
-    public SpellResolvedEvent(Card source, SpellAbility sa) {
+    public GameEventSpellResolved(Card source, SpellAbility sa) {
         // TODO Auto-generated constructor stub
         Source = source;
         Spell = sa;

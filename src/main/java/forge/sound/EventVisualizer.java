@@ -7,27 +7,27 @@ import java.util.Map;
 import forge.Card;
 import forge.Singletons;
 import forge.card.spellability.SpellAbility;
-import forge.game.event.BlockerAssignedEvent;
-import forge.game.event.CardDamagedEvent;
-import forge.game.event.CardDestroyedEvent;
-import forge.game.event.CardDiscardedEvent;
-import forge.game.event.CardEquippedEvent;
-import forge.game.event.CardRegeneratedEvent;
-import forge.game.event.CardSacrificedEvent;
-import forge.game.event.CounterAddedEvent;
-import forge.game.event.CounterRemovedEvent;
-import forge.game.event.DrawCardEvent;
-import forge.game.event.DuelOutcomeEvent;
-import forge.game.event.EndOfTurnEvent;
-import forge.game.event.Event;
-import forge.game.event.FlipCoinEvent;
-import forge.game.event.LandPlayedEvent;
-import forge.game.event.LifeLossEvent;
-import forge.game.event.PoisonCounterEvent;
-import forge.game.event.SetTappedEvent;
-import forge.game.event.ShuffleEvent;
-import forge.game.event.SpellResolvedEvent;
-import forge.game.event.TokenCreatedEvent;
+import forge.game.event.GameEventBlockerAssigned;
+import forge.game.event.GameEventCardDamaged;
+import forge.game.event.GameEventCardDestroyed;
+import forge.game.event.GameEventCardDiscarded;
+import forge.game.event.GameEventCardEquipped;
+import forge.game.event.GameEventCardRegenerated;
+import forge.game.event.GameEventCardSacrificed;
+import forge.game.event.GameEventCounterAdded;
+import forge.game.event.GameEventCounterRemoved;
+import forge.game.event.GameEventDrawCard;
+import forge.game.event.GameEventDuelOutcome;
+import forge.game.event.GameEventEndOfTurn;
+import forge.game.event.GameEvent;
+import forge.game.event.GameEventFlipCoin;
+import forge.game.event.GameEventLandPlayed;
+import forge.game.event.GameEventLifeLoss;
+import forge.game.event.GameEventPoisonCounter;
+import forge.game.event.GameEventCardTapped;
+import forge.game.event.GameEventShuffle;
+import forge.game.event.GameEventSpellResolved;
+import forge.game.event.GameEventTokenCreated;
 
 /** 
  * This class is in charge of converting any forge.game.event.Event to a SoundEffectType.
@@ -38,50 +38,50 @@ public class EventVisualizer {
     static final Map<Class<?>, SoundEffectType> matchTable = new HashMap<Class<?>, SoundEffectType>();
 
     public EventVisualizer() {
-        matchTable.put(CounterAddedEvent.class, SoundEffectType.AddCounter);
-        matchTable.put(BlockerAssignedEvent.class, SoundEffectType.Block);
-        matchTable.put(CardDamagedEvent.class, SoundEffectType.Damage);
-        matchTable.put(CardDestroyedEvent.class, SoundEffectType.Destroy);
-        matchTable.put(CardDiscardedEvent.class, SoundEffectType.Discard);
-        matchTable.put(DrawCardEvent.class, SoundEffectType.Draw);
-        matchTable.put(EndOfTurnEvent.class, SoundEffectType.EndOfTurn);
-        matchTable.put(CardEquippedEvent.class, SoundEffectType.Equip);
-        matchTable.put(FlipCoinEvent.class, SoundEffectType.FlipCoin);
-        matchTable.put(LifeLossEvent.class, SoundEffectType.LifeLoss);
-        matchTable.put(PoisonCounterEvent.class, SoundEffectType.Poison);
-        matchTable.put(CardRegeneratedEvent.class, SoundEffectType.Regen);
-        matchTable.put(CounterRemovedEvent.class, SoundEffectType.RemoveCounter);
-        matchTable.put(CardSacrificedEvent.class, SoundEffectType.Sacrifice);
-        matchTable.put(ShuffleEvent.class, SoundEffectType.Shuffle);
-        matchTable.put(TokenCreatedEvent.class, SoundEffectType.Token);
+        matchTable.put(GameEventCounterAdded.class, SoundEffectType.AddCounter);
+        matchTable.put(GameEventBlockerAssigned.class, SoundEffectType.Block);
+        matchTable.put(GameEventCardDamaged.class, SoundEffectType.Damage);
+        matchTable.put(GameEventCardDestroyed.class, SoundEffectType.Destroy);
+        matchTable.put(GameEventCardDiscarded.class, SoundEffectType.Discard);
+        matchTable.put(GameEventDrawCard.class, SoundEffectType.Draw);
+        matchTable.put(GameEventEndOfTurn.class, SoundEffectType.EndOfTurn);
+        matchTable.put(GameEventCardEquipped.class, SoundEffectType.Equip);
+        matchTable.put(GameEventFlipCoin.class, SoundEffectType.FlipCoin);
+        matchTable.put(GameEventLifeLoss.class, SoundEffectType.LifeLoss);
+        matchTable.put(GameEventPoisonCounter.class, SoundEffectType.Poison);
+        matchTable.put(GameEventCardRegenerated.class, SoundEffectType.Regen);
+        matchTable.put(GameEventCounterRemoved.class, SoundEffectType.RemoveCounter);
+        matchTable.put(GameEventCardSacrificed.class, SoundEffectType.Sacrifice);
+        matchTable.put(GameEventShuffle.class, SoundEffectType.Shuffle);
+        matchTable.put(GameEventTokenCreated.class, SoundEffectType.Token);
     }
 
 
-    public final SoundEffectType getSoundForEvent(Event evt) {
+    public final SoundEffectType getSoundForEvent(GameEvent evt) {
         SoundEffectType fromMap = matchTable.get(evt.getClass());
 
         // call methods copied from Utils here
-        if (evt instanceof SpellResolvedEvent) {
-            return getSoundEffectForResolve(((SpellResolvedEvent) evt).Source, ((SpellResolvedEvent) evt).Spell);
+        if (evt instanceof GameEventSpellResolved) {
+            return getSoundEffectForResolve(((GameEventSpellResolved) evt).Source, ((GameEventSpellResolved) evt).Spell);
         }
-        if (evt instanceof LandPlayedEvent) {
-            return getSoundEffectForLand(((LandPlayedEvent) evt).Land);
+        if (evt instanceof GameEventLandPlayed) {
+            return getSoundEffectForLand(((GameEventLandPlayed) evt).Land);
         }
-        if (evt instanceof CounterAddedEvent) {
-            if (((CounterAddedEvent) evt).Amount == 0) {
+        if (evt instanceof GameEventCounterAdded) {
+            if (((GameEventCounterAdded) evt).Amount == 0) {
                 return null;
             }
         }
-        if (evt instanceof CounterRemovedEvent) {
-            if (((CounterRemovedEvent) evt).Amount == 0) {
+        if (evt instanceof GameEventCounterRemoved) {
+            if (((GameEventCounterRemoved) evt).Amount == 0) {
                 return null;
             }
         }
-        if (evt instanceof SetTappedEvent) {
-            return getSoundEffectForTapState(((SetTappedEvent) evt).Tapped);
+        if (evt instanceof GameEventCardTapped) {
+            return getSoundEffectForTapState(((GameEventCardTapped) evt).Tapped);
         }
-        if (evt instanceof DuelOutcomeEvent) {
-            return getSoundEffectForDuelOutcome(((DuelOutcomeEvent) evt).result.getWinner() == Singletons.getControl().getLobby().getGuiPlayer());
+        if (evt instanceof GameEventDuelOutcome) {
+            return getSoundEffectForDuelOutcome(((GameEventDuelOutcome) evt).result.getWinner() == Singletons.getControl().getLobby().getGuiPlayer());
         }
 
         return fromMap;
@@ -217,13 +217,13 @@ public class EventVisualizer {
      * @return a string containing the SoundEffect SVar, or empty string if
      * SVar:SoundEffect does not exist.
      */
-    public String getScriptedSoundEffectName(Event evt) {
+    public String getScriptedSoundEffectName(GameEvent evt) {
         Card c = null;
 
-        if (evt instanceof SpellResolvedEvent) {
-            c = ((SpellResolvedEvent) evt).Source;
-        } else if (evt instanceof LandPlayedEvent) {
-            c = ((LandPlayedEvent) evt).Land;
+        if (evt instanceof GameEventSpellResolved) {
+            c = ((GameEventSpellResolved) evt).Source;
+        } else if (evt instanceof GameEventLandPlayed) {
+            c = ((GameEventLandPlayed) evt).Land;
         }
 
         return c != null ? c.getSVar("SoundEffect") : "";

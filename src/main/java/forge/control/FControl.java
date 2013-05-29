@@ -43,11 +43,11 @@ import forge.control.KeyboardShortcuts.Shortcut;
 import forge.control.input.InputQueue;
 import forge.game.GameState;
 import forge.game.ai.AiProfileUtil;
-import forge.game.event.CardsAntedEvent;
-import forge.game.event.DuelFinishedEvent;
-import forge.game.event.Event;
-import forge.game.event.PhaseEvent;
-import forge.game.event.PlayerControlEvent;
+import forge.game.event.GameEventCardsAnted;
+import forge.game.event.GameEventDuelFinished;
+import forge.game.event.GameEvent;
+import forge.game.event.GameEventTurnPhase;
+import forge.game.event.GameEventPlayerControl;
 import forge.game.phase.PhaseType;
 import forge.game.phase.PhaseUtil;
 import forge.game.player.LobbyPlayer;
@@ -417,23 +417,23 @@ public enum FControl {
     }
     
     @Subscribe
-    public void receiveGameEvent(final Event ev) { 
+    public void receiveGameEvent(final GameEvent ev) { 
 
-        if( ev instanceof DuelFinishedEvent ) {
+        if( ev instanceof GameEventDuelFinished ) {
             FThreads.invokeInEdtNowOrLater(new Runnable() { @Override public void run() {
                 getInputQueue().onGameOver();
                 new ViewWinLose(game.getMatch());
                 SOverlayUtils.showOverlay();
             } });
-        } else if ( ev instanceof CardsAntedEvent ) {
+        } else if ( ev instanceof GameEventCardsAnted ) {
             // Require EDT here? 
             final String nl = System.getProperty("line.separator");
             final StringBuilder msg = new StringBuilder();
-            for (final Pair<Player, Card> kv : ((CardsAntedEvent) ev).cards) {
+            for (final Pair<Player, Card> kv : ((GameEventCardsAnted) ev).cards) {
                 msg.append(kv.getKey().getName()).append(" ante: ").append(kv.getValue()).append(nl);
             }
             GuiDialog.message(msg.toString(), "Ante");
-        } else if ( ev instanceof PlayerControlEvent ) {
+        } else if ( ev instanceof GameEventPlayerControl ) {
             FThreads.invokeInEdtNowOrLater(new Runnable() { @Override public void run() {
                 CMatchUI.SINGLETON_INSTANCE.initHandViews(getLobby().getGuiPlayer());
                 VMatchUI.SINGLETON_INSTANCE.populate();
@@ -441,10 +441,10 @@ public enum FControl {
                     h.getLayoutControl().updateHand();
                 }
             } });
-        } else if ( ev instanceof PhaseEvent ) {
+        } else if ( ev instanceof GameEventTurnPhase ) {
             FThreads.invokeInEdtNowOrLater(new Runnable() { @Override public void run() {
-                Player p = ((PhaseEvent) ev).playerTurn;
-                PhaseType ph = ((PhaseEvent) ev).phase;
+                Player p = ((GameEventTurnPhase) ev).playerTurn;
+                PhaseType ph = ((GameEventTurnPhase) ev).phase;
                 PhaseUtil.visuallyActivatePhase(p, ph);
             } });
         }

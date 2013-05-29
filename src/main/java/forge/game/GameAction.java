@@ -59,9 +59,9 @@ import forge.card.trigger.TriggerType;
 import forge.card.trigger.ZCTrigger;
 import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilCost;
-import forge.game.event.CardDestroyedEvent;
-import forge.game.event.CardRegeneratedEvent;
-import forge.game.event.CardSacrificedEvent;
+import forge.game.event.GameEventCardDestroyed;
+import forge.game.event.GameEventCardRegenerated;
+import forge.game.event.GameEventCardSacrificed;
 import forge.game.player.GameLossReason;
 import forge.game.player.HumanPlay;
 import forge.game.player.Player;
@@ -1110,7 +1110,7 @@ public class GameAction {
             if (c.getCounters(CounterType.LOYALTY) <= 0) {
                 moveToGraveyard(c);
                 // Play the Destroy sound
-                game.getEvents().post(new CardDestroyedEvent());
+                game.getEvents().post(new GameEventCardDestroyed());
                 recheck = true;
             }
 
@@ -1164,7 +1164,7 @@ public class GameAction {
                 }
                 recheck = true;
                 // Play the Destroy sound
-                game.getEvents().post(new CardDestroyedEvent());
+                game.getEvents().post(new GameEventCardDestroyed());
             }
         }
 
@@ -1179,7 +1179,7 @@ public class GameAction {
         this.sacrificeDestroy(c);
 
         // Play the Sacrifice sound
-        game.getEvents().post(new CardSacrificedEvent());
+        game.getEvents().post(new GameEventCardSacrificed());
 
         // Run triggers
         final HashMap<String, Object> runParams = new HashMap<String, Object>();
@@ -1211,7 +1211,7 @@ public class GameAction {
             game.getCombat().removeFromCombat(c);
 
             // Play the Regen sound
-            game.getEvents().post(new CardRegeneratedEvent());
+            game.getEvents().post(new GameEventCardRegenerated());
 
             return false;
         }
@@ -1263,7 +1263,7 @@ public class GameAction {
                         card.setDamage(0);
 
                         // Play the Destroy sound
-                        game.getEvents().post(new CardDestroyedEvent());
+                        game.getEvents().post(new GameEventCardDestroyed());
                     }
                 };
 
@@ -1280,7 +1280,7 @@ public class GameAction {
         }
 
         // Play the Destroy sound
-        game.getEvents().post(new CardDestroyedEvent());
+        game.getEvents().post(new GameEventCardDestroyed());
         // Run triggers
         final HashMap<String, Object> runParams = new HashMap<String, Object>();
         runParams.put("Card", c);

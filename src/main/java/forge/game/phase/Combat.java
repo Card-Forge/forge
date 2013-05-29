@@ -33,7 +33,7 @@ import forge.CardLists;
 import forge.CardPredicates;
 import forge.GameEntity;
 import forge.card.trigger.TriggerType;
-import forge.game.event.BlockerAssignedEvent;
+import forge.game.event.GameEventBlockerAssigned;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
@@ -374,7 +374,7 @@ public class Combat {
         } else {
             this.blockerMap.get(blocker).add(attacker);
         }
-        attacker.getGame().getEvents().post(new BlockerAssignedEvent());
+        attacker.getGame().getEvents().post(new GameEventBlockerAssigned());
     }
 
     public final void removeBlockAssignment(final Card attacker, final Card blocker) {

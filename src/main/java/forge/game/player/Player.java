@@ -57,14 +57,14 @@ import forge.card.trigger.TriggerType;
 import forge.game.GameActionUtil;
 import forge.game.GameState;
 import forge.game.GlobalRuleChange;
-import forge.game.event.CardDiscardedEvent;
-import forge.game.event.DrawCardEvent;
-import forge.game.event.LandPlayedEvent;
-import forge.game.event.LifeLossEvent;
-import forge.game.event.MulliganEvent;
-import forge.game.event.PlayerControlEvent;
-import forge.game.event.PoisonCounterEvent;
-import forge.game.event.ShuffleEvent;
+import forge.game.event.GameEventCardDiscarded;
+import forge.game.event.GameEventDrawCard;
+import forge.game.event.GameEventLandPlayed;
+import forge.game.event.GameEventLifeLoss;
+import forge.game.event.GameEventMulligan;
+import forge.game.event.GameEventPlayerControl;
+import forge.game.event.GameEventPoisonCounter;
+import forge.game.event.GameEventShuffle;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.zone.PlayerZone;
@@ -509,7 +509,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         if (toLose > 0) {
             this.subtractLife(toLose);
             lifeLost = toLose;
-            game.getEvents().post(new LifeLossEvent());
+            game.getEvents().post(new GameEventLifeLoss());
             this.updateObservers();
         } else if (toLose == 0) {
             // Rule 118.4
@@ -656,7 +656,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             source.getController().gainLife(damageToDo, source);
         }
         source.getDamageHistory().registerDamage(this);
-        this.getGame().getEvents().post(new LifeLossEvent());
+        this.getGame().getEvents().post(new GameEventLifeLoss());
 
         if (isCombat) {
             final ArrayList<String> types = source.getType();
@@ -1020,7 +1020,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         if (!this.hasKeyword("You can't get poison counters")) {
             this.poisonCounters += num;
 
-            game.getEvents().post(new PoisonCounterEvent(this, source, num));
+            game.getEvents().post(new GameEventPoisonCounter(this, source, num));
             game.getGameLog().add(GameEventType.DAMAGE_POISON, this + " receives a poison counter from " + source);
 
             this.updateObservers();
@@ -1267,7 +1267,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         }
     
         // Play the Draw sound
-        game.getEvents().post(new DrawCardEvent());
+        game.getEvents().post(new GameEventDrawCard());
     
         return drawn;
     }
@@ -1605,13 +1605,13 @@ public class Player extends GameEntity implements Comparable<Player> {
         if (discardToTopOfLibrary) {
             game.getAction().moveToLibrary(c, 0);
             // Play the Discard sound
-            game.getEvents().post(new CardDiscardedEvent());
+            game.getEvents().post(new GameEventCardDiscarded());
             this.numDiscardedThisTurn++;
         } else {
             game.getAction().moveToGraveyard(c);
 
             // Play the Discard sound
-            game.getEvents().post(new CardDiscardedEvent());
+            game.getEvents().post(new GameEventCardDiscarded());
             this.numDiscardedThisTurn++;
         }
 
@@ -1738,7 +1738,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         game.getTriggerHandler().runTrigger(TriggerType.Shuffled, runParams, false);
 
         // Play the shuffle sound
-        game.getEvents().post(new ShuffleEvent());
+        game.getEvents().post(new GameEventShuffle());
     } // shuffle
       // //////////////////////////////
 
@@ -1771,7 +1771,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             game.getGameLog().add(GameEventType.LAND, this + " played " + land);
 
             // play a sound
-            game.getEvents().post(new LandPlayedEvent(this, land));
+            game.getEvents().post(new GameEventLandPlayed(this, land));
 
             // Run triggers
             final HashMap<String, Object> runParams = new HashMap<String, Object>();
@@ -2719,13 +2719,13 @@ public class Player extends GameEntity implements Comparable<Player> {
     
     public final void releaseControl() {
         controller = controllerCreator;
-        game.getEvents().post(new PlayerControlEvent(this, getLobbyPlayer(), null));
+        game.getEvents().post(new GameEventPlayerControl(this, getLobbyPlayer(), null));
     }
 
     public final void obeyNewMaster(PlayerController pc) {
         LobbyPlayer oldController = getLobbyPlayer();
         controller = pc;
-        game.getEvents().post(new PlayerControlEvent(this, oldController, pc.getLobbyPlayer()));
+        game.getEvents().post(new GameEventPlayerControl(this, oldController, pc.getLobbyPlayer()));
     }
 
 
@@ -3126,7 +3126,7 @@ public class Player extends GameEntity implements Comparable<Player> {
      * TODO: Write javadoc for this method.
      */
     public void onMulliganned() {
-        game.getEvents().post(new MulliganEvent(this)); // quest listener may interfere here
+        game.getEvents().post(new GameEventMulligan(this)); // quest listener may interfere here
         final int newHand = getCardsIn(ZoneType.Hand).size();
         game.getGameLog().add(GameEventType.MULLIGAN, this + " has mulliganed down to " + newHand + " cards.");
         stats.notifyHasMulliganed();

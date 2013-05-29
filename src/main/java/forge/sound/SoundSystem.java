@@ -7,7 +7,7 @@ import java.util.Map;
 import com.google.common.eventbus.Subscribe;
 
 import forge.Singletons;
-import forge.game.event.Event;
+import forge.game.event.GameEvent;
 import forge.properties.ForgePreferences.FPref;
 
 /** 
@@ -150,7 +150,7 @@ public class SoundSystem {
     }
 
     @Subscribe
-    public void receiveEvent(Event evt) {
+    public void receiveEvent(GameEvent evt) {
         SoundEffectType effect = visualizer.getSoundForEvent(evt);
         if (null == effect) {
             return;

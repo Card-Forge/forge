@@ -29,8 +29,8 @@ import com.google.common.eventbus.Subscribe;
 import forge.Singletons;
 import forge.deck.Deck;
 import forge.game.GameFormat;
-import forge.game.event.Event;
-import forge.game.event.MulliganEvent;
+import forge.game.event.GameEvent;
+import forge.game.event.GameEventMulligan;
 import forge.item.CardPrinted;
 import forge.item.PreconDeck;
 import forge.properties.NewConstants;
@@ -426,9 +426,9 @@ public class QuestController {
     }
     
     @Subscribe
-    public void receiveGameEvent(Event ev) { // Receives events only during quest games
-        if ( ev instanceof MulliganEvent ) {
-            MulliganEvent mev = (MulliganEvent)ev;
+    public void receiveGameEvent(GameEvent ev) { // Receives events only during quest games
+        if ( ev instanceof GameEventMulligan ) {
+            GameEventMulligan mev = (GameEventMulligan)ev;
             // First mulligan is free
             if (mev.player.getLobbyPlayer() == Singletons.getControl().getLobby().getQuestPlayer() 
                     && getAssets().hasItem(QuestItemType.SLEIGHT) && mev.player.getStats().getMulliganCount() == 0) {
