@@ -125,7 +125,7 @@ public class Game {
         if ( match0.getGameType() == GameType.Quest)
             events.register(Singletons.getModel().getQuest()); // this one listens to player's mulligans ATM
 
-        events.register(gameLog);
+        subscribeToEvents(gameLog.getEventVisitor());
     }
     
 

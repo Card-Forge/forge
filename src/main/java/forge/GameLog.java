@@ -22,9 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
-import com.google.common.eventbus.Subscribe;
-
-import forge.game.event.GameEvent;
+import forge.game.event.IGameEventVisitor;
 import forge.game.phase.Combat;
 import forge.util.MyObservable;
 
@@ -69,7 +67,7 @@ public class GameLog extends MyObservable {
         this.updateObservers();
     }
 
-    private void add(GameLogEntry entry) {
+    void add(GameLogEntry entry) {
         log.add(entry);
         this.updateObservers();
     }    
@@ -107,18 +105,6 @@ public class GameLog extends MyObservable {
         return result;
     }
 
-
-    // Special methods
-    
-    @Subscribe
-    public void receiveGameEvent(GameEvent ev) { 
-        GameLogEntry record = formatter.recieve(ev);
-        if( null != record ) {
-            add(record);
-        }
-    }
-
-    
     public void addCombatAttackers(Combat combat) {
         this.add(GameLogFormatter.describeAttack(combat)); 
     }
@@ -126,5 +112,10 @@ public class GameLog extends MyObservable {
         this.add(GameLogFormatter.describeBlock(combat)); 
     }
     // Special methods
+
+
+    public IGameEventVisitor<?> getEventVisitor() {
+        return formatter;
+    }
 
 }

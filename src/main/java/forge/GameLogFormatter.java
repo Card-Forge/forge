@@ -4,73 +4,46 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map.Entry;
 
+import com.google.common.eventbus.Subscribe;
+
 import forge.game.GameOutcome;
+import forge.game.event.IGameEventVisitor;
 import forge.game.event.GameEventDuelOutcome;
 import forge.game.event.GameEvent;
 import forge.game.event.GameEventTurnPhase;
 import forge.game.event.GameEventPlayerControl;
 import forge.game.phase.Combat;
-import forge.game.phase.PhaseType;
 import forge.game.player.LobbyPlayer;
 import forge.game.player.Player;
 import forge.game.player.PlayerStatistics;
 import forge.util.Lang;
 
-public class GameLogFormatter { 
+public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> { 
     private final GameLog log;
-
 
     public GameLogFormatter(GameLog gameLog) {
         log = gameLog;
     }
 
-
-    // Some events produce several log entries. I've let them added into log directly
-    private GameLogEntry logEvent(GameEvent ev) {
-        if(ev instanceof GameEventDuelOutcome) {
-            return fillOutcome(((GameEventDuelOutcome) ev).result, ((GameEventDuelOutcome) ev).history );
-            
-        } else if ( ev instanceof GameEventPlayerControl ) {
-            LobbyPlayer newController = ((GameEventPlayerControl) ev).newController;
-            Player p = ((GameEventPlayerControl) ev).player;
-
-            final String message;
-            if( newController == null )
-                message = p.getName() + " has restored control over themself";
-            else
-                message =  String.format("%s is controlled by %s", p.getName(), newController.getName());
-            
-            return new GameLogEntry(GameEventType.PLAYER_CONROL, message);
-        } else if ( ev instanceof GameEventTurnPhase ) {
-            Player p = ((GameEventTurnPhase) ev).playerTurn;
-            PhaseType ph = ((GameEventTurnPhase) ev).phase;
-            return new GameLogEntry(GameEventType.PHASE, ((GameEventTurnPhase) ev).phaseDesc + Lang.getPossesive(p.getName()) + " " + ph.nameForUi);
-        }
-        return null;
-    }
-    
-    
-    /**
-     * Generates and adds 
-     */
-    private GameLogEntry fillOutcome(GameOutcome result, List<GameOutcome> history) {
-    
+    @Override
+    public GameLogEntry visit(GameEventDuelOutcome ev) {
         // add result entries to the game log
         final LobbyPlayer human = Singletons.getControl().getLobby().getGuiPlayer();
         
-    
+        // This adds some extra entries to log
         final List<String> outcomes = new ArrayList<String>();
-        for (Entry<LobbyPlayer, PlayerStatistics> p : result) {
+        for (Entry<LobbyPlayer, PlayerStatistics> p : ev.result) {
             String whoHas = p.getKey().equals(human) ? "You have" : p.getKey().getName() + " has";
             String outcome = String.format("%s %s", whoHas, p.getValue().getOutcome().toString());
             outcomes.add(outcome);
             log.add(GameEventType.GAME_OUTCOME, outcome);
         }
         
-        return generateSummary(history);
+        return generateSummary(ev.history);
     }
+    
 
-    private static GameLogEntry generateSummary(List<GameOutcome> gamesPlayed) {
+    private GameLogEntry generateSummary(List<GameOutcome> gamesPlayed) {
         GameOutcome outcome1 = gamesPlayed.get(0);
         int[] wins = new int[outcome1.getNumPlayers()];
         LobbyPlayer[] players = new LobbyPlayer[outcome1.getNumPlayers()];
@@ -93,13 +66,35 @@ public class GameLogFormatter {
         return new GameLogEntry(GameEventType.MATCH_RESULTS, sb.toString());
     }
 
+    @Override
+    public GameLogEntry visit(GameEventPlayerControl event) {
+        // TODO Auto-generated method stub
+        LobbyPlayer newController = event.newController;
+        Player p = event.player;
+
+        final String message;
+        if( newController == null )
+            message = p.getName() + " has restored control over themself";
+        else
+            message =  String.format("%s is controlled by %s", p.getName(), newController.getName());
+        
+        return new GameLogEntry(GameEventType.PLAYER_CONROL, message);
+    }
+    
+    @Override
+    public GameLogEntry visit(GameEventTurnPhase ev) {
+        Player p = ev.playerTurn;
+        return new GameLogEntry(GameEventType.PHASE, ev.phaseDesc + Lang.getPossesive(p.getName()) + " " + ev.phase.nameForUi);
+    }
+    
+    
+
+
     static GameLogEntry describeAttack(final Combat combat) {
         final StringBuilder sb = new StringBuilder();
 
         // Loop through Defenders
         // Append Defending Player/Planeswalker
-
-        
 
         // Not a big fan of the triple nested loop here
         for (GameEntity defender : combat.getDefenders()) {
@@ -154,9 +149,11 @@ public class GameLogFormatter {
     }
 
 
-
-    public GameLogEntry recieve(GameEvent ev) {
-        return logEvent(ev);
+    @Subscribe
+    public void recieve(GameEvent ev) {
+        GameLogEntry le = ev.visit(this);
+        if ( le != null )
+            log.add(le);
     }
     
 } // end class GameLog

@@ -3,7 +3,6 @@ package forge.sound;
 import forge.Card;
 import forge.Singletons;
 import forge.card.spellability.SpellAbility;
-import forge.game.event.GameEventAnteCardsSelected;
 import forge.game.event.GameEventBlockerAssigned;
 import forge.game.event.GameEventCardDamaged;
 import forge.game.event.GameEventCardDestroyed;
@@ -14,30 +13,24 @@ import forge.game.event.GameEventCardSacrificed;
 import forge.game.event.GameEventCounterAdded;
 import forge.game.event.GameEventCounterRemoved;
 import forge.game.event.GameEventDrawCard;
-import forge.game.event.GameEventDuelFinished;
 import forge.game.event.GameEventDuelOutcome;
 import forge.game.event.GameEventEndOfTurn;
 import forge.game.event.GameEvent;
 import forge.game.event.GameEventFlipCoin;
-import forge.game.event.GameEventGameRestarted;
 import forge.game.event.GameEventLandPlayed;
 import forge.game.event.GameEventLifeLoss;
-import forge.game.event.GameEventManaBurn;
-import forge.game.event.GameEventMulligan;
-import forge.game.event.GameEventPlayerControl;
 import forge.game.event.GameEventPoisonCounter;
 import forge.game.event.GameEventCardTapped;
 import forge.game.event.GameEventShuffle;
 import forge.game.event.GameEventSpellResolved;
 import forge.game.event.GameEventTokenCreated;
-import forge.game.event.GameEventTurnPhase;
 import forge.game.event.IGameEventVisitor;
 
 /** 
  * This class is in charge of converting any forge.game.event.Event to a SoundEffectType.
  *
  */
-public class EventVisualizer implements IGameEventVisitor<SoundEffectType> {
+public class EventVisualizer extends IGameEventVisitor.Base<SoundEffectType> {
 
 
     public SoundEffectType visit(GameEventBlockerAssigned event) { return SoundEffectType.Block; }
@@ -182,14 +175,4 @@ public class EventVisualizer implements IGameEventVisitor<SoundEffectType> {
 
         return c != null ? c.getSVar("SoundEffect") : "";
     }
-
-    // These are not used by sound system
-    public SoundEffectType visit(GameEventGameRestarted event) { return null; }
-    public SoundEffectType visit(GameEventDuelFinished event) { return null; }
-    public SoundEffectType visit(GameEventAnteCardsSelected event) { return null; }
-    public SoundEffectType visit(GameEventManaBurn event) { return null; }
-    public SoundEffectType visit(GameEventMulligan event) { return null; }
-    public SoundEffectType visit(GameEventPlayerControl event) { return null; }
-    public SoundEffectType visit(GameEventTurnPhase event) { return null; }
-
 }
