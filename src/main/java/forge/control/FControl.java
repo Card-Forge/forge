@@ -31,28 +31,17 @@ import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.WindowConstants;
 
-import org.apache.commons.lang3.tuple.Pair;
 
-import com.google.common.eventbus.Subscribe;
 
 import forge.Card;
-import forge.FThreads;
 import forge.Constant.Preferences;
 import forge.Singletons;
 import forge.control.KeyboardShortcuts.Shortcut;
 import forge.control.input.InputQueue;
 import forge.game.GameState;
 import forge.game.ai.AiProfileUtil;
-import forge.game.event.GameEventAnteCardsSelected;
-import forge.game.event.GameEventDuelFinished;
-import forge.game.event.GameEvent;
-import forge.game.event.GameEventTurnPhase;
-import forge.game.event.GameEventPlayerControl;
-import forge.game.phase.PhaseType;
-import forge.game.phase.PhaseUtil;
 import forge.game.player.LobbyPlayer;
 import forge.game.player.Player;
-import forge.gui.GuiDialog;
 import forge.gui.SOverlayUtils;
 import forge.gui.deckeditor.CDeckEditorUI;
 import forge.gui.deckeditor.VDeckEditorUI;
@@ -64,14 +53,12 @@ import forge.gui.home.CHomeUI;
 import forge.gui.home.VHomeUI;
 import forge.gui.match.CMatchUI;
 import forge.gui.match.VMatchUI;
-import forge.gui.match.ViewWinLose;
 import forge.gui.match.controllers.CCombat;
 import forge.gui.match.controllers.CDock;
 import forge.gui.match.controllers.CLog;
 import forge.gui.match.controllers.CMessage;
 import forge.gui.match.controllers.CStack;
 import forge.gui.match.nonsingleton.VField;
-import forge.gui.match.nonsingleton.VHand;
 import forge.gui.match.views.VAntes;
 import forge.gui.toolbox.CardFaceSymbols;
 import forge.gui.toolbox.FSkin;
@@ -371,6 +358,7 @@ public enum FControl {
     }
 
     
+    private final FControlGameEventHandler fcVisitor = new FControlGameEventHandler(this);
     public void attachToGame(GameState game0) {
         // TODO: Detach from other game we might be looking at
         
@@ -401,7 +389,7 @@ public enum FControl {
         // some observers were set in CMatchUI.initMatch
     
         // Listen to DuelOutcome event to show ViewWinLose
-        game.subscribeToEvents(this);
+        game.subscribeToEvents(fcVisitor);
         
         
         VAntes.SINGLETON_INSTANCE.setModel(game.getRegisteredPlayers());
@@ -416,37 +404,6 @@ public enum FControl {
         SDisplayUtil.showTab(nextField);
     }
     
-    @Subscribe
-    public void receiveGameEvent(final GameEvent ev) { 
-
-        if( ev instanceof GameEventDuelFinished ) {
-            FThreads.invokeInEdtNowOrLater(new Runnable() { @Override public void run() {
-                getInputQueue().onGameOver();
-                new ViewWinLose(game.getMatch());
-                SOverlayUtils.showOverlay();
-            } });
-        } else if ( ev instanceof GameEventAnteCardsSelected ) {
-            // Require EDT here? 
-            final String nl = System.getProperty("line.separator");
-            final StringBuilder msg = new StringBuilder();
-            for (final Pair<Player, Card> kv : ((GameEventAnteCardsSelected) ev).cards) {
-                msg.append(kv.getKey().getName()).append(" ante: ").append(kv.getValue()).append(nl);
-            }
-            GuiDialog.message(msg.toString(), "Ante");
-        } else if ( ev instanceof GameEventPlayerControl ) {
-            FThreads.invokeInEdtNowOrLater(new Runnable() { @Override public void run() {
-                CMatchUI.SINGLETON_INSTANCE.initHandViews(getLobby().getGuiPlayer());
-                VMatchUI.SINGLETON_INSTANCE.populate();
-                for(VHand h : VMatchUI.SINGLETON_INSTANCE.getHands()) {
-                    h.getLayoutControl().updateHand();
-                }
-            } });
-        } else if ( ev instanceof GameEventTurnPhase ) {
-            FThreads.invokeInEdtNowOrLater(new Runnable() { @Override public void run() {
-                Player p = ((GameEventTurnPhase) ev).playerTurn;
-                PhaseType ph = ((GameEventTurnPhase) ev).phase;
-                PhaseUtil.visuallyActivatePhase(p, ph);
-            } });
-        }
-    }
+    
 }
+

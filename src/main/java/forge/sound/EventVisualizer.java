@@ -1,6 +1,5 @@
 package forge.sound;
 
-import java.util.List;
 import forge.Card;
 import forge.Singletons;
 import forge.card.spellability.SpellAbility;

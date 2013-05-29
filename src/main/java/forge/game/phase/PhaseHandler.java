@@ -681,52 +681,11 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
         onPhaseBegin();
         updateObservers();
         // don't even offer priority, because it's untap of 1st turn now
+        givePriorityToPlayer = false;
         
         while (!game.isGameOver()) { // loop only while is playing
-            final Player actingPlayer = this.getPriorityPlayer();
-            final Player firstAction = this.getFirstPriority();
     
-            // actingPlayer is the player who may act
-            // the firstAction is the player who gained Priority First in this segment
-            // of Priority
-    
-            Player nextPlayer = game.getNextPlayerAfter(actingPlayer);
-    
-            // System.out.println(String.format("%s %s: %s passes priority to %s", playerTurn, phase, actingPlayer, nextPlayer));
-            if (firstAction.equals(nextPlayer)) {
-                if (game.getStack().isEmpty()) {
-                    this.setPriority(this.getPlayerTurn()); // this needs to be set early as we exit the phase
-                    // end phase
-                    this.givePriorityToPlayer = true;
-
-                    onPhaseEnd();
-                    advanceToNextPhase();
-                    onPhaseBegin();
-                } else if (!game.getStack().hasSimultaneousStackEntries()) {
-                    game.getStack().resolveStack();
-                    game.getStack().chooseOrderOfSimultaneousStackEntryAll();
-                }
-            } else {
-                // pass the priority to other player
-                this.pPlayerPriority = nextPlayer;
-            }
-            
-            updateObservers();
-            
-            // If ever the karn's ultimate resolved
-            if( game.getAge() == GameAge.RestartedByKarn) {
-                phase = null;
-                game.fireEvent(new GameEventGameRestarted(playerTurn));
-                return;
-            }
-            
-            
-            // Time to handle priority to next player.
-            if ( phase == PhaseType.COMBAT_DECLARE_ATTACKERS || phase == PhaseType.COMBAT_DECLARE_BLOCKERS)
-                game.getStack().freezeStack();
-            
-            boolean givePriority = givePriorityToPlayer;
-            
+            boolean givePriority = givePriorityToPlayer ;
             if ( phase == PhaseType.COMBAT_DECLARE_BLOCKERS)
                 givePriority = game.getCombat().isPlayerAttacked(pPlayerPriority);
 
@@ -755,6 +714,46 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
                 System.out.print(" >>\n");
             }
             
+            // actingPlayer is the player who may act
+            // the firstAction is the player who gained Priority First in this segment
+            // of Priority
+
+            Player nextPlayer = game.getNextPlayerAfter(this.getPriorityPlayer());
+    
+            // System.out.println(String.format("%s %s: %s passes priority to %s", playerTurn, phase, actingPlayer, nextPlayer));
+            if (this.getFirstPriority().equals(nextPlayer)) {
+                if (game.getStack().isEmpty()) {
+                    this.setPriority(this.getPlayerTurn()); // this needs to be set early as we exit the phase
+
+                    // end phase
+                    this.givePriorityToPlayer = true;
+                    onPhaseEnd();
+                    advanceToNextPhase();
+                    onPhaseBegin();
+                } else if (!game.getStack().hasSimultaneousStackEntries()) {
+                    game.getStack().resolveStack();
+                    game.getStack().chooseOrderOfSimultaneousStackEntryAll();
+                }
+            } else {
+                // pass the priority to other player
+                this.pPlayerPriority = nextPlayer;
+            }
+            
+            updateObservers();
+            
+            // If ever the karn's ultimate resolved
+            if( game.getAge() == GameAge.RestartedByKarn) {
+                phase = null;
+                game.fireEvent(new GameEventGameRestarted(playerTurn));
+                return;
+            }
+            
+            
+            // Time to handle priority to next player.
+            if ( phase == PhaseType.COMBAT_DECLARE_ATTACKERS || phase == PhaseType.COMBAT_DECLARE_BLOCKERS)
+                game.getStack().freezeStack();
+            
+
         }
     }
     

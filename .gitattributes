@@ -14162,6 +14162,7 @@ src/main/java/forge/card/trigger/package-info.java svneol=native#text/plain
 src/main/java/forge/control/ChatArea.java -text
 src/main/java/forge/control/ControlBazaarUI.java -text
 src/main/java/forge/control/FControl.java -text
+src/main/java/forge/control/FControlGameEventHandler.java -text
 src/main/java/forge/control/KeyboardShortcuts.java -text
 src/main/java/forge/control/Lobby.java -text
 src/main/java/forge/control/RestartUtil.java -text

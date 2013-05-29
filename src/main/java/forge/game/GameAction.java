@@ -62,6 +62,7 @@ import forge.game.ai.ComputerUtilCost;
 import forge.game.event.GameEventCardDestroyed;
 import forge.game.event.GameEventCardRegenerated;
 import forge.game.event.GameEventCardSacrificed;
+import forge.game.event.GameEventDuelFinished;
 import forge.game.player.GameLossReason;
 import forge.game.player.HumanPlay;
 import forge.game.player.Player;
@@ -1506,7 +1507,8 @@ public class GameAction {
             first = game.getPhaseHandler().getPlayerTurn();  // needed only for restart
         } while( game.getAge() == GameAge.RestartedByKarn );
 
-        System.out.println(FThreads.prependThreadId("Thread exited game loop due to ... " + ( game.isGameOver() ? "game over" : "interrupt" )));
+        // will pull UI 
+        game.fireEvent(new GameEventDuelFinished());
     }
     
     private void performMulligans(final Player firstPlayer, final boolean isCommander) {

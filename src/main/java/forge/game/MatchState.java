@@ -89,9 +89,6 @@ public class MatchState {
 
         // The log shall listen to events and generate text internally
         game.fireEvent(new GameEventDuelOutcome(result, gamesPlayedRo));
-        
-        // will pull UI 
-        game.fireEvent(new GameEventDuelFinished());
     }
     
 
