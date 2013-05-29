@@ -101,9 +101,8 @@ public class PhaseUtil {
         // TODO move propaganda to happen as the Attacker is Declared
         // Remove illegal Propaganda attacks first only for attacking the Player
 
-        final int size = list.size();
-        for (int i = 0; i < size; i++) {
-            final Card c = list.get(i);
+
+        for (final Card c : list) {
             CombatUtil.checkPropagandaEffects(game, c);
         }
         PhaseUtil.handleAttackingTriggers(game);

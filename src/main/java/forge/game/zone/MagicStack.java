@@ -198,15 +198,16 @@ public class MagicStack extends MyObservable implements Iterable<SpellAbilitySta
      */
     public final void unfreezeStack() {
         this.frozen = false;
-        boolean checkState = !this.getFrozenStack().isEmpty();
+
         // Add all Frozen Abilities onto the stack
         while (!this.getFrozenStack().isEmpty()) {
             final SpellAbility sa = this.getFrozenStack().pop().getSpellAbility();
             this.add(sa);
         }
         // Add all waiting triggers onto the stack
-        checkState |= game.getTriggerHandler().runWaitingTriggers();
-        if (checkState) {
+        game.getTriggerHandler().runWaitingTriggers();
+
+        if (!simultaneousStackEntryList.isEmpty()) {
             this.chooseOrderOfSimultaneousStackEntryAll();
             game.getAction().checkStateEffects();
         }
@@ -738,7 +739,7 @@ public class MagicStack extends MyObservable implements Iterable<SpellAbilitySta
 
         game.getAction().checkStateEffects();
 
-        game.getPhaseHandler().setPlayersPriorityPermission(true);
+        game.getPhaseHandler().onStackResolved();
 
         this.curResolvingCard = null;
 
@@ -1108,4 +1109,10 @@ public class MagicStack extends MyObservable implements Iterable<SpellAbilitySta
     public void clear() {
         stack.clear();
     }
+    
+    @Override 
+    public String toString() {
+        return String.format("%s==%s==%s", simultaneousStackEntryList, frozenStack.toString(), stack.toString()); 
+    }
+    
 }

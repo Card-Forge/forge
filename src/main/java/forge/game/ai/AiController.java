@@ -845,11 +845,7 @@ public class AiController {
         // 12/2/10(sol) the decision making here has moved to getAttackers()
         game.setCombat(new AiAttackController(player, player.getOpponent()).getAttackers());
 
-        final List<Card> att = game.getCombat().getAttackers();
-        game.getPhaseHandler().setCombat(!att.isEmpty());
-
-
-        for (final Card element : att) {
+        for (final Card element : game.getCombat().getAttackers()) {
             // tapping of attackers happens after Propaganda is paid for
             final StringBuilder sb = new StringBuilder();
             sb.append("Computer just assigned ").append(element.getName()).append(" as an attacker.");

@@ -1065,6 +1065,7 @@ public class GameAction {
             if (game.getTriggerHandler().runWaitingTriggers()) {
                 checkAgain = true;
                 // Place triggers on stack
+                game.getStack().chooseOrderOfSimultaneousStackEntryAll();
             }
 
             if (this.handleLegendRule()) {
@@ -1085,10 +1086,6 @@ public class GameAction {
             // Clear Simultaneous triggers at the end of the game
             game.setGameOver(endGame);
             game.getStack().clearSimultaneousStack();
-            if (!refreeze) {
-                game.getStack().unfreezeStack();
-            }
-            return;
         }
 
         if (!refreeze) {

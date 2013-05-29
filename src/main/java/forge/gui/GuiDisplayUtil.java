@@ -48,6 +48,7 @@ import forge.control.input.InputSelectCardsFromList;
 import forge.game.GameState;
 import forge.game.GameType;
 import forge.game.PlanarDice;
+import forge.game.phase.PhaseType;
 import forge.game.player.HumanPlay;
 import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
@@ -146,15 +147,10 @@ public final class GuiDisplayUtil {
                 final Player human = game.getPlayers().get(0);
                 final Player ai = game.getPlayers().get(1);
 
-                if (tChangePlayer.equals("human")) {
-                    game.getPhaseHandler().setPlayerTurn(human);
-                } else if (tChangePlayer.equals("ai")) {
-                    game.getPhaseHandler().setPlayerTurn(ai);
-                }
-              
-                if (!tChangePhase.trim().equalsIgnoreCase("none")) {
-                    game.getPhaseHandler().setDevPhaseState(forge.game.phase.PhaseType.smartValueOf(tChangePhase));
-                }
+                Player newPlayerTurn = tChangePlayer.equals("human") ? newPlayerTurn = human : tChangePlayer.equals("ai") ? newPlayerTurn = ai : null;
+                PhaseType newPhase = tChangePhase.trim().equalsIgnoreCase("none") ? null : PhaseType.smartValueOf(tChangePhase);
+                
+                game.getPhaseHandler().devModeSet(newPhase, newPlayerTurn);
               
                 game.getCombat().reset(game.getPhaseHandler().getPlayerTurn());
                 game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);

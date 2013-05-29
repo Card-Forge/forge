@@ -282,4 +282,9 @@ public class SpellAbilityStackInstance {
 
         return true;
     }
+    
+    @Override
+    public String toString() {
+        return String.format("%s->%s", getSourceCard(), stackDescription);
+    }    
 }

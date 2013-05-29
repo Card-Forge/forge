@@ -96,8 +96,6 @@ public class InputAttack extends InputSyncronizedBase {
     protected final void onOk() {
         // Propaganda costs could have been paid here.
         setCurrentDefender(null); // remove highlights
-        game.getPhaseHandler().setCombat(!game.getCombat().getAttackers().isEmpty());
-
         stop();
     }
 
