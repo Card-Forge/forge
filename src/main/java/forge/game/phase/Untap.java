@@ -30,13 +30,13 @@ import forge.Singletons;
 import forge.CardPredicates.Presets;
 import forge.CounterType;
 import forge.GameEntity;
-import forge.control.input.InputSelectCards;
-import forge.control.input.InputSelectCardsFromList;
 import forge.game.Game;
 import forge.game.ai.ComputerUtilCard;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiDialog;
+import forge.gui.input.InputSelectCards;
+import forge.gui.input.InputSelectCardsFromList;
 
 /**
  * <p>

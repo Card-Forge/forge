@@ -27,11 +27,11 @@ import forge.CounterType;
 import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.spellability.SpellAbility;
-import forge.control.input.InputSelectCards;
 import forge.game.Game;
 import forge.game.ai.ComputerUtilCard;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
+import forge.gui.input.InputSelectCards;
 
 /**
  * The Class CostPutCounter.

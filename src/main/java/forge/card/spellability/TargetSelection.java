@@ -26,12 +26,12 @@ import forge.Card;
 import forge.CardLists;
 import forge.Singletons;
 import forge.card.ability.AbilityUtils;
-import forge.control.input.InputSelectTargets;
 import forge.game.Game;
 import forge.game.player.Player;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
+import forge.gui.input.InputSelectTargets;
 import forge.util.Aggregates;
 
 /**

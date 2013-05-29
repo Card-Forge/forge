@@ -50,9 +50,6 @@ import forge.card.spellability.Target;
 import forge.card.spellability.TargetChoices;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerType;
-import forge.control.input.InputPayManaExecuteCommands;
-import forge.control.input.InputSelectCards;
-import forge.control.input.InputSelectCardsFromList;
 import forge.game.GameActionUtil;
 import forge.game.Game;
 import forge.game.ai.ComputerUtil;
@@ -62,6 +59,9 @@ import forge.game.event.GameEventSpellResolved;
 import forge.game.player.HumanPlay;
 import forge.game.player.Player;
 import forge.gui.GuiChoose;
+import forge.gui.input.InputPayManaExecuteCommands;
+import forge.gui.input.InputSelectCards;
+import forge.gui.input.InputSelectCardsFromList;
 import forge.util.MyObservable;
 
 /**

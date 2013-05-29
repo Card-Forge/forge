@@ -20,7 +20,6 @@ import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityStackInstance;
 import forge.card.spellability.Target;
 import forge.card.trigger.TriggerType;
-import forge.control.input.InputSelectCardsFromList;
 import forge.game.Game;
 import forge.game.ai.ComputerUtilCard;
 import forge.game.player.Player;
@@ -28,6 +27,7 @@ import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 import forge.gui.GuiDialog;
+import forge.gui.input.InputSelectCardsFromList;
 import forge.util.Aggregates;
 import forge.util.Lang;
 

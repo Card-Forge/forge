@@ -30,15 +30,15 @@ import forge.card.cost.Cost;
 import forge.card.mana.ManaCost;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
-import forge.control.input.InputPayManaExecuteCommands;
-import forge.control.input.InputSelectCards;
-import forge.control.input.InputSelectCardsFromList;
 import forge.game.Game;
 import forge.game.ai.AiController;
 import forge.game.player.Player;
 import forge.game.player.PlayerControllerAi;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
+import forge.gui.input.InputPayManaExecuteCommands;
+import forge.gui.input.InputSelectCards;
+import forge.gui.input.InputSelectCardsFromList;
 
 /**
  * <p>

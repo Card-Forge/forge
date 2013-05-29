@@ -42,7 +42,17 @@ public class Lang {
         }
         return sb.toString();
     }
+    
+    public static <T> String joinVerb(List<T> subjects, String verb) {
+        // English is simple - just add (s) for multiple objects. 
+        return subjects.size() > 1 ? verb : verb + "s";
+    }
 
+    public static <T> String joinNounToAmount(int cnt, String noun) {
+        //  Simpliest check
+        return cnt > 1 ? noun : ( noun.endsWith("s") || noun.endsWith("x") ? noun + "es" : noun + "s");
+    }    
+    
     /**
      * TODO: Write javadoc for this method.
      * @param name

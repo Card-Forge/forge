@@ -41,8 +41,6 @@ import forge.card.spellability.SpellPermanent;
 import forge.card.spellability.Target;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerHandler;
-import forge.control.input.InputSelectCards;
-import forge.control.input.InputSelectCardsFromList;
 import forge.game.Game;
 import forge.game.ai.ComputerUtilCard;
 import forge.game.ai.ComputerUtilCombat;
@@ -50,6 +48,8 @@ import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
+import forge.gui.input.InputSelectCards;
+import forge.gui.input.InputSelectCardsFromList;
 import forge.util.Aggregates;
 
 /**

@@ -39,16 +39,16 @@ import forge.card.spellability.Ability;
 import forge.card.spellability.HumanPlaySpellAbility;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
-import forge.control.input.InputPayMana;
-import forge.control.input.InputPayManaExecuteCommands;
-import forge.control.input.InputPayManaSimple;
-import forge.control.input.InputSelectCards;
-import forge.control.input.InputSelectCardsFromList;
 import forge.game.GameActionUtil;
 import forge.game.Game;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 import forge.gui.GuiDialog;
+import forge.gui.input.InputPayMana;
+import forge.gui.input.InputPayManaExecuteCommands;
+import forge.gui.input.InputPayManaSimple;
+import forge.gui.input.InputSelectCards;
+import forge.gui.input.InputSelectCardsFromList;
 
 /** 
  * TODO: Write javadoc for this type.

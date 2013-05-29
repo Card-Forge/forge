@@ -37,7 +37,6 @@ import forge.Card;
 import forge.Constant.Preferences;
 import forge.Singletons;
 import forge.control.KeyboardShortcuts.Shortcut;
-import forge.control.input.InputQueue;
 import forge.game.Game;
 import forge.game.ai.AiProfileUtil;
 import forge.game.player.LobbyPlayer;

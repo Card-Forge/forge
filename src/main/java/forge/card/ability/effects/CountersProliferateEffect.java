@@ -12,9 +12,9 @@ import forge.GameEntity;
 import forge.Singletons;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
-import forge.control.input.InputProliferate;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
+import forge.gui.input.InputProliferate;
 
 public class CountersProliferateEffect extends SpellAbilityEffect {
     @Override

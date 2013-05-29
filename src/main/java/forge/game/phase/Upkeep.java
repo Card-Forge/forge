@@ -37,9 +37,6 @@ import forge.card.spellability.Ability;
 import forge.card.spellability.AbilityManaPart;
 import forge.card.spellability.AbilityStatic;
 import forge.card.spellability.SpellAbility;
-import forge.control.input.InputPayManaExecuteCommands;
-import forge.control.input.InputSelectCards;
-import forge.control.input.InputSelectCardsFromList;
 import forge.game.Game;
 import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilCard;
@@ -52,6 +49,9 @@ import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 import forge.gui.GuiDialog;
+import forge.gui.input.InputPayManaExecuteCommands;
+import forge.gui.input.InputSelectCards;
+import forge.gui.input.InputSelectCardsFromList;
 
 /**
  * <p>

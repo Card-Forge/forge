@@ -35,6 +35,7 @@ import forge.CardPredicates;
 import forge.CardPredicates.Presets;
 import forge.Constant;
 import forge.GameEntity;
+import forge.card.ability.AbilityUtils;
 import forge.card.ability.ApiType;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.CostDiscard;
@@ -740,6 +741,14 @@ public class AiController {
                 //the spell in the first place if it would curse its own creature
                 //and the pump isn't mandatory
                 return true;
+                
+            case Draw:
+                int numCards = sa.hasParam("NumCards") ? AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("NumCards"), sa) : 1;
+                // AI shouldn't mill itself
+                return numCards < player.getZone(ZoneType.Library).size();
+
+
+                
             default: 
         }
         String exMsg = String.format("AI confirmAction does not know what to decide about %s API with %s mode.", api, mode);

@@ -1,4 +1,4 @@
-package forge.control.input;
+package forge.gui.input;
 
 public interface InputSynchronized extends Input {
     void awaitLatchRelease();

@@ -13,6 +13,7 @@ import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 import forge.gui.GuiDialog;
+import forge.util.Lang;
 
 public class DrawEffect extends SpellAbilityEffect {
     @Override
@@ -23,20 +24,16 @@ public class DrawEffect extends SpellAbilityEffect {
 
         if (!tgtPlayers.isEmpty()) {
 
-            sb.append(StringUtils.join(tgtPlayers, " and "));
-
-            int numCards = 1;
-            if (sa.hasParam("NumCards")) {
-                numCards = AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("NumCards"), sa);
-            }
+            int numCards = sa.hasParam("NumCards") ? AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("NumCards"), sa) : 1;
+            
+            sb.append(Lang.joinHomogenous(tgtPlayers));
 
             if (tgtPlayers.size() > 1) {
                 sb.append(" each");
             }
-            sb.append(" draw");
-            if (tgtPlayers.size() == 1) {
-                sb.append("s");
-            }
+            sb.append(Lang.joinVerb(tgtPlayers, "draw")).append(" ");
+
+            sb.append(numCards).append(Lang.joinNounToAmount(numCards, "card"));
             sb.append(" (").append(numCards).append(")");
 
             if (sa.hasParam("NextUpkeep")) {
@@ -52,10 +49,8 @@ public class DrawEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
         final Card source = sa.getSourceCard();
-        int numCards = 1;
-        if (sa.hasParam("NumCards")) {
-            numCards = AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("NumCards"), sa);
-        }
+        int numCards = sa.hasParam("NumCards") ? AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("NumCards"), sa) : 1;
+        
 
         final Target tgt = sa.getTarget();
 
@@ -64,30 +59,16 @@ public class DrawEffect extends SpellAbilityEffect {
 
         for (final Player p : getDefinedPlayersBeforeTargetOnes(sa)) {
             if ((tgt == null) || p.canBeTargetedBy(sa)) {
-                if (optional) {
-                    if (p.isComputer()) {
-                        if (numCards >= p.getCardsIn(ZoneType.Library).size()) {
-                            // AI shouldn't itself
-                            continue;
-                        }
-                    } else {
-                        final StringBuilder sb = new StringBuilder();
-                        sb.append("Do you want to draw ").append(numCards).append(" cards(s)");
+                if (optional && !p.getController().confirmAction(sa, null, "Do you want to draw " + numCards + " cards(s)?"))
+                    continue;
 
-                        sb.append("?");
-
-                        if (!GuiDialog.confirm(sa.getSourceCard(), sb.toString())) {
-                            continue;
-                        }
-                    }
-                }
                 //TODO: remove this deprecation exception
                 if (slowDraw) {
                     throw new RuntimeException("This api option is no longer supported.  Please file a bug report with the card that threw this error.");
                 } else {
                     final List<Card> drawn = p.drawCards(numCards);
                     if (sa.hasParam("Reveal")) {
-                        GuiChoose.one("Revealing drawn cards", drawn);
+                        p.getGame().getAction().reveal(drawn, p);
                     }
                     if (sa.hasParam("RememberDrawn")) {
                         for (final Card c : drawn) {

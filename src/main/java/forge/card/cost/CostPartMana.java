@@ -25,12 +25,12 @@ import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostBeingPaid;
 import forge.card.mana.ManaCostShard;
 import forge.card.spellability.SpellAbility;
-import forge.control.input.InputPayMana;
-import forge.control.input.InputPayManaOfCostPayment;
-import forge.control.input.InputPayManaX;
 import forge.game.Game;
 import forge.game.ai.ComputerUtilMana;
 import forge.game.player.Player;
+import forge.gui.input.InputPayMana;
+import forge.gui.input.InputPayManaOfCostPayment;
+import forge.gui.input.InputPayManaX;
 
 /**
  * The mana component of any spell or ability cost

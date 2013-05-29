@@ -1,10 +1,11 @@
-package forge.control.input;
+package forge.gui.input;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
 import forge.Card;
 import forge.FThreads;
 import forge.Singletons;
+import forge.control.InputQueue;
 import forge.game.player.Player;
 import forge.gui.match.CMatchUI;
 import forge.view.ButtonUtil;

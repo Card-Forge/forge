@@ -1,4 +1,4 @@
-package forge.control.input;
+package forge.gui.input;
 
 import java.util.HashMap;
 import java.util.List;

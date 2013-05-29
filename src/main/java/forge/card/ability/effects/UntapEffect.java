@@ -12,11 +12,11 @@ import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
-import forge.control.input.InputSelectCards;
-import forge.control.input.InputSelectCardsFromList;
 import forge.game.ai.ComputerUtilCard;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
+import forge.gui.input.InputSelectCards;
+import forge.gui.input.InputSelectCardsFromList;
 
 public class UntapEffect extends SpellAbilityEffect {
 

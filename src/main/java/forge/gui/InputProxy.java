@@ -24,9 +24,9 @@ import java.util.concurrent.atomic.AtomicReference;
 import forge.Card;
 import forge.FThreads;
 import forge.Singletons;
-import forge.control.input.Input;
 import forge.game.Game;
 import forge.game.player.Player;
+import forge.gui.input.Input;
 
 /**
  * <p>

@@ -1,4 +1,4 @@
-package forge.control.input;
+package forge.gui.input;
 
 import forge.Card;
 import forge.card.mana.ManaCostBeingPaid;

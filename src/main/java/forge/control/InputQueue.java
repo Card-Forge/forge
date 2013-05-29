@@ -15,12 +15,15 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package forge.control.input;
+package forge.control;
 
 import java.util.concurrent.BlockingDeque;
 import java.util.concurrent.LinkedBlockingDeque;
 
 import forge.game.Game;
+import forge.gui.input.Input;
+import forge.gui.input.InputLockUI;
+import forge.gui.input.InputSynchronized;
 import forge.util.MyObservable;
 
 /**
@@ -43,13 +46,6 @@ public class InputQueue extends MyObservable implements java.io.Serializable {
         inputLock = new InputLockUI(this);
     }
 
-    /**
-     * <p>
-     * Getter for the field <code>input</code>.
-     * </p>
-     * 
-     * @return a {@link forge.control.input.InputBase} object.
-     */
     public final Input getInput() {
         return inputStack.isEmpty() ? null : this.inputStack.peek();
     }
@@ -62,7 +58,7 @@ public class InputQueue extends MyObservable implements java.io.Serializable {
      * @param update
      *            a boolean.
      */
-    final void removeInput(Input inp) {
+    public final void removeInput(Input inp) {
         Input topMostInput = inputStack.isEmpty() ? null : inputStack.pop();
 
         if( topMostInput != inp )
@@ -75,7 +71,7 @@ public class InputQueue extends MyObservable implements java.io.Serializable {
      * updateInput.
      * </p>
      * 
-     * @return a {@link forge.control.input.InputBase} object.
+     * @return a {@link forge.gui.input.InputBase} object.
      */
     public final Input getActualInput(Game game) {
         Input topMost = inputStack.peek(); // incoming input to Control
