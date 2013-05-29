@@ -62,7 +62,7 @@ public class GameLog extends MyObservable {
      * @param message the message
      * @param type the level
      */
-    public void add(final GameEventType type, final String message) {
+    public void add(final GameLogEntryType type, final String message) {
         log.add(new GameLogEntry(type, message));
         this.updateObservers();
     }
@@ -72,7 +72,7 @@ public class GameLog extends MyObservable {
         this.updateObservers();
     }    
     
-    public String getLogText(final GameEventType logLevel) { 
+    public String getLogText(final GameLogEntryType logLevel) { 
         List<GameLogEntry> filteredAndReversed = getLogEntries(logLevel);
         return StringUtils.join(filteredAndReversed, "\r\n");
     }
@@ -83,7 +83,7 @@ public class GameLog extends MyObservable {
      * @param logLevel the log level
      * @return the log text
      */
-    public List<GameLogEntry> getLogEntries(final GameEventType logLevel) { // null to fetch all
+    public List<GameLogEntry> getLogEntries(final GameLogEntryType logLevel) { // null to fetch all
         final List<GameLogEntry> result = new ArrayList<GameLogEntry>();
     
         for (int i = log.size() - 1; i >= 0; i--) {
@@ -94,7 +94,7 @@ public class GameLog extends MyObservable {
         return result;
     }
 
-    public List<GameLogEntry> getLogEntriesExact(final GameEventType logLevel) { // null to fetch all
+    public List<GameLogEntry> getLogEntriesExact(final GameLogEntryType logLevel) { // null to fetch all
         final List<GameLogEntry> result = new ArrayList<GameLogEntry>();
     
         for (int i = log.size() - 1; i >= 0; i--) {

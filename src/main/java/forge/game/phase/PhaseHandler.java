@@ -26,7 +26,7 @@ import org.apache.commons.lang.time.StopWatch;
 import forge.Card;
 import forge.CardLists;
 import forge.FThreads;
-import forge.GameEventType;
+import forge.GameLogEntryType;
 import forge.Singletons;
 import forge.CardPredicates.Presets;
 import forge.card.trigger.TriggerType;
@@ -197,7 +197,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
 
         if (this.phase == PhaseType.UNTAP) {
             this.turn++;
-            game.getGameLog().add(GameEventType.TURN, "Turn " + this.turn + " (" + this.getPlayerTurn() + ")");
+            game.getGameLog().add(GameLogEntryType.TURN, "Turn " + this.turn + " (" + this.getPlayerTurn() + ")");
         }
 
         game.fireEvent(new GameEventTurnPhase(this.getPlayerTurn(), this.getPhase(), phaseType));

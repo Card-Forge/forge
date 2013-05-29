@@ -1,6 +1,6 @@
 package forge;
 
-public enum GameEventType {
+public enum GameLogEntryType {
     GAME_OUTCOME("Game outcome"),
     MATCH_RESULTS("Match result"),
     TURN("Turn"),
@@ -18,7 +18,7 @@ public enum GameEventType {
     PHASE("Phase");
     
     private final String caption; 
-    private GameEventType(String name) {
+    private GameLogEntryType(String name) {
         this.caption = name;
     }
 

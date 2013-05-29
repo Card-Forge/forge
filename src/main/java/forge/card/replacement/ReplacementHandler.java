@@ -26,7 +26,7 @@ import java.util.Map;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.Card;
-import forge.GameEventType;
+import forge.GameLogEntryType;
 import forge.card.ability.AbilityFactory;
 import forge.card.ability.AbilityUtils;
 import forge.card.spellability.SpellAbility;
@@ -154,7 +154,7 @@ public class ReplacementHandler {
                 chosenRE.setHasRun(false);
                 String message = chosenRE.toString();
                 if ( !StringUtils.isEmpty(message))
-                    game.getGameLog().add(GameEventType.EFFECT_REPLACED, chosenRE.toString());
+                    game.getGameLog().add(GameLogEntryType.EFFECT_REPLACED, chosenRE.toString());
                 return res;
             } else {
                 if (possibleReplacers.size() == 0) {

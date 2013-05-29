@@ -34,7 +34,7 @@ import forge.CardLists;
 import forge.FThreads;
 import forge.Singletons;
 import forge.CardPredicates.Presets;
-import forge.GameEventType;
+import forge.GameLogEntryType;
 import forge.card.ability.AbilityUtils;
 import forge.card.cardfactory.CardFactory;
 import forge.card.cardfactory.CardFactoryUtil;
@@ -312,7 +312,7 @@ public class MagicStack extends MyObservable implements Iterable<SpellAbilitySta
             AbilityUtils.resolve(sp, false);
             //sp.resolve();
             sp.resetOnceResolved();
-            game.getGameLog().add(GameEventType.MANA, sp.getSourceCard() + " - " + sp.getDescription());
+            game.getGameLog().add(GameLogEntryType.MANA, sp.getSourceCard() + " - " + sp.getDescription());
             return;
         }
 
@@ -356,7 +356,7 @@ public class MagicStack extends MyObservable implements Iterable<SpellAbilitySta
         }
         sb.append(".");
 
-        game.getGameLog().add(GameEventType.STACK_ADD, sb.toString());
+        game.getGameLog().add(GameLogEntryType.STACK_ADD, sb.toString());
         //============= GameLog ======================
 
         // if activating player slips through the cracks, assign activating
@@ -602,7 +602,7 @@ public class MagicStack extends MyObservable implements Iterable<SpellAbilitySta
         
         boolean thisHasFizzled = this.hasFizzled(sa, source, false);
         String messageForLog = thisHasFizzled ? source.getName() + " ability fizzles." : sa.getStackDescription();
-        game.getGameLog().add(GameEventType.STACK_RESOLVE, messageForLog);
+        game.getGameLog().add(GameLogEntryType.STACK_RESOLVE, messageForLog);
         if (thisHasFizzled) { // Fizzle
             // TODO: Spell fizzles, what's the best way to alert player?
             Log.debug(source.getName() + " ability fizzles.");

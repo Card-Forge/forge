@@ -17,7 +17,7 @@ import net.miginfocom.swing.MigLayout;
 import forge.Command;
 import forge.GameLog;
 import forge.GameLogEntry;
-import forge.GameEventType;
+import forge.GameLogEntryType;
 import forge.Singletons;
 import forge.game.Match;
 import forge.game.player.LobbyPlayer;
@@ -183,10 +183,10 @@ public class ViewWinLose {
 
         GameLog log = match.getCurrentGame().getGameLog();
 
-        for (GameLogEntry o : log.getLogEntriesExact(GameEventType.GAME_OUTCOME)) 
+        for (GameLogEntry o : log.getLogEntriesExact(GameLogEntryType.GAME_OUTCOME)) 
             pnlOutcomes.add(new FLabel.Builder().text(o.message).fontSize(14).build(), "h 20!");
 
-        for (GameLogEntry o : log.getLogEntriesExact(GameEventType.MATCH_RESULTS))
+        for (GameLogEntry o : log.getLogEntriesExact(GameLogEntryType.MATCH_RESULTS))
             lblStats.setText(o.message);
     }
 

@@ -39,7 +39,7 @@ import forge.Command;
 import forge.CounterType;
 import forge.FThreads;
 import forge.GameEntity;
-import forge.GameEventType;
+import forge.GameLogEntryType;
 import forge.card.CardType;
 import forge.card.TriggerReplacementBase;
 import forge.card.ability.AbilityFactory;
@@ -1570,7 +1570,7 @@ public class GameAction {
                     p.onMulliganned();
                     allKept = false;
                 } else {
-                    game.getGameLog().add(GameEventType.MULLIGAN, p.getName() + " has kept a hand of " + p.getZone(ZoneType.Hand).size() + " cards");
+                    game.getGameLog().add(GameLogEntryType.MULLIGAN, p.getName() + " has kept a hand of " + p.getZone(ZoneType.Hand).size() + " cards");
                     hasKept[i] = true;
                 }
             }

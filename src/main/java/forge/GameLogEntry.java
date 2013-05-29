@@ -2,10 +2,10 @@ package forge;
 
 public class GameLogEntry {
     public final String message;
-    public final GameEventType type;
+    public final GameLogEntryType type;
     // might add here date and some other fields
 
-    GameLogEntry(final GameEventType type0, final String messageIn) {
+    GameLogEntry(final GameLogEntryType type0, final String messageIn) {
         type = type0;
         message = messageIn;
     }

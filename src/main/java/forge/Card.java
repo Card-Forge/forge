@@ -3164,7 +3164,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     public final void equipCard(final Card c) {
         if (c.hasKeyword("CARDNAME can't be equipped.")) {
-            getGame().getGameLog().add(GameEventType.STACK_RESOLVE, "Trying to equip " + c.getName() + " but it can't be equipped.");
+            getGame().getGameLog().add(GameLogEntryType.STACK_RESOLVE, "Trying to equip " + c.getName() + " but it can't be equipped.");
             return;
         }
         if (this.hasStartOfKeyword("CantEquip")) {
@@ -3173,7 +3173,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             final String[] k = parse.split(" ", 2);
             final String[] restrictions = k[1].split(",");
             if (c.isValid(restrictions, this.getController(), this)) {
-                getGame().getGameLog().add(GameEventType.STACK_RESOLVE, "Trying to equip " + c.getName() + " but it can't be equipped.");
+                getGame().getGameLog().add(GameLogEntryType.STACK_RESOLVE, "Trying to equip " + c.getName() + " but it can't be equipped.");
                 return;
             }
         }
@@ -3365,7 +3365,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     public final void enchantEntity(final GameEntity entity) {
         if (entity.hasKeyword("CARDNAME can't be enchanted.")) {
-            getGame().getGameLog().add(GameEventType.STACK_RESOLVE, "Trying to enchant " + entity.getName()
+            getGame().getGameLog().add(GameLogEntryType.STACK_RESOLVE, "Trying to enchant " + entity.getName()
             + " but it can't be enchanted.");
             return;
         }
@@ -7409,7 +7409,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             game.fireEvent(new GameEventCardDamaged());
         }
 
-        getGame().getGameLog().add(GameEventType.DAMAGE, String.format("Dealing %d damage to %s. %s", damageToAdd, this.getName(), additionalLog));
+        getGame().getGameLog().add(GameLogEntryType.DAMAGE, String.format("Dealing %d damage to %s. %s", damageToAdd, this.getName(), additionalLog));
         return true;
     }
 

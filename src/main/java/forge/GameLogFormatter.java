@@ -36,7 +36,7 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
             String whoHas = p.getKey().equals(human) ? "You have" : p.getKey().getName() + " has";
             String outcome = String.format("%s %s", whoHas, p.getValue().getOutcome().toString());
             outcomes.add(outcome);
-            log.add(GameEventType.GAME_OUTCOME, outcome);
+            log.add(GameLogEntryType.GAME_OUTCOME, outcome);
         }
         
         return generateSummary(ev.history);
@@ -63,7 +63,7 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
         for(int i = 0; i < wins.length; i++) {
             sb.append(players[i].getName()).append(": ").append(wins[i]).append(" ");
         }
-        return new GameLogEntry(GameEventType.MATCH_RESULTS, sb.toString());
+        return new GameLogEntry(GameLogEntryType.MATCH_RESULTS, sb.toString());
     }
 
     @Override
@@ -78,13 +78,13 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
         else
             message =  String.format("%s is controlled by %s", p.getName(), newController.getName());
         
-        return new GameLogEntry(GameEventType.PLAYER_CONROL, message);
+        return new GameLogEntry(GameLogEntryType.PLAYER_CONROL, message);
     }
     
     @Override
     public GameLogEntry visit(GameEventTurnPhase ev) {
         Player p = ev.playerTurn;
-        return new GameLogEntry(GameEventType.PHASE, ev.phaseDesc + Lang.getPossesive(p.getName()) + " " + ev.phase.nameForUi);
+        return new GameLogEntry(GameLogEntryType.PHASE, ev.phaseDesc + Lang.getPossesive(p.getName()) + " " + ev.phase.nameForUi);
     }
     
     
@@ -108,7 +108,7 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
             sb.append(" to attack ").append(defender.toString()).append(".");
         }
 
-        return new GameLogEntry(GameEventType.COMBAT, sb.toString());
+        return new GameLogEntry(GameLogEntryType.COMBAT, sb.toString());
     }
 
 
@@ -145,7 +145,7 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
             }
         }
 
-        return new GameLogEntry(GameEventType.COMBAT, sb.toString());
+        return new GameLogEntry(GameLogEntryType.COMBAT, sb.toString());
     }
 
 

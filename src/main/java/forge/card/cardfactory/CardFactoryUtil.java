@@ -35,7 +35,7 @@ import forge.Command;
 import forge.Constant;
 import forge.CounterType;
 import forge.GameEntity;
-import forge.GameEventType;
+import forge.GameLogEntryType;
 import forge.Singletons;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
@@ -207,7 +207,7 @@ public class CardFactoryUtil {
             public void resolve() {
                 if (sourceCard.turnFaceUp()) {
                     String sb = this.getActivatingPlayer() + " has unmorphed " + sourceCard.getName();
-                    sourceCard.getGame().getGameLog().add(GameEventType.STACK_RESOLVE, sb);
+                    sourceCard.getGame().getGameLog().add(GameLogEntryType.STACK_RESOLVE, sb);
                 }
             }
 
@@ -430,7 +430,7 @@ public class CardFactoryUtil {
                 c.addCounter(CounterType.TIME, counters, true);
                 
                 String sb = String.format("%s has suspended %s with %d time counters on it.", this.getActivatingPlayer(), c.getName(), counters);
-                game.getGameLog().add(GameEventType.STACK_RESOLVE, sb);
+                game.getGameLog().add(GameLogEntryType.STACK_RESOLVE, sb);
             }
         };
         final StringBuilder sbDesc = new StringBuilder();

@@ -18,7 +18,7 @@ import com.google.common.collect.Lists;
 import forge.Card;
 import forge.CardLists;
 import forge.CardPredicates;
-import forge.GameEventType;
+import forge.GameLogEntryType;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerHandler;
 import forge.deck.CardPool;
@@ -312,7 +312,7 @@ public class GameNew {
             Predicate<Card> goodForAnte = Predicates.not(CardPredicates.Presets.BASIC_LANDS);
             Card ante = Aggregates.random(Iterables.filter(lib, goodForAnte));
             if (ante == null) {
-                game.getGameLog().add(GameEventType.ANTE, "Only basic lands found. Will ante one of them");
+                game.getGameLog().add(GameLogEntryType.ANTE, "Only basic lands found. Will ante one of them");
                 ante = Aggregates.random(lib);
             }
             anteed.add(Pair.of(p, ante));
@@ -324,7 +324,7 @@ public class GameNew {
         for(Pair<Player, Card> kv : cards) {
             Player p = kv.getKey();
             p.getGame().getAction().moveTo(ZoneType.Ante, kv.getValue());
-            p.getGame().getGameLog().add(GameEventType.ANTE, p + " anted " + kv.getValue());
+            p.getGame().getGameLog().add(GameLogEntryType.ANTE, p + " anted " + kv.getValue());
         }
     }
 

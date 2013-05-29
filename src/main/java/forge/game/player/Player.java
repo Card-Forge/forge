@@ -39,7 +39,7 @@ import forge.Constant.Preferences;
 import forge.CounterType;
 import forge.FThreads;
 import forge.GameEntity;
-import forge.GameEventType;
+import forge.GameLogEntryType;
 import forge.Singletons;
 import forge.card.MagicColor;
 import forge.card.ability.AbilityFactory;
@@ -673,7 +673,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         runParams.put("IsCombatDamage", isCombat);
         game.getTriggerHandler().runTrigger(TriggerType.DamageDone, runParams, false);
 
-        game.getGameLog().add(GameEventType.DAMAGE, String.format("Dealing %d damage to %s. %s", damageToDo, this.getName(), additionalLog));
+        game.getGameLog().add(GameLogEntryType.DAMAGE, String.format("Dealing %d damage to %s. %s", damageToDo, this.getName(), additionalLog));
 
         return true;
     }
@@ -1021,7 +1021,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             this.poisonCounters += num;
 
             game.fireEvent(new GameEventPoisonCounter(this, source, num));
-            game.getGameLog().add(GameEventType.DAMAGE_POISON, this + " receives a poison counter from " + source);
+            game.getGameLog().add(GameLogEntryType.DAMAGE_POISON, this + " receives a poison counter from " + source);
 
             this.updateObservers();
         }
@@ -1768,7 +1768,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             game.getAction().checkStateEffects();
 
             // add to log
-            game.getGameLog().add(GameEventType.LAND, this + " played " + land);
+            game.getGameLog().add(GameLogEntryType.LAND, this + " played " + land);
 
             // play a sound
             game.fireEvent(new GameEventLandPlayed(this, land));
@@ -3128,7 +3128,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     public void onMulliganned() {
         game.fireEvent(new GameEventMulligan(this)); // quest listener may interfere here
         final int newHand = getCardsIn(ZoneType.Hand).size();
-        game.getGameLog().add(GameEventType.MULLIGAN, this + " has mulliganed down to " + newHand + " cards.");
+        game.getGameLog().add(GameLogEntryType.MULLIGAN, this + " has mulliganed down to " + newHand + " cards.");
         stats.notifyHasMulliganed();
         stats.notifyOpeningHandSize(newHand);
     }

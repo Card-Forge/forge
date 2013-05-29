@@ -10,7 +10,7 @@ import forge.CardLists;
 import forge.CardPredicates.Presets;
 import forge.CounterType;
 import forge.FThreads;
-import forge.GameEventType;
+import forge.GameLogEntryType;
 import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.ApiType;
@@ -349,7 +349,7 @@ public class HumanPlay {
                 
                 if (false == source.canReceiveCounters(counterType)) {
                     String message = String.format("Won't be able to pay upkeep for %s but it can't have %s counters put on it.", source, counterType.getName());
-                    p.getGame().getGameLog().add(GameEventType.STACK_RESOLVE, message);
+                    p.getGame().getGameLog().add(GameLogEntryType.STACK_RESOLVE, message);
                     return false;
                 }
                 
