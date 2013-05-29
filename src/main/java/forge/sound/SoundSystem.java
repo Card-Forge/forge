@@ -151,7 +151,7 @@ public class SoundSystem {
 
     @Subscribe
     public void receiveEvent(GameEvent evt) {
-        SoundEffectType effect = visualizer.getSoundForEvent(evt);
+        SoundEffectType effect = evt.visit(visualizer, null);
         if (null == effect) {
             return;
         }

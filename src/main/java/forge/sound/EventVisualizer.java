@@ -1,12 +1,10 @@
 package forge.sound;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
 import forge.Card;
 import forge.Singletons;
 import forge.card.spellability.SpellAbility;
+import forge.game.event.GameEventAnteCardsSelected;
 import forge.game.event.GameEventBlockerAssigned;
 import forge.game.event.GameEventCardDamaged;
 import forge.game.event.GameEventCardDestroyed;
@@ -17,94 +15,65 @@ import forge.game.event.GameEventCardSacrificed;
 import forge.game.event.GameEventCounterAdded;
 import forge.game.event.GameEventCounterRemoved;
 import forge.game.event.GameEventDrawCard;
+import forge.game.event.GameEventDuelFinished;
 import forge.game.event.GameEventDuelOutcome;
 import forge.game.event.GameEventEndOfTurn;
 import forge.game.event.GameEvent;
 import forge.game.event.GameEventFlipCoin;
+import forge.game.event.GameEventGameRestarted;
 import forge.game.event.GameEventLandPlayed;
 import forge.game.event.GameEventLifeLoss;
+import forge.game.event.GameEventManaBurn;
+import forge.game.event.GameEventMulligan;
+import forge.game.event.GameEventPlayerControl;
 import forge.game.event.GameEventPoisonCounter;
 import forge.game.event.GameEventCardTapped;
 import forge.game.event.GameEventShuffle;
 import forge.game.event.GameEventSpellResolved;
 import forge.game.event.GameEventTokenCreated;
+import forge.game.event.GameEventTurnPhase;
+import forge.game.event.IGameEventVisitor;
 
 /** 
  * This class is in charge of converting any forge.game.event.Event to a SoundEffectType.
  *
  */
-public class EventVisualizer {
-
-    static final Map<Class<?>, SoundEffectType> matchTable = new HashMap<Class<?>, SoundEffectType>();
-
-    public EventVisualizer() {
-        matchTable.put(GameEventCounterAdded.class, SoundEffectType.AddCounter);
-        matchTable.put(GameEventBlockerAssigned.class, SoundEffectType.Block);
-        matchTable.put(GameEventCardDamaged.class, SoundEffectType.Damage);
-        matchTable.put(GameEventCardDestroyed.class, SoundEffectType.Destroy);
-        matchTable.put(GameEventCardDiscarded.class, SoundEffectType.Discard);
-        matchTable.put(GameEventDrawCard.class, SoundEffectType.Draw);
-        matchTable.put(GameEventEndOfTurn.class, SoundEffectType.EndOfTurn);
-        matchTable.put(GameEventCardEquipped.class, SoundEffectType.Equip);
-        matchTable.put(GameEventFlipCoin.class, SoundEffectType.FlipCoin);
-        matchTable.put(GameEventLifeLoss.class, SoundEffectType.LifeLoss);
-        matchTable.put(GameEventPoisonCounter.class, SoundEffectType.Poison);
-        matchTable.put(GameEventCardRegenerated.class, SoundEffectType.Regen);
-        matchTable.put(GameEventCounterRemoved.class, SoundEffectType.RemoveCounter);
-        matchTable.put(GameEventCardSacrificed.class, SoundEffectType.Sacrifice);
-        matchTable.put(GameEventShuffle.class, SoundEffectType.Shuffle);
-        matchTable.put(GameEventTokenCreated.class, SoundEffectType.Token);
-    }
+public class EventVisualizer implements IGameEventVisitor<Void, SoundEffectType> {
 
 
-    public final SoundEffectType getSoundForEvent(GameEvent evt) {
-        SoundEffectType fromMap = matchTable.get(evt.getClass());
-
-        // call methods copied from Utils here
-        if (evt instanceof GameEventSpellResolved) {
-            return getSoundEffectForResolve(((GameEventSpellResolved) evt).Source, ((GameEventSpellResolved) evt).Spell);
-        }
-        if (evt instanceof GameEventLandPlayed) {
-            return getSoundEffectForLand(((GameEventLandPlayed) evt).Land);
-        }
-        if (evt instanceof GameEventCounterAdded) {
-            if (((GameEventCounterAdded) evt).Amount == 0) {
-                return null;
-            }
-        }
-        if (evt instanceof GameEventCounterRemoved) {
-            if (((GameEventCounterRemoved) evt).Amount == 0) {
-                return null;
-            }
-        }
-        if (evt instanceof GameEventCardTapped) {
-            return getSoundEffectForTapState(((GameEventCardTapped) evt).tapped);
-        }
-        if (evt instanceof GameEventDuelOutcome) {
-            return getSoundEffectForDuelOutcome(((GameEventDuelOutcome) evt).result.getWinner() == Singletons.getControl().getLobby().getGuiPlayer());
-        }
-
-        return fromMap;
-    }
+    public SoundEffectType visit(GameEventBlockerAssigned event, Void params) { return SoundEffectType.Block; }
+    public SoundEffectType visit(GameEventCardDamaged event, Void params) { return SoundEffectType.Damage; }
+    public SoundEffectType visit(GameEventCardDestroyed event, Void params) { return SoundEffectType.Destroy; }
+    public SoundEffectType visit(GameEventCardDiscarded event, Void params) { return SoundEffectType.Discard; }
+    public SoundEffectType visit(GameEventCardEquipped event, Void params) { return SoundEffectType.Equip; }
+    public SoundEffectType visit(GameEventCardRegenerated event, Void params) { return SoundEffectType.Regen; }
+    public SoundEffectType visit(GameEventCardSacrificed event, Void params) { return SoundEffectType.Sacrifice; }
+    public SoundEffectType visit(GameEventCounterAdded event, Void params) { return event.Amount > 0 ? SoundEffectType.AddCounter : null; }
+    public SoundEffectType visit(GameEventCounterRemoved event, Void params) { return event.Amount > 0 ? SoundEffectType.RemoveCounter : null; }
+    public SoundEffectType visit(GameEventDrawCard event, Void params) { return SoundEffectType.Draw; }
+    public SoundEffectType visit(GameEventEndOfTurn event, Void params) { return SoundEffectType.EndOfTurn; }
+    public SoundEffectType visit(GameEventFlipCoin event, Void params) { return SoundEffectType.FlipCoin; }
+    public SoundEffectType visit(GameEventLifeLoss event, Void params) { return SoundEffectType.LifeLoss; }
+    public SoundEffectType visit(GameEventPoisonCounter event, Void params) { return SoundEffectType.Poison; }
+    public SoundEffectType visit(GameEventShuffle event, Void params) { return SoundEffectType.Shuffle; }
+    public SoundEffectType visit(GameEventTokenCreated event, Void params) { return SoundEffectType.Token; }
 
     /**
      * Plays the sound corresponding to the outcome of the duel.
-     * 
-     * @param humanWonTheDuel true if the human won the duel, false otherwise.
-     * @return the sound effect played
      */
-    public SoundEffectType getSoundEffectForDuelOutcome(boolean humanWonTheDuel) {
+    public SoundEffectType visit(GameEventDuelOutcome event, Void params) {
+        boolean humanWonTheDuel = event.result.getWinner() == Singletons.getControl().getLobby().getGuiPlayer();
         return humanWonTheDuel ? SoundEffectType.WinDuel : SoundEffectType.LoseDuel;
     }
 
     /**
      * Plays the sound corresponding to the card type/color when the card
      * ability resolves on the stack.
-     *
-     * @param source the card to play the sound for.
-     * @param sa the spell ability that was resolving.
      */
-    public SoundEffectType getSoundEffectForResolve(final Card source, final SpellAbility sa) {
+    public SoundEffectType visit(GameEventSpellResolved evt, Void params) { 
+        Card source = evt.Source;
+        SpellAbility sa = evt.Spell;
+    
         if (sa == null || source == null) {
             return null;
         }
@@ -143,8 +112,8 @@ public class EventVisualizer {
      * "untap" sound is played
      * @return the sound effect type
      */
-    public static SoundEffectType getSoundEffectForTapState(boolean tapped_state) {
-        return tapped_state ? SoundEffectType.Tap : SoundEffectType.Untap;
+    public SoundEffectType visit(GameEventCardTapped event, Void params) {
+        return event.tapped ? SoundEffectType.Tap : SoundEffectType.Untap;
     }
 
     /**
@@ -153,7 +122,8 @@ public class EventVisualizer {
      * @param land the land card that was played
      * @return the sound effect type
      */
-    public static SoundEffectType getSoundEffectForLand(final Card land) {
+    public SoundEffectType visit(GameEventLandPlayed event, Void params) { 
+        Card land = event.Land;
         if (land == null) {
             return null;
         }
@@ -238,5 +208,13 @@ public class EventVisualizer {
 
         return effect.getIsSynced();
     }
+    // These are not used by sound system
+    public SoundEffectType visit(GameEventGameRestarted event, Void params) { return null; }
+    public SoundEffectType visit(GameEventDuelFinished event, Void params) { return null; }
+    public SoundEffectType visit(GameEventAnteCardsSelected event, Void params) { return null; }
+    public SoundEffectType visit(GameEventManaBurn event, Void params) { return null; }
+    public SoundEffectType visit(GameEventMulligan event, Void params) { return null; }
+    public SoundEffectType visit(GameEventPlayerControl event, Void params) { return null; }
+    public SoundEffectType visit(GameEventTurnPhase event, Void params) { return null; }
 
 }
