@@ -282,4 +282,9 @@ public class PlayerControllerAi extends PlayerController {
             brains.onPriorityRecieved();
         // use separate thread for AI?
     }
+
+    @Override
+    public List<Card> chooseCardsToDiscardToMaximumHandSize(int numDiscard) {
+        return brains.getCardsToDiscard(numDiscard, (String[])null, null);
+    }
 }

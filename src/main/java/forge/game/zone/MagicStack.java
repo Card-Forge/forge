@@ -59,7 +59,6 @@ import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilCard;
 import forge.game.ai.ComputerUtilCost;
 import forge.game.event.SpellResolvedEvent;
-import forge.game.phase.PhaseType;
 import forge.game.player.HumanPlay;
 import forge.game.player.Player;
 import forge.gui.GuiChoose;
@@ -365,11 +364,6 @@ public class MagicStack extends MyObservable implements Iterable<SpellAbilitySta
         if (null == sp.getActivatingPlayer()) {
             sp.setActivatingPlayer(sp.getSourceCard().getController());
             System.out.println(sp.getSourceCard().getName() + " - activatingPlayer not set before adding to stack.");
-        }
-
-        if (game.getPhaseHandler().is(PhaseType.CLEANUP)) {
-            // If something triggers during Cleanup, need to repeat
-            game.getPhaseHandler().repeatPhase();
         }
 
         if ((sp instanceof AbilityTriggered) || (sp instanceof AbilityStatic)) {

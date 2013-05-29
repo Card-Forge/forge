@@ -801,23 +801,6 @@ public class AiController {
             playSpellAbilities(game);
         } else {
             switch(phase) {
-                case CLEANUP:
-                    if ( game.getPhaseHandler().getPlayerTurn() == player ) {
-                        final int size = player.getCardsIn(ZoneType.Hand).size();
-                        
-                        if (!player.isUnlimitedHandSize()) {
-                            int max = Math.min(player.getZone(ZoneType.Hand).size(), size - player.getMaxHandSize());
-                            if( max > 0) {
-                                final List<Card> toDiscard = getCardsToDiscard(max, (String[])null, null);
-                                for (int i = 0; i < toDiscard.size(); i++) {
-                                    player.discard(toDiscard.get(i), null);
-                                }
-                            }
-                            game.getStack().chooseOrderOfSimultaneousStackEntryAll();
-                        }
-                    }
-                    break;
-
                 case COMBAT_DECLARE_ATTACKERS:
                     declareAttackers();
                     break;

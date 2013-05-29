@@ -172,15 +172,6 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
         return this.bCombat;
     }
 
-    /**
-     * <p>
-     * repeatPhase.
-     * </p>
-     */
-    public final void repeatPhase() {
-        this.bRepeatCleanup = true;
-    }
-
     private void advanceToNextPhase() {
         PhaseType oldPhase = phase;
         
@@ -213,83 +204,6 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
         
     }
 
-    private void onPhaseEnd() {
-        // If the Stack isn't empty why is nextPhase being called?
-        if (!game.getStack().isEmpty()) {
-            throw new IllegalStateException("Phase.nextPhase() is called, but Stack isn't empty.");
-        }
-    
-        for (Player p : game.getPlayers()) {
-            int burn = p.getManaPool().clearPool(true);
-            if (Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_MANABURN)) {
-                p.loseLife(burn);
-    
-                // Play the Mana Burn sound
-                game.getEvents().post(new ManaBurnEvent());
-            }
-            p.updateObservers();
-        }
-
-        switch (this.phase) {
-            case UNTAP:
-                this.nCombatsThisTurn = 0;
-                break;
-    
-            case COMBAT_DECLARE_ATTACKERS:
-                this.bCombat = !game.getCombat().getAttackers().isEmpty();
-                game.getStack().unfreezeStack();
-                this.nCombatsThisTurn++;
-                break;
-    
-            case COMBAT_DECLARE_BLOCKERS:
-                game.getStack().unfreezeStack();
-                break;
-    
-            case COMBAT_END:
-                game.getCombat().reset(playerTurn);
-                this.getPlayerTurn().resetAttackedThisCombat();
-                this.bCombat = false;
-                break;
-    
-            case CLEANUP:
-                this.bPreventCombatDamageThisTurn = false;
-                if (!this.bRepeatCleanup) {
-                    this.setPlayerTurn(this.handleNextTurn());
-                }
-                this.planarDiceRolledthisTurn = 0;
-                // Play the End Turn sound
-                game.getEvents().post(new EndOfTurnEvent());
-                break;
-            default: // no action
-        }
-
-    }
-
-    private boolean isSkippingPhase(PhaseType phase) {
-        switch(phase) {
-            case UPKEEP: 
-                return getPlayerTurn().hasKeyword("Skip your upkeep step.");
-
-            case DRAW: 
-                return getPlayerTurn().isSkippingDraw() || getTurn() == 1 && game.getPlayers().size() == 2;
-
-            case COMBAT_BEGIN:
-            case COMBAT_DECLARE_ATTACKERS:
-                return playerTurn.isSkippingCombat();
-
-            case COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY:
-            case COMBAT_DECLARE_BLOCKERS:
-            case COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY:
-            case COMBAT_FIRST_STRIKE_DAMAGE:
-            case COMBAT_DAMAGE:
-                return !this.inCombat();
-            
-            default: 
-                return false;
-        }
-        
-    }
-    
     private final void onPhaseBegin() {
         
         if ( isSkippingPhase(phase) ) {
@@ -404,6 +318,18 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
                     break;
     
                 case CLEANUP:
+                    // Rule 514.1
+                    final int handSize = playerTurn.getZone(ZoneType.Hand).size();
+                    final int max = playerTurn.getMaxHandSize();
+                    int numDiscard = playerTurn.isUnlimitedHandSize() || handSize <= max || handSize == 0 ? 0 : handSize - max; 
+
+                    if ( numDiscard > 0 ) {
+                        for(Card c : playerTurn.getController().chooseCardsToDiscardToMaximumHandSize(numDiscard)){ 
+                            playerTurn.discard(c, null);
+                        }
+                    }
+
+                    // Rule 514.2
                     // Reset Damage received map
                     for (final Card c : game.getCardsIn(ZoneType.Battlefield)) {
                         c.onCleanupPhase(playerTurn);
@@ -419,20 +345,23 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
                     this.getPlayerTurn().removeKeyword("Skip all combat phases of this turn.");
                     game.getCleanup().executeUntil(this.getNextTurn());
                     this.nUpkeepsThisTurn = 0;
+                    
+                    // Rule 514.3
+                    givePriorityToPlayer = false;
                     break;
     
                 default:
                     break;
             }
-
+    
             if (inCombat()) {
                 CombatUtil.showCombat(game);
             }
         }
-
+    
         // Handle effects that happen at the beginning of phases
         game.getAction().checkStateEffects();
-
+    
         if (this.givePriorityToPlayer) {
             // Run triggers if phase isn't being skipped
             final HashMap<String, Object> runParams = new HashMap<String, Object>();
@@ -440,11 +369,95 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
             runParams.put("Player", this.getPlayerTurn());
             game.getTriggerHandler().runTrigger(TriggerType.Phase, runParams, false);
         }
-
+    
         // This line fixes Combat Damage triggers not going off when they should
         game.getStack().unfreezeStack();
+        
+        // Rule 514.3a
+        if( phase == PhaseType.CLEANUP && !game.getStack().isEmpty() ) {
+            bRepeatCleanup = true;
+            givePriorityToPlayer = true;
+        }
     }
 
+
+    private void onPhaseEnd() {
+        // If the Stack isn't empty why is nextPhase being called?
+        if (!game.getStack().isEmpty()) {
+            throw new IllegalStateException("Phase.nextPhase() is called, but Stack isn't empty.");
+        }
+    
+        for (Player p : game.getPlayers()) {
+            int burn = p.getManaPool().clearPool(true);
+            if (Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_MANABURN)) {
+                p.loseLife(burn);
+    
+                // Play the Mana Burn sound
+                game.getEvents().post(new ManaBurnEvent());
+            }
+            p.updateObservers();
+        }
+
+        switch (this.phase) {
+            case UNTAP:
+                this.nCombatsThisTurn = 0;
+                break;
+    
+            case COMBAT_DECLARE_ATTACKERS:
+                this.bCombat = !game.getCombat().getAttackers().isEmpty();
+                game.getStack().unfreezeStack();
+                this.nCombatsThisTurn++;
+                break;
+    
+            case COMBAT_DECLARE_BLOCKERS:
+                game.getStack().unfreezeStack();
+                break;
+    
+            case COMBAT_END:
+                game.getCombat().reset(playerTurn);
+                this.getPlayerTurn().resetAttackedThisCombat();
+                this.bCombat = false;
+                break;
+    
+            case CLEANUP:
+                this.bPreventCombatDamageThisTurn = false;
+                if (!this.bRepeatCleanup) {
+                    this.setPlayerTurn(this.handleNextTurn());
+                }
+                this.planarDiceRolledthisTurn = 0;
+                // Play the End Turn sound
+                game.getEvents().post(new EndOfTurnEvent());
+                break;
+            default: // no action
+        }
+
+    }
+
+    private boolean isSkippingPhase(PhaseType phase) {
+        switch(phase) {
+            case UPKEEP: 
+                return getPlayerTurn().hasKeyword("Skip your upkeep step.");
+
+            case DRAW: 
+                return getPlayerTurn().isSkippingDraw() || getTurn() == 1 && game.getPlayers().size() == 2;
+
+            case COMBAT_BEGIN:
+            case COMBAT_DECLARE_ATTACKERS:
+                return playerTurn.isSkippingCombat();
+
+            case COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY:
+            case COMBAT_DECLARE_BLOCKERS:
+            case COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY:
+            case COMBAT_FIRST_STRIKE_DAMAGE:
+            case COMBAT_DAMAGE:
+                return !this.inCombat();
+            
+            default: 
+                return false;
+        }
+        
+    }
+    
     /**
      * Checks if is prevent combat damage this turn.
      * 

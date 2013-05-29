@@ -33,7 +33,6 @@ import forge.deck.DeckSection;
 import forge.game.GameState;
 import forge.game.GameType;
 import forge.game.phase.PhaseType;
-import forge.game.zone.MagicStack;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 import forge.gui.GuiDialog;
@@ -483,7 +482,6 @@ public class PlayerControllerHuman extends PlayerController {
     @Override
     public void takePriority() {
         PhaseType phase = game.getPhaseHandler().getPhase();
-        MagicStack stack = game.getStack();
 
         boolean maySkipPriority = mayAutoPass(phase) || isUiSetToSkipPhase(game.getPhaseHandler().getPlayerTurn(), phase);
         if (game.getStack().isEmpty() && maySkipPriority) {
@@ -504,32 +502,22 @@ public class PlayerControllerHuman extends PlayerController {
                 Singletons.getControl().getInputQueue().setInputAndWait(inpBlock);
                 return;
 
-            case CLEANUP:
-                if( stack.isEmpty() ) {
-                    final int n = player.getZone(ZoneType.Hand).size();
-                    final int max = player.getMaxHandSize();
-                    // goes to the next phase
-                    int nDiscard = player.isUnlimitedHandSize() || n <= max || n == 0 ? 0 : n - max; 
-                    
-    
-                    if ( nDiscard > 0 ) {
-                        InputSelectCardsFromList inp = new InputSelectCardsFromList(nDiscard, nDiscard, player.getZone(ZoneType.Hand).getCards());
-                        String msgFmt = "Cleanup Phase: You can only have a maximum of %d cards, you currently have %d  cards in your hand - select %d card(s) to discard";
-                        String message = String.format(msgFmt, max, n, nDiscard);
-                        inp.setMessage(message);
-                        inp.setCancelAllowed(false);
-                        Singletons.getControl().getInputQueue().setInputAndWait(inp);
-                        for(Card c : inp.getSelected()){ 
-                            player.discard(c, null);
-                        }
-                    }
-                    break;
-                }
-                
-                // fallthough
-                
             default:
                 showDefaultInput();
         }
+    }
+
+    @Override
+    public List<Card> chooseCardsToDiscardToMaximumHandSize(int nDiscard) {
+        final int n = player.getZone(ZoneType.Hand).size();
+        final int max = player.getMaxHandSize();
+
+        InputSelectCardsFromList inp = new InputSelectCardsFromList(nDiscard, nDiscard, player.getZone(ZoneType.Hand).getCards());
+        String msgFmt = "Cleanup Phase: You can only have a maximum of %d cards, you currently have %d  cards in your hand - select %d card(s) to discard";
+        String message = String.format(msgFmt, max, n, nDiscard);
+        inp.setMessage(message);
+        inp.setCancelAllowed(false);
+        Singletons.getControl().getInputQueue().setInputAndWait(inp);
+        return inp.getSelected();
     }
 }

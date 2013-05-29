@@ -126,4 +126,5 @@ public abstract class PlayerController {
     public abstract List<Card> getCardsToMulligan(boolean isCommander, Player firstPlayer);
 
     public abstract void takePriority();
+    public abstract List<Card> chooseCardsToDiscardToMaximumHandSize(int numDiscard);
 }
