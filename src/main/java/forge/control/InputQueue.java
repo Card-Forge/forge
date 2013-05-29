@@ -88,11 +88,19 @@ public class InputQueue extends MyObservable implements java.io.Serializable {
     
     public void setInputAndWait(InputSynchronized input) {
         this.inputStack.push(input);
+        syncPoint();
         this.updateObservers();
         
         input.awaitLatchRelease();
     }
+    
 
+    public void syncPoint() { 
+        synchronized (inputLock) {
+            // acquire and release lock, so that actions from Game thread happen before EDT reads their results  
+        }
+    }
+    
     /**
      * TODO: Write javadoc for this method.
      */

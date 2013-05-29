@@ -26,10 +26,9 @@ import com.google.common.collect.Iterables;
 import forge.Card;
 import forge.CardPredicates;
 import forge.GameEntity;
-import forge.game.Game;
+import forge.game.phase.Combat;
 import forge.game.phase.CombatUtil;
 import forge.game.player.Player;
-import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.util.MyObservable;
 import forge.view.ButtonUtil;
@@ -47,14 +46,15 @@ public class InputAttack extends InputSyncronizedBase {
     private static final long serialVersionUID = 7849903731842214245L;
 
     
-    private final Game game;
-    private List<GameEntity> defenders;
+    private final Combat combat;
+    private final List<GameEntity> defenders;
     private GameEntity currentDefender;
     private final Player player;
     
-    public InputAttack(Player human) {
-        player = human;
-        game = human.getGame();
+    public InputAttack(Player human, Combat combat) {
+        this.player = human;
+        this.combat = combat;
+        this.defenders = combat.getDefenders();
     }
     
     
@@ -64,7 +64,7 @@ public class InputAttack extends InputSyncronizedBase {
         // TODO still seems to have some issues with multiple planeswalkers
 
         ButtonUtil.enableOnlyOk();
-        defenders = game.getCombat().getDefenders();
+
         setCurrentDefender(defenders.isEmpty() ? null : defenders.get(0));
 
         if ( null == currentDefender ) {
@@ -78,8 +78,8 @@ public class InputAttack extends InputSyncronizedBase {
                 continue; // do not force
 
             for(GameEntity def : defenders ) {
-                if( CombatUtil.canAttack(c, def, game.getCombat()) ) {
-                    game.getCombat().addAttacker(c, currentDefender);
+                if( CombatUtil.canAttack(c, def, combat) ) {
+                    combat.addAttacker(c, currentDefender);
                     break;
                 }
             }
@@ -110,9 +110,9 @@ public class InputAttack extends InputSyncronizedBase {
     /** {@inheritDoc} */
     @Override
     protected final void onCardSelected(final Card card, boolean isMetaDown) {
-        final List<Card> att = game.getCombat().getAttackers();
+        final List<Card> att = combat.getAttackers();
         if (isMetaDown && att.contains(card) && !card.hasKeyword("CARDNAME attacks each turn if able.")) {
-            game.getCombat().removeFromCombat(card);
+            combat.removeFromCombat(card);
             showCombat();
             return;
         }
@@ -128,12 +128,11 @@ public class InputAttack extends InputSyncronizedBase {
             }
         }
 
-        Zone zone = game.getZoneOf(card);
-        if (zone.is(ZoneType.Battlefield, player) && CombatUtil.canAttack(card, currentDefender, game.getCombat())) {
-            if( game.getCombat().isAttacking(card)) {
-                game.getCombat().removeFromCombat(card);
+        if (player.getZone(ZoneType.Battlefield).contains(card) && CombatUtil.canAttack(card, currentDefender, combat)) {
+            if( combat.isAttacking(card)) {
+                combat.removeFromCombat(card);
             }
-            game.getCombat().addAttacker(card, currentDefender);
+            combat.addAttacker(card, currentDefender);
             showCombat();
         }
         else {

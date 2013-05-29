@@ -493,7 +493,7 @@ public class PlayerControllerHuman extends PlayerController {
 
             case COMBAT_DECLARE_ATTACKERS:
                 game.getCombat().initiatePossibleDefenders(player.getOpponents());
-                InputSynchronized inpAttack = new InputAttack(player);
+                InputSynchronized inpAttack = new InputAttack(player, game.getCombat());
                 Singletons.getControl().getInputQueue().setInputAndWait(inpAttack);
                 return;
     

@@ -42,6 +42,7 @@ import forge.gui.match.controllers.CMessage;
 import forge.gui.match.controllers.CPicture;
 import forge.gui.match.nonsingleton.VCommand;
 import forge.gui.match.nonsingleton.VField;
+import forge.gui.match.nonsingleton.VField.PhaseLabel;
 import forge.gui.match.nonsingleton.VHand;
 import forge.gui.match.views.VPlayers;
 import forge.gui.toolbox.FSkin;
@@ -233,23 +234,8 @@ public enum CMatchUI {
      */
     public final boolean stopAtPhase(final Player turn, final PhaseType phase) {
         VField vf = getFieldViewFor(turn);
-
-        switch (phase) {
-            case UPKEEP: return vf.getLblUpkeep().getEnabled();
-            case DRAW: return vf.getLblDraw().getEnabled();
-            case MAIN1: return vf.getLblMain1().getEnabled();
-            case COMBAT_BEGIN: return vf.getLblBeginCombat().getEnabled();
-            case COMBAT_DECLARE_ATTACKERS: return vf.getLblDeclareAttackers().getEnabled();
-            case COMBAT_DECLARE_BLOCKERS: return vf.getLblDeclareBlockers().getEnabled();
-            case COMBAT_FIRST_STRIKE_DAMAGE: return vf.getLblFirstStrike().getEnabled();
-            case COMBAT_DAMAGE: return vf.getLblCombatDamage().getEnabled();
-            case COMBAT_END: return vf.getLblEndCombat().getEnabled();
-            case MAIN2: return vf.getLblMain2().getEnabled();
-            case END_OF_TURN: return vf.getLblEndTurn().getEnabled();
-            default:
-        }
-
-        return true;
+        PhaseLabel label = vf.getLabelFor(phase);
+        return label == null || label.isTurnedOn(); 
     }
 
     public void setCard(final Card c) {

@@ -62,6 +62,7 @@ public class InputProxy implements Observer {
         Runnable showMessage = new Runnable() {
             @Override public void run() { 
                 Input current = getInput(); 
+                Singletons.getControl().getInputQueue().syncPoint();
                 //System.out.printf("\t%s > showMessage @ %s/%s during %s%n", FThreads.debugGetCurrThreadId(), nextInput.getClass().getSimpleName(), current.getClass().getSimpleName(), game.getPhaseHandler().debugPrintState());
                 current.showMessageInitial(); 
             }
