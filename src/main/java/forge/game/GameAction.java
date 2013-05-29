@@ -1478,6 +1478,8 @@ public class GameAction {
     public void startGame(final Player firstPlayer) {
         Player first = firstPlayer;
         do { 
+            if ( game.isGameOver() ) break; // conceded during "play or draw"
+
             // Draw <handsize> cards
             for (final Player p1 : game.getPlayers()) {
                 p1.drawCards(p1.getMaxHandSize());
@@ -1486,10 +1488,12 @@ public class GameAction {
             game.setAge(GameAge.Mulligan);
             performMulligans(first, game.getType() == GameType.Commander);
             
+            if ( game.isGameOver() ) break; // conceded during "mulligan" prompt
+
             // should I restore everyting exiled by Karn here, or before Mulligans is fine?  
-            
+
             game.setAge(GameAge.Play);
-            
+
             // THIS CODE WILL WORK WITH PHASE = NULL {
                 if(game.getType() == GameType.Planechase)
                     firstPlayer.initPlane();
