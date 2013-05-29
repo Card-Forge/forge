@@ -15,7 +15,7 @@ import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityStackInstance;
 import forge.card.spellability.Target;
-import forge.game.GameState;
+import forge.game.Game;
 import forge.game.ai.ComputerUtilCard;
 import forge.game.ai.ComputerUtilCombat;
 import forge.game.player.Player;
@@ -38,7 +38,7 @@ public class ChooseSourceEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
         final Card host = sa.getSourceCard();
-        final GameState game = sa.getActivatingPlayer().getGame();
+        final Game game = sa.getActivatingPlayer().getGame();
 
         final Target tgt = sa.getTarget();
         final List<Player> tgtPlayers = getTargetPlayers(sa);
@@ -174,7 +174,7 @@ public class ChooseSourceEffect extends SpellAbilityEffect {
         }
     }
 
-    private Card ChooseCardOnStack(SpellAbility sa, Player ai, GameState game) {
+    private Card ChooseCardOnStack(SpellAbility sa, Player ai, Game game) {
         for (SpellAbilityStackInstance si : game.getStack()) {
             final Card source = si.getSourceCard();
             final SpellAbility abilityOnStack = si.getSpellAbility();

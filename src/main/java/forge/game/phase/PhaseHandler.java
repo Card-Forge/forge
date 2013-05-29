@@ -31,7 +31,7 @@ import forge.Singletons;
 import forge.CardPredicates.Presets;
 import forge.card.trigger.TriggerType;
 import forge.game.GameAge;
-import forge.game.GameState;
+import forge.game.Game;
 import forge.game.GameType;
 import forge.game.event.GameEventEndOfTurn;
 import forge.game.event.GameEventGameRestarted;
@@ -84,9 +84,9 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
     /** The need to next phase. */
     private boolean givePriorityToPlayer = false;
 
-    private final transient GameState game;
+    private final transient Game game;
 
-    public PhaseHandler(final GameState game0) {
+    public PhaseHandler(final Game game0) {
 
         game = game0;
     }

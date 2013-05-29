@@ -8,7 +8,7 @@ import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
-import forge.game.GameState;
+import forge.game.Game;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
@@ -29,7 +29,7 @@ public class TapAllEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
         final Player activator = sa.getActivatingPlayer();
-        final GameState game = activator.getGame();
+        final Game game = activator.getGame();
         final Card card = sa.getSourceCard();
         final boolean remTapped = sa.hasParam("RememberTapped");
         if (remTapped) {

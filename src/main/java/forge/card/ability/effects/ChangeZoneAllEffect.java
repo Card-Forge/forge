@@ -14,7 +14,7 @@ import forge.CardPredicates;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
-import forge.game.GameState;
+import forge.game.Game;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
@@ -44,7 +44,7 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
         List<Card> cards = new ArrayList<Card>();
 
         List<Player> tgtPlayers = getTargetPlayersEmptyAsDefault(sa);
-        final GameState game = sa.getActivatingPlayer().getGame();
+        final Game game = sa.getActivatingPlayer().getGame();
 
         if ((tgtPlayers == null) || tgtPlayers.isEmpty() || sa.hasParam("UseAllOriginZones")) {
             cards = game.getCardsIn(origin);

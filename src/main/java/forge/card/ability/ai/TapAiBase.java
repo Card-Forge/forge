@@ -12,7 +12,7 @@ import forge.CardPredicates.Presets;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
-import forge.game.GameState;
+import forge.game.Game;
 import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilCard;
 import forge.game.phase.CombatUtil;
@@ -114,7 +114,7 @@ public abstract class TapAiBase extends SpellAbilityAi  {
      */
     protected boolean tapPrefTargeting(final Player ai, final Card source, final Target tgt, final SpellAbility sa, final boolean mandatory) {
         final Player opp = ai.getOpponent();
-        final GameState game = ai.getGame();
+        final Game game = ai.getGame();
         List<Card> tapList = opp.getCardsIn(ZoneType.Battlefield);
         tapList = CardLists.filter(tapList, Presets.UNTAPPED);
         tapList = CardLists.getValidCards(tapList, tgt.getValidTgts(), source.getController(), source);
@@ -240,7 +240,7 @@ public abstract class TapAiBase extends SpellAbilityAi  {
     protected  boolean tapUnpreferredTargeting(final Player ai, final SpellAbility sa, final boolean mandatory) {
         final Card source = sa.getSourceCard();
         final Target tgt = sa.getTarget();
-        final GameState game = ai.getGame();
+        final Game game = ai.getGame();
 
         List<Card> list = game.getCardsIn(ZoneType.Battlefield);
         list = CardLists.getValidCards(list, tgt.getValidTgts(), source.getController(), source);

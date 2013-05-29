@@ -8,7 +8,7 @@ import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerHandler;
-import forge.game.GameState;
+import forge.game.Game;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
@@ -29,7 +29,7 @@ public class EncodeEffect extends SpellAbilityEffect {
     public void resolve(SpellAbility sa) {
         final Card host = sa.getSourceCard();
         final Player player = sa.getActivatingPlayer();
-        final GameState game = player.getGame();
+        final Game game = player.getGame();
 
         // make list of creatures that controller has on Battlefield
         List<Card> choices = game.getCardsIn(ZoneType.Battlefield);

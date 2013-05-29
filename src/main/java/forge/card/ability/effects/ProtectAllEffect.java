@@ -12,7 +12,7 @@ import forge.card.MagicColor;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
-import forge.game.GameState;
+import forge.game.Game;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
@@ -40,7 +40,7 @@ public class ProtectAllEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
         final Card host = sa.getSourceCard();
-        final GameState game = sa.getActivatingPlayer().getGame();
+        final Game game = sa.getActivatingPlayer().getGame();
 
         final boolean isChoice = sa.getParam("Gains").contains("Choice");
         final ArrayList<String> choices = AbilityUtils.getProtectionList(sa);

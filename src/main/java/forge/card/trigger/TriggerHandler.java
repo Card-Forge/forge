@@ -32,7 +32,7 @@ import forge.card.mana.ManaCost;
 import forge.card.spellability.Ability;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
-import forge.game.GameState;
+import forge.game.Game;
 import forge.game.GlobalRuleChange;
 import forge.game.ai.ComputerUtil;
 import forge.game.phase.PhaseType;
@@ -45,13 +45,13 @@ public class TriggerHandler {
 
     private final ArrayList<Trigger> delayedTriggers = new ArrayList<Trigger>();
     private final List<TriggerWaiting> waitingTriggers = new ArrayList<TriggerWaiting>();
-    private final GameState game;
+    private final Game game;
 
     /**
      * TODO: Write javadoc for Constructor.
      * @param gameState
      */
-    public TriggerHandler(GameState gameState) {
+    public TriggerHandler(Game gameState) {
         game = gameState;
     }
 

@@ -29,7 +29,7 @@ import forge.CounterType;
 import forge.GameEntity;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerType;
-import forge.game.GameState;
+import forge.game.Game;
 import forge.game.phase.Combat;
 import forge.game.phase.CombatUtil;
 import forge.game.player.Player;
@@ -481,7 +481,7 @@ public class AiAttackController {
         // randomInt is used so that the computer doesn't always
         // do the same thing on turn 3 if he had the same creatures in play
         // I know this is a little confusing
-        GameState game = ai.getGame();
+        Game game = ai.getGame();
 
         this.random.setSeed(game.getPhaseHandler().getTurn() + this.randomInt);
 

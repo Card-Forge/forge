@@ -28,7 +28,7 @@ import com.esotericsoftware.minlog.Log;
 import forge.card.TriggerReplacementBase;
 import forge.card.spellability.SpellAbility;
 import forge.card.staticability.StaticAbility;
-import forge.game.GameState;
+import forge.game.Game;
 import forge.game.GlobalRuleChange;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
@@ -370,7 +370,7 @@ public class StaticEffects {
      * </p>
      * @param game 
      */
-    public final void rePopulateStateBasedList(GameState game) {
+    public final void rePopulateStateBasedList(Game game) {
         this.reset();
 
         final List<Card> cards = game.getCardsIn(ZoneType.Battlefield);

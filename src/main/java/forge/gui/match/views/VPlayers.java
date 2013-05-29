@@ -29,7 +29,7 @@ import javax.swing.border.MatteBorder;
 import net.miginfocom.swing.MigLayout;
 import forge.Card;
 import forge.Singletons;
-import forge.game.GameState;
+import forge.game.Game;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.framework.DragCell;
@@ -175,7 +175,7 @@ public enum VPlayers implements IVDoc<CPlayers> {
 
     /**
      * @param game  */
-    public void updateStormLabel(GameState game) {
+    public void updateStormLabel(Game game) {
         // No need to update if this panel isn't showing
         if (!parentCell.getSelected().equals(this)) { return; }
 

@@ -12,7 +12,7 @@ import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
-import forge.game.GameState;
+import forge.game.Game;
 import forge.game.ai.ComputerUtilCard;
 import forge.game.player.Player;
 import forge.gui.GuiChoose;
@@ -97,7 +97,7 @@ public class ProtectEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
         final Card host = sa.getSourceCard();
-        final GameState game = sa.getActivatingPlayer().getGame();
+        final Game game = sa.getActivatingPlayer().getGame();
 
         final boolean isChoice = sa.getParam("Gains").contains("Choice");
         final ArrayList<String> choices = AbilityUtils.getProtectionList(sa);

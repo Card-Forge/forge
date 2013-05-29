@@ -25,7 +25,7 @@ import forge.Card;
 import forge.CardLists;
 import forge.card.ability.AbilityUtils;
 import forge.card.cardfactory.CardFactoryUtil;
-import forge.game.GameState;
+import forge.game.Game;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.zone.Zone;
@@ -227,7 +227,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
      */
     public final boolean checkTimingRestrictions(final Card c, final SpellAbility sa) {
         Player activator = sa.getActivatingPlayer();
-        final GameState game = activator.getGame();
+        final Game game = activator.getGame();
 
         if (this.isPlayerTurn() && !game.getPhaseHandler().isPlayerTurn(activator)) {
             return false;
@@ -303,7 +303,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
             System.out.println(c.getName() + " Did not have activator set in SpellAbilityRestriction.canPlay()");
         }
 
-        final GameState game = activator.getGame();
+        final Game game = activator.getGame();
 
         if (this.isSorcerySpeed() && !activator.canCastSorcery()) {
             return false;

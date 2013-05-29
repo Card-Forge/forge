@@ -13,7 +13,7 @@ import forge.CardPredicates;
 import forge.CardUtil;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.spellability.SpellAbility;
-import forge.game.GameState;
+import forge.game.Game;
 import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilCard;
 import forge.game.ai.ComputerUtilCombat;
@@ -51,7 +51,7 @@ public abstract class PumpAiBase extends SpellAbilityAi {
      * @return true, if is useful keyword
      */
     public boolean isUsefulCurseKeyword(final Player ai, final String keyword, final Card card, final SpellAbility sa) {
-        final GameState game = ai.getGame();
+        final Game game = ai.getGame();
         final PhaseHandler ph = game.getPhaseHandler();
         final Player human = ai.getOpponent();
         //int attack = getNumAttack(sa);
@@ -157,7 +157,7 @@ public abstract class PumpAiBase extends SpellAbilityAi {
      * @return true, if is useful keyword
      */
     public boolean isUsefulPumpKeyword(final Player ai, final String keyword, final Card card, final SpellAbility sa, final int attack) {
-        final GameState game = ai.getGame();
+        final Game game = ai.getGame();
         final PhaseHandler ph = game.getPhaseHandler();
         final Player opp = ai.getOpponent();
         //int defense = getNumDefense(sa);
@@ -384,7 +384,7 @@ public abstract class PumpAiBase extends SpellAbilityAi {
 
     protected boolean shouldPumpCard(final Player ai, final SpellAbility sa, final Card c, final int defense, final int attack,
             final List<String> keywords) {
-        final GameState game = ai.getGame();
+        final Game game = ai.getGame();
         PhaseHandler phase = game.getPhaseHandler();
 
         if (!c.canBeTargetedBy(sa)) {
@@ -503,7 +503,7 @@ public abstract class PumpAiBase extends SpellAbilityAi {
      */
     protected List<Card> getCurseCreatures(final Player ai, final SpellAbility sa, final int defense, final int attack, final List<String> keywords) {
         List<Card> list = ai.getOpponent().getCreaturesInPlay();
-        final GameState game = ai.getGame();
+        final Game game = ai.getGame();
         list = CardLists.getTargetableCards(list, sa);
         
         if (list.isEmpty()) {

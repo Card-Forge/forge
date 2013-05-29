@@ -9,7 +9,7 @@ import forge.CardUtil;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
-import forge.game.GameState;
+import forge.game.Game;
 
 public class DestroyEffect extends SpellAbilityEffect {
     /* (non-Javadoc)
@@ -69,7 +69,7 @@ public class DestroyEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
         final Card card = sa.getSourceCard();
-        final GameState game = card.getGame();
+        final Game game = card.getGame();
 
         final boolean remDestroyed = sa.hasParam("RememberDestroyed");
         if (remDestroyed) {

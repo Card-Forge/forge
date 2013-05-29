@@ -19,7 +19,7 @@ import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.deck.DeckgenUtil;
 import forge.game.GameType;
-import forge.game.MatchState;
+import forge.game.Match;
 import forge.game.RegisteredPlayer;
 import forge.game.player.LobbyPlayer;
 import forge.gui.GuiDialog;
@@ -215,7 +215,7 @@ public enum CSubmenuPlanechase implements ICDoc {
         SOverlayUtils.startGameOverlay();
         SOverlayUtils.showOverlay();
                 
-        final MatchState mc = new MatchState(GameType.Planechase, helper);
+        final Match mc = new Match(GameType.Planechase, helper);
         FThreads.invokeInEdtLater(new Runnable(){
             @Override
             public void run() {

@@ -28,7 +28,7 @@ import forge.card.ability.SpellAbilityAi;
 import forge.card.cost.Cost;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
-import forge.game.GameState;
+import forge.game.Game;
 import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilCard;
 import forge.game.ai.ComputerUtilCombat;
@@ -59,7 +59,7 @@ public class RegenerateAi extends SpellAbilityAi {
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
         final Card hostCard = sa.getSourceCard();
         final Cost abCost = sa.getPayCosts();
-        final GameState game = ai.getGame();
+        final Game game = ai.getGame();
 
         boolean chance = false;
         if (abCost != null) {
@@ -174,7 +174,7 @@ public class RegenerateAi extends SpellAbilityAi {
 
     private static boolean regenMandatoryTarget(final Player ai, final SpellAbility sa, final boolean mandatory) {
         final Card hostCard = sa.getSourceCard();
-        final GameState game = ai.getGame();
+        final Game game = ai.getGame();
         final Target tgt = sa.getTarget();
         tgt.resetTargets();
         // filter AIs battlefield by what I can target

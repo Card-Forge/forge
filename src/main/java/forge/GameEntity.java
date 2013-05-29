@@ -20,7 +20,7 @@ package forge;
 import java.util.ArrayList;
 
 import forge.card.spellability.SpellAbility;
-import forge.game.GameState;
+import forge.game.Game;
 import forge.game.player.Player;
 import forge.util.MyObservable;
 
@@ -426,5 +426,5 @@ public abstract class GameEntity extends MyObservable {
         return this.name;
     }
 
-    public abstract GameState getGame();
+    public abstract Game getGame();
 }

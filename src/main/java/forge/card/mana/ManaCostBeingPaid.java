@@ -36,7 +36,7 @@ import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.card.spellability.SpellAbility;
 import forge.card.staticability.StaticAbility;
-import forge.game.GameState;
+import forge.game.Game;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
@@ -494,7 +494,7 @@ public class ManaCostBeingPaid {
     }
 
     public final void applySpellCostChange(final SpellAbility sa) {
-        final GameState game = sa.getActivatingPlayer().getGame();
+        final Game game = sa.getActivatingPlayer().getGame();
         // Beached
         final Card originalCard = sa.getSourceCard();
         final SpellAbility spell = sa;

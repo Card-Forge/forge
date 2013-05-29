@@ -5,7 +5,7 @@ import java.util.List;
 import forge.Card;
 import forge.Command;
 import forge.GameEntity;
-import forge.game.GameState;
+import forge.game.Game;
 import forge.game.phase.Combat;
 import forge.game.player.Player;
 import forge.gui.framework.ICDoc;
@@ -22,7 +22,7 @@ public enum CCombat implements ICDoc {
     /** */
     SINGLETON_INSTANCE;
     
-    private GameState game;
+    private Game game;
 
     /* (non-Javadoc)
      * @see forge.gui.framework.ICDoc#getCommandOnSelect()
@@ -50,7 +50,7 @@ public enum CCombat implements ICDoc {
             VCombat.SINGLETON_INSTANCE.updateCombat(game.getCombat().getAttackers().size(), getCombatDescription(game.getCombat()));
     }
     
-    public void setModel(GameState game)
+    public void setModel(Game game)
     {
         this.game = game;
 

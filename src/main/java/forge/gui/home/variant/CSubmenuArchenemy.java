@@ -19,7 +19,7 @@ import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.deck.DeckgenUtil;
 import forge.game.GameType;
-import forge.game.MatchState;
+import forge.game.Match;
 import forge.game.RegisteredPlayer;
 import forge.gui.GuiDialog;
 import forge.gui.SOverlayUtils;
@@ -234,7 +234,7 @@ public enum CSubmenuArchenemy implements ICDoc {
             }
         }
 
-        final MatchState mc = new MatchState(GameType.Archenemy, players);
+        final Match mc = new Match(GameType.Archenemy, players);
         FThreads.invokeInEdtLater(new Runnable(){
             @Override
             public void run() {

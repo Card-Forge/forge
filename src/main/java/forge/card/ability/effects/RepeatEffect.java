@@ -11,7 +11,7 @@ import forge.card.ability.SpellAbilityEffect;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
-import forge.game.GameState;
+import forge.game.Game;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.util.Expressions;
@@ -70,7 +70,7 @@ public class RepeatEffect extends SpellAbilityEffect {
     private boolean checkRepeatConditions(final SpellAbility sa) {
         //boolean doAgain = false;
         final Player activator = sa.getActivatingPlayer();
-        final GameState game = activator.getGame();
+        final Game game = activator.getGame();
 
 
         if (sa.hasParam("RepeatPresent")) {

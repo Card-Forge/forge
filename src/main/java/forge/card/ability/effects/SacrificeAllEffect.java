@@ -7,7 +7,7 @@ import forge.Card;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
-import forge.game.GameState;
+import forge.game.Game;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
@@ -36,7 +36,7 @@ public class SacrificeAllEffect extends SpellAbilityEffect {
     public void resolve(SpellAbility sa) {
         final Card card = sa.getSourceCard();
         final Player activator = sa.getActivatingPlayer();
-        final GameState game = activator.getGame();
+        final Game game = activator.getGame();
 
 
         String valid = "";

@@ -31,7 +31,7 @@ import forge.card.spellability.Ability;
 import forge.card.spellability.AbilityStatic;
 import forge.card.staticability.StaticAbility;
 import forge.card.trigger.TriggerType;
-import forge.game.GameState;
+import forge.game.Game;
 import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilCost;
 import forge.game.player.HumanPlay;
@@ -81,7 +81,7 @@ public class PhaseUtil {
      * handleDeclareAttackers.
      * </p>
      */
-    public static void handleDeclareAttackers(final GameState game) {
+    public static void handleDeclareAttackers(final Game game) {
         final Combat combat = game.getCombat();
         combat.verifyCreaturesInPlay();
 
@@ -119,7 +119,7 @@ public class PhaseUtil {
      * </p>
      * @param game 
      */
-    public static void handleAttackingTriggers(GameState game) {
+    public static void handleAttackingTriggers(Game game) {
         final List<Card> list = game.getCombat().getAttackers();
         game.getStack().freezeStack();
         // Then run other Attacker bonuses
@@ -158,7 +158,7 @@ public class PhaseUtil {
      * 
      * @param game
      */
-    public static void handleDeclareBlockers(GameState game) {
+    public static void handleDeclareBlockers(Game game) {
         final Combat combat = game.getCombat();
         combat.verifyCreaturesInPlay();
 

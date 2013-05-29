@@ -2,7 +2,7 @@ package forge.game.player;
 
 import org.apache.commons.lang.NotImplementedException;
 
-import forge.game.GameState;
+import forge.game.Game;
 import forge.net.client.INetClient;
 import forge.net.protocol.toclient.ChatPacketClt;
 
@@ -24,7 +24,7 @@ public class LobbyPlayerRemote extends LobbyPlayer {
      * @see forge.game.player.LobbyPlayer#getPlayer(forge.game.GameState)
      */
     @Override
-    public Player getPlayer(GameState gameState) {
+    public Player getPlayer(Game gameState) {
         // Cannot create remote players yet 
         throw new NotImplementedException();
     }

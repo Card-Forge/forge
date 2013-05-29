@@ -26,7 +26,7 @@ import com.google.common.collect.Iterables;
 import forge.Card;
 import forge.CardPredicates;
 import forge.GameEntity;
-import forge.game.GameState;
+import forge.game.Game;
 import forge.game.phase.CombatUtil;
 import forge.game.player.Player;
 import forge.game.zone.Zone;
@@ -47,7 +47,7 @@ public class InputAttack extends InputSyncronizedBase {
     private static final long serialVersionUID = 7849903731842214245L;
 
     
-    private final GameState game;
+    private final Game game;
     private List<GameEntity> defenders;
     private GameEntity currentDefender;
     private final Player player;

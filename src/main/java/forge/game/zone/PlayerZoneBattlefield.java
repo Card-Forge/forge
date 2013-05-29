@@ -35,7 +35,7 @@ import forge.card.spellability.SpellAbility;
 import forge.card.staticability.StaticAbility;
 import forge.card.trigger.ZCTrigger;
 import forge.game.GameActionUtil;
-import forge.game.GameState;
+import forge.game.Game;
 import forge.game.player.Player;
 
 /**
@@ -115,7 +115,7 @@ public class PlayerZoneBattlefield extends PlayerZone {
             }
         }*/
 
-        final GameState game = c.getGame();
+        final Game game = c.getGame();
         if (this.trigger) {
             c.setSickness(true); // summoning sickness
             c.executeTrigger(ZCTrigger.ENTERFIELD);
@@ -214,7 +214,7 @@ public class PlayerZoneBattlefield extends PlayerZone {
             }
         }*/
 
-        final GameState game = c.getGame();
+        final Game game = c.getGame();
         
         if (this.leavesTrigger) {
             c.executeTrigger(ZCTrigger.LEAVEFIELD);
@@ -227,7 +227,7 @@ public class PlayerZoneBattlefield extends PlayerZone {
                 tempEffect = effect;
                 game.getStaticEffects().removeStateBasedEffect(effect);
                 // this is to make sure cards reset correctly
-                final Function<GameState, ?> comm = GameActionUtil.getCommands().get(tempEffect);
+                final Function<Game, ?> comm = GameActionUtil.getCommands().get(tempEffect);
                 comm.apply(game);
             }
         }

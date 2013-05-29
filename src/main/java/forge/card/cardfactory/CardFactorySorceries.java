@@ -33,7 +33,7 @@ import forge.card.spellability.SpellAbility;
 import forge.control.input.InputPayManaExecuteCommands;
 import forge.control.input.InputSelectCards;
 import forge.control.input.InputSelectCardsFromList;
-import forge.game.GameState;
+import forge.game.Game;
 import forge.game.ai.AiController;
 import forge.game.player.Player;
 import forge.game.player.PlayerControllerAi;
@@ -50,7 +50,7 @@ import forge.gui.GuiChoose;
  */
 public class CardFactorySorceries {
 
-    private static final void balanceLands(GameState game, Spell card) {
+    private static final void balanceLands(Game game, Spell card) {
 
         List<List<Card>> lands = new ArrayList<List<Card>>();
         for (Player p : game.getPlayers()) {
@@ -88,7 +88,7 @@ public class CardFactorySorceries {
         }
     }
 
-    private static final void balanceHands(GameState game, Spell spell) {
+    private static final void balanceHands(Game game, Spell spell) {
         int min = Integer.MAX_VALUE;
         for (Player p : game.getPlayers()) {
             min = Math.min(min, p.getZone(ZoneType.Hand).size());
@@ -116,7 +116,7 @@ public class CardFactorySorceries {
         }
     }
 
-    private static final void balanceCreatures(GameState game, Spell card) {
+    private static final void balanceCreatures(Game game, Spell card) {
         List<List<Card>> creats = new ArrayList<List<Card>>();
         for (Player p : game.getPlayers()) {
 
@@ -160,7 +160,7 @@ public class CardFactorySorceries {
 
             @Override
             public void resolve() {
-                final GameState game = this.getActivatingPlayer().getGame();
+                final Game game = this.getActivatingPlayer().getGame();
                 balanceLands(game, this);
                 balanceHands(game, this);
                 balanceCreatures(game, this);
@@ -211,7 +211,7 @@ public class CardFactorySorceries {
             @Override
             public void resolve() {
                 final Player p = card.getController();
-                final GameState game = p.getGame();
+                final Game game = p.getGame();
                 int baseCMC = -1;
                 final Card[] newArtifact = new Card[1];
 

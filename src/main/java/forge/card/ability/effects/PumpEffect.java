@@ -13,7 +13,7 @@ import forge.card.ability.SpellAbilityEffect;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
-import forge.game.GameState;
+import forge.game.Game;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
@@ -27,7 +27,7 @@ public class PumpEffect extends SpellAbilityEffect {
                 && !sa.getSourceCard().isInPlay()) {
             return;
         }
-        final GameState game = sa.getActivatingPlayer().getGame();
+        final Game game = sa.getActivatingPlayer().getGame();
         final long timestamp = game.getNextTimestamp();
         final ArrayList<String> kws = new ArrayList<String>();
         
@@ -88,7 +88,7 @@ public class PumpEffect extends SpellAbilityEffect {
     }
 
     private void applyPump(final SpellAbility sa, final Player p, final List<String> keywords) {
-        final GameState game = p.getGame();
+        final Game game = p.getGame();
         for (int i = 0; i < keywords.size(); i++) {
             p.addKeyword(keywords.get(i));
         }
@@ -189,7 +189,7 @@ public class PumpEffect extends SpellAbilityEffect {
         List<Card> tgtCards = new ArrayList<Card>();
         final ArrayList<Card> untargetedCards = new ArrayList<Card>();
         final Target tgt = sa.getTarget();
-        final GameState game = sa.getActivatingPlayer().getGame();
+        final Game game = sa.getActivatingPlayer().getGame();
         List<Player> tgtPlayers = new ArrayList<Player>();
         String pumpRemembered = null;
         String pumpForget = null;

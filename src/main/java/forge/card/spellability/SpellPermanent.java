@@ -37,7 +37,7 @@ import forge.card.replacement.ReplaceMoved;
 import forge.card.replacement.ReplacementEffect;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerType;
-import forge.game.GameState;
+import forge.game.Game;
 import forge.game.GlobalRuleChange;
 import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilCost;
@@ -94,7 +94,7 @@ public class SpellPermanent extends Spell {
         final Card card = this.getSourceCard();
         ManaCost mana = this.getPayCosts().getTotalMana();
         final Player ai = getActivatingPlayer();
-        final GameState game = ai.getGame();
+        final Game game = ai.getGame();
         if (mana.countX() > 0) {
             // Set PayX here to maximum value.
             final int xPay = ComputerUtilMana.determineLeftoverMana(this, ai);
@@ -215,7 +215,7 @@ public class SpellPermanent extends Spell {
 
     public static boolean checkETBEffects(final Card card, final SpellAbility sa, final ApiType api, final Player ai) {
         boolean rightapi = false;
-        final GameState game = ai.getGame();
+        final Game game = ai.getGame();
 
         if (card.isCreature()
                 && game.getStaticEffects().getGlobalRuleChange(GlobalRuleChange.noCreatureETBTriggers)) {

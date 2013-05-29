@@ -12,7 +12,7 @@ import forge.Constant;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
-import forge.game.GameState;
+import forge.game.Game;
 import forge.game.ai.ComputerUtilCard;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
@@ -67,7 +67,7 @@ public class ChooseColorEffect extends SpellAbilityEffect {
                 } else {
                     List<String> chosen = new ArrayList<String>();
                     Player ai = sa.getActivatingPlayer();
-                    final GameState game = ai.getGame();
+                    final Game game = ai.getGame();
                     Player opp = ai.getOpponent();
                     if (sa.hasParam("AILogic")) {
                         final String logic = sa.getParam("AILogic");

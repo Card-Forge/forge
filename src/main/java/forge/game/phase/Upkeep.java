@@ -40,7 +40,7 @@ import forge.card.spellability.SpellAbility;
 import forge.control.input.InputPayManaExecuteCommands;
 import forge.control.input.InputSelectCards;
 import forge.control.input.InputSelectCardsFromList;
-import forge.game.GameState;
+import forge.game.Game;
 import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilCard;
 import forge.game.ai.ComputerUtilCombat;
@@ -67,7 +67,7 @@ import forge.gui.GuiDialog;
 public class Upkeep extends Phase {
     private static final long serialVersionUID = 6906459482978819354L;
 
-    public Upkeep(final GameState game) { super(game); }
+    public Upkeep(final Game game) { super(game); }
     
     /**
      * <p>
@@ -110,7 +110,7 @@ public class Upkeep extends Phase {
      * upkeepBraidOfFire.
      * </p>
      */
-    private static void upkeepBraidOfFire(final GameState game) {
+    private static void upkeepBraidOfFire(final Game game) {
         final Player player = game.getPhaseHandler().getPlayerTurn();
 
         final List<Card> braids = player.getCardsIn(ZoneType.Battlefield, "Braid of Fire");
@@ -153,7 +153,7 @@ public class Upkeep extends Phase {
      * upkeepEcho.
      * </p>
      */
-    private static void upkeepEcho(final GameState game) {
+    private static void upkeepEcho(final Game game) {
         List<Card> list = game.getPhaseHandler().getPlayerTurn().getCardsIn(ZoneType.Battlefield);
         list = CardLists.filter(list, new Predicate<Card>() {
             @Override
@@ -206,7 +206,7 @@ public class Upkeep extends Phase {
      * upkeepUpkeepCost.
      * </p>
      */
-    private static void upkeepUpkeepCost(final GameState game) {
+    private static void upkeepUpkeepCost(final Game game) {
         
         final List<Card> list = game.getPhaseHandler().getPlayerTurn().getCardsIn(ZoneType.Battlefield);
 
@@ -362,7 +362,7 @@ public class Upkeep extends Phase {
      * upkeepTheAbyss.
      * </p>
      */
-    private static void upkeepTheAbyss(final GameState game) {
+    private static void upkeepTheAbyss(final Game game) {
         /*
          * At the beginning of each player's upkeep, destroy target nonartifact
          * creature that player controls of his or her choice. It can't be
@@ -428,7 +428,7 @@ public class Upkeep extends Phase {
      * upkeepDropOfHoney.
      * </p>
      */
-    private static void upkeepDropOfHoney(final GameState game) {
+    private static void upkeepDropOfHoney(final Game game) {
         /*
          * At the beginning of your upkeep, destroy the creature with the least
          * power. It can't be regenerated. If two or more creatures are tied for
@@ -590,7 +590,7 @@ public class Upkeep extends Phase {
      * upkeepVanishing.
      * </p>
      */
-    private static void upkeepVanishing(final GameState game) {
+    private static void upkeepVanishing(final Game game) {
 
         final Player player = game.getPhaseHandler().getPlayerTurn();
         List<Card> list = player.getCardsIn(ZoneType.Battlefield);
@@ -628,7 +628,7 @@ public class Upkeep extends Phase {
      * upkeepFading.
      * </p>
      */
-    private static void upkeepFading(final GameState game) {
+    private static void upkeepFading(final Game game) {
 
         final Player player = game.getPhaseHandler().getPlayerTurn();
         List<Card> list = player.getCardsIn(ZoneType.Battlefield);
@@ -671,7 +671,7 @@ public class Upkeep extends Phase {
      * upkeepOathOfDruids.
      * </p>
      */
-    private static void upkeepOathOfDruids(final GameState game) {
+    private static void upkeepOathOfDruids(final Game game) {
         final List<Card> oathList = CardLists.filter(game
                 .getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Oath of Druids"));
         if (oathList.isEmpty()) {
@@ -680,7 +680,7 @@ public class Upkeep extends Phase {
 
         final Player player = game.getPhaseHandler().getPlayerTurn();
 
-        if (GameState.compareTypeAmountInPlay(player, "Creature") < 0) {
+        if (Game.compareTypeAmountInPlay(player, "Creature") < 0) {
             for (int i = 0; i < oathList.size(); i++) {
                 final Card oath = oathList.get(i);
                 final Ability ability = new Ability(oath, ManaCost.ZERO) {
@@ -690,7 +690,7 @@ public class Upkeep extends Phase {
                         final PlayerZone battlefield = player.getZone(ZoneType.Battlefield);
                         boolean oathFlag = true;
 
-                        if (GameState.compareTypeAmountInPlay(player, "Creature") < 0) {
+                        if (Game.compareTypeAmountInPlay(player, "Creature") < 0) {
                             if (player.isHuman()) {
                                 final StringBuilder question = new StringBuilder();
                                 question.append("Reveal cards from the top of your library and place ");
@@ -753,7 +753,7 @@ public class Upkeep extends Phase {
      * upkeepOathOfGhouls.
      * </p>
      */
-    private static void upkeepOathOfGhouls(final GameState game) {
+    private static void upkeepOathOfGhouls(final Game game) {
         final List<Card> oathList = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Oath of Ghouls"));
         if (oathList.isEmpty()) {
             return;
@@ -761,14 +761,14 @@ public class Upkeep extends Phase {
 
         final Player player = game.getPhaseHandler().getPlayerTurn();
 
-        if (GameState.compareTypeAmountInGraveyard(player, "Creature") > 0) {
+        if (Game.compareTypeAmountInGraveyard(player, "Creature") > 0) {
             for (int i = 0; i < oathList.size(); i++) {
                 final Ability ability = new Ability(oathList.get(0), ManaCost.ZERO) {
                     @Override
                     public void resolve() {
                         final List<Card> graveyardCreatures = CardLists.filter(player.getCardsIn(ZoneType.Graveyard), CardPredicates.Presets.CREATURES);
 
-                        if (GameState.compareTypeAmountInGraveyard(player, "Creature") > 0) {
+                        if (Game.compareTypeAmountInGraveyard(player, "Creature") > 0) {
                             Card card = null;
                             if (player.isHuman()) {
                                 card = GuiChoose.oneOrNone("Pick a creature to return to hand", graveyardCreatures);
@@ -799,7 +799,7 @@ public class Upkeep extends Phase {
      * upkeepPowerSurge.
      * </p>
      */
-    private static void upkeepPowerSurge(final GameState game) {
+    private static void upkeepPowerSurge(final Game game) {
         /*
          * At the beginning of each player's upkeep, Power Surge deals X damage
          * to that player, where X is the number of untapped lands he or she
@@ -835,7 +835,7 @@ public class Upkeep extends Phase {
      * upkeepTangleWire.
      * </p>
      */
-    private static void upkeepTangleWire(final GameState game) {
+    private static void upkeepTangleWire(final Game game) {
         final Player player = game.getPhaseHandler().getPlayerTurn();
         final List<Card> wires = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Tangle Wire"));
 
@@ -901,7 +901,7 @@ public class Upkeep extends Phase {
      * upkeepBlazeCounters.
      * </p>
      */
-    private static void upkeepBlazeCounters(final GameState game) {
+    private static void upkeepBlazeCounters(final Game game) {
         final Player player = game.getPhaseHandler().getPlayerTurn();
 
         List<Card> blaze = player.getCardsIn(ZoneType.Battlefield);

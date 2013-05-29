@@ -26,7 +26,7 @@ import forge.card.TriggerReplacementBase;
 import forge.card.ability.AbilityUtils;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
-import forge.game.GameState;
+import forge.game.Game;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.util.Expressions;
@@ -172,11 +172,11 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
      * 
      * @return a boolean.
      */
-    public boolean requirementsCheck(GameState game) {
+    public boolean requirementsCheck(Game game) {
         return this.requirementsCheck(game, this.getMapParams());
     }
     
-    public boolean requirementsCheck(GameState game, Map<String,String> params) {
+    public boolean requirementsCheck(Game game, Map<String,String> params) {
 
         if (this.isSuppressed()) {
             return false; // Effect removed by effect

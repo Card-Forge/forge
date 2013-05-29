@@ -20,7 +20,7 @@ package forge.control.input;
 import java.util.concurrent.BlockingDeque;
 import java.util.concurrent.LinkedBlockingDeque;
 
-import forge.game.GameState;
+import forge.game.Game;
 import forge.util.MyObservable;
 
 /**
@@ -77,7 +77,7 @@ public class InputQueue extends MyObservable implements java.io.Serializable {
      * 
      * @return a {@link forge.control.input.InputBase} object.
      */
-    public final Input getActualInput(GameState game) {
+    public final Input getActualInput(Game game) {
         Input topMost = inputStack.peek(); // incoming input to Control
         if (topMost != null && !game.isGameOver() )
             return topMost;

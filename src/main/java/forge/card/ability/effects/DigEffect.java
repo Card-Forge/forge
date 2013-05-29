@@ -13,7 +13,7 @@ import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
-import forge.game.GameState;
+import forge.game.Game;
 import forge.game.ai.ComputerUtilCard;
 import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
@@ -52,7 +52,7 @@ public class DigEffect extends SpellAbilityEffect {
     public void resolve(SpellAbility sa) {
         final Card host = sa.getSourceCard();
         final Player player = sa.getActivatingPlayer();
-        final GameState game = player.getGame();
+        final Game game = player.getGame();
         Player choser = player;
         int numToDig = AbilityUtils.calculateAmount(host, sa.getParam("DigNum"), sa);
         final ZoneType destZone1 = sa.hasParam("DestinationZone") ? ZoneType.smartValueOf(sa.getParam("DestinationZone"))
@@ -365,7 +365,7 @@ public class DigEffect extends SpellAbilityEffect {
      *            a {@link forge.CardList} object.
      * @return a {@link forge.CardList} object.
      */
-    private List<Card> sharesNameWithCardOnBattlefield(final GameState game, final List<Card> list) {
+    private List<Card> sharesNameWithCardOnBattlefield(final Game game, final List<Card> list) {
         final List<Card> toReturn = new ArrayList<Card>();
         final List<Card> play = game.getCardsIn(ZoneType.Battlefield);
         for (final Card c : list) {

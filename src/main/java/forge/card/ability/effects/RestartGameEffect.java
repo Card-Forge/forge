@@ -16,7 +16,7 @@ import forge.card.trigger.TriggerType;
 import forge.game.GameAction;
 import forge.game.GameAge;
 import forge.game.GameNew;
-import forge.game.GameState;
+import forge.game.Game;
 import forge.game.RegisteredPlayer;
 import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
@@ -30,7 +30,7 @@ public class RestartGameEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
         final Player activator = sa.getActivatingPlayer();
-        final GameState game = activator.getGame();
+        final Game game = activator.getGame();
         List<Player> players = game.getPlayers();
         Map<Player, List<Card>> playerLibraries = new HashMap<Player, List<Card>>();
 

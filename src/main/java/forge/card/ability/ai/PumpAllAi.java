@@ -11,7 +11,7 @@ import forge.CardLists;
 import forge.card.ability.AbilityUtils;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
-import forge.game.GameState;
+import forge.game.Game;
 import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilCard;
 import forge.game.ai.ComputerUtilCombat;
@@ -29,7 +29,7 @@ public class PumpAllAi extends PumpAiBase {
     protected boolean canPlayAI(final Player ai, final SpellAbility sa) {
         String valid = "";
         final Card source = sa.getSourceCard();
-        final GameState game = ai.getGame();
+        final Game game = ai.getGame();
 
         final int power = AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("NumAtt"), sa);
         final int defense = AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("NumDef"), sa);

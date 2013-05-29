@@ -4,7 +4,7 @@ import forge.Card;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
 import forge.card.trigger.TriggerType;
-import forge.game.GameState;
+import forge.game.Game;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
@@ -19,7 +19,7 @@ public class AbandonEffect extends SpellAbilityEffect {
         Card source = sa.getSourceCard();
         Player controller = source.getController();
 
-        final GameState game = controller.getGame();
+        final Game game = controller.getGame();
         
         game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
         controller.getZone(ZoneType.Command).remove(source);

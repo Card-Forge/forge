@@ -93,7 +93,7 @@ public final class GameActionUtil {
 
         @Override
         public void resolve() {
-            final GameState game =controller.getGame(); 
+            final Game game =controller.getGame(); 
             final List<Card> topOfLibrary = controller.getCardsIn(ZoneType.Library);
             final List<Card> revealed = new ArrayList<Card>();
 
@@ -133,7 +133,7 @@ public final class GameActionUtil {
 
     private static final class CascadeExecutor implements Command {
         private final Card c;
-        private final GameState game;
+        private final Game game;
         private final Player controller;
         
         private static final long serialVersionUID = -845154812215847505L;
@@ -143,7 +143,7 @@ public final class GameActionUtil {
          * @param controller
          * @param c
          */
-        private CascadeExecutor(Player controller, Card c, final GameState game) {
+        private CascadeExecutor(Player controller, Card c, final Game game) {
             this.controller = controller;
             this.c = c;
             this.game = game;
@@ -326,7 +326,7 @@ public final class GameActionUtil {
     public static void executePlayCardEffects(final SpellAbility sa) {
         // (called from MagicStack.java)
 
-        final GameState game = sa.getActivatingPlayer().getGame(); 
+        final Game game = sa.getActivatingPlayer().getGame(); 
         final Command cascade = new CascadeExecutor(sa.getActivatingPlayer(), sa.getSourceCard(), game);
         cascade.run();
         final Command ripple = new RippleExecutor(sa.getActivatingPlayer(), sa.getSourceCard());
@@ -481,7 +481,7 @@ public final class GameActionUtil {
     private static void playerCombatDamageScalpelexis(final Card c) {
         final Player player = c.getController();
         final Player opponent = player.getOpponent();
-        final GameState game = player.getGame();
+        final Game game = player.getGame();
 
         if (c.getNetAttack() > 0) {
             final Ability ability = new Ability(c, ManaCost.ZERO) {
@@ -553,9 +553,9 @@ public final class GameActionUtil {
     }
 
     /** stores the Command. */
-    private static Function<GameState, ?> umbraStalker = new Function<GameState, Object>() {
+    private static Function<Game, ?> umbraStalker = new Function<Game, Object>() {
         @Override
-        public Object apply(GameState game) {
+        public Object apply(Game game) {
             // get all creatures
             final List<Card> cards = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Umbra Stalker"));
             for (final Card c : cards) {
@@ -570,10 +570,10 @@ public final class GameActionUtil {
     };
 
     /** Constant <code>oldManOfTheSea</code>. */
-    private static Function<GameState, ?> oldManOfTheSea = new Function<GameState, Object>() {
+    private static Function<Game, ?> oldManOfTheSea = new Function<Game, Object>() {
 
         @Override
-        public Object apply(GameState game) {
+        public Object apply(Game game) {
             final List<Card> list = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Old Man of the Sea"));
             for (final Card oldman : list) {
                 if (!oldman.getGainControlTargets().isEmpty()) {
@@ -590,10 +590,10 @@ public final class GameActionUtil {
     }; // Old Man of the Sea
 
     /** Constant <code>liuBei</code>. */
-    private static Function<GameState, ?> liuBei = new Function<GameState, Object>() {
+    private static Function<Game, ?> liuBei = new Function<Game, Object>() {
 
         @Override
-        public Object apply(GameState game) {
+        public Object apply(Game game) {
             final List<Card> list = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Liu Bei, Lord of Shu"));
 
             if (list.size() > 0) {
@@ -626,7 +626,7 @@ public final class GameActionUtil {
     }; // Liu_Bei
 
     /** Constant <code>commands</code>. */
-    private final static HashMap<String, Function<GameState, ?>> commands = new HashMap<String, Function<GameState, ?>>();
+    private final static HashMap<String, Function<Game, ?>> commands = new HashMap<String, Function<Game, ?>>();
 
     static {
         // Please add cards in alphabetical order so they are easier to find
@@ -643,7 +643,7 @@ public final class GameActionUtil {
      * 
      * @return the commands
      */
-    public static Map<String, Function<GameState, ?>> getCommands() {
+    public static Map<String, Function<Game, ?>> getCommands() {
         return GameActionUtil.commands;
     }
 
@@ -653,7 +653,7 @@ public final class GameActionUtil {
      * 
      * @return the stLandManaAbilities
      */
-    public static void grantBasicLandsManaAbilities(GameState game) {
+    public static void grantBasicLandsManaAbilities(Game game) {
         /*
          * for future use boolean naked =
          * AllZoneUtil.isCardInPlay("Naked Singularity"); boolean twist =

@@ -6,7 +6,7 @@ import forge.Card;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
-import forge.game.GameState;
+import forge.game.Game;
 import forge.game.player.Player;
 
 /** 
@@ -20,7 +20,7 @@ public class PlaneswalkEffect extends SpellAbilityEffect {
      */
     @Override
     public void resolve(SpellAbility sa) {
-        GameState game = sa.getActivatingPlayer().getGame();
+        Game game = sa.getActivatingPlayer().getGame();
         
         for(Player p : game.getPlayers())
         {

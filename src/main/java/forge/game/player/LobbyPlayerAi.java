@@ -1,7 +1,7 @@
 package forge.game.player;
 
 import forge.Singletons;
-import forge.game.GameState;
+import forge.game.Game;
 import forge.game.ai.AiProfileUtil;
 import forge.properties.ForgePreferences.FPref;
 
@@ -31,7 +31,7 @@ public class LobbyPlayerAi extends LobbyPlayer {
     }
     
     @Override
-    public Player getPlayer(GameState game) {
+    public Player getPlayer(Game game) {
         Player ai = new Player(getName(), game);
         ai.setFirstController(createControllerFor(ai));
 

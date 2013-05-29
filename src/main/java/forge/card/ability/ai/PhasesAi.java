@@ -9,7 +9,7 @@ import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
-import forge.game.GameState;
+import forge.game.Game;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
@@ -133,7 +133,7 @@ public class PhasesAi extends SpellAbilityAi {
      *            a boolean.
      * @return a boolean.
      */
-    private boolean phasesUnpreferredTargeting(final GameState game, final SpellAbility sa, final boolean mandatory) {
+    private boolean phasesUnpreferredTargeting(final Game game, final SpellAbility sa, final boolean mandatory) {
         final Card source = sa.getSourceCard();
         final Target tgt = sa.getTarget();
 

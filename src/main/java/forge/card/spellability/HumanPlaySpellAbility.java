@@ -26,7 +26,7 @@ import forge.CardCharacteristicName;
 import forge.card.ability.AbilityUtils;
 import forge.card.cost.CostPartMana;
 import forge.card.cost.CostPayment;
-import forge.game.GameState;
+import forge.game.Game;
 import forge.game.zone.Zone;
 
 /**
@@ -48,7 +48,7 @@ public class HumanPlaySpellAbility {
 
 
     public final void fillRequirements(boolean isAlreadyTargeted, boolean isFree, boolean skipStack) {
-        final GameState game = ability.getActivatingPlayer().getGame();
+        final Game game = ability.getActivatingPlayer().getGame();
 
         // used to rollback
         Zone fromZone = null;
@@ -129,7 +129,7 @@ public class HumanPlaySpellAbility {
     
     private void rollbackAbility(Zone fromZone, int zonePosition) { 
         // cancel ability during target choosing
-        final GameState game = ability.getActivatingPlayer().getGame();
+        final Game game = ability.getActivatingPlayer().getGame();
         final Card c = ability.getSourceCard();
 
         // split cards transform back to full form if targeting is canceled

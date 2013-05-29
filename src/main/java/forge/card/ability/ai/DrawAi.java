@@ -31,7 +31,7 @@ import forge.card.cost.PaymentDecision;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
-import forge.game.GameState;
+import forge.game.Game;
 import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilCost;
 import forge.game.ai.ComputerUtilMana;
@@ -55,7 +55,7 @@ public class DrawAi extends SpellAbilityAi {
         final Target tgt = sa.getTarget();
         final Card source = sa.getSourceCard();
         final Cost abCost = sa.getPayCosts();
-        final GameState game = ai.getGame();
+        final Game game = ai.getGame();
 
         if (abCost != null) {
             // AI currently disabled for these costs
@@ -140,7 +140,7 @@ public class DrawAi extends SpellAbilityAi {
         final Target tgt = sa.getTarget();
         final Card source = sa.getSourceCard();
         final boolean drawback = (sa instanceof AbilitySub);
-        final GameState game = ai.getGame();
+        final Game game = ai.getGame();
         Player opp = ai.getOpponent();
 
         int computerHandSize = ai.getCardsIn(ZoneType.Hand).size();

@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import forge.Card;
-import forge.game.GameState;
+import forge.game.Game;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiDialog;
@@ -56,7 +56,7 @@ public class InputConfirmMulligan extends InputSyncronizedBase {
     /** {@inheritDoc} */
     @Override
     public final void showMessage() {
-        GameState game = player.getGame();
+        Game game = player.getGame();
 
         StringBuilder sb = new StringBuilder();
         if( startingPlayer == player ) {

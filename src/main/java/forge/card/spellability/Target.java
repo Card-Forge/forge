@@ -25,7 +25,7 @@ import java.util.List;
 import forge.Card;
 import forge.card.CardType;
 import forge.card.ability.AbilityUtils;
-import forge.game.GameState;
+import forge.game.Game;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
@@ -665,7 +665,7 @@ public class Target {
      * @return a boolean.
      */
     public final boolean hasCandidates(final SpellAbility sa, final boolean isTargeted) {
-        final GameState game = sa.getSourceCard().getGame();
+        final Game game = sa.getSourceCard().getGame();
         for (Player player : game.getPlayers()) {
             if (sa.canTarget(player)) {
                 return true;
@@ -720,7 +720,7 @@ public class Target {
      * @return a List<Object>.
      */
     public final List<Object> getAllCandidates(final SpellAbility sa, final boolean isTargeted) {
-        final GameState game = sa.getActivatingPlayer().getGame();
+        final Game game = sa.getActivatingPlayer().getGame();
         List<Object> candidates = new ArrayList<Object>();
         for (Player player : game.getPlayers()) {
             if (sa.canTarget(player)) {

@@ -89,9 +89,9 @@ public class GameAction {
      * </p>
      */
 
-    private final GameState game;
+    private final Game game;
 
-    public GameAction(GameState game0) {
+    public GameAction(Game game0) {
         game = game0;
     }
 
@@ -793,7 +793,7 @@ public class GameAction {
      * 
      * @return a boolean.
      */
-    private final GameEndReason checkEndGameState(final GameState game) {
+    private final GameEndReason checkEndGameState(final Game game) {
 
         GameEndReason reason = null;
         // award loses as SBE
@@ -894,7 +894,7 @@ public class GameAction {
 
         // card state effects like Glorious Anthem
         for (final String effect : game.getStaticEffects().getStateBasedMap().keySet()) {
-            final Function<GameState, ?> com = GameActionUtil.getCommands().get(effect);
+            final Function<Game, ?> com = GameActionUtil.getCommands().get(effect);
             com.apply(game);
         }
 

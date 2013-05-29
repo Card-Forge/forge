@@ -22,7 +22,7 @@ import com.esotericsoftware.minlog.Log;
 import forge.Card;
 import forge.card.cost.Cost;
 import forge.card.mana.ManaCost;
-import forge.game.GameState;
+import forge.game.Game;
 
 /**
  * <p>
@@ -71,7 +71,7 @@ public abstract class Ability extends SpellAbility {
     /** {@inheritDoc} */
     @Override
     public boolean canPlay() {
-        final GameState game = getActivatingPlayer().getGame();
+        final Game game = getActivatingPlayer().getGame();
         if (game.getStack().isSplitSecondOnStack() && !this.isManaAbility()) {
             return false;
         }

@@ -15,7 +15,7 @@ import forge.card.mana.ManaCostBeingPaid;
 import forge.card.mana.ManaCostShard;
 import forge.card.spellability.AbilityManaPart;
 import forge.card.spellability.SpellAbility;
-import forge.game.GameState;
+import forge.game.Game;
 import forge.game.player.HumanPlay;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
@@ -33,7 +33,7 @@ public abstract class InputPayMana extends InputSyncronizedBase {
     protected int phyLifeToLose = 0;
     
     protected final Player player;
-    protected final GameState game;
+    protected final Game game;
     protected ManaCostBeingPaid manaCost;
     protected final SpellAbility saPaidFor;
     

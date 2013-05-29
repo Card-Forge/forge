@@ -54,7 +54,7 @@ import forge.control.input.InputPayManaExecuteCommands;
 import forge.control.input.InputSelectCards;
 import forge.control.input.InputSelectCardsFromList;
 import forge.game.GameActionUtil;
-import forge.game.GameState;
+import forge.game.Game;
 import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilCard;
 import forge.game.ai.ComputerUtilCost;
@@ -86,13 +86,13 @@ public class MagicStack extends MyObservable implements Iterable<SpellAbilitySta
     private List<Card> lastTurnCast = new ArrayList<Card>();
     private Card curResolvingCard = null;
 
-    private final GameState game;
+    private final Game game;
 
     /**
      * TODO: Write javadoc for Constructor.
      * @param gameState
      */
-    public MagicStack(GameState gameState) {
+    public MagicStack(Game gameState) {
         game = gameState;
     }
 

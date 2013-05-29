@@ -1,6 +1,6 @@
 package forge.game.player;
 
-import forge.game.GameState;
+import forge.game.Game;
 
 /** 
  * This means a player's part unchanged for all games.
@@ -76,7 +76,7 @@ public abstract class LobbyPlayer implements IHasIcon {
         this.avatarIndex = avatarIndex;
     }
 
-    public abstract Player getPlayer(GameState gameState); // factory method to create player
+    public abstract Player getPlayer(Game gameState); // factory method to create player
     public abstract PlayerController createControllerFor(Player p);
 
     public abstract void hear(LobbyPlayer player, String message);

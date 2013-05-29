@@ -21,7 +21,7 @@ import forge.Card;
 import forge.card.mana.ManaCost;
 import forge.card.spellability.Ability;
 import forge.card.spellability.SpellAbility;
-import forge.game.GameState;
+import forge.game.Game;
 import forge.game.player.GameLossReason;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
@@ -39,7 +39,7 @@ public class EndOfTurn extends Phase {
     /** Constant <code>serialVersionUID=-3656715295379727275L</code>. */
     private static final long serialVersionUID = -3656715295379727275L;
 
-    public EndOfTurn(final GameState game) { super(game); }
+    public EndOfTurn(final Game game) { super(game); }
     /**
      * <p>
      * Handles all the hardcoded events that happen "at end of turn".

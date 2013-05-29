@@ -7,7 +7,7 @@ import forge.CardLists;
 import forge.Command;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
-import forge.game.GameState;
+import forge.game.Game;
 import forge.game.zone.ZoneType;
 
 public class RegenerateAllEffect extends SpellAbilityEffect {
@@ -20,7 +20,7 @@ public class RegenerateAllEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
         final Card hostCard = sa.getSourceCard();
-        final GameState game = hostCard.getGame();
+        final Game game = hostCard.getGame();
         String valid = "";
 
         if (sa.hasParam("ValidCards")) {

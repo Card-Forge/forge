@@ -27,7 +27,7 @@ import forge.card.cost.Cost;
 import forge.card.cost.CostPayment;
 import forge.card.staticability.StaticAbility;
 import forge.error.BugReporter;
-import forge.game.GameState;
+import forge.game.Game;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.util.Expressions;
@@ -68,7 +68,7 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
     /** {@inheritDoc} */
     @Override
     public boolean canPlay() {
-        final GameState game = getActivatingPlayer().getGame();
+        final Game game = getActivatingPlayer().getGame();
         if (game.getStack().isSplitSecondOnStack()) {
             return false;
         }
@@ -120,7 +120,7 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
     @Override
     public boolean canPlayAI() {
         final Card card = this.getSourceCard();
-        final GameState game = getActivatingPlayer().getGame();
+        final Game game = getActivatingPlayer().getGame();
         if (card.getSVar("NeedsToPlay").length() > 0) {
             final String needsToPlay = card.getSVar("NeedsToPlay");
             List<Card> list = game.getCardsIn(ZoneType.Battlefield);

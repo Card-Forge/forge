@@ -20,7 +20,7 @@ package forge.control.input;
 import forge.Card;
 import forge.card.mana.ManaCostBeingPaid;
 import forge.card.spellability.SpellAbility;
-import forge.game.GameState;
+import forge.game.Game;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.view.ButtonUtil;
@@ -36,7 +36,7 @@ public class InputPayManaSimple extends InputPayMana {
     private final Card originalCard;
     private final String originalManaCost;
 
-    public InputPayManaSimple(final GameState game, final SpellAbility sa, final ManaCostBeingPaid manaCostToPay) {
+    public InputPayManaSimple(final Game game, final SpellAbility sa, final ManaCostBeingPaid manaCostToPay) {
         super(sa);
         this.originalManaCost = manaCostToPay.toString(); // Change
         this.originalCard = sa.getSourceCard();

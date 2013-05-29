@@ -12,7 +12,7 @@ import forge.card.mana.ManaCost;
 import forge.card.spellability.Ability;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
-import forge.game.GameState;
+import forge.game.Game;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
@@ -97,7 +97,7 @@ public class ControlGainEffect extends SpellAbilityEffect {
             controllers = new ArrayList<Player>();
 
         final Player newController = controllers.isEmpty() ? sa.getActivatingPlayer() : controllers.get(0);
-        final GameState game = newController.getGame();
+        final Game game = newController.getGame();
 
         if (sa.hasParam("AllValid")) {
             tgtCards = game.getCardsIn(ZoneType.Battlefield);
@@ -202,7 +202,7 @@ public class ControlGainEffect extends SpellAbilityEffect {
 
             @Override
             public void run() {
-                final GameState game = hostCard.getGame();
+                final Game game = hostCard.getGame();
                 final Ability ability = new Ability(hostCard, ManaCost.ZERO) {
                     @Override
                     public void resolve() {

@@ -9,7 +9,7 @@ import forge.Card;
 import forge.CardPredicates;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.spellability.SpellAbility;
-import forge.game.GameState;
+import forge.game.Game;
 import forge.game.ai.ComputerUtil;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -27,7 +27,7 @@ public class PermanentCreatureAi extends SpellAbilityAi {
     @Override
     protected boolean canPlayAI(Player aiPlayer, SpellAbility sa) {
         String logic = sa.getParam("AILogic");
-        GameState game = aiPlayer.getGame();
+        Game game = aiPlayer.getGame();
 
         if ("ZeroToughness".equals(logic)) {
             // If Creature has Zero Toughness, make sure some static ability is in play

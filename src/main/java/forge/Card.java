@@ -62,7 +62,7 @@ import forge.card.staticability.StaticAbility;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerType;
 import forge.card.trigger.ZCTrigger;
-import forge.game.GameState;
+import forge.game.Game;
 import forge.game.GlobalRuleChange;
 import forge.game.event.GameEventCardDamaged;
 import forge.game.event.GameEventCardEquipped;
@@ -7360,7 +7360,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             additionalLog = String.format("(Removing %d Loyalty Counters)", damageToAdd);
         } else {
 
-            final GameState game = source.getGame();
+            final Game game = source.getGame();
             
                 final String s = this + " - destroy";
 
@@ -8111,7 +8111,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         if (getController() == viewer && isInZone(ZoneType.Battlefield)) {
             return true;
         }
-        final GameState game = this.getGame();
+        final Game game = this.getGame();
         if (getController() == viewer && hasKeyword("You may look at this card.")) {
             return true; 
         }
@@ -8244,7 +8244,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * Fetch GameState for this card from references to players who may own or control this card. 
      */
     @Override
-    public GameState getGame() {
+    public Game getGame() {
         
         Player controller = getController();
         if (null != controller)

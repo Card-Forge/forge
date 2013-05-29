@@ -9,7 +9,7 @@ import forge.CardLists;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
-import forge.game.GameState;
+import forge.game.Game;
 import forge.game.ai.ComputerUtilCombat;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -23,7 +23,7 @@ public class ChooseCardAi extends SpellAbilityAi {
     @Override
     protected boolean canPlayAI(final Player ai, SpellAbility sa) {
         final Card host = sa.getSourceCard();
-        final GameState game = ai.getGame();
+        final Game game = ai.getGame();
 
         final Target tgt = sa.getTarget();
         if (tgt != null) {

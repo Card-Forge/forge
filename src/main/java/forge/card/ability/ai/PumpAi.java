@@ -17,7 +17,7 @@ import forge.card.cost.CostTapType;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityRestriction;
 import forge.card.spellability.Target;
-import forge.game.GameState;
+import forge.game.Game;
 import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilCard;
 import forge.game.ai.ComputerUtilCost;
@@ -48,7 +48,7 @@ public class PumpAi extends PumpAiBase {
     @Override
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
         final Cost cost = sa.getPayCosts();
-        final GameState game = ai.getGame();
+        final Game game = ai.getGame();
         final PhaseHandler ph = game.getPhaseHandler();
         final List<String> keywords = sa.hasParam("KW") ? Arrays.asList(sa.getParam("KW").split(" & ")) : new ArrayList<String>();
         final String numDefense = sa.hasParam("NumDef") ? sa.getParam("NumDef") : "";
@@ -181,7 +181,7 @@ public class PumpAi extends PumpAiBase {
 
     private boolean pumpTgtAI(final Player ai, final SpellAbility sa, final int defense, final int attack, final boolean mandatory) {
         final List<String> keywords = sa.hasParam("KW") ? Arrays.asList(sa.getParam("KW").split(" & ")) : new ArrayList<String>();
-        final GameState game = ai.getGame();
+        final Game game = ai.getGame();
 
         if (!mandatory
                 && !sa.isTrigger()
@@ -284,7 +284,7 @@ public class PumpAi extends PumpAiBase {
     } // pumpTgtAI()
 
     private boolean pumpMandatoryTarget(final Player ai, final SpellAbility sa, final boolean mandatory) {
-        final GameState game = ai.getGame();
+        final Game game = ai.getGame();
         List<Card> list = game.getCardsIn(ZoneType.Battlefield);
         final Target tgt = sa.getTarget();
         final Player opp = ai.getOpponent();

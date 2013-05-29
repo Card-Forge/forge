@@ -40,7 +40,7 @@ import forge.card.staticability.StaticAbility;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerHandler;
 import forge.card.trigger.TriggerType;
-import forge.game.GameState;
+import forge.game.Game;
 import forge.game.GlobalRuleChange;
 import forge.game.phase.Combat;
 import forge.game.phase.CombatUtil;
@@ -417,7 +417,7 @@ public class ComputerUtilCombat {
      */
     public static int dealsDamageAsBlocker(final Card attacker, final Card defender) {
 
-        final GameState game = attacker.getGame();
+        final Game game = attacker.getGame();
         if (attacker.getName().equals("Sylvan Basilisk") && !defender.hasKeyword("Indestructible")) {
             return 0;
         }
@@ -550,7 +550,7 @@ public class ComputerUtilCombat {
      * @return a boolean.
      */
     public static boolean attackerWouldBeDestroyed(Player ai, final Card attacker) {
-        final GameState game = ai.getGame();
+        final Game game = ai.getGame();
         final List<Card> blockers = game.getCombat().getBlockers(attacker);
 
         for (final Card defender : blockers) {
@@ -581,7 +581,7 @@ public class ComputerUtilCombat {
      */
     public static boolean combatTriggerWillTrigger(final Card attacker, final Card defender, final Trigger trigger,
             Combat combat) {
-        final GameState game = attacker.getGame();
+        final Game game = attacker.getGame();
         final HashMap<String, String> trigParams = trigger.getMapParams();
         boolean willTrigger = false;
         final Card source = trigger.getHostCard();
@@ -703,7 +703,7 @@ public class ComputerUtilCombat {
 
         power += defender.getKeywordMagnitude("Bushido");
 
-        final GameState game = attacker.getGame();
+        final Game game = attacker.getGame();
         // look out for continuous static abilities that only care for blocking
         // creatures
         final List<Card> cardList = game.getCardsIn(ZoneType.Battlefield);
@@ -831,7 +831,7 @@ public class ComputerUtilCombat {
         }
 
         toughness += defender.getKeywordMagnitude("Bushido");
-        final GameState game = attacker.getGame();
+        final Game game = attacker.getGame();
         final ArrayList<Trigger> theTriggers = new ArrayList<Trigger>();
         for (Card card : game.getCardsIn(ZoneType.Battlefield)) {
             theTriggers.addAll(card.getTriggers());
@@ -953,7 +953,7 @@ public class ComputerUtilCombat {
             }
         }
 
-        final GameState game = attacker.getGame();
+        final Game game = attacker.getGame();
         final ArrayList<Trigger> theTriggers = new ArrayList<Trigger>();
         for (Card card : game.getCardsIn(ZoneType.Battlefield)) {
             theTriggers.addAll(card.getTriggers());
@@ -1113,7 +1113,7 @@ public class ComputerUtilCombat {
             }
         }
 
-        final GameState game = attacker.getGame();
+        final Game game = attacker.getGame();
         final ArrayList<Trigger> theTriggers = new ArrayList<Trigger>();
         for (Card card : game.getCardsIn(ZoneType.Battlefield)) {
             theTriggers.addAll(card.getTriggers());
@@ -1268,7 +1268,7 @@ public class ComputerUtilCombat {
      * @return a boolean.
      */
     public static boolean checkDestroyBlockerTrigger(final Card attacker, final Card defender) {
-        final GameState game = attacker.getGame();
+        final Game game = attacker.getGame();
         final ArrayList<Trigger> theTriggers = new ArrayList<Trigger>();
         for (Card card : game.getCardsIn(ZoneType.Battlefield)) {
             theTriggers.addAll(card.getTriggers());
@@ -1510,7 +1510,7 @@ public class ComputerUtilCombat {
      * @return a boolean.
      */
     public static boolean blockerWouldBeDestroyed(Player ai, final Card blocker) {
-        final GameState game = ai.getGame();
+        final Game game = ai.getGame();
         // TODO THis function only checks if a single attacker at a time would destroy a blocker
         // This needs to expand to tally up damage
         final List<Card> attackers = game.getCombat().getAttackersBlockedBy(blocker);
@@ -1543,7 +1543,7 @@ public class ComputerUtilCombat {
      */
     public static boolean canDestroyBlocker(Player ai, final Card defender, final Card attacker, final Combat combat,
             final boolean withoutAbilities) {
-        final GameState game = ai.getGame();
+        final Game game = ai.getGame();
         int flankingMagnitude = 0;
         if (attacker.hasKeyword("Flanking") && !defender.hasKeyword("Flanking")) {
 
@@ -1851,7 +1851,7 @@ public class ComputerUtilCombat {
 
     public final static int predictDamageTo(final Player target, final int damage, final Card source, final boolean isCombat) {
 
-        final GameState game = target.getGame();
+        final Game game = target.getGame();
         int restDamage = damage;
 
         restDamage = target.staticReplaceDamage(restDamage, source, isCombat);

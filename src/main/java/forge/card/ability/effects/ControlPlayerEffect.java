@@ -5,7 +5,7 @@ import java.util.List;
 import forge.Command;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
-import forge.game.GameState;
+import forge.game.Game;
 import forge.game.player.Player;
 import forge.util.Lang;
 
@@ -26,7 +26,7 @@ public class ControlPlayerEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
         final Player activator = sa.getActivatingPlayer();
-        final GameState game = activator.getGame();
+        final Game game = activator.getGame();
 
         List<Player> tgtPlayers = getTargetPlayers(sa);
 

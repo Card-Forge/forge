@@ -29,7 +29,7 @@ import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
-import forge.game.GameState;
+import forge.game.Game;
 import forge.game.ai.ComputerUtilCard;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -183,7 +183,7 @@ public class ControlGainAi extends SpellAbilityAi {
 
     @Override
     public boolean chkAIDrawback(SpellAbility sa, final Player ai) {
-        final GameState game = ai.getGame();
+        final Game game = ai.getGame();
         if ((sa.getTarget() == null) || !sa.getTarget().doesTarget()) {
             if (sa.hasParam("AllValid")) {
                 List<Card> tgtCards = CardLists.filterControlledBy(game.getCardsIn(ZoneType.Battlefield), ai.getOpponent());

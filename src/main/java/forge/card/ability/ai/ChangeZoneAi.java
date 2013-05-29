@@ -27,7 +27,7 @@ import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.card.trigger.TriggerType;
-import forge.game.GameState;
+import forge.game.Game;
 import forge.game.GlobalRuleChange;
 import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilBlock;
@@ -1065,7 +1065,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
         final Card card = sa.getSourceCard();
         final boolean defined = sa.hasParam("Defined");
         final Player activator = sa.getActivatingPlayer();
-        final GameState game = ai.getGame();
+        final Game game = ai.getGame();
 
         if (tgt != null) {
             if (!tgt.getTargetPlayers().isEmpty()) {

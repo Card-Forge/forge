@@ -10,7 +10,7 @@ import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
-import forge.game.GameState;
+import forge.game.Game;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
@@ -33,7 +33,7 @@ public class AnimateAi extends SpellAbilityAi {
     protected boolean canPlayAI(Player aiPlayer, SpellAbility sa) {
         final Target tgt = sa.getTarget();
         final Card source = sa.getSourceCard();
-        final GameState game = aiPlayer.getGame();
+        final Game game = aiPlayer.getGame();
         
         // TODO - add some kind of check to answer
         // "Am I going to attack with this?"

@@ -30,7 +30,7 @@ import forge.GameEventType;
 import forge.card.ability.AbilityFactory;
 import forge.card.ability.AbilityUtils;
 import forge.card.spellability.SpellAbility;
-import forge.game.GameState;
+import forge.game.Game;
 import forge.game.ai.ComputerUtil;
 import forge.game.player.HumanPlay;
 import forge.game.player.Player;
@@ -58,7 +58,7 @@ public class ReplacementHandler {
         } else {
             decider = ((Card) affected).getController();
         }
-        final GameState game = decider.getGame(); 
+        final Game game = decider.getGame(); 
 
         if (runParams.get("Event").equals("Moved")) {
             ReplacementResult res = run(runParams, ReplacementLayer.Control, decider, game);
@@ -97,7 +97,7 @@ public class ReplacementHandler {
      *            the run params,same as for triggers.
      * @return true if the event was replaced.
      */
-    public ReplacementResult run(final HashMap<String, Object> runParams, final ReplacementLayer layer, final Player decider, final GameState game) {
+    public ReplacementResult run(final HashMap<String, Object> runParams, final ReplacementLayer layer, final Player decider, final Game game) {
 
         final List<ReplacementEffect> possibleReplacers = new ArrayList<ReplacementEffect>();
         // Round up Non-static replacement effects ("Until EOT," or
@@ -181,7 +181,7 @@ public class ReplacementHandler {
      *            the replacement effect to run
      */
     private ReplacementResult executeReplacement(final Map<String, Object> runParams,
-        final ReplacementEffect replacementEffect, final Player decider, final GameState game) {
+        final ReplacementEffect replacementEffect, final Player decider, final Game game) {
         final Map<String, String> mapParams = replacementEffect.getMapParams();
 
         SpellAbility effectSA = null;

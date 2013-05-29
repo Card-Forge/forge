@@ -55,7 +55,7 @@ import forge.card.spellability.Target;
 import forge.card.staticability.StaticAbility;
 import forge.card.trigger.TriggerType;
 import forge.game.GameActionUtil;
-import forge.game.GameState;
+import forge.game.Game;
 import forge.game.GlobalRuleChange;
 import forge.game.event.GameEventCardDiscarded;
 import forge.game.event.GameEventDrawCard;
@@ -172,7 +172,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             ZoneType.Library, ZoneType.Graveyard, ZoneType.Hand, ZoneType.Exile, ZoneType.Command, ZoneType.Ante,
             ZoneType.Sideboard, ZoneType.PlanarDeck,ZoneType.SchemeDeck));
 
-    protected final GameState game;
+    protected final Game game;
 
     public final PlayerOutcome getOutcome() {
         return stats.getOutcome();
@@ -190,7 +190,7 @@ public class Player extends GameEntity implements Comparable<Player> {
      * @param myPoisonCounters
      *            a int.
      */
-    public Player(String name, GameState game0) {
+    public Player(String name, Game game0) {
         game = game0;
         for (final ZoneType z : Player.ALL_ZONES) {
             final PlayerZone toPut = z == ZoneType.Battlefield
@@ -219,7 +219,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     @Override
-    public GameState getGame() { // I'll probably regret about this  
+    public Game getGame() { // I'll probably regret about this  
         return game;
     }
     

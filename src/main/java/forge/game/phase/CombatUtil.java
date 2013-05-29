@@ -46,7 +46,7 @@ import forge.card.spellability.Ability;
 import forge.card.spellability.AbilityStatic;
 import forge.card.staticability.StaticAbility;
 import forge.card.trigger.TriggerType;
-import forge.game.GameState;
+import forge.game.Game;
 import forge.game.GlobalRuleChange;
 import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilCard;
@@ -96,7 +96,7 @@ public class CombatUtil {
         if (!CombatUtil.canBlockMoreCreatures(blocker, combat.getAttackersBlockedBy(blocker))) {
             return false;
         }
-        final GameState game = blocker.getGame();
+        final Game game = blocker.getGame();
 
         for (final Card c : game.getCardsIn(ZoneType.Battlefield)) {
             for (final String keyword : c.getKeyword()) {
@@ -767,7 +767,7 @@ public class CombatUtil {
      */
     public static boolean canAttack(final Card c, final GameEntity def, final Combat combat) {
         int cntAttackers = combat.getAttackers().size();
-        final GameState game = c.getGame();
+        final Game game = c.getGame();
 
         for (final Card card : game.getCardsIn(ZoneType.Battlefield)) {
             for (final String keyword : card.getKeyword()) {
@@ -821,7 +821,7 @@ public class CombatUtil {
     }
     
     public static boolean canAttack(final Card c) {
-        final GameState game = c.getGame();
+        final Game game = c.getGame();
         if (c.isTapped() || c.isPhasedOut()
                 || (c.hasSickness() && !c.hasKeyword("CARDNAME can attack as though it had haste."))
                 || game.getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
@@ -947,7 +947,7 @@ public class CombatUtil {
         if (c.isTapped() && !Untap.canUntap(c)) {
             return false;
         }
-        final GameState game = c.getGame();
+        final Game game = c.getGame();
         // CantBeActivated static abilities
         for (final Card ca : game.getCardsIn(ZoneType.listValueOf("Battlefield,Command"))) {
             final ArrayList<StaticAbility> staticAbilities = ca.getStaticAbilities();
@@ -985,7 +985,7 @@ public class CombatUtil {
      * @param bLast
      *            a boolean.
      */
-    public static boolean checkPropagandaEffects(final GameState game, final Card c) {
+    public static boolean checkPropagandaEffects(final Game game, final Card c) {
         Cost attackCost = new Cost(ManaCost.ZERO, true);
         // Sort abilities to apply them in proper order
         for (Card card : game.getCardsIn(ZoneType.listValueOf("Battlefield,Command"))) {
@@ -1024,7 +1024,7 @@ public class CombatUtil {
      * @param c
      *            a {@link forge.Card} object.
      */
-    public static void checkDeclareAttackers(final GameState game, final Card c) {
+    public static void checkDeclareAttackers(final Game game, final Card c) {
         // Run triggers
         final HashMap<String, Object> runParams = new HashMap<String, Object>();
         runParams.put("Attacker", c);
@@ -1142,7 +1142,7 @@ public class CombatUtil {
      * @param cl
      *            a {@link forge.CardList} object.
      */
-    public static void checkDeclareBlockers(GameState game, final List<Card> cl) {
+    public static void checkDeclareBlockers(Game game, final List<Card> cl) {
         for (final Card c : cl) {
             if (!c.getDamageHistory().getCreatureBlockedThisCombat()) {
                 for (final Ability ab : CardFactoryUtil.getBushidoEffects(c)) {
@@ -1172,7 +1172,7 @@ public class CombatUtil {
      * @param b
      *            a {@link forge.Card} object.
      */
-    public static void checkBlockedAttackers(final GameState game, final Card a, final List<Card> blockers) {
+    public static void checkBlockedAttackers(final Game game, final Card a, final List<Card> blockers) {
 
         if (blockers.isEmpty()) {
             return;
@@ -1274,7 +1274,7 @@ public class CombatUtil {
      * @param magnitude
      *            a int.
      */
-    public static void executeExaltedAbility(final GameState game, final Card c, final int magnitude) {
+    public static void executeExaltedAbility(final Game game, final Card c, final int magnitude) {
         final Card crd = c;
         Ability ability;
 
@@ -1382,7 +1382,7 @@ public class CombatUtil {
      * @param numBlockers
      *            - the number of creatures blocking this rampaging creature
      */
-    private static void executeRampageAbility(final GameState game, final Card c, final int magnitude, final int numBlockers) {
+    private static void executeRampageAbility(final Game game, final Card c, final int magnitude, final int numBlockers) {
         final Card crd = c;
         final int pump = magnitude;
         Ability ability;

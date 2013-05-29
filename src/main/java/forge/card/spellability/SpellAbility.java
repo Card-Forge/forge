@@ -34,7 +34,7 @@ import forge.card.cost.Cost;
 import forge.card.cost.CostPartMana;
 import forge.card.mana.Mana;
 import forge.card.mana.ManaCost;
-import forge.game.GameState;
+import forge.game.Game;
 import forge.game.player.Player;
 import forge.util.TextUtil;
 
@@ -1345,7 +1345,7 @@ public abstract class SpellAbility implements ISpellAbility {
     public List<Card> knownDetermineDefined(final String defined) {
         final List<Card> ret = new ArrayList<Card>();
         final List<Card> list = AbilityUtils.getDefinedCards(getSourceCard(), defined, this);
-        final GameState game = getActivatingPlayer().getGame();
+        final Game game = getActivatingPlayer().getGame();
         
         for (final Card c : list) {
             final Card actualCard = game.getCardState(c);

@@ -10,7 +10,7 @@ import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
-import forge.game.GameState;
+import forge.game.Game;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
@@ -55,7 +55,7 @@ public class CountersRemoveEffect extends SpellAbilityEffect {
     public void resolve(SpellAbility sa) {
 
         final Card card = sa.getSourceCard();
-        final GameState game = card.getGame();
+        final Game game = card.getGame();
         final String type = sa.getParam("CounterType");
         int counterAmount = 0;
         if (!sa.getParam("CounterNum").equals("All") && !sa.getParam("CounterNum").equals("Remembered")) {

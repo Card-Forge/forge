@@ -19,7 +19,7 @@ import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityRestriction;
-import forge.game.GameState;
+import forge.game.Game;
 import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilCard;
 import forge.game.player.HumanPlay;
@@ -55,7 +55,7 @@ public class PlayEffect extends SpellAbilityEffect {
     public void resolve(SpellAbility sa) {
         final Card source = sa.getSourceCard();
         Player activator = sa.getActivatingPlayer();
-        final GameState game = activator.getGame();
+        final Game game = activator.getGame();
         boolean optional = sa.hasParam("Optional");
         boolean remember = sa.hasParam("RememberPlayed");
         boolean wasFaceDown = false;

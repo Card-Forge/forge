@@ -30,7 +30,7 @@ import forge.card.cardfactory.CardFactory;
 import forge.card.spellability.SpellAbility;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerHandler;
-import forge.game.GameState;
+import forge.game.Game;
 import forge.game.event.GameEventTokenCreated;
 import forge.game.player.Player;
 import forge.gui.GuiChoose;
@@ -276,7 +276,7 @@ public class TokenEffect extends SpellAbilityEffect {
                     }
                 }
 
-                final GameState game = controller.getGame();
+                final Game game = controller.getGame();
                 for (final Card c : tokens) {
                     if (this.tokenTapped) {
                         c.setTapped(true);

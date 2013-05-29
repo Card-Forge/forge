@@ -45,7 +45,7 @@ import forge.control.input.InputPayManaSimple;
 import forge.control.input.InputSelectCards;
 import forge.control.input.InputSelectCardsFromList;
 import forge.game.GameActionUtil;
-import forge.game.GameState;
+import forge.game.Game;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 import forge.gui.GuiDialog;
@@ -191,7 +191,7 @@ public class HumanPlay {
      * @param sa
      *            a {@link forge.card.spellability.SpellAbility} object.
      */
-    public static final void playSaWithoutPayingManaCost(final GameState game, final SpellAbility sa) {
+    public static final void playSaWithoutPayingManaCost(final Game game, final SpellAbility sa) {
         FThreads.assertExecutedByEdt(false);
         final Card source = sa.getSourceCard();
         
@@ -280,7 +280,7 @@ public class HumanPlay {
      *            a {@link forge.Command} object.
      * @param sourceAbility TODO
      */
-    public static boolean payCostDuringAbilityResolve(final SpellAbility ability, final Cost cost, SpellAbility sourceAbility, final GameState game) {
+    public static boolean payCostDuringAbilityResolve(final SpellAbility ability, final Cost cost, SpellAbility sourceAbility, final Game game) {
         
         // Only human player pays this way
         final Player p = ability.getActivatingPlayer();

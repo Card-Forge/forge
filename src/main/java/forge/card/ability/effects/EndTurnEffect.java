@@ -4,7 +4,7 @@ package forge.card.ability.effects;
 import forge.Card;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
-import forge.game.GameState;
+import forge.game.Game;
 import forge.game.player.Player;
 
 public class EndTurnEffect extends SpellAbilityEffect {
@@ -19,7 +19,7 @@ public class EndTurnEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
 
-        GameState game = sa.getActivatingPlayer().getGame();
+        Game game = sa.getActivatingPlayer().getGame();
         // Steps taken from gatherer's rulings on Time Stop.
         // 1) All spells and abilities on the stack are exiled. This includes
         // Time Stop, though it will continue to resolve. It also includes

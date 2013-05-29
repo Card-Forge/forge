@@ -29,7 +29,7 @@ import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.spellability.SpellAbility;
 import forge.control.input.InputSelectCards;
-import forge.game.GameState;
+import forge.game.Game;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
@@ -115,7 +115,7 @@ public class CostRemoveCounter extends CostPartWithList {
     }
 
     @Override
-    public final boolean payHuman(final SpellAbility ability, final GameState game) {
+    public final boolean payHuman(final SpellAbility ability, final Game game) {
         final String amount = this.getAmount();
         final Card source = ability.getSourceCard();
         Integer c = this.convertAmount();

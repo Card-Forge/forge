@@ -9,7 +9,7 @@ import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
-import forge.game.GameState;
+import forge.game.Game;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
@@ -48,7 +48,7 @@ public class DestroyAllEffect extends SpellAbilityEffect {
 
         final boolean noRegen = sa.hasParam("NoRegen");
         final Card card = sa.getSourceCard();
-        final GameState game = sa.getActivatingPlayer().getGame();
+        final Game game = sa.getActivatingPlayer().getGame();
 
         final Target tgt = sa.getTarget();
         Player targetPlayer = null;

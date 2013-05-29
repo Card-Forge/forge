@@ -22,7 +22,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import forge.Card;
 import forge.card.spellability.SpellAbility;
-import forge.game.GameState;
+import forge.game.Game;
 import forge.game.player.Player;
 
 /**
@@ -192,7 +192,7 @@ public abstract class CostPart {
      * @param game
      * @return true, if successful
      */
-    public abstract boolean payHuman(SpellAbility ability, GameState game);
+    public abstract boolean payHuman(SpellAbility ability, Game game);
     
     /*
      * (non-Javadoc)

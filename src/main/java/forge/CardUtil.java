@@ -30,7 +30,7 @@ import forge.card.ability.ApiType;
 import forge.card.spellability.AbilityManaPart;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
-import forge.game.GameState;
+import forge.game.Game;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.properties.NewConstants;
@@ -71,7 +71,7 @@ public final class CardUtil {
      */
     public static List<Card> getThisTurnEntered(final ZoneType to, final ZoneType from, final String valid, final Card src) {
         List<Card> res = new ArrayList<Card>();
-        final GameState game = src.getGame();
+        final Game game = src.getGame();
         if (to != ZoneType.Stack) {
             for (Player p : game.getPlayers()) {
                 res.addAll(p.getZone(to).getCardsAddedThisTurn(from));
@@ -87,7 +87,7 @@ public final class CardUtil {
 
     public static List<Card> getThisTurnCast(final String valid, final Card src) {
         List<Card> res = new ArrayList<Card>();
-        final GameState game = src.getGame();
+        final Game game = src.getGame();
         res.addAll(game.getStack().getCardsCastThisTurn());
 
         res = CardLists.getValidCards(res, valid, src.getController(), src);
@@ -97,7 +97,7 @@ public final class CardUtil {
 
     public static List<Card> getLastTurnCast(final String valid, final Card src) {
         List<Card> res = new ArrayList<Card>();
-        final GameState game = src.getGame();
+        final Game game = src.getGame();
         res.addAll(game.getStack().getCardsCastLastTurn());
 
         res = CardLists.getValidCards(res, valid, src.getController(), src);
@@ -162,7 +162,7 @@ public final class CardUtil {
     public static List<Card> getRadiance(final Card source, final Card origin, final String[] valid) {
         final List<Card> res = new ArrayList<Card>();
 
-        final GameState game = source.getGame();
+        final Game game = source.getGame();
         ColorSet cs = CardUtil.getColors(origin);
         for (byte color : MagicColor.WUBRG) {
             if(!cs.hasAnyColor(color)) 
@@ -233,7 +233,7 @@ public final class CardUtil {
         if (validCard.startsWith("Defined.")) {
             cards = AbilityUtils.getDefinedCards(card, validCard.replace("Defined.", ""), abMana);
         } else {
-            final GameState game = sa.getActivatingPlayer().getGame();
+            final Game game = sa.getActivatingPlayer().getGame();
             cards = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), validCard, abMana.getActivatingPlayer(), card);
         }
 

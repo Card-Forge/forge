@@ -21,7 +21,7 @@ import forge.card.spellability.Ability;
 import forge.card.spellability.AbilityStatic;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
-import forge.game.GameState;
+import forge.game.Game;
 import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilCost;
 import forge.game.player.HumanPlay;
@@ -79,7 +79,7 @@ public class AbilityUtils {
     public static List<Card> getDefinedCards(final Card hostCard, final String def, final SpellAbility sa) {
         final List<Card> cards = new ArrayList<Card>();
         final String defined = (def == null) ? "Self" : def; // default to Self
-        final GameState game = hostCard.getGame();
+        final Game game = hostCard.getGame();
         
         Card c = null;
 
@@ -287,7 +287,7 @@ public class AbilityUtils {
     public static int calculateAmount(final Card card, String amount, final SpellAbility ability) {
         // return empty strings and constants
         if (StringUtils.isBlank(amount)) { return 0; }
-        final GameState game = card.getController().getGame(); 
+        final Game game = card.getController().getGame(); 
 
         // Strip and save sign for calculations
         final boolean startsWithPlus = amount.charAt(0) == '+';
@@ -696,7 +696,7 @@ public class AbilityUtils {
     public static List<Player> getDefinedPlayers(final Card card, final String def, final SpellAbility sa) {
         final List<Player> players = new ArrayList<Player>();
         final String defined = (def == null) ? "You" : def;
-        final GameState game = sa.getActivatingPlayer().getGame();
+        final Game game = sa.getActivatingPlayer().getGame();
 
         if (defined.equals("Targeted")) {
             final SpellAbility saTargeting = sa.getSATargetingPlayer();
@@ -943,7 +943,7 @@ public class AbilityUtils {
             final SpellAbility sa) {
         final ArrayList<SpellAbility> sas = new ArrayList<SpellAbility>();
         final String defined = (def == null) ? "Self" : def; // default to Self
-        final GameState game = sa.getActivatingPlayer().getGame();
+        final Game game = sa.getActivatingPlayer().getGame();
         
         SpellAbility s = null;
 
@@ -1034,7 +1034,7 @@ public class AbilityUtils {
         AbilityUtils.resolveApiAbility(sa, usedStack, sa.getActivatingPlayer().getGame());
     }
 
-    private static void resolveSubAbilities(final SpellAbility sa, boolean usedStack, final GameState game) {
+    private static void resolveSubAbilities(final SpellAbility sa, boolean usedStack, final Game game) {
         final AbilitySub abSub = sa.getSubAbility();
         if (abSub == null || sa.isWrapper()) {
             // every resolving spellAbility will end here
@@ -1050,7 +1050,7 @@ public class AbilityUtils {
         AbilityUtils.resolveApiAbility(abSub, usedStack, game);
     }
 
-    private static void resolveApiAbility(final SpellAbility sa, boolean usedStack, final GameState game) {
+    private static void resolveApiAbility(final SpellAbility sa, boolean usedStack, final Game game) {
         // check conditions
         if (sa.getConditions().areMet(sa)) {
             if (sa.isWrapper() || StringUtils.isBlank(sa.getParam("UnlessCost"))) {
@@ -1063,7 +1063,7 @@ public class AbilityUtils {
         resolveSubAbilities(sa, usedStack, game);
     }
 
-    private static void handleUnlessCost(final SpellAbility sa, final boolean usedStack, final GameState game) {
+    private static void handleUnlessCost(final SpellAbility sa, final boolean usedStack, final Game game) {
         final Card source = sa.getSourceCard();
         String unlessCost = sa.getParam("UnlessCost");
         unlessCost = unlessCost.trim();

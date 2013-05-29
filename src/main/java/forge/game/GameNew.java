@@ -219,7 +219,7 @@ public class GameNew {
      * their decks and other special starting conditions.
      * @param forceAnte Forces ante on or off no matter what your preferences
      */
-    public static void newGame(final GameState game, final boolean canRandomFoil, boolean useAnte) {
+    public static void newGame(final Game game, final boolean canRandomFoil, boolean useAnte) {
 
         Card.resetUniqueNumber();
         // need this code here, otherwise observables fail
@@ -304,7 +304,7 @@ public class GameNew {
         }
     }
 
-    static List<Pair<Player, Card>> chooseCardsForAnte(final GameState game) {
+    static List<Pair<Player, Card>> chooseCardsForAnte(final Game game) {
         List<Pair<Player, Card>> anteed = new ArrayList<Pair<Player,Card>>();
 
         for (final Player p : game.getPlayers()) {

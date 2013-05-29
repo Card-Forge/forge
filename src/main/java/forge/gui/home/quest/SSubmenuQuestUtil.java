@@ -17,7 +17,7 @@ import forge.control.FControl;
 import forge.control.Lobby;
 import forge.deck.Deck;
 import forge.game.GameType;
-import forge.game.MatchState;
+import forge.game.Match;
 import forge.game.RegisteredPlayer;
 import forge.game.player.LobbyPlayer;
 import forge.gui.GuiChoose;
@@ -440,7 +440,7 @@ public class SSubmenuQuestUtil {
         aiPlayer.setIconImageKey(event.getIconImageKey());
         starter.add(aiStart.setPlayer(aiPlayer));
 
-        final MatchState mc = new MatchState(GameType.Quest, starter, forceAnte);
+        final Match mc = new Match(GameType.Quest, starter, forceAnte);
         FThreads.invokeInEdtLater(new Runnable(){
             @Override
             public void run() {

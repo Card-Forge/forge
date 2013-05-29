@@ -23,7 +23,7 @@ import forge.Card;
 import forge.card.cost.Cost;
 import forge.card.cost.CostPayment;
 import forge.card.staticability.StaticAbility;
-import forge.game.GameState;
+import forge.game.Game;
 import forge.game.GlobalRuleChange;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
@@ -85,7 +85,7 @@ public abstract class AbilityActivated extends SpellAbility implements java.io.S
             player = this.getSourceCard().getController();
         }
         
-        final GameState game = player.getGame();
+        final Game game = player.getGame();
         if (game.getStack().isSplitSecondOnStack() && !this.isManaAbility()) {
             return false;
         }

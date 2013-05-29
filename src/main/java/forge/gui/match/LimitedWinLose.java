@@ -25,7 +25,7 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
 import forge.Singletons;
-import forge.game.MatchState;
+import forge.game.Match;
 import forge.game.limited.GauntletMini;
 import forge.gui.SOverlayUtils;
 import forge.gui.toolbox.FSkin;
@@ -52,9 +52,9 @@ public class LimitedWinLose extends ControlWinLose {
      * Instantiates a new limited mode win/lose handler.
      * 
      * @param view0 {@link forge.gui.match.ViewWinLose}
-     * @param match {@link forge.game.MatchState}
+     * @param match {@link forge.game.Match}
      */
-    public LimitedWinLose(final ViewWinLose view0, MatchState match) {
+    public LimitedWinLose(final ViewWinLose view0, Match match) {
         super(view0, match);
         this.view = view0;
         gauntlet = Singletons.getModel().getGauntletMini();

@@ -13,7 +13,7 @@ import forge.card.spellability.Ability;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.card.trigger.TriggerType;
-import forge.game.GameState;
+import forge.game.Game;
 
 public class BecomesBlockedEffect extends SpellAbilityEffect {
 
@@ -32,7 +32,7 @@ public class BecomesBlockedEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
 
-        final GameState game = sa.getActivatingPlayer().getGame();
+        final Game game = sa.getActivatingPlayer().getGame();
         final Target tgt = sa.getTarget();
         for (final Card c : getTargetCards(sa)) {
             if ((tgt == null) || c.canBeTargetedBy(sa)) {

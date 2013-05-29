@@ -13,7 +13,7 @@ import forge.card.ability.SpellAbilityAi;
 import forge.card.cost.Cost;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
-import forge.game.GameState;
+import forge.game.Game;
 import forge.game.ai.ComputerUtilCard;
 import forge.game.ai.ComputerUtilCombat;
 import forge.game.ai.ComputerUtilCost;
@@ -66,7 +66,7 @@ public class ProtectAi extends SpellAbilityAi {
      */
     private static List<Card> getProtectCreatures(final Player ai, final SpellAbility sa) {
         final ArrayList<String> gains = AbilityUtils.getProtectionList(sa);
-        final GameState game = ai.getGame();
+        final Game game = ai.getGame();
         
         List<Card> list = ai.getCreaturesInPlay();
         list = CardLists.filter(list, new Predicate<Card>() {
@@ -111,7 +111,7 @@ public class ProtectAi extends SpellAbilityAi {
     @Override
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
         final Card hostCard = sa.getSourceCard();
-        final GameState game = ai.getGame();
+        final Game game = ai.getGame();
         // if there is no target and host card isn't in play, don't activate
         if ((sa.getTarget() == null) && !hostCard.isInPlay()) {
             return false;
@@ -171,7 +171,7 @@ public class ProtectAi extends SpellAbilityAi {
     } // protectPlayAI()
 
     private boolean protectTgtAI(final Player ai, final SpellAbility sa, final boolean mandatory) {
-        final GameState game = ai.getGame();
+        final Game game = ai.getGame();
         if (!mandatory && game.getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
             return false;
         }
@@ -250,7 +250,7 @@ public class ProtectAi extends SpellAbilityAi {
     } // protectTgtAI()
 
     private static boolean protectMandatoryTarget(final Player ai, final SpellAbility sa, final boolean mandatory) {
-        final GameState game = ai.getGame();
+        final Game game = ai.getGame();
 
         List<Card> list = game.getCardsIn(ZoneType.Battlefield);
         final Target tgt = sa.getTarget();

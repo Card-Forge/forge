@@ -44,7 +44,7 @@ import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellPermanent;
 import forge.game.GameActionUtil;
-import forge.game.GameState;
+import forge.game.Game;
 import forge.game.phase.CombatUtil;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -65,8 +65,8 @@ import forge.util.MyRandom;
 public class AiController {
 
     private final Player player;
-    private final GameState game;
-    public GameState getGame()
+    private final Game game;
+    public Game getGame()
     {
         return game;
     }
@@ -81,7 +81,7 @@ public class AiController {
      * Constructor for ComputerAI_General.
      * </p>
      */
-    public AiController(final Player computerPlayer, final GameState game0) {
+    public AiController(final Player computerPlayer, final Game game0) {
         player = computerPlayer;
         game = game0;
     }
@@ -871,7 +871,7 @@ public class AiController {
         }
     }
 
-    private void playSpellAbilities(final GameState game)
+    private void playSpellAbilities(final Game game)
     {
         SpellAbility sa;
         do { 

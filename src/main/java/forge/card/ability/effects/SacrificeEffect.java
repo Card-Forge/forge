@@ -8,7 +8,7 @@ import forge.CardPredicates;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
-import forge.game.GameState;
+import forge.game.Game;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
@@ -19,7 +19,7 @@ public class SacrificeEffect extends SpellAbilityEffect {
     public void resolve(SpellAbility sa) {
         final Card card = sa.getSourceCard();
         final Player activator = sa.getActivatingPlayer();
-        final GameState game = activator.getGame();
+        final Game game = activator.getGame();
 
         // Expand Sacrifice keyword here depending on what we need out of it.
         final String num = sa.hasParam("Amount") ? sa.getParam("Amount") : "1";

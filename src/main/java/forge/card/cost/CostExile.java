@@ -29,7 +29,7 @@ import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityStackInstance;
 import forge.control.input.InputSelectCards;
 import forge.control.input.InputSelectCardsFromList;
-import forge.game.GameState;
+import forge.game.Game;
 import forge.game.ai.ComputerUtil;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
@@ -154,7 +154,7 @@ public class CostExile extends CostPartWithList {
     public final boolean canPay(final SpellAbility ability) {
         final Player activator = ability.getActivatingPlayer();
         final Card source = ability.getSourceCard();
-        final GameState game = activator.getGame();
+        final Game game = activator.getGame();
         
         List<Card> typeList = new ArrayList<Card>();
         if (this.getType().equals("All")) {
@@ -207,7 +207,7 @@ public class CostExile extends CostPartWithList {
      * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final boolean payHuman(final SpellAbility ability, final GameState game) {
+    public final boolean payHuman(final SpellAbility ability, final Game game) {
         final String amount = this.getAmount();
         final Card source = ability.getSourceCard();
         Integer c = this.convertAmount();
@@ -335,7 +335,7 @@ public class CostExile extends CostPartWithList {
             return true;
         }
     
-        final GameState game = sa.getActivatingPlayer().getGame();
+        final Game game = sa.getActivatingPlayer().getGame();
         ArrayList<SpellAbility> saList = new ArrayList<SpellAbility>();
         ArrayList<String> descList = new ArrayList<String>();
         

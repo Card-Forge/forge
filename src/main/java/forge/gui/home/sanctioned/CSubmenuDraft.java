@@ -17,7 +17,7 @@ import forge.control.Lobby;
 import forge.deck.Deck;
 import forge.deck.DeckGroup;
 import forge.game.GameType;
-import forge.game.MatchState;
+import forge.game.Match;
 import forge.game.RegisteredPlayer;
 import forge.game.limited.BoosterDraft;
 import forge.game.limited.LimitedPoolType;
@@ -136,7 +136,7 @@ public enum CSubmenuDraft implements ICDoc {
         starter.add(RegisteredPlayer.fromDeck(humanDeck).setPlayer(lobby.getGuiPlayer()));
         starter.add(RegisteredPlayer.fromDeck(aiDeck).setPlayer(lobby.getAiPlayer()));
 
-        final MatchState mc = new MatchState(GameType.Draft, starter);
+        final Match mc = new Match(GameType.Draft, starter);
         FThreads.invokeInEdtLater(new Runnable(){
             @Override
             public void run() {

@@ -42,7 +42,7 @@ import forge.control.FControl;
 import forge.game.GameEndReason;
 import forge.game.GameFormat;
 import forge.game.GameOutcome;
-import forge.game.MatchState;
+import forge.game.Match;
 import forge.game.player.GameLossReason;
 import forge.game.player.LobbyPlayer;
 import forge.game.player.Player;
@@ -103,7 +103,7 @@ public class QuestWinLose extends ControlWinLose {
      * @param view0 ViewWinLose object
      * @param match2
      */
-    public QuestWinLose(final ViewWinLose view0, MatchState match2) {
+    public QuestWinLose(final ViewWinLose view0, Match match2) {
         super(view0, match2);
         this.view = view0;
         qData = Singletons.getModel().getQuest();

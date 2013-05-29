@@ -8,7 +8,7 @@ import forge.card.ability.SpellAbilityAi;
 import forge.card.cost.Cost;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
-import forge.game.GameState;
+import forge.game.Game;
 import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilCost;
 import forge.game.ai.ComputerUtilMana;
@@ -66,7 +66,7 @@ public class TokenAi extends SpellAbilityAi {
     @Override
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
         final Cost cost = sa.getPayCosts();
-        final GameState game = ai.getGame();
+        final Game game = ai.getGame();
         readParameters(sa);
 
         if (ComputerUtil.preventRunAwayActivations(sa)) {

@@ -49,7 +49,7 @@ import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityStackInstance;
 import forge.card.spellability.Target;
 import forge.error.BugReporter;
-import forge.game.GameState;
+import forge.game.Game;
 import forge.game.phase.Combat;
 import forge.game.phase.CombatUtil;
 import forge.game.phase.PhaseHandler;
@@ -81,7 +81,7 @@ public class ComputerUtil {
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
-    public static boolean handlePlayingSpellAbility(final Player ai, final SpellAbility sa, final GameState game) {
+    public static boolean handlePlayingSpellAbility(final Player ai, final SpellAbility sa, final Game game) {
         
         if (sa instanceof AbilityStatic) {
             final Cost cost = sa.getPayCosts();
@@ -225,7 +225,7 @@ public class ComputerUtil {
      * @param sa
      *            a {@link forge.card.spellability.SpellAbility} object.
      */
-    public static final void playStack(final SpellAbility sa, final Player ai, final GameState game) {
+    public static final void playStack(final SpellAbility sa, final Player ai, final Game game) {
         sa.setActivatingPlayer(ai);
         if (!ComputerUtilCost.canPayCost(sa, ai)) 
             return;
@@ -273,7 +273,7 @@ public class ComputerUtil {
      * @param sa
      *            a {@link forge.card.spellability.SpellAbility} object.
      */
-    public static final void playSpellAbilityWithoutPayingManaCost(final Player ai, final SpellAbility sa, final GameState game) {
+    public static final void playSpellAbilityWithoutPayingManaCost(final Player ai, final SpellAbility sa, final Game game) {
         final SpellAbility newSA = sa.copyWithNoManaCost();
         newSA.setActivatingPlayer(ai);
 
@@ -300,7 +300,7 @@ public class ComputerUtil {
      * @param sa
      *            a {@link forge.card.spellability.SpellAbility} object.
      */
-    public static final void playNoStack(final Player ai, final SpellAbility sa, final GameState game) {
+    public static final void playNoStack(final Player ai, final SpellAbility sa, final Game game) {
         sa.setActivatingPlayer(ai);
         // TODO: We should really restrict what doesn't use the Stack
         if (ComputerUtilCost.canPayCost(sa, ai)) {
@@ -465,7 +465,7 @@ public class ComputerUtil {
      */
     public static List<Card> chooseExileFrom(final Player ai, final ZoneType zone, final String type, final Card activate,
             final Card target, final int amount) {
-        final GameState game = ai.getGame();
+        final Game game = ai.getGame();
         List<Card> typeList = new ArrayList<Card>();
         if (zone.equals(ZoneType.Stack)) {
             for (SpellAbilityStackInstance si : game.getStack()) {
@@ -725,7 +725,7 @@ public class ComputerUtil {
         }
 
         final Player controller = card.getController();
-        final GameState game = controller.getGame();
+        final Game game = controller.getGame();
         final List<Card> l = controller.getCardsIn(ZoneType.Battlefield);
         for (final Card c : l) {
             for (final SpellAbility sa : c.getSpellAbilities()) {
@@ -788,7 +788,7 @@ public class ComputerUtil {
         int prevented = 0;
 
         final Player controller = card.getController();
-        final GameState game = controller.getGame();
+        final Game game = controller.getGame();
 
         final List<Card> l = controller.getCardsIn(ZoneType.Battlefield);
         for (final Card c : l) {
@@ -955,7 +955,7 @@ public class ComputerUtil {
             return true;
         }
         
-        final GameState game = ai.getGame();
+        final Game game = ai.getGame();
         final List<Card> landsInPlay = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.LANDS);
         final List<Card> landsInHand = CardLists.filter(ai.getCardsIn(ZoneType.Hand), CardPredicates.Presets.LANDS);
         final List<Card> nonLandsInHand = CardLists.getNotType(ai.getCardsIn(ZoneType.Hand), "Land");
@@ -999,7 +999,7 @@ public class ComputerUtil {
      * @return a boolean (returns true if it's better to wait until blockers are declared).
      */
     public static boolean waitForBlocking(final SpellAbility sa) {
-        final GameState game = sa.getActivatingPlayer().getGame();
+        final Game game = sa.getActivatingPlayer().getGame();
         final PhaseHandler ph = game.getPhaseHandler();
 
         return (sa.getSourceCard().isCreature()
@@ -1155,7 +1155,7 @@ public class ComputerUtil {
      * @since 1.0.15
      */
     public static ArrayList<Object> predictThreatenedObjects(final Player aiPlayer, final SpellAbility sa) {
-        final GameState game = aiPlayer.getGame();
+        final Game game = aiPlayer.getGame();
         final ArrayList<Object> objects = new ArrayList<Object>();
         if (game.getStack().isEmpty()) {
             return objects;
@@ -1479,7 +1479,7 @@ public class ComputerUtil {
     }
 
     public static String chooseSomeType(Player ai, String kindOfType, String logic, List<String> invalidTypes) {
-        final GameState game = ai.getGame();
+        final Game game = ai.getGame();
         String chosen = "";
         if( kindOfType.equals("Card")) {
             // TODO

@@ -27,7 +27,7 @@ import forge.CardLists;
 import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.control.input.InputSelectTargets;
-import forge.game.GameState;
+import forge.game.Game;
 import forge.game.player.Player;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
@@ -137,7 +137,7 @@ public class TargetSelection {
      */
     private final List<Card> getValidCardsToTarget() {
         final Target tgt = this.getTgt();
-        final GameState game = ability.getActivatingPlayer().getGame();
+        final Game game = ability.getActivatingPlayer().getGame();
         final List<ZoneType> zone = tgt.getZone();
 
         final boolean canTgtStack = zone.contains(ZoneType.Stack);
@@ -269,7 +269,7 @@ public class TargetSelection {
      */
     private final boolean chooseCardFromList(final List<Card> choices, final boolean targeted, final boolean mandatory) {
         // Send in a list of valid cards, and popup a choice box to target
-        final GameState game = ability.getActivatingPlayer().getGame(); 
+        final Game game = ability.getActivatingPlayer().getGame(); 
 
         final List<Card> crdsBattle = new ArrayList<Card>();
         final List<Card> crdsExile = new ArrayList<Card>();
@@ -340,7 +340,7 @@ public class TargetSelection {
         // Find what's targetable, then allow human to choose
         final List<Object> selectOptions = new ArrayList<Object>();
 
-        final GameState game = ability.getActivatingPlayer().getGame();
+        final Game game = ability.getActivatingPlayer().getGame();
         for (SpellAbilityStackInstance si : game.getStack()) {
             SpellAbility abilityOnStack = si.getSpellAbility();
             if (ability.equals(abilityOnStack)) {

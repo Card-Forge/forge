@@ -18,7 +18,7 @@ import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerHandler;
-import forge.game.GameState;
+import forge.game.Game;
 import forge.gui.GuiDialog;
 import forge.properties.ForgePreferences.FPref;
 
@@ -200,7 +200,7 @@ public class CloneEffect extends SpellAbilityEffect {
                 }
             };
 
-            final GameState game = sa.getActivatingPlayer().getGame();
+            final Game game = sa.getActivatingPlayer().getGame();
             String duration = sa.getParam("Duration");
             if (duration.equals("UntilEndOfTurn")) {
                 game.getEndOfTurn().addUntil(unclone);

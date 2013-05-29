@@ -17,7 +17,7 @@ import forge.card.spellability.Target;
 import forge.card.staticability.StaticAbility;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerHandler;
-import forge.game.GameState;
+import forge.game.Game;
 
 public class AnimateEffect extends AnimateEffectBase {
 
@@ -53,7 +53,7 @@ public class AnimateEffect extends AnimateEffectBase {
             toughness = AbilityUtils.calculateAmount(host, sa.getParam("Toughness"), sa);
         }
 
-        final GameState game = sa.getActivatingPlayer().getGame();
+        final Game game = sa.getActivatingPlayer().getGame();
         // Every Animate event needs a unique time stamp
         final long timestamp = game.getNextTimestamp();
 

@@ -20,7 +20,7 @@ import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.deck.Deck;
-import forge.game.GameState;
+import forge.game.Game;
 import forge.game.GameType;
 import forge.game.ai.AiController;
 import forge.game.ai.ComputerUtil;
@@ -38,7 +38,7 @@ import forge.util.Aggregates;
 public class PlayerControllerAi extends PlayerController {
     private final AiController brains;
 
-    public PlayerControllerAi(GameState game, Player p, LobbyPlayer lp) {
+    public PlayerControllerAi(Game game, Player p, LobbyPlayer lp) {
         super(game, p, lp);
 
         brains = new AiController(p, game); 

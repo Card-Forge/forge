@@ -7,7 +7,7 @@ import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
-import forge.game.GameState;
+import forge.game.Game;
 import forge.game.ai.ComputerUtilCost;
 import forge.game.ai.ComputerUtilMana;
 import forge.game.player.Player;
@@ -20,7 +20,7 @@ public class CounterAi extends SpellAbilityAi {
         boolean toReturn = true;
         final Cost abCost = sa.getPayCosts();
         final Card source = sa.getSourceCard();
-        final GameState game = ai.getGame();
+        final Game game = ai.getGame();
         if (game.getStack().isEmpty()) {
             return false;
         }
@@ -110,7 +110,7 @@ public class CounterAi extends SpellAbilityAi {
 
         final Target tgt = sa.getTarget();
         if (tgt != null) {
-            final GameState game = ai.getGame();
+            final Game game = ai.getGame();
             if (game.getStack().isEmpty()) {
                 return false;
             }

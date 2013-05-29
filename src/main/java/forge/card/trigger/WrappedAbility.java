@@ -15,7 +15,7 @@ import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityRestriction;
 import forge.card.spellability.Target;
 import forge.card.spellability.TargetChoices;
-import forge.game.GameState;
+import forge.game.Game;
 import forge.game.ai.ComputerUtil;
 import forge.game.player.HumanPlay;
 import forge.game.player.Player;
@@ -348,7 +348,7 @@ public class WrappedAbility extends Ability implements ISpellAbility {
     // //////////////////////////////////////
     @Override
     public void resolve() {
-        final GameState game = sa.getActivatingPlayer().getGame();
+        final Game game = sa.getActivatingPlayer().getGame();
 
         if (!(regtrig instanceof TriggerAlways)) {
             // State triggers don't have "Intervening If"

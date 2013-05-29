@@ -13,7 +13,7 @@ import forge.card.spellability.SpellAbility;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerHandler;
 import forge.card.trigger.TriggerType;
-import forge.game.GameState;
+import forge.game.Game;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
@@ -37,7 +37,7 @@ public class EffectEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
         final Card hostCard = sa.getSourceCard();
-        final GameState game = hostCard.getGame();
+        final Game game = hostCard.getGame();
 
         String[] effectAbilities = null;
         String[] effectTriggers = null;

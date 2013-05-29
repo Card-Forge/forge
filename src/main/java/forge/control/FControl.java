@@ -38,7 +38,7 @@ import forge.Constant.Preferences;
 import forge.Singletons;
 import forge.control.KeyboardShortcuts.Shortcut;
 import forge.control.input.InputQueue;
-import forge.game.GameState;
+import forge.game.Game;
 import forge.game.ai.AiProfileUtil;
 import forge.game.player.LobbyPlayer;
 import forge.game.player.Player;
@@ -347,8 +347,8 @@ public enum FControl {
         return server;
     }
 
-    private GameState game;
-    public GameState getObservedGame() {
+    private Game game;
+    public Game getObservedGame() {
         return game;
     }
 
@@ -359,7 +359,7 @@ public enum FControl {
 
     
     private final FControlGameEventHandler fcVisitor = new FControlGameEventHandler(this);
-    public void attachToGame(GameState game0) {
+    public void attachToGame(Game game0) {
         // TODO: Detach from other game we might be looking at
         
         inputQueue = new InputQueue();

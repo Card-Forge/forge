@@ -2,7 +2,7 @@ package forge.card.ability.effects;
 
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
-import forge.game.GameState;
+import forge.game.Game;
 import forge.game.PlanarDice;
 import forge.game.player.Player;
 import forge.gui.GuiDialog;
@@ -20,7 +20,7 @@ public class RollPlanarDiceEffect extends SpellAbilityEffect {
     public void resolve(SpellAbility sa) {
         boolean countedTowardsCost = !sa.hasParam("NotCountedTowardsCost");
         final Player activator = sa.getActivatingPlayer();
-        final GameState game = activator.getGame();
+        final Game game = activator.getGame();
 
         if(countedTowardsCost) {
             game.getPhaseHandler().incPlanarDiceRolledthisTurn();

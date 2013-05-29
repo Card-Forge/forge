@@ -1,6 +1,6 @@
 package forge.game.player;
 
-import forge.game.GameState;
+import forge.game.Game;
 import forge.gui.FNetOverlay;
 
 public class LobbyPlayerHuman extends LobbyPlayer {
@@ -19,7 +19,7 @@ public class LobbyPlayerHuman extends LobbyPlayer {
     }
     
     @Override
-    public Player getPlayer(GameState game) {
+    public Player getPlayer(Game game) {
         Player player = new Player(getName(), game);
         player.setFirstController(new PlayerControllerHuman(game, player, this));
         return player;

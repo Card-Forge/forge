@@ -10,7 +10,7 @@ import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
-import forge.game.GameState;
+import forge.game.Game;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
@@ -18,7 +18,7 @@ public class PumpAllEffect extends SpellAbilityEffect {
     private void applyPumpAll(final SpellAbility sa, final List<Card> list, final int a, 
             final int d, final List<String> keywords, final ArrayList<ZoneType> affectedZones) {
         
-        final GameState game = sa.getActivatingPlayer().getGame();
+        final Game game = sa.getActivatingPlayer().getGame();
         final long timestamp = game.getNextTimestamp();
         final ArrayList<String> kws = new ArrayList<String>();
         final ArrayList<String> hiddenkws = new ArrayList<String>();
@@ -115,7 +115,7 @@ public class PumpAllEffect extends SpellAbilityEffect {
         List<Card> list;
         final List<Player> tgtPlayers = getTargetPlayersEmptyAsDefault(sa);
         final ArrayList<ZoneType> affectedZones = new ArrayList<ZoneType>();
-        final GameState game = sa.getActivatingPlayer().getGame();
+        final Game game = sa.getActivatingPlayer().getGame();
 
         if (sa.hasParam("PumpZone")) {
             for (final String zone : sa.getParam("PumpZone").split(",")) {

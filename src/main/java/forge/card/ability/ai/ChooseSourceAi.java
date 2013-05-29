@@ -13,7 +13,7 @@ import forge.card.ability.SpellAbilityAi;
 import forge.card.cost.Cost;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
-import forge.game.GameState;
+import forge.game.Game;
 import forge.game.ai.ComputerUtilCombat;
 import forge.game.ai.ComputerUtilCost;
 import forge.game.phase.PhaseType;
@@ -65,7 +65,7 @@ public class ChooseSourceAi extends SpellAbilityAi {
             }
         }
         if (sa.hasParam("AILogic")) {
-            final GameState game = ai.getGame();
+            final Game game = ai.getGame();
             if (sa.getParam("AILogic").equals("NeedsPrevention")) {
                 if (!game.getStack().isEmpty()) {
                     final SpellAbility topStack = game.getStack().peekAbility();

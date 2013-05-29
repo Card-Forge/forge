@@ -29,8 +29,8 @@ import java.util.Observer;
 import javax.swing.JButton;
 
 import forge.Command;
-import forge.game.GameState;
-import forge.game.MatchState;
+import forge.game.Game;
+import forge.game.Match;
 import forge.gui.InputProxy;
 import forge.gui.framework.ICDoc;
 import forge.gui.framework.SDisplayUtil;
@@ -71,7 +71,7 @@ public enum CMessage implements ICDoc, Observer {
             }
         }
     };
-    private GameState game;
+    private Game game;
 
     private void _initButton(JButton button, ActionListener onClick) {
         // remove to ensure listeners don't accumulate over many initializations
@@ -119,7 +119,7 @@ public enum CMessage implements ICDoc, Observer {
      */
     @Override
     public void update(Observable o, Object arg) {
-        MatchState match = game.getMatch();
+        Match match = game.getMatch();
         view.getLblGames().setText(
                 match.getGameType().toString() + ": Game #"
                 + (match.getPlayedGames().size() + 1)
@@ -142,7 +142,7 @@ public enum CMessage implements ICDoc, Observer {
      * TODO: Write javadoc for this method.
      * @param match
      */
-    public void setModel(GameState game0) {
+    public void setModel(Game game0) {
         game = game0;
         game.getPhaseHandler().addObserver(this);
         update(null, null);

@@ -23,7 +23,7 @@ import java.util.List;
 import forge.Card;
 import forge.card.ability.AbilityUtils;
 import forge.card.spellability.SpellAbility;
-import forge.game.GameState;
+import forge.game.Game;
 import forge.game.player.Player;
 import forge.gui.GuiChoose;
 
@@ -116,7 +116,7 @@ public class CostGainLife extends CostPart {
      * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final boolean payHuman(final SpellAbility ability, final GameState game) {
+    public final boolean payHuman(final SpellAbility ability, final Game game) {
         final Card source = ability.getSourceCard();
         final String amount = this.getAmount();
         final Player activator = ability.getActivatingPlayer();

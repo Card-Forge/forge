@@ -8,7 +8,7 @@ import forge.Card;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
-import forge.game.GameState;
+import forge.game.Game;
 import forge.game.player.Player;
 
 public class RemoveFromCombatEffect extends SpellAbilityEffect {
@@ -29,7 +29,7 @@ public class RemoveFromCombatEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
         final Player activator = sa.getActivatingPlayer();
-        final GameState game = activator.getGame();
+        final Game game = activator.getGame();
 
 
         final Target tgt = sa.getTarget();

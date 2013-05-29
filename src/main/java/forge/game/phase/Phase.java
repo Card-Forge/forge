@@ -24,7 +24,7 @@ import java.util.List;
 import com.google.common.collect.Lists;
 
 import forge.Command;
-import forge.game.GameState;
+import forge.game.Game;
 import forge.game.player.Player;
 
 
@@ -40,9 +40,9 @@ public abstract class Phase implements java.io.Serializable {
 
     private static final long serialVersionUID = 4665309652476851977L;
 
-    protected final GameState game;
+    protected final Game game;
 
-    public Phase(final GameState game0) {
+    public Phase(final Game game0) {
         game = game0;
     }
 

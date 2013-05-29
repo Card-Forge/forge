@@ -37,7 +37,7 @@ import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
 import forge.control.input.Input;
 import forge.control.input.InputPayMana;
-import forge.game.GameState;
+import forge.game.Game;
 import forge.game.player.HumanPlay;
 import forge.game.player.LobbyPlayer;
 import forge.game.player.Player;
@@ -150,7 +150,7 @@ public class CField implements ICDoc {
                 if (player.getLobbyPlayer() != CField.this.viewer) {
                     return;
                 }
-                final GameState game = player.getGame();
+                final Game game = player.getGame();
                 // TODO: "can play" check needed!
 
                 // should I check for who owns these cards? Are there any abilities to be played from opponent's graveyard? 

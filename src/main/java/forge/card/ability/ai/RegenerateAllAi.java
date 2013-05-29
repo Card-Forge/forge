@@ -9,7 +9,7 @@ import forge.CardPredicates;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.cost.Cost;
 import forge.card.spellability.SpellAbility;
-import forge.game.GameState;
+import forge.game.Game;
 import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilCombat;
 import forge.game.ai.ComputerUtilCost;
@@ -24,7 +24,7 @@ public class RegenerateAllAi extends SpellAbilityAi {
         final Card hostCard = sa.getSourceCard();
         boolean chance = false;
         final Cost abCost = sa.getPayCosts();
-        final GameState game = ai.getGame();
+        final Game game = ai.getGame();
         if (abCost != null) {
             // AI currently disabled for these costs
             if (!ComputerUtilCost.checkSacrificeCost(ai, abCost, hostCard)) {

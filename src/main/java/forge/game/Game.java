@@ -56,7 +56,7 @@ import forge.game.zone.ZoneType;
     /**
  * Represents the state of a <i>single game</i>, a new instance is created for each game.
  */
-public class GameState {
+public class Game {
     private final GameType type;
     private final List<Player> roIngamePlayers;
     private final List<Player> allPlayers;
@@ -83,7 +83,7 @@ public class GameState {
 
     private long timestamp = 0;
     public final GameAction action;
-    private final MatchState match;
+    private final Match match;
     private GameAge age = GameAge.BeforeMulligan;
 
     /**
@@ -92,7 +92,7 @@ public class GameState {
      * @param match0 
      * @param input 
      */
-    public GameState(List<RegisteredPlayer> players0, GameType t, MatchState match0) { /* no more zones to map here */
+    public Game(List<RegisteredPlayer> players0, GameType t, Match match0) { /* no more zones to map here */
         type = t;
         match = match0;
         List<Player> players = new ArrayList<Player>();
@@ -479,7 +479,7 @@ public class GameState {
         return action;
     }
 
-    public final MatchState getMatch() {
+    public final Match getMatch() {
         return match;
     }
 

@@ -11,7 +11,7 @@ import forge.card.ability.SpellAbilityAi;
 import forge.card.cost.Cost;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
-import forge.game.GameState;
+import forge.game.Game;
 import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilCard;
 import forge.game.ai.ComputerUtilCombat;
@@ -26,7 +26,7 @@ public class DamagePreventAi extends SpellAbilityAi {
     @Override
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
         final Card hostCard = sa.getSourceCard();
-        final GameState game = ai.getGame();
+        final Game game = ai.getGame();
         boolean chance = false;
 
         final Cost cost = sa.getPayCosts();
@@ -180,7 +180,7 @@ public class DamagePreventAi extends SpellAbilityAi {
         final Target tgt = sa.getTarget();
         tgt.resetTargets();
         // filter AIs battlefield by what I can target
-        final GameState game = ai.getGame();
+        final Game game = ai.getGame();
         List<Card> targetables = game.getCardsIn(ZoneType.Battlefield);
         targetables = CardLists.getValidCards(targetables, tgt.getValidTgts(), ai, sa.getSourceCard());
         final List<Card> compTargetables = CardLists.filterControlledBy(targetables, ai);

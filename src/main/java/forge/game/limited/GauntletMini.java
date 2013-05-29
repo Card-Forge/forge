@@ -27,7 +27,7 @@ import forge.Singletons;
 import forge.control.Lobby;
 import forge.deck.Deck;
 import forge.game.GameType;
-import forge.game.MatchState;
+import forge.game.Match;
 import forge.game.RegisteredPlayer;
 import forge.gui.SOverlayUtils;
 
@@ -165,7 +165,7 @@ public class GauntletMini {
         Lobby lobby = Singletons.getControl().getLobby();
         starter.add(RegisteredPlayer.fromDeck(humanDeck).setPlayer(lobby.getGuiPlayer()));
         starter.add(aiOpponents.get(currentRound - 1).setPlayer(lobby.getAiPlayer()));
-        final MatchState mc = new MatchState(gauntletType, starter);
+        final Match mc = new Match(gauntletType, starter);
         FThreads.invokeInEdtLater(new Runnable(){
             @Override
             public void run() {

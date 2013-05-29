@@ -45,7 +45,7 @@ import forge.card.spellability.AbilityManaPart;
 import forge.card.spellability.SpellAbility;
 import forge.card.trigger.TriggerType;
 import forge.control.input.InputSelectCardsFromList;
-import forge.game.GameState;
+import forge.game.Game;
 import forge.game.GameType;
 import forge.game.PlanarDice;
 import forge.game.phase.PhaseType;
@@ -140,7 +140,7 @@ public final class GuiDisplayUtil {
     private static void setupGameState(final int humanLife, final int computerLife, final Map<ZoneType, String> humanCardTexts,
             final Map<ZoneType, String> aiCardTexts, final String tChangePlayer, final String tChangePhase) {
         
-        final GameState game = getGame();
+        final Game game = getGame();
         game.getAction().invoke(new Runnable() {
             @Override
             public void run() {
@@ -293,7 +293,7 @@ public final class GuiDisplayUtil {
      * @since 1.0.15
      */
     public static void devModeTapPerm() {
-        final GameState game = getGame();
+        final Game game = getGame();
         game.getAction().invoke(new Runnable() {
             @Override
             public void run() {
@@ -317,7 +317,7 @@ public final class GuiDisplayUtil {
      * @since 1.0.15
      */
     public static void devModeUntapPerm() {
-        final GameState game = getGame();
+        final Game game = getGame();
         
         
 
@@ -410,7 +410,7 @@ public final class GuiDisplayUtil {
 
         final Card forgeCard = c.toForgeCard(p);
 
-        final GameState game = getGame();
+        final Game game = getGame();
         if (forgeCard.getType().contains("Land")) {
             forgeCard.setOwner(p);
             game.getAction().moveToPlay(forgeCard);
@@ -497,7 +497,7 @@ public final class GuiDisplayUtil {
     }
 
     public static void devModePlaneswalkTo() {
-        final GameState game = getGame();
+        final Game game = getGame();
         if (game.getMatch().getGameType() != GameType.Planechase) { return; }
         final Player p = game.getPhaseHandler().getPlayerTurn();
 
@@ -526,7 +526,7 @@ public final class GuiDisplayUtil {
         });
     }
 
-    private static GameState getGame() {
+    private static Game getGame() {
         return Singletons.getControl().getObservedGame();
     }
 

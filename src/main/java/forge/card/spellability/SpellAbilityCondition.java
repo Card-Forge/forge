@@ -28,7 +28,7 @@ import forge.CardLists;
 import forge.card.MagicColor;
 import forge.card.ability.AbilityUtils;
 import forge.card.cardfactory.CardFactoryUtil;
-import forge.game.GameState;
+import forge.game.Game;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
@@ -176,7 +176,7 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
             System.out.println(sa.getSourceCard().getName()
                     + " Did not have activator set in SpellAbility_Condition.checkConditions()");
         }
-        final GameState game = activator.getGame();
+        final Game game = activator.getGame();
 
         if (this.isHellbent() && !activator.hasHellbent()) return false;
         if (this.isThreshold() && !activator.hasThreshold()) return false;

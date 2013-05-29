@@ -17,7 +17,7 @@
  */
 package forge.game.phase;
 
-import forge.game.GameState;
+import forge.game.Game;
 
 /**
  * <p>
@@ -32,6 +32,6 @@ public class EndOfCombat extends Phase {
     /** Constant <code>serialVersionUID=3035250030566186842L</code>. */
     private static final long serialVersionUID = 3035250030566186842L;
 
-    public EndOfCombat(final GameState game) { super(game); }
+    public EndOfCombat(final Game game) { super(game); }
     
 } // end class EndOfCombat

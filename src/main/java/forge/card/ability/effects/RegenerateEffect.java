@@ -8,7 +8,7 @@ import forge.Command;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
-import forge.game.GameState;
+import forge.game.Game;
 
 public class RegenerateEffect extends SpellAbilityEffect {
 
@@ -45,7 +45,7 @@ public class RegenerateEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
         final Target tgt = sa.getTarget();
-        final GameState game = sa.getActivatingPlayer().getGame();
+        final Game game = sa.getActivatingPlayer().getGame();
 
         for (final Card tgtC : getTargetCards(sa)) {
             final Command untilEOT = new Command() {

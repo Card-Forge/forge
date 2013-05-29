@@ -38,7 +38,7 @@ import forge.card.spellability.AbilityActivated;
 import forge.card.spellability.SpellAbility;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerHandler;
-import forge.game.GameState;
+import forge.game.Game;
 import forge.game.GlobalRuleChange;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
@@ -63,7 +63,7 @@ public class StaticAbilityContinuous {
         final StaticEffect se = new StaticEffect();
         final List<Card> affectedCards = StaticAbilityContinuous.getAffectedCards(stAb);
         final ArrayList<Player> affectedPlayers = StaticAbilityContinuous.getAffectedPlayers(stAb);
-        final GameState game = hostCard.getGame();
+        final Game game = hostCard.getGame();
 
         se.setAffectedCards(affectedCards);
         se.setAffectedPlayers(affectedPlayers);
@@ -484,7 +484,7 @@ public class StaticAbilityContinuous {
     private static List<Card> getAffectedCards(final StaticAbility stAb) {
         final HashMap<String, String> params = stAb.getMapParams();
         final Card hostCard = stAb.getHostCard();
-        final GameState game = hostCard.getGame();
+        final Game game = hostCard.getGame();
         final Player controller = hostCard.getController();
 
         if (params.containsKey("CharacteristicDefining")) {

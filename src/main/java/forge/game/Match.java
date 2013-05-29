@@ -21,7 +21,7 @@ import forge.util.Aggregates;
  * 
  */
 
-public class MatchState {
+public class Match {
 
     private final List<RegisteredPlayer> players;
     private final GameType gameType;
@@ -31,7 +31,7 @@ public class MatchState {
     
     private boolean useAnte = Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_ANTE);
 
-    private GameState currentGame = null;
+    private Game currentGame = null;
 
     private final List<GameOutcome> gamesPlayed = new ArrayList<GameOutcome>();
     private final List<GameOutcome> gamesPlayedRo;
@@ -39,13 +39,13 @@ public class MatchState {
     /**
      * This should become constructor once.
      */
-    public MatchState(GameType type, List<RegisteredPlayer> players0) {
+    public Match(GameType type, List<RegisteredPlayer> players0) {
         gamesPlayedRo = Collections.unmodifiableList(gamesPlayed);
         players = Collections.unmodifiableList(Lists.newArrayList(players0));
         gameType = type;
     }
     
-    public MatchState(GameType type, List<RegisteredPlayer> players0, Boolean overrideAnte) {
+    public Match(GameType type, List<RegisteredPlayer> players0, Boolean overrideAnte) {
         this(type, players0);
         if( overrideAnte != null )
             this.useAnte = overrideAnte.booleanValue();
@@ -83,7 +83,7 @@ public class MatchState {
      */
     public void startRound() {
 
-        currentGame = new GameState(players, gameType, this);
+        currentGame = new Game(players, gameType, this);
         
         Singletons.getControl().attachToGame(currentGame);
 
@@ -136,7 +136,7 @@ public class MatchState {
         return gamesPlayedRo;
     }
 
-    public GameState getCurrentGame() {
+    public Game getCurrentGame() {
         return currentGame;
     }
 
@@ -206,7 +206,7 @@ public class MatchState {
     }
     
 
-    private Player determineFirstTurnPlayer(final GameOutcome lastGameOutcome, final GameState game) {
+    private Player determineFirstTurnPlayer(final GameOutcome lastGameOutcome, final Game game) {
         // Only cut/coin toss if it's the first game of the match
         Player goesFirst = null;
 

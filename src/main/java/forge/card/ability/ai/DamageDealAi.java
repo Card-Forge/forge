@@ -14,7 +14,7 @@ import forge.card.cost.Cost;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
-import forge.game.GameState;
+import forge.game.Game;
 import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilCard;
 import forge.game.ai.ComputerUtilCombat;
@@ -232,7 +232,7 @@ public class DamageDealAi extends DamageAiBase {
             final boolean isTrigger, final boolean mandatory) {
         final Card source = saMe.getSourceCard();
         final boolean noPrevention = saMe.hasParam("NoPrevention");
-        final GameState game = source.getGame();
+        final Game game = source.getGame();
         final PhaseHandler phase = game.getPhaseHandler();
         final boolean divided = saMe.hasParam("DividedAsYouChoose");
 

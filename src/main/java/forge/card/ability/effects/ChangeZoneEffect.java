@@ -21,7 +21,7 @@ import forge.card.spellability.SpellAbilityStackInstance;
 import forge.card.spellability.Target;
 import forge.card.trigger.TriggerType;
 import forge.control.input.InputSelectCardsFromList;
-import forge.game.GameState;
+import forge.game.Game;
 import forge.game.ai.ComputerUtilCard;
 import forge.game.player.Player;
 import forge.game.zone.Zone;
@@ -375,7 +375,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         final Target tgt = sa.getTarget();
         final Player player = sa.getActivatingPlayer();
         final Card hostCard = sa.getSourceCard();
-        final GameState game = player.getGame();
+        final Game game = player.getGame();
 
         final ZoneType destination = ZoneType.smartValueOf(sa.getParam("Destination"));
         final List<ZoneType> origin = ZoneType.listValueOf(sa.getParam("Origin"));
@@ -619,7 +619,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         final List<Card> movedCards = new ArrayList<Card>();
         final boolean defined = sa.hasParam("Defined");
         final boolean optional = sa.hasParam("Optional");
-        final GameState game = player.getGame();
+        final Game game = player.getGame();
 
         final Target tgt = sa.getTarget();
         if (tgt != null) {
@@ -923,7 +923,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
      *            object.
      * @param game 
      */
-    private static void removeFromStack(final SpellAbility tgtSA, final SpellAbility srcSA, final SpellAbilityStackInstance si, final GameState game) {
+    private static void removeFromStack(final SpellAbility tgtSA, final SpellAbility srcSA, final SpellAbilityStackInstance si, final Game game) {
         game.getStack().remove(si);
 
         if (srcSA.hasParam("Destination")) {

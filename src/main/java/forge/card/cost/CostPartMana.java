@@ -28,7 +28,7 @@ import forge.card.spellability.SpellAbility;
 import forge.control.input.InputPayMana;
 import forge.control.input.InputPayManaOfCostPayment;
 import forge.control.input.InputPayManaX;
-import forge.game.GameState;
+import forge.game.Game;
 import forge.game.ai.ComputerUtilMana;
 import forge.game.player.Player;
 
@@ -107,7 +107,7 @@ public class CostPartMana extends CostPart {
     }
 
     @Override
-    public final boolean payHuman(final SpellAbility ability, final GameState game) {
+    public final boolean payHuman(final SpellAbility ability, final Game game) {
         final Card source = ability.getSourceCard();
         ManaCostBeingPaid toPay = new ManaCostBeingPaid(getManaToPay(), restriction);
 

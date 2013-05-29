@@ -27,7 +27,7 @@ import forge.card.TriggerReplacementBase;
 import forge.card.spellability.Ability;
 import forge.card.spellability.OptionalCost;
 import forge.card.spellability.SpellAbility;
-import forge.game.GameState;
+import forge.game.Game;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -164,7 +164,7 @@ public abstract class Trigger extends TriggerReplacementBase {
      * 
      * @return a boolean.
      */
-    public final boolean phasesCheck(final GameState game) {
+    public final boolean phasesCheck(final Game game) {
         PhaseHandler phaseHandler = game.getPhaseHandler();
         if (null != validPhases) {
             if (!validPhases.contains(phaseHandler.getPhase())) {
@@ -206,7 +206,7 @@ public abstract class Trigger extends TriggerReplacementBase {
      * 
      * @return a boolean.
      */
-    public final boolean requirementsCheck(GameState game) {
+    public final boolean requirementsCheck(Game game) {
         return this.requirementsCheck(game, this.getRunParams());
     }
 
@@ -220,7 +220,7 @@ public abstract class Trigger extends TriggerReplacementBase {
      *            a {@link java.util.HashMap} object.
      * @return a boolean.
      */
-    public final boolean requirementsCheck(GameState game, final Map<String, Object> runParams) {
+    public final boolean requirementsCheck(Game game, final Map<String, Object> runParams) {
 
         if (this.mapParams.containsKey("APlayerHasMoreLifeThanEachOther")) {
             int highestLife = -50; // Negative base just in case a few Lich's or Platinum Angels are running around

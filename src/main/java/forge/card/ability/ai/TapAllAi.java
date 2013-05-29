@@ -12,7 +12,7 @@ import forge.CardPredicates.Presets;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
-import forge.game.GameState;
+import forge.game.Game;
 import forge.game.phase.CombatUtil;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -32,7 +32,7 @@ public class TapAllAi extends SpellAbilityAi {
 
         final Card source = sa.getSourceCard();
         final Player opp = ai.getOpponent();
-        final GameState game = ai.getGame();
+        final Game game = ai.getGame();
 
         if (game.getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_BEGIN)) {
             return false;
@@ -108,7 +108,7 @@ public class TapAllAi extends SpellAbilityAi {
      * @return a {@link forge.CardList} object.
      */
     private List<Card> getTapAllTargets(final String valid, final Card source) {
-        final GameState game = source.getGame();
+        final Game game = source.getGame();
         List<Card> tmpList = game.getCardsIn(ZoneType.Battlefield);
         tmpList = CardLists.getValidCards(tmpList, valid, source.getController(), source);
         tmpList = CardLists.filter(tmpList, Presets.UNTAPPED);

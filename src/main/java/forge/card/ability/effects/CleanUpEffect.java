@@ -5,7 +5,7 @@ import forge.Card;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
-import forge.game.GameState;
+import forge.game.Game;
 
 public class CleanUpEffect extends SpellAbilityEffect {
 
@@ -15,7 +15,7 @@ public class CleanUpEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
         Card source = sa.getSourceCard();
-        final GameState game = source.getGame();
+        final Game game = source.getGame();
 
         if (sa.hasParam("ClearRemembered")) {
             source.clearRemembered();

@@ -63,7 +63,7 @@ import forge.card.trigger.TriggerHandler;
 import forge.card.trigger.TriggerType;
 import forge.control.input.InputSelectCards;
 import forge.control.input.InputSelectCardsFromList;
-import forge.game.GameState;
+import forge.game.Game;
 import forge.game.ai.ComputerUtilCard;
 import forge.game.ai.ComputerUtilCost;
 import forge.game.phase.PhaseHandler;
@@ -423,7 +423,7 @@ public class CardFactoryUtil {
 
             @Override
             public void resolve() {
-                final GameState game = sourceCard.getGame();
+                final Game game = sourceCard.getGame();
                 final Card c = game.getAction().exile(sourceCard);
 
                 int counters = AbilityUtils.calculateAmount(c, timeCounters, this);
@@ -1001,7 +1001,7 @@ public class CardFactoryUtil {
         final String[] l = s.split("/");
         final String m = extractOperators(s);
         
-        final GameState game = player.getGame();
+        final Game game = player.getGame();
         
         // count valid cards in any specified zone/s
         if (l[0].startsWith("Valid") && !l[0].contains("Valid ")) {
@@ -1130,7 +1130,7 @@ public class CardFactoryUtil {
 
         final Player cc = c.getController();
         final Player ccOpp = cc.getOpponent();
-        final GameState game = c.getGame();
+        final Game game = c.getGame();
         final Player activePlayer = game.getPhaseHandler().getPlayerTurn();
         
 
@@ -1597,7 +1597,7 @@ public class CardFactoryUtil {
 
     private static List<Card> getCardListForXCount(final Card c, final Player cc, final Player ccOpp, final String[] sq) {
         List<Card> someCards = new ArrayList<Card>();
-        final GameState game = c.getGame();
+        final Game game = c.getGame();
         
         // Generic Zone-based counting
         // Count$QualityAndZones.Subquality
@@ -2769,7 +2769,7 @@ public class CardFactoryUtil {
         final Ability haunterDiesSetup = new Ability(card, ManaCost.ZERO) {
             @Override
             public void resolve() {
-                final GameState game = card.getGame();
+                final Game game = card.getGame();
                 this.setActivatingPlayer(card.getController());
                 final List<Card> creats = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), Presets.CREATURES);
                 for (int i = 0; i < creats.size(); i++) {
@@ -3095,7 +3095,7 @@ public class CardFactoryUtil {
 
                 @Override
                 public void run() {
-                    final GameState game = card.getGame();
+                    final Game game = card.getGame();
                     final List<Card> cardsInPlay = CardLists.getType(game.getCardsIn(ZoneType.Battlefield), "World");
                     cardsInPlay.remove(card);
                     for (int i = 0; i < cardsInPlay.size(); i++) {
@@ -3180,7 +3180,7 @@ public class CardFactoryUtil {
 
 
                     private void devour(Card eater, Card dinner) {
-                        final GameState game = eater.getGame();
+                        final Game game = eater.getGame();
                         eater.addDevoured(dinner);
                         game.getAction().sacrifice(dinner, null);
                         final HashMap<String, Object> runParams = new HashMap<String, Object>();

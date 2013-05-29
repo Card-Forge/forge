@@ -7,7 +7,7 @@ import java.util.List;
 import forge.Card;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.cardfactory.CardFactoryUtil;
-import forge.game.GameState;
+import forge.game.Game;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityStackInstance;
 import forge.card.spellability.SpellPermanent;
@@ -17,7 +17,7 @@ import forge.gui.GuiChoose;
 public class CounterEffect extends SpellAbilityEffect {
     @Override
     protected String getStackDescription(SpellAbility sa) {
-        final GameState game = sa.getActivatingPlayer().getGame();
+        final Game game = sa.getActivatingPlayer().getGame();
 
         final StringBuilder sb = new StringBuilder();
         final List<SpellAbility> sas;
@@ -62,7 +62,7 @@ public class CounterEffect extends SpellAbilityEffect {
 
     @Override
     public void resolve(SpellAbility sa) {
-        final GameState game = sa.getActivatingPlayer().getGame();
+        final Game game = sa.getActivatingPlayer().getGame();
         // TODO Before this resolves we should see if any of our targets are
         // still on the stack
         final List<SpellAbility> sas;
@@ -139,7 +139,7 @@ public class CounterEffect extends SpellAbilityEffect {
      * @param sa
      */
     private void removeFromStack(final SpellAbility tgtSA, final SpellAbility srcSA, final SpellAbilityStackInstance si) {
-        final GameState game = tgtSA.getActivatingPlayer().getGame();
+        final Game game = tgtSA.getActivatingPlayer().getGame();
         game.getStack().remove(si);
 
         String destination =  srcSA.hasParam("Destination") ? srcSA.getParam("Destination") : "Graveyard";

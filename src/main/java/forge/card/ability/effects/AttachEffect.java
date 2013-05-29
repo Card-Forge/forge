@@ -13,7 +13,7 @@ import forge.card.ability.SpellAbilityEffect;
 import forge.card.ability.ai.AttachAi;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
-import forge.game.GameState;
+import forge.game.Game;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
@@ -184,7 +184,7 @@ public class AttachEffect extends SpellAbilityEffect {
             return false;
         }
         aura.setActivatingPlayer(source.getController());
-        final GameState game = source.getGame();
+        final Game game = source.getGame();
         final Target tgt = aura.getTarget();
 
         if (source.getController().isHuman()) {

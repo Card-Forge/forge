@@ -14,7 +14,7 @@ import forge.card.replacement.ReplacementEffect;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.deck.Deck;
-import forge.game.GameState;
+import forge.game.Game;
 import forge.game.GameType;
 import forge.game.phase.PhaseType;
 import forge.game.zone.ZoneType;
@@ -27,13 +27,13 @@ import forge.game.zone.ZoneType;
  */
 public abstract class PlayerController {
 
-    protected final GameState game;
+    protected final Game game;
     
     private PhaseType autoPassUntil = null;
     protected final Player player;
     protected final LobbyPlayer lobbyPlayer;
 
-    public PlayerController(GameState game0, Player p, LobbyPlayer lp) {
+    public PlayerController(Game game0, Player p, LobbyPlayer lp) {
         game = game0;
         player = p;
         lobbyPlayer = lp;

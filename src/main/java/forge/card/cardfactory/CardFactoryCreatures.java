@@ -43,7 +43,7 @@ import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerHandler;
 import forge.control.input.InputSelectCards;
 import forge.control.input.InputSelectCardsFromList;
-import forge.game.GameState;
+import forge.game.Game;
 import forge.game.ai.ComputerUtilCard;
 import forge.game.ai.ComputerUtilCombat;
 import forge.game.player.Player;
@@ -284,7 +284,7 @@ public class CardFactoryCreatures {
 
             @Override
             public void run() {
-                final GameState game = card.getGame();
+                final Game game = card.getGame();
                 int intermSumPower = 0;
                 int intermSumToughness = 0;
                 // intermSumPower = intermSumToughness = 0;
@@ -343,7 +343,7 @@ public class CardFactoryCreatures {
         final Ability sacOrSac = new Ability(card, ManaCost.NO_COST) {
             @Override
             public void resolve() {
-                final GameState game = player.getGame();
+                final Game game = player.getGame();
                 if (player.isHuman()) {
                     final InputSelectCards target = new InputSelectCardsForDreadnought(player, 0, Integer.MAX_VALUE); // Input
                     String toDisplay = cardName + " - Select any number of creatures to sacrifice.\n" +

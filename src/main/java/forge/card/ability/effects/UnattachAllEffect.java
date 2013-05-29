@@ -9,7 +9,7 @@ import forge.CardLists;
 import forge.GameEntity;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
-import forge.game.GameState;
+import forge.game.Game;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
@@ -150,7 +150,7 @@ public class UnattachAllEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
         Card source = sa.getSourceCard();
-        final GameState game = sa.getActivatingPlayer().getGame();
+        final Game game = sa.getActivatingPlayer().getGame();
         final List<Object> targets = getTargetObjects(sa);
 
         // If Cast Targets will be checked on the Stack

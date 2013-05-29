@@ -34,7 +34,7 @@ import forge.Singletons;
 import forge.CardPredicates.Presets;
 import forge.Command;
 import forge.deck.Deck;
-import forge.game.GameState;
+import forge.game.Game;
 import forge.game.phase.CombatUtil;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
@@ -65,9 +65,9 @@ public enum CDock implements ICDoc {
     SINGLETON_INSTANCE;
 
     private int arcState;
-    private GameState game;
+    private Game game;
 
-    public void setModel(GameState game0, LobbyPlayer player0) {
+    public void setModel(Game game0, LobbyPlayer player0) {
         game = game0;
     }
 

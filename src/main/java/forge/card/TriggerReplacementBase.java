@@ -12,7 +12,7 @@ import forge.GameEntity;
 import forge.card.ability.AbilityUtils;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
-import forge.game.GameState;
+import forge.game.Game;
 import forge.game.player.Player;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
@@ -156,7 +156,7 @@ public abstract class TriggerReplacementBase {
 
     protected boolean meetsCommonRequirements(Map<String, String> params) {
         final Player hostController = this.getHostCard().getController();
-        final GameState game = hostController.getGame();
+        final Game game = hostController.getGame();
         
         if ("True".equalsIgnoreCase(params.get("Metalcraft")) && !hostController.hasMetalcraft()) return false;
         if ("True".equalsIgnoreCase(params.get("Threshold")) && !hostController.hasThreshold()) return false;

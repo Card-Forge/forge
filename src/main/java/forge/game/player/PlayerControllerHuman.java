@@ -30,7 +30,7 @@ import forge.control.input.InputSynchronized;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
-import forge.game.GameState;
+import forge.game.Game;
 import forge.game.GameType;
 import forge.game.phase.PhaseType;
 import forge.game.zone.ZoneType;
@@ -51,7 +51,7 @@ import forge.util.TextUtil;
 public class PlayerControllerHuman extends PlayerController {
 
 
-    public PlayerControllerHuman(GameState game0, Player p, LobbyPlayer lp) {
+    public PlayerControllerHuman(Game game0, Player p, LobbyPlayer lp) {
         super(game0, p, lp);
     }
 

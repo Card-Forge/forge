@@ -32,7 +32,7 @@ import forge.CounterType;
 import forge.GameEntity;
 import forge.control.input.InputSelectCards;
 import forge.control.input.InputSelectCardsFromList;
-import forge.game.GameState;
+import forge.game.Game;
 import forge.game.ai.ComputerUtilCard;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
@@ -51,7 +51,7 @@ import forge.gui.GuiDialog;
 public class Untap extends Phase {
     private static final long serialVersionUID = 4515266331266259123L;
 
-    public Untap(final GameState game0) {
+    public Untap(final Game game0) {
         super(game0);
     }
     

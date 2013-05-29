@@ -9,7 +9,7 @@ import forge.CardLists;
 import forge.Command;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
-import forge.game.GameState;
+import forge.game.Game;
 import forge.game.zone.ZoneType;
 
 public class DebuffAllEffect extends SpellAbilityEffect {
@@ -40,7 +40,7 @@ public class DebuffAllEffect extends SpellAbilityEffect {
     public void resolve(SpellAbility sa) {
         final Card hostCard = sa.getSourceCard();
         final List<String> kws = sa.hasParam("Keywords") ? Arrays.asList(sa.getParam("Keywords").split(" & ")) : new ArrayList<String>();
-        final GameState game = sa.getActivatingPlayer().getGame();
+        final Game game = sa.getActivatingPlayer().getGame();
 
         String valid = "";
 

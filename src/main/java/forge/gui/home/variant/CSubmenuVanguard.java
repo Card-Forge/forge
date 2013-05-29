@@ -17,7 +17,7 @@ import forge.control.Lobby;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.game.GameType;
-import forge.game.MatchState;
+import forge.game.Match;
 import forge.game.RegisteredPlayer;
 import forge.game.player.LobbyPlayer;
 import forge.gui.GuiDialog;
@@ -177,7 +177,7 @@ public enum CSubmenuVanguard implements ICDoc {
             LobbyPlayer player = i == 0 ? lobby.getGuiPlayer() : lobby.getAiPlayer();
             helper.add(RegisteredPlayer.forVanguard(playerDecks.get(i), playerAvatars.get(i)).setPlayer(player));
         }
-        final MatchState mc = new MatchState(GameType.Vanguard, helper);
+        final Match mc = new Match(GameType.Vanguard, helper);
         FThreads.invokeInEdtLater(new Runnable(){
             @Override
             public void run() {

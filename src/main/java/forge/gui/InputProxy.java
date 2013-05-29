@@ -25,7 +25,7 @@ import forge.Card;
 import forge.FThreads;
 import forge.Singletons;
 import forge.control.input.Input;
-import forge.game.GameState;
+import forge.game.Game;
 import forge.game.player.Player;
 
 /**
@@ -40,11 +40,11 @@ public class InputProxy implements Observer {
 
     /** The input. */
     private AtomicReference<Input> input = new AtomicReference<Input>();
-    private GameState game = null;
+    private Game game = null;
 
 //    private static final boolean DEBUG_INPUT = true; // false;
     
-    public void setGame(GameState game0) {
+    public void setGame(Game game0) {
         game = game0;
         Singletons.getControl().getInputQueue().addObserver(this);
     }
