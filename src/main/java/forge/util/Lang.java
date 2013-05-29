@@ -49,9 +49,13 @@ public class Lang {
     }
 
     public static <T> String nounWithAmount(int cnt, String noun) {
-        //  Simpliest check
-        String suffix = cnt <= 1 ? "" : ( noun.endsWith("s") || noun.endsWith("x") ? "es" : "s"); 
-        return String.valueOf(cnt) + " " + noun + suffix;
+        String suffix = cnt <= 1 ? "" : ( noun.endsWith("s") || noun.endsWith("x") ? "es" : "s");
+        final String strCount;
+        if( cnt == 1 )
+            strCount = startsWithVowel(noun) ? "an " : "a ";
+        else 
+            strCount = String.valueOf(cnt) + " "; 
+        return strCount + noun + suffix;
     }    
     
     /**
@@ -61,5 +65,18 @@ public class Lang {
      */
     public static String getPossesive(String name) {
         return name.endsWith("s") ? name + "'" : name + "'s";
+    }
+    
+    public static boolean startsWithVowel(String word) {
+        return isVowel(word.trim().charAt(0));
+    }
+    
+    private static final char[] vowels = { 'a', 'i', 'e', 'o', 'u' }; 
+    public static boolean isVowel(char letter) {
+        char l = Character.toLowerCase(letter);
+        for(char c : vowels)
+            if ( c == l ) return true;
+        return false;
+        
     }
 }
