@@ -37,8 +37,6 @@ import forge.game.ai.ComputerUtilCost;
 import forge.game.player.HumanPlay;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
-import forge.gui.match.CMatchUI;
-import forge.gui.match.nonsingleton.VField.PhaseLabel;
 
 /**
  * <p>

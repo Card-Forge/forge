@@ -39,6 +39,7 @@ import forge.util.MyObservable;
 public class GameLog extends MyObservable {
     private List<GameLogEntry> log = new ArrayList<GameLogEntry>();
 
+    private GameLogFormatter formatter = new GameLogFormatter(this);
     /** Logging level:
      * 0 - Turn
      * 2 - Stack items
@@ -111,7 +112,7 @@ public class GameLog extends MyObservable {
     
     @Subscribe
     public void receiveGameEvent(GameEvent ev) { 
-        GameLogEntry record = GameLogFormatter.logEvent(ev, this);
+        GameLogEntry record = formatter.recieve(ev);
         if( null != record ) {
             add(record);
         }

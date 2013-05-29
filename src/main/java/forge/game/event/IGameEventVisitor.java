@@ -4,65 +4,65 @@ package forge.game.event;
  * TODO: Write javadoc for this type.
  *
  */
-public interface IGameEventVisitor<T,U> {
-    U visit(GameEventBlockerAssigned event, T params);
-    U visit(GameEventCardDamaged event, T params);
-    U visit(GameEventCardDestroyed event, T params);
-    U visit(GameEventCardDiscarded event, T params);
-    U visit(GameEventCardEquipped event, T params);
-    U visit(GameEventCardRegenerated event, T params);
-    U visit(GameEventCardSacrificed event, T params);
-    U visit(GameEventAnteCardsSelected event, T params);
-    U visit(GameEventCardTapped event, T params);
-    U visit(GameEventCounterAdded event, T params);
-    U visit(GameEventCounterRemoved event, T params);
-    U visit(GameEventDrawCard event, T params);
-    U visit(GameEventDuelFinished event, T params);
-    U visit(GameEventDuelOutcome event, T params);
-    U visit(GameEventEndOfTurn event, T params);
-    U visit(GameEventFlipCoin event, T params);
-    U visit(GameEventGameRestarted event, T params);
-    U visit(GameEventLandPlayed event, T params);
-    U visit(GameEventLifeLoss event, T params);
-    U visit(GameEventManaBurn event, T params);
-    U visit(GameEventMulligan event, T params);
-    U visit(GameEventPlayerControl event, T params);
-    U visit(GameEventPoisonCounter event, T params);
-    U visit(GameEventShuffle event, T params);
-    U visit(GameEventSpellResolved event, T params);
-    U visit(GameEventTokenCreated event, T params);
-    U visit(GameEventTurnPhase event, T params);
+public interface IGameEventVisitor<T> {
+    T visit(GameEventBlockerAssigned event);
+    T visit(GameEventCardDamaged event);
+    T visit(GameEventCardDestroyed event);
+    T visit(GameEventCardDiscarded event);
+    T visit(GameEventCardEquipped event);
+    T visit(GameEventCardRegenerated event);
+    T visit(GameEventCardSacrificed event);
+    T visit(GameEventAnteCardsSelected event);
+    T visit(GameEventCardTapped event);
+    T visit(GameEventCounterAdded event);
+    T visit(GameEventCounterRemoved event);
+    T visit(GameEventDrawCard event);
+    T visit(GameEventDuelFinished event);
+    T visit(GameEventDuelOutcome event);
+    T visit(GameEventEndOfTurn event);
+    T visit(GameEventFlipCoin event);
+    T visit(GameEventGameRestarted event);
+    T visit(GameEventLandPlayed event);
+    T visit(GameEventLifeLoss event);
+    T visit(GameEventManaBurn event);
+    T visit(GameEventMulligan event);
+    T visit(GameEventPlayerControl event);
+    T visit(GameEventPoisonCounter event);
+    T visit(GameEventShuffle event);
+    T visit(GameEventSpellResolved event);
+    T visit(GameEventTokenCreated event);
+    T visit(GameEventTurnPhase event);
     
     
     // This is base class for all visitors.
-    public static class Base<T,U> implements IGameEventVisitor<T,U>{
-        public U visit(GameEventBlockerAssigned event, T params) { return null; }
-        public U visit(GameEventCardDamaged event, T params) { return null; }
-        public U visit(GameEventCardDestroyed event, T params) { return null; }
-        public U visit(GameEventCardDiscarded event, T params) { return null; }
-        public U visit(GameEventCardEquipped event, T params) { return null; }
-        public U visit(GameEventCardRegenerated event, T params) { return null; }
-        public U visit(GameEventCardSacrificed event, T params) { return null; }
-        public U visit(GameEventAnteCardsSelected event, T params) { return null; }
-        public U visit(GameEventCardTapped event, T params) { return null; }
-        public U visit(GameEventCounterAdded event, T params) { return null; }
-        public U visit(GameEventCounterRemoved event, T params) { return null; }
-        public U visit(GameEventDrawCard event, T params) { return null; }
-        public U visit(GameEventDuelFinished event, T params) { return null; }
-        public U visit(GameEventDuelOutcome event, T params) { return null; }
-        public U visit(GameEventEndOfTurn event, T params) { return null; }
-        public U visit(GameEventFlipCoin event, T params) { return null; }
-        public U visit(GameEventGameRestarted event, T params) { return null; }
-        public U visit(GameEventLandPlayed event, T params) { return null; }
-        public U visit(GameEventLifeLoss event, T params) { return null; }
-        public U visit(GameEventManaBurn event, T params) { return null; }
-        public U visit(GameEventMulligan event, T params) { return null; }
-        public U visit(GameEventPlayerControl event, T params) { return null; }
-        public U visit(GameEventPoisonCounter event, T params) { return null; }
-        public U visit(GameEventShuffle event, T params) { return null; }
-        public U visit(GameEventSpellResolved event, T params) { return null; }
-        public U visit(GameEventTokenCreated event, T params) { return null; }
-        public U visit(GameEventTurnPhase event, T params) { return null; }
+    public static class Base<T> implements IGameEventVisitor<T>{
+        public T visit(GameEventBlockerAssigned event) { return null; }
+        public T visit(GameEventCardDamaged event) { return null; }
+        public T visit(GameEventCardDestroyed event) { return null; }
+        public T visit(GameEventCardDiscarded event) { return null; }
+        public T visit(GameEventCardEquipped event) { return null; }
+        public T visit(GameEventCardRegenerated event) { return null; }
+        public T visit(GameEventCardSacrificed event) { return null; }
+        public T visit(GameEventAnteCardsSelected event) { return null; }
+        public T visit(GameEventCardTapped event) { return null; }
+        public T visit(GameEventCounterAdded event) { return null; }
+        public T visit(GameEventCounterRemoved event) { return null; }
+        public T visit(GameEventDrawCard event) { return null; }
+        public T visit(GameEventDuelFinished event) { return null; }
+        public T visit(GameEventDuelOutcome event) { return null; }
+        public T visit(GameEventEndOfTurn event) { return null; }
+        public T visit(GameEventFlipCoin event) { return null; }
+        public T visit(GameEventGameRestarted event) { return null; }
+        public T visit(GameEventLandPlayed event) { return null; }
+        public T visit(GameEventLifeLoss event) { return null; }
+        public T visit(GameEventManaBurn event) { return null; }
+        public T visit(GameEventMulligan event) { return null; }
+        public T visit(GameEventPlayerControl event) { return null; }
+        public T visit(GameEventPoisonCounter event) { return null; }
+        public T visit(GameEventShuffle event) { return null; }
+        public T visit(GameEventSpellResolved event) { return null; }
+        public T visit(GameEventTokenCreated event) { return null; }
+        public T visit(GameEventTurnPhase event) { return null; }
     }
 }
 

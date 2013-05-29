@@ -17,11 +17,18 @@ import forge.game.player.PlayerStatistics;
 import forge.util.Lang;
 
 public class GameLogFormatter { 
-    
+    private final GameLog log;
+
+
+    public GameLogFormatter(GameLog gameLog) {
+        log = gameLog;
+    }
+
+
     // Some events produce several log entries. I've let them added into log directly
-    static GameLogEntry logEvent(GameEvent ev, GameLog log) {
+    private GameLogEntry logEvent(GameEvent ev) {
         if(ev instanceof GameEventDuelOutcome) {
-            return GameLogFormatter.fillOutcome(log, ((GameEventDuelOutcome) ev).result, ((GameEventDuelOutcome) ev).history );
+            return fillOutcome(((GameEventDuelOutcome) ev).result, ((GameEventDuelOutcome) ev).history );
             
         } else if ( ev instanceof GameEventPlayerControl ) {
             LobbyPlayer newController = ((GameEventPlayerControl) ev).newController;
@@ -46,7 +53,7 @@ public class GameLogFormatter {
     /**
      * Generates and adds 
      */
-    private static GameLogEntry fillOutcome(GameLog log, GameOutcome result, List<GameOutcome> history) {
+    private GameLogEntry fillOutcome(GameOutcome result, List<GameOutcome> history) {
     
         // add result entries to the game log
         final LobbyPlayer human = Singletons.getControl().getLobby().getGuiPlayer();
@@ -145,7 +152,11 @@ public class GameLogFormatter {
 
         return new GameLogEntry(GameEventType.COMBAT, sb.toString());
     }
-    
-    
+
+
+
+    public GameLogEntry recieve(GameEvent ev) {
+        return logEvent(ev);
+    }
     
 } // end class GameLog

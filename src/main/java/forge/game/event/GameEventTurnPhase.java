@@ -21,7 +21,7 @@ public class GameEventTurnPhase extends GameEvent {
 
     
     @Override
-    public <T, U> U visit(IGameEventVisitor<T, U> visitor, T params) {
-        return visitor.visit(this, params);
+    public <T> T visit(IGameEventVisitor<T> visitor) {
+        return visitor.visit(this);
     }
 }

@@ -25,7 +25,7 @@ import forge.gui.match.ViewWinLose;
 import forge.gui.match.nonsingleton.VHand;
 import forge.gui.match.nonsingleton.VField.PhaseLabel;
 
-public class FControlGameEventHandler extends IGameEventVisitor.Base<Void, Void> {
+public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     public final FControl fc;
     public FControlGameEventHandler(FControl fc ) {
         this.fc = fc;
@@ -34,10 +34,10 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void, Void>
     private final AtomicBoolean phaseUpdPlanned = new AtomicBoolean(false);
     
     @Subscribe
-    public void receiveGameEvent(final GameEvent ev) { ev.visit(this, null); }
+    public void receiveGameEvent(final GameEvent ev) { ev.visit(this); }
     
     @Override
-    public Void visit(final GameEventTurnPhase ev, Void params) {
+    public Void visit(final GameEventTurnPhase ev) {
         if ( phaseUpdPlanned.getAndSet(true) ) return null;
         
         FThreads.invokeInEdtNowOrLater(new Runnable() { @Override public void run() {
@@ -60,7 +60,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void, Void>
     }
     
     @Override
-    public Void visit(GameEventAnteCardsSelected ev, Void params) {
+    public Void visit(GameEventAnteCardsSelected ev) {
         // Require EDT here?
         final String nl = System.getProperty("line.separator");
         final StringBuilder msg = new StringBuilder();
@@ -72,7 +72,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void, Void>
     }
     
     @Override
-    public Void visit(GameEventPlayerControl ev, Void params) {
+    public Void visit(GameEventPlayerControl ev) {
         FThreads.invokeInEdtNowOrLater(new Runnable() { @Override public void run() {
             CMatchUI.SINGLETON_INSTANCE.initHandViews(fc.getLobby().getGuiPlayer());
             VMatchUI.SINGLETON_INSTANCE.populate();
@@ -84,7 +84,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void, Void>
     }
     
     @Override
-    public Void visit(GameEventDuelOutcome ev, Void params) {
+    public Void visit(GameEventDuelOutcome ev) {
         FThreads.invokeInEdtNowOrLater(new Runnable() { @Override public void run() {
             fc.getInputQueue().onGameOver(); // this will unlock any game threads waiting for inputs to complete
         } });
@@ -92,7 +92,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void, Void>
     }    
     
     @Override
-    public Void visit(GameEventDuelFinished ev, Void params) {
+    public Void visit(GameEventDuelFinished ev) {
         FThreads.invokeInEdtNowOrLater(new Runnable() { @Override public void run() {
             new ViewWinLose(fc.getObservedGame().getMatch());
             SOverlayUtils.showOverlay();

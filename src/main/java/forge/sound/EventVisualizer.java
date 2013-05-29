@@ -37,30 +37,30 @@ import forge.game.event.IGameEventVisitor;
  * This class is in charge of converting any forge.game.event.Event to a SoundEffectType.
  *
  */
-public class EventVisualizer implements IGameEventVisitor<Void, SoundEffectType> {
+public class EventVisualizer implements IGameEventVisitor<SoundEffectType> {
 
 
-    public SoundEffectType visit(GameEventBlockerAssigned event, Void params) { return SoundEffectType.Block; }
-    public SoundEffectType visit(GameEventCardDamaged event, Void params) { return SoundEffectType.Damage; }
-    public SoundEffectType visit(GameEventCardDestroyed event, Void params) { return SoundEffectType.Destroy; }
-    public SoundEffectType visit(GameEventCardDiscarded event, Void params) { return SoundEffectType.Discard; }
-    public SoundEffectType visit(GameEventCardEquipped event, Void params) { return SoundEffectType.Equip; }
-    public SoundEffectType visit(GameEventCardRegenerated event, Void params) { return SoundEffectType.Regen; }
-    public SoundEffectType visit(GameEventCardSacrificed event, Void params) { return SoundEffectType.Sacrifice; }
-    public SoundEffectType visit(GameEventCounterAdded event, Void params) { return event.Amount > 0 ? SoundEffectType.AddCounter : null; }
-    public SoundEffectType visit(GameEventCounterRemoved event, Void params) { return event.Amount > 0 ? SoundEffectType.RemoveCounter : null; }
-    public SoundEffectType visit(GameEventDrawCard event, Void params) { return SoundEffectType.Draw; }
-    public SoundEffectType visit(GameEventEndOfTurn event, Void params) { return SoundEffectType.EndOfTurn; }
-    public SoundEffectType visit(GameEventFlipCoin event, Void params) { return SoundEffectType.FlipCoin; }
-    public SoundEffectType visit(GameEventLifeLoss event, Void params) { return SoundEffectType.LifeLoss; }
-    public SoundEffectType visit(GameEventPoisonCounter event, Void params) { return SoundEffectType.Poison; }
-    public SoundEffectType visit(GameEventShuffle event, Void params) { return SoundEffectType.Shuffle; }
-    public SoundEffectType visit(GameEventTokenCreated event, Void params) { return SoundEffectType.Token; }
+    public SoundEffectType visit(GameEventBlockerAssigned event) { return SoundEffectType.Block; }
+    public SoundEffectType visit(GameEventCardDamaged event) { return SoundEffectType.Damage; }
+    public SoundEffectType visit(GameEventCardDestroyed event) { return SoundEffectType.Destroy; }
+    public SoundEffectType visit(GameEventCardDiscarded event) { return SoundEffectType.Discard; }
+    public SoundEffectType visit(GameEventCardEquipped event) { return SoundEffectType.Equip; }
+    public SoundEffectType visit(GameEventCardRegenerated event) { return SoundEffectType.Regen; }
+    public SoundEffectType visit(GameEventCardSacrificed event) { return SoundEffectType.Sacrifice; }
+    public SoundEffectType visit(GameEventCounterAdded event) { return event.Amount > 0 ? SoundEffectType.AddCounter : null; }
+    public SoundEffectType visit(GameEventCounterRemoved event) { return event.Amount > 0 ? SoundEffectType.RemoveCounter : null; }
+    public SoundEffectType visit(GameEventDrawCard event) { return SoundEffectType.Draw; }
+    public SoundEffectType visit(GameEventEndOfTurn event) { return SoundEffectType.EndOfTurn; }
+    public SoundEffectType visit(GameEventFlipCoin event) { return SoundEffectType.FlipCoin; }
+    public SoundEffectType visit(GameEventLifeLoss event) { return SoundEffectType.LifeLoss; }
+    public SoundEffectType visit(GameEventPoisonCounter event) { return SoundEffectType.Poison; }
+    public SoundEffectType visit(GameEventShuffle event) { return SoundEffectType.Shuffle; }
+    public SoundEffectType visit(GameEventTokenCreated event) { return SoundEffectType.Token; }
 
     /**
      * Plays the sound corresponding to the outcome of the duel.
      */
-    public SoundEffectType visit(GameEventDuelOutcome event, Void params) {
+    public SoundEffectType visit(GameEventDuelOutcome event) {
         boolean humanWonTheDuel = event.result.getWinner() == Singletons.getControl().getLobby().getGuiPlayer();
         return humanWonTheDuel ? SoundEffectType.WinDuel : SoundEffectType.LoseDuel;
     }
@@ -69,7 +69,7 @@ public class EventVisualizer implements IGameEventVisitor<Void, SoundEffectType>
      * Plays the sound corresponding to the card type/color when the card
      * ability resolves on the stack.
      */
-    public SoundEffectType visit(GameEventSpellResolved evt, Void params) { 
+    public SoundEffectType visit(GameEventSpellResolved evt) { 
         Card source = evt.Source;
         SpellAbility sa = evt.Spell;
     
@@ -111,7 +111,7 @@ public class EventVisualizer implements IGameEventVisitor<Void, SoundEffectType>
      * "untap" sound is played
      * @return the sound effect type
      */
-    public SoundEffectType visit(GameEventCardTapped event, Void params) {
+    public SoundEffectType visit(GameEventCardTapped event) {
         return event.tapped ? SoundEffectType.Tap : SoundEffectType.Untap;
     }
 
@@ -121,7 +121,7 @@ public class EventVisualizer implements IGameEventVisitor<Void, SoundEffectType>
      * @param land the land card that was played
      * @return the sound effect type
      */
-    public SoundEffectType visit(GameEventLandPlayed event, Void params) { 
+    public SoundEffectType visit(GameEventLandPlayed event) { 
         Card land = event.Land;
         if (land == null) {
             return null;
@@ -184,12 +184,12 @@ public class EventVisualizer implements IGameEventVisitor<Void, SoundEffectType>
     }
 
     // These are not used by sound system
-    public SoundEffectType visit(GameEventGameRestarted event, Void params) { return null; }
-    public SoundEffectType visit(GameEventDuelFinished event, Void params) { return null; }
-    public SoundEffectType visit(GameEventAnteCardsSelected event, Void params) { return null; }
-    public SoundEffectType visit(GameEventManaBurn event, Void params) { return null; }
-    public SoundEffectType visit(GameEventMulligan event, Void params) { return null; }
-    public SoundEffectType visit(GameEventPlayerControl event, Void params) { return null; }
-    public SoundEffectType visit(GameEventTurnPhase event, Void params) { return null; }
+    public SoundEffectType visit(GameEventGameRestarted event) { return null; }
+    public SoundEffectType visit(GameEventDuelFinished event) { return null; }
+    public SoundEffectType visit(GameEventAnteCardsSelected event) { return null; }
+    public SoundEffectType visit(GameEventManaBurn event) { return null; }
+    public SoundEffectType visit(GameEventMulligan event) { return null; }
+    public SoundEffectType visit(GameEventPlayerControl event) { return null; }
+    public SoundEffectType visit(GameEventTurnPhase event) { return null; }
 
 }

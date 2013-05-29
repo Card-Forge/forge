@@ -2,5 +2,5 @@ package forge.game.event;
 
 public abstract class GameEvent {
 
-    public abstract <T,U> U visit(IGameEventVisitor<T, U> visitor, T params);
+    public abstract <T> T visit(IGameEventVisitor<T> visitor);
 }
