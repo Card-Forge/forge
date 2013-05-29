@@ -76,15 +76,17 @@ public enum CDev implements ICDoc {
         public void mousePressed(final MouseEvent e) {
             GuiDisplayUtil.devModeCardToBattlefield(); } };
 
-
     private final MouseListener madBreakpoint = new MouseAdapter() { @Override
         public void mousePressed(final MouseEvent e) {
             GuiDisplayUtil.devModeBreakpoint(); } };
     
-    
     private final MouseListener madRiggedRoll = new MouseAdapter() { @Override
         public void mousePressed(final MouseEvent e) {
             GuiDisplayUtil.devModeRiggedPlanarRoll(); } };
+
+    private final MouseListener madWalkToPlane = new MouseAdapter() { @Override
+        public void mousePressed(final MouseEvent e) {
+            GuiDisplayUtil.devModePlaneswalkTo(); } };
 
     //========== End mouse listener inits
 
@@ -114,6 +116,7 @@ public enum CDev implements ICDoc {
         VDev.SINGLETON_INSTANCE.getLblBreakpoint().addMouseListener(madBreakpoint);
         VDev.SINGLETON_INSTANCE.getLblCardToBattlefield().addMouseListener(madCardToBattlefield);
         VDev.SINGLETON_INSTANCE.getLblRiggedRoll().addMouseListener(madRiggedRoll);
+        VDev.SINGLETON_INSTANCE.getLblWalkTo().addMouseListener(madWalkToPlane);
         
         ForgePreferences prefs = Singletons.getModel().getPreferences();
 

@@ -76,7 +76,8 @@ public enum VDev implements IVDoc<CDev> {
     private final DevLabel lblCardToHand = new DevLabel("Add card to hand");
     private final DevLabel lblBreakpoint = new DevLabel("Trigger breakpoint");
     private final DevLabel lblRiggedRoll = new DevLabel("Rigged planar roll");
-    
+    private final DevLabel lblWalkTo = new DevLabel("Planeswalk to");
+
     //========= Constructor
 
     private VDev() {
@@ -93,6 +94,7 @@ public enum VDev implements IVDoc<CDev> {
         devLBLs.add(lblUntapPermanent);
         devLBLs.add(lblSetLife);
         devLBLs.add(lblBreakpoint);
+        devLBLs.add(lblWalkTo);
 
         scroller.setBorder(null);
         scroller.setOpaque(false);
@@ -105,8 +107,8 @@ public enum VDev implements IVDoc<CDev> {
         viewport.add(this.lblTutor, constraints);
         viewport.add(this.lblCardToHand, halfConstraints + ", split 2");
         viewport.add(this.lblCardToBattlefield, halfConstraints);
-        
-        viewport.add(this.lblRiggedRoll, constraints);
+        viewport.add(this.lblRiggedRoll, halfConstraints + ", split 2");
+        viewport.add(this.lblWalkTo, halfConstraints);
         viewport.add(this.lblMilling, constraints);
         viewport.add(this.lblUnlimitedLands, constraints);
         viewport.add(this.lblSetupGame, constraints);
@@ -228,9 +230,13 @@ public enum VDev implements IVDoc<CDev> {
     public DevLabel getLblBreakpoint() {
         return this.lblBreakpoint;
     }
-    
+
     public DevLabel getLblRiggedRoll() {
         return this.lblRiggedRoll;
+    }
+
+    public DevLabel getLblWalkTo() {
+        return this.lblWalkTo;
     }
 
     /**

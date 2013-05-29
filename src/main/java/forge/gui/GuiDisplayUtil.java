@@ -46,6 +46,7 @@ import forge.card.spellability.SpellAbility;
 import forge.card.trigger.TriggerType;
 import forge.control.input.InputSelectCardsFromList;
 import forge.game.GameState;
+import forge.game.GameType;
 import forge.game.PlanarDice;
 import forge.game.player.HumanPlay;
 import forge.game.player.Player;
@@ -74,7 +75,7 @@ public final class GuiDisplayUtil {
     public static void devSetupGameState() {
         int humanLife = -1;
         int computerLife = -1;
-        
+
         final Map<ZoneType, String> humanCardTexts = new EnumMap<ZoneType, String>(ZoneType.class);
         final Map<ZoneType, String> aiCardTexts = new EnumMap<ZoneType, String>(ZoneType.class);
 
@@ -497,9 +498,38 @@ public final class GuiDisplayUtil {
             }
         });
         
-        
     }
-    
+
+    public static void devModePlaneswalkTo() {
+        final GameState game = getGame();
+        if (game.getMatch().getGameType() != GameType.Planechase) { return; }
+        final Player p = game.getPhaseHandler().getPlayerTurn();
+
+        final List<CardPrinted> allPlanars = new ArrayList<CardPrinted>();
+        for (CardPrinted c : CardDb.variants().getAllCards()) {
+            if (c.getRules().getType().isPlane() || c.getRules().getType().isPhenomenon()) {
+                allPlanars.add(c);
+            }
+        }
+        Collections.sort(allPlanars);
+
+        // use standard forge's list selection dialog
+        final IPaperCard c = GuiChoose.oneOrNone("Name the card", allPlanars);
+        if (c == null) { return; }
+        final Card forgeCard = c.toForgeCard(p);
+
+        forgeCard.setOwner(p);
+        game.getAction().changeZone(null, p.getZone(ZoneType.PlanarDeck), forgeCard, 0);
+        PlanarDice.roll(p, PlanarDice.Planeswalk);
+
+        game.getAction().invoke(new Runnable() {
+            @Override
+            public void run() {
+                p.getGame().getStack().chooseOrderOfSimultaneousStackEntryAll();
+            }
+        });
+    }
+
     private static GameState getGame() {
         return Singletons.getControl().getObservedGame();
     }
