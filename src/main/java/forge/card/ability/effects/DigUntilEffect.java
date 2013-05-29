@@ -100,7 +100,10 @@ public class DigUntilEffect extends SpellAbilityEffect {
         final int foundLibPos = AbilityUtils.calculateAmount(host, sa.getParam("FoundLibraryPosition"), sa);
         final ZoneType revealedDest = ZoneType.smartValueOf(sa.getParam("RevealedDestination"));
         final int revealedLibPos = AbilityUtils.calculateAmount(host, sa.getParam("RevealedLibraryPosition"), sa);
+        final ZoneType noneFoundDest = ZoneType.smartValueOf(sa.getParam("NoneFoundDestination"));
+        final int noneFoundLibPos = AbilityUtils.calculateAmount(host, sa.getParam("NoneFoundLibraryPosition"), sa);
         final ZoneType digSite = sa.hasParam("DigZone") ? ZoneType.smartValueOf(sa.getParam("DigZone")) : ZoneType.Library;
+        boolean shuffle = sa.hasParam("Shuffle");
 
         for (final Player p : getTargetPlayers(sa)) {
             if ((tgt == null) || p.canBeTargetedBy(sa)) {
@@ -122,6 +125,12 @@ public class DigUntilEffect extends SpellAbilityEffect {
                         if (found.size() == untilAmount) {
                             break;
                         }
+                    }
+                }
+
+                if (shuffle && sa.hasParam("ShuffleCondition")) {
+                    if (sa.getParam("ShuffleCondition").equals("NoneFound")) {
+                        shuffle = found.isEmpty();
                     }
                 }
 
@@ -166,22 +175,39 @@ public class DigUntilEffect extends SpellAbilityEffect {
                     Collections.shuffle(revealed, random);
                 }
 
-                // Allow ordering the rest of the revealed cards
-                if ((revealedDest.isKnown()) && revealed.size() >= 2) {
-                    revealed = p.getController().orderMoveToZoneList(revealed, revealedDest);
-                }
-                if (revealedDest == ZoneType.Library && !sa.hasParam("Shuffle")
-                        && !sa.hasParam("RevealRandomOrder") && revealed.size() >= 2) {
-                    revealed = p.getController().orderMoveToZoneList(revealed, revealedDest);
+                if (sa.hasParam("NoneFoundDestination") && found.size() < untilAmount) {
+                 // Allow ordering the revealed cards
+                    if ((noneFoundDest.isKnown()) && revealed.size() >= 2) {
+                        revealed = p.getController().orderMoveToZoneList(revealed, noneFoundDest);
+                    }
+                    if (noneFoundDest == ZoneType.Library && !shuffle
+                            && !sa.hasParam("RevealRandomOrder") && revealed.size() >= 2) {
+                        revealed = p.getController().orderMoveToZoneList(revealed, noneFoundDest);
+                    }
+
+                    final Iterator<Card> itr = revealed.iterator();
+                    while (itr.hasNext()) {
+                        final Card c = itr.next();
+                        game.getAction().moveTo(noneFoundDest, c, noneFoundLibPos);
+                    }
+                } else {
+                 // Allow ordering the rest of the revealed cards
+                    if ((revealedDest.isKnown()) && revealed.size() >= 2) {
+                        revealed = p.getController().orderMoveToZoneList(revealed, revealedDest);
+                    }
+                    if (revealedDest == ZoneType.Library && !shuffle
+                            && !sa.hasParam("RevealRandomOrder") && revealed.size() >= 2) {
+                        revealed = p.getController().orderMoveToZoneList(revealed, revealedDest);
+                    }
+
+                    final Iterator<Card> itr = revealed.iterator();
+                    while (itr.hasNext()) {
+                        final Card c = itr.next();
+                        game.getAction().moveTo(revealedDest, c, revealedLibPos);
+                    }
                 }
 
-                final Iterator<Card> itr = revealed.iterator();
-                while (itr.hasNext()) {
-                    final Card c = itr.next();
-                    game.getAction().moveTo(revealedDest, c, revealedLibPos);
-                }
-
-                if (sa.hasParam("Shuffle")) {
+                if (shuffle) {
                     p.shuffle();
                 }
             } // end foreach player
