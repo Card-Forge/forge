@@ -14,7 +14,7 @@ import forge.game.event.GameEventCounterAdded;
 import forge.game.event.GameEventCounterRemoved;
 import forge.game.event.GameEventDrawCard;
 import forge.game.event.GameEventDuelOutcome;
-import forge.game.event.GameEventEndOfTurn;
+import forge.game.event.GameEventTurnEnded;
 import forge.game.event.GameEvent;
 import forge.game.event.GameEventFlipCoin;
 import forge.game.event.GameEventLandPlayed;
@@ -43,7 +43,7 @@ public class EventVisualizer extends IGameEventVisitor.Base<SoundEffectType> {
     public SoundEffectType visit(GameEventCounterAdded event) { return event.Amount > 0 ? SoundEffectType.AddCounter : null; }
     public SoundEffectType visit(GameEventCounterRemoved event) { return event.Amount > 0 ? SoundEffectType.RemoveCounter : null; }
     public SoundEffectType visit(GameEventDrawCard event) { return SoundEffectType.Draw; }
-    public SoundEffectType visit(GameEventEndOfTurn event) { return SoundEffectType.EndOfTurn; }
+    public SoundEffectType visit(GameEventTurnEnded event) { return SoundEffectType.EndOfTurn; }
     public SoundEffectType visit(GameEventFlipCoin event) { return SoundEffectType.FlipCoin; }
     public SoundEffectType visit(GameEventLifeLoss event) { return SoundEffectType.LifeLoss; }
     public SoundEffectType visit(GameEventPlayerPoisoned event) { return SoundEffectType.Poison; }
@@ -63,14 +63,12 @@ public class EventVisualizer extends IGameEventVisitor.Base<SoundEffectType> {
      * ability resolves on the stack.
      */
     public SoundEffectType visit(GameEventSpellResolved evt) { 
-        Card source = evt.Source;
-        SpellAbility sa = evt.Spell;
-    
-        if (sa == null || source == null) {
+        if (evt.spell == null ) {
             return null;
         }
 
-        if (sa.isSpell()) {
+        Card source = evt.spell.getSourceCard();
+        if (!evt.spell.isSpell()) {
             // if there's a specific effect for this particular card, play it and
             // we're done.
             if (hasSpecificCardEffect(source)) {
@@ -115,18 +113,17 @@ public class EventVisualizer extends IGameEventVisitor.Base<SoundEffectType> {
      * @return the sound effect type
      */
     public SoundEffectType visit(GameEventLandPlayed event) { 
-        Card land = event.Land;
-        if (land == null) {
+        if (event.land == null) {
             return null;
         }
 
         // if there's a specific effect for this particular card, play it and
         // we're done.
-        if (hasSpecificCardEffect(land)) {
+        if (hasSpecificCardEffect(event.land)) {
             return SoundEffectType.ScriptedEffect;
         }
 
-        for (SpellAbility sa : land.getManaAbility()) {
+        for (SpellAbility sa : event.land.getManaAbility()) {
             String manaColors = sa.getManaPartRecursive().getOrigProduced();
 
             if (manaColors.contains("B")) return SoundEffectType.BlackLand;
@@ -168,9 +165,9 @@ public class EventVisualizer extends IGameEventVisitor.Base<SoundEffectType> {
         Card c = null;
 
         if (evt instanceof GameEventSpellResolved) {
-            c = ((GameEventSpellResolved) evt).Source;
+            c = ((GameEventSpellResolved) evt).spell.getSourceCard();
         } else if (evt instanceof GameEventLandPlayed) {
-            c = ((GameEventLandPlayed) evt).Land;
+            c = ((GameEventLandPlayed) evt).land;
         }
 
         return c != null ? c.getSVar("SoundEffect") : "";

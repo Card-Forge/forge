@@ -9,8 +9,11 @@ import com.google.common.eventbus.Subscribe;
 import forge.game.GameOutcome;
 import forge.game.event.GameEventCardDamaged;
 import forge.game.event.GameEventCardDamaged.DamageType;
+import forge.game.event.GameEventLandPlayed;
 import forge.game.event.GameEventPlayerDamaged;
 import forge.game.event.GameEventPlayerPoisoned;
+import forge.game.event.GameEventSpellResolved;
+import forge.game.event.GameEventTurnBegan;
 import forge.game.event.IGameEventVisitor;
 import forge.game.event.GameEventDuelOutcome;
 import forge.game.event.GameEvent;
@@ -47,6 +50,15 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
     }
     
 
+    /* (non-Javadoc)
+     * @see forge.game.event.IGameEventVisitor.Base#visit(forge.game.event.GameEventSpellResolved)
+     */
+    @Override
+    public GameLogEntry visit(GameEventSpellResolved ev) {
+        String messageForLog = ev.hasFizzled ? ev.spell.getSourceCard().getName() + " ability fizzles." : ev.spell.getStackDescription();
+        return new GameLogEntry(GameLogEntryType.STACK_RESOLVE, messageForLog);
+    }
+    
     private GameLogEntry generateSummary(List<GameOutcome> gamesPlayed) {
         GameOutcome outcome1 = gamesPlayed.get(0);
         int[] wins = new int[outcome1.getNumPlayers()];
@@ -103,6 +115,20 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
         return new GameLogEntry(GameLogEntryType.DAMAGE, message);
     }
 
+    /* (non-Javadoc)
+     * @see forge.game.event.IGameEventVisitor.Base#visit(forge.game.event.GameEventLandPlayed)
+     */
+    @Override
+    public GameLogEntry visit(GameEventLandPlayed ev) {
+        String message = String.format("%s played %s", ev.player, ev.land);
+        return new GameLogEntry(GameLogEntryType.LAND, message);
+    }
+    
+    @Override
+    public GameLogEntry visit(GameEventTurnBegan event) {
+        String message = String.format( "Turn %d (%s)", event.turnNumber, event.turnOwner);
+        return new GameLogEntry(GameLogEntryType.TURN, message);
+    }
 
     @Override
     public GameLogEntry visit(GameEventPlayerDamaged ev) {

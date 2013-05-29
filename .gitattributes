@@ -14232,7 +14232,6 @@ src/main/java/forge/game/event/GameEventCounterRemoved.java -text
 src/main/java/forge/game/event/GameEventDrawCard.java -text
 src/main/java/forge/game/event/GameEventDuelFinished.java -text
 src/main/java/forge/game/event/GameEventDuelOutcome.java -text
-src/main/java/forge/game/event/GameEventEndOfTurn.java -text
 src/main/java/forge/game/event/GameEventFlipCoin.java -text
 src/main/java/forge/game/event/GameEventGameRestarted.java -text
 src/main/java/forge/game/event/GameEventLandPlayed.java -text
@@ -14245,6 +14244,8 @@ src/main/java/forge/game/event/GameEventPlayerPoisoned.java -text
 src/main/java/forge/game/event/GameEventShuffle.java -text
 src/main/java/forge/game/event/GameEventSpellResolved.java -text
 src/main/java/forge/game/event/GameEventTokenCreated.java -text
+src/main/java/forge/game/event/GameEventTurnBegan.java -text
+src/main/java/forge/game/event/GameEventTurnEnded.java -text
 src/main/java/forge/game/event/GameEventTurnPhase.java -text
 src/main/java/forge/game/event/IGameEventVisitor.java -text
 src/main/java/forge/game/event/package-info.java -text

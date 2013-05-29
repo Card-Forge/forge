@@ -5,12 +5,12 @@ import forge.game.player.Player;
 
 public class GameEventLandPlayed extends GameEvent {
 
-    public final Player Player;
-    public final Card Land;
+    public final Player player;
+    public final Card land;
 
     public GameEventLandPlayed(Player player, Card land) {
-        Player = player;
-        Land = land;
+        this.player = player;
+        this.land = land;
 
     }
 

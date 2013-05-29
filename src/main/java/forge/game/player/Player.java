@@ -1762,9 +1762,6 @@ public class Player extends GameEntity implements Comparable<Player> {
             // etc...)
             game.getAction().checkStateEffects();
 
-            // add to log
-            game.getGameLog().add(GameLogEntryType.LAND, this + " played " + land);
-
             // play a sound
             game.fireEvent(new GameEventLandPlayed(this, land));
 

@@ -1,6 +1,6 @@
 package forge.game.event;
 
-public class GameEventEndOfTurn extends GameEvent {
+public class GameEventTurnEnded extends GameEvent {
     
     
     @Override

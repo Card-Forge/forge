@@ -19,7 +19,6 @@ public interface IGameEventVisitor<T> {
     T visit(GameEventDrawCard event);
     T visit(GameEventDuelFinished event);
     T visit(GameEventDuelOutcome event);
-    T visit(GameEventEndOfTurn event);
     T visit(GameEventFlipCoin event);
     T visit(GameEventGameRestarted event);
     T visit(GameEventLandPlayed event);
@@ -32,6 +31,8 @@ public interface IGameEventVisitor<T> {
     T visit(GameEventShuffle event);
     T visit(GameEventSpellResolved event);
     T visit(GameEventTokenCreated event);
+    T visit(GameEventTurnBegan gameEventTurnBegan);
+    T visit(GameEventTurnEnded event);
     T visit(GameEventTurnPhase event);
     
     
@@ -51,7 +52,6 @@ public interface IGameEventVisitor<T> {
         public T visit(GameEventDrawCard event) { return null; }
         public T visit(GameEventDuelFinished event) { return null; }
         public T visit(GameEventDuelOutcome event) { return null; }
-        public T visit(GameEventEndOfTurn event) { return null; }
         public T visit(GameEventFlipCoin event) { return null; }
         public T visit(GameEventGameRestarted event) { return null; }
         public T visit(GameEventLandPlayed event) { return null; }
@@ -63,8 +63,13 @@ public interface IGameEventVisitor<T> {
         public T visit(GameEventShuffle event) { return null; }
         public T visit(GameEventSpellResolved event) { return null; }
         public T visit(GameEventTokenCreated event) { return null; }
+        public T visit(GameEventTurnBegan event) { return null; }
+        public T visit(GameEventTurnEnded event) { return null; }
         public T visit(GameEventTurnPhase event) { return null; }
         public T visit(GameEventPlayerDamaged event) { return null; }
     }
+
+
+
 }
 

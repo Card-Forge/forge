@@ -1,6 +1,5 @@
 package forge.game.event;
 
-import forge.Card;
 import forge.card.spellability.SpellAbility;
 
 /** 
@@ -9,18 +8,19 @@ import forge.card.spellability.SpellAbility;
  */
 public class GameEventSpellResolved extends GameEvent {
 
-    public final Card Source;
-    public final SpellAbility Spell;
+    public final SpellAbility spell;
+    public final boolean hasFizzled;
 
     /**
      * TODO: Write javadoc for Constructor.
      * @param source
      * @param sa
+     * @param hasFizzled 
      */
-    public GameEventSpellResolved(Card source, SpellAbility sa) {
+    public GameEventSpellResolved(SpellAbility sa, boolean hasFizzled) {
         // TODO Auto-generated constructor stub
-        Source = source;
-        Spell = sa;
+        this.spell = sa;
+        this.hasFizzled = hasFizzled;
     }
 
 

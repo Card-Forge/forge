@@ -26,14 +26,14 @@ import org.apache.commons.lang.time.StopWatch;
 import forge.Card;
 import forge.CardLists;
 import forge.FThreads;
-import forge.GameLogEntryType;
 import forge.Singletons;
 import forge.CardPredicates.Presets;
 import forge.card.trigger.TriggerType;
 import forge.game.GameAge;
 import forge.game.Game;
 import forge.game.GameType;
-import forge.game.event.GameEventEndOfTurn;
+import forge.game.event.GameEventTurnBegan;
+import forge.game.event.GameEventTurnEnded;
 import forge.game.event.GameEventGameRestarted;
 import forge.game.event.GameEventManaBurn;
 import forge.game.event.GameEventTurnPhase;
@@ -197,7 +197,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
 
         if (this.phase == PhaseType.UNTAP) {
             this.turn++;
-            game.getGameLog().add(GameLogEntryType.TURN, "Turn " + this.turn + " (" + this.getPlayerTurn() + ")");
+            game.fireEvent(new GameEventTurnBegan(playerTurn, turn));
         }
 
         game.fireEvent(new GameEventTurnPhase(this.getPlayerTurn(), this.getPhase(), phaseType));
@@ -426,7 +426,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
                 }
                 this.planarDiceRolledthisTurn = 0;
                 // Play the End Turn sound
-                game.fireEvent(new GameEventEndOfTurn());
+                game.fireEvent(new GameEventTurnEnded());
                 break;
             default: // no action
         }

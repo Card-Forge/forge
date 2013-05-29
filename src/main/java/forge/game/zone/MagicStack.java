@@ -601,8 +601,7 @@ public class MagicStack extends MyObservable implements Iterable<SpellAbilitySta
         curResolvingCard = source;
         
         boolean thisHasFizzled = this.hasFizzled(sa, source, false);
-        String messageForLog = thisHasFizzled ? source.getName() + " ability fizzles." : sa.getStackDescription();
-        game.getGameLog().add(GameLogEntryType.STACK_RESOLVE, messageForLog);
+        
         if (thisHasFizzled) { // Fizzle
             // TODO: Spell fizzles, what's the best way to alert player?
             Log.debug(source.getName() + " ability fizzles.");
@@ -617,7 +616,7 @@ public class MagicStack extends MyObservable implements Iterable<SpellAbilitySta
         }
         sa.getSourceCard().setXManaCostPaid(0);
 
-        game.fireEvent(new GameEventSpellResolved(source, sa));
+        game.fireEvent(new GameEventSpellResolved(sa, thisHasFizzled));
 
         if (source.hasStartOfKeyword("Haunt") && !source.isCreature()
                 && game.getZoneOf(source).is(ZoneType.Graveyard)) {
