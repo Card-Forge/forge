@@ -620,8 +620,8 @@ public class AiController {
         }
 
         Card choice = null;
-        Card host = sa.getSourceCard();
-        String logic = sa.getParam("AILogic");
+        final Card host = sa.getSourceCard();
+        final String logic = sa.getParam("AILogic");
 
         switch(api) {
             case Bond: 
@@ -648,6 +648,25 @@ public class AiController {
                         options = CardLists.getValidCards(options, "Permanent.YouCtrl,Permanent.tapped", host.getController(), host);
                     }
                     choice = ComputerUtilCard.getBestAI(options);
+                } else if (logic.equals("NeedsPrevention")) {
+                    final Player ai = this.getPlayer();
+                    List<Card> better =  CardLists.filter(options, new Predicate<Card>() {
+                        @Override
+                        public boolean apply(final Card c) {
+                            if (!c.isAttacking(ai) || !game.getCombat().isUnblocked(c)) {
+                                return false;
+                            }
+                            if (host.getName().equals("Forcefield")) {
+                                return ComputerUtilCombat.damageIfUnblocked(c, ai, game.getCombat()) > 1;
+                            }
+                            return ComputerUtilCombat.damageIfUnblocked(c, ai, game.getCombat()) > 0;
+                        }
+                    });
+                    if (!better.isEmpty()) {
+                        choice = ComputerUtilCard.getBestAI(better);
+                    } else {
+                        choice = ComputerUtilCard.getBestAI(options);
+                    }
                 } else {
                     choice = ComputerUtilCard.getBestAI(options);
                 }

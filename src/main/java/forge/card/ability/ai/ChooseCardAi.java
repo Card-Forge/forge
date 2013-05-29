@@ -2,11 +2,16 @@ package forge.card.ability.ai;
 
 import java.util.List;
 
+import com.google.common.base.Predicate;
+
 import forge.Card;
 import forge.CardLists;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
+import forge.game.GameState;
+import forge.game.ai.ComputerUtilCombat;
+import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
@@ -16,8 +21,9 @@ public class ChooseCardAi extends SpellAbilityAi {
      * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
      */
     @Override
-    protected boolean canPlayAI(Player ai, SpellAbility sa) {
+    protected boolean canPlayAI(final Player ai, SpellAbility sa) {
         final Card host = sa.getSourceCard();
+        final GameState game = ai.getGame();
 
         final Target tgt = sa.getTarget();
         if (tgt != null) {
@@ -55,6 +61,25 @@ public class ChooseCardAi extends SpellAbilityAi {
                 }
             } else if (sa.getParam("AILogic").equals("Never")) {
                 return false;
+            } else if (sa.getParam("AILogic").equals("NeedsPrevention")) {
+                if (!game.getPhaseHandler().getPhase() .equals(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
+                    return false;
+                }
+                choices = CardLists.filter(choices, new Predicate<Card>() {
+                    @Override
+                    public boolean apply(final Card c) {
+                        if (!c.isAttacking(ai) || !game.getCombat().isUnblocked(c)) {
+                            return false;
+                        }
+                        if (host.getName().equals("Forcefield")) {
+                            return ComputerUtilCombat.damageIfUnblocked(c, ai, game.getCombat()) > 1;
+                        }
+                        return ComputerUtilCombat.damageIfUnblocked(c, ai, game.getCombat()) > 0;
+                    }
+                });
+                if (choices.isEmpty()) {
+                    return false;
+                }
             }
         }
 

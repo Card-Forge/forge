@@ -1,0 +1,15 @@
+Name:Forcefield
+ManaCost:3
+Types:Artifact
+A:AB$ ChooseCard | Cost$ 1 | Choices$ Creature.unblocked | RememberChosen$ True | AILogic$ NeedsPrevention | SubAbility$ DBEffect | SVars$ DBEffect,RPreventNextFromCreature,CombatDmg,ExileEffect | SpellDescription$ The next time an unblocked creature of your choice would deal combat damage to you this turn, prevent all but 1 of that damage.
+SVar:DBEffect:DB$ Effect | ReplacementEffects$ RPreventNextFromCreature | RememberObjects$ Remembered | SVars$ RPreventNextFromCreature,CombatDmg,ExileEffect | SubAbility$ DBCleanup | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ GE1
+SVar:RPreventNextFromCreature:Event$ DamageDone | ValidSource$ Card.IsRemembered | ValidTarget$ You | ReplaceWith$ CombatDmg | PreventionEffect$ True | CombatDamage$ True | Description$ The next time an unblocked creature of your choice would deal combat damage to you this turn, prevent all but 1 of that damage.
+SVar:CombatDmg:AB$ DealDamage | Cost$ 0 | Defined$ ReplacedTarget | DamageSource$ ReplacedSource | CombatDamage$ True | NumDmg$ 1 | SubAbility$ ExileEffect
+SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:NonStackingEffect:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/forcefield.jpg
+Oracle:{1}: The next time an unblocked creature of your choice would deal combat damage to you this turn, prevent all but 1 of that damage.
+SetInfo:LEB Rare
+SetInfo:LEA Rare
+SetInfo:2ED Rare
