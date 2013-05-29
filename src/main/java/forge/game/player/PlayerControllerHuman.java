@@ -482,7 +482,6 @@ public class PlayerControllerHuman extends PlayerController {
     @Override
     public void takePriority() {
         PhaseType phase = game.getPhaseHandler().getPhase();
-
         boolean maySkipPriority = mayAutoPass(phase) || isUiSetToSkipPhase(game.getPhaseHandler().getPlayerTurn(), phase);
         if (game.getStack().isEmpty() && maySkipPriority) {
             return;
