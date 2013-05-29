@@ -14,4 +14,9 @@ public class GameEventGameRestarted extends GameEvent {
         whoRestarted = playerTurn;
     }
 
+    
+    @Override
+    public <T, U> U visit(IGameEventVisitor<T, U> visitor, T params) {
+        return visitor.visit(this, params);
+    }
 }

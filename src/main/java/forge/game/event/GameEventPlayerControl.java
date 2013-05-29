@@ -13,4 +13,10 @@ public class GameEventPlayerControl extends GameEvent {
         oldController = old;
         newController = new1;
     }
+    
+    
+    @Override
+    public <T, U> U visit(IGameEventVisitor<T, U> visitor, T params) {
+        return visitor.visit(this, params);
+    }
 }

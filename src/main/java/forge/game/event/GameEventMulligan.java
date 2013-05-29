@@ -12,4 +12,10 @@ public class GameEventMulligan extends GameEvent {
     public GameEventMulligan(Player p) {
         player = p;
     }
+    
+    
+    @Override
+    public <T, U> U visit(IGameEventVisitor<T, U> visitor, T params) {
+        return visitor.visit(this, params);
+    }
 }

@@ -12,4 +12,10 @@ public class GameEventDuelOutcome extends GameEvent {
         this.result = lastOne;
         this.history = history;
     }
+    
+    
+    @Override
+    public <T, U> U visit(IGameEventVisitor<T, U> visitor, T params) {
+        return visitor.visit(this, params);
+    }
 }
