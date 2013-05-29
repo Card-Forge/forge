@@ -1,5 +1,7 @@
 package forge.control;
 
+import java.util.concurrent.atomic.AtomicBoolean;
+
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.eventbus.Subscribe;
@@ -13,7 +15,7 @@ import forge.game.event.GameEventDuelOutcome;
 import forge.game.event.GameEventPlayerControl;
 import forge.game.event.GameEventTurnPhase;
 import forge.game.event.IGameEventVisitor;
-import forge.game.phase.PhaseUtil;
+import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.gui.GuiDialog;
 import forge.gui.SOverlayUtils;
@@ -21,6 +23,7 @@ import forge.gui.match.CMatchUI;
 import forge.gui.match.VMatchUI;
 import forge.gui.match.ViewWinLose;
 import forge.gui.match.nonsingleton.VHand;
+import forge.gui.match.nonsingleton.VField.PhaseLabel;
 
 public class FControlGameEventHandler extends IGameEventVisitor.Base<Void, Void> {
     public final FControl fc;
@@ -28,13 +31,30 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void, Void>
         this.fc = fc;
     }
     
+    private final AtomicBoolean phaseUpdPlanned = new AtomicBoolean(false);
+    
     @Subscribe
     public void receiveGameEvent(final GameEvent ev) { ev.visit(this, null); }
     
     @Override
     public Void visit(final GameEventTurnPhase ev, Void params) {
+        if ( phaseUpdPlanned.getAndSet(true) ) return null;
+        
         FThreads.invokeInEdtNowOrLater(new Runnable() { @Override public void run() {
-            PhaseUtil.visuallyActivatePhase(ev.playerTurn, ev.phase);
+            Player p = fc.getObservedGame().getPhaseHandler().getPlayerTurn();
+            PhaseType ph = fc.getObservedGame().getPhaseHandler().getPhase();
+
+            phaseUpdPlanned.set(false);
+            
+            final CMatchUI matchUi = CMatchUI.SINGLETON_INSTANCE;
+            PhaseLabel lbl = matchUi.getFieldViewFor(p).getLabelFor(ph);
+
+            matchUi.resetAllPhaseButtons();
+            if (lbl != null) {
+                lbl.setActive(true);
+            }
+            
+            
         } });
         return null;
     }

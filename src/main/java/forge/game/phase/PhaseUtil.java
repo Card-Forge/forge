@@ -233,23 +233,4 @@ public class PhaseUtil {
 
         game.getGameLog().addCombatBlockers(game.getCombat());
     }
-
-
-    /**
-     * Retrieves and visually activates phase label for appropriate phase and
-     * player.
-     * 
-     * @param phase
-     *            &emsp; Phase state
-     */
-    public static void visuallyActivatePhase(final Player player, final PhaseType phase) {
-        final CMatchUI matchUi = CMatchUI.SINGLETON_INSTANCE;
-
-        PhaseLabel lbl = matchUi.getFieldViewFor(player).getLabelFor(phase);
-
-        matchUi.resetAllPhaseButtons();
-        if (lbl != null) {
-            lbl.setActive(true);
-        }
-    }
 }
