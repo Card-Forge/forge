@@ -36,6 +36,10 @@ Hotseat matches are now possible. This mode has some known bugs to fix. At this 
 Added the capability to play Challenges vs predetermined decks (along with a few other related options to disallow specific quest mode things). Added Sorin vs Tibalt, and Tibalt vs Sorin as examples of Challenges that force you to use a specific Deck. (They seemed to be the best duel deck compatibility for the AI).
 
 
+- Targeting Overlay -
+Targeting arrows will now be shown for equipments equipping permanents currently under opponent's control (for those rare cases when e.g. an equipped creature gets Switcheroo'd for something else).
+
+
 ---------
 New Cards
 ---------
@@ -67,6 +71,10 @@ Mindslaver
 Gustha's Scepter
 Thoughtbound Primoc
 Wild Mammoth
+Endless Whispers
+Radiate
+Tunnel Vision
+Forcefield
 
 
 ----------
