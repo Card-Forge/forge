@@ -48,9 +48,10 @@ public class Lang {
         return subjects.size() > 1 ? verb : verb + "s";
     }
 
-    public static <T> String joinNounToAmount(int cnt, String noun) {
+    public static <T> String nounWithAmount(int cnt, String noun) {
         //  Simpliest check
-        return cnt > 1 ? noun : ( noun.endsWith("s") || noun.endsWith("x") ? noun + "es" : noun + "s");
+        String suffix = cnt <= 1 ? "" : ( noun.endsWith("s") || noun.endsWith("x") ? "es" : "s"); 
+        return String.valueOf(cnt) + " " + noun + suffix;
     }    
     
     /**

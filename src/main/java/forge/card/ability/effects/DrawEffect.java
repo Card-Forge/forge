@@ -26,14 +26,8 @@ public class DrawEffect extends SpellAbilityEffect {
             if (tgtPlayers.size() > 1) {
                 sb.append(" each");
             }
-            sb.append(Lang.joinVerb(tgtPlayers, "draw")).append(" ");
-
-            sb.append(numCards).append(Lang.joinNounToAmount(numCards, " card"));
-
-            if (sa.hasParam("NextUpkeep")) {
-                sb.append(" at the beginning of the next upkeep");
-            }
-
+            sb.append(Lang.joinVerb(tgtPlayers, " draw")).append(" ");
+            sb.append(Lang.nounWithAmount(numCards, " card"));
             sb.append(".");
         }
 
@@ -49,30 +43,24 @@ public class DrawEffect extends SpellAbilityEffect {
         final Target tgt = sa.getTarget();
 
         final boolean optional = sa.hasParam("OptionalDecider");
-        final boolean slowDraw = sa.hasParam("NextUpkeep");
+
 
         for (final Player p : getDefinedPlayersBeforeTargetOnes(sa)) {
-            if ((tgt == null) || p.canBeTargetedBy(sa)) {
-                if (optional && !p.getController().confirmAction(sa, null, "Do you want to draw " + numCards + " cards(s)?"))
+            if ((tgt == null) || p.canBeTargetedBy(sa)) 
+                if (optional && !p.getController().confirmAction(sa, null, "Do you want to draw " + Lang.nounWithAmount(numCards, " card") + "?"))
                     continue;
 
                 //TODO: remove this deprecation exception
-                if (slowDraw) {
-                    throw new RuntimeException("This api option is no longer supported.  Please file a bug report with the card that threw this error.");
-                } else {
-                    final List<Card> drawn = p.drawCards(numCards);
-                    if (sa.hasParam("Reveal")) {
-                        p.getGame().getAction().reveal(drawn, p);
-                    }
-                    if (sa.hasParam("RememberDrawn")) {
-                        for (final Card c : drawn) {
-                            source.addRemembered(c);
-                        }
-                    }
-
+                final List<Card> drawn = p.drawCards(numCards);
+                if (sa.hasParam("Reveal")) {
+                    p.getGame().getAction().reveal(drawn, p);
                 }
-
+                if (sa.hasParam("RememberDrawn")) {
+                    for (final Card c : drawn) {
+                        source.addRemembered(c);
+                    }
+                }
             }
         }
     } // drawResolve()
-}
+
