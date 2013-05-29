@@ -161,7 +161,7 @@ public class SoundSystem {
                 play(resourceName);
             }
         } else {
-            boolean isSync = visualizer.isSyncSound(effect);
+            boolean isSync = effect.getIsSynced();
             if (isSync) {
                 playSync(effect);
             } else {

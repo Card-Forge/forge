@@ -81,7 +81,7 @@ public class EventVisualizer implements IGameEventVisitor<Void, SoundEffectType>
         if (sa.isSpell()) {
             // if there's a specific effect for this particular card, play it and
             // we're done.
-            if (getSpecificCardEffect(source)) {
+            if (hasSpecificCardEffect(source)) {
                 return SoundEffectType.ScriptedEffect;
             }
 
@@ -130,33 +130,18 @@ public class EventVisualizer implements IGameEventVisitor<Void, SoundEffectType>
 
         // if there's a specific effect for this particular card, play it and
         // we're done.
-        if (getSpecificCardEffect(land)) {
+        if (hasSpecificCardEffect(land)) {
             return SoundEffectType.ScriptedEffect;
         }
 
-        final List<SpellAbility> manaProduced = land.getManaAbility();
-
-        for (SpellAbility sa : manaProduced) {
-            
-            // Find mana ability if it is somewhere in tail
-
+        for (SpellAbility sa : land.getManaAbility()) {
             String manaColors = sa.getManaPartRecursive().getOrigProduced();
 
-            if (manaColors.contains("B")) {
-                return SoundEffectType.BlackLand;
-            }
-            if (manaColors.contains("U")) {
-                return SoundEffectType.BlueLand;
-            }
-            if (manaColors.contains("G")) {
-                return SoundEffectType.GreenLand;
-            }
-            if (manaColors.contains("R")) {
-                return SoundEffectType.RedLand;
-            }
-            if (manaColors.contains("W")) {
-                return SoundEffectType.WhiteLand;
-            }
+            if (manaColors.contains("B")) return SoundEffectType.BlackLand;
+            if (manaColors.contains("U")) return SoundEffectType.BlueLand;
+            if (manaColors.contains("G")) return SoundEffectType.GreenLand;
+            if (manaColors.contains("R")) return SoundEffectType.RedLand;
+            if (manaColors.contains("W")) return SoundEffectType.WhiteLand;
         }
 
         // play a generic land sound if no other sound corresponded to it.
@@ -169,7 +154,7 @@ public class EventVisualizer implements IGameEventVisitor<Void, SoundEffectType>
      * @param c the card to play the sound effect for.
      * @return the sound effect type
      */
-    private static boolean getSpecificCardEffect(final Card c) {
+    private static boolean hasSpecificCardEffect(final Card c) {
         // Implement sound effects for specific cards here, if necessary.
         String effect = "";
         if (null != c) {
@@ -199,15 +184,6 @@ public class EventVisualizer implements IGameEventVisitor<Void, SoundEffectType>
         return c != null ? c.getSVar("SoundEffect") : "";
     }
 
-    /**
-     * Determine if the event will potentially produce a lot of overlapping
-     * sounds, in which case only one of the must actually be played and the
-     * others must wait on it and only play when the first sound effect is done.
-     */
-    public boolean isSyncSound(SoundEffectType effect) {
-
-        return effect.getIsSynced();
-    }
     // These are not used by sound system
     public SoundEffectType visit(GameEventGameRestarted event, Void params) { return null; }
     public SoundEffectType visit(GameEventDuelFinished event, Void params) { return null; }
