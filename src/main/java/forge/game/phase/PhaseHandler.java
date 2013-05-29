@@ -714,6 +714,8 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
                 System.out.print(" >>\n");
             }
             
+            if ( game.isGameOver() ) return; // conceded?
+            
             // actingPlayer is the player who may act
             // the firstAction is the player who gained Priority First in this segment
             // of Priority

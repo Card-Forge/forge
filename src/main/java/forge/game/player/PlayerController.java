@@ -54,9 +54,6 @@ public abstract class PlayerController {
         return phase.isBefore(autoPassUntil);
     }
 
-    public boolean isUiSetToSkipPhase(final Player turn, final PhaseType phase) {
-        return false; // human has it's overload
-    }
 
     // Triggers preliminary choice: ask, decline or play
     private Map<Integer, Boolean> triggersAlwaysAccept = new HashMap<Integer, Boolean>();

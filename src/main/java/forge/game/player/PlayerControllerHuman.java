@@ -56,10 +56,10 @@ public class PlayerControllerHuman extends PlayerController {
     }
 
 
-    @Override
     public boolean isUiSetToSkipPhase(final Player turn, final PhaseType phase) {
         return !CMatchUI.SINGLETON_INSTANCE.stopAtPhase(turn, phase);
     }
+    
 
     /**
      * Uses GUI to learn which spell the player (human in our case) would like to play
