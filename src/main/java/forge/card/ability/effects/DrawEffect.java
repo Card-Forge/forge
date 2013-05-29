@@ -2,17 +2,12 @@ package forge.card.ability.effects;
 
 import java.util.List;
 
-import org.apache.commons.lang3.StringUtils;
-
 import forge.Card;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.game.player.Player;
-import forge.game.zone.ZoneType;
-import forge.gui.GuiChoose;
-import forge.gui.GuiDialog;
 import forge.util.Lang;
 
 public class DrawEffect extends SpellAbilityEffect {
@@ -33,8 +28,7 @@ public class DrawEffect extends SpellAbilityEffect {
             }
             sb.append(Lang.joinVerb(tgtPlayers, "draw")).append(" ");
 
-            sb.append(numCards).append(Lang.joinNounToAmount(numCards, "card"));
-            sb.append(" (").append(numCards).append(")");
+            sb.append(numCards).append(Lang.joinNounToAmount(numCards, " card"));
 
             if (sa.hasParam("NextUpkeep")) {
                 sb.append(" at the beginning of the next upkeep");
