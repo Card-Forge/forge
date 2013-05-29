@@ -235,7 +235,7 @@ public enum CMatchUI {
     public final boolean stopAtPhase(final Player turn, final PhaseType phase) {
         VField vf = getFieldViewFor(turn);
         PhaseLabel label = vf.getLabelFor(phase);
-        return label == null || label.isEnabled(); 
+        return label == null || label.getEnabled(); 
     }
 
     public void setCard(final Card c) {
