@@ -101,6 +101,7 @@ http://www.cardforge.org/fpics/questAvatars/Green%20Arrow.jpg
 http://www.cardforge.org/fpics/questAvatars/Green%20Hornet.jpg
 http://www.cardforge.org/fpics/questAvatars/Green%20Lantern.jpg
 http://www.cardforge.org/fpics/questAvatars/Grumpy.jpg
+http://www.cardforge.org/fpics/questAvatars/Gunnery%20Sergeant%20Hartman.jpg
 http://www.cardforge.org/fpics/questAvatars/Hagrid.jpg
 http://www.cardforge.org/fpics/questAvatars/Han%20Solo.jpg
 http://www.cardforge.org/fpics/questAvatars/Hans.jpg
