@@ -27,7 +27,8 @@ public interface IGameEventVisitor<T> {
     T visit(GameEventManaBurn event);
     T visit(GameEventMulligan event);
     T visit(GameEventPlayerControl event);
-    T visit(GameEventPoisonCounter event);
+    T visit(GameEventPlayerDamaged gameEventPlayerDamaged);
+    T visit(GameEventPlayerPoisoned event);
     T visit(GameEventShuffle event);
     T visit(GameEventSpellResolved event);
     T visit(GameEventTokenCreated event);
@@ -58,11 +59,12 @@ public interface IGameEventVisitor<T> {
         public T visit(GameEventManaBurn event) { return null; }
         public T visit(GameEventMulligan event) { return null; }
         public T visit(GameEventPlayerControl event) { return null; }
-        public T visit(GameEventPoisonCounter event) { return null; }
+        public T visit(GameEventPlayerPoisoned event) { return null; }
         public T visit(GameEventShuffle event) { return null; }
         public T visit(GameEventSpellResolved event) { return null; }
         public T visit(GameEventTokenCreated event) { return null; }
         public T visit(GameEventTurnPhase event) { return null; }
+        public T visit(GameEventPlayerDamaged event) { return null; }
     }
 }
 

@@ -7,6 +7,10 @@ import java.util.Map.Entry;
 import com.google.common.eventbus.Subscribe;
 
 import forge.game.GameOutcome;
+import forge.game.event.GameEventCardDamaged;
+import forge.game.event.GameEventCardDamaged.DamageType;
+import forge.game.event.GameEventPlayerDamaged;
+import forge.game.event.GameEventPlayerPoisoned;
 import forge.game.event.IGameEventVisitor;
 import forge.game.event.GameEventDuelOutcome;
 import forge.game.event.GameEvent;
@@ -86,10 +90,34 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
         Player p = ev.playerTurn;
         return new GameLogEntry(GameLogEntryType.PHASE, ev.phaseDesc + Lang.getPossesive(p.getName()) + " " + ev.phase.nameForUi);
     }
-    
-    
 
 
+    @Override
+    public GameLogEntry visit(GameEventCardDamaged event) {
+        String additionalLog = "";
+        if( event.type == DamageType.Deathtouch ) additionalLog = " (Deathtouch)";
+        if( event.type == DamageType.M1M1Counters ) additionalLog = " (As -1/-1 Counters)";
+        if( event.type == DamageType.LoyaltyLoss ) additionalLog = " (Removing " + Lang.nounWithAmount(event.amount, "loyalty counter") + ")";
+        
+        String message = String.format("%s deals %d damage%s to %s.", event.source, event.amount, event.damaged, additionalLog);
+        return new GameLogEntry(GameLogEntryType.DAMAGE, message);
+    }
+
+
+    @Override
+    public GameLogEntry visit(GameEventPlayerDamaged ev) {
+        String extra = ev.infect ? " (as poison counters)" : "";
+        String message = String.format("%s deals %d %s damage to %s%s.", ev.source, ev.amount, ev.combat ? "combat" : "non-combat", ev.target, extra );
+        return new GameLogEntry(GameLogEntryType.DAMAGE, message);
+    }
+    
+    @Override
+    public GameLogEntry visit(GameEventPlayerPoisoned ev) {
+        String message = String.format("%s receives %s from %s", ev.receiver, Lang.nounWithAmount(ev.amount, "posion counter"), ev.source);
+        return new GameLogEntry(GameLogEntryType.DAMAGE, message);
+    }
+    
+    
     static GameLogEntry describeAttack(final Combat combat) {
         final StringBuilder sb = new StringBuilder();
 

@@ -63,7 +63,8 @@ import forge.game.event.GameEventLandPlayed;
 import forge.game.event.GameEventLifeLoss;
 import forge.game.event.GameEventMulligan;
 import forge.game.event.GameEventPlayerControl;
-import forge.game.event.GameEventPoisonCounter;
+import forge.game.event.GameEventPlayerDamaged;
+import forge.game.event.GameEventPlayerPoisoned;
 import forge.game.event.GameEventShuffle;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
@@ -622,38 +623,34 @@ public class Player extends GameEntity implements Comparable<Player> {
      * @return whether or not damage was dealt
      */
     @Override
-    public final boolean addDamageAfterPrevention(final int damage, final Card source, final boolean isCombat) {
-        final int damageToDo = damage;
-
-        if (damageToDo <= 0) {
+    public final boolean addDamageAfterPrevention(final int amount, final Card source, final boolean isCombat) {
+        if (amount <= 0) {
             return false;
         }
-        String additionalLog = "";
-        source.addDealtDamageToPlayerThisTurn(this.getName(), damageToDo);
+        //String additionalLog = "";
+        source.addDealtDamageToPlayerThisTurn(this.getName(), amount);
 
         boolean infect = source.hasKeyword("Infect")
                 || this.hasKeyword("All damage is dealt to you as though its source had infect.");
 
         if (infect) {
-            this.addPoisonCounters(damageToDo, source);
-            additionalLog = "(as Poison Counters)";
+            this.addPoisonCounters(amount, source);
         } else {
             // Worship does not reduce the damage dealt but changes the effect
             // of the damage
             if (this.hasKeyword("Damage that would reduce your life total to less than 1 reduces it to 1 instead.")
-                    && this.life <= damageToDo) {
-                this.loseLife(Math.min(damageToDo, this.life - 1));
-                additionalLog = "(would reduce life total to less than 1, reduced to 1 instead.)";
+                    && this.life <= amount) {
+                this.loseLife(Math.min(amount, this.life - 1));
             } else {
                 // rule 118.2. Damage dealt to a player normally causes that
                 // player to lose that much life.
-                this.loseLife(damageToDo);
+                this.loseLife(amount);
             }
         }
 
-        this.assignedDamage.put(source, damageToDo);
+        this.assignedDamage.put(source, amount);
         if (source.hasKeyword("Lifelink")) {
-            source.getController().gainLife(damageToDo, source);
+            source.getController().gainLife(amount, source);
         }
         source.getDamageHistory().registerDamage(this);
         this.getGame().fireEvent(new GameEventLifeLoss());
@@ -669,11 +666,11 @@ public class Player extends GameEntity implements Comparable<Player> {
         final HashMap<String, Object> runParams = new HashMap<String, Object>();
         runParams.put("DamageSource", source);
         runParams.put("DamageTarget", this);
-        runParams.put("DamageAmount", damageToDo);
+        runParams.put("DamageAmount", amount);
         runParams.put("IsCombatDamage", isCombat);
         game.getTriggerHandler().runTrigger(TriggerType.DamageDone, runParams, false);
 
-        game.getGameLog().add(GameLogEntryType.DAMAGE, String.format("Dealing %d damage to %s. %s", damageToDo, this.getName(), additionalLog));
+        game.fireEvent(new GameEventPlayerDamaged(this, source, amount, isCombat, infect));
 
         return true;
     }
@@ -1020,9 +1017,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         if (!this.hasKeyword("You can't get poison counters")) {
             this.poisonCounters += num;
 
-            game.fireEvent(new GameEventPoisonCounter(this, source, num));
-            game.getGameLog().add(GameLogEntryType.DAMAGE_POISON, this + " receives a poison counter from " + source);
-
+            game.fireEvent(new GameEventPlayerPoisoned(this, source, num));
             this.updateObservers();
         }
     }

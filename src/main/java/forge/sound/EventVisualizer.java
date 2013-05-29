@@ -19,7 +19,7 @@ import forge.game.event.GameEvent;
 import forge.game.event.GameEventFlipCoin;
 import forge.game.event.GameEventLandPlayed;
 import forge.game.event.GameEventLifeLoss;
-import forge.game.event.GameEventPoisonCounter;
+import forge.game.event.GameEventPlayerPoisoned;
 import forge.game.event.GameEventCardTapped;
 import forge.game.event.GameEventShuffle;
 import forge.game.event.GameEventSpellResolved;
@@ -46,7 +46,7 @@ public class EventVisualizer extends IGameEventVisitor.Base<SoundEffectType> {
     public SoundEffectType visit(GameEventEndOfTurn event) { return SoundEffectType.EndOfTurn; }
     public SoundEffectType visit(GameEventFlipCoin event) { return SoundEffectType.FlipCoin; }
     public SoundEffectType visit(GameEventLifeLoss event) { return SoundEffectType.LifeLoss; }
-    public SoundEffectType visit(GameEventPoisonCounter event) { return SoundEffectType.Poison; }
+    public SoundEffectType visit(GameEventPlayerPoisoned event) { return SoundEffectType.Poison; }
     public SoundEffectType visit(GameEventShuffle event) { return SoundEffectType.Shuffle; }
     public SoundEffectType visit(GameEventTokenCreated event) { return SoundEffectType.Token; }
 

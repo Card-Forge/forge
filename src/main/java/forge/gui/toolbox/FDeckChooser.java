@@ -26,11 +26,13 @@ import forge.deck.Deck;
 import forge.deck.DeckgenUtil;
 import forge.deck.generate.GenerateThemeDeck;
 import forge.game.RegisteredPlayer;
+import forge.item.PreconDeck;
 import forge.quest.QuestController;
 import forge.quest.QuestEvent;
 import forge.quest.QuestEventChallenge;
 import forge.quest.QuestUtil;
 import forge.util.storage.IStorage;
+import forge.util.storage.IStorageView;
 
 @SuppressWarnings("serial")
 public class FDeckChooser extends JPanel {
@@ -38,6 +40,7 @@ public class FDeckChooser extends JPanel {
     private final JRadioButton radThemes = new FRadioButton("Semi-random theme deck");
     private final JRadioButton radCustom = new FRadioButton("Custom user deck");
     private final JRadioButton radQuests = new FRadioButton("Quest opponent deck");
+    private final JRadioButton radPrecons = new FRadioButton("Decks from quest shop");
 
     private final JList  lstDecks  = new FList();
     private final FLabel btnRandom = new FLabel.ButtonBuilder().text("Random").fontSize(16).build();
@@ -101,6 +104,7 @@ public class FDeckChooser extends JPanel {
         JXButtonPanel grpRadios = new JXButtonPanel();
         grpRadios.add(radCustom, strRadioConstraints);
         grpRadios.add(radQuests, strRadioConstraints);
+        grpRadios.add(radPrecons, strRadioConstraints);
         grpRadios.add(radColors, strRadioConstraints);
         grpRadios.add(radThemes, strRadioConstraints);
 
@@ -122,6 +126,7 @@ public class FDeckChooser extends JPanel {
         _listen(getRadThemes(), new Runnable() { @Override public void run() { updateThemes();      } });
         _listen(getRadCustom(), new Runnable() { @Override public void run() { updateCustom();      } });
         _listen(getRadQuests(), new Runnable() { @Override public void run() { updateQuestEvents(); } });
+        _listen(getRadPrecons(), new Runnable() { @Override public void run() { updatePrecons();    } });
 
         // First run: colors
         getRadColors().setSelected(true);
@@ -138,6 +143,7 @@ public class FDeckChooser extends JPanel {
     private JRadioButton getRadThemes() { return radThemes; }
     private JRadioButton getRadCustom() { return radCustom; }
     private JRadioButton getRadQuests() { return radQuests; }
+    private JRadioButton getRadPrecons() { return radPrecons; }
 
     /** Handles all control for "colors" radio button click. */
     private void updateColors() {
@@ -202,6 +208,28 @@ public class FDeckChooser extends JPanel {
         lst.setSelectedIndex(0);
     }
 
+    /** Handles all control for "custom" radio button click. */
+    private void updatePrecons() {
+        final JList lst = getLstDecks();
+        lst.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
+        final List<String> customNames = new ArrayList<String>();
+        final IStorageView<PreconDeck> allDecks = QuestController.getPrecons();
+        for (final PreconDeck d : allDecks) { customNames.add(d.getName()); }
+
+        lst.setListData(customNames.toArray(ArrayUtils.EMPTY_STRING_ARRAY));
+        lst.setName(DeckgenUtil.DeckTypes.PRECON.toString());
+        lst.removeMouseListener(madDecklist);
+        lst.addMouseListener(madDecklist);
+
+        getBtnRandom().setText("Random deck");
+        getBtnRandom().setCommand(new Command() {
+            @Override public void run() { DeckgenUtil.randomSelect(lst); } });
+
+        // Init first in list
+        lst.setSelectedIndex(0);
+    }
+    
     /** Handles all control for "quest event" radio button click. */
     private void updateQuestEvents() {
         final JList lst = getLstDecks();
@@ -258,6 +286,8 @@ public class FDeckChooser extends JPanel {
             deck = DeckgenUtil.buildThemeDeck(selection);
         } else if (lst0.getName().equals(DeckgenUtil.DeckTypes.CUSTOM.toString())) {
             deck = DeckgenUtil.getConstructedDeck(selection);
+        } else if (lst0.getName().equals(DeckgenUtil.DeckTypes.PRECON.toString())) {
+            deck = DeckgenUtil.getPreconDeck(selection);
         }
 
         return RegisteredPlayer.fromDeck(deck);

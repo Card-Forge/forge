@@ -14240,7 +14240,8 @@ src/main/java/forge/game/event/GameEventLifeLoss.java -text
 src/main/java/forge/game/event/GameEventManaBurn.java -text
 src/main/java/forge/game/event/GameEventMulligan.java -text
 src/main/java/forge/game/event/GameEventPlayerControl.java -text
-src/main/java/forge/game/event/GameEventPoisonCounter.java -text
+src/main/java/forge/game/event/GameEventPlayerDamaged.java -text
+src/main/java/forge/game/event/GameEventPlayerPoisoned.java -text
 src/main/java/forge/game/event/GameEventShuffle.java -text
 src/main/java/forge/game/event/GameEventSpellResolved.java -text
 src/main/java/forge/game/event/GameEventTokenCreated.java -text

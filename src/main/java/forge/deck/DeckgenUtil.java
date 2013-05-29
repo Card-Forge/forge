@@ -24,6 +24,7 @@ import forge.deck.generate.GenerateThemeDeck;
 import forge.item.CardDb;
 import forge.item.CardPrinted;
 import forge.item.ItemPoolView;
+import forge.item.PreconDeck;
 import forge.quest.QuestController;
 import forge.quest.QuestEvent;
 import forge.quest.QuestEventChallenge;
@@ -32,6 +33,7 @@ import forge.util.Aggregates;
 import forge.util.Lang;
 import forge.util.MyRandom;
 import forge.util.storage.IStorage;
+import forge.util.storage.IStorageView;
 
 /** 
  * Utility collection for various types of decks.
@@ -47,7 +49,8 @@ public class DeckgenUtil {
         COLORS,
         THEMES,
         CUSTOM,
-        QUESTEVENTS
+        QUESTEVENTS,
+        PRECON
     }
 
     /**
@@ -105,6 +108,10 @@ public class DeckgenUtil {
     public static Deck getConstructedDeck(final String[] selection) {
         return Singletons.getModel().getDecks().getConstructed().get(selection[0]);
     }
+    
+    public static Deck getPreconDeck(String[] selection) {
+        return QuestController.getPrecons().get(selection[0]).getDeck();
+    }
 
     public static QuestEvent getQuestEvent(final String name) {
         QuestController qCtrl = Singletons.getModel().getQuest();
@@ -147,6 +154,13 @@ public class DeckgenUtil {
         return allDecks.get(name);
     }
 
+    public static Deck getRandomPreconDeck() {
+        final IStorageView<PreconDeck> allDecks = QuestController.getPrecons();
+        final int rand = (int) (Math.floor(Math.random() * allDecks.size()));
+        final String name = allDecks.getNames().toArray(new String[0])[rand];
+        return allDecks.get(name).getDeck();
+    }
+    
     /** @return {@link forge.deck.Deck} */
     public static Deck getRandomQuestDeck() {
         final List<Deck> allQuestDecks = new ArrayList<Deck>();

@@ -13,7 +13,6 @@ public enum GameLogEntryType {
     STACK_RESOLVE("Resolve stack"),
     STACK_ADD("Add to stack"),
     DAMAGE("Damage"),
-    DAMAGE_POISON("Poison"),
     MANA("Mana"),
     PHASE("Phase");
     

@@ -65,6 +65,7 @@ import forge.card.trigger.ZCTrigger;
 import forge.game.Game;
 import forge.game.GlobalRuleChange;
 import forge.game.event.GameEventCardDamaged;
+import forge.game.event.GameEventCardDamaged.DamageType;
 import forge.game.event.GameEventCardEquipped;
 import forge.game.event.GameEventCounterAdded;
 import forge.game.event.GameEventCounterRemoved;
@@ -7354,62 +7355,63 @@ public class Card extends GameEntity implements Comparable<Card> {
         runParams.put("IsCombatDamage", isCombat);
         getGame().getTriggerHandler().runTrigger(TriggerType.DamageDone, runParams, false);
 
-        String additionalLog = "";
+        GameEventCardDamaged.DamageType damageType = DamageType.Normal;
         if (this.isPlaneswalker()) {
             this.subtractCounter(CounterType.LOYALTY, damageToAdd);
-            additionalLog = String.format("(Removing %d Loyalty Counters)", damageToAdd);
+            damageType = DamageType.LoyaltyLoss;
         } else {
 
             final Game game = source.getGame();
             
-                final String s = this + " - destroy";
+            final String s = this + " - destroy";
 
-                final int amount = this.getAmountOfKeyword("When CARDNAME is dealt damage, destroy it.");
-                if(amount > 0) {
-                    final Ability abDestroy = new Ability(source, ManaCost.ZERO){ 
-                        @Override public void resolve() { game.getAction().destroy(Card.this, this); }
-                    };
-                    abDestroy.setStackDescription(s + ", it cannot be regenerated.");
-    
-                    for (int i = 0; i < amount; i++) {
-                        game.getStack().addSimultaneousStackEntry(abDestroy);
-                    }
+            final int amount = this.getAmountOfKeyword("When CARDNAME is dealt damage, destroy it.");
+            if(amount > 0) {
+                final Ability abDestroy = new Ability(source, ManaCost.ZERO){ 
+                    @Override public void resolve() { game.getAction().destroy(Card.this, this); }
+                };
+                abDestroy.setStackDescription(s + ", it cannot be regenerated.");
+
+                for (int i = 0; i < amount; i++) {
+                    game.getStack().addSimultaneousStackEntry(abDestroy);
                 }
+            }
+        
+            final int amount2 = this.getAmountOfKeyword("When CARDNAME is dealt damage, destroy it. It can't be regenerated.");
+            if( amount2 > 0 ) {
+                final Ability abDestoryNoRegen = new Ability(source, ManaCost.ZERO){ 
+                    @Override public void resolve() { game.getAction().destroyNoRegeneration(Card.this, this); }
+                };
+                abDestoryNoRegen.setStackDescription(s);
             
-                final int amount2 = this.getAmountOfKeyword("When CARDNAME is dealt damage, destroy it. It can't be regenerated.");
-                if( amount2 > 0 ) {
-                    final Ability abDestoryNoRegen = new Ability(source, ManaCost.ZERO){ 
-                        @Override public void resolve() { game.getAction().destroyNoRegeneration(Card.this, this); }
-                    };
-                    abDestoryNoRegen.setStackDescription(s);
+                for (int i = 0; i < amount2; i++) {
+                    game.getStack().addSimultaneousStackEntry(abDestoryNoRegen);
+                }
+            }
+        
+
+            
                 
-                    for (int i = 0; i < amount2; i++) {
-                        game.getStack().addSimultaneousStackEntry(abDestoryNoRegen);
-                    }
-                }
-            
-
             boolean wither = (getGame().getStaticEffects().getGlobalRuleChange(GlobalRuleChange.alwaysWither)
                     || source.hasKeyword("Wither") || source.hasKeyword("Infect"));
 
             if (this.isInPlay()) {
                 if (wither) {
                     this.addCounter(CounterType.M1M1, damageToAdd, true);
-                    additionalLog = "(As -1/-1 Counters)";
+                    damageType = DamageType.M1M1Counters;
                 } else
                     this.damage += damageToAdd;
             }
             
             if (source.hasKeyword("Deathtouch") && this.isCreature()) {
                 getGame().getAction().destroy(this, null);
-                additionalLog = "(Deathtouch)";
+                damageType = DamageType.Deathtouch;
             } 
 
             // Play the Damage sound
-            game.fireEvent(new GameEventCardDamaged());
+            game.fireEvent(new GameEventCardDamaged(this, source, damageToAdd, damageType));
         }
 
-        getGame().getGameLog().add(GameLogEntryType.DAMAGE, String.format("Dealing %d damage to %s. %s", damageToAdd, this.getName(), additionalLog));
         return true;
     }
 
