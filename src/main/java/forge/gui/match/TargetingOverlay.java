@@ -127,7 +127,9 @@ public enum TargetingOverlay {
             Card c = activePanel.getCard();
 
             Card enchanting = c.getEnchantingCard();
+            Card equipping = c.getEquippingCard();
             List<Card> enchantedBy = c.getEnchantedBy();
+            List<Card> equippedBy = c.getEquippedBy();
             Card paired = c.getPairedWith();
 
             if (null != enchanting) {
@@ -139,12 +141,32 @@ public enum TargetingOverlay {
                 }
             }
 
+            if (null != equipping) {
+                if (!equipping.getController().equals(c.getController())) {
+                    arcs.add(new Point[] {
+                        endpoints.get(equipping.getUniqueNumber()),
+                        endpoints.get(c.getUniqueNumber())
+                    });
+                }
+            }
+
             if (null != enchantedBy) {
                 for (Card enc : enchantedBy) {
                     if (!enc.getController().equals(c.getController())) {
                     arcs.add(new Point[] {
                         endpoints.get(c.getUniqueNumber()),
                         endpoints.get(enc.getUniqueNumber())
+                    });
+                    }
+                }
+            }
+
+            if (null != equippedBy) {
+                for (Card eq : equippedBy) {
+                    if (!eq.getController().equals(c.getController())) {
+                    arcs.add(new Point[] {
+                        endpoints.get(c.getUniqueNumber()),
+                        endpoints.get(eq.getUniqueNumber())
                     });
                     }
                 }
