@@ -1,5 +1,6 @@
 package forge.card.ability.effects;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -39,7 +40,7 @@ public class BecomesBlockedEffect extends SpellAbilityEffect {
                 if (!c.getDamageHistory().getCreatureGotBlockedThisCombat()) {
                     final HashMap<String, Object> runParams = new HashMap<String, Object>();
                     runParams.put("Attacker", c);
-                    runParams.put("Blocker", null);
+                    runParams.put("Blockers", new ArrayList<Card>());
                     runParams.put("NumBlockers", 0);
                     game.getTriggerHandler().runTrigger(TriggerType.AttackerBlocked, runParams, false);
 
