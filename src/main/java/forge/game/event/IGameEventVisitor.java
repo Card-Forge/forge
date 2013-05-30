@@ -17,8 +17,8 @@ public interface IGameEventVisitor<T> {
     T visit(GameEventCounterAdded event);
     T visit(GameEventCounterRemoved event);
     T visit(GameEventDrawCard event);
-    T visit(GameEventDuelFinished event);
-    T visit(GameEventDuelOutcome event);
+    T visit(GameEventGameFinished event);
+    T visit(GameEventGameOutcome event);
     T visit(GameEventFlipCoin event);
     T visit(GameEventGameStarted event);
     T visit(GameEventGameRestarted event);
@@ -29,6 +29,7 @@ public interface IGameEventVisitor<T> {
     T visit(GameEventPlayerControl event);
     T visit(GameEventPlayerDamaged gameEventPlayerDamaged);
     T visit(GameEventPlayerPoisoned event);
+    T visit(GameEventPlayerPriority event);
     T visit(GameEventShuffle event);
     T visit(GameEventSpellResolved event);
     T visit(GameEventTokenCreated event);
@@ -51,8 +52,8 @@ public interface IGameEventVisitor<T> {
         public T visit(GameEventCounterAdded event) { return null; }
         public T visit(GameEventCounterRemoved event) { return null; }
         public T visit(GameEventDrawCard event) { return null; }
-        public T visit(GameEventDuelFinished event) { return null; }
-        public T visit(GameEventDuelOutcome event) { return null; }
+        public T visit(GameEventGameFinished event) { return null; }
+        public T visit(GameEventGameOutcome event) { return null; }
         public T visit(GameEventFlipCoin event) { return null; }
         public T visit(GameEventGameStarted event) { return null; }
         public T visit(GameEventGameRestarted event) { return null; }
@@ -62,6 +63,7 @@ public interface IGameEventVisitor<T> {
         public T visit(GameEventMulligan event) { return null; }
         public T visit(GameEventPlayerControl event) { return null; }
         public T visit(GameEventPlayerPoisoned event) { return null; }
+        public T visit(GameEventPlayerPriority event) { return null; }
         public T visit(GameEventShuffle event) { return null; }
         public T visit(GameEventSpellResolved event) { return null; }
         public T visit(GameEventTokenCreated event) { return null; }
@@ -70,6 +72,9 @@ public interface IGameEventVisitor<T> {
         public T visit(GameEventTurnPhase event) { return null; }
         public T visit(GameEventPlayerDamaged event) { return null; }
     }
+
+
+    
 
 }
 

@@ -62,7 +62,7 @@ import forge.game.ai.ComputerUtilCost;
 import forge.game.event.GameEventCardDestroyed;
 import forge.game.event.GameEventCardRegenerated;
 import forge.game.event.GameEventCardSacrificed;
-import forge.game.event.GameEventDuelFinished;
+import forge.game.event.GameEventGameFinished;
 import forge.game.event.GameEventFlipCoin;
 import forge.game.event.GameEventGameStarted;
 import forge.game.player.GameLossReason;
@@ -1531,7 +1531,7 @@ public class GameAction {
         } while( game.getAge() == GameAge.RestartedByKarn );
 
         // will pull UI dialog, when the UI is listening
-        game.fireEvent(new GameEventDuelFinished());
+        game.fireEvent(new GameEventGameFinished());
     }
     
     private void performMulligans(final Player firstPlayer, final boolean isCommander) {

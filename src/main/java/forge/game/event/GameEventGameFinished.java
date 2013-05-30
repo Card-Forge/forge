@@ -1,6 +1,6 @@
 package forge.game.event;
 
-public class GameEventDuelFinished extends GameEvent {
+public class GameEventGameFinished extends GameEvent {
     
     
     

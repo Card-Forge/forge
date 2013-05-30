@@ -10,8 +10,8 @@ import forge.Card;
 import forge.FThreads;
 import forge.game.event.GameEvent;
 import forge.game.event.GameEventAnteCardsSelected;
-import forge.game.event.GameEventDuelFinished;
-import forge.game.event.GameEventDuelOutcome;
+import forge.game.event.GameEventGameFinished;
+import forge.game.event.GameEventGameOutcome;
 import forge.game.event.GameEventPlayerControl;
 import forge.game.event.GameEventTurnPhase;
 import forge.game.event.IGameEventVisitor;
@@ -81,15 +81,15 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     }
     
     @Override
-    public Void visit(GameEventDuelOutcome ev) {
+    public Void visit(GameEventGameOutcome ev) {
         FThreads.invokeInEdtNowOrLater(new Runnable() { @Override public void run() {
             fc.getInputQueue().onGameOver(); // this will unlock any game threads waiting for inputs to complete
         } });
         return null;
-    }    
+    }
     
     @Override
-    public Void visit(GameEventDuelFinished ev) {
+    public Void visit(GameEventGameFinished ev) {
         FThreads.invokeInEdtNowOrLater(new Runnable() { @Override public void run() {
             new ViewWinLose(fc.getObservedGame().getMatch());
             SOverlayUtils.showOverlay();

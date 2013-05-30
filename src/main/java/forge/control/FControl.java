@@ -61,7 +61,6 @@ import forge.gui.match.controllers.CStack;
 import forge.gui.match.nonsingleton.VField;
 import forge.gui.match.views.VAntes;
 import forge.gui.toolbox.CardFaceSymbols;
-import forge.gui.toolbox.FOverlay;
 import forge.gui.toolbox.FSkin;
 import forge.net.NetServer;
 import forge.properties.NewConstants;
@@ -349,6 +348,8 @@ public enum FControl {
     }
 
     private Game game;
+    private boolean gameHasHumanPlayer;
+
     public Game getObservedGame() {
         return game;
     }
@@ -412,12 +413,13 @@ public enum FControl {
         game.subscribeToEvents(fcVisitor);
         
         // Add playback controls to match if needed
-        boolean hasHuman = false;
+        gameHasHumanPlayer = false;
         for(Player p :  game.getPlayers()) {
             if ( p.getController().getLobbyPlayer() == getLobby().getGuiPlayer() )
-                hasHuman = true;
+                gameHasHumanPlayer = true;
         }
-        if (!hasHuman) {
+
+        if (!gameHasHumanPlayer) {
             game.subscribeToEvents(playbackControl);
         }
 

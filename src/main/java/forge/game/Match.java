@@ -10,11 +10,9 @@ import com.google.common.collect.Lists;
 import forge.Card;
 import forge.Singletons;
 import forge.game.event.GameEventAnteCardsSelected;
-import forge.game.event.GameEventFlipCoin;
 import forge.game.player.LobbyPlayer;
 import forge.game.player.Player;
 import forge.properties.ForgePreferences.FPref;
-import forge.util.Aggregates;
 
 /**
  * TODO: Write javadoc for this type.

@@ -13,7 +13,7 @@ import forge.game.event.GameEventCardSacrificed;
 import forge.game.event.GameEventCounterAdded;
 import forge.game.event.GameEventCounterRemoved;
 import forge.game.event.GameEventDrawCard;
-import forge.game.event.GameEventDuelOutcome;
+import forge.game.event.GameEventGameOutcome;
 import forge.game.event.GameEventTurnEnded;
 import forge.game.event.GameEvent;
 import forge.game.event.GameEventFlipCoin;
@@ -53,7 +53,7 @@ public class EventVisualizer extends IGameEventVisitor.Base<SoundEffectType> {
     /**
      * Plays the sound corresponding to the outcome of the duel.
      */
-    public SoundEffectType visit(GameEventDuelOutcome event) {
+    public SoundEffectType visit(GameEventGameOutcome event) {
         boolean humanWonTheDuel = event.result.getWinner() == Singletons.getControl().getLobby().getGuiPlayer();
         return humanWonTheDuel ? SoundEffectType.WinDuel : SoundEffectType.LoseDuel;
     }

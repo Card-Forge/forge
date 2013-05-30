@@ -32,6 +32,7 @@ import forge.card.trigger.TriggerType;
 import forge.game.GameAge;
 import forge.game.Game;
 import forge.game.GameType;
+import forge.game.event.GameEventPlayerPriority;
 import forge.game.event.GameEventTurnBegan;
 import forge.game.event.GameEventTurnEnded;
 import forge.game.event.GameEventGameRestarted;
@@ -702,6 +703,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
                 if( DEBUG_PHASES )
                     sw.start();
                 
+                game.fireEvent(new GameEventPlayerPriority(getPlayerTurn(), getPhase(), getPriorityPlayer()));
                 pPlayerPriority.getController().takePriority();
                 
                 if( DEBUG_PHASES ) {

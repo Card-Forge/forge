@@ -18,6 +18,7 @@
 package forge.gui.input;
 
 import forge.Card;
+import forge.game.Game;
 import forge.game.phase.PhaseHandler;
 import forge.game.player.Player;
 import forge.gui.framework.SDisplayUtil;
@@ -84,21 +85,20 @@ public abstract class InputBase implements java.io.Serializable, Input {
         SDisplayUtil.remind(VMessage.SINGLETON_INSTANCE);
     }
 
-    protected String getTurnPhasePriorityMessage(Player player) {
-        final PhaseHandler ph = player.getGame().getPhaseHandler();
+    protected String getTurnPhasePriorityMessage(Game game) {
+        final PhaseHandler ph = game.getPhaseHandler();
         final StringBuilder sb = new StringBuilder();
     
-        sb.append("Priority: ").append(player).append("\n").append("\n");
+        sb.append("Priority: ").append(ph.getPriorityPlayer()).append("\n").append("\n");
         sb.append("Turn : ").append(ph.getPlayerTurn()).append("\n");
         sb.append("Phase: ").append(ph.getPhase().nameForUi).append("\n");
         sb.append("Stack: ");
-        if (!player.getGame().getStack().isEmpty()) {
-            sb.append(player.getGame().getStack().size()).append(" to Resolve.");
+        if (!game.getStack().isEmpty()) {
+            sb.append(game.getStack().size()).append(" to Resolve.");
         } else {
             sb.append("Empty");
         }
         sb.append("\n");
-        String message = sb.toString();
-        return message;
+        return sb.toString();
     }
 }

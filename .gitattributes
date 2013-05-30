@@ -14231,9 +14231,9 @@ src/main/java/forge/game/event/GameEventCardTapped.java -text
 src/main/java/forge/game/event/GameEventCounterAdded.java -text
 src/main/java/forge/game/event/GameEventCounterRemoved.java -text
 src/main/java/forge/game/event/GameEventDrawCard.java -text
-src/main/java/forge/game/event/GameEventDuelFinished.java -text
-src/main/java/forge/game/event/GameEventDuelOutcome.java -text
 src/main/java/forge/game/event/GameEventFlipCoin.java -text
+src/main/java/forge/game/event/GameEventGameFinished.java -text
+src/main/java/forge/game/event/GameEventGameOutcome.java -text
 src/main/java/forge/game/event/GameEventGameRestarted.java -text
 src/main/java/forge/game/event/GameEventGameStarted.java -text
 src/main/java/forge/game/event/GameEventLandPlayed.java -text
@@ -14243,6 +14243,7 @@ src/main/java/forge/game/event/GameEventMulligan.java -text
 src/main/java/forge/game/event/GameEventPlayerControl.java -text
 src/main/java/forge/game/event/GameEventPlayerDamaged.java -text
 src/main/java/forge/game/event/GameEventPlayerPoisoned.java -text
+src/main/java/forge/game/event/GameEventPlayerPriority.java -text
 src/main/java/forge/game/event/GameEventShuffle.java -text
 src/main/java/forge/game/event/GameEventSpellResolved.java -text
 src/main/java/forge/game/event/GameEventTokenCreated.java -text
@@ -14457,6 +14458,7 @@ src/main/java/forge/gui/input/InputPayManaOfCostPayment.java -text
 src/main/java/forge/gui/input/InputPayManaSimple.java svneol=native#text/plain
 src/main/java/forge/gui/input/InputPayManaX.java -text
 src/main/java/forge/gui/input/InputPlayOrDraw.java -text
+src/main/java/forge/gui/input/InputPlaybackControl.java -text
 src/main/java/forge/gui/input/InputProliferate.java -text
 src/main/java/forge/gui/input/InputSelectCards.java -text
 src/main/java/forge/gui/input/InputSelectCardsFromList.java -text

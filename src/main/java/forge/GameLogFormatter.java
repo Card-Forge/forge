@@ -15,7 +15,7 @@ import forge.game.event.GameEventPlayerPoisoned;
 import forge.game.event.GameEventSpellResolved;
 import forge.game.event.GameEventTurnBegan;
 import forge.game.event.IGameEventVisitor;
-import forge.game.event.GameEventDuelOutcome;
+import forge.game.event.GameEventGameOutcome;
 import forge.game.event.GameEvent;
 import forge.game.event.GameEventTurnPhase;
 import forge.game.event.GameEventPlayerControl;
@@ -33,7 +33,7 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
     }
 
     @Override
-    public GameLogEntry visit(GameEventDuelOutcome ev) {
+    public GameLogEntry visit(GameEventGameOutcome ev) {
         // add result entries to the game log
         final LobbyPlayer human = Singletons.getControl().getLobby().getGuiPlayer();
         

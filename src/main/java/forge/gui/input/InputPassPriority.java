@@ -48,7 +48,7 @@ public class InputPassPriority extends InputSyncronizedBase {
         for (Player p : player.getGame().getRegisteredPlayers()) {
             p.getZone(ZoneType.Battlefield).updateObservers();
         }
-        showMessage(getTurnPhasePriorityMessage(player));
+        showMessage(getTurnPhasePriorityMessage(player.getGame()));
         chosenSa = null;
         ButtonUtil.enableOnlyOk();
     }

@@ -94,6 +94,12 @@ public class InputQueue extends MyObservable implements java.io.Serializable {
         input.awaitLatchRelease();
     }
     
+    public void setInput(InputSynchronized input) {
+        this.inputStack.push(input);
+        syncPoint();
+        this.updateObservers();
+    }
+    
 
     public void syncPoint() { 
         synchronized (inputLock) {
