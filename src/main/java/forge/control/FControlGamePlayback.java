@@ -134,8 +134,15 @@ public class FControlGamePlayback extends IGameEventVisitor.Base<Void> {
     }
 
     
+    public void onGameStopRequested() {
+        paused.set(false);
+        if ( gameThreadPauser.getNumberWaiting() != 0)
+            releaseGameThread();
+    }
+    
     private void releaseGameThread() {
         // just need to run another thread through the barrier... not edt preferrably :)
+        
         fc.getObservedGame().getAction().invoke( new Runnable() {
             @Override
             public void run() {

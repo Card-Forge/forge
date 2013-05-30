@@ -375,6 +375,8 @@ public enum FControl {
             game.getAction().checkGameOverCondition();
         else
             game.isGameOver(); // this is synchronized method - it's used to make Game-0 thread see changes made here
+
+        playbackControl.onGameStopRequested();
     }
 
     private InputQueue inputQueue;
