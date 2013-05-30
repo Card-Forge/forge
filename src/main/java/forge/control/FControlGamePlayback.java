@@ -13,6 +13,7 @@ import forge.game.event.GameEventGameFinished;
 import forge.game.event.GameEventGameStarted;
 import forge.game.event.GameEventLandPlayed;
 import forge.game.event.GameEventPlayerPriority;
+import forge.game.event.GameEventSpellAbilityCast;
 import forge.game.event.GameEventSpellResolved;
 import forge.game.event.GameEventTurnPhase;
 import forge.game.event.IGameEventVisitor;
@@ -36,7 +37,8 @@ public class FControlGamePlayback extends IGameEventVisitor.Base<Void> {
 
     private int phasesDelay = 200;
     private int combatDelay = 400;
-    private int resolveDelay = 600;
+    private int castDelay = 400;
+    private int resolveDelay = 400;
     
     private void pauseForEvent(int delay) {
         try {
@@ -103,14 +105,18 @@ public class FControlGamePlayback extends IGameEventVisitor.Base<Void> {
     
     @Override
     public Void visit(final GameEventSpellResolved event) {
-        FThreads.invokeInEdtNowOrLater(new Runnable() {
-            @Override
-            public void run() {
-                CMatchUI.SINGLETON_INSTANCE.setCard(event.spell.getSourceCard());
-            }
-        });
-        
+        FThreads.invokeInEdtNowOrLater(new Runnable() { @Override public void run() { CMatchUI.SINGLETON_INSTANCE.setCard(event.spell.getSourceCard()); } });
         pauseForEvent(resolveDelay);
+        return null;
+    }
+    
+    /* (non-Javadoc)
+     * @see forge.game.event.IGameEventVisitor.Base#visit(forge.game.event.GameEventSpellAbilityCast)
+     */
+    @Override
+    public Void visit(final GameEventSpellAbilityCast event) {
+        FThreads.invokeInEdtNowOrLater(new Runnable() { @Override public void run() { CMatchUI.SINGLETON_INSTANCE.setCard(event.sa.getSourceCard()); } });
+        pauseForEvent(castDelay);
         return null;
     }
     

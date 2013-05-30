@@ -6,12 +6,15 @@ import java.util.Map.Entry;
 
 import com.google.common.eventbus.Subscribe;
 
+import forge.card.spellability.SpellAbility;
+import forge.card.spellability.TargetChoices;
 import forge.game.GameOutcome;
 import forge.game.event.GameEventCardDamaged;
 import forge.game.event.GameEventCardDamaged.DamageType;
 import forge.game.event.GameEventLandPlayed;
 import forge.game.event.GameEventPlayerDamaged;
 import forge.game.event.GameEventPlayerPoisoned;
+import forge.game.event.GameEventSpellAbilityCast;
 import forge.game.event.GameEventSpellResolved;
 import forge.game.event.GameEventTurnBegan;
 import forge.game.event.IGameEventVisitor;
@@ -57,6 +60,41 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
     public GameLogEntry visit(GameEventSpellResolved ev) {
         String messageForLog = ev.hasFizzled ? ev.spell.getSourceCard().getName() + " ability fizzles." : ev.spell.getStackDescription();
         return new GameLogEntry(GameLogEntryType.STACK_RESOLVE, messageForLog);
+    }
+    
+
+    @Override
+    public GameLogEntry visit(GameEventSpellAbilityCast event) {
+        SpellAbility sp = event.sa;
+        final List<TargetChoices> chosenTargets = sp.getAllTargetChoices();
+
+
+        StringBuilder sb = new StringBuilder();
+        sb.append(sp.getActivatingPlayer());
+        if (sp.isSpell()) {
+            sb.append(" cast ");
+        }
+        else if (sp.isAbility()) {
+            sb.append(" activated ");
+        }
+
+        if (sp.getStackDescription().startsWith("Morph ")) {
+            sb.append("Morph");
+        } else {
+            sb.append(sp.getSourceCard());
+        }
+
+        if (sp.getTarget() != null) {
+            sb.append(" targeting ");
+            for (TargetChoices ch : chosenTargets) {
+                if (null != ch) {
+                    sb.append(ch.getTargetedString());
+                }
+            }
+        }
+        sb.append(".");
+
+        return new GameLogEntry(GameLogEntryType.STACK_ADD, sb.toString());
     }
     
     private GameLogEntry generateSummary(List<GameOutcome> gamesPlayed) {

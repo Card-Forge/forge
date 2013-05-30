@@ -14245,6 +14245,7 @@ src/main/java/forge/game/event/GameEventPlayerDamaged.java -text
 src/main/java/forge/game/event/GameEventPlayerPoisoned.java -text
 src/main/java/forge/game/event/GameEventPlayerPriority.java -text
 src/main/java/forge/game/event/GameEventShuffle.java -text
+src/main/java/forge/game/event/GameEventSpellAbilityCast.java -text
 src/main/java/forge/game/event/GameEventSpellResolved.java -text
 src/main/java/forge/game/event/GameEventTokenCreated.java -text
 src/main/java/forge/game/event/GameEventTurnBegan.java -text

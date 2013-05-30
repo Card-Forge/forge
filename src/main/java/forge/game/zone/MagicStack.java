@@ -55,6 +55,7 @@ import forge.game.Game;
 import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilCard;
 import forge.game.ai.ComputerUtilCost;
+import forge.game.event.GameEventSpellAbilityCast;
 import forge.game.event.GameEventSpellResolved;
 import forge.game.player.HumanPlay;
 import forge.game.player.Player;
@@ -306,7 +307,6 @@ public class MagicStack extends MyObservable implements Iterable<SpellAbilitySta
      */
     public final void add(final SpellAbility sp) {
         FThreads.assertExecutedByEdt(false);
-        final ArrayList<TargetChoices> chosenTargets = sp.getAllTargetChoices();
 
         if (sp.isManaAbility()) { // Mana Abilities go straight through
             AbilityUtils.resolve(sp, false);
@@ -330,35 +330,8 @@ public class MagicStack extends MyObservable implements Iterable<SpellAbilitySta
             return;
         }
 
-        //============= GameLog ======================
-        StringBuilder sb = new StringBuilder();
-        sb.append(sp.getActivatingPlayer());
-        if (sp.isSpell()) {
-            sb.append(" cast ");
-        }
-        else if (sp.isAbility()) {
-            sb.append(" activated ");
-        }
-
-        if (sp.getStackDescription().startsWith("Morph ")) {
-            sb.append("Morph");
-        } else {
-            sb.append(sp.getSourceCard());
-        }
-
-        if (sp.getTarget() != null) {
-            sb.append(" targeting ");
-            for (TargetChoices ch : chosenTargets) {
-                if (null != ch) {
-                    sb.append(ch.getTargetedString());
-                }
-            }
-        }
-        sb.append(".");
-
-        game.getGameLog().add(GameLogEntryType.STACK_ADD, sb.toString());
-        //============= GameLog ======================
-
+        game.fireEvent(new GameEventSpellAbilityCast(sp));
+        
         // if activating player slips through the cracks, assign activating
         // Player to the controller here
         if (null == sp.getActivatingPlayer()) {
@@ -488,6 +461,7 @@ public class MagicStack extends MyObservable implements Iterable<SpellAbilitySta
 
             // Run BecomesTarget triggers
             // Create a new object, since the triggers aren't happening right away
+            final List<TargetChoices> chosenTargets = sp.getAllTargetChoices();
             runParams = new HashMap<String, Object>();
             runParams.put("SourceSA", sp);
             if (!chosenTargets.isEmpty()) { 
