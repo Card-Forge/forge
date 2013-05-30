@@ -1,0 +1,25 @@
+[duel]
+[metadata]
+Name=Gunnery Sergeant Hartman 3
+Title=Gunnery Sergeant Hartman
+Difficulty=hard
+Description=Mono W token deck with Cathars' Crusade and Mentor of the Meek
+Icon=Gunnery Sergeant Hartman.jpg
+Deck Type=constructed
+[main]
+2 Soul Warden
+1 Soul's Attendant
+1 Trained Caracal
+4 Mentor of the Meek
+4 Doomed Traveler
+1 Mox Pearl
+3 Godhead of Awe
+1 Elspeth, Knight-Errant
+1 Geist-Honored Monk
+4 Gather the Townsfolk
+22 Plains
+4 Precinct Captain
+4 Cathars' Crusade
+4 Spectral Procession
+4 Thraben Doomsayer
+[sideboard]
