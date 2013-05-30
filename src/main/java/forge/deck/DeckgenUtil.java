@@ -221,9 +221,11 @@ public class DeckgenUtil {
         final Deck deck;
 
         // Retrieve from custom or quest deck maps
-        if (lst0.getName().equals(DeckTypes.CUSTOM.toString())) {
+        if (lst0.getName().equals(DeckTypes.CUSTOM.toString())) 
             deck = Singletons.getModel().getDecks().getConstructed().get(deckName);
-        } else 
+        else if (lst0.getName().equals(DeckTypes.PRECON.toString()))
+            deck = QuestController.getPrecons().get(deckName).getDeck();
+         else 
             deck = getQuestEvent(deckName).getEventDeck();
 
         // Dump into map and display.
