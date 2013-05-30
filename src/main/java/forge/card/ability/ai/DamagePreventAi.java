@@ -104,6 +104,7 @@ public class DamagePreventAi extends SpellAbilityAi {
             final List<Card> threatenedTargets = new ArrayList<Card>();
             // filter AIs battlefield by what I can target
             List<Card> targetables = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), tgt.getValidTgts(), ai, hostCard);
+            targetables = CardLists.getTargetableCards(targetables, sa);
 
             for (final Card c : targetables) {
                 if (objects.contains(c)) {
@@ -128,8 +129,9 @@ public class DamagePreventAi extends SpellAbilityAi {
                 // filter AIs battlefield by what I can target
                 List<Card> targetables = ai.getCardsIn(ZoneType.Battlefield);
                 targetables = CardLists.getValidCards(targetables, tgt.getValidTgts(), ai, hostCard);
+                targetables = CardLists.getTargetableCards(targetables, sa);
 
-                if (targetables.size() == 0) {
+                if (targetables.isEmpty()) {
                     return false;
                 }
                 final List<Card> combatants = CardLists.filter(targetables, CardPredicates.Presets.CREATURES);
