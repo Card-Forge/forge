@@ -13,7 +13,6 @@ import forge.card.spellability.Ability;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.game.Game;
-import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 

@@ -6,7 +6,6 @@ import java.util.Map.Entry;
 
 import com.google.common.eventbus.Subscribe;
 
-import forge.card.spellability.SpellAbility;
 import forge.card.spellability.TargetChoices;
 import forge.game.GameOutcome;
 import forge.game.event.GameEventCardDamaged;
@@ -65,28 +64,16 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
 
     @Override
     public GameLogEntry visit(GameEventSpellAbilityCast event) {
-        SpellAbility sp = event.sa;
-        final List<TargetChoices> chosenTargets = sp.getAllTargetChoices();
-
+        String who = event.sa.getActivatingPlayer().getName();
+        String action = event.sa.isSpell() ? " cast " : " activated ";
+        String what = event.sa.getStackDescription().startsWith("Morph ") ? "Morph" : event.sa.getSourceCard().toString();
 
         StringBuilder sb = new StringBuilder();
-        sb.append(sp.getActivatingPlayer());
-        if (sp.isSpell()) {
-            sb.append(" cast ");
-        }
-        else if (sp.isAbility()) {
-            sb.append(" activated ");
-        }
+        sb.append(who).append(action).append(what);
 
-        if (sp.getStackDescription().startsWith("Morph ")) {
-            sb.append("Morph");
-        } else {
-            sb.append(sp.getSourceCard());
-        }
-
-        if (sp.getTarget() != null) {
+        if (event.sa.getTarget() != null) {
             sb.append(" targeting ");
-            for (TargetChoices ch : chosenTargets) {
+            for (TargetChoices ch : event.sa.getAllTargetChoices()) {
                 if (null != ch) {
                     sb.append(ch.getTargetedString());
                 }
