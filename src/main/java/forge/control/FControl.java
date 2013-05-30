@@ -367,7 +367,8 @@ public enum FControl {
         for(Player p: pp)
             p.concede();
         
-        boolean humanHasPriority = game.getPhaseHandler().getPriorityPlayer().getLobbyPlayer() == getLobby().getGuiPlayer(); 
+        Player priorityPlayer = game.getPhaseHandler().getPriorityPlayer();
+        boolean humanHasPriority = priorityPlayer == null || priorityPlayer.getLobbyPlayer() == getLobby().getGuiPlayer(); 
 
         if ( hasHuman && humanHasPriority ) 
             game.getAction().checkGameOverCondition();

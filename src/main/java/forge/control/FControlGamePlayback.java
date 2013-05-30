@@ -21,7 +21,7 @@ public class FControlGamePlayback extends IGameEventVisitor.Base<Void> {
     @Subscribe
     public void receiveGameEvent(final GameEvent ev) { ev.visit(this); }
 
-    private int phasesDelay = 400;
+    private int phasesDelay = 200;
     private int combatDelay = 400;
     private int resolveDelay = 600;
     
@@ -67,23 +67,6 @@ public class FControlGamePlayback extends IGameEventVisitor.Base<Void> {
         return null;
     }
     
-    /* (non-Javadoc)
-     * @see forge.game.event.IGameEventVisitor.Base#visit(forge.game.event.GameEventGameStarted)
-     */
-    @Override
-    public Void visit(GameEventGameStarted event) {
-        boolean hasHuman = false;
-        for(Player p :  event.players) {
-            if ( p.getController().getLobbyPlayer() == fc.getLobby().getGuiPlayer() )
-                hasHuman = true;
-        }
-        
-    
-        // show input here to adjust speed if no human playing
-        
-        return null;
-    }
-
 
     @Override
     public Void visit(GameEventLandPlayed event) {
