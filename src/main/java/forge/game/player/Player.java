@@ -2960,7 +2960,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         {
           //Run PlaneswalkedFrom triggers here.
             HashMap<String,Object> runParams = new HashMap<String,Object>();
-            runParams.put("Card", currentPlanes);
+            runParams.put("Card", new ArrayList<Card>(currentPlanes));
             game.getTriggerHandler().runTrigger(TriggerType.PlaneswalkedFrom, runParams,false);
             
             for(Card c : currentPlanes) {
