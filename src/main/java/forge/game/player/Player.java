@@ -2066,7 +2066,6 @@ public class Player extends GameEntity implements Comparable<Player> {
      * Concede.
      */
     public final void concede() { // No cantLose checks - just lose
-        FThreads.assertExecutedByEdt(false);
         setOutcome(PlayerOutcome.concede());
     }
 
@@ -2703,6 +2702,10 @@ public class Player extends GameEntity implements Comparable<Player> {
      */
     public final LobbyPlayer getLobbyPlayer() {
         return getController().getLobbyPlayer();
+    }
+
+    public final LobbyPlayer getOriginalLobbyPlayer() {
+        return controllerCreator.getLobbyPlayer();
     }
     
     public final boolean isMindSlaved() {

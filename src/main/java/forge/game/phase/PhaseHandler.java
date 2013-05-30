@@ -713,14 +713,14 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
             } else if( DEBUG_PHASES ){
                 System.out.print(" >>\n");
             }
-            
-            if ( game.isGameOver() ) return; // conceded?
+
             
             // actingPlayer is the player who may act
             // the firstAction is the player who gained Priority First in this segment
             // of Priority
-
             Player nextPlayer = game.getNextPlayerAfter(this.getPriorityPlayer());
+            
+            if ( game.isGameOver() || nextPlayer == null ) return; // conceded?
     
             // System.out.println(String.format("%s %s: %s passes priority to %s", playerTurn, phase, actingPlayer, nextPlayer));
             if (this.getFirstPriority().equals(nextPlayer)) {

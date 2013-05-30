@@ -198,8 +198,10 @@ public class ViewWinLose {
                 nHumansInGame++;
         }
         LobbyPlayer winner = match.getLastGameOutcome().getWinner();
-        String title = nHumansInGame == 1 ? "You " + (winner == guiPlayer ? "won!" : "lost!") : winner.getName() + " Won!";
-        return title;
+        if ( winner == null )
+            return "It's a draw!";
+
+        return nHumansInGame == 1 ? "You " + (winner == guiPlayer ? "won!" : "lost!") : winner.getName() + " Won!";
     }
 
     /** @return {@link forge.gui.toolbox.FButton} */

@@ -26,16 +26,15 @@ import forge.gui.match.nonsingleton.VHand;
 import forge.gui.match.nonsingleton.VField.PhaseLabel;
 
 public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
-    public final FControl fc;
+    private final FControl fc;
     public FControlGameEventHandler(FControl fc ) {
         this.fc = fc;
     }
-    
-    private final AtomicBoolean phaseUpdPlanned = new AtomicBoolean(false);
-    
+
     @Subscribe
     public void receiveGameEvent(final GameEvent ev) { ev.visit(this); }
-    
+
+    private final AtomicBoolean phaseUpdPlanned = new AtomicBoolean(false);
     @Override
     public Void visit(final GameEventTurnPhase ev) {
         if ( phaseUpdPlanned.getAndSet(true) ) return null;
@@ -50,15 +49,13 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
             PhaseLabel lbl = matchUi.getFieldViewFor(p).getLabelFor(ph);
 
             matchUi.resetAllPhaseButtons();
-            if (lbl != null) {
-                lbl.setActive(true);
-            }
-            
-            
+            if (lbl != null) lbl.setActive(true);
         } });
+        
+
         return null;
     }
-    
+
     @Override
     public Void visit(GameEventAnteCardsSelected ev) {
         // Require EDT here?
@@ -99,6 +96,4 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
         } });
         return null;
     }
-    
-    
 }

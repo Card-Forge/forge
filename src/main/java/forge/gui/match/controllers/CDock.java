@@ -33,6 +33,7 @@ import forge.FThreads;
 import forge.Singletons;
 import forge.CardPredicates.Presets;
 import forge.Command;
+import forge.control.FControl;
 import forge.deck.Deck;
 import forge.game.Game;
 import forge.game.phase.CombatUtil;
@@ -80,23 +81,8 @@ public enum CDock implements ICDoc {
         if (FOverlay.SINGLETON_INSTANCE.getPanel().isShowing()) {
             return;
         }
-        
-        final Player p = findAffectedPlayer();
-        if( p == null ) return;
-        if( p.isMindSlaved() ) {
-            GuiDialog.message("You cannot make concede a player you temporarily control");
-            return;
-        }
 
-        game.getAction().invoke(new Runnable() {
-            @Override
-            public void run() {
-                p.concede();
-                p.getGame().getAction().checkStateEffects();
-            }
-        });
-        game = null; // no second entry possible;
-
+        Singletons.getControl().stopGame();
     }
 
     /**

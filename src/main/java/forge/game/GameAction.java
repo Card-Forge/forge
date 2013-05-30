@@ -63,6 +63,8 @@ import forge.game.event.GameEventCardDestroyed;
 import forge.game.event.GameEventCardRegenerated;
 import forge.game.event.GameEventCardSacrificed;
 import forge.game.event.GameEventDuelFinished;
+import forge.game.event.GameEventFlipCoin;
+import forge.game.event.GameEventGameStarted;
 import forge.game.player.GameLossReason;
 import forge.game.player.HumanPlay;
 import forge.game.player.Player;
@@ -72,6 +74,7 @@ import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 import forge.gui.GuiDialog;
+import forge.util.Aggregates;
 import forge.util.maps.CollectionSuppliers;
 import forge.util.maps.HashMapOfLists;
 import forge.util.maps.MapOfLists;
@@ -786,75 +789,6 @@ public class GameAction {
         game.getStack().add(activate);
     }
 
-    /**
-     * <p>
-     * checkEndGameSate.
-     * </p>
-     * 
-     * @return a boolean.
-     */
-    private final GameEndReason checkEndGameState(final Game game) {
-
-        GameEndReason reason = null;
-        // award loses as SBE
-        List<Player> losers = null;
-        for (Player p : game.getPlayers()) {
-            if (p.checkLoseCondition()) { // this will set appropriate outcomes
-                // Run triggers
-                if (losers == null) {
-                    losers = new ArrayList<Player>(3);
-                }
-                losers.add(p);
-            }
-        }
-
-        // Has anyone won by spelleffect?
-        for (Player p : game.getPlayers()) {
-            if (!p.hasWon()) {
-                continue;
-            }
-
-            // then the rest have lost!
-            reason = GameEndReason.WinsGameSpellEffect;
-            for (Player pl : game.getPlayers()) {
-                if (pl.equals(p)) {
-                    continue;
-                }
-
-                if (!pl.loseConditionMet(GameLossReason.OpponentWon, p.getOutcome().altWinSourceName)) {
-                    reason = null; // they cannot lose!
-                } else {
-                    if (losers == null) {
-                        losers = new ArrayList<Player>(3);
-                    }
-                    losers.add(p);
-                }
-            }
-            break;
-        }
-
-        // need a separate loop here, otherwise ConcurrentModificationException is raised
-        if (losers != null) {
-            for (Player p : losers) {
-                game.onPlayerLost(p);
-            }
-        }
-
-        // still unclear why this has not caught me conceding
-        if (reason == null && Iterables.size(Iterables.filter(game.getPlayers(), Player.Predicates.NOT_LOST)) == 1)
-        {
-            reason = GameEndReason.AllOpponentsLost;
-        }
-
-        // ai's cannot finish their game without human yet - so terminate a game if human has left.
-        /*
-        if (reason == null && !Iterables.any(game.getPlayers(), Predicates.and(Player.Predicates.NOT_LOST, Player.Predicates.isType(PlayerType.HUMAN)))) {
-            reason = GameEndReason.AllHumansLost;
-        }
-        */
-        return reason;
-    }
-
     /** */
     public final void checkStaticAbilities() {
         FThreads.assertExecutedByEdt(false);
@@ -1082,17 +1016,80 @@ public class GameAction {
             }
         } // for q=0;q<2
 
-        GameEndReason endGame = this.checkEndGameState(game);
-        if (endGame != null) {
-            // Clear Simultaneous triggers at the end of the game
-            game.setGameOver(endGame);
-            game.getStack().clearSimultaneousStack();
-        }
+        checkGameOverCondition();
 
         if (!refreeze) {
             game.getStack().unfreezeStack();
         }
     } // checkStateEffects()
+
+    public void checkGameOverCondition() {
+        GameEndReason reason = this.eliminateLosingPlayers();
+        
+        // still unclear why this has not caught me conceding
+        if (reason == null )
+        {
+            int cntNotLost = Iterables.size(Iterables.filter(game.getPlayers(), Player.Predicates.NOT_LOST));
+            if( cntNotLost == 1 )
+                reason = GameEndReason.AllOpponentsLost;
+            else if ( cntNotLost == 0 )
+                reason = GameEndReason.Draw;
+            else 
+                return;
+        }
+
+        // Clear Simultaneous triggers at the end of the game
+        game.setGameOver(reason);
+        game.getStack().clearSimultaneousStack();
+    }
+
+    private GameEndReason eliminateLosingPlayers() {
+        // award loses as SBE
+        List<Player> losers = null;
+        for (Player p : game.getPlayers()) {
+            if (p.checkLoseCondition()) { // this will set appropriate outcomes
+                // Run triggers
+                if (losers == null) {
+                    losers = new ArrayList<Player>(3);
+                }
+                losers.add(p);
+            }
+        }
+    
+        GameEndReason reason = null;
+        // Has anyone won by spelleffect?
+        for (Player p : game.getPlayers()) {
+            if (!p.hasWon()) {
+                continue;
+            }
+    
+            // then the rest have lost!
+            reason = GameEndReason.WinsGameSpellEffect;
+            for (Player pl : game.getPlayers()) {
+                if (pl.equals(p)) {
+                    continue;
+                }
+    
+                if (!pl.loseConditionMet(GameLossReason.OpponentWon, p.getOutcome().altWinSourceName)) {
+                    reason = null; // they cannot lose!
+                } else {
+                    if (losers == null) {
+                        losers = new ArrayList<Player>(3);
+                    }
+                    losers.add(p);
+                }
+            }
+            break;
+        }
+    
+        // need a separate loop here, otherwise ConcurrentModificationException is raised
+        if (losers != null) {
+            for (Player p : losers) {
+                game.onPlayerLost(p);
+            }
+        }
+        return reason;
+    }
 
     /**
      * <p>
@@ -1474,33 +1471,55 @@ public class GameAction {
             }
         }
     }
+    
+    private Player determineFirstTurnPlayer(final GameOutcome lastGameOutcome) {
+        // Only cut/coin toss if it's the first game of the match
+        Player goesFirst = null;
 
-    public void startGame(final Player firstPlayer) {
-        Player first = firstPlayer;
+        boolean isFirstGame = lastGameOutcome == null;
+        if (isFirstGame) {
+            game.fireEvent(new GameEventFlipCoin()); // Play the Flip Coin sound
+            goesFirst = Aggregates.random(game.getPlayers());
+        } else {
+            for(Player p : game.getPlayers()) {
+                if(!lastGameOutcome.isWinner(p.getLobbyPlayer())) { 
+                    goesFirst = p;
+                    break;
+                }
+            }
+        }
+
+        boolean willPlay = goesFirst.getController().getWillPlayOnFirstTurn(isFirstGame);
+        goesFirst = willPlay ? goesFirst : goesFirst.getOpponent();
+        return goesFirst;
+    }
+
+    public void startGame() {
+        Player first = determineFirstTurnPlayer(game.getMatch().getLastGameOutcome());
+
         do { 
             if ( game.isGameOver() ) break; // conceded during "play or draw"
-
-            // Draw <handsize> cards
-            for (final Player p1 : game.getPlayers()) {
-                p1.drawCards(p1.getMaxHandSize());
-            }
+            
+            // FControl should determine now if there are any human players. 
+            // Where there are none, it should bring up speed controls
+            game.fireEvent(new GameEventGameStarted(first, game.getPlayers()));
 
             game.setAge(GameAge.Mulligan);
-            performMulligans(first, game.getType() == GameType.Commander);
-            
-            if ( game.isGameOver() ) break; // conceded during "mulligan" prompt
+            for (final Player p1 : game.getPlayers())
+                p1.drawCards(p1.getMaxHandSize());
 
-            // should I restore everyting exiled by Karn here, or before Mulligans is fine?  
+            performMulligans(first, game.getType() == GameType.Commander);
+            if ( game.isGameOver() ) break; // conceded during "mulligan" prompt
 
             game.setAge(GameAge.Play);
 
             // THIS CODE WILL WORK WITH PHASE = NULL {
                 if(game.getType() == GameType.Planechase)
-                    firstPlayer.initPlane();
-
+                    first.initPlane();
+    
                 handleLeylinesAndChancellors();
                 checkStateEffects();
-
+    
                 // Run Trigger beginning of the game
                 final HashMap<String, Object> runParams = new HashMap<String, Object>();
                 game.getTriggerHandler().runTrigger(TriggerType.NewGame, runParams, false);
@@ -1511,7 +1530,7 @@ public class GameAction {
             first = game.getPhaseHandler().getPlayerTurn();  // needed only for restart
         } while( game.getAge() == GameAge.RestartedByKarn );
 
-        // will pull UI 
+        // will pull UI dialog, when the UI is listening
         game.fireEvent(new GameEventDuelFinished());
     }
     
@@ -1588,6 +1607,7 @@ public class GameAction {
             }
     }
     
+    // Invokes given runnable in Game thread pool - used to start game and perform actions from UI (when game-0 waits for input)
     public void invoke(final Runnable proc) {
         if( FThreads.isGameThread() ) {
             proc.run();

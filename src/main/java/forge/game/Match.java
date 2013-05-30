@@ -100,8 +100,7 @@ public class Match {
         currentGame.getAction().invoke(new Runnable() {
             @Override
             public void run() {
-                final Player firstPlayer = determineFirstTurnPlayer(getLastGameOutcome(), currentGame);
-                currentGame.getAction().startGame(firstPlayer);
+                currentGame.getAction().startGame();
             }
         });
     }
@@ -205,26 +204,4 @@ public class Match {
         return 10;
     }
     
-
-    private Player determineFirstTurnPlayer(final GameOutcome lastGameOutcome, final Game game) {
-        // Only cut/coin toss if it's the first game of the match
-        Player goesFirst = null;
-
-        boolean isFirstGame = lastGameOutcome == null;
-        if (isFirstGame) {
-            game.fireEvent(new GameEventFlipCoin()); // Play the Flip Coin sound
-            goesFirst = Aggregates.random(game.getPlayers());
-        } else {
-            for(Player p : game.getPlayers()) {
-                if(!lastGameOutcome.isWinner(p.getLobbyPlayer())) { 
-                    goesFirst = p;
-                    break;
-                }
-            }
-        }
-
-        boolean willPlay = goesFirst.getController().getWillPlayOnFirstTurn(isFirstGame);
-        goesFirst = willPlay ? goesFirst : goesFirst.getOpponent();
-        return goesFirst;
-    }
 }

@@ -24,6 +24,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JLayeredPane;
@@ -60,6 +61,7 @@ import forge.gui.match.controllers.CStack;
 import forge.gui.match.nonsingleton.VField;
 import forge.gui.match.views.VAntes;
 import forge.gui.toolbox.CardFaceSymbols;
+import forge.gui.toolbox.FOverlay;
 import forge.gui.toolbox.FSkin;
 import forge.net.NetServer;
 import forge.properties.NewConstants;
@@ -127,7 +129,7 @@ public enum FControl {
                 Singletons.getView().getFrame().setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 
                 if (!FControl.this.game.isGameOver())
-                    CDock.SINGLETON_INSTANCE.concede();
+                    stopGame();
                 else {
                     Singletons.getControl().changeState(FControl.Screens.HOME_SCREEN);
                     SOverlayUtils.hideOverlay();
@@ -350,6 +352,28 @@ public enum FControl {
     public Game getObservedGame() {
         return game;
     }
+    
+    public final void stopGame() {
+        List<Player> pp = new ArrayList<Player>();
+        for(Player p : game.getPlayers()) {
+            if ( p.getOriginalLobbyPlayer() == getLobby().getGuiPlayer() )
+                pp.add(p);
+        }
+        boolean hasHuman = !pp.isEmpty();
+        
+        if ( pp.isEmpty() ) 
+            pp.addAll(game.getPlayers()); // no human? then all players surrender!
+
+        for(Player p: pp)
+            p.concede();
+        
+        boolean humanHasPriority = game.getPhaseHandler().getPriorityPlayer().getLobbyPlayer() == getLobby().getGuiPlayer(); 
+
+        if ( hasHuman && humanHasPriority ) 
+            game.getAction().checkGameOverCondition();
+        else
+            game.isGameOver(); // this is synchronized method - it's used to make Game-0 thread see changes made here
+    }
 
     private InputQueue inputQueue;
     public InputQueue getInputQueue() {
@@ -358,6 +382,7 @@ public enum FControl {
 
     
     private final FControlGameEventHandler fcVisitor = new FControlGameEventHandler(this);
+    private final FControlGamePlayback playbackControl = new FControlGamePlayback(this);
     public void attachToGame(Game game0) {
         // TODO: Detach from other game we might be looking at
         
@@ -382,13 +407,19 @@ public enum FControl {
     
         CMessage.SINGLETON_INSTANCE.getInputControl().setGame(game);
     
-        // models shall notify controllers of changes
-        
-        
-        // some observers were set in CMatchUI.initMatch
-    
         // Listen to DuelOutcome event to show ViewWinLose
         game.subscribeToEvents(fcVisitor);
+        
+        // Add playback controls to match if needed
+        boolean hasHuman = false;
+        for(Player p :  game.getPlayers()) {
+            if ( p.getController().getLobbyPlayer() == getLobby().getGuiPlayer() )
+                hasHuman = true;
+        }
+        if (!hasHuman) {
+            game.subscribeToEvents(playbackControl);
+        }
+
         
         
         VAntes.SINGLETON_INSTANCE.setModel(game.getRegisteredPlayers());

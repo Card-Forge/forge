@@ -20,6 +20,7 @@ public interface IGameEventVisitor<T> {
     T visit(GameEventDuelFinished event);
     T visit(GameEventDuelOutcome event);
     T visit(GameEventFlipCoin event);
+    T visit(GameEventGameStarted event);
     T visit(GameEventGameRestarted event);
     T visit(GameEventLandPlayed event);
     T visit(GameEventLifeLoss event);
@@ -53,6 +54,7 @@ public interface IGameEventVisitor<T> {
         public T visit(GameEventDuelFinished event) { return null; }
         public T visit(GameEventDuelOutcome event) { return null; }
         public T visit(GameEventFlipCoin event) { return null; }
+        public T visit(GameEventGameStarted event) { return null; }
         public T visit(GameEventGameRestarted event) { return null; }
         public T visit(GameEventLandPlayed event) { return null; }
         public T visit(GameEventLifeLoss event) { return null; }
@@ -68,8 +70,6 @@ public interface IGameEventVisitor<T> {
         public T visit(GameEventTurnPhase event) { return null; }
         public T visit(GameEventPlayerDamaged event) { return null; }
     }
-
-
 
 }
 

@@ -491,7 +491,10 @@ public class Game {
     public Player getNextPlayerAfter(final Player playerTurn) {
         int iPlayer = roIngamePlayers.indexOf(playerTurn);
 
-        if (-1 == iPlayer && !roIngamePlayers.isEmpty()) { // if playerTurn has just lost
+        if (roIngamePlayers.isEmpty()) 
+            return null;
+        
+        if (-1 == iPlayer) { // if playerTurn has just lost
             int iAlive;
             iPlayer = allPlayers.indexOf(playerTurn);
             do {
@@ -507,7 +510,6 @@ public class Game {
         }
 
         return roIngamePlayers.get(iPlayer);
-
     }
     
     public int getPosition(Player player, Player startingPlayer) {

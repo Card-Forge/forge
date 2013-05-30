@@ -14163,6 +14163,7 @@ src/main/java/forge/control/ChatArea.java -text
 src/main/java/forge/control/ControlBazaarUI.java -text
 src/main/java/forge/control/FControl.java -text
 src/main/java/forge/control/FControlGameEventHandler.java -text
+src/main/java/forge/control/FControlGamePlayback.java -text
 src/main/java/forge/control/InputQueue.java svneol=native#text/plain
 src/main/java/forge/control/KeyboardShortcuts.java -text
 src/main/java/forge/control/Lobby.java -text
@@ -14234,6 +14235,7 @@ src/main/java/forge/game/event/GameEventDuelFinished.java -text
 src/main/java/forge/game/event/GameEventDuelOutcome.java -text
 src/main/java/forge/game/event/GameEventFlipCoin.java -text
 src/main/java/forge/game/event/GameEventGameRestarted.java -text
+src/main/java/forge/game/event/GameEventGameStarted.java -text
 src/main/java/forge/game/event/GameEventLandPlayed.java -text
 src/main/java/forge/game/event/GameEventLifeLoss.java -text
 src/main/java/forge/game/event/GameEventManaBurn.java -text

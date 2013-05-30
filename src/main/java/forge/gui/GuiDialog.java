@@ -101,9 +101,9 @@ public class GuiDialog {
     
         // Play the Flip A Coin sound
         caller.getGame().fireEvent(new GameEventFlipCoin());
-    
-        JOptionPane.showMessageDialog(null, source.getName() + " - " + caller + winMsg, source.getName(),
-                JOptionPane.PLAIN_MESSAGE);
+        
+        message(source.getName() + " - " + caller + winMsg, source.getName());
+        
         return winFlip;
     }
 
