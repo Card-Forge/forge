@@ -31,6 +31,7 @@ import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.game.Game;
 import forge.game.ai.ComputerUtilCard;
+import forge.game.phase.CombatUtil;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
@@ -61,14 +62,13 @@ import forge.game.zone.ZoneType;
  */
 public class ControlGainAi extends SpellAbilityAi {
     @Override
-    protected boolean canPlayAI(Player ai, final SpellAbility sa) {
+    protected boolean canPlayAI(final Player ai, final SpellAbility sa) {
         boolean hasCreature = false;
         boolean hasArtifact = false;
         boolean hasEnchantment = false;
         boolean hasLand = false;
 
         final List<String> lose = sa.hasParam("LoseControl") ? Arrays.asList(sa.getParam("LoseControl").split(",")) : null;
-
 
         final Target tgt = sa.getTarget();
         Player opp = ai.getOpponent();
@@ -93,6 +93,13 @@ public class ControlGainAi extends SpellAbilityAi {
             }
         }
 
+        // Don't steal something if I can't Attack without, or prevent it from
+        // blocking at least
+        if (lose != null && lose.contains("EOT")
+                && ai.getGame().getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
+            return false;
+        }
+
         List<Card> list =
                 CardLists.getValidCards(opp.getCardsIn(ZoneType.Battlefield), tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getSourceCard());
         // AI won't try to grab cards that are filtered out of AI decks on
@@ -101,18 +108,11 @@ public class ControlGainAi extends SpellAbilityAi {
             @Override
             public boolean apply(final Card c) {
                 final Map<String, String> vars = c.getSVars();
-                return !vars.containsKey("RemAIDeck") && c.canBeTargetedBy(sa);
+                return !vars.containsKey("RemAIDeck") && c.canBeTargetedBy(sa) && CombatUtil.canAttackNextTurn(c, ai.getOpponent());
             }
         });
 
         if (list.isEmpty()) {
-            return false;
-        }
-
-        // Don't steal something if I can't Attack without, or prevent it from
-        // blocking at least
-        if ((lose != null) && lose.contains("EOT")
-                && ai.getGame().getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
             return false;
         }
 

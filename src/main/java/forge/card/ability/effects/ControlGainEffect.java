@@ -13,6 +13,7 @@ import forge.card.spellability.Ability;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.game.Game;
+import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
@@ -164,6 +165,7 @@ public class ControlGainEffect extends SpellAbilityEffect {
                 }
                 if (lose.contains("EOT")) {
                     game.getEndOfTurn().addAt(this.getLoseControlCommand(tgtC, tStamp, bTapOnLose, source, kws));
+                    tgtC.setSVar("SacMe", "6");
                 }
             }
 
@@ -245,7 +247,10 @@ public class ControlGainEffect extends SpellAbilityEffect {
             private static final long serialVersionUID = 878543373519872418L;
 
             @Override
-            public void run() { doLoseControl(c, hostCard, bTapOnLose, kws, tStamp); }
+            public void run() { 
+                doLoseControl(c, hostCard, bTapOnLose, kws, tStamp);
+                c.getSVars().remove("SacMe");
+            }
         };
 
         return loseControl;

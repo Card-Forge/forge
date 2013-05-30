@@ -350,7 +350,7 @@ public class ComputerUtil {
             }
         }
         if (pref.contains("SacCost")) { // search for permanents with SacMe
-            for (int ip = 0; ip < 6; ip++) { // priority 0 is the lowest,
+            for (int ip = 1; ip < 6; ip++) { // priority 1 is the lowest,
                                              // priority 5 the highest
                 final int priority = 6 - ip;
                 final List<Card> sacMeList = CardLists.filter(typeList, new Predicate<Card>() {
@@ -359,7 +359,7 @@ public class ComputerUtil {
                         return (c.hasSVar("SacMe") && (Integer.parseInt(c.getSVar("SacMe")) == priority));
                     }
                 });
-                if (sacMeList.size() != 0) {
+                if (!sacMeList.isEmpty()) {
                     CardLists.shuffle(sacMeList);
                     return sacMeList.get(0);
                 }
