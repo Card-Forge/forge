@@ -68,7 +68,7 @@ public class EventVisualizer extends IGameEventVisitor.Base<SoundEffectType> {
         }
 
         Card source = evt.spell.getSourceCard();
-        if (!evt.spell.isSpell()) {
+        if (evt.spell.isSpell()) {
             // if there's a specific effect for this particular card, play it and
             // we're done.
             if (hasSpecificCardEffect(source)) {
