@@ -190,7 +190,7 @@ public abstract class SpellAbility implements ISpellAbility {
      * 
      * @return a boolean.
      */
-    public boolean canPlayAI() {
+    public /*final*/ boolean canPlayAI() {
         return true;
     }
 

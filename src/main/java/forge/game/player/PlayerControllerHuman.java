@@ -519,4 +519,16 @@ public class PlayerControllerHuman extends PlayerController {
         Singletons.getControl().getInputQueue().setInputAndWait(inp);
         return inp.getSelected();
     }
+
+
+    /* (non-Javadoc)
+     * @see forge.game.player.PlayerController#chooseCardsToRevealFromHand(int, int, java.util.List)
+     */
+    @Override
+    public List<Card> chooseCardsToRevealFromHand(int min, int max, List<Card> valid) {
+        InputSelectCardsFromList inp = new InputSelectCardsFromList(min, max, valid);
+        inp.setMessage("Choose Which Cards to Reveal");
+        Singletons.getControl().getInputQueue().setInputAndWait(inp);
+        return inp.getSelected();
+    }
 }

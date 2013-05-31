@@ -14008,7 +14008,6 @@ src/main/java/forge/card/ability/effects/RepeatEachEffect.java -text
 src/main/java/forge/card/ability/effects/RepeatEffect.java -text
 src/main/java/forge/card/ability/effects/RestartGameEffect.java -text
 src/main/java/forge/card/ability/effects/RevealEffect.java -text
-src/main/java/forge/card/ability/effects/RevealEffectBase.java svneol=native#text/plain
 src/main/java/forge/card/ability/effects/RevealHandEffect.java -text
 src/main/java/forge/card/ability/effects/RollPlanarDiceEffect.java -text
 src/main/java/forge/card/ability/effects/SacrificeAllEffect.java -text

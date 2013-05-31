@@ -6,67 +6,74 @@ import java.util.List;
 import forge.Card;
 import forge.CardLists;
 import forge.card.ability.AbilityUtils;
+import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
+import forge.game.Game;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
-import forge.gui.GuiChoose;
 import forge.util.Aggregates;
 
-public class RevealEffect extends RevealEffectBase {
+public class RevealEffect extends SpellAbilityEffect {
 
     @Override
     public void resolve(SpellAbility sa) {
         final Card host = sa.getSourceCard();
         final boolean anyNumber = sa.hasParam("AnyNumber");
+        int cnt = sa.hasParam("NumCards") ? AbilityUtils.calculateAmount(host, sa.getParam("NumCards"), sa) : 1;
 
+        
         final Target tgt = sa.getTarget();
 
         for (final Player p : getTargetPlayers(sa)) {
-            if ((tgt == null) || p.canBeTargetedBy(sa)) {
-                final List<Card> handChoices = p.getCardsIn(ZoneType.Hand);
-                if (handChoices.size() > 0) {
-                    final List<Card> revealed = new ArrayList<Card>();
-                    if (sa.hasParam("Random")) {
-                        if (sa.hasParam("NumCards")) {
-                            final int num = AbilityUtils.calculateAmount(host, sa.getParam("NumCards"), sa);
-                            final int revealnum = Math.min(handChoices.size(), num);
-                            final List<Card> hand = new ArrayList<Card>(handChoices);
-                            for (int i = 0; i < revealnum; i++) {
-                                final Card random = Aggregates.random(hand);
-                                revealed.add(random);
-                                hand.remove(random);
-                            }
-                        } else {
-                            revealed.add(Aggregates.random(handChoices));
+            final Game game = p.getGame();
+            if (tgt == null || p.canBeTargetedBy(sa)) {
+                final List<Card> cardsInHand = p.getZone(ZoneType.Hand).getCards();
+                if (cardsInHand.isEmpty())
+                    continue; 
+                
+                final List<Card> revealed = new ArrayList<Card>();
+                if (sa.hasParam("Random")) {
+                    if (sa.hasParam("NumCards")) {
+                        final int revealnum = Math.min(cardsInHand.size(), cnt);
+                        final List<Card> hand = new ArrayList<Card>(cardsInHand);
+                        for (int i = 0; i < revealnum; i++) {
+                            final Card random = Aggregates.random(hand);
+                            revealed.add(random);
+                            hand.remove(random);
                         }
-                        GuiChoose.oneOrNone("Revealed card(s)", revealed);
                     } else {
-                        List<Card> valid = new ArrayList<Card>(handChoices);
-                        int max = 1;
-                        if (sa.hasParam("RevealValid")) {
-                            valid = CardLists.getValidCards(valid, sa.getParam("RevealValid"), p, host);
-                        }
-                        if (anyNumber) {
-                            max = valid.size();
-                        }
-                        else if (sa.hasParam("NumCards")) {
-                            max = Math.min(valid.size(), AbilityUtils.calculateAmount(host, sa.getParam("NumCards"), sa));
-                        }
-                        //revealed.addAll(getRevealedList(sa.getActivatingPlayer(), valid, max, anyNumber));
-                        revealed.addAll(getRevealedList(p, valid, max, anyNumber));
-                        //if (sa.getActivatingPlayer().isComputer()) {
-                        if (p.isComputer()) {
-                            GuiChoose.oneOrNone("Revealed card(s)", revealed);
-                        }
+                        revealed.add(Aggregates.random(cardsInHand));
                     }
+                    
+                } else {
+                    List<Card> valid = new ArrayList<Card>(cardsInHand);
 
-                    if (sa.hasParam("RememberRevealed")) {
-                        for (final Card rem : revealed) {
-                            host.addRemembered(rem);
-                        }
+                    if (sa.hasParam("RevealValid")) {
+                        valid = CardLists.getValidCards(valid, sa.getParam("RevealValid"), p, host);
                     }
+                    
+                    if (valid.isEmpty())
+                        continue;
+                    
+                    if( cnt > valid.size() )
+                        cnt = valid.size();
 
+                    int min = cnt;
+                    if (anyNumber) {
+                        cnt = valid.size();
+                        min = 0;
+                    }
+                    
+                    revealed.addAll(p.getController().chooseCardsToRevealFromHand(min, cnt, valid));
+                }
+                
+                game.getAction().reveal(revealed, p);
+                
+                if (sa.hasParam("RememberRevealed")) {
+                    for (final Card rem : revealed) {
+                        host.addRemembered(rem);
+                    }
                 }
             }
         }

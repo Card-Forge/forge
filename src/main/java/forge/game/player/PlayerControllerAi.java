@@ -287,4 +287,9 @@ public class PlayerControllerAi extends PlayerController {
     public List<Card> chooseCardsToDiscardToMaximumHandSize(int numDiscard) {
         return brains.getCardsToDiscard(numDiscard, (String[])null, null);
     }
+
+    @Override
+    public List<Card> chooseCardsToRevealFromHand(int min, int max, List<Card> valid) {
+        return max == 0 ? Lists.<Card>newArrayList() : valid.subList(0, max);
+    }
 }

@@ -10,6 +10,7 @@ import com.google.common.collect.Lists;
 import forge.Card;
 import forge.CardLists;
 import forge.card.ability.AbilityUtils;
+import forge.card.ability.SpellAbilityEffect;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
@@ -18,7 +19,7 @@ import forge.game.player.PlayerActionConfirmMode;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
 
-public class DiscardEffect extends RevealEffectBase {
+public class DiscardEffect extends SpellAbilityEffect {
     @Override
     protected String getStackDescription(SpellAbility sa) {
         final String mode = sa.getParam("Mode");
@@ -192,7 +193,7 @@ public class DiscardEffect extends RevealEffectBase {
                     if (sa.hasParam("RevealNumber")) {
                         String amountString = sa.getParam("RevealNumber");
                         int amount = StringUtils.isNumeric(amountString) ? Integer.parseInt(amountString) : CardFactoryUtil.xCount(source, source.getSVar(amountString));
-                        dPHand = getRevealedList(p, dPHand, amount, false);
+                        dPHand = p.getController().chooseCardsToRevealFromHand(amount, amount, dPHand);
                     }
                     final String valid = sa.hasParam("DiscardValid") ? sa.getParam("DiscardValid") : "Card";
                     String[] dValid = valid.split(",");
