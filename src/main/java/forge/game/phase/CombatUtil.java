@@ -1048,7 +1048,7 @@ public class CombatUtil {
                         final Player opponent = game.getCombat().getDefendingPlayerRelatedTo(c).get(0);
                         //List<Card> list = AbilityUtils.filterListByType(opponent.getCardsIn(ZoneType.Battlefield), "Permanent", this);
                         final List<Card> list = opponent.getCardsIn(ZoneType.Battlefield);
-                        List<Card> toSac = opponent.getController().choosePermanentsToSacrifice(list, "Card", a, this, false, false, false);
+                        List<Card> toSac = opponent.getController().choosePermanentsToSacrifice(this, a, a, list, "Card");
 
                         for(Card sacd : toSac) {
                             game.getAction().sacrifice(sacd, this);

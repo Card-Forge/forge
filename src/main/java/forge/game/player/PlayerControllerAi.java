@@ -118,10 +118,16 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public List<Card> choosePermanentsToSacrifice(List<Card> validTargets, String validMessage, int amount, SpellAbility sa, boolean destroy, boolean isOptional, boolean canCancel) {
-        return ComputerUtil.choosePermanentsToSacrifice(player, validTargets, amount, sa, destroy, isOptional);
+    public List<Card> choosePermanentsToSacrifice(SpellAbility sa, int min, int max, List<Card> validTargets, String message) {
+        return ComputerUtil.choosePermanentsToSacrifice(player, validTargets, max, sa, false, min == 0);
     }
 
+    @Override
+    public List<Card> choosePermanentsToDestroy(SpellAbility sa, int min, int max, List<Card> validTargets, String message) {
+        return ComputerUtil.choosePermanentsToSacrifice(player, validTargets, max, sa, true, min == 0);
+    }
+
+    
     @Override
     public Card chooseSingleCardForEffect(List<Card> options, SpellAbility sa, String title, boolean isOptional) {
         return getAi().chooseSingleCardForEffect(options, sa, title, isOptional);

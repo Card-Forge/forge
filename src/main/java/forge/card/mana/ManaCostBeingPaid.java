@@ -665,8 +665,9 @@ public class ManaCostBeingPaid {
         List<Card> canOffer = CardLists.filter(spell.getActivatingPlayer().getCardsIn(ZoneType.Battlefield),
                 CardPredicates.isType(offeringType));
 
-        final List<Card> toSacList = sa.getSourceCard().getController().getController().choosePermanentsToSacrifice(canOffer,
-                offeringType, 1, spell, false, false, true);
+        final List<Card> toSacList = sa.getSourceCard().getController().getController().choosePermanentsToSacrifice(spell, 0, 1, canOffer,
+                offeringType);
+
         if (!toSacList.isEmpty()) {
             toSac = toSacList.get(0);
         } else {

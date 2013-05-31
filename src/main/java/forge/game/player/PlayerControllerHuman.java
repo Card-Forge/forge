@@ -11,6 +11,8 @@ import javax.swing.JOptionPane;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
+import com.google.common.collect.Lists;
+
 import forge.Card;
 import forge.GameEntity;
 import forge.Singletons;
@@ -202,34 +204,33 @@ public class PlayerControllerHuman extends PlayerController {
                 if (val == 0 && canChooseZero || val > 0) 
                     return val;
             }
-            JOptionPane.showMessageDialog(null, "You have to enter a valid number", "Announce value", JOptionPane.WARNING_MESSAGE);
+            GuiDialog.message("You have to enter a valid number", "Announce value");
         }
     }
 
-    /* (non-Javadoc)
-     * @see forge.game.player.PlayerController#choosePermanentsToSacrifice(java.util.List, int, forge.card.spellability.SpellAbility, boolean, boolean)
-     */
+
     @Override
-    public List<Card> choosePermanentsToSacrifice(List<Card> validTargets, String validMessage, int amount, SpellAbility sa, boolean destroy, boolean isOptional, boolean canCancel) {
-        int max = Math.min(amount, validTargets.size());
+    public List<Card> choosePermanentsToSacrifice(SpellAbility sa, int min, int max, List<Card> valid, String message) {
+        String outerMessage = "Select %d " + message + "(s) to sacrifice";
+        return choosePermanentsTo(min, max, valid, outerMessage); 
+    }
+
+    @Override
+    public List<Card> choosePermanentsToDestroy(SpellAbility sa, int min, int max, List<Card> valid, String message) {
+        String outerMessage = "Select %d " + message + "(s) to be destroyed";
+        return choosePermanentsTo(min, max, valid, outerMessage); 
+    }
+
+    private List<Card> choosePermanentsTo(int min, int max, List<Card> valid, String outerMessage) {
+        max = Math.min(max, valid.size());
         if (max <= 0)
             return new ArrayList<Card>();
-        
-        int min = isOptional ? 0 : amount;
-        if (min > max) {
-            min = max;
-        }
 
-        InputSelectCards inp = new InputSelectCardsFromList(min, max, validTargets);
-        // TODO: Either compose a message here, or pass it as parameter from caller. 
-        inp.setMessage("Select %d " + validMessage + "(s) to sacrifice");
-        inp.setCancelAllowed(canCancel);
-        
+        InputSelectCards inp = new InputSelectCardsFromList(min == 0 ? 1 : min, max, valid);
+        inp.setMessage(outerMessage);
+        inp.setCancelAllowed(min == 0);
         Singletons.getControl().getInputQueue().setInputAndWait(inp);
-        if (inp.hasCancelled()) {
-            return new ArrayList<Card>();
-        }
-        else return inp.getSelected(); 
+        return inp.hasCancelled() ? Lists.<Card>newArrayList() : inp.getSelected();
     }
 
     @Override
