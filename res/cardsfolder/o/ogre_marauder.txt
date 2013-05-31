@@ -6,6 +6,7 @@ T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigOgreMarauderSacrifice | Tr
 SVar:TrigOgreMarauderSacrifice:AB$ Sacrifice | Cost$ 0 | SacValid$ Creature | Defined$ DefendingPlayer | Optional$ True | RememberSacrificed$ True | SubAbility$ DBOgreMarauderPump
 SVar:DBOgreMarauderPump:DB$ Pump | Defined$ Self | KW$ HIDDEN Unblockable | ConditionDefined$ Remembered | ConditionPresent$ Creature | ConditionCompare$ EQ0 | SubAbility$ DBOgreMarauderCleanup
 SVar:DBOgreMarauderCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:HasAttackEffect:TRUE
 SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ogre_marauder.jpg
