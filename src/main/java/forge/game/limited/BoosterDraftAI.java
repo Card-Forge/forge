@@ -52,8 +52,8 @@ public class BoosterDraftAI {
     private final ArrayList<DeckColors> playerColors = new ArrayList<DeckColors>();
 
     private ReadDraftRankings draftRankings;
-    // roughly equivalent to 75 ranks in a core set, or 50 ranks in a small set
-    private static final double TAKE_BEST_THRESHOLD = 0.3;
+    // roughly equivalent to 25 ranks in a core set, or 15 ranks in a small set
+    private static final double TAKE_BEST_THRESHOLD = 0.1;
 
     /**
      * <p>
