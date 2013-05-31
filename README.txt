@@ -658,6 +658,42 @@ Booster: 16 Any
 Booster: 10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand
 
 
+Blank screen when starting a match:
+-----------------------------------
+
+This problem should be fixed. At least you'll see an exception/crash report describing why the match didn't start instead of a blank screen.
+
+
+Duplicate triggers problem solved:
+----------------------------------
+
+This problem has now been fixed. (Mana Vortex required 2 lands, Emrakul gave 2 extra turns, Empty the Warrens creatures two Storm triggers instead of one.)
+
+
+Constructed mode AI vs AI matches:
+----------------------------------
+
+Added support for AI vs AI matches. There is a checkbox which allows you to view the AI vs AI match. This is a work in progress and is not finished. While it appears to work OK there is still a need for a few UI changes. Please be patient. These AI vs AI matches will not be a good way to test out various deck types against one another as the AI does not understand card combos and the AI is still limited at this time.
+
+
+Constructed mode Human vs Human Hotseat matches:
+------------------------------------------------
+
+Hotseat matches are now possible. This mode has some known bugs to fix. At this time both players must use the same computer. Human vs Human matches via the internet is planned and should become available sometime in the future. Please be patient.
+
+
+Using predetermined decks in quest mode Challenges:
+---------------------------------------------------
+
+Added the capability to play Challenges vs predetermined decks (along with a few other related options to disallow specific quest mode things). Added Sorin vs Tibalt, and Tibalt vs Sorin as examples of Challenges that force you to use a specific Deck. (They seemed to be the best duel deck compatibility for the AI).
+
+
+Targeting Overlay:
+------------------
+
+Targeting arrows will now be shown for equipments equipping permanents currently under opponent's control (for those rare cases when e.g. an equipped creature gets Switcheroo'd for something else).
+
+
 Our Lawyers Made Us Do This:
 ----------------------------
 
