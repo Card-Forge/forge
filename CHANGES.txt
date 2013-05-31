@@ -1,7 +1,7 @@
-Forge Beta: 05-##-2013 ver 1.3.17
+Forge Beta: 05-31-2013 ver 1.4.0
 
 
-12### cards in total.
+12755 cards in total.
 
 
 -------------
@@ -44,37 +44,37 @@ Targeting arrows will now be shown for equipments equipping permanents currently
 New Cards
 ---------
 
-Sand Golem
-Bronze Horse
 Boros Battleshaper
 Boseiju, Who Shelters All
-Manaforge Cinder
-Chain of Plasma
-Fate Transfer
-Jinxed Choker
-Paradox Haze
-Reins of Power
-Puca's Mischief
-Spawnbroker
-Fathom Trawl
-Gauntlet of Power
+Bronze Horse
 Caged Sun
+Chain of Plasma
+Endless Whispers
+Fate Transfer
+Fathom Trawl
+Forcefield
+Gauntlet of Power
+Gustha's Scepter
 Ink-Treader Nephilim
+Jinxed Choker
+Manaforge Cinder
+Mindslaver
+Paradox Haze
 Precursor Golem
-Weatherseed Totem
 Psychogenic Probe
-Treacherous Vampire
+Puca's Mischief
+Radiate
 Reborn Hero
+Reins of Power
+Sand Golem
 Showstopper
 Sorin Markov
-Mindslaver
-Gustha's Scepter
+Spawnbroker
 Thoughtbound Primoc
-Wild Mammoth
-Endless Whispers
-Radiate
+Treacherous Vampire
 Tunnel Vision
-Forcefield
+Weatherseed Totem
+Wild Mammoth
 
 
 ----------
@@ -92,57 +92,56 @@ New M14 branch Cards
 --------------------
 
 Advocate of the Beast
+Ajani's Chosen
 Archangel of Thune
+Awaken the Ancient
 Battle Sliver
 Blur Sliver
+Bonescythe Sliver
+Charging Grffin
 Dawnstrike Paladin
+Devout Invocation
 Enlarge
+Glimpse the Future
+Grim Return
 Groundshaker Sliver
+Guardian of the Ages
+Hive Stirrings
+Hunt the Weak
+Jace's Mindseeker
 Kalonian Tusker
+Liliana's Reaver
+Master of Diversion
 Megantic Sliver
+Molten Birth
+Ogre Battledriver
+Predatory Sliver
+Primeval Bounty
 Regathan Firecat
+Ring of Three Wishes
+Rise of the Dark Realms
+Scourge of Valkas
 Sentinel Sliver
-Staff of the Wild Magus
-Steelform Sliver
-Striking Sliver
-
+Seraph of the Sword
 Shadowborn Apostle
 Shadowborn Demon
-Awaken the Ancient
+Sliver Construct
+Soulmender
+Sporemound
+Staff of the Death Magus
 Staff of the Flame Magus
 Staff of the Mind Magus
-Hive Stirrings
-Sliver Construct
-Bonescythe Sliver
-Master of Diversion
-Predatory Sliver
-Staff of the Death Magus
-Charging Grffin
-Glimpse the Future
-Ogre Battledriver
-Rise of the Dark Realms
-Seraph of the Sword
-Young Pyromancer
-Ajani's Chosen
-Devout Invocation
-Grim Return
-Scourge of Valkas
-Windreader Sphinx
-Primeval Bounty
-Hunt the Weak
-Guardian of the Ages
-Ring of Three Wishes
-Vial of Poison
-Jace's Mindseeker
-Liliana's Reaver
+Staff of the Wild Magus
+Steelform Sliver
+Stonehorn Chanter
+Striking Sliver
 Thorncaster Sliver
 Undead Minotaur
-Molten Birth
 Vastwood Hydra
-Sporemound
+Vial of Poison
+Windreader Sphinx
 Woodborn Behemoth
-Soulmender
-Stonehorn Chanter
+Young Pyromancer
 
 
 ------------
@@ -185,7 +184,19 @@ Some people use the Windows application 7zip. This utility can be found at http:
 Contributors to This Release
 ----------------------------
 
-
+Agetian
+Gos
+Hellfish
+Marc
+Max
+Nordos
+RedDeckWins
+Sagephoenix
+Sloth
+Sol
+Swordshine
+ZzzzSleep
+Chris H
 
 
 (Quest icons used created by Teekatas, from his Legendora set http://raindropmemory.deviantart.com)
