@@ -641,13 +641,4 @@ public class Game {
     public void setAge(GameAge value) {
         age = value;
     }
-
-    public void revealToPlayers(String string, Collection<Card> cards, ZoneType zone, List<Player> skipReveal) {
-        List<Player> allPlayers = this.getPlayers();
-        for (Player p : allPlayers) {
-            if (skipReveal != null && !skipReveal.contains(p)) {
-                p.getController().reveal(string, cards, zone, p);
-            }
-        }
-    }
 }

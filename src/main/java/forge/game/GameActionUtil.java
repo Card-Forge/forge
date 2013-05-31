@@ -117,7 +117,7 @@ public final class GameActionUtil {
 
             } // while
 
-            game.revealToPlayers("Revealed Cascade Cards:", revealed, ZoneType.Library, null);
+            game.getAction().reveal("Revealed Cascade Cards:", revealed, ZoneType.Library, controller, false);
 
             if (cascadedCard != null) {
                 Player p = cascadedCard.getController();

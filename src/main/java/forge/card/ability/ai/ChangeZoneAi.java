@@ -8,7 +8,6 @@ import java.util.Random;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
 
 import forge.Card;
 import forge.CardCharacteristicName;
@@ -1345,9 +1344,8 @@ public class ChangeZoneAi extends SpellAbilityAi {
         if (((!ZoneType.Battlefield.equals(destination) && !"Card".equals(type) && !defined)
                 || (sa.hasParam("Reveal") && !fetched.isEmpty()))
                 && !sa.hasParam("NoReveal")) {
-            final String picked = player + " picked:";
 
-            game.revealToPlayers(picked, fetched, destination, Lists.newArrayList(player));
+            game.getAction().reveal(fetched, player);
         }
     } // end changeHiddenOriginResolveAI
 
