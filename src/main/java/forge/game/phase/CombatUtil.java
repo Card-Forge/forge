@@ -1274,12 +1274,13 @@ public class CombatUtil {
      * @param magnitude
      *            a int.
      */
-    public static void executeExaltedAbility(final Game game, final Card c, final int magnitude) {
+    public static void executeExaltedAbility(final Game game, final Card c, final int magnitude, final Card host) {
         final Card crd = c;
         Ability ability;
+        // This really should be a trigger on the stack
 
         for (int i = 0; i < magnitude; i++) {
-            ability = new Ability(c, ManaCost.ZERO) {
+            ability = new Ability(host, ManaCost.ZERO) {
                 @Override
                 public void resolve() {
                     final Command untilEOT = new Command() {
@@ -1305,10 +1306,13 @@ public class CombatUtil {
             }; // ability
 
             final StringBuilder sb = new StringBuilder();
-            sb.append(c).append(" - (Exalted) gets +1/+1 until EOT.");
+            sb.append(host).append(" - Exalted (Whenever a creature you control attacks alone, that creature gets +1/+1 until end of turn.)");
+            
+            sb.append(" [Attacker: ").append(c).append("]");
             ability.setStackDescription(sb.toString());
             ability.setDescription(sb.toString());
-            ability.setActivatingPlayer(c.getController());
+            ability.setActivatingPlayer(host.getController());
+            ability.setTrigger(true);
 
             game.getStack().addSimultaneousStackEntry(ability);
         }
