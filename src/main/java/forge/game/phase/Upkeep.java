@@ -174,20 +174,20 @@ public class Upkeep extends Phase {
                 final Ability sacAbility = new Ability(c, ManaCost.ZERO) {
                     @Override
                     public void resolve() {
-                        
+                        boolean hasPaid = false;
                         Player controller = c.getController();
                         if (controller.isHuman()) {
                             Cost cost = new Cost(c.getEchoCost().trim(), true);
-                            if ( !HumanPlay.payCostDuringAbilityResolve(blankAbility, cost, null, game) )
-                                game.getAction().sacrifice(c, null);;
-
+                            hasPaid = HumanPlay.payCostDuringAbilityResolve(blankAbility, cost, null);
                         } else { // computer
                             if (ComputerUtilCost.canPayCost(blankAbility, controller)) {
                                 ComputerUtil.playNoStack(controller, blankAbility, game);
-                            } else {
-                                game.getAction().sacrifice(c, null);
+                                hasPaid = true;
                             }
                         }
+                        
+                        if (!hasPaid)
+                            game.getAction().sacrifice(c, null);;
                     }
                 };
                 sacAbility.setActivatingPlayer(c.getController());
@@ -279,7 +279,7 @@ public class Upkeep extends Phase {
                         @Override
                         public void resolve() {
                             if (controller.isHuman()) {
-                                if ( !HumanPlay.payCostDuringAbilityResolve(blankAbility, blankAbility.getPayCosts(), this, game))
+                                if ( !HumanPlay.payCostDuringAbilityResolve(blankAbility, blankAbility.getPayCosts(), this))
                                     game.getAction().sacrifice(c, null);
                             } else { // computer
                                 if (ComputerUtilCost.shouldPayCost(controller, c, upkeepCost) && ComputerUtilCost.canPayCost(blankAbility, controller)) {

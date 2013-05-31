@@ -280,7 +280,7 @@ public class HumanPlay {
      *            a {@link forge.Command} object.
      * @param sourceAbility TODO
      */
-    public static boolean payCostDuringAbilityResolve(final SpellAbility ability, final Cost cost, SpellAbility sourceAbility, final Game game) {
+    public static boolean payCostDuringAbilityResolve(final SpellAbility ability, final Cost cost, SpellAbility sourceAbility) {
         
         // Only human player pays this way
         final Player p = ability.getActivatingPlayer();

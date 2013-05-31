@@ -997,21 +997,23 @@ public class CombatUtil {
             }
         }
         
-        boolean hasPaid = attackCost.getTotalMana().isZero() && attackCost.isOnlyManaCost(); // true if needless to pay
-        if (!hasPaid) { 
+        boolean needsToPay = !attackCost.getTotalMana().isZero() || !attackCost.isOnlyManaCost(); // true if needless to pay
+        boolean isPaid = !needsToPay;
+        if (needsToPay) {
+            
             final Ability ability = new AbilityStatic(c, attackCost, null) { @Override public void resolve() {} };
             ability.setActivatingPlayer(c.getController());
 
             if (c.getController().isHuman()) {
-                hasPaid = HumanPlay.payCostDuringAbilityResolve(ability, attackCost, null, game);
+                isPaid = HumanPlay.payCostDuringAbilityResolve(ability, attackCost, null);
             } else { // computer
                 if (ComputerUtilCost.canPayCost(ability, c.getController())) {
                     ComputerUtil.playNoStack(c.getController(), ability, game);
-                    hasPaid = true;
+                    isPaid = true;
                 }
             }
         }
-        return hasPaid;
+        return isPaid;
     }
 
     /**

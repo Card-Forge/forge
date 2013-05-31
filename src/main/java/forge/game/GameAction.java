@@ -507,7 +507,7 @@ public class GameAction {
 
             @Override
             public void resolve() {
-                GameAction.this.moveToHand(recoverable);
+                
             }
 
             @Override
@@ -531,19 +531,21 @@ public class GameAction {
             @Override
             public void resolve() {
                 Player p = recoverable.getController();
-
+                boolean hasPaid = false;
                 if (p.isHuman()) {
-                    if ( HumanPlay.payCostDuringAbilityResolve(abRecover, abRecover.getPayCosts(), null, game) )
-                        moveToHand(recoverable);
-                    else
-                        exile(recoverable);
+                    hasPaid = HumanPlay.payCostDuringAbilityResolve(abRecover, abRecover.getPayCosts(), null);
                 } else { // computer
                     if (ComputerUtilCost.canPayCost(abRecover, p)) {
                         ComputerUtil.playNoStack(p, abRecover, game);
-                    } else {
-                        GameAction.this.exile(recoverable);
+                        hasPaid = true;
                     }
                 }
+                
+                if (hasPaid)
+                    moveToHand(recoverable);
+                else
+                    exile(recoverable);
+                
             }
         };
         recoverAbility.setStackDescription(sb.toString());
