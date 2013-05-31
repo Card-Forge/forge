@@ -43,6 +43,7 @@ import forge.card.cost.Cost;
 import forge.card.cost.CostDiscard;
 import forge.card.cost.CostPart;
 import forge.card.cost.CostPayment;
+import forge.card.cost.CostSacrifice;
 import forge.card.spellability.AbilityManaPart;
 import forge.card.spellability.AbilityStatic;
 import forge.card.spellability.SpellAbility;
@@ -350,7 +351,7 @@ public class ComputerUtil {
             }
         }
         if (pref.contains("SacCost")) { // search for permanents with SacMe
-            for (int ip = 1; ip < 6; ip++) { // priority 1 is the lowest,
+            for (int ip = 0; ip < 6; ip++) { // priority 1 is the lowest,
                                              // priority 5 the highest
                 final int priority = 6 - ip;
                 final List<Card> sacMeList = CardLists.filter(typeList, new Predicate<Card>() {
@@ -1082,6 +1083,39 @@ public class ComputerUtil {
         final Random r = MyRandom.getRandom();
 
         return r.nextFloat() <= Math.pow(.95, activations);
+    }
+
+    /**
+     * TODO: Write javadoc for this method.
+     * @param sa
+     * @return
+     */
+    public static boolean ActivateForSacCost(SpellAbility sa, final Player ai) {
+        final Cost abCost = sa.getPayCosts();
+        final Card source = sa.getSourceCard();
+        if (abCost == null) {
+            return false;
+        }
+        for (final CostPart part : abCost.getCostParts()) {
+            if (part instanceof CostSacrifice) {
+                final CostSacrifice sac = (CostSacrifice) part;
+    
+                final String type = sac.getType();
+    
+                if (type.equals("CARDNAME")) {
+                    continue;
+                }
+    
+                final List<Card> typeList =
+                        CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), type.split(","), source.getController(), source);
+                for (Card c : typeList) {
+                    if (c.getSVar("SacMe").equals("6")) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
     }
 
     /**

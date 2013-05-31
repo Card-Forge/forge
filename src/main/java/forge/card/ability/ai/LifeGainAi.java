@@ -1,7 +1,5 @@
 package forge.card.ability.ai;
 
-import java.util.Random;
-
 import forge.Card;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityAi;
@@ -16,7 +14,6 @@ import forge.game.ai.ComputerUtilCost;
 import forge.game.ai.ComputerUtilMana;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
-import forge.util.MyRandom;
 
 /**
  * TODO: Write javadoc for this type.
@@ -30,8 +27,6 @@ public class LifeGainAi extends SpellAbilityAi {
      */
     @Override
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
-
-        final Random r = MyRandom.getRandom();
         final Cost abCost = sa.getPayCosts();
         final Card source = sa.getSourceCard();
         final Game game = source.getGame();
@@ -98,10 +93,12 @@ public class LifeGainAi extends SpellAbilityAi {
                 && !sa.hasParam("ActivationPhases")) {
             return false;
         }
+
         // Don't use lifegain before main 2 if possible
         if (!lifeCritical && (!game.getPhaseHandler().getNextTurn().equals(ai)
                 || game.getPhaseHandler().getPhase().isBefore(PhaseType.END_OF_TURN))
-                && !sa.hasParam("PlayerTurn") && !SpellAbilityAi.isSorcerySpeed(sa)) {
+                && !sa.hasParam("PlayerTurn") && !SpellAbilityAi.isSorcerySpeed(sa)
+                && !ComputerUtil.ActivateForSacCost(sa, ai)) {
             return false;
         }
 
@@ -111,7 +108,9 @@ public class LifeGainAi extends SpellAbilityAi {
         }
 
         // prevent run-away activations - first time will always return true
-        final boolean chance = r.nextFloat() <= Math.pow(.9, sa.getActivationsThisTurn());
+        if (ComputerUtil.preventRunAwayActivations(sa)) {
+            return false;
+        }
 
         final Target tgt = sa.getTarget();
         if (tgt != null) {
@@ -123,12 +122,7 @@ public class LifeGainAi extends SpellAbilityAi {
             }
         }
 
-        boolean randomReturn = r.nextFloat() <= .6667;
-        if (lifeCritical || SpellAbilityAi.playReusable(ai, sa)) {
-            randomReturn = true;
-        }
-
-        return (randomReturn && chance);
+        return true;
     }
 
 
