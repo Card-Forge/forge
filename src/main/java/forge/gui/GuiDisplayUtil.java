@@ -50,7 +50,6 @@ import forge.game.PlanarDice;
 import forge.game.phase.PhaseType;
 import forge.game.player.HumanPlay;
 import forge.game.player.Player;
-import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 import forge.gui.input.InputSelectCardsFromList;
 import forge.item.CardDb;
@@ -245,13 +244,12 @@ public final class GuiDisplayUtil {
      */
     public static void devModeTutor() {
         final List<Card> lib = getGame().getPhaseHandler().getPriorityPlayer().getCardsIn(ZoneType.Library);
-        final Object o = GuiChoose.oneOrNone("Choose a card", lib);
-        if (null == o) {
+        final Card c = GuiChoose.oneOrNone("Choose a card", lib);
+        if (null == c)
             return;
-        } else {
-            final Card c = (Card) o;
-            getGame().getAction().moveToHand(c);
-        }
+        
+        getGame().getAction().invoke(new Runnable() { @Override public void run() { getGame().getAction().moveToHand(c); }});
+
     }
 
     /**
@@ -387,9 +385,10 @@ public final class GuiDisplayUtil {
             return;
         }
 
-        Card forgeCard = c.toForgeCard(p);
-        getGame().getAction().moveToHand(forgeCard);
-
+        getGame().getAction().invoke(new Runnable() { @Override public void run() { 
+            Card forgeCard = c.toForgeCard(p);
+            getGame().getAction().moveToHand(forgeCard);
+        }});
     }
 
     public static void devModeCardToBattlefield() {
@@ -440,33 +439,6 @@ public final class GuiDisplayUtil {
 
     }
 
-    public static void devModeBreakpoint() {
-        List<Player> Players = getGame().getPlayers();
-/*
-        Combat CombatHandler = AllZone.getCombat();
-        TriggerHandler Triggers = AllZone.getTriggerHandler();
-        InputControl InputHandler = AllZone.getInputControl();
-        ReplacementHandler Replacements = AllZone.getReplacementHandler();
-        StaticEffects StaticHandler = AllZone.getStaticEffects();
-*/
-        List<PlayerZone> Zones = new ArrayList<PlayerZone>();
-        for (Player p : Players) {
-
-            Zones.add(p.getZone(ZoneType.Ante));
-            Zones.add(p.getZone(ZoneType.Battlefield));
-            Zones.add(p.getZone(ZoneType.Command));
-            Zones.add(p.getZone(ZoneType.Exile));
-            Zones.add(p.getZone(ZoneType.Graveyard));
-            Zones.add(p.getZone(ZoneType.Hand));
-            Zones.add(p.getZone(ZoneType.Library));
-            Zones.add(p.getZone(ZoneType.Sideboard));
-            // player has no stack of his own
-        }
-
-        //Set a breakpoint on the following statement
-        System.out.println("Manual Breakpoint");
-    }
-    
     public static void devModeRiggedPlanarRoll()
     {
         final List<Player> players = getGame().getPlayers();

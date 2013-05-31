@@ -361,6 +361,8 @@ public class GameAction {
     }
 
     public final Card moveTo(final Zone zoneTo, Card c, Integer position) {
+        FThreads.assertExecutedByEdt(false);
+        
         // Ideally move to should never be called without a prevZone
         // Remove card from Current Zone, if it has one
         final Zone zoneFrom = game.getZoneOf(c);

@@ -74,7 +74,6 @@ public enum VDev implements IVDoc<CDev> {
     private final DevLabel lblSetLife = new DevLabel("Set Player Life");
     private final DevLabel lblCardToBattlefield = new DevLabel("Add card to play");
     private final DevLabel lblCardToHand = new DevLabel("Add card to hand");
-    private final DevLabel lblBreakpoint = new DevLabel("Trigger breakpoint");
     private final DevLabel lblRiggedRoll = new DevLabel("Rigged planar roll");
     private final DevLabel lblWalkTo = new DevLabel("Planeswalk to");
 
@@ -93,7 +92,6 @@ public enum VDev implements IVDoc<CDev> {
         devLBLs.add(lblTapPermanent);
         devLBLs.add(lblUntapPermanent);
         devLBLs.add(lblSetLife);
-        devLBLs.add(lblBreakpoint);
         devLBLs.add(lblWalkTo);
 
         scroller.setBorder(null);
@@ -116,7 +114,6 @@ public enum VDev implements IVDoc<CDev> {
         viewport.add(this.lblTapPermanent, halfConstraints + ", split 2");
         viewport.add(this.lblUntapPermanent, halfConstraints);
         viewport.add(this.lblSetLife, constraints);
-        viewport.add(this.lblBreakpoint, constraints);
     }
 
     //========= Overridden methods
@@ -225,10 +222,6 @@ public enum VDev implements IVDoc<CDev> {
     /** @return {@link forge.gui.match.views.VDev.DevLabel} */
     public DevLabel getLblSetLife() {
         return this.lblSetLife;
-    }
-
-    public DevLabel getLblBreakpoint() {
-        return this.lblBreakpoint;
     }
 
     public DevLabel getLblRiggedRoll() {

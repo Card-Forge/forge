@@ -76,10 +76,6 @@ public enum CDev implements ICDoc {
         public void mousePressed(final MouseEvent e) {
             GuiDisplayUtil.devModeCardToBattlefield(); } };
 
-    private final MouseListener madBreakpoint = new MouseAdapter() { @Override
-        public void mousePressed(final MouseEvent e) {
-            GuiDisplayUtil.devModeBreakpoint(); } };
-    
     private final MouseListener madRiggedRoll = new MouseAdapter() { @Override
         public void mousePressed(final MouseEvent e) {
             GuiDisplayUtil.devModeRiggedPlanarRoll(); } };
@@ -113,7 +109,6 @@ public enum CDev implements ICDoc {
         VDev.SINGLETON_INSTANCE.getLblTapPermanent().addMouseListener(madTap);
         VDev.SINGLETON_INSTANCE.getLblUntapPermanent().addMouseListener(madUntap);
         VDev.SINGLETON_INSTANCE.getLblSetLife().addMouseListener(madLife);
-        VDev.SINGLETON_INSTANCE.getLblBreakpoint().addMouseListener(madBreakpoint);
         VDev.SINGLETON_INSTANCE.getLblCardToBattlefield().addMouseListener(madCardToBattlefield);
         VDev.SINGLETON_INSTANCE.getLblRiggedRoll().addMouseListener(madRiggedRoll);
         VDev.SINGLETON_INSTANCE.getLblWalkTo().addMouseListener(madWalkToPlane);
