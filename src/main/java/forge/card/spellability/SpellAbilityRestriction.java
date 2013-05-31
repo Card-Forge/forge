@@ -292,7 +292,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
      * @return a boolean.
      */
     public final boolean canPlay(final Card c, final SpellAbility sa) {
-        if (c.isPhasedOut()) {
+        if (c.isPhasedOut() || c.isUsedToPay()) {
             return false;
         }
 

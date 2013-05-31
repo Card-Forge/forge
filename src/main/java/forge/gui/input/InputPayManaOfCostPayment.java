@@ -39,11 +39,19 @@ public class InputPayManaOfCostPayment extends InputPayMana {
         // any mana tapabilities can't be used in payment as well as being tapped for convoke)
 
         handleConvokedCards(false);
+
+        if (saPaidFor.isOffering()) {
+            handleOfferings(false);
+        }
     }
-    
+
     @Override
     protected void onCancel() {
         handleConvokedCards(true);
+
+        if (saPaidFor.isOffering()) {
+            handleOfferings(true);
+        }
         stop();
     }
 

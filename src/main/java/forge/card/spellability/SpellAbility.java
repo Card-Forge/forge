@@ -76,6 +76,7 @@ public abstract class SpellAbility implements ISpellAbility {
     private boolean replicate = false;
     private boolean cycling = false;
     private boolean delve = false;
+    private boolean offering = false;
 
     private Card targetCard;
     /** The chosen target. */
@@ -100,6 +101,7 @@ public abstract class SpellAbility implements ISpellAbility {
     private HashMap<String, Object> replacingObjects = new HashMap<String, Object>();
 
     private List<Card> tappedForConvoke = new ArrayList<Card>();
+    private Card sacrificedAsOffering = null;
 
     private HashMap<String, String> sVars = new HashMap<String, String>();
 
@@ -1307,6 +1309,47 @@ public abstract class SpellAbility implements ISpellAbility {
         if (this.tappedForConvoke != null) {
             this.tappedForConvoke.clear();
         }
+    }
+
+    /**
+     * Returns whether the SA is a patron offering.
+     */
+    public boolean isOffering() {
+        return this.offering;
+    }
+
+    /**
+     * Sets the SA as a patron offering.
+     * 
+     * @param c      card sacrificed for a patron offering
+     */
+    public void setIsOffering(final boolean bOffering) {
+        this.offering = bOffering;
+    }
+
+    /**
+     * Sets the card sacrificed for a patron offering.
+     * 
+     * @param c      card sacrificed for a patron offering
+     */
+    public void setSacrificedAsOffering(final Card c) {
+        this.sacrificedAsOffering = c;
+    }
+
+    /**
+     * Gets the card sacrificed for a patron offering.
+     * 
+     * @return the card sacrificed for a patron offering
+     */
+    public Card getSacrificedAsOffering() {
+        return this.sacrificedAsOffering;
+    }
+
+    /**
+     * Clear the card sacrificed for a patron offering.
+     */
+    public void resetSacrificedAsOffering() {
+        this.sacrificedAsOffering = null;
     }
 
     /**

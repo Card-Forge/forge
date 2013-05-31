@@ -7827,6 +7827,10 @@ res/cardsfolder/p/patriarchs_desire.txt -text svneol=unset#text/plain
 res/cardsfolder/p/patricians_scorn.txt -text svneol=unset#text/plain
 res/cardsfolder/p/patrol_hound.txt -text
 res/cardsfolder/p/patrol_signaler.txt svneol=native#text/plain
+res/cardsfolder/p/patron_of_the_akki.txt -text
+res/cardsfolder/p/patron_of_the_kitsune.txt -text
+res/cardsfolder/p/patron_of_the_moon.txt -text
+res/cardsfolder/p/patron_of_the_orochi.txt -text
 res/cardsfolder/p/patron_of_the_wild.txt svneol=native#text/plain
 res/cardsfolder/p/patron_wizard.txt svneol=native#text/plain
 res/cardsfolder/p/pattern_of_rebirth.txt svneol=native#text/plain

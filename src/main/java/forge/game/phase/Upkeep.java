@@ -455,7 +455,7 @@ public class Upkeep extends Phase {
                             lowest.add(c);
                         }
 
-                        List<Card> toSac = player.getController().choosePermanentsToSacrifice(lowest, "Select creature with power: " + power + " to destroy.", 1, this, true, false);
+                        List<Card> toSac = player.getController().choosePermanentsToSacrifice(lowest, "Select creature with power: " + power + " to destroy.", 1, this, true, false, false);
                         game.getAction().destroyNoRegeneration(toSac.get(0), this);
                     }
                 } // resolve

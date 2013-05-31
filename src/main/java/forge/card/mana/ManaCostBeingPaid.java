@@ -398,6 +398,19 @@ public class ManaCostBeingPaid {
         increaseColorlessMana(extra.getGenericCost());
     }
 
+    public final void determineManaCostDifference(final ManaCost subThisManaCost) {
+        for (ManaCostShard shard : subThisManaCost.getShards()) {
+            if (shard == ManaCostShard.X) {
+                cntX--;
+            } else if (unpaidShards.containsKey(shard)) {
+                decreaseShard(shard, 1);
+            } else {
+                decreaseColorlessMana(1);
+            }
+        }
+        decreaseColorlessMana(subThisManaCost.getGenericCost());
+    }
+
     /**
      * To string.
      * 
@@ -554,6 +567,9 @@ public class ManaCostBeingPaid {
         for (final StaticAbility stAb : reduceAbilities) {
             stAb.applyAbility("ReduceCost", spell, this);
         }
+        if (spell.isSpell() && spell.isOffering()) { // cost reduction from offerings
+            adjustCostByOffering(sa, spell);
+        }
 
         // Set cost (only used by Trinisphere) is applied last
         for (final StaticAbility stAb : setAbilities) {
@@ -562,7 +578,7 @@ public class ManaCostBeingPaid {
     } // GetSpellCostChange
 
     private void adjustCostByConvoke(final SpellAbility sa, final SpellAbility spell) {
-        
+
         List<Card> untappedCreats = CardLists.filter(spell.getActivatingPlayer().getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.CREATURES);
         untappedCreats = CardLists.filter(untappedCreats, CardPredicates.Presets.UNTAPPED);
 
@@ -634,6 +650,33 @@ public class ManaCostBeingPaid {
                 usableColors.add(MagicColor.toLongString(color));
         }
         return usableColors;
+    }
+
+    private void adjustCostByOffering(final SpellAbility sa, final SpellAbility spell) {
+        String offeringType = "";
+        for (String kw : sa.getSourceCard().getKeyword()) {
+            if (kw.endsWith(" offering")) {
+                offeringType = kw.split(" ")[0];
+                break;
+            }
+        }
+
+        Card toSac = null;
+        List<Card> canOffer = CardLists.filter(spell.getActivatingPlayer().getCardsIn(ZoneType.Battlefield),
+                CardPredicates.isType(offeringType));
+
+        final List<Card> toSacList = sa.getSourceCard().getController().getController().choosePermanentsToSacrifice(canOffer,
+                offeringType, 1, spell, false, false, true);
+        if (!toSacList.isEmpty()) {
+            toSac = toSacList.get(0);
+        } else {
+            return;
+        }
+
+        determineManaCostDifference(toSac.getManaCost());
+
+        sa.setSacrificedAsOffering(toSac);
+        toSac.setUsedToPay(true); //stop it from interfering with mana input
     }
 
     public String getSourceRestriction() {

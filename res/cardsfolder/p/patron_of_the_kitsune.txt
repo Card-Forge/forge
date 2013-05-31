@@ -1,0 +1,11 @@
+Name:Patron of the Kitsune
+ManaCost:4 W W
+Types:Legendary Creature Spirit
+PT:5/6
+K:Fox offering
+T:Mode$ Attacks | ValidCard$ Creature | TriggerZones$ Battlefield | Execute$ PatronLife | OptionalDecider$ You | TriggerDescription$ Whenever a creature attacks, you gain 1 life.
+SVar:PatronLife:AB$ GainLife | Cost$ 0 | LifeAmount$ 1
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/patron_of_the_kitsune.jpg
+Oracle:Fox offering (You may cast this card any time you could cast an instant by sacrificing a Fox and paying the difference in mana costs between this and the sacrificed Fox. Mana cost includes color.)\nWhenever a creature attacks, you may gain 1 life.
+SetInfo:BOK Rare

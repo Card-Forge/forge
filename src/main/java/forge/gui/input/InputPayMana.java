@@ -239,7 +239,7 @@ public abstract class InputPayMana extends InputSyncronizedBase {
             player.getZone(ZoneType.Battlefield).updateObservers();
     }
     
-    protected boolean isAlredyPaid() {
+    protected boolean isAlreadyPaid() {
         if (manaCost.isPaid()) {
             bPaid = true;
         }
@@ -256,7 +256,7 @@ public abstract class InputPayMana extends InputSyncronizedBase {
     }
     
     protected void onStateChanged() { 
-        if( isAlredyPaid() ) {
+        if( isAlreadyPaid() ) {
             done();
             stop();
         } else 
@@ -282,6 +282,17 @@ public abstract class InputPayMana extends InputSyncronizedBase {
             saPaidFor.clearTappedForConvoke();
         }
     }
-    
+
+    protected void handleOfferings(boolean isCancelled) {
+        final Card offering = saPaidFor.getSacrificedAsOffering();
+        if (offering != null) {
+            offering.setUsedToPay(false);
+            if (!isCancelled) {
+                game.getAction().sacrifice(offering, saPaidFor);
+            }
+        }
+        saPaidFor.resetSacrificedAsOffering();
+    }
+
     public boolean isPaid() { return bPaid; }
 }

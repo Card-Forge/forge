@@ -129,6 +129,10 @@ public class CostPartMana extends CostPart {
 
         InputPayMana inpPayment;
         toPay.applySpellCostChange(ability);
+        if (ability.isOffering() && ability.getSacrificedAsOffering() == null) {
+            System.out.println("Sacrifice input for Offering cancelled");
+            return false;
+        }
         if (!toPay.isPaid()) {
             inpPayment = new InputPayManaOfCostPayment(toPay, ability);
             Singletons.getControl().getInputQueue().setInputAndWait(inpPayment);
@@ -139,19 +143,36 @@ public class CostPartMana extends CostPart {
             source.setSunburstValue(toPay.getSunburst());
         }
         if (this.getAmountOfX() > 0) {
-            if( !ability.isAnnouncing("X") && !xWasBilled) {
+            if (!ability.isAnnouncing("X") && !xWasBilled) {
                 source.setXManaCostPaid(0);
                 inpPayment = new InputPayManaX(ability, this.getAmountOfX(), this.canXbe0());
                 Singletons.getControl().getInputQueue().setInputAndWait(inpPayment);
-                if(!inpPayment.isPaid())
+                if (!inpPayment.isPaid()) {
                     return false;
+                }
             } else {
                 int x = AbilityUtils.calculateAmount(source, "X", ability);
                 source.setXManaCostPaid(x);
             }
         }
+
+        // Handle convoke and offerings if InputPayManaOfCostPayment was skipped because cost was reduced to 0
+        if (ability.isOffering() && ability.getSacrificedAsOffering() != null) {
+            System.out.println("Finishing up Offering");
+            final Card offering = ability.getSacrificedAsOffering();
+            offering.setUsedToPay(false);
+            game.getAction().sacrifice(offering, ability);
+            ability.resetSacrificedAsOffering();
+        }
+        if (ability.getTappedForConvoke() != null) {
+            for (final Card c : ability.getTappedForConvoke()) {
+                c.setTapped(false);
+                c.tap();
+            }
+            ability.clearTappedForConvoke();
+        }
         return true;
-    
+
     }
 
     /* (non-Javadoc)

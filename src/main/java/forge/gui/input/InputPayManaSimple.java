@@ -92,12 +92,18 @@ public class InputPayManaSimple extends InputPayMana {
 
             handleConvokedCards(false);
         }
+        if (!this.saPaidFor.isOffering()) {
+            handleOfferings(false);
+        }
     }
 
     /** {@inheritDoc} */
     @Override
     protected final void onCancel() {
         handleConvokedCards(true);
+        if (!this.saPaidFor.isOffering()) {
+            handleOfferings(true);
+        }
 
         player.getManaPool().refundManaPaid(this.saPaidFor, true);
         player.getZone(ZoneType.Battlefield).updateObservers(); // DO

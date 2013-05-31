@@ -2149,6 +2149,17 @@ public class Card extends GameEntity implements Comparable<Card> {
                     sb.append("\r\n");
                 }
                 sb.append("Convoke (Each creature you tap while casting this spell reduces its cost by 1 or by one mana of that creature's color.)");
+            } else if (keyword.endsWith(" offering")) {
+                String offeringType = keyword.split(" ")[0];
+                if (sb.length() != 0) {
+                    sb.append("\r\n");
+                }
+                sbLong.append(keywords.get(i));
+                sbLong.append(" (You may cast this card any time you could cast an instant by sacrificing a ");
+                sbLong.append(offeringType);
+                sbLong.append("and paying the difference in mana costs between this and the sacrificed ");
+                sbLong.append(offeringType);
+                sbLong.append(". Mana cost includes color.)");
             } else if (keyword.startsWith("Soulbond")) {
                 sbLong.append(keywords.get(i));
                 sbLong.append(" (You may pair this creature ");
@@ -2429,6 +2440,17 @@ public class Card extends GameEntity implements Comparable<Card> {
                     sb.delete(sb.lastIndexOf("\r\n"), sb.lastIndexOf("\r\n") + 3);
                 }
                 sb.append("Convoke (Each creature you tap while casting this spell reduces its cost by 1 or by one mana of that creature's color.)\r\n");
+            } else if (keyword.endsWith(" offering")) {
+                if (sb.toString().endsWith("\r\n\r\n")) {
+                    sb.delete(sb.lastIndexOf("\r\n"), sb.lastIndexOf("\r\n") + 3);
+                }
+                String offeringType = keyword.split(" ")[0];
+                sb.append(keyword);
+                sb.append(" (You may cast this card any time you could cast an instant by sacrificing a ");
+                sb.append(offeringType);
+                sb.append("and paying the difference in mana costs between this and the sacrificed ");
+                sb.append(offeringType);
+                sb.append(". Mana cost includes color.)");
             } else if (keyword.equals("Remove CARDNAME from your deck before playing if you're not playing for ante.")) {
                 if (sb.toString().endsWith("\r\n\r\n")) {
                     sb.delete(sb.lastIndexOf("\r\n"), sb.lastIndexOf("\r\n") + 3);

@@ -194,6 +194,16 @@ public class ComputerUtilMana {
 
         manapool.clearManaPaid(sa, test);
 
+        // handle Offerings for AI
+        if (sa.isOffering() && sa.getSacrificedAsOffering() != null) {
+            final Card offering = sa.getSacrificedAsOffering();
+            offering.setUsedToPay(false);
+            if (cost.isPaid() && !test) {
+                sa.getSourceCard().getController().getGame().getAction().sacrifice(offering, sa);
+            }
+            sa.resetSacrificedAsOffering();
+        }
+
         if( DEBUG_MANA_PAYMENT )
             System.err.printf("%s > [%s] payment has %s (%s +%d) for (%s) %s:%n\t%s%n%n", FThreads.debugGetCurrThreadId(), test ? "test" : "PROD", cost.isPaid() ? "*PAID*" : "failed", originalCost, extraMana, sa.getSourceCard(), sa.toUnsuppressedString(), StringUtils.join(paymentPlan, "\n\t") );
         
