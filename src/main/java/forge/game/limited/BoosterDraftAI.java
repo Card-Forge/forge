@@ -137,7 +137,7 @@ public class BoosterDraftAI {
                 rankedCards.add(MutablePair.of(card, rkg));
             } else {
                 System.out.println("Draft Rankings - Card Not Found: " + card.getName());
-                rankedCards.add(MutablePair.of(card, 0.0));
+                rankedCards.add(MutablePair.of(card, 999.0));
             }
         }
         return rankedCards;
