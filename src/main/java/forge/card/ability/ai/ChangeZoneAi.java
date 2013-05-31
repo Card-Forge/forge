@@ -8,6 +8,7 @@ import java.util.Random;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 
 import forge.Card;
 import forge.CardCharacteristicName;
@@ -1346,12 +1347,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 && !sa.hasParam("NoReveal")) {
             final String picked = player + " picked:";
 
-            List<Player> otherPlayers = game.getPlayers();
-            for (Player p : otherPlayers) {
-                if (!p.equals(player)) {
-                    p.getController().reveal(picked, fetched, destination, player);
-                }
-            }
+            game.revealToPlayers(picked, fetched, destination, Lists.newArrayList(player));
         }
     } // end changeHiddenOriginResolveAI
 

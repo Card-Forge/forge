@@ -19,6 +19,7 @@ package forge.game;
 
 import java.util.ArrayList;
 
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -639,5 +640,14 @@ public class Game {
 
     public void setAge(GameAge value) {
         age = value;
+    }
+
+    public void revealToPlayers(String string, Collection<Card> cards, ZoneType zone, List<Player> skipReveal) {
+        List<Player> allPlayers = this.getPlayers();
+        for (Player p : allPlayers) {
+            if (skipReveal != null && !skipReveal.contains(p)) {
+                p.getController().reveal(string, cards, zone, p);
+            }
+        }
     }
 }
