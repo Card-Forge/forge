@@ -64,59 +64,50 @@ public class HumanPlaySpellAbility {
         // freeze Stack. No abilities should go onto the stack while I'm filling requirements.
         game.getStack().freezeStack();
 
-        // Announce things like how many times you want to Multikick or the value of X
-        if (!this.announceRequirements()) {
+        // This line makes use of short-circuit evaluation of boolean values, that is each subsequent argument 
+        // is only executed or evaluated if the first argument does not suffice to determine the value of the expression
+        boolean prerequisitesMet = this.announceValuesLikeX() 
+                && ( isAlreadyTargeted || setupTargets() ) 
+                && ( isFree || this.payment.payCost(game) );
+
+
+        if (!prerequisitesMet) {
             rollbackAbility(fromZone, zonePosition);
             return;
         }
 
-        // Skip to paying if parent ability doesn't target and has no
-        // subAbilities.
-        // (or trigger case where its already targeted)
-        if (!isAlreadyTargeted) {
-            
-            SpellAbility beingTargeted = ability;
-            do { 
-                Target tgt = beingTargeted.getTarget();
-                if( tgt != null && tgt.doesTarget()) {
-                    clearTargets(beingTargeted);
-                    final TargetSelection select = new TargetSelection(beingTargeted);
-                    if (!select.chooseTargets() ) {
-                        rollbackAbility(fromZone, zonePosition);
-                        return;
-                    }
-                }
-                beingTargeted = beingTargeted.getSubAbility();
-            } while (beingTargeted != null);
-            
-        }
-        
-        // Payment
-        boolean paymentMade = isFree;
-        
-        if (!paymentMade) {
-            paymentMade = this.payment.payCost(game);
-        } 
-    
-        if (!paymentMade) {
-            rollbackAbility(fromZone, zonePosition);
-            return;
-        }
-        else {
-            if (isFree || this.payment.isFullyPaid()) {
-                if (skipStack) {
-                    AbilityUtils.resolve(this.ability, false);
-                } else {
-                    this.enusureAbilityHasDescription(this.ability);
-                    this.ability.getActivatingPlayer().getManaPool().clearManaPaid(this.ability, false);
-                    game.getStack().addAndUnfreeze(this.ability);
-                }
-        
-                // no worries here. The same thread must resolve, and by this moment ability will have been resolved already
-                clearTargets(ability);
-                //game.getAction().checkStateEffects();
+
+        if (isFree || this.payment.isFullyPaid()) {
+            if (skipStack) {
+                AbilityUtils.resolve(this.ability);
+            } else {
+                this.enusureAbilityHasDescription(this.ability);
+                this.ability.getActivatingPlayer().getManaPool().clearManaPaid(this.ability, false);
+                game.getStack().addAndUnfreeze(this.ability);
             }
+    
+            // no worries here. The same thread must resolve, and by this moment ability will have been resolved already
+            clearTargets(ability);
         }
+
+    }
+    
+    private final boolean setupTargets() {
+        // Skip to paying if parent ability doesn't target and has no subAbilities.
+        // (or trigger case where its already targeted)
+        SpellAbility beingTargeted = ability;
+        do { 
+            Target tgt = beingTargeted.getTarget();
+            if( tgt != null && tgt.doesTarget()) {
+                clearTargets(beingTargeted);
+                final TargetSelection select = new TargetSelection(beingTargeted);
+                if (!select.chooseTargets() ) {
+                    return false;
+                }
+            }
+            beingTargeted = beingTargeted.getSubAbility();
+        } while (beingTargeted != null);
+        return true;
     }
 
     public final void clearTargets(SpellAbility ability) {
@@ -147,11 +138,10 @@ public class HumanPlaySpellAbility {
         this.ability.resetOnceResolved();
         this.payment.refundPayment();
         game.getStack().clearFrozen();
-        // Singletons.getModel().getGame().getStack().removeFromFrozenStack(this.ability);
     }
     
 
-    private boolean announceRequirements() {
+    private boolean announceValuesLikeX() {
         // Announcing Requirements like Choosing X or Multikicker
         // SA Params as comma delimited list
         String announce = ability.getParam("Announce");

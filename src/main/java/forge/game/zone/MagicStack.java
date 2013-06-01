@@ -132,7 +132,7 @@ public class MagicStack extends MyObservable implements Iterable<SpellAbilitySta
         this.lastTurnCast.clear();
         this.thisTurnCast.clear();
         this.curResolvingCard = null;
-        this.getFrozenStack().clear();
+        this.frozenStack.clear();
         this.updateObservers();
     }
 
@@ -200,8 +200,8 @@ public class MagicStack extends MyObservable implements Iterable<SpellAbilitySta
         this.frozen = false;
 
         // Add all Frozen Abilities onto the stack
-        while (!this.getFrozenStack().isEmpty()) {
-            final SpellAbility sa = this.getFrozenStack().pop().getSpellAbility();
+        while (!this.frozenStack.isEmpty()) {
+            final SpellAbility sa = this.frozenStack.pop().getSpellAbility();
             this.add(sa);
         }
         // Add all waiting triggers onto the stack
@@ -222,7 +222,7 @@ public class MagicStack extends MyObservable implements Iterable<SpellAbilitySta
         // TODO: frozen triggered abilities and undoable costs have nasty
         // consequences
         this.frozen = false;
-        this.getFrozenStack().clear();
+        this.frozenStack.clear();
     }
 
     /**
@@ -234,8 +234,8 @@ public class MagicStack extends MyObservable implements Iterable<SpellAbilitySta
      */
     public final void removeFromFrozenStack(SpellAbility sa) {
         SpellAbilityStackInstance si = this.getInstanceFromSpellAbility(sa);
-        this.getFrozenStack().remove(si);
-        if (this.getFrozenStack().isEmpty()) {
+        this.frozenStack.remove(si);
+        if (this.frozenStack.isEmpty()) {
             clearFrozen();
         }
     }
@@ -273,43 +273,12 @@ public class MagicStack extends MyObservable implements Iterable<SpellAbilitySta
      * 
      * @param sp
      *            a {@link forge.card.spellability.SpellAbility} object.
-     * @param useX
-     *            a boolean.
-     */
-    public final void add(final SpellAbility sp, final boolean useX) {
-        if (!useX) {
-            this.add(sp);
-        } else {
-
-            // TODO: make working triggered abilities!
-            if (sp.isManaAbility() || (sp instanceof AbilityTriggered)) {
-                AbilityUtils.resolve(sp, false);
-                //sp.resolve();
-            } else {
-                this.push(sp);
-                /*
-                 * if (sp.getTargetCard() != null)
-                 * CardFactoryUtil.checkTargetingEffects(sp,
-                 * sp.getTargetCard());
-                 */
-            }
-        }
-    }
-
-
-    /**
-     * <p>
-     * add.
-     * </p>
-     * 
-     * @param sp
-     *            a {@link forge.card.spellability.SpellAbility} object.
      */
     public final void add(final SpellAbility sp) {
         FThreads.assertExecutedByEdt(false);
 
         if (sp.isManaAbility()) { // Mana Abilities go straight through
-            AbilityUtils.resolve(sp, false);
+            AbilityUtils.resolve(sp);
             //sp.resolve();
             sp.resetOnceResolved();
             game.getGameLog().add(GameLogEntryType.MANA, sp.getSourceCard() + " - " + sp.getDescription());
@@ -326,7 +295,7 @@ public class MagicStack extends MyObservable implements Iterable<SpellAbilitySta
 
         if (this.frozen) {
             final SpellAbilityStackInstance si = new SpellAbilityStackInstance(sp);
-            this.getFrozenStack().push(si);
+            this.frozenStack.push(si);
             return;
         }
 
@@ -456,7 +425,7 @@ public class MagicStack extends MyObservable implements Iterable<SpellAbilitySta
             }
         }
         
-        if (!this.getSimultaneousStackEntryList().isEmpty()) {
+        if (!this.simultaneousStackEntryList.isEmpty()) {
             chooseOrderOfSimultaneousStackEntryAll();
             // Why should we pass priority after adding something to a stack?
             // game.getPhaseHandler().passPriority();
@@ -520,9 +489,6 @@ public class MagicStack extends MyObservable implements Iterable<SpellAbilitySta
     public final void resolveStack() {
         // Resolving the Stack
 
-        // TODO: change to use forge.view.FView?
-        //GuiDisplayUtil.updateGUI();
-
         // freeze the stack while we're in the middle of resolving
         this.freezeStack(); 
         this.setResolving(true);
@@ -543,67 +509,100 @@ public class MagicStack extends MyObservable implements Iterable<SpellAbilitySta
         if (thisHasFizzled) { // Fizzle
             // TODO: Spell fizzles, what's the best way to alert player?
             Log.debug(source.getName() + " ability fizzles.");
-            this.finishResolving(sa, true);
         } else if (sa.getApi() != null) {
             AbilityUtils.handleRemembering(sa);
-            AbilityUtils.resolve(sa, true);
+            AbilityUtils.resolve(sa);
         } else {
             sa.resolve();
-            this.finishResolving(sa, false);
             // do creatures ETB from here?
         }
-        sa.getSourceCard().setXManaCostPaid(0);
+        this.finishResolving(sa, thisHasFizzled);
 
         game.fireEvent(new GameEventSpellResolved(sa, thisHasFizzled));
 
-        if (source.hasStartOfKeyword("Haunt") && !source.isCreature()
-                && game.getZoneOf(source).is(ZoneType.Graveyard)) {
-            final List<Card> creats = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), Presets.CREATURES);
-            final Ability haunterDiesWork = new Ability(source, ManaCost.ZERO) {
-                @Override
-                public void resolve() {
-                    game.getAction().exile(source);
-                    this.getTargetCard().addHauntedBy(source);
-                }
-            };
-            for (int i = 0; i < creats.size(); i++) {
-                haunterDiesWork.setActivatingPlayer(sa.getActivatingPlayer());
-                if (!creats.get(i).canBeTargetedBy(haunterDiesWork)) {
-                    creats.remove(i);
-                    i--;
-                }
-            }
-            if (!creats.isEmpty()) {
-                haunterDiesWork.setDescription("");
+        if (source.hasStartOfKeyword("Haunt") && !source.isCreature() && game.getZoneOf(source).is(ZoneType.Graveyard)) {
+            handleHauntForNonPermanents(sa);
+        }
+    }
 
-                if (source.getController().isHuman()) {
-                    final InputSelectCards targetHaunted = new InputSelectCardsFromList(1,1, creats);
-                    targetHaunted.setMessage("Choose target creature to haunt.");
-                    Singletons.getControl().getInputQueue().setInputAndWait(targetHaunted);
-                    haunterDiesWork.setTargetCard(targetHaunted.getSelected().get(0));
-                    MagicStack.this.add(haunterDiesWork);
-                } else {
-                    // AI choosing what to haunt
-                    final List<Card> oppCreats = CardLists.filterControlledBy(creats, source.getController().getOpponents());
-                    haunterDiesWork.setTargetCard(ComputerUtilCard.getWorstCreatureAI(oppCreats.isEmpty() ? creats : oppCreats));
-                    this.add(haunterDiesWork);
-                }
+    private void handleHauntForNonPermanents(final SpellAbility sa) {
+        final Card source = sa.getSourceCard();
+        final List<Card> creats = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), Presets.CREATURES);
+        final Ability haunterDiesWork = new Ability(source, ManaCost.ZERO) {
+            @Override
+            public void resolve() {
+                game.getAction().exile(source);
+                this.getTargetCard().addHauntedBy(source);
+            }
+        };
+        for (int i = 0; i < creats.size(); i++) {
+            haunterDiesWork.setActivatingPlayer(sa.getActivatingPlayer());
+            if (!creats.get(i).canBeTargetedBy(haunterDiesWork)) {
+                creats.remove(i);
+                i--;
+            }
+        }
+        if (!creats.isEmpty()) {
+            haunterDiesWork.setDescription("");
+
+            if (source.getController().isHuman()) {
+                final InputSelectCards targetHaunted = new InputSelectCardsFromList(1,1, creats);
+                targetHaunted.setMessage("Choose target creature to haunt.");
+                Singletons.getControl().getInputQueue().setInputAndWait(targetHaunted);
+                haunterDiesWork.setTargetCard(targetHaunted.getSelected().get(0));
+                MagicStack.this.add(haunterDiesWork);
+            } else {
+                // AI choosing what to haunt
+                final List<Card> oppCreats = CardLists.filterControlledBy(creats, source.getController().getOpponents());
+                haunterDiesWork.setTargetCard(ComputerUtilCard.getWorstCreatureAI(oppCreats.isEmpty() ? creats : oppCreats));
+                this.add(haunterDiesWork);
             }
         }
     }
 
-    /**
-     * <p>
-     * removeCardFromStack.
-     * </p>
-     * 
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @param fizzle
-     *            a boolean.
-     * @since 1.0.15
-     */
-    public final void removeCardFromStack(final SpellAbility sa, final boolean fizzle) {
+
+    private final void finishResolving(final SpellAbility sa, final boolean fizzle) {
+    
+        // remove SA and card from the stack
+        this.removeCardFromStack(sa, fizzle);
+        // SpellAbility is removed from the stack here
+        // temporarily removed removing SA after resolution
+        final SpellAbilityStackInstance si = this.getInstanceFromSpellAbility(sa);
+        
+        if (si != null) {
+            this.remove(si);
+        }
+    
+        // After SA resolves we have to do a handful of things
+        this.setResolving(false);
+        this.unfreezeStack();
+        sa.resetOnceResolved();
+    
+        game.getAction().checkStateEffects();
+    
+        game.getPhaseHandler().onStackResolved();
+    
+        this.curResolvingCard = null;
+    
+        this.updateObservers();
+    
+        // TODO: this is a huge hack. Why is this necessary?
+        // hostCard in AF is not the same object that's on the battlefield
+        // verified by System.identityHashCode(card);
+        final Card tmp = sa.getSourceCard();
+        tmp.setCanCounter(true); // reset mana pumped counter magic flag
+        if (tmp.getClones().size() > 0) {
+            for (final Card c : game.getCardsIn(ZoneType.Battlefield)) {
+                if (c.equals(tmp)) {
+                    c.setClones(tmp.getClones());
+                }
+            }
+        }
+        
+        sa.getSourceCard().setXManaCostPaid(0);
+    }
+
+    private final void removeCardFromStack(final SpellAbility sa, final boolean fizzle) {
         Card source = sa.getSourceCard();
 
         // do nothing
@@ -644,54 +643,6 @@ public class MagicStack extends MyObservable implements Iterable<SpellAbilitySta
         }
     }
 
-    /**
-     * <p>
-     * finishResolving.
-     * </p>
-     * 
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @param fizzle
-     *            a boolean.
-     * @since 1.0.15
-     */
-    public final void finishResolving(final SpellAbility sa, final boolean fizzle) {
-
-        // remove SA and card from the stack
-        this.removeCardFromStack(sa, fizzle);
-        // SpellAbility is removed from the stack here
-        // temporarily removed removing SA after resolution
-        this.remove(sa);
-
-        // After SA resolves we have to do a handful of things
-        this.setResolving(false);
-        this.unfreezeStack();
-        sa.resetOnceResolved();
-
-        game.getAction().checkStateEffects();
-
-        game.getPhaseHandler().onStackResolved();
-
-        this.curResolvingCard = null;
-
-        // TODO: change to use forge.view.FView?
-        //GuiDisplayUtil.updateGUI();
-        this.updateObservers();
-
-        // TODO: this is a huge hack. Why is this necessary?
-        // hostCard in AF is not the same object that's on the battlefield
-        // verified by System.identityHashCode(card);
-        final Card tmp = sa.getSourceCard();
-        tmp.setCanCounter(true); // reset mana pumped counter magic flag
-        if (tmp.getClones().size() > 0) {
-            for (final Card c : game.getCardsIn(ZoneType.Battlefield)) {
-                if (c.equals(tmp)) {
-                    c.setClones(tmp.getClones());
-                }
-            }
-
-        }
-    }
 
     /**
      * <p>
@@ -704,7 +655,7 @@ public class MagicStack extends MyObservable implements Iterable<SpellAbilitySta
      *            a {@link forge.Card} object.
      * @return a boolean.
      */
-    public final boolean hasFizzled(final SpellAbility sa, final Card source, final boolean parentFizzled) {
+    private final boolean hasFizzled(final SpellAbility sa, final Card source, final boolean parentFizzled) {
         // Can't fizzle unless there are some targets
         boolean fizzle = false;
 
@@ -770,60 +721,16 @@ public class MagicStack extends MyObservable implements Iterable<SpellAbilitySta
         return hasFizzled(sa.getSubAbility(), source, fizzle) && fizzle;
     }
 
-    /**
-     * <p>
-     * peekAbility.
-     * </p>
-     * 
-     * @return a {@link forge.card.spellability.SpellAbility} object.
-     */
     public final SpellAbility peekAbility() {
         return this.stack.peekFirst().getSpellAbility();
     }
 
-    /**
-     * <p>
-     * remove.
-     * </p>
-     * 
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     */
-    public final void remove(final SpellAbility sa) {
-        final SpellAbilityStackInstance si = this.getInstanceFromSpellAbility(sa);
-
-        if (si == null) {
-            return;
-        }
-
-        this.remove(si);
-    }
-
-    /**
-     * <p>
-     * remove.
-     * </p>
-     * 
-     * @param si
-     *            a {@link forge.card.spellability.SpellAbilityStackInstance}
-     *            object.
-     */
     public final void remove(final SpellAbilityStackInstance si) {
         this.stack.remove(si);
-        this.getFrozenStack().remove(si);
+        this.frozenStack.remove(si);
         this.updateObservers();
     }
 
-    /**
-     * <p>
-     * getInstanceFromSpellAbility.
-     * </p>
-     * 
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @return a {@link forge.card.spellability.SpellAbilityStackInstance}
-     *         object.
-     */
     public final SpellAbilityStackInstance getInstanceFromSpellAbility(final SpellAbility sa) {
         // TODO: Confirm this works!
         for (final SpellAbilityStackInstance si : this.stack) {
@@ -834,38 +741,19 @@ public class MagicStack extends MyObservable implements Iterable<SpellAbilitySta
         return null;
     }
 
-    /**
-     * <p>
-     * hasSimultaneousStackEntries.
-     * </p>
-     * 
-     * @return a boolean.
-     */
     public final boolean hasSimultaneousStackEntries() {
-        return this.getSimultaneousStackEntryList().size() > 0;
+        return !this.simultaneousStackEntryList.isEmpty();
     }
 
     public final void clearSimultaneousStack() {
         this.simultaneousStackEntryList.clear();
     }
 
-    /**
-     * <p>
-     * addSimultaneousStackEntry.
-     * </p>
-     * 
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     */
     public final void addSimultaneousStackEntry(final SpellAbility sa) {
-        this.getSimultaneousStackEntryList().add(sa);
+        this.simultaneousStackEntryList.add(sa);
     }
 
-    /**
-     * <p>
-     * chooseOrderOfSimultaneousStackEntryAll.
-     * </p>
-     */
+
     public final void chooseOrderOfSimultaneousStackEntryAll() {
         final Player playerTurn = game.getPhaseHandler().getPlayerTurn();
 
@@ -879,33 +767,26 @@ public class MagicStack extends MyObservable implements Iterable<SpellAbilitySta
         }
     }
 
-    /**
-     * <p>
-     * chooseOrderOfSimultaneousStackEntry.
-     * </p>
-     * 
-     * @param activePlayer
-     *            a {@link forge.game.player.Player} object.
-     */
-    public final void chooseOrderOfSimultaneousStackEntry(final Player activePlayer) {
-        if (this.getSimultaneousStackEntryList().isEmpty()) {
+
+    private final void chooseOrderOfSimultaneousStackEntry(final Player activePlayer) {
+        if (this.simultaneousStackEntryList.isEmpty()) {
             return;
         }
 
         final List<SpellAbility> activePlayerSAs = new ArrayList<SpellAbility>();
-        for (int i = 0; i < this.getSimultaneousStackEntryList().size(); i++) {
-            SpellAbility sa = this.getSimultaneousStackEntryList().get(i);
+        for (int i = 0; i < this.simultaneousStackEntryList.size(); i++) {
+            SpellAbility sa = this.simultaneousStackEntryList.get(i);
             Player activator = sa.getActivatingPlayer();
             if (activator == null) {
                 if (sa.getSourceCard().getController().equals(activePlayer)) {
                     activePlayerSAs.add(sa);
-                    this.getSimultaneousStackEntryList().remove(i);
+                    this.simultaneousStackEntryList.remove(i);
                     i--;
                 }
             } else {
                 if (activator.equals(activePlayer)) {
                     activePlayerSAs.add(sa);
-                    this.getSimultaneousStackEntryList().remove(i);
+                    this.simultaneousStackEntryList.remove(i);
                     i--;
                 }
             }
@@ -967,24 +848,6 @@ public class MagicStack extends MyObservable implements Iterable<SpellAbilitySta
     }
 
     /**
-     * Gets the simultaneous stack entry list.
-     * 
-     * @return the simultaneousStackEntryList
-     */
-    public final List<SpellAbility> getSimultaneousStackEntryList() {
-        return this.simultaneousStackEntryList;
-    }
-
-    /**
-     * Gets the frozen stack.
-     * 
-     * @return the frozenStack
-     */
-    public final Stack<SpellAbilityStackInstance> getFrozenStack() {
-        return this.frozenStack;
-    }
-
-    /**
      * Accessor for the field thisTurnCast.
      * 
      * @return a CardList.
@@ -996,16 +859,9 @@ public class MagicStack extends MyObservable implements Iterable<SpellAbilitySta
     /**
      * clearCardsCastThisTurn.
      */
-    public final void clearCardsCastThisTurn() {
-        this.thisTurnCast.clear();
-    }
-
-    /**
-     * 
-     * setCardsCastLastTurn.
-     */
-    public final void setCardsCastLastTurn() {
+    public final void onNextTurn() {
         this.lastTurnCast = new ArrayList<Card>(this.thisTurnCast);
+        this.thisTurnCast.clear();
     }
 
     /**

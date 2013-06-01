@@ -40,7 +40,7 @@ public class RepeatEffect extends SpellAbilityEffect {
         //execute repeat ability at least once
         int count = 0;
         do {
-             AbilityUtils.resolve(repeat, false);
+             AbilityUtils.resolve(repeat);
              count++;
              if (maxRepeat != null && maxRepeat <= count) {
                  // TODO Replace Infinite Loop Break with a game draw. Here are the scenarios that can cause this:

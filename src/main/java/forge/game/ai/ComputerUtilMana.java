@@ -185,7 +185,7 @@ public class ComputerUtilMana {
                     saPayment.getSourceCard().tap();
                 }
 
-                AbilityUtils.resolve(saPayment, false);
+                AbilityUtils.resolve(saPayment);
                 // subtract mana from mana pool
                 manapool.payManaFromAbility(sa, cost, saPayment);
 

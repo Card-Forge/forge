@@ -140,7 +140,7 @@ public class TwoPilesEffect extends SpellAbilityEffect {
                     action.setActivatingPlayer(sa.getActivatingPlayer());
                     ((AbilitySub) action).setParent(sa);
 
-                    AbilityUtils.resolve(action, false);
+                    AbilityUtils.resolve(action);
                 }
 
                 // take action on the chosen pile
@@ -160,7 +160,7 @@ public class TwoPilesEffect extends SpellAbilityEffect {
                     action.setActivatingPlayer(sa.getActivatingPlayer());
                     ((AbilitySub) action).setParent(sa);
 
-                    AbilityUtils.resolve(action, false);
+                    AbilityUtils.resolve(action);
                 }
             }
         }

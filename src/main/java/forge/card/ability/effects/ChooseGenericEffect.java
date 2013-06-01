@@ -62,7 +62,7 @@ public class ChooseGenericEffect extends SpellAbilityEffect {
             }
             chosenSA.setActivatingPlayer(sa.getSourceCard().getController());
             ((AbilitySub) chosenSA).setParent(sa);
-            AbilityUtils.resolve(chosenSA, false);
+            AbilityUtils.resolve(chosenSA);
         }
     }
 

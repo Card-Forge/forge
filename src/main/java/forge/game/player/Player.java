@@ -1313,14 +1313,14 @@ public class Player extends GameEntity implements Comparable<Player> {
                     SpellAbility saMill = AbilityFactory.getAbility(c.getSVar("MillOne"), c);
                     saMill.setActivatingPlayer(c.getController());
                     saMill.setTarget(target);
-                    AbilityUtils.resolve(saMill, false);
+                    AbilityUtils.resolve(saMill);
                     
                     return drawn; // Draw is cancelled
                 } else { 
                     SpellAbility saDiscard = AbilityFactory.getAbility(c.getSVar("DiscardOne"), c);
                     saDiscard.setActivatingPlayer(c.getController());
                     saDiscard.setTarget(target);
-                    AbilityUtils.resolve(saDiscard, false);
+                    AbilityUtils.resolve(saDiscard);
                 }
             }
         }

@@ -76,7 +76,7 @@ public class FlipCoinEffect extends SpellAbilityEffect {
                         heads.setActivatingPlayer(player);
                         ((AbilitySub) heads).setParent(sa);
 
-                        AbilityUtils.resolve(heads, false);
+                        AbilityUtils.resolve(heads);
                     }
                 } else {
                     if (sa.hasParam("TailsSubAbility")) {
@@ -84,7 +84,7 @@ public class FlipCoinEffect extends SpellAbilityEffect {
                         tails.setActivatingPlayer(player);
                         ((AbilitySub) tails).setParent(sa);
 
-                        AbilityUtils.resolve(tails, false);
+                        AbilityUtils.resolve(tails);
                     }
                 }
             } else {
@@ -97,7 +97,7 @@ public class FlipCoinEffect extends SpellAbilityEffect {
                         win.setActivatingPlayer(player);
                         ((AbilitySub) win).setParent(sa);
 
-                        AbilityUtils.resolve(win, false);
+                        AbilityUtils.resolve(win);
                     }
                     // runParams.put("Won","True");
                 } else {
@@ -109,7 +109,7 @@ public class FlipCoinEffect extends SpellAbilityEffect {
                         lose.setActivatingPlayer(player);
                         ((AbilitySub) lose).setParent(sa);
 
-                        AbilityUtils.resolve(lose, false);
+                        AbilityUtils.resolve(lose);
                     }
                     // runParams.put("Won","False");
                 }

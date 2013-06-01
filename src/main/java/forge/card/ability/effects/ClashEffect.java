@@ -43,7 +43,7 @@ public class ClashEffect extends SpellAbilityEffect {
                 win.setActivatingPlayer(sa.getSourceCard().getController());
                 ((AbilitySub) win).setParent(sa);
 
-                AbilityUtils.resolve(win, false);
+                AbilityUtils.resolve(win);
             }
             runParams.put("Won", "True");
         } else {
@@ -53,7 +53,7 @@ public class ClashEffect extends SpellAbilityEffect {
                 otherwise.setActivatingPlayer(sa.getSourceCard().getController());
                 ((AbilitySub) otherwise).setParent(sa);
 
-                AbilityUtils.resolve(otherwise, false);
+                AbilityUtils.resolve(otherwise);
             }
             runParams.put("Won", "False");
         }

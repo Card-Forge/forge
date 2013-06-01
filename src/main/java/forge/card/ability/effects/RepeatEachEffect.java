@@ -70,7 +70,7 @@ public class RepeatEachEffect extends SpellAbilityEffect {
                     source.addRemembered(card);
                 }
 
-                AbilityUtils.resolve(repeat, false);
+                AbilityUtils.resolve(repeat);
                 if (useImprinted) {
                     source.removeImprinted(card);
                 } else {
@@ -84,7 +84,7 @@ public class RepeatEachEffect extends SpellAbilityEffect {
 
             for (Player player : repeatPlayers) {
                 source.addRemembered(player);
-                AbilityUtils.resolve(repeat, false);
+                AbilityUtils.resolve(repeat);
                 source.removeRemembered(player);
             }
         }
@@ -100,7 +100,7 @@ public class RepeatEachEffect extends SpellAbilityEffect {
                 sb.append("Number$").append(target.getCounters(type));
                 source.setSVar("RepeatSVarCounter", type.getName().toUpperCase());
                 source.setSVar("RepeatCounterAmount", sb.toString());
-                AbilityUtils.resolve(repeat, false);
+                AbilityUtils.resolve(repeat);
             }
         }
     }

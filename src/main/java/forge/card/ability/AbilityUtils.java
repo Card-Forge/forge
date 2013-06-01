@@ -1020,7 +1020,7 @@ public class AbilityUtils {
     // BELOW ARE resove() METHOD AND ITS DEPENDANTS, CONSIDER MOVING TO DEDICATED CLASS
     //
     /////////////////////////////////////////////////////////////////////////////////////
-    public static void resolve(final SpellAbility sa, final boolean usedStack) {
+    public static void resolve(final SpellAbility sa) {
         if (sa == null) {
             return;
         }
@@ -1028,44 +1028,38 @@ public class AbilityUtils {
         if (api == null) {
             sa.resolve();
             if (sa.getSubAbility() != null) {
-                resolve(sa.getSubAbility(), usedStack);
+                resolve(sa.getSubAbility());
             }
             return;
         }
 
-        AbilityUtils.resolveApiAbility(sa, usedStack, sa.getActivatingPlayer().getGame());
+        AbilityUtils.resolveApiAbility(sa, sa.getActivatingPlayer().getGame());
     }
 
-    private static void resolveSubAbilities(final SpellAbility sa, boolean usedStack, final Game game) {
+    private static void resolveSubAbilities(final SpellAbility sa, final Game game) {
         final AbilitySub abSub = sa.getSubAbility();
         if (abSub == null || sa.isWrapper()) {
-            // every resolving spellAbility will end here
-            if (usedStack) {
-                SpellAbility root = sa.getRootAbility();
-                // static abilities will get refreshed from SBE check.
-                game.getStack().finishResolving(root, false);
-            }
             return;
         }
 
         game.getAction().checkStaticAbilities(); // this will refresh continuous abilities for players and permanents.
-        AbilityUtils.resolveApiAbility(abSub, usedStack, game);
+        AbilityUtils.resolveApiAbility(abSub, game);
     }
 
-    private static void resolveApiAbility(final SpellAbility sa, boolean usedStack, final Game game) {
+    private static void resolveApiAbility(final SpellAbility sa, final Game game) {
         // check conditions
         if (sa.getConditions().areMet(sa)) {
             if (sa.isWrapper() || StringUtils.isBlank(sa.getParam("UnlessCost"))) {
                 sa.resolve();
             } else {
-                handleUnlessCost(sa, usedStack, game);
+                handleUnlessCost(sa, game);
                 return;
             }
         }
-        resolveSubAbilities(sa, usedStack, game);
+        resolveSubAbilities(sa, game);
     }
 
-    private static void handleUnlessCost(final SpellAbility sa, final boolean usedStack, final Game game) {
+    private static void handleUnlessCost(final SpellAbility sa, final Game game) {
         final Card source = sa.getSourceCard();
         String unlessCost = sa.getParam("UnlessCost");
         unlessCost = unlessCost.trim();
@@ -1084,7 +1078,7 @@ public class AbilityUtils {
         } else if (unlessCost.equals("RememberedCostMinus2")) {
             if (source.getRemembered().isEmpty() || !(source.getRemembered().get(0) instanceof Card)) {
                 sa.resolve();
-                resolveSubAbilities(sa, usedStack, game);
+                resolveSubAbilities(sa, game);
             }
             Card rememberedCard = (Card) source.getRemembered().get(0);
             unlessCost = rememberedCard.getManaCost().toString();
@@ -1124,10 +1118,7 @@ public class AbilityUtils {
         }
 
         if ( paid && execSubsWhenPaid || !paid && execSubsWhenNotPaid ) { // switched refers only to main ability!
-            resolveSubAbilities(sa, usedStack, game);
-        } else if (usedStack) {
-            SpellAbility root = sa.getRootAbility();
-            game.getStack().finishResolving(root, false);
+            resolveSubAbilities(sa, game);
         }
     }
 

@@ -318,7 +318,7 @@ public class ComputerUtil {
                 pay.payComputerCosts(ai, game);
             }
 
-            AbilityUtils.resolve(sa, false);
+            AbilityUtils.resolve(sa);
 
             // destroys creatures if they have lethal damage, etc..
             //game.getAction().checkStateEffects();

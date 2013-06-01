@@ -126,7 +126,7 @@ public class CountersRemoveEffect extends SpellAbilityEffect {
                             // better logic to pick a counter type and probably
                             // an initial target
                             // find first nonzero counter on target
-                            for (Object key : tgtCounters.keySet()) {
+                            for (CounterType key : tgtCounters.keySet()) {
                                 if (tgtCounters.get(key) > 0) {
                                     chosenType = (CounterType) key;
                                     break;

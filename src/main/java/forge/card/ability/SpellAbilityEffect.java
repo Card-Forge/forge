@@ -40,7 +40,7 @@ import forge.game.player.Player;
             final AbilitySub abSub = sa.getSubAbility();
             if (abSub != null) {
                 sa.setUndoable(false);
-                AbilityUtils.resolve(abSub, false);
+                AbilityUtils.resolve(abSub);
             }
         }
 

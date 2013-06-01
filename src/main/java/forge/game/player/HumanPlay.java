@@ -34,7 +34,6 @@ import forge.card.cost.CostSacrifice;
 import forge.card.cost.CostTapType;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostBeingPaid;
-import forge.card.mana.ManaCostShard;
 import forge.card.spellability.Ability;
 import forge.card.spellability.HumanPlaySpellAbility;
 import forge.card.spellability.SpellAbility;
@@ -210,8 +209,7 @@ public class HumanPlay {
                     sa.setSourceCard(game.getAction().moveToStack(c));
                 }
             }
-            boolean x = sa.getSourceCard().getManaCost().getShardCount(ManaCostShard.X) > 0;
-            game.getStack().add(sa, x);
+            game.getStack().add(sa);
         }
     }
 
@@ -238,7 +236,7 @@ public class HumanPlay {
             req.fillRequirements(useOldTargets, false, true);
         } else {
             if (payManaCostIfNeeded(player, sa)) {
-                AbilityUtils.resolve(sa, false);
+                AbilityUtils.resolve(sa);
             }
     
         }

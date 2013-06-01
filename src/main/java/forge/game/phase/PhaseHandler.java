@@ -477,8 +477,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
      */
     private Player handleNextTurn() {
 
-        game.getStack().setCardsCastLastTurn();
-        game.getStack().clearCardsCastThisTurn();
+        game.getStack().onNextTurn();
 
         for (final Player p1 : game.getPlayers()) {
             for (final ZoneType z : Player.ALL_ZONES) {
