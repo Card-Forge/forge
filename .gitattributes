@@ -4644,6 +4644,7 @@ res/cardsfolder/g/grim_tutor.txt svneol=native#text/plain
 res/cardsfolder/g/grimclaw_bats.txt svneol=native#text/plain
 res/cardsfolder/g/grimgrin_corpse_born.txt -text
 res/cardsfolder/g/grimoire_of_the_dead.txt -text
+res/cardsfolder/g/grimoire_thief.txt -text
 res/cardsfolder/g/grindclock.txt svneol=native#text/plain
 res/cardsfolder/g/grinding_station.txt svneol=native#text/plain
 res/cardsfolder/g/grindstone.txt svneol=native#text/plain
@@ -6787,6 +6788,7 @@ res/cardsfolder/m/millstone.txt svneol=native#text/plain
 res/cardsfolder/m/mimeofacture.txt -text
 res/cardsfolder/m/mimic_vat.txt -text
 res/cardsfolder/m/miming_slime.txt -text
+res/cardsfolder/m/minamo.txt -text
 res/cardsfolder/m/minamo_school_at_waters_edge.txt svneol=native#text/plain
 res/cardsfolder/m/minamo_scrollkeeper.txt svneol=native#text/plain
 res/cardsfolder/m/minamo_sightbender.txt svneol=native#text/plain

@@ -1,0 +1,13 @@
+Name:Minamo
+ManaCost:no cost
+Types:Plane Kamigawa
+T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ Player | TriggerZones$ Command | Execute$ TrigDraw | TriggerDescription$ Whenever a player casts a spell, that player may draw a card.
+SVar:TrigDraw:AB$ Draw | Cost$ 0 | Defined$ TriggeredActivator | OptionalDecider$ True
+T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever you roll Chaos, each player may return a blue card from his or her graveyard to his or her hand.
+SVar:RolledChaos:AB$ RepeatEach | Cost$ 0 | RepeatPlayers$ Player | RepeatSubAbility$ DBChoose | SubAbility$ DBChangeZoneAll
+SVar:DBChoose:DB$ ChooseCard | Choices$ Card.RememberedPlayerCtrl+Blue | ChoiceZone$ Graveyard | Defined$ Player.IsRemembered | Amount$ 1 | RememberChosen$ True
+SVar:DBChangeZoneAll:DB$ ChangeZoneAll | ChangeType$ Card.IsRemembered | Origin$ Graveyard | Destination$ Hand | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/minamo.jpg
+Oracle:Whenever a player casts a spell, that player may draw a card.\nWhenever you roll {C}, each player may return a blue card from his or her graveyard to his or her hand.
+SetInfo:HOP Common
