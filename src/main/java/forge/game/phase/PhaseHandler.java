@@ -44,7 +44,6 @@ import forge.gui.framework.SDisplayUtil;
 import forge.gui.match.CMatchUI;
 import forge.gui.match.nonsingleton.VField;
 import forge.properties.ForgePreferences.FPref;
-import forge.util.MyObservable;
 
 
 /**
@@ -55,7 +54,7 @@ import forge.util.MyObservable;
  * @author Forge
  * @version $Id: PhaseHandler.java 13001 2012-01-08 12:25:25Z Sloth $
  */
-public class PhaseHandler extends MyObservable implements java.io.Serializable {
+public class PhaseHandler implements java.io.Serializable {
 
     /** Constant <code>serialVersionUID=5207222278370963197L</code>. */
     private static final long serialVersionUID = 5207222278370963197L;
@@ -679,7 +678,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
         setPlayerTurn(goesFirst);
         advanceToNextPhase();
         onPhaseBegin();
-        updateObservers();
+
         // don't even offer priority, because it's untap of 1st turn now
         givePriorityToPlayer = false;
         
@@ -741,9 +740,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
                 // pass the priority to other player
                 this.pPlayerPriority = nextPlayer;
             }
-            
-            updateObservers();
-            
+
             // If ever the karn's ultimate resolved
             if( game.getAge() == GameAge.RestartedByKarn) {
                 phase = null;
@@ -764,9 +761,12 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
     // this is a hack for the setup game state mode, do not use outside of devSetupGameState code
     // as it avoids calling any of the phase effects that may be necessary in a less enforced context
     public final void devModeSet(final PhaseType phase0, final Player player0) {
+        
         if (null != phase0) this.phase = phase0;
         if (null != player0 )
             setPlayerTurn(player0);
+        
+        game.fireEvent(new GameEventTurnPhase(this.getPlayerTurn(), this.getPhase(), ""));
     }
 
     /**

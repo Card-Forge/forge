@@ -13,6 +13,7 @@ import forge.game.event.GameEventAnteCardsSelected;
 import forge.game.event.GameEventGameFinished;
 import forge.game.event.GameEventGameOutcome;
 import forge.game.event.GameEventPlayerControl;
+import forge.game.event.GameEventTurnBegan;
 import forge.game.event.GameEventTurnPhase;
 import forge.game.event.IGameEventVisitor;
 import forge.game.phase.PhaseType;
@@ -22,6 +23,7 @@ import forge.gui.SOverlayUtils;
 import forge.gui.match.CMatchUI;
 import forge.gui.match.VMatchUI;
 import forge.gui.match.ViewWinLose;
+import forge.gui.match.controllers.CMessage;
 import forge.gui.match.nonsingleton.VHand;
 import forge.gui.match.nonsingleton.VField.PhaseLabel;
 
@@ -56,6 +58,21 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
         return null;
     }
 
+    private final AtomicBoolean turnUpdPlanned = new AtomicBoolean(false);
+    @Override
+    public Void visit(GameEventTurnBegan event) {
+        if ( turnUpdPlanned.getAndSet(true) ) return null;
+
+        FThreads.invokeInEdtNowOrLater(new Runnable() {
+            @Override
+            public void run() {
+                turnUpdPlanned.set(false);
+                CMessage.SINGLETON_INSTANCE.updateText();
+            }
+        });
+        return null;
+    }
+    
     @Override
     public Void visit(GameEventAnteCardsSelected ev) {
         // Require EDT here?

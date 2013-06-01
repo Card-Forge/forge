@@ -23,12 +23,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
-import java.util.Observable;
-import java.util.Observer;
-
 import javax.swing.JButton;
 
 import forge.Command;
+import forge.FThreads;
 import forge.game.Game;
 import forge.game.Match;
 import forge.gui.InputProxy;
@@ -41,7 +39,7 @@ import forge.gui.match.views.VMessage;
  * 
  * <br><br><i>(C at beginning of class name denotes a control class.)</i>
  */
-public enum CMessage implements ICDoc, Observer {
+public enum CMessage implements ICDoc {
     /** */
     SINGLETON_INSTANCE;
 
@@ -117,19 +115,14 @@ public enum CMessage implements ICDoc, Observer {
     /* (non-Javadoc)
      * @see java.util.Observer#update(java.util.Observable, java.lang.Object)
      */
-    @Override
-    public void update(Observable o, Object arg) {
+
+    public void updateText() {
+        FThreads.assertExecutedByEdt(true);
         Match match = game.getMatch();
-        view.getLblGames().setText(
-                match.getGameType().toString() + ": Game #"
-                + (match.getPlayedGames().size() + 1)
-                + " of " + match.getGamesPerMatch()
-                + ", turn " + match.getCurrentGame().getPhaseHandler().getTurn());
+        String text = String.format("%s: Game #%d of %d, turn %d", match.getGameType(), match.getPlayedGames().size() + 1, match.getGamesPerMatch(), game.getPhaseHandler().getTurn());
+        view.getLblGames().setText(text);
     }
 
-    /* (non-Javadoc)
-     * @see forge.gui.framework.ICDoc#update()
-     */
     @Override
     public void update() {
         // set focus back to button that last had it
@@ -138,13 +131,13 @@ public enum CMessage implements ICDoc, Observer {
         }
     }
 
+
     /**
      * TODO: Write javadoc for this method.
      * @param match
      */
     public void setModel(Game game0) {
         game = game0;
-        game.getPhaseHandler().addObserver(this);
-        update(null, null);
+        update();
     }
 }
