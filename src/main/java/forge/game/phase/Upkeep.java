@@ -165,7 +165,8 @@ public class Upkeep extends Phase {
         for (int i = 0; i < list.size(); i++) {
             final Card c = list.get(i);
             if (c.hasStartOfKeyword("(Echo unpaid)")) {
-                final Ability blankAbility = Upkeep.getBlankAbility(c, c.getEchoCost());
+                Cost cost = new Cost(c.getEchoCost(), true);
+                final Ability blankAbility = Upkeep.getBlankAbility(c, cost);
                 blankAbility.setActivatingPlayer(c.getController());
 
                 final StringBuilder sb = new StringBuilder();
@@ -178,7 +179,7 @@ public class Upkeep extends Phase {
                         Player controller = c.getController();
                         if (controller.isHuman()) {
                             Cost cost = new Cost(c.getEchoCost().trim(), true);
-                            hasPaid = HumanPlay.payCostDuringAbilityResolve(blankAbility, cost, null);
+                            hasPaid = HumanPlay.payCostDuringAbilityResolve(controller, c, cost, null);
                         } else { // computer
                             if (ComputerUtilCost.canPayCost(blankAbility, controller)) {
                                 ComputerUtil.playNoStack(controller, blankAbility, game);
@@ -230,7 +231,7 @@ public class Upkeep extends Phase {
                                 Singletons.getControl().getInputQueue().setInputAndWait(inp);
                                 isUpkeepPaid = inp.isPaid();
                             } else { // computer
-                                Ability aiPaid = Upkeep.getBlankAbility(c, upkeepCost.toString());
+                                Ability aiPaid = Upkeep.getBlankAbility(c, new Cost(upkeepCost, true));
                                 isUpkeepPaid = ComputerUtilCost.canPayCost(aiPaid, controller) && !c.hasKeyword("Indestructible"); 
                                 if (isUpkeepPaid) {
                                     ComputerUtil.playNoStack(controller, aiPaid, game);
@@ -271,23 +272,26 @@ public class Upkeep extends Phase {
                         sb.append("Cumulative upkeep for ").append(c).append("\n");
                     }
 
-                    final String upkeepCost = cost;
+                    final Cost upkeepCost = new Cost(cost, true);
                     final Ability blankAbility = Upkeep.getBlankAbility(c, upkeepCost);
                     blankAbility.setActivatingPlayer(controller);
 
                     final Ability upkeepAbility = new Ability(c, ManaCost.ZERO) {
                         @Override
                         public void resolve() {
+                            boolean isPaid = false;
                             if (controller.isHuman()) {
-                                if ( !HumanPlay.payCostDuringAbilityResolve(blankAbility, blankAbility.getPayCosts(), this))
-                                    game.getAction().sacrifice(c, null);
+                                isPaid = HumanPlay.payCostDuringAbilityResolve(controller, c, upkeepCost, this);
+                                    
                             } else { // computer
                                 if (ComputerUtilCost.shouldPayCost(controller, c, upkeepCost) && ComputerUtilCost.canPayCost(blankAbility, controller)) {
                                     ComputerUtil.playNoStack(controller, blankAbility, game); // this makes AI pay
-                                } else {
-                                    game.getAction().sacrifice(c, null);
+                                    isPaid = true;
                                 }
                             }
+                            
+                            if(!isPaid)
+                                game.getAction().sacrifice(c, null);
                         }
                     };
                     upkeepAbility.setActivatingPlayer(controller);
@@ -315,7 +319,7 @@ public class Upkeep extends Phase {
                                 Singletons.getControl().getInputQueue().setInputAndWait(inp);
                                 isUpkeepPaid = inp.isPaid();
                             } else { // computers
-                                final Ability aiPaid = Upkeep.getBlankAbility(c, upkeepCost.toString());
+                                final Ability aiPaid = Upkeep.getBlankAbility(c, new Cost(upkeepCost, true));
                                 if (ComputerUtilCost.canPayCost(aiPaid, controller) && ComputerUtilCombat.predictDamageTo(controller, upkeepDamage, c, false) > 0) {
                                     ComputerUtil.playNoStack(controller, aiPaid, game);
                                     isUpkeepPaid = true;
@@ -350,8 +354,8 @@ public class Upkeep extends Phase {
      *            a {@link java.lang.String} object.
      * @return a {@link forge.card.spellability.Ability} object.
      */
-    public static Ability getBlankAbility(final Card c, final String costString) {
-        return new AbilityStatic(c, new Cost(costString, true), null) {
+    public static Ability getBlankAbility(final Card c, final Cost cost) {
+        return new AbilityStatic(c, cost, null) {
             @Override
             public void resolve() {}
         };

@@ -7,6 +7,7 @@ import forge.game.ai.ComputerUtilCost;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
+import forge.game.player.PlayerActionConfirmMode;
 
 public abstract class SpellAbilityAi {
 
@@ -102,5 +103,10 @@ public abstract class SpellAbilityAi {
     public boolean chkDrawbackWithSubs(Player aiPlayer, AbilitySub ab) {
         final AbilitySub subAb = ab.getSubAbility();
         return ab.getAi().chkAIDrawback(ab, aiPlayer) && (subAb == null || chkDrawbackWithSubs(aiPlayer, subAb));  
+    }
+    
+    public boolean confirmAction(Player player, SpellAbility sa, PlayerActionConfirmMode mode, String message) {
+        System.err.println("Warning: default (ie. inherited from base class) implementation of confirmAction is used for " + this.getClass().getName() + ". Consider declaring an overloaded method");
+        return true;
     }
 }

@@ -1005,7 +1005,7 @@ public class CombatUtil {
             ability.setActivatingPlayer(c.getController());
 
             if (c.getController().isHuman()) {
-                isPaid = HumanPlay.payCostDuringAbilityResolve(ability, attackCost, null);
+                isPaid = HumanPlay.payCostDuringAbilityResolve(c.getController(), c, attackCost, null);
             } else { // computer
                 if (ComputerUtilCost.canPayCost(ability, c.getController())) {
                     ComputerUtil.playNoStack(c.getController(), ability, game);

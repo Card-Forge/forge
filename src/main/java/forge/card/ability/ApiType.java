@@ -242,7 +242,6 @@ public enum ApiType {
 
     public SpellAbilityEffect getSpellEffect() {
         return clsEffect == null ? null : ReflectionUtil.makeDefaultInstanceOf(clsEffect);
-
     }
 
     public SpellAbilityAi getAi() {

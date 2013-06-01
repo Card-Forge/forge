@@ -35,12 +35,10 @@ import forge.CardPredicates;
 import forge.CardPredicates.Presets;
 import forge.Constant;
 import forge.GameEntity;
-import forge.card.ability.AbilityUtils;
 import forge.card.ability.ApiType;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.CostDiscard;
 import forge.card.cost.CostPart;
-import forge.card.spellability.AbilitySub;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellPermanent;
@@ -711,50 +709,12 @@ public class AiController {
             if( mode != null ) switch (mode) {
                 case BraidOfFire: return true;
             }
-        } else switch(api) {
-            case Discard:
-                if ( mode == PlayerActionConfirmMode.Random ) { //
-                    // TODO For now AI will always discard Random used currently with: Balduvian Horde and similar cards
-                    return true;
-                }
-            break;
-            
-            case Encode:
-                return true;
-                
-            case Dig:
-                Card topc = player.getZone(ZoneType.Library).get(0);
-                return topc.isInstant() || topc.isSorcery();
-                
-            case Repeat:
-                //TODO add logic to have computer make better choice (ArsenalNut)
-                return false;
 
-            case PeekAndReveal:
-                AbilitySub subAb = sa.getSubAbility();
-                return subAb != null && subAb.getAi().chkDrawbackWithSubs(player, subAb);
+            String exMsg = String.format("AI confirmAction does not know what to decide about %s mode (api is null).", mode);
+            throw new InvalidParameterException(exMsg);
 
-            case Shuffle: // ai could analyze parameter denoting the player to shuffle
-                return true;
-                
-            case Pump:  //TODO Add logic here if necessary but I think the AI won't cast
-                //the spell in the first place if it would curse its own creature
-                //and the pump isn't mandatory
-                return true;
-                
-            case Draw:
-                int numCards = sa.hasParam("NumCards") ? AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("NumCards"), sa) : 1;
-                // AI shouldn't mill itself
-                return numCards < player.getZone(ZoneType.Library).size();
-                
-            case CopyPermanent:
-                //TODO: add logic here
-                return true;
-                
-            default: 
-        }
-        String exMsg = String.format("AI confirmAction does not know what to decide about %s API with %s mode.", api, mode);
-        throw new InvalidParameterException(exMsg);
+        } else 
+            return api.getAi().confirmAction(player, sa, mode, message);
     }
 
     public boolean confirmStaticApplication(Card hostCard, GameEntity affected, String logic, String message) {

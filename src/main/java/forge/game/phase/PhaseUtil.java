@@ -181,7 +181,7 @@ public class PhaseUtil {
                     ability.setActivatingPlayer(blocker.getController());
 
                     if (blocker.getController().isHuman()) {
-                        hasPaid = HumanPlay.payCostDuringAbilityResolve(ability, blockCost, null);
+                        hasPaid = HumanPlay.payCostDuringAbilityResolve(blocker.getController(), blocker, blockCost, null);
                     } else { // computer
                         if (ComputerUtilCost.canPayCost(ability, blocker.getController())) {
                             ComputerUtil.playNoStack(blocker.getController(), ability, game);

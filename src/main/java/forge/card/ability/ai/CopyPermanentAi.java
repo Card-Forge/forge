@@ -15,6 +15,7 @@ import forge.card.spellability.Target;
 import forge.game.ai.ComputerUtilCard;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
+import forge.game.player.PlayerActionConfirmMode;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
 
@@ -109,6 +110,15 @@ public class CopyPermanentAi extends SpellAbilityAi {
             // if no targeting, it should always be ok
         }
 
+        return true;
+    }
+    
+    /* (non-Javadoc)
+     * @see forge.card.ability.SpellAbilityAi#confirmAction(forge.game.player.Player, forge.card.spellability.SpellAbility, forge.game.player.PlayerActionConfirmMode, java.lang.String)
+     */
+    @Override
+    public boolean confirmAction(Player player, SpellAbility sa, PlayerActionConfirmMode mode, String message) {
+        //TODO: add logic here
         return true;
     }
 

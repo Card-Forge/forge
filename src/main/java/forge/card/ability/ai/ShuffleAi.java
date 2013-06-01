@@ -3,6 +3,7 @@ package forge.card.ability.ai;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.spellability.SpellAbility;
 import forge.game.player.Player;
+import forge.game.player.PlayerActionConfirmMode;
 
 public class ShuffleAi extends SpellAbilityAi {
     @Override
@@ -45,6 +46,14 @@ public class ShuffleAi extends SpellAbilityAi {
             return false;
         }
 
+        return true;
+    }
+    
+
+
+    @Override
+    public boolean confirmAction(Player player, SpellAbility sa, PlayerActionConfirmMode mode, String message) {
+     // ai could analyze parameter denoting the player to shuffle
         return true;
     }
 }

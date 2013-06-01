@@ -506,9 +506,7 @@ public class GameAction {
             private static final long serialVersionUID = 8858061639236920054L;
 
             @Override
-            public void resolve() {
-                
-            }
+            public void resolve() {}
 
             @Override
             public String getStackDescription() {
@@ -533,7 +531,7 @@ public class GameAction {
                 Player p = recoverable.getController();
                 boolean hasPaid = false;
                 if (p.isHuman()) {
-                    hasPaid = HumanPlay.payCostDuringAbilityResolve(abRecover, abRecover.getPayCosts(), null);
+                    hasPaid = HumanPlay.payCostDuringAbilityResolve(p, recoverable, cost, null);
                 } else { // computer
                     if (ComputerUtilCost.canPayCost(abRecover, p)) {
                         ComputerUtil.playNoStack(p, abRecover, game);

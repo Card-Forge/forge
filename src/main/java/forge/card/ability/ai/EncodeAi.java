@@ -20,6 +20,7 @@ package forge.card.ability.ai;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.spellability.SpellAbility;
 import forge.game.player.Player;
+import forge.game.player.PlayerActionConfirmMode;
 
 /**
  * <p>
@@ -49,6 +50,12 @@ public final class EncodeAi extends SpellAbilityAi {
 
     @Override
     public boolean chkAIDrawback(SpellAbility sa, Player ai) {
+        return true;
+    }
+    
+
+    @Override
+    public boolean confirmAction(Player player, SpellAbility sa, PlayerActionConfirmMode mode, String message) {
         return true;
     }
 }

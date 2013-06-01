@@ -2,11 +2,13 @@ package forge.card.ability.ai;
 
 import java.util.Random;
 
+import forge.Card;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
+import forge.game.player.PlayerActionConfirmMode;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
 
@@ -65,4 +67,13 @@ public class DigAi extends SpellAbilityAi {
         return true;
     }
 
+    /* (non-Javadoc)
+     * @see forge.card.ability.SpellAbilityAi#confirmAction(forge.card.spellability.SpellAbility, forge.game.player.PlayerActionConfirmMode, java.lang.String)
+     */
+    @Override
+    public boolean confirmAction(Player player, SpellAbility sa, PlayerActionConfirmMode mode, String message) {
+        // looks like perfect code for Delver of Secrets, but what about other cards? 
+        Card topc = player.getZone(ZoneType.Library).get(0);
+        return topc.isInstant() || topc.isSorcery();
+    }
 }

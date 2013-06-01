@@ -25,6 +25,7 @@ import forge.game.ai.ComputerUtilMana;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
+import forge.game.player.PlayerActionConfirmMode;
 import forge.game.zone.ZoneType;
 
 public class PumpAi extends PumpAiBase {
@@ -446,4 +447,14 @@ public class PumpAi extends PumpAiBase {
 
         return true;
     } // pumpDrawbackAI()
+    
+
+
+    @Override
+    public boolean confirmAction(Player player, SpellAbility sa, PlayerActionConfirmMode mode, String message) {
+        //TODO Add logic here if necessary but I think the AI won't cast
+        //the spell in the first place if it would curse its own creature
+        //and the pump isn't mandatory
+        return true;
+    }
 }

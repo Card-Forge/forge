@@ -14,6 +14,7 @@ import forge.game.ai.ComputerUtilCost;
 import forge.game.ai.ComputerUtilMana;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
+import forge.game.player.PlayerActionConfirmMode;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
 
@@ -165,4 +166,13 @@ public class DiscardAi extends SpellAbilityAi {
         // TODO: check for some extra things
         return true;
     } // discardCheckDrawbackAI()
+
+
+    public boolean confirmAction(Player player, SpellAbility sa, PlayerActionConfirmMode mode, String message) {
+        if ( mode == PlayerActionConfirmMode.Random ) { //
+            // TODO For now AI will always discard Random used currently with: Balduvian Horde and similar cards
+            return true;
+        }
+        return super.confirmAction(player, sa, mode, message);
+    }
 }

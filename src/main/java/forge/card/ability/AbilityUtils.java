@@ -1102,22 +1102,20 @@ public class AbilityUtils {
         }
 
         final Cost cost = new Cost(unlessCost, true);
-        final Ability ability = new AbilityStatic(source, cost, sa.getTarget()) {
-            @Override
-            public void resolve() { /* nothing to do here */ }
-        };
+
 
         boolean paid = false;
         for (Player payer : payers) {
+            final Ability ability = new AbilityStatic(source, cost, sa.getTarget()) { @Override public void resolve() { } };
             ability.setActivatingPlayer(payer);
             if (payer.isComputer()) {
-                if (ComputerUtilCost.willPayUnlessCost(sa, payer, ability, paid, payers) && ComputerUtilCost.canPayCost(ability, payer)) {
+                if (ComputerUtilCost.willPayUnlessCost(sa, payer, cost, paid, payers) && ComputerUtilCost.canPayCost(ability, payer)) {
                     ComputerUtil.playNoStack(payer, ability, game); // Unless cost was payed - no resolve
                     paid = true;
                 }
             } else {
                 // if it's paid by the AI already the human can pay, but it won't change anything
-                paid |= HumanPlay.payCostDuringAbilityResolve(ability, cost, sa);
+                paid |= HumanPlay.payCostDuringAbilityResolve(payer, source, cost, sa);
             }
         }
 

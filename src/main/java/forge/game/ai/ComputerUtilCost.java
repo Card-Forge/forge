@@ -312,8 +312,7 @@ public class ComputerUtilCost {
      *            a {@link java.lang.String} object.
      * @return a boolean.
      */
-    public static boolean shouldPayCost(final Player ai, final Card hostCard, final String costString) {
-        final Cost cost = new Cost(costString, false);
+    public static boolean shouldPayCost(final Player ai, final Card hostCard, final Cost cost) {
     
         for (final CostPart part : cost.getCostParts()) {
             if (part instanceof CostPayLife) {
@@ -368,7 +367,7 @@ public class ComputerUtilCost {
             && CostPayment.canPayAdditionalCosts(sa.getPayCosts(), sa);
     } // canPayCost()
 
-    public static boolean willPayUnlessCost(SpellAbility sa, Player payer, SpellAbility ability, boolean alreadyPaid, List<Player> payers) {
+    public static boolean willPayUnlessCost(SpellAbility sa, Player payer, Cost cost, boolean alreadyPaid, List<Player> payers) {
         final Card source = sa.getSourceCard();
         boolean payForOwnOnly = "OnlyOwn".equals(sa.getParam("UnlessAI"));
         boolean payOwner = sa.hasParam("UnlessAI") ? sa.getParam("UnlessAI").startsWith("Defined") : false;
@@ -409,9 +408,9 @@ public class ComputerUtilCost {
         // AI was crashing because the blank ability used to pay costs
         // Didn't have any of the data on the original SA to pay dependant costs
 
-        return checkLifeCost(payer, ability.getPayCosts(), source, 4, sa)
-            && checkDamageCost(payer, ability.getPayCosts(), source, 4)
-            && (isMine || checkDiscardCost(payer, ability.getPayCosts(), source))
+        return checkLifeCost(payer, cost, source, 4, sa)
+            && checkDamageCost(payer, cost, source, 4)
+            && (isMine || checkDiscardCost(payer, cost, source))
             && (!source.getName().equals("Tyrannize") || payer.getCardsIn(ZoneType.Hand).size() > 2)
             && (!source.getName().equals("Perplex") || payer.getCardsIn(ZoneType.Hand).size() < 2)
             && (!source.getName().equals("Breaking Point") || payer.getCreaturesInPlay().size() > 1)
