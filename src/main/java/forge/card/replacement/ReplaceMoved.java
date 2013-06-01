@@ -36,16 +36,20 @@ public class ReplaceMoved extends ReplacementEffect {
             }
         }
         if (this.getMapParams().containsKey("Origin")) {
-            ZoneType z = ZoneType.smartValueOf(this.getMapParams().get("Origin"));
-            if (z != (ZoneType) runParams.get("Origin")) {
-                return false;
+            for(ZoneType z : ZoneType.listValueOf(this.getMapParams().get("Origin"))) {
+                if(z == (ZoneType) runParams.get("Origin"))
+                    return true;
             }
+            
+            return false;
         }
-        if (this.getMapParams().containsKey("Destination")) {
-            ZoneType z = ZoneType.smartValueOf(this.getMapParams().get("Destination"));
-            if (z != (ZoneType) runParams.get("Destination")) {
-                return false;
+        if (this.getMapParams().containsKey("Destination")) {            
+            for(ZoneType z : ZoneType.listValueOf(this.getMapParams().get("Destination"))) {
+                if(z == (ZoneType) runParams.get("Destination"))
+                    return true;
             }
+            
+            return false;
         }
         return true;
     }
