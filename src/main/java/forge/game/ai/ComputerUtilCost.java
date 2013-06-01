@@ -410,6 +410,7 @@ public class ComputerUtilCost {
 
         return checkLifeCost(payer, cost, source, 4, sa)
             && checkDamageCost(payer, cost, source, 4)
+            && (isMine || checkSacrificeCost(payer, cost, source))
             && (isMine || checkDiscardCost(payer, cost, source))
             && (!source.getName().equals("Tyrannize") || payer.getCardsIn(ZoneType.Hand).size() > 2)
             && (!source.getName().equals("Perplex") || payer.getCardsIn(ZoneType.Hand).size() < 2)

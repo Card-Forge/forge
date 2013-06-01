@@ -364,6 +364,18 @@ public class ComputerUtil {
                     CardLists.shuffle(sacMeList);
                     return sacMeList.get(0);
                 }
+
+                // Sac lands
+                final List<Card> landsInPlay = CardLists.getType(typeList, "Land");
+                if (!landsInPlay.isEmpty()) {
+                    final List<Card> landsInHand = CardLists.getType(ai.getCardsIn(ZoneType.Battlefield), "Land");
+                    final List<Card> nonLandsInHand = CardLists.getNotType(ai.getCardsIn(ZoneType.Hand), "Land");
+                    final int highestCMC = Math.max(6, Aggregates.max(nonLandsInHand, CardPredicates.Accessors.fnGetCmc));
+                    if (landsInPlay.size() + landsInHand.size() >= highestCMC) {
+                        // Don't need more land.
+                        return ComputerUtilCard.getWorstLand(landsInPlay);
+                    }
+                }
             }
         }
 
