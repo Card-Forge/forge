@@ -97,6 +97,7 @@ public class ComputerUtilMana {
         if (cost.isPaid()) {
             // refund any mana taken from mana pool when test
             manapool.clearManaPaid(sa, test);
+            handleOfferingsAI(sa, test, cost.isPaid());
             return true;
         }
 
@@ -104,6 +105,7 @@ public class ComputerUtilMana {
         final MapOfLists<Integer, SpellAbility> manaAbilityMap = ComputerUtilMana.groupSourcesByManaColor(ai, checkPlayable);
         if ( manaAbilityMap.isEmpty() ) {
             manapool.clearManaPaid(sa, test);
+            handleOfferingsAI(sa, test, cost.isPaid());
             return false;
         }
         
@@ -193,16 +195,7 @@ public class ComputerUtilMana {
         }
 
         manapool.clearManaPaid(sa, test);
-
-        // handle Offerings for AI
-        if (sa.isOffering() && sa.getSacrificedAsOffering() != null) {
-            final Card offering = sa.getSacrificedAsOffering();
-            offering.setUsedToPay(false);
-            if (cost.isPaid() && !test) {
-                sa.getSourceCard().getController().getGame().getAction().sacrifice(offering, sa);
-            }
-            sa.resetSacrificedAsOffering();
-        }
+        handleOfferingsAI(sa, test, cost.isPaid());
 
         if( DEBUG_MANA_PAYMENT )
             System.err.printf("%s > [%s] payment has %s (%s +%d) for (%s) %s:%n\t%s%n%n", FThreads.debugGetCurrThreadId(), test ? "test" : "PROD", cost.isPaid() ? "*PAID*" : "failed", originalCost, extraMana, sa.getSourceCard(), sa.toUnsuppressedString(), StringUtils.join(paymentPlan, "\n\t") );
@@ -710,6 +703,16 @@ public class ComputerUtilMana {
     
         }
         return res;
+    }
+    private static void handleOfferingsAI(final SpellAbility sa, boolean test, boolean costIsPaid) {
+        if (sa.isOffering() && sa.getSacrificedAsOffering() != null) {
+            final Card offering = sa.getSacrificedAsOffering();
+            offering.setUsedToPay(false);
+            if (costIsPaid && !test) {
+                sa.getSourceCard().getController().getGame().getAction().sacrifice(offering, sa);
+            }
+            sa.resetSacrificedAsOffering();
+        }
     }
 
 }
