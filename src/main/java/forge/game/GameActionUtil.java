@@ -878,8 +878,10 @@ public final class GameActionUtil {
                     newSA.setPayCosts(new Cost(keyword.substring(8), false).add(newSA.getPayCosts()));
                     newSA.setDescription(newSA.getDescription() + " (with Buyback)");
                     newSA.addOptionalCost(OptionalCost.Buyback);
-                    if ( newSA.canPlay() )
-                        abilities.add(++i, newSA);
+                    if ( newSA.canPlay() ) {
+                        abilities.add(i, newSA);
+                        i++;
+                    }
                 }
             } else if (keyword.startsWith("Kicker")) {
                 for (int i = 0; i < abilities.size(); i++) {
@@ -892,10 +894,12 @@ public final class GameActionUtil {
                         newSA.setDescription(newSA.getDescription() + " (Kicker " + cost.toSimpleString() + ")");
                         newSA.setPayCosts(cost.add(newSA.getPayCosts()));
                         newSA.addOptionalCost(j == 0 ? OptionalCost.Kicker1 : OptionalCost.Kicker2);
-                        if ( newSA.canPlay() )
-                            abilities.add(++i, newSA);
+                        if ( newSA.canPlay() ) {
+                            abilities.add(i, newSA);
+                            i++;
+                        }
                     }
-                    if(sCosts.length == 2) { // case for both kickers - it's hardcoded since they never have more that 2 kickers
+                    if(sCosts.length == 2) { // case for both kickers - it's hardcoded since they never have more than 2 kickers
                         final SpellAbility newSA = abilities.get(iUnKicked).copy();
                         newSA.setBasicSpell(false);
                         final Cost cost1 = new Cost(sCosts[0], false);
@@ -904,8 +908,11 @@ public final class GameActionUtil {
                         newSA.setPayCosts(cost2.add(cost1.add(newSA.getPayCosts())));
                         newSA.addOptionalCost(OptionalCost.Kicker1);
                         newSA.addOptionalCost(OptionalCost.Kicker2);
-                        if ( newSA.canPlay() )
-                            abilities.add(++i, newSA);
+                        if ( newSA.canPlay() ) {
+                            abilities.add(i, newSA);
+                            i++;
+                        }
+                        
                     }
                 }
             } else if (keyword.startsWith("Conspire")) {
