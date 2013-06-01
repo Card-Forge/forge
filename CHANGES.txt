@@ -19,11 +19,18 @@ We have added a branch to our SVN for the new cards that are currently being scr
 - The AI Drafting has been improved -
 The AI evaluated the basic lands higher than anything else. Fixed. The AI would pick cards with RemAIDeck but only at a much lowered pick rate. For example the best pick in a 250 card set would become the 75th best pick, the 20th best pick would become the 95th and so on. Divided this factor by 3 (so the first pick would become the 25th pick). Please test whether this has improved the draft experience.
 
+
 ---------
 New Cards
 ---------
 
-
+Patron of the Akki
+Patron of the Kitsune
+Patron of the Moon
+Patron of the Orochi
+Furnace Layer
+Mirrored Depths
+Kharasha Foothills
 
 
 --------------------
