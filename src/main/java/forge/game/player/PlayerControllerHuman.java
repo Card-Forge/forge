@@ -16,6 +16,7 @@ import com.google.common.collect.Lists;
 import forge.Card;
 import forge.GameEntity;
 import forge.Singletons;
+import forge.card.cost.Cost;
 import forge.card.mana.Mana;
 import forge.card.replacement.ReplacementEffect;
 import forge.card.spellability.SpellAbility;
@@ -533,5 +534,14 @@ public class PlayerControllerHuman extends PlayerController {
         inp.setMessage("Choose Which Cards to Reveal");
         Singletons.getControl().getInputQueue().setInputAndWait(inp);
         return inp.getSelected();
+    }
+
+
+    /* (non-Javadoc)
+     * @see forge.game.player.PlayerController#payManaOptional(forge.Card, forge.card.cost.Cost)
+     */
+    @Override
+    public boolean payManaOptional(Card c, Cost attackCost) {
+        return HumanPlay.payCostDuringAbilityResolve(player, c, attackCost, null);
     }
 }

@@ -58,7 +58,6 @@ import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerType;
 import forge.card.trigger.ZCTrigger;
 import forge.game.ai.ComputerUtil;
-import forge.game.ai.ComputerUtilCost;
 import forge.game.event.GameEventCardDestroyed;
 import forge.game.event.GameEventCardRegenerated;
 import forge.game.event.GameEventCardSacrificed;
@@ -528,16 +527,7 @@ public class GameAction {
         final Ability recoverAbility = new Ability(recoverable, ManaCost.ZERO) {
             @Override
             public void resolve() {
-                Player p = recoverable.getController();
-                boolean hasPaid = false;
-                if (p.isHuman()) {
-                    hasPaid = HumanPlay.payCostDuringAbilityResolve(p, recoverable, cost, null);
-                } else { // computer
-                    if (ComputerUtilCost.canPayCost(abRecover, p)) {
-                        ComputerUtil.playNoStack(p, abRecover, game);
-                        hasPaid = true;
-                    }
-                }
+                boolean hasPaid = recoverable.getController().getController().payManaOptional(recoverable, cost);
                 
                 if (hasPaid)
                     moveToHand(recoverable);

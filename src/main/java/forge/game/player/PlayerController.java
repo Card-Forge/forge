@@ -9,6 +9,7 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
 
 import forge.Card;
 import forge.GameEntity;
+import forge.card.cost.Cost;
 import forge.card.mana.Mana;
 import forge.card.replacement.ReplacementEffect;
 import forge.card.spellability.SpellAbility;
@@ -126,4 +127,5 @@ public abstract class PlayerController {
 
     public abstract void takePriority();
     public abstract List<Card> chooseCardsToDiscardToMaximumHandSize(int numDiscard);
+    public abstract boolean payManaOptional(Card card, Cost cost);
 }

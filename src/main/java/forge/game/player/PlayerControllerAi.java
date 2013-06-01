@@ -14,8 +14,11 @@ import forge.Card;
 import forge.CardLists;
 import forge.CardPredicates;
 import forge.GameEntity;
+import forge.card.cost.Cost;
 import forge.card.mana.Mana;
 import forge.card.replacement.ReplacementEffect;
+import forge.card.spellability.Ability;
+import forge.card.spellability.AbilityStatic;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
@@ -26,6 +29,7 @@ import forge.game.ai.AiController;
 import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilBlock;
 import forge.game.ai.ComputerUtilCombat;
+import forge.game.ai.ComputerUtilCost;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
 
@@ -297,5 +301,20 @@ public class PlayerControllerAi extends PlayerController {
     @Override
     public List<Card> chooseCardsToRevealFromHand(int min, int max, List<Card> valid) {
         return max == 0 ? Lists.<Card>newArrayList() : valid.subList(0, max);
+    }
+
+    /* (non-Javadoc)
+     * @see forge.game.player.PlayerController#payManaOptional(forge.Card, forge.card.cost.Cost)
+     */
+    @Override
+    public boolean payManaOptional(Card c, Cost cost) {
+        final Ability ability = new AbilityStatic(c, cost, null) { @Override public void resolve() {} };
+        ability.setActivatingPlayer(c.getController());
+
+        if (ComputerUtilCost.canPayCost(ability, c.getController())) {
+            ComputerUtil.playNoStack(c.getController(), ability, game);
+            return true;
+        }
+        return false;
     }
 }

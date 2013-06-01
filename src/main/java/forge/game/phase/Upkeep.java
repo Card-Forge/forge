@@ -42,7 +42,6 @@ import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilCard;
 import forge.game.ai.ComputerUtilCombat;
 import forge.game.ai.ComputerUtilCost;
-import forge.game.player.HumanPlay;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
 import forge.game.zone.PlayerZone;
@@ -175,17 +174,8 @@ public class Upkeep extends Phase {
                 final Ability sacAbility = new Ability(c, ManaCost.ZERO) {
                     @Override
                     public void resolve() {
-                        boolean hasPaid = false;
-                        Player controller = c.getController();
-                        if (controller.isHuman()) {
-                            Cost cost = new Cost(c.getEchoCost().trim(), true);
-                            hasPaid = HumanPlay.payCostDuringAbilityResolve(controller, c, cost, null);
-                        } else { // computer
-                            if (ComputerUtilCost.canPayCost(blankAbility, controller)) {
-                                ComputerUtil.playNoStack(controller, blankAbility, game);
-                                hasPaid = true;
-                            }
-                        }
+                        Cost cost = new Cost(c.getEchoCost().trim(), true);
+                        boolean hasPaid = c.getController().getController().payManaOptional(c, cost);
                         
                         if (!hasPaid)
                             game.getAction().sacrifice(c, null);;
@@ -279,17 +269,8 @@ public class Upkeep extends Phase {
                     final Ability upkeepAbility = new Ability(c, ManaCost.ZERO) {
                         @Override
                         public void resolve() {
-                            boolean isPaid = false;
-                            if (controller.isHuman()) {
-                                isPaid = HumanPlay.payCostDuringAbilityResolve(controller, c, upkeepCost, this);
-                                    
-                            } else { // computer
-                                if (ComputerUtilCost.shouldPayCost(controller, c, upkeepCost) && ComputerUtilCost.canPayCost(blankAbility, controller)) {
-                                    ComputerUtil.playNoStack(controller, blankAbility, game); // this makes AI pay
-                                    isPaid = true;
-                                }
-                            }
-                            
+                            boolean isPaid = controller.getController().payManaOptional(c, upkeepCost);
+
                             if(!isPaid)
                                 game.getAction().sacrifice(c, null);
                         }

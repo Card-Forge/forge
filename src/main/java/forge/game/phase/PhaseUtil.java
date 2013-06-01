@@ -27,14 +27,9 @@ import forge.Card;
 import forge.CardLists;
 import forge.card.cost.Cost;
 import forge.card.mana.ManaCost;
-import forge.card.spellability.Ability;
-import forge.card.spellability.AbilityStatic;
 import forge.card.staticability.StaticAbility;
 import forge.card.trigger.TriggerType;
 import forge.game.Game;
-import forge.game.ai.ComputerUtil;
-import forge.game.ai.ComputerUtilCost;
-import forge.game.player.HumanPlay;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
@@ -177,17 +172,7 @@ public class PhaseUtil {
                 
                 boolean hasPaid = blockCost.getTotalMana().isZero() && blockCost.isOnlyManaCost(); // true if needless to pay
                 if (!hasPaid) { 
-                    final Ability ability = new AbilityStatic(blocker, blockCost, null) { @Override public void resolve() {} };
-                    ability.setActivatingPlayer(blocker.getController());
-
-                    if (blocker.getController().isHuman()) {
-                        hasPaid = HumanPlay.payCostDuringAbilityResolve(blocker.getController(), blocker, blockCost, null);
-                    } else { // computer
-                        if (ComputerUtilCost.canPayCost(ability, blocker.getController())) {
-                            ComputerUtil.playNoStack(blocker.getController(), ability, game);
-                            hasPaid = true;
-                        }
-                    }
+                    hasPaid = blocker.getController().getController().payManaOptional(blocker, blockCost);
                 }
 
                 if ( !hasPaid ) {

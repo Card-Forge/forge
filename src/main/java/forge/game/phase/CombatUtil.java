@@ -43,15 +43,11 @@ import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.mana.ManaCost;
 import forge.card.spellability.Ability;
-import forge.card.spellability.AbilityStatic;
 import forge.card.staticability.StaticAbility;
 import forge.card.trigger.TriggerType;
 import forge.game.Game;
 import forge.game.GlobalRuleChange;
-import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilCard;
-import forge.game.ai.ComputerUtilCost;
-import forge.game.player.HumanPlay;
 import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
@@ -997,23 +993,8 @@ public class CombatUtil {
             }
         }
         
-        boolean needsToPay = !attackCost.getTotalMana().isZero() || !attackCost.isOnlyManaCost(); // true if needless to pay
-        boolean isPaid = !needsToPay;
-        if (needsToPay) {
-            
-            final Ability ability = new AbilityStatic(c, attackCost, null) { @Override public void resolve() {} };
-            ability.setActivatingPlayer(c.getController());
-
-            if (c.getController().isHuman()) {
-                isPaid = HumanPlay.payCostDuringAbilityResolve(c.getController(), c, attackCost, null);
-            } else { // computer
-                if (ComputerUtilCost.canPayCost(ability, c.getController())) {
-                    ComputerUtil.playNoStack(c.getController(), ability, game);
-                    isPaid = true;
-                }
-            }
-        }
-        return isPaid;
+        boolean isFree = attackCost.getTotalMana().isZero() && attackCost.isOnlyManaCost(); // true if needless to pay
+        return isFree || c.getController().getController().payManaOptional(c, attackCost);
     }
 
     /**
