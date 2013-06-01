@@ -6842,6 +6842,7 @@ res/cardsfolder/m/mindwrack_liege.txt svneol=native#text/plain
 res/cardsfolder/m/mine_bearer.txt svneol=native#text/plain
 res/cardsfolder/m/mine_excavation.txt -text
 res/cardsfolder/m/mine_layer.txt -text
+res/cardsfolder/m/minion_of_leshrac.txt -text
 res/cardsfolder/m/minion_of_tevesh_szat.txt svneol=native#text/plain
 res/cardsfolder/m/minion_of_the_wastes.txt -text
 res/cardsfolder/m/minion_reflector.txt -text
@@ -7835,6 +7836,7 @@ res/cardsfolder/p/patrol_signaler.txt svneol=native#text/plain
 res/cardsfolder/p/patron_of_the_akki.txt -text
 res/cardsfolder/p/patron_of_the_kitsune.txt -text
 res/cardsfolder/p/patron_of_the_moon.txt -text
+res/cardsfolder/p/patron_of_the_nezumi.txt -text
 res/cardsfolder/p/patron_of_the_orochi.txt -text
 res/cardsfolder/p/patron_of_the_wild.txt svneol=native#text/plain
 res/cardsfolder/p/patron_wizard.txt svneol=native#text/plain
