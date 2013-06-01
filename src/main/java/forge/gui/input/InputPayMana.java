@@ -272,27 +272,5 @@ public abstract class InputPayMana extends InputSyncronizedBase {
         return String.format("PayManaBase %s left", manaCost.toString() );
     }
 
-    protected void handleConvokedCards(boolean isCancelled) {
-        if (saPaidFor.getTappedForConvoke() != null) {
-            for (final Card c : saPaidFor.getTappedForConvoke()) {
-                c.setTapped(false);
-                if (!isCancelled)
-                    c.tap(); // that will tap cards with all the triggers, it's no good to call this from EDT
-            }
-            saPaidFor.clearTappedForConvoke();
-        }
-    }
-
-    protected void handleOfferings(boolean isCancelled) {
-        final Card offering = saPaidFor.getSacrificedAsOffering();
-        if (offering != null) {
-            offering.setUsedToPay(false);
-            if (!isCancelled) {
-                game.getAction().sacrifice(offering, saPaidFor);
-            }
-        }
-        saPaidFor.resetSacrificedAsOffering();
-    }
-
     public boolean isPaid() { return bPaid; }
 }
