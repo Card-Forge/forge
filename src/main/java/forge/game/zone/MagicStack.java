@@ -987,6 +987,12 @@ public class MagicStack extends MyObservable implements Iterable<SpellAbilitySta
             }
         }
 
+        for (final SpellAbilityStackInstance sasi : this.frozenStack) {
+            if (sasi.isStateTrigger(triggerID)) {
+                return true;
+            }
+        }
+
         for (final SpellAbility sa : this.simultaneousStackEntryList) {
             if (sa.getSourceTrigger() == triggerID) {
                 return true;
