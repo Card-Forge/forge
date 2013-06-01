@@ -136,8 +136,9 @@ public class CostPartMana extends CostPart {
         if (!toPay.isPaid()) {
             inpPayment = new InputPayManaOfCostPayment(toPay, ability);
             Singletons.getControl().getInputQueue().setInputAndWait(inpPayment);
-            if(!inpPayment.isPaid())
-                return false;
+            if (!inpPayment.isPaid()) {
+                return handleOfferingAndConvoke(ability, true, false);
+            }
 
             source.setColorsPaid(toPay.getColorsPaid());
             source.setSunburstValue(toPay.getSunburst());
@@ -156,7 +157,7 @@ public class CostPartMana extends CostPart {
             }
         }
 
-        // Handle convoke and offerings if InputPayManaOfCostPayment was skipped because cost was reduced to 0
+        // Handle convoke and offerings
         if (ability.isOffering() && ability.getSacrificedAsOffering() != null) {
             System.out.println("Finishing up Offering");
             final Card offering = ability.getSacrificedAsOffering();
@@ -171,7 +172,7 @@ public class CostPartMana extends CostPart {
             }
             ability.clearTappedForConvoke();
         }
-        return true;
+        return handleOfferingAndConvoke(ability, false, true);
 
     }
 
@@ -199,5 +200,27 @@ public class CostPartMana extends CostPart {
     public String getRestiction() {
         // TODO Auto-generated method stub
         return restriction;
+    }
+
+    private boolean handleOfferingAndConvoke(final SpellAbility ability, boolean manaInputCancelled, boolean isPaid) {
+        boolean done = !manaInputCancelled && isPaid;
+        if (ability.isOffering() && ability.getSacrificedAsOffering() != null) {
+            final Card offering = ability.getSacrificedAsOffering();
+            offering.setUsedToPay(false);
+            if (done) {
+                ability.getSourceCard().getGame().getAction().sacrifice(offering, ability);
+            }
+            ability.resetSacrificedAsOffering();
+        }
+        if (ability.getTappedForConvoke() != null) {
+            for (final Card c : ability.getTappedForConvoke()) {
+                c.setTapped(false);
+                if (done) {
+                    c.tap();
+                }
+            }
+            ability.clearTappedForConvoke();
+        }
+        return done;
     }
 }

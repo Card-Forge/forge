@@ -32,26 +32,10 @@ public class InputPayManaOfCostPayment extends InputPayMana {
         if (this.phyLifeToLose > 0) {
             player.payLife(this.phyLifeToLose, source);
         }
-
-        // If this is a spell with convoke, re-tap all creatures used  for it.
-        // This is done to make sure Taps triggers go off at the right time
-        // (i.e. AFTER cost payment, they are tapped previously as well so that
-        // any mana tapabilities can't be used in payment as well as being tapped for convoke)
-
-        handleConvokedCards(false);
-
-        if (saPaidFor.isOffering()) {
-            handleOfferings(false);
-        }
     }
 
     @Override
     protected void onCancel() {
-        handleConvokedCards(true);
-
-        if (saPaidFor.isOffering()) {
-            handleOfferings(true);
-        }
         stop();
     }
 
