@@ -35,22 +35,34 @@ public class ReplaceMoved extends ReplacementEffect {
                 return false;
             }
         }
+        
+        boolean matchedZone = false;
         if (this.getMapParams().containsKey("Origin")) {
             for(ZoneType z : ZoneType.listValueOf(this.getMapParams().get("Origin"))) {
                 if(z == (ZoneType) runParams.get("Origin"))
-                    return true;
+                    matchedZone =  true;
             }
             
-            return false;
-        }
-        if (this.getMapParams().containsKey("Destination")) {            
+            if(!matchedZone)
+            {
+                return false;
+            }
+        }        
+        
+        if (this.getMapParams().containsKey("Destination")) {
+            matchedZone = false;
             for(ZoneType z : ZoneType.listValueOf(this.getMapParams().get("Destination"))) {
                 if(z == (ZoneType) runParams.get("Destination"))
-                    return true;
+                    matchedZone =  true;
             }
             
-            return false;
+            if(!matchedZone)
+            {
+                return false;
+            }
         }
+        
+        
         return true;
     }
 
