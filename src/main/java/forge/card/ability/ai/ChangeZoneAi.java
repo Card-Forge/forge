@@ -628,6 +628,15 @@ public class ChangeZoneAi extends SpellAbilityAi {
             }
         }
 
+        if (destination.equals(ZoneType.Library) && origin.equals(ZoneType.Graveyard)) {
+            if (ai.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2)) {
+                return false;
+            }
+            if (ComputerUtil.waitForBlocking(sa)) {
+                return false;
+            }
+        }
+
         final AbilitySub subAb = sa.getSubAbility();
         chance &= subAb == null || subAb.getAi().chkDrawbackWithSubs(ai, subAb);
 
