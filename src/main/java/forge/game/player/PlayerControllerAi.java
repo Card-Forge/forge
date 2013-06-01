@@ -303,11 +303,8 @@ public class PlayerControllerAi extends PlayerController {
         return max == 0 ? Lists.<Card>newArrayList() : valid.subList(0, max);
     }
 
-    /* (non-Javadoc)
-     * @see forge.game.player.PlayerController#payManaOptional(forge.Card, forge.card.cost.Cost)
-     */
     @Override
-    public boolean payManaOptional(Card c, Cost cost) {
+    public boolean payManaOptional(Card c, Cost cost, String prompt, ManaPaymentPurpose purpose) {
         final Ability ability = new AbilityStatic(c, cost, null) { @Override public void resolve() {} };
         ability.setActivatingPlayer(c.getController());
 

@@ -28,6 +28,16 @@ import forge.game.zone.ZoneType;
  */
 public abstract class PlayerController {
 
+    public static enum ManaPaymentPurpose {
+        DeclareAttacker,
+        DeclareBlocker,
+        Recover,
+        Echo,
+        Multikicker,
+        Replicate, 
+        CumulativeUpkeep;
+    }
+    
     protected final Game game;
     
     private PhaseType autoPassUntil = null;
@@ -127,5 +137,5 @@ public abstract class PlayerController {
 
     public abstract void takePriority();
     public abstract List<Card> chooseCardsToDiscardToMaximumHandSize(int numDiscard);
-    public abstract boolean payManaOptional(Card card, Cost cost);
+    public abstract boolean payManaOptional(Card card, Cost cost, String prompt, ManaPaymentPurpose purpose);
 }

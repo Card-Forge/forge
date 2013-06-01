@@ -67,6 +67,7 @@ import forge.game.event.GameEventGameStarted;
 import forge.game.player.GameLossReason;
 import forge.game.player.HumanPlay;
 import forge.game.player.Player;
+import forge.game.player.PlayerController.ManaPaymentPurpose;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.PlayerZoneBattlefield;
 import forge.game.zone.Zone;
@@ -527,7 +528,7 @@ public class GameAction {
         final Ability recoverAbility = new Ability(recoverable, ManaCost.ZERO) {
             @Override
             public void resolve() {
-                boolean hasPaid = recoverable.getController().getController().payManaOptional(recoverable, cost);
+                boolean hasPaid = recoverable.getController().getController().payManaOptional(recoverable, cost, sb.toString(), ManaPaymentPurpose.Recover);
                 
                 if (hasPaid)
                     moveToHand(recoverable);

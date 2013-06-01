@@ -44,6 +44,7 @@ import forge.game.ai.ComputerUtilCombat;
 import forge.game.ai.ComputerUtilCost;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
+import forge.game.player.PlayerController.ManaPaymentPurpose;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
@@ -175,7 +176,7 @@ public class Upkeep extends Phase {
                     @Override
                     public void resolve() {
                         Cost cost = new Cost(c.getEchoCost().trim(), true);
-                        boolean hasPaid = c.getController().getController().payManaOptional(c, cost);
+                        boolean hasPaid = c.getController().getController().payManaOptional(c, cost, "Echo for " + c, ManaPaymentPurpose.Echo);
                         
                         if (!hasPaid)
                             game.getAction().sacrifice(c, null);;
@@ -269,7 +270,7 @@ public class Upkeep extends Phase {
                     final Ability upkeepAbility = new Ability(c, ManaCost.ZERO) {
                         @Override
                         public void resolve() {
-                            boolean isPaid = controller.getController().payManaOptional(c, upkeepCost);
+                            boolean isPaid = controller.getController().payManaOptional(c, upkeepCost, "Cumulative upkeep for " + c, ManaPaymentPurpose.CumulativeUpkeep);
 
                             if(!isPaid)
                                 game.getAction().sacrifice(c, null);

@@ -31,12 +31,9 @@ public class DigEffect extends SpellAbilityEffect {
         final int numToDig = AbilityUtils.calculateAmount(host, sa.getParam("DigNum"), sa);
         final List<Player> tgtPlayers = getTargetPlayers(sa);
 
-        sb.append(host.getController()).append(" looks at the top ").append(numToDig);
-        sb.append(" card");
-        if (numToDig != 1) {
-            sb.append("s");
-        }
-        sb.append(" of ");
+        sb.append(host.getController()).append(" looks at the top ");
+        sb.append(Lang.nounWithAmount(numToDig, "card")).append(" of ");
+        
         if (tgtPlayers.contains(host.getController())) {
             sb.append("his or her ");
         } else {
@@ -55,8 +52,8 @@ public class DigEffect extends SpellAbilityEffect {
         final Game game = player.getGame();
         Player choser = player;
         int numToDig = AbilityUtils.calculateAmount(host, sa.getParam("DigNum"), sa);
-        final ZoneType destZone1 = sa.hasParam("DestinationZone") ? ZoneType.smartValueOf(sa.getParam("DestinationZone"))
-                : ZoneType.Hand;
+        
+        final ZoneType destZone1 = sa.hasParam("DestinationZone") ? ZoneType.smartValueOf(sa.getParam("DestinationZone")) : ZoneType.Hand;
         final ZoneType destZone2 = sa.hasParam("DestinationZone2") ? ZoneType.smartValueOf(sa.getParam("DestinationZone2")) : ZoneType.Library;
 
         final int libraryPosition = sa.hasParam("LibraryPosition") ? Integer.parseInt(sa.getParam("LibraryPosition")) : -1;

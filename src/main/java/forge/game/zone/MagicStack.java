@@ -38,6 +38,7 @@ import forge.GameLogEntryType;
 import forge.card.ability.AbilityUtils;
 import forge.card.cardfactory.CardFactory;
 import forge.card.cardfactory.CardFactoryUtil;
+import forge.card.cost.Cost;
 import forge.card.mana.ManaCost;
 import forge.card.spellability.Ability;
 import forge.card.spellability.AbilityStatic;
@@ -54,13 +55,12 @@ import forge.game.GameActionUtil;
 import forge.game.Game;
 import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilCard;
-import forge.game.ai.ComputerUtilCost;
 import forge.game.event.GameEventSpellAbilityCast;
 import forge.game.event.GameEventSpellResolved;
 import forge.game.player.HumanPlay;
 import forge.game.player.Player;
+import forge.game.player.PlayerController.ManaPaymentPurpose;
 import forge.gui.GuiChoose;
-import forge.gui.input.InputPayManaExecuteCommands;
 import forge.gui.input.InputSelectCards;
 import forge.gui.input.InputSelectCardsFromList;
 import forge.util.MyObservable;
@@ -351,80 +351,44 @@ public class MagicStack extends MyObservable implements Iterable<SpellAbilitySta
             }
             if (sp.getSourceCard().isCopiedSpell()) {
                 this.push(sp);
-            } else if (!sp.isMultiKicker() && !sp.isReplicate()) {
-                this.push(sp);
-            } else if (sp.isMultiKicker()) {
-                final SpellAbility sa = sp;
-                final Player activating = sp.getActivatingPlayer();
-
-                if (activating.isHuman()) {
-                    while(true) {
-                        int mkMagnitude = sa.getSourceCard().getKickerMagnitude();
-                        String prompt = String.format("Multikicker for %s\r\nTimes Kicked: %d\r\n", sa.getSourceCard(), mkMagnitude );
-                        InputPayManaExecuteCommands toSet = new InputPayManaExecuteCommands(activating, prompt, sp.getMultiKickerManaCost());
-                        Singletons.getControl().getInputQueue().setInputAndWait(toSet);
-                        if ( !toSet.isPaid() )
-                            break;
-                        
-                        sa.getSourceCard().addMultiKickerMagnitude(1);
-                    }
-                } else {
-                    // computer
-                    final Ability abilityIncreaseMultikicker = new Ability(sp.getSourceCard(), sp.getMultiKickerManaCost()) {
-                        @Override
-                        public void resolve() {
-                            this.getSourceCard().addMultiKickerMagnitude(1);
-                        }
-                    };
-
-                    while (ComputerUtilCost.canPayCost(abilityIncreaseMultikicker, activating)) {
-                        ComputerUtil.playNoStack(activating, abilityIncreaseMultikicker, game);
-                    }
+            } else {
+                if (sp.isMultiKicker()) {
+                    final Player activating = sp.getActivatingPlayer();
+                    final Cost costMultikicker = new Cost(sp.getMultiKickerManaCost(), false);
+                    
+                    boolean hasPaid = false;
+                    do {
+                        int mkMagnitude = sp.getSourceCard().getKickerMagnitude();
+                        String prompt = String.format("Multikicker for %s\r\nTimes Kicked: %d\r\n", sp.getSourceCard(), mkMagnitude );
+                        hasPaid = activating.getController().payManaOptional(sp.getSourceCard(), costMultikicker, prompt, ManaPaymentPurpose.Multikicker);
+                        if( hasPaid )
+                            sp.getSourceCard().addMultiKickerMagnitude(1);
+                    } while( !hasPaid );
                 }
-                this.push(sa);
-            } else if (sp.isReplicate()) {
-                // TODO: convert multikicker/replicate support in abCost so this
-                // doesn't happen here
-                // X and multi and replicate are not supported yet
+                
+                // The ability is added to stack HERE
+                this.push(sp);
+                
+                if (sp.isReplicate()) {
+                    // TODO: convert multikicker/replicate support in abCost so this
+                    // doesn't happen here
+                    // X and multi and replicate are not supported yet
+                    
+                    final Player activating = sp.getActivatingPlayer();
+                    final Cost costMultikicker = new Cost(sp.getMultiKickerManaCost(), false);
+                    
+                    boolean hasPaid = false;
+                    do {
+                        int rMagnitude = sp.getSourceCard().getReplicateMagnitude();
+                        String prompt = String.format("Replicate for %s\r\nTimes Replicated: %d\r\n", sp.getSourceCard(), rMagnitude);
+                        hasPaid = activating.getController().payManaOptional(sp.getSourceCard(), costMultikicker, prompt, ManaPaymentPurpose.Replicate);
+                        if( hasPaid )
+                            sp.getSourceCard().addReplicateMagnitude(1);
+                    } while( !hasPaid );
+                }
 
-                final SpellAbility sa = sp;
-                MagicStack.this.push(sa);
-                final Ability ability = new Ability(sp.getSourceCard(), sp.getReplicateManaCost()) {
-                    @Override
-                    public void resolve() {
-                        this.getSourceCard().addReplicateMagnitude(1);
-                    }
-                };
-                final Player controller = sp.getSourceCard().getController();
-                ability.setActivatingPlayer(controller);
- 
-
-                if (controller.isHuman()) {
-                    sa.getSourceCard().addReplicateMagnitude(-1);
-                    final Runnable addMagnitude = new Runnable() {
-                         @Override
-                        public void run() {
-                            ability.resolve();
-                            String prompt = String.format("Replicate for %s\r\nTimes Replicated: %d\r\n", sa.getSourceCard(), sa.getSourceCard().getReplicateMagnitude());
-                            InputPayManaExecuteCommands toSet = new InputPayManaExecuteCommands(controller, prompt, sp.getReplicateManaCost());
-                            Singletons.getControl().getInputQueue().setInputAndWait(toSet);
-                            if ( toSet.isPaid() ) { 
-                                this.run();
-                            } else {
-                                for (int i = 0; i < sp.getSourceCard().getReplicateMagnitude(); i++) {
-                                    CardFactory.copySpellontoStack(sp.getSourceCard(), sp.getSourceCard(), sp, false, null);
-                                }
-                            }
-                        }
-                    };
-                    addMagnitude.run();
-                } else {
-                    // computer
-                    while (ComputerUtilCost.canPayCost(ability, controller)) {
-                        ComputerUtil.playNoStack(controller, ability, game);
-                    }
-
-                    this.push(sa);
+                for (int i = 0; i < sp.getSourceCard().getReplicateMagnitude(); i++) {
+                    CardFactory.copySpellontoStack(sp.getSourceCard(), sp.getSourceCard(), sp, false, null);
                 }
             }
 

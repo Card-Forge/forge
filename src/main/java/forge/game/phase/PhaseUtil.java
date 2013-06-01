@@ -31,6 +31,7 @@ import forge.card.staticability.StaticAbility;
 import forge.card.trigger.TriggerType;
 import forge.game.Game;
 import forge.game.player.Player;
+import forge.game.player.PlayerController.ManaPaymentPurpose;
 import forge.game.zone.ZoneType;
 
 /**
@@ -172,7 +173,7 @@ public class PhaseUtil {
                 
                 boolean hasPaid = blockCost.getTotalMana().isZero() && blockCost.isOnlyManaCost(); // true if needless to pay
                 if (!hasPaid) { 
-                    hasPaid = blocker.getController().getController().payManaOptional(blocker, blockCost);
+                    hasPaid = blocker.getController().getController().payManaOptional(blocker, blockCost, "Pay cost to declare " + blocker + " a blocker", ManaPaymentPurpose.DeclareBlocker);
                 }
 
                 if ( !hasPaid ) {

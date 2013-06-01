@@ -49,6 +49,7 @@ import forge.game.Game;
 import forge.game.GlobalRuleChange;
 import forge.game.ai.ComputerUtilCard;
 import forge.game.player.Player;
+import forge.game.player.PlayerController.ManaPaymentPurpose;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
@@ -994,7 +995,7 @@ public class CombatUtil {
         }
         
         boolean isFree = attackCost.getTotalMana().isZero() && attackCost.isOnlyManaCost(); // true if needless to pay
-        return isFree || c.getController().getController().payManaOptional(c, attackCost);
+        return isFree || c.getController().getController().payManaOptional(c, attackCost, "Pay additional cost to declare " + c + " an attacker", ManaPaymentPurpose.DeclareAttacker);
     }
 
     /**
