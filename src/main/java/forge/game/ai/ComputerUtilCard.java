@@ -800,6 +800,7 @@ public class ComputerUtilCard {
         for (Card tmp : lands) {
             int score = tmp.isTapped() ? 2 : 0;
             score += tmp.isBasicLand() ? 1 : 0;
+            score += tmp.isCreature() ? 4 : 0;
             if (score >= maxScore) {
                 worstLand = tmp;
                 maxScore = score;
