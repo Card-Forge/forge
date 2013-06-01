@@ -108,7 +108,8 @@ public class DrawAi extends SpellAbilityAi {
         if ((!game.getPhaseHandler().getNextTurn().equals(ai)
                     || game.getPhaseHandler().getPhase().isBefore(PhaseType.END_OF_TURN))
                 && !sa.hasParam("PlayerTurn") && !SpellAbilityAi.isSorcerySpeed(sa)
-                && ai.getCardsIn(ZoneType.Hand).size() > 1) {
+                && ai.getCardsIn(ZoneType.Hand).size() > 1
+                && !ComputerUtil.ActivateForSacCost(sa, ai)) {
             return false;
         }
 

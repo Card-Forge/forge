@@ -52,7 +52,6 @@ public class LifeLoseAi extends SpellAbilityAi {
 
         final Cost abCost = sa.getPayCosts();
         final Card source = sa.getSourceCard();
-        boolean priority = false;
 
         final String amountStr = sa.getParam("LifeAmount");
 
@@ -99,22 +98,6 @@ public class LifeLoseAi extends SpellAbilityAi {
             return false;
         }
 
-        if (amount >= opp.getLife()) {
-            priority = true; // killing the human should be done asap
-        }
-
-        // Don't use loselife before main 2 if possible
-        if (ai.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2)
-                && !sa.hasParam("ActivationPhases") && !priority
-                && !ComputerUtil.castSpellInMain1(ai, sa)) {
-            return false;
-        }
-
-        // Don't tap creatures that may be able to block
-        if (ComputerUtil.waitForBlocking(sa) && !priority) {
-            return false;
-        }
-
         final Target tgt = sa.getTarget();
 
         if (sa.getTarget() != null) {
@@ -126,9 +109,26 @@ public class LifeLoseAi extends SpellAbilityAi {
             }
         }
 
-        if (priority || SpellAbilityAi.isSorcerySpeed(sa) 
+        if (amount >= opp.getLife()) {
+            return true; // killing the human should be done asap
+        }
+
+        // Don't use loselife before main 2 if possible
+        if (ai.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2)
+                && !sa.hasParam("ActivationPhases")
+                && !ComputerUtil.castSpellInMain1(ai, sa)) {
+            return false;
+        }
+
+        // Don't tap creatures that may be able to block
+        if (ComputerUtil.waitForBlocking(sa)) {
+            return false;
+        }
+
+        if (SpellAbilityAi.isSorcerySpeed(sa) 
                 || sa.hasParam("ActivationPhases") 
-                || SpellAbilityAi.playReusable(ai, sa)) {
+                || SpellAbilityAi.playReusable(ai, sa)
+                || ComputerUtil.ActivateForSacCost(sa, ai)) {
             return true;
         }
 
