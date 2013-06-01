@@ -815,6 +815,10 @@ public class AbilityUtils {
                     }
                 }
             }
+        } else if (defined.startsWith("OppNonTriggered")) {
+            players.addAll(sa.getActivatingPlayer().getOpponents());
+            players.removeAll(getDefinedPlayers(card, defined.substring(6), sa));
+            
         } else if (defined.startsWith("Replaced")) {
             final SpellAbility root = sa.getRootAbility();
             Object o = null;
@@ -857,11 +861,9 @@ public class AbilityUtils {
                     }
                 }
             }
-        } else if (defined.equals("NonReplacedPlayer")) {
-            final SpellAbility root = sa.getRootAbility();
-            Player p = (Player) root.getReplacingObject("Player");
-            players.addAll(sa.getActivatingPlayer().getGame().getPlayers());
-            players.remove(p);
+        } else if (defined.startsWith("NonReplaced")) {
+            players.addAll(game.getPlayers());
+            players.removeAll(getDefinedPlayers(card, defined.substring(3), sa));
         } else if (defined.equals("EnchantedController")) {
             if (card.getEnchantingCard() == null) {
                 return players;

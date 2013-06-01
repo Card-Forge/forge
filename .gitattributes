@@ -4030,6 +4030,7 @@ res/cardsfolder/f/furious_resistance.txt -text
 res/cardsfolder/f/furnace_brood.txt svneol=native#text/plain
 res/cardsfolder/f/furnace_celebration.txt svneol=native#text/plain
 res/cardsfolder/f/furnace_dragon.txt svneol=native#text/plain
+res/cardsfolder/f/furnace_layer.txt -text
 res/cardsfolder/f/furnace_of_rath.txt svneol=native#text/plain
 res/cardsfolder/f/furnace_scamp.txt svneol=native#text/plain
 res/cardsfolder/f/furnace_spirit.txt svneol=native#text/plain
@@ -5784,6 +5785,7 @@ res/cardsfolder/k/khalni_garden.txt svneol=native#text/plain
 res/cardsfolder/k/khalni_gem.txt svneol=native#text/plain
 res/cardsfolder/k/khalni_heart_expedition.txt svneol=native#text/plain
 res/cardsfolder/k/khalni_hydra.txt svneol=native#text/plain
+res/cardsfolder/k/kharasha_foothills.txt -text
 res/cardsfolder/k/kher_keep.txt svneol=native#text/plain
 res/cardsfolder/k/kiki_jiki_mirror_breaker.txt svneol=native#text/plain
 res/cardsfolder/k/kiku_nights_flower.txt svneol=native#text/plain
@@ -6879,6 +6881,7 @@ res/cardsfolder/m/mirror_sigil_sergeant.txt svneol=native#text/plain
 res/cardsfolder/m/mirror_strike.txt -text
 res/cardsfolder/m/mirror_universe.txt svneol=native#text/plain
 res/cardsfolder/m/mirror_wall.txt svneol=native#text/plain
+res/cardsfolder/m/mirrored_depths.txt -text
 res/cardsfolder/m/mirrorweave.txt -text
 res/cardsfolder/m/mirrorwood_treefolk.txt -text
 res/cardsfolder/m/mirrorworks.txt svneol=native#text/plain

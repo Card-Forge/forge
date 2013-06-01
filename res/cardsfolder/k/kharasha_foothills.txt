@@ -1,0 +1,15 @@
+Name:Kharasha Foothills
+ManaCost:no cost
+Types:Plane Mongseng
+T:Mode$ Attacks | ValidCard$ Creature.YouCtrl | TriggerZones$ Command | Attacked$ Player | Execute$ TrigCopy | TriggerDescription$ Whenever a creature you control attacks a player, for each other opponent, you may put a token that's a copy of that creature onto the battlefield tapped and attacking that opponent. Exile those tokens at the beginning of the next end step.
+SVar:TrigCopy:AB$ RepeatEach | Cost$ 0 | RepeatPlayers$ OppNonTriggeredDefender | RepeatSubAbility$ DBCopy
+SVar:DBCopy:DB$ CopyPermanent | Defined$ TriggeredAttacker | NumCopies$ 1 | CopyAttacking$ Remembered | Tapped$ True | AtEOT$ Exile | Optional$ True
+T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ you may sacrifice any number of creatures. If you do, CARDNAME deals that much damage to target creature.
+SVar:RolledChaos:AB$ Sacrifice | Cost$ 0 | Defined$ You | Amount$ SacX | References$ SacX | SacValid$ Creature | RememberSacrificed$ True | Optional$ True | SubAbility$ DBDmg
+SVar:SacX:Count$Valid Creature.YouCtrl
+SVar:DBDmg:DB$ DealDamage | ValidTgts$ Creature | NumDmg$ DmgX | References$ DmgX | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:DmgX:Remembered$Amount
+SVar:Picture:http://www.wizards.com/global/images/magic/general/kharasha_foothills.jpg
+Oracle:Whenever a creature you control attacks a player, for each other opponent, you may put a token that's a copy of that creature onto the battlefield tapped and attacking that opponent. Exile those tokens at the beginning of the next end step.\nWhenever you roll {C}, you may sacrifice any number of creatures. If you do, Kharasha Foothills deals that much damage to target creature.
+SetInfo:PC2 Common

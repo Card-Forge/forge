@@ -746,8 +746,10 @@ public class AiController {
                 int numCards = sa.hasParam("NumCards") ? AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("NumCards"), sa) : 1;
                 // AI shouldn't mill itself
                 return numCards < player.getZone(ZoneType.Library).size();
-
-
+                
+            case CopyPermanent:
+                //TODO: add logic here
+                return true;
                 
             default: 
         }

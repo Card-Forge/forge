@@ -15,6 +15,7 @@ import forge.Card;
 import forge.CardCharacteristicName;
 import forge.CardLists;
 import forge.Command;
+import forge.GameEntity;
 import forge.card.CardRulesPredicates;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
@@ -57,6 +58,11 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
         final Card hostCard = sa.getSourceCard();
         final Game game = hostCard.getGame();
         final ArrayList<String> keywords = new ArrayList<String>();
+        if (sa.hasParam("Optional")) {
+            if (!sa.getActivatingPlayer().getController().confirmAction(sa, null, "Copy this permanent?")) {
+                return;
+            }
+        }
         if (sa.hasParam("Keywords")) {
             keywords.addAll(Arrays.asList(sa.getParam("Keywords").split(" & ")));
         }
@@ -243,6 +249,14 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
                     crds[i] = copy;
                     if (sa.hasParam("RememberCopied")) {
                         hostCard.addRemembered(copy);
+                    }
+                    if (sa.hasParam("Tapped")) {
+                        copy.setTapped(true);
+                    }
+                    if (sa.hasParam("CopyAttacking")) {
+                        final GameEntity defender = (GameEntity) AbilityUtils.getDefinedPlayers(hostCard, 
+                                sa.getParam("CopyAttacking"), sa).get(0);
+                        game.getCombat().addAttacker(copy, defender);
                     }
                 }
 

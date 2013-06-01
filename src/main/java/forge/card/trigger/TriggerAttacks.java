@@ -99,5 +99,6 @@ public class TriggerAttacks extends Trigger {
     @Override
     public final void setTriggeringObjects(final SpellAbility sa) {
         sa.setTriggeringObject("Attacker", this.getRunParams().get("Attacker"));
+        sa.setTriggeringObject("Defender", this.getRunParams().get("Attacked"));
     }
 }
