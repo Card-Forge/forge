@@ -115,7 +115,7 @@ public class DigEffect extends SpellAbilityEffect {
 
                 boolean hasRevealed = true;
                 if (sa.hasParam("Reveal")) {
-                    GuiChoose.one("Revealing cards from library", top);
+                    game.getAction().reveal(top, p);
                     // Singletons.getModel().getGameAction().revealToCopmuter(top.toArray());
                     // - for when it exists
                 } else if (sa.hasParam("RevealOptional")) {

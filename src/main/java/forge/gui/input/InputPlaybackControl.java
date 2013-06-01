@@ -14,6 +14,7 @@ public class InputPlaybackControl extends InputSyncronizedBase implements InputS
     FControlGamePlayback control;
     
     private boolean isPaused = false;
+    private boolean isFast = false;
     
     /**
      * TODO: Write javadoc for Constructor.
@@ -37,7 +38,7 @@ public class InputPlaybackControl extends InputSyncronizedBase implements InputS
         if ( isPaused ) 
             ButtonUtil.setButtonText("Resume", "Step");
         else  {
-            ButtonUtil.setButtonText("Pause", "End game");
+            ButtonUtil.setButtonText("Pause", isFast ? "1x Speed" : "10x Faster");
             showMessage("Press pause to pause game.");
         }
     }
@@ -62,8 +63,12 @@ public class InputPlaybackControl extends InputSyncronizedBase implements InputS
     protected void onCancel() {
         if ( isPaused ) {
             control.singleStep();
-        } else 
-            control.endGame();
+        } else {  
+            isFast = !isFast;
+            control.setSpeed(isFast);
+            setPause(isPaused); // update message
+        }
+
     }
 
 }

@@ -39,10 +39,12 @@ public class FControlGamePlayback extends IGameEventVisitor.Base<Void> {
     private int combatDelay = 400;
     private int castDelay = 400;
     private int resolveDelay = 400;
+
+    private boolean fasterPlayback = false;
     
     private void pauseForEvent(int delay) {
         try {
-            Thread.sleep(delay);
+            Thread.sleep(fasterPlayback ? delay / 10 : delay);
         } catch (InterruptedException e) {
             // TODO Auto-generated catch block ignores the exception, but sends it to System.err and probably forge.log.
             e.printStackTrace();
@@ -179,9 +181,12 @@ public class FControlGamePlayback extends IGameEventVisitor.Base<Void> {
         releaseGameThread();
     }
 
-    public void endGame() {
-        fc.stopGame();
-        releaseGameThread();
+    /**
+     * TODO: Write javadoc for this method.
+     * @param isFast
+     */
+    public void setSpeed(boolean isFast) {
+        fasterPlayback  = isFast;
     }
 
 }
