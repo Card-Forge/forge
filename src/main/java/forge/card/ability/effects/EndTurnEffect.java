@@ -41,7 +41,6 @@ public class EndTurnEffect extends SpellAbilityEffect {
         game.getPhaseHandler().endTurnByEffect();
 
         // Update observers
-        game.getStack().updateObservers();
         for (Player p : game.getPlayers()) {
             p.updateObservers();
             p.updateLabelObservers();

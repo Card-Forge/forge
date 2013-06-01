@@ -9,9 +9,11 @@ import forge.card.spellability.SpellAbility;
 public class GameEventSpellAbilityCast extends GameEvent {
 
     public final SpellAbility sa; 
+    public final boolean replicate;
     
-    public GameEventSpellAbilityCast(SpellAbility sp) {
+    public GameEventSpellAbilityCast(SpellAbility sp, boolean replicate) {
         sa = sp;
+        this.replicate = replicate;
     }
 
     /* (non-Javadoc)

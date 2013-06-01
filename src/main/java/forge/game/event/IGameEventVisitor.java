@@ -33,6 +33,7 @@ public interface IGameEventVisitor<T> {
     T visit(GameEventShuffle event);
     T visit(GameEventSpellAbilityCast gameEventSpellAbilityCast);
     T visit(GameEventSpellResolved event);
+    T visit(GameEventSpellRemovedFromStack event);
     T visit(GameEventTokenCreated event);
     T visit(GameEventTurnBegan gameEventTurnBegan);
     T visit(GameEventTurnEnded event);
@@ -68,6 +69,7 @@ public interface IGameEventVisitor<T> {
         public T visit(GameEventShuffle event) { return null; }
         public T visit(GameEventSpellResolved event) { return null; }
         public T visit(GameEventSpellAbilityCast event) { return null; }
+        public T visit(GameEventSpellRemovedFromStack event) { return null; }
         public T visit(GameEventTokenCreated event) { return null; }
         public T visit(GameEventTurnBegan event) { return null; }
         public T visit(GameEventTurnEnded event) { return null; }

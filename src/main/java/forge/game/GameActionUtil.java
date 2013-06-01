@@ -74,7 +74,7 @@ import forge.util.TextUtil;
  */
 public final class GameActionUtil {
     
-    private static final class CascadeAbility extends Ability {
+    public static final class CascadeAbility extends Ability {
         private final Player controller;
         private final Card cascCard;
 
@@ -132,7 +132,7 @@ public final class GameActionUtil {
         }
     }
 
-    private static final class CascadeExecutor implements Command {
+    public static final class CascadeExecutor implements Command {
         private final Card c;
         private final Game game;
         private final Player controller;
@@ -144,7 +144,7 @@ public final class GameActionUtil {
          * @param controller
          * @param c
          */
-        private CascadeExecutor(Player controller, Card c, final Game game) {
+        public CascadeExecutor(Player controller, Card c, final Game game) {
             this.controller = controller;
             this.c = c;
             this.game = game;
@@ -187,7 +187,7 @@ public final class GameActionUtil {
      * TODO: Write javadoc for this type.
      *
      */
-    private static final class RippleAbility extends Ability {
+    public static final class RippleAbility extends Ability {
         private final Player controller;
         private final int rippleCount;
         private final Card rippleCard;
@@ -263,7 +263,7 @@ public final class GameActionUtil {
      * TODO: Write javadoc for this type.
      *
      */
-    private static final class RippleExecutor implements Command {
+    public static final class RippleExecutor implements Command {
         private final Player controller;
         private final Card c;
         private static final long serialVersionUID = -845154812215847505L;
@@ -273,7 +273,7 @@ public final class GameActionUtil {
          * @param controller
          * @param c
          */
-        private RippleExecutor(Player controller, Card c) {
+        public RippleExecutor(Player controller, Card c) {
             this.controller = controller;
             this.c = c;
         }
@@ -314,24 +314,6 @@ public final class GameActionUtil {
 
     private GameActionUtil() {
         throw new AssertionError();
-    }
-
-    /**
-     * <p>
-     * executePlayCardEffects.
-     * </p>
-     * 
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     */
-    public static void executePlayCardEffects(final SpellAbility sa) {
-        // (called from MagicStack.java)
-
-        final Game game = sa.getActivatingPlayer().getGame(); 
-        final Command cascade = new CascadeExecutor(sa.getActivatingPlayer(), sa.getSourceCard(), game);
-        cascade.run();
-        final Command ripple = new RippleExecutor(sa.getActivatingPlayer(), sa.getSourceCard());
-        ripple.run();
     }
 
     // this is for cards like Sengir Vampire

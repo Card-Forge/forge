@@ -31,6 +31,7 @@ import com.esotericsoftware.minlog.Log;
 
 import forge.Card;
 import forge.CardLists;
+import forge.Command;
 import forge.FThreads;
 import forge.Singletons;
 import forge.CardPredicates.Presets;
@@ -51,11 +52,13 @@ import forge.card.spellability.Target;
 import forge.card.spellability.TargetChoices;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerType;
-import forge.game.GameActionUtil;
 import forge.game.Game;
+import forge.game.GameActionUtil.CascadeExecutor;
+import forge.game.GameActionUtil.RippleExecutor;
 import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilCard;
 import forge.game.event.GameEventSpellAbilityCast;
+import forge.game.event.GameEventSpellRemovedFromStack;
 import forge.game.event.GameEventSpellResolved;
 import forge.game.player.HumanPlay;
 import forge.game.player.Player;
@@ -63,7 +66,6 @@ import forge.game.player.PlayerController.ManaPaymentPurpose;
 import forge.gui.GuiChoose;
 import forge.gui.input.InputSelectCards;
 import forge.gui.input.InputSelectCardsFromList;
-import forge.util.MyObservable;
 
 /**
  * <p>
@@ -73,7 +75,7 @@ import forge.util.MyObservable;
  * @author Forge
  * @version $Id$
  */
-public class MagicStack extends MyObservable implements Iterable<SpellAbilityStackInstance> {
+public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbilityStackInstance> {
     private final List<SpellAbility> simultaneousStackEntryList = new ArrayList<SpellAbility>();
 
     // They don't provide a LIFO queue, so had to use a deque
@@ -133,7 +135,6 @@ public class MagicStack extends MyObservable implements Iterable<SpellAbilitySta
         this.thisTurnCast.clear();
         this.curResolvingCard = null;
         this.frozenStack.clear();
-        this.updateObservers();
     }
 
     /**
@@ -299,7 +300,6 @@ public class MagicStack extends MyObservable implements Iterable<SpellAbilitySta
             return;
         }
 
-        game.fireEvent(new GameEventSpellAbilityCast(sp));
         
         // if activating player slips through the cracks, assign activating
         // Player to the controller here
@@ -341,12 +341,12 @@ public class MagicStack extends MyObservable implements Iterable<SpellAbilitySta
                 if (sp.isReplicate()) {
                     // TODO: convert multikicker/replicate support in abCost so this
                     // doesn't happen here
-                    // X and multi and replicate are not supported yet
                     
                     final Player activating = sp.getActivatingPlayer();
-                    final Cost costMultikicker = new Cost(sp.getMultiKickerManaCost(), false);
-                    
+                    final Cost costMultikicker = new Cost(sp.getReplicateManaCost(), false);
+                    sp.getSourceCard().resetReplicateMagnitude();
                     boolean hasPaid = false;
+                    
                     do {
                         int rMagnitude = sp.getSourceCard().getReplicateMagnitude();
                         String prompt = String.format("Replicate for %s\r\nTimes Replicated: %d\r\n", sp.getSourceCard(), rMagnitude);
@@ -464,6 +464,7 @@ public class MagicStack extends MyObservable implements Iterable<SpellAbilitySta
         final SpellAbilityStackInstance si = new SpellAbilityStackInstance(sp);
         
         this.stack.addFirst(si);
+        game.fireEvent(new GameEventSpellAbilityCast(sp, false));
 
         // 2012-07-21 the following comparison needs to move below the pushes but somehow screws up priority
         // When it's down there. That makes absolutely no sense to me, so i'm putting it back for now
@@ -472,12 +473,14 @@ public class MagicStack extends MyObservable implements Iterable<SpellAbilitySta
             game.getPhaseHandler().setPriority(sp.getActivatingPlayer());
         }
 
-        this.updateObservers();
-
         if (sp.isSpell() && !sp.getSourceCard().isCopiedSpell()) {
             this.thisTurnCast.add(sp.getSourceCard());
 
-            GameActionUtil.executePlayCardEffects(sp);
+            final Game game = sp.getActivatingPlayer().getGame(); 
+            final Command cascade = new CascadeExecutor(sp.getActivatingPlayer(), sp.getSourceCard(), game);
+            cascade.run();
+            final Command ripple = new RippleExecutor(sp.getActivatingPlayer(), sp.getSourceCard());
+            ripple.run();
         }
     }
 
@@ -516,6 +519,7 @@ public class MagicStack extends MyObservable implements Iterable<SpellAbilitySta
             sa.resolve();
             // do creatures ETB from here?
         }
+        
         this.finishResolving(sa, thisHasFizzled);
 
         game.fireEvent(new GameEventSpellResolved(sa, thisHasFizzled));
@@ -572,20 +576,17 @@ public class MagicStack extends MyObservable implements Iterable<SpellAbilitySta
         if (si != null) {
             this.remove(si);
         }
-    
+
         // After SA resolves we have to do a handful of things
         this.setResolving(false);
         this.unfreezeStack();
         sa.resetOnceResolved();
-    
+
         game.getAction().checkStateEffects();
-    
         game.getPhaseHandler().onStackResolved();
-    
+
         this.curResolvingCard = null;
-    
-        this.updateObservers();
-    
+
         // TODO: this is a huge hack. Why is this necessary?
         // hostCard in AF is not the same object that's on the battlefield
         // verified by System.identityHashCode(card);
@@ -728,7 +729,7 @@ public class MagicStack extends MyObservable implements Iterable<SpellAbilitySta
     public final void remove(final SpellAbilityStackInstance si) {
         this.stack.remove(si);
         this.frozenStack.remove(si);
-        this.updateObservers();
+        game.fireEvent(new GameEventSpellRemovedFromStack(si.getSpellAbility()));
     }
 
     public final SpellAbilityStackInstance getInstanceFromSpellAbility(final SpellAbility sa) {
@@ -901,6 +902,7 @@ public class MagicStack extends MyObservable implements Iterable<SpellAbilitySta
      */
     public void clear() {
         stack.clear();
+        game.fireEvent(new GameEventSpellRemovedFromStack(null));
     }
     
     @Override 

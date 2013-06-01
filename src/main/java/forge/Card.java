@@ -3918,8 +3918,8 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @param n
      *            a int.
      */
-    public final void setReplicateMagnitude(final int n) {
-        this.replicateMagnitude = n;
+    public final void resetReplicateMagnitude() {
+        this.replicateMagnitude = 0;
     }
 
     /**
