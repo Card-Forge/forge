@@ -139,10 +139,10 @@ public class AiController {
         return spellAbilities;
     }
 
-    private List<SpellAbility> getOriginalAndAltCostAbilities(final List<SpellAbility> possibleCounters)
+    private List<SpellAbility> getOriginalAndAltCostAbilities(final List<SpellAbility> originList)
     {
         final ArrayList<SpellAbility> newAbilities = new ArrayList<SpellAbility>();
-        for (SpellAbility sa : possibleCounters) {
+        for (SpellAbility sa : originList) {
             sa.setActivatingPlayer(player);
             //add alternative costs as additional spell abilities
             newAbilities.add(sa);

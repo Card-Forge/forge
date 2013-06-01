@@ -137,14 +137,11 @@ public class HumanPlay {
      *            the original sa
      * @return an ArrayList<SpellAbility>.
      */
-    static SpellAbility chooseOptionalAdditionalCosts(Player p, final SpellAbility original) {
-        //final HashMap<String, SpellAbility> map = new HashMap<String, SpellAbility>();
-        final List<SpellAbility> abilities = GameActionUtil.getOptionalCosts(original);
-        
+    static SpellAbility chooseOptionalAdditionalCosts(Player p, final SpellAbility original) { 
         if (!original.isSpell()) {
             return original;
         }
-    
+        final List<SpellAbility> abilities = GameActionUtil.getOptionalCosts(original);
         return p.getController().getAbilityToPlay(abilities);
     }
 
