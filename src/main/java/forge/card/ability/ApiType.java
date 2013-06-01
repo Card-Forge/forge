@@ -207,7 +207,7 @@ public enum ApiType {
     TapAll (TapAllEffect.class, TapAllAi.class),
     TapOrUntap (TapOrUntapEffect.class, TapOrUntapAi.class),
     TapOrUntapAll (TapOrUntapAllEffect.class, TapOrUntapAllAi.class),
-    Token (TokenEffect.class, TokenAi.class),
+    Token (TokenEffect.class, TokenAi.class, false), // Token AI and effect classes have state, they have to be re-created on each request 
     TwoPiles (TwoPilesEffect.class, TwoPilesAi.class),
     UnattachAll (UnattachAllEffect.class, UnattachAllAi.class),
     Untap (UntapEffect.class, UntapAi.class),
@@ -221,12 +221,24 @@ public enum ApiType {
     private final Class<? extends SpellAbilityEffect> clsEffect;
     private final Class<? extends SpellAbilityAi> clsAi;
     
+    private final SpellAbilityEffect instanceEffect;
+    private final SpellAbilityAi instanceAi;
 
+    
+    
     private static final Map<String, ApiType> allValues = new TreeMap<String, ApiType>(String.CASE_INSENSITIVE_ORDER);
 
-    ApiType(Class<? extends SpellAbilityEffect> clsEf, Class<? extends SpellAbilityAi> clsAI) {
+    ApiType(Class<? extends SpellAbilityEffect> clsEf, Class<? extends SpellAbilityAi> clsAi) {
+        this(clsEf, clsAi, true);
+    }
+    
+    ApiType(Class<? extends SpellAbilityEffect> clsEf, Class<? extends SpellAbilityAi> clsAI, final boolean isStateLess) {
         clsEffect = clsEf;
         clsAi = clsAI;
+        
+        instanceAi = isStateLess ? ReflectionUtil.makeDefaultInstanceOf(clsAi) : null;
+        instanceEffect = isStateLess ? ReflectionUtil.makeDefaultInstanceOf(clsEf) : null; 
+        
     }
 
     public static ApiType smartValueOf(String value) {
@@ -241,11 +253,11 @@ public enum ApiType {
     }
 
     public SpellAbilityEffect getSpellEffect() {
-        return clsEffect == null ? null : ReflectionUtil.makeDefaultInstanceOf(clsEffect);
+        return instanceEffect != null ? instanceEffect : ReflectionUtil.makeDefaultInstanceOf(clsEffect);
     }
 
     public SpellAbilityAi getAi() {
-        return clsAi == null ? null : ReflectionUtil.makeDefaultInstanceOf(clsAi);
+        return instanceAi != null ? instanceAi : ReflectionUtil.makeDefaultInstanceOf(clsAi);
     }
 
 }

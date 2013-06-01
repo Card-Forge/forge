@@ -20,7 +20,7 @@ import forge.gui.GuiChoose;
  */
 public class TapOrUntapAllEffect extends SpellAbilityEffect {
 
-    private enum TapOrUntap {
+    private static enum TapOrUntap {
         TAP, UNTAP
     }
 
