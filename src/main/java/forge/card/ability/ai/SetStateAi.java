@@ -8,6 +8,9 @@ import forge.game.player.Player;
 public class SetStateAi extends SpellAbilityAi {
     @Override
     protected boolean canPlayAI(Player aiPlayer, SpellAbility sa) {
+        if (sa.getTarget() == null && "Transform".equals(sa.getParam("Mode"))) {
+            return true;
+        }
         return false;
     }
 
