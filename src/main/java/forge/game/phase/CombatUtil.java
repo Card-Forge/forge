@@ -1300,62 +1300,57 @@ public class CombatUtil {
 
             game.getStack().addSimultaneousStackEntry(ability);
         }
+    }
 
-        final Player phasingPlayer = c.getController();
-
-        if (phasingPlayer.getCardsIn(ZoneType.Battlefield, "Sovereigns of Lost Alara").size() > 0) {
-            for (int i = 0; i < phasingPlayer.getCardsIn(ZoneType.Battlefield, "Sovereigns of Lost Alara").size(); i++) {
-                final Card attacker = c;
-                final Ability ability4 = new Ability(c, ManaCost.ZERO) {
+    public static void souverignsOfAlara2ndAbility(final Game game, final Card attacker) {
+        final Ability ability4 = new Ability(attacker, ManaCost.ZERO) {
+            @Override
+            public void resolve() {
+                List<Card> enchantments =
+                        CardLists.filter(attacker.getController().getCardsIn(ZoneType.Library), new Predicate<Card>() {
                     @Override
-                    public void resolve() {
-                        List<Card> enchantments =
-                                CardLists.filter(attacker.getController().getCardsIn(ZoneType.Library), new Predicate<Card>() {
-                            @Override
-                            public boolean apply(final Card c) {
-                                if (attacker.hasKeyword("Protection from enchantments")
-                                        || (attacker.hasKeyword("Protection from everything"))) {
-                                    return false;
-                                }
-                                return (c.isEnchantment() && c.hasKeyword("Enchant creature") && !CardFactoryUtil
-                                        .hasProtectionFrom(c, attacker));
-                            }
-                        });
-                        final Player player = attacker.getController();
-                        Card enchantment = null;
-                        if (player.isHuman()) {
-                            final Card[] target = new Card[enchantments.size()];
-                            for (int j = 0; j < enchantments.size(); j++) {
-                                final Card crd = enchantments.get(j);
-                                target[j] = crd;
-                            }
-                            final Object check = GuiChoose.oneOrNone(
-                                    "Select enchantment to enchant exalted creature", target);
-                            if (check != null) {
-                                enchantment = ((Card) check);
-                            }
-                        } else {
-                            enchantment = ComputerUtilCard.getBestEnchantmentAI(enchantments, this, false);
+                    public boolean apply(final Card c) {
+                        if (attacker.hasKeyword("Protection from enchantments")
+                                || (attacker.hasKeyword("Protection from everything"))) {
+                            return false;
                         }
-                        if ((enchantment != null) && attacker.isInPlay()) {
-                            game.getAction().changeZone(game.getZoneOf(enchantment),
-                                    enchantment.getOwner().getZone(ZoneType.Battlefield), enchantment, null);
-                            enchantment.enchantEntity(attacker);
-                        }
-                        attacker.getController().shuffle();
-                    } // resolve
-                }; // ability4
+                        return (c.isEnchantment() && c.hasKeyword("Enchant creature") && !CardFactoryUtil
+                                .hasProtectionFrom(c, attacker));
+                    }
+                });
+                final Player player = attacker.getController();
+                Card enchantment = null;
+                if (player.isHuman()) {
+                    final Card[] target = new Card[enchantments.size()];
+                    for (int j = 0; j < enchantments.size(); j++) {
+                        final Card crd = enchantments.get(j);
+                        target[j] = crd;
+                    }
+                    final Object check = GuiChoose.oneOrNone(
+                            "Select enchantment to enchant exalted creature", target);
+                    if (check != null) {
+                        enchantment = ((Card) check);
+                    }
+                } else {
+                    enchantment = ComputerUtilCard.getBestEnchantmentAI(enchantments, this, false);
+                }
+                if ((enchantment != null) && attacker.isInPlay()) {
+                    game.getAction().changeZone(game.getZoneOf(enchantment),
+                            enchantment.getOwner().getZone(ZoneType.Battlefield), enchantment, null);
+                    enchantment.enchantEntity(attacker);
+                }
+                attacker.getController().shuffle();
+            } // resolve
+        }; // ability4
 
-                final StringBuilder sb4 = new StringBuilder();
-                sb4.append(c).append(
-                        " - (Exalted) searches library for an Aura card that could enchant that creature, ");
-                sb4.append("put it onto the battlefield attached to that creature, then shuffles library.");
-                ability4.setDescription(sb4.toString());
-                ability4.setStackDescription(sb4.toString());
+        final StringBuilder sb4 = new StringBuilder();
+        sb4.append(attacker).append(
+                " - (Exalted) searches library for an Aura card that could enchant that creature, ");
+        sb4.append("put it onto the battlefield attached to that creature, then shuffles library.");
+        ability4.setDescription(sb4.toString());
+        ability4.setStackDescription(sb4.toString());
 
-                game.getStack().addSimultaneousStackEntry(ability4);
-            } // For
-        }
+        game.getStack().addSimultaneousStackEntry(ability4);
     }
 
     /**

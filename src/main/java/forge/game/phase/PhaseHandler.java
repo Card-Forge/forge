@@ -268,10 +268,63 @@ public class PhaseHandler implements java.io.Serializable {
                     
                     playerTurn.getController().declareAttackers();
 
-                    PhaseUtil.handleDeclareAttackers(game);
+                    game.getCombat().verifyCreaturesInPlay();
+                    
+                    // Handles removing cards like Mogg Flunkies from combat if group attack
+                    // didn't occur
+                    for (Card c1 : game.getCombat().getAttackers()) {
+                        if (c1.hasKeyword("CARDNAME can't attack or block alone.") && c1.isAttacking()) {
+                            if (game.getCombat().getAttackers().size() < 2) {
+                                game.getCombat().removeFromCombat(c1);
+                            }
+                        }
+                    }
+                    
+                    
+                    // TODO move propaganda to happen as the Attacker is Declared
+
+                    for (final Card c2 : game.getCombat().getAttackers()) {
+                        boolean canAttack = CombatUtil.checkPropagandaEffects(game, c2);
+                        if ( canAttack ) {
+                            if (!c2.hasKeyword("Vigilance")) 
+                                c2.tap();
+                        } else {
+                            game.getCombat().removeFromCombat(c2);
+                        }
+                    }
+                    
+
+                    // Then run other Attacker bonuses
+                    // check for exalted:
+                    if (game.getCombat().getAttackers().size() == 1) {
+                        final Player attackingPlayer = game.getCombat().getAttackingPlayer();
+                        final Card attacker = game.getCombat().getAttackers().get(0);
+                        for (Card card : attackingPlayer.getCardsIn(ZoneType.Battlefield)) {
+                            int exaltedMagnitude = card.getKeywordAmount("Exalted");
+                            if (exaltedMagnitude > 0) {
+                                CombatUtil.executeExaltedAbility(game, attacker, exaltedMagnitude, card);
+                                // Make sure exalted effects get applied only once per combat
+                            }
+                            
+                            if ("Sovereigns of Lost Alara".equals(card.getName())) {
+                                CombatUtil.souverignsOfAlara2ndAbility(game, attacker);
+                            }
+                        }
+                    }
+
+                    game.getGameLog().addCombatAttackers(game.getCombat());
+
+                    final HashMap<String, Object> runParams = new HashMap<String, Object>();
+                    runParams.put("Attackers", game.getCombat().getAttackers());
+                    runParams.put("AttackingPlayer", game.getCombat().getAttackingPlayer());
+                    game.getTriggerHandler().runTrigger(TriggerType.AttackersDeclared, runParams, false);
+
+                    for (final Card c : game.getCombat().getAttackers()) {
+                        CombatUtil.checkDeclareAttackers(game, c);
+                    }
+                    game.getStack().unfreezeStack();
                     
                     this.bCombat = !game.getCombat().getAttackers().isEmpty();
-                    game.getStack().unfreezeStack();
                     this.nCombatsThisTurn++;
                     
                     break;
