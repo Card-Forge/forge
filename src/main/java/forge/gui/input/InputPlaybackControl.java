@@ -30,7 +30,7 @@ public class InputPlaybackControl extends InputSyncronizedBase implements InputS
     @Override
     protected void showMessage() {
         setPause(false);
-
+        ButtonUtil.enableAllFocusOk();
     }
     
     private void setPause(boolean pause) {
