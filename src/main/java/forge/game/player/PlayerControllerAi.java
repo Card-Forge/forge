@@ -287,6 +287,17 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
+    public void declareAttackers() {
+        brains.declareAttackers();
+    }
+
+   
+    @Override
+    public void declareBlockers() {
+        brains.declateBlockers();
+    }
+
+    @Override
     public void takePriority() {
         if ( !game.isGameOver() )
             brains.onPriorityRecieved();

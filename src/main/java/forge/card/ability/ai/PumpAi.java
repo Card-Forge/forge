@@ -186,7 +186,7 @@ public class PumpAi extends PumpAiBase {
 
         if (!mandatory
                 && !sa.isTrigger()
-                && game.getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)
+                && game.getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS)
                 && !(sa.isCurse() && (defense < 0))
                 && !this.containsNonCombatKeyword(keywords)
                 && !sa.hasParam("UntilYourNextTurn")) {

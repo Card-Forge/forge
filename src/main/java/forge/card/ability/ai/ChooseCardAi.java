@@ -62,7 +62,7 @@ public class ChooseCardAi extends SpellAbilityAi {
             } else if (sa.getParam("AILogic").equals("Never")) {
                 return false;
             } else if (sa.getParam("AILogic").equals("NeedsPrevention")) {
-                if (!game.getPhaseHandler().getPhase() .equals(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
+                if (!game.getPhaseHandler().getPhase() .equals(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
                     return false;
                 }
                 choices = CardLists.filter(choices, new Predicate<Card>() {

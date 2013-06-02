@@ -53,8 +53,8 @@ public class DebuffAi extends SpellAbilityAi {
         final PhaseHandler ph =  ai.getGame().getPhaseHandler();
 
         // Phase Restrictions
-        if (ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY)
-                || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)
+        if (ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)
+                || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS)
                 || !ai.getGame().getStack().isEmpty()) {
             // Instant-speed pumps should not be cast outside of combat when the
             // stack is empty
@@ -124,7 +124,7 @@ public class DebuffAi extends SpellAbilityAi {
      */
     private boolean debuffTgtAI(final Player ai, final SpellAbility sa, final List<String> kws, final boolean mandatory) {
         // this would be for evasive things like Flying, Unblockable, etc
-        if (!mandatory && ai.getGame().getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
+        if (!mandatory && ai.getGame().getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
             return false;
         }
 

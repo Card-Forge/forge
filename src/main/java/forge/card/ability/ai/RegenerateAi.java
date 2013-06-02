@@ -92,7 +92,7 @@ public class RegenerateAi extends SpellAbilityAi {
                     }
                 }
             } else {
-                if (game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
+                if (game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
                     boolean flag = false;
 
                     for (final Card c : list) {
@@ -136,7 +136,7 @@ public class RegenerateAi extends SpellAbilityAi {
                     chance = true;
                 }
             } else {
-                if (game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
+                if (game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
                     final List<Card> combatants = CardLists.filter(targetables, CardPredicates.Presets.CREATURES);
                     CardLists.sortByEvaluateCreature(combatants);
 
@@ -194,7 +194,7 @@ public class RegenerateAi extends SpellAbilityAi {
         if (compTargetables.size() > 0) {
             final List<Card> combatants = CardLists.filter(compTargetables, CardPredicates.Presets.CREATURES);
             CardLists.sortByEvaluateCreature(combatants);
-            if (game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
+            if (game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
                 for (final Card c : combatants) {
                     if ((c.getShield() == 0) && ComputerUtilCombat.combatantWouldBeDestroyed(ai, c)) {
                         tgt.addTarget(c);
@@ -207,7 +207,7 @@ public class RegenerateAi extends SpellAbilityAi {
             // can target
 
             // choose my best X without regen
-            if (CardLists.getNotType(compTargetables, "Creature").size() == 0) {
+            if (CardLists.getNotType(compTargetables, "Creature").isEmpty()) {
                 for (final Card c : combatants) {
                     if (c.getShield() == 0) {
                         tgt.addTarget(c);

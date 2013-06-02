@@ -68,8 +68,8 @@ public class FControlGamePlayback extends IGameEventVisitor.Base<Void> {
         
         switch(ev.phase) {
             case COMBAT_END:
-            case COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY:
-            case COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY:
+            case COMBAT_DECLARE_ATTACKERS:
+            case COMBAT_DECLARE_BLOCKERS:
                 if( fc.getObservedGame().getPhaseHandler().inCombat() )
                     pauseForEvent(combatDelay);
                 break;

@@ -99,8 +99,7 @@ public class ChooseSourceAi extends SpellAbilityAi {
                     }
                     return true;
                 }
-                if (!game.getPhaseHandler().getPhase()
-                        .equals(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
+                if (game.getPhaseHandler().getPhase() != PhaseType.COMBAT_DECLARE_BLOCKERS) {
                     return false;
                 }
                 List<Card> choices = game.getCardsIn(ZoneType.Battlefield);

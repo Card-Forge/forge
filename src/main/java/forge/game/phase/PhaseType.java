@@ -15,9 +15,9 @@ public enum PhaseType {
     MAIN1("Main, precombat", "Main1"),
     COMBAT_BEGIN("Begin Combat", "BeginCombat"),
     COMBAT_DECLARE_ATTACKERS("Declare Attackers"),
-    COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY("Declare Attackers - Play Instants and Abilities"),
+    //COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY("Declare Attackers - Play Instants and Abilities"),
     COMBAT_DECLARE_BLOCKERS("Declare Blockers"),
-    COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY("Declare Blockers - Play Instants and Abilities"),
+    //COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY("Declare Blockers - Play Instants and Abilities"),
     COMBAT_FIRST_STRIKE_DAMAGE("First Strike Damage"),
     COMBAT_DAMAGE("Combat Damage"),
     COMBAT_END("End Combat", "EndCombat"),
@@ -28,8 +28,8 @@ public enum PhaseType {
     public static final List<PhaseType> ALL_PHASES = Collections.unmodifiableList(
             Arrays.asList(
                     UNTAP, UPKEEP, DRAW, MAIN1,
-                    COMBAT_BEGIN, COMBAT_DECLARE_ATTACKERS, COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY,
-                    COMBAT_DECLARE_BLOCKERS, COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY,
+                    COMBAT_BEGIN, COMBAT_DECLARE_ATTACKERS, //COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY,
+                    COMBAT_DECLARE_BLOCKERS, // COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY,
                     COMBAT_FIRST_STRIKE_DAMAGE, COMBAT_DAMAGE, COMBAT_END,
                     MAIN2, END_OF_TURN, CLEANUP
                     )

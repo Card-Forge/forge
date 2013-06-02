@@ -111,7 +111,7 @@ public class TokenAi extends SpellAbilityAi {
         }
         if ((ph.isPlayerTurn(ai)
                 || ph.getPhase().isBefore(
-                        PhaseType.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY))
+                        PhaseType.COMBAT_DECLARE_ATTACKERS))
                 && !sa.hasParam("ActivationPhases") && !sa.hasParam("PlayerTurn")
                 && !SpellAbilityAi.isSorcerySpeed(sa) && !haste) {
             return false;
@@ -170,7 +170,7 @@ public class TokenAi extends SpellAbilityAi {
             return true;
         }
 
-        if (game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY)) {
+        if (game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
             return true;
         }
         if (sa.isAbility()) {

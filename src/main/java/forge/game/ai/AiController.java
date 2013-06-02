@@ -787,16 +787,6 @@ public class AiController {
     public void onPriorityRecieved() {
         final PhaseType phase = game.getPhaseHandler().getPhase();
         switch(phase) {
-            case COMBAT_DECLARE_ATTACKERS:
-                declareAttackers();
-                break;
-                
-            case COMBAT_DECLARE_BLOCKERS:
-                final List<Card> blockers = player.getCreaturesInPlay();
-                game.setCombat(ComputerUtilBlock.getBlockers(player, game.getCombat(), blockers));
-                CombatUtil.orderMultipleCombatants(game.getCombat());
-                break;
-
             case MAIN1:
             case MAIN2:
                 Log.debug("Computer " + phase.nameForUi);
@@ -809,9 +799,15 @@ public class AiController {
                 break;
         }
     }
+
+    public void declateBlockers() {
+        final List<Card> blockers = player.getCreaturesInPlay();
+        game.setCombat(ComputerUtilBlock.getBlockers(player, game.getCombat(), blockers));
+        CombatUtil.orderMultipleCombatants(game.getCombat());
+    }
     
 
-    private void declareAttackers() {
+    public void declareAttackers() {
         // 12/2/10(sol) the decision making here has moved to getAttackers()
         game.setCombat(new AiAttackController(player, player.getOpponent()).getAttackers());
 

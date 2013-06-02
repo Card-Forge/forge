@@ -65,7 +65,7 @@ public class RegenerateAllAi extends SpellAbilityAi {
                 }
             }
         } else {
-            if (game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
+            if (game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
                 final List<Card> combatants = CardLists.filter(list, CardPredicates.Presets.CREATURES);
 
                 for (final Card c : combatants) {

@@ -743,7 +743,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                     }
                 }
                 // Save combatants
-                else if (ai.getGame().getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
+                else if (ai.getGame().getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
                     final List<Card> combatants = CardLists.filter(aiPermanents, CardPredicates.Presets.CREATURES);
                     CardLists.sortByEvaluateCreature(combatants);
 
@@ -799,7 +799,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
         if (origin.equals(ZoneType.Battlefield)
                 && destination.equals(ZoneType.Exile)
                 && (subApi == ApiType.DelayedTrigger || (subApi == ApiType.ChangeZone  && subAffected.equals("Remembered")))
-                && !(ai.getGame().getPhaseHandler().is(PhaseType.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY) || sa
+                && !(ai.getGame().getPhaseHandler().is(PhaseType.COMBAT_DECLARE_ATTACKERS) || sa
                         .isAbility())) {
             return false;
         }

@@ -22,7 +22,7 @@ public class BecomesBlockedAi extends SpellAbilityAi {
         final Target tgt = sa.getTarget();
         final Game game = aiPlayer.getGame();
         
-        if (!game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)
+        if (!game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS)
                 || !game.getPhaseHandler().getPlayerTurn().isOpponentOf(aiPlayer)) {
             return false;
         }

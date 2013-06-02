@@ -78,8 +78,8 @@ public class PumpAllAi extends PumpAiBase {
                 }); // leaves all creatures that will be destroyed
             } // -X/-X end
             else if (power < 0) { // -X/-0
-                if (phase.isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)
-                        || phase.isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY)
+                if (phase.isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS)
+                        || phase.isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)
                         || game.getPhaseHandler().isPlayerTurn(sa.getActivatingPlayer())
                         || game.getPhaseHandler().isPreventCombatDamageThisTurn()) {
                     return false;
@@ -90,7 +90,7 @@ public class PumpAllAi extends PumpAiBase {
                         continue;
                     }
                     totalPower += Math.min(c.getNetAttack(), power * -1);
-                    if (phase == PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY
+                    if (phase == PhaseType.COMBAT_DECLARE_BLOCKERS
                             && game.getCombat().getUnblockedAttackers().contains(c)) {
                         if (ComputerUtilCombat.lifeInDanger(sa.getActivatingPlayer(), game.getCombat())) {
                             return true;
@@ -113,7 +113,7 @@ public class PumpAllAi extends PumpAiBase {
         } // end Curse
 
         // don't use non curse PumpAll after Combat_Begin until AI is improved
-        if (phase.isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY) || phase.isBefore(PhaseType.MAIN1)) {
+        if (phase.isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS) || phase.isBefore(PhaseType.MAIN1)) {
             return false;
         }
 
@@ -124,7 +124,7 @@ public class PumpAllAi extends PumpAiBase {
                 if (power <= 0 && !containsUsefulKeyword(ai, keywords, c, sa, power)) {
                     return false;
                 }
-                if (phase.equals(PhaseType.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY) && c.isAttacking()) {
+                if (phase.equals(PhaseType.COMBAT_DECLARE_ATTACKERS) && c.isAttacking()) {
                     return true;
                 }
                 if (phase.isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS) && CombatUtil.canAttack(c, opp)) {

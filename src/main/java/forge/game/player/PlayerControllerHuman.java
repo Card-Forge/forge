@@ -469,19 +469,21 @@ public class PlayerControllerHuman extends PlayerController {
         return inp.isKeepHand() ? null : isCommander ? inp.getSelectedCards() : player.getCardsIn(ZoneType.Hand);
     }
 
-
-    private void showDefaultInput() {
-        SpellAbility chosenSa = null;
-        do {
-            if (chosenSa != null) {
-                HumanPlay.playSpellAbility(player, chosenSa);
-            }
-            InputPassPriority defaultInput = new InputPassPriority(player);
-            Singletons.getControl().getInputQueue().setInputAndWait(defaultInput);
-            chosenSa = defaultInput.getChosenSa();
-        } while( chosenSa != null );
+    @Override
+    public void declareAttackers() {
+        game.getCombat().initiatePossibleDefenders(player.getOpponents());
+        // This input should not modify combat object itself, but should return user choice
+        InputSynchronized inpAttack = new InputAttack(player, game.getCombat());
+        Singletons.getControl().getInputQueue().setInputAndWait(inpAttack);
     }
-    
+
+    @Override
+    public void declareBlockers() {
+        // This input should not modify combat object itself, but should return user choice
+        InputSynchronized inpBlock = new InputBlock(player, game.getCombat());
+        Singletons.getControl().getInputQueue().setInputAndWait(inpBlock);
+    }
+
     
     @Override
     public void takePriority() {
@@ -492,22 +494,15 @@ public class PlayerControllerHuman extends PlayerController {
         } else
             autoPassCancel(); // probably cancel, since something has happened
         
-        switch(phase) {
-
-            case COMBAT_DECLARE_ATTACKERS:
-                game.getCombat().initiatePossibleDefenders(player.getOpponents());
-                InputSynchronized inpAttack = new InputAttack(player, game.getCombat());
-                Singletons.getControl().getInputQueue().setInputAndWait(inpAttack);
-                return;
-    
-            case COMBAT_DECLARE_BLOCKERS:
-                InputSynchronized inpBlock = new InputBlock(player, game.getCombat());
-                Singletons.getControl().getInputQueue().setInputAndWait(inpBlock);
-                return;
-
-            default:
-                showDefaultInput();
-        }
+        SpellAbility chosenSa = null;
+        do {
+            if (chosenSa != null) {
+                HumanPlay.playSpellAbility(player, chosenSa);
+            }
+            InputPassPriority defaultInput = new InputPassPriority(player);
+            Singletons.getControl().getInputQueue().setInputAndWait(defaultInput);
+            chosenSa = defaultInput.getChosenSa();
+        } while( chosenSa != null );
     }
 
     @Override

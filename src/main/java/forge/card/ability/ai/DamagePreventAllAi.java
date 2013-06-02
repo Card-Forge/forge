@@ -43,7 +43,7 @@ public class DamagePreventAllAi extends SpellAbilityAi {
             // control
 
         } // Protect combatants
-        else if (ai.getGame().getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
+        else if (ai.getGame().getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
             // TODO
         }
 

@@ -20,7 +20,7 @@ public class FogAi extends SpellAbilityAi {
         if (game.getPhaseHandler().isPlayerTurn(sa.getActivatingPlayer())) {
             return false;
         }
-        if (!game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
+        if (!game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
             return false;
         }
 

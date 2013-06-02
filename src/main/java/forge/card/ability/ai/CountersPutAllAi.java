@@ -108,7 +108,7 @@ public class CountersPutAllAi extends SpellAbilityAi {
                     && sa.getPayCosts() != null && sa.getPayCosts().hasTapCost()
                     && sa instanceof AbilitySub
                     && (!phase.getNextTurn().equals(ai)
-                    || phase.getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY))) {
+                    || phase.getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS))) {
                 boolean combatants = false;
                 for (Card c : hList) {
                     if (!c.equals(source) && c.isUntapped()) {

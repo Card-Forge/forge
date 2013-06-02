@@ -65,7 +65,7 @@ public class DamagePreventAi extends SpellAbilityAi {
                 }
             } else {
                 PhaseHandler handler = game.getPhaseHandler();
-                if (handler.is(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
+                if (handler.is(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
                     boolean flag = false;
                     for (final Object o : objects) {
                         if (o instanceof Card) {
@@ -119,7 +119,7 @@ public class DamagePreventAi extends SpellAbilityAi {
             }
 
         } // Protect combatants
-        else if (game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
+        else if (game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
             if (sa.canTarget(ai) && ComputerUtilCombat.wouldLoseLife(ai, game.getCombat())
                     && (ComputerUtilCombat.lifeInDanger(ai, game.getCombat()) || sa.isAbility())
                     && game.getPhaseHandler().isPlayerTurn(ai.getOpponent())) {
@@ -198,7 +198,7 @@ public class DamagePreventAi extends SpellAbilityAi {
         if (compTargetables.size() > 0) {
             final List<Card> combatants = CardLists.filter(compTargetables, CardPredicates.Presets.CREATURES);
             CardLists.sortByEvaluateCreature(combatants);
-            if (game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
+            if (game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
                 for (final Card c : combatants) {
                     if (ComputerUtilCombat.combatantWouldBeDestroyed(ai, c)) {
                         tgt.addTarget(c);

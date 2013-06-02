@@ -264,17 +264,30 @@ public class PhaseHandler implements java.io.Serializable {
                     break;
     
                 case COMBAT_DECLARE_ATTACKERS:
-                    break;
-    
-                case COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY:
+                    game.getStack().freezeStack();
+                    
+                    playerTurn.getController().declareAttackers();
+
                     PhaseUtil.handleDeclareAttackers(game);
+                    
+                    this.bCombat = !game.getCombat().getAttackers().isEmpty();
+                    game.getStack().unfreezeStack();
+                    this.nCombatsThisTurn++;
+                    
                     break;
                     
                 case COMBAT_DECLARE_BLOCKERS:
                     game.getCombat().verifyCreaturesInPlay();
-                    break;
-    
-                case COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY:
+                    game.getStack().freezeStack();
+                    
+                    Player p = playerTurn;
+                    do {
+                        p = game.getNextPlayerAfter(p);
+                        if ( game.getCombat().isPlayerAttacked(p) )
+                            p.getController().declareBlockers(); 
+                    } while(p != playerTurn);
+
+                    game.getStack().unfreezeStack();
                     PhaseUtil.handleDeclareBlockers(game);
                     break;
     
@@ -402,17 +415,7 @@ public class PhaseHandler implements java.io.Serializable {
             case UNTAP:
                 this.nCombatsThisTurn = 0;
                 break;
-    
-            case COMBAT_DECLARE_ATTACKERS:
-                this.bCombat = !game.getCombat().getAttackers().isEmpty();
-                game.getStack().unfreezeStack();
-                this.nCombatsThisTurn++;
-                break;
-    
-            case COMBAT_DECLARE_BLOCKERS:
-                game.getStack().unfreezeStack();
-                break;
-    
+
             case COMBAT_END:
                 game.getCombat().reset(playerTurn);
                 this.getPlayerTurn().resetAttackedThisCombat();
@@ -445,9 +448,7 @@ public class PhaseHandler implements java.io.Serializable {
             case COMBAT_DECLARE_ATTACKERS:
                 return playerTurn.isSkippingCombat();
 
-            case COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY:
             case COMBAT_DECLARE_BLOCKERS:
-            case COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY:
             case COMBAT_FIRST_STRIKE_DAMAGE:
             case COMBAT_DAMAGE:
                 return !this.inCombat();
@@ -684,20 +685,13 @@ public class PhaseHandler implements java.io.Serializable {
         
         while (!game.isGameOver()) { // loop only while is playing
     
-            boolean givePriority = givePriorityToPlayer ;
-            if ( phase == PhaseType.COMBAT_DECLARE_BLOCKERS)
-                givePriority = game.getCombat().isPlayerAttacked(pPlayerPriority);
-
-            if ( phase == PhaseType.COMBAT_DECLARE_ATTACKERS && playerTurn != pPlayerPriority )
-                givePriority = false;
-            
             if( DEBUG_PHASES ) {
                 System.out.println("\t\tStack: " + game.getStack());
-                System.out.print(FThreads.prependThreadId(debugPrintState(givePriority)));
+                System.out.print(FThreads.prependThreadId(debugPrintState(givePriorityToPlayer)));
             }
 
             
-            if( givePriority ) {
+            if( givePriorityToPlayer ) {
                 if( DEBUG_PHASES )
                     sw.start();
                 
@@ -747,13 +741,6 @@ public class PhaseHandler implements java.io.Serializable {
                 game.fireEvent(new GameEventGameRestarted(playerTurn));
                 return;
             }
-            
-            
-            // Time to handle priority to next player.
-            if ( phase == PhaseType.COMBAT_DECLARE_ATTACKERS || phase == PhaseType.COMBAT_DECLARE_BLOCKERS)
-                game.getStack().freezeStack();
-            
-
         }
     }
     

@@ -172,7 +172,7 @@ public class ProtectAi extends SpellAbilityAi {
 
     private boolean protectTgtAI(final Player ai, final SpellAbility sa, final boolean mandatory) {
         final Game game = ai.getGame();
-        if (!mandatory && game.getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
+        if (!mandatory && game.getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
             return false;
         }
 

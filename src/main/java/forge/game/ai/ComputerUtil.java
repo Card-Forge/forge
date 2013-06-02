@@ -1017,7 +1017,7 @@ public class ComputerUtil {
 
         return (sa.getSourceCard().isCreature()
                 && sa.getPayCosts().hasTapCost()
-                && (ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)
+                && (ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS)
                  || !ph.getNextTurn().equals(sa.getActivatingPlayer())));
     }
     
