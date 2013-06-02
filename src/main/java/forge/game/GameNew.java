@@ -244,14 +244,14 @@ public class GameNew {
             putCardsOnBattlefield(player, psc.getCardsOnBattlefield(player));
             initVariantsZones(player, psc);
 
-            boolean hasSideboard = psc.getOriginalDeck().has(DeckSection.Sideboard);
-            if (canSideBoard && hasSideboard) {
+            if (canSideBoard) {
                 Deck sideboarded = player.getController().sideboard(psc.getCurrentDeck(), gameType);
                 psc.setCurrentDeck(sideboarded);
             } else { 
                 psc.restoreOriginalDeck();
             }
             Deck myDeck = psc.getCurrentDeck();
+            boolean hasSideboard = myDeck.has(DeckSection.Sideboard);
 
             Set<CardPrinted> myRemovedAnteCards = useAnte ? null : getRemovedAnteCards(myDeck);
             Random generator = MyRandom.getRandom();
