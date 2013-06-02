@@ -1,6 +1,7 @@
 package forge;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map.Entry;
 
@@ -8,6 +9,8 @@ import com.google.common.eventbus.Subscribe;
 
 import forge.card.spellability.TargetChoices;
 import forge.game.GameOutcome;
+import forge.game.event.GameEventAttackersDeclared;
+import forge.game.event.GameEventBlockersDeclared;
 import forge.game.event.GameEventCardDamaged;
 import forge.game.event.GameEventCardDamaged.DamageType;
 import forge.game.event.GameEventLandPlayed;
@@ -21,11 +24,11 @@ import forge.game.event.GameEventGameOutcome;
 import forge.game.event.GameEvent;
 import forge.game.event.GameEventTurnPhase;
 import forge.game.event.GameEventPlayerControl;
-import forge.game.phase.Combat;
 import forge.game.player.LobbyPlayer;
 import forge.game.player.Player;
 import forge.game.player.PlayerStatistics;
 import forge.util.Lang;
+import forge.util.maps.MapOfLists;
 
 public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> { 
     private final GameLog log;
@@ -168,40 +171,42 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
         return new GameLogEntry(GameLogEntryType.DAMAGE, message);
     }
     
-    
-    static GameLogEntry describeAttack(final Combat combat) {
+    @Override
+    public GameLogEntry visit(final GameEventAttackersDeclared ev) {
         final StringBuilder sb = new StringBuilder();
 
         // Loop through Defenders
         // Append Defending Player/Planeswalker
 
         // Not a big fan of the triple nested loop here
-        for (GameEntity defender : combat.getDefenders()) {
-            List<Card> attackers = combat.getAttackersOf(defender);
+        for (Entry<GameEntity, Collection<Card>> kv : ev.attackersMap.entrySet()) {
+            Collection<Card> attackers = kv.getValue();
             if (attackers == null || attackers.isEmpty()) {
                 continue;
             }
             if ( sb.length() > 0 ) sb.append("\n");
-
-            sb.append(combat.getAttackingPlayer()).append(" declared ").append(Lang.joinHomogenous(attackers));
-            sb.append(" to attack ").append(defender.toString()).append(".");
+            sb.append(ev.player).append(" assigned ").append(Lang.joinHomogenous(attackers));
+            sb.append(" to attack ").append(kv.getKey().toString()).append(".");
         }
+        if ( sb.length() == 0 ) 
+            sb.append(ev.player).append(" didn't attack this turn.");
 
         return new GameLogEntry(GameLogEntryType.COMBAT, sb.toString());
     }
 
 
-    static GameLogEntry describeBlock(final Combat combat) {
+    @Override
+    public GameLogEntry visit(final GameEventBlockersDeclared ev) {
         final StringBuilder sb = new StringBuilder();
 
         // Loop through Defenders
         // Append Defending Player/Planeswalker
         
-        List<Card> blockers = null;
-        
+        Collection<Card> blockers = null;
 
-        for (GameEntity defender : combat.getDefenders()) {
-            List<Card> attackers = combat.getAttackersOf(defender);
+        for (Entry<GameEntity, MapOfLists<Card, Card>> kv : ev.blockers.entrySet()) {
+            GameEntity defender = kv.getKey();
+            MapOfLists<Card, Card> attackers = kv.getValue();
             if (attackers == null || attackers.isEmpty()) {
                 continue;
             }
@@ -209,17 +214,17 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
 
             String controllerName = defender instanceof Card ? ((Card)defender).getController().getName() : defender.getName();
             boolean firstAttacker = true;
-            for (final Card attacker : attackers) {
+            for (final Entry<Card, Collection<Card>> att : attackers.entrySet()) {
                 if ( !firstAttacker ) sb.append("\n");
                 
-                blockers = combat.getBlockers(attacker);
+                blockers = att.getValue();
                 if ( blockers.isEmpty() ) {
                     sb.append(controllerName).append(" didn't block ");
                 } else {
                     sb.append(controllerName).append(" assigned ").append(Lang.joinHomogenous(blockers)).append(" to block ");
                 }
                 
-                sb.append(attacker).append(".");
+                sb.append(att.getKey()).append(".");
                 firstAttacker = false;
             }
         }

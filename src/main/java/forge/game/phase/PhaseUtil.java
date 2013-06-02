@@ -18,7 +18,6 @@
 package forge.game.phase;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import com.google.common.base.Predicate;
@@ -28,7 +27,6 @@ import forge.CardLists;
 import forge.card.cost.Cost;
 import forge.card.mana.ManaCost;
 import forge.card.staticability.StaticAbility;
-import forge.card.trigger.TriggerType;
 import forge.game.Game;
 import forge.game.player.Player;
 import forge.game.player.PlayerController.ManaPaymentPurpose;
@@ -77,7 +75,6 @@ public class PhaseUtil {
      */
     public static void handleDeclareBlockers(Game game) {
         final Combat combat = game.getCombat();
-        combat.verifyCreaturesInPlay();
 
         // Handles removing cards like Mogg Flunkies from combat if group block
         // didn't occur
@@ -85,21 +82,7 @@ public class PhaseUtil {
         for (Card blocker : filterList) {
             final List<Card> attackers = new ArrayList<Card>(combat.getAttackersBlockedBy(blocker));
             for (Card attacker : attackers) {
-                Cost blockCost = new Cost(ManaCost.ZERO, true);
-                // Sort abilities to apply them in proper order
-                for (Card card : game.getCardsIn(ZoneType.Battlefield)) {
-                    final ArrayList<StaticAbility> staticAbilities = card.getStaticAbilities();
-                    for (final StaticAbility stAb : staticAbilities) {
-                        Cost c1 = stAb.getBlockCost(blocker, attacker);
-                        if ( c1 != null )
-                            blockCost.add(c1);
-                    }
-                }
-                
-                boolean hasPaid = blockCost.getTotalMana().isZero() && blockCost.isOnlyManaCost(); // true if needless to pay
-                if (!hasPaid) { 
-                    hasPaid = blocker.getController().getController().payManaOptional(blocker, blockCost, "Pay cost to declare " + blocker + " a blocker", ManaPaymentPurpose.DeclareBlocker);
-                }
+                boolean hasPaid = payRequiredBlockCosts(game, blocker, attacker);
 
                 if ( !hasPaid ) {
                     combat.removeBlockAssignment(attacker, blocker);
@@ -114,12 +97,9 @@ public class PhaseUtil {
             }
         }
 
-        game.getStack().freezeStack();
+        combat.setUnblockedAttackers();
 
-        combat.setUnblocked();
-
-        List<Card> list = new ArrayList<Card>();
-        list.addAll(combat.getAllBlockers());
+        List<Card> list = combat.getAllBlockers();
 
         list = CardLists.filter(list, new Predicate<Card>() {
             @Override
@@ -128,16 +108,30 @@ public class PhaseUtil {
             }
         });
 
-        final List<Card> attList = combat.getAttackers();
-
         CombatUtil.checkDeclareBlockers(game, list);
 
-        for (final Card a : attList) {
+        for (final Card a : combat.getAttackers()) {
             CombatUtil.checkBlockedAttackers(game, a, combat.getBlockers(a));
         }
+    }
 
-        game.getStack().unfreezeStack();
 
-        game.getGameLog().addCombatBlockers(game.getCombat());
+    private static boolean payRequiredBlockCosts(Game game, Card blocker, Card attacker) {
+        Cost blockCost = new Cost(ManaCost.ZERO, true);
+        // Sort abilities to apply them in proper order
+        for (Card card : game.getCardsIn(ZoneType.Battlefield)) {
+            final ArrayList<StaticAbility> staticAbilities = card.getStaticAbilities();
+            for (final StaticAbility stAb : staticAbilities) {
+                Cost c1 = stAb.getBlockCost(blocker, attacker);
+                if ( c1 != null )
+                    blockCost.add(c1);
+            }
+        }
+        
+        boolean hasPaid = blockCost.getTotalMana().isZero() && blockCost.isOnlyManaCost(); // true if needless to pay
+        if (!hasPaid) { 
+            hasPaid = blocker.getController().getController().payManaOptional(blocker, blockCost, "Pay cost to declare " + blocker + " a blocker", ManaPaymentPurpose.DeclareBlocker);
+        }
+        return hasPaid;
     }
 }

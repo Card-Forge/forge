@@ -1405,4 +1405,16 @@ public class CombatUtil {
         }
     }
 
+    public static void checkAttackOrBlockAlone(Combat combat) {
+        // Handles removing cards like Mogg Flunkies from combat if group attack
+        // didn't occur
+        for (Card c1 : combat.getAttackers()) {
+            if (c1.hasKeyword("CARDNAME can't attack or block alone.") && c1.isAttacking()) {
+                if (combat.getAttackers().size() < 2) {
+                    combat.removeFromCombat(c1);
+                }
+            }
+        }
+    }
+
 } // end class CombatUtil

@@ -565,7 +565,7 @@ public class Combat {
      * verifyCreaturesInPlay.
      * </p>
      */
-    public final void verifyCreaturesInPlay() {
+    public final void removeAbsentCombatants() {
         final List<Card> all = new ArrayList<Card>();
         all.addAll(this.getAttackers());
         all.addAll(this.getAllBlockers());
@@ -582,7 +582,7 @@ public class Combat {
      * setUnblocked.
      * </p>
      */
-    public final void setUnblocked() {
+    public final void setUnblockedAttackers() {
         final List<Card> attacking = this.getAttackers();
 
         for (final Card attacker : attacking) {

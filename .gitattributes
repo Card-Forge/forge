@@ -14234,7 +14234,9 @@ src/main/java/forge/game/ai/ComputerUtilCost.java -text
 src/main/java/forge/game/ai/ComputerUtilMana.java -text
 src/main/java/forge/game/event/GameEvent.java -text
 src/main/java/forge/game/event/GameEventAnteCardsSelected.java -text
+src/main/java/forge/game/event/GameEventAttackersDeclared.java -text
 src/main/java/forge/game/event/GameEventBlockerAssigned.java -text
+src/main/java/forge/game/event/GameEventBlockersDeclared.java -text
 src/main/java/forge/game/event/GameEventCardDamaged.java -text
 src/main/java/forge/game/event/GameEventCardDestroyed.java -text
 src/main/java/forge/game/event/GameEventCardDiscarded.java -text

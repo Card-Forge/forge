@@ -1,5 +1,6 @@
 package forge.util;
 
+import java.util.Collection;
 import java.util.List;
 
 import com.google.common.base.Function;
@@ -27,8 +28,8 @@ public class Lang {
         }
     }
     
-    public static <T> String joinHomogenous(List<T> objects) { return joinHomogenous(objects, null); }
-    public static <T> String joinHomogenous(List<T> objects, Function<T, String> accessor) {
+    public static <T> String joinHomogenous(Collection<T> objects) { return joinHomogenous(objects, null); }
+    public static <T> String joinHomogenous(Collection<T> objects, Function<T, String> accessor) {
         int remaining = objects.size();
         StringBuilder sb = new StringBuilder();
         for(T obj : objects) {

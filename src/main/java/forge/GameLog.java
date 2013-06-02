@@ -24,7 +24,6 @@ import java.util.Observable;
 
 import org.apache.commons.lang3.StringUtils;
 import forge.game.event.IGameEventVisitor;
-import forge.game.phase.Combat;
 
 
 /**
@@ -104,15 +103,6 @@ public class GameLog extends Observable {
         }
         return result;
     }
-
-    public void addCombatAttackers(Combat combat) {
-        this.add(GameLogFormatter.describeAttack(combat)); 
-    }
-    public void addCombatBlockers(Combat combat) {
-        this.add(GameLogFormatter.describeBlock(combat)); 
-    }
-    // Special methods
-
 
     public IGameEventVisitor<?> getEventVisitor() {
         return formatter;
