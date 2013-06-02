@@ -8,7 +8,6 @@ import java.util.Map;
 
 import javax.swing.JOptionPane;
 
-import org.apache.commons.lang.math.IntRange;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
@@ -43,7 +42,6 @@ import forge.gui.input.InputSelectCardsFromList;
 import forge.gui.input.InputSynchronized;
 import forge.gui.match.CMatchUI;
 import forge.item.CardPrinted;
-import forge.properties.ForgePreferences.FPref;
 import forge.util.TextUtil;
 
 
@@ -123,38 +121,21 @@ public class PlayerControllerHuman extends PlayerController {
         CardPool sideboard = deck.get(DeckSection.Sideboard);
         CardPool main = deck.get(DeckSection.Main);
 
-        boolean conform = Singletons.getModel().getPreferences().getPrefBoolean(FPref.ENFORCE_DECK_LEGALITY);
-        int mainSize = main.countAll();
-        int sbSize = sideboard.countAll();
-        int combinedDeckSize = mainSize + sbSize;
-
-        int deckMinSize = Math.min(mainSize, gameType.getDecksFormat().getMainRange().getMinimumInteger());
-        IntRange sbRange = gameType.getDecksFormat().getSideRange();
-        // Limited doesn't have a sideboard max, so let the Main min take care of things.
-        int sbMax = sbRange == null ? combinedDeckSize : sbRange.getMaximumInteger();
-
+        int deckMinSize = Math.min(main.countAll(), gameType.getDecksFormat().getMainRange().getMinimumInteger());
+    
         CardPool newSb = new CardPool();
         List<CardPrinted> newMain = null;
         
-        if (sbSize == 0 && mainSize == deckMinSize) {
-            // Skip sideboard loop if there are no sideboarding opportunities
-            newMain = main.toFlatList();
-        } else {
-            do {
-                if (newMain != null) {
-                    if (newMain.size() < deckMinSize) {
-                        String errMsg = String.format("Too few cards in your main deck (minimum %d), please make modifications to your deck again.", deckMinSize);
-                        JOptionPane.showMessageDialog(null, errMsg, "Invalid deck", JOptionPane.ERROR_MESSAGE);
-                    } else {
-                        String errMsg = String.format("Too many cards in your sideboard (maximum %d), please make modifications to your deck again.", sbMax);
-                        JOptionPane.showMessageDialog(null, errMsg, "Invalid deck", JOptionPane.ERROR_MESSAGE);
-                    }
-                }
-                // Sideboard rules have changed for M14, just need to consider min maindeck and max sideboard sizes
-                // No longer need 1:1 sideboarding in non-limited formats
-                newMain = GuiChoose.sideboard(sideboard.toFlatList(), main.toFlatList());
-            } while (conform && (newMain.size() < deckMinSize || combinedDeckSize - newMain.size() > sbMax));
+        while (newMain == null || newMain.size() < deckMinSize) {
+            if (newMain != null) {
+                String errMsg = String.format("Too few cards in your main deck (minimum %d), please make modifications to your deck again.", deckMinSize);
+                JOptionPane.showMessageDialog(null, errMsg, "Invalid deck", JOptionPane.ERROR_MESSAGE);
+            }
+            
+            boolean isLimited = (gameType == GameType.Draft || gameType == GameType.Sealed);
+            newMain = GuiChoose.sideboard(sideboard.toFlatList(), main.toFlatList(), isLimited);
         }
+    
         newSb.clear();
         newSb.addAll(main);
         newSb.addAll(sideboard);
