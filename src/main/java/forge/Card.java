@@ -5429,9 +5429,15 @@ public class Card extends GameEntity implements Comparable<Card> {
             if (!source.equals(this.enchanting)) {
                 return false;
             }
-        } else if (property.startsWith("CanEnchantSource")) {
-            if (!source.canBeEnchantedBy(this)) {
-                return false;
+        } else if (property.startsWith("CanEnchant")) {
+            final String restriction = property.substring(10);
+            if (restriction.equals("Remembered")) {
+                for (final Object rem : source.getRemembered()) {
+                    if (!(rem instanceof Card) || !((Card) rem).canBeEnchantedBy(this)) 
+                        return false;
+                }
+            } else if (restriction.equals("Source")) {
+                if (!source.canBeEnchantedBy(this)) return false;
             }
         } else if (property.startsWith("CanBeEnchantedBy")) {
             if (property.substring(16).equals("Targeted")) {

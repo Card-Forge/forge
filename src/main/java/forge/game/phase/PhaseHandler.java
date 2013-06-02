@@ -305,9 +305,9 @@ public class PhaseHandler implements java.io.Serializable {
                                 CombatUtil.executeExaltedAbility(game, attacker, exaltedMagnitude, card);
                             }
                             
-                            if ("Sovereigns of Lost Alara".equals(card.getName())) {
-                                CombatUtil.souverignsOfAlara2ndAbility(game, attacker);
-                            }
+//                            if ("Sovereigns of Lost Alara".equals(card.getName())) {
+//                                CombatUtil.souverignsOfAlara2ndAbility(game, attacker);
+//                            }
                         }
                     }
 
