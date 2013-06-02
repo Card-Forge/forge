@@ -325,4 +325,10 @@ public class PlayerControllerAi extends PlayerController {
         }
         return false;
     }
+
+    @Override
+    public List<SpellAbility> chooseSaToActivateFromOpeningHand(List<SpellAbility> usableFromOpeningHand) {
+        // AI would play everything. But limits to one copy of (Leyline of Singularity) and (Gemstone Caverns)
+        return brains.chooseSaToActivateFromOpeningHand(usableFromOpeningHand);
+    }
 }

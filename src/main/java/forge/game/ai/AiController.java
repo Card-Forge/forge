@@ -904,5 +904,45 @@ public class AiController {
         }
         return toExile;
     }
+    
+    public List<SpellAbility> chooseSaToActivateFromOpeningHand(List<SpellAbility> usableFromOpeningHand) {
+        // AI would play everything. But limits to one copy of (Leyline of Singularity) and (Gemstone Caverns)
+        
+        List<SpellAbility> result = new ArrayList<SpellAbility>();
+        for(SpellAbility sa : usableFromOpeningHand) {
+            // Is there a better way for the AI to decide this?
+            if (sa.doTrigger(false, player)) {
+                result.add(sa);
+            }
+        }
+        
+        boolean hasLeyline1 = false;
+        SpellAbility saGemstones = null;
+        
+        for(int i = 0; i < result.size(); i++) {
+            SpellAbility sa = result.get(i);
+            
+            String srcName = sa.getSourceCard().getName();
+            if("Gemstone Caverns".equals(srcName)) {
+                if(saGemstones == null)
+                    saGemstones = sa;
+                else
+                    result.remove(i--);
+            } else if ("Leyline of Singularity".equals(srcName)) {
+                if(!hasLeyline1)
+                    hasLeyline1 = true;
+                else
+                    result.remove(i--);
+            }
+        }
+        
+        // Play them last
+        if( saGemstones != null ) {
+            result.remove(saGemstones);
+            result.add(saGemstones);
+        }
+        
+        return result;
+    }
 }
 

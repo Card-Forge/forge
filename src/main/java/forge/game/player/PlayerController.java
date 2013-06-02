@@ -129,6 +129,7 @@ public abstract class PlayerController {
     public abstract List<Card> chooseCardsToDelve(int colorLessAmount, List<Card> grave);
     public abstract List<Card> chooseCardsToRevealFromHand(int min, int max, List<Card> valid);
     public abstract List<Card> chooseCardsToDiscardUnlessType(int min, List<Card> hand, String param, SpellAbility sa);
+    public abstract List<SpellAbility> chooseSaToActivateFromOpeningHand(List<SpellAbility> usableFromOpeningHand);
     public abstract Mana chooseManaFromPool(List<Mana> manaChoices);
     
     public abstract String chooseSomeType(String kindOfType, String aiLogic, List<String> validTypes, List<String> invalidTypes);

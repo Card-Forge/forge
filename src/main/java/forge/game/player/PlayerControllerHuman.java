@@ -539,4 +539,27 @@ public class PlayerControllerHuman extends PlayerController {
     public boolean payManaOptional(Card c, Cost attackCost, String prompt, ManaPaymentPurpose purpose) {
         return HumanPlay.payCostDuringAbilityResolve(player, c, attackCost, null);
     }
+
+
+    /* (non-Javadoc)
+     * @see forge.game.player.PlayerController#chooseSaToActivateFromOpeningHand(java.util.List)
+     */
+    @Override
+    public List<SpellAbility> chooseSaToActivateFromOpeningHand(List<SpellAbility> usableFromOpeningHand) {
+        List<Card> srcCards = new ArrayList<Card>();
+        for(SpellAbility sa : usableFromOpeningHand) {
+            srcCards.add(sa.getSourceCard());
+        }
+        List<Card> chosen = GuiChoose.order("Choose cards to activate from opening hand", "Activate first", -1, srcCards, null, null);
+        List<SpellAbility> result = new ArrayList<SpellAbility>(); 
+        for(Card c : chosen) {
+            for(SpellAbility sa : usableFromOpeningHand) {
+                if ( sa.getSourceCard() == c ) {
+                    result.add(sa);
+                    break;
+                }
+            }
+        }
+        return result;
+    }
 }

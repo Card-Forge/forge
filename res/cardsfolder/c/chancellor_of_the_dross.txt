@@ -3,10 +3,11 @@ ManaCost:4 B B B
 Types:Creature Vampire
 Text:You may reveal this card from your opening hand. If you do, at the beginning of the first upkeep, each opponent loses 3 life, then you gain life equal to the life lost this way.
 PT:6/6
-K:MayEffectFromOpeningHand:DrainOnUpkeep
+K:MayEffectFromOpeningHand:RevealCard
 K:Flying
 K:Lifelink
-SVar:DrainOnUpkeep:AB$ Effect | Cost$ 0 | Triggers$ TrigDrain | SVars$ DrainLife,GainLife,RemoveMe,AFLifeLost | Name$ Chancellor of the Dross effect
+SVar:RevealCard:AB$ Reveal | Cost$ 0 | Defined$ Self | SubAbility$ DrainOnUpkeep | SpellDescription$ You may reveal this card from your opening hand. If you do, at the beginning of the first upkeep, each opponent loses 3 life, then you gain life equal to the life lost this way.
+SVar:DrainOnUpkeep:DB$ Effect | Cost$ 0 | Triggers$ TrigDrain | SVars$ DrainLife,GainLife,RemoveMe,AFLifeLost | Name$ Chancellor of the Dross effect
 SVar:TrigDrain:Mode$ Phase | Phase$ Upkeep | Execute$ DrainLife | TriggerDescription$ At the beginning of the first upkeep, each opponent loses 3 life, then you gain life equal to the life lost this way.
 SVar:DrainLife:AB$ LoseLife | Cost$ 0 | Defined$ Player.Opponent | LifeAmount$ 3 | SubAbility$ GainLife
 SVar:GainLife:DB$ GainLife | Defined$ You | LifeAmount$ AFLifeLost | SubAbility$ RemoveMe

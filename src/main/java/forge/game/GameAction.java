@@ -40,7 +40,6 @@ import forge.CounterType;
 import forge.FThreads;
 import forge.GameEntity;
 import forge.GameLogEntryType;
-import forge.Singletons;
 import forge.card.CardType;
 import forge.card.TriggerReplacementBase;
 import forge.card.ability.AbilityFactory;
@@ -59,7 +58,6 @@ import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerType;
 import forge.card.trigger.ZCTrigger;
 import forge.game.ai.ComputerUtil;
-import forge.game.ai.ComputerUtilCard;
 import forge.game.event.GameEventCardDestroyed;
 import forge.game.event.GameEventCardRegenerated;
 import forge.game.event.GameEventCardSacrificed;
@@ -75,8 +73,6 @@ import forge.game.zone.PlayerZoneBattlefield;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
-import forge.gui.GuiDialog;
-import forge.gui.input.InputSelectCardsFromList;
 import forge.util.Aggregates;
 import forge.util.maps.CollectionSuppliers;
 import forge.util.maps.HashMapOfLists;
@@ -1420,103 +1416,6 @@ public class GameAction {
         }
     }
 
-    private void handleLeylinesAndChancellors(final Player first) {
-        for (Player p : game.getPlayers()) {
-            final List<Card> openingHand = new ArrayList<Card>(p.getCardsIn(ZoneType.Hand));
-    
-            for (final Card c : openingHand) {
-                // check c.isInZone(ZoneType.Hand) because Gemstone Caverns would exile a card
-                if (!c.isInZone(ZoneType.Hand)) {
-                    continue;
-                }
-                if (p.isHuman()) {
-                    for (String kw : c.getKeyword()) {
-                        if (kw.startsWith("MayEffectFromOpeningHand")) {
-                            final String effName = kw.split(":")[1];
-    
-                            final SpellAbility effect = AbilityFactory.getAbility(c.getSVar(effName), c);
-                            effect.setActivatingPlayer(p);
-                            if (GuiDialog.confirm(c, "Use " + c +"'s  ability?")) {
-                                // If we ever let the AI memorize cards in the players
-                                // hand, this would be a place to do so.
-                                HumanPlay.playSpellAbilityNoStack(p, effect);
-                            }
-                        }
-                    }
-                    if (c.getName().startsWith("Leyline of")) {
-                        if (GuiDialog.confirm(c, "Use " + c + "'s ability?")) {
-                            game.getAction().moveToPlay(c);
-                        }
-                    }
-                    if (c.getName().equals("Gemstone Caverns") && !p.equals(first) 
-                            && GuiDialog.confirm(c, "Use " + c + "'s ability?")) {
-                        c.addCounter(CounterType.LUCK, 1, true);
-                        game.getAction().moveToPlay(c);
-                        List<Card> remainingHand = new ArrayList<Card>(p.getCardsIn(ZoneType.Hand));
-                        InputSelectCardsFromList inp = new InputSelectCardsFromList(1, 1, remainingHand);
-                        inp.setCancelAllowed(false);
-                        inp.setMessage("Choose a card in you hand to exile");
-                        Singletons.getControl().getInputQueue().setInputAndWait(inp);
-                        Card exiled = inp.getSelected().get(0);
-                        game.getAction().exile(exiled);
-                    }
-                } else { // Computer Leylines & Chancellors
-                    if (!c.getName().startsWith("Leyline of") && !c.getName().equals("Gemstone Caverns")) {
-                        for (String kw : c.getKeyword()) {
-                            if (kw.startsWith("MayEffectFromOpeningHand")) {
-                                final String effName = kw.split(":")[1];
-    
-                                final SpellAbility effect = AbilityFactory.getAbility(c.getSVar(effName), c);
-                                effect.setActivatingPlayer(p);
-                                // Is there a better way for the AI to decide this?
-                                if (effect.doTrigger(false, p)) {
-                                    GuiDialog.message("Computer reveals " + c.getName() + "(" + c.getUniqueNumber() + ").");
-                                    ComputerUtil.playNoStack(p, effect, game);
-                                }
-                            }
-                        }
-                    }
-                    if (c.getName().startsWith("Leyline of")
-                            && !(c.getName().startsWith("Leyline of Singularity")
-                            && (Iterables.any(game.getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Leyline of Singularity"))))) {
-                        game.getAction().moveToPlay(c);
-                        //ga.checkStateEffects();
-                    }
-                    if (c.getName().equals("Gemstone Caverns") && !p.equals(first)
-                            && !Iterables.any(game.getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Gemstone Caverns"))) {
-                        c.addCounter(CounterType.LUCK, 1, true);
-                        game.getAction().moveToPlay(c);
-                        List<Card> remainingHand = new ArrayList<Card>(p.getCardsIn(ZoneType.Hand));
-                        Card exiled = ComputerUtilCard.getWorstAI(remainingHand);
-                        game.getAction().exile(exiled);
-                    }
-                }
-            }
-        }
-    }
-    
-    private Player determineFirstTurnPlayer(final GameOutcome lastGameOutcome) {
-        // Only cut/coin toss if it's the first game of the match
-        Player goesFirst = null;
-
-        boolean isFirstGame = lastGameOutcome == null;
-        if (isFirstGame) {
-            game.fireEvent(new GameEventFlipCoin()); // Play the Flip Coin sound
-            goesFirst = Aggregates.random(game.getPlayers());
-        } else {
-            for(Player p : game.getPlayers()) {
-                if(!lastGameOutcome.isWinner(p.getLobbyPlayer())) { 
-                    goesFirst = p;
-                    break;
-                }
-            }
-        }
-
-        boolean willPlay = goesFirst.getController().getWillPlayOnFirstTurn(isFirstGame);
-        goesFirst = willPlay ? goesFirst : goesFirst.getOpponent();
-        return goesFirst;
-    }
-
     public void startGame() {
         Player first = determineFirstTurnPlayer(game.getMatch().getLastGameOutcome());
 
@@ -1540,7 +1439,7 @@ public class GameAction {
                 if(game.getType() == GameType.Planechase)
                     first.initPlane();
     
-                handleLeylinesAndChancellors(first);
+                runOpeningHandActions(first);
                 checkStateEffects();
     
                 // Run Trigger beginning of the game
@@ -1557,6 +1456,28 @@ public class GameAction {
         game.fireEvent(new GameEventGameFinished());
     }
     
+    private Player determineFirstTurnPlayer(final GameOutcome lastGameOutcome) {
+        // Only cut/coin toss if it's the first game of the match
+        Player goesFirst = null;
+    
+        boolean isFirstGame = lastGameOutcome == null;
+        if (isFirstGame) {
+            game.fireEvent(new GameEventFlipCoin()); // Play the Flip Coin sound
+            goesFirst = Aggregates.random(game.getPlayers());
+        } else {
+            for(Player p : game.getPlayers()) {
+                if(!lastGameOutcome.isWinner(p.getLobbyPlayer())) { 
+                    goesFirst = p;
+                    break;
+                }
+            }
+        }
+    
+        boolean willPlay = goesFirst.getController().getWillPlayOnFirstTurn(isFirstGame);
+        goesFirst = willPlay ? goesFirst : goesFirst.getOpponent();
+        return goesFirst;
+    }
+
     private void performMulligans(final Player firstPlayer, final boolean isCommander) {
         List<Player> whoCanMulligan = Lists.newArrayList(game.getPlayers());
         int offset = whoCanMulligan.indexOf(firstPlayer);
@@ -1630,6 +1551,45 @@ public class GameAction {
             }
     }
     
+    private void runOpeningHandActions(final Player first) {
+        Player takesAction = first;
+        do {
+            List<SpellAbility> usableFromOpeningHand = new ArrayList<SpellAbility>();
+    
+            // Select what can be activated from a given hand 
+            for (final Card c : takesAction.getCardsIn(ZoneType.Hand)) {
+                for (String kw : c.getKeyword()) {
+                    if (kw.startsWith("MayEffectFromOpeningHand")) {
+                        String[] split = kw.split(":");
+                        final String effName = split[1];
+                        if ( split.length > 2 && split[2].equalsIgnoreCase("!PlayFirst") && first == takesAction)
+                            continue;
+    
+                        final SpellAbility effect = AbilityFactory.getAbility(c.getSVar(effName), c);
+                        effect.setActivatingPlayer(takesAction);
+    
+                        usableFromOpeningHand.add(effect);
+                    }
+                }
+            }
+    
+            // Players are supposed to return the effects in an order they want those to be resolved (Rule 103.5)
+            usableFromOpeningHand = takesAction.getController().chooseSaToActivateFromOpeningHand(usableFromOpeningHand);
+    
+            for(final SpellAbility sa : usableFromOpeningHand ) {
+                if (!takesAction.getZone(ZoneType.Hand).contains(sa.getSourceCard()))
+                    continue;
+                    
+                if (takesAction.isHuman())
+                    HumanPlay.playSpellAbilityNoStack(takesAction, sa);
+                else
+                    ComputerUtil.playNoStack(takesAction, sa, game);
+            }
+            takesAction = game.getNextPlayerAfter(takesAction);
+        } while( takesAction != first );
+        // state effects are checked only when someone gets priority
+    }
+
     // Invokes given runnable in Game thread pool - used to start game and perform actions from UI (when game-0 waits for input)
     public void invoke(final Runnable proc) {
         if( FThreads.isGameThread() ) {

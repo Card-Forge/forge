@@ -7,5 +7,6 @@ package forge.game.player;
 public enum PlayerActionConfirmMode {
     Random,
     BraidOfFire,
+    FromOpeningHand;
     
 }
