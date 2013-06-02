@@ -6588,6 +6588,7 @@ res/cardsfolder/m/martial_glory.txt -text
 res/cardsfolder/m/martial_law.txt -text
 res/cardsfolder/m/marton_stromgald.txt svneol=native#text/plain
 res/cardsfolder/m/martyr_of_ashes.txt -text svneol=unset#text/plain
+res/cardsfolder/m/martyr_of_bones.txt -text
 res/cardsfolder/m/martyr_of_frost.txt -text
 res/cardsfolder/m/martyr_of_sands.txt -text
 res/cardsfolder/m/martyr_of_spores.txt -text
