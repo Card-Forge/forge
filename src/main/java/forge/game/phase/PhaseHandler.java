@@ -231,10 +231,6 @@ public class PhaseHandler implements java.io.Serializable {
 
             final List<Card> lands = CardLists.filter(playerTurn.getLandsInPlay(), Presets.UNTAPPED);
             playerTurn.setNumPowerSurgeLands(lands.size());
-            
-            // reset players controlling attack or defense
-            playerDeclaresAttackers = null;
-            playerDeclaresBlockers = null;
         }
 
         game.fireEvent(new GameEventTurnPhase(this.getPlayerTurn(), this.getPhase(), phaseType));
