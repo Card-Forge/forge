@@ -1092,25 +1092,6 @@ public class CombatUtil {
 
         } // Witch-Maw Nephilim
 
-        else if (c.getName().equals("Sapling of Colfenor") && !c.getDamageHistory().getCreatureAttackedThisCombat()) {
-            final Player player = c.getController();
-
-            final PlayerZone lib = player.getZone(ZoneType.Library);
-
-            if (lib.size() > 0) {
-                final List<Card> cl = new ArrayList<Card>();
-                cl.add(lib.get(0));
-                GuiChoose.oneOrNone("Top card", cl);
-                final Card top = lib.get(0);
-                if (top.isCreature()) {
-                    player.gainLife(top.getBaseDefense(), c);
-                    player.loseLife(top.getBaseAttack());
-
-                    game.getAction().moveToHand(top);
-                }
-            }
-        } // Sapling of Colfenor
-
         c.getDamageHistory().setCreatureAttackedThisCombat(true);
         c.getController().setAttackedWithCreatureThisTurn(true);
         c.getController().incrementAttackersDeclaredThisTurn();

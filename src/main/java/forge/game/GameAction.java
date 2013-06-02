@@ -1405,8 +1405,12 @@ public class GameAction {
     } // sacrificeDestroy()
 
     public void reveal(List<Card> cards, Player cardOwner) {
+        reveal(cards, cardOwner, true);
+    }
+
+    public void reveal(List<Card> cards, Player cardOwner, boolean dontRevealToOwner) {
         ZoneType zt = cards.isEmpty() ? ZoneType.Hand : game.getZoneOf(cards.get(0)).getZoneType();
-        reveal(cardOwner + " reveals card from " + zt, cards, zt, cardOwner, true);
+        reveal(cardOwner + " reveals card from " + zt, cards, zt, cardOwner, dontRevealToOwner);
     }
     
     public void reveal(String message, List<Card> cards, ZoneType zt, Player cardOwner, boolean dontRevealToOwner) {

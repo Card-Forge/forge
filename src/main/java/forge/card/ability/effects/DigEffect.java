@@ -115,9 +115,7 @@ public class DigEffect extends SpellAbilityEffect {
 
                 boolean hasRevealed = true;
                 if (sa.hasParam("Reveal")) {
-                    game.getAction().reveal(top, p);
-                    // Singletons.getModel().getGameAction().revealToCopmuter(top.toArray());
-                    // - for when it exists
+                    game.getAction().reveal(top, p, false);
                 } else if (sa.hasParam("RevealOptional")) {
                     String question = "Reveal: " + Lang.joinHomogenous(top) +"?";
                     
