@@ -17,11 +17,14 @@
  */
 package forge.game.phase;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Stack;
 import org.apache.commons.lang.time.StopWatch;
+
+import com.google.common.base.Predicate;
 
 import forge.Card;
 import forge.CardLists;
@@ -29,6 +32,9 @@ import forge.FThreads;
 import forge.GameEntity;
 import forge.Singletons;
 import forge.CardPredicates.Presets;
+import forge.card.cost.Cost;
+import forge.card.mana.ManaCost;
+import forge.card.staticability.StaticAbility;
 import forge.card.trigger.TriggerType;
 import forge.game.GameAge;
 import forge.game.Game;
@@ -42,6 +48,7 @@ import forge.game.event.GameEventGameRestarted;
 import forge.game.event.GameEventManaBurn;
 import forge.game.event.GameEventTurnPhase;
 import forge.game.player.Player;
+import forge.game.player.PlayerController.ManaPaymentPurpose;
 import forge.game.zone.ZoneType;
 import forge.gui.framework.SDisplayUtil;
 import forge.gui.match.CMatchUI;
@@ -208,7 +215,57 @@ public class PhaseHandler implements java.io.Serializable {
 
         game.fireEvent(new GameEventTurnPhase(this.getPlayerTurn(), this.getPhase(), phaseType));
         
+        if (this.phase == PhaseType.UNTAP) {
+            // Here's what happens on new turn, regardless of skipped phases
+            game.getCombat().reset(playerTurn);
+            
+            // Tokens starting game in play should suffer from Sum. Sickness
+            final List<Card> list = playerTurn.getCardsIncludePhasingIn(ZoneType.Battlefield);
+            for (final Card c : list) {
+                if (playerTurn.getTurn() > 0 || !c.isStartsGameInPlay()) {
+                    c.setSickness(false);
+                }
+            }
+            playerTurn.incrementTurn();
+
+            game.getAction().resetActivationsPerTurn();
+
+            final List<Card> lands = CardLists.filter(playerTurn.getLandsInPlay(), Presets.UNTAPPED);
+            playerTurn.setNumPowerSurgeLands(lands.size());
+        }
+        
     }
+
+    private boolean isSkippingPhase(PhaseType phase) {
+        switch(phase) {
+            case UNTAP:
+                if (playerTurn.hasKeyword("Skip your next untap step.")) {
+                    playerTurn.removeKeyword("Skip your next untap step.");
+                    return true;
+                }
+                return playerTurn.hasKeyword("Skip the untap step of this turn.") || playerTurn.hasKeyword("Skip your untap step.");
+        
+            case UPKEEP: 
+                return getPlayerTurn().hasKeyword("Skip your upkeep step.");
+    
+            case DRAW: 
+                return getPlayerTurn().isSkippingDraw() || getTurn() == 1 && game.getPlayers().size() == 2;
+    
+            case COMBAT_BEGIN:
+            case COMBAT_DECLARE_ATTACKERS:
+                return playerTurn.isSkippingCombat();
+    
+            case COMBAT_DECLARE_BLOCKERS:
+            case COMBAT_FIRST_STRIKE_DAMAGE:
+            case COMBAT_DAMAGE:
+                return !this.inCombat();
+            
+            default: 
+                return false;
+        }
+        
+    }
+
 
     private final void onPhaseBegin() {
         boolean skipped = false;
@@ -222,33 +279,9 @@ public class PhaseHandler implements java.io.Serializable {
             // Perform turn-based actions 
             switch(this.getPhase()) {
                 case UNTAP:
-                    //SDisplayUtil.showTab(EDocID.REPORT_STACK.getDoc());
                     givePriorityToPlayer = false;
-    
-                    game.getCombat().reset(playerTurn);
-    
-                    // Tokens starting game in play should suffer from Sum. Sickness
-                    final List<Card> list = playerTurn.getCardsIncludePhasingIn(ZoneType.Battlefield);
-                    for (final Card c : list) {
-                        if (playerTurn.getTurn() > 0 || !c.isStartsGameInPlay()) {
-                            c.setSickness(false);
-                        }
-                    }
-                    playerTurn.incrementTurn();
-    
-                    game.getAction().resetActivationsPerTurn();
-    
-                    final List<Card> lands = CardLists.filter(playerTurn.getLandsInPlay(), Presets.UNTAPPED);
-                    playerTurn.setNumPowerSurgeLands(lands.size());
-    
-                    // anything before this point happens regardless of whether the Untap
-                    // phase is skipped
-    
-                    if (!PhaseUtil.isSkipUntap(playerTurn)) {
-                        game.getUntap().executeUntil(playerTurn);
-                        game.getUntap().executeAt();
-                    }
-    
+                    game.getUntap().executeUntil(playerTurn);
+                    game.getUntap().executeAt();
                     break;
     
                 case UPKEEP:
@@ -273,53 +306,7 @@ public class PhaseHandler implements java.io.Serializable {
     
                 case COMBAT_DECLARE_ATTACKERS:
                     game.getStack().freezeStack();
-                    
-                    playerTurn.getController().declareAttackers();
-
-                    game.getCombat().removeAbsentCombatants();
-                    CombatUtil.checkAttackOrBlockAlone(game.getCombat());
-
-                    // TODO move propaganda to happen as the Attacker is Declared
-                    for (final Card c2 : game.getCombat().getAttackers()) {
-                        boolean canAttack = CombatUtil.checkPropagandaEffects(game, c2);
-                        if ( canAttack ) {
-                            if (!c2.hasKeyword("Vigilance")) 
-                                c2.tap();
-                        } else {
-                            game.getCombat().removeFromCombat(c2);
-                        }
-                    }
-
-                    // Prepare and fire event 'attackers declared'
-                    MapOfLists<GameEntity, Card> attackersMap = new HashMapOfLists<GameEntity, Card>(CollectionSuppliers.<Card>arrayLists());
-                    for(GameEntity ge : game.getCombat().getDefenders()) attackersMap.addAll(ge, game.getCombat().getAttackersOf(ge));
-                    game.fireEvent(new GameEventAttackersDeclared(playerTurn, attackersMap));
-
-                    // This Exalted handler should be converted to script
-                    if (game.getCombat().getAttackers().size() == 1) {
-                        final Player attackingPlayer = game.getCombat().getAttackingPlayer();
-                        final Card attacker = game.getCombat().getAttackers().get(0);
-                        for (Card card : attackingPlayer.getCardsIn(ZoneType.Battlefield)) {
-                            int exaltedMagnitude = card.getKeywordAmount("Exalted");
-                            if (exaltedMagnitude > 0) {
-                                CombatUtil.executeExaltedAbility(game, attacker, exaltedMagnitude, card);
-                            }
-                            
-//                            if ("Sovereigns of Lost Alara".equals(card.getName())) {
-//                                CombatUtil.souverignsOfAlara2ndAbility(game, attacker);
-//                            }
-                        }
-                    }
-
-                    // fire trigger
-                    final HashMap<String, Object> runParams = new HashMap<String, Object>();
-                    runParams.put("Attackers", game.getCombat().getAttackers());
-                    runParams.put("AttackingPlayer", game.getCombat().getAttackingPlayer());
-                    game.getTriggerHandler().runTrigger(TriggerType.AttackersDeclared, runParams, false);
-
-                    for (final Card c : game.getCombat().getAttackers()) {
-                        CombatUtil.checkDeclareAttackers(game, c);
-                    }
+                    declateAttackTurnBasedActions();
                     game.getStack().unfreezeStack();
 
                     this.bCombat = !game.getCombat().getAttackers().isEmpty();
@@ -331,26 +318,7 @@ public class PhaseHandler implements java.io.Serializable {
                     game.getCombat().removeAbsentCombatants();
                     game.getStack().freezeStack();
                     
-                    Player p = playerTurn;
-                    do {
-                        p = game.getNextPlayerAfter(p);
-                        if ( game.getCombat().isPlayerAttacked(p) )
-                            p.getController().declareBlockers(); 
-                    } while(p != playerTurn);
-
-                    game.getCombat().removeAbsentCombatants();
-                    PhaseUtil.handleDeclareBlockers(game);
-                    
-                    // map: defender => (many) attacker => (many) blocker  
-                    Map<GameEntity, MapOfLists<Card, Card>> blockers = new HashMap<GameEntity, MapOfLists<Card,Card>>();
-                    for(GameEntity ge : game.getCombat().getDefenders()) {
-                        MapOfLists<Card, Card> protectThisDefender = new HashMapOfLists<Card, Card>(CollectionSuppliers.<Card>arrayLists());
-                        for(Card att : game.getCombat().getAttackersOf(ge)) {
-                            protectThisDefender.addAll(att, game.getCombat().getBlockers(att));
-                        }
-                        blockers.put(ge, protectThisDefender);
-                    }
-                    game.fireEvent(new GameEventBlockersDeclared(blockers));
+                declareBlockersTurnBaseActions();
 
                     game.getStack().unfreezeStack();
                     break;
@@ -500,27 +468,137 @@ public class PhaseHandler implements java.io.Serializable {
 
     }
 
-    private boolean isSkippingPhase(PhaseType phase) {
-        switch(phase) {
-            case UPKEEP: 
-                return getPlayerTurn().hasKeyword("Skip your upkeep step.");
+    private void declateAttackTurnBasedActions() {
+            playerTurn.getController().declareAttackers();
+    
+            game.getCombat().removeAbsentCombatants();
+            CombatUtil.checkAttackOrBlockAlone(game.getCombat());
+    
+            // TODO move propaganda to happen as the Attacker is Declared
+            for (final Card c2 : game.getCombat().getAttackers()) {
+                boolean canAttack = CombatUtil.checkPropagandaEffects(game, c2);
+                if ( canAttack ) {
+                    if (!c2.hasKeyword("Vigilance")) 
+                        c2.tap();
+                } else {
+                    game.getCombat().removeFromCombat(c2);
+                }
+            }
+    
+            // Prepare and fire event 'attackers declared'
+            MapOfLists<GameEntity, Card> attackersMap = new HashMapOfLists<GameEntity, Card>(CollectionSuppliers.<Card>arrayLists());
+            for(GameEntity ge : game.getCombat().getDefenders()) attackersMap.addAll(ge, game.getCombat().getAttackersOf(ge));
+            game.fireEvent(new GameEventAttackersDeclared(playerTurn, attackersMap));
+    
+            // This Exalted handler should be converted to script
+            if (game.getCombat().getAttackers().size() == 1) {
+                final Player attackingPlayer = game.getCombat().getAttackingPlayer();
+                final Card attacker = game.getCombat().getAttackers().get(0);
+                for (Card card : attackingPlayer.getCardsIn(ZoneType.Battlefield)) {
+                    int exaltedMagnitude = card.getKeywordAmount("Exalted");
+                    if (exaltedMagnitude > 0) {
+                        CombatUtil.executeExaltedAbility(game, attacker, exaltedMagnitude, card);
+                    }
+                    
+    //                            if ("Sovereigns of Lost Alara".equals(card.getName())) {
+    //                                CombatUtil.souverignsOfAlara2ndAbility(game, attacker);
+    //                            }
+                }
+            }
+    
+            // fire trigger
+            final HashMap<String, Object> runParams = new HashMap<String, Object>();
+            runParams.put("Attackers", game.getCombat().getAttackers());
+            runParams.put("AttackingPlayer", game.getCombat().getAttackingPlayer());
+            game.getTriggerHandler().runTrigger(TriggerType.AttackersDeclared, runParams, false);
+    
+            for (final Card c : game.getCombat().getAttackers()) {
+                CombatUtil.checkDeclareAttackers(game, c);
+            }
+        }
 
-            case DRAW: 
-                return getPlayerTurn().isSkippingDraw() || getTurn() == 1 && game.getPlayers().size() == 2;
 
-            case COMBAT_BEGIN:
-            case COMBAT_DECLARE_ATTACKERS:
-                return playerTurn.isSkippingCombat();
-
-            case COMBAT_DECLARE_BLOCKERS:
-            case COMBAT_FIRST_STRIKE_DAMAGE:
-            case COMBAT_DAMAGE:
-                return !this.inCombat();
-            
-            default: 
-                return false;
+    private void declareBlockersTurnBaseActions() {
+        final Combat combat = game.getCombat();
+        
+        Player p = playerTurn;
+        do {
+            p = game.getNextPlayerAfter(p);
+            if ( combat.isPlayerAttacked(p) )
+                p.getController().declareBlockers(); 
+        } while(p != playerTurn);
+    
+        combat.removeAbsentCombatants();
+        
+        
+        // Handles removing cards like Mogg Flunkies from combat if group block
+        // didn't occur
+        final List<Card> filterList = combat.getAllBlockers();
+        for (Card blocker : filterList) {
+            final List<Card> attackers = new ArrayList<Card>(combat.getAttackersBlockedBy(blocker));
+            for (Card attacker : attackers) {
+                boolean hasPaid = payRequiredBlockCosts(game, blocker, attacker);
+        
+                if ( !hasPaid ) {
+                    combat.removeBlockAssignment(attacker, blocker);
+                }
+            }
+        }
+        for (Card c : filterList) {
+            if (c.hasKeyword("CARDNAME can't attack or block alone.") && c.isBlocking()) {
+                if (combat.getAllBlockers().size() < 2) {
+                    combat.undoBlockingAssignment(c);
+                }
+            }
         }
         
+        combat.setUnblockedAttackers();
+        
+        List<Card> list = combat.getAllBlockers();
+        
+        list = CardLists.filter(list, new Predicate<Card>() {
+            @Override
+            public boolean apply(final Card c) {
+                return !c.getDamageHistory().getCreatureBlockedThisCombat();
+            }
+        });
+        
+        CombatUtil.checkDeclareBlockers(game, list);
+        
+        for (final Card a : combat.getAttackers()) {
+            CombatUtil.checkBlockedAttackers(game, a, combat.getBlockers(a));
+        }
+        
+        // map: defender => (many) attacker => (many) blocker  
+        Map<GameEntity, MapOfLists<Card, Card>> blockers = new HashMap<GameEntity, MapOfLists<Card,Card>>();
+        for(GameEntity ge : game.getCombat().getDefenders()) {
+            MapOfLists<Card, Card> protectThisDefender = new HashMapOfLists<Card, Card>(CollectionSuppliers.<Card>arrayLists());
+            for(Card att : game.getCombat().getAttackersOf(ge)) {
+                protectThisDefender.addAll(att, game.getCombat().getBlockers(att));
+            }
+            blockers.put(ge, protectThisDefender);
+        }
+        game.fireEvent(new GameEventBlockersDeclared(blockers));
+    }
+
+
+    private static boolean payRequiredBlockCosts(Game game, Card blocker, Card attacker) {
+        Cost blockCost = new Cost(ManaCost.ZERO, true);
+        // Sort abilities to apply them in proper order
+        for (Card card : game.getCardsIn(ZoneType.Battlefield)) {
+            final ArrayList<StaticAbility> staticAbilities = card.getStaticAbilities();
+            for (final StaticAbility stAb : staticAbilities) {
+                Cost c1 = stAb.getBlockCost(blocker, attacker);
+                if ( c1 != null )
+                    blockCost.add(c1);
+            }
+        }
+        
+        boolean hasPaid = blockCost.getTotalMana().isZero() && blockCost.isOnlyManaCost(); // true if needless to pay
+        if (!hasPaid) { 
+            hasPaid = blocker.getController().getController().payManaOptional(blocker, blockCost, "Pay cost to declare " + blocker + " a blocker", ManaPaymentPurpose.DeclareBlocker);
+        }
+        return hasPaid;
     }
     
     /**

@@ -47,7 +47,6 @@ import forge.card.staticability.StaticAbility;
 import forge.card.trigger.TriggerType;
 import forge.game.Game;
 import forge.game.GlobalRuleChange;
-import forge.game.ai.ComputerUtilCard;
 import forge.game.player.Player;
 import forge.game.player.PlayerController.ManaPaymentPurpose;
 import forge.game.zone.PlayerZone;
@@ -1302,6 +1301,7 @@ public class CombatUtil {
         }
     }
 
+    /*
     public static void souverignsOfAlara2ndAbility(final Game game, final Card attacker) {
         final Ability ability4 = new Ability(attacker, ManaCost.ZERO) {
             @Override
@@ -1352,6 +1352,8 @@ public class CombatUtil {
 
         game.getStack().addSimultaneousStackEntry(ability4);
     }
+    */
+
 
     /**
      * executes Rampage abilities for a given card.
