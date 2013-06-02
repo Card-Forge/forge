@@ -4139,6 +4139,7 @@ res/cardsfolder/g/gempalm_polluter.txt svneol=native#text/plain
 res/cardsfolder/g/gempalm_sorcerer.txt svneol=native#text/plain
 res/cardsfolder/g/gempalm_strider.txt svneol=native#text/plain
 res/cardsfolder/g/gemstone_array.txt svneol=native#text/plain
+res/cardsfolder/g/gemstone_caverns.txt -text
 res/cardsfolder/g/gemstone_mine.txt svneol=native#text/plain
 res/cardsfolder/g/generals_kabuto.txt svneol=native#text/plain
 res/cardsfolder/g/generals_regalia.txt -text

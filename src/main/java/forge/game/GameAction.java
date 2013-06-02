@@ -40,6 +40,7 @@ import forge.CounterType;
 import forge.FThreads;
 import forge.GameEntity;
 import forge.GameLogEntryType;
+import forge.Singletons;
 import forge.card.CardType;
 import forge.card.TriggerReplacementBase;
 import forge.card.ability.AbilityFactory;
@@ -58,6 +59,7 @@ import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerType;
 import forge.card.trigger.ZCTrigger;
 import forge.game.ai.ComputerUtil;
+import forge.game.ai.ComputerUtilCard;
 import forge.game.event.GameEventCardDestroyed;
 import forge.game.event.GameEventCardRegenerated;
 import forge.game.event.GameEventCardSacrificed;
@@ -74,6 +76,7 @@ import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 import forge.gui.GuiDialog;
+import forge.gui.input.InputSelectCardsFromList;
 import forge.util.Aggregates;
 import forge.util.maps.CollectionSuppliers;
 import forge.util.maps.HashMapOfLists;
@@ -1413,11 +1416,15 @@ public class GameAction {
         }
     }
 
-    private void handleLeylinesAndChancellors() {
+    private void handleLeylinesAndChancellors(final Player first) {
         for (Player p : game.getPlayers()) {
             final List<Card> openingHand = new ArrayList<Card>(p.getCardsIn(ZoneType.Hand));
     
             for (final Card c : openingHand) {
+                // check c.isInZone(ZoneType.Hand) because Gemstone Caverns would exile a card
+                if (!c.isInZone(ZoneType.Hand)) {
+                    continue;
+                }
                 if (p.isHuman()) {
                     for (String kw : c.getKeyword()) {
                         if (kw.startsWith("MayEffectFromOpeningHand")) {
@@ -1437,8 +1444,20 @@ public class GameAction {
                             game.getAction().moveToPlay(c);
                         }
                     }
+                    if (c.getName().equals("Gemstone Caverns") && !p.equals(first) 
+                            && GuiDialog.confirm(c, "Use " + c + "'s ability?")) {
+                        c.addCounter(CounterType.LUCK, 1, true);
+                        game.getAction().moveToPlay(c);
+                        List<Card> remainingHand = new ArrayList<Card>(p.getCardsIn(ZoneType.Hand));
+                        InputSelectCardsFromList inp = new InputSelectCardsFromList(1, 1, remainingHand);
+                        inp.setCancelAllowed(false);
+                        inp.setMessage("Choose a card in you hand to exile");
+                        Singletons.getControl().getInputQueue().setInputAndWait(inp);
+                        Card exiled = inp.getSelected().get(0);
+                        game.getAction().exile(exiled);
+                    }
                 } else { // Computer Leylines & Chancellors
-                    if (!c.getName().startsWith("Leyline of")) {
+                    if (!c.getName().startsWith("Leyline of") && !c.getName().equals("Gemstone Caverns")) {
                         for (String kw : c.getKeyword()) {
                             if (kw.startsWith("MayEffectFromOpeningHand")) {
                                 final String effName = kw.split(":")[1];
@@ -1458,6 +1477,14 @@ public class GameAction {
                             && (Iterables.any(game.getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Leyline of Singularity"))))) {
                         game.getAction().moveToPlay(c);
                         //ga.checkStateEffects();
+                    }
+                    if (c.getName().equals("Gemstone Caverns") && !p.equals(first)
+                            && !Iterables.any(game.getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Gemstone Caverns"))) {
+                        c.addCounter(CounterType.LUCK, 1, true);
+                        game.getAction().moveToPlay(c);
+                        List<Card> remainingHand = new ArrayList<Card>(p.getCardsIn(ZoneType.Hand));
+                        Card exiled = ComputerUtilCard.getWorstAI(remainingHand);
+                        game.getAction().exile(exiled);
                     }
                 }
             }
@@ -1509,7 +1536,7 @@ public class GameAction {
                 if(game.getType() == GameType.Planechase)
                     first.initPlane();
     
-                handleLeylinesAndChancellors();
+                handleLeylinesAndChancellors(first);
                 checkStateEffects();
     
                 // Run Trigger beginning of the game
