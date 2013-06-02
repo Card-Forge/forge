@@ -49,10 +49,12 @@ public class InputAttack extends InputSyncronizedBase {
     private final Combat combat;
     private final List<GameEntity> defenders;
     private GameEntity currentDefender;
-    private final Player player;
+    private final Player playerAttacks;
+    private final Player playerDeclares;
     
-    public InputAttack(Player human, Combat combat) {
-        this.player = human;
+    public InputAttack(Player attacks, Player declares, Combat combat) {
+        this.playerAttacks = attacks;
+        this.playerDeclares = declares;
         this.combat = combat;
         this.defenders = combat.getDefenders();
     }
@@ -72,7 +74,7 @@ public class InputAttack extends InputSyncronizedBase {
             return; // should even throw here!
         }
 
-        List<Card> possibleAttackers = player.getCardsIn(ZoneType.Battlefield);
+        List<Card> possibleAttackers = playerAttacks.getCardsIn(ZoneType.Battlefield);
         for (Card c : Iterables.filter(possibleAttackers, CardPredicates.Presets.CREATURES)) {
             if (!c.hasKeyword("CARDNAME attacks each turn if able."))
                 continue; // do not force
@@ -87,7 +89,7 @@ public class InputAttack extends InputSyncronizedBase {
     }
     
     private void showCombat() {
-        player.getZone(ZoneType.Battlefield).updateObservers(); // redraw sword icons
+        playerAttacks.getZone(ZoneType.Battlefield).updateObservers(); // redraw sword icons
         CombatUtil.showCombat();
     }
     
@@ -121,14 +123,14 @@ public class InputAttack extends InputSyncronizedBase {
             return;
         }
     
-        if ( card.getController().isOpponentOf(player) ) {
+        if ( card.getController().isOpponentOf(playerAttacks) ) {
             if ( defenders.contains(card) ) { // planeswalker?
                 setCurrentDefender(card);
                 return;
             }
         }
 
-        if (player.getZone(ZoneType.Battlefield).contains(card) && CombatUtil.canAttack(card, currentDefender, combat)) {
+        if (playerAttacks.getZone(ZoneType.Battlefield).contains(card) && CombatUtil.canAttack(card, currentDefender, combat)) {
             if( combat.isAttacking(card)) {
                 combat.removeFromCombat(card);
             }
@@ -154,7 +156,8 @@ public class InputAttack extends InputSyncronizedBase {
             }
         }
 
-        showMessage("Declare Attackers.\nSelecting Creatures to Attack " + currentDefender + 
+        String header = playerAttacks == playerDeclares ? "declare attackers." : "declare attackers for " + playerAttacks.getName(); 
+        showMessage(playerDeclares.getName() + ", " + header + "\nSelecting Creatures to Attack " + currentDefender + 
                 "\n\nTo attack other players or their planewalkers just click on them");
 
         // This will instantly highlight targets

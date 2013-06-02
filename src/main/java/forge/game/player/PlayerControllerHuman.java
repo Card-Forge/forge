@@ -473,7 +473,7 @@ public class PlayerControllerHuman extends PlayerController {
     public void declareAttackers(Player attacker) {
         game.getCombat().initiatePossibleDefenders(attacker.getOpponents());
         // This input should not modify combat object itself, but should return user choice
-        InputSynchronized inpAttack = new InputAttack(player, game.getCombat());
+        InputSynchronized inpAttack = new InputAttack(attacker, player, game.getCombat());
         Singletons.getControl().getInputQueue().setInputAndWait(inpAttack);
     }
 

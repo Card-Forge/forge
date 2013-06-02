@@ -138,7 +138,7 @@ public enum ApiType {
     DealDamage (DamageDealEffect.class, DamageDealAi.class),
     Debuff (DebuffEffect.class, DebuffAi.class),
     DebuffAll (DebuffAllEffect.class, DebuffAllAi.class),
-    DeclaresCombatants(DeclareCombatantsEffect.class, CannotPlayAi.class),
+    DeclareCombatants(DeclareCombatantsEffect.class, CannotPlayAi.class),
     DelayedTrigger (DelayedTriggerEffect.class, DelayedTriggerAi.class),
     Destroy (DestroyEffect.class, DestroyAi.class),
     DestroyAll (DestroyAllEffect.class, DestroyAllAi.class),
