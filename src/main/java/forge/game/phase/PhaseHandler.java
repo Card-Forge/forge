@@ -205,8 +205,10 @@ public class PhaseHandler implements java.io.Serializable {
     }
 
     private final void onPhaseBegin() {
+        boolean skipped = false;
         
         if ( isSkippingPhase(phase) ) {
+            skipped = true;
             givePriorityToPlayer = false;
             if( phase == PhaseType.COMBAT_DECLARE_ATTACKERS  )
                 playerTurn.removeKeyword("Skip your next combat phase.");
@@ -428,7 +430,7 @@ public class PhaseHandler implements java.io.Serializable {
         // Handle effects that happen at the beginning of phases
         game.getAction().checkStateEffects();
     
-        if (this.givePriorityToPlayer) {
+        if (!skipped) {
             // Run triggers if phase isn't being skipped
             final HashMap<String, Object> runParams = new HashMap<String, Object>();
             runParams.put("Phase", this.getPhase().nameForScripts);
