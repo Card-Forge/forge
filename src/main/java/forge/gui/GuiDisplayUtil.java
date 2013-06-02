@@ -406,33 +406,33 @@ public final class GuiDisplayUtil {
             return;
         }
 
-        final Card forgeCard = c.toForgeCard(p);
-
         final Game game = getGame();
-        if (forgeCard.getType().contains("Land")) {
-            forgeCard.setOwner(p);
-            game.getAction().moveToPlay(forgeCard);
-        } else {
-            final List<SpellAbility> choices = forgeCard.getBasicSpells();
-            if (choices.isEmpty()) {
-                return; // when would it happen?
-            }
+        game.getAction().invoke(new Runnable() {
+            @Override public void run() {
+                final Card forgeCard = c.toForgeCard(p);
 
-            final SpellAbility sa = choices.size() == 1 ? choices.get(0) : GuiChoose.oneOrNone("Choose", choices);
-            if (sa == null) {
-                return; // happens if cancelled
-            }
-
-            game.getAction().invoke(new Runnable() {
-                @Override
-                public void run() {
+                if (c.getRules().getType().isLand()) {
+                    forgeCard.setOwner(p);
+                    game.getAction().moveToPlay(forgeCard);
+        
+                } else {
+                    final List<SpellAbility> choices = forgeCard.getBasicSpells();
+                    if (choices.isEmpty()) {
+                        return; // when would it happen?
+                    }
+        
+                    final SpellAbility sa = choices.size() == 1 ? choices.get(0) : GuiChoose.oneOrNone("Choose", choices);
+                    if (sa == null) {
+                        return; // happens if cancelled
+                    }
+        
                     game.getAction().moveToHand(forgeCard); // this is really needed (for rollbacks at least) 
                     // Human player is choosing targets for an ability controlled by chosen player. 
                     sa.setActivatingPlayer(p);
                     HumanPlay.playSaWithoutPayingManaCost(game, sa);
                 }
-            });
-        }
+            }
+        });
 
 
     }
