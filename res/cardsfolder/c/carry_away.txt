@@ -3,7 +3,7 @@ ManaCost:U U
 Types:Enchantment Aura
 K:Enchant Equipment
 A:SP$ Attach | Cost$ U U | ValidTgts$ Equipment | AILogic$ GainControl
-S:Mode$ Continuous | Affected$ Equipment.EnchantedBy | GainControl$ You | Description$ You control enchanted Equipment.
+S:Mode$ Continuous | Affected$ Card.EnchantedBy | GainControl$ You | Description$ You control enchanted Equipment.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigUnattach | TriggerDescription$ When CARDNAME enters the battlefield, unattach enchanted Equipment.
 SVar:TrigUnattach:AB$ UnattachAll | Cost$ 0 | Defined$ Valid Card.EquippedByEnchanted | UnattachValid$ Equipment.EnchantedBy
 SVar:Picture:http://www.wizards.com/global/images/magic/general/carry_away.jpg
