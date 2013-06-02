@@ -135,8 +135,8 @@ public abstract class PlayerController {
     public abstract boolean confirmReplacementEffect(ReplacementEffect replacementEffect, SpellAbility effectSA, String question);
     public abstract List<Card> getCardsToMulligan(boolean isCommander, Player firstPlayer);
 
-    public abstract void declareAttackers();
-    public abstract void declareBlockers();
+    public abstract void declareAttackers(Player attacker);
+    public abstract void declareBlockers(Player defender);
     public abstract void takePriority();
     
     public abstract List<Card> chooseCardsToDiscardToMaximumHandSize(int numDiscard);

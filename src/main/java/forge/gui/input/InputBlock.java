@@ -43,14 +43,16 @@ public class InputBlock extends InputSyncronizedBase {
     private Card currentAttacker = null;
     private final HashMap<Card, List<Card>> allBlocking = new HashMap<Card, List<Card>>();
     private final Combat combat;
-    private final Player player;
+    private final Player defender;
+    private final Player declarer;
     
     /**
      * TODO: Write javadoc for Constructor.
      * @param priority
      */
-    public InputBlock(Player human, Combat combat) {
-        player = human;
+    public InputBlock(Player whoDeclares, Player whoDefends, Combat combat) {
+        defender = whoDefends;
+        declarer = whoDeclares;
         this.combat = combat;
     }
 
@@ -63,8 +65,11 @@ public class InputBlock extends InputSyncronizedBase {
     protected final void showMessage() {
         // could add "Reset Blockers" button
         ButtonUtil.enableOnlyOk();
-        final StringBuilder sb = new StringBuilder();
-        sb.append(player.getName() + ", declare blockers.\n\n");
+        
+        String prompt = declarer == defender ? "declare blockers." : "declare blockers for " + defender.getName(); 
+        
+        final StringBuilder sb = new StringBuilder(declarer.getName());
+        sb.append(", ").append(prompt).append("\n\n");
 
         if (this.currentAttacker == null) {
             sb.append("To Block, click on your opponent's attacker first, then your blocker(s).\n");
@@ -84,7 +89,7 @@ public class InputBlock extends InputSyncronizedBase {
     /** {@inheritDoc} */
     @Override
     public final void onOk() {
-        if (CombatUtil.finishedMandatoryBlocks(combat, player)) {
+        if (CombatUtil.finishedMandatoryBlocks(combat, defender)) {
             // Done blocking
             ButtonUtil.reset();
             CombatUtil.orderMultipleCombatants(combat);
@@ -100,7 +105,7 @@ public class InputBlock extends InputSyncronizedBase {
     public final void onCardSelected(final Card card, boolean isMetaDown) {
 
         if (isMetaDown) {
-            if (card.getController() == player ) {
+            if (card.getController() == defender ) {
                 combat.removeFromCombat(card);
             }
             removeFromAllBlocking(card);
@@ -116,7 +121,7 @@ public class InputBlock extends InputSyncronizedBase {
             reminder = false;
         } else {
             // Make sure this card is valid to even be a blocker
-            if (this.currentAttacker != null && card.isCreature() && player.getZone(ZoneType.Battlefield).contains(card)) {
+            if (this.currentAttacker != null && card.isCreature() && defender.getZone(ZoneType.Battlefield).contains(card)) {
                 // Create a new blockedBy list if it doesn't exist
                 if (!this.allBlocking.containsKey(card)) {
                     this.allBlocking.put(card, new ArrayList<Card>());

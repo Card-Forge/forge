@@ -3,6 +3,8 @@ package forge.util;
 import java.util.Collection;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.google.common.base.Function;
 
 /** 
@@ -26,6 +28,12 @@ public class Lang {
         default:
             return position + sufixes[position % 10];
         }
+    }
+    
+    public static <T> String joinHomogenous(String s1, String s2) { 
+        boolean has1 = StringUtils.isNotBlank(s1);
+        boolean has2 = StringUtils.isNotBlank(s2);
+        return has1 ? (has2 ? s1 + " and " + s2 : s1) : (has2 ? s2 : "");
     }
     
     public static <T> String joinHomogenous(Collection<T> objects) { return joinHomogenous(objects, null); }

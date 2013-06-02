@@ -13977,6 +13977,7 @@ src/main/java/forge/card/ability/effects/DamagePreventAllEffect.java -text
 src/main/java/forge/card/ability/effects/DamagePreventEffect.java -text
 src/main/java/forge/card/ability/effects/DebuffAllEffect.java -text
 src/main/java/forge/card/ability/effects/DebuffEffect.java -text
+src/main/java/forge/card/ability/effects/DeclareCombatantsEffect.java -text
 src/main/java/forge/card/ability/effects/DelayedTriggerEffect.java -text
 src/main/java/forge/card/ability/effects/DestroyAllEffect.java -text
 src/main/java/forge/card/ability/effects/DestroyEffect.java -text

@@ -470,17 +470,17 @@ public class PlayerControllerHuman extends PlayerController {
     }
 
     @Override
-    public void declareAttackers() {
-        game.getCombat().initiatePossibleDefenders(player.getOpponents());
+    public void declareAttackers(Player attacker) {
+        game.getCombat().initiatePossibleDefenders(attacker.getOpponents());
         // This input should not modify combat object itself, but should return user choice
         InputSynchronized inpAttack = new InputAttack(player, game.getCombat());
         Singletons.getControl().getInputQueue().setInputAndWait(inpAttack);
     }
 
     @Override
-    public void declareBlockers() {
+    public void declareBlockers(Player defender) {
         // This input should not modify combat object itself, but should return user choice
-        InputSynchronized inpBlock = new InputBlock(player, game.getCombat());
+        InputSynchronized inpBlock = new InputBlock(player, defender, game.getCombat());
         Singletons.getControl().getInputQueue().setInputAndWait(inpBlock);
     }
 

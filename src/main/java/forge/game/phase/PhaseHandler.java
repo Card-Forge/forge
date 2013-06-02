@@ -93,6 +93,9 @@ public class PhaseHandler implements java.io.Serializable {
     private Player pFirstPriority = null;
     private boolean bCombat = false;
     private boolean bRepeatCleanup = false;
+    
+    private Player playerDeclaresBlockers = null;
+    private Player playerDeclaresAttackers = null;
 
     /** The need to next phase. */
     private boolean givePriorityToPlayer = false;
@@ -211,11 +214,7 @@ public class PhaseHandler implements java.io.Serializable {
         if (this.phase == PhaseType.UNTAP) {
             this.turn++;
             game.fireEvent(new GameEventTurnBegan(playerTurn, turn));
-        }
 
-        game.fireEvent(new GameEventTurnPhase(this.getPlayerTurn(), this.getPhase(), phaseType));
-        
-        if (this.phase == PhaseType.UNTAP) {
             // Here's what happens on new turn, regardless of skipped phases
             game.getCombat().reset(playerTurn);
             
@@ -232,8 +231,13 @@ public class PhaseHandler implements java.io.Serializable {
 
             final List<Card> lands = CardLists.filter(playerTurn.getLandsInPlay(), Presets.UNTAPPED);
             playerTurn.setNumPowerSurgeLands(lands.size());
+            
+            // reset players controlling attack or defense
+            playerDeclaresAttackers = null;
+            playerDeclaresBlockers = null;
         }
-        
+
+        game.fireEvent(new GameEventTurnPhase(this.getPlayerTurn(), this.getPhase(), phaseType));
     }
 
     private boolean isSkippingPhase(PhaseType phase) {
@@ -465,11 +469,11 @@ public class PhaseHandler implements java.io.Serializable {
                 break;
             default: // no action
         }
-
     }
 
     private void declateAttackTurnBasedActions() {
-            playerTurn.getController().declareAttackers();
+            Player whoDeclares = playerDeclaresAttackers == null || playerDeclaresAttackers.hasLost() ? playerTurn : playerDeclaresAttackers;
+            whoDeclares.getController().declareAttackers(playerTurn);
     
             game.getCombat().removeAbsentCombatants();
             CombatUtil.checkAttackOrBlockAlone(game.getCombat());
@@ -520,12 +524,14 @@ public class PhaseHandler implements java.io.Serializable {
 
     private void declareBlockersTurnBaseActions() {
         final Combat combat = game.getCombat();
-        
         Player p = playerTurn;
+
         do {
             p = game.getNextPlayerAfter(p);
+            // Apply Odric's effect here
+            Player whoDeclaresBlockers = playerDeclaresBlockers == null || playerDeclaresBlockers.hasLost() ? p : playerDeclaresBlockers;
             if ( combat.isPlayerAttacked(p) )
-                p.getController().declareBlockers(); 
+                whoDeclaresBlockers.getController().declareBlockers(p); 
         } while(p != playerTurn);
     
         combat.removeAbsentCombatants();
@@ -934,6 +940,18 @@ public class PhaseHandler implements java.io.Serializable {
     public void onStackResolved() {
         givePriorityToPlayer = true;
     }
+
+
+    public final void setPlayerDeclaresBlockers(Player player) {
+        this.playerDeclaresBlockers = player;
+    }
+    
+
+
+    public final void setPlayerDeclaresAttackers(Player player) {
+        this.playerDeclaresAttackers = player;
+    }
+    
 
 
 }

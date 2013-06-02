@@ -287,14 +287,14 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public void declareAttackers() {
-        brains.declareAttackers();
+    public void declareAttackers(Player attacker) {
+        brains.declareAttackers(attacker);
     }
 
    
     @Override
-    public void declareBlockers() {
-        brains.declateBlockers();
+    public void declareBlockers(Player defender) {
+        brains.declateBlockers(defender);
     }
 
     @Override

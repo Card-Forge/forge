@@ -800,16 +800,17 @@ public class AiController {
         }
     }
 
-    public void declateBlockers() {
-        final List<Card> blockers = player.getCreaturesInPlay();
-        game.setCombat(ComputerUtilBlock.getBlockers(player, game.getCombat(), blockers));
+    public void declateBlockers(Player defender) {
+        final List<Card> blockers = defender.getCreaturesInPlay();
+        // When player != defender, AI should declare blockers for its benefit.
+        game.setCombat(ComputerUtilBlock.getBlockers(defender, game.getCombat(), blockers));
         CombatUtil.orderMultipleCombatants(game.getCombat());
     }
     
 
-    public void declareAttackers() {
+    public void declareAttackers(Player attacker) {
         // 12/2/10(sol) the decision making here has moved to getAttackers()
-        game.setCombat(new AiAttackController(player, player.getOpponent()).getAttackers());
+        game.setCombat(new AiAttackController(attacker, attacker.getOpponent()).getAttackers());
 
         for (final Card element : game.getCombat().getAttackers()) {
             // tapping of attackers happens after Propaganda is paid for
@@ -818,7 +819,7 @@ public class AiController {
             Log.debug(sb.toString());
         }
 
-        player.getZone(ZoneType.Battlefield).updateObservers();
+        attacker.getZone(ZoneType.Battlefield).updateObservers();
 
         // ai is about to attack, cancel all phase skipping
         for (Player p : game.getPlayers()) {
