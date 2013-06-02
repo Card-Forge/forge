@@ -2,7 +2,7 @@ Name:Curtain of Light
 ManaCost:1 W
 Types:Instant
 Text:Cast CARDNAME only during combat after blockers are declared.
-A:SP$ BecomesBlocked | Cost$ 1 W | ValidTgts$ Creature.attacking+unblocked | TgtPrompt$ Select target unblocked attacking creature | SubAbility$ Draw | ActivationPhases$ Declare Blockers - Play Instants and Abilities->EndCombat | SpellDescription$ Target unblocked attacking creature becomes blocked. (This spell works on unblockable creatures.) Draw a card.
+A:SP$ BecomesBlocked | Cost$ 1 W | ValidTgts$ Creature.attacking+unblocked | TgtPrompt$ Select target unblocked attacking creature | SubAbility$ Draw | ActivationPhases$ Declare Blockers->EndCombat | SpellDescription$ Target unblocked attacking creature becomes blocked. (This spell works on unblockable creatures.) Draw a card.
 SVar:Draw:DB$ Draw | NumCards$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/curtain_of_light.jpg
 Oracle:Cast Curtain of Light only during combat after blockers are declared.\nTarget unblocked attacking creature becomes blocked. (This spell works on unblockable creatures.)\nDraw a card.
