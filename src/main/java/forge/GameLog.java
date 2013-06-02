@@ -20,11 +20,11 @@ package forge;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
 
 import org.apache.commons.lang3.StringUtils;
 import forge.game.event.IGameEventVisitor;
 import forge.game.phase.Combat;
-import forge.util.MyObservable;
 
 
 /**
@@ -34,7 +34,7 @@ import forge.util.MyObservable;
  * @author Forge
  * @version $Id: GameLog.java 12297 2011-11-28 19:56:47Z slapshot5 $
  */
-public class GameLog extends MyObservable {
+public class GameLog extends Observable {
     private List<GameLogEntry> log = new ArrayList<GameLogEntry>();
 
     private GameLogFormatter formatter = new GameLogFormatter(this);
@@ -63,13 +63,13 @@ public class GameLog extends MyObservable {
      * @param type the level
      */
     public void add(final GameLogEntryType type, final String message) {
-        log.add(new GameLogEntry(type, message));
-        this.updateObservers();
+        add(new GameLogEntry(type, message));
     }
 
     void add(GameLogEntry entry) {
         log.add(entry);
-        this.updateObservers();
+        this.setChanged();
+        this.notifyObservers();
     }    
     
     public String getLogText(final GameLogEntryType logLevel) { 

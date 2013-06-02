@@ -430,7 +430,6 @@ public final class GuiDisplayUtil {
                     // Human player is choosing targets for an ability controlled by chosen player. 
                     sa.setActivatingPlayer(p);
                     HumanPlay.playSaWithoutPayingManaCost(game, sa);
-                    Singletons.getControl().getInputQueue().updateObservers(); // priority can be on AI side, need this update for that case
                 }
             });
         }

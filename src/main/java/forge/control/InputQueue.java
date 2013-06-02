@@ -34,9 +34,7 @@ import forge.util.MyObservable;
  * @author Forge
  * @version $Id$
  */
-public class InputQueue extends MyObservable implements java.io.Serializable {
-    /** Constant <code>serialVersionUID=3955194449319994301L</code>. */
-    private static final long serialVersionUID = 3955194449319994301L;
+public class InputQueue extends MyObservable {
 
     private final BlockingDeque<InputSynchronized> inputStack = new LinkedBlockingDeque<InputSynchronized>();
     private final InputLockUI inputLock;
@@ -50,14 +48,6 @@ public class InputQueue extends MyObservable implements java.io.Serializable {
         return inputStack.isEmpty() ? null : this.inputStack.peek();
     }
 
-    /**
-     * <p>
-     * resetInput.
-     * </p>
-     * 
-     * @param update
-     *            a boolean.
-     */
     public final void removeInput(Input inp) {
         Input topMostInput = inputStack.isEmpty() ? null : inputStack.pop();
 
