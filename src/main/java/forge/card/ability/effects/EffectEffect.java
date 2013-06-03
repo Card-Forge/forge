@@ -4,6 +4,7 @@ import java.util.List;
 
 import forge.Card;
 import forge.Command;
+import forge.ImageCache;
 import forge.card.ability.AbilityFactory;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
@@ -103,7 +104,7 @@ public class EffectEffect extends SpellAbilityEffect {
         eff.addType("Effect"); // Or Emblem
         eff.setToken(true); // Set token to true, so when leaving play it gets nuked
         eff.setOwner(controller);
-        eff.setImageKey(sa.hasParam("Image") ? "t:" + sa.getParam("Image") : hostCard.getImageKey());
+        eff.setImageKey(sa.hasParam("Image") ? ImageCache.TOKEN_PREFIX + sa.getParam("Image") : hostCard.getImageKey());
         eff.setColor(hostCard.getColor());
         eff.setImmutable(true);
         eff.setEffectSource(hostCard);
