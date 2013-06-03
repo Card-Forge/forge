@@ -550,8 +550,11 @@ public class PlayerControllerHuman extends PlayerController {
         for(SpellAbility sa : usableFromOpeningHand) {
             srcCards.add(sa.getSourceCard());
         }
+        List<SpellAbility> result = new ArrayList<SpellAbility>();
+        if (srcCards.isEmpty()) {
+            return result;
+        }
         List<Card> chosen = GuiChoose.order("Choose cards to activate from opening hand", "Activate first", -1, srcCards, null, null);
-        List<SpellAbility> result = new ArrayList<SpellAbility>(); 
         for(Card c : chosen) {
             for(SpellAbility sa : usableFromOpeningHand) {
                 if ( sa.getSourceCard() == c ) {
