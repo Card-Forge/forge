@@ -108,7 +108,7 @@ public enum CDock implements ICDoc {
 
     private void saveLayout() {
         final SaveOpenDialog dlgSave = new SaveOpenDialog();
-        final File defFile = new File(SLayoutIO.getFilePreferred());
+        final File defFile = new File(SLayoutIO.getFilePreferred(Singletons.getControl().getState()));
         final File saveFile = dlgSave.SaveDialog(defFile, Filetypes.LAYOUT);
         if (saveFile != null) {
             SLayoutIO.saveLayout(saveFile);
@@ -119,7 +119,7 @@ public enum CDock implements ICDoc {
         SOverlayUtils.genericOverlay();
 
         final SaveOpenDialog dlgOpen = new SaveOpenDialog();
-        final File defFile = new File(SLayoutIO.getFilePreferred());
+        final File defFile = new File(SLayoutIO.getFilePreferred(Singletons.getControl().getState()));
         final File loadFile = dlgOpen.OpenDialog(defFile, Filetypes.LAYOUT);
 
         FView.SINGLETON_INSTANCE.getPnlContent().removeAll();

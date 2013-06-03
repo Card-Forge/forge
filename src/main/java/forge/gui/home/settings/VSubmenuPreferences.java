@@ -60,8 +60,10 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final FScrollPane scrContent = new FScrollPane(pnlPrefs,
             ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
-    private final FLabel btnReset = new FLabel.Builder().opaque(true)
-            .hoverable(true).text("Reset to defaults").build();
+    private final FLabel btnReset = new FLabel.Builder().opaque(true).hoverable(true).text("Reset to defaults").build();
+    
+    private final FLabel btnDeleteMatchUI = new FLabel.Builder().opaque(true).hoverable(true).text("Reset Match Layout").build();
+    private final FLabel btnDeleteEditorUI = new FLabel.Builder().opaque(true).hoverable(true).text("Reset Editor Layout").build();
 
     private final FLabel lblTitleSkin = new FLabel.Builder()
             .text("Choose Skin").fontStyle(Font.BOLD).fontSize(14).build();
@@ -147,6 +149,12 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
         pnlPrefs.add(cbCloneImgSource, regularConstraints);
         pnlPrefs.add(new NoteLabel("When enabled clones will use their original art instead of the cloned card's art"), regularConstraints);
+
+        // Troubleshooting
+        pnlPrefs.add(new SectionLabel("Troubleshooting"), sectionConstraints);
+        final String twoButtonConstraints = "w 38%!, h 30px!, gap 10% 0 0 10px";
+        pnlPrefs.add(btnDeleteMatchUI, twoButtonConstraints);
+        pnlPrefs.add(btnDeleteEditorUI, "w 38%!, h 30px!, gap 0 0 0 10px");
 
         // AI Personality Profile Options
         pnlPrefs.add(new SectionLabel("AI Options"), sectionConstraints);
@@ -487,6 +495,14 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     }
 
     //========== Overridden from IVDoc
+
+    public final FLabel getBtnDeleteMatchUI() {
+        return btnDeleteMatchUI;
+    }
+
+    public final FLabel getBtnDeleteEditorUI() {
+        return btnDeleteEditorUI;
+    }
 
     /* (non-Javadoc)
      * @see forge.gui.framework.IVDoc#getDocumentID()

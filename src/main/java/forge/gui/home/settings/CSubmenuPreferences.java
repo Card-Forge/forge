@@ -4,6 +4,7 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
 
 import javax.swing.JCheckBox;
 import javax.swing.SwingUtilities;
@@ -14,9 +15,11 @@ import org.apache.commons.lang3.tuple.Pair;
 import forge.Command;
 import forge.Constant.Preferences;
 import forge.Singletons;
+import forge.control.FControl.Screens;
 import forge.control.RestartUtil;
 import forge.game.ai.AiProfileUtil;
 import forge.gui.framework.ICDoc;
+import forge.gui.framework.SLayoutIO;
 import forge.gui.toolbox.FSkin;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
@@ -107,6 +110,24 @@ public enum CSubmenuPreferences implements ICDoc {
                 update();
             }
         });
+        
+        view.getBtnDeleteEditorUI().setCommand(new Command() {
+            @Override
+            public void run() {
+                String fd = SLayoutIO.getFilePreferred(Screens.DECK_EDITOR_CONSTRUCTED);
+                File f = new File(fd);
+                f.delete();
+            }
+        });
+        
+        view.getBtnDeleteMatchUI().setCommand(new Command() {
+            @Override
+            public void run() {
+                String fd = SLayoutIO.getFilePreferred(Screens.MATCH_SCREEN);
+                File f = new File(fd);
+                f.delete();
+            }
+        });        
     }
 
     /* (non-Javadoc)

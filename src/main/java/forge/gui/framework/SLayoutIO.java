@@ -54,8 +54,8 @@ public final class SLayoutIO {
      * Gets preferred layout file corresponding to current state of UI.
      * @return {@link java.lang.String}
      */
-    public static String getFilePreferred() {
-        return SLayoutIO.getFileForState(Singletons.getControl().getState()).userPrefLoc;
+    public static String getFilePreferred(Screens mode) {
+        return SLayoutIO.getFileForState(mode).userPrefLoc;
     }
 
     /** Publicly-accessible save method, to neatly handle exception handling.
