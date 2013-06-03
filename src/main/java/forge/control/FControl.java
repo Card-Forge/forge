@@ -42,11 +42,14 @@ import forge.game.Game;
 import forge.game.ai.AiProfileUtil;
 import forge.game.player.LobbyPlayer;
 import forge.game.player.Player;
+import forge.gui.GuiDialog;
 import forge.gui.SOverlayUtils;
 import forge.gui.deckeditor.CDeckEditorUI;
 import forge.gui.deckeditor.VDeckEditorUI;
 import forge.gui.framework.EDocID;
+import forge.gui.framework.InvalidLayoutFileException;
 import forge.gui.framework.SDisplayUtil;
+import forge.gui.framework.SLayoutIO;
 import forge.gui.framework.SOverflowUtil;
 import forge.gui.framework.SResizingUtil;
 import forge.gui.home.CHomeUI;
@@ -406,7 +409,16 @@ public enum FControl {
     
     
         Singletons.getModel().getPreferences().actuateMatchPreferences();
-        Singletons.getControl().changeState(Screens.MATCH_SCREEN);
+        
+        try {
+            Singletons.getControl().changeState(Screens.MATCH_SCREEN);
+        } catch (InvalidLayoutFileException ex) {
+            GuiDialog.message("Your match layout file could not be read. It will be deleted after you press OK.\nThe game will proceed with default layout.");
+            File fLayout = new File(SLayoutIO.getFilePreferred(Screens.MATCH_SCREEN));
+            fLayout.delete();
+            // try again
+            Singletons.getControl().changeState(Screens.MATCH_SCREEN);
+        }
         SDisplayUtil.showTab(EDocID.REPORT_LOG.getDoc());
     
         CMessage.SINGLETON_INSTANCE.getInputControl().setGame(game);

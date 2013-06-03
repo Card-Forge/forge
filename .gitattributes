@@ -14403,6 +14403,7 @@ src/main/java/forge/gui/framework/IDocIdList.java -text
 src/main/java/forge/gui/framework/ILocalRepaint.java -text
 src/main/java/forge/gui/framework/IVDoc.java -text
 src/main/java/forge/gui/framework/IVTopLevelUI.java -text
+src/main/java/forge/gui/framework/InvalidLayoutFileException.java -text
 src/main/java/forge/gui/framework/RectangleOfDouble.java -text
 src/main/java/forge/gui/framework/SDisplayUtil.java -text
 src/main/java/forge/gui/framework/SLayoutConstants.java -text

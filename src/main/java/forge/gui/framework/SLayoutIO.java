@@ -3,6 +3,7 @@ package forge.gui.framework;
 import java.awt.BorderLayout;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.util.Collection;
 import java.util.Iterator;
@@ -136,17 +137,35 @@ public final class SLayoutIO {
         
         // Read a model for new layout
         MapOfLists<RectangleOfDouble, EDocID> model = null;
+        
+        boolean usedCustomPrefsFile = false;
+        
+        FileInputStream fis = null;
+
         try {
-            FileInputStream fis = null;
             if (f != null && f.exists()) 
                 fis = new FileInputStream(f);
             else {
                 File userSetting = new File(file.userPrefLoc);
-                fis = userSetting.exists() ? new FileInputStream(userSetting) : new FileInputStream(file.defaultLoc);
+                if ( userSetting.exists() ) {
+                    usedCustomPrefsFile = true;
+                    fis = new FileInputStream(userSetting);
+                } else {
+                    fis = new FileInputStream(file.defaultLoc);
+                }
             }
-    
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+        try {
             model = readLayout(inputFactory.createXMLEventReader(fis));
-        } catch (final Exception e) { e.printStackTrace(); }
+        } catch (final XMLStreamException e) {
+            if ( usedCustomPrefsFile ) // the one we can safely delete
+                throw new InvalidLayoutFileException();
+            else
+                throw new RuntimeException(e);
+        }
         
         // Apply new layout
         DragCell cell = null;
@@ -170,8 +189,8 @@ public final class SLayoutIO {
         SResizingUtil.resizeWindow();
     }
 
-    private static MapOfLists<RectangleOfDouble, EDocID> readLayout(final XMLEventReader reader)
-            throws XMLStreamException {
+    private static MapOfLists<RectangleOfDouble, EDocID> readLayout(final XMLEventReader reader) throws XMLStreamException
+    {
         XMLEvent event;
         StartElement element;
         Iterator<?> attributes;
