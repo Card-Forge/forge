@@ -6630,6 +6630,7 @@ res/cardsfolder/m/master_of_the_wild_hunt_avatar.txt -text
 res/cardsfolder/m/master_splicer.txt svneol=native#text/plain
 res/cardsfolder/m/master_thief.txt svneol=native#text/plain
 res/cardsfolder/m/master_transmuter.txt svneol=native#text/plain
+res/cardsfolder/m/master_warcraft.txt -text
 res/cardsfolder/m/masters_call.txt svneol=native#text/plain
 res/cardsfolder/m/masticore.txt svneol=native#text/plain
 res/cardsfolder/m/masumaro_first_to_live.txt svneol=native#text/plain

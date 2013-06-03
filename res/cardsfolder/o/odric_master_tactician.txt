@@ -4,7 +4,7 @@ Types:Legendary Creature Human Soldier
 PT:3/4
 K:First Strike
 T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | CheckSVar$ OdricTest | SVarCompare$ GE3 | Execute$ TrigOdricEffect | TriggerDescription$ Whenever CARDNAME and at least three other creatures attack, you choose which creatures block this combat and how those creatures block.
-SVar:TrigOdricEffect:AB$ DeclareCombatants | Cost$ 0 | DeclareAttackers$ True | DeclareBlockers$ True
+SVar:TrigOdricEffect:AB$ DeclareCombatants | Cost$ 0 | DeclareBlockers$ True
 SVar:OdricTest:Count$Valid Creature.attacking+Other
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/odric_master_tactician.jpg
