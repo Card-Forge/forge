@@ -40,6 +40,10 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
     public void resolve(SpellAbility sa) {
         final ZoneType destination = ZoneType.smartValueOf(sa.getParam("Destination"));
         final List<ZoneType> origin = ZoneType.listValueOf(sa.getParam("Origin"));
+        
+        if(origin.contains(ZoneType.Library)) {
+            sa.getActivatingPlayer().incLibrarySearched();
+        }
 
         List<Card> cards = new ArrayList<Card>();
 

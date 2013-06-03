@@ -634,6 +634,11 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         if (sa.hasParam("Origin")) {
             origin = ZoneType.listValueOf(sa.getParam("Origin"));
         }
+        
+        if(origin.contains(ZoneType.Library)) {
+            sa.getActivatingPlayer().incLibrarySearched();
+        }
+        
         ZoneType destination = ZoneType.smartValueOf(sa.getParam("Destination"));
         // this needs to be zero indexed. Top = 0, Third = 2
         int libraryPos = sa.hasParam("LibraryPosition") ? Integer.parseInt(sa.getParam("LibraryPosition")) : 0;

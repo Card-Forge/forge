@@ -1199,6 +1199,17 @@ public class AbilityUtils {
                     return CardFactoryUtil.doXMath(Integer.parseInt(sq[2]), expr, c); // not Kicked
                 }
             }
+            
+          //Count$SearchedLibrary.<DefinedPlayer>
+            if(sq[0].contains("SearchedLibrary")) {
+                int sum = 0;
+                for(Player p : AbilityUtils.getDefinedPlayers(c, sq[1], sa))
+                {
+                    sum += p.getLibrarySearched();
+                }
+                
+                return sum;
+            }
 
             // Count$Compare <int comparator value>.<True>.<False>
             if (sq[0].startsWith("Compare")) {

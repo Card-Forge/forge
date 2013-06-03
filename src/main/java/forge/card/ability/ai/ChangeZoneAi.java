@@ -1089,6 +1089,10 @@ public class ChangeZoneAi extends SpellAbilityAi {
         if (sa.hasParam("Origin")) {
             origin = ZoneType.listValueOf(sa.getParam("Origin"));
         }
+        
+        if(origin.contains(ZoneType.Library)) {
+            sa.getActivatingPlayer().incLibrarySearched();
+        }
 
         String type = sa.getParam("ChangeType");
         if (type == null) {

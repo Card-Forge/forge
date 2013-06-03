@@ -1373,6 +1373,8 @@ public class CardFactoryUtil {
         if (sq[0].contains("LowestLibrary")) {
             return Aggregates.min(cc.getGame().getPlayers(), Player.Accessors.countCardsInZone(ZoneType.Library));
         }
+        
+        
 
         // Count$Chroma.<mana letter>
         if (sq[0].contains("Chroma")) {
