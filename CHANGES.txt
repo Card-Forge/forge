@@ -16,6 +16,20 @@ The devs are discussing a plan to update the battlefield display code with Java 
 We have added a branch to our SVN for the new cards that are currently being scripted. These cards are not yet available in this build of forge. Please be patient and they will soon become available.
 
 
+- Match and Deck Editor Layout problems -
+The match and deck editor windows contain panels that can be moved and or resized. The changes that you make are saved to files that are named "editor.xml" and "match.xml". These files can be found in your userDir/preferences/ directory.
+
+Sometimes people will decide that they do not like the changes that they made and wish to go back to the original layout.
+
+These "editor.xml" and "match.xml" files at times can become corrupted. You may notice one or more panels/tabs are missing from the match and/or deck editor windows. Or Forge may crash when a match is started or when the deck editor is displayed. When this happens you will notice a crash report that starts with the following lines:
+
+java.lang.NullPointerException
+   at forge.gui.framework.SLayoutIO.loadLayout(SLayoutIO.java:153)
+   at forge.gui.match.VMatchUI.populate(VMatchUI.java:57)
+
+You can solve either of the two problems stated above by finding the "editor.xml" and/or "match.xml" files and then deleting them. Or you can go to the Game Settings -> Preferences -> Troubleshooting section. You will find at this location two buttons that will reset the match layout and the deck editor layouts.
+
+
 - The AI Drafting has been improved -
 The AI evaluated the basic lands higher than anything else. Fixed. The AI would pick cards with RemAIDeck but only at a much lowered pick rate. For example the best pick in a 250 card set would become the 75th best pick, the 20th best pick would become the 95th and so on. Divided this factor by 3 (so the first pick would become the 25th pick). Please test whether this has improved the draft experience.
 
@@ -113,17 +127,7 @@ Marauding Maulhorn
 Known Issues
 ------------
 
-We have received several reports about a Null Pointer Exception crash report which contains the following info:
-
-java.lang.NullPointerException
-   at forge.gui.match.VMatchUI.populate(VMatchUI.java:###)
-   at forge.control.FControl.changeState(FControl.java:###)
-
-We currently suspect that this is a thread misuse issue. This will cause forge to crash eventually on some systems. Once the SwingWorkers that start different types of matches are refactored this problem should be fixed. The problem with a match starting with a blank screen will also be gone.
-
 A small number of cards including Wall of Corpses, Abu Ja'far and others with a similar ability are not functional. The common issue here is actually that they check the blocker/attacker after being removed from the battlefield. Probably need to use LKI. Regular destroy/destroy all effects work just fine. The problem cards are caring about battlefield specific properties, that no longer apply when the base card is no longer on the battlefield.
-
-On several occasions people have noticed that the Forge deck editor and/or quest mode card shop would not open or display. We have also received reports that some of the tabs/panels in the deck editor are missing. There has also been reports that Forge will crash while creating/populating display components during start up or crash when a match is started. One or both of your layout xml files may be corrupted in some fashion. Try deleting the file(s) named "editor.xml" and/or "match.xml" that are now located in your userDir/preferences/ directory. This should force Forge to then use the default layout xml files instead.
 
 Several people have noticed that the cards displayed on the battlefield will fail to be displayed when the number of cards on the battlefield increases. Maximizing the human panel can help to re-display the cards.
 
