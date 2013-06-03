@@ -953,6 +953,8 @@ public class AbilityUtils {
         // work
         if (defined.equals("Self")) {
             s = sa;
+        } else if (defined.equals("Parent")) {
+            s = sa.getRootAbility();
         } else if (defined.equals("Targeted")) {
             final SpellAbility saTargeting = sa.getSATargetingSA();
             if (saTargeting != null) {
