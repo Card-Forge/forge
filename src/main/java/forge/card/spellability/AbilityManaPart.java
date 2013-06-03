@@ -175,6 +175,10 @@ public class AbilityManaPart implements java.io.Serializable {
 
         // Loop over restrictions
         for (String restriction : this.manaRestrictions.split(",")) {
+            if (restriction.equals("nonSpell")) {
+                return !sa.isSpell();
+            }
+
             if (restriction.startsWith("CostContainsX")) {
                 if (sa.isXCost()) {
                     return true;
