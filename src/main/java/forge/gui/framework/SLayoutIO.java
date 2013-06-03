@@ -70,12 +70,10 @@ public final class SLayoutIO {
             throw new IllegalThreadStateException("This operation should be independent of the EDT.");
         }
 
-        try { save(f0); }
-        catch (final Exception e) { e.printStackTrace(); }
-
+        save(f0);
     }
 
-    private synchronized static void save(final File f0) throws Exception {
+    private synchronized static void save(final File f0) {
         final String fWriteTo;
         FileLocation file = SLayoutIO.getFileForState(Singletons.getControl().getState());
 
@@ -90,38 +88,53 @@ public final class SLayoutIO {
         }
 
         final XMLOutputFactory out = XMLOutputFactory.newInstance();
-        final XMLEventWriter writer = out.createXMLEventWriter(new FileOutputStream(fWriteTo));
-        final List<DragCell> cells = FView.SINGLETON_INSTANCE.getDragCells();
+        FileOutputStream fos = null;
+        XMLEventWriter writer = null;
+        try {
+            fos = new FileOutputStream(fWriteTo);
+            writer = out.createXMLEventWriter(fos);
+            final List<DragCell> cells = FView.SINGLETON_INSTANCE.getDragCells();
 
-        writer.add(EF.createStartDocument());
-        writer.add(NEWLINE);
-        writer.add(EF.createStartElement("", "", "layout"));
-        writer.add(NEWLINE);
-
-        for (final DragCell cell : cells) {
-            cell.updateRoughBounds();
-            RectangleOfDouble bounds = cell.getRoughBounds();
-            
-            writer.add(TAB);
-            writer.add(EF.createStartElement("", "", "cell"));
-            writer.add(EF.createAttribute(Property.x.toString(), String.valueOf(Math.rint(bounds.getX() * 100000) / 100000)));
-            writer.add(EF.createAttribute(Property.y.toString(), String.valueOf(Math.rint(bounds.getY() * 100000) / 100000)));
-            writer.add(EF.createAttribute(Property.w.toString(), String.valueOf(Math.rint(bounds.getW() * 100000) / 100000)));
-            writer.add(EF.createAttribute(Property.h.toString(), String.valueOf(Math.rint(bounds.getH() * 100000) / 100000)));
+            writer.add(EF.createStartDocument());
+            writer.add(NEWLINE);
+            writer.add(EF.createStartElement("", "", "layout"));
             writer.add(NEWLINE);
 
-            for (final IVDoc<? extends ICDoc> vDoc : cell.getDocs()) {
-                createNode(writer, Property.doc, vDoc.getDocumentID().toString());
+            for (final DragCell cell : cells) {
+                cell.updateRoughBounds();
+                RectangleOfDouble bounds = cell.getRoughBounds();
+                
+                writer.add(TAB);
+                writer.add(EF.createStartElement("", "", "cell"));
+                writer.add(EF.createAttribute(Property.x.toString(), String.valueOf(Math.rint(bounds.getX() * 100000) / 100000)));
+                writer.add(EF.createAttribute(Property.y.toString(), String.valueOf(Math.rint(bounds.getY() * 100000) / 100000)));
+                writer.add(EF.createAttribute(Property.w.toString(), String.valueOf(Math.rint(bounds.getW() * 100000) / 100000)));
+                writer.add(EF.createAttribute(Property.h.toString(), String.valueOf(Math.rint(bounds.getH() * 100000) / 100000)));
+                writer.add(NEWLINE);
+
+                for (final IVDoc<? extends ICDoc> vDoc : cell.getDocs()) {
+                    createNode(writer, Property.doc, vDoc.getDocumentID().toString());
+                }
+
+                writer.add(TAB);
+                writer.add(EF.createEndElement("", "", "cell"));
+                writer.add(NEWLINE);
             }
+            writer.flush(); 
+            writer.add(EF.createEndDocument());
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block ignores the exception, but sends it to System.err and probably forge.log.
+            e.printStackTrace();
+        } catch (XMLStreamException e) {
+            // TODO Auto-generated catch block ignores the exception, but sends it to System.err and probably forge.log.
+            e.printStackTrace();
+        } finally {
+            if ( writer != null )
+                try { writer.close(); } catch (XMLStreamException e) {}
 
-            writer.add(TAB);
-            writer.add(EF.createEndElement("", "", "cell"));
-            writer.add(NEWLINE);
+            if ( fos != null )
+                try { fos.close(); } catch (IOException e) {}
         }
-
-        writer.add(EF.createEndDocument());
-        writer.flush();
-        writer.close();
     }
 
     public static void loadLayout(final File f) {
