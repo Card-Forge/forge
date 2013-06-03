@@ -277,6 +277,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
      */
     public final void add(final SpellAbility sp) {
         FThreads.assertExecutedByEdt(false);
+        SpellAbilityStackInstance si = null;
 
         if (sp.isManaAbility()) { // Mana Abilities go straight through
             AbilityUtils.resolve(sp);
@@ -295,7 +296,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         }
 
         if (this.frozen) {
-            final SpellAbilityStackInstance si = new SpellAbilityStackInstance(sp);
+            si = new SpellAbilityStackInstance(sp);
             this.frozenStack.push(si);
             return;
         }
@@ -319,7 +320,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
                 sp.getSourceCard().addOptionalCostPaid(s);
             }
             if (sp.getSourceCard().isCopiedSpell()) {
-                this.push(sp);
+                si = this.push(sp);
             } else {
                 if (sp.isMultiKicker()) {
                     final Player activating = sp.getActivatingPlayer();
@@ -336,7 +337,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
                 }
                 
                 // The ability is added to stack HERE
-                this.push(sp);
+                si = this.push(sp);
                 
                 if (sp.isReplicate()) {
                     // TODO: convert multikicker/replicate support in abCost so this
@@ -360,19 +361,16 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
                     CardFactory.copySpellontoStack(sp.getSourceCard(), sp.getSourceCard(), sp, false, null);
                 }
             }
-
         }
 
-        // Copied spells aren't cast
-        // per se so triggers shouldn't
-        // run for them.
+        // Copied spells aren't cast per se so triggers shouldn't run for them.
+        HashMap<String, Object> runParams = new HashMap<String, Object>();
         if (!(sp instanceof AbilityStatic) && !sp.isCopied()) {
             // Run SpellAbilityCast triggers
-            HashMap<String, Object> runParams = new HashMap<String, Object>();
             runParams.put("Cost", sp.getPayCosts());
             runParams.put("Player", sp.getSourceCard().getController());
             runParams.put("Activator", sp.getActivatingPlayer());
-            runParams.put("CastSA", sp);
+            runParams.put("CastSA", si.getSpellAbility());
             game.getTriggerHandler().runTrigger(TriggerType.SpellAbilityCast, runParams, true);
 
             // Run SpellCast triggers
@@ -391,38 +389,37 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
                 runParams.put("Card", sp.getSourceCard());
                 game.getTriggerHandler().runTrigger(TriggerType.Cycled, runParams, false);
             }
+        }
 
-            // Run BecomesTarget triggers
-            // Create a new object, since the triggers aren't happening right away
-            final List<TargetChoices> chosenTargets = sp.getAllTargetChoices();
-            runParams = new HashMap<String, Object>();
-            runParams.put("SourceSA", sp);
-            if (!chosenTargets.isEmpty()) { 
-                HashSet<Object> distinctObjects = new HashSet<Object>();
-                for (final TargetChoices tc : chosenTargets) {
-                    if ((tc != null) && (tc.getTargetCards() != null)) {
-                        for (final Object tgt : tc.getTargets()) {
-                            // Track distinct objects so Becomes targets don't trigger for things like:
-                            // Seeds of Strength or Pyrotechnics
-                            if (distinctObjects.contains(tgt)) {
-                                continue;
-                            }
-                            
-                            distinctObjects.add(tgt);
-                            runParams.put("Target", tgt);
-                            game.getTriggerHandler().runTrigger(TriggerType.BecomesTarget, runParams, false);
+        // Run BecomesTarget triggers
+        // Create a new object, since the triggers aren't happening right away
+        final List<TargetChoices> chosenTargets = sp.getAllTargetChoices();
+        runParams = new HashMap<String, Object>();
+        runParams.put("SourceSA", si.getSpellAbility());
+        if (!chosenTargets.isEmpty()) { 
+            HashSet<Object> distinctObjects = new HashSet<Object>();
+            for (final TargetChoices tc : chosenTargets) {
+                if (tc != null && tc.getTargetCards() != null) {
+                    for (final Object tgt : tc.getTargets()) {
+                        // Track distinct objects so Becomes targets don't trigger for things like:
+                        // Seeds of Strength
+                        if (distinctObjects.contains(tgt)) {
+                            continue;
                         }
+                        
+                        distinctObjects.add(tgt);
+                        runParams.put("Target", tgt);
+                        game.getTriggerHandler().runTrigger(TriggerType.BecomesTarget, runParams, false);
                     }
                 }
             }
+        }
+        // Not sure these clauses are necessary. Consider it a precaution
+        // for backwards compatibility for hardcoded cards.
+        else if (sp.getTargetCard() != null) {
+            runParams.put("Target", sp.getTargetCard());
 
-            // Not sure these clauses are necessary. Consider it a precaution
-            // for backwards compatibility for hardcoded cards.
-            else if (sp.getTargetCard() != null) {
-                runParams.put("Target", sp.getTargetCard());
-
-                game.getTriggerHandler().runTrigger(TriggerType.BecomesTarget, runParams, false);
-            }
+            game.getTriggerHandler().runTrigger(TriggerType.BecomesTarget, runParams, false);
         }
         
         if (!this.simultaneousStackEntryList.isEmpty()) {
@@ -455,7 +452,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
     }
 
     // Push should only be used by add.
-    private void push(final SpellAbility sp) {
+    private SpellAbilityStackInstance push(final SpellAbility sp) {
         if (null == sp.getActivatingPlayer()) {
             sp.setActivatingPlayer(sp.getSourceCard().getController());
             System.out.println(sp.getSourceCard().getName() + " - activatingPlayer not set before adding to stack.");
@@ -482,6 +479,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             final Command ripple = new RippleExecutor(sp.getActivatingPlayer(), sp.getSourceCard());
             ripple.run();
         }
+        return si;
     }
 
     /**
