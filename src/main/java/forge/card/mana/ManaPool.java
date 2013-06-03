@@ -25,6 +25,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.base.Supplier;
+import com.google.common.collect.Lists;
+
 import forge.card.MagicColor;
 import forge.card.spellability.AbilityManaPart;
 import forge.card.spellability.SpellAbility;
@@ -108,7 +110,7 @@ public class ManaPool {
         int numRemoved = 0;
         boolean keepGreenMana = isEndOfPhase && this.owner.hasKeyword("Green mana doesn't empty from your mana pool as steps and phases end."); 
 
-        Set<Byte> keys = floatingMana.keySet();
+        List<Byte> keys = Lists.newArrayList(floatingMana.keySet());
         if ( keepGreenMana )
             keys.remove(Byte.valueOf(MagicColor.GREEN));
         
