@@ -5,6 +5,7 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | OptionalDecider$ You | Trigge
 SVar:ChooseAmount:DB$ ChooseNumber | Min$ 0 | Max$ 2 | ListTitle$ Choose the amount of mana | SubAbility$ DBMana
 SVar:DBMana:DB$ Mana | Amount$ X | References$ X | Produced$ 1 | RestrictValid$ nonSpell
 SVar:X:Count$ChosenNumber
+SVar:RemRandomDeck:True
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thran_turbine.jpg
 Oracle:At the beginning of your upkeep, you may add {1} or {2} to your mana pool. You can't spend this mana to cast spells.
