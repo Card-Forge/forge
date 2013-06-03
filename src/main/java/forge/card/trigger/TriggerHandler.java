@@ -244,11 +244,12 @@ public class TriggerHandler {
         List<Card> playerCards = player.getAllCards();
         
         // check LKI copies for triggers
-        if (runParams.containsKey("Destination") && runParams.containsKey("Card")) {
+        if (runParams.containsKey("Destination") && !ZoneType.Battlefield.name().equals(runParams.get("Destination"))
+                && runParams.containsKey("Card")) {
             Card card = (Card) runParams.get("Card");
             if (card.getController() == player) {
                 for (final Trigger t : card.getTriggers()) {
-                    if (!t.isStatic() && !t.isIntrinsic() && canRunTrigger(t, mode, runParams)) {
+                    if (!t.isStatic() && (card.isToken() || !t.isIntrinsic()) && canRunTrigger(t, mode, runParams)) {
                         this.runSingleTrigger(t, runParams);
                         checkStatics = true;
                     }
