@@ -8,7 +8,7 @@ Name=Dimir Dementia
 Description=House Dimir values secrecy above all, entrusting only its own agents with valuable codes and information. Whenever you cast a card with cipher, you can exile it, encoding it on a creature you control. Then, whenever the creature slides through and damages a player, you'll get to cast that card again!
 Deck Type=constructed
 Set=GTC
-Image=boros_battalion.jpg
+Image=dimir_dementia.jpg
 [main]
 1  Dimir Guildgate|GTC
 12  Island|RTR

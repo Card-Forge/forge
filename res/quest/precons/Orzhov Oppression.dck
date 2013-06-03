@@ -8,7 +8,7 @@ Name=Orzhov Oppression
 Description=The Orzhov Syndicate's underhanded dealings wear down your opponents, whittling away their life totals until you have it all. Cards with the extort mechanic allow you to pay B/W whenever you cast a spell to "drain" each opponent for 1 life. Better yet, the ability works in multiples! Get more and more creatures from the "Orzhov Oppression" deck on the battlefield and you can take larger and larger bites out of opposing life totals every time you cast a spell.
 Deck Type=constructed
 Set=GTC
-Image=orzhov_opression.jpg
+Image=orzhov_oppression.jpg
 [main]
 1  Orzhov Guildgate|GTC
 12  Plains|RTR
