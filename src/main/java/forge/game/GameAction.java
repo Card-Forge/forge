@@ -1572,10 +1572,12 @@ public class GameAction {
                     }
                 }
             }
-    
+
             // Players are supposed to return the effects in an order they want those to be resolved (Rule 103.5)
-            usableFromOpeningHand = takesAction.getController().chooseSaToActivateFromOpeningHand(usableFromOpeningHand);
-    
+            if (!usableFromOpeningHand.isEmpty()) {
+                usableFromOpeningHand = takesAction.getController().chooseSaToActivateFromOpeningHand(usableFromOpeningHand);
+            }
+
             for(final SpellAbility sa : usableFromOpeningHand ) {
                 if (!takesAction.getZone(ZoneType.Hand).contains(sa.getSourceCard()))
                     continue;
