@@ -33,6 +33,10 @@ Minion of Leshrac
 Patron of the Nezumi
 Prowling Pangolin
 Gemstone Caverns
+Martyr of Bones
+Odric, Master Tactician
+Master Warcraft
+Thran Turbine
 
 
 ----------
@@ -100,6 +104,9 @@ Vial of Poison
 Windreader Sphinx
 Woodborn Behemoth
 Young Pyromancer
+
+Fleshpulper Giant
+Marauding Maulhorn
 
 
 ------------
