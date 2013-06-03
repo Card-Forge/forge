@@ -1665,6 +1665,7 @@ res/cardsfolder/c/chain_lightning.txt -text
 res/cardsfolder/c/chain_of_plasma.txt -text
 res/cardsfolder/c/chain_of_vapor.txt -text
 res/cardsfolder/c/chain_reaction.txt svneol=native#text/plain
+res/cardsfolder/c/chain_stasis.txt -text
 res/cardsfolder/c/chainbreaker.txt svneol=native#text/plain
 res/cardsfolder/c/chained_throatseeker.txt svneol=native#text/plain
 res/cardsfolder/c/chainer_dementia_master.txt svneol=native#text/plain

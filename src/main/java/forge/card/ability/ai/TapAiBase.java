@@ -292,6 +292,7 @@ public abstract class TapAiBase extends SpellAbilityAi  {
 
             return true;
         } else {
+            tgt.resetTargets();
             if (tapPrefTargeting(ai, source, tgt, sa, mandatory)) {
                 return true;
             } else if (mandatory) {
