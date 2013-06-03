@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
@@ -154,18 +155,35 @@ public final class SLayoutIO {
                     fis = new FileInputStream(file.defaultLoc);
                 }
             }
+
+            XMLEventReader xer = null;
+            try {
+                xer = inputFactory.createXMLEventReader(fis); 
+                model = readLayout(xer);
+            } catch (final XMLStreamException e) {
+                try {
+                    if ( xer != null ) xer.close();
+                } catch (final XMLStreamException x) {
+                    e.printStackTrace();
+                }
+                e.printStackTrace();
+                if ( usedCustomPrefsFile ) // the one we can safely delete
+                    throw new InvalidLayoutFileException();
+                else
+                    throw new RuntimeException(e);
+            }
+
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
+        } finally {
+            if ( fis != null )
+                try {
+                    fis.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
         }
 
-        try {
-            model = readLayout(inputFactory.createXMLEventReader(fis));
-        } catch (final XMLStreamException e) {
-            if ( usedCustomPrefsFile ) // the one we can safely delete
-                throw new InvalidLayoutFileException();
-            else
-                throw new RuntimeException(e);
-        }
         
         // Apply new layout
         DragCell cell = null;
