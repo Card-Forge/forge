@@ -1,10 +1,10 @@
 Name:Hatching Plans
 ManaCost:1 U
 Types:Enchantment
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ TrigDraw | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, draw three cards.
-SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ TriggeredCardController | NumCards$ 3
-SVar:RemRandomDeck:True
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, draw three cards.
+SVar:TrigDraw:AB$ Draw | Cost$ 0 | Defined$ TriggeredCardController | NumCards$ 3
 SVar:SacMe:5
+SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hatching_plans.jpg
 Oracle:When Hatching Plans is put into a graveyard from the battlefield, draw three cards.
 SetInfo:GPT Rare
