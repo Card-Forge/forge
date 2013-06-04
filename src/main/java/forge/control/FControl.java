@@ -329,7 +329,7 @@ public enum FControl {
     
     public boolean mayShowCard(Card c) {
         if ( game == null ) return true;
-        return c.canBeShownTo(getCurrentPlayer());
+        return !gameHasHumanPlayer || c.canBeShownTo(getCurrentPlayer());
     }
 
     /**

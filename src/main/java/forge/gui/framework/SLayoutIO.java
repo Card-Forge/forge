@@ -173,7 +173,7 @@ public final class SLayoutIO {
             try {
                 xer = inputFactory.createXMLEventReader(fis); 
                 model = readLayout(xer);
-            } catch (final XMLStreamException e) {
+            } catch (final Exception e) { // I don't care what happened inside, the layout is wrong
                 try {
                     if ( xer != null ) xer.close();
                 } catch (final XMLStreamException x) {
