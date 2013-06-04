@@ -1,0 +1,15 @@
+Name:Summoning Trap
+ManaCost:4 G G
+Types:Instant Trap
+#Keep track of countered cards even while in other zones, so no TriggerZones param. Clear tracked number each cleanup.
+T:Mode$ Countered | ValidCause$ Card.OppCtrl | ValidCard$ Creature.YouCtrl | Execute$ TrackValidCounters | Static$ True
+SVar:TrackValidCounters:DB$ StoreSVar | SVar$ SetTrap | Type$ CountSVar | Expression$ SetTrap/Plus.1
+T:Mode$ Phase | Phase$ Cleanup | Execute$ TrigReset | Static$ True
+SVar:TrigReset:AB$ StoreSVar | Cost$ 0 | SVar$ SetTrap | Type$ Number | Expression$ 0
+SVar:SetTrap:Number$0
+#Set up main abilities
+SVar:AltCost:Cost$ 0 | CheckSVar$ SetTrap | SVarCompare$ GE1 | Description$ If a creature spell you cast this turn was countered by a spell or ability an opponent controlled, you may pay {0} rather than pay CARDNAME's mana cost.
+A:SP$ Dig | Cost$ 4 G G | DigNum$ 7 | ChangeNum$ 1 | ChangeValid$ Creature | DestinationZone$ Battlefield | SpellDescription$ Look at the top seven cards of your library. You may put a creature card from among them onto the battlefield. Put the rest on the bottom of your library in any order.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/summoning_trap.jpg
+Oracle:If a creature spell you cast this turn was countered by a spell or ability an opponent controlled, you may pay {0} rather than pay Summoning Trap's mana cost.\nLook at the top seven cards of your library. You may put a creature card from among them onto the battlefield. Put the rest on the bottom of your library in any order.
+SetInfo:ZEN Rare

@@ -10751,6 +10751,7 @@ res/cardsfolder/s/summoners_bane.txt svneol=native#text/plain
 res/cardsfolder/s/summoners_egg.txt -text
 res/cardsfolder/s/summoners_pact.txt svneol=native#text/plain
 res/cardsfolder/s/summoning_station.txt svneol=native#text/plain
+res/cardsfolder/s/summoning_trap.txt -text
 res/cardsfolder/s/sun_ce_young_conquerer.txt svneol=native#text/plain
 res/cardsfolder/s/sun_clasp.txt svneol=native#text/plain
 res/cardsfolder/s/sun_droplet.txt svneol=native#text/plain
