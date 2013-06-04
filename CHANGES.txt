@@ -17,17 +17,17 @@ We have added a branch to our SVN for the new cards that are currently being scr
 
 
 - Match and Deck Editor Layout problems -
-The match and deck editor windows contain panels that can be moved and or resized. The changes that you make are saved to files that are named "editor.xml" and "match.xml". These files can be found in your userDir/preferences/ directory.
+The match and deck editor windows contain panels that can be moved and/or resized. The changes that you make are saved to files that are named "editor.xml" and "match.xml". These files can be found in your userDir/preferences/ directory.
 
 Sometimes people will decide that they do not like the changes that they made and wish to go back to the original layout.
 
-These "editor.xml" and "match.xml" files at times can become corrupted. You may notice one or more panels/tabs are missing from the match and/or deck editor windows. Or Forge may crash when a match is started or when the deck editor is displayed. When this happens you will notice a crash report that starts with the following lines:
+These "editor.xml" and "match.xml" files at times can become corrupted. You may notice that one or more panels/tabs are missing from the match and/or deck editor windows. Or Forge may crash when a match is started or when the deck editor is displayed. When this happens you will notice a crash report that starts with the following lines:
 
 java.lang.NullPointerException
    at forge.gui.framework.SLayoutIO.loadLayout(SLayoutIO.java:153)
    at forge.gui.match.VMatchUI.populate(VMatchUI.java:57)
 
-You can solve either of the two problems stated above by finding the "editor.xml" and/or "match.xml" files and then deleting them. Or you can go to the Game Settings -> Preferences -> Troubleshooting section. You will find at this location two buttons that will reset the match layout and the deck editor layouts.
+You can solve either of the two problems stated above by going to the Game Settings -> Preferences -> Troubleshooting section. You will find at this location two buttons that will reset the match layout and the deck editor layouts.
 
 
 - The AI Drafting has been improved -
