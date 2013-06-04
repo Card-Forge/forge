@@ -9,7 +9,7 @@ Release Notes
 -------------
 
 - Java 7 -
-The devs are discussing a plan to update the battlefield display code with Java FX 2.2 and this should help to improve a few things. Java FX 2.2 requires Java 7 so it is important for members of our user base to update in the near future as Forge at the time of the update will no longer run under Java 6.
+The devs are discussing a plan to update the battlefield display code with Java FX 2.2 and this should help to improve a few things. Java FX 2.2 requires Java 7 so please update your Java runtime environment in the nearest future. At some point a new version of Forge will no longer run under Java 6.
 
 
 - New M14 cards -
@@ -19,15 +19,9 @@ We have added a branch to our SVN for the new cards that are currently being scr
 - Match and Deck Editor Layout problems -
 The match and deck editor windows contain panels that can be moved and/or resized. The changes that you make are saved to files that are named "editor.xml" and "match.xml". These files can be found in your userDir/preferences/ directory.
 
-Sometimes people will decide that they do not like the changes that they made and wish to go back to the original layout.
+Sometimes people will decide that they do not like the changes that they made and wish to go back to the original layout. To reset layouts to deafult, go to the Game Settings -> Preferences -> Troubleshooting section. You will find at this location two buttons that will reset the match layout and the deck editor layouts.
 
-These "editor.xml" and "match.xml" files at times can become corrupted. You may notice that one or more panels/tabs are missing from the match and/or deck editor windows. Or Forge may crash when a match is started or when the deck editor is displayed. When this happens you will notice a crash report that starts with the following lines:
-
-java.lang.NullPointerException
-   at forge.gui.framework.SLayoutIO.loadLayout(SLayoutIO.java:153)
-   at forge.gui.match.VMatchUI.populate(VMatchUI.java:57)
-
-You can solve either of the two problems stated above by going to the Game Settings -> Preferences -> Troubleshooting section. You will find at this location two buttons that will reset the match layout and the deck editor layouts.
+Also use the mentioned measure if your match or deckeditor won't start - it would help in 90% of the cases.
 
 
 - The AI Drafting has been improved -
