@@ -1,6 +1,9 @@
 package forge.card.ability;
 
 
+import java.util.List;
+
+import forge.Card;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.game.ai.ComputerUtilCost;
@@ -108,5 +111,15 @@ public abstract class SpellAbilityAi {
     public boolean confirmAction(Player player, SpellAbility sa, PlayerActionConfirmMode mode, String message) {
         System.err.println("Warning: default (ie. inherited from base class) implementation of confirmAction is used for " + this.getClass().getName() + ". Consider declaring an overloaded method");
         return true;
+    }
+
+    public Card chooseSingleCard(Player ai, SpellAbility sa, List<Card> options, boolean isOptional) {
+        System.err.println("Warning: default (ie. inherited from base class) implementation of chooseSingleCard is used for " + this.getClass().getName() + ". Consider declaring an overloaded method");
+        return options.get(0);
+    }
+    
+    public Player chooseSinglePlayer(Player ai, SpellAbility sa, List<Player> options, boolean isOptional) {
+        System.err.println("Warning: default (ie. inherited from base class) implementation of chooseSinglePlayer is used for " + this.getClass().getName() + ". Consider declaring an overloaded method");
+        return options.get(0);
     }
 }

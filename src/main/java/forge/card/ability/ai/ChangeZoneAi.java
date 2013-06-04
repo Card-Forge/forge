@@ -1382,4 +1382,11 @@ public class ChangeZoneAi extends SpellAbilityAi {
         return true;
     }
     
+
+    @Override
+    public Card chooseSingleCard(Player ai, SpellAbility sa, List<Card> options, boolean isOptional) {
+        // Called when looking for creature to attach aura or equipment
+        return ComputerUtilCard.getBestAI(options);
+    }
+    
 }

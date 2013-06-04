@@ -6,10 +6,12 @@ import com.google.common.base.Predicate;
 
 import forge.Card;
 import forge.CardLists;
+import forge.CardPredicates.Presets;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.game.Game;
+import forge.game.ai.ComputerUtilCard;
 import forge.game.ai.ComputerUtilCombat;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -89,5 +91,58 @@ public class ChooseCardAi extends SpellAbilityAi {
     @Override
     public boolean chkAIDrawback(SpellAbility sa, Player ai) {
         return canPlayAI(ai, sa);
+    }
+    
+    /* (non-Javadoc)
+     * @see forge.card.ability.SpellAbilityAi#chooseSingleCard(forge.card.spellability.SpellAbility, java.util.List, boolean)
+     */
+    @Override
+    public Card chooseSingleCard(final Player ai, SpellAbility sa, List<Card> options, boolean isOptional) {
+        final Card host = sa.getSourceCard();
+        final String logic = sa.getParam("AILogic");
+        Card choice = null;
+        if (logic == null) {
+            // Base Logic is choose "best"
+            choice = ComputerUtilCard.getBestAI(options);
+        } else if ("WorstCard".equals(logic)) {
+            choice = ComputerUtilCard.getWorstAI(options);
+        } else if (logic.equals("BestBlocker")) {
+            if (!CardLists.filter(options, Presets.UNTAPPED).isEmpty()) {
+                options = CardLists.filter(options, Presets.UNTAPPED);
+            }
+            choice = ComputerUtilCard.getBestCreatureAI(options);
+        } else if (logic.equals("Clone")) {
+            if (!CardLists.getValidCards(options, "Permanent.YouDontCtrl,Permanent.nonLegendary", host.getController(), host).isEmpty()) {
+                options = CardLists.getValidCards(options, "Permanent.YouDontCtrl,Permanent.nonLegendary", host.getController(), host);
+            }
+            choice = ComputerUtilCard.getBestAI(options);
+        } else if (logic.equals("Untap")) {
+            if (!CardLists.getValidCards(options, "Permanent.YouCtrl,Permanent.tapped", host.getController(), host).isEmpty()) {
+                options = CardLists.getValidCards(options, "Permanent.YouCtrl,Permanent.tapped", host.getController(), host);
+            }
+            choice = ComputerUtilCard.getBestAI(options);
+        } else if (logic.equals("NeedsPrevention")) {
+            List<Card> better =  CardLists.filter(options, new Predicate<Card>() {
+                @Override
+                public boolean apply(final Card c) {
+                    final Game game = ai.getGame();
+                    if (!c.isAttacking(ai) || !game.getCombat().isUnblocked(c)) {
+                        return false;
+                    }
+                    if (host.getName().equals("Forcefield")) {
+                        return ComputerUtilCombat.damageIfUnblocked(c, ai, game.getCombat()) > 1;
+                    }
+                    return ComputerUtilCombat.damageIfUnblocked(c, ai, game.getCombat()) > 0;
+                }
+            });
+            if (!better.isEmpty()) {
+                choice = ComputerUtilCard.getBestAI(better);
+            } else {
+                choice = ComputerUtilCard.getBestAI(options);
+            }
+        } else {
+            choice = ComputerUtilCard.getBestAI(options);
+        }
+        return choice;
     }
 }

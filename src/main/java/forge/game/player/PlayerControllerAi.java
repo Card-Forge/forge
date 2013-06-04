@@ -1,5 +1,6 @@
 package forge.game.player;
 
+import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -14,6 +15,7 @@ import forge.Card;
 import forge.CardLists;
 import forge.CardPredicates;
 import forge.GameEntity;
+import forge.card.ability.ApiType;
 import forge.card.cost.Cost;
 import forge.card.mana.Mana;
 import forge.card.replacement.ReplacementEffect;
@@ -134,7 +136,12 @@ public class PlayerControllerAi extends PlayerController {
     
     @Override
     public Card chooseSingleCardForEffect(List<Card> options, SpellAbility sa, String title, boolean isOptional) {
-        return getAi().chooseSingleCardForEffect(options, sa, title, isOptional);
+        ApiType api = sa.getApi();
+        if ( null == api ) {
+            throw new InvalidParameterException("SA is not api-based, this is not supported yet");
+        }
+        
+        return api.getAi().chooseSingleCard(player, sa, options, isOptional);
     }
 
     @Override

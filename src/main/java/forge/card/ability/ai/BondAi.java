@@ -17,8 +17,12 @@
  */
 package forge.card.ability.ai;
 
+import java.util.List;
+
+import forge.Card;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.spellability.SpellAbility;
+import forge.game.ai.ComputerUtilCard;
 import forge.game.player.Player;
 
 /**
@@ -45,4 +49,10 @@ public final class BondAi extends SpellAbilityAi {
     protected boolean canPlayAI(Player aiPlayer, SpellAbility sa) {
         return true;
     } // end bondCanPlayAI()
+    
+
+    @Override
+    public Card chooseSingleCard(Player ai, SpellAbility sa, List<Card> options, boolean isOptional) {
+        return ComputerUtilCard.getBestCreatureAI(options);
+    }
 }
