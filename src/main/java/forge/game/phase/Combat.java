@@ -112,6 +112,10 @@ public class Combat {
         this.defenderMap.clear();
         fillDefenderMaps(defender);
     }
+    
+    public final boolean isCombat() {
+        return !attackerMap.isEmpty();
+    }
 
     private void fillDefenderMaps(final Player defender) {
         this.defenders.add(defender);

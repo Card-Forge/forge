@@ -397,10 +397,6 @@ public class PhaseHandler implements java.io.Serializable {
                 default:
                     break;
             }
-    
-            if (inCombat()) {
-                CombatUtil.showCombat();
-            }
         }
     
         // Handle effects that happen at the beginning of phases
@@ -498,10 +494,6 @@ public class PhaseHandler implements java.io.Serializable {
                     if (exaltedMagnitude > 0) {
                         CombatUtil.executeExaltedAbility(game, attacker, exaltedMagnitude, card);
                     }
-                    
-    //                            if ("Sovereigns of Lost Alara".equals(card.getName())) {
-    //                                CombatUtil.souverignsOfAlara2ndAbility(game, attacker);
-    //                            }
                 }
             }
     

@@ -37,6 +37,8 @@ import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 import forge.gui.framework.EDocID;
+import forge.gui.framework.SDisplayUtil;
+import forge.gui.match.controllers.CCombat;
 import forge.gui.match.controllers.CDetail;
 import forge.gui.match.controllers.CMessage;
 import forge.gui.match.controllers.CPicture;
@@ -256,4 +258,13 @@ public enum CMatchUI {
     private int getPlayerIndex(Player player) {
         return sortedPlayers.indexOf(player);
     }    
+    
+
+    public void showCombat() {
+        if ( CCombat.SINGLETON_INSTANCE.hasCombatToShow() ) {
+            SDisplayUtil.showTab(EDocID.REPORT_COMBAT.getDoc());
+        }
+        CCombat.SINGLETON_INSTANCE.update();
+    } // showBlockers()
+
 }

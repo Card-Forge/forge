@@ -7,6 +7,8 @@ import forge.Command;
 import forge.GameEntity;
 import forge.game.Game;
 import forge.game.phase.Combat;
+import forge.game.phase.PhaseHandler;
+import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.gui.framework.ICDoc;
 import forge.gui.match.views.VCombat;
@@ -39,15 +41,22 @@ public enum CCombat implements ICDoc {
     public void initialize() {
     }
 
+    public final boolean hasCombatToShow() {
+        PhaseHandler pH = game.getPhaseHandler();
+        PhaseType ph = pH.getPhase();
+
+        return game.getCombat().isCombat() && ph.isAfter(PhaseType.COMBAT_BEGIN) && ph.isBefore(PhaseType.END_OF_TURN);
+    }
+    
     /* (non-Javadoc)
      * @see forge.gui.framework.ICDoc#update()
      */
     @Override
     public void update() {
-        if (!game.getPhaseHandler().inCombat())
-            VCombat.SINGLETON_INSTANCE.updateCombat(0, "");
-        else
+        if (hasCombatToShow()) // display combat
             VCombat.SINGLETON_INSTANCE.updateCombat(game.getCombat().getAttackers().size(), getCombatDescription(game.getCombat()));
+        else
+            VCombat.SINGLETON_INSTANCE.updateCombat(0, "");
     }
     
     public void setModel(Game game)

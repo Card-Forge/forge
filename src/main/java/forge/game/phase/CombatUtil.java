@@ -34,7 +34,6 @@ import forge.CardLists;
 import forge.CardPredicates;
 import forge.Command;
 import forge.Constant;
-import forge.FThreads;
 import forge.GameEntity;
 import forge.card.CardType;
 import forge.card.MagicColor;
@@ -51,9 +50,6 @@ import forge.game.player.Player;
 import forge.game.player.PlayerController.ManaPaymentPurpose;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiDialog;
-import forge.gui.framework.EDocID;
-import forge.gui.framework.SDisplayUtil;
-import forge.gui.match.controllers.CCombat;
 
 
 /**
@@ -423,10 +419,7 @@ public class CombatUtil {
 
     public static void orderMultipleCombatants(final Combat combat) {
         CombatUtil.orderMultipleBlockers(combat);
-        CombatUtil.showCombat();
-
         CombatUtil.orderBlockingMultipleAttackers(combat);
-        CombatUtil.showCombat();
     }
 
     private static void orderMultipleBlockers(final Combat combat) {
@@ -954,20 +947,6 @@ public class CombatUtil {
 
         return true;
     } // canAttack()
-
-
-    /**
-     * <p>
-     * showCombat.
-     * </p>
-     */
-    public static void showCombat() {
-        FThreads.invokeInEdtNowOrLater( new Runnable() { @Override public void run() {
-            SDisplayUtil.showTab(EDocID.REPORT_COMBAT.getDoc());
-            CCombat.SINGLETON_INSTANCE.update();
-        } }); 
-    } // showBlockers()
-
 
     /**
      * <p>

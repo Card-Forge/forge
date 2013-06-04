@@ -10,15 +10,18 @@ import forge.Card;
 import forge.FThreads;
 import forge.game.event.GameEvent;
 import forge.game.event.GameEventAnteCardsSelected;
+import forge.game.event.GameEventAttackersDeclared;
 import forge.game.event.GameEventGameFinished;
 import forge.game.event.GameEventGameOutcome;
 import forge.game.event.GameEventPlayerControl;
+import forge.game.event.GameEventPlayerPriority;
 import forge.game.event.GameEventSpellAbilityCast;
 import forge.game.event.GameEventSpellRemovedFromStack;
 import forge.game.event.GameEventSpellResolved;
 import forge.game.event.GameEventTurnBegan;
 import forge.game.event.GameEventTurnPhase;
 import forge.game.event.IGameEventVisitor;
+import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.gui.GuiDialog;
@@ -46,8 +49,9 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
         if ( phaseUpdPlanned.getAndSet(true) ) return null;
         
         FThreads.invokeInEdtNowOrLater(new Runnable() { @Override public void run() {
-            Player p = fc.getObservedGame().getPhaseHandler().getPlayerTurn();
-            PhaseType ph = fc.getObservedGame().getPhaseHandler().getPhase();
+            PhaseHandler pH = fc.getObservedGame().getPhaseHandler();
+            Player p = pH.getPlayerTurn();
+            PhaseType ph = pH.getPhase();
 
             phaseUpdPlanned.set(false);
             
@@ -57,10 +61,25 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
             matchUi.resetAllPhaseButtons();
             if (lbl != null) lbl.setActive(true);
         } });
-        
-
         return null;
     }
+    
+    /* (non-Javadoc)
+     * @see forge.game.event.IGameEventVisitor.Base#visit(forge.game.event.GameEventPlayerPriority)
+     */
+    
+    
+    private final AtomicBoolean combatUpdPlanned = new AtomicBoolean(false);
+    @Override
+    public Void visit(GameEventPlayerPriority event) {
+        if ( combatUpdPlanned.getAndSet(true) ) return null;
+        FThreads.invokeInEdtNowOrLater(new Runnable() { @Override public void run() {
+            combatUpdPlanned.set(false);
+            CMatchUI.SINGLETON_INSTANCE.showCombat();
+        } });
+        return null;
+    }
+    
 
     private final AtomicBoolean turnUpdPlanned = new AtomicBoolean(false);
     @Override

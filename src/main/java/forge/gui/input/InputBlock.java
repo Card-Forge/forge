@@ -26,6 +26,7 @@ import forge.game.phase.Combat;
 import forge.game.phase.CombatUtil;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
+import forge.gui.match.CMatchUI;
 import forge.view.ButtonUtil;
 
 /**
@@ -83,7 +84,7 @@ public class InputBlock extends InputSyncronizedBase {
             showMessage(sb.toString());
         }
 
-        CombatUtil.showCombat();
+        CMatchUI.SINGLETON_INSTANCE.showCombat();
     }
 
     /** {@inheritDoc} */
@@ -109,7 +110,7 @@ public class InputBlock extends InputSyncronizedBase {
                 combat.removeFromCombat(card);
             }
             removeFromAllBlocking(card);
-            CombatUtil.showCombat();
+            CMatchUI.SINGLETON_INSTANCE.showCombat();
             return;
         }
         

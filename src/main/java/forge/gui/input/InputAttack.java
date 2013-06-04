@@ -30,6 +30,7 @@ import forge.game.phase.Combat;
 import forge.game.phase.CombatUtil;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
+import forge.gui.match.CMatchUI;
 import forge.util.MyObservable;
 import forge.view.ButtonUtil;
 
@@ -90,7 +91,7 @@ public class InputAttack extends InputSyncronizedBase {
     
     private void showCombat() {
         playerAttacks.getZone(ZoneType.Battlefield).updateObservers(); // redraw sword icons
-        CombatUtil.showCombat();
+        CMatchUI.SINGLETON_INSTANCE.showCombat();
     }
     
     /** {@inheritDoc} */
