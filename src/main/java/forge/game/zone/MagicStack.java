@@ -394,9 +394,13 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         // Run BecomesTarget triggers
         // Create a new object, since the triggers aren't happening right away
         final List<TargetChoices> chosenTargets = sp.getAllTargetChoices();
-        runParams = new HashMap<String, Object>();
-        runParams.put("SourceSA", si.getSpellAbility());
         if (!chosenTargets.isEmpty()) { 
+            runParams = new HashMap<String, Object>();
+            SpellAbility s = sp;
+            if (si != null) {
+                s = si.getSpellAbility();
+            }
+            runParams.put("SourceSA", s);
             HashSet<Object> distinctObjects = new HashSet<Object>();
             for (final TargetChoices tc : chosenTargets) {
                 if (tc != null && tc.getTargetCards() != null) {
