@@ -5,7 +5,6 @@ A:SP$ ChangeZone | Cost$ X 2 U B | Origin$ Hand | Destination$ Exile | ValidTgts
 SVar:DBExile:DB$ ChangeZoneAll | Origin$ Hand,Library,Graveyard | Destination$ Exile | Defined$ Targeted | Search$ True | ChangeType$ Card.sharesNameWith Remembered | Shuffle$ True | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$xPaid
-SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reap_intellect.jpg
 Oracle:Target opponent reveals his or her hand. You choose up to X nonland cards from it and exile them. For each card exiled this way, search that player's graveyard, hand, and library for any number of cards with the same name as that card and exile them. Then that player shuffles his or her library.
 SetInfo:DGM Mythic

@@ -260,7 +260,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
         for (final Player p : pDefined) {
             List<Card> list = p.getCardsIn(origin);
 
-            if ((type != null) && p == ai) {
+            if (type != null && p == ai) {
                 // AI only "knows" about his information
                 list = CardLists.getValidCards(list, type, source.getController(), source);
                 list = CardLists.filter(list, new Predicate<Card>() {
@@ -274,6 +274,16 @@ public class ChangeZoneAi extends SpellAbilityAi {
                         return true;
                     }
                 });
+            }
+
+            String num = sa.getParam("ChangeNum");
+            if (num != null) {
+                if (num.contains("X") && source.getSVar("X").equals("Count$xPaid")) {
+                    // Set PayX here to maximum value.
+                    int xPay = ComputerUtilMana.determineLeftoverMana(sa, ai);
+                    xPay = Math.min(xPay, list.size());
+                    source.setSVar("PayX", Integer.toString(xPay));
+                }
             }
 
             if (list.isEmpty()) {
@@ -356,7 +366,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
 
         // this works for hidden because the mana is paid first.
         final String type = sa.getParam("ChangeType");
-        if ((type != null) && type.contains("X") && source.getSVar("X").equals("Count$xPaid")) {
+        if (type != null && type.contains("X") && source.getSVar("X").equals("Count$xPaid")) {
             // Set PayX here to maximum value.
             final int xPay = ComputerUtilMana.determineLeftoverMana(sa, ai);
             source.setSVar("PayX", Integer.toString(xPay));
