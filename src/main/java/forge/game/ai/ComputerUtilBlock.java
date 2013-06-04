@@ -567,26 +567,56 @@ public class ComputerUtilBlock {
     private static Combat makeChumpBlocks(final Player ai, final Combat combat) {
 
         List<Card> currentAttackers = new ArrayList<Card>(ComputerUtilBlock.getAttackersLeft());
-        List<Card> chumpBlockers;
 
-        for (final Card attacker : ComputerUtilBlock.getAttackersLeft()) {
-
-            if (attacker.hasKeyword("CARDNAME can't be blocked except by two or more creatures.")
-                    || attacker.hasKeyword("You may have CARDNAME assign its combat damage as though it weren't blocked.")) {
-                continue;
-            }
-
-            chumpBlockers = ComputerUtilBlock
-                    .getPossibleBlockers(attacker, ComputerUtilBlock.getBlockersLeft(), combat, true);
-            if ((chumpBlockers.size() > 0) && ComputerUtilCombat.lifeInDanger(ai, combat)) {
-                final Card blocker = ComputerUtilCard.getWorstCreatureAI(chumpBlockers);
-                combat.addBlocker(attacker, blocker);
-                currentAttackers.remove(attacker);
-                ComputerUtilBlock.getBlockedButUnkilled().add(attacker);
-            }
+        return makeChumpBlocks(ai, combat, currentAttackers);
+    }
+    
+    private static Combat makeChumpBlocks(final Player ai, final Combat combat, List<Card> attackers) {
+        
+        if (attackers.isEmpty() || !ComputerUtilCombat.lifeInDanger(ai, combat)) {
+            return combat;
         }
-        ComputerUtilBlock.setAttackersLeft(new ArrayList<Card>(currentAttackers));
-        return combat;
+        
+        Card attacker = attackers.get(0);
+        
+        if (attacker.hasKeyword("CARDNAME can't be blocked except by two or more creatures.")
+                || attacker.hasKeyword("You may have CARDNAME assign its combat damage as though it weren't blocked.")) {
+            attackers.remove(0);
+            return makeChumpBlocks(ai, combat, attackers);
+        }
+
+        List<Card> chumpBlockers = ComputerUtilBlock
+                .getPossibleBlockers(attacker, ComputerUtilBlock.getBlockersLeft(), combat, true);
+        if (!chumpBlockers.isEmpty()) {
+            final Card blocker = ComputerUtilCard.getWorstCreatureAI(chumpBlockers);
+            
+            // check if it's better to block a creature with lower power and without trample
+            if (attacker.hasKeyword("Trample")) {
+                final int damageAbsorbed = blocker.getLethalDamage();
+                if (attacker.getNetCombatDamage() > damageAbsorbed) {
+                    for (Card other : attackers) {
+                        if (other.equals(attacker)) {
+                            continue;
+                        }
+                        if (other.getNetCombatDamage() >= damageAbsorbed 
+                                && !other.hasKeyword("Trample")
+                                && CombatUtil.canBlock(other, blocker, combat)) {
+                            combat.addBlocker(other, blocker);
+                            ComputerUtilBlock.getAttackersLeft().remove(other);
+                            ComputerUtilBlock.getBlockedButUnkilled().add(other);
+                            attackers.remove(other);
+                            return makeChumpBlocks(ai, combat, attackers);
+                        }
+                    }
+                }
+            }
+
+            combat.addBlocker(attacker, blocker);
+            ComputerUtilBlock.getAttackersLeft().remove(attacker);
+            ComputerUtilBlock.getBlockedButUnkilled().add(attacker);
+        }
+        attackers.remove(0);
+        return makeChumpBlocks(ai, combat, attackers);
     }
 
     // Reinforce blockers blocking attackers with trample (should only be made
@@ -777,13 +807,7 @@ public class ComputerUtilBlock {
         List<Card> blockers;
         List<Card> chumpBlockers;
 
-        ComputerUtilBlock.setDiff((ai.getLife() * 2) - 5); // This
-                                                                                    // is
-                                                                                    // the
-        // minimal gain
-        // for an
-        // unnecessary
-        // trade
+        ComputerUtilBlock.setDiff((ai.getLife() * 2) - 5); // This is the minimal gain for an unnecessary trade
 
         // remove all attackers that can't be blocked anyway
         for (final Card a : ComputerUtilBlock.getAttackers()) {
@@ -810,15 +834,11 @@ public class ComputerUtilBlock {
         combat = ComputerUtilBlock.makeGoodBlocks(ai, combat);
         combat = ComputerUtilBlock.makeGangBlocks(ai, combat);
         if (ComputerUtilCombat.lifeInDanger(ai, combat)) {
-            combat = ComputerUtilBlock.makeTradeBlocks(ai, combat); // choose
-                                                                // necessary
-                                                                // trade blocks
+            combat = ComputerUtilBlock.makeTradeBlocks(ai, combat); // choose necessary trade blocks
         }
         // if life is in danger
         if (ComputerUtilCombat.lifeInDanger(ai, combat)) {
-            combat = ComputerUtilBlock.makeChumpBlocks(ai, combat); // choose
-                                                                // necessary
-                                                                // chump blocks
+            combat = ComputerUtilBlock.makeChumpBlocks(ai, combat); // choose necessary chump blocks
         }
         // if life is still in danger
         // Reinforce blockers blocking attackers with trample if life is still
@@ -836,22 +856,14 @@ public class ComputerUtilBlock {
         // ==
         if (ComputerUtilCombat.lifeInDanger(ai, combat)) {
             lifeInDanger = true;
-            combat = ComputerUtilBlock.resetBlockers(combat, possibleBlockers); // reset
-                                                                                // every
-            // block
-            // assignment
-            combat = ComputerUtilBlock.makeTradeBlocks(ai, combat); // choose
-                                                                // necessary
-                                                                // trade blocks
+            combat = ComputerUtilBlock.resetBlockers(combat, possibleBlockers); // reset every block assignment
+            combat = ComputerUtilBlock.makeTradeBlocks(ai, combat); // choose necessary trade blocks
             // if life is in danger
             combat = ComputerUtilBlock.makeGoodBlocks(ai, combat);
+            // choose necessary chump blocks if life is still in danger
             if (ComputerUtilCombat.lifeInDanger(ai, combat)) {
-                combat = ComputerUtilBlock.makeChumpBlocks(ai, combat); // choose
-                                                                    // necessary
-                                                                    // chump
+                combat = ComputerUtilBlock.makeChumpBlocks(ai, combat);
             }
-            // blocks if life is still in
-            // danger
             // Reinforce blockers blocking attackers with trample if life is
             // still in danger
             if (ComputerUtilCombat.lifeInDanger(ai, combat)) {
@@ -861,19 +873,12 @@ public class ComputerUtilBlock {
             combat = ComputerUtilBlock.reinforceBlockersToKill(ai, combat);
         }
 
-        // == 3. If the AI life would be in serious danger make an even safer
-        // approach ==
-        if (ComputerUtilCombat.lifeInSeriousDanger(ai, combat)) {
-            combat = ComputerUtilBlock.resetBlockers(combat, possibleBlockers); // reset
-                                                                                // every
-            // block
-            // assignment
-            combat = ComputerUtilBlock.makeChumpBlocks(ai, combat); // choose chump
-                                                                // blocks
+        // == 3. If the AI life would be in serious danger make an even safer approach ==
+        if (lifeInDanger && ComputerUtilCombat.lifeInSeriousDanger(ai, combat)) {
+            combat = ComputerUtilBlock.resetBlockers(combat, possibleBlockers); // reset every block assignment
+            combat = ComputerUtilBlock.makeChumpBlocks(ai, combat); // choose chump blocks
             if (ComputerUtilCombat.lifeInDanger(ai, combat)) {
-                combat = ComputerUtilBlock.makeTradeBlocks(ai, combat); // choose
-                                                                    // necessary
-                                                                    // trade
+                combat = ComputerUtilBlock.makeTradeBlocks(ai, combat); // choose necessary trade
             }
 
             if (!ComputerUtilCombat.lifeInDanger(ai, combat)) {
