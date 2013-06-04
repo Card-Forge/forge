@@ -37,16 +37,4 @@ public class ReplaceGameLoss extends ReplacementEffect {
         return true;
     }
 
-    /* (non-Javadoc)
-     * @see forge.card.replacement.ReplacementEffect#getCopy()
-     */
-    @Override
-    public ReplacementEffect getCopy() {
-        ReplacementEffect res = new ReplaceGameLoss(this.getMapParams(), this.getHostCard());
-        res.setOverridingAbility(this.getOverridingAbility());
-        res.setActiveZone(validHostZones);
-        res.setLayer(getLayer());
-        return res;
-    }
-
 }

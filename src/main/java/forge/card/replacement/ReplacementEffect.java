@@ -17,7 +17,6 @@
  */
 package forge.card.replacement;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -49,6 +48,22 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
      */
     public final boolean hasRun() {
         return this.hasRun;
+    }
+
+    /** The map params, denoting what to replace. */
+    protected final Map<String, String> mapParams;
+
+    /**
+     * Instantiates a new replacement effect.
+     * 
+     * @param map
+     *            the map
+     * @param host
+     *            the host
+     */
+    public ReplacementEffect(final Map<String, String> map, final Card host) {
+        mapParams = map;
+        this.setHostCard(host);
     }
 
     /**
@@ -117,9 +132,6 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
         this.hasRun = hasRun;
     }
 
-    /** The map params, denoting what to replace. */
-    private Map<String, String> mapParams = new HashMap<String, String>();
-
     /**
      * <p>
      * Getter for the field <code>mapParams</code>.
@@ -132,16 +144,6 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
     }
 
     /**
-     * Sets the map params.
-     * 
-     * @param mapParams
-     *            the mapParams to set
-     */
-    public final void setMapParams(final Map<String, String> mapParams) {
-        this.mapParams = mapParams;
-    }
-
-    /**
      * Can replace.
      * 
      * @param runParams
@@ -149,20 +151,6 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
      * @return true, if successful
      */
     public abstract boolean canReplace(final Map<String, Object> runParams);
-
-    /**
-     * To string.
-     *
-     * @return a String
-     */
-    @Override
-    public String toString() {
-        if (this.getMapParams().containsKey("Description") && !this.isSuppressed()) {
-            return this.getMapParams().get("Description");
-        } else {
-            return "";
-        }
-    }
 
     /**
      * <p>
@@ -210,7 +198,15 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
      * 
      * @return the copy
      */
-    public abstract ReplacementEffect getCopy();
+    public final ReplacementEffect getCopy() {
+        ReplacementType rt = ReplacementType.getTypeFor(this);
+        ReplacementEffect res = rt.createReplacement(mapParams, hostCard); 
+        res.setOverridingAbility(this.getOverridingAbility());
+        res.setActiveZone(validHostZones);
+        res.setLayer(getLayer());
+        return res;
+
+    }
 
     /**
      * Sets the replacing objects.
@@ -225,19 +221,6 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
     }
 
     /**
-     * Instantiates a new replacement effect.
-     * 
-     * @param map
-     *            the map
-     * @param host
-     *            the host
-     */
-    public ReplacementEffect(final Map<String, String> map, final Card host) {
-        this.setMapParams(map);
-        this.setHostCard(host);
-    }
-
-    /**
      * @return the layer
      */
     public ReplacementLayer getLayer() {
@@ -249,5 +232,19 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
      */
     public void setLayer(ReplacementLayer layer0) {
         this.layer = layer0;
+    }
+
+    /**
+     * To string.
+     *
+     * @return a String
+     */
+    @Override
+    public String toString() {
+        if (this.getMapParams().containsKey("Description") && !this.isSuppressed()) {
+            return this.getMapParams().get("Description");
+        } else {
+            return "";
+        }
     }
 }

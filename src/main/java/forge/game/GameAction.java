@@ -1271,6 +1271,7 @@ public class GameAction {
 
         // Play the Destroy sound
         game.fireEvent(new GameEventCardDestroyed());
+
         // Run triggers
         final HashMap<String, Object> runParams = new HashMap<String, Object>();
         runParams.put("Card", c);

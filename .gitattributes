@@ -14100,6 +14100,7 @@ src/main/java/forge/card/replacement/ReplacementEffect.java -text
 src/main/java/forge/card/replacement/ReplacementHandler.java -text
 src/main/java/forge/card/replacement/ReplacementLayer.java -text
 src/main/java/forge/card/replacement/ReplacementResult.java -text
+src/main/java/forge/card/replacement/ReplacementType.java -text
 src/main/java/forge/card/replacement/package-info.java svneol=native#text/plain
 src/main/java/forge/card/spellability/Ability.java svneol=native#text/plain
 src/main/java/forge/card/spellability/AbilityActivated.java svneol=native#text/plain

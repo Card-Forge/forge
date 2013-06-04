@@ -254,6 +254,7 @@ public class ReplacementHandler {
      * @return A finished instance
      */
     public static ReplacementEffect parseReplacement(final String repParse, final Card host) {
+        
         final Map<String, String> mapParams = FileSection.parseToMap(repParse, "$", "|");
         return ReplacementHandler.parseReplacement(mapParams, host);
     }
@@ -269,27 +270,9 @@ public class ReplacementHandler {
      *            The card that hosts the replacement effect
      * @return The finished instance
      */
-    public static ReplacementEffect parseReplacement(final Map<String, String> mapParams, final Card host) {
-        ReplacementEffect ret = null;
-
-        final String eventToReplace = mapParams.get("Event");
-        if (eventToReplace.equals("Draw")) {
-            ret = new ReplaceDraw(mapParams, host);
-        } else if (eventToReplace.equals("Discard")) {
-            ret = new ReplaceDiscard(mapParams, host);
-        } else if (eventToReplace.equals("GainLife")) {
-            ret = new ReplaceGainLife(mapParams, host);
-        } else if (eventToReplace.equals("DamageDone")) {
-            ret = new ReplaceDamage(mapParams, host);
-        } else if (eventToReplace.equals("GameLoss")) {
-            ret = new ReplaceGameLoss(mapParams, host);
-        } else if (eventToReplace.equals("Moved")) {
-            ret = new ReplaceMoved(mapParams, host);
-        } else if (eventToReplace.equals("SetInMotion")) {
-            ret = new ReplaceSetInMotion(mapParams, host);
-        } else if (eventToReplace.equals("TurnFaceUp")) {
-            ret = new ReplaceTurnFaceUp(mapParams, host);
-        }
+    private static ReplacementEffect parseReplacement(final Map<String, String> mapParams, final Card host) {
+        final ReplacementType rt = ReplacementType.smartValueOf(mapParams.get("Event"));
+        ReplacementEffect ret = rt.createReplacement(mapParams, host);
 
         String activeZones = mapParams.get("ActiveZones");
         if (null != activeZones) {

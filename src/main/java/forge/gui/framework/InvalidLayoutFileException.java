@@ -6,4 +6,6 @@ package forge.gui.framework;
  */
 public class InvalidLayoutFileException extends RuntimeException {
 
+    private static final long serialVersionUID = 8201703516717298690L;
+
 }

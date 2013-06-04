@@ -38,18 +38,6 @@ public class ReplaceTurnFaceUp extends ReplacementEffect {
     }
 
     /* (non-Javadoc)
-     * @see forge.card.replacement.ReplacementEffect#getCopy()
-     */
-    @Override
-    public ReplacementEffect getCopy() {
-        ReplacementEffect res = new ReplaceTurnFaceUp(this.getMapParams(), this.getHostCard());
-        res.setOverridingAbility(this.getOverridingAbility());
-        res.setActiveZone(validHostZones);
-        res.setLayer(getLayer());
-        return res;
-    }
-
-    /* (non-Javadoc)
      * @see forge.card.replacement.ReplacementEffect#setReplacingObjects(java.util.HashMap, forge.card.spellability.SpellAbility)
      */
     @Override

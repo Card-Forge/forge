@@ -328,8 +328,7 @@ public enum FControl {
     }
     
     public boolean mayShowCard(Card c) {
-        if ( game == null ) return true;
-        return !gameHasHumanPlayer || c.canBeShownTo(getCurrentPlayer());
+        return game == null || !gameHasHumanPlayer || c.canBeShownTo(getCurrentPlayer());
     }
 
     /**

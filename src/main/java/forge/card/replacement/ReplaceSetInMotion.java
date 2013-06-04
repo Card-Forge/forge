@@ -54,16 +54,4 @@ public class ReplaceSetInMotion extends ReplacementEffect {
         return true;
     }
 
-    /* (non-Javadoc)
-     * @see forge.card.replacement.ReplacementEffect#getCopy()
-     */
-    @Override
-    public ReplacementEffect getCopy() {
-        ReplacementEffect res = new ReplaceSetInMotion(this.getMapParams(), this.getHostCard());
-        res.setOverridingAbility(this.getOverridingAbility());
-        res.setActiveZone(validHostZones);
-        res.setLayer(getLayer());
-        return res;
-    }
-
 }
