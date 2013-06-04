@@ -659,7 +659,7 @@ public final class GameActionUtil {
             List<SpellAbility> manaAbs = land.getCharacteristics().getManaAbility();
             // will get comodification exception without a different list
             for (final SpellAbility sa : origManaAbs) {
-                if (sa.getType().equals("BasicLandTypeMana")) {
+                if (sa.isBasicLandAbility()) {
                     manaAbs.remove(sa);
                 }
             }
@@ -673,7 +673,7 @@ public final class GameActionUtil {
             for (final Card land : lands) {
                 if (land.isType(landType)) {
                     final SpellAbility sa = AbilityFactory.getAbility(abString, land);
-                    sa.setType("BasicLandTypeMana");
+                    sa.setBasicLandAbility(true);
                     land.getCharacteristics().getManaAbility().add(sa);
                 }
             }

@@ -284,7 +284,7 @@ public class StaticAbilityContinuous {
                     for (SpellAbility sa : c.getSpellAbilities()) {
                         if (sa instanceof AbilityActivated) {
                             SpellAbility newSA = ((AbilityActivated) sa).getCopy();
-                            newSA.setType("Temporary");
+                            newSA.setTemporary(true);
                             CardFactoryUtil.correctAbilityChainSourceCard(newSA, hostCard);
                             addFullAbs.add(newSA);
                         }
@@ -410,7 +410,7 @@ public class StaticAbilityContinuous {
                     }
                     if (abilty.startsWith("AB")) { // grant the ability
                         final SpellAbility sa = AbilityFactory.getAbility(abilty, affectedCard);
-                        sa.setType("Temporary");
+                        sa.setTemporary(true);
                         sa.setOriginalHost(hostCard);
                         affectedCard.addSpellAbility(sa);
                     }

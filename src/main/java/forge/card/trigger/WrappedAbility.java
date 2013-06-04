@@ -319,11 +319,6 @@ public class WrappedAbility extends Ability implements ISpellAbility {
     }
 
     @Override
-    public void setType(final String s) {
-        sa.setType(s);
-    }
-
-    @Override
     public void setSourceTrigger(final int id) {
         sa.setSourceTrigger(id);
     }

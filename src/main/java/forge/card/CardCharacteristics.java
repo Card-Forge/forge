@@ -322,13 +322,6 @@ public class CardCharacteristics {
     }
 
     /**
-     * @param replacementEffects0 the replacementEffects to set
-     */
-    public void setReplacementEffects(ArrayList<ReplacementEffect> replacementEffects0) {
-        this.replacementEffects = replacementEffects0;
-    }
-
-    /**
      * <p>
      * getSVar.
      * </p>

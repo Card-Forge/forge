@@ -306,10 +306,11 @@ public class PhaseHandler implements java.io.Serializable {
     
                 case COMBAT_DECLARE_ATTACKERS:
                     game.getStack().freezeStack();
-                    declateAttackTurnBasedActions();
+                    declareAttackersTurnBasedActions();
                     game.getStack().unfreezeStack();
 
                     this.bCombat = !game.getCombat().getAttackers().isEmpty();
+                    givePriorityToPlayer = bCombat;
                     this.nCombatsThisTurn++;
                     
                     break;
@@ -317,9 +318,7 @@ public class PhaseHandler implements java.io.Serializable {
                 case COMBAT_DECLARE_BLOCKERS:
                     game.getCombat().removeAbsentCombatants();
                     game.getStack().freezeStack();
-                    
-                declareBlockersTurnBaseActions();
-
+                    declareBlockersTurnBaseActions();
                     game.getStack().unfreezeStack();
                     break;
     
@@ -467,7 +466,7 @@ public class PhaseHandler implements java.io.Serializable {
         }
     }
 
-    private void declateAttackTurnBasedActions() {
+    private void declareAttackersTurnBasedActions() {
             Player whoDeclares = playerDeclaresAttackers == null || playerDeclaresAttackers.hasLost() ? playerTurn : playerDeclaresAttackers;
             whoDeclares.getController().declareAttackers(playerTurn);
     

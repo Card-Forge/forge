@@ -14089,6 +14089,7 @@ src/main/java/forge/card/mana/ManaPool.java svneol=native#text/plain
 src/main/java/forge/card/mana/package-info.java svneol=native#text/plain
 src/main/java/forge/card/package-info.java svneol=native#text/plain
 src/main/java/forge/card/replacement/ReplaceDamage.java -text
+src/main/java/forge/card/replacement/ReplaceDestroy.java -text
 src/main/java/forge/card/replacement/ReplaceDiscard.java -text
 src/main/java/forge/card/replacement/ReplaceDraw.java -text
 src/main/java/forge/card/replacement/ReplaceGainLife.java -text

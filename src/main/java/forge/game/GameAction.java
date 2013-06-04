@@ -45,12 +45,12 @@ import forge.card.TriggerReplacementBase;
 import forge.card.ability.AbilityFactory;
 import forge.card.ability.effects.AttachEffect;
 import forge.card.cardfactory.CardFactory;
+import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.mana.ManaCost;
 import forge.card.replacement.ReplacementResult;
 import forge.card.spellability.Ability;
 import forge.card.spellability.AbilityActivated;
-import forge.card.spellability.AbilityStatic;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.card.staticability.StaticAbility;
@@ -72,7 +72,6 @@ import forge.game.zone.PlayerZone;
 import forge.game.zone.PlayerZoneBattlefield;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
-import forge.gui.GuiChoose;
 import forge.util.Aggregates;
 import forge.util.maps.CollectionSuppliers;
 import forge.util.maps.HashMapOfLists;
@@ -1224,47 +1223,23 @@ public class GameAction {
             return false;
 
         if (c.isEnchanted()) {
-            List<Card> list = new ArrayList<Card>(c.getEnchantedBy());
-            list = CardLists.filter(list, new Predicate<Card>() {
-                @Override
-                public boolean apply(final Card crd) {
-                    return crd.hasKeyword("Totem armor");
-                }
-            });
-            CardLists.sortByCmcDesc(list);
-
-            if (list.size() != 0) {
-                final Card crd;
-                if (list.size() == 1) {
-                    crd = list.get(0);
-                } else {
-                    if (c.getController().isHuman()) {
-                        crd = GuiChoose.oneOrNone("Select totem armor to destroy", list);
-                    } else {
-                        crd = list.get(0);
-                    }
-                }
-
-                final Card card = c;
-                final AbilityStatic ability = new AbilityStatic(crd, ManaCost.ZERO) {
-                    @Override
-                    public void resolve() {
-                        GameAction.this.destroy(crd, sa);
-                        card.setDamage(0);
-
-                        // Play the Destroy sound
-                        game.fireEvent(new GameEventCardDestroyed());
-                    }
-                };
-
-                final StringBuilder sb = new StringBuilder();
-                sb.append(crd).append(" - Totem armor: destroy this aura.");
-                ability.setStackDescription(sb.toString());
-
-                game.getStack().add(ability);
-                return false;
+            for( Card e : c.getEnchantedBy() ) {
+                CardFactoryUtil.refreshTotemArmor(e); 
             }
-        } // totem armor
+        }
+
+        // Replacement effects
+        final HashMap<String, Object> repRunParams = new HashMap<String, Object>();
+        repRunParams.put("Event", "Destroy");
+        repRunParams.put("Source", sa);
+        repRunParams.put("Card", c);
+        repRunParams.put("Affected", c);
+
+        if (game.getReplacementHandler().run(repRunParams) != ReplacementResult.NotReplaced) {
+            return false;
+        }
+
+
         if (sa != null) {
             activator = sa.getActivatingPlayer();
         }

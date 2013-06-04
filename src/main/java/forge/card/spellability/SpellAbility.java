@@ -57,10 +57,11 @@ public abstract class SpellAbility implements ISpellAbility {
     private ManaCost replicateManaCost = null;
     private Player activatingPlayer = null;
 
-    private String type = "Intrinsic"; // set to Intrinsic by default
+    private boolean temporary; // that is given by some static ability
+    private boolean basicLandAbility; // granted by basic land type
 
     private Card sourceCard;
-    private Card originalHost = null;
+    private Card grantorCard = null; // card which grants the ability (equipment or owner of static ability that gave this one) 
 
     private List<Card> splicedCards = null;
 //    private List<Card> targetList;
@@ -385,7 +386,7 @@ public abstract class SpellAbility implements ISpellAbility {
      *            a {@link forge.Card} object.
      */
     public void setOriginalHost(final Card c) {
-        this.originalHost = c;
+        this.grantorCard = c;
     }
 
     /**
@@ -396,7 +397,7 @@ public abstract class SpellAbility implements ISpellAbility {
      * @return a {@link forge.Card} object.
      */
     public Card getOriginalHost() {
-        return this.originalHost;
+        return this.grantorCard;
     }
 
     public String getParamOrDefault(String key, String defaultValue) { 
@@ -818,32 +819,6 @@ public abstract class SpellAbility implements ISpellAbility {
         }
 
         return this.stackDescription.replaceAll("CARDNAME", this.getSourceCard().getName());
-    }
-
-    /**
-     * <p>
-     * Setter for the field <code>type</code>.
-     * </p>
-     * 
-     * Extrinsic or Intrinsic:
-     * 
-     * @param s
-     *            a {@link java.lang.String} object.
-     */
-    public void setType(final String s) {
-        this.type = s;
-    }
-
-    /**
-     * <p>
-     * Getter for the field <code>type</code>.
-     * </p>
-     * 
-     * @return a {@link java.lang.String} object.
-     */
-    public String getType() {
-        // Extrinsic or Intrinsic:
-        return this.type;
     }
 
     // setDescription() includes mana cost and everything like
@@ -1730,5 +1705,21 @@ public abstract class SpellAbility implements ISpellAbility {
     public boolean isXCost() {
         CostPartMana cm = payCosts != null ? getPayCosts().getCostMana() : null;
         return cm != null && cm.getAmountOfX() > 0; 
+    }
+
+    public boolean isBasicLandAbility() {
+        return basicLandAbility;
+    }
+
+    public void setBasicLandAbility(boolean basicLandAbility) {
+        this.basicLandAbility = basicLandAbility; // TODO: Add 0 to parameter's name.
+    }
+
+    public boolean isTemporary() {
+        return temporary;
+    }
+
+    public void setTemporary(boolean temporary) {
+        this.temporary = temporary; // TODO: Add 0 to parameter's name.
     }
 }

@@ -2228,14 +2228,13 @@ public class CardFactoryUtil {
 
         if (hasKeyword(card, "Replicate") != -1) {
             final int n = hasKeyword(card, "Replicate");
-            if (n != -1) {
-                final String parse = card.getKeyword().get(n).toString();
-                final String[] k = parse.split("cate ");
+            final String parse = card.getKeyword().get(n).toString();
+            final String[] k = parse.split("cate ");
 
-                final SpellAbility sa = card.getFirstSpellAbility();
-                sa.setIsReplicate(true);
-                sa.setReplicateManaCost(new ManaCost(new ManaCostParser(k[1])));
-            }
+            final SpellAbility sa = card.getFirstSpellAbility();
+            sa.setIsReplicate(true);
+            sa.setReplicateManaCost(new ManaCost(new ManaCostParser(k[1])));
+
         }
         
         if(hasKeyword(card, "Fuse") != -1) {
@@ -2472,7 +2471,7 @@ public class CardFactoryUtil {
             final Trigger etbTrigger = TriggerHandler.parseTrigger(sbTrig.toString(), card, true);
             card.addTrigger(etbTrigger);
         }
-
+        
         if (card.hasKeyword("Epic")) {
             makeEpic(card);
         }
@@ -3338,6 +3337,26 @@ public class CardFactoryUtil {
 
             card.addTrigger(stormTrigger);
         } // Storm
+    }
+    
+    public final static void refreshTotemArmor(Card c) {
+        boolean hasKw = c.hasKeyword("Totem armor");
+
+        List<ReplacementEffect> res = c.getReplacementEffects();
+        for ( int ix = 0; ix < res.size(); ix++ ) {
+            ReplacementEffect re = res.get(ix);
+            if( re.getMapParams().containsKey("TotemArmor") ) {
+                if(hasKw) return; // has re and kw - nothing to do here 
+                res.remove(ix--);
+            }
+        }
+
+        if( hasKw ) { 
+            ReplacementEffect re = ReplacementHandler.parseReplacement("Event$ Destroy | ActiveZones$ Battlefield | ValidCard$ Card.EnchantedBy | ReplaceWith$ RegenTA | Secondary$ True | TotemArmor$ True | Description$ Totem armor - " + c, c);
+            c.getSVars().put("RegenTA", "AB$ DealDamage | Cost$ 0 | Defined$ ReplacedCard | Remove$ All | SubAbility$ DestroyMe");
+            c.getSVars().put("DestroyMe", "DB$ Destroy | Defined$ Self");
+            c.getReplacementEffects().add(re);
+        }
     }
 
 } // end class CardFactoryUtil

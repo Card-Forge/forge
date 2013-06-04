@@ -71,10 +71,11 @@ public class DamageDealEffect extends SpellAbilityEffect {
 
         final boolean noPrevention = sa.hasParam("NoPrevention");
         final boolean combatDmg = sa.hasParam("CombatDamage");
+        final boolean removeDamage = sa.hasParam("Remove");
 
         ArrayList<Object> tgts;
         if (sa.getTarget() == null) {
-            tgts = AbilityUtils.getDefinedObjects(sa.getSourceCard(), sa.getParam("Defined"), sa);
+            tgts = AbilityUtils.getDefinedObjects(sa.getSourceCard(), sa.getParam("Defined"), sa) ;
         } else {
             tgts = sa.getTarget().getTargets();
         }
@@ -119,7 +120,11 @@ public class DamageDealEffect extends SpellAbilityEffect {
             if (o instanceof Card) {
                 final Card c = (Card) o;
                 if (c.isInPlay() && (!targeted || c.canBeTargetedBy(sa))) {
-                    if (noPrevention) {
+                    if (removeDamage) {
+                        c.setDamage(0);
+                        c.clearAssignedDamage();
+                    }
+                    else if (noPrevention) {
                         if (c.addDamageWithoutPrevention(dmg, source) && remember) {
                             source.addRemembered(c);
                         }
