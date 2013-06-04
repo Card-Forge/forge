@@ -1,0 +1,22 @@
+[duel]
+[metadata]
+Name=Wolverine 2
+Title=Wolverine
+Difficulty=medium
+Description=Mono B Swamp deck with Korlash, Heir to Blackblade
+Icon=Wolverine.jpg
+Deck Type=constructed
+[main]
+4 Tendrils of Corruption
+4 Liliana's Shade
+4 Corrupt
+4 Korlash, Heir to Blackblade
+24 Swamp
+4 Nightmare
+4 Lashwrithe
+2 Mind Sludge
+4 Quag Sickness
+1 Dakmor Sorceress
+1 Sima Yi, Wei Field Marshal
+4 Will-o'-the-Wisp
+[sideboard]
