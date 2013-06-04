@@ -45,6 +45,9 @@ Martyr of Bones
 Odric, Master Tactician
 Master Warcraft
 Thran Turbine
+Chain Stasis
+Archive Trap
+Melee
 
 
 ----------
