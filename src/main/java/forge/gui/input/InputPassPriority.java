@@ -64,7 +64,7 @@ public class InputPassPriority extends InputSyncronizedBase {
 
     @Override
     protected void onCardSelected(Card card, boolean isRmb) {
-        final SpellAbility ab = player.getController().getAbilityToPlay(player.getGame().getAbilitesOfCard(card, player));
+        final SpellAbility ab = player.getController().getAbilityToPlay(card.getAllPossibleAbilites(player));
         if ( null != ab) {
             chosenSa = ab;
             stop();

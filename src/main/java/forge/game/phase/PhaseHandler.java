@@ -465,6 +465,9 @@ public class PhaseHandler implements java.io.Serializable {
     private void declareAttackersTurnBasedActions() {
             Player whoDeclares = playerDeclaresAttackers == null || playerDeclaresAttackers.hasLost() ? playerTurn : playerDeclaresAttackers;
             whoDeclares.getController().declareAttackers(playerTurn);
+            
+            if ( game.isGameOver() ) // they just like to close window at any moment
+                return;
     
             game.getCombat().removeAbsentCombatants();
             CombatUtil.checkAttackOrBlockAlone(game.getCombat());
@@ -518,7 +521,10 @@ public class PhaseHandler implements java.io.Serializable {
             // Apply Odric's effect here
             Player whoDeclaresBlockers = playerDeclaresBlockers == null || playerDeclaresBlockers.hasLost() ? p : playerDeclaresBlockers;
             if ( combat.isPlayerAttacked(p) )
-                whoDeclaresBlockers.getController().declareBlockers(p); 
+                whoDeclaresBlockers.getController().declareBlockers(p);
+            
+            if ( game.isGameOver() ) // they just like to close window at any moment
+                return;
         } while(p != playerTurn);
     
         combat.removeAbsentCombatants();

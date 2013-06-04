@@ -21,7 +21,6 @@ import forge.card.spellability.SpellAbilityStackInstance;
 import forge.card.spellability.Target;
 import forge.card.trigger.TriggerType;
 import forge.game.Game;
-import forge.game.ai.ComputerUtilCard;
 import forge.game.player.Player;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
@@ -428,10 +427,11 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 if (tgt != null && tgtC.isInPlay() && !tgtC.canBeTargetedBy(sa)) {
                     continue;
                 }
-                final String prompt = "Do you want to move " + tgtC + " from " + origin + " to " + destination + "?";
-                if (player.isHuman() && optional && !GuiDialog.confirm(hostCard, prompt)) {
+
+                final String prompt = String.format("Do you want to move %s from %s to %s?", tgtC, origin, destination);
+                if (optional && false == player.getController().confirmAction(sa, null, prompt) )
                     continue;
-                }
+
                 final Zone originZone = game.getZoneOf(tgtC);
 
                 // if Target isn't in the expected Zone, continue
@@ -472,16 +472,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                                 list = CardLists.getValidCards(list, sa.getParam("AttachedTo"), tgtC.getController(), tgtC);
                             }
                             if (!list.isEmpty()) {
-                                Card attachedTo = null;
-                                if (player.isHuman()) {
-                                    if (list.size() > 1) {
-                                        attachedTo = GuiChoose.one(tgtC + " - Select a card to attach to.", list);
-                                    } else {
-                                        attachedTo = list.get(0);
-                                    }
-                                } else { // AI player
-                                    attachedTo = ComputerUtilCard.getBestAI(list);
-                                }
+                                Card attachedTo = player.getController().chooseSingleCardForEffect(list, sa, tgtC + " - Select a card to attach to.");
                                 if (tgtC.isAura()) {
                                     if (tgtC.isEnchanting()) {
                                         // If this Card is already Enchanting something, need

@@ -30,11 +30,8 @@ import forge.Card;
 import forge.CardLists;
 import forge.ColorChanger;
 import forge.GameLog;
-import forge.Singletons;
 import forge.StaticEffects;
 import forge.card.replacement.ReplacementHandler;
-import forge.card.spellability.Ability;
-import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityStackInstance;
 import forge.card.trigger.TriggerHandler;
 import forge.card.trigger.TriggerType;
@@ -122,9 +119,6 @@ public class Game {
         endOfTurn = new EndOfTurn(this);
         endOfCombat = new EndOfCombat(this);
         
-        if ( match0.getGameType() == GameType.Quest)
-            events.register(Singletons.getModel().getQuest()); // this one listens to player's mulligans ATM
-
         subscribeToEvents(gameLog.getEventVisitor());
     }
     
@@ -547,42 +541,6 @@ public class Game {
      */
     public GameType getType() {
         return type;
-    }
-
-    /**
-     * TODO: Write javadoc for this method.
-     * @param card
-     * @param player
-     * @return
-     */
-    public List<SpellAbility> getAbilitesOfCard(Card c, Player player) {
-        // this can only be called by the Human
-        final Zone zone = this.getZoneOf(c);
-
-        final List<SpellAbility> abilities = new ArrayList<SpellAbility>();
-        for (SpellAbility sa : c.getSpellAbilities()) {
-            //add alternative costs as additional spell abilities
-            abilities.add(sa);
-            abilities.addAll(GameActionUtil.getAlternativeCosts(sa));
-        }
-
-        for (int iSa = 0; iSa < abilities.size();) {
-            SpellAbility sa = abilities.get(iSa); 
-            sa.setActivatingPlayer(player);
-            if (!sa.canPlay())
-                abilities.remove(iSa);
-            else
-                iSa++;
-        }
-
-        if (c.isLand() && player.canPlayLand(c)) {
-            if (zone.is(ZoneType.Hand) || (!zone.is(ZoneType.Battlefield) && c.hasStartOfKeyword("May be played"))) {
-                Ability.PLAY_LAND_SURROGATE.setSourceCard(c);
-                abilities.add(Ability.PLAY_LAND_SURROGATE);
-            }
-        }
-
-        return abilities;
     }
 
     /**

@@ -154,7 +154,7 @@ public class CField implements ICDoc {
                 // TODO: "can play" check needed!
 
                 // should I check for who owns these cards? Are there any abilities to be played from opponent's graveyard? 
-                final SpellAbility ab = player.getController().getAbilityToPlay(game.getAbilitesOfCard(c, player));
+                final SpellAbility ab = player.getController().getAbilityToPlay(c.getAllPossibleAbilites(player));
                 if ( null != ab) {
                     game.getAction().invoke(new Runnable(){ @Override public void run(){
                         HumanPlay.playSpellAbility(player, ab);

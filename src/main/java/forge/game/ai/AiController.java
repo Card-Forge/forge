@@ -695,6 +695,9 @@ public class AiController {
                 }
                 return choice;
                 
+            case ChangeZone: // called when permanent ETB 'AttachedTo' something
+                return ComputerUtilCard.getBestAI(options);
+                
             default: throw new InvalidParameterException("AI chooseSingleCard does not know how to choose card for " + api);
         }
     }

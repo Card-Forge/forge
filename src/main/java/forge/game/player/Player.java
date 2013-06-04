@@ -39,7 +39,6 @@ import forge.Constant.Preferences;
 import forge.CounterType;
 import forge.FThreads;
 import forge.GameEntity;
-import forge.GameLogEntryType;
 import forge.Singletons;
 import forge.card.MagicColor;
 import forge.card.ability.AbilityFactory;
@@ -3137,7 +3136,6 @@ public class Player extends GameEntity implements Comparable<Player> {
     public void onMulliganned() {
         game.fireEvent(new GameEventMulligan(this)); // quest listener may interfere here
         final int newHand = getCardsIn(ZoneType.Hand).size();
-        game.getGameLog().add(GameLogEntryType.MULLIGAN, this + " has mulliganed down to " + newHand + " cards.");
         stats.notifyHasMulliganed();
         stats.notifyOpeningHandSize(newHand);
     }

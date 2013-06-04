@@ -63,6 +63,7 @@ import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerType;
 import forge.card.trigger.ZCTrigger;
 import forge.game.Game;
+import forge.game.GameActionUtil;
 import forge.game.GlobalRuleChange;
 import forge.game.event.GameEventCardDamaged;
 import forge.game.event.GameEventCardDamaged.DamageType;
@@ -72,6 +73,7 @@ import forge.game.event.GameEventCounterRemoved;
 import forge.game.event.GameEventCardTapped;
 import forge.game.phase.Combat;
 import forge.game.player.Player;
+import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.item.CardDb;
 import forge.util.Expressions;
@@ -8285,6 +8287,43 @@ public class Card extends GameEntity implements Comparable<Card> {
             return owner.getGame();
         
         throw new IllegalStateException("Card " + toString() + " has no means to determine the game it belongs to!");
+    }
+
+    /**
+     * TODO: Write javadoc for this method.
+     * @param card
+     * @param game TODO
+     * @param player
+     * @return
+     */
+    public List<SpellAbility> getAllPossibleAbilites(Player player) {
+        // this can only be called by the Human
+        final Zone zone = player.getGame().getZoneOf(this);
+    
+        final List<SpellAbility> abilities = new ArrayList<SpellAbility>();
+        for (SpellAbility sa : getSpellAbilities()) {
+            //add alternative costs as additional spell abilities
+            abilities.add(sa);
+            abilities.addAll(GameActionUtil.getAlternativeCosts(sa));
+        }
+    
+        for (int iSa = 0; iSa < abilities.size();) {
+            SpellAbility sa = abilities.get(iSa); 
+            sa.setActivatingPlayer(player);
+            if (!sa.canPlay())
+                abilities.remove(iSa);
+            else
+                iSa++;
+        }
+    
+        if (isLand() && player.canPlayLand(this)) {
+            if (zone.is(ZoneType.Hand) || (!zone.is(ZoneType.Battlefield) && hasStartOfKeyword("May be played"))) {
+                Ability.PLAY_LAND_SURROGATE.setSourceCard(this);
+                abilities.add(Ability.PLAY_LAND_SURROGATE);
+            }
+        }
+    
+        return abilities;
     }
 
 } // end Card class

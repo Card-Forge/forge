@@ -263,8 +263,10 @@ public class PlayerControllerHuman extends PlayerController {
         // Human is supposed to read the message and understand from it what to choose
         if ( isOptional )
             return GuiChoose.oneOrNone(title, options);
-        else 
+        else if ( options.size() > 2 )
             return GuiChoose.one(title, options);
+        else 
+            return options.get(0);
     }
 
     /* (non-Javadoc)

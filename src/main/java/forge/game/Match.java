@@ -82,7 +82,10 @@ public class Match {
     public void startRound() {
 
         currentGame = new Game(players, gameType, this);
-        
+
+        if ( getGameType() == GameType.Quest)
+            currentGame.subscribeToEvents(Singletons.getModel().getQuest()); // this one listens to player's mulligans ATM
+
         Singletons.getControl().attachToGame(currentGame);
 
         final boolean canRandomFoil = Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_RANDOM_FOIL) && gameType == GameType.Constructed;

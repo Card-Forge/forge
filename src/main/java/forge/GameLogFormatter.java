@@ -14,6 +14,7 @@ import forge.game.event.GameEventBlockersDeclared;
 import forge.game.event.GameEventCardDamaged;
 import forge.game.event.GameEventCardDamaged.DamageType;
 import forge.game.event.GameEventLandPlayed;
+import forge.game.event.GameEventMulligan;
 import forge.game.event.GameEventPlayerDamaged;
 import forge.game.event.GameEventPlayerPoisoned;
 import forge.game.event.GameEventSpellAbilityCast;
@@ -27,6 +28,7 @@ import forge.game.event.GameEventPlayerControl;
 import forge.game.player.LobbyPlayer;
 import forge.game.player.Player;
 import forge.game.player.PlayerStatistics;
+import forge.game.zone.ZoneType;
 import forge.util.Lang;
 import forge.util.maps.MapOfLists;
 
@@ -230,6 +232,12 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
         }
 
         return new GameLogEntry(GameLogEntryType.COMBAT, sb.toString());
+    }
+    
+    @Override
+    public GameLogEntry visit(GameEventMulligan ev) {
+        String message = String.format( "%s has mulliganed down to %d cards.", ev.player, ev.player.getZone(ZoneType.Hand).size());
+        return new GameLogEntry(GameLogEntryType.MULLIGAN, message);
     }
 
 

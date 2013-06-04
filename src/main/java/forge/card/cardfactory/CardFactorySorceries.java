@@ -18,7 +18,6 @@
 package forge.card.cardfactory;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import forge.Card;
@@ -31,14 +30,10 @@ import forge.card.mana.ManaCost;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.game.Game;
-import forge.game.ai.AiController;
 import forge.game.player.Player;
-import forge.game.player.PlayerControllerAi;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 import forge.gui.input.InputPayManaExecuteCommands;
-import forge.gui.input.InputSelectCards;
-import forge.gui.input.InputSelectCardsFromList;
 
 /**
  * <p>
@@ -52,39 +47,24 @@ public class CardFactorySorceries {
 
     private static final void balanceLands(Game game, Spell card) {
 
-        List<List<Card>> lands = new ArrayList<List<Card>>();
+        int minLands = Integer.MAX_VALUE;
         for (Player p : game.getPlayers()) {
-
-            lands.add(p.getLandsInPlay());
+            int pL = p.getLandsInPlay().size();
+            if( pL < minLands ) 
+                minLands = pL;
         }
 
-        int min = Integer.MAX_VALUE;
-        for (List<Card> l : lands) {
-            int s = l.size();
-            min = Math.min(min, s);
-        }
-        Iterator<List<Card>> ll = lands.iterator();
         for (Player p : game.getPlayers()) {
 
-            List<Card> l = ll.next();
-            int sac = l.size() - min;
+            List<Card> l = p.getLandsInPlay();
+            int sac = l.size() - minLands;
             if (sac == 0) {
                 continue;
             }
-            if (p.isComputer()) {
-                CardLists.shuffle(l);
-                for (int i = 0; i < sac; i++) {
-                    game.getAction().sacrifice(l.get(i), card);
-                }
-            } else {
-                final List<Card> list = CardLists.getType(p.getCardsIn(ZoneType.Battlefield), "Land");
-
-                InputSelectCards inp = new InputSelectCardsFromList(sac, sac, list);
-                inp.setMessage("Select %d more land(s) to sacrifice");
-                Singletons.getControl().getInputQueue().setInputAndWait(inp);
-                for( Card crd : inp.getSelected() )
-                    p.getGame().getAction().sacrifice(crd, card);
-            }
+            
+            List<Card> toSac = p.getController().choosePermanentsToSacrifice(card, sac, sac, l, "Select %d more land(s) to sacrifice");
+            for( Card crd : toSac )
+                p.getGame().getAction().sacrifice(crd, card);
         }
     }
 
@@ -100,26 +80,16 @@ public class CardFactorySorceries {
             if (sac == 0) {
                 continue;
             }
-            if (p.isHuman()) {
-                InputSelectCards sc = new InputSelectCardsFromList(sac, sac, hand);
-                sc.setMessage("Select %d more card(s) to discard");
-                Singletons.getControl().getInputQueue().setInputAndWait(sc);
-                for( Card c : sc.getSelected())
-                    p.discard(c, spell);
-            } else {
-                final AiController ai = ((PlayerControllerAi)p.getController()).getAi();
-                final List<Card> toDiscard = ai.getCardsToDiscard(sac, (String[])null, spell);
-                for (int i = 0; i < toDiscard.size(); i++) {
-                    p.discard(toDiscard.get(i), spell);
-                }
-            }
+            
+            List<Card> toDiscard = p.getController().chooseCardsToDiscardFrom(p, spell, hand, sac, sac); // "Select %d more card(s) to discard"
+            for (Card c : toDiscard)
+                p.discard(c, spell);
         }
     }
 
     private static final void balanceCreatures(Game game, Spell card) {
         List<List<Card>> creats = new ArrayList<List<Card>>();
         for (Player p : game.getPlayers()) {
-
             creats.add(p.getCreaturesInPlay());
         }
         int min = Integer.MAX_VALUE;
@@ -135,22 +105,10 @@ public class CardFactorySorceries {
             if (sac == 0) {
                 continue;
             }
-            if (p.isComputer()) {
-                CardLists.sortByPowerAsc(c);
-                CardLists.sortByCmcDesc(c);
-                Collections.reverse(c);
-                for (int i = 0; i < sac; i++) {
-                    p.getGame().getAction().sacrifice(c.get(i), card);
-                }
-            } else {
-                final List<Card> list = CardLists.getType(p.getCardsIn(ZoneType.Battlefield), "Creature");
-                InputSelectCards inp = new InputSelectCardsFromList(sac, sac, list);
-                inp.setMessage("Select %d more creature(s) to sacrifice");
-                Singletons.getControl().getInputQueue().setInputAndWait(inp);
-                for( Card crd : inp.getSelected() )
-                    p.getGame().getAction().sacrifice(crd, card);
-
-            }
+            List<Card> toSac = p.getController().choosePermanentsToSacrifice(card, sac, sac, c, "Select %d more creature(s) to sacrifice"); 
+            
+            for( Card crd : toSac )
+                p.getGame().getAction().sacrifice(crd, card);
         }
     }
     

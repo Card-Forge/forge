@@ -10,7 +10,6 @@ import forge.Card;
 import forge.FThreads;
 import forge.game.event.GameEvent;
 import forge.game.event.GameEventAnteCardsSelected;
-import forge.game.event.GameEventAttackersDeclared;
 import forge.game.event.GameEventGameFinished;
 import forge.game.event.GameEventGameOutcome;
 import forge.game.event.GameEventPlayerControl;

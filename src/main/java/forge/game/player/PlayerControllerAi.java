@@ -200,6 +200,9 @@ public class PlayerControllerAi extends PlayerController {
 
     @Override
     public List<Card> chooseCardsToDiscardFrom(Player p, SpellAbility sa, List<Card> validCards, int min, int max) {
+        if ( p == player )
+            return brains.getCardsToDiscard(min, max, validCards, sa);
+        
         boolean isTargetFriendly = !p.isOpponentOf(player);
         
         return isTargetFriendly
