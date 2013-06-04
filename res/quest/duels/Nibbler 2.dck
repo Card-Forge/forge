@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Nibbler 2
+Title=Nibbler
+Difficulty=medium
+Description=BR Threaten deck that sacrifices stolen creatures
+Icon=Nibbler.jpg
+Deck Type=constructed
+[main]
+5 Swamp
+5 Mountain
+4 Badlands
+4 Dragonskull Summit
+4 High Market
+1 Mox Jet
+1 Mox Ruby
+2 Act of Treason
+2 Threaten
+2 Traitorous Blood
+4 Traitorous Instinct
+4 Zealous Conscripts
+4 Conquering Manticore
+2 Molten Primordial
+4 Gutless Ghoul
+4 Nezumi Bone-Reader
+1 Phyrexian Vault
+2 Hanweir Watchkeep
+1 Wall of Bone
+1 Wall of Diffusion
+1 Wall of Earth
+2 Wall of Souls
+[sideboard]
