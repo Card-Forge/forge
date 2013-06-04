@@ -269,6 +269,16 @@ public class PlayerControllerHuman extends PlayerController {
             return options.get(0);
     }
 
+    @Override
+    public Player chooseSinglePlayerForEffect(List<Player> options, SpellAbility sa, String title) {
+        // Human is supposed to read the message and understand from it what to choose
+        if ( options.size() > 2 )
+            return GuiChoose.one(title, options);
+        else 
+            return options.get(0);
+    }
+
+
     /* (non-Javadoc)
      * @see forge.game.player.PlayerController#confirmAction(forge.card.spellability.SpellAbility, java.lang.String, java.lang.String)
      */

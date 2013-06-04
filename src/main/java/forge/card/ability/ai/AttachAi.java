@@ -29,6 +29,7 @@ import forge.game.phase.CombatUtil;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
+import forge.game.player.PlayerActionConfirmMode;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
 
@@ -675,7 +676,7 @@ public class AttachAi extends SpellAbilityAi {
      *            the mandatory
      * @return true, if successful
      */
-    public static boolean attachPreference(final SpellAbility sa, final Target tgt, final boolean mandatory) {
+    private static boolean attachPreference(final SpellAbility sa, final Target tgt, final boolean mandatory) {
         Object o;
         if (tgt.canTgtPlayer()) {
             o = attachToPlayerAIPreferences(sa.getActivatingPlayer(), sa, mandatory);
@@ -1164,4 +1165,18 @@ public class AttachAi extends SpellAbilityAi {
         return true;
     }
 
+    @Override
+    public boolean confirmAction(Player player, SpellAbility sa, PlayerActionConfirmMode mode, String message) {
+        return true;
+    }
+    
+    @Override
+    public Card chooseSingleCard(Player ai, SpellAbility sa, List<Card> options, boolean isOptional) {
+        return attachToCardAIPreferences(ai, sa, true);
+    }
+    
+    @Override
+    public Player chooseSinglePlayer(Player ai, SpellAbility sa, List<Player> options) {
+        return attachToPlayerAIPreferences(ai, sa, true);
+    }
 }

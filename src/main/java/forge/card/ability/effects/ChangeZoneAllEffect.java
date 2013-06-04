@@ -17,7 +17,6 @@ import forge.card.spellability.SpellAbility;
 import forge.game.Game;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
-import forge.gui.GuiChoose;
 import forge.util.MyRandom;
 
 public class ChangeZoneAllEffect extends SpellAbilityEffect {
@@ -65,10 +64,10 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
                 cards.addAll(p.getCardsIn(origin));
             }
         }
-        if (sa.getActivatingPlayer().isHuman() && origin.contains(ZoneType.Library)
-                && sa.hasParam("Search")) {
-            GuiChoose.oneOrNone("Looking at the Library",
-                    CardLists.getValidCards(cards, "Card.inZoneLibrary", sa.getActivatingPlayer(), sa.getSourceCard()));
+        
+        if (origin.contains(ZoneType.Library) && sa.hasParam("Search")) {
+            List<Card> libCards = CardLists.getValidCards(cards, "Card.inZoneLibrary", sa.getActivatingPlayer(), sa.getSourceCard());
+            sa.getActivatingPlayer().getController().reveal("Looking at the Library", libCards, ZoneType.Library, sa.getActivatingPlayer());
         }
         cards = AbilityUtils.filterListByType(cards, sa.getParam("ChangeType"), sa);
 

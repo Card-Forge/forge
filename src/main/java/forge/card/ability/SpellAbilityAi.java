@@ -118,7 +118,7 @@ public abstract class SpellAbilityAi {
         return options.get(0);
     }
     
-    public Player chooseSinglePlayer(Player ai, SpellAbility sa, List<Player> options, boolean isOptional) {
+    public Player chooseSinglePlayer(Player ai, SpellAbility sa, List<Player> options) {
         System.err.println("Warning: default (ie. inherited from base class) implementation of chooseSinglePlayer is used for " + this.getClass().getName() + ". Consider declaring an overloaded method");
         return options.get(0);
     }

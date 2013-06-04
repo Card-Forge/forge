@@ -140,10 +140,19 @@ public class PlayerControllerAi extends PlayerController {
         if ( null == api ) {
             throw new InvalidParameterException("SA is not api-based, this is not supported yet");
         }
-        
         return api.getAi().chooseSingleCard(player, sa, options, isOptional);
     }
 
+    @Override
+    public Player chooseSinglePlayerForEffect(List<Player> options, SpellAbility sa, String title) {
+        ApiType api = sa.getApi();
+        if ( null == api ) {
+            throw new InvalidParameterException("SA is not api-based, this is not supported yet");
+        }
+        return api.getAi().chooseSinglePlayer(player, sa, options);
+    }
+
+    
     @Override
     public boolean confirmAction(SpellAbility sa, PlayerActionConfirmMode mode, String message) {
         return getAi().confirmAction(sa, mode, message);

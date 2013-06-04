@@ -813,19 +813,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                         List<Player> list = AbilityUtils.getDefinedPlayers(card,
                                 sa.getParam("AttachedToPlayer"), sa);
                         if (!list.isEmpty()) {
-                            Player attachedTo = null;
-
-                            if (list.size() == 1) {
-                                attachedTo = list.get(0);
-                            } else {
-                                if (player.isHuman()) {
-                                    attachedTo = GuiChoose.one(c + " - Select a player to attach to.", list);
-                                } else { // AI player
-                                    // Currently only used by Curse of Misfortunes, so this branch should never get hit
-                                    // But just in case it does, just select the first option
-                                    attachedTo = list.get(0);
-                                }
-                            }
+                            Player attachedTo = player.getController().chooseSinglePlayerForEffect(list, sa, c + " - Select a player to attach to.");
                             if (c.isAura()) {
                                 if (c.isEnchanting()) {
                                     // If this Card is already Enchanting something, need

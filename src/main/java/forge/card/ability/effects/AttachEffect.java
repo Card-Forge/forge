@@ -10,14 +10,11 @@ import forge.GameEntity;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.ApiType;
 import forge.card.ability.SpellAbilityEffect;
-import forge.card.ability.ai.AttachAi;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.game.Game;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
-import forge.gui.GuiChoose;
-import forge.gui.GuiDialog;
 
 public class AttachEffect extends SpellAbilityEffect {
 
@@ -46,12 +43,10 @@ public class AttachEffect extends SpellAbilityEffect {
             card = AbilityUtils.getDefinedCards(source, sa.getParam("Object"), sa).get(0);
         }
 
-        final StringBuilder sb = new StringBuilder();
-        sb.append("Do you want to attach " + card + " to " + targets + "?");
-        if (sa.getActivatingPlayer().isHuman() && sa.hasParam("Optional")
-                && !GuiDialog.confirm(source, sb.toString())) {
+        final Player p = sa.getActivatingPlayer();
+        String message = "Do you want to attach " + card + " to " + targets + "?";
+        if ( sa.hasParam("Optional") && !p.getController().confirmAction(sa, null, message) )
             return;
-        }
 
         // If Cast Targets will be checked on the Stack
         for (final Object o : targets) {
@@ -158,14 +153,12 @@ public class AttachEffect extends SpellAbilityEffect {
      * @return the attach spell ability
      */
     public static SpellAbility getAttachSpellAbility(final Card source) {
-        SpellAbility aura = null;
         for (final SpellAbility sa : source.getSpells()) {
             if (sa.getApi() == ApiType.Attach) {
-                aura = sa;
-                break;
+                return sa;
             }
         }
-        return aura;
+        return null;
     }
 
     /**
@@ -187,50 +180,34 @@ public class AttachEffect extends SpellAbilityEffect {
         final Game game = source.getGame();
         final Target tgt = aura.getTarget();
 
-        if (source.getController().isHuman()) {
-            if (tgt.canTgtPlayer()) {
-                final ArrayList<Player> players = new ArrayList<Player>();
+        Player p = source.getController();
+        if (tgt.canTgtPlayer()) {
+            final ArrayList<Player> players = new ArrayList<Player>();
 
-                for (Player player : game.getPlayers()) {
-                    if (player.isValid(tgt.getValidTgts(), aura.getActivatingPlayer(), source)) {
-                        players.add(player);
-                    }
-                }
-
-                final Player p = GuiChoose.one(source + " - Select a player to attach to.", players);
-                if (p != null) {
-                    handleAura(source, p);
-                    return true;
-                }
-            } else {
-                List<Card> list = game.getCardsIn(tgt.getZone());
-                list = CardLists.getValidCards(list, tgt.getValidTgts(), aura.getActivatingPlayer(), source);
-                if (list.isEmpty()) {
-                    return false;
-                }
-
-                final Object o = GuiChoose.one(source + " - Select a card to attach to.", list);
-                if (o instanceof Card) {
-                    handleAura(source, (Card) o);
-                    //source.enchantEntity((Card) o);
-                    return true;
+            for (Player player : game.getPlayers()) {
+                if (player.isValid(tgt.getValidTgts(), aura.getActivatingPlayer(), source)) {
+                    players.add(player);
                 }
             }
-        }
+            final Player pa = p.getController().chooseSinglePlayerForEffect(players, aura, source + " - Select a player to attach to.");
+            if (pa != null) {
+                handleAura(source, pa);
+                return true;
+            }
+        } else {
+            List<Card> list = game.getCardsIn(tgt.getZone());
+            list = CardLists.getValidCards(list, tgt.getValidTgts(), aura.getActivatingPlayer(), source);
+            if (list.isEmpty()) {
+                return false;
+            }
 
-        else if (AttachAi.attachPreference(aura, tgt, true)) {
-            final Object o = aura.getTarget().getTargets().get(0);
-            if (o instanceof Card) {
-                //source.enchantEntity((Card) o);
+            final Card o = p.getController().chooseSingleCardForEffect(list, aura, source + " - Select a card to attach to.");
+            if (o != null) {
                 handleAura(source, (Card) o);
-                return true;
-            } else if (o instanceof Player) {
-                //source.enchantEntity((Player) o);
-                handleAura(source, (Player) o);
+                //source.enchantEntity((Card) o);
                 return true;
             }
         }
-
         return false;
     }
 }
