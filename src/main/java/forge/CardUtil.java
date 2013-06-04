@@ -120,6 +120,9 @@ public final class CardUtil {
         newCopy.setOwner(in.getOwner());
         newCopy.setController(in.getController(), 0);
         newCopy.getCharacteristics().copyFrom(in.getState(in.getCurState()));
+        if (in.isCloned()) {
+            newCopy.addAlternateState(CardCharacteristicName.Cloner);
+        }
         newCopy.setType(new ArrayList<String>(in.getType()));
         newCopy.setTriggers(in.getTriggers(), false);
         for (SpellAbility sa : in.getManaAbility()) {

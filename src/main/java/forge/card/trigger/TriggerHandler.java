@@ -249,7 +249,8 @@ public class TriggerHandler {
             Card card = (Card) runParams.get("Card");
             if (card.getController() == player) {
                 for (final Trigger t : card.getTriggers()) {
-                    if (!t.isStatic() && (card.isToken() || !t.isIntrinsic()) && canRunTrigger(t, mode, runParams)) {
+                    if (!t.isStatic() && (card.isCloned() || card.isToken() || !t.isIntrinsic()) 
+                            && canRunTrigger(t, mode, runParams)) {
                         this.runSingleTrigger(t, runParams);
                         checkStatics = true;
                     }
@@ -348,11 +349,7 @@ public class TriggerHandler {
         }
 
         SpellAbility sa = null;
-        Card host = game.getCardState(regtrig.getHostCard());
-
-        if (host == null) {
-            host = regtrig.getHostCard();
-        }
+        Card host = regtrig.getHostCard();
 
         sa = regtrig.getOverridingAbility();
         if (sa == null) {
@@ -366,6 +363,8 @@ public class TriggerHandler {
                 sa = AbilityFactory.getAbility(host.getSVar(triggerParams.get("Execute")), host);
             }
         }
+        host = game.getCardState(regtrig.getHostCard());
+        sa.setSourceCard(host);
         sa.setTrigger(true);
         sa.setSourceTrigger(regtrig.getId());
         regtrig.setTriggeringObjects(sa);
