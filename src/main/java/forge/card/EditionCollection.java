@@ -23,6 +23,7 @@ import java.util.TreeMap;
 
 import com.google.common.base.Function;
 
+import forge.util.IItemReader;
 import forge.util.storage.StorageView;
 
 public final class EditionCollection extends StorageView<CardEdition> {
@@ -88,5 +89,29 @@ public final class EditionCollection extends StorageView<CardEdition> {
             return EditionCollection.this.get(code);
         };
     };
+
+    /**
+     * TODO: Write javadoc for this method.
+     * @return
+     */
+    public IItemReader<SealedProductTemplate> getBoosterGenerator() {
+        // TODO Auto-generated method stub
+        return new IItemReader<SealedProductTemplate>() {
+            
+            @Override
+            public Map<String, SealedProductTemplate> readAll() {
+                Map<String, SealedProductTemplate> map = new TreeMap<String, SealedProductTemplate>(String.CASE_INSENSITIVE_ORDER);
+                for(CardEdition ce : EditionCollection.this) {
+                     map.put(ce.getCode(), ce.getBoosterTemplate());
+                }
+                return map;
+            }
+            
+            @Override
+            public String getItemKey(SealedProductTemplate item) {
+                return item.getEdition();
+            }
+        };
+    }
 }
 

@@ -26,19 +26,19 @@ import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 
-import forge.card.BoosterTemplate;
 import forge.card.BoosterGenerator;
 import forge.card.CardDb;
 import forge.card.CardRulesPredicates;
+import forge.card.SealedProductTemplate;
 import forge.util.Aggregates;
 
 public abstract class OpenablePack implements InventoryItemFromSet {
-    protected final BoosterTemplate contents;
+    protected final SealedProductTemplate contents;
     protected final String name;
     private final int hash;
     private List<PaperCard> cards = null;
 
-    public OpenablePack(String name0, BoosterTemplate boosterData) {
+    public OpenablePack(String name0, SealedProductTemplate boosterData) {
         if (null == name0)       { throw new NullArgumentException("name0");       }
         if (null == boosterData) { throw new NullArgumentException("boosterData"); }
         contents = boosterData;

@@ -222,7 +222,8 @@ public class ImageCache {
             return ImageCache.TOURNAMENTPACK_PREFIX + ((TournamentPack)ii).getEdition();
         if ( ii instanceof BoosterPack ) {
             BoosterPack bp = (BoosterPack)ii;
-            String suffix = (1 >= bp.getBoosterData().getArtIndices()) ? "" : ("_" + bp.getArtIndex());
+            int cntPics = Singletons.getModel().getEditions().get(bp.getEdition()).getCntBoosterPictures();
+            String suffix = (1 >= cntPics) ? "" : ("_" + bp.getArtIndex());
             return ImageCache.BOOSTER_PREFIX + bp.getEdition() + suffix;
         }
         if ( ii instanceof FatPack )
@@ -248,7 +249,7 @@ public class ImageCache {
         final int cntPictures;
         final boolean hasManyPictures;
         if (includeSet) {
-            cntPictures = card.isTraditional() ? CardDb.instance().getPrintCount(card.getName(), edition) : CardDb.variants().getPrintCount(card.getName(), edition); 
+            cntPictures = !card.isVariant() ? CardDb.instance().getPrintCount(card.getName(), edition) : CardDb.variants().getPrintCount(card.getName(), edition); 
             hasManyPictures = cntPictures > 1;
         } else {
             // without set number of pictures equals number of urls provided in Svar:Picture
@@ -256,7 +257,7 @@ public class ImageCache {
             cntPictures = StringUtils.countMatches(urls, "\\") + 1;
 
             // raise the art index limit to the maximum of the sets this card was printed in
-            int maxCntPictures = card.isTraditional() ? CardDb.instance().getMaxPrintCount(card.getName()) : CardDb.variants().getMaxPrintCount(card.getName());
+            int maxCntPictures = !card.isVariant() ? CardDb.instance().getMaxPrintCount(card.getName()) : CardDb.variants().getMaxPrintCount(card.getName());
             hasManyPictures = maxCntPictures > 1;
         }
         

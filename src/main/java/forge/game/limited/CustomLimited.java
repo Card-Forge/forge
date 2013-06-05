@@ -24,7 +24,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 
-import forge.card.BoosterTemplate;
 import forge.card.CardDb;
 import forge.card.SealedProductTemplate;
 import forge.deck.Deck;
@@ -101,7 +100,7 @@ public class CustomLimited extends DeckBase {
                 slots.add(ImmutablePair.of(kv[1], Integer.parseInt(kv[0])));
             }
         } else
-            slots = BoosterTemplate.genericBooster.getSlots();
+            slots = SealedProductTemplate.genericBooster.getSlots();
 
         final CustomLimited cd = new CustomLimited(data.get("Name"), slots);
         cd.landSetCode = data.get("LandSetCode");

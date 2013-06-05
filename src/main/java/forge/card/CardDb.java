@@ -41,7 +41,6 @@ import forge.util.MyRandom;
 import forge.util.maps.CollectionSuppliers;
 import forge.util.maps.MapOfLists;
 import forge.util.maps.TreeMapOfLists;
-import forge.view.arcane.CardPanel;
 
 public final class CardDb implements ICardDatabase {
     private static volatile CardDb commonCards = null; // 'volatile' keyword makes this working
@@ -233,8 +232,8 @@ public final class CardDb implements ICardDatabase {
                     candidates[cnt++] = pc;
             }
 
-            if (candidates.length == 0 ) return null;
-            if (candidates.length == 1 ) return candidates[0];
+            if (cnt == 0 ) return null;
+            if (cnt == 1 ) return candidates[0];
             return candidates[MyRandom.getRandom().nextInt(cnt)];
         } else 
             for( PaperCard pc : cards ) {
@@ -315,23 +314,16 @@ public final class CardDb implements ICardDatabase {
         public final Map<String, CardRules> regularCards = new TreeMap<String, CardRules>(String.CASE_INSENSITIVE_ORDER);
         public final Map<String, CardRules> variantsCards = new TreeMap<String, CardRules>(String.CASE_INSENSITIVE_ORDER);
 
-        private void addNewCard(final CardRules card) {
-            if (null == card) {
-                return;
-            } // consider that a success
-              // System.out.println(card.getName());
-            final String cardName = card.getName();
-        
-
-            if ( card.isTraditional() )
-                regularCards.put(cardName, card);
-            else
-                variantsCards.put(cardName, card);
-        }
 
         CardSorter(final Iterable<CardRules> parser) {
-            for (CardRules cr : parser) {
-                this.addNewCard(cr);
+            for (CardRules card : parser) {
+                if (null == card) continue;
+                
+                final String cardName = card.getName();
+                if ( card.isVariant() )
+                    variantsCards.put(cardName, card);
+                else
+                    regularCards.put(cardName, card);
             }
         }
     }

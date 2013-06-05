@@ -23,7 +23,6 @@ import java.util.Map;
 import com.google.common.base.Function;
 
 import forge.Card;
-import forge.Singletons;
 import forge.card.CardRarity;
 import forge.card.CardRules;
 import forge.card.cardfactory.CardFactory;

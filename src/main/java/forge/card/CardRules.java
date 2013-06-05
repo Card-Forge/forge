@@ -18,7 +18,6 @@
 package forge.card;
 
 import java.util.List;
-import java.util.Map;
 import forge.card.mana.ManaCost;
 
 /**
@@ -96,8 +95,9 @@ public final class CardRules implements ICardCharacteristics {
         return res;
     }
 
-    public boolean isTraditional() {
-        return !(getType().isVanguard() || getType().isScheme() || getType().isPlane() || getType().isPhenomenon());
+    public boolean isVariant() {
+        CardType t = getType();
+        return t.isVanguard() || t.isScheme() || t.isPlane() || t.isPhenomenon();
     }
 
     public CardSplitType getSplitType() {

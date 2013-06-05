@@ -161,7 +161,7 @@ public class MetaSet {
 
         switch(type) {
             case Full:
-                return new UnOpenedProduct(BoosterTemplate.genericBooster);
+                return new UnOpenedProduct(SealedProductTemplate.genericBooster);
 
             case Booster:
                 return new UnOpenedProduct(Singletons.getModel().getBoosters().get(data));
@@ -174,7 +174,7 @@ public class MetaSet {
 
             case JoinedSet:
                 Predicate<PaperCard> predicate = IPaperCard.Predicates.printedInSets(data.split(" "));
-                return new UnOpenedProduct(BoosterTemplate.genericBooster, predicate);
+                return new UnOpenedProduct(SealedProductTemplate.genericBooster, predicate);
 
             case Choose: return UnOpenedMeta.choose(data);
             case Random: return UnOpenedMeta.random(data);

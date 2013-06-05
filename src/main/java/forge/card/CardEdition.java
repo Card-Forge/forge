@@ -79,17 +79,25 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
     /** The Constant unknown. */
     private final static SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
     
-    public static final CardEdition UNKNOWN = new CardEdition("1990-01-01", "??", "???", Type.UNKNOWN, "Undefined", null, false, new CardInSet[]{});
+    public static final CardEdition UNKNOWN = new CardEdition("1990-01-01", "??", "???", Type.UNKNOWN, "Undefined", new CardInSet[]{});
 
     private Date date;
-    private final String code2;
-    private final String code;
-    private final Type   type;
-    private final String name;
-    private final String alias;
-    private final boolean whiteBorder;
+    private String code2;
+    private String code;
+    private Type   type;
+    private String name;
+    private String alias = null;
+    private boolean whiteBorder = false;
     private final CardInSet[] cards;
+    
+    
+    private int boosterArts = 1;
+    private SealedProductTemplate boosterTpl = null;
 
+    private CardEdition(CardInSet[] cards) {
+        this.cards = cards;
+    }
+    
     /**
      * Instantiates a new card set.
      * 
@@ -103,20 +111,23 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
      * @param name the name of the set
      * @param an optional secondary code alias for the set
      */
-    private CardEdition(String date, String code2, String code, Type type, String name, String alias, boolean whiteBorder, CardInSet[] cards) {
+    private CardEdition(String date, String code2, String code, Type type, String name, CardInSet[] cards) {
+        this(cards);
         this.code2 = code2;
         this.code  = code;
         this.type  = type;
         this.name  = name;
-        this.alias = alias;
-        this.whiteBorder = whiteBorder;
-        this.cards = cards;
+        this.date = parseDate(date);
+
+    }
+    
+    private static Date parseDate(String date) {
         if( date.length() <= 7 ) 
             date = date + "-01";
         try {
-            this.date = formatter.parse(date);
+            return formatter.parse(date);
         } catch (ParseException e) {
-            this.date = new Date();
+            return new Date();
         }
     }
 
@@ -190,7 +201,7 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
         private static class CanMakeBooster implements Predicate<CardEdition> {
             @Override
             public boolean apply(final CardEdition subject) {
-                return Singletons.getModel().getBoosters().contains(subject.getCode());
+                return subject.boosterTpl != null;
             }
         }
 
@@ -236,7 +247,7 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
         public static final Predicate<CardEdition> hasBasicLands = new Predicate<CardEdition>() {
             @Override
             public boolean apply(CardEdition ed) {
-                return null != CardDb.instance().tryGetCard("Plains", ed.getCode());
+                return null != CardDb.instance().tryGetCard("Plains", ed.getCode(), 0);
             };
         };
 
@@ -253,28 +264,6 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
         protected CardEdition read(File file) {
             final Map<String, List<String>> contents = FileSection.parseSections(FileUtil.readFile(file));
 
-            FileSection section = FileSection.parse(contents.get("metadata"), "=");
-            String name  = section.get("name");
-            String date  = section.get("date");
-            String code  = section.get("code");
-            String code2 = section.get("code2");
-            if( code2 == null ) 
-                code2 = code;
-            
-            String type  = section.get("type");
-            String alias = section.get("alias");
-            boolean borderWhite = "white".equalsIgnoreCase(section.get("border"));
-
-            Type enumType = Type.UNKNOWN;
-            if (null != type && !type.isEmpty()) {
-                try {
-                    enumType = Type.valueOf(type.toUpperCase(Locale.ENGLISH));
-                } catch (IllegalArgumentException e) {
-                    // ignore; type will get UNKNOWN
-                    System.err.println(String.format("Ignoring unknown type in set definitions: name: %s; type: %s", name, type));
-                }
-            }
-            
             List<CardEdition.CardInSet> processedCards = new ArrayList<CardEdition.CardInSet>();
             for(String line : contents.get("cards")) {
                 if (StringUtils.isBlank(line))
@@ -288,7 +277,35 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
                 processedCards.add(cis);
             }
 
-            return new CardEdition(date, code2, code, enumType, name, alias, borderWhite, processedCards.toArray(arrCards));
+            CardEdition res = new CardEdition(processedCards.toArray(arrCards));
+            
+            
+            FileSection section = FileSection.parse(contents.get("metadata"), "=");
+            res.name  = section.get("name");
+            res.date  = parseDate(section.get("date"));
+            res.code  = section.get("code");
+            res.code2 = section.get("code2");
+            if( res.code2 == null ) 
+                res.code2 = res.code;
+            
+            res.boosterArts = section.getInt("BoosterCovers", 1);
+            String boosterDesc = section.get("Booster");
+            res.boosterTpl = boosterDesc == null ? null : new SealedProductTemplate(res.code, SealedProductTemplate.Reader.parseSlots(boosterDesc));
+            
+            res.alias = section.get("alias");
+            res.whiteBorder = "white".equalsIgnoreCase(section.get("border"));
+            String type  = section.get("type");
+            Type enumType = Type.UNKNOWN;
+            if (null != type && !type.isEmpty()) {
+                try {
+                    enumType = Type.valueOf(type.toUpperCase(Locale.ENGLISH));
+                } catch (IllegalArgumentException e) {
+                    // ignore; type will get UNKNOWN
+                    System.err.println(String.format("Ignoring unknown type in set definitions: name: %s; type: %s", res.name, type));
+                }
+            }
+            res.type = enumType;
+            return res;
         }
 
         @Override
@@ -303,5 +320,21 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
                 return name.endsWith(".txt");
             }
         };
+    }
+
+    /**
+     * TODO: Write javadoc for this method.
+     * @return
+     */
+    public int getCntBoosterPictures() {
+        return boosterArts;
+    }
+
+    /**
+     * TODO: Write javadoc for this method.
+     * @return
+     */
+    public SealedProductTemplate getBoosterTemplate() {
+        return boosterTpl;
     }
 }

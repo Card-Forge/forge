@@ -27,7 +27,6 @@ import com.google.common.base.Predicates;
 import com.google.common.collect.Lists;
 
 import forge.card.CardDb;
-import forge.card.CardRulesPredicates;
 import forge.item.PaperCard;
 import forge.item.IPaperCard;
 

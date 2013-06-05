@@ -22,9 +22,9 @@ import java.util.List;
 import com.google.common.base.Function;
 
 import forge.Singletons;
-import forge.card.BoosterTemplate;
 import forge.card.BoosterGenerator;
 import forge.card.CardEdition;
+import forge.card.SealedProductTemplate;
 
 public class TournamentPack extends OpenablePack {
 
@@ -32,12 +32,12 @@ public class TournamentPack extends OpenablePack {
     public static final Function<CardEdition, TournamentPack> FN_FROM_SET = new Function<CardEdition, TournamentPack>() {
         @Override
         public TournamentPack apply(final CardEdition arg1) {
-            BoosterTemplate d = Singletons.getModel().getTournamentPacks().get(arg1.getCode());
+            SealedProductTemplate d = Singletons.getModel().getTournamentPacks().get(arg1.getCode());
             return new TournamentPack(arg1.getName(), d);
         }
     };
 
-    public TournamentPack(final String name0, final BoosterTemplate boosterData) {
+    public TournamentPack(final String name0, final SealedProductTemplate boosterData) {
         super(name0, boosterData);
     }
 

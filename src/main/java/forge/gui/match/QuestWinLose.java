@@ -34,10 +34,10 @@ import org.apache.commons.lang.StringUtils;
 
 import forge.Card;
 import forge.Singletons;
-import forge.card.BoosterTemplate;
 import forge.card.CardDb;
 import forge.card.CardEdition;
 import forge.card.IUnOpenedProduct;
+import forge.card.SealedProductTemplate;
 import forge.card.UnOpenedProduct;
 import forge.control.FControl;
 import forge.game.GameEndReason;
@@ -562,7 +562,7 @@ public class QuestWinLose extends ControlWinLose {
         } else {
             final List<String> sets = new ArrayList<String>();
 
-            for (BoosterTemplate bd : Singletons.getModel().getBoosters()) {
+            for (SealedProductTemplate bd : Singletons.getModel().getBoosters()) {
                 if (qData.getFormat().isSetLegal(bd.getEdition())) {
                     sets.add(bd.getEdition());
                 }

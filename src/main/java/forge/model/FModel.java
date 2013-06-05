@@ -28,7 +28,6 @@ import java.util.List;
 import forge.Constant;
 import forge.Constant.Preferences;
 import forge.FThreads;
-import forge.card.BoosterTemplate;
 import forge.card.CardBlock;
 import forge.card.CardDb;
 import forge.card.EditionCollection;
@@ -37,7 +36,6 @@ import forge.card.FormatCollection;
 import forge.card.SealedProductTemplate;
 import forge.card.cardfactory.CardStorageReader;
 import forge.deck.CardCollections;
-import forge.error.BugReporter;
 import forge.error.ExceptionHandler;
 import forge.game.limited.GauntletMini;
 import forge.gauntlet.GauntletData;
@@ -81,9 +79,9 @@ public enum FModel {
 
     private final EditionCollection editions;
     private final FormatCollection formats;
-    private final IStorageView<BoosterTemplate> boosters;
+    private final IStorageView<SealedProductTemplate> boosters;
     private final IStorageView<SealedProductTemplate> specialBoosters;
-    private final IStorageView<BoosterTemplate> tournaments;
+    private final IStorageView<SealedProductTemplate> tournaments;
     private final IStorageView<FatPackTemplate> fatPacks;
     private final IStorageView<CardBlock> blocks;
     private final IStorageView<CardBlock> fantasyBlocks;
@@ -152,9 +150,9 @@ public enum FModel {
 
  
         this.formats = new FormatCollection("res/blockdata/formats.txt");
-        this.boosters = new StorageView<BoosterTemplate>(new BoosterTemplate.Reader("res/blockdata/boosters.txt"));
+        this.boosters = new StorageView<SealedProductTemplate>(editions.getBoosterGenerator());
         this.specialBoosters = new StorageView<SealedProductTemplate>(new SealedProductTemplate.Reader("res/blockdata/boosters-special.txt"));
-        this.tournaments = new StorageView<BoosterTemplate>(new BoosterTemplate.Reader("res/blockdata/starters.txt"));
+        this.tournaments = new StorageView<SealedProductTemplate>(new SealedProductTemplate.Reader("res/blockdata/starters.txt"));
         this.fatPacks = new StorageView<FatPackTemplate>(new FatPackTemplate.Reader("res/blockdata/fatpacks.txt"));
         this.blocks = new StorageView<CardBlock>(new CardBlock.Reader("res/blockdata/blocks.txt", editions));
         this.fantasyBlocks = new StorageView<CardBlock>(new CardBlock.Reader("res/blockdata/fantasyblocks.txt", editions));
@@ -363,12 +361,12 @@ public enum FModel {
     }
 
     /** @return {@link forge.util.storage.IStorageView}<{@link forge.card.BoosterTemplate}> */
-    public final IStorageView<BoosterTemplate> getTournamentPacks() {
+    public final IStorageView<SealedProductTemplate> getTournamentPacks() {
         return tournaments;
     }
 
     /** @return {@link forge.util.storage.IStorageView}<{@link forge.card.BoosterTemplate}> */
-    public final IStorageView<BoosterTemplate> getBoosters() {
+    public final IStorageView<SealedProductTemplate> getBoosters() {
         return boosters;
     }
 

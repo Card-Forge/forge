@@ -32,6 +32,13 @@ import forge.util.storage.StorageReaderFile;
 
 public class SealedProductTemplate {
 
+    @SuppressWarnings("unchecked")
+    public final static SealedProductTemplate genericBooster = new SealedProductTemplate(null, Lists.newArrayList(
+        Pair.of(BoosterGenerator.COMMON, 10), Pair.of(BoosterGenerator.UNCOMMON, 3), 
+        Pair.of(BoosterGenerator.RARE_MYTHIC, 1), Pair.of(BoosterGenerator.BASIC_LAND, 1)
+    ));
+
+    
     protected final List<Pair<String, Integer>> slots;
     protected final String name;
 
@@ -69,24 +76,47 @@ public class SealedProductTemplate {
         }
     };
     
+    @Override
+    public String toString() {
+        StringBuilder s = new StringBuilder();
+        
+        
+        s.append("consisting of ");
+        for(Pair<String, Integer> p : slots) {
+            s.append(p.getRight()).append(" ").append(p.getLeft()).append(", ");
+        }
+
+        // trim the last comma and space
+        s.replace(s.length() - 2, s.length(), "");
+        
+        // put an 'and' before the previous comma
+        int lastCommaIdx = s.lastIndexOf(","); 
+        if (0 < lastCommaIdx) {
+            s.replace(lastCommaIdx+1, lastCommaIdx+1, " and");
+        }
+
+        return s.toString();
+    }
+    
     public static final class Reader extends StorageReaderFile<SealedProductTemplate> {
         public Reader(String pathname) {
             super(pathname, SealedProductTemplate.FN_GET_NAME);
         }
 
-        @Override
-        protected SealedProductTemplate read(String line, int i) {
-            String[] headAndData = TextUtil.split(line, ':', 2);
-            final String edition = headAndData[0];
-            final String[] data = TextUtil.splitWithParenthesis(headAndData[1], ',');
-
+        public static List<Pair<String, Integer>> parseSlots(String data) {
+            final String[] dataz = TextUtil.splitWithParenthesis(data, ',');
             List<Pair<String, Integer>> slots = new ArrayList<Pair<String,Integer>>();
-            for(String slotDesc : data) {
+            for(String slotDesc : dataz) {
                 String[] kv = TextUtil.splitWithParenthesis(slotDesc, ' ', 2);
                 slots.add(ImmutablePair.of(kv[1], Integer.parseInt(kv[0])));
             }
-
-            return new SealedProductTemplate(edition, slots);
+            return slots;
+        }
+        
+        @Override
+        protected SealedProductTemplate read(String line, int i) {
+            String[] headAndData = TextUtil.split(line, ':', 2);
+            return new SealedProductTemplate(headAndData[0], parseSlots(headAndData[1]));
         }
     }
 }

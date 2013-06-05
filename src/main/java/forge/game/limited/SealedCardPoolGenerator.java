@@ -27,11 +27,11 @@ import javax.swing.JOptionPane;
 import org.apache.commons.lang.ArrayUtils;
 
 import forge.Singletons;
-import forge.card.BoosterTemplate;
 import forge.card.CardBlock;
 import forge.card.CardDb;
 import forge.card.CardEdition;
 import forge.card.IUnOpenedProduct;
+import forge.card.SealedProductTemplate;
 import forge.card.UnOpenedMeta;
 import forge.card.UnOpenedProduct;
 import forge.deck.CardPool;
@@ -71,7 +71,7 @@ public class SealedCardPoolGenerator {
             case Full:
                 // Choose number of boosters
 
-                chooseNumberOfBoosters(new UnOpenedProduct(BoosterTemplate.genericBooster));
+                chooseNumberOfBoosters(new UnOpenedProduct(SealedProductTemplate.genericBooster));
                 landSetCode = CardDb.instance().getCard("Plains").getEdition();
                 break;
                 

@@ -13919,7 +13919,6 @@ src/main/java/forge/StaticEffect.java svneol=native#text/plain
 src/main/java/forge/StaticEffects.java svneol=native#text/plain
 src/main/java/forge/card/AggregationMethod.java -text
 src/main/java/forge/card/BoosterGenerator.java svneol=native#text/plain
-src/main/java/forge/card/BoosterTemplate.java -text
 src/main/java/forge/card/CardAiHints.java -text
 src/main/java/forge/card/CardBlock.java -text
 src/main/java/forge/card/CardCharacteristics.java -text

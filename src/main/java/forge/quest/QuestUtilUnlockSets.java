@@ -31,8 +31,8 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 import forge.Singletons;
-import forge.card.BoosterTemplate;
 import forge.card.CardEdition;
+import forge.card.SealedProductTemplate;
 import forge.card.UnOpenedProduct;
 import forge.gui.CardListViewer;
 import forge.gui.GuiChoose;
@@ -184,8 +184,8 @@ public class QuestUtilUnlockSets {
      */
     public static void doUnlock(QuestController qData, final CardEdition unlockedSet) {
 
-        IStorageView<BoosterTemplate> starters = Singletons.getModel().getTournamentPacks();
-        IStorageView<BoosterTemplate> boosters = Singletons.getModel().getBoosters();
+        IStorageView<SealedProductTemplate> starters = Singletons.getModel().getTournamentPacks();
+        IStorageView<SealedProductTemplate> boosters = Singletons.getModel().getBoosters();
         qData.getFormat().unlockSet(unlockedSet.getCode());
 
         List<PaperCard> cardsWon = new ArrayList<PaperCard>();
