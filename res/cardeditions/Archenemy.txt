@@ -41,7 +41,7 @@ U Dragon Whelp
 U Dragonspeaker Shaman
 U Dreamstone Hedron
 C Dregscape Zombie
-P Drench the Soil in Their Blood
+S Drench the Soil in Their Blood
 R Duplicant
 C Embrace My Diabolical Vision
 C Ethersworn Shieldmage
@@ -79,7 +79,7 @@ C I Delight in Your Convulsions
 C I Know All, I See All
 C Ignite the Cloneforge!
 R Imperial Hellkite
-P Imprison This Insolent Wretch
+S Imprison This Insolent Wretch
 U Incremental Blight
 C Infectious Horror
 U Inferno Trap
@@ -131,10 +131,10 @@ C Oblivion Ring
 C Only Blood Ends Your Nightmares
 C Pale Recluse
 U Path to Exile
-P Perhaps You've Met My Cohort
+S Perhaps You've Met My Cohort
 L Plains
 L Plains
-P Plots That Span Centuries
+S Plots That Span Centuries
 C Plummet
 R Primal Command
 C Rakdos Carnarium

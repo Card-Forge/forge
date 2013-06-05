@@ -39,7 +39,7 @@ U Bull Cerodon
 U Cabal Coffers
 C Cadaverous Knight
 U Captain's Maneuver
-P Celestine Reef
+S Celestine Reef
 C Cerodon Yearling
 U Cinder Elemental
 C Cliffside Market
@@ -89,7 +89,7 @@ C Gruul Turf
 U Hearthfire Hobgoblin
 R Helldozer
 C Hideous End
-P Horizon Boughs
+S Horizon Boughs
 C Hull Breach
 C Immersturm
 U Incremental Blight
@@ -120,7 +120,7 @@ U Mask of Memory
 R Master of Etherium
 R Menacing Ogre
 C Minamo
-P Mirrored Depths
+S Mirrored Depths
 L Mountain
 L Mountain
 L Mountain
@@ -198,7 +198,7 @@ C Syphon Mind
 C Syphon Soul
 R Taurean Mauler
 S Tazeem
-P Tember City
+S Tember City
 C Terramorphic Expanse
 C The AEther Flues
 C The Dark Barony
