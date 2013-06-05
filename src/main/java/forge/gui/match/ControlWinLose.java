@@ -20,7 +20,7 @@ import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 import forge.gui.SOverlayUtils;
 import forge.item.CardDb;
-import forge.item.CardPrinted;
+import forge.item.PaperCard;
 import forge.properties.ForgePreferences.FPref;
 
 /** 
@@ -119,7 +119,7 @@ public class ControlWinLose {
         }
 
         // remove all the lost cards from owners' decks
-        List<CardPrinted> losses = new ArrayList<CardPrinted>();
+        List<PaperCard> losses = new ArrayList<PaperCard>();
         int cntPlayers = match.getPlayers().size();
         for (int i = 0; i < cntPlayers; i++ ) {
             Player fromGame = match.getCurrentGame().getRegisteredPlayers().get(i);
@@ -132,7 +132,7 @@ public class ControlWinLose {
             Deck oDeck = psc.getOriginalDeck();
 
             for (Card c : compAntes) {
-                CardPrinted toRemove = CardDb.getCard(c);
+                PaperCard toRemove = CardDb.getCard(c);
                 cDeck.getMain().remove(toRemove);
                 if ( cDeck != oDeck )
                     oDeck.getMain().remove(toRemove);
@@ -146,12 +146,12 @@ public class ControlWinLose {
             
             // offer to winner, if he is local human
             if (fromGame.isHuman()) {
-                List<CardPrinted> chosen = GuiChoose.noneOrMany("Select cards to add to your deck", losses);
+                List<PaperCard> chosen = GuiChoose.noneOrMany("Select cards to add to your deck", losses);
                 if (null != chosen) {
                     RegisteredPlayer psc = match.getPlayers().get(i);
                     Deck cDeck = psc.getCurrentDeck();
                     //Deck oDeck = psc.getOriginalDeck();
-                    for (CardPrinted c : chosen) {
+                    for (PaperCard c : chosen) {
                         cDeck.getMain().add(c);
                         //oDeck.getMain().add(c);
                     }

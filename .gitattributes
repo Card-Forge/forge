@@ -14565,8 +14565,6 @@ src/main/java/forge/gui/toolbox/SaveOpenDialog.java -text
 src/main/java/forge/gui/toolbox/package-info.java svneol=native#text/plain
 src/main/java/forge/item/BoosterPack.java -text
 src/main/java/forge/item/CardDb.java -text
-src/main/java/forge/item/CardPrinted.java -text
-src/main/java/forge/item/CardToken.java -text
 src/main/java/forge/item/FatPack.java -text
 src/main/java/forge/item/IPaperCard.java -text
 src/main/java/forge/item/InventoryItem.java -text
@@ -14575,6 +14573,8 @@ src/main/java/forge/item/ItemPool.java -text
 src/main/java/forge/item/ItemPoolView.java -text
 src/main/java/forge/item/ItemPredicate.java -text
 src/main/java/forge/item/OpenablePack.java -text
+src/main/java/forge/item/PaperCard.java -text
+src/main/java/forge/item/PaperToken.java -text
 src/main/java/forge/item/PreconDeck.java -text
 src/main/java/forge/item/PrintSheet.java -text
 src/main/java/forge/item/TournamentPack.java -text

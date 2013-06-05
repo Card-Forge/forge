@@ -38,7 +38,7 @@ import forge.gui.deckeditor.views.VDeckgen;
 import forge.gui.framework.DragCell;
 import forge.gui.home.sanctioned.CSubmenuDraft;
 import forge.item.CardDb;
-import forge.item.CardPrinted;
+import forge.item.PaperCard;
 import forge.item.InventoryItem;
 import forge.item.ItemPoolView;
 
@@ -50,7 +50,7 @@ import forge.item.ItemPoolView;
  * @author Forge
  * @version $Id$
  */
-public class CEditorDraftingProcess extends ACEditorBase<CardPrinted, DeckGroup> {
+public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> {
     private IBoosterDraft boosterDraft;
 
     private String ccAddLabel = "Add card";
@@ -63,8 +63,8 @@ public class CEditorDraftingProcess extends ACEditorBase<CardPrinted, DeckGroup>
      * Updates the deck editor UI as necessary draft selection mode.
      */
     public CEditorDraftingProcess() {
-        final EditorTableView<CardPrinted> tblCatalog = new EditorTableView<CardPrinted>(false, CardPrinted.class);
-        final EditorTableView<CardPrinted> tblDeck = new EditorTableView<CardPrinted>(false, CardPrinted.class);
+        final EditorTableView<PaperCard> tblCatalog = new EditorTableView<PaperCard>(false, PaperCard.class);
+        final EditorTableView<PaperCard> tblDeck = new EditorTableView<PaperCard>(false, PaperCard.class);
 
         VCardCatalog.SINGLETON_INSTANCE.setTableView(tblCatalog.getTable());
         VCurrentDeck.SINGLETON_INSTANCE.setTableView(tblDeck.getTable());
@@ -104,11 +104,11 @@ public class CEditorDraftingProcess extends ACEditorBase<CardPrinted, DeckGroup>
      */
     @Override
     public void addCard(InventoryItem item, boolean toAlternate, int qty) {
-        if ((item == null) || !(item instanceof CardPrinted) || toAlternate) {
+        if ((item == null) || !(item instanceof PaperCard) || toAlternate) {
             return;
         }
 
-        final CardPrinted card = (CardPrinted) item;
+        final PaperCard card = (PaperCard) item;
 
         // can only draft one at a time, regardless of the requested quantity
         this.getTableDeck().addCard(card, 1);
@@ -150,7 +150,7 @@ public class CEditorDraftingProcess extends ACEditorBase<CardPrinted, DeckGroup>
      * @param list
      *            a {@link forge.CardList} object.
      */
-    private void showChoices(final ItemPoolView<CardPrinted> list) {
+    private void showChoices(final ItemPoolView<PaperCard> list) {
         VCardCatalog.SINGLETON_INSTANCE.getPnlHeader().setVisible(true);
         VCardCatalog.SINGLETON_INSTANCE.getLblTitle().setText("Select a card from pack number "
                 + (((BoosterDraft) boosterDraft).getCurrentBoosterIndex() + 1) + ".");

@@ -8,7 +8,7 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 
 import forge.item.CardDb;
-import forge.item.CardPrinted;
+import forge.item.PaperCard;
 
 /** 
  * Allows the player to choose a card from a predicate-filtered list of cards.
@@ -17,7 +17,7 @@ import forge.item.CardPrinted;
 public class QuestRewardCardFiltered extends QuestRewardCard implements IQuestRewardCard {
 
     private final String description;
-    private final Predicate<CardPrinted> predicates;
+    private final Predicate<PaperCard> predicates;
 
     /**
      * The constructor.
@@ -56,9 +56,9 @@ public class QuestRewardCardFiltered extends QuestRewardCard implements IQuestRe
      * @return a List<CardPrinted> or null if could not create a list.
      */
     @Override
-    public final List<CardPrinted> getChoices() {
-        List<CardPrinted> cardChoices = new ArrayList<CardPrinted>();
-        for (final CardPrinted card : Iterables.filter(CardDb.instance().getAllCards(), predicates)) {
+    public final List<PaperCard> getChoices() {
+        List<PaperCard> cardChoices = new ArrayList<PaperCard>();
+        for (final PaperCard card : Iterables.filter(CardDb.instance().getAllCards(), predicates)) {
             cardChoices.add(card);
         }
         Collections.sort(cardChoices);

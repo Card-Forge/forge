@@ -34,7 +34,7 @@ import forge.game.Game;
 import forge.game.event.GameEventTokenCreated;
 import forge.game.player.Player;
 import forge.gui.GuiChoose;
-import forge.item.CardToken;
+import forge.item.PaperToken;
 
 public class TokenEffect extends SpellAbilityEffect {
 
@@ -71,7 +71,7 @@ public class TokenEffect extends SpellAbilityEffect {
         }
 
         if (mapParams.hasParam("TokenImage")) {
-            image = CardToken.makeTokenFileName(mapParams.getParam("TokenImage"));
+            image = PaperToken.makeTokenFileName(mapParams.getParam("TokenImage"));
         } else {
             image = "";
         }
@@ -177,7 +177,7 @@ public class TokenEffect extends SpellAbilityEffect {
         
         final String imageName;
         if (this.tokenImage.equals("")) {
-            imageName = CardToken.makeTokenFileName(colorDesc.replace(" ", ""), tokenPower, tokenToughness, tokenName);
+            imageName = PaperToken.makeTokenFileName(colorDesc.replace(" ", ""), tokenPower, tokenToughness, tokenName);
         } else {
             imageName = this.tokenImage;
         }

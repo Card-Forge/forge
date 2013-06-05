@@ -23,7 +23,7 @@ import java.util.Map;
 
 import forge.Singletons;
 import forge.deck.Deck;
-import forge.item.CardPrinted;
+import forge.item.PaperCard;
 import forge.item.InventoryItem;
 import forge.item.ItemPool;
 import forge.item.ItemPoolView;
@@ -38,7 +38,7 @@ public class QuestAssets {
 
     // Cards associated with quest
     /** The card pool. */
-    private final ItemPool<CardPrinted> cardPool = new ItemPool<CardPrinted>(CardPrinted.class); // player's
+    private final ItemPool<PaperCard> cardPool = new ItemPool<PaperCard>(PaperCard.class); // player's
     /** The credits. */
     private long credits; // this money is good for all modes
     // game
@@ -171,7 +171,7 @@ public class QuestAssets {
         if (useFormat != null && !useFormat.hasSnowLands()) {
             snowLands = 0;
         }
-        final ItemPoolView<CardPrinted> lands = QuestUtilCards.generateBasicLands(
+        final ItemPoolView<PaperCard> lands = QuestUtilCards.generateBasicLands(
                 prefs.getPrefInt(QPref.STARTING_BASIC_LANDS), snowLands, useFormat);
         this.getCardPool().addAll(lands);
     }
@@ -243,7 +243,7 @@ public class QuestAssets {
      * 
      * @return the cardPool
      */
-    public ItemPool<CardPrinted> getCardPool() {
+    public ItemPool<PaperCard> getCardPool() {
         return this.cardPool;
     }
 

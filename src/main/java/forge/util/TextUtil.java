@@ -9,7 +9,7 @@ import java.util.Map.Entry;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 
-import forge.item.CardPrinted;
+import forge.item.PaperCard;
 
 /** 
  * TODO: Write javadoc for this type.
@@ -108,10 +108,10 @@ public class TextUtil {
                 val.toString().substring(1).toLowerCase(Locale.ENGLISH);
     }
 
-    public static String buildFourColumnList(String firstLine, Iterable<CardPrinted> cAnteRemoved) {
+    public static String buildFourColumnList(String firstLine, Iterable<PaperCard> cAnteRemoved) {
         StringBuilder sb = new StringBuilder(firstLine);
         int i = 0;
-        for(CardPrinted cp: cAnteRemoved) {
+        for(PaperCard cp: cAnteRemoved) {
             if ( i != 0 ) sb.append(", ");
             if ( i % 4 == 0 ) sb.append("\n");
             sb.append(cp);

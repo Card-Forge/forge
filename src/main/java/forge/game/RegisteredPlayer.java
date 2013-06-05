@@ -8,7 +8,7 @@ import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.game.player.LobbyPlayer;
 import forge.game.player.Player;
-import forge.item.CardPrinted;
+import forge.item.PaperCard;
 import forge.item.IPaperCard;
 
 
@@ -16,7 +16,7 @@ public class RegisteredPlayer {
     private final Deck originalDeck;
     private Deck currentDeck;
 
-    private static final Iterable<CardPrinted> EmptyList = Collections.unmodifiableList(new ArrayList<CardPrinted>());
+    private static final Iterable<PaperCard> EmptyList = Collections.unmodifiableList(new ArrayList<PaperCard>());
     
     private LobbyPlayer player = null;
     
@@ -25,7 +25,7 @@ public class RegisteredPlayer {
     private Iterable<IPaperCard> cardsOnBattlefield = null;
     private final List<IPaperCard> cardsInCommand = new ArrayList<IPaperCard>();
     private Iterable<? extends IPaperCard> schemes = null;
-    private Iterable<CardPrinted> planes = null;
+    private Iterable<PaperCard> planes = null;
     private int teamNumber = -1; // members of teams with negative id will play FFA.
     
     public RegisteredPlayer(Deck deck0) {
@@ -117,14 +117,14 @@ public class RegisteredPlayer {
     /**
      * @return the planes
      */
-    public Iterable<CardPrinted> getPlanes(final Player p) {
+    public Iterable<PaperCard> getPlanes(final Player p) {
         return planes == null ? EmptyList : planes;
     }
 
     /**
      * @param planes0 the planes to set
      */
-    public void setPlanes(Iterable<CardPrinted> planes0) {
+    public void setPlanes(Iterable<PaperCard> planes0) {
         this.planes = planes0;
     }
 
@@ -146,7 +146,7 @@ public class RegisteredPlayer {
         return new RegisteredPlayer(deck);
     }
 
-    public static RegisteredPlayer forVanguard(final Deck deck, final CardPrinted avatar) {
+    public static RegisteredPlayer forVanguard(final Deck deck, final PaperCard avatar) {
         RegisteredPlayer start = fromDeck(deck);
         start.setStartingLife(start.getStartingLife() + avatar.getRules().getLife());
         start.setStartingHand(start.getStartingHand() + avatar.getRules().getHand());
@@ -155,13 +155,13 @@ public class RegisteredPlayer {
     }
 
 
-    public static RegisteredPlayer forArchenemy(final Deck deck, final Iterable<CardPrinted> schemes) {
+    public static RegisteredPlayer forArchenemy(final Deck deck, final Iterable<PaperCard> schemes) {
         RegisteredPlayer start = fromDeck(deck);
         start.setSchemes(schemes);
         return start;
     }
     
-    public static RegisteredPlayer forPlanechase(final Deck deck, final Iterable<CardPrinted> planes) {
+    public static RegisteredPlayer forPlanechase(final Deck deck, final Iterable<PaperCard> planes) {
         RegisteredPlayer start = fromDeck(deck);
         start.setPlanes(planes);
         return start;

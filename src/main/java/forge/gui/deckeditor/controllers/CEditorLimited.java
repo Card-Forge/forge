@@ -34,7 +34,7 @@ import forge.gui.deckeditor.views.VDeckgen;
 import forge.gui.framework.DragCell;
 import forge.gui.home.sanctioned.CSubmenuDraft;
 import forge.gui.home.sanctioned.CSubmenuSealed;
-import forge.item.CardPrinted;
+import forge.item.PaperCard;
 import forge.item.InventoryItem;
 import forge.util.storage.IStorage;
 
@@ -46,7 +46,7 @@ import forge.util.storage.IStorage;
  * @author Forge
  * @version $Id: DeckEditorCommon.java 12850 2011-12-26 14:55:09Z slapshot5 $
  */
-public final class CEditorLimited extends ACEditorBase<CardPrinted, DeckGroup> {
+public final class CEditorLimited extends ACEditorBase<PaperCard, DeckGroup> {
 
     private final DeckController<DeckGroup> controller;
     private DragCell allDecksParent = null;
@@ -60,8 +60,8 @@ public final class CEditorLimited extends ACEditorBase<CardPrinted, DeckGroup> {
      * @param deckMap0 &emsp; {@link forge.deck.DeckGroup}<{@link forge.util.storage.IStorage}>
      */
     public CEditorLimited(final IStorage<DeckGroup> deckMap0) {
-        final EditorTableView<CardPrinted> tblCatalog = new EditorTableView<CardPrinted>(false, CardPrinted.class);
-        final EditorTableView<CardPrinted> tblDeck = new EditorTableView<CardPrinted>(false, CardPrinted.class);
+        final EditorTableView<PaperCard> tblCatalog = new EditorTableView<PaperCard>(false, PaperCard.class);
+        final EditorTableView<PaperCard> tblDeck = new EditorTableView<PaperCard>(false, PaperCard.class);
 
         VCardCatalog.SINGLETON_INSTANCE.setTableView(tblCatalog.getTable());
         VCurrentDeck.SINGLETON_INSTANCE.setTableView(tblDeck.getTable());
@@ -96,12 +96,12 @@ public final class CEditorLimited extends ACEditorBase<CardPrinted, DeckGroup> {
      */
     @Override
     public void addCard(InventoryItem item, boolean toAlternate, int qty) {
-        if ((item == null) || !(item instanceof CardPrinted) || toAlternate) {
+        if ((item == null) || !(item instanceof PaperCard) || toAlternate) {
             return;
         }
 
         // update view
-        final CardPrinted card = (CardPrinted) item;
+        final PaperCard card = (PaperCard) item;
         this.getTableDeck().addCard(card, qty);
         this.getTableCatalog().removeCard(card, qty);
         this.getDeckController().notifyModelChanged();
@@ -112,12 +112,12 @@ public final class CEditorLimited extends ACEditorBase<CardPrinted, DeckGroup> {
      */
     @Override
     public void removeCard(InventoryItem item, boolean toAlternate, int qty) {
-        if ((item == null) || !(item instanceof CardPrinted) || toAlternate) {
+        if ((item == null) || !(item instanceof PaperCard) || toAlternate) {
             return;
         }
 
         // update view
-        final CardPrinted card = (CardPrinted) item;
+        final PaperCard card = (PaperCard) item;
         this.getTableCatalog().addCard(card, qty);
         this.getTableDeck().removeCard(card, qty);
         this.getDeckController().notifyModelChanged();

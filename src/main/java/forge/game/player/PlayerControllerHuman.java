@@ -42,7 +42,7 @@ import forge.gui.input.InputSelectCards;
 import forge.gui.input.InputSelectCardsFromList;
 import forge.gui.input.InputSynchronized;
 import forge.gui.match.CMatchUI;
-import forge.item.CardPrinted;
+import forge.item.PaperCard;
 import forge.properties.ForgePreferences.FPref;
 import forge.util.TextUtil;
 
@@ -139,7 +139,7 @@ public class PlayerControllerHuman extends PlayerController {
         int sbMax = sbRange == null ? combinedDeckSize : sbRange.getMaximumInteger();
 
         CardPool newSb = new CardPool();
-        List<CardPrinted> newMain = null;
+        List<PaperCard> newMain = null;
         
         if (sbSize == 0 && mainSize == deckMinSize) {
             // Skip sideboard loop if there are no sideboarding opportunities
@@ -163,7 +163,7 @@ public class PlayerControllerHuman extends PlayerController {
         newSb.clear();
         newSb.addAll(main);
         newSb.addAll(sideboard);
-        for(CardPrinted c : newMain) {
+        for(PaperCard c : newMain) {
             newSb.remove(c);
         }
     

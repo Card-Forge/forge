@@ -48,7 +48,7 @@ import forge.deck.DeckRecognizer.TokenType;
 import forge.deck.DeckSection;
 import forge.gui.GuiUtils;
 import forge.gui.deckeditor.controllers.ACEditorBase;
-import forge.item.CardPrinted;
+import forge.item.PaperCard;
 import forge.item.InventoryItem;
 
 /**
@@ -231,7 +231,7 @@ public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> ex
             if (type != DeckRecognizer.TokenType.KnownCard) {
                 continue;
             }
-            final CardPrinted crd = t.getCard();
+            final PaperCard crd = t.getCard();
             if (isMain) {
                 result.getMain().add(crd, t.getNumber());
             } else {

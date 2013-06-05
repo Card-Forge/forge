@@ -56,7 +56,7 @@ import forge.gui.home.quest.CSubmenuDuels;
 import forge.gui.toolbox.FSkin;
 import forge.item.BoosterPack;
 import forge.item.CardDb;
-import forge.item.CardPrinted;
+import forge.item.PaperCard;
 import forge.item.InventoryItem;
 import forge.item.OpenablePack;
 import forge.item.TournamentPack;
@@ -136,7 +136,7 @@ public class QuestWinLose extends ControlWinLose {
             // Ante returns to owners in a draw
             if (!outcome.isDraw()) {
                 boolean isHumanWinner = outcome.getWinner().equals(questPlayer);
-                final List<CardPrinted> anteCards = new ArrayList<CardPrinted>();
+                final List<PaperCard> anteCards = new ArrayList<PaperCard>();
                 for (Player p : match.getCurrentGame().getRegisteredPlayers()) {
                     if (p.getLobbyPlayer().equals(questPlayer) == isHumanWinner) {
                         continue;
@@ -150,7 +150,7 @@ public class QuestWinLose extends ControlWinLose {
                     qc.getCards().addAllCards(anteCards);
                     this.anteWon(anteCards);
                 } else {
-                    for (CardPrinted c : anteCards) {
+                    for (PaperCard c : anteCards) {
                         qc.getCards().loseCard(c, 1);
                     }
                     this.anteLost(anteCards);
@@ -228,7 +228,7 @@ public class QuestWinLose extends ControlWinLose {
      * Displays cards lost to ante this game.
      * 
      */
-    private void anteLost(final List<CardPrinted> antesLost) {
+    private void anteLost(final List<PaperCard> antesLost) {
         // Generate Swing components and attach.
         this.lblTemp1 = new TitleLabel("Ante Lost: You lost the following cards in Ante:");
 
@@ -244,7 +244,7 @@ public class QuestWinLose extends ControlWinLose {
      * Displays cards won in ante this game (which will be added to your Card Pool).
      * 
      */
-    private void anteWon(final List<CardPrinted> antesWon) {
+    private void anteWon(final List<PaperCard> antesWon) {
         final StringBuilder str = new StringBuilder();
         str.append("Ante Won: These cards will be available in your card pool after this match.");
         // Generate Swing components and attach.
@@ -494,8 +494,8 @@ public class QuestWinLose extends ControlWinLose {
      * 
      */
     private void awardRandomRare(final String message) {
-        final CardPrinted c = qData.getCards().addRandomRare();
-        final List<CardPrinted> cardsWon = new ArrayList<CardPrinted>();
+        final PaperCard c = qData.getCards().addRandomRare();
+        final List<PaperCard> cardsWon = new ArrayList<PaperCard>();
         cardsWon.add(c);
 
         // Generate Swing components and attach.
@@ -515,7 +515,7 @@ public class QuestWinLose extends ControlWinLose {
      * 
      */
     private void awardJackpot() {
-        final List<CardPrinted> cardsWon = qData.getCards().addRandomRare(10);
+        final List<PaperCard> cardsWon = qData.getCards().addRandomRare(10);
 
         // Generate Swing components and attach.
         this.lblTemp1 = new TitleLabel("You just won 10 random rares!");
@@ -534,7 +534,7 @@ public class QuestWinLose extends ControlWinLose {
      */
     private void awardBooster() {
 
-        List<CardPrinted> cardsWon = null;
+        List<PaperCard> cardsWon = null;
 
         if (qData.getFormat() == null) {
             final List<GameFormat> formats = new ArrayList<GameFormat>();
@@ -653,13 +653,13 @@ public class QuestWinLose extends ControlWinLose {
             return;
         }
 
-        final List<CardPrinted> cardsWon = new ArrayList<CardPrinted>();
+        final List<PaperCard> cardsWon = new ArrayList<PaperCard>();
 
         for (InventoryItem ii : itemsWon) {
-            if (ii instanceof CardPrinted) {
-                cardsWon.add((CardPrinted) ii);
+            if (ii instanceof PaperCard) {
+                cardsWon.add((PaperCard) ii);
             } else if (ii instanceof TournamentPack || ii instanceof BoosterPack) {
-                List<CardPrinted> boosterCards = new ArrayList<CardPrinted>();
+                List<PaperCard> boosterCards = new ArrayList<PaperCard>();
                 OpenablePack booster = null;
                 if (ii instanceof BoosterPack) {
                     booster = (BoosterPack) ((BoosterPack) ii).clone();
@@ -676,8 +676,8 @@ public class QuestWinLose extends ControlWinLose {
                 }
             }
             else if (ii instanceof IQuestRewardCard) {
-                final List<CardPrinted> cardChoices = ((IQuestRewardCard) ii).getChoices();
-                final CardPrinted chosenCard = (null == cardChoices ? null : GuiChoose.one("Choose " + ((IQuestRewardCard) ii).getName() + ":", cardChoices));
+                final List<PaperCard> cardChoices = ((IQuestRewardCard) ii).getChoices();
+                final PaperCard chosenCard = (null == cardChoices ? null : GuiChoose.one("Choose " + ((IQuestRewardCard) ii).getName() + ":", cardChoices));
                 if (null != chosenCard) {
                     cardsWon.add(chosenCard);
                 }

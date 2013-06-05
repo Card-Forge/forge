@@ -39,7 +39,7 @@ import forge.game.player.Player;
  * @author Forge
  * @version $Id: CardReference.java 9708 2011-08-09 19:34:12Z jendave $
  */
-public final class CardPrinted implements Comparable<IPaperCard>, InventoryItemFromSet, IPaperCard {
+public final class PaperCard implements Comparable<IPaperCard>, InventoryItemFromSet, IPaperCard {
     // Reference to rules
     private final transient CardRules card;
 
@@ -104,28 +104,28 @@ public final class CardPrinted implements Comparable<IPaperCard>, InventoryItemF
     /**
      * Lambda to get rules for selects from list of printed cards.
      */
-    public static final Function<CardPrinted, CardRules> FN_GET_RULES = new Function<CardPrinted, CardRules>() {
+    public static final Function<PaperCard, CardRules> FN_GET_RULES = new Function<PaperCard, CardRules>() {
         @Override
-        public CardRules apply(final CardPrinted from) {
+        public CardRules apply(final PaperCard from) {
             return from.card;
         }
     };
-    public static final Function<CardPrinted, String> FN_GET_NAME = new Function<CardPrinted, String>() {
+    public static final Function<PaperCard, String> FN_GET_NAME = new Function<PaperCard, String>() {
         @Override
-        public String apply(final CardPrinted from) {
+        public String apply(final PaperCard from) {
             return from.getName();
         }
     };    
 
-    public static final Function<CardPrinted, Integer> FN_GET_EDITION_INDEX = new Function<CardPrinted, Integer>() {
+    public static final Function<PaperCard, Integer> FN_GET_EDITION_INDEX = new Function<PaperCard, Integer>() {
         @Override
-        public Integer apply(final CardPrinted from) {
+        public Integer apply(final PaperCard from) {
             return Integer.valueOf(Singletons.getModel().getEditions().get(from.getEdition()).getIndex());
         }
     };
 
     // Constructor is private. All non-foiled instances are stored in CardDb
-    private CardPrinted(final CardRules c, final String edition0, final CardRarity rare, final int index, final boolean foil) {
+    private PaperCard(final CardRules c, final String edition0, final CardRarity rare, final int index, final boolean foil) {
         this.card = c;
         this.name = c.getName();
         this.edition = edition0;
@@ -148,8 +148,8 @@ public final class CardPrinted implements Comparable<IPaperCard>, InventoryItemF
      *            the index
      * @return the card printed
      */
-    static CardPrinted build(final CardRules c, final String edition, final CardRarity rare, final int index) {
-        return new CardPrinted(c, edition, rare, index, false);
+    static PaperCard build(final CardRules c, final String edition, final CardRarity rare, final int index) {
+        return new PaperCard(c, edition, rare, index, false);
     }
 
     /* foiled don't need to stay in CardDb's structures, so u'r free to create */
@@ -160,8 +160,8 @@ public final class CardPrinted implements Comparable<IPaperCard>, InventoryItemF
      *            the c
      * @return the card printed
      */
-    public static CardPrinted makeFoiled(final CardPrinted c) {
-        return new CardPrinted(c.card, c.edition, c.rarity, c.artIndex, true);
+    public static PaperCard makeFoiled(final PaperCard c) {
+        return new PaperCard(c.card, c.edition, c.rarity, c.artIndex, true);
     }
 
     // Want this class to be a key for HashTable
@@ -182,7 +182,7 @@ public final class CardPrinted implements Comparable<IPaperCard>, InventoryItemF
             return false;
         }
 
-        final CardPrinted other = (CardPrinted) obj;
+        final PaperCard other = (PaperCard) obj;
         if (!this.name.equals(other.name)) {
             return false;
         }
@@ -227,7 +227,7 @@ public final class CardPrinted implements Comparable<IPaperCard>, InventoryItemF
      * 
      * @return the card
      */
-    private static final Map<CardPrinted, Card> cp2card = new HashMap<CardPrinted, Card>();
+    private static final Map<PaperCard, Card> cp2card = new HashMap<PaperCard, Card>();
     /* (non-Javadoc)
      * @see forge.item.ICardPrinted#getMatchingForgeCard()
      */

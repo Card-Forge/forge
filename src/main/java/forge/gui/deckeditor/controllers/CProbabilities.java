@@ -13,7 +13,7 @@ import forge.gui.deckeditor.CDeckEditorUI;
 import forge.gui.deckeditor.views.VProbabilities;
 import forge.gui.framework.ICDoc;
 import forge.gui.toolbox.FLabel;
-import forge.item.CardPrinted;
+import forge.item.PaperCard;
 import forge.item.InventoryItem;
 import forge.item.ItemPool;
 import forge.item.ItemPoolView;
@@ -63,24 +63,24 @@ public enum CProbabilities implements ICDoc {
         final ACEditorBase<T, TModel> ed = (ACEditorBase<T, TModel>)
                 CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController();
 
-        final ItemPoolView<CardPrinted> deck = ItemPool.createFrom(ed.getTableDeck().getCards(), CardPrinted.class);
+        final ItemPoolView<PaperCard> deck = ItemPool.createFrom(ed.getTableDeck().getCards(), PaperCard.class);
 
         final List<String> cardProbabilities = new ArrayList<String>();
 
-        final List<CardPrinted> shuffled = deck.toFlatList();
+        final List<PaperCard> shuffled = deck.toFlatList();
         Collections.shuffle(shuffled, MyRandom.getRandom());
 
         // Log totals of each card for decrementing
-        final Map<CardPrinted, Integer> cardTotals = new HashMap<CardPrinted, Integer>();
-        for (final CardPrinted c : shuffled) {
+        final Map<PaperCard, Integer> cardTotals = new HashMap<PaperCard, Integer>();
+        for (final PaperCard c : shuffled) {
             if (cardTotals.containsKey(c)) { cardTotals.put(c, cardTotals.get(c) + 1); }
             else { cardTotals.put(c, 1); }
         }
 
         // Run through shuffled deck and calculate probabilities.
         // Formulas is (remaining instances of this card / total cards remaining)
-        final Iterator<CardPrinted> itr = shuffled.iterator();
-        CardPrinted tmp;
+        final Iterator<PaperCard> itr = shuffled.iterator();
+        PaperCard tmp;
        // int prob;
         while (itr.hasNext()) {
             tmp = itr.next();

@@ -51,7 +51,7 @@ public class TournamentPack extends OpenablePack {
     }
 
     @Override
-    protected List<CardPrinted> generate() {
+    protected List<PaperCard> generate() {
         return BoosterGenerator.getBoosterPack(this.contents);
     }
 

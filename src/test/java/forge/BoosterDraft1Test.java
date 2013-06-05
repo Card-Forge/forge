@@ -4,7 +4,7 @@ import org.testng.annotations.Test;
 
 import forge.game.limited.BoosterDraft;
 import forge.game.limited.LimitedPoolType;
-import forge.item.CardPrinted;
+import forge.item.PaperCard;
 import forge.item.ItemPoolView;
 
 /**
@@ -23,7 +23,7 @@ public class BoosterDraft1Test {
     public void boosterDraft1Test1() throws Exception {
         final BoosterDraft draft = new BoosterDraft(LimitedPoolType.Full);
         while (draft.hasNextChoice()) {
-            final ItemPoolView<CardPrinted> list = draft.nextChoice();
+            final ItemPoolView<PaperCard> list = draft.nextChoice();
             System.out.println(list.countAll());
             draft.setChoice(list.toFlatList().get(0));
         }

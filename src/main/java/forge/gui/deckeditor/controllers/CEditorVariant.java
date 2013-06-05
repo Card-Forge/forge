@@ -40,7 +40,7 @@ import forge.gui.deckeditor.views.VDeckgen;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.EDocID;
 import forge.item.CardDb;
-import forge.item.CardPrinted;
+import forge.item.PaperCard;
 import forge.item.InventoryItem;
 import forge.item.ItemPool;
 import forge.properties.ForgePreferences.FPref;
@@ -56,11 +56,11 @@ import forge.util.storage.IStorage;
  * @author Forge
  * @version $Id: CEditorConstructed.java 18430 2012-11-27 22:42:36Z Hellfish $
  */
-public final class CEditorVariant extends ACEditorBase<CardPrinted, Deck> {
+public final class CEditorVariant extends ACEditorBase<PaperCard, Deck> {
     private final DeckController<Deck> controller;
     private DragCell allDecksParent = null;
     private DragCell deckGenParent = null;
-    private final Predicate<CardPrinted> cardPoolCondition;
+    private final Predicate<PaperCard> cardPoolCondition;
     private final EDocID exitToScreen;
 
     //=========== Constructor
@@ -69,14 +69,14 @@ public final class CEditorVariant extends ACEditorBase<CardPrinted, Deck> {
      * This is the least restrictive mode;
      * all cards are available.
      */
-    public CEditorVariant(final IStorage<Deck> folder, final Predicate<CardPrinted> poolCondition, final EDocID exitTo) {
+    public CEditorVariant(final IStorage<Deck> folder, final Predicate<PaperCard> poolCondition, final EDocID exitTo) {
         super();
         
         cardPoolCondition = poolCondition;
         exitToScreen = exitTo;
         
-        final EditorTableView<CardPrinted> tblCatalog = new EditorTableView<CardPrinted>(true, CardPrinted.class);
-        final EditorTableView<CardPrinted> tblDeck = new EditorTableView<CardPrinted>(true, CardPrinted.class);
+        final EditorTableView<PaperCard> tblCatalog = new EditorTableView<PaperCard>(true, PaperCard.class);
+        final EditorTableView<PaperCard> tblDeck = new EditorTableView<PaperCard>(true, PaperCard.class);
 
         VCardCatalog.SINGLETON_INSTANCE.setTableView(tblCatalog.getTable());
         VCurrentDeck.SINGLETON_INSTANCE.setTableView(tblDeck.getTable());
@@ -100,11 +100,11 @@ public final class CEditorVariant extends ACEditorBase<CardPrinted, Deck> {
      */
     @Override
     public void addCard(InventoryItem item, boolean toAlternate, int qty) {
-        if ((item == null) || !(item instanceof CardPrinted) || toAlternate) {
+        if ((item == null) || !(item instanceof PaperCard) || toAlternate) {
             return;
         }
 
-        final CardPrinted card = (CardPrinted) item;
+        final PaperCard card = (PaperCard) item;
         this.getTableDeck().addCard(card, qty);
         this.controller.notifyModelChanged();
     }
@@ -114,11 +114,11 @@ public final class CEditorVariant extends ACEditorBase<CardPrinted, Deck> {
      */
     @Override
     public void removeCard(InventoryItem item, boolean toAlternate, int qty) {
-        if ((item == null) || !(item instanceof CardPrinted) || toAlternate) {
+        if ((item == null) || !(item instanceof PaperCard) || toAlternate) {
             return;
         }
 
-        final CardPrinted card = (CardPrinted) item;
+        final PaperCard card = (PaperCard) item;
         this.getTableDeck().removeCard(card, qty);
         this.controller.notifyModelChanged();
     }
@@ -141,10 +141,10 @@ public final class CEditorVariant extends ACEditorBase<CardPrinted, Deck> {
      */
     @Override
     public void resetTables() {
-        Iterable<CardPrinted> allNT = CardDb.variants().getAllCards();
+        Iterable<PaperCard> allNT = CardDb.variants().getAllCards();
         allNT = Iterables.filter(allNT, cardPoolCondition);
         
-        this.getTableCatalog().setDeck(ItemPool.createFrom(allNT, CardPrinted.class), true);
+        this.getTableCatalog().setDeck(ItemPool.createFrom(allNT, PaperCard.class), true);
         this.getTableDeck().setDeck(this.controller.getModel().getOrCreate(DeckSection.Sideboard));
     }
 

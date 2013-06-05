@@ -17,7 +17,7 @@ import forge.gui.deckeditor.views.VDeckgen;
 import forge.gui.framework.ICDoc;
 import forge.gui.toolbox.FLabel;
 import forge.item.CardDb;
-import forge.item.CardPrinted;
+import forge.item.PaperCard;
 import forge.item.InventoryItem;
 import forge.util.Aggregates;
 
@@ -79,8 +79,8 @@ public enum CDeckgen implements ICDoc {
 
         final Deck randomDeck = new Deck();
 
-        Predicate<CardPrinted> notBasicLand = Predicates.not(Predicates.compose(CardRulesPredicates.Presets.IS_BASIC_LAND, CardPrinted.FN_GET_RULES));
-        Iterable<CardPrinted> source = Iterables.filter(CardDb.instance().getUniqueCards(), notBasicLand);
+        Predicate<PaperCard> notBasicLand = Predicates.not(Predicates.compose(CardRulesPredicates.Presets.IS_BASIC_LAND, PaperCard.FN_GET_RULES));
+        Iterable<PaperCard> source = Iterables.filter(CardDb.instance().getUniqueCards(), notBasicLand);
         randomDeck.getMain().addAllFlat(Aggregates.random(source, 15 * 5));
 
         randomDeck.getMain().add("Plains", 1);

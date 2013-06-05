@@ -18,7 +18,7 @@
 package forge.game.limited;
 
 import forge.deck.Deck;
-import forge.item.CardPrinted;
+import forge.item.PaperCard;
 import forge.item.ItemPoolView;
 
 /**
@@ -37,7 +37,7 @@ public interface IBoosterDraft {
      * 
      * @return a {@link forge.CardList} object.
      */
-    ItemPoolView<CardPrinted> nextChoice();
+    ItemPoolView<PaperCard> nextChoice();
 
     /**
      * <p>
@@ -47,7 +47,7 @@ public interface IBoosterDraft {
      * @param c
      *            a {@link forge.Card} object.
      */
-    void setChoice(CardPrinted c);
+    void setChoice(PaperCard c);
 
     /**
      * <p>

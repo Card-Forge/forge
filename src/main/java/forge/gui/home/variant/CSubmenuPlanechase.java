@@ -30,7 +30,7 @@ import forge.gui.framework.EDocID;
 import forge.gui.framework.ICDoc;
 import forge.gui.toolbox.FDeckChooser;
 import forge.gui.toolbox.FList;
-import forge.item.CardPrinted;
+import forge.item.PaperCard;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 import forge.util.Aggregates;
@@ -86,9 +86,9 @@ public enum CSubmenuPlanechase implements ICDoc {
         VSubmenuPlanechase.SINGLETON_INSTANCE.getLblEditor().setCommand(new Command() {
             @Override
             public void run() {
-                Predicate<CardPrinted> predPlanes = new Predicate<CardPrinted>() {
+                Predicate<PaperCard> predPlanes = new Predicate<PaperCard>() {
                     @Override
-                    public boolean apply(CardPrinted arg0) {
+                    public boolean apply(PaperCard arg0) {
                         return arg0.getRules().getType().isPlane() || arg0.getRules().getType().isPhenomenon();
                     }
                 };
@@ -163,7 +163,7 @@ public enum CSubmenuPlanechase implements ICDoc {
             playerDecks.add(d.getOriginalDeck());
             
 
-            List<CardPrinted> planes = null;
+            List<PaperCard> planes = null;
             Object obj = view.getPlanarDeckLists().get(i).getSelectedValue();
 
             boolean useDefault = VSubmenuPlanechase.SINGLETON_INSTANCE.getCbUseDefaultPlanes().isSelected();

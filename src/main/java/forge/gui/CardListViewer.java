@@ -37,7 +37,7 @@ import javax.swing.JScrollPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-import forge.item.CardPrinted;
+import forge.item.PaperCard;
 
 /**
  * A simple class that shows a list of cards in a dialog with preview in its
@@ -49,7 +49,7 @@ import forge.item.CardPrinted;
 public class CardListViewer {
 
     // Data and number of choices for the list
-    private final List<CardPrinted> list;
+    private final List<PaperCard> list;
 
     // Decoration
     private final String title;
@@ -74,7 +74,7 @@ public class CardListViewer {
      * @param list
      *            the list
      */
-    public CardListViewer(final String title, final List<CardPrinted> list) {
+    public CardListViewer(final String title, final List<PaperCard> list) {
         this(title, "", list, null);
     }
 
@@ -88,7 +88,7 @@ public class CardListViewer {
      * @param list
      *            the list
      */
-    public CardListViewer(final String title, final String message, final List<CardPrinted> list) {
+    public CardListViewer(final String title, final String message, final List<PaperCard> list) {
         this(title, message, list, null);
     }
 
@@ -104,7 +104,7 @@ public class CardListViewer {
      * @param dialogIcon
      *            the dialog icon
      */
-    public CardListViewer(final String title, final String message, final List<CardPrinted> list, final Icon dialogIcon) {
+    public CardListViewer(final String title, final String message, final List<PaperCard> list, final Icon dialogIcon) {
         this.title = title;
         this.list = Collections.unmodifiableList(list);
         this.jList = new JList(new ChooserListModel());
@@ -200,7 +200,7 @@ public class CardListViewer {
             final int row = CardListViewer.this.jList.getSelectedIndex();
             // (String) jList.getSelectedValue();
             if ((row >= 0) && (row < CardListViewer.this.list.size())) {
-                final CardPrinted cp = CardListViewer.this.list.get(row);
+                final PaperCard cp = CardListViewer.this.list.get(row);
                 CardListViewer.this.detail.setCard(cp.getMatchingForgeCard());
                 CardListViewer.this.picture.setCard(cp);
             }

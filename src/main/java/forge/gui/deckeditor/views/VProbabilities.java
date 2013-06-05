@@ -22,7 +22,7 @@ import forge.gui.framework.EDocID;
 import forge.gui.framework.IVDoc;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FSkin;
-import forge.item.CardPrinted;
+import forge.item.PaperCard;
 import forge.item.InventoryItem;
 
 /** 
@@ -170,11 +170,11 @@ public enum VProbabilities implements IVDoc<CProbabilities> {
                 final ACEditorBase<T, TModel> ed = (ACEditorBase<T, TModel>)
                         CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController();
 
-                final List<CardPrinted> cards = (List<CardPrinted>) ed.getTableDeck().getCards().toFlatList();
+                final List<PaperCard> cards = (List<PaperCard>) ed.getTableDeck().getCards().toFlatList();
                 final String name1 = lbl.getText();
                 String name2;
 
-                for (CardPrinted c : cards) {
+                for (PaperCard c : cards) {
                     name2 = c.getName();
                     if (name2.length() > name1.length()) { continue; }
 

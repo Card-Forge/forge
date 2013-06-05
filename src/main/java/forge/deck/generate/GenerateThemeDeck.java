@@ -24,7 +24,7 @@ import java.util.Random;
 
 import forge.error.BugReporter;
 import forge.item.CardDb;
-import forge.item.CardPrinted;
+import forge.item.PaperCard;
 import forge.item.ItemPoolView;
 import forge.util.FileUtil;
 import forge.util.MyRandom;
@@ -93,7 +93,7 @@ public class GenerateThemeDeck extends GenerateColoredDeckBase {
      *            a int.
      * @return a {@link forge.CardList} object.
      */
-    public final ItemPoolView<CardPrinted> getThemeDeck(final String themeName, final int size) {
+    public final ItemPoolView<PaperCard> getThemeDeck(final String themeName, final int size) {
         String s = "";
 
         // read theme file

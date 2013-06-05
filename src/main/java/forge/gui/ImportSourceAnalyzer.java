@@ -34,7 +34,7 @@ import forge.card.CardEdition;
 import forge.card.CardRules;
 import forge.card.EditionCollection;
 import forge.item.CardDb;
-import forge.item.CardPrinted;
+import forge.item.PaperCard;
 import forge.item.IPaperCard;
 import forge.properties.NewConstants;
 import forge.util.FileUtil;
@@ -293,7 +293,7 @@ public class ImportSourceAnalyzer {
         return out.toString().toLowerCase();
     }
     
-    private void _addDefaultPicNames(CardPrinted c, boolean backFace) {
+    private void _addDefaultPicNames(PaperCard c, boolean backFace) {
         CardRules card = c.getRules();
         String urls = card.getPictureUrl(backFace);
         if (StringUtils.isEmpty(urls)) { return; }
@@ -323,13 +323,13 @@ public class ImportSourceAnalyzer {
             _defaultPicNames = new TreeMap<String, String>(String.CASE_INSENSITIVE_ORDER);
             _defaultPicOldNameToCurrentName = new TreeMap<String, String>(String.CASE_INSENSITIVE_ORDER);
 
-            for (CardPrinted c : CardDb.instance().getAllCards()) {
+            for (PaperCard c : CardDb.instance().getAllCards()) {
                 _addDefaultPicNames(c, false);
                 if (ImageCache.hasBackFacePicture(c))
                     _addDefaultPicNames(c, true);
             }
             
-            for (CardPrinted c : CardDb.variants().getAllCards()) {
+            for (PaperCard c : CardDb.variants().getAllCards()) {
                 _addDefaultPicNames(c, false);
                 // variants never have backfaces
             }
@@ -362,8 +362,8 @@ public class ImportSourceAnalyzer {
     // set card pics
     //
     
-    private static void _addSetCards(Map<String, String> cardFileNames, Iterable<CardPrinted> library, Predicate<CardPrinted> filter) {
-        for (CardPrinted c : Iterables.filter(library, filter)) {
+    private static void _addSetCards(Map<String, String> cardFileNames, Iterable<PaperCard> library, Predicate<PaperCard> filter) {
+        for (PaperCard c : Iterables.filter(library, filter)) {
             String filename = ImageCache.getImageKey(c, false, true) + ".jpg";
             cardFileNames.put(filename, filename);
             if (ImageCache.hasBackFacePicture(c)) {
@@ -380,7 +380,7 @@ public class ImportSourceAnalyzer {
             _cardFileNamesBySet = new TreeMap<String, Map<String, String>>(String.CASE_INSENSITIVE_ORDER);
             for (CardEdition ce : Singletons.getModel().getEditions()) {
                 Map<String, String> cardFileNames = new TreeMap<String, String>(String.CASE_INSENSITIVE_ORDER);
-                Predicate<CardPrinted> filter = IPaperCard.Predicates.printedInSet(ce.getCode());
+                Predicate<PaperCard> filter = IPaperCard.Predicates.printedInSet(ce.getCode());
                 _addSetCards(cardFileNames, CardDb.instance().getAllCards(), filter);
                 _addSetCards(cardFileNames, CardDb.variants().getAllCards(), filter);
                 _cardFileNamesBySet.put(ce.getCode2(), cardFileNames);
@@ -388,14 +388,14 @@ public class ImportSourceAnalyzer {
             
             // planar cards now don't have the ".full" part in their filenames
             _nameUpdates = new TreeMap<String, String>(String.CASE_INSENSITIVE_ORDER);
-            Predicate<CardPrinted> predPlanes = new Predicate<CardPrinted>() {
+            Predicate<PaperCard> predPlanes = new Predicate<PaperCard>() {
                 @Override
-                public boolean apply(CardPrinted arg0) {
+                public boolean apply(PaperCard arg0) {
                     return arg0.getRules().getType().isPlane() || arg0.getRules().getType().isPhenomenon();
                 }
             };
 
-            for (CardPrinted c : Iterables.filter(CardDb.variants().getAllCards(), predPlanes)) {
+            for (PaperCard c : Iterables.filter(CardDb.variants().getAllCards(), predPlanes)) {
                 String baseName = ImageCache.getImageKey(c,false, true);
                 _nameUpdates.put(baseName + ".full.jpg", baseName + ".jpg");
                 if (ImageCache.hasBackFacePicture(c)) {

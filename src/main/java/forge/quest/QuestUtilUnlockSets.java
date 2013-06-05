@@ -36,7 +36,7 @@ import forge.card.CardEdition;
 import forge.card.UnOpenedProduct;
 import forge.gui.CardListViewer;
 import forge.gui.GuiChoose;
-import forge.item.CardPrinted;
+import forge.item.PaperCard;
 import forge.quest.io.ReadPriceList;
 import forge.util.storage.IStorageView;
 
@@ -188,7 +188,7 @@ public class QuestUtilUnlockSets {
         IStorageView<BoosterTemplate> boosters = Singletons.getModel().getBoosters();
         qData.getFormat().unlockSet(unlockedSet.getCode());
 
-        List<CardPrinted> cardsWon = new ArrayList<CardPrinted>();
+        List<PaperCard> cardsWon = new ArrayList<PaperCard>();
 
         if (starters.contains(unlockedSet.getCode())) {
             UnOpenedProduct starter = new UnOpenedProduct(starters.get(unlockedSet.getCode()));

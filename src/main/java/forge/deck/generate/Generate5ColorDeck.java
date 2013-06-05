@@ -25,7 +25,7 @@ import com.google.common.collect.Lists;
 
 import forge.card.ColorSet;
 import forge.deck.generate.GenerateDeckUtil.FilterCMC;
-import forge.item.CardPrinted;
+import forge.item.PaperCard;
 import forge.item.ItemPoolView;
 
 /**
@@ -59,7 +59,7 @@ public class Generate5ColorDeck extends GenerateColoredDeckBase {
 
 
     @Override
-    public final ItemPoolView<CardPrinted> getDeck(final int size, final boolean forAi) {
+    public final ItemPoolView<PaperCard> getDeck(final int size, final boolean forAi) {
         addCreaturesAndSpells(size, cmcLevels, forAi);
 
         // Add lands

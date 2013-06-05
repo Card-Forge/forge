@@ -19,7 +19,7 @@ import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.game.GameFormat;
 import forge.gui.framework.ICDoc;
-import forge.item.CardPrinted;
+import forge.item.PaperCard;
 import forge.properties.NewConstants;
 import forge.quest.QuestController;
 import forge.quest.QuestMode;
@@ -212,11 +212,11 @@ public enum CSubmenuQuestData implements ICDoc {
             fmtPrizes = fmtStartPool;
             if (null == fmtPrizes && dckStartPool != null) { // build it form deck
                 Set<String> sets = new HashSet<String>();
-                for (Entry<CardPrinted, Integer> c : dckStartPool.getMain()) {
+                for (Entry<PaperCard, Integer> c : dckStartPool.getMain()) {
                     sets.add(c.getKey().getEdition());
                 }
                 if (dckStartPool.has(DeckSection.Sideboard))
-                    for (Entry<CardPrinted, Integer> c : dckStartPool.get(DeckSection.Sideboard)) {
+                    for (Entry<PaperCard, Integer> c : dckStartPool.get(DeckSection.Sideboard)) {
                         sets.add(c.getKey().getEdition());
                     }
                 fmtPrizes = new GameFormat("From deck", sets, null);

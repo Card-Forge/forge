@@ -3,7 +3,7 @@ package forge.game.limited;
 
 import java.util.List;
 
-import forge.item.CardPrinted;
+import forge.item.PaperCard;
 
 
 /**
@@ -20,7 +20,7 @@ public class BoosterDeckBuilder extends LimitedDeckBuilder {
      * @param pClrs
      *            colors
      */
-    public BoosterDeckBuilder(List<CardPrinted> dList, DeckColors pClrs) {
+    public BoosterDeckBuilder(List<PaperCard> dList, DeckColors pClrs) {
         super(dList, pClrs);
     }
 

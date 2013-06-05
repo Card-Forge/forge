@@ -29,7 +29,7 @@ import javax.swing.event.ListSelectionListener;
 
 import forge.gui.CardDetailPanel;
 import forge.gui.CardPicturePanel;
-import forge.item.CardPrinted;
+import forge.item.PaperCard;
 
 /**
  * A simple JPanel that shows three columns: card list, pic, and description..
@@ -41,7 +41,7 @@ import forge.item.CardPrinted;
 public class CardViewer extends JPanel {
 
     // Data and number of choices for the list
-    private final List<CardPrinted> list;
+    private final List<PaperCard> list;
 
     // initialized before; listeners may be added to it
     private JList jList = null;
@@ -54,7 +54,7 @@ public class CardViewer extends JPanel {
      * @param list
      *            the list
      */
-    public CardViewer(final List<CardPrinted> list) {
+    public CardViewer(final List<PaperCard> list) {
         this.list = Collections.unmodifiableList(list);
         this.jList = new JList(new ChooserListModel());
         this.detail = new CardDetailPanel(null);
@@ -91,7 +91,7 @@ public class CardViewer extends JPanel {
             final int row = CardViewer.this.jList.getSelectedIndex();
             // (String) jList.getSelectedValue();
             if ((row >= 0) && (row < CardViewer.this.list.size())) {
-                final CardPrinted cp = CardViewer.this.list.get(row);
+                final PaperCard cp = CardViewer.this.list.get(row);
                 CardViewer.this.detail.setCard(cp.getMatchingForgeCard());
                 CardViewer.this.picture.setCard(cp);
             }

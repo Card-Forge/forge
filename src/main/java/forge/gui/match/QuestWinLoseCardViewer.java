@@ -32,7 +32,7 @@ import forge.gui.toolbox.FList;
 import forge.gui.toolbox.FPanel;
 import forge.gui.toolbox.FScrollPane;
 import forge.gui.toolbox.FSkin;
-import forge.item.CardPrinted;
+import forge.item.PaperCard;
 
 /**
  * A simple JPanel that shows three columns: card list, pic, and description..
@@ -44,7 +44,7 @@ import forge.item.CardPrinted;
 public class QuestWinLoseCardViewer extends FPanel {
 
     // Data and number of choices for the list
-    private final List<CardPrinted> list;
+    private final List<PaperCard> list;
 
     // initialized before; listeners may be added to it
     private final JList jList;
@@ -58,7 +58,7 @@ public class QuestWinLoseCardViewer extends FPanel {
      * @param list
      *            the list
      */
-    public QuestWinLoseCardViewer(final List<CardPrinted> list) {
+    public QuestWinLoseCardViewer(final List<PaperCard> list) {
         this.list = Collections.unmodifiableList(list);
         this.jList = new FList(new ChooserListModel());
         this.detail = new CardDetailPanel(null);
@@ -102,7 +102,7 @@ public class QuestWinLoseCardViewer extends FPanel {
             final int row = QuestWinLoseCardViewer.this.jList.getSelectedIndex();
             // (String) jList.getSelectedValue();
             if ((row >= 0) && (row < QuestWinLoseCardViewer.this.list.size())) {
-                final CardPrinted cp = QuestWinLoseCardViewer.this.list.get(row);
+                final PaperCard cp = QuestWinLoseCardViewer.this.list.get(row);
                 QuestWinLoseCardViewer.this.detail.setCard(cp.getMatchingForgeCard());
                 QuestWinLoseCardViewer.this.picture.setCard(cp);
             }

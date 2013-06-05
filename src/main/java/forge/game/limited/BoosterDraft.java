@@ -45,7 +45,7 @@ import forge.card.UnOpenedProduct;
 import forge.deck.Deck;
 import forge.gui.GuiChoose;
 import forge.item.CardDb;
-import forge.item.CardPrinted;
+import forge.item.PaperCard;
 import forge.item.IPaperCard;
 import forge.item.ItemPool;
 import forge.item.ItemPoolView;
@@ -66,13 +66,13 @@ public final class BoosterDraft implements IBoosterDraft {
     private int nextBoosterGroup = 0;
     private int currentBoosterSize = 0;
     private int currentBoosterPick = 0;
-    private List<List<CardPrinted>> pack; // size 8
+    private List<List<PaperCard>> pack; // size 8
 
     /** The draft picks. */
     private final Map<String, Float> draftPicks = new TreeMap<String, Float>();
     private final LimitedPoolType draftFormat;
 
-    private final List<Supplier<List<CardPrinted>>> product = new ArrayList<Supplier<List<CardPrinted>>>();
+    private final List<Supplier<List<PaperCard>>> product = new ArrayList<Supplier<List<PaperCard>>>();
 
     /**
      * <p>
@@ -88,7 +88,7 @@ public final class BoosterDraft implements IBoosterDraft {
 
         switch (draftType) {
         case Full: // Draft from all cards in Forge
-            Supplier<List<CardPrinted>> s = new UnOpenedProduct(BoosterTemplate.genericBooster);
+            Supplier<List<PaperCard>> s = new UnOpenedProduct(BoosterTemplate.genericBooster);
 
             for (int i = 0; i < 3; i++) this.product.add(s);
             IBoosterDraft.LAND_SET_CODE[0] = CardDb.instance().getCard("Plains").getEdition();
@@ -157,7 +157,7 @@ public final class BoosterDraft implements IBoosterDraft {
     }
 
     private void setupCustomDraft(final CustomLimited draft) {
-        final ItemPoolView<CardPrinted> dPool = draft.getCardPool();
+        final ItemPoolView<PaperCard> dPool = draft.getCardPool();
         if (dPool == null) {
             throw new RuntimeException("BoosterGenerator : deck not found");
         }
@@ -207,13 +207,13 @@ public final class BoosterDraft implements IBoosterDraft {
      * @return a {@link forge.CardList} object.
      */
     @Override
-    public ItemPoolView<CardPrinted> nextChoice() {
+    public ItemPoolView<PaperCard> nextChoice() {
         if (this.pack.get(this.getCurrentBoosterIndex()).size() == 0) {
             this.pack = this.get8BoosterPack();
         }
 
         this.computerChoose();
-        return ItemPool.createFrom(this.pack.get(this.getCurrentBoosterIndex()), CardPrinted.class);
+        return ItemPool.createFrom(this.pack.get(this.getCurrentBoosterIndex()), PaperCard.class);
     }
 
     /**
@@ -223,12 +223,12 @@ public final class BoosterDraft implements IBoosterDraft {
      * 
      * @return an array of {@link forge.CardList} objects.
      */
-    public List<List<CardPrinted>> get8BoosterPack() {
+    public List<List<PaperCard>> get8BoosterPack() {
         if (this.nextBoosterGroup >= this.product.size()) {
             return null;
         }
 
-        final List<List<CardPrinted>> list = new ArrayList<List<CardPrinted>>();
+        final List<List<PaperCard>> list = new ArrayList<List<PaperCard>>();
         for (int i = 0; i < 8; i++) {
             list.add(this.product.get(this.nextBoosterGroup).get());
         }
@@ -260,12 +260,12 @@ public final class BoosterDraft implements IBoosterDraft {
         for (int i = 1; i < this.pack.size(); i++) {
 
             final List<Card> forAi = new ArrayList<Card>();
-            final List<CardPrinted> booster = this.pack.get((iHumansBooster + i) % this.pack.size());
+            final List<PaperCard> booster = this.pack.get((iHumansBooster + i) % this.pack.size());
             for (final IPaperCard cr : booster) {
                 forAi.add(cr.getMatchingForgeCard());
             }
 
-            final CardPrinted aiPick = this.draftAI.choose(booster, iPlayer++);
+            final PaperCard aiPick = this.draftAI.choose(booster, iPlayer++);
             booster.remove(aiPick);
         }
     } // computerChoose()
@@ -296,8 +296,8 @@ public final class BoosterDraft implements IBoosterDraft {
 
     /** {@inheritDoc} */
     @Override
-    public void setChoice(final CardPrinted c) {
-        final List<CardPrinted> thisBooster = this.pack.get(this.getCurrentBoosterIndex());
+    public void setChoice(final PaperCard c) {
+        final List<PaperCard> thisBooster = this.pack.get(this.getCurrentBoosterIndex());
 
         if (!thisBooster.contains(c)) {
             throw new RuntimeException("BoosterDraft : setChoice() error - card not found - " + c
@@ -306,7 +306,7 @@ public final class BoosterDraft implements IBoosterDraft {
 
         if (Preferences.UPLOAD_DRAFT) {
             for (int i = 0; i < thisBooster.size(); i++) {
-                final CardPrinted cc = thisBooster.get(i);
+                final PaperCard cc = thisBooster.get(i);
                 final String cnBk = cc.getName() + "|" + cc.getEdition();
 
                 float pickValue = 0;

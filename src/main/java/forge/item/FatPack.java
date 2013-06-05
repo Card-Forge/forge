@@ -55,8 +55,8 @@ public class FatPack extends OpenablePack {
     }
 
     @Override
-    protected List<CardPrinted> generate() {
-        List<CardPrinted> result = new ArrayList<CardPrinted>();
+    protected List<PaperCard> generate() {
+        List<PaperCard> result = new ArrayList<PaperCard>();
         for (int i = 0; i < fpData.getCntBoosters(); i++) {
             result.addAll(super.generate());
         }

@@ -35,7 +35,7 @@ public abstract class OpenablePack implements InventoryItemFromSet {
     protected final BoosterTemplate contents;
     protected final String name;
     private final int hash;
-    private List<CardPrinted> cards = null;
+    private List<PaperCard> cards = null;
 
     public OpenablePack(String name0, BoosterTemplate boosterData) {
         if (null == name0)       { throw new NullArgumentException("name0");       }
@@ -59,7 +59,7 @@ public abstract class OpenablePack implements InventoryItemFromSet {
         return contents.getEdition();
     }
     
-    public final List<CardPrinted> getCards() {
+    public final List<PaperCard> getCards() {
         if (null == cards) {
             cards = generate();
         }
@@ -91,18 +91,18 @@ public abstract class OpenablePack implements InventoryItemFromSet {
         return hash;
     }
 
-    protected List<CardPrinted> generate() {
+    protected List<PaperCard> generate() {
         return BoosterGenerator.getBoosterPack(contents);
     }
 
-    protected CardPrinted getRandomBasicLand(final String setCode) {
+    protected PaperCard getRandomBasicLand(final String setCode) {
         return this.getRandomBasicLands(setCode, 1).get(0);
     }
 
-    protected List<CardPrinted> getRandomBasicLands(final String setCode, final int count) {
-        Predicate<CardPrinted> cardsRule = Predicates.and(
+    protected List<PaperCard> getRandomBasicLands(final String setCode, final int count) {
+        Predicate<PaperCard> cardsRule = Predicates.and(
                 IPaperCard.Predicates.printedInSet(setCode),
-                Predicates.compose(CardRulesPredicates.Presets.IS_BASIC_LAND, CardPrinted.FN_GET_RULES));
+                Predicates.compose(CardRulesPredicates.Presets.IS_BASIC_LAND, PaperCard.FN_GET_RULES));
         return Aggregates.random(Iterables.filter(CardDb.instance().getAllCards(), cardsRule), count);
     }
 }

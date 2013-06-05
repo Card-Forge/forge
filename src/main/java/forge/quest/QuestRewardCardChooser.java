@@ -10,7 +10,7 @@ import com.google.common.collect.Iterables;
 
 import forge.Singletons;
 import forge.item.CardDb;
-import forge.item.CardPrinted;
+import forge.item.PaperCard;
 import forge.item.InventoryItem;
 import forge.item.ItemPool;
 
@@ -33,7 +33,7 @@ public class QuestRewardCardChooser extends QuestRewardCard implements Inventory
 
     private poolType type;
     private final String description;
-    private final Predicate<CardPrinted> predicates;
+    private final Predicate<PaperCard> predicates;
 
     /**
      * The constructor.
@@ -91,13 +91,13 @@ public class QuestRewardCardChooser extends QuestRewardCard implements Inventory
      * @return a List<CardPrinted> or null if could not create a list.
      */
     @Override
-    public final List<CardPrinted> getChoices() {
+    public final List<PaperCard> getChoices() {
         if (type == poolType.playerCards) {
-            final ItemPool<CardPrinted> playerCards = Singletons.getModel().getQuest().getAssets().getCardPool();
+            final ItemPool<PaperCard> playerCards = Singletons.getModel().getQuest().getAssets().getCardPool();
             if (!playerCards.isEmpty()) { // Maybe a redundant check since it's hard to win a duel without any cards...
 
-                List<CardPrinted> cardChoices = new ArrayList<CardPrinted>();
-                for (final Map.Entry<CardPrinted, Integer> card : playerCards) {
+                List<PaperCard> cardChoices = new ArrayList<PaperCard>();
+                for (final Map.Entry<PaperCard, Integer> card : playerCards) {
                     cardChoices.add(card.getKey());
                 }
                 Collections.sort(cardChoices);
@@ -106,9 +106,9 @@ public class QuestRewardCardChooser extends QuestRewardCard implements Inventory
             }
 
         } else if (type == poolType.predicateFilter) {
-            List<CardPrinted> cardChoices = new ArrayList<CardPrinted>();
+            List<PaperCard> cardChoices = new ArrayList<PaperCard>();
 
-            for (final CardPrinted card : Iterables.filter(CardDb.instance().getAllCards(), predicates)) {
+            for (final PaperCard card : Iterables.filter(CardDb.instance().getAllCards(), predicates)) {
                 cardChoices.add(card);
             }
             Collections.sort(cardChoices);

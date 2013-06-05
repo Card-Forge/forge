@@ -39,8 +39,8 @@ import forge.card.CardSplitType;
 import forge.game.player.IHasIcon;
 import forge.gui.toolbox.FSkin;
 import forge.item.BoosterPack;
-import forge.item.CardPrinted;
-import forge.item.CardToken;
+import forge.item.PaperCard;
+import forge.item.PaperToken;
 import forge.item.FatPack;
 import forge.item.InventoryItem;
 import forge.item.PreconDeck;
@@ -215,8 +215,8 @@ public class ImageCache {
     // Inventory items don't have to know how a certain client should draw them. 
     // That's why this method is not encapsulated and overloaded in the InventoryItem descendants
     public static String getImageKey(InventoryItem ii, boolean altState) {
-        if ( ii instanceof CardPrinted )
-            return getImageKey((CardPrinted)ii, altState, true);
+        if ( ii instanceof PaperCard )
+            return getImageKey((PaperCard)ii, altState, true);
         if ( ii instanceof TournamentPack )
             return ImageCache.TOURNAMENTPACK_PREFIX + ((TournamentPack)ii).getEdition();
         if ( ii instanceof BoosterPack ) {
@@ -228,12 +228,12 @@ public class ImageCache {
             return ImageCache.FATPACK_PREFIX + ((FatPack)ii).getEdition();
         if ( ii instanceof PreconDeck )
             return ImageCache.PRECON_PREFIX + ((PreconDeck)ii).getImageFilename();
-        if ( ii instanceof CardToken ) 
-            return ImageCache.TOKEN_PREFIX + ((CardToken)ii).getImageFilename();
+        if ( ii instanceof PaperToken ) 
+            return ImageCache.TOKEN_PREFIX + ((PaperToken)ii).getImageFilename();
         return null;
     }
 
-    private static String getImageLocator(CardPrinted cp, boolean backFace, boolean includeSet, boolean isDownloadUrl) {
+    private static String getImageLocator(PaperCard cp, boolean backFace, boolean includeSet, boolean isDownloadUrl) {
         final String nameToUse = getNameToUse(cp, backFace);
         if ( null == nameToUse )
             return null;
@@ -290,7 +290,7 @@ public class ImageCache {
         }
     }
     
-    public static boolean hasBackFacePicture(CardPrinted cp) {
+    public static boolean hasBackFacePicture(PaperCard cp) {
         CardSplitType cst = cp.getRules().getSplitType();
         return cst == CardSplitType.Transform || cst == CardSplitType.Flip; 
     }
@@ -301,7 +301,7 @@ public class ImageCache {
                 : NewConstants.CACHE_CARD_PICS_SUBDIR.get(edition); // may use custom paths though
     }
 
-    private static String getNameToUse(CardPrinted cp, boolean backFace) {
+    private static String getNameToUse(PaperCard cp, boolean backFace) {
         final CardRules card = cp.getRules();
         if (backFace ) {
             if ( hasBackFacePicture(cp) ) 
@@ -315,11 +315,11 @@ public class ImageCache {
         }
     }
     
-    public static String getImageKey(CardPrinted cp, boolean backFace, boolean includeSet) {
+    public static String getImageKey(PaperCard cp, boolean backFace, boolean includeSet) {
         return getImageLocator(cp, backFace, includeSet, false);
     }
 
-    public static String getDownloadUrl(CardPrinted cp, boolean backFace) {
+    public static String getDownloadUrl(PaperCard cp, boolean backFace) {
         return getImageLocator(cp, backFace, true, true);
     }    
     

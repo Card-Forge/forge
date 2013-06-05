@@ -39,7 +39,7 @@ import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.deck.generate.GenerateDeckUtil.FilterCMC;
 import forge.item.CardDb;
-import forge.item.CardPrinted;
+import forge.item.PaperCard;
 import forge.item.ItemPool;
 import forge.item.ItemPoolView;
 import forge.properties.ForgePreferences.FPref;
@@ -60,7 +60,7 @@ public abstract class GenerateColoredDeckBase {
     protected int maxDuplicates;
 
     protected ColorSet colors;
-    protected final ItemPool<CardPrinted> tDeck;
+    protected final ItemPool<PaperCard> tDeck;
 
     // 2-colored deck generator has its own constants. The rest works fine with these ones
     protected float getLandsPercentage() { return 0.44f; }
@@ -71,22 +71,22 @@ public abstract class GenerateColoredDeckBase {
 
     public GenerateColoredDeckBase() {
         this.maxDuplicates = Singletons.getModel().getPreferences().getPrefBoolean(FPref.DECKGEN_SINGLETONS) ? 1 : 4;
-        tDeck = new ItemPool<CardPrinted>(CardPrinted.class);
+        tDeck = new ItemPool<PaperCard>(PaperCard.class);
     }
 
     protected void addCreaturesAndSpells(int size, List<ImmutablePair<FilterCMC, Integer>> cmcLevels, boolean forAi) {
         tmpDeck.append("Building deck of ").append(size).append("cards\n");
         
-        final Iterable<CardPrinted> cards = selectCardsOfMatchingColorForPlayer(forAi);
+        final Iterable<PaperCard> cards = selectCardsOfMatchingColorForPlayer(forAi);
         // build subsets based on type
 
-        final Iterable<CardPrinted> creatures = Iterables.filter(cards, Predicates.compose(CardRulesPredicates.Presets.IS_CREATURE, CardPrinted.FN_GET_RULES));
+        final Iterable<PaperCard> creatures = Iterables.filter(cards, Predicates.compose(CardRulesPredicates.Presets.IS_CREATURE, PaperCard.FN_GET_RULES));
         final int creatCnt = (int) Math.ceil(getCreatPercentage() * size);
         tmpDeck.append("Creatures to add:").append(creatCnt).append("\n");
         addCmcAdjusted(creatures, creatCnt, cmcLevels);
 
-        Predicate<CardPrinted> preSpells = Predicates.compose(CardRulesPredicates.Presets.IS_NONCREATURE_SPELL_FOR_GENERATOR, CardPrinted.FN_GET_RULES);
-        final Iterable<CardPrinted> spells = Iterables.filter(cards, preSpells);
+        Predicate<PaperCard> preSpells = Predicates.compose(CardRulesPredicates.Presets.IS_NONCREATURE_SPELL_FOR_GENERATOR, PaperCard.FN_GET_RULES);
+        final Iterable<PaperCard> spells = Iterables.filter(cards, preSpells);
         final int spellCnt = (int) Math.ceil(getSpellPercentage() * size);
         tmpDeck.append("Spells to add:").append(spellCnt).append("\n");
         addCmcAdjusted(spells, spellCnt, cmcLevels);
@@ -94,13 +94,13 @@ public abstract class GenerateColoredDeckBase {
         tmpDeck.append(String.format("Current deck size: %d... should be %f%n", tDeck.countAll(), size * (getCreatPercentage() + getSpellPercentage())));
     }
 
-    public ItemPoolView<CardPrinted> getDeck(final int size, final boolean forAi) {
+    public ItemPoolView<PaperCard> getDeck(final int size, final boolean forAi) {
         return null; // all but theme deck do override this method
     }
 
-    protected void addSome(int cnt, List<CardPrinted> source) {
+    protected void addSome(int cnt, List<PaperCard> source) {
         for (int i = 0; i < cnt; i++) {
-            CardPrinted cp;
+            PaperCard cp;
             int lc = 0;
             int srcLen = source.size();
             do {
@@ -132,7 +132,7 @@ public abstract class GenerateColoredDeckBase {
             } while ((this.cardCounts.get(s) > 3) && (lc <= 20));
             // not an error if looped too much - could play singleton mode, with 6 slots for 3 non-basic lands.
 
-            CardPrinted cp = CardDb.instance().getCard(s);
+            PaperCard cp = CardDb.instance().getCard(s);
             tDeck.add(CardDb.instance().getCard(cp.getName(), Aggregates.random(cp.getRules().getSets())));
 
             final int n = this.cardCounts.get(s);
@@ -169,7 +169,7 @@ public abstract class GenerateColoredDeckBase {
             // just to prevent a null exception by the deck size fixing code
             this.cardCounts.put(color, nLand);
 
-            CardPrinted cp = CardDb.instance().getCard(color);
+            PaperCard cp = CardDb.instance().getCard(color);
             String basicLandSet = Aggregates.random(cp.getRules().getSets());
 
             tDeck.add(CardDb.instance().getCard(cp.getName(), basicLandSet), nLand);
@@ -185,14 +185,14 @@ public abstract class GenerateColoredDeckBase {
             addSome(diff, tDeck.toFlatList());
         } else if (actualSize > targetSize) {
 
-            Predicate<CardPrinted> exceptBasicLand = Predicates.not(Predicates.compose(CardRulesPredicates.Presets.IS_BASIC_LAND, CardPrinted.FN_GET_RULES));
+            Predicate<PaperCard> exceptBasicLand = Predicates.not(Predicates.compose(CardRulesPredicates.Presets.IS_BASIC_LAND, PaperCard.FN_GET_RULES));
 
             for (int i = 0; i < 3 && actualSize > targetSize; i++) {
-                Iterable<CardPrinted> matchingCards = Iterables.filter(tDeck.toFlatList(), exceptBasicLand);
-                List<CardPrinted> toRemove = Aggregates.random(matchingCards,  actualSize - targetSize);
+                Iterable<PaperCard> matchingCards = Iterables.filter(tDeck.toFlatList(), exceptBasicLand);
+                List<PaperCard> toRemove = Aggregates.random(matchingCards,  actualSize - targetSize);
                 tDeck.removeAllFlat(toRemove);
 
-                for (CardPrinted c : toRemove) {
+                for (PaperCard c : toRemove) {
                     tmpDeck.append("Removed:").append(c.getName()).append("\n");
                 }
                 actualSize = tDeck.countAll();
@@ -200,7 +200,7 @@ public abstract class GenerateColoredDeckBase {
         }
     }
 
-    protected void addCmcAdjusted(Iterable<CardPrinted> source, int cnt, List<ImmutablePair<FilterCMC, Integer>> cmcLevels) {
+    protected void addCmcAdjusted(Iterable<PaperCard> source, int cnt, List<ImmutablePair<FilterCMC, Integer>> cmcLevels) {
         int totalWeight = 0;
         for (ImmutablePair<FilterCMC, Integer> pair : cmcLevels) {
             totalWeight += pair.getRight();
@@ -212,17 +212,17 @@ public abstract class GenerateColoredDeckBase {
         float requestedOverTotal = (float)cnt / totalWeight;
         
         for (ImmutablePair<FilterCMC, Integer> pair : cmcLevels) {
-            Iterable<CardPrinted> matchingCards = Iterables.filter(source, Predicates.compose(pair.getLeft(), CardPrinted.FN_GET_RULES));
+            Iterable<PaperCard> matchingCards = Iterables.filter(source, Predicates.compose(pair.getLeft(), PaperCard.FN_GET_RULES));
             int cmcCountForPool = (int) Math.ceil(pair.getRight().intValue() * desiredOverTotal);
             
             int addOfThisCmc = Math.round(pair.getRight().intValue() * requestedOverTotal);
             tmpDeck.append(String.format("Adding %d cards for cmc range from a pool with %d cards:%n", addOfThisCmc, cmcCountForPool));
 
-            final List<CardPrinted> curved = Aggregates.random(matchingCards, cmcCountForPool);
-            final List<CardPrinted> curvedRandomized = Lists.newArrayList();
-            for (CardPrinted c : curved) {
+            final List<PaperCard> curved = Aggregates.random(matchingCards, cmcCountForPool);
+            final List<PaperCard> curvedRandomized = Lists.newArrayList();
+            for (PaperCard c : curved) {
                 this.cardCounts.put(c.getName(), 0);
-                CardPrinted cpRandomSet = CardDb.instance().getCard(c.getName(), Aggregates.random(c.getRules().getSets()));
+                PaperCard cpRandomSet = CardDb.instance().getCard(c.getName(), Aggregates.random(c.getRules().getSets()));
                 curvedRandomized.add(cpRandomSet);
             }
 
@@ -230,7 +230,7 @@ public abstract class GenerateColoredDeckBase {
         }
     }
 
-    protected Iterable<CardPrinted> selectCardsOfMatchingColorForPlayer(boolean forAi) {
+    protected Iterable<PaperCard> selectCardsOfMatchingColorForPlayer(boolean forAi) {
 
         // start with all cards
         // remove cards that generated decks don't like
@@ -240,17 +240,17 @@ public abstract class GenerateColoredDeckBase {
         if (!Singletons.getModel().getPreferences().getPrefBoolean(FPref.DECKGEN_ARTIFACTS)) {
             hasColor = Predicates.or(hasColor, GenerateDeckUtil.COLORLESS_CARDS);
         }
-        return Iterables.filter(CardDb.instance().getAllCards(), Predicates.compose(Predicates.and(canPlay, hasColor), CardPrinted.FN_GET_RULES));
+        return Iterables.filter(CardDb.instance().getAllCards(), Predicates.compose(Predicates.and(canPlay, hasColor), PaperCard.FN_GET_RULES));
     }
 
-    protected static Map<String, Integer> countLands(ItemPool<CardPrinted> outList) {
+    protected static Map<String, Integer> countLands(ItemPool<PaperCard> outList) {
         // attempt to optimize basic land counts according
         // to color representation
 
         Map<String, Integer> res = new TreeMap<String, Integer>();
         // count each card color using mana costs
         // TODO: count hybrid mana differently?
-        for (Entry<CardPrinted, Integer> cpe : outList) {
+        for (Entry<PaperCard, Integer> cpe : outList) {
 
             int profile = cpe.getKey().getRules().getManaCost().getColorProfile();
 

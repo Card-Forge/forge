@@ -14,7 +14,7 @@ import forge.gui.deckeditor.views.VCardCatalog;
 import forge.gui.deckeditor.views.VCurrentDeck;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FSkin;
-import forge.item.CardPrinted;
+import forge.item.PaperCard;
 import forge.item.InventoryItem;
 import forge.item.ItemPoolView;
 import forge.util.Aggregates;
@@ -78,7 +78,7 @@ public final class SEditorUtil  {
         return (int) Math.round((double) (x0 * 100) / (double) y0);
     }
 
-    private static final Predicate<Object> totalPred = Predicates.instanceOf(CardPrinted.class);
+    private static final Predicate<Object> totalPred = Predicates.instanceOf(PaperCard.class);
     private static final Predicate<Object> packPred  = Predicates.not(totalPred);
     
     /**
@@ -100,7 +100,7 @@ public final class SEditorUtil  {
                         Aggregates.sum(Iterables.filter(items, Predicates.compose(packPred, items.FN_GET_KEY)), items.FN_GET_COUNT)));
                 break;
             default:
-                view.getStatLabel(s).setText(String.valueOf(items.countAll(Predicates.compose(s.predicate, CardPrinted.FN_GET_RULES), CardPrinted.class)));
+                view.getStatLabel(s).setText(String.valueOf(items.countAll(Predicates.compose(s.predicate, PaperCard.FN_GET_RULES), PaperCard.class)));
             }
         }
     }

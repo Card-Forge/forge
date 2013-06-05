@@ -47,7 +47,7 @@ import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerHandler;
 import forge.game.player.Player;
 import forge.item.CardDb;
-import forge.item.CardPrinted;
+import forge.item.PaperCard;
 import forge.item.IPaperCard;
 
 /**
@@ -251,7 +251,7 @@ public class CardFactory {
                 c.setState(CardCharacteristicName.Flipped);
                 c.setImageKey(ImageCache.getImageKey(cp, true));
             }
-            else if (c.isDoubleFaced() && cp instanceof CardPrinted) {
+            else if (c.isDoubleFaced() && cp instanceof PaperCard) {
                 c.setState(CardCharacteristicName.Transformed);
                 c.setImageKey(ImageCache.getImageKey(cp, true));
             }

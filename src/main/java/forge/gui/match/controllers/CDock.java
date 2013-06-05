@@ -49,7 +49,7 @@ import forge.gui.toolbox.FOverlay;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.SaveOpenDialog;
 import forge.gui.toolbox.SaveOpenDialog.Filetypes;
-import forge.item.CardPrinted;
+import forge.item.PaperCard;
 import forge.model.FModel;
 import forge.properties.ForgePreferences.FPref;
 import forge.view.FView;
@@ -228,7 +228,7 @@ public enum CDock implements ICDoc {
 
         final TreeMap<String, Integer> deckMap = new TreeMap<String, Integer>();
 
-        for (final Entry<CardPrinted, Integer> s : targetDeck.getMain()) {
+        for (final Entry<PaperCard, Integer> s : targetDeck.getMain()) {
             deckMap.put(s.getKey().getName(), s.getValue());
         }
 

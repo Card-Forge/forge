@@ -22,7 +22,7 @@ import forge.deck.generate.GenerateColoredDeckBase;
 import forge.deck.generate.GenerateMonoColorDeck;
 import forge.deck.generate.GenerateThemeDeck;
 import forge.item.CardDb;
-import forge.item.CardPrinted;
+import forge.item.PaperCard;
 import forge.item.ItemPoolView;
 import forge.item.PreconDeck;
 import forge.quest.QuestController;
@@ -75,7 +75,7 @@ public class DeckgenUtil {
             deckName = "5 colors";
         }
         
-        ItemPoolView<CardPrinted> cards = gen == null ? null : gen.getDeck(60, forAi);
+        ItemPoolView<PaperCard> cards = gen == null ? null : gen.getDeck(60, forAi);
         
         if(null == deckName)
             deckName = Lang.joinHomogenous(Arrays.asList(selection));
@@ -247,7 +247,7 @@ public class DeckgenUtil {
             } else {
                 deckList.append(nl);
                 nLines++;
-                for (final Entry<CardPrinted, Integer> ev : cp) {
+                for (final Entry<PaperCard, Integer> ev : cp) {
                     deckList.append(ev.getValue()).append(" x ").append(ev.getKey()).append(nl);
                     nLines++;
                 }
@@ -302,8 +302,8 @@ public class DeckgenUtil {
 
     public static CardPool generateSchemeDeck() {
         CardPool schemes = new CardPool();
-        List<CardPrinted> allSchemes = new ArrayList<CardPrinted>();
-        for (CardPrinted c : CardDb.variants().getAllCards()) {
+        List<PaperCard> allSchemes = new ArrayList<PaperCard>();
+        for (PaperCard c : CardDb.variants().getAllCards()) {
             if (c.getRules().getType().isScheme()) {
                 allSchemes.add(c);
             }
@@ -312,7 +312,7 @@ public class DeckgenUtil {
         int schemesToAdd = 20;
         int attemptsLeft = 100; // to avoid endless loop
         while (schemesToAdd > 0 && attemptsLeft > 0) {
-            CardPrinted cp = Aggregates.random(allSchemes);
+            PaperCard cp = Aggregates.random(allSchemes);
             int appearances = schemes.count(cp) + 1;
             if (appearances < 2) {
                 schemes.add(cp);
@@ -327,8 +327,8 @@ public class DeckgenUtil {
     
     public static CardPool generatePlanarDeck() {
         CardPool res = new CardPool();
-        List<CardPrinted> allPlanars = new ArrayList<CardPrinted>();
-        for (CardPrinted c : CardDb.variants().getAllCards()) {
+        List<PaperCard> allPlanars = new ArrayList<PaperCard>();
+        for (PaperCard c : CardDb.variants().getAllCards()) {
             if (c.getRules().getType().isPlane() || c.getRules().getType().isPhenomenon()) {
                 allPlanars.add(c);
             }
@@ -338,7 +338,7 @@ public class DeckgenUtil {
         int targetsize = MyRandom.getRandom().nextInt(allPlanars.size()-10)+10;
         while(true)
         {
-            CardPrinted rndPlane = Aggregates.random(allPlanars);
+            PaperCard rndPlane = Aggregates.random(allPlanars);
             allPlanars.remove(rndPlane);
             
             if(rndPlane.getRules().getType().isPhenomenon() && phenoms < 2)

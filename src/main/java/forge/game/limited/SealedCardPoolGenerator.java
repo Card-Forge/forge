@@ -36,7 +36,7 @@ import forge.card.UnOpenedProduct;
 import forge.deck.CardPool;
 import forge.gui.GuiChoose;
 import forge.item.CardDb;
-import forge.item.CardPrinted;
+import forge.item.PaperCard;
 import forge.item.ItemPool;
 import forge.util.FileUtil;
 import forge.util.TextUtil;
@@ -336,7 +336,7 @@ public class SealedCardPoolGenerator {
      *      boolean, get pool for human (possible choices)
      * @return a {@link forge.CardList} object.
      */
-    public ItemPool<CardPrinted> getCardpool(final boolean isHuman) {
+    public ItemPool<PaperCard> getCardpool(final boolean isHuman) {
         final CardPool pool = new CardPool();
 
         for (IUnOpenedProduct prod : product) {

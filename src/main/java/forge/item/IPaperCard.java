@@ -22,45 +22,45 @@ public interface IPaperCard extends InventoryItem {
      */
     public abstract static class Predicates {
     
-        public static Predicate<CardPrinted> rarity(final boolean isEqual, final CardRarity value) {
+        public static Predicate<PaperCard> rarity(final boolean isEqual, final CardRarity value) {
             return new PredicateRarity(value, isEqual);
         }
-        public static Predicate<CardPrinted> printedInSets(final String[] sets) {
+        public static Predicate<PaperCard> printedInSets(final String[] sets) {
             return printedInSets(Lists.newArrayList(sets), true);
         }
     
-        public static Predicate<CardPrinted> printedInSets(final List<String> value, final boolean shouldContain) {
+        public static Predicate<PaperCard> printedInSets(final List<String> value, final boolean shouldContain) {
             if ((value == null) || value.isEmpty()) {
                 return com.google.common.base.Predicates.alwaysTrue();
             }
             return new PredicateSets(value, shouldContain);
         }
     
-        public static Predicate<CardPrinted> printedInSet(final String value) {
+        public static Predicate<PaperCard> printedInSet(final String value) {
             if (StringUtils.isEmpty(value)) {
                 return com.google.common.base.Predicates.alwaysTrue();
             }
             return new PredicateSets(Lists.newArrayList(value), true);
         }
     
-        public static Predicate<CardPrinted> name(final String what) {
+        public static Predicate<PaperCard> name(final String what) {
             return new PredicateName(PredicateString.StringOp.EQUALS_IC, what);
         }
     
-        public static Predicate<CardPrinted> name(final PredicateString.StringOp op, final String what) {
+        public static Predicate<PaperCard> name(final PredicateString.StringOp op, final String what) {
             return new PredicateName(op, what);
         }
     
-        public static Predicate<CardPrinted> names(final List<String> what) {
+        public static Predicate<PaperCard> names(final List<String> what) {
             return new PredicateNames(what);
         }
     
-        private static class PredicateRarity implements Predicate<CardPrinted> {
+        private static class PredicateRarity implements Predicate<PaperCard> {
             private final CardRarity operand;
             private final boolean shouldBeEqual;
     
             @Override
-            public boolean apply(final CardPrinted card) {
+            public boolean apply(final PaperCard card) {
                 return (card.getRarity() == this.operand) == this.shouldBeEqual;
             }
     
@@ -70,12 +70,12 @@ public interface IPaperCard extends InventoryItem {
             }
         }
     
-        private static class PredicateSets implements Predicate<CardPrinted> {
+        private static class PredicateSets implements Predicate<PaperCard> {
             private final Set<String> sets;
             private final boolean mustContain;
     
             @Override
-            public boolean apply(final CardPrinted card) {
+            public boolean apply(final PaperCard card) {
                 return this.sets.contains(card.getEdition()) == this.mustContain;
             }
     
@@ -85,11 +85,11 @@ public interface IPaperCard extends InventoryItem {
             }
         }
     
-        private static class PredicateName extends PredicateString<CardPrinted> {
+        private static class PredicateName extends PredicateString<PaperCard> {
             private final String operand;
     
             @Override
-            public boolean apply(final CardPrinted card) {
+            public boolean apply(final PaperCard card) {
                 return this.op(card.getName(), this.operand);
             }
     
@@ -99,11 +99,11 @@ public interface IPaperCard extends InventoryItem {
             }
         }
     
-        private static class PredicateNames extends PredicateString<CardPrinted> {
+        private static class PredicateNames extends PredicateString<PaperCard> {
             private final List<String> operand;
     
             @Override
-            public boolean apply(final CardPrinted card) {
+            public boolean apply(final PaperCard card) {
                 final String cardName = card.getName();
                 for (final String element : this.operand) {
                     if (this.op(cardName, element)) {
@@ -127,26 +127,26 @@ public interface IPaperCard extends InventoryItem {
             // Think twice before using these, since rarity is a prop of printed
             // card.
             /** The Constant isCommon. */
-            public static final Predicate<CardPrinted> IS_COMMON = Predicates.rarity(true, CardRarity.Common);
+            public static final Predicate<PaperCard> IS_COMMON = Predicates.rarity(true, CardRarity.Common);
     
             /** The Constant isUncommon. */
-            public static final Predicate<CardPrinted> IS_UNCOMMON = Predicates.rarity(true, CardRarity.Uncommon);
+            public static final Predicate<PaperCard> IS_UNCOMMON = Predicates.rarity(true, CardRarity.Uncommon);
     
             /** The Constant isRare. */
-            public static final Predicate<CardPrinted> IS_RARE = Predicates.rarity(true, CardRarity.Rare);
+            public static final Predicate<PaperCard> IS_RARE = Predicates.rarity(true, CardRarity.Rare);
     
             /** The Constant isMythicRare. */
-            public static final Predicate<CardPrinted> IS_MYTHIC_RARE = Predicates.rarity(true, CardRarity.MythicRare);
+            public static final Predicate<PaperCard> IS_MYTHIC_RARE = Predicates.rarity(true, CardRarity.MythicRare);
     
             /** The Constant isRareOrMythic. */
-            public static final Predicate<CardPrinted> IS_RARE_OR_MYTHIC = com.google.common.base.Predicates.or(Presets.IS_RARE,
+            public static final Predicate<PaperCard> IS_RARE_OR_MYTHIC = com.google.common.base.Predicates.or(Presets.IS_RARE,
                     Presets.IS_MYTHIC_RARE);
     
             /** The Constant isSpecial. */
-            public static final Predicate<CardPrinted> IS_SPECIAL = Predicates.rarity(true, CardRarity.Special);
+            public static final Predicate<PaperCard> IS_SPECIAL = Predicates.rarity(true, CardRarity.Special);
     
             /** The Constant exceptLands. */
-            public static final Predicate<CardPrinted> IS_BASIC_LAND = Predicates.rarity(true, CardRarity.BasicLand);
+            public static final Predicate<PaperCard> IS_BASIC_LAND = Predicates.rarity(true, CardRarity.BasicLand);
         }
     }
 

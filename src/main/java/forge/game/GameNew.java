@@ -30,7 +30,7 @@ import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiDialog;
 import forge.item.CardDb;
-import forge.item.CardPrinted;
+import forge.item.PaperCard;
 import forge.item.IPaperCard;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
@@ -95,17 +95,17 @@ public class GameNew {
         
     }
 
-    private static Set<CardPrinted> getRemovedAnteCards(Deck toUse) {
+    private static Set<PaperCard> getRemovedAnteCards(Deck toUse) {
         final String keywordToRemove = "Remove CARDNAME from your deck before playing if you're not playing for ante.";
-        Set<CardPrinted> myRemovedAnteCards = new HashSet<CardPrinted>();
+        Set<PaperCard> myRemovedAnteCards = new HashSet<PaperCard>();
         for ( Entry<DeckSection, CardPool> ds : toUse ) {
-            for (Entry<CardPrinted, Integer> cp : ds.getValue()) {
+            for (Entry<PaperCard, Integer> cp : ds.getValue()) {
                 if ( Iterables.contains(cp.getKey().getRules().getMainPart().getKeywords(), keywordToRemove) ) 
                     myRemovedAnteCards.add(cp.getKey());
             }
         }
     
-        for(CardPrinted cp: myRemovedAnteCards) {
+        for(PaperCard cp: myRemovedAnteCards) {
             for ( Entry<DeckSection, CardPool> ds : toUse ) {
                 ds.getValue().remove(cp, Integer.MAX_VALUE);
             }
@@ -115,18 +115,18 @@ public class GameNew {
 
     private static void preparePlayerLibrary(Player player, final ZoneType zoneType, CardPool secion, boolean canRandomFoil, Random generator) {
         PlayerZone library = player.getZone(zoneType);
-        for (final Entry<CardPrinted, Integer> stackOfCards : secion) {
-            final CardPrinted cp = stackOfCards.getKey();
+        for (final Entry<PaperCard, Integer> stackOfCards : secion) {
+            final PaperCard cp = stackOfCards.getKey();
             for (int i = 0; i < stackOfCards.getValue(); i++) {
 
-                CardPrinted cpi = cp;
+                PaperCard cpi = cp;
                 // apply random pictures for cards
                 if (preferences.getPrefBoolean(FPref.UI_RANDOM_CARD_ART)) {
                     final int cntVariants = cp.getRules().getEditionInfo(cp.getEdition()).getCopiesCount();
                     if (cntVariants > 1) {
                         cpi = CardDb.instance().getCard(cp.getName(), cp.getEdition(), generator.nextInt(cntVariants));
                         if ( cp.isFoil() )
-                            cpi = CardPrinted.makeFoiled(cpi);
+                            cpi = PaperCard.makeFoiled(cpi);
                     }
                 }
 
@@ -199,11 +199,11 @@ public class GameNew {
         return library;
     } // smoothComputerManaCurve()
 
-    private static List<CardPrinted> getCardsAiCantPlayWell(final Deck toUse) {
-        List<CardPrinted> result = new ArrayList<CardPrinted>();
+    private static List<PaperCard> getCardsAiCantPlayWell(final Deck toUse) {
+        List<PaperCard> result = new ArrayList<PaperCard>();
         
         for ( Entry<DeckSection, CardPool> ds : toUse ) {
-            for (Entry<CardPrinted, Integer> cp : ds.getValue()) {
+            for (Entry<PaperCard, Integer> cp : ds.getValue()) {
                 if ( cp.getKey().getRules().getAiHints().getRemAIDecks() ) 
                     result.add(cp.getKey());
             }
@@ -228,9 +228,9 @@ public class GameNew {
         trigHandler.clearDelayedTrigger();
 
         // friendliness
-        final Set<CardPrinted> rAICards = new HashSet<CardPrinted>();
+        final Set<PaperCard> rAICards = new HashSet<PaperCard>();
 
-        MapOfLists<Player, CardPrinted> removedAnteCards = new HashMapOfLists<Player, CardPrinted>(CollectionSuppliers.<CardPrinted>hashSets());
+        MapOfLists<Player, PaperCard> removedAnteCards = new HashMapOfLists<Player, PaperCard>(CollectionSuppliers.<PaperCard>hashSets());
 
         GameType gameType = game.getType();
         boolean isFirstGame = game.getMatch().getPlayedGames().isEmpty();
@@ -253,7 +253,7 @@ public class GameNew {
             Deck myDeck = psc.getCurrentDeck();
             boolean hasSideboard = myDeck.has(DeckSection.Sideboard);
 
-            Set<CardPrinted> myRemovedAnteCards = useAnte ? null : getRemovedAnteCards(myDeck);
+            Set<PaperCard> myRemovedAnteCards = useAnte ? null : getRemovedAnteCards(myDeck);
             Random generator = MyRandom.getRandom();
 
             preparePlayerLibrary(player, ZoneType.Library, myDeck.getMain(), canRandomFoil, generator);
@@ -297,7 +297,7 @@ public class GameNew {
 
         if (!removedAnteCards.isEmpty()) {
             StringBuilder ante = new StringBuilder("The following ante cards were removed:\n\n");
-            for (Entry<Player, Collection<CardPrinted>> ants : removedAnteCards.entrySet()) {
+            for (Entry<Player, Collection<PaperCard>> ants : removedAnteCards.entrySet()) {
                 ante.append(TextUtil.buildFourColumnList("From the " + ants.getKey().getName() + "'s deck:", ants.getValue()));
             }
             GuiDialog.message(ante.toString());

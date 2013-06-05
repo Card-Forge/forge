@@ -16,7 +16,7 @@ import forge.gui.deckeditor.CDeckEditorUI;
 import forge.gui.deckeditor.SEditorUtil;
 import forge.gui.deckeditor.views.VStatistics;
 import forge.gui.framework.ICDoc;
-import forge.item.CardPrinted;
+import forge.item.PaperCard;
 import forge.item.InventoryItem;
 import forge.item.ItemPool;
 import forge.item.ItemPoolView;
@@ -57,8 +57,8 @@ public enum CStatistics implements ICDoc {
         analyze();
     }
 
-    private void setLabelValue(JLabel label, ItemPoolView<CardPrinted> deck, Predicate<CardRules> predicate, int total) {
-        int tmp = deck.countAll(Predicates.compose(predicate, CardPrinted.FN_GET_RULES));
+    private void setLabelValue(JLabel label, ItemPoolView<PaperCard> deck, Predicate<CardRules> predicate, int total) {
+        int tmp = deck.countAll(Predicates.compose(predicate, PaperCard.FN_GET_RULES));
         label.setText(tmp + " (" + SEditorUtil.calculatePercentage(tmp, total) + "%)");
 
     }
@@ -71,7 +71,7 @@ public enum CStatistics implements ICDoc {
 
         if (ed == null) { return; }
 
-        final ItemPoolView<CardPrinted> deck = ItemPool.createFrom(ed.getTableDeck().getCards(), CardPrinted.class);
+        final ItemPoolView<PaperCard> deck = ItemPool.createFrom(ed.getTableDeck().getCards(), PaperCard.class);
 
         int total = deck.countAll();
 
@@ -98,7 +98,7 @@ public enum CStatistics implements ICDoc {
         int cmc0 = 0, cmc1 = 0, cmc2 = 0, cmc3 = 0, cmc4 = 0, cmc5 = 0, cmc6 = 0;
         int tmc = 0;
 
-        for (final Entry<CardPrinted, Integer> e : deck) {
+        for (final Entry<PaperCard, Integer> e : deck) {
             final CardRules cardRules = e.getKey().getRules();
             final int count = e.getValue();
             final int cmc = cardRules.getManaCost().getCMC();

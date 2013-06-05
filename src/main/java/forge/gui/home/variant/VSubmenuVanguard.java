@@ -36,7 +36,7 @@ import forge.gui.toolbox.FScrollPane;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FTabbedPane;
 import forge.item.CardDb;
-import forge.item.CardPrinted;
+import forge.item.PaperCard;
 import forge.item.IPaperCard;
 
 /** 
@@ -64,11 +64,11 @@ public enum VSubmenuVanguard implements IVSubmenu<CSubmenuVanguard> {
     private final JCheckBox cbArtifacts = new FCheckBox("Remove Artifacts");
     private final JCheckBox cbRemoveSmall = new FCheckBox("Remove Small Creatures");
 
-    private final List<CardPrinted> allAvatars = new ArrayList<CardPrinted>();
+    private final List<PaperCard> allAvatars = new ArrayList<PaperCard>();
 
-    private final List<CardPrinted> allAiAvatars = new ArrayList<CardPrinted>();
-    private final List<CardPrinted> nonRandomHumanAvatars = new ArrayList<CardPrinted>();
-    private final List<CardPrinted> nonRandomAiAvatars = new ArrayList<CardPrinted>();
+    private final List<PaperCard> allAiAvatars = new ArrayList<PaperCard>();
+    private final List<PaperCard> nonRandomHumanAvatars = new ArrayList<PaperCard>();
+    private final List<PaperCard> nonRandomAiAvatars = new ArrayList<PaperCard>();
 
     //////////////////////////////
 
@@ -93,7 +93,7 @@ public enum VSubmenuVanguard implements IVSubmenu<CSubmenuVanguard> {
         Vector<Object> aiListData = new Vector<Object>();
         humanListData.add("Random");
         aiListData.add("Random");
-        for (CardPrinted cp : getAllAvatars()) {
+        for (PaperCard cp : getAllAvatars()) {
             humanListData.add(cp);
             if (!cp.getRules().getAiHints().getRemRandomDecks()) {
                 nonRandomHumanAvatars.add(cp);
@@ -131,7 +131,7 @@ public enum VSubmenuVanguard implements IVSubmenu<CSubmenuVanguard> {
                 int index = avatarLists.indexOf(arg0.getSource());
                 Object obj = avatarLists.get(index).getSelectedValue();
 
-                if (obj instanceof CardPrinted) {
+                if (obj instanceof PaperCard) {
                     cdpAvatarDetails.get(index).setCard(((IPaperCard) obj).getMatchingForgeCard());
                 }
             }
@@ -362,9 +362,9 @@ public enum VSubmenuVanguard implements IVSubmenu<CSubmenuVanguard> {
     /**
      * @return the allAvatars
      */
-    public Iterable<CardPrinted> getAllAvatars() {
+    public Iterable<PaperCard> getAllAvatars() {
         if (allAvatars.isEmpty()) {
-            for (CardPrinted c : CardDb.variants().getAllCards()) {
+            for (PaperCard c : CardDb.variants().getAllCards()) {
                 if (c.getRules().getType().isVanguard()) {
                     allAvatars.add(c);
                 }
@@ -376,21 +376,21 @@ public enum VSubmenuVanguard implements IVSubmenu<CSubmenuVanguard> {
     /**
      * @return the allAiAvatars
      */
-    public List<CardPrinted> getAllAiAvatars() {
+    public List<PaperCard> getAllAiAvatars() {
         return allAiAvatars;
     }
 
     /**
      * @return the non-random human Avatars
      */
-    public List<CardPrinted> getNonRandomHumanAvatars() {
+    public List<PaperCard> getNonRandomHumanAvatars() {
         return nonRandomHumanAvatars;
     }
 
     /**
      * @return the non-random AI Avatars
      */
-    public List<CardPrinted> getNonRandomAiAvatars() {
+    public List<PaperCard> getNonRandomAiAvatars() {
         return nonRandomAiAvatars;
     }
 

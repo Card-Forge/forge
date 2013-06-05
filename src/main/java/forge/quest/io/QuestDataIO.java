@@ -61,7 +61,7 @@ import forge.deck.DeckSection;
 import forge.error.BugReporter;
 import forge.item.BoosterPack;
 import forge.item.CardDb;
-import forge.item.CardPrinted;
+import forge.item.PaperCard;
 import forge.item.FatPack;
 import forge.item.InventoryItem;
 import forge.item.ItemPool;
@@ -507,7 +507,7 @@ public class QuestDataIO {
             
             for( Entry<DeckSection, CardPool> ds : d ) {
                 writer.startNode(ds.getKey().toString());
-                for (final Entry<CardPrinted, Integer> e : ds.getValue()) {
+                for (final Entry<PaperCard, Integer> e : ds.getValue()) {
                     this.write(e.getKey(), e.getValue(), writer);
                 }
                 writer.endNode();
@@ -559,7 +559,7 @@ public class QuestDataIO {
             return clasz.equals(ItemPool.class);
         }
 
-        protected void write(final CardPrinted cref, final Integer count, final HierarchicalStreamWriter writer) {
+        protected void write(final PaperCard cref, final Integer count, final HierarchicalStreamWriter writer) {
             writer.startNode("card");
             writer.addAttribute("c", cref.getName());
             writer.addAttribute("s", cref.getEdition());
@@ -608,8 +608,8 @@ public class QuestDataIO {
             for (final Entry<InventoryItem, Integer> e : pool) {
                 final InventoryItem item = e.getKey();
                 final Integer count = e.getValue();
-                if (item instanceof CardPrinted) {
-                    this.write((CardPrinted) item, count, writer);
+                if (item instanceof PaperCard) {
+                    this.write((PaperCard) item, count, writer);
                 } else if (item instanceof BoosterPack) {
                     this.write((BoosterPack) item, count, writer);
                 } else if (item instanceof TournamentPack) {
@@ -676,15 +676,15 @@ public class QuestDataIO {
             return FatPack.FN_FROM_SET.apply(ed);
         }
 
-        protected CardPrinted readCardPrinted(final HierarchicalStreamReader reader) {
+        protected PaperCard readCardPrinted(final HierarchicalStreamReader reader) {
             final String name = reader.getAttribute("c");
             final String set = reader.getAttribute("s");
             final String sIndex = reader.getAttribute("i");
             final short index = StringUtils.isNumeric(sIndex) ? Short.parseShort(sIndex) : 0;
             final boolean foil = "1".equals(reader.getAttribute("foil"));
-            CardPrinted c = CardDb.instance().tryGetCard(name, set, index);
+            PaperCard c = CardDb.instance().tryGetCard(name, set, index);
             if ( null == c ) c = CardDb.instance().getCard(name);
-            return foil ? CardPrinted.makeFoiled(c) : c;
+            return foil ? PaperCard.makeFoiled(c) : c;
         }
     }
 }

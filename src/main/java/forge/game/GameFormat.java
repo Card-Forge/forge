@@ -27,7 +27,7 @@ import com.google.common.base.Predicates;
 import com.google.common.collect.Lists;
 
 import forge.card.CardRulesPredicates;
-import forge.item.CardPrinted;
+import forge.item.PaperCard;
 import forge.item.IPaperCard;
 
 
@@ -45,8 +45,8 @@ public class GameFormat implements Comparable<GameFormat> {
     protected final transient List<String> allowedSetCodes_ro;
     protected final transient List<String> bannedCardNames_ro;
 
-    protected final transient Predicate<CardPrinted> filterRules;
-    protected final transient Predicate<CardPrinted> filterPrinted;
+    protected final transient Predicate<PaperCard> filterRules;
+    protected final transient Predicate<PaperCard> filterPrinted;
 
     private final int index; 
     
@@ -77,20 +77,20 @@ public class GameFormat implements Comparable<GameFormat> {
         this.filterPrinted = this.buildFilterPrinted();
     }
 
-    private Predicate<CardPrinted> buildFilterPrinted() {
-        final Predicate<CardPrinted> banNames = Predicates.not(IPaperCard.Predicates.names(this.bannedCardNames));
+    private Predicate<PaperCard> buildFilterPrinted() {
+        final Predicate<PaperCard> banNames = Predicates.not(IPaperCard.Predicates.names(this.bannedCardNames));
         if (this.allowedSetCodes == null || this.allowedSetCodes.isEmpty()) {
             return banNames;
         }
         return Predicates.and(banNames, IPaperCard.Predicates.printedInSets(this.allowedSetCodes, true));
     }
 
-    private Predicate<CardPrinted> buildFilterRules() {
-        final Predicate<CardPrinted> banNames = Predicates.not(IPaperCard.Predicates.names(this.bannedCardNames));
+    private Predicate<PaperCard> buildFilterRules() {
+        final Predicate<PaperCard> banNames = Predicates.not(IPaperCard.Predicates.names(this.bannedCardNames));
         if (this.allowedSetCodes == null || this.allowedSetCodes.isEmpty()) {
             return banNames;
         }
-        return Predicates.and(banNames, Predicates.compose(CardRulesPredicates.wasPrintedInSets(this.allowedSetCodes), CardPrinted.FN_GET_RULES));
+        return Predicates.and(banNames, Predicates.compose(CardRulesPredicates.wasPrintedInSets(this.allowedSetCodes), PaperCard.FN_GET_RULES));
     }
 
     /**
@@ -125,7 +125,7 @@ public class GameFormat implements Comparable<GameFormat> {
      * 
      * @return the filter rules
      */
-    public Predicate<CardPrinted> getFilterRules() {
+    public Predicate<PaperCard> getFilterRules() {
         return this.filterRules;
     }
 
@@ -134,7 +134,7 @@ public class GameFormat implements Comparable<GameFormat> {
      * 
      * @return the filter printed
      */
-    public Predicate<CardPrinted> getFilterPrinted() {
+    public Predicate<PaperCard> getFilterPrinted() {
         return this.filterPrinted;
     }
 

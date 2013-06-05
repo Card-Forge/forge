@@ -32,7 +32,7 @@ import forge.gui.deckeditor.CDeckEditorUI;
 import forge.gui.deckeditor.controllers.ACEditorBase;
 import forge.gui.deckeditor.controllers.CEditorLimited;
 import forge.gui.framework.ICDoc;
-import forge.item.CardPrinted;
+import forge.item.PaperCard;
 import forge.item.InventoryItem;
 import forge.item.ItemPool;
 import forge.util.storage.IStorage;
@@ -150,7 +150,7 @@ public enum CSubmenuSealed implements ICDoc {
         SealedCardPoolGenerator sd = new SealedCardPoolGenerator(o);
         if (sd.isEmpty()) return;
 
-        final ItemPool<CardPrinted> humanPool = sd.getCardpool(true);
+        final ItemPool<PaperCard> humanPool = sd.getCardpool(true);
         
         // System.out.println(humanPool);
 
@@ -235,8 +235,8 @@ public enum CSubmenuSealed implements ICDoc {
 
             double best = 1.0;
 
-            for (Entry<CardPrinted, Integer> kv : d.getMain()) {
-                CardPrinted evalCard = kv.getKey();
+            for (Entry<PaperCard, Integer> kv : d.getMain()) {
+                PaperCard evalCard = kv.getKey();
                 int count = kv.getValue();
                 if (ranker.getRanking(evalCard.getName(), evalCard.getEdition()) != null) {
                     double add = ranker.getRanking(evalCard.getName(), evalCard.getEdition());

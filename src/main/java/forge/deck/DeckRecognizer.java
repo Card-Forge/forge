@@ -23,7 +23,7 @@ import java.util.regex.Pattern;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.item.CardDb;
-import forge.item.CardPrinted;
+import forge.item.PaperCard;
 
 /**
  * <p>
@@ -62,7 +62,7 @@ public class DeckRecognizer {
      */
     public static class Token {
         private final TokenType type;
-        private final CardPrinted card;
+        private final PaperCard card;
         private final int number;
         private final String text;
 
@@ -75,7 +75,7 @@ public class DeckRecognizer {
          *            the count
          * @return the token
          */
-        public static Token knownCard(final CardPrinted theCard, final int count) {
+        public static Token knownCard(final PaperCard theCard, final int count) {
             return new Token(theCard, TokenType.KnownCard, count, null);
         }
 
@@ -92,7 +92,7 @@ public class DeckRecognizer {
             return new Token(null, TokenType.UnknownCard, count, cardNme);
         }
 
-        private Token(final CardPrinted knownCard, final TokenType type1, final int count, final String message) {
+        private Token(final PaperCard knownCard, final TokenType type1, final int count, final String message) {
             this.card = knownCard;
             this.number = count;
             this.type = type1;
@@ -130,7 +130,7 @@ public class DeckRecognizer {
          * 
          * @return the card
          */
-        public final CardPrinted getCard() {
+        public final PaperCard getCard() {
             return this.card;
         }
 

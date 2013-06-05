@@ -29,7 +29,7 @@ import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.game.player.Player;
-import forge.item.CardPrinted;
+import forge.item.PaperCard;
 import forge.util.Aggregates;
 
 /** 
@@ -813,7 +813,7 @@ public class ComputerUtilCard {
         @Override
         public boolean apply(Deck d) {
             for(Entry<DeckSection, CardPool> cp: d) {
-                for(Entry<CardPrinted, Integer> e : cp.getValue()) {
+                for(Entry<PaperCard, Integer> e : cp.getValue()) {
                     if ( e.getKey().getRules().getAiHints().getRemAIDecks() )
                         return false;
                 }

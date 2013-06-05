@@ -8,7 +8,7 @@ import forge.card.BoosterTemplate;
 import forge.card.BoosterGenerator;
 import forge.deck.Deck;
 import forge.game.limited.IBoosterDraft;
-import forge.item.CardPrinted;
+import forge.item.PaperCard;
 import forge.item.ItemPool;
 import forge.item.ItemPoolView;
 
@@ -47,15 +47,15 @@ public class BoosterDraftTest implements IBoosterDraft {
      * @return a {@link forge.CardList} object.
      */
     @Override
-    public ItemPoolView<CardPrinted> nextChoice() {
+    public ItemPoolView<PaperCard> nextChoice() {
         this.n--;
         BoosterTemplate booster = Singletons.getModel().getBoosters().get("M11");
-        return ItemPool.createFrom(BoosterGenerator.getBoosterPack(booster), CardPrinted.class);
+        return ItemPool.createFrom(BoosterGenerator.getBoosterPack(booster), PaperCard.class);
     }
 
     /** {@inheritDoc} */
     @Override
-    public void setChoice(final CardPrinted c) {
+    public void setChoice(final PaperCard c) {
         System.out.println(c.getName());
     }
 

@@ -15,7 +15,7 @@ import forge.gui.deckeditor.views.VCardCatalog;
 import forge.gui.deckeditor.views.VCardCatalog.RangeTypes;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FSpinner;
-import forge.item.CardPrinted;
+import forge.item.PaperCard;
 import forge.util.ComparableOp;
 import forge.util.PredicateString.StringOp;
 
@@ -31,7 +31,7 @@ public class SFilterUtil {
      * <br><br>
      * Handles "multicolor" label, which is quite tricky.
      */
-    public static Predicate<CardPrinted> buildColorAndTypeFilter(Map<SEditorUtil.StatTypes, FLabel> statLabels) {
+    public static Predicate<PaperCard> buildColorAndTypeFilter(Map<SEditorUtil.StatTypes, FLabel> statLabels) {
         final List<Predicate<CardRules>> colors = new ArrayList<Predicate<CardRules>>();
         final List<Predicate<CardRules>> types = new ArrayList<Predicate<CardRules>>();
         
@@ -67,12 +67,12 @@ public class SFilterUtil {
             return Predicates.alwaysTrue();
         }
 
-        Predicate<CardPrinted> typesFinal = Predicates.compose(Predicates.or(types), CardPrinted.FN_GET_RULES);
+        Predicate<PaperCard> typesFinal = Predicates.compose(Predicates.or(types), PaperCard.FN_GET_RULES);
         if (null == preFinal) {
             return typesFinal;
         }
         
-        Predicate<CardPrinted> colorFinal = Predicates.compose(preFinal, CardPrinted.FN_GET_RULES);
+        Predicate<PaperCard> colorFinal = Predicates.compose(preFinal, PaperCard.FN_GET_RULES);
         if (7 == types.size()) {
             return colorFinal;
         }
@@ -83,7 +83,7 @@ public class SFilterUtil {
     /**
      * builds a string search filter
      */
-    public static Predicate<CardPrinted> buildTextFilter(String text, boolean invert, boolean inName, boolean inType, boolean inText) {
+    public static Predicate<PaperCard> buildTextFilter(String text, boolean invert, boolean inName, boolean inType, boolean inText) {
         if (text.trim().isEmpty()) {
             return Predicates.alwaysTrue();
         }
@@ -102,7 +102,7 @@ public class SFilterUtil {
         }
         Predicate<CardRules> textFilter = invert ? Predicates.not(Predicates.or(terms)) : Predicates.and(terms);
  
-        return Predicates.compose(textFilter, CardPrinted.FN_GET_RULES);
+        return Predicates.compose(textFilter, PaperCard.FN_GET_RULES);
     }
 
     private static Predicate<CardRules> getCardRulesFieldPredicate(int min, int max, CardRulesPredicates.LeafNumber.CardField field) {
@@ -123,7 +123,7 @@ public class SFilterUtil {
     /**
      * builds a filter for an interval on a card field
      */
-    public static Predicate<CardPrinted> buildIntervalFilter(
+    public static Predicate<PaperCard> buildIntervalFilter(
             Map<RangeTypes, Pair<FSpinner, FSpinner>> spinners, VCardCatalog.RangeTypes field) {
         Pair<FSpinner, FSpinner> sPair = spinners.get(field);
         Predicate<CardRules> fieldFilter = getCardRulesFieldPredicate(
@@ -138,7 +138,7 @@ public class SFilterUtil {
         if (fieldFilter == null) {
             return Predicates.alwaysTrue();
         } else {
-            return Predicates.compose(fieldFilter, CardPrinted.FN_GET_RULES);
+            return Predicates.compose(fieldFilter, PaperCard.FN_GET_RULES);
         }
     }
 }

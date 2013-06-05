@@ -28,7 +28,7 @@ import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 import forge.gui.GuiDialog;
 import forge.item.CardDb;
-import forge.item.CardPrinted;
+import forge.item.PaperCard;
 import forge.util.Aggregates;
 
 public class PlayEffect extends SpellAbilityEffect {
@@ -87,23 +87,23 @@ public class PlayEffect extends SpellAbilityEffect {
             useEncoded = true;
         }
         else if (sa.hasParam("AnySupportedCard")) {
-            List<CardPrinted> cards = Lists.newArrayList(CardDb.instance().getUniqueCards());
+            List<PaperCard> cards = Lists.newArrayList(CardDb.instance().getUniqueCards());
             String valid = sa.getParam("AnySupportedCard");
             if (StringUtils.containsIgnoreCase(valid, "sorcery")) {
-                Predicate<CardPrinted> cpp = Predicates.compose(CardRulesPredicates.Presets.IS_SORCERY, CardPrinted.FN_GET_RULES);
+                Predicate<PaperCard> cpp = Predicates.compose(CardRulesPredicates.Presets.IS_SORCERY, PaperCard.FN_GET_RULES);
                 cards = Lists.newArrayList(Iterables.filter(cards, cpp));
             }
             if (StringUtils.containsIgnoreCase(valid, "instant")) {
-                Predicate<CardPrinted> cpp = Predicates.compose(CardRulesPredicates.Presets.IS_INSTANT, CardPrinted.FN_GET_RULES);
+                Predicate<PaperCard> cpp = Predicates.compose(CardRulesPredicates.Presets.IS_INSTANT, PaperCard.FN_GET_RULES);
                 cards = Lists.newArrayList(Iterables.filter(cards, cpp));
             }
             if (sa.hasParam("RandomCopied")) {
-                List<CardPrinted> copysource = new ArrayList<CardPrinted>(cards);
+                List<PaperCard> copysource = new ArrayList<PaperCard>(cards);
                 List<Card> choice = new ArrayList<Card>();
                 final String num = sa.hasParam("RandomNum") ? sa.getParam("RandomNum") : "1";
                 int ncopied = AbilityUtils.calculateAmount(source, num, sa);
                 while(ncopied > 0) {
-                    final CardPrinted cp = Aggregates.random(copysource);
+                    final PaperCard cp = Aggregates.random(copysource);
                     if (cp.getMatchingForgeCard().isValid(valid, source.getController(), source)) {
                         choice.add(cp.getMatchingForgeCard());
                         copysource.remove(cp);

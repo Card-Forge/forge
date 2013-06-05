@@ -35,7 +35,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import forge.ImageCache;
 import forge.deck.Deck;
-import forge.item.CardPrinted;
+import forge.item.PaperCard;
 import forge.properties.NewConstants;
 import forge.util.FileSection;
 import forge.util.FileSectionManual;
@@ -136,17 +136,17 @@ public class DeckSerializer extends StorageReaderFolder<Deck> implements IItemSe
             final Map<String, Object> root = new HashMap<String, Object>();
             root.put("title", d.getName());
             final List<String> list = new ArrayList<String>();
-            for (final Entry<CardPrinted, Integer> card : d.getMain()) {
+            for (final Entry<PaperCard, Integer> card : d.getMain()) {
                 // System.out.println(card.getSets().get(card.getSets().size() - 1).URL);
                 for (int i = card.getValue().intValue(); i > 0; --i ) {
-                    CardPrinted r = card.getKey();
+                    PaperCard r = card.getKey();
                     String url = NewConstants.URL_PIC_DOWNLOAD + ImageCache.getDownloadUrl(r, false);
                     list.add(url);
                 }
             }
 
             final TreeMap<String, Integer> map = new TreeMap<String, Integer>();
-            for (final Entry<CardPrinted, Integer> entry : d.getMain().getOrderedList()) {
+            for (final Entry<PaperCard, Integer> entry : d.getMain().getOrderedList()) {
                 map.put(entry.getKey().getName(), entry.getValue());
                 // System.out.println(entry.getValue() + " " +
                 // entry.getKey().getName());

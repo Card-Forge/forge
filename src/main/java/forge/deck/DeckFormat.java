@@ -28,7 +28,7 @@ import forge.Singletons;
 import forge.card.CardCoreType;
 import forge.card.ColorSet;
 import forge.item.CardDb;
-import forge.item.CardPrinted;
+import forge.item.PaperCard;
 import forge.item.IPaperCard;
 import forge.properties.ForgePreferences.FPref;
 import forge.util.Aggregates;
@@ -149,9 +149,9 @@ public enum DeckFormat {
                 }
                 
                 ColorSet cmdCI = cmd.get(0).getRules().getColorIdentity();
-                List<CardPrinted> erroneousCI = new ArrayList<CardPrinted>();
+                List<PaperCard> erroneousCI = new ArrayList<PaperCard>();
                                 
-                for(Entry<CardPrinted, Integer> cp : deck.get(DeckSection.Main)) {
+                for(Entry<PaperCard, Integer> cp : deck.get(DeckSection.Main)) {
                     if(!cp.getKey().getRules().getColorIdentity().hasNoColorsExcept(cmdCI.getColor()))
                     {
                         erroneousCI.add(cp.getKey());
@@ -159,7 +159,7 @@ public enum DeckFormat {
                 }
                 if(deck.has(DeckSection.Sideboard))
                 {
-                    for(Entry<CardPrinted, Integer> cp : deck.get(DeckSection.Sideboard)) {
+                    for(Entry<PaperCard, Integer> cp : deck.get(DeckSection.Sideboard)) {
                         if(!cp.getKey().getRules().getColorIdentity().hasNoColorsExcept(cmdCI.getColor()))
                         {
                             erroneousCI.add(cp.getKey());
@@ -171,7 +171,7 @@ public enum DeckFormat {
                 {
                     StringBuilder sb = new StringBuilder("contains card that do not match the commanders color identity:");
                     
-                    for(CardPrinted cp : erroneousCI)
+                    for(PaperCard cp : erroneousCI)
                     {
                         sb.append("\n").append(cp.getName());
                     }
@@ -187,7 +187,7 @@ public enum DeckFormat {
                     return "should have at least 10 planes";
                 }
                 int phenoms = 0;
-                for (Entry<CardPrinted, Integer> cp : planes) {
+                for (Entry<PaperCard, Integer> cp : planes) {
 
                     if (cp.getKey().getRules().getType().typeContains(CardCoreType.Phenomenon)) {
                         phenoms++;
@@ -208,7 +208,7 @@ public enum DeckFormat {
                     return "must contain at least 20 schemes";
                 }
 
-                for (Entry<CardPrinted, Integer> cp : schemes) {
+                for (Entry<PaperCard, Integer> cp : schemes) {
                     if (cp.getValue() > 2) {
                         return String.format("must not contain more than 2 copies of any Scheme, but has %d of '%s'", cp.getValue(), cp.getKey().getName());
                     }
@@ -231,7 +231,7 @@ public enum DeckFormat {
             List<String> limitExceptions = Arrays.asList(new String[]{"Relentless Rats", "Shadowborn Apostle"});
 
             // should group all cards by name, so that different editions of same card are really counted as the same card
-            for (Entry<String, Integer> cp : Aggregates.groupSumBy(tmp, CardPrinted.FN_GET_NAME)) {
+            for (Entry<String, Integer> cp : Aggregates.groupSumBy(tmp, PaperCard.FN_GET_NAME)) {
 
                 IPaperCard simpleCard = CardDb.instance().getCard(cp.getKey());
                 boolean canHaveMultiple = simpleCard.getRules().getType().isBasicLand() || limitExceptions.contains(cp.getKey());

@@ -24,7 +24,7 @@ import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 import forge.item.CardDb;
-import forge.item.CardPrinted;
+import forge.item.PaperCard;
 import forge.util.Aggregates;
 import forge.util.ComparableOp;
 
@@ -70,9 +70,9 @@ public class ChooseCardNameEffect extends SpellAbilityEffect {
 
                         Predicate<CardRules>  additionalRule = CardRulesPredicates.cmc(ComparableOp.EQUALS, validAmount);
 
-                        List<CardPrinted> cards = Lists.newArrayList(CardDb.instance().getUniqueCards());
-                        Predicate<CardPrinted> cpp = Predicates.and(Predicates.compose(baseRule, CardPrinted.FN_GET_RULES), 
-                                Predicates.compose(additionalRule, CardPrinted.FN_GET_RULES));
+                        List<PaperCard> cards = Lists.newArrayList(CardDb.instance().getUniqueCards());
+                        Predicate<PaperCard> cpp = Predicates.and(Predicates.compose(baseRule, PaperCard.FN_GET_RULES), 
+                                Predicates.compose(additionalRule, PaperCard.FN_GET_RULES));
                         cards = Lists.newArrayList(Iterables.filter(cards, cpp));
                         if (!cards.isEmpty()) {
                             host.setNamedCard(Aggregates.random(cards).getName());
@@ -83,31 +83,31 @@ public class ChooseCardNameEffect extends SpellAbilityEffect {
                     } else if (p.isHuman()) {
                         final String message = validDesc.equals("card") ? "Name a card" : "Name a " + validDesc + " card.";
                         
-                        List<CardPrinted> cards = Lists.newArrayList(CardDb.instance().getUniqueCards());
+                        List<PaperCard> cards = Lists.newArrayList(CardDb.instance().getUniqueCards());
                         if ( StringUtils.containsIgnoreCase(valid, "nonland") )
                         {
-                            Predicate<CardPrinted> cpp = Predicates.compose(CardRulesPredicates.Presets.IS_NON_LAND, CardPrinted.FN_GET_RULES);
+                            Predicate<PaperCard> cpp = Predicates.compose(CardRulesPredicates.Presets.IS_NON_LAND, PaperCard.FN_GET_RULES);
                             cards = Lists.newArrayList(Iterables.filter(cards, cpp));
                         }
                         if ( StringUtils.containsIgnoreCase(valid, "nonbasic") )
                         {
-                            Predicate<CardPrinted> cpp = Predicates.compose(Predicates.not(CardRulesPredicates.Presets.IS_BASIC_LAND), CardPrinted.FN_GET_RULES);
+                            Predicate<PaperCard> cpp = Predicates.compose(Predicates.not(CardRulesPredicates.Presets.IS_BASIC_LAND), PaperCard.FN_GET_RULES);
                             cards = Lists.newArrayList(Iterables.filter(cards, cpp));
                         }
                         if ( StringUtils.containsIgnoreCase(valid, "noncreature") )
                         {
-                            Predicate<CardPrinted> cpp = Predicates.compose(Predicates.not(CardRulesPredicates.Presets.IS_CREATURE), CardPrinted.FN_GET_RULES);
+                            Predicate<PaperCard> cpp = Predicates.compose(Predicates.not(CardRulesPredicates.Presets.IS_CREATURE), PaperCard.FN_GET_RULES);
                             cards = Lists.newArrayList(Iterables.filter(cards, cpp));
                         }
                         else if ( StringUtils.containsIgnoreCase(valid, "creature") )
                         {
-                            Predicate<CardPrinted> cpp = Predicates.compose(CardRulesPredicates.Presets.IS_CREATURE, CardPrinted.FN_GET_RULES);
+                            Predicate<PaperCard> cpp = Predicates.compose(CardRulesPredicates.Presets.IS_CREATURE, PaperCard.FN_GET_RULES);
                             cards = Lists.newArrayList(Iterables.filter(cards, cpp));
                         }
 
                         Collections.sort(cards);
                             
-                        CardPrinted cp = GuiChoose.one(message, cards);
+                        PaperCard cp = GuiChoose.one(message, cards);
                         if (cp.getMatchingForgeCard().isValid(valid, host.getController(), host)) {
                             host.setNamedCard(cp.getName());
                             ok = true;

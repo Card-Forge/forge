@@ -24,7 +24,7 @@ import forge.Card;
 import forge.card.CardEdition;
 import forge.card.CardRulesReader;
 import forge.item.CardDb;
-import forge.item.CardToken;
+import forge.item.PaperToken;
 import forge.item.IPaperCard;
 import forge.quest.bazaar.QuestPetController;
 
@@ -133,7 +133,7 @@ public class QuestUtil {
      *            (TOKEN;W;1;1;sheep;type;type;type...)
      * @return token Card
      */
-    public static CardToken createToken(final String s) {
+    public static PaperToken createToken(final String s) {
         final String[] properties = s.split(";", 6);
 
         List<String> script = new ArrayList<String>();
@@ -142,8 +142,8 @@ public class QuestUtil {
         script.add("PT:"+ properties[2] + "/" + properties[3]);
         script.add("Types:" + properties[5].replace(';', ' '));
         script.add("Oracle:"); // tokens don't have texts yet
-        String fileName = CardToken.makeTokenFileName(properties[1], properties[2], properties[3], properties[4]);
-        final CardToken c = new CardToken(CardRulesReader.parseSingleCard(script), CardEdition.UNKNOWN, fileName);
+        String fileName = PaperToken.makeTokenFileName(properties[1], properties[2], properties[3], properties[4]);
+        final PaperToken c = new PaperToken(CardRulesReader.parseSingleCard(script), CardEdition.UNKNOWN, fileName);
         return c;
     }
 

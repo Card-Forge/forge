@@ -29,7 +29,7 @@ import forge.card.SealedProductTemplate;
 import forge.deck.Deck;
 import forge.deck.DeckBase;
 import forge.item.CardDb;
-import forge.item.CardPrinted;
+import forge.item.PaperCard;
 import forge.item.ItemPool;
 import forge.item.ItemPoolView;
 import forge.util.FileSection;
@@ -63,7 +63,7 @@ public class CustomLimited extends DeckBase {
     /** The Num packs. */
     private int numPacks = 3;
 
-    private transient ItemPoolView<CardPrinted> cardPool;
+    private transient ItemPoolView<PaperCard> cardPool;
 
     /** The Land set code. */
     private String landSetCode = CardDb.instance().getCard("Plains", true).getEdition();
@@ -108,7 +108,7 @@ public class CustomLimited extends DeckBase {
         cd.numPacks = data.getInt("NumPacks");
         cd.singleton = data.getBoolean("Singleton");
         final Deck deckCube = cubes.get(data.get("DeckFile"));
-        cd.cardPool = deckCube == null ? ItemPool.createFrom(CardDb.instance().getUniqueCards(), CardPrinted.class) : deckCube.getMain();
+        cd.cardPool = deckCube == null ? ItemPool.createFrom(CardDb.instance().getUniqueCards(), PaperCard.class) : deckCube.getMain();
 
         return cd;
     }
@@ -148,7 +148,7 @@ public class CustomLimited extends DeckBase {
      * 
      * @see forge.item.CardCollectionBase#getCardPool()
      */
-    public ItemPoolView<CardPrinted> getCardPool() {
+    public ItemPoolView<PaperCard> getCardPool() {
         return this.cardPool;
     }
 

@@ -24,7 +24,7 @@ import forge.gui.GuiDialog;
 import forge.gui.SOverlayUtils;
 import forge.gui.framework.ICDoc;
 import forge.gui.toolbox.FDeckChooser;
-import forge.item.CardPrinted;
+import forge.item.PaperCard;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 
@@ -131,9 +131,9 @@ public enum CSubmenuVanguard implements ICDoc {
             playerDecks.add(d.getOriginalDeck());
         }
 
-        List<CardPrinted> playerAvatars = new ArrayList<CardPrinted>();
+        List<PaperCard> playerAvatars = new ArrayList<PaperCard>();
         for (int i = 0; i < view.getNumPlayers(); i++) {
-            CardPrinted avatar = null;
+            PaperCard avatar = null;
             Object obj = view.getAvatarLists().get(i).getSelectedValue();
 
             boolean useDefault = VSubmenuVanguard.SINGLETON_INSTANCE.getCbDefaultAvatars().isSelected();
@@ -156,7 +156,7 @@ public enum CSubmenuVanguard implements ICDoc {
                         avatar = Iterables.get(view.getAllAiAvatars(), rnd.nextInt(Iterables.size(view.getNonRandomAiAvatars())));
                     }
                 } else {
-                    avatar = (CardPrinted) obj;
+                    avatar = (PaperCard) obj;
                 }
             }
             if (avatar == null) {

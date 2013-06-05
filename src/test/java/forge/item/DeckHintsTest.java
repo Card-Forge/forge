@@ -26,16 +26,16 @@ public class DeckHintsTest {
      */
     @Test(timeOut = 1000, enabled = true)
     void test() {
-        CardPrinted cp = readCard("griffin_rider.txt");
+        PaperCard cp = readCard("griffin_rider.txt");
         Assert.assertEquals("Griffin Rider", cp.getName());
         DeckHints hints = cp.getRules().getAiHints().getDeckHints();
         Assert.assertNotNull(hints);
         Assert.assertEquals(DeckHints.Type.TYPE, hints.getType());
 
-        List<CardPrinted> list = new ArrayList<CardPrinted>();
-        CardPrinted c0 = readCard("assault_griffin.txt");
+        List<PaperCard> list = new ArrayList<PaperCard>();
+        PaperCard c0 = readCard("assault_griffin.txt");
         list.add(c0);
-        CardPrinted c1 = readCard("auramancer.txt");
+        PaperCard c1 = readCard("auramancer.txt");
         list.add(c1);
 
         Assert.assertEquals(1, hints.filter(list).size());
@@ -47,18 +47,18 @@ public class DeckHintsTest {
      */
     @Test(timeOut = 1000, enabled = true)
     void testCards() {
-        CardPrinted cp = readCard("throne_of_empires.txt");
+        PaperCard cp = readCard("throne_of_empires.txt");
         Assert.assertEquals("Throne of Empires", cp.getName());
         DeckHints hints = cp.getRules().getAiHints().getDeckHints();
         Assert.assertNotNull(hints);
         Assert.assertEquals(DeckHints.Type.NAME, hints.getType());
 
-        List<CardPrinted> list = new ArrayList<CardPrinted>();
-        CardPrinted c0 = readCard("assault_griffin.txt");
+        List<PaperCard> list = new ArrayList<PaperCard>();
+        PaperCard c0 = readCard("assault_griffin.txt");
         list.add(c0);
-        CardPrinted c1 = readCard("scepter_of_empires.txt");
+        PaperCard c1 = readCard("scepter_of_empires.txt");
         list.add(c1);
-        CardPrinted c2 = readCard("crown_of_empires.txt");
+        PaperCard c2 = readCard("crown_of_empires.txt");
         list.add(c2);
 
         Assert.assertEquals(2, hints.filter(list).size());
@@ -74,10 +74,10 @@ public class DeckHintsTest {
         Assert.assertNotNull(hints);
         Assert.assertEquals(DeckHints.Type.KEYWORD, hints.getType());
 
-        List<CardPrinted> list = new ArrayList<CardPrinted>();
-        CardPrinted c0 = readCard("acidic_slime.txt");
+        List<PaperCard> list = new ArrayList<PaperCard>();
+        PaperCard c0 = readCard("acidic_slime.txt");
         list.add(c0);
-        CardPrinted c1 = readCard("ajanis_sunstriker.txt");
+        PaperCard c1 = readCard("ajanis_sunstriker.txt");
         list.add(c1);
 
         Assert.assertEquals(1, hints.filter(list).size());
@@ -93,10 +93,10 @@ public class DeckHintsTest {
         Assert.assertNotNull(hints);
         Assert.assertEquals(DeckHints.Type.COLOR, hints.getType());
 
-        List<CardPrinted> list = new ArrayList<CardPrinted>();
-        CardPrinted c0 = readCard("llanowar_elves.txt");
+        List<PaperCard> list = new ArrayList<PaperCard>();
+        PaperCard c0 = readCard("llanowar_elves.txt");
         list.add(c0);
-        CardPrinted c1 = readCard("unsummon.txt");
+        PaperCard c1 = readCard("unsummon.txt");
         list.add(c1);
 
         Assert.assertEquals(1, hints.filter(list).size());
@@ -108,14 +108,14 @@ public class DeckHintsTest {
      */
     @Test(timeOut = 1000, enabled = false)
     void testNoFilter() {
-        CardPrinted cp = readCard("assault_griffin.txt");
+        PaperCard cp = readCard("assault_griffin.txt");
         DeckHints hints = cp.getRules().getAiHints().getDeckHints();
         Assert.assertEquals("Assault Griffin", cp.getName());
         Assert.assertNotNull(hints);
         Assert.assertEquals(DeckHints.Type.NONE, hints.getType());
 
-        List<CardPrinted> list = new ArrayList<CardPrinted>();
-        CardPrinted c0 = readCard("assault_griffin.txt");
+        List<PaperCard> list = new ArrayList<PaperCard>();
+        PaperCard c0 = readCard("assault_griffin.txt");
         list.add(c0);
 
         Assert.assertEquals(1, hints.filter(list).size());
@@ -128,7 +128,7 @@ public class DeckHintsTest {
      *            the filename
      * @return the CardPrinted
      */
-    protected CardPrinted readCard(String filename) {
+    protected PaperCard readCard(String filename) {
         String firstLetter = filename.substring(0, 1);
         File dir = new File(NewConstants.CARD_DATA_DIR, firstLetter);
         File txtFile = new File(dir, filename);
@@ -138,7 +138,7 @@ public class DeckHintsTest {
             crr.parseLine(line);
         }
         // Don't care what the actual set or rarity is here.
-        return CardPrinted.build(crr.getCard(), "M11", CardRarity.Common, 0);
+        return PaperCard.build(crr.getCard(), "M11", CardRarity.Common, 0);
     }
 
 }

@@ -22,7 +22,7 @@ import java.util.Map.Entry;
 
 import com.google.common.base.Function;
 
-import forge.item.CardPrinted;
+import forge.item.PaperCard;
 
 /**
  * <p>
@@ -56,10 +56,10 @@ public class TableSorter<T> implements Comparator<Entry<T, Integer>> {
     }
 
     /** The Constant byNameThenSet. */
-    public static final TableSorter<CardPrinted> BY_NAME_THEN_SET = new TableSorter<CardPrinted>(
-            new Function<Entry<CardPrinted, Integer>, Comparable<?>>() {
+    public static final TableSorter<PaperCard> BY_NAME_THEN_SET = new TableSorter<PaperCard>(
+            new Function<Entry<PaperCard, Integer>, Comparable<?>>() {
                 @Override
-                public Comparable<?> apply(final Entry<CardPrinted, Integer> from) {
+                public Comparable<?> apply(final Entry<PaperCard, Integer> from) {
                     return from.getKey();
                 }
             }, true);

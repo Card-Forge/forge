@@ -29,7 +29,7 @@ import forge.gui.framework.EDocID;
 import forge.gui.framework.ICDoc;
 import forge.gui.toolbox.FDeckChooser;
 import forge.gui.toolbox.FList;
-import forge.item.CardPrinted;
+import forge.item.PaperCard;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 import forge.util.Aggregates;
@@ -87,9 +87,9 @@ public enum CSubmenuArchenemy implements ICDoc {
             @Override
             public void run() {
                 
-                Predicate<CardPrinted> predSchemes = new Predicate<CardPrinted>() {
+                Predicate<PaperCard> predSchemes = new Predicate<PaperCard>() {
                     @Override
-                    public boolean apply(CardPrinted arg0) {
+                    public boolean apply(PaperCard arg0) {
                         if(arg0.getRules().getType().isScheme())
                         {
                             return true;
@@ -172,7 +172,7 @@ public enum CSubmenuArchenemy implements ICDoc {
             playerDecks.add(d.getOriginalDeck());
         }
 
-        List<CardPrinted> schemes = null;
+        List<PaperCard> schemes = null;
         Object obj = view.getArchenemySchemes().getSelectedValue();
 
         boolean useDefault = VSubmenuArchenemy.SINGLETON_INSTANCE.getCbUseDefaultSchemes().isSelected();

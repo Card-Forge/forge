@@ -9,7 +9,7 @@ import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
 import forge.card.CardEdition;
 import forge.card.CardRules;
 import forge.card.CardRulesReader;
-import forge.item.CardToken;
+import forge.item.PaperToken;
 import forge.properties.NewConstants;
 import forge.util.FileUtil;
 
@@ -40,7 +40,7 @@ public class QuestPetStats {
     @XStreamAsAttribute()
     private String nextLevel;
 
-    private transient CardToken petCard = null;
+    private transient PaperToken petCard = null;
 
     private QuestPetStats() { }
 
@@ -56,11 +56,11 @@ public class QuestPetStats {
         return stats;
     }
 
-    public final CardToken getCard() {
+    public final PaperToken getCard() {
         if (null == petCard) {
             List<String> cardLines = FileUtil.readFile(new File(NewConstants.CARD_DATA_PETS_DIR, cardFile));
             CardRules rules = CardRulesReader.parseSingleCard(cardLines);
-            petCard = new CardToken(rules, CardEdition.UNKNOWN, picture);
+            petCard = new PaperToken(rules, CardEdition.UNKNOWN, picture);
         }
         return petCard;
     }

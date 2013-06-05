@@ -28,20 +28,20 @@ import org.apache.commons.lang3.StringUtils;
 
 import forge.Card;
 import forge.item.CardDb;
-import forge.item.CardPrinted;
+import forge.item.PaperCard;
 import forge.item.ItemPool;
 
 /**
  * Deck section.
  * 
  */
-public class CardPool extends ItemPool<CardPrinted> {
+public class CardPool extends ItemPool<PaperCard> {
 
     /**
      * Instantiates a new deck section.
      */
     public CardPool() {
-        super(CardPrinted.class);
+        super(PaperCard.class);
     }
 
     /**
@@ -49,7 +49,7 @@ public class CardPool extends ItemPool<CardPrinted> {
      *
      * @param cards the cards
      */
-    public CardPool(final Iterable<Entry<CardPrinted, Integer>> cards) {
+    public CardPool(final Iterable<Entry<PaperCard, Integer>> cards) {
         this();
         this.addAll(cards);
     }
@@ -84,7 +84,7 @@ public class CardPool extends ItemPool<CardPrinted> {
      * @param amount the amount
      */
     public void add(final String cardName, final String setCode, final int amount) {
-        CardPrinted cp = CardDb.instance().tryGetCard(cardName, setCode);
+        PaperCard cp = CardDb.instance().tryGetCard(cardName, setCode);
         if ( cp == null )
             cp = CardDb.variants().tryGetCard(cardName, setCode);
 
@@ -112,8 +112,8 @@ public class CardPool extends ItemPool<CardPrinted> {
      * @param list
      *            CardPrinteds to add
      */
-    public void add(final Iterable<CardPrinted> list) {
-        for (CardPrinted cp : list) {
+    public void add(final Iterable<PaperCard> list) {
+        for (PaperCard cp : list) {
             this.add(cp);
         }
     }
@@ -124,7 +124,7 @@ public class CardPool extends ItemPool<CardPrinted> {
      * @param cardName the card name
      */
     public void add(final String cardName, int cnt) {
-        CardPrinted cp = CardDb.instance().tryGetCard(cardName);
+        PaperCard cp = CardDb.instance().tryGetCard(cardName);
         if ( cp == null )
             cp = CardDb.variants().tryGetCard(cardName);
 
@@ -139,8 +139,8 @@ public class CardPool extends ItemPool<CardPrinted> {
      * @param i
      * @return
      */
-    public CardPrinted get(int n) {
-        for(Entry<CardPrinted, Integer> e : this)
+    public PaperCard get(int n) {
+        for(Entry<PaperCard, Integer> e : this)
         {
             n -= e.getValue();
             if ( n <= 0 ) return e.getKey();
@@ -155,7 +155,7 @@ public class CardPool extends ItemPool<CardPrinted> {
         boolean isFirst = true;
         StringBuilder sb = new StringBuilder();
         sb.append('[');
-        for (Entry<CardPrinted, Integer> e : this) {
+        for (Entry<PaperCard, Integer> e : this) {
             if ( isFirst ) isFirst = false; 
             else sb.append(", ");
 

@@ -28,7 +28,7 @@ import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 
 import forge.Singletons;
-import forge.item.CardPrinted;
+import forge.item.PaperCard;
 import forge.item.IPaperCard;
 import forge.util.TextUtil;
 import forge.util.storage.StorageReaderFile;
@@ -48,7 +48,7 @@ public final class CardBlock implements Comparable<CardBlock> {
     private final CardEdition landSet;
     private final int cntBoostersDraft;
     private final int cntBoostersSealed;
-    private Predicate<CardPrinted> filter = null;
+    private Predicate<PaperCard> filter = null;
 
     /**
      * Instantiates a new card block.
@@ -131,14 +131,14 @@ public final class CardBlock implements Comparable<CardBlock> {
      * 
      * @return the filter
      */
-    public Predicate<CardPrinted> getFilter() {
+    public Predicate<PaperCard> getFilter() {
         if (this.filter == null) {
             this.filter = this.buildFilter();
         }
         return this.filter;
     }
 
-    private Predicate<CardPrinted> buildFilter() {
+    private Predicate<PaperCard> buildFilter() {
         final List<String> setCodes = new ArrayList<String>();
         for (final CardEdition set : this.sets) {
             setCodes.add(set.getCode());

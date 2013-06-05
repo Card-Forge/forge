@@ -23,7 +23,7 @@ import java.util.List;
 import java.util.Random;
 
 import forge.gui.GuiChoose;
-import forge.item.CardPrinted;
+import forge.item.PaperCard;
 import forge.util.MyRandom;
 import forge.util.TextUtil;
 
@@ -66,7 +66,7 @@ public class UnOpenedMeta implements IUnOpenedProduct {
      * @return List, list of cards.
      */
     @Override
-    public List<CardPrinted> get() {
+    public List<PaperCard> get() {
         return this.open(true);
     }
 
@@ -78,7 +78,7 @@ public class UnOpenedMeta implements IUnOpenedProduct {
      *      known partialities for the AI.
      * @return List, list of cards.
      */
-    public List<CardPrinted> open(final boolean isHuman) {
+    public List<PaperCard> open(final boolean isHuman) {
 
         if (metaSets.isEmpty()) {
             throw new RuntimeException("Empty UnOpenedMetaset, cannot generate booster.");
@@ -97,7 +97,7 @@ public class UnOpenedMeta implements IUnOpenedProduct {
                 return newBooster.get();
             
             case SelectAll:
-                List<CardPrinted> allCards = new ArrayList<CardPrinted>();
+                List<PaperCard> allCards = new ArrayList<PaperCard>();
                 for (MetaSet ms : metaSets) {
                     allCards.addAll(ms.getBooster().get());
                 }

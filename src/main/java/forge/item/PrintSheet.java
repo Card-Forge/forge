@@ -22,7 +22,7 @@ public class PrintSheet {
     };
 
 
-    private final ItemPool<CardPrinted> cardsWithWeights;
+    private final ItemPool<PaperCard> cardsWithWeights;
 
     
     private final String name;
@@ -30,39 +30,39 @@ public class PrintSheet {
         this(name0, null);
     }
     
-    private PrintSheet(String name0, ItemPool<CardPrinted> pool) {
+    private PrintSheet(String name0, ItemPool<PaperCard> pool) {
         name = name0;
-        cardsWithWeights = pool != null ? pool : new ItemPool<CardPrinted>(CardPrinted.class);
+        cardsWithWeights = pool != null ? pool : new ItemPool<PaperCard>(PaperCard.class);
     }
     
-    public void add(CardPrinted card) {
+    public void add(PaperCard card) {
         add(card,1);
     }
 
-    public void add(CardPrinted card, int weight) {
+    public void add(PaperCard card, int weight) {
         cardsWithWeights.add(card, weight);
     }
 
-    public void addAll(Iterable<CardPrinted> cards) {
+    public void addAll(Iterable<PaperCard> cards) {
         addAll(cards, 1);
     }
 
-    public void addAll(Iterable<CardPrinted> cards, int weight) {
-        for(CardPrinted card : cards)
+    public void addAll(Iterable<PaperCard> cards, int weight) {
+        for(PaperCard card : cards)
             cardsWithWeights.add(card, weight);
     }
     
     /** Cuts cards out of a sheet - they won't be printed again.
     * Please use mutable sheets for cubes only.*/ 
-    public void removeAll(Iterable<CardPrinted> cards) {
-        for(CardPrinted card : cards)
+    public void removeAll(Iterable<PaperCard> cards) {
+        for(PaperCard card : cards)
             cardsWithWeights.remove(card);
     }
 
-    private CardPrinted fetchRoulette(int start, int roulette, Collection<CardPrinted> toSkip) {
+    private PaperCard fetchRoulette(int start, int roulette, Collection<PaperCard> toSkip) {
         int sum = start;
         boolean isSecondRun = start > 0;
-        for(Entry<CardPrinted, Integer> cc : cardsWithWeights ) {
+        for(Entry<PaperCard, Integer> cc : cardsWithWeights ) {
             sum += cc.getValue().intValue();
             if( sum > roulette ) {
                 if( toSkip != null && toSkip.contains(cc.getKey()))
@@ -76,8 +76,8 @@ public class PrintSheet {
         return fetchRoulette(sum + 1, roulette, toSkip); // start over from beginning, in case last cards were to skip
     }
     
-    public List<CardPrinted> random(int number, boolean wantUnique) {
-        List<CardPrinted> result = new ArrayList<CardPrinted>();
+    public List<PaperCard> random(int number, boolean wantUnique) {
+        List<PaperCard> result = new ArrayList<PaperCard>();
 
         int totalWeight = cardsWithWeights.countAll();
         if( totalWeight == 0) {
@@ -88,16 +88,16 @@ public class PrintSheet {
         // If they ask for 40 unique basic lands (to make a fatpack) out of 20 distinct possible, add the whole print run N times.
         int uniqueCards = cardsWithWeights.countDistinct();
         while ( number >= uniqueCards ) {
-            for(Entry<CardPrinted, Integer> kv : cardsWithWeights) {
+            for(Entry<PaperCard, Integer> kv : cardsWithWeights) {
                 result.add(kv.getKey());
             }
             number -= uniqueCards;
         }
 
-        List<CardPrinted> uniques = wantUnique ? new ArrayList<CardPrinted>() : null; 
+        List<PaperCard> uniques = wantUnique ? new ArrayList<PaperCard>() : null; 
         for(int iC = 0; iC < number; iC++) {
             int index = MyRandom.getRandom().nextInt(totalWeight);
-            CardPrinted toAdd = fetchRoulette(0, index, wantUnique ? uniques : null);
+            PaperCard toAdd = fetchRoulette(0, index, wantUnique ? uniques : null);
             result.add(toAdd);
             if( wantUnique )
                 uniques.add(toAdd);
@@ -121,7 +121,7 @@ public class PrintSheet {
         return cardsWithWeights.isEmpty();
     }
 
-    public Iterable<CardPrinted> toFlatList() {
+    public Iterable<PaperCard> toFlatList() {
         return cardsWithWeights.toFlatList();
     }
 

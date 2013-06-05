@@ -35,7 +35,7 @@ import forge.deck.io.DeckFileHeader;
 import forge.deck.io.DeckSerializer;
 import forge.gui.deckeditor.tables.TableSorter;
 import forge.item.CardDb;
-import forge.item.CardPrinted;
+import forge.item.PaperCard;
 import forge.item.IPaperCard;
 import forge.item.ItemPoolView;
 import forge.util.FileSection;
@@ -197,17 +197,17 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
 
 
 
-    private static List<String> writeCardPool(final ItemPoolView<CardPrinted> pool) {
-        final List<Entry<CardPrinted, Integer>> main2sort = pool.getOrderedList();
+    private static List<String> writeCardPool(final ItemPoolView<PaperCard> pool) {
+        final List<Entry<PaperCard, Integer>> main2sort = pool.getOrderedList();
         Collections.sort(main2sort, TableSorter.BY_NAME_THEN_SET);
         final List<String> out = new ArrayList<String>();
-        for (final Entry<CardPrinted, Integer> e : main2sort) {
+        for (final Entry<PaperCard, Integer> e : main2sort) {
             out.add(serializeSingleCard(e.getKey(), e.getValue()));
         }
         return out;
     }
 
-    private static String serializeSingleCard(CardPrinted card, Integer n) {
+    private static String serializeSingleCard(PaperCard card, Integer n) {
 
         final boolean hasBadSetInfo = "???".equals(card.getEdition()) || StringUtils.isBlank(card.getEdition());
         StringBuilder sb = new StringBuilder();

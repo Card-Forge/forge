@@ -41,7 +41,7 @@ import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.item.BoosterPack;
 import forge.item.CardDb;
-import forge.item.CardPrinted;
+import forge.item.PaperCard;
 import forge.item.FatPack;
 import forge.item.IPaperCard;
 import forge.item.InventoryItem;
@@ -88,9 +88,9 @@ public final class QuestUtilCards {
      * @param usedFormat currently enforced game format, if any
      * @return the item pool view
      */
-    public static ItemPoolView<CardPrinted> generateBasicLands(final int nBasic, final int nSnow, final GameFormatQuest usedFormat) {
+    public static ItemPoolView<PaperCard> generateBasicLands(final int nBasic, final int nSnow, final GameFormatQuest usedFormat) {
         final CardDb db = CardDb.instance();
-        final ItemPool<CardPrinted> pool = new ItemPool<CardPrinted>(CardPrinted.class);
+        final ItemPool<PaperCard> pool = new ItemPool<PaperCard>(PaperCard.class);
 
         List<String> landCodes = new ArrayList<String>();
         List<String> snowLandCodes = new ArrayList<String>();
@@ -148,7 +148,7 @@ public final class QuestUtilCards {
      *            the f sets
      * @return the array list
      */
-    public List<CardPrinted> generateQuestBooster(final Predicate<CardPrinted> fSets) {
+    public List<PaperCard> generateQuestBooster(final Predicate<PaperCard> fSets) {
         UnOpenedProduct unopened = new UnOpenedProduct(getBoosterTemplate(), fSets);
         return unopened.get();
     }
@@ -159,8 +159,8 @@ public final class QuestUtilCards {
      * @param newCards
      *            the new cards
      */
-    public void addAllCards(final Iterable<CardPrinted> newCards) {
-        for (final CardPrinted card : newCards) {
+    public void addAllCards(final Iterable<PaperCard> newCards) {
+        for (final PaperCard card : newCards) {
             this.addSingleCard(card, 1);
         }
     }
@@ -171,14 +171,14 @@ public final class QuestUtilCards {
      * @param card
      *            the card
      */
-    public void addSingleCard(final CardPrinted card, int qty) {
+    public void addSingleCard(final PaperCard card, int qty) {
         this.qa.getCardPool().add(card, qty);
 
         // register card into that list so that it would appear as a new one.
         this.qa.getNewCardList().add(card, qty);
     }
 
-    private static final Predicate<CardPrinted> RARE_PREDICATE = IPaperCard.Predicates.Presets.IS_RARE_OR_MYTHIC;
+    private static final Predicate<PaperCard> RARE_PREDICATE = IPaperCard.Predicates.Presets.IS_RARE_OR_MYTHIC;
 
 
     /**
@@ -187,7 +187,7 @@ public final class QuestUtilCards {
      *  the predicate to be added to the format predicate.
      * @return the composite predicate.
      */
-    public Predicate<CardPrinted> applyFormatFilter(Predicate<CardPrinted> source) {
+    public Predicate<PaperCard> applyFormatFilter(Predicate<PaperCard> source) {
        return qc.getFormat() == null ? source : Predicates.and(source, qc.getFormat().getFilterPrinted());
     }
 
@@ -196,11 +196,11 @@ public final class QuestUtilCards {
      * 
      * @return the card printed
      */
-    public CardPrinted addRandomRare() {
+    public PaperCard addRandomRare() {
 
-        final Predicate<CardPrinted> myFilter = applyFormatFilter(QuestUtilCards.RARE_PREDICATE);
+        final Predicate<PaperCard> myFilter = applyFormatFilter(QuestUtilCards.RARE_PREDICATE);
 
-        final CardPrinted card = Aggregates.random(Iterables.filter(CardDb.instance().getAllCards(), myFilter));
+        final PaperCard card = Aggregates.random(Iterables.filter(CardDb.instance().getAllCards(), myFilter));
         this.addSingleCard(card, 1);
         return card;
     }
@@ -212,10 +212,10 @@ public final class QuestUtilCards {
      *            the n
      * @return the list
      */
-    public List<CardPrinted> addRandomRare(final int n) {
-        final Predicate<CardPrinted> myFilter = applyFormatFilter(QuestUtilCards.RARE_PREDICATE);
+    public List<PaperCard> addRandomRare(final int n) {
+        final Predicate<PaperCard> myFilter = applyFormatFilter(QuestUtilCards.RARE_PREDICATE);
 
-        final List<CardPrinted> newCards = Aggregates.random(Iterables.filter(CardDb.instance().getAllCards(), myFilter), n);
+        final List<PaperCard> newCards = Aggregates.random(Iterables.filter(CardDb.instance().getAllCards(), myFilter), n);
         this.addAllCards(newCards);
         return newCards;
     }
@@ -228,7 +228,7 @@ public final class QuestUtilCards {
      * @param idxDifficulty
      *            the idx difficulty
      */
-    public void setupNewGameCardPool(final Predicate<CardPrinted> filter, final int idxDifficulty) {
+    public void setupNewGameCardPool(final Predicate<PaperCard> filter, final int idxDifficulty) {
         final int nC = this.qpref.getPrefInt(DifficultyPrefs.STARTING_COMMONS, idxDifficulty);
         final int nU = this.qpref.getPrefInt(DifficultyPrefs.STARTING_UNCOMMONS, idxDifficulty);
         final int nR = this.qpref.getPrefInt(DifficultyPrefs.STARTING_RARES, idxDifficulty);
@@ -244,7 +244,7 @@ public final class QuestUtilCards {
      * @param value
      *            the value
      */
-    public void buyCard(final CardPrinted card, int qty, final int value) {
+    public void buyCard(final PaperCard card, int qty, final int value) {
         int totalCost = qty * value;
         if (this.qa.getCredits() >= totalCost) {
             this.qa.setCredits(this.qa.getCredits() - totalCost);
@@ -309,11 +309,11 @@ public final class QuestUtilCards {
      * @param price
      *            the price
      */
-    public void sellCard(final CardPrinted card, int qty, final int pricePerCard) {
+    public void sellCard(final PaperCard card, int qty, final int pricePerCard) {
         this.sellCard(card, qty, pricePerCard, true);
     }
 
-    public void loseCard(final CardPrinted card, int qty) {
+    public void loseCard(final PaperCard card, int qty) {
         this.sellCard(card, qty, 0, false);
     }
 
@@ -327,7 +327,7 @@ public final class QuestUtilCards {
      * @param addToShop
      *            true if this card should be added to the shop, false otherwise
      */
-    private void sellCard(final CardPrinted card, int qty, final int pricePerCard, final boolean addToShop) {
+    private void sellCard(final PaperCard card, int qty, final int pricePerCard, final boolean addToShop) {
         if (pricePerCard > 0) {
             this.qa.setCredits(this.qa.getCredits() + (qty * pricePerCard));
         }
@@ -558,7 +558,7 @@ public final class QuestUtilCards {
      * 
      * @return the cardpool
      */
-    public ItemPool<CardPrinted> getCardpool() {
+    public ItemPool<PaperCard> getCardpool() {
         return this.qa.getCardPool();
     }
 
@@ -632,14 +632,14 @@ public final class QuestUtilCards {
     
     public int getCompletionPercent(String edition) {
         // get all cards in the specified edition
-        Predicate<CardPrinted> filter = IPaperCard.Predicates.printedInSet(edition);
-        Iterable<CardPrinted> editionCards = Iterables.filter(CardDb.instance().getAllCards(), filter);
+        Predicate<PaperCard> filter = IPaperCard.Predicates.printedInSet(edition);
+        Iterable<PaperCard> editionCards = Iterables.filter(CardDb.instance().getAllCards(), filter);
 
-        ItemPool<CardPrinted> ownedCards = qa.getCardPool();
+        ItemPool<PaperCard> ownedCards = qa.getCardPool();
         // 100% means at least one of every basic land and at least 4 of every other card in the set
         int completeCards = 0;
         int numOwnedCards = 0;
-        for (CardPrinted card : editionCards) {
+        for (PaperCard card : editionCards) {
             final int target = CardRarity.BasicLand == card.getRarity() ? 1 : 4;
             
             completeCards += target;
@@ -655,8 +655,8 @@ public final class QuestUtilCards {
         @Override
         public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
             InventoryItem i = from.getKey();
-            if (i instanceof CardPrinted) {
-                return QuestUtilCards.this.qa.getCardPool().count((CardPrinted)i);
+            if (i instanceof PaperCard) {
+                return QuestUtilCards.this.qa.getCardPool().count((PaperCard)i);
             } else if (i instanceof PreconDeck) {
                 PreconDeck pDeck = (PreconDeck)i;
                 return Singletons.getModel().getQuest().getMyDecks().contains(pDeck.getName()) ? -1 : -2;
@@ -673,8 +673,8 @@ public final class QuestUtilCards {
         @Override
         public Object apply(final Entry<InventoryItem, Integer> from) {
             InventoryItem i = from.getKey();
-            if (i instanceof CardPrinted) {
-                return QuestUtilCards.this.qa.getCardPool().count((CardPrinted)i);
+            if (i instanceof PaperCard) {
+                return QuestUtilCards.this.qa.getCardPool().count((PaperCard)i);
             } else if (i instanceof PreconDeck) {
                 PreconDeck pDeck = (PreconDeck)i;
                 return Singletons.getModel().getQuest().getMyDecks().contains(pDeck.getName()) ? "YES" : "NO";

@@ -24,7 +24,7 @@ import java.util.List;
 import com.google.common.base.Predicate;
 import forge.Singletons;
 import forge.game.limited.CustomLimited;
-import forge.item.CardPrinted;
+import forge.item.PaperCard;
 import forge.item.IPaperCard;
 import forge.util.FileUtil;
 
@@ -173,7 +173,7 @@ public class MetaSet {
                 return new UnOpenedProduct(Singletons.getModel().getTournamentPacks().get(data));
 
             case JoinedSet:
-                Predicate<CardPrinted> predicate = IPaperCard.Predicates.printedInSets(data.split(" "));
+                Predicate<PaperCard> predicate = IPaperCard.Predicates.printedInSets(data.split(" "));
                 return new UnOpenedProduct(BoosterTemplate.genericBooster, predicate);
 
             case Choose: return UnOpenedMeta.choose(data);

@@ -26,7 +26,7 @@ import org.apache.commons.lang3.tuple.Pair;
 import forge.Constant.Preferences;
 import forge.card.ColorSet;
 import forge.deck.Deck;
-import forge.item.CardPrinted;
+import forge.item.PaperCard;
 import forge.util.Aggregates;
 
 /**
@@ -48,7 +48,7 @@ public class BoosterDraftAI {
     private static final int N_DECKS = 7;
 
     // holds all the cards for each of the computer's decks
-    private final List<List<CardPrinted>> deck = new ArrayList<List<CardPrinted>>();
+    private final List<List<PaperCard>> deck = new ArrayList<List<PaperCard>>();
     private final ArrayList<DeckColors> playerColors = new ArrayList<DeckColors>();
 
     private ReadDraftRankings draftRankings;
@@ -66,7 +66,7 @@ public class BoosterDraftAI {
      *            a int.
      * @return a {@link forge.CardList} object.
      */
-    public CardPrinted choose(final List<CardPrinted> chooseFrom, final int player) {
+    public PaperCard choose(final List<PaperCard> chooseFrom, final int player) {
         if (Preferences.DEV_MODE) {
             System.out.println("Player[" + player + "] pack: " + chooseFrom.toString());
         }
@@ -75,9 +75,9 @@ public class BoosterDraftAI {
         ColorSet currentChoice = deckCols.getChosenColors();
         boolean canAddMoreColors = deckCols.canChoseMoreColors();
         
-        List<Pair<CardPrinted, Double>> rankedCards = rankCards(chooseFrom);
+        List<Pair<PaperCard, Double>> rankedCards = rankCards(chooseFrom);
         
-        for(Pair<CardPrinted, Double> p : rankedCards) {
+        for(Pair<PaperCard, Double> p : rankedCards) {
             // If a card is not ai playable, somewhat decrease its rating
             if( p.getKey().getRules().getAiHints().getRemAIDecks() )
                 p.setValue(p.getValue() + TAKE_BEST_THRESHOLD);
@@ -89,8 +89,8 @@ public class BoosterDraftAI {
 
         int cntBestCards = 0;
         double bestRanking = Double.MAX_VALUE;
-        CardPrinted bestPick = null;
-        for(Pair<CardPrinted, Double> p : rankedCards) { 
+        PaperCard bestPick = null;
+        for(Pair<PaperCard, Double> p : rankedCards) { 
             double rating = p.getValue();
             if( rating < bestRanking )
             {
@@ -103,8 +103,8 @@ public class BoosterDraftAI {
         }
 
         if (cntBestCards > 1) {
-            final List<CardPrinted> possiblePick = new ArrayList<CardPrinted>();
-            for(Pair<CardPrinted, Double> p : rankedCards) {
+            final List<PaperCard> possiblePick = new ArrayList<PaperCard>();
+            for(Pair<PaperCard, Double> p : rankedCards) {
                 if ( p.getValue() == bestRanking )
                     possiblePick.add(p.getKey());
             }
@@ -129,9 +129,9 @@ public class BoosterDraftAI {
      *            List of cards
      * @return map of rankings
      */
-    private List<Pair<CardPrinted, Double>> rankCards(final Iterable<CardPrinted> chooseFrom) {
-        List<Pair<CardPrinted, Double>> rankedCards = new ArrayList<Pair<CardPrinted,Double>>();
-        for (CardPrinted card : chooseFrom) {
+    private List<Pair<PaperCard, Double>> rankCards(final Iterable<PaperCard> chooseFrom) {
+        List<Pair<PaperCard, Double>> rankedCards = new ArrayList<Pair<PaperCard,Double>>();
+        for (PaperCard card : chooseFrom) {
             Double rkg = draftRankings.getRanking(card.getName(), card.getEdition());
             if (rkg != null) {
                 rankedCards.add(MutablePair.of(card, rkg));
@@ -171,7 +171,7 @@ public class BoosterDraftAI {
     public BoosterDraftAI() {
         // Initialize deck array and playerColors list
         for (int i = 0; i < N_DECKS; i++) {
-            this.deck.add(new ArrayList<CardPrinted>());
+            this.deck.add(new ArrayList<PaperCard>());
             this.playerColors.add(new DeckColors());
         }
 

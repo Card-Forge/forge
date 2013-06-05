@@ -26,7 +26,7 @@ import org.apache.commons.lang3.StringUtils;
 import forge.ImageCache;
 import forge.card.CardRules;
 import forge.item.CardDb;
-import forge.item.CardPrinted;
+import forge.item.PaperCard;
 import forge.properties.NewConstants;
 
 @SuppressWarnings("serial")
@@ -39,13 +39,13 @@ public class GuiDownloadPicturesLQ extends GuiDownloader {
     protected final Map<String, String> getNeededImages() {
         Map<String, String> downloads = new TreeMap<String, String>(String.CASE_INSENSITIVE_ORDER);
 
-        for (CardPrinted c : CardDb.instance().getAllCards()) {
+        for (PaperCard c : CardDb.instance().getAllCards()) {
             addDLObject(c, downloads, false);
             if (ImageCache.hasBackFacePicture(c))
                 addDLObject(c, downloads, true);
         }
 
-        for (CardPrinted c : CardDb.variants().getAllCards()) {
+        for (PaperCard c : CardDb.variants().getAllCards()) {
             addDLObject(c, downloads, false);
         }
         
@@ -55,7 +55,7 @@ public class GuiDownloadPicturesLQ extends GuiDownloader {
         return downloads;
     }
 
-    private void addDLObject(CardPrinted c, Map<String, String> downloads, boolean backFace) {
+    private void addDLObject(PaperCard c, Map<String, String> downloads, boolean backFace) {
         CardRules cardRules = c.getRules();
         String urls = cardRules.getPictureUrl(backFace);
         if (StringUtils.isEmpty(urls)) {

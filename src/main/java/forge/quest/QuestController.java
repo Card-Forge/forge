@@ -31,7 +31,7 @@ import forge.deck.Deck;
 import forge.game.GameFormat;
 import forge.game.event.GameEvent;
 import forge.game.event.GameEventMulligan;
-import forge.item.CardPrinted;
+import forge.item.PaperCard;
 import forge.item.PreconDeck;
 import forge.properties.NewConstants;
 import forge.quest.bazaar.QuestBazaarManager;
@@ -236,7 +236,7 @@ public class QuestController {
         if (null != startingCards) {
             this.myCards.addDeck(startingCards);
         } else {
-            Predicate<CardPrinted> filter = Predicates.alwaysTrue();
+            Predicate<PaperCard> filter = Predicates.alwaysTrue();
             if (formatStartingPool != null) {
                 filter = formatStartingPool.getFilterPrinted();
             }

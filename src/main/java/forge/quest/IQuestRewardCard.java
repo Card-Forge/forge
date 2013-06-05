@@ -2,7 +2,7 @@ package forge.quest;
 
 import java.util.List;
 
-import forge.item.CardPrinted;
+import forge.item.PaperCard;
 import forge.item.InventoryItem;
 
 /** 
@@ -17,6 +17,6 @@ public interface IQuestRewardCard extends InventoryItem {
      * Returns an unmodifiable list of card choices.
      * @return List<CardPrinted>, an umodifiable list of cards.
      */
-    List<CardPrinted> getChoices();
+    List<PaperCard> getChoices();
 
 }

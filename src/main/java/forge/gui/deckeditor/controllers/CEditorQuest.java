@@ -44,7 +44,7 @@ import forge.gui.deckeditor.views.VDeckgen;
 import forge.gui.framework.DragCell;
 import forge.gui.home.quest.CSubmenuQuestDecks;
 import forge.gui.toolbox.FLabel;
-import forge.item.CardPrinted;
+import forge.item.PaperCard;
 import forge.item.InventoryItem;
 import forge.item.ItemPool;
 import forge.quest.QuestController;
@@ -61,14 +61,14 @@ import forge.quest.QuestController;
  * @author Forge
  * @version $Id$
  */
-public final class CEditorQuest extends ACEditorBase<CardPrinted, Deck> {
+public final class CEditorQuest extends ACEditorBase<PaperCard, Deck> {
     private final QuestController questData;
     private final DeckController<Deck> controller;
     private DragCell allDecksParent = null;
     private DragCell deckGenParent = null;
     private boolean sideboardMode = false;
 
-    private Map<CardPrinted, Integer> decksUsingMyCards;
+    private Map<PaperCard, Integer> decksUsingMyCards;
 
     private final Function<Entry<InventoryItem, Integer>, Comparable<?>> fnDeckCompare = new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
         @Override
@@ -96,8 +96,8 @@ public final class CEditorQuest extends ACEditorBase<CardPrinted, Deck> {
     public CEditorQuest(final QuestController questData0) {
         this.questData = questData0;
 
-        final EditorTableView<CardPrinted> tblCatalog = new EditorTableView<CardPrinted>(false, CardPrinted.class);
-        final EditorTableView<CardPrinted> tblDeck = new EditorTableView<CardPrinted>(false, CardPrinted.class);
+        final EditorTableView<PaperCard> tblCatalog = new EditorTableView<PaperCard>(false, PaperCard.class);
+        final EditorTableView<PaperCard> tblDeck = new EditorTableView<PaperCard>(false, PaperCard.class);
 
         tblCatalog.setAlwaysNonUnique(true);
         tblDeck.setAlwaysNonUnique(true);
@@ -121,19 +121,19 @@ public final class CEditorQuest extends ACEditorBase<CardPrinted, Deck> {
     /**
      * Adds any card to the catalog and data pool.
      * 
-     * @param card {@link forge.item.CardPrinted}
+     * @param card {@link forge.item.PaperCard}
      */
-    public void addCheatCard(final CardPrinted card, int qty) {
+    public void addCheatCard(final PaperCard card, int qty) {
         this.getTableCatalog().addCard(card, qty);
         this.questData.getCards().getCardpool().add(card, qty);
     }
 
     // fills number of decks using each card
-    private Map<CardPrinted, Integer> countDecksForEachCard() {
-        final Map<CardPrinted, Integer> result = new HashMap<CardPrinted, Integer>();
+    private Map<PaperCard, Integer> countDecksForEachCard() {
+        final Map<PaperCard, Integer> result = new HashMap<PaperCard, Integer>();
         for (final Deck deck : this.questData.getMyDecks()) {
-            for (final Entry<CardPrinted, Integer> e : deck.getMain()) {
-                final CardPrinted card = e.getKey();
+            for (final Entry<PaperCard, Integer> e : deck.getMain()) {
+                final PaperCard card = e.getKey();
                 final Integer amount = result.get(card);
                 result.put(card, Integer.valueOf(amount == null ? 1 : 1 + amount.intValue()));
             }
@@ -148,11 +148,11 @@ public final class CEditorQuest extends ACEditorBase<CardPrinted, Deck> {
      */
     @Override
     public void addCard(InventoryItem item, boolean toAlternate, int qty) {
-        if ((item == null) || !(item instanceof CardPrinted)) {
+        if ((item == null) || !(item instanceof PaperCard)) {
             return;
         }
 
-        final CardPrinted card = (CardPrinted) item;
+        final PaperCard card = (PaperCard) item;
         if (toAlternate) {
             // if we're in sideboard mode, the library will get adjusted properly when we call resetTables()
             if (!sideboardMode) {
@@ -170,11 +170,11 @@ public final class CEditorQuest extends ACEditorBase<CardPrinted, Deck> {
      */
     @Override
     public void removeCard(InventoryItem item, boolean toAlternate, int qty) {
-        if ((item == null) || !(item instanceof CardPrinted)) {
+        if ((item == null) || !(item instanceof PaperCard)) {
             return;
         }
 
-        final CardPrinted card = (CardPrinted) item;
+        final PaperCard card = (PaperCard) item;
         if (toAlternate) {
             // if we're in sideboard mode, the library will get adjusted properly when we call resetTables()
             if (!sideboardMode) {
@@ -209,7 +209,7 @@ public final class CEditorQuest extends ACEditorBase<CardPrinted, Deck> {
     public void resetTables() {
         final Deck deck = this.controller.getModel();
 
-        final ItemPool<CardPrinted> cardpool = new ItemPool<CardPrinted>(CardPrinted.class);
+        final ItemPool<PaperCard> cardpool = new ItemPool<PaperCard>(PaperCard.class);
         cardpool.addAll(this.questData.getCards().getCardpool());
         // remove bottom cards that are in the deck from the card pool
         cardpool.removeAll(deck.getMain());

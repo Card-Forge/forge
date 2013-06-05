@@ -53,7 +53,7 @@ import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.input.InputSelectCardsFromList;
 import forge.item.CardDb;
-import forge.item.CardPrinted;
+import forge.item.PaperCard;
 import forge.item.IPaperCard;
 
 public final class GuiDisplayUtil {
@@ -375,7 +375,7 @@ public final class GuiDisplayUtil {
             return;
         }
 
-        final List<CardPrinted> cards =  Lists.newArrayList(CardDb.instance().getUniqueCards());
+        final List<PaperCard> cards =  Lists.newArrayList(CardDb.instance().getUniqueCards());
         Collections.sort(cards);
 
         // use standard forge's list selection dialog
@@ -397,7 +397,7 @@ public final class GuiDisplayUtil {
             return;
         }
 
-        final List<CardPrinted> cards =  Lists.newArrayList(CardDb.instance().getUniqueCards());
+        final List<PaperCard> cards =  Lists.newArrayList(CardDb.instance().getUniqueCards());
         Collections.sort(cards);
 
         // use standard forge's list selection dialog
@@ -471,8 +471,8 @@ public final class GuiDisplayUtil {
         if (game.getMatch().getGameType() != GameType.Planechase) { return; }
         final Player p = game.getPhaseHandler().getPlayerTurn();
 
-        final List<CardPrinted> allPlanars = new ArrayList<CardPrinted>();
-        for (CardPrinted c : CardDb.variants().getAllCards()) {
+        final List<PaperCard> allPlanars = new ArrayList<PaperCard>();
+        for (PaperCard c : CardDb.variants().getAllCards()) {
             if (c.getRules().getType().isPlane() || c.getRules().getType().isPhenomenon()) {
                 allPlanars.add(c);
             }

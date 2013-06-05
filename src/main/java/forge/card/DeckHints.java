@@ -10,7 +10,7 @@ import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
-import forge.item.CardPrinted;
+import forge.item.PaperCard;
 import forge.util.PredicateString.StringOp;
 
 /**
@@ -80,36 +80,36 @@ public class DeckHints {
      *            list of cards to be filtered
      * @return List<Card> of Cards that match this DeckHints.
      */
-    public List<CardPrinted> filter(Iterable<CardPrinted> cardList) {
-        List<CardPrinted> ret;
+    public List<PaperCard> filter(Iterable<PaperCard> cardList) {
+        List<PaperCard> ret;
         switch (type) {
         case TYPE:
-            ret = new ArrayList<CardPrinted>();
+            ret = new ArrayList<PaperCard>();
             String[] types = filterParam.split("\\|");
             for (String type : types) {
-                addMatchingItems(ret, cardList, CardRulesPredicates.subType(type), CardPrinted.FN_GET_RULES);
+                addMatchingItems(ret, cardList, CardRulesPredicates.subType(type), PaperCard.FN_GET_RULES);
             }
             break;
         case COLOR:
-            ret = new ArrayList<CardPrinted>();
+            ret = new ArrayList<PaperCard>();
             String[] colors = filterParam.split("\\|");
             for (String color : colors) {
                 ColorSet cc = ColorSet.fromNames(color);
-                addMatchingItems(ret, cardList, CardRulesPredicates.isColor(cc.getColor()), CardPrinted.FN_GET_RULES);
+                addMatchingItems(ret, cardList, CardRulesPredicates.isColor(cc.getColor()), PaperCard.FN_GET_RULES);
             }
             break;
         case KEYWORD:
-            ret = new ArrayList<CardPrinted>();
+            ret = new ArrayList<PaperCard>();
             String[] keywords = filterParam.split("\\|");
             for (String keyword : keywords) {
-                addMatchingItems(ret, cardList, CardRulesPredicates.hasKeyword(keyword), CardPrinted.FN_GET_RULES);
+                addMatchingItems(ret, cardList, CardRulesPredicates.hasKeyword(keyword), PaperCard.FN_GET_RULES);
             }
             break;
         case NAME:
-            ret = new ArrayList<CardPrinted>();
+            ret = new ArrayList<PaperCard>();
             String[] names = filterParam.split("\\|");
             for (String name : names) {
-                addMatchingItems(ret, cardList, CardRulesPredicates.name(StringOp.EQUALS, name), CardPrinted.FN_GET_RULES);
+                addMatchingItems(ret, cardList, CardRulesPredicates.name(StringOp.EQUALS, name), PaperCard.FN_GET_RULES);
             }
             break;
         default:

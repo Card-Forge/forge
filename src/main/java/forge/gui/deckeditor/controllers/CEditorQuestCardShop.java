@@ -55,7 +55,7 @@ import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FSkin;
 import forge.item.BoosterPack;
 import forge.item.CardDb;
-import forge.item.CardPrinted;
+import forge.item.PaperCard;
 import forge.item.FatPack;
 import forge.item.IPaperCard;
 import forge.item.InventoryItem;
@@ -220,11 +220,11 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
         final ItemPool<InventoryItem> result = new ItemPool<InventoryItem>(InventoryItem.class);
         for (final Deck deck : this.questData.getMyDecks()) {
             CardPool main = deck.getMain();
-            for (final Entry<CardPrinted, Integer> e : main) {
+            for (final Entry<PaperCard, Integer> e : main) {
                 result.add(e.getKey());
             }
             if (deck.has(DeckSection.Sideboard)) {
-                for (final Entry<CardPrinted, Integer> e : deck.get(DeckSection.Sideboard)) {
+                for (final Entry<PaperCard, Integer> e : deck.get(DeckSection.Sideboard)) {
                     // only add card if we haven't already encountered it in main
                     if (!main.contains(e.getKey())) {
                         result.add(e.getKey());
@@ -237,15 +237,15 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
 
     private Integer getCardValue(final InventoryItem card) {
         String ns = null;
-        if (card instanceof CardPrinted) {
-            ns = card.getName() + "|" + ((CardPrinted) card).getEdition();
+        if (card instanceof PaperCard) {
+            ns = card.getName() + "|" + ((PaperCard) card).getEdition();
         } else {
             ns = card.getName();
         }
 
         if (this.mapPrices.containsKey(ns)) {
             return this.mapPrices.get(ns);
-        } else if (card instanceof CardPrinted) {
+        } else if (card instanceof PaperCard) {
             switch (((IPaperCard) card).getRarity()) {
             case BasicLand:
                 return Integer.valueOf(4);
@@ -325,8 +325,8 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
             return;
         }
         
-        if (item instanceof CardPrinted) {
-            final CardPrinted card = (CardPrinted) item;
+        if (item instanceof PaperCard) {
+            final PaperCard card = (PaperCard) item;
             this.getTableDeck().addCard(card, qty);
             this.getTableCatalog().removeCard(item, qty);
             this.questData.getCards().buyCard(card, qty, value);
@@ -342,7 +342,7 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
                     booster = (FatPack) ((FatPack) item).clone();
                 }
                 this.questData.getCards().buyPack(booster, value);
-                final List<CardPrinted> newCards = booster.getCards();
+                final List<PaperCard> newCards = booster.getCards();
                 final List<InventoryItem> newInventory = new LinkedList<InventoryItem>(newCards);
                 getTableDeck().addCards(newInventory);
                 final CardListViewer c = new CardListViewer(booster.getName(),
@@ -375,11 +375,11 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
      */
     @Override
     public void removeCard(InventoryItem item, boolean toAlternate, int qty) {
-        if ((item == null) || !(item instanceof CardPrinted) || showingFullCatalog || toAlternate) {
+        if ((item == null) || !(item instanceof PaperCard) || showingFullCatalog || toAlternate) {
             return;
         }
 
-        final CardPrinted card = (CardPrinted) item;
+        final PaperCard card = (PaperCard) item;
         this.getTableCatalog().addCard(card, qty);
         this.getTableDeck().removeCard(card, qty);
 
@@ -414,10 +414,10 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
         this.getTableDeck().removeCards(cardsToRemove);
 
         for (Map.Entry<InventoryItem, Integer> item : cardsToRemove) {
-            if (!(item.getKey() instanceof CardPrinted)) {
+            if (!(item.getKey() instanceof PaperCard)) {
                 continue;
             }
-            CardPrinted card = (CardPrinted)item.getKey();
+            PaperCard card = (PaperCard)item.getKey();
             final int price = Math.min((int) (this.multiplier * this.getCardValue(card)),
                     this.questData.getCards().getSellPriceLimit());
             this.questData.getCards().sellCard(card, item.getValue(), price);
@@ -470,7 +470,7 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
             public void run() {
                 List<Map.Entry<InventoryItem, Integer>> cardsToRemove = new LinkedList<Map.Entry<InventoryItem,Integer>>();
                 for (Map.Entry<InventoryItem, Integer> item : getTableDeck().getCards()) {
-                    CardPrinted card = (CardPrinted)item.getKey();
+                    PaperCard card = (PaperCard)item.getKey();
                     int numToKeep = card.getRules().getType().isBasic() ? 50 : 4;
                     if ("Relentless Rats".equals(card.getName())) {
                         numToKeep = Integer.MAX_VALUE;

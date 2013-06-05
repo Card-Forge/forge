@@ -23,7 +23,7 @@ import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
 import forge.deck.CardPool;
 import forge.error.BugReporter;
 import forge.item.CardDb;
-import forge.item.CardPrinted;
+import forge.item.PaperCard;
 import forge.properties.NewConstants;
 import forge.util.IgnoringXStream;
 
@@ -138,7 +138,7 @@ public class GauntletIO {
 
         @Override
         public void marshal(final Object source, final HierarchicalStreamWriter writer, final MarshallingContext context) {
-            for (final Entry<CardPrinted, Integer> e : (CardPool) source) {
+            for (final Entry<PaperCard, Integer> e : (CardPool) source) {
                 this.writeCardPrinted(e.getKey(), e.getValue(), writer);
             }
         }
@@ -163,7 +163,7 @@ public class GauntletIO {
             return result;
         }
 
-        private void writeCardPrinted(final CardPrinted cref, final Integer count, final HierarchicalStreamWriter writer) {
+        private void writeCardPrinted(final PaperCard cref, final Integer count, final HierarchicalStreamWriter writer) {
             writer.startNode("card");
             writer.addAttribute("c", cref.getName());
             writer.addAttribute("s", cref.getEdition());
@@ -177,14 +177,14 @@ public class GauntletIO {
             writer.endNode();
         }
 
-        private CardPrinted readCardPrinted(final HierarchicalStreamReader reader) {
+        private PaperCard readCardPrinted(final HierarchicalStreamReader reader) {
             final String name = reader.getAttribute("c");
             final String set = reader.getAttribute("s");
             final String sIndex = reader.getAttribute("i");
             final short index = StringUtils.isNumeric(sIndex) ? Short.parseShort(sIndex) : 0;
             final boolean foil = "1".equals(reader.getAttribute("foil"));
-            final CardPrinted card = CardDb.instance().getCard(name, set, index);
-            return foil ? CardPrinted.makeFoiled(card) : card;
+            final PaperCard card = CardDb.instance().getCard(name, set, index);
+            return foil ? PaperCard.makeFoiled(card) : card;
         }
     }
 }

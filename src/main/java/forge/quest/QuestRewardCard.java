@@ -8,7 +8,7 @@ import com.google.common.base.Predicates;
 
 import forge.Singletons;
 import forge.card.CardRules;
-import forge.item.CardPrinted;
+import forge.item.PaperCard;
 import forge.item.IPaperCard;
 import forge.item.InventoryItem;
 
@@ -49,14 +49,14 @@ public abstract class QuestRewardCard implements InventoryItem, IQuestRewardCard
         return defaultDescription;
     }
 
-    protected Predicate<CardPrinted> buildPredicates(final String [] input) {
+    protected Predicate<PaperCard> buildPredicates(final String [] input) {
         if (input == null || input.length < 1) {
             return null;
         }
     
-        Predicate<CardPrinted> filters = Singletons.getModel().getQuest().getFormat().getFilterPrinted();
+        Predicate<PaperCard> filters = Singletons.getModel().getQuest().getFormat().getFilterPrinted();
         Predicate<CardRules> filterRules = null;
-        Predicate<CardPrinted> filterRarity = null;
+        Predicate<PaperCard> filterRarity = null;
     
         for (String s : input) {
             if (s.startsWith("sets:") || s.startsWith("Sets:")) {
@@ -112,7 +112,7 @@ public abstract class QuestRewardCard implements InventoryItem, IQuestRewardCard
         }
     
         if (filterRules != null) {
-            final Predicate<CardPrinted> rulesPrinted = Predicates.compose(filterRules, CardPrinted.FN_GET_RULES);
+            final Predicate<PaperCard> rulesPrinted = Predicates.compose(filterRules, PaperCard.FN_GET_RULES);
             filters = Predicates.and(filters, rulesPrinted);
         }
         if (filterRarity != null) {
@@ -121,6 +121,6 @@ public abstract class QuestRewardCard implements InventoryItem, IQuestRewardCard
         return filters;
     }
 
-    public abstract List<CardPrinted> getChoices();
+    public abstract List<PaperCard> getChoices();
 
 }

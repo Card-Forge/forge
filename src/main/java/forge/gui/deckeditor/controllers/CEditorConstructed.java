@@ -42,7 +42,7 @@ import forge.gui.deckeditor.views.VCurrentDeck;
 import forge.gui.framework.EDocID;
 import forge.gui.toolbox.FLabel;
 import forge.item.CardDb;
-import forge.item.CardPrinted;
+import forge.item.PaperCard;
 import forge.item.InventoryItem;
 import forge.item.ItemPool;
 import forge.item.ItemPoolView;
@@ -58,17 +58,17 @@ import forge.properties.ForgePreferences.FPref;
  * @author Forge
  * @version $Id$
  */
-public final class CEditorConstructed extends ACEditorBase<CardPrinted, Deck> {
+public final class CEditorConstructed extends ACEditorBase<PaperCard, Deck> {
     private final DeckController<Deck> controller;
     //private boolean sideboardMode = false;
     
     private List<DeckSection> allSections = new ArrayList<DeckSection>();
     private DeckSection sectionMode = DeckSection.Main;
     
-    private final ItemPoolView<CardPrinted> avatarPool;
-    private final ItemPoolView<CardPrinted> planePool;
-    private final ItemPoolView<CardPrinted> schemePool;
-    private final ItemPoolView<CardPrinted> commanderPool;
+    private final ItemPoolView<PaperCard> avatarPool;
+    private final ItemPoolView<PaperCard> planePool;
+    private final ItemPoolView<PaperCard> schemePool;
+    private final ItemPoolView<PaperCard> commanderPool;
     
     //=========== Constructor
     /**
@@ -87,15 +87,15 @@ public final class CEditorConstructed extends ACEditorBase<CardPrinted, Deck> {
         //allSections.add(DeckSection.Commander);
         
         
-        avatarPool = ItemPool.createFrom(CardDb.variants().getAllCards(Predicates.compose(CardRulesPredicates.Presets.IS_VANGUARD, CardPrinted.FN_GET_RULES)),CardPrinted.class);
-        planePool = ItemPool.createFrom(CardDb.variants().getAllCards(Predicates.compose(CardRulesPredicates.Presets.IS_PLANE_OR_PHENOMENON, CardPrinted.FN_GET_RULES)),CardPrinted.class);
-        schemePool = ItemPool.createFrom(CardDb.variants().getAllCards(Predicates.compose(CardRulesPredicates.Presets.IS_SCHEME, CardPrinted.FN_GET_RULES)),CardPrinted.class);
-        commanderPool = ItemPool.createFrom(CardDb.instance().getAllCards(Predicates.compose(Predicates.and(CardRulesPredicates.Presets.IS_CREATURE,CardRulesPredicates.Presets.IS_LEGENDARY), CardPrinted.FN_GET_RULES)),CardPrinted.class);
+        avatarPool = ItemPool.createFrom(CardDb.variants().getAllCards(Predicates.compose(CardRulesPredicates.Presets.IS_VANGUARD, PaperCard.FN_GET_RULES)),PaperCard.class);
+        planePool = ItemPool.createFrom(CardDb.variants().getAllCards(Predicates.compose(CardRulesPredicates.Presets.IS_PLANE_OR_PHENOMENON, PaperCard.FN_GET_RULES)),PaperCard.class);
+        schemePool = ItemPool.createFrom(CardDb.variants().getAllCards(Predicates.compose(CardRulesPredicates.Presets.IS_SCHEME, PaperCard.FN_GET_RULES)),PaperCard.class);
+        commanderPool = ItemPool.createFrom(CardDb.instance().getAllCards(Predicates.compose(Predicates.and(CardRulesPredicates.Presets.IS_CREATURE,CardRulesPredicates.Presets.IS_LEGENDARY), PaperCard.FN_GET_RULES)),PaperCard.class);
         
         boolean wantUnique = SEditorIO.getPref(EditorPreference.display_unique_only);
 
-        final EditorTableView<CardPrinted> tblCatalog = new EditorTableView<CardPrinted>(wantUnique, CardPrinted.class);
-        final EditorTableView<CardPrinted> tblDeck = new EditorTableView<CardPrinted>(wantUnique, CardPrinted.class);
+        final EditorTableView<PaperCard> tblCatalog = new EditorTableView<PaperCard>(wantUnique, PaperCard.class);
+        final EditorTableView<PaperCard> tblDeck = new EditorTableView<PaperCard>(wantUnique, PaperCard.class);
 
         VCardCatalog.SINGLETON_INSTANCE.setTableView(tblCatalog.getTable());
         VCurrentDeck.SINGLETON_INSTANCE.setTableView(tblDeck.getTable());
@@ -120,17 +120,17 @@ public final class CEditorConstructed extends ACEditorBase<CardPrinted, Deck> {
      */
     @Override
     public void addCard(InventoryItem item, boolean toAlternate, int qty) {
-        if ((item == null) || !(item instanceof CardPrinted)) {
+        if ((item == null) || !(item instanceof PaperCard)) {
             return;
         }
 
         if (sectionMode == DeckSection.Avatar || sectionMode == DeckSection.Commander) {
-            for(Map.Entry<CardPrinted, Integer> cp : getTableDeck().getCards()) {
+            for(Map.Entry<PaperCard, Integer> cp : getTableDeck().getCards()) {
                 getTableDeck().removeCard(cp.getKey(), cp.getValue());
             }
         }
 
-        final CardPrinted card = (CardPrinted) item;
+        final PaperCard card = (PaperCard) item;
         if (toAlternate) {
             if (sectionMode != DeckSection.Sideboard) {
                 controller.getModel().getOrCreate(DeckSection.Sideboard).add(card, qty);
@@ -149,11 +149,11 @@ public final class CEditorConstructed extends ACEditorBase<CardPrinted, Deck> {
      */
     @Override
     public void removeCard(InventoryItem item, boolean toAlternate, int qty) {
-        if ((item == null) || !(item instanceof CardPrinted)) {
+        if ((item == null) || !(item instanceof PaperCard)) {
             return;
         }
 
-        final CardPrinted card = (CardPrinted) item;
+        final PaperCard card = (PaperCard) item;
         if (toAlternate) {
             if (sectionMode != DeckSection.Sideboard) {
                 controller.getModel().getOrCreate(DeckSection.Sideboard).add(card, qty);
@@ -188,7 +188,7 @@ public final class CEditorConstructed extends ACEditorBase<CardPrinted, Deck> {
     @Override
     public void resetTables() {
         // Constructed mode can use all cards, no limitations.
-        this.getTableCatalog().setDeck(ItemPool.createFrom(CardDb.instance().getAllCards(), CardPrinted.class), true);
+        this.getTableCatalog().setDeck(ItemPool.createFrom(CardDb.instance().getAllCards(), PaperCard.class), true);
         this.getTableDeck().setDeck(this.controller.getModel().getMain());
     }
 
@@ -221,7 +221,7 @@ public final class CEditorConstructed extends ACEditorBase<CardPrinted, Deck> {
             case Main:
                 lstCatalogCols.remove(SColumnUtil.getColumn(ColumnName.CAT_QUANTITY));
                 this.getTableCatalog().setAvailableColumns(lstCatalogCols);
-                this.getTableCatalog().setDeck(ItemPool.createFrom(CardDb.instance().getAllCards(), CardPrinted.class), true);
+                this.getTableCatalog().setDeck(ItemPool.createFrom(CardDb.instance().getAllCards(), PaperCard.class), true);
                 this.getTableDeck().setDeck(this.controller.getModel().getMain());
                 showOptions = true;
                 title = "Title: ";

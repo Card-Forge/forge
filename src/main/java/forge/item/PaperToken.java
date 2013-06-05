@@ -9,7 +9,7 @@ import forge.card.CardRules;
 import forge.card.cardfactory.CardFactory;
 import forge.game.player.Player;
 
-public class CardToken implements InventoryItemFromSet, IPaperCard {
+public class PaperToken implements InventoryItemFromSet, IPaperCard {
     private String name;
     private CardEdition edition;
     private String imageFileName;
@@ -40,7 +40,7 @@ public class CardToken implements InventoryItemFromSet, IPaperCard {
         return makeTokenFileName(fileName.toString());
     }
     
-    public CardToken(final CardRules c, CardEdition edition0, final String imageFileName) {
+    public PaperToken(final CardRules c, CardEdition edition0, final String imageFileName) {
         this.card = c;
         this.name = c.getName();
         this.edition = edition0;

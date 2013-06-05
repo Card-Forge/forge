@@ -31,7 +31,7 @@ import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 import forge.item.CardDb;
-import forge.item.CardPrinted;
+import forge.item.PaperCard;
 import forge.util.Aggregates;
 import forge.util.PredicateString.StringOp;
 
@@ -73,26 +73,26 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
         final Target tgt = sa.getTarget();
 
         if (sa.hasParam("ValidSupportedCopy")) {
-            List<CardPrinted> cards = Lists.newArrayList(CardDb.instance().getUniqueCards());
+            List<PaperCard> cards = Lists.newArrayList(CardDb.instance().getUniqueCards());
             String valid = sa.getParam("ValidSupportedCopy");
             if (valid.contains("X")) {
                 valid = valid.replace("X", Integer.toString(AbilityUtils.calculateAmount(hostCard, "X", sa)));
             }
             if (StringUtils.containsIgnoreCase(valid, "creature")) {
-                Predicate<CardPrinted> cpp = Predicates.compose(CardRulesPredicates.Presets.IS_CREATURE, CardPrinted.FN_GET_RULES);
+                Predicate<PaperCard> cpp = Predicates.compose(CardRulesPredicates.Presets.IS_CREATURE, PaperCard.FN_GET_RULES);
                 cards = Lists.newArrayList(Iterables.filter(cards, cpp));
             }
             if (StringUtils.containsIgnoreCase(valid, "equipment")) {
-                Predicate<CardPrinted> cpp = Predicates.compose(CardRulesPredicates.Presets.IS_EQUIPMENT, CardPrinted.FN_GET_RULES);
+                Predicate<PaperCard> cpp = Predicates.compose(CardRulesPredicates.Presets.IS_EQUIPMENT, PaperCard.FN_GET_RULES);
                 cards = Lists.newArrayList(Iterables.filter(cards, cpp));
             }
             if (sa.hasParam("RandomCopied")) {
-                List<CardPrinted> copysource = new ArrayList<CardPrinted>(cards);
+                List<PaperCard> copysource = new ArrayList<PaperCard>(cards);
                 List<Card> choice = new ArrayList<Card>();
                 final String num = sa.hasParam("RandomNum") ? sa.getParam("RandomNum") : "1";
                 int ncopied = AbilityUtils.calculateAmount(hostCard, num, sa);
                 while(ncopied > 0) {
-                    final CardPrinted cp = Aggregates.random(copysource);
+                    final PaperCard cp = Aggregates.random(copysource);
                     if (cp.getMatchingForgeCard().isValid(valid, hostCard.getController(), hostCard)) {
                         choice.add(cp.getMatchingForgeCard());
                         copysource.remove(cp);
@@ -108,7 +108,7 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
                     }
                 }
 
-                Predicate<CardPrinted> cpp = Predicates.compose(CardRulesPredicates.name(StringOp.EQUALS, name), CardPrinted.FN_GET_RULES);
+                Predicate<PaperCard> cpp = Predicates.compose(CardRulesPredicates.name(StringOp.EQUALS, name), PaperCard.FN_GET_RULES);
                 cards = Lists.newArrayList(Iterables.filter(cards, cpp));
 
                 tgtCards.clear();

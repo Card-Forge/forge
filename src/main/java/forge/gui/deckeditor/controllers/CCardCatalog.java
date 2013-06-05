@@ -42,7 +42,7 @@ import forge.gui.framework.ICDoc;
 import forge.gui.home.quest.DialogChooseSets;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FSpinner;
-import forge.item.CardPrinted;
+import forge.item.PaperCard;
 import forge.item.ItemPredicate;
 import forge.quest.QuestWorld;
 import forge.quest.data.GameFormatQuest;
@@ -57,7 +57,7 @@ public enum CCardCatalog implements ICDoc {
     /** */
     SINGLETON_INSTANCE;
 
-    private final Set<Predicate<CardPrinted>> activePredicates = new HashSet<Predicate<CardPrinted>>();
+    private final Set<Predicate<PaperCard>> activePredicates = new HashSet<Predicate<PaperCard>>();
     private final Set<GameFormat> activeFormats = new HashSet<GameFormat>();
     private final Set<QuestWorld> activeWorlds = new HashSet<QuestWorld>();
     private final Set<RangeTypes> activeRanges = EnumSet.noneOf(RangeTypes.class);
@@ -321,8 +321,8 @@ public enum CCardCatalog implements ICDoc {
         // The main trick here is to apply a CardPrinted predicate
         // to the table. CardRules will lead to difficulties.
 
-        List<Predicate<? super CardPrinted>> cardPredicates = new ArrayList<Predicate<? super CardPrinted>>();
-        cardPredicates.add(Predicates.instanceOf(CardPrinted.class));
+        List<Predicate<? super PaperCard>> cardPredicates = new ArrayList<Predicate<? super PaperCard>>();
+        cardPredicates.add(Predicates.instanceOf(PaperCard.class));
         cardPredicates.add(SFilterUtil.buildColorAndTypeFilter(VCardCatalog.SINGLETON_INSTANCE.getStatLabels()));
         cardPredicates.addAll(activePredicates);
         
@@ -341,12 +341,12 @@ public enum CCardCatalog implements ICDoc {
                 VCardCatalog.SINGLETON_INSTANCE.getLblType().getSelected(),
                 VCardCatalog.SINGLETON_INSTANCE.getLblText().getSelected()));
         
-        Predicate<CardPrinted> cardFilter = Predicates.and(cardPredicates);
+        Predicate<PaperCard> cardFilter = Predicates.and(cardPredicates);
         
         // show packs and decks in the card shop according to the toggle setting
         // this is special-cased apart from the buildColorAndTypeFilter() above
         if (VCardCatalog.SINGLETON_INSTANCE.getStatLabel(SEditorUtil.StatTypes.PACK).getSelected()) {
-            List<Predicate<? super CardPrinted>> itemPredicates = new ArrayList<Predicate<? super CardPrinted>>();
+            List<Predicate<? super PaperCard>> itemPredicates = new ArrayList<Predicate<? super PaperCard>>();
             itemPredicates.add(cardFilter);
             itemPredicates.add(ItemPredicate.Presets.IS_PACK);
             itemPredicates.add(ItemPredicate.Presets.IS_DECK);
@@ -357,7 +357,7 @@ public enum CCardCatalog implements ICDoc {
         // TODO: is there really no way to make this type safe?
         ACEditorBase<?, ?> editor = CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController();
         if (null != editor) {
-            ((ACEditorBase<CardPrinted, DeckBase>)editor).getTableCatalog().setFilter(cardFilter);
+            ((ACEditorBase<PaperCard, DeckBase>)editor).getTableCatalog().setFilter(cardFilter);
         }
     }
     
@@ -373,8 +373,8 @@ public enum CCardCatalog implements ICDoc {
     }
     
     @SuppressWarnings("serial")
-    private <T> void addRestriction(Pair<? extends JComponent, Predicate<CardPrinted>> restriction, final Set<T> activeSet, final T key) {
-        final Predicate<CardPrinted> predicate = restriction.getRight();
+    private <T> void addRestriction(Pair<? extends JComponent, Predicate<PaperCard>> restriction, final Set<T> activeSet, final T key) {
+        final Predicate<PaperCard> predicate = restriction.getRight();
         
         if (null != predicate && activePredicates.contains(predicate)) {
             return;
@@ -403,7 +403,7 @@ public enum CCardCatalog implements ICDoc {
         applyCurrentFilter();
     }
 
-    private Pair<JPanel, Predicate<CardPrinted>> buildRangeRestriction(RangeTypes t) {
+    private Pair<JPanel, Predicate<PaperCard>> buildRangeRestriction(RangeTypes t) {
         final Pair<FSpinner, FSpinner> s = VCardCatalog.SINGLETON_INSTANCE.getSpinners().get(t);
         s.getLeft().setValue(0);
         s.getRight().setValue(10);
@@ -431,7 +431,7 @@ public enum CCardCatalog implements ICDoc {
         return sb.toString();
     }
 
-    private Pair<FLabel, Predicate<CardPrinted>> buildSearchRestriction() {
+    private Pair<FLabel, Predicate<PaperCard>> buildSearchRestriction() {
         boolean isInverse =
                 VCardCatalog.SEARCH_MODE_INVERSE_INDEX == VCardCatalog.SINGLETON_INSTANCE.getCbSearchMode().getSelectedIndex();
         String text = VCardCatalog.SINGLETON_INSTANCE.getTxfSearch().getText();
@@ -454,7 +454,7 @@ public enum CCardCatalog implements ICDoc {
                 SFilterUtil.buildTextFilter(text, isInverse, wantName, wantType, wantText));
     }
     
-    private Pair<FLabel, Predicate<CardPrinted>> buildFormatRestriction(String displayName, GameFormat format, boolean allowReprints) {
+    private Pair<FLabel, Predicate<PaperCard>> buildFormatRestriction(String displayName, GameFormat format, boolean allowReprints) {
         EditionCollection editions = Singletons.getModel().getEditions();
         StringBuilder tooltip = new StringBuilder("<html>Sets:");
         
@@ -515,7 +515,7 @@ public enum CCardCatalog implements ICDoc {
                 allowReprints ? format.getFilterRules() : format.getFilterPrinted());
     }
     
-    private Pair<FLabel, Predicate<CardPrinted>> buildSetRestriction(String displayName, List<String> setCodes, boolean allowReprints) {
+    private Pair<FLabel, Predicate<PaperCard>> buildSetRestriction(String displayName, List<String> setCodes, boolean allowReprints) {
         return buildFormatRestriction(displayName, new GameFormat(null, setCodes, null), allowReprints);
     }
 }

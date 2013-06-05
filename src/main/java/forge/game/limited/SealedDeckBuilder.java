@@ -14,7 +14,7 @@ import forge.Constant.Color;
 import forge.card.CardRules;
 import forge.card.CardRulesPredicates;
 import forge.card.ColorSet;
-import forge.item.CardPrinted;
+import forge.item.PaperCard;
 import forge.util.MyRandom;
 
 /**
@@ -23,7 +23,7 @@ import forge.util.MyRandom;
  */
 public class SealedDeckBuilder extends LimitedDeckBuilder {
 
-    public SealedDeckBuilder(List<CardPrinted> list) {
+    public SealedDeckBuilder(List<PaperCard> list) {
         super(list);
         this.setColors(chooseColors());
     }
@@ -34,18 +34,18 @@ public class SealedDeckBuilder extends LimitedDeckBuilder {
      * @return DeckColors
      */
     private ColorSet chooseColors() {
-        List<Pair<Double, CardPrinted>> rankedCards = rankCards(getAiPlayables());
+        List<Pair<Double, PaperCard>> rankedCards = rankCards(getAiPlayables());
 
         // choose colors based on top 33% of cards
-        final List<CardPrinted> colorChooserList = new ArrayList<CardPrinted>();
+        final List<PaperCard> colorChooserList = new ArrayList<PaperCard>();
         double limit = rankedCards.size() * .33;
         for (int i = 0; i < limit; i++) {
-            CardPrinted cp = rankedCards.get(i).getValue();
+            PaperCard cp = rankedCards.get(i).getValue();
             colorChooserList.add(cp);
             //System.out.println(cp.getName() + " " + cp.getRules().getManaCost().toString());
         }
 
-        Iterable<CardRules> rules = Iterables.transform(colorChooserList, CardPrinted.FN_GET_RULES);
+        Iterable<CardRules> rules = Iterables.transform(colorChooserList, PaperCard.FN_GET_RULES);
 
         int white = Iterables.size(Iterables.filter(rules, CardRulesPredicates.Presets.IS_WHITE));
         int blue = Iterables.size(Iterables.filter(rules, CardRulesPredicates.Presets.IS_BLUE));

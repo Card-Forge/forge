@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import forge.Singletons;
-import forge.item.CardPrinted;
+import forge.item.PaperCard;
 import forge.item.ItemPool;
 
 /** 
@@ -51,12 +51,12 @@ public class QuestRewardCardDuplicate implements IQuestRewardCard {
      * 
      * @return a List<CardPrinted> or null if could not create a list.
      */
-    public final List<CardPrinted> getChoices() {
-        final ItemPool<CardPrinted> playerCards = Singletons.getModel().getQuest().getAssets().getCardPool();
+    public final List<PaperCard> getChoices() {
+        final ItemPool<PaperCard> playerCards = Singletons.getModel().getQuest().getAssets().getCardPool();
         if (!playerCards.isEmpty()) { // Maybe a redundant check since it's hard to win a duel without any cards...
 
-            List<CardPrinted> cardChoices = new ArrayList<CardPrinted>();
-            for (final Map.Entry<CardPrinted, Integer> card : playerCards) {
+            List<PaperCard> cardChoices = new ArrayList<PaperCard>();
+            for (final Map.Entry<PaperCard, Integer> card : playerCards) {
                 cardChoices.add(card.getKey());
             }
             Collections.sort(cardChoices);
