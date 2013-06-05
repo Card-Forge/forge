@@ -108,9 +108,9 @@ TE TMP # Tempest
 ---UG  # Unglued
 ---UNH # Unhinged
 UZ USG # Urza's Saga
-===V09 # From the Vault: Exiled
-===V10 # From the Vault: Relics
-===V11 # From the Vault: Legends
+FVE V09 # From the Vault: Exiled
+FVR V10 # From the Vault: Relics
+FVL V11 # From the Vault: Legends
 ===V12 # From the Vault: Realms
 ===VAN #  Vanguard
 VI VIS # Visions
