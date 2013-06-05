@@ -1,0 +1,236 @@
+[metadata]
+Name=Modern Masters
+Code=MDM
+Date=2013-06-07
+Type=Reprint
+
+[cards]
+R Adarkar Valkyrie
+C Amrou Scout
+C Amrou Seekers
+R Angel's Grace
+R Auriok Salvagers
+C Avian Changeling
+C Blinding Beam
+C Bound in Silence
+C Cenn's Enlistment
+U Cloudgoat Ranger
+C Court Homunculus
+C Dispeller's Capsule
+M Elspeth, Knight-Errant
+R Ethersworn Canonist
+U Feudkiller's Verdict
+U Flickerwisp
+C Gleam of Resistance
+C Hillcomber Giant
+C Ivory Giant
+R Kataki, War's Wage
+C Kithkin Greatheart
+U Meadowboon
+C Otherworldly Journey
+C Pallid Mycoderm
+U Path to Exile
+R Reveillark
+C Saltfield Recluse
+C Sanctum Gargoyle
+U Sandsower
+U Stir the Pride
+R Stonehewer Giant
+U Terashi's Grasp
+C Test of Faith
+C Veteran Armorer
+M Yosei, the Morning Star
+C AEthersnipe
+U Careful Consideration
+R Cryptic Command
+C Dampen Thought
+C Echoing Truth
+C Errant Ephemeron
+C Erratic Mutation
+U Esperzoa
+C Etherium Sculptor
+C Faerie Mechanist
+R Gifts Ungiven
+R Glen Elendra Archmage
+M Keiga, the Tide Star
+R Kira, Great Glass-Spinner
+C Latchkey Faerie
+C Logic Knot
+R Meloku the Clouded Mirror
+C Mothdust Changeling
+U Mulldrifter
+U Narcomoeba
+R Pact of Negation
+C Peer Through Depths
+C Perilous Research
+C Pestermite
+C Petals of Insight
+C Reach Through Mists
+U Riftwing Cloudskate
+R Scion of Oona
+U Spell Snare
+C Spellstutter Sprite
+U Take Possession
+U Thirst for Knowledge
+C Traumatic Visions
+C Vedalken Dismisser
+M Vendilion Clique
+C Absorb Vis
+U Auntie's Snitch
+C Blightspeaker
+R Bridge from Below
+M Dark Confidant
+R Death Cloud
+C Death Denied
+U Death Rattle
+C Deepcavern Imp
+C Drag Down
+C Dreamspoiler Witches
+R Earwig Squad
+U Executioner's Capsule
+R Extirpate
+C Facevaulter
+C Faerie Macabre
+C Festering Goblin
+U Horobi's Whisper
+M Kokusho, the Evening Star
+U Mad Auntie
+U Marsh Flitter
+C Peppersmoke
+U Phthisis
+C Rathi Trapper
+C Raven's Crime
+R Skeletal Vampire
+R Slaughter Pact
+C Stinkweed Imp
+C Street Wraith
+C Syphon Life
+C Thieving Sprite
+R Tombstalker
+C Warren Pilferers
+C Warren Weirding
+C Blind-Spot Giant
+R Blood Moon
+C Brute Force
+R Countryside Crusher
+C Crush Underfoot
+U Desperate Ritual
+R Dragonstorm
+C Empty the Warrens
+C Fiery Fall
+C Fury Charm
+C Glacial Ray
+C Grapeshot
+R Greater Gargadon
+U Grinning Ignus
+C Hammerheim Deadeye
+M Kiki-Jiki, Mirror Breaker
+C Lava Spike
+C Mogg War Marshal
+R Molten Disaster
+U Pardic Dragon
+R Pyromancer's Swath
+C Rift Bolt
+C Rift Elemental
+M Ryusei, the Falling Star
+U Shrapnel Blast
+R Squee, Goblin Nabob
+C Stingscourger
+C Stinkdrinker Daredevil
+U Sudden Shock
+U Tar Pitcher
+U Thundercloud Shaman
+C Thundering Giant
+C Torrent of Stone
+U Tribal Flames
+C War-Spike Changeling
+C Citanul Woodreaders
+R Doubling Season
+C Durkwood Baloth
+C Echoing Courage
+U Eternal Witness
+C Giant Dustwasp
+C Greater Mossdog
+C Hana Kami
+C Imperiosaur
+U Incremental Growth
+M Jugan, the Rising Star
+C Kodama's Reach
+U Krosan Grip
+R Life from the Loam
+U Masked Admirers
+C Moldervine Cloak
+C Nantuko Shaman
+C Penumbra Spider
+U Reach of Branches
+U Riftsweeper
+R Rude Awakening
+C Search for Tomorrow
+U Sporesower Thallid
+C Sporoloth Ancient
+R Summoner's Pact
+C Sylvan Bounty
+M Tarmogoyf
+C Thallid
+C Thallid Germinator
+C Thallid Shell-Dweller
+R Tooth and Nail
+U Tromp the Domains
+R Verdeloth the Ancient
+C Walker of the Grove
+R Woodfall Primus
+U Electrolyze
+R Grand Arbiter Augustin IV
+R Jhoira of the Ghitu
+R Knight of the Reliquary
+U Lightning Helix
+R Maelstrom Pulse
+U Mind Funeral
+M Progenitus
+M Sarkhan Vol
+U Tidehollow Sculler
+U Trygon Predator
+R Cold-Eyed Selkie
+R Demigod of Revenge
+R Divinity of Pride
+R Figure of Destiny
+U Kitchen Finks
+U Manamorphose
+U Murderous Redcap
+R Oona, Queen of the Fae
+U Plumeveil
+U Worm Harvest
+C AEther Spellbomb
+R AEther Vial
+R Arcbound Ravager
+C Arcbound Stinger
+C Arcbound Wanderer
+C Arcbound Worker
+C Bonesplitter
+R Chalice of the Void
+R Engineered Explosives
+U Epochrasite
+U Etched Oracle
+C Frogmite
+R Lotus Bloom
+C Myr Enforcer
+U Myr Retriever
+U Paradise Mantle
+C Pyrite Spellbomb
+U Relic of Progenitus
+C Runed Stalactite
+C Skyreach Manta
+M Sword of Fire and Ice
+M Sword of Light and Shadow
+M Vedalken Shackles
+R Academy Ruins
+R Blinkmoth Nexus
+R City of Brass
+U Dakmor Salvage
+R Glimmervoid
+C Terramorphic Expanse
+U Vivid Crag
+U Vivid Creek
+U Vivid Grove
+U Vivid Marsh
+U Vivid Meadow
