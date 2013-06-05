@@ -3,6 +3,8 @@ Name=Modern Masters
 Code=MDM
 Date=2013-06-07
 Type=Reprint
+BoosterCovers=3
+Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 Any
 
 [cards]
 R Adarkar Valkyrie

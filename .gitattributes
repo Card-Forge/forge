@@ -17,7 +17,6 @@ res/blockdata/fantasyblocks.txt -text
 res/blockdata/fatpacks.txt -text
 res/blockdata/formats.txt -text
 res/blockdata/printsheets.txt -text
-res/blockdata/setdata.txt svneol=native#text/plain
 res/blockdata/starters.txt -text
 res/cardeditions/Alara[!!-~]Reborn.txt -text
 res/cardeditions/Alliances.txt -text
