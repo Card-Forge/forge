@@ -1,0 +1,197 @@
+[metadata]
+Code=FEM
+Date=1994-11-01
+Name=Fallen Empires
+Code2=FE
+Type=Expansion
+BoosterCovers=1
+Booster=5 Common, 2 Uncommon, 1 Rare
+
+[cards]
+R Aeolipile
+C Armor Thrull
+C Armor Thrull
+C Armor Thrull
+C Armor Thrull
+R Balm of Restoration
+C Basal Thrull
+C Basal Thrull
+C Basal Thrull
+C Basal Thrull
+R Bottomless Vault
+C Brassclaw Orcs
+C Brassclaw Orcs
+C Brassclaw Orcs
+C Brassclaw Orcs
+U Breeding Pit
+C Combat Medic
+C Combat Medic
+C Combat Medic
+C Combat Medic
+R Conch Horn
+U Deep Spawn
+C Delif's Cone
+R Delif's Cube
+R Derelor
+R Draconian Cylix
+R Dwarven Armorer
+U Dwarven Catapult
+R Dwarven Hold
+U Dwarven Lieutenant
+U Dwarven Ruins
+C Dwarven Soldier
+C Dwarven Soldier
+C Dwarven Soldier
+R Ebon Praetor
+U Ebon Stronghold
+C Elven Fortress
+C Elven Fortress
+C Elven Fortress
+C Elven Fortress
+R Elven Lyre
+R Elvish Farmer
+C Elvish Hunter
+C Elvish Hunter
+C Elvish Hunter
+C Elvish Scout
+C Elvish Scout
+C Elvish Scout
+U Farrel's Mantle
+C Farrel's Zealot
+C Farrel's Zealot
+C Farrel's Zealot
+U Farrelite Priest
+U Feral Thallid
+R Fungal Bloom
+C Goblin Chirurgeon
+C Goblin Chirurgeon
+C Goblin Chirurgeon
+R Goblin Flotilla
+C Goblin Grenade
+C Goblin Grenade
+C Goblin Grenade
+U Goblin Kites
+C Goblin War Drums
+C Goblin War Drums
+C Goblin War Drums
+C Goblin War Drums
+R Goblin Warrens
+R Hand of Justice
+U Havenwood Battleground
+U Heroism
+C High Tide
+C High Tide
+C High Tide
+R Hollow Trees
+C Homarid
+C Homarid
+C Homarid
+C Homarid
+R Homarid Shaman
+U Homarid Spawning Bed
+C Homarid Warrior
+C Homarid Warrior
+C Homarid Warrior
+C Hymn to Tourach
+C Hymn to Tourach
+C Hymn to Tourach
+C Hymn to Tourach
+C Icatian Infantry
+C Icatian Infantry
+C Icatian Infantry
+C Icatian Infantry
+C Icatian Javelineers
+C Icatian Javelineers
+C Icatian Javelineers
+R Icatian Lieutenant
+C Icatian Moneychanger
+C Icatian Moneychanger
+C Icatian Moneychanger
+U Icatian Phalanx
+U Icatian Priest
+C Icatian Scout
+C Icatian Scout
+C Icatian Scout
+C Icatian Scout
+R Icatian Skirmishers
+R Icatian Store
+R Icatian Town
+R Implements of Sacrifice
+C Initiates of the Ebon Hand
+C Initiates of the Ebon Hand
+C Initiates of the Ebon Hand
+C Merseine
+C Merseine
+C Merseine
+C Merseine
+C Mindstab Thrull
+C Mindstab Thrull
+C Mindstab Thrull
+C Necrite
+C Necrite
+C Necrite
+C Night Soil
+C Night Soil
+C Night Soil
+U Orcish Captain
+C Orcish Spy
+C Orcish Spy
+C Orcish Spy
+C Orcish Veteran
+C Orcish Veteran
+C Orcish Veteran
+C Orcish Veteran
+C Order of Leitbur
+C Order of Leitbur
+C Order of Leitbur
+C Order of the Ebon Hand
+C Order of the Ebon Hand
+C Order of the Ebon Hand
+R Orgg
+U Raiding Party
+R Rainbow Vale
+R Ring of Renewal
+R River Merfolk
+U Ruins of Trokair
+R Sand Silos
+U Seasinger
+U Soul Exchange
+R Spirit Shield
+C Spore Cloud
+C Spore Cloud
+C Spore Cloud
+U Spore Flower
+U Svyelunite Priest
+U Svyelunite Temple
+C Thallid
+C Thallid
+C Thallid
+C Thallid
+U Thallid Devourer
+U Thelon's Chant
+R Thelon's Curse
+U Thelonite Druid
+R Thelonite Monk
+C Thorn Thallid
+C Thorn Thallid
+C Thorn Thallid
+C Thorn Thallid
+R Thrull Champion
+U Thrull Retainer
+U Thrull Wizard
+C Tidal Flats
+C Tidal Flats
+C Tidal Flats
+U Tidal Influence
+U Tourach's Chant
+R Tourach's Gate
+R Vodalian Knights
+C Vodalian Mage
+C Vodalian Mage
+C Vodalian Mage
+C Vodalian Soldiers
+C Vodalian Soldiers
+C Vodalian Soldiers
+C Vodalian Soldiers
+R Vodalian War Machine
+R Zelyon Sword

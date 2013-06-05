@@ -1,0 +1,254 @@
+[metadata]
+Code=AVR
+Date=2012-05-04
+Name=Avacyn Restored
+Code2=AVR
+Type=Expansion
+BoosterCovers=5
+Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand
+
+[cards]
+C Abundant Growth
+U Aggravate
+C Alchemist's Apprentice
+R Alchemist's Refuge
+C Amass the Components
+R Angel of Glory's Rise
+R Angel of Jubilation
+C Angel's Mercy
+U Angel's Tomb
+U Angelic Armaments
+C Angelic Wall
+U Appetite for Brains
+R Arcane Melee
+U Archangel
+R Archwing Dragon
+M Avacyn, Angel of Hope
+U Banishing Stroke
+C Banners Raised
+U Barter in Blood
+C Battle Hymn
+C Bladed Bracers
+U Blessings of Nature
+U Blood Artist
+C Bloodflow Connoisseur
+C Bone Splinters
+M Bonfire of the Damned
+C Borderland Ranger
+U Bower Passage
+M Bruna, Light of Alabaster
+U Builder's Blessing
+R Burn at the Stake
+C Butcher Ghoul
+C Call to Serve
+R Captain of the Mists
+R Cathars' Crusade
+C Cathedral Sanctifier
+R Cavern of Souls
+R Champion of Lambholt
+C Cloudshift
+U Commander's Authority
+R Conjurer's Closet
+U Corpse Traders
+M Craterhoof Behemoth
+C Crippling Chill
+C Crypt Creeper
+C Cursebreak
+C Dangerous Wager
+R Dark Impostor
+R Deadeye Navigator
+C Death Wind
+C Defang
+U Defy Death
+C Demolish
+R Demonic Rising
+U Demonic Taskmaster
+R Demonlord of Ashmouth
+R Descendants' Path
+M Descent into Madness
+R Desolate Lighthouse
+R Devastation Tide
+U Devout Chaplain
+C Diregraf Escort
+R Divine Deflection
+R Dread Slaver
+C Dreadwaters
+C Driver of the Dead
+U Druid's Familiar
+R Druids' Repository
+R Dual Casting
+U Eaten by Spiders
+C Elgaud Shieldmate
+U Emancipation Angel
+M Entreat the Angels
+C Essence Harvest
+U Evernight Shade
+R Exquisite Blood
+U Falkenrath Exterminator
+C Farbog Explorer
+U Favorable Winds
+C Fervent Cathar
+U Fettergeist
+C Fleeting Distraction
+C Flowering Lumberknot
+L Forest
+L Forest
+L Forest
+R Gallows at Willow Hill
+C Galvanic Alchemist
+U Gang of Devils
+C Geist Snatch
+C Geist Trappers
+C Ghostform
+C Ghostly Flicker
+U Ghostly Touch
+C Ghoulflesh
+M Gisela, Blade of Goldnight
+R Gloom Surgeon
+U Gloomwidow
+U Goldnight Commander
+U Goldnight Redeemer
+C Grave Exchange
+M Griselbrand
+C Grounded
+C Gryff Vanguard
+C Guise of Fire
+C Hanweir Lancer
+R Harvester of Souls
+U Haunted Guardian
+C Havengul Skaab
+U Havengul Vampire
+C Heirs of Stromkirk
+R Herald of War
+U Holy Justiciar
+U Homicidal Seclusion
+R Hound of Griselbrand
+U Howlgeist
+U Human Frailty
+C Hunted Ghoul
+R Infinite Reflection
+U Into the Void
+L Island
+L Island
+L Island
+C Joint Assault
+U Kessig Malcontents
+R Killing Wave
+C Kruin Striker
+C Lair Delve
+U Latch Seeker
+C Leap of Faith
+U Lightning Mauler
+U Lightning Prowess
+R Lone Revenant
+R Lunar Mystic
+U Maalfeld Twins
+C Mad Prophet
+C Malicious Intent
+M Malignus
+U Marrow Bats
+U Mass Appeal
+C Mental Agony
+C Midnight Duelist
+C Midvast Protector
+C Mist Raven
+M Misthollow Griffin
+C Moonlight Geist
+R Moonsilver Spear
+C Moorland Inquisitor
+L Mountain
+L Mountain
+L Mountain
+C Narstad Scrapper
+C Natural End
+U Nearheath Pilgrim
+C Necrobite
+U Nephalia Smuggler
+C Nettle Swine
+C Nightshade Peddler
+R Otherworld Atlas
+C Outwit
+C Pathbreaker Wurm
+C Peel from Reality
+C Pillar of Flame
+L Plains
+L Plains
+L Plains
+C Polluted Dead
+C Predator's Gambit
+M Primal Surge
+C Raging Poltergeist
+U Rain of Thorns
+R Reforge the Soul
+C Renegade Demon
+R Restoration Angel
+R Revenge of the Hunted
+R Riders of Gavony
+C Righteous Blow
+C Riot Ringleader
+R Rite of Ruin
+C Rotcrown Ghoul
+U Rush of Blood
+C Scalding Devil
+C Scrapskin Drake
+C Scroll of Avacyn
+C Scroll of Griselbrand
+C Searchlight Geist
+U Second Guess
+C Seraph Sanctuary
+C Seraph of Dawn
+C Sheltering Word
+M Sigarda, Host of Herons
+R Silverblade Paladin
+R Slayers' Stronghold
+C Snare the Skies
+R Somberwald Sage
+C Somberwald Vigilante
+R Soul of the Harvest
+C Soulcage Fiend
+C Spectral Gateguards
+C Spectral Prison
+R Spirit Away
+U Stern Mentor
+R Stolen Goods
+U Stonewright
+L Swamp
+L Swamp
+L Swamp
+M Tamiyo, the Moon Sage
+U Tandem Lookout
+M Temporal Mastery
+R Terminus
+C Terrifying Presence
+C Thatcher Revolt
+C Thraben Valiant
+C Thunderbolt
+U Thunderous Wrath
+M Tibalt, the Fiend-Blooded
+C Timberland Guide
+U Tormentor's Trident
+R Treacherous Pit-Dweller
+U Triumph of Cruelty
+U Triumph of Ferocity
+C Trusted Forcemage
+R Tyrant of Discord
+R Ulvenwald Tracker
+C Uncanny Speed
+C Undead Executioner
+C Unhallowed Pact
+C Vanguard's Shield
+U Vanishment
+U Vessel of Endless Rest
+R Vexing Devil
+U Vigilante Justice
+C Voice of the Provinces
+U Vorstclaw
+C Wandering Wolf
+R Wild Defiance
+C Wildwood Geist
+C Wingcrafter
+U Wolfir Avenger
+R Wolfir Silverheart
+U Yew Spirit
+R Zealous Conscripts
+C Zealous Strike

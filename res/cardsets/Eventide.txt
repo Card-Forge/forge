@@ -1,0 +1,191 @@
+[metadata]
+Code=EVE
+Date=2008-07-25
+Name=Eventide
+Code2=EVE
+Alias=EVT
+Type=Expansion
+BoosterCovers=3
+Booster=11 Common, 3 Uncommon, 1 Rare
+
+[cards]
+C Aerie Ouphes
+R Altar Golem
+C Antler Skulkin
+R Archon of Justice
+R Ashling, the Extinguisher
+R Balefire Liege
+C Ballynock Trapper
+C Banishing Knack
+C Battlegate Mimic
+U Batwing Brume
+C Beckon Apparition
+U Belligerent Hatchling
+U Bloodied Ghost
+R Bloom Tender
+U Cache Raiders
+R Call the Skybreaker
+U Canker Abomination
+U Cankerous Thirst
+R Cascade Bluffs
+U Cauldron Haze
+C Cenn's Enlistment
+U Chaotic Backlash
+C Cinder Pyromancer
+C Clout of the Dominus
+R Cold-Eyed Selkie
+R Crackleburr
+U Crag Puca
+U Creakwood Ghoul
+R Creakwood Liege
+U Crumbling Ashes
+R Deathbringer Liege
+R Deity of Scars
+C Desecrator Hag
+R Divinity of Pride
+R Dominus of Fealty
+R Doomgape
+C Double Cleave
+C Drain the Well
+U Dream Fracture
+C Dream Thief
+C Duergar Assailant
+U Duergar Cave-Guard
+U Duergar Hedge-Mage
+U Duergar Mine-Captain
+U Duskdale Wurm
+C Edge of the Divinity
+R Endless Horizons
+U Endure
+R Evershrike
+R Fable of Wolf and Owl
+C Fang Skulkin
+C Favor of the Overbeing
+R Fetid Heath
+R Fiery Bombardment
+R Figure of Destiny
+C Fire at Will
+C Flame Jab
+U Flickerwisp
+R Flooded Grove
+C Gift of the Deity
+U Gilder Bairn
+R Glamerdye
+R Glen Elendra Archmage
+C Grazing Kelpie
+U Groundling Pouncer
+U Gwyllion Hedge-Mage
+U Hag Hedge-Mage
+R Hallowed Burial
+C Harvest Gwyllion
+U Hatchet Bully
+R Hateflayer
+U Hearthfire Hobgoblin
+C Heartlash Cinder
+R Helix Pinnacle
+C Hobgoblin Dragoon
+C Hoof Skulkin
+C Hotheaded Giant
+U Idle Thoughts
+U Impelled Giant
+U Indigo Faerie
+C Inside Out
+R Inundate
+U Invert the Skies
+C Jawbone Skulkin
+C Kithkin Spellduster
+C Kithkin Zealot
+R Leering Emblem
+R Light from Within
+U Lingering Tormentor
+U Loyal Gyrfalcon
+U Marshdrinker Giant
+C Merrow Bonegnawer
+C Merrow Levitator
+R Mindwrack Liege
+R Mirror Sheen
+C Monstrify
+U Moonhold
+R Murkfiend Liege
+R Necroskitter
+R Needle Specter
+C Nettle Sentinel
+R Nightmare Incursion
+C Nightsky Mimic
+C Nip Gwyllion
+R Nobilis of War
+C Noggle Bandit
+C Noggle Bridgebreaker
+U Noggle Hedge-Mage
+U Noggle Ransacker
+U Noxious Hatchling
+U Nucklavee
+C Odious Trow
+C Oona's Grace
+U Outrage Shaman
+R Overbeing of Myth
+U Patrol Signaler
+U Phosphorescent Feast
+R Primalcrux
+C Puncture Blast
+R Pyrrhic Revival
+U Quillspike
+C Raven's Crime
+U Razorfin Abolisher
+C Recumbent Bliss
+R Regal Force
+R Rekindled Flame
+C Rendclaw Trow
+U Restless Apparition
+R Rise of the Hobgoblins
+C Riverfall Mimic
+R Rugged Prairie
+R Sanity Grinding
+R Sapling of Colfenor
+U Savage Conception
+R Scarecrone
+C Scourge of the Nobilis
+U Selkie Hedge-Mage
+C Shell Skulkin
+C Shorecrasher Mimic
+U Shrewd Hatchling
+C Slippery Bogle
+C Smoldering Butcher
+C Snakeform
+U Soot Imp
+C Soul Reap
+U Soul Snuffers
+R Spirit of the Hearth
+U Spitemare
+R Spitting Image
+R Springjack Pasture
+U Springjack Shepherd
+U Stalker Hag
+R Stigma Lasher
+R Stillmoon Cavalier
+C Stream Hopper
+U Sturdy Hatchling
+U Suture Spirit
+U Swirling Spriggan
+U Syphon Life
+C Talara's Bane
+R Talara's Battalion
+U Talonrend
+R Thunderblust
+C Tilling Treefolk
+C Trapjaw Kelpie
+R Twilight Mire
+U Twinblade Slasher
+R Umbra Stalker
+C Unmake
+U Unnerving Assault
+U Unwilling Recruit
+U Voracious Hatchling
+R Wake Thrasher
+R Ward of Bones
+R Waves of Aggression
+C Wickerbough Elder
+C Wilderness Hypnotist
+U Wistful Selkie
+C Woodlurker Mimic
+R Worm Harvest

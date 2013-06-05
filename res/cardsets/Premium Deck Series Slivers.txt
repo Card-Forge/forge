@@ -1,0 +1,47 @@
+[metadata]
+Code=H09
+Date=2009-11-20
+Name=Premium Deck Series: Slivers
+
+[cards]
+U Acidic Sliver
+C Amoeboid Changeling
+U Ancient Ziggurat
+C Aphetto Dredging
+U Armor Sliver
+U Barbed Sliver
+R Brood Sliver
+C Clot Sliver
+R Coat of Arms
+U Crystalline Sliver
+C Distant Melody
+L Forest
+C Frenzy Sliver
+R Fungus Sliver
+U Fury Sliver
+C Gemhide Sliver
+C Heart Sliver
+U Heartstone
+U Hibernation Sliver
+C Homing Sliver
+L Island
+C Metallic Sliver
+U Might Sliver
+L Mountain
+C Muscle Sliver
+U Necrotic Sliver
+L Plains
+C Quick Sliver
+R Rootbound Crag
+C Rupture Spire
+M Sliver Overlord
+U Spectral Sliver
+U Spined Sliver
+L Swamp
+C Terramorphic Expanse
+U Victual Sliver
+C Virulent Sliver
+U Vivid Creek
+U Vivid Grove
+R Wild Pair
+C Winged Sliver

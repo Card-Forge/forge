@@ -1,0 +1,96 @@
+[metadata]
+Code=DDJ
+Date=2012-09-07
+Name=Duel Decks: Izzet vs. Golgari
+
+[cards]
+C Barren Moor
+U Boneyard Wurm
+C Brain Weevil
+C Brainstorm
+C Call to Heel
+U Dakmor Salvage
+U Dissipate
+R Djinn Illuminatus
+R Doomgape
+U Dreg Mangler
+C Elves of Deep Shadow
+U Eternal Witness
+C Feast or Famine
+U Fire
+C Force Spike
+L Forest
+L Forest
+L Forest
+L Forest
+C Forgotten Cave
+R Galvanoth
+U Gelectrode
+U Ghoul's Feast
+R Gleancrawler
+C Goblin Electromancer
+U Golgari Germination
+R Golgari Grave-Troll
+C Golgari Rot Farm
+C Golgari Rotwurm
+C Golgari Signet
+U Golgari Thug
+C Greater Mossdog
+U Grim Flowering
+R Invoke the Firemind
+L Island
+L Island
+L Island
+L Island
+U Isochron Scepter
+C Izzet Boilerworks
+U Izzet Charm
+C Izzet Chronarch
+U Izzet Guildmage
+C Izzet Signet
+M Jarad, Golgari Lich Lord
+C Kiln Fiend
+U Korozda Guildmage
+U Life
+R Life from the Loam
+C Lonely Sandbar
+C Magma Spray
+L Mountain
+L Mountain
+L Mountain
+L Mountain
+U Nightmare Void
+M Niv-Mizzet, the Firemind
+U Nivix, Aerie of the Firemind
+C Ogre Savant
+U Overwhelming Intellect
+U Plagued Rusalka
+R Prophetic Bolt
+U Putrefy
+C Putrid Leech
+C Pyromatics
+C Quicksilver Dagger
+C Ravenous Rats
+U Reassembling Skeleton
+U Reminisce
+U Sadistic Hypnotist
+C Shambling Shell
+U Shrewd Hatchling
+R Sphinx-Bone Wand
+C Steamcore Weird
+U Stingerfling Spider
+C Stinkweed Imp
+U Street Spasm
+U Svogthos, the Restless Tomb
+L Swamp
+L Swamp
+L Swamp
+L Swamp
+U Thunderheads
+C Train of Thought
+C Tranquil Thicket
+R Twilight's Call
+U Vacuumelt
+U Vigor Mortis
+C Wee Dragonauts
+C Yoke of the Damned

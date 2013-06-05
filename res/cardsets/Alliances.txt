@@ -1,0 +1,209 @@
+[metadata]
+Code=ALL
+Date=1996-06-10
+Name=Alliances
+Code2=AL
+Type=Expansion
+BoosterCovers=1
+Booster=8 Common, 3 Uncommon, 1 Rare
+
+[cards]
+C Aesthir Glider
+C Aesthir Glider
+C Agent of Stromgald
+C Agent of Stromgald
+C Arcane Denial
+C Arcane Denial
+R Ashnod's Cylix
+C Astrolabe
+C Astrolabe
+C Awesome Presence
+C Awesome Presence
+U Balduvian Dead
+R Balduvian Horde
+R Balduvian Trading Post
+C Balduvian War-Makers
+C Balduvian War-Makers
+C Benthic Explorers
+C Benthic Explorers
+C Bestial Fury
+C Bestial Fury
+U Bounty of the Hunt
+U Browse
+U Burnout
+C Carrier Pigeons
+C Carrier Pigeons
+C Casting of Bones
+C Casting of Bones
+R Chaos Harlequin
+U Contagion
+C Deadly Insect
+C Deadly Insect
+U Death Spark
+R Diminishing Returns
+U Diseased Vermin
+R Dystopia
+U Elvish Bard
+C Elvish Ranger
+C Elvish Ranger
+U Elvish Spirit Guide
+U Energy Arc
+C Enslaved Scout
+C Enslaved Scout
+C Errand of Duty
+C Errand of Duty
+R Exile
+C False Demise
+C False Demise
+R Fatal Lore
+C Feast or Famine
+C Feast or Famine
+C Fevered Strength
+C Fevered Strength
+R Floodwater Dam
+U Force of Will
+C Foresight
+C Foresight
+C Fyndhorn Druid
+C Fyndhorn Druid
+R Gargantuan Gorilla
+C Gift of the Woods
+C Gift of the Woods
+C Gorilla Berserkers
+C Gorilla Berserkers
+C Gorilla Chieftain
+C Gorilla Chieftain
+C Gorilla Shaman
+C Gorilla Shaman
+C Gorilla War Cry
+C Gorilla War Cry
+C Guerrilla Tactics
+C Guerrilla Tactics
+R Gustha's Scepter
+U Hail Storm
+R Heart of Yavimaya
+R Helm of Obedience
+U Inheritance
+C Insidious Bookworms
+C Insidious Bookworms
+R Ivory Gargoyle
+U Juniper Order Advocate
+R Kaysa
+R Keeper of Tresserhorn
+C Kjeldoran Escort
+C Kjeldoran Escort
+U Kjeldoran Home Guard
+R Kjeldoran Outpost
+C Kjeldoran Pride
+C Kjeldoran Pride
+R Krovikan Horror
+U Krovikan Plague
+R Lake of the Dead
+C Lat-Nam's Legacy
+C Lat-Nam's Legacy
+R Library of Lat-Nam
+C Lim-Dul's High Guard
+C Lim-Dul's High Guard
+U Lim-Dul's Paladin
+U Lim-Dul's Vault
+R Lodestone Bauble
+R Lord of Tresserhorn
+C Martyrdom
+C Martyrdom
+R Misfortune
+U Mishra's Groundbreaker
+U Misinformation
+U Mystic Compass
+U Nature's Blessing
+U Nature's Chosen
+R Nature's Wrath
+C Noble Steeds
+C Noble Steeds
+R Omen of Fire
+C Phantasmal Fiend
+C Phantasmal Fiend
+R Phantasmal Sphere
+R Phelddagrif
+C Phyrexian Boon
+C Phyrexian Boon
+R Phyrexian Devourer
+R Phyrexian Portal
+C Phyrexian War Beast
+C Phyrexian War Beast
+U Pillage
+U Primitive Justice
+U Pyrokinesis
+C Reinforcements
+C Reinforcements
+C Reprisal
+C Reprisal
+R Ritual of the Machine
+R Rogue Skycaptain
+R Royal Decree
+C Royal Herbalist
+C Royal Herbalist
+U Scarab of the Unseen
+U Scars of the Veteran
+U School of the Unseen
+U Seasoned Tactician
+R Sheltered Valley
+U Shield Sphere
+U Sol Grail
+C Soldevi Adnate
+C Soldevi Adnate
+R Soldevi Digger
+R Soldevi Excavations
+C Soldevi Heretic
+C Soldevi Heretic
+C Soldevi Sage
+C Soldevi Sage
+C Soldevi Sentry
+C Soldevi Sentry
+C Soldevi Steam Beast
+C Soldevi Steam Beast
+U Soldier of Fortune
+U Spiny Starfish
+R Splintering Wind
+C Stench of Decay
+C Stench of Decay
+R Storm Cauldron
+C Storm Crow
+C Storm Crow
+U Storm Elemental
+C Storm Shaman
+C Storm Shaman
+U Stromgald Spy
+U Suffocation
+U Surge of Strength
+R Sustaining Spirit
+C Swamp Mosquito
+C Swamp Mosquito
+R Sworn Defender
+C Taste of Paradise
+C Taste of Paradise
+R Thawing Glaciers
+R Thought Lash
+R Tidal Control
+R Tornado
+C Undergrowth
+C Undergrowth
+U Unlikely Alliance
+U Urza's Engine
+C Varchild's Crusader
+C Varchild's Crusader
+R Varchild's War-Riders
+C Veteran's Voice
+C Veteran's Voice
+C Viscerid Armor
+C Viscerid Armor
+U Viscerid Drone
+R Wandering Mage
+C Whip Vine
+C Whip Vine
+U Whirling Catapult
+C Wild Aesthir
+C Wild Aesthir
+R Winter's Night
+C Yavimaya Ancients
+C Yavimaya Ancients
+U Yavimaya Ants

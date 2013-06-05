@@ -1,0 +1,259 @@
+[metadata]
+Code=M10
+Date=2009-07-17
+Name=Magic 2010
+Code2=M10
+Type=Core
+BoosterCovers=5
+Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand
+
+[cards]
+U Acidic Slime
+C Acolyte of Xathrid
+U Act of Treason
+U Air Elemental
+M Ajani Goldmane
+U Alluring Siren
+U Angel's Feather
+C Angel's Mercy
+R Ant Queen
+U Armored Ascension
+C Assassinate
+U Awakener Druid
+R Ball Lightning
+M Baneslayer Angel
+C Berserkers of Blood Ridge
+R Birds of Paradise
+U Black Knight
+C Blinding Mage
+U Bog Wraith
+M Bogardan Hellkite
+C Borderland Ranger
+C Bountiful Harvest
+C Bramble Creeper
+C Burning Inquiry
+C Burst of Speed
+C Cancel
+C Canyon Minotaur
+R Capricious Efreet
+R Captain of the Watch
+U Celestial Purge
+R Cemetery Reaper
+C Centaur Courser
+M Chandra Nalaar
+C Child of Night
+R Clone
+R Coat of Arms
+U Consume Spirit
+C Convincing Mirage
+C Coral Merfolk
+C Craw Wurm
+U Cudgel Troll
+M Darksteel Colossus
+C Deadly Recluse
+U Deathmark
+U Demon's Horn
+U Diabolic Tutor
+C Disentomb
+C Disorient
+C Divination
+C Divine Verdict
+R Djinn of Wishes
+C Doom Blade
+U Dragon Whelp
+U Dragon's Claw
+R Dragonskull Summit
+C Dread Warlock
+R Drowned Catacomb
+C Drudge Skeletons
+C Duress
+R Earthquake
+U Elite Vanguard
+R Elvish Archdruid
+R Elvish Piper
+C Elvish Visionary
+C Emerald Oryx
+U Enormous Baloth
+C Entangling Vines
+C Essence Scatter
+C Excommunicate
+U Fabricate
+C Fiery Hellhound
+U Fireball
+C Firebreathing
+U Flashfreeze
+C Fog
+L Forest
+L Forest
+L Forest
+L Forest
+R Gargoyle Castle
+M Garruk Wildspeaker
+C Giant Growth
+C Giant Spider
+R Glacial Fortress
+C Glorious Charge
+U Goblin Artillery
+R Goblin Chieftain
+C Goblin Piker
+U Gorgon Flail
+C Gravedigger
+R Great Sable Stag
+C Griffin Sentinel
+R Guardian Seraph
+U Harm's Way
+R Haunting Echoes
+R Hive Mind
+C Holy Strength
+R Honor of the Pure
+C Horned Turtle
+U Howl of the Night Pack
+U Howling Banshee
+R Howling Mine
+R Hypnotic Specter
+C Ice Cage
+U Ignite Disorder
+C Illusionary Servant
+R Indestructibility
+U Inferno Elemental
+L Island
+L Island
+L Island
+L Island
+M Jace Beleren
+C Jackal Familiar
+C Jump
+R Kalonian Behemoth
+C Kelinore Bat
+C Kindled Fury
+U Kraken's Eye
+C Lava Axe
+U Levitation
+C Lifelink
+C Lightning Bolt
+C Lightning Elemental
+R Lightwielder Paladin
+M Liliana Vess
+C Llanowar Elves
+C Looming Shade
+R Lurking Predators
+R Magebane Armor
+R Magma Phoenix
+R Manabarbs
+M Master of the Wild Hunt
+U Megrim
+C Merfolk Looter
+R Merfolk Sovereign
+R Mesa Enchantress
+R Might of Oaks
+U Mind Control
+C Mind Rot
+R Mind Shatter
+R Mind Spring
+R Mirror of Fate
+C Mist Leopard
+U Mold Adder
+L Mountain
+L Mountain
+L Mountain
+L Mountain
+C Naturalize
+U Nature's Spiral
+C Negate
+R Nightmare
+C Oakenform
+R Open the Vaults
+U Ornithopter
+U Overrun
+C Pacifism
+C Palace Guard
+C Panic Attack
+U Phantom Warrior
+R Pithing Needle
+L Plains
+L Plains
+L Plains
+L Plains
+R Planar Cleansing
+M Platinum Angel
+R Polymorph
+C Ponder
+U Prized Unicorn
+U Prodigal Pyromancer
+M Protean Hydra
+U Pyroclasm
+C Raging Goblin
+C Rampant Growth
+C Razorfoot Griffin
+C Regenerate
+U Relentless Rats
+U Rhox Pikemaster
+U Righteousness
+U Rise from the Grave
+U Rod of Ruin
+R Rootbound Crag
+R Royal Assassin
+C Runeclaw Bear
+C Safe Passage
+C Sage Owl
+R Sanguine Bond
+C Seismic Strike
+C Serpent of the Endless Sea
+U Serra Angel
+C Shatter
+R Shivan Dragon
+C Siege Mastodon
+R Siege-Gang Commander
+C Sign in Blood
+R Silence
+C Silvercoat Lion
+U Sleep
+C Snapping Drake
+C Solemn Offering
+C Soul Bleed
+C Soul Warden
+C Sparkmage Apprentice
+U Spellbook
+M Sphinx Ambassador
+C Stampeding Rhino
+U Stone Giant
+C Stormfront Pegasus
+R Sunpetal Grove
+L Swamp
+L Swamp
+L Swamp
+L Swamp
+U Telepathy
+U Tempest of Light
+C Tendrils of Corruption
+C Terramorphic Expanse
+M Time Warp
+C Tome Scour
+R Traumatize
+C Trumpet Blast
+R Twincast
+U Undead Slayer
+R Underworld Dreams
+C Unholy Strength
+C Unsummon
+C Vampire Aristocrat
+M Vampire Nocturnus
+C Veteran Armorsmith
+C Veteran Swordsmith
+C Viashino Spearhunter
+U Wall of Bone
+C Wall of Faith
+U Wall of Fire
+U Wall of Frost
+R Warp World
+C Warpath Ghoul
+C Weakness
+U Whispersilk Cloak
+U White Knight
+C Wind Drake
+U Windstorm
+U Wurm's Tooth
+M Xathrid Demon
+C Yawning Fissure
+C Zephyr Sprite
+C Zombie Goliath

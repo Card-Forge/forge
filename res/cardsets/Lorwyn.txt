@@ -1,0 +1,311 @@
+[metadata]
+Code=LRW
+Date=2007-10-12
+Name=Lorwyn
+Code2=LRW
+Type=Expansion
+BoosterCovers=5
+Booster=11 Common, 3 Uncommon, 1 Rare
+
+[cards]
+C AEthersnipe
+C Adder-Staff Boggart
+R Ajani Goldmane
+C Amoeboid Changeling
+R Ancient Amphitheater
+C Aquitect's Will
+R Arbiter of Knollridge
+R Ashling the Pilgrim
+R Ashling's Prerogative
+R Auntie's Hovel
+R Austere Command
+C Avian Changeling
+C Axegrinder Giant
+U Battle Mastery
+C Battlewand Oak
+U Benthicore
+C Black Poplar Shaman
+C Blades of Velis Vel
+C Blind-Spot Giant
+C Bog Hoodlums
+C Bog-Strider Ash
+C Boggart Birth Rite
+C Boggart Forager
+U Boggart Harbinger
+C Boggart Loggers
+R Boggart Mob
+U Boggart Shenanigans
+C Boggart Sprite-Chaser
+U Briarhorn
+R Brigid, Hero of Kinsbaile
+R Brion Stoutarm
+C Broken Ambitions
+U Burrenton Forge-Tender
+R Cairn Wanderer
+U Captivating Glance
+C Caterwauling Boggart
+U Ceaseless Searblades
+C Cenn's Heir
+R Chandra Nalaar
+U Changeling Berserker
+U Changeling Hero
+U Changeling Titan
+C Cloudcrown Oak
+U Cloudgoat Ranger
+R Cloudthresher
+R Colfenor's Plans
+R Colfenor's Urn
+C Consuming Bonfire
+U Crib Swap
+U Crush Underfoot
+R Cryptic Command
+R Dauntless Dourbark
+C Dawnfluke
+R Deathrender
+C Deeptread Merrow
+R Dolmen Gate
+R Doran, the Siege Tower
+R Dread
+C Dreamspoiler Witches
+U Drowner of Secrets
+U Ego Erasure
+C Elvish Branchbender
+C Elvish Eulogist
+C Elvish Handservant
+U Elvish Harbinger
+U Elvish Promenade
+U Entangling Trap
+R Epic Proportions
+U Ethereal Whiskergill
+C Exiled Boggart
+C Eyeblight's Ending
+R Eyes of the Wisent
+C Facevaulter
+U Faerie Harbinger
+U Faerie Tauntings
+C Faerie Trickery
+U Fallowsage
+U Familiar's Ruse
+R Fathom Trawl
+C Faultgrinder
+R Favor of the Mighty
+C Fertile Ground
+U Final Revels
+C Fire-Belly Changeling
+C Fistful of Force
+U Flamekin Bladewhirl
+C Flamekin Brawler
+U Flamekin Harbinger
+U Flamekin Spitfire
+U Fodder Launch
+C Footbottom Feast
+R Forced Fruition
+L Forest
+L Forest
+L Forest
+L Forest
+R Gaddock Teeg
+R Galepowder Mage
+R Garruk Wildspeaker
+U Ghostly Changeling
+U Giant Harbinger
+C Giant's Ire
+C Gilt-Leaf Ambush
+R Gilt-Leaf Palace
+C Gilt-Leaf Seer
+U Glarewielder
+U Glen Elendra Pranksters
+C Glimmerdust Nap
+U Goatnapper
+C Goldmeadow Dodger
+C Goldmeadow Harrier
+U Goldmeadow Stalwart
+U Guardian of Cloverdell
+R Guile
+R Hamletback Goliath
+U Harpoon Sniper
+C Heal the Scars
+U Hearthcage Giant
+R Heat Shimmer
+C Herbal Poultice
+C Hillcomber Giant
+U Hoarder's Greed
+R Hoofprints of the Stag
+R Horde of Notions
+C Hornet Harasser
+R Hostility
+R Howltooth Hollow
+C Hunt Down
+U Hunter of Eyeblights
+C Hurly-Burly
+R Immaculate Magistrate
+U Imperious Perfect
+R Incandescent Soulstoke
+R Incendiary Command
+U Incremental Growth
+C Ingot Chewer
+C Inkfathom Divers
+C Inner-Flame Acolyte
+U Inner-Flame Igniter
+L Island
+L Island
+L Island
+L Island
+R Jace Beleren
+U Jagged-Scar Archers
+C Judge of Currents
+C Kinsbaile Balloonist
+C Kinsbaile Skirmisher
+C Kithkin Daggerdare
+C Kithkin Greatheart
+U Kithkin Harbinger
+C Kithkin Healer
+U Kithkin Mourncaller
+U Knight of Meadowgrain
+R Knucklebone Witch
+C Lace with Moonglove
+C Lairwatch Giant
+U Lammastide Weave
+C Lash Out
+C Leaf Gilder
+C Lignify
+R Liliana Vess
+C Lowland Oaf
+C Lys Alana Huntmaster
+U Lys Alana Scarblade
+R Mad Auntie
+U Makeshift Mannequin
+U Marsh Flitter
+R Masked Admirers
+U Merrow Commerce
+U Merrow Harbinger
+U Merrow Reejerey
+R Militia's Pride
+R Mirror Entity
+R Mistbind Clique
+C Moonglove Extract
+C Moonglove Winnower
+R Mosswort Bridge
+L Mountain
+L Mountain
+L Mountain
+L Mountain
+C Mournwhelk
+C Mudbutton Torchrunner
+C Mulldrifter
+C Nameless Inversion
+R Nath of the Gilt-Leaf
+C Nath's Buffoon
+C Nath's Elite
+C Neck Snap
+U Nectar Faerie
+C Needle Drop
+R Nettlevine Blight
+C Nightshade Stinger
+R Nova Chaser
+C Oaken Brawler
+C Oakgnarl Warrior
+C Oblivion Ring
+R Oona's Prowler
+C Paperfin Rascal
+C Peppersmoke
+C Pestermite
+L Plains
+L Plains
+L Plains
+L Plains
+C Plover Knights
+U Pollen Lullaby
+C Ponder
+R Primal Command
+R Profane Command
+C Protective Bubble
+U Prowess of the Fair
+R Purity
+C Quill-Slinger Boggart
+U Rebellion of the Flamekin
+R Rings of Brighthearth
+C Ringskipper
+C Rootgrapple
+C Runed Stalactite
+C Scarred Vinebreeder
+U Scattering Stroke
+R Scion of Oona
+R Secluded Glen
+U Seedguide Ash
+C Sentinels of Glen Elendra
+U Sentry Oak
+R Shapesharer
+R Shelldock Isle
+C Shields of Velis Vel
+C Shimmering Grotto
+U Shriekmaw
+U Silvergill Adept
+C Silvergill Douser
+C Skeletal Changeling
+C Smokebraider
+C Soaring Hope
+C Soulbright Flamekin
+R Sower of Temptation
+C Spellstutter Sprite
+C Spiderwig Boggart
+R Spinerock Knoll
+C Spring Cleaning
+C Springjack Knight
+C Springleaf Drum
+U Squeaking Pie Sneak
+C Stinkdrinker Daredevil
+C Stonybrook Angler
+C Streambed Aquitects
+U Summon the School
+R Sunrise Sovereign
+C Surge of Thoughtweft
+R Surgespanner
+L Swamp
+L Swamp
+L Swamp
+L Swamp
+R Sygg, River Guide
+U Sylvan Echoes
+U Tar Pitcher
+C Tarfire
+C Thieving Sprite
+R Thorn of Amethyst
+U Thorntooth Witch
+R Thoughtseize
+R Thoughtweft Trio
+R Thousand-Year Elixir
+U Thundercloud Shaman
+C Tideshaper Mystic
+R Timber Protector
+U Treefolk Harbinger
+C Triclopean Sight
+U Turtleshell Changeling
+R Twinning Glass
+U Veteran of the Depths
+R Vigor
+U Vivid Crag
+U Vivid Creek
+U Vivid Grove
+U Vivid Marsh
+U Vivid Meadow
+C Wanderer's Twig
+R Wanderwine Hub
+R Wanderwine Prophets
+C Warren Pilferers
+C Warren-Scourge Elf
+C Weed Strangle
+C Wellgabber Apothecary
+C Whirlpool Whelm
+R Wild Ricochet
+R Windbrisk Heights
+C Wings of Velis Vel
+C Wispmare
+U Wizened Cenn
+C Woodland Changeling
+U Woodland Guidance
+R Wort, Boggart Auntie
+R Wren's Run Packmaster
+U Wren's Run Vanquisher
+R Wydwen, the Biting Gale
+C Zephyr Net

@@ -1,0 +1,185 @@
+[metadata]
+Code=NPH
+Date=2011-05-13
+Name=New Phyrexia
+Code2=NPH
+Type=Expansion
+BoosterCovers=3
+Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand
+
+[cards]
+U Act of Aggression
+U Alloy Myr
+C Apostle's Blessing
+U Argent Mutation
+U Arm with AEther
+C Artillerize
+U Auriok Survivors
+M Batterskull
+U Beast Within
+R Birthing Pod
+R Blade Splicer
+C Blighted Agent
+C Blind Zealot
+C Blinding Souleater
+R Bludgeon Brawl
+U Brutalizer Exarch
+R Caged Sun
+U Caress of Phyrexia
+U Cathedral Membrane
+C Chained Throatseeker
+R Chancellor of the Annex
+R Chancellor of the Dross
+R Chancellor of the Forge
+R Chancellor of the Spires
+R Chancellor of the Tangle
+U Conversion Chamber
+U Corrosive Gale
+U Corrupted Resolve
+U Darksteel Relic
+C Death-Hood Cobra
+U Deceiver Exarch
+C Defensive Stance
+C Dementia Bat
+U Despise
+U Dismember
+U Dispatch
+U Due Respect
+M Elesh Norn, Grand Cenobite
+U Enslave
+U Entomber Exarch
+M Etched Monstrosity
+C Evil Presence
+U Exclusion Ritual
+U Fallen Ferromancer
+C Flameborn Viron
+C Forced Worship
+L Forest
+L Forest
+R Fresh Meat
+C Furnace Scamp
+U Geosurge
+C Geth's Verdict
+C Gitaxian Probe
+C Glissa's Scorn
+C Glistener Elf
+R Glistening Oil
+U Greenhilt Trainee
+C Gremlin Mine
+C Grim Affliction
+U Gut Shot
+R Hex Parasite
+C Hovermyr
+U Ichor Explosion
+C Immolating Souleater
+C Impaler Shrike
+U Inquisitor Exarch
+C Insatiable Souleater
+R Invader Parasite
+L Island
+L Island
+U Isolation Cell
+M Jin-Gitaxias, Core Augur
+R Jor Kadeen, the Prevailer
+M Karn Liberated
+U Kiln Walker
+R Lashwrithe
+C Leeching Bite
+R Life's Finale
+C Lost Leonin
+C Loxodon Convert
+U Marrow Shards
+U Master Splicer
+C Maul Splicer
+R Melira, Sylvok Outcast
+U Mental Misstep
+U Mindcrank
+U Mindculling
+R Moltensteel Dragon
+C Mortis Dogs
+L Mountain
+L Mountain
+C Mutagenic Growth
+U Mycosynth Fiend
+C Mycosynth Wellspring
+R Myr Superion
+U Necropouncer
+R Norn's Annex
+U Noxious Revival
+C Numbing Dose
+C Ogre Menial
+R Omen Machine
+C Parasitic Implant
+C Pestilent Souleater
+U Phyrexia's Core
+C Phyrexian Hulk
+R Phyrexian Ingester
+R Phyrexian Metamorph
+M Phyrexian Obliterator
+R Phyrexian Swarmlord
+R Phyrexian Unlife
+C Pith Driller
+L Plains
+L Plains
+C Porcelain Legionnaire
+U Postmortem Lunge
+R Praetor's Grasp
+U Priest of Urabrask
+C Pristine Talisman
+C Psychic Barrier
+R Psychic Surgery
+R Puresteel Paladin
+U Rage Extractor
+C Razor Swine
+U Reaper of Sheoldred
+C Remember the Fallen
+C Rotted Hystrix
+C Ruthless Invasion
+C Scrapyard Salvo
+C Sensor Splicer
+U Shattered Angel
+M Sheoldred, Whispering One
+C Shriek Raptor
+U Shrine of Boundless Growth
+U Shrine of Burning Rage
+U Shrine of Limitless Power
+U Shrine of Loyal Legions
+U Shrine of Piercing Vision
+U Sickleslicer
+R Slag Fiend
+C Slash Panther
+R Soul Conduit
+R Spellskite
+U Spinebiter
+C Spined Thopter
+C Spire Monitor
+U Surge Node
+R Surgical Extraction
+C Suture Priest
+L Swamp
+L Swamp
+M Sword of War and Peace
+U Tezzeret's Gambit
+C Thundering Tanadon
+U Tormentor Exarch
+R Torpor Orb
+C Toxic Nim
+C Trespassing Souleater
+U Triumph of the Hordes
+R Unwinding Clock
+M Urabrask the Hidden
+C Vapor Snag
+C Vault Skirge
+C Victorious Destruction
+U Viral Drake
+C Viridian Betrayers
+C Viridian Harvest
+U Vital Splicer
+C Volt Charge
+M Vorinclex, Voice of Hunger
+U Vulshok Refugee
+C War Report
+U Whipflare
+U Whispering Specter
+U Wing Splicer
+R Xenograft

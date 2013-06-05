@@ -1,0 +1,316 @@
+[metadata]
+Code=MRD
+Date=2003-10-02
+Name=Mirrodin
+Code2=MR
+Type=Expansion
+BoosterCovers=5
+Booster=11 Common, 3 Uncommon, 1 Rare
+
+[cards]
+C AEther Spellbomb
+C Alpha Myr
+R Altar of Shadows
+U Altar's Light
+C Ancient Den
+C Annul
+R Arc-Slogger
+C Arrest
+U Assert Authority
+U Atog
+U Auriok Bladewarden
+R Auriok Steelshaper
+C Auriok Transfixer
+C Awe Strike
+U Banshee's Blade
+U Barter in Blood
+C Battlegrowth
+U Betrayal of Flesh
+C Blinding Beam
+R Blinkmoth Urn
+U Blinkmoth Well
+U Bloodscent
+C Bonesplitter
+R Bosh, Iron Golem
+U Bottle Gnomes
+R Broodstar
+U Brown Ouphe
+U Cathodion
+R Chalice of the Void
+C Chimney Imp
+C Chromatic Sphere
+R Chrome Mox
+C Clockwork Beetle
+C Clockwork Condor
+R Clockwork Dragon
+U Clockwork Vorrac
+C Cloudpost
+C Cobalt Golem
+R Confusion in the Ranks
+C Consume Spirit
+C Contaminated Bond
+C Copper Myr
+R Copperhoof Vorrac
+U Creeping Mold
+U Crystal Shard
+R Culling Scales
+R Damping Matrix
+U Dead-Iron Sledge
+C Deconstruct
+U Detonate
+C Disarm
+C Disciple of the Vault
+U Domineer
+U Dragon Blood
+C Dream's Grip
+R Dross Harvester
+C Dross Prowler
+C Dross Scorpion
+R Duplicant
+U Duskworker
+C Electrostatic Bolt
+C Elf Replica
+R Empyrial Plate
+R Extraplanar Lens
+U Fabricate
+C Fangren Hunter
+U Farsight Mask
+R Fatespinner
+R Fiery Gambit
+U Fireshrieker
+C Fists of the Anvil
+U Flayed Nim
+L Forest
+L Forest
+L Forest
+L Forest
+U Forge Armor
+U Fractured Loyalty
+C Frogmite
+C Galvanic Key
+R Gate to the AEther
+R Gilded Lotus
+R Glimmervoid
+R Glissa Sunseeker
+R Goblin Charbelcher
+U Goblin Dirigible
+C Goblin Replica
+C Goblin Striker
+C Goblin War Wagon
+C Gold Myr
+U Golem-Skin Gauntlets
+U Grab the Reins
+U Granite Shard
+C Great Furnace
+R Grid Monitor
+R Grim Reminder
+C Groffskithur
+U Heartwood Shard
+C Hematite Golem
+R Hum of the Radix
+U Icy Manipulator
+C Incite War
+C Inertia Bubble
+C Iron Myr
+C Irradiate
+L Island
+L Island
+L Island
+L Island
+U Isochron Scepter
+R Jinxed Choker
+C Journey of Discovery
+R Krark's Thumb
+C Krark-Clan Grunt
+C Krark-Clan Shaman
+C Leaden Myr
+R Leonin Abunas
+U Leonin Bladetrap
+C Leonin Den-Guard
+C Leonin Elder
+C Leonin Scimitar
+U Leonin Skyhunter
+R Leonin Sun Standard
+R Leveler
+R Liar's Pendulum
+C Lifespark Spellbomb
+R Lightning Coils
+U Lightning Greaves
+R Living Hive
+R Lodestone Myr
+U Looming Hoverguard
+C Loxodon Mender
+R Loxodon Peacekeeper
+R Loxodon Punisher
+U Loxodon Warhammer
+R Lumengrid Augur
+U Lumengrid Sentinel
+C Lumengrid Warden
+R Luminous Angel
+C Malachite Golem
+R March of the Machines
+U Mask of Memory
+R Mass Hysteria
+R Megatog
+R Mesmeric Orb
+R Mind's Eye
+R Mindslaver
+U Mindstorm Crown
+U Mirror Golem
+R Molder Slug
+C Molten Rain
+C Moriok Scavenger
+L Mountain
+L Mountain
+L Mountain
+L Mountain
+U Mourner's Shield
+C Myr Adapter
+C Myr Enforcer
+R Myr Incubator
+U Myr Mindservant
+U Myr Prototype
+U Myr Retriever
+R Necrogen Mists
+C Necrogen Spellbomb
+U Needlebug
+C Neurok Familiar
+C Neurok Hoversail
+C Neurok Spy
+R Nightmare Lash
+R Nim Devourer
+C Nim Lasher
+C Nim Replica
+U Nim Shambler
+C Nim Shrieker
+U Nuisance Engine
+R Oblivion Stone
+C Ogre Leadfoot
+C Omega Myr
+U One Dozen Eyes
+U Ornithopter
+C Override
+U Pearl Shard
+R Pentavus
+C Pewter Golem
+L Plains
+L Plains
+L Plains
+L Plains
+R Plated Slagwurm
+R Platinum Angel
+U Power Conduit
+C Predator's Strike
+R Promise of Power
+R Proteus Staff
+U Psychic Membrane
+R Psychogenic Probe
+C Pyrite Spellbomb
+R Quicksilver Elemental
+R Quicksilver Fountain
+C Raise the Alarm
+C Razor Barrier
+C Regress
+R Reiver Demon
+U Relic Bane
+U Roar of the Kha
+R Rule of Law
+U Rust Elemental
+U Rustmouth Ogre
+U Rustspore Ram
+C Scale of Chiss-Goria
+U Scrabbling Claws
+R Sculpting Steel
+R Scythe of the Wretched
+C Seat of the Synod
+R Second Sunrise
+C Seething Song
+U Serum Tank
+R Shared Fate
+C Shatter
+U Shrapnel Blast
+C Silver Myr
+U Skeleton Shard
+C Skyhunter Cub
+C Skyhunter Patrol
+C Slagwurm Armor
+U Slith Ascendant
+U Slith Bloodletter
+U Slith Firewalker
+U Slith Predator
+U Slith Strider
+R Solar Tide
+C Soldier Replica
+R Solemn Simulacrum
+C Somber Hoverguard
+R Soul Foundry
+U Soul Nova
+R Spellweaver Helix
+C Sphere of Purity
+C Spikeshot Goblin
+R Spoils of the Vault
+U Stalking Stones
+C Steel Wall
+U Sun Droplet
+C Sunbeam Spellbomb
+L Swamp
+L Swamp
+L Swamp
+L Swamp
+R Sword of Kaldra
+U Sylvan Scrying
+U Synod Sanctum
+U Taj-Nar Swordsmith
+U Talisman of Dominance
+U Talisman of Impulse
+U Talisman of Indulgence
+U Talisman of Progress
+U Talisman of Unity
+C Tanglebloom
+R Tangleroot
+C Tel-Jilad Archers
+C Tel-Jilad Chosen
+C Tel-Jilad Exile
+U Tel-Jilad Stylus
+U Tempest of Light
+R Temporal Cascade
+C Terror
+U Thirst for Knowledge
+U Thought Prison
+C Thoughtcast
+R Timesifter
+C Titanium Golem
+R Tooth and Nail
+C Tooth of Chiss-Goria
+R Tower of Champions
+R Tower of Eons
+R Tower of Fortunes
+R Tower of Murmurs
+R Trash for Treasure
+C Tree of Tales
+R Triskelion
+R Troll Ascetic
+U Trolls of Tel-Jilad
+C Turn to Dust
+C Vault of Whispers
+R Vedalken Archmage
+R Vermiculos
+C Viridian Joiner
+C Viridian Longbow
+U Viridian Shaman
+C Vorrac Battlehorns
+U Vulshok Battlegear
+R Vulshok Battlemaster
+C Vulshok Berserker
+C Vulshok Gauntlets
+C Wail of the Nim
+U Wall of Blood
+C Wanderguard Sentry
+R War Elemental
+C Welding Jar
+C Wizard Replica
+U Woebearer
+R Worldslayer
+C Wrench Mind
+C Wurmskin Forger
+C Yotian Soldier

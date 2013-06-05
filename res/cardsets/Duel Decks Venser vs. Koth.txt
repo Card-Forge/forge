@@ -1,0 +1,83 @@
+[metadata]
+Code=DDI
+Date=2012-03-30
+Name=Duel Decks: Venser vs. Koth
+
+[cards]
+U AEther Membrane
+U Angelic Shield
+U Anger
+C Armillary Sphere
+C Augury Owl
+C Azorius Chancery
+R Bloodfire Colossus
+U Bloodfire Kavu
+U Cache Raiders
+C Chartooth Cougar
+R Clone
+U Coral Fighters
+C Cosi's Ravager
+U Cryptic Annelid
+C Downhill Charge
+U Earth Servant
+C Fiery Hellhound
+U Flood Plain
+R Galepowder Mage
+U Geyser Glider
+U Greater Stone Spirit
+L Island
+L Island
+L Island
+U Jaws of Stone
+C Jedit's Dragoons
+R Journeyer's Kite
+C Kor Cartographer
+M Koth of the Hammer
+R Lithophage
+U Minamo Sightbender
+U Mistmeadow Witch
+L Mountain
+L Mountain
+L Mountain
+L Mountain
+C Neurok Invisimancer
+U New Benalia
+U Oblivion Ring
+C Overrule
+U Path to Exile
+C Pilgrim's Eye
+L Plains
+L Plains
+L Plains
+C Plated Geopede
+C Preordain
+C Primal Plasma
+C Pygmy Pyrosaur
+C Revoke Existence
+C Safe Passage
+U Sawtooth Loon
+C Scroll Thief
+C Searing Blaze
+C Seismic Strike
+U Sejiri Refuge
+C Sigil of Sleep
+U Sky Spirit
+U Slith Strider
+C Soaring Seacliff
+R Sphinx of Uthuun
+C Spire Barrage
+C Steel of the Godhead
+U Stone Giant
+R Sunblast Angel
+R Torchling
+U Vanish into Memory
+M Venser, the Sojourner
+R Volley of Boulders
+U Vulshok Battlegear
+C Vulshok Berserker
+U Vulshok Morningstar
+C Vulshok Sorcerer
+U Wall of Denial
+C Wayfarer's Bauble
+C Whitemane Lion
+R Windreaver

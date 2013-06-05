@@ -1,0 +1,175 @@
+[metadata]
+Code=PLC
+Date=2007-02-02
+Name=Planar Chaos
+Code2=PLC
+Type=Expansion
+BoosterCovers=3
+Booster=11 Common, 3 Uncommon, 1 Rare
+
+[cards]
+U AEther Membrane
+R Aeon Chronicler
+R Akroma, Angel of Fury
+U Ana Battlemage
+C Aquamorph Entity
+U Auramancer's Guise
+C Aven Riftwatcher
+C Battering Sliver
+R Benalish Commander
+U Big Game Hunter
+C Blightspeaker
+U Blood Knight
+R Body Double
+C Bog Serpent
+R Boom
+R Braids, Conjurer Adept
+C Brain Gorgers
+C Brute Force
+U Calciderm
+U Cautery Sliver
+R Chronozoa
+U Circle of Affliction
+C Citanul Woodreaders
+C Cradle to Grave
+R Crovax, Ascendant Hero
+R Damnation
+U Darkheart Sliver
+C Dash Hopes
+C Dawn Charm
+C Dead
+C Deadly Grub
+U Deadwood Treefolk
+R Detritivore
+R Dichotomancy
+U Dismal Failure
+U Dormant Sliver
+C Dreamscape Artist
+U Dunerider Outlaw
+C Dust Corona
+R Dust Elemental
+U Enslave
+C Erratic Mutation
+C Essence Warden
+C Evolution Charm
+R Extirpate
+C Fa'adiyah Seer
+R Fatal Frenzy
+C Firefright Mage
+U Frenetic Sliver
+U Frozen AEther
+R Fungal Behemoth
+C Fury Charm
+R Gaea's Anthem
+C Ghost Tactician
+C Giant Dustwasp
+C Gossamer Phantasm
+R Groundbreaker
+U Hammerheim Deadeye
+U Harmonize
+C Healing Leaves
+U Hedge Troll
+R Heroes Remembered
+U Hunting Wilds
+R Imp's Mischief
+R Intet, the Dreamer
+R Jedit Ojanen of Efrava
+U Jodah's Avenger
+U Kavu Predator
+U Keen Sense
+C Keldon Marauders
+U Kor Dirge
+U Lavacore Elemental
+R Life and Limb
+R Magus of the Arena
+R Magus of the Bazaar
+R Magus of the Coffers
+R Magus of the Library
+R Magus of the Tabernacle
+U Malach of the Dawn
+C Mana Tithe
+U Mantle of Leadership
+C Melancholy
+C Merfolk Thaumaturgist
+R Mesa Enchantress
+C Midnight Charm
+C Mire Boa
+R Mirri the Cursed
+R Molten Firebird
+U Muck Drubb
+U Mycologist
+U Necrotic Sliver
+C Needlepeak Spider
+R Null Profusion
+R Numot, the Devastator
+R Oros, the Avenger
+U Ovinize
+C Pallid Mycoderm
+U Phantasmagorian
+C Piracy Charm
+U Pongify
+R Porphyry Nodes
+C Poultice Sliver
+U Pouncing Wurm
+C Primal Plasma
+C Prodigal Pyromancer
+U Psychotrope Thallid
+U Pyrohemia
+R Radha, Heir to Keld
+C Rathi Trapper
+C Reality Acid
+U Rebuff the Wicked
+U Reckless Wurm
+C Reflex Sliver
+R Retether
+C Revered Dead
+C Ridged Kusite
+U Riftmarked Knight
+U Riptide Pilferer
+R Roiling Horror
+U Rough
+U Saltblast
+C Saltfield Recluse
+C Seal of Primordium
+R Serendib Sorcerer
+R Serra Sphinx
+U Serra's Boon
+C Shade of Trokair
+C Shaper Parasite
+U Shivan Meteor
+R Shivan Wumpus
+U Shrouded Lore
+C Simian Spirit Guide
+C Sinew Sliver
+C Skirk Shaman
+U Sophic Centaur
+R Spellshift
+C Spitting Sliver
+C Stingscourger
+U Stonecloaker
+U Stormfront Riders
+U Sulfur Elemental
+C Sunlance
+C Synchronous Sliver
+R Temporal Extortion
+R Teneb, the Harvester
+U Tidewalker
+R Timbermare
+U Timebender
+U Timecrafting
+R Torchling
+U Treacherous Urge
+C Uktabi Drake
+R Urborg, Tomb of Yawgmoth
+C Utopia Vow
+C Vampiric Link
+C Veiling Oddity
+U Venarian Glimmer
+C Vitaspore Thallid
+R Voidstone Gargoyle
+R Volcano Hellion
+R Vorosh, the Hunter
+U Waning Wurm
+C Whitemane Lion
+R Wild Pair
+C Wistful Thinking

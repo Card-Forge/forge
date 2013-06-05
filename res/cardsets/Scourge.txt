@@ -1,0 +1,153 @@
+[metadata]
+Code=SCG
+Date=2003-05-26
+Name=Scourge
+Code2=SC
+Type=Expansion
+BoosterCovers=3
+Booster=11 Common, 3 Uncommon, 1 Rare
+
+[cards]
+C Accelerated Mutation
+R Ageless Sentinels
+U Alpha Status
+R Ambush Commander
+R Ancient Ooze
+U Aphetto Runecaster
+U Ark of Blight
+C Astral Steel
+C Aven Farseer
+C Aven Liberator
+R Bladewing the Risen
+U Bladewing's Thrall
+C Bonethorn Valesk
+U Brain Freeze
+C Break Asunder
+R Cabal Conditioning
+U Cabal Interrogator
+R Call to the Grave
+U Carbonize
+C Carrion Feeder
+C Chartooth Cougar
+U Chill Haunting
+U Claws of Wirewood
+C Clutch of Undeath
+C Coast Watcher
+R Consumptive Goo
+C Daru Spiritualist
+U Daru Warchief
+R Dawn Elemental
+R Day of the Dragons
+C Death's-Head Buzzard
+R Decree of Annihilation
+R Decree of Justice
+R Decree of Pain
+R Decree of Savagery
+R Decree of Silence
+R Dimensional Breach
+C Dispersal Shield
+C Divergent Growth
+C Dragon Breath
+C Dragon Fangs
+R Dragon Mage
+C Dragon Scales
+C Dragon Shadow
+R Dragon Tyrant
+C Dragon Wings
+U Dragonspeaker Shaman
+U Dragonstalker
+R Dragonstorm
+U Edgewalker
+U Elvish Aberration
+U Enrage
+R Eternal Dragon
+R Exiled Doomsayer
+U Extra Arms
+R Faces of the Past
+U Fatal Mutation
+C Fierce Empath
+R Final Punishment
+R Force Bubble
+R Forgotten Ancient
+R Form of the Dragon
+C Frontline Strategist
+C Frozen Solid
+U Gilded Light
+C Goblin Brigand
+U Goblin Psychopath
+C Goblin War Strike
+U Goblin Warchief
+R Grip of Chaos
+C Guilty Conscience
+C Hindering Touch
+U Hunting Pack
+U Karona's Zealot
+R Karona, False God
+C Krosan Drover
+U Krosan Warchief
+U Kurgadon
+R Lethal Vapors
+C Lingering Death
+U Long-Term Plans
+C Mercurial Kite
+U Metamorphose
+R Mind's Desire
+R Mischievous Quanar
+C Misguided Rage
+U Mistform Warchief
+R Nefashu
+C Noble Templar
+U One with Nature
+R Parallel Thoughts
+U Pemmin's Aura
+R Primitive Etchings
+U Proteus Machine
+U Putrid Raptor
+U Pyrostatic Pillar
+U Rain of Blades
+C Raven Guild Initiate
+R Raven Guild Master
+C Reaping the Graves
+C Recuperate
+U Reward the Faithful
+U Riptide Survivor
+C Rock Jockey
+R Root Elemental
+C Rush of Knowledge
+C Scattershot
+C Scornful Egotist
+C Shoreline Ranger
+R Siege-Gang Commander
+U Silver Knight
+U Skirk Volcanist
+C Skulltap
+R Sliver Overlord
+R Soul Collector
+C Spark Spray
+C Sprouting Vines
+R Stabilizer
+R Stifle
+R Sulfuric Vortex
+U Temple of the False God
+C Temporal Fissure
+U Tendrils of Agony
+U Thundercloud Elemental
+C Titanic Bulvox
+C Torrent of Fire
+R Trap Digger
+C Treetop Scout
+C Twisted Abomination
+C Unburden
+C Uncontrolled Infestation
+U Undead Warchief
+U Unspeakable Symbol
+R Upwelling
+C Vengeful Dead
+U Wing Shards
+C Wipe Clean
+C Wirewood Guardian
+U Wirewood Symbiote
+C Woodcloaker
+R Xantid Swarm
+C Zealous Inquisitor
+C Zombie Cutthroat

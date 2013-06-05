@@ -1,0 +1,155 @@
+[metadata]
+Code=ARB
+Date=2009-04-30
+Name=Alara Reborn
+Code2=ARB
+Type=Expansion
+BoosterCovers=3
+Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand ALA
+
+[cards]
+U Anathemancer
+C Architects of Will
+U Ardent Plea
+C Arsenal Thresher
+R Aven Mimeomancer
+C Bant Sojourners
+C Bant Sureblade
+U Behemoth Sledge
+U Bituminous Blast
+R Blitz Hellion
+U Bloodbraid Elf
+C Brainbite
+C Breath of Malfegor
+C Captured Sunlight
+C Cerodon Yearling
+R Cloven Casting
+C Colossal Might
+C Crystallization
+R Dauntless Escort
+C Deadshot Minotaur
+R Deathbringer Thoctar
+M Defiler of Souls
+C Demonic Dread
+U Demonspine Whip
+C Deny Reality
+U Double Negative
+U Dragon Appeasement
+M Dragon Broodmother
+U Drastic Revelation
+R Enigma Sphinx
+U Enlisted Wurm
+C Esper Sojourners
+C Esper Stormblade
+C Ethercaste Knight
+C Etherium Abomination
+C Ethersworn Shieldmage
+U Etherwrought Page
+C Fieldmist Borderpost
+R Fight to the Death
+R Filigree Angel
+R Finest Hour
+C Firewild Borderpost
+U Flurry of Wings
+U Giant Ambush Beetle
+C Glassdust Hulk
+R Glory of Warfare
+U Gloryscale Viashino
+C Godtracker of Jund
+C Gorger Wurm
+C Grixis Grimblade
+C Grixis Sojourners
+C Grizzled Leotau
+R Identity Crisis
+C Igneous Pouncer
+U Illusory Demon
+U Intimidation Bolt
+M Jenara, Asura of War
+C Jhessian Zombies
+C Jund Hackblade
+C Jund Sojourners
+M Karrthus, Tyrant of Jund
+C Kathari Bomber
+U Kathari Remnant
+R Knight of New Alara
+R Knotvine Paladin
+R Lavalanche
+C Leonin Armorguard
+R Lich Lord of Unx
+R Lightning Reaver
+M Lord of Extinction
+U Lorescale Coatl
+R Madrush Cyclops
+M Maelstrom Nexus
+R Maelstrom Pulse
+U Mage Slayer
+C Magefire Wings
+U Marisi's Twinclaws
+U Marrow Chomper
+U Mask of Riddles
+R Mayael's Aria
+R Meddling Mage
+U Messenger Falcons
+U Mind Funeral
+C Mistvein Borderpost
+C Monstrous Carabid
+U Morbid Bloom
+R Mycoid Shepherd
+C Naya Hushblade
+C Naya Sojourners
+R Necromancer's Covenant
+R Nemesis of Reason
+U Nulltread Gargantuan
+C Offering to Asha
+C Pale Recluse
+R Predatory Advantage
+C Putrid Leech
+C Qasali Pridemage
+U Reborn Hope
+R Retaliator Griffin
+C Rhox Brute
+R Sages of the Anima
+C Sanctum Plowbeast
+C Sangrite Backlash
+U Sanity Gnawers
+M Sen Triplets
+C Sewn-Eye Drake
+U Shield of the Righteous
+U Sigil Captain
+C Sigil of the Nayan Gods
+C Sigiled Behemoth
+C Singe-Mind Ogre
+U Skyclaw Thrash
+U Slave of Bolas
+C Soul Manipulation
+R Soulquake
+R Sovereigns of Lost Alara
+R Spellbound Dragon
+R Spellbreaker Behemoth
+M Sphinx of the Steel Wind
+C Stormcaller's Boon
+U Stun Sniper
+U Tainted Sigil
+C Talon Trooper
+C Terminate
+U Thopter Foundry
+R Thought Hemorrhage
+M Thraximundar
+R Time Sieve
+C Trace of Abundance
+U Unbender Tine
+R Unscythe, Killer of Kings
+M Uril, the Miststalker
+C Valley Rannet
+C Vectis Dominator
+C Vedalken Ghoul
+R Vedalken Heretic
+C Veinfire Borderpost
+U Vengeful Rebirth
+C Violent Outburst
+U Vithian Renegades
+U Wall of Denial
+R Wargate
+C Wildfield Borderpost
+C Winged Coatl
+U Zealous Persecution

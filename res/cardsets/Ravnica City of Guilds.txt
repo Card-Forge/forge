@@ -1,0 +1,316 @@
+[metadata]
+Code=RAV
+Date=2005-10-07
+Name=Ravnica: City of Guilds
+Code2=RAV
+Type=Expansion
+BoosterCovers=5
+Booster=11 Common, 3 Uncommon, 1 Rare
+
+[cards]
+R Agrus Kos, Wojek Veteran
+U Auratouched Mage
+R Autochthon Wurm
+C Barbarian Riftcutter
+U Bathe in Light
+U Belltower Sphinx
+C Benevolent Ancestor
+R Birds of Paradise
+R Blazing Archon
+U Blockbuster
+R Blood Funnel
+R Bloodbond March
+R Bloodletter Quill
+C Boros Fury-Shield
+C Boros Garrison
+U Boros Guildmage
+C Boros Recruit
+C Boros Signet
+U Boros Swiftblade
+R Bottled Cloister
+C Brainspoil
+C Bramble Elemental
+R Breath of Fury
+R Brightflame
+C Caregiver
+U Carrion Howler
+U Carven Caryatid
+C Centaur Safeguard
+R Cerulean Sphinx
+U Chant of Vitu-Ghazi
+R Char
+R Chord of Calling
+R Chorus of the Conclave
+R Circu, Dimir Lobotomist
+C Civic Wayfinder
+U Cleansing Beam
+C Clinging Darkness
+R Cloudstone Curio
+U Clutch of the Undercity
+C Coalhauler Swine
+C Compulsive Research
+R Concerted Effort
+C Conclave Equenaut
+U Conclave Phalanx
+C Conclave's Blessing
+U Congregation at Dawn
+C Consult the Necrosages
+C Convolute
+R Copy Enchantment
+C Courier Hawk
+R Crown of Convergence
+U Cyclopean Snare
+R Dark Confidant
+U Dark Heart of the Wood
+U Darkblast
+U Devouring Light
+C Dimir Aqueduct
+R Dimir Cutpurse
+R Dimir Doppelganger
+U Dimir Guildmage
+C Dimir House Guard
+C Dimir Infiltrator
+U Dimir Machinations
+C Dimir Signet
+C Disembowel
+U Divebomber Griffin
+C Dizzy Spell
+C Dogpile
+R Doubling Season
+U Dowsing Shaman
+C Drake Familiar
+R Dream Leash
+C Drift of Phantasms
+C Dromad Purebred
+U Drooling Groodion
+C Dryad's Caress
+U Duskmantle, House of Shadow
+C Elves of Deep Shadow
+C Elvish Skysweeper
+R Empty the Catacombs
+U Ethereal Usher
+R Excruciator
+R Eye of the Storm
+C Faith's Fetters
+C Farseek
+U Festival of the Guildpact
+C Fiery Conclusion
+R Firemane Angel
+C Fists of Ironwood
+R Flame Fusillade
+U Flame-Kin Zealot
+U Flash Conscription
+R Flickerform
+C Flight of Fancy
+U Flow of Ideas
+R Followed Footsteps
+L Forest
+L Forest
+L Forest
+L Forest
+U Frenzied Goblin
+C Galvanic Arc
+C Gate Hound
+C Gather Courage
+C Gaze of the Gorgon
+R Ghosts of the Innocent
+R Glare of Subdual
+U Glass Golem
+R Gleancrawler
+R Glimpse the Unthinkable
+C Goblin Fire Fiend
+C Goblin Spelunkers
+C Golgari Brownscale
+U Golgari Germination
+R Golgari Grave-Troll
+U Golgari Guildmage
+C Golgari Rot Farm
+C Golgari Rotwurm
+C Golgari Signet
+U Golgari Thug
+U Goliath Spider
+R Grave-Shell Scarab
+C Grayscaled Gharial
+U Greater Forgeling
+C Greater Mossdog
+U Grifter's Blade
+R Grozoth
+C Guardian of Vitu-Ghazi
+U Halcyon Glaze
+R Hammerfist Giant
+R Helldozer
+R Hex
+R Hour of Reckoning
+R Hunted Dragon
+R Hunted Horror
+R Hunted Lammasu
+R Hunted Phantasm
+R Hunted Troll
+C Incite Hysteria
+U Indentured Oaf
+C Induce Paranoia
+C Infectious Host
+U Instill Furor
+L Island
+L Island
+L Island
+L Island
+U Ivy Dancer
+U Junktroller
+U Keening Banshee
+C Last Gasp
+U Leashling
+C Leave No Trace
+R Life from the Loam
+R Light of Sanction
+U Lightning Helix
+U Lore Broker
+R Loxodon Gatekeeper
+R Loxodon Hierarch
+C Lurking Informant
+U Mark of Eviction
+R Master Warcraft
+U Mausoleum Turnkey
+R Mindleech Mass
+R Mindmoil
+U Mnemonic Nexus
+U Moldervine Cloak
+R Molten Sentry
+R Moonlight Bargain
+U Moroii
+C Mortipede
+L Mountain
+L Mountain
+L Mountain
+L Mountain
+C Muddle the Mixture
+C Necromantic Thirst
+R Necroplasm
+U Netherborn Phalanx
+C Nightguard Patrol
+U Nightmare Void
+U Nullmage Shepherd
+R Nullstone Gargoyle
+U Oathsworn Giant
+C Ordruun Commando
+R Overgrown Tomb
+U Overwhelm
+R Pariah's Shield
+C Peel from Reality
+U Peregrine Mask
+U Perilous Forays
+C Perplex
+R Phytohydra
+R Plague Boiler
+L Plains
+L Plains
+L Plains
+L Plains
+U Pollenbright Wings
+R Primordial Sage
+R Privileged Position
+U Psychic Drain
+U Putrefy
+C Quickchange
+C Rain of Embers
+C Rally the Righteous
+R Razia's Purification
+R Razia, Boros Archangel
+U Recollect
+U Remand
+U Reroute
+U Ribbons of Night
+U Rolling Spoil
+C Roofstalker Wight
+U Root-Kin Ally
+C Sabertooth Alley Cat
+R Sacred Foundry
+C Sadistic Augermage
+U Sandsower
+R Savra, Queen of the Golgari
+C Scatter the Seeds
+R Scion of the Wild
+C Screeching Griffin
+R Searing Meditation
+U Seed Spark
+C Seeds of Strength
+C Seismic Spike
+C Selesnya Evangel
+U Selesnya Guildmage
+U Selesnya Sagittars
+C Selesnya Sanctuary
+C Selesnya Signet
+C Sell-Sword Brute
+C Sewerdreg
+R Shadow of Doubt
+C Shambling Shell
+C Shred Memory
+C Siege Wurm
+R Sins of the Past
+R Sisters of Stone Death
+C Skyknight Legionnaire
+C Smash
+C Snapping Drake
+C Sparkmage Apprentice
+R Spawnbroker
+U Spectral Searchlight
+C Stasis Cell
+C Stinkweed Imp
+C Stone-Seeder Hierophant
+U Stoneshaker Shaman
+C Strands of Undeath
+C Sundering Vitae
+R Sunforger
+U Sunhome Enforcer
+U Sunhome, Fortress of the Legion
+U Suppression Field
+C Surge of Zeal
+C Surveilling Sprite
+U Svogthos, the Restless Tomb
+L Swamp
+L Swamp
+L Swamp
+L Swamp
+R Szadek, Lord of Secrets
+C Tattered Drake
+U Telling Time
+R Temple Garden
+C Terraformer
+C Terrarion
+C Thoughtpicker Witch
+R Three Dreams
+C Thundersong Trumpeter
+C Tidewater Minion
+R Tolsimir Wolfblood
+C Torpid Moloch
+C Transluminant
+U Trophy Hunter
+R Tunnel Vision
+R Twilight Drover
+U Twisted Justice
+U Undercity Shade
+R Ursapine
+C Vedalken Dismisser
+C Vedalken Entrancer
+C Veteran Armorer
+C Viashino Fangtail
+C Viashino Slasher
+U Vigor Mortis
+U Vindictive Mob
+R Vinelasher Kudzu
+U Vitu-Ghazi, the City-Tree
+C Votary of the Conclave
+U Voyager Staff
+R Vulturous Zombie
+C War-Torch Goblin
+R Warp World
+U Watchwolf
+R Watery Grave
+U Wizened Snitches
+R Woebringer Demon
+U Wojek Apothecary
+U Wojek Embermage
+C Wojek Siren
+R Woodwraith Corrupter
+C Woodwraith Strangler
+C Zephyr Spirit

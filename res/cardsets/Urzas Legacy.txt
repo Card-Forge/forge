@@ -1,0 +1,153 @@
+[metadata]
+Code=ULG
+Date=1999-02-15
+Name=Urza's Legacy
+Code2=UL
+Type=Expansion
+BoosterCovers=1
+Booster=11 Common, 3 Uncommon, 1 Rare
+
+[cards]
+C About Face
+U Angel's Trumpet
+C Angelic Curator
+R Anthroplasm
+R Archivist
+C Aura Flux
+U Avalanche Riders
+R Beast of Burden
+R Blessed Reversal
+U Bloated Toad
+U Bone Shredder
+C Bouncing Beebles
+R Brink of Madness
+C Burst of Energy
+C Cessation
+C Cloud of Faeries
+R Crawlspace
+C Crop Rotation
+R Damping Engine
+U Darkwatch Elves
+C Defender of Chaos
+C Defender of Law
+R Defense Grid
+R Defense of the Heart
+R Delusions of Mediocrity
+R Deranged Hermit
+C Devout Harpist
+U Engineered Plague
+C Erase
+R Eviscerator
+C Expendable Troops
+U Faerie Conclave
+R Fleeting Image
+C Fog of Gnats
+U Forbidding Watchtower
+C Frantic Search
+U Gang of Elk
+U Ghitu Encampment
+U Ghitu Fire-Eater
+C Ghitu Slinger
+U Ghitu War Cry
+C Giant Cockroach
+C Goblin Medics
+R Goblin Welder
+C Granite Grip
+R Grim Monolith
+U Harmonic Convergence
+R Hidden Gibbons
+U Hope and Glory
+R Impending Disaster
+C Intervene
+R Iron Maiden
+C Iron Will
+U Jhoira's Toolbox
+R Karmic Guide
+U King Crab
+U Knighthood
+U Last-Ditch Effort
+C Lava Axe
+U Levitation
+U Lone Wolf
+R Lurking Skirge
+U Martyr's Cause
+R Memory Jar
+R Might of Oaks
+C Miscalculation
+R Molten Hydra
+U Mother of Runes
+C Multani's Acolyte
+U Multani's Presence
+R Multani, Maro-Sorcerer
+R No Mercy
+R Opal Avenger
+C Opal Champion
+U Opportunity
+C Ostracize
+R Palinchron
+C Parch
+U Peace and Quiet
+C Phyrexian Broodlings
+C Phyrexian Debaser
+U Phyrexian Defiler
+C Phyrexian Denouncer
+R Phyrexian Plaguelord
+U Phyrexian Reclamation
+C Plague Beetle
+R Planar Collapse
+R Purify
+C Pygmy Pyrosaur
+R Pyromancy
+R Quicksilver Amulet
+U Rack and Ruin
+U Radiant's Dragoons
+C Radiant's Judgment
+R Radiant, Archangel
+C Rancor
+U Rank and File
+U Raven Familiar
+U Rebuild
+C Repopulate
+R Ring of Gix
+R Rivalry
+R Scrapheap
+R Second Chance
+R Shivan Phoenix
+C Sick and Tired
+C Silk Net
+C Simian Grunts
+C Sleeper's Guile
+C Slow Motion
+C Sluggishness
+C Snap
+U Spawning Pool
+R Subversion
+U Sustainer of the Realm
+C Swat
+U Tethered Skirge
+C Thornwind Faeries
+R Thran Lens
+U Thran War Machine
+R Thran Weaponry
+U Ticking Gnomes
+U Tinker
+C Tragic Poet
+U Treacherous Link
+C Treefolk Mystic
+U Treetop Village
+C Unearth
+R Urza's Blueprints
+C Viashino Bey
+U Viashino Cutthroat
+U Viashino Heretic
+C Viashino Sandscout
+C Vigilant Drake
+U Walking Sponge
+C Weatherseed Elf
+C Weatherseed Faeries
+R Weatherseed Treefolk
+R Wheel of Torture
+U Wing Snare
+C Yavimaya Granger
+C Yavimaya Scion
+C Yavimaya Wurm

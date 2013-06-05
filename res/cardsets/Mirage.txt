@@ -1,0 +1,360 @@
+[metadata]
+Code=MIR
+Date=1996-10-08
+Name=Mirage
+Code2=MI
+Type=Expansion
+BoosterCovers=5
+Booster=11 Common, 3 Uncommon, 1 Rare
+
+[cards]
+R Abyssal Hunter
+R Acidic Dagger
+R Afiya Grove
+U Afterlife
+C Agility
+C Alarum
+U Aleatory
+R Amber Prison
+R Amulet of Unmaking
+R Ancestral Memories
+C Armor of Thorns
+C Armorer Guildmage
+R Ashen Powder
+R Asmira, Holy Avenger
+R Auspicious Ancestor
+C Azimaet Drake
+U Bad River
+U Barbed Foliage
+U Barbed-Back Wurm
+R Barreling Attack
+U Basalt Golem
+C Bay Falcon
+R Bazaar of Wonders
+C Benevolent Unicorn
+R Benthic Djinn
+C Binding Agony
+U Blighted Shaman
+U Blind Fury
+U Blinding Light
+C Blistering Barrier
+C Bone Harvest
+R Bone Mask
+C Boomerang
+C Breathstealer
+R Brushwagg
+C Builder's Bane
+U Burning Palm Efreet
+C Burning Shield Askari
+R Cadaverous Bloom
+C Cadaverous Knight
+R Canopy Dragon
+R Carrion
+R Catacomb Dragon
+R Celestial Dawn
+U Cerulean Wyvern
+C Chaos Charm
+R Chaosphere
+U Charcoal Diamond
+U Chariot of the Sun
+C Choking Sands
+U Cinder Cloud
+R Circle of Despair
+C Civic Guildmage
+C Cloak of Invisibility
+U Consuming Ferocity
+U Coral Fighters
+C Crash of Rhinos
+R Crimson Hellkite
+U Crimson Roc
+U Crypt Cobra
+U Crystal Golem
+U Crystal Vein
+R Cursed Totem
+R Cycle of Life
+R Daring Apprentice
+C Dark Banishing
+C Dark Ritual
+C Dazzling Beauty
+U Decomposition
+U Delirium
+C Dirtwater Wraith
+R Discordant Spirit
+C Disempower
+C Disenchant
+U Dissipate
+C Divine Offering
+R Divine Retribution
+C Drain Life
+U Dread Specter
+C Dream Cache
+C Dream Fighter
+U Dwarven Miner
+C Dwarven Nomad
+R Early Harvest
+C Ebony Charm
+C Ekundu Cyclops
+C Ekundu Griffin
+U Elixir of Vitality
+R Emberwilde Caliph
+R Emberwilde Djinn
+R Energy Bolt
+R Energy Vortex
+C Enfeeblement
+U Enlightened Tutor
+U Ersatz Gnomes
+U Ether Well
+R Ethereal Champion
+U Fallow Earth
+U Favorable Destiny
+U Femeref Archers
+C Femeref Healer
+C Femeref Knight
+C Femeref Scouts
+C Feral Shadow
+C Fetid Horror
+R Final Fortune
+U Fire Diamond
+C Firebreathing
+U Flame Elemental
+C Flare
+R Flash
+U Flood Plain
+U Floodgate
+C Fog
+U Foratog
+R Forbidden Crypt
+L Forest
+L Forest
+L Forest
+L Forest
+R Forsaken Wastes
+R Frenetic Efreet
+C Giant Mantis
+C Gibbering Hyenas
+C Goblin Elite Infantry
+U Goblin Scouts
+U Goblin Soothsayer
+C Goblin Tinkerer
+C Granger Guildmage
+U Grasslands
+C Grave Servitude
+C Gravebane Zombie
+R Grim Feast
+R Grinning Totem
+R Hakim, Loreweaver
+R Hall of Gemstone
+R Hammer of Bogardan
+R Harbinger of Night
+U Harbor Guardian
+U Harmattan Efreet
+U Haunting Apparition
+U Hazerider Drake
+C Healing Salve
+R Hivis of the Scale
+U Horrible Hordes
+U Igneous Golem
+R Illicit Auction
+U Illumination
+C Incinerate
+R Infernal Contract
+U Iron Tusk Elephant
+L Island
+L Island
+L Island
+L Island
+C Ivory Charm
+R Jabari's Influence
+C Jolrael's Centaur
+C Jolt
+R Jungle Patrol
+U Jungle Troll
+C Jungle Wurm
+U Kaervek's Hex
+U Kaervek's Purge
+C Kaervek's Torch
+U Karoo Meerkat
+R Kukemssa Pirates
+C Kukemssa Serpent
+U Lead Golem
+R Leering Gargoyle
+C Lightning Reflexes
+R Lion's Eye Diamond
+U Locust Swarm
+R Lure of Prey
+R Malignant Growth
+U Mana Prism
+U Mangara's Blessing
+U Mangara's Equity
+R Mangara's Tome
+U Marble Diamond
+R Maro
+U Meddle
+U Melesse Spirit
+C Memory Lapse
+C Merfolk Raiders
+C Merfolk Seer
+U Mind Bend
+U Mind Harness
+R Mindbender Spores
+U Mire Shade
+R Misers' Cage
+R Mist Dragon
+U Moss Diamond
+L Mountain
+L Mountain
+L Mountain
+L Mountain
+U Mountain Valley
+U Mtenda Griffin
+C Mtenda Herder
+C Mtenda Lion
+U Mystical Tutor
+R Natural Balance
+U Nettletooth Djinn
+C Noble Elephant
+U Nocturnal Raid
+R Null Chamber
+C Pacifism
+U Painful Memories
+U Patagia Golem
+R Paupers' Cage
+R Pearl Dragon
+R Phyrexian Dreadnought
+R Phyrexian Purge
+R Phyrexian Tribute
+U Phyrexian Vault
+L Plains
+L Plains
+L Plains
+L Plains
+R Political Trickery
+R Polymorph
+C Power Sink
+R Preferred Selection
+U Prismatic Boon
+C Prismatic Circle
+R Prismatic Lace
+R Psychic Transfer
+R Purgatory
+R Purraj of Urborg
+C Pyric Salamander
+C Quirion Elves
+U Radiant Essence
+C Raging Spirit
+C Rampant Growth
+R Rashida Scalebane
+U Ravenous Vampire
+C Ray of Command
+R Razor Pendulum
+C Reality Ripple
+R Reckless Embermage
+R Reflect Damage
+C Regeneration
+U Reign of Chaos
+U Reign of Terror
+R Reparations
+C Restless Dead
+C Ritual of Steel
+R Rock Basilisk
+U Rocky Tar Pit
+U Roots of Life
+C Sabertooth Cobra
+R Sacred Mesa
+U Sand Golem
+C Sandbar Crocodile
+C Sandstorm
+C Sapphire Charm
+U Savage Twister
+R Sawback Manticore
+C Sea Scryer
+U Sealed Fate
+C Searing Spear Askari
+C Seedling Charm
+R Seeds of Innocence
+C Serene Heart
+C Sewer Rats
+C Shadow Guildmage
+U Shadowbane
+R Shallow Grave
+C Shaper Guildmage
+U Shauku's Minion
+R Shauku, Endbringer
+R Shimmer
+R Sidar Jabari
+U Sirocco
+C Skulking Ghost
+U Sky Diamond
+C Soar
+R Soul Echo
+U Soul Rend
+C Soulshriek
+U Spatial Binding
+R Spectral Guardian
+R Spirit of the Night
+C Spitting Earth
+C Stalking Tiger
+C Stone Rain
+U Stupor
+R Subterranean Spirit
+R Sunweb
+U Superior Numbers
+U Suq'Ata Firewalker
+L Swamp
+L Swamp
+L Swamp
+L Swamp
+R Tainted Specter
+C Talruum Minotaur
+R Taniwha
+R Teeka's Dragon
+C Teferi's Curse
+C Teferi's Drake
+R Teferi's Imp
+R Teferi's Isle
+R Telim'Tor
+U Telim'Tor's Darts
+R Telim'Tor's Edict
+C Teremko Griffin
+C Thirst
+U Tidal Wave
+R Tombstone Stairwell
+R Torrent of Lava
+C Tranquil Domain
+U Tropical Storm
+C Uktabi Faerie
+R Uktabi Wildcats
+U Unerring Sling
+R Unfulfilled Desires
+U Unseen Walker
+U Unyaro Bee Sting
+U Unyaro Griffin
+C Urborg Panther
+U Vaporous Djinn
+R Ventifact Bottle
+C Viashino Warrior
+U Vigilant Martyr
+C Village Elder
+U Vitalizing Cascade
+R Volcanic Dragon
+U Volcanic Geyser
+R Waiting in the Weeds
+C Wall of Corpses
+C Wall of Resistance
+C Wall of Roots
+C Ward of Lights
+R Warping Wurm
+U Wave Elemental
+R Wellspring
+C Wild Elephant
+U Wildfire Emissary
+U Windreaper Falcon
+U Withering Boon
+U Worldly Tutor
+R Yare
+U Zebra Unicorn
+U Zhalfirin Commander
+C Zhalfirin Knight
+R Zirilan of the Claw
+U Zombie Mob
+R Zuberi, Golden Feather

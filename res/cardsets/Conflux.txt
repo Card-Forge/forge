@@ -1,0 +1,156 @@
+[metadata]
+Code=CFX
+Date=2009-02-06
+Name=Conflux
+Code2=CFX
+Alias=CON
+Type=Expansion
+BoosterCovers=3
+Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand ALA
+
+[cards]
+C Absorb Vis
+U Aerie Mystics
+U Ancient Ziggurat
+M Apocalypse Hydra
+C Armillary Sphere
+C Asha's Favor
+C Aven Squire
+C Aven Trailblazer
+R Banefire
+C Beacon Behemoth
+R Blood Tyrant
+R Bloodhall Ooze
+C Bone Saw
+C Brackwater Elemental
+C Canyon Minotaur
+U Celestial Purge
+R Charnelhoard Wurm
+M Child of Alara
+R Cliffrunner Behemoth
+M Conflux
+C Constricting Tendrils
+U Controlled Instincts
+U Corrupted Roots
+U Countersquall
+C Court Homunculus
+U Cumber Stone
+R Cylian Sunsinger
+C Dark Temper
+C Darklit Gargoyle
+C Drag Down
+U Dragonsoul Knight
+U Dreadwing
+U Elder Mastery
+C Ember Weaver
+C Esper Cormorants
+U Esperzoa
+M Ethersworn Adjudicator
+R Exotic Orchard
+C Exploding Borders
+R Extractor Demon
+C Faerie Mechanist
+C Fiery Fall
+U Filigree Fracture
+U Fleshformer
+R Font of Mythos
+C Frontline Sage
+U Fusion Elemental
+R Giltspire Avenger
+C Gleam of Resistance
+U Gluttonous Slime
+C Goblin Outlander
+R Goblin Razerunners
+C Grixis Illusionist
+U Grixis Slavedriver
+R Gwafa Hazid, Profiteer
+U Hellkite Hatchling
+U Hellspark Elemental
+U Ignite Disorder
+C Infectious Horror
+R Inkwell Leviathan
+U Jhessian Balmgiver
+C Kaleidostone
+R Kederekt Parasite
+R Knight of the Reliquary
+U Knotvine Mystic
+C Kranioceros
+C Lapse of Certainty
+M Maelstrom Archangel
+R Magister Sphinx
+M Malfegor
+C Mana Cylix
+U Manaforce Mace
+C Maniacal Rage
+R Mark of Asylum
+R Martial Coup
+R Master Transmuter
+C Matca Rioters
+R Meglonoth
+C Might of Alara
+M Mirror-Sigil Sergeant
+C Molten Frame
+U Nacatl Hunt-Pride
+C Nacatl Outlander
+C Nacatl Savage
+M Nicol Bolas, Planeswalker
+R Noble Hierarch
+R Nyxathid
+R Obelisk of Alara
+R Paleoloth
+U Paragon of the Amesha
+C Parasitic Strix
+U Path to Exile
+C Pestilent Kathari
+M Progenitus
+C Quenchable Fire
+R Rakka Mar
+U Reliquary Tower
+C Rhox Bodyguard
+C Rhox Meditant
+C Rotting Rats
+C Rupture Spire
+U Sacellum Archers
+C Salvage Slasher
+U Scarland Thrinax
+C Scattershot Archer
+R Scepter of Dominance
+R Scepter of Fugue
+R Scepter of Insight
+U Scornful AEther-Lich
+C Sedraxis Alchemist
+U Shambling Remains
+U Shard Convergence
+R Sigil of the Empty Throne
+U Skyward Eye Prophets
+U Sludge Strider
+R Soul's Majesty
+R Sphinx Summoner
+U Spore Burst
+C Suicidal Charge
+C Sylvan Bounty
+R Telemin Performance
+M Thornling
+C Toxic Iguanar
+C Traumatic Visions
+C Tukatongue Thallid
+U Unstable Frontier
+C Unsummon
+U Vagrant Plowbeasts
+C Valeron Outlander
+C Valiant Guard
+C Vectis Agents
+C Vedalken Outlander
+U Viashino Slaughtermaster
+U View from Above
+U Voices from the Void
+U Volcanic Fallout
+R Voracious Dragon
+R Wall of Reverence
+C Wandering Goblins
+C Wild Leotau
+R Worldheart Phoenix
+C Worldly Counsel
+C Wretched Banquet
+C Yoke of the Damned
+C Zombie Outlander

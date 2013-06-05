@@ -1,0 +1,370 @@
+[metadata]
+Code=9ED
+Date=2005-07-29
+Name=Ninth Edition
+Code2=9E
+Type=Core
+Border=White
+BoosterCovers=5
+Booster=10 Common, 3 Uncommon, 1 Rare, 1 BasicLand
+
+[cards]
+R Adarkar Wastes
+U Air Elemental
+R Aladdin's Ring
+C Anaba Shaman
+U Anaconda
+U Anarchist
+R Ancient Silverback
+U Angel of Mercy
+U Angel's Feather
+C Angelic Blessing
+U Annex
+R Archivist
+C Aven Cloudchaser
+C Aven Fisher
+C Aven Flock
+C Aven Windreader
+U Azure Drake
+C Balduvian Barbarians
+U Baleful Stare
+U Ballista Squad
+R Battle of Wits
+R Battlefield Forge
+R Beast of Burden
+R Biorhythm
+U Blackmail
+U Blanchwood Armor
+U Blaze
+U Blessed Orator
+R Blinding Angel
+R Blinking Spirit
+R Blood Moon
+R Bloodfire Colossus
+C Bog Imp
+U Bog Wraith
+U Boiling Seas
+R Booby Trap
+C Boomerang
+U Bottle Gnomes
+R Brushland
+R Caves of Koilos
+U Chastise
+U Circle of Protection: Black
+U Circle of Protection: Red
+R Clone
+R Coat of Arms
+C Coercion
+U Confiscate
+U Consume Spirit
+C Contaminated Bond
+C Coral Eel
+C Counsel of the Soratami
+R Cowardice
+C Crafty Pathmage
+C Craw Wurm
+U Creeping Mold
+C Crossbow Infantry
+U Cruel Edict
+U Dancing Scimitar
+R Daring Apprentice
+C Dark Banishing
+R Death Pits of Rath
+U Deathgazer
+R Defense Grid
+C Dehydration
+U Demolish
+U Demon's Horn
+C Demystify
+U Diabolic Tutor
+R Disrupting Scepter
+U Dragon's Claw
+U Dream Prowler
+U Drudge Skeletons
+C Eager Cadet
+R Early Harvest
+U Elvish Bard
+C Elvish Berserker
+R Elvish Champion
+R Elvish Piper
+C Elvish Warrior
+R Emperor Crocodile
+C Enfeeblement
+U Enormous Baloth
+U Enrage
+R Evacuation
+U Execute
+U Exhaustion
+C Fear
+U Fellwar Stone
+C Festering Goblin
+R Final Punishment
+C Firebreathing
+C Fishliver Oil
+U Flame Wave
+U Flashfires
+R Fleeting Image
+C Flight
+U Flowstone Crusher
+C Flowstone Shambler
+R Flowstone Slide
+C Foot Soldiers
+R Force of Nature
+L Forest
+L Forest
+L Forest
+L Forest
+R Form of the Dragon
+C Foul Imp
+C Fugitive Wizard
+R Furnace of Rath
+C Giant Cockroach
+C Giant Growth
+C Giant Octopus
+C Giant Spider
+U Gift of Estates
+R Glorious Anthem
+C Glory Seeker
+U Gluttonous Zombie
+U Goblin Balloon Brigade
+C Goblin Brigand
+C Goblin Chariot
+R Goblin King
+C Goblin Mountaineer
+C Goblin Piker
+C Goblin Raider
+C Goblin Sky Raider
+R Grave Pact
+C Gravedigger
+R Greater Good
+C Grizzly Bears
+U Groundskeeper
+U Guerrilla Tactics
+R Hell's Caretaker
+C Highway Robber
+C Hill Giant
+C Hollow Dogs
+C Holy Day
+C Holy Strength
+C Honor Guard
+C Horned Turtle
+U Horror of Horrors
+R Howling Mine
+U Hunted Wumpus
+R Hypnotic Specter
+U Icy Manipulator
+R Imaginary Pet
+C Index
+C Infantry Veteran
+U Inspirit
+L Island
+L Island
+L Island
+L Island
+R Ivory Mask
+R Jade Statue
+R Jester's Cap
+U Kami of Old Stone
+R Karplusan Forest
+R Karplusan Yeti
+C Kavu Climber
+U King Cheetah
+U Kird Ape
+U Kraken's Eye
+C Lava Axe
+U Leonin Skyhunter
+U Levitation
+U Ley Druid
+C Lightning Elemental
+U Llanowar Behemoth
+C Llanowar Elves
+R Llanowar Wastes
+C Looming Shade
+R Lord of the Undead
+R Loxodon Warhammer
+C Lumengrid Warden
+R Magnivore
+R Mahamoti Djinn
+R Mana Clash
+C Mana Leak
+R Marble Titan
+R Maro
+C Master Decoy
+R Master Healer
+U Megrim
+C Mending Hands
+R Might of Oaks
+R Millstone
+R Mind Bend
+C Mind Rot
+R Mindslicer
+R Mogg Sentry
+R Mortivore
+L Mountain
+L Mountain
+L Mountain
+L Mountain
+U Nantuko Husk
+R Natural Affinity
+C Natural Spring
+C Naturalize
+U Needle Storm
+U Nekrataal
+R Nightmare
+C Norwood Ranger
+U Ogre Taskmaster
+R Oracle's Attendants
+U Orcish Artillery
+C Order of the Sacred Bell
+U Ornithopter
+C Overgrowth
+C Pacifism
+R Paladin en-Vec
+C Panic Attack
+U Peace of Mind
+C Pegasus Charger
+R Persecute
+U Phantom Warrior
+R Phyrexian Arena
+U Phyrexian Gargantua
+U Phyrexian Hulk
+R Plagiarize
+C Plague Beetle
+R Plague Wind
+L Plains
+L Plains
+L Plains
+L Plains
+R Polymorph
+U Puppeteer
+U Pyroclasm
+U Quicksand
+C Raging Goblin
+C Raise Dead
+C Rampant Growth
+R Rathi Dragon
+C Ravenous Rats
+C Razortooth Rats
+C Reclaim
+C Reflexes
+U Regeneration
+R Relentless Assault
+U Reminisce
+C Remove Soul
+R Reverse Damage
+U Rewind
+R Righteousness
+U River Bear
+U Rod of Ruin
+C Rogue Kavu
+U Rootbreaker Wurm
+C Rootwalla
+R Royal Assassin
+R Rukh Egg
+R Sacred Ground
+C Sacred Nectar
+C Sage Aven
+C Samite Healer
+U Sanctum Guardian
+C Sandstone Warrior
+R Savannah Lions
+C Scaled Wurm
+C Scathe Zombies
+C Sea Monster
+C Sea's Claim
+U Seasoned Marshal
+R Seedborn Muse
+C Seething Song
+R Sengir Vampire
+C Serpent Warrior
+R Serra Angel
+U Serra's Blessing
+R Shard Phoenix
+C Shatter
+R Shivan Dragon
+R Shivan Reef
+C Shock
+C Sift
+R Silklash Spider
+C Skyhunter Prowler
+R Slate of Ancestry
+U Slay
+C Sleight of Hand
+U Soul Feast
+U Soul Warden
+U Spellbook
+C Spined Wurm
+C Spineless Thug
+U Spirit Link
+C Stone Rain
+R Storage Matrix
+C Storm Crow
+R Story Circle
+U Stream of Life
+U Sudden Impact
+R Sulfurous Springs
+U Summer Bloom
+C Suntail Hawk
+L Swamp
+L Swamp
+L Swamp
+L Swamp
+U Swarm of Rats
+U Tanglebloom
+R Teferi's Puzzle Box
+U Telepathy
+U Tempest of Light
+R Temporal Adept
+U Thieving Magpie
+U Thought Courier
+R Thran Golem
+U Threaten
+R Thundermare
+R Tidal Kraken
+U Tidings
+C Time Ebb
+R Trade Routes
+C Trained Armodon
+R Traumatize
+U Treasure Trove
+C Tree Monkey
+C Treetop Bracers
+R Underground River
+R Underworld Dreams
+C Unholy Strength
+U Ur-Golem's Eye
+U Urza's Mine
+U Urza's Power Plant
+U Urza's Tower
+R Utopia Tree
+C Venerable Monk
+U Vengeance
+R Verdant Force
+R Verduran Enchantress
+C Veteran Cavalier
+U Viashino Sandstalker
+U Viridian Shaman
+R Vizzerdrix
+C Volcanic Hammer
+U Vulshok Morningstar
+C Wanderguard Sentry
+C Warrior's Honor
+R Weathered Wayfarer
+U Web
+R Weird Harvest
+U Whip Sergeant
+R Wildfire
+R Will-o'-the-Wisp
+C Wind Drake
+U Withering Gaze
+C Wood Elves
+R Worship
+R Wrath of God
+U Wurm's Tooth
+R Yavimaya Coast
+U Yavimaya Enchantress
+R Yawgmoth Demon
+U Zealous Inquisitor
+C Zodiac Monkey
+U Zombify
+R Zur's Weirding

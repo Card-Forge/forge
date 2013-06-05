@@ -1,0 +1,129 @@
+[metadata]
+Code=DRK
+Date=1994-08-01
+Name=The Dark
+Code2=DK
+Type=Expansion
+BoosterCovers=1
+Booster=6 Common, 2 UncommonRare
+
+[cards]
+U Amnesia
+U Angry Mob
+R Apprentice Wizard
+C Ashes to Ashes
+R Ball Lightning
+U Banshee
+R Barl's Cage
+R Blood Moon
+U Blood of the Martyr
+C Bog Imp
+C Bog Rats
+U Bone Flute
+U Book of Rass
+C Brainwash
+U Brothers of Fire
+C Carnivorous Plant
+U Cave People
+R City of Shadows
+R Cleansing
+U Coal Golem
+U Curse Artifact
+R Dance of Many
+C Dark Heart of the Wood
+U Dark Sphere
+C Deep Water
+U Diabolic Machine
+C Drowned
+C Dust to Dust
+U Eater of the Dead
+U Electric Eel
+U Elves of Deep Shadow
+C Erosion
+R Eternal Flame
+R Exorcist
+U Fasting
+U Fellwar Stone
+C Festival
+U Fire Drake
+U Fire and Brimstone
+C Fissure
+U Flood
+U Fountain of Youth
+R Frankenstein's Monster
+C Gaea's Touch
+C Ghost Ship
+C Giant Shark
+C Goblin Caves
+C Goblin Digging Team
+C Goblin Hero
+C Goblin Rock Sled
+C Goblin Shrine
+R Goblin Wizard
+C Goblins of the Flarg
+R Grave Robbers
+R Hidden Path
+C Holy Light
+R Inferno
+C Inquisition
+R Knights of Thorn
+C Land Leeches
+R Leviathan
+U Living Armor
+R Lurker
+R Mana Clash
+R Mana Vortex
+C Marsh Gas
+C Marsh Goblins
+C Marsh Viper
+R Martyr's Cry
+U Maze of Ith
+U Merfolk Assassin
+R Mind Bomb
+C Miracle Worker
+C Morale
+C Murk Dwellers
+R Nameless Race
+U Necropolis
+R Niall Silvain
+U Orc General
+U People of the Woods
+C Pikemen
+R Preacher
+R Psychic Allergy
+R Rag Man
+U Reflecting Mirror
+C Riptide
+U Runesword
+R Safe Haven
+C Savaen Elves
+U Scarecrow
+R Scarwood Bandits
+C Scarwood Goblins
+U Scarwood Hag
+C Scavenger Folk
+R Season of the Witch
+U Sisters of the Flame
+U Skull of Orm
+R Sorrow's Path
+U Spitting Slug
+C Squire
+U Standing Stones
+R Stone Calendar
+C Sunken City
+U Tangle Kelp
+U The Fallen
+U Tivadar's Crusade
+U Tormod's Crypt
+U Tower of Coireall
+R Tracker
+U Uncle Istvan
+C Venom
+U Wand of Ith
+U War Barge
+C Water Wurm
+U Whippoorwill
+R Witch Hunter
+C Word of Binding
+R Worms of the Earth
+R Wormwood Treefolk

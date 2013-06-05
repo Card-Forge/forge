@@ -1,0 +1,156 @@
+[metadata]
+Code=PLS
+Date=2001-02-05
+Name=Planeshift
+Code2=PS
+Type=Expansion
+BoosterCovers=1
+Booster=11 Common, 3 Uncommon, 1 Rare
+
+[cards]
+U Allied Strategies
+U Alpha Kavu
+C Amphibious Kavu
+R Ancient Spider
+C Arctic Merfolk
+C Aura Blast
+C Aurora Griffin
+C Bog Down
+C Caldera Kavu
+C Cavern Harpy
+R Cloud Cover
+C Confound
+U Crosis's Catacombs
+U Crosis's Charm
+U Darigaaz's Caldera
+U Darigaaz's Charm
+C Daring Leap
+R Dark Suspicions
+R Deadapult
+C Death Bomb
+R Destructive Flow
+R Diabolic Intent
+C Disciple of Kangee
+R Dominaria's Judgment
+R Doomsday Specter
+R Draco
+R Dralnu's Crusade
+R Dralnu's Pet
+U Dromar's Cavern
+U Dromar's Charm
+R Eladamri's Call
+U Ertai's Trickery
+R Ertai, the Corrupted
+R Ertai, the Corrupted
+C Escape Routes
+U Exotic Disease
+C Falling Timber
+U Flametongue Kavu
+U Fleetfoot Panther
+R Forsaken City
+R Gaea's Herald
+C Gaea's Might
+U Gainsay
+C Gerrard's Command
+R Goblin Game
+U Guard Dogs
+C Heroic Defiance
+C Hobble
+C Honorable Scout
+C Horned Kavu
+C Hull Breach
+C Hunting Drake
+U Implode
+C Insolence
+C Kavu Recluse
+C Keldon Mantle
+R Keldon Twilight
+U Lashknife Barrier
+C Lava Zombie
+R Lord of the Undead
+C Maggot Carrier
+C Magma Burst
+R Magnigoth Treefolk
+C Malicious Advice
+U Mana Cylix
+R March of Souls
+U Marsh Crocodile
+R Meddling Mage
+R Meteor Crater
+C Mire Kavu
+U Mirrorwood Treefolk
+U Mogg Jailer
+R Mogg Sentry
+C Morgue Toad
+U Multani's Harmony
+R Natural Emergence
+R Nemata, Grove Guardian
+U Nightscape Battlemage
+C Nightscape Familiar
+U Noxious Vapors
+R Orim's Chant
+C Phyrexian Bloodstock
+R Phyrexian Scuta
+R Phyrexian Tyranny
+R Planar Overlay
+R Planeswalker's Favor
+R Planeswalker's Fury
+R Planeswalker's Mirth
+R Planeswalker's Mischief
+R Planeswalker's Scorn
+C Pollen Remedy
+C Primal Growth
+C Pygmy Kavu
+R Questing Phelddagrif
+R Quirion Dryad
+C Quirion Explorer
+R Radiant Kavu
+U Razing Snidd
+U Rith's Charm
+U Rith's Grove
+C Root Greevil
+C Rushing River
+R Samite Elder
+C Samite Pilgrim
+U Sawtooth Loon
+C Sea Snidd
+U Shifting Sky
+R Shivan Wurm
+C Shriek of Dread
+C Silver Drake
+C Singe
+C Sinister Strength
+C Sisay's Ingenuity
+R Skyship Weatherlight
+R Skyship Weatherlight
+U Skyshroud Blessing
+U Slay
+C Sleeping Potion
+C Slingshot Goblin
+U Sparkcaster
+U Star Compass
+C Steel Leaf Paladin
+C Stone Kavu
+U Stormscape Battlemage
+C Stormscape Familiar
+U Strafe
+U Stratadon
+R Sunken Hope
+U Sunscape Battlemage
+C Sunscape Familiar
+U Surprise Deployment
+R Tahngarth, Talruum Hero
+R Tahngarth, Talruum Hero
+U Terminal Moraine
+C Terminate
+U Thornscape Battlemage
+C Thornscape Familiar
+U Thunderscape Battlemage
+C Thunderscape Familiar
+U Treva's Charm
+U Treva's Ruins
+R Urza's Guilt
+U Voice of All
+C Volcano Imp
+U Warped Devotion
+R Waterspout Elemental

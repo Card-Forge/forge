@@ -1,0 +1,274 @@
+[metadata]
+Code=ISD
+Date=2011-09-30
+Name=Innistrad
+Code2=ISD
+Type=Expansion
+BoosterCovers=5
+Booster=9 Common:!dfc, 3 Uncommon:!dfc, 1 RareMythic:!dfc, 1 dfc, 1 BasicLand
+
+[cards]
+U Abattoir Ghoul
+C Abbey Griffin
+C Altar's Reap
+C Ambush Viper
+C Ancient Grudge
+R Angel of Flight Alabaster
+M Angelic Overseer
+C Armored Skaab
+M Army of the Damned
+C Ashmouth Hound
+C Avacyn's Pilgrim
+C Avacynian Priest
+R Back from the Brink
+M Balefire Dragon
+U Battleground Geist
+U Bitterheart Witch
+R Blasphemous Act
+C Blazing Torch
+C Bloodcrazed Neonate
+R Bloodgift Demon
+R Bloodline Keeper
+C Bonds of Faith
+U Boneyard Wurm
+C Brain Weevil
+U Bramblecrush
+C Brimstone Volley
+C Bump in the Night
+U Burning Vengeance
+U Butcher's Cleaver
+R Cackling Counterpart
+C Caravan Vigil
+U Cellar Door
+R Champion of the Parish
+C Chapel Geist
+R Charmbreaker Devils
+U Civilized Scholar
+C Claustrophobia
+R Clifftop Retreat
+U Cloistered Youth
+C Cobbled Wings
+C Corpse Lunge
+R Creeping Renaissance
+R Creepy Doll
+C Crossway Vampire
+U Curiosity
+R Curse of Death's Hold
+C Curse of Oblivion
+R Curse of Stalked Prey
+C Curse of the Bloody Tome
+U Curse of the Nightly Hunt
+C Curse of the Pierced Heart
+C Darkthicket Wolf
+R Daybreak Ranger
+C Dead Weight
+R Dearly Departed
+C Delver of Secrets
+U Demonmail Hauberk
+C Deranged Assistant
+U Desperate Ravings
+R Devil's Play
+U Diregraf Ghoul
+U Disciple of Griselbrand
+U Dissipate
+R Divine Reckoning
+C Doomed Traveler
+C Dream Twist
+C Elder Cathar
+R Elder of Laurels
+R Elite Inquisitor
+R Endless Ranks of the Dead
+M Essence of the Wild
+R Evil Twin
+R Falkenrath Marauders
+U Falkenrath Noble
+C Feeling of Dread
+C Feral Ridgewolf
+C Festerhide Boar
+U Fiend Hunter
+C Forbidden Alchemy
+L Forest
+L Forest
+L Forest
+C Fortress Crab
+C Frightful Delusion
+U Full Moon's Rise
+C Furor of the Bitten
+U Gallows Warden
+U Galvanic Juggernaut
+M Garruk Relentless
+U Gatstaf Shepherd
+R Gavony Township
+M Geist of Saint Traft
+R Geist-Honored Monk
+U Geistcatcher's Rig
+C Geistflame
+U Ghost Quarter
+C Ghostly Possession
+C Ghoulcaller's Bell
+C Ghoulcaller's Chant
+C Ghoulraiser
+C Gnaw to the Bone
+U Grasp of Phantoms
+C Grave Bramble
+U Graveyard Shovel
+M Grimgrin, Corpse-Born
+M Grimoire of the Dead
+C Grizzled Outcasts
+C Gruesome Deformity
+R Gutter Grime
+U Hamlet Captain
+U Hanweir Watchkeep
+C Harvest Pyre
+R Heartless Summoning
+R Heretic's Punishment
+R Hinterland Harbor
+U Hollowhenge Scavenger
+C Hysterical Blindness
+C Infernal Plunge
+U Inquisitor's Flail
+R Instigator Gang
+U Intangible Virtue
+U Into the Maw of Hell
+U Invisible Stalker
+L Island
+L Island
+L Island
+R Isolated Chapel
+R Kessig Cagebreakers
+C Kessig Wolf
+R Kessig Wolf Run
+C Kindercatch
+R Kruin Outlaw
+R Laboratory Maniac
+U Lantern Spirit
+M Liliana of the Veil
+C Lost in the Mist
+R Ludevic's Test Subject
+U Lumberknot
+U Make a Wish
+C Makeshift Mauler
+R Manor Gargoyle
+C Manor Skeleton
+C Markov Patrician
+U Mask of Avacyn
+U Mausoleum Guard
+C Maw of the Mire
+R Mayor of Avabruck
+U Memory's Journey
+R Mentor of the Meek
+U Midnight Haunting
+M Mikaeus, the Lunarch
+R Mindshrieker
+M Mirror-Mad Phantasm
+U Moan of the Unhallowed
+R Moldgraf Monstrosity
+C Moment of Heroism
+C Moon Heron
+C Moonmist
+R Moorland Haunt
+U Morkrut Banshee
+L Mountain
+L Mountain
+L Mountain
+C Mulch
+U Murder of Crows
+C Naturalize
+R Nephalia Drownyard
+R Nevermore
+C Night Revelers
+C Night Terrors
+C Nightbird's Clutches
+M Olivia Voldaren
+C One-Eyed Scarecrow
+C Orchard Spirit
+R Parallel Lives
+U Paraselene
+M Past in Flames
+C Pitchburn Devils
+L Plains
+L Plains
+L Plains
+C Prey Upon
+U Purify the Grave
+U Rage Thrower
+U Rakish Heir
+U Rally the Peasants
+C Ranger's Guile
+M Reaper from the Abyss
+C Rebuke
+U Reckless Waif
+C Riot Devils
+U Rolling Temblor
+R Rooftop Storm
+C Rotting Fensnake
+R Runechanter's Pike
+U Runic Repetition
+U Scourge of Geier Reach
+U Screeching Bat
+C Selfless Cathar
+C Selhoff Occultist
+C Sensory Deprivation
+R Sever the Bloodline
+U Sharpened Pitchfork
+C Shimmering Grotto
+C Silent Departure
+U Silver-Inlaid Dagger
+C Silverchase Fox
+U Skaab Goliath
+M Skaab Ruinator
+C Skeletal Grimace
+U Skirsdag Cultist
+R Skirsdag High Priest
+U Slayer of the Wicked
+C Smite the Monstrous
+R Snapcaster Mage
+C Somberwald Spider
+C Spare from Evil
+C Spectral Flight
+U Spectral Rider
+U Spider Spawning
+C Spidery Grasp
+R Splinterfright
+R Stensia Bloodhall
+C Stitched Drake
+C Stitcher's Apprentice
+R Stony Silence
+R Stromkirk Noble
+C Stromkirk Patrol
+R Sturmgeist
+R Sulfur Falls
+L Swamp
+L Swamp
+L Swamp
+C Think Twice
+C Thraben Purebloods
+C Thraben Sentry
+C Tormented Pariah
+C Traitorous Blood
+C Travel Preparations
+C Traveler's Amulet
+M Tree of Redemption
+U Trepanation Blade
+U Tribute to Hunger
+C Typhoid Rats
+U Ulvenwald Mystics
+R Unbreathing Horde
+U Unburial Rites
+R Undead Alchemist
+C Unruly Mob
+C Urgent Exorcism
+C Vampire Interloper
+C Vampiric Fury
+C Victim of Night
+C Village Bell-Ringer
+U Village Cannibals
+C Village Ironsmith
+C Villagers of Estwald
+C Voiceless Spirit
+C Walking Corpse
+R Witchbane Orb
+C Wooden Stake
+R Woodland Cemetery
+C Woodland Sleuth
+U Wreath of Geists

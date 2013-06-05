@@ -1,0 +1,153 @@
+[metadata]
+Code=UDS
+Date=1999-06-07
+Name=Urza's Destiny
+Code2=UD
+Type=Expansion
+BoosterCovers=1
+Booster=11 Common, 3 Uncommon, 1 Rare
+
+[cards]
+U AEther Sting
+R Academy Rector
+R Ancient Silverback
+R Apprentice Necromancer
+U Archery Training
+R Attrition
+R Aura Thief
+R Blizzard Elemental
+R Bloodshot Cyclops
+R Body Snatcher
+U Braidwood Cup
+U Braidwood Sextant
+U Brass Secretary
+U Brine Seer
+C Bubbling Beebles
+C Bubbling Muck
+U Caltrops
+C Capashen Knight
+C Capashen Standard
+C Capashen Templar
+R Carnival of Souls
+C Chime of Night
+U Cinder Seer
+C Colos Yearling
+U Compost
+R Covetous Dragon
+U Disappear
+C Disease Carriers
+R Donate
+C Dying Wail
+C Elvish Lookout
+R Elvish Piper
+R Emperor Crocodile
+U Encroach
+U Eradicate
+U Extruder
+R False Prophet
+C Fatigue
+C Fend Off
+U Festering Wound
+C Field Surgeon
+C Flame Jet
+C Fledgling Osprey
+R Flicker
+U Fodder Cannon
+U Gamekeeper
+U Goblin Berserker
+R Goblin Festival
+C Goblin Gardener
+R Goblin Marshal
+C Goblin Masons
+C Goliath Beetle
+C Heart Warden
+C Hulking Ogre
+U Hunting Moa
+C Illuminated Wings
+R Impatience
+U Incendiary
+U Iridescent Drake
+U Ivy Seer
+U Jasmine Seer
+R Junk Diver
+U Keldon Champion
+C Keldon Vandals
+C Kingfisher
+U Landslide
+U Lurking Jackals
+C Magnify
+U Mantis Engine
+C Mark of Fury
+C Marker Beetles
+C Mask of Law and Grace
+R Master Healer
+R Masticore
+C Mental Discipline
+R Metalworker
+U Metathran Elite
+C Metathran Soldier
+U Momentum
+C Multani's Decree
+U Nightshade Seer
+R Opalescence
+R Opposition
+R Pattern of Rebirth
+C Phyrexian Monitor
+R Phyrexian Negator
+U Plague Dogs
+C Plated Spider
+R Plow Under
+R Powder Keg
+U Private Research
+U Quash
+R Rapid Decay
+C Ravenous Rats
+R Rayne, Academy Chancellor
+C Reckless Abandon
+C Reliquary Monk
+R Repercussion
+R Replenish
+C Rescue
+C Rofellos's Gift
+R Rofellos, Llanowar Emissary
+U Sanctimony
+C Scent of Brine
+C Scent of Cinder
+C Scent of Ivy
+C Scent of Jasmine
+C Scent of Nightshade
+U Scour
+R Scrying Glass
+U Serra Advocate
+C Sigil of Sleep
+C Skittering Horror
+C Slinking Skirge
+C Solidarity
+U Soul Feast
+U Sowing Salt
+U Splinter
+C Squirming Mass
+R Storage Matrix
+C Taunting Elf
+C Telepathic Spies
+R Temporal Adept
+R Tethered Griffin
+U Thieving Magpie
+R Thorn Elemental
+U Thran Dynamo
+U Thran Foundry
+R Thran Golem
+C Tormented Angel
+R Treachery
+C Trumpet Blast
+C Twisted Experiment
+R Urza's Incubator
+U Voice of Duty
+U Voice of Reason
+R Wake of Destruction
+C Wall of Glare
+C Wild Colos
+C Yavimaya Elder
+U Yavimaya Enchantress
+R Yavimaya Hollow
+R Yawgmoth's Bargain

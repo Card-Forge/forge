@@ -1,0 +1,317 @@
+[metadata]
+Code=CHK
+Date=2004-10-01
+Name=Champions of Kamigawa
+Code2=CHK
+Type=Expansion
+BoosterCovers=5
+Booster=11 Common, 3 Uncommon, 1 Rare
+
+[cards]
+C Akki Avalanchers
+U Akki Coalflinger
+R Akki Lavarunner
+C Akki Rockspeaker
+U Akki Underminer
+C Ashen-Skin Zubera
+U Aura of Dominion
+R Azami, Lady of Scrolls
+R Azusa, Lost but Seeking
+C Battle-Mad Ronin
+C Befoul
+R Ben-Ben, Akki Hermit
+C Blessed Breath
+U Blind with Anger
+U Blood Rites
+U Blood Speaker
+U Bloodthirsty Ogre
+R Boseiju, Who Shelters All
+U Brothers Yamazaki
+U Brothers Yamazaki
+C Brutal Deceiver
+R Budoka Gardener
+C Burr Grafter
+U Bushi Tenderfoot
+C Cage of Hands
+C Call to Glory
+C Callous Deceiver
+U Candles' Glow
+U Cleanfall
+U Cloudcrest Lake
+C Commune with Nature
+C Consuming Vortex
+C Counsel of the Soratami
+R Cranial Extraction
+C Cruel Deceiver
+C Crushing Pain
+C Cursed Ronin
+U Cut the Tethers
+U Dampen Thought
+U Dance of Shadows
+C Deathcurse Ogre
+C Desperate Ritual
+C Devoted Retainer
+C Devouring Greed
+C Devouring Rage
+C Distress
+R Dosan the Falling Leaf
+C Dripping-Tongue Zubera
+U Earthshaker
+U Eerie Procession
+R Eiganjo Castle
+R Eight-and-a-Half-Tails
+C Ember-Fist Zubera
+C Ethereal Haze
+C Eye of Nowhere
+U Feast of Worms
+C Feral Deceiver
+C Field of Reality
+C Floating-Dream Zubera
+R Forbidden Orchard
+L Forest
+L Forest
+L Forest
+L Forest
+C Frostwielder
+U Gale Force
+R General's Kabuto
+U Ghostly Prison
+C Gibbering Kami
+R Gifts Ungiven
+C Glacial Ray
+R Glimpse of Nature
+R Godo, Bandit Warlord
+U Graceful Adept
+U Guardian of Solitude
+U Gutwrencher Oni
+R Hair-Strung Koto
+R Hall of the Bandit Lord
+U Hana Kami
+U Hanabi Blast
+U Hankyu
+C Harsh Deceiver
+R He Who Hungers
+R Heartbeat of Spring
+C Hearth Kami
+U Hideous Laughter
+R Hikari, Twilight Guardian
+U Hinder
+C Hisoka's Defiance
+C Hisoka's Guard
+R Hisoka, Minamo Sensei
+R Hold the Line
+U Honden of Cleansing Fire
+U Honden of Infinite Rage
+U Honden of Life's Web
+U Honden of Night's Reach
+U Honden of Seeing Winds
+U Honor-Worn Shaku
+U Horizon Seed
+R Horobi, Death's Wail
+C Humble Budoka
+C Hundred-Talon Kami
+R Imi Statue
+R Iname, Death Aspect
+R Iname, Life Aspect
+C Indomitable Will
+U Initiate of Blood
+U Innocence Kami
+R Isamaru, Hound of Konda
+L Island
+L Island
+L Island
+L Island
+U Jade Idol
+R Journeyer's Kite
+C Joyous Respite
+R Jugan, the Rising Star
+C Jukai Messenger
+R Junkyo Bell
+R Jushi Apprentice
+C Kabuto Moth
+C Kami of Ancient Law
+C Kami of Fire's Roar
+U Kami of Lunacy
+U Kami of Old Stone
+C Kami of Twisted Reflection
+C Kami of the Hunt
+C Kami of the Painted Road
+U Kami of the Palace Fields
+C Kami of the Waning Moon
+U Kashi-Tribe Reaver
+C Kashi-Tribe Warriors
+R Keiga, the Tide Star
+R Kiki-Jiki, Mirror Breaker
+R Kiku, Night's Flower
+C Kitsune Blademaster
+C Kitsune Diviner
+C Kitsune Healer
+R Kitsune Mystic
+C Kitsune Riftwalker
+R Kodama of the North Tree
+R Kodama of the South Tree
+C Kodama's Might
+C Kodama's Reach
+R Kokusho, the Evening Star
+R Konda's Banner
+U Konda's Hatamoto
+R Konda, Lord of Eiganjo
+U Kumano's Pupils
+R Kumano, Master Yamabushi
+R Kuro, Pitlord
+R Kusari-Gama
+C Lantern Kami
+U Lantern-Lit Graveyard
+C Lava Spike
+C Lifted by Clouds
+R Long-Forgotten Gohei
+U Lure
+U Mana Seism
+R Marrow-Gnawer
+R Masako the Humorless
+C Matsu-Tribe Decoy
+R Meloku the Clouded Mirror
+C Midnight Covenant
+R Minamo, School at Water's Edge
+R Mindblaze
+R Moonring Mirror
+C Moss Kami
+C Mothrider Samurai
+L Mountain
+L Mountain
+L Mountain
+L Mountain
+R Myojin of Cleansing Fire
+R Myojin of Infinite Rage
+R Myojin of Life's Web
+R Myojin of Night's Reach
+R Myojin of Seeing Winds
+C Mystic Restraints
+U Nagao, Bound by Honor
+R Nature's Will
+U Nezumi Bone-Reader
+C Nezumi Cutthroat
+U Nezumi Graverobber
+C Nezumi Ronin
+R Nezumi Shortfang
+R Night Dealings
+R Night of Souls' Betrayal
+U Nine-Ringed Bo
+U No-Dachi
+U Numai Outcast
+R Oathkeeper, Takeno's Daisho
+R Okina, Temple to the Grandfathers
+U Oni Possession
+U Orbweaver Kumo
+C Order of the Sacred Bell
+U Ore Gorger
+U Orochi Eggwatcher
+R Orochi Hatchery
+C Orochi Leafcaller
+C Orochi Ranger
+C Orochi Sustainer
+U Otherworldly Journey
+U Pain Kami
+U Painwracker Oni
+R Part the Veil
+C Peer Through Depths
+U Petals of Insight
+U Pinecrest Ridge
+C Pious Kitsune
+L Plains
+L Plains
+L Plains
+L Plains
+C Psychic Puppetry
+C Pull Under
+C Quiet Purity
+C Rag Dealer
+C Ragged Veins
+C Reach Through Mists
+U Reciprocate
+U Reito Lantern
+C Rend Flesh
+C Rend Spirit
+R Reverse the Sands
+R Reweave
+C River Kaijin
+C Ronin Houndmaster
+U Rootrunner
+R Ryusei, the Falling Star
+U Sachi, Daughter of Seshiro
+C Sakura-Tribe Elder
+U Samurai Enforcers
+U Samurai of the Pale Curtain
+C Scuttling Death
+R Seizan, Perverter of Truth
+R Sensei Golden-Tail
+U Sensei's Divining Top
+C Serpent Skin
+R Seshiro the Anointed
+R Shell of the Last Kappa
+R Shimatsu the Bloodcloaked
+R Shinka, the Bloodsoaked Keep
+R Shisato, Whispering Hunter
+R Shizo, Death's Storehouse
+U Sideswipe
+C Sift Through Sands
+C Silent-Chant Zubera
+U Sire of the Storm
+U Soilshaper
+C Sokenzan Bruiser
+C Soratami Cloudskater
+C Soratami Mirror-Guard
+U Soratami Mirror-Mage
+C Soratami Rainshaper
+U Soratami Savant
+U Soratami Seer
+U Sosuke, Son of Seshiro
+C Soul of Magma
+R Soulblast
+C Soulless Revival
+U Squelch
+C Stone Rain
+U Strange Inversion
+U Strength of Cedars
+U Struggle for Sanity
+U Student of Elements
+U Swallowing Plague
+L Swamp
+L Swamp
+L Swamp
+L Swamp
+R Swirl the Mists
+R Takeno, Samurai General
+R Tatsumasa, the Dragon's Fang
+C Teller of Tales
+U Tenza, Godo's Maul
+C Terashi's Cry
+R The Unspeakable
+U Thief of Hope
+C Thoughtbind
+U Thousand-legged Kami
+R Through the Breach
+R Tide of War
+R Time Stop
+U Time of Need
+U Tranquil Garden
+R Uba Mask
+C Uncontrollable Anger
+C Unearthly Blizzard
+C Unnatural Speed
+R Untaidake, the Cloud Keeper
+R Uyo, Silent Prophet
+R Vassal's Duty
+C Venerable Kumo
+C Vigilance
+C Villainous Ogre
+C Vine Kami
+C Waking Nightmare
+C Wandering Ones
+U Waterveil Cavern
+C Wear Away
+C Wicked Akuba
+C Yamabushi's Flame
+C Yamabushi's Storm
+R Yosei, the Morning Star
+R Zo-Zu the Punisher

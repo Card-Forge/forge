@@ -1,0 +1,87 @@
+[metadata]
+Code=DDG
+Date=2011-04-01
+Name=Duel Decks: Knights vs. Dragons
+
+[cards]
+U Alaborn Cavalier
+C Armillary Sphere
+C Benalish Lancer
+U Bloodmark Mentor
+M Bogardan Hellkite
+C Bogardan Rager
+U Breath of Darigaaz
+U Captive Flame
+C Caravan Escort
+C Cinder Wall
+C Claws of Valakut
+U Cone of Flame
+C Dragon Fodder
+U Dragon Whelp
+U Dragon's Claw
+U Dragonspeaker Shaman
+C Edge of Autumn
+C Fiery Fall
+C Fire-Belly Changeling
+L Forest
+L Forest
+L Forest
+L Forest
+C Ghostfire
+U Grasslands
+U Griffin Guide
+U Harm's Way
+U Henge Guardian
+U Heroes' Reunion
+U Jaws of Stone
+U Juniper Order Ranger
+U Kabira Vindicator
+R Kilnmouth Dragon
+R Kinsbaile Cavalier
+R Knight Exemplar
+C Knight of Cliffhaven
+U Knight of Meadowgrain
+M Knight of the Reliquary
+R Knight of the White Orchid
+R Knotvine Paladin
+U Leonin Skyhunter
+C Lionheart Maverick
+R Loxodon Warhammer
+C Mighty Leap
+R Mordant Dragon
+L Mountain
+L Mountain
+L Mountain
+L Mountain
+C Mudbutton Torchrunner
+C Oblivion Ring
+U Paladin of Prahv
+L Plains
+L Plains
+L Plains
+L Plains
+C Plover Knights
+U Punishing Fire
+U Reciprocate
+U Reprisal
+C Seething Song
+C Seismic Strike
+C Sejiri Steppe
+C Selesnya Sanctuary
+U Shiv's Embrace
+R Shivan Hellkite
+C Sigil Blessing
+U Silver Knight
+C Skirk Prospector
+C Skyhunter Patrol
+C Spidersilk Armor
+C Spitting Earth
+C Steward of Valeron
+U Temporary Insanity
+U Test of Faith
+R Thunder Dragon
+U Treetop Village
+R Voracious Dragon
+U White Knight
+U Wilt-Leaf Cavaliers
+U Zhalfirin Commander

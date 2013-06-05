@@ -1,0 +1,259 @@
+[metadata]
+Code=M12
+Date=2011-07-15
+Name=Magic 2012
+Code2=M12
+Type=Core
+BoosterCovers=5
+Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand
+
+[cards]
+C AEther Adept
+U Acidic Slime
+C Act of Treason
+R Adaptive Automaton
+R Aegis Angel
+U Alabaster Mage
+U Alluring Siren
+C Amphin Cutthroat
+U Angel's Feather
+C Angel's Mercy
+M Angelic Destiny
+R Arachnus Spinner
+C Arachnus Web
+U Arbalest Elite
+R Archon of Justice
+C Armored Warhorse
+C Assault Griffin
+C Auramancer
+U Autumn's Veil
+C Aven Fleetwing
+U Azure Mage
+U Belltower Sphinx
+C Benalish Veteran
+R Birds of Paradise
+C Blood Ogre
+C Blood Seeker
+M Bloodlord of Vaasgoth
+C Bloodrage Vampire
+C Bonebreaker Giant
+C Bountiful Harvest
+C Brindle Boar
+C Brink of Disaster
+U Buried Ruin
+R Call to the Grave
+C Cancel
+U Carnage Wurm
+U Celestial Purge
+R Cemetery Reaper
+C Chandra's Outrage
+R Chandra's Phoenix
+M Chandra, the Firebrand
+C Chasm Drake
+C Child of Night
+U Circle of Flame
+U Combust
+U Consume Spirit
+C Coral Merfolk
+U Crimson Mage
+U Crown of Empires
+U Crumbling Colossus
+U Cudgel Troll
+C Dark Favor
+R Day of Judgment
+U Deathmark
+U Demon's Horn
+C Demystify
+C Devouring Swarm
+U Diabolic Tutor
+C Disentomb
+C Distress
+C Divination
+C Divine Favor
+R Djinn of Wishes
+C Doom Blade
+R Doubling Chant
+U Dragon's Claw
+R Dragonskull Summit
+C Drifting Shade
+R Drowned Catacomb
+R Druidic Satchel
+R Dungrove Elder
+C Duskhunter Bat
+U Elite Vanguard
+U Elixir of Immortality
+R Elvish Archdruid
+C Fiery Hellhound
+U Fireball
+C Firebreathing
+R Flameblast Dragon
+U Flashfreeze
+C Flight
+C Fling
+C Fog
+L Forest
+L Forest
+L Forest
+L Forest
+C Frost Breath
+M Frost Titan
+M Furyborn Hellkite
+C Garruk's Companion
+R Garruk's Horde
+M Garruk, Primal Hunter
+C Giant Spider
+M Gideon Jura
+R Gideon's Avenger
+C Gideon's Lawkeeper
+R Glacial Fortress
+C Gladecover Scout
+C Goblin Arsonist
+U Goblin Bangchuckers
+R Goblin Chieftain
+C Goblin Fireslinger
+U Goblin Grenade
+C Goblin Piker
+C Goblin Tunneler
+C Goblin War Paint
+C Gorehorn Minotaurs
+R Grand Abolisher
+M Grave Titan
+C Gravedigger
+C Greater Basilisk
+U Greatsword
+C Griffin Rider
+C Griffin Sentinel
+R Grim Lavamancer
+C Guardians' Pledge
+C Harbor Serpent
+C Hideous Visage
+R Honor of the Pure
+U Hunter's Insight
+C Ice Cage
+C Incinerate
+M Inferno Titan
+L Island
+L Island
+L Island
+L Island
+R Jace's Archivist
+C Jace's Erasure
+M Jace, Memory Adept
+U Jade Mage
+U Kite Shield
+U Kraken's Eye
+C Lava Axe
+U Levitation
+C Lifelink
+C Lightning Elemental
+C Llanowar Elves
+R Lord of the Unreal
+U Lure
+C Lurking Crocodile
+C Mana Leak
+R Manabarbs
+C Manalith
+C Manic Vandal
+U Master Thief
+C Merfolk Looter
+C Merfolk Mesmerist
+R Mesa Enchantress
+C Mighty Leap
+U Mind Control
+C Mind Rot
+R Mind Unbound
+R Monomania
+L Mountain
+L Mountain
+L Mountain
+L Mountain
+C Naturalize
+C Negate
+U Oblivion Ring
+U Onyx Mage
+U Overrun
+C Pacifism
+R Pentavus
+C Peregrine Griffin
+R Personal Sanctuary
+C Phantasmal Bear
+U Phantasmal Dragon
+R Phantasmal Image
+L Plains
+L Plains
+L Plains
+L Plains
+C Plummet
+C Ponder
+C Pride Guardian
+M Primeval Titan
+M Primordial Hydra
+R Quicksilver Amulet
+C Rampant Growth
+U Reassembling Skeleton
+C Reclaim
+R Redirect
+R Reverberate
+R Rites of Flourishing
+U Roc Egg
+R Rootbound Crag
+R Royal Assassin
+R Rune-Scarred Demon
+C Runeclaw Bear
+U Rusted Sentinel
+C Sacred Wolf
+U Scepter of Empires
+R Scrambleverse
+U Sengir Vampire
+U Serra Angel
+C Shock
+C Siege Mastodon
+R Skinshifter
+C Skywinder Drake
+C Slaughter Cry
+U Smallpox
+R Solemn Simulacrum
+M Sorin Markov
+C Sorin's Thirst
+R Sorin's Vengeance
+R Sphinx of Uthuun
+U Spirit Mantle
+C Stampeding Rhino
+C Stave Off
+U Stingerfling Spider
+C Stonehorn Dignitary
+U Stormblood Berserker
+C Stormfront Pegasus
+M Sun Titan
+R Sundial of the Infinite
+R Sunpetal Grove
+R Sutured Ghoul
+L Swamp
+L Swamp
+L Swamp
+L Swamp
+U Swiftfoot Boots
+C Taste of Blood
+U Tectonic Rift
+U Thran Golem
+R Throne of Empires
+M Time Reversal
+U Timely Reinforcements
+C Titanic Growth
+C Tormented Soul
+C Trollhide
+U Turn to Frog
+C Unsummon
+U Vampire Outcasts
+C Vastwood Gorger
+R Vengeful Pharaoh
+R Visions of Beyond
+U Volcanic Dragon
+C Wall of Torches
+C Warpath Ghoul
+R Warstorm Surge
+R Worldslayer
+C Wring Flesh
+U Wurm's Tooth
+C Zombie Goliath
+U Zombie Infestation

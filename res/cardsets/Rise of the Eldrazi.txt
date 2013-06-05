@@ -1,0 +1,258 @@
+[metadata]
+Code=ROE
+Date=2010-04-23
+Name=Rise of the Eldrazi
+Code2=ROE
+Type=Expansion
+BoosterCovers=5
+Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand
+
+[cards]
+U Affa Guard Hound
+U Akoum Boulderfoot
+M All Is Dust
+C Ancient Stirrings
+R Angelheart Vial
+U Arrogant Bloodlord
+U Artisan of Kozilek
+C Aura Finesse
+C Aura Gnarlid
+R Awakening Zone
+C Bala Ged Scorpion
+R Baneful Omen
+C Battle Rampart
+C Battle-Rattle Shaman
+R Bear Umbra
+U Beastbreaker of Bala Ged
+C Bloodrite Invoker
+C Bloodthrone Vampire
+U Boar Umbra
+U Bramblesnap
+U Brimstone Mage
+C Brood Birthing
+U Broodwarden
+C Cadaver Imp
+C Caravan Escort
+M Cast Through Time
+C Champion's Drake
+R Conquering Manticore
+R Consume the Meek
+R Consuming Vapors
+C Contaminated Ground
+R Coralhelm Commander
+U Corpsehatch
+U Crab Umbra
+U Curse of Wizardry
+C Daggerback Basilisk
+C Dawnglare Invoker
+C Death Cultist
+R Deathless Angel
+C Demonic Appetite
+C Demystify
+C Deprive
+R Devastating Summons
+R Disaster Radius
+C Distortion Strike
+U Domestication
+R Dormant Gomazoa
+U Drake Umbra
+R Drana, Kalastria Bloodchief
+C Dread Drone
+U Dreamstone Hedron
+R Echo Mage
+C Eel Umbra
+C Eland Umbra
+R Eldrazi Conscription
+R Eldrazi Temple
+U Emerge Unscathed
+C Emrakul's Hatcher
+M Emrakul, the Aeons Torn
+U Enatu Golem
+U Enclave Cryptologist
+U Escaped Null
+C Essence Feed
+C Evolving Wilds
+U Explosive Revelation
+C Fissure Vent
+C Flame Slash
+C Fleeting Distraction
+L Forest
+L Forest
+L Forest
+L Forest
+U Forked Bolt
+C Frostwind Invoker
+R Gelatinous Genesis
+M Gideon Jura
+R Gigantomancer
+C Gloomhunter
+C Glory Seeker
+C Goblin Arsonist
+C Goblin Tunneler
+R Gravitational Shift
+U Gravity Well
+C Grotag Siege-Runner
+C Growth Spasm
+C Guard Duty
+U Guard Gomazoa
+R Guul Draz Assassin
+U Hada Spy Patrol
+C Halimar Wavewatch
+C Hand of Emrakul
+C Harmless Assault
+C Haze Frog
+C Heat Ray
+R Hedron Matrix
+R Hedron-Field Purists
+M Hellcarver Demon
+R Hellion Eruption
+C Hyena Umbra
+C Ikiral Outrider
+C Induce Despair
+U Inquisition of Kozilek
+U Irresistible Prey
+L Island
+L Island
+L Island
+L Island
+R It That Betrays
+U Jaddi Lifestrider
+U Joraga Treespeaker
+C Jwari Scuttler
+U Kabira Vindicator
+M Kargan Dragonlord
+R Kazandu Tuskcaller
+R Keening Stone
+M Khalni Hydra
+C Kiln Fiend
+C Knight of Cliffhaven
+C Kor Line-Slinger
+R Kor Spiritdancer
+C Kozilek's Predator
+M Kozilek, Butcher of Truth
+C Lagac Lizard
+C Last Kiss
+C Lavafume Invoker
+C Lay Bare
+C Leaf Arrow
+M Lighthouse Chronologist
+R Lightmine Field
+M Linvala, Keeper of Silence
+C Living Destiny
+C Lone Missionary
+R Lord of Shatterskull Pass
+U Luminous Wake
+U Lust for War
+R Magmaw
+C Makindi Griffin
+U Mammoth Umbra
+C Merfolk Observer
+U Merfolk Skyscout
+C Might of the Masses
+C Mnemonic Wall
+R Momentous Fall
+R Mortician Beetle
+L Mountain
+L Mountain
+L Mountain
+L Mountain
+R Mul Daya Channelers
+C Narcolepsy
+C Naturalize
+R Near-Death Experience
+C Nema Siltlurker
+C Nest Invader
+C Nighthaze
+U Nirkana Cutthroat
+M Nirkana Revenant
+R Nomads' Assembly
+U Not of This World
+C Null Champion
+C Ogre Sentry
+U Ogre's Cleaver
+C Ondu Giant
+U Oust
+C Overgrown Battlement
+U Pathrazer of Ulamog
+U Pawn of Ulamog
+U Pelakka Wurm
+U Pennon Blade
+C Perish the Thought
+R Pestilence Demon
+U Phantasmal Abomination
+L Plains
+L Plains
+L Plains
+L Plains
+U Prey's Vengeance
+C Prophetic Prism
+C Puncturing Light
+R Rage Nimbus
+C Raid Bombardment
+U Rapacious One
+U Reality Spasm
+R Realms Uncharted
+R Recurring Insight
+C Regress
+C Reinforced Bulwark
+R Renegade Doppelganger
+R Repay in Kind
+C Repel the Darkness
+U Runed Servitor
+M Sarkhan the Mad
+C Sea Gate Oracle
+C See Beyond
+C Shared Discovery
+C Shrivel
+U Skeletal Wurm
+U Skittering Invasion
+C Skywatcher Adept
+C Smite
+C Snake Umbra
+C Soul's Attendant
+U Soulbound Guardians
+U Soulsurge Elemental
+C Spawning Breath
+R Spawnsire of Ulamog
+R Sphinx of Magosi
+R Sphinx-Bone Wand
+C Spider Umbra
+R Splinter Twin
+C Sporecap Spider
+C Staggershock
+C Stalwart Shield-Bearers
+C Stomper Cub
+R Student of Warfare
+U Suffer the Past
+R Surrakar Spellblade
+U Surreal Memoir
+U Survival Cache
+L Swamp
+L Swamp
+L Swamp
+L Swamp
+R Tajuru Preserver
+R Thought Gorger
+U Time of Heroes
+C Totem-Guide Hartebeest
+R Training Grounds
+U Traitorous Instinct
+M Transcendent Master
+R Tuktuk the Explorer
+C Ulamog's Crusher
+M Ulamog, the Infinite Gyre
+R Umbra Mystic
+U Unified Will
+U Valakut Fireboar
+C Vendetta
+C Venerated Teacher
+M Vengevine
+C Vent Sentinel
+U Virulent Swipe
+U Wall of Omens
+U Warmonger's Chariot
+C Wildheart Invoker
+R World at War
+C Wrap in Flames
+C Zof Shade
+C Zulaport Enforcer

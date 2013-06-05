@@ -1,0 +1,160 @@
+[metadata]
+Code=MOR
+Date=2008-02-01
+Name=Morningtide
+Code2=MOR
+Type=Expansion
+BoosterCovers=3
+Booster=11 Common, 3 Uncommon, 1 Rare
+
+[cards]
+C Ambassador Oak
+R Auntie's Snitch
+C Ballyrush Banneret
+R Battletide Alchemist
+R Bitterblossom
+C Blightsoil Druid
+R Boldwyr Heavyweights
+U Boldwyr Intimidator
+R Borderland Behemoth
+C Bosk Banneret
+U Bramblewood Paragon
+C Brighthearth Banneret
+C Burrenton Bombardier
+C Burrenton Shield-Bearers
+U Cenn's Tactician
+R Chameleon Colossus
+C Changeling Sentinel
+U Cloak and Dagger
+C Coordinated Barrage
+R Countryside Crusher
+R Cream of the Crop
+U Daily Regimen
+R Declaration of Naught
+C Deglamer
+C Dewdrop Spy
+C Disperse
+C Distant Melody
+U Diviner's Wand
+R Door of Destinies
+C Earthbrawn
+R Earwig Squad
+C Elvish Warrior
+C Everbark Shaman
+C Fencer Clique
+R Fendeep Summoner
+C Fertilid
+C Festercreep
+R Feudkiller's Verdict
+C Final-Sting Faerie
+C Fire Juggler
+C Floodchaser
+C Forfend
+C Frogtosser Banneret
+C Game-Trail Changeling
+R Gilt-Leaf Archdruid
+U Graceful Reprieve
+R Greatbow Doyen
+R Grimoire Thief
+U Heritage Druid
+C Hostile Realm
+U Hunting Triad
+R Idyllic Tutor
+R Indomitable Ancients
+C Ink Dissolver
+U Inspired Sprite
+C Kindled Fury
+R Kinsbaile Borderguard
+R Kinsbaile Cavalier
+C Kithkin Zephyrnaut
+R Knowledge Exploitation
+C Latchkey Faerie
+R Leaf-Crowned Elder
+R Lightning Crafter
+C Luminescent Rain
+C Lunk Errant
+C Lys Alana Bowmaster
+R Maralen of the Mornsong
+U Meadowboon
+C Merrow Witsniper
+R Mind Shatter
+R Mind Spring
+C Moonglove Changeling
+C Morsel Theft
+C Mosquito Guard
+C Mothdust Changeling
+C Mudbutton Clanger
+R Murmuring Bosk
+R Mutavault
+C Negate
+U Nevermaker
+U Nightshade Schemers
+U Noggin Whack
+R Notorious Throng
+U Obsidian Battle-Axe
+U Offalsnout
+U Oona's Blackguard
+U Orchard Warden
+C Order of the Golden Cricket
+C Pack's Disdain
+R Preeminent Captain
+C Prickly Boggart
+R Primal Beyond
+C Pulling Teeth
+U Pyroclast Consul
+U Rage Forger
+R Reach of Branches
+U Recross the Paths
+U Redeem the Lost
+C Reins of the Vinesteed
+U Release the Ants
+U Research the Deep
+R Reveillark
+U Revive the Fallen
+R Rhys the Exiled
+U Rivals' Duel
+C Roar of the Crowd
+R Rustic Clachan
+U Sage of Fables
+U Sage's Dousing
+R Scapeshift
+R Scarblade Elite
+C Seething Pathblazer
+R Sensation Gorger
+C Shard Volley
+R Shared Animosity
+C Shinewend
+R Sigil Tracer
+R Slithermuse
+U Spitebellows
+C Squeaking Pie Grubfellows
+R Stenchskipper
+C Stingmoggie
+U Stinkdrinker Bandit
+U Stomping Slabs
+R Stonehewer Giant
+C Stonybrook Banneret
+C Stonybrook Schoolmaster
+C Stream of Unconsciousness
+C Sunflare Shaman
+R Supreme Exemplar
+U Swell of Courage
+R Taurean Mauler
+U Thieves' Fortune
+U Thornbite Staff
+R Titan's Revenge
+R Unstoppable Ash
+R Vendilion Clique
+R Vengeful Firebrand
+U Veteran's Armaments
+C Violet Pall
+U Walker of the Grove
+U Wandering Graybeard
+C War-Spike Changeling
+U Warren Weirding
+U Waterspout Weavers
+C Weed-Pruner Poplar
+C Weight of Conscience
+R Weirding Shaman
+C Winnower Patrol
+U Wolf-Skull Shaman

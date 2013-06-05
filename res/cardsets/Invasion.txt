@@ -1,0 +1,360 @@
+[metadata]
+Code=INV
+Date=2000-10-02
+Name=Invasion
+Code2=IN
+Type=Expansion
+BoosterCovers=3
+Booster=11 Common, 3 Uncommon, 1 Rare
+
+[cards]
+R AEther Rift
+R Absorb
+U Addle
+C Aggressive Urge
+C Agonizing Demise
+R Alabaster Leech
+U Alloy Golem
+C Ancient Kavu
+C Ancient Spring
+R Andradite Leech
+U Angel of Mercy
+U Angelic Shield
+U Annihilate
+U Archaeological Dig
+C Ardent Soldier
+C Armadillo Cloak
+R Armored Guardian
+R Artifact Mutation
+U Assault
+R Atalya, Samite Master
+R Aura Mutation
+U Aura Shards
+U Backlash
+R Barrin's Spite
+C Barrin's Unmaking
+U Benalish Emissary
+U Benalish Heralds
+C Benalish Lancer
+C Benalish Trapper
+R Bend or Break
+R Bind
+R Blazing Specter
+R Blind Seer
+U Blinding Light
+U Bloodstone Cameo
+R Blurred Mongoose
+C Bog Initiate
+R Breaking Wave
+U Breath of Darigaaz
+R Callous Giant
+U Canopy Surge
+C Capashen Unicorn
+R Captain Sisay
+U Cauldron Dance
+U Chaotic Strike
+U Charging Troll
+U Chromatic Sphere
+U Cinder Shade
+R Coalition Victory
+U Coastal Tower
+R Collapsing Borders
+R Collective Restraint
+U Cremate
+C Crimson Acolyte
+U Crosis's Attendant
+R Crosis, the Purger
+C Crown of Flames
+R Crusading Knight
+R Crypt Angel
+R Crystal Spray
+C Cursed Flesh
+U Darigaaz's Attendant
+R Darigaaz, the Igniter
+R Death or Glory
+U Defiling Tears
+R Desperate Research
+R Devouring Strossus
+C Dismantling Blow
+U Disrupt
+R Distorting Wake
+R Divine Presence
+R Do or Die
+U Drake-Skull Cameo
+C Dream Thrush
+U Dredge
+U Dromar's Attendant
+R Dromar, the Banisher
+R Dueling Grounds
+C Duskwalker
+U Elfhame Palace
+U Elfhame Sanctuary
+R Elvish Champion
+R Empress Galina
+U Essence Leak
+C Exclude
+C Exotic Curse
+C Explosive Growth
+U Fact or Fiction
+C Faerie Squadron
+C Fertile Ground
+R Fight or Flight
+U Firebrand Ranger
+U Fires of Yavimaya
+C Firescreamer
+L Forest
+L Forest
+L Forest
+L Forest
+C Frenzied Tilling
+C Galina's Knight
+C Geothermal Crevice
+R Ghitu Fire
+C Glimmering Angel
+R Global Ruin
+U Goblin Spy
+U Goham Djinn
+U Halam Djinn
+R Hanna, Ship's Navigator
+C Harrow
+R Harsh Judgment
+U Hate Weaver
+U Heroes' Reunion
+C Holy Day
+C Hooded Kavu
+U Horned Cheetah
+U Hunting Kavu
+C Hypnotic Cloud
+C Irrigation Ditch
+L Island
+L Island
+L Island
+L Island
+R Jade Leech
+R Juntu Stakes
+R Kangee, Aerie Keeper
+C Kavu Aggressor
+U Kavu Chameleon
+C Kavu Climber
+R Kavu Lair
+R Kavu Monarch
+U Kavu Runner
+C Kavu Scout
+R Kavu Titan
+R Keldon Necropolis
+U Liberate
+U Lightning Dart
+C Llanowar Cavalry
+C Llanowar Elite
+C Llanowar Knight
+C Llanowar Vanguard
+R Loafing Giant
+U Lobotomy
+R Lotus Guardian
+R Mages' Contest
+R Mana Maze
+C Maniacal Rage
+U Manipulate Fate
+R Marauding Knight
+R Metathran Aerostat
+U Metathran Transport
+C Metathran Zombie
+R Meteor Storm
+U Might Weaver
+R Molimo, Maro-Sorcerer
+L Mountain
+L Mountain
+L Mountain
+L Mountain
+C Mourning
+C Nightscape Apprentice
+R Nightscape Master
+R Noble Panther
+C Nomadic Elf
+R Obliterate
+C Obsidian Acolyte
+C Opt
+U Ordered Migration
+C Orim's Touch
+R Overabundance
+C Overload
+U Pain
+C Phantasmal Terrain
+R Phyrexian Altar
+C Phyrexian Battleflies
+R Phyrexian Delver
+R Phyrexian Infiltrator
+R Phyrexian Lens
+C Phyrexian Reaper
+C Phyrexian Slayer
+C Pincer Spider
+U Plague Spitter
+C Plague Spores
+L Plains
+L Plains
+L Plains
+L Plains
+R Planar Portal
+U Pledge of Loyalty
+C Pouncing Kavu
+U Power Armor
+C Prison Barricade
+C Probe
+C Prohibit
+C Protective Sphere
+R Psychic Battle
+U Pulse of Llanowar
+R Pure Reflection
+R Pyre Zombie
+C Quirion Elves
+C Quirion Sentinel
+C Quirion Trailblazer
+U Rage Weaver
+R Raging Kavu
+U Rainbow Crow
+C Rampant Elephant
+C Ravenous Rats
+C Razorfoot Griffin
+R Reckless Assault
+U Reckless Spite
+C Recoil
+C Recover
+C Repulse
+R Restock
+C Restrain
+C Reviving Dose
+U Reviving Vapors
+U Rewards of Diversity
+R Reya Dawnbringer
+U Riptide Crab
+U Rith's Attendant
+R Rith, the Awakener
+C Rogue Kavu
+U Rooting Kavu
+R Rout
+R Ruby Leech
+U Ruham Djinn
+R Sabertooth Nishoba
+U Salt Marsh
+U Samite Archer
+U Samite Ministration
+R Sapphire Leech
+R Saproling Infestation
+R Saproling Symbiosis
+C Savage Offensive
+C Scarred Puma
+C Scavenged Weaponry
+C Scorching Lava
+U Scouting Trek
+U Searing Rays
+U Seashell Cameo
+U Seer's Vision
+C Serpentine Kavu
+C Shackles
+C Shimmering Wings
+U Shivan Emissary
+U Shivan Harvest
+U Shivan Oasis
+C Shivan Zombie
+C Shoreline Raider
+U Simoon
+U Skittish Kavu
+R Skizzik
+U Sky Weaver
+U Sleeper's Robe
+C Slimy Kavu
+U Slinking Serpent
+U Smoldering Tar
+C Soul Burn
+U Sparring Golem
+R Spinal Embrace
+U Spirit Weaver
+R Spirit of Resistance
+U Spite
+R Spreading Plague
+R Stalking Assassin
+U Stand
+R Stand or Fall
+U Sterling Grove
+C Stormscape Apprentice
+R Stormscape Master
+C Strength of Unity
+C Stun
+U Sulam Djinn
+C Sulfur Vent
+C Sunscape Apprentice
+R Sunscape Master
+L Swamp
+L Swamp
+L Swamp
+L Swamp
+U Sway of Illusion
+C Tainted Well
+U Tangle
+R Tectonic Instability
+U Teferi's Care
+R Teferi's Moat
+R Teferi's Response
+R Tek
+R Temporal Distortion
+R Thicket Elemental
+C Thornscape Apprentice
+R Thornscape Master
+C Thunderscape Apprentice
+R Thunderscape Master
+C Tidal Visionary
+U Tigereye Cameo
+C Tinder Farm
+U Tolarian Emissary
+C Tower Drake
+C Tranquility
+C Traveler's Cloak
+U Treefolk Healer
+U Trench Wurm
+U Treva's Attendant
+R Treva, the Renewer
+C Tribal Flames
+U Troll-Horn Cameo
+R Tsabo Tavoc
+R Tsabo's Assassin
+R Tsabo's Decree
+R Tsabo's Web
+C Turf Wound
+R Twilight's Call
+R Undermine
+U Urborg Drake
+U Urborg Emissary
+C Urborg Phantom
+U Urborg Shambler
+C Urborg Skeleton
+U Urborg Volcano
+R Urza's Filter
+R Urza's Rage
+R Utopia Tree
+R Verdeloth the Ancient
+U Verduran Emissary
+C Viashino Grappler
+U Vicious Kavu
+C Vigorous Charge
+R Vile Consumption
+U Vodalian Hypnotist
+C Vodalian Merchant
+C Vodalian Serpent
+C Vodalian Zombie
+R Void
+U Voracious Cobra
+U Wallop
+C Wandering Stream
+U Wash Out
+U Wax
+U Wayfaring Giant
+R Well-Laid Plans
+C Whip Silk
+C Wings of Hope
+R Winnow
+C Worldly Counsel
+C Yavimaya Barbarian
+U Yavimaya Kavu
+R Yawgmoth's Agenda
+U Zanam Djinn
+C Zap

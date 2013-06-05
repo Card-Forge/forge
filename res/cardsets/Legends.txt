@@ -1,0 +1,320 @@
+[metadata]
+Code=LEG
+Date=1994-06-01
+Name=Legends
+Code2=LG
+Type=Expansion
+BoosterCovers=1
+Booster=11 Common, 3 Uncommon, 1 Rare
+
+[cards]
+U AErathi Berserker
+U Abomination
+R Acid Rain
+C Active Volcano
+R Adun Oakenshield
+U Adventurers' Guildhouse
+C Aisling Leprechaun
+R Akron Legionnaire
+R Al-abara's Carpet
+C Alabaster Potion
+R Alchor's Tomb
+R All Hallow's Eve
+C Amrou Kithkin
+R Angelic Voices
+R Angus Mackenzie
+C Anti-Magic Aura
+U Arboria
+R Arcades Sabboth
+R Arena of the Ancients
+C Avoid Fate
+R Axelrod Gunnarson
+R Ayesha Tanaka
+U Azure Drake
+U Backdraft
+U Backfire
+C Barbary Apes
+U Barktooth Warbeard
+R Bartel Runeaxe
+U Beasts of Bogardan
+U Black Mana Battery
+C Blazing Effigy
+U Blight
+U Blood Lust
+U Blue Mana Battery
+C Boomerang
+R Boris Devilboon
+U Brine Hag
+R Bronze Horse
+R Carrion Ants
+C Cat Warriors
+U Cathedral of Serra
+R Caverns of Despair
+C Chain Lightning
+R Chains of Mephistopheles
+R Chromium
+R Cleanse
+C Clergy of the Holy Nimbus
+U Cocoon
+R Concordant Crossroads
+R Cosmic Horror
+U Craw Giant
+U Crevasse
+C Crimson Kobolds
+R Crimson Manticore
+C Crookshank Kobolds
+C Cyclopean Mummy
+C D'Avenant Archer
+R Dakkon Blackblade
+C Darkness
+U Deadfall
+U Demonic Torment
+C Devouring Deep
+R Disharmony
+R Divine Intervention
+C Divine Offering
+R Divine Transformation
+U Dream Coat
+C Durkwood Boars
+U Dwarven Song
+R Elder Land Wurm
+R Elder Spawn
+R Elven Riders
+C Emerald Dragonfly
+C Enchanted Being
+C Enchantment Alteration
+C Energy Tap
+C Equinox
+U Eternal Warrior
+R Eureka
+U Evil Eye of Orms-by-Gore
+U Fallen Angel
+R Falling Star
+C Feint
+R Field of Dreams
+C Fire Sprites
+R Firestorm Phoenix
+C Flash Counter
+C Flash Flood
+U Floral Spuzzem
+C Force Spike
+R Forethought Amulet
+U Fortified Area
+U Frost Giant
+R Gabriel Angelfire
+C Gaseous Form
+R Gauntlets of Chaos
+C Ghosts of the Damned
+C Giant Slug
+C Giant Strength
+C Giant Turtle
+C Glyph of Delusion
+C Glyph of Destruction
+C Glyph of Doom
+C Glyph of Life
+C Glyph of Reincarnation
+R Gosta Dirk
+R Gravity Sphere
+U Great Defender
+U Great Wall
+U Greater Realm of Preservation
+R Greed
+U Green Mana Battery
+R Gwendlyn Di Corci
+R Halfdane
+U Hammerheim
+R Hazezon Tamar
+C Headless Horseman
+U Heaven's Gate
+C Hell Swarm
+R Hell's Caretaker
+R Hellfire
+C Holy Day
+R Horn of Deafening
+C Hornet Cobra
+U Horror of Horrors
+U Hunding Gjornersen
+U Hyperion Blacksmith
+U Ichneumon Druid
+C Immolation
+R Imprison
+R In the Eye of Chaos
+C Indestructible Aura
+U Infernal Medusa
+R Infinite Authority
+R Invoke Prejudice
+U Ivory Guardians
+R Jacques le Vert
+U Jasmine Boreal
+U Jedit Ojanen
+U Jerrard of the Closed Fist
+R Johan
+R Jovial Evil
+R Juxtapose
+U Karakas
+U Kasimir the Lone Wolf
+C Keepers of the Faith
+R Kei Takahashi
+R Killer Bees
+U Kismet
+R Knowledge Vault
+U Kobold Drill Sergeant
+R Kobold Overlord
+U Kobold Taskmaster
+C Kobolds of Kher Keep
+U Kry Shield
+R Lady Caleria
+R Lady Evangela
+U Lady Orca
+R Land Equilibrium
+U Land Tax
+R Land's Edge
+U Lesser Werewolf
+U Life Chisel
+R Life Matrix
+R Lifeblood
+R Living Plane
+R Livonya Silone
+U Lord Magnus
+C Lost Soul
+U Mana Drain
+R Mana Matrix
+U Marble Priest
+U Marhault Elsdragon
+R Master of the Hunt
+R Mirror Universe
+R Moat
+R Mold Demon
+C Moss Monster
+U Mountain Stronghold
+U Mountain Yeti
+R Nebuchadnezzar
+R Nether Void
+R Nicol Bolas
+R North Star
+R Nova Pentacle
+C Osai Vultures
+R Palladia-Mors
+U Part Water
+U Pavel Maliki
+U Pendelhaven
+R Petra Sphinx
+C Pit Scorpion
+R Pixie Queen
+R Planar Gate
+U Pradesh Gypsies
+U Presence of the Master
+U Primordial Ooze
+U Princess Lucrezia
+R Psionic Entity
+C Psychic Purge
+U Puppet Master
+C Pyrotechnics
+U Quagmire
+R Quarum Trench Gnomes
+U Rabid Wombat
+U Radjan Spirit
+C Raging Bull
+R Ragnar
+U Ramirez DePietro
+R Ramses Overdark
+R Rapid Fire
+R Rasputin Dreamweaver
+R Rebirth
+R Recall
+U Red Mana Battery
+U Reincarnation
+U Relic Barrier
+U Relic Bind
+C Remove Enchantments
+C Remove Soul
+U Reset
+R Revelation
+R Reverberation
+U Righteous Avengers
+R Ring of Immortals
+U Riven Turnbull
+R Rohgahh of Kher Keep
+R Rubinia Soulsinger
+C Rust
+U Sea Kings' Blessing
+U Seafarer's Quay
+U Seeker
+U Segovian Leviathan
+R Sentinel
+R Serpent Generator
+C Shelkin Brownie
+U Shield Wall
+U Shimian Night Stalker
+U Silhouette
+U Sir Shandlar of Eberyn
+U Sivitri Scarzam
+R Sol'kanar the Swamp King
+U Spectral Cloak
+R Spinal Villain
+U Spirit Link
+C Spirit Shackle
+R Spiritual Sanctuary
+R Stangg
+U Storm Seeker
+R Storm World
+C Subdue
+U Sunastian Falconer
+R Sword of the Ages
+U Sylvan Library
+U Sylvan Paradise
+C Syphon Soul
+U Takklemaggot
+R Telekinesis
+R Teleport
+R Tempest Efreet
+R Tetsuo Umezawa
+R The Abyss
+C The Brute
+U The Lady of the Mountain
+R The Tabernacle at Pendrell Vale
+R The Wretched
+R Thunder Spirit
+R Time Elemental
+U Tobias Andrion
+U Tolaria
+U Tor Wauki
+U Torsten Von Ursus
+U Touch of Darkness
+C Transmutation
+R Triassic Egg
+R Tuknir Deathlock
+C Tundra Wolves
+R Typhoon
+U Undertow
+U Underworld Dreams
+U Unholy Citadel
+U Untamed Wilds
+R Ur-Drago
+U Urborg
+R Vaevictis Asmadi
+C Vampire Bats
+C Venarian Gold
+U Visions
+R Voodoo Doll
+C Walking Dead
+C Wall of Caltrops
+U Wall of Dust
+C Wall of Earth
+C Wall of Heat
+U Wall of Light
+R Wall of Opposition
+U Wall of Putrid Flesh
+C Wall of Shadows
+U Wall of Tombstones
+C Wall of Vapor
+U Wall of Wonder
+U Whirling Dervish
+U White Mana Battery
+R Willow Satyr
+U Winds of Change
+R Winter Blast
+C Wolverine Pack
+R Wood Elemental
+R Xira Arien
+C Zephyr Falcon

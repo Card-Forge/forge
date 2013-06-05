@@ -1,0 +1,175 @@
+[metadata]
+Code=BOK
+Date=2005-02-04
+Name=Betrayers of Kamigawa
+Code2=BOK
+Type=Expansion
+BoosterCovers=3
+Booster=11 Common, 3 Uncommon, 1 Rare
+
+[cards]
+C Akki Blizzard-Herder
+U Akki Raider
+U Ashen Monstrosity
+U Aura Barbs
+R Baku Altar
+C Bile Urchin
+C Blademane Baku
+R Blazing Shoal
+C Blessing of Leeches
+U Blinding Powder
+U Body of Jukai
+U Budoka Pupil
+C Call for Blood
+U Callow Jushi
+C Child of Thorns
+R Chisei, Heart of Oceans
+R Clash of Realities
+C Crack the Earth
+C Crawling Filth
+U Cunning Bandit
+R Day of Destiny
+R Disrupting Shoal
+U Empty-Shrine Kannushi
+R Enshrined Memories
+U Eradicate
+U Faithful Squire
+R Final Judgment
+C First Volley
+U Flames of the Blood Hand
+C Floodbringer
+U Forked-Branch Garami
+C Frost Ogre
+C Frostling
+R Fumiko the Lowblood
+U Genju of the Cedars
+U Genju of the Falls
+U Genju of the Fens
+U Genju of the Fields
+R Genju of the Realm
+U Genju of the Spires
+C Gnarled Mass
+C Goblin Cohort
+U Gods' Eye, Gate to the Reikai
+R Goryo's Vengeance
+C Harbinger of Spring
+C Heart of Light
+R Heartless Hidetsugu
+U Heed the Mists
+R Hero's Demise
+R Higure, the Still Wind
+U Hired Muscle
+R Hokori, Dust Drinker
+C Horobi's Whisper
+C Hundred-Talon Strike
+R In the Web of War
+U Indebted Samurai
+R Ink-Eyes, Servant of Oni
+C Ire of Kaminari
+R Isao, Enlightened Bushi
+R Ishi-Ishi, Akki Crackshot
+R Iwamori of the Open Fist
+U Jetting Glasskite
+U Kaijin of the Vanishing Touch
+C Kami of False Hope
+C Kami of Tattered Shoji
+U Kami of the Honored Dead
+R Kentaro, the Smiling Cat
+R Kira, Great Glass-Spinner
+U Kitsune Palliator
+R Kodama of the Center Tree
+C Kumano's Blessing
+R Kyoki, Sanity's Eclipse
+R Lifegift
+U Lifespinner
+U Loam Dweller
+R Mannichi, the Fevered Dream
+U Mark of Sakiko
+U Mark of the Oni
+C Matsu-Tribe Sniper
+C Mending Hands
+U Minamo Sightbender
+C Minamo's Meddling
+R Mirror Gallery
+C Mistblade Shinobi
+C Moonlit Strider
+R Neko-Te
+U Nezumi Shadow-Watcher
+C Ninja of the Deep Hours
+R Nourishing Shoal
+U Ogre Marauder
+U Ogre Recluse
+C Okiba-Gang Shinobi
+R Opal-Eye, Konda's Yojimbo
+R Orb of Dreams
+R Ornate Kanzashi
+U Overblaze
+R Oyobi, Who Split the Heavens
+R Patron of the Akki
+R Patron of the Kitsune
+R Patron of the Moon
+R Patron of the Nezumi
+R Patron of the Orochi
+C Petalmane Baku
+C Phantom Wings
+C Psychic Spear
+U Pus Kami
+U Quash
+C Quillmane Baku
+R Reduce to Dreams
+C Ribbons of the Reikai
+C Roar of Jukai
+U Ronin Cliffrider
+U Ronin Warclub
+R Sakiko, Mother of Summer
+C Sakura-Tribe Springcaller
+C Scaled Hulk
+U Scour
+U Scourge of Numai
+C Shimmering Glasskite
+R Shining Shoal
+C Shinka Gatekeeper
+R Shirei, Shizo's Caretaker
+R Shizuko, Caller of Autumn
+U Shuko
+U Shuriken
+R Sickening Shoal
+C Silverstorm Samurai
+C Skullmane Baku
+C Skullsnatcher
+R Slumbering Tora
+U Soratami Mindsweeper
+U Sosuke's Summons
+U Sowing Salt
+U Splinter
+C Split-Tail Miko
+C Stir the Grave
+U Stream of Consciousness
+R Sway of the Stars
+C Takeno's Cavalry
+C Takenuma Bleeder
+U Tallowisp
+C Teardrop Kami
+R Tendo Ice Bridge
+C Terashi's Grasp
+U Terashi's Verdict
+R That Which Was Taken
+R Threads of Disloyalty
+U Three Tragedies
+U Throat Slitter
+C Toils of Night and Day
+R Tomorrow, Azami's Familiar
+C Torrent of Stone
+R Toshiro Umezawa
+C Traproot Kami
+R Twist Allegiance
+R Umezawa's Jitte
+U Unchecked Growth
+C Uproot
+C Veil of Secrecy
+C Vital Surge
+U Walker of Secret Ways
+U Ward of Piety
+C Waxmane Baku
+R Yomiji, Who Bars the Way
+R Yukora, the Prisoner

@@ -1,0 +1,42 @@
+[metadata]
+Code=PD2
+Date=2010-11-19
+Name=Premium Deck Series: Fire and Lightning
+Code2=PD2
+Type=Other
+
+[cards]
+R Ball Lightning
+U Barbarian Ring
+U Boggart Ram-Gang
+U Browbeat
+C Chain Lightning
+C Cinder Pyromancer
+R Figure of Destiny
+U Fire Servant
+U Fireball
+C Fireblast
+U Flames of the Blood Hand
+U Ghitu Encampment
+R Grim Lavamancer
+R Hammer of Bogardan
+U Hellspark Elemental
+U Jackal Pup
+R Jaya Ballard, Task Mage
+U Keldon Champion
+C Keldon Marauders
+C Lightning Bolt
+U Mogg Fanatic
+C Mogg Flunkies
+L Mountain
+L Mountain
+L Mountain
+L Mountain
+U Pillage
+U Price of Progress
+R Reverberate
+U Spark Elemental
+U Sudden Impact
+C Teetering Peaks
+C Thunderbolt
+C Vulshok Sorcerer

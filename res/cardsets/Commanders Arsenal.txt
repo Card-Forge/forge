@@ -1,0 +1,24 @@
+[metadata]
+Code=CM1
+Date=2012-11-02
+Name=Commander's Arsenal
+
+[cards]
+R Chaos Warp
+C Command Tower
+R Decree of Pain
+R Desertion
+R Diaochan, Artful Beauty
+R Dragonlair Spider
+R Duplicant
+R Edric, Spymaster of Trest
+M Kaalia of the Vast
+U Loyal Retainers
+M Maelstrom Wanderer
+R Mind's Eye
+R Mirari's Wake
+C Rhystic Study
+R Scroll Rack
+R Sylvan Library
+M The Mimeoplasm
+M Vela the Night-Clad

@@ -1,0 +1,175 @@
+[metadata]
+Code=DST
+Date=2004-02-06
+Name=Darksteel
+Code2=DS
+Type=Expansion
+BoosterCovers=3
+Booster=11 Common, 3 Uncommon, 1 Rare
+
+[cards]
+R AEther Snap
+U AEther Vial
+R Ageless Entity
+U Angel's Feather
+C Arcane Spyglass
+C Arcbound Bruiser
+U Arcbound Crusher
+U Arcbound Fiend
+C Arcbound Hybrid
+U Arcbound Lancer
+R Arcbound Overseer
+R Arcbound Ravager
+R Arcbound Reclaimer
+U Arcbound Slith
+C Arcbound Stinger
+C Arcbound Worker
+C Auriok Glaivemaster
+U Auriok Siege Sled
+C Barbed Lightning
+R Blinkmoth Nexus
+C Burden of Greed
+U Carry Away
+U Chimeric Egg
+C Chittering Rats
+R Chromescale Drake
+U Coretapper
+C Crazed Goblin
+U Darksteel Brute
+C Darksteel Citadel
+R Darksteel Colossus
+R Darksteel Forge
+U Darksteel Gargoyle
+C Darksteel Ingot
+C Darksteel Pendant
+R Darksteel Reactor
+R Death Cloud
+U Death-Mask Duplicant
+U Demon's Horn
+U Dismantle
+U Dragon's Claw
+C Drill-Skimmer
+C Drooling Ogre
+C Dross Golem
+R Eater of Days
+C Echoing Calm
+C Echoing Courage
+C Echoing Decay
+C Echoing Ruin
+C Echoing Truth
+U Emissary of Despair
+U Emissary of Hope
+C Essence Drain
+R Fangren Firstborn
+U Fireball
+R Flamebreak
+R Furnace Dragon
+R Gemini Engine
+U Genesis Chamber
+U Geth's Grimoire
+U Goblin Archaeologist
+R Greater Harvester
+C Grimclaw Bats
+C Hallow
+R Heartseeker
+U Hoverguard Observer
+C Hunger of the Nim
+U Infested Roothold
+C Inflame
+U Juggernaut
+U Karstoderm
+U Kraken's Eye
+C Krark-Clan Stoker
+R Last Word
+U Leonin Battlemage
+C Leonin Bola
+R Leonin Shikari
+R Lich's Tomb
+C Loxodon Mystic
+C Machinate
+C Magnetic Flux
+R Memnarch
+R Mephitic Ooze
+C Metal Fatigue
+U Mirrodin's Core
+U Murderous Spoils
+R Mycosynth Lattice
+C Myr Landshaper
+R Myr Matrix
+C Myr Moonvessel
+U Nemesis Mask
+C Neurok Prodigy
+U Neurok Transmuter
+U Nim Abomination
+C Nourish
+C Oxidda Golem
+U Oxidize
+R Panoptic Mirror
+R Pristine Angel
+U Psychic Overload
+C Pteron Ghost
+R Pulse of the Dross
+R Pulse of the Fields
+R Pulse of the Forge
+R Pulse of the Grid
+R Pulse of the Tangle
+U Purge
+C Quicksilver Behemoth
+C Razor Golem
+C Reap and Sow
+R Rebuking Ceremony
+R Reshape
+R Retract
+C Ritual of Restoration
+R Roaring Slagwurm
+R Savage Beating
+C Scavenging Scarab
+U Screams from Within
+U Scrounge
+U Second Sight
+R Serum Powder
+R Shield of Kaldra
+R Shriveling Rot
+R Shunt
+U Skullclamp
+R Slobad, Goblin Tinkerer
+R Soulscour
+U Spawning Pit
+U Specter's Shroud
+R Spellbinder
+U Spincrusher
+C Spire Golem
+U Stand Together
+R Steelshaper Apprentice
+U Stir the Pride
+R Sundering Titan
+U Surestrike Trident
+R Sword of Fire and Ice
+R Sword of Light and Shadow
+R Synod Artificer
+U Talon of Pain
+C Tangle Golem
+C Tangle Spider
+U Tanglewalker
+U Tears of Rage
+C Tel-Jilad Outrider
+C Tel-Jilad Wolf
+U Test of Faith
+R Thought Dissector
+U Thunderstaff
+R Trinisphere
+R Turn the Tables
+C Unforge
+C Ur-Golem's Eye
+C Vedalken Engineer
+C Vex
+C Viridian Acolyte
+R Viridian Zealot
+U Voltaic Construct
+C Vulshok Morningstar
+U Vulshok War Boar
+R Wand of the Elements
+R Well of Lost Dreams
+C Whispersilk Cloak
+U Wirefly Hive
+U Wurm's Tooth

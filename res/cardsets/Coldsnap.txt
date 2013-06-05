@@ -1,0 +1,165 @@
+[metadata]
+Code=CSP
+Date=2006-07-21
+Name=Coldsnap
+Code2=CS
+Type=Expansion
+BoosterCovers=3
+Booster=11 Common, 3 Uncommon, 1 Rare
+
+[cards]
+R Adarkar Valkyrie
+U Adarkar Windform
+R Allosaurus Rider
+U Arctic Flats
+U Arctic Nishoba
+R Arcum Dagsson
+C Aurochs Herd
+U Balduvian Fallen
+U Balduvian Frostwaker
+U Balduvian Rage
+U Balduvian Warlord
+U Blizzard Specter
+C Boreal Centaur
+C Boreal Druid
+C Boreal Griffin
+U Boreal Shelf
+R Braid of Fire
+R Brooding Saurian
+C Bull Aurochs
+C Chill to the Bone
+C Chilling Shade
+U Coldsteel Heart
+R Commandeer
+U Controvert
+U Counterbalance
+R Cover of Winter
+U Cryoclasm
+R Darien, King of Kjeldor
+R Dark Depths
+U Deathmark
+U Deepfire Elemental
+R Diamond Faerie
+C Disciple of Tevesh Szat
+C Drelnoch
+U Earthen Goo
+C Feast of Flesh
+R Field Marshal
+U Flashfreeze
+U Freyalise's Radiance
+U Frost Marsh
+C Frost Raptor
+C Frostweb Spider
+C Frozen Solid
+R Fury of the Horde
+R Garza Zol, Plague Queen
+R Garza's Assassin
+C Gelid Shackles
+U Glacial Plating
+C Goblin Furrier
+C Goblin Rimerunner
+U Greater Stone Spirit
+C Grim Harvest
+U Gristle Grinner
+C Gutless Ghoul
+R Haakon, Stromgald Scourge
+R Heidar, Rimewind Master
+R Herald of Leshrac
+R Hibernation's End
+U Highland Weald
+C Icefall
+C Into the North
+R Jester's Scepter
+R Jokulmorder
+U Jotun Grunt
+U Jotun Owl Keeper
+U Juniper Order Ranger
+R Karplusan Minotaur
+U Karplusan Strider
+C Karplusan Wolverine
+U Kjeldoran Gargoyle
+C Kjeldoran Javelineer
+C Kjeldoran Outrider
+C Kjeldoran War Cry
+C Krovikan Mist
+U Krovikan Rot
+C Krovikan Scoundrel
+U Krovikan Whispers
+R Lightning Serpent
+U Lightning Storm
+R Lovisa Coldeyes
+U Luminesce
+U Magmatic Core
+C Martyr of Ashes
+C Martyr of Bones
+C Martyr of Frost
+C Martyr of Sands
+C Martyr of Spores
+U Mishra's Bauble
+U Mouth of Ronom
+U Mystic Melting
+R Ohran Viper
+C Ohran Yeti
+C Orcish Bloodpainter
+R Panglacial Wurm
+U Perilous Research
+U Phobian Phantasm
+R Phyrexian Etchings
+U Phyrexian Ironfoot
+U Phyrexian Snowcrusher
+R Phyrexian Soulgorger
+U Resize
+U Rime Transfusion
+C Rimebound Dead
+R Rimefeather Owl
+U Rimehorn Aurochs
+R Rimescale Dragon
+U Rimewind Cryomancer
+C Rimewind Taskmage
+C Rite of Flame
+C Ronom Hulk
+C Ronom Serpent
+C Ronom Unicorn
+C Rune Snag
+R Scrying Sheets
+R Sek'Kuar, Deathkeeper
+R Shape of the Wiitigo
+U Sheltering Ancient
+C Simian Brawler
+C Skred
+C Snow-Covered Forest
+C Snow-Covered Island
+C Snow-Covered Mountain
+C Snow-Covered Plains
+C Snow-Covered Swamp
+R Soul Spike
+C Sound the Call
+C Squall Drifter
+U Stalking Yeti
+U Steam Spitter
+U Stromgald Crusader
+C Sun's Bounty
+R Sunscour
+C Surging AEther
+C Surging Dementia
+C Surging Flame
+C Surging Might
+C Surging Sentinels
+C Survivor of the Unseen
+C Swift Maneuver
+R Tamanoa
+C Thermal Flux
+C Thermopod
+R Thrumming Stone
+U Tresserhorn Sinks
+U Tresserhorn Skyknight
+U Ursine Fylgja
+U Vanish into Memory
+R Vexing Sphinx
+R Void Maw
+U Wall of Shards
+U White Shield Crusader
+U Wilderness Elemental
+R Woolly Razorback
+C Zombie Musher
+R Zur the Enchanter

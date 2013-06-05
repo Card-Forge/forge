@@ -1,0 +1,389 @@
+[metadata]
+Code=4ED
+Date=1995-04-01
+Name=Fourth Edition
+Code2=4E
+Type=Core
+Border=White
+BoosterCovers=5
+Booster=11 Common, 3 Uncommon, 1 Rare
+
+[cards]
+U Abomination
+U Air Elemental
+C Alabaster Potion
+R Aladdin's Lamp
+R Aladdin's Ring
+U Ali Baba
+C Amrou Kithkin
+C Amulet of Kroog
+U Angry Mob
+U Animate Artifact
+U Animate Dead
+R Animate Wall
+R Ankh of Mishra
+C Apprentice Wizard
+R Armageddon
+R Armageddon Clock
+U Ashes to Ashes
+U Ashnod's Battle Gear
+R Aspect of Wolf
+U Backfire
+R Bad Moon
+R Balance
+R Ball Lightning
+C Battering Ram
+C Benalish Hero
+C Bird Maiden
+R Birds of Paradise
+U Black Knight
+R Black Mana Battery
+U Black Vise
+U Black Ward
+R Blessing
+U Blight
+C Blood Lust
+C Blue Elemental Blast
+R Blue Mana Battery
+U Blue Ward
+C Bog Imp
+U Bog Wraith
+R Bottle of Suleiman
+C Brainwash
+U Brass Man
+R Bronze Tablet
+C Brothers of Fire
+U Burrowing
+C Carnivorous Plant
+U Carrion Ants
+U Castle
+U Cave People
+U Celestial Prism
+U Channel
+R Chaoslace
+U Circle of Protection: Artifacts
+C Circle of Protection: Black
+C Circle of Protection: Blue
+C Circle of Protection: Green
+C Circle of Protection: Red
+C Circle of Protection: White
+C Clay Statue
+R Clockwork Avian
+R Clockwork Beast
+R Cockatrice
+R Colossus of Sardia
+U Conservator
+U Control Magic
+U Conversion
+R Coral Helm
+R Cosmic Horror
+U Counterspell
+C Craw Wurm
+C Creature Bond
+R Crimson Manticore
+U Crumble
+R Crusade
+U Crystal Rod
+U Cursed Land
+U Cursed Rack
+C Cyclopean Mummy
+R Dancing Scimitar
+C Dark Ritual
+C Death Ward
+U Deathgrip
+R Deathlace
+U Desert Twister
+U Detonate
+U Diabolic Machine
+R Dingus Egg
+C Disenchant
+C Disintegrate
+R Disrupting Scepter
+U Divine Transformation
+R Dragon Engine
+U Dragon Whelp
+C Drain Life
+R Drain Power
+C Drudge Skeletons
+C Durkwood Boars
+C Dwarven Warriors
+U Earth Elemental
+R Earthquake
+R Ebony Horse
+R El-Hajjaj
+R Elder Land Wurm
+U Elven Riders
+R Elvish Archers
+U Energy Flux
+C Energy Tap
+C Erg Raiders
+C Erosion
+C Eternal Warrior
+U Evil Presence
+R Eye for an Eye
+C Fear
+U Feedback
+U Fellwar Stone
+U Fire Elemental
+C Fireball
+C Firebreathing
+C Fissure
+U Flashfires
+C Flight
+C Flood
+R Flying Carpet
+C Fog
+R Force of Nature
+L Forest
+L Forest
+L Forest
+C Fortified Area
+C Frozen Shade
+R Fungusaur
+R Gaea's Liege
+C Gaseous Form
+U Ghost Ship
+C Giant Growth
+C Giant Spider
+C Giant Strength
+C Giant Tortoise
+U Glasses of Urza
+U Gloom
+U Goblin Balloon Brigade
+R Goblin King
+C Goblin Rock Sled
+C Grapeshot Catapult
+C Gray Ogre
+R Greed
+R Green Mana Battery
+U Green Ward
+C Grizzly Bears
+C Healing Salve
+R Helm of Chatzuk
+C Hill Giant
+C Holy Armor
+C Holy Strength
+C Howl from Beyond
+R Howling Mine
+R Hurkyl's Recall
+C Hurloon Minotaur
+R Hurr Jackal
+U Hurricane
+U Hypnotic Specter
+C Immolation
+R Inferno
+U Instill Energy
+U Iron Star
+C Ironclaw Orcs
+C Ironroot Treefolk
+L Island
+L Island
+L Island
+R Island Fish Jasconius
+R Island Sanctuary
+U Ivory Cup
+R Ivory Tower
+R Jade Monolith
+R Jandor's Saddlebags
+R Jayemdae Tome
+C Jump
+U Junun Efreet
+U Karma
+U Keldon Warlord
+U Killer Bees
+U Kismet
+R Kormus Bell
+C Land Leeches
+R Land Tax
+R Leviathan
+U Ley Druid
+U Library of Leng
+U Lifeforce
+R Lifelace
+U Lifetap
+C Lightning Bolt
+R Living Artifact
+R Living Lands
+C Llanowar Elves
+R Lord of Atlantis
+R Lord of the Pit
+C Lost Soul
+U Lure
+R Magical Hack
+R Magnetic Mountain
+R Mahamoti Djinn
+R Mana Clash
+R Mana Flare
+R Mana Short
+R Mana Vault
+R Manabarbs
+C Marsh Gas
+C Marsh Viper
+R Meekstone
+C Merfolk of the Pearl Trident
+C Mesa Pegasus
+R Millstone
+U Mind Bomb
+R Mind Twist
+U Mishra's Factory
+R Mishra's War Machine
+C Mons's Goblin Raiders
+C Morale
+L Mountain
+L Mountain
+L Mountain
+C Murk Dwellers
+C Nafs Asp
+R Nether Shadow
+R Nevinyrral's Disk
+R Nightmare
+R Northern Paladin
+U Oasis
+U Obsianus Golem
+R Onulet
+U Orcish Artillery
+U Orcish Oriflamme
+U Ornithopter
+U Osai Vultures
+C Paralyze
+C Pearled Unicorn
+R Personal Incarnation
+C Pestilence
+U Phantasmal Forces
+C Phantasmal Terrain
+U Phantom Monster
+C Piety
+C Pikemen
+R Pirate Ship
+C Pit Scorpion
+C Plague Rats
+L Plains
+L Plains
+L Plains
+C Power Leak
+C Power Sink
+R Power Surge
+C Pradesh Gypsies
+R Primal Clay
+C Prodigal Sorcerer
+R Psionic Entity
+C Psychic Venom
+R Purelace
+U Pyrotechnics
+U Radjan Spirit
+R Rag Man
+C Raise Dead
+R Rebirth
+C Red Elemental Blast
+R Red Mana Battery
+U Red Ward
+C Regeneration
+R Relic Bind
+R Reverse Damage
+R Righteousness
+U Rod of Ruin
+R Royal Assassin
+C Samite Healer
+C Sandstorm
+R Savannah Lions
+C Scathe Zombies
+U Scavenging Ghoul
+C Scryb Sprites
+C Sea Serpent
+C Seeker
+U Segovian Leviathan
+U Sengir Vampire
+U Serra Angel
+C Shanodin Dryads
+U Shapeshifter
+C Shatter
+R Shivan Dragon
+U Simulacrum
+U Sindbad
+U Siren's Call
+C Sisters of the Flame
+R Sleight of Mind
+R Smoke
+R Sorceress Queen
+U Soul Net
+C Spell Blast
+U Spirit Link
+U Spirit Shackle
+R Stasis
+U Steal Artifact
+U Stone Giant
+C Stone Rain
+C Stream of Life
+U Strip Mine
+R Sunglasses of Urza
+C Sunken City
+L Swamp
+L Swamp
+L Swamp
+U Swords to Plowshares
+R Sylvan Library
+U Tawnos's Wand
+U Tawnos's Weaponry
+R Tempest Efreet
+C Terror
+R Tetravus
+C The Brute
+R The Hive
+U The Rack
+U Thicket Basilisk
+R Thoughtlace
+U Throne of Bone
+R Timber Wolves
+R Time Elemental
+R Titania's Song
+C Tranquility
+R Triskelion
+U Tsunami
+C Tundra Wolves
+U Tunnel
+C Twiddle
+U Uncle Istvan
+C Unholy Strength
+C Unstable Mutation
+C Unsummon
+U Untamed Wilds
+R Urza's Avenger
+U Uthden Troll
+C Vampire Bats
+C Venom
+R Verduran Enchantress
+U Visions
+R Volcanic Eruption
+U Wall of Air
+U Wall of Bone
+U Wall of Brambles
+U Wall of Dust
+U Wall of Fire
+U Wall of Ice
+C Wall of Spears
+U Wall of Stone
+U Wall of Swords
+U Wall of Water
+C Wall of Wood
+U Wanderlust
+C War Mammoth
+R Warp Artifact
+U Water Elemental
+C Weakness
+R Web
+U Whirling Dervish
+U White Knight
+R White Mana Battery
+U White Ward
+C Wild Growth
+R Will-o'-the-Wisp
+R Winds of Change
+U Winter Blast
+R Winter Orb
+U Wooden Sphere
+C Word of Binding
+R Wrath of God
+R Xenic Poltergeist
+C Yotian Soldier
+C Zephyr Falcon
+R Zombie Master

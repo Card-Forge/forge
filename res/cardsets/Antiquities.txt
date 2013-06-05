@@ -1,0 +1,110 @@
+[metadata]
+Code=ATQ
+Date=1994-03-01
+Name=Antiquities
+Code2=AQ
+Type=Expansion
+BoosterCovers=1
+Booster=6 Common, 2 UncommonRare
+
+[cards]
+C Amulet of Kroog
+R Argivian Archaeologist
+C Argivian Blacksmith
+C Argothian Pixies
+C Argothian Treefolk
+U Armageddon Clock
+C Artifact Blast
+C Artifact Possession
+C Artifact Ward
+U Ashnod's Altar
+U Ashnod's Battle Gear
+U Ashnod's Transmogrant
+C Atog
+C Battering Ram
+R Bronze Tablet
+R Candelabra of Tawnos
+U Circle of Protection: Artifacts
+U Citanul Druid
+C Clay Statue
+R Clockwork Avian
+R Colossus of Sardia
+R Coral Helm
+C Crumble
+U Cursed Rack
+U Damping Field
+U Detonate
+C Drafna's Restoration
+C Dragon Engine
+U Dwarven Weaponsmith
+U Energy Flux
+U Feldon's Cane
+R Gaea's Avenger
+U Gate to Phyrexia
+U Goblin Artisans
+R Golgothian Sylex
+C Grapeshot Catapult
+U Haunting Wind
+R Hurkyl's Recall
+U Ivory Tower
+U Jalum Tome
+U Martyrs of Korlis
+U Mightstone
+U Millstone
+R Mishra's Factory
+R Mishra's Factory
+U Mishra's Factory
+R Mishra's Factory
+R Mishra's War Machine
+R Mishra's Workshop
+R Obelisk of Undoing
+U Onulet
+C Orcish Mechanics
+C Ornithopter
+C Phyrexian Gremlins
+U Power Artifact
+U Powerleech
+C Priest of Yawgmoth
+U Primal Clay
+U Rakalite
+C Reconstruction
+C Reverse Polarity
+U Rocket Launcher
+C Sage of Lat-Nam
+R Shapeshifter
+R Shatterstorm
+C Staff of Zegon
+R Strip Mine
+R Strip Mine
+R Strip Mine
+U Strip Mine
+U Su-Chi
+C Tablet of Epityr
+R Tawnos's Coffin
+U Tawnos's Wand
+U Tawnos's Weaponry
+R Tetravus
+U The Rack
+U Titania's Song
+U Transmute Artifact
+R Triskelion
+R Urza's Avenger
+C Urza's Chalice
+C Urza's Mine
+U Urza's Mine
+C Urza's Mine
+U Urza's Mine
+R Urza's Miter
+U Urza's Power Plant
+C Urza's Power Plant
+C Urza's Power Plant
+U Urza's Power Plant
+U Urza's Tower
+U Urza's Tower
+C Urza's Tower
+U Urza's Tower
+U Wall of Spears
+U Weakstone
+U Xenic Poltergeist
+R Yawgmoth Demon
+C Yotian Soldier

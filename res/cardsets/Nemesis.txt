@@ -1,0 +1,154 @@
+[metadata]
+Code=NMS
+Date=2000-02-14
+Name=Nemesis
+Code2=NE
+Alias=NEM
+Type=Expansion
+BoosterCovers=1
+Booster=11 Common, 3 Uncommon, 1 Rare
+
+[cards]
+R AEther Barrier
+C Accumulated Knowledge
+C Air Bladder
+U Ancient Hydra
+U Angelic Favor
+U Animate Land
+U Arc Mage
+R Ascendant Evincar
+R Avenger en-Dal
+U Battlefield Percher
+U Belbe's Armor
+C Belbe's Percher
+R Belbe's Portal
+C Blastoderm
+R Blinding Angel
+C Bola Warrior
+U Carrion Wall
+U Chieftain en-Dal
+C Cloudskate
+U Coiling Woodworm
+R Complex Automaton
+U Dark Triumph
+C Daze
+R Death Pit Offering
+C Defender en-Vec
+C Defiant Falcon
+U Defiant Vanguard
+R Divining Witch
+U Dominate
+C Downhill Charge
+U Ensnare
+R Eye of Yawgmoth
+C Fanatical Devotion
+C Flame Rift
+U Flint Golem
+U Flowstone Armor
+C Flowstone Crusher
+R Flowstone Overseer
+R Flowstone Slide
+C Flowstone Strike
+U Flowstone Surge
+U Flowstone Thopter
+C Flowstone Wall
+C Fog Patch
+C Harvest Mage
+C Infiltrate
+U Jolting Merfolk
+R Kill Switch
+R Kor Haven
+C Laccolith Grunt
+C Laccolith Rig
+R Laccolith Titan
+U Laccolith Warrior
+C Laccolith Whelp
+C Lashknife
+C Lawbringer
+C Lightbringer
+R Lin Sivvi, Defiant Hero
+R Mana Cache
+U Massacre
+U Mind Slash
+C Mind Swords
+U Mogg Alarm
+U Mogg Salvage
+C Mogg Toady
+R Moggcatcher
+C Mossdog
+R Murderous Betrayal
+U Nesting Wurm
+C Netter en-Dal
+U Noble Stand
+C Off Balance
+R Oracle's Attendants
+C Oraxid
+R Overlaid Terrain
+R Pack Hunt
+R Pale Moon
+C Parallax Dementia
+R Parallax Inhibitor
+R Parallax Nexus
+R Parallax Tide
+R Parallax Wave
+C Phyrexian Driver
+U Phyrexian Prowler
+C Plague Witch
+R Predator, Flagship
+U Rackling
+R Rath's Edge
+R Rathi Assassin
+U Rathi Fiend
+C Rathi Intimidator
+U Refreshing Rain
+U Rejuvenation Chamber
+C Reverent Silence
+R Rhox
+R Rising Waters
+C Rootwater Commando
+R Rootwater Thief
+U Rupture
+U Rusting Golem
+R Saproling Burst
+R Saproling Cluster
+R Seahunter
+C Seal of Cleansing
+C Seal of Doom
+C Seal of Fire
+C Seal of Removal
+C Seal of Strength
+R Shrieking Mogg
+C Silkenfist Fighter
+U Silkenfist Order
+U Sivvi's Ruse
+R Sivvi's Valor
+R Skyshroud Behemoth
+C Skyshroud Claim
+C Skyshroud Cutter
+R Skyshroud Poacher
+C Skyshroud Ridgeback
+C Skyshroud Sentinel
+R Sliptide Serpent
+C Sneaky Homunculus
+C Spineless Thug
+R Spiritual Asylum
+C Spiteful Bully
+U Stampede Driver
+U Stronghold Biologist
+C Stronghold Discipline
+R Stronghold Gambit
+U Stronghold Machinist
+U Stronghold Zeppelin
+U Submerge
+R Tangle Wire
+U Terrain Generator
+C Topple
+C Treetop Bracers
+C Trickster Mage
+C Vicious Hunger
+U Viseling
+U Voice of Truth
+R Volrath the Fallen
+C Wandering Eye
+U Wild Mammoth
+U Woodripper

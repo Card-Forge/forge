@@ -1,0 +1,393 @@
+[metadata]
+Code=10E
+Date=2007-07-14
+Name=Tenth Edition
+Code2=10E
+Type=Core
+BoosterCovers=5
+Booster=10 Common, 3 Uncommon, 1 Rare, 1 BasicLand
+
+[cards]
+R Abundance
+U Academy Researchers
+R Adarkar Wastes
+C Afflict
+C Aggressive Urge
+U Agonizing Memories
+U Air Elemental
+R Ambassador Laquatus
+C Anaba Bodyguard
+U Ancestor's Chosen
+U Angel of Mercy
+U Angel's Feather
+C Angelic Blessing
+R Angelic Chorus
+C Angelic Wall
+U Arcane Teachings
+R Arcanis the Omnipotent
+R Ascendant Evincar
+C Assassinate
+U Aura Graft
+U Aura of Silence
+R Avatar of Might
+C Aven Cloudchaser
+C Aven Fisher
+C Aven Windreader
+U Ballista Squad
+C Bandage
+R Battlefield Forge
+R Beacon of Destruction
+R Beacon of Immortality
+R Beacon of Unrest
+C Benalish Knight
+R Birds of Paradise
+U Blanchwood Armor
+U Blaze
+R Bloodfire Colossus
+C Bloodrock Cyclops
+U Bog Wraith
+C Bogardan Firefiend
+C Boomerang
+U Bottle Gnomes
+R Brushland
+C Cancel
+C Canopy Spider
+R Caves of Koilos
+R Cephalid Constable
+R Chimeric Staff
+R Cho-Manno, Revolutionary
+U Chromatic Star
+R Citanul Flute
+C Civic Wayfinder
+R Clone
+C Cloud Elemental
+C Cloud Sprite
+R Coat of Arms
+R Colossus of Sardia
+C Commune with Nature
+U Composite Golem
+U Condemn
+U Cone of Flame
+U Consume Spirit
+C Contaminated Bond
+C Counsel of the Soratami
+C Crafty Pathmage
+C Craw Wurm
+U Creeping Mold
+R Crucible of Worlds
+U Cruel Edict
+U Cryoclasm
+U Deathmark
+C Dehydration
+U Deluge
+C Demolish
+U Demon's Horn
+C Demystify
+R Denizen of the Deep
+U Diabolic Tutor
+U Discombobulate
+C Distress
+R Doomed Necromancer
+R Doubling Cube
+R Dragon Roost
+U Dragon's Claw
+R Dreamborn Muse
+C Dross Crocodile
+U Drudge Skeletons
+C Duct Crawler
+C Dusk Imp
+U Earth Elemental
+U Elven Riders
+C Elvish Berserker
+R Elvish Champion
+R Elvish Piper
+U Enormous Baloth
+C Essence Drain
+R Evacuation
+U Faerie Conclave
+C Fear
+U Femeref Archers
+C Festering Goblin
+R Field Marshal
+C Firebreathing
+C Fists of the Anvil
+U Flamewave Invoker
+U Flashfreeze
+R Flowstone Slide
+U Fog Elemental
+U Forbidding Watchtower
+L Forest
+L Forest
+L Forest
+L Forest
+U Fountain of Youth
+C Fugitive Wizard
+U Furnace Whelp
+R Furnace of Rath
+R Gaea's Herald
+U Ghitu Encampment
+C Ghost Warden
+C Giant Growth
+C Giant Spider
+R Glorious Anthem
+C Goblin Elite Infantry
+R Goblin King
+U Goblin Lore
+C Goblin Piker
+C Goblin Sky Raider
+R Grave Pact
+R Graveborn Muse
+C Gravedigger
+C Grizzly Bears
+U Guerrilla Tactics
+U Hail of Arrows
+U Hate Weaver
+R Head Games
+C Heart of Light
+U Hidden Horror
+U High Ground
+C Highway Robber
+C Hill Giant
+C Holy Day
+C Holy Strength
+C Honor Guard
+C Horseshoe Crab
+R Howling Mine
+U Hunted Wumpus
+R Hurkyl's Recall
+R Hurricane
+R Hypnotic Specter
+U Icatian Priest
+U Icy Manipulator
+C Incinerate
+L Island
+L Island
+L Island
+L Island
+R Jayemdae Tome
+R Joiner Adept
+U Juggernaut
+R Kamahl, Pit Fighter
+R Karplusan Forest
+U Karplusan Strider
+C Kavu Climber
+R Kjeldoran Royal Guard
+U Knight of Dusk
+U Kraken's Eye
+C Lava Axe
+R Lavaborn Muse
+R Legacy Weapon
+U Leonin Scimitar
+C Lightning Elemental
+C Llanowar Elves
+C Llanowar Sentinel
+R Llanowar Wastes
+C Looming Shade
+R Lord of the Pit
+R Lord of the Undead
+C Loxodon Mystic
+R Loxodon Warhammer
+R Loyal Sentry
+C Lumengrid Warden
+U Luminesce
+U Lure
+R Mahamoti Djinn
+R Manabarbs
+U Mantis Engine
+R March of the Machines
+C Mass of Ghouls
+U Megrim
+C Merfolk Looter
+R Midnight Ritual
+U Might Weaver
+R Might of Oaks
+R Millstone
+R Mind Bend
+C Mind Rot
+U Mind Stone
+R Mirri, Cat Warrior
+R Mobilization
+U Mogg Fanatic
+R Molimo, Maro-Sorcerer
+R Mortal Combat
+R Mortivore
+L Mountain
+L Mountain
+L Mountain
+L Mountain
+U Nantuko Husk
+C Natural Spring
+C Naturalize
+U Nekrataal
+R Nightmare
+U No Rest for the Wicked
+R Nomad Mythmaker
+U Orcish Artillery
+U Ornithopter
+C Overgrowth
+U Overrun
+C Pacifism
+R Paladin en-Vec
+R Pariah
+C Peek
+U Persuasion
+R Phage the Untouchable
+U Phantom Warrior
+C Phyrexian Rager
+U Phyrexian Vault
+C Pincher Beetles
+R Pithing Needle
+R Plagiarize
+C Plague Beetle
+R Plague Wind
+L Plains
+L Plains
+L Plains
+L Plains
+R Platinum Angel
+U Primal Rage
+C Prodigal Pyromancer
+U Puppeteer
+U Pyroclasm
+U Quicksand
+R Quirion Dryad
+U Rage Weaver
+C Raging Goblin
+U Rain of Tears
+C Rampant Growth
+C Ravenous Rats
+R Razormane Masticore
+U Recollect
+C Recover
+U Regeneration
+R Relentless Assault
+U Relentless Rats
+U Reminisce
+C Remove Soul
+C Reviving Dose
+R Reya Dawnbringer
+R Rhox
+R Righteousness
+C Robe of Mirrors
+C Rock Badger
+U Rod of Ruin
+R Root Maze
+C Rootwalla
+C Rootwater Commando
+R Rootwater Matriarch
+R Royal Assassin
+U Rule of Law
+C Rushwood Dryad
+C Sage Owl
+C Samite Healer
+R Scalpelexis
+C Scathe Zombies
+R Scion of the Wild
+R Scoria Wurm
+R Sculpting Steel
+C Sea Monster
+R Seedborn Muse
+R Seismic Assault
+R Sengir Vampire
+R Serra Angel
+U Serra's Embrace
+C Severed Legion
+U Shatterstorm
+C Shimmering Wings
+R Shivan Dragon
+R Shivan Hellkite
+R Shivan Reef
+C Shock
+R Shunt
+R Siege-Gang Commander
+C Sift
+U Sky Weaver
+C Skyhunter Patrol
+C Skyhunter Prowler
+U Skyhunter Skirmisher
+C Skyshroud Ranger
+R Sleeper Agent
+C Smash
+C Snapping Drake
+U Soul Feast
+U Soul Warden
+R Soulblast
+U Spark Elemental
+U Spawning Pool
+U Spellbook
+U Spiketail Hatchling
+C Spined Wurm
+C Spineless Thug
+U Spirit Link
+U Spirit Weaver
+C Spitting Earth
+R Squee, Goblin Nabob
+C Stalking Tiger
+U Stampeding Wildebeests
+U Starlight Invoker
+C Steadfast Guard
+U Steel Golem
+R Story Circle
+U Stronghold Discipline
+C Stun
+U Sudden Impact
+R Sulfurous Springs
+R Sunken Hope
+C Suntail Hawk
+L Swamp
+L Swamp
+L Swamp
+L Swamp
+U Sylvan Basilisk
+U Sylvan Scrying
+U Tangle Spider
+U Telepathy
+U Telling Time
+U Tempest of Light
+C Terramorphic Expanse
+C Terror
+R The Hive
+U Thieving Magpie
+U Threaten
+U Thrull Surgeon
+U Thundering Giant
+U Tidings
+R Time Stop
+R Time Stretch
+R Traumatize
+U Treasure Hunter
+C Treetop Bracers
+U Treetop Village
+R Troll Ascetic
+R True Believer
+C Tundra Wolves
+R Twincast
+C Twitch
+C Uncontrollable Anger
+R Underground River
+R Underworld Dreams
+C Unholy Strength
+C Unsummon
+R Upwelling
+C Vampire Bats
+U Vedalken Mastermind
+C Venerable Monk
+R Verdant Force
+C Viashino Runner
+C Viashino Sandscout
+U Viridian Shaman
+R Voice of All
+U Wall of Air
+U Wall of Fire
+U Wall of Swords
+C Wall of Wood
+R Warp World
+C Warrior's Honor
+U Whispersilk Cloak
+C Wild Griffin
+R Windborn Muse
+R Wrath of God
+U Wurm's Tooth
+R Yavimaya Coast
+U Yavimaya Enchantress
+C Youthful Knight

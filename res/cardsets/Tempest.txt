@@ -1,0 +1,360 @@
+[metadata]
+Code=TMP
+Date=1997-10-14
+Name=Tempest
+Code2=TE
+Type=Expansion
+BoosterCovers=3
+Booster=11 Common, 3 Uncommon, 1 Rare
+
+[cards]
+U Abandon Hope
+C Advance Scout
+C Aftershock
+R Altar of Dementia
+R Aluren
+U Ancient Runes
+U Ancient Tomb
+U Angelic Protector
+C Anoint
+U Apes of Rath
+R Apocalypse
+U Armor Sliver
+C Armored Pegasus
+R Auratog
+R Avenging Angel
+U Barbed Sliver
+C Bayou Dragonfly
+R Bellowing Fiend
+R Benthic Behemoth
+C Blood Frenzy
+C Blood Pet
+U Boil
+R Booby Trap
+U Bottle Gnomes
+R Bounty Hunter
+C Broken Fall
+R Caldera Lake
+C Canopy Spider
+R Canyon Drake
+C Canyon Wildcat
+C Capsize
+R Carrionette
+R Chaotic Goo
+U Charging Rhino
+U Chill
+U Choke
+U Cinder Marsh
+C Circle of Protection: Black
+C Circle of Protection: Blue
+C Circle of Protection: Green
+C Circle of Protection: Red
+C Circle of Protection: Shadow
+C Circle of Protection: White
+C Clergy en-Vec
+C Clot Sliver
+C Cloudchaser Eagle
+C Coercion
+R Coffin Queen
+C Coiled Tinviper
+R Cold Storage
+R Commander Greven il-Vec
+R Corpse Dance
+C Counterspell
+R Crazed Armodon
+C Crown of Flames
+R Cursed Scroll
+C Dark Banishing
+C Dark Ritual
+C Darkling Stalker
+U Dauthi Embrace
+U Dauthi Ghoul
+C Dauthi Horror
+C Dauthi Marauder
+U Dauthi Mercenary
+U Dauthi Mindripper
+C Dauthi Slayer
+R Deadshot
+R Death Pits of Rath
+C Diabolic Edict
+R Dirtcowl Wurm
+C Disenchant
+U Dismiss
+C Disturbed Burial
+R Dracoplasm
+U Dread of Night
+C Dream Cache
+R Dregs of Sorrow
+R Duplicity
+R Earthcraft
+R Echo Chamber
+R Eladamri's Vineyard
+R Eladamri, Lord of Leaves
+C Elite Javelineer
+R Elven Warhounds
+C Elvish Fury
+R Emerald Medallion
+R Emmessi Tome
+C Endless Scream
+R Energizer
+C Enfeeblement
+U Enraging Licid
+R Ertai's Meddling
+R Escaped Shapeshifter
+U Essence Bottle
+C Evincar's Justice
+U Excavator
+R Extinction
+R Fevered Convulsions
+R Field of Souls
+U Fighting Drake
+U Firefly
+C Fireslinger
+U Flailing Drake
+U Flickering Ward
+C Flowstone Giant
+U Flowstone Salamander
+R Flowstone Sculpture
+R Flowstone Wyvern
+R Fool's Tome
+L Forest
+L Forest
+L Forest
+L Forest
+C Frog Tongue
+R Fugitive Druid
+R Furnace of Rath
+U Fylamarid
+U Gallantry
+C Gaseous Form
+R Gerrard's Battle Cry
+U Ghost Town
+C Giant Crab
+C Giant Strength
+U Goblin Bombardment
+C Gravedigger
+R Grindstone
+R Hand to Hand
+R Hanna's Custody
+U Harrow
+U Havoc
+C Heart Sliver
+C Heartwood Dryad
+R Heartwood Giant
+U Heartwood Treefolk
+R Helm of Possession
+C Hero's Resolve
+U Horned Sliver
+C Horned Turtle
+R Humility
+U Imps' Taunt
+U Insight
+U Interdict
+R Intuition
+U Invulnerability
+L Island
+L Island
+L Island
+L Island
+U Jackal Pup
+R Jet Medallion
+R Jinxed Idol
+R Kezzerdrix
+C Kindle
+U Knight of Dawn
+U Knight of Dusk
+U Krakilin
+U Leeching Licid
+U Legacy's Allure
+U Legerdemain
+U Light of Day
+C Lightning Blast
+C Lightning Elemental
+R Living Death
+U Lobotomy
+C Lotus Petal
+C Lowland Giant
+R Maddening Imp
+R Magmasaur
+R Magnetic Web
+R Mana Severance
+C Manakin
+C Manta Riders
+R Marble Titan
+C Marsh Lurker
+C Master Decoy
+R Mawcor
+U Maze of Shadows
+R Meditate
+C Metallic Sliver
+U Mindwhip Sliver
+R Minion of the Wastes
+R Mirri's Guile
+U Mnemonic Sliver
+U Mogg Cannon
+C Mogg Conscripts
+C Mogg Fanatic
+U Mogg Hollows
+C Mogg Raider
+U Mogg Squad
+R Mongrel Pack
+L Mountain
+L Mountain
+L Mountain
+L Mountain
+C Mounted Archers
+C Muscle Sliver
+C Natural Spring
+R Nature's Revolt
+U Needle Storm
+R No Quarter
+U Nurturing Licid
+U Opportunist
+R Oracle en-Vec
+U Orim's Prayer
+R Orim, Samite Healer
+U Overrun
+C Pacifism
+R Pallimud
+U Patchwork Gnomes
+R Pearl Medallion
+R Pegasus Refuge
+U Perish
+R Phyrexian Grimoire
+U Phyrexian Hulk
+U Phyrexian Splicer
+C Pincher Beetles
+R Pine Barrens
+C Pit Imp
+L Plains
+L Plains
+L Plains
+L Plains
+C Power Sink
+R Precognition
+U Propaganda
+U Puppet Strings
+U Quickening Licid
+U Rain of Tears
+C Rampant Growth
+U Ranger en-Vec
+R Rathi Dragon
+C Rats of Rath
+C Reality Anchor
+U Reanimate
+U Reap
+U Reckless Spite
+R Recycle
+R Reflecting Pool
+U Renegade Warlord
+U Repentance
+C Respite
+C Rolling Thunder
+R Root Maze
+C Rootbreaker Wurm
+C Rootwalla
+U Rootwater Depths
+U Rootwater Diver
+C Rootwater Hunter
+R Rootwater Matriarch
+R Rootwater Shaman
+R Ruby Medallion
+R Sacred Guide
+C Sadistic Glee
+R Safeguard
+R Salt Flats
+C Sandstone Warrior
+R Sapphire Medallion
+R Sarcomancy
+R Scabland
+R Scalding Tongs
+R Scorched Earth
+U Scragnoth
+U Screeching Harpy
+R Scroll Rack
+C Sea Monster
+U Searing Touch
+C Seeker of Skybreak
+U Segmented Wurm
+R Selenia, Dark Angel
+U Serene Offering
+C Servant of Volrath
+C Shadow Rift
+U Shadowstorm
+C Shatter
+C Shimmering Wings
+R Shocker
+U Sky Spirit
+U Skyshroud Condor
+C Skyshroud Elf
+R Skyshroud Forest
+C Skyshroud Ranger
+C Skyshroud Troll
+U Skyshroud Vampire
+U Soltari Crusader
+R Soltari Emissary
+C Soltari Foot Soldier
+R Soltari Guerrillas
+C Soltari Lancer
+U Soltari Monk
+U Soltari Priest
+C Soltari Trooper
+U Souldrinker
+C Spell Blast
+C Spike Drone
+C Spinal Graft
+R Spirit Mirror
+U Spontaneous Combustion
+C Squee's Toy
+U Stalking Stones
+R Starke of Rath
+R Static Orb
+U Staunch Defenders
+U Steal Enchantment
+U Stinging Licid
+C Stone Rain
+U Storm Front
+C Stun
+U Sudden Impact
+L Swamp
+L Swamp
+L Swamp
+L Swamp
+U Tahngarth's Rage
+C Talon Sliver
+U Telethopter
+U Thalakos Dreamsower
+U Thalakos Lowlands
+C Thalakos Mistfolk
+C Thalakos Seer
+C Thalakos Sentry
+R Thumbscrews
+C Time Ebb
+R Time Warp
+R Tooth and Claw
+R Torture Chamber
+R Tradewind Rider
+C Trained Armodon
+C Tranquility
+U Trumpeting Armodon
+C Twitch
+R Unstable Shapeshifter
+U Vec Townships
+R Verdant Force
+U Verdigris
+R Vhati il-Dal
+C Volrath's Curse
+C Wall of Diffusion
+U Warmth
+U Wasteland
+U Watchdog
+R Whim of Volrath
+U Whispers of the Muse
+U Wild Wurm
+U Wind Dancer
+C Wind Drake
+R Winds of Rath
+C Winged Sliver
+U Winter's Grasp
+R Wood Sage
+U Worthy Cause

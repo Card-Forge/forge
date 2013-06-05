@@ -1,0 +1,360 @@
+[metadata]
+Code=MMQ
+Date=1999-10-04
+Name=Mercadian Masques
+Code2=MM
+Type=Expansion
+BoosterCovers=3
+Booster=11 Common, 3 Uncommon, 1 Rare
+
+[cards]
+R Aerial Caravan
+U Afterlife
+C Alabaster Wall
+C Alley Grifters
+C Ancestral Mask
+R Armistice
+U Arms Dealer
+U Arrest
+R Assembly Hall
+U Ballista Squad
+C Balloon Peddler
+U Barbed Wire
+R Bargaining Table
+C Battle Rampart
+R Battle Squadron
+R Bifurcate
+R Black Market
+C Blaster Mage
+C Blockade Runner
+R Blood Hound
+R Blood Oath
+U Boa Constrictor
+C Bog Smugglers
+C Bog Witch
+C Brainstorm
+R Brawl
+U Briar Patch
+R Bribery
+C Buoyancy
+U Cackling Witch
+R Caller of the Hunt
+C Cateran Brute
+U Cateran Enforcer
+U Cateran Kidnappers
+R Cateran Overlord
+C Cateran Persuader
+R Cateran Slaver
+U Cateran Summons
+U Caustic Wasps
+C Cave Sense
+R Cave-In
+C Cavern Crawler
+C Ceremonial Guard
+U Chambered Nautilus
+U Chameleon Spirit
+R Charisma
+C Charm Peddler
+U Charmed Griffin
+R Cho-Arrim Alchemist
+R Cho-Arrim Bruiser
+U Cho-Arrim Legate
+C Cho-Manno's Blessing
+R Cho-Manno, Revolutionary
+U Cinder Elemental
+R Clear the Land
+U Close Quarters
+C Cloud Sprite
+U Coastal Piracy
+R Collective Unconscious
+R Common Cause
+R Conspiracy
+R Cornered Market
+R Corrupt Official
+C Counterspell
+R Cowardice
+R Crackdown
+R Crag Saurian
+C Crash
+U Credit Voucher
+U Crenellated Wall
+R Crooked Scales
+C Crossbow Infantry
+R Crumbling Sanctuary
+U Customs Depot
+C Dark Ritual
+C Darting Merfolk
+R Dawnstrider
+C Deadly Insect
+U Deathgazer
+C Deepwood Drummer
+R Deepwood Elder
+C Deepwood Ghoul
+U Deepwood Legate
+U Deepwood Tantiv
+C Deepwood Wolverine
+C Dehydration
+R Delraich
+U Desert Twister
+C Devout Witness
+U Diplomatic Escort
+C Diplomatic Immunity
+C Disenchant
+R Distorting Lens
+C Drake Hatchling
+R Dust Bowl
+R Embargo
+U Energy Flux
+U Enslaved Horror
+R Erithizon
+R Extortion
+R Extravagant Spirit
+R Eye of Ramos
+U False Demise
+C Ferocity
+R Flailing Manticore
+U Flailing Ogre
+C Flailing Soldier
+C Flaming Sword
+R Food Chain
+R Forced March
+L Forest
+L Forest
+L Forest
+L Forest
+R Foster
+R Fountain Watch
+U Fountain of Cho
+C Fresh Volunteers
+C Furious Assault
+R Game Preserve
+R General's Regalia
+C Gerrard's Irregulars
+U Ghoul's Feast
+C Giant Caterpillar
+U Glowing Anemone
+U Groundskeeper
+C Gush
+U Hammer Mage
+U Haunted Crossroads
+R Heart of Ramos
+U Henge Guardian
+U Henge of Ramos
+C Hickory Woodlot
+R High Market
+U High Seas
+C Highway Robber
+U Hired Giant
+R Honor the Fallen
+C Hoodwink
+R Horn of Plenty
+R Horn of Ramos
+C Horned Troll
+C Howling Wolf
+U Hunted Wumpus
+U Ignoble Soldier
+U Indentured Djinn
+R Instigator
+C Insubordination
+U Intimidation
+C Invigorate
+C Inviolability
+U Iron Lance
+L Island
+L Island
+L Island
+L Island
+R Ivory Mask
+U Jeweled Torque
+R Jhovall Queen
+U Jhovall Rider
+R Karn's Touch
+C Kris Mage
+R Kyren Archive
+C Kyren Glider
+U Kyren Legate
+U Kyren Negotiations
+C Kyren Sniper
+R Kyren Toy
+C Land Grant
+U Larceny
+U Last Breath
+R Lava Runner
+U Ley Line
+R Liability
+C Lightning Hounds
+R Lithophage
+U Lumbering Satyr
+C Lunge
+U Lure
+C Maggot Therapy
+R Magistrate's Scepter
+U Magistrate's Veto
+R Megatherium
+U Mercadia's Downfall
+R Mercadian Atlas
+U Mercadian Bazaar
+R Mercadian Lift
+R Midnight Ritual
+R Misdirection
+C Misshapen Fiend
+C Misstep
+U Molting Harpy
+C Moment of Silence
+R Monkey Cage
+U Moonlit Wake
+L Mountain
+L Mountain
+L Mountain
+L Mountain
+C Muzzle
+R Natural Affinity
+R Nether Spirit
+C Nightwind Glider
+U Noble Purpose
+R Notorious Assassin
+U Ogre Taskmaster
+C Orim's Cure
+R Overtaker
+U Panacea
+R Pangosaur
+C Peat Bog
+C Pious Warrior
+L Plains
+L Plains
+L Plains
+L Plains
+C Port Inspector
+R Power Matrix
+U Pretender's Claim
+U Primeval Shambler
+U Puffer Extract
+R Pulverize
+R Puppet's Verdict
+U Putrefaction
+U Quagmire Lamprey
+U Rain of Tears
+U Ramosian Captain
+U Ramosian Commander
+C Ramosian Lieutenant
+C Ramosian Rally
+C Ramosian Sergeant
+R Ramosian Sky Marshal
+C Rampart Crawler
+R Rappelling Scouts
+C Remote Farm
+U Renounce
+C Revered Elder
+R Reverent Mantra
+U Revive
+U Righteous Aura
+U Righteous Indignation
+C Rishadan Airship
+R Rishadan Brigand
+C Rishadan Cutpurse
+U Rishadan Footpad
+R Rishadan Pawnshop
+R Rishadan Port
+U Robber Fly
+U Rock Badger
+C Rouse
+C Rushwood Dryad
+R Rushwood Elemental
+U Rushwood Grove
+C Rushwood Herbalist
+U Rushwood Legate
+U Saber Ants
+C Sacred Prey
+U Sailmonger
+R Sand Squid
+C Sandstone Needle
+R Saprazzan Bailiff
+U Saprazzan Breaker
+U Saprazzan Cove
+R Saprazzan Heir
+U Saprazzan Legate
+C Saprazzan Outrigger
+C Saprazzan Raider
+C Saprazzan Skerry
+U Scandalmonger
+R Security Detail
+R Seismic Mage
+C Sever Soul
+C Shock Troops
+U Shoving Match
+R Silent Assassin
+C Silverglade Elemental
+U Silverglade Pathfinder
+C Sizzle
+C Skulking Fugitive
+R Skull of Ramos
+U Snake Pit
+C Snorting Gahr
+C Snuff Out
+C Soothing Balm
+U Soothsaying
+C Soul Channeling
+C Specter's Wail
+C Spidersilk Armor
+R Spiritual Focus
+R Spontaneous Generation
+C Squall
+U Squallmonger
+R Squee, Goblin Nabob
+R Squeeze
+U Stamina
+R Statecraft
+C Steadfast Guard
+C Stinging Barrier
+C Stone Rain
+U Story Circle
+U Strongarm Thug
+U Subterranean Hangar
+U Sustenance
+L Swamp
+L Swamp
+L Swamp
+L Swamp
+C Task Force
+R Tectonic Break
+R Territorial Dispute
+C Thermal Glider
+R Thieves' Auction
+R Thrashing Wumpus
+C Thunderclap
+U Thwart
+C Tidal Bore
+R Tidal Kraken
+C Tiger Claws
+U Timid Drake
+U Tonic Peddler
+R Tooth of Ramos
+R Tower of the Magistrate
+U Toymaker
+R Trade Routes
+C Tranquility
+U Trap Runner
+C Tremor
+R Two-Headed Dragon
+C Undertaker
+R Unmask
+R Unnatural Hunger
+U Uphill Battle
+C Vendetta
+U Venomous Breath
+C Venomous Dragonfly
+R Vernal Equinox
+R Vine Dryad
+C Vine Trellis
+U Volcanic Wind
+C Wall of Distortion
+U War Cadence
+U War Tax
+U Warmonger
+U Warpath
+C Waterfront Bouncer
+R Wave of Reckoning
+C Wild Jhovall
+U Wishmonger
+U Word of Blasting
+R Worry Beads

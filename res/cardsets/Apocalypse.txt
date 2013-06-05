@@ -1,0 +1,153 @@
+[metadata]
+Code=APC
+Date=2001-06-04
+Name=Apocalypse
+Code2=AP
+Type=Expansion
+BoosterCovers=1
+Booster=11 Common, 3 Uncommon, 1 Rare
+
+[cards]
+U AEther Mutation
+C Ana Disciple
+U Ana Sanctuary
+R Anavolver
+C Angelfire Crusader
+R Battlefield Forge
+R Bloodfire Colossus
+C Bloodfire Dwarf
+C Bloodfire Infusion
+U Bloodfire Kavu
+C Bog Gnarr
+U Brass Herald
+U Captain's Maneuver
+R Caves of Koilos
+C Ceta Disciple
+U Ceta Sanctuary
+R Cetavolver
+U Coalition Flag
+C Coalition Honor Guard
+C Coastal Drake
+C Consume Strength
+R Cromat
+C Dead Ringers
+R Death Grasp
+U Death Mutation
+C Dega Disciple
+U Dega Sanctuary
+R Degavolver
+R Desolation Angel
+R Desolation Giant
+U Diversionary Tactics
+C Divine Light
+U Dodecapod
+U Dragon Arch
+C Dwarven Landslide
+U Dwarven Patrol
+U Ebony Treefolk
+U Emblazoned Golem
+U Enlistment Officer
+U Evasive Action
+R False Dawn
+R Fervent Charge
+U Fire
+U Flowstone Charger
+U Foul Presence
+R Fungal Shambler
+U Gaea's Balance
+C Gaea's Skyfolk
+R Gerrard Capashen
+U Gerrard's Verdict
+C Glade Gnarr
+C Goblin Legionnaire
+U Goblin Ringleader
+R Goblin Trenches
+U Grave Defiler
+R Guided Passage
+U Haunted Angel
+C Helionaut
+R Ice Cave
+U Illuminate
+U Illusion
+C Index
+C Jaded Response
+C Jilt
+U Jungle Barrier
+C Kavu Glider
+U Kavu Howler
+R Kavu Mauler
+C Last Caress
+R Last Stand
+C Lay of the Land
+R Legacy Weapon
+U Life
+R Lightning Angel
+C Living Airship
+C Llanowar Dead
+R Llanowar Wastes
+C Manacles of Decay
+U Martyrs' Tomb
+R Mask of Intolerance
+C Mind Extraction
+U Minotaur Illusionist
+C Minotaur Tactician
+C Mournful Zombie
+R Mystic Snake
+C Necra Disciple
+U Necra Sanctuary
+R Necravolver
+U Night
+U Order
+C Orim's Thunder
+R Overgrown Estate
+C Penumbra Bobcat
+U Penumbra Kavu
+R Penumbra Wurm
+R Pernicious Deed
+R Phyrexian Arena
+U Phyrexian Gargantua
+C Phyrexian Rager
+R Planar Despair
+R Powerstone Minefield
+R Prophetic Bolt
+C Putrid Warrior
+C Quagmire Druid
+C Quicksilver Dagger
+C Raka Disciple
+U Raka Sanctuary
+R Rakavolver
+C Razorfin Hunter
+C Reef Shaman
+C Savage Gorilla
+C Shield of Duty and Reason
+C Shimmering Mirage
+R Shivan Reef
+C Smash
+C Soul Link
+R Spectral Lynx
+R Spiritmonger
+C Squee's Embrace
+U Squee's Revenge
+C Standard Bearer
+C Strength of Night
+R Suffocating Blast
+U Suppress
+U Sylvan Messenger
+R Symbiotic Deployment
+C Tahngarth's Glare
+C Temporal Spring
+U Tidal Courier
+C Tranquil Path
+C Tundra Kavu
+R Unnatural Selection
+C Urborg Elf
+C Urborg Uprising
+R Vindicate
+U Vodalian Mystic
+U Whirlpool Drake
+C Whirlpool Rider
+R Whirlpool Warrior
+R Wild Research
+R Yavimaya Coast
+R Yavimaya's Embrace
+C Zombie Boa

@@ -1,0 +1,21 @@
+[metadata]
+Code=V12
+Date=2012-08-31
+Name=From the Vault: Realms
+
+[cards]
+M Ancient Tomb
+M Boseiju, Who Shelters All
+M Cephalid Coliseum
+M Desert
+M Dryad Arbor
+M Forbidden Orchard
+M Glacial Chasm
+M Grove of the Burnwillows
+M High Market
+M Maze of Ith
+M Murmuring Bosk
+M Shivan Gorge
+M Urborg, Tomb of Yawgmoth
+M Vesuva
+M Windbrisk Heights

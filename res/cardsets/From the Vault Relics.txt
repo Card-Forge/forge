@@ -1,0 +1,21 @@
+[metadata]
+Code=V10
+Date=2010-08-27
+Name=From the Vault: Relics
+
+[cards]
+M AEther Vial
+M Black Vise
+M Isochron Scepter
+M Ivory Tower
+M Jester's Cap
+M Karn, Silver Golem
+M Masticore
+M Memory Jar
+M Mirari
+M Mox Diamond
+M Nevinyrral's Disk
+M Sol Ring
+M Sundering Titan
+M Sword of Body and Mind
+M Zuran Orb

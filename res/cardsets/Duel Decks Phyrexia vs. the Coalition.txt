@@ -1,0 +1,80 @@
+[metadata]
+Code=DDE
+Date=2010-03-19
+Name=Duel Decks: Phyrexia vs. the Coalition
+
+[cards]
+U Allied Strategies
+C Armadillo Cloak
+U Bone Shredder
+C Carrion Feeder
+U Charging Troll
+R Coalition Relic
+U Darigaaz's Charm
+R Darigaaz, the Igniter
+C Dark Ritual
+U Elfhame Palace
+U Evasive Action
+C Exotic Curse
+C Fertile Ground
+L Forest
+L Forest
+R Gerrard Capashen
+C Gerrard's Command
+C Harrow
+C Hideous End
+C Hornet
+U Hornet Cannon
+L Island
+U Lightning Greaves
+R Living Death
+C Minion
+L Mountain
+C Narrow Escape
+C Nomadic Elf
+U Order of Yawgmoth
+R Phyrexian Arena
+C Phyrexian Battleflies
+C Phyrexian Broodlings
+R Phyrexian Colossus
+C Phyrexian Debaser
+U Phyrexian Defiler
+C Phyrexian Denouncer
+U Phyrexian Gargantua
+C Phyrexian Ghoul
+U Phyrexian Hulk
+M Phyrexian Negator
+R Phyrexian Plaguelord
+R Phyrexian Processor
+U Phyrexian Totem
+U Phyrexian Vault
+L Plains
+U Power Armor
+U Priest of Gix
+U Puppet Strings
+C Quirion Elves
+U Rith's Charm
+R Rith, the Awakener
+U Sanguine Guard
+C Saproling
+U Shivan Oasis
+U Slay
+U Sunscape Battlemage
+L Swamp
+L Swamp
+L Swamp
+L Swamp
+C Tendrils of Corruption
+C Terramorphic Expanse
+C Thornscape Apprentice
+U Thornscape Battlemage
+U Thunderscape Battlemage
+U Treva's Charm
+R Treva, the Renewer
+C Tribal Flames
+M Urza's Rage
+U Verduran Emissary
+U Voltaic Key
+U Whispersilk Cloak
+U Worn Powerstone
+C Yavimaya Elder

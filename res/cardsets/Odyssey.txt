@@ -1,0 +1,360 @@
+[metadata]
+Code=ODY
+Date=2001-10-01
+Name=Odyssey
+Code2=OD
+Type=Expansion
+BoosterCovers=3
+Booster=11 Common, 3 Uncommon, 1 Rare
+
+[cards]
+C AEther Burst
+C Abandoned Outpost
+C Aboshan's Desire
+R Aboshan, Cephalid Emperor
+C Acceptable Losses
+R Aegis of Honor
+C Afflict
+R Amugaba
+C Anarchist
+R Ancestral Tribute
+C Angelic Wall
+U Animal Boneyard
+R Ashen Firebeast
+R Atogatog
+U Aura Graft
+C Auramancer
+U Aven Archer
+C Aven Cloudchaser
+C Aven Fisher
+C Aven Flock
+R Aven Shrine
+U Aven Smokeweaver
+C Aven Windreader
+R Balancing Act
+U Balshan Beguiler
+U Balshan Griffin
+U Bamboozle
+C Barbarian Lunatic
+U Barbarian Ring
+U Bash to Bits
+U Battle Strain
+R Battle of Wits
+R Bearscape
+U Beast Attack
+U Beloved Chaplain
+C Blazing Salvo
+U Blessed Orator
+R Bloodcurdler
+C Bog Wreckage
+R Bomb Squad
+R Braids, Cabal Minion
+U Buried Alive
+R Burning Sands
+C Cabal Inquisitor
+R Cabal Patriarch
+U Cabal Pit
+R Cabal Shrine
+R Call of the Herd
+R Cantivore
+C Careful Study
+C Cartographer
+R Catalyst Stone
+U Caustic Tar
+C Cease-Fire
+U Centaur Garden
+U Cephalid Broker
+U Cephalid Coliseum
+C Cephalid Looter
+R Cephalid Retainer
+C Cephalid Scout
+R Cephalid Shrine
+C Chainflinger
+U Chamber of Manipulation
+R Chance Encounter
+R Charmed Pendant
+C Chatter of the Squirrel
+U Childhood Horror
+R Chlorophant
+C Coffin Purge
+R Cognivore
+U Concentrate
+C Confessor
+U Crashing Centaur
+C Crypt Creeper
+R Crystal Quarry
+R Cultural Exchange
+R Cursed Monstrosity
+R Darkwater Catacombs
+U Darkwater Egg
+R Decaying Soil
+R Decimate
+U Decompose
+C Dedicated Martyr
+U Deep Reconnaissance
+R Delaying Shield
+U Deluge
+C Dematerialize
+U Demolish
+C Demoralize
+R Deserted Temple
+R Devoted Caretaker
+U Diabolic Tutor
+C Diligent Farmhand
+C Dirty Wererat
+R Divert
+R Divine Sacrament
+R Dogged Hunter
+C Dreamwinder
+C Druid Lyrist
+U Druid's Call
+C Dusk Imp
+C Dwarven Grunt
+U Dwarven Recruiter
+R Dwarven Shrine
+U Dwarven Strike Force
+R Earnest Fellowship
+C Earth Rift
+C Elephant Ambush
+C Ember Beast
+C Embolden
+U Engulfing Flames
+R Entomb
+R Epicenter
+C Escape Artist
+U Execute
+R Extract
+U Face of Fear
+U Famished Ghoul
+U Fervent Denial
+C Filthy Cur
+C Firebolt
+C Flame Burst
+C Fledgling Imp
+L Forest
+L Forest
+L Forest
+L Forest
+U Frenetic Ogre
+C Frightcrawler
+U Gallantry
+C Ghastly Demise
+U Gorilla Titan
+R Graceful Antelope
+C Gravedigger
+R Gravestorm
+R Ground Seal
+C Halberdier
+C Hallowed Healer
+R Haunting Echoes
+R Hint of Insanity
+R Holistic Wisdom
+U Howling Gale
+C Immobilizing Ink
+R Impulsive Maneuvers
+U Infected Vermin
+C Innocent Blood
+R Iridescent Angel
+L Island
+L Island
+L Island
+L Island
+R Ivy Elemental
+R Junk Golem
+C Kamahl's Desire
+R Kamahl, Pit Fighter
+R Karmic Justice
+C Kirtar's Desire
+R Kirtar's Wrath
+C Krosan Archer
+C Krosan Avenger
+R Krosan Beast
+U Laquatus's Creativity
+C Last Rites
+U Lava Blister
+C Leaf Dancer
+R Lieutenant Kirtar
+C Life Burst
+U Limestone Golem
+U Liquid Fire
+U Lithatog
+U Luminous Guardian
+C Mad Dog
+U Magma Vein
+R Magnivore
+U Malevolent Awakening
+R Master Apothecary
+U Metamorphic Wurm
+U Millikin
+C Mind Burst
+R Mindslicer
+R Mine Layer
+U Minotaur Explorer
+R Mirari
+R Molten Influence
+C Moment's Peace
+C Morbid Hunger
+C Morgue Theft
+R Mortivore
+U Mossfire Egg
+R Mossfire Valley
+L Mountain
+L Mountain
+L Mountain
+L Mountain
+R Mudhole
+C Muscle Burst
+R Mystic Crusader
+R Mystic Enforcer
+U Mystic Penitent
+C Mystic Visionary
+C Mystic Zealot
+C Nantuko Disciple
+U Nantuko Elder
+R Nantuko Mentor
+R Nantuko Shrine
+R Need for Speed
+R Nefarious Lich
+R New Frontiers
+U Nimble Mongoose
+U Nomad Decoy
+U Nomad Stadium
+R Nut Collector
+R Obstinate Familiar
+R Otarian Juggernaut
+C Overeager Apprentice
+U Overrun
+U Painbringer
+C Pardic Firecat
+R Pardic Miner
+C Pardic Swordsmith
+U Patchwork Gnomes
+C Patriarch's Desire
+C Patrol Hound
+R Patron Wizard
+R Pedantic Learning
+C Peek
+R Persuasion
+R Petrified Field
+U Phantatog
+C Phantom Whelp
+R Pianna, Nomad Captain
+C Pilgrim of Justice
+C Pilgrim of Virtue
+U Piper's Melody
+L Plains
+L Plains
+L Plains
+L Plains
+U Predict
+U Price of Glory
+C Primal Frenzy
+C Psionic Gift
+U Psychatog
+U Pulsating Illusion
+U Puppeteer
+C Rabid Elephant
+C Ravaged Highlands
+C Ray of Distortion
+C Reckless Charge
+U Recoup
+C Refresh
+C Repel
+R Repentant Vampire
+U Resilient Wanderer
+C Rites of Initiation
+C Rites of Refusal
+C Rites of Spring
+U Roar of the Wurm
+U Rotting Giant
+C Sacred Rites
+U Sadistic Hypnotist
+U Sandstone Deadfall
+U Sarcatog
+R Savage Firecat
+C Scorching Missile
+U Screams of the Damned
+C Scrivener
+C Seafloor Debris
+C Second Thoughts
+R Seize the Day
+C Seton's Desire
+R Seton, Krosan Protector
+U Shadowblood Egg
+R Shadowblood Ridge
+R Shadowmage Infiltrator
+C Shelter
+R Shifty Doppelganger
+U Shower of Coals
+C Simplify
+U Skeletal Scrying
+U Skull Fracture
+U Skycloud Egg
+R Skycloud Expanse
+U Skyshooter
+U Soulcatcher
+U Spark Mage
+R Spellbane Centaur
+U Sphere of Duty
+U Sphere of Grace
+U Sphere of Law
+U Sphere of Reason
+U Sphere of Truth
+U Spiritualize
+C Springing Tiger
+R Squirrel Mob
+U Squirrel Nest
+R Stalking Bloodsucker
+U Standstill
+U Steam Vines
+U Steamclaw
+U Still Life
+R Stone-Tongue Basilisk
+U Sungrass Egg
+R Sungrass Prairie
+L Swamp
+L Swamp
+L Swamp
+L Swamp
+U Sylvan Might
+C Syncopate
+R Tainted Pact
+R Tarnished Citadel
+U Tattoo Ward
+R Terravore
+U Testament of Faith
+U Thaumatog
+C Thermal Blast
+U Think Tank
+R Thought Devourer
+U Thought Eater
+C Thought Nibbler
+C Timberland Ruins
+R Time Stretch
+C Tireless Tribe
+R Tombfire
+C Touch of Invisibility
+R Traumatize
+R Traveling Plague
+U Treetop Sentinel
+C Tremble
+U Twigwalker
+R Unifying Theory
+R Upheaval
+R Vampiric Dragon
+R Verdant Succession
+U Vivify
+U Volcanic Spray
+R Volley of Boulders
+R Wayward Angel
+C Werebear
+U Whipkeeper
+C Whispering Shade
+C Wild Mongrel
+C Woodland Druid
+C Words of Wisdom
+C Zombie Assassin
+C Zombie Cannibal
+U Zombie Infestation
+U Zombify
+R Zoologist

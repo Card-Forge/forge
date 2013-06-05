@@ -1,0 +1,259 @@
+[metadata]
+Code=ALA
+Date=2008-10-03
+Name=Shards of Alara
+Code2=ALA
+Type=Expansion
+BoosterCovers=5
+Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand
+
+[cards]
+R Ad Nauseam
+C Agony Warp
+M Ajani Vengeant
+C Akrasan Squire
+U Algae Gharial
+U Angel's Herald
+U Angelic Benediction
+C Angelsong
+U Arcane Sanctum
+R Archdemon of Unx
+C Banewasp Affliction
+U Bant Battlemage
+U Bant Charm
+C Bant Panorama
+R Battlegrace Angel
+U Behemoth's Herald
+C Blightning
+C Blister Beetle
+U Blood Cultist
+C Bloodpyre Elemental
+C Bloodthorn Taunter
+C Bone Splinters
+C Branching Bolt
+R Brilliant Ultimatum
+R Broodmate Dragon
+U Bull Cerodon
+R Caldera Hellion
+C Call to Heel
+C Cancel
+C Carrion Thrash
+C Cathartic Adept
+C Cavern Thoctar
+R Clarion Ultimatum
+C Cloudheath Drake
+C Coma Veil
+U Corpse Connoisseur
+C Courier's Capsule
+C Court Archers
+R Covenant of Minds
+R Cradle of Vitality
+R Crucible of Fire
+R Cruel Ultimatum
+U Crumbling Necropolis
+R Cunning Lethemancer
+C Cylian Elf
+U Dawnray Archer
+R Death Baron
+C Deathgreeter
+C Deft Duelist
+U Demon's Herald
+C Dispeller's Capsule
+C Dragon Fodder
+U Dragon's Herald
+C Dreg Reaver
+C Dregscape Zombie
+C Druid of the Anima
+U Drumhunter
+M Elspeth, Knight-Errant
+C Elvish Visionary
+M Empyrial Archangel
+U Esper Battlemage
+U Esper Charm
+C Esper Panorama
+U Etherium Astrolabe
+C Etherium Sculptor
+R Ethersworn Canonist
+C Excommunicate
+C Executioner's Capsule
+U Exuberant Firestoker
+U Fatestitcher
+R Feral Hydra
+U Filigree Sages
+U Fire-Field Ogre
+R Flameblast Dragon
+U Fleshbag Marauder
+L Forest
+L Forest
+L Forest
+L Forest
+R Gather Specimens
+C Gift of the Gargantuan
+C Glaze Fiend
+R Goblin Assault
+C Goblin Deathraiders
+C Goblin Mountaineer
+M Godsire
+C Godtoucher
+U Grixis Battlemage
+U Grixis Charm
+C Grixis Panorama
+C Guardians of Akrasa
+C Gustrider Exuberant
+R Hell's Thunder
+M Hellkite Overlord
+C Hindering Light
+C Hissing Iguanar
+R Immortal Coil
+C Incurable Ogre
+U Infest
+R Invincible Hymn
+L Island
+L Island
+L Island
+L Island
+U Jhessian Infiltrator
+C Jhessian Lookout
+U Jund Battlemage
+U Jund Charm
+C Jund Panorama
+U Jungle Shrine
+C Jungle Weaver
+C Kathari Screecher
+C Kederekt Creeper
+R Kederekt Leviathan
+R Keeper of Progenitus
+U Kiss of the Amesha
+C Knight of the Skyward Eye
+R Knight of the White Orchid
+R Knight-Captain of Eos
+M Kresh the Bloodbraided
+M Lich's Mirror
+C Lightning Talons
+C Lush Growth
+C Magma Spray
+R Manaplasm
+C Marble Chalice
+R Master of Etherium
+M Mayael the Anima
+R Memory Erosion
+U Metallurgeon
+U Mighty Emergence
+R Mindlock Orb
+R Minion Reflector
+C Mosstodon
+L Mountain
+L Mountain
+L Mountain
+L Mountain
+R Mycoloth
+C Naturalize
+U Naya Battlemage
+U Naya Charm
+C Naya Panorama
+U Necrogenesis
+C Obelisk of Bant
+C Obelisk of Esper
+C Obelisk of Grixis
+C Obelisk of Jund
+C Obelisk of Naya
+C Oblivion Ring
+C Onyx Goblet
+R Ooze Garden
+C Outrider of Jhess
+L Plains
+L Plains
+L Plains
+L Plains
+R Predator Dragon
+M Prince of Thralls
+U Protomatter Powder
+R Punish Ignorance
+U Puppet Conjurer
+U Qasali Ambusher
+R Quietus Spike
+M Rafiq of the Many
+C Rakeclaw Gargantuan
+R Ranger of Eos
+R Realm Razer
+C Relic of Progenitus
+C Resounding Roar
+C Resounding Scream
+C Resounding Silence
+C Resounding Thunder
+C Resounding Wave
+U Rhox Charger
+U Rhox War Monk
+C Ridge Rannet
+C Rip-Clan Crasher
+U Rockcaster Platoon
+U Rockslide Elemental
+R Sacellum Godspeaker
+R Salvage Titan
+C Sanctum Gargoyle
+U Sangrite Surge
+M Sarkhan Vol
+C Savage Hunger
+U Savage Lands
+U Scavenger Drake
+U Scourge Devil
+R Scourglass
+U Seaside Citadel
+R Sedraxis Specter
+M Sedris, the Traitor King
+C Shadowfeed
+R Sharding Sphinx
+M Sharuum the Hegemon
+C Shore Snapper
+C Sighted-Caste Sorcerer
+C Sigil Blessing
+R Sigil of Distinction
+U Sigiled Paladin
+C Skeletal Kathari
+U Skeletonize
+R Skill Borrower
+R Skullmulcher
+C Soul's Fire
+C Soul's Grace
+C Soul's Might
+R Spearbreaker Behemoth
+C Spell Snip
+M Sphinx Sovereign
+U Sphinx's Herald
+U Sprouting Thrinax
+C Steelclad Serpent
+C Steward of Valeron
+R Stoic Angel
+U Sunseed Nurturer
+L Swamp
+L Swamp
+L Swamp
+L Swamp
+U Swerve
+R Tar Fiend
+M Tezzeret the Seeker
+C Thorn-Thrash Viashino
+U Thoughtcutter Agent
+U Thunder-Thrash Elder
+U Tidehollow Sculler
+C Tidehollow Strix
+R Titanic Ultimatum
+U Topan Ascetic
+C Tortoise Formation
+U Tower Gargoyle
+C Undead Leotau
+C Vectis Silencers
+R Vein Drinker
+C Viashino Skeleton
+R Vicious Shadows
+R Violent Ultimatum
+C Viscera Dragger
+C Vithian Stinger
+C Volcanic Submersion
+C Waveskimmer Aven
+C Welkin Guide
+R Where Ancients Tread
+C Wild Nacatl
+C Windwright Mage
+U Woolly Thoctar
+C Yoked Plowbeast

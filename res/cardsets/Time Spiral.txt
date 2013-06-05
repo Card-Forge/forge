@@ -1,0 +1,311 @@
+[metadata]
+Code=TSP
+Date=2006-10-06
+Name=Time Spiral
+Code2=TSP
+Type=Expansion
+BoosterCovers=5
+Booster=10 Common, 3 Uncommon, 1 Rare, 1 TimeShifted TSB
+
+[cards]
+C AEther Web
+C AEtherflame Wall
+R Academy Ruins
+C Amrou Scout
+C Amrou Seekers
+R Ancestral Vision
+C Ancient Grudge
+R Angel's Grace
+C Ashcoat Bear
+U Aspect of Mongoose
+C Assassinate
+U Assembly-Worker
+U Barbed Shocker
+C Basal Sliver
+U Basalt Gargoyle
+C Benalish Cavalry
+C Bewilder
+C Blazing Blade Askari
+R Bogardan Hellkite
+C Bogardan Rager
+C Bonesplitter Sliver
+C Brass Gnat
+U Brine Elemental
+U Calciform Pools
+C Call to the Netherworld
+C Cancel
+R Candles of Leng
+U Careful Consideration
+C Castle Raptors
+U Cavalry Master
+U Celestial Crusader
+C Chameleon Blur
+C Children of Korlis
+C Chromatic Star
+U Chronatog Totem
+R Chronosavant
+C Clockspinning
+U Clockwork Hydra
+C Cloudchaser Kestrel
+C Coal Stoker
+U Conflagrate
+C Coral Trickster
+C Corpulent Corpse
+C Crookclaw Transmuter
+R Curse of the Cabal
+C Cyclopean Giant
+C D'Avenant Healer
+C Dark Withering
+C Deathspore Thallid
+R Deep-Sea Kraken
+U Dementia Sliver
+R Demonic Collusion
+C Detainment Spell
+C Divine Congregation
+R Draining Whelk
+R Dralnu, Lich Lord
+U Dread Return
+U Dreadship Reef
+C Dream Stalker
+C Drifter il-Dal
+C Drudge Reavers
+C Durkwood Baloth
+U Durkwood Tracker
+U Duskrider Peregrine
+C Empty the Warrens
+R Endrek Sahr, Master Breeder
+C Errant Doomsayers
+C Errant Ephemeron
+C Eternity Snare
+R Evangelize
+U Evil Eye of Urborg
+U Faceless Devourer
+U Fallen Ideal
+C Fathom Seer
+C Feebleness
+U Firemaw Kavu
+U Firewake Sliver
+R Flagstones of Trokair
+C Flamecore Elemental
+U Fledgling Mawcor
+C Flickering Spirit
+C Flowstone Channeler
+U Fool's Demise
+L Forest
+L Forest
+L Forest
+L Forest
+C Foriysian Interceptor
+U Foriysian Totem
+C Fortify
+R Fortune Thief
+U Fungal Reaches
+R Fungus Sliver
+U Fury Sliver
+R Gauntlet of Power
+C Gaze of Justice
+C Gemhide Sliver
+R Gemstone Caverns
+C Ghitu Firebreathing
+U Ghostflame Sliver
+C Glass Asp
+C Goblin Skycutter
+C Gorgon Recluse
+C Grapeshot
+R Greater Gargadon
+C Greenseeker
+U Griffin Guide
+C Ground Rift
+U Gustcloak Cavalier
+U Harmonic Sliver
+U Haunting Hymn
+C Havenwood Wurm
+C Herd Gnarr
+R Hivestone
+R Hypergenesis
+R Ib Halfheart, Goblin Tactician
+C Icatian Crier
+U Ignite Memories
+C Ironclaw Buzzardiers
+L Island
+L Island
+L Island
+L Island
+R Ith, High Arcanist
+C Ivory Giant
+R Ixidron
+R Jaya Ballard, Task Mage
+C Jedit's Dragoons
+C Jhoira's Timebug
+R Kaervek the Merciless
+C Keldon Halberdier
+R Kher Keep
+U Knight of the Holy Nimbus
+U Krosan Grip
+R Liege of the Pit
+C Lightning Axe
+R Lim-Dul the Necromancer
+R Living End
+U Locket of Yesterdays
+C Looter il-Kor
+R Lotus Bloom
+R Magus of the Candelabra
+R Magus of the Disk
+R Magus of the Jar
+R Magus of the Mirror
+R Magus of the Scroll
+C Mana Skimmer
+R Mangara of Corondor
+U Might Sliver
+U Might of Old Krosa
+C Mindlash Sliver
+C Mindstab
+R Mishra, Artificer Prodigy
+C Mogg War Marshal
+C Molder
+U Molten Slagheap
+C Momentary Blink
+R Moonlace
+L Mountain
+L Mountain
+L Mountain
+L Mountain
+C Mwonvuli Acid-Moss
+C Mystical Teachings
+C Nantuko Shaman
+R Nether Traitor
+U Nightshade Assassin
+R Norin the Wary
+R Opal Guardian
+U Opaline Sliver
+C Ophidian Eye
+C Orcish Cannonade
+U Outrider en-Kor
+U Paradise Plume
+U Paradox Haze
+R Pardic Dragon
+U Pendelhaven Elder
+R Pentarch Paladin
+C Pentarch Ward
+C Penumbra Spider
+U Phantom Wurm
+U Phthisis
+U Phyrexian Totem
+C Pit Keeper
+R Plague Sliver
+L Plains
+L Plains
+L Plains
+L Plains
+U Plated Pegasus
+C Plunder
+U Premature Burial
+U Primal Forcemage
+C Prismatic Lens
+R Psionic Sliver
+C Psychotic Episode
+U Pull from Eternity
+R Pulmonic Sliver
+U Quilled Sliver
+R Reiterate
+R Restore Balance
+U Return to Dust
+C Rift Bolt
+U Riftwing Cloudskate
+R Saffi Eriksdotter
+C Sage of Epityr
+U Saltcrusted Steppe
+C Sangrophage
+R Sarpadian Empires, Vol. VII
+C Savage Thallid
+C Scarwood Treefolk
+R Scion of the Ur-Dragon
+C Screeching Sliver
+U Scryb Ranger
+C Search for Tomorrow
+R Sedge Sliver
+R Sengir Nosferatu
+R Serra Avenger
+C Shadow Sliver
+C Sidewinder Sliver
+U Skittering Monstrosity
+C Skulking Knight
+C Slipstream Serpent
+U Smallpox
+C Snapback
+R Spectral Force
+U Spell Burst
+R Spike Tiller
+C Spiketail Drakeling
+C Spinneret Sliver
+U Spirit Loop
+U Sporesower Thallid
+R Sprite Noble
+C Sprout
+R Squall Line
+R Stonebrow, Krosan Hero
+R Stonewood Invocation
+U Stormcloud Djinn
+C Strangling Soot
+C Strength in Numbers
+R Stronghold Overseer
+R Stuffy Doll
+C Subterranean Shambler
+U Sudden Death
+U Sudden Shock
+R Sudden Spoiling
+U Sulfurous Blast
+L Swamp
+L Swamp
+L Swamp
+L Swamp
+R Swarmyard
+U Tectonic Fiend
+R Teferi, Mage of Zhalfir
+U Telekinetic Sliver
+C Temporal Eddy
+C Temporal Isolation
+C Tendrils of Corruption
+C Terramorphic Expanse
+C Thallid Germinator
+C Thallid Shell-Dweller
+R Thelon of Havenwood
+R Thelonite Hermit
+U Thick-Skinned Goblin
+C Think Twice
+C Thrill of the Hunt
+U Thunder Totem
+R Tivadar of Thorn
+C Tolarian Sentinel
+C Traitor's Clutch
+C Trespasser il-Vec
+R Trickbind
+R Triskelavus
+U Tromp the Domains
+U Truth or Tale
+C Two-Headed Sliver
+U Undying Rage
+R Unyaro Bees
+C Urborg Syphon-Mage
+U Urza's Factory
+U Vampiric Sliver
+C Venser's Sliver
+R Verdant Embrace
+R Vesuva
+R Vesuvan Shapeshifter
+C Viashino Bladescout
+C Viscerid Deepwalker
+C Viscid Lemures
+U Voidmage Husher
+U Volcanic Awakening
+R Walk the Aeons
+C Watcher Sliver
+R Weathered Bodyguards
+U Weatherseed Totem
+R Wheel of Fate
+U Wipe Away
+R Word of Seizing
+C Wormwood Dryad
+R Wurmcalling
+U Yavimaya Dryad
+C Zealot il-Vec

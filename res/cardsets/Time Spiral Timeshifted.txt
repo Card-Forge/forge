@@ -1,0 +1,129 @@
+[metadata]
+Code=TSB
+Date=2006-10-06
+Name=Time Spiral "Timeshifted"
+Code2=TSB
+Type=Expansion
+
+[cards]
+S Akroma, Angel of Wrath
+S Arena
+S Assault
+S Auratog
+S Avalanche Riders
+S Avatar of Woe
+S Avoid Fate
+S Bad Moon
+S Browbeat
+S Call of the Herd
+S Celestial Dawn
+S Claws of Gix
+S Coalition Victory
+S Cockatrice
+S Consecrate Land
+S Conspiracy
+S Craw Giant
+S Dandan
+S Darkness
+S Dauthi Slayer
+S Defiant Vanguard
+S Desert
+S Desolation Giant
+S Disenchant
+S Disintegrate
+S Dodecapod
+S Dragon Whelp
+S Dragonstorm
+S Enduring Renewal
+S Eron the Relentless
+S Essence Sliver
+S Evil Eye of Orms-by-Gore
+S Faceless Butcher
+S Feldon's Cane
+S Fiery Justice
+S Fiery Temper
+S Fire Whip
+S Flying Men
+S Funeral Charm
+S Gaea's Blessing
+S Gaea's Liege
+S Gemstone Mine
+S Ghost Ship
+S Giant Oyster
+S Goblin Snowman
+S Grinning Totem
+S Hail Storm
+S Honorable Passage
+S Hunting Moa
+S Icatian Javelineers
+S Jasmine Boreal
+S Jolrael, Empress of Beasts
+S Kobold Taskmaster
+S Krosan Cloudscraper
+S Leviathan
+S Lightning Angel
+S Lord of Atlantis
+S Merfolk Assassin
+S Merieke Ri Berit
+S Mindless Automaton
+S Mirari
+S Mistform Ultimus
+S Moorish Cavalry
+S Mystic Enforcer
+S Mystic Snake
+S Nicol Bolas
+S Orcish Librarian
+S Orgg
+S Ovinomancer
+S Pandemonium
+S Pendelhaven
+S Pirate Ship
+S Prodigal Sorcerer
+S Psionic Blast
+S Resurrection
+S Sacred Mesa
+S Safe Haven
+S Scragnoth
+S Sengir Autocrat
+S Serrated Arrows
+S Shadow Guildmage
+S Shadowmage Infiltrator
+S Sindbad
+S Sol'kanar the Swamp King
+S Soltari Priest
+S Soul Collector
+S Spike Feeder
+S Spined Sliver
+S Spitting Slug
+S Squire
+S Stormbind
+S Stormscape Familiar
+S Stupor
+S Suq'Ata Lancer
+S Swamp Mosquito
+S Teferi's Moat
+S Thallid
+S The Rack
+S Thornscape Battlemage
+S Tormod's Crypt
+S Tribal Flames
+S Twisted Abomination
+S Uncle Istvan
+S Undead Warchief
+S Undertaker
+S Unstable Mutation
+S Uthden Troll
+S Valor
+S Verdeloth the Ancient
+S Vhati il-Dal
+S Void
+S Voidmage Prodigy
+S Wall of Roots
+S War Barge
+S Whirling Dervish
+S Whispers of the Muse
+S Wildfire Emissary
+S Willbender
+S Witch Hunter
+S Withered Wretch
+S Zhalfirin Commander

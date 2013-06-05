@@ -1,0 +1,259 @@
+[metadata]
+Code=GTC
+Date=2013-02-01
+Name=Gatecrash
+Code2=GTC
+Type=Expansion
+BoosterCovers=5
+Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand RTR
+
+[cards]
+U AEtherize
+C Act of Treason
+C Adaptive Snapjaw
+C Aerial Maneuver
+U Agoraphobia
+R Alms Beast
+U Alpha Authority
+C Angelic Edict
+R Angelic Skirmisher
+C Armored Transport
+U Arrows of Justice
+C Assault Griffin
+R Assemble the Legion
+M Aurelia's Fury
+M Aurelia, the Warleader
+C Balustrade Spy
+U Bane Alley Broker
+C Basilica Guards
+C Basilica Screecher
+C Beckon Apparition
+R Biomass Mutation
+C Bioshift
+R Biovisionary
+R Blind Obedience
+C Bomber Corps
+M Borborygmos Enraged
+U Boros Charm
+U Boros Elite
+C Boros Guildgate
+U Boros Keyrune
+R Boros Reckoner
+R Breeding Pool
+U Burning-Tree Emissary
+C Burst of Strength
+U Call of the Nightwing
+U Cartel Aristocrat
+U Cinder Elemental
+R Clan Defiance
+C Clinging Anemones
+C Cloudfin Raptor
+U Coerced Confession
+R Consuming Aberration
+C Contaminated Ground
+C Corpse Blockade
+C Court Street Denizen
+U Crackling Perimeter
+C Crocanura
+U Crowned Ceratok
+R Crypt Ghast
+C Daring Skyjek
+C Death's Approach
+C Deathcult Rogue
+M Deathpact Angel
+U Debtor's Pulpit
+C Devour Flesh
+R Diluvian Primordial
+U Dimir Charm
+C Dimir Guildgate
+U Dimir Keyrune
+U Dinrova Horror
+C Disciple of the Old Ways
+M Domri Rade
+C Drakewing Krasis
+U Duskmantle Guildmage
+M Duskmantle Seer
+C Dutiful Thrull
+U Dying Wish
+U Elusive Krasis
+C Ember Beast
+M Enter the Infinite
+C Executioner's Swing
+U Experiment One
+R Fathom Mage
+U Firefist Striker
+R Firemane Avenger
+R Five-Alarm Fire
+C Forced Adaptation
+U Fortress Cyclops
+R Foundry Champion
+C Foundry Street Denizen
+U Frenzied Tilling
+C Frilled Oculus
+R Frontline Medic
+C Furious Resistance
+U Gateway Shade
+U Ghor-Clan Rampager
+M Giant Adephage
+M Gideon, Champion of Justice
+U Gift of Orzhova
+R Glaring Spotlight
+R Godless Shrine
+C Greenside Watcher
+U Gridlock
+C Grisly Spectacle
+U Ground Assault
+U Gruul Charm
+C Gruul Guildgate
+U Gruul Keyrune
+R Gruul Ragebeast
+U Guardian of the Gateless
+C Guildscorn Ward
+C Gutter Skulk
+R Gyre Sage
+C Hands of Binding
+M Hellkite Tyrant
+U Hellraiser Goblin
+R High Priest of Penance
+U Hindervines
+U Hold the Gates
+U Holy Mantle
+U Homing Lightning
+C Horror of the Dim
+C Hydroform
+U Illness in the Ranks
+R Illusionist's Bracers
+R Immortal Servitude
+U Incursion Specialist
+C Ivy Lane Denizen
+C Keymaster Rogue
+U Killing Glare
+C Kingpin's Pet
+C Knight Watch
+U Knight of Obligation
+C Last Thoughts
+M Lazav, Dimir Mastermind
+R Legion Loyalist
+C Leyline Phantom
+M Lord of the Void
+R Luminate Primordial
+C Madcap Skills
+U Mark for Death
+C Martial Glory
+C Massive Raid
+M Master Biomancer
+U Mental Vapors
+R Merciless Eviction
+U Merfolk of the Depths
+C Metropolis Sprite
+C Midnight Recovery
+C Millennial Gargoyle
+U Miming Slime
+R Mind Grind
+U Mindeye Drake
+R Molten Primordial
+C Mortus Strider
+C Mugging
+U Murder Investigation
+R Mystic Genesis
+C Naturalize
+C Nav Squad Commandos
+R Nightveil Specter
+U Nimbus Swimmer
+M Obzedat, Ghost Council
+R Ogre Slumlord
+U One Thousand Lashes
+R Ooze Flux
+U Ordruun Veteran
+U Orzhov Charm
+C Orzhov Guildgate
+U Orzhov Keyrune
+C Paranoid Delusions
+C Pit Fight
+C Predator's Rapport
+C Primal Visitation
+M Prime Speaker Zegana
+C Prophetic Prism
+C Psychic Strike
+C Purge the Profane
+U Rapid Hybridization
+C Razortip Whip
+R Realmwright
+U Righteous Charge
+C Riot Gear
+U Ripscale Predator
+R Rubblebelt Raiders
+R Rubblehulk
+C Ruination Wurm
+U Rust Scarab
+R Sacred Foundry
+C Sage's Row Denizen
+U Sapphire Drake
+C Scab-Clan Charger
+C Scatter Arc
+C Scorchwalker
+R Sepulchral Primordial
+U Serene Remembrance
+C Shadow Alley Denizen
+C Shadow Slice
+C Shambleshark
+C Shattering Blow
+C Shielded Passage
+R Signal the Clans
+U Simic Charm
+U Simic Fluxmage
+C Simic Guildgate
+U Simic Keyrune
+R Simic Manipulator
+R Skarrg Goliath
+U Skarrg Guildmage
+C Skinbrand Goblin
+U Skullcrack
+C Skyblinder Staff
+C Skygames
+C Skyknight Legionnaire
+C Slate Street Ruffian
+C Slaughterhorn
+C Smite
+U Smog Elemental
+R Soul Ransom
+R Spark Trooper
+C Spell Rupture
+C Spire Tracer
+R Stolen Identity
+R Stomping Ground
+C Structural Collapse
+U Sunhome Guildmage
+R Sylvan Primordial
+C Syndic of Tithes
+C Syndicate Enforcer
+R Thespian's Stage
+U Thrull Parasite
+C Tin Street Market
+C Totally Lost
+U Tower Defense
+C Towering Thunderfist
+R Treasury Thrull
+U Truefire Paladin
+U Undercity Informer
+R Undercity Plague
+R Unexpected Results
+U Urban Evolution
+U Urbis Protector
+C Verdant Haven
+U Viashino Shanktail
+U Vizkopa Confessor
+U Vizkopa Guildmage
+U Voidwalk
+C Warmind Infantry
+U Wasteland Viper
+R Watery Grave
+C Way of the Thief
+R Whispering Madness
+U Wight of Precinct Six
+C Wildwood Rebirth
+C Wojek Halberdiers
+R Wrecking Ogre
+U Zameck Guildmage
+C Zarichi Tiger
+C Zhur-Taa Swine

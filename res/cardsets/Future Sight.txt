@@ -1,0 +1,190 @@
+[metadata]
+Code=FUT
+Date=2007-05-04
+Name=Future Sight
+Code2=FUT
+Type=Expansion
+BoosterCovers=3
+Booster=11 Common, 3 Uncommon, 1 Rare
+
+[cards]
+R Akroma's Memorial
+R Angel of Salvation
+U Arc Blade
+U Arcanum Wings
+C Augur il-Vec
+C Augur of Skulls
+C Aven Augur
+U Aven Mindcensor
+R Barren Glory
+R Baru, Fist of Krosa
+R Bitter Ordeal
+C Blade of the Sixth Pride
+C Blind Phantasm
+U Bloodshot Trainee
+C Bogardan Lancer
+U Boldwyr Intimidator
+U Bonded Fetch
+U Bound in Silence
+R Bridge from Below
+U Centaur Omenreader
+U Char-Rumbler
+U Chronomantic Escape
+R Cloud Key
+U Cloudseeder
+R Coalition Relic
+U Cryptic Annelid
+C Cutthroat il-Dal
+U Cyclical Evolution
+U Dakmor Salvage
+R Darksteel Garrison
+R Daybreak Coronet
+C Death Rattle
+C Deepcavern Imp
+U Delay
+U Dryad Arbor
+U Dust of Moments
+C Edge of Autumn
+C Emberwilde Augur
+U Emblem of the Warmind
+R Epochrasite
+U Even the Odds
+C Fatal Attraction
+U Festering March
+U Fleshwrither
+C Flowstone Embrace
+C Fomori Nomad
+R Force of Savagery
+C Foresee
+C Frenzy Sliver
+C Gathan Raiders
+C Ghostfire
+R Gibbering Descent
+C Gift of Granite
+R Glittering Wish
+U Goldmeadow Lookout
+C Grave Peril
+C Grave Scrabbler
+R Graven Cairns
+C Grinning Ignus
+R Grove of the Burnwillows
+U Haze of Rage
+R Heartwood Storyteller
+C Henchfiend of Ukor
+C Homing Sliver
+R Horizon Canopy
+C Ichor Slick
+R Imperial Mask
+U Imperiosaur
+C Infiltrator il-Kor
+R Intervention Pact
+R Jhoira of the Ghitu
+C Judge Unworthy
+C Kavu Primarch
+U Keldon Megaliths
+C Knight of Sursi
+R Korlash, Heir to Blackblade
+C Leaden Fists
+R Linessa, Zephyr Mage
+C Llanowar Augur
+C Llanowar Empath
+U Llanowar Mentor
+U Llanowar Reborn
+C Logic Knot
+U Lost Auramancers
+C Lost Hours
+C Lucent Liminid
+C Lumithread Field
+C Lymph Sliver
+R Maelstrom Djinn
+R Magus of the Abyss
+R Magus of the Future
+R Magus of the Moat
+R Magus of the Moon
+R Magus of the Vineyard
+C Marshaling Cry
+C Mass of Ghouls
+C Mesmeric Sliver
+U Minions' Murmurs
+U Mistmeadow Skulk
+R Molten Disaster
+R Muraganda Petroglyphs
+U Mystic Speculation
+U Nacatl War-Pride
+U Narcomoeba
+C Nessian Courser
+U New Benalia
+R Nihilith
+R Nimbus Maze
+R Nix
+C Oblivion Crown
+R Oriss, Samite Guardian
+R Pact of Negation
+R Pact of the Titan
+C Patrician's Scorn
+C Petrified Plating
+U Phosphorescent Feast
+U Pooling Venom
+C Putrid Cyclops
+R Pyromancer's Swath
+R Quagnoth
+C Quiet Disrepair
+U Ramosian Revivalist
+U Ravaging Riftwurm
+U Reality Strobe
+C Riddle of Lightning
+C Rift Elemental
+U Riftsweeper
+R Rites of Flourishing
+R River of Tears
+C Saltskitter
+C Samite Censer-Bearer
+C Sarcomite Myr
+R Scourge of Kher Ridges
+R Scout's Warning
+U Second Wind
+R Seht's Tiger
+R Shah of Naar Isle
+R Shapeshifter's Marrow
+R Shimian Specter
+U Shivan Sand-Mage
+U Skirk Ridge Exhumer
+U Skizzik Surger
+R Slaughter Pact
+R Sliver Legion
+U Sliversmith
+U Snake Cult Initiation
+U Soultether Golem
+U Sparkspitter
+R Spellweaver Volute
+U Spellwild Ouphe
+U Spin into Myth
+U Spirit en-Dal
+C Sporoloth Ancient
+C Sprout Swarm
+R Steamflogger Boss
+U Storm Entity
+U Street Wraith
+U Stronghold Rats
+R Summoner's Pact
+U Sword of the Meek
+R Take Possession
+R Tarmogoyf
+R Tarox Bladewing
+C Thornweald Archer
+R Thunderblade Charge
+U Tolaria West
+R Tombstalker
+C Unblinking Bleb
+U Utopia Mycon
+C Vedalken AEthermage
+R Veilstone Amulet
+C Venser's Diffusion
+R Venser, Shaper Savant
+C Virulent Sliver
+R Whetwheel
+C Whip-Spine Drake
+U Witch's Mist
+C Wrap in Vigor
+U Yixlid Jailer
+U Zoetic Cavern

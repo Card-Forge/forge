@@ -1,0 +1,191 @@
+[metadata]
+Code=PTK
+Date=1999-05
+Name=Portal Three Kingdoms
+Code2=P3
+Type=Starter
+Border=White
+BoosterCovers=1
+Booster=5 Common, 2 Uncommon, 1 Rare, 2 BasicLand
+
+[cards]
+U Alert Shu Infantry
+R Ambition's Cost
+R Balance of Power
+U Barbarian General
+C Barbarian Horde
+U Blaze
+U Borrowing 100,000 Arrows
+R Borrowing the East Wind
+U Brilliant Plan
+C Broken Dam
+C Burning Fields
+R Burning of Xinye
+R Cao Cao, Lord of Wei
+R Cao Ren, Wei Commander
+R Capture of Jingzhou
+U Champion's Victory
+U Coercion
+U Control of the Court
+U Corrupt Court Official
+U Corrupt Eunuchs
+U Council of Advisors
+U Counterintelligence
+U Cunning Advisor
+C Deception
+C Desert Sandstorm
+U Desperate Charge
+R Diaochan, Artful Beauty
+R Dong Zhou, the Tyrant
+R Eightfold Maze
+U Empty City Ruse
+U Eunuchs' Intrigues
+R Exhaustion
+C Extinguish
+C False Defeat
+U False Mourning
+U Famine
+C Fire Ambush
+U Fire Bowman
+U Flanking Troops
+C Forced Retreat
+L Forest
+L Forest
+L Forest
+C Forest Bear
+C Ghostly Visit
+R Guan Yu's 1,000-Li March
+R Guan Yu, Sainted Warrior
+U Heavy Fog
+R Hua Tuo, Honored Physician
+R Huang Zhong, Shu General
+U Hunting Cheetah
+C Imperial Edict
+U Imperial Recruiter
+R Imperial Seal
+C Independent Troops
+L Island
+L Island
+L Island
+R Kongming's Contraptions
+R Kongming, "Sleeping Dragon"
+R Lady Sun
+R Lady Zhurong, Warrior Queen
+R Liu Bei, Lord of Shu
+U Lone Wolf
+U Loyal Retainers
+R Lu Bu, Master-at-Arms
+R Lu Meng, Wu General
+R Lu Su, Wu Advisor
+R Lu Xun, Scholar General
+R Ma Chao, Western Warrior
+R Marshaling the Troops
+C Meng Huo's Horde
+R Meng Huo, Barbarian King
+C Misfortune's Gain
+L Mountain
+L Mountain
+L Mountain
+C Mountain Bandit
+U Mystic Denial
+R Overwhelming Forces
+R Pang Tong, "Young Phoenix"
+U Peach Garden Oath
+L Plains
+L Plains
+L Plains
+U Poison Arrow
+C Preemptive Strike
+U Rally the Troops
+R Ravages of War
+U Ravaging Horde
+U Red Cliffs Armada
+R Relentless Assault
+U Renegade Troops
+C Return to Battle
+C Riding Red Hare
+R Riding the Dilu Horse
+U Rockslide Ambush
+R Rolling Earthquake
+C Sage's Knowledge
+C Shu Cavalry
+C Shu Defender
+U Shu Elite Companions
+C Shu Elite Infantry
+C Shu Farmer
+C Shu Foot Soldiers
+U Shu General
+C Shu Grain Caravan
+U Shu Soldier-Farmers
+R Sima Yi, Wei Field Marshal
+R Slashing Tiger
+C Southern Elephant
+U Spoils of Victory
+C Spring of Eternal Peace
+C Stalking Tiger
+U Stolen Grain
+R Stone Catapult
+C Stone Rain
+U Strategic Planning
+C Straw Soldiers
+R Sun Ce, Young Conquerer
+R Sun Quan, Lord of Wu
+L Swamp
+L Swamp
+L Swamp
+U Taoist Hermit
+R Taoist Mystic
+R Taunting Challenge
+C Three Visits
+U Trained Cheetah
+C Trained Jackal
+U Trip Wire
+U Vengeance
+C Virtuous Charge
+C Volunteer Militia
+R Warrior's Oath
+U Warrior's Stand
+C Wei Ambush Force
+U Wei Assassins
+U Wei Elite Companions
+C Wei Infantry
+U Wei Night Raiders
+C Wei Scout
+C Wei Strike Force
+C Wielding the Green Dragon
+R Wolf Pack
+U Wu Admiral
+C Wu Elite Cavalry
+C Wu Infantry
+C Wu Light Cavalry
+U Wu Longbowman
+C Wu Scout
+U Wu Spy
+C Wu Warship
+R Xiahou Dun, the One-Eyed
+R Xun Yu, Wei Advisor
+C Yellow Scarves Cavalry
+R Yellow Scarves General
+C Yellow Scarves Troops
+C Young Wei Recruits
+U Yuan Shao's Infantry
+R Yuan Shao, the Indecisive
+R Zhang Fei, Fierce Warrior
+R Zhang He, Wei General
+R Zhang Liao, Hero of Hefei
+R Zhao Zilong, Tiger General
+R Zhou Yu, Chief Commander
+R Zhuge Jin, Wu Strategist
+C Zodiac Dog
+R Zodiac Dragon
+C Zodiac Goat
+U Zodiac Horse
+C Zodiac Monkey
+U Zodiac Ox
+U Zodiac Pig
+C Zodiac Rabbit
+C Zodiac Rat
+C Zodiac Rooster
+C Zodiac Snake
+U Zodiac Tiger
+R Zuo Ci, the Mocking Sage

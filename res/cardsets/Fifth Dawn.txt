@@ -1,0 +1,175 @@
+[metadata]
+Code=5DN
+Date=2004-06-04
+Name=Fifth Dawn
+Code2=FD
+Type=Expansion
+BoosterCovers=3
+Booster=11 Common, 3 Uncommon, 1 Rare
+
+[cards]
+C Abuna's Chant
+R Acquire
+C Advanced Hoverguard
+R All Suns' Dawn
+C Anodet Lurker
+U Arachnoid
+U Arcbound Wanderer
+C Armed Response
+R Artificer's Intuition
+R Auriok Champion
+U Auriok Salvagers
+R Auriok Windwalker
+U Avarice Totem
+C Baton of Courage
+C Battered Golem
+R Beacon of Creation
+R Beacon of Destruction
+R Beacon of Immortality
+R Beacon of Tomorrows
+R Beacon of Unrest
+U Blasting Station
+C Blind Creeper
+R Blinkmoth Infusion
+R Bringer of the Black Dawn
+R Bringer of the Blue Dawn
+R Bringer of the Green Dawn
+R Bringer of the Red Dawn
+R Bringer of the White Dawn
+C Cackling Imp
+U Channel the Suns
+U Chimeric Coils
+U Circle of Protection: Artifacts
+R Clearwater Goblet
+U Clock of Omens
+U Composite Golem
+C Condescend
+C Conjurer's Bauble
+R Cosmic Larva
+C Cranial Plating
+R Crucible of Worlds
+C Dawn's Reflection
+R Desecration Elemental
+U Devour in Shadow
+U Disruption Aura
+R Door to Nothingness
+R Doubling Cube
+C Dross Crocodile
+C Early Frost
+U Ebon Drake
+R Endless Whispers
+U Energy Chamber
+R Engineered Explosives
+U Ensouled Scimitar
+R Eon Hub
+U Etched Oracle
+U Eternal Witness
+U Eyes of the Watcher
+U Fangren Pathcutter
+U Feedback Bolt
+C Ferocious Charge
+U Ferropede
+C Fill with Fright
+R Fist of Suns
+C Fleshgrafter
+U Fold into AEther
+U Furnace Whelp
+U Gemstone Array
+C Goblin Brawler
+U Goblin Cannon
+U Grafted Wargear
+R Granulate
+U Grinding Station
+U Guardian Idol
+C Healer's Headdress
+C Heliophial
+R Helm of Kaldra
+C Horned Helm
+R Hoverguard Sweepers
+U Infused Arrows
+C Into Thin Air
+R Ion Storm
+U Iron-Barb Hellion
+R Joiner Adept
+U Krark-Clan Engineers
+U Krark-Clan Ironworks
+C Krark-Clan Ogre
+U Lantern of Insight
+C Leonin Squire
+C Lose Hope
+C Loxodon Anchorite
+U Loxodon Stalwart
+U Lunar Avenger
+R Magma Giant
+U Magma Jet
+U Magnetic Theft
+C Mana Geyser
+R Mephidross Vampire
+R Moriok Rigger
+R Mycosynth Golem
+C Myr Quadropod
+C Myr Servitor
+C Neurok Stealthsuit
+U Night's Whisper
+U Nim Grotesque
+C Opaline Bracers
+U Ouphe Vandals
+U Paradise Mantle
+C Pentad Prism
+U Plasma Elemental
+R Plunge into Darkness
+R Possessed Portal
+U Qumulox
+C Rain of Rust
+R Raksha Golden Cub
+C Razorgrass Screen
+R Razormane Masticore
+U Relentless Rats
+U Relic Barrier
+R Retaliate
+R Reversal of Fortune
+R Rite of Passage
+R Roar of Reclamation
+R Rude Awakening
+R Salvaging Station
+C Sawtooth Thresher
+C Screaming Fury
+C Serum Visions
+U Shattered Dreams
+R Silent Arbiter
+U Skullcage
+C Skyhunter Prowler
+U Skyhunter Skirmisher
+C Skyreach Manta
+R Solarion
+C Spark Elemental
+C Sparring Collar
+R Spectral Shift
+U Spinal Parasite
+R Staff of Domination
+C Stand Firm
+C Stasis Cocoon
+U Steelshaper's Gift
+R Summoner's Egg
+R Summoning Station
+R Suncrusher
+C Suntouched Myr
+C Sylvok Explorer
+U Synod Centurion
+C Tangle Asp
+U Tel-Jilad Justice
+C Tel-Jilad Lifebreather
+C Thermal Navigator
+C Thought Courier
+R Tornado Elemental
+C Trinket Mage
+C Tyrranax
+U Vanquish
+U Vedalken Mastermind
+R Vedalken Orrery
+R Vedalken Shackles
+C Vicious Betrayal
+U Viridian Lorebearers
+C Viridian Scout
+C Vulshok Sorcerer
+C Wayfarer's Bauble

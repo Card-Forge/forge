@@ -1,0 +1,175 @@
+[metadata]
+Code=SOK
+Date=2005-06-03
+Name=Saviors of Kamigawa
+Code2=SOK
+Type=Expansion
+BoosterCovers=3
+Booster=11 Common, 3 Uncommon, 1 Rare
+
+[cards]
+U AEther Shockwave
+R Adamaro, First to Desire
+C Akki Drillmaster
+C Akki Underling
+R Akuta, Born of Ash
+C Araba Mothrider
+R Arashi, the Sky Asunder
+R Ashes of the Fallen
+R Ayumi, the Last Visitor
+C Barrel Down Sokenzan
+R Blood Clock
+R Bounteous Kirin
+U Briarknit Kami
+U Burning-Eye Zubera
+U Captive Flame
+R Celestial Kirin
+U Charge Across the Araba
+R Choice of Damnations
+R Cloudhoof Kirin
+C Cowed by Wisdom
+C Curtain of Light
+C Cut the Earthly Bond
+C Death Denied
+C Death of a Thousand Stings
+C Deathknell Kami
+C Deathmask Nezumi
+U Dense Canopy
+U Descendant of Kiyomaro
+U Descendant of Masumaro
+C Descendant of Soramaro
+C Dosan's Oldest Chant
+C Dreamcatcher
+U Ebony Owl Netsuke
+U Eiganjo Free-Riders
+C Elder Pine of Jukai
+R Endless Swarm
+R Enduring Ideal
+R Erayo, Soratami Ascendant
+R Eternal Dominion
+U Evermind
+U Exile into Darkness
+U Feral Lightning
+C Fiddlehead Kami
+U Footsteps of the Goryo
+C Freed from the Real
+U Gaze of Adamaro
+U Ghost-Lit Nourisher
+U Ghost-Lit Raider
+U Ghost-Lit Redeemer
+U Ghost-Lit Stalker
+U Ghost-Lit Warder
+C Glitterfang
+C Gnat Miser
+U Godo's Irregulars
+U Hail of Arrows
+U Hand of Cruelty
+U Hand of Honor
+U Haru-Onna
+R Hidetsugu's Second Rite
+R Homura, Human Ascendant
+C Ideas Unbound
+R Iizuka the Ruthless
+R Iname as One
+R Infernal Kirin
+C Inner Calm, Outer Strength
+C Inner Fire
+U Inner-Chamber Guard
+C Into the Fray
+U Ivory Crane Netsuke
+R Jiwari, the Earth Aflame
+C Kagemaro's Clutch
+R Kagemaro, First to Suffer
+R Kaho, Minamo Historian
+C Kami of Empty Graves
+R Kami of the Crescent Moon
+U Kami of the Tended Garden
+U Kashi-Tribe Elite
+R Kataki, War's Wage
+U Kemuri-Onna
+U Kiku's Shadow
+U Kiri-Onna
+C Kitsune Bonesetter
+C Kitsune Dawnblade
+C Kitsune Loreweaver
+R Kiyomaro, First to Stand
+R Kuon, Ogre Ascendant
+C Kuro's Taken
+U Locust Miser
+R Maga, Traitor to Mortals
+U Manriki-Gusari
+R Masumaro, First to Live
+C Matsu-Tribe Birdstalker
+U Measure of Wickedness
+R Meishin, the Mind Cage
+R Michiko Konda, Truth Seeker
+R Mikokoro, Center of the Sea
+C Minamo Scrollkeeper
+R Miren, the Moaning Well
+U Molting Skin
+C Moonbow Illusionist
+C Moonwing Moth
+C Murmurs from Beyond
+R Neverending Torment
+C Nightsoil Kami
+U Nikko-Onna
+U O-Naginata
+C Oboro Breezecaller
+U Oboro Envoy
+R Oboro, Palace in the Clouds
+C Okina Nightwatch
+R One with Nothing
+U Oni of Wild Places
+C Oppressive Will
+U Overwhelming Intellect
+R Pain's Reward
+C Path of Anger's Flame
+R Pithing Needle
+C Plow Through Reito
+U Presence of the Wise
+R Promise of Bunrei
+C Promised Kannushi
+R Pure Intentions
+R Rally the Horde
+C Raving Oni-Slave
+U Razorjaw Oni
+R Reki, the History of Kamigawa
+C Rending Vines
+R Reverence
+C Ronin Cavekeeper
+R Rune-Tail, Kitsune Ascendant
+U Rushing-Tide Zubera
+R Sakashima the Impostor
+C Sakura-Tribe Scout
+R Sasaya, Orochi Ascendant
+R Scroll of Origins
+U Secretkeeper
+R Seed the Land
+U Seek the Horizon
+R Sekki, Seasons' Guide
+U Shape Stealer
+U Shifting Borders
+C Shinen of Fear's Chill
+C Shinen of Flight's Wings
+C Shinen of Fury's Fire
+C Shinen of Life's Roar
+C Shinen of Stars' Light
+C Sink into Takenuma
+U Skull Collector
+R Skyfire Kirin
+U Sokenzan Renegade
+C Sokenzan Spellblade
+R Soramaro, First to Dream
+U Soratami Cloud Chariot
+C Spiraling Embers
+C Spiritual Visit
+U Stampeding Serow
+U Sunder from Within
+R Thoughts of Ruin
+R Tomb of Urami
+C Torii Watchward
+U Trusted Advisor
+R Twincast
+R Undying Flames
+R Wine of Blood and Iron
+U Yuki-Onna

@@ -1,0 +1,153 @@
+[metadata]
+Code=TOR
+Date=2002-02-04
+Name=Torment
+Code2=TO
+Type=Expansion
+BoosterCovers=1
+Booster=11 Common, 3 Uncommon, 1 Rare
+
+[cards]
+C Accelerate
+C Acorn Harvest
+R Alter Reality
+R Ambassador Laquatus
+R Angel of Retribution
+U Anurid Scavenger
+C Aquamoeba
+U Arrogant Wurm
+C Aven Trooper
+U Balshan Collaborator
+R Balthor the Stout
+C Barbarian Outcast
+C Basking Rootwalla
+U Boneshard Slasher
+U Breakthrough
+U Cabal Coffers
+C Cabal Ritual
+C Cabal Surgeon
+C Cabal Torturer
+C Carrion Rats
+U Carrion Wurm
+U Centaur Chieftain
+C Centaur Veteran
+C Cephalid Aristocrat
+U Cephalid Illusionist
+U Cephalid Sage
+C Cephalid Snitch
+R Cephalid Vandal
+U Chainer's Edict
+R Chainer, Dementia Master
+C Churning Eddy
+U Circular Logic
+U Cleansing Meditation
+U Compulsion
+C Coral Net
+C Crackling Club
+U Crazed Firecat
+C Crippling Fatigue
+R Dawn of the Dead
+C Deep Analysis
+R Devastating Dreams
+U Dwell on the Past
+C Enslaved Dwarf
+U Equal Treatment
+C Faceless Butcher
+R False Memories
+C Far Wanderings
+C Fiery Temper
+U Flaming Gambit
+C Flash of Defiance
+C Floating Shield
+C Frantic Purification
+C Ghostly Wings
+U Gloomdrifter
+C Gravegouger
+R Grim Lavamancer
+U Grotesque Hybrid
+R Gurzigost
+R Hell-Bent Raider
+C Hydromorph Guardian
+U Hydromorph Gull
+R Hypnox
+U Hypochondria
+R Ichorid
+R Insidious Dreams
+R Insist
+C Invigorating Falls
+C Kamahl's Sledge
+C Krosan Constrictor
+C Krosan Restorer
+R Laquatus's Champion
+R Last Laugh
+C Liquify
+R Llawan, Cephalid Empress
+C Longhorn Firebeast
+R Major Teroh
+C Mesmeric Fiend
+C Militant Monk
+U Mind Sludge
+R Morningtide
+R Mortal Combat
+U Mortiphobia
+R Mutilate
+C Mystic Familiar
+R Nantuko Blightcutter
+C Nantuko Calmer
+R Nantuko Cultivator
+R Nantuko Shade
+U Narcissism
+R Nostalgic Dreams
+C Obsessive Search
+C Organ Grinder
+R Overmaster
+R Parallel Evolution
+U Pardic Arsonist
+U Pardic Collaborator
+C Pardic Lancer
+C Pay No Heed
+R Petradon
+C Petravark
+U Pitchstone Wall
+R Plagiarize
+R Possessed Aven
+R Possessed Barbarian
+R Possessed Centaur
+R Possessed Nomad
+C Psychotic Haze
+C Putrid Imp
+U Pyromania
+R Radiate
+C Rancid Earth
+R Reborn Hero
+C Restless Dreams
+R Retraced Image
+R Sengir Vampire
+U Seton's Scout
+C Shade's Form
+R Shambling Swarm
+U Sickening Dreams
+R Skullscorch
+C Skywing Aven
+U Slithery Stalker
+C Sonic Seizure
+C Soul Scourge
+C Spirit Flare
+U Stern Judge
+U Strength of Isolation
+U Strength of Lunacy
+U Stupefying Touch
+U Tainted Field
+U Tainted Isle
+U Tainted Peak
+U Tainted Wood
+U Temporary Insanity
+C Teroh's Faithful
+U Teroh's Vanguard
+R Transcendence
+R Turbulent Dreams
+C Unhinge
+R Vengeful Dreams
+U Violent Eruption
+C Waste Away
+U Zombie Trailblazer

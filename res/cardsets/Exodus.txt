@@ -1,0 +1,153 @@
+[metadata]
+Code=EXO
+Date=1998-06-15
+Name=Exodus
+Code2=EX
+Type=Expansion
+BoosterCovers=1
+Booster=11 Common, 3 Uncommon, 1 Rare
+
+[cards]
+C AEther Tide
+C Allay
+C Anarchist
+C Angelic Blessing
+C Avenging Druid
+C Bequeathal
+C Carnophage
+U Cartographer
+C Cat Burglar
+R Cataclysm
+C Charging Paladin
+C Cinder Crawler
+R City of Traitors
+R Coat of Arms
+R Convalescence
+U Crashing Boars
+C Culling the Weak
+C Cunning
+U Curiosity
+C Cursed Flesh
+U Dauthi Cutthroat
+C Dauthi Jackal
+U Dauthi Warlord
+C Death's Duet
+C Dizzying Gaze
+R Dominating Licid
+U Elven Palisade
+C Elvish Berserker
+R Entropic Specter
+R Ephemeron
+R Equilibrium
+R Erratic Portal
+R Ertai, Wizard Adept
+R Exalted Dragon
+C Fade Away
+R Fighting Chance
+U Flowstone Flood
+U Forbid
+U Fugue
+C Furnace Brood
+C Grollub
+R Hatred
+U High Ground
+C Jackalope Herd
+U Keeper of the Beasts
+U Keeper of the Dead
+U Keeper of the Flame
+U Keeper of the Light
+U Keeper of the Mind
+U Killer Whale
+C Kor Chant
+R Limited Resources
+C Mage il-Vec
+U Mana Breach
+R Manabond
+C Maniacal Rage
+U Medicine Bag
+R Memory Crystal
+C Merfolk Looter
+U Mind Maggots
+R Mind Over Matter
+R Mindless Automaton
+U Mirozel
+R Mirri, Cat Warrior
+U Mogg Assassin
+R Monstrous Hound
+C Nausea
+U Necrologia
+R Null Brooch
+R Oath of Druids
+R Oath of Ghouls
+R Oath of Lieges
+R Oath of Mages
+R Oath of Scholars
+R Ogre Shaman
+C Onslaught
+R Paladin en-Vec
+R Pandemonium
+U Paroxysm
+U Peace of Mind
+U Pegasus Stampede
+U Penance
+R Pit Spawn
+R Plaguebearer
+C Plated Rootwalla
+C Predatory Hunger
+U Price of Progress
+C Pygmy Troll
+C Rabid Wolverines
+C Raging Goblin
+R Ravenous Baboons
+C Reaping the Rewards
+C Reckless Ogre
+C Reclaim
+U Reconnaissance
+R Recurring Nightmare
+U Resuscitate
+C Robe of Mirrors
+C Rootwater Alligator
+C Rootwater Mystic
+U Sabertooth Wyvern
+U Scalding Salamander
+C Scare Tactics
+C School of Piranha
+U Scrivener
+R Seismic Assault
+C Shackles
+C Shattering Pulse
+C Shield Mate
+U Skyshaper
+U Skyshroud Elite
+R Skyshroud War Beast
+U Slaughter
+C Soltari Visionary
+U Song of Serenity
+C Sonic Burst
+C Soul Warden
+U Spellbook
+U Spellshock
+R Sphere of Resistance
+U Spike Cannibal
+R Spike Hatcher
+U Spike Rogue
+R Spike Weaver
+C Standing Troops
+R Survival of the Fittest
+R Thalakos Drifters
+C Thalakos Scout
+C Theft of Dreams
+R Thopter Squadron
+C Thrull Surgeon
+U Transmogrifying Licid
+U Treasure Hunter
+U Treasure Trove
+C Vampire Hounds
+R Volrath's Dungeon
+R Wall of Nets
+C Wayward Soul
+C Welkin Hawk
+C Whiptongue Frog
+C Wood Elves
+R Workhorse
+U Zealots en-Dal

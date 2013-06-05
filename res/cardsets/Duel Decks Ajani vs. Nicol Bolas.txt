@@ -1,0 +1,86 @@
+[metadata]
+Code=DDH
+Date=2011-09-02
+Name=Duel Decks: Ajani vs. Nicol Bolas
+
+[cards]
+R Ageless Entity
+C Agonizing Demise
+M Ajani Vengeant
+C Ajani's Mantra
+U Ajani's Pridemate
+U Behemoth Sledge
+R Blazing Specter
+C Brackwater Elemental
+U Briarhorn
+C Canyon Wildcat
+U Countersquall
+R Cruel Ultimatum
+U Crumbling Necropolis
+U Deep Analysis
+R Dimir Cutpurse
+U Elder Mastery
+C Essence Warden
+C Evolving Wilds
+U Fire-Field Ogre
+R Firemane Angel
+U Fleetfoot Panther
+L Forest
+L Forest
+U Graypelt Refuge
+C Grazing Gladehart
+U Griffin Guide
+U Grixis Charm
+U Hellfire Mongrel
+U Icy Manipulator
+C Igneous Pouncer
+L Island
+U Jade Mage
+C Jhessian Zombies
+U Jungle Shrine
+U Kazandu Refuge
+U Kird Ape
+U Lead the Stampede
+U Lightning Helix
+U Loam Lion
+R Loxodon Hierarch
+U Marisi's Twinclaws
+C Morgue Toad
+U Moroii
+L Mountain
+L Mountain
+U Nacatl Hunt-Pride
+U Naya Charm
+M Nicol Bolas, Planeswalker
+C Nightscape Familiar
+C Obelisk of Grixis
+C Ogre Savant
+U Pain
+L Plains
+U Pride of Lions
+R Profane Command
+C Qasali Pridemage
+C Recoil
+C Recumbent Bliss
+U Rise
+C Rupture Spire
+U Sapseep Forest
+R Searing Meditation
+U Shriekmaw
+U Slave of Bolas
+U Slavering Nulls
+U Spite
+U Spitemare
+C Steamcore Weird
+C Surveilling Sprite
+L Swamp
+L Swamp
+C Sylvan Bounty
+C Sylvan Ranger
+C Terramorphic Expanse
+R Titanic Ultimatum
+R Undermine
+C Vapor Snag
+U Vitu-Ghazi, the City-Tree
+C Wild Nacatl
+U Woolly Thoctar

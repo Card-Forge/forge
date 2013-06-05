@@ -1,0 +1,393 @@
+[metadata]
+Code=ICE
+Date=1995-06-01
+Name=Ice Age
+Code2=IA
+Type=Expansion
+BoosterCovers=5
+Booster=11 Common, 3 Uncommon, 1 Rare
+
+[cards]
+U Abyssal Specter
+U Adarkar Sentinel
+C Adarkar Unicorn
+R Adarkar Wastes
+R Aegis of the Meek
+U Aggression
+R Altar of Bone
+R Amulet of Quoz
+U Anarchy
+C Arctic Foxes
+U Arcum's Sleigh
+U Arcum's Weathervane
+U Arcum's Whistle
+C Arenson's Aura
+C Armor of Faith
+C Arnjlot's Ascent
+U Ashen Ghoul
+C Aurochs
+U Avalanche
+C Balduvian Barbarians
+C Balduvian Bears
+U Balduvian Conjurer
+R Balduvian Hydra
+C Balduvian Shaman
+C Barbarian Guides
+C Barbed Sextant
+U Baton of Morale
+U Battle Cry
+C Battle Frenzy
+U Binding Grasp
+U Black Scarab
+C Blessed Wine
+R Blinking Spirit
+R Blizzard
+U Blue Scarab
+C Bone Shaman
+C Brainstorm
+R Brand of Ill Omen
+U Breath of Dreams
+C Brine Shaman
+C Brown Ouphe
+R Brushland
+C Burnt Offering
+R Call to Arms
+R Caribou Range
+R Celestial Sword
+U Centaur Archer
+R Chaos Lord
+R Chaos Moon
+R Chromatic Armor
+C Chub Toad
+C Circle of Protection: Black
+C Circle of Protection: Blue
+C Circle of Protection: Green
+C Circle of Protection: Red
+C Circle of Protection: White
+C Clairvoyance
+C Cloak of Confusion
+U Cold Snap
+U Conquer
+C Cooperation
+C Counterspell
+R Crown of the Ages
+R Curse of Marit Lage
+U Dance of the Dead
+C Dark Banishing
+C Dark Ritual
+C Death Ward
+R Deflection
+U Demonic Consultation
+R Despotic Scepter
+U Diabolic Vision
+C Dire Wolves
+C Disenchant
+R Dread Wight
+U Dreams of the Dead
+U Drift of the Dead
+U Drought
+R Dwarven Armory
+R Earthlink
+C Earthlore
+R Elder Druid
+R Elemental Augury
+R Elkin Bottle
+C Elvish Healer
+R Enduring Renewal
+R Energy Storm
+C Enervate
+C Errant Minion
+C Errantry
+C Essence Filter
+C Essence Flare
+U Essence Vortex
+U Fanatical Fever
+C Fear
+R Fiery Justice
+U Fire Covenant
+U Flame Spirit
+C Flare
+R Flooded Woodlands
+R Flow of Maggots
+C Folk of the Pines
+R Forbidden Lore
+U Force Void
+L Forest
+L Forest
+L Forest
+U Forgotten Lore
+R Formation
+C Foul Familiar
+C Foxfire
+U Freyalise Supplicant
+U Freyalise's Charm
+R Freyalise's Winds
+U Fumarole
+C Fylgja
+U Fyndhorn Bow
+C Fyndhorn Brownie
+U Fyndhorn Elder
+C Fyndhorn Elves
+R Fyndhorn Pollen
+R Game of Chaos
+C Gangrenous Zombies
+C Gaze of Pain
+R General Jarkeld
+R Ghostly Flame
+C Giant Growth
+U Giant Trap Door Spider
+U Glacial Chasm
+R Glacial Crevasses
+U Glacial Wall
+R Glaciers
+R Goblin Lyre
+U Goblin Mutant
+C Goblin Sappers
+C Goblin Ski Patrol
+U Goblin Snowman
+C Gorilla Pack
+R Gravebind
+U Green Scarab
+C Grizzled Wolverine
+U Hallowed Ground
+R Halls of Mist
+C Heal
+R Hecatomb
+U Hematite Talisman
+U Hipparion
+C Hoar Shade
+R Hot Springs
+C Howl from Beyond
+U Hurricane
+U Hyalopterous Lemure
+C Hydroblast
+U Hymn of Rebirth
+R Ice Cauldron
+U Ice Floe
+U Iceberg
+U Icequake
+U Icy Manipulator
+R Icy Prison
+C Illusionary Forces
+R Illusionary Presence
+U Illusionary Terrain
+C Illusionary Wall
+R Illusions of Grandeur
+C Imposing Visage
+C Incinerate
+R Infernal Darkness
+R Infernal Denizen
+R Infinite Hourglass
+C Infuse
+L Island
+L Island
+L Island
+R Jester's Cap
+R Jester's Mask
+U Jeweled Amulet
+U Johtull Wurm
+R Jokulhaups
+C Juniper Order Druid
+U Justice
+R Karplusan Forest
+U Karplusan Giant
+R Karplusan Yeti
+C Kelsinko Ranger
+C Kjeldoran Dead
+U Kjeldoran Elite Guard
+U Kjeldoran Frostbeast
+C Kjeldoran Guard
+R Kjeldoran Knight
+R Kjeldoran Phalanx
+R Kjeldoran Royal Guard
+U Kjeldoran Skycaptain
+C Kjeldoran Skyknight
+C Kjeldoran Warrior
+U Knight of Stromgald
+U Krovikan Elementalist
+C Krovikan Fetish
+C Krovikan Sorcerer
+U Krovikan Vampire
+R Land Cap
+U Lapis Lazuli Talisman
+C Lava Burst
+R Lava Tubes
+C Legions of Lim-Dul
+U Leshrac's Rite
+U Leshrac's Sigil
+R Lhurgoyf
+R Lightning Blow
+C Lim-Dul's Cohort
+U Lim-Dul's Hex
+R Lost Order of Jarkeld
+U Lure
+U Maddening Wind
+R Magus of the Unseen
+U Malachite Talisman
+R Marton Stromgald
+U Melee
+U Melting
+R Mercenaries
+R Merieke Ri Berit
+R Mesmeric Trance
+C Meteor Shower
+C Mind Ravel
+U Mind Warp
+R Mind Whip
+R Minion of Leshrac
+R Minion of Tevesh Szat
+C Mistfolk
+U Mole Worms
+R Monsoon
+C Moor Fiend
+L Mountain
+L Mountain
+L Mountain
+C Mountain Goat
+R Mountain Titan
+R Mudslide
+R Musician
+R Mystic Might
+C Mystic Remora
+U Nacre Talisman
+R Naked Singularity
+U Nature's Lore
+R Necropotence
+C Norritt
+R Oath of Lim-Dul
+U Onyx Talisman
+U Orcish Cannoneers
+C Orcish Conscripts
+C Orcish Farmer
+U Orcish Healer
+R Orcish Librarian
+C Orcish Lumberjack
+R Orcish Squatters
+R Order of the Sacred Torch
+U Order of the White Shield
+R Pale Bears
+C Panic
+R Pentagram of the Ages
+C Pestilence Rats
+U Phantasmal Mount
+U Pit Trap
+L Plains
+L Plains
+L Plains
+R Polar Kraken
+C Portent
+C Power Sink
+R Pox
+C Prismatic Ward
+R Pygmy Allosaurus
+C Pyknite
+C Pyroblast
+U Pyroclasm
+C Rally
+C Ray of Command
+C Ray of Erasure
+R Reality Twist
+R Reclamation
+U Red Scarab
+C Regeneration
+C Rime Dryad
+R Ritual of Subdual
+R River Delta
+R Runed Arch
+C Sabretooth Tiger
+U Sacred Boon
+C Scaled Wurm
+U Sea Spirit
+C Seizures
+R Seraph
+C Shambling Strider
+C Shatter
+C Shield Bearer
+U Shield of the Ages
+R Shyft
+R Sibilant Spirit
+U Silver Erne
+R Skeleton Ship
+U Skull Catapult
+U Sleight of Mind
+C Snow Devil
+R Snow Fortress
+U Snow Hound
+L Snow-Covered Forest
+L Snow-Covered Island
+L Snow-Covered Mountain
+L Snow-Covered Plains
+L Snow-Covered Swamp
+R Snowblind
+C Snowfall
+R Soldevi Golem
+U Soldevi Machinist
+U Soldevi Simulacrum
+C Songs of the Damned
+U Soul Barrier
+C Soul Burn
+C Soul Kiss
+U Spectral Shield
+R Spoils of Evil
+R Spoils of War
+R Staff of the Ages
+R Stampede
+U Stench of Evil
+C Stone Rain
+U Stone Spirit
+C Stonehands
+R Storm Spirit
+R Stormbind
+R Stromgald Cabal
+R Stunted Growth
+R Sulfurous Springs
+U Sunstone
+L Swamp
+L Swamp
+L Swamp
+U Swords to Plowshares
+C Tarpan
+U Thermokarst
+U Thoughtleech
+U Thunder Wall
+R Timberline Ridge
+R Time Bomb
+C Tinder Wall
+C Tor Giant
+R Total War
+C Touch of Death
+U Touch of Vitae
+R Trailblazer
+R Underground River
+U Updraft
+U Urza's Bauble
+R Veldt
+U Venomous Breath
+U Vertigo
+R Vexing Arcanix
+R Vibrating Sphere
+U Walking Wall
+U Wall of Lava
+U Wall of Pine Needles
+U Wall of Shields
+U War Chariot
+C Warning
+U Whalebone Glider
+U White Scarab
+U Whiteout
+R Wiitigo
+C Wild Growth
+U Wind Spirit
+U Wings of Aesthir
+R Winter's Chill
+U Withering Wisps
+C Woolly Mammoths
+C Woolly Spider
+U Word of Blasting
+C Word of Undoing
+R Wrath of Marit Lage
+U Yavimaya Gnats
+R Zur's Weirding
+C Zuran Enchanter
+U Zuran Orb
+C Zuran Spellcaster

@@ -1,0 +1,73 @@
+[metadata]
+Code=DDC
+Date=2009-04-10
+Name=Duel Decks: Divine vs. Demonic
+Code2=DDC
+Type=Other
+
+[cards]
+C Abyssal Gatekeeper
+U Abyssal Specter
+M Akroma, Angel of Wrath
+U Angel of Mercy
+U Angel's Feather
+U Angelic Benediction
+C Angelic Page
+U Angelic Protector
+C Angelsong
+C Barren Moor
+U Barter in Blood
+U Breeding Pit
+C Cackling Imp
+C Charging Paladin
+U Consume Spirit
+U Corrupt
+U Cruel Edict
+U Daggerclaw Imp
+C Dark Banishing
+C Dark Ritual
+C Demon
+U Demon's Horn
+C Demon's Jester
+U Demonic Tutor
+C Duress
+C Dusk Imp
+C Faith's Fetters
+R Fallen Angel
+C Foul Imp
+C Healing Salve
+U Icatian Priest
+R Kuro, Pitlord
+M Lord of the Pit
+R Luminous Angel
+U Marble Diamond
+U Oni Possession
+U Otherworldly Journey
+C Overeager Apprentice
+C Pacifism
+L Plains
+L Plains
+L Plains
+L Plains
+R Promise of Power
+R Reiver Demon
+R Reya Dawnbringer
+U Righteous Cause
+C Secluded Steppe
+U Serra Advocate
+R Serra Angel
+U Serra's Boon
+U Serra's Embrace
+U Soot Imp
+U Souldrinker
+C Spirit
+C Stinkweed Imp
+U Sustainer of the Realm
+L Swamp
+L Swamp
+L Swamp
+L Swamp
+C Thrull
+R Twilight Shepherd
+C Unholy Strength
+C Venerable Monk

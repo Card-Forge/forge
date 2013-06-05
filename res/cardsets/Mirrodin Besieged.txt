@@ -1,0 +1,165 @@
+[metadata]
+Code=MBS
+Date=2011-02-04
+Name=Mirrodin Besieged
+Code2=MBS
+Type=Expansion
+BoosterCovers=3
+Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand
+
+[cards]
+U Accorder Paladin
+C Ardent Recruit
+C Banishment Decree
+R Black Sun's Zenith
+C Bladed Sentinel
+M Blightsteel Colossus
+C Blightwidow
+C Blisterstick Shaman
+R Blue Sun's Zenith
+R Bonehoard
+U Brass Squire
+C Burn the Impure
+C Caustic Hound
+U Choking Fumes
+C Concussive Bolt
+M Consecrated Sphinx
+R Contested War Zone
+C Copper Carapace
+U Core Prowler
+U Corrupted Conscience
+R Creeping Corrosion
+C Crush
+R Cryptoplasm
+R Darksteel Plate
+R Decimator Web
+R Distant Memories
+C Divine Offering
+C Dross Ripper
+C Fangren Marauder
+C Flayer Husk
+C Flensermite
+U Flesh-Eater Imp
+L Forest
+L Forest
+C Frantic Salvage
+C Fuel for the Cause
+R Galvanoth
+C Glissa's Courier
+M Glissa, the Traitor
+C Gnathosaur
+U Go for the Throat
+U Goblin Wardriver
+U Gore Vassal
+R Green Sun's Zenith
+U Gruesome Encore
+C Gust-Skimmer
+R Hellkite Igniter
+M Hero of Bladehold
+M Hero of Oxid Ridge
+C Hexplate Golem
+C Horrifying Revelation
+C Ichor Wellspring
+R Inkmoth Nexus
+U Into the Core
+L Island
+L Island
+U Kemba's Legion
+R Knowledge Pool
+C Koth's Courier
+U Kuldotha Flamefiend
+C Kuldotha Ringleader
+U Lead the Stampede
+U Leonin Relic-Warder
+C Leonin Skyhunter
+C Loxodon Partisan
+U Lumengrid Gargoyle
+R Magnetic Mine
+M Massacre Wurm
+C Master's Call
+U Melira's Keepers
+U Metallic Mastery
+R Mirran Crusader
+C Mirran Mettle
+C Mirran Spy
+R Mirrorworks
+R Mitotic Manipulation
+C Morbid Plunder
+U Mortarpod
+L Mountain
+L Mountain
+C Myr Sire
+R Myr Turbine
+R Myr Welder
+U Nested Ghoul
+U Neurok Commando
+C Oculus
+C Ogre Resister
+U Peace Strider
+C Phyresis
+R Phyrexian Crusader
+C Phyrexian Digester
+R Phyrexian Hydra
+U Phyrexian Juggernaut
+C Phyrexian Rager
+R Phyrexian Rebirth
+R Phyrexian Revoker
+R Phyrexian Vatmother
+U Pierce Strider
+U Piston Sledge
+C Pistus Strike
+U Plague Myr
+U Plaguemaw Beast
+L Plains
+L Plains
+M Praetor's Counsel
+C Priests of Norn
+R Psychosis Crawler
+C Quicksilver Geyser
+U Quilled Slagwurm
+C Rally the Forces
+C Razorfield Rhino
+R Red Sun's Zenith
+C Rot Wolf
+C Rusted Slasher
+R Sangromancer
+C Scourge Servant
+U Septic Rats
+C Serum Raker
+R Shimmer Myr
+C Shriekhorn
+U Signal Pest
+U Silverskin Armor
+U Skinwing
+R Slagstorm
+U Sphere of the Suns
+C Spin Engine
+R Spine of Ish Sah
+U Spiraling Duelist
+C Spire Serpent
+C Spread the Sickness
+C Steel Sabotage
+U Strandwalker
+L Swamp
+L Swamp
+M Sword of Feast and Famine
+C Tangle Hulk
+C Tangle Mantis
+M Tezzeret, Agent of Bolas
+R Thopter Assembly
+M Thrun, the Last Troll
+C Tine Shrike
+R Titan Forge
+C Training Drone
+U Treasure Mage
+C Turn the Tide
+C Unnatural Predation
+U Vedalken Anatomist
+U Vedalken Infuser
+R Victory's Herald
+U Viridian Claw
+U Viridian Corrupter
+C Viridian Emissary
+C Virulent Wound
+C Vivisection
+R White Sun's Zenith

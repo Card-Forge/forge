@@ -1,0 +1,153 @@
+[metadata]
+Code=PCY
+Date=2000-06-05
+Name=Prophecy
+Code2=PY
+Type=Expansion
+BoosterCovers=1
+Booster=11 Common, 3 Uncommon, 1 Rare
+
+[cards]
+U Abolish
+C Agent of Shauku
+C Alexi's Cloak
+R Alexi, Zephyr Mage
+C Aura Fracture
+R Avatar of Fury
+R Avatar of Hope
+R Avatar of Might
+R Avatar of Will
+R Avatar of Woe
+U Barbed Field
+R Blessed Wind
+R Bog Elemental
+C Bog Glider
+C Branded Brawlers
+U Brutal Suppression
+C Calming Verse
+R Celestial Convergence
+U Chilling Apparition
+U Chimeric Idol
+U Citadel of Pain
+C Coastal Hornclaw
+R Coffin Puppets
+R Copper-Leaf Angel
+U Darba
+C Death Charmer
+R Denying Wind
+C Despoil
+C Devastate
+C Diving Griffin
+R Dual Nature
+R Elephant Resurgence
+U Endbringer's Revel
+U Entangler
+U Excavation
+C Excise
+C Fault Riders
+C Fen Stalker
+R Fickle Efreet
+U Flameshot
+C Flay
+U Flowering Field
+U Foil
+R Forgotten Harvest
+U Glittering Lion
+C Glittering Lynx
+C Greel's Caress
+R Greel, Mind Raker
+C Gulf Squid
+C Hazy Homunculus
+R Heightened Awareness
+U Hollow Warrior
+R Infernal Genesis
+C Inflame
+R Jeweled Spirit
+C Jolrael's Favor
+R Jolrael, Empress of Beasts
+U Keldon Arsonist
+R Keldon Battlewagon
+C Keldon Berserker
+R Keldon Firebombers
+C Latulla's Orders
+R Latulla, Keldon Overseer
+U Lesser Gargadon
+U Living Terrain
+R Mageta the Lion
+C Mageta's Boon
+U Mana Vapors
+C Marsh Boa
+R Mercenary Informer
+C Mine Bearer
+U Mirror Strike
+R Mungha Wurm
+U Nakaya Shade
+U Noxious Field
+U Outbreak
+R Overburden
+C Panic Attack
+U Pit Raptor
+C Plague Fiend
+R Plague Wind
+R Psychic Theft
+C Pygmy Razorback
+U Quicksilver Wall
+R Rebel Informer
+C Rethink
+U Reveille Squad
+U Rhystic Cave
+C Rhystic Circle
+C Rhystic Deluge
+C Rhystic Lightning
+U Rhystic Scrying
+C Rhystic Shield
+C Rhystic Study
+U Rhystic Syphon
+R Rhystic Tutor
+C Rib Cage Spider
+C Ribbon Snake
+C Ridgeline Rager
+U Root Cage
+R Samite Sanctuary
+U Scoria Cat
+R Search for Survivors
+R Searing Wind
+R Sheltering Prayers
+U Shield Dancer
+R Shrouded Serpent
+C Silt Crawler
+U Snag
+C Soul Charmer
+C Soul Strings
+U Spiketail Drake
+C Spiketail Hatchling
+U Spitting Spider
+C Spore Frog
+C Spur Grappler
+R Squirrel Wrangler
+C Steal Strength
+C Stormwatch Eagle
+U Sunken Field
+U Sword Dancer
+R Task Mage Assembly
+C Thresher Beast
+C Thrive
+C Trenching Steed
+C Troubled Healer
+R Troublesome Spirit
+U Verdant Field
+R Veteran Brawlers
+C Vintara Elephant
+U Vintara Snapper
+R Vitalizing Wind
+U Wall of Vipers
+R Well of Discovery
+U Well of Life
+U Whip Sergeant
+C Whipstitched Zombie
+C Wild Might
+U Windscouter
+U Wing Storm
+R Wintermoon Mesa
+C Withdraw
+C Zerapa Minotaur

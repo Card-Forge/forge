@@ -1,0 +1,153 @@
+[metadata]
+Code=JUD
+Date=2002-05-27
+Name=Judgment
+Code2=JU
+Type=Expansion
+BoosterCovers=1
+Booster=11 Common, 3 Uncommon, 1 Rare
+
+[cards]
+U Ancestor's Chosen
+U Anger
+C Anurid Barkripper
+R Anurid Brushhopper
+U Anurid Swarmsnapper
+C Arcane Teachings
+C Aven Fogbringer
+U Aven Warcraft
+R Balthor the Defiled
+C Barbarian Bully
+U Battle Screech
+C Battlefield Scrounger
+C Battlewise Aven
+C Benevolent Bodyguard
+C Book Burning
+C Border Patrol
+U Brawn
+R Breaking Point
+U Browbeat
+R Burning Wish
+U Cabal Therapy
+C Cabal Trainee
+C Cagemail
+C Canopy Claws
+C Centaur Rootcaster
+R Cephalid Constable
+U Cephalid Inkshrouder
+U Chastise
+R Commander Eesha
+R Crush of Wurms
+R Cunning Wish
+R Death Wish
+C Defy Gravity
+R Dwarven Bloodboiler
+U Dwarven Driller
+C Dwarven Scorcher
+C Earsplitting Rats
+U Elephant Guide
+C Ember Shot
+C Envelop
+R Epic Struggle
+R Erhnam Djinn
+U Exoskeletal Armor
+U Filth
+U Firecat Blitz
+C Flaring Pain
+U Flash of Insight
+R Fledgling Dragon
+C Folk Medicine
+U Forcemage Advocate
+C Funeral Pyre
+R Genesis
+C Giant Warthog
+R Glory
+R Golden Wish
+C Goretusk Firebeast
+U Grave Consequences
+C Grip of Amnesia
+U Grizzly Fate
+C Guided Strike
+R Guiltfeeder
+C Hapless Researcher
+C Harvester Druid
+R Hunting Grounds
+U Infectious Rage
+C Ironshell Beetle
+R Jeska, Warrior Adept
+C Keep Watch
+U Krosan Reclamation
+U Krosan Verge
+C Krosan Wayfarer
+U Laquatus's Disdain
+C Lava Dart
+C Lead Astray
+C Liberated Dwarf
+R Lightning Surge
+R Living Wish
+C Lost in Thought
+R Masked Gorgon
+C Mental Note
+R Mirari's Wake
+C Mirror Wall
+R Mist of Stagnation
+R Morality Shift
+U Nantuko Monastery
+C Nantuko Tracer
+R Nomad Mythmaker
+C Nullmage Advocate
+U Phantom Centaur
+U Phantom Flock
+R Phantom Nantuko
+R Phantom Nishoba
+C Phantom Nomad
+C Phantom Tiger
+U Planar Chaos
+C Prismatic Strands
+R Pulsemage Advocate
+U Quiet Speculation
+C Rats' Feast
+C Ray of Revelation
+U Riftstone Portal
+R Scalpelexis
+R Seedtime
+R Selfless Exorcist
+U Serene Sunset
+R Shaman's Trance
+C Shieldmage Advocate
+R Silver Seraph
+R Solitary Confinement
+U Soulcatchers' Aerie
+U Soulgorger Orgg
+C Spellgorger Barbarian
+R Spelljack
+U Spirit Cairn
+U Spurnmage Advocate
+U Stitch Together
+C Sudden Strength
+C Suntail Hawk
+R Sutured Ghoul
+U Swelter
+C Swirling Sandstorm
+R Sylvan Safekeeper
+R Telekinetic Bonds
+R Test of Endurance
+R Thriss, Nantuko Primus
+C Toxic Stench
+C Trained Pronghorn
+U Treacherous Vampire
+C Treacherous Werewolf
+U Tunneler Wurm
+U Unquestioned Authority
+U Valor
+C Venomous Vines
+C Vigilant Sentry
+U Web of Inertia
+U Wonder
+R Worldgorger Dragon
+R Wormfang Behemoth
+U Wormfang Crab
+C Wormfang Drake
+R Wormfang Manta
+C Wormfang Newt
+U Wormfang Turtle

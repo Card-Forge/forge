@@ -1,0 +1,124 @@
+[metadata]
+Code=VAN
+Date=1997-08
+Name=Vanguard
+Code2=VAN
+Type=Other
+
+[cards]
+S Akroma, Angel of Wrath Avatar
+S Arcanis, the Omnipotent Avatar
+S Arcbound Overseer Avatar
+S Ashling the Pilgrim Avatar
+S Ashling, the Extinguisher Avatar
+S Ashnod
+S Barrin
+S Birds of Paradise Avatar
+S Birds of Paradise Avatar
+S Bosh, Iron Golem Avatar
+S Braids, Conjurer Adept Avatar
+S Chronatog Avatar
+S Crovax
+S Dakkon Blackblade Avatar
+S Dauntless Escort Avatar
+S Diamond Faerie Avatar
+S Eight-and-a-Half-Tails Avatar
+S Eladamri
+S Eladamri, Lord of Leaves Avatar
+S Elvish Champion Avatar
+S Enigma Sphinx Avatar
+S Erhnam Djinn Avatar
+S Erhnam Djinn Avatar
+S Ertai
+S Etched Oracle Avatar
+S Fallen Angel Avatar
+S Figure of Destiny Avatar
+S Flametongue Kavu Avatar
+S Frenetic Efreet Avatar
+S Gerrard
+S Gix
+S Goblin Warchief Avatar
+S Goblin Warchief Avatar
+S Greven il-Vec
+S Grinning Demon Avatar
+S Grinning Demon Avatar
+S Haakon, Stromgald Scourge Avatar
+S Hanna
+S Heartwood Storyteller Avatar
+S Hell's Caretaker Avatar
+S Hermit Druid Avatar
+S Higure, the Still Wind Avatar
+S Ink-Eyes, Servant of Oni Avatar
+S Jaya Ballard Avatar
+S Jhoira of the Ghitu Avatar
+S Karn
+S Karona, False God Avatar
+S Kresh the Bloodbraided Avatar
+S Loxodon Hierarch Avatar
+S Lyna
+S Lyzolda, the Blood Witch Avatar
+S Maelstrom Archangel Avatar
+S Malfegor Avatar
+S Maralen of the Mornsong Avatar
+S Maraxus
+S Maro Avatar
+S Master of the Wild Hunt Avatar
+S Mayael the Anima Avatar
+S Mirri
+S Mirri the Cursed Avatar
+S Mirror Entity Avatar
+S Mishra
+S Momir Vig, Simic Visionary Avatar
+S Morinfen Avatar
+S Multani
+S Murderous Redcap Avatar
+S Necropotence Avatar
+S Nekrataal Avatar
+S Oni of Wild Places Avatar
+S Oracle
+S Orcish Squatters Avatar
+S Orim
+S Peacekeeper Avatar
+S Phage the Untouchable Avatar
+S Platinum Angel Avatar
+S Platinum Angel Avatar
+S Prodigal Sorcerer Avatar
+S Prodigal Sorcerer Avatar
+S Raksha Golden Cub Avatar
+S Reaper King Avatar
+S Rith, the Awakener Avatar
+S Rith, the Awakener Avatar
+S Rofellos
+S Royal Assassin Avatar
+S Royal Assassin Avatar
+S Rumbling Slum Avatar
+S Sakashima the Impostor Avatar
+S Selenia
+S Serra
+S Serra Angel Avatar
+S Serra Angel Avatar
+S Seshiro the Anointed Avatar
+S Sidar Kondo
+S Sisay
+S Sisters of Stone Death Avatar
+S Sliver Queen Avatar
+S Sliver Queen, Brood Mother
+S Squee
+S Squee, Goblin Nabob Avatar
+S Stalking Tiger Avatar
+S Starke
+S Stonehewer Giant Avatar
+S Stuffy Doll Avatar
+S Tahngarth
+S Takara
+S Tawnos
+S Teysa, Orzhov Scion Avatar
+S Titania
+S Tradewind Rider Avatar
+S Tradewind Rider Avatar
+S Two-Headed Giant of Foriys Avatar
+S Urza
+S Vampire Nocturnus Avatar
+S Viridian Zealot Avatar
+S Volrath
+S Xantcha

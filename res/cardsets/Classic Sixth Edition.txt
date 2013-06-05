@@ -1,0 +1,361 @@
+[metadata]
+Code=6ED
+Date=1999-04-28
+Name=Classic Sixth Edition
+Code2=6E
+Type=Core
+Border=White
+BoosterCovers=1
+Booster=11 Common, 3 Uncommon, 1 Rare
+
+[cards]
+U AEther Flash
+U Abduction
+R Abyssal Hunter
+U Abyssal Specter
+R Adarkar Wastes
+U Agonizing Memories
+U Air Elemental
+R Aladdin's Ring
+R Amber Prison
+C Anaba Bodyguard
+C Anaba Shaman
+R Ancestral Memories
+R Animate Wall
+R Ankh of Mishra
+R Archangel
+U Ardent Militia
+R Armageddon
+C Armored Pegasus
+R Ashen Powder
+U Ashnod's Altar
+C Balduvian Barbarians
+R Balduvian Horde
+R Birds of Paradise
+U Blaze
+U Blight
+U Blighted Shaman
+C Blood Pet
+C Bog Imp
+C Bog Rats
+U Bog Wraith
+U Boil
+C Boomerang
+R Bottle of Suleiman
+U Browse
+R Brushland
+U Burrowing
+R Call of the Wild
+U Castle
+C Cat Warriors
+R Celestial Dawn
+U Charcoal Diamond
+U Chill
+C Circle of Protection: Black
+C Circle of Protection: Blue
+C Circle of Protection: Green
+C Circle of Protection: Red
+C Circle of Protection: White
+R City of Brass
+C Coercion
+U Conquer
+C Counterspell
+U Creeping Mold
+R Crimson Hellkite
+R Crusade
+U Crystal Rod
+U Crystal Vein
+R Cursed Totem
+C D'Avenant Archer
+R Dancing Scimitar
+U Daraja Griffin
+R Daring Apprentice
+R Deflection
+R Dense Foliage
+R Derelor
+R Desertion
+R Diminishing Returns
+R Dingus Egg
+C Disenchant
+R Disrupting Scepter
+U Divine Transformation
+R Doomsday
+R Dragon Engine
+U Dragon Mask
+U Dread of Night
+C Dream Cache
+C Drudge Skeletons
+C Dry Spell
+U Dwarven Ruins
+R Early Harvest
+R Earthquake
+U Ebon Stronghold
+C Ekundu Griffin
+R Elder Druid
+C Elven Cache
+U Elven Riders
+R Elvish Archers
+C Enfeeblement
+U Enlightened Tutor
+R Ethereal Champion
+U Evil Eye of Orms-by-Gore
+R Exile
+R Fallen Angel
+U Fallow Earth
+U Familiar Ground
+C Fatal Blow
+C Fear
+C Feast of the Unicorn
+U Femeref Archers
+C Feral Shadow
+R Fervor
+R Final Fortune
+U Fire Diamond
+U Fire Elemental
+C Firebreathing
+C Fit of Rage
+C Flame Spirit
+R Flash
+U Flashfires
+C Flight
+R Flying Carpet
+C Fog
+C Fog Elemental
+R Forbidden Crypt
+L Forest
+L Forest
+L Forest
+L Forest
+R Forget
+U Fountain of Youth
+C Fyndhorn Brownie
+U Fyndhorn Elder
+C Gaseous Form
+C Giant Growth
+C Giant Spider
+C Giant Strength
+U Glacial Wall
+U Glasses of Urza
+C Goblin Digging Team
+C Goblin Elite Infantry
+C Goblin Hero
+R Goblin King
+U Goblin Recruiter
+R Goblin Warrens
+C Gorilla Chieftain
+U Gravebane Zombie
+C Gravedigger
+R Greed
+R Grinning Totem
+C Grizzly Bears
+R Hammer of Bogardan
+U Harmattan Efreet
+U Havenwood Battleground
+C Healing Salve
+U Heavy Ballista
+R Hecatomb
+C Hero's Resolve
+U Hidden Horror
+C Horned Turtle
+C Howl from Beyond
+R Howling Mine
+U Hulking Cyclops
+R Hurricane
+R Icatian Town
+R Illicit Auction
+C Infantry Veteran
+R Infernal Contract
+R Inferno
+U Insight
+C Inspiration
+U Iron Star
+L Island
+L Island
+L Island
+L Island
+U Ivory Cup
+R Jade Monolith
+R Jalum Tome
+R Jayemdae Tome
+R Jokulhaups
+R Juxtapose
+R Karplusan Forest
+U Kismet
+C Kjeldoran Dead
+R Kjeldoran Royal Guard
+U Lead Golem
+U Leshrac's Rite
+R Library of Lat-Nam
+U Light of Day
+C Lightning Blast
+R Living Lands
+C Llanowar Elves
+U Longbow Archer
+R Lord of Atlantis
+C Lost Soul
+U Lure
+U Mana Prism
+R Mana Short
+R Manabarbs
+U Marble Diamond
+R Maro
+R Meekstone
+C Memory Lapse
+C Merfolk of the Pearl Trident
+C Mesa Falcon
+R Millstone
+U Mind Warp
+U Mischievous Poltergeist
+U Moss Diamond
+L Mountain
+L Mountain
+L Mountain
+L Mountain
+C Mountain Goat
+U Mystic Compass
+U Mystical Tutor
+R Nature's Resurgence
+R Necrosavant
+R Nightmare
+U Obsianus Golem
+U Orcish Artillery
+U Orcish Oriflamme
+R Order of the Sacred Torch
+U Ornithopter
+C Pacifism
+C Painful Memories
+C Panther Warriors
+U Patagia Golem
+R Pearl Dragon
+R Pentagram of the Ages
+U Perish
+U Pestilence
+C Phantasmal Terrain
+U Phantom Warrior
+U Phyrexian Vault
+U Pillage
+L Plains
+L Plains
+L Plains
+L Plains
+R Polymorph
+U Power Sink
+C Pradesh Gypsies
+R Primal Clay
+C Prodigal Sorcerer
+U Prosperity
+R Psychic Transfer
+C Psychic Venom
+C Pyrotechnics
+C Python
+U Radjan Spirit
+R Rag Man
+C Raging Goblin
+C Raise Dead
+C Rampant Growth
+C Razortooth Rats
+R Recall
+R Reckless Embermage
+C Redwood Treefolk
+C Regal Unicorn
+C Regeneration
+U Relearn
+R Relentless Assault
+C Remedy
+C Remove Soul
+U Reprisal
+C Resistance Fighter
+R Reverse Damage
+U River Boa
+U Rod of Ruin
+R Rowen
+U Ruins of Trokair
+C Sabretooth Tiger
+C Sage Owl
+C Samite Healer
+C Scaled Wurm
+C Scathe Zombies
+C Sea Monster
+U Segovian Leviathan
+R Sengir Autocrat
+R Serenity
+U Serra's Blessing
+C Shanodin Dryads
+C Shatter
+R Shatterstorm
+C Shock
+R Sibilant Spirit
+U Skull Catapult
+U Sky Diamond
+R Snake Basket
+U Soldevi Sage
+U Soul Net
+C Spell Blast
+U Spirit Link
+U Spitting Drake
+C Spitting Earth
+C Stalking Tiger
+C Standing Troops
+U Staunch Defenders
+C Stone Rain
+R Storm Cauldron
+C Storm Crow
+U Strands of Night
+C Stream of Life
+R Stromgald Cabal
+U Stupor
+R Sulfurous Springs
+U Summer Bloom
+R Sunweb
+U Svyelunite Temple
+L Swamp
+L Swamp
+L Swamp
+L Swamp
+C Syphon Soul
+C Talruum Minotaur
+R Tariff
+R Teferi's Puzzle Box
+C Terror
+R The Hive
+U Thicket Basilisk
+U Throne of Bone
+C Tidal Surge
+C Trained Armodon
+R Tranquil Grove
+C Tranquility
+C Tremor
+C Tundra Wolves
+U Uktabi Orangutan
+R Uktabi Wildcats
+R Underground River
+U Unseen Walker
+C Unsummon
+U Untamed Wilds
+U Unyaro Griffin
+R Vampiric Tutor
+C Venerable Monk
+R Verduran Enchantress
+U Vertigo
+C Viashino Warrior
+C Vitalize
+C Vodalian Soldiers
+R Volcanic Dragon
+U Volcanic Geyser
+R Waiting in the Weeds
+U Wall of Air
+U Wall of Fire
+U Wall of Swords
+R Wand of Denial
+U Warmth
+C Warrior's Honor
+U Warthog
+C Wild Growth
+C Wind Drake
+U Wind Spirit
+U Wooden Sphere
+U Worldly Tutor
+R Wrath of God
+R Wyluli Wolf
+R Zombie Master
+R Zur's Weirding

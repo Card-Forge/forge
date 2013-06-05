@@ -1,0 +1,460 @@
+[metadata]
+Code=5ED
+Date=1997-03-24
+Name=Fifth Edition
+Code2=5E
+Type=Core
+Border=White
+BoosterCovers=5
+Booster=11 Common, 3 Uncommon, 1 Rare
+
+[cards]
+U AEther Storm
+U Abbey Gargoyles
+U Abyssal Specter
+R Adarkar Wastes
+U Air Elemental
+R Akron Legionnaire
+C Alabaster Potion
+R Aladdin's Ring
+C Ambush Party
+C Amulet of Kroog
+R An-Havva Constable
+U Angry Mob
+U Animate Dead
+R Animate Wall
+R Ankh of Mishra
+U Anti-Magic Aura
+U Arenson's Aura
+R Armageddon
+C Armor of Faith
+U Ashes to Ashes
+U Ashnod's Altar
+C Ashnod's Transmogrant
+R Aspect of Wolf
+U Atog
+C Aurochs
+C Aysen Bureaucrats
+U Azure Drake
+R Bad Moon
+R Ball Lightning
+C Barbed Sextant
+R Barl's Cage
+C Battering Ram
+C Benalish Hero
+U Binding Grasp
+C Bird Maiden
+R Birds of Paradise
+U Black Knight
+C Blessed Wine
+U Blight
+R Blinking Spirit
+C Blood Lust
+C Bog Imp
+C Bog Rats
+U Bog Wraith
+C Boomerang
+R Bottle of Suleiman
+R Bottomless Vault
+C Brainstorm
+C Brainwash
+C Brassclaw Orcs
+U Breeding Pit
+R Broken Visage
+C Brothers of Fire
+R Brushland
+C Carapace
+R Caribou Range
+U Carrion Ants
+U Castle
+C Cat Warriors
+U Cave People
+C Chub Toad
+U Circle of Protection: Artifacts
+C Circle of Protection: Black
+C Circle of Protection: Blue
+C Circle of Protection: Green
+C Circle of Protection: Red
+C Circle of Protection: White
+R City of Brass
+C Clay Statue
+C Cloak of Confusion
+R Clockwork Beast
+U Clockwork Steed
+R Cockatrice
+R Colossus of Sardia
+U Conquer
+R Coral Helm
+C Counterspell
+U Craw Giant
+C Craw Wurm
+R Crimson Manticore
+R Crown of the Ages
+U Crumble
+R Crusade
+U Crystal Rod
+U Cursed Land
+C D'Avenant Archer
+R Dance of Many
+R Dancing Scimitar
+C Dandan
+C Dark Maze
+C Dark Ritual
+C Death Speakers
+C Death Ward
+U Deathgrip
+R Deflection
+R Derelor
+U Desert Twister
+U Detonate
+U Diabolic Machine
+R Dingus Egg
+C Disenchant
+C Disintegrate
+R Disrupting Scepter
+C Divine Offering
+U Divine Transformation
+R Dragon Engine
+C Drain Life
+R Drain Power
+C Drudge Skeletons
+C Durkwood Boars
+U Dust to Dust
+U Dwarven Catapult
+R Dwarven Hold
+U Dwarven Ruins
+C Dwarven Soldier
+C Dwarven Warriors
+R Earthquake
+U Ebon Stronghold
+R Elder Druid
+R Elkin Bottle
+U Elven Riders
+R Elvish Archers
+U Energy Flux
+C Enervate
+C Erg Raiders
+C Errantry
+C Eternal Warrior
+U Evil Eye of Orms-by-Gore
+U Evil Presence
+R Eye for an Eye
+U Fallen Angel
+C Fear
+U Feedback
+U Feldon's Cane
+U Fellwar Stone
+R Feroz's Ban
+U Fire Drake
+C Fireball
+C Firebreathing
+U Flame Spirit
+C Flare
+U Flashfires
+C Flight
+C Flood
+R Flying Carpet
+C Fog
+C Force Spike
+R Force of Nature
+L Forest
+L Forest
+L Forest
+L Forest
+R Forget
+U Fountain of Youth
+C Foxfire
+C Frozen Shade
+C Funeral March
+R Fungusaur
+U Fyndhorn Elder
+R Game of Chaos
+C Gaseous Form
+R Gauntlets of Chaos
+C Ghazban Ogre
+C Giant Growth
+C Giant Spider
+C Giant Strength
+U Glacial Wall
+U Glasses of Urza
+U Gloom
+C Goblin Digging Team
+C Goblin Hero
+R Goblin King
+C Goblin War Drums
+R Goblin Warrens
+C Grapeshot Catapult
+U Greater Realm of Preservation
+U Greater Werewolf
+C Grizzly Bears
+U Havenwood Battleground
+C Heal
+C Healing Salve
+R Hecatomb
+R Helm of Chatzuk
+C Hill Giant
+C Hipparion
+R Hollow Trees
+C Holy Strength
+C Homarid Warrior
+C Howl from Beyond
+R Howling Mine
+C Hungry Mist
+R Hurkyl's Recall
+C Hurloon Minotaur
+U Hurricane
+U Hydroblast
+U Icatian Phalanx
+C Icatian Scout
+R Icatian Store
+R Icatian Town
+U Ice Floe
+C Imposing Visage
+C Incinerate
+R Inferno
+R Infinite Hourglass
+C Initiates of the Ebon Hand
+U Instill Energy
+U Iron Star
+R Ironclaw Curse
+C Ironclaw Orcs
+C Ironroot Treefolk
+L Island
+L Island
+L Island
+L Island
+R Island Sanctuary
+U Ivory Cup
+U Ivory Guardians
+R Jade Monolith
+R Jalum Tome
+R Jandor's Saddlebags
+R Jayemdae Tome
+R Jester's Cap
+U Johtull Wurm
+R Jokulhaups
+U Joven's Tools
+U Justice
+R Juxtapose
+U Karma
+R Karplusan Forest
+U Keldon Warlord
+U Killer Bees
+U Kismet
+C Kjeldoran Dead
+R Kjeldoran Royal Guard
+U Kjeldoran Skycaptain
+U Knight of Stromgald
+C Krovikan Fetish
+C Krovikan Sorcerer
+C Labyrinth Minotaur
+U Leshrac's Rite
+R Leviathan
+C Ley Druid
+R Lhurgoyf
+U Library of Leng
+U Lifeforce
+U Lifetap
+R Living Artifact
+R Living Lands
+C Llanowar Elves
+R Lord of Atlantis
+R Lord of the Pit
+C Lost Soul
+U Lure
+R Magical Hack
+R Magus of the Unseen
+R Mana Clash
+R Mana Flare
+R Mana Vault
+R Manabarbs
+C Marsh Viper
+R Meekstone
+C Memory Lapse
+C Merfolk of the Pearl Trident
+C Mesa Falcon
+C Mesa Pegasus
+R Millstone
+U Mind Bomb
+C Mind Ravel
+U Mind Warp
+C Mindstab Thrull
+U Mole Worms
+C Mons's Goblin Raiders
+L Mountain
+L Mountain
+L Mountain
+L Mountain
+C Mountain Goat
+C Murk Dwellers
+C Nature's Lore
+C Necrite
+R Necropotence
+R Nether Shadow
+R Nevinyrral's Disk
+R Nightmare
+R Obelisk of Undoing
+U Orcish Artillery
+U Orcish Captain
+C Orcish Conscripts
+C Orcish Farmer
+U Orcish Oriflamme
+R Orcish Squatters
+R Order of the Sacred Torch
+U Order of the White Shield
+R Orgg
+U Ornithopter
+C Panic
+C Paralyze
+C Pearled Unicorn
+R Pentagram of the Ages
+R Personal Incarnation
+C Pestilence
+U Phantasmal Forces
+C Phantasmal Terrain
+U Phantom Monster
+C Pikemen
+R Pirate Ship
+C Pit Scorpion
+C Plague Rats
+L Plains
+L Plains
+L Plains
+L Plains
+C Portent
+U Power Sink
+R Pox
+C Pradesh Gypsies
+R Primal Clay
+R Primal Order
+U Primordial Ooze
+C Prismatic Ward
+C Prodigal Sorcerer
+C Psychic Venom
+U Pyroblast
+U Pyrotechnics
+U Rabid Wombat
+U Radjan Spirit
+R Rag Man
+C Raise Dead
+C Ray of Command
+R Recall
+C Reef Pirates
+C Regeneration
+C Remove Soul
+C Repentant Blacksmith
+R Reverse Damage
+R Righteousness
+U Rod of Ruin
+U Ruins of Trokair
+C Sabretooth Tiger
+U Sacred Boon
+C Samite Healer
+R Sand Silos
+C Scaled Wurm
+C Scathe Zombies
+C Scavenger Folk
+C Scryb Sprites
+C Sea Serpent
+U Sea Spirit
+U Sea Sprite
+U Seasinger
+U Segovian Leviathan
+R Sengir Autocrat
+R Seraph
+R Serpent Generator
+U Serra Bestiary
+U Serra Paladin
+C Shanodin Dryads
+U Shapeshifter
+C Shatter
+U Shatterstorm
+C Shield Bearer
+C Shield Wall
+R Shivan Dragon
+C Shrink
+R Sibilant Spirit
+U Skull Catapult
+R Sleight of Mind
+R Smoke
+R Sorceress Queen
+C Soul Barrier
+U Soul Net
+C Spell Blast
+U Spirit Link
+R Stampede
+R Stasis
+U Steal Artifact
+U Stone Giant
+C Stone Rain
+U Stone Spirit
+C Stream of Life
+R Stromgald Cabal
+R Sulfurous Springs
+U Svyelunite Temple
+L Swamp
+L Swamp
+L Swamp
+L Swamp
+R Sylvan Library
+C Tarpan
+U Tawnos's Weaponry
+C Terror
+C The Brute
+R The Hive
+R The Wretched
+U Thicket Basilisk
+U Throne of Bone
+U Thrull Retainer
+R Time Bomb
+R Time Elemental
+R Titania's Song
+C Torture
+C Touch of Death
+C Tranquility
+R Truce
+U Tsunami
+C Tundra Wolves
+C Twiddle
+R Underground River
+C Unholy Strength
+C Unstable Mutation
+C Unsummon
+U Untamed Wilds
+C Updraft
+R Urza's Avenger
+U Urza's Bauble
+C Urza's Mine
+C Urza's Power Plant
+C Urza's Tower
+C Vampire Bats
+C Venom
+R Verduran Enchantress
+C Vodalian Soldiers
+U Wall of Air
+U Wall of Bone
+U Wall of Brambles
+U Wall of Fire
+C Wall of Spears
+U Wall of Stone
+U Wall of Swords
+U Wanderlust
+C War Mammoth
+R Warp Artifact
+C Weakness
+U Whirling Dervish
+U White Knight
+C Wild Growth
+U Wind Spirit
+R Winds of Change
+U Winter Blast
+R Winter Orb
+U Wolverine Pack
+U Wooden Sphere
+U Word of Blasting
+R Wrath of God
+R Wyluli Wolf
+R Xenic Poltergeist
+C Zephyr Falcon
+R Zombie Master
+R Zur's Weirding

@@ -1,0 +1,368 @@
+[metadata]
+Code=8ED
+Date=2003-07-28
+Name=Eighth Edition
+Code2=8E
+Type=Core
+Border=White
+BoosterCovers=5
+Booster=10 Common, 3 Uncommon, 1 Rare, 1 BasicLand
+
+[cards]
+U Abyssal Specter
+U Air Elemental
+R Aladdin's Ring
+U Ambition's Cost
+C Anaba Shaman
+U Angel of Mercy
+C Angelic Page
+R Archivist
+U Ardent Militia
+R Avatar of Hope
+C Aven Cloudchaser
+C Aven Fisher
+C Aven Flock
+R Balance of Power
+C Balduvian Barbarians
+R Beast of Burden
+R Birds of Paradise
+U Blanchwood Armor
+U Blaze
+R Blessed Reversal
+R Blinding Angel
+R Blood Moon
+R Bloodshot Cyclops
+C Bog Imp
+U Bog Wraith
+U Boil
+C Boomerang
+R Brass Herald
+R Bribery
+R Call of the Wild
+C Canopy Spider
+C Canyon Wildcat
+U Carrion Wall
+C Catalog
+U Chastise
+U Choke
+C Cinder Wall
+U Circle of Protection: Black
+U Circle of Protection: Blue
+U Circle of Protection: Green
+U Circle of Protection: Red
+U Circle of Protection: White
+R City of Brass
+C Coastal Hornclaw
+R Coastal Piracy
+U Coastal Tower
+R Coat of Arms
+C Coercion
+R Collective Unconscious
+U Concentrate
+U Confiscate
+C Coral Eel
+R Cowardice
+C Craw Wurm
+U Creeping Mold
+C Crossbow Infantry
+U Crystal Rod
+U Curiosity
+R Daring Apprentice
+C Dark Banishing
+R Death Pit Offering
+R Death Pits of Rath
+U Deathgazer
+C Deepwood Ghoul
+R Defense Grid
+R Deflection
+C Dehydration
+U Demolish
+C Demystify
+U Diabolic Tutor
+R Dingus Egg
+R Disrupting Scepter
+R Distorting Lens
+C Diving Griffin
+C Drudge Skeletons
+C Dusk Imp
+U Dwarven Demolition Team
+C Eager Cadet
+R Eastern Paladin
+U Elfhame Palace
+R Elite Archers
+U Elite Javelineer
+R Elvish Champion
+U Elvish Lyrist
+C Elvish Pioneer
+R Elvish Piper
+U Elvish Scrapper
+R Emperor Crocodile
+U Enormous Baloth
+U Enrage
+R Ensnaring Bridge
+R Evacuation
+U Execute
+R Fallen Angel
+C Fear
+U Fecundity
+C Fertile Ground
+U Fighting Drake
+C Flash Counter
+U Flashfires
+R Fleeting Image
+C Flight
+R Flying Carpet
+U Fodder Cannon
+U Foratog
+L Forest
+L Forest
+L Forest
+L Forest
+C Fugitive Wizard
+R Fungusaur
+R Furnace of Rath
+U Fyndhorn Elder
+R Gaea's Herald
+C Giant Badger
+C Giant Cockroach
+C Giant Growth
+C Giant Octopus
+C Giant Spider
+R Glorious Anthem
+C Glory Seeker
+U Gluttonous Zombie
+C Goblin Chariot
+U Goblin Glider
+R Goblin King
+C Goblin Raider
+R Grave Pact
+C Gravedigger
+C Grizzly Bears
+U Guerrilla Tactics
+R Hammer of Bogardan
+C Healing Salve
+U Hibernation
+C Hill Giant
+C Holy Day
+C Holy Strength
+C Honor Guard
+C Horned Troll
+C Horned Turtle
+R Howling Mine
+U Hulking Cyclops
+U Hunted Wumpus
+C Index
+R Inferno
+C Inspiration
+R Intrepid Hero
+R Intruder Alarm
+U Invisibility
+U Iron Star
+L Island
+L Island
+L Island
+L Island
+U Ivory Cup
+R Ivory Mask
+R Jayemdae Tome
+U Karma
+R Larceny
+C Lava Axe
+R Lava Hounds
+U Lesser Gargadon
+R Lhurgoyf
+U Lightning Blast
+C Lightning Elemental
+U Living Terrain
+U Llanowar Behemoth
+C Lone Wolf
+C Looming Shade
+R Lord of the Undead
+U Lure
+C Maggot Carrier
+R Mahamoti Djinn
+R Mana Clash
+C Mana Leak
+R Maro
+C Master Decoy
+R Master Healer
+U Megrim
+U Merchant Scroll
+C Merchant of Secrets
+R Might of Oaks
+R Millstone
+R Mind Bend
+C Mind Rot
+U Mind Slash
+U Mind Sludge
+R Mogg Sentry
+C Monstrous Growth
+C Moss Monster
+L Mountain
+L Mountain
+L Mountain
+L Mountain
+R Murderous Betrayal
+C Nantuko Disciple
+R Natural Affinity
+C Naturalize
+C Nausea
+U Nekrataal
+R Nightmare
+R Noble Purpose
+C Norwood Ranger
+R Obliterate
+U Ogre Taskmaster
+R Okk
+R Oracle's Attendants
+U Orcish Artillery
+C Orcish Spy
+C Pacifism
+C Panic Attack
+U Patagia Golem
+U Peach Garden Oath
+R Persecute
+U Phantom Warrior
+R Phyrexian Arena
+R Phyrexian Colossus
+U Phyrexian Hulk
+R Phyrexian Plaguelord
+C Plague Beetle
+R Plague Wind
+L Plains
+L Plains
+L Plains
+L Plains
+R Planar Portal
+R Plow Under
+R Primeval Force
+U Primeval Shambler
+U Puppeteer
+U Pyroclasm
+U Pyrotechnics
+C Raging Goblin
+U Rain of Blades
+C Raise Dead
+C Rampant Growth
+C Ravenous Rats
+C Razorfoot Griffin
+C Redeem
+C Reflexes
+C Regeneration
+R Relentless Assault
+C Remove Soul
+U Revive
+U Rewind
+R Rhox
+C Ridgeline Rager
+U Rod of Ruin
+R Rolling Stones
+R Royal Assassin
+R Rukh Egg
+C Rushwood Dryad
+C Sabretooth Tiger
+R Sacred Ground
+C Sacred Nectar
+C Sage Owl
+R Sage of Lat-Nam
+U Salt Marsh
+C Samite Healer
+U Sanctimony
+R Savannah Lions
+C Scathe Zombies
+C Sea Eagle
+C Sea Monster
+R Searing Wind
+U Seasoned Marshal
+R Seismic Assault
+C Serpent Warrior
+R Serra Angel
+U Sever Soul
+C Severed Legion
+C Shatter
+R Shifting Sky
+R Shivan Dragon
+U Shivan Oasis
+C Shock
+C Shock Troops
+U Silverback Ape
+C Sizzle
+R Skull of Orm
+U Slay
+C Sneaky Homunculus
+C Solidarity
+U Soul Feast
+U Spellbook
+U Spiketail Hatchling
+C Spined Wurm
+C Spineless Thug
+U Spirit Link
+U Spitting Spider
+U Spreading Algae
+C Standing Troops
+U Star Compass
+U Staunch Defenders
+U Steal Artifact
+C Stone Rain
+C Storm Crow
+R Story Circle
+U Stream of Life
+U Sudden Impact
+C Suntail Hawk
+R Sunweb
+L Swamp
+L Swamp
+L Swamp
+L Swamp
+U Swarm of Rats
+U Sword Dancer
+R Teferi's Puzzle Box
+U Telepathy
+R Temporal Adept
+R Thieves' Auction
+U Thieving Magpie
+R Thorn Elemental
+U Throne of Bone
+R Tidal Kraken
+R Trade Routes
+C Trained Armodon
+U Treasure Trove
+C Tremor
+C Tundra Wolves
+C Twiddle
+R Two-Headed Dragon
+R Underworld Dreams
+C Unholy Strength
+C Unsummon
+U Urborg Volcano
+R Urza's Armor
+U Urza's Mine
+U Urza's Power Plant
+U Urza's Tower
+R Vampiric Spirit
+C Venerable Monk
+U Vengeance
+R Verduran Enchantress
+R Vernal Bloom
+R Vexing Arcanix
+U Viashino Sandstalker
+C Vicious Hunger
+C Vine Trellis
+R Vizzerdrix
+C Volcanic Hammer
+U Wall of Air
+U Wall of Spears
+U Wall of Stone
+U Wall of Swords
+R Warped Devotion
+R Western Paladin
+C Wind Drake
+U Wing Snare
+C Wood Elves
+U Wooden Sphere
+R Worship
+R Wrath of God
+U Wrath of Marit Lage
+U Yavimaya Enchantress
+U Zombify
+R Zur's Weirding

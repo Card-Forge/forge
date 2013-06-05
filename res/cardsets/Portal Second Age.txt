@@ -1,0 +1,176 @@
+[metadata]
+Code=PO2
+Date=1998-06
+Name=Portal Second Age
+Code2=P2
+Alias=P02
+Type=Starter
+BoosterCovers=1
+Booster=11 Common, 3 Uncommon, 1 Rare
+
+[cards]
+U Abyssal Nightstalker
+U Air Elemental
+U Alaborn Cavalier
+C Alaborn Grenadier
+C Alaborn Musketeer
+C Alaborn Trooper
+R Alaborn Veteran
+U Alaborn Zealot
+R Alluring Scent
+R Ancient Craving
+R Angel of Fury
+U Angel of Mercy
+C Angelic Blessing
+C Angelic Wall
+U Apprentice Sorcerer
+R Archangel
+R Armageddon
+U Armored Galleon
+U Armored Griffin
+C Barbtooth Wurm
+U Bargain
+C Bear Cub
+U Bee Sting
+U Blaze
+U Bloodcurdling Scream
+C Breath of Life
+R Brimstone Dragon
+U Brutal Nightstalker
+C Chorus of Woe
+R Coastal Wizard
+U Coercion
+C Cruel Edict
+R Cunning Giant
+C Dakmor Bat
+U Dakmor Plague
+C Dakmor Scorpion
+R Dakmor Sorceress
+U Dark Offering
+R Deathcoil Wurm
+U Deep Wood
+C Deja Vu
+R Denizen of the Deep
+R Earthquake
+R Exhaustion
+C Extinguish
+U Eye Spy
+C False Summoning
+C Festival of Trokin
+L Forest
+L Forest
+L Forest
+U Foul Spirit
+C Goblin Cavaliers
+U Goblin Firestarter
+R Goblin General
+C Goblin Glider
+U Goblin Lore
+U Goblin Matron
+C Goblin Mountaineer
+C Goblin Piker
+C Goblin Raider
+U Goblin War Cry
+C Goblin War Strike
+C Golden Bear
+C Hand of Death
+U Harmony of Nature
+R Hidden Horror
+R Hurricane
+U Ironhoof Ox
+L Island
+L Island
+L Island
+U Jagged Lightning
+R Just Fate
+U Kiss of Death
+C Lava Axe
+U Lone Wolf
+C Lurking Nightstalker
+C Lynx
+R Magma Giant
+C Mind Rot
+C Moaning Spirit
+C Monstrous Growth
+L Mountain
+L Mountain
+L Mountain
+C Muck Rats
+U Mystic Denial
+C Natural Spring
+C Nature's Lore
+R Nightstalker Engine
+C Norwood Archers
+R Norwood Priestess
+C Norwood Ranger
+C Norwood Riders
+C Norwood Warrior
+U Obsidian Giant
+U Ogre Arsonist
+C Ogre Berserker
+U Ogre Taskmaster
+C Ogre Warrior
+C Path of Peace
+R Piracy
+L Plains
+L Plains
+L Plains
+C Plated Wurm
+U Predatory Nightstalker
+C Prowling Nightstalker
+C Raging Goblin
+C Raiding Nightstalker
+R Rain of Daggers
+C Raise Dead
+U Rally the Troops
+C Ravenous Rats
+R Razorclaw Bear
+R Relentless Assault
+U Remove
+U Renewing Touch
+R Return of the Nightstalkers
+C Righteous Charge
+R Righteous Fury
+U River Bear
+C Salvage
+C Screeching Drake
+U Sea Drake
+C Sleight of Hand
+C Spitting Earth
+R Steam Catapult
+C Steam Frigate
+C Stone Rain
+L Swamp
+L Swamp
+L Swamp
+C Swarm of Rats
+R Sylvan Basilisk
+R Sylvan Yeti
+C Talas Air Ship
+C Talas Explorer
+C Talas Merchant
+R Talas Researcher
+C Talas Scout
+R Talas Warrior
+C Temple Acolyte
+U Temple Elder
+R Temporal Manipulation
+U Theft of Dreams
+C Tidal Surge
+C Time Ebb
+C Touch of Brilliance
+C Town Sentry
+C Tree Monkey
+C Tremor
+C Trokin High Guard
+U Undo
+U Untamed Wilds
+R Vampiric Spirit
+U Vengeance
+C Volcanic Hammer
+C Volunteer Militia
+U Warrior's Stand
+C Wild Griffin
+U Wild Ox
+R Wildfire
+C Wind Sail

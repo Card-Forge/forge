@@ -1,0 +1,175 @@
+[metadata]
+Code=GPT
+Date=2006-02-03
+Name=Guildpact
+Code2=GP
+Type=Expansion
+BoosterCovers=3
+Booster=11 Common, 3 Uncommon, 1 Rare
+
+[cards]
+U AEtherplasm
+C Absolver Thrull
+R Abyssal Nocturnus
+U Agent of Masks
+R Angel of Despair
+U Battering Wurm
+C Beastmaster's Magemark
+U Belfry Spirit
+C Benediction of Moons
+R Bioplasm
+C Blind Hunter
+C Bloodscale Prowler
+R Borborygmos
+C Burning-Tree Bloodscale
+R Burning-Tree Shaman
+C Castigate
+U Caustic Rain
+R Cerebral Vortex
+U Conjurer's Ban
+U Crash Landing
+C Cremate
+C Cry of Contrition
+U Cryptwailing
+C Crystal Seer
+R Culling Sun
+U Daggerclaw Imp
+R Debtors' Knell
+R Djinn Illuminatus
+C Douse in Gloom
+U Droning Bureaucrats
+U Drowned Rusalka
+U Dryad Sophisticate
+R Dune-Brood Nephilim
+R Earth Surge
+U Electrolyze
+U Exhumer Thrull
+C Fencer's Magemark
+U Feral Animist
+U Frazzle
+U Gatherer of Graces
+U Gelectrode
+U Ghor-Clan Bloodscale
+C Ghor-Clan Savage
+R Ghost Council of Orzhova
+C Ghost Warden
+R Ghostway
+R Giant Solifuge
+C Gigadrowse
+R Glint-Eye Nephilim
+U Goblin Flectomancer
+R Godless Shrine
+R Graven Dominator
+U Gristleback
+U Gruul Guildmage
+C Gruul Nodorog
+C Gruul Scrapper
+C Gruul Signet
+C Gruul Turf
+R Gruul War Plow
+C Guardian's Magemark
+U Harrier Griffin
+R Hatching Plans
+U Hissing Miasma
+U Hypervolt Grasp
+C Infiltrator's Magemark
+R Ink-Treader Nephilim
+R Invoke the Firemind
+C Izzet Boilerworks
+C Izzet Chronarch
+U Izzet Guildmage
+C Izzet Signet
+R Killer Instinct
+C Leap of Flame
+R Leyline of Lifeforce
+R Leyline of Lightning
+R Leyline of Singularity
+R Leyline of the Meek
+R Leyline of the Void
+C Lionheart Maverick
+R Living Inferno
+U Martyred Rusalka
+R Mimeofacture
+R Mizzium Transreliquat
+R Moratorium Stone
+U Mortify
+C Mourning Thrull
+C Necromancer's Magemark
+R Niv-Mizzet, the Firemind
+U Nivix, Aerie of the Firemind
+C Ogre Savant
+U Order of the Stars
+C Orzhov Basilica
+C Orzhov Euthanist
+U Orzhov Guildmage
+R Orzhov Pontiff
+C Orzhov Signet
+U Orzhova, the Church of Deals
+C Ostiary Thrull
+R Parallectric Feedback
+C Petrahydrox
+R Petrified Wood-Kin
+C Pillory of the Sleepless
+U Plagued Rusalka
+C Poisonbelly Ogre
+U Predatory Focus
+U Primeval Light
+C Pyromatics
+R Quicken
+U Rabble-Rouser
+C Repeal
+C Restless Bones
+U Revenant Patriarch
+R Rumbling Slum
+C Runeboggle
+R Sanguine Praetor
+U Savage Twister
+C Scab-Clan Mauler
+U Schismotivate
+U Scorched Rusalka
+R Seize the Soul
+U Shadow Lance
+U Shattering Spree
+C Shrieking Grotesque
+R Siege of Towers
+C Silhana Ledgewalker
+C Silhana Starfletcher
+U Sinstriker's Will
+U Skarrg, the Rage Pits
+R Skarrgan Firebird
+C Skarrgan Pit-Skulk
+U Skarrgan Skybreaker
+R Skeletal Vampire
+R Sky Swallower
+C Skyrider Trainee
+U Smogsteed Rider
+U Souls of the Faultless
+R Spelltithe Enforcer
+U Starved Rusalka
+R Steam Vents
+C Steamcore Weird
+R Stitch in Time
+R Stomping Ground
+R Storm Herd
+U Stratozeppelid
+C Streetbreaker Wurm
+R Sword of the Paruns
+R Teysa, Orzhov Scion
+U Thunderheads
+R Tibor and Lumia
+C Tin Street Hooligan
+U To Arms!
+C Torch Drake
+C Train of Thought
+R Ulasht, the Hate Seed
+U Vacuumelt
+U Vedalken Plotter
+U Vertigo Spawn
+C Wee Dragonauts
+C Wild Cantor
+C Wildsize
+R Witch-Maw Nephilim
+C Withstand
+U Wreak Havoc
+R Wurmweaver Coil
+R Yore-Tiller Nephilim

@@ -1,0 +1,150 @@
+[metadata]
+Code=HML
+Date=1995-10-01
+Name=Homelands
+Code2=HL
+Type=Expansion
+BoosterCovers=1
+Booster=6 Common, 2 UncommonRare
+
+[cards]
+U AEther Storm
+U Abbey Gargoyles
+C Abbey Matron
+C Abbey Matron
+C Aliban's Tower
+C Aliban's Tower
+C Ambush
+C Ambush Party
+C Ambush Party
+R An-Havva Constable
+U An-Havva Inn
+U An-Havva Township
+R An-Zerrin Ruins
+R Anaba Ancestor
+C Anaba Bodyguard
+C Anaba Bodyguard
+C Anaba Shaman
+C Anaba Shaman
+R Anaba Spirit Crafter
+R Apocalypse Chime
+R Autumn Willow
+U Aysen Abbey
+C Aysen Bureaucrats
+C Aysen Bureaucrats
+R Aysen Crusader
+R Aysen Highway
+R Baki's Curse
+R Baron Sengir
+R Beast Walkers
+R Black Carriage
+R Broken Visage
+C Carapace
+C Carapace
+U Castle Sengir
+C Cemetery Gate
+C Cemetery Gate
+R Chain Stasis
+C Chandler
+C Clockwork Gnomes
+C Clockwork Steed
+C Clockwork Swarm
+C Coral Reef
+C Dark Maze
+C Dark Maze
+R Daughter of Autumn
+U Death Speakers
+R Didgeridoo
+U Drudge Spell
+C Dry Spell
+C Dry Spell
+R Dwarven Pony
+R Dwarven Sea Clan
+C Dwarven Trader
+C Dwarven Trader
+C Ebony Rhino
+U Eron the Relentless
+U Evaporate
+R Faerie Noble
+C Feast of the Unicorn
+C Feast of the Unicorn
+R Feroz's Ban
+C Folk of An-Havva
+C Folk of An-Havva
+R Forget
+C Funeral March
+U Ghost Hounds
+C Giant Albatross
+C Giant Albatross
+U Giant Oyster
+R Grandmother Sengir
+C Greater Werewolf
+R Hazduhr the Abbot
+C Headstone
+R Heart Wolf
+C Hungry Mist
+C Hungry Mist
+U Ihsan's Shade
+U Irini Sengir
+R Ironclaw Curse
+C Jinx
+C Joven
+C Joven's Ferrets
+U Joven's Tools
+R Koskun Falls
+U Koskun Keep
+C Labyrinth Minotaur
+C Labyrinth Minotaur
+C Leaping Lizard
+R Leeches
+R Mammoth Harness
+R Marjhan
+C Memory Lapse
+C Memory Lapse
+C Merchant Scroll
+C Mesa Falcon
+C Mesa Falcon
+R Mystic Decree
+R Narwhal
+U Orcish Mine
+R Primal Order
+C Prophecy
+U Rashka the Slayer
+C Reef Pirates
+C Reef Pirates
+C Renewal
+U Retribution
+R Reveka, Wizard Savant
+U Root Spider
+U Roots
+C Roterothopter
+R Rysorian Badger
+C Samite Alchemist
+C Samite Alchemist
+U Sea Sprite
+U Sea Troll
+U Sengir Autocrat
+C Sengir Bats
+C Sengir Bats
+R Serra Aviary
+C Serra Bestiary
+U Serra Inquisitors
+C Serra Paladin
+C Serrated Arrows
+C Shrink
+C Shrink
+R Soraya the Falconer
+U Spectral Bears
+R Timmerian Fiends
+C Torture
+C Torture
+C Trade Caravan
+C Trade Caravan
+R Truce
+R Veldrane of Sengir
+R Wall of Kelp
+C Willow Faerie
+C Willow Faerie
+R Willow Priestess
+R Winter Sky
+U Wizards' School

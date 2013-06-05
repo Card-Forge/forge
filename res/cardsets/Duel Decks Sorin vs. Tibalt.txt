@@ -1,0 +1,86 @@
+[metadata]
+Code=DDK
+Date=2013-03-15
+Name=Duel Decks: Sorin vs. Tibalt
+
+[cards]
+C Absorb Vis
+U Akoum Refuge
+R Ancient Craving
+C Ashmouth Hound
+C Blazing Salvo
+C Blightning
+C Bloodrage Vampire
+R Breaking Point
+U Browbeat
+C Bump in the Night
+R Butcher of Malakir
+C Child of Night
+C Coal Stoker
+U Corpse Connoisseur
+R Death Grasp
+U Decompose
+R Devil's Play
+C Doomed Traveler
+C Duskhunter Bat
+C Evolving Wilds
+C Faithless Looting
+R Field of Souls
+U Fiend Hunter
+U Flame Javelin
+C Flame Slash
+U Gang of Devils
+U Gatekeeper of Malakir
+C Geistflame
+C Goblin Arsonist
+R Hellrider
+U Hellspark Elemental
+R Lavaborn Muse
+U Lingering Souls
+C Mad Prophet
+C Mark of the Vampire
+U Mausoleum Guard
+C Mesmeric Fiend
+U Mortify
+L Mountain
+L Mountain
+L Mountain
+U Phantom General
+L Plains
+L Plains
+L Plains
+U Pyroclasm
+C Rakdos Carnarium
+U Reassembling Skeleton
+U Recoup
+U Revenant Patriarch
+U Scorched Rusalka
+U Scourge Devil
+U Sengir Vampire
+U Shambling Remains
+U Skirsdag Cultist
+C Sorin's Thirst
+M Sorin, Lord of Innistrad
+U Spectral Procession
+C Strangling Soot
+R Sulfuric Vortex
+L Swamp
+L Swamp
+L Swamp
+L Swamp
+L Swamp
+L Swamp
+U Tainted Field
+C Terminate
+M Tibalt, the Fiend-Blooded
+U Torrent of Souls
+R Twilight Drover
+C Unmake
+U Urge to Feed
+C Vampire Lacerator
+U Vampire Nighthawk
+U Vampire Outcasts
+C Vampire's Bite
+C Vithian Stinger
+U Wall of Omens
+U Zealous Persecution

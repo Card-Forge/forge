@@ -1,0 +1,168 @@
+[metadata]
+Code=DKA
+Date=2012-02-03
+Name=Dark Ascension
+Code2=DKA
+Type=Expansion
+BoosterCovers=3
+Booster=9 Common:!dfc, 3 Uncommon:!dfc, 1 RareMythic:!dfc, 1 dfc, 1 BasicLand ISD
+
+[cards]
+U Afflicted Deserter
+R Alpha Brawl
+U Altar of the Lost
+M Archangel's Light
+C Artful Dodge
+U Avacyn's Collar
+C Bar the Door
+M Beguiler of Wills
+C Black Cat
+U Blood Feud
+C Bone to Ash
+C Break of Day
+U Briarpack Alpha
+C Burden of Guilt
+U Burning Oil
+R Call to the Kindred
+U Chalice of Life
+C Chant of the Skifsang
+U Chill of Foreboding
+C Chosen of Markov
+C Clinging Mists
+R Counterlash
+C Crushing Vines
+R Curse of Bloodletting
+R Curse of Echoes
+U Curse of Exhaustion
+R Curse of Misfortunes
+U Curse of Thirst
+C Dawntreader Elk
+U Deadly Allure
+C Death's Caress
+R Deranged Outcast
+U Diregraf Captain
+C Divination
+U Drogskol Captain
+M Drogskol Reaver
+R Dungeon Geists
+M Elbrus, the Binding Blade
+C Elgaud Inquisitor
+C Erdwal Ripper
+C Evolving Wilds
+C Executioner's Hood
+U Faith's Shield
+C Faithless Looting
+M Falkenrath Aristocrat
+C Falkenrath Torturer
+U Farbog Boneflinger
+C Favor of the Woods
+R Feed the Pack
+R Fiend of the Shadows
+C Fires of Undeath
+R Flayer of the Hatebound
+C Fling
+C Forge Devil
+C Gather the Townsfolk
+U Gavony Ironwright
+R Geralf's Messenger
+R Geralf's Mindcrusher
+R Ghoultree
+R Grafdigger's Cage
+R Gravecrawler
+C Gravepurge
+U Gravetiller Wurm
+R Grim Backwoods
+U Grim Flowering
+C Griptide
+C Gruesome Discovery
+U Harrowing Journey
+C Haunted Fengraf
+M Havengul Lich
+R Havengul Runebinder
+C Headless Skaab
+C Heavy Mattock
+U Heckling Fiends
+R Hellrider
+M Helvault
+C Highborn Ghoul
+C Hinterland Hermit
+C Hollowhenge Beast
+U Hollowhenge Spirit
+C Hunger of the Howlpack
+M Huntmaster of the Fells
+U Immerwolf
+R Increasing Ambition
+R Increasing Confusion
+R Increasing Devotion
+R Increasing Savagery
+R Increasing Vengeance
+R Jar of Eyeballs
+C Kessig Recluse
+U Lambholt Elder
+U Lingering Souls
+R Lost in the Woods
+C Loyal Cathar
+R Markov Blademaster
+U Markov Warlord
+C Midnight Guard
+M Mikaeus, the Unhallowed
+R Mondronen Shaman
+M Moonveil Dragon
+U Mystic Retrieval
+C Nearheath Stalker
+C Nephalia Seakite
+U Niblis of the Breath
+C Niblis of the Mist
+U Niblis of the Urn
+R Predator Ooze
+U Pyreheart Wolf
+R Ravenous Demon
+C Ray of Revelation
+C Reap the Seagraf
+U Relentless Skaabs
+R Requiem Angel
+C Russet Wolves
+C Sanctuary Cat
+C Saving Grasp
+C Scorch the Fields
+C Scorned Villager
+C Screeching Skaab
+R Seance
+U Secrets of the Dead
+U Shattered Perception
+C Shriekgeist
+C Sightless Ghoul
+C Silverclaw Griffin
+C Skillful Lunge
+U Skirsdag Flayer
+C Somberwald Dryad
+M Sorin, Lord of Innistrad
+U Soul Seizer
+C Spiteful Shadows
+C Stormbound Geist
+U Strangleroot Geist
+U Stromkirk Captain
+R Sudden Disappearance
+C Talons of Falkenrath
+R Thalia, Guardian of Thraben
+C Thought Scour
+R Thraben Doomsayer
+U Thraben Heretic
+C Torch Fiend
+U Tower Geist
+U Tracker's Instincts
+C Tragic Slip
+C Ulvenwald Bear
+C Undying Evil
+R Vault of the Archangel
+U Vengeful Vampire
+U Village Survivors
+M Vorapede
+U Wakedancer
+U Warden of the Wall
+C Wild Hunger
+R Wolfbitten Captive
+U Wolfhunter's Quiver
+C Wrack with Madness
+C Young Wolf
+R Zombie Apocalypse

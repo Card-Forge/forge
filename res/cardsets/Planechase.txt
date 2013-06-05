@@ -1,0 +1,223 @@
+[metadata]
+Code=HOP
+Date=2009-09-04
+Name=Planechase
+Alias=PCH
+Code2=HOP
+Type=Other
+
+[cards]
+C Academy at Tolaria West
+C Agyrem
+R Akroma's Vengeance
+C Ancient Den
+C Arc Lightning
+U Arcbound Crusher
+U Arcbound Slith
+C Arsenal Thresher
+R Ascendant Evincar
+U Assault
+R Balefire Liege
+C Bant
+C Battlegate Mimic
+R Beacon of Unrest
+C Beast Hunt
+U Beseech the Queen
+U Blaze
+C Bogardan Firefiend
+C Bogardan Rager
+C Boros Garrison
+U Boros Guildmage
+C Boros Signet
+U Boros Swiftblade
+R Bosh, Iron Golem
+C Branching Bolt
+U Briarhorn
+R Broodstar
+U Browbeat
+U Bull Cerodon
+U Cabal Coffers
+C Cadaverous Knight
+U Captain's Maneuver
+P Celestine Reef
+C Cerodon Yearling
+U Cinder Elemental
+C Cliffside Market
+U Cone of Flame
+C Congregate
+U Consume Spirit
+C Copper Myr
+U Corpse Harvester
+C Cranial Plating
+C Cruel Revival
+C Dark Ritual
+R Darksteel Forge
+R Death Baron
+R Door to Nothingness
+C Double Cleave
+C Dregscape Zombie
+U Duergar Hedge-Mage
+C Eloren Wilds
+U Etched Oracle
+U Explosive Vegetation
+U Fabricate
+C Feeding Grounds
+C Fertile Ground
+C Fertilid
+C Festering Goblin
+C Fields of Summer
+U Fires of Yavimaya
+U Flamekin Harbinger
+U Flametongue Kavu
+L Forest
+L Forest
+L Forest
+L Forest
+L Forest
+R Forgotten Ancient
+R Furnace of Rath
+C Glimmervoid Basin
+R Glory of Warfare
+U Goblin Offensive
+C Gold Myr
+C Goldmeadow
+R Grave Pact
+C Gravedigger
+C Great Furnace
+C Grixis
+C Gruul Turf
+U Hearthfire Hobgoblin
+R Helldozer
+C Hideous End
+P Horizon Boughs
+C Hull Breach
+C Immersturm
+U Incremental Blight
+C Innocent Blood
+R Insurrection
+C Iron Myr
+L Island
+L Island
+L Island
+L Island
+C Isle of Vesuva
+R Ivy Elemental
+C Izzet Steam Maze
+C Keep Watch
+U Keldon Champion
+C Kor Sanctifiers
+C Krosa
+C Leaden Myr
+U Leechridden Swamp
+C Lethe Lake
+U Lightning Helix
+R Living Hive
+C Llanowar
+R Lodestone Myr
+R Loxodon Warhammer
+U Mage Slayer
+U Mask of Memory
+R Master of Etherium
+R Menacing Ogre
+C Minamo
+P Mirrored Depths
+L Mountain
+L Mountain
+L Mountain
+L Mountain
+L Mountain
+L Mountain
+L Mountain
+L Mountain
+L Mountain
+C Murasa
+C Myr Enforcer
+C Naar Isle
+C Naya
+R Nefashu
+U Noxious Ghoul
+U Nuisance Engine
+C Oblivion Ring
+U Order
+C Orim's Thunder
+C Otaria
+C Panopticon
+C Pentad Prism
+R Pentavus
+R Phyrexian Arena
+C Phyrexian Ghoul
+L Plains
+L Plains
+L Plains
+L Plains
+L Plains
+C Pools of Becoming
+U Prison Term
+R Profane Command
+U Pyrotechnics
+U Qumulox
+C Rampant Growth
+C Raven's Run
+R Razia, Boros Archangel
+C Reckless Charge
+R Relentless Assault
+C Relic of Progenitus
+U Rockslide Elemental
+C Rolling Thunder
+R Rorix Bladewing
+C Rotting Rats
+R Rumbling Slum
+C Sanctum of Serra
+C Sarcomite Myr
+U Savage Twister
+C Sea of Sand
+C Search for Tomorrow
+C Seat of the Synod
+U Serum Tank
+C Shepherd of Rot
+C Shiv
+U Shivan Oasis
+C Silver Myr
+C Silverglade Elemental
+U Skeleton Shard
+C Skybreen
+U Sludge Strider
+C Smokebraider
+C Sokenzan
+C Soul Warden
+U Soulless One
+C Stronghold Furnace
+U Sunhome, Fortress of the Legion
+C Suntouched Myr
+L Swamp
+L Swamp
+L Swamp
+L Swamp
+L Swamp
+C Syphon Mind
+C Syphon Soul
+R Taurean Mauler
+S Tazeem
+P Tember City
+C Terramorphic Expanse
+C The AEther Flues
+C The Dark Barony
+C The Eon Fog
+C The Fourth Sphere
+C The Great Forest
+C The Hippodrome
+C The Maelstrom
+U Thirst for Knowledge
+R Tornado Elemental
+C Tree of Tales
+U Tribal Unity
+C Turri Island
+U Undead Warchief
+C Undercity Reaches
+C Vault of Whispers
+C Vedalken Engineer
+C Velis Vel
+R Verdant Force
+C Whiplash Trap
+U Withered Wretch
+C Wizard Replica

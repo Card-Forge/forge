@@ -1,0 +1,182 @@
+[metadata]
+Code=S99
+Date=1999-07
+Name=Starter 1999
+Border=White
+Code2=ST
+Type=Starter
+
+[cards]
+R Abyssal Horror
+U Air Elemental
+R Alluring Scent
+R Ancient Craving
+U Angel of Light
+U Angel of Mercy
+C Angelic Blessing
+R Archangel
+U Ardent Militia
+R Armageddon
+C Barbtooth Wurm
+U Bargain
+R Blinding Light
+C Bog Imp
+C Bog Raiders
+U Bog Wraith
+C Border Guard
+U Breath of Life
+U Bull Hippo
+R Champion Lancer
+U Charging Paladin
+C Chorus of Woe
+U Cinder Storm
+U Coercion
+C Coral Eel
+U Counterspell
+U Dakmor Ghoul
+R Dakmor Lancer
+U Dakmor Plague
+C Dakmor Scorpion
+R Dakmor Sorceress
+U Dark Offering
+R Denizen of the Deep
+R Devastation
+C Devoted Hero
+C Devout Monk
+R Dread Reaper
+C Durkwood Boars
+C Eager Cadet
+U Earth Elemental
+U Exhaustion
+C Extinguish
+U Eye Spy
+U False Peace
+C Feral Shadow
+U Fire Elemental
+R Fire Tempest
+C Foot Soldiers
+L Forest
+L Forest
+L Forest
+L Forest
+R Gerrard's Wisdom
+C Giant Octopus
+C Goblin Cavaliers
+C Goblin Chariot
+U Goblin Commando
+U Goblin General
+U Goblin Glider
+R Goblin Hero
+U Goblin Lore
+C Goblin Mountaineer
+U Goblin Settler
+C Gorilla Warrior
+U Gravedigger
+R Grim Tutor
+C Grizzly Bears
+C Hand of Death
+C Hollow Dogs
+U Howling Fury
+C Hulking Goblin
+U Hulking Ogre
+C Ingenious Thief
+L Island
+L Island
+L Island
+L Island
+U Jagged Lightning
+C Knight Errant
+R Last Chance
+C Lava Axe
+C Lone Wolf
+R Loyal Sentry
+U Lynx
+U Man-o'-War
+C Merfolk of the Pearl Trident
+C Mind Rot
+R Mons's Goblin Raiders
+C Monstrous Growth
+U Moon Sprite
+L Mountain
+L Mountain
+L Mountain
+L Mountain
+C Muck Rats
+U Natural Spring
+R Nature's Cloak
+C Nature's Lore
+C Norwood Archers
+C Norwood Ranger
+C Ogre Warrior
+U Owl Familiar
+C Path of Peace
+R Phantom Warrior
+R Piracy
+L Plains
+L Plains
+L Plains
+L Plains
+U Pride of Lions
+R Psychic Transfer
+C Raging Goblin
+C Raise Dead
+R Ransack
+U Ravenous Rats
+U Relearn
+R Relentless Assault
+C Remove Soul
+U Renewing Touch
+U Righteous Charge
+R Righteous Fury
+C Royal Falcon
+U Royal Trooper
+C Sacred Nectar
+C Scathe Zombies
+C Scorching Spear
+C Sea Eagle
+C Serpent Warrior
+U Shrieking Specter
+U Silverback Ape
+C Sleight of Hand
+C Snapping Drake
+U Soul Feast
+C Southern Elephant
+U Spitting Earth
+C Squall
+C Steadfastness
+C Stone Rain
+C Storm Crow
+U Stream of Acid
+R Summer Bloom
+L Swamp
+L Swamp
+L Swamp
+L Swamp
+R Sylvan Basilisk
+R Sylvan Yeti
+R Thorn Elemental
+R Thunder Dragon
+U Tidings
+C Time Ebb
+R Time Warp
+C Touch of Brilliance
+R Trained Orgg
+C Tremor
+U Undo
+U Untamed Wilds
+C Venerable Monk
+U Vengeance
+U Veteran Cavalier
+R Vizzerdrix
+R Volcanic Dragon
+C Volcanic Hammer
+U Water Elemental
+U Whiptail Wurm
+R Whirlwind
+R Wicked Pact
+C Wild Griffin
+U Wild Ox
+C Willow Elf
+C Wind Drake
+U Wind Sail
+U Wood Elves

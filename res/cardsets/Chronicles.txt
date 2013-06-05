@@ -1,0 +1,136 @@
+[metadata]
+Code=CHR
+Date=1995-07
+Name=Chronicles
+Code2=CH
+Type=Reprint
+Border=White
+BoosterCovers=1
+Booster=9 Common, 3 UncommonRare
+
+[cards]
+U Abu Ja'far
+C Active Volcano
+R Akron Legionnaire
+U Aladdin
+R Angelic Voices
+R Arcades Sabboth
+R Arena of the Ancients
+C Argothian Pixies
+C Ashnod's Altar
+C Ashnod's Transmogrant
+R Axelrod Gunnarson
+R Ayesha Tanaka
+U Azure Drake
+U Banshee
+R Barl's Cage
+U Beasts of Bogardan
+R Blood Moon
+U Blood of the Martyr
+C Bog Rats
+R Book of Rass
+C Boomerang
+R Bronze Horse
+C Cat Warriors
+R Chromium
+R City of Brass
+U Cocoon
+R Concordant Crossroads
+U Craw Giant
+C Cuombajj Witches
+R Cyclone
+C D'Avenant Archer
+R Dakkon Blackblade
+R Dance of Many
+C Dandan
+C Divine Offering
+C Emerald Dragonfly
+U Enchantment Alteration
+U Erhnam Djinn
+U Fallen Angel
+C Feldon's Cane
+U Fire Drake
+C Fishliver Oil
+C Flash Flood
+C Fountain of Youth
+R Gabriel Angelfire
+R Gauntlets of Chaos
+C Ghazban Ogre
+C Giant Slug
+U Goblin Artisans
+C Goblin Digging Team
+C Goblin Shrine
+C Goblins of the Flarg
+C Hasran Ogress
+R Hell's Caretaker
+R Horn of Deafening
+C Indestructible Aura
+U Ivory Guardians
+R Jalum Tome
+R Jeweled Bird
+R Johan
+R Juxtapose
+C Keepers of the Faith
+U Kei Takahashi
+R Land's Edge
+C Living Armor
+U Marhault Elsdragon
+C Metamorphosis
+C Mountain Yeti
+R Nebuchadnezzar
+R Nicol Bolas
+R Obelisk of Undoing
+R Palladia-Mors
+R Petra Sphinx
+U Primordial Ooze
+U Puppet Master
+U Rabid Wombat
+R Rakalite
+U Recall
+C Remove Soul
+C Repentant Blacksmith
+R Revelation
+R Rubinia Soulsinger
+C Runesword
+R Safe Haven
+C Scavenger Folk
+R Sentinel
+R Serpent Generator
+U Shield Wall
+U Shimian Night Stalker
+U Sivitri Scarzam
+R Sol'kanar the Swamp King
+R Stangg
+U Storm Seeker
+U Takklemaggot
+R Teleport
+U The Fallen
+R The Wretched
+U Tobias Andrion
+U Tor Wauki
+C Tormod's Crypt
+C Transmutation
+R Triassic Egg
+U Urza's Mine
+U Urza's Mine
+U Urza's Mine
+U Urza's Mine
+U Urza's Power Plant
+U Urza's Power Plant
+U Urza's Power Plant
+U Urza's Power Plant
+U Urza's Tower
+U Urza's Tower
+U Urza's Tower
+U Urza's Tower
+R Vaevictis Asmadi
+R Voodoo Doll
+C Wall of Heat
+U Wall of Opposition
+C Wall of Shadows
+C Wall of Vapor
+U Wall of Wonder
+C War Elephant
+U Witch Hunter
+R Xira Arien
+R Yawgmoth Demon

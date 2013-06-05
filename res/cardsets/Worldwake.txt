@@ -1,0 +1,155 @@
+[metadata]
+Code=WWK
+Date=2010-02-05
+Name=Worldwake
+Code2=WWK
+Type=Expansion
+BoosterCovers=3
+Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand ZEN
+
+[cards]
+C AEther Tradewinds
+M Abyssal Persecutor
+M Admonition Angel
+R Agadeem Occultist
+C Akoum Battlesinger
+R Amulet of Vigor
+R Anowon, the Ruin Sage
+C Apex Hawks
+C Arbor Elf
+R Archon of Redemption
+M Avenger of Zendikar
+R Basilisk Collar
+C Battle Hurda
+R Bazaar Trader
+U Bestial Menace
+U Bloodhusk Ritualist
+C Bojuka Bog
+C Bojuka Brigand
+C Brink of Disaster
+C Bull Rush
+R Butcher of Malakir
+C Calcite Snapper
+U Canopy Cover
+U Caustic Crawler
+R Celestial Colonnade
+R Chain Reaction
+C Claws of Valakut
+M Comet Storm
+C Corrupted Zendikon
+C Cosi's Ravager
+R Creeping Tar Pit
+C Crusher Zendikon
+U Cunning Sparkmage
+C Dead Reckoning
+R Death's Shadow
+U Deathforge Shaman
+C Dispel
+M Dragonmaster Outcast
+U Dread Statuary
+C Enclave Elite
+U Everflowing Chalice
+C Explore
+M Eye of Ugin
+C Feral Contest
+C Fledgling Griffin
+C Gnarlid Pack
+C Goblin Roughrider
+R Goliath Sphinx
+C Grappler Spider
+C Graypelt Hunter
+C Grotag Thrasher
+C Groundswell
+C Guardian Zendikon
+U Hada Freeblade
+C Halimar Depths
+C Halimar Excavator
+U Hammer of Ruin
+R Harabaz Druid
+C Hedron Rover
+U Horizon Drake
+C Iona's Judgment
+M Jace, the Mind Sculptor
+C Jagwasp Swarm
+C Join the Ranks
+R Joraga Warcaller
+R Jwari Shapeshifter
+R Kalastria Highborn
+R Kazuul, Tyrant of the Cliffs
+C Khalni Garden
+C Kitesail
+C Kitesail Apprentice
+U Kor Firewalker
+R Lavaclaw Reaches
+U Leatherback Baloth
+U Lightkeeper of Emeria
+U Loam Lion
+R Lodestone Golem
+C Marsh Threader
+R Marshal's Anthem
+C Mire's Toll
+R Mordant Dragon
+C Mysteries of the Deep
+C Nature's Claim
+U Nemesis Trap
+M Novablast Wurm
+M Omnath, Locus of Mana
+U Perimeter Captain
+U Permafrost Trap
+C Pilgrim's Eye
+C Pulse Tracker
+C Quag Vampires
+U Quest for Renewal
+R Quest for Ula's Temple
+U Quest for the Goblin Lord
+R Quest for the Nihil Stone
+C Quicksand
+R Raging Ravine
+U Razor Boomerang
+U Refraction Trap
+C Rest for the Weary
+U Ricochet Trap
+C Roiling Terrain
+U Ruin Ghost
+U Rumbling Aftershocks
+C Ruthless Cullblade
+U Scrib Nibblers
+C Searing Blaze
+R Seer's Sundial
+U Sejiri Merfolk
+C Sejiri Steppe
+R Selective Memory
+U Shoreline Salvager
+C Skitter of Lizards
+U Slavering Nulls
+U Slingbow Trap
+C Smoldering Spires
+U Smother
+C Snapping Creeper
+U Spell Contortion
+R Stirring Wildwood
+R Stone Idol Trap
+R Stoneforge Mystic
+R Strength of the Tajuru
+U Summit Apes
+C Surrakar Banisher
+R Talus Paladin
+U Tectonic Edge
+R Terastodon
+R Terra Eternal
+R Thada Adel, Acquisitor
+U Tideforce Elemental
+C Tomb Hex
+C Treasure Hunt
+U Tuktuk Scrapper
+C Twitch
+U Urge to Feed
+U Vapor Snare
+U Vastwood Animist
+C Vastwood Zendikon
+C Veteran's Reflexes
+U Voyager Drake
+C Walking Atlas
+C Wind Zendikon
+R Wolfbriar Elemental
+M Wrexial, the Risen Deep

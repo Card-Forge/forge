@@ -1,0 +1,102 @@
+[metadata]
+Code=ARN
+Date=1993-12-01
+Name=Arabian Nights
+Code2=AN
+Type=Expansion
+BoosterCovers=1
+Booster=6 Common, 2 UncommonRare
+
+[cards]
+U Abu Ja'far
+R Aladdin
+R Aladdin's Lamp
+R Aladdin's Ring
+U Ali Baba
+R Ali from Cairo
+C Army of Allah
+C Army of Allah
+U Bazaar of Baghdad
+C Bird Maiden
+C Bird Maiden
+R Bottle of Suleiman
+U Brass Man
+C Camel
+R City in a Bottle
+U City of Brass
+C Cuombajj Witches
+U Cyclone
+R Dancing Scimitar
+C Dandan
+C Desert
+C Desert Nomads
+U Desert Twister
+U Diamond Valley
+R Drop of Honey
+R Ebony Horse
+R El-Hajjaj
+R Elephant Graveyard
+C Erg Raiders
+C Erg Raiders
+R Erhnam Djinn
+U Eye for an Eye
+C Fishliver Oil
+C Fishliver Oil
+U Flying Carpet
+C Flying Men
+C Ghazban Ogre
+C Giant Tortoise
+C Giant Tortoise
+R Guardian Beast
+C Hasran Ogress
+C Hasran Ogress
+C Hurr Jackal
+R Ifh-Biff Efreet
+R Island Fish Jasconius
+R Island of Wak-Wak
+R Jandor's Ring
+R Jandor's Saddlebags
+U Jeweled Bird
+R Jihad
+R Junun Efreet
+R Juzam Djinn
+U Khabal Ghoul
+R King Suleiman
+C Kird Ape
+U Library of Alexandria
+U Magnetic Mountain
+U Merchant Ship
+C Metamorphosis
+R Mijae Djinn
+C Moorish Cavalry
+C Moorish Cavalry
+C Mountain
+C Nafs Asp
+C Nafs Asp
+U Oasis
+R Old Man of the Sea
+C Oubliette
+C Oubliette
+C Piety
+C Piety
+R Pyramids
+R Repentant Blacksmith
+R Ring of Ma'ruf
+C Rukh Egg
+C Rukh Egg
+U Sandals of Abdallah
+C Sandstorm
+R Serendib Djinn
+R Serendib Efreet
+R Shahrazad
+U Sindbad
+R Singing Tree
+U Sorceress Queen
+C Stone-Throwing Devils
+C Stone-Throwing Devils
+C Unstable Mutation
+C War Elephant
+C War Elephant
+C Wyluli Wolf
+C Wyluli Wolf
+R Ydwen Efreet

@@ -1,0 +1,259 @@
+[metadata]
+Code=M11
+Date=2010-07-16
+Name=Magic 2011
+Code2=M11
+Type=Core
+BoosterCovers=5
+Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand
+
+[cards]
+C AEther Adept
+U Acidic Slime
+C Act of Treason
+U Air Servant
+M Ajani Goldmane
+C Ajani's Mantra
+U Ajani's Pridemate
+U Alluring Siren
+R Ancient Hellkite
+U Angel's Feather
+R Angelic Arbiter
+C Arc Runner
+U Armored Ascension
+C Armored Cancrix
+C Assassinate
+C Assault Griffin
+C Augury Owl
+U Autumn's Veil
+U Awakener Druid
+C Azure Drake
+U Back to Nature
+M Baneslayer Angel
+C Barony Vampire
+C Berserkers of Blood Ridge
+R Birds of Paradise
+U Black Knight
+C Blinding Mage
+C Blood Tithe
+C Bloodcrazed Goblin
+C Bloodthrone Vampire
+C Bog Raiders
+C Brindle Boar
+R Brittle Effigy
+U Call to Mind
+C Cancel
+C Canyon Minotaur
+R Captivating Vampire
+U Celestial Purge
+M Chandra Nalaar
+C Chandra's Outrage
+U Chandra's Spitfire
+C Child of Night
+R Clone
+C Cloud Crusader
+C Cloud Elemental
+U Combust
+U Condemn
+R Conundrum Sphinx
+U Corrupt
+U Crystal Ball
+U Cudgel Troll
+C Cultivate
+R Cyclops Gladiator
+R Dark Tutelage
+R Day of Judgment
+U Deathmark
+C Demolish
+M Demon of Death's Gate
+U Demon's Horn
+R Destructive Force
+U Diabolic Tutor
+C Diminish
+C Disentomb
+C Doom Blade
+U Dragon's Claw
+R Dragonskull Summit
+R Drowned Catacomb
+C Dryad's Favor
+C Duress
+U Duskdale Wurm
+U Earth Servant
+U Elite Vanguard
+U Elixir of Immortality
+R Elvish Archdruid
+U Ember Hauler
+C Excommunicate
+R Fauna Shaman
+C Fiery Hellhound
+U Fire Servant
+U Fireball
+U Flashfreeze
+C Fling
+C Fog
+C Foresee
+L Forest
+L Forest
+L Forest
+L Forest
+M Frost Titan
+M Gaea's Revenge
+U Gargoyle Sentinel
+M Garruk Wildspeaker
+C Garruk's Companion
+U Garruk's Packleader
+C Giant Growth
+C Giant Spider
+R Glacial Fortress
+C Goblin Balloon Brigade
+R Goblin Chieftain
+C Goblin Piker
+C Goblin Tunneler
+C Goldenglow Moth
+M Grave Titan
+C Gravedigger
+C Greater Basilisk
+C Harbor Serpent
+R Haunting Echoes
+R Hoarding Dragon
+C Holy Strength
+R Honor of the Pure
+C Hornet Sting
+U Howling Banshee
+C Hunters' Feast
+C Ice Cage
+C Incite
+C Infantry Veteran
+M Inferno Titan
+C Inspired Charge
+L Island
+L Island
+L Island
+L Island
+M Jace Beleren
+C Jace's Erasure
+U Jace's Ingenuity
+R Jinxed Idol
+U Juggernaut
+R Knight Exemplar
+U Kraken's Eye
+C Lava Axe
+R Leyline of Anticipation
+R Leyline of Punishment
+R Leyline of Sanctity
+R Leyline of Vitality
+R Leyline of the Void
+C Lightning Bolt
+M Liliana Vess
+U Liliana's Caress
+C Liliana's Specter
+C Llanowar Elves
+R Magma Phoenix
+C Mana Leak
+C Manic Vandal
+C Maritime Guard
+R Mass Polymorph
+R Merfolk Sovereign
+C Merfolk Spy
+C Mighty Leap
+U Mind Control
+C Mind Rot
+R Mitotic Slime
+L Mountain
+L Mountain
+L Mountain
+L Mountain
+R Mystifying Maze
+R Nantuko Shade
+C Naturalize
+U Nature's Spiral
+R Necrotic Plague
+C Negate
+C Nether Horror
+C Nightwing Shade
+R Obstinate Baloth
+U Ornithopter
+R Overwhelming Stampede
+C Pacifism
+C Palace Guard
+C Phantom Beast
+R Phylactery Lich
+L Plains
+L Plains
+L Plains
+L Plains
+M Platinum Angel
+C Plummet
+C Preordain
+C Primal Cocoon
+M Primeval Titan
+U Prized Unicorn
+U Prodigal Pyromancer
+R Protean Hydra
+C Pyretic Ritual
+U Pyroclasm
+C Quag Sickness
+U Reassembling Skeleton
+R Redirect
+U Relentless Rats
+R Reverberate
+U Rise from the Grave
+U Roc Egg
+R Rootbound Crag
+C Rotting Legion
+R Royal Assassin
+C Runeclaw Bear
+C Sacred Wolf
+C Safe Passage
+C Scroll Thief
+U Serra Angel
+R Serra Ascendant
+U Shiv's Embrace
+C Siege Mastodon
+C Sign in Blood
+R Silence
+C Silvercoat Lion
+U Sleep
+C Solemn Offering
+U Sorcerer's Strongbox
+C Spined Wurm
+C Squadron Hawk
+C Stabbing Pain
+R Steel Overseer
+U Stone Golem
+C Stormfront Pegasus
+R Stormtide Leviathan
+M Sun Titan
+R Sunpetal Grove
+L Swamp
+L Swamp
+L Swamp
+L Swamp
+R Sword of Vengeance
+C Sylvan Ranger
+R Temple Bell
+C Terramorphic Expanse
+C Thunder Strike
+M Time Reversal
+C Tireless Missionaries
+C Tome Scour
+R Traumatize
+R Triskelion
+C Unholy Strength
+C Unsummon
+R Vengeful Archon
+C Viscera Seer
+C Volcanic Strength
+U Voltaic Key
+C Vulshok Berserker
+U Wall of Frost
+C Wall of Vines
+U War Priest of Thune
+U Warlord's Axe
+U Water Servant
+U Whispersilk Cloak
+U White Knight
+R Wild Evocation
+C Wild Griffin
+U Wurm's Tooth
+C Yavimaya Wurm

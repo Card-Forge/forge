@@ -1,0 +1,177 @@
+[metadata]
+Code=VIS
+Date=1997-02-03
+Name=Visions
+Code2=VI
+Type=Expansion
+BoosterCovers=1
+Booster=11 Common, 3 Uncommon, 1 Rare
+
+[cards]
+R Aku Djinn
+R Anvil of Bogardan
+R Archangel
+U Army Ants
+C Betrayal
+U Blanket of Night
+R Bogardan Phoenix
+U Brass-Talon Chimera
+R Breathstealer's Crypt
+C Breezekeeper
+U Brood of Cockroaches
+C Bull Elephant
+R Chronatog
+R City of Solitude
+C Cloud Elemental
+C Coercion
+U Coral Atoll
+R Corrosion
+U Creeping Mold
+C Crypt Rats
+U Daraja Griffin
+C Dark Privilege
+C Death Watch
+R Desertion
+U Desolation
+R Diamond Kaleidoscope
+U Dormant Volcano
+U Dragon Mask
+U Dream Tides
+C Dwarven Vigilantes
+U Elephant Grass
+R Elkin Lair
+C Elven Cache
+C Emerald Charm
+R Equipoise
+U Everglades
+R Eye of Singularity
+C Fallen Askari
+R Femeref Enchantress
+C Feral Instinct
+C Fireblast
+R Firestorm Hellkite
+R Flooded Shoreline
+R Forbidden Ritual
+U Foreshadow
+C Freewind Falcon
+C Funeral Charm
+C Giant Caterpillar
+U Goblin Recruiter
+C Goblin Swine-Rider
+C Gossamer Chains
+R Griffin Canyon
+R Guiding Spirit
+C Hearth Charm
+U Heat Wave
+U Helm of Awakening
+U Honorable Passage
+C Hope Charm
+U Hulking Cyclops
+C Impulse
+C Infantry Veteran
+C Infernal Harvest
+C Inspiration
+U Iron-Heart Chimera
+C Jamuraan Lion
+U Juju Bubble
+U Jungle Basin
+R Kaervek's Spite
+U Karoo
+R Katabatic Winds
+C Keeper of Kookus
+C King Cheetah
+C Knight of Valor
+C Knight of the Mists
+R Kookus
+U Kyscu Drake
+U Lead-Belly Chimera
+R Lichenthrope
+R Lightning Cloud
+U Longbow Archer
+U Magma Mine
+C Man-o'-War
+U Matopi Golem
+U Miraculous Recovery
+U Mob Mentality
+C Mortal Wound
+U Mundungu
+C Mystic Veil
+R Natural Order
+U Necromancy
+R Necrosavant
+U Nekrataal
+R Ogre Enforcer
+U Ovinomancer
+C Panther Warriors
+C Parapet
+U Peace Talks
+R Phyrexian Marauder
+C Phyrexian Walker
+R Pillar Tombs of Aku
+U Prosperity
+R Pygmy Hippo
+C Python
+U Quicksand
+R Quirion Druid
+C Quirion Ranger
+C Raging Gorilla
+R Rainbow Efreet
+R Relentless Assault
+U Relic Ward
+C Remedy
+C Resistance Fighter
+R Retribution of the Meek
+C Righteous Aura
+R Righteous War
+C River Boa
+C Rock Slide
+R Rowen
+R Sands of Time
+U Scalebane's Elite
+U Shimmering Efreet
+C Shrieking Drake
+U Simoon
+C Sisay's Ring
+R Snake Basket
+C Solfatara
+C Song of Blood
+C Spider Climb
+U Spitting Drake
+R Squandered Resources
+U Stampeding Wildebeests
+R Suleiman's Legacy
+U Summer Bloom
+C Sun Clasp
+U Suq'Ata Assassin
+C Suq'Ata Lancer
+C Talruum Champion
+U Talruum Piper
+C Tar Pit Warrior
+U Teferi's Honor Guard
+R Teferi's Puzzle Box
+R Teferi's Realm
+U Tempest Drake
+R Three Wishes
+U Time and Tide
+U Tin-Wing Chimera
+R Tithe
+C Tremor
+R Triangle of War
+U Uktabi Orangutan
+R Undiscovered Paradise
+C Undo
+C Urborg Mindsucker
+R Vampiric Tutor
+U Vampirism
+C Vanishing
+U Viashino Sandstalker
+R Viashivan Dragon
+C Vision Charm
+C Wake of Vultures
+R Wand of Denial
+C Warrior's Honor
+C Warthog
+U Waterspout Djinn
+C Wicked Reward
+U Wind Shear
+R Zhalfirin Crusader

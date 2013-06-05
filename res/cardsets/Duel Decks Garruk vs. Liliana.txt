@@ -1,0 +1,72 @@
+[metadata]
+Code=DDD
+Date=2009-10-30
+Name=Duel Decks: Garruk vs. Liliana
+
+[cards]
+U Albino Troll
+R Bad Moon
+C Basking Rootwalla
+C Beast
+C Beast
+U Beast Attack
+C Blastoderm
+U Corrupt
+C Deathgreeter
+C Drudge Skeletons
+C Elephant
+U Elephant Guide
+U Enslave
+C Faerie Macabre
+U Fleshbag Marauder
+L Forest
+L Forest
+L Forest
+L Forest
+M Garruk Wildspeaker
+U Genju of the Cedars
+U Genju of the Fens
+U Ghost-Lit Stalker
+C Giant Growth
+U Harmonize
+C Hideous End
+U Howling Banshee
+C Ichor Slick
+U Indrik Stomphowler
+C Invigorate
+U Keening Banshee
+C Krosan Tusker
+C Lignify
+M Liliana Vess
+R Mutilate
+C Nature's Lore
+U Overrun
+C Phyrexian Rager
+R Plated Slagwurm
+C Polluted Mire
+C Rancor
+R Ravenous Baloth
+C Ravenous Rats
+U Rise from the Grave
+R Rude Awakening
+C Serrated Arrows
+C Sign in Blood
+R Skeletal Vampire
+C Slippery Karst
+C Snuff Out
+U Stampeding Wildebeests
+L Swamp
+L Swamp
+L Swamp
+L Swamp
+C Tendrils of Corruption
+U Treetop Village
+C Twisted Abomination
+C Urborg Syphon-Mage
+C Vampire Bats
+C Vicious Hunger
+C Vine Trellis
+U Wall of Bone
+C Wild Mongrel
+U Windstorm
+C Wirewood Savage

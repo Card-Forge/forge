@@ -1,0 +1,69 @@
+[metadata]
+Code=DD2
+Date=2008-11-07
+Name=Duel Decks: Jace vs. Chandra
+
+[cards]
+C AEthersnipe
+U Air Elemental
+R Ancestral Vision
+U Bottle Gnomes
+U Brine Elemental
+M Chandra Nalaar
+C Chartooth Cougar
+C Condescend
+U Cone of Flame
+C Counterspell
+C Daze
+R Demonfire
+C Elemental Shaman
+C Errant Ephemeron
+U Fact or Fiction
+C Fathom Seer
+U Fireball
+C Fireblast
+C Firebolt
+C Fireslinger
+U Flame Javelin
+C Flamekin Brawler
+U Flametongue Kavu
+U Flamewave Invoker
+U Fledgling Mawcor
+U Furnace Whelp
+R Guile
+C Gush
+R Hostility
+C Incinerate
+C Ingot Chewer
+C Inner-Flame Acolyte
+L Island
+L Island
+L Island
+L Island
+M Jace Beleren
+U Keldon Megaliths
+U Magma Jet
+C Man-o'-War
+C Martyr of Frost
+U Mind Stone
+L Mountain
+L Mountain
+L Mountain
+L Mountain
+C Mulldrifter
+C Ophidian
+C Oxidda Golem
+U Pyre Charger
+R Quicksilver Dragon
+R Rakdos Pit Dragon
+C Repulse
+U Riftwing Cloudskate
+C Seal of Fire
+U Slith Firewalker
+C Soulbright Flamekin
+C Spire Golem
+U Terrain Generator
+C Voidmage Apprentice
+U Wall of Deceit
+U Waterspout Djinn
+U Willbender

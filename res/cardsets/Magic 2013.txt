@@ -1,0 +1,259 @@
+[metadata]
+Code=M13
+Date=2012-07-13
+Name=Magic 2013
+Code2=M13
+Type=Core
+BoosterCovers=5
+Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand
+
+[cards]
+U Acidic Slime
+C Ajani's Sunstriker
+M Ajani, Caller of the Pride
+M Akroma's Memorial
+C Angel's Mercy
+U Angelic Benediction
+C Arbor Elf
+C Archaeomancer
+U Arctic Aven
+U Arms Dealer
+C Attended Knight
+U Augur of Bolas
+C Aven Squire
+R Battle of Wits
+C Battleflight Eagle
+C Bladetusk Boar
+U Blood Reckoning
+C Bloodhunter Bat
+C Bloodthrone Vampire
+C Bond Beetle
+R Boundless Realms
+C Bountiful Harvest
+C Canyon Minotaur
+R Captain of the Watch
+C Captain's Call
+R Cathedral of War
+C Centaur Courser
+C Chandra's Fury
+M Chandra, the Firebrand
+U Chronomaton
+U Cleaver Riot
+U Clock of Omens
+R Clone
+U Courtly Provocateur
+U Cower in Fear
+C Craterize
+U Crimson Muckwader
+C Crippling Blight
+U Crusader of Odric
+C Dark Favor
+C Deadly Recluse
+R Diabolic Revelation
+R Disciple of Bolas
+C Disentomb
+C Divination
+C Divine Favor
+C Divine Verdict
+R Door to Nothingness
+C Downpour
+C Dragon Hatchling
+R Dragonskull Summit
+R Drowned Catacomb
+C Duress
+U Duskdale Wurm
+U Duskmantle Prowler
+C Duty-Bound Dead
+M Elderscale Wurm
+U Elixir of Immortality
+R Elvish Archdruid
+C Elvish Visionary
+C Encrust
+C Erase
+C Essence Drain
+C Essence Scatter
+C Evolving Wilds
+C Faerie Invaders
+R Faith's Reward
+C Farseek
+R Fervor
+C Fire Elemental
+R Firewing Phoenix
+U Flames of the Firebrand
+U Flinthoof Boar
+C Fog
+U Fog Bank
+L Forest
+L Forest
+L Forest
+L Forest
+U Fungal Sprouting
+U Furnace Whelp
+U Garruk's Packleader
+M Garruk, Primal Hunter
+U Gem of Becoming
+C Giant Scorpion
+R Gilded Lotus
+R Glacial Fortress
+C Glorious Charge
+C Goblin Arsonist
+C Goblin Battle Jester
+C Griffin Protector
+R Ground Seal
+C Guardian Lions
+C Guardians of Akrasa
+R Hamletback Goliath
+U Harbor Bandit
+C Harbor Serpent
+U Healer of the Pride
+R Hellion Crucible
+C Hydrosurge
+C Index
+R Intrepid Hero
+L Island
+L Island
+L Island
+L Island
+U Jace's Phantasm
+M Jace, Memory Adept
+U Jayemdae Tome
+C Kindled Fury
+U Kitesail
+U Knight of Glory
+U Knight of Infamy
+C Kraken Hatchling
+C Krenko's Command
+R Krenko, Mob Boss
+M Liliana of the Dark Realms
+C Liliana's Shade
+R Magmaquake
+U Mark of Mutiny
+C Mark of the Vampire
+R Master of the Pearl Trident
+C Merfolk of the Pearl Trident
+C Mind Rot
+C Mind Sculpt
+U Mindclaw Shaman
+C Mogg Flunkies
+L Mountain
+L Mountain
+L Mountain
+L Mountain
+C Murder
+R Mutilate
+U Mwonvuli Beast Tracker
+C Naturalize
+R Nefarox, Overlord of Grixis
+C Negate
+M Nicol Bolas, Planeswalker
+U Oblivion Ring
+R Odric, Master Tactician
+M Omniscience
+C Pacifism
+R Phylactery Lich
+U Phyrexian Hulk
+C Pillarfield Ox
+L Plains
+L Plains
+L Plains
+L Plains
+R Planar Cleansing
+C Plummet
+R Predatory Rampage
+C Prey Upon
+U Primal Clay
+C Primal Huntbeast
+M Primordial Hydra
+U Prized Elephant
+U Public Execution
+R Quirion Dryad
+U Rain of Blades
+U Rancor
+C Ranger's Path
+C Ravenous Rats
+C Reckless Brute
+R Redirect
+U Reliquary Tower
+R Reverberate
+U Revive
+U Rewind
+R Rhox Faithmender
+U Ring of Evos Isle
+U Ring of Kalonia
+U Ring of Thune
+U Ring of Valkas
+U Ring of Xathrid
+U Rise from the Grave
+U Roaring Primadox
+R Rootbound Crag
+C Rummaging Goblin
+C Safe Passage
+R Sands of Delirium
+C Scroll Thief
+C Searing Spear
+C Sentinel Spider
+C Serpent's Gift
+U Serra Angel
+M Serra Avatar
+R Serra Avenger
+C Servant of Nefarox
+R Shimian Specter
+C Show of Valor
+C Sign in Blood
+R Silklash Spider
+C Silvercoat Lion
+U Sleep
+R Slumbering Dragon
+C Smelt
+R Spelltwine
+R Sphinx of Uthuun
+C Spiked Baloth
+R Staff of Nin
+R Stormtide Leviathan
+R Stuffy Doll
+M Sublime Archangel
+R Sunpetal Grove
+L Swamp
+L Swamp
+L Swamp
+L Swamp
+U Switcheroo
+U Talrand's Invocation
+R Talrand, Sky Summoner
+R Thragtusk
+M Thundermaw Hellkite
+C Timberpack Wolf
+C Titanic Growth
+U Torch Fiend
+C Tormented Soul
+U Tormod's Crypt
+R Touch of the Eternal
+R Trading Post
+C Tricks of the Trade
+C Trumpet Blast
+C Turn to Slag
+C Unsummon
+U Vampire Nighthawk
+M Vampire Nocturnus
+C Vastwood Gorger
+C Vedalken Entrancer
+U Veilborn Ghoul
+C Vile Rebirth
+R Void Stalker
+U Volcanic Geyser
+C Volcanic Strength
+C Walking Corpse
+C Wall of Fire
+C War Falcon
+U War Priest of Thune
+C Warclamp Mastiff
+C Watercourser
+C Welkin Tern
+C Wild Guess
+C Wind Drake
+R Wit's End
+M Worldfire
+R Xathrid Gorgon
+C Yeva's Forcemage
+R Yeva, Nature's Herald
+C Zombie Goliath

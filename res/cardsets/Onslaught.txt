@@ -1,0 +1,360 @@
+[metadata]
+Code=ONS
+Date=2002-10-07
+Name=Onslaught
+Code2=ON
+Type=Expansion
+BoosterCovers=5
+Booster=11 Common, 3 Uncommon, 1 Rare
+
+[cards]
+U AEther Charge
+C Accursed Centaur
+R Aggravated Assault
+C Airborne Aid
+U Airdrop Condor
+U Akroma's Blessing
+R Akroma's Vengeance
+R Ancestor's Prophet
+R Animal Magnetism
+U Annex
+C Anurid Murkdiver
+U Aphetto Alchemist
+C Aphetto Dredging
+U Aphetto Grifter
+U Aphetto Vulture
+R Arcanis the Omnipotent
+R Artificial Evolution
+C Ascending Aven
+U Astral Slide
+U Aura Extraction
+R Aurification
+U Avarax
+R Aven Brigadier
+U Aven Fateshaper
+U Aven Soulgazer
+C Backslide
+C Barkhide Mauler
+C Barren Moor
+C Battering Craghorn
+C Battlefield Medic
+R Biorhythm
+C Birchlore Rangers
+U Blackmail
+R Blatant Thievery
+R Blistering Firecat
+U Bloodline Shaman
+R Bloodstained Mire
+U Boneknitter
+C Break Open
+C Brightstone Ritual
+U Broodhatch Nantuko
+R Butcher Orgg
+U Cabal Archon
+U Cabal Executioner
+U Cabal Slaver
+R Callous Oppressor
+R Catapult Master
+U Catapult Squad
+U Centaur Glade
+U Chain of Acid
+U Chain of Plasma
+U Chain of Silence
+U Chain of Smog
+U Chain of Vapor
+C Charging Slateback
+C Choking Tethers
+R Circle of Solace
+R Clone
+U Commando Raid
+U Complicate
+R Contested Cliffs
+R Convalescent Care
+R Cover of Darkness
+C Crafty Pathmage
+U Crowd Favorites
+C Crown of Ascension
+C Crown of Awe
+C Crown of Fury
+C Crown of Suspicion
+C Crown of Vigor
+U Crude Rampart
+C Cruel Revival
+R Cryptic Gateway
+U Custody Battle
+C Daru Cavalier
+U Daru Encampment
+C Daru Healer
+C Daru Lancer
+C Daunting Defender
+U Dawning Purist
+R Death Match
+U Death Pulse
+C Defensive Maneuvers
+C Demystify
+C Dirge of Dread
+C Disciple of Grace
+C Disciple of Malice
+U Discombobulate
+U Dispersing Orb
+C Disruptive Pitmage
+C Dive Bomber
+R Doom Cannon
+R Doomed Necromancer
+U Doubtless One
+R Dragon Roost
+R Dream Chisel
+U Dwarven Blastminer
+R Ebonblade Reaper
+U Elven Riders
+C Elvish Guidance
+C Elvish Pathcutter
+C Elvish Pioneer
+U Elvish Scrapper
+R Elvish Vanguard
+C Elvish Warrior
+U Embermage Goblin
+R Enchantress's Presence
+R Endemic Plague
+R Entrails Feaster
+C Erratic Explosion
+U Essence Fracture
+U Everglove Courier
+R Exalted Angel
+U Explosive Vegetation
+U Fade from Memory
+C Fallen Cleric
+R False Cure
+U Feeding Frenzy
+C Festering Goblin
+C Fever Charm
+U Flamestick Courier
+U Fleeting Aven
+R Flooded Strand
+C Foothill Guide
+L Forest
+L Forest
+L Forest
+L Forest
+C Forgotten Cave
+U Frightshroud Courier
+R Future Sight
+R Gangrenous Goliath
+U Ghosthelm Courier
+R Gigapede
+R Glarecaster
+C Glory Seeker
+U Gluttonous Zombie
+U Goblin Burrows
+U Goblin Machinist
+R Goblin Piledriver
+R Goblin Pyromancer
+R Goblin Sharpshooter
+C Goblin Sky Raider
+C Goblin Sledder
+C Goblin Taskmaster
+R Grand Coliseum
+R Grand Melee
+C Grassland Crusader
+R Gratuitous Violence
+C Gravel Slinger
+R Gravespawn Sovereign
+U Graxiplon
+R Grinning Demon
+C Gustcloak Harrier
+C Gustcloak Runner
+R Gustcloak Savior
+U Gustcloak Sentinel
+U Gustcloak Skirmisher
+R Harsh Mercy
+C Haunted Cadaver
+R Head Games
+U Headhunter
+U Heedless One
+R Hystrodon
+C Imagecrafter
+U Improvised Armor
+U Infest
+C Information Dealer
+U Inspirit
+R Insurrection
+U Invigorating Boon
+U Ironfist Crusher
+L Island
+L Island
+L Island
+L Island
+C Ixidor's Will
+R Ixidor, Reality Sculptor
+R Jareth, Leonine Titan
+R Kaboom!
+U Kamahl's Summons
+R Kamahl, Fist of Krosa
+R Krosan Colossus
+U Krosan Groundshaker
+C Krosan Tusker
+C Lavamancer's Skill
+C Lay Waste
+C Leery Fogbeast
+U Lightning Rift
+C Lonely Sandbar
+C Mage's Guile
+R Mana Echoes
+U Meddle
+R Menacing Ogre
+C Misery Charm
+C Mistform Dreamer
+C Mistform Mask
+U Mistform Mutant
+U Mistform Shrieker
+R Mistform Skyreaver
+U Mistform Stalker
+C Mistform Wall
+R Mobilization
+L Mountain
+L Mountain
+L Mountain
+L Mountain
+R Mythic Proportions
+U Nameless One
+C Nantuko Husk
+C Naturalize
+C Nosy Goblin
+U Nova Cleric
+R Oblation
+R Oversold Cemetery
+U Overwhelming Instinct
+C Pacifism
+R Patriarch's Bidding
+U Pearlspear Courier
+R Peer Pressure
+C Piety Charm
+C Pinpoint Avalanche
+L Plains
+L Plains
+L Plains
+L Plains
+R Polluted Delta
+U Primal Boost
+C Profane Prayers
+U Prowling Pangolin
+R Psychic Trance
+R Quicksilver Dragon
+R Ravenous Baloth
+R Read the Runes
+U Reckless One
+U Reminisce
+C Renewed Faith
+U Righteous Cause
+C Riptide Biologist
+U Riptide Chronologist
+R Riptide Entrancer
+R Riptide Laboratory
+R Riptide Replicator
+U Riptide Shapeshifter
+R Risky Move
+R Rorix Bladewing
+R Rotlung Reanimator
+U Rummaging Wizard
+U Run Wild
+C Sage Aven
+C Sandskin
+C Screaming Seahawk
+C Screeching Buzzard
+C Sea's Claim
+U Searing Flesh
+U Seaside Haven
+C Secluded Steppe
+U Serpentine Basilisk
+C Severed Legion
+U Shade's Breath
+U Shaleskin Bruiser
+R Shared Triumph
+C Shepherd of Rot
+U Shieldmage Elder
+C Shock
+R Sigil of the New Dawn
+R Silent Specter
+R Silklash Spider
+R Silvos, Rogue Elemental
+C Skirk Commando
+R Skirk Fire Marshal
+C Skirk Prospector
+U Skittish Valesk
+R Slate of Ancestry
+U Slice and Dice
+C Slipstream Eel
+U Smother
+U Snapping Thragg
+C Snarling Undorak
+C Solar Blast
+U Soulless One
+C Sparksmith
+C Spined Basher
+U Spitfire Handler
+C Spitting Gourna
+C Spurred Wolverine
+C Spy Network
+R Stag Beetle
+R Standardize
+U Starlit Sanctum
+R Starstorm
+R Steely Resolve
+R Strongarm Tactics
+U Sunfire Balm
+R Supreme Inquisitor
+L Swamp
+L Swamp
+L Swamp
+L Swamp
+C Swat
+U Symbiotic Beast
+C Symbiotic Elf
+R Symbiotic Wurm
+C Syphon Mind
+C Syphon Soul
+C Taunting Elf
+R Tempting Wurm
+R Tephraderm
+U Thoughtbound Primoc
+U Thrashing Mudspawn
+U Threaten
+U Thunder of Hooves
+U Towering Baloth
+R Trade Secrets
+C Tranquil Thicket
+C Treespring Lorian
+R Tribal Golem
+U Tribal Unity
+C Trickery Charm
+R True Believer
+R Undead Gladiator
+R Unholy Grotto
+C Unified Strike
+U Venomspout Brackus
+R Visara the Dreadful
+C Vitality Charm
+R Voice of the Woods
+R Voidmage Prodigy
+U Walking Desecration
+U Wall of Mulch
+C Wave of Indifference
+R Weathered Wayfarer
+R Weird Harvest
+C Wellwisher
+R Wheel and Deal
+U Whipcorder
+R Windswept Heath
+C Wirewood Elf
+C Wirewood Herald
+U Wirewood Lodge
+C Wirewood Pride
+C Wirewood Savage
+U Withering Hex
+R Wooded Foothills
+R Words of War
+R Words of Waste
+R Words of Wilding
+R Words of Wind
+R Words of Worship
+C Wretched Anurid

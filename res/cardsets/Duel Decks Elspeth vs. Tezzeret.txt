@@ -1,0 +1,85 @@
+[metadata]
+Code=DDF
+Date=2010-09-03
+Name=Duel Decks: Elspeth vs. Tezzeret
+
+[cards]
+C AEther Spellbomb
+U Abolish
+R Angel of Salvation
+C Arcbound Worker
+U Argivian Restoration
+U Assembly-Worker
+C Blinding Beam
+C Burrenton Bombardier
+R Catapult Master
+U Celestial Crusader
+C Clockwork Condor
+U Clockwork Hydra
+C Conclave Equenaut
+U Conclave Phalanx
+U Contagion Clasp
+R Crusade
+C Darksteel Citadel
+U Daru Encampment
+C Echoing Truth
+U Elite Vanguard
+U Elixir of Immortality
+M Elspeth, Knight-Errant
+U Energy Chamber
+U Esperzoa
+U Everflowing Chalice
+C Faerie Mechanist
+U Foil
+C Frogmite
+C Glory Seeker
+C Goldmeadow Harrier
+C Infantry Veteran
+L Island
+L Island
+L Island
+L Island
+C Journey to Nowhere
+U Juggernaut
+C Kabira Crossroads
+C Kemba's Skyguard
+U Kor Aeronaut
+C Kor Hookmaster
+C Kor Skyfisher
+R Loyal Sentry
+R Master of Etherium
+C Mighty Leap
+U Mishra's Factory
+C Moonglove Extract
+C Mosquito Guard
+R Pentavus
+L Plains
+L Plains
+L Plains
+L Plains
+U Qumulox
+C Raise the Alarm
+C Razor Barrier
+R Razormane Masticore
+U Runed Servitor
+R Rustic Clachan
+U Saltblast
+U Seasoned Marshal
+C Seat of the Synod
+U Serrated Biskelion
+C Silver Myr
+U Stalking Stones
+R Steel Overseer
+C Steel Wall
+U Stormfront Riders
+C Sunlance
+U Swell of Courage
+U Swords to Plowshares
+U Synod Centurion
+C Temple Acolyte
+M Tezzeret the Seeker
+U Thirst for Knowledge
+C Thoughtcast
+C Trinket Mage
+U Trip Noose
+R Triskelion

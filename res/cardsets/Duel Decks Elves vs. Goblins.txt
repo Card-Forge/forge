@@ -1,0 +1,73 @@
+[metadata]
+Code=EVG
+Date=2007-11-16
+Name=Duel Decks: Elves vs. Goblins
+Code2=EVG
+Type=Other
+
+[cards]
+U Akki Coalflinger
+R Allosaurus Rider
+R Ambush Commander
+U Boggart Shenanigans
+R Clickslither
+C Elemental
+C Elf Warrior
+C Elvish Eulogist
+U Elvish Harbinger
+U Elvish Promenade
+C Elvish Warrior
+C Emberwilde Augur
+U Flamewave Invoker
+L Forest
+L Forest
+L Forest
+L Forest
+C Forgotten Cave
+U Gempalm Incinerator
+U Gempalm Strider
+C Giant Growth
+C Goblin
+U Goblin Burrows
+C Goblin Cohort
+U Goblin Matron
+U Goblin Ringleader
+C Goblin Sledder
+U Goblin Warchief
+U Harmonize
+U Heedless One
+R Ib Halfheart, Goblin Tactician
+U Imperious Perfect
+C Llanowar Elves
+C Lys Alana Huntmaster
+U Mogg Fanatic
+C Mogg War Marshal
+C Moonglove Extract
+L Mountain
+L Mountain
+L Mountain
+L Mountain
+C Mudbutton Torchrunner
+C Raging Goblin
+U Reckless One
+R Siege-Gang Commander
+U Skirk Drill Sergeant
+R Skirk Fire Marshal
+C Skirk Prospector
+C Skirk Shaman
+R Slate of Ancestry
+C Spitting Earth
+C Stonewood Invoker
+U Sylvan Messenger
+U Tar Pitcher
+C Tarfire
+C Timberwatch Elf
+C Tranquil Thicket
+R Voice of the Woods
+C Wellwisher
+C Wildsize
+C Wirewood Herald
+U Wirewood Lodge
+U Wirewood Symbiote
+C Wood Elves
+U Wren's Run Vanquisher

@@ -1,0 +1,155 @@
+[metadata]
+Code=LGN
+Date=2003-02-03
+Name=Legions
+Code2=LE
+Type=Expansion
+BoosterCovers=3
+Booster=11 Common, 3 Uncommon, 1 Rare
+
+[cards]
+U Akroma's Devoted
+R Akroma, Angel of Wrath
+U Aphetto Exterminator
+C Aven Envoy
+C Aven Redeemer
+U Aven Warhawk
+R Bane of the Living
+R Beacon of Destiny
+C Berserk Murlodont
+U Blade Sliver
+C Blood Celebrant
+C Bloodstoke Howler
+U Branchsnap Lorian
+U Brontotherium
+R Brood Sliver
+R Caller of the Claw
+U Canopy Crawler
+R Celestial Gatekeeper
+C Cephalid Pathmage
+R Chromeshell Crab
+R Clickslither
+U Cloudreach Cavalry
+U Corpse Harvester
+C Covert Operative
+C Crested Craghorn
+U Crookclaw Elder
+C Crypt Sliver
+U Dark Supplicant
+U Daru Mender
+C Daru Sanctifier
+C Daru Stinger
+U Deathmark Prelate
+R Defender of the Order
+C Defiant Elf
+C Deftblade Elite
+R Dermoplasm
+R Dreamborn Muse
+R Drinker of Sorrow
+C Dripping Dead
+U Earthblighter
+C Echo Tracer
+R Elvish Soultiller
+C Embalmed Brawler
+U Enormous Baloth
+R Essence Sliver
+R Feral Throwback
+C Flamewave Invoker
+U Frenetic Raptor
+C Fugitive Wizard
+C Gempalm Avenger
+U Gempalm Incinerator
+C Gempalm Polluter
+U Gempalm Sorcerer
+U Gempalm Strider
+R Ghastly Remains
+C Glintwing Invoker
+C Glowering Rogon
+R Glowrider
+U Goblin Assassin
+U Goblin Clearcutter
+U Goblin Dynamo
+C Goblin Firebug
+R Goblin Goon
+C Goblin Grappler
+C Goblin Lookout
+C Goblin Turncoat
+R Graveborn Muse
+R Havoc Demon
+R Hollow Specter
+C Hundroog
+C Hunter Sliver
+R Imperial Hellkite
+C Infernal Caretaker
+C Keeneye Aven
+R Keeper of the Nine Gales
+R Kilnmouth Dragon
+R Krosan Cloudscraper
+C Krosan Vorine
+R Lavaborn Muse
+U Liege of the Axe
+C Lowland Tracker
+C Macetail Hystrodon
+R Magma Sliver
+U Master of the Veil
+C Merchant of Secrets
+C Mistform Seaswift
+C Mistform Sliver
+R Mistform Ultimus
+U Mistform Wakecaster
+C Nantuko Vigilante
+C Needleshot Gourna
+U Noxious Ghoul
+C Patron of the Wild
+R Phage the Untouchable
+R Planar Guide
+C Plated Sliver
+R Primal Whisperer
+U Primoc Escapee
+C Quick Sliver
+U Ridgetop Raptor
+R Riptide Director
+R Riptide Mangler
+R Rockshard Elemental
+U Root Sliver
+R Scion of Darkness
+R Seedborn Muse
+C Shaleskin Plower
+U Shifting Sliver
+C Skinthinner
+R Skirk Alarmist
+U Skirk Drill Sergeant
+C Skirk Marauder
+C Skirk Outrider
+C Smokespew Invoker
+C Sootfeather Flock
+U Spectral Sliver
+C Starlight Invoker
+U Stoic Champion
+C Stonewood Invoker
+R Sunstrike Legionnaire
+U Swooping Talon
+R Synapse Sliver
+C Timberwatch Elf
+U Totem Speaker
+R Toxin Sliver
+R Tribal Forcemage
+R Unstable Hulk
+R Vexing Beetle
+C Vile Deacon
+C Voidmage Apprentice
+U Wall of Deceit
+C Wall of Hope
+U Warbreak Trumpeter
+U Ward Sliver
+U Warped Researcher
+R Weaver of Lies
+C Whipgrass Entangler
+U White Knight
+U Willbender
+R Windborn Muse
+C Wingbeat Warrior
+U Wirewood Channeler
+U Wirewood Hivemaster
+U Withered Wretch
+U Zombie Brute

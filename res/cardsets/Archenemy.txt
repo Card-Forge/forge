@@ -1,0 +1,208 @@
+[metadata]
+Code=ARC
+Date=2010-06-18
+Name=Archenemy
+Code2=ARC
+Type=Other
+
+[cards]
+C A Display of My Dark Power
+C AEther Spellbomb
+C Agony Warp
+C All Shall Smolder in My Wake
+C All in Good Time
+C Approach My Molten Realm
+C Architects of Will
+C Armadillo Cloak
+U Artisan of Kozilek
+R Avatar of Discord
+R Avatar of Woe
+C Azorius Signet
+C Barren Moor
+C Battering Craghorn
+U Batwing Brume
+R Beacon of Unrest
+C Behold the Power of Destruction
+U Bituminous Blast
+C Bog Witch
+C Branching Bolt
+U Breath of Darigaaz
+R Cemetery Reaper
+R Chameleon Colossus
+C Chandra's Outrage
+C Choose Your Champion
+C Colossal Might
+U Corpse Connoisseur
+C Dance, Pathetic Marionette
+C Dimir Signet
+C Dragon Breath
+C Dragon Fodder
+U Dragon Whelp
+U Dragonspeaker Shaman
+U Dreamstone Hedron
+C Dregscape Zombie
+P Drench the Soil in Their Blood
+R Duplicant
+C Embrace My Diabolical Vision
+C Ethersworn Shieldmage
+U Everflowing Chalice
+C Every Hope Shall Vanish
+C Every Last Vestige Shall Rot
+C Evil Comes to Fruition
+R Extractor Demon
+C Feed the Machine
+R Feral Hydra
+C Fertilid
+C Festering Goblin
+C Fieldmist Borderpost
+C Fierce Empath
+U Fireball
+U Fires of Yavimaya
+R Flameblast Dragon
+C Fog
+L Forest
+L Forest
+L Forest
+R Forgotten Ancient
+U Furnace Whelp
+C Gathan Raiders
+C Gleeful Sabotage
+U Graypelt Refuge
+C Gruul Signet
+U Harmonize
+R Hellkite Charger
+U Heroes' Reunion
+U Hunting Moa
+C I Bask in Your Silent Awe
+C I Call on the Ancient Magics
+C I Delight in Your Convulsions
+C I Know All, I See All
+C Ignite the Cloneforge!
+R Imperial Hellkite
+P Imprison This Insolent Wretch
+U Incremental Blight
+C Infectious Horror
+U Inferno Trap
+U Infest
+C Into the Earthen Maw
+C Introductions Are in Order
+L Island
+L Island
+L Island
+U Juggernaut
+R Kaervek the Merciless
+R Kamahl, Fist of Krosa
+U Kazandu Refuge
+C Khalni Garden
+R Kilnmouth Dragon
+C Know Naught but Fire
+C Krosan Tusker
+U Krosan Verge
+C Leaf Gilder
+R Leonin Abunas
+U Lightning Greaves
+U Llanowar Reborn
+R Lodestone Golem
+C Look Skyward and Despair
+R Magister Sphinx
+U Makeshift Mannequin
+R March of the Machines
+R Master Transmuter
+C May Civilization Collapse
+R Memnarch
+U Metallurgeon
+C Mistvein Borderpost
+R Molimo, Maro-Sorcerer
+C Mortal Flesh Is Weak
+R Mosswort Bridge
+L Mountain
+L Mountain
+L Mountain
+C My Crushing Masterstroke
+C My Genius Knows No Bounds
+C My Undead Horde Awakens
+C My Wish Is Your Command
+U Nantuko Monastery
+C Nature Demands an Offering
+C Nature Shields Its Own
+C Nothing Can Stop Me Now
+C Obelisk of Esper
+C Oblivion Ring
+C Only Blood Ends Your Nightmares
+C Pale Recluse
+U Path to Exile
+P Perhaps You've Met My Cohort
+L Plains
+L Plains
+P Plots That Span Centuries
+C Plummet
+R Primal Command
+C Rakdos Carnarium
+U Rakdos Guildmage
+C Rakdos Signet
+C Rancor
+C Realms Befitting My Majesty
+U Reanimate
+U Reassembling Skeleton
+C Roots of All Evil
+C Rotted Ones, Lay Siege
+R Ryusei, the Falling Star
+C Sakura-Tribe Elder
+C Sanctum Gargoyle
+U Savage Twister
+R Scion of Darkness
+C Secluded Steppe
+C Seething Song
+U Selesnya Guildmage
+C Shinen of Life's Roar
+U Shriekmaw
+C Sign in Blood
+C Skirk Commando
+C Skirk Marauder
+U Skullcage
+U Sorcerer's Strongbox
+C Spider Umbra
+U Spin into Myth
+U Sun Droplet
+R Sundering Titan
+C Surrender Your Thoughts
+L Swamp
+L Swamp
+L Swamp
+U Synod Centurion
+U Synod Sanctum
+R Taurean Mauler
+C Terminate
+C Terramorphic Expanse
+C The Dead Shall Serve
+C The Fate of the Flammable
+C The Iron Guardian Stirs
+C The Pieces Are Coming Together
+C The Very Soil Shall Shake
+R Thelonite Hermit
+U Thran Dynamo
+U Thunderstaff
+C Tooth, Claw, and Tail
+U Torrent of Souls
+C Tranquil Thicket
+C Twisted Abomination
+R Two-Headed Dragon
+U Unbender Tine
+C Unmake
+C Urborg Syphon-Mage
+R Vampiric Dragon
+R Verdeloth the Ancient
+U Vitu-Ghazi, the City-Tree
+U Volcanic Fallout
+C Wall of Roots
+U Watchwolf
+U Wax
+C Which of You Burns Brightest?
+C Wickerbough Elder
+U Yavimaya Dryad
+C Your Fate Is Thrice Sealed
+P Your Inescapable Doom
+C Your Puny Minds Cannot Fathom
+C Your Will Is Not Your Own
+U Zombie Infestation
+U Zombify

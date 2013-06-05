@@ -1,0 +1,284 @@
+[metadata]
+Code=RTR
+Date=2012-10-05
+Name=Return to Ravnica
+Code2=RTR
+Type=Expansion
+BoosterCovers=5
+Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand
+
+[cards]
+R Abrupt Decay
+C Aerial Predation
+M Angel of Serenity
+C Annihilating Fire
+U Aquus Steed
+R Archon of the Triumvirate
+U Archweaver
+M Armada Wurm
+C Armory Guard
+U Arrest
+R Ash Zealot
+U Assassin's Strike
+C Auger Spree
+C Avenging Arrow
+C Axebane Guardian
+C Axebane Stag
+R Azor's Elocutors
+C Azorius Arrester
+U Azorius Charm
+C Azorius Guildgate
+U Azorius Justiciar
+U Azorius Keyrune
+C Batterhorn
+U Bazaar Krovod
+C Bellows Lizard
+U Blistercoil Weird
+R Blood Crypt
+U Bloodfray Giant
+U Blustersquall
+U Brushstrider
+U Call of the Conclave
+C Cancel
+R Carnival Hellsteed
+C Catacomb Slug
+C Centaur Healer
+C Centaur's Herald
+R Chaos Imps
+C Chemister's Trick
+C Chorus of Might
+R Chromatic Lantern
+C Chronic Flooding
+U Civic Saber
+C Cobblebrute
+U Codex Shredder
+R Collective Blessing
+C Common Bond
+C Concordia Pegasus
+R Conjured Currency
+R Corpsejack Menace
+R Counterflux
+C Coursers' Accord
+C Cremate
+C Crosstown Courier
+R Cryptborn Horror
+R Cyclonic Rift
+C Daggerdrome Imp
+U Dark Revenant
+C Dead Reveler
+R Deadbridge Goliath
+R Death's Presence
+R Deathrite Shaman
+R Desecration Demon
+C Destroy the Evidence
+R Detention Sphere
+C Deviant Glee
+C Dispel
+C Doorkeeper
+C Downsize
+C Drainpipe Vermin
+C Dramatic Rescue
+R Dreadbore
+U Dreg Mangler
+C Drudge Beetle
+C Druid's Deliverance
+U Dryad Militant
+C Dynacharge
+C Electrickery
+M Epic Experiment
+C Essence Backlash
+C Ethereal Armor
+C Explosive Impact
+C Eyes in the Skies
+U Faerie Impostor
+U Fall of the Gavel
+U Fencing Ace
+R Firemind's Foresight
+L Forest
+L Forest
+L Forest
+L Forest
+L Forest
+C Frostburn Weird
+C Gatecreeper Vine
+C Giant Growth
+U Gobbling Ooze
+C Goblin Electromancer
+U Goblin Rally
+U Golgari Charm
+U Golgari Decoy
+C Golgari Guildgate
+U Golgari Keyrune
+C Golgari Longlegs
+C Gore-House Chainwalker
+R Grave Betrayal
+C Grim Roustabout
+C Grisly Salvage
+R Grove of the Guardian
+R Growing Ranks
+R Guild Feud
+U Guttersnipe
+R Hallowed Fountain
+R Havoc Festival
+U Hellhole Flailer
+U Heroes' Reunion
+C Horncaller's Chant
+U Hover Barrier
+C Hussar Patrol
+R Hypersonic Dragon
+C Inaction Injunction
+C Inspiration
+L Island
+L Island
+L Island
+L Island
+L Island
+C Isperia's Skywatch
+M Isperia, Supreme Judge
+U Izzet Charm
+C Izzet Guildgate
+U Izzet Keyrune
+U Izzet Staticaster
+M Jace, Architect of Thought
+R Jarad's Orders
+M Jarad, Golgari Lich Lord
+U Judge's Familiar
+C Keening Apparition
+C Knightly Valor
+U Korozda Guildmage
+C Korozda Monitor
+C Launch Party
+C Lobber Crew
+R Lotleth Troll
+R Loxodon Smiter
+U Lyev Skyknight
+R Mana Bloom
+R Martial Law
+R Mercurial Chemister
+C Mind Rot
+U Minotaur Aggressor
+R Mizzium Mortars
+C Mizzium Skin
+L Mountain
+L Mountain
+L Mountain
+L Mountain
+L Mountain
+M Necropolis Regent
+U New Prahv Guildmage
+M Niv-Mizzet, Dracogenius
+U Nivix Guildmage
+R Nivmagus Elemental
+U Oak Street Innkeeper
+C Ogre Jailbreaker
+R Overgrown Tomb
+R Pack Rat
+R Palisade Giant
+C Paralyzing Grasp
+C Perilous Shadow
+U Phantom General
+R Pithing Needle
+L Plains
+L Plains
+L Plains
+L Plains
+L Plains
+R Precinct Captain
+U Psychic Spiral
+C Pursuit of Flight
+U Pyroconvergence
+U Racecourse Fury
+U Rakdos Cackler
+U Rakdos Charm
+C Rakdos Guildgate
+U Rakdos Keyrune
+U Rakdos Ragemutt
+U Rakdos Ringleader
+C Rakdos Shred-Freak
+M Rakdos's Return
+M Rakdos, Lord of Riots
+R Rest in Peace
+R Righteous Authority
+U Risen Sanctuary
+U Rites of Reaping
+U Rix Maadi Guildmage
+U Rogue's Passage
+C Rootborn Defenses
+C Rubbleback Rhino
+C Runewing
+U Savage Surge
+C Search Warrant
+R Search the City
+U Security Blockade
+U Seek the Horizon
+U Selesnya Charm
+C Selesnya Guildgate
+U Selesnya Keyrune
+C Selesnya Sentry
+C Seller of Songbirds
+C Sewer Shambler
+U Shrieking Affliction
+C Skull Rend
+U Skyline Predator
+U Skymark Roc
+R Slaughter Games
+U Slime Molding
+U Slitherhead
+C Sluiceway Scorpion
+U Slum Reaper
+U Soul Tithe
+U Soulsworn Spirit
+C Spawn of Rix Maadi
+U Sphere of Safety
+R Sphinx of the Chimes
+M Sphinx's Revelation
+C Splatter Thug
+C Stab Wound
+C Stealer of Secrets
+R Steam Vents
+C Stonefare Crocodile
+U Street Spasm
+U Street Sweeper
+C Sundering Growth
+C Sunspire Griffin
+R Supreme Verdict
+C Survey the Wreckage
+L Swamp
+L Swamp
+L Swamp
+L Swamp
+L Swamp
+C Swift Justice
+U Syncopate
+U Tablet of the Guilds
+U Tavern Swindler
+U Teleportal
+R Temple Garden
+C Tenement Crasher
+C Terrus Wurm
+U Thoughtflare
+U Thrill-Kill Assassin
+C Tower Drake
+C Towering Indrik
+C Trained Caracal
+C Traitorous Instinct
+C Transguild Promenade
+U Treasured Find
+C Trestle Troll
+C Trostani's Judgment
+M Trostani, Selesnya's Voice
+U Ultimate Price
+R Underworld Connections
+C Urban Burgeoning
+M Utvara Hellkite
+U Vandalblast
+C Vassal Soul
+C Viashino Racketeer
+U Vitu-Ghazi Guildmage
+C Voidwielder
+R Volatile Rig
+M Vraska the Unseen
+R Wayfaring Temple
+R Wild Beastmaster
+M Worldspine Wurm
+U Zanikev Locust

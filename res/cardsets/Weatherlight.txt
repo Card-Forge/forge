@@ -1,0 +1,177 @@
+[metadata]
+Code=WTH
+Date=1997-06-09
+Name=Weatherlight
+Code2=WL
+Type=Expansion
+BoosterCovers=1
+Booster=11 Common, 3 Uncommon, 1 Rare
+
+[cards]
+U AEther Flash
+U Abduction
+R Abeyance
+C Abjure
+R Aboroth
+C Abyssal Gatekeeper
+U Agonizing Memories
+R Alabaster Dragon
+C Alms
+R Ancestral Knowledge
+C Angelic Renewal
+C Apathy
+U Arctic Wolves
+C Ardent Militia
+U Argivian Find
+U Argivian Restoration
+U Aura of Silence
+R Avizoa
+U Barishi
+C Barrow Ghoul
+C Benalish Infantry
+C Benalish Knight
+C Benalish Missionary
+C Betrothed of Fire
+C Bloodrock Cyclops
+C Blossoming Wreath
+C Bogardan Firefiend
+C Boiling Blood
+R Bone Dancer
+R Bosium Strip
+C Briar Shield
+R Bubble Matrix
+U Buried Alive
+R Call of the Wild
+U Chimeric Sphere
+C Choking Vines
+U Cinder Giant
+C Cinder Wall
+U Circling Vultures
+U Cloud Djinn
+C Coils of the Medusa
+U Cone of Flame
+R Debt of Loyalty
+R Dense Foliage
+U Desperate Gambit
+U Dingus Staff
+C Disrupt
+R Doomsday
+U Downdraft
+C Duskrider Falcon
+C Dwarven Berserker
+R Dwarven Thaumaturgist
+C Empyrial Armor
+R Ertai's Familiar
+U Fallow Wurm
+U Familiar Ground
+C Fatal Blow
+R Fervor
+U Festering Evil
+C Fire Whip
+R Firestorm
+C Fit of Rage
+C Fledgling Djinn
+C Flux
+C Fog Elemental
+U Foriysian Brigade
+R Fungus Elemental
+U Gaea's Blessing
+R Gallowbraid
+U Gemstone Mine
+U Gerrard's Wisdom
+R Goblin Bomb
+U Goblin Grenadiers
+C Goblin Vandal
+C Guided Strike
+C Harvest Wurm
+C Haunting Misery
+R Heart of Bogardan
+R Heat Stroke
+C Heavy Ballista
+U Hidden Horror
+U Hurloon Shaman
+R Infernal Tribute
+R Inner Sanctum
+U Jabari's Banner
+C Jangling Automaton
+C Kithkin Armor
+U Lava Hounds
+C Lava Storm
+R Liege of the Hollows
+U Llanowar Behemoth
+C Llanowar Druid
+C Llanowar Sentinel
+R Lotus Vale
+C Mana Chains
+R Mana Web
+C Manta Ray
+R Maraxus of Keld
+U Master of Arms
+C Merfolk Traders
+C Mind Stone
+U Mischievous Poltergeist
+U Mistmoon Griffin
+R Morinfen
+R Mwonvuli Ooze
+C Nature's Kiss
+R Nature's Resurgence
+U Necratog
+U Noble Benefactor
+R Null Rod
+U Odylic Wraith
+C Ophidian
+U Orcish Settlers
+R Paradigm Shift
+R Peacekeeper
+R Pendrell Mists
+U Phantom Warrior
+C Phantom Wings
+U Phyrexian Furnace
+R Psychic Vortex
+C Razortooth Rats
+C Redwood Treefolk
+U Relearn
+U Revered Unicorn
+U Roc Hatchling
+C Rogue Elephant
+C Sage Owl
+C Sawtooth Ogre
+R Scorched Ruins
+R Serenity
+U Serra's Blessing
+U Serrated Biskelion
+C Shadow Rider
+C Shattered Crypt
+C Soul Shepherd
+R Southern Paladin
+C Spinning Darkness
+U Steel Golem
+U Strands of Night
+U Straw Golem
+C Striped Bears
+U Sylvan Hierophant
+R Tariff
+U Teferi's Veil
+C Tendrils of Despair
+U Thran Forge
+R Thran Tome
+C Thunderbolt
+R Thundermare
+U Timid Drake
+C Tolarian Drake
+R Tolarian Entrancer
+R Tolarian Serpent
+U Touchstone
+R Tranquil Grove
+C Uktabi Efreet
+R Urborg Justice
+R Urborg Stalker
+U Veteran Explorer
+C Vitalize
+U Vodalian Illusionist
+U Volunteer Reserves
+R Wave of Terror
+R Well of Knowledge
+R Winding Canyons
+R Xanthic Statue
+C Zombie Scavengers

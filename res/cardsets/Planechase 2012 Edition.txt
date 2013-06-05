@@ -1,0 +1,205 @@
+[metadata]
+Code=PC2
+Date=2012-06-01
+Name=Planechase 2012 Edition
+Code2=PC2
+Type=Other
+
+[cards]
+C Akoum
+U Arc Trail
+C Aretopolis
+C Armillary Sphere
+U Armored Griffin
+C Assassinate
+C Astral Arena
+C Augury Owl
+C Aura Gnarlid
+C Auramancer
+U Auratouched Mage
+R Awakening Zone
+U Baleful Strix
+U Beast Within
+U Beetleback Chief
+U Bituminous Blast
+U Bloodbraid Elf
+C Bloodhill Bastion
+U Boar Umbra
+C Bramble Elemental
+U Brindle Shoat
+U Brutalizer Exarch
+C Cadaver Imp
+C Cage of Hands
+C Cancel
+R Celestial Ancient
+C Chaotic AEther
+U Concentrate
+C Cultivate
+R Dark Hatchling
+C Deny Reality
+C Dimir Aqueduct
+C Dimir Infiltrator
+U Dowsing Shaman
+R Dragonlair Spider
+U Dreampod Druid
+C Edge of Malacol
+R Elderwood Scion
+R Enigma Sphinx
+U Enlisted Wurm
+C Erratic Explosion
+R Etherium-Horn Sorcerer
+R Exotic Orchard
+U Farsight Mask
+U Felidar Umbra
+C Fiery Conclusion
+C Fiery Fall
+U Fires of Yavimaya
+C Flayer Husk
+C Fling
+L Forest
+L Forest
+L Forest
+L Forest
+L Forest
+L Forest
+C Fractured Powerstone
+C Furnace Layer
+U Fusion Elemental
+C Gavony
+U Ghostly Prison
+C Glen Elendra
+R Glen Elendra Liege
+U Gluttonous Slime
+C Grand Ossuary
+U Graypelt Refuge
+C Grove of the Dreampods
+C Gruul Turf
+U Guard Gomazoa
+C Hedron Fields of Agadeem
+R Hellion Eruption
+U Hellkite Hatchling
+R Higure, the Still Wind
+C Hissing Iguanar
+C Hyena Umbra
+U Illusory Angel
+R Indrik Umbra
+R Ink-Eyes, Servant of Oni
+U Inkfathom Witch
+C Interplanar Tunnel
+L Island
+L Island
+L Island
+L Island
+L Island
+C Jund
+U Jwar Isle Refuge
+U Kathari Remnant
+U Kazandu Refuge
+C Kessig
+C Khalni Garden
+C Kharasha Foothills
+C Kilnspire District
+R Kor Spiritdancer
+M Krond the Dawn-Clad
+U Krosan Verge
+C Lair of the Ashen Idol
+R Last Stand
+C Liliana's Specter
+U Lumberknot
+M Maelstrom Wanderer
+U Mammoth Umbra
+U Mark of Mutiny
+R Mass Mutiny
+C Mistblade Shinobi
+R Mitotic Slime
+C Morphic Tide
+C Mount Keralia
+L Mountain
+L Mountain
+L Mountain
+L Mountain
+C Mudbutton Torchrunner
+C Mutual Epiphany
+R Mycoloth
+C Nephalia
+C Nest Invader
+C Ninja of the Deep Hours
+U Noggle Ransacker
+C Norn's Dominion
+C Nullmage Advocate
+C Okiba-Gang Shinobi
+C Onakke Catacomb
+C Ondu Giant
+C Orochi Colony
+C Orzhova
+U Overrun
+C Penumbra Spider
+U Peregrine Drake
+L Plains
+L Plains
+L Plains
+L Plains
+L Plains
+C Planewide Disaster
+U Pollenbright Wings
+C Prahv
+R Predatory Urge
+R Preyseizer Dragon
+C Primal Plasma
+C Quicksilver Sea
+C Quiet Disrepair
+R Quietus Spike
+C Rancor
+C Reality Shaping
+U Rivals' Duel
+C Rupture Spire
+U Sai of the Shinobi
+R Sakashima's Student
+C See Beyond
+C Selesnya Loft Gardens
+C Selesnya Sanctuary
+U Shardless Agent
+C Shimmering Grotto
+R Sigil of the Empty Throne
+R Silent-Blade Oni
+C Silhana Ledgewalker
+U Skarrg, the Rage Pits
+C Skullsnatcher
+C Snake Umbra
+C Spatial Merging
+U Spirit Mantle
+R Stairs to Infinity
+C Stensia
+R Sunken Hope
+L Swamp
+L Swamp
+L Swamp
+L Swamp
+L Swamp
+U Tainted Isle
+C Takenuma
+C Talon Gates
+C Terramorphic Expanse
+C The Zephyr Maze
+C Thorn-Thrash Viashino
+U Thran Golem
+R Three Dreams
+U Throat Slitter
+M Thromok the Insatiable
+U Thunder-Thrash Elder
+C Time Distortion
+C Tormented Soul
+C Trail of the Mage-Rings
+C Truga Jungle
+C Tukatongue Thallid
+M Vela the Night-Clad
+C Viridian Emissary
+U Vitu-Ghazi, the City-Tree
+U Vivid Creek
+U Walker of Secret Ways
+U Wall of Blossoms
+U Wall of Frost
+R Warstorm Surge
+R Whirlpool Warrior
+U Whispersilk Cloak
+C Windriddle Palaces

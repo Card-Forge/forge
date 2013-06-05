@@ -1,0 +1,153 @@
+[metadata]
+Code=STH
+Date=1998-03-02
+Name=Stronghold
+Code2=SH
+Type=Expansion
+BoosterCovers=1
+Booster=11 Common, 3 Uncommon, 1 Rare
+
+[cards]
+U Acidic Sliver
+R Amok
+R Awakening
+C Bandage
+U Bottomless Pit
+C Brush with Death
+U Bullwhip
+R Burgeoning
+U Calming Licid
+C Cannibalize
+R Carnassid
+C Change of Heart
+C Cloud Spirit
+U Constant Mists
+U Contemplation
+C Contempt
+C Conviction
+U Convulsing Licid
+U Corrupting Licid
+C Craven Giant
+C Crossbow Ambush
+R Crovax the Cursed
+U Crystalline Sliver
+U Dauthi Trapper
+C Death Stroke
+R Dream Halls
+C Dream Prowler
+C Duct Crawler
+C Dungeon Shade
+U Elven Rite
+C Endangered Armodon
+R Ensnaring Bridge
+R Evacuation
+U Fanning the Flames
+U Flame Wave
+C Fling
+C Flowstone Blade
+U Flowstone Hellion
+R Flowstone Mauler
+C Flowstone Shambler
+C Foul Imp
+C Furnace Spirit
+U Gliding Licid
+R Grave Pact
+C Hammerhead Shark
+U Heartstone
+U Heat of Battle
+R Hermit Druid
+U Hesitation
+U Hibernation Sliver
+R Hidden Retreat
+C Honor Guard
+R Horn of Greed
+U Hornet Cannon
+R Intruder Alarm
+R Invasion Plans
+R Jinxed Ring
+C Lab Rats
+U Lancers en-Kor
+C Leap
+C Lowland Basilisk
+C Mana Leak
+U Mask of the Mimic
+U Megrim
+C Mind Games
+U Mind Peel
+R Mindwarper
+C Mob Justice
+C Mogg Bombers
+C Mogg Flunkies
+R Mogg Infestation
+U Mogg Maniac
+C Morgue Thrull
+R Mortuary
+R Mox Diamond
+C Mulch
+C Nomads en-Kor
+C Overgrowth
+R Portcullis
+U Primal Rage
+C Provoke
+R Pursuit of Knowledge
+C Rabid Rats
+U Ransack
+U Rebound
+R Reins of Power
+R Revenant
+R Rolling Stones
+R Ruination
+R Sacred Ground
+C Samite Blessing
+U Scapegoat
+C Seething Anger
+C Serpent Warrior
+R Shaman en-Kor
+R Shard Phoenix
+U Shifting Wall
+C Shock
+C Sift
+R Silver Wyvern
+R Skeleton Scavengers
+C Skyshroud Archer
+C Skyshroud Falcon
+C Skyshroud Troopers
+R Sliver Queen
+C Smite
+R Soltari Champion
+R Spike Breeder
+C Spike Colony
+U Spike Feeder
+U Spike Soldier
+C Spike Worker
+C Spindrift Drake
+U Spined Sliver
+C Spined Wurm
+C Spirit en-Kor
+R Spitting Hydra
+R Stronghold Assassin
+U Stronghold Taskmaster
+R Sword of the Chosen
+U Temper
+U Tempting Licid
+R Thalakos Deceiver
+C Tidal Surge
+C Tidal Warrior
+C Torment
+C Tortured Existence
+C Venerable Monk
+R Verdant Touch
+U Victual Sliver
+R Volrath's Gardens
+R Volrath's Laboratory
+R Volrath's Shapeshifter
+R Volrath's Stronghold
+U Walking Dream
+U Wall of Blossoms
+U Wall of Essence
+U Wall of Razors
+U Wall of Souls
+U Wall of Tears
+R Warrior Angel
+U Warrior en-Kor
+C Youthful Knight

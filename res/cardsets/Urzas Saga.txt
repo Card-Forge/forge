@@ -1,0 +1,360 @@
+[metadata]
+Code=USG
+Date=1998-10-12
+Name=Urza's Saga
+Code2=US
+Type=Expansion
+BoosterCovers=3
+Booster=11 Common, 3 Uncommon, 1 Rare
+
+[cards]
+U Absolute Grace
+U Absolute Law
+R Abundance
+R Abyssal Horror
+U Academy Researchers
+U Acidic Soil
+C Acridian
+U Albino Troll
+U Anaconda
+R Angelic Chorus
+C Angelic Page
+C Annul
+R Antagonism
+C Arc Lightning
+U Arcane Laboratory
+U Argothian Elder
+R Argothian Enchantress
+C Argothian Swine
+R Argothian Wurm
+R Attunement
+R Back to Basics
+R Barrin's Codex
+R Barrin, Master Wizard
+R Bedlam
+C Befoul
+U Bereavement
+U Blanchwood Armor
+C Blanchwood Treefolk
+U Blasted Landscape
+C Blood Vassal
+C Bog Raiders
+R Brand
+C Bravado
+C Breach
+C Brilliant Halo
+U Bull Hippo
+R Bulwark
+C Cackling Fiend
+U Carpet of Flowers
+C Carrion Beetles
+C Catalog
+R Catastrophe
+U Cathodion
+C Cave Tiger
+R Child of Gaea
+R Chimeric Staff
+R Citanul Centaurs
+R Citanul Flute
+R Citanul Hierophants
+U Claws of Gix
+U Clear
+C Cloak of Mists
+U Confiscate
+C Congregate
+R Contamination
+R Copper Gnomes
+C Coral Merfolk
+C Corrupt
+U Cradle Guard
+R Crater Hellion
+U Crazed Skirge
+U Crosswinds
+U Crystal Chimes
+C Curfew
+R Dark Hatchling
+C Dark Ritual
+R Darkest Hour
+U Defensive Formation
+C Despondency
+U Destructive Urge
+U Diabolic Servitude
+C Disciple of Grace
+C Disciple of Law
+R Discordant Dirge
+C Disenchant
+U Disorder
+C Disruptive Student
+U Douse
+U Dragon Blood
+R Drifting Djinn
+C Drifting Meadow
+C Dromosaur
+C Duress
+R Eastern Paladin
+R Electryte
+R Elite Archers
+C Elvish Herder
+C Elvish Lyrist
+U Enchantment Alteration
+R Endless Wurm
+U Endoskeleton
+R Energy Field
+U Exhaustion
+C Exhume
+R Exploration
+C Expunge
+R Faith Healer
+C Falter
+R Fault Line
+U Fecundity
+C Fertile Ground
+C Fiery Mantle
+U Fire Ants
+U Flesh Reaver
+R Fluctuator
+U Fog Bank
+L Forest
+L Forest
+L Forest
+L Forest
+C Fortitude
+C Gaea's Bounty
+R Gaea's Cradle
+U Gaea's Embrace
+R Gamble
+R Gilded Drake
+R Glorious Anthem
+U Goblin Cadets
+U Goblin Lackey
+C Goblin Matron
+U Goblin Offensive
+C Goblin Patrol
+C Goblin Raider
+C Goblin Spelunkers
+C Goblin War Buggy
+C Gorilla Warrior
+R Grafted Skullcap
+R Great Whale
+R Greater Good
+R Greener Pastures
+U Guma
+U Hawkeater Moth
+C Headlong Rush
+C Healing Salve
+C Heat Ray
+R Herald of Serra
+C Hermetic Study
+U Hibernation
+U Hidden Ancients
+U Hidden Guerrillas
+R Hidden Herd
+R Hidden Predators
+C Hidden Spider
+R Hidden Stag
+C Hollow Dogs
+U Hopping Automaton
+C Horseshoe Crab
+U Humble
+C Hush
+R Ill-Gotten Gains
+R Imaginary Pet
+R Intrepid Hero
+L Island
+L Island
+L Island
+L Island
+U Jagged Lightning
+R Karn, Silver Golem
+C Launch
+C Lay Waste
+R Lifeline
+R Lightning Dragon
+U Lilting Refrain
+U Lingering Mirage
+C Looming Shade
+R Lotus Blossom
+C Lull
+R Lurking Evil
+U Mana Leech
+U Meltdown
+R Metrognome
+R Midsummer Revel
+R Mishra's Helix
+U Mobile Fort
+U Monk Idealist
+C Monk Realist
+R Morphling
+L Mountain
+L Mountain
+L Mountain
+L Mountain
+U No Rest for the Wicked
+R Noetic Scales
+R Okk
+U Opal Acrolith
+R Opal Archangel
+C Opal Caryatid
+C Opal Gargoyle
+R Opal Titan
+R Oppression
+U Order of Yawgmoth
+U Outmaneuver
+C Pacifism
+U Parasitic Bond
+R Pariah
+C Path of Peace
+C Pegasus Charger
+C Pendrell Drake
+C Pendrell Flux
+U Peregrine Drake
+R Persecute
+C Pestilence
+R Phyrexian Colossus
+C Phyrexian Ghoul
+R Phyrexian Processor
+R Phyrexian Tower
+U Pit Trap
+L Plains
+L Plains
+L Plains
+L Plains
+R Planar Birth
+U Planar Void
+C Polluted Mire
+C Pouncing Jaguar
+C Power Sink
+C Power Taint
+U Presence of the Master
+U Priest of Gix
+C Priest of Titania
+R Purging Scythe
+U Rain of Filth
+U Rain of Salt
+C Ravenous Skirge
+C Raze
+R Recantation
+U Reclusive Wight
+U Redeem
+C Reflexes
+C Rejuvenate
+R Remembrance
+C Remote Isle
+R Reprocess
+C Rescind
+U Retaliation
+C Retromancer
+C Rewind
+R Rumbling Crescendo
+U Rune of Protection: Artifacts
+C Rune of Protection: Black
+C Rune of Protection: Blue
+C Rune of Protection: Green
+R Rune of Protection: Lands
+C Rune of Protection: Red
+C Rune of Protection: White
+C Sanctum Custodian
+U Sanctum Guardian
+C Sandbar Merfolk
+U Sandbar Serpent
+U Sanguine Guard
+U Scald
+R Scoria Wurm
+C Scrap
+U Seasoned Marshal
+R Serra Avatar
+C Serra Zealot
+U Serra's Embrace
+U Serra's Hymn
+R Serra's Liturgy
+R Serra's Sanctum
+U Shimmering Barrier
+U Shiv's Embrace
+R Shivan Gorge
+R Shivan Hellkite
+U Shivan Raptor
+R Show and Tell
+C Shower of Sparks
+C Sicken
+C Silent Attendant
+U Skirge Familiar
+C Skittering Skirge
+R Sleeper Agent
+C Slippery Karst
+R Smokestack
+C Smoldering Crater
+R Sneak Attack
+R Somnophore
+U Songstitcher
+R Soul Sculptor
+U Spined Fluke
+C Spire Owl
+R Sporogenesis
+U Spreading Algae
+U Steam Blast
+U Stern Proctor
+R Stroke of Genius
+R Sulfuric Vapors
+R Sunder
+L Swamp
+L Swamp
+L Swamp
+L Swamp
+C Symbiosis
+R Tainted AEther
+U Telepathy
+R Temporal Aperture
+R Thran Quarry
+U Thran Turbine
+U Thundering Giant
+R Time Spiral
+U Titania's Boon
+U Titania's Chosen
+R Tolarian Academy
+C Tolarian Winds
+U Torch Song
+U Treefolk Seedlings
+C Treetop Rangers
+U Turnabout
+R Umbilicus
+C Unnerve
+C Unworthy Dead
+U Urza's Armor
+U Vampiric Embrace
+R Vebulid
+C Veil of Birds
+U Veiled Apparition
+R Veiled Crocodile
+U Veiled Sentry
+C Veiled Serpent
+C Venomous Fangs
+R Vernal Bloom
+C Viashino Outrider
+C Viashino Runner
+R Viashino Sandswimmer
+C Viashino Weaponsmith
+U Victimize
+U Vile Requiem
+U Voice of Grace
+U Voice of Law
+U Voltaic Key
+U Vug Lizard
+U Wall of Junk
+U War Dance
+U Waylay
+R Western Paladin
+R Whetstone
+R Whirlwind
+C Wild Dogs
+R Wildfire
+U Windfall
+C Winding Wurm
+U Wirecat
+R Witch Engine
+C Wizard Mentor
+U Worn Powerstone
+R Worship
+U Yawgmoth's Edict
+R Yawgmoth's Will
+R Zephid
+U Zephid's Embrace

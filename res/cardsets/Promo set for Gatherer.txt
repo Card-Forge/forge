@@ -1,0 +1,36 @@
+[metadata]
+Code=MBP
+Date=1992
+Name=Promo set for Gatherer
+Alias=PRO
+Code2=MBP
+Type=Other
+
+[cards]
+S Arena
+R Avatar of Hope
+R Beast of Burden
+R Dirtcowl Wurm
+R False Prophet
+R Feral Throwback
+R Fungal Shambler
+S Giant Badger
+R Glory
+R Helm of Kaldra
+R Laquatus's Champion
+R Lightning Dragon
+S Mana Crypt
+R Monstrous Hound
+S Nalathni Dragon
+R Overtaker
+R Questing Phelddagrif
+R Raging Kavu
+R Rathi Assassin
+R Revenant
+R Ryusei, the Falling Star
+S Sewers of Estark
+ Shield of Kaldra
+R Silent Specter
+R Soul Collector
+R Sword of Kaldra
+S Windseeker Centaur

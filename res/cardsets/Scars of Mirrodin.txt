@@ -1,0 +1,259 @@
+[metadata]
+Code=SOM
+Date=2010-10-01
+Name=Scars of Mirrodin
+Code2=SOM
+Type=Expansion
+BoosterCovers=5
+Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand
+
+[cards]
+U Abuna Acolyte
+C Accorder's Shield
+U Acid Web Spider
+C Alpha Tyrranax
+U Arc Trail
+R Argent Sphinx
+R Argentum Armor
+C Arrest
+R Asceticism
+C Assault Strobe
+U Auriok Edgewright
+C Auriok Replica
+C Auriok Sunchaser
+U Barbed Battlegear
+U Barrage Ogre
+U Bellowing Tanglewurm
+R Blackcleave Cliffs
+C Blackcleave Goblin
+C Blade-Tribe Berserkers
+C Bladed Pinions
+C Bleak Coven Vampires
+C Blight Mamba
+C Blistergrub
+U Bloodshot Trainee
+C Blunt the Assault
+C Bonds of Quicksilver
+C Carapace Forger
+R Carnifex Demon
+U Carrion Call
+R Cerebral Eruption
+R Chimeric Mass
+C Chrome Steed
+U Clone Shell
+U Contagion Clasp
+R Contagion Engine
+C Contagious Nim
+C Copper Myr
+C Copperhorn Scout
+R Copperline Gorge
+C Corpse Cur
+U Corrupted Harvester
+U Culling Dais
+C Cystbearer
+U Darkslick Drake
+R Darkslick Shores
+U Darksteel Axe
+R Darksteel Juggernaut
+U Darksteel Myr
+U Darksteel Sentinel
+U Dispense Justice
+C Disperse
+R Dissipation Field
+C Dross Hopper
+C Echo Circlet
+M Elspeth Tirel
+U Embersmith
+R Engulfing Slagwurm
+R Etched Champion
+U Exsanguinate
+C Ezuri's Archers
+R Ezuri's Brigade
+R Ezuri, Renegade Leader
+C Ferrovore
+C Flameborn Hellion
+U Flesh Allergy
+C Flight Spellbomb
+L Forest
+L Forest
+L Forest
+L Forest
+C Fulgent Distraction
+C Fume Spitter
+U Furnace Celebration
+C Galvanic Blast
+R Genesis Wave
+M Geth, Lord of the Vault
+C Ghalma's Warden
+U Glimmerpoint Stag
+C Glimmerpost
+C Glint Hawk
+C Glint Hawk Idol
+C Goblin Gaveleer
+C Gold Myr
+C Golden Urn
+U Golem Artisan
+C Golem Foundry
+U Golem's Heart
+U Grafted Exoskeleton
+R Grand Architect
+C Grasp of Darkness
+R Grindclock
+U Halt Order
+R Hand of the Praetors
+U Heavy Arbalest
+R Hoard-Smelter Dragon
+C Horizon Spellbomb
+U Ichor Rats
+C Ichorclaw Myr
+M Indomitable Archangel
+R Inexorable Tide
+U Infiltration Lens
+C Instill Infection
+C Iron Myr
+L Island
+L Island
+L Island
+L Island
+C Kemba's Skyguard
+R Kemba, Kha Regent
+M Koth of the Hammer
+R Kuldotha Forgemaster
+R Kuldotha Phoenix
+C Kuldotha Rebirth
+C Leaden Myr
+R Leonin Arbiter
+M Liege of the Tangle
+U Lifesmith
+U Liquimetal Coating
+R Livewire Lash
+C Loxodon Wayfarer
+C Lumengrid Drake
+M Lux Cannon
+C Melt Terrain
+U Memnite
+R Memoricide
+R Mimic Vat
+M Mindslaver
+C Molder Beast
+R Molten Psyche
+M Molten-Tail Masticore
+C Moriok Reaver
+C Moriok Replica
+L Mountain
+L Mountain
+L Mountain
+L Mountain
+M Mox Opal
+R Myr Battlesphere
+U Myr Galvanizer
+R Myr Propagator
+R Myr Reservoir
+U Myrsmith
+C Necrogen Censer
+U Necrogen Scudder
+U Necropede
+R Necrotic Ooze
+C Neurok Invisimancer
+C Neurok Replica
+C Nihil Spellbomb
+R Nim Deathmantle
+U Ogre Geargrabber
+C Origin Spellbomb
+C Oxidda Daredevil
+U Oxidda Scrapmelter
+R Painful Quandary
+U Painsmith
+U Palladium Myr
+C Panic Spellbomb
+C Perilous Myr
+C Plague Stinger
+L Plains
+L Plains
+L Plains
+L Plains
+C Plated Seastrider
+M Platinum Emperion
+R Precursor Golem
+R Prototype Portal
+C Psychic Miasma
+R Putrefax
+M Quicksilver Gargantuan
+R Ratchet Bomb
+U Razor Hippogriff
+C Razorfield Thresher
+R Razorverge Thicket
+C Relic Putrescence
+C Revoke Existence
+U Riddlesmith
+U Rust Tick
+U Rusted Relic
+C Saberclaw Golem
+C Salvage Scout
+C Scoria Elemental
+C Scrapdiver Serpent
+C Screeching Silcaw
+R Seachrome Coast
+C Seize the Initiative
+R Semblance Anvil
+R Shape Anew
+C Shatter
+C Silver Myr
+U Skinrender
+M Skithiryx, the Blight Dragon
+C Sky-Eel School
+U Slice in Twain
+C Snapsail Glider
+C Soliton
+C Soul Parry
+R Spikeshot Elder
+C Steady Progress
+R Steel Hellkite
+C Stoic Rebuttal
+R Strata Scythe
+C Strider Harness
+R Sunblast Angel
+C Sunspear Shikari
+L Swamp
+L Swamp
+L Swamp
+L Swamp
+M Sword of Body and Mind
+C Sylvok Lifestaff
+C Sylvok Replica
+C Tainted Strike
+U Tangle Angler
+C Tel-Jilad Defiance
+C Tel-Jilad Fallen
+R Tempered Steel
+U Throne of Geth
+U Thrummingbird
+R Tower of Calamities
+U Trigon of Corruption
+U Trigon of Infestation
+U Trigon of Mending
+U Trigon of Rage
+U Trigon of Thought
+U Trinket Mage
+R True Conviction
+C Tumble Magnet
+R Tunnel Ignus
+C Turn Aside
+C Turn to Slag
+U Twisted Image
+C Untamed Might
+C Vault Skyward
+C Vector Asp
+C Vedalken Certarch
+R Venser's Journal
+M Venser, the Sojourner
+U Vigil for the Lost
+U Viridian Revel
+U Volition Reins
+C Vulshok Heartstoker
+C Vulshok Replica
+C Wall of Tanglecord
+C Whitesun's Passage
+C Wing Puncture
+C Withstand Death
+M Wurmcoil Engine

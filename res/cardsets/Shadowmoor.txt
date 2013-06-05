@@ -1,0 +1,311 @@
+[metadata]
+Code=SHM
+Date=2008-05-02
+Name=Shadowmoor
+Code2=SHM
+Type=Expansion
+BoosterCovers=5
+Booster=11 Common, 3 Uncommon, 1 Rare
+
+[cards]
+C AEthertow
+U Advice from the Fae
+C Aphotic Wisps
+C Apothecary Initiate
+U Armored Ascension
+C Ashenmoor Cohort
+U Ashenmoor Gouger
+R Ashenmoor Liege
+R Augury Adept
+C Ballynock Cohort
+C Barkshell Blessing
+C Barrenton Cragtreads
+C Barrenton Medic
+U Beseech the Queen
+U Biting Tether
+C Blazethorn Scarecrow
+C Blight Sickle
+C Blistering Dieflyn
+U Bloodmark Mentor
+C Bloodshed Fever
+U Blowfly Infestation
+R Boartusk Liege
+C Boggart Arsonists
+U Boggart Ram-Gang
+R Boon Reflection
+C Briarberry Cohort
+C Burn Trail
+R Cauldron of Souls
+R Cemetery Puca
+C Cerulean Wisps
+C Chainbreaker
+C Cinderbones
+C Cinderhaze Wretch
+C Consign to Dream
+U Corrosive Mentor
+U Corrupt
+R Counterbore
+C Crabapple Cohort
+R Cragganwick Cremator
+C Crimson Wisps
+U Crowd of Cinders
+C Cultbrand Cinder
+C Curse of Chains
+U Cursecatcher
+U Dawnglow Infusion
+R Deep-Slumber Titan
+U Deepchannel Mentor
+R Demigod of Revenge
+R Deus of Calamity
+C Devoted Druid
+R Din of the Fireherd
+R Dire Undercurrents
+C Disturbing Plot
+R Dramatic Entrance
+U Dream Salvage
+U Drove of Elves
+C Drowner Initiate
+R Dusk Urchins
+R Elemental Mastery
+C Elsewhere Flask
+C Elvish Hexhunter
+C Ember Gale
+C Emberstrike Duo
+R Enchanted Evening
+R Everlasting Torment
+C Faerie Macabre
+U Faerie Swarm
+C Farhaven Elf
+C Fate Transfer
+R Fire-Lit Thicket
+U Firespout
+C Fists of the Demigod
+U Flame Javelin
+U Flourishing Defenses
+U Flow of Ideas
+L Forest
+L Forest
+L Forest
+L Forest
+U Fossil Find
+C Foxfire Oak
+R Fracturing Gust
+R Fulminator Mage
+R Furystoke Giant
+R Ghastlord of Fugue
+C Ghastly Discovery
+C Giantbaiting
+U Glamer Spinners
+C Gleeful Sabotage
+R Glen Elendra Liege
+C Gloomlance
+U Gloomwidow
+C Gloomwidow's Feast
+U Gnarled Effigy
+R Godhead of Awe
+C Goldenglow Moth
+C Gravelgill Axeshark
+C Gravelgill Duo
+R Graven Cairns
+R Greater Auramancy
+U Grief Tyrant
+R Grim Poppet
+U Guttural Response
+U Heap Doll
+R Heartmender
+C Helm of the Ghastlord
+R Hollowborn Barghest
+U Hollowsage
+U Horde of Boggarts
+U Howl of the Night Pack
+C Hungry Spriggan
+U Illuminated Folio
+R Impromptu Raid
+U Incremental Blight
+C Inescapable Brute
+U Inkfathom Infiltrator
+U Inkfathom Witch
+C Inquisitor's Snare
+C Intimidator Initiate
+L Island
+L Island
+L Island
+L Island
+R Isleback Spawn
+U Jaws of Stone
+C Juvenile Gloomwidow
+C Kinscaer Harpoonist
+U Kitchen Finks
+U Kithkin Rabble
+C Kithkin Shielddare
+R Knacksaw Clique
+R Knollspine Dragon
+R Knollspine Invocation
+U Kulrath Knight
+C Last Breath
+U Leech Bonder
+U Leechridden Swamp
+C Loamdragger Giant
+C Loch Korrigan
+U Lockjaw Snapper
+U Lurebound Scarecrow
+U Madblind Mountain
+R Mana Reflection
+C Manaforge Cinder
+C Manamorphose
+R Mass Calcify
+C Medicine Runner
+R Memory Plunder
+C Memory Sluice
+U Mercy Killing
+U Merrow Grimeblotter
+C Merrow Wavebreakers
+R Midnight Banshee
+C Mine Excavation
+R Mirrorweave
+U Mistmeadow Skulk
+U Mistmeadow Witch
+U Mistveil Plains
+U Moonring Island
+C Morselhoarder
+R Mossbridge Troll
+L Mountain
+L Mountain
+L Mountain
+L Mountain
+C Mudbrawler Cohort
+C Mudbrawler Raiders
+U Murderous Redcap
+R Mystic Gate
+C Niveous Wisps
+C Nurturer Initiate
+C Old Ghastbark
+C Oona's Gatewarden
+R Oona, Queen of the Fae
+R Oracle of Nectars
+R Order of Whiteclay
+R Oversoul of Dusk
+R Painter's Servant
+U Pale Wayfarer
+C Parapet Watchers
+C Pili-Pala
+R Plague of Vermin
+L Plains
+L Plains
+L Plains
+L Plains
+U Plumeveil
+C Poison the Well
+R Polluted Bonds
+C Power of Fire
+C Presence of Gond
+R Prismatic Omen
+C Prismwake Merrow
+U Prison Term
+R Puca's Mischief
+C Puncture Bolt
+R Puppeteer Clique
+U Puresight Merrow
+C Put Away
+U Pyre Charger
+R Rage Reflection
+U Raking Canopy
+C Rattleblaze Scarecrow
+C Raven's Run Dragoon
+R Reaper King
+R Reflecting Pool
+U Reknit
+U Repel Intruders
+U Resplendent Mentor
+U Revelsong Horn
+R Rhys the Redeemed
+C Rite of Consumption
+R River Kelpie
+U River's Grasp
+R Rosheen Meanderer
+U Roughshod Mentor
+C Rune-Cervin Rider
+R Runed Halo
+C Runes of the Deus
+C Rustrazor Butcher
+C Safehold Duo
+C Safehold Elite
+C Safehold Sentry
+C Safewright Quest
+U Sapseep Forest
+R Savor the Moment
+C Scar
+C Scarscale Ritual
+C Scrapbasket
+C Scuttlemutt
+C Scuzzback Marauders
+C Scuzzback Scrapper
+U Seedcradle Witch
+C Shield of the Oversoul
+C Sickle Ripper
+C Silkbind Faerie
+C Sinking Feeling
+U Slinking Giant
+C Smash to Smithereens
+C Smolder Initiate
+C Somnomancer
+C Sootstoke Kindler
+C Sootwalkers
+R Spawnwrithe
+U Spectral Procession
+C Spell Syphon
+U Spiteflame Witch
+R Spiteful Visions
+C Splitting Headache
+C Steel of the Godhead
+C Strip Bare
+R Sunken Ruins
+L Swamp
+L Swamp
+L Swamp
+L Swamp
+R Swans of Bryn Argoll
+R Sygg, River Cutthroat
+U Tatterkite
+C Tattermunge Duo
+U Tattermunge Maniac
+U Tattermunge Witch
+C Thistledown Duo
+R Thistledown Liege
+C Thornwatch Scarecrow
+R Thought Reflection
+U Thoughtweft Gambit
+C Toil to Renown
+C Torpor Dust
+U Torrent of Souls
+C Torture
+U Tower Above
+C Traitor's Roar
+U Trip Noose
+C Turn to Mist
+R Twilight Shepherd
+R Tyrannize
+U Umbral Mantle
+R Valleymaker
+R Vexing Shusher
+C Viridescent Wisps
+C Wanderbrine Rootcutters
+U Wasp Lancer
+C Watchwing Scarecrow
+R Wheel of Sun and Moon
+C Whimwader
+U Wicker Warcrawler
+U Wild Swing
+C Wildslayer Elves
+U Wilt-Leaf Cavaliers
+R Wilt-Leaf Liege
+R Windbrisk Raptor
+C Wingrattle Scarecrow
+R Witherscale Wurm
+C Woeleecher
+R Wooded Bastion
+R Woodfall Primus
+R Worldpurge
+R Wort, the Raidmother
+R Wound Reflection
+C Zealous Guardian

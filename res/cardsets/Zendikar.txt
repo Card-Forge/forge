@@ -1,0 +1,279 @@
+[metadata]
+Code=ZEN
+Date=2009-10-02
+Name=Zendikar
+Code2=ZEN
+Type=Expansion
+BoosterCovers=5
+Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand
+
+[cards]
+U AEther Figment
+C Adventuring Gear
+U Akoum Refuge
+R Archive Trap
+R Archmage Ascension
+R Arid Mesa
+R Armament Master
+U Arrow Volley Trap
+R Bala Ged Thief
+U Baloth Cage Trap
+U Baloth Woodcrasher
+C Beast Hunt
+R Beastmaster Ascension
+R Blade of the Bloodchief
+C Bladetusk Boar
+U Blazing Torch
+C Blood Seeker
+R Blood Tribute
+R Bloodchief Ascension
+R Bloodghast
+C Bog Tatters
+C Bold Defense
+U Brave the Elements
+C Burst Lightning
+C Caller of Gales
+C Cancel
+C Caravan Hurda
+U Carnage Altar
+R Celestial Mantle
+M Chandra Ablaze
+C Cliff Threader
+U Cobra Trap
+R Conqueror's Pledge
+R Cosi's Trickster
+C Crypt Ripper
+R Crypt of Agadeem
+R Day of Judgment
+C Demolish
+C Desecrated Earth
+R Devout Lightcaster
+C Disfigure
+M Eldrazi Monument
+R Electropotence
+R Elemental Appeal
+R Emeria Angel
+R Emeria, the Sky Ruin
+M Eternity Vessel
+C Expedition Map
+C Explorer's Scope
+U Feast of Blood
+M Felidar Sovereign
+L Forest
+L Forest
+L Forest
+L Forest
+L Forest
+L Forest
+L Forest
+L Forest
+U Frontier Guide
+U Gatekeeper of Malakir
+U Geyser Glider
+C Giant Scorpion
+R Gigantiform
+C Goblin Bushwhacker
+R Goblin Guide
+U Goblin Ruinblaster
+C Goblin Shortcutter
+C Goblin War Paint
+U Gomazoa
+R Grappling Hook
+U Graypelt Refuge
+C Grazing Gladehart
+U Greenweaver Druid
+C Grim Discovery
+R Guul Draz Specter
+C Guul Draz Vampire
+C Hagra Crocodile
+U Hagra Diabolist
+R Halo Hunter
+C Harrow
+C Heartstabber Mosquito
+U Hedron Crab
+C Hedron Scrabbler
+U Hellfire Mongrel
+R Hellkite Charger
+C Hideous End
+C Highland Berserker
+U Inferno Trap
+C Into the Roil
+M Iona, Shield of Emeria
+C Ior Ruin Expedition
+L Island
+L Island
+L Island
+L Island
+L Island
+L Island
+L Island
+L Island
+C Joraga Bard
+C Journey to Nowhere
+U Jwar Isle Refuge
+C Kabira Crossroads
+R Kabira Evangel
+M Kalitas, Bloodchief of Ghet
+U Kazandu Blademaster
+U Kazandu Refuge
+R Kazuul Warlord
+U Khalni Gem
+C Khalni Heart Expedition
+U Kor Aeronaut
+C Kor Cartographer
+U Kor Duelist
+C Kor Hookmaster
+C Kor Outfitter
+C Kor Sanctifiers
+C Kor Skyfisher
+C Kraken Hatchling
+U Landbind Ritual
+R Lavaball Trap
+C Lethargy Trap
+U Living Tsunami
+M Lorthos, the Tidemaker
+M Lotus Cobra
+R Lullmage Mentor
+R Luminarch Ascension
+C Magma Rift
+R Magosi, the Waterveil
+C Makindi Shieldmate
+R Malakir Bloodwitch
+U Mark of Mutiny
+U Marsh Casualties
+R Marsh Flats
+U Merfolk Seastalkers
+U Merfolk Wayfinder
+U Mind Sludge
+M Mindbreak Trap
+C Mindless Null
+C Mire Blight
+R Misty Rainforest
+C Mold Shambler
+C Molten Ravager
+L Mountain
+L Mountain
+L Mountain
+L Mountain
+L Mountain
+L Mountain
+L Mountain
+L Mountain
+U Murasa Pyromancer
+C Narrow Escape
+U Needlebite Trap
+C Nimana Sell-Sword
+C Nimbus Wings
+M Nissa Revane
+C Nissa's Chosen
+C Noble Vestige
+M Ob Nixilis, the Fallen
+M Obsidian Fireheart
+C Ondu Cleric
+R Oracle of Mul Daya
+C Oran-Rief Recluse
+C Oran-Rief Survivalist
+R Oran-Rief, the Vastwood
+C Paralyzing Grasp
+C Pillarfield Ox
+C Piranha Marsh
+U Pitfall Trap
+L Plains
+L Plains
+L Plains
+L Plains
+L Plains
+L Plains
+L Plains
+L Plains
+C Plated Geopede
+R Predatory Urge
+U Primal Bellow
+U Punishing Fire
+R Pyromancer Ascension
+U Quest for Ancient Secrets
+U Quest for Pure Flame
+U Quest for the Gemblades
+U Quest for the Gravelord
+U Quest for the Holy Relic
+M Rampaging Baloths
+U Ravenous Trap
+C Reckless Scholar
+C Relic Crush
+R Rite of Replication
+U River Boa
+R Roil Elemental
+C Ruinous Minotaur
+U Runeflare Trap
+R Sadistic Sacrament
+C Savage Silhouette
+R Scalding Tarn
+R Scute Mob
+C Scythe Tiger
+R Sea Gate Loremaster
+U Seascape Aerialist
+C Seismic Shudder
+U Sejiri Refuge
+C Shatterskull Giant
+U Shepherd of the Lost
+C Shieldmate's Blessing
+C Shoal Serpent
+C Sky Ruin Drake
+C Slaughter Cry
+C Soaring Seacliff
+M Sorin Markov
+C Soul Stair Expedition
+C Spell Pierce
+R Sphinx of Jwar Isle
+R Sphinx of Lost Truths
+C Spidersilk Net
+C Spire Barrage
+C Spreading Seas
+C Steppe Lynx
+C Stonework Puma
+U Summoner's Bane
+R Summoning Trap
+C Sunspring Expedition
+C Surrakar Marauder
+L Swamp
+L Swamp
+L Swamp
+L Swamp
+L Swamp
+L Swamp
+L Swamp
+L Swamp
+U Tajuru Archer
+C Tanglesap
+C Teetering Peaks
+C Tempest Owl
+R Terra Stomper
+C Territorial Baloth
+C Timbermaw Larva
+C Torch Slinger
+U Trailblazer's Boots
+C Trapfinder's Trick
+U Trapmaker's Snare
+U Trusty Machete
+C Tuktuk Grunts
+U Turntimber Basilisk
+C Turntimber Grove
+R Turntimber Ranger
+C Umara Raptor
+U Unstable Footing
+R Valakut, the Molten Pinnacle
+U Vampire Hexmage
+C Vampire Lacerator
+U Vampire Nighthawk
+C Vampire's Bite
+C Vastwood Gorger
+R Verdant Catacombs
+C Vines of Vastwood
+M Warren Instigator
+C Welkin Tern
+C Whiplash Trap
+U Windborne Charge
+C Windrider Eel
+R World Queller
+C Zektar Shrine Expedition
+C Zendikar Farguide

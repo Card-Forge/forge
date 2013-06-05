@@ -1,0 +1,317 @@
+[metadata]
+Code=3ED
+Date=1994-04-01
+Name=Revised Edition
+Code2=R
+Type=Core
+Border=White
+BoosterCovers=1
+Booster=11 Common, 3 Uncommon, 1 Rare
+
+[cards]
+U Air Elemental
+R Aladdin's Lamp
+R Aladdin's Ring
+U Animate Artifact
+U Animate Dead
+R Animate Wall
+R Ankh of Mishra
+R Armageddon
+R Armageddon Clock
+R Aspect of Wolf
+C Atog
+R Bad Moon
+R Badlands
+R Balance
+U Basalt Monolith
+R Bayou
+C Benalish Hero
+R Birds of Paradise
+U Black Knight
+U Black Vise
+U Black Ward
+R Blessing
+C Blue Elemental Blast
+U Blue Ward
+U Bog Wraith
+R Bottle of Suleiman
+R Braingeyser
+U Brass Man
+U Burrowing
+U Castle
+U Celestial Prism
+U Channel
+R Chaoslace
+C Circle of Protection: Black
+C Circle of Protection: Blue
+C Circle of Protection: Green
+C Circle of Protection: Red
+C Circle of Protection: White
+R Clockwork Beast
+U Clone
+R Cockatrice
+U Conservator
+R Contract from Below
+U Control Magic
+U Conversion
+R Copy Artifact
+U Counterspell
+C Craw Wurm
+C Creature Bond
+U Crumble
+R Crusade
+U Crystal Rod
+U Cursed Land
+R Dancing Scimitar
+C Dark Ritual
+R Darkpact
+C Death Ward
+U Deathgrip
+R Deathlace
+R Demonic Attorney
+R Demonic Hordes
+U Demonic Tutor
+U Desert Twister
+R Dingus Egg
+C Disenchant
+C Disintegrate
+R Disrupting Scepter
+R Dragon Engine
+U Dragon Whelp
+C Drain Life
+R Drain Power
+C Drudge Skeletons
+C Dwarven Warriors
+U Dwarven Weaponsmith
+U Earth Elemental
+C Earthbind
+R Earthquake
+R Ebony Horse
+R El-Hajjaj
+R Elvish Archers
+U Energy Flux
+C Erg Raiders
+U Evil Presence
+R Eye for an Eye
+R Farmstead
+R Fastbond
+C Fear
+U Feedback
+U Fire Elemental
+C Fireball
+C Firebreathing
+U Flashfires
+C Flight
+R Flying Carpet
+C Fog
+R Force of Nature
+L Forest
+L Forest
+L Forest
+R Fork
+C Frozen Shade
+R Fungusaur
+R Gaea's Liege
+C Giant Growth
+C Giant Spider
+U Glasses of Urza
+U Gloom
+U Goblin Balloon Brigade
+R Goblin King
+R Granite Gargoyle
+C Gray Ogre
+U Green Ward
+C Grizzly Bears
+C Guardian Angel
+C Healing Salve
+R Helm of Chatzuk
+C Hill Giant
+C Holy Armor
+C Holy Strength
+C Howl from Beyond
+R Howling Mine
+R Hurkyl's Recall
+C Hurloon Minotaur
+U Hurricane
+U Hypnotic Specter
+U Instill Energy
+U Iron Star
+C Ironroot Treefolk
+L Island
+L Island
+L Island
+R Island Fish Jasconius
+R Island Sanctuary
+U Ivory Cup
+R Ivory Tower
+R Jade Monolith
+R Jandor's Ring
+R Jandor's Saddlebags
+R Jayemdae Tome
+U Juggernaut
+C Jump
+U Karma
+U Keldon Warlord
+C Kird Ape
+R Kormus Bell
+R Kudzu
+U Lance
+U Ley Druid
+U Library of Leng
+U Lifeforce
+R Lifelace
+U Lifetap
+C Lightning Bolt
+R Living Artifact
+R Living Lands
+U Living Wall
+C Llanowar Elves
+R Lord of Atlantis
+R Lord of the Pit
+U Lure
+R Magical Hack
+R Magnetic Mountain
+R Mahamoti Djinn
+R Mana Flare
+R Mana Short
+R Mana Vault
+R Manabarbs
+R Meekstone
+C Merfolk of the Pearl Trident
+C Mesa Pegasus
+R Mijae Djinn
+R Millstone
+R Mind Twist
+R Mishra's War Machine
+C Mons's Goblin Raiders
+L Mountain
+L Mountain
+L Mountain
+R Nether Shadow
+U Nettling Imp
+R Nevinyrral's Disk
+R Nightmare
+R Northern Paladin
+U Obsianus Golem
+R Onulet
+U Orcish Artillery
+U Orcish Oriflamme
+U Ornithopter
+C Paralyze
+C Pearled Unicorn
+R Personal Incarnation
+C Pestilence
+U Phantasmal Forces
+C Phantasmal Terrain
+U Phantom Monster
+R Pirate Ship
+C Plague Rats
+L Plains
+L Plains
+L Plains
+R Plateau
+C Power Leak
+C Power Sink
+R Power Surge
+R Primal Clay
+C Prodigal Sorcerer
+C Psychic Venom
+R Purelace
+C Raise Dead
+C Reconstruction
+C Red Elemental Blast
+U Red Ward
+C Regeneration
+U Regrowth
+U Resurrection
+R Reverse Damage
+U Reverse Polarity
+R Righteousness
+R Roc of Kher Ridges
+R Rock Hydra
+R Rocket Launcher
+U Rod of Ruin
+R Royal Assassin
+U Sacrifice
+C Samite Healer
+R Savannah
+R Savannah Lions
+C Scathe Zombies
+U Scavenging Ghoul
+R Scrubland
+C Scryb Sprites
+C Sea Serpent
+R Sedge Troll
+U Sengir Vampire
+R Serendib Efreet
+U Serra Angel
+C Shanodin Dryads
+C Shatter
+U Shatterstorm
+R Shivan Dragon
+U Simulacrum
+U Siren's Call
+R Sleight of Mind
+R Smoke
+U Sol Ring
+R Sorceress Queen
+U Soul Net
+C Spell Blast
+R Stasis
+U Steal Artifact
+U Stone Giant
+C Stone Rain
+C Stream of Life
+R Sunglasses of Urza
+L Swamp
+L Swamp
+L Swamp
+U Swords to Plowshares
+R Taiga
+C Terror
+R The Hive
+U The Rack
+U Thicket Basilisk
+R Thoughtlace
+U Throne of Bone
+R Timber Wolves
+R Titania's Song
+C Tranquility
+R Tropical Island
+U Tsunami
+R Tundra
+U Tunnel
+R Underground Sea
+C Unholy Strength
+C Unstable Mutation
+C Unsummon
+U Uthden Troll
+R Verduran Enchantress
+R Vesuvan Doppelganger
+R Veteran Bodyguard
+R Volcanic Eruption
+R Volcanic Island
+U Wall of Air
+U Wall of Bone
+U Wall of Brambles
+U Wall of Fire
+U Wall of Ice
+U Wall of Stone
+U Wall of Swords
+U Wall of Water
+C Wall of Wood
+U Wanderlust
+C War Mammoth
+R Warp Artifact
+U Water Elemental
+C Weakness
+R Web
+R Wheel of Fortune
+U White Knight
+U White Ward
+C Wild Growth
+R Will-o'-the-Wisp
+R Winter Orb
+U Wooden Sphere
+R Wrath of God
+R Zombie Master

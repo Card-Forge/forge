@@ -1,0 +1,232 @@
+[metadata]
+Code=POR
+Date=1997-06
+Name=Portal
+Code2=PT
+Type=Starter
+BoosterCovers=5
+Booster=11 Common, 3 Uncommon, 1 Rare
+
+[cards]
+R Alabaster Dragon
+R Alluring Scent
+U Anaconda
+U Anaconda
+R Ancestral Memories
+C Angelic Blessing
+R Archangel
+U Ardent Militia
+R Armageddon
+C Armored Pegasus
+U Arrogant Vampire
+U Assassin's Blade
+R Balance of Power
+U Baleful Stare
+U Bee Sting
+U Blaze
+U Blaze
+R Blessed Reversal
+R Blinding Light
+C Bog Imp
+C Bog Raiders
+U Bog Wraith
+U Boiling Seas
+C Border Guard
+C Breath of Life
+U Bull Hippo
+C Burning Cloak
+R Capricious Sorcerer
+U Charging Bandits
+U Charging Paladin
+R Charging Rhino
+C Cloak of Feathers
+R Cloud Dragon
+C Cloud Pirates
+U Cloud Spirit
+U Command of Unsummoning
+C Coral Eel
+C Craven Giant
+C Craven Knight
+R Cruel Bargain
+R Cruel Fate
+R Cruel Tutor
+U Deep Wood
+U Deep-Sea Serpent
+U Defiant Stand
+C Deja Vu
+U Desert Drake
+R Devastation
+C Devoted Hero
+R Djinn of the Lamp
+R Dread Charge
+R Dread Reaper
+U Dry Spell
+R Earthquake
+R Ebon Dragon
+C Elite Cat Warrior
+C Elite Cat Warrior
+C Elven Cache
+C Elvish Ranger
+R Endless Cockroaches
+R Exhaustion
+C False Peace
+C Feral Shadow
+R Final Strike
+R Fire Dragon
+U Fire Imp
+C Fire Snake
+R Fire Tempest
+U Flashfires
+C Fleet-Footed Monk
+U Flux
+C Foot Soldiers
+L Forest
+L Forest
+L Forest
+L Forest
+R Forked Lightning
+C Fruition
+C Giant Octopus
+C Giant Spider
+R Gift of Estates
+C Goblin Bully
+C Gorilla Warrior
+U Gravedigger
+C Grizzly Bears
+C Hand of Death
+C Hand of Death
+R Harsh Justice
+C Highland Giant
+C Hill Giant
+C Horned Turtle
+C Howling Fury
+U Hulking Cyclops
+C Hulking Goblin
+R Hurricane
+U Ingenious Thief
+L Island
+L Island
+L Island
+L Island
+C Jungle Lion
+C Keen-Eyed Archers
+R King's Assassin
+C Knight Errant
+R Last Chance
+C Lava Axe
+U Lava Flow
+C Lizard Warrior
+U Man-o'-War
+R Mercenary Knight
+C Merfolk of the Pearl Trident
+C Mind Knives
+C Mind Rot
+C Minotaur Warrior
+C Mobilize
+C Monstrous Growth
+C Monstrous Growth
+U Moon Sprite
+L Mountain
+L Mountain
+L Mountain
+L Mountain
+U Mountain Goat
+C Muck Rats
+U Mystic Denial
+R Natural Order
+U Natural Spring
+R Nature's Cloak
+C Nature's Lore
+U Nature's Ruin
+U Needle Storm
+U Noxious Toad
+C Omen
+C Owl Familiar
+C Panther Warriors
+C Path of Peace
+U Personal Tutor
+R Phantom Warrior
+R Pillaging Horde
+L Plains
+L Plains
+L Plains
+L Plains
+U Plant Elemental
+R Primeval Force
+R Prosperity
+R Pyroclasm
+C Python
+C Raging Cougar
+C Raging Goblin
+C Raging Goblin
+C Raging Minotaur
+U Rain of Salt
+U Rain of Tears
+C Raise Dead
+C Redwood Treefolk
+C Regal Unicorn
+U Renewing Dawn
+C Rowan Treefolk
+C Sacred Knight
+C Sacred Nectar
+C Scorching Spear
+U Scorching Winds
+U Seasoned Marshal
+R Serpent Assassin
+C Serpent Warrior
+C Skeletal Crocodile
+C Skeletal Snake
+C Snapping Drake
+C Sorcerous Sight
+C Soul Shred
+C Spined Wurm
+R Spiritual Guardian
+C Spitting Earth
+C Spotted Griffin
+C Stalking Tiger
+U Starlight
+U Starlit Angel
+C Steadfastness
+R Stern Marshal
+C Stone Rain
+C Storm Crow
+R Summer Bloom
+L Swamp
+L Swamp
+L Swamp
+L Swamp
+R Sylvan Tutor
+C Symbol of Unsummoning
+R Taunt
+R Temporary Truce
+U Theft of Dreams
+R Thing from the Deep
+R Thundering Wurm
+R Thundermare
+C Tidal Surge
+C Time Ebb
+C Touch of Brilliance
+R Treetop Defense
+C Undying Beast
+U Untamed Wilds
+U Valorous Charge
+U Vampiric Feast
+C Vampiric Touch
+U Venerable Monk
+U Vengeance
+U Virtue's Ruin
+R Volcanic Dragon
+C Volcanic Hammer
+U Wall of Granite
+U Wall of Swords
+C Warrior's Charge
+C Warrior's Charge
+U Whiptail Wurm
+R Wicked Pact
+C Willow Dryad
+C Wind Drake
+R Winds of Change
+U Winter's Grasp
+U Withering Gaze
+R Wood Elves
+R Wrath of God

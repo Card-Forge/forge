@@ -1,0 +1,36 @@
+[metadata]
+Code=PD3
+Date=2011-11-18
+Name=Premium Deck Series: Graveborn
+
+[cards]
+U Animate Dead
+R Avatar of Woe
+R Blazing Archon
+U Buried Alive
+U Cabal Therapy
+R Crosis, the Purger
+U Crystal Vein
+U Diabolic Servitude
+U Dread Return
+C Duress
+U Ebon Stronghold
+R Entomb
+C Exhume
+C Faceless Butcher
+U Hidden Horror
+R Inkwell Leviathan
+C Last Rites
+C Polluted Mire
+C Putrid Imp
+U Reanimate
+U Sickening Dreams
+M Sphinx of the Steel Wind
+L Swamp
+L Swamp
+L Swamp
+L Swamp
+R Terastodon
+C Twisted Abomination
+R Verdant Force
+U Zombie Infestation
