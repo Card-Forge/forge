@@ -24,13 +24,19 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+import com.google.common.collect.Lists;
+
 import net.miginfocom.swing.MigLayout;
 import forge.Singletons;
+import forge.control.Lobby;
 import forge.deck.Deck;
+import forge.game.GameType;
 import forge.game.Match;
+import forge.game.RegisteredPlayer;
 import forge.game.player.LobbyPlayer;
 import forge.gauntlet.GauntletData;
 import forge.gauntlet.GauntletIO;
+import forge.gui.SOverlayUtils;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FSkin;
 import forge.model.FModel;
@@ -80,10 +86,12 @@ public class GauntletWinLose extends ControlWinLose {
         // Pretty sure this can't be fixed until in-game states can be
         // saved. Doublestrike 07-10-12
         LobbyPlayer questPlayer = Singletons.getControl().getLobby().getQuestPlayer();
+
+        // In all cases, update stats.
+        lstEventRecords.set(gd.getCompleted(), match.getGamesWonBy(questPlayer) + " - "
+                + (match.getPlayedGames().size() - match.getGamesWonBy(questPlayer)));
+        
         if (match.isMatchOver()) {
-            // In all cases, update stats.
-            lstEventRecords.set(gd.getCompleted(), match.getGamesWonBy(questPlayer) + " - "
-                    + (match.getPlayedGames().size() - match.getGamesWonBy(questPlayer)));
             gd.setCompleted(gd.getCompleted() + 1);
 
             // Win match case
@@ -182,5 +190,26 @@ public class GauntletWinLose extends ControlWinLose {
         }
 
         return true;
+    }
+    
+    @Override
+    public void actionOnContinue() {
+        if (match.isMatchOver()) {
+            // To change the AI deck, we have to create a new match.
+            GauntletData gd = FModel.SINGLETON_INSTANCE.getGauntletData();
+            Deck aiDeck = gd.getDecks().get(gd.getCompleted());
+            List<RegisteredPlayer> players = Lists.newArrayList();
+            Lobby lobby = Singletons.getControl().getLobby();
+            players.add(RegisteredPlayer.fromDeck(gd.getUserDeck()).setPlayer(lobby.getGuiPlayer()));
+            players.add(RegisteredPlayer.fromDeck(aiDeck).setPlayer(lobby.getAiPlayer()));
+           
+            Match newMatch = new Match(GameType.Gauntlet, players);
+
+            SOverlayUtils.hideOverlay();
+            saveOptions();
+            newMatch.startRound();
+        } else {
+            super.actionOnContinue();
+        }
     }
 }
