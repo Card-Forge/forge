@@ -3,6 +3,7 @@ Code=FVR
 Date=2010-08-27
 Name=From the Vault: Relics
 Type=From_the_Vault
+Alias=V10
 
 [cards]
 M AEther Vial

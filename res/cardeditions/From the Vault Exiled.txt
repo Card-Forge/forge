@@ -3,6 +3,7 @@ Code=FVE
 Date=2009-08-28
 Name=From the Vault: Exiled
 Type=From_the_Vault
+Alias=V09
 
 [cards]
 M Balance

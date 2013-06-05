@@ -1,6 +1,6 @@
 [metadata]
 Code=ARN
-Date=1993-12-01
+Date=1993-12-21
 Name=Arabian Nights
 Code2=AN
 Type=Expansion
