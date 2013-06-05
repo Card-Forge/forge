@@ -48,6 +48,9 @@ Thran Turbine
 Chain Stasis
 Archive Trap
 Melee
+Ion Storm
+Summoning Trap
+Cobra Trap
 
 
 ----------
