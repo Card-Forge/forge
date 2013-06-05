@@ -54,7 +54,7 @@ FE FEM # Fallen Empires
 ===GPT # Guildpact
 ===GTC # Gatecrash
 GU ULG # Urza's Legacy
-===H09 # Premium Deck Series: Slivers
+PDS H09 # Premium Deck Series: Slivers
 HM HML # Homelands
 ===HOP # Planechase
 IA ICE # Ice Age

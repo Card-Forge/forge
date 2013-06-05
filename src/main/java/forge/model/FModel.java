@@ -140,7 +140,7 @@ public enum FModel {
         this.questPreferences = new QuestPreferences();
         this.gauntletData = new GauntletData();
 
-        this.editions = new EditionCollection(new File("res/cardeditions"));
+        this.editions = new EditionCollection(new File("res/editions"));
         
         // Loads all cards (using progress bar).
         FThreads.assertExecutedByEdt(false);
