@@ -1,0 +1,14 @@
+Name:Cobra Trap
+ManaCost:4 G G
+Types:Instant Trap
+T:Mode$ Destroyed | ValidCauser$ Player.Opponent | ValidCard$ Permanent.nonCreature+YouCtrl | Execute$ TrackValidDestroy | Static$ True
+SVar:TrackValidDestroy:DB$ StoreSVar | SVar$ SetTrap | Type$ CountSVar | Expression$ SetTrap/Plus.1
+T:Mode$ Phase | Phase$ Cleanup | Execute$ TrigReset | Static$ True
+SVar:TrigReset:AB$ StoreSVar | Cost$ 0 | SVar$ SetTrap | Type$ Number | Expression$ 0
+SVar:SetTrap:Number$0
+SVar:AltCost:Cost$ G | CheckSVar$ SetTrap | SVarCompare$ GE1 | Description$ If a noncreature permanent under your control was destroyed this turn by a spell or ability an opponent controlled, you may pay G rather than pay CARDNAME's mana cost.
+A:SP$ Token | Cost$ 4 G G | TokenAmount$ 4 | TokenName$ Snake | TokenTypes$ Creature,Snake | TokenOwner$ You | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1 | SpellDescription$ Put four 1/1 green Snake creature tokens onto the battlefield.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/cobra_trap.jpg
+Oracle:If a noncreature permanent under your control was destroyed this turn by a spell or ability an opponent controlled, you may pay {G} rather than pay Cobra Trap's mana cost.\nPut four 1/1 green Snake creature tokens onto the battlefield.
+SetInfo:COM Uncommon
+SetInfo:ZEN Uncommon
