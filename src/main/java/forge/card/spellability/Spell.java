@@ -101,20 +101,26 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
             }
         }
 
+        return checkOtherRestrictions();
+    } // canPlay()
+    
+    public boolean checkOtherRestrictions() {
+        final Card source = this.getSourceCard();
+        Player activator = getActivatingPlayer();
+        final Game game = activator.getGame();
         // CantBeCast static abilities
         final List<Card> allp = new ArrayList<Card>(game.getCardsIn(ZoneType.listValueOf("Battlefield,Command")));
-        allp.add(card);
+        allp.add(source);
         for (final Card ca : allp) {
             final ArrayList<StaticAbility> staticAbilities = ca.getStaticAbilities();
             for (final StaticAbility stAb : staticAbilities) {
-                if (stAb.applyAbility("CantBeCast", card, activator)) {
+                if (stAb.applyAbility("CantBeCast", source, activator)) {
                     return false;
                 }
             }
         }
-
         return true;
-    } // canPlay()
+    }
 
     /** {@inheritDoc} */
     @Override

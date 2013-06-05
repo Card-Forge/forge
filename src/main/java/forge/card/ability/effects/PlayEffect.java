@@ -206,7 +206,7 @@ public class PlayEffect extends SpellAbilityEffect {
             // get basic spells (no flashback, etc.)
             ArrayList<SpellAbility> sas = new ArrayList<SpellAbility>();
             for (SpellAbility s : tgtCard.getBasicSpells()) {
-                final SpellAbility newSA = s.copy();
+                final Spell newSA = (Spell) s.copy();
                 newSA.setActivatingPlayer(controller);
                 SpellAbilityRestriction res = new SpellAbilityRestriction();
                 // timing restrictions still apply
@@ -216,7 +216,7 @@ public class PlayEffect extends SpellAbilityEffect {
                 res.setZone(null);
                 newSA.setRestrictions(res);
                 // timing restrictions still apply
-                if (res.checkTimingRestrictions(tgtCard, newSA)) {
+                if (res.checkTimingRestrictions(tgtCard, newSA) && newSA.checkOtherRestrictions()) {
                     sas.add(newSA);
                 }
             }

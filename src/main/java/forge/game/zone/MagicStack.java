@@ -316,10 +316,9 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             //GuiDisplayUtil.updateGUI();
         } else {
             for (OptionalCost s : sp.getOptionalCosts()) {
-                
                 sp.getSourceCard().addOptionalCostPaid(s);
             }
-            if (sp.getSourceCard().isCopiedSpell()) {
+            if (sp.isCopied()) {
                 si = this.push(sp);
             } else {
                 if (sp.isMultiKicker()) {
@@ -474,7 +473,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             game.getPhaseHandler().setPriority(sp.getActivatingPlayer());
         }
 
-        if (sp.isSpell() && !sp.getSourceCard().isCopiedSpell()) {
+        if (sp.isSpell() && !sp.isCopied()) {
             this.thisTurnCast.add(sp.getSourceCard());
 
             final Game game = sp.getActivatingPlayer().getGame(); 

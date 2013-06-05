@@ -4,7 +4,7 @@ Types:Enchantment
 T:Mode$ SpellCast | ValidCard$ Card.wasCastFromHand | Execute$ TrigExileSpell | TriggerZones$ Battlefield | TriggerDescription$ Whenever a player casts a spell from his or her hand, that player exiles it, then exiles cards from the top of his or her library until he or she exiles a card that shares a card type with it. That player may cast that card without paying its mana cost. Then he or she puts all cards exiled with CARDNAME on the bottom of his or her library in a random order.
 SVar:TrigExileSpell:AB$ ChangeZone | Cost$ 0 | Defined$ TriggeredCard | Origin$ Stack | Destination$ Exile | Fizzle$ True | SubAbility$ DBDig | Imprint$ True
 SVar:DBDig:DB$ DigUntil | Defined$ TriggeredCardController | Valid$ Card.sharesTypeWith FirstImprinted | ValidDescription$ shares a card type with exiled card | FoundDestination$ Exile | RevealedDestination$ Exile | RememberFound$ True | ImprintRevealed$ True | SubAbility$ DBPlay
-SVar:DBPlay:DB$ Play | Defined$ Remembered | Controller$ RememberedController | WithoutManaCost$ True | Optional$ True | SubAbility$ DBChangeZone
+SVar:DBPlay:DB$ Play | Defined$ Remembered | Controller$ TriggeredCardController | WithoutManaCost$ True | Optional$ True | SubAbility$ DBChangeZone
 SVar:DBChangeZone:DB$ ChangeZoneAll | Origin$ Exile | ChangeType$ Card.IsRemembered,Card.IsImprinted | Destination$ Library | LibraryPosition$ -1 | RandomOrder$ True | SubAbility$ DBPossibilityCleanup
 SVar:DBPossibilityCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/possibility_storm.jpg

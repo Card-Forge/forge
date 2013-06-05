@@ -524,7 +524,9 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                             for (SpellAbility spell : spells) {
                                 if (tgtC.isInZone(ZoneType.Exile)) {
                                     final SpellAbilityStackInstance si = game.getStack().getInstanceFromSpellAbility(spell);
-                                    game.getStack().remove(si);
+                                    if (si != null) { 
+                                        game.getStack().remove(si);
+                                    }
                                 }
                             }
                         }
