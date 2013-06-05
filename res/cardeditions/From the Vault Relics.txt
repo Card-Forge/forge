@@ -1,8 +1,8 @@
 [metadata]
-Code=V10
+Code=FVR
 Date=2010-08-27
 Name=From the Vault: Relics
-Type=From_the_Valut
+Type=From_the_Vault
 
 [cards]
 M AEther Vial

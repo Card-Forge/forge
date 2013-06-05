@@ -1,8 +1,8 @@
 [metadata]
-Code=V09
+Code=FVE
 Date=2009-08-28
 Name=From the Vault: Exiled
-Type=From_the_Valut
+Type=From_the_Vault
 
 [cards]
 M Balance

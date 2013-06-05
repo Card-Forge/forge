@@ -1,8 +1,8 @@
 [metadata]
-Code=V11
+Code=FVL
 Date=2011-08-26
 Name=From the Vault: Legends
-Type=From_the_Valut
+Type=From_the_Vault
 
 [cards]
 M Cao Cao, Lord of Wei

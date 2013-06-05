@@ -2,7 +2,7 @@
 Code=V12
 Date=2012-08-31
 Name=From the Vault: Realms
-Type=From_the_Valut
+Type=From_the_Vault
 
 [cards]
 M Ancient Tomb
