@@ -41,6 +41,7 @@ import forge.util.MyRandom;
 import forge.util.maps.CollectionSuppliers;
 import forge.util.maps.MapOfLists;
 import forge.util.maps.TreeMapOfLists;
+import forge.view.arcane.CardPanel;
 
 public final class CardDb implements ICardDatabase {
     private static volatile CardDb commonCards = null; // 'volatile' keyword makes this working
@@ -111,6 +112,15 @@ public final class CardDb implements ICardDatabase {
                 // else card is not scripted yet
             }
         }
+        
+        for(CardRules cr : rulesByName.values()) {
+            if( !allCardsByName.containsKey(cr.getName()) )
+            {
+                System.err.println("The card " + cr.getName() + " was not assigned to any set. Adding it to UNKNOWN set... to fix see res/cardeditions/ folder. ");
+                addCard(new PaperCard(cr, CardEdition.UNKNOWN.getCode(), CardRarity.Special, 0));
+            }
+        }
+        
         reIndex();
     }
 
