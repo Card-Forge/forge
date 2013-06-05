@@ -33,6 +33,7 @@ import com.google.common.base.Function;
 
 import forge.Command;
 import forge.Singletons;
+import forge.card.CardDb;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckBase;
@@ -54,7 +55,6 @@ import forge.gui.home.quest.CSubmenuQuestDecks;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FSkin;
 import forge.item.BoosterPack;
-import forge.item.CardDb;
 import forge.item.PaperCard;
 import forge.item.FatPack;
 import forge.item.IPaperCard;

@@ -35,7 +35,6 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 import forge.Singletons;
-import forge.item.CardDb;
 import forge.item.PaperCard;
 import forge.item.IPaperCard;
 import forge.item.PrintSheet;

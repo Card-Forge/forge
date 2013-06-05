@@ -44,10 +44,10 @@ public final class PaperCard implements Comparable<IPaperCard>, InventoryItemFro
     private final transient CardRules card;
 
     // These fields are kinda PK for PrintedCard
-    private final String name;
-    private final String edition;
-    private final int artIndex;
-    private final boolean foiled;
+    public final String name;
+    public final String edition;
+    public final int artIndex;
+    public final boolean foil;
 
     // Calculated fields are below:
     private final transient CardRarity rarity; // rarity is given in ctor when set is assigned
@@ -69,7 +69,7 @@ public final class PaperCard implements Comparable<IPaperCard>, InventoryItemFro
 
     @Override
     public boolean isFoil() {
-        return this.foiled;
+        return this.foil;
     }
 
     @Override
@@ -117,59 +117,24 @@ public final class PaperCard implements Comparable<IPaperCard>, InventoryItemFro
         }
     };    
 
-    public static final Function<PaperCard, Integer> FN_GET_EDITION_INDEX = new Function<PaperCard, Integer>() {
-        @Override
-        public Integer apply(final PaperCard from) {
-            return Integer.valueOf(Singletons.getModel().getEditions().get(from.getEdition()).getIndex());
-        }
-    };
-
-    // Constructor is private. All non-foiled instances are stored in CardDb
-    private PaperCard(final CardRules c, final String edition0, final CardRarity rare, final int index, final boolean foil) {
+    public PaperCard(final CardRules c, final String edition0, final CardRarity rare, final int index) {
+        this(c, edition0, rare, index, false);
+    }
+    
+    public PaperCard(final CardRules c, final String edition0, final CardRarity rare, final int index, final boolean foil) {
         this.card = c;
         this.name = c.getName();
         this.edition = edition0;
         this.artIndex = index;
-        this.foiled = foil;
+        this.foil = foil;
         this.rarity = rare;
     }
 
-    /* package visibility */
-    /**
-     * Builds the.
-     * 
-     * @param c
-     *            the c
-     * @param edition
-     *            the set
-     * @param rare
-     *            the rare
-     * @param index
-     *            the index
-     * @return the card printed
-     */
-    static PaperCard build(final CardRules c, final String edition, final CardRarity rare, final int index) {
-        return new PaperCard(c, edition, rare, index, false);
-    }
-
-    /* foiled don't need to stay in CardDb's structures, so u'r free to create */
-    /**
-     * Make foiled.
-     * 
-     * @param c
-     *            the c
-     * @return the card printed
-     */
     public static PaperCard makeFoiled(final PaperCard c) {
         return new PaperCard(c.card, c.edition, c.rarity, c.artIndex, true);
     }
-
+    
     // Want this class to be a key for HashTable
-    /*
-     * (non-Javadoc)
-     * 
-     * @see java.lang.Object#equals(java.lang.Object)
-     */
     @Override
     public boolean equals(final Object obj) {
         if (this == obj) {
@@ -189,7 +154,7 @@ public final class PaperCard implements Comparable<IPaperCard>, InventoryItemFro
         if (!this.edition.equals(other.edition)) {
             return false;
         }
-        if ((other.foiled != this.foiled) || (other.artIndex != this.artIndex)) {
+        if ((other.foil != this.foil) || (other.artIndex != this.artIndex)) {
             return false;
         }
 
@@ -204,7 +169,7 @@ public final class PaperCard implements Comparable<IPaperCard>, InventoryItemFro
     @Override
     public int hashCode() {
         final int code = (this.name.hashCode() * 11) + (this.edition.hashCode() * 59) + (this.artIndex * 2);
-        if (this.foiled) {
+        if (this.foil) {
             return code + 1;
         }
         return code;

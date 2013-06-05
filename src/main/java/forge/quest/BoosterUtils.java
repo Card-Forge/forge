@@ -29,11 +29,11 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 import forge.Singletons;
+import forge.card.CardDb;
 import forge.card.CardRules;
 import forge.card.CardRulesPredicates;
 import forge.card.MagicColor;
 import forge.item.BoosterPack;
-import forge.item.CardDb;
 import forge.item.PaperCard;
 import forge.item.IPaperCard;
 import forge.item.InventoryItem;

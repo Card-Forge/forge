@@ -17,10 +17,7 @@
  */
 package forge.card;
 
-import java.util.Map;
 import java.util.StringTokenizer;
-import java.util.TreeMap;
-
 import org.apache.commons.lang3.StringUtils;
 
 import forge.card.mana.IParserManaCost;
@@ -38,16 +35,12 @@ import forge.card.mana.ManaCostShard;
  * @version $Id$
  */
 public class CardRulesReader {
-    public final static EditionCollection editions = new EditionCollection(); // create a copy here, Singletons.model... is not initialized yet.
-    
     // fields to build 
     private CardFace[] faces = new CardFace[] { null, null };
     private String[] pictureUrl = new String[] { null, null };
     private int curFace = 0;
     private CardSplitType altMode = CardSplitType.None;
     private String handLife = null; 
-    
-    private Map<String,CardInSet> sets = new TreeMap<String, CardInSet>(String.CASE_INSENSITIVE_ORDER);
     
     // fields to build CardAiHints
     private boolean removedFromAIDecks = false;
@@ -68,8 +61,6 @@ public class CardRulesReader {
         this.faces[1] = null;
         this.pictureUrl[0] = null;
         this.pictureUrl[1] = null;
-        
-        this.sets.clear();
 
         this.handLife = null;
         this.altMode = CardSplitType.None;
@@ -89,7 +80,7 @@ public class CardRulesReader {
         CardAiHints cah = new CardAiHints(removedFromAIDecks, removedFromRandomDecks, hints, needs );
         faces[0].assignMissingFields();
         if (null != faces[1]) faces[1].assignMissingFields();
-        final CardRules result = new CardRules(faces, altMode, cah, sets);
+        final CardRules result = new CardRules(faces, altMode, cah);
         result.setDlUrls(pictureUrl);
         if (StringUtils.isNotBlank(handLife))
             result.setVanguardProperties(handLife);
@@ -219,7 +210,7 @@ public class CardRulesReader {
                     } else
                         this.faces[curFace].addSVar(variable, value);
                 } else if ("SetInfo".equals(key)) {
-                    parseSetInfoLine(value);
+                    // deprecated
                 }
                 break;
 
@@ -234,64 +225,6 @@ public class CardRulesReader {
                 break;
         }
 
-    }
-
-    /**
-     * Parse a SetInfo line from a card txt file.
-     * 
-     * @param line
-     *            must begin with "SetInfo:"
-     * @param setsData
-     *            the current mapping of set names to CardInSet instances
-     */
-    private void parseSetInfoLine(final String value) {
-        // Sample SetInfo line:
-        // SetInfo:POR Land x4
-
-        int i = 0;
-        String setCode = null;
-        String txtRarity = "Common";
-        String txtCount = "x1";
-        
-        StringTokenizer stt = new StringTokenizer(value, " ");
-        while(stt.hasMoreTokens()) {
-            if( i == 0 ) setCode = stt.nextToken();
-            if( i == 1 ) txtRarity = stt.nextToken();
-            if( i == 2 ) txtCount = stt.nextToken();
-            i++;
-        }
-
-
-        int numIllustrations = 1;
-        if ( i > 2 )
-            numIllustrations = Integer.parseInt(txtCount.substring(1));
-
-        if (sets.containsKey(setCode)) {
-            System.err.print(faces[0].getName());
-            throw new RuntimeException("Found multiple SetInfo lines for set code <<" + setCode + ">>");
-        }
-
-
-        CardRarity rarity = null;
-        if ("Land".equals(txtRarity)) {
-            rarity = CardRarity.BasicLand;
-        } else if ("Common".equals(txtRarity)) {
-            rarity = CardRarity.Common;
-        } else if ("Uncommon".equals(txtRarity)) {
-            rarity = CardRarity.Uncommon;
-        } else if ("Rare".equals(txtRarity)) {
-            rarity = CardRarity.Rare;
-        } else if ("Mythic".equals(txtRarity)) {
-            rarity = CardRarity.MythicRare;
-        } else if ("Special".equals(txtRarity)) {
-            rarity = CardRarity.Special;
-        } else {
-            throw new RuntimeException("Unrecognized rarity string <<" + txtRarity + ">>");
-        }
-
-        final CardInSet cardInSet = new CardInSet(rarity, numIllustrations);
-
-        sets.put(setCode, cardInSet);
     }
 
     /**

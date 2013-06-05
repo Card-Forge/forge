@@ -136,7 +136,7 @@ public class QuestUtilUnlockSets {
          Collections.sort(excludedSets);
 
          // get a number of sets between an excluded and any included set
-         List<ImmutablePair<CardEdition, Integer>> excludedWithDistances = new ArrayList<ImmutablePair<CardEdition, Integer>>();
+         List<ImmutablePair<CardEdition, Long>> excludedWithDistances = new ArrayList<ImmutablePair<CardEdition, Long>>();
          for (CardEdition ex : excludedSets) {
              switch (ex.getType()) {
              case CORE: case EXPANSION: case REPRINT: case STARTER: break;
@@ -147,9 +147,9 @@ public class QuestUtilUnlockSets {
              default:
                  throw new RuntimeException("unhandled card edition type: " + ex.getType());                 
              }
-             int distance = Integer.MAX_VALUE;
+             long distance = Integer.MAX_VALUE;
              for (CardEdition in : allowedSets) {
-                 int d = Math.abs(ex.getIndex() - in.getIndex());
+                 long d = Math.abs(ex.getDate().getTime() - in.getDate().getTime());
                  if (d < distance) {
                      distance = d;
                  }
@@ -158,16 +158,16 @@ public class QuestUtilUnlockSets {
          }
 
          // sort by distance, then by code desc
-         Collections.sort(excludedWithDistances, new Comparator<ImmutablePair<CardEdition, Integer>>() {
+         Collections.sort(excludedWithDistances, new Comparator<ImmutablePair<CardEdition, Long>>() {
             @Override
-            public int compare(ImmutablePair<CardEdition, Integer> o1, ImmutablePair<CardEdition, Integer> o2) {
-                int d1 = o2.right - o1.right;
-                return d1 != 0 ? d1 : o1.left.getIndex() - o2.left.getIndex();
+            public int compare(ImmutablePair<CardEdition, Long> o1, ImmutablePair<CardEdition, Long> o2) {
+                long delta = o2.right - o1.right;
+                return delta < 0 ? -1 : delta == 0 ? 0 : 1;
             }
          });
 
 
-         for (ImmutablePair<CardEdition, Integer> set : excludedWithDistances) {
+         for (ImmutablePair<CardEdition, Long> set : excludedWithDistances) {
              options.add(set.left);
              // System.out.println("Padded with: " + fillers.get(i).getName());
          }

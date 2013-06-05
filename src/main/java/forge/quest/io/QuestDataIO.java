@@ -54,13 +54,13 @@ import com.thoughtworks.xstream.io.HierarchicalStreamReader;
 import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
 
 import forge.Singletons;
+import forge.card.CardDb;
 import forge.card.CardEdition;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.error.BugReporter;
 import forge.item.BoosterPack;
-import forge.item.CardDb;
 import forge.item.PaperCard;
 import forge.item.FatPack;
 import forge.item.InventoryItem;

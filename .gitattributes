@@ -13923,9 +13923,9 @@ src/main/java/forge/card/CardAiHints.java -text
 src/main/java/forge/card/CardBlock.java -text
 src/main/java/forge/card/CardCharacteristics.java -text
 src/main/java/forge/card/CardCoreType.java -text
+src/main/java/forge/card/CardDb.java -text
 src/main/java/forge/card/CardEdition.java -text
 src/main/java/forge/card/CardFace.java -text
-src/main/java/forge/card/CardInSet.java -text
 src/main/java/forge/card/CardRarity.java -text
 src/main/java/forge/card/CardRules.java -text
 src/main/java/forge/card/CardRulesPredicates.java -text
@@ -13939,6 +13939,7 @@ src/main/java/forge/card/EditionCollection.java svneol=native#text/plain
 src/main/java/forge/card/FatPackTemplate.java -text
 src/main/java/forge/card/FormatCollection.java -text
 src/main/java/forge/card/ICardCharacteristics.java -text
+src/main/java/forge/card/ICardDatabase.java -text
 src/main/java/forge/card/ICardFace.java -text
 src/main/java/forge/card/ICardRawAbilites.java -text
 src/main/java/forge/card/IUnOpenedProduct.java -text
@@ -14673,7 +14674,6 @@ src/main/java/forge/gui/toolbox/FTextField.java -text
 src/main/java/forge/gui/toolbox/SaveOpenDialog.java -text
 src/main/java/forge/gui/toolbox/package-info.java svneol=native#text/plain
 src/main/java/forge/item/BoosterPack.java -text
-src/main/java/forge/item/CardDb.java -text
 src/main/java/forge/item/FatPack.java -text
 src/main/java/forge/item/IPaperCard.java -text
 src/main/java/forge/item/InventoryItem.java -text

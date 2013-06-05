@@ -26,6 +26,7 @@ import com.google.common.base.Supplier;
 
 import forge.Command;
 import forge.Singletons;
+import forge.card.CardDb;
 import forge.card.CardRulesPredicates;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
@@ -41,7 +42,6 @@ import forge.gui.deckeditor.views.VCardCatalog;
 import forge.gui.deckeditor.views.VCurrentDeck;
 import forge.gui.framework.EDocID;
 import forge.gui.toolbox.FLabel;
-import forge.item.CardDb;
 import forge.item.PaperCard;
 import forge.item.InventoryItem;
 import forge.item.ItemPool;

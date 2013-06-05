@@ -15,13 +15,13 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 
 import forge.Singletons;
+import forge.card.CardDb;
 import forge.deck.generate.Generate2ColorDeck;
 import forge.deck.generate.Generate3ColorDeck;
 import forge.deck.generate.Generate5ColorDeck;
 import forge.deck.generate.GenerateColoredDeckBase;
 import forge.deck.generate.GenerateMonoColorDeck;
 import forge.deck.generate.GenerateThemeDeck;
-import forge.item.CardDb;
 import forge.item.PaperCard;
 import forge.item.ItemPoolView;
 import forge.item.PreconDeck;

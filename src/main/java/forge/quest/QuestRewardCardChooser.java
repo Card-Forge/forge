@@ -9,7 +9,7 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 
 import forge.Singletons;
-import forge.item.CardDb;
+import forge.card.CardDb;
 import forge.item.PaperCard;
 import forge.item.InventoryItem;
 import forge.item.ItemPool;

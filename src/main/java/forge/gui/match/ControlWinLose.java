@@ -9,6 +9,7 @@ import javax.swing.JButton;
 
 import forge.Card;
 import forge.Singletons;
+import forge.card.CardDb;
 import forge.control.FControl;
 import forge.deck.Deck;
 import forge.game.GameOutcome;
@@ -19,7 +20,6 @@ import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 import forge.gui.SOverlayUtils;
-import forge.item.CardDb;
 import forge.item.PaperCard;
 import forge.properties.ForgePreferences.FPref;
 

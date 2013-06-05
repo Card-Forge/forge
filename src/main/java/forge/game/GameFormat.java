@@ -26,6 +26,7 @@ import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Lists;
 
+import forge.card.CardDb;
 import forge.card.CardRulesPredicates;
 import forge.item.PaperCard;
 import forge.item.IPaperCard;
@@ -90,7 +91,7 @@ public class GameFormat implements Comparable<GameFormat> {
         if (this.allowedSetCodes == null || this.allowedSetCodes.isEmpty()) {
             return banNames;
         }
-        return Predicates.and(banNames, Predicates.compose(CardRulesPredicates.wasPrintedInSets(this.allowedSetCodes), PaperCard.FN_GET_RULES));
+        return Predicates.and(banNames, CardDb.instance().wasPrintedInSets(this.allowedSetCodes));
     }
 
     /**

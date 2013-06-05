@@ -24,8 +24,8 @@ import java.util.TreeMap;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.ImageCache;
+import forge.card.CardDb;
 import forge.card.CardRules;
-import forge.item.CardDb;
 import forge.item.PaperCard;
 import forge.properties.NewConstants;
 

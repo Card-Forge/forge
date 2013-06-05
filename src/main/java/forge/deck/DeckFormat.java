@@ -26,8 +26,8 @@ import org.apache.commons.lang.math.IntRange;
 
 import forge.Singletons;
 import forge.card.CardCoreType;
+import forge.card.CardDb;
 import forge.card.ColorSet;
-import forge.item.CardDb;
 import forge.item.PaperCard;
 import forge.item.IPaperCard;
 import forge.properties.ForgePreferences.FPref;

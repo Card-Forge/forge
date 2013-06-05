@@ -19,10 +19,6 @@ package forge.card;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-import java.util.TreeMap;
-
 import forge.card.mana.ManaCost;
 
 /**
@@ -36,13 +32,13 @@ public final class CardRules implements ICardCharacteristics {
     private final CardSplitType splitType;
     private final ICardFace mainPart;
     private final ICardFace otherPart;
-    private final Map<String, CardInSet> setsPrinted = new TreeMap<String, CardInSet>(String.CASE_INSENSITIVE_ORDER);
+    //private final Map<String, CardInSet> setsPrinted = new TreeMap<String, CardInSet>(String.CASE_INSENSITIVE_ORDER);
 
     private CardAiHints aiHints;
     
     private ColorSet colorIdentity = null;
 
-    public CardRules(ICardFace[] faces, CardSplitType altMode, CardAiHints cah, Map<String, CardInSet> sets) {
+    public CardRules(ICardFace[] faces, CardSplitType altMode, CardAiHints cah) {
         splitType = altMode;
         mainPart = faces[0];
         otherPart = faces[1];
@@ -50,16 +46,16 @@ public final class CardRules implements ICardCharacteristics {
         
         //System.out.print(faces[0].getName());
         
-        for (Entry<String, CardInSet> cs : sets.entrySet()) {
-            if( CardRulesReader.editions.get(cs.getKey()) != null )
-                setsPrinted.put(cs.getKey(), cs.getValue());
-        }
-
-        if ( setsPrinted.isEmpty() ) { 
-            System.err.println(getName() + " was not assigned any set."); 
-            setsPrinted.put(CardEdition.UNKNOWN.getCode(), new CardInSet(CardRarity.Common, 1) );
-        }
-        
+//        for (Entry<String, CardInSet> cs : sets.entrySet()) {
+//            if( CardRulesReader.editions.get(cs.getKey()) != null )
+//                setsPrinted.put(cs.getKey(), cs.getValue());
+//        }
+//
+//        if ( setsPrinted.isEmpty() ) { 
+//            System.err.println(getName() + " was not assigned any set."); 
+//            setsPrinted.put(CardEdition.UNKNOWN.getCode(), new CardInSet(CardRarity.Common, 1) );
+//        }
+//        
         //Calculate Color Identity
         byte colMask = calculateColorIdentity(mainPart);
         
@@ -176,11 +172,11 @@ public final class CardRules implements ICardCharacteristics {
         }
     }
 
-    public Set<String> getSets() { return this.setsPrinted.keySet(); }
-    public CardInSet getEditionInfo(final String setCode) {
-        final CardInSet result = this.setsPrinted.get(setCode);
-        return result; // if returns null, String.format("Card '%s' was never printed in set '%s'", this.getName(), setCode);
-    }
+//    public Set<String> getSets() { return this.setsPrinted.keySet(); }
+//    public CardInSet getEditionInfo(final String setCode) {
+//        final CardInSet result = this.setsPrinted.get(setCode);
+//        return result; // if returns null, String.format("Card '%s' was never printed in set '%s'", this.getName(), setCode);
+//    }
 
     // vanguard card fields, they don't use sides.
     private int deltaHand;

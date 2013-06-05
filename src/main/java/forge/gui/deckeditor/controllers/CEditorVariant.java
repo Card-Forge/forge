@@ -24,6 +24,7 @@ import com.google.common.base.Supplier;
 import com.google.common.collect.Iterables;
 
 import forge.Singletons;
+import forge.card.CardDb;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.gui.deckeditor.SEditorIO;
@@ -39,7 +40,6 @@ import forge.gui.deckeditor.views.VCurrentDeck;
 import forge.gui.deckeditor.views.VDeckgen;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.EDocID;
-import forge.item.CardDb;
 import forge.item.PaperCard;
 import forge.item.InventoryItem;
 import forge.item.ItemPool;

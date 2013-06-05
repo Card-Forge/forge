@@ -34,6 +34,7 @@ import com.google.common.cache.CacheLoader.InvalidCacheLoadException;
 import com.google.common.cache.LoadingCache;
 import com.mortennobel.imagescaling.ResampleOp;
 
+import forge.card.CardDb;
 import forge.card.CardRules;
 import forge.card.CardSplitType;
 import forge.game.player.IHasIcon;
@@ -247,7 +248,7 @@ public class ImageCache {
         final int cntPictures;
         final boolean hasManyPictures;
         if (includeSet) {
-            cntPictures = card.getEditionInfo(edition).getCopiesCount();
+            cntPictures = card.isTraditional() ? CardDb.instance().getPrintCount(card.getName(), edition) : CardDb.variants().getPrintCount(card.getName(), edition); 
             hasManyPictures = cntPictures > 1;
         } else {
             // without set number of pictures equals number of urls provided in Svar:Picture
@@ -255,10 +256,7 @@ public class ImageCache {
             cntPictures = StringUtils.countMatches(urls, "\\") + 1;
 
             // raise the art index limit to the maximum of the sets this card was printed in
-            int maxCntPictures = 1;
-            for (String set : card.getSets()) {
-                maxCntPictures = Math.max(maxCntPictures, card.getEditionInfo(set).getCopiesCount());
-            }
+            int maxCntPictures = card.isTraditional() ? CardDb.instance().getMaxPrintCount(card.getName()) : CardDb.variants().getMaxPrintCount(card.getName());
             hasManyPictures = maxCntPictures > 1;
         }
         

@@ -5,6 +5,7 @@ import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 
 import forge.Command;
+import forge.card.CardDb;
 import forge.card.CardRulesPredicates;
 import forge.deck.Deck;
 import forge.deck.DeckBase;
@@ -16,7 +17,6 @@ import forge.gui.deckeditor.SEditorIO;
 import forge.gui.deckeditor.views.VDeckgen;
 import forge.gui.framework.ICDoc;
 import forge.gui.toolbox.FLabel;
-import forge.item.CardDb;
 import forge.item.PaperCard;
 import forge.item.InventoryItem;
 import forge.util.Aggregates;

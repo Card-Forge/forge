@@ -17,6 +17,7 @@
  */
 package forge.card;
 
+import java.io.File;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -28,8 +29,8 @@ public final class EditionCollection extends StorageView<CardEdition> {
 
     private final Map<String, CardEdition> aliasToEdition = new TreeMap<String, CardEdition>();
 
-    public EditionCollection() {
-        super(new CardEdition.Reader("res/blockdata/setdata.txt"));
+    public EditionCollection(File folder) {
+        super(new CardEdition.EditionReader(folder));
 
         for (CardEdition ee : this) {
             String alias = ee.getAlias();
@@ -54,7 +55,7 @@ public final class EditionCollection extends StorageView<CardEdition> {
     }
 
     /**
-     * Gets the sets the by code or throw.
+     * Gets the sets by code or throw.
      * 
      * @param code
      *            the code

@@ -21,9 +21,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import forge.Card;
+import forge.card.CardDb;
 import forge.card.CardEdition;
 import forge.card.CardRulesReader;
-import forge.item.CardDb;
 import forge.item.PaperToken;
 import forge.item.IPaperCard;
 import forge.quest.bazaar.QuestPetController;

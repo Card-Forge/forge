@@ -21,6 +21,7 @@ import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 
 import forge.Singletons;
+import forge.card.CardDb;
 import forge.control.FControl;
 import forge.deck.CardPool;
 import forge.deck.Deck;
@@ -37,7 +38,6 @@ import forge.gui.deckeditor.views.VCurrentDeck;
 import forge.gui.deckeditor.views.VDeckgen;
 import forge.gui.framework.DragCell;
 import forge.gui.home.sanctioned.CSubmenuDraft;
-import forge.item.CardDb;
 import forge.item.PaperCard;
 import forge.item.InventoryItem;
 import forge.item.ItemPoolView;

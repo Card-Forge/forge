@@ -32,15 +32,16 @@ import com.google.common.collect.Lists;
 import forge.Constant;
 import forge.Singletons;
 import forge.card.BoosterGenerator;
+import forge.card.CardDb;
 import forge.card.CardEdition;
 import forge.card.CardRarity;
 import forge.card.FormatCollection;
+import forge.card.ICardDatabase;
 import forge.card.SealedProductTemplate;
 import forge.card.UnOpenedProduct;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.item.BoosterPack;
-import forge.item.CardDb;
 import forge.item.PaperCard;
 import forge.item.FatPack;
 import forge.item.IPaperCard;
@@ -89,7 +90,7 @@ public final class QuestUtilCards {
      * @return the item pool view
      */
     public static ItemPoolView<PaperCard> generateBasicLands(final int nBasic, final int nSnow, final GameFormatQuest usedFormat) {
-        final CardDb db = CardDb.instance();
+        final ICardDatabase db = CardDb.instance();
         final ItemPool<PaperCard> pool = new ItemPool<PaperCard>(PaperCard.class);
 
         List<String> landCodes = new ArrayList<String>();

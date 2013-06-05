@@ -25,10 +25,10 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 
 import forge.card.BoosterTemplate;
+import forge.card.CardDb;
 import forge.card.SealedProductTemplate;
 import forge.deck.Deck;
 import forge.deck.DeckBase;
-import forge.item.CardDb;
 import forge.item.PaperCard;
 import forge.item.ItemPool;
 import forge.item.ItemPoolView;

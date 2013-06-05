@@ -20,9 +20,9 @@ import com.thoughtworks.xstream.converters.UnmarshallingContext;
 import com.thoughtworks.xstream.io.HierarchicalStreamReader;
 import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
 
+import forge.card.CardDb;
 import forge.deck.CardPool;
 import forge.error.BugReporter;
-import forge.item.CardDb;
 import forge.item.PaperCard;
 import forge.properties.NewConstants;
 import forge.util.IgnoringXStream;

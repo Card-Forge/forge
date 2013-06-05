@@ -10,7 +10,6 @@ import org.apache.commons.lang3.tuple.Pair;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 
-import forge.item.CardDb;
 import forge.item.PaperCard;
 import forge.item.ItemPoolView;
 import forge.item.PrintSheet;

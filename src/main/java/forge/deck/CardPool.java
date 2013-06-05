@@ -27,7 +27,7 @@ import java.util.NoSuchElementException;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.Card;
-import forge.item.CardDb;
+import forge.card.CardDb;
 import forge.item.PaperCard;
 import forge.item.ItemPool;
 

@@ -22,8 +22,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import forge.card.CardDb;
 import forge.error.BugReporter;
-import forge.item.CardDb;
 import forge.item.PaperCard;
 import forge.item.ItemPoolView;
 import forge.util.FileUtil;

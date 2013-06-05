@@ -160,17 +160,6 @@ public final class CardRulesPredicates {
     }
 
     /**
-     * Was printed in sets.
-     * 
-     * @param setCodes
-     *            the set codes
-     * @return the predicate
-     */
-    public static Predicate<CardRules> wasPrintedInSets(final List<String> setCodes) {
-        return new PredicateExistsInSets(setCodes);
-    }
-
-    /**
      * Core type.
      * 
      * @param isEqual
@@ -439,22 +428,6 @@ public final class CardRulesPredicates {
         }
     }
 
-    private static class PredicateExistsInSets implements Predicate<CardRules> {
-        private final List<String> sets;
-
-        public PredicateExistsInSets(final List<String> wantSets) {
-            this.sets = wantSets; // maybe should make a copy here?
-        }
-
-        @Override
-        public boolean apply(final CardRules subject) {
-            for (final String s : this.sets)
-                if ( null != subject.getEditionInfo(s) )
-                    return true;
-            return false;
-        }
-    }
-    
     private static class PredicateSplitType implements Predicate<CardRules> {
         private final CardSplitType cst;
 

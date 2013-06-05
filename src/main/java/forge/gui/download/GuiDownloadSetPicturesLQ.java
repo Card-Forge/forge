@@ -26,8 +26,8 @@ import org.apache.commons.lang3.StringUtils;
 import com.google.common.collect.Iterables;
 
 import forge.ImageCache;
+import forge.card.CardDb;
 import forge.card.CardEdition;
-import forge.item.CardDb;
 import forge.item.PaperCard;
 import forge.properties.NewConstants;
 

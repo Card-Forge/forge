@@ -31,10 +31,10 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.base.Function;
 
+import forge.card.CardDb;
 import forge.deck.io.DeckFileHeader;
 import forge.deck.io.DeckSerializer;
 import forge.gui.deckeditor.tables.TableSorter;
-import forge.item.CardDb;
 import forge.item.PaperCard;
 import forge.item.IPaperCard;
 import forge.item.ItemPoolView;

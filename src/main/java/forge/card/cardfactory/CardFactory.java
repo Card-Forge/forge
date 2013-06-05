@@ -30,6 +30,7 @@ import forge.Command;
 import forge.CounterType;
 import forge.ImageCache;
 import forge.card.CardCharacteristics;
+import forge.card.CardDb;
 import forge.card.CardRules;
 import forge.card.CardSplitType;
 import forge.card.ICardFace;
@@ -46,7 +47,6 @@ import forge.card.spellability.Target;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerHandler;
 import forge.game.player.Player;
-import forge.item.CardDb;
 import forge.item.PaperCard;
 import forge.item.IPaperCard;
 

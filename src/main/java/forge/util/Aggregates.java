@@ -76,6 +76,8 @@ public class Aggregates {
      * @return the t
      */
     public static final <T> T random(final Iterable<T> source) {
+        if( null == source ) 
+            return null;
         Random rnd = MyRandom.getRandom(); 
         if ( source instanceof List<?> )
         {

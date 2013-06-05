@@ -30,7 +30,7 @@ import forge.Constant.Preferences;
 import forge.FThreads;
 import forge.card.BoosterTemplate;
 import forge.card.CardBlock;
-import forge.card.CardRulesReader;
+import forge.card.CardDb;
 import forge.card.EditionCollection;
 import forge.card.FatPackTemplate;
 import forge.card.FormatCollection;
@@ -41,7 +41,6 @@ import forge.error.BugReporter;
 import forge.error.ExceptionHandler;
 import forge.game.limited.GauntletMini;
 import forge.gauntlet.GauntletData;
-import forge.item.CardDb;
 import forge.item.PrintSheet;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
@@ -143,7 +142,15 @@ public enum FModel {
         this.questPreferences = new QuestPreferences();
         this.gauntletData = new GauntletData();
 
-        this.editions = CardRulesReader.editions; // CardRules ctor cannot refer to FModel, since it is not yet build by that moment
+        this.editions = new EditionCollection(new File("res/cardeditions"));
+        
+        // Loads all cards (using progress bar).
+        FThreads.assertExecutedByEdt(false);
+        final CardStorageReader reader = new CardStorageReader(NewConstants.CARD_DATA_DIR, true);
+        // this fills in our map of card names to Card instances.
+        CardDb.setup(reader.loadCards(), editions);
+
+ 
         this.formats = new FormatCollection("res/blockdata/formats.txt");
         this.boosters = new StorageView<BoosterTemplate>(new BoosterTemplate.Reader("res/blockdata/boosters.txt"));
         this.specialBoosters = new StorageView<SealedProductTemplate>(new SealedProductTemplate.Reader("res/blockdata/boosters-special.txt"));
@@ -157,16 +164,6 @@ public enum FModel {
 
         this.loadDynamicGamedata();
 
-        // Loads all cards (using progress bar).
-        FThreads.assertExecutedByEdt(false);
-        final CardStorageReader reader = new CardStorageReader(NewConstants.CARD_DATA_DIR, true);
-        try {
-            // this fills in our map of card names to Card instances.
-            CardDb.setup(reader.loadCards());
-            
-        } catch (final Exception ex) {
-            BugReporter.reportException(ex);
-        }
 
         this.decks = new CardCollections();
         this.quest = new QuestController();

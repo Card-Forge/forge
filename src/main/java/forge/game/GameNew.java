@@ -19,6 +19,7 @@ import forge.Card;
 import forge.CardLists;
 import forge.CardPredicates;
 import forge.GameLogEntryType;
+import forge.card.CardDb;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerHandler;
 import forge.deck.CardPool;
@@ -29,7 +30,6 @@ import forge.game.player.PlayerType;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiDialog;
-import forge.item.CardDb;
 import forge.item.PaperCard;
 import forge.item.IPaperCard;
 import forge.properties.ForgePreferences;
@@ -122,12 +122,9 @@ public class GameNew {
                 PaperCard cpi = cp;
                 // apply random pictures for cards
                 if (preferences.getPrefBoolean(FPref.UI_RANDOM_CARD_ART)) {
-                    final int cntVariants = cp.getRules().getEditionInfo(cp.getEdition()).getCopiesCount();
-                    if (cntVariants > 1) {
-                        cpi = CardDb.instance().getCard(cp.getName(), cp.getEdition(), generator.nextInt(cntVariants));
-                        if ( cp.isFoil() )
-                            cpi = PaperCard.makeFoiled(cpi);
-                    }
+                    cpi = CardDb.instance().getCard(cp.getName(), cp.getEdition(), -1);
+                    if ( cp.isFoil() )
+                        cpi = PaperCard.makeFoiled(cpi);
                 }
 
                 final Card card = cpi.toForgeCard(player);

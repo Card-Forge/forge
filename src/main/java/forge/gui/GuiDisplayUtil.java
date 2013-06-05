@@ -41,6 +41,7 @@ import forge.CardLists;
 import forge.CardPredicates;
 import forge.CounterType;
 import forge.Singletons;
+import forge.card.CardDb;
 import forge.card.spellability.AbilityManaPart;
 import forge.card.spellability.SpellAbility;
 import forge.card.trigger.TriggerType;
@@ -52,7 +53,6 @@ import forge.game.player.HumanPlay;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.input.InputSelectCardsFromList;
-import forge.item.CardDb;
 import forge.item.PaperCard;
 import forge.item.IPaperCard;
 

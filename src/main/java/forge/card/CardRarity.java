@@ -36,4 +36,12 @@ public enum CardRarity {
     public String toString() {
         return this.strValue;
     }
+    
+    public static CardRarity smartValueOf(String input) {
+        for(CardRarity r : CardRarity.values()) {
+            if( r.name().equalsIgnoreCase(input) || r.strValue.equalsIgnoreCase(input))
+                return r;
+        }
+        return Unknown;
+    }
 }

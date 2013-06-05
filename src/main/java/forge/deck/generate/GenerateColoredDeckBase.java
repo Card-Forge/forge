@@ -33,12 +33,12 @@ import com.google.common.collect.Lists;
 
 import forge.Constant;
 import forge.Singletons;
+import forge.card.CardDb;
 import forge.card.CardRules;
 import forge.card.CardRulesPredicates;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.deck.generate.GenerateDeckUtil.FilterCMC;
-import forge.item.CardDb;
 import forge.item.PaperCard;
 import forge.item.ItemPool;
 import forge.item.ItemPoolView;
@@ -133,7 +133,7 @@ public abstract class GenerateColoredDeckBase {
             // not an error if looped too much - could play singleton mode, with 6 slots for 3 non-basic lands.
 
             PaperCard cp = CardDb.instance().getCard(s);
-            tDeck.add(CardDb.instance().getCard(cp.getName(), Aggregates.random(cp.getRules().getSets())));
+            tDeck.add(CardDb.instance().getCard(cp.getName(), false));
 
             final int n = this.cardCounts.get(s);
             this.cardCounts.put(s, n + 1);
@@ -170,7 +170,7 @@ public abstract class GenerateColoredDeckBase {
             this.cardCounts.put(color, nLand);
 
             PaperCard cp = CardDb.instance().getCard(color);
-            String basicLandSet = Aggregates.random(cp.getRules().getSets());
+            String basicLandSet = cp.getEdition();
 
             tDeck.add(CardDb.instance().getCard(cp.getName(), basicLandSet), nLand);
             landsLeft -= nLand;
@@ -222,8 +222,7 @@ public abstract class GenerateColoredDeckBase {
             final List<PaperCard> curvedRandomized = Lists.newArrayList();
             for (PaperCard c : curved) {
                 this.cardCounts.put(c.getName(), 0);
-                PaperCard cpRandomSet = CardDb.instance().getCard(c.getName(), Aggregates.random(c.getRules().getSets()));
-                curvedRandomized.add(cpRandomSet);
+                curvedRandomized.add(CardDb.instance().getCard(c.getName(), false));
             }
 
             addSome(addOfThisCmc, curvedRandomized);

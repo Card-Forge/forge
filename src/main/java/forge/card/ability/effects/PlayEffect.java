@@ -13,6 +13,7 @@ import com.google.common.collect.Lists;
 import forge.Card;
 import forge.CardCharacteristicName;
 import forge.CardLists;
+import forge.card.CardDb;
 import forge.card.CardRulesPredicates;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
@@ -27,7 +28,6 @@ import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 import forge.gui.GuiDialog;
-import forge.item.CardDb;
 import forge.item.PaperCard;
 import forge.util.Aggregates;
 

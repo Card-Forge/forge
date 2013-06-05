@@ -40,6 +40,7 @@ import com.google.common.collect.ImmutableList;
 
 import forge.CardPredicates.Presets;
 import forge.card.CardCharacteristics;
+import forge.card.CardDb;
 import forge.card.CardRarity;
 import forge.card.CardRules;
 import forge.card.ColorSet;
@@ -75,7 +76,6 @@ import forge.game.phase.Combat;
 import forge.game.player.Player;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
-import forge.item.CardDb;
 import forge.util.Expressions;
 
 /**

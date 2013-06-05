@@ -17,16 +17,26 @@
  */
 package forge.card;
 
+import java.io.File;
+import java.io.FilenameFilter;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 import java.util.Locale;
+import java.util.Map;
+
+import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 
 import forge.Singletons;
 import forge.game.GameFormat;
-import forge.item.CardDb;
 import forge.util.FileSection;
-import forge.util.storage.StorageReaderFile;
+import forge.util.FileUtil;
+import forge.util.storage.StorageReaderFolder;
 
 
 /**
@@ -40,23 +50,45 @@ import forge.util.storage.StorageReaderFile;
 public final class CardEdition implements Comparable<CardEdition> { // immutable
     public enum Type {
         UNKNOWN,
+        
         CORE,
         EXPANSION,
+        
         REPRINT,
         STARTER,
-        OTHER
+        
+        DUEL_DECKS,
+        PREMIUM_DECK_SERIES,
+        FROM_THE_VAULT,
+        
+        OTHER,
+        THIRDPARTY // custom sets
     }
     
-    /** The Constant unknown. */
-    public static final CardEdition UNKNOWN = new CardEdition(-1, "??", "???", Type.UNKNOWN, "Undefined", null, false);
+    public static class CardInSet {
+        public final CardRarity rarity;
+        public final String name;
 
-    private final int    index;
+        public CardInSet(final String name, final CardRarity rarity) {
+            this.rarity = rarity;
+            this.name = name;
+        }
+    }
+
+    
+    /** The Constant unknown. */
+    private final static SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+    
+    public static final CardEdition UNKNOWN = new CardEdition("1990-01-01", "??", "???", Type.UNKNOWN, "Undefined", null, false, new CardInSet[]{});
+
+    private Date date;
     private final String code2;
     private final String code;
     private final Type   type;
     private final String name;
     private final String alias;
     private final boolean whiteBorder;
+    private final CardInSet[] cards;
 
     /**
      * Instantiates a new card set.
@@ -71,22 +103,30 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
      * @param name the name of the set
      * @param an optional secondary code alias for the set
      */
-    private CardEdition(int index, String code2, String code, Type type, String name, String alias, boolean whiteBorder) {
-        this.index = index;
+    private CardEdition(String date, String code2, String code, Type type, String name, String alias, boolean whiteBorder, CardInSet[] cards) {
         this.code2 = code2;
         this.code  = code;
         this.type  = type;
         this.name  = name;
         this.alias = alias;
         this.whiteBorder = whiteBorder;
+        this.cards = cards;
+        if( date.length() <= 7 ) 
+            date = date + "-01";
+        try {
+            this.date = formatter.parse(date);
+        } catch (ParseException e) {
+            this.date = new Date();
+        }
     }
 
-    public int    getIndex() { return index; }
+    public Date getDate()  { return date;  }
     public String getCode2() { return code2; }
     public String getCode()  { return code;  }
     public Type   getType()  { return type;  }
     public String getName()  { return name;  }
     public String getAlias() { return alias; }
+    public CardInSet[] getCards() { return cards; }
 
     /** The Constant fnGetName. */
     public static final Function<CardEdition, String> FN_GET_CODE = new Function<CardEdition, String>() {
@@ -101,7 +141,7 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
         if (o == null) {
             return 1;
         }
-        return o.index - this.index;
+        return date.compareTo(o.date);
     }
 
     @Override
@@ -202,19 +242,26 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
 
     }
 
-    public static class Reader extends StorageReaderFile<CardEdition> {
-        public Reader(String pathname) {
-            super(pathname, CardEdition.FN_GET_CODE);
+    public static class EditionReader extends StorageReaderFolder<CardEdition> {
+        public EditionReader(File path) {
+            super(path, CardEdition.FN_GET_CODE);
         }
+        
+        public final static CardInSet[] arrCards = new CardInSet[] {};
 
         @Override
-        protected CardEdition read(String line, int i) {
-            FileSection section = FileSection.parse(line, ":", "|");
-            int    index = 1+i;
-            String code2 = section.get("code2");
-            String code  = section.get("code3");
-            String type  = section.get("type");
+        protected CardEdition read(File file) {
+            final Map<String, List<String>> contents = FileSection.parseSections(FileUtil.readFile(file));
+
+            FileSection section = FileSection.parse(contents.get("metadata"), "=");
             String name  = section.get("name");
+            String date  = section.get("date");
+            String code  = section.get("code");
+            String code2 = section.get("code2");
+            if( code2 == null ) 
+                code2 = code;
+            
+            String type  = section.get("type");
             String alias = section.get("alias");
             boolean borderWhite = "white".equalsIgnoreCase(section.get("border"));
 
@@ -228,10 +275,33 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
                 }
             }
             
-            // if( !code2.equals(code) ) System.out.printf("%s->%s|", code, code);
+            List<CardEdition.CardInSet> processedCards = new ArrayList<CardEdition.CardInSet>();
+            for(String line : contents.get("cards")) {
+                if (StringUtils.isBlank(line))
+                    continue;
 
-            return new CardEdition(index, code2, code, enumType, name, alias, borderWhite);
+                // You may omit rarity for early development
+                CardRarity r = CardRarity.smartValueOf(line.substring(0, 1));
+                boolean hadRarity = r != CardRarity.Unknown && line.charAt(1) == ' ';
+                String cardName = hadRarity ? line.substring(2) : line; 
+                CardInSet cis = new CardInSet(cardName, r);
+                processedCards.add(cis);
+            }
+
+            return new CardEdition(date, code2, code, enumType, name, alias, borderWhite, processedCards.toArray(arrCards));
         }
 
+        @Override
+        protected FilenameFilter getFileFilter() {
+            return TXT_FILE_FILTER;
+        }
+
+
+        public static final FilenameFilter TXT_FILE_FILTER = new FilenameFilter() {
+            @Override
+            public boolean accept(final File dir, final String name) {
+                return name.endsWith(".txt");
+            }
+        };
     }
 }

@@ -30,10 +30,10 @@ import com.google.common.collect.Iterables;
 
 import forge.ImageCache;
 import forge.Singletons;
+import forge.card.CardDb;
 import forge.card.CardEdition;
 import forge.card.CardRules;
 import forge.card.EditionCollection;
-import forge.item.CardDb;
 import forge.item.PaperCard;
 import forge.item.IPaperCard;
 import forge.properties.NewConstants;

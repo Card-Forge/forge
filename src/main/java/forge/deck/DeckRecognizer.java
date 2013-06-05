@@ -22,7 +22,7 @@ import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
 
-import forge.item.CardDb;
+import forge.card.CardDb;
 import forge.item.PaperCard;
 
 /**
