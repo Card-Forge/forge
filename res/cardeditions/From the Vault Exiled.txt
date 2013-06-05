@@ -2,6 +2,7 @@
 Code=V09
 Date=2009-08-28
 Name=From the Vault: Exiled
+Type=From_the_Valut
 
 [cards]
 M Balance

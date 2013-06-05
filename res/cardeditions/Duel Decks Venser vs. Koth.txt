@@ -2,6 +2,7 @@
 Code=DDI
 Date=2012-03-30
 Name=Duel Decks: Venser vs. Koth
+Type=Duel_Decks
 
 [cards]
 U AEther Membrane

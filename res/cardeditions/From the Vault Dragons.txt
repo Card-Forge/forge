@@ -2,6 +2,7 @@
 Code=DRB
 Date=2008-08-29
 Name=From the Vault: Dragons
+Type=From_the_Valut
 
 [cards]
 R Bladewing the Risen

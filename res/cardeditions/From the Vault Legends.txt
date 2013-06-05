@@ -2,6 +2,7 @@
 Code=V11
 Date=2011-08-26
 Name=From the Vault: Legends
+Type=From_the_Valut
 
 [cards]
 M Cao Cao, Lord of Wei

@@ -3,7 +3,7 @@ Code=DDC
 Date=2009-04-10
 Name=Duel Decks: Divine vs. Demonic
 Code2=DDC
-Type=Other
+Type=Duel_Decks
 
 [cards]
 C Abyssal Gatekeeper

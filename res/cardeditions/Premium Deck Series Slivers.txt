@@ -2,6 +2,7 @@
 Code=H09
 Date=2009-11-20
 Name=Premium Deck Series: Slivers
+Type=Premium_Deck_Series
 
 [cards]
 U Acidic Sliver

@@ -2,6 +2,7 @@
 Code=DD2
 Date=2008-11-07
 Name=Duel Decks: Jace vs. Chandra
+Type=Duel_Decks
 
 [cards]
 C AEthersnipe

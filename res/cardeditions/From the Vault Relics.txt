@@ -2,6 +2,7 @@
 Code=V10
 Date=2010-08-27
 Name=From the Vault: Relics
+Type=From_the_Valut
 
 [cards]
 M AEther Vial
