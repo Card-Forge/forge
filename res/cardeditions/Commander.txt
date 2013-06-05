@@ -1,8 +1,9 @@
 [metadata]
 Code=COM
 Date=2011-06-17
-Name=Magic: The Gathering-Commander
+Name=Commander
 Code2=COM
+Alias=CMD
 Type=Other
 
 [cards]
