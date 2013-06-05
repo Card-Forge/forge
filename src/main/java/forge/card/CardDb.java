@@ -35,8 +35,10 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 import forge.Card;
+import forge.card.CardEdition.Type;
 import forge.item.PaperCard;
 import forge.util.Aggregates;
+import forge.util.Lang;
 import forge.util.MyRandom;
 import forge.util.maps.CollectionSuppliers;
 import forge.util.maps.MapOfLists;
@@ -69,8 +71,8 @@ public final class CardDb implements ICardDatabase {
         synchronized (CardDb.class) {
             if (CardDb.commonCards == null) { // It's broken under 1.4 and below, on 1.5+ works again!
                 CardSorter cs = new CardSorter(rules);
-                commonCards = new CardDb(cs.regularCards, editions);
-                variantCards = new CardDb(cs.variantsCards, editions);
+                commonCards = new CardDb(cs.regularCards, editions, false /*true*/);
+                variantCards = new CardDb(cs.variantsCards, editions, false);
             }
         }
     }
@@ -93,9 +95,13 @@ public final class CardDb implements ICardDatabase {
         }
     };
 
-    private CardDb(Map<String, CardRules> rules, Iterable<CardEdition> editions) {
+    private CardDb(Map<String, CardRules> rules, Iterable<CardEdition> editions, boolean logMissingCards) {
         this.rulesByName = rules;
+        List<String> missingCards = new ArrayList<String>();
         for(CardEdition e : editions) {
+            boolean worthLogging = logMissingCards && ( e.getType() == Type.CORE || e.getType() == Type.EXPANSION );
+            if(worthLogging)
+                System.out.print(e.getName() + " (" + e.getCards().length + " cards)");
             String lastCardName = null;
             int artIdx = 0;
             for(CardEdition.CardInSet cis : e.getCards()) {
@@ -108,7 +114,17 @@ public final class CardDb implements ICardDatabase {
                 CardRules cr = rulesByName.get(lastCardName);
                 if( cr != null ) 
                     addCard(new PaperCard(cr, e.getCode(), cis.rarity, artIdx));
-                // else card is not scripted yet
+                else if (worthLogging)
+                    missingCards.add(cis.name);
+            }
+            if(worthLogging) {
+                if(missingCards.isEmpty())
+                    System.out.println(" ... 100% ");
+                else {
+                    int missing = (e.getCards().length - missingCards.size()) * 10000 / e.getCards().length;
+                    System.out.printf(" ... %.2f%% (%s missing: %s)%n", missing * 0.01f, Lang.nounWithAmount(missingCards.size(), "card"), StringUtils.join(missingCards, " | ") );
+                }
+                missingCards.clear();
             }
         }
         
