@@ -420,5 +420,11 @@ public class TriggerHandler {
             game.getStack().addSimultaneousStackEntry(wrapperAbility);
         }
         regtrig.setTriggeredSA(wrapperAbility);
+        
+        if ( triggerParams.containsKey("OneOff") && regtrig.getHostCard().isImmutable() ) {
+            Player p = regtrig.getHostCard().getController();
+            p.getZone(ZoneType.Command).remove(regtrig.getHostCard());
+        }
+
     }
 }
