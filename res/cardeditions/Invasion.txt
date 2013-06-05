@@ -26,7 +26,7 @@ C Ardent Soldier
 C Armadillo Cloak
 R Armored Guardian
 R Artifact Mutation
-U Assault
+U Assault // Battery
 R Atalya, Samite Master
 R Aura Mutation
 U Aura Shards
@@ -178,7 +178,7 @@ U Ordered Migration
 C Orim's Touch
 R Overabundance
 C Overload
-U Pain
+U Pain // Suffering
 C Phantasmal Terrain
 R Phyrexian Altar
 C Phyrexian Battleflies
@@ -270,10 +270,10 @@ U Sparring Golem
 R Spinal Embrace
 U Spirit Weaver
 R Spirit of Resistance
-U Spite
+U Spite // Malice
 R Spreading Plague
 R Stalking Assassin
-U Stand
+U Stand // Deliver
 R Stand or Fall
 U Sterling Grove
 C Stormscape Apprentice
@@ -346,7 +346,7 @@ U Voracious Cobra
 U Wallop
 C Wandering Stream
 U Wash Out
-U Wax
+U Wax // Wane
 U Wayfaring Giant
 R Well-Laid Plans
 C Whip Silk

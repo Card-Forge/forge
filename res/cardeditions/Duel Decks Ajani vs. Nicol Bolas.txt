@@ -55,21 +55,21 @@ M Nicol Bolas, Planeswalker
 C Nightscape Familiar
 C Obelisk of Grixis
 C Ogre Savant
-U Pain
+U Pain // Suffering
 L Plains
 U Pride of Lions
 R Profane Command
 C Qasali Pridemage
 C Recoil
 C Recumbent Bliss
-U Rise
+U Rise // Fall
 C Rupture Spire
 U Sapseep Forest
 R Searing Meditation
 U Shriekmaw
 U Slave of Bolas
 U Slavering Nulls
-U Spite
+U Spite // Malice
 U Spitemare
 C Steamcore Weird
 C Surveilling Sprite

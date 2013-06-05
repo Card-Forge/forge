@@ -8,159 +8,159 @@ BoosterCovers=3
 Booster=10 Common:!land, 3 Uncommon, 1 RareMythic:!land, 1 fromSheet("DGM Lands")
 
 [cards]
+C Boros Mastiff
+C Haazda Snare Squad
+C Lyev Decree
+C Maze Sentinel
+R Renounce the Guilds
+C Riot Control
+R Scion of Vitu-Ghazi
+C Steeple Roc
+C Sunspire Gatekeepers
+C Wake the Reflections
 R AEtherling
+C Hidden Strings
+C Maze Glider
+C Mindstatic
+C Murmuring Phantasm
+C Opal Lake Gatekeepers
+C Runner's Bane
+R Trait Doctoring
+C Uncovered Clues
+C Wind Drake
+C Bane Alley Blackguard
+R Blood Scrivener
+C Crypt Incursion
+C Fatal Fumes
+C Hired Torturer
+C Maze Abomination
+R Pontiff of Blight
+C Rakdos Drake
+C Sinister Possession
+C Ubul Sar Gatekeepers
+C Awe for the Guilds
+C Clear a Path
+C Maze Rusher
+R Possibility Storm
+C Punish the Enemy
+R Pyrewild Shaman
+C Riot Piker
+C Rubblebelt Maaka
+C Smelt-Ward Gatekeepers
+C Weapon Surge
+C Battering Krasis
+C Kraul Warrior
+C Maze Behemoth
+C Mending Touch
+C Mutant's Prey
+C Phytoburst
+R Renegade Krasis
+C Saruli Gatekeepers
+R Skylasher
+C Thrashing Mossdog
 R Advent of the Wurm
-U Alive
-U Armed
 C Armored Wolf-Rider
 U Ascended Lawmage
-C Awe for the Guilds
-C Azorius Cluestone
-C Azorius Guildgate
-C Bane Alley Blackguard
-C Battering Krasis
-R Beck
 C Beetleform Mage
 U Blast of Genius
 U Blaze Commando
 M Blood Baron of Vizkopa
-R Blood Scrivener
 R Boros Battleshaper
-C Boros Cluestone
-C Boros Guildgate
-C Boros Mastiff
-R Breaking
 U Bred for the Hunt
 U Bronzebeak Moa
 U Carnage Gladiator
-R Catch
-C Clear a Path
 M Council of the Absolute
-C Crypt Incursion
 M Deadbridge Chant
 U Debt to the Deathless
 C Deputy of Acquittals
-C Dimir Cluestone
-C Dimir Guildgate
-U Down
 R Dragonshift
 C Drown in Filth
 R Emmara Tandris
 R Exava, Rakdos Blood Witch
-U Far
-C Fatal Fumes
 U Feral Animist
-R Flesh
 U Fluxcharger
 R Gaze of Granite
-U Give
 U Gleam of Battle
 U Goblin Test Pilot
-C Golgari Cluestone
-C Golgari Guildgate
-C Gruul Cluestone
-C Gruul Guildgate
 U Gruul War Chant
-C Haazda Snare Squad
 U Haunter of Nightveil
-C Hidden Strings
-C Hired Torturer
-C Izzet Cluestone
-C Izzet Guildgate
 U Jelenn Sphinx
 U Korozda Gorgon
 U Krasis Incubation
-C Kraul Warrior
 R Lavinia of the Tenth
 M Legion's Initiative
-C Lyev Decree
 M Master of Cruelties
 U Maw of the Obzedat
-C Maze Abomination
-C Maze Behemoth
-C Maze Glider
-C Maze Rusher
-C Maze Sentinel
-M Maze's End
 R Melek, Izzet Paragon
-C Mending Touch
-C Mindstatic
 R Mirko Vosk, Mind Drinker
 C Morgue Burst
-C Murmuring Phantasm
-C Mutant's Prey
 C Nivix Cyclops
 R Notion Thief
 R Obzedat's Aid
-C Opal Lake Gatekeepers
-C Orzhov Cluestone
-C Orzhov Guildgate
-C Phytoburst
 C Pilfered Plans
 R Plasm Capture
-R Pontiff of Blight
-R Possibility Storm
-U Profit
 M Progenitor Mimic
-U Protect
-C Punish the Enemy
 U Putrefy
-R Pyrewild Shaman
-C Rakdos Cluestone
-C Rakdos Drake
-C Rakdos Guildgate
 M Ral Zarek
-R Ready
 M Reap Intellect
 R Render Silent
-R Renegade Krasis
-R Renounce the Guilds
 U Restore the Peace
-C Riot Control
-C Riot Piker
 U Rot Farm Skeleton
-C Rubblebelt Maaka
-C Runner's Bane
 R Ruric Thar, the Unbowed
-C Saruli Gatekeepers
 M Savageborn Hydra
 U Scab-Clan Giant
-R Scion of Vitu-Ghazi
-C Selesnya Cluestone
-C Selesnya Guildgate
 U Showstopper
-C Simic Cluestone
-C Simic Guildgate
 U Sin Collector
-C Sinister Possession
 R Sire of Insanity
-R Skylasher
-C Smelt-Ward Gatekeepers
 U Species Gorger
 U Spike Jester
-C Steeple Roc
-C Sunspire Gatekeepers
 R Tajic, Blade of the Legion
 R Teysa, Envoy of Ghosts
-C Thrashing Mossdog
 C Tithe Drinker
-U Toil
-R Trait Doctoring
 U Trostani's Summoner
-U Turn
-C Ubul Sar Gatekeepers
-C Uncovered Clues
 U Unflinching Courage
 R Varolz, the Scar-Striped
 C Viashino Firstblade
 M Voice of Resurgence
 R Vorel of the Hull Clade
-C Wake the Reflections
 U Warleader's Helix
 U Warped Physique
-C Weapon Surge
-U Wear
-C Wind Drake
 U Woodlot Crawler
 R Zhur-Taa Ancient
 C Zhur-Taa Druid
+U Alive // Well
+U Armed // Dangerous
+R Beck // Call
+R Breaking // Entering
+R Catch // Release
+U Down // Dirty
+U Far // Away
+R Flesh // Blood
+U Give // Take
+U Profit // Loss
+U Protect // Serve
+R Ready // Willing
+U Toil // Trouble
+U Turn // Burn
+U Wear // Tear
+C Azorius Cluestone
+C Boros Cluestone
+C Dimir Cluestone
+C Golgari Cluestone
+C Gruul Cluestone
+C Izzet Cluestone
+C Orzhov Cluestone
+C Rakdos Cluestone
+C Selesnya Cluestone
+C Simic Cluestone
+C Azorius Guildgate
+C Boros Guildgate
+C Dimir Guildgate
+C Golgari Guildgate
+C Gruul Guildgate
+C Izzet Guildgate
+M Maze's End
+C Orzhov Guildgate
+C Rakdos Guildgate
+C Selesnya Guildgate
+C Simic Guildgate

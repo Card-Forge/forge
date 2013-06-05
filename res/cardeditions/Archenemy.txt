@@ -196,7 +196,7 @@ U Vitu-Ghazi, the City-Tree
 U Volcanic Fallout
 C Wall of Roots
 U Watchwolf
-U Wax
+U Wax // Wane
 C Which of You Burns Brightest?
 C Wickerbough Elder
 U Yavimaya Dryad

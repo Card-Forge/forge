@@ -17,7 +17,7 @@ U Dreg Mangler
 C Elves of Deep Shadow
 U Eternal Witness
 C Feast or Famine
-U Fire
+U Fire // Ice
 C Force Spike
 L Forest
 L Forest
@@ -51,7 +51,7 @@ C Izzet Signet
 M Jarad, Golgari Lich Lord
 C Kiln Fiend
 U Korozda Guildmage
-U Life
+U Life // Death
 R Life from the Loam
 C Lonely Sandbar
 C Magma Spray

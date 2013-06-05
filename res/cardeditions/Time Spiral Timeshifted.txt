@@ -8,7 +8,7 @@ Type=Expansion
 [cards]
 S Akroma, Angel of Wrath
 S Arena
-S Assault
+S Assault // Battery
 S Auratog
 S Avalanche Riders
 S Avatar of Woe

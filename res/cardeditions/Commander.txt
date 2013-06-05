@@ -103,7 +103,7 @@ C Faultgrinder
 U Fellwar Stone
 C Fertilid
 C Fierce Empath
-U Fire
+U Fire // Ice
 U Firespout
 C Fists of Ironwood
 U Flametongue Kavu

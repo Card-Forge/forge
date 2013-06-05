@@ -50,7 +50,7 @@ U Enlistment Officer
 U Evasive Action
 R False Dawn
 R Fervent Charge
-U Fire
+U Fire // Ice
 U Flowstone Charger
 U Foul Presence
 R Fungal Shambler
@@ -68,7 +68,7 @@ U Haunted Angel
 C Helionaut
 R Ice Cave
 U Illuminate
-U Illusion
+U Illusion // Reality
 C Index
 C Jaded Response
 C Jilt
@@ -80,7 +80,7 @@ C Last Caress
 R Last Stand
 C Lay of the Land
 R Legacy Weapon
-U Life
+U Life // Death
 R Lightning Angel
 C Living Airship
 C Llanowar Dead
@@ -96,8 +96,8 @@ R Mystic Snake
 C Necra Disciple
 U Necra Sanctuary
 R Necravolver
-U Night
-U Order
+U Night // Day
+U Order // Chaos
 C Orim's Thunder
 R Overgrown Estate
 C Penumbra Bobcat

@@ -16,7 +16,7 @@ U Arcbound Crusher
 U Arcbound Slith
 C Arsenal Thresher
 R Ascendant Evincar
-U Assault
+U Assault // Battery
 R Balefire Liege
 C Bant
 C Battlegate Mimic
@@ -138,7 +138,7 @@ R Nefashu
 U Noxious Ghoul
 U Nuisance Engine
 C Oblivion Ring
-U Order
+U Order // Chaos
 C Orim's Thunder
 C Otaria
 C Panopticon

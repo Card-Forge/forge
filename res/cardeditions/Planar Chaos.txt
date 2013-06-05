@@ -22,7 +22,7 @@ C Blightspeaker
 U Blood Knight
 R Body Double
 C Bog Serpent
-R Boom
+R Boom // Bust
 R Braids, Conjurer Adept
 C Brain Gorgers
 C Brute Force
@@ -37,7 +37,7 @@ R Damnation
 U Darkheart Sliver
 C Dash Hopes
 C Dawn Charm
-C Dead
+C Dead // Gone
 C Deadly Grub
 U Deadwood Treefolk
 R Detritivore
@@ -127,7 +127,7 @@ C Ridged Kusite
 U Riftmarked Knight
 U Riptide Pilferer
 R Roiling Horror
-U Rough
+U Rough // Tumble
 U Saltblast
 C Saltfield Recluse
 C Seal of Primordium
