@@ -18,10 +18,13 @@
 package forge.card;
 
 import java.io.File;
+import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
 import com.google.common.base.Function;
+import com.google.common.collect.Lists;
 
 import forge.util.IItemReader;
 import forge.util.storage.StorageView;
@@ -53,6 +56,14 @@ public final class EditionCollection extends StorageView<CardEdition> {
     public CardEdition get(final String code) {
         CardEdition baseResult = super.get(code);
         return baseResult == null ? aliasToEdition.get(code) : baseResult;
+    }
+    
+    
+    public Iterable<CardEdition> getOrderedEditions() {
+        List<CardEdition> res = Lists.newArrayList(this);
+        Collections.sort(res);
+        Collections.reverse(res);
+        return res;
     }
 
     /**

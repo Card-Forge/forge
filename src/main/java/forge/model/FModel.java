@@ -146,7 +146,7 @@ public enum FModel {
         FThreads.assertExecutedByEdt(false);
         final CardStorageReader reader = new CardStorageReader(NewConstants.CARD_DATA_DIR, true);
         // this fills in our map of card names to Card instances.
-        CardDb.setup(reader.loadCards(), editions);
+        CardDb.setup(reader.loadCards(), editions.getOrderedEditions());
 
  
         this.formats = new FormatCollection("res/blockdata/formats.txt");
