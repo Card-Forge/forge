@@ -216,6 +216,7 @@ public class DrawAi extends SpellAbilityAi {
                 } else {
                     // Don't draw too many cards and then risk discarding cards
                     // at EOT
+                    // TODO: "NextUpkeep" is deprecated
                     if (!(sa.hasParam("NextUpkeep") || (sa instanceof AbilitySub)) && !mandatory) {
                         return false;
                     }

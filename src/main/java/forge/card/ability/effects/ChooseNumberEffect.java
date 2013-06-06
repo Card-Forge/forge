@@ -11,7 +11,6 @@ import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.game.player.Player;
-import forge.gui.GuiChoose;
 import forge.gui.GuiDialog;
 
 public class ChooseNumberEffect extends SpellAbilityEffect {
@@ -43,44 +42,22 @@ public class ChooseNumberEffect extends SpellAbilityEffect {
         final String sMax = sa.getParamOrDefault("Max", "99");
         final int max = StringUtils.isNumeric(sMax) ? Integer.parseInt(sMax) : CardFactoryUtil.xCount(card, card.getSVar(sMax)); 
 
-        final String[] choices = new String[max + 1];
-        if (!random) {
-            // initialize the array
-            for (int i = min; i <= max; i++) {
-                choices[i] = Integer.toString(i);
-            }
-        }
-
         final List<Player> tgtPlayers = getTargetPlayers(sa);
         final Target tgt = sa.getTarget();
 
         for (final Player p : tgtPlayers) {
             if ((tgt == null) || p.canBeTargetedBy(sa)) {
-                if (p.isHuman()) {
-                    int chosen;
-                    if (random) {
-                        final Random randomGen = new Random();
-                        chosen = randomGen.nextInt(max - min) + min;
-                        final String message = "Randomly chosen number: " + chosen;
-                        GuiDialog.message(message, card.toString());
-                    } else if (sa.hasParam("ListTitle")) {
-                        final Object o = GuiChoose.one(sa.getParam("ListTitle"), choices);
-                        if (null == o) {
-                            return;
-                        }
-                        chosen = Integer.parseInt((String) o);
-                    } else {
-                        final Object o = GuiChoose.one("Choose a number", choices);
-                        if (null == o) {
-                            return;
-                        }
-                        chosen = Integer.parseInt((String) o);
-                    }
-                    card.setChosenNumber(chosen);
-
+                int chosen;
+                if (random) {
+                    final Random randomGen = new Random();
+                    chosen = randomGen.nextInt(max - min) + min;
+                    final String message = "Randomly chosen number: " + chosen;
+                    GuiDialog.message(message, card.toString());
                 } else {
-                    // TODO - not implemented
+                    String title = sa.hasParam("ListTitle") ? sa.getParam("ListTitle") : "Choose a number";
+                    chosen = p.getController().chooseNumber(sa, title, min, max);
                 }
+                card.setChosenNumber(chosen);
             }
         }
     }

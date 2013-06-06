@@ -11077,6 +11077,7 @@ res/cardsfolder/t/temporal_manipulation.txt svneol=native#text/plain
 res/cardsfolder/t/temporal_mastery.txt -text
 res/cardsfolder/t/temporal_spring.txt svneol=native#text/plain
 res/cardsfolder/t/temporary_insanity.txt svneol=native#text/plain
+res/cardsfolder/t/temporary_truce.txt -text
 res/cardsfolder/t/tempting_licid.txt -text
 res/cardsfolder/t/tempting_wurm.txt svneol=native#text/plain
 res/cardsfolder/t/tendo_ice_bridge.txt svneol=native#text/plain

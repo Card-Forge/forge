@@ -37,12 +37,13 @@ public class DrawEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
         final Card source = sa.getSourceCard();
-        int numCards = sa.hasParam("NumCards") ? AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("NumCards"), sa) : 1;
+        final int numCards = sa.hasParam("NumCards") ? AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("NumCards"), sa) : 1;
         
 
         final Target tgt = sa.getTarget();
 
         final boolean optional = sa.hasParam("OptionalDecider");
+        final boolean upto = sa.hasParam("Upto");
 
 
         for (final Player p : getDefinedPlayersBeforeTargetOnes(sa)) {
@@ -50,8 +51,12 @@ public class DrawEffect extends SpellAbilityEffect {
                 if (optional && !p.getController().confirmAction(sa, null, "Do you want to draw " + Lang.nounWithAmount(numCards, " card") + "?"))
                     continue;
 
-                //TODO: remove this deprecation exception
-                final List<Card> drawn = p.drawCards(numCards);
+                int actualNum = numCards; 
+                if (upto) {
+                    actualNum = p.getController().chooseNumber(sa, "Choose a number", 0, numCards);
+                }
+
+                final List<Card> drawn = p.drawCards(actualNum);
                 if (sa.hasParam("Reveal")) {
                     p.getGame().getAction().reveal(drawn, p);
                 }

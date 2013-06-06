@@ -855,5 +855,15 @@ public class AiController {
         
         return result;
     }
+
+    public int chooseNumber(SpellAbility sa, String title, int min, int max) {
+        //TODO: AILogic
+        if ("GainLife".equals(sa.getParam("AILogic"))) {
+            if (player.getLife() < 5 || player.getCardsIn(ZoneType.Hand).size() >= player.getMaxHandSize()) {
+                return min;
+            }
+        }
+        return max;
+    }
 }
 

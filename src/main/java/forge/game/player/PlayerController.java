@@ -142,4 +142,6 @@ public abstract class PlayerController {
     public abstract List<Card> chooseCardsToDiscardToMaximumHandSize(int numDiscard);
     public abstract boolean payManaOptional(Card card, Cost cost, String prompt, ManaPaymentPurpose purpose);
 
+    public abstract int chooseNumber(SpellAbility sa, String title, int min, int max);
+
 }

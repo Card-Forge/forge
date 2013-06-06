@@ -270,6 +270,15 @@ public class PlayerControllerHuman extends PlayerController {
     }
 
     @Override
+    public int chooseNumber(SpellAbility sa, String title, int min, int max) {
+        final String[] choices = new String[max + 1];
+        for (int i = min; i <= max; i++) {
+            choices[i] = Integer.toString(i);
+        }
+        return Integer.parseInt(GuiChoose.one(title, choices));
+    }
+
+    @Override
     public Player chooseSinglePlayerForEffect(List<Player> options, SpellAbility sa, String title) {
         // Human is supposed to read the message and understand from it what to choose
         if ( options.size() > 2 )

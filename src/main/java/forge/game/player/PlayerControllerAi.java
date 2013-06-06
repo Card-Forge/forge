@@ -350,4 +350,9 @@ public class PlayerControllerAi extends PlayerController {
         // AI would play everything. But limits to one copy of (Leyline of Singularity) and (Gemstone Caverns)
         return brains.chooseSaToActivateFromOpeningHand(usableFromOpeningHand);
     }
+
+    @Override
+    public int chooseNumber(SpellAbility sa, String title, int min, int max) {
+        return brains.chooseNumber(sa, title, min, max);
+    }
 }
