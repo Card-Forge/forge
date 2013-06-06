@@ -2,7 +2,7 @@ Name:Domestication
 ManaCost:2 U U
 Types:Enchantment Aura
 K:Enchant creature
-A:SP$ Attach | Cost$ 2 U U | ValidTgts$ Creature | AILogic$ GainControl
+A:SP$ Attach | Cost$ 2 U U | ValidTgts$ Creature | AILogic$ GainControl | AITgts$ Creature.powerLT4
 S:Mode$ Continuous | Affected$ Card.EnchantedBy | GainControl$ You | Description$ You control enchanted creature.
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | IsPresent$ Card.AttachedBy+powerGE4 | Execute$ TrigSac | TriggerDescription$ At the beginning of your end step, if enchanted creature's power is 4 or greater, sacrifice CARDNAME.
 SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Defined$ Self
