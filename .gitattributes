@@ -2913,6 +2913,7 @@ res/cardsfolder/d/dreadship_reef.txt svneol=native#text/plain
 res/cardsfolder/d/dreadwaters.txt -text
 res/cardsfolder/d/dreadwing.txt svneol=native#text/plain
 res/cardsfolder/d/dream_cache.txt svneol=native#text/plain
+res/cardsfolder/d/dream_chisel.txt -text
 res/cardsfolder/d/dream_coat.txt -text svneol=unset#text/plain
 res/cardsfolder/d/dream_fighter.txt -text
 res/cardsfolder/d/dream_fracture.txt svneol=native#text/plain
@@ -3445,6 +3446,7 @@ res/cardsfolder/e/exhumer_thrull.txt -text
 res/cardsfolder/e/exile.txt svneol=native#text/plain
 res/cardsfolder/e/exile_into_darkness.txt svneol=native#text/plain
 res/cardsfolder/e/exiled_boggart.txt svneol=native#text/plain
+res/cardsfolder/e/exiled_doomsayer.txt -text
 res/cardsfolder/e/exorcist.txt svneol=native#text/plain
 res/cardsfolder/e/exoskeletal_armor.txt svneol=native#text/plain
 res/cardsfolder/e/exotic_curse.txt svneol=native#text/plain

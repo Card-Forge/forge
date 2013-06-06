@@ -233,6 +233,7 @@ public class CardFactoryUtil {
         final StringBuilder sbStack = new StringBuilder();
         sbStack.append(sourceCard.getName()).append(" - turn this card face up.");
         morphUp.setStackDescription(sbStack.toString());
+        morphUp.setIsMorphUp(true);
 
         return morphUp;
     }

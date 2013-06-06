@@ -25,6 +25,7 @@ import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.mana.ManaCostBeingPaid;
 import forge.card.mana.ManaCostShard;
 import forge.card.spellability.AbilityActivated;
+import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.game.player.Player;
@@ -73,13 +74,17 @@ public class StaticAbilityCostChange {
                     return;
                 }
             } else if (params.get("Type").equals("NonManaAbility")) {
-                    if (!(sa instanceof AbilityActivated) || sa.isManaAbility()) {
-                        return;
-                    }
+                if (!(sa instanceof AbilityActivated) || sa.isManaAbility()) {
+                    return;
+                }
             } else if (params.get("Type").equals("Flashback")) {
-                    if (!sa.isFlashBackAbility()) {
-                        return;
-                    }
+                if (!sa.isFlashBackAbility()) {
+                    return;
+                }
+            } else if (params.get("Type").equals("MorphUp")) {
+                if (!sa.isMorphUp()) {
+                    return;
+                }
             }
         }
         if (params.containsKey("AffectedZone") && !card.isInZone(ZoneType.smartValueOf(params.get("AffectedZone")))) {
@@ -209,6 +214,10 @@ public class StaticAbilityCostChange {
                 }
             } else if (params.get("Type").equals("Flashback")) {
                 if (!sa.isFlashBackAbility()) {
+                    return;
+                }
+            } else if (params.get("Type").equals("MorphDown")) {
+                if (!sa.isSpell() || !((Spell) sa).isCastFaceDown()) {
                     return;
                 }
             }

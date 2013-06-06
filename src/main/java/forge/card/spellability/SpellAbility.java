@@ -78,6 +78,7 @@ public abstract class SpellAbility implements ISpellAbility {
     private boolean cycling = false;
     private boolean delve = false;
     private boolean offering = false;
+    private boolean morphup = false;
 
     private Card targetCard;
     /** The chosen target. */
@@ -330,6 +331,28 @@ public abstract class SpellAbility implements ISpellAbility {
         return this.replicate;
     }
 
+    /**
+     * <p>
+     * setIsMorphUp.
+     * </p>
+     * 
+     * @param b
+     *            a boolean.
+     */
+    public final void setIsMorphUp(final boolean b) {
+        this.morphup = b;
+    }
+
+    /**
+     * <p>
+     * isMorphUp.
+     * </p>
+     * 
+     * @return a boolean.
+     */
+    public boolean isMorphUp() {
+        return this.morphup;
+    }
 
     /**
      * <p>
