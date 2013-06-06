@@ -10,6 +10,7 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map.Entry;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
@@ -23,6 +24,7 @@ import javax.xml.stream.events.Attribute;
 import javax.xml.stream.events.StartElement;
 import javax.xml.stream.events.XMLEvent;
 
+import forge.FThreads;
 import forge.Singletons;
 import forge.control.FControl.Screens;
 import forge.properties.FileLocation;
@@ -60,17 +62,23 @@ public final class SLayoutIO {
         return SLayoutIO.getFileForState(mode).userPrefLoc;
     }
 
+    
+    private final static AtomicBoolean saveRequested = new AtomicBoolean(false);
     /** Publicly-accessible save method, to neatly handle exception handling.
      * @param f0 file to save layout to, if null, saves to filePreferred
      * 
      * 
      */
     public static void saveLayout(final File f0) {
-        if (SwingUtilities.isEventDispatchThread()) {
-            throw new IllegalThreadStateException("This operation should be independent of the EDT.");
-        }
-
-        save(f0);
+        if( saveRequested.getAndSet(true) ) return; 
+        FThreads.delay(100, new Runnable() {
+            
+            @Override
+            public void run() {
+                save(f0);
+                saveRequested.set(false);
+            }
+        });
     }
 
     private synchronized static void save(final File f0) {

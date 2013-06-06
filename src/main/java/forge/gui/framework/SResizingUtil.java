@@ -374,9 +374,7 @@ public final class SResizingUtil {
 
     /** */
     public static void endResize() {
-        final Thread t = new Thread() { @Override
-            public void run() { SLayoutIO.saveLayout(null); } };
-        t.start();
+        SLayoutIO.saveLayout(null);
     }
 
     /** @return {@link java.awt.event.MouseListener} */

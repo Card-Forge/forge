@@ -306,9 +306,7 @@ public final class SRearrangingUtil {
         cellNew.refresh();
         updateBorders();
 
-        final Thread t = new Thread() { @Override
-            public void run() { SLayoutIO.saveLayout(null); } };
-        t.start();
+        SLayoutIO.saveLayout(null);
     }
 
     /** The gap created by displaced panels must be filled.
