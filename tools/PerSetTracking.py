@@ -178,7 +178,7 @@ if __name__ == '__main__':
 			if currentSet in setList:
 				if key in forgeCards :
 					currentImplemented.append(key)
-				else :
+				elif key != "":
 					currentMissing.append(key)
 		total = len(currentMissing)+len(currentImplemented)
 		percentage = 0       
