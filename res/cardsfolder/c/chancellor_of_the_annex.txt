@@ -1,0 +1,19 @@
+Name:Chancellor of the Annex
+ManaCost:4 W W W
+Types:Creature Angel
+PT:5/6
+Text:You may reveal this card from your opening hand. If you do, when each opponent casts his or her first spell of the game, counter that spell unless that player pays 1.
+K:Flying
+K:MayEffectFromOpeningHand:CounterFirstSpellEffect
+SVar:CounterFirstSpellEffect:AB$ RepeatEach | Cost$ 0 | RepeatPlayers$ Player.Opponent | RepeatSubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | Triggers$ TrigCounter | SVars$ TrigCounterSpell,RemoveEffect,SpellsNeedExtraManaEffect | EffectOwner$ Player.IsRemembered | Duration$ Permanent
+SVar:TrigCounter:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ You | Execute$ TrigCounterSpell | OneOff$ True | TriggerZones$ Command | TriggerDescription$ Whenever an opponent casts a spell for the first time, counter that spell unless that player pays 1.
+SVar:TrigCounterSpell:AB$ Counter | Cost$ 0 | Defined$ TriggeredSpellAbility | UnlessCost$ 1 | UnlessPayer$ You | SubAbility$ RemoveEffect
+SVar:RemoveEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
+SVar:SpellsNeedExtraManaEffect:1
+T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ Opponent | Execute$ CounterSpellOpp | TriggerZones$ Battlefield | TriggerDescription$ Whenever an opponent casts a spell, counter it unless that player pays 1.
+SVar:CounterSpellOpp:AB$ Counter | Cost$ 0 | Defined$ TriggeredSpellAbility | UnlessCost$ 1 | UnlessPayer$ TriggeredActivator
+SVar:AI_SpellsNeedExtraMana:1 Opponent
+SVar:Picture:http://www.wizards.com/global/images/magic/general/chancellor_of_the_annex.jpg
+Oracle:You may reveal this card from your opening hand. If you do, when each opponent casts his or her first spell of the game, counter that spell unless that player pays {1}.\nFlying\nWhenever an opponent casts a spell, counter it unless that player pays {1}.
+SetInfo:NPH Rare

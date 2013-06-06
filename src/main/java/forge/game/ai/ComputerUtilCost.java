@@ -361,6 +361,16 @@ public class ComputerUtilCost {
                     }
                 }
             }
+            for (Card c : player.getCardsIn(ZoneType.Command)) {
+                final String snem = c.getSVar("SpellsNeedExtraManaEffect");
+                if (!StringUtils.isBlank(snem)) {
+                    try {
+                        extraManaNeeded += Integer.parseInt(snem);
+                    } catch (final NumberFormatException e) {
+                        System.out.println("wrong SpellsNeedExtraManaEffect SVar format on " + c);
+                    }
+                }
+            }
         }
 
         return ComputerUtilMana.canPayManaCost(sa, player, extraManaNeeded) 
