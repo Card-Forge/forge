@@ -12,7 +12,6 @@ import java.util.List;
 import java.util.Map.Entry;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 import javax.xml.stream.XMLEventFactory;
 import javax.xml.stream.XMLEventReader;

@@ -2354,7 +2354,7 @@ public class CardFactoryUtil {
             final String[] k = card.getKeyword().get(echoPos).split(":");
             final String manacost = k[1];
 
-            card.setEchoCost(manacost);
+            card.setEchoCost(new Cost(manacost, false));
 
             final Command intoPlay = new Command() {
 
@@ -3149,7 +3149,7 @@ public class CardFactoryUtil {
                 // card.removeIntrinsicKeyword(parse);
 
                 final String[] k = parse.split(":");
-                card.setMadnessCost(k[1]);
+                card.setMadnessCost(new Cost(k[1], false));
             }
         } // madness
 
@@ -3160,7 +3160,7 @@ public class CardFactoryUtil {
                 // card.removeIntrinsicKeyword(parse);
 
                 final String[] k = parse.split(":");
-                card.setMiracleCost(k[1]);
+                card.setMiracleCost(new Cost(k[1], false));
             }
         } // miracle
 

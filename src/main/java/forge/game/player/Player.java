@@ -113,7 +113,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     private ArrayList<String> prowl = new ArrayList<String>();
 
     /** The max lands to play. */
-    private int maxLandsToPlay = 1;
+    private final static int maxLandsToPlay = 1;
 
     /** The num lands played. */
     private int numLandsPlayed = 0;
@@ -1849,32 +1849,6 @@ public class Player extends GameEntity implements Comparable<Player> {
     // // properties about the player and his/her cards/game status
     // //
     // /////////////////////////////
-    /**
-     * <p>
-     * hasPlaneswalker.
-     * </p>
-     * 
-     * @return a boolean.
-     */
-    public final boolean hasPlaneswalker() {
-        return null != this.getPlaneswalker();
-    }
-
-    /**
-     * <p>
-     * getPlaneswalker.
-     * </p>
-     * 
-     * @return a {@link forge.Card} object.
-     */
-    public final Card getPlaneswalker() {
-        final List<Card> c = CardLists.filter(this.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.PLANEWALKERS);
-        if ((null != c) && (c.size() > 0)) {
-            return c.get(0);
-        } else {
-            return null;
-        }
-    }
 
     /**
      * <p>
@@ -1921,22 +1895,9 @@ public class Player extends GameEntity implements Comparable<Player> {
      *            a {@link forge.Card} object.
      * @return a {@link forge.Card} object.
      */
-    public final Card setLastDrawnCard(final Card c) {
+    private final Card setLastDrawnCard(final Card c) {
         this.lastDrawnCard = c;
         return this.lastDrawnCard;
-    }
-
-    /**
-     * <p>
-     * resetLastDrawnCard.
-     * </p>
-     * 
-     * @return a {@link forge.Card} object.
-     */
-    public final Card resetLastDrawnCard() {
-        final Card old = this.lastDrawnCard;
-        this.lastDrawnCard = null;
-        return old;
     }
 
     /**
@@ -2502,42 +2463,6 @@ public class Player extends GameEntity implements Comparable<Player> {
         this.unlimitedHandSize = unlimited;
     }
 
-
-    /**
-     * <p>
-     * Getter for the field <code>maxLandsToPlay</code>.
-     * </p>
-     * 
-     * @return a int.
-     */
-    public final int getMaxLandsToPlay() {
-        return this.maxLandsToPlay;
-    }
-
-    /**
-     * <p>
-     * Setter for the field <code>maxLandsToPlay</code>.
-     * </p>
-     * 
-     * @param n
-     *            a int.
-     */
-    public final void setMaxLandsToPlay(final int n) {
-        this.maxLandsToPlay = n;
-    }
-
-    /**
-     * <p>
-     * addMaxLandsToPlay.
-     * </p>
-     * 
-     * @param n
-     *            a int.
-     */
-    public final void addMaxLandsToPlay(final int n) {
-        this.maxLandsToPlay += n;
-    }
-
     /**
      * <p>
      * Getter for the field <code>numLandsPlayed</code>.
@@ -3062,7 +2987,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         }
 
         final SpellAbility playForMiracleCost = card.getFirstSpellAbility().copy();
-        playForMiracleCost.setPayCosts(new Cost(card.getMiracleCost(), false));
+        playForMiracleCost.setPayCosts(card.getMiracleCost());
         playForMiracleCost.setStackDescription(card.getName() + " - Cast via Miracle");
 
         // TODO Convert this to a Trigger

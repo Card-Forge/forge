@@ -199,9 +199,9 @@ public class Card extends GameEntity implements Comparable<Card> {
     private TreeMap<Long, Player> tempControllers = new TreeMap<Long, Player>();
 
     private String text = "";
-    private String echoCost = "";
-    private String madnessCost = null;
-    private String miracleCost = null;
+    private Cost echoCost = null;
+    private Cost madnessCost = null;
+    private Cost miracleCost = null;
     private String chosenType = "";
     private List<String> chosenColor = new ArrayList<String>();
     private String namedCard = "";
@@ -1440,18 +1440,11 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @param s
      *            a {@link java.lang.String} object.
      */
-    public final void setEchoCost(final String s) {
+    public final void setEchoCost(final Cost s) {
         this.echoCost = s;
     }
 
-    /**
-     * <p>
-     * Getter for the field <code>echoCost</code>.
-     * </p>
-     * 
-     * @return a {@link java.lang.String} object.
-     */
-    public final String getEchoCost() {
+    public final Cost getEchoCost() {
         return this.echoCost;
     }
 
@@ -4679,7 +4672,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * 
      * @return a {@link java.lang.String} object.
      */
-    public final String getMadnessCost() {
+    public final Cost getMadnessCost() {
         return this.madnessCost;
     }
 
@@ -4691,7 +4684,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @param cost
      *            a {@link java.lang.String} object.
      */
-    public final void setMadnessCost(final String cost) {
+    public final void setMadnessCost(final Cost cost) {
         this.madnessCost = cost;
     }
 
@@ -4702,7 +4695,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * 
      * @return a {@link java.lang.String} object.
      */
-    public final String getMiracleCost() {
+    public final Cost getMiracleCost() {
         return this.miracleCost;
     }
 
@@ -4714,7 +4707,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @param cost
      *            a {@link java.lang.String} object.
      */
-    public final void setMiracleCost(final String cost) {
+    public final void setMiracleCost(final Cost cost) {
         this.miracleCost = cost;
     }
 

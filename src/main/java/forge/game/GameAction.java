@@ -757,7 +757,7 @@ public class GameAction {
         }
 
         final SpellAbility madness = card.getFirstSpellAbility().copy();
-        madness.setPayCosts(new Cost(card.getMadnessCost(), false));
+        madness.setPayCosts(card.getMadnessCost());
 
         final StringBuilder sb = new StringBuilder();
         sb.append(card.getName()).append(" - Cast via Madness");

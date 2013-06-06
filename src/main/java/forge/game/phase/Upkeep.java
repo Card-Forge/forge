@@ -165,8 +165,7 @@ public class Upkeep extends Phase {
         for (int i = 0; i < list.size(); i++) {
             final Card c = list.get(i);
             if (c.hasStartOfKeyword("(Echo unpaid)")) {
-                Cost cost = new Cost(c.getEchoCost(), true);
-                final Ability blankAbility = Upkeep.getBlankAbility(c, cost);
+                final Ability blankAbility = Upkeep.getBlankAbility(c, c.getEchoCost());
                 blankAbility.setActivatingPlayer(c.getController());
 
                 final StringBuilder sb = new StringBuilder();
@@ -175,7 +174,7 @@ public class Upkeep extends Phase {
                 final Ability sacAbility = new Ability(c, ManaCost.ZERO) {
                     @Override
                     public void resolve() {
-                        Cost cost = new Cost(c.getEchoCost().trim(), true);
+                        Cost cost = c.getEchoCost();
                         boolean hasPaid = c.getController().getController().payManaOptional(c, cost, "Echo for " + c, ManaPaymentPurpose.Echo);
                         
                         if (!hasPaid)
