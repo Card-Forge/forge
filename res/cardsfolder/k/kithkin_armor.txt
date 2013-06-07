@@ -1,0 +1,17 @@
+Name:Kithkin Armor
+ManaCost:W
+Types:Enchantment Aura
+K:Enchant creature
+A:SP$ Attach | Cost$ W | ValidTgts$ Creature | AILogic$ Pump
+S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddHiddenKeyword$ CantBeBlockedBy Creature.powerGE3 | Description$ Enchanted creature can't be blocked by creatures with power 3 or greater.
+T:Mode$ Attached | ValidSource$ Card.Self | ValidTarget$ Creature | TriggerZones$ Battlefield | Execute$ TrigImprint | Static$ True
+SVar:TrigImprint:DB$ Cleanup | ClearImprinted$ True | SubAbility$ ImprintNew
+SVar:ImprintNew:DB$ Pump | ImprintCards$ Enchanted
+A:AB$ ChooseSource | Cost$ Sac<1/CARDNAME> | Choices$ Card | AILogic$ NeedsPrevention | SubAbility$ DBEffect | SpellDescription$ The next time a source of your choice would deal damage to enchanted creature this turn, prevent that damage.
+SVar:DBEffect:DB$ Effect | ReplacementEffects$ RPreventNextFromSource | RememberObjects$ ChosenCard | ImprintCards$ Imprinted | SVars$ RPreventNextFromSource,ExileEffect,ExileFromLibInstead,X | SubAbility$ DBCleanup | ConditionDefined$ ChosenCard | ConditionPresent$ Card | ConditionCompare$ GE1
+SVar:RPreventNextFromSource:Event$ DamageDone | ValidSource$ Card.IsRemembered | ValidTarget$ Card.IsImprinted | ReplaceWith$ ExileEffect | PreventionEffect$ True | Description$ The next time the chosen source deals damage to enchanted creature, prevent that damage.
+SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
+SVar:DBCleanup:DB$ Cleanup | ClearImprinted$ True
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/kithkin_armor.jpg
+Oracle:Enchant creature\nEnchanted creature can't be blocked by creatures with power 3 or greater.\nSacrifice Kithkin Armor: The next time a source of your choice would deal damage to enchanted creature this turn, prevent that damage.

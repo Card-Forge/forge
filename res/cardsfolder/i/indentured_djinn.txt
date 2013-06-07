@@ -1,0 +1,11 @@
+Name:Indentured Djinn
+ManaCost:1 U U
+Types:Creature Djinn
+PT:4/4
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, each other player may draw up to three cards.
+SVar:TrigDraw:AB$ RepeatEach | Cost$ 0 | RepeatPlayers$ Player.Other | RepeatSubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | Defined$ Player.IsRemembered | NumCards$ 3 | Upto$ True
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/indentured_djinn.jpg
+Oracle:Flying\nWhen Indentured Djinn enters the battlefield, each other player may draw up to three cards.
