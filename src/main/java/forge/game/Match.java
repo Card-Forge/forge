@@ -91,16 +91,17 @@ public class Match {
         final boolean canRandomFoil = Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_RANDOM_FOIL) && gameType == GameType.Constructed;
         GameNew.newGame(currentGame, canRandomFoil, this.useAnte);
 
-        if (useAnte) {  // Deciding which cards go to ante
-            List<Pair<Player, Card>> list = GameNew.chooseCardsForAnte(currentGame);
-            GameNew.moveCardsToAnte(list);
-            currentGame.fireEvent(new GameEventAnteCardsSelected(list));
-        }
-
         // This code was run from EDT.
         currentGame.getAction().invoke(new Runnable() {
             @Override
             public void run() {
+                
+                if (useAnte) {  // Deciding which cards go to ante
+                    List<Pair<Player, Card>> list = GameNew.chooseCardsForAnte(currentGame);
+                    GameNew.moveCardsToAnte(list);
+                    currentGame.fireEvent(new GameEventAnteCardsSelected(list));
+                }
+                
                 currentGame.getAction().startGame();
             }
         });

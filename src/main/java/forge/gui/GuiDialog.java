@@ -67,10 +67,16 @@ public class GuiDialog {
      *            a {@link java.lang.String} object.
      */
     public static void message(final String message) {
-        message(message, UIManager.getString("OptionPane.messageDialogTitle"));
+        FThreads.invokeInEdtAndWait( new Runnable() {
+            @Override
+            public void run() {
+                message(message, UIManager.getString("OptionPane.messageDialogTitle"));
+            }
+        });
     }
 
     public static void message(final String message, String title) {
+        
         JOptionPane.showMessageDialog(null, message, title, JOptionPane.PLAIN_MESSAGE);
     }
 

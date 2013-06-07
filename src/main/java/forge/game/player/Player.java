@@ -44,7 +44,6 @@ import forge.card.MagicColor;
 import forge.card.ability.AbilityFactory;
 import forge.card.ability.AbilityUtils;
 import forge.card.cardfactory.CardFactoryUtil;
-import forge.card.cost.Cost;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaPool;
 import forge.card.replacement.ReplacementResult;
@@ -1829,7 +1828,7 @@ public class Player extends GameEntity implements Comparable<Player> {
                 adjMax += Integer.valueOf(k[1]);
             }
         }
-        final int adjCheck = this.maxLandsToPlay + adjMax;
+        final int adjCheck = Player.maxLandsToPlay + adjMax;
         // System.out.println("Max lands for player " + this.getName() + ": " + adjCheck);
 
         return this.numLandsPlayed < adjCheck || this.isCardInPlay("Fastbond") || this.isCardInCommand("Naya");
