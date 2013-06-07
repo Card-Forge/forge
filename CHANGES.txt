@@ -53,6 +53,8 @@ Summoning Trap
 Cobra Trap
 Chancellor of the Annex
 Temporary Truce
+Dream Chisel
+Exiled Doomsayer
 
 
 ----------
