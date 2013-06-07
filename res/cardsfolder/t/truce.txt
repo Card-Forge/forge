@@ -1,7 +1,7 @@
-Name:Temporary Truce
-ManaCost:1 W
-Types:Sorcery
-A:SP$ RepeatEach | Cost$ 1 W | RepeatPlayers$ Player | RepeatSubAbility$ DBDraw | SpellDescription$ Each player may draw up to two cards. For each card less than two a player draws this way, that player gains 2 life.
+Name:Truce
+ManaCost:2 W
+Types:Instant
+A:SP$ RepeatEach | Cost$ 2 W | RepeatPlayers$ Player | RepeatSubAbility$ DBDraw | SpellDescription$ Each player may draw up to two cards. For each card less than two a player draws this way, that player gains 2 life.
 SVar:DBDraw:DB$ Draw | Defined$ Player.IsRemembered | Upto$ True | NumCards$ 2 | RememberDrawn$ True | SubAbility$ DBGainLife | AILogic$ GainLife
 SVar:DBGainLife:DB$ GainLife | LifeAmount$ X | References$ X,Y | Defined$ Player.IsRemembered | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
@@ -9,5 +9,5 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Y:Count$RememberedSize/NMinus.3
 SVar:X:SVar$Y/Twice
 SVar:RemAIDeck:True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/temporary_truce.jpg
+SVar:Picture:http://www.wizards.com/global/images/magic/general/truce.jpg
 Oracle:Each player may draw up to two cards. For each card less than two a player draws this way, that player gains 2 life.

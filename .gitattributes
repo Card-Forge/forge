@@ -11599,6 +11599,7 @@ res/cardsfolder/t/trostanis_judgment.txt -text
 res/cardsfolder/t/trostanis_summoner.txt -text
 res/cardsfolder/t/troubled_healer.txt svneol=native#text/plain
 res/cardsfolder/t/troublesome_spirit.txt svneol=native#text/plain
+res/cardsfolder/t/truce.txt -text
 res/cardsfolder/t/true_believer.txt -text
 res/cardsfolder/t/true_conviction.txt svneol=native#text/plain
 res/cardsfolder/t/truefire_paladin.txt -text
