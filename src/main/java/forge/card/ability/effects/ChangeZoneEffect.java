@@ -666,7 +666,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         int changeNum = sa.hasParam("ChangeNum") ? AbilityUtils.calculateAmount(card, sa.getParam("ChangeNum"),
                 sa) : 1;
 
-        if (optional && !GuiDialog.confirm(card, "Search " + origin + "?")) {
+        if (optional && !GuiDialog.confirm(card, defined ? "Put that card from " + origin + "to " + destination : "Search " + origin + "?")) {
             return;
         }
 
