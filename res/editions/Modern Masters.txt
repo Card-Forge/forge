@@ -1,6 +1,6 @@
 [metadata]
 Name=Modern Masters
-Code=MDM
+Code=MMA
 Date=2013-06-07
 Type=Reprint
 BoosterCovers=3
