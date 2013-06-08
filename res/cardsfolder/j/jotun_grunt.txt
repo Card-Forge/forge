@@ -1,0 +1,9 @@
+Name:Jotun Grunt
+ManaCost:1 W
+Types:Creature Giant Soldier
+PT:4/4
+K:Cumulative upkeep:PutCardToLibFromSameGrave<2/-1/Card>:Put two cards from a single graveyard on the bottom of their owner's library.
+SVar:X:PlayerCountPlayers$HighestValidGraveyard Card.YouOwn
+SVar:NeedsToPlayVar:X GE2
+SVar:Picture:http://www.wizards.com/global/images/magic/general/jotun_grunt.jpg
+Oracle:Cumulative upkeep-Put two cards from a single graveyard on the bottom of their owner's library. (At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.)

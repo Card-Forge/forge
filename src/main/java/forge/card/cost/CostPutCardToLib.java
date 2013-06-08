@@ -319,6 +319,16 @@ public class CostPutCardToLib extends CostPartWithList {
     @Override
     public PaymentDecision decideAIPayment(Player ai, SpellAbility ability, Card source) {
         Integer c = this.convertAmount();
+        final Game game = ai.getGame();
+        List<Card> chosen = new ArrayList<Card>();
+        List<Card> list;
+
+        if (this.sameZone) {
+            list = new ArrayList<Card>(game.getCardsIn(this.getFrom()));
+        } else {
+            list = new ArrayList<Card>(ai.getCardsIn(this.getFrom()));
+        }
+
         if (c == null) {
             final String sVar = ability.getSVar(this.getAmount());
             // Generalize this
@@ -328,12 +338,24 @@ public class CostPutCardToLib extends CostPartWithList {
     
             c = AbilityUtils.calculateAmount(source, this.getAmount(), ability);
         }
+
+        list = CardLists.getValidCards(list, this.getType().split(";"), ai, source);
+
         if (this.sameZone) {
-            // TODO Determine exile from same zone for AI
-            return null;
+            // Jotun Grunt
+            // TODO: improve AI
+            final List<Player> players = game.getPlayers();
+            for (Player p : players) {
+                List<Card> enoughType = CardLists.filter(list, CardPredicates.isOwner(p));
+                if (enoughType.size() >= c) {
+                    chosen.addAll(enoughType);
+                    break;
+                }
+            }
+            chosen = chosen.subList(0, c);
         } else {
-            List<Card> chosen = ComputerUtil.choosePutToLibraryFrom(ai, this.getFrom(), this.getType(), source, ability.getTargetCard(), c);
-            return null == chosen ? null : new PaymentDecision(chosen);
+            chosen = ComputerUtil.choosePutToLibraryFrom(ai, this.getFrom(), this.getType(), source, ability.getTargetCard(), c);
         }
+        return chosen.isEmpty() ? null : new PaymentDecision(chosen);
     }
 }
