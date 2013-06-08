@@ -65,7 +65,7 @@ public class CostPutCardToLib extends CostPartWithList {
     }
 
     /**
-     * Instantiates a new cost exile.
+     * Instantiates a new cost CostPutCardToLib.
      * 
      * @param amount
      *            the amount
@@ -251,7 +251,7 @@ public class CostPutCardToLib extends CostPartWithList {
     }
     
     /**
-     * TODO: Write javadoc for this method.
+     * PutFromMiscZone
      * @param sa
      * @param nNeeded
      * @param typeList

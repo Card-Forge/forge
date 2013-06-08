@@ -3950,6 +3950,7 @@ res/cardsfolder/f/fortitude.txt svneol=native#text/plain
 res/cardsfolder/f/fortress_crab.txt -text
 res/cardsfolder/f/fortress_cyclops.txt -text
 res/cardsfolder/f/fortune_thief.txt svneol=native#text/plain
+res/cardsfolder/f/fossil_find.txt -text
 res/cardsfolder/f/foster.txt -text
 res/cardsfolder/f/foul_familiar.txt svneol=native#text/plain
 res/cardsfolder/f/foul_imp.txt svneol=native#text/plain
@@ -9443,6 +9444,7 @@ res/cardsfolder/s/seal_of_removal.txt svneol=native#text/plain
 res/cardsfolder/s/seal_of_strength.txt svneol=native#text/plain
 res/cardsfolder/s/sealed_fate.txt svneol=native#text/plain
 res/cardsfolder/s/seance.txt -text
+res/cardsfolder/s/search_for_survivors.txt -text
 res/cardsfolder/s/search_for_tomorrow.txt svneol=native#text/plain
 res/cardsfolder/s/search_the_city.txt -text
 res/cardsfolder/s/search_warrant.txt -text
@@ -14151,6 +14153,7 @@ src/main/java/forge/card/ability/effects/RearrangeTopOfLibraryEffect.java -text
 src/main/java/forge/card/ability/effects/RegenerateAllEffect.java -text
 src/main/java/forge/card/ability/effects/RegenerateEffect.java -text
 src/main/java/forge/card/ability/effects/RemoveFromCombatEffect.java -text
+src/main/java/forge/card/ability/effects/ReorderZoneEffect.java -text
 src/main/java/forge/card/ability/effects/RepeatEachEffect.java -text
 src/main/java/forge/card/ability/effects/RepeatEffect.java -text
 src/main/java/forge/card/ability/effects/RestartGameEffect.java -text

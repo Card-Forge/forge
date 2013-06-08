@@ -190,6 +190,7 @@ public enum ApiType {
     RemoveCounter (CountersRemoveEffect.class, CountersRemoveAi.class),
     RemoveCounterAll (CountersRemoveAllEffect.class, CannotPlayAi.class),
     RemoveFromCombat (RemoveFromCombatEffect.class, RemoveFromCombatAi.class),
+    ReorderZone (ReorderZoneEffect.class, AlwaysPlayAi.class),
     Repeat (RepeatEffect.class, RepeatAi.class),
     RepeatEach (RepeatEachEffect.class, RepeatEachAi.class),
     RestartGame (RestartGameEffect.class, RestartGameAi.class),

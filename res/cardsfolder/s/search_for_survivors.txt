@@ -1,0 +1,12 @@
+Name:Search for Survivors
+ManaCost:2 R
+Types:Sorcery
+A:SP$ ReorderZone | Cost$ 2 R | Zone$ Graveyard | Defined$ You | Random$ True | SubAbility$ DBChoose | SpellDescription$ Reorder your graveyard at random. An opponent chooses a card at random in your graveyard. If it's a creature card, put it onto the battlefield. Otherwise, exile it.
+SVar:DBChoose:DB$ ChooseCard | Defined$ Opponent | Choices$ Card.YouOwn | ChoiceZone$ Graveyard | AtRandom$ True | Amount$ 1 | SubAbility$ DBReturn
+SVar:DBReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ConditionDefined$ ChosenCard | ConditionPresent$ Card.Creature | ConditionCompare$ GE1 | Defined$ ChosenCard | SubAbility$ DBExile
+SVar:DBExile:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | ConditionDefined$ ChosenCard | ConditionPresent$ Card.Creature | ConditionCompare$ EQ0 | Defined$ ChosenCard
+SVar:X:Count$ValidGraveyard Creature.YouCtrl
+SVar:NeedsToPlayVar:X GE2
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/search_for_survivors.jpg
+Oracle:Reorder your graveyard at random. An opponent chooses a card at random in your graveyard. If it's a creature card, put it onto the battlefield. Otherwise, exile it.
