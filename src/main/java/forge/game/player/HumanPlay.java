@@ -403,7 +403,7 @@ public class HumanPlay {
                 //Jotun Grunt
                 int amount = Integer.parseInt(((CostPutCardToLib) part).getAmount());
                 final ZoneType from = ((CostPutCardToLib) part).getFrom();
-                List<Card> list = CardLists.getValidCards(p.getGame().getCardsIn(from), part.getType().split(","), p, source);
+                List<Card> list = CardLists.getValidCards(p.getGame().getCardsIn(from), part.getType().split(";"), p, source);
                 List<Player> players = p.getGame().getPlayers();
                 List<Player> payableZone = new ArrayList<Player>();
                 for (Player player : players) {
