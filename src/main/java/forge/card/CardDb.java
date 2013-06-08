@@ -71,7 +71,7 @@ public final class CardDb implements ICardDatabase {
         synchronized (CardDb.class) {
             if (CardDb.commonCards == null) { // It's broken under 1.4 and below, on 1.5+ works again!
                 CardSorter cs = new CardSorter(rules);
-                commonCards = new CardDb(cs.regularCards, editions, false /*true*/);
+                commonCards = new CardDb(cs.regularCards, editions, false);
                 variantCards = new CardDb(cs.variantsCards, editions, false);
             }
         }
@@ -99,7 +99,7 @@ public final class CardDb implements ICardDatabase {
         this.rulesByName = rules;
         List<String> missingCards = new ArrayList<String>();
         for(CardEdition e : editions) {
-            boolean worthLogging = logMissingCards && ( e.getType() == Type.CORE || e.getType() == Type.EXPANSION );
+            boolean worthLogging = logMissingCards && ( e.getType() == Type.CORE || e.getType() == Type.EXPANSION || e.getType() == Type.REPRINT );
             if(worthLogging)
                 System.out.print(e.getName() + " (" + e.getCards().length + " cards)");
             String lastCardName = null;
