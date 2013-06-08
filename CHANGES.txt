@@ -55,6 +55,16 @@ Chancellor of the Annex
 Temporary Truce
 Dream Chisel
 Exiled Doomsayer
+Indentured Djinn
+Kithkin Armor
+Truce
+Defensive Formation
+Battlefield Scrounger
+Leashling
+Penance
+Jotun Grunt
+Fossil Find
+Search for Survivors
 
 
 ----------
@@ -125,6 +135,10 @@ Young Pyromancer
 
 Fleshpulper Giant
 Marauding Maulhorn
+Accursed Spirit
+Corpse Hauler
+Vampire Warlord
+Into the Wilds
 
 
 ------------
