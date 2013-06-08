@@ -244,9 +244,9 @@ public class CostPutCardToLib extends CostPartWithList {
                     payableZone.add(p);
                 }
             }
-            return PutFromSame(list, c, payableZone);
+            return putFromSame(list, c, payableZone);
         } else {//Graveyard
-            return PutFromMiscZone(ability, c, list);
+            return putFromMiscZone(ability, c, list);
         }
     }
     
@@ -257,7 +257,7 @@ public class CostPutCardToLib extends CostPartWithList {
      * @param typeList
      * @return a boolean
      */
-    private boolean PutFromMiscZone(SpellAbility sa, int nNeeded, List<Card> typeList) {
+    private boolean putFromMiscZone(SpellAbility sa, int nNeeded, List<Card> typeList) {
         for (int i = 0; i < nNeeded; i++) {
             if (typeList.isEmpty()) {
                 return false;
@@ -275,7 +275,7 @@ public class CostPutCardToLib extends CostPartWithList {
         return true;
     }
 
-    private boolean PutFromSame(List<Card> list, int nNeeded, List<Player> payableZone) {
+    private boolean putFromSame(List<Card> list, int nNeeded, List<Player> payableZone) {
         if (nNeeded == 0) {
             return true;
         }
