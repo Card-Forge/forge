@@ -1,0 +1,8 @@
+Name:Defensive Formation
+ManaCost:W
+Types:Enchantment
+S:Mode$ Continuous | Affected$ You | AddKeyword$ You assign combat damage of each creature attacking you. | Description$ Rather than the attacking player, you assign the combat damage of each creature attacking you. You can divide that creature's combat damage as you choose among any of the creatures blocking it.
+SVar:NonStackingEffect:True
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/defensive_formation.jpg
+Oracle:Rather than the attacking player, you assign the combat damage of each creature attacking you. You can divide that creature's combat damage as you choose among any of the creatures blocking it.

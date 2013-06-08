@@ -180,7 +180,7 @@ public class PlayerControllerHuman extends PlayerController {
      * @see forge.game.player.PlayerController#assignCombatDamage()
      */
     @Override
-    public Map<Card, Integer> assignCombatDamage(Card attacker, List<Card> blockers, int damageDealt, GameEntity defender) {
+    public Map<Card, Integer> assignCombatDamage(Card attacker, List<Card> blockers, int damageDealt, GameEntity defender, boolean overrideOrder) {
         // Attacker is a poor name here, since the creature assigning damage
         // could just as easily be the blocker. 
         Map<Card, Integer> map;
@@ -189,7 +189,7 @@ public class PlayerControllerHuman extends PlayerController {
             map.put(null, damageDealt);
         } else {
             if ((attacker.hasKeyword("Trample") && defender != null) || (blockers.size() > 1)) {
-                map = CMatchUI.SINGLETON_INSTANCE.getDamageToAssign(attacker, blockers, damageDealt, defender);
+                map = CMatchUI.SINGLETON_INSTANCE.getDamageToAssign(attacker, blockers, damageDealt, defender, overrideOrder);
             } else {
                 map = new HashMap<Card, Integer>();
                 map.put(blockers.get(0), damageDealt);

@@ -618,7 +618,7 @@ public class Combat {
 
                 if (!attackers.isEmpty()) {
                     assignedDamage = true;
-                    Map<Card, Integer> map = blocker.getController().getController().assignCombatDamage(blocker, attackers, damage, null);
+                    Map<Card, Integer> map = blocker.getController().getController().assignCombatDamage(blocker, attackers, damage, null, false);
                     for (Entry<Card, Integer> dt : map.entrySet()) {
                         dt.getKey().addAssignedDamage(dt.getValue(), blocker);
                         dt.getKey().updateObservers();
@@ -659,7 +659,22 @@ public class Combat {
                     continue;
                 }
             } else {
-                Map<Card, Integer> map = this.getAttackingPlayer().getController().assignCombatDamage(attacker, blockers, damageDealt, this.getDefenderByAttacker(attacker));
+                GameEntity defender = this.getDefenderByAttacker(attacker);
+                Player assigningPlayer = this.getAttackingPlayer();
+                // Defensive Formation is very similar to Banding with Blockers
+                // It allows the defending player to assign damage instead of the attacking player
+                if (defender instanceof Player && defender.hasKeyword("You assign combat damage of each creature attacking you.")) {
+                    assigningPlayer = (Player)defender;
+                }
+
+                if (!assigningPlayer.equals(defender)) {
+                    List<Card> blockingBand = CardLists.getKeyword(blockers, "Banding");
+                    if (!blockingBand.isEmpty()) {
+                        assigningPlayer = blockingBand.get(0).getController();
+                    }
+                }
+
+                Map<Card, Integer> map = assigningPlayer.getController().assignCombatDamage(attacker, blockers, damageDealt, defender, this.getAttackingPlayer() != assigningPlayer);
                 for (Entry<Card, Integer> dt : map.entrySet()) {
                     if( dt.getKey() == null) {
                         if (dt.getValue() > 0) 

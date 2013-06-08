@@ -96,7 +96,7 @@ public abstract class PlayerController {
     public abstract Deck sideboard(final Deck deck, GameType gameType);
 
 
-    public abstract Map<Card, Integer> assignCombatDamage(Card attacker, List<Card> blockers, int damageDealt, GameEntity defender);
+    public abstract Map<Card, Integer> assignCombatDamage(Card attacker, List<Card> blockers, int damageDealt, GameEntity defender, boolean overrideOrder);
 
     public abstract Integer announceRequirements(SpellAbility ability, String announce, boolean allowZero);
     public abstract List<Card> choosePermanentsToSacrifice(SpellAbility sa, int min, int max, List<Card> validTargets, String message);

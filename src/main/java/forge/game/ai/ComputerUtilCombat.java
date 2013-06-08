@@ -1670,8 +1670,10 @@ public class ComputerUtilCombat {
      * @param dmgCanDeal
      *            a int.
      * @param defender 
+     * @param overrideOrder overriding combatant order
      */
-    public static Map<Card, Integer> distributeAIDamage(final Card attacker, final List<Card> block, int dmgCanDeal, GameEntity defender) {
+    public static Map<Card, Integer> distributeAIDamage(final Card attacker, final List<Card> block, int dmgCanDeal, GameEntity defender, boolean overrideOrder) {
+        // TODO: Distribute defensive Damage (AI controls how damage is dealt to own cards) for Banding and Defensive Formation
         Map<Card, Integer> damageMap = new HashMap<Card, Integer>();
         
         boolean isAttacking = defender != null;

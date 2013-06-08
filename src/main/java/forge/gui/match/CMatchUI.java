@@ -200,9 +200,10 @@ public enum CMatchUI {
      * @param attacker &emsp; {@link forge.Card}
      * @param blockers &emsp; {@link forge.CardList}
      * @param damage &emsp; int
+     * @param overrideOrder overriding combatant order
      */
     @SuppressWarnings("unchecked")
-    public Map<Card, Integer> getDamageToAssign(final Card attacker, final List<Card> blockers, final int damage, final GameEntity defender) {
+    public Map<Card, Integer> getDamageToAssign(final Card attacker, final List<Card> blockers, final int damage, final GameEntity defender, final boolean overrideOrder) {
         if (damage <= 0) {
             return new HashMap<Card, Integer>();
         }
@@ -219,8 +220,7 @@ public enum CMatchUI {
         FThreads.invokeInEdtAndWait(new Runnable() {
             @Override
             public void run() {
-                // TODO Auto-generated method stub
-                VAssignDamage v = new VAssignDamage(attacker, blockers, damage, defender);
+                VAssignDamage v = new VAssignDamage(attacker, blockers, damage, defender, overrideOrder);
                 result[0] = v.getDamageMap();
             }});
         return (Map<Card, Integer>)result[0];

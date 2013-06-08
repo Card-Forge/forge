@@ -69,6 +69,7 @@ public class VAssignDamage {
     private boolean attackerHasDeathtouch = false;
     private boolean attackerHasTrample = false;
     private boolean attackerHasInfect = false;
+    private boolean overrideCombatantOrder = false;
 
     private final GameEntity defender;
 
@@ -136,17 +137,20 @@ public class VAssignDamage {
     /** Constructor.
      * 
      * @param attacker0 {@link forge.Card}
-     * @param defenders0 List<{@link forge.Card}>
+     * @param defenderCards List<{@link forge.Card}>
      * @param damage0 int
      * @param defender GameEntity that's bein attacked
+     * @param overrideOrder override combatant order
+
      */
-    public VAssignDamage(final Card attacker0, final List<Card> defenderCards, final int damage0, final GameEntity defender) {
+    public VAssignDamage(final Card attacker0, final List<Card> defenderCards, final int damage0, final GameEntity defender, boolean overrideOrder) {
         // Set damage storage vars
         this.totalDamageToAssign = damage0;
         this.defender = defender;
         this.attackerHasDeathtouch = attacker0.hasKeyword("Deathtouch");
         this.attackerHasInfect = attacker0.hasKeyword("Infect");
         this.attackerHasTrample = defender != null && attacker0.hasKeyword("Trample");
+        this.overrideCombatantOrder = overrideOrder;
 
         // Top-level UI stuff
         final JPanel overlay = SOverlayUtils.genericOverlay();
@@ -275,8 +279,10 @@ public class VAssignDamage {
         if ( !damage.containsKey(source) ) 
             source = null;
 
-        // Allow click if this is active, or next to active and active has lethal
-        if (isAdding && !VAssignDamage.this.canAssignTo(source)) {
+        // If trying to assign to the defender, follow the normal assignment rules
+        // No need to check for "active" creature assignee when overiding combatant order
+        if ((source == null || source == this.defender || !this.overrideCombatantOrder) && isAdding && 
+                !VAssignDamage.this.canAssignTo(source)) {
             return;
         }
 
@@ -301,9 +307,9 @@ public class VAssignDamage {
         if ( damageToAdd > leftToAssign )
             damageToAdd = leftToAssign;
         
-        // cannot assign first blocker less than lethal damage
+        // cannot assign first blocker less than lethal damage except when overriding order
         boolean isFirstBlocker = defenders.get(0).card == source;
-        if ( isFirstBlocker && damageToAdd + damageItHad < lethalDamage )
+        if (!this.overrideCombatantOrder && isFirstBlocker && damageToAdd + damageItHad < lethalDamage )
             return;
 
         if ( 0 == damageToAdd || damageToAdd + damageItHad < 0) 
@@ -314,23 +320,29 @@ public class VAssignDamage {
         updateLabels();
     }
 
-    /**
-     * TODO: Write javadoc for this method.
-     */
     private void checkDamageQueue() {
+        // Clear out any Damage that shouldn't be assigned to other combatants
         boolean hasAliveEnemy = false;
         for(DamageTarget dt : defenders) {
             int lethal = getDamageToKill(dt.card);
             int damage = dt.damage;
-            if ( hasAliveEnemy )
+            // If overriding combatant order, make sure everything has lethal if defender has damage assigned to it
+            // Otherwise, follow normal combatant order
+            if ( hasAliveEnemy && (!this.overrideCombatantOrder || dt.card == null || dt.card == this.defender))
                 dt.damage = 0;
             else
-                hasAliveEnemy = damage < lethal;
+                hasAliveEnemy |= damage < lethal;
         }
     }
 
     // will assign all damage to defenders and rest to player, if present
     private void initialAssignDamage(boolean toAllBlockers) {
+        if (!toAllBlockers && this.overrideCombatantOrder) {
+            // Don't auto assign the first damage when overriding combatant order
+            updateLabels();
+            return;
+        }
+
         int dmgLeft = totalDamageToAssign;
         DamageTarget dtLast = null;
         for(DamageTarget dt : defenders) { // MUST NOT RUN WITH EMPTY collection
