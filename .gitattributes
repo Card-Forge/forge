@@ -848,6 +848,7 @@ res/cardsfolder/b/battle_strain.txt svneol=native#text/plain
 res/cardsfolder/b/battlefield_forge.txt svneol=native#text/plain
 res/cardsfolder/b/battlefield_medic.txt svneol=native#text/plain
 res/cardsfolder/b/battlefield_percher.txt svneol=native#text/plain
+res/cardsfolder/b/battlefield_scrounger.txt -text
 res/cardsfolder/b/battleflight_eagle.txt -text
 res/cardsfolder/b/battlegate_mimic.txt svneol=native#text/plain
 res/cardsfolder/b/battlegrace_angel.txt svneol=native#text/plain
@@ -6109,6 +6110,7 @@ res/cardsfolder/l/leap.txt svneol=native#text/plain
 res/cardsfolder/l/leap_of_faith.txt -text
 res/cardsfolder/l/leap_of_flame.txt svneol=native#text/plain
 res/cardsfolder/l/leaping_lizard.txt svneol=native#text/plain
+res/cardsfolder/l/leashling.txt -text
 res/cardsfolder/l/leatherback_baloth.txt svneol=native#text/plain
 res/cardsfolder/l/leave_no_trace.txt svneol=native#text/plain
 res/cardsfolder/l/leech_bonder.txt -text
@@ -7881,6 +7883,7 @@ res/cardsfolder/p/pegasus_refuge.txt svneol=native#text/plain
 res/cardsfolder/p/pegasus_stampede.txt svneol=native#text/plain
 res/cardsfolder/p/pelakka_wurm.txt svneol=native#text/plain
 res/cardsfolder/p/pemmins_aura.txt svneol=native#text/plain
+res/cardsfolder/p/penance.txt -text
 res/cardsfolder/p/pendelhaven.txt svneol=native#text/plain
 res/cardsfolder/p/pendelhaven_elder.txt svneol=native#text/plain
 res/cardsfolder/p/pendrell_drake.txt svneol=native#text/plain
@@ -14188,6 +14191,7 @@ src/main/java/forge/card/cost/CostPartMana.java -text
 src/main/java/forge/card/cost/CostPartWithList.java -text
 src/main/java/forge/card/cost/CostPayLife.java -text
 src/main/java/forge/card/cost/CostPayment.java svneol=native#text/plain
+src/main/java/forge/card/cost/CostPutCardToLib.java -text
 src/main/java/forge/card/cost/CostPutCounter.java -text
 src/main/java/forge/card/cost/CostRemoveCounter.java -text
 src/main/java/forge/card/cost/CostReturn.java -text

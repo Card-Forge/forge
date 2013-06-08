@@ -316,12 +316,30 @@ public class Cost {
             final String description = splitStr.length > 2 ? splitStr[2] : null;
             return new CostReveal(splitStr[0], splitStr[1], description);
         }
+
+        if(parse.startsWith("PutCardToLibFromHand<")) {
+            final String[] splitStr = abCostParse(parse, 4);
+            final String description = splitStr.length > 3 ? splitStr[3] : null;
+            return new CostPutCardToLib(splitStr[0], splitStr[1], splitStr[2], description, ZoneType.Hand);
+        }
+
+        if(parse.startsWith("PutCardToLibFromGrave<")) {
+            final String[] splitStr = abCostParse(parse, 4);
+            final String description = splitStr.length > 3 ? splitStr[3] : null;
+            return new CostPutCardToLib(splitStr[0], splitStr[1], splitStr[2], description, ZoneType.Graveyard);
+        }
         
+        if(parse.startsWith("PutCardToLibFromSameGrave<")) {
+            final String[] splitStr = abCostParse(parse, 4);
+            final String description = splitStr.length > 3 ? splitStr[3] : null;
+            return new CostPutCardToLib(splitStr[0], splitStr[1], splitStr[2], description, ZoneType.Graveyard, true);
+        }
+
         // These won't show up with multiples
         if (parse.equals("Untap") || parse.equals("Q")) {
             return new CostUntap();
         }
-    
+
         if (parse.equals("T")) {
             return new CostTap();
         }

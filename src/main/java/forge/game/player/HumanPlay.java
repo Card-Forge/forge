@@ -8,6 +8,7 @@ import org.apache.commons.lang3.StringUtils;
 import forge.Card;
 import forge.CardLists;
 import forge.CardPredicates.Presets;
+import forge.CardPredicates;
 import forge.CounterType;
 import forge.FThreads;
 import forge.GameLogEntryType;
@@ -26,6 +27,7 @@ import forge.card.cost.CostPartMana;
 import forge.card.cost.CostPartWithList;
 import forge.card.cost.CostPayLife;
 import forge.card.cost.CostPayment;
+import forge.card.cost.CostPutCardToLib;
 import forge.card.cost.CostPutCounter;
 import forge.card.cost.CostRemoveCounter;
 import forge.card.cost.CostReturn;
@@ -395,6 +397,46 @@ public class HumanPlay {
                         p.getGame().getAction().exile(c);
                     }
                 }
+            }
+            
+            else if (part instanceof CostPutCardToLib) {
+                //Jotun Grunt
+                int amount = Integer.parseInt(((CostPutCardToLib) part).getAmount());
+                final ZoneType from = ((CostPutCardToLib) part).getFrom();
+                List<Card> list = CardLists.getValidCards(p.getGame().getCardsIn(from), part.getType().split(","), p, source);
+                List<Player> players = p.getGame().getPlayers();
+                List<Player> payableZone = new ArrayList<Player>();
+                for (Player player : players) {
+                    List<Card> enoughType = CardLists.filter(list, CardPredicates.isOwner(player));
+                    if (enoughType.size() < amount) {
+                        list.removeAll(enoughType);
+                    } else {
+                        payableZone.add(player);
+                    }
+                }       
+                Player chosen = GuiChoose.oneOrNone(String.format("Put cards from whose %s?", 
+                        ((CostPutCardToLib) part).getFrom()), payableZone);
+                if (chosen == null) {
+                    return false;
+                }
+            
+                List<Card> typeList = CardLists.filter(list, CardPredicates.isOwner(chosen));
+            
+                for (int i = 0; i < amount; i++) {
+                    if (typeList.isEmpty()) {
+                        return false;
+                    }
+            
+                    final Card c = GuiChoose.oneOrNone("Put cards to Library", typeList);
+            
+                    if (c != null) {
+                        typeList.remove(c);
+                        p.getGame().getAction().moveToLibrary(c, Integer.parseInt(((CostPutCardToLib) part).getLibPos()));
+                    } else {
+                        return false;
+                    }
+                }
+                return true;
             }
     
             else if (part instanceof CostSacrifice) {

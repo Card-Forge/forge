@@ -508,6 +508,51 @@ public class ComputerUtil {
 
     /**
      * <p>
+     * choosePutToLibraryFrom.
+     * </p>
+     * 
+     * @param zone
+     *            a {@link java.lang.String} object.
+     * @param type
+     *            a {@link java.lang.String} object.
+     * @param activate
+     *            a {@link forge.Card} object.
+     * @param target
+     *            a {@link forge.Card} object.
+     * @param amount
+     *            a int.
+     * @return a {@link forge.CardList} object.
+     */
+    public static List<Card> choosePutToLibraryFrom(final Player ai, final ZoneType zone, final String type, final Card activate,
+            final Card target, final int amount) {
+        List<Card> typeList = ai.getCardsIn(zone);
+
+        typeList = CardLists.getValidCards(typeList, type.split(","), activate.getController(), activate);
+        
+        if ((target != null) && target.getController() == ai && typeList.contains(target)) {
+            typeList.remove(target); // don't move the card we're pumping
+        }
+
+        if (typeList.size() < amount) {
+            return null;
+        }
+
+        CardLists.sortByPowerAsc(typeList);
+        final List<Card> list = new ArrayList<Card>();
+        
+        if (zone != ZoneType.Hand) {
+            Collections.reverse(typeList);
+        }
+        
+        for (int i = 0; i < amount; i++) {
+            list.add(typeList.get(i));
+        }
+
+        return list;
+    }
+
+    /**
+     * <p>
      * chooseTapType.
      * </p>
      * 
