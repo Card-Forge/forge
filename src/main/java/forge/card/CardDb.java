@@ -241,7 +241,7 @@ public final class CardDb implements ICardDatabase {
         if ( null == cards ) return null;
 
         if ( index < 0 ) { // this stands for 'random art'
-            PaperCard[] candidates = new PaperCard[8]; // 8 cards with same name per set is a maximum of what has been printed (lands of Zendikar)
+            PaperCard[] candidates = new PaperCard[9]; // 9 cards with same name per set is a maximum of what has been printed (Arnchenemy)
             int cnt = 0;
             for( PaperCard pc : cards ) {
                 if( pc.getEdition().equals(setName) )
