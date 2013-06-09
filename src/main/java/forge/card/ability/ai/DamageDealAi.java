@@ -210,6 +210,10 @@ public class DamageDealAi extends DamageAiBase {
             return this.damageChooseNontargeted(ai, saMe, dmg);
         }
 
+        if (tgt.isRandomTarget()) {
+            return false;
+        }
+
         return this.damageChoosingTargets(ai, saMe, tgt, dmg, false, false);
     }
 
