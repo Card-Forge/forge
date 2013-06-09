@@ -332,7 +332,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
                         hasPaid = activating.getController().payManaOptional(sp.getSourceCard(), costMultikicker, prompt, ManaPaymentPurpose.Multikicker);
                         if( hasPaid )
                             sp.getSourceCard().addMultiKickerMagnitude(1);
-                    } while( !hasPaid );
+                    } while( hasPaid );
                 }
                 
                 // The ability is added to stack HERE
