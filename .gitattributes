@@ -14188,6 +14188,7 @@ src/main/java/forge/card/cardfactory/package-info.java svneol=native#text/plain
 src/main/java/forge/card/cost/Cost.java svneol=native#text/plain
 src/main/java/forge/card/cost/CostDamage.java -text
 src/main/java/forge/card/cost/CostDiscard.java -text
+src/main/java/forge/card/cost/CostDraw.java -text
 src/main/java/forge/card/cost/CostExile.java -text
 src/main/java/forge/card/cost/CostExileAndPay.java -text
 src/main/java/forge/card/cost/CostGainLife.java -text
