@@ -1,0 +1,16 @@
+Name:Grave Consequences
+ManaCost:1 B
+Types:Instant
+#AI will exile all cards from its graveyard currently
+A:SP$ RepeatEach | Cost$ 1 B | RepeatPlayers$ Player | RepeatSubAbility$ DBChooseNum | SubAbility$ DBExile | SpellDescription$ Each player may exile any number of cards from his or her graveyard. Then each player loses 1 life for each card in his or her graveyard. Draw a card.
+SVar:DBChooseNum:DB$ ChooseNumber | Defined$ Player.IsRemembered | Min$ 0 | Max$ X | References$ X | ListTitle$ Exile how many cards in your graveyard? | SubAbility$ DBChooseCard
+SVar:DBChooseCard:DB$ ChooseCard | Defined$ Player.IsRemembered | Amount$ Y | References$ Y | Choices$ Card.RememberedPlayerCtrl | ChoiceZone$ Graveyard | Mandatory$ True | RememberChosen$ True
+SVar:DBExile:DB$ ChangeZoneAll | ChangeType$ Card.IsRemembered | Origin$ Graveyard | Destination$ Exile | SubAbility$ DBRepeat
+SVar:DBRepeat:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ DBLoseLife | SubAbility$ DBDraw
+SVar:DBLoseLife:DB$ LoseLife | Defined$ Player.IsRemembered | LifeAmount$ X | References$ X
+SVar:DBDraw:DB$ Draw | NumCards$ 1
+SVar:X:Count$ValidGraveyard Card.RememberedPlayerCtrl
+SVar:Y:Count$ChosenNumber
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/grave_consequences.jpg
+Oracle:Each player may exile any number of cards from his or her graveyard. Then each player loses 1 life for each card in his or her graveyard.\nDraw a card.

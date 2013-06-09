@@ -1,0 +1,10 @@
+Name:Psychic Vortex
+ManaCost:2 U U
+Types:Enchantment
+K:Cumulative upkeep:DrawYou<1>:Draw a card.
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | Execute$ TrigSac | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your end step, sacrifice a land and discard your hand.
+SVar:TrigSac:AB$ Sacrifice | Cost$ 0 | SacValid$ Land | SubAbility$ DBDiscard
+SVar:DBDiscard:DB$ Discard | Mode$ Hand
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/psychic_vortex.jpg
+Oracle:Cumulative upkeep-Draw a card. (At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.)\nAt the beginning of your end step, sacrifice a land and discard your hand.

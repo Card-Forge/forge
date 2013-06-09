@@ -20,6 +20,7 @@ import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.cost.CostDamage;
 import forge.card.cost.CostDiscard;
+import forge.card.cost.CostDraw;
 import forge.card.cost.CostExile;
 import forge.card.cost.CostMill;
 import forge.card.cost.CostPart;
@@ -319,7 +320,20 @@ public class HumanPlay {
     
                 p.payLife(amount, null);
             }
-    
+
+            else if (part instanceof CostDraw) {
+                final int amount = getAmountFromPart(part, source, sourceAbility);
+                if (!p.canDraw()) {
+                    return false;
+                }
+
+                if (false == GuiDialog.confirm(source, "Do you want to draw " + amount + " card(s)?" + orString)) {
+                    return false;
+                }
+
+                p.drawCards(amount);
+            }
+
             else if (part instanceof CostMill) {
                 final int amount = getAmountFromPart(part, source, sourceAbility);
                 final List<Card> list = p.getCardsIn(ZoneType.Library);

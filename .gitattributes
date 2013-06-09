@@ -4565,6 +4565,7 @@ res/cardsfolder/g/grasslands.txt svneol=native#text/plain
 res/cardsfolder/g/gratuitous_violence.txt svneol=native#text/plain
 res/cardsfolder/g/grave_betrayal.txt -text
 res/cardsfolder/g/grave_bramble.txt -text
+res/cardsfolder/g/grave_consequences.txt -text
 res/cardsfolder/g/grave_defiler.txt svneol=native#text/plain
 res/cardsfolder/g/grave_exchange.txt -text
 res/cardsfolder/g/grave_pact.txt svneol=native#text/plain
@@ -8311,6 +8312,7 @@ res/cardsfolder/p/psychic_surgery.txt svneol=native#text/plain
 res/cardsfolder/p/psychic_trance.txt -text svneol=unset#text/plain
 res/cardsfolder/p/psychic_transfer.txt -text
 res/cardsfolder/p/psychic_venom.txt svneol=native#text/plain
+res/cardsfolder/p/psychic_vortex.txt -text
 res/cardsfolder/p/psychogenic_probe.txt -text
 res/cardsfolder/p/psychosis_crawler.txt svneol=native#text/plain
 res/cardsfolder/p/psychotic_episode.txt -text svneol=unset#text/plain

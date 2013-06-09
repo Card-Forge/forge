@@ -27,7 +27,7 @@ public class ReorderZoneEffect extends SpellAbilityEffect {
         final List<Player> tgtPlayers = getTargetPlayers(sa);
         boolean shuffle = sa.hasParam("Random");
 
-        return "Reorder " + Lang.joinHomogenous(tgtPlayers)+ " " + zone.toString() + " " + (shuffle ? "at random." : "as your choose.");
+        return "Reorder " + Lang.joinHomogenous(tgtPlayers) + " " + zone.toString() + " " + (shuffle ? "at random." : "as your choose.");
     }
 
     /**
@@ -36,8 +36,6 @@ public class ReorderZoneEffect extends SpellAbilityEffect {
      * </p>
      * @param sa
      *            a {@link forge.card.spellability.SpellAbility} object.
-     * @param af
-     *            a {@link forge.card.ability.AbilityFactory} object.
      */
 
     @Override
