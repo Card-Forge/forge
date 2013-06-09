@@ -5796,6 +5796,20 @@ public class Card extends GameEntity implements Comparable<Card> {
                         }
                     }
                     return false;
+                } else if (restriction.equals("MovedToGrave")) {
+                    for (final SpellAbility sa : source.getCharacteristics().getSpellAbility()) {
+                        final SpellAbility root = sa.getRootAbility();
+                        if (root != null && (root.getPaidList("MovedToGrave") != null)
+                                && !root.getPaidList("MovedToGrave").isEmpty()) {
+                            List<Card> list = root.getPaidList("MovedToGrave");
+                            for (Card card : list) {
+                                if (this.getName().equals(card.getName())) {
+                                    return true;
+                                }
+                            }
+                        }
+                    }
+                    return false;
                 } else if (restriction.equals("NonToken")) {
                     final List<Card> list = CardLists.filter(getGame().getCardsIn(ZoneType.Battlefield),
                             Presets.NON_TOKEN);

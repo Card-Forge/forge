@@ -5570,6 +5570,7 @@ res/cardsfolder/j/jerrard_of_the_closed_fist.txt svneol=native#text/plain
 res/cardsfolder/j/jeska_warrior_adept.txt svneol=native#text/plain
 res/cardsfolder/j/jesters_cap.txt svneol=native#text/plain
 res/cardsfolder/j/jesters_mask.txt svneol=native#text/plain
+res/cardsfolder/j/jesters_scepter.txt -text
 res/cardsfolder/j/jet_medallion.txt svneol=native#text/plain
 res/cardsfolder/j/jeweled_bird.txt -text
 res/cardsfolder/j/jeweled_spirit.txt svneol=native#text/plain
@@ -12128,6 +12129,7 @@ res/cardsfolder/v/voice_of_truth.txt svneol=native#text/plain
 res/cardsfolder/v/voiceless_spirit.txt -text
 res/cardsfolder/v/voices_from_the_void.txt svneol=native#text/plain
 res/cardsfolder/v/void.txt -text svneol=unset#text/plain
+res/cardsfolder/v/void_maw.txt -text
 res/cardsfolder/v/void_stalker.txt -text
 res/cardsfolder/v/voidmage_apprentice.txt -text svneol=unset#text/plain
 res/cardsfolder/v/voidmage_husher.txt svneol=native#text/plain
@@ -14191,6 +14193,7 @@ src/main/java/forge/card/cost/CostDiscard.java -text
 src/main/java/forge/card/cost/CostDraw.java -text
 src/main/java/forge/card/cost/CostExile.java -text
 src/main/java/forge/card/cost/CostExileAndPay.java -text
+src/main/java/forge/card/cost/CostExiledMoveToGrave.java -text
 src/main/java/forge/card/cost/CostGainLife.java -text
 src/main/java/forge/card/cost/CostMill.java -text
 src/main/java/forge/card/cost/CostPart.java -text
