@@ -248,7 +248,7 @@ public class DeckgenUtil {
                 deckList.append(nl);
                 nLines++;
                 for (final Entry<PaperCard, Integer> ev : cp) {
-                    deckList.append(ev.getValue()).append(" x ").append(ev.getKey()).append(nl);
+                    deckList.append(ev.getValue()).append(" ").append(ev.getKey()).append(nl);
                     nLines++;
                 }
             }
