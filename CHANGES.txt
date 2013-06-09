@@ -65,6 +65,8 @@ Penance
 Jotun Grunt
 Fossil Find
 Search for Survivors
+Grave Consequences
+Psychic Vortex
 
 
 ----------
