@@ -137,11 +137,11 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
     @Override
     public GameLogEntry visit(GameEventCardDamaged event) {
         String additionalLog = "";
-        if( event.type == DamageType.Deathtouch ) additionalLog = " (Deathtouch)";
-        if( event.type == DamageType.M1M1Counters ) additionalLog = " (As -1/-1 Counters)";
-        if( event.type == DamageType.LoyaltyLoss ) additionalLog = " (Removing " + Lang.nounWithAmount(event.amount, "loyalty counter") + ")";
+        if( event.type == DamageType.Deathtouch ) additionalLog = "(Deathtouch)";
+        if( event.type == DamageType.M1M1Counters ) additionalLog = "(As -1/-1 Counters)";
+        if( event.type == DamageType.LoyaltyLoss ) additionalLog = "(Removing " + Lang.nounWithAmount(event.amount, "loyalty counter") + ")";
         
-        String message = String.format("%s deals %d damage%s to %s.", event.source, event.amount, event.damaged, additionalLog);
+        String message = String.format("%s deals %d damage %s to %s.", event.source, event.amount, additionalLog, event.damaged);
         return new GameLogEntry(GameLogEntryType.DAMAGE, message);
     }
 
@@ -187,11 +187,11 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
                 continue;
             }
             if ( sb.length() > 0 ) sb.append("\n");
-            sb.append(ev.player).append(" assigned ").append(Lang.joinHomogenous(attackers));
-            sb.append(" to attack ").append(kv.getKey().toString()).append(".");
+            sb.append(ev.player + " assigned " + Lang.joinHomogenous(attackers));
+            sb.append(" to attack " + kv.getKey() + ".");
         }
         if ( sb.length() == 0 ) 
-            sb.append(ev.player).append(" didn't attack this turn.");
+            sb.append(ev.player + " didn't attack this turn.");
 
         return new GameLogEntry(GameLogEntryType.COMBAT, sb.toString());
     }
@@ -221,9 +221,9 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
                 
                 blockers = att.getValue();
                 if ( blockers.isEmpty() ) {
-                    sb.append(controllerName).append(" didn't block ");
+                    sb.append(controllerName + " didn't block ");
                 } else {
-                    sb.append(controllerName).append(" assigned ").append(Lang.joinHomogenous(blockers)).append(" to block ");
+                    sb.append(controllerName + " assigned " + Lang.joinHomogenous(blockers) + " to block ");
                 }
                 
                 sb.append(att.getKey()).append(".");
