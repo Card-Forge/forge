@@ -22,6 +22,7 @@ import forge.card.cost.Cost;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.card.staticability.StaticAbility;
+import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilCard;
 import forge.game.ai.ComputerUtilCost;
 import forge.game.ai.ComputerUtilMana;
@@ -814,12 +815,7 @@ public class AttachAi extends SpellAbilityAi {
         }
 
         // Don't pump cards that will die.
-        prefList = CardLists.filter(prefList, new Predicate<Card>() {
-            @Override
-            public boolean apply(final Card c) {
-                return !c.getSVar("Targeting").equals("Dies");
-            }
-        });
+        prefList = ComputerUtil.getSafeTargets(ai, sa, prefList);
 
         if (attachSource.isAura() && !attachSource.getName().equals("Daybreak Coronet")) {
             // TODO For Auras like Rancor, that aren't as likely to lead to

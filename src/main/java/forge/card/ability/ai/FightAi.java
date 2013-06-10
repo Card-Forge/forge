@@ -10,6 +10,7 @@ import forge.CardLists;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
+import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilCombat;
 import forge.game.player.Player;
 import forge.util.MyRandom;
@@ -26,12 +27,7 @@ public class FightAi extends SpellAbilityAi {
 
         List<Card> aiCreatures = ai.getCreaturesInPlay();
         aiCreatures = CardLists.getTargetableCards(aiCreatures, sa);
-        aiCreatures = CardLists.filter(aiCreatures, new Predicate<Card>() {
-            @Override
-            public boolean apply(final Card c) {
-                return !c.getSVar("Targeting").equals("Dies");
-            }
-        });
+        aiCreatures =  ComputerUtil.getSafeTargets(ai, sa, aiCreatures);
 
         List<Card> humCreatures = ai.getOpponent().getCreaturesInPlay();
         humCreatures = CardLists.getTargetableCards(humCreatures, sa);

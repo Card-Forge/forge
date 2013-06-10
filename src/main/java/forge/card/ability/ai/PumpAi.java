@@ -250,12 +250,7 @@ public class PumpAi extends PumpAiBase {
 
         if (!sa.isCurse()) {
             // Don't target cards that will die.
-            list = CardLists.filter(list, new Predicate<Card>() {
-                @Override
-                public boolean apply(final Card c) {
-                    return !c.getSVar("Targeting").equals("Dies");
-                }
-            });
+            list = ComputerUtil.getSafeTargets(ai, sa, list);
         }
 
         while (tgt.getNumTargeted() < tgt.getMaxTargets(sa.getSourceCard(), sa)) {

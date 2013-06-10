@@ -4,7 +4,7 @@ Types:Creature Viashino Shaman
 PT:3/3
 T:Mode$ SpellAbilityCast | TargetsValid$ Card.Self | Execute$ TrigDamage | TriggerDescription$ Whenever CARDNAME becomes the target of a spell or ability, CARDNAME deals 3 damage to that spell or ability's controller.
 SVar:TrigDamage:AB$DealDamage | Cost$ 0 | Defined$ TriggeredCardController | NumDmg$ 3
-SVar:RemAIDeck:True
+SVar:Targeting:Counter
 SVar:Picture:http://www.wizards.com/global/images/magic/general/retromancer.jpg
 Oracle:Whenever Retromancer becomes the target of a spell or ability, Retromancer deals 3 damage to that spell or ability's controller.
 SetInfo:USG Common

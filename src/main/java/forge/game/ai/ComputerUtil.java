@@ -1663,4 +1663,19 @@ public class ComputerUtil {
         GuiChoose.one("Computer picked: ", new String[]{chosen});
         return chosen;
     }
+    
+    public static List<Card> getSafeTargets(final Player ai, SpellAbility sa, List<Card> validCards) {
+        List<Card> safeCards = new ArrayList<Card>(validCards);
+        safeCards = CardLists.filter(safeCards, new Predicate<Card>() {
+            @Override
+            public boolean apply(final Card c) {
+                if (c.getController() == ai) {
+                    if (c.getSVar("Targeting").equals("Dies") || c.getSVar("Targeting").equals("Counter"))
+                    return false;
+                }
+                return true;
+            }
+        });
+        return safeCards;
+    }
 }

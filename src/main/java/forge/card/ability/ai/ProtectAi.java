@@ -14,6 +14,7 @@ import forge.card.cost.Cost;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.game.Game;
+import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilCard;
 import forge.game.ai.ComputerUtilCombat;
 import forge.game.ai.ComputerUtilCost;
@@ -215,13 +216,7 @@ public class ProtectAi extends SpellAbilityAi {
         }
 
         // Don't target cards that will die.
-        list = CardLists.filter(list, new Predicate<Card>() {
-            @Override
-            public boolean apply(final Card c) {
-                System.out.println("Not Protecting");
-                return !c.getSVar("Targeting").equals("Dies");
-            }
-        });
+        list = ComputerUtil.getSafeTargets(ai, sa, list);
 
         while (tgt.getNumTargeted() < tgt.getMaxTargets(source, sa)) {
             Card t = null;

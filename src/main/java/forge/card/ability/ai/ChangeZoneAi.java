@@ -722,12 +722,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
             List<Card> aiPermanents = CardLists.filterControlledBy(list, ai);
 
             // Don't blink cards that will die.
-            aiPermanents = CardLists.filter(aiPermanents, new Predicate<Card>() {
-                @Override
-                public boolean apply(final Card c) {
-                    return !c.getSVar("Targeting").equals("Dies");
-                }
-            });
+            aiPermanents = ComputerUtil.getSafeTargets(ai, sa, aiPermanents);
 
             // if it's blink or bounce, try to save my about to die stuff
             if ((destination.equals(ZoneType.Hand) || (destination.equals(ZoneType.Exile)
