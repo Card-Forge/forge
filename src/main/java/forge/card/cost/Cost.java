@@ -320,9 +320,9 @@ public class Cost {
             return new CostExiledMoveToGrave(splitStr[0], splitStr[1], description);
         }
 
-        if (parse.startsWith("DrawYou<")) {
-            final String[] splitStr = abCostParse(parse, 1);
-            return new CostDraw(splitStr[0], "You");
+        if (parse.startsWith("Draw<")) {
+            final String[] splitStr = abCostParse(parse, 2);
+            return new CostDraw(splitStr[0], splitStr[1]);
         }
 
         if (parse.startsWith("PutCardToLibFromHand<")) {

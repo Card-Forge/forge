@@ -1,7 +1,7 @@
 Name:Psychic Vortex
 ManaCost:2 U U
 Types:Enchantment
-K:Cumulative upkeep:DrawYou<1>:Draw a card.
+K:Cumulative upkeep:Draw<1/You>:Draw a card.
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | Execute$ TrigSac | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your end step, sacrifice a land and discard your hand.
 SVar:TrigSac:AB$ Sacrifice | Cost$ 0 | SacValid$ Land | SubAbility$ DBDiscard
 SVar:DBDiscard:DB$ Discard | Mode$ Hand

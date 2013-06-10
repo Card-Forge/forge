@@ -8781,6 +8781,7 @@ res/cardsfolder/r/requiem_angel.txt -text
 res/cardsfolder/r/reroute.txt -text
 res/cardsfolder/r/rescind.txt svneol=native#text/plain
 res/cardsfolder/r/rescue.txt svneol=native#text/plain
+res/cardsfolder/r/research_development.txt -text
 res/cardsfolder/r/research_the_deep.txt svneol=native#text/plain
 res/cardsfolder/r/reset.txt svneol=native#text/plain
 res/cardsfolder/r/reshape.txt svneol=native#text/plain
@@ -10939,6 +10940,7 @@ res/cardsfolder/t/tainted_isle.txt svneol=native#text/plain
 res/cardsfolder/t/tainted_pact.txt -text
 res/cardsfolder/t/tainted_peak.txt svneol=native#text/plain
 res/cardsfolder/t/tainted_sigil.txt -text
+res/cardsfolder/t/tainted_specter.txt -text
 res/cardsfolder/t/tainted_strike.txt svneol=native#text/plain
 res/cardsfolder/t/tainted_well.txt svneol=native#text/plain
 res/cardsfolder/t/tainted_wood.txt svneol=native#text/plain
@@ -11678,6 +11680,7 @@ res/cardsfolder/t/typhoon.txt svneol=native#text/plain
 res/cardsfolder/t/tyrannize.txt -text
 res/cardsfolder/t/tyrant_of_discord.txt -text
 res/cardsfolder/t/tyrranax.txt svneol=native#text/plain
+res/cardsfolder/u/uba_mask.txt -text
 res/cardsfolder/u/ubul_sar_gatekeepers.txt -text
 res/cardsfolder/u/uktabi_drake.txt svneol=native#text/plain
 res/cardsfolder/u/uktabi_efreet.txt svneol=native#text/plain

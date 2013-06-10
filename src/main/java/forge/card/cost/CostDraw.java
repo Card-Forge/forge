@@ -58,16 +58,12 @@ public class CostDraw extends CostPart {
      * @param payer
      * @param source
      */
-    private List<Player> getPotentialPlayers(final Player payer, final SpellAbility  ability) {
+    private List<Player> getPotentialPlayers(final Player payer, final Card source) {
         List<Player> res = new ArrayList<Player>();
         String type = this.getType();
-        if ("Activator".equals(type)) {
-            res.add(ability.getActivatingPlayer());
-        } else {
-            for (Player p : payer.getGame().getPlayers()) {
-                if (p.isValid(type, payer, ability.getSourceCard())) {
-                    res.add(p);
-                }
+        for (Player p : payer.getGame().getPlayers()) {
+            if (p.isValid(type, payer, source) && p.canDraw()) {
+                res.add(p);
             }
         }
         return res;
@@ -82,7 +78,7 @@ public class CostDraw extends CostPart {
      */
     @Override
     public final boolean canPay(final SpellAbility ability) {
-        List<Player> potentials = getPotentialPlayers(ability.getActivatingPlayer(), ability);
+        List<Player> potentials = getPotentialPlayers(ability.getActivatingPlayer(), ability.getSourceCard());
         return !potentials.isEmpty();
     }
 
@@ -94,7 +90,7 @@ public class CostDraw extends CostPart {
      */
     @Override
     public final void payAI(final PaymentDecision decision, final Player ai, SpellAbility ability, Card source) {
-        for (final Player p : getPotentialPlayers(ai, ability)) {
+        for (final Player p : getPotentialPlayers(ai, ability.getSourceCard())) {
             p.drawCards(decision.c);
         }
     }
@@ -109,7 +105,7 @@ public class CostDraw extends CostPart {
     @Override
     public final boolean payHuman(final SpellAbility ability, final Game game) {
         final String amount = this.getAmount();
-        final List<Player> players = getPotentialPlayers(ability.getActivatingPlayer(), ability);
+        final List<Player> players = getPotentialPlayers(ability.getActivatingPlayer(), ability.getSourceCard());
         final Card source = ability.getSourceCard();
 
         Integer c = this.convertAmount();

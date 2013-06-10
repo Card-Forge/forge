@@ -1,0 +1,18 @@
+Name:Research
+ManaCost:G U
+AlternateMode: Split
+Types:Instant
+A:SP$ ChangeZone | Cost$ U R | Origin$ Sideboard | Destination$ Library | Shuffle$ True | ChangeType$ Card.YouOwn | ChangeNum$ 4 | SpellDescription$ Choose up to four cards you own from outside the game and shuffle them into your library.
+SVar:RemRandomDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/research_development.jpg
+Oracle:Choose up to four cards you own from outside the game and shuffle them into your library.
+ALTERNATE
+Name:Development
+ManaCost:3 U R
+Types:Instant
+A:SP$ Repeat | Cost$ 3 U R | RepeatSubAbility$ DBToken | MaxRepeat$ 3 | StackDescription$ SpellDescription | SubAbility$ DBCleanup | SpellDescription$ Put a 3/1 red Elemental creature token onto the battlefield unless any opponent has you draw a card. Repeat this process two more times.
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenName$ Elemental | TokenTypes$ Creature,Elemental | TokenOwner$ You | TokenColors$ Red | TokenPower$ 3 | TokenToughness$ 1 | TokenKeywords$ Haste | UnlessPayer$ Player.Opponent | UnlessCost$ Draw<1/Player.IsRemembered> | UnlessAI$ MorePowerful
+T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigRemember | Static$ True
+SVar:TrigRemember:DB$ Pump | RememberObjects$ TriggeredActivator
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Put a 3/1 red Elemental creature token onto the battlefield unless any opponent has you draw a card. Repeat this process two more times.

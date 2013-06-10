@@ -65,6 +65,15 @@ public class CostPutCardToLib extends CostPartWithList {
     }
 
     /**
+     * isSameZone.
+     * 
+     * @return a boolean
+     */
+    public final boolean isSameZone() {
+        return this.sameZone;
+    }
+
+    /**
      * Instantiates a new cost CostPutCardToLib.
      * 
      * @param amount

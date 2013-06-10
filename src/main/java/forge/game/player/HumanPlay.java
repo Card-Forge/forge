@@ -305,7 +305,7 @@ public class HumanPlay {
         if (parts.isEmpty() || costPart.getAmount().equals("0")) {
             return GuiDialog.confirm(source, "Do you want to pay 0?" + orString);
         }
-        
+
         //the following costs do not need inputs
         for (CostPart part : parts) {
             boolean mayRemovePart = true;
@@ -314,24 +314,41 @@ public class HumanPlay {
                 final int amount = getAmountFromPart(part, source, sourceAbility);
                 if (!p.canPayLife(amount))
                     return false;
-    
+
                 if (false == GuiDialog.confirm(source, "Do you want to pay " + amount + " life?" + orString))
                     return false;
-    
+
                 p.payLife(amount, null);
             }
 
             else if (part instanceof CostDraw) {
                 final int amount = getAmountFromPart(part, source, sourceAbility);
-                if (!p.canDraw()) {
+                List<Player> res = new ArrayList<Player>();
+                String type = part.getType();
+                for (Player player : p.getGame().getPlayers()) {
+                    if (player.isValid(type, p, source) && player.canDraw()) {
+                        res.add(player);
+                    }
+                }
+
+                if (res.isEmpty()) {
                     return false;
                 }
 
-                if (false == GuiDialog.confirm(source, "Do you want to draw " + amount + " card(s)?" + orString)) {
+                StringBuilder sb = new StringBuilder();
+
+                sb.append("Do you want to ");
+                sb.append(res.contains(p) ? "" : "let that player ");
+                sb.append(amount);
+                sb.append(" card(s)?" + orString);
+
+                if (!GuiDialog.confirm(source, sb.toString())) {
                     return false;
                 }
 
-                p.drawCards(amount);
+                for (Player player : res) {
+                    player.drawCards(amount);
+                }
             }
 
             else if (part instanceof CostMill) {
@@ -412,47 +429,60 @@ public class HumanPlay {
                     }
                 }
             }
-            
+
             else if (part instanceof CostPutCardToLib) {
-                //Jotun Grunt
                 int amount = Integer.parseInt(((CostPutCardToLib) part).getAmount());
                 final ZoneType from = ((CostPutCardToLib) part).getFrom();
-                List<Card> list = CardLists.getValidCards(p.getGame().getCardsIn(from), part.getType().split(";"), p, source);
-                List<Player> players = p.getGame().getPlayers();
-                List<Player> payableZone = new ArrayList<Player>();
-                for (Player player : players) {
-                    List<Card> enoughType = CardLists.filter(list, CardPredicates.isOwner(player));
-                    if (enoughType.size() < amount) {
-                        list.removeAll(enoughType);
-                    } else {
-                        payableZone.add(player);
-                    }
-                }       
-                Player chosen = GuiChoose.oneOrNone(String.format("Put cards from whose %s?", 
-                        ((CostPutCardToLib) part).getFrom()), payableZone);
-                if (chosen == null) {
-                    return false;
+                final boolean sameZone = ((CostPutCardToLib) part).isSameZone();
+                List<Card> list;
+                if (sameZone) {
+                    list = p.getGame().getCardsIn(from);
+                } else {
+                    list = p.getCardsIn(from);
                 }
-            
-                List<Card> typeList = CardLists.filter(list, CardPredicates.isOwner(chosen));
-            
-                for (int i = 0; i < amount; i++) {
-                    if (typeList.isEmpty()) {
+                list = CardLists.getValidCards(list, part.getType().split(";"), p, source);
+
+                if (sameZone) { // Jotun Grunt
+                    List<Player> players = p.getGame().getPlayers();
+                    List<Player> payableZone = new ArrayList<Player>();
+                    for (Player player : players) {
+                        List<Card> enoughType = CardLists.filter(list, CardPredicates.isOwner(player));
+                        if (enoughType.size() < amount) {
+                            list.removeAll(enoughType);
+                        } else {
+                            payableZone.add(player);
+                        }
+                    }
+                    Player chosen = GuiChoose.oneOrNone(String.format("Put cards from whose %s?", from), payableZone);
+                    if (chosen == null) {
                         return false;
                     }
-            
-                    final Card c = GuiChoose.oneOrNone("Put cards to Library", typeList);
-            
-                    if (c != null) {
-                        typeList.remove(c);
-                        p.getGame().getAction().moveToLibrary(c, Integer.parseInt(((CostPutCardToLib) part).getLibPos()));
-                    } else {
+
+                    List<Card> typeList = CardLists.filter(list, CardPredicates.isOwner(chosen));
+
+                    for (int i = 0; i < amount; i++) {
+                        if (typeList.isEmpty()) {
+                            return false;
+                        }
+
+                        final Card c = GuiChoose.oneOrNone("Put cards to Library", typeList);
+
+                        if (c != null) {
+                            typeList.remove(c);
+                            p.getGame().getAction().moveToLibrary(c, Integer.parseInt(((CostPutCardToLib) part).getLibPos()));
+                        } else {
+                            return false;
+                        }
+                    }
+                } else if (from == ZoneType.Hand) { // Tainted Specter
+                    boolean hasPaid = payCostPart(sourceAbility, (CostPartWithList)part, amount, list, "put into library." + orString);
+                    if (!hasPaid) {
                         return false;
                     }
                 }
                 return true;
             }
-    
+
             else if (part instanceof CostSacrifice) {
                 int amount = Integer.parseInt(((CostSacrifice)part).getAmount());
                 List<Card> list = CardLists.getValidCards(p.getCardsIn(ZoneType.Battlefield), part.getType(), p, source);
@@ -484,8 +514,9 @@ public class HumanPlay {
             else if (part instanceof CostPartMana ) {
                 if (!((CostPartMana) part).getManaToPay().isZero()) // non-zero costs require input
                     mayRemovePart = false; 
-            } else
+            } else {
                 throw new RuntimeException("GameActionUtil.payCostDuringAbilityResolve - An unhandled type of cost was met: " + part.getClass());
+            }
     
             if( mayRemovePart )
                 remainingParts.remove(part);

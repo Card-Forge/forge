@@ -170,7 +170,7 @@ public class CostExiledMoveToGrave extends CostPartWithList {
 
         List<Card> typeList = ai.getGame().getCardsIn(ZoneType.Exile);
 
-        typeList = CardLists.getValidCards(typeList, this.getType().split(","), ai, source);
+        typeList = CardLists.getValidCards(typeList, this.getType().split(";"), ai, source);
 
         if (typeList.size() < c) {
             return null;

@@ -408,13 +408,19 @@ public class ComputerUtilCost {
             if (c == null || c.isUntapped()) {
                 return false;
             }
+        } else if ("MorePowerful".equals(sa.getParam("UnlessAI"))) {
+            final int sourceCreatures = sa.getActivatingPlayer().getCreaturesInPlay().size();
+            final int payerCreatures = payer.getCreaturesInPlay().size();
+            if (payerCreatures > sourceCreatures + 1) {
+                return false;
+            }
         }
-    
+
         // AI will only pay when it's not already payed and only opponents abilities
         if (alreadyPaid || (payers.size() > 1 && (isMine && !payForOwnOnly))) {
             return false;
         }
-        
+
         // AI was crashing because the blank ability used to pay costs
         // Didn't have any of the data on the original SA to pay dependant costs
 

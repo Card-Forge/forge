@@ -487,7 +487,7 @@ public class ComputerUtil {
         } else {
             typeList = ai.getCardsIn(zone);
         }
-        typeList = CardLists.getValidCards(typeList, type.split(","), activate.getController(), activate);
+        typeList = CardLists.getValidCards(typeList, type.split(";"), activate.getController(), activate);
         
         if ((target != null) && target.getController() == ai && typeList.contains(target)) {
             typeList.remove(target); // don't exile the card we're pumping
@@ -527,7 +527,7 @@ public class ComputerUtil {
             final Card target, final int amount) {
         List<Card> typeList = ai.getCardsIn(zone);
 
-        typeList = CardLists.getValidCards(typeList, type.split(","), activate.getController(), activate);
+        typeList = CardLists.getValidCards(typeList, type.split(";"), activate.getController(), activate);
         
         if ((target != null) && target.getController() == ai && typeList.contains(target)) {
             typeList.remove(target); // don't move the card we're pumping
