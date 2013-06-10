@@ -850,7 +850,6 @@ public class PhaseHandler implements java.io.Serializable {
                 System.out.print(" >>\n");
             }
 
-            
             // actingPlayer is the player who may act
             // the firstAction is the player who gained Priority First in this segment
             // of Priority
@@ -859,7 +858,7 @@ public class PhaseHandler implements java.io.Serializable {
             if ( game.isGameOver() || nextPlayer == null ) return; // conceded?
     
             // System.out.println(String.format("%s %s: %s passes priority to %s", playerTurn, phase, actingPlayer, nextPlayer));
-            if (this.getFirstPriority().equals(nextPlayer)) {
+            if (getFirstPriority() == nextPlayer) {
                 if (game.getStack().isEmpty()) {
                     this.setPriority(this.getPlayerTurn()); // this needs to be set early as we exit the phase
 

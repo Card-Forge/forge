@@ -472,7 +472,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
 
         // 2012-07-21 the following comparison needs to move below the pushes but somehow screws up priority
         // When it's down there. That makes absolutely no sense to me, so i'm putting it back for now
-        if (!((sp instanceof AbilityTriggered) || (sp instanceof AbilityStatic))) {
+        if (!(sp.isTrigger() || (sp instanceof AbilityStatic))) {
             // when something is added we need to setPriority
             game.getPhaseHandler().setPriority(sp.getActivatingPlayer());
         }
