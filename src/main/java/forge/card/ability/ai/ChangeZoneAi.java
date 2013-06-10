@@ -765,6 +765,21 @@ public class ChangeZoneAi extends SpellAbilityAi {
                         }
                     }
                 }
+                
+                // When bouncing opponents stuff, don't bounce cards with CMC 0
+                list = CardLists.filter(list, new Predicate<Card>() {
+                    @Override
+                    public boolean apply(final Card c) {
+                        for (Card aura : c.getEnchantedBy()) {
+                            if (aura.getController().isOpponentOf(ai)) {
+                                return true;
+                            } else {
+                                return false;
+                            }
+                        }
+                        return c.getCMC() > 0;
+                    }
+                });
                 // TODO: Blink permanents with ETB triggers
                 /*else if (!sa.isTrigger() && SpellAbilityAi.playReusable(ai, sa)) {
                     aiPermanents = CardLists.filter(aiPermanents, new Predicate<Card>() {
@@ -810,8 +825,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
         if (origin.equals(ZoneType.Battlefield)
                 && destination.equals(ZoneType.Exile)
                 && (subApi == ApiType.DelayedTrigger || (subApi == ApiType.ChangeZone  && subAffected.equals("Remembered")))
-                && !(ai.getGame().getPhaseHandler().is(PhaseType.COMBAT_DECLARE_ATTACKERS) || sa
-                        .isAbility())) {
+                && !(ai.getGame().getPhaseHandler().is(PhaseType.COMBAT_DECLARE_ATTACKERS) || sa.isAbility())) {
             return false;
         }
 
