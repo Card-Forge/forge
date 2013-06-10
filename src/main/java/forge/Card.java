@@ -138,6 +138,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     private boolean isCommander = false;
     private boolean startsGameInPlay = false;
     private boolean drawnThisTurn = false;
+    private boolean becameTargetThisTurn = false;
     private boolean tapped = false;
     private boolean sickness = true; // summoning sickness
     private boolean token = false;
@@ -2969,6 +2970,21 @@ public class Card extends GameEntity implements Comparable<Card> {
     public final boolean isSick() {
         return this.sickness && this.isCreature() && !this.hasKeyword("Haste");
     }
+
+    /**
+     * @return the becameTargetThisTurn
+     */
+    public boolean hasBecomeTargetThisTurn() {
+        return becameTargetThisTurn;
+    }
+
+    /**
+     * @param becameTargetThisTurn0 the becameTargetThisTurn to set
+     */
+    public void setBecameTargetThisTurn(boolean becameTargetThisTurn) {
+        this.becameTargetThisTurn = becameTargetThisTurn;
+    }
+    
 
     /**
      * <p>
@@ -8079,6 +8095,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         resetDealtDamageToPlayerThisTurn();
         getDamageHistory().newTurn();
         setRegeneratedThisTurn(0);
+        setBecameTargetThisTurn(false);
         clearMustBlockCards();
         getDamageHistory().setCreatureAttackedLastTurnOf(turn, getDamageHistory().getCreatureAttackedThisTurn());
         getDamageHistory().setCreatureAttackedThisTurn(false);

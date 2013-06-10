@@ -411,6 +411,10 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
                         }
                         
                         distinctObjects.add(tgt);
+                        if (tgt instanceof Card && !((Card) tgt).hasBecomeTargetThisTurn()) {
+                            runParams.put("FirstTime", null);
+                            ((Card) tgt).setBecameTargetThisTurn(true);
+                        }
                         runParams.put("Target", tgt);
                         game.getTriggerHandler().runTrigger(TriggerType.BecomesTarget, runParams, false);
                     }
