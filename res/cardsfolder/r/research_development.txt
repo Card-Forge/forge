@@ -2,7 +2,7 @@ Name:Research
 ManaCost:G U
 AlternateMode: Split
 Types:Instant
-A:SP$ ChangeZone | Cost$ U R | Origin$ Sideboard | Destination$ Library | Shuffle$ True | ChangeType$ Card.YouOwn | ChangeNum$ 4 | SpellDescription$ Choose up to four cards you own from outside the game and shuffle them into your library.
+A:SP$ ChangeZone | Cost$ G U | Origin$ Sideboard | Destination$ Library | Shuffle$ True | ChangeType$ Card.YouOwn | ChangeNum$ 4 | SpellDescription$ Choose up to four cards you own from outside the game and shuffle them into your library.
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/research_development.jpg
 Oracle:Choose up to four cards you own from outside the game and shuffle them into your library.
