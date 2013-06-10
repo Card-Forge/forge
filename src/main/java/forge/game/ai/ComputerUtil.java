@@ -86,17 +86,23 @@ public class ComputerUtil {
         
         if (sa instanceof AbilityStatic) {
             final Cost cost = sa.getPayCosts();
-            if (cost == null && ComputerUtilMana.payManaCost(ai, sa)) {
-                sa.resolve();
+            if (cost == null) {
+                if (ComputerUtilMana.payManaCost(ai, sa)) {
+                    sa.resolve();
+                } else {
+                    return false;
+                }
             } else {
                 final CostPayment pay = new CostPayment(cost, sa);
                 if (pay.payComputerCosts(ai, game)) {
                     sa.resolve();
+                } else {
+                    return false;
                 }
             }
             // Why?
             game.getPhaseHandler().setPriority(ai);
-            return false;
+            return true;
         }
 
         game.getStack().freezeStack();
