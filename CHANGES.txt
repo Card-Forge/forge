@@ -74,6 +74,8 @@ Tainted Specter
 Uba Mask
 Teferi's Curse
 Choking Vines
+Jetting Glasskite
+Shimmering Glasskite
 
 
 ----------
@@ -160,12 +162,8 @@ Several people have noticed that the cards displayed on the battlefield will fai
 
 Some time was spent turning the static ETB triggers into the proper ETB replacement effects they should be, mainly to interact correctly with each other. This work is not yet finished. As a result there is currently some inconsistencies with "Enters the battlefield with counters" (Not incredibly noticeable).
 
-A recent contribution to the code base should fix some of the bugs that people noticed with cloning type abilities. At this time there are two remaining issues that we hope will be addressed in the near future.
-
-1. Leave play triggers don't work correct for clones.
-2. Copies of cards that setup Zone Change triggers via addComesIntoPlayCommand and addLeavesPlayCommand will not function correctly.
-
-There is currently a known issue with some of the cards that have effects triggering after the card goes to graveyard (e.g. Wall of Corpses, Abu Ja'Far) not working correctly.
+A recent contribution to the code base should fix some of the bugs that people noticed with cloning type abilities. At this time there is one remaining issue that we hope will be addressed in the near future:
+Copies of cards that setup Zone Change triggers via addComesIntoPlayCommand and addLeavesPlayCommand will not function correctly.
 
 Forge is likely to be compatible with Java 7 at this time. Some people have used forge with Java 7 and have not reported any problems that are related to Java 7. If you would like to upgrade to Java 7 and have held off because of Forge then you may upgrade as we do not think that it will cause an incompatibility type of problem. We will continue to try to maintain compatibility with Java 6 for the foreseeable future.
 
