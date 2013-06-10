@@ -67,6 +67,13 @@ Fossil Find
 Search for Survivors
 Grave Consequences
 Psychic Vortex
+Jester's Scepter
+Void Maw
+Research // Development
+Tainted Specter
+Uba Mask
+Teferi's Curse
+Choking Vines
 
 
 ----------
