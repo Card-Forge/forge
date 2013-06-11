@@ -654,7 +654,7 @@ public class ComputerUtil {
      */
     public static List<Card> chooseReturnType(final Player ai, final String type, final Card activate, final Card target, final int amount) {
         final List<Card> typeList =
-                CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), type.split(","), activate.getController(), activate);
+                CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), type.split(";"), activate.getController(), activate);
         if ((target != null) && target.getController() == ai && typeList.contains(target)) {
             // don't bounce the card we're pumping
             typeList.remove(target);

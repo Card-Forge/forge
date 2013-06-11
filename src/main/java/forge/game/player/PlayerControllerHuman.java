@@ -281,7 +281,7 @@ public class PlayerControllerHuman extends PlayerController {
     @Override
     public Player chooseSinglePlayerForEffect(List<Player> options, SpellAbility sa, String title) {
         // Human is supposed to read the message and understand from it what to choose
-        if ( options.size() > 2 )
+        if (options.size() > 1)
             return GuiChoose.one(title, options);
         else 
             return options.get(0);
