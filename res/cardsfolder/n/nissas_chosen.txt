@@ -1,8 +1,9 @@
 Name:Nissa's Chosen
 ManaCost:G G
 Types:Creature Elf Warrior
-Text:If Nissa's Chosen would be put into a graveyard from the battlefield, put it on the bottom of its owner's library instead.
 PT:2/3
+R:Event$ Moved | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | ReplaceWith$ NissaChosenRep | Description$ If CARDNAME would die, put it on the bottom of its owner's library instead.
+SVar:NissaChosenRep:AB$ ChangeZone | Cost$ 0 | Hidden$ True | Origin$ All | Destination$ Library | LibraryPosition$ -1 | Defined$ ReplacedCard
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nissas_chosen.jpg
 Oracle:If Nissa's Chosen would die, put it on the bottom of its owner's library instead.
 SetInfo:ZEN Common

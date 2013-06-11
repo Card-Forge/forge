@@ -1,7 +1,6 @@
 Name:Kira, Great Glass-Spinner
 ManaCost:1 U U
 Types:Legendary Creature Spirit
-Text:no text
 PT:2/2
 K:Flying
 S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddTrigger$ KiraGlassSpinnerTrig | AddSVar$ KiraGlassSpinnerCounter & Targeting | Description$ Creatures you control have "Whenever this creature becomes the target of a spell or ability for the first time in a turn, counter that spell or ability."
