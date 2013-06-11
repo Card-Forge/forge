@@ -74,6 +74,7 @@ public class RestartGameEffect extends SpellAbilityEffect {
             RegisteredPlayer psc = game.getMatch().getPlayers().get(i);
             
             player.setStartingLife(psc.getStartingLife());
+            player.setPoisonCounters(0);
             player.setNumLandsPlayed(0);
             GameNew.putCardsOnBattlefield(player, psc.getCardsOnBattlefield(player));
     
