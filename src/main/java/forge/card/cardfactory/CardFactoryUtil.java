@@ -3264,7 +3264,7 @@ public class CardFactoryUtil {
                             if (!aiChoices.isEmpty()) {
                                 card2 = ComputerUtilCard.getBestCreatureAI(aiChoices);
                             }
-                        } else {
+                        } else if (!choices.isEmpty()){
                             InputSelectCards inp = new InputSelectCardsFromList(1, 1, choices);
                             inp.setCancelAllowed(true);
                             inp.setMessage("Select target artifact creature to give it +1/+1 counters from the dead " + card);
