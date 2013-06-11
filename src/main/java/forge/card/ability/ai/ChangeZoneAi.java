@@ -511,9 +511,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
             // need something AI can cast now
             CardLists.sortByEvaluateCreature(list);
             for (Card c : list) {
-                SpellAbility spell = c.getFirstSpellAbility();
-                spell.setActivatingPlayer(ai);
-                if (ComputerUtilMana.hasEnoughManaSourcesToCast(spell, ai))
+                if (ComputerUtilMana.hasEnoughManaSourcesToCast(c.getFirstSpellAbility(), ai))
                    return c;
             }
             return null;
@@ -1237,9 +1235,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                     if (CardLists.filter(hand, Presets.LANDS).isEmpty() && CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), Presets.LANDS).size() < 4) {
                         boolean canCastSomething = false;
                         for (Card cardInHand : hand) {
-                            final SpellAbility spell = cardInHand.getFirstSpellAbility();
-                            spell.setActivatingPlayer(ai);
-                            canCastSomething |= ComputerUtilMana.hasEnoughManaSourcesToCast(spell, ai);
+                            canCastSomething |= ComputerUtilMana.hasEnoughManaSourcesToCast(cardInHand.getFirstSpellAbility(), ai);
                         }
                         if (!canCastSomething) {
                             System.out.println("Pulling a land as there are none in hand, less than 4 on the board, and nothing in hand is castable.");
