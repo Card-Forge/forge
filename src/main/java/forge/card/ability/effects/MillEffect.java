@@ -32,6 +32,12 @@ public class MillEffect extends SpellAbilityEffect {
 
         for (final Player p : getTargetPlayers(sa)) {
             if ((tgt == null) || p.canBeTargetedBy(sa)) {
+                if (sa.hasParam("Optional")) {
+                    final String prompt = String.format("Do you want to put card(s) from library to %s?", destination);
+                    if (!p.getController().confirmAction(sa, null, prompt)) {
+                        continue;
+                    }
+                }
                 final List<Card> milled = p.mill(numCards, destination, bottom);
                 if (destination.equals(ZoneType.Exile) && sa.hasParam("ExileFaceDown")) {
                     for (final Card c : milled) {

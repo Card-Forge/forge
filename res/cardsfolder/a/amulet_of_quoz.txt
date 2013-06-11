@@ -1,0 +1,13 @@
+Name:Amulet of Quoz
+ManaCost:6
+Types:Artifact
+K:Remove CARDNAME from your deck before playing if you're not playing for ante.
+A:AB$ Mill | Cost$ T Sac<1/CARDNAME> | ValidTgts$ Opponent | Destination$ Ante | NumCards$ 1 | RememberMilled$ True | Optional$ True | SubAbility$ DBFlip | PlayerTurn$ True | ActivationPhases$ Upkeep | SpellDescription$ Target opponent may add the top card of his or her library to the ante. If he or she doesn't, you flip a coin. If you win the flip, that player loses the game. If you lose the flip, you lose the game. Activate this ability only during your upkeep.
+SVar:DBFlip:DB$ FlipACoin | Caller$ You | WinSubAbility$ OppLoseGame | LoseSubAbility$ YouLoseGame | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ EQ0 | SubAbility$ DBCleanup
+SVar:OppLoseGame:DB$ LosesGame | Defined$ Targeted
+SVar:YouLoseGame:DB$ LosesGame | Defined$ You
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:RemAIDeck:True
+SVar:RemRandomDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/amulet_of_quoz.jpg
+Oracle:Remove Amulet of Quoz from your deck before playing if you're not playing for ante.\n{T}, Sacrifice Amulet of Quoz: Target opponent may add the top card of his or her library to the ante. If he or she doesn't, you flip a coin. If you win the flip, that player loses the game. If you lose the flip, you lose the game. Activate this ability only during your upkeep.

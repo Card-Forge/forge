@@ -361,6 +361,18 @@ public class Game {
         }
     }
 
+    public List<Card> getCardsIncludePhasingIn(final ZoneType zone) {
+        if (zone == ZoneType.Stack) {
+            return getStackZone().getCards();
+        } else {
+            List<Card> cards = new ArrayList<Card>();
+            for (final Player p : getPlayers()) {
+                cards.addAll(p.getCardsIncludePhasingIn(zone));
+            }
+            return cards;
+        }
+    }
+
     public List<Card> getCardsIn(final Iterable<ZoneType> zones) {
         final List<Card> cards = new ArrayList<Card>();
         for (final ZoneType z : zones) {

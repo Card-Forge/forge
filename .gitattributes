@@ -264,6 +264,7 @@ res/cardsfolder/a/amrou_scout.txt svneol=native#text/plain
 res/cardsfolder/a/amrou_seekers.txt svneol=native#text/plain
 res/cardsfolder/a/amugaba.txt svneol=native#text/plain
 res/cardsfolder/a/amulet_of_kroog.txt svneol=native#text/plain
+res/cardsfolder/a/amulet_of_quoz.txt -text
 res/cardsfolder/a/amulet_of_unmaking.txt svneol=native#text/plain
 res/cardsfolder/a/amulet_of_vigor.txt svneol=native#text/plain
 res/cardsfolder/a/an_havva_constable.txt svneol=native#text/plain
@@ -11348,6 +11349,7 @@ res/cardsfolder/t/timbermare.txt svneol=native#text/plain
 res/cardsfolder/t/timbermaw_larva.txt svneol=native#text/plain
 res/cardsfolder/t/timberpack_wolf.txt -text
 res/cardsfolder/t/timberwatch_elf.txt svneol=native#text/plain
+res/cardsfolder/t/time_and_tide.txt -text
 res/cardsfolder/t/time_bomb.txt svneol=native#text/plain
 res/cardsfolder/t/time_ebb.txt svneol=native#text/plain
 res/cardsfolder/t/time_elemental.txt svneol=native#text/plain

@@ -1,12 +1,16 @@
 package forge.card.ability.effects;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 
 import forge.Card;
+import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
+import forge.game.Game;
+import forge.game.zone.ZoneType;
 
 public class PhasesEffect extends SpellAbilityEffect {
 
@@ -35,16 +39,35 @@ public class PhasesEffect extends SpellAbilityEffect {
      * </p>
      * @param sa
      *            a {@link forge.card.spellability.SpellAbility} object.
-     * @param af
-     *            a {@link forge.card.ability.AbilityFactory} object.
      */
     @Override
     public void resolve(SpellAbility sa) {
-        final List<Card> tgtCards = getTargetCards(sa);
+        List<Card> tgtCards = new ArrayList<Card>();
+        final Game game = sa.getActivatingPlayer().getGame();
+        final Card source = sa.getSourceCard();
+        final boolean phaseInOrOut = sa.hasParam("PhaseInOrOutAll");
 
-        for (final Card tgtC : tgtCards) {
-            if (!tgtC.isPhasedOut()) {
+        if (sa.hasParam("AllValid")) {
+            if (phaseInOrOut) {
+                tgtCards = game.getCardsIncludePhasingIn(ZoneType.Battlefield);
+            } else {
+                tgtCards = game.getCardsIn(ZoneType.Battlefield);
+            }
+            tgtCards = AbilityUtils.filterListByType(tgtCards, sa.getParam("AllValid"), sa);
+        } else if (sa.hasParam("Defined")) {
+            tgtCards = AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa);
+        } else {
+            tgtCards = getTargetCards(sa);
+        }
+        if (phaseInOrOut) { // Time and Tide
+            for (final Card tgtC : tgtCards) {
                 tgtC.phase();
+            }
+        } else { // just phase out
+            for (final Card tgtC : tgtCards) {
+                if (!tgtC.isPhasedOut()) {
+                    tgtC.phase();
+                }
             }
         }
     }
