@@ -646,6 +646,11 @@ public class AiController {
      * @return
      */
     public Card chooseCardToDredge(List<Card> dredgers) {
+        Player ai = getPlayer();
+        //don't dredge when the library is nearly empty
+        if (ai.getCardsIn(ZoneType.Library).size() < 8 && !ai.isCardInPlay("Laboratory Maniac")) {
+            return null;
+        }
         // use dredge if there are more than one of them in your graveyard
         if (dredgers.size() > 1 || MyRandom.getRandom().nextBoolean()) {
             return Aggregates.random(dredgers);
