@@ -76,6 +76,10 @@ Teferi's Curse
 Choking Vines
 Jetting Glasskite
 Shimmering Glasskite
+Time and Tide
+Amulet of Quoz
+Kira, Great Glass Spinner
+Hankyu
 
 
 ----------
@@ -150,6 +154,8 @@ Accursed Spirit
 Corpse Hauler
 Vampire Warlord
 Into the Wilds
+Deathgaze Cockatrice
+Elvish Mystic
 
 
 ------------
