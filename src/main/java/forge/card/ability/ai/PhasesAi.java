@@ -26,7 +26,7 @@ public class PhasesAi extends SpellAbilityAi {
         final Card source = sa.getSourceCard();
 
         final Random r = MyRandom.getRandom();
-        boolean randomReturn = r.nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn() + 1);
+        boolean randomReturn = r.nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn());
 
         List<Card> tgtCards;
         if (tgt == null) {
