@@ -384,7 +384,7 @@ public class StaticAbilityContinuous {
                 for (final String sVar : addSVars) {
                     String actualSVar = hostCard.getSVar(sVar);
                     String name = sVar;
-                    if (actualSVar.startsWith("SVar")) {
+                    if (actualSVar.startsWith("SVar:")) {
                         actualSVar = actualSVar.split("SVar:")[1];
                         name = actualSVar.split(":")[0];
                         actualSVar = actualSVar.split(":")[1];
