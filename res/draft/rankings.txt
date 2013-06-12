@@ -1,170 +1,401 @@
 //Rank|Name|Rarity|Set
-#1|Ral Zarek|M|DGM
-#2|Voice of Resurgence|M|DGM
-#3|Blood Baron of Vizkopa|M|DGM
-#4|Deadbridge Chant|M|DGM
-#5|Master of Cruelties|M|DGM
-#6|Progenitor Mimic|M|DGM
-#7|Council of the Absolute|M|DGM
-#8|Savageborn Hydra|M|DGM
-#9|Legion's Initiative|M|DGM
-#10|Advent of the Wurm|R|DGM
-#11|Tajic Blade of the Legion|R|DGM
-#12|AEtherling|R|DGM
-#13|Scion of Vitu-Ghazi|R|DGM
+#1|Sword of Fire and Ice|M|MMA
+#2|Sword of Light and Shadow|M|MMA
+#3|Kokusho the Evening Star|M|MMA
+#4|Vendilion Clique|M|MMA
+#5|Vedalken Shackles|M|MMA
+#6|Elspeth Knight-Errant|M|MMA
+#7|Keiga the Tide Star|M|MMA
+#8|Kiki-Jiki, Mirror Breaker|M|MMA
+#9|Sarkhan Vol|M|MMA
+#10|Tarmogoyf|M|MMA
+#11|Yosei the Morning Star|M|MMA
+#12|Dark Confidant|M|MMA
+#13|Ryusei the Falling Star|M|MMA
+#14|Jugan the Rising Star|M|MMA
+#15|Cryptic Command|R|MMA
+#16|Adarkar Valkyrie|R|MMA
+#17|Progenitus|M|MMA
+#18|Figure of Destiny|R|MMA
+#19|Oona Queen of the Fae|R|MMA
+#20|Reveillark|R|MMA
+#21|Arcbound Ravager|R|MMA
+#22|Maelstrom Pulse|R|MMA
+#23|Meloku the Clouded Mirror|R|MMA
+#24|Knight of the Reliquary|R|MMA
+#25|Tombstalker|R|MMA
+#26|Kira Great Glass-Spinner|R|MMA
+#27|Demigod of Revenge|R|MMA
+#28|Divinity of Pride|R|MMA
+#29|Glen Elendra Archmage|R|MMA
+#30|Scion of Oona|R|MMA
+#31|Skeletal Vampire|R|MMA
+#32|Path to Exile|U|MMA
+#33|Kitchen Finks|U|MMA
+#34|Grand Arbiter Augustin IV|R|MMA
+#35|Slaughter Pact|R|MMA
+#36|Stonehewer Giant|R|MMA
+#37|Countryside Crusher|R|MMA
+#38|Doubling Season|R|MMA
+#39|Blinkmoth Nexus|R|MMA
+#40|Verdeloth the Ancient|R|MMA
+#41|Molten Disaster|R|MMA
+#42|Engineered Explosives|R|MMA
+#43|Murderous Redcap|U|MMA
+#44|Auriok Salvagers|R|MMA
+#45|Lightning Helix|U|MMA
+#46|Cloudgoat Ranger|U|MMA
+#47|AEther Vial|R|MMA
+#48|Tooth and Nail|R|MMA
+#49|Eternal Witness|U|MMA
+#50|Mulldrifter|U|MMA
+#51|Woodfall Primus|R|MMA
+#52|Academy Ruins|R|MMA
+#53|Executioner's Capsule|U|MMA
+#54|Ethersworn Canonist|R|MMA
+#55|Lotus Bloom|R|MMA
+#56|City of Brass|R|MMA
+#57|Gifts Ungiven|R|MMA
+#58|Greater Gargadon|R|MMA
+#59|Earwig Squad|R|MMA
+#60|Rude Awakening|R|MMA
+#61|Pact of Negation|R|MMA
+#62|Horobi's Whisper|U|MMA
+#63|Cold-Eyed Selkie|R|MMA
+#64|Life from the Loam|R|MMA
+#65|Summoner's Pact|R|MMA
+#66|Kataki War's Wage|R|MMA
+#67|Jhoira of the Ghitu|R|MMA
+#68|Riftwing Cloudskate|U|MMA
+#69|Electrolyze|U|MMA
+#70|Sporesower Thallid|U|MMA
+#71|Glimmervoid|R|MMA
+#72|Flickerwisp|U|MMA
+#73|Death Cloud|R|MMA
+#74|Thundercloud Shaman|U|MMA
+#75|Chalice of the Void|R|MMA
+#76|Sudden Shock|U|MMA
+#77|Manamorphose|U|MMA
+#78|Pardic Dragon|U|MMA
+#79|Marsh Flitter|U|MMA
+#80|Squee Goblin Nabob|R|MMA
+#81|Bridge from Below|R|MMA
+#82|Masked Admirers|U|MMA
+#83|Thirst for Knowledge|U|MMA
+#84|Death Rattle|U|MMA
+#85|Epochrasite|U|MMA
+#86|Rift Bolt|C|MMA
+#87|Esperzoa|U|MMA
+#88|Glacial Ray|C|MMA
+#89|Meadowboon|U|MMA
+#90|Feudkiller's Verdict|U|MMA
+#91|Blood Moon|R|MMA
+#92|Bonesplitter|C|MMA
+#93|Tribal Flames|U|MMA
+#94|Careful Consideration|U|MMA
+#95|Take Possession|U|MMA
+#96|Tidehollow Sculler|U|MMA
+#97|Spell Snare|U|MMA
+#98|Bound in Silence|C|MMA
+#99|Plumeveil|U|MMA
+#100|Trygon Predator|U|MMA
+#101|Phthisis|U|MMA
+#102|Mad Auntie|U|MMA
+#103|Vivid Creek|U|MMA
+#104|Kodama's Reach|C|MMA
+#105|Vivid Meadow|U|MMA
+#106|Pestermite|C|MMA
+#107|Paradise Mantle|U|MMA
+#108|Etched Oracle|U|MMA
+#109|Reach of Branches|U|MMA
+#110|Spellstutter Sprite|C|MMA
+#111|Avian Changeling|C|MMA
+#112|Pyrite Spellbomb|C|MMA
+#113|Imperiosaur|C|MMA
+#114|Vivid Crag|U|MMA
+#115|Terramorphic Expanse|C|MMA
+#116|Torrent of Stone|C|MMA
+#117|Rathi Trapper|C|MMA
+#118|Errant Ephemeron|C|MMA
+#119|Search for Tomorrow|C|MMA
+#120|AEther Spellbomb|C|MMA
+#121|Myr Retriever|U|MMA
+#122|Shrapnel Blast|U|MMA
+#123|Sanctum Gargoyle|C|MMA
+#124|Tar Pitcher|U|MMA
+#125|Penumbra Spider|C|MMA
+#126|Vivid Grove|U|MMA
+#127|Mogg War Marshal|C|MMA
+#128|Vivid Marsh|U|MMA
+#129|War-Spike Changeling|C|MMA
+#130|Amrou Scout|C|MMA
+#131|Sporoloth Ancient|C|MMA
+#132|Frogmite|C|MMA
+#133|Latchkey Faerie|C|MMA
+#134|Faerie Mechanist|C|MMA
+#135|Pyromancer's Swath|R|MMA
+#136|Arcbound Stinger|C|MMA
+#137|Stingscourger|C|MMA
+#138|Myr Enforcer|C|MMA
+#139|Fiery Fall|C|MMA
+#140|Worm Harvest|U|MMA
+#141|AEthersnipe|C|MMA
+#142|Durkwood Baloth|C|MMA
+#143|Lava Spike|C|MMA
+#144|Blind-Spot Giant|C|MMA
+#145|Drag Down|C|MMA
+#146|Desperate Ritual|U|MMA
+#147|Veteran Armorer|C|MMA
+#148|Stinkweed Imp|C|MMA
+#149|Grapeshot|C|MMA
+#150|Empty the Warrens|C|MMA
+#151|Arcbound Worker|C|MMA
+#152|Etherium Sculptor|C|MMA
+#153|Echoing Truth|C|MMA
+#154|Moldervine Cloak|C|MMA
+#155|Amrou Seekers|C|MMA
+#156|Kithkin Greatheart|C|MMA
+#157|Incremental Growth|U|MMA
+#158|Giant Dustwasp|C|MMA
+#159|Warren Weirding|C|MMA
+#160|Blightspeaker|C|MMA
+#161|Otherworldly Journey|C|MMA
+#162|Court Homunculus|C|MMA
+#163|Thallid Germinator|C|MMA
+#164|Thallid Shell-Dweller|C|MMA
+#165|Tromp the Domains|U|MMA
+#166|Grinning Ignus|U|MMA
+#167|Faerie Macabre|C|MMA
+#168|Nantuko Shaman|C|MMA
+#169|Thundering Giant|C|MMA
+#170|Blinding Beam|C|MMA
+#171|Test of Faith|C|MMA
+#172|Reach Through Mists|C|MMA
+#173|Runed Stalactite|C|MMA
+#174|Stinkdrinker Daredevil|C|MMA
+#175|Warren Pilferers|C|MMA
+#176|Ivory Giant|C|MMA
+#177|Dreamspoiler Witches|C|MMA
+#178|Dampen Thought|C|MMA
+#179|Peer Through Depths|C|MMA
+#180|Saltfield Recluse|C|MMA
+#181|Hammerheim Deadeye|C|MMA
+#182|Thieving Sprite|C|MMA
+#183|Skyreach Manta|C|MMA
+#184|Brute Force|C|MMA
+#185|Traumatic Visions|C|MMA
+#186|Vedalken Dismisser|C|MMA
+#187|Perilous Research|C|MMA
+#188|Auntie's Snitch|U|MMA
+#189|Hillcomber Giant|C|MMA
+#190|Relic of Progenitus|U|MMA
+#191|Citanul Woodreaders|C|MMA
+#192|Thallid|C|MMA
+#193|Deepcavern Imp|C|MMA
+#194|Street Wraith|C|MMA
+#195|Mind Funeral|U|MMA
+#196|Mothdust Changeling|C|MMA
+#197|Peppersmoke|C|MMA
+#198|Pallid Mycoderm|C|MMA
+#199|Festering Goblin|C|MMA
+#200|Echoing Courage|C|MMA
+#201|Greater Mossdog|C|MMA
+#202|Erratic Mutation|C|MMA
+#203|Cenn's Enlistment|C|MMA
+#204|Crush Underfoot|C|MMA
+#205|Logic Knot|C|MMA
+#206|Petals of Insight|C|MMA
+#207|Death Denied|C|MMA
+#208|Gleam of Resistance|C|MMA
+#209|Dispeller's Capsule|C|MMA
+#210|Syphon Life|C|MMA
+#211|Rift Elemental|C|MMA
+#212|Raven's Crime|C|MMA
+#213|Walker of the Grove|C|MMA
+#214|Sylvan Bounty|C|MMA
+#215|Fury Charm|C|MMA
+#216|Absorb Vis|C|MMA
+#217|Riftsweeper|U|MMA
+#218|Hana Kami|C|MMA
+#219|Stir the Pride|U|MMA
+#220|Facevaulter|C|MMA
+#221|Arcbound Wanderer|C|MMA
+#222|Sandsower|U|MMA
+#223|Narcomoeba|U|MMA
+#224|Angel's Grace|R|MMA
+#225|Krosan Grip|U|MMA
+#226|Extirpate|R|MMA
+#227|Terashi's Grasp|U|MMA
+#228|Dakmor Salvage|U|MMA
+#229|Dragonstorm|R|MMA
+//Rank|Name|Rarity|Set
+#1|Voice of Resurgence|M|DGM
+#2|Master of Cruelties|M|DGM
+#3|Ral Zarek|M|DGM
+#4|Progenitor Mimic|M|DGM
+#5|Blood Baron of Vizkopa|M|DGM
+#6|Savageborn Hydra|M|DGM
+#7|Legion's Initiative|M|DGM
+#8|Deadbridge Chant|M|DGM
+#9|Advent of the Wurm|R|DGM
+#10|Tajic Blade of the Legion|R|DGM
+#11|AEtherling|R|DGM
+#12|Scion of Vitu-Ghazi|R|DGM
+#13|Exava Rakdos Blood Witch|R|DGM
 #14|Lavinia of the Tenth|R|DGM
-#15|Varolz the Scar-Striped|R|DGM
-#16|Exava Rakdos Blood Witch|R|DGM
-#17|Ruric Thar the Unbowed|R|DGM
+#15|Ruric Thar the Unbowed|R|DGM
+#16|Varolz the Scar-Striped|R|DGM
+#17|Council of the Absolute|M|DGM
 #18|Pontiff of Blight|R|DGM
-#19|Teysa Envoy of Ghosts|R|DGM
-#20|Ready Willing|R|DGM
-#21|Mirko Vosk Mind Drinker|R|DGM
-#22|Renegade Krasis|R|DGM
-#23|Gaze of Granite|R|DGM
-#24|Sire of Insanity|R|DGM
-#25|Beck Call|R|DGM
-#26|Warleader's Helix|U|DGM
-#27|Flesh Blood|R|DGM
-#28|Blood Scrivener|R|DGM
-#29|Putrefy|U|DGM
+#19|Mirko Vosk Mind Drinker|R|DGM
+#20|Sire of Insanity|R|DGM
+#21|Teysa Envoy of Ghosts|R|DGM
+#22|Warleader's Helix|U|DGM
+#23|Ready Willing|R|DGM
+#24|Unflinching Courage|U|DGM
+#25|Renegade Krasis|R|DGM
+#26|Putrefy|U|DGM
+#27|Turn Burn|U|DGM
+#28|Gaze of Granite|R|DGM
+#29|Far Away|U|DGM
 #30|Pyrewild Shaman|R|DGM
-#31|Unflinching Courage|U|DGM
+#31|Blood Scrivener|R|DGM
 #32|Boros Battleshaper|R|DGM
-#33|Dragonshift|R|DGM
-#34|Far Away|U|DGM
-#35|Turn Burn|U|DGM
-#36|Reap Intellect|M|DGM
-#37|Vorel of the Hull Clade|R|DGM
-#38|Emmara Tandris|R|DGM
+#33|Vorel of the Hull Clade|R|DGM
+#34|Flesh Blood|R|DGM
+#35|Trostani's Summoner|U|DGM
+#36|Ascended Lawmage|U|DGM
+#37|Dragonshift|R|DGM
+#38|Beck Call|R|DGM
 #39|Skylasher|R|DGM
-#40|Trostani's Summoner|U|DGM
-#41|Ascended Lawmage|U|DGM
-#42|Zhur-Taa Ancient|R|DGM
-#43|Krasis Incubation|U|DGM
-#44|Bronzebeak Moa|U|DGM
+#40|Jelenn Sphinx|U|DGM
+#41|Krasis Incubation|U|DGM
+#42|Bronzebeak Moa|U|DGM
+#43|Zhur-Taa Ancient|R|DGM
+#44|Carnage Gladiator|U|DGM
 #45|Melek Izzet Paragon|R|DGM
-#46|Carnage Gladiator|U|DGM
-#47|Breaking Entering|R|DGM
-#48|Jelenn Sphinx|U|DGM
-#49|Obzedat's Aid|R|DGM
-#50|Scab-Clan Giant|U|DGM
-#51|Korozda Gorgon|U|DGM
-#52|Blast of Genius|U|DGM
-#53|Plasm Capture|R|DGM
-#54|Warped Physique|U|DGM
-#55|Spike Jester|U|DGM
-#56|Fluxcharger|U|DGM
-#57|Gruul War Chant|U|DGM
-#58|Blaze Commando|U|DGM
-#59|Haunter of Nightveil|U|DGM
+#46|Scab-Clan Giant|U|DGM
+#47|Warped Physique|U|DGM
+#48|Gruul War Chant|U|DGM
+#49|Haunter of Nightveil|U|DGM
+#50|Spike Jester|U|DGM
+#51|Fluxcharger|U|DGM
+#52|Obzedat's Aid|R|DGM
+#53|Species Gorger|U|DGM
+#54|Punish the Enemy|C|DGM
+#55|Emmara Tandris|R|DGM
+#56|Breaking Entering|R|DGM
+#57|Korozda Gorgon|U|DGM
+#58|Tithe Drinker|C|DGM
+#59|Sin Collector|U|DGM
 #60|Renounce the Guilds|R|DGM
-#61|Punish the Enemy|C|DGM
-#62|Catch Release|R|DGM
+#61|Blast of Genius|U|DGM
+#62|Give Take|U|DGM
 #63|Armed Dangerous|U|DGM
-#64|Notion Thief|R|DGM
-#65|Tithe Drinker|C|DGM
-#66|Ubul Sar Gatekeepers|C|DGM
-#67|Rubblebelt Maaka|C|DGM
-#68|Rakdos Drake|C|DGM
-#69|Sin Collector|U|DGM
-#70|Species Gorger|U|DGM
-#71|Zhur-Taa Druid|C|DGM
-#72|Give Take|U|DGM
-#73|Thrashing Mossdog|C|DGM
-#74|Profit Loss|U|DGM
+#64|Zhur-Taa Druid|C|DGM
+#65|Rubblebelt Maaka|C|DGM
+#66|Alive Well|U|DGM
+#67|Viashino Firstblade|C|DGM
+#68|Thrashing Mossdog|C|DGM
+#69|Blaze Commando|U|DGM
+#70|Battering Krasis|C|DGM
+#71|Ubul Sar Gatekeepers|C|DGM
+#72|Rakdos Drake|C|DGM
+#73|Kraul Warrior|C|DGM
+#74|Beetleform Mage|C|DGM
 #75|Haazda Snare Squad|C|DGM
-#76|Battering Krasis|C|DGM
-#77|Wind Drake|C|DGM
-#78|Viashino Firstblade|C|DGM
-#79|Alive Well|U|DGM
-#80|Fatal Fumes|C|DGM
-#81|Boros Mastiff|C|DGM
-#82|Sunspire Gatekeepers|C|DGM
-#83|Debt to the Deathless|U|DGM
-#84|Rot Farm Skeleton|U|DGM
-#85|Azorius Guildgate|L|DGM
-#86|Kraul Warrior|C|DGM
-#87|Woodlot Crawler|U|DGM
-#88|Orzhov Guildgate|L|DGM
-#89|Steam Vents|L|DGM
-#90|Overgrown Tomb|L|DGM
+#76|Wind Drake|C|DGM
+#77|Plasm Capture|R|DGM
+#78|Boros Mastiff|C|DGM
+#79|Fatal Fumes|C|DGM
+#80|Profit Loss|U|DGM
+#81|Sunspire Gatekeepers|C|DGM
+#82|Woodlot Crawler|U|DGM
+#83|Maw of the Obzedat|U|DGM
+#84|Runner's Bane|C|DGM
+#85|Deputy of Acquittals|C|DGM
+#86|Gruul Guildgate|L|DGM
+#87|Azorius Guildgate|L|DGM
+#88|Godless Shrine|L|DGM
+#89|Temple Garden|L|DGM
+#90|Hallowed Fountain|L|DGM
 #91|Boros Guildgate|L|DGM
-#92|Blood Crypt|L|DGM
-#93|Deputy of Acquittals|C|DGM
-#94|Selesnya Guildgate|L|DGM
-#95|Toil Trouble|U|DGM
+#92|Golgari Guildgate|L|DGM
+#93|Catch Release|R|DGM
+#94|Izzet Guildgate|L|DGM
+#95|Protect Serve|U|DGM
 #96|Stomping Ground|L|DGM
-#97|Golgari Guildgate|L|DGM
-#98|Godless Shrine|L|DGM
-#99|Rakdos Guildgate|L|DGM
-#100|Breeding Pool|L|DGM
-#101|Sacred Foundry|L|DGM
-#102|Gruul Guildgate|L|DGM
-#103|Runner's Bane|C|DGM
-#104|Hallowed Fountain|L|DGM
-#105|Temple Garden|L|DGM
-#106|Feral Animist|U|DGM
+#97|Blood Crypt|L|DGM
+#98|Selesnya Guildgate|L|DGM
+#99|Watery Grave|L|DGM
+#100|Orzhov Guildgate|L|DGM
+#101|Toil Trouble|U|DGM
+#102|Opal Lake Gatekeepers|C|DGM
+#103|Steam Vents|L|DGM
+#104|Rakdos Guildgate|L|DGM
+#105|Notion Thief|R|DGM
+#106|Simic Guildgate|L|DGM
 #107|Dimir Guildgate|L|DGM
-#108|Maw of the Obzedat|U|DGM
-#109|Render Silent|R|DGM
-#110|Beetleform Mage|C|DGM
-#111|Izzet Guildgate|L|DGM
-#112|Opal Lake Gatekeepers|C|DGM
-#113|Riot Piker|C|DGM
-#114|Simic Guildgate|L|DGM
-#115|Protect Serve|U|DGM
-#116|Steeple Roc|C|DGM
-#117|Watery Grave|L|DGM
-#118|Nivix Cyclops|C|DGM
-#119|Smelt-Ward Gatekeepers|C|DGM
-#120|Armored Wolf-Rider|C|DGM
-#121|Down Dirty|U|DGM
-#122|Maze's End|L|DGM
-#123|Pilfered Plans|C|DGM
-#124|Weapon Surge|C|DGM
-#125|Morgue Burst|C|DGM
+#108|Overgrown Tomb|L|DGM
+#109|Breeding Pool|L|DGM
+#110|Sacred Foundry|L|DGM
+#111|Feral Animist|U|DGM
+#112|Riot Piker|C|DGM
+#113|Render Silent|R|DGM
+#114|Nivix Cyclops|C|DGM
+#115|Steeple Roc|C|DGM
+#116|Smelt-Ward Gatekeepers|C|DGM
+#117|Armored Wolf-Rider|C|DGM
+#118|Debt to the Deathless|U|DGM
+#119|Maze's End|L|DGM
+#120|Rot Farm Skeleton|U|DGM
+#121|Saruli Gatekeepers|C|DGM
+#122|Weapon Surge|C|DGM
+#123|Reap Intellect|M|DGM
+#124|Pilfered Plans|C|DGM
+#125|Down Dirty|U|DGM
 #126|Maze Glider|C|DGM
-#127|Gleam of Battle|U|DGM
-#128|Murmuring Phantasm|C|DGM
-#129|Saruli Gatekeepers|C|DGM
-#130|Maze Behemoth|C|DGM
-#131|Lyev Decree|C|DGM
-#132|Hired Torturer|C|DGM
-#133|Maze Abomination|C|DGM
-#134|Drown in Filth|C|DGM
-#135|Hidden Strings|C|DGM
-#136|Phytoburst|C|DGM
-#137|Bred for the Hunt|U|DGM
-#138|Maze Rusher|C|DGM
-#139|Selesnya Cluestone|C|DGM
-#140|Golgari Cluestone|C|DGM
-#141|Orzhov Cluestone|C|DGM
-#142|Rakdos Cluestone|C|DGM
-#143|Izzet Cluestone|C|DGM
-#144|Boros Cluestone|C|DGM
-#145|Gruul Cluestone|C|DGM
-#146|Azorius Cluestone|C|DGM
-#147|Dimir Cluestone|C|DGM
+#127|Murmuring Phantasm|C|DGM
+#128|Morgue Burst|C|DGM
+#129|Hired Torturer|C|DGM
+#130|Lyev Decree|C|DGM
+#131|Maze Abomination|C|DGM
+#132|Gleam of Battle|U|DGM
+#133|Maze Behemoth|C|DGM
+#134|Maze Rusher|C|DGM
+#135|Selesnya Cluestone|C|DGM
+#136|Drown in Filth|C|DGM
+#137|Phytoburst|C|DGM
+#138|Gruul Cluestone|C|DGM
+#139|Boros Cluestone|C|DGM
+#140|Orzhov Cluestone|C|DGM
+#141|Hidden Strings|C|DGM
+#142|Golgari Cluestone|C|DGM
+#143|Mindstatic|C|DGM
+#144|Azorius Cluestone|C|DGM
+#145|Dimir Cluestone|C|DGM
+#146|Simic Cluestone|C|DGM
+#147|Maze Sentinel|C|DGM
 #148|Bane Alley Blackguard|C|DGM
-#149|Restore the Peace|U|DGM
-#150|Simic Cluestone|C|DGM
-#151|Maze Sentinel|C|DGM
+#149|Izzet Cluestone|C|DGM
+#150|Rakdos Cluestone|C|DGM
+#151|Bred for the Hunt|U|DGM
 #152|Mutant's Prey|C|DGM
-#153|Mindstatic|C|DGM
-#154|Wake the Reflections|C|DGM
-#155|Riot Control|C|DGM
-#156|Uncovered Clues|C|DGM
-#157|Mending Touch|C|DGM
-#158|Sinister Possession|C|DGM
-#159|Clear a Path|C|DGM
-#160|Crypt Incursion|C|DGM
+#153|Riot Control|C|DGM
+#154|Mending Touch|C|DGM
+#155|Wake the Reflections|C|DGM
+#156|Clear a Path|C|DGM
+#157|Uncovered Clues|C|DGM
+#158|Crypt Incursion|C|DGM
+#159|Sinister Possession|C|DGM
+#160|Wear Tear|U|DGM
 #161|Awe for the Guilds|C|DGM
-#162|Showstopper|U|DGM
-#163|Wear Tear|U|DGM
+#162|Restore the Peace|U|DGM
+#163|Showstopper|U|DGM
 #164|Goblin Test Pilot|U|DGM
-#165|Trait Doctoring|R|DGM
-#166|Possibility Storm|R|DGM
+#165|Possibility Storm|R|DGM
+#166|Trait Doctoring|R|DGM
+//Rank|Name|Rarity|Set
 #1|Aurelia the Warleader|M|GTC
 #2|Obzedat Ghost Council|M|GTC
 #3|Gideon Champion of Justice|M|GTC
