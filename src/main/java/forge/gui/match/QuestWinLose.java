@@ -563,7 +563,7 @@ public class QuestWinLose extends ControlWinLose {
             final List<String> sets = new ArrayList<String>();
 
             for (SealedProductTemplate bd : Singletons.getModel().getBoosters()) {
-                if (qData.getFormat().isSetLegal(bd.getEdition())) {
+                if (bd != null && qData.getFormat().isSetLegal(bd.getEdition())) {
                     sets.add(bd.getEdition());
                 }
             }
