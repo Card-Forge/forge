@@ -1,8 +1,11 @@
 Name:Mijae Djinn
 ManaCost:R R R
 Types:Creature Djinn
-Text:Whenever CARDNAME attacks, flip a coin. If you lose the flip, remove CARDNAME from combat and tap it.
 PT:6/3
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ FlipCoin | TriggerDescription$ Whenever CARDNAME attacks, flip a coin. If you lose the flip, remove CARDNAME from combat and tap it.
+SVar:FlipCoin:AB$ FlipACoin | Cost$ 0 | LoseSubAbility$ DBRemoveFromCombat
+SVar:DBRemoveFromCombat:DB$ RemoveFromCombat | Defined$ Self | SubAbility$ DBTap
+SVar:DBTap:DB$ Tap | Defined$ Self
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mijae_djinn.jpg
 Oracle:Whenever Mijae Djinn attacks, flip a coin. If you lose the flip, remove Mijae Djinn from combat and tap it.
 SetInfo:3ED Rare

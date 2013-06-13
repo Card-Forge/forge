@@ -1028,14 +1028,8 @@ public class CombatUtil {
         } // creatureAttacked
           // Annihilator
 
-        // Mijae Djinn
-        if (c.getName().equals("Mijae Djinn")) {
-            if (!GuiDialog.flipCoin(c.getController(), c)) {
-                game.getCombat().removeFromCombat(c);
-                c.tap();
-            }
-        } // Mijae Djinn
-        else if (c.getName().equals("Witch-Maw Nephilim") && !c.getDamageHistory().getCreatureAttackedThisCombat()
+
+        if (c.getName().equals("Witch-Maw Nephilim") && !c.getDamageHistory().getCreatureAttackedThisCombat()
                 && (c.getNetAttack() >= 10)) {
             final Card charger = c;
             final Ability ability2 = new Ability(c, ManaCost.ZERO) {
