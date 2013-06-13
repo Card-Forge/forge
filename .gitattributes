@@ -8174,6 +8174,7 @@ res/cardsfolder/p/pouncing_wurm.txt -text
 res/cardsfolder/p/powder_keg.txt svneol=native#text/plain
 res/cardsfolder/p/power_armor.txt svneol=native#text/plain
 res/cardsfolder/p/power_artifact.txt svneol=native#text/plain
+res/cardsfolder/p/power_conduit.txt -text
 res/cardsfolder/p/power_matrix.txt svneol=native#text/plain
 res/cardsfolder/p/power_of_fire.txt svneol=native#text/plain
 res/cardsfolder/p/power_sink.txt svneol=native#text/plain
@@ -14219,6 +14220,7 @@ src/main/java/forge/card/cost/CostPayLife.java -text
 src/main/java/forge/card/cost/CostPayment.java svneol=native#text/plain
 src/main/java/forge/card/cost/CostPutCardToLib.java -text
 src/main/java/forge/card/cost/CostPutCounter.java -text
+src/main/java/forge/card/cost/CostRemoveAnyCounter.java -text
 src/main/java/forge/card/cost/CostRemoveCounter.java -text
 src/main/java/forge/card/cost/CostReturn.java -text
 src/main/java/forge/card/cost/CostReveal.java -text

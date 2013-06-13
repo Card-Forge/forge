@@ -262,6 +262,12 @@ public class Cost {
             return new CostSacrifice(splitStr[0], splitStr[1], description);
         }
 
+        if (parse.startsWith("RemoveAnyCounter<")) {
+            final String[] splitStr = abCostParse(parse, 3);
+            final String description = splitStr.length > 2 ? splitStr[2] : null;
+            return new CostRemoveAnyCounter(splitStr[0], splitStr[1], description);
+        }
+
         if (parse.startsWith("Exile<")) {
             final String[] splitStr = abCostParse(parse, 3);
             final String description = splitStr.length > 2 ? splitStr[2] : null;
