@@ -28,7 +28,7 @@ import forge.card.spellability.SpellAbility;
  * @author Forge
  * @version $Id: TriggerFlipped.java 17802 2012-10-31 08:05:14Z Max mtg $
  */
-public class TriggerFlipped extends Trigger {
+public class TriggerFlippedCoin extends Trigger {
 
     /**
      * <p>
@@ -42,7 +42,7 @@ public class TriggerFlipped extends Trigger {
      * @param intrinsic
      *            the intrinsic
      */
-    public TriggerFlipped(final java.util.Map<String, String> params, final Card host, final boolean intrinsic) {
+    public TriggerFlippedCoin(final java.util.Map<String, String> params, final Card host, final boolean intrinsic) {
         super(params, host, intrinsic);
     }
 

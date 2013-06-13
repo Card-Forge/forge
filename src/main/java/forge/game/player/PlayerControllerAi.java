@@ -34,6 +34,7 @@ import forge.game.ai.ComputerUtilCombat;
 import forge.game.ai.ComputerUtilCost;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
+import forge.util.MyRandom;
 
 
 /** 
@@ -354,5 +355,27 @@ public class PlayerControllerAi extends PlayerController {
     @Override
     public int chooseNumber(SpellAbility sa, String title, int min, int max) {
         return brains.chooseNumber(sa, title, min, max);
+    }
+
+    /* (non-Javadoc)
+     * @see forge.game.player.PlayerController#chooseFilpResult(forge.Card, forge.game.player.Player, java.lang.String[], boolean)
+     */
+    @Override
+    public String chooseFilpResult(Card source, Player flipper, String[] results, boolean call) {
+        if (call) {
+			// Win if possible
+            String result = " loses flip.";
+            for (String s : results) {
+                if (s.equals(" wins flip.")) {
+                    result = s;
+                    break;
+                }
+            }
+            return result;
+        } else {
+			// heads or tails, AI doesn't know which is better now
+            int i = MyRandom.getRandom().nextInt(results.length);
+            return results[i];
+        }
     }
 }

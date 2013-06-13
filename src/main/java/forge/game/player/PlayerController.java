@@ -144,4 +144,6 @@ public abstract class PlayerController {
 
     public abstract int chooseNumber(SpellAbility sa, String title, int min, int max);
 
+    public abstract String chooseFilpResult(Card source, Player flipper, String[] results, boolean call);
+
 }

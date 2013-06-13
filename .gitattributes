@@ -5962,6 +5962,7 @@ res/cardsfolder/k/krark_clan_ironworks.txt svneol=native#text/plain
 res/cardsfolder/k/krark_clan_ogre.txt svneol=native#text/plain
 res/cardsfolder/k/krark_clan_shaman.txt svneol=native#text/plain
 res/cardsfolder/k/krark_clan_stoker.txt svneol=native#text/plain
+res/cardsfolder/k/krarks_thumb.txt -text
 res/cardsfolder/k/krasis_incubation.txt -text
 res/cardsfolder/k/kraul_warrior.txt -text
 res/cardsfolder/k/krenko_mob_boss.txt -text
@@ -14318,7 +14319,7 @@ src/main/java/forge/card/trigger/TriggerDevoured.java -text
 src/main/java/forge/card/trigger/TriggerDiscarded.java svneol=native#text/plain
 src/main/java/forge/card/trigger/TriggerDrawn.java svneol=native#text/plain
 src/main/java/forge/card/trigger/TriggerEvolved.java -text
-src/main/java/forge/card/trigger/TriggerFlipped.java -text
+src/main/java/forge/card/trigger/TriggerFlippedCoin.java -text
 src/main/java/forge/card/trigger/TriggerHandler.java svneol=native#text/plain
 src/main/java/forge/card/trigger/TriggerLandPlayed.java svneol=native#text/plain
 src/main/java/forge/card/trigger/TriggerLifeGained.java svneol=native#text/plain

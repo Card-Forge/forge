@@ -610,4 +610,13 @@ public class PlayerControllerHuman extends PlayerController {
         }
         return result;
     }
+
+
+    /* (non-Javadoc)
+     * @see forge.game.player.PlayerController#chooseFilpResult(forge.game.player.Player, java.lang.String[], boolean)
+     */
+    @Override
+    public String chooseFilpResult(Card source, Player flipper, String[] results, boolean call) {
+        return GuiChoose.one(source.getName() + " - Choose a result", results);
+    }
 }

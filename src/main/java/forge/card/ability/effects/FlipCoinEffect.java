@@ -2,7 +2,6 @@ package forge.card.ability.effects;
 
 import java.util.HashMap;
 import java.util.List;
-
 import forge.Card;
 import forge.card.ability.AbilityFactory;
 import forge.card.ability.AbilityUtils;
@@ -12,6 +11,7 @@ import forge.card.spellability.SpellAbility;
 import forge.card.trigger.TriggerType;
 import forge.game.event.GameEventFlipCoin;
 import forge.game.player.Player;
+import forge.gui.GuiChoose;
 import forge.gui.GuiDialog;
 import forge.util.MyRandom;
 
@@ -38,6 +38,7 @@ public class FlipCoinEffect extends SpellAbilityEffect {
     public void resolve(SpellAbility sa) {
         final Card host = sa.getSourceCard();
         final Player player = host.getController();
+        int flipMultiplier = 1; // For multiple copies of Krark's Thumb
 
         final List<Player> playersToFlip = AbilityUtils.getDefinedPlayers(host, sa.getParam("Flipper"), sa);
         if (playersToFlip.isEmpty()) {
@@ -52,20 +53,22 @@ public class FlipCoinEffect extends SpellAbilityEffect {
         final boolean noCall = sa.hasParam("NoCall");
         boolean victory = false;
         if (!noCall) {
-            victory = GuiDialog.flipCoin(caller.get(0), host);
+            flipMultiplier = getFilpMultiplier(caller.get(0));
+            victory = flipCoinCall(caller.get(0), host, flipMultiplier);
         }
 
         // Run triggers
         HashMap<String,Object> runParams = new HashMap<String,Object>();
         runParams.put("Player", caller.get(0));
         runParams.put("Result", (Boolean) victory);
-        player.getGame().getTriggerHandler().runTrigger(TriggerType.Flipped, runParams, false);
+        player.getGame().getTriggerHandler().runTrigger(TriggerType.FlippedCoin, runParams, false);
 
         final boolean rememberResult = sa.hasParam("RememberResult");
 
         for (final Player flipper : playersToFlip) {
             if (noCall) {
-                final boolean resultIsHeads = FlipCoinEffect.flipCoinNoCall(sa.getSourceCard(), flipper);
+                flipMultiplier = getFilpMultiplier(flipper);
+                final boolean resultIsHeads = FlipCoinEffect.flipCoinNoCall(sa.getSourceCard(), flipper, flipMultiplier);
                 if (rememberResult) {
                     host.addFlipResult(flipper, resultIsHeads ? "Heads" : "Tails");
                 }
@@ -126,19 +129,79 @@ public class FlipCoinEffect extends SpellAbilityEffect {
      * 
      * @param source   the source card.
      * @param flipper  the player flipping the coin.
+     * @param multiplier
      * @return a boolean.
      */
-    public static boolean flipCoinNoCall(final Card source, final Player flipper) {
-        final boolean resultIsHeads = MyRandom.getRandom().nextBoolean();
+    public static boolean flipCoinNoCall(final Card source, final Player flipper, final int multiplier) {
+        String[] results = new String[multiplier];
+        String result;
+        for (int i = 0; i < multiplier; i++) {
+            final boolean resultIsHeads = MyRandom.getRandom().nextBoolean();
+            flipper.getGame().fireEvent(new GameEventFlipCoin());
+            results[i] = resultIsHeads ? " heads." : " tails.";
+        }
+        if (multiplier == 1) {
+            result = results[0];
+        } else {
+            result = flipper.getController().chooseFilpResult(source, flipper, results, false);
+        }
+        final StringBuilder sb = new StringBuilder();
+        sb.append(flipper.getName());
+        sb.append("'s flip comes up");
+        sb.append(result);
+        GuiDialog.message(sb.toString(), source + " Flip result:");
+        return result.equals(" heads.");
+    }
 
-        flipper.getGame().fireEvent(new GameEventFlipCoin());
-        final StringBuilder result = new StringBuilder();
-        result.append(flipper.getName());
-        result.append("'s flip comes up");
-        result.append(resultIsHeads ? " heads." : " tails.");
-        GuiDialog.message(result.toString(), source + " Flip result:");
+    /**
+     * <p>
+     * flipCoinCall.
+     * </p>
+     * 
+     * @param caller
+     *            a {@link forge.game.player.Player} object.
+     * @param source
+     *            a {@link forge.Card} object.
+     * @param multiplier
+     * @return a boolean.
+     */
+    public static boolean flipCoinCall(final Player caller, final Card source, final int multiplier) {
+        String choice;
+        final String[] choices = { "heads", "tails" };
+        String[] results = new String[multiplier];
+        for (int i = 0; i < multiplier; i++) {
+            // Play the Flip A Coin sound
+            caller.getGame().fireEvent(new GameEventFlipCoin());
+            final boolean flip = MyRandom.getRandom().nextBoolean();
+            if (caller.isHuman()) {
+                choice = GuiChoose.one(source.getName() + " - Call coin flip", choices);
+            } else {
+                choice = choices[MyRandom.getRandom().nextInt(2)];
+            }
+            final boolean winFlip = flip == choice.equals(choices[0]);
+            final String winMsg = winFlip ? " wins flip." : " loses flip.";
+            results[i] = winMsg;
+        }
+        String result;
+        if (multiplier == 1) {
+            result = results[0];
+        } else {
+            result = caller.getController().chooseFilpResult(source, caller, results, true);
+        }
+        
+        GuiDialog.message(source.getName() + " - " + caller + result, source.getName());
+        
+        return result.equals(" wins flip.");
+    }
 
-        return resultIsHeads;
+    public static int getFilpMultiplier(final Player flipper) {
+        int i = 0;
+        for (String kw : flipper.getKeywords()) {
+            if (kw.startsWith("If you would flip a coin")) {
+                i++;
+            }
+        }
+        return 1 << i;
     }
 
 }

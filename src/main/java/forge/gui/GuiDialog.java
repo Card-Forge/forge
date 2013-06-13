@@ -80,37 +80,4 @@ public class GuiDialog {
         });
     }
 
-    /**
-     * <p>
-     * flipACoin.
-     * </p>
-     * 
-     * @param caller
-     *            a {@link forge.game.player.Player} object.
-     * @param source
-     *            a {@link forge.Card} object.
-     * @return a boolean.
-     */
-    public static boolean flipCoin(final Player caller, final Card source) {
-        String choice;
-        final String[] choices = { "heads", "tails" };
-    
-        final boolean flip = MyRandom.getRandom().nextBoolean();
-        if (caller.isHuman()) {
-            choice = GuiChoose.one(source.getName() + " - Call coin flip", choices);
-        } else {
-            choice = choices[MyRandom.getRandom().nextInt(2)];
-        }
-    
-        final boolean winFlip = flip == choice.equals(choices[0]);
-        final String winMsg = winFlip ? " wins flip." : " loses flip.";
-    
-        // Play the Flip A Coin sound
-        caller.getGame().fireEvent(new GameEventFlipCoin());
-        
-        message(source.getName() + " - " + caller + winMsg, source.getName());
-        
-        return winFlip;
-    }
-
 }

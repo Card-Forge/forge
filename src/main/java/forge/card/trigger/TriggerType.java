@@ -21,7 +21,7 @@ public enum TriggerType {
 
     Clashed(TriggerClashed.class),
     PayCumulativeUpkeep(TriggerPayCumulativeUpkeep.class),
-    Flipped(TriggerFlipped.class),
+    FlippedCoin(TriggerFlippedCoin.class),
     Attached(TriggerAttached.class),
     Destroyed(TriggerDestroyed.class),
     Devoured(TriggerDevoured.class),
