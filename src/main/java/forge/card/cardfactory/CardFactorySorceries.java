@@ -62,7 +62,7 @@ public class CardFactorySorceries {
                 continue;
             }
             
-            List<Card> toSac = p.getController().choosePermanentsToSacrifice(card, sac, sac, l, "Select %d more land(s) to sacrifice");
+            List<Card> toSac = p.getController().choosePermanentsToSacrifice(card, sac, sac, l, "land(s)");
             for( Card crd : toSac )
                 p.getGame().getAction().sacrifice(crd, card);
         }
@@ -105,7 +105,7 @@ public class CardFactorySorceries {
             if (sac == 0) {
                 continue;
             }
-            List<Card> toSac = p.getController().choosePermanentsToSacrifice(card, sac, sac, c, "Select %d more creature(s) to sacrifice"); 
+            List<Card> toSac = p.getController().choosePermanentsToSacrifice(card, sac, sac, c, "creature(s)"); 
             
             for( Card crd : toSac )
                 p.getGame().getAction().sacrifice(crd, card);
