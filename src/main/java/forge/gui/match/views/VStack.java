@@ -138,7 +138,8 @@ public enum VStack implements IVDoc<CStack> {
         for (final SpellAbilityStackInstance spell : stack) {
             scheme = getSpellColor(spell);
 
-            String isOptional = spell.getSpellAbility().isOptionalTrigger() && spell.getSourceCard().getController().equals(viewer) ? "(OPTIONAL) " : "";
+            String isOptional = spell.getSpellAbility().isOptionalTrigger() 
+                    && spell.getSourceCard().getController().getController().getLobbyPlayer().equals(viewer) ? "(OPTIONAL) " : "";
             String txt = (count++) + ". " + isOptional + spell.getStackDescription();
             JTextArea tar = new JTextArea(txt);
             tar.setToolTipText(txt);
