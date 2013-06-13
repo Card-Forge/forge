@@ -1764,6 +1764,7 @@ res/cardsfolder/c/chimeric_mass.txt svneol=native#text/plain
 res/cardsfolder/c/chimeric_sphere.txt -text
 res/cardsfolder/c/chimeric_staff.txt svneol=native#text/plain
 res/cardsfolder/c/chimney_imp.txt svneol=native#text/plain
+res/cardsfolder/c/chisei_heart_of_oceans.txt -text
 res/cardsfolder/c/chittering_rats.txt svneol=native#text/plain
 res/cardsfolder/c/chlorophant.txt -text
 res/cardsfolder/c/cho_arrim_alchemist.txt -text
@@ -2923,6 +2924,7 @@ res/cardsfolder/d/dream_coat.txt -text svneol=unset#text/plain
 res/cardsfolder/d/dream_fighter.txt -text
 res/cardsfolder/d/dream_fracture.txt svneol=native#text/plain
 res/cardsfolder/d/dream_halls.txt -text
+res/cardsfolder/d/dream_leash.txt -text
 res/cardsfolder/d/dream_prowler.txt svneol=native#text/plain
 res/cardsfolder/d/dream_salvage.txt -text
 res/cardsfolder/d/dream_stalker.txt svneol=native#text/plain
@@ -10399,6 +10401,7 @@ res/cardsfolder/s/spined_wurm.txt svneol=native#text/plain
 res/cardsfolder/s/spineless_thug.txt svneol=native#text/plain
 res/cardsfolder/s/spinerock_knoll.txt -text
 res/cardsfolder/s/spinneret_sliver.txt svneol=native#text/plain
+res/cardsfolder/s/spinning_darkness.txt -text
 res/cardsfolder/s/spiny_starfish.txt -text
 res/cardsfolder/s/spiraling_duelist.txt svneol=native#text/plain
 res/cardsfolder/s/spiraling_embers.txt svneol=native#text/plain
@@ -11233,6 +11236,7 @@ res/cardsfolder/t/thought_devourer.txt svneol=native#text/plain
 res/cardsfolder/t/thought_eater.txt svneol=native#text/plain
 res/cardsfolder/t/thought_gorger.txt -text
 res/cardsfolder/t/thought_hemorrhage.txt -text svneol=unset#text/plain
+res/cardsfolder/t/thought_lash.txt -text
 res/cardsfolder/t/thought_nibbler.txt svneol=native#text/plain
 res/cardsfolder/t/thought_prison.txt -text svneol=unset#text/plain
 res/cardsfolder/t/thought_reflection.txt -text

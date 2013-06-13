@@ -2,8 +2,11 @@ package forge.game.player;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
+
+import com.google.common.base.Predicate;
 
 import forge.Card;
 import forge.CardLists;
@@ -30,6 +33,7 @@ import forge.card.cost.CostPayLife;
 import forge.card.cost.CostPayment;
 import forge.card.cost.CostPutCardToLib;
 import forge.card.cost.CostPutCounter;
+import forge.card.cost.CostRemoveAnyCounter;
 import forge.card.cost.CostRemoveCounter;
 import forge.card.cost.CostReturn;
 import forge.card.cost.CostReveal;
@@ -375,17 +379,23 @@ public class HumanPlay {
             else if (part instanceof CostPutCounter) {
                 CounterType counterType = ((CostPutCounter) part).getCounter();
                 int amount = getAmountFromPartX(part, source, sourceAbility);
-                
-                if (false == source.canReceiveCounters(counterType)) {
-                    String message = String.format("Won't be able to pay upkeep for %s but it can't have %s counters put on it.", source, counterType.getName());
-                    p.getGame().getGameLog().add(GameLogEntryType.STACK_RESOLVE, message);
-                    return false;
+                if (part.payCostFromSource()) {
+                    if (!source.canReceiveCounters(counterType)) {
+                        String message = String.format("Won't be able to pay upkeep for %s but it can't have %s counters put on it.", source, counterType.getName());
+                        p.getGame().getGameLog().add(GameLogEntryType.STACK_RESOLVE, message);
+                        return false;
+                    }
+
+                    if (!GuiDialog.confirm(source, "Do you want to put " + Lang.nounWithAmount(amount, counterType.getName() + " counter") + " on " + source + "?")) 
+                        return false;
+
+                    source.addCounter(counterType, amount, false);
+                } else {
+                    List<Card> list = p.getGame().getCardsIn(ZoneType.Battlefield);
+                    list = CardLists.getValidCards(list, part.getType().split(";"), p, source);
+                    boolean hasPaid = payCostPart(sourceAbility, (CostPartWithList)part, amount, list, "add a counter." + orString);
+                    if(!hasPaid) return false;
                 }
-                
-                if (false == GuiDialog.confirm(source, "Do you want to put " + Lang.nounWithAmount(amount, counterType.getName() + " counter") + " on " + source + "?")) 
-                    return false;
-                
-                source.addCounter(counterType, amount, false);
             }
     
             else if (part instanceof CostRemoveCounter) {
@@ -400,7 +410,57 @@ public class HumanPlay {
     
                 source.subtractCounter(counterType, amount);
             }
-    
+
+            else if (part instanceof CostRemoveAnyCounter) {
+                int amount = getAmountFromPartX(part, source, sourceAbility);
+                List<Card> list = new ArrayList<Card>(p.getCardsIn(ZoneType.Battlefield));
+                int allCounters = 0;
+                for (Card c : list) {
+                    final Map<CounterType, Integer> tgtCounters = c.getCounters();
+                    for (Integer value : tgtCounters.values()) {
+                        allCounters += value;
+                    }
+                }
+                if (allCounters < amount) return false;
+                if (!GuiDialog.confirm(source, "Do you want to remove counters from " + part.getDescriptiveType() + " ?")) {
+                    return false;
+                }
+
+                list = CardLists.getValidCards(list, ((CostRemoveAnyCounter) part).getType().split(";"), p, source);
+                while (amount > 0) {
+                    final CounterType counterType;
+                    list = CardLists.filter(list, new Predicate<Card>() {
+                        @Override
+                        public boolean apply(final Card card) {
+                            return card.hasCounters();
+                        }
+                    });
+                    if (list.isEmpty()) return false;
+                    InputSelectCards inp = new InputSelectCardsFromList(1, 1, list);
+                    inp.setMessage("Select a card to remove a counter");
+                    inp.setCancelAllowed(true);
+                    Singletons.getControl().getInputQueue().setInputAndWait(inp);
+                    if (inp.hasCancelled())
+                        continue;
+                    Card selected = inp.getSelected().get(0);
+                    final Map<CounterType, Integer> tgtCounters = selected.getCounters();
+                    final ArrayList<CounterType> typeChoices = new ArrayList<CounterType>();
+                    for (CounterType key : tgtCounters.keySet()) {
+                        if (tgtCounters.get(key) > 0) {
+                            typeChoices.add(key);
+                        }
+                    }
+                    if (typeChoices.size() > 1) {
+                        String prompt = "Select type counters to remove";
+                        counterType = GuiChoose.one(prompt, typeChoices);
+                    } else {
+                        counterType = typeChoices.get(0);
+                    }
+                    selected.subtractCounter(counterType, 1);
+                    amount--;
+                }
+            }
+
             else if (part instanceof CostExile) {
                 if ("All".equals(part.getType())) {
                     if (false == GuiDialog.confirm(source, "Do you want to exile all cards in your graveyard?"))
@@ -417,7 +477,16 @@ public class HumanPlay {
                     final int nNeeded = getAmountFromPart(costPart, source, sourceAbility);
                     if (list.size() < nNeeded)
                         return false;
-    
+                    if (from == ZoneType.Library) {
+                        if (!GuiDialog.confirm(source, "Do you want to exile card(s) from you library?")) {
+                            return false;
+                        }
+                        list = list.subList(0, nNeeded);
+                        for (Card c : list) {
+                            p.getGame().getAction().exile(c);
+                        }
+                        return true;
+                    }
                     // replace this with input
                     for (int i = 0; i < nNeeded; i++) {
                         final Card c = GuiChoose.oneOrNone("Exile from " + from, list);

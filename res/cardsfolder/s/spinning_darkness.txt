@@ -1,0 +1,9 @@
+Name:Spinning Darkness
+ManaCost:4 B B
+Types:Instant
+SVar:AltCost:Cost$ ExileFromGrave<3/Card.Black+FromTopGrave> | Description$ You may exile the top three black cards of your graveyard rather than pay CARDNAME's mana cost.
+A:SP$ DealDamage | Cost$ 4 B B | ValidTgts$ Creature.nonBlack | TgtPrompt$ Select target nonblack creature | NumDmg$ 3 | SubAbility$ DBGainLife | SpellDescription$ CARDNAME deals 3 damage to target nonblack creature. You gain 3 life.
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ 3
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/spinning_darkness.jpg
+Oracle:You may exile the top three black cards of your graveyard rather than pay Spinning Darkness's mana cost.\nSpinning Darkness deals 3 damage to target nonblack creature. You gain 3 life.

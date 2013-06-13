@@ -2013,20 +2013,11 @@ public class Card extends GameEntity implements Comparable<Card> {
                     || keyword.startsWith("PreventAllDamageBy")
                     || keyword.startsWith("CantBlock")
                     || keyword.startsWith("CantBeBlockedBy")
-                    || keyword.startsWith("CantEquip")) {
+                    || keyword.startsWith("CantEquip")
+                    || keyword.startsWith("SpellCantTarget")) {
                 continue;
             }
-            if (keyword.startsWith("CostChange")) {
-                final String[] k = keyword.split(":");
-                if (k.length > 8) {
-                    sbLong.append(k[8]).append("\r\n");
-                }
-            /*} else if (keyword.startsWith("AdjustLandPlays")) {
-                final String[] k = keyword.split(":");
-                if (k.length > 3) {
-                    sbLong.append(k[3]).append("\r\n");
-                }*/
-            } else if (keyword.startsWith("etbCounter")) {
+            if (keyword.startsWith("etbCounter")) {
                 final String[] p = keyword.split(":");
                 final StringBuilder s = new StringBuilder();
                 if (p.length > 4) {
@@ -2345,18 +2336,6 @@ public class Card extends GameEntity implements Comparable<Card> {
         // keyword descriptions
         for (int i = 0; i < kw.size(); i++) {
             final String keyword = kw.get(i);
-            if (keyword.startsWith("CostChange")) {
-                final String[] k = keyword.split(":");
-                if (k.length > 8) {
-                    sb.append(k[8]).append("\r\n");
-                }
-            }
-            /*if (keyword.startsWith("AdjustLandPlays")) {
-                final String[] k = keyword.split(":");
-                if (k.length > 3) {
-                    sb.append(k[3]).append("\r\n");
-                }
-            }*/
             if ((keyword.startsWith("Ripple") && !sb.toString().contains("Ripple"))
                     || (keyword.startsWith("Dredge") && !sb.toString().contains("Dredge"))
                     || (keyword.startsWith("Madness") && !sb.toString().contains("Madness"))
@@ -7881,10 +7860,10 @@ public class Card extends GameEntity implements Comparable<Card> {
         if (this.isPhasedOut()) {
             return false;
         }
+        
+        final Card source = sa.getSourceCard();
 
         if (this.getKeyword() != null) {
-            final Card source = sa.getSourceCard();
-
             for (String kw : this.getKeyword()) {
                 if (kw.equals("Shroud")) {
                     return false;
@@ -7939,6 +7918,15 @@ public class Card extends GameEntity implements Comparable<Card> {
                         return false;
                     }
                 }
+            }
+        }
+        if (sa.isSpell() && source.hasStartOfKeyword("SpellCantTarget")) {
+            final int keywordPosition = source.getKeywordPosition("SpellCantTarget");
+            final String parse = source.getKeyword().get(keywordPosition).toString();
+            final String[] k = parse.split(":");
+            final String[] restrictions = k[1].split(",");
+            if (this.isValid(restrictions, source.getController(), source)) {
+                return false;
             }
         }
         return true;
