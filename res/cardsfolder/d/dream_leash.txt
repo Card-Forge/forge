@@ -6,6 +6,5 @@ K:Enchant permanent
 K:SpellCantTarget:Permanent.untapped
 A:SP$ Attach | Cost$ 3 U U | ValidTgts$ Permanent | AILogic$ GainControl
 S:Mode$ Continuous | Affected$ Card.EnchantedBy | GainControl$ You | Description$ You control enchanted creature.
-SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dream_leash.jpg
 Oracle:Enchant permanent\nYou can't choose an untapped permanent as Dream Leash's target as you cast Dream Leash.\nYou control enchanted permanent.

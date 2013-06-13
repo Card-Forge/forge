@@ -7,5 +7,6 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | E
 SVar:TrigSac:AB$ Sacrifice | Cost$ 0 | Defined$ Self | UnlessPayer$ You | UnlessCost$ RemoveAnyCounter<1/Permanent.YouCtrl/a permanent you control>
 #AI only removes negative counters
 SVar:RemAIDeck:True
+SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chisei_heart_of_oceans.jpg
 Oracle:Flying\nAt the beginning of your upkeep, sacrifice Chisei, Heart of Oceans unless you remove a counter from a permanent you control.
