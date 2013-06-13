@@ -23,6 +23,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import forge.Card;
 import forge.CardCharacteristicName;
+import forge.card.CardType;
 import forge.card.ability.AbilityUtils;
 import forge.card.cost.CostPartMana;
 import forge.card.cost.CostPayment;
@@ -66,7 +67,8 @@ public class HumanPlaySpellAbility {
 
         // This line makes use of short-circuit evaluation of boolean values, that is each subsequent argument 
         // is only executed or evaluated if the first argument does not suffice to determine the value of the expression
-        boolean prerequisitesMet = this.announceValuesLikeX() 
+        boolean prerequisitesMet = this.announceValuesLikeX()
+                && this.announceType()
                 && ( isAlreadyTargeted || setupTargets() ) 
                 && ( isFree || this.payment.payCost(game) );
 
@@ -163,6 +165,29 @@ public class HumanPlaySpellAbility {
                     ability.getSourceCard().setKickerMagnitude(value);
                 } else {
                     ability.getSourceCard().setSVar(varName, value.toString());
+                }
+            }
+        }
+        return true;
+    }
+
+    private boolean announceType() {
+     // Announcing Requirements like choosing creature type or number
+        String announce = ability.getParam("AnnounceType");
+        if (announce != null) {
+            for(String aVar : announce.split(",")) {
+                String varName = aVar.trim();
+                if ("CreatureType".equals(varName)) {
+                    String choice = ability.getActivatingPlayer().getController().chooseSomeType("Creature", 
+                            ability.getParam("AILogic"), CardType.getCreatureTypes(), new ArrayList<String>());
+                    ability.getSourceCard().setChosenType(choice);
+                }
+                if ("ChooseNumber".equals(varName)) {
+                    int min = Integer.parseInt(ability.getParam("Min"));
+                    int max = Integer.parseInt(ability.getParam("Max"));
+                    int i = ability.getActivatingPlayer().getController().chooseNumber(ability,
+                            "Choose a number", min, max);
+                    ability.getSourceCard().setChosenNumber(i);
                 }
             }
         }

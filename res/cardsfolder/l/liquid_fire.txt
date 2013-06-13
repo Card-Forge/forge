@@ -1,0 +1,11 @@
+Name:Liquid Fire
+ManaCost:4 R R
+Types:Sorcery
+Text:As an additional cost to cast CARDNAME, choose a number between 0 and 5.
+A:SP$ DealDamage | Cost$ 4 R R | AnnounceType$ ChooseNumber | Min$ 0 | Max$ 5 | ValidTgts$ Creature | NumDmg$ X | References$ X | SubAbility$ DBDmg | SpellDescription$ CARDNAME deals X damage to target creature and 5 minus X damage to that creature's controller, where X is the chosen number.
+SVar:DBDmg:DB$ DealDamage | Defined$ TargetedController | NumDmg$ Y | References$ Y
+SVar:X:Count$ChosenNumber
+SVar:Y:SVar$X/NMinus.5
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/liquid_fire.jpg
+Oracle:As an additional cost to cast Liquid Fire, choose a number between 0 and 5.\nLiquid Fire deals X damage to target creature and 5 minus X damage to that creature's controller, where X is the chosen number.
