@@ -90,12 +90,10 @@ public class Upkeep extends Phase {
 
         Upkeep.upkeepTheAbyss(game);
         Upkeep.upkeepDropOfHoney(game);
-        //Upkeep.upkeepDemonicHordes(game);
         Upkeep.upkeepTangleWire(game);
 
         Upkeep.upkeepOathOfDruids(game);
         Upkeep.upkeepOathOfGhouls(game);
-        //Upkeep.upkeepSuspend(game);
         Upkeep.upkeepVanishing(game);
         Upkeep.upkeepFading(game);
         Upkeep.upkeepBlazeCounters(game);
@@ -166,9 +164,6 @@ public class Upkeep extends Phase {
         for (int i = 0; i < list.size(); i++) {
             final Card c = list.get(i);
             if (c.hasStartOfKeyword("(Echo unpaid)")) {
-                final Ability blankAbility = Upkeep.getBlankAbility(c, c.getEchoCost());
-                blankAbility.setActivatingPlayer(c.getController());
-
                 final StringBuilder sb = new StringBuilder();
                 sb.append("Echo for ").append(c).append("\n");
 
@@ -179,7 +174,7 @@ public class Upkeep extends Phase {
                         boolean hasPaid = c.getController().getController().payManaOptional(c, cost, "Echo for " + c, ManaPaymentPurpose.Echo);
                         
                         if (!hasPaid)
-                            game.getAction().sacrifice(c, null);;
+                            game.getAction().sacrifice(c, this);;
                     }
                 };
                 sacAbility.setActivatingPlayer(c.getController());
@@ -264,9 +259,6 @@ public class Upkeep extends Phase {
                     }
 
                     final Cost upkeepCost = new Cost(cost, true);
-                    final Ability blankAbility = Upkeep.getBlankAbility(c, upkeepCost);
-                    blankAbility.setActivatingPlayer(controller);
-
                     final Ability upkeepAbility = new Ability(c, ManaCost.ZERO) {
                         @Override
                         public void resolve() {
@@ -461,119 +453,7 @@ public class Upkeep extends Phase {
         } // end for
     } // upkeepDropOfHoney()
 
-    /**
-     * <p>
-     * upkeepDemonicHordes.
-     * </p>
-     */
-    /*
-    private static void upkeepDemonicHordes(final GameState game) {
 
-        /*
-         * At the beginning of your upkeep, unless you pay BBB, tap Demonic
-         * Hordes and sacrifice a land of an opponent's choice.
-         *-/
-
-        final Player player = game.getPhaseHandler().getPlayerTurn();
-        final List<Card> cards = player.getCardsIn(ZoneType.Battlefield, "Demonic Hordes");
-
-        for (final Card c : cards) {
-
-            final Ability cost = new Ability(c, new ManaCost(new ManaCostParser("B B B"))) {
-                @Override
-                public void resolve() {
-                }
-            }; // end cost ability
-
-            final Ability unpaidHordesAb = new Ability(c, ManaCost.ZERO) {
-                @Override
-                public void resolve() {
-                    final List<Card> playerLand = player.getLandsInPlay();
-
-                    c.tap();
-                    if (playerLand.isEmpty()) {
-                        return;
-                    }
-                    Card target = null;
-                    if (c.getController().isComputer()) {
-                        target = GuiChoose.one("Select a card to sacrifice", playerLand);
-                    } else {
-                        target = ComputerUtilCard.getBestLandAI(playerLand);
-                    }
-                    game.getAction().sacrifice(target, null);
-                } // end resolve()
-            }; // end noPay ability
-
-            final Player cp = c.getController();
-            if (cp.isHuman()) {
-                final Ability pay = new Ability(c, ManaCost.ZERO) {
-                    @Override
-                    public void resolve() {
-                        if (game.getZoneOf(c).is(ZoneType.Battlefield)) {
-                            InputPayment inp = new InputPayManaExecuteCommands(cp, "Pay Demonic Hordes upkeep cost", cost.getPayCosts().getTotalMana());
-                            cp.getGame().getInputQueue().setInputAndWait(inp);
-                            if ( !inp.isPaid() ) 
-                                unpaidHordesAb.resolve();
-                        }
-                    } // end resolve()
-                }; // end pay ability
-                pay.setStackDescription("Demonic Hordes - Upkeep Cost");
-                pay.setDescription("Demonic Hordes - Upkeep Cost");
-
-                game.getStack().addSimultaneousStackEntry(pay);
-            } // end human
-            else { // computer
-                unpaidHordesAb.setActivatingPlayer(cp);
-                if (ComputerUtilCost.canPayCost(cost, cp)) {
-                    final Ability computerPay = new Ability(c, ManaCost.ZERO) {
-                        @Override
-                        public void resolve() {
-                            ComputerUtilMana.payManaCost(cp, cost);
-                        }
-                    };
-                    computerPay.setStackDescription("Computer pays Demonic Hordes upkeep cost");
-
-                    game.getStack().addSimultaneousStackEntry(computerPay);
-                } else {
-                    unpaidHordesAb.setStackDescription("Demonic Hordes - Upkeep Cost");
-                    game.getStack().addSimultaneousStackEntry(unpaidHordesAb);
-
-                }
-            } // end computer
-
-        } // end for loop
-
-    } // upkeepDemonicHordes
-*/
-    /**
-     * <p>
-     * upkeepSuspend.
-     * </p>
-     */ /*
-    private static void upkeepSuspend(final GameState game) {
-        final Player player = game.getPhaseHandler().getPlayerTurn();
-
-        List<Card> list = player.getCardsIn(ZoneType.Exile);
-
-        list = CardLists.filter(list, new Predicate<Card>() {
-            @Override
-            public boolean apply(final Card c) {
-                return c.hasSuspend();
-            }
-        });
-
-        if (list.size() == 0) {
-            return;
-        }
-
-        for (final Card c : list) {
-            final int counters = c.getCounters(CounterType.TIME);
-            if (counters > 0) {
-                c.subtractCounter(CounterType.TIME, 1);
-            }
-        }
-    } // suspend
-*/
     /**
      * <p>
      * upkeepVanishing.
