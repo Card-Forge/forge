@@ -37,6 +37,7 @@ import forge.card.spellability.Ability;
 import forge.card.spellability.AbilityManaPart;
 import forge.card.spellability.AbilityStatic;
 import forge.card.spellability.SpellAbility;
+import forge.card.trigger.TriggerType;
 import forge.game.Game;
 import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilCard;
@@ -270,7 +271,10 @@ public class Upkeep extends Phase {
                         @Override
                         public void resolve() {
                             boolean isPaid = controller.getController().payManaOptional(c, upkeepCost, "Cumulative upkeep for " + c, ManaPaymentPurpose.CumulativeUpkeep);
-
+                            final HashMap<String, Object> runParams = new HashMap<String, Object>();
+                            runParams.put("CumulativeUpkeepPaid", (Boolean) isPaid);
+                            runParams.put("Card", this.getSourceCard());
+                            game.getTriggerHandler().runTrigger(TriggerType.PayCumulativeUpkeep, runParams, false);
                             if(!isPaid)
                                 game.getAction().sacrifice(c, null);
                         }

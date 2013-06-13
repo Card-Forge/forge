@@ -20,6 +20,7 @@ public enum TriggerType {
     ChangesZone(TriggerChangesZone.class),
 
     Clashed(TriggerClashed.class),
+    PayCumulativeUpkeep(TriggerPayCumulativeUpkeep.class),
     Flipped(TriggerFlipped.class),
     Attached(TriggerAttached.class),
     Destroyed(TriggerDestroyed.class),

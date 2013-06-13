@@ -5004,6 +5004,7 @@ res/cardsfolder/h/hex_parasite.txt -text
 res/cardsfolder/h/hexplate_golem.txt svneol=native#text/plain
 res/cardsfolder/h/hibernation.txt svneol=native#text/plain
 res/cardsfolder/h/hibernation_sliver.txt svneol=native#text/plain
+res/cardsfolder/h/hibernations_end.txt -text
 res/cardsfolder/h/hickory_woodlot.txt svneol=native#text/plain
 res/cardsfolder/h/hidden_ancients.txt svneol=native#text/plain
 res/cardsfolder/h/hidden_gibbons.txt svneol=native#text/plain
@@ -11193,6 +11194,7 @@ res/cardsfolder/t/thelon_of_havenwood.txt -text
 res/cardsfolder/t/thelonite_druid.txt -text
 res/cardsfolder/t/thelonite_hermit.txt svneol=native#text/plain
 res/cardsfolder/t/thelonite_monk.txt svneol=native#text/plain
+res/cardsfolder/t/thelons_chant.txt -text
 res/cardsfolder/t/thermal_blast.txt svneol=native#text/plain
 res/cardsfolder/t/thermal_flux.txt -text
 res/cardsfolder/t/thermal_glider.txt svneol=native#text/plain
@@ -11470,6 +11472,7 @@ res/cardsfolder/t/touch_of_invisibility.txt svneol=native#text/plain
 res/cardsfolder/t/touch_of_the_eternal.txt -text
 res/cardsfolder/t/touch_of_vitae.txt -text svneol=unset#text/plain
 res/cardsfolder/t/touchstone.txt svneol=native#text/plain
+res/cardsfolder/t/tourachs_chant.txt -text
 res/cardsfolder/t/tourachs_gate.txt -text
 res/cardsfolder/t/tower_above.txt -text
 res/cardsfolder/t/tower_defense.txt -text
@@ -14322,6 +14325,7 @@ src/main/java/forge/card/trigger/TriggerLifeGained.java svneol=native#text/plain
 src/main/java/forge/card/trigger/TriggerLifeLost.java svneol=native#text/plain
 src/main/java/forge/card/trigger/TriggerLosesGame.java -text
 src/main/java/forge/card/trigger/TriggerNewGame.java -text
+src/main/java/forge/card/trigger/TriggerPayCumulativeUpkeep.java -text
 src/main/java/forge/card/trigger/TriggerPhase.java svneol=native#text/plain
 src/main/java/forge/card/trigger/TriggerPlanarDice.java -text
 src/main/java/forge/card/trigger/TriggerPlaneswalkedFrom.java -text
