@@ -75,7 +75,7 @@ public class CardFactorySorceries {
         }
 
         for (Player p : game.getPlayers()) {
-            List<Card> hand = p.getCardsIn(ZoneType.Hand);
+            List<Card> hand = new ArrayList<Card>(p.getCardsIn(ZoneType.Hand));
             int sac = hand.size() - min;
             if (sac == 0) {
                 continue;
