@@ -1,7 +1,7 @@
-Forge Beta: 06-##-2013 ver 1.4.1
+Forge Beta: 06-14-2013 ver 1.4.1
 
 
-12### cards in total.
+12819 cards in total.
 
 
 -------------
@@ -32,66 +32,66 @@ The AI evaluated the basic lands higher than anything else. Fixed. The AI would 
 New Cards
 ---------
 
+Amulet of Quoz
+Aphetto Dredging
+Archive Trap
+Battlefield Scrounger
+Chain Stasis
+Chancellor of the Annex
+Chisei, Heart of Oceans
+Choking Vines
+Cobra Trap
+Defensive Formation
+Dream Chisel
+Dream Leash
+Exiled Doomsayer
+Fossil Find
+Gemstone Caverns
+Grave Consequences
+Grimoire Thief
+Hankyu
+Hibernation's End
+Indentured Djinn
+Ion Storm
+Jester's Scepter
+Jetting Glasskite
+Jotun Grunt
+Kira, Great Glass Spinner
+Kithkin Armor
+Krark's Thumb
+Leashling
+Liquid Fire
+Martyr of Bones
+Master Warcraft
+Melee
+Minion of Leshrac
+Odric, Master Tactician
 Patron of the Akki
 Patron of the Kitsune
 Patron of the Moon
-Patron of the Orochi
-Grimoire Thief
-Minion of Leshrac
 Patron of the Nezumi
-Prowling Pangolin
-Gemstone Caverns
-Martyr of Bones
-Odric, Master Tactician
-Master Warcraft
-Thran Turbine
-Chain Stasis
-Archive Trap
-Melee
-Ion Storm
-Summoning Trap
-Cobra Trap
-Chancellor of the Annex
-Temporary Truce
-Dream Chisel
-Exiled Doomsayer
-Indentured Djinn
-Kithkin Armor
-Truce
-Defensive Formation
-Battlefield Scrounger
-Leashling
+Patron of the Orochi
 Penance
-Jotun Grunt
-Fossil Find
-Search for Survivors
-Grave Consequences
-Psychic Vortex
-Jester's Scepter
-Void Maw
-Research // Development
-Tainted Specter
-Uba Mask
-Teferi's Curse
-Choking Vines
-Jetting Glasskite
-Shimmering Glasskite
-Time and Tide
-Amulet of Quoz
-Kira, Great Glass Spinner
-Hankyu
-Tidal Influence
-Aphetto Dredging
-Liquid Fire
 Power Conduit
-Chisei, Heart of Oceans
-Dream Leash
+Prowling Pangolin
+Psychic Vortex
+Research // Development
+Search for Survivors
+Shimmering Glasskite
 Spinning Darkness
-Thought Lash
+Summoning Trap
+Tainted Specter
+Teferi's Curse
+Temporary Truce
 Thelon's Chant
+Thought Lash
+Thran Turbine
+Tidal Influence
+Time and Tide
 Tourach's Chant
-Hibernation's End
-Krark's Thumb
+Truce
+Uba Mask
+Void Maw
 
 
 ----------
@@ -99,15 +99,16 @@ New Planes
 ----------
 
 Furnace Layer
-Mirrored Depths
 Kharasha Foothills
 Mimano
+Mirrored Depths
 
 
 --------------------
 New M14 branch Cards
 --------------------
 
+Accursed Spirit
 Advocate of the Beast
 Ajani's Chosen
 Archangel of Thune
@@ -116,18 +117,24 @@ Battle Sliver
 Blur Sliver
 Bonescythe Sliver
 Charging Grffin
+Corpse Hauler
 Dawnstrike Paladin
+Deathgaze Cockatrice
 Devout Invocation
+Elvish Mystic
 Enlarge
+Fleshpulper Giant
 Glimpse the Future
 Grim Return
 Groundshaker Sliver
 Guardian of the Ages
 Hive Stirrings
 Hunt the Weak
+Into the Wilds
 Jace's Mindseeker
 Kalonian Tusker
 Liliana's Reaver
+Marauding Maulhorn
 Master of Diversion
 Megantic Sliver
 Molten Birth
@@ -154,20 +161,12 @@ Stonehorn Chanter
 Striking Sliver
 Thorncaster Sliver
 Undead Minotaur
+Vampire Warlord
 Vastwood Hydra
 Vial of Poison
 Windreader Sphinx
 Woodborn Behemoth
 Young Pyromancer
-
-Fleshpulper Giant
-Marauding Maulhorn
-Accursed Spirit
-Corpse Hauler
-Vampire Warlord
-Into the Wilds
-Deathgaze Cockatrice
-Elvish Mystic
 
 
 ------------
@@ -196,7 +195,20 @@ Some people use the Windows application 7zip. This utility can be found at http:
 Contributors to This Release
 ----------------------------
 
-
+Agetian
+Asepetci
+Diogenes
+Gos
+Hellfish
+Marc
+Max
+Nordos
+RedDeckWins
+Sidereal
+Sloth
+Sol
+Swordshine
+Chris H
 
 
 (Quest icons used created by Teekatas, from his Legendora set http://raindropmemory.deviantart.com)
