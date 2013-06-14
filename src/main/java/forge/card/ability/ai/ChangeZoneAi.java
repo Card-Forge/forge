@@ -199,8 +199,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 if (ai.getGame().getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_DAMAGE)) {
                     return false;
                 }
-                List<Card> attackers = new ArrayList<Card>();
-                attackers.addAll(ai.getGame().getCombat().getUnblockedAttackers());
+                List<Card> attackers = ai.getGame().getCombat().getUnblockedAttackers();
                 boolean lowerCMC = false;
                 for (Card attacker : attackers) {
                     if (attacker.getCMC() < source.getCMC()) {
@@ -499,6 +498,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
      * @return Card
      */
     private static Card chooseCreature(final Player ai, List<Card> list) {
+        // Creating a new combat for testing purposes. 
         Combat combat = new Combat();
         combat.initiatePossibleDefenders(ai);
         List<Card> attackers = ai.getOpponent().getCreaturesInPlay();

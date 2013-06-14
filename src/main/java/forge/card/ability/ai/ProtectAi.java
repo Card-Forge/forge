@@ -18,6 +18,7 @@ import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilCard;
 import forge.game.ai.ComputerUtilCombat;
 import forge.game.ai.ComputerUtilCost;
+import forge.game.phase.Combat;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
@@ -68,6 +69,7 @@ public class ProtectAi extends SpellAbilityAi {
     private static List<Card> getProtectCreatures(final Player ai, final SpellAbility sa) {
         final ArrayList<String> gains = AbilityUtils.getProtectionList(sa);
         final Game game = ai.getGame();
+        final Combat combat = game.getCombat();
         
         List<Card> list = ai.getCreaturesInPlay();
         list = CardLists.filter(list, new Predicate<Card>() {
@@ -97,9 +99,10 @@ public class ProtectAi extends SpellAbilityAi {
                 }
 
                 // is the creature in blocked and the blocker would survive
-                if (game.getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS)
-                        && game.getCombat().isAttacking(c) && game.getCombat().isBlocked(c)
-                        && ComputerUtilCombat.blockerWouldBeDestroyed(ai, game.getCombat().getBlockers(c).get(0))) {
+                // TODO Potential NPE here if no blockers are actually left
+                if (game.getPhaseHandler().getPhase().equals(PhaseType.COMBAT_DECLARE_BLOCKERS)
+                        && combat.isAttacking(c) && game.getCombat().isBlocked(c)
+                        && ComputerUtilCombat.blockerWouldBeDestroyed(ai, combat.getBlockers(c).get(0))) {
                     return true;
                 }
 

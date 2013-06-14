@@ -91,7 +91,7 @@ public class PumpAllAi extends PumpAiBase {
                     }
                     totalPower += Math.min(c.getNetAttack(), power * -1);
                     if (phase == PhaseType.COMBAT_DECLARE_BLOCKERS
-                            && game.getCombat().getUnblockedAttackers().contains(c)) {
+                            && game.getCombat().isUnblocked(c)) {
                         if (ComputerUtilCombat.lifeInDanger(sa.getActivatingPlayer(), game.getCombat())) {
                             return true;
                         }

@@ -46,6 +46,7 @@ import forge.card.staticability.StaticAbility;
 import forge.card.trigger.TriggerType;
 import forge.game.Game;
 import forge.game.GlobalRuleChange;
+import forge.game.combat.AttackingBand;
 import forge.game.player.Player;
 import forge.game.player.PlayerController.ManaPaymentPurpose;
 import forge.game.zone.ZoneType;
@@ -179,11 +180,10 @@ public class CombatUtil {
             return true;
         }
 
-        if (attacker.hasKeyword("CARDNAME can't be blocked by more than one creature.")
-                && (combat.getBlockers(attacker).size() > 0)) {
+        if (attacker.hasKeyword("CARDNAME can't be blocked by more than one creature.") &&
+                !combat.getBlockers(attacker).isEmpty()) {
             return false;
         }
-
         return CombatUtil.canBeBlocked(attacker);
     }
 
@@ -425,32 +425,42 @@ public class CombatUtil {
     private static void orderMultipleBlockers(final Combat combat) {
         // If there are multiple blockers, the Attacker declares the Assignment Order
         final Player player = combat.getAttackingPlayer();
-        for (final Card attacker : combat.getAttackers()) {
-            List<Card> blockers = combat.getBlockers(attacker);
-            if (blockers.size() <= 1) {
+        for (final AttackingBand band : combat.getAttackingBands()) {
+            List<Card> attackers = band.getAttackers();
+            if (attackers.isEmpty()) {
                 continue;
             }
-            List<Card> orderedBlockers = player.getController().orderBlockers(attacker, blockers);
-            combat.setBlockerList(attacker, orderedBlockers);
-        }
 
-        // Refresh Combat Panel
+            List<Card> blockers = combat.getBlockers(band);
+            for(Card attacker : attackers) {
+                List<Card> orderedBlockers = null;
+                if (blockers.size() <= 1) {
+                    orderedBlockers = blockers;
+                } else {
+                    // Damage Ordering needs to take cards like Melee into account, is that happening?
+                    orderedBlockers = player.getController().orderBlockers(attacker, blockers);
+                }
+                combat.setAttackerDamageAssignmentOrder(attacker, orderedBlockers);
+            }
+        }
     }
 
     private static void orderBlockingMultipleAttackers(final Combat combat) {
         // If there are multiple blockers, the Attacker declares the Assignment Order
         for (final Card blocker : combat.getAllBlockers()) {
             List<Card> attackers = combat.getAttackersBlockedBy(blocker);
+            List<Card> orderedAttacker = null;
+
             if (attackers.size() <= 1) {
-                continue;
+                orderedAttacker = attackers;
+            } else {
+                // Damage Ordering needs to take cards like Melee into account, is that happening?
+                orderedAttacker = blocker.getController().getController().orderAttackers(blocker, attackers);
             }
 
-            List<Card> orderedAttacker = blocker.getController().getController().orderAttackers(blocker, attackers);
-            combat.setAttackersBlockedByList(blocker,  orderedAttacker);
+            combat.setBlockerDamageAssignmentOrder(blocker, orderedAttacker);
         }
-        // Refresh Combat Panel
     }
-
 
     // can the blocker block an attacker with a lure effect?
     /**
@@ -465,7 +475,6 @@ public class CombatUtil {
      * @return a boolean.
      */
     public static boolean mustBlockAnAttacker(final Card blocker, final Combat combat) {
-
         if (blocker == null || combat == null) {
             return false;
         }
@@ -1108,7 +1117,7 @@ public class CombatUtil {
      *            a {@link forge.Card} object.
      */
     public static void checkBlockedAttackers(final Game game, final Card a, final List<Card> blockers) {
-
+        final Combat combat = game.getCombat();
         if (blockers.isEmpty()) {
             return;
         }
@@ -1135,7 +1144,7 @@ public class CombatUtil {
                 if (m.find()) {
                     final String[] k = keyword.split(" ");
                     final int magnitude = Integer.valueOf(k[1]);
-                    final int numBlockers = game.getCombat().getBlockers(a).size();
+                    final int numBlockers = combat.getBlockers(a).size();
                     if (numBlockers > 1) {
                         CombatUtil.executeRampageAbility(game, a, magnitude, numBlockers);
                     }
@@ -1252,60 +1261,6 @@ public class CombatUtil {
             game.getStack().addSimultaneousStackEntry(ability);
         }
     }
-
-    /*
-    public static void souverignsOfAlara2ndAbility(final Game game, final Card attacker) {
-        final Ability ability4 = new Ability(attacker, ManaCost.ZERO) {
-            @Override
-            public void resolve() {
-                List<Card> enchantments =
-                        CardLists.filter(attacker.getController().getCardsIn(ZoneType.Library), new Predicate<Card>() {
-                    @Override
-                    public boolean apply(final Card c) {
-                        if (attacker.hasKeyword("Protection from enchantments")
-                                || (attacker.hasKeyword("Protection from everything"))) {
-                            return false;
-                        }
-                        return (c.isEnchantment() && c.hasKeyword("Enchant creature") && !CardFactoryUtil
-                                .hasProtectionFrom(c, attacker));
-                    }
-                });
-                final Player player = attacker.getController();
-                Card enchantment = null;
-                if (player.isHuman()) {
-                    final Card[] target = new Card[enchantments.size()];
-                    for (int j = 0; j < enchantments.size(); j++) {
-                        final Card crd = enchantments.get(j);
-                        target[j] = crd;
-                    }
-                    final Object check = GuiChoose.oneOrNone(
-                            "Select enchantment to enchant exalted creature", target);
-                    if (check != null) {
-                        enchantment = ((Card) check);
-                    }
-                } else {
-                    enchantment = ComputerUtilCard.getBestEnchantmentAI(enchantments, this, false);
-                }
-                if ((enchantment != null) && attacker.isInPlay()) {
-                    game.getAction().changeZone(game.getZoneOf(enchantment),
-                            enchantment.getOwner().getZone(ZoneType.Battlefield), enchantment, null);
-                    enchantment.enchantEntity(attacker);
-                }
-                attacker.getController().shuffle();
-            } // resolve
-        }; // ability4
-
-        final StringBuilder sb4 = new StringBuilder();
-        sb4.append(attacker).append(
-                " - (Exalted) searches library for an Aura card that could enchant that creature, ");
-        sb4.append("put it onto the battlefield attached to that creature, then shuffles library.");
-        ability4.setDescription(sb4.toString());
-        ability4.setStackDescription(sb4.toString());
-
-        game.getStack().addSimultaneousStackEntry(ability4);
-    }
-    */
-
 
     /**
      * executes Rampage abilities for a given card.

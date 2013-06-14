@@ -507,10 +507,11 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
 
                         if (sa.hasParam("Ninjutsu") || sa.hasParam("Attacking")) {
                             // What should they attack?
+                            // TODO Ninjutsu needs to actually select the Defender, instead of auto selecting player
                             List<GameEntity> defenders = game.getCombat().getDefenders();
                             if (!defenders.isEmpty()) { 
-                                game.getCombat().addAttacker(tgtC, defenders.get(0));
-                                game.getCombat().addUnblockedAttacker(tgtC);
+                                // Blockeres are already declared, set this to unblocked
+                                game.getCombat().addAttacker(tgtC, defenders.get(0), false);
                             }
                         }
                         if (sa.hasParam("Tapped") || sa.hasParam("Ninjutsu")) {

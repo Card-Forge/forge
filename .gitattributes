@@ -14405,6 +14405,7 @@ src/main/java/forge/game/ai/ComputerUtilCard.java -text
 src/main/java/forge/game/ai/ComputerUtilCombat.java -text
 src/main/java/forge/game/ai/ComputerUtilCost.java -text
 src/main/java/forge/game/ai/ComputerUtilMana.java -text
+src/main/java/forge/game/combat/AttackingBand.java -text
 src/main/java/forge/game/event/GameEvent.java -text
 src/main/java/forge/game/event/GameEventAnteCardsSelected.java -text
 src/main/java/forge/game/event/GameEventAttackersDeclared.java -text

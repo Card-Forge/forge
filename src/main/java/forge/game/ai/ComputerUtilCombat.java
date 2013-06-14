@@ -219,7 +219,7 @@ public class ComputerUtilCombat {
 
         int damage = 0;
 
-        final List<Card> attackers = combat.getAttackersByDefenderSlot(0);
+        final List<Card> attackers = combat.getAttackersOf(ai);
         final List<Card> unblocked = new ArrayList<Card>();
 
         for (final Card attacker : attackers) {
@@ -261,7 +261,7 @@ public class ComputerUtilCombat {
 
         int poison = 0;
 
-        final List<Card> attackers = combat.getAttackersByDefenderSlot(0);
+        final List<Card> attackers = combat.getAttackersOf(ai);
         final List<Card> unblocked = new ArrayList<Card>();
 
         for (final Card attacker : attackers) {
@@ -305,7 +305,7 @@ public class ComputerUtilCombat {
         }
 
         // check for creatures that must be blocked
-        final List<Card> attackers = combat.getAttackersByDefenderSlot(0);
+        final List<Card> attackers = combat.getAttackersOf(ai);
 
         for (final Card attacker : attackers) {
 
@@ -359,7 +359,7 @@ public class ComputerUtilCombat {
         }
 
         // check for creatures that must be blocked
-        final List<Card> attackers = combat.getAttackersByDefenderSlot(0);
+        final List<Card> attackers = combat.getAttackersOf(ai);
 
         for (final Card attacker : attackers) {
 
@@ -551,7 +551,8 @@ public class ComputerUtilCombat {
      */
     public static boolean attackerWouldBeDestroyed(Player ai, final Card attacker) {
         final Game game = ai.getGame();
-        final List<Card> blockers = game.getCombat().getBlockers(attacker);
+        final Combat combat = game.getCombat();
+        final List<Card> blockers = combat.getBlockers(attacker);
 
         for (final Card defender : blockers) {
             if (ComputerUtilCombat.canDestroyAttacker(ai, attacker, defender, game.getCombat(), true)

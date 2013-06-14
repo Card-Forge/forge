@@ -787,7 +787,7 @@ public class AiAttackController {
                     final int blockNum = this.blockers.size();
                     int attackNum = 0;
                     int damage = 0;
-                    List<Card> attacking = combat.getAttackersByDefenderSlot(iDefender);
+                    List<Card> attacking = combat.getAttackersOf(defender);
                     CardLists.sortByPowerAsc(attacking);
                     for (Card atta : attacking) {
                         if (attackNum >= blockNum || !CombatUtil.canBeBlocked(attacker, this.blockers)) {

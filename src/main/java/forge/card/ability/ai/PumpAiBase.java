@@ -386,6 +386,7 @@ public abstract class PumpAiBase extends SpellAbilityAi {
     protected boolean shouldPumpCard(final Player ai, final SpellAbility sa, final Card c, final int defense, final int attack,
             final List<String> keywords) {
         final Game game = ai.getGame();
+        final Combat combat = game.getCombat();
         PhaseHandler phase = game.getPhaseHandler();
 
         if (!c.canBeTargetedBy(sa)) {
@@ -437,22 +438,22 @@ public abstract class PumpAiBase extends SpellAbilityAi {
 
         // is the creature unblocked and the spell will pump its power?
         if (phase.is(PhaseType.COMBAT_DECLARE_BLOCKERS)
-                && game.getCombat().isAttacking(c) && game.getCombat().isUnblocked(c) && attack > 0) {
+                && combat.isAttacking(c) && combat.isUnblocked(c) && attack > 0) {
             return true;
         }
 
         // is the creature blocked and the blocker would survive
         if (phase.is(PhaseType.COMBAT_DECLARE_BLOCKERS) && attack > 0
-                && game.getCombat().isAttacking(c)
-                && game.getCombat().isBlocked(c)
-                && game.getCombat().getBlockers(c) != null
-                && !game.getCombat().getBlockers(c).isEmpty()
-                && !ComputerUtilCombat.blockerWouldBeDestroyed(ai, game.getCombat().getBlockers(c).get(0))) {
+                && combat.isAttacking(c)
+                && combat.isBlocked(c)
+                && combat.getBlockers(c) != null
+                && !combat.getBlockers(c).isEmpty()
+                && !ComputerUtilCombat.blockerWouldBeDestroyed(ai, combat.getBlockers(c).get(0))) {
             return true;
         }
 
         // if the life of the computer is in danger, try to pump blockers blocking Tramplers
-        List<Card> blockedBy = game.getCombat().getAttackersBlockedBy(c);
+        List<Card> blockedBy = combat.getAttackersBlockedBy(c);
         boolean attackerHasTrample = false;
         for (Card b : blockedBy) {
             attackerHasTrample |= b.hasKeyword("Trample");

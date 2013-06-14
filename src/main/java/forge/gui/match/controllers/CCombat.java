@@ -91,7 +91,7 @@ public enum CCombat implements ICDoc {
                 display.append(" > ");
                 display.append(combatantToString(c)).append("\n");
 
-                List<Card> blockers = combat.getBlockers(c);
+                List<Card> blockers = combat.getBlockers(c, true);
 
                 // loop through blockers
                 for (final Card element : blockers) {
