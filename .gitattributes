@@ -912,6 +912,7 @@ res/cardsfolder/b/benalish_cavalry.txt svneol=native#text/plain
 res/cardsfolder/b/benalish_commander.txt -text
 res/cardsfolder/b/benalish_emissary.txt svneol=native#text/plain
 res/cardsfolder/b/benalish_heralds.txt svneol=native#text/plain
+res/cardsfolder/b/benalish_hero.txt -text
 res/cardsfolder/b/benalish_knight.txt svneol=native#text/plain
 res/cardsfolder/b/benalish_lancer.txt -text
 res/cardsfolder/b/benalish_missionary.txt svneol=native#text/plain

@@ -26,6 +26,7 @@ import com.google.common.collect.Iterables;
 import forge.Card;
 import forge.CardPredicates;
 import forge.GameEntity;
+import forge.game.combat.AttackingBand;
 import forge.game.phase.Combat;
 import forge.game.phase.CombatUtil;
 import forge.game.player.Player;
@@ -52,6 +53,7 @@ public class InputAttack extends InputSyncronizedBase {
     private GameEntity currentDefender;
     private final Player playerAttacks;
     private final Player playerDeclares;
+    private AttackingBand activeBand = null;
     
     public InputAttack(Player attacks, Player declares, Combat combat) {
         this.playerAttacks = attacks;
@@ -97,8 +99,10 @@ public class InputAttack extends InputSyncronizedBase {
     /** {@inheritDoc} */
     @Override
     protected final void onOk() {
+        // TODO Add check to see if each must attack creature is attacking
         // Propaganda costs could have been paid here.
         setCurrentDefender(null); // remove highlights
+        activateBand(null);
         stop();
     }
 
@@ -115,12 +119,33 @@ public class InputAttack extends InputSyncronizedBase {
     protected final void onCardSelected(final Card card, boolean isMetaDown) {
         final List<Card> att = combat.getAttackers();
         if (isMetaDown && att.contains(card) && !card.hasKeyword("CARDNAME attacks each turn if able.")) {
+            // TODO Is there no way to attacks each turn cards to attack Planeswalkers?
             combat.removeFromCombat(card);
+            card.setUsedToPay(false);
             showCombat();
+            // When removing an attacker should I clear the attacking band?
+            this.activateBand(this.activeBand);
             return;
         }
 
         if (card.isAttacking(currentDefender)) {
+            // Activate band by selecting/deselecting a band member
+            if (this.activeBand == null) {
+                this.activateBand(combat.getBandByAttacker(card));
+            } else if (this.activeBand.getAttackers().contains(card)) {
+                this.activateBand(null);
+            } else { // Join a band by selecting a non-active band member after activating a band 
+                if (this.activeBand.canJoinBand(card)) {
+                    combat.removeFromCombat(card);
+                    combat.addAttacker(card, currentDefender, this.activeBand);
+                    this.activateBand(this.activeBand);
+                    updateMessage();
+                } else {
+                    flashIncorrectAction();
+                }
+            }
+
+            updateMessage();
             return;
         }
     
@@ -132,10 +157,20 @@ public class InputAttack extends InputSyncronizedBase {
         }
 
         if (playerAttacks.getZone(ZoneType.Battlefield).contains(card) && CombatUtil.canAttack(card, currentDefender, combat)) {
-            if( combat.isAttacking(card)) {
-                combat.removeFromCombat(card);
+            if (this.activeBand != null && !this.activeBand.canJoinBand(card)) {
+                this.activateBand(null);
+                updateMessage();
+                flashIncorrectAction();
+                return;
             }
-            combat.addAttacker(card, currentDefender);
+            
+            if(combat.isAttacking(card)) {
+                combat.removeFromCombat(card);
+            } 
+            
+            combat.addAttacker(card, currentDefender, this.activeBand);
+            this.activateBand(this.activeBand);
+            updateMessage();
             showCombat();
         }
         else {
@@ -157,13 +192,45 @@ public class InputAttack extends InputSyncronizedBase {
             }
         }
 
-        String header = playerAttacks == playerDeclares ? "declare attackers." : "declare attackers for " + playerAttacks.getName(); 
-        showMessage(playerDeclares.getName() + ", " + header + "\nSelecting Creatures to Attack " + currentDefender + 
-                "\n\nTo attack other players or their planewalkers just click on them");
+        updateMessage();
 
         // This will instantly highlight targets
         for(MyObservable updateable : toUpdate) {
             updateable.updateObservers();
         }
+    }
+    
+    private final void activateBand(AttackingBand band) {
+        Set<MyObservable> toUpdate = new HashSet<MyObservable>();
+        if (this.activeBand != null) {
+            for(Card card : this.activeBand.getAttackers()) {
+                card.setUsedToPay(false);
+                toUpdate.add(card.getController().getZone(ZoneType.Battlefield));
+            }
+        }
+        this.activeBand = band;
+        
+        if (this.activeBand != null) {
+            for(Card card : this.activeBand.getAttackers()) {
+                card.setUsedToPay(true);
+                toUpdate.add(card.getController().getZone(ZoneType.Battlefield));
+            }
+        }
+        
+        // This will instantly highlight targets
+        for(MyObservable updateable : toUpdate) {
+            updateable.updateObservers();
+        }
+    }
+    
+    private void updateMessage() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(playerDeclares.getName()).append(", ");
+        sb.append(playerAttacks == playerDeclares ? "declare attackers." : "declare attackers for " + playerAttacks.getName()).append("\n");
+        sb.append("Selecting Creatures to Attack ").append(currentDefender).append("\n\n");
+        sb.append("To change the current defender, click on the player or planeswalker you wish to attack.\n");
+        sb.append("To attack as a band, click an attacking creature to activate its 'band', select another to join the band.");
+
+        showMessage(sb.toString());
     }
 }

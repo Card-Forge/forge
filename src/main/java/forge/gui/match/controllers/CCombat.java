@@ -6,6 +6,7 @@ import forge.Card;
 import forge.Command;
 import forge.GameEntity;
 import forge.game.Game;
+import forge.game.combat.AttackingBand;
 import forge.game.phase.Combat;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
@@ -70,8 +71,8 @@ public enum CCombat implements ICDoc {
 
         // Not a big fan of the triple nested loop here
         for (GameEntity defender : combat.getDefenders()) {
-            List<Card> atk = combat.getAttackersOf(defender);
-            if (atk == null || atk.isEmpty()) {
+            List<AttackingBand> bands = combat.getAttackingBandsOf(defender);
+            if (bands == null || bands.isEmpty()) {
                 continue;
             }
 
@@ -86,18 +87,23 @@ public enum CCombat implements ICDoc {
 
             display.append(defender.getName()).append(" is attacked by:\n");
 
-            for (final Card c : atk) {
-                // loop through attackers
-                display.append(" > ");
-                display.append(combatantToString(c)).append("\n");
+            // Associate Bands, Attackers Blockers
+            for(AttackingBand band : bands) {
+                display.append(" BAND");
+                if (band.getBlocked()) {
+                    display.append(" (blocked)");
+                }
+                display.append("\n");
+                
+                for (final Card c : band.getAttackers()) {
+                    display.append(" > ");
+                    display.append(combatantToString(c)).append("\n");
+                }
 
-                List<Card> blockers = combat.getBlockers(c, true);
-
-                // loop through blockers
-                for (final Card element : blockers) {
+                for (final Card element : band.getBlockers()) {
                     display.append("     < ").append(combatantToString(element)).append("\n");
                 }
-            } // loop through attackers
+            }
         }
         return display.toString().trim();
     }

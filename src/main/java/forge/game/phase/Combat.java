@@ -206,6 +206,16 @@ public class Combat {
     public final List<Card> getAttackersOf(GameEntity defender) {
         return defenderMap.get(defender);
     }
+    
+    public final List<AttackingBand> getAttackingBandsOf(GameEntity defender) {
+        List<AttackingBand> bands = new ArrayList<AttackingBand>();
+        for(AttackingBand band : this.attackingBands) {
+            if (band.getDefender().equals(defender)) {
+                bands.add(band);
+            }
+        }
+        return bands;
+    }
 
     /**
      * <p>
@@ -503,11 +513,17 @@ public class Combat {
                     this.blockerToBandsMap.get(b).remove(c);
                 }
                 // Clear removed attacker from assignment order
-                this.blockerDamageAssignmentOrder.get(b).remove(c);
+                if (this.blockerDamageAssignmentOrder.containsKey(b)) {
+                    this.blockerDamageAssignmentOrder.get(b).remove(c);
+                }
             }
 
             this.defenderMap.get(band.getDefender()).remove(c);
-        } else if (this.blockerDamageAssignmentOrder.containsKey(c)) { // card is a blocker
+            
+            if (band.getAttackers().isEmpty() && band.getBlockers().isEmpty()) {
+                this.getAttackingBands().remove(band);
+            }
+        } else if (this.blockerToBandsMap.containsKey(c)) { // card is a blocker
             List<AttackingBand> attackers = this.blockerToBandsMap.get(c);
 
             this.blockerToBandsMap.remove(c);
@@ -515,7 +531,9 @@ public class Combat {
             for (AttackingBand a : attackers) {
                 a.removeBlocker(c);
                 for(Card atk : a.getAttackers()) {
-                    this.attackerDamageAssignmentOrder.get(atk).remove(c);
+                    if (this.attackerDamageAssignmentOrder.containsKey(atk)) {
+                        this.attackerDamageAssignmentOrder.get(atk).remove(c);
+                    }
                 }
             }
         }
