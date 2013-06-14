@@ -210,7 +210,7 @@ public enum CMatchUI {
 
         // If the first blocker can absorb all of the damage, don't show the Assign Damage Frame
         Card firstBlocker = blockers.get(0);
-        if (!attacker.hasKeyword("Deathtouch") && firstBlocker.getLethalDamage() >= damage) {
+        if (!overrideOrder && !attacker.hasKeyword("Deathtouch") && firstBlocker.getLethalDamage() >= damage) {
             Map<Card, Integer> res = new HashMap<Card, Integer>();
             res.put(firstBlocker, damage);
             return res;

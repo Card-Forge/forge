@@ -563,6 +563,7 @@ public class Combat {
     }
 
     private final boolean assignBlockersDamage(boolean firstStrikeDamage) {
+        // Assign damage by Blockers
         final List<Card> blockers = this.getAllBlockers();
         boolean assignedDamage = false;
 
@@ -586,7 +587,7 @@ public class Combat {
                     }
 
                     assignedDamage = true;
-                    Map<Card, Integer> map = blocker.getController().getController().assignCombatDamage(blocker, attackers, damage, null, assigningPlayer != blocker.getController());
+                    Map<Card, Integer> map = assigningPlayer.getController().assignCombatDamage(blocker, attackers, damage, null, assigningPlayer != blocker.getController());
                     for (Entry<Card, Integer> dt : map.entrySet()) {
                         dt.getKey().addAssignedDamage(dt.getValue(), blocker);
                         dt.getKey().updateObservers();
@@ -599,6 +600,7 @@ public class Combat {
     }
 
     private final boolean assignAttackersDamage(boolean firstStrikeDamage) {
+     // Assign damage by Attackers
         this.defendingDamageMap.clear(); // this should really happen in deal damage
         List<Card> blockers = null;
         final List<Card> attackers = this.getAttackers();
