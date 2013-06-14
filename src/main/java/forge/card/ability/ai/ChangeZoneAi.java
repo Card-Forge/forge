@@ -702,6 +702,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
 
         tgt.resetTargets();
         List<Card> list = CardLists.getValidCards(ai.getGame().getCardsIn(origin), tgt.getValidTgts(), ai, source);
+        list = CardLists.getTargetableCards(list, sa);
         if (sa.hasParam("AITgts")) {
             list = CardLists.getValidCards(list, sa.getParam("AITgts"), sa.getActivatingPlayer(), source);
         }
@@ -716,7 +717,6 @@ public class ChangeZoneAi extends SpellAbilityAi {
         // Narrow down the list:
         if (origin.equals(ZoneType.Battlefield)) {
             // filter out untargetables
-            list = CardLists.getTargetableCards(list, sa);
             List<Card> aiPermanents = CardLists.filterControlledBy(list, ai);
 
             // Don't blink cards that will die.
