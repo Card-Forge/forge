@@ -411,6 +411,10 @@ public class WrappedAbility extends Ability implements ISpellAbility {
                 // There is no way this doTrigger here will have the same target as stored above
                 // So it's possible it's making a different decision here than will actually happen
                 if (!sa.doTrigger(this.isMandatory(), decider)) {
+                    if (storeChoices) {
+                        tgt.resetTargets();
+                        tgt.setTargetChoices(tc);
+                    }
                     return false;
                 }
                 if (storeChoices) {
