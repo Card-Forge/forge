@@ -572,6 +572,8 @@ public class PlayerControllerHuman extends PlayerController {
      */
     @Override
     public List<Card> chooseCardsToRevealFromHand(int min, int max, List<Card> valid) {
+        max = Math.min(max, valid.size());
+        min = Math.min(min, max);
         InputSelectCardsFromList inp = new InputSelectCardsFromList(min, max, valid);
         inp.setMessage("Choose Which Cards to Reveal");
         Singletons.getControl().getInputQueue().setInputAndWait(inp);
