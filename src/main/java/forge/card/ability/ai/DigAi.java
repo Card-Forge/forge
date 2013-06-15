@@ -3,6 +3,7 @@ package forge.card.ability.ai;
 import java.util.Random;
 
 import forge.Card;
+import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
@@ -20,10 +21,8 @@ public class DigAi extends SpellAbilityAi {
     @Override
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
 
-        final Random r = MyRandom.getRandom();
-        boolean randomReturn = r.nextFloat() <= Math.pow(0.9, sa.getActivationsThisTurn());
-
         Player opp = ai.getOpponent();
+        final Card host = sa.getSourceCard();
         final Target tgt = sa.getTarget();
         Player libraryOwner = ai;
 
@@ -42,14 +41,25 @@ public class DigAi extends SpellAbilityAi {
             return false;
         }
 
+        // don't deck yourself
+        if (sa.hasParam("DestinationZone2") && !"Library".equals(sa.getParam("DestinationZone2"))) {
+            int numToDig = AbilityUtils.calculateAmount(host, sa.getParam("DigNum"), sa);
+            if (libraryOwner == ai && ai.getCardsIn(ZoneType.Library).size() <= numToDig + 1) {
+                return false;
+            }
+        }
+
         // Don't use draw abilities before main 2 if possible
         if (ai.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2) && !sa.hasParam("ActivationPhases")
                 && !sa.hasParam("DestinationZone")) {
             return false;
         }
 
+        final Random r = MyRandom.getRandom();
+        boolean randomReturn = r.nextFloat() <= Math.pow(0.9, sa.getActivationsThisTurn());
+        
         if (SpellAbilityAi.playReusable(ai, sa)) {
-            randomReturn = true;
+            return true;
         }
 
         return randomReturn;
