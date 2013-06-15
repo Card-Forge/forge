@@ -3,12 +3,9 @@ package forge.game.combat;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.google.common.base.Predicate;
-
 import forge.Card;
 import forge.CardLists;
 import forge.GameEntity;
-import forge.item.IPaperCard.Predicates;
 
 /** 
  * TODO: Write javadoc for this type.
