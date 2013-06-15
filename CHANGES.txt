@@ -1,7 +1,7 @@
-Forge Beta: 06-14-2013 ver 1.4.1
+Forge Beta: 06-##-2013 ver 1.4.2
 
 
-12819 cards in total.
+12### cards in total.
 
 
 -------------
@@ -24,84 +24,11 @@ Sometimes people will decide that they do not like the changes that they made an
 Also use the mentioned measure if your match or deckeditor won't start - it would help in 90% of the cases.
 
 
-- The AI Drafting has been improved -
-The AI evaluated the basic lands higher than anything else. Fixed. The AI would pick cards with RemAIDeck but only at a much lowered pick rate. For example the best pick in a 250 card set would become the 75th best pick, the 20th best pick would become the 95th and so on. Divided this factor by 3 (so the first pick would become the 25th pick). Please test whether this has improved the draft experience.
-
-
 ---------
 New Cards
 ---------
 
-Amulet of Quoz
-Aphetto Dredging
-Archive Trap
-Battlefield Scrounger
-Chain Stasis
-Chancellor of the Annex
-Chisei, Heart of Oceans
-Choking Vines
-Cobra Trap
-Defensive Formation
-Dream Chisel
-Dream Leash
-Exiled Doomsayer
-Fossil Find
-Gemstone Caverns
-Grave Consequences
-Grimoire Thief
-Hankyu
-Hibernation's End
-Indentured Djinn
-Ion Storm
-Jester's Scepter
-Jetting Glasskite
-Jotun Grunt
-Kira, Great Glass Spinner
-Kithkin Armor
-Krark's Thumb
-Leashling
-Liquid Fire
-Martyr of Bones
-Master Warcraft
-Melee
-Minion of Leshrac
-Odric, Master Tactician
-Patron of the Akki
-Patron of the Kitsune
-Patron of the Moon
-Patron of the Nezumi
-Patron of the Orochi
-Penance
-Power Conduit
-Prowling Pangolin
-Psychic Vortex
-Research // Development
-Search for Survivors
-Shimmering Glasskite
-Spinning Darkness
-Summoning Trap
-Tainted Specter
-Teferi's Curse
-Temporary Truce
-Thelon's Chant
-Thought Lash
-Thran Turbine
-Tidal Influence
-Time and Tide
-Tourach's Chant
-Truce
-Uba Mask
-Void Maw
 
-
-----------
-New Planes
-----------
-
-Furnace Layer
-Kharasha Foothills
-Mimano
-Mirrored Depths
 
 
 --------------------
@@ -195,20 +122,7 @@ Some people use the Windows application 7zip. This utility can be found at http:
 Contributors to This Release
 ----------------------------
 
-Agetian
-Asepetci
-Diogenes
-Gos
-Hellfish
-Marc
-Max
-Nordos
-RedDeckWins
-Sidereal
-Sloth
-Sol
-Swordshine
-Chris H
+
 
 
 (Quest icons used created by Teekatas, from his Legendora set http://raindropmemory.deviantart.com)

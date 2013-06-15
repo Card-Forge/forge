@@ -694,6 +694,10 @@ Targeting Overlay:
 Targeting arrows will now be shown for equipments equipping permanents currently under opponent's control (for those rare cases when e.g. an equipped creature gets Switcheroo'd for something else).
 
 
+- The AI Drafting has been improved -
+The AI evaluated the basic lands higher than anything else. Fixed. The AI would pick cards with RemAIDeck but only at a much lowered pick rate. For example the best pick in a 250 card set would become the 75th best pick, the 20th best pick would become the 95th and so on. Divided this factor by 3 (so the first pick would become the 25th pick). Please test whether this has improved the draft experience.
+
+
 Our Lawyers Made Us Do This:
 ----------------------------
 
