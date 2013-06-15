@@ -28,7 +28,9 @@ Also use the mentioned measure if your match or deckeditor won't start - it woul
 New Cards
 ---------
 
-
+Benalish Hero
+Mindlock Orb
+Shadow of Doubt
 
 
 --------------------
