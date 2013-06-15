@@ -1,0 +1,9 @@
+Name:Shadow of Doubt
+ManaCost:UB UB
+Types:Instant
+A:SP$ Effect | Cost$ UB UB | StaticAbilities$ STCantSearch | SubAbility$ DBDraw | SpellDesciption$ Players can't search libraries this turn. Draw a card.
+SVar:STCantSearch:Mode$ Continuous | Affected$ Player | EffectZone$ Command | AddKeyword$ CantSearchLibrary | Description$ Players can't search libraries.
+SVar:DBDraw:DB$ Draw | NumCards$ 1
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/shadow_of_doubt.jpg
+Oracle:({U/B} can be paid with either {U} or {B}.)\nPlayers can't search libraries this turn.\nDraw a card.

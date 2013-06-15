@@ -629,9 +629,6 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             origin = ZoneType.listValueOf(sa.getParam("Origin"));
         }
         
-        if(origin.contains(ZoneType.Library) && !sa.hasParam("NoLooking")) {
-            sa.getActivatingPlayer().incLibrarySearched();
-        }
         
         ZoneType destination = ZoneType.smartValueOf(sa.getParam("Destination"));
         // this needs to be zero indexed. Top = 0, Third = 2
@@ -672,6 +669,8 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         }
 
         List<Card> fetchList;
+        boolean shuffleMandatory = true;
+        boolean searchedLibrary = false;
         if (defined) {
             fetchList = new ArrayList<Card>(AbilityUtils.getDefinedCards(card, sa.getParam("Defined"), sa));
             if (!sa.hasParam("ChangeNum")) {
@@ -682,16 +681,32 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             fetchList = game.getCardsIn(origin);
         } else {
             fetchList = player.getCardsIn(origin);
-            if (origin.contains(ZoneType.Library) && decider.hasKeyword("LimitSearchLibrary") 
-                    && !sa.hasParam("NoLooking")) {// Aven Mindcensor
-                fetchList.removeAll(player.getCardsIn(ZoneType.Library));
-                final int fetchNum = Math.min(player.getCardsIn(ZoneType.Library).size(), 4);
-                fetchList.addAll(player.getCardsIn(ZoneType.Library, fetchNum));
+            if (origin.contains(ZoneType.Library) && !sa.hasParam("NoLooking")) {
+                searchedLibrary = true;
+                if (decider.hasKeyword("LimitSearchLibrary")) { // Aven Mindcensor
+                    fetchList.removeAll(player.getCardsIn(ZoneType.Library));
+                    final int fetchNum = Math.min(player.getCardsIn(ZoneType.Library).size(), 4);
+                    if (fetchNum == 0) {
+                        searchedLibrary = false;
+                    }System.out.println(fetchNum);
+                    fetchList.addAll(player.getCardsIn(ZoneType.Library, fetchNum));
+                }
+                if (decider.hasKeyword("CantSearchLibrary")) {
+                    fetchList.removeAll(player.getCardsIn(ZoneType.Library));
+                    // "if you do/sb does, shuffle" is not mandatory (usually a triggered ability), should has this param. 
+                    // "then shuffle" is mandatory
+                    shuffleMandatory = !sa.hasParam("ShuffleNonMandatory");
+                    searchedLibrary = false;
+                }
             }
         }
-        
+
+        if (searchedLibrary && decider.equals(player)) { // should only count the number of searching player's own library
+            decider.incLibrarySearched();
+        }
+
         if (!defined) {
-            if (origin.contains(ZoneType.Library) && !defined && !sa.hasParam("NoLooking")) {
+            if (origin.contains(ZoneType.Library) && !defined && !sa.hasParam("NoLooking") && !decider.hasKeyword("CantSearchLibrary")) {
                 final int fetchNum = Math.min(player.getCardsIn(ZoneType.Library).size(), 4);
                 List<Card> shown = !decider.hasKeyword("LimitSearchLibrary") ? player.getCardsIn(ZoneType.Library) : player.getCardsIn(ZoneType.Library, fetchNum);
                 // Look at whole library before moving onto choosing a card
@@ -889,7 +904,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             decider.getController().reveal(card + " - Revealed card: ", movedCards, zt, player);
         }
 
-        if ((origin.contains(ZoneType.Library) && !destination.equals(ZoneType.Library) && !defined)
+        if ((origin.contains(ZoneType.Library) && !destination.equals(ZoneType.Library) && !defined && shuffleMandatory)
                 || (sa.hasParam("Shuffle") && "True".equals(sa.getParam("Shuffle")))) {
             player.shuffle();
         }

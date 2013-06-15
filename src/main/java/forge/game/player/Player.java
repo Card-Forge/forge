@@ -107,7 +107,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     private int numPowerSurgeLands;
     
     /** The number of times this player has searched his library. */
-    private int numLibrarySearched = 0;
+    private int numLibrarySearchedOwn = 0;
 
     /** The prowl. */
     private ArrayList<String> prowl = new ArrayList<String>();
@@ -2229,14 +2229,14 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
     
     public final void setLibrarySearched(final int l) {
-        this.numLibrarySearched = l;
+        this.numLibrarySearchedOwn = l;
     }
     
     public final int getLibrarySearched() {
-        return this.numLibrarySearched;
+        return this.numLibrarySearchedOwn;
     }
     public final void incLibrarySearched() {
-        this.numLibrarySearched++;
+        this.numLibrarySearchedOwn++;
     }
 
     /*

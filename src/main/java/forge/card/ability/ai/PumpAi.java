@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import com.google.common.base.Predicate;
-
 import forge.Card;
 import forge.CardLists;
 import forge.CardPredicates.Presets;

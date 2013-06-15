@@ -3,8 +3,6 @@ package forge.card.ability.ai;
 import java.util.List;
 import java.util.Random;
 
-import com.google.common.base.Predicate;
-
 import forge.Card;
 import forge.CardLists;
 import forge.card.ability.SpellAbilityAi;

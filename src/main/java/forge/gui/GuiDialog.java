@@ -10,10 +10,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import forge.Card;
 import forge.FThreads;
-import forge.game.event.GameEventFlipCoin;
-import forge.game.player.Player;
 import forge.gui.match.CMatchUI;
-import forge.util.MyRandom;
 
 /** 
  * Holds player interactions using standard windows 

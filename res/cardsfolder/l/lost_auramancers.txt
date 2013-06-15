@@ -3,7 +3,7 @@ ManaCost:2 W W
 Types:Creature Human Wizard
 PT:3/3
 T:Mode$ ChangesZone | ValidCard$ Card.Self+counters_EQ0_TIME | Origin$ Battlefield | Destination$ Graveyard | Execute$ DBReturn | OptionalDecider$ TriggeredCardController | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, if it had no time counters on it, you may search your library for an enchantment card and put it onto the battlefield. If you do, shuffle your library.
-SVar:DBReturn:DB$ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Enchantment.YouOwn | ChangeNum$ 1
+SVar:DBReturn:DB$ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Enchantment.YouOwn | ChangeNum$ 1 | ShuffleNonMandatory$ True
 K:Vanishing:3
 SVar:RemRandomDeck:True
 DeckNeeds:Type$Enchantment

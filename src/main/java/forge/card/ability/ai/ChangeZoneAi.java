@@ -1107,10 +1107,6 @@ public class ChangeZoneAi extends SpellAbilityAi {
         if (sa.hasParam("Origin")) {
             origin = ZoneType.listValueOf(sa.getParam("Origin"));
         }
-        
-        if(origin.contains(ZoneType.Library) && !sa.hasParam("NoLooking")) {
-            sa.getActivatingPlayer().incLibrarySearched();
-        }
 
         String type = sa.getParam("ChangeType");
         if (type == null) {
@@ -1121,6 +1117,8 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 sa) : 1;
 
         List<Card> fetchList;
+        boolean shuffleMandatory = true;
+        boolean searchedLibrary = false;
         if (defined) {
             fetchList = new ArrayList<Card>(AbilityUtils.getDefinedCards(card, sa.getParam("Defined"), sa));
             if (!sa.hasParam("ChangeNum")) {
@@ -1132,14 +1130,29 @@ public class ChangeZoneAi extends SpellAbilityAi {
             fetchList = AbilityUtils.filterListByType(fetchList, type, sa);
         } else {
             fetchList = player.getCardsIn(origin);
-            if (origin.contains(ZoneType.Library) && ai.hasKeyword("LimitSearchLibrary")
-                    && !sa.hasParam("NoLooking")) {
+            if (origin.contains(ZoneType.Library) && !sa.hasParam("NoLooking")) {
+                searchedLibrary = true;
+                if (ai.hasKeyword("LimitSearchLibrary")) {
                 // Aven Mindcensor
-                fetchList.removeAll(player.getCardsIn(ZoneType.Library));
-                final int fetchNum = Math.min(player.getCardsIn(ZoneType.Library).size(), 4);
-                fetchList.addAll(player.getCardsIn(ZoneType.Library, fetchNum));
+                    fetchList.removeAll(player.getCardsIn(ZoneType.Library));
+                    final int fetchNum = Math.min(player.getCardsIn(ZoneType.Library).size(), 4);
+                    fetchList.addAll(player.getCardsIn(ZoneType.Library, fetchNum));
+                    if (fetchNum == 0) {
+                        searchedLibrary = false;
+                    }
+                }
+                if (ai.hasKeyword("CantSearchLibrary")) {
+                    fetchList.removeAll(player.getCardsIn(ZoneType.Library));
+                    // "if you do/sb does, shuffle" is not mandatory, should has this param.
+                    // "then shuffle" is mandatory
+                    shuffleMandatory = !sa.hasParam("ShuffleNonMandatory");
+                    searchedLibrary = false;
+                }
             }
             fetchList = AbilityUtils.filterListByType(fetchList, type, sa);
+        }
+        if (searchedLibrary && ai.equals(player)) {
+            ai.incLibrarySearched();
         }
 
         final ZoneType destination = ZoneType.smartValueOf(sa.getParam("Destination"));
@@ -1278,7 +1291,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
             }
         }
 
-        if (origin.contains(ZoneType.Library) && !defined && !"False".equals(sa.getParam("Shuffle"))) {
+        if (origin.contains(ZoneType.Library) && !defined && !"False".equals(sa.getParam("Shuffle")) && shuffleMandatory) {
             player.shuffle();
         }
 

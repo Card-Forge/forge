@@ -50,7 +50,6 @@ import forge.game.combat.AttackingBand;
 import forge.game.player.Player;
 import forge.game.player.PlayerController.ManaPaymentPurpose;
 import forge.game.zone.ZoneType;
-import forge.gui.GuiDialog;
 
 
 /**

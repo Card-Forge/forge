@@ -3,7 +3,7 @@ ManaCost:5 R
 Types:Legendary Creature Human Barbarian
 PT:3/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ TrigTutorEquip | TriggerDescription$ When CARDNAME enters the battlefield, you may search your library for an Equipment card and put it onto the battlefield. If you do, shuffle your library.
-SVar:TrigTutorEquip:AB$ ChangeZone | Cost$ 0 | Origin$ Library | Destination$ Battlefield | ChangeType$ Equipment | ChangeNum$ 1
+SVar:TrigTutorEquip:AB$ ChangeZone | Cost$ 0 | Origin$ Library | Destination$ Battlefield | ChangeType$ Equipment | ChangeNum$ 1 | ShuffleNonMandatory$ True
 T:Mode$ Attacks | ValidCard$ Creature.Self | TriggerZones$ Battlefield | Execute$ TrigUntap | FirstAttack$ True | TriggerDescription$ Whenever CARDNAME attacks for the first time each turn, untap it and all Samurai you control. After this phase, there is an additional combat phase.
 SVar:TrigUntap:AB$ UntapAll | Cost$ 0 | ValidCards$ Card.Self,Samurai.YouCtrl | SubAbility$ DBAddCombat
 SVar:DBAddCombat:DB$ AddPhase | ExtraPhase$ BeginCombat | AfterPhase$ EndCombat

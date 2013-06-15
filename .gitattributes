@@ -6858,6 +6858,7 @@ res/cardsfolder/m/mindlash_sliver.txt svneol=native#text/plain
 res/cardsfolder/m/mindleech_mass.txt -text
 res/cardsfolder/m/mindless_automaton.txt svneol=native#text/plain
 res/cardsfolder/m/mindless_null.txt -text
+res/cardsfolder/m/mindlock_orb.txt -text
 res/cardsfolder/m/mindmoil.txt -text
 res/cardsfolder/m/minds_desire.txt svneol=native#text/plain
 res/cardsfolder/m/minds_eye.txt svneol=native#text/plain
@@ -9638,6 +9639,7 @@ res/cardsfolder/s/shades_form.txt svneol=native#text/plain
 res/cardsfolder/s/shadow_alley_denizen.txt -text
 res/cardsfolder/s/shadow_guildmage.txt svneol=native#text/plain
 res/cardsfolder/s/shadow_lance.txt svneol=native#text/plain
+res/cardsfolder/s/shadow_of_doubt.txt -text
 res/cardsfolder/s/shadow_rider.txt svneol=native#text/plain
 res/cardsfolder/s/shadow_rift.txt svneol=native#text/plain
 res/cardsfolder/s/shadow_slice.txt -text

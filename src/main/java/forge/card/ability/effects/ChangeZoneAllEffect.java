@@ -51,13 +51,19 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
 
         if ((tgtPlayers == null) || tgtPlayers.isEmpty() || sa.hasParam("UseAllOriginZones")) {
             cards = game.getCardsIn(origin);
-        } else if (sa.getActivatingPlayer().hasKeyword("LimitSearchLibrary")
-                && origin.contains(ZoneType.Library) && sa.hasParam("Search")) {
-            for (final Player p : tgtPlayers) {
-                cards.addAll(p.getCardsIn(origin));
-                cards.removeAll(p.getCardsIn(ZoneType.Library));
-                int fetchNum = Math.min(p.getCardsIn(ZoneType.Library).size(), 4);
-                cards.addAll(p.getCardsIn(ZoneType.Library, fetchNum));
+        } else if (origin.contains(ZoneType.Library) && sa.hasParam("Search")) {
+            // Search library using changezoneall effect need a param "Search"
+            if (sa.getActivatingPlayer().hasKeyword("LimitSearchLibrary")) {
+                for (final Player p : tgtPlayers) {
+                    cards.addAll(p.getCardsIn(origin));
+                    cards.removeAll(p.getCardsIn(ZoneType.Library));
+                    int fetchNum = Math.min(p.getCardsIn(ZoneType.Library).size(), 4);
+                    cards.addAll(p.getCardsIn(ZoneType.Library, fetchNum));
+                }
+            }
+            if (sa.getActivatingPlayer().hasKeyword("CantSearchLibrary")) {
+                // all these cards have "then that player shuffles", mandatory shuffle
+                cards.removeAll(game.getCardsIn(ZoneType.Library));
             }
         } else {
             for (final Player p : tgtPlayers) {
@@ -65,8 +71,12 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
             }
         }
         
-        if (origin.contains(ZoneType.Library) && sa.hasParam("Search")) {
+        if (origin.contains(ZoneType.Library) && sa.hasParam("Search") && !sa.getActivatingPlayer().hasKeyword("CantSearchLibrary")) {
             List<Card> libCards = CardLists.getValidCards(cards, "Card.inZoneLibrary", sa.getActivatingPlayer(), sa.getSourceCard());
+            List<Card> libCardsYouOwn = CardLists.filterControlledBy(libCards, sa.getActivatingPlayer());
+            if (!libCardsYouOwn.isEmpty()) { // Only searching one's own library would fire Archive Trap's altcost
+                sa.getActivatingPlayer().incLibrarySearched();
+            }
             sa.getActivatingPlayer().getController().reveal("Looking at the Library", libCards, ZoneType.Library, sa.getActivatingPlayer());
         }
         cards = AbilityUtils.filterListByType(cards, sa.getParam("ChangeType"), sa);
