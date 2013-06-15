@@ -7,6 +7,7 @@ import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
+import forge.game.ai.ComputerUtil;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
@@ -51,7 +52,7 @@ public class DigAi extends SpellAbilityAi {
 
         // Don't use draw abilities before main 2 if possible
         if (ai.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2) && !sa.hasParam("ActivationPhases")
-                && !sa.hasParam("DestinationZone")) {
+                && !sa.hasParam("DestinationZone") && !ComputerUtil.castSpellInMain1(ai, sa)) {
             return false;
         }
 

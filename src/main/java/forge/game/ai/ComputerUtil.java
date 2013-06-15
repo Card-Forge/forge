@@ -49,6 +49,7 @@ import forge.card.spellability.AbilityStatic;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityStackInstance;
 import forge.card.spellability.Target;
+import forge.card.staticability.StaticAbility;
 import forge.error.BugReporter;
 import forge.game.Game;
 import forge.game.phase.Combat;
@@ -1099,12 +1100,21 @@ public class ComputerUtil {
             }
         }
         final List<Card> buffed = ai.getCardsIn(ZoneType.Battlefield);
-        for (Card buffedcard : buffed) {
-            if (buffedcard.hasSVar("BuffedBy")) {
-                final String buffedby = buffedcard.getSVar("BuffedBy");
+        boolean checkThreshold = sa.isSpell() && !ai.hasThreshold() && !sa.getSourceCard().isInZone(ZoneType.Graveyard);
+        for (Card buffedCard : buffed) {
+            if (buffedCard.hasSVar("BuffedBy")) {
+                final String buffedby = buffedCard.getSVar("BuffedBy");
                 final String[] bffdby = buffedby.split(",");
-                if (source.isValid(bffdby, buffedcard.getController(), buffedcard)) {
+                if (source.isValid(bffdby, buffedCard.getController(), buffedCard)) {
                     return true;
+                }
+            }
+            //Fill the graveyard for Threshold
+            if (checkThreshold) {
+                for (StaticAbility stAb : buffedCard.getStaticAbilities()) {
+                    if ("Threshold".equals(stAb.getMapParams().get("Condition"))) {
+                        return true;
+                    }
                 }
             }
         }
