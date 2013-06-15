@@ -134,7 +134,7 @@ public abstract class TapAiBase extends SpellAbilityAi  {
                         return true;
                     }
                 }
-                return true;
+                return false;
             }
         });
 
