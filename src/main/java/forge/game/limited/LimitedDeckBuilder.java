@@ -303,7 +303,7 @@ public class LimitedDeckBuilder {
                 final float p = (float) clrCnts[i] / (float) totalColor;
                 final int nLand = Math.round(landsNeeded * p); // desired truncation to int
                 if (Preferences.DEV_MODE) {
-                    System.out.printf("Basics[%s]: %d/%d = %f%% = %d cards", Constant.Color.BASIC_LANDS.get(i), clrCnts[i], totalColor, 100*p, nLand);
+                    System.out.printf("Basics[%s]: %d/%d = %f%% = %d cards%n", Constant.Color.BASIC_LANDS.get(i), clrCnts[i], totalColor, 100*p, nLand);
                 }
 
                 for (int j = 0; j < nLand; j++) {

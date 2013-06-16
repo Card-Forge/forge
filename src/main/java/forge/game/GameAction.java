@@ -58,8 +58,8 @@ import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerType;
 import forge.card.trigger.ZCTrigger;
 import forge.game.ai.ComputerUtil;
+import forge.game.event.GameEventCardChangeZone;
 import forge.game.event.GameEventCardDestroyed;
-import forge.game.event.GameEventCardExiled;
 import forge.game.event.GameEventCardRegenerated;
 import forge.game.event.GameEventCardSacrificed;
 import forge.game.event.GameEventGameFinished;
@@ -123,6 +123,10 @@ public class GameAction {
      * @return a {@link forge.Card} object.
      */
     public Card changeZone(final Zone zoneFrom, final Zone zoneTo, final Card c, Integer position) {
+        // play the Exile sound
+        game.fireEvent(new GameEventCardChangeZone(c, zoneFrom, zoneTo));
+
+        
         if (c.isCopiedSpell()) {
             if ((zoneFrom != null)) {
                 zoneFrom.remove(c);
@@ -693,10 +697,6 @@ public class GameAction {
             return c;
         }
         final PlayerZone removed = c.getOwner().getZone(ZoneType.Exile);
-
-        // play the Exile sound
-        game.fireEvent(new GameEventCardExiled());
-        
         return moveTo(removed, c);
     }
 

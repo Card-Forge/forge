@@ -4,6 +4,7 @@ import forge.Card;
 import forge.Singletons;
 import forge.card.spellability.SpellAbility;
 import forge.game.event.GameEventBlockerAssigned;
+import forge.game.event.GameEventCardChangeZone;
 import forge.game.event.GameEventCardDamaged;
 import forge.game.event.GameEventCardDestroyed;
 import forge.game.event.GameEventCardDiscarded;
@@ -16,7 +17,6 @@ import forge.game.event.GameEventDrawCard;
 import forge.game.event.GameEventGameOutcome;
 import forge.game.event.GameEventTurnEnded;
 import forge.game.event.GameEvent;
-import forge.game.event.GameEventCardExiled;
 import forge.game.event.GameEventFlipCoin;
 import forge.game.event.GameEventLandPlayed;
 import forge.game.event.GameEventLifeLoss;
@@ -26,6 +26,7 @@ import forge.game.event.GameEventShuffle;
 import forge.game.event.GameEventSpellResolved;
 import forge.game.event.GameEventTokenCreated;
 import forge.game.event.IGameEventVisitor;
+import forge.game.zone.ZoneType;
 
 /** 
  * This class is in charge of converting any forge.game.event.Event to a SoundEffectType.
@@ -39,7 +40,7 @@ public class EventVisualizer extends IGameEventVisitor.Base<SoundEffectType> {
     public SoundEffectType visit(GameEventCardDestroyed event) { return SoundEffectType.Destroy; }
     public SoundEffectType visit(GameEventCardDiscarded event) { return SoundEffectType.Discard; }
     public SoundEffectType visit(GameEventCardEquipped event) { return SoundEffectType.Equip; }
-    public SoundEffectType visit(GameEventCardExiled event) { return SoundEffectType.Exile; }
+    public SoundEffectType visit(GameEventCardChangeZone event) { return event.to.getZoneType() == ZoneType.Exile ? SoundEffectType.Exile : null; }
     public SoundEffectType visit(GameEventCardRegenerated event) { return SoundEffectType.Regen; }
     public SoundEffectType visit(GameEventCardSacrificed event) { return SoundEffectType.Sacrifice; }
     public SoundEffectType visit(GameEventCounterAdded event) { return event.Amount > 0 ? SoundEffectType.AddCounter : null; }
