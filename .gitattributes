@@ -11862,6 +11862,7 @@ res/cardsfolder/u/ursapine.txt svneol=native#text/plain
 res/cardsfolder/u/ursine_fylgja.txt svneol=native#text/plain
 res/cardsfolder/u/urza.txt -text
 res/cardsfolder/u/urzas_armor.txt svneol=native#text/plain
+res/cardsfolder/u/urzas_avenger.txt -text
 res/cardsfolder/u/urzas_bauble.txt -text
 res/cardsfolder/u/urzas_blueprints.txt svneol=native#text/plain
 res/cardsfolder/u/urzas_chalice.txt svneol=native#text/plain
