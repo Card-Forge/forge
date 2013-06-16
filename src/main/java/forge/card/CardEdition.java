@@ -32,6 +32,7 @@ import org.apache.commons.lang3.StringUtils;
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 
+import forge.Constant;
 import forge.Singletons;
 import forge.game.GameFormat;
 import forge.util.FileSection;
@@ -247,7 +248,11 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
         public static final Predicate<CardEdition> hasBasicLands = new Predicate<CardEdition>() {
             @Override
             public boolean apply(CardEdition ed) {
-                return null != CardDb.instance().tryGetCard("Plains", ed.getCode(), 0);
+                for(String landName : Constant.Color.BASIC_LANDS) {
+                    if (null == CardDb.instance().tryGetCard(landName, ed.getCode(), 0))
+                        return false;
+                }
+                return true;
             };
         };
 

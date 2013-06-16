@@ -98,9 +98,12 @@ public final class QuestUtilCards {
 
         if (usedFormat != null) {
             List<String> availableEditions = usedFormat.getAllowedSetCodes();
-            for (String edition : availableEditions) {
-                if (null != db.tryGetCard("Plains", edition)) {
-                    landCodes.add(edition);
+            
+            for (String edCode : availableEditions) {
+                CardEdition ed = Singletons.getModel().getEditions().get(edCode);
+                // Duel decks might have only 2 types of basic lands
+                if( CardEdition.Predicates.hasBasicLands.apply(ed) ) {
+                    landCodes.add(edCode);
                 }
             }
             if (usedFormat.isSetLegal("ICE")) {
