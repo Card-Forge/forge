@@ -58,13 +58,6 @@ public class InputPayManaX extends InputPayMana {
     public void showMessage() {
         if( isFinished() ) return;
         
-        // Enable just cancel is full X value hasn't been paid for multiple X values
-        // or X is 0, and x can't be 0
-        if (!isPaid()) {
-            ButtonUtil.enableOnlyCancel();
-        } else {
-            ButtonUtil.enableAllFocusOk();
-        }
         updateMessage();
     }
 
@@ -75,6 +68,13 @@ public class InputPayManaX extends InputPayMana {
         msg.append(" Paid so far.");
         if (!xCanBe0) {
             msg.append(" X Can't be 0.");
+        }
+        // Enable just cancel is full X value hasn't been paid for multiple X values
+        // or X is 0, and x can't be 0
+        if (!isPaid()) {
+            ButtonUtil.enableOnlyCancel();
+        } else {
+            ButtonUtil.enableAllFocusOk();
         }
 
         showMessage(msg.toString());
