@@ -55,6 +55,10 @@ public class TriggerSpellAbilityCast extends Trigger {
     @Override
     public final boolean performTest(final java.util.Map<String, Object> runParams2) {
         final SpellAbility spellAbility = (SpellAbility) runParams2.get("CastSA");
+        if (spellAbility == null) {
+            System.out.println("TriggerSpellAbilityCast performTest encountered spellAbility == null. runParams2 = " + runParams2);
+            return false;
+        }
         final Card cast = spellAbility.getSourceCard();
         final Game game = cast.getGame();
         final SpellAbilityStackInstance si = game.getStack().getInstanceFromSpellAbility(spellAbility);
