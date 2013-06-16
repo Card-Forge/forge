@@ -138,6 +138,11 @@ public class ComputerUtilMana {
                 for (final SpellAbility ma : saList) { 
                     if(ma.getSourceCard() == sa.getSourceCard())
                         continue;
+                    
+                    final String typeRes = cost.getSourceRestriction();
+                    if( StringUtils.isNotBlank(typeRes) && !ma.getSourceCard().isType(typeRes))
+                        continue;
+
                     if( canPayShardWithSpellAbility(toPay, ai, ma, sa, checkPlayable || !test ) ) {
                         saPayment = ma;
                         break;
@@ -461,9 +466,14 @@ public class ComputerUtilMana {
      * @return ManaCost
      */
     private static ManaCostBeingPaid calculateManaCost(final SpellAbility sa, final boolean test, final int extraMana) {
-        final ManaCost mana = sa.getPayCosts() != null ? sa.getPayCosts().getTotalMana() : ManaCost.NO_COST;
+        Cost payCosts = sa.getPayCosts();
+        final ManaCost mana = payCosts != null ? payCosts.getTotalMana() : ManaCost.NO_COST;
     
-        ManaCostBeingPaid cost = new ManaCostBeingPaid(mana);
+        String restriction = null;
+        if (payCosts != null && payCosts.getCostMana() != null) {
+            restriction = payCosts.getCostMana().getRestiction();
+        }
+        ManaCostBeingPaid cost = new ManaCostBeingPaid(mana, restriction);
         cost.applySpellCostChange(sa);
     
         final Card card = sa.getSourceCard();
