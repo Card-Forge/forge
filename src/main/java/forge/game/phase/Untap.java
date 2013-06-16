@@ -193,11 +193,11 @@ public class Untap extends Phase {
         }
 
         // other players untapping during your untap phase
-        final List<Card> cardsWithKW = CardLists.getKeyword(game.getCardsIn(ZoneType.Battlefield),
+        List<Card> cardsWithKW = CardLists.getKeyword(game.getCardsIn(ZoneType.Battlefield),
                 "CARDNAME untaps during each other player's untap step.");
-        final List<Player> otherPlayers = player.getOpponents();
-        otherPlayers.addAll(player.getAllies());
-        CardLists.filter(cardsWithKW, CardPredicates.isControlledByAnyOf(otherPlayers));
+        final List<Player> otherPlayers = new ArrayList<Player>(game.getPlayers());
+        otherPlayers.remove(player);
+        cardsWithKW = CardLists.filter(cardsWithKW, CardPredicates.isControlledByAnyOf(otherPlayers));
         for (final Card cardWithKW : cardsWithKW) {
             cardWithKW.untap();
         }
