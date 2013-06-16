@@ -319,43 +319,40 @@ public class CardPanel extends JPanel implements CardContainer {
         // + White borders for Core sets Unlimited - 9th +
         final int cornerSize = Math.max(4, Math.round(this.cardWidth * CardPanel.ROUNDED_CORNER_SIZE));
 
+        final int n2 = Math.max(1, Math.round(2 * this.cardWidth * CardPanel.SELECTED_BORDER_SIZE));
+        final int offset = this.isTapped() ? 1 : 0;
+
+        
+        if (this.getCard().isUsedToPay()) {
+            g2d.setColor(Color.magenta);
+            g2d.fillRoundRect(this.cardXOffset - n2, (this.cardYOffset - n2) + offset, this.cardWidth + (n2 * 2), this.cardHeight + (n2 * 2), cornerSize + n2, cornerSize + n2);
+        }
+
+        int n = Math.max(1, Math.round(this.cardWidth * CardPanel.SELECTED_BORDER_SIZE));
+        if( this.isSelected ) {
+            g2d.setColor(Color.green);
+            g2d.fillRoundRect(this.cardXOffset - n, (this.cardYOffset - n) + offset, this.cardWidth + (n * 2), this.cardHeight + (n * 2), cornerSize + n , cornerSize + n);
+        }
+        else {
+            n = 1;
+            g2d.setColor(Color.black);
+            g2d.fillRoundRect(this.cardXOffset - n, (this.cardYOffset - n) + offset, this.cardWidth + (n * 2), this.cardHeight + (n * 2), cornerSize + n , cornerSize + n);
+        }
+        
+        g2d.setColor(Color.black);
+
         if (this.getGameCard() != null && this.getGameCard().getImageKey() != null
                 && !this.getGameCard().getImageKey().equals("none") && !this.getGameCard().getName().equals("Morph")) {
             CardEdition ed = Singletons.getModel().getEditions().get(this.getGameCard().getCurSetCode());
 
             if (ed != null && ed.isWhiteBorder()) {
-                if (!this.isSelected) {
-                    g2d.setColor(Color.black);
-                    final int offset = this.isTapped() ? 1 : 0;
-                    for (int i = 1, n = Math.max(1, Math.round(this.cardWidth * CardPanel.SELECTED_BORDER_SIZE)); i <= n; i++) {
-                        g2d.drawRoundRect(this.cardXOffset - i, (this.cardYOffset - i) + offset,
-                                (this.cardWidth + (i * 2)) - 1, (this.cardHeight + (i * 2)) - 1, cornerSize, cornerSize);
-                    }
-                }
                 g2d.setColor(Color.white);
             } else {
                 g2d.setColor(Color.black);
             }
         }
         // - White borders for Core sets Unlimited - 9th -
-
         g2d.fillRoundRect(this.cardXOffset, this.cardYOffset, this.cardWidth, this.cardHeight, cornerSize, cornerSize);
-        if (this.getCard().isUsedToPay()) {
-            g2d.setColor(Color.decode("#FF00FF"));
-            final int offset = this.isTapped() ? 1 : 0;
-            for (int i = 1, n = Math.max(1, Math.round(2 * this.cardWidth * CardPanel.SELECTED_BORDER_SIZE)); i <= n; i++) {
-                g2d.drawRoundRect(this.cardXOffset - i, (this.cardYOffset - i) + offset,
-                        (this.cardWidth + (i * 2)) - 1, (this.cardHeight + (i * 2)) - 1, cornerSize, cornerSize);
-            }
-        }
-        else if (this.isSelected) {
-            g2d.setColor(Color.green);
-            final int offset = this.isTapped() ? 1 : 0;
-            for (int i = 1, n = Math.max(1, Math.round(this.cardWidth * CardPanel.SELECTED_BORDER_SIZE)); i <= n; i++) {
-                g2d.drawRoundRect(this.cardXOffset - i, (this.cardYOffset - i) + offset,
-                        (this.cardWidth + (i * 2)) - 1, (this.cardHeight + (i * 2)) - 1, cornerSize, cornerSize);
-            }
-        }
     }
 
     /**
