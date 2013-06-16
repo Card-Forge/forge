@@ -20,8 +20,10 @@ package forge.gui.deckeditor.controllers;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 
+import forge.Constant;
 import forge.Singletons;
 import forge.card.CardDb;
+import forge.card.CardEdition;
 import forge.control.FControl;
 import forge.deck.CardPool;
 import forge.deck.Deck;
@@ -172,13 +174,11 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> {
         CardPool side = deck.getOrCreate(DeckSection.Sideboard);
         side.addAll(this.getTableDeck().getCards());
 
-        final String landSet = IBoosterDraft.LAND_SET_CODE[0];
+        final CardEdition landSet = IBoosterDraft.LAND_SET_CODE[0];
         final int landsCount = 20;
-        side.add(CardDb.instance().getCard("Forest", landSet), landsCount);
-        side.add(CardDb.instance().getCard("Mountain", landSet), landsCount);
-        side.add(CardDb.instance().getCard("Swamp", landSet), landsCount);
-        side.add(CardDb.instance().getCard("Island", landSet), landsCount);
-        side.add(CardDb.instance().getCard("Plains", landSet), landsCount);
+        for(String landName : Constant.Color.BASIC_LANDS) {
+            side.add(CardDb.instance().getCard(landName, landSet.getCode()), landsCount);
+        }
 
         return deck;
     } // getPlayersDeck()

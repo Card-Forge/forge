@@ -18,8 +18,6 @@
 package forge;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import com.google.common.collect.ImmutableList;
 
@@ -87,7 +85,8 @@ public final class Constant {
         public static final String SNOW = "snow";
 
         /** The Basic lands. */
-        public static final List<String> BASIC_LANDS = Collections.unmodifiableList(Arrays.asList("Plains", "Island", "Swamp", "Mountain", "Forest"));
+        public static final List<String> BASIC_LANDS = ImmutableList.of("Plains", "Island", "Swamp", "Mountain", "Forest");
+        public static final List<String> SNOW_LANDS = ImmutableList.of("Snow-Covered Plains", "Snow-Covered Island", "Snow-Covered Swamp", "Snow-Covered Mountain", "Snow-Covered Forest");
     }
 
     /**

@@ -344,7 +344,6 @@ public final class CardDb implements ICardDatabase {
         }
     }
 
-
     public Predicate<? super PaperCard> wasPrintedInSets(List<String> setCodes) {
         return new PredicateExistsInSets(setCodes);
     }

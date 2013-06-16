@@ -24,7 +24,9 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 
+import forge.Singletons;
 import forge.card.CardDb;
+import forge.card.CardEdition;
 import forge.card.SealedProductTemplate;
 import forge.deck.Deck;
 import forge.deck.DeckBase;
@@ -65,7 +67,7 @@ public class CustomLimited extends DeckBase {
     private transient ItemPoolView<PaperCard> cardPool;
 
     /** The Land set code. */
-    private String landSetCode = CardDb.instance().getCard("Plains", true).getEdition();
+    private String landSetCode = CardEdition.getRandomSetWithAllBasicLands(Singletons.getModel().getEditions()).getCode();
 
     private boolean singleton; 
 

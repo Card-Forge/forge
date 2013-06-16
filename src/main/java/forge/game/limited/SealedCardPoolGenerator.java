@@ -28,7 +28,6 @@ import org.apache.commons.lang.ArrayUtils;
 
 import forge.Singletons;
 import forge.card.CardBlock;
-import forge.card.CardDb;
 import forge.card.CardEdition;
 import forge.card.IUnOpenedProduct;
 import forge.card.SealedProductTemplate;
@@ -72,7 +71,7 @@ public class SealedCardPoolGenerator {
                 // Choose number of boosters
 
                 chooseNumberOfBoosters(new UnOpenedProduct(SealedProductTemplate.genericBooster));
-                landSetCode = CardDb.instance().getCard("Plains").getEdition();
+                landSetCode = CardEdition.getRandomSetWithAllBasicLands(Singletons.getModel().getEditions()).getCode();
                 break;
                 
             case Block: 

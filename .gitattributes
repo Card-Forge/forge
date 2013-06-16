@@ -14483,7 +14483,6 @@ src/main/java/forge/game/event/package-info.java -text
 src/main/java/forge/game/limited/BoosterDeckBuilder.java -text
 src/main/java/forge/game/limited/BoosterDraft.java svneol=native#text/plain
 src/main/java/forge/game/limited/BoosterDraftAI.java svneol=native#text/plain
-src/main/java/forge/game/limited/CCnt.java svneol=native#text/plain
 src/main/java/forge/game/limited/CardRankingComparator.java -text
 src/main/java/forge/game/limited/CustomLimited.java svneol=native#text/plain
 src/main/java/forge/game/limited/DeckColors.java svneol=native#text/plain
@@ -14554,7 +14553,6 @@ src/main/java/forge/gui/UnsortedListModel.java -text
 src/main/java/forge/gui/WrapLayout.java -text
 src/main/java/forge/gui/deckeditor/CDeckEditorUI.java -text
 src/main/java/forge/gui/deckeditor/DeckImport.java -text
-src/main/java/forge/gui/deckeditor/MenuCommon.java svneol=native#text/plain
 src/main/java/forge/gui/deckeditor/SEditorIO.java -text
 src/main/java/forge/gui/deckeditor/SEditorUtil.java -text
 src/main/java/forge/gui/deckeditor/SFilterUtil.java -text

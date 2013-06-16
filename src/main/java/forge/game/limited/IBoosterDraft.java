@@ -17,6 +17,7 @@
  */
 package forge.game.limited;
 
+import forge.card.CardEdition;
 import forge.deck.Deck;
 import forge.item.PaperCard;
 import forge.item.ItemPoolView;
@@ -68,7 +69,7 @@ public interface IBoosterDraft {
     Deck[] getDecks(); // size 7, all the computers decks
 
     /** Constant <code>LandSetCode="{}"</code>. */
-    String[] LAND_SET_CODE = { "" };
+    CardEdition[] LAND_SET_CODE = { null };
 
     /**
      * Called when drafting is over - to upload picks.

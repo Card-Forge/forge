@@ -5,6 +5,7 @@ import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 
 import forge.Command;
+import forge.Constant;
 import forge.card.CardDb;
 import forge.card.CardRulesPredicates;
 import forge.deck.Deck;
@@ -83,11 +84,9 @@ public enum CDeckgen implements ICDoc {
         Iterable<PaperCard> source = Iterables.filter(CardDb.instance().getUniqueCards(), notBasicLand);
         randomDeck.getMain().addAllFlat(Aggregates.random(source, 15 * 5));
 
-        randomDeck.getMain().add("Plains", 1);
-        randomDeck.getMain().add("Island", 1);
-        randomDeck.getMain().add("Swamp", 1);
-        randomDeck.getMain().add("Mountain", 1);
-        randomDeck.getMain().add("Forest", 1);
+        for(String landName : Constant.Color.BASIC_LANDS) { 
+            randomDeck.getMain().add(landName, 1);
+        }
         randomDeck.getMain().add("Terramorphic Expanse", 1);
 
         final ACEditorBase<TItem, TModel> ed = (ACEditorBase<TItem, TModel>)

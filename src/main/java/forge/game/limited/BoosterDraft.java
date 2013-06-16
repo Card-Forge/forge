@@ -32,6 +32,7 @@ import javax.swing.JOptionPane;
 import org.apache.commons.lang.ArrayUtils;
 
 import com.google.common.base.Supplier;
+import com.google.common.collect.Iterables;
 
 import forge.Card;
 import forge.Constant.Preferences;
@@ -49,6 +50,7 @@ import forge.item.IPaperCard;
 import forge.item.ItemPool;
 import forge.item.ItemPoolView;
 import forge.properties.NewConstants;
+import forge.util.Aggregates;
 import forge.util.FileUtil;
 import forge.util.HttpUtil;
 import forge.util.storage.IStorageView;
@@ -90,7 +92,7 @@ public final class BoosterDraft implements IBoosterDraft {
             Supplier<List<PaperCard>> s = new UnOpenedProduct(SealedProductTemplate.genericBooster);
 
             for (int i = 0; i < 3; i++) this.product.add(s);
-            IBoosterDraft.LAND_SET_CODE[0] = CardDb.instance().getCard("Plains").getEdition();
+            IBoosterDraft.LAND_SET_CODE[0] = CardEdition.getRandomSetWithAllBasicLands(Singletons.getModel().getEditions());
             break;
 
         case Block: case FantasyBlock: // Draft from cards by block or set
@@ -133,7 +135,7 @@ public final class BoosterDraft implements IBoosterDraft {
                 }
             }
 
-            IBoosterDraft.LAND_SET_CODE[0] = block.getLandSet().getCode();
+            IBoosterDraft.LAND_SET_CODE[0] = block.getLandSet();
             break;
 
         case Custom:
@@ -169,7 +171,7 @@ public final class BoosterDraft implements IBoosterDraft {
             this.product.add(toAdd);
         }
 
-        IBoosterDraft.LAND_SET_CODE[0] = draft.getLandSetCode();
+        IBoosterDraft.LAND_SET_CODE[0] = Singletons.getModel().getEditions().get(draft.getLandSetCode());
     }
 
     /** Looks for res/draft/*.draft files, reads them, returns a list. */

@@ -31,10 +31,12 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
 
 import forge.Constant;
 import forge.Singletons;
 import forge.game.GameFormat;
+import forge.util.Aggregates;
 import forge.util.FileSection;
 import forge.util.FileUtil;
 import forge.util.storage.StorageReaderFolder;
@@ -326,19 +328,16 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
             }
         };
     }
+    
+    public final static CardEdition getRandomSetWithAllBasicLands(Iterable<CardEdition> allEditions) {
+        return Aggregates.random(Iterables.filter(allEditions, CardEdition.Predicates.hasBasicLands));
+    }
 
-    /**
-     * TODO: Write javadoc for this method.
-     * @return
-     */
     public int getCntBoosterPictures() {
         return boosterArts;
     }
 
-    /**
-     * TODO: Write javadoc for this method.
-     * @return
-     */
+
     public SealedProductTemplate getBoosterTemplate() {
         return boosterTpl;
     }

@@ -133,11 +133,9 @@ public final class QuestUtilCards {
 
         if (!snowLandCodes.isEmpty()) {
             String snowLandCode = Aggregates.random(snowLandCodes);
-            pool.add(db.getCard("Snow-Covered Forest", snowLandCode), nSnow);
-            pool.add(db.getCard("Snow-Covered Mountain", snowLandCode), nSnow);
-            pool.add(db.getCard("Snow-Covered Swamp", snowLandCode), nSnow);
-            pool.add(db.getCard("Snow-Covered Island", snowLandCode), nSnow);
-            pool.add(db.getCard("Snow-Covered Plains", snowLandCode), nSnow);
+            for(String landName : Constant.Color.SNOW_LANDS) {
+                pool.add(db.getCard(landName, snowLandCode), nSnow);
+            }
         }
 
         return pool;

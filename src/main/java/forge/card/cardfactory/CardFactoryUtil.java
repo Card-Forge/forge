@@ -1034,10 +1034,10 @@ public class CardFactoryUtil {
             int n = 0;
             final List<Card> someCards = new ArrayList<Card>();
             someCards.addAll(player.getCardsIn(ZoneType.Battlefield));
-            final String[] basic = { "Forest", "Plains", "Mountain", "Island", "Swamp" };
+            final List<String> basic = Constant.Color.BASIC_LANDS;
 
-            for (int i = 0; i < basic.length; i++) {
-                if (!CardLists.getType(someCards, basic[i]).isEmpty()) {
+            for (int i = 0; i < basic.size(); i++) {
+                if (!CardLists.getType(someCards, basic.get(i)).isEmpty()) {
                     n++;
                 }
             }

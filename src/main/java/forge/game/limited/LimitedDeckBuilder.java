@@ -1,7 +1,6 @@
 package forge.game.limited;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -17,9 +16,12 @@ import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
+import forge.Constant;
+import forge.Singletons;
 import forge.Constant.Preferences;
 import forge.card.CardAiHints;
 import forge.card.CardDb;
+import forge.card.CardEdition;
 import forge.card.CardRules;
 import forge.card.CardRulesPredicates;
 import forge.card.ColorSet;
@@ -164,7 +166,7 @@ public class LimitedDeckBuilder {
         addNonBasicLands();
 
         // 11. Fill up with basic lands.
-        final CCnt[] clrCnts = calculateLandNeeds();
+        final int[] clrCnts = calculateLandNeeds();
         if (landsNeeded > 0) {
             addLands(clrCnts);
         }
@@ -226,7 +228,7 @@ public class LimitedDeckBuilder {
      * @param clrCnts
      *            color counts needed
      */
-    private void fixDeckSize(final CCnt[] clrCnts) {
+    private void fixDeckSize(final int[] clrCnts) {
         while (deckList.size() > 40) {
             System.out.println("WARNING: Fixing deck size, currently " + deckList.size() + " cards.");
             final PaperCard c = deckList.get(MyRandom.getRandom().nextInt(deckList.size() - 1));
@@ -250,8 +252,8 @@ public class LimitedDeckBuilder {
             } else {
                 // if no playable cards remain fill up with basic lands
                 for (int i = 0; i < 5; i++) {
-                    if (clrCnts[i].getCount() > 0) {
-                        final PaperCard cp = getBasicLand(clrCnts[i].getColor());
+                    if (clrCnts[i] > 0) {
+                        final PaperCard cp = getBasicLand(i);
                         deckList.add(cp);
                         System.out.println(" - Added " + cp.getName() + " as last resort.");
                         break;
@@ -267,9 +269,9 @@ public class LimitedDeckBuilder {
     private void findBasicLandSets() {
         Set<String> sets = new HashSet<String>();
         for (PaperCard cp : aiPlayables) {
-            if (null != CardDb.instance().tryGetCard("Plains", cp.getEdition())) {
+            CardEdition ee = Singletons.getModel().getEditions().get(cp.edition);
+            if( !sets.contains(cp.getEdition()) && CardEdition.Predicates.hasBasicLands.apply(ee))
                 sets.add(cp.getEdition());
-            }
         }
         setsWithBasicLands.addAll(sets);
         if (setsWithBasicLands.isEmpty()) {
@@ -282,12 +284,12 @@ public class LimitedDeckBuilder {
      * 
      * @param clrCnts
      */
-    private void addLands(final CCnt[] clrCnts) {
+    private void addLands(final int[] clrCnts) {
 
         // total of all ClrCnts
         int totalColor = 0;
         for (int i = 0; i < 5; i++) {
-            totalColor += clrCnts[i].getCount();
+            totalColor += clrCnts[i];
         }
         if (totalColor == 0) {
             throw new RuntimeException("Add Lands to empty deck list!");
@@ -295,42 +297,18 @@ public class LimitedDeckBuilder {
 
         // do not update landsNeeded until after the loop, because the
         // calculation involves landsNeeded
-        int landsAdded = 0;
         for (int i = 0; i < 5; i++) {
-            if (clrCnts[i].getCount() > 0) {
+            if (clrCnts[i] > 0) {
                 // calculate number of lands for each color
-                final float p = (float) clrCnts[i].getCount() / (float) totalColor;
-                final int nLand = (int) (landsNeeded * p); // desired truncation
-                                                           // to int
+                final float p = (float) clrCnts[i] / (float) totalColor;
+                final int nLand = Math.round(landsNeeded * p); // desired truncation to int
                 if (Preferences.DEV_MODE) {
-                    System.out.println("Basics[" + clrCnts[i].getColor() + "]: " + clrCnts[i].getCount() + "/"
-                            + totalColor + " = " + p + " = " + nLand);
+                    System.out.printf("Basics[%s]: %d/%d = %f%% = %d cards", Constant.Color.BASIC_LANDS.get(i), clrCnts[i], totalColor, 100*p, nLand);
                 }
 
                 for (int j = 0; j < nLand; j++) {
-                    deckList.add(getBasicLand(clrCnts[i].getColor()));
-                    landsAdded++;
+                    deckList.add(getBasicLand(i));
                 }
-            }
-        }
-
-        // Add extra lands to get up to the right number.
-        // Start with the smallest CCnt to "even out" a little.
-        landsNeeded -= landsAdded;
-        Arrays.sort(clrCnts);
-        int n = 0;
-        while (landsNeeded > 0) {
-            if (clrCnts[n].getCount() > 0) {
-                final PaperCard cp = getBasicLand(clrCnts[n].getColor());
-                deckList.add(cp);
-                landsNeeded--;
-
-                if (Preferences.DEV_MODE) {
-                    System.out.println("AddBasics: " + cp.getName());
-                }
-            }
-            if (++n > 4) {
-                n = 0;
             }
         }
     }
@@ -341,14 +319,14 @@ public class LimitedDeckBuilder {
      * @param basicLand
      * @return card
      */
-    private PaperCard getBasicLand(String basicLand) {
+    private PaperCard getBasicLand(int basicLand) {
         String set;
         if (setsWithBasicLands.size() > 1) {
             set = setsWithBasicLands.get(MyRandom.getRandom().nextInt(setsWithBasicLands.size() - 1));
         } else {
             set = setsWithBasicLands.get(0);
         }
-        return CardDb.instance().getCard(basicLand, set);
+        return CardDb.instance().getCard(Constant.Color.BASIC_LANDS.get(basicLand), set);
     }
 
     /**
@@ -359,32 +337,19 @@ public class LimitedDeckBuilder {
      * 
      * @return CCnt
      */
-    private CCnt[] calculateLandNeeds() {
-        final CCnt[] clrCnts = { new CCnt("Plains", 0), new CCnt("Island", 0), new CCnt("Swamp", 0),
-                new CCnt("Mountain", 0), new CCnt("Forest", 0) };
+    private int[] calculateLandNeeds() {
+        final int[] clrCnts = { 0,0,0,0,0 };
 
         // count each card color using mana costs
-        for (int i = 0; i < deckList.size(); i++) {
-            final ManaCost mc = deckList.get(i).getRules().getManaCost();
+        for (PaperCard cp : deckList) {
+            final ManaCost mc = cp.getRules().getManaCost();
 
             // count each mana symbol in the mana cost
             for (ManaCostShard shard : mc.getShards()) {
-                byte mask = shard.getColorMask();
-
-                if ((mask & MagicColor.WHITE) > 0 && colors.hasWhite()) {
-                    clrCnts[0].setCount(clrCnts[0].getCount() + 1);
-                }
-                if ((mask & MagicColor.BLUE) > 0 && colors.hasBlue()) {
-                    clrCnts[1].setCount(clrCnts[1].getCount() + 1);
-                }
-                if ((mask & MagicColor.BLACK) > 0 && colors.hasBlack()) {
-                    clrCnts[2].setCount(clrCnts[2].getCount() + 1);
-                }
-                if ((mask & MagicColor.RED) > 0 && colors.hasRed()) {
-                    clrCnts[3].setCount(clrCnts[3].getCount() + 1);
-                }
-                if ((mask & MagicColor.GREEN) > 0 && colors.hasGreen()) {
-                    clrCnts[4].setCount(clrCnts[4].getCount() + 1);
+                for ( int i = 0 ; i < MagicColor.WUBRG.length; i++ ) {
+                    byte c = MagicColor.WUBRG[i];
+                    if ( shard.canBePaidWithManaOfColor(c) && colors.hasAnyColor(c))
+                        clrCnts[i]++;
                 }
             }
         }

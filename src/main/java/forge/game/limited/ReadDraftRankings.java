@@ -6,6 +6,7 @@ import java.util.Map;
 
 import com.esotericsoftware.minlog.Log;
 
+import forge.Constant;
 import forge.properties.NewConstants;
 import forge.util.FileUtil;
 
@@ -90,10 +91,8 @@ public class ReadDraftRankings {
         Double rank = null;
 
         // Basic lands should be excluded from the evaluation --BBU
-        if (cardName.equals("Island") || cardName.equals("Forest") || cardName.equals("Swamp")
-                || cardName.equals("Plains") || cardName.equals("Mountain")) {
+        if ( Constant.Color.BASIC_LANDS.contains(cardName))
             return null;
-        }
 
         if (draftRankings.containsKey(edition)) {
             String safeName = cardName.replaceAll("-", " ").replaceAll("[^A-Za-z ]", "");

@@ -637,19 +637,6 @@ public final class GameActionUtil {
      * @return the stLandManaAbilities
      */
     public static void grantBasicLandsManaAbilities(Game game) {
-        /*
-         * for future use boolean naked =
-         * AllZoneUtil.isCardInPlay("Naked Singularity"); boolean twist =
-         * AllZoneUtil.isCardInPlay("Reality Twist"); //set up what they
-         * produce produces.put("Forest", naked || twist ? "B" : "G");
-         * produces.put("Island", naked == true ? "G" : "U"); if(naked)
-         * produces.put("Mountain", "U"); else if(twist)
-         * produces.put("Mountain", "W"); else produces.put("Mountain",
-         * "R"); produces.put("Plains", naked || twist ? "R" : "W");
-         * if(naked) produces.put("Swamp", "W"); else if(twist)
-         * produces.put("Swamp", "G"); else produces.put("Swamp", "B");
-         */
-
         List<Card> lands = game.getCardsIn(ZoneType.Battlefield);
         lands = CardLists.filter(lands, Presets.LANDS);
 

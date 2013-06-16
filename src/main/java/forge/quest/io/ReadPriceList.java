@@ -24,6 +24,7 @@ import java.util.Random;
 
 import com.esotericsoftware.minlog.Log;
 
+import forge.Constant;
 import forge.properties.NewConstants;
 import forge.util.FileUtil;
 import forge.util.MyRandom;
@@ -93,11 +94,7 @@ public class ReadPriceList {
             try {
                 int val = Integer.parseInt(price.trim());
 
-                if (!(name.equals("Plains") || name.equals("Island") || name.equals("Swamp")
-                        || name.equals("Mountain") || name.equals("Forest")
-                        || name.equals("Snow-Covered Plains") || name.equals("Snow-Covered Island")
-                        || name.equals("Snow-Covered Swamp") || name.equals("Snow-Covered Mountain") || name
-                            .equals("Snow-Covered Forest"))) {
+                if (!(Constant.Color.BASIC_LANDS.contains(name) || Constant.Color.SNOW_LANDS.contains(name))) {
                     float ff = 0;
                     if (r.nextInt(100) < 90) {
                         ff = r.nextInt(10) * (float) .01;
