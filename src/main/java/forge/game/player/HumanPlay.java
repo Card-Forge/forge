@@ -283,7 +283,8 @@ public class HumanPlay {
      *            a {@link forge.Command} object.
      * @param sourceAbility TODO
      */
-    public static boolean payCostDuringAbilityResolve(final Player p, final Card source, final Cost cost, SpellAbility sourceAbility) {
+    public static boolean payCostDuringAbilityResolve(final Player p, final Card source, final Cost cost, SpellAbility sourceAbility
+            , String prompt) {
         
         // Only human player pays this way
         Card current = null; // Used in spells with RepeatEach effect to distinguish cards, Cut the Tethers
@@ -295,8 +296,6 @@ public class HumanPlay {
         if (!source.getImprinted().isEmpty()) {
             current = source.getImprinted().get(0);
         }
-        
-        String promptCurrent = current == null ? "" : "Current Card: " + current + "\r\n";
         
         final List<CostPart> parts =  cost.getCostParts();
         ArrayList<CostPart> remainingParts =  new ArrayList<CostPart>(cost.getCostParts());
@@ -451,8 +450,8 @@ public class HumanPlay {
                         }
                     }
                     if (typeChoices.size() > 1) {
-                        String prompt = "Select type counters to remove";
-                        counterType = GuiChoose.one(prompt, typeChoices);
+                        String cprompt = "Select type counters to remove";
+                        counterType = GuiChoose.one(cprompt, typeChoices);
                     } else {
                         counterType = typeChoices.get(0);
                     }
@@ -603,7 +602,10 @@ public class HumanPlay {
         if (!(costPart instanceof CostPartMana ))
             throw new RuntimeException("GameActionUtil.payCostDuringAbilityResolve - The remaining payment type is not Mana.");
     
-        String prompt = source + "\r\n" + promptCurrent;
+        if (prompt == null) {
+            String promptCurrent = current == null ? "" : "Current Card: " + current + "\r\n";
+            prompt = source + "\r\n" + promptCurrent;
+        }
         InputPayMana toSet = new InputPayManaExecuteCommands(p, prompt, cost.getCostMana().getManaToPay());
         Singletons.getControl().getInputQueue().setInputAndWait(toSet);
         return toSet.isPaid();
