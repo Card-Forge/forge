@@ -50,6 +50,7 @@ public enum SoundEffectType {
     Enchantment("enchant.wav", false),
     EndOfTurn("end_of_turn.wav", false),
     Equip("equip.wav", false),
+    Exile("exile.wav", false),
     FlipCoin("flip_coin.wav", false),
     GreenLand("green_land.wav", false),
     Instant("instant.wav", false),

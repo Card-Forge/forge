@@ -59,6 +59,7 @@ import forge.card.trigger.TriggerType;
 import forge.card.trigger.ZCTrigger;
 import forge.game.ai.ComputerUtil;
 import forge.game.event.GameEventCardDestroyed;
+import forge.game.event.GameEventCardExiled;
 import forge.game.event.GameEventCardRegenerated;
 import forge.game.event.GameEventCardSacrificed;
 import forge.game.event.GameEventGameFinished;
@@ -693,6 +694,9 @@ public class GameAction {
         }
         final PlayerZone removed = c.getOwner().getZone(ZoneType.Exile);
 
+        // play the Exile sound
+        game.fireEvent(new GameEventCardExiled());
+        
         return moveTo(removed, c);
     }
 

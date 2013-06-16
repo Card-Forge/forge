@@ -14450,6 +14450,7 @@ src/main/java/forge/game/event/GameEventCardDamaged.java -text
 src/main/java/forge/game/event/GameEventCardDestroyed.java -text
 src/main/java/forge/game/event/GameEventCardDiscarded.java -text
 src/main/java/forge/game/event/GameEventCardEquipped.java -text
+src/main/java/forge/game/event/GameEventCardExiled.java -text
 src/main/java/forge/game/event/GameEventCardRegenerated.java -text
 src/main/java/forge/game/event/GameEventCardSacrificed.java -text
 src/main/java/forge/game/event/GameEventCardTapped.java -text

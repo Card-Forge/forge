@@ -16,6 +16,7 @@ import forge.game.event.GameEventDrawCard;
 import forge.game.event.GameEventGameOutcome;
 import forge.game.event.GameEventTurnEnded;
 import forge.game.event.GameEvent;
+import forge.game.event.GameEventCardExiled;
 import forge.game.event.GameEventFlipCoin;
 import forge.game.event.GameEventLandPlayed;
 import forge.game.event.GameEventLifeLoss;
@@ -38,6 +39,7 @@ public class EventVisualizer extends IGameEventVisitor.Base<SoundEffectType> {
     public SoundEffectType visit(GameEventCardDestroyed event) { return SoundEffectType.Destroy; }
     public SoundEffectType visit(GameEventCardDiscarded event) { return SoundEffectType.Discard; }
     public SoundEffectType visit(GameEventCardEquipped event) { return SoundEffectType.Equip; }
+    public SoundEffectType visit(GameEventCardExiled event) { return SoundEffectType.Exile; }
     public SoundEffectType visit(GameEventCardRegenerated event) { return SoundEffectType.Regen; }
     public SoundEffectType visit(GameEventCardSacrificed event) { return SoundEffectType.Sacrifice; }
     public SoundEffectType visit(GameEventCounterAdded event) { return event.Amount > 0 ? SoundEffectType.AddCounter : null; }
