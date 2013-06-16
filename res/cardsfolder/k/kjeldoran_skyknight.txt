@@ -1,0 +1,9 @@
+Name:Kjeldoran Skyknight
+ManaCost:2 W
+Types:Creature Human Knight
+PT:1/1
+K:Flying
+K:First Strike
+K:Banding
+SVar:Picture:http://www.wizards.com/global/images/magic/general/kjeldoran_skyknight.jpg
+Oracle:Flying, first strike, banding (Any creatures with banding, and up to one without, can attack in a band. Bands are blocked as a group. If any creatures with banding you control are blocking or being blocked by a creature, you divide that creature's combat damage, not its controller, among any of the creatures it's being blocked by or is blocking.)

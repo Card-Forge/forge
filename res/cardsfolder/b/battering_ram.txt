@@ -1,0 +1,11 @@
+Name:Battering Ram
+ManaCost:2
+Types:Artifact Creature Construct
+PT:1/1
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | Execute$ TrigBanding | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of combat on your turn, CARDNAME gains banding until end of combat.
+SVar:TrigBanding:AB$ Pump | Cost$ 0 | KW$ Banding | UntilEndOfCombat$ True
+T:Mode$ Blocks | ValidCard$ Creature.Wall | ValidBlocked$ Card.Self | DelayedTrigger$ DelayAttackTrig | TriggerDescription$ Whenever CARDNAME becomes blocked by a Wall, destroy that Wall at end of combat.
+SVar:DelayAttackTrig:Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Player | Execute$ TrigDestroyBlocker | TriggerDescription$ Destroy blocked creature at end of combat.
+SVar:TrigDestroyBlocker:AB$ Destroy | Cost$ 0 | Defined$ TriggeredBlocker
+SVar:Picture:http://www.wizards.com/global/images/magic/general/battering_ram.jpg
+Oracle:At the beginning of combat on your turn, Battering Ram gains banding until end of combat. (Any creatures with banding, and up to one without, can attack in a band. Bands are blocked as a group. If any creatures with banding you control are being blocked by a creature, you divide that creature's combat damage, not its controller, among any of the creatures it's blocking.)\nWhenever Battering Ram becomes blocked by a Wall, destroy that Wall at end of combat.
