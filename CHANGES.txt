@@ -31,6 +31,37 @@ New Cards
 Benalish Hero
 Mindlock Orb
 Shadow of Doubt
+Baton of Morale
+Battering Ram
+Beast Walkers
+Benalish Infantry
+Cooperation
+Dire Wolves
+Errand of Duty
+Formation
+Fortified Area
+Helm of Chatzuk
+Icatian Infantry
+Icatian Phalanx
+Kjeldoran Escort
+Kjeldoran Knight
+Kjeldoran Phalanx
+Kjeldoran Skycaptain
+Kjeldoran Skyknight
+Kjeldoran Warrior
+Knights of Thorn
+Mesa Pegasus
+Nature's Blessing
+Noble Elephant
+Pikemen
+Shield Bearer
+Soraya the Falconer
+Teremko Griffin
+Timber Wolves
+Volunteer Reserves
+Wall of Shields
+War Elephant
+Urza's Avenger
 
 
 --------------------
@@ -96,6 +127,10 @@ Vial of Poison
 Windreader Sphinx
 Woodborn Behemoth
 Young Pyromancer
+
+Messenger Drake
+Seacoast Drake
+Warden of Evos Isle
 
 
 ------------
