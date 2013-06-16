@@ -272,6 +272,9 @@ public class Combat {
      * @return a {@link java.lang.Object} object.
      */
     public final GameEntity getDefenderByAttacker(final Card c) {
+        if (!this.attackerToBandMap.containsKey(c)) {
+            return null;
+        }
         return this.attackerToBandMap.get(c).getDefender();
     }
 

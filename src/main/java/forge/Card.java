@@ -6654,10 +6654,11 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     public final boolean isAttacking(GameEntity ge) {
         Combat combat = getGame().getCombat();
-        if (!combat.isAttacking(this)) {
+        GameEntity defender = combat.getDefenderByAttacker(this);
+        if (!combat.isAttacking(this) || defender == null) {
             return false;
         }
-        return combat.getDefenderByAttacker(this).equals(ge);
+        return defender.equals(ge);
     }
 
     /**
