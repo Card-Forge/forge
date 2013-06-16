@@ -641,7 +641,7 @@ public class Combat {
             blockers = this.attackerDamageAssignmentOrder.get(attacker);
             assignedDamage = true;
             // If the Attacker is unblocked, or it's a trampler and has 0 blockers, deal damage to defender
-            if (blockers.isEmpty()) {
+            if (blockers == null || blockers.isEmpty()) {
                 if (trampler || !band.getBlocked()) {
                     this.addDefendingDamage(damageDealt, attacker);
                 } // No damage happens if blocked but no blockers left
