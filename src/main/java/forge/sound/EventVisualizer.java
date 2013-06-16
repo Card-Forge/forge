@@ -7,13 +7,11 @@ import forge.game.event.GameEventBlockerAssigned;
 import forge.game.event.GameEventCardChangeZone;
 import forge.game.event.GameEventCardDamaged;
 import forge.game.event.GameEventCardDestroyed;
-import forge.game.event.GameEventCardDiscarded;
 import forge.game.event.GameEventCardEquipped;
 import forge.game.event.GameEventCardRegenerated;
 import forge.game.event.GameEventCardSacrificed;
 import forge.game.event.GameEventCounterAdded;
 import forge.game.event.GameEventCounterRemoved;
-import forge.game.event.GameEventDrawCard;
 import forge.game.event.GameEventGameOutcome;
 import forge.game.event.GameEventTurnEnded;
 import forge.game.event.GameEvent;
@@ -38,14 +36,21 @@ public class EventVisualizer extends IGameEventVisitor.Base<SoundEffectType> {
     public SoundEffectType visit(GameEventBlockerAssigned event) { return SoundEffectType.Block; }
     public SoundEffectType visit(GameEventCardDamaged event) { return SoundEffectType.Damage; }
     public SoundEffectType visit(GameEventCardDestroyed event) { return SoundEffectType.Destroy; }
-    public SoundEffectType visit(GameEventCardDiscarded event) { return SoundEffectType.Discard; }
     public SoundEffectType visit(GameEventCardEquipped event) { return SoundEffectType.Equip; }
-    public SoundEffectType visit(GameEventCardChangeZone event) { return event.to.getZoneType() == ZoneType.Exile ? SoundEffectType.Exile : null; }
+    public SoundEffectType visit(GameEventCardChangeZone event) {
+        ZoneType from = event.from.getZoneType();
+        ZoneType to = event.to.getZoneType();
+        if( from == ZoneType.Library && to == ZoneType.Hand)
+            return SoundEffectType.Draw; 
+        if( from == ZoneType.Hand && (to == ZoneType.Graveyard || to == ZoneType.Library) )
+            return SoundEffectType.Discard;
+        
+        return to == ZoneType.Exile ? SoundEffectType.Exile : null; 
+    }
     public SoundEffectType visit(GameEventCardRegenerated event) { return SoundEffectType.Regen; }
     public SoundEffectType visit(GameEventCardSacrificed event) { return SoundEffectType.Sacrifice; }
     public SoundEffectType visit(GameEventCounterAdded event) { return event.Amount > 0 ? SoundEffectType.AddCounter : null; }
     public SoundEffectType visit(GameEventCounterRemoved event) { return event.Amount > 0 ? SoundEffectType.RemoveCounter : null; }
-    public SoundEffectType visit(GameEventDrawCard event) { return SoundEffectType.Draw; }
     public SoundEffectType visit(GameEventTurnEnded event) { return SoundEffectType.EndOfTurn; }
     public SoundEffectType visit(GameEventFlipCoin event) { return SoundEffectType.FlipCoin; }
     public SoundEffectType visit(GameEventLifeLoss event) { return SoundEffectType.LifeLoss; }

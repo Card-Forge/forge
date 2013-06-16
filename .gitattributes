@@ -14449,14 +14449,12 @@ src/main/java/forge/game/event/GameEventBlockersDeclared.java -text
 src/main/java/forge/game/event/GameEventCardChangeZone.java -text
 src/main/java/forge/game/event/GameEventCardDamaged.java -text
 src/main/java/forge/game/event/GameEventCardDestroyed.java -text
-src/main/java/forge/game/event/GameEventCardDiscarded.java -text
 src/main/java/forge/game/event/GameEventCardEquipped.java -text
 src/main/java/forge/game/event/GameEventCardRegenerated.java -text
 src/main/java/forge/game/event/GameEventCardSacrificed.java -text
 src/main/java/forge/game/event/GameEventCardTapped.java -text
 src/main/java/forge/game/event/GameEventCounterAdded.java -text
 src/main/java/forge/game/event/GameEventCounterRemoved.java -text
-src/main/java/forge/game/event/GameEventDrawCard.java -text
 src/main/java/forge/game/event/GameEventFlipCoin.java -text
 src/main/java/forge/game/event/GameEventGameFinished.java -text
 src/main/java/forge/game/event/GameEventGameOutcome.java -text

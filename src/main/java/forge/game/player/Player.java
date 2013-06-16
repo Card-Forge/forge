@@ -56,8 +56,6 @@ import forge.game.GameActionUtil;
 import forge.game.Game;
 import forge.game.GameAge;
 import forge.game.GlobalRuleChange;
-import forge.game.event.GameEventCardDiscarded;
-import forge.game.event.GameEventDrawCard;
 import forge.game.event.GameEventLandPlayed;
 import forge.game.event.GameEventLifeLoss;
 import forge.game.event.GameEventMulligan;
@@ -1262,10 +1260,6 @@ public class Player extends GameEntity implements Comparable<Player> {
     
             drawn.addAll(this.doDraw());
         }
-    
-        // Play the Draw sound
-        game.fireEvent(new GameEventDrawCard());
-    
         return drawn;
     }
 
@@ -1604,13 +1598,11 @@ public class Player extends GameEntity implements Comparable<Player> {
         if (discardToTopOfLibrary) {
             game.getAction().moveToLibrary(c, 0);
             // Play the Discard sound
-            game.fireEvent(new GameEventCardDiscarded());
             this.numDiscardedThisTurn++;
         } else {
             game.getAction().moveToGraveyard(c);
 
             // Play the Discard sound
-            game.fireEvent(new GameEventCardDiscarded());
             this.numDiscardedThisTurn++;
         }
 
