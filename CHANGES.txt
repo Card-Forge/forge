@@ -62,6 +62,8 @@ Volunteer Reserves
 Wall of Shields
 War Elephant
 Urza's Avenger
+Darksteel Garrison
+Pulmonic Sliver
 
 
 --------------------
