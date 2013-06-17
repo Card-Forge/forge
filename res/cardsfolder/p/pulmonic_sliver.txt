@@ -1,0 +1,11 @@
+Name:Pulmonic Sliver
+ManaCost:3 W W
+Types:Creature Sliver
+PT:3/3
+S:Mode$ Continuous | Affected$ Creature.Sliver | AddKeyword$ Flying | Description$ All Sliver creatures have flying.
+S:Mode$ Continuous | Affected$ Card.Sliver | AddReplacementEffects$ PulmonicMoveToLibrary | AddSVar$ PulmonicSliverRep | Description$ All Slivers have "If this permanent would be put into a graveyard, you may put it on top of its owner's library instead."
+SVar:PulmonicMoveToLibrary:Event$ Moved | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | ReplaceWith$ PulmonicSliverRep | Optional$ True | Description$ If CARDNAME would die, you may put it on the top of its owner's library instead.
+SVar:PulmonicSliverRep:DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Library | LibraryPosition$ 0 | Defined$ ReplacedCard
+SVar:PlayMain1:TRUE
+SVar:Picture:http://www.wizards.com/global/images/magic/general/pulmonic_sliver.jpg
+Oracle:All Sliver creatures have flying.\nAll Slivers have "If this permanent would be put into a graveyard, you may put it on top of its owner's library instead."

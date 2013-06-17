@@ -32,13 +32,10 @@ import javax.swing.JOptionPane;
 import org.apache.commons.lang.ArrayUtils;
 
 import com.google.common.base.Supplier;
-import com.google.common.collect.Iterables;
-
 import forge.Card;
 import forge.Constant.Preferences;
 import forge.Singletons;
 import forge.card.CardBlock;
-import forge.card.CardDb;
 import forge.card.CardEdition;
 import forge.card.IUnOpenedProduct;
 import forge.card.SealedProductTemplate;
@@ -50,7 +47,6 @@ import forge.item.IPaperCard;
 import forge.item.ItemPool;
 import forge.item.ItemPoolView;
 import forge.properties.NewConstants;
-import forge.util.Aggregates;
 import forge.util.FileUtil;
 import forge.util.HttpUtil;
 import forge.util.storage.IStorageView;

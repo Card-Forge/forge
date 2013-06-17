@@ -157,7 +157,7 @@ public class StaticAbility {
 
         if (this.params.containsKey("AddKeyword") || this.params.containsKey("AddAbility")
                 || this.params.containsKey("AddTrigger") || this.params.containsKey("RemoveTriggers")
-                || this.params.containsKey("RemoveKeyword")) {
+                || this.params.containsKey("RemoveKeyword") || this.params.containsKey("AddReplacementEffects")) {
             return 7; // Layer 6 (dependent)
         }
 

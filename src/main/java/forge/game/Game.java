@@ -70,7 +70,7 @@ public class Game {
     public final MagicStack stack;
     private final StaticEffects staticEffects = new StaticEffects();
     private final TriggerHandler triggerHandler = new TriggerHandler(this);
-    private final ReplacementHandler replacementHandler = new ReplacementHandler();
+    private final ReplacementHandler replacementHandler = new ReplacementHandler(this);
     private Combat combat = new Combat();
     private final EventBus events = new EventBus();
     private final GameLog gameLog = new GameLog();

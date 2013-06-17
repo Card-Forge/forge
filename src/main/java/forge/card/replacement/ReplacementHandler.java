@@ -43,6 +43,14 @@ import forge.util.FileSection;
  * 
  */
 public class ReplacementHandler {
+    private final Game game;
+    /**
+     * ReplacementHandler.
+     * @param gameState
+     */
+    public ReplacementHandler(Game gameState) {
+        game = gameState;
+    }
 
     //private final List<ReplacementEffect> tmpEffects = new ArrayList<ReplacementEffect>();
 
@@ -280,5 +288,25 @@ public class ReplacementHandler {
         }
 
         return ret;
+    }
+
+    /**
+     * TODO: Write javadoc for this method.
+     */
+    public void cleanUpTemporaryReplacements() {
+         final List<Card> absolutelyAllCards = game.getCardsInGame();
+         for (final Card c : absolutelyAllCards) {
+             for (int i = 0; i < c.getReplacementEffects().size(); i++) {
+                if (c.getReplacementEffects().get(i).isTemporary()) {
+                     c.getReplacementEffects().remove(i);
+                     i--;
+                }
+             }
+        }
+        for (final Card c : absolutelyAllCards) {
+             for (int i = 0; i < c.getReplacementEffects().size(); i++) {
+                 c.getReplacementEffects().get(i).setTemporarilySuppressed(false);
+             }
+        }
     }
 }

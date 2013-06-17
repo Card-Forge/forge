@@ -797,6 +797,7 @@ public class GameAction {
         // remove old effects
         game.getStaticEffects().clearStaticEffects();
         game.getTriggerHandler().cleanUpTemporaryTriggers();
+        game.getReplacementHandler().cleanUpTemporaryReplacements();
 
         // search for cards with static abilities
         final List<Card> allCards = game.getCardsInGame();

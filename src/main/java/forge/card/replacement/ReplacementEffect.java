@@ -247,4 +247,27 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
             return "";
         }
     }
+
+
+    /** The temporary. */
+    private boolean temporary = false;
+
+    /**
+     * Sets the temporary.
+     * 
+     * @param temp
+     *            the new temporary
+     */
+    public final void setTemporary(final boolean temp) {
+        this.temporary = temp;
+    }
+
+    /**
+     * Checks if is temporary.
+     * 
+     * @return true, if is temporary
+     */
+    public final boolean isTemporary() {
+        return this.temporary;
+    }
 }

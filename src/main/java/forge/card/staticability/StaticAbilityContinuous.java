@@ -34,6 +34,8 @@ import forge.card.TriggerReplacementBase;
 import forge.card.ability.AbilityFactory;
 import forge.card.ability.AbilityUtils;
 import forge.card.cardfactory.CardFactoryUtil;
+import forge.card.replacement.ReplacementEffect;
+import forge.card.replacement.ReplacementHandler;
 import forge.card.spellability.AbilityActivated;
 import forge.card.spellability.SpellAbility;
 import forge.card.trigger.Trigger;
@@ -86,6 +88,7 @@ public class StaticAbilityContinuous {
         String[] addHiddenKeywords = null;
         String[] removeKeywords = null;
         String[] addAbilities = null;
+        String[] addReplacements = null;
         String[] addSVars = null;
         String[] addTypes = null;
         String[] removeTypes = null;
@@ -184,6 +187,14 @@ public class StaticAbilityContinuous {
                 sVars[i] = hostCard.getSVar(sVars[i]);
             }
             addAbilities = sVars;
+        }
+
+        if (params.containsKey("AddReplacementEffects")) {
+            final String[] sVars = params.get("AddReplacementEffects").split(" & ");
+            for (int i = 0; i < sVars.length; i++) {
+                sVars[i] = hostCard.getSVar(sVars[i]);
+            }
+            addReplacements = sVars;
         }
 
         if (params.containsKey("AddSVar")) {
@@ -417,6 +428,14 @@ public class StaticAbilityContinuous {
                 }
             }
 
+            // add Replacement effects
+            if (addReplacements != null) {
+                for (String rep : addReplacements) {
+                    final ReplacementEffect actualRep = ReplacementHandler.parseReplacement(rep, affectedCard);
+                    affectedCard.addReplacementEffect(actualRep).setTemporary(true);;
+                }
+            }
+            
             // add Types
             if ((addTypes != null) || (removeTypes != null)) {
                 affectedCard.addChangedCardTypes(addTypes, removeTypes, removeSuperTypes, removeCardTypes,
