@@ -28,9 +28,11 @@ import java.util.concurrent.LinkedBlockingDeque;
 
 
 import com.esotericsoftware.minlog.Log;
+import com.google.common.collect.Iterables;
 
 import forge.Card;
 import forge.CardLists;
+import forge.CardPredicates;
 import forge.Command;
 import forge.FThreads;
 import forge.Singletons;
@@ -338,7 +340,9 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
                 // The ability is added to stack HERE
                 si = this.push(sp);
                 
-                if (sp.isSpell() && sp.getSourceCard().hasStartOfKeyword("Replicate")) {
+                if (sp.isSpell() && (sp.getSourceCard().hasStartOfKeyword("Replicate")
+                        || Iterables.any(sp.getActivatingPlayer().getCardsIn(ZoneType.Battlefield),
+                                CardPredicates.hasKeyword("Each instant and sorcery spell you cast has replicate. The replicate cost is equal to its mana cost.")))) {
                     int magnitude = 0;
                     // TODO: convert multikicker/replicate support in abCost so this
                     // doesn't happen here
