@@ -25,6 +25,7 @@ import forge.card.cost.CostDamage;
 import forge.card.cost.CostDiscard;
 import forge.card.cost.CostDraw;
 import forge.card.cost.CostExile;
+import forge.card.cost.CostGainLife;
 import forge.card.cost.CostMill;
 import forge.card.cost.CostPart;
 import forge.card.cost.CostPartMana;
@@ -303,7 +304,7 @@ public class HumanPlay {
         if (!parts.isEmpty()) {
             costPart = parts.get(0);
         }
-        final String orString = sourceAbility == null ? "" : " (or: " + sourceAbility.getStackDescription() + ")";
+        final String orString = prompt != null ? "" : " (or: " + sourceAbility.getStackDescription() + ")";
         
         if (parts.isEmpty() || costPart.getAmount().equals("0")) {
             return GuiDialog.confirm(source, "Do you want to pay 0?" + orString);
@@ -342,7 +343,7 @@ public class HumanPlay {
 
                 sb.append("Do you want to ");
                 sb.append(res.contains(p) ? "" : "let that player ");
-                sb.append(amount);
+                sb.append("draw " + amount);
                 sb.append(" card(s)?" + orString);
 
                 if (!GuiDialog.confirm(source, sb.toString())) {
@@ -351,6 +352,12 @@ public class HumanPlay {
 
                 for (Player player : res) {
                     player.drawCards(amount);
+                }
+            }
+
+            else if (part instanceof CostGainLife) {
+                if (!part.payHuman(sourceAbility, p.getGame())) {
+                    return false;
                 }
             }
 

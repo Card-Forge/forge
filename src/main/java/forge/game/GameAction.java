@@ -533,7 +533,7 @@ public class GameAction {
         final Ability recoverAbility = new Ability(recoverable, ManaCost.ZERO) {
             @Override
             public void resolve() {
-                boolean hasPaid = recoverable.getController().getController().payManaOptional(recoverable, cost, sb.toString(), ManaPaymentPurpose.Recover);
+                boolean hasPaid = recoverable.getController().getController().payManaOptional(recoverable, cost, this, sb.toString(), ManaPaymentPurpose.Recover);
                 
                 if (hasPaid)
                     moveToHand(recoverable);

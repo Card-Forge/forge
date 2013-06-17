@@ -979,7 +979,7 @@ public class CombatUtil {
         }
         
         boolean isFree = attackCost.getTotalMana().isZero() && attackCost.isOnlyManaCost(); // true if needless to pay
-        return isFree || c.getController().getController().payManaOptional(c, attackCost, "Pay additional cost to declare " + c + " an attacker", ManaPaymentPurpose.DeclareAttacker);
+        return isFree || c.getController().getController().payManaOptional(c, attackCost, null, "Pay additional cost to declare " + c + " an attacker", ManaPaymentPurpose.DeclareAttacker);
     }
 
     /**

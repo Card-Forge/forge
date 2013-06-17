@@ -595,7 +595,7 @@ public class PhaseHandler implements java.io.Serializable {
         
         boolean hasPaid = blockCost.getTotalMana().isZero() && blockCost.isOnlyManaCost(); // true if needless to pay
         if (!hasPaid) { 
-            hasPaid = blocker.getController().getController().payManaOptional(blocker, blockCost, "Pay cost to declare " + blocker + " a blocker", ManaPaymentPurpose.DeclareBlocker);
+            hasPaid = blocker.getController().getController().payManaOptional(blocker, blockCost, null, "Pay cost to declare " + blocker + " a blocker", ManaPaymentPurpose.DeclareBlocker);
         }
         return hasPaid;
     }

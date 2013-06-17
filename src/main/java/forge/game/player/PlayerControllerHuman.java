@@ -585,8 +585,8 @@ public class PlayerControllerHuman extends PlayerController {
      * @see forge.game.player.PlayerController#payManaOptional(forge.Card, forge.card.cost.Cost)
      */
     @Override
-    public boolean payManaOptional(Card c, Cost cost, String prompt, ManaPaymentPurpose purpose) {
-        return HumanPlay.payCostDuringAbilityResolve(player, c, cost, null, prompt);
+    public boolean payManaOptional(Card c, Cost cost, SpellAbility sa, String prompt, ManaPaymentPurpose purpose) {
+        return HumanPlay.payCostDuringAbilityResolve(player, c, cost, sa, prompt);
     }
 
 

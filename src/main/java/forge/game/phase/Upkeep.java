@@ -171,7 +171,7 @@ public class Upkeep extends Phase {
                     @Override
                     public void resolve() {
                         Cost cost = c.getEchoCost();
-                        boolean hasPaid = c.getController().getController().payManaOptional(c, cost, "Echo for " + c, ManaPaymentPurpose.Echo);
+                        boolean hasPaid = c.getController().getController().payManaOptional(c, cost, this, "Echo for " + c, ManaPaymentPurpose.Echo);
                         
                         if (!hasPaid)
                             game.getAction().sacrifice(c, this);;
@@ -262,7 +262,7 @@ public class Upkeep extends Phase {
                     final Ability upkeepAbility = new Ability(c, ManaCost.ZERO) {
                         @Override
                         public void resolve() {
-                            boolean isPaid = controller.getController().payManaOptional(c, upkeepCost, "Cumulative upkeep for " + c, ManaPaymentPurpose.CumulativeUpkeep);
+                            boolean isPaid = controller.getController().payManaOptional(c, upkeepCost, this, "Cumulative upkeep for " + c, ManaPaymentPurpose.CumulativeUpkeep);
                             final HashMap<String, Object> runParams = new HashMap<String, Object>();
                             runParams.put("CumulativeUpkeepPaid", (Boolean) isPaid);
                             runParams.put("Card", this.getSourceCard());

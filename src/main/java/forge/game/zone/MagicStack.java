@@ -331,7 +331,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
                     do {
                         int mkMagnitude = sp.getSourceCard().getKickerMagnitude();
                         String prompt = String.format("Multikicker for %s\r\nTimes Kicked: %d\r\n", sp.getSourceCard(), mkMagnitude );
-                        hasPaid = activating.getController().payManaOptional(sp.getSourceCard(), costMultikicker, prompt, ManaPaymentPurpose.Multikicker);
+                        hasPaid = activating.getController().payManaOptional(sp.getSourceCard(), costMultikicker, sp, prompt, ManaPaymentPurpose.Multikicker);
                         if( hasPaid )
                             sp.getSourceCard().addMultiKickerMagnitude(1);
                     } while( hasPaid );
@@ -348,12 +348,12 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
                     // doesn't happen here
                     
                     final Player activating = sp.getActivatingPlayer();
-                    final Cost costMultikicker = new Cost(sp.getPayCosts().getTotalMana(), false);
+                    final Cost costReplicate = new Cost(sp.getPayCosts().getTotalMana(), false);
                     boolean hasPaid = false;
                     
                     do {
                         String prompt = String.format("Replicate for %s\r\nTimes Replicated: %d\r\n", sp.getSourceCard(), magnitude);
-                        hasPaid = activating.getController().payManaOptional(sp.getSourceCard(), costMultikicker, prompt, ManaPaymentPurpose.Replicate);
+                        hasPaid = activating.getController().payManaOptional(sp.getSourceCard(), costReplicate, sp, prompt, ManaPaymentPurpose.Replicate);
                         if( hasPaid )
                             magnitude++;
                     } while( hasPaid );

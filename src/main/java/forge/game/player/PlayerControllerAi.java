@@ -335,7 +335,7 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public boolean payManaOptional(Card c, Cost cost, String prompt, ManaPaymentPurpose purpose) {
+    public boolean payManaOptional(Card c, Cost cost, SpellAbility sa, String prompt, ManaPaymentPurpose purpose) {
         final Ability ability = new AbilityStatic(c, cost, null) { @Override public void resolve() {} };
         ability.setActivatingPlayer(c.getController());
 
