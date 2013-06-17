@@ -93,8 +93,8 @@ public class AttachEffect extends SpellAbilityEffect {
                 handleAura(card, c);
             } else if (card.isEquipment()) {
                 card.equipCard(c);
-                // else if (card.isFortification())
-                // card.fortifyCard(c);
+            } else if (card.isFortification()) {
+                card.fortifyCard(c);
             }
         } else if (o instanceof Player) {
             // Currently, a few cards can enchant players

@@ -2395,6 +2395,7 @@ res/cardsfolder/d/darksteel_citadel.txt svneol=native#text/plain
 res/cardsfolder/d/darksteel_colossus.txt svneol=native#text/plain
 res/cardsfolder/d/darksteel_forge.txt svneol=native#text/plain
 res/cardsfolder/d/darksteel_gargoyle.txt svneol=native#text/plain
+res/cardsfolder/d/darksteel_garrison.txt -text
 res/cardsfolder/d/darksteel_ingot.txt svneol=native#text/plain
 res/cardsfolder/d/darksteel_juggernaut.txt svneol=native#text/plain
 res/cardsfolder/d/darksteel_myr.txt svneol=native#text/plain

@@ -303,8 +303,11 @@ public class Untap extends Phase {
                     if (list.contains(c.getEquippingCard())) {
                         continue;
                     }
+                } else if (c.isFortification() && c.isFortifying()) {
+                    if (list.contains(c.getFortifyingCard())) {
+                        continue;
+                    }
                 }
-                // TODO: Fortification
                 c.phase();
             }
         }

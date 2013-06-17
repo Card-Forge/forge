@@ -26,7 +26,10 @@ public class UnattachAllEffect extends SpellAbilityEffect {
                 if (cardToUnattach.isEquipping() && c.getEquippedBy().contains(cardToUnattach)) {
                     cardToUnattach.unEquipCard(cardToUnattach.getEquipping().get(0));
                 }
-                //TODO - unfortify would also be handled here
+            } else if (cardToUnattach.isFortification()) {
+                if (cardToUnattach.isFortifying() && c.getFortifiedBy().contains(cardToUnattach)) {
+                    cardToUnattach.unFortifyCard(cardToUnattach.getFortifying().get(0));
+                }
             }
         } else if (o instanceof Player) {
             final Player p = (Player) o;

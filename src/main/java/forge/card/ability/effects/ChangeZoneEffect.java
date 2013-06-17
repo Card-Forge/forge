@@ -481,12 +481,18 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                                         tgtC.removeEnchanting(oldEnchanted);
                                     }
                                     tgtC.enchantEntity(attachedTo);
-                                } else { //Equipment
+                                } else if (tgtC.isEquipment()) { //Equipment
                                     if (tgtC.isEquipping()) {
                                         final Card oldEquiped = tgtC.getEquippingCard();
                                         tgtC.removeEquipping(oldEquiped);
                                     }
                                     tgtC.equipCard(attachedTo);
+                                } else { // fortification
+                                    if (tgtC.isFortifying()) {
+                                        final Card oldFortified = tgtC.getFortifyingCard();
+                                        tgtC.removeFortifying(oldFortified);
+                                    }
+                                    tgtC.fortifyCard(attachedTo);
                                 }
                             } else { // When it should enter the battlefield attached to an illegal permanent it fails
                                 continue;
@@ -815,12 +821,18 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                                     c.removeEnchanting(oldEnchanted);
                                 }
                                 c.enchantEntity(attachedTo);
-                            } else { //Equipment
+                            } else if (c.isEquipment()) { //Equipment
                                 if (c.isEquipping()) {
                                     final Card oldEquiped = c.getEquippingCard();
                                     c.removeEquipping(oldEquiped);
                                 }
                                 c.equipCard(attachedTo);
+                            } else {
+                                if (c.isFortifying()) {
+                                    final Card oldFortified = c.getFortifyingCard();
+                                    c.removeFortifying(oldFortified);
+                                }
+                                c.fortifyCard(attachedTo);
                             }
                         } else { // When it should enter the battlefield attached to an illegal permanent it fails
                             continue;

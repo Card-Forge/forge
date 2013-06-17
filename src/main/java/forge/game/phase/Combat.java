@@ -473,6 +473,8 @@ public class Combat {
             attacker = source.getEnchantingCard();
         } else if (source.isEquipment()) {
             attacker = source.getEquippingCard();
+        } else if (source.isFortification()) {
+            attacker = source.getFortifyingCard();
         }
 
         // return the corresponding defender

@@ -193,8 +193,9 @@ w_1_1_bird_rtr.jpg                     http://www.cardforge.org/fpics/tokens/RTR
 w_1_1_citizen.jpg                      http://www.cardforge.org/fpics/tokens/w_1_1_citizen.jpg
 w_1_1_goldmeadow_harrier.jpg           http://www.cardforge.org/fpics/tokens/w_1_1_goldmeadow_harrier.jpg
 w_1_1_human_dka.jpg                    http://www.cardforge.org/fpics/tokens/w_1_1_human_dka.jpg 
-w_1_1_human_avr.jpg                    http://www.cardforge.org/fpics/tokens/w_1_1_human_avr.jpg 
+w_1_1_human_avr.jpg                    http://www.cardforge.org/fpics/tokens/w_1_1_human_avr.jpg
 w_1_1_kithkin_soldier.jpg              http://www.cardforge.org/fpics/tokens/w_1_1_kithkin_soldier.jpg
+w_1_1_knight.jpg                       http://www.cardforge.org/fpics/tokens/w_1_1_knight.jpg
 w_1_1_kor_soldier.jpg                  http://www.cardforge.org/fpics/tokens/w_1_1_kor_soldier.jpg
 w_1_1_pegasus.jpg                      http://www.cardforge.org/fpics/tokens/w_1_1_pegasus.jpg
 w_1_1_soldier.jpg                      http://www.cardforge.org/fpics/tokens/w_1_1_soldier.jpg
@@ -238,4 +239,3 @@ morph.jpg                              http://www.cardforge.org/fpics/effects/mo
 # //These tokens are not currently used by any cards in Forge, but links provided should they be scripted so the correct name is used:
 # //g_1_1_wolves_of_the_hunt.jpg           http://www.cardforge.org/fpics/tokens/g_1_1_wolves_of_the_hunt.jpg           [LEG] Master of the Hunt
 # //rg_1_1_goblin_warrior.jpg              http://www.cardforge.org/fpics/tokens/rg_1_1_goblin_warrior.jpg              [SHM] Wort, the Raidmother
-# //w_1_1_knight.jpg                       http://www.cardforge.org/fpics/tokens/w_1_1_knight.jpg                       [ALL] Errand of Duty

@@ -147,6 +147,8 @@ public final class CardUtil {
         newCopy.setEnchantedBy(new ArrayList<Card> (in.getEnchantedBy()));
         newCopy.setEquipping(new ArrayList<Card> (in.getEquipping()));
         newCopy.setEquippedBy(new ArrayList<Card> (in.getEquippedBy()));
+        newCopy.setFortifying(new ArrayList<Card> (in.getFortifying()));
+        newCopy.setFortifiedBy(new ArrayList<Card> (in.getFortifiedBy()));
         newCopy.setClones(in.getClones());
         newCopy.setHaunting(in.getHaunting());
         for (final Card haunter : in.getHauntedBy()) {

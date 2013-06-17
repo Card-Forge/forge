@@ -589,11 +589,23 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
                     }
                 }
             }
-    
+
+            if (card.isFortified()) {
+                final ArrayList<Card> fortifications = card.getFortifiedBy();
+                for (final Card e : fortifications) {
+                    final forge.view.arcane.CardPanel cardE = getCardPanel(e.getUniqueNumber());
+                    if (cardE != null) {
+                        toPanel.getAttachedPanels().add(cardE);
+                    }
+                }
+            }
+
             if (card.isEnchantingCard()) {
                 toPanel.setAttachedToPanel(getCardPanel(card.getEnchantingCard().getUniqueNumber()));
             } else if (card.isEquipping()) {
                 toPanel.setAttachedToPanel(getCardPanel(card.getEquipping().get(0).getUniqueNumber()));
+            } else if (card.isFortifying()) {
+                toPanel.setAttachedToPanel(getCardPanel(card.getFortifying().get(0).getUniqueNumber()));
             } else {
                 toPanel.setAttachedToPanel(null);
             }

@@ -221,6 +221,15 @@ public final class CardPredicates {
             }
         };
         /**
+         * a Predicate<Card> to get all fortification.
+         */
+        public static final Predicate<Card> Fortification = new Predicate<Card>() {
+            @Override
+            public boolean apply(Card c) {
+                return c.isFortification();
+            }
+        };
+        /**
          * a Predicate<Card> to get all unenchanted cards in a list.
          */
         public static final Predicate<Card> UNENCHANTED = new Predicate<Card>() {

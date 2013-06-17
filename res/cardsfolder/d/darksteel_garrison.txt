@@ -1,0 +1,9 @@
+Name:Darksteel Garrison
+ManaCost:2
+Types:Artifact Fortification
+K:Fortify 3
+S:Mode$ Continuous | Affected$ Land.FortifiedBy | AddKeyword$ Indestructible |  Description$ Fortified land is indestructible.
+T:Mode$ Taps | ValidCard$ Land.FortifiedBy | Execute$ TrigPump | TriggerDescription$ Whenever fortified land becomes tapped, target creature gets +1/+1 until end of turn.
+SVar:TrigPump:AB$ Pump | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ 1 | NumDef$ 1
+SVar:Picture:http://www.wizards.com/global/images/magic/general/darksteel_garrison.jpg
+Oracle:Fortified land is indestructible.\nWhenever fortified land becomes tapped, target creature gets +1/+1 until end of turn.\nFortify {3} ({3}: Attach to target land you control. Fortify only as a sorcery. This card enters the battlefield unattached and stays on the battlefield if the land leaves.)

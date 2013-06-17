@@ -107,6 +107,8 @@ public class CardFactory {
         // I'm not sure if we really should be copying enchant/equip stuff over.
         out.setEquipping(in.getEquipping());
         out.setEquippedBy(in.getEquippedBy());
+        out.setFortifying(in.getFortifying());
+        out.setFortifiedBy(in.getFortifiedBy());
         out.setEnchantedBy(in.getEnchantedBy());
         out.setEnchanting(in.getEnchanting());
         out.setClones(in.getClones());

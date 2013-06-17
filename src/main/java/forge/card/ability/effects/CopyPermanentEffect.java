@@ -235,8 +235,14 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
                                 } else {//can't enchant
                                     continue;
                                 }
-                            } else { //Equipment
-                                copy.equipCard(attachedTo);
+                            } else if (copy.isEquipment()) { //Equipment
+                                if (attachedTo.canBeEquippedBy(copy)) {
+                                    copy.equipCard(attachedTo);
+                                } else {
+                                    continue;
+                                }
+                            } else { // Fortification
+                                copy.fortifyCard(attachedTo);
                             }
                         } else {
                             continue;

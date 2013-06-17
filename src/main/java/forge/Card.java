@@ -113,8 +113,14 @@ public class Card extends GameEntity implements Comparable<Card> {
     // equipping size will always be 0 or 1
     // if this card is of the type equipment, what card is it currently equipping?
     private ArrayList<Card> equipping = new ArrayList<Card>();
-    // which auras enchanted this card?
 
+    // which fortification cards are fortifying this card?
+    private ArrayList<Card> fortifiedBy = new ArrayList<Card>();
+    // fortifying size will always be 0 or 1
+    // if this card is of the type fortification, what card is it currently fortifying?
+    private ArrayList<Card> fortifying = new ArrayList<Card>();
+    
+    // which auras enchanted this card?
     // if this card is an Aura, what Entity is it enchanting?
     private GameEntity enchanting = null;
 
@@ -2153,7 +2159,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                 sbLong.append("with another unpaired creature when either ");
                 sbLong.append("enters the battlefield. They remain paired for ");
                 sbLong.append("as long as you control both of them)");
-            } else if (keyword.startsWith("Equip")) {
+            } else if (keyword.startsWith("Equip") || keyword.startsWith("Fortification")) {
                 // keyword parsing takes care of adding a proper description
                 continue;
             } else {
@@ -3044,6 +3050,17 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     /**
      * <p>
+     * Getter for the field <code>fortifiedBy</code>.
+     * </p>
+     * 
+     * @return a {@link java.util.ArrayList} object.
+     */
+    public final ArrayList<Card> getFortifiedBy() {
+        return this.fortifiedBy;
+    }
+
+    /**
+     * <p>
      * Setter for the field <code>equippedBy</code>.
      * </p>
      * 
@@ -3056,6 +3073,18 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     /**
      * <p>
+     * Setter for the field <code>fortifiedBy</code>.
+     * </p>
+     * 
+     * @param list
+     *            a {@link java.util.ArrayList} object.
+     */
+    public final void setFortifiedBy(final ArrayList<Card> list) {
+        this.fortifiedBy = list;
+    }
+
+    /**
+     * <p>
      * Getter for the field <code>equipping</code>.
      * </p>
      * 
@@ -3063,6 +3092,17 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     public final ArrayList<Card> getEquipping() {
         return this.equipping;
+    }
+
+    /**
+     * <p>
+     * Getter for the field <code>fortifying</code>.
+     * </p>
+     * 
+     * @return a {@link java.util.ArrayList} object.
+     */
+    public final ArrayList<Card> getFortifying() {
+        return this.fortifying;
     }
 
     /**
@@ -3081,6 +3121,20 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     /**
      * <p>
+     * getFortifyingCard.
+     * </p>
+     * 
+     * @return a {@link forge.Card} object.
+     */
+    public final Card getFortifyingCard() {
+        if (this.fortifying.isEmpty()) {
+            return null;
+        }
+        return this.fortifying.get(0);
+    }
+
+    /**
+     * <p>
      * Setter for the field <code>equipping</code>.
      * </p>
      * 
@@ -3089,6 +3143,18 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     public final void setEquipping(final ArrayList<Card> list) {
         this.equipping = list;
+    }
+
+    /**
+     * <p>
+     * Setter for the field <code>fortifying</code>.
+     * </p>
+     * 
+     * @param list
+     *            a {@link java.util.ArrayList} object.
+     */
+    public final void setFortifying(final ArrayList<Card> list) {
+        this.fortifying = list;
     }
 
     /**
@@ -3104,6 +3170,17 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     /**
      * <p>
+     * isFortified.
+     * </p>
+     * 
+     * @return a boolean.
+     */
+    public final boolean isFortified() {
+        return !this.fortifiedBy.isEmpty();
+    }
+
+    /**
+     * <p>
      * isEquipping.
      * </p>
      * 
@@ -3111,6 +3188,17 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     public final boolean isEquipping() {
         return this.equipping.size() != 0;
+    }
+
+    /**
+     * <p>
+     * isFortifying.
+     * </p>
+     * 
+     * @return a boolean.
+     */
+    public final boolean isFortifying() {
+        return !this.fortifying.isEmpty();
     }
 
     /**
@@ -3123,6 +3211,19 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     public final void addEquippedBy(final Card c) {
         this.equippedBy.add(c);
+        this.updateObservers();
+    }
+
+    /**
+     * <p>
+     * addFortifiedBy.
+     * </p>
+     * 
+     * @param c
+     *            a {@link forge.Card} object.
+     */
+    public final void addFortifiedBy(final Card c) {
+        this.fortifiedBy.add(c);
         this.updateObservers();
     }
 
@@ -3141,6 +3242,19 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     /**
      * <p>
+     * removeFortifiedBy.
+     * </p>
+     * 
+     * @param c
+     *            a {@link forge.Card} object.
+     */
+    public final void removeFortifiedBy(final Card c) {
+        this.fortifiedBy.remove(c);
+        this.updateObservers();
+    }
+ 
+    /**
+     * <p>
      * addEquipping.
      * </p>
      * 
@@ -3150,6 +3264,33 @@ public class Card extends GameEntity implements Comparable<Card> {
     public final void addEquipping(final Card c) {
         this.equipping.add(c);
         this.setTimestamp(getGame().getNextTimestamp());
+        this.updateObservers();
+    }
+
+    /**
+     * <p>
+     * addFortifying.
+     * </p>
+     * 
+     * @param c
+     *            a {@link forge.Card} object.
+     */
+    public final void addFortifying(final Card c) {
+        this.fortifying.add(c);
+        this.setTimestamp(getGame().getNextTimestamp());
+        this.updateObservers();
+    }
+
+    /**
+     * <p>
+     * removeFortifying.
+     * </p>
+     * 
+     * @param c
+     *            a {@link forge.Card} object.
+     */
+    public final void removeFortifying(final Card c) {
+        this.fortifying.remove(c);
         this.updateObservers();
     }
 
@@ -3207,6 +3348,31 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     /**
      * <p>
+     * fortifyCard.
+     * </p>
+     * fortification.fortifyCard(cardToBeFortified)
+     * 
+     * @param c
+     *            a {@link forge.Card} object.
+     */
+    public final void fortifyCard(final Card c) {
+        if (this.isFortifying()) {
+            this.unFortifyCard(this.getFortifying().get(0));
+        }
+        this.addFortifying(c);
+        c.addFortifiedBy(this);
+
+        // Play the Equip sound
+        getGame().fireEvent(new GameEventCardEquipped());
+        // run trigger
+        final HashMap<String, Object> runParams = new HashMap<String, Object>();
+        runParams.put("AttachSource", this);
+        runParams.put("AttachTarget", c);
+        this.getController().getGame().getTriggerHandler().runTrigger(TriggerType.Attached, runParams, false);
+    }
+
+    /**
+     * <p>
      * unEquipCard.
      * </p>
      * 
@@ -3223,6 +3389,19 @@ public class Card extends GameEntity implements Comparable<Card> {
         runParams.put("Equipment", this);
         runParams.put("Card", c);
         getGame().getTriggerHandler().runTrigger(TriggerType.Unequip, runParams, false);
+    }
+
+    /**
+     * <p>
+     * unFortifyCard.
+     * </p>
+     * 
+     * @param c
+     *            a {@link forge.Card} object.
+     */
+    public final void unFortifyCard(final Card c) { // fortification.unEquipCard(fortifiedCard);
+        this.fortifying.remove(c);
+        c.removeFortifiedBy(this);
     }
 
     /**
@@ -4542,6 +4721,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     public final boolean isCreature()   { return this.typeContains("Creature"); }
     public final boolean isArtifact()   { return this.typeContains("Artifact"); }
     public final boolean isEquipment()  { return this.typeContains("Equipment"); }
+    public final boolean isFortification()  { return this.typeContains("Fortification"); }
     public final boolean isScheme()     { return this.typeContains("Scheme"); }
     
 
@@ -4799,6 +4979,12 @@ public class Card extends GameEntity implements Comparable<Card> {
         for (final Card eq : this.getEquippedBy()) {
             if (eq.isPhasedOut() == phasingIn) {
                 eq.phase(false);
+            }
+        }
+
+        for (final Card f : this.getFortifiedBy()) {
+            if (f.isPhasedOut() == phasingIn) {
+                f.phase(false);
             }
         }
 
@@ -5319,11 +5505,11 @@ public class Card extends GameEntity implements Comparable<Card> {
                 return false;
             }
         } else if (property.startsWith("AttachedBy")) {
-            if (!this.equippedBy.contains(source) && !this.getEnchantedBy().contains(source)) {
+            if (!this.equippedBy.contains(source) && !this.getEnchantedBy().contains(source) && !this.getFortifiedBy().contains(source)) {
                 return false;
             }
         } else if (property.equals("Attached")) {
-            if (!this.equipping.contains(source) && !source.equals(this.enchanting)) {
+            if (!this.equipping.contains(source) && !source.equals(this.enchanting) && !this.fortifying.contains(source)) {
                 return false;
             }
         } else if (property.startsWith("AttachedTo")) {
@@ -5351,8 +5537,8 @@ public class Card extends GameEntity implements Comparable<Card> {
                 }
             } else {
                 if (((this.enchanting == null) || !this.enchanting.isValid(restriction, sourceController, source))
-                        && (this.equipping.isEmpty() || !this.equipping.get(0).isValid(restriction, sourceController,
-                                source))) {
+                        && (this.equipping.isEmpty() || !this.equipping.get(0).isValid(restriction, sourceController, source))
+                        && (this.fortifying.isEmpty() || !this.fortifying.get(0).isValid(restriction, sourceController, source))) {
                     return false;
                 }
             }
@@ -5369,7 +5555,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                 }
             }
         } else if (property.equals("NotAttachedTo")) {
-            if (this.equipping.contains(source) || source.equals(this.enchanting)) {
+            if (this.equipping.contains(source) || source.equals(this.enchanting) || this.fortifying.contains(source)) {
                 return false;
             }
         } else if (property.startsWith("EnchantedBy")) {
@@ -5477,12 +5663,20 @@ public class Card extends GameEntity implements Comparable<Card> {
                     return false;
                 }
             }
+        } else if (property.startsWith("FortifiedBy")) {
+            if (!this.fortifiedBy.contains(source)) {
+                return false;
+            }
         } else if (property.startsWith("CanBeEquippedBy")) {
             if (!this.canBeEquippedBy(source)) {
                 return false;
             }
         } else if (property.startsWith("Equipped")) {
             if (!this.equipping.contains(source)) {
+                return false;
+            }
+        } else if (property.startsWith("Fortified")) {
+            if (!this.fortifying.contains(source)) {
                 return false;
             }
         } else if (property.startsWith("HauntedBy")) {

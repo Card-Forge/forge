@@ -278,12 +278,12 @@ public class GameAction {
                     }
                 }
             }
-            // Handle unequipping creatures
-            if (copied.isEquipped()) {
-                final List<Card> equipments = new ArrayList<Card>(copied.getEquippedBy());
-                for (final Card equipment : equipments) {
-                    if (equipment.isInPlay()) {
-                        equipment.unEquipCard(copied);
+            // Handle unfortifying lands
+            if (copied.isFortified()) {
+                final List<Card> fortifications = new ArrayList<Card>(copied.getFortifiedBy());
+                for (final Card f : fortifications) {
+                    if (f.isInPlay()) {
+                        f.unFortifyCard(copied);
                     }
                 }
             }
@@ -292,6 +292,13 @@ public class GameAction {
                 final Card equippedCreature = copied.getEquipping().get(0);
                 if (equippedCreature.isInPlay()) {
                     copied.unEquipCard(equippedCreature);
+                }
+            }
+            // fortifications moving off battlefield
+            if (copied.isFortifying()) {
+                final Card fortifiedLand = copied.getFortifying().get(0);
+                if (fortifiedLand.isInPlay()) {
+                    copied.unFortifyCard(fortifiedLand);
                 }
             }
             // remove enchantments from creatures
@@ -888,6 +895,16 @@ public class GameAction {
                     }
                 } // if isEquipped()
 
+                if (c.isFortified()) {
+                    final List<Card> fortifications = new ArrayList<Card>(c.getFortifiedBy());
+                    for (final Card f : fortifications) {
+                        if (!f.isInPlay()) {
+                            f.unFortifyCard(c);
+                            checkAgain = true;
+                        }
+                    }
+                } // if isFortified()
+
                 if (c.isEquipping()) {
                     final Card equippedCreature = c.getEquipping().get(0);
                     if (!equippedCreature.isCreature() || !equippedCreature.isInPlay()
@@ -901,6 +918,19 @@ public class GameAction {
                         checkAgain = true;
                     }
                 } // if isEquipping()
+
+                if (c.isFortifying()) {
+                    final Card fortifiedLand = c.getFortifying().get(0);
+                    if (!fortifiedLand.isLand() || !fortifiedLand.isInPlay()) {
+                        c.unFortifyCard(fortifiedLand);
+                        checkAgain = true;
+                    }
+                    // make sure any fortification that has become a creature stops fortifying
+                    if (c.isCreature()) {
+                        c.unFortifyCard(fortifiedLand);
+                        checkAgain = true;
+                    }
+                } // if isFortifying()
 
                 if (c.isAura()) {
                     // Check if Card Aura is attached to is a legal target
