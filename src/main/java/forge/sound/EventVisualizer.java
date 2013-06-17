@@ -38,7 +38,7 @@ public class EventVisualizer extends IGameEventVisitor.Base<SoundEffectType> {
     public SoundEffectType visit(GameEventCardDestroyed event) { return SoundEffectType.Destroy; }
     public SoundEffectType visit(GameEventCardEquipped event) { return SoundEffectType.Equip; }
     public SoundEffectType visit(GameEventCardChangeZone event) {
-        ZoneType from = event.from.getZoneType();
+        ZoneType from = event.from == null ? null : event.from.getZoneType();
         ZoneType to = event.to.getZoneType();
         if( from == ZoneType.Library && to == ZoneType.Hand)
             return SoundEffectType.Draw; 
