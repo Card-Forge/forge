@@ -2226,17 +2226,6 @@ public class CardFactoryUtil {
                 sa.setMultiKickerManaCost(new ManaCost(new ManaCostParser(k[1])));
             }
         }
-
-        if (hasKeyword(card, "Replicate") != -1) {
-            final int n = hasKeyword(card, "Replicate");
-            final String parse = card.getKeyword().get(n).toString();
-            final String[] k = parse.split("cate ");
-
-            final SpellAbility sa = card.getFirstSpellAbility();
-            sa.setIsReplicate(true);
-            sa.setReplicateManaCost(new ManaCost(new ManaCostParser(k[1])));
-
-        }
         
         if(hasKeyword(card, "Fuse") != -1) {
             card.getState(CardCharacteristicName.Original).getSpellAbility().add(AbilityFactory.buildFusedAbility(card));

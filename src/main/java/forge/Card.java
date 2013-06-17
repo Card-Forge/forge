@@ -195,8 +195,6 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     private int xManaCostPaid = 0;
 
-    private int replicateMagnitude = 0;
-
     private int sunburstValue = 0;
     private byte colorsPaid = 0;
 
@@ -4072,40 +4070,6 @@ public class Card extends GameEntity implements Comparable<Card> {
         return hasK1 == costsPaid.contains(OptionalCost.Kicker2) ? (hasK1 ? 2 : 0) : 1; 
     }
 
-    /**
-     * <p>
-     * addReplicateMagnitude.
-     * </p>
-     * 
-     * @param n
-     *            a int.
-     */
-    public final void addReplicateMagnitude(final int n) {
-        this.replicateMagnitude += n;
-    }
-
-    /**
-     * <p>
-     * Setter for the field <code>replicateMagnitude</code>.
-     * </p>
-     * 
-     * @param n
-     *            a int.
-     */
-    public final void resetReplicateMagnitude() {
-        this.replicateMagnitude = 0;
-    }
-
-    /**
-     * <p>
-     * Getter for the field <code>replicateMagnitude</code>.
-     * </p>
-     * 
-     * @return a int.
-     */
-    public final int getReplicateMagnitude() {
-        return this.replicateMagnitude;
-    }
 
     // for cards like Giant Growth, etc.
     /**

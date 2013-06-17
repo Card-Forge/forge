@@ -207,10 +207,6 @@ public class CardFactory {
             for (OptionalCost cost : original.getOptionalCostsPaid()) {
                 c.addOptionalCostPaid(cost);
             }
-            c.addReplicateMagnitude(original.getReplicateMagnitude());
-            if (sa.isReplicate()) {
-                copySA.setIsReplicate(true);
-            }
         }
 
         controller.getController().playSpellAbilityForFree(copySA);

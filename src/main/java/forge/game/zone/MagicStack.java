@@ -338,27 +338,27 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
                 // The ability is added to stack HERE
                 si = this.push(sp);
                 
-                if (sp.isReplicate()) {
+                if (sp.isSpell() && sp.getSourceCard().hasStartOfKeyword("Replicate")) {
+                    int magnitude = 0;
                     // TODO: convert multikicker/replicate support in abCost so this
                     // doesn't happen here
                     
                     final Player activating = sp.getActivatingPlayer();
-                    final Cost costMultikicker = new Cost(sp.getReplicateManaCost(), false);
-                    sp.getSourceCard().resetReplicateMagnitude();
+                    final Cost costMultikicker = new Cost(sp.getPayCosts().getTotalMana(), false);
                     boolean hasPaid = false;
                     
                     do {
-                        int rMagnitude = sp.getSourceCard().getReplicateMagnitude();
-                        String prompt = String.format("Replicate for %s\r\nTimes Replicated: %d\r\n", sp.getSourceCard(), rMagnitude);
+                        String prompt = String.format("Replicate for %s\r\nTimes Replicated: %d\r\n", sp.getSourceCard(), magnitude);
                         hasPaid = activating.getController().payManaOptional(sp.getSourceCard(), costMultikicker, prompt, ManaPaymentPurpose.Replicate);
                         if( hasPaid )
-                            sp.getSourceCard().addReplicateMagnitude(1);
+                            magnitude++;
                     } while( hasPaid );
+
+                    for (int i = 0; i < magnitude; i++) {
+                        CardFactory.copySpellontoStack(sp.getSourceCard(), sp.getSourceCard(), sp, false, null);
+                    }
                 }
 
-                for (int i = 0; i < sp.getSourceCard().getReplicateMagnitude(); i++) {
-                    CardFactory.copySpellontoStack(sp.getSourceCard(), sp.getSourceCard(), sp, false, null);
-                }
             }
         }
 

@@ -163,11 +163,6 @@ public class WrappedAbility extends Ability implements ISpellAbility {
     }
 
     @Override
-    public ManaCost getReplicateManaCost() {
-        return sa.getReplicateManaCost();
-    }
-
-    @Override
     public SpellAbilityRestriction getRestrictions() {
         return sa.getRestrictions();
     }
@@ -240,11 +235,6 @@ public class WrappedAbility extends Ability implements ISpellAbility {
     @Override
     public boolean isMultiKicker() {
         return sa.isMultiKicker();
-    }
-
-    @Override
-    public boolean isReplicate() {
-        return sa.isReplicate();
     }
 
     @Override

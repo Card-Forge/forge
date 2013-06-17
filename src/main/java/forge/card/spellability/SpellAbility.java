@@ -54,7 +54,6 @@ public abstract class SpellAbility implements ISpellAbility {
     private String description = "";
     private String stackDescription = "";
     private ManaCost multiKickerManaCost = null;
-    private ManaCost replicateManaCost = null;
     private Player activatingPlayer = null;
 
     private boolean temporary; // that is given by some static ability
@@ -74,7 +73,6 @@ public abstract class SpellAbility implements ISpellAbility {
     private boolean temporarilySuppressed = false;
 
     private boolean flashBackAbility = false;
-    private boolean replicate = false;
     private boolean cycling = false;
     private boolean delve = false;
     private boolean offering = false;
@@ -236,28 +234,6 @@ public abstract class SpellAbility implements ISpellAbility {
         this.multiKickerManaCost = cost;
     }
 
-    /**
-     * <p>
-     * Getter for the field <code>replicateManaCost</code>.
-     * </p>
-     * 
-     * @return a {@link java.lang.String} object.
-     */
-    public ManaCost getReplicateManaCost() {
-        return this.replicateManaCost;
-    }
-
-    /**
-     * <p>
-     * Setter for the field <code>replicateManaCost</code>.
-     * </p>
-     * 
-     * @param spellManaCost
-     *            a {@link java.lang.String} object.
-     */
-    public final void setReplicateManaCost(final ManaCost spellManaCost) {
-        this.replicateManaCost = spellManaCost;
-    }
 
     /**
      * <p>
@@ -306,29 +282,6 @@ public abstract class SpellAbility implements ISpellAbility {
      */
     public boolean isMultiKicker() {
         return this.multiKickerManaCost != null && !this.isAnnouncing("Multikicker");
-    }
-
-    /**
-     * <p>
-     * setIsReplicate.
-     * </p>
-     * 
-     * @param b
-     *            a boolean.
-     */
-    public final void setIsReplicate(final boolean b) {
-        this.replicate = b;
-    }
-
-    /**
-     * <p>
-     * isReplicate.
-     * </p>
-     * 
-     * @return a boolean.
-     */
-    public boolean isReplicate() {
-        return this.replicate;
     }
 
     /**
