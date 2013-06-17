@@ -123,10 +123,6 @@ public class GameAction {
      * @return a {@link forge.Card} object.
      */
     public Card changeZone(final Zone zoneFrom, final Zone zoneTo, final Card c, Integer position) {
-        // play the Exile sound
-        game.fireEvent(new GameEventCardChangeZone(c, zoneFrom, zoneTo));
-
-        
         if (c.isCopiedSpell()) {
             if ((zoneFrom != null)) {
                 zoneFrom.remove(c);
@@ -198,6 +194,9 @@ public class GameAction {
             }
         }
         
+        // play the change zone sound
+        game.fireEvent(new GameEventCardChangeZone(c, zoneFrom, zoneTo));
+
         copied.getOwner().removeInboundToken(copied);
 
         if (c.wasSuspendCast()) {
