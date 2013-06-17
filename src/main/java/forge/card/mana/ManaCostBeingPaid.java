@@ -506,7 +506,7 @@ public class ManaCostBeingPaid {
         unpaidShards.remove(ManaCostShard.COLORLESS);
     }
 
-    public final void applySpellCostChange(final SpellAbility sa) {
+    public final void applySpellCostChange(final SpellAbility sa, boolean test) {
         final Game game = sa.getActivatingPlayer().getGame();
         // Beached
         final Card originalCard = sa.getSourceCard();
@@ -524,11 +524,13 @@ public class ManaCostBeingPaid {
         if (spell.isSpell()) {
             if (spell.isDelve()) {
                 final Player pc = originalCard.getController();
-                final List<Card> mutableGrave = Lists.newArrayList(pc.getZone(ZoneType.Graveyard).getCards());
+                final List<Card> mutableGrave = new ArrayList<Card>(pc.getCardsIn(ZoneType.Graveyard));
                 final List<Card> toExile = pc.getController().chooseCardsToDelve(this.getColorlessManaAmount(), mutableGrave);
                 for (final Card c : toExile) {
-                    pc.getGame().getAction().exile(c);
                     decreaseColorlessMana(1);
+                    if (!test) {
+                        pc.getGame().getAction().exile(c);
+                    }
                 }
             } else if (spell.getSourceCard().hasKeyword("Convoke")) {
                 adjustCostByConvoke(sa, spell);

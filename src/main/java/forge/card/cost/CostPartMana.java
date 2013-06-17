@@ -128,7 +128,7 @@ public class CostPartMana extends CostPart {
         }
 
         InputPayMana inpPayment;
-        toPay.applySpellCostChange(ability);
+        toPay.applySpellCostChange(ability, false);
         if (ability.isOffering() && ability.getSacrificedAsOffering() == null) {
             System.out.println("Sacrifice input for Offering cancelled");
             return false;

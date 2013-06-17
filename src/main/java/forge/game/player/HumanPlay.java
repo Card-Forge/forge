@@ -157,7 +157,7 @@ public class HumanPlay {
             manaCost = new ManaCostBeingPaid(ManaCost.ZERO);
         } else {
             manaCost = new ManaCostBeingPaid(sa.getPayCosts().getTotalMana());
-            manaCost.applySpellCostChange(sa);
+            manaCost.applySpellCostChange(sa, false);
         }
     
         boolean isPaid = manaCost.isPaid();

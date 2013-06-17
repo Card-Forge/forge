@@ -474,7 +474,7 @@ public class ComputerUtilMana {
             restriction = payCosts.getCostMana().getRestiction();
         }
         ManaCostBeingPaid cost = new ManaCostBeingPaid(mana, restriction);
-        cost.applySpellCostChange(sa);
+        cost.applySpellCostChange(sa, test);
     
         final Card card = sa.getSourceCard();
         // Tack xMana Payments into mana here if X is a set value
