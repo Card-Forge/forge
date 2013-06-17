@@ -316,43 +316,37 @@ public class CardPanel extends JPanel implements CardContainer {
         final Graphics2D g2d = (Graphics2D) g;
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-        // + White borders for Core sets Unlimited - 9th +
         final int cornerSize = Math.max(4, Math.round(this.cardWidth * CardPanel.ROUNDED_CORNER_SIZE));
-
-        final int n2 = Math.max(1, Math.round(2 * this.cardWidth * CardPanel.SELECTED_BORDER_SIZE));
         final int offset = this.isTapped() ? 1 : 0;
 
-        
+        // Magenta outline for when card was chosen to pay
         if (this.getCard().isUsedToPay()) {
             g2d.setColor(Color.magenta);
+            final int n2 = Math.max(1, Math.round(2 * this.cardWidth * CardPanel.SELECTED_BORDER_SIZE));
             g2d.fillRoundRect(this.cardXOffset - n2, (this.cardYOffset - n2) + offset, this.cardWidth + (n2 * 2), this.cardHeight + (n2 * 2), cornerSize + n2, cornerSize + n2);
         }
 
-        int n = Math.max(1, Math.round(this.cardWidth * CardPanel.SELECTED_BORDER_SIZE));
+        // Green outline for hover
         if( this.isSelected ) {
             g2d.setColor(Color.green);
-            g2d.fillRoundRect(this.cardXOffset - n, (this.cardYOffset - n) + offset, this.cardWidth + (n * 2), this.cardHeight + (n * 2), cornerSize + n , cornerSize + n);
-        }
-        else {
-            n = 1;
-            g2d.setColor(Color.black);
+            final int n = Math.max(1, Math.round(this.cardWidth * CardPanel.SELECTED_BORDER_SIZE));
             g2d.fillRoundRect(this.cardXOffset - n, (this.cardYOffset - n) + offset, this.cardWidth + (n * 2), this.cardHeight + (n * 2), cornerSize + n , cornerSize + n);
         }
         
+        // Black fill - (will become outline for white bordered cards) 
+        final int n = 0;
         g2d.setColor(Color.black);
-
-        if (this.getGameCard() != null && this.getGameCard().getImageKey() != null
-                && !this.getGameCard().getImageKey().equals("none") && !this.getGameCard().getName().equals("Morph")) {
+        g2d.fillRoundRect(this.cardXOffset - n, (this.cardYOffset - n) + offset, this.cardWidth + (n * 2), this.cardHeight + (n * 2), cornerSize + n , cornerSize + n);
+        
+        // White border if card is known to have it.
+        if (this.getGameCard() != null && !this.getGameCard().isFaceDown()) {
             CardEdition ed = Singletons.getModel().getEditions().get(this.getGameCard().getCurSetCode());
-
             if (ed != null && ed.isWhiteBorder()) {
                 g2d.setColor(Color.white);
-            } else {
-                g2d.setColor(Color.black);
+                int ins = 1;
+                g2d.fillRoundRect(this.cardXOffset + ins, this.cardYOffset + ins, this.cardWidth - ins*2, this.cardHeight - ins*2, cornerSize, cornerSize);
             }
         }
-        // - White borders for Core sets Unlimited - 9th -
-        g2d.fillRoundRect(this.cardXOffset, this.cardYOffset, this.cardWidth, this.cardHeight, cornerSize, cornerSize);
     }
 
     /**
@@ -375,17 +369,14 @@ public class CardPanel extends JPanel implements CardContainer {
             return;
         }
 
-        if (this.showCastingCost) {
-            if (this.cardWidth < 200) {
-                Card gameCard = this.getGameCard();
-                boolean showSplitMana = gameCard.isSplitCard() && gameCard.getCurState() == CardCharacteristicName.Original;
-                if ( !showSplitMana ) {
-                    drawManaCost(g, gameCard.getManaCost(), 0);
-                } else {
-                    drawManaCost(g, gameCard.getRules().getMainPart().getManaCost(), +12);
-                    drawManaCost(g, gameCard.getRules().getOtherPart().getManaCost(), -12);
-                }
-                
+        if (this.showCastingCost && this.cardWidth < 200) {
+            Card gameCard = this.getGameCard();
+            boolean showSplitMana = gameCard.isSplitCard() && gameCard.getCurState() == CardCharacteristicName.Original;
+            if ( !showSplitMana ) {
+                drawManaCost(g, gameCard.getManaCost(), 0);
+            } else {
+                drawManaCost(g, gameCard.getRules().getMainPart().getManaCost(), +12);
+                drawManaCost(g, gameCard.getRules().getOtherPart().getManaCost(), -12);
             }
         }
 
@@ -443,13 +434,6 @@ public class CardPanel extends JPanel implements CardContainer {
         }
     }
 
-    /**
-     * <p>
-     * doLayout.
-     * </p>
-     * 
-     * @since 1.0.15
-     */
     @Override
     public final void doLayout() {
         final int borderSize = Math.round(this.cardWidth * CardPanel.BLACK_BORDER_SIZE);
@@ -484,17 +468,9 @@ public class CardPanel extends JPanel implements CardContainer {
         final int dmgX = rightLine - dmgSize.width / 2;
         final int dmgY =  ptY - 16;
         this.damageText.setLocation(imgPos.x + dmgX, imgPos.y + dmgY);
-        
-        
     }
 
-    /**
-     * <p>
-     * toString.
-     * </p>
-     * 
-     * @return a {@link java.lang.String} object.
-     */
+
     @Override
     public final String toString() {
         return this.getGameCard().getName();
