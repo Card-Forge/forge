@@ -344,7 +344,7 @@ public class CardPanel extends JPanel implements CardContainer {
             if (ed != null && ed.isWhiteBorder()) {
                 g2d.setColor(Color.white);
                 int ins = 1;
-                g2d.fillRoundRect(this.cardXOffset + ins, this.cardYOffset + ins, this.cardWidth - ins*2, this.cardHeight - ins*2, cornerSize, cornerSize);
+                g2d.fillRoundRect(this.cardXOffset + ins, this.cardYOffset + ins, this.cardWidth - ins*2, this.cardHeight - ins*2, cornerSize-ins, cornerSize-ins);
             }
         }
     }
