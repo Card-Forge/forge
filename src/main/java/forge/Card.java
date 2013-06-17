@@ -2421,6 +2421,11 @@ public class Card extends GameEntity implements Comparable<Card> {
                     sb.delete(sb.lastIndexOf("\r\n"), sb.lastIndexOf("\r\n") + 3);
                 }
                 sb.append("Convoke (Each creature you tap while casting this spell reduces its cost by 1 or by one mana of that creature's color.)\r\n");
+            } else if (keyword.equals("Delve")) {
+                if (sb.toString().endsWith("\r\n\r\n")) {
+                    sb.delete(sb.lastIndexOf("\r\n"), sb.lastIndexOf("\r\n") + 3);
+                }
+                sb.append("Delve (You may exile any number of cards from your graveyard as you cast this spell. It costs 1 less to cast for each card exiled this way.)\r\n");
             } else if (keyword.endsWith(" offering")) {
                 if (sb.toString().endsWith("\r\n\r\n")) {
                     sb.delete(sb.lastIndexOf("\r\n"), sb.lastIndexOf("\r\n") + 3);
