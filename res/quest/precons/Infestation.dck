@@ -7,7 +7,7 @@ MaxDifficulty=5
 Name=Infestation
 Description=You can describe the "Infestation" deck in four words: Goblins, Goblins, Goblins, and Goblins. Of the decks's sixteen creatures, twelve of them are Goblins. You even get the Goblin King! How do you win with "Infestation"? Overrun your opponents with Goblins. While your opponent tries to fend off your horde, you can use your instants and sorceries to blow things up. 
 Deck Type=constructed
-Set=AVR
+Set=7ED
 Image=infestation.jpg
 [main]
 1 Blaze|7ED
