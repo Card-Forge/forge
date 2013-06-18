@@ -29,6 +29,7 @@ import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.spellability.SpellAbility;
 import forge.game.Game;
+import forge.game.ai.ComputerUtil;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
@@ -183,7 +184,7 @@ public class CostRemoveAnyCounter extends CostPartWithList {
         }
         Card valid = decision.cards.get(0);
         for (CounterType c1 : valid.getCounters().keySet()) {
-            if (valid.getCounters(c1) >= c && c1.isNegativeCounter()) {
+            if (valid.getCounters(c1) >= c && ComputerUtil.isNegativeCounter(c1, valid)) {
                 counterType = c1;
                 break;
             }
@@ -215,7 +216,7 @@ public class CostRemoveAnyCounter extends CostPartWithList {
             @Override
             public boolean apply(final Card crd) {
                 for (final CounterType c1 : CounterType.values()) {
-                    if (crd.getCounters(c1) >= c  && c1.isNegativeCounter()) {
+                    if (crd.getCounters(c1) >= c  && ComputerUtil.isNegativeCounter(c1, crd)) {
                         return true;
                     }
                 }

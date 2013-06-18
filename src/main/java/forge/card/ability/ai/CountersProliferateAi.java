@@ -9,6 +9,7 @@ import forge.CardLists;
 import forge.CounterType;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.spellability.SpellAbility;
+import forge.game.ai.ComputerUtil;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
@@ -22,7 +23,7 @@ public class CountersProliferateAi extends SpellAbilityAi {
             @Override
             public boolean apply(final Card crd) {
                 for (final CounterType c1 : CounterType.values()) {
-                    if (crd.getCounters(c1) != 0 && !c1.isNegativeCounter()) {
+                    if (crd.getCounters(c1) != 0 && !ComputerUtil.isNegativeCounter(c1, crd)) {
                         return true;
                     }
                 }
@@ -34,7 +35,7 @@ public class CountersProliferateAi extends SpellAbilityAi {
             @Override
             public boolean apply(final Card crd) {
                 for (final CounterType c1 : CounterType.values()) {
-                    if (crd.getCounters(c1) != 0 && c1.isNegativeCounter()) {
+                    if (crd.getCounters(c1) != 0 && ComputerUtil.isNegativeCounter(c1, crd)) {
                         return true;
                     }
                 }

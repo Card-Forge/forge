@@ -31,6 +31,7 @@ import forge.Card;
 import forge.CardLists;
 import forge.CardPredicates;
 import forge.Constant;
+import forge.CounterType;
 import forge.CardPredicates.Presets;
 import forge.CardUtil;
 import forge.ITargetable;
@@ -1694,5 +1695,15 @@ public class ComputerUtil {
             }
         });
         return safeCards;
+    }
+    
+    
+    // although this should be in AI's code 
+    public static boolean isNegativeCounter(CounterType type, Card c) {
+        return type == CounterType.AGE || type == CounterType.BLAZE || type == CounterType.BRIBERY || type == CounterType.DOOM
+                || type == CounterType.ICE || type == CounterType.M1M1 || type == CounterType.M0M2 || type == CounterType.M0M1
+                || type == CounterType.M1M0 || type == CounterType.M2M1 || type == CounterType.M2M2 || type == CounterType.MUSIC
+                || type == CounterType.PARALYZATION || type == CounterType.SHELL || type == CounterType.SLEEP 
+                || type == CounterType.SLEIGHT || (type == CounterType.TIME && !c.isInPlay()) || type == CounterType.WAGE;
     }
 }

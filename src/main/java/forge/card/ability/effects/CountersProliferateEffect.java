@@ -12,6 +12,7 @@ import forge.GameEntity;
 import forge.Singletons;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
+import forge.game.ai.ComputerUtil;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.input.InputProliferate;
@@ -56,10 +57,10 @@ public class CountersProliferateEffect extends SpellAbilityEffect {
             @Override
             public boolean apply(Card crd) {
                 for (final Entry<CounterType, Integer> c1 : crd.getCounters().entrySet()) {
-                    if (c1.getKey().isNegativeCounter() && enemies.contains(crd.getController())) {
+                    if (ComputerUtil.isNegativeCounter(c1.getKey(), crd) && enemies.contains(crd.getController())) {
                         return true;
                     }
-                    if (!c1.getKey().isNegativeCounter() && allies.contains(crd.getController())) {
+                    if (!ComputerUtil.isNegativeCounter(c1.getKey(), crd) && allies.contains(crd.getController())) {
                         return true;
                     }
                 }
@@ -102,12 +103,12 @@ public class CountersProliferateEffect extends SpellAbilityEffect {
         // computer
         for (final Card c : cardsToProliferate) {
             for (final Entry<CounterType, Integer> c1 : c.getCounters().entrySet()) {
-                if (c1.getKey().isNegativeCounter() && enemies.contains(c.getController()))
+                if (ComputerUtil.isNegativeCounter(c1.getKey(), c) && enemies.contains(c.getController()))
                 {
                     c.addCounter(c1.getKey(), 1, true);
                     break;
                 }
-                if (!c1.getKey().isNegativeCounter() && allies.contains(c.getController()))
+                if (!ComputerUtil.isNegativeCounter(c1.getKey(), c) && allies.contains(c.getController()))
                 {
                     c.addCounter(c1.getKey(), 1, true);
                     break;

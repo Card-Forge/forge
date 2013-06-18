@@ -8236,7 +8236,7 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     /** @return boolean */
     public boolean isInPlay() {
-        return this.getGame().getCardsIn(ZoneType.Battlefield).contains(this);
+        return this.isInZone(ZoneType.Battlefield);
     }
 
     public void onCleanupPhase(final Player turn) {
