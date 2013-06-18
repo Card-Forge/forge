@@ -57,7 +57,7 @@ public class CardListViewer {
     // Flag: was the dialog already shown?
     private boolean called;
     // initialized before; listeners may be added to it
-    private final JList jList;
+    private final JList<PaperCard> jList;
     private final CardDetailPanel detail;
     private final CardPicturePanel picture;
 
@@ -107,7 +107,7 @@ public class CardListViewer {
     public CardListViewer(final String title, final String message, final List<PaperCard> list, final Icon dialogIcon) {
         this.title = title;
         this.list = Collections.unmodifiableList(list);
-        this.jList = new JList(new ChooserListModel());
+        this.jList = new JList<PaperCard>(new ChooserListModel());
         this.detail = new CardDetailPanel(null);
         this.picture = new CardPicturePanel();
         this.ok = new CloseAction(JOptionPane.OK_OPTION, "OK");
@@ -150,7 +150,7 @@ public class CardListViewer {
         return true;
     }
 
-    private class ChooserListModel extends AbstractListModel {
+    private class ChooserListModel extends AbstractListModel<PaperCard> {
 
         private static final long serialVersionUID = 3871965346333840556L;
 
@@ -160,7 +160,7 @@ public class CardListViewer {
         }
 
         @Override
-        public Object getElementAt(final int index) {
+        public PaperCard getElementAt(final int index) {
             return CardListViewer.this.list.get(index);
         }
     }

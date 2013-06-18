@@ -46,7 +46,7 @@ public enum VSubmenuChallenges implements IVSubmenu<CSubmenuChallenges>, IVQuest
             ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
     private final JButton btnStart  = new StartButton();
-    private final JComboBox cbxPet  = new JComboBox();
+    private final JComboBox<String> cbxPet  = new JComboBox<String>();
     private final JCheckBox cbPlant = new FCheckBox("Summon Plant");
     private final JLabel lblZep   = new FLabel.Builder().text("<html>Launch<br>Zeppelin</html>")
             .hoverable(true).icon(FSkin.getIcon(FSkin.QuestIcons.ICO_ZEP))
@@ -248,7 +248,7 @@ public enum VSubmenuChallenges implements IVSubmenu<CSubmenuChallenges>, IVQuest
     }
 
     @Override
-    public JComboBox getCbxPet() {
+    public JComboBox<String> getCbxPet() {
         return cbxPet;
     }
 

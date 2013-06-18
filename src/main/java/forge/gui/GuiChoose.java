@@ -114,7 +114,7 @@ public class GuiChoose {
             @Override
             public List<T> call() {
                 ListChooser<T> c = new ListChooser<T>(message, min, max, choices);
-                final JList list = c.getJList();
+                final JList<T> list = c.getJList();
                 list.addListSelectionListener(new ListSelectionListener() {
                     @Override
                     public void valueChanged(final ListSelectionEvent ev) {

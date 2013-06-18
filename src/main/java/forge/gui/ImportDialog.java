@@ -307,7 +307,7 @@ public class ImportDialog {
         private final Runnable     _onAnalyzerDone;
         private final boolean      _isMigration;
         private final FLabel       _unknownDeckLabel;
-        private final JComboBox    _unknownDeckCombo;
+        private final JComboBox<_UnknownDeckChoice>    _unknownDeckCombo;
         private final FCheckBox    _moveCheckbox;
         private final FCheckBox    _overwriteCheckbox;
         private final JTextArea    _operationLog;
@@ -340,7 +340,7 @@ public class ImportDialog {
             _addSelectionWidget(knownDeckPanel, OpType.UNKNOWN_DECK,     "Unknown decks");
             JPanel unknownDeckPanel = new JPanel(new MigLayout("insets 0, gap 5"));
             unknownDeckPanel.setOpaque(false);
-            _unknownDeckCombo = new JComboBox();
+            _unknownDeckCombo = new JComboBox<_UnknownDeckChoice>();
             _unknownDeckCombo.addItem(new _UnknownDeckChoice("Constructed", NewConstants.DECK_CONSTRUCTED_DIR));
             _unknownDeckCombo.addItem(new _UnknownDeckChoice("Draft",       NewConstants.DECK_DRAFT_DIR));
             _unknownDeckCombo.addItem(new _UnknownDeckChoice("Planar",      NewConstants.DECK_PLANE_DIR));
@@ -816,7 +816,7 @@ public class ImportDialog {
         private final boolean         _move;
         private final boolean         _overwrite;
         
-        public _Importer(String srcDir, Map<OpType, Pair<FCheckBox, ? extends Map<File, File>>> selections, JComboBox unknownDeckCombo,
+        public _Importer(String srcDir, Map<OpType, Pair<FCheckBox, ? extends Map<File, File>>> selections, JComboBox<_UnknownDeckChoice> unknownDeckCombo,
                 JTextArea operationLog, JProgressBar progressBar, boolean move, boolean overwrite) {
             _srcDir       = srcDir;
             _operationLog = operationLog;

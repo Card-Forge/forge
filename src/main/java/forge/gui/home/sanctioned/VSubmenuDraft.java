@@ -48,7 +48,7 @@ public enum VSubmenuDraft implements IVSubmenu<CSubmenuDraft> {
     private final StartButton btnStart  = new StartButton();
 
     private final DeckLister lstDecks = new DeckLister(GameType.Draft);
-    private final JList lstAI = new FList();
+    private final JList<String> lstAI = new FList<String>();
 
     private final JRadioButton radSingle = new FRadioButton("Play one opponent");
     private final JRadioButton radAll = new FRadioButton("Play all 7 opponents");

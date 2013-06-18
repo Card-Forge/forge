@@ -68,7 +68,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final FLabel lblTitleSkin = new FLabel.Builder()
             .text("Choose Skin").fontStyle(Font.BOLD).fontSize(14).build();
 
-    private final JList lstChooseSkin = new FList();
+    private final JList<String> lstChooseSkin = new FList<String>();
     private final FLabel lblChooseSkin = new FLabel.Builder().fontSize(12).fontStyle(Font.ITALIC)
             .text("Various user-created themes for Forge backgrounds, fonts, and colors.")
             .fontAlign(SwingConstants.LEFT).build();
@@ -77,7 +77,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final FLabel lblTitleAIProfile = new FLabel.Builder()
             .text("Choose AI Personality").fontStyle(Font.BOLD).fontSize(14).build();
 
-    private final JList lstChooseAIProfile = new FList();
+    private final JList<String> lstChooseAIProfile = new FList<String>();
     private final FLabel lblChooseAIProfile = new FLabel.Builder().fontSize(12).fontStyle(Font.ITALIC)
             .text("AI Opponent Personality.")
             .fontAlign(SwingConstants.LEFT).build();
@@ -376,7 +376,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     }
 
     /** @return {@link javax.swing.JList} */
-    public final JList getLstChooseSkin() {
+    public final JList<String> getLstChooseSkin() {
         return lstChooseSkin;
     }
 
@@ -391,7 +391,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     }
 
     /** @return {@link javax.swing.JList} */
-    public final JList getLstChooseAIProfile() {
+    public final JList<String> getLstChooseAIProfile() {
         return lstChooseAIProfile;
     }
 

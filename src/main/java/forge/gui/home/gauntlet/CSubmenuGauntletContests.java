@@ -41,10 +41,11 @@ public enum CSubmenuGauntletContests implements ICDoc {
     private final VSubmenuGauntletContests view = VSubmenuGauntletContests.SINGLETON_INSTANCE;
 
     private final MouseAdapter madDecklist = new MouseAdapter() {
+        @SuppressWarnings("unchecked")
         @Override
         public void mouseClicked(final MouseEvent e) {
             if (e.getClickCount() == 2) {
-                DeckgenUtil.showDecklist(((JList) e.getSource())); }
+                DeckgenUtil.showDecklist(((JList<String>) e.getSource())); }
         }
     };
 

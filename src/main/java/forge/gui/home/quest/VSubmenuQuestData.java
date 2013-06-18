@@ -79,33 +79,33 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
     private final JCheckBox boxFantasy = new FCheckBox("Fantasy Mode");
 
     private final JLabel lblStartingWorld = new FLabel.Builder().text("Starting world:").build();
-    private final JComboBox cbxStartingWorld = new JComboBox();
+    private final JComboBox<QuestWorld> cbxStartingWorld = new JComboBox<QuestWorld>();
 
 
     /* Second column */
 
     private final JLabel lblStartingPool = new FLabel.Builder().text("Starting pool:").build();
-    private final JComboBox cbxStartingPool = new JComboBox();
+    private final JComboBox<StartingPoolType> cbxStartingPool = new JComboBox<StartingPoolType>();
 
     private final JLabel lblUnrestricted = new FLabel.Builder().text("All cards will be available to play.").build();
 
     private final JLabel lblPreconDeck = new FLabel.Builder().text("Starter/Event deck:").build();
-    private final JComboBox cbxPreconDeck = new JComboBox();
+    private final JComboBox<String> cbxPreconDeck = new JComboBox<String>();
 
     private final JLabel lblFormat = new FLabel.Builder().text("Sanctioned format:").build();
-    private final JComboBox cbxFormat = new JComboBox();
+    private final JComboBox<GameFormat> cbxFormat = new JComboBox<GameFormat>();
 
     private final JLabel lblCustomDeck = new FLabel.Builder().text("Custom deck:").build();
-    private final JComboBox cbxCustomDeck = new JComboBox();
+    private final JComboBox<Deck> cbxCustomDeck = new JComboBox<Deck>();
 
     private final FLabel btnDefineCustomFormat = new FLabel.Builder().opaque(true).hoverable(true).text("Define custom format").build();
     private final FLabel btnPrizeDefineCustomFormat = new FLabel.Builder().opaque(true).hoverable(true).text("Define custom format").build();
 
     private final JLabel lblPrizedCards = new FLabel.Builder().text("Prized cards:").build();
-    private final JComboBox cbxPrizedCards = new JComboBox();
+    private final JComboBox<Object> cbxPrizedCards = new JComboBox<Object>();
 
     private final JLabel lblPrizeFormat = new FLabel.Builder().text("Sanctioned format:").build();
-    private final JComboBox cbxPrizeFormat = new JComboBox();
+    private final JComboBox<GameFormat> cbxPrizeFormat = new JComboBox<GameFormat>();
 
     private final JLabel lblPrizeUnrestricted = new FLabel.Builder().text("All cards will be available to win.").build();
     private final JLabel lblPrizeSameAsStarting = new FLabel.Builder().text("Only sets found in starting pool will be available.").build();
@@ -197,6 +197,7 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
     /**
      * Constructor.
      */
+    @SuppressWarnings("unchecked")
     private VSubmenuQuestData() {
         lblTitle.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
         lblTitleNew.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
@@ -260,9 +261,11 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
             preconDescriptions.put(name, description);
         }
 
+        // The cbx needs strictly typed renderer
         cbxPreconDeck.setRenderer(new BasicComboBoxRenderer() {
             private static final long serialVersionUID = 3477357932538947199L;
 
+            @SuppressWarnings("rawtypes")
             @Override
             public Component getListCellRendererComponent(
                     JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {

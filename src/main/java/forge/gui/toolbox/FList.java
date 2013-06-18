@@ -1,7 +1,6 @@
 package forge.gui.toolbox;
 
 import java.awt.Component;
-
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -14,35 +13,21 @@ import javax.swing.border.EmptyBorder;
  *
  */
 @SuppressWarnings("serial")
-public class FList extends JList {
-    /** 
-     * A JList object using Forge skin properties.
-     * This constructor assumes list contents are null and will be set later.
-     */
+public class FList<E> extends JList<E> {
+
     public FList() {
-        this(new Object[] {});
+        super();
+        applySkin();
     }
-
-    /** 
-     * A JList object using Forge skin properties.
-     * This constructor assumes list contents are null and will be set later.
-     * This constructor is used for naming a list at instantiation.
-     * @param name0 &emsp; {@link java.lang.String}
-     */
-    public FList(final String name0) {
-        this(new Object[] {});
-        this.setName(name0);
-    }
-
     /** 
      * A JList object using Forge skin properties.
      * This constructor assumes list contents are null and will be set later.
      * This constructor is used for applying a list model at instantiation.
      * @param model0 &emsp; {@link javax.swing.ListModel}
      */
-    public FList(final ListModel model0) {
-        this(new Object[] {});
-        this.setModel(model0);
+    public FList(final ListModel<E> model0) {
+        super(model0);
+        applySkin();
     }
 
     /**
@@ -51,19 +36,26 @@ public class FList extends JList {
      * 
      * @param o0 {@link java.lang.Object}[]
      */
-    public FList(Object[] o0) {
+    public FList(E[] o0) {
         super(o0);
+        applySkin();
+    }
+
+    /**
+     * TODO: Write javadoc for this method.
+     */
+    private void applySkin() {
         setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
 
-        ListCellRenderer renderer = new ComplexCellRenderer();
+        ListCellRenderer<E> renderer = new ComplexCellRenderer<E>();
         setCellRenderer(renderer);
     }
 
-    private class ComplexCellRenderer implements ListCellRenderer {
+    private class ComplexCellRenderer<E1> implements ListCellRenderer<E1> {
         private DefaultListCellRenderer defaultRenderer = new DefaultListCellRenderer();
 
         @Override
-        public Component getListCellRendererComponent(JList lst0, Object val0, int i0,
+        public Component getListCellRendererComponent(JList<? extends E1> lst0, E1 val0, int i0,
             boolean isSelected, boolean cellHasFocus) {
 
             JLabel lblItem = (JLabel) defaultRenderer.getListCellRendererComponent(

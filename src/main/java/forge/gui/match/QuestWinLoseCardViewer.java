@@ -47,7 +47,7 @@ public class QuestWinLoseCardViewer extends FPanel {
     private final List<PaperCard> list;
 
     // initialized before; listeners may be added to it
-    private final JList jList;
+    private final JList<PaperCard> jList;
     private final CardDetailPanel detail;
     private final CardPicturePanel picture;
     private final FScrollPane scroller;
@@ -60,7 +60,7 @@ public class QuestWinLoseCardViewer extends FPanel {
      */
     public QuestWinLoseCardViewer(final List<PaperCard> list) {
         this.list = Collections.unmodifiableList(list);
-        this.jList = new FList(new ChooserListModel());
+        this.jList = new FList<PaperCard>(new ChooserListModel());
         this.detail = new CardDetailPanel(null);
         this.picture = new CardPicturePanel();
         this.scroller = new FScrollPane(this.jList);
@@ -81,7 +81,7 @@ public class QuestWinLoseCardViewer extends FPanel {
         this.jList.setSelectedIndex(0);
     }
 
-    private class ChooserListModel extends AbstractListModel {
+    private class ChooserListModel extends AbstractListModel<PaperCard> {
 
         private static final long serialVersionUID = 3871965346333840556L;
 
@@ -91,7 +91,7 @@ public class QuestWinLoseCardViewer extends FPanel {
         }
 
         @Override
-        public Object getElementAt(final int index) {
+        public PaperCard getElementAt(final int index) {
             return QuestWinLoseCardViewer.this.list.get(index);
         }
     }

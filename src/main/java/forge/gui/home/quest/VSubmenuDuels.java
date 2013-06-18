@@ -45,7 +45,7 @@ public enum VSubmenuDuels implements IVSubmenu<CSubmenuDuels>, IVQuestStats {
             ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
     private final JButton btnStart  = new StartButton();
-    private final JComboBox cbxPet  = new JComboBox();
+    private final JComboBox<String> cbxPet  = new JComboBox<String>();
     private final JCheckBox cbPlant = new FCheckBox("Summon Plant");
     private final JLabel lblZep     = new FLabel.Builder().text("Launch Zeppelin").fontSize(14).build();
 
@@ -241,7 +241,7 @@ public enum VSubmenuDuels implements IVSubmenu<CSubmenuDuels>, IVQuestStats {
     }
 
     @Override
-    public JComboBox getCbxPet() {
+    public JComboBox<String> getCbxPet() {
         return cbxPet;
     }
 

@@ -52,7 +52,7 @@ public enum CSubmenuArchenemy implements ICDoc {
     @Override
     public void update() {
         // reinit deck list and restore last selections (if any)
-        FList deckList = view.getArchenemySchemes();
+        FList<Object> deckList = view.getArchenemySchemes();
         Vector<Object> listData = new Vector<Object>();
         listData.add("Random");
         listData.add("Generate");

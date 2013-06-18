@@ -64,7 +64,7 @@ public enum VSubmenuPlanechase implements IVSubmenu<CSubmenuPlanechase> {
     private final FTabbedPane tabPane = new FTabbedPane();
     private final List<FPanel> playerPanels = new ArrayList<FPanel>();
     private final List<FDeckChooser> deckChoosers = new ArrayList<FDeckChooser>();
-    private final List<FList> planarDeckLists = new ArrayList<FList>();
+    private final List<FList<Object>> planarDeckLists = new ArrayList<FList<Object>>();
     private final List<Deck> allPlanarDecks = new ArrayList<Deck>();
     private final JCheckBox cbUseDefaultPlanes = new FCheckBox("Use default planar decks if possible.");
     private final List<JRadioButton> fieldRadios = new ArrayList<JRadioButton>();
@@ -96,7 +96,7 @@ public enum VSubmenuPlanechase implements IVSubmenu<CSubmenuPlanechase> {
         FRadioButton tempRadio = null;
         FPanel tempPanel;
         FDeckChooser tempChooser;
-        FList tempPlanarDeckList;
+        FList<Object> tempPlanarDeckList;
 
         //Settings panel
         FPanel settingsPanel = new FPanel();
@@ -133,7 +133,7 @@ public enum VSubmenuPlanechase implements IVSubmenu<CSubmenuPlanechase> {
 
             tempPanel.add(new FLabel.Builder().text("Select Planar deck:").build(), "gap 0px 0px 10px 10px, flowy");
 
-            tempPlanarDeckList = new FList();
+            tempPlanarDeckList = new FList<Object>();
 
             tempPlanarDeckList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
@@ -315,7 +315,7 @@ public enum VSubmenuPlanechase implements IVSubmenu<CSubmenuPlanechase> {
     /**
      * @return the archenemySchemes
      */
-    public List<FList> getPlanarDeckLists() {
+    public List<FList<Object>> getPlanarDeckLists() {
         return planarDeckLists;
     }
 

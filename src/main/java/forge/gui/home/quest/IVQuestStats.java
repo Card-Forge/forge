@@ -46,7 +46,7 @@ public interface IVQuestStats {
     JLabel getLblWinStreak();
 
     /** @return {@link javax.swing.JComboBox} */
-    JComboBox getCbxPet();
+    JComboBox<String> getCbxPet();
 
     /** @return {@link javax.swing.JCheckBox} */
     JCheckBox getCbPlant();

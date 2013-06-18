@@ -10,7 +10,7 @@ import javax.swing.ListModel;
 
 
 @SuppressWarnings("serial")
-public class UnsortedListModel<T> extends AbstractListModel { // Java 7 has a generic version. In 6 we have to cast types
+public class UnsortedListModel<T> extends AbstractListModel<T> {
     List<T> model;
 
     public UnsortedListModel() {
@@ -23,7 +23,7 @@ public class UnsortedListModel<T> extends AbstractListModel { // Java 7 has a ge
     }
 
     @Override
-    public Object getElementAt(int index) {
+    public T getElementAt(int index) {
         return model.get(index);
     }
 
@@ -50,8 +50,7 @@ public class UnsortedListModel<T> extends AbstractListModel { // Java 7 has a ge
         fireContentsChanged(this, 0, getSize() - 1);
     }
 
-    @SuppressWarnings("unchecked") // Java 7 has type parameterized ListModel
-    public void addAll(ListModel otherModel) {
+    public void addAll(ListModel<T> otherModel) {
         Collection<T> elements = new ArrayList<T>();
         int size = otherModel.getSize();
         for (int i = 0; size > i; ++i) {

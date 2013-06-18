@@ -75,7 +75,7 @@ public enum VSubmenuVanguard implements IVSubmenu<CSubmenuVanguard> {
     private final FTabbedPane tabPane = new FTabbedPane();
     private final List<FPanel> playerPanels = new ArrayList<FPanel>();
     private final List<FDeckChooser> deckChoosers = new ArrayList<FDeckChooser>();
-    private final List<FList> avatarLists = new ArrayList<FList>();
+    private final List<FList<Object>> avatarLists = new ArrayList<FList<Object>>();
 
     private final List<JRadioButton> fieldRadios = new ArrayList<JRadioButton>();
     private final ButtonGroup grpFields = new ButtonGroup();
@@ -142,7 +142,7 @@ public enum VSubmenuVanguard implements IVSubmenu<CSubmenuVanguard> {
         FRadioButton tempRadio = null;
         FPanel tempPanel;
         FDeckChooser tempChooser;
-        FList tempList;
+        FList<Object> tempList;
         CardDetailPanel tempDetail;
 
         //Settings panel
@@ -173,7 +173,7 @@ public enum VSubmenuVanguard implements IVSubmenu<CSubmenuVanguard> {
             tempChooser = new FDeckChooser("Select deck:", i != 0);
             tempChooser.initialize();
 
-            tempList = new FList();
+            tempList = new FList<Object>();
 
             tempList.setListData(i == 0 ? humanListData : aiListData);
             tempList.setSelectedIndex(0);
@@ -348,7 +348,7 @@ public enum VSubmenuVanguard implements IVSubmenu<CSubmenuVanguard> {
     /**
      * @return the avatarLists
      */
-    public List<FList> getAvatarLists() {
+    public List<FList<Object>> getAvatarLists() {
         return avatarLists;
     }
 

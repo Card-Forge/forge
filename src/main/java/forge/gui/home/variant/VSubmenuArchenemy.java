@@ -65,7 +65,7 @@ public enum VSubmenuArchenemy implements IVSubmenu<CSubmenuArchenemy> {
     private final FTabbedPane tabPane = new FTabbedPane();
     private final List<FPanel> playerPanels = new ArrayList<FPanel>();
     private final List<FDeckChooser> deckChoosers = new ArrayList<FDeckChooser>();
-    private final FList archenemySchemes = new FList();
+    private final FList<Object> archenemySchemes = new FList<Object>();
     private final List<Deck> allSchemeDecks = new ArrayList<Deck>();
     private final JCheckBox cbUseDefaultSchemes = new FCheckBox("Use default scheme decks if possible.");
     private final List<JRadioButton> fieldRadios = new ArrayList<JRadioButton>();
@@ -314,7 +314,7 @@ public enum VSubmenuArchenemy implements IVSubmenu<CSubmenuArchenemy> {
     /**
      * @return the archenemySchemes
      */
-    public FList getArchenemySchemes() {
+    public FList<Object> getArchenemySchemes() {
         return archenemySchemes;
     }
 

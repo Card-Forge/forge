@@ -47,10 +47,10 @@ import forge.item.IPaperCard;
 
 @SuppressWarnings("serial")
 public class DualListBox<T> extends FPanel {
-    private final FList sourceList;
+    private final FList<T> sourceList;
     private final UnsortedListModel<T> sourceListModel;
 
-    private final FList destList;
+    private final FList<T> destList;
     private final UnsortedListModel<T> destListModel;
 
     private final FButton addButton;
@@ -71,9 +71,9 @@ public class DualListBox<T> extends FPanel {
     public DualListBox(int remainingSources, List<T> sourceElements, List<T> destElements ) {
         targetRemainingSources = remainingSources;
         sourceListModel = new UnsortedListModel<T>();
-        sourceList = new FList(sourceListModel);
+        sourceList = new FList<T>(sourceListModel);
         destListModel = new UnsortedListModel<T>();
-        destList = new FList(destListModel);
+        destList = new FList<T>(destListModel);
         
         setPreferredSize(new Dimension(650, 300));
         setLayout(new GridLayout(0, 3));
@@ -85,7 +85,7 @@ public class DualListBox<T> extends FPanel {
             @Override
             public void run() {
                 List<T> selected = new ArrayList<T>();
-                for (Object item : sourceList.getSelectedValues()) {
+                for (Object item : sourceList.getSelectedValuesList()) {
                     selected.add((T)item);
                 }
                 addDestinationElements(selected);
@@ -100,7 +100,7 @@ public class DualListBox<T> extends FPanel {
             @Override
             public void run() {
                 List<T> selected = new ArrayList<T>();
-                for (Object item : destList.getSelectedValues()) {
+                for (Object item : destList.getSelectedValuesList()) {
                     selected.add((T)item);
                 }
                 clearDestinationSelected();
@@ -217,7 +217,7 @@ public class DualListBox<T> extends FPanel {
         }
     }
 
-    private void _handleListKey (KeyEvent e, Runnable onSpace, FList arrowFocusTarget) {
+    private void _handleListKey (KeyEvent e, Runnable onSpace, FList<T> arrowFocusTarget) {
         switch (e.getKeyCode()) {
         case KeyEvent.VK_SPACE:
             onSpace.run();
@@ -249,11 +249,11 @@ public class DualListBox<T> extends FPanel {
         destListModel.clear();
     }
 
-    public void addSourceElements(ListModel newValue) {
+    public void addSourceElements(ListModel<T> newValue) {
         fillListModel(sourceListModel, newValue);
     }
 
-    public void setSourceElements(ListModel newValue) {
+    public void setSourceElements(ListModel<T> newValue) {
         clearSourceListModel();
         addSourceElements(newValue);
     }
@@ -262,11 +262,11 @@ public class DualListBox<T> extends FPanel {
         fillListModel(destListModel, newValue);
     }
 
-    public void addDestinationElements(ListModel newValue) {
+    public void addDestinationElements(ListModel<T> newValue) {
         fillListModel(destListModel, newValue);
     }
 
-    private void fillListModel(UnsortedListModel<T> model, ListModel newValues) {
+    private void fillListModel(UnsortedListModel<T> model, ListModel<T> newValues) {
         model.addAll(newValues);
     }
 
@@ -326,7 +326,7 @@ public class DualListBox<T> extends FPanel {
         }
     }
 
-    private void _addListListeners(final FList list) {
+    private void _addListListeners(final FList<T> list) {
         list.getModel().addListDataListener(new ListDataListener() {
             int callCount = 0;
             @Override
@@ -342,7 +342,7 @@ public class DualListBox<T> extends FPanel {
                             return;
                         }
                         
-                        ListModel model = list.getModel();
+                        ListModel<T> model = list.getModel();
                         if (0 == model.getSize()) {
                             // nothing left to show
                             return;

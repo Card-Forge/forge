@@ -44,7 +44,7 @@ public class CardViewer extends JPanel {
     private final List<PaperCard> list;
 
     // initialized before; listeners may be added to it
-    private JList jList = null;
+    private JList<PaperCard> jList = null;
     private final CardDetailPanel detail;
     private final CardPicturePanel picture;
 
@@ -56,7 +56,7 @@ public class CardViewer extends JPanel {
      */
     public CardViewer(final List<PaperCard> list) {
         this.list = Collections.unmodifiableList(list);
-        this.jList = new JList(new ChooserListModel());
+        this.jList = new JList<PaperCard>(new ChooserListModel());
         this.detail = new CardDetailPanel(null);
         this.picture = new CardPicturePanel();
 
@@ -70,7 +70,7 @@ public class CardViewer extends JPanel {
         this.jList.setSelectedIndex(0);
     }
 
-    private class ChooserListModel extends AbstractListModel {
+    private class ChooserListModel extends AbstractListModel<PaperCard> {
 
         private static final long serialVersionUID = 3871965346333840556L;
 
@@ -80,7 +80,7 @@ public class CardViewer extends JPanel {
         }
 
         @Override
-        public Object getElementAt(final int index) {
+        public PaperCard getElementAt(final int index) {
             return CardViewer.this.list.get(index);
         }
     }

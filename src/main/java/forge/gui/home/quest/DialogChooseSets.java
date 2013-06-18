@@ -123,8 +123,8 @@ public class DialogChooseSets {
 
     private JPanel makeCheckBoxList(List<FCheckBox> sets, String title, boolean focused) {
         choices.addAll(sets);
-        final FCheckBoxList cbl = new FCheckBoxList(false);
-        cbl.setListData(sets.toArray());
+        final FCheckBoxList<FCheckBox> cbl = new FCheckBoxList<FCheckBox>(false);
+        cbl.setListData(sets.toArray(new FCheckBox[]{}));
         cbl.setVisibleRowCount(Math.min(20, sets.size()));
         
         if (focused) {

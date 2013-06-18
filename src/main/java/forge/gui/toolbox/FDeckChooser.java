@@ -4,7 +4,6 @@ import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import javax.swing.JList;
@@ -42,7 +41,7 @@ public class FDeckChooser extends JPanel {
     private final JRadioButton radQuests = new FRadioButton("Quest opponent deck");
     private final JRadioButton radPrecons = new FRadioButton("Decks from quest shop");
 
-    private final JList  lstDecks  = new FList();
+    private final JList<String> lstDecks  = new FList<String>();
     private final FLabel btnRandom = new FLabel.ButtonBuilder().text("Random").fontSize(16).build();
     private final FLabel btnChange = new FLabel.ButtonBuilder().text("Change player type").fontSize(16).build();
     
@@ -59,10 +58,11 @@ public class FDeckChooser extends JPanel {
     private boolean isAi;
     
     private final MouseAdapter madDecklist = new MouseAdapter() {
+        @SuppressWarnings("unchecked")
         @Override
         public void mouseClicked(final MouseEvent e) {
             if (MouseEvent.BUTTON1 == e.getButton() && e.getClickCount() == 2) {
-                final JList src = ((JList) e.getSource());
+                final JList<String> src = ((JList<String>) e.getSource());
                 if (getRadColors().isSelected() || getRadThemes().isSelected()) { return; }
                 DeckgenUtil.showDecklist(src);
             }
@@ -137,7 +137,7 @@ public class FDeckChooser extends JPanel {
     }
 
 
-    private JList        getLstDecks()  { return lstDecks;  }
+    private JList<String> getLstDecks()  { return lstDecks;  }
     private FLabel       getBtnRandom() { return btnRandom; }
     private JRadioButton getRadColors() { return radColors; }
     private JRadioButton getRadThemes() { return radThemes; }
@@ -147,7 +147,7 @@ public class FDeckChooser extends JPanel {
 
     /** Handles all control for "colors" radio button click. */
     private void updateColors() {
-        final JList lst = getLstDecks();
+        final JList<String> lst = getLstDecks();
         lst.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 
         lst.setListData(new String[] {"Random 1", "Random 2", "Random 3", "Black", "Blue", "Green", "Red", "White"});
@@ -165,7 +165,7 @@ public class FDeckChooser extends JPanel {
 
     /** Handles all control for "themes" radio button click. */
     private void updateThemes() {
-        final JList lst = getLstDecks();
+        final JList<String> lst = getLstDecks();
         lst.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
         lst.removeMouseListener(madDecklist);
@@ -188,7 +188,7 @@ public class FDeckChooser extends JPanel {
 
     /** Handles all control for "custom" radio button click. */
     private void updateCustom() {
-        final JList lst = getLstDecks();
+        final JList<String> lst = getLstDecks();
         lst.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
         final List<String> customNames = new ArrayList<String>();
@@ -210,7 +210,7 @@ public class FDeckChooser extends JPanel {
 
     /** Handles all control for "custom" radio button click. */
     private void updatePrecons() {
-        final JList lst = getLstDecks();
+        final JList<String> lst = getLstDecks();
         lst.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
         final List<String> customNames = new ArrayList<String>();
@@ -232,7 +232,7 @@ public class FDeckChooser extends JPanel {
     
     /** Handles all control for "quest event" radio button click. */
     private void updateQuestEvents() {
-        final JList lst = getLstDecks();
+        final JList<String> lst = getLstDecks();
         lst.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
         final List<String> eventNames = new ArrayList<String>();
@@ -263,14 +263,14 @@ public class FDeckChooser extends JPanel {
     public RegisteredPlayer getDeck() {
 
         
-        JList lst0 = getLstDecks();
-        final String[] selection = Arrays.copyOf(lst0.getSelectedValues(), lst0.getSelectedValues().length, String[].class);
+        JList<String> lst0 = getLstDecks();
+        final List<String> selection = lst0.getSelectedValuesList();
 
-        if (selection.length == 0) { return null; }
+        if (selection.isEmpty()) { return null; }
 
         // Special branch for quest events
         if (lst0.getName().equals(DeckgenUtil.DeckTypes.QUESTEVENTS.toString())) {
-            QuestEvent event = DeckgenUtil.getQuestEvent(selection[0]); 
+            QuestEvent event = DeckgenUtil.getQuestEvent(selection.get(0)); 
             RegisteredPlayer result = new RegisteredPlayer(event.getEventDeck());
             if( event instanceof QuestEventChallenge ) {
                 result.setStartingLife(((QuestEventChallenge) event).getAiLife());
@@ -283,11 +283,11 @@ public class FDeckChooser extends JPanel {
         if (lst0.getName().equals(DeckgenUtil.DeckTypes.COLORS.toString()) && DeckgenUtil.colorCheck(selection)) {
             deck = DeckgenUtil.buildColorDeck(selection, isAi);
         } else if (lst0.getName().equals(DeckgenUtil.DeckTypes.THEMES.toString())) {
-            deck = DeckgenUtil.buildThemeDeck(selection);
+            deck = DeckgenUtil.buildThemeDeck(selection.get(0));
         } else if (lst0.getName().equals(DeckgenUtil.DeckTypes.CUSTOM.toString())) {
-            deck = DeckgenUtil.getConstructedDeck(selection);
+            deck = DeckgenUtil.getConstructedDeck(selection.get(0));
         } else if (lst0.getName().equals(DeckgenUtil.DeckTypes.PRECON.toString())) {
-            deck = DeckgenUtil.getPreconDeck(selection);
+            deck = DeckgenUtil.getPreconDeck(selection.get(0));
         }
 
         return RegisteredPlayer.fromDeck(deck);

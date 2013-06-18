@@ -57,19 +57,19 @@ public class DeckgenUtil {
      * @param selection {@link java.lang.String} array
      * @return {@link forge.deck.Deck}
      */
-    public static Deck buildColorDeck(final String[] selection, boolean forAi) {
+    public static Deck buildColorDeck(List<String> selection, boolean forAi) {
         
         final Deck deck;
         String deckName = null;  
         
         GenerateColoredDeckBase gen = null;
         
-        if (selection.length == 1) {
-            gen = new GenerateMonoColorDeck(selection[0]);
-        } else if (selection.length == 2) {
-            gen = new Generate2ColorDeck(selection[0], selection[1]);
-        } else if (selection.length == 3) {
-            gen = new Generate3ColorDeck(selection[0], selection[1], selection[2]);
+        if (selection.size() == 1) {
+            gen = new GenerateMonoColorDeck(selection.get(0));
+        } else if (selection.size() == 2) {
+            gen = new Generate2ColorDeck(selection.get(0), selection.get(1));
+        } else if (selection.size() == 3) {
+            gen = new Generate3ColorDeck(selection.get(0), selection.get(1), selection.get(2));
         } else {
             gen = new Generate5ColorDeck();
             deckName = "5 colors";
@@ -91,10 +91,10 @@ public class DeckgenUtil {
      * @param selection {@link java.lang.String}
      * @return {@link forge.deck.Deck}
      */
-    public static Deck buildThemeDeck(final String[] selection) {
+    public static Deck buildThemeDeck(final String selection) {
         final GenerateThemeDeck gen = new GenerateThemeDeck();
         final Deck deck = new Deck();
-        deck.getMain().addAll(gen.getThemeDeck(selection[0], 60));
+        deck.getMain().addAll(gen.getThemeDeck(selection, 60));
 
         return deck;
     }
@@ -105,12 +105,12 @@ public class DeckgenUtil {
      * @param selection {java.lang.String}
      * @return {@link forge.deck.Deck}
      */
-    public static Deck getConstructedDeck(final String[] selection) {
-        return Singletons.getModel().getDecks().getConstructed().get(selection[0]);
+    public static Deck getConstructedDeck(final String selection) {
+        return Singletons.getModel().getDecks().getConstructed().get(selection);
     }
     
-    public static Deck getPreconDeck(String[] selection) {
-        return QuestController.getPrecons().get(selection[0]).getDeck();
+    public static Deck getPreconDeck(String selection) {
+        return QuestController.getPrecons().get(selection).getDeck();
     }
 
     public static QuestEvent getQuestEvent(final String name) {
@@ -130,10 +130,10 @@ public class DeckgenUtil {
     public static Deck getRandomColorDeck(boolean forAi) {
         final int[] colorCount = new int[] {1, 2, 3, 5};
         final int count = colorCount[MyRandom.getRandom().nextInt(colorCount.length)];
-        final String[] selection = new String[count];
+        final List<String> selection = new ArrayList<String>();
 
         // A simulated selection of "random 1" will trigger the AI selection process.
-        for (int i = 0; i < count; i++) { selection[i] = "Random 1"; }
+        for (int i = 0; i < count; i++) { selection.add("Random"); }
 
         return DeckgenUtil.buildColorDeck(selection, forAi);
     }
@@ -143,7 +143,7 @@ public class DeckgenUtil {
         final List<String> themeNames = new ArrayList<String>();
         for (final String s : GenerateThemeDeck.getThemeNames()) { themeNames.add(s); }
         final int rand = (int) (Math.floor(Math.random() * themeNames.size()));
-        return DeckgenUtil.buildThemeDeck(new String[] {themeNames.get(rand)});
+        return DeckgenUtil.buildThemeDeck(themeNames.get(rand));
     }
 
     /** @return {@link forge.deck.Deck} */
@@ -201,7 +201,7 @@ public class DeckgenUtil {
     }
 
     /** @param lst0 {@link javax.swing.JList} */
-    public static void randomSelect(final JList lst0) {
+    public static void randomSelect(final JList<String> lst0) {
         final int size = lst0.getModel().getSize();
 
         if (size > 0) {
@@ -216,7 +216,7 @@ public class DeckgenUtil {
     /** Shows decklist dialog for a given deck.
      * @param lst0 {@link javax.swing.JList}
      */
-    public static void showDecklist(final JList lst0) {
+    public static void showDecklist(final JList<String> lst0) {
         final String deckName = lst0.getSelectedValue().toString();
         final Deck deck;
 
@@ -281,17 +281,17 @@ public class DeckgenUtil {
      * @param colors0 String[]
      * @return boolean
      */
-    public static boolean colorCheck(final String[] colors0) {
+    public static boolean colorCheck(final List<String> colors0) {
         boolean result = true;
 
-        if (colors0.length == 4) {
+        if (colors0.size() == 4) {
             JOptionPane.showMessageDialog(null,
                     "Sorry, four color generated decks aren't supported yet."
                     + "\n\rPlease use 2, 3, or 5 colors for this deck.",
                     "Generate deck: 4 colors", JOptionPane.ERROR_MESSAGE);
             result = false;
         }
-        else if (colors0.length > 5) {
+        else if (colors0.size() > 5) {
             JOptionPane.showMessageDialog(null,
                     "Generate deck: maximum five colors!",
                     "Generate deck: too many colors", JOptionPane.ERROR_MESSAGE);

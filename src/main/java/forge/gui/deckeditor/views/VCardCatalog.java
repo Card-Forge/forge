@@ -87,7 +87,7 @@ public enum VCardCatalog implements IVDoc<CCardCatalog>, ITableContainer {
             .text("Add filter")
             .tooltip("Click to add custom filters to the card list")
             .reactOnMouseDown().build();
-    private final JComboBox cbSearchMode = new JComboBox();
+    private final JComboBox<String> cbSearchMode = new JComboBox<String>();
     private final JTextField txfSearch = new FTextField.Builder().build();
     private final FLabel lblName = new FLabel.Builder().text("Name").hoverable().selectable().selected().build();
     private final FLabel lblType = new FLabel.Builder().text("Type").hoverable().selectable().selected().build();
@@ -252,7 +252,7 @@ public enum VCardCatalog implements IVDoc<CCardCatalog>, ITableContainer {
     public FLabel getLblText()       { return lblText;       }
     
     public FLabel getBtnAddRestriction() { return btnAddRestriction; }
-    public JComboBox getCbSearchMode()   { return cbSearchMode;      }
+    public JComboBox<String> getCbSearchMode()   { return cbSearchMode;      }
     public JTextField getTxfSearch()     { return txfSearch;         }
 
     public Map<SEditorUtil.StatTypes, FLabel> getStatLabels() {

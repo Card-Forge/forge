@@ -23,7 +23,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowFocusListener;
-import java.util.AbstractList;
 import java.util.Collection;
 import java.util.List;
 
@@ -79,7 +78,7 @@ public class ListChooser<T> {
     // Flag: was the dialog already shown?
     private boolean called;
     // initialized before; listeners may be added to it
-    private JList jList;
+    private JList<T> jList;
     // Temporarily stored for event handlers during show
     private JDialog dialog;
     private JOptionPane optionPane;
@@ -91,7 +90,7 @@ public class ListChooser<T> {
         this.minChoices = minChoices;
         this.maxChoices = maxChoices;
         this.list = list.getClass().isInstance(List.class) ? (List<T>)list : Lists.newArrayList(list);
-        this.jList = new JList(new ChooserListModel());
+        this.jList = new JList<T>(new ChooserListModel());
         this.ok = new CloseAction(JOptionPane.OK_OPTION, "OK");
         this.ok.setEnabled(minChoices == 0);
         this.cancel = new CloseAction(JOptionPane.CANCEL_OPTION, "Cancel");
@@ -118,7 +117,7 @@ public class ListChooser<T> {
      * 
      * @return a {@link javax.swing.JList} object.
      */
-    public JList getJList() {
+    public JList<T> getJList() {
         return this.jList;
     }
 
@@ -210,19 +209,7 @@ public class ListChooser<T> {
         if (!this.called) {
             throw new IllegalStateException("not yet shown");
         }
-        final Object[] selected = this.jList.getSelectedValues();
-        return new AbstractList<T>() {
-            @Override
-            public int size() {
-                return selected.length;
-            }
-
-            @SuppressWarnings("unchecked")
-            @Override
-            public T get(final int index) {
-                return (T) selected[index];
-            }
-        };
+        return this.jList.getSelectedValuesList();
     }
 
     /**
@@ -242,7 +229,6 @@ public class ListChooser<T> {
      * 
      * @return a T object.
      */
-    @SuppressWarnings("unchecked")
     public T getSelectedValue() {
         if (!this.called) {
             throw new IllegalStateException("not yet shown");
@@ -261,7 +247,7 @@ public class ListChooser<T> {
         }
     }
 
-    private class ChooserListModel extends AbstractListModel {
+    private class ChooserListModel extends AbstractListModel<T> {
 
         private static final long serialVersionUID = 3871965346333840556L;
 
@@ -271,7 +257,7 @@ public class ListChooser<T> {
         }
 
         @Override
-        public Object getElementAt(final int index) {
+        public T getElementAt(final int index) {
             return ListChooser.this.list.get(index);
         }
     }

@@ -51,7 +51,7 @@ public enum VSubmenuGauntletBuild implements IVSubmenu<CSubmenuGauntletBuild> {
     private final JPanel pnlDirections = new JPanel();
 
     private final FDeckChooser lstLeft = new FDeckChooser("Deck", false);
-    private final JList lstRight = new FList();
+    private final JList<String> lstRight = new FList<String>();
 
     private final JScrollPane scrRight  = new FScrollPane(lstRight,
             ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
@@ -210,7 +210,7 @@ public enum VSubmenuGauntletBuild implements IVSubmenu<CSubmenuGauntletBuild> {
     }
 
     /** @return {@link javax.swing.JList} */
-    public JList getLstRight() {
+    public JList<String> getLstRight() {
         return this.lstRight;
     }
 

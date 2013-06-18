@@ -9,6 +9,7 @@ import java.io.File;
 import javax.swing.JCheckBox;
 import javax.swing.SwingUtilities;
 
+import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang3.text.WordUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -154,7 +155,7 @@ public enum CSubmenuPreferences implements ICDoc {
 
     private void updateSkinNames() {
         final VSubmenuPreferences view = VSubmenuPreferences.SINGLETON_INSTANCE;
-        final String[] uglyNames = FSkin.getSkins().toArray(new String[0]);
+        final String[] uglyNames = FSkin.getSkins().toArray(ArrayUtils.EMPTY_STRING_ARRAY);
         final String[] prettyNames = new String[uglyNames.length];
         final String currentName = Singletons.getModel().getPreferences().getPref(FPref.UI_SKIN);
         int currentIndex = 0;
@@ -171,7 +172,7 @@ public enum CSubmenuPreferences implements ICDoc {
 
     private void updateAIProfiles() {
         final VSubmenuPreferences view = VSubmenuPreferences.SINGLETON_INSTANCE;
-        final ArrayList<String> profileNames = AiProfileUtil.getProfilesDisplayList();
+        final List<String> profileNames = AiProfileUtil.getProfilesDisplayList();
         final String currentName = Singletons.getModel().getPreferences().getPref(FPref.UI_CURRENT_AI_PROFILE);
         int currentIndex = 0;
 
@@ -179,7 +180,7 @@ public enum CSubmenuPreferences implements ICDoc {
             if (currentName.equalsIgnoreCase(profileNames.get(i))) { currentIndex = i; }
         }
 
-        view.getLstChooseAIProfile().setListData(profileNames.toArray());
+        view.getLstChooseAIProfile().setListData(profileNames.toArray(ArrayUtils.EMPTY_STRING_ARRAY));
         view.getLstChooseAIProfile().setSelectedIndex(currentIndex);
         view.getLstChooseAIProfile().ensureIndexIsVisible(view.getLstChooseAIProfile().getSelectedIndex());
     }

@@ -22,11 +22,11 @@ import javax.swing.border.EmptyBorder;
  * based on code at http://www.devx.com/tips/Tip/5342
  */
 @SuppressWarnings("serial")
-public class FCheckBoxList extends JList {
+public class FCheckBoxList<E> extends JList<E> {
     protected static Border noFocusBorder = new EmptyBorder(1, 1, 1, 1);
 
     public FCheckBoxList(boolean keepSelectionWhenFocusLost) {
-        setCellRenderer(new CellRenderer());
+        setCellRenderer(new CellRenderer<E>());
 
         addMouseListener(new MouseAdapter() {
             @Override
@@ -80,8 +80,8 @@ public class FCheckBoxList extends JList {
         setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }
     
-    protected class CellRenderer implements ListCellRenderer {
-        public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+    protected class CellRenderer<E1> implements ListCellRenderer<E1> {
+        public Component getListCellRendererComponent(JList<? extends E1> list, E1 value, int index, boolean isSelected, boolean cellHasFocus) {
             FCheckBox checkbox = (FCheckBox)value;
             checkbox.setBackground(isSelected ? getSelectionBackground() : getBackground());
             checkbox.setForeground(isSelected ? getSelectionForeground() : getForeground());
