@@ -89,15 +89,26 @@ public enum CCombat implements ICDoc {
 
             // Associate Bands, Attackers Blockers
             for(AttackingBand band : bands) {
-                display.append(" BAND");
-                if (band.getBlocked()) {
-                    display.append(" (blocked)");
+                boolean isBand = band.getAttackers().size() > 1;
+                if (isBand) {
+                    // Only print Band data if it's actually a band
+                    display.append(" BAND");
+                    if (band.getBlocked()) {
+                        display.append(" (blocked)");
+                    }
+                    display.append("\n");
                 }
-                display.append("\n");
                 
                 for (final Card c : band.getAttackers()) {
                     display.append(" > ");
                     display.append(combatantToString(c)).append("\n");
+                }
+
+                if (!isBand && band.getBlockers().isEmpty()) {
+                    // if single creature is blocked, but no longer has blockers, tell the user!
+                    if (band.getBlocked()) {
+                        display.append("     (blocked) ");
+                    }
                 }
 
                 for (final Card element : band.getBlockers()) {
