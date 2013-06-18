@@ -60,7 +60,7 @@ public class TargetChoices {
      *            a {@link java.lang.Object} object.
      * @return a boolean.
      */
-    public final boolean addTarget(final Object o) {
+    public final boolean addTarget(final ITargetable o) {
         if (o instanceof Player) {
             return this.addTarget((Player) o);
         } else if (o instanceof Card) {

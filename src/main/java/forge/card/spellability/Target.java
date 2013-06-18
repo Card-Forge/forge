@@ -22,6 +22,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
+import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
 
 import forge.Card;
@@ -49,7 +50,7 @@ public class Target {
     // What this Object is restricted to targeting
     private boolean tgtValid = false;
     private String[] validTgts;
-    private String vtSelection = "";
+    private String uiPrompt = "";
     private List<ZoneType> tgtZone = Arrays.asList(ZoneType.Battlefield);
 
     //SpellAbility Restrictions
@@ -96,7 +97,7 @@ public class Target {
      */
     public Target(final Target target) {
         this.tgtValid = true;
-        this.vtSelection = target.getVTSelection();
+        this.uiPrompt = target.getVTSelection();
         this.validTgts = target.getValidTgts();
         this.minTargets = target.getMinTargets();
         this.maxTargets = target.getMaxTargets();
@@ -118,20 +119,8 @@ public class Target {
         this.choice = target.getTargetChoices();
     }
 
-    /**
-     * <p>
-     * Constructor for Target.
-     * </p>
-     * 
-     * @param src
-     *            a {@link forge.Card} object.
-     * @param select
-     *            a {@link java.lang.String} object.
-     * @param valid
-     *            an array of {@link java.lang.String} objects.
-     */
-    public Target(final String select, final String[] valid) {
-        this(select, valid, "1", "1");
+    public Target() {
+        this(null, ArrayUtils.EMPTY_STRING_ARRAY, "1", "1");
     }
 
     /**
@@ -141,23 +130,7 @@ public class Target {
      * 
      * @param src
      *            a {@link forge.Card} object.
-     * @param select
-     *            a {@link java.lang.String} object.
-     * @param valid
-     *            a {@link java.lang.String} object.
-     */
-    public Target(final String select, final String valid) {
-        this(select, valid.split(","), "1", "1");
-    }
-
-    /**
-     * <p>
-     * Constructor for Target.
-     * </p>
-     * 
-     * @param src
-     *            a {@link forge.Card} object.
-     * @param select
+     * @param prompt
      *            a {@link java.lang.String} object.
      * @param valid
      *            an array of {@link java.lang.String} objects.
@@ -166,11 +139,10 @@ public class Target {
      * @param max
      *            a {@link java.lang.String} object.
      */
-    public Target(final String select, final String[] valid, final String min, final String max) {
+    public Target(final String prompt, final String[] valid, final String min, final String max) {
         this.tgtValid = true;
-        this.vtSelection = select;
+        this.uiPrompt = prompt;
         this.validTgts = valid;
-
         this.minTargets = min;
         this.maxTargets = max;
     }
@@ -251,7 +223,7 @@ public class Target {
      * @return a {@link java.lang.String} object.
      */
     public final String getVTSelection() {
-        return this.vtSelection;
+        return this.uiPrompt;
     }
 
     /**
