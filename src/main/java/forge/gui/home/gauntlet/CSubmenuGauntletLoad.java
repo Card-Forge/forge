@@ -96,7 +96,7 @@ public enum CSubmenuGauntletLoad implements ICDoc {
 
     private void startGame() {
         FModel.SINGLETON_INSTANCE.setGauntletData(
-                GauntletIO.loadGauntlet(VSubmenuGauntletQuick.SINGLETON_INSTANCE.getGauntletLister().getSelectedGauntletFile()));
+                GauntletIO.loadGauntlet(view.getGauntletLister().getSelectedGauntletFile()));
 
         // Start game
         SwingUtilities.invokeLater(new Runnable() {
