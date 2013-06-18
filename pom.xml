@@ -28,7 +28,7 @@
             ISO-8859-1
         </project.reporting.outputEncoding>
         <configSourceDirectory>src/main/config</configSourceDirectory>
-        <jettyVersion>8.1.10.v20130312</jettyVersion>
+        <jettyVersion>8.1.11.v20130520</jettyVersion>
     </properties>
     <developers>
         <developer>
@@ -246,7 +246,7 @@
 
             <plugin>
                 <artifactId>maven-release-plugin</artifactId>
-                <version>2.3.2</version><!--$NO-MVN-MAN-VER$-->
+                <version>2.4.1</version><!--$NO-MVN-MAN-VER$-->
                 <configuration>
                     <allowTimestampedSnapshots>true</allowTimestampedSnapshots>
                 </configuration>
@@ -437,12 +437,12 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-dependency-plugin</artifactId>
-                    <version>2.6</version>
+                    <version>2.8</version>
                 </plugin>
 
                 <plugin>
                     <artifactId>maven-release-plugin</artifactId>
-                    <version>2.3.2</version>
+                    <version>2.4.1</version>
                 </plugin>
 
                 <plugin>
@@ -574,7 +574,7 @@
 
             <plugin>
                 <artifactId>maven-dependency-plugin</artifactId>
-                <version>2.6</version>
+                <version>2.8</version>
                 <reportSets>
                     <reportSet>
                         <reports>
@@ -708,7 +708,7 @@
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
-            <version>2.2.3</version>
+            <version>2.2.4</version>
         </dependency>
         <dependency>
             <groupId>com.thoughtworks.xstream</groupId>
@@ -718,7 +718,7 @@
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
-            <version>6.8.1</version>
+            <version>6.8.5</version>
             <scope>test</scope>
         </dependency>
         <dependency>
