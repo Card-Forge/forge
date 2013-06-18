@@ -207,6 +207,7 @@ public class CardFactory {
             for (OptionalCost cost : original.getOptionalCostsPaid()) {
                 c.addOptionalCostPaid(cost);
             }
+            copySA.setPaidHash(sa.getPaidHash());
         }
 
         controller.getController().playSpellAbilityForFree(copySA);
