@@ -22,6 +22,8 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
+
 import forge.Card;
 import forge.ITargetable;
 import forge.card.CardType;
@@ -43,7 +45,7 @@ public class Target {
     // Targeting restrictions (Creature, Min/Maxm etc) which are true for this
 
     // Target Choices (which is specific for the StackInstance)
-    private Card srcCard;
+
     // What this Object is restricted to targeting
     private boolean tgtValid = false;
     private String[] validTgts;
@@ -94,7 +96,6 @@ public class Target {
      */
     public Target(final Target target) {
         this.tgtValid = true;
-        this.srcCard = target.getSourceCard();
         this.vtSelection = target.getVTSelection();
         this.validTgts = target.getValidTgts();
         this.minTargets = target.getMinTargets();
@@ -129,8 +130,8 @@ public class Target {
      * @param valid
      *            an array of {@link java.lang.String} objects.
      */
-    public Target(final Card src, final String select, final String[] valid) {
-        this(src, select, valid, "1", "1");
+    public Target(final String select, final String[] valid) {
+        this(select, valid, "1", "1");
     }
 
     /**
@@ -145,8 +146,8 @@ public class Target {
      * @param valid
      *            a {@link java.lang.String} object.
      */
-    public Target(final Card src, final String select, final String valid) {
-        this(src, select, valid.split(","), "1", "1");
+    public Target(final String select, final String valid) {
+        this(select, valid.split(","), "1", "1");
     }
 
     /**
@@ -165,8 +166,7 @@ public class Target {
      * @param max
      *            a {@link java.lang.String} object.
      */
-    public Target(final Card src, final String select, final String[] valid, final String min, final String max) {
-        this.srcCard = src;
+    public Target(final String select, final String[] valid, final String min, final String max) {
         this.tgtValid = true;
         this.vtSelection = select;
         this.validTgts = valid;
@@ -175,29 +175,6 @@ public class Target {
         this.maxTargets = max;
     }
     
-    /**
-     * <p>
-     * getSourceCard.
-     * </p>
-     * 
-     * @return a Card object.
-     */
-    public final Card getSourceCard() {
-        return this.srcCard;
-    }
-
-    /**
-     * <p>
-     * setSourceCard.
-     * </p>
-     * 
-     * @param source
-     *            a Card object.
-     */
-    public final void setSourceCard(final Card source) {
-        this.srcCard = source;
-    }
-
     /**
      * <p>
      * getTargetChoices.
@@ -672,13 +649,14 @@ public class Target {
                 return true;
             }
         }
-
+        
+        final Card srcCard = sa.getSourceCard(); // should there be OrginalHost at any moment?
         if (this.tgtZone.contains(ZoneType.Stack)) {
             // Stack Zone targets are considered later
             return true;
         } else {
             for (final Card c : game.getCardsIn(this.tgtZone)) {
-                if (!c.isValid(this.validTgts, this.srcCard.getController(), this.srcCard)) {
+                if (!c.isValid(this.validTgts, srcCard.getController(), srcCard)) {
                     continue;
                 }
                 if (isTargeted && !c.canBeTargetedBy(sa)) {
@@ -729,9 +707,10 @@ public class Target {
             }
         }
 
+        final Card srcCard = sa.getSourceCard(); // should there be OrginalHost at any moment?
         if (this.tgtZone.contains(ZoneType.Stack)) {
             for (final Card c : game.getStackZone().getCards()) {
-                boolean isValidTarget = c.isValid(this.validTgts, this.srcCard.getController(), this.srcCard);
+                boolean isValidTarget = c.isValid(this.validTgts, srcCard.getController(), srcCard);
                 boolean canTarget = (!isTargeted || c.canBeTargetedBy(sa));
                 boolean isAlreadyTargeted = this.getTargetCards().contains(c);
                 if (isValidTarget && canTarget && !isAlreadyTargeted) {
@@ -740,7 +719,7 @@ public class Target {
             }
         } else {
             for (final Card c : game.getCardsIn(this.tgtZone)) {
-                boolean isValidTarget = c.isValid(this.validTgts, this.srcCard.getController(), this.srcCard);
+                boolean isValidTarget = c.isValid(this.validTgts, srcCard.getController(), srcCard);
                 boolean canTarget = (!isTargeted || c.canBeTargetedBy(sa));
                 boolean isAlreadyTargeted = this.getTargetCards().contains(c);
                 if (isValidTarget && canTarget && !isAlreadyTargeted) {
@@ -972,8 +951,10 @@ public class Target {
             return;
         }
 
-        if (toDistribute.matches("[0-9][0-9]")) {
+        if (StringUtils.isNumeric(toDistribute)) {
             this.setStillToDivide(Integer.parseInt(toDistribute));
+        } else if ( source == null ) { 
+            return; // such calls come from AbilityFactory.readTarget - at this moment we don't yet know X or any other variables
         } else if (source.getSVar(toDistribute).equals("xPaid")) {
             this.setStillToDivide(source.getXManaCostPaid());
         } else {

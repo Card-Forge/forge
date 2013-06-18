@@ -189,13 +189,12 @@ public class CardFactory {
         //remove all costs
         copySA.setPayCosts(new Cost("", sa.isAbility()));
         if (definedTarget != null) {
-            Target target = new Target(c, null, "");
+            Target target = new Target(null, "");
             target.setDefinedTarget(definedTarget);
             copySA.setTarget(target);
         }
         else if (sa.getTarget() != null) {
             Target target = new Target(sa.getTarget());
-            target.setSourceCard(c);
             copySA.setTarget(target);
         }
         copySA.setActivatingPlayer(controller);

@@ -124,7 +124,7 @@ public final class AbilityFactory {
     public static final SpellAbility getAbility(AbilityRecordType type, ApiType api, Map<String, String> mapParams, Cost abCost, Card hostCard) {
         
         
-        Target abTgt = mapParams.containsKey("ValidTgts") ? readTarget(hostCard, mapParams) : null;
+        Target abTgt = mapParams.containsKey("ValidTgts") ? readTarget(mapParams) : null;
 
         if (api == ApiType.CopySpellAbility || api == ApiType.Counter || api == ApiType.ChangeTargets) {
             // Since all "CopySpell" ABs copy things on the Stack no need for it to be everywhere
@@ -204,20 +204,17 @@ public final class AbilityFactory {
         return spellAbility;
     }
 
-    private static final Target readTarget(Card hostC, Map<String, String> mapParams) {
+    private static final Target readTarget(Map<String, String> mapParams) {
         final String min = mapParams.containsKey("TargetMin") ? mapParams.get("TargetMin") : "1";
         final String max = mapParams.containsKey("TargetMax") ? mapParams.get("TargetMax") : "1";
 
 
         // TgtPrompt now optional
         final StringBuilder sb = new StringBuilder();
-        if (hostC != null) {
-            sb.append(hostC + " - ");
-        }
         final String prompt = mapParams.containsKey("TgtPrompt") ? mapParams.get("TgtPrompt") : "Select target " + mapParams.get("ValidTgts");
         sb.append(prompt);
 
-        Target abTgt = new Target(hostC, sb.toString(), mapParams.get("ValidTgts").split(","), min, max);
+        Target abTgt = new Target(prompt, mapParams.get("ValidTgts").split(","), min, max);
 
         if (mapParams.containsKey("TgtZone")) { // if Targeting
                                                      // something
@@ -264,7 +261,7 @@ public final class AbilityFactory {
             abTgt.setDifferentControllers(true);
         }
         if (mapParams.containsKey("DividedAsYouChoose")) {
-            abTgt.calculateStillToDivide(mapParams.get("DividedAsYouChoose"), hostC, null);
+            abTgt.calculateStillToDivide(mapParams.get("DividedAsYouChoose"), null, null);
             abTgt.setDividedAsYouChoose(true);
         }
         if (mapParams.containsKey("TargetsAtRandom")) {

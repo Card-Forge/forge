@@ -1302,7 +1302,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         if (chainsList != null && (numDrawnThisDrawStep > 0 || !game.getPhaseHandler().is(PhaseType.DRAW))) {
             for(Card c : chainsList) {
                 // I have to target this player - don't know how to do it.
-                Target target = new Target(c, null, "");
+                Target target = new Target(null, "");
                 target.addTarget(this);
 
                 if (getCardsIn(ZoneType.Hand).isEmpty()) {

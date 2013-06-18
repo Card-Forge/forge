@@ -132,7 +132,7 @@ public class CardFactoryCreatures {
 
     private static void getCard_MasterOfTheWildHunt(final Card card) {
         final Cost abCost = new Cost("T", true);
-        final Target abTgt = new Target(card, "Target a creature to Hunt", "Creature".split(","));
+        final Target abTgt = new Target("Target a creature to Hunt", new String[]{"Creature"});
         class MasterOfTheWildHuntAbility extends AbilityActivated {
             public MasterOfTheWildHuntAbility(final Card ca, final Cost co, final Target t) {
                 super(ca, co, t);

@@ -79,10 +79,6 @@ public abstract class SpellAbility implements ISpellAbility, ITargetable {
     private boolean offering = false;
     private boolean morphup = false;
 
-    private Card targetCard;
-    /** The chosen target. */
-    private Target chosenTarget = null;
-
     /** The pay costs. */
     private Cost payCosts = null;
     private SpellAbilityRestriction restrictions = new SpellAbilityRestriction();
@@ -1357,6 +1353,10 @@ public abstract class SpellAbility implements ISpellAbility, ITargetable {
     //
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     
+    private Card targetCard;
+    /** The chosen target. */
+    private Target chosenTarget = null;
+
     /**
      * <p>
      * Getter for the field <code>targetCard</code>.

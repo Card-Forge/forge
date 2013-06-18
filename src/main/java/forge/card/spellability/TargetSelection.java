@@ -147,9 +147,9 @@ public class TargetSelection {
         if (canTgtStack) {
             // Since getTargetableCards doesn't have additional checks if one of the Zones is stack
             // Remove the activating card from targeting itself if its on the Stack
-            Card activatingCard = tgt.getSourceCard();
+            Card activatingCard = ability.getSourceCard();
             if (activatingCard.isInZone(ZoneType.Stack)) {
-                choices.remove(tgt.getSourceCard());
+                choices.remove(ability.getSourceCard());
             }
         }
         List<ITargetable> targetedObjects = this.ability.getUniqueTargets();
