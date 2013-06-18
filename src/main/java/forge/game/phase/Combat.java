@@ -141,6 +141,25 @@ public class Combat {
      * 
      * @return an array of {@link forge.Card} objects.
      */
+    public final List<Player> getDefendingPlayers() {
+        final List<Player> defending = new ArrayList<Player>();
+
+        for (final GameEntity o : this.defenderMap.keySet()) {
+            if (o instanceof Player) {
+                defending.add((Player) o);
+            }
+        }
+
+        return defending;
+    }
+
+    /**
+     * <p>
+     * getDefendingPlaneswalkers.
+     * </p>
+     * 
+     * @return an array of {@link forge.Card} objects.
+     */
     public final List<Card> getDefendingPlaneswalkers() {
         final List<Card> pwDefending = new ArrayList<Card>();
 

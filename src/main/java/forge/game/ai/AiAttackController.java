@@ -388,11 +388,10 @@ public class AiAttackController {
         final Player opp = ai.getOpponent();
 
 
-        for (int i = 0; i < this.attackers.size(); i++) {
-            if (!CombatUtil.canBeBlocked(this.attackers.get(i), this.blockers)
-                    || this.attackers.get(i).hasKeyword("You may have CARDNAME assign its combat damage as though"
-                            + " it weren't blocked.")) {
-                unblockedAttackers.add(this.attackers.get(i));
+        for (Card attacker : attackers) {
+            if (!CombatUtil.canBeBlocked(attacker, this.blockers)
+                    || attacker.hasKeyword("You may have CARDNAME assign its combat damage as though it weren't blocked.")) {
+                unblockedAttackers.add(attacker);
             }
         }
 
@@ -446,14 +445,14 @@ public class AiAttackController {
      */
     public final GameEntity chooseDefender(final Combat c, final Combat gameCombat, final boolean bAssault) {
         final List<GameEntity> defs = c.getDefenders();
-
-        // Start with last planeswalker
-        int n = defs.size() - 1;
+        if (defs.size() == 1) {
+            return defs.get(0);
+        }
 
         final GameEntity entity = ai.getMustAttackEntity();
         if (null != entity) {
             final List<GameEntity> defenders = gameCombat.getDefenders();
-            n = defenders.indexOf(entity);
+            int n = defenders.indexOf(entity);
             if (-1 == n) {
                 System.out.println("getMustAttackEntity() returned something not in defenders.");
                 return defs.get(0);
@@ -461,7 +460,17 @@ public class AiAttackController {
                 return entity;
             }
         } else {
-            return defs.get(bAssault ? 0 : n);
+            // 1. assault the opponent if you can kill him
+            if (bAssault) {
+                return c.getDefendingPlayers().get(0);
+            }
+            // 2. attack planeswalkers
+            List<Card> pwDefending = c.getDefendingPlaneswalkers();
+            if (!pwDefending.isEmpty()) {
+                return pwDefending.get(0);
+            } else {
+                return defs.get(0);
+            }
         }
     }
 
@@ -770,7 +779,6 @@ public class AiAttackController {
         attackersLeft = this.notNeededAsBlockers(ai, attackersLeft);
         attackersLeft = this.sortAttackers(attackersLeft);
 
-        int iDefender = combat.getDefenders().indexOf(defender);
         for (int i = 0; i < attackersLeft.size(); i++) {
             final Card attacker = attackersLeft.get(i);
             if (this.aiAggression < 5 && !attacker.hasFirstStrike() && !attacker.hasDoubleStrike()
@@ -782,7 +790,7 @@ public class AiAttackController {
             if (this.shouldAttack(ai, attacker, this.blockers, combat) && CombatUtil.canAttack(attacker, defender, combat)) {
                 combat.addAttacker(attacker, defender);
                 // check if attackers are enough to finish the attacked planeswalker
-                if (iDefender > 0) {
+                if (defender instanceof Card) {
                     Card pw = (Card) defender;
                     final int blockNum = this.blockers.size();
                     int attackNum = 0;
@@ -798,8 +806,19 @@ public class AiAttackController {
                     }
                     // if enough damage: switch to next planeswalker or player
                     if (damage >= pw.getCounters(CounterType.LOYALTY)) {
-                        iDefender--;
-                        defender = combat.getDefenders().get(iDefender);
+                        List<Card> pwDefending = combat.getDefendingPlaneswalkers();
+                        boolean found = false;
+                        // look for next planeswalker
+                        for (Card walker : pwDefending) {
+                            if (combat.getAttackersOf(walker).isEmpty()) {
+                                defender = walker;
+                                found = true;
+                                break;
+                            }
+                        }
+                        if (!found) {
+                            defender = combat.getDefendingPlayers().get(0);
+                        }
                     }
                 }
             }
