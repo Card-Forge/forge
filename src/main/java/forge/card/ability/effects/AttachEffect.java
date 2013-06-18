@@ -7,6 +7,7 @@ import forge.Card;
 import forge.CardLists;
 import forge.Command;
 import forge.GameEntity;
+import forge.ITargetable;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.ApiType;
 import forge.card.ability.SpellAbilityEffect;
@@ -37,7 +38,7 @@ public class AttachEffect extends SpellAbilityEffect {
         Card source = sa.getSourceCard();
         Card card = sa.getSourceCard();
 
-        final List<Object> targets = getTargetObjects(sa);
+        final List<ITargetable> targets = getTargetObjects(sa);
 
         if (sa.hasParam("Object")) {
             card = AbilityUtils.getDefinedCards(source, sa.getParam("Object"), sa).get(0);
@@ -60,7 +61,7 @@ public class AttachEffect extends SpellAbilityEffect {
 
         sb.append(" Attach to ");
 
-        final List<Object> targets = getTargetObjects(sa);
+        final List<ITargetable> targets = getTargetObjects(sa);
         // Should never allow more than one Attachment per card
 
         for (final Object o : targets) {

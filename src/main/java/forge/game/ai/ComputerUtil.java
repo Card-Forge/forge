@@ -33,6 +33,7 @@ import forge.CardPredicates;
 import forge.Constant;
 import forge.CardPredicates.Presets;
 import forge.CardUtil;
+import forge.ITargetable;
 import forge.card.CardType;
 import forge.card.MagicColor;
 import forge.card.ability.AbilityUtils;
@@ -1287,10 +1288,10 @@ public class ComputerUtil {
      * @return a {@link java.util.ArrayList} object.
      * @since 1.0.15
      */
-    public static ArrayList<Object> predictThreatenedObjects(final Player aiPlayer, final SpellAbility saviour,
+    public static List<ITargetable> predictThreatenedObjects(final Player aiPlayer, final SpellAbility saviour,
             final SpellAbility topStack) {
-        ArrayList<Object> objects = new ArrayList<Object>();
-        final ArrayList<Object> threatened = new ArrayList<Object>();
+        List<ITargetable> objects = new ArrayList<ITargetable>();
+        final List<ITargetable> threatened = new ArrayList<ITargetable>();
         ApiType saviourApi = saviour.getApi();
     
         if (topStack == null) {

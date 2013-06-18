@@ -5,6 +5,7 @@ import java.util.List;
 
 import forge.Card;
 import forge.CardUtil;
+import forge.ITargetable;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
@@ -16,7 +17,7 @@ public class DamagePreventEffect extends SpellAbilityEffect {
     protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
 
-        final List<Object> tgts = getTargetObjects(sa);
+        final List<ITargetable> tgts = getTargetObjects(sa);
 
         sb.append("Prevent the next ");
         sb.append(sa.getParam("Amount"));
@@ -65,7 +66,7 @@ public class DamagePreventEffect extends SpellAbilityEffect {
         Card host = sa.getSourceCard();
         int numDam = AbilityUtils.calculateAmount(host, sa.getParam("Amount"), sa);
 
-        ArrayList<Object> tgts;
+        final List<ITargetable> tgts;
         final ArrayList<Card> untargetedCards = new ArrayList<Card>();
         if (sa.getTarget() == null) {
             tgts = AbilityUtils.getDefinedObjects(sa.getSourceCard(), sa.getParam("Defined"), sa);

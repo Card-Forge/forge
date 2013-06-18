@@ -1,10 +1,10 @@
 package forge.card.ability.effects;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import forge.Card;
 import forge.CardLists;
+import forge.ITargetable;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.cardfactory.CardFactoryUtil;
@@ -65,7 +65,7 @@ public class DamageEachEffect extends SpellAbilityEffect {
             sources = CardLists.getValidCards(sources, sa.getParam("ValidCards"), card.getController(), card);
         }
 
-        ArrayList<Object> tgts = new ArrayList<Object>();
+        final List<ITargetable> tgts;
         if (sa.getTarget() == null) {
             tgts = AbilityUtils.getDefinedObjects(sa.getSourceCard(), sa.getParam("DefinedPlayers"), sa);
         } else {

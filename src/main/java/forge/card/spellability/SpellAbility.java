@@ -28,6 +28,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import forge.Card;
 import forge.GameEntity;
+import forge.ITargetable;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.ApiType;
 import forge.card.cost.Cost;
@@ -48,7 +49,7 @@ import forge.util.TextUtil;
  * @author Forge
  * @version $Id$
  */
-public abstract class SpellAbility implements ISpellAbility {
+public abstract class SpellAbility implements ISpellAbility, ITargetable {
 
     // choices for constructor isPermanent argument
     private String description = "";
@@ -892,79 +893,6 @@ public abstract class SpellAbility implements ISpellAbility {
 
     /**
      * <p>
-     * Getter for the field <code>targetCard</code>.
-     * </p>
-     * 
-     * @return a {@link forge.Card} object.
-     */
-    public Card getTargetCard() {
-        if (this.targetCard == null) {
-            final Target tgt = this.getTarget();
-            if (tgt != null) {
-                final List<Card> list = tgt.getTargetCards();
-
-                if (!list.isEmpty()) {
-                    return list.get(0);
-                }
-            }
-            return null;
-        }
-
-        return this.targetCard;
-    }
-
-    /**
-     * <p>
-     * Setter for the field <code>targetCard</code>.
-     * </p>
-     * 
-     * @param card
-     *            a {@link forge.Card} object.
-     */
-    public void setTargetCard(final Card card) {
-        if (card == null) {
-            System.out.println(this.getSourceCard()
-                    + " - SpellAbility.setTargetCard() called with null for target card.");
-            return;
-        }
-
-        final Target tgt = this.getTarget();
-        if (tgt != null) {
-            tgt.addTarget(card);
-        } else {
-            this.targetCard = card;
-        }
-        String desc = "";
-
-        if (!card.isFaceDown()) {
-            desc = this.getSourceCard().getName() + " - targeting " + card;
-        } else {
-            desc = this.getSourceCard().getName() + " - targeting Morph(" + card.getUniqueNumber() + ")";
-        }
-        this.setStackDescription(desc);
-    }
-
-    /**
-     * <p>
-     * Getter for the field <code>targetPlayer</code>.
-     * </p>
-     * 
-     * @return a {@link forge.game.player.Player} object.
-     */
-    public Player getTargetPlayer() {
-        final Target tgt = this.getTarget();
-        if (tgt != null) {
-            final List<Player> list = tgt.getTargetPlayers();
-
-            if (!list.isEmpty()) {
-                return list.get(0);
-            }
-        }
-        return null;
-    }
-
-    /**
-     * <p>
      * isBasicAbility.
      * </p>
      * 
@@ -1212,25 +1140,6 @@ public abstract class SpellAbility implements ISpellAbility {
     }
 
     /**
-     * Gets the chosen target.
-     * 
-     * @return the chosenTarget
-     */
-    public Target getChosenTarget() {
-        return this.chosenTarget;
-    }
-
-    /**
-     * Sets the chosen target.
-     * 
-     * @param chosenTarget0
-     *            the chosenTarget to set
-     */
-    public void setChosenTarget(final Target chosenTarget0) {
-        this.chosenTarget = chosenTarget0;
-    }
-
-    /**
      * Adds the tapped for convoke.
      * 
      * @param c
@@ -1369,6 +1278,178 @@ public abstract class SpellAbility implements ISpellAbility {
     }
 
     /**
+     * TODO: Write javadoc for this method.
+     * @return
+     */
+    public boolean isUndoable() {
+        return this.undoable && this.payCosts.isUndoable() && this.getSourceCard().isInPlay();
+    }
+
+    /**
+     * TODO: Write javadoc for this method.
+     */
+    public void undo() {
+        if (isUndoable()) {
+            this.payCosts.refundPaidCost(sourceCard);
+        }
+    }
+
+    /**
+     * TODO: Write javadoc for this method.
+     * @param b
+     */
+    public void setUndoable(boolean b) {
+        this.undoable = b;
+    }
+
+    /**
+     * @return the isCopied
+     */
+    public boolean isCopied() {
+        return isCopied;
+    }
+
+    /**
+     * @param isCopied0 the isCopied to set
+     */
+    public void setCopied(boolean isCopied0) {
+        this.isCopied = isCopied0; 
+    }
+
+    /**
+     * Returns whether variable was present in the announce list.
+     */
+    public boolean isAnnouncing(String variable) {
+        String announce = getParam("Announce");
+        if (StringUtils.isBlank(announce)) return false;
+        String[] announcedOnes = TextUtil.split(announce, ',');
+        for(String a : announcedOnes) {
+            if( a.trim().equalsIgnoreCase(variable))
+                return true;
+        }
+        return false;
+    }
+
+    public boolean isXCost() {
+        CostPartMana cm = payCosts != null ? getPayCosts().getCostMana() : null;
+        return cm != null && cm.getAmountOfX() > 0; 
+    }
+
+    public boolean isBasicLandAbility() {
+        return basicLandAbility;
+    }
+
+    public void setBasicLandAbility(boolean basicLandAbility) {
+        this.basicLandAbility = basicLandAbility; // TODO: Add 0 to parameter's name.
+    }
+
+    public boolean isTemporary() {
+        return temporary;
+    }
+
+    public void setTemporary(boolean temporary) {
+        this.temporary = temporary; // TODO: Add 0 to parameter's name.
+    }
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //
+    // THE CODE BELOW IS RELATED TO TARGETING. It shall await extraction to other class from here
+    //
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    
+    /**
+     * <p>
+     * Getter for the field <code>targetCard</code>.
+     * </p>
+     * 
+     * @return a {@link forge.Card} object.
+     */
+    public Card getTargetCard() {
+        if (this.targetCard == null) {
+            final Target tgt = this.getTarget();
+            if (tgt != null) {
+                final List<Card> list = tgt.getTargetCards();
+    
+                if (!list.isEmpty()) {
+                    return list.get(0);
+                }
+            }
+            return null;
+        }
+    
+        return this.targetCard;
+    }
+
+    /**
+     * <p>
+     * Setter for the field <code>targetCard</code>.
+     * </p>
+     * 
+     * @param card
+     *            a {@link forge.Card} object.
+     */
+    public void setTargetCard(final Card card) {
+        if (card == null) {
+            System.out.println(this.getSourceCard()
+                    + " - SpellAbility.setTargetCard() called with null for target card.");
+            return;
+        }
+    
+        final Target tgt = this.getTarget();
+        if (tgt != null) {
+            tgt.addTarget(card);
+        } else {
+            this.targetCard = card;
+        }
+        String desc = "";
+    
+        if (!card.isFaceDown()) {
+            desc = this.getSourceCard().getName() + " - targeting " + card;
+        } else {
+            desc = this.getSourceCard().getName() + " - targeting Morph(" + card.getUniqueNumber() + ")";
+        }
+        this.setStackDescription(desc);
+    }
+
+    /**
+     * <p>
+     * Getter for the field <code>targetPlayer</code>.
+     * </p>
+     * 
+     * @return a {@link forge.game.player.Player} object.
+     */
+    public Player getTargetPlayer() {
+        final Target tgt = this.getTarget();
+        if (tgt != null) {
+            final List<Player> list = tgt.getTargetPlayers();
+    
+            if (!list.isEmpty()) {
+                return list.get(0);
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Gets the chosen target.
+     * 
+     * @return the chosenTarget
+     */
+    public Target getChosenTarget() {
+        return this.chosenTarget;
+    }
+
+    /**
+     * Sets the chosen target.
+     * 
+     * @param chosenTarget0
+     *            the chosenTarget to set
+     */
+    public void setChosenTarget(final Target chosenTarget0) {
+        this.chosenTarget = chosenTarget0;
+    }
+
+    /**
      * <p>
      * findTargetCards.
      * </p>
@@ -1415,7 +1496,7 @@ public abstract class SpellAbility implements ISpellAbility {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public SpellAbility getSATargetingCard() {
-
+    
         Target tgt = this.getTarget();
         if (tgt != null && tgt.getTargetCards() != null && !tgt.getTargetCards().isEmpty()) {
             return this;
@@ -1434,7 +1515,7 @@ public abstract class SpellAbility implements ISpellAbility {
      */
     public SpellAbility getParentTargetingCard() {
         SpellAbility parent = this.getParent();
-
+    
         while (parent != null) {
             Target tgt = parent.getTarget();
             if (tgt != null && tgt.getTargetCards() != null && !tgt.getTargetCards().isEmpty()) {
@@ -1471,15 +1552,15 @@ public abstract class SpellAbility implements ISpellAbility {
      */
     public SpellAbility getParentTargetingSA() {
         SpellAbility parent = this.getParent();
-
+    
         while (parent != null) {
-
+    
             Target tgt = parent.getTarget();
             if (tgt != null && tgt.getTargetSAs() != null && !tgt.getTargetSAs().isEmpty()) {
                 break;
             }
             parent = parent.getParent();
-
+    
         }
         return parent;
     }
@@ -1511,54 +1592,15 @@ public abstract class SpellAbility implements ISpellAbility {
     public SpellAbility getParentTargetingPlayer() {
         SpellAbility parent = this.getParent();
         while (parent != null) {
-
+    
             Target tgt = parent.getTarget();
             if (tgt != null && tgt.getTargetPlayers() != null && !tgt.getTargetPlayers().isEmpty()) {
                 break;
             }
             parent = parent.getParent();
-
+    
         }
         return parent;
-    }
-
-    /**
-     * TODO: Write javadoc for this method.
-     * @return
-     */
-    public boolean isUndoable() {
-        return this.undoable && this.payCosts.isUndoable() && this.getSourceCard().isInPlay();
-    }
-
-    /**
-     * TODO: Write javadoc for this method.
-     */
-    public void undo() {
-        if (isUndoable()) {
-            this.payCosts.refundPaidCost(sourceCard);
-        }
-    }
-
-    /**
-     * TODO: Write javadoc for this method.
-     * @param b
-     */
-    public void setUndoable(boolean b) {
-        this.undoable = b;
-    }
-
-    /**
-     * @return the isCopied
-     */
-    public boolean isCopied() {
-        return isCopied;
-    }
-
-    /**
-     * @param isCopied0 the isCopied to set
-     */
-    public void setCopied(boolean isCopied0) {
-        this.isCopied = isCopied0; 
     }
 
     /**
@@ -1568,8 +1610,8 @@ public abstract class SpellAbility implements ISpellAbility {
      *            the ability
      * @return the unique targets
      */
-    public final List<Object> getUniqueTargets() {
-        final List<Object> targets = new ArrayList<Object>();
+    public final List<ITargetable> getUniqueTargets() {
+        final List<ITargetable> targets = new ArrayList<ITargetable>();
         SpellAbility child = this.getParent();
         while (child != null) {
             if (child.getTarget() != null) {
@@ -1579,11 +1621,16 @@ public abstract class SpellAbility implements ISpellAbility {
         }
         return targets;
     }
+
+    @Override
+    public boolean canBeTargetedBy(SpellAbility sa) {
+        return sa.canBeTargetedBy(this);
+    }
     
     public boolean canTargetSpellAbility(final SpellAbility topSA) {
         final Target tgt = this.getTarget();
         final String saType = tgt.getTargetSpellAbilityType();
-
+    
         if (null == saType) {
             // just take this to mean no restrictions - carry on.
         } else if (topSA instanceof Spell) {
@@ -1601,31 +1648,31 @@ public abstract class SpellAbility implements ISpellAbility {
         } else {
             return false; //Static ability? Whatever.
         }
-
+    
         final String splitTargetRestrictions = tgt.getSAValidTargeting();
         if (splitTargetRestrictions != null) {
             // TODO What about spells with SubAbilities with Targets?
-
+    
             final Target matchTgt = topSA.getTarget();
-
+    
             if (matchTgt == null) {
                 return false;
             }
-
+    
             boolean result = false;
-
+    
             for (final Object o : matchTgt.getTargets()) {
                 if (matchesValid(o, splitTargetRestrictions.split(","))) {
                     result = true;
                     break;
                 }
             }
-
+    
             if (!result) {
                 return false;
             }
         }
-
+    
         if (tgt.isSingleTarget()) {
             final ArrayList<TargetChoices> choices = topSA.getAllTargetChoices();
             int totalTargets = 0;
@@ -1641,10 +1688,9 @@ public abstract class SpellAbility implements ISpellAbility {
                 return false;
             }
         }
-
+    
         return topSA.getSourceCard().isValid(tgt.getValidTgts(), this.getActivatingPlayer(), this.getSourceCard());
     }
-
 
     private boolean matchesValid(final Object o, final String[] valids) {
         final Card srcCard = this.getSourceCard();
@@ -1653,49 +1699,14 @@ public abstract class SpellAbility implements ISpellAbility {
             final Card c = (Card) o;
             return c.isValid(valids, activatingPlayer, srcCard);
         }
-
+    
         if (o instanceof Player) {
             Player p = (Player) o;
             if (p.isValid(valids, activatingPlayer, srcCard)) {
                 return true;
             }
         }
-
+    
         return false;
-    }
-
-    /**
-     * Returns whether variable was present in the announce list.
-     */
-    public boolean isAnnouncing(String variable) {
-        String announce = getParam("Announce");
-        if (StringUtils.isBlank(announce)) return false;
-        String[] announcedOnes = TextUtil.split(announce, ',');
-        for(String a : announcedOnes) {
-            if( a.trim().equalsIgnoreCase(variable))
-                return true;
-        }
-        return false;
-    }
-
-    public boolean isXCost() {
-        CostPartMana cm = payCosts != null ? getPayCosts().getCostMana() : null;
-        return cm != null && cm.getAmountOfX() > 0; 
-    }
-
-    public boolean isBasicLandAbility() {
-        return basicLandAbility;
-    }
-
-    public void setBasicLandAbility(boolean basicLandAbility) {
-        this.basicLandAbility = basicLandAbility; // TODO: Add 0 to parameter's name.
-    }
-
-    public boolean isTemporary() {
-        return temporary;
-    }
-
-    public void setTemporary(boolean temporary) {
-        this.temporary = temporary; // TODO: Add 0 to parameter's name.
     }
 }

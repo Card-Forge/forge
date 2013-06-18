@@ -35,6 +35,7 @@ import forge.CardLists;
 import forge.CardPredicates;
 import forge.Command;
 import forge.FThreads;
+import forge.ITargetable;
 import forge.Singletons;
 import forge.CardPredicates.Presets;
 import forge.GameLogEntryType;
@@ -679,7 +680,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
                 fizzle = true;
                 // With multi-targets, as long as one target is still legal,
                 // we'll try to go through as much as possible
-                final ArrayList<Object> tgts = tgt.getTargets();
+                final List<ITargetable> tgts = tgt.getTargets();
                 final TargetChoices choices = tgt.getTargetChoices();
                 for (final Object o : tgts) {
                     boolean invalidTarget = false;

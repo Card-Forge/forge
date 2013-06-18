@@ -9,6 +9,7 @@ import java.util.StringTokenizer;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.Card;
+import forge.ITargetable;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
@@ -162,7 +163,7 @@ import forge.game.player.Player;
             return tgt != null ? tgt.getTargetSAs() : AbilityUtils.getDefinedSpellAbilities(sa.getSourceCard(), sa.getParam("Defined"), sa);
         }
 
-        protected List<Object> getTargetObjects(SpellAbility sa) {
+        protected List<ITargetable> getTargetObjects(SpellAbility sa) {
             final Target tgt = sa.getTarget();
             return tgt != null ? tgt.getTargets() : AbilityUtils.getDefinedObjects(sa.getSourceCard(), sa.getParam("Defined"), sa);
         }

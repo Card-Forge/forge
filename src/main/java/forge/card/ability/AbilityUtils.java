@@ -14,6 +14,7 @@ import forge.CardLists;
 import forge.CardUtil;
 import forge.Constant;
 import forge.CounterType;
+import forge.ITargetable;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.mana.ManaCostBeingPaid;
@@ -571,8 +572,8 @@ public class AbilityUtils {
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a {@link java.util.ArrayList} object.
      */
-    public static ArrayList<Object> getDefinedObjects(final Card card, final String def, final SpellAbility sa) {
-        final ArrayList<Object> objects = new ArrayList<Object>();
+    public static List<ITargetable> getDefinedObjects(final Card card, final String def, final SpellAbility sa) {
+        final ArrayList<ITargetable> objects = new ArrayList<ITargetable>();
         final String defined = (def == null) ? "Self" : def;
 
         objects.addAll(AbilityUtils.getDefinedPlayers(card, defined, sa));

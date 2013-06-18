@@ -19,7 +19,6 @@ package forge;
 
 import java.util.ArrayList;
 
-import forge.card.spellability.SpellAbility;
 import forge.game.Game;
 import forge.game.player.Player;
 import forge.util.MyObservable;
@@ -32,7 +31,7 @@ import forge.util.MyObservable;
  * @author Forge
  * @version $Id: Player.java 10091 2011-08-30 16:11:21Z Sloth $
  */
-public abstract class GameEntity extends MyObservable {
+public abstract class GameEntity extends MyObservable implements ITargetable {
     private String name = "";
     private int preventNextDamage = 0;
 
@@ -264,17 +263,6 @@ public abstract class GameEntity extends MyObservable {
      * @return true, if successful
      */
     public boolean hasKeyword(final String keyword) {
-        return false;
-    }
-
-    /**
-     * Can target.
-     * 
-     * @param sa
-     *            the sa
-     * @return a boolean
-     */
-    public boolean canBeTargetedBy(final SpellAbility sa) {
         return false;
     }
 

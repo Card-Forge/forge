@@ -1,6 +1,5 @@
 package forge.card.ability.ai;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -8,6 +7,7 @@ import com.google.common.base.Predicate;
 
 import forge.Card;
 import forge.CardLists;
+import forge.ITargetable;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.cost.Cost;
@@ -146,7 +146,7 @@ public class DamageDealAi extends DamageAiBase {
         final Card source = saMe.getSourceCard();
         List<Card> hPlay = CardLists.getValidCards(pl.getCardsIn(ZoneType.Battlefield), tgt.getValidTgts(), ai, source);
 
-        final ArrayList<Object> objects = tgt.getTargets();
+        final List<ITargetable> objects = tgt.getTargets();
         if (saMe.hasParam("TargetUnique")) {
             objects.addAll(saMe.getUniqueTargets());
         }
@@ -359,7 +359,7 @@ public class DamageDealAi extends DamageAiBase {
      */
     private boolean damageChooseNontargeted(Player ai, final SpellAbility saMe, final int dmg) {
         // TODO: Improve circumstances where the Defined Damage is unwanted
-        final ArrayList<Object> objects = AbilityUtils.getDefinedObjects(saMe.getSourceCard(), saMe.getParam("Defined"), saMe);
+        final List<ITargetable> objects = AbilityUtils.getDefinedObjects(saMe.getSourceCard(), saMe.getParam("Defined"), saMe);
         boolean urgent = false; // can it wait?
         boolean positive = false;
 

@@ -24,6 +24,7 @@ import com.google.common.base.Predicate;
 
 import forge.Card;
 import forge.CardLists;
+import forge.ITargetable;
 import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.game.Game;
@@ -151,7 +152,7 @@ public class TargetSelection {
                 choices.remove(tgt.getSourceCard());
             }
         }
-        List<Object> targetedObjects = this.ability.getUniqueTargets();
+        List<ITargetable> targetedObjects = this.ability.getUniqueTargets();
 
         if (tgt.isUniqueTargets()) {
             for (final Object o : targetedObjects) {

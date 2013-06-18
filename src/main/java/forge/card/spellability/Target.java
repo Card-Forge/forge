@@ -23,6 +23,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import forge.Card;
+import forge.ITargetable;
 import forge.card.CardType;
 import forge.card.ability.AbilityUtils;
 import forge.game.Game;
@@ -518,9 +519,9 @@ public class Target {
      * 
      * @return a {@link java.util.ArrayList} object.
      */
-    public final ArrayList<Object> getTargets() {
+    public final List<ITargetable> getTargets() {
         if (this.choice == null) {
-            return new ArrayList<Object>();
+            return new ArrayList<ITargetable>();
         }
 
         return this.choice.getTargets();
@@ -557,7 +558,7 @@ public class Target {
      * @return a {@link java.lang.String} object.
      */
     public final String getTargetedString() {
-        final ArrayList<Object> tgts = this.getTargets();
+        final List<ITargetable> tgts = this.getTargets();
         final StringBuilder sb = new StringBuilder("");
         for (final Object o : tgts) {
             if (o instanceof Player) {

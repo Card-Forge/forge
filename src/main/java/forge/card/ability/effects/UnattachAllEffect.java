@@ -7,6 +7,7 @@ import org.apache.commons.lang3.StringUtils;
 import forge.Card;
 import forge.CardLists;
 import forge.GameEntity;
+import forge.ITargetable;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
 import forge.game.Game;
@@ -142,7 +143,7 @@ public class UnattachAllEffect extends SpellAbilityEffect {
     protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
         sb.append("Unattach all valid Equipment and Auras from ");
-        final List<Object> targets = getTargetObjects(sa);
+        final List<ITargetable> targets = getTargetObjects(sa);
         sb.append(StringUtils.join(targets, " "));
         return sb.toString();
     }
@@ -154,7 +155,7 @@ public class UnattachAllEffect extends SpellAbilityEffect {
     public void resolve(SpellAbility sa) {
         Card source = sa.getSourceCard();
         final Game game = sa.getActivatingPlayer().getGame();
-        final List<Object> targets = getTargetObjects(sa);
+        final List<ITargetable> targets = getTargetObjects(sa);
 
         // If Cast Targets will be checked on the Stack
         for (final Object o : targets) {

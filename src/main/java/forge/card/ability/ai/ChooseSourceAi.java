@@ -7,6 +7,7 @@ import com.google.common.base.Predicate;
 
 import forge.Card;
 import forge.CardLists;
+import forge.ITargetable;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.ApiType;
 import forge.card.ability.SpellAbilityAi;
@@ -78,17 +79,17 @@ public class ChooseSourceAi extends SpellAbilityAi {
                     }
 
                     final Card threatSource = topStack.getSourceCard();
-                    ArrayList<Object> objects = new ArrayList<Object>();
+                    List<? extends ITargetable> objects = new ArrayList<ITargetable>();
                     final Target threatTgt = topStack.getTarget();
 
                     if (threatTgt == null) {
                         if (topStack.hasParam("Defined")) {
                             objects = AbilityUtils.getDefinedObjects(threatSource, topStack.getParam("Defined"), topStack);
                         } else if (topStack.hasParam("ValidPlayers")) {
-                            objects.addAll(AbilityUtils.getDefinedPlayers(threatSource, topStack.getParam("ValidPlayers"), topStack));
+                            objects = AbilityUtils.getDefinedPlayers(threatSource, topStack.getParam("ValidPlayers"), topStack);
                         }
                     } else {
-                        objects.addAll(threatTgt.getTargetPlayers());
+                        objects = threatTgt.getTargetPlayers();
                     }
                     if (!objects.contains(ai) || topStack.hasParam("NoPrevention")) {
                         return false;

@@ -6,6 +6,7 @@ import java.util.List;
 import forge.Card;
 import forge.CardLists;
 import forge.CardPredicates;
+import forge.ITargetable;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.cost.Cost;
@@ -52,8 +53,7 @@ public class DamagePreventAi extends SpellAbilityAi {
         if (tgt == null) {
             // As far as I can tell these Defined Cards will only have one of
             // them
-            final ArrayList<Object> objects = AbilityUtils.getDefinedObjects(sa.getSourceCard(),
-                    sa.getParam("Defined"), sa);
+            final List<ITargetable> objects = AbilityUtils.getDefinedObjects(sa.getSourceCard(), sa.getParam("Defined"), sa);
 
             // react to threats on the stack
             if (!game.getStack().isEmpty()) {

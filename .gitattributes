@@ -13994,6 +13994,7 @@ src/main/java/forge/GameLog.java -text
 src/main/java/forge/GameLogEntry.java -text
 src/main/java/forge/GameLogEntryType.java -text
 src/main/java/forge/GameLogFormatter.java -text
+src/main/java/forge/ITargetable.java -text
 src/main/java/forge/ImageCache.java svneol=native#text/plain
 src/main/java/forge/ImageLoader.java -text
 src/main/java/forge/Singletons.java svneol=native#text/plain

@@ -5,9 +5,11 @@ import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.base.Predicate;
+import com.google.common.collect.Lists;
 
 import forge.Card;
 import forge.CardLists;
+import forge.ITargetable;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.ApiType;
 import forge.card.ability.SpellAbilityEffect;
@@ -188,18 +190,20 @@ public class ChooseSourceEffect extends SpellAbilityEffect {
             }
     
             
-            ArrayList<Object> objects = new ArrayList<Object>();
+            final List<? extends ITargetable> objects;
             final Target threatTgt = abilityOnStack.getTarget();
     
             if (threatTgt == null) {
                 if (abilityOnStack.hasParam("Defined")) {
                     objects = AbilityUtils.getDefinedObjects(source, abilityOnStack.getParam("Defined"), abilityOnStack);
                 } else if (abilityOnStack.hasParam("ValidPlayers")) {
-                    objects.addAll(AbilityUtils.getDefinedPlayers(source, abilityOnStack.getParam("ValidPlayers"), abilityOnStack));
-                }
+                    objects = AbilityUtils.getDefinedPlayers(source, abilityOnStack.getParam("ValidPlayers"), abilityOnStack);
+                } else
+                    objects = Lists.<ITargetable>newArrayList();
             } else {
-                objects.addAll(threatTgt.getTargetPlayers());
+                objects = threatTgt.getTargetPlayers();
             }
+            
             if (!objects.contains(ai) || abilityOnStack.hasParam("NoPrevention")) {
                 continue;
             }

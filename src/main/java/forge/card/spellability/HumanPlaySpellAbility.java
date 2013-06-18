@@ -18,11 +18,13 @@
 package forge.card.spellability;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 
 import forge.Card;
 import forge.CardCharacteristicName;
+import forge.ITargetable;
 import forge.card.CardType;
 import forge.card.ability.AbilityUtils;
 import forge.card.cost.CostPartMana;
@@ -202,7 +204,7 @@ public class HumanPlaySpellAbility {
         final StringBuilder sb = new StringBuilder();
         sb.append(ability.getSourceCard().getName());
         if (ability.getTarget() != null) {
-            final ArrayList<Object> targets = ability.getTarget().getTargets();
+            final List<ITargetable> targets = ability.getTarget().getTargets();
             if (targets.size() > 0) {
                 sb.append(" - Targeting ");
                 for (final Object o : targets) {

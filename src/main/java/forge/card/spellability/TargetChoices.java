@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import forge.Card;
+import forge.ITargetable;
 import forge.game.player.Player;
 
 /**
@@ -233,8 +234,8 @@ public class TargetChoices {
      * 
      * @return a {@link java.util.ArrayList} object.
      */
-    public final ArrayList<Object> getTargets() {
-        final ArrayList<Object> tgts = new ArrayList<Object>();
+    public final List<ITargetable> getTargets() {
+        final ArrayList<ITargetable> tgts = new ArrayList<ITargetable>();
         tgts.addAll(this.targetPlayers);
         tgts.addAll(this.targetCards);
         tgts.addAll(this.targetSAs);
@@ -250,8 +251,8 @@ public class TargetChoices {
      * @return a {@link java.lang.String} object.
      */
     public final String getTargetedString() {
-        final ArrayList<Object> tgts = this.getTargets();
-        final StringBuilder sb = new StringBuilder("");
+        final List<ITargetable> tgts = this.getTargets();
+        final StringBuilder sb = new StringBuilder();
         for (final Object o : tgts) {
             if (o instanceof Player) {
                 final Player p = (Player) o;

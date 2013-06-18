@@ -1,11 +1,11 @@
 package forge.card.ability.effects;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 import forge.Card;
 import forge.CardUtil;
+import forge.ITargetable;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
@@ -25,7 +25,7 @@ public class DamageDealEffect extends SpellAbilityEffect {
         final int dmg = AbilityUtils.calculateAmount(sa.getSourceCard(), damage, sa);
 
 
-        List<Object> tgts = getTargetObjects(sa);
+        List<ITargetable> tgts = getTargetObjects(sa);
         if (tgts.isEmpty()) 
             return "";
 
@@ -73,7 +73,7 @@ public class DamageDealEffect extends SpellAbilityEffect {
         final boolean combatDmg = sa.hasParam("CombatDamage");
         final boolean removeDamage = sa.hasParam("Remove");
 
-        ArrayList<Object> tgts;
+        List<ITargetable> tgts;
         if (sa.getTarget() == null) {
             tgts = AbilityUtils.getDefinedObjects(sa.getSourceCard(), sa.getParam("Defined"), sa) ;
         } else {
