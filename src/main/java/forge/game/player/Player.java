@@ -1806,7 +1806,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             }
         }
         
-        if( land != null && land.getOwner() != this )
+        if( land != null && land.getOwner() != this && !land.hasKeyword("May be played by your opponent"))
             return false;
 
         // Dev Mode
