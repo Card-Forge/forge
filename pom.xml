@@ -319,8 +319,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.0</version>
                 <configuration>
-                    <source>1.6</source>
-                    <target>1.6</target>
+                    <source>1.7</source>
+                    <target>1.7</target>
                     <compilerId>groovy-eclipse-compiler</compilerId>
 							      <!-- set verbose to be true if you want lots of uninteresting messages -->
 							      <!-- <verbose>true</verbose> -->
@@ -624,7 +624,7 @@
                     <linkXRef>true</linkXRef>
                     <sourceEncoding>utf-8</sourceEncoding>
                     <minimumTokens>100</minimumTokens>
-                    <targetJdk>1.6</targetJdk>
+                    <targetJdk>1.7</targetJdk>
                 </configuration>
             </plugin>
 
@@ -746,7 +746,13 @@
             <artifactId>minlog</artifactId>
             <version>1.2</version>
         </dependency>
-
+        <dependency>
+            <groupId>com.oracle</groupId>
+            <artifactId>javafx</artifactId>
+            <version>2.2</version>
+            <systemPath>${java.home}/lib/jfxrt.jar</systemPath>
+            <scope>system</scope>
+        </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
@@ -835,7 +841,7 @@
                                         <preCp>anything</preCp>
                                     </classPath>
                                     <jre>
-                                        <minVersion>1.6.0</minVersion>
+                                        <minVersion>1.7.0</minVersion>
                                         <maxHeapSize>1024</maxHeapSize>
                                     </jre>
                                     <versionInfo>
