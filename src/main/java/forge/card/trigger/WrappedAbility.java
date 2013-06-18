@@ -378,8 +378,12 @@ public class WrappedAbility extends Ability implements ISpellAbility {
             final StringBuilder buildQuestion = new StringBuilder("Use triggered ability of ");
             buildQuestion.append(regtrig.getHostCard().toString()).append("?");
             buildQuestion.append("\r\n(").append(triggerDesc).append(")\r\n");
-            if (sa.getTriggeringObjects().containsKey("Attacker")) {
-                buildQuestion.append("[Attacker: " + sa.getTriggeringObjects().get("Attacker") + "]");
+            HashMap<String, Object> tos = sa.getTriggeringObjects();
+            if (tos.containsKey("Attacker")) {
+                buildQuestion.append("[Attacker: " + tos.get("Attacker") + "]");
+            }
+            if (tos.containsKey("Card")) {
+                buildQuestion.append("[Triggering card: " + tos.get("Card") + "]");
             }
             if (!GuiDialog.confirm(regtrig.getHostCard(), buildQuestion.toString())) {
                 return false;
