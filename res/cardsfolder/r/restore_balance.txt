@@ -1,0 +1,11 @@
+Name:Restore Balance
+ManaCost:no cost
+Types:Sorcery
+Colors:white
+K:Suspend:6:W
+A:SP$ Balance | Cost$ 1 W | Valid$ Land | AILogic$ BalanceCreaturesAndLands | SubAbility$ BalanceCreatures | SpellDescription$ Each player chooses a number of lands he or she controls equal to the number of lands controlled by the player who controls the fewest, then sacrifices the rest. Players discard cards and sacrifice creatures the same way. | ActivationLimit$ 0
+SVar:BalanceCreatures:DB$ Balance | Valid$ Creature | SubAbility$ BalanceHands
+SVar:BalanceHands:DB$ Balance | Zone$ Hand
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/restore_balance.jpg
+Oracle:Sorcery\nSuspend 6- {W} (Rather than cast this card from your hand, pay {W} and exile it with six time counters on it. At the beginning of your upkeep, remove a time counter. When the last is removed, cast it without paying its mana cost.)\nEach player chooses a number of lands he or she controls equal to the number of lands controlled by the player who controls the fewest, then sacrifices the rest. Players sacrifice creatures and discard cards the same way.

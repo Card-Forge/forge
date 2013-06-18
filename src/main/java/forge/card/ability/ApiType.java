@@ -10,6 +10,7 @@ import forge.card.ability.ai.AlwaysPlayAi;
 import forge.card.ability.ai.AnimateAi;
 import forge.card.ability.ai.AnimateAllAi;
 import forge.card.ability.ai.AttachAi;
+import forge.card.ability.ai.BalanceAi;
 import forge.card.ability.ai.BecomesBlockedAi;
 import forge.card.ability.ai.BondAi;
 import forge.card.ability.ai.CanPlayAsDrawbackAi;
@@ -114,6 +115,7 @@ public enum ApiType {
     Animate (AnimateEffect.class, AnimateAi.class),
     AnimateAll (AnimateAllEffect.class, AnimateAllAi.class),
     Attach (AttachEffect.class, AttachAi.class),
+    Balance (BalanceEffect.class, BalanceAi.class),
     BecomesBlocked (BecomesBlockedEffect.class, BecomesBlockedAi.class),
     Bond (BondEffect.class, BondAi.class),
     ChangeTargets(ChangeTargetsEffect.class,  CannotPlayAi.class),

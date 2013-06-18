@@ -1,12 +1,8 @@
 Name:Balance
 ManaCost:1 W
 Types:Sorcery
-Text:Each player chooses a number of lands he or she controls equal to the number of lands controlled by the player who controls the fewest, then sacrifices the rest. Players discard cards and sacrifice creatures the same way.
+A:SP$ Balance | Cost$ 1 W | Valid$ Land | AILogic$ BalanceCreaturesAndLands | SubAbility$ BalanceHands | SpellDescription$ Each player chooses a number of lands he or she controls equal to the number of lands controlled by the player who controls the fewest, then sacrifices the rest. Players discard cards and sacrifice creatures the same way.
+SVar:BalanceHands:DB$ Balance | Zone$ Hand | SubAbility$ BalanceCreatures
+SVar:BalanceCreatures:DB$ Balance | Valid$ Creature
 SVar:Picture:http://www.wizards.com/global/images/magic/general/balance.jpg
 Oracle:Each player chooses a number of lands he or she controls equal to the number of lands controlled by the player who controls the fewest, then sacrifices the rest. Players discard cards and sacrifice creatures the same way.
-SetInfo:2ED Rare
-SetInfo:V09 Mythic
-SetInfo:LEB Rare
-SetInfo:LEA Rare
-SetInfo:4ED Rare
-SetInfo:3ED Rare

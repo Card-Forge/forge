@@ -17,12 +17,9 @@
  */
 package forge.card.cardfactory;
 
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import forge.Card;
 import forge.CardLists;
-import forge.CardPredicates;
 import forge.Singletons;
 import forge.CardPredicates.Presets;
 import forge.card.cost.Cost;
@@ -44,108 +41,6 @@ import forge.gui.input.InputPayManaExecuteCommands;
  * @version $Id$
  */
 public class CardFactorySorceries {
-
-    private static final void balanceLands(Game game, Spell card) {
-
-        int minLands = Integer.MAX_VALUE;
-        for (Player p : game.getPlayers()) {
-            int pL = p.getLandsInPlay().size();
-            if( pL < minLands ) 
-                minLands = pL;
-        }
-
-        for (Player p : game.getPlayers()) {
-
-            List<Card> l = p.getLandsInPlay();
-            int sac = l.size() - minLands;
-            if (sac == 0) {
-                continue;
-            }
-            
-            List<Card> toSac = p.getController().choosePermanentsToSacrifice(card, sac, sac, l, "land(s)");
-            for( Card crd : toSac )
-                p.getGame().getAction().sacrifice(crd, card);
-        }
-    }
-
-    private static final void balanceHands(Game game, Spell spell) {
-        int min = Integer.MAX_VALUE;
-        for (Player p : game.getPlayers()) {
-            min = Math.min(min, p.getZone(ZoneType.Hand).size());
-        }
-
-        for (Player p : game.getPlayers()) {
-            List<Card> hand = new ArrayList<Card>(p.getCardsIn(ZoneType.Hand));
-            int sac = hand.size() - min;
-            if (sac == 0) {
-                continue;
-            }
-            
-            List<Card> toDiscard = p.getController().chooseCardsToDiscardFrom(p, spell, hand, sac, sac); // "Select %d more card(s) to discard"
-            for (Card c : toDiscard)
-                p.discard(c, spell);
-        }
-    }
-
-    private static final void balanceCreatures(Game game, Spell card) {
-        List<List<Card>> creats = new ArrayList<List<Card>>();
-        for (Player p : game.getPlayers()) {
-            creats.add(p.getCreaturesInPlay());
-        }
-        int min = Integer.MAX_VALUE;
-        for (List<Card> h : creats) {
-            int s = h.size();
-            min = Math.min(min, s);
-        }
-        Iterator<List<Card>> cc = creats.iterator();
-        for (Player p : game.getPlayers()) {
-
-            List<Card> c = cc.next();
-            int sac = c.size() - min;
-            if (sac == 0) {
-                continue;
-            }
-            List<Card> toSac = p.getController().choosePermanentsToSacrifice(card, sac, sac, c, "creature(s)"); 
-            
-            for( Card crd : toSac )
-                p.getGame().getAction().sacrifice(crd, card);
-        }
-    }
-    
-    private static final SpellAbility getBalance(final Card card) {
-        return new Spell(card) {
-            private static final long serialVersionUID = -5941893280103164961L;
-
-            @Override
-            public void resolve() {
-                final Game game = this.getActivatingPlayer().getGame();
-                balanceLands(game, this);
-                balanceHands(game, this);
-                balanceCreatures(game, this);
-            }
-
-            @Override
-            public boolean canPlayAI() {
-                int diff = 0;
-                final Player ai = getActivatingPlayer();
-                final Player opp = ai.getOpponent();
-                final List<Card> humLand = opp.getLandsInPlay();
-                final List<Card> compLand = ai.getLandsInPlay();
-                diff += humLand.size() - compLand.size();
-
-                final List<Card> humCreats = opp.getCreaturesInPlay();
-                List<Card> compCreats = ai.getCreaturesInPlay();
-                compCreats = CardLists.filter(compCreats, CardPredicates.Presets.CREATURES);
-                diff += 1.5 * (humCreats.size() - compCreats.size());
-
-                final List<Card> humHand = opp.getCardsIn(ZoneType.Hand);
-                final List<Card> compHand = ai.getCardsIn(ZoneType.Hand);
-                diff += 0.5 * (humHand.size() - compHand.size());
-
-                return diff > 2;
-            }
-        };
-    }
 
     private static final SpellAbility getTransmuteArtifact(final Card card) {
         /*
@@ -219,8 +114,7 @@ public class CardFactorySorceries {
 
     public static void buildCard(final Card card, final String cardName) {
 
-        if (cardName.equals("Balance")) { card.addSpellAbility(getBalance(card));
-        } else if (cardName.equals("Transmute Artifact")) { card.addSpellAbility(getTransmuteArtifact(card));
+        if (cardName.equals("Transmute Artifact")) { card.addSpellAbility(getTransmuteArtifact(card));
         }
     } // getCard
 }

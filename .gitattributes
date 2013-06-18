@@ -8843,6 +8843,7 @@ res/cardsfolder/r/restless_dead.txt svneol=native#text/plain
 res/cardsfolder/r/restless_dreams.txt -text
 res/cardsfolder/r/restock.txt svneol=native#text/plain
 res/cardsfolder/r/restoration_angel.txt -text
+res/cardsfolder/r/restore_balance.txt -text
 res/cardsfolder/r/restore_the_peace.txt -text
 res/cardsfolder/r/restrain.txt -text
 res/cardsfolder/r/resurrection.txt svneol=native#text/plain
@@ -14042,6 +14043,7 @@ src/main/java/forge/card/ability/ai/AlwaysPlayAi.java -text
 src/main/java/forge/card/ability/ai/AnimateAi.java -text
 src/main/java/forge/card/ability/ai/AnimateAllAi.java -text
 src/main/java/forge/card/ability/ai/AttachAi.java -text
+src/main/java/forge/card/ability/ai/BalanceAi.java -text
 src/main/java/forge/card/ability/ai/BecomesBlockedAi.java -text
 src/main/java/forge/card/ability/ai/BondAi.java -text
 src/main/java/forge/card/ability/ai/CanPlayAsDrawbackAi.java -text
@@ -14143,6 +14145,7 @@ src/main/java/forge/card/ability/effects/AnimateAllEffect.java -text
 src/main/java/forge/card/ability/effects/AnimateEffect.java -text
 src/main/java/forge/card/ability/effects/AnimateEffectBase.java svneol=native#text/plain
 src/main/java/forge/card/ability/effects/AttachEffect.java -text
+src/main/java/forge/card/ability/effects/BalanceEffect.java -text
 src/main/java/forge/card/ability/effects/BecomesBlockedEffect.java -text
 src/main/java/forge/card/ability/effects/BondEffect.java -text
 src/main/java/forge/card/ability/effects/ChangeTargetsEffect.java -text
