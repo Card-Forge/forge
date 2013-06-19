@@ -215,7 +215,7 @@ public class CostReveal extends CostPartWithList {
      */
     @Override
     protected void doPayment(SpellAbility ability, Card targetCard) {
-        ability.getActivatingPlayer().getGame().getAction().reveal(Lists.newArrayList(targetCard), ability.getActivatingPlayer());
+        targetCard.getGame().getAction().reveal(Lists.newArrayList(targetCard), ability.getActivatingPlayer());
     }
 
     

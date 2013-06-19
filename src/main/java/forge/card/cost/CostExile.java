@@ -453,7 +453,7 @@ public class CostExile extends CostPartWithList {
      */
     @Override
     protected void doPayment(SpellAbility ability, Card targetCard) {
-        ability.getActivatingPlayer().getGame().getAction().exile(targetCard);
+        targetCard.getGame().getAction().exile(targetCard);
     }
 
     /* (non-Javadoc)

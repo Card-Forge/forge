@@ -186,7 +186,7 @@ public class CostReturn extends CostPartWithList {
      */
     @Override
     protected void doPayment(SpellAbility ability, Card targetCard) {
-        ability.getActivatingPlayer().getGame().getAction().moveToHand(targetCard);
+        targetCard.getGame().getAction().moveToHand(targetCard);
     }
 
     /* (non-Javadoc)

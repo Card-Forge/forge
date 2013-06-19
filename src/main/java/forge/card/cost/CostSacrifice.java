@@ -175,7 +175,7 @@ public class CostSacrifice extends CostPartWithList {
 
     @Override
     protected void doPayment(SpellAbility ability, Card targetCard) {
-        ability.getActivatingPlayer().getGame().getAction().sacrifice(targetCard, ability);
+        targetCard.getGame().getAction().sacrifice(targetCard, ability);
     }
 
     /* (non-Javadoc)

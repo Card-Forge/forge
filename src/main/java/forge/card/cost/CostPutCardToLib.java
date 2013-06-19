@@ -319,7 +319,7 @@ public class CostPutCardToLib extends CostPartWithList {
      */
     @Override
     protected void doPayment(SpellAbility ability, Card targetCard) {
-        ability.getActivatingPlayer().getGame().getAction().moveToLibrary(targetCard, Integer.parseInt(getLibPos()));
+        targetCard.getGame().getAction().moveToLibrary(targetCard, Integer.parseInt(getLibPos()));
     }
 
     /* (non-Javadoc)

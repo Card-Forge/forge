@@ -153,7 +153,7 @@ public class CostExiledMoveToGrave extends CostPartWithList {
      */
     @Override
     protected void doPayment(SpellAbility ability, Card targetCard) {
-        ability.getActivatingPlayer().getGame().getAction().moveToGraveyard(targetCard);
+        targetCard.getGame().getAction().moveToGraveyard(targetCard);
     }
 
     /* (non-Javadoc)
