@@ -18,19 +18,12 @@ public class DestroyAllEffect extends SpellAbilityEffect {
     @Override
     protected String getStackDescription(SpellAbility sa) {
 
-        final StringBuilder sb = new StringBuilder();
-        final boolean noRegen = sa.hasParam("NoRegen");
-
-        List<Card> tgtCards;
-
-        final Target tgt = sa.getTarget();
-        if (tgt != null) {
-            tgtCards = tgt.getTargetCards();
-        } else {
-            tgtCards = new ArrayList<Card>();
-            tgtCards.add(sa.getSourceCard());
+        if (sa.hasParam("SpellDescription")) {
+            return sa.getParam("SpellDescription");
         }
 
+        final StringBuilder sb = new StringBuilder();
+        final boolean noRegen = sa.hasParam("NoRegen");
         sb.append(sa.getSourceCard().getName()).append(" - Destroy permanents.");
 
         if (noRegen) {
