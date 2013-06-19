@@ -5,7 +5,7 @@ import java.util.List;
 
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.Target;
+import forge.card.spellability.TargetRestrictions;
 import forge.game.player.Player;
 
 public class ShuffleEffect extends SpellAbilityEffect {
@@ -16,7 +16,7 @@ public class ShuffleEffect extends SpellAbilityEffect {
 
         final List<Player> tgtPlayers = getTargetPlayers(sa);
 
-        final Target tgt = sa.getTarget();
+        final TargetRestrictions tgt = sa.getTargetRestrictions();
 
         for (final Player p : tgtPlayers) {
             if ((tgt == null) || p.canBeTargetedBy(sa)) {

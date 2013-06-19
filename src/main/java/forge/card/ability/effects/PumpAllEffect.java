@@ -113,7 +113,7 @@ public class PumpAllEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
         List<Card> list;
-        final List<Player> tgtPlayers = getTargetPlayersEmptyAsDefault(sa);
+        final List<Player> tgtPlayers = getTargetPlayers(sa);
         final ArrayList<ZoneType> affectedZones = new ArrayList<ZoneType>();
         final Game game = sa.getActivatingPlayer().getGame();
 

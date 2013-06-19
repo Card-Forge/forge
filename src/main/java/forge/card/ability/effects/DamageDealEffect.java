@@ -25,7 +25,7 @@ public class DamageDealEffect extends SpellAbilityEffect {
         final int dmg = AbilityUtils.calculateAmount(sa.getSourceCard(), damage, sa);
 
 
-        List<ITargetable> tgts = getTargetObjects(sa);
+        List<ITargetable> tgts = getTargets(sa);
         if (tgts.isEmpty()) 
             return "";
 
@@ -73,12 +73,7 @@ public class DamageDealEffect extends SpellAbilityEffect {
         final boolean combatDmg = sa.hasParam("CombatDamage");
         final boolean removeDamage = sa.hasParam("Remove");
 
-        List<ITargetable> tgts;
-        if (sa.getTarget() == null) {
-            tgts = AbilityUtils.getDefinedObjects(sa.getSourceCard(), sa.getParam("Defined"), sa) ;
-        } else {
-            tgts = sa.getTarget().getTargets();
-        }
+        List<ITargetable> tgts = getTargets(sa);
 
         // Right now for Fireball, maybe later for other stuff
         if (sa.hasParam("DivideEvenly")) {
@@ -88,7 +83,7 @@ public class DamageDealEffect extends SpellAbilityEffect {
             }
         }
 
-        final boolean targeted = (sa.getTarget() != null);
+        final boolean targeted = (sa.usesTargeting());
 
         if (sa.hasParam("Radiance") && targeted) {
             Card origin = null;
@@ -116,7 +111,7 @@ public class DamageDealEffect extends SpellAbilityEffect {
         final Card source = definedSources.get(0);
 
         for (final Object o : tgts) {
-            dmg = (sa.getTarget() != null && sa.hasParam("DividedAsYouChoose")) ? sa.getTarget().getDividedValue(o) : dmg;
+            dmg = (sa.usesTargeting() && sa.hasParam("DividedAsYouChoose")) ? sa.getTargetRestrictions().getDividedValue(o) : dmg;
             if (o instanceof Card) {
                 final Card c = (Card) o;
                 if (c.isInPlay() && (!targeted || c.canBeTargetedBy(sa))) {

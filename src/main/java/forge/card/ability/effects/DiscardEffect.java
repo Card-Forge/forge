@@ -13,7 +13,7 @@ import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.Target;
+import forge.card.spellability.TargetRestrictions;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
 import forge.game.zone.ZoneType;
@@ -90,7 +90,7 @@ public class DiscardEffect extends SpellAbilityEffect {
         final String mode = sa.getParam("Mode");
         //final boolean anyNumber = sa.hasParam("AnyNumber");
 
-        final Target tgt = sa.getTarget();
+        final TargetRestrictions tgt = sa.getTargetRestrictions();
 
         final List<Card> discarded = new ArrayList<Card>();
 

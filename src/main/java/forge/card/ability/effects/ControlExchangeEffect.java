@@ -3,11 +3,13 @@ package forge.card.ability.effects;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.common.collect.Lists;
+
 import forge.Card;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.Target;
+import forge.card.spellability.TargetRestrictions;
 import forge.game.player.Player;
 
 
@@ -20,8 +22,8 @@ public class ControlExchangeEffect extends SpellAbilityEffect {
     protected String getStackDescription(SpellAbility sa) {
         Card object1 = null;
         Card object2 = null;
-        final Target tgt = sa.getTarget();
-        List<Card> tgts = tgt == null ? new ArrayList<Card>() : tgt.getTargetCards();
+        final TargetRestrictions tgt = sa.getTargetRestrictions();
+        List<Card> tgts = tgt == null ? new ArrayList<Card>() : Lists.newArrayList(sa.getTargets().getTargetCards());
         if (tgts.size() > 0) {
             object1 = tgts.get(0);
         }
@@ -45,8 +47,8 @@ public class ControlExchangeEffect extends SpellAbilityEffect {
     public void resolve(SpellAbility sa) {
         Card object1 = null;
         Card object2 = null;
-        final Target tgt = sa.getTarget();
-        List<Card> tgts = tgt == null ? new ArrayList<Card>() : tgt.getTargetCards();
+        final TargetRestrictions tgt = sa.getTargetRestrictions();
+        List<Card> tgts = tgt == null ? new ArrayList<Card>() : Lists.newArrayList(sa.getTargets().getTargetCards());
         if (tgts.size() > 0) {
             object1 = tgts.get(0);
         }

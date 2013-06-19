@@ -7,7 +7,7 @@ import org.apache.commons.lang3.StringUtils;
 import forge.Card;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.Target;
+import forge.card.spellability.TargetRestrictions;
 
 public class TapEffect extends SpellAbilityEffect {
 
@@ -22,7 +22,7 @@ public class TapEffect extends SpellAbilityEffect {
             card.clearRemembered();
         }
 
-        final Target tgt = sa.getTarget();
+        final TargetRestrictions tgt = sa.getTargetRestrictions();
         final List<Card> tgtCards = getTargetCards(sa);
 
         for (final Card tgtC : tgtCards) {

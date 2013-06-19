@@ -7,7 +7,7 @@ import forge.CounterType;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.Target;
+import forge.card.spellability.TargetRestrictions;
 import forge.game.ai.ComputerUtilMana;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -51,11 +51,11 @@ public class LifeSetAi extends SpellAbilityAi {
         // prevent run-away activations - first time will always return true
         final boolean chance = r.nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn());
 
-        final Target tgt = sa.getTarget();
+        final TargetRestrictions tgt = sa.getTargetRestrictions();
         if (tgt != null) {
-            tgt.resetTargets();
+            sa.resetTargets();
             if (tgt.canOnlyTgtOpponent()) {
-                tgt.addTarget(opponent);
+                sa.getTargets().add(opponent);
                 // if we can only target the human, and the Human's life
                 // would
                 // go up, don't play it.
@@ -67,11 +67,11 @@ public class LifeSetAi extends SpellAbilityAi {
                 }
             } else {
                 if ((amount > myLife) && (myLife <= 10)) {
-                    tgt.addTarget(ai);
+                    sa.getTargets().add(ai);
                 } else if (hlife > amount) {
-                    tgt.addTarget(opponent);
+                    sa.getTargets().add(opponent);
                 } else if (amount > myLife) {
-                    tgt.addTarget(ai);
+                    sa.getTargets().add(ai);
                 } else {
                     return false;
                 }
@@ -128,18 +128,18 @@ public class LifeSetAi extends SpellAbilityAi {
         // if the Target is modifying how much life is gained, this needs to
         // be
         // handled better
-        final Target tgt = sa.getTarget();
+        final TargetRestrictions tgt = sa.getTargetRestrictions();
         if (tgt != null) {
-            tgt.resetTargets();
+            sa.resetTargets();
             if (tgt.canOnlyTgtOpponent()) {
-                tgt.addTarget(opponent);
+                sa.getTargets().add(opponent);
             } else {
                 if ((amount > myLife) && (myLife <= 10)) {
-                    tgt.addTarget(ai);
+                    sa.getTargets().add(ai);
                 } else if (hlife > amount) {
-                    tgt.addTarget(opponent);
+                    sa.getTargets().add(opponent);
                 } else if (amount > myLife) {
-                    tgt.addTarget(ai);
+                    sa.getTargets().add(ai);
                 } else {
                     return false;
                 }

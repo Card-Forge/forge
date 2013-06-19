@@ -11,7 +11,7 @@ import forge.CardLists;
 import forge.CardPredicates.Presets;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.Target;
+import forge.card.spellability.TargetRestrictions;
 import forge.game.Game;
 import forge.game.phase.CombatUtil;
 import forge.game.phase.PhaseType;
@@ -45,11 +45,9 @@ public class TapAllAi extends SpellAbilityAi {
 
         List<Card> validTappables = game.getCardsIn(ZoneType.Battlefield);
 
-        final Target tgt = sa.getTarget();
-
-        if (sa.getTarget() != null) {
-            tgt.resetTargets();
-            tgt.addTarget(opp);
+        if (sa.usesTargeting()) {
+            sa.resetTargets();
+            sa.getTargets().add(opp);
             validTappables = opp.getCardsIn(ZoneType.Battlefield);
         }
 
@@ -126,11 +124,11 @@ public class TapAllAi extends SpellAbilityAi {
 
         List<Card> validTappables = getTapAllTargets(valid, source);
 
-        final Target tgt = sa.getTarget();
+        final TargetRestrictions tgt = sa.getTargetRestrictions();
 
         if (tgt != null) {
-            tgt.resetTargets();
-            tgt.addTarget(ai.getOpponent());
+            sa.resetTargets();
+            sa.getTargets().add(ai.getOpponent());
             validTappables = ai.getOpponent().getCardsIn(ZoneType.Battlefield);
         }
 

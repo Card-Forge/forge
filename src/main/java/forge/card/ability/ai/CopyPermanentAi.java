@@ -11,7 +11,7 @@ import forge.CardLists;
 import forge.CardPredicates.Presets;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.Target;
+import forge.card.spellability.TargetRestrictions;
 import forge.game.ai.ComputerUtilCard;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -53,7 +53,7 @@ public class CopyPermanentAi extends SpellAbilityAi {
         // ////
         // Targeting
 
-        final Target abTgt = sa.getTarget();
+        final TargetRestrictions abTgt = sa.getTargetRestrictions();
 
         if (abTgt != null) {
             List<Card> list = aiPlayer.getGame().getCardsIn(ZoneType.Battlefield);
@@ -66,13 +66,13 @@ public class CopyPermanentAi extends SpellAbilityAi {
                     return !vars.containsKey("RemAIDeck");
                 }
             }); 
-            abTgt.resetTargets();
+            sa.resetTargets();
             // target loop
-            while (abTgt.getNumTargeted() < abTgt.getMaxTargets(sa.getSourceCard(), sa)) {
+            while (sa.getTargets().getNumTargeted() < abTgt.getMaxTargets(sa.getSourceCard(), sa)) {
                 if (list.isEmpty()) {
-                    if ((abTgt.getNumTargeted() < abTgt.getMinTargets(sa.getSourceCard(), sa))
-                            || (abTgt.getNumTargeted() == 0)) {
-                        abTgt.resetTargets();
+                    if ((sa.getTargets().getNumTargeted() < abTgt.getMinTargets(sa.getSourceCard(), sa))
+                            || (sa.getTargets().getNumTargeted() == 0)) {
+                        sa.resetTargets();
                         return false;
                     } else {
                         // TODO is this good enough? for up to amounts?
@@ -94,9 +94,9 @@ public class CopyPermanentAi extends SpellAbilityAi {
                 }
 
                 if (choice == null) { // can't find anything left
-                    if ((abTgt.getNumTargeted() < abTgt.getMinTargets(sa.getSourceCard(), sa))
-                            || (abTgt.getNumTargeted() == 0)) {
-                        abTgt.resetTargets();
+                    if ((sa.getTargets().getNumTargeted() < abTgt.getMinTargets(sa.getSourceCard(), sa))
+                            || (sa.getTargets().getNumTargeted() == 0)) {
+                        sa.resetTargets();
                         return false;
                     } else {
                         // TODO is this good enough? for up to amounts?
@@ -104,7 +104,7 @@ public class CopyPermanentAi extends SpellAbilityAi {
                     }
                 }
                 list.remove(choice);
-                abTgt.addTarget(choice);
+                sa.getTargets().add(choice);
             }
         } else {
             // if no targeting, it should always be ok

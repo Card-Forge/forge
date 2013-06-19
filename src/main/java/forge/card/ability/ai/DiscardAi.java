@@ -8,7 +8,7 @@ import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.cost.Cost;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.Target;
+import forge.card.spellability.TargetRestrictions;
 import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilCost;
 import forge.game.ai.ComputerUtilMana;
@@ -22,7 +22,7 @@ public class DiscardAi extends SpellAbilityAi {
 
     @Override
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
-        final Target tgt = sa.getTarget();
+        final TargetRestrictions tgt = sa.getTargetRestrictions();
         final Card source = sa.getSourceCard();
         final Cost abCost = sa.getPayCosts();
 
@@ -113,14 +113,14 @@ public class DiscardAi extends SpellAbilityAi {
     } // discardCanPlayAI()
 
     private boolean discardTargetAI(final Player ai, final SpellAbility sa) {
-        final Target tgt = sa.getTarget();
+        final TargetRestrictions tgt = sa.getTargetRestrictions();
         Player opp = ai.getOpponent();
         if (opp.getCardsIn(ZoneType.Hand).isEmpty()) {
             return false;
         }
         if (tgt != null) {
             if (sa.canTarget(opp)) {
-                tgt.addTarget(opp);
+                sa.getTargets().add(opp);
                 return true;
             }
         }
@@ -131,14 +131,14 @@ public class DiscardAi extends SpellAbilityAi {
 
     @Override
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
-        final Target tgt = sa.getTarget();
+        final TargetRestrictions tgt = sa.getTargetRestrictions();
         if (tgt != null) {
             Player opp = ai.getOpponent();
             if (!discardTargetAI(ai, sa)) {
                 if (mandatory && sa.canTarget(opp)) {
-                    tgt.addTarget(opp);
+                    sa.getTargets().add(opp);
                 } else if (mandatory && sa.canTarget(ai)) {
-                    tgt.addTarget(ai);
+                    sa.getTargets().add(ai);
                 } else {
                     return false;
                 }
@@ -159,7 +159,7 @@ public class DiscardAi extends SpellAbilityAi {
     public boolean chkAIDrawback(SpellAbility sa, Player ai) {
         // Drawback AI improvements
         // if parent draws cards, make sure cards in hand + cards drawn > 0
-        final Target tgt = sa.getTarget();
+        final TargetRestrictions tgt = sa.getTargetRestrictions();
         if (tgt != null) {
             return discardTargetAI(ai, sa);
         }

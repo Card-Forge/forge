@@ -7,7 +7,7 @@ import forge.Card;
 import forge.CardLists;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.Target;
+import forge.card.spellability.TargetRestrictions;
 import forge.game.Game;
 import forge.game.ai.ComputerUtilCard;
 import forge.game.phase.PhaseType;
@@ -19,7 +19,7 @@ public class BecomesBlockedAi extends SpellAbilityAi {
     @Override
     protected boolean canPlayAI(Player aiPlayer, SpellAbility sa) {
         final Card source = sa.getSourceCard();
-        final Target tgt = sa.getTarget();
+        final TargetRestrictions tgt = sa.getTargetRestrictions();
         final Game game = aiPlayer.getGame();
         
         if (!game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS)
@@ -33,7 +33,7 @@ public class BecomesBlockedAi extends SpellAbilityAi {
         list = CardLists.getTargetableCards(list, sa);
         list = CardLists.getNotKeyword(list, "Trample");
 
-        while (tgt.getNumTargeted() < tgt.getMaxTargets(source, sa)) {
+        while (sa.getTargets().getNumTargeted() < tgt.getMaxTargets(source, sa)) {
             Card choice = null;
 
             if (list.isEmpty()) {
@@ -47,7 +47,7 @@ public class BecomesBlockedAi extends SpellAbilityAi {
             }
 
             list.remove(choice);
-            tgt.addTarget(choice);
+            sa.getTargets().add(choice);
         }
         return true;
     }

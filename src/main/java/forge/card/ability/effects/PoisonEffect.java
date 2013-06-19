@@ -7,7 +7,7 @@ import org.apache.commons.lang3.StringUtils;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.Target;
+import forge.card.spellability.TargetRestrictions;
 import forge.game.player.Player;
 
 /** 
@@ -24,7 +24,7 @@ import forge.game.player.Player;
         public void resolve(SpellAbility sa) {
             final int amount = AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("Num"), sa);
 
-            final Target tgt = sa.getTarget();
+            final TargetRestrictions tgt = sa.getTargetRestrictions();
             for (final Player p : getTargetPlayers(sa)) {
                 if ((tgt == null) || p.canBeTargetedBy(sa)) {
                     p.addPoisonCounters(amount, sa.getSourceCard());

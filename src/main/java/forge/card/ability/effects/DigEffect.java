@@ -12,7 +12,7 @@ import forge.CardLists;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.Target;
+import forge.card.spellability.TargetRestrictions;
 import forge.game.Game;
 import forge.game.ai.ComputerUtilCard;
 import forge.game.player.Player;
@@ -85,7 +85,7 @@ public class DigEffect extends SpellAbilityEffect {
             }
         }
 
-        final Target tgt = sa.getTarget();
+        final TargetRestrictions tgt = sa.getTargetRestrictions();
         final List<Player> tgtPlayers = getTargetPlayers(sa);
 
         if (sa.hasParam("Choser")) {

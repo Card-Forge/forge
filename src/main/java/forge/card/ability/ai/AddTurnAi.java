@@ -22,7 +22,6 @@ import java.util.List;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.Target;
 import forge.game.player.Player;
 
 /**
@@ -39,21 +38,20 @@ public class AddTurnAi extends SpellAbilityAi {
     @Override
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
         final Player opp = ai.getWeakestOpponent();
-        final Target tgt = sa.getTarget();
 
-        if (sa.getTarget() != null) {
-            tgt.resetTargets();
+        if (sa.usesTargeting()) {
+            sa.resetTargets();
             if (sa.canTarget(ai)) {
-                sa.getTarget().addTarget(ai);
+                sa.getTargets().add(ai);
             } else if (mandatory) {
             	for (final Player ally : ai.getAllies()) {
                     if (sa.canTarget(ally)) {
-                    	sa.getTarget().addTarget(ally);
+                    	sa.getTargets().add(ally);
                     	break;
                     }
             	}
-                if (!sa.getTarget().isMinTargetsChosen(sa.getSourceCard(), sa) && sa.canTarget(opp)) {
-                    sa.getTarget().addTarget(opp);
+                if (!sa.getTargetRestrictions().isMinTargetsChosen(sa.getSourceCard(), sa) && sa.canTarget(opp)) {
+                    sa.getTargets().add(opp);
                 } else {
                     return false;
                 }

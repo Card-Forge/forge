@@ -6,7 +6,7 @@ import forge.card.ability.SpellAbilityAi;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.Target;
+import forge.card.spellability.TargetRestrictions;
 import forge.game.Game;
 import forge.game.ai.ComputerUtilCost;
 import forge.game.ai.ComputerUtilMana;
@@ -35,7 +35,7 @@ public class CounterAi extends SpellAbilityAi {
             }
         }
 
-        final Target tgt = sa.getTarget();
+        final TargetRestrictions tgt = sa.getTargetRestrictions();
         if (tgt != null) {
 
             final SpellAbility topSA = game.getStack().peekAbility();
@@ -48,9 +48,9 @@ public class CounterAi extends SpellAbilityAi {
                 return false;
             }
 
-            tgt.resetTargets();
+            sa.resetTargets();
             if (sa.canTargetSpellAbility(topSA)) {
-                tgt.addTarget(topSA);
+                sa.getTargets().add(topSA);
             } else {
                 return false;
             }
@@ -108,7 +108,7 @@ public class CounterAi extends SpellAbilityAi {
     @Override
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
 
-        final Target tgt = sa.getTarget();
+        final TargetRestrictions tgt = sa.getTargetRestrictions();
         if (tgt != null) {
             final Game game = ai.getGame();
             if (game.getStack().isEmpty()) {
@@ -119,9 +119,9 @@ public class CounterAi extends SpellAbilityAi {
                 return false;
             }
 
-            tgt.resetTargets();
+            sa.resetTargets();
             if (sa.canTargetSpellAbility(topSA)) {
-                tgt.addTarget(topSA);
+                sa.getTargets().add(topSA);
             } else {
                 return false;
             }

@@ -5,6 +5,7 @@ import java.util.List;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityStackInstance;
+import forge.card.spellability.TargetChoices;
 import forge.game.zone.MagicStack;
 
 /** 
@@ -18,7 +19,7 @@ public class ChangeTargetsEffect extends SpellAbilityEffect {
      */
     @Override
     public void resolve(SpellAbility sa) {
-        final List<SpellAbility> sas = getTargetSpellAbilities(sa);
+        final List<SpellAbility> sas = getTargetSpells(sa);
         final boolean remember = sa.hasParam("RememberTargetedCard");
         
         final MagicStack stack = sa.getActivatingPlayer().getGame().getStack();
@@ -33,7 +34,8 @@ public class ChangeTargetsEffect extends SpellAbilityEffect {
             while(changingTgtSI != null) {
                 // Update targets, with a potential new target
                 SpellAbility changingTgtSA = changingTgtSI.getSpellAbility();
-                changingTgtSI.updateTarget(sa.getActivatingPlayer().getController().chooseTargets(changingTgtSA));
+                TargetChoices newTarget = sa.getActivatingPlayer().getController().chooseTargets(changingTgtSA);
+                changingTgtSI.updateTarget(newTarget);
                 changingTgtSI = changingTgtSI.getSubInstace();
             }
 

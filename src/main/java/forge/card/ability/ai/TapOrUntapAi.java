@@ -6,7 +6,7 @@ import java.util.Random;
 import forge.Card;
 import forge.card.ability.AbilityUtils;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.Target;
+import forge.card.spellability.TargetRestrictions;
 import forge.game.player.Player;
 import forge.util.MyRandom;
 
@@ -17,7 +17,7 @@ public class TapOrUntapAi extends TapAiBase {
      */
     @Override
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
-        final Target tgt = sa.getTarget();
+        final TargetRestrictions tgt = sa.getTargetRestrictions();
         final Card source = sa.getSourceCard();
 
         final Random r = MyRandom.getRandom();
@@ -38,7 +38,7 @@ public class TapOrUntapAi extends TapAiBase {
                 return false;
             }
         } else {
-            tgt.resetTargets();
+            sa.resetTargets();
             if (!tapPrefTargeting(ai, source, tgt, sa, false)) {
                 return false;
             }

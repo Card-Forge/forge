@@ -8,7 +8,7 @@ import forge.CardLists;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.Target;
+import forge.card.spellability.TargetRestrictions;
 import forge.game.Game;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
@@ -23,7 +23,7 @@ public class RevealEffect extends SpellAbilityEffect {
         int cnt = sa.hasParam("NumCards") ? AbilityUtils.calculateAmount(host, sa.getParam("NumCards"), sa) : 1;
 
         
-        final Target tgt = sa.getTarget();
+        final TargetRestrictions tgt = sa.getTargetRestrictions();
 
         for (final Player p : getTargetPlayers(sa)) {
             final Game game = p.getGame();

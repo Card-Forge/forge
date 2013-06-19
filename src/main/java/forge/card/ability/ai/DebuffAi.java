@@ -13,7 +13,7 @@ import forge.card.ability.SpellAbilityAi;
 import forge.card.cost.Cost;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityRestriction;
-import forge.card.spellability.Target;
+import forge.card.spellability.TargetRestrictions;
 import forge.game.ai.ComputerUtilCard;
 import forge.game.ai.ComputerUtilCost;
 import forge.game.phase.PhaseHandler;
@@ -30,7 +30,7 @@ public class DebuffAi extends SpellAbilityAi {
     protected boolean canPlayAI(final Player ai, final SpellAbility sa) {
         // if there is no target and host card isn't in play, don't activate
         final Card source = sa.getSourceCard();
-        if ((sa.getTarget() == null) && !source.isInPlay()) {
+        if ((sa.getTargetRestrictions() == null) && !source.isInPlay()) {
             return false;
         }
 
@@ -70,7 +70,7 @@ public class DebuffAi extends SpellAbilityAi {
             return false;
         }
 
-        if ((sa.getTarget() == null) || !sa.getTarget().doesTarget()) {
+        if ((sa.getTargetRestrictions() == null) || !sa.getTargetRestrictions().doesTarget()) {
             List<Card> cards = AbilityUtils.getDefinedCards(sa.getSourceCard(), sa.getParam("Defined"), sa);
 
             if (!cards.isEmpty()) {
@@ -97,7 +97,7 @@ public class DebuffAi extends SpellAbilityAi {
 
     @Override
     public boolean chkAIDrawback(SpellAbility sa, Player ai) {
-        if ((sa.getTarget() == null) || !sa.getTarget().doesTarget()) {
+        if ((sa.getTargetRestrictions() == null) || !sa.getTargetRestrictions().doesTarget()) {
             // TODO - copied from AF_Pump.pumpDrawbackAI() - what should be
             // here?
         } else {
@@ -128,8 +128,8 @@ public class DebuffAi extends SpellAbilityAi {
             return false;
         }
 
-        final Target tgt = sa.getTarget();
-        tgt.resetTargets();
+        final TargetRestrictions tgt = sa.getTargetRestrictions();
+        sa.resetTargets();
         List<Card> list = getCurseCreatures(ai, sa, kws);
         list = CardLists.getValidCards(list, tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getSourceCard());
 
@@ -144,17 +144,17 @@ public class DebuffAi extends SpellAbilityAi {
             return mandatory && debuffMandatoryTarget(ai, sa, mandatory);
         }
 
-        while (tgt.getNumTargeted() < tgt.getMaxTargets(sa.getSourceCard(), sa)) {
+        while (sa.getTargets().getNumTargeted() < tgt.getMaxTargets(sa.getSourceCard(), sa)) {
             Card t = null;
             // boolean goodt = false;
 
             if (list.isEmpty()) {
-                if ((tgt.getNumTargeted() < tgt.getMinTargets(sa.getSourceCard(), sa)) || (tgt.getNumTargeted() == 0)) {
+                if ((sa.getTargets().getNumTargeted() < tgt.getMinTargets(sa.getSourceCard(), sa)) || (sa.getTargets().getNumTargeted() == 0)) {
                     if (mandatory) {
                         return debuffMandatoryTarget(ai, sa, mandatory);
                     }
 
-                    tgt.resetTargets();
+                    sa.resetTargets();
                     return false;
                 } else {
                     // TODO is this good enough? for up to amounts?
@@ -163,7 +163,7 @@ public class DebuffAi extends SpellAbilityAi {
             }
 
             t = ComputerUtilCard.getBestCreatureAI(list);
-            tgt.addTarget(t);
+            sa.getTargets().add(t);
             list.remove(t);
         }
 
@@ -216,16 +216,16 @@ public class DebuffAi extends SpellAbilityAi {
      */
     private boolean debuffMandatoryTarget(final Player ai, final SpellAbility sa, final boolean mandatory) {
         List<Card> list = ai.getGame().getCardsIn(ZoneType.Battlefield);
-        final Target tgt = sa.getTarget();
+        final TargetRestrictions tgt = sa.getTargetRestrictions();
         list = CardLists.getValidCards(list, tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getSourceCard());
 
         if (list.size() < tgt.getMinTargets(sa.getSourceCard(), sa)) {
-            tgt.resetTargets();
+            sa.resetTargets();
             return false;
         }
 
         // Remove anything that's already been targeted
-        for (final Card c : tgt.getTargetCards()) {
+        for (final Card c : sa.getTargets().getTargetCards()) {
             list.remove(c);
         }
 
@@ -233,7 +233,7 @@ public class DebuffAi extends SpellAbilityAi {
         final List<Card> forced = CardLists.filterControlledBy(list, ai);
         final Card source = sa.getSourceCard();
 
-        while (tgt.getNumTargeted() < tgt.getMaxTargets(source, sa)) {
+        while (sa.getTargets().getNumTargeted() < tgt.getMaxTargets(source, sa)) {
             if (pref.isEmpty()) {
                 break;
             }
@@ -247,10 +247,10 @@ public class DebuffAi extends SpellAbilityAi {
 
             pref.remove(c);
 
-            tgt.addTarget(c);
+            sa.getTargets().add(c);
         }
 
-        while (tgt.getNumTargeted() < tgt.getMinTargets(sa.getSourceCard(), sa)) {
+        while (sa.getTargets().getNumTargeted() < tgt.getMinTargets(sa.getSourceCard(), sa)) {
             if (forced.isEmpty()) {
                 break;
             }
@@ -266,11 +266,11 @@ public class DebuffAi extends SpellAbilityAi {
 
             forced.remove(c);
 
-            tgt.addTarget(c);
+            sa.getTargets().add(c);
         }
 
-        if (tgt.getNumTargeted() < tgt.getMinTargets(sa.getSourceCard(), sa)) {
-            tgt.resetTargets();
+        if (sa.getTargets().getNumTargeted() < tgt.getMinTargets(sa.getSourceCard(), sa)) {
+            sa.resetTargets();
             return false;
         }
 
@@ -281,7 +281,7 @@ public class DebuffAi extends SpellAbilityAi {
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
         final List<String> kws = sa.hasParam("Keywords") ? Arrays.asList(sa.getParam("Keywords").split(" & ")) : new ArrayList<String>();
 
-        if (sa.getTarget() == null) {
+        if (sa.getTargetRestrictions() == null) {
             if (mandatory) {
                 return true;
             }

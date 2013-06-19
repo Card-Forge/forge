@@ -7,7 +7,7 @@ import forge.Card;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.Target;
+import forge.card.spellability.TargetRestrictions;
 import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
@@ -74,7 +74,7 @@ public class RearrangeTopOfLibraryEffect extends SpellAbilityEffect {
         boolean shuffle = false;
 
         if (sa.getActivatingPlayer().isHuman()) {
-            final Target tgt = sa.getTarget();
+            final TargetRestrictions tgt = sa.getTargetRestrictions();
 
 
             numCards = AbilityUtils.calculateAmount(host, sa.getParam("NumCards"), sa);

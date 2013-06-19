@@ -9,7 +9,7 @@ import forge.Card;
 import forge.CardLists;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.Target;
+import forge.card.spellability.TargetRestrictions;
 import forge.game.Game;
 import forge.game.ai.ComputerUtilCard;
 import forge.game.ai.ComputerUtilCombat;
@@ -58,9 +58,9 @@ public class EffectAi extends SpellAbilityAi {
                 if (!ComputerUtilCombat.lifeInDanger(ai, game.getCombat())) {
                     return false;
                 }
-                final Target tgt = sa.getTarget();
+                final TargetRestrictions tgt = sa.getTargetRestrictions();
                 if (tgt != null) {
-                    tgt.resetTargets();
+                    sa.resetTargets();
                     List<Card> list = game.getCombat().getAttackers();
                     list = CardLists.getValidCards(list, tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getSourceCard());
                     list = CardLists.getTargetableCards(list, sa);
@@ -68,7 +68,7 @@ public class EffectAi extends SpellAbilityAi {
                     if (target == null) {
                         return false;
                     }
-                    tgt.addTarget(target);
+                    sa.getTargets().add(target);
                 }
                 randomReturn = true;
             } else if (logic.equals("Always")) {
@@ -109,13 +109,13 @@ public class EffectAi extends SpellAbilityAi {
             }
         }
 
-        final Target tgt = sa.getTarget();
+        final TargetRestrictions tgt = sa.getTargetRestrictions();
         if (tgt != null && tgt.canTgtPlayer()) {
-            tgt.resetTargets();
+            sa.resetTargets();
             if (tgt.canOnlyTgtOpponent() || logic.equals("BeginningOfOppTurn")) {
-                tgt.addTarget(ai.getOpponent());
+                sa.getTargets().add(ai.getOpponent());
             } else {
-                tgt.addTarget(ai);
+                sa.getTargets().add(ai);
             }
         }
 
@@ -125,15 +125,14 @@ public class EffectAi extends SpellAbilityAi {
     @Override
     protected boolean doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
 
-        final Target tgt = sa.getTarget();
         final Player opp = aiPlayer.getOpponent();
 
-        if (sa.getTarget() != null) {
-            tgt.resetTargets();
+        if (sa.usesTargeting()) {
+            sa.resetTargets();
             if (mandatory && sa.canTarget(opp)) {
-                sa.getTarget().addTarget(opp);
+                sa.getTargets().add(opp);
             } else if (mandatory && sa.canTarget(aiPlayer)) {
-                sa.getTarget().addTarget(aiPlayer);
+                sa.getTargets().add(aiPlayer);
             }
         }
 

@@ -11,7 +11,7 @@ import forge.CardPredicates;
 import forge.CardPredicates.Presets;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.Target;
+import forge.card.spellability.TargetRestrictions;
 import forge.game.Game;
 import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilCard;
@@ -40,9 +40,9 @@ public abstract class TapAiBase extends SpellAbilityAi  {
      */
     private boolean tapTargetList(final Player ai, final SpellAbility sa, final List<Card> tapList, final boolean mandatory) {
         final Card source = sa.getSourceCard();
-        final Target tgt = sa.getTarget();
+        final TargetRestrictions tgt = sa.getTargetRestrictions();
 
-        for (final Card c : tgt.getTargetCards()) {
+        for (final Card c : sa.getTargets().getTargetCards()) {
             tapList.remove(c);
         }
 
@@ -50,13 +50,13 @@ public abstract class TapAiBase extends SpellAbilityAi  {
             return false;
         }
 
-        while (tgt.getNumTargeted() < tgt.getMaxTargets(source, sa)) {
+        while (sa.getTargets().getNumTargeted() < tgt.getMaxTargets(source, sa)) {
             Card choice = null;
 
             if (tapList.size() == 0) {
-                if ((tgt.getNumTargeted() < tgt.getMinTargets(source, sa)) || (tgt.getNumTargeted() == 0)) {
+                if ((sa.getTargets().getNumTargeted() < tgt.getMinTargets(source, sa)) || (sa.getTargets().getNumTargeted() == 0)) {
                     if (!mandatory) {
-                        tgt.resetTargets();
+                        sa.resetTargets();
                     }
                     return false;
                 } else {
@@ -75,9 +75,9 @@ public abstract class TapAiBase extends SpellAbilityAi  {
             }
 
             if (choice == null) { // can't find anything left
-                if ((tgt.getNumTargeted() < tgt.getMinTargets(sa.getSourceCard(), sa)) || (tgt.getNumTargeted() == 0)) {
+                if ((sa.getTargets().getNumTargeted() < tgt.getMinTargets(sa.getSourceCard(), sa)) || (sa.getTargets().getNumTargeted() == 0)) {
                     if (!mandatory) {
-                        tgt.resetTargets();
+                        sa.resetTargets();
                     }
                     return false;
                 } else {
@@ -89,7 +89,7 @@ public abstract class TapAiBase extends SpellAbilityAi  {
             }
 
             tapList.remove(choice);
-            tgt.addTarget(choice);
+            sa.getTargets().add(choice);
         }
 
         return true;
@@ -103,7 +103,7 @@ public abstract class TapAiBase extends SpellAbilityAi  {
      * @param source
      *            a {@link forge.Card} object.
      * @param tgt
-     *            a {@link forge.card.spellability.Target} object.
+     *            a {@link forge.card.spellability.TargetRestrictions} object.
      * @param af
      *            a {@link forge.card.ability.AbilityFactory} object.
      * @param sa
@@ -112,7 +112,7 @@ public abstract class TapAiBase extends SpellAbilityAi  {
      *            a boolean.
      * @return a boolean.
      */
-    protected boolean tapPrefTargeting(final Player ai, final Card source, final Target tgt, final SpellAbility sa, final boolean mandatory) {
+    protected boolean tapPrefTargeting(final Player ai, final Card source, final TargetRestrictions tgt, final SpellAbility sa, final boolean mandatory) {
         final Player opp = ai.getOpponent();
         final Game game = ai.getGame();
         List<Card> tapList = opp.getCardsIn(ZoneType.Battlefield);
@@ -142,13 +142,13 @@ public abstract class TapAiBase extends SpellAbilityAi  {
             return false;
         }
 
-        while (tgt.getNumTargeted() < tgt.getMaxTargets(source, sa)) {
+        while (sa.getTargets().getNumTargeted() < tgt.getMaxTargets(source, sa)) {
             Card choice = null;
 
             if (tapList.size() == 0) {
-                if ((tgt.getNumTargeted() < tgt.getMinTargets(source, sa)) || (tgt.getNumTargeted() == 0)) {
+                if ((sa.getTargets().getNumTargeted() < tgt.getMinTargets(source, sa)) || (sa.getTargets().getNumTargeted() == 0)) {
                     if (!mandatory) {
-                        tgt.resetTargets();
+                        sa.resetTargets();
                     }
                     return false;
                 } else {
@@ -204,9 +204,9 @@ public abstract class TapAiBase extends SpellAbilityAi  {
             }
 
             if (choice == null) { // can't find anything left
-                if ((tgt.getNumTargeted() < tgt.getMinTargets(sa.getSourceCard(), sa)) || (tgt.getNumTargeted() == 0)) {
+                if ((sa.getTargets().getNumTargeted() < tgt.getMinTargets(sa.getSourceCard(), sa)) || (sa.getTargets().getNumTargeted() == 0)) {
                     if (!mandatory) {
-                        tgt.resetTargets();
+                        sa.resetTargets();
                     }
                     return false;
                 } else {
@@ -218,7 +218,7 @@ public abstract class TapAiBase extends SpellAbilityAi  {
             }
 
             tapList.remove(choice);
-            tgt.addTarget(choice);
+            sa.getTargets().add(choice);
         }
 
         return true;
@@ -239,7 +239,7 @@ public abstract class TapAiBase extends SpellAbilityAi  {
      */
     protected  boolean tapUnpreferredTargeting(final Player ai, final SpellAbility sa, final boolean mandatory) {
         final Card source = sa.getSourceCard();
-        final Target tgt = sa.getTarget();
+        final TargetRestrictions tgt = sa.getTargetRestrictions();
         final Game game = ai.getGame();
 
         List<Card> list = game.getCardsIn(ZoneType.Battlefield);
@@ -280,7 +280,7 @@ public abstract class TapAiBase extends SpellAbilityAi  {
     @Override
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
 
-        final Target tgt = sa.getTarget();
+        final TargetRestrictions tgt = sa.getTargetRestrictions();
         final Card source = sa.getSourceCard();
 
         if (tgt == null) {
@@ -292,7 +292,7 @@ public abstract class TapAiBase extends SpellAbilityAi  {
 
             return true;
         } else {
-            tgt.resetTargets();
+            sa.resetTargets();
             if (tapPrefTargeting(ai, source, tgt, sa, mandatory)) {
                 return true;
             } else if (mandatory) {
@@ -306,7 +306,7 @@ public abstract class TapAiBase extends SpellAbilityAi  {
 
     @Override
     public boolean chkAIDrawback(SpellAbility sa, Player ai) {
-        final Target tgt = sa.getTarget();
+        final TargetRestrictions tgt = sa.getTargetRestrictions();
         final Card source = sa.getSourceCard();
 
         boolean randomReturn = true;
@@ -315,7 +315,7 @@ public abstract class TapAiBase extends SpellAbilityAi  {
             // either self or defined, either way should be fine
         } else {
             // target section, maybe pull this out?
-            tgt.resetTargets();
+            sa.resetTargets();
             if (!tapPrefTargeting(ai, source, tgt, sa, false)) {
                 return false;
             }

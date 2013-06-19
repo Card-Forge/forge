@@ -3,7 +3,7 @@ package forge.card.ability.ai;
 
 import forge.card.ability.AbilityUtils;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.Target;
+import forge.card.spellability.TargetRestrictions;
 import forge.game.player.Player;
 
 public class DamageEachAi extends DamageAiBase {
@@ -13,11 +13,11 @@ public class DamageEachAi extends DamageAiBase {
      */
     @Override
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
-        final Target tgt = sa.getTarget();
+        final TargetRestrictions tgt = sa.getTargetRestrictions();
 
         if (tgt != null && sa.canTarget(ai.getOpponent())) {
-            tgt.resetTargets();
-            sa.getTarget().addTarget(ai.getOpponent());
+            sa.resetTargets();
+            sa.getTargets().add(ai.getOpponent());
         }
 
         final String damage = sa.getParam("NumDmg");

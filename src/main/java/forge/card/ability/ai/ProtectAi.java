@@ -12,7 +12,7 @@ import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.cost.Cost;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.Target;
+import forge.card.spellability.TargetRestrictions;
 import forge.game.Game;
 import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilCard;
@@ -117,7 +117,7 @@ public class ProtectAi extends SpellAbilityAi {
         final Card hostCard = sa.getSourceCard();
         final Game game = ai.getGame();
         // if there is no target and host card isn't in play, don't activate
-        if ((sa.getTarget() == null) && !hostCard.isInPlay()) {
+        if ((sa.getTargetRestrictions() == null) && !hostCard.isInPlay()) {
             return false;
         }
 
@@ -153,7 +153,7 @@ public class ProtectAi extends SpellAbilityAi {
             return false;
         }
 
-        if ((sa.getTarget() == null) || !sa.getTarget().doesTarget()) {
+        if ((sa.getTargetRestrictions() == null) || !sa.getTargetRestrictions().doesTarget()) {
             final List<Card> cards = AbilityUtils.getDefinedCards(sa.getSourceCard(), sa.getParam("Defined"), sa);
 
             if (cards.size() == 0) {
@@ -182,8 +182,8 @@ public class ProtectAi extends SpellAbilityAi {
 
         final Card source = sa.getSourceCard();
 
-        final Target tgt = sa.getTarget();
-        tgt.resetTargets();
+        final TargetRestrictions tgt = sa.getTargetRestrictions();
+        sa.resetTargets();
         List<Card> list = getProtectCreatures(ai, sa);
 
         list = CardLists.getValidCards(list, tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getSourceCard());
@@ -221,17 +221,17 @@ public class ProtectAi extends SpellAbilityAi {
         // Don't target cards that will die.
         list = ComputerUtil.getSafeTargets(ai, sa, list);
 
-        while (tgt.getNumTargeted() < tgt.getMaxTargets(source, sa)) {
+        while (sa.getTargets().getNumTargeted() < tgt.getMaxTargets(source, sa)) {
             Card t = null;
             // boolean goodt = false;
 
             if (list.isEmpty()) {
-                if ((tgt.getNumTargeted() < tgt.getMinTargets(source, sa)) || (tgt.getNumTargeted() == 0)) {
+                if ((sa.getTargets().getNumTargeted() < tgt.getMinTargets(source, sa)) || (sa.getTargets().getNumTargeted() == 0)) {
                     if (mandatory) {
                         return protectMandatoryTarget(ai, sa, mandatory);
                     }
 
-                    tgt.resetTargets();
+                    sa.resetTargets();
                     return false;
                 } else {
                     // TODO is this good enough? for up to amounts?
@@ -240,7 +240,7 @@ public class ProtectAi extends SpellAbilityAi {
             }
 
             t = ComputerUtilCard.getBestCreatureAI(list);
-            tgt.addTarget(t);
+            sa.getTargets().add(t);
             list.remove(t);
         }
 
@@ -251,16 +251,16 @@ public class ProtectAi extends SpellAbilityAi {
         final Game game = ai.getGame();
 
         List<Card> list = game.getCardsIn(ZoneType.Battlefield);
-        final Target tgt = sa.getTarget();
+        final TargetRestrictions tgt = sa.getTargetRestrictions();
         list = CardLists.getValidCards(list, tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getSourceCard());
 
         if (list.size() < tgt.getMinTargets(sa.getSourceCard(), sa)) {
-            tgt.resetTargets();
+            sa.resetTargets();
             return false;
         }
 
         // Remove anything that's already been targeted
-        for (final Card c : tgt.getTargetCards()) {
+        for (final Card c : sa.getTargets().getTargetCards()) {
             list.remove(c);
         }
 
@@ -281,7 +281,7 @@ public class ProtectAi extends SpellAbilityAi {
         final List<Card> forced = CardLists.filterControlledBy(list, ai);
         final Card source = sa.getSourceCard();
 
-        while (tgt.getNumTargeted() < tgt.getMaxTargets(source, sa)) {
+        while (sa.getTargets().getNumTargeted() < tgt.getMaxTargets(source, sa)) {
             if (pref.isEmpty()) {
                 break;
             }
@@ -295,10 +295,10 @@ public class ProtectAi extends SpellAbilityAi {
 
             pref.remove(c);
 
-            tgt.addTarget(c);
+            sa.getTargets().add(c);
         }
 
-        while (tgt.getNumTargeted() < tgt.getMaxTargets(source, sa)) {
+        while (sa.getTargets().getNumTargeted() < tgt.getMaxTargets(source, sa)) {
             if (pref2.isEmpty()) {
                 break;
             }
@@ -312,10 +312,10 @@ public class ProtectAi extends SpellAbilityAi {
 
             pref2.remove(c);
 
-            tgt.addTarget(c);
+            sa.getTargets().add(c);
         }
 
-        while (tgt.getNumTargeted() < tgt.getMinTargets(source, sa)) {
+        while (sa.getTargets().getNumTargeted() < tgt.getMinTargets(source, sa)) {
             if (forced.isEmpty()) {
                 break;
             }
@@ -329,11 +329,11 @@ public class ProtectAi extends SpellAbilityAi {
 
             forced.remove(c);
 
-            tgt.addTarget(c);
+            sa.getTargets().add(c);
         }
 
-        if (tgt.getNumTargeted() < tgt.getMinTargets(sa.getSourceCard(), sa)) {
-            tgt.resetTargets();
+        if (sa.getTargets().getNumTargeted() < tgt.getMinTargets(sa.getSourceCard(), sa)) {
+            sa.resetTargets();
             return false;
         }
 
@@ -342,7 +342,7 @@ public class ProtectAi extends SpellAbilityAi {
 
     @Override
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
-        if (sa.getTarget() == null) {
+        if (sa.getTargetRestrictions() == null) {
             if (mandatory) {
                 return true;
             }
@@ -356,7 +356,7 @@ public class ProtectAi extends SpellAbilityAi {
     @Override
     public boolean chkAIDrawback(SpellAbility sa, Player ai) {
         final Card host = sa.getSourceCard();
-        if ((sa.getTarget() == null) || !sa.getTarget().doesTarget()) {
+        if ((sa.getTargetRestrictions() == null) || !sa.getTargetRestrictions().doesTarget()) {
             if (host.isCreature()) {
                 // TODO
             }

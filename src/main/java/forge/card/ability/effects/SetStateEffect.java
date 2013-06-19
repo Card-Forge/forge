@@ -48,7 +48,7 @@ public class SetStateEffect extends SpellAbilityEffect {
         final boolean remChanged = sa.hasParam("RememberChanged");
 
         for (final Card tgt : tgtCards) {
-            if (sa.getTarget() != null && !tgt.canBeTargetedBy(sa)) {
+            if (sa.usesTargeting() && !tgt.canBeTargetedBy(sa)) {
                 continue;
             }
 

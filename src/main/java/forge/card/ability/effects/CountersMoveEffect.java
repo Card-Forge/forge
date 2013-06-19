@@ -9,7 +9,6 @@ import forge.CounterType;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.Target;
 import forge.gui.GuiChoose;
 
 public class CountersMoveEffect extends SpellAbilityEffect {
@@ -17,16 +16,10 @@ public class CountersMoveEffect extends SpellAbilityEffect {
     @Override
     protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
-        final Card host = sa.getSourceCard();
 
         Card source = null;
-        List<Card> srcCards;
-        final Target tgt = sa.getTarget();
-        if (!sa.hasParam("Source") && tgt != null) {
-            srcCards = tgt.getTargetCards();
-        } else {
-            srcCards = AbilityUtils.getDefinedCards(host, sa.getParam("Source"), sa);
-        }
+        List<Card> srcCards = getDefinedCardsOrTargeted(sa, "Source");
+        
         if (srcCards.size() > 0) {
             source = srcCards.get(0);
         }
@@ -74,25 +67,14 @@ public class CountersMoveEffect extends SpellAbilityEffect {
         }
 
         Card source = null;
-        List<Card> srcCards;
-        final Target tgt = sa.getTarget();
-        if (!sa.hasParam("Source") && tgt != null) {
-            srcCards = tgt.getTargetCards();
-        } else {
-            srcCards = AbilityUtils.getDefinedCards(host, sa.getParam("Source"), sa);
-        }
+        List<Card> srcCards = getDefinedCardsOrTargeted(sa, "Source");
         if (srcCards.size() > 0) {
             source = srcCards.get(0);
         }
         if (sa.getParam("CounterNum").equals("All")) {
             amount = source.getCounters(cType);
         }
-        List<Card> tgtCards;
-        if (!sa.hasParam("Defined") && tgt != null) {
-            tgtCards = tgt.getTargetCards();
-        } else {
-            tgtCards = AbilityUtils.getDefinedCards(host, sa.getParam("Defined"), sa);
-        }
+        List<Card> tgtCards = getTargetCards(sa);
 
         for (final Card dest : tgtCards) {
             if ((null != source) && (null != dest)) {

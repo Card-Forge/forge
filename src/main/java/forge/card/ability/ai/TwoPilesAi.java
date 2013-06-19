@@ -8,7 +8,7 @@ import forge.CardLists;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.Target;
+import forge.card.spellability.TargetRestrictions;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
@@ -31,20 +31,19 @@ public class TwoPilesAi extends SpellAbilityAi  {
             valid = sa.getParam("ValidCards");
         }
 
-        List<Player> tgtPlayers;
+        
         final Player opp = ai.getOpponent();
 
-        final Target tgt = sa.getTarget();
+        final TargetRestrictions tgt = sa.getTargetRestrictions();
         if (tgt != null) {
-            tgt.resetTargets();
+            sa.resetTargets();
             if (tgt.canTgtPlayer()) {
-                tgt.addTarget(opp);
+                sa.getTargets().add(opp);
             }
-            tgtPlayers = tgt.getTargetPlayers();
-        } else {
-            tgtPlayers = AbilityUtils.getDefinedPlayers(sa.getSourceCard(), sa.getParam("Defined"), sa);
         }
-
+        
+        List<Player> tgtPlayers = getTargetPlayers(sa);
+        
         final Player p = tgtPlayers.get(0);
         List<Card> pool = new ArrayList<Card>();
         if (sa.hasParam("DefinedCards")) {

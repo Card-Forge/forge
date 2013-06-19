@@ -10,7 +10,7 @@ import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.cost.Cost;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.Target;
+import forge.card.spellability.TargetRestrictions;
 import forge.game.ai.ComputerUtilCard;
 import forge.game.ai.ComputerUtilCost;
 import forge.game.player.Player;
@@ -54,14 +54,14 @@ public class PlayAi extends SpellAbilityAi {
         boolean chance = r.nextFloat() <= Math.pow(.6667, sa.getRestrictions().getNumberTurnActivations());
 
         List<Card> cards;
-        final Target tgt = sa.getTarget();
+        final TargetRestrictions tgt = sa.getTargetRestrictions();
         if (tgt != null) {
             ZoneType zone = tgt.getZone().get(0);
             cards = CardLists.getValidCards(ai.getGame().getCardsIn(zone), tgt.getValidTgts(), ai, source);
             if (cards.isEmpty()) {
                 return false;
             }
-            tgt.addTarget(ComputerUtilCard.getBestAI(cards));
+            sa.getTargets().add(ComputerUtilCard.getBestAI(cards));
         } else if (!sa.hasParam("Valid")) {
             cards = new ArrayList<Card>(AbilityUtils.getDefinedCards(sa.getSourceCard(), sa.getParam("Defined"), sa));
             if (cards.isEmpty()) {
@@ -87,7 +87,7 @@ public class PlayAi extends SpellAbilityAi {
     @Override
     protected boolean doTriggerAINoCost(final Player ai, final SpellAbility sa, final boolean mandatory) {
 
-        final Target tgt = sa.getTarget();
+        final TargetRestrictions tgt = sa.getTargetRestrictions();
         if (tgt != null) {
             return false;
         }

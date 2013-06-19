@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Random;
 
 import com.google.common.base.Predicate;
+import com.google.common.collect.Lists;
 
 import forge.Card;
 import forge.CardLists;
@@ -13,7 +14,7 @@ import forge.card.ability.SpellAbilityAi;
 import forge.card.cost.Cost;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.Target;
+import forge.card.spellability.TargetRestrictions;
 import forge.game.Game;
 import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilCard;
@@ -104,11 +105,10 @@ public class DamageDealAi extends DamageAiBase {
 
         if (damage.equals("X") && source.getSVar(damage).equals("Count$xPaid")) {
             // If I can kill my target by paying less mana, do it
-            final Target tgt = sa.getTarget();
-            if (tgt != null && tgt.getTargetPlayers().isEmpty() && !sa.hasParam("DividedAsYouChoose")) {
+            if (sa.usesTargeting() && !sa.getTargets().isTargetingAnyPlayer() && !sa.hasParam("DividedAsYouChoose")) {
                 int actualPay = 0;
                 final boolean noPrevention = sa.hasParam("NoPrevention");
-                for (final Card c : tgt.getTargetCards()) {
+                for (final Card c : sa.getTargets().getTargetCards()) {
                     final int adjDamage = ComputerUtilCombat.getEnoughDamageToKill(c, dmg, source, false, noPrevention);
                     if ((adjDamage > actualPay) && (adjDamage <= dmg)) {
                         actualPay = adjDamage;
@@ -135,20 +135,20 @@ public class DamageDealAi extends DamageAiBase {
      *            a boolean.
      * @return a {@link forge.Card} object.
      */
-    private Card dealDamageChooseTgtC(final Player ai, final SpellAbility saMe, final int d, final boolean noPrevention,
+    private Card dealDamageChooseTgtC(final Player ai, final SpellAbility sa, final int d, final boolean noPrevention,
             final Player pl, final boolean mandatory) {
 
         // wait until stack is empty (prevents duplicate kills)
-        if (!saMe.isTrigger() && !ai.getGame().getStack().isEmpty()) {
+        if (!sa.isTrigger() && !ai.getGame().getStack().isEmpty()) {
             return null;
         }
-        final Target tgt = saMe.getTarget();
-        final Card source = saMe.getSourceCard();
+        final TargetRestrictions tgt = sa.getTargetRestrictions();
+        final Card source = sa.getSourceCard();
         List<Card> hPlay = CardLists.getValidCards(pl.getCardsIn(ZoneType.Battlefield), tgt.getValidTgts(), ai, source);
 
-        final List<ITargetable> objects = tgt.getTargets();
-        if (saMe.hasParam("TargetUnique")) {
-            objects.addAll(saMe.getUniqueTargets());
+        final List<ITargetable> objects = Lists.newArrayList(sa.getTargets().getTargets());
+        if (sa.hasParam("TargetUnique")) {
+            objects.addAll(sa.getUniqueTargets());
         }
         for (final Object o : objects) {
             if (o instanceof Card) {
@@ -158,7 +158,7 @@ public class DamageDealAi extends DamageAiBase {
                 }
             }
         }
-        hPlay = CardLists.getTargetableCards(hPlay, saMe);
+        hPlay = CardLists.getTargetableCards(hPlay, sa);
 
         final List<Card> killables = CardLists.filter(hPlay, new Predicate<Card>() {
             @Override
@@ -204,7 +204,7 @@ public class DamageDealAi extends DamageAiBase {
      * @return a boolean.
      */
     private boolean damageTargetAI(final Player ai, final SpellAbility saMe, final int dmg) {
-        final Target tgt = saMe.getTarget();
+        final TargetRestrictions tgt = saMe.getTargetRestrictions();
 
         if (tgt == null) {
             return this.damageChooseNontargeted(ai, saMe, dmg);
@@ -222,38 +222,38 @@ public class DamageDealAi extends DamageAiBase {
      * damageChoosingTargets.
      * </p>
      * 
-     * @param saMe
+     * @param sa
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @param tgt
-     *            a {@link forge.card.spellability.Target} object.
+     *            a {@link forge.card.spellability.TargetRestrictions} object.
      * @param dmg
      *            a int.
      * @param mandatory
      *            a boolean.
      * @return a boolean.
      */
-    private boolean damageChoosingTargets(final Player ai, final SpellAbility saMe, final Target tgt, int dmg,
+    private boolean damageChoosingTargets(final Player ai, final SpellAbility sa, final TargetRestrictions tgt, int dmg,
             final boolean isTrigger, final boolean mandatory) {
-        final Card source = saMe.getSourceCard();
-        final boolean noPrevention = saMe.hasParam("NoPrevention");
+        final Card source = sa.getSourceCard();
+        final boolean noPrevention = sa.hasParam("NoPrevention");
         final Game game = source.getGame();
         final PhaseHandler phase = game.getPhaseHandler();
-        final boolean divided = saMe.hasParam("DividedAsYouChoose");
+        final boolean divided = sa.hasParam("DividedAsYouChoose");
 
         // target loop
-        tgt.resetTargets();
+        sa.resetTargets();
         Player enemy = ai.getOpponent();
         
-        if (tgt.getMaxTargets(source, saMe) <= 0) {
+        if (tgt.getMaxTargets(source, sa) <= 0) {
             return false;
         }
 
-        while (tgt.getNumTargeted() < tgt.getMaxTargets(source, saMe)) {
+        while (sa.getTargets().getNumTargeted() < tgt.getMaxTargets(source, sa)) {
 
             if (tgt.canTgtCreatureAndPlayer()) {
 
-                if (this.shouldTgtP(ai, saMe, dmg, noPrevention)) {
-                    tgt.addTarget(enemy);
+                if (this.shouldTgtP(ai, sa, dmg, noPrevention)) {
+                    sa.getTargets().add(enemy);
                     if (divided) {
                         tgt.addDividedAllocation(enemy, dmg);
                         break;
@@ -261,9 +261,9 @@ public class DamageDealAi extends DamageAiBase {
                     continue;
                 }
 
-                final Card c = this.dealDamageChooseTgtC(ai, saMe, dmg, noPrevention, enemy, false);
+                final Card c = this.dealDamageChooseTgtC(ai, sa, dmg, noPrevention, enemy, false);
                 if (c != null) {
-                    tgt.addTarget(c);
+                    sa.getTargets().add(c);
                     if (divided) {
                         final int assignedDamage = ComputerUtilCombat.getEnoughDamageToKill(c, dmg, source, false, noPrevention);
                         if (assignedDamage <= dmg) {
@@ -284,21 +284,21 @@ public class DamageDealAi extends DamageAiBase {
                 // TODO: add check here if card is about to die from something
                 // on the stack
                 // or from taking combat damage
-                final boolean freePing = isTrigger || saMe.getPayCosts() == null || tgt.getNumTargeted() > 0
-                        || (phase.is(PhaseType.END_OF_TURN) && saMe.isAbility() && phase.getNextTurn().equals(ai))
-                            || (phase.is(PhaseType.MAIN2) && saMe.getRestrictions().getPlaneswalker());
+                final boolean freePing = isTrigger || sa.getPayCosts() == null || sa.getTargets().getNumTargeted() > 0
+                        || (phase.is(PhaseType.END_OF_TURN) && sa.isAbility() && phase.getNextTurn().equals(ai))
+                            || (phase.is(PhaseType.MAIN2) && sa.getRestrictions().getPlaneswalker());
 
-                if (freePing && saMe.canTarget(enemy)) {
-                    tgt.addTarget(enemy);
+                if (freePing && sa.canTarget(enemy)) {
+                    sa.getTargets().add(enemy);
                     if (divided) {
                         tgt.addDividedAllocation(enemy, dmg);
                         break;
                     }
                 }
             } else if (tgt.canTgtCreature()) {
-                final Card c = this.dealDamageChooseTgtC(ai, saMe, dmg, noPrevention, enemy, mandatory);
+                final Card c = this.dealDamageChooseTgtC(ai, sa, dmg, noPrevention, enemy, mandatory);
                 if (c != null) {
-                    tgt.addTarget(c);
+                    sa.getTargets().add(c);
                     if (divided) {
                         final int assignedDamage = ComputerUtilCombat.getEnoughDamageToKill(c, dmg, source, false, noPrevention);
                         if (assignedDamage <= dmg) {
@@ -315,12 +315,12 @@ public class DamageDealAi extends DamageAiBase {
 
             // TODO: Improve Damage, we shouldn't just target the player just
             // because we can
-            else if (saMe.canTarget(enemy)) {
+            else if (sa.canTarget(enemy)) {
                 if ((phase.is(PhaseType.END_OF_TURN) && phase.getNextTurn().equals(ai))
-                        || (SpellAbilityAi.isSorcerySpeed(saMe) && phase.is(PhaseType.MAIN2))
-                        || saMe.getPayCosts() == null || isTrigger
-                        || this.shouldTgtP(ai, saMe, dmg, noPrevention)) {
-                    tgt.addTarget(enemy);
+                        || (SpellAbilityAi.isSorcerySpeed(sa) && phase.is(PhaseType.MAIN2))
+                        || sa.getPayCosts() == null || isTrigger
+                        || this.shouldTgtP(ai, sa, dmg, noPrevention)) {
+                    sa.getTargets().add(enemy);
                     if (divided) {
                         tgt.addDividedAllocation(enemy, dmg);
                         break;
@@ -329,13 +329,13 @@ public class DamageDealAi extends DamageAiBase {
                 }
             }
             // fell through all the choices, no targets left?
-            if (((tgt.getNumTargeted() < tgt.getMinTargets(source, saMe)) || (tgt.getNumTargeted() == 0))) {
+            if (((sa.getTargets().getNumTargeted() < tgt.getMinTargets(source, sa)) || (sa.getTargets().getNumTargeted() == 0))) {
                 if (!mandatory) {
-                    tgt.resetTargets();
+                    sa.resetTargets();
                     return false;
                 } else {
                     // If the trigger is mandatory, gotta choose my own stuff now
-                    return this.damageChooseRequiredTargets(ai, saMe, tgt, dmg, mandatory);
+                    return this.damageChooseRequiredTargets(ai, sa, tgt, dmg, mandatory);
                 }
             } else {
                 // TODO is this good enough? for up to amounts?
@@ -406,28 +406,28 @@ public class DamageDealAi extends DamageAiBase {
      * damageChooseRequiredTargets.
      * </p>
      * 
-     * @param saMe
+     * @param sa
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @param tgt
-     *            a {@link forge.card.spellability.Target} object.
+     *            a {@link forge.card.spellability.TargetRestrictions} object.
      * @param dmg
      *            a int.
      * @param mandatory
      *            a boolean.
      * @return a boolean.
      */
-    private boolean damageChooseRequiredTargets(final Player ai, final SpellAbility saMe, final Target tgt, final int dmg,
+    private boolean damageChooseRequiredTargets(final Player ai, final SpellAbility sa, final TargetRestrictions tgt, final int dmg,
             final boolean mandatory) {
         // this is for Triggered targets that are mandatory
-        final boolean noPrevention = saMe.hasParam("NoPrevention");
-        final boolean divided = saMe.hasParam("DividedAsYouChoose");
+        final boolean noPrevention = sa.hasParam("NoPrevention");
+        final boolean divided = sa.hasParam("DividedAsYouChoose");
 
-        while (tgt.getNumTargeted() < tgt.getMinTargets(saMe.getSourceCard(), saMe)) {
+        while (sa.getTargets().getNumTargeted() < tgt.getMinTargets(sa.getSourceCard(), sa)) {
             // TODO: Consider targeting the planeswalker
             if (tgt.canTgtCreature()) {
-                final Card c = this.dealDamageChooseTgtC(ai, saMe, dmg, noPrevention, ai, mandatory);
+                final Card c = this.dealDamageChooseTgtC(ai, sa, dmg, noPrevention, ai, mandatory);
                 if (c != null) {
-                    tgt.addTarget(c);
+                    sa.getTargets().add(c);
                     if (divided) {
                         tgt.addDividedAllocation(c, dmg);
                         break;
@@ -436,8 +436,8 @@ public class DamageDealAi extends DamageAiBase {
                 }
             }
 
-            if (saMe.canTarget(ai)) {
-                if (tgt.addTarget(ai)) {
+            if (sa.canTarget(ai)) {
+                if (sa.getTargets().add(ai)) {
                     if (divided) {
                         tgt.addDividedAllocation(ai, dmg);
                         break;
@@ -466,7 +466,7 @@ public class DamageDealAi extends DamageAiBase {
             source.setSVar("PayX", Integer.toString(dmg));
         }
 
-        final Target tgt = sa.getTarget();
+        final TargetRestrictions tgt = sa.getTargetRestrictions();
         if (tgt == null) {
             // If it's not mandatory check a few things
             if (!mandatory && !this.damageChooseNontargeted(ai, sa, dmg)) {
@@ -481,12 +481,12 @@ public class DamageDealAi extends DamageAiBase {
                 // If I can kill my target by paying less mana, do it
                 int actualPay = 0;
                 final boolean noPrevention = sa.hasParam("NoPrevention");
-                final List<Card> cards = tgt.getTargetCards();
+                
                 //target is a player
-                if (cards.isEmpty()) {
+                if (!sa.getTargets().isTargetingAnyCard()) {
                     actualPay = dmg;
                 }
-                for (final Card c : cards) {
+                for (final Card c : sa.getTargets().getTargetCards()) {
                     final int adjDamage = ComputerUtilCombat.getEnoughDamageToKill(c, dmg, source, false, noPrevention);
                     if (adjDamage > actualPay) {
                         actualPay = adjDamage;

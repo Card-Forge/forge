@@ -11,7 +11,7 @@ import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.cost.Cost;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.Target;
+import forge.card.spellability.TargetRestrictions;
 import forge.game.Game;
 import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilCard;
@@ -49,7 +49,7 @@ public class DamagePreventAi extends SpellAbilityAi {
             return false;
         }
 
-        final Target tgt = sa.getTarget();
+        final TargetRestrictions tgt = sa.getTargetRestrictions();
         if (tgt == null) {
             // As far as I can tell these Defined Cards will only have one of
             // them
@@ -57,7 +57,7 @@ public class DamagePreventAi extends SpellAbilityAi {
 
             // react to threats on the stack
             if (!game.getStack().isEmpty()) {
-                final ArrayList<Object> threatenedObjects = ComputerUtil.predictThreatenedObjects(sa.getActivatingPlayer(), sa);
+                final List<ITargetable> threatenedObjects = ComputerUtil.predictThreatenedObjects(sa.getActivatingPlayer(), sa);
                 for (final Object o : objects) {
                     if (threatenedObjects.contains(o)) {
                         chance = true;
@@ -91,14 +91,14 @@ public class DamagePreventAi extends SpellAbilityAi {
 
         // react to threats on the stack
         else if (!game.getStack().isEmpty()) {
-            tgt.resetTargets();
+            sa.resetTargets();
             // check stack for something on the stack will kill anything i
             // control
             final ArrayList<Object> objects = new ArrayList<Object>();
             // AbilityFactory.predictThreatenedObjects(af);
 
             if (objects.contains(ai)) {
-                tgt.addTarget(ai);
+                sa.getTargets().add(ai);
             }
 
             final List<Card> threatenedTargets = new ArrayList<Card>();
@@ -114,7 +114,7 @@ public class DamagePreventAi extends SpellAbilityAi {
 
             if (!threatenedTargets.isEmpty()) {
                 // Choose "best" of the remaining to save
-                tgt.addTarget(ComputerUtilCard.getBestCreatureAI(threatenedTargets));
+                sa.getTargets().add(ComputerUtilCard.getBestCreatureAI(threatenedTargets));
                 chance = true;
             }
 
@@ -123,7 +123,7 @@ public class DamagePreventAi extends SpellAbilityAi {
             if (sa.canTarget(ai) && ComputerUtilCombat.wouldLoseLife(ai, game.getCombat())
                     && (ComputerUtilCombat.lifeInDanger(ai, game.getCombat()) || sa.isAbility())
                     && game.getPhaseHandler().isPlayerTurn(ai.getOpponent())) {
-                tgt.addTarget(ai);
+                sa.getTargets().add(ai);
                 chance = true;
             } else {
                 // filter AIs battlefield by what I can target
@@ -139,7 +139,7 @@ public class DamagePreventAi extends SpellAbilityAi {
 
                 for (final Card c : combatants) {
                     if (ComputerUtilCombat.combatantWouldBeDestroyed(ai, c)) {
-                        tgt.addTarget(c);
+                        sa.getTargets().add(c);
                         chance = true;
                         break;
                     }
@@ -153,7 +153,7 @@ public class DamagePreventAi extends SpellAbilityAi {
     @Override
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
         boolean chance = false;
-        final Target tgt = sa.getTarget();
+        final TargetRestrictions tgt = sa.getTargetRestrictions();
         if (tgt == null) {
             // If there's no target on the trigger, just say yes.
             chance = true;
@@ -179,8 +179,8 @@ public class DamagePreventAi extends SpellAbilityAi {
      */
     private boolean preventDamageMandatoryTarget(final Player ai, final SpellAbility sa,
             final boolean mandatory) {
-        final Target tgt = sa.getTarget();
-        tgt.resetTargets();
+        final TargetRestrictions tgt = sa.getTargetRestrictions();
+        sa.resetTargets();
         // filter AIs battlefield by what I can target
         final Game game = ai.getGame();
         List<Card> targetables = game.getCardsIn(ZoneType.Battlefield);
@@ -201,7 +201,7 @@ public class DamagePreventAi extends SpellAbilityAi {
             if (game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
                 for (final Card c : combatants) {
                     if (ComputerUtilCombat.combatantWouldBeDestroyed(ai, c)) {
-                        tgt.addTarget(c);
+                        sa.getTargets().add(c);
                         return true;
                     }
                 }
@@ -210,11 +210,11 @@ public class DamagePreventAi extends SpellAbilityAi {
             // TODO see if something on the stack is about to kill something I
             // can target
 
-            tgt.addTarget(combatants.get(0));
+            sa.getTargets().add(combatants.get(0));
             return true;
         }
 
-        tgt.addTarget(ComputerUtilCard.getCheapestPermanentAI(targetables, sa, true));
+        sa.getTargets().add(ComputerUtilCard.getCheapestPermanentAI(targetables, sa, true));
         return true;
     }
 

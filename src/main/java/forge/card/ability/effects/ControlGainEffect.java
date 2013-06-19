@@ -1,6 +1,5 @@
 package forge.card.ability.effects;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -11,7 +10,6 @@ import forge.card.ability.SpellAbilityEffect;
 import forge.card.mana.ManaCost;
 import forge.card.spellability.Ability;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.Target;
 import forge.game.Game;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
@@ -24,13 +22,7 @@ public class ControlGainEffect extends SpellAbilityEffect {
     protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
 
-
-        final Target tgt = sa.getTarget();
-
-        List<Player> newController = AbilityUtils.getDefinedPlayers(sa.getSourceCard(), sa.getParam("NewController"), sa);
-        if ((tgt != null) && tgt.getTargetPlayers() != null && !tgt.getTargetPlayers().isEmpty()) {
-            newController = tgt.getTargetPlayers();
-        }
+        List<Player> newController = getTargetPlayers(sa, "NewController");
         if (newController.size() == 0) {
             newController.add(sa.getActivatingPlayer());
         }
@@ -74,7 +66,6 @@ public class ControlGainEffect extends SpellAbilityEffect {
 
     @Override
     public void resolve(SpellAbility sa) {
-        List<Card> tgtCards = new ArrayList<Card>();
         Card source = sa.getSourceCard();
 
         final boolean bUntap = sa.hasParam("Untap");
@@ -86,28 +77,16 @@ public class ControlGainEffect extends SpellAbilityEffect {
         final List<String> kws = sa.hasParam("AddKWs") ? Arrays.asList(sa.getParam("AddKWs").split(" & ")) : null;
         final List<String> lose = sa.hasParam("LoseControl") ? Arrays.asList(sa.getParam("LoseControl").split(",")) : null;
 
-        final Target tgt = sa.getTarget();
-        final List<Player> controllers;
-
-        if (sa.hasParam("NewController")) {
-            controllers = AbilityUtils.getDefinedPlayers(sa.getSourceCard(), sa.getParam("NewController"), sa);
-        } else if (tgt != null && tgt.getTargetPlayers() != null && tgt.canTgtPlayer()) {
-            controllers = tgt.getTargetPlayers();
-        } else
-            controllers = new ArrayList<Player>();
+        final List<Player> controllers = getDefinedPlayersOrTargeted(sa, "NewController");
 
         final Player newController = controllers.isEmpty() ? sa.getActivatingPlayer() : controllers.get(0);
         final Game game = newController.getGame();
 
+        final List<Card> tgtCards;
         if (sa.hasParam("AllValid")) {
-            tgtCards = game.getCardsIn(ZoneType.Battlefield);
-            tgtCards = AbilityUtils.filterListByType(tgtCards, sa.getParam("AllValid"), sa);
-        } else if (sa.hasParam("Defined")) {
-            tgtCards = AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa);
-        } else {
+            tgtCards = AbilityUtils.filterListByType(game.getCardsIn(ZoneType.Battlefield), sa.getParam("AllValid"), sa);
+        } else 
             tgtCards = getTargetCards(sa);
-        }
-
 
         // check for lose control criteria right away
         if (lose != null && lose.contains("LeavesPlay") && !source.isInZone(ZoneType.Battlefield)) {

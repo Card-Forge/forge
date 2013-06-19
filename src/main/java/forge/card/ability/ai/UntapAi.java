@@ -10,7 +10,7 @@ import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.cost.Cost;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.Target;
+import forge.card.spellability.TargetRestrictions;
 import forge.game.ai.ComputerUtilCard;
 import forge.game.ai.ComputerUtilCost;
 import forge.game.player.Player;
@@ -24,7 +24,7 @@ public class UntapAi extends SpellAbilityAi {
      */
     @Override
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
-        final Target tgt = sa.getTarget();
+        final TargetRestrictions tgt = sa.getTargetRestrictions();
         final Card source = sa.getSourceCard();
         final Cost cost = sa.getPayCosts();
 
@@ -51,7 +51,7 @@ public class UntapAi extends SpellAbilityAi {
 
     @Override
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
-        final Target tgt = sa.getTarget();
+        final TargetRestrictions tgt = sa.getTargetRestrictions();
 
         if (tgt == null) {
             if (mandatory) {
@@ -79,7 +79,7 @@ public class UntapAi extends SpellAbilityAi {
 
     @Override
     public boolean chkAIDrawback(SpellAbility sa, Player ai) {
-        final Target tgt = sa.getTarget();
+        final TargetRestrictions tgt = sa.getTargetRestrictions();
 
         boolean randomReturn = true;
 
@@ -100,7 +100,7 @@ public class UntapAi extends SpellAbilityAi {
      * </p>
      * 
      * @param tgt
-     *            a {@link forge.card.spellability.Target} object.
+     *            a {@link forge.card.spellability.TargetRestrictions} object.
      * @param af
      *            a {@link forge.card.ability.AbilityFactory} object.
      * @param sa
@@ -109,7 +109,7 @@ public class UntapAi extends SpellAbilityAi {
      *            a boolean.
      * @return a boolean.
      */
-    private static boolean untapPrefTargeting(final Player ai, final Target tgt, final SpellAbility sa, final boolean mandatory) {
+    private static boolean untapPrefTargeting(final Player ai, final TargetRestrictions tgt, final SpellAbility sa, final boolean mandatory) {
         final Card source = sa.getSourceCard();
 
         Player targetController = ai;
@@ -132,12 +132,12 @@ public class UntapAi extends SpellAbilityAi {
             return false;
         }
 
-        while (tgt.getNumTargeted() < tgt.getMaxTargets(sa.getSourceCard(), sa)) {
+        while (sa.getTargets().getNumTargeted() < tgt.getMaxTargets(sa.getSourceCard(), sa)) {
             Card choice = null;
 
             if (untapList.size() == 0) {
-                if ((tgt.getNumTargeted() < tgt.getMinTargets(sa.getSourceCard(), sa)) || (tgt.getNumTargeted() == 0)) {
-                    tgt.resetTargets();
+                if ((sa.getTargets().getNumTargeted() < tgt.getMinTargets(sa.getSourceCard(), sa)) || (sa.getTargets().getNumTargeted() == 0)) {
+                    sa.resetTargets();
                     return false;
                 } else {
                     // TODO is this good enough? for up to amounts?
@@ -157,8 +157,8 @@ public class UntapAi extends SpellAbilityAi {
             }
 
             if (choice == null) { // can't find anything left
-                if ((tgt.getNumTargeted() < tgt.getMinTargets(sa.getSourceCard(), sa)) || (tgt.getNumTargeted() == 0)) {
-                    tgt.resetTargets();
+                if ((sa.getTargets().getNumTargeted() < tgt.getMinTargets(sa.getSourceCard(), sa)) || (sa.getTargets().getNumTargeted() == 0)) {
+                    sa.resetTargets();
                     return false;
                 } else {
                     // TODO is this good enough? for up to amounts?
@@ -167,7 +167,7 @@ public class UntapAi extends SpellAbilityAi {
             }
 
             untapList.remove(choice);
-            tgt.addTarget(choice);
+            sa.getTargets().add(choice);
         }
         return true;
     }
@@ -187,7 +187,7 @@ public class UntapAi extends SpellAbilityAi {
      */
     private boolean untapUnpreferredTargeting(final SpellAbility sa, final boolean mandatory) {
         final Card source = sa.getSourceCard();
-        final Target tgt = sa.getTarget();
+        final TargetRestrictions tgt = sa.getTargetRestrictions();
 
         List<Card> list = sa.getActivatingPlayer().getGame().getCardsIn(ZoneType.Battlefield);
 
@@ -228,7 +228,7 @@ public class UntapAi extends SpellAbilityAi {
      * @param source
      *            a {@link forge.Card} object.
      * @param tgt
-     *            a {@link forge.card.spellability.Target} object.
+     *            a {@link forge.card.spellability.TargetRestrictions} object.
      * @param af
      *            a {@link forge.card.ability.AbilityFactory} object.
      * @param sa
@@ -239,8 +239,9 @@ public class UntapAi extends SpellAbilityAi {
      *            a {@link forge.CardList} object.
      * @return a boolean.
      */
-    private boolean untapTargetList(final Card source, final Target tgt, final SpellAbility sa, final boolean mandatory, final List<Card> tapList) {
-        for (final Card c : tgt.getTargetCards()) {
+    private boolean untapTargetList(final Card source, final TargetRestrictions tgt, final SpellAbility sa, final boolean mandatory, final List<Card> tapList) {
+        
+        for (final Card c : sa.getTargets().getTargetCards()) {
             tapList.remove(c);
         }
 
@@ -248,13 +249,13 @@ public class UntapAi extends SpellAbilityAi {
             return false;
         }
 
-        while (tgt.getNumTargeted() < tgt.getMaxTargets(source, sa)) {
+        while (sa.getTargets().getNumTargeted() < tgt.getMaxTargets(source, sa)) {
             Card choice = null;
 
             if (tapList.size() == 0) {
-                if ((tgt.getNumTargeted() < tgt.getMinTargets(source, sa)) || (tgt.getNumTargeted() == 0)) {
+                if ((sa.getTargets().getNumTargeted() < tgt.getMinTargets(source, sa)) || (sa.getTargets().getNumTargeted() == 0)) {
                     if (!mandatory) {
-                        tgt.resetTargets();
+                        sa.resetTargets();
                     }
                     return false;
                 } else {
@@ -274,9 +275,9 @@ public class UntapAi extends SpellAbilityAi {
             }
 
             if (choice == null) { // can't find anything left
-                if ((tgt.getNumTargeted() < tgt.getMinTargets(sa.getSourceCard(), sa)) || (tgt.getNumTargeted() == 0)) {
+                if ((sa.getTargets().getNumTargeted() < tgt.getMinTargets(sa.getSourceCard(), sa)) || (sa.getTargets().getNumTargeted() == 0)) {
                     if (!mandatory) {
-                        tgt.resetTargets();
+                        sa.resetTargets();
                     }
                     return false;
                 } else {
@@ -286,7 +287,7 @@ public class UntapAi extends SpellAbilityAi {
             }
 
             tapList.remove(choice);
-            tgt.addTarget(choice);
+            sa.getTargets().add(choice);
         }
 
         return true;

@@ -417,7 +417,6 @@ public class Game {
                 return c;
             }
         }
-
         return card;
     }
 

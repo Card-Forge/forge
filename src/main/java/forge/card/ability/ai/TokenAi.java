@@ -7,7 +7,7 @@ import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.cost.Cost;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.Target;
+import forge.card.spellability.TargetRestrictions;
 import forge.game.Game;
 import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilCost;
@@ -126,13 +126,13 @@ public class TokenAi extends SpellAbilityAi {
         final Random r = MyRandom.getRandom();
         final Card source = sa.getSourceCard();
 
-        final Target tgt = sa.getTarget();
+        final TargetRestrictions tgt = sa.getTargetRestrictions();
         if (tgt != null) {
-            tgt.resetTargets();
+            sa.resetTargets();
             if (tgt.canOnlyTgtOpponent() || "Opponent".equals(sa.getParam("AITgts"))) {
-                tgt.addTarget(opp);
+                sa.getTargets().add(opp);
             } else {
-                tgt.addTarget(ai);
+                sa.getTargets().add(ai);
             }
         }
 
@@ -184,13 +184,13 @@ public class TokenAi extends SpellAbilityAi {
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
         readParameters(sa);
         final Card source = sa.getSourceCard();
-        final Target tgt = sa.getTarget();
+        final TargetRestrictions tgt = sa.getTargetRestrictions();
         if (tgt != null) {
-            tgt.resetTargets();
+            sa.resetTargets();
             if (tgt.canOnlyTgtOpponent()) {
-                tgt.addTarget(ai.getOpponent());
+                sa.getTargets().add(ai.getOpponent());
             } else {
-                tgt.addTarget(ai);
+                sa.getTargets().add(ai);
             }
         }
         if ("X".equals(this.tokenAmount) || "X".equals(this.tokenPower) || "X".equals(this.tokenToughness)) {

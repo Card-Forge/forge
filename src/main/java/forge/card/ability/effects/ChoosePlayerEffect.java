@@ -6,7 +6,7 @@ import forge.Card;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.Target;
+import forge.card.spellability.TargetRestrictions;
 import forge.game.player.Player;
 
 public class ChoosePlayerEffect extends SpellAbilityEffect {
@@ -29,7 +29,7 @@ public class ChoosePlayerEffect extends SpellAbilityEffect {
 
         final List<Player> tgtPlayers = getTargetPlayers(sa);
 
-        final Target tgt = sa.getTarget();
+        final TargetRestrictions tgt = sa.getTargetRestrictions();
 
         final List<Player> choices = sa.hasParam("Choices") ? AbilityUtils.getDefinedPlayers(
                 sa.getSourceCard(), sa.getParam("Choices"), sa) : sa.getActivatingPlayer().getGame().getPlayers();

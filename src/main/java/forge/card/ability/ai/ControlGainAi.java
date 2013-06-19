@@ -28,7 +28,7 @@ import forge.CardLists;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.Target;
+import forge.card.spellability.TargetRestrictions;
 import forge.game.Game;
 import forge.game.ai.ComputerUtilCard;
 import forge.game.phase.CombatUtil;
@@ -70,7 +70,7 @@ public class ControlGainAi extends SpellAbilityAi {
 
         final List<String> lose = sa.hasParam("LoseControl") ? Arrays.asList(sa.getParam("LoseControl").split(",")) : null;
 
-        final Target tgt = sa.getTarget();
+        final TargetRestrictions tgt = sa.getTargetRestrictions();
         Player opp = ai.getOpponent();
 
         // if Defined, then don't worry about targeting
@@ -84,12 +84,12 @@ public class ControlGainAi extends SpellAbilityAi {
             }
             return true;
         } else {
-            tgt.resetTargets();
+            sa.resetTargets();
             if (tgt.canOnlyTgtOpponent()) {
                 if (!opp.canBeTargetedBy(sa)) {
                     return false;
                 }
-                tgt.addTarget(opp);
+                sa.getTargets().add(opp);
             }
         }
 
@@ -116,7 +116,7 @@ public class ControlGainAi extends SpellAbilityAi {
             return false;
         }
 
-        while (tgt.getNumTargeted() < tgt.getMaxTargets(sa.getSourceCard(), sa)) {
+        while (sa.getTargets().getNumTargeted() < tgt.getMaxTargets(sa.getSourceCard(), sa)) {
             Card t = null;
             for (final Card c : list) {
                 if (c.isCreature()) {
@@ -134,8 +134,8 @@ public class ControlGainAi extends SpellAbilityAi {
             }
 
             if (list.isEmpty()) {
-                if ((tgt.getNumTargeted() < tgt.getMinTargets(sa.getSourceCard(), sa)) || (tgt.getNumTargeted() == 0)) {
-                    tgt.resetTargets();
+                if ((sa.getTargets().getNumTargeted() < tgt.getMinTargets(sa.getSourceCard(), sa)) || (sa.getTargets().getNumTargeted() == 0)) {
+                    sa.resetTargets();
                     return false;
                 } else {
                     // TODO is this good enough? for up to amounts?
@@ -155,7 +155,7 @@ public class ControlGainAi extends SpellAbilityAi {
                 t = ComputerUtilCard.getMostExpensivePermanentAI(list, sa, true);
             }
 
-            tgt.addTarget(t);
+            sa.getTargets().add(t);
             list.remove(t);
 
             hasCreature = false;
@@ -170,7 +170,7 @@ public class ControlGainAi extends SpellAbilityAi {
 
     @Override
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
-        if (sa.getTarget() == null) {
+        if (sa.getTargetRestrictions() == null) {
             if (mandatory) {
                 return true;
             }
@@ -184,7 +184,7 @@ public class ControlGainAi extends SpellAbilityAi {
     @Override
     public boolean chkAIDrawback(SpellAbility sa, final Player ai) {
         final Game game = ai.getGame();
-        if ((sa.getTarget() == null) || !sa.getTarget().doesTarget()) {
+        if ((sa.getTargetRestrictions() == null) || !sa.getTargetRestrictions().doesTarget()) {
             if (sa.hasParam("AllValid")) {
                 List<Card> tgtCards = CardLists.filterControlledBy(game.getCardsIn(ZoneType.Battlefield), ai.getOpponent());
                 tgtCards = AbilityUtils.filterListByType(tgtCards, sa.getParam("AllValid"), sa);

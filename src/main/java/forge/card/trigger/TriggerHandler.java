@@ -31,7 +31,7 @@ import forge.card.ability.effects.CharmEffect;
 import forge.card.mana.ManaCost;
 import forge.card.spellability.Ability;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.Target;
+import forge.card.spellability.TargetRestrictions;
 import forge.game.Game;
 import forge.game.GlobalRuleChange;
 import forge.game.ai.ComputerUtil;
@@ -394,7 +394,7 @@ public class TriggerHandler {
 
             SpellAbility ability = sa;
             while (ability != null) {
-                final Target tgt = ability.getTarget();
+                final TargetRestrictions tgt = ability.getTargetRestrictions();
 
                 if (tgt != null) {
                     tgt.setMandatory(true);

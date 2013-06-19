@@ -10,7 +10,6 @@ import forge.CardLists;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.cost.Cost;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.Target;
 import forge.game.ai.ComputerUtilCard;
 import forge.game.ai.ComputerUtilCost;
 import forge.game.ai.ComputerUtilMana;
@@ -33,7 +32,6 @@ public class DestroyAllAi extends SpellAbilityAi {
     @Override
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
         final Card source = sa.getSourceCard();
-        final Target tgt = sa.getTarget();
         String valid = "";
         if (mandatory) {
             return true;
@@ -41,13 +39,12 @@ public class DestroyAllAi extends SpellAbilityAi {
         if (sa.hasParam("ValidCards")) {
             valid = sa.getParam("ValidCards");
         }
-        List<Card> humanlist =
-                CardLists.getValidCards(ai.getOpponent().getCardsIn(ZoneType.Battlefield), valid.split(","), source.getController(), source);
-        List<Card> computerlist =
-                CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), valid.split(","), source.getController(), source);
-        if (sa.getTarget() != null) {
-            tgt.resetTargets();
-            sa.getTarget().addTarget(ai.getOpponent());
+        List<Card> humanlist =  CardLists.getValidCards(ai.getOpponent().getCardsIn(ZoneType.Battlefield), valid.split(","), source.getController(), source);
+        List<Card> computerlist = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), valid.split(","), source.getController(), source);
+        
+        if (sa.usesTargeting()) {
+            sa.resetTargets();
+            sa.getTargets().add(ai.getOpponent());
             computerlist.clear();
         }
 
@@ -98,15 +95,11 @@ public class DestroyAllAi extends SpellAbilityAi {
             valid = valid.replace("X", Integer.toString(xPay));
         }
 
-        final Target tgt = sa.getTarget();
-
-        List<Card> humanlist =
-                CardLists.getValidCards(ai.getOpponent().getCardsIn(ZoneType.Battlefield), valid.split(","), source.getController(), source);
-        List<Card> computerlist =
-                CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), valid.split(","), source.getController(), source);
-        if (sa.getTarget() != null) {
-            tgt.resetTargets();
-            sa.getTarget().addTarget(ai.getOpponent());
+        List<Card> humanlist = CardLists.getValidCards(ai.getOpponent().getCardsIn(ZoneType.Battlefield), valid.split(","), source.getController(), source);
+        List<Card> computerlist = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), valid.split(","), source.getController(), source);
+        if (sa.usesTargeting()) {
+            sa.resetTargets();
+            sa.getTargets().add(ai.getOpponent());
             computerlist.clear();
         }
 

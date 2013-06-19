@@ -26,6 +26,10 @@ import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
 
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
+
 import forge.Card;
 import forge.GameEntity;
 import forge.ITargetable;
@@ -429,29 +433,6 @@ public abstract class SpellAbility implements ISpellAbility, ITargetable {
 
     /**
      * <p>
-     * getTarget.
-     * </p>
-     * 
-     * @return a {@link forge.card.spellability.Target} object.
-     */
-    public Target getTarget() {
-        return this.getChosenTarget();
-    }
-
-    /**
-     * <p>
-     * setTarget.
-     * </p>
-     * 
-     * @param tgt
-     *            a {@link forge.card.spellability.Target} object.
-     */
-    public void setTarget(final Target tgt) {
-        this.setChosenTarget(tgt);
-    }
-
-    /**
-     * <p>
      * Setter for the field <code>restrictions</code>.
      * </p>
      * 
@@ -748,11 +729,7 @@ public abstract class SpellAbility implements ISpellAbility, ITargetable {
      */
     public void resetOnceResolved() {
         this.resetPaidHash();
-
-        if (this.getChosenTarget() != null) {
-            this.getChosenTarget().resetTargets();
-        }
-
+        this.resetTargets();
         this.resetTriggeringObjects();
 
         // Clear SVars
@@ -1035,32 +1012,6 @@ public abstract class SpellAbility implements ISpellAbility, ITargetable {
 
     /**
      * <p>
-     * getAllTargetChoices.
-     * </p>
-     * 
-     * @return a {@link java.util.ArrayList} object.
-     * @since 1.0.15
-     */
-    public final ArrayList<TargetChoices> getAllTargetChoices() {
-        final ArrayList<TargetChoices> res = new ArrayList<TargetChoices>();
-
-        SpellAbility sa = this.getRootAbility();
-        if (sa.getTarget() != null) {
-            res.add(sa.getTarget().getTargetChoices());
-        }
-        while (sa.getSubAbility() != null) {
-            sa = sa.getSubAbility();
-
-            if (sa.getTarget() != null) {
-                res.add(sa.getTarget().getTargetChoices());
-            }
-        }
-
-        return res;
-    }
-
-    /**
-     * <p>
      * canTarget.
      * </p>
      * 
@@ -1069,14 +1020,14 @@ public abstract class SpellAbility implements ISpellAbility, ITargetable {
      * @return a boolean.
      */
     public final boolean canTarget(final GameEntity entity) {
-        if (this.getTarget() == null) {
+        if (this.getTargetRestrictions() == null) {
             if (entity.canBeTargetedBy(this)) {
                 return true;
             }
             return false;
         }
-        if (entity.isValid(this.getTarget().getValidTgts(), this.getActivatingPlayer(), this.getSourceCard())
-                && (!this.getTarget().isUniqueTargets() || !this.getUniqueTargets().contains(entity))
+        if (entity.isValid(this.getTargetRestrictions().getValidTgts(), this.getActivatingPlayer(), this.getSourceCard())
+                && (!this.getTargetRestrictions().isUniqueTargets() || !this.getUniqueTargets().contains(entity))
                 && entity.canBeTargetedBy(this)) {
             return true;
         }
@@ -1352,32 +1303,74 @@ public abstract class SpellAbility implements ISpellAbility, ITargetable {
     // THE CODE BELOW IS RELATED TO TARGETING. It shall await extraction to other class from here
     //
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    
-    private Card targetCard;
+
+    @Override
+    public boolean canBeTargetedBy(SpellAbility sa) {
+        return sa.canBeTargetedBy(this);
+    }
+
     /** The chosen target. */
-    private Target chosenTarget = null;
+    private TargetRestrictions targetRestricions = null;
+    private TargetChoices targetChosen = new TargetChoices();
+
+    public boolean usesTargeting() { 
+        return targetRestricions != null;
+    }
+    
+    public TargetRestrictions getTargetRestrictions() {
+        return targetRestricions;
+    }
+
+
+    public void setTargetRestrictions(final TargetRestrictions tgt) {
+        targetRestricions = tgt;
+    }
+
+    /**
+     * Gets the chosen target.
+     * 
+     * @return the chosenTarget
+     */
+    public TargetChoices getTargets() {
+        return this.targetChosen;
+    }
+
+    public void setTargets(TargetChoices targets) {
+        this.targetChosen = targets;
+    }
+    
+    public void resetTargets() {
+        targetChosen = new TargetChoices();
+    }
 
     /**
      * <p>
-     * Getter for the field <code>targetCard</code>.
+     * getAllTargetChoices.
      * </p>
      * 
-     * @return a {@link forge.Card} object.
+     * @return a {@link java.util.ArrayList} object.
+     * @since 1.0.15
      */
-    public Card getTargetCard() {
-        if (this.targetCard == null) {
-            final Target tgt = this.getTarget();
-            if (tgt != null) {
-                final List<Card> list = tgt.getTargetCards();
+    public final ArrayList<TargetChoices> getAllTargetChoices() {
+        final ArrayList<TargetChoices> res = new ArrayList<TargetChoices>();
     
-                if (!list.isEmpty()) {
-                    return list.get(0);
-                }
+        SpellAbility sa = this.getRootAbility();
+        if (sa.getTargetRestrictions() != null) {
+            res.add(sa.getTargets());
+        }
+        while (sa.getSubAbility() != null) {
+            sa = sa.getSubAbility();
+    
+            if (sa.getTargetRestrictions() != null) {
+                res.add(sa.getTargets());
             }
-            return null;
         }
     
-        return this.targetCard;
+        return res;
+    }
+
+    public Card getTargetCard() {
+        return targetChosen.getFirstTargetedCard();
     }
 
     /**
@@ -1395,13 +1388,10 @@ public abstract class SpellAbility implements ISpellAbility, ITargetable {
             return;
         }
     
-        final Target tgt = this.getTarget();
-        if (tgt != null) {
-            tgt.addTarget(card);
-        } else {
-            this.targetCard = card;
-        }
-        String desc = "";
+        resetTargets();
+        targetChosen.add(card);
+        
+        final String desc;
     
         if (!card.isFaceDown()) {
             desc = this.getSourceCard().getName() + " - targeting " + card;
@@ -1413,173 +1403,72 @@ public abstract class SpellAbility implements ISpellAbility, ITargetable {
 
     /**
      * <p>
-     * Getter for the field <code>targetPlayer</code>.
-     * </p>
-     * 
-     * @return a {@link forge.game.player.Player} object.
-     */
-    public Player getTargetPlayer() {
-        final Target tgt = this.getTarget();
-        if (tgt != null) {
-            final List<Player> list = tgt.getTargetPlayers();
-    
-            if (!list.isEmpty()) {
-                return list.get(0);
-            }
-        }
-        return null;
-    }
-
-    /**
-     * Gets the chosen target.
-     * 
-     * @return the chosenTarget
-     */
-    public Target getChosenTarget() {
-        return this.chosenTarget;
-    }
-
-    /**
-     * Sets the chosen target.
-     * 
-     * @param chosenTarget0
-     *            the chosenTarget to set
-     */
-    public void setChosenTarget(final Target chosenTarget0) {
-        this.chosenTarget = chosenTarget0;
-    }
-
-    /**
-     * <p>
      * findTargetCards.
      * </p>
      * 
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public List<Card> findTargetedCards() {
-        Target tgt = this.getTarget();
         // First search for targeted cards associated with current ability
-        if (tgt != null && tgt.getTargetCards() != null && !tgt.getTargetCards().isEmpty()) {
-            return tgt.getTargetCards();
+        if (targetChosen.isTargetingAnyCard()) {
+            return Lists.newArrayList(targetChosen.getTargetCards());
         }
-        List<Card> list = new ArrayList<Card>();
+        
         // Next search for source cards of targeted SAs associated with current ability
-        if (tgt != null && tgt.getTargetSAs() != null && !tgt.getTargetSAs().isEmpty()) {
-            for (final SpellAbility ability : tgt.getTargetSAs()) {
-                list.add(ability.getSourceCard());
+        if (targetChosen.isTargetingAnySpell()) {
+            List<Card> res = Lists.newArrayList();
+            for (final SpellAbility ability : targetChosen.getTargetSpells()) {
+                res.add(ability.getSourceCard());
             }
-            return list;
+            return res;
         }
-        // Lastly Search parent SAs for target cards
         
-            // Check for a parent that targets a card
-            SpellAbility parent = this.getParentTargetingCard();
-            if (null != parent) {
-                return parent.getTarget().getTargetCards();
-            }
-         // Check for a parent that targets an SA
-            parent = this.getParentTargetingSA();
-            if (null != parent) {
-                for (final SpellAbility ability : parent.getTarget().getTargetSAs()) {
-                    list.add(ability.getSourceCard());
-                }
-            }
+        // Lastly Search parent SAs that targets a card
+        SpellAbility parent = this.getParentTargetingCard();
+        if (null != parent) {
+            return parent.findTargetedCards();
+        }
         
-        return list;
+        // Lastly Search parent SAs that targets an SA
+        parent = this.getParentTargetingSA();
+        if (null != parent) {
+            return parent.findTargetedCards();
+        }
+        
+        return ImmutableList.<Card>of();
     }
 
-    /**
-     * <p>
-     * getSATargetingCard.
-     * </p>
-     * 
-     * @return a {@link forge.card.spellability.SpellAbility} object.
-     */
+
     public SpellAbility getSATargetingCard() {
-    
-        Target tgt = this.getTarget();
-        if (tgt != null && tgt.getTargetCards() != null && !tgt.getTargetCards().isEmpty()) {
-            return this;
-        }
-        else {
-            return this.getParentTargetingCard();
-        }
+        return targetChosen.isTargetingAnyCard() ? this : getParentTargetingCard();
     }
 
-    /**
-     * <p>
-     * getParentTargetingCard.
-     * </p>
-     * 
-     * @return a {@link forge.card.spellability.SpellAbility} object.
-     */
     public SpellAbility getParentTargetingCard() {
         SpellAbility parent = this.getParent();
-    
         while (parent != null) {
-            Target tgt = parent.getTarget();
-            if (tgt != null && tgt.getTargetCards() != null && !tgt.getTargetCards().isEmpty()) {
-                break;
-            }
+            if (parent.targetChosen.isTargetingAnyCard())
+                return parent;
             parent = parent.getParent();
         }
-        return parent;
+        return null;
     }
 
-    /**
-     * <p>
-     * getSATargetingSA.
-     * </p>
-     * 
-     * @return a {@link forge.card.spellability.SpellAbility} object.
-     */
     public SpellAbility getSATargetingSA() {
-        Target tgt = this.getTarget();
-        if (tgt != null && tgt.getTargetSAs() != null && !tgt.getTargetSAs().isEmpty()) {
-            return this;
-        }
-        else {
-            return this.getParentTargetingSA();
-        }
+        return targetChosen.isTargetingAnySpell() ? this : getParentTargetingSA();
     }
 
-    /**
-     * <p>
-     * getParentTargetingSA.
-     * </p>
-     * 
-     * @return a {@link forge.card.spellability.SpellAbility} object.
-     */
     public SpellAbility getParentTargetingSA() {
         SpellAbility parent = this.getParent();
-    
         while (parent != null) {
-    
-            Target tgt = parent.getTarget();
-            if (tgt != null && tgt.getTargetSAs() != null && !tgt.getTargetSAs().isEmpty()) {
-                break;
-            }
+            if (parent.targetChosen.isTargetingAnySpell())
+                return parent;
             parent = parent.getParent();
-    
         }
-        return parent;
+        return null;
     }
 
-    /**
-     * <p>
-     * getSATargetingPlayer.
-     * </p>
-     * 
-     * @return a {@link forge.card.spellability.SpellAbility} object.
-     */
     public SpellAbility getSATargetingPlayer() {
-        Target tgt = this.getTarget();
-        if (tgt != null && tgt.getTargetPlayers() != null && !tgt.getTargetPlayers().isEmpty()) {
-            return this;
-        }
-        else {
-            return this.getParentTargetingPlayer();
-        }
+        return targetChosen.isTargetingAnyPlayer() ? this : getParentTargetingPlayer();
     }
 
     /**
@@ -1592,15 +1481,11 @@ public abstract class SpellAbility implements ISpellAbility, ITargetable {
     public SpellAbility getParentTargetingPlayer() {
         SpellAbility parent = this.getParent();
         while (parent != null) {
-    
-            Target tgt = parent.getTarget();
-            if (tgt != null && tgt.getTargetPlayers() != null && !tgt.getTargetPlayers().isEmpty()) {
-                break;
-            }
+            if (parent.targetChosen.isTargetingAnyPlayer())
+                return parent;
             parent = parent.getParent();
-    
         }
-        return parent;
+        return null;
     }
 
     /**
@@ -1614,21 +1499,16 @@ public abstract class SpellAbility implements ISpellAbility, ITargetable {
         final List<ITargetable> targets = new ArrayList<ITargetable>();
         SpellAbility child = this.getParent();
         while (child != null) {
-            if (child.getTarget() != null) {
-                targets.addAll(child.getTarget().getTargets());
+            if (child.getTargetRestrictions() != null) {
+                Iterables.addAll(targets, child.getTargets().getTargets());
             }
             child = child.getParent();
         }
         return targets;
     }
 
-    @Override
-    public boolean canBeTargetedBy(SpellAbility sa) {
-        return sa.canBeTargetedBy(this);
-    }
-    
     public boolean canTargetSpellAbility(final SpellAbility topSA) {
-        final Target tgt = this.getTarget();
+        final TargetRestrictions tgt = this.getTargetRestrictions();
         final String saType = tgt.getTargetSpellAbilityType();
     
         if (null == saType) {
@@ -1653,7 +1533,7 @@ public abstract class SpellAbility implements ISpellAbility, ITargetable {
         if (splitTargetRestrictions != null) {
             // TODO What about spells with SubAbilities with Targets?
     
-            final Target matchTgt = topSA.getTarget();
+            final TargetChoices matchTgt = topSA.getTargets();
     
             if (matchTgt == null) {
                 return false;
@@ -1661,7 +1541,7 @@ public abstract class SpellAbility implements ISpellAbility, ITargetable {
     
             boolean result = false;
     
-            for (final Object o : matchTgt.getTargets()) {
+            for (final ITargetable o : matchTgt.getTargets()) {
                 if (matchesValid(o, splitTargetRestrictions.split(","))) {
                     result = true;
                     break;
@@ -1674,9 +1554,8 @@ public abstract class SpellAbility implements ISpellAbility, ITargetable {
         }
     
         if (tgt.isSingleTarget()) {
-            final ArrayList<TargetChoices> choices = topSA.getAllTargetChoices();
             int totalTargets = 0;
-            for(TargetChoices tc : choices) {
+            for(TargetChoices tc : topSA.getAllTargetChoices()) {
                 totalTargets += tc.getNumTargeted();
                 if (totalTargets > 1) {
                     // As soon as we get more than one, bail out
@@ -1692,7 +1571,7 @@ public abstract class SpellAbility implements ISpellAbility, ITargetable {
         return topSA.getSourceCard().isValid(tgt.getValidTgts(), this.getActivatingPlayer(), this.getSourceCard());
     }
 
-    private boolean matchesValid(final Object o, final String[] valids) {
+    private boolean matchesValid(final ITargetable o, final String[] valids) {
         final Card srcCard = this.getSourceCard();
         final Player activatingPlayer = this.getActivatingPlayer();
         if (o instanceof Card) {

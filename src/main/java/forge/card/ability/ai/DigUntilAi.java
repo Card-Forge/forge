@@ -7,7 +7,6 @@ import forge.CardLists;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.Target;
 import forge.game.ai.ComputerUtilMana;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
@@ -26,16 +25,15 @@ public class DigUntilAi extends SpellAbilityAi {
         final Random r = MyRandom.getRandom();
         final boolean randomReturn = r.nextFloat() <= Math.pow(chance, sa.getActivationsThisTurn() + 1);
 
-        final Target tgt = sa.getTarget();
         Player libraryOwner = ai;
         Player opp = ai.getOpponent();
 
-        if (sa.getTarget() != null) {
-            tgt.resetTargets();
+        if (sa.usesTargeting()) {
+            sa.resetTargets();
             if (!opp.canBeTargetedBy(sa)) {
                 return false;
             } else {
-                sa.getTarget().addTarget(opp);
+                sa.getTargets().add(opp);
             }
             libraryOwner = opp;
         } else {
@@ -70,14 +68,12 @@ public class DigUntilAi extends SpellAbilityAi {
     @Override
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
 
-        final Target tgt = sa.getTarget();
-
-        if (sa.getTarget() != null) {
-            tgt.resetTargets();
+        if (sa.usesTargeting()) {
+            sa.resetTargets();
             if (sa.isCurse()) {
-                sa.getTarget().addTarget(ai.getOpponent());
+                sa.getTargets().add(ai.getOpponent());
             } else {
-                sa.getTarget().addTarget(ai);
+                sa.getTargets().add(ai);
             }
         }
 

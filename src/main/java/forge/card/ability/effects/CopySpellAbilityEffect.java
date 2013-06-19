@@ -6,6 +6,7 @@ import java.util.List;
 
 import forge.Card;
 import forge.CardLists;
+import forge.ITargetable;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.cardfactory.CardFactory;
@@ -15,14 +16,10 @@ import forge.gui.GuiChoose;
 
 public class CopySpellAbilityEffect extends SpellAbilityEffect {
 
-    // *************************************************************************
-    // ************************* CopySpell *************************************
-    // *************************************************************************
-
     @Override
     protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
-        final List<SpellAbility> tgtSpells = getTargetSpellAbilities(sa);
+        final List<SpellAbility> tgtSpells = getTargetSpells(sa);
 
         sb.append("Copy ");
         // TODO Someone fix this Description when Copying Charms
@@ -62,7 +59,7 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
             controller = AbilityUtils.getDefinedPlayers(card, sa.getParam("Controller"), sa).get(0);
         }
 
-        final List<SpellAbility> tgtSpells = getTargetSpellAbilities(sa);
+        final List<SpellAbility> tgtSpells = getTargetSpells(sa);
 
 
         if (tgtSpells.size() == 0) {
@@ -112,12 +109,13 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
                 chosenSA = GuiChoose.one("Select a spell to copy", tgtSpells);
             }
             chosenSA.setActivatingPlayer(controller);
-            List<Object> candidates = chosenSA.getTarget().getAllCandidates(chosenSA, true);
+            List<ITargetable> candidates = chosenSA.getTargetRestrictions().getAllCandidates(chosenSA, true);
             if (sa.hasParam("CanTargetPlayer")) {
                 // Radiate
                 // Remove targeted players because getAllCandidates include all the valid players
-                candidates.removeAll(chosenSA.getTarget().getTargetPlayers());
-                for (Object o : candidates) {
+                for(Player p : chosenSA.getTargets().getTargetPlayers())
+                    candidates.remove(p);
+                for (ITargetable o : candidates) {
                     CardFactory.copySpellontoStack(card, chosenSA.getSourceCard(), chosenSA, true, o);
                 }
             } else {// Precursor Golem, Ink-Treader Nephilim

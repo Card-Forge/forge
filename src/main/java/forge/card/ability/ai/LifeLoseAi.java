@@ -6,7 +6,7 @@ import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.cost.Cost;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.Target;
+import forge.card.spellability.TargetRestrictions;
 import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilCost;
 import forge.game.ai.ComputerUtilMana;
@@ -18,13 +18,7 @@ public class LifeLoseAi extends SpellAbilityAi {
     @Override
     public boolean chkAIDrawback(SpellAbility sa, Player ai) {
 
-        final Target tgt = sa.getTarget();
-        List<Player> tgtPlayers;
-        if (tgt != null) {
-            tgtPlayers = tgt.getTargetPlayers();
-        } else {
-            tgtPlayers = AbilityUtils.getDefinedPlayers(sa.getSourceCard(), sa.getParam("Defined"), sa);
-        }
+        List<Player> tgtPlayers = getTargetPlayers(sa);
 
         final Card source = sa.getSourceCard();
         final String amountStr = sa.getParam("LifeAmount");
@@ -98,12 +92,10 @@ public class LifeLoseAi extends SpellAbilityAi {
             return false;
         }
 
-        final Target tgt = sa.getTarget();
-
-        if (sa.getTarget() != null) {
-            tgt.resetTargets();
+        if (sa.usesTargeting()) {
+            sa.resetTargets();
             if (sa.canTarget(opp)) {
-                sa.getTarget().addTarget(opp);
+                sa.getTargets().add(opp);
             } else {
                 return false;
             }
@@ -138,12 +130,12 @@ public class LifeLoseAi extends SpellAbilityAi {
     @Override
     protected boolean doTriggerAINoCost(final Player ai, final SpellAbility sa,
     final boolean mandatory) {
-        final Target tgt = sa.getTarget();
+        final TargetRestrictions tgt = sa.getTargetRestrictions();
         if (tgt != null) {
             if (sa.canTarget(ai.getOpponent())) {
-                tgt.addTarget(ai.getOpponent());
+                sa.getTargets().add(ai.getOpponent());
             } else if (mandatory && sa.canTarget(ai)) {
-                tgt.addTarget(ai);
+                sa.getTargets().add(ai);
             } else {
                 return false;
             }
@@ -161,12 +153,7 @@ public class LifeLoseAi extends SpellAbilityAi {
             amount = AbilityUtils.calculateAmount(source, amountStr, sa);
         }
 
-        List<Player> tgtPlayers;
-        if (tgt != null) {
-            tgtPlayers = tgt.getTargetPlayers();
-        } else {
-            tgtPlayers = AbilityUtils.getDefinedPlayers(sa.getSourceCard(), sa.getParam("Defined"), sa);
-        }
+        List<Player> tgtPlayers = getTargetPlayers(sa);
 
         if (!mandatory && tgtPlayers.contains(ai) && amount > 0 && amount + 3 > ai.getLife()) {
             // For cards like Foul Imp, ETB you lose life

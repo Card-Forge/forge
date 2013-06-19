@@ -23,11 +23,12 @@ import java.util.List;
 import forge.Card;
 import forge.CardLists;
 import forge.CardPredicates;
+import forge.ITargetable;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.cost.Cost;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.Target;
+import forge.card.spellability.TargetRestrictions;
 import forge.game.Game;
 import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilCard;
@@ -77,14 +78,14 @@ public class RegenerateAi extends SpellAbilityAi {
             }
         }
 
-        final Target tgt = sa.getTarget();
+        final TargetRestrictions tgt = sa.getTargetRestrictions();
         if (tgt == null) {
             // As far as I can tell these Defined Cards will only have one of
             // them
             final List<Card> list = AbilityUtils.getDefinedCards(hostCard, sa.getParam("Defined"), sa);
 
             if (!game.getStack().isEmpty()) {
-                final List<Object> objects = ComputerUtil.predictThreatenedObjects(sa.getActivatingPlayer(), sa);
+                final List<ITargetable> objects = ComputerUtil.predictThreatenedObjects(sa.getActivatingPlayer(), sa);
 
                 for (final Card c : list) {
                     if (objects.contains(c)) {
@@ -108,7 +109,7 @@ public class RegenerateAi extends SpellAbilityAi {
                 }
             }
         } else {
-            tgt.resetTargets();
+            sa.resetTargets();
             // filter AIs battlefield by what I can target
             List<Card> targetables = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), tgt.getValidTgts(), ai, hostCard);
             targetables = CardLists.getTargetableCards(targetables, sa);
@@ -120,7 +121,7 @@ public class RegenerateAi extends SpellAbilityAi {
             if (!game.getStack().isEmpty()) {
                 // check stack for something on the stack will kill anything i
                 // control
-                final ArrayList<Object> objects = ComputerUtil.predictThreatenedObjects(sa.getActivatingPlayer(), sa);
+                final List<ITargetable> objects = ComputerUtil.predictThreatenedObjects(sa.getActivatingPlayer(), sa);
 
                 final List<Card> threatenedTargets = new ArrayList<Card>();
 
@@ -132,7 +133,7 @@ public class RegenerateAi extends SpellAbilityAi {
 
                 if (!threatenedTargets.isEmpty()) {
                     // Choose "best" of the remaining to regenerate
-                    tgt.addTarget(ComputerUtilCard.getBestCreatureAI(threatenedTargets));
+                    sa.getTargets().add(ComputerUtilCard.getBestCreatureAI(threatenedTargets));
                     chance = true;
                 }
             } else {
@@ -142,14 +143,14 @@ public class RegenerateAi extends SpellAbilityAi {
 
                     for (final Card c : combatants) {
                         if ((c.getShield() == 0) && ComputerUtilCombat.combatantWouldBeDestroyed(ai, c)) {
-                            tgt.addTarget(c);
+                            sa.getTargets().add(c);
                             chance = true;
                             break;
                         }
                     }
                 }
             }
-            if (tgt.getTargets().isEmpty()) {
+            if (sa.getTargets().isEmpty()) {
                 return false;
             }
         }
@@ -161,7 +162,7 @@ public class RegenerateAi extends SpellAbilityAi {
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
         boolean chance = false;
 
-        final Target tgt = sa.getTarget();
+        final TargetRestrictions tgt = sa.getTargetRestrictions();
         if (tgt == null) {
             // If there's no target on the trigger, just say yes.
             chance = true;
@@ -175,8 +176,8 @@ public class RegenerateAi extends SpellAbilityAi {
     private static boolean regenMandatoryTarget(final Player ai, final SpellAbility sa, final boolean mandatory) {
         final Card hostCard = sa.getSourceCard();
         final Game game = ai.getGame();
-        final Target tgt = sa.getTarget();
-        tgt.resetTargets();
+        final TargetRestrictions tgt = sa.getTargetRestrictions();
+        sa.resetTargets();
         // filter AIs battlefield by what I can target
         List<Card> targetables = game.getCardsIn(ZoneType.Battlefield);
         targetables = CardLists.getValidCards(targetables, tgt.getValidTgts(), ai, hostCard);
@@ -197,7 +198,7 @@ public class RegenerateAi extends SpellAbilityAi {
             if (game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
                 for (final Card c : combatants) {
                     if ((c.getShield() == 0) && ComputerUtilCombat.combatantWouldBeDestroyed(ai, c)) {
-                        tgt.addTarget(c);
+                        sa.getTargets().add(c);
                         return true;
                     }
                 }
@@ -210,26 +211,26 @@ public class RegenerateAi extends SpellAbilityAi {
             if (CardLists.getNotType(compTargetables, "Creature").isEmpty()) {
                 for (final Card c : combatants) {
                     if (c.getShield() == 0) {
-                        tgt.addTarget(c);
+                        sa.getTargets().add(c);
                         return true;
                     }
                 }
-                tgt.addTarget(combatants.get(0));
+                sa.getTargets().add(combatants.get(0));
                 return true;
             } else {
                 CardLists.sortByCmcDesc(compTargetables);
                 for (final Card c : compTargetables) {
                     if (c.getShield() == 0) {
-                        tgt.addTarget(c);
+                        sa.getTargets().add(c);
                         return true;
                     }
                 }
-                tgt.addTarget(compTargetables.get(0));
+                sa.getTargets().add(compTargetables.get(0));
                 return true;
             }
         }
 
-        tgt.addTarget(ComputerUtilCard.getCheapestPermanentAI(targetables, sa, true));
+        sa.getTargets().add(ComputerUtilCard.getCheapestPermanentAI(targetables, sa, true));
         return true;
     }
 

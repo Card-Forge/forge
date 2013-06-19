@@ -10,7 +10,7 @@ import forge.Card;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.Target;
+import forge.card.spellability.TargetRestrictions;
 import forge.game.Game;
 import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
@@ -94,7 +94,7 @@ public class DigUntilEffect extends SpellAbilityEffect {
 
         final boolean remember = sa.hasParam("RememberFound");
 
-        final Target tgt = sa.getTarget();
+        final TargetRestrictions tgt = sa.getTargetRestrictions();
 
         final ZoneType foundDest = ZoneType.smartValueOf(sa.getParam("FoundDestination"));
         final int foundLibPos = AbilityUtils.calculateAmount(host, sa.getParam("FoundLibraryPosition"), sa);

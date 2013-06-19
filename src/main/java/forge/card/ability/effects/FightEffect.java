@@ -3,11 +3,13 @@ package forge.card.ability.effects;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.common.collect.Lists;
+
 import forge.Card;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.Target;
+import forge.card.spellability.TargetRestrictions;
 
 public class FightEffect extends SpellAbilityEffect {
 
@@ -48,10 +50,10 @@ public class FightEffect extends SpellAbilityEffect {
 
         Card fighter1 = null;
         Card fighter2 = null;
-        final Target tgt = sa.getTarget();
+        final TargetRestrictions tgt = sa.getTargetRestrictions();
         List<Card> tgts = null;
         if (tgt != null) {
-            tgts = tgt.getTargetCards();
+            tgts = Lists.newArrayList(sa.getTargets().getTargetCards());
             if (tgts.size() > 0) {
                 fighter1 = tgts.get(0);
             }

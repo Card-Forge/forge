@@ -8,6 +8,7 @@ import java.util.Random;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 
 import forge.Card;
 import forge.CardCharacteristicName;
@@ -16,6 +17,7 @@ import forge.CardPredicates;
 import forge.CardPredicates.Presets;
 import forge.Constant;
 import forge.GameEntity;
+import forge.ITargetable;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.ApiType;
 import forge.card.ability.SpellAbilityAi;
@@ -25,7 +27,7 @@ import forge.card.cost.CostDiscard;
 import forge.card.cost.CostPart;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.Target;
+import forge.card.spellability.TargetRestrictions;
 import forge.card.trigger.TriggerType;
 import forge.game.Game;
 import forge.game.GlobalRuleChange;
@@ -228,17 +230,16 @@ public class ChangeZoneAi extends SpellAbilityAi {
         // prevent run-away activations - first time will always return true
         boolean chance = r.nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn());
 
-        List<Player> pDefined = new ArrayList<Player>();
-        pDefined.add(source.getController());
-        final Target tgt = sa.getTarget();
+        Iterable<Player> pDefined = Lists.newArrayList(source.getController());
+        final TargetRestrictions tgt = sa.getTargetRestrictions();
         if ((tgt != null) && tgt.canTgtPlayer()) {
             boolean isCurse = sa.isCurse();
             if (isCurse && sa.canTarget(opponent)) {
-                tgt.addTarget(opponent);
+                sa.getTargets().add(opponent);
             } else if (!isCurse && sa.canTarget(ai)) {
-                tgt.addTarget(ai);
+                sa.getTargets().add(ai);
             }
-            pDefined = tgt.getTargetPlayers();
+            pDefined = sa.getTargets().getTargetPlayers();
         } else {
             if (sa.hasParam("DefinedPlayer")) {
                 pDefined = AbilityUtils.getDefinedPlayers(sa.getSourceCard(), sa.getParam("DefinedPlayer"), sa);
@@ -323,14 +324,14 @@ public class ChangeZoneAi extends SpellAbilityAi {
     private static boolean hiddenOriginPlayDrawbackAI(final Player aiPlayer, final SpellAbility sa) {
         // if putting cards from hand to library and parent is drawing cards
         // make sure this will actually do something:
-        final Target tgt = sa.getTarget();
+        final TargetRestrictions tgt = sa.getTargetRestrictions();
         final Player opp = aiPlayer.getOpponent();
         if ((tgt != null) && tgt.canTgtPlayer()) {
             boolean isCurse = sa.isCurse();
             if (isCurse && sa.canTarget(opp)) {
-                tgt.addTarget(opp);
+                sa.getTargets().add(opp);
             } else if (!isCurse && sa.canTarget(aiPlayer)) {
-                tgt.addTarget(aiPlayer);
+                sa.getTargets().add(aiPlayer);
             } else {
                 return false;
             }
@@ -372,32 +373,32 @@ public class ChangeZoneAi extends SpellAbilityAi {
             source.setSVar("PayX", Integer.toString(xPay));
         }
 
-        List<Player> pDefined;
-        final Target tgt = sa.getTarget();
+        Iterable<Player> pDefined;
+        final TargetRestrictions tgt = sa.getTargetRestrictions();
         if ((tgt != null) && tgt.canTgtPlayer()) {
             final Player opp = ai.getOpponent();
             if (sa.isCurse()) {
                 if (sa.canTarget(opp)) {
-                    tgt.addTarget(opp);
+                    sa.getTargets().add(opp);
                 } else if (mandatory && sa.canTarget(ai)) {
-                    tgt.addTarget(ai);
+                    sa.getTargets().add(ai);
                 }
             } else {
                 if (sa.canTarget(ai)) {
-                    tgt.addTarget(ai);
+                    sa.getTargets().add(ai);
                 } else if (mandatory && sa.canTarget(opp)) {
-                    tgt.addTarget(opp);
+                    sa.getTargets().add(opp);
                 }
             }
 
-            pDefined = tgt.getTargetPlayers();
+            pDefined = sa.getTargets().getTargetPlayers();
 
-            if (pDefined.isEmpty()) {
+            if (Iterables.isEmpty(pDefined)) {
                 return false;
             }
 
             if (mandatory) {
-                return pDefined.size() > 0;
+                return true;
             }
         } else {
             if (mandatory) {
@@ -571,7 +572,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
         // prevent run-away activations - first time will always return true
         boolean chance = r.nextFloat() <= Math.pow(.6667, sa.getRestrictions().getNumberTurnActivations());
 
-        final Target tgt = sa.getTarget();
+        final TargetRestrictions tgt = sa.getTargetRestrictions();
         if (tgt != null) {
             if (!isPreferredTarget(ai, sa, false)) {
                 return false;
@@ -609,7 +610,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                     return false;
                 }
 
-                final ArrayList<Object> objects = ComputerUtil.predictThreatenedObjects(ai, sa);
+                final List<ITargetable> objects = ComputerUtil.predictThreatenedObjects(ai, sa);
                 boolean contains = false;
                 for (final Card c : retrieval) {
                     if (objects.contains(c)) {
@@ -664,7 +665,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
      * @return a boolean.
      */
     private static boolean knownOriginPlayDrawbackAI(final Player aiPlayer, final SpellAbility sa) {
-        if (sa.getTarget() == null) {
+        if (sa.getTargetRestrictions() == null) {
             return true;
         }
 
@@ -688,7 +689,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
         final Card source = sa.getSourceCard();
         final ZoneType origin = ZoneType.listValueOf(sa.getParam("Origin")).get(0);
         final ZoneType destination = ZoneType.smartValueOf(sa.getParam("Destination"));
-        final Target tgt = sa.getTarget();
+        final TargetRestrictions tgt = sa.getTargetRestrictions();
 
         final AbilitySub abSub = sa.getSubAbility();
         ApiType subApi = null;
@@ -700,7 +701,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
             }
         }
 
-        tgt.resetTargets();
+        sa.resetTargets();
         List<Card> list = CardLists.getValidCards(ai.getGame().getCardsIn(origin), tgt.getValidTgts(), ai, source);
         list = CardLists.getTargetableCards(list, sa);
         if (sa.hasParam("AITgts")) {
@@ -730,7 +731,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 // check stack for something on the stack that will kill
                 // anything i control
                 if (!ai.getGame().getStack().isEmpty()) {
-                    final ArrayList<Object> objects = ComputerUtil.predictThreatenedObjects(ai, sa);
+                    final List<ITargetable> objects = ComputerUtil.predictThreatenedObjects(ai, sa);
 
                     final List<Card> threatenedTargets = new ArrayList<Card>();
 
@@ -742,7 +743,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
 
                     if (!threatenedTargets.isEmpty()) {
                         // Choose "best" of the remaining to save
-                        tgt.addTarget(ComputerUtilCard.getBestAI(threatenedTargets));
+                        sa.getTargets().add(ComputerUtilCard.getBestAI(threatenedTargets));
                         return true;
                     }
                 }
@@ -753,7 +754,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
 
                     for (final Card c : combatants) {
                         if (c.getShield() == 0 && ComputerUtilCombat.combatantWouldBeDestroyed(ai, c) && c.getOwner() == ai && !c.isToken()) {
-                            tgt.addTarget(c);
+                            sa.getTargets().add(c);
                             return true;
                         }
                     }
@@ -789,7 +790,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                     });
                     if (!aiPermanents.isEmpty()) {
                         // Choose "best" of the remaining to save
-                        tgt.addTarget(ComputerUtilCard.getBestAI(aiPermanents));
+                        sa.getTargets().add(ComputerUtilCard.getBestAI(aiPermanents));
                         return true;
                     }
                 }*/
@@ -860,7 +861,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
         }
 
         // target loop
-        while (tgt.getNumTargeted() < tgt.getMaxTargets(sa.getSourceCard(), sa)) {
+        while (sa.getTargets().getNumTargeted() < tgt.getMaxTargets(sa.getSourceCard(), sa)) {
             // AI Targeting
             Card choice = null;
 
@@ -909,9 +910,9 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 }
             }
             if (choice == null) { // can't find anything left
-                if (tgt.getNumTargeted() == 0 || tgt.getNumTargeted() < tgt.getMinTargets(sa.getSourceCard(), sa)) {
+                if (sa.getTargets().getNumTargeted() == 0 || sa.getTargets().getNumTargeted() < tgt.getMinTargets(sa.getSourceCard(), sa)) {
                     if (!mandatory) {
-                        tgt.resetTargets();
+                        sa.resetTargets();
                     }
                     return false;
                 } else {
@@ -923,7 +924,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
             }
 
             list.remove(choice);
-            tgt.addTarget(choice);
+            sa.getTargets().add(choice);
         }
 
         return true;
@@ -951,7 +952,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
         final Card source = sa.getSourceCard();
         final ZoneType origin = ZoneType.listValueOf(sa.getParam("Origin")).get(0);
         final ZoneType destination = ZoneType.smartValueOf(sa.getParam("Destination"));
-        final Target tgt = sa.getTarget();
+        final TargetRestrictions tgt = sa.getTargetRestrictions();
 
         List<Card> list = CardLists.getValidCards(ai.getGame().getCardsIn(origin), tgt.getValidTgts(), ai, source);
 
@@ -969,7 +970,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
 
         }
 
-        for (final Card c : tgt.getTargetCards()) {
+        for (final Card c : sa.getTargets().getTargetCards()) {
             list.remove(c);
         }
 
@@ -978,7 +979,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
         }
 
         // target loop
-        while (tgt.getNumTargeted() < tgt.getMinTargets(sa.getSourceCard(), sa)) {
+        while (sa.getTargets().getNumTargeted() < tgt.getMinTargets(sa.getSourceCard(), sa)) {
             // AI Targeting
             Card choice = null;
 
@@ -1020,8 +1021,8 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 }
             }
             if (choice == null) { // can't find anything left
-                if ((tgt.getNumTargeted() == 0) || (tgt.getNumTargeted() < tgt.getMinTargets(sa.getSourceCard(), sa))) {
-                    tgt.resetTargets();
+                if ((sa.getTargets().getNumTargeted() == 0) || (sa.getTargets().getNumTargeted() < tgt.getMinTargets(sa.getSourceCard(), sa))) {
+                    sa.resetTargets();
                     return false;
                 } else {
                     if (!ComputerUtil.shouldCastLessThanMax(ai, source)) {
@@ -1032,7 +1033,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
             }
 
             list.remove(choice);
-            tgt.addTarget(choice);
+            sa.getTargets().add(choice);
         }
 
         return true;
@@ -1054,7 +1055,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
     private static boolean knownOriginTriggerAI(final Player ai, final SpellAbility sa,
             final boolean mandatory) {
 
-        if (sa.getTarget() == null) {
+        if (sa.getTargetRestrictions() == null) {
             // Just in case of Defined cases
             if (!mandatory && sa.hasParam("AttachedTo")) {
                 final List<Card> list = AbilityUtils.getDefinedCards(sa.getSourceCard(), sa.getParam("AttachedTo"), sa);
@@ -1088,15 +1089,15 @@ public class ChangeZoneAi extends SpellAbilityAi {
      *            a {@link forge.game.player.Player} object.
      */
     public static void hiddenOriginResolveAI(final Player ai, final SpellAbility sa, Player player) {
-        final Target tgt = sa.getTarget();
+        final TargetRestrictions tgt = sa.getTargetRestrictions();
         final Card card = sa.getSourceCard();
         final boolean defined = sa.hasParam("Defined");
         final Player activator = sa.getActivatingPlayer();
         final Game game = ai.getGame();
 
         if (tgt != null) {
-            if (!tgt.getTargetPlayers().isEmpty()) {
-                player = sa.hasParam("DefinedPlayer") ? player : tgt.getTargetPlayers().get(0);
+            if (sa.getTargets().isTargetingAnyPlayer()) {
+                player = sa.hasParam("DefinedPlayer") ? player : sa.getTargets().getFirstTargetedPlayer();
                 if (!player.canBeTargetedBy(sa)) {
                     return;
                 }
@@ -1342,7 +1343,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 // Auras without Candidates stay in their current location
                 if (c.isAura()) {
                     final SpellAbility saAura = AttachEffect.getAttachSpellAbility(c);
-                    if (!saAura.getTarget().hasCandidates(saAura, false)) {
+                    if (!saAura.getTargetRestrictions().hasCandidates(saAura, false)) {
                         continue;
                     }
                 }

@@ -12,7 +12,7 @@ import forge.card.ability.SpellAbilityAi;
 import forge.card.cost.Cost;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.Target;
+import forge.card.spellability.TargetRestrictions;
 import forge.game.ai.ComputerUtilCost;
 import forge.game.ai.ComputerUtilMana;
 import forge.game.phase.PhaseHandler;
@@ -36,7 +36,7 @@ public class CountersPutAllAi extends SpellAbilityAi {
         final String amountStr = sa.getParam("CounterNum");
         final String valid = sa.getParam("ValidCards");
         final boolean curse = sa.isCurse();
-        final Target tgt = sa.getTarget();
+        final TargetRestrictions tgt = sa.getTargetRestrictions();
 
         hList = CardLists.getValidCards(ai.getOpponent().getCardsIn(ZoneType.Battlefield), valid, source.getController(), source);
         cList = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), valid, source.getController(), source);
@@ -58,7 +58,7 @@ public class CountersPutAllAi extends SpellAbilityAi {
 
         if (tgt != null) {
             Player pl = curse ? ai.getOpponent() : ai;
-            tgt.addTarget(pl);
+            sa.getTargets().add(pl);
 
             hList = CardLists.filterControlledBy(hList, pl);
             cList = CardLists.filterControlledBy(cList, pl);

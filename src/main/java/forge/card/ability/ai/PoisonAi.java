@@ -7,7 +7,7 @@ import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.cost.Cost;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.Target;
+import forge.card.spellability.TargetRestrictions;
 import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilCost;
 import forge.game.phase.PhaseType;
@@ -59,11 +59,10 @@ public class PoisonAi extends SpellAbilityAi {
             return false;
         }
 
-        final Target tgt = sa.getTarget();
 
-        if (sa.getTarget() != null) {
-            tgt.resetTargets();
-            sa.getTarget().addTarget(ai.getOpponent());
+        if (sa.usesTargeting()) {
+            sa.resetTargets();
+            sa.getTargets().add(ai.getOpponent());
         }
 
         return true;
@@ -72,9 +71,9 @@ public class PoisonAi extends SpellAbilityAi {
     @Override
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
 
-        final Target tgt = sa.getTarget();
+        final TargetRestrictions tgt = sa.getTargetRestrictions();
         if (tgt != null) {
-            tgt.addTarget(ai.getOpponent());
+            sa.getTargets().add(ai.getOpponent());
         } else {
             final List<Player> players = AbilityUtils.getDefinedPlayers(sa.getSourceCard(), sa.getParam("Defined"), sa);
             for (final Player p : players) {

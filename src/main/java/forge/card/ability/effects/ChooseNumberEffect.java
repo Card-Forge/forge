@@ -9,7 +9,7 @@ import forge.Card;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.Target;
+import forge.card.spellability.TargetRestrictions;
 import forge.game.player.Player;
 import forge.gui.GuiDialog;
 
@@ -43,7 +43,7 @@ public class ChooseNumberEffect extends SpellAbilityEffect {
         final int max = StringUtils.isNumeric(sMax) ? Integer.parseInt(sMax) : CardFactoryUtil.xCount(card, card.getSVar(sMax)); 
 
         final List<Player> tgtPlayers = getTargetPlayers(sa);
-        final Target tgt = sa.getTarget();
+        final TargetRestrictions tgt = sa.getTargetRestrictions();
 
         for (final Player p : tgtPlayers) {
             if ((tgt == null) || p.canBeTargetedBy(sa)) {

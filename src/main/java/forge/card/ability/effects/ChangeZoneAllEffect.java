@@ -46,7 +46,7 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
 
         List<Card> cards = new ArrayList<Card>();
 
-        List<Player> tgtPlayers = getTargetPlayersEmptyAsDefault(sa);
+        List<Player> tgtPlayers = getTargetPlayers(sa);
         final Game game = sa.getActivatingPlayer().getGame();
 
         if ((tgtPlayers == null) || tgtPlayers.isEmpty() || sa.hasParam("UseAllOriginZones")) {
@@ -106,7 +106,7 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
                 // Auras without Candidates stay in their current location
                 if (c.isAura()) {
                     final SpellAbility saAura = AttachEffect.getAttachSpellAbility(c);
-                    if (!saAura.getTarget().hasCandidates(saAura, false)) {
+                    if (!saAura.getTargetRestrictions().hasCandidates(saAura, false)) {
                         continue;
                     }
                 }

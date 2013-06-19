@@ -41,7 +41,7 @@ import forge.game.zone.ZoneType;
  * @author Forge
  * @version $Id$
  */
-public class Target {
+public class TargetRestrictions {
     // Target has two things happening:
     // Targeting restrictions (Creature, Min/Maxm etc) which are true for this
 
@@ -70,14 +70,10 @@ public class Target {
     private boolean randomTarget = false;
     private String definedController = null;
     private String relatedProperty = null;
-    private Object definedTarget = null;
 
     // How many can be targeted?
     private String minTargets;
     private String maxTargets;
-
-    // What Choices are actually made for targeting
-    private TargetChoices choice = null;
 
     // For "Divided" cards. Is this better in TargetChoices?
     private boolean dividedAsYouChoose = false;
@@ -93,9 +89,9 @@ public class Target {
      * </p>
      * 
      * @param target
-     *            a {@link forge.card.spellability.Target} object.
+     *            a {@link forge.card.spellability.TargetRestrictions} object.
      */
-    public Target(final Target target) {
+    public TargetRestrictions(final TargetRestrictions target) {
         this.tgtValid = true;
         this.uiPrompt = target.getVTSelection();
         this.validTgts = target.getValidTgts();
@@ -115,11 +111,9 @@ public class Target {
         this.relatedProperty = target.getRelatedProperty();
         this.singleTarget = target.isSingleTarget();
         this.randomTarget = target.isRandomTarget();
-        this.definedTarget = target.getDefinedTarget();
-        this.choice = target.getTargetChoices();
     }
 
-    public Target() {
+    public TargetRestrictions() {
         this(null, ArrayUtils.EMPTY_STRING_ARRAY, "1", "1");
     }
 
@@ -139,35 +133,12 @@ public class Target {
      * @param max
      *            a {@link java.lang.String} object.
      */
-    public Target(final String prompt, final String[] valid, final String min, final String max) {
+    public TargetRestrictions(final String prompt, final String[] valid, final String min, final String max) {
         this.tgtValid = true;
         this.uiPrompt = prompt;
         this.validTgts = valid;
         this.minTargets = min;
         this.maxTargets = max;
-    }
-    
-    /**
-     * <p>
-     * getTargetChoices.
-     * </p>
-     * 
-     * @return a {@link forge.card.spellability.TargetChoices} object.
-     */
-    public final TargetChoices getTargetChoices() {
-        return this.choice;
-    }
-
-    /**
-     * <p>
-     * setTargetChoices.
-     * </p>
-     * 
-     * @param tc
-     *            a {@link forge.card.spellability.TargetChoices} object.
-     */
-    public final void setTargetChoices(final TargetChoices tc) {
-        this.choice = tc;
     }
 
     /**
@@ -286,7 +257,8 @@ public class Target {
      * @return a boolean.
      */
     public final boolean isMaxTargetsChosen(final Card c, final SpellAbility sa) {
-        return (this.choice != null) && (this.getMaxTargets(c, sa) == this.choice.getNumTargeted());
+        TargetChoices choice = sa.getTargets();
+        return this.getMaxTargets(c, sa) == choice.getNumTargeted();
     }
 
     /**
@@ -304,7 +276,8 @@ public class Target {
         if (this.getMinTargets(c, sa) == 0) {
             return true;
         }
-        return (this.choice != null) && (this.getMinTargets(c, sa) <= this.choice.getNumTargeted());
+        TargetChoices choice = sa.getTargets();
+        return this.getMinTargets(c, sa) <= choice.getNumTargeted();
     }
 
     /**
@@ -386,143 +359,6 @@ public class Target {
         return this.saValidTargeting;
     }
 
-    // Leaving old structure behind for compatibility.
-    /**
-     * <p>
-     * addTarget.
-     * </p>
-     * 
-     * @param o
-     *            a {@link java.lang.Object} object.
-     * @return a boolean.
-     */
-    public final boolean addTarget(final Object o) {
-        if (this.choice == null) {
-            this.choice = new TargetChoices();
-        }
-
-        if (o instanceof Card) {
-            return this.choice.addTarget((Card) o);
-        }
-
-        if (o instanceof Player) {
-            return this.choice.addTarget((Player) o);
-        }
-
-        if (o instanceof SpellAbility) {
-            return this.choice.addTarget((SpellAbility) o);
-        }
-
-        return false;
-    }
-
-    /**
-     * <p>
-     * getTargetCards.
-     * </p>
-     * 
-     * @return a {@link java.util.ArrayList} object.
-     */
-    public final List<Card> getTargetCards() {
-        if (this.choice == null) {
-            return new ArrayList<Card>();
-        }
-
-        return this.choice.getTargetCards();
-    }
-
-    /**
-     * <p>
-     * getTargetPlayers.
-     * </p>
-     * 
-     * @return a {@link java.util.ArrayList} object.
-     */
-    public final List<Player> getTargetPlayers() {
-        if (this.choice == null) {
-            return new ArrayList<Player>();
-        }
-
-        return this.choice.getTargetPlayers();
-    }
-
-    /**
-     * <p>
-     * getTargetSAs.
-     * </p>
-     * 
-     * @return a {@link java.util.ArrayList} object.
-     */
-    public final List<SpellAbility> getTargetSAs() {
-        if (this.choice == null) {
-            return new ArrayList<SpellAbility>();
-        }
-
-        return this.choice.getTargetSAs();
-    }
-
-    /**
-     * <p>
-     * getTargets.
-     * </p>
-     * 
-     * @return a {@link java.util.ArrayList} object.
-     */
-    public final List<ITargetable> getTargets() {
-        if (this.choice == null) {
-            return new ArrayList<ITargetable>();
-        }
-
-        return this.choice.getTargets();
-    }
-
-    /**
-     * <p>
-     * getNumTargeted.
-     * </p>
-     * 
-     * @return a int.
-     */
-    public final int getNumTargeted() {
-        if (this.choice == null) {
-            return 0;
-        }
-        return this.choice.getNumTargeted();
-    }
-
-    /**
-     * <p>
-     * resetTargets.
-     * </p>
-     */
-    public final void resetTargets() {
-        this.choice = null;
-    }
-
-    /**
-     * <p>
-     * getTargetedString.
-     * </p>
-     * 
-     * @return a {@link java.lang.String} object.
-     */
-    public final String getTargetedString() {
-        final List<ITargetable> tgts = this.getTargets();
-        final StringBuilder sb = new StringBuilder("");
-        for (final Object o : tgts) {
-            if (o instanceof Player) {
-                final Player p = (Player) o;
-                sb.append(p.getName());
-            }
-            if (o instanceof Card) {
-                final Card c = (Card) o;
-                sb.append(c);
-            }
-            sb.append(" ");
-        }
-
-        return sb.toString();
-    }
 
     /**
      * <p>
@@ -634,7 +470,7 @@ public class Target {
                 if (isTargeted && !c.canBeTargetedBy(sa)) {
                     continue;
                 }
-                if (this.getTargetCards().contains(c)) {
+                if (sa.getTargets().isTargeting(c)) {
                     continue;
                 }
                 return true;
@@ -670,9 +506,9 @@ public class Target {
      *            Check Valid Candidates and Targeting
      * @return a List<Object>.
      */
-    public final List<Object> getAllCandidates(final SpellAbility sa, final boolean isTargeted) {
+    public final List<ITargetable> getAllCandidates(final SpellAbility sa, final boolean isTargeted) {
         final Game game = sa.getActivatingPlayer().getGame();
-        List<Object> candidates = new ArrayList<Object>();
+        List<ITargetable> candidates = new ArrayList<ITargetable>();
         for (Player player : game.getPlayers()) {
             if (sa.canTarget(player)) {
                 candidates.add(player);
@@ -684,7 +520,7 @@ public class Target {
             for (final Card c : game.getStackZone().getCards()) {
                 boolean isValidTarget = c.isValid(this.validTgts, srcCard.getController(), srcCard);
                 boolean canTarget = (!isTargeted || c.canBeTargetedBy(sa));
-                boolean isAlreadyTargeted = this.getTargetCards().contains(c);
+                boolean isAlreadyTargeted = sa.getTargets().isTargeting(c);
                 if (isValidTarget && canTarget && !isAlreadyTargeted) {
                     candidates.add(c);
                 }
@@ -693,7 +529,7 @@ public class Target {
             for (final Card c : game.getCardsIn(this.tgtZone)) {
                 boolean isValidTarget = c.isValid(this.validTgts, srcCard.getController(), srcCard);
                 boolean canTarget = (!isTargeted || c.canBeTargetedBy(sa));
-                boolean isAlreadyTargeted = this.getTargetCards().contains(c);
+                boolean isAlreadyTargeted = sa.getTargets().isTargeting(c);
                 if (isValidTarget && canTarget && !isAlreadyTargeted) {
                     candidates.add(c);
                 }
@@ -760,12 +596,12 @@ public class Target {
      * copy.
      * </p>
      * 
-     * @return a {@link forge.card.spellability.Target} object.
+     * @return a {@link forge.card.spellability.TargetRestrictions} object.
      */
-    public Target copy() {
-        Target clone = null;
+    public TargetRestrictions copy() {
+        TargetRestrictions clone = null;
         try {
-            clone = (Target) this.clone();
+            clone = (TargetRestrictions) this.clone();
         } catch (final CloneNotSupportedException e) {
             System.err.println(e);
         }
@@ -858,20 +694,6 @@ public class Target {
      */
     public void setRelatedProperty(String related) {
         this.relatedProperty = related;
-    }
-
-    /**
-     * @return the definedTarget
-     */
-    public Object getDefinedTarget() {
-        return definedTarget;
-    }
-
-    /**
-     * @param defined the definedTarget to set
-     */
-    public void setDefinedTarget(Object defined) {
-        this.definedTarget = defined;
     }
 
     /**

@@ -10,7 +10,7 @@ import forge.CardLists;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.Target;
+import forge.card.spellability.TargetRestrictions;
 import forge.game.ai.ComputerUtilCard;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
@@ -25,8 +25,8 @@ public class ControlExchangeAi extends SpellAbilityAi {
     protected boolean canPlayAI(Player ai, final SpellAbility sa) {
         Card object1 = null;
         Card object2 = null;
-        final Target tgt = sa.getTarget();
-        tgt.resetTargets();
+        final TargetRestrictions tgt = sa.getTargetRestrictions();
+        sa.resetTargets();
 
         List<Card> list =
                 CardLists.getValidCards(ai.getOpponent().getCardsIn(ZoneType.Battlefield), tgt.getValidTgts(), ai, sa.getSourceCard());
@@ -46,13 +46,13 @@ public class ControlExchangeAi extends SpellAbilityAi {
             List<Card> list2 = ai.getCardsIn(ZoneType.Battlefield);
             list2 = CardLists.getValidCards(list2, tgt.getValidTgts(), ai, sa.getSourceCard());
             object2 = ComputerUtilCard.getWorstAI(list2);
-            tgt.addTarget(object2);
+            sa.getTargets().add(object2);
         }
         if (object1 == null || object2 == null) {
             return false;
         }
         if (ComputerUtilCard.evaluateCreature(object1) > ComputerUtilCard.evaluateCreature(object2) + 40) {
-            tgt.addTarget(object1);
+            sa.getTargets().add(object1);
             return MyRandom.getRandom().nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn());
         }
         return false;

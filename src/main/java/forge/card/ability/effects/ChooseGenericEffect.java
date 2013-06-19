@@ -13,7 +13,7 @@ import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.Target;
+import forge.card.spellability.TargetRestrictions;
 import forge.game.player.Player;
 import forge.gui.GuiChoose;
 import forge.util.Aggregates;
@@ -41,9 +41,9 @@ public class ChooseGenericEffect extends SpellAbilityEffect {
             choices.put(s, theseParams.get("ChoiceDescription"));
         }
 
-        final List<Player> tgtPlayers = getDefinedPlayersBeforeTargetOnes(sa);
+        final List<Player> tgtPlayers = getDefinedPlayersOrTargeted(sa);
 
-        final Target tgt = sa.getTarget();
+        final TargetRestrictions tgt = sa.getTargetRestrictions();
 
         for (final Player p : tgtPlayers) {
             if (tgt != null && !p.canBeTargetedBy(sa)) {

@@ -112,16 +112,16 @@ public class TriggerSpellAbilityCast extends Trigger {
             if (si != null) {
                 sa = si.getSpellAbility();
             }
-            if (sa.getTarget() == null) {
+            if (sa.getTargetRestrictions() == null) {
                 if (sa.getTargetCard() == null) {
-                    if (sa.getTargetPlayer() == null) {
+                    Player targetPl = sa.getTargets().getFirstTargetedPlayer();
+                    if (targetPl == null)
                         return false;
-                    } else {
-                        if (!matchesValid(sa.getTargetPlayer(),
-                                this.mapParams.get("TargetsValid").split(","), this.getHostCard())) {
-                            return false;
-                        }
+                        
+                    if (!matchesValid(targetPl, this.mapParams.get("TargetsValid").split(","), this.getHostCard())) {
+                        return false;
                     }
+
                 } else {
                     if (!matchesValid(sa.getTargetCard(), this.mapParams.get("TargetsValid").split(","),
                             this.getHostCard())) {
@@ -129,9 +129,9 @@ public class TriggerSpellAbilityCast extends Trigger {
                     }
                 }
             } else {
-                if (sa.getTarget().doesTarget()) {
+                if (sa.getTargetRestrictions().doesTarget()) {
                     boolean validTgtFound = false;
-                    for (final Card tgt : sa.getTarget().getTargetCards()) {
+                    for (final Card tgt : sa.getTargets().getTargetCards()) {
                         if (tgt.isValid(this.mapParams.get("TargetsValid").split(","), this.getHostCard()
                                 .getController(), this.getHostCard())) {
                             validTgtFound = true;
@@ -139,7 +139,7 @@ public class TriggerSpellAbilityCast extends Trigger {
                         }
                     }
 
-                    for (final Player p : sa.getTarget().getTargetPlayers()) {
+                    for (final Player p : sa.getTargets().getTargetPlayers()) {
                         if (matchesValid(p, this.mapParams.get("TargetsValid").split(","), this.getHostCard())) {
                             validTgtFound = true;
                             break;
@@ -168,7 +168,7 @@ public class TriggerSpellAbilityCast extends Trigger {
             }
         }
         if (this.mapParams.containsKey("IsSingleTarget")) {
-            if (spellAbility.getTarget().getTargets().size() != 1) {
+            if (spellAbility.getTargets().getNumTargeted() != 1) {
                 return false;
             }
         }

@@ -13,7 +13,7 @@ public class DeclareCombatantsEffect extends SpellAbilityEffect {
 
     @Override
     protected String getStackDescription(SpellAbility sa) {
-        List<Player> tgtPlayers = getDefinedPlayersBeforeTargetOnes(sa);
+        List<Player> tgtPlayers = getDefinedPlayersOrTargeted(sa);
 
         boolean attackers = sa.hasParam("DeclareAttackers");
         final String attDesc =  "which creatures attack";
@@ -31,7 +31,7 @@ public class DeclareCombatantsEffect extends SpellAbilityEffect {
 
     @Override
     public void resolve(SpellAbility sa) {
-        List<Player> tgtPlayers = getDefinedPlayersBeforeTargetOnes(sa);
+        List<Player> tgtPlayers = getDefinedPlayersOrTargeted(sa);
         
         final boolean attackers = sa.hasParam("DeclareAttackers");
         final boolean blockers = sa.hasParam("DeclareBlockers");

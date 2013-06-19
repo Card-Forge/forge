@@ -8,7 +8,7 @@ import forge.Card;
 import forge.CardUtil;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.Target;
+import forge.card.spellability.TargetRestrictions;
 import forge.game.Game;
 
 public class DestroyEffect extends SpellAbilityEffect {
@@ -82,7 +82,7 @@ public class DestroyEffect extends SpellAbilityEffect {
         final List<Card> tgtCards = getTargetCards(sa);
         final ArrayList<Card> untargetedCards = new ArrayList<Card>();
 
-        final Target tgt = sa.getTarget();
+        final TargetRestrictions tgt = sa.getTargetRestrictions();
 
         if (sa.hasParam("Radiance")) {
             for (final Card c : CardUtil.getRadiance(card, tgtCards.get(0),

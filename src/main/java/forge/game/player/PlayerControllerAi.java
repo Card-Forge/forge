@@ -23,7 +23,7 @@ import forge.card.spellability.Ability;
 import forge.card.spellability.AbilityStatic;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.Target;
+import forge.card.spellability.TargetChoices;
 import forge.deck.Deck;
 import forge.game.Game;
 import forge.game.GameType;
@@ -255,7 +255,7 @@ public class PlayerControllerAi extends PlayerController {
      * @see forge.game.player.PlayerController#chooseTargets(forge.card.spellability.SpellAbility, forge.card.spellability.SpellAbilityStackInstance)
      */
     @Override
-    public Target chooseTargets(SpellAbility ability) {
+    public TargetChoices chooseTargets(SpellAbility ability) {
         // AI currently can't do this. But when it can it will need to be based on Ability API
         return null;
     }

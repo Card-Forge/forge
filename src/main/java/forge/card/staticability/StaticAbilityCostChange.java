@@ -27,7 +27,7 @@ import forge.card.mana.ManaCostShard;
 import forge.card.spellability.AbilityActivated;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.Target;
+import forge.card.spellability.TargetRestrictions;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
@@ -91,17 +91,14 @@ public class StaticAbilityCostChange {
             return;
         }
         if (params.containsKey("ValidTarget")) {
-            Target tgt = sa.getTarget();
+            TargetRestrictions tgt = sa.getTargetRestrictions();
             if (tgt == null) {
                 return;
             }
             boolean targetValid = false;
-            for (Object target : tgt.getTargets()) {
-                if (target instanceof Card) {
-                    Card targetCard = (Card) target;
-                    if (targetCard.isValid(params.get("ValidTarget").split(","), hostCard.getController(), hostCard)) {
-                        targetValid = true;
-                    }
+            for (Card target : sa.getTargets().getTargetCards()) {
+                if (target.isValid(params.get("ValidTarget").split(","), hostCard.getController(), hostCard)) {
+                    targetValid = true;
                 }
             }
             if (!targetValid) {
@@ -109,17 +106,15 @@ public class StaticAbilityCostChange {
             }
         }
         if (params.containsKey("ValidSpellTarget")) {
-            Target tgt = sa.getTarget();
+            TargetRestrictions tgt = sa.getTargetRestrictions();
             if (tgt == null) {
                 return;
             }
             boolean targetValid = false;
-            for (Object target : tgt.getTargets()) {
-                if (target instanceof SpellAbility) {
-                    Card targetCard = ((SpellAbility) target).getSourceCard();
-                    if (targetCard.isValid(params.get("ValidSpellTarget").split(","), hostCard.getController(), hostCard)) {
-                        targetValid = true;
-                    }
+            for (SpellAbility target : sa.getTargets().getTargetSpells()) {
+                Card targetCard = target.getSourceCard();
+                if (targetCard.isValid(params.get("ValidSpellTarget").split(","), hostCard.getController(), hostCard)) {
+                    targetValid = true;
                 }
             }
             if (!targetValid) {
@@ -223,17 +218,14 @@ public class StaticAbilityCostChange {
             }
         }
         if (params.containsKey("ValidTarget")) {
-            Target tgt = sa.getTarget();
+            TargetRestrictions tgt = sa.getTargetRestrictions();
             if (tgt == null) {
                 return;
             }
             boolean targetValid = false;
-            for (Object target : tgt.getTargets()) {
-                if (target instanceof Card) {
-                    Card targetCard = (Card) target;
-                    if (targetCard.isValid(params.get("ValidTarget").split(","), hostCard.getController(), hostCard)) {
-                        targetValid = true;
-                    }
+            for (Card target : sa.getTargets().getTargetCards()) {
+                if (target.isValid(params.get("ValidTarget").split(","), hostCard.getController(), hostCard)) {
+                    targetValid = true;
                 }
             }
             if (!targetValid) {

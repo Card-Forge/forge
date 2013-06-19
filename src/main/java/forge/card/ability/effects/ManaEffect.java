@@ -11,7 +11,7 @@ import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.AbilityManaPart;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.Target;
+import forge.card.spellability.TargetRestrictions;
 import forge.game.GameActionUtil;
 import forge.game.Game;
 import forge.game.ai.ComputerUtilCard;
@@ -33,7 +33,7 @@ public class ManaEffect extends SpellAbilityEffect {
         sa.setUndoable(sa.isAbility() && sa.isUndoable());
 
         final List<Player> tgtPlayers = getTargetPlayers(sa);
-        final Target tgt = sa.getTarget();
+        final TargetRestrictions tgt = sa.getTargetRestrictions();
         final boolean optional = sa.hasParam("Optional");
         final Game game = sa.getActivatingPlayer().getGame();
 

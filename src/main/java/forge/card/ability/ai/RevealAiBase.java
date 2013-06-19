@@ -3,28 +3,28 @@ package forge.card.ability.ai;
 
 import forge.card.ability.SpellAbilityAi;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.Target;
+import forge.card.spellability.TargetRestrictions;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
 public abstract class RevealAiBase extends SpellAbilityAi {
 
     protected  boolean revealHandTargetAI(final Player ai, final SpellAbility sa) {
-        final Target tgt = sa.getTarget();
+        final TargetRestrictions tgt = sa.getTargetRestrictions();
 
         Player opp = ai.getOpponent();
         final int humanHandSize = opp.getCardsIn(ZoneType.Hand).size();
 
         if (tgt != null) {
             // ability is targeted
-            tgt.resetTargets();
+            sa.resetTargets();
 
             final boolean canTgtHuman = opp.canBeTargetedBy(sa);
 
             if (!canTgtHuman || (humanHandSize == 0)) {
                 return false;
             } else {
-                tgt.addTarget(opp);
+                sa.getTargets().add(opp);
             }
         } else {
             // if it's just defined, no big deal

@@ -9,7 +9,7 @@ import forge.CardLists;
 import forge.CardPredicates.Presets;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.Target;
+import forge.card.spellability.TargetRestrictions;
 import forge.game.Game;
 import forge.game.ai.ComputerUtilCard;
 import forge.game.ai.ComputerUtilCombat;
@@ -27,11 +27,11 @@ public class ChooseCardAi extends SpellAbilityAi {
         final Card host = sa.getSourceCard();
         final Game game = ai.getGame();
 
-        final Target tgt = sa.getTarget();
+        final TargetRestrictions tgt = sa.getTargetRestrictions();
         if (tgt != null) {
-            tgt.resetTargets();
+            sa.resetTargets();
             if (sa.canTarget(ai.getOpponent())) {
-                tgt.addTarget(ai.getOpponent());
+                sa.getTargets().add(ai.getOpponent());
             } else {
                 return false;
             }

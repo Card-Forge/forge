@@ -1,6 +1,5 @@
 package forge.card.ability.ai;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.google.common.base.Predicate;
@@ -13,7 +12,7 @@ import forge.card.ability.ApiType;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.cost.Cost;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.Target;
+import forge.card.spellability.TargetRestrictions;
 import forge.game.Game;
 import forge.game.ai.ComputerUtilCombat;
 import forge.game.ai.ComputerUtilCost;
@@ -56,11 +55,11 @@ public class ChooseSourceAi extends SpellAbilityAi {
             }
         }
 
-        final Target tgt = sa.getTarget();
+        final TargetRestrictions tgt = sa.getTargetRestrictions();
         if (tgt != null) {
-            tgt.resetTargets();
+            sa.resetTargets();
             if (sa.canTarget(ai.getOpponent())) {
-                tgt.addTarget(ai.getOpponent());
+                sa.getTargets().add(ai.getOpponent());
             } else {
                 return false;
             }
@@ -79,18 +78,12 @@ public class ChooseSourceAi extends SpellAbilityAi {
                     }
 
                     final Card threatSource = topStack.getSourceCard();
-                    List<? extends ITargetable> objects = new ArrayList<ITargetable>();
-                    final Target threatTgt = topStack.getTarget();
+                    List<? extends ITargetable> objects = getTargets(sa);
 
-                    if (threatTgt == null) {
-                        if (topStack.hasParam("Defined")) {
-                            objects = AbilityUtils.getDefinedObjects(threatSource, topStack.getParam("Defined"), topStack);
-                        } else if (topStack.hasParam("ValidPlayers")) {
-                            objects = AbilityUtils.getDefinedPlayers(threatSource, topStack.getParam("ValidPlayers"), topStack);
-                        }
-                    } else {
-                        objects = threatTgt.getTargetPlayers();
+                    if (!topStack.usesTargeting() && topStack.hasParam("ValidPlayers") && !topStack.hasParam("Defined")) {
+                        objects = AbilityUtils.getDefinedPlayers(threatSource, topStack.getParam("ValidPlayers"), topStack);
                     }
+                    
                     if (!objects.contains(ai) || topStack.hasParam("NoPrevention")) {
                         return false;
                     }

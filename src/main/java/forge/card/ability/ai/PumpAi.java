@@ -14,7 +14,7 @@ import forge.card.cost.CostPart;
 import forge.card.cost.CostTapType;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityRestriction;
-import forge.card.spellability.Target;
+import forge.card.spellability.TargetRestrictions;
 import forge.game.Game;
 import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilCard;
@@ -142,7 +142,7 @@ public class PumpAi extends PumpAiBase {
         }
 
         //Untargeted
-        if ((sa.getTarget() == null) || !sa.getTarget().doesTarget()) {
+        if ((sa.getTargetRestrictions() == null) || !sa.getTargetRestrictions().doesTarget()) {
             final List<Card> cards = AbilityUtils.getDefinedCards(sa.getSourceCard(),
                     sa.getParam("Defined"), sa);
 
@@ -192,8 +192,8 @@ public class PumpAi extends PumpAiBase {
         }
 
         final Player opp = ai.getOpponent();
-        final Target tgt = sa.getTarget();
-        tgt.resetTargets();
+        final TargetRestrictions tgt = sa.getTargetRestrictions();
+        sa.resetTargets();
         List<Card> list = new ArrayList<Card>();
         if (sa.hasParam("AILogic")) {
             if (sa.getParam("AILogic").equals("HighestPower")) {
@@ -201,7 +201,7 @@ public class PumpAi extends PumpAiBase {
                 list = CardLists.getTargetableCards(list, sa);
                 CardLists.sortByPowerDesc(list);
                 if (!list.isEmpty()) {
-                    tgt.addTarget(list.get(0));
+                    sa.getTargets().add(list.get(0));
                     return true;
                 } else {
                     return false;
@@ -209,7 +209,7 @@ public class PumpAi extends PumpAiBase {
             }
         } else if (sa.isCurse()) {
             if (sa.canTarget(opp)) {
-                tgt.addTarget(opp);
+                sa.getTargets().add(opp);
                 return true;
             }
             list = this.getCurseCreatures(ai, sa, defense, attack, keywords);
@@ -221,7 +221,7 @@ public class PumpAi extends PumpAiBase {
                 list = this.getPumpCreatures(ai, sa, defense, attack, keywords);
             }
             if (sa.canTarget(ai)) {
-                tgt.addTarget(ai);
+                sa.getTargets().add(ai);
                 return true;
             }
         }
@@ -251,17 +251,17 @@ public class PumpAi extends PumpAiBase {
             list = ComputerUtil.getSafeTargets(ai, sa, list);
         }
 
-        while (tgt.getNumTargeted() < tgt.getMaxTargets(sa.getSourceCard(), sa)) {
+        while (sa.getTargets().getNumTargeted() < tgt.getMaxTargets(sa.getSourceCard(), sa)) {
             Card t = null;
             // boolean goodt = false;
 
             if (list.isEmpty()) {
-                if ((tgt.getNumTargeted() < tgt.getMinTargets(sa.getSourceCard(), sa)) || (tgt.getNumTargeted() == 0)) {
+                if ((sa.getTargets().getNumTargeted() < tgt.getMinTargets(sa.getSourceCard(), sa)) || (sa.getTargets().getNumTargeted() == 0)) {
                     if (mandatory) {
                         return this.pumpMandatoryTarget(ai, sa, mandatory);
                     }
 
-                    tgt.resetTargets();
+                    sa.resetTargets();
                     return false;
                 } else {
                     // TODO is this good enough? for up to amounts?
@@ -270,7 +270,7 @@ public class PumpAi extends PumpAiBase {
             }
 
             t = ComputerUtilCard.getBestAI(list);
-            tgt.addTarget(t);
+            sa.getTargets().add(t);
             list.remove(t);
         }
 
@@ -280,18 +280,18 @@ public class PumpAi extends PumpAiBase {
     private boolean pumpMandatoryTarget(final Player ai, final SpellAbility sa, final boolean mandatory) {
         final Game game = ai.getGame();
         List<Card> list = game.getCardsIn(ZoneType.Battlefield);
-        final Target tgt = sa.getTarget();
+        final TargetRestrictions tgt = sa.getTargetRestrictions();
         final Player opp = ai.getOpponent();
         list = CardLists.getValidCards(list, tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getSourceCard());
         list = CardLists.getTargetableCards(list, sa);
 
         if (list.size() < tgt.getMinTargets(sa.getSourceCard(), sa)) {
-            tgt.resetTargets();
+            sa.resetTargets();
             return false;
         }
 
         // Remove anything that's already been targeted
-        for (final Card c : tgt.getTargetCards()) {
+        for (final Card c : sa.getTargets().getTargetCards()) {
             list.remove(c);
         }
 
@@ -307,7 +307,7 @@ public class PumpAi extends PumpAiBase {
             forced = CardLists.filterControlledBy(list, opp);
         }
 
-        while (tgt.getNumTargeted() < tgt.getMaxTargets(source, sa)) {
+        while (sa.getTargets().getNumTargeted() < tgt.getMaxTargets(source, sa)) {
             if (pref.isEmpty()) {
                 break;
             }
@@ -321,10 +321,10 @@ public class PumpAi extends PumpAiBase {
 
             pref.remove(c);
 
-            tgt.addTarget(c);
+            sa.getTargets().add(c);
         }
 
-        while (tgt.getNumTargeted() < tgt.getMinTargets(sa.getSourceCard(), sa)) {
+        while (sa.getTargets().getNumTargeted() < tgt.getMinTargets(sa.getSourceCard(), sa)) {
             if (forced.isEmpty()) {
                 break;
             }
@@ -338,11 +338,11 @@ public class PumpAi extends PumpAiBase {
 
             forced.remove(c);
 
-            tgt.addTarget(c);
+            sa.getTargets().add(c);
         }
 
-        if (tgt.getNumTargeted() < tgt.getMinTargets(sa.getSourceCard(), sa)) {
-            tgt.resetTargets();
+        if (sa.getTargets().getNumTargeted() < tgt.getMinTargets(sa.getSourceCard(), sa)) {
+            sa.resetTargets();
             return false;
         }
 
@@ -381,7 +381,7 @@ public class PumpAi extends PumpAiBase {
             attack = AbilityUtils.calculateAmount(sa.getSourceCard(), numAttack, sa);
         }
 
-        if (sa.getTarget() == null) {
+        if (sa.getTargetRestrictions() == null) {
             if (mandatory) {
                 return true;
             }
@@ -421,7 +421,7 @@ public class PumpAi extends PumpAiBase {
             attack = AbilityUtils.calculateAmount(sa.getSourceCard(), numAttack, sa);
         }
 
-        if ((sa.getTarget() == null) || !sa.getTarget().doesTarget()) {
+        if ((sa.getTargetRestrictions() == null) || !sa.getTargetRestrictions().doesTarget()) {
             if (source.isCreature()) {
                 if (!source.hasKeyword("Indestructible")
                         && ((source.getNetDefense() + defense) <= source.getDamage())) {

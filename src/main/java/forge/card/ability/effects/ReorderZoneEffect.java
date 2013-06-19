@@ -9,7 +9,7 @@ import com.google.common.collect.Lists;
 import forge.Card;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.Target;
+import forge.card.spellability.TargetRestrictions;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.util.Lang;
@@ -42,7 +42,7 @@ public class ReorderZoneEffect extends SpellAbilityEffect {
     public void resolve(SpellAbility sa) {
         final ZoneType zone = ZoneType.smartValueOf(sa.getParam("Zone"));
         boolean shuffle = sa.hasParam("Random");
-        final Target tgt = sa.getTarget();
+        final TargetRestrictions tgt = sa.getTargetRestrictions();
 
 
         for (final Player p : getTargetPlayers(sa)) {

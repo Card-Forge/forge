@@ -7,7 +7,7 @@ import forge.CardCharacteristicName;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.Target;
+import forge.card.spellability.TargetRestrictions;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
@@ -23,7 +23,7 @@ public class MillEffect extends SpellAbilityEffect {
             source.clearRemembered();
         }
 
-        final Target tgt = sa.getTarget();
+        final TargetRestrictions tgt = sa.getTargetRestrictions();
 
         ZoneType destination = ZoneType.smartValueOf(sa.getParam("Destination"));
         if (destination == null) {

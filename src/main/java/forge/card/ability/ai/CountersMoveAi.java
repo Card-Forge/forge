@@ -9,7 +9,7 @@ import forge.CounterType;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.Target;
+import forge.card.spellability.TargetRestrictions;
 import forge.game.ai.ComputerUtilCard;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
@@ -48,7 +48,7 @@ public class CountersMoveAi extends SpellAbilityAi {
     @Override
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
         final Card host = sa.getSourceCard();
-        final Target abTgt = sa.getTarget();
+        final TargetRestrictions abTgt = sa.getTargetRestrictions();
         final String type = sa.getParam("CounterType");
         final String amountStr = sa.getParam("CounterNum");
         int amount = 0;
@@ -124,7 +124,7 @@ public class CountersMoveAi extends SpellAbilityAi {
 
             // TODO - I think choice can be null here. Is that ok for
             // addTarget()?
-            abTgt.addTarget(choice);
+            sa.getTargets().add(choice);
         }
 
         return chance;

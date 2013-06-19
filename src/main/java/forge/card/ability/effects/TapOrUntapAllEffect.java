@@ -48,7 +48,7 @@ public class TapOrUntapAllEffect extends SpellAbilityEffect {
         final Game game = activator.getGame();
 
         
-        List<Player> targetedPlayers = getTargetPlayersEmptyAsDefault(sa);
+        List<Player> targetedPlayers = getTargetPlayers(sa);
 
         if (sa.hasParam("ValidCards")) {
             validCards = game.getCardsIn(ZoneType.Battlefield);

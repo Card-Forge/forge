@@ -28,7 +28,7 @@ import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityCondition;
 import forge.card.spellability.SpellAbilityRestriction;
-import forge.card.spellability.Target;
+import forge.card.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
 import forge.util.FileSection;
 
@@ -55,7 +55,7 @@ public final class AbilityFactory {
             return prefix;
         }
         
-        public SpellAbility buildSpellAbility(ApiType api, Card hostCard, Cost abCost, Target abTgt, Map<String, String> mapParams ) {
+        public SpellAbility buildSpellAbility(ApiType api, Card hostCard, Cost abCost, TargetRestrictions abTgt, Map<String, String> mapParams ) {
             switch(this) {
                 case Ability: return new AbilityApiBased(api, hostCard, abCost, abTgt, mapParams);
                 case Spell: return new SpellApiBased(api, hostCard, abCost, abTgt, mapParams);
@@ -124,7 +124,7 @@ public final class AbilityFactory {
     public static final SpellAbility getAbility(AbilityRecordType type, ApiType api, Map<String, String> mapParams, Cost abCost, Card hostCard) {
         
         
-        Target abTgt = mapParams.containsKey("ValidTgts") ? readTarget(mapParams) : null;
+        TargetRestrictions abTgt = mapParams.containsKey("ValidTgts") ? readTarget(mapParams) : null;
 
         if (api == ApiType.CopySpellAbility || api == ApiType.Counter || api == ApiType.ChangeTargets) {
             // Since all "CopySpell" ABs copy things on the Stack no need for it to be everywhere
@@ -204,7 +204,7 @@ public final class AbilityFactory {
         return spellAbility;
     }
 
-    private static final Target readTarget(Map<String, String> mapParams) {
+    private static final TargetRestrictions readTarget(Map<String, String> mapParams) {
         final String min = mapParams.containsKey("TargetMin") ? mapParams.get("TargetMin") : "1";
         final String max = mapParams.containsKey("TargetMax") ? mapParams.get("TargetMax") : "1";
 
@@ -214,7 +214,7 @@ public final class AbilityFactory {
         final String prompt = mapParams.containsKey("TgtPrompt") ? mapParams.get("TgtPrompt") : "Select target " + mapParams.get("ValidTgts");
         sb.append(prompt);
 
-        Target abTgt = new Target(prompt, mapParams.get("ValidTgts").split(","), min, max);
+        TargetRestrictions abTgt = new TargetRestrictions(prompt, mapParams.get("ValidTgts").split(","), min, max);
 
         if (mapParams.containsKey("TgtZone")) { // if Targeting
                                                      // something
@@ -338,11 +338,11 @@ public final class AbilityFactory {
             origin = ZoneType.listValueOf(params.get("Origin"));
         }
     
-        final Target tgt = sa.getTarget();
+        final TargetRestrictions tgt = sa.getTargetRestrictions();
     
         // Don't set the zone if it targets a player
         if ((tgt != null) && !tgt.canTgtPlayer()) {
-            sa.getTarget().setZone(origin);
+            sa.getTargetRestrictions().setZone(origin);
         }
     }
 

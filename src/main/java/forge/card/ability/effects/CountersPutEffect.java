@@ -9,7 +9,6 @@ import forge.CounterType;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.Target;
 import forge.card.trigger.TriggerType;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
@@ -41,8 +40,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
         } else {
             sb.append(" on ");
         }
-        final Target tgt = sa.getTarget();
-        final List<Card> tgtCards = tgt != null ? tgt.getTargetCards() :  AbilityUtils.getDefinedCards(sa.getSourceCard(), sa.getParam("Defined"), sa);
+        final List<Card> tgtCards = getTargetCards(sa);
 
         final Iterator<Card> it = tgtCards.iterator();
         while (it.hasNext()) {
@@ -92,18 +90,11 @@ public class CountersPutEffect extends SpellAbilityEffect {
             }
         }
 
-        List<Card> tgtCards;
-
-        final Target tgt = sa.getTarget();
-        if (tgt != null && (tgt.getTargetPlayers().size() == 0)) {
-            tgtCards = tgt.getTargetCards();
-        } else {
-            tgtCards = AbilityUtils.getDefinedCards(card, sa.getParam("Defined"), sa);
-        }
+        List<Card> tgtCards = getTargetCards(sa);
 
         for (final Card tgtCard : tgtCards) {
-            counterAmount = (sa.getTarget() != null && sa.hasParam("DividedAsYouChoose")) ? sa.getTarget().getDividedValue(tgtCard) : counterAmount;
-            if ((tgt == null) || tgtCard.canBeTargetedBy(sa)) {
+            counterAmount = (sa.usesTargeting() && sa.hasParam("DividedAsYouChoose")) ? sa.getTargetRestrictions().getDividedValue(tgtCard) : counterAmount;
+            if (!sa.usesTargeting() || tgtCard.canBeTargetedBy(sa)) {
                 if (max != -1) {
                     counterAmount = max - tgtCard.getCounters(counterType);
                 }

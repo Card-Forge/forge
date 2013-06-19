@@ -5,7 +5,6 @@ import java.util.List;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.Target;
 import forge.game.phase.ExtraTurn;
 import forge.game.player.Player;
 
@@ -39,17 +38,10 @@ public class AddTurnEffect extends SpellAbilityEffect {
     public void resolve(SpellAbility sa) {
         final int numTurns = AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("NumTurns"), sa);
 
-        List<Player> tgtPlayers;
-
-        final Target tgt = sa.getTarget();
-        if (tgt != null) {
-            tgtPlayers = tgt.getTargetPlayers();
-        } else {
-            tgtPlayers = AbilityUtils.getDefinedPlayers(sa.getSourceCard(), sa.getParam("Defined"), sa);
-        }
+        List<Player> tgtPlayers = getTargetPlayers(sa);
 
         for (final Player p : tgtPlayers) {
-            if ((tgt == null) || p.canBeTargetedBy(sa)) {
+            if ((sa.getTargetRestrictions() == null) || p.canBeTargetedBy(sa)) {
                 for (int i = 0; i < numTurns; i++) {
                     ExtraTurn extra = p.getGame().getPhaseHandler().addExtraTurn(p);
                     if (sa.hasParam("LoseAtEndStep")) {

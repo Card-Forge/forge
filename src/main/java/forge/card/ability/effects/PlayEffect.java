@@ -230,8 +230,8 @@ public class PlayEffect extends SpellAbilityEffect {
             boolean noManaCost = sa.hasParam("WithoutManaCost");
             tgtSA = noManaCost ? tgtSA.copyWithNoManaCost() : tgtSA;
 
-            if (tgtSA.getTarget() != null && !optional) {
-                tgtSA.getTarget().setMandatory(true);
+            if (tgtSA.usesTargeting() && !optional) {
+                tgtSA.getTargetRestrictions().setMandatory(true);
             }
 
             if (controller.isHuman()) {

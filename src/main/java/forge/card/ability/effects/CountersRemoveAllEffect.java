@@ -8,7 +8,6 @@ import forge.CounterType;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.Target;
 import forge.game.Game;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
@@ -52,9 +51,8 @@ public class CountersRemoveAllEffect extends SpellAbilityEffect {
         List<Card> cards = game.getCardsIn(zone);
         cards = CardLists.getValidCards(cards, valid, sa.getSourceCard().getController(), sa.getSourceCard());
 
-        final Target tgt = sa.getTarget();
-        if (tgt != null) {
-            final Player pl = sa.getTargetPlayer();
+        if (sa.usesTargeting()) {
+            final Player pl = sa.getTargets().getFirstTargetedPlayer();
             cards = CardLists.filterControlledBy(cards, pl);
         }
 

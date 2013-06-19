@@ -76,7 +76,7 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
         StringBuilder sb = new StringBuilder();
         sb.append(who).append(action).append(what);
 
-        if (event.sa.getTarget() != null) {
+        if (event.sa.getTargetRestrictions() != null) {
             sb.append(" targeting ");
             for (TargetChoices ch : event.sa.getAllTargetChoices()) {
                 if (null != ch) {

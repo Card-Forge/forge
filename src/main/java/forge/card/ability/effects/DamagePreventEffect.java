@@ -17,7 +17,7 @@ public class DamagePreventEffect extends SpellAbilityEffect {
     protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
 
-        final List<ITargetable> tgts = getTargetObjects(sa);
+        final List<ITargetable> tgts = getTargets(sa);
 
         sb.append("Prevent the next ");
         sb.append(sa.getParam("Amount"));
@@ -45,7 +45,7 @@ public class DamagePreventEffect extends SpellAbilityEffect {
             }
         }
 
-        if (sa.hasParam("Radiance") && (sa.getTarget() != null)) {
+        if (sa.hasParam("Radiance") && (sa.usesTargeting())) {
             sb.append(" and each other ").append(sa.getParam("ValidTgts"))
                     .append(" that shares a color with ");
             if (tgts.size() > 1) {
@@ -66,15 +66,10 @@ public class DamagePreventEffect extends SpellAbilityEffect {
         Card host = sa.getSourceCard();
         int numDam = AbilityUtils.calculateAmount(host, sa.getParam("Amount"), sa);
 
-        final List<ITargetable> tgts;
+        final List<ITargetable> tgts = getTargets(sa);
         final ArrayList<Card> untargetedCards = new ArrayList<Card>();
-        if (sa.getTarget() == null) {
-            tgts = AbilityUtils.getDefinedObjects(sa.getSourceCard(), sa.getParam("Defined"), sa);
-        } else {
-            tgts = sa.getTarget().getTargets();
-        }
-
-        if (sa.hasParam("Radiance") && (sa.getTarget() != null)) {
+        
+        if (sa.hasParam("Radiance") && (sa.usesTargeting())) {
             Card origin = null;
             for (int i = 0; i < tgts.size(); i++) {
                 if (tgts.get(i) instanceof Card) {
@@ -90,10 +85,10 @@ public class DamagePreventEffect extends SpellAbilityEffect {
             }
         }
 
-        final boolean targeted = (sa.getTarget() != null);
+        final boolean targeted = (sa.usesTargeting());
 
         for (final Object o : tgts) {
-            numDam = (sa.getTarget() != null && sa.hasParam("DividedAsYouChoose")) ? sa.getTarget().getDividedValue(o) : numDam;
+            numDam = (sa.usesTargeting() && sa.hasParam("DividedAsYouChoose")) ? sa.getTargetRestrictions().getDividedValue(o) : numDam;
             if (o instanceof Card) {
                 final Card c = (Card) o;
                 if (c.isInPlay() && (!targeted || c.canBeTargetedBy(sa))) {

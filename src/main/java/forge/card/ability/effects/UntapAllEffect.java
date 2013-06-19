@@ -32,7 +32,7 @@ public class UntapAllEffect extends SpellAbilityEffect {
         String valid = "";
         List<Card> list = null;
 
-        List<Player> tgtPlayers = getTargetPlayersEmptyAsDefault(sa);
+        List<Player> tgtPlayers = getTargetPlayers(sa);
 
         if (sa.hasParam("ValidCards")) {
             valid = sa.getParam("ValidCards");

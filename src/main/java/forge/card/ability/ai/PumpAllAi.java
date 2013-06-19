@@ -10,7 +10,7 @@ import forge.Card;
 import forge.CardLists;
 import forge.card.ability.AbilityUtils;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.Target;
+import forge.card.spellability.TargetRestrictions;
 import forge.game.Game;
 import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilCard;
@@ -49,10 +49,10 @@ public class PumpAllAi extends PumpAiBase {
         List<Card> comp = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), valid, source.getController(), source);
         List<Card> human = CardLists.getValidCards(opp.getCardsIn(ZoneType.Battlefield), valid, source.getController(), source);
 
-        final Target tgt = sa.getTarget();
+        final TargetRestrictions tgt = sa.getTargetRestrictions();
         if (tgt != null && sa.canTarget(opp) && sa.hasParam("IsCurse")) {
-            tgt.resetTargets();
-            sa.getTarget().addTarget(opp);
+            sa.resetTargets();
+            sa.getTargets().add(opp);
             comp = new ArrayList<Card>();
         }
 

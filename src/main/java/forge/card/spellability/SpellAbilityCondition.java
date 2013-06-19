@@ -188,7 +188,7 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
         if( this.altCostPaid && !sa.isOptionalCostPaid(OptionalCost.AltCost)) return false;
         
         if (this.isAllTargetsLegal()) {
-            for (Card c : sa.getTarget().getTargetCards()) {
+            for (Card c : sa.getTargets().getTargetCards()) {
                 if (!CardFactoryUtil.isTargetStillValid(sa, c)) {
                     return false;
                 }

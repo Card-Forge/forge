@@ -37,7 +37,7 @@ public class CounterEffect extends SpellAbilityEffect {
                 sas.add(spell);
             }
         } else {
-            sas = getTargetSpellAbilities(sa);
+            sas = getTargetSpells(sa);
         }
 
         sb.append("countering");
@@ -82,7 +82,7 @@ public class CounterEffect extends SpellAbilityEffect {
                 sas.add(spell);
             }
         } else {
-            sas = getTargetSpellAbilities(sa);
+            sas = getTargetSpells(sa);
         }
 
         if (sa.hasParam("ForgetOtherTargets")) {

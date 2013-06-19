@@ -20,6 +20,8 @@ package forge.card.spellability;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.common.collect.Iterables;
+
 import forge.Card;
 import forge.ITargetable;
 import forge.game.player.Player;
@@ -38,7 +40,7 @@ public class TargetChoices {
     // Card or Player are legal targets.
     private final List<Card> targetCards = new ArrayList<Card>();
     private final List<Player> targetPlayers = new ArrayList<Player>();
-    private final List<SpellAbility> targetSAs = new ArrayList<SpellAbility>();
+    private final List<SpellAbility> targetSpells = new ArrayList<SpellAbility>();
 
     /**
      * <p>
@@ -60,7 +62,7 @@ public class TargetChoices {
      *            a {@link java.lang.Object} object.
      * @return a boolean.
      */
-    public final boolean addTarget(final ITargetable o) {
+    public final boolean add(final ITargetable o) {
         if (o instanceof Player) {
             return this.addTarget((Player) o);
         } else if (o instanceof Card) {
@@ -81,7 +83,7 @@ public class TargetChoices {
      *            a {@link forge.Card} object.
      * @return a boolean.
      */
-    public final boolean addTarget(final Card c) {
+    private final boolean addTarget(final Card c) {
         if (!this.targetCards.contains(c)) {
             this.targetCards.add(c);
             this.numTargeted++;
@@ -99,7 +101,7 @@ public class TargetChoices {
      *            a {@link forge.game.player.Player} object.
      * @return a boolean.
      */
-    public final boolean addTarget(final Player p) {
+    private final boolean addTarget(final Player p) {
         if (!this.targetPlayers.contains(p)) {
             this.targetPlayers.add(p);
             this.numTargeted++;
@@ -117,24 +119,13 @@ public class TargetChoices {
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
-    public final boolean addTarget(final SpellAbility sa) {
-        if (!this.targetSAs.contains(sa)) {
-            this.targetSAs.add(sa);
+    private final boolean addTarget(final SpellAbility sa) {
+        if (!this.targetSpells.contains(sa)) {
+            this.targetSpells.add(sa);
             this.numTargeted++;
             return true;
         }
         return false;
-    }
-
-    /**
-     * <p>
-     * clear.
-     * </p>
-     */
-    public final void clear() {
-        this.targetPlayers.clear();
-        this.targetCards.clear();
-        this.targetSAs.clear();
     }
 
     /**
@@ -146,48 +137,11 @@ public class TargetChoices {
      *            a {@link forge.Card} object.
      * @return a boolean.
      */
-    public final boolean removeTarget(final Card card) {
-        // Do I decrement numTargeted for fizzling targets?
-        if (!this.targetCards.contains(card)) {
-            this.targetCards.remove(card);
-            //this.numTargeted--;
-            return true;
-        }
-        return false;
-    }
-
-    /**
-     * <p>
-     * removeTarget.
-     * </p>
-     * 
-     * @param pl
-     *            a {@link forge.game.player.Player} object.
-     * @return a boolean.
-     */
-    public final boolean removeTarget(final Player pl) {
-        // Do I decrement numTargeted for fizzling targets?
-        if (!this.targetPlayers.contains(pl)) {
-            this.targetPlayers.remove(pl);
-            //this.numTargeted--;
-            return true;
-        }
-        return false;
-    }
-
-    /**
-     * <p>
-     * removeTarget.
-     * </p>
-     * 
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @return a boolean.
-     */
-    public final boolean removeTarget(final SpellAbility sa) {
-        // Do I decrement numTargeted for fizzling targets?
-        if (!this.targetSAs.contains(sa)) {
-            this.targetSAs.remove(sa);
+    public final boolean remove(final ITargetable target) {
+        // remove returns true if element was found in given list
+        if (this.targetCards.remove(target) || this.targetPlayers.remove(target) || this.targetSpells.remove(target)) {
+            
+            // Do I decrement numTargeted for fizzling targets?
             //this.numTargeted--;
             return true;
         }
@@ -201,7 +155,7 @@ public class TargetChoices {
      * 
      * @return a {@link java.util.ArrayList} object.
      */
-    public final List<Card> getTargetCards() {
+    public final Iterable<Card> getTargetCards() {
         return this.targetCards;
     }
 
@@ -212,7 +166,7 @@ public class TargetChoices {
      * 
      * @return a {@link java.util.ArrayList} object.
      */
-    public final List<Player> getTargetPlayers() {
+    public final Iterable<Player> getTargetPlayers() {
         return this.targetPlayers;
     }
 
@@ -223,8 +177,8 @@ public class TargetChoices {
      * 
      * @return a {@link java.util.ArrayList} object.
      */
-    public final List<SpellAbility> getTargetSAs() {
-        return this.targetSAs;
+    public final Iterable<SpellAbility> getTargetSpells() {
+        return this.targetSpells;
     }
 
     /**
@@ -238,18 +192,12 @@ public class TargetChoices {
         final ArrayList<ITargetable> tgts = new ArrayList<ITargetable>();
         tgts.addAll(this.targetPlayers);
         tgts.addAll(this.targetCards);
-        tgts.addAll(this.targetSAs);
+        tgts.addAll(this.targetSpells);
 
         return tgts;
     }
 
-    /**
-     * <p>
-     * getTargetedString.
-     * </p>
-     * 
-     * @return a {@link java.lang.String} object.
-     */
+
     public final String getTargetedString() {
         final List<ITargetable> tgts = this.getTargets();
         final StringBuilder sb = new StringBuilder();
@@ -270,5 +218,41 @@ public class TargetChoices {
         }
 
         return sb.toString();
+    }
+
+    public final boolean isTargetingAnyCard() {
+        return !targetCards.isEmpty();
+    }
+
+    public final boolean isTargetingAnyPlayer() {
+        return !targetPlayers.isEmpty();
+    }
+
+
+    public final boolean isTargetingAnySpell() {
+        return !targetSpells.isEmpty();
+    }
+
+    public final boolean isTargeting(ITargetable e) {
+        return targetCards.contains(e) || targetSpells.contains(e) || targetPlayers.contains(e); 
+    }
+
+    public final Card getFirstTargetedCard() {
+        return Iterables.getFirst(targetCards, null);
+    }
+
+    public final Player getFirstTargetedPlayer() {
+        return Iterables.getFirst(targetPlayers, null);
+    }
+
+    public final SpellAbility getFirstTargetedSpell() {
+        return Iterables.getFirst(targetSpells, null);
+    }
+
+    /* (non-Javadoc)
+     * @see forge.card.spellability.ITargetsChosen#isEmpty()
+     */
+    public final boolean isEmpty() {
+        return targetCards.isEmpty() && targetSpells.isEmpty() && targetPlayers.isEmpty();
     }
 }

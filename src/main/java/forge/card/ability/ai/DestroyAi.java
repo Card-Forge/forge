@@ -15,7 +15,7 @@ import forge.card.cost.Cost;
 import forge.card.cost.CostPart;
 import forge.card.cost.CostSacrifice;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.Target;
+import forge.card.spellability.TargetRestrictions;
 import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilCard;
 import forge.game.ai.ComputerUtilCost;
@@ -41,7 +41,7 @@ public class DestroyAi extends SpellAbilityAi {
         // based on what the expected targets could be
         final Random r = MyRandom.getRandom();
         final Cost abCost = sa.getPayCosts();
-        final Target abTgt = sa.getTarget();
+        final TargetRestrictions abTgt = sa.getTargetRestrictions();
         final Card source = sa.getSourceCard();
         final boolean noRegen = sa.hasParam("NoRegen");
         List<Card> list;
@@ -65,7 +65,7 @@ public class DestroyAi extends SpellAbilityAi {
 
         // Targeting
         if (abTgt != null) {
-            abTgt.resetTargets();
+            sa.resetTargets();
             list = CardLists.getTargetableCards(ai.getOpponent().getCardsIn(ZoneType.Battlefield), sa);
             list = CardLists.getValidCards(list, abTgt.getValidTgts(), source.getController(), source);
             if (sa.hasParam("AITgts")) {
@@ -113,11 +113,11 @@ public class DestroyAi extends SpellAbilityAi {
                 return false;
             }
             // target loop
-            while (abTgt.getNumTargeted() < abTgt.getMaxTargets(sa.getSourceCard(), sa)) {
+            while (sa.getTargets().getNumTargeted() < abTgt.getMaxTargets(sa.getSourceCard(), sa)) {
                 if (list.size() == 0) {
-                    if ((abTgt.getNumTargeted() < abTgt.getMinTargets(sa.getSourceCard(), sa))
-                            || (abTgt.getNumTargeted() == 0)) {
-                        abTgt.resetTargets();
+                    if ((sa.getTargets().getNumTargeted() < abTgt.getMinTargets(sa.getSourceCard(), sa))
+                            || (sa.getTargets().getNumTargeted() == 0)) {
+                        sa.resetTargets();
                         return false;
                     } else {
                         // TODO is this good enough? for up to amounts?
@@ -136,9 +136,9 @@ public class DestroyAi extends SpellAbilityAi {
                 }
 
                 if (choice == null) { // can't find anything left
-                    if ((abTgt.getNumTargeted() < abTgt.getMinTargets(sa.getSourceCard(), sa))
-                            || (abTgt.getNumTargeted() == 0)) {
-                        abTgt.resetTargets();
+                    if ((sa.getTargets().getNumTargeted() < abTgt.getMinTargets(sa.getSourceCard(), sa))
+                            || (sa.getTargets().getNumTargeted() == 0)) {
+                        sa.resetTargets();
                         return false;
                     } else {
                         // TODO is this good enough? for up to amounts?
@@ -146,7 +146,7 @@ public class DestroyAi extends SpellAbilityAi {
                     }
                 }
                 list.remove(choice);
-                abTgt.addTarget(choice);
+                sa.getTargets().add(choice);
             }
         } else {
             if (sa.hasParam("Defined")) {
@@ -164,7 +164,7 @@ public class DestroyAi extends SpellAbilityAi {
 
     @Override
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
-        final Target tgt = sa.getTarget();
+        final TargetRestrictions tgt = sa.getTargetRestrictions();
         final Card source = sa.getSourceCard();
         final boolean noRegen = sa.hasParam("NoRegen");
         final Player opp = ai.getOpponent();
@@ -178,7 +178,7 @@ public class DestroyAi extends SpellAbilityAi {
                 return false;
             }
 
-            tgt.resetTargets();
+            sa.resetTargets();
 
             List<Card> preferred = CardLists.getNotKeyword(list, "Indestructible");
             preferred = CardLists.filterControlledBy(preferred, opp);
@@ -200,12 +200,12 @@ public class DestroyAi extends SpellAbilityAi {
                 list.remove(c);
             }
 
-            while (tgt.getNumTargeted() < tgt.getMaxTargets(sa.getSourceCard(), sa)) {
+            while (sa.getTargets().getNumTargeted() < tgt.getMaxTargets(sa.getSourceCard(), sa)) {
                 if (preferred.size() == 0) {
-                    if ((tgt.getNumTargeted() == 0)
-                            || (tgt.getNumTargeted() < tgt.getMinTargets(sa.getSourceCard(), sa))) {
+                    if ((sa.getTargets().getNumTargeted() == 0)
+                            || (sa.getTargets().getNumTargeted() < tgt.getMinTargets(sa.getSourceCard(), sa))) {
                         if (!mandatory) {
-                            tgt.resetTargets();
+                            sa.resetTargets();
                             return false;
                         } else {
                             break;
@@ -222,12 +222,12 @@ public class DestroyAi extends SpellAbilityAi {
                     } else {
                         c = ComputerUtilCard.getMostExpensivePermanentAI(preferred, sa, false);
                     }
-                    tgt.addTarget(c);
+                    sa.getTargets().add(c);
                     preferred.remove(c);
                 }
             }
 
-            while (tgt.getNumTargeted() < tgt.getMinTargets(sa.getSourceCard(), sa)) {
+            while (sa.getTargets().getNumTargeted() < tgt.getMinTargets(sa.getSourceCard(), sa)) {
                 if (list.size() == 0) {
                     break;
                 } else {
@@ -237,12 +237,12 @@ public class DestroyAi extends SpellAbilityAi {
                     } else {
                         c = ComputerUtilCard.getCheapestPermanentAI(list, sa, false);
                     }
-                    tgt.addTarget(c);
+                    sa.getTargets().add(c);
                     list.remove(c);
                 }
             }
 
-            if (tgt.getNumTargeted() < tgt.getMinTargets(sa.getSourceCard(), sa)) {
+            if (sa.getTargets().getNumTargeted() < tgt.getMinTargets(sa.getSourceCard(), sa)) {
                 return false;
             }
         } else {

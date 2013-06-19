@@ -7,7 +7,7 @@ import org.apache.commons.lang3.StringUtils;
 import forge.Card;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.Target;
+import forge.card.spellability.TargetRestrictions;
 import forge.gui.GuiChoose;
 
 public class TapOrUntapEffect extends SpellAbilityEffect {
@@ -33,7 +33,7 @@ public class TapOrUntapEffect extends SpellAbilityEffect {
     public void resolve(SpellAbility sa) {
         final List<Card> tgtCards = getTargetCards(sa);
 
-        final Target tgt = sa.getTarget();
+        final TargetRestrictions tgt = sa.getTargetRestrictions();
 
         for (final Card tgtC : tgtCards) {
             if (tgtC.isInPlay() && ((tgt == null) || tgtC.canBeTargetedBy(sa))) {

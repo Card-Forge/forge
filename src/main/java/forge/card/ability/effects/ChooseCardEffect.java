@@ -12,7 +12,7 @@ import forge.card.CardType;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.Target;
+import forge.card.spellability.TargetRestrictions;
 import forge.game.Game;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
@@ -37,7 +37,7 @@ public class ChooseCardEffect extends SpellAbilityEffect {
         final Game game = sa.getActivatingPlayer().getGame();
         final ArrayList<Card> chosen = new ArrayList<Card>();
 
-        final Target tgt = sa.getTarget();
+        final TargetRestrictions tgt = sa.getTargetRestrictions();
         final List<Player> tgtPlayers = getTargetPlayers(sa);
 
         ZoneType choiceZone = ZoneType.Battlefield;

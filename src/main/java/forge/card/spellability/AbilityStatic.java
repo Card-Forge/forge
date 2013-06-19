@@ -44,10 +44,10 @@ public abstract class AbilityStatic extends Ability {
         super(sourceCard, manaCost);
     }
 
-    public AbilityStatic(final Card sourceCard, final Cost abCost, final Target tgt) {
+    public AbilityStatic(final Card sourceCard, final Cost abCost, final TargetRestrictions tgt) {
         super(sourceCard, abCost);
         if ((tgt != null) && tgt.doesTarget()) {
-            this.setTarget(tgt);
+            this.setTargetRestrictions(tgt);
         }
     }
 }

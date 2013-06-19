@@ -21,7 +21,7 @@ import forge.card.ability.SpellAbilityAi;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.Target;
+import forge.card.spellability.TargetRestrictions;
 import forge.card.staticability.StaticAbility;
 import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilCard;
@@ -60,9 +60,9 @@ public class AttachAi extends SpellAbilityAi {
         final boolean chance = r.nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn());
 
         // Attach spells always have a target
-        final Target tgt = sa.getTarget();
+        final TargetRestrictions tgt = sa.getTargetRestrictions();
         if (tgt != null) {
-            tgt.resetTargets();
+            sa.resetTargets();
             if (!attachPreference(sa, tgt, false)) {
                 return false;
             }
@@ -455,7 +455,7 @@ public class AttachAi extends SpellAbilityAi {
             final Card attachSource) {
         // AI For choosing a Card to Gain Control of.
 
-        if (sa.getTarget().canTgtPermanent()) {
+        if (sa.getTargetRestrictions().canTgtPermanent()) {
             // If can target all Permanents, and Life isn't in eminent danger,
             // grab Planeswalker first, then Creature
             // if Life < 5 grab Creature first, then Planeswalker. Lands,
@@ -613,7 +613,7 @@ public class AttachAi extends SpellAbilityAi {
         final Card card = sa.getSourceCard();
         // Check if there are any valid targets
         List<ITargetable> targets = new ArrayList<ITargetable>();
-        final Target tgt = sa.getTarget();
+        final TargetRestrictions tgt = sa.getTargetRestrictions();
         if (tgt == null) {
             targets = AbilityUtils.getDefinedObjects(sa.getSourceCard(), sa.getParam("Defined"), sa);
         } else {
@@ -678,8 +678,8 @@ public class AttachAi extends SpellAbilityAi {
      *            the mandatory
      * @return true, if successful
      */
-    private static boolean attachPreference(final SpellAbility sa, final Target tgt, final boolean mandatory) {
-        Object o;
+    private static boolean attachPreference(final SpellAbility sa, final TargetRestrictions tgt, final boolean mandatory) {
+        ITargetable o;
         if (tgt.canTgtPlayer()) {
             o = attachToPlayerAIPreferences(sa.getActivatingPlayer(), sa, mandatory);
         } else {
@@ -690,7 +690,7 @@ public class AttachAi extends SpellAbilityAi {
             return false;
         }
 
-        tgt.addTarget(o);
+        sa.getTargets().add(o);
         return true;
     }
 
@@ -866,7 +866,7 @@ public class AttachAi extends SpellAbilityAi {
      * @return the card
      */
     private static Card attachToCardAIPreferences(final Player aiPlayer, final SpellAbility sa, final boolean mandatory) {
-        final Target tgt = sa.getTarget();
+        final TargetRestrictions tgt = sa.getTargetRestrictions();
         final Card attachSource = sa.getSourceCard();
         // TODO AttachSource is currently set for the Source of the Spell, but
         // at some point can support attaching a different card

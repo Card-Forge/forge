@@ -6,7 +6,7 @@ import forge.Card;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.Target;
+import forge.card.spellability.TargetRestrictions;
 import forge.game.Game;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
@@ -16,7 +16,7 @@ public class CloneAi extends SpellAbilityAi {
 
     @Override
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
-        final Target tgt = sa.getTarget();
+        final TargetRestrictions tgt = sa.getTargetRestrictions();
         final Card source = sa.getSourceCard();
         final Game game = source.getGame();
 
@@ -85,7 +85,7 @@ public class CloneAi extends SpellAbilityAi {
                 return false;
             }
         } else {
-            tgt.resetTargets();
+            sa.resetTargets();
             useAbility &= cloneTgtAI(sa);
         }
 
@@ -97,7 +97,7 @@ public class CloneAi extends SpellAbilityAi {
         // AI should only activate this during Human's turn
         boolean chance = true;
 
-        if (sa.getTarget() != null) {
+        if (sa.usesTargeting()) {
             chance = cloneTgtAI(sa);
         }
 
@@ -110,7 +110,7 @@ public class CloneAi extends SpellAbilityAi {
 
         boolean chance = true;
 
-        if (sa.getTarget() != null) {
+        if (sa.usesTargeting()) {
             chance = cloneTgtAI(sa);
         }
 

@@ -7,7 +7,7 @@ import forge.Card;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.Target;
+import forge.card.spellability.TargetRestrictions;
 
 public class MustBlockEffect extends SpellAbilityEffect {
 
@@ -15,14 +15,8 @@ public class MustBlockEffect extends SpellAbilityEffect {
     public void resolve(SpellAbility sa) {
         final Card host = sa.getSourceCard();
 
-        List<Card> tgtCards;
-
-        final Target tgt = sa.getTarget();
-        if (tgt != null) {
-            tgtCards = tgt.getTargetCards();
-        } else {
-            tgtCards = AbilityUtils.getDefinedCards(sa.getSourceCard(), sa.getParam("Defined"), sa);
-        }
+        List<Card> tgtCards = getTargetCards(sa);
+        final TargetRestrictions tgt = sa.getTargetRestrictions();
 
         List<Card> cards;
         if (sa.hasParam("DefinedAttacker")) {

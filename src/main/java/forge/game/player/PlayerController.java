@@ -13,7 +13,7 @@ import forge.card.cost.Cost;
 import forge.card.mana.Mana;
 import forge.card.replacement.ReplacementEffect;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.Target;
+import forge.card.spellability.TargetChoices;
 import forge.deck.Deck;
 import forge.game.Game;
 import forge.game.GameType;
@@ -101,7 +101,7 @@ public abstract class PlayerController {
     public abstract Integer announceRequirements(SpellAbility ability, String announce, boolean allowZero);
     public abstract List<Card> choosePermanentsToSacrifice(SpellAbility sa, int min, int max, List<Card> validTargets, String message);
     public abstract List<Card> choosePermanentsToDestroy(SpellAbility sa, int min, int max, List<Card> validTargets, String message);
-    public abstract Target chooseTargets(SpellAbility ability);
+    public abstract TargetChoices chooseTargets(SpellAbility ability);
 
     public Card chooseSingleCardForEffect(List<Card> sourceList, SpellAbility sa, String title) { return chooseSingleCardForEffect(sourceList, sa, title, false); }
     public abstract Card chooseSingleCardForEffect(List<Card> sourceList, SpellAbility sa, String title, boolean isOptional);

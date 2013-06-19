@@ -11,7 +11,6 @@ import forge.CardPredicates.Presets;
 import forge.CounterType;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.Target;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
@@ -57,7 +56,6 @@ public class RepeatEachAi extends SpellAbilityAi {
             sa.setTargetCard(perms.get(0));
         } else if ("RemoveAllCounters".equals(logic)) {
             // Break Dark Depths
-            Target tgt = sa.getTarget();
             List<Card> depthsList = aiPlayer.getCardsIn(ZoneType.Battlefield, "Dark Depths");
             depthsList = CardLists.filter(depthsList, new Predicate<Card>() {
                 @Override
@@ -67,7 +65,7 @@ public class RepeatEachAi extends SpellAbilityAi {
             });
 
             if (depthsList.size() > 0) {
-                tgt.addTarget(depthsList.get(0));
+                sa.getTargets().add(depthsList.get(0));
                 return true;
             }
 
@@ -84,7 +82,7 @@ public class RepeatEachAi extends SpellAbilityAi {
                 return false;
             }
 
-            tgt.addTarget(list.get(0));
+            sa.getTargets().add(list.get(0));
         } else if ("BalanceLands".equals(logic)) {
             if (CardLists.filter(aiPlayer.getCardsIn(ZoneType.Battlefield), Presets.LANDS).size() >= 5) {
                 return false;

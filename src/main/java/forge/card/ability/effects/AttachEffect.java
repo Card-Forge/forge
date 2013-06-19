@@ -12,10 +12,11 @@ import forge.card.ability.AbilityUtils;
 import forge.card.ability.ApiType;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.Target;
+import forge.card.spellability.TargetRestrictions;
 import forge.game.Game;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
+import forge.util.Lang;
 
 public class AttachEffect extends SpellAbilityEffect {
 
@@ -38,7 +39,7 @@ public class AttachEffect extends SpellAbilityEffect {
         Card source = sa.getSourceCard();
         Card card = sa.getSourceCard();
 
-        final List<ITargetable> targets = getTargetObjects(sa);
+        final List<ITargetable> targets = getTargets(sa);
 
         if (sa.hasParam("Object")) {
             card = AbilityUtils.getDefinedCards(source, sa.getParam("Object"), sa).get(0);
@@ -61,13 +62,10 @@ public class AttachEffect extends SpellAbilityEffect {
 
         sb.append(" Attach to ");
 
-        final List<ITargetable> targets = getTargetObjects(sa);
+        final List<ITargetable> targets = getTargets(sa);
         // Should never allow more than one Attachment per card
 
-        for (final Object o : targets) {
-            sb.append(o).append(" ");
-        }
-
+        sb.append(Lang.joinHomogenous(targets));
         return sb.toString();
     }
 
@@ -179,7 +177,7 @@ public class AttachEffect extends SpellAbilityEffect {
         }
         aura.setActivatingPlayer(source.getController());
         final Game game = source.getGame();
-        final Target tgt = aura.getTarget();
+        final TargetRestrictions tgt = aura.getTargetRestrictions();
 
         Player p = source.getController();
         if (tgt.canTgtPlayer()) {

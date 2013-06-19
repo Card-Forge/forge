@@ -9,7 +9,7 @@ import forge.CardPredicates;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.Target;
+import forge.card.spellability.TargetRestrictions;
 import forge.game.Game;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -31,7 +31,7 @@ public class AnimateAi extends SpellAbilityAi {
      */
     @Override
     protected boolean canPlayAI(Player aiPlayer, SpellAbility sa) {
-        final Target tgt = sa.getTarget();
+        final TargetRestrictions tgt = sa.getTargetRestrictions();
         final Card source = sa.getSourceCard();
         final Game game = aiPlayer.getGame();
         
@@ -112,7 +112,7 @@ public class AnimateAi extends SpellAbilityAi {
                 return false;
             }
         } else {
-            tgt.resetTargets();
+            sa.resetTargets();
             if (!animateTgtAI(sa)) {
                 return false;
             }
@@ -125,8 +125,8 @@ public class AnimateAi extends SpellAbilityAi {
 
     @Override
     public boolean chkAIDrawback(SpellAbility sa, Player aiPlayer) {
-        if (sa.getTarget() != null) {
-            sa.getTarget().resetTargets();
+        if (sa.usesTargeting()) {
+            sa.resetTargets();
             if (!animateTgtAI(sa)) {
                 return false;
             }
@@ -151,7 +151,7 @@ public class AnimateAi extends SpellAbilityAi {
     @Override
     protected boolean doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
 
-        if (sa.getTarget() != null && !animateTgtAI(sa) && !mandatory) {
+        if (sa.usesTargeting() && !animateTgtAI(sa) && !mandatory) {
             return false;
         }
 

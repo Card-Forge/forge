@@ -21,8 +21,8 @@ import forge.card.cost.Cost;
 import forge.card.mana.Mana;
 import forge.card.replacement.ReplacementEffect;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.Target;
 import forge.card.spellability.TargetSelection;
+import forge.card.spellability.TargetChoices;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
@@ -440,15 +440,15 @@ public class PlayerControllerHuman extends PlayerController {
      * @see forge.game.player.PlayerController#chooseTargets(forge.card.spellability.SpellAbility, forge.card.spellability.SpellAbilityStackInstance)
      */
     @Override
-    public Target chooseTargets(SpellAbility ability) {
-        if (ability.getTarget() == null) {
+    public TargetChoices chooseTargets(SpellAbility ability) {
+        if (ability.getTargetRestrictions() == null) {
             return null;
         }
-        Target oldTarget = new Target(ability.getTarget());
+        TargetChoices oldTarget = ability.getTargets();
         TargetSelection select = new TargetSelection(ability);
-        ability.getTarget().resetTargets();
+        ability.resetTargets();
         if (select.chooseTargets()) {
-            return ability.getTarget();
+            return ability.getTargets();
         } else {
             // Return old target, since we had to reset them above
             return oldTarget;

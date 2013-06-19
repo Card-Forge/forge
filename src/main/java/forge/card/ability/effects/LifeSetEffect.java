@@ -7,7 +7,7 @@ import java.util.List;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.Target;
+import forge.card.spellability.TargetRestrictions;
 import forge.game.player.Player;
 import forge.gui.GuiChoose;
 
@@ -20,7 +20,7 @@ public class LifeSetEffect extends SpellAbilityEffect {
     public void resolve(SpellAbility sa) {
         final boolean redistribute = sa.hasParam("Redistribute");
         final int lifeAmount = redistribute ? 20 : AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("LifeAmount"), sa);
-        final Target tgt = sa.getTarget();
+        final TargetRestrictions tgt = sa.getTargetRestrictions();
         final List<Integer> lifetotals = new ArrayList<Integer>();
         
         if (redistribute) {

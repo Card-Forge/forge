@@ -108,10 +108,10 @@ public class SpellAbilityStackInstance {
         // Targeting info -- 29/06/11 Moved to after taking care of SubAbilities
         // because otherwise AF_DealDamage SubAbilities that use Defined$
         // Targeted breaks (since it's parents target is reset)
-        final Target target = sa.getTarget();
+        final TargetRestrictions target = sa.getTargetRestrictions();
         if (target != null) {
-            this.tc = target.getTargetChoices();
-            this.ability.getTarget().resetTargets();
+            this.tc = ability.getTargets();
+            this.ability.resetTargets();
         }
 
         final Card source = this.ability.getSourceCard();
@@ -134,10 +134,8 @@ public class SpellAbilityStackInstance {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public final SpellAbility getSpellAbility() {
-        if (this.ability.getTarget() != null) {
-            this.ability.getTarget().resetTargets();
-            this.ability.getTarget().setTargetChoices(this.tc);
-        }
+        this.ability.resetTargets();
+        this.ability.setTargets(tc);
         this.ability.setActivatingPlayer(activator);
 
         // Saved sub-SA needs to be reset on the way out
@@ -252,10 +250,10 @@ public class SpellAbilityStackInstance {
         return this.tc;
     }
 
-    public void updateTarget(Target target) {
+    public void updateTarget(TargetChoices target) {
         if (target != null) {
-            this.tc = target.getTargetChoices();
-            this.ability.setTarget(target);
+            this.tc = target;
+            this.ability.setTargets(tc);
             this.stackDescription = this.ability.getStackDescription();
         }
     }
@@ -271,7 +269,7 @@ public class SpellAbilityStackInstance {
         }
 
         while (compare != null && sub != null) {
-            TargetChoices choices = compare.getTarget() != null ? compare.getTarget().getTargetChoices() : null;
+            TargetChoices choices = compare.getTargetRestrictions() != null ? compare.getTargets() : null;
 
             if (choices != null && !choices.equals(sub.getTargetChoices())) {
                 return false;

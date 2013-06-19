@@ -7,7 +7,6 @@ import forge.CardLists;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.Target;
 import forge.game.Game;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
@@ -42,15 +41,7 @@ public class DestroyAllEffect extends SpellAbilityEffect {
         final Card card = sa.getSourceCard();
         final Game game = sa.getActivatingPlayer().getGame();
 
-        final Target tgt = sa.getTarget();
-        Player targetPlayer = null;
-        if (tgt != null) {
-            for (final Object o : tgt.getTargets()) {
-                if (o instanceof Player) {
-                    targetPlayer = (Player) o;
-                }
-            }
-        }
+        Player targetPlayer = sa.getTargets().getFirstTargetedPlayer();
 
         String valid = "";
 

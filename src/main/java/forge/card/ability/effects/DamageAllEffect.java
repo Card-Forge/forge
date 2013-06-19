@@ -8,7 +8,6 @@ import forge.CardLists;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.Target;
 import forge.game.Game;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
@@ -51,11 +50,7 @@ public class DamageAllEffect extends SpellAbilityEffect {
         final String damage = sa.getParam("NumDmg");
         final int dmg = AbilityUtils.calculateAmount(sa.getSourceCard(), damage, sa);
 
-        final Target tgt = sa.getTarget();
-        Player targetPlayer = null;
-        if (tgt != null) {
-            targetPlayer = tgt.getTargetPlayers().get(0);
-        }
+        Player targetPlayer = sa.getTargets().getFirstTargetedPlayer();
 
         String players = "";
         List<Card> list = new ArrayList<Card>();

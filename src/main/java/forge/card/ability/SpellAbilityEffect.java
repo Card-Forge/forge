@@ -1,20 +1,15 @@
 package forge.card.ability;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
 
 import org.apache.commons.lang3.StringUtils;
 
-import forge.Card;
-import forge.ITargetable;
+
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.Target;
-import forge.game.player.Player;
 
 /**
  * <p>
@@ -25,7 +20,7 @@ import forge.game.player.Player;
  * @version $Id: AbilityFactoryAlterLife.java 17656 2012-10-22 19:32:56Z Max mtg $
  */
 
-    public abstract class SpellAbilityEffect {
+    public abstract class SpellAbilityEffect extends SaTargetRountines {
 
         public abstract void resolve(final SpellAbility sa);
 
@@ -123,49 +118,4 @@ import forge.game.player.Player;
                 }
             }
         }
-
-        protected List<Card> getTargetCards(SpellAbility sa) {
-            final Target tgt = sa.getTarget();
-            return tgt != null ? tgt.getTargetCards() : AbilityUtils.getDefinedCards(sa.getSourceCard(), sa.getParam("Defined"), sa);
-        }
-
-        protected List<Player> getTargetPlayers(SpellAbility sa) {
-            return getTargetPlayers(sa, false, true);
-        }
-
-        protected List<Player> getTargetPlayersEmptyAsDefault(SpellAbility sa) {
-            return getTargetPlayers(sa, true, true);
-        }
-
-        protected List<Player> getDefinedPlayersBeforeTargetOnes(SpellAbility sa) {
-            return getTargetPlayers(sa, false, false);
-        }
-
-        // Each AF used its own preference in choosing target players:
-        // Some checked target first and params["Defined"] then - @see targetIsPreferred
-        // Some wanted empty list when params["Defined"] was not set - @see wantEmptyAsDefault
-        // Poor me had to gather it all in a single place
-        private static final List<Player> emptyPlayerList = Collections.unmodifiableList(new ArrayList<Player>());
-        private List<Player> getTargetPlayers(SpellAbility sa, final boolean wantEmptyAsDefault, final boolean targetIsPreferred) {
-            final Target tgt = sa.getTarget();
-            final String defined = sa.getParam("Defined");
-            if (tgt != null && (targetIsPreferred || (StringUtils.isEmpty(defined) && !wantEmptyAsDefault))) {
-                return tgt.getTargetPlayers();
-            }
-            if (StringUtils.isEmpty(defined) && wantEmptyAsDefault) {
-                return emptyPlayerList;
-            }
-            return AbilityUtils.getDefinedPlayers(sa.getSourceCard(), defined, sa);
-        }
-
-        protected List<SpellAbility> getTargetSpellAbilities(SpellAbility sa) {
-            final Target tgt = sa.getTarget();
-            return tgt != null ? tgt.getTargetSAs() : AbilityUtils.getDefinedSpellAbilities(sa.getSourceCard(), sa.getParam("Defined"), sa);
-        }
-
-        protected List<ITargetable> getTargetObjects(SpellAbility sa) {
-            final Target tgt = sa.getTarget();
-            return tgt != null ? tgt.getTargets() : AbilityUtils.getDefinedObjects(sa.getSourceCard(), sa.getParam("Defined"), sa);
-        }
-
     }

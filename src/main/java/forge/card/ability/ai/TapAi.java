@@ -7,7 +7,7 @@ import forge.Card;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.Target;
+import forge.card.spellability.TargetRestrictions;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -31,7 +31,7 @@ public class TapAi extends TapAiBase {
             return false;
         }
         
-        final Target tgt = sa.getTarget();
+        final TargetRestrictions tgt = sa.getTargetRestrictions();
         final Card source = sa.getSourceCard();
 
         final Random r = MyRandom.getRandom();
@@ -49,7 +49,7 @@ public class TapAi extends TapAiBase {
                 return false;
             }
         } else {
-            tgt.resetTargets();
+            sa.resetTargets();
             if (!tapPrefTargeting(ai, source, tgt, sa, false)) {
                 return false;
             }

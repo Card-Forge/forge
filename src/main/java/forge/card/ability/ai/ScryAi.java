@@ -4,7 +4,7 @@ import java.util.Random;
 
 import forge.card.ability.SpellAbilityAi;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.Target;
+import forge.card.spellability.TargetRestrictions;
 import forge.game.player.Player;
 import forge.util.MyRandom;
 
@@ -15,13 +15,13 @@ public class ScryAi extends SpellAbilityAi {
      */
     @Override
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
-        final Target tgt = sa.getTarget();
+        final TargetRestrictions tgt = sa.getTargetRestrictions();
 
         if (tgt != null) { // It doesn't appear that Scry ever targets
             // ability is targeted
-            tgt.resetTargets();
+            sa.resetTargets();
 
-            tgt.addTarget(ai);
+            sa.getTargets().add(ai);
         }
 
         return true;

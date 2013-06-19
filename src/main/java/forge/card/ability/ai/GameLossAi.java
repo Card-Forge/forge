@@ -2,7 +2,7 @@ package forge.card.ability.ai;
 
 import forge.card.ability.SpellAbilityAi;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.Target;
+import forge.card.spellability.TargetRestrictions;
 import forge.game.player.Player;
 
 public class GameLossAi extends SpellAbilityAi {
@@ -16,10 +16,10 @@ public class GameLossAi extends SpellAbilityAi {
         // Only one SA Lose the Game card right now, which is Door to
         // Nothingness
 
-        final Target tgt = sa.getTarget();
+        final TargetRestrictions tgt = sa.getTargetRestrictions();
         if (tgt != null) {
-            tgt.resetTargets();
-            tgt.addTarget(opp);
+            sa.resetTargets();
+            sa.getTargets().add(opp);
         }
 
         // In general, don't return true.
@@ -38,10 +38,10 @@ public class GameLossAi extends SpellAbilityAi {
             return false;
         }
 
-        final Target tgt = sa.getTarget();
+        final TargetRestrictions tgt = sa.getTargetRestrictions();
         if (tgt != null) {
-            tgt.resetTargets();
-            tgt.addTarget(ai.getOpponent());
+            sa.resetTargets();
+            sa.getTargets().add(ai.getOpponent());
         }
 
         return true;

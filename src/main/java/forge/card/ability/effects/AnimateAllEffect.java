@@ -14,7 +14,6 @@ import forge.card.ability.AbilityFactory;
 import forge.card.ability.AbilityUtils;
 import forge.card.replacement.ReplacementEffect;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.Target;
 import forge.card.staticability.StaticAbility;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerHandler;
@@ -121,16 +120,8 @@ public class AnimateAllEffect extends AnimateEffectBase {
         }
 
         List<Card> list;
-        List<Player> tgtPlayers = null;
-
-        final Target tgt = sa.getTarget();
-        if (tgt != null) {
-            tgtPlayers = tgt.getTargetPlayers();
-        } else if (sa.hasParam("Defined")) {
-            // use it
-            tgtPlayers = AbilityUtils.getDefinedPlayers(sa.getSourceCard(), sa.getParam("Defined"), sa);
-        }
-
+        List<Player> tgtPlayers = getTargetPlayers(sa);
+        
         if ((tgtPlayers == null) || tgtPlayers.isEmpty()) {
             list = game.getCardsIn(ZoneType.Battlefield);
         } else {

@@ -52,7 +52,7 @@ import forge.card.replacement.ReplacementResult;
 import forge.card.spellability.Ability;
 import forge.card.spellability.AbilityActivated;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.Target;
+import forge.card.spellability.TargetRestrictions;
 import forge.card.staticability.StaticAbility;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerType;
@@ -937,9 +937,9 @@ public class GameAction {
                     final GameEntity entity = c.getEnchanting();
                     final SpellAbility sa = c.getSpells().get(0);
 
-                    Target tgt = null;
+                    TargetRestrictions tgt = null;
                     if (sa != null) {
-                        tgt = sa.getTarget();
+                        tgt = sa.getTargetRestrictions();
                     }
 
                     if (entity instanceof Card) {

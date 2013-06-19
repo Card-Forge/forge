@@ -3,7 +3,7 @@ package forge.card.ability.ai;
 import forge.Card;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.Target;
+import forge.card.spellability.TargetRestrictions;
 import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilMana;
 import forge.game.phase.PhaseType;
@@ -40,13 +40,13 @@ public class ChooseCardNameAi extends SpellAbilityAi {
                 source.setSVar("PayX", Integer.toString(tokenSize));
             }
 
-            final Target tgt = sa.getTarget();
+            final TargetRestrictions tgt = sa.getTargetRestrictions();
             if (tgt != null) {
-                tgt.resetTargets();
+                sa.resetTargets();
                 if (tgt.canOnlyTgtOpponent()) {
-                    tgt.addTarget(ai.getOpponent());
+                    sa.getTargets().add(ai.getOpponent());
                 } else {
-                    tgt.addTarget(ai);
+                    sa.getTargets().add(ai);
                 }
             }
             return true;

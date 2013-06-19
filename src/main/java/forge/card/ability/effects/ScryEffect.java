@@ -10,7 +10,7 @@ import forge.Card;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.Target;
+import forge.card.spellability.TargetRestrictions;
 import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
@@ -44,7 +44,7 @@ public class ScryEffect extends SpellAbilityEffect {
             num = AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("ScryNum"), sa);
         }
 
-        final Target tgt = sa.getTarget();
+        final TargetRestrictions tgt = sa.getTargetRestrictions();
         final List<Player> tgtPlayers = getTargetPlayers(sa);
 
         for (final Player p : tgtPlayers) {

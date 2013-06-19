@@ -13,7 +13,7 @@ import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.cost.Cost;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.Target;
+import forge.card.spellability.TargetRestrictions;
 import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilCard;
 import forge.game.ai.ComputerUtilCost;
@@ -32,7 +32,7 @@ public class CountersPutAi extends SpellAbilityAi {
         // what the expected targets could be
         final Random r = MyRandom.getRandom();
         final Cost abCost = sa.getPayCosts();
-        final Target abTgt = sa.getTarget();
+        final TargetRestrictions abTgt = sa.getTargetRestrictions();
         final Card source = sa.getSourceCard();
         List<Card> list;
         Card choice = null;
@@ -89,7 +89,7 @@ public class CountersPutAi extends SpellAbilityAi {
 
         // Targeting
         if (abTgt != null) {
-            abTgt.resetTargets();
+            sa.resetTargets();
             // target loop
 
             list = CardLists.filter(player.getCardsIn(ZoneType.Battlefield), new Predicate<Card>() {
@@ -104,11 +104,11 @@ public class CountersPutAi extends SpellAbilityAi {
             if (list.size() < abTgt.getMinTargets(source, sa)) {
                 return false;
             }
-            while (abTgt.getNumTargeted() < abTgt.getMaxTargets(sa.getSourceCard(), sa)) {
+            while (sa.getTargets().getNumTargeted() < abTgt.getMaxTargets(sa.getSourceCard(), sa)) {
                 if (list.isEmpty()) {
-                    if ((abTgt.getNumTargeted() < abTgt.getMinTargets(sa.getSourceCard(), sa))
-                            || (abTgt.getNumTargeted() == 0)) {
-                        abTgt.resetTargets();
+                    if ((sa.getTargets().getNumTargeted() < abTgt.getMinTargets(sa.getSourceCard(), sa))
+                            || (sa.getTargets().getNumTargeted() == 0)) {
+                        sa.resetTargets();
                         return false;
                     } else {
                         // TODO is this good enough? for up to amounts?
@@ -123,9 +123,9 @@ public class CountersPutAi extends SpellAbilityAi {
                 }
 
                 if (choice == null) { // can't find anything left
-                    if ((abTgt.getNumTargeted() < abTgt.getMinTargets(sa.getSourceCard(), sa))
-                            || (abTgt.getNumTargeted() == 0)) {
-                        abTgt.resetTargets();
+                    if ((sa.getTargets().getNumTargeted() < abTgt.getMinTargets(sa.getSourceCard(), sa))
+                            || (sa.getTargets().getNumTargeted() == 0)) {
+                        sa.resetTargets();
                         return false;
                     } else {
                         // TODO is this good enough? for up to amounts?
@@ -134,7 +134,7 @@ public class CountersPutAi extends SpellAbilityAi {
                 }
 
                 list.remove(choice);
-                abTgt.addTarget(choice);
+                sa.getTargets().add(choice);
                 
                 if (divided) {
                     abTgt.addDividedAllocation(choice, amount);
@@ -175,7 +175,7 @@ public class CountersPutAi extends SpellAbilityAi {
     @Override
     public boolean chkAIDrawback(final SpellAbility sa, Player ai) {
         boolean chance = true;
-        final Target abTgt = sa.getTarget();
+        final TargetRestrictions abTgt = sa.getTargetRestrictions();
         final Card source = sa.getSourceCard();
         Card choice = null;
         final String type = sa.getParam("CounterType");
@@ -193,9 +193,9 @@ public class CountersPutAi extends SpellAbilityAi {
                 return false;
             }
 
-            abTgt.resetTargets();
+            sa.resetTargets();
             // target loop
-            while (abTgt.getNumTargeted() < abTgt.getMaxTargets(sa.getSourceCard(), sa)) {
+            while (sa.getTargets().getNumTargeted() < abTgt.getMaxTargets(sa.getSourceCard(), sa)) {
                 list = CardLists.filter(list, new Predicate<Card>() {
                     @Override
                     public boolean apply(final Card c) {
@@ -203,9 +203,9 @@ public class CountersPutAi extends SpellAbilityAi {
                     }
                 });
                 if (list.size() == 0) {
-                    if ((abTgt.getNumTargeted() < abTgt.getMinTargets(sa.getSourceCard(), sa))
-                            || (abTgt.getNumTargeted() == 0)) {
-                        abTgt.resetTargets();
+                    if ((sa.getTargets().getNumTargeted() < abTgt.getMinTargets(sa.getSourceCard(), sa))
+                            || (sa.getTargets().getNumTargeted() == 0)) {
+                        sa.resetTargets();
                         return false;
                     } else {
                         break;
@@ -219,9 +219,9 @@ public class CountersPutAi extends SpellAbilityAi {
                 }
 
                 if (choice == null) { // can't find anything left
-                    if ((abTgt.getNumTargeted() < abTgt.getMinTargets(sa.getSourceCard(), sa))
-                            || (abTgt.getNumTargeted() == 0)) {
-                        abTgt.resetTargets();
+                    if ((sa.getTargets().getNumTargeted() < abTgt.getMinTargets(sa.getSourceCard(), sa))
+                            || (sa.getTargets().getNumTargeted() == 0)) {
+                        sa.resetTargets();
                         return false;
                     } else {
                         // TODO is this good enough? for up to amounts?
@@ -229,7 +229,7 @@ public class CountersPutAi extends SpellAbilityAi {
                     }
                 }
                 list.remove(choice);
-                abTgt.addTarget(choice);
+                sa.getTargets().add(choice);
                 if (divided) {
                     abTgt.addDividedAllocation(choice, amount);
                     break;
@@ -242,7 +242,7 @@ public class CountersPutAi extends SpellAbilityAi {
 
     @Override
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
-        final Target abTgt = sa.getTarget();
+        final TargetRestrictions abTgt = sa.getTargetRestrictions();
         final Card source = sa.getSourceCard();
         // boolean chance = true;
         boolean preferred = true;
@@ -316,7 +316,7 @@ public class CountersPutAi extends SpellAbilityAi {
 
             // TODO - I think choice can be null here. Is that ok for
             // addTarget()?
-            abTgt.addTarget(choice);
+            sa.getTargets().add(choice);
         }
 
         return true;

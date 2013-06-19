@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 
 import com.google.common.base.Predicates;
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 
 import forge.Card;
 import forge.CardCharacteristicName;
@@ -18,7 +20,7 @@ import forge.card.ability.ai.ChangeZoneAi;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityStackInstance;
-import forge.card.spellability.Target;
+import forge.card.spellability.TargetRestrictions;
 import forge.card.trigger.TriggerType;
 import forge.game.Game;
 import forge.game.player.Player;
@@ -70,15 +72,15 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         sb.append(" ");
 
         // Player whose cards will change zones
-        List<Player> fetchers = new ArrayList<Player>();
+        List<Player> fetchers = null;
         if (sa.hasParam("DefinedPlayer")) {
             fetchers = AbilityUtils.getDefinedPlayers(sa.getSourceCard(), sa.getParam("DefinedPlayer"), sa);
         }
-        if (fetchers.isEmpty() && sa.hasParam("ValidTgts") && sa.getTarget() != null) {
-            fetchers = sa.getTarget().getTargetPlayers();
+        if (fetchers == null && sa.hasParam("ValidTgts") && sa.usesTargeting()) {
+            fetchers = Lists.newArrayList(sa.getTargets().getTargetPlayers());
         }
-        if (fetchers.isEmpty()) {
-            fetchers.add(sa.getSourceCard().getController());
+        if (fetchers == null) {
+            fetchers = Lists.newArrayList(sa.getSourceCard().getController());
         }
 
         final String fetcherNames = Lang.joinHomogenous(fetchers, Player.Accessors.FN_GET_NAME);
@@ -238,15 +240,12 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
 
         final StringBuilder sbTargets = new StringBuilder();
 
-        List<Card> tgts;
-        if (sa.getTarget() != null) {
-            tgts = sa.getTarget().getTargetCards();
+        Iterable<Card> tgts;
+        if (sa.usesTargeting()) {
+            tgts = sa.getTargets().getTargetCards();
         } else {
             // otherwise add self to list and go from there
-            tgts = new ArrayList<Card>();
-            for (final Card c : sa.knownDetermineDefined(sa.getParam("Defined"))) {
-                tgts.add(c);
-            }
+            tgts = sa.knownDetermineDefined(sa.getParam("Defined"));
         }
 
         for (final Card c : tgts) {
@@ -255,7 +254,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
 
         final String targetname = sbTargets.toString();
 
-        final String pronoun = tgts.size() > 1 ? " their " : " its ";
+        final String pronoun = Iterables.size(tgts) > 1 ? " their " : " its ";
 
         final String fromGraveyard = " from the graveyard";
 
@@ -367,11 +366,9 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
      * @param sa
      *            a {@link forge.card.spellability.SpellAbility} object.
      */
-    private static void changeKnownOriginResolve(final SpellAbility sa) {
-        List<Card> tgtCards;
-        List<SpellAbility> sas;
-
-        final Target tgt = sa.getTarget();
+    private void changeKnownOriginResolve(final SpellAbility sa) {
+        Iterable<Card> tgtCards = getTargetCards(sa);
+        final TargetRestrictions tgt = sa.getTargetRestrictions();
         final Player player = sa.getActivatingPlayer();
         final Card hostCard = sa.getSourceCard();
         final Game game = player.getGame();
@@ -379,23 +376,8 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         final ZoneType destination = ZoneType.smartValueOf(sa.getParam("Destination"));
         final List<ZoneType> origin = ZoneType.listValueOf(sa.getParam("Origin"));
 
-        if (tgt != null) {
-            tgtCards = tgt.getTargetCards();
-        } else {
-            tgtCards = new ArrayList<Card>();
-            for (final Card c : AbilityUtils.getDefinedCards(hostCard, sa.getParam("Defined"), sa)) {
-                tgtCards.add(c);
-            }
-        }
-
         // changing zones for spells on the stack
-        if (tgt != null) {
-            sas = tgt.getTargetSAs();
-        } else {
-            sas = AbilityUtils.getDefinedSpellAbilities(hostCard, sa.getParam("Defined"), sa);
-        }
-
-        for (final SpellAbility tgtSA : sas) {
+        for (final SpellAbility tgtSA : getTargetSpells(sa)) {
             if (!tgtSA.isSpell()) { // Catch any abilities or triggers that slip through somehow
                 continue;
             }
@@ -422,135 +404,134 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
 
         boolean optional = sa.hasParam("Optional");
 
-        if (tgtCards.size() != 0) {
-            for (final Card tgtC : tgtCards) {
-                if (tgt != null && tgtC.isInPlay() && !tgtC.canBeTargetedBy(sa)) {
-                    continue;
+
+        for (final Card tgtC : tgtCards) {
+            if (tgt != null && tgtC.isInPlay() && !tgtC.canBeTargetedBy(sa)) {
+                continue;
+            }
+
+            final String prompt = String.format("Do you want to move %s from %s to %s?", tgtC, origin, destination);
+            if (optional && false == player.getController().confirmAction(sa, null, prompt) )
+                continue;
+
+            final Zone originZone = game.getZoneOf(tgtC);
+
+            // if Target isn't in the expected Zone, continue
+
+            if (originZone == null || !origin.contains(originZone.getZoneType())) {
+                continue;
+            }
+
+            Card movedCard = null;
+
+            if (destination.equals(ZoneType.Library)) {
+                // library position is zero indexed
+                final int libraryPosition = sa.hasParam("LibraryPosition") ? Integer.parseInt(sa.getParam("LibraryPosition")) : 0;
+
+                movedCard = game.getAction().moveToLibrary(tgtC, libraryPosition);
+
+                // for things like Gaea's Blessing
+                if (sa.hasParam("Shuffle")) {
+                    tgtC.getOwner().shuffle();
                 }
+            } else {
+                if (destination.equals(ZoneType.Battlefield)) {
+                    if (sa.hasParam("Tapped") || sa.hasParam("Ninjutsu")) {
+                        tgtC.setTapped(true);
+                    }
+                    if (sa.hasParam("GainControl")) {
+                        if (sa.hasParam("NewController")) {
+                            final Player p = AbilityUtils.getDefinedPlayers(hostCard, sa.getParam("NewController"), sa).get(0);
+                            tgtC.setController(p, game.getNextTimestamp());
+                        } else {
+                            tgtC.setController(player, game.getNextTimestamp());
+                        }
+                    }
+                    if (sa.hasParam("AttachedTo")) {
+                        List<Card> list = AbilityUtils.getDefinedCards(hostCard, sa.getParam("AttachedTo"), sa);
+                        if (list.isEmpty()) {
+                            list = game.getCardsIn(ZoneType.Battlefield);
+                            list = CardLists.getValidCards(list, sa.getParam("AttachedTo"), tgtC.getController(), tgtC);
+                        }
+                        if (!list.isEmpty()) {
+                            Card attachedTo = player.getController().chooseSingleCardForEffect(list, sa, tgtC + " - Select a card to attach to.");
+                            if (tgtC.isAura()) {
+                                if (tgtC.isEnchanting()) {
+                                    // If this Card is already Enchanting something, need
+                                    // to unenchant it, then clear out the commands
+                                    final GameEntity oldEnchanted = tgtC.getEnchanting();
+                                    tgtC.removeEnchanting(oldEnchanted);
+                                }
+                                tgtC.enchantEntity(attachedTo);
+                            } else if (tgtC.isEquipment()) { //Equipment
+                                if (tgtC.isEquipping()) {
+                                    final Card oldEquiped = tgtC.getEquippingCard();
+                                    tgtC.removeEquipping(oldEquiped);
+                                }
+                                tgtC.equipCard(attachedTo);
+                            } else { // fortification
+                                if (tgtC.isFortifying()) {
+                                    final Card oldFortified = tgtC.getFortifyingCard();
+                                    tgtC.removeFortifying(oldFortified);
+                                }
+                                tgtC.fortifyCard(attachedTo);
+                            }
+                        } else { // When it should enter the battlefield attached to an illegal permanent it fails
+                            continue;
+                        }
+                    }
 
-                final String prompt = String.format("Do you want to move %s from %s to %s?", tgtC, origin, destination);
-                if (optional && false == player.getController().confirmAction(sa, null, prompt) )
-                    continue;
+                    // Auras without Candidates stay in their current
+                    // location
+                    if (tgtC.isAura()) {
+                        final SpellAbility saAura = AttachEffect.getAttachSpellAbility(tgtC);
+                        saAura.setActivatingPlayer(sa.getActivatingPlayer());
+                        if (!saAura.getTargetRestrictions().hasCandidates(saAura, false)) {
+                            continue;
+                        }
+                    }
 
-                final Zone originZone = game.getZoneOf(tgtC);
+                    movedCard = game.getAction().moveTo(tgtC.getController().getZone(destination), tgtC);
 
-                // if Target isn't in the expected Zone, continue
-
-                if (originZone == null || !origin.contains(originZone.getZoneType())) {
-                    continue;
-                }
-
-                Card movedCard = null;
-
-                if (destination.equals(ZoneType.Library)) {
-                    // library position is zero indexed
-                    final int libraryPosition = sa.hasParam("LibraryPosition") ? Integer.parseInt(sa.getParam("LibraryPosition")) : 0;
-
-                    movedCard = game.getAction().moveToLibrary(tgtC, libraryPosition);
-
-                    // for things like Gaea's Blessing
-                    if (sa.hasParam("Shuffle")) {
-                        tgtC.getOwner().shuffle();
+                    if (sa.hasParam("Ninjutsu") || sa.hasParam("Attacking")) {
+                        // What should they attack?
+                        // TODO Ninjutsu needs to actually select the Defender, instead of auto selecting player
+                        List<GameEntity> defenders = game.getCombat().getDefenders();
+                        if (!defenders.isEmpty()) { 
+                            // Blockeres are already declared, set this to unblocked
+                            game.getCombat().addAttacker(tgtC, defenders.get(0), false);
+                        }
+                    }
+                    if (sa.hasParam("Tapped") || sa.hasParam("Ninjutsu")) {
+                        tgtC.setTapped(true);
                     }
                 } else {
-                    if (destination.equals(ZoneType.Battlefield)) {
-                        if (sa.hasParam("Tapped") || sa.hasParam("Ninjutsu")) {
-                            tgtC.setTapped(true);
-                        }
-                        if (sa.hasParam("GainControl")) {
-                            if (sa.hasParam("NewController")) {
-                                final Player p = AbilityUtils.getDefinedPlayers(hostCard, sa.getParam("NewController"), sa).get(0);
-                                tgtC.setController(p, game.getNextTimestamp());
-                            } else {
-                                tgtC.setController(player, game.getNextTimestamp());
-                            }
-                        }
-                        if (sa.hasParam("AttachedTo")) {
-                            List<Card> list = AbilityUtils.getDefinedCards(hostCard, sa.getParam("AttachedTo"), sa);
-                            if (list.isEmpty()) {
-                                list = game.getCardsIn(ZoneType.Battlefield);
-                                list = CardLists.getValidCards(list, sa.getParam("AttachedTo"), tgtC.getController(), tgtC);
-                            }
-                            if (!list.isEmpty()) {
-                                Card attachedTo = player.getController().chooseSingleCardForEffect(list, sa, tgtC + " - Select a card to attach to.");
-                                if (tgtC.isAura()) {
-                                    if (tgtC.isEnchanting()) {
-                                        // If this Card is already Enchanting something, need
-                                        // to unenchant it, then clear out the commands
-                                        final GameEntity oldEnchanted = tgtC.getEnchanting();
-                                        tgtC.removeEnchanting(oldEnchanted);
-                                    }
-                                    tgtC.enchantEntity(attachedTo);
-                                } else if (tgtC.isEquipment()) { //Equipment
-                                    if (tgtC.isEquipping()) {
-                                        final Card oldEquiped = tgtC.getEquippingCard();
-                                        tgtC.removeEquipping(oldEquiped);
-                                    }
-                                    tgtC.equipCard(attachedTo);
-                                } else { // fortification
-                                    if (tgtC.isFortifying()) {
-                                        final Card oldFortified = tgtC.getFortifyingCard();
-                                        tgtC.removeFortifying(oldFortified);
-                                    }
-                                    tgtC.fortifyCard(attachedTo);
-                                }
-                            } else { // When it should enter the battlefield attached to an illegal permanent it fails
-                                continue;
-                            }
-                        }
-
-                        // Auras without Candidates stay in their current
-                        // location
-                        if (tgtC.isAura()) {
-                            final SpellAbility saAura = AttachEffect.getAttachSpellAbility(tgtC);
-                            saAura.setActivatingPlayer(sa.getActivatingPlayer());
-                            if (!saAura.getTarget().hasCandidates(saAura, false)) {
-                                continue;
-                            }
-                        }
-
-                        movedCard = game.getAction().moveTo(tgtC.getController().getZone(destination), tgtC);
-
-                        if (sa.hasParam("Ninjutsu") || sa.hasParam("Attacking")) {
-                            // What should they attack?
-                            // TODO Ninjutsu needs to actually select the Defender, instead of auto selecting player
-                            List<GameEntity> defenders = game.getCombat().getDefenders();
-                            if (!defenders.isEmpty()) { 
-                                // Blockeres are already declared, set this to unblocked
-                                game.getCombat().addAttacker(tgtC, defenders.get(0), false);
-                            }
-                        }
-                        if (sa.hasParam("Tapped") || sa.hasParam("Ninjutsu")) {
-                            tgtC.setTapped(true);
-                        }
-                    } else {
-                        movedCard = game.getAction().moveTo(destination, tgtC);
-                        // If a card is Exiled from the stack, remove its spells from the stack
-                        if (sa.hasParam("Fizzle")) {
-                            ArrayList<SpellAbility> spells = tgtC.getSpellAbilities();
-                            for (SpellAbility spell : spells) {
-                                if (tgtC.isInZone(ZoneType.Exile)) {
-                                    final SpellAbilityStackInstance si = game.getStack().getInstanceFromSpellAbility(spell);
-                                    if (si != null) { 
-                                        game.getStack().remove(si);
-                                    }
+                    movedCard = game.getAction().moveTo(destination, tgtC);
+                    // If a card is Exiled from the stack, remove its spells from the stack
+                    if (sa.hasParam("Fizzle")) {
+                        ArrayList<SpellAbility> spells = tgtC.getSpellAbilities();
+                        for (SpellAbility spell : spells) {
+                            if (tgtC.isInZone(ZoneType.Exile)) {
+                                final SpellAbilityStackInstance si = game.getStack().getInstanceFromSpellAbility(spell);
+                                if (si != null) { 
+                                    game.getStack().remove(si);
                                 }
                             }
-                        }
-                        if (sa.hasParam("ExileFaceDown")) {
-                            movedCard.setState(CardCharacteristicName.FaceDown);
                         }
                     }
+                    if (sa.hasParam("ExileFaceDown")) {
+                        movedCard.setState(CardCharacteristicName.FaceDown);
+                    }
                 }
-                if (remember != null) {
-                    hostCard.addRemembered(movedCard);
-                }
-                if (forget != null) {
-                    hostCard.getRemembered().remove(movedCard);
-                }
-                if (imprint != null) {
-                    hostCard.addImprinted(movedCard);
-                }
+            }
+            if (remember != null) {
+                hostCard.addRemembered(movedCard);
+            }
+            if (forget != null) {
+                hostCard.getRemembered().remove(movedCard);
+            }
+            if (imprint != null) {
+                hostCard.addImprinted(movedCard);
             }
         }
     }
@@ -582,8 +563,8 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         Player chooser = null;
         if (sa.hasParam("Chooser")) {
             final String choose = sa.getParam("Chooser");
-            if (choose.equals("Targeted") && (sa.getTarget().getTargetPlayers() != null)) {
-                chooser = sa.getTarget().getTargetPlayers().get(0);
+            if (choose.equals("Targeted") && sa.getTargets().isTargetingAnyPlayer()) {
+                chooser = sa.getTargets().getFirstTargetedPlayer();
             } else {
                 chooser = AbilityUtils.getDefinedPlayers(sa.getSourceCard(), choose, sa).get(0);
             }
@@ -621,9 +602,9 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         final boolean optional = sa.hasParam("Optional");
         final Game game = player.getGame();
 
-        final Target tgt = sa.getTarget();
+        final TargetRestrictions tgt = sa.getTargetRestrictions();
         if (tgt != null) {
-            final List<Player> players = tgt.getTargetPlayers();
+            final List<Player> players = Lists.newArrayList(sa.getTargets().getTargetPlayers());
             player = sa.hasParam("DefinedPlayer") ? player : players.get(0);
             if (players.contains(player) && !player.canBeTargetedBy(sa)) {
                 return;

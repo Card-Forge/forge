@@ -8,7 +8,7 @@ import forge.CardLists;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.Target;
+import forge.card.spellability.TargetRestrictions;
 import forge.game.Game;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
@@ -22,7 +22,7 @@ public class PhasesAi extends SpellAbilityAi {
     @Override
     protected boolean canPlayAI(Player aiPlayer, SpellAbility sa) {
         // This still needs to be fleshed out
-        final Target tgt = sa.getTarget();
+        final TargetRestrictions tgt = sa.getTargetRestrictions();
         final Card source = sa.getSourceCard();
 
         final Random r = MyRandom.getRandom();
@@ -51,7 +51,7 @@ public class PhasesAi extends SpellAbilityAi {
 
     @Override
     protected boolean doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
-        final Target tgt = sa.getTarget();
+        final TargetRestrictions tgt = sa.getTargetRestrictions();
 
         if (tgt == null) {
             return mandatory;
@@ -69,7 +69,7 @@ public class PhasesAi extends SpellAbilityAi {
 
     @Override
     public boolean chkAIDrawback(SpellAbility sa, Player aiPlayer) {
-        final Target tgt = sa.getTarget();
+        final TargetRestrictions tgt = sa.getTargetRestrictions();
 
         boolean randomReturn = true;
 
@@ -89,7 +89,7 @@ public class PhasesAi extends SpellAbilityAi {
      * </p>
      * 
      * @param tgt
-     *            a {@link forge.card.spellability.Target} object.
+     *            a {@link forge.card.spellability.TargetRestrictions} object.
      * @param af
      *            a {@link forge.card.ability.AbilityFactory} object.
      * @param sa
@@ -98,7 +98,7 @@ public class PhasesAi extends SpellAbilityAi {
      *            a boolean.
      * @return a boolean.
      */
-    private boolean phasesPrefTargeting(final Target tgt, final SpellAbility sa,
+    private boolean phasesPrefTargeting(final TargetRestrictions tgt, final SpellAbility sa,
             final boolean mandatory) {
         // Card source = sa.getSourceCard();
 
@@ -135,7 +135,7 @@ public class PhasesAi extends SpellAbilityAi {
      */
     private boolean phasesUnpreferredTargeting(final Game game, final SpellAbility sa, final boolean mandatory) {
         final Card source = sa.getSourceCard();
-        final Target tgt = sa.getTarget();
+        final TargetRestrictions tgt = sa.getTargetRestrictions();
 
         List<Card> list = game.getCardsIn(ZoneType.Battlefield);
         list = CardLists.getTargetableCards(CardLists.getValidCards(list, tgt.getValidTgts(), source.getController(), source), sa);

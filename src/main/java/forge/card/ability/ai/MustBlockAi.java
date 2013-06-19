@@ -10,7 +10,7 @@ import forge.CardPredicates;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.Target;
+import forge.card.spellability.TargetRestrictions;
 import forge.game.ai.ComputerUtilCard;
 import forge.game.ai.ComputerUtilCombat;
 import forge.game.phase.CombatUtil;
@@ -35,7 +35,7 @@ public class MustBlockAi extends SpellAbilityAi {
     @Override
     protected boolean doTriggerAINoCost(final Player ai, SpellAbility sa, boolean mandatory) {
         final Card source = sa.getSourceCard();
-        final Target abTgt = sa.getTarget();
+        final TargetRestrictions abTgt = sa.getTargetRestrictions();
 
         // only use on creatures that can attack
         if (!ai.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2)) {
@@ -89,7 +89,7 @@ public class MustBlockAi extends SpellAbilityAi {
             if (blocker == null) {
                 return false;
             }
-            abTgt.addTarget(blocker);
+            sa.getTargets().add(blocker);
             chance = true;
         } else {
             return false;

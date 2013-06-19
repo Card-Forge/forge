@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.google.common.base.Predicate;
+import com.google.common.collect.Lists;
 
 import forge.Card;
 import forge.CardLists;
@@ -51,8 +52,8 @@ public class TargetSelection {
         this.ability = sa;
     }
 
-    private final Target getTgt() {
-        return this.ability.getTarget();
+    private final TargetRestrictions getTgt() {
+        return this.ability.getTargetRestrictions();
     }
 
     private boolean bTargetingDone = false;
@@ -65,14 +66,14 @@ public class TargetSelection {
      */
 
     public final boolean chooseTargets() {
-        Target tgt = getTgt();
+        TargetRestrictions tgt = getTgt();
         final boolean canTarget = tgt != null && tgt.doesTarget();
         if( !canTarget )
             throw new RuntimeException("TargetSelection.chooseTargets called for ability that does not target - " + ability);
         
         final int minTargets = tgt.getMinTargets(ability.getSourceCard(), ability);
         final int maxTargets = tgt.getMaxTargets(ability.getSourceCard(), ability);
-        final int numTargeted = tgt.getNumTargeted();
+        final int numTargeted = ability.getTargets().getNumTargeted();
 
         boolean hasEnoughTargets = minTargets == 0 || numTargeted >= minTargets;
         boolean hasAllTargets = numTargeted == maxTargets && maxTargets > 0;
@@ -96,13 +97,10 @@ public class TargetSelection {
         
         final boolean choiceResult;
         final boolean random = tgt.isRandomTarget();
-        final Object defined = tgt.getDefinedTarget();
         if (random) {
-            List<Object> candidates = tgt.getAllCandidates(this.ability, true);
-            Object choice = Aggregates.random(candidates);
-            return tgt.addTarget(choice);
-        } else if (defined != null) {
-            return tgt.addTarget(defined);
+            List<ITargetable> candidates = tgt.getAllCandidates(this.ability, true);
+            ITargetable choice = Aggregates.random(candidates);
+            return ability.getTargets().add(choice);
         } else if (zone.size() == 1 && zone.get(0) == ZoneType.Stack) {
             // If Zone is Stack, the choices are handled slightly differently.
             // Handle everything inside function due to interaction with StackInstance
@@ -137,7 +135,7 @@ public class TargetSelection {
      * @return 
      */
     private final List<Card> getValidCardsToTarget() {
-        final Target tgt = this.getTgt();
+        final TargetRestrictions tgt = this.getTgt();
         final Game game = ability.getActivatingPlayer().getGame();
         final List<ZoneType> zone = tgt.getZone();
 
@@ -163,7 +161,7 @@ public class TargetSelection {
         }
 
         // Remove cards already targeted
-        final List<Card> targeted = tgt.getTargetCards();
+        final List<Card> targeted = Lists.newArrayList(ability.getTargets().getTargetCards());
         for (final Card c : targeted) {
             if (choices.contains(c)) {
                 choices.remove(c);
@@ -323,7 +321,7 @@ public class TargetSelection {
         }
         
         if (chosen instanceof Card )
-            this.getTgt().addTarget(chosen);
+            ability.getTargets().add((Card)chosen);
         return true;
     }
 
@@ -336,7 +334,7 @@ public class TargetSelection {
      *            a boolean.
      */
     private final boolean chooseCardFromStack(final boolean mandatory) {
-        final Target tgt = this.getTgt();
+        final TargetRestrictions tgt = this.getTgt();
         final String message = tgt.getVTSelection();
         // Find what's targetable, then allow human to choose
         final List<Object> selectOptions = new ArrayList<Object>();
@@ -346,7 +344,7 @@ public class TargetSelection {
             SpellAbility abilityOnStack = si.getSpellAbility();
             if (ability.equals(abilityOnStack)) {
                 // By peeking at stack item, target is set to its SI state. So set it back before adding targets
-                tgt.resetTargets();
+                ability.resetTargets();
             }
             else if (ability.canTargetSpellAbility(abilityOnStack)) {
                 selectOptions.add(abilityOnStack);
@@ -372,7 +370,7 @@ public class TargetSelection {
                     return false;
                 }
                 if (madeChoice instanceof SpellAbility) {
-                    tgt.addTarget(madeChoice);
+                    ability.getTargets().add((SpellAbility)madeChoice);
                 } else // 'FINISH TARGETING' chosen 
                     bTargetingDone = true;
             }

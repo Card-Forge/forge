@@ -11,7 +11,7 @@ import forge.card.ability.SpellAbilityEffect;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.Ability;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.Target;
+import forge.card.spellability.TargetRestrictions;
 import forge.card.trigger.TriggerType;
 import forge.game.Game;
 
@@ -33,7 +33,7 @@ public class BecomesBlockedEffect extends SpellAbilityEffect {
     public void resolve(SpellAbility sa) {
 
         final Game game = sa.getActivatingPlayer().getGame();
-        final Target tgt = sa.getTarget();
+        final TargetRestrictions tgt = sa.getTargetRestrictions();
         for (final Card c : getTargetCards(sa)) {
             if ((tgt == null) || c.canBeTargetedBy(sa)) {
                 game.getCombat().setBlocked(c);

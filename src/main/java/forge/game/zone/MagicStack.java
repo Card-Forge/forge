@@ -51,7 +51,7 @@ import forge.card.spellability.OptionalCost;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityStackInstance;
-import forge.card.spellability.Target;
+import forge.card.spellability.TargetRestrictions;
 import forge.card.spellability.TargetChoices;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerType;
@@ -670,9 +670,9 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         // Can't fizzle unless there are some targets
         boolean fizzle = false;
 
-        Target tgt = sa.getTarget();
+        TargetRestrictions tgt = sa.getTargetRestrictions();
         if (tgt != null) {
-            if (tgt.getMinTargets(source, sa) == 0 && tgt.getNumTargeted() == 0) {
+            if (tgt.getMinTargets(source, sa) == 0 && sa.getTargets().getNumTargeted() == 0) {
                 // Nothing targeted, and nothing needs to be targeted.
             }
             else {
@@ -680,39 +680,22 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
                 fizzle = true;
                 // With multi-targets, as long as one target is still legal,
                 // we'll try to go through as much as possible
-                final List<ITargetable> tgts = tgt.getTargets();
-                final TargetChoices choices = tgt.getTargetChoices();
-                for (final Object o : tgts) {
+                final TargetChoices choices = sa.getTargets();
+                for (final ITargetable o : sa.getTargets().getTargets()) {
                     boolean invalidTarget = false;
-                    if (o instanceof Player) {
-                        final Player p = (Player) o;
-                        invalidTarget = !(p.canBeTargetedBy(sa));
-                        // TODO Remove target?
-                        if (invalidTarget) {
-                            choices.removeTarget(p);
-                        }
-                    }
-                    else if (o instanceof Card) {
+                    if (o instanceof Card) {
                         final Card card = (Card) o;
                         Card current = game.getCardState(card);
-
                         invalidTarget = current.getTimestamp() != card.getTimestamp();
-
                         invalidTarget |= !(CardFactoryUtil.isTargetStillValid(sa, card));
+                    } else {
+                        invalidTarget = !o.canBeTargetedBy(sa);
+                    }
+                    // Remove targets
+                    if (invalidTarget) {
+                        choices.remove(o);
+                    }
 
-                        if (invalidTarget) {
-                            choices.removeTarget(card);
-                        }
-                        // Remove targets
-                    }
-                    else if (o instanceof SpellAbility) {
-                        final SpellAbility tgtSA = (SpellAbility) o;
-                        invalidTarget = !(sa.canTargetSpellAbility(tgtSA));
-                        // TODO Remove target?
-                        if (invalidTarget) {
-                            choices.removeTarget(tgtSA);
-                        }
-                    }
                     fizzle &= invalidTarget;
                 }
             }

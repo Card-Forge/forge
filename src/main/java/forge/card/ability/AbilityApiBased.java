@@ -11,7 +11,7 @@ import forge.card.cardfactory.CardFactory;
 import forge.card.cost.Cost;
 import forge.card.spellability.AbilityActivated;
 import forge.card.spellability.AbilityManaPart;
-import forge.card.spellability.Target;
+import forge.card.spellability.TargetRestrictions;
 import forge.game.player.Player;
 
 public class AbilityApiBased extends AbilityActivated {
@@ -20,7 +20,7 @@ public class AbilityApiBased extends AbilityActivated {
 
     private static final long serialVersionUID = -4183793555528531978L;
 
-    public AbilityApiBased(ApiType api0, Card sourceCard, Cost abCost, Target tgt, Map<String, String> params0) {
+    public AbilityApiBased(ApiType api0, Card sourceCard, Cost abCost, TargetRestrictions tgt, Map<String, String> params0) {
         super(sourceCard, abCost, tgt);
         params = params0;
         api = api0;
@@ -48,7 +48,7 @@ public class AbilityApiBased extends AbilityActivated {
      */
     @Override
     public AbilityActivated getCopy() {
-        Target tgt = getTarget() == null ? null : new Target(getTarget());
+        TargetRestrictions tgt = getTargetRestrictions() == null ? null : new TargetRestrictions(getTargetRestrictions());
         AbilityActivated res = new AbilityApiBased(api, getSourceCard(), getPayCosts(), tgt, params);
         CardFactory.copySpellAbility(this, res);
         return res;

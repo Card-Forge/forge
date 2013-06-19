@@ -64,12 +64,12 @@ public abstract class AbilityActivated extends SpellAbility implements java.io.S
      * @param abCost
      *            a {@link forge.card.cost.Cost} object.
      * @param tgt
-     *            a {@link forge.card.spellability.Target} object.
+     *            a {@link forge.card.spellability.TargetRestrictions} object.
      */
-    public AbilityActivated(final Card sourceCard, final Cost abCost, final Target tgt) {
+    public AbilityActivated(final Card sourceCard, final Cost abCost, final TargetRestrictions tgt) {
         super(sourceCard, abCost);
         if ((tgt != null) && tgt.doesTarget()) {
-            this.setTarget(tgt);
+            this.setTargetRestrictions(tgt);
         }
     }
 

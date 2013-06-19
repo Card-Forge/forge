@@ -5,7 +5,7 @@ import forge.CounterType;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.cost.Cost;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.Target;
+import forge.card.spellability.TargetRestrictions;
 import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilCost;
 import forge.game.phase.PhaseType;
@@ -19,7 +19,7 @@ public class CountersRemoveAi extends SpellAbilityAi {
         // based on what
         // the expected targets could be
         final Cost abCost = sa.getPayCosts();
-        Target abTgt = sa.getTarget();
+        TargetRestrictions abTgt = sa.getTargetRestrictions();
         final Card source = sa.getSourceCard();
         // List<Card> list;
         // Card choice = null;

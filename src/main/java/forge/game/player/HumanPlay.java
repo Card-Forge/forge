@@ -45,7 +45,7 @@ import forge.card.mana.ManaCostBeingPaid;
 import forge.card.spellability.Ability;
 import forge.card.spellability.HumanPlaySpellAbility;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.Target;
+import forge.card.spellability.TargetRestrictions;
 import forge.game.GameActionUtil;
 import forge.game.Game;
 import forge.game.zone.ZoneType;
@@ -109,7 +109,7 @@ public class HumanPlay {
         boolean newAbility = sa.getPayCosts() != null;
         SpellAbility ability = sa;
         while ((ability != null) && !newAbility) {
-            final Target tgt = ability.getTarget();
+            final TargetRestrictions tgt = ability.getTargetRestrictions();
     
             newAbility |= tgt != null;
             ability = ability.getSubAbility();

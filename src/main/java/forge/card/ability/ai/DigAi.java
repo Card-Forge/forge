@@ -6,7 +6,6 @@ import forge.Card;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.Target;
 import forge.game.ai.ComputerUtil;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -24,15 +23,14 @@ public class DigAi extends SpellAbilityAi {
 
         Player opp = ai.getOpponent();
         final Card host = sa.getSourceCard();
-        final Target tgt = sa.getTarget();
         Player libraryOwner = ai;
 
-        if (sa.getTarget() != null) {
-            tgt.resetTargets();
+        if (sa.usesTargeting()) {
+            sa.resetTargets();
             if (!opp.canBeTargetedBy(sa)) {
                 return false;
             } else {
-                sa.getTarget().addTarget(opp);
+                sa.getTargets().add(opp);
             }
             libraryOwner = opp;
         }
@@ -68,11 +66,9 @@ public class DigAi extends SpellAbilityAi {
 
     @Override
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
-        final Target tgt = sa.getTarget();
-
-        if (sa.getTarget() != null) {
-            tgt.resetTargets();
-            sa.getTarget().addTarget(ai);
+        if (sa.usesTargeting()) {
+            sa.resetTargets();
+            sa.getTargets().add(ai);
         }
 
         return true;

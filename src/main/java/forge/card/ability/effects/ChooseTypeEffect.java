@@ -10,7 +10,7 @@ import forge.Constant;
 import forge.card.CardType;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.Target;
+import forge.card.spellability.TargetRestrictions;
 import forge.game.player.Player;
 
 public class ChooseTypeEffect extends SpellAbilityEffect {
@@ -53,7 +53,7 @@ public class ChooseTypeEffect extends SpellAbilityEffect {
         }
 
         
-        final Target tgt = sa.getTarget();
+        final TargetRestrictions tgt = sa.getTargetRestrictions();
         final List<Player> tgtPlayers = getTargetPlayers(sa);
 
         if( !validTypes.isEmpty()) {

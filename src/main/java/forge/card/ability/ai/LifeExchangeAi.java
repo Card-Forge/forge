@@ -4,7 +4,7 @@ import java.util.Random;
 
 import forge.card.ability.SpellAbilityAi;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.Target;
+import forge.card.spellability.TargetRestrictions;
 import forge.game.player.Player;
 import forge.util.MyRandom;
 
@@ -37,12 +37,12 @@ public class LifeExchangeAi extends SpellAbilityAi {
          * and one card that has a conditional (Psychic Transfer) that are
          * not currently handled
          */
-        final Target tgt = sa.getTarget();
+        final TargetRestrictions tgt = sa.getTargetRestrictions();
         if (tgt != null) {
-            tgt.resetTargets();
+            sa.resetTargets();
             if (opponent.canBeTargetedBy(sa)) {
                 // never target self, that would be silly for exchange
-                tgt.addTarget(opponent);
+                sa.getTargets().add(opponent);
                 if (!opponent.canLoseLife()) {
                     return false;
                 }

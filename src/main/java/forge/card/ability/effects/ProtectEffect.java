@@ -11,7 +11,7 @@ import forge.Command;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.Target;
+import forge.card.spellability.TargetRestrictions;
 import forge.game.Game;
 import forge.game.ai.ComputerUtilCard;
 import forge.game.player.Player;
@@ -52,7 +52,7 @@ public class ProtectEffect extends SpellAbilityEffect {
                 }
             }
 
-            if (sa.hasParam("Radiance") && (sa.getTarget() != null)) {
+            if (sa.hasParam("Radiance") && (sa.usesTargeting())) {
                 sb.append(" and each other ").append(sa.getParam("ValidTgts"))
                         .append(" that shares a color with ");
                 if (tgtCards.size() > 1) {
@@ -141,7 +141,7 @@ public class ProtectEffect extends SpellAbilityEffect {
 
         final List<Card> tgtCards = getTargetCards(sa);
         final ArrayList<Card> untargetedCards = new ArrayList<Card>();
-        final Target tgt = sa.getTarget();
+        final TargetRestrictions tgt = sa.getTargetRestrictions();
 
         if (sa.hasParam("Radiance") && (tgt != null)) {
             for (final Card c : CardUtil.getRadiance(host, tgtCards.get(0),

@@ -14035,6 +14035,7 @@ src/main/java/forge/card/ability/AbilityApiBased.java -text
 src/main/java/forge/card/ability/AbilityFactory.java svneol=native#text/plain
 src/main/java/forge/card/ability/AbilityUtils.java -text
 src/main/java/forge/card/ability/ApiType.java -text
+src/main/java/forge/card/ability/SaTargetRountines.java -text
 src/main/java/forge/card/ability/SpellAbilityAi.java -text
 src/main/java/forge/card/ability/SpellAbilityEffect.java -text
 src/main/java/forge/card/ability/SpellApiBased.java -text
@@ -14324,8 +14325,8 @@ src/main/java/forge/card/spellability/SpellAbilityRestriction.java svneol=native
 src/main/java/forge/card/spellability/SpellAbilityStackInstance.java svneol=native#text/plain
 src/main/java/forge/card/spellability/SpellAbilityVariables.java svneol=native#text/plain
 src/main/java/forge/card/spellability/SpellPermanent.java svneol=native#text/plain
-src/main/java/forge/card/spellability/Target.java svneol=native#text/plain
 src/main/java/forge/card/spellability/TargetChoices.java svneol=native#text/plain
+src/main/java/forge/card/spellability/TargetRestrictions.java svneol=native#text/plain
 src/main/java/forge/card/spellability/TargetSelection.java svneol=native#text/plain
 src/main/java/forge/card/spellability/package-info.java svneol=native#text/plain
 src/main/java/forge/card/staticability/StaticAbility.java svneol=native#text/plain

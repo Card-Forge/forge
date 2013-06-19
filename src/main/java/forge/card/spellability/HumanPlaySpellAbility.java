@@ -18,9 +18,9 @@
 package forge.card.spellability;
 
 import java.util.ArrayList;
-import java.util.List;
-
 import org.apache.commons.lang3.StringUtils;
+
+import com.google.common.collect.Iterables;
 
 import forge.Card;
 import forge.CardCharacteristicName;
@@ -102,7 +102,7 @@ public class HumanPlaySpellAbility {
         // (or trigger case where its already targeted)
         SpellAbility beingTargeted = ability;
         do { 
-            Target tgt = beingTargeted.getTarget();
+            TargetRestrictions tgt = beingTargeted.getTargetRestrictions();
             if( tgt != null && tgt.doesTarget()) {
                 clearTargets(beingTargeted);
                 final TargetSelection select = new TargetSelection(beingTargeted);
@@ -116,9 +116,9 @@ public class HumanPlaySpellAbility {
     }
 
     public final void clearTargets(SpellAbility ability) {
-        Target tg = ability.getTarget();
+        TargetRestrictions tg = ability.getTargetRestrictions();
         if (tg != null) {
-            tg.resetTargets();
+            ability.resetTargets();
             tg.calculateStillToDivide(ability.getParam("DividedAsYouChoose"), ability.getSourceCard(), ability);
         }
     }
@@ -203,11 +203,11 @@ public class HumanPlaySpellAbility {
         // For older abilities that don't setStackDescription set it here
         final StringBuilder sb = new StringBuilder();
         sb.append(ability.getSourceCard().getName());
-        if (ability.getTarget() != null) {
-            final List<ITargetable> targets = ability.getTarget().getTargets();
-            if (targets.size() > 0) {
+        if (ability.getTargetRestrictions() != null) {
+            final Iterable<ITargetable> targets = ability.getTargets().getTargets();
+            if (!Iterables.isEmpty(targets)) {
                 sb.append(" - Targeting ");
-                for (final Object o : targets) {
+                for (final ITargetable o : targets) {
                     sb.append(o.toString()).append(" ");
                 }
             }

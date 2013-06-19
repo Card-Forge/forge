@@ -8,7 +8,7 @@ import forge.CounterType;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.Target;
+import forge.card.spellability.TargetRestrictions;
 import forge.game.Game;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
@@ -48,9 +48,9 @@ public class CountersPutAllEffect extends SpellAbilityEffect  {
         List<Card> cards = game.getCardsIn(zone);
         cards = CardLists.getValidCards(cards, valid, sa.getSourceCard().getController(), sa.getSourceCard());
 
-        final Target tgt = sa.getTarget();
+        final TargetRestrictions tgt = sa.getTargetRestrictions();
         if (tgt != null) {
-            final Player pl = sa.getTargetPlayer();
+            final Player pl = sa.getTargets().getFirstTargetedPlayer();
             cards = CardLists.filterControlledBy(cards, pl);
         }
 

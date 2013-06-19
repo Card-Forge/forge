@@ -6,7 +6,7 @@ import forge.Card;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.Target;
+import forge.card.spellability.TargetRestrictions;
 import forge.game.player.Player;
 import forge.util.Lang;
 
@@ -15,7 +15,7 @@ public class DrawEffect extends SpellAbilityEffect {
     protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
 
-        final List<Player> tgtPlayers = getDefinedPlayersBeforeTargetOnes(sa);
+        final List<Player> tgtPlayers = getDefinedPlayersOrTargeted(sa);
 
         if (!tgtPlayers.isEmpty()) {
 
@@ -40,13 +40,13 @@ public class DrawEffect extends SpellAbilityEffect {
         final int numCards = sa.hasParam("NumCards") ? AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("NumCards"), sa) : 1;
         
 
-        final Target tgt = sa.getTarget();
+        final TargetRestrictions tgt = sa.getTargetRestrictions();
 
         final boolean optional = sa.hasParam("OptionalDecider");
         final boolean upto = sa.hasParam("Upto");
 
 
-        for (final Player p : getDefinedPlayersBeforeTargetOnes(sa)) {
+        for (final Player p : getDefinedPlayersOrTargeted(sa)) {
             if ((tgt == null) || p.canBeTargetedBy(sa)) 
                 if (optional && !p.getController().confirmAction(sa, null, "Do you want to draw " + Lang.nounWithAmount(numCards, " card") + "?"))
                     continue;

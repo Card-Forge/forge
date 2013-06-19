@@ -8,7 +8,7 @@ import forge.CardPredicates;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.Target;
+import forge.card.spellability.TargetRestrictions;
 import forge.game.ai.ComputerUtilCard;
 import forge.game.ai.ComputerUtilMana;
 import forge.game.player.Player;
@@ -50,16 +50,16 @@ public class SacrificeAi extends SpellAbilityAi {
     private boolean sacrificeTgtAI(final Player ai, final SpellAbility sa) {
 
         final Card source = sa.getSourceCard();
-        final Target tgt = sa.getTarget();
+        final TargetRestrictions tgt = sa.getTargetRestrictions();
         final boolean destroy = sa.hasParam("Destroy");
 
         Player opp = ai.getOpponent();
         if (tgt != null) {
-            tgt.resetTargets();
+            sa.resetTargets();
             if (!opp.canBeTargetedBy(sa)) {
                 return false;
             }
-            tgt.addTarget(opp);
+            sa.getTargets().add(opp);
             final String valid = sa.getParam("SacValid");
             String num = sa.getParam("Amount");
             num = (num == null) ? "1" : num;

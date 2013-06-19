@@ -8,7 +8,7 @@ import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.cost.Cost;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.Target;
+import forge.card.spellability.TargetRestrictions;
 import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilCost;
 import forge.game.ai.ComputerUtilMana;
@@ -92,14 +92,14 @@ public class MillAi extends SpellAbilityAi {
     }
 
     private boolean targetAI(final Player ai, final SpellAbility sa, final boolean mandatory) {
-        final Target tgt = sa.getTarget();
+        final TargetRestrictions tgt = sa.getTargetRestrictions();
         Player opp = ai.getOpponent();
 
         if (tgt != null) {
-            tgt.resetTargets();
+            sa.resetTargets();
             if (!sa.canTarget(opp)) {
                 if (mandatory && sa.canTarget(ai)) {
-                    tgt.addTarget(ai);
+                    sa.getTargets().add(ai);
                     return true;
                 }
                 return false;
@@ -114,22 +114,22 @@ public class MillAi extends SpellAbilityAi {
                     return false;
                 }
 
-                tgt.addTarget(opp);
+                sa.getTargets().add(opp);
                 return true;
             }
 
             if (numCards >= pLibrary.size()) {
                 // Can Mill out Human's deck? Do it!
-                tgt.addTarget(opp);
+                sa.getTargets().add(opp);
                 return true;
             }
 
             // Obscure case when you know what your top card is so you might?
             // want to mill yourself here
             // if (AI wants to mill self)
-            // tgt.addTarget(AllZone.getComputerPlayer());
+            // sa.getTargets().add(AllZone.getComputerPlayer());
             // else
-            tgt.addTarget(opp);
+            sa.getTargets().add(opp);
         }
         return true;
     }

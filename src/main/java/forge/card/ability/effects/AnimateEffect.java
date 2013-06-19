@@ -13,7 +13,6 @@ import forge.card.ability.AbilityFactory;
 import forge.card.ability.AbilityUtils;
 import forge.card.replacement.ReplacementEffect;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.Target;
 import forge.card.staticability.StaticAbility;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerHandler;
@@ -27,8 +26,7 @@ public class AnimateEffect extends AnimateEffectBase {
     @Override
     public void resolve(final SpellAbility sa) {
         final Card source = sa.getSourceCard();
-        final Card host = sa.getSourceCard();
-        final Map<String, String> svars = host.getSVars();
+        final Map<String, String> svars = source.getSVars();
 
         String animateRemembered = null;
 
@@ -46,11 +44,11 @@ public class AnimateEffect extends AnimateEffectBase {
         // AF specific sa
         int power = -1;
         if (sa.hasParam("Power")) {
-            power = AbilityUtils.calculateAmount(host, sa.getParam("Power"), sa);
+            power = AbilityUtils.calculateAmount(source, sa.getParam("Power"), sa);
         }
         int toughness = -1;
         if (sa.hasParam("Toughness")) {
-            toughness = AbilityUtils.calculateAmount(host, sa.getParam("Toughness"), sa);
+            toughness = AbilityUtils.calculateAmount(source, sa.getParam("Toughness"), sa);
         }
 
         final Game game = sa.getActivatingPlayer().getGame();
@@ -74,7 +72,7 @@ public class AnimateEffect extends AnimateEffectBase {
         // allow ChosenType - overrides anything else specified
         if (types.contains("ChosenType")) {
             types.clear();
-            types.add(host.getChosenType());
+            types.add(source.getChosenType());
         }
 
         final ArrayList<String> keywords = new ArrayList<String>();
@@ -106,7 +104,7 @@ public class AnimateEffect extends AnimateEffectBase {
             final String colors = sa.getParam("Colors");
             if (colors.equals("ChosenColor")) {
 
-                tmpDesc = CardUtil.getShortColorsString(host.getChosenColor());
+                tmpDesc = CardUtil.getShortColorsString(source.getChosenColor());
             } else {
                 tmpDesc = CardUtil.getShortColorsString(new ArrayList<String>(Arrays.asList(colors.split(","))));
             }
@@ -137,8 +135,7 @@ public class AnimateEffect extends AnimateEffectBase {
             sVars.addAll(Arrays.asList(sa.getParam("sVars").split(",")));
         }
 
-        final Target tgt = sa.getTarget();
-        List<Card> tgts = tgt != null ? tgts = tgt.getTargetCards() : AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa);
+        List<Card> tgts = getTargetCards(sa);
 
         for (final Card c : tgts) {
 
@@ -165,7 +162,7 @@ public class AnimateEffect extends AnimateEffectBase {
             final ArrayList<SpellAbility> addedAbilities = new ArrayList<SpellAbility>();
             if (abilities.size() > 0) {
                 for (final String s : abilities) {
-                    final String actualAbility = host.getSVar(s);
+                    final String actualAbility = source.getSVar(s);
                     final SpellAbility grantedAbility = AbilityFactory.getAbility(actualAbility, c);
                     addedAbilities.add(grantedAbility);
                     c.addSpellAbility(grantedAbility);
@@ -176,7 +173,7 @@ public class AnimateEffect extends AnimateEffectBase {
             final ArrayList<Trigger> addedTriggers = new ArrayList<Trigger>();
             if (triggers.size() > 0) {
                 for (final String s : triggers) {
-                    final String actualTrigger = host.getSVar(s);
+                    final String actualTrigger = source.getSVar(s);
                     final Trigger parsedTrigger = TriggerHandler.parseTrigger(actualTrigger, c, false);
                     addedTriggers.add(c.addTrigger(parsedTrigger));
                 }
@@ -196,7 +193,7 @@ public class AnimateEffect extends AnimateEffectBase {
             // itself a static ability)
             if (stAbs.size() > 0) {
                 for (final String s : stAbs) {
-                    final String actualAbility = host.getSVar(s);
+                    final String actualAbility = source.getSVar(s);
                     c.addStaticAbility(actualAbility);
                 }
             }
@@ -204,7 +201,7 @@ public class AnimateEffect extends AnimateEffectBase {
             // give sVars
             if (sVars.size() > 0) {
                 for (final String s : sVars) {
-                    final String actualsVar = host.getSVar(s);
+                    final String actualsVar = source.getSVar(s);
                     c.setSVar(s, actualsVar);
                 }
             }
@@ -230,7 +227,7 @@ public class AnimateEffect extends AnimateEffectBase {
 
             // give Remembered
             if (animateRemembered != null) {
-                for (final Object o : AbilityUtils.getDefinedObjects(host, animateRemembered, sa)) {
+                for (final Object o : AbilityUtils.getDefinedObjects(source, animateRemembered, sa)) {
                     c.addRemembered(o);
                 }
             }
@@ -266,13 +263,13 @@ public class AnimateEffect extends AnimateEffectBase {
                 if (sa.hasParam("UntilEndOfCombat")) {
                     game.getEndOfCombat().addUntil(unanimate);
                 } else if (sa.hasParam("UntilHostLeavesPlay")) {
-                    host.addLeavesPlayCommand(unanimate);
+                    source.addLeavesPlayCommand(unanimate);
                 } else if (sa.hasParam("UntilYourNextUpkeep")) {
-                    game.getUpkeep().addUntil(host.getController(), unanimate);
+                    game.getUpkeep().addUntil(source.getController(), unanimate);
                 } else if (sa.hasParam("UntilControllerNextUntap")) {
                     game.getUntap().addUntil(c.getController(), unanimate);
                 } else if (sa.hasParam("UntilYourNextTurn")) {
-                    game.getCleanup().addUntil(host.getController(), unanimate);
+                    game.getCleanup().addUntil(source.getController(), unanimate);
                 } else {
                     game.getEndOfTurn().addUntil(unanimate);
                 }
@@ -321,8 +318,7 @@ public class AnimateEffect extends AnimateEffectBase {
 
         final StringBuilder sb = new StringBuilder();
 
-        final Target tgt = sa.getTarget();
-        final List<Card> tgts = tgt != null ? tgt.getTargetCards() :  AbilityUtils.getDefinedCards(sa.getSourceCard(), sa.getParam("Defined"), sa);
+        final List<Card> tgts = getTargetCards(sa);
 
         for (final Card c : tgts) {
             sb.append(c).append(" ");

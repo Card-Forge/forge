@@ -28,6 +28,7 @@ import forge.CardColor;
 import forge.CardUtil;
 import forge.Command;
 import forge.CounterType;
+import forge.ITargetable;
 import forge.ImageCache;
 import forge.card.CardCharacteristics;
 import forge.card.CardDb;
@@ -43,7 +44,7 @@ import forge.card.spellability.AbilitySub;
 import forge.card.spellability.OptionalCost;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellPermanent;
-import forge.card.spellability.Target;
+import forge.card.spellability.TargetRestrictions;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerHandler;
 import forge.game.player.Player;
@@ -138,7 +139,7 @@ public class CardFactory {
      *            a boolean.
      */
     public final static void copySpellontoStack(final Card source, final Card original, final SpellAbility sa,
-            final boolean bCopyDetails, final Object definedTarget) {
+            final boolean bCopyDetails, final ITargetable definedTarget) {
         //Player originalController = original.getController();
         Player controller = sa.getActivatingPlayer();
         final Card c = copyCard(original);
@@ -188,14 +189,9 @@ public class CardFactory {
         copySA.setCopied(true);
         //remove all costs
         copySA.setPayCosts(new Cost("", sa.isAbility()));
-        if (definedTarget != null) {
-            Target target = new Target();
-            target.setDefinedTarget(definedTarget);
-            copySA.setTarget(target);
-        }
-        else if (sa.getTarget() != null) {
-            Target target = new Target(sa.getTarget());
-            copySA.setTarget(target);
+        if (sa.getTargetRestrictions() != null) {
+            TargetRestrictions target = new TargetRestrictions(sa.getTargetRestrictions());
+            copySA.setTargetRestrictions(target);
         }
         copySA.setActivatingPlayer(controller);
 

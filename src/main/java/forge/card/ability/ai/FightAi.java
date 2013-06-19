@@ -7,7 +7,6 @@ import forge.Card;
 import forge.CardLists;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.Target;
 import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilCombat;
 import forge.game.player.Player;
@@ -20,8 +19,7 @@ public class FightAi extends SpellAbilityAi {
      */
     @Override
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
-        Target tgt = sa.getTarget();
-        tgt.resetTargets();
+        sa.resetTargets();
 
         List<Card> aiCreatures = ai.getCreaturesInPlay();
         aiCreatures = CardLists.getTargetableCards(aiCreatures, sa);
@@ -42,12 +40,12 @@ public class FightAi extends SpellAbilityAi {
                         if (ComputerUtilCombat.getDamageToKill(humanCreature) <= aiCreature.getNetAttack()
                                 && humanCreature.getNetAttack() < ComputerUtilCombat.getDamageToKill(aiCreature)) {
                             // todo: check min/max targets; see if we picked the best matchup
-                            tgt.addTarget(humanCreature);
-                            tgt.addTarget(aiCreature);
+                            sa.getTargets().add(humanCreature);
+                            sa.getTargets().add(aiCreature);
                             return true;
                         } else if (humanCreature.getSVar("Targeting").equals("Dies")) {
-                            tgt.addTarget(humanCreature);
-                            tgt.addTarget(aiCreature);
+                            sa.getTargets().add(humanCreature);
+                            sa.getTargets().add(aiCreature);
                             return true;
                         }
                     }
@@ -67,8 +65,8 @@ public class FightAi extends SpellAbilityAi {
                 if (ComputerUtilCombat.getDamageToKill(creature1) <= creature2.getNetAttack()
                         && creature1.getNetAttack() >= ComputerUtilCombat.getDamageToKill(creature2)) {
                     // todo: check min/max targets; see if we picked the best matchup
-                    tgt.addTarget(creature1);
-                    tgt.addTarget(creature2);
+                    sa.getTargets().add(creature1);
+                    sa.getTargets().add(creature2);
                     return true;
                 }
             }

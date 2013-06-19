@@ -7,7 +7,7 @@ import forge.Card;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.Target;
+import forge.card.spellability.TargetRestrictions;
 import forge.game.player.Player;
 import forge.util.MyRandom;
 
@@ -17,7 +17,7 @@ public class DrainManaAi extends SpellAbilityAi {
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
         // AI cannot use this properly until he can use SAs during Humans turn
 
-        final Target tgt = sa.getTarget();
+        final TargetRestrictions tgt = sa.getTargetRestrictions();
         final Card source = sa.getSourceCard();
         final Player opp = ai.getOpponent();
         final Random r = MyRandom.getRandom();
@@ -33,8 +33,8 @@ public class DrainManaAi extends SpellAbilityAi {
                 return false;
             }
         } else {
-            tgt.resetTargets();
-            tgt.addTarget(opp);
+            sa.resetTargets();
+            sa.getTargets().add(opp);
         }
 
         return randomReturn;
@@ -44,7 +44,7 @@ public class DrainManaAi extends SpellAbilityAi {
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
         final Player opp = ai.getOpponent();
 
-        final Target tgt = sa.getTarget();
+        final TargetRestrictions tgt = sa.getTargetRestrictions();
         final Card source = sa.getSourceCard();
 
         if (null == tgt) {
@@ -60,8 +60,8 @@ public class DrainManaAi extends SpellAbilityAi {
 
             return true;
         } else {
-            tgt.resetTargets();
-            tgt.addTarget(opp);
+            sa.resetTargets();
+            sa.getTargets().add(opp);
         }
 
         return true;
@@ -70,7 +70,7 @@ public class DrainManaAi extends SpellAbilityAi {
     @Override
     public boolean chkAIDrawback(SpellAbility sa, Player ai) {
         // AI cannot use this properly until he can use SAs during Humans turn
-        final Target tgt = sa.getTarget();
+        final TargetRestrictions tgt = sa.getTargetRestrictions();
         final Card source = sa.getSourceCard();
 
         boolean randomReturn = true;
@@ -82,8 +82,8 @@ public class DrainManaAi extends SpellAbilityAi {
                 return false;
             }
         } else {
-            tgt.resetTargets();
-            tgt.addTarget(ai.getOpponent());
+            sa.resetTargets();
+            sa.getTargets().add(ai.getOpponent());
         }
 
         return randomReturn;

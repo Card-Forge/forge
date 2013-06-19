@@ -9,7 +9,7 @@ import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.cost.Cost;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.Target;
+import forge.card.spellability.TargetRestrictions;
 import forge.game.ai.ComputerUtilCard;
 import forge.game.ai.ComputerUtilCost;
 import forge.game.phase.PhaseType;
@@ -57,7 +57,7 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
         final List<Card> humanType = AbilityUtils.filterListByType(opp.getCardsIn(origin), sa.getParam("ChangeType"), sa);
         List<Card> computerType = ai.getCardsIn(origin);
         computerType = AbilityUtils.filterListByType(computerType, sa.getParam("ChangeType"), sa);
-        final Target tgt = sa.getTarget();
+        final TargetRestrictions tgt = sa.getTargetRestrictions();
 
         // TODO improve restrictions on when the AI would want to use this
         // spBounceAll has some AI we can compare to.
@@ -67,8 +67,8 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
                         || !opp.canBeTargetedBy(sa)) {
                     return false;
                 }
-                tgt.resetTargets();
-                tgt.addTarget(opp);
+                sa.resetTargets();
+                sa.getTargets().add(opp);
             }
         } else if (origin.equals(ZoneType.Battlefield)) {
             // this statement is assuming the AI is trying to use this spell
@@ -82,8 +82,8 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
                         || !opp.canBeTargetedBy(sa)) {
                     return false;
                 }
-                tgt.resetTargets();
-                tgt.addTarget(opp);
+                sa.resetTargets();
+                sa.getTargets().add(opp);
                 computerType.clear();
             }
             if ((CardLists.getNotType(humanType, "Creature").size() == 0) && (CardLists.getNotType(computerType, "Creature").size() == 0)) {
@@ -108,8 +108,8 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
                         || !opp.canBeTargetedBy(sa)) {
                     return false;
                 }
-                tgt.resetTargets();
-                tgt.addTarget(opp);
+                sa.resetTargets();
+                sa.getTargets().add(opp);
             }
         } else if (origin.equals(ZoneType.Exile)) {
 
@@ -189,14 +189,14 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
         // TODO improve restrictions on when the AI would want to use this
         // spBounceAll has some AI we can compare to.
         if (origin.equals(ZoneType.Hand) || origin.equals(ZoneType.Library)) {
-            final Target tgt = sa.getTarget();
+            final TargetRestrictions tgt = sa.getTargetRestrictions();
             if (tgt != null) {
                 if (opp.getCardsIn(ZoneType.Hand).isEmpty()
                         || !opp.canBeTargetedBy(sa)) {
                     return false;
                 }
-                tgt.resetTargets();
-                tgt.addTarget(opp);
+                sa.resetTargets();
+                sa.getTargets().add(opp);
             }
         } else if (origin.equals(ZoneType.Battlefield)) {
             // this statement is assuming the AI is trying to use this spell offensively
@@ -215,14 +215,14 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
                 return false;
             }
         } else if (origin.equals(ZoneType.Graveyard)) {
-            final Target tgt = sa.getTarget();
+            final TargetRestrictions tgt = sa.getTargetRestrictions();
             if (tgt != null) {
                 if (opp.getCardsIn(ZoneType.Graveyard).isEmpty()
                         || !opp.canBeTargetedBy(sa)) {
                     return false;
                 }
-                tgt.resetTargets();
-                tgt.addTarget(opp);
+                sa.resetTargets();
+                sa.getTargets().add(opp);
             }
         } else if (origin.equals(ZoneType.Exile)) {
 

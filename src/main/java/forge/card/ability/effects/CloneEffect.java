@@ -15,7 +15,7 @@ import forge.card.ability.SpellAbilityEffect;
 import forge.card.cardfactory.CardFactory;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.Target;
+import forge.card.spellability.TargetRestrictions;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerHandler;
 import forge.game.Game;
@@ -32,14 +32,14 @@ public class CloneEffect extends SpellAbilityEffect {
         Card tgtCard = host;
 
         Card cardToCopy = host;
-        final Target tgt = sa.getTarget();
+        final TargetRestrictions tgt = sa.getTargetRestrictions();
         if (sa.hasParam("Defined")) {
             List<Card> cloneSources = AbilityUtils.getDefinedCards(host, sa.getParam("Defined"), sa);
             if (!cloneSources.isEmpty()) {
                 cardToCopy = cloneSources.get(0);
             }
         } else if (tgt != null) {
-            cardToCopy = tgt.getTargetCards().get(0);
+            cardToCopy = sa.getTargets().getFirstTargetedCard();
         }
 
         List<Card> cloneTargets = AbilityUtils.getDefinedCards(host, sa.getParam("CloneTarget"), sa);
@@ -61,14 +61,14 @@ public class CloneEffect extends SpellAbilityEffect {
 
         // find cloning source i.e. thing to be copied
         Card cardToCopy = null;
-        final Target tgt = sa.getTarget();
+        final TargetRestrictions tgt = sa.getTargetRestrictions();
         if (sa.hasParam("Defined")) {
             List<Card> cloneSources = AbilityUtils.getDefinedCards(host, sa.getParam("Defined"), sa);
             if (!cloneSources.isEmpty()) {
                 cardToCopy = cloneSources.get(0);
             }
         } else if (tgt != null) {
-            cardToCopy = tgt.getTargetCards().get(0);
+            cardToCopy = sa.getTargets().getFirstTargetedCard();
         }
         if (cardToCopy == null) {
             return;

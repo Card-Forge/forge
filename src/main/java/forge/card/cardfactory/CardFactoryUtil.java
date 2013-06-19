@@ -57,7 +57,7 @@ import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityRestriction;
 import forge.card.spellability.SpellPermanent;
-import forge.card.spellability.Target;
+import forge.card.spellability.TargetRestrictions;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerHandler;
 import forge.card.trigger.TriggerType;
@@ -100,14 +100,14 @@ public class CardFactoryUtil {
 
         final Cost cost = new Cost(manaCost, true);
         class AbilityUnearth extends AbilityActivated {
-            public AbilityUnearth(final Card ca, final Cost co, final Target t) {
+            public AbilityUnearth(final Card ca, final Cost co, final TargetRestrictions t) {
                 super(ca, co, t);
             }
 
             @Override
             public AbilityActivated getCopy() {
                 AbilityActivated res = new AbilityUnearth(getSourceCard(),
-                        getPayCosts(), getTarget() == null ? null : new Target(getTarget()));
+                        getPayCosts(), getTargetRestrictions() == null ? null : new TargetRestrictions(getTargetRestrictions()));
                 CardFactory.copySpellAbility(this, res);
                 final SpellAbilityRestriction restrict = new SpellAbilityRestriction();
                 restrict.setZone(ZoneType.Graveyard);
@@ -311,14 +311,14 @@ public class CardFactoryUtil {
         transmuteCost += " Discard<1/CARDNAME>";
         final Cost abCost = new Cost(transmuteCost, true);
         class AbilityTransmute extends AbilityActivated {
-            public AbilityTransmute(final Card ca, final Cost co, final Target t) {
+            public AbilityTransmute(final Card ca, final Cost co, final TargetRestrictions t) {
                 super(ca, co, t);
             }
 
             @Override
             public AbilityActivated getCopy() {
                 AbilityActivated res = new AbilityTransmute(getSourceCard(),
-                        getPayCosts(), getTarget() == null ? null : new Target(getTarget()));
+                        getPayCosts(), getTargetRestrictions() == null ? null : new TargetRestrictions(getTargetRestrictions()));
                 CardFactory.copySpellAbility(this, res);
                 res.getRestrictions().setZone(ZoneType.Hand);
                 return res;
@@ -695,7 +695,7 @@ public class CardFactoryUtil {
         }
 
         final Card source = ability.getSourceCard();
-        final Target tgt = ability.getTarget();
+        final TargetRestrictions tgt = ability.getTargetRestrictions();
         if (tgt != null) {
             // Reconfirm the Validity of a TgtValid, or if the Creature is still
             // a Creature
@@ -923,7 +923,7 @@ public class CardFactoryUtil {
      *            a {@link forge.Card} object.
      * @return a int.
      */
-    public static int objectXCount(final ArrayList<Object> objects, final String s, final Card source) {
+    public static int objectXCount(final List<?> objects, final String s, final Card source) {
         if (objects.isEmpty()) {
             return 0;
         }
@@ -1303,7 +1303,7 @@ public class CardFactoryUtil {
             for (final SpellAbility sa : c.getCharacteristics().getSpellAbility()) {
                 final SpellAbility saTargeting = sa.getSATargetingPlayer();
                 if (saTargeting != null) {
-                    for (final Player tgtP : saTargeting.getTarget().getTargetPlayers()) {
+                    for (final Player tgtP : saTargeting.getTargets().getTargetPlayers()) {
                         return doXMath(tgtP.getLife(), m, c);
                     }
                 }
@@ -1712,7 +1712,7 @@ public class CardFactoryUtil {
             for (final SpellAbility sa : c.getCharacteristics().getSpellAbility()) {
                 final SpellAbility saTargeting = sa.getSATargetingPlayer();
                 if (saTargeting != null) {
-                    for (final Player tgtP : saTargeting.getTarget().getTargetPlayers()) {
+                    for (final Player tgtP : saTargeting.getTargets().getTargetPlayers()) {
                         someCards.addAll(tgtP.getCardsIn(ZoneType.Hand));
                     }
                 }

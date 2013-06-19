@@ -12,7 +12,7 @@ import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.Target;
+import forge.card.spellability.TargetRestrictions;
 import forge.game.Game;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
@@ -122,20 +122,9 @@ public class PumpEffect extends SpellAbilityEffect {
     protected String getStackDescription(SpellAbility sa) {
 
         final StringBuilder sb = new StringBuilder();
-        ArrayList<GameEntity> tgts = new ArrayList<GameEntity>();
-
-        final Target tgt = sa.getTarget();
-        if (tgt != null) {
-            tgts.addAll(tgt.getTargetCards());
-            tgts.addAll(tgt.getTargetPlayers());
-        } else {
-            if (sa.hasParam("Defined")) {
-                tgts.addAll(AbilityUtils.getDefinedPlayers(sa.getSourceCard(), sa.getParam("Defined"), sa));
-            }
-            if (tgts.isEmpty()) {
-                tgts.addAll(AbilityUtils.getDefinedCards(sa.getSourceCard(), sa.getParam("Defined"), sa));
-            }
-        }
+        List<GameEntity> tgts = new ArrayList<GameEntity>();
+        tgts.addAll(getTargetCards(sa));
+        tgts.addAll(getTargetPlayers(sa));
 
         if (tgts.size() > 0) {
 
@@ -188,7 +177,7 @@ public class PumpEffect extends SpellAbilityEffect {
     public void resolve(SpellAbility sa) {
         List<Card> tgtCards = new ArrayList<Card>();
         final ArrayList<Card> untargetedCards = new ArrayList<Card>();
-        final Target tgt = sa.getTarget();
+        final TargetRestrictions tgt = sa.getTargetRestrictions();
         final Game game = sa.getActivatingPlayer().getGame();
         List<Player> tgtPlayers = new ArrayList<Player>();
         String pumpRemembered = null;
@@ -199,17 +188,10 @@ public class PumpEffect extends SpellAbilityEffect {
         final int a = AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("NumAtt"), sa);
         final int d = AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("NumDef"), sa);
 
-        if (tgt != null) {
-            tgtCards = tgt.getTargetCards();
-            tgtPlayers = tgt.getTargetPlayers();
-        } else {
-            if (sa.hasParam("Defined")) {
-                tgtPlayers = AbilityUtils.getDefinedPlayers(sa.getSourceCard(), sa.getParam("Defined"), sa);
-            }
-            if (tgtPlayers.isEmpty()) {
-                tgtCards = AbilityUtils.getDefinedCards(sa.getSourceCard(), sa.getParam("Defined"), sa);
-            }
-        }
+        List<GameEntity> tgts = new ArrayList<GameEntity>();
+        tgts.addAll(getTargetCards(sa));
+        tgts.addAll(getTargetPlayers(sa));
+
         if (sa.hasParam("DefinedChosenKW")) {
             if (sa.getParam("DefinedChosenKW").equals("Type")) {
                 final String t = sa.getSourceCard().getChosenType();

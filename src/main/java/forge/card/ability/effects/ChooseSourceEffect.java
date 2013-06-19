@@ -5,8 +5,6 @@ import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.base.Predicate;
-import com.google.common.collect.Lists;
-
 import forge.Card;
 import forge.CardLists;
 import forge.ITargetable;
@@ -16,7 +14,7 @@ import forge.card.ability.SpellAbilityEffect;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityStackInstance;
-import forge.card.spellability.Target;
+import forge.card.spellability.TargetRestrictions;
 import forge.game.Game;
 import forge.game.ai.ComputerUtilCard;
 import forge.game.ai.ComputerUtilCombat;
@@ -42,7 +40,7 @@ public class ChooseSourceEffect extends SpellAbilityEffect {
         final Card host = sa.getSourceCard();
         final Game game = sa.getActivatingPlayer().getGame();
 
-        final Target tgt = sa.getTarget();
+        final TargetRestrictions tgt = sa.getTargetRestrictions();
         final List<Player> tgtPlayers = getTargetPlayers(sa);
 
 
@@ -190,19 +188,10 @@ public class ChooseSourceEffect extends SpellAbilityEffect {
             }
     
             
-            final List<? extends ITargetable> objects;
-            final Target threatTgt = abilityOnStack.getTarget();
+            List<? extends ITargetable> objects = getTargets(abilityOnStack);
     
-            if (threatTgt == null) {
-                if (abilityOnStack.hasParam("Defined")) {
-                    objects = AbilityUtils.getDefinedObjects(source, abilityOnStack.getParam("Defined"), abilityOnStack);
-                } else if (abilityOnStack.hasParam("ValidPlayers")) {
-                    objects = AbilityUtils.getDefinedPlayers(source, abilityOnStack.getParam("ValidPlayers"), abilityOnStack);
-                } else
-                    objects = Lists.<ITargetable>newArrayList();
-            } else {
-                objects = threatTgt.getTargetPlayers();
-            }
+            if (!abilityOnStack.usesTargeting() && !abilityOnStack.hasParam("Defined") && abilityOnStack.hasParam("ValidPlayers")) 
+                objects = AbilityUtils.getDefinedPlayers(source, abilityOnStack.getParam("ValidPlayers"), abilityOnStack);
             
             if (!objects.contains(ai) || abilityOnStack.hasParam("NoPrevention")) {
                 continue;

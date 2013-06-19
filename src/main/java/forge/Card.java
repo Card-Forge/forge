@@ -58,7 +58,7 @@ import forge.card.spellability.AbilityTriggered;
 import forge.card.spellability.OptionalCost;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellPermanent;
-import forge.card.spellability.Target;
+import forge.card.spellability.TargetRestrictions;
 import forge.card.staticability.StaticAbility;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerType;
@@ -5355,7 +5355,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             for (final SpellAbility sa : source.getCharacteristics().getSpellAbility()) {
                 final SpellAbility saTargeting = sa.getSATargetingPlayer();
                 if (saTargeting != null) {
-                    for (final Player p : saTargeting.getTarget().getTargetPlayers()) {
+                    for (final Player p : saTargeting.getTargets().getTargetPlayers()) {
                         if (!this.getController().equals(p)) {
                             return false;
                         }
@@ -5403,7 +5403,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             for (final SpellAbility sa : source.getCharacteristics().getSpellAbility()) {
                 final SpellAbility saTargeting = sa.getSATargetingPlayer();
                 if (saTargeting != null) {
-                    for (final Player p : saTargeting.getTarget().getTargetPlayers()) {
+                    for (final Player p : saTargeting.getTargets().getTargetPlayers()) {
                         if (!this.getOwner().equals(p)) {
                             return false;
                         }
@@ -5504,7 +5504,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                     for (final SpellAbility sa : source.getCharacteristics().getSpellAbility()) {
                         final SpellAbility saTargeting = sa.getSATargetingCard();
                         if (saTargeting != null) {
-                            for (final Card c : saTargeting.getTarget().getTargetCards()) {
+                            for (final Card c : saTargeting.getTargets().getTargetCards()) {
                                 if (!this.getEnchantedBy().contains(c) && !this.equals(c.getEnchanting())) {
                                     return false;
                                 }
@@ -5518,7 +5518,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                 for (final SpellAbility sa : source.getCharacteristics().getSpellAbility()) {
                     final SpellAbility saTargeting = sa.getSATargetingCard();
                     if (saTargeting != null) {
-                        for (final Card c : saTargeting.getTarget().getTargetCards()) {
+                        for (final Card c : saTargeting.getTargets().getTargetCards()) {
                             if (this.getEnchantedBy().contains(c)) {
                                 return false;
                             }
@@ -5549,7 +5549,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                 for (final SpellAbility sa : source.getCharacteristics().getSpellAbility()) {
                     final SpellAbility saTargeting = sa.getSATargetingCard();
                     if (saTargeting != null) {
-                        for (final Card c : saTargeting.getTarget().getTargetCards()) {
+                        for (final Card c : saTargeting.getTargets().getTargetCards()) {
                             if (!this.canBeEnchantedBy(c)) {
                                 return false;
                             }
@@ -5575,7 +5575,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                 for (final SpellAbility sa : source.getCharacteristics().getSpellAbility()) {
                     final SpellAbility saTargeting = sa.getSATargetingCard();
                     if (saTargeting != null) {
-                        for (final Card c : saTargeting.getTarget().getTargetCards()) {
+                        for (final Card c : saTargeting.getTargets().getTargetCards()) {
                             if (!this.equippedBy.contains(c)) {
                                 return false;
                             }
@@ -5686,7 +5686,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             for (final SpellAbility sa : this.getCharacteristics().getSpellAbility()) {
                 final SpellAbility saTargeting = sa.getSATargetingCard();
                 if (saTargeting != null) {
-                    for (final Card c : saTargeting.getTarget().getTargetCards()) {
+                    for (final Card c : saTargeting.getTargets().getTargetCards()) {
                         if (c.equals(source)) {
                             return true;
                         }
@@ -8050,9 +8050,9 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     public final boolean canBeEnchantedBy(final Card aura) {
         final SpellAbility sa = aura.getFirstSpellAbility();
-        Target tgt = null;
+        TargetRestrictions tgt = null;
         if (sa != null) {
-            tgt = sa.getTarget();
+            tgt = sa.getTargetRestrictions();
         }
 
         if (this.hasProtectionFrom(aura)

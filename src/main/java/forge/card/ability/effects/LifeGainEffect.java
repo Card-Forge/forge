@@ -1,13 +1,12 @@
 package forge.card.ability.effects;
 
 
-import java.util.ArrayList;
 import java.util.List;
 
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.Target;
+import forge.card.spellability.TargetRestrictions;
 import forge.game.player.Player;
 
 public class LifeGainEffect extends SpellAbilityEffect {
@@ -36,14 +35,9 @@ public class LifeGainEffect extends SpellAbilityEffect {
     public void resolve(SpellAbility sa) {
         final int lifeAmount = AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("LifeAmount"), sa);
 
-        final Target tgt = sa.getTarget();
-        List<Player> tgtPlayers = new ArrayList<Player>();
-
-        if (sa.hasParam("Defined")) {
-            tgtPlayers = AbilityUtils.getDefinedPlayers(sa.getSourceCard(), sa.getParam("Defined"), sa);
-        } else if (tgt != null) {
-            tgtPlayers = tgt.getTargetPlayers();
-        } else {
+        final TargetRestrictions tgt = sa.getTargetRestrictions();
+        List<Player> tgtPlayers = getTargetPlayers(sa);
+        if( tgtPlayers.isEmpty() ) {
             tgtPlayers.add(sa.getActivatingPlayer());
         }
 

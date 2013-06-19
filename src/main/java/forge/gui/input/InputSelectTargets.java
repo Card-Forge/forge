@@ -9,7 +9,7 @@ import forge.Card;
 import forge.GameEntity;
 import forge.card.ability.ApiType;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.Target;
+import forge.card.spellability.TargetRestrictions;
 import forge.game.player.Player;
 import forge.gui.GuiChoose;
 import forge.view.ButtonUtil;
@@ -22,7 +22,7 @@ public final class InputSelectTargets extends InputSyncronizedBase {
     private final List<Card> choices;
     // some cards can be targeted several times (eg: distribute damage as you choose)
     private final Map<GameEntity, Integer> targetDepth = new HashMap<GameEntity, Integer>();
-    private final Target tgt;
+    private final TargetRestrictions tgt;
     private final SpellAbility sa;
     private boolean bCancel = false;
     private boolean bOk = false;
@@ -44,7 +44,7 @@ public final class InputSelectTargets extends InputSyncronizedBase {
      */
     public InputSelectTargets(List<Card> choices, SpellAbility sa, boolean mandatory) {
         this.choices = choices;
-        this.tgt = sa.getTarget();
+        this.tgt = sa.getTargetRestrictions();
         this.sa = sa;
         this.mandatory = mandatory;
     }
@@ -64,7 +64,7 @@ public final class InputSelectTargets extends InputSyncronizedBase {
         sb.append(tgt.getVTSelection());
         
         int maxTargets = tgt.getMaxTargets(sa.getSourceCard(), sa);
-        int targeted = tgt.getNumTargeted();
+        int targeted = sa.getTargets().getNumTargeted();
         if(maxTargets > 1)
             sb.append("\n(").append(maxTargets - targeted).append(" more can be targeted)");
 
@@ -125,7 +125,7 @@ public final class InputSelectTargets extends InputSyncronizedBase {
             final int stillToDivide = tgt.getStillToDivide();
             int allocatedPortion = 0;
             // allow allocation only if the max targets isn't reached and there are more candidates
-            if ((tgt.getNumTargeted() + 1 < tgt.getMaxTargets(sa.getSourceCard(), sa))
+            if ((sa.getTargets().getNumTargeted() + 1 < tgt.getMaxTargets(sa.getSourceCard(), sa))
                     && (tgt.getNumCandidates(sa, true) - 1 > 0) && stillToDivide > 1) {
                 final Integer[] choices = new Integer[stillToDivide];
                 for (int i = 1; i <= stillToDivide; i++) {
@@ -171,7 +171,7 @@ public final class InputSelectTargets extends InputSyncronizedBase {
             final int stillToDivide = tgt.getStillToDivide();
             int allocatedPortion = 0;
             // allow allocation only if the max targets isn't reached and there are more candidates
-            if ((tgt.getNumTargeted() + 1 < tgt.getMaxTargets(sa.getSourceCard(), sa)) && (tgt.getNumCandidates(sa, true) - 1 > 0) && stillToDivide > 1) {
+            if ((sa.getTargets().getNumTargeted() + 1 < tgt.getMaxTargets(sa.getSourceCard(), sa)) && (tgt.getNumCandidates(sa, true) - 1 > 0) && stillToDivide > 1) {
                 final Integer[] choices = new Integer[stillToDivide];
                 for (int i = 1; i <= stillToDivide; i++) {
                     choices[i - 1] = i;
@@ -200,7 +200,7 @@ public final class InputSelectTargets extends InputSyncronizedBase {
     }
 
     private void addTarget(GameEntity ge) {
-        tgt.addTarget(ge);
+        sa.getTargets().add(ge);
         if(ge instanceof Card) {
             ((Card) ge).setUsedToPay(true);
         }

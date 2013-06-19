@@ -9,6 +9,8 @@ import forge.card.MagicColor;
 import forge.card.mana.ManaCostShard;
 import org.apache.commons.lang3.StringUtils;
 
+import com.google.common.collect.Iterables;
+
 import forge.Card;
 import forge.CardLists;
 import forge.CardUtil;
@@ -124,13 +126,13 @@ public class AbilityUtils {
         else if (defined.equals("Targeted")) {
             final SpellAbility saTargeting = sa.getSATargetingCard();
             if (saTargeting != null) {
-                cards.addAll(saTargeting.getTarget().getTargetCards());
+                Iterables.addAll(cards, saTargeting.getTargets().getTargetCards());
             }
 
         } else if (defined.equals("ParentTarget")) {
             final SpellAbility parent = sa.getParentTargetingCard();
             if (parent != null) {
-                cards.addAll(parent.getTarget().getTargetCards());
+                Iterables.addAll(cards, parent.getTargets().getTargetCards());
             }
 
         } else if (defined.startsWith("Triggered") && (sa != null)) {
@@ -445,17 +447,17 @@ public class AbilityUtils {
             final ArrayList<Player> players = new ArrayList<Player>();
             final SpellAbility saTargeting = ability.getSATargetingPlayer();
             if (null != saTargeting) {
-                players.addAll(saTargeting.getTarget().getTargetPlayers());
+                Iterables.addAll(players, saTargeting.getTargets().getTargetPlayers());
             }
             return CardFactoryUtil.playerXCount(players, calcX[1], card) * multiplier;
         }
         if (calcX[0].startsWith("TargetedObjects")) {
-            final ArrayList<Object> objects = new ArrayList<Object>();
+            final List<ITargetable> objects = new ArrayList<ITargetable>();
             // Make list of all targeted objects starting with the root SpellAbility
             SpellAbility loopSA = ability.getRootAbility();
             while (loopSA != null) {
-                if (loopSA.getTarget() != null) {
-                    objects.addAll(loopSA.getTarget().getTargets());
+                if (loopSA.getTargetRestrictions() != null) {
+                    Iterables.addAll(objects, loopSA.getTargets().getTargets());
                 }
                 loopSA = loopSA.getSubAbility();
             }
@@ -702,7 +704,7 @@ public class AbilityUtils {
         if (defined.equals("Targeted")) {
             final SpellAbility saTargeting = sa.getSATargetingPlayer();
             if (saTargeting != null) {
-                players.addAll(saTargeting.getTarget().getTargetPlayers());
+                Iterables.addAll(players, saTargeting.getTargets().getTargetPlayers());
             }
         } else if (defined.equals("TargetedController")) {
             final List<Card> list = getDefinedCards(card, "Targeted", sa);
@@ -732,7 +734,7 @@ public class AbilityUtils {
         } else if (defined.equals("TargetedAndYou")) {
             final SpellAbility saTargeting = sa.getSATargetingPlayer();
             if (saTargeting != null) {
-                players.addAll(saTargeting.getTarget().getTargetPlayers());
+                Iterables.addAll(players, saTargeting.getTargets().getTargetPlayers());
                 players.add(sa.getActivatingPlayer());
             }
         } else if (defined.equals("Remembered")) {
@@ -959,7 +961,7 @@ public class AbilityUtils {
         } else if (defined.equals("Targeted")) {
             final SpellAbility saTargeting = sa.getSATargetingSA();
             if (saTargeting != null) {
-                sas.addAll(saTargeting.getTarget().getTargetSAs());
+                Iterables.addAll(sas, saTargeting.getTargets().getTargetSpells());
             }
         } else if (defined.startsWith("Triggered")) {
             final SpellAbility root = sa.getRootAbility();
@@ -1103,7 +1105,7 @@ public class AbilityUtils {
 
         boolean paid = false;
         for (Player payer : payers) {
-            final Ability ability = new AbilityStatic(source, cost, sa.getTarget()) { @Override public void resolve() { } };
+            final Ability ability = new AbilityStatic(source, cost, sa.getTargetRestrictions()) { @Override public void resolve() { } };
             ability.setActivatingPlayer(payer);
             if (payer.isComputer()) {
                 if (ComputerUtilCost.willPayUnlessCost(sa, payer, cost, paid, payers) && ComputerUtilCost.canPayCost(ability, payer)) {
@@ -1136,11 +1138,11 @@ public class AbilityUtils {
     public static void handleRemembering(final SpellAbility sa) {
         Card host = sa.getSourceCard();
 
-        if (sa.hasParam("RememberTargets") && sa.getTarget() != null) {
+        if (sa.hasParam("RememberTargets") && sa.getTargetRestrictions() != null) {
             if (sa.hasParam("ForgetOtherTargets")) {
                 host.clearRemembered();
             }
-            for (final Object o : sa.getTarget().getTargets()) {
+            for (final ITargetable o : sa.getTargets().getTargets()) {
                 host.addRemembered(o);
             }
         }

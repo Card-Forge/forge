@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import forge.Card;
+import forge.ITargetable;
 import forge.card.ability.ApiType;
 import forge.card.cost.Cost;
 import forge.card.mana.ManaCost;
@@ -13,7 +14,7 @@ import forge.card.spellability.AbilitySub;
 import forge.card.spellability.ISpellAbility;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityRestriction;
-import forge.card.spellability.Target;
+import forge.card.spellability.TargetRestrictions;
 import forge.card.spellability.TargetChoices;
 import forge.game.Game;
 import forge.game.ai.ComputerUtil;
@@ -175,9 +176,9 @@ public class WrappedAbility extends Ability implements ISpellAbility {
     @Override
     public String getStackDescription() {
         final StringBuilder sb = new StringBuilder(regtrig.toString());
-        if (this.getTarget() != null) {
+        if (this.getTargetRestrictions() != null) {
             sb.append(" (Targeting ");
-            for (final Object o : this.getTarget().getTargets()) {
+            for (final ITargetable o : this.getTargets().getTargets()) {
                 sb.append(o.toString());
                 sb.append(", ");
             }
@@ -198,8 +199,8 @@ public class WrappedAbility extends Ability implements ISpellAbility {
     }
 
     @Override
-    public Target getTarget() {
-        return sa.getTarget();
+    public TargetRestrictions getTargetRestrictions() {
+        return sa.getTargetRestrictions();
     }
 
     @Override
@@ -208,8 +209,8 @@ public class WrappedAbility extends Ability implements ISpellAbility {
     }
 
     @Override
-    public Player getTargetPlayer() {
-        return sa.getTargetPlayer();
+    public TargetChoices getTargets() {
+        return sa.getTargets();
     }
 
     @Override
@@ -299,8 +300,8 @@ public class WrappedAbility extends Ability implements ISpellAbility {
     }
 
     @Override
-    public void setTarget(final Target tgt) {
-        sa.setTarget(tgt);
+    public void setTargetRestrictions(final TargetRestrictions tgt) {
+        sa.setTargetRestrictions(tgt);
     }
 
     @Override
@@ -394,26 +395,25 @@ public class WrappedAbility extends Ability implements ISpellAbility {
                 //      needs to be expanded when a more difficult cards comes up
             } else {
                 // Store/replace target choices more properly to get this SA cleared.
-                Target tgt = sa.getTarget();
                 TargetChoices tc = null;
-                boolean storeChoices = tgt != null && tgt.getTargetChoices() != null;
+                boolean storeChoices = sa.getTargetRestrictions() != null;
 
                 if (storeChoices) {
-                    tc = tgt.getTargetChoices();
-                    tgt.resetTargets();
+                    tc = sa.getTargets();
+                    sa.resetTargets();
                 }
                 // There is no way this doTrigger here will have the same target as stored above
                 // So it's possible it's making a different decision here than will actually happen
                 if (!sa.doTrigger(this.isMandatory(), decider)) {
                     if (storeChoices) {
-                        tgt.resetTargets();
-                        tgt.setTargetChoices(tc);
+                        sa.resetTargets();
+                        sa.setTargets(tc);
                     }
                     return false;
                 }
                 if (storeChoices) {
-                    tgt.resetTargets();
-                    tgt.setTargetChoices(tc);
+                    sa.resetTargets();
+                    sa.setTargets(tc);
                 }
             }
         }

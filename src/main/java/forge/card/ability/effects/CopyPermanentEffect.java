@@ -25,7 +25,7 @@ import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.mana.ManaCost;
 import forge.card.spellability.Ability;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.Target;
+import forge.card.spellability.TargetRestrictions;
 import forge.game.Game;
 import forge.game.ai.ComputerUtilCard;
 import forge.game.player.Player;
@@ -70,7 +70,7 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
                 sa.getParam("NumCopies"), sa) : 1;
 
         List<Card> tgtCards = getTargetCards(sa);
-        final Target tgt = sa.getTarget();
+        final TargetRestrictions tgt = sa.getTargetRestrictions();
 
         if (sa.hasParam("ValidSupportedCopy")) {
             List<PaperCard> cards = Lists.newArrayList(CardDb.instance().getUniqueCards());

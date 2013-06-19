@@ -10,7 +10,7 @@ import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.cost.Cost;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.Target;
+import forge.card.spellability.TargetRestrictions;
 import forge.game.ai.ComputerUtilCard;
 import forge.game.ai.ComputerUtilMana;
 import forge.game.phase.PhaseType;
@@ -36,9 +36,9 @@ public class UnattachAllAi extends SpellAbilityAi {
         boolean chance = r.nextFloat() <= .9;
 
         // Attach spells always have a target
-        final Target tgt = sa.getTarget();
+        final TargetRestrictions tgt = sa.getTargetRestrictions();
         if (tgt != null) {
-            tgt.resetTargets();
+            sa.resetTargets();
         }
 
         if (abCost != null && abCost.getTotalMana().countX() > 0 && source.getSVar("X").equals("Count$xPaid")) {
@@ -69,7 +69,7 @@ public class UnattachAllAi extends SpellAbilityAi {
         final Player opp = ai.getOpponent();
         // Check if there are any valid targets
         List<ITargetable> targets = new ArrayList<ITargetable>();
-        final Target tgt = sa.getTarget();
+        final TargetRestrictions tgt = sa.getTargetRestrictions();
         if (tgt == null) {
             targets = AbilityUtils.getDefinedObjects(sa.getSourceCard(), sa.getParam("Defined"), sa);
         }

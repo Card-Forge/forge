@@ -12,7 +12,7 @@ import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.cost.Cost;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.Target;
+import forge.card.spellability.TargetRestrictions;
 import forge.game.ai.ComputerUtilCard;
 import forge.game.ai.ComputerUtilCombat;
 import forge.game.ai.ComputerUtilCost;
@@ -51,10 +51,10 @@ public class  DamageAllAi extends SpellAbilityAi {
         final List<Card> humanList = this.getKillableCreatures(sa, opp, dmg);
         List<Card> computerList = this.getKillableCreatures(sa, ai, dmg);
 
-        final Target tgt = sa.getTarget();
+        final TargetRestrictions tgt = sa.getTargetRestrictions();
         if (tgt != null && sa.canTarget(opp)) {
-            tgt.resetTargets();
-            sa.getTarget().addTarget(opp);
+            sa.resetTargets();
+            sa.getTargets().add(opp);
             computerList = new ArrayList<Card>();
         }
 
@@ -124,11 +124,11 @@ public class  DamageAllAi extends SpellAbilityAi {
         Player enemy = ai.getOpponent();
         final List<Card> humanList = this.getKillableCreatures(sa, enemy, dmg);
         List<Card> computerList = this.getKillableCreatures(sa, ai, dmg);
-        final Target tgt = sa.getTarget();
+        final TargetRestrictions tgt = sa.getTargetRestrictions();
 
         if (tgt != null && sa.canTarget(enemy)) {
-            tgt.resetTargets();
-            sa.getTarget().addTarget(enemy);
+            sa.resetTargets();
+            sa.getTargets().add(enemy);
             computerList.clear();
         }
         // Don't get yourself killed
@@ -208,11 +208,11 @@ public class  DamageAllAi extends SpellAbilityAi {
         Player enemy = ai.getOpponent();
         final List<Card> humanList = this.getKillableCreatures(sa, enemy, dmg);
         List<Card> computerList = this.getKillableCreatures(sa, ai, dmg);
-        final Target tgt = sa.getTarget();
+        final TargetRestrictions tgt = sa.getTargetRestrictions();
 
         if (tgt != null && sa.canTarget(enemy)) {
-            tgt.resetTargets();
-            sa.getTarget().addTarget(enemy);
+            sa.resetTargets();
+            sa.getTargets().add(enemy);
             computerList.clear();
         }
 

@@ -50,7 +50,7 @@ import forge.card.spellability.AbilityManaPart;
 import forge.card.spellability.AbilityStatic;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityStackInstance;
-import forge.card.spellability.Target;
+import forge.card.spellability.TargetRestrictions;
 import forge.card.staticability.StaticAbility;
 import forge.error.BugReporter;
 import forge.game.Game;
@@ -173,7 +173,7 @@ public class ComputerUtil {
         int restrict = 0;
 
         final Card source = sa.getSourceCard();
-        final Target tgt = sa.getTarget();
+        final TargetRestrictions tgt = sa.getTargetRestrictions();
 
 
         // Play higher costing spells first?
@@ -824,7 +824,7 @@ public class ComputerUtil {
                         }
                     }
 
-                    final Target tgt = sa.getTarget();
+                    final TargetRestrictions tgt = sa.getTargetRestrictions();
                     if (tgt != null) {
                         if (CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), tgt.getValidTgts(), controller, sa.getSourceCard()).contains(card)) {
                             return true;
@@ -872,7 +872,7 @@ public class ComputerUtil {
                         if (AbilityUtils.getDefinedCards(sa.getSourceCard(), sa.getParam("Defined"), sa).contains(card)) {
                             prevented += AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("Amount"), sa);
                         }
-                        final Target tgt = sa.getTarget();
+                        final TargetRestrictions tgt = sa.getTargetRestrictions();
                         if (tgt != null) {
                             if (CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), tgt.getValidTgts(), controller, sa.getSourceCard()).contains(card)) {
                                 prevented += AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("Amount"), sa);
@@ -1236,7 +1236,7 @@ public class ComputerUtil {
                 if (dmg <= damage) {
                     continue;
                 }
-                final Target tgt = sa.getTarget();
+                final TargetRestrictions tgt = sa.getTargetRestrictions();
                 if (tgt == null) {
                     continue;
                 }
@@ -1263,16 +1263,16 @@ public class ComputerUtil {
      * @return a {@link java.util.ArrayList} object.
      * @since 1.0.15
      */
-    public static ArrayList<Object> predictThreatenedObjects(final Player aiPlayer, final SpellAbility sa) {
+    public static List<ITargetable> predictThreatenedObjects(final Player aiPlayer, final SpellAbility sa) {
         final Game game = aiPlayer.getGame();
-        final ArrayList<Object> objects = new ArrayList<Object>();
+        final List<ITargetable> objects = new ArrayList<ITargetable>();
         if (game.getStack().isEmpty()) {
             return objects;
         }
     
         // check stack for something that will kill this
         final SpellAbility topStack = game.getStack().peekAbility();
-        objects.addAll(ComputerUtil.predictThreatenedObjects(aiPlayer, sa, topStack));
+        Iterables.addAll(objects, ComputerUtil.predictThreatenedObjects(aiPlayer, sa, topStack));
     
         return objects;
     }
@@ -1289,9 +1289,9 @@ public class ComputerUtil {
      * @return a {@link java.util.ArrayList} object.
      * @since 1.0.15
      */
-    public static List<ITargetable> predictThreatenedObjects(final Player aiPlayer, final SpellAbility saviour,
+    private static Iterable<? extends ITargetable> predictThreatenedObjects(final Player aiPlayer, final SpellAbility saviour,
             final SpellAbility topStack) {
-        List<ITargetable> objects = new ArrayList<ITargetable>();
+        Iterable<? extends ITargetable> objects = new ArrayList<ITargetable>();
         final List<ITargetable> threatened = new ArrayList<ITargetable>();
         ApiType saviourApi = saviour.getApi();
     
@@ -1304,20 +1304,17 @@ public class ComputerUtil {
     
         // Can only Predict things from AFs
         if (threatApi != null) {
-            final Target tgt = topStack.getTarget();
+            final TargetRestrictions tgt = topStack.getTargetRestrictions();
     
             if (tgt == null) {
                 if (topStack.hasParam("Defined")) {
                     objects = AbilityUtils.getDefinedObjects(source, topStack.getParam("Defined"), topStack);
                 } else if (topStack.hasParam("ValidCards")) {
                     List<Card> battleField = aiPlayer.getCardsIn(ZoneType.Battlefield);
-                    List<Card> cards = CardLists.getValidCards(battleField, topStack.getParam("ValidCards").split(","), source.getController(), source);
-                    for (Card card : cards) {
-                        objects.add(card);
-                    }
+                    objects = CardLists.getValidCards(battleField, topStack.getParam("ValidCards").split(","), source.getController(), source);
                 }
             } else {
-                objects = tgt.getTargets();
+                objects = topStack.getTargets().getTargets();
             }
     
             // Determine if Defined Objects are "threatened" will be destroyed
@@ -1440,7 +1437,7 @@ public class ComputerUtil {
             }
         }
     
-        threatened.addAll(ComputerUtil.predictThreatenedObjects(aiPlayer, saviour, topStack.getSubAbility()));
+        Iterables.addAll(threatened, ComputerUtil.predictThreatenedObjects(aiPlayer, saviour, topStack.getSubAbility()));
         return threatened;
     }
 

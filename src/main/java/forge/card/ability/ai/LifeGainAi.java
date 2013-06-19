@@ -6,7 +6,7 @@ import forge.card.ability.SpellAbilityAi;
 import forge.card.cost.Cost;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.Target;
+import forge.card.spellability.TargetRestrictions;
 import forge.game.Game;
 import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilCombat;
@@ -112,11 +112,11 @@ public class LifeGainAi extends SpellAbilityAi {
             return false;
         }
 
-        final Target tgt = sa.getTarget();
+        final TargetRestrictions tgt = sa.getTargetRestrictions();
         if (tgt != null) {
-            tgt.resetTargets();
+            sa.resetTargets();
             if (sa.canTarget(ai)) {
-                tgt.addTarget(ai);
+                sa.getTargets().add(ai);
             } else {
                 return false;
             }
@@ -146,13 +146,13 @@ public class LifeGainAi extends SpellAbilityAi {
         // If the Target is gaining life, target self.
         // if the Target is modifying how much life is gained, this needs to be
         // handled better
-        final Target tgt = sa.getTarget();
+        final TargetRestrictions tgt = sa.getTargetRestrictions();
         if (tgt != null) {
-            tgt.resetTargets();
+            sa.resetTargets();
             if (sa.canTarget(ai)) {
-                tgt.addTarget(ai);
+                sa.getTargets().add(ai);
             } else if (mandatory && sa.canTarget(ai.getOpponent())) {
-                tgt.addTarget(ai.getOpponent());
+                sa.getTargets().add(ai.getOpponent());
             } else {
                 return false;
             }

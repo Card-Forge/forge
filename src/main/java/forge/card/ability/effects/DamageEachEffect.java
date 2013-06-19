@@ -65,14 +65,9 @@ public class DamageEachEffect extends SpellAbilityEffect {
             sources = CardLists.getValidCards(sources, sa.getParam("ValidCards"), card.getController(), card);
         }
 
-        final List<ITargetable> tgts;
-        if (sa.getTarget() == null) {
-            tgts = AbilityUtils.getDefinedObjects(sa.getSourceCard(), sa.getParam("DefinedPlayers"), sa);
-        } else {
-            tgts = sa.getTarget().getTargets();
-        }
+        final List<ITargetable> tgts = getTargets(sa, "DefinedPlayers");
 
-        final boolean targeted = (sa.getTarget() != null);
+        final boolean targeted = (sa.usesTargeting());
 
         for (final Object o : tgts) {
             for (final Card source : sources) {

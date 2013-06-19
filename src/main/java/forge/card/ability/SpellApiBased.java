@@ -10,16 +10,16 @@ import forge.card.ability.effects.ManaReflectedEffect;
 import forge.card.cost.Cost;
 import forge.card.spellability.AbilityManaPart;
 import forge.card.spellability.Spell;
-import forge.card.spellability.Target;
+import forge.card.spellability.TargetRestrictions;
 
 public class SpellApiBased extends Spell {
     private static final long serialVersionUID = -6741797239508483250L;
     private final SpellAbilityEffect effect;
     private final SpellAbilityAi ai;
 
-    public SpellApiBased(ApiType api0, Card sourceCard, Cost abCost, Target tgt, Map<String, String> params0) {
+    public SpellApiBased(ApiType api0, Card sourceCard, Cost abCost, TargetRestrictions tgt, Map<String, String> params0) {
         super(sourceCard, abCost);
-        this.setTarget(tgt);
+        this.setTargetRestrictions(tgt);
         
         params = params0;
         api = api0;

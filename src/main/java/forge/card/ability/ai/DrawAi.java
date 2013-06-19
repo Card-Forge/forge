@@ -18,7 +18,6 @@
  */
 package forge.card.ability.ai;
 
-import java.util.List;
 import java.util.Random;
 
 import forge.Card;
@@ -30,7 +29,7 @@ import forge.card.cost.CostPart;
 import forge.card.cost.PaymentDecision;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.Target;
+import forge.card.spellability.TargetRestrictions;
 import forge.game.Game;
 import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilCost;
@@ -53,7 +52,7 @@ public class DrawAi extends SpellAbilityAi {
      */
     @Override
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
-        final Target tgt = sa.getTarget();
+        final TargetRestrictions tgt = sa.getTargetRestrictions();
         final Card source = sa.getSourceCard();
         final Cost abCost = sa.getPayCosts();
         final Game game = ai.getGame();
@@ -95,8 +94,8 @@ public class DrawAi extends SpellAbilityAi {
         }
 
         if (tgt != null) {
-            final List<Player> players = tgt.getTargetPlayers();
-            if ((players.size() > 0) && players.get(0).isOpponentOf(ai)) {
+            final Player player = sa.getTargets().getFirstTargetedPlayer();
+            if (player != null && player.isOpponentOf(ai)) {
                 return true;
             }
         }
@@ -139,7 +138,7 @@ public class DrawAi extends SpellAbilityAi {
     }
 
     private boolean targetAI(final Player ai, final SpellAbility sa, final boolean mandatory) {
-        final Target tgt = sa.getTarget();
+        final TargetRestrictions tgt = sa.getTargetRestrictions();
         final Card source = sa.getSourceCard();
         final boolean drawback = (sa instanceof AbilitySub);
         final Game game = ai.getGame();
@@ -180,7 +179,7 @@ public class DrawAi extends SpellAbilityAi {
 
         if (tgt != null) {
             // ability is targeted
-            tgt.resetTargets();
+            sa.resetTargets();
 
             final boolean canTgtHuman = sa.canTarget(opp);
             final boolean canTgtComp = sa.canTarget(ai);
@@ -192,7 +191,7 @@ public class DrawAi extends SpellAbilityAi {
 
             if (canTgtHuman && !opp.cantLose() && numCards >= humanLibrarySize) {
                 // Deck the Human? DO IT!
-                tgt.addTarget(opp);
+                sa.getTargets().add(opp);
                 return true;
             }
 
@@ -228,9 +227,9 @@ public class DrawAi extends SpellAbilityAi {
             }
 
             if ((!tgtHuman || !canTgtHuman) && canTgtComp) {
-                tgt.addTarget(ai);
+                sa.getTargets().add(ai);
             } else if (mandatory && canTgtHuman) {
-                tgt.addTarget(opp);
+                sa.getTargets().add(opp);
             } else {
                 return false;
             }
