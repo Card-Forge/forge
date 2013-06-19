@@ -592,7 +592,7 @@ public class Combat {
         for (final AttackingBand band : attacking) {
             band.calculateBlockedState();
 
-            if (band.getBlocked()) {
+            if (!band.getBlocked()) {
                 for (Card attacker : band.getAttackers()) {
                     // Run Unblocked Trigger
                     final HashMap<String, Object> runParams = new HashMap<String, Object>();
