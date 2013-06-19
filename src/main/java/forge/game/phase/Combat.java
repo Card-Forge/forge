@@ -441,12 +441,12 @@ public class Combat {
     }
 
     public final List<Card> getBlockers(final Card card, boolean ordered) {
-        // If requesting the ordered blocking lsit pass true, directly. 
+        // If requesting the ordered blocking list pass true, directly. 
         List<Card> list = null;
         if (ordered) {
             list = this.attackerDamageAssignmentOrder.containsKey(card) ? this.attackerDamageAssignmentOrder.get(card) : null;
         } else {
-            list = this.getBandByAttacker(card).getBlockers();
+            list = this.getBandByAttacker(card) != null ? this.getBandByAttacker(card).getBlockers() : null;
         }
 
         if (list == null) {
