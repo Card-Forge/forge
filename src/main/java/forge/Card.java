@@ -492,14 +492,6 @@ public class Card extends GameEntity implements Comparable<Card> {
         return Card.storableSVars;
     }
 
-    // hacky code below, used to limit the number of times an ability
-    // can be used per turn like Vampire Bats
-    // should be put in SpellAbility, but it is put here for convenience
-    // this is make public just to make things easy
-    // this code presumes that each card only has one ability that can be
-    // used a limited number of times per turn
-    // CardFactory.SSP_canPlay(Card) uses these variables
-
     /**
      * 
      * Resets the unique number for this Card to 1.
@@ -952,22 +944,6 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
 
     /**
-     * <p>
-     * canAnyPlayerActivate.
-     * </p>
-     * 
-     * @return a boolean.
-     */
-    public final boolean canAnyPlayerActivate() {
-        for (final SpellAbility s : this.getCharacteristics().getSpellAbility()) {
-            if (s.getRestrictions().isAnyPlayer()) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    /**
      * a Card that this Card must block if able in an upcoming combat. This is
      * cleared at the end of each turn.
      * 
@@ -1069,17 +1045,6 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     public final void setCloneOrigin(final Card name) {
         this.cloneOrigin = name;
-    }
-
-    /**
-     * <p>
-     * Getter for the field <code>sacrificeAtEOT</code>.
-     * </p>
-     * 
-     * @return a boolean.
-     */
-    public final boolean getSacrificeAtEOT() {
-        return this.hasKeyword("At the beginning of the end step, sacrifice CARDNAME.");
     }
 
     /**
@@ -1286,9 +1251,6 @@ public class Card extends GameEntity implements Comparable<Card> {
         return !this.counters.isEmpty();
     }
 
-
-
-    // get all counters from a card
     /**
      * <p>
      * Setter for the field <code>counters</code>.
@@ -1302,7 +1264,6 @@ public class Card extends GameEntity implements Comparable<Card> {
         this.counters = allCounters;
     }
 
-    // get all counters from a card
     /**
      * <p>
      * clearCounters.
@@ -4723,7 +4684,6 @@ public class Card extends GameEntity implements Comparable<Card> {
     public final void setUniqueNumber(final int n) {
         //System.out.println("Card _ " + n);
         this.uniqueNumber = n;
-        //this.updateObservers();
     }
 
     /**
@@ -6168,13 +6128,13 @@ public class Card extends GameEntity implements Comparable<Card> {
             }
         } else if (property.equals("wasDealtDamageByEquipeeThisTurn")) {
             Card equipee = source.getEquippingCard();
-            if (this.getReceivedDamageFromThisTurn().keySet().isEmpty()
+            if (equipee == null || this.getReceivedDamageFromThisTurn().keySet().isEmpty()
                     || !this.getReceivedDamageFromThisTurn().keySet().contains(equipee)) {
                 return false;
             }
          } else if (property.equals("wasDealtDamageByEnchantedThisTurn")) {
             Card enchanted = source.getEnchantingCard();
-            if (this.getReceivedDamageFromThisTurn().keySet().isEmpty()
+            if (enchanted == null || this.getReceivedDamageFromThisTurn().keySet().isEmpty()
                     || !this.getReceivedDamageFromThisTurn().keySet().contains(enchanted)) {
                 return false;
             }
@@ -7025,8 +6985,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         this.dealtDamageToPlayerThisTurn.clear();
     }
 
-    // this is the minimal damage a trampling creature has to assign to a
-    // blocker
+    // this is the minimal damage a trampling creature has to assign to a blocker
     /**
      * <p>
      * getLethalDamage.
@@ -7086,17 +7045,6 @@ public class Card extends GameEntity implements Comparable<Card> {
         } else {
             this.assignedDamageMap.put(sourceCard, this.assignedDamageMap.get(sourceCard) + assignedDamage);
         }
-
-        Log.debug("***");
-        /*
-         * if(sourceCards.size() > 1)
-         * System.out.println("(MULTIPLE blockers):");
-         * System.out.println("Assigned " + damage + " damage to " + card); for
-         * (int i=0;i<sourceCards.size();i++){
-         * System.out.println(sourceCards.get(i).getName() +
-         * " assigned damage to " + card.getName()); }
-         * System.out.println("***");
-         */
     }
 
     /**
@@ -7166,7 +7114,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         }
     }
 
-    // This should be also usable by the AI to forecast an effect (so it must not change the game state)
+    // This is used by the AI to forecast an effect (so it must not change the game state)
     /**
      * <p>
      * staticDamagePrevention.
@@ -7392,7 +7340,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         return restDamage;
     }
 
-    // This should be also usable by the AI to forecast an effect (so it must not change the game state)
+    // This is used by the AI to forecast an effect (so it must not change the game state)
     /**
      * <p>
      * staticReplaceDamage.
@@ -7584,9 +7532,6 @@ public class Card extends GameEntity implements Comparable<Card> {
                     game.getStack().addSimultaneousStackEntry(abDestoryNoRegen);
                 }
             }
-        
-
-            
                 
             boolean wither = (getGame().getStaticEffects().getGlobalRuleChange(GlobalRuleChange.alwaysWither)
                     || source.hasKeyword("Wither") || source.hasKeyword("Infect"));

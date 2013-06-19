@@ -522,8 +522,7 @@ public class AiAttackController {
                     break;
                 }
             }
-            if (mustAttack || attacker.getSacrificeAtEOT()
-                    || attacker.getController().getMustAttackEntity() != null
+            if (mustAttack || attacker.getController().getMustAttackEntity() != null
                     || attacker.getSVar("MustAttack").equals("True")) {
                 combat.addAttacker(attacker, defender);
                 attackersLeft.remove(attacker);
