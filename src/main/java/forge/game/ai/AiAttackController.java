@@ -34,7 +34,6 @@ import forge.game.phase.Combat;
 import forge.game.phase.CombatUtil;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
-import forge.util.MyRandom;
 
 
 //doesHumanAttackAndWin() uses the global variable AllZone.getComputerPlayer()
@@ -52,8 +51,8 @@ public class AiAttackController {
     private final List<Card> attackers;
     private final List<Card> blockers;
 
-    private final Random random = MyRandom.getRandom();
-    private final int randomInt = this.random.nextInt();
+    private final static Random random = new Random();
+    private final static int randomInt = random.nextInt();
 
     private List<Card> oppList; // holds human player creatures
     private List<Card> myList; // holds computer creatures
@@ -492,7 +491,7 @@ public class AiAttackController {
         // I know this is a little confusing
         Game game = ai.getGame();
 
-        this.random.setSeed(game.getPhaseHandler().getTurn() + this.randomInt);
+        random.setSeed(game.getPhaseHandler().getTurn() + this.randomInt);
 
         final Combat combat = new Combat();
         combat.setAttackingPlayer(game.getCombat().getAttackingPlayer());
