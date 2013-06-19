@@ -49,7 +49,7 @@ public class SpellAbilityStackInstance {
 
     // When going to a SubAbility that SA has a Instance Choice object
     /** The tc. */
-    private TargetChoices tc = null;
+    private TargetChoices tc = new TargetChoices();
     private List<Card> splicedCards = null;
 
     /** The stack description. */
