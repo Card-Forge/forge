@@ -163,6 +163,14 @@ public final class CardPredicates {
         };
     } // getColor()
 
+    public static final Predicate<Card> hasCMC(final int cmc) {
+        return new Predicate<Card>() {
+            @Override
+            public boolean apply(final Card c) {
+                return c.getCMC() == cmc;
+            }
+        };
+    }
 
     public static class Presets {
 

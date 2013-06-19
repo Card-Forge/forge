@@ -697,7 +697,7 @@ public class ComputerUtilMana {
      * 
      * @return a {@link java.util.ArrayList} object.
      */
-    private static final ArrayList<SpellAbility> getAIPlayableMana(Card c) {
+    public static final ArrayList<SpellAbility> getAIPlayableMana(Card c) {
         final ArrayList<SpellAbility> res = new ArrayList<SpellAbility>();
         for (final SpellAbility a : c.getManaAbility()) {
     

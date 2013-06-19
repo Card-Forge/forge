@@ -35,10 +35,12 @@ import forge.CardPredicates;
 import forge.CardPredicates.Presets;
 import forge.Constant;
 import forge.GameEntity;
+import forge.card.MagicColor;
 import forge.card.ability.ApiType;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.CostDiscard;
 import forge.card.cost.CostPart;
+import forge.card.spellability.AbilityManaPart;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellPermanent;
@@ -324,15 +326,39 @@ public class AiController {
         if (landList.isEmpty())
             return null;
     
-        // play as many lands as you can
-        int ix = 0;
-        while (landList.get(ix).isReflectedLand() && ((ix + 1) < landList.size())) {
-            // Skip through reflected lands. Choose last if they are all
-            // reflected.
-            ix++;
+        //Skip reflected lands.
+        List<Card> unreflectedLands = new ArrayList<Card>(landList);
+        for (Card l : landList) {
+            if (l.isReflectedLand()) {
+                unreflectedLands.remove(l);
+            }
         }
-    
-        Card land = landList.get(ix);
+
+        if (!unreflectedLands.isEmpty()) {
+            landList = unreflectedLands;
+        }
+
+        // Choose first land to be able to play a one drop
+        if (player.getLandsInPlay().isEmpty()) {
+            List<Card> oneDrops = CardLists.filter(player.getCardsIn(ZoneType.Hand), CardPredicates.hasCMC(1));
+            for (int i = 0; i < MagicColor.WUBRG.length; i++) {
+                byte color = MagicColor.WUBRG[i];
+                if (!CardLists.filter(oneDrops, CardPredicates.isColor(color)).isEmpty()) {
+                    for (Card land : landList) {
+                        if (land.isType(Constant.Color.BASIC_LANDS.get(i)))
+                            return land;
+                        
+                        for (final SpellAbility m : ComputerUtilMana.getAIPlayableMana(land)) {
+                            AbilityManaPart mp = m.getManaPart();
+                            if (mp.canProduce(MagicColor.toShortString(color))) {
+                                return land;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
         //play basic lands that are needed the most
         if (Iterables.any(landList, CardPredicates.Presets.BASIC_LANDS)) {
             final List<Card> combined = player.getCardsIn(ZoneType.Battlefield);
@@ -363,10 +389,8 @@ public class AiController {
             if (minType != null) {
                 landList = CardLists.getType(landList, minType);
             }
-    
-            land = landList.get(0);
         }
-        return land;
+        return landList.get(0);
     }
 
     // if return true, go to next phase
