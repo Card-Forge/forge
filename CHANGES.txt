@@ -8,8 +8,8 @@ Forge Beta: 06-##-2013 ver 1.4.2
 Release Notes
 -------------
 
-- Java 7 -
-The devs are discussing a plan to update the battlefield display code with Java FX 2.2 and this should help to improve a few things. Java FX 2.2 requires Java 7 so please update your Java runtime environment in the nearest future. At some point a new version of Forge will no longer run under Java 6.
+- Forge now requires Java 7 -
+Please update your Java runtime environment. At this point Forge versions 1.4.2 and above will no longer run under Java 6.
 
 
 - New M14 cards -
