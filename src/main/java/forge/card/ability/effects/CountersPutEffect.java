@@ -90,7 +90,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
             }
         }
 
-        List<Card> tgtCards = getTargetCards(sa);
+        List<Card> tgtCards = getDefinedCardsOrTargeted(sa);
 
         for (final Card tgtCard : tgtCards) {
             counterAmount = (sa.usesTargeting() && sa.hasParam("DividedAsYouChoose")) ? sa.getTargetRestrictions().getDividedValue(tgtCard) : counterAmount;

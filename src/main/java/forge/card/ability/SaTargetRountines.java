@@ -17,6 +17,7 @@ public class SaTargetRountines {
     // Cards
     protected List<Card> getTargetCards(SpellAbility sa) {                                  return getCards(false, "Defined", sa); }
     protected List<Card> getTargetCards(SpellAbility sa, String definedParam) {             return getCards(false, definedParam, sa); }
+    protected List<Card> getDefinedCardsOrTargeted(SpellAbility sa) {                       return getCards(true, "Defined", sa); }
     protected List<Card> getDefinedCardsOrTargeted(SpellAbility sa, String definedParam) {  return getCards(true, definedParam, sa); }
 
     private List<Card> getCards(boolean definedFirst, String definedParam, SpellAbility sa) {
