@@ -175,7 +175,7 @@ public class PumpEffect extends SpellAbilityEffect {
 
     @Override
     public void resolve(SpellAbility sa) {
-        List<Card> tgtCards = new ArrayList<Card>();
+        
         final ArrayList<Card> untargetedCards = new ArrayList<Card>();
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         final Game game = sa.getActivatingPlayer().getGame();
@@ -189,7 +189,8 @@ public class PumpEffect extends SpellAbilityEffect {
         final int d = AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("NumDef"), sa);
 
         List<GameEntity> tgts = new ArrayList<GameEntity>();
-        tgts.addAll(getTargetCards(sa));
+        List<Card> tgtCards = getTargetCards(sa);
+        tgts.addAll(tgtCards);
         tgts.addAll(getTargetPlayers(sa));
 
         if (sa.hasParam("DefinedChosenKW")) {
