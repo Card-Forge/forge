@@ -64,6 +64,9 @@ War Elephant
 Urza's Avenger
 Darksteel Garrison
 Pulmonic Sliver
+Djinn Illuminatus
+Wall of Shards
+Restore Balance
 
 
 --------------------
@@ -133,6 +136,9 @@ Young Pyromancer
 Messenger Drake
 Seacoast Drake
 Warden of Evos Isle
+Burning Earth
+Goblin Diplomats
+Seismic Stomp
 
 
 ------------
