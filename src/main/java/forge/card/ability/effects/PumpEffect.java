@@ -179,7 +179,7 @@ public class PumpEffect extends SpellAbilityEffect {
         final ArrayList<Card> untargetedCards = new ArrayList<Card>();
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         final Game game = sa.getActivatingPlayer().getGame();
-        List<Player> tgtPlayers = new ArrayList<Player>();
+        
         String pumpRemembered = null;
         String pumpForget = null;
         String pumpImprint = null;
@@ -190,8 +190,9 @@ public class PumpEffect extends SpellAbilityEffect {
 
         List<GameEntity> tgts = new ArrayList<GameEntity>();
         List<Card> tgtCards = getTargetCards(sa);
+        List<Player> tgtPlayers = getTargetPlayers(sa);
         tgts.addAll(tgtCards);
-        tgts.addAll(getTargetPlayers(sa));
+        tgts.addAll(tgtPlayers);
 
         if (sa.hasParam("DefinedChosenKW")) {
             if (sa.getParam("DefinedChosenKW").equals("Type")) {
