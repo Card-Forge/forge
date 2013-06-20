@@ -1306,7 +1306,7 @@ public abstract class SpellAbility implements ISpellAbility, ITargetable {
 
     @Override
     public boolean canBeTargetedBy(SpellAbility sa) {
-        return sa.canBeTargetedBy(this);
+        return sa.canTargetSpellAbility(this);
     }
 
     /** The chosen target. */
