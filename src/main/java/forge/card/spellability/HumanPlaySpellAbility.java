@@ -92,7 +92,10 @@ public class HumanPlaySpellAbility {
             }
     
             // no worries here. The same thread must resolve, and by this moment ability will have been resolved already
-            clearTargets(ability);
+            // Triggers haven't resolved yet ??
+            if (!isAlreadyTargeted) {
+                clearTargets(ability);
+            }
         }
 
     }
