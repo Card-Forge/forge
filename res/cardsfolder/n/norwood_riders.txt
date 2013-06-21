@@ -2,7 +2,7 @@ Name:Norwood Riders
 ManaCost:3 G
 Types:Creature Elf
 PT:3/3
-K:CARDNAME can't be blocked by more than one creature.
+K:CantBeBlockedByAmount GT1
 SVar:Picture:http://resources.wizards.com/magic/cards/p2/en-us/card6615.jpg
 Oracle:Norwood Riders can't be blocked by more than one creature.
 SetInfo:PO2 Common

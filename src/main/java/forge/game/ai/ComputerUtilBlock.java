@@ -343,7 +343,7 @@ public class ComputerUtilBlock {
 
         for (final Card attacker : ComputerUtilBlock.getAttackersLeft()) {
 
-            if (attacker.hasKeyword("CARDNAME can't be blocked except by two or more creatures.")) {
+            if (attacker.hasStartOfKeyword("CantBeBlockedByAmount LT")) {
                 continue;
             }
 
@@ -405,7 +405,7 @@ public class ComputerUtilBlock {
      *            a {@link forge.game.phase.Combat} object.
      * @return a {@link forge.game.phase.Combat} object.
      */
-    static final Predicate<Card> rampagesOrNeedsManyToBlock = Predicates.or(CardPredicates.containsKeyword("Rampage"), CardPredicates.containsKeyword("CARDNAME can't be blocked by more than one creature."));
+    static final Predicate<Card> rampagesOrNeedsManyToBlock = Predicates.or(CardPredicates.containsKeyword("Rampage"), CardPredicates.containsKeyword("CantBeBlockedByAmount GT"));
 
     private static Combat makeGangBlocks(final Player ai, final Combat combat) {
         List<Card> currentAttackers = CardLists.filter(ComputerUtilBlock.getAttackersLeft(), Predicates.not(rampagesOrNeedsManyToBlock));
@@ -537,7 +537,7 @@ public class ComputerUtilBlock {
 
         for (final Card attacker : ComputerUtilBlock.getAttackersLeft()) {
 
-            if (attacker.hasKeyword("CARDNAME can't be blocked except by two or more creatures.")) {
+            if (attacker.hasStartOfKeyword("CantBeBlockedByAmount LT")) {
                 continue;
             }
 
@@ -579,8 +579,7 @@ public class ComputerUtilBlock {
         
         Card attacker = attackers.get(0);
         
-        if (attacker.hasKeyword("CARDNAME can't be blocked except by two or more creatures.")
-                || attacker.hasKeyword("You may have CARDNAME assign its combat damage as though it weren't blocked.")) {
+        if (attacker.hasStartOfKeyword("CantBeBlockedByAmount LT") || attacker.hasKeyword("You may have CARDNAME assign its combat damage as though it weren't blocked.")) {
             attackers.remove(0);
             return makeChumpBlocks(ai, combat, attackers);
         }
@@ -643,8 +642,7 @@ public class ComputerUtilBlock {
 
         for (final Card attacker : tramplingAttackers) {
 
-            if ((attacker.hasKeyword("CARDNAME can't be blocked except by two or more creatures.")
-                    && !combat.isBlocked(attacker))
+            if ((attacker.hasStartOfKeyword("CantBeBlockedByAmount LT") && !combat.isBlocked(attacker))
                     || attacker.hasKeyword("You may have CARDNAME assign its combat damage as though it weren't blocked.")) {
                 continue;
             }

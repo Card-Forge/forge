@@ -417,11 +417,8 @@ public class ComputerUtilCard {
             if (c.hasKeyword("Intimidate")) {
                 value += power * 6;
             }
-            if (c.hasStartOfKeyword("CARDNAME can't be blocked except by")) {
-                value += power * 5;
-            }
-            if (c.hasStartOfKeyword("CARDNAME can't be blocked by")) {
-                value += power * 2;
+            if (c.hasStartOfKeyword("CantBeBlockedBy")) {
+                value += power * 3;
             }
         }
     

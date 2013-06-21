@@ -951,9 +951,7 @@ public class AiAttackController {
             return true;
         }
 
-        if (numberOfPossibleBlockers > 1
-                || (numberOfPossibleBlockers == 1
-                    && !attacker.hasKeyword("CARDNAME can't be blocked except by two or more creatures."))) {
+        if (numberOfPossibleBlockers > 1 || (numberOfPossibleBlockers == 1 && CombatUtil.canAttackerBeBlockedWithAmount(attacker, 1))) {
             canBeBlocked = true;
         }
         /*System.out.println(attacker + " canBeKilledByOne: " + canBeKilledByOne + " canKillAll: "

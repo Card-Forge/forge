@@ -2,7 +2,7 @@ Name:Stalking Tiger
 ManaCost:3 G
 Types:Creature Cat
 PT:3/3
-K:CARDNAME can't be blocked by more than one creature.
+K:CantBeBlockedByAmount GT1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stalking_tiger.jpg
 Oracle:Stalking Tiger can't be blocked by more than one creature.
 SetInfo:PTK Common

@@ -73,8 +73,12 @@ public class Lang {
         else 
             strCount = String.valueOf(cnt) + " "; 
         return strCount + countedForm;
-    }    
+    }
     
+    public static <T> String nounWithNumeral(int cnt, String noun) {
+        String countedForm = cnt <= 1 ? noun : getPlural(noun);
+        return getNumeral(cnt) + " " + countedForm;
+    }        
     /**
      * TODO: Write javadoc for this method.
      * @param name
@@ -95,5 +99,23 @@ public class Lang {
             if ( c == l ) return true;
         return false;
         
+    }
+    
+    public final static String[] numbers0 = new String[] {
+        "zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", 
+        "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eightteen", "nineteen" };
+    public final static String[] numbers20 = new String[] {"twenty", "thirty", "fourty", "fifty", "sixty", "seventy", "eighty", "ninety" };
+    
+    public static String getNumeral(int n) {
+        String prefix = n < 0 ? "minus " : "";
+        n = Math.abs(n);
+        if ( n >= 0 && n < 20 )
+            return prefix + numbers0[n];
+        if ( n < 100 ) {
+            int n1 = n % 10;
+            String ones = n1 == 0 ? "" : numbers0[n1];
+            return prefix + numbers20[(n / 10) - 2] + " " + ones;
+        }
+        return Integer.toString(n);
     }
 }

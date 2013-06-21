@@ -2,7 +2,7 @@ Name:Horde of Boggarts
 ManaCost:3 R
 Types:Creature Goblin
 PT:*/*
-K:CARDNAME can't be blocked except by two or more creatures.
+K:CantBeBlockedByAmount LT2
 S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of red permanents you control.
 SVar:X:Count$Valid Permanent.Red+YouCtrl
 SVar:BuffedBy:Permanent.Red

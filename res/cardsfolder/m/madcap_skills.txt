@@ -3,7 +3,7 @@ ManaCost:1 R
 Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ 1 R | ValidTgts$ Creature | AILogic$ Pump
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 3 | AddHiddenKeyword$ CARDNAME can't be blocked except by two or more creatures. | Description$ Enchanted creature gets +3/+0 and can't be blocked except by two or more creatures.
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 3 | AddKeyword$ CantBeBlockedByAmount LT2 | Description$ Enchanted creature gets +3/+0 and can't be blocked except by two or more creatures.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/madcap_skills.jpg
 Oracle:Enchant creature\nEnchanted creature gets +3/+0 and can't be blocked except by two or more creatures.
 SetInfo:GTC Common

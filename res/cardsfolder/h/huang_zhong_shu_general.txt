@@ -2,7 +2,7 @@ Name:Huang Zhong, Shu General
 ManaCost:2 W W
 Types:Legendary Creature Human Soldier
 PT:2/3
-K:CARDNAME can't be blocked by more than one creature.
+K:CantBeBlockedByAmount GT1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/huang_zhong_shu_general.jpg
 Oracle:Huang Zhong, Shu General can't be blocked by more than one creature.
 SetInfo:PTK Rare

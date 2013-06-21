@@ -1,7 +1,8 @@
 All creatures able to block CARDNAME do so.
 CARDNAME attacks each turn if able.
 CARDNAME can't be regenerated.
-CARDNAME can't be blocked except by two or more creatures.
+CantBeBlockedByAmount LT2
+CantBeBlockedByAmount LT3
 CARDNAME doesn't untap during your untap step.
 Changeling
 Convoke

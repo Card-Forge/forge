@@ -28,6 +28,7 @@ import org.apache.commons.lang3.StringUtils;
 import com.esotericsoftware.minlog.Log;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 
 import forge.Card;
 import forge.CardLists;
@@ -50,6 +51,8 @@ import forge.game.combat.AttackingBand;
 import forge.game.player.Player;
 import forge.game.player.PlayerController.ManaPaymentPurpose;
 import forge.game.zone.ZoneType;
+import forge.util.Expressions;
+import forge.util.TextUtil;
 
 
 /**
@@ -179,8 +182,7 @@ public class CombatUtil {
             return true;
         }
 
-        if (attacker.hasKeyword("CARDNAME can't be blocked by more than one creature.") &&
-                !combat.getBlockers(attacker).isEmpty()) {
+        if (attacker.hasStartOfKeyword("CantBeBlockedByAmount GT") && !combat.getBlockers(attacker).isEmpty()) {
             return false;
         }
         return CombatUtil.canBeBlocked(attacker);
@@ -321,24 +323,14 @@ public class CombatUtil {
             return false;
         }
 
-        if (attacker.hasKeyword("CARDNAME can't be blocked except by two or more creatures.")) {
-            int blocks = 0;
-            for (final Card blocker : blockers) {
-                if (CombatUtil.canBlock(attacker, blocker)) {
-                    blocks += 1;
-                    if (blocks > 1) {
-                        return true;
-                    }
-                }
-            }
-        } else {
-            for (final Card blocker : blockers) {
-                if (CombatUtil.canBlock(attacker, blocker)) {
-                    return true;
-                }
+        int blocks = 0;
+        for (final Card blocker : blockers) {
+            if (CombatUtil.canBlock(attacker, blocker)) {
+                blocks++;
             }
         }
-        return false;
+        
+        return canAttackerBeBlockedWithAmount(attacker, blocks);
     }
 
     /**
@@ -356,11 +348,12 @@ public class CombatUtil {
             return 0;
         }
 
-        if (attacker.hasKeyword("CARDNAME can't be blocked except by two or more creatures.")) {
+        if (attacker.hasKeyword("CantBeBlockedByAmount LT2")) {
             return 2;
-        }
-
-        return 1;
+        } else if (attacker.hasKeyword("CantBeBlockedByAmount LT3")) {
+            return 3;
+        } else
+            return 1;
     }
 
     // Has the human player chosen all mandatory blocks?
@@ -390,7 +383,7 @@ public class CombatUtil {
                 for (final Card attacker : attackers) {
                     if (CombatUtil.canBlock(attacker, blocker, combat)) {
                         boolean must = true;
-                        if (attacker.hasKeyword("CARDNAME can't be blocked except by two or more creatures.")) {
+                        if (attacker.hasStartOfKeyword("CantBeBlockedByAmount LT")) {
                             final List<Card> possibleBlockers = CardLists.filter(defending.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.CREATURES);
                             possibleBlockers.remove(blocker);
                             if (!CombatUtil.canBeBlocked(attacker, possibleBlockers)) {
@@ -406,11 +399,9 @@ public class CombatUtil {
         }
 
         for (final Card attacker : attackers) {
-            // don't accept one blocker for attackers with this keyword
-            if (attacker.hasKeyword("CARDNAME can't be blocked except by two or more creatures.")
-                    && (combat.getBlockers(attacker).size() == 1)) {
+            // don't accept blocker amount for attackers with keyword defining valid blockers amount
+            if (!canAttackerBeBlockedWithAmount(attacker, combat.getBlockers(attacker).size()))
                 return false;
-            }
         }
 
         return true;
@@ -497,7 +488,7 @@ public class CombatUtil {
         for (final Card attacker : attackersWithLure) {
             if (CombatUtil.canBeBlocked(attacker, combat) && CombatUtil.canBlock(attacker, blocker)) {
                 boolean canBe = true;
-                if (attacker.hasKeyword("CARDNAME can't be blocked except by two or more creatures.")) {
+                if (attacker.hasStartOfKeyword("CantBeBlockedByAmount LT")) {
                     final List<Card> blockers = combat.getDefenderPlayerByAttacker(attacker).getCreaturesInPlay();
                     blockers.remove(blocker);
                     if (!CombatUtil.canBeBlocked(attacker, blockers)) {
@@ -515,7 +506,7 @@ public class CombatUtil {
                 if (CombatUtil.canBeBlocked(attacker, combat) && CombatUtil.canBlock(attacker, blocker)
                         && combat.isAttacking(attacker)) {
                     boolean canBe = true;
-                    if (attacker.hasKeyword("CARDNAME can't be blocked except by two or more creatures.")) {
+                    if (attacker.hasStartOfKeyword("CantBeBlockedByAmount LT")) {
                         final List<Card> blockers = combat.getDefenderPlayerByAttacker(attacker).getCreaturesInPlay();
                         blockers.remove(blocker);
                         if (!CombatUtil.canBeBlocked(attacker, blockers)) {
@@ -645,23 +636,13 @@ public class CombatUtil {
             return false;
         }
 
-        if (attacker.hasKeyword("Creatures with power less than CARDNAME's power can't block it.")
-                && (attacker.getNetAttack() > blocker.getNetAttack())) {
-            return false;
-        }
-        if ((blocker.getNetAttack() > attacker.getNetAttack())
-                && blocker.hasKeyword("CARDNAME can't be blocked by creatures "
-                        + "with power greater than CARDNAME's power.")) {
-            return false;
-        }
-        if ((blocker.getNetAttack() >= attacker.getNetDefense())
-                && blocker.hasKeyword("CARDNAME can't be blocked by creatures with "
-                        + "power equal to or greater than CARDNAME's toughness.")) {
+        if (attacker.hasKeyword("Creatures with power less than CARDNAME's power can't block it.") && attacker.getNetAttack() > blocker.getNetAttack()) {
             return false;
         }
 
-        if (attacker.hasStartOfKeyword("CantBeBlockedBy")) {
-            final int keywordPosition = attacker.getKeywordPosition("CantBeBlockedBy");
+
+        if (attacker.hasStartOfKeyword("CantBeBlockedBy ")) {
+            final int keywordPosition = attacker.getKeywordPosition("CantBeBlockedBy ");
             final String parse = attacker.getKeyword().get(keywordPosition).toString();
             final String[] k = parse.split(" ", 2);
             final String[] restrictions = k[1].split(",");
@@ -684,29 +665,20 @@ public class CombatUtil {
             return false;
         }
 
-        if (attacker.hasKeyword("Flying")
-                || attacker.hasKeyword("CARDNAME can't be blocked except by creatures with flying or reach.")) {
-            if (!blocker.hasKeyword("Flying") && !blocker.hasKeyword("Reach")) {
-                return false;
-            }
+        if (attacker.hasKeyword("Flying") && !blocker.hasKeyword("Flying") && !blocker.hasKeyword("Reach")) {
+            return false;
         }
 
-        if (attacker.hasKeyword("Horsemanship")) {
-            if (!blocker.hasKeyword("Horsemanship")) {
-                return false;
-            }
+        if (attacker.hasKeyword("Horsemanship") && !blocker.hasKeyword("Horsemanship")) {
+            return false;
         }
 
-        if (attacker.hasKeyword("Fear")) {
-            if (!blocker.isArtifact() && !blocker.isBlack()) {
-                return false;
-            }
+        if (attacker.hasKeyword("Fear") && !blocker.isArtifact() && !blocker.isBlack()) {
+            return false;
         }
 
-        if (attacker.hasKeyword("Intimidate")) {
-            if (!blocker.isArtifact() && !blocker.sharesColorWith(attacker)) {
-                return false;
-            }
+        if (attacker.hasKeyword("Intimidate") && !blocker.isArtifact() && !blocker.sharesColorWith(attacker)) {
+            return false;
         }
 
         return true;
@@ -786,6 +758,22 @@ public class CombatUtil {
                 || game.getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
             return false;
         }
+        return true;
+    }
+    
+    public static boolean canAttackerBeBlockedWithAmount(Card attacker, int amount) {
+        List<String> restrictions = Lists.newArrayList(); 
+        for ( String kw : attacker.getKeyword() ) {
+            if ( kw.startsWith("CantBeBlockedByAmount") )
+                restrictions.add(TextUtil.split(kw, ' ', 2)[1]);
+        }
+        for ( String res : restrictions ) {
+            int operand = Integer.parseInt(res.substring(2));
+            String operator = res.substring(0,2);
+            if (Expressions.compare(amount, operator, operand) )
+                return false;
+        }
+
         return true;
     }
 
