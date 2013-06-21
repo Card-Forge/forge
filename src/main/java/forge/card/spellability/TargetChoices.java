@@ -260,6 +260,7 @@ public class TargetChoices implements Cloneable {
         tc.targetCards.addAll(this.targetCards);
         tc.targetPlayers.addAll(this.targetPlayers);
         tc.targetSpells.addAll(this.targetSpells);
+        tc.numTargeted = this.numTargeted;
         return tc;
     }
 }
