@@ -305,6 +305,7 @@ public class PhaseHandler implements java.io.Serializable {
                     break;
     
                 case COMBAT_DECLARE_ATTACKERS:
+                    this.bCombat = true;
                     game.getStack().freezeStack();
                     declareAttackersTurnBasedActions();
                     game.getStack().unfreezeStack();
