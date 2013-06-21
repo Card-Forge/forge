@@ -32,7 +32,6 @@ import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
-import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
 
 public class AttachAi extends SpellAbilityAi {
@@ -618,6 +617,7 @@ public class AttachAi extends SpellAbilityAi {
             targets = AbilityUtils.getDefinedObjects(sa.getSourceCard(), sa.getParam("Defined"), sa);
         } else {
             AttachAi.attachPreference(sa, tgt, mandatory);
+            targets = sa.getTargets().getTargets();
         }
 
         if (!mandatory && card.isEquipment() && !targets.isEmpty()) {
@@ -632,6 +632,13 @@ public class AttachAi extends SpellAbilityAi {
                 Card oldTarget = card.getEquipping().get(0);
                 if (ComputerUtilCard.evaluateCreature(oldTarget) > ComputerUtilCard.evaluateCreature(newTarget)) {
                     return false;
+                }
+                // don't equip creatures that don't gain anything
+                if (card.hasSVar("NonStackingAttachEffect")) {
+                    for (Card equipment : newTarget.getEquippedBy()) {
+                        if (equipment.getName().equals(card.getName()))
+                            return false;
+                    }
                 }
             }
         }
@@ -739,7 +746,7 @@ public class AttachAi extends SpellAbilityAi {
             });
         }
 
-        if ((magnetList != null) && !magnetList.isEmpty()) {
+        if (magnetList != null && !magnetList.isEmpty()) {
             // Always choose something from the Magnet List.
             // Probably want to "weight" the list by amount of Enchantments and
             // choose the "lightest"
@@ -815,6 +822,20 @@ public class AttachAi extends SpellAbilityAi {
             });
         }
 
+        //some equipments aren't useful in multiples
+        if (attachSource.hasSVar("NonStackingAttachEffect")) {
+            prefList = CardLists.filter(prefList, new Predicate<Card>() {
+                @Override
+                public boolean apply(final Card c) {
+                    for (Card equipment : c.getEquippedBy()) {
+                        if (equipment.getName().equals(attachSource.getName()))
+                            return false;
+                    }
+                    return true;
+                }
+            });
+        }
+
         // Don't pump cards that will die.
         prefList = ComputerUtil.getSafeTargets(ai, sa, prefList);
 
@@ -883,7 +904,7 @@ public class AttachAi extends SpellAbilityAi {
         // I believe this is the only case where mandatory will be true, so just
         // check that when starting that work
         // But we shouldn't attach to things with Protection
-        if (tgt.getZone().contains(ZoneType.Battlefield) && !mandatory) {
+        if (!mandatory) {
             list = CardLists.getTargetableCards(list, sa);
         } else {
             list = CardLists.filter(list, Predicates.not(CardPredicates.isProtectedFrom(attachSource)));
