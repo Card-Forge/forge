@@ -401,6 +401,7 @@ Draw [*] - draw.wav - triggered when a player draws a card.
 Enchantment [*] - enchant.wav - triggered when an enchantment is played.
 EndOfTurn [*] - end_of_turn.wav - triggered at the end of turn.
 Equip [*] - equip.wav - triggered when an equipment is equipped.
+Exile - exile.wav - triggered when a card is exiled.
 FlipCoin [*] - flip_coin.wav - triggered when a coin is flipped.
 GreenLand [*] - green_land.wav - triggered when a land with the "G" mana ability is played.
 Instant [*] - instant.wav - triggered when an instant is played.
