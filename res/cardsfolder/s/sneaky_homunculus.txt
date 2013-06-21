@@ -1,7 +1,6 @@
 Name:Sneaky Homunculus
 ManaCost:1 U
 Types:Creature Homunculus Illusion
-Text:CARDNAME can't block or be blocked by creatures with power 2 or greater.
 PT:1/1
 K:CantBeBlockedBy Creature.powerGE2
 K:CantBlock Creature.powerGE2

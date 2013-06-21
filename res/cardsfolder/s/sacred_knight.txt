@@ -1,7 +1,6 @@
 Name:Sacred Knight
 ManaCost:3 W
 Types:Creature Human Knight
-Text:CARDNAME can't be blocked by black and/or red creatures.
 PT:3/2
 K:CantBeBlockedBy Creature.Black,Creature.Red
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sacred_knight.jpg

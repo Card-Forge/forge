@@ -34,11 +34,15 @@ import java.util.concurrent.ConcurrentSkipListMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.Pair;
 
 import com.esotericsoftware.minlog.Log;
+import com.google.common.base.Function;
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Lists;
 
 import forge.CardPredicates.Presets;
+import forge.Constant.CardTypes;
 import forge.card.CardCharacteristics;
 import forge.card.CardDb;
 import forge.card.CardRarity;
@@ -2123,30 +2127,107 @@ public class Card extends GameEntity implements Comparable<Card> {
                 // keyword parsing takes care of adding a proper description
                 continue;
             } else if (keyword.startsWith("CantBeBlockedBy")) {
-                String expression = keyword.split(" ", 2)[1];
-                boolean hasNon = expression.contains("non") || expression.contains("without");
-                sbLong.append(this.getName()).append(" cannot be blocked ");
-                if( hasNon ) sbLong.append("except ");
-                sbLong.append("by ");
-                String[] parts = TextUtil.split(expression, '.');
-                List<String> partsAfterCreatures = new ArrayList<String>();
-                for(String part : parts) {
-                    if( part.equalsIgnoreCase("creature"))
-                        continue;
-                    if(part.startsWith("with"))
-                    {
-                        int cutIdx = part.startsWith("without") ? 7 : 4;
-                        partsAfterCreatures.add(StringUtils.capitalize(part.substring(cutIdx)));
+                sbLong.append(this.getName()).append(" can't be blocked ");
+
+                boolean negative = true;
+                List<String> subs = Lists.newArrayList(TextUtil.split(keyword.split(" ", 2)[1], ','));
+                List<List<String>> subsAnd = Lists.newArrayList();
+                List<String> orClauses = new ArrayList<String>(); 
+                for( int iOr = 0; iOr < subs.size(); iOr++ ) {
+                    String expession = subs.get(iOr);
+                    List<String> parts = Lists.newArrayList(expession.split("[.+]"));
+                    for(int p = 0; p < parts.size(); p++) {
+                        String part = parts.get(p); 
+                        if( part.equalsIgnoreCase("creature")) {
+                            parts.remove(p--);
+                            continue;
+                        }
+                        // based on suppossition that each expression has at least 1 predicate except 'creature'
+                        negative &= part.contains("non") || part.contains("without");
                     }
-                    else
-                        sbLong.append(part.toLowerCase()).append(" ");
+                    subsAnd.add(parts);
+                }
+
+                final boolean allNegative = negative;
+                if( allNegative ) sbLong.append("except ");
+                sbLong.append("by ");
+                
+                final Function<Pair<Boolean, String>, String> withToString = new Function<Pair<Boolean, String>, String>() {
+                    @Override
+                    public String apply(Pair<Boolean, String> inp) {
+                        boolean useNon = inp.getKey().booleanValue() == allNegative;
+                        return (useNon ? "*NO* " : "" ) + inp.getRight();
+                    }
+                };
+
+                for( int iOr = 0; iOr < subsAnd.size(); iOr++ ) {
+                    List<String> andOperands = subsAnd.get(iOr);
+                    List<Pair<Boolean, String>> prependedAdjectives = Lists.newArrayList();
+                    List<Pair<Boolean, String>> postponedAdjectives = Lists.newArrayList();
+                    String creatures = null;
                     
+                    for(String part : andOperands) {
+                        boolean positive = true;
+                        if (part.startsWith("non")) {
+                            part = part.substring(3);
+                            positive = false;
+                        }
+                        if(part.startsWith("with")) {
+                            positive = !part.startsWith("without"); 
+                            postponedAdjectives.add(Pair.of(positive, part.substring(positive ? 4 : 7)));
+                        } else if ( part.startsWith("power") ) {
+                            int kwLength = 5;
+                            String opName = Expressions.operatorName(part.substring(kwLength, kwLength + 2));
+                            String operand = part.substring(kwLength + 2);
+                            postponedAdjectives.add(Pair.of(true, "power" + opName + operand));
+                        } else if ( forge.card.CardType.isACreatureType(part)) {
+                            creatures = StringUtils.capitalize(Lang.getPlural(part)) + ( creatures == null ? "" : " or " + creatures ); 
+                        } else {
+                            prependedAdjectives.add(Pair.of(positive, part.toLowerCase()));
+                        }
+                    }
+                    
+                    StringBuilder sbShort = new StringBuilder();
+                    if ( allNegative ) {
+                        boolean isFirst = true;
+                        for(Pair<Boolean, String> pre : prependedAdjectives) {
+                            if ( isFirst ) isFirst = false;
+                            else sbShort.append(" and/or ");
+                            
+                            boolean useNon = pre.getKey().booleanValue() == allNegative;
+                            if( useNon ) sbShort.append("non-");
+                            sbShort.append(pre.getValue()).append(" ").append(creatures == null ? "creatures" : creatures);
+                        } 
+                        if (prependedAdjectives.isEmpty())
+                            sbShort.append(creatures == null ? "creatures" : creatures);
+                        
+                        if(!postponedAdjectives.isEmpty()) {
+                            if( !prependedAdjectives.isEmpty() ) {
+                                sbShort.append(" and/or creatures");
+                            }
+
+                            sbShort.append(" with ");
+                            sbShort.append(Lang.joinHomogenous(postponedAdjectives, withToString, allNegative ? "or" : "and"));
+                        }
+                        
+                    } else {
+                        for(Pair<Boolean, String> pre : prependedAdjectives) {
+                            boolean useNon = pre.getKey().booleanValue() == allNegative;
+                            if( useNon ) sbShort.append("non-");
+                            sbShort.append(pre.getValue()).append(" ");
+                        }
+                        sbShort.append(creatures == null ? "creatures" : creatures);
+
+                        if(!postponedAdjectives.isEmpty()) {
+                            sbShort.append(" with ");
+                            sbShort.append(Lang.joinHomogenous(postponedAdjectives, withToString, allNegative ? "or" : "and"));
+                        }
+
+                    }
+                    orClauses.add(sbShort.toString());
                 }
-                sbLong.append("creatures"); 
-                if( !partsAfterCreatures.isEmpty() ) {
-                    sbLong.append(" with ");
-                    sbLong.append(Lang.joinHomogenous(partsAfterCreatures, null, hasNon ? "or" : "and"));
-                }
+                
+                sbLong.append(StringUtils.join(orClauses, " or "));
             }
             
             else {

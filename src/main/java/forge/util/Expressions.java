@@ -64,4 +64,26 @@ public abstract class Expressions {
         return false;
     }
 
+    public static String operatorName(final String comp) {
+        // should this function be somewhere else?
+        // leftSide COMPARED to rightSide:
+        if (comp.contains("LT")) {
+            return " less than ";
+        } else if (comp.contains("LE")) {
+            return " less or equal to ";
+        } else if (comp.contains("EQ")) {
+            return " equal to ";
+        } else if (comp.contains("GT")) {
+            return " greater than ";
+        } else if (comp.contains("GE")) {
+            return " greater or equal to ";
+        } else if (comp.contains("NE")) {
+            return " not equal to ";
+        } else if (comp.contains("M2")) {
+            return " is modulo 2 equal to"; // should not show this to players
+        }
+        return " ? ";
+    }
+    
+    
 } // end class AllZoneUtil

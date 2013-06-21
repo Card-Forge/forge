@@ -1,7 +1,7 @@
 Name:Bower Passage
 ManaCost:1 G
 Types:Enchantment
-S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddHiddenKeyword$ CantBeBlockedBy Creature.withFlying | Description$ Creatures you control can't be blocked by creatures with flying.
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddKeyword$ CantBeBlockedBy Creature.withFlying | Description$ Creatures with flying can't block creatures you control.
 SVar:NonStackingEffect:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bower_passage.jpg
 Oracle:Creatures with flying can't block creatures you control.

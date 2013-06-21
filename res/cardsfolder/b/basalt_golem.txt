@@ -1,7 +1,6 @@
 Name:Basalt Golem
 ManaCost:5
 Types:Artifact Creature Golem
-Text:CARDNAME can't be blocked by artifact creatures.
 PT:2/4
 K:CantBeBlockedBy Artifact.Creature
 T:Mode$ Blocks | ValidCard$ Creature | ValidBlocked$ Card.Self | DelayedTrigger$ TrigEndCombat | TriggerDescription$ Whenever CARDNAME becomes blocked by a creature, that creature's controller sacrifices it at end of combat. If the player does, he or she puts a 0/2 colorless Wall artifact creature token with defender onto the battlefield.

@@ -1,7 +1,6 @@
 Name:Manta Ray
 ManaCost:1 U U
 Types:Creature Fish
-Text:CARDNAME can't be blocked except by blue creatures.
 PT:3/3
 K:CARDNAME can't attack unless defending player controls an Island.
 K:CantBeBlockedBy Creature.nonBlue

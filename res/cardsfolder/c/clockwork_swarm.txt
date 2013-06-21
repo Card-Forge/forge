@@ -1,7 +1,6 @@
 Name:Clockwork Swarm
 ManaCost:4
 Types:Artifact Creature Insect
-Text:CARDNAME can't be blocked by Walls.
 PT:0/3
 K:etbCounter:P1P0:4
 K:CantBeBlockedBy Creature.Wall

@@ -61,14 +61,18 @@ public class Lang {
         return subjects.size() > 1 ? verb : verb + "s";
     }
 
+    public static String getPlural(String noun) {
+        return noun + ( noun.endsWith("s") || noun.endsWith("x") ? "es" : "s");
+    }
+    
     public static <T> String nounWithAmount(int cnt, String noun) {
-        String suffix = cnt <= 1 ? "" : ( noun.endsWith("s") || noun.endsWith("x") ? "es" : "s");
+        String countedForm = cnt <= 1 ? noun : getPlural(noun);
         final String strCount;
         if( cnt == 1 )
             strCount = startsWithVowel(noun) ? "an " : "a ";
         else 
             strCount = String.valueOf(cnt) + " "; 
-        return strCount + noun + suffix;
+        return strCount + countedForm;
     }    
     
     /**

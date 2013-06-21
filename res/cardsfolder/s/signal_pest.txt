@@ -1,7 +1,6 @@
 Name:Signal Pest
 ManaCost:1
 Types:Artifact Creature Pest
-Text:CARDNAME can't be blocked except by creatures with flying or reach.
 PT:0/1
 K:CantBeBlockedBy Creature.withoutFlying+withoutReach
 T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigBattleCry | TriggerDescription$ Battle cry (Whenever this creature attacks, each other attacking creature gets +1/+0 until end of turn.)

@@ -1,7 +1,6 @@
 Name:Stromkirk Noble
 ManaCost:R
 Types:Creature Vampire
-Text:CARDNAME can't be blocked by Humans.
 PT:1/1
 K:CantBeBlockedBy Creature.Human
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, put a +1/+1 counter on it.

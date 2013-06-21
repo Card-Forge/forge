@@ -1,7 +1,6 @@
 Name:Vindictive Mob
 ManaCost:4 B B
 Types:Creature Human Berserker
-Text:CARDNAME can't be blocked by Saprolings.
 PT:5/5
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSac | TriggerDescription$ When CARDNAME enters the battlefield, sacrifice a creature.
 SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Defined$ You | SacValid$ Creature
