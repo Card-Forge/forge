@@ -77,6 +77,7 @@ import forge.game.player.Player;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.util.Expressions;
+import forge.util.TextUtil;
 
 /**
  * <p>
@@ -1977,7 +1978,6 @@ public class Card extends GameEntity implements Comparable<Card> {
             if (keyword.startsWith("Permanents don't untap during their controllers' untap steps")
                     || keyword.startsWith("PreventAllDamageBy")
                     || keyword.startsWith("CantBlock")
-                    || keyword.startsWith("CantBeBlockedBy")
                     || keyword.startsWith("CantEquip")
                     || keyword.startsWith("SpellCantTarget")) {
                 continue;
@@ -2121,7 +2121,22 @@ public class Card extends GameEntity implements Comparable<Card> {
             } else if (keyword.startsWith("Equip") || keyword.startsWith("Fortification")) {
                 // keyword parsing takes care of adding a proper description
                 continue;
-            } else {
+            } else if (keyword.startsWith("CantBeBlockedBy")) {
+                String expression = keyword.split(" ", 2)[1];
+                boolean hasNon = expression.contains("non");
+                sbLong.append(this.getName()).append(" cannot be blocked ");
+                if( hasNon ) sbLong.append("except ");
+                sbLong.append("by ");
+                String[] parts = TextUtil.split(expression, '.');
+                for(String part : parts) {
+                    if( part.equalsIgnoreCase("creature"))
+                        continue;
+                    sbLong.append(part.toLowerCase()).append(" ");
+                }
+                sbLong.append("creatures");
+            }
+            
+            else {
                 if ((i != 0) && (sb.length() != 0)) {
                     sb.append(", ");
                 }
