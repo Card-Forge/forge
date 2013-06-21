@@ -643,6 +643,7 @@ public class AiController {
         if ( null == api ) {
             if( mode != null ) switch (mode) {
                 case BraidOfFire: return true;
+                case Ripple: return true;
             }
 
             String exMsg = String.format("AI confirmAction does not know what to decide about %s mode (api is null).", mode);

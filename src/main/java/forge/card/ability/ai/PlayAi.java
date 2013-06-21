@@ -4,16 +4,20 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import com.google.common.base.Predicate;
+
 import forge.Card;
 import forge.CardLists;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.cost.Cost;
+import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.TargetRestrictions;
 import forge.game.ai.ComputerUtilCard;
 import forge.game.ai.ComputerUtilCost;
 import forge.game.player.Player;
+import forge.game.player.PlayerActionConfirmMode;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
 
@@ -93,5 +97,36 @@ public class PlayAi extends SpellAbilityAi {
         }
 
         return true;
+    }
+    
+    /* (non-Javadoc)
+     * @see forge.card.ability.SpellAbilityAi#confirmAction(forge.game.player.Player, forge.card.spellability.SpellAbility, forge.game.player.PlayerActionConfirmMode, java.lang.String)
+     */
+    @Override
+    public boolean confirmAction(Player player, SpellAbility sa, PlayerActionConfirmMode mode, String message) {
+        // as called from PlayEffect:173
+        return true;
+    }
+    
+    /* (non-Javadoc)
+     * @see forge.card.ability.SpellAbilityAi#chooseSingleCard(forge.game.player.Player, forge.card.spellability.SpellAbility, java.util.List, boolean)
+     */
+    @Override
+    public Card chooseSingleCard(final Player ai, SpellAbility sa, List<Card> options, boolean isOptional) {
+        List<Card> tgtCards = CardLists.filter(options, new Predicate<Card>() {
+            @Override
+            public boolean apply(final Card c) {
+                for (SpellAbility s : c.getBasicSpells()) {
+                    Spell spell = (Spell) s;
+                    s.setActivatingPlayer(ai);
+                    // timing restrictions still apply
+                    if (s.getRestrictions().checkTimingRestrictions(c, s) && spell.canPlayFromEffectAI(false, true)) {
+                        return true;
+                    }
+                }
+                return false;
+            }
+        });
+        return ComputerUtilCard.getBestAI(tgtCards);
     }
 }

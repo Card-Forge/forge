@@ -145,7 +145,7 @@ public class ControlWinLose {
             if( !fromGame.hasWon()) continue; // not a loser
             
             // offer to winner, if he is local human
-            if (fromGame.isHuman()) {
+            if (fromGame.getController().getLobbyPlayer() == Singletons.getControl().getLobby().getGuiPlayer()) {
                 List<PaperCard> chosen = GuiChoose.noneOrMany("Select cards to add to your deck", losses);
                 if (null != chosen) {
                     RegisteredPlayer psc = match.getPlayers().get(i);

@@ -27,10 +27,8 @@ import forge.card.spellability.Ability;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.TargetRestrictions;
 import forge.game.Game;
-import forge.game.ai.ComputerUtilCard;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
-import forge.gui.GuiChoose;
 import forge.item.PaperCard;
 import forge.util.Aggregates;
 import forge.util.PredicateString.StringOp;
@@ -219,16 +217,7 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
                             list = CardLists.getValidCards(list, sa.getParam("AttachedTo"), copy.getController(), copy);
                         }
                         if (!list.isEmpty()) {
-                            Card attachedTo = null;
-                            if (sa.getActivatingPlayer().isHuman()) {
-                                if (list.size() > 1) {
-                                    attachedTo = GuiChoose.one(copy + " - Select a card to attach to.", list);
-                                } else {
-                                    attachedTo = list.get(0);
-                                }
-                            } else { // AI player
-                                attachedTo = ComputerUtilCard.getBestAI(list);
-                            }
+                            Card attachedTo = sa.getActivatingPlayer().getController().chooseSingleCardForEffect(list, sa, copy + " - Select a card to attach to.");
                             if (copy.isAura()) {
                                 if (attachedTo.canBeEnchantedBy(copy)) {
                                     copy.enchantEntity(attachedTo);

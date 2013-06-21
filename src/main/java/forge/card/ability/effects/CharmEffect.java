@@ -57,18 +57,10 @@ public class CharmEffect extends SpellAbilityEffect {
         if (sa.hasParam("Chooser")) {
             // Three modal cards require you to choose a player to make the modal choice'
             // Two of these also reference the chosen player during the spell effect
-            String choose = sa.getParam("Chooser");
-            List<Player> opponents = activator.getOpponents();
-            int numOpps = opponents.size();
-            if (numOpps == 1) {
-                chooser = opponents.get(0);
-            } else {
-                if (activator.isComputer()) {
-                    chooser = CharmAi.determineOpponentChooser(activator, sa, opponents);
-                } else {
-                    chooser = GuiChoose.one("Choose an opponent", opponents);
-                }
-            }
+            
+            //String choosers = sa.getParam("Chooser"); 
+            List<Player> opponents = activator.getOpponents(); // all cards have Choser$ Opponent, so it's hardcoded here
+            chooser = activator.getController().chooseSinglePlayerForEffect(opponents, sa, "Choose an opponent");
             source.setChosenPlayer(chooser);
         }
 

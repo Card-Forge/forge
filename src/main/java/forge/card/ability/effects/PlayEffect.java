@@ -12,7 +12,6 @@ import com.google.common.collect.Lists;
 
 import forge.Card;
 import forge.CardCharacteristicName;
-import forge.CardLists;
 import forge.card.CardDb;
 import forge.card.CardRulesPredicates;
 import forge.card.ability.AbilityUtils;
@@ -22,12 +21,10 @@ import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityRestriction;
 import forge.game.Game;
 import forge.game.ai.ComputerUtil;
-import forge.game.ai.ComputerUtilCard;
 import forge.game.player.HumanPlay;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
-import forge.gui.GuiDialog;
 import forge.item.PaperCard;
 import forge.util.Aggregates;
 
@@ -136,42 +133,17 @@ public class PlayEffect extends SpellAbilityEffect {
         }
 
         for (int i = 0; i < amount; i++) {
-            if (tgtCards.isEmpty()) {
+            Card tgtCard = controller.getController().chooseSingleCardForEffect(tgtCards, sa, "Select a card to play");
+            if (tgtCard == null) {
                 return;
             }
-            Card tgtCard = tgtCards.get(0);
-            if (tgtCards.size() > 1) {
-                if (controller.isHuman()) {
-                    tgtCard = GuiChoose.one("Select a card to play", tgtCards);
-                } else {
-                    // AI
-                    tgtCards = CardLists.filter(tgtCards, new Predicate<Card>() {
-                        @Override
-                        public boolean apply(final Card c) {
-                            for (SpellAbility s : c.getBasicSpells()) {
-                                Spell spell = (Spell) s;
-                                s.setActivatingPlayer(controller);
-                                // timing restrictions still apply
-                                if (s.getRestrictions().checkTimingRestrictions(c, s) && spell.canPlayFromEffectAI(false, true)) {
-                                    return true;
-                                }
-                            }
-                            return false;
-                        }
-                    });
-                    tgtCard = ComputerUtilCard.getBestAI(tgtCards);
-                    if (tgtCard == null) {
-                        return;
-                    }
-                }
-            }
+
             if (tgtCard.isFaceDown()) {
                 tgtCard.setState(CardCharacteristicName.Original);
                 wasFaceDown = true;
             }
-            final StringBuilder sb = new StringBuilder();
-            sb.append("Do you want to play " + tgtCard + "?");
-            if (controller.isHuman() && optional && !GuiDialog.confirm(source, sb.toString())) {
+            
+            if (optional && !controller.getController().confirmAction(sa, null, "Do you want to play " + tgtCard + "?")) {
                 // i--;  // This causes an infinite loop (ArsenalNut)
                 if (wasFaceDown) {
                     tgtCard.setState(CardCharacteristicName.FaceDown);

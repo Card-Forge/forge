@@ -179,21 +179,21 @@ public class DigEffect extends SpellAbilityEffect {
                         movedCards = CardLists.getRandomSubList(valid, numChanging);
                     } else if (allButOne) {
                         movedCards.addAll(valid);
+                        Card chosen = null;
                         if (choser.isHuman()) {
-                            Card chosen = null;
+                            
                             String prompt = "Choose a card to leave in ";
                             if (destZone2.equals(ZoneType.Library) && (libraryPosition2 == 0)) {
                                 prompt = "Leave which card on top of the ";
                             }
                             chosen = GuiChoose.one(prompt + destZone2, valid);
-                            movedCards.remove(chosen);
                         } else { // Computer
-                            Card chosen = ComputerUtilCard.getBestAI(valid);
-                            if (sa.getActivatingPlayer().isHuman() && p.isHuman()) {
+                            chosen = ComputerUtilCard.getBestAI(valid);
+                            if (sa.getActivatingPlayer().isOpponentOf(choser) && p.isOpponentOf(choser)) {
                                 chosen = ComputerUtilCard.getWorstAI(valid);
                             }
-                            movedCards.remove(chosen);
                         }
+                        movedCards.remove(chosen);
                         if (sa.hasParam("RandomOrder")) {
                             final Random random = MyRandom.getRandom();
                             Collections.shuffle(movedCards, random);

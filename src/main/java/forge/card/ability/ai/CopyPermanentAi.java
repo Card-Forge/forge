@@ -121,5 +121,14 @@ public class CopyPermanentAi extends SpellAbilityAi {
         //TODO: add logic here
         return true;
     }
+    
+    /* (non-Javadoc)
+     * @see forge.card.ability.SpellAbilityAi#chooseSingleCard(forge.game.player.Player, forge.card.spellability.SpellAbility, java.util.List, boolean)
+     */
+    @Override
+    public Card chooseSingleCard(Player ai, SpellAbility sa, List<Card> options, boolean isOptional) {
+        // Select a card to attach to
+        return ComputerUtilCard.getBestAI(options);
+    }
 
 }

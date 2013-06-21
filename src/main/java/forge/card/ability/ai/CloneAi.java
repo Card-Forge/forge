@@ -11,6 +11,7 @@ import forge.game.Game;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
+import forge.game.player.PlayerActionConfirmMode;
 
 public class CloneAi extends SpellAbilityAi {
 
@@ -141,6 +142,15 @@ public class CloneAi extends SpellAbilityAi {
         // that clone a target. Those can just use SVar:RemAIDeck:True until
         // this can do a reasonably
         // good job of picking a good target
+        return false;
+    }
+    
+    /* (non-Javadoc)
+     * @see forge.card.ability.SpellAbilityAi#confirmAction(forge.game.player.Player, forge.card.spellability.SpellAbility, forge.game.player.PlayerActionConfirmMode, java.lang.String)
+     */
+    @Override
+    public boolean confirmAction(Player player, SpellAbility sa, PlayerActionConfirmMode mode, String message) {
+        // Didn't confirm in the original code
         return false;
     }
 

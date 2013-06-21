@@ -4,13 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import org.apache.commons.lang.math.RandomUtils;
-
 import forge.card.ability.SpellAbilityAi;
 import forge.card.ability.effects.CharmEffect;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.game.player.Player;
+import forge.util.Aggregates;
 import forge.util.MyRandom;
 
 public class CharmAi extends SpellAbilityAi {
@@ -68,8 +67,12 @@ public class CharmAi extends SpellAbilityAi {
         return chosenList.size() >= min ? chosenList : null;
     }
     
-    public static Player determineOpponentChooser(Player ai, SpellAbility sa, List<Player> opponents) {
-        return opponents.get(RandomUtils.nextInt(opponents.size()));
+    /* (non-Javadoc)
+     * @see forge.card.ability.SpellAbilityAi#chooseSinglePlayer(forge.game.player.Player, forge.card.spellability.SpellAbility, java.util.List)
+     */
+    @Override
+    public Player chooseSinglePlayer(Player ai, SpellAbility sa, List<Player> opponents) {
+        return Aggregates.random(opponents);
     }
     
 }

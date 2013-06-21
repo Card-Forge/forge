@@ -266,14 +266,15 @@ public class PlayerControllerHuman extends PlayerController {
     @Override
     public Card chooseSingleCardForEffect(List<Card> options, SpellAbility sa, String title, boolean isOptional) {
         // Human is supposed to read the message and understand from it what to choose
+        if (options.isEmpty())
+            return null;
+
         if ( isOptional )
             return GuiChoose.oneOrNone(title, options);
         else if ( options.size() > 1 )
             return GuiChoose.one(title, options);
-        else if (options.size() == 1)
-            return options.get(0);
         else 
-            return null;
+            return options.get(0);
     }
 
     @Override

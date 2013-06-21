@@ -57,6 +57,7 @@ import forge.game.ai.AiController;
 import forge.game.player.HumanPlay;
 import forge.game.event.GameEventLifeLoss;
 import forge.game.player.Player;
+import forge.game.player.PlayerActionConfirmMode;
 import forge.game.player.PlayerControllerAi;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
@@ -297,9 +298,10 @@ public final class GameActionUtil {
         void doRipple(final Card c, final int rippleCount, final Player controller) {
             final Card rippleCard = c;
 
-            if (controller.isComputer() || GuiDialog.confirm(c, "Activate Ripple for " + c + "?")) {
+            final Ability ability = new RippleAbility(c, ManaCost.ZERO, controller, rippleCount, rippleCard);
 
-                final Ability ability = new RippleAbility(c, ManaCost.ZERO, controller, rippleCount, rippleCard);
+            if (controller.getController().confirmAction(ability, PlayerActionConfirmMode.Ripple, "Activate Ripple for " + c + "?")) {
+
                 final StringBuilder sb = new StringBuilder();
                 sb.append(c).append(" - Ripple.");
                 ability.setStackDescription(sb.toString());

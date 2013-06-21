@@ -19,7 +19,6 @@ import forge.card.spellability.TargetRestrictions;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerHandler;
 import forge.game.Game;
-import forge.gui.GuiDialog;
 import forge.properties.ForgePreferences.FPref;
 
 public class CloneEffect extends SpellAbilityEffect {
@@ -74,11 +73,8 @@ public class CloneEffect extends SpellAbilityEffect {
             return;
         }
 
-        final StringBuilder sb = new StringBuilder();
-        sb.append("Do you want to copy " + cardToCopy + "?");
         boolean optional = sa.hasParam("Optional");
-        if (host.getController().isHuman() && optional
-                && !GuiDialog.confirm(host, sb.toString())) {
+        if (optional && !host.getController().getController().confirmAction(sa, null, "Do you want to copy " + cardToCopy + "?")) {
             return;
         }
 
