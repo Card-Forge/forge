@@ -3,7 +3,7 @@ ManaCost:1 U U
 Types:Creature Metathran
 PT:1/3
 K:Flying
-K:CARDNAME can't be blocked by blue creatures.
+K:CantBeBlockedBy Creature.Blue
 A:AB$ Animate | Cost$ U | ValidTgts$ Creature | TgtPrompt$ Select target creature | Colors$ Blue | OverwriteColors$ True | SpellDescription$ Target creature becomes blue until end of turn.
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/metathran_transport.jpg
