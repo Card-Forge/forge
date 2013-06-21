@@ -34,7 +34,7 @@ import forge.game.player.Player;
  * @author Forge
  * @version $Id$
  */
-public class TargetChoices {
+public class TargetChoices implements Cloneable {
     private int numTargeted = 0;
 
     // Card or Player are legal targets.
@@ -140,9 +140,7 @@ public class TargetChoices {
     public final boolean remove(final ITargetable target) {
         // remove returns true if element was found in given list
         if (this.targetCards.remove(target) || this.targetPlayers.remove(target) || this.targetSpells.remove(target)) {
-            
-            // Do I decrement numTargeted for fizzling targets?
-            //this.numTargeted--;
+            this.numTargeted--;
             return true;
         }
         return false;
@@ -254,5 +252,14 @@ public class TargetChoices {
      */
     public final boolean isEmpty() {
         return targetCards.isEmpty() && targetSpells.isEmpty() && targetPlayers.isEmpty();
+    }
+    
+    @Override
+    public TargetChoices clone() {
+        TargetChoices tc = new TargetChoices();
+        tc.targetCards.addAll(this.targetCards);
+        tc.targetPlayers.addAll(this.targetPlayers);
+        tc.targetSpells.addAll(this.targetSpells);
+        return tc;
     }
 }

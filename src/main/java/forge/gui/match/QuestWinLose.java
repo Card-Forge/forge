@@ -550,7 +550,7 @@ public class QuestWinLose extends ControlWinLose {
 
             Collections.sort(formats);
 
-            final GameFormat selected = GuiChoose.getChoices("Choose bonus booster format", 1, 1, formats, pref).get(0); //ch.getSelectedValue();
+            final GameFormat selected = GuiChoose.getChoices("Choose bonus booster format", 1, 1, formats, pref, null).get(0); //ch.getSelectedValue();
             Singletons.getModel().getQuestPreferences().setPref(QPref.BOOSTER_FORMAT, selected.toString());
 
             cardsWon = qData.getCards().generateQuestBooster(selected.getFilterPrinted());

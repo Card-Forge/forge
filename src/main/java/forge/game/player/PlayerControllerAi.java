@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.collect.Lists;
 
@@ -15,6 +16,7 @@ import forge.Card;
 import forge.CardLists;
 import forge.CardPredicates;
 import forge.GameEntity;
+import forge.ITargetable;
 import forge.card.ability.ApiType;
 import forge.card.cost.Cost;
 import forge.card.mana.Mana;
@@ -23,6 +25,7 @@ import forge.card.spellability.Ability;
 import forge.card.spellability.AbilityStatic;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
+import forge.card.spellability.SpellAbilityStackInstance;
 import forge.card.spellability.TargetChoices;
 import forge.deck.Deck;
 import forge.game.Game;
@@ -255,7 +258,7 @@ public class PlayerControllerAi extends PlayerController {
      * @see forge.game.player.PlayerController#chooseTargets(forge.card.spellability.SpellAbility, forge.card.spellability.SpellAbilityStackInstance)
      */
     @Override
-    public TargetChoices chooseTargets(SpellAbility ability) {
+    public TargetChoices chooseNewTargetsFor(SpellAbility ability) {
         // AI currently can't do this. But when it can it will need to be based on Ability API
         return null;
     }
@@ -377,5 +380,11 @@ public class PlayerControllerAi extends PlayerController {
             int i = MyRandom.getRandom().nextInt(results.length);
             return results[i];
         }
+    }
+
+    @Override
+    public Pair<SpellAbilityStackInstance, ITargetable> chooseTarget(SpellAbility saSrc, List<Pair<SpellAbilityStackInstance, ITargetable>> allTargets) {
+        // TODO Teach AI how to use Spellskite
+        return allTargets.get(0);
     }
 }

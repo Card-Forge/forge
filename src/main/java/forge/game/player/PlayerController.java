@@ -6,13 +6,16 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.apache.commons.lang3.tuple.Pair;
 
 import forge.Card;
 import forge.GameEntity;
+import forge.ITargetable;
 import forge.card.cost.Cost;
 import forge.card.mana.Mana;
 import forge.card.replacement.ReplacementEffect;
 import forge.card.spellability.SpellAbility;
+import forge.card.spellability.SpellAbilityStackInstance;
 import forge.card.spellability.TargetChoices;
 import forge.deck.Deck;
 import forge.game.Game;
@@ -101,7 +104,10 @@ public abstract class PlayerController {
     public abstract Integer announceRequirements(SpellAbility ability, String announce, boolean allowZero);
     public abstract List<Card> choosePermanentsToSacrifice(SpellAbility sa, int min, int max, List<Card> validTargets, String message);
     public abstract List<Card> choosePermanentsToDestroy(SpellAbility sa, int min, int max, List<Card> validTargets, String message);
-    public abstract TargetChoices chooseTargets(SpellAbility ability);
+    public abstract TargetChoices chooseNewTargetsFor(SpellAbility ability);
+
+    // Specify a target of a spell (Spellskite)
+    public abstract Pair<SpellAbilityStackInstance, ITargetable> chooseTarget(SpellAbility sa, List<Pair<SpellAbilityStackInstance, ITargetable>> allTargets);
 
     public Card chooseSingleCardForEffect(List<Card> sourceList, SpellAbility sa, String title) { return chooseSingleCardForEffect(sourceList, sa, title, false); }
     public abstract Card chooseSingleCardForEffect(List<Card> sourceList, SpellAbility sa, String title, boolean isOptional);

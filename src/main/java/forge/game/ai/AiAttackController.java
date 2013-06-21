@@ -491,7 +491,7 @@ public class AiAttackController {
         // I know this is a little confusing
         Game game = ai.getGame();
 
-        random.setSeed(game.getPhaseHandler().getTurn() + this.randomInt);
+        random.setSeed(game.getPhaseHandler().getTurn() + AiAttackController.randomInt);
 
         final Combat combat = new Combat();
         combat.setAttackingPlayer(game.getCombat().getAttackingPlayer());

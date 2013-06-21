@@ -17,6 +17,8 @@ import javax.swing.WindowConstants;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import com.google.common.base.Function;
+
 import forge.Card;
 import forge.FThreads;
 import forge.Singletons;
@@ -89,19 +91,19 @@ public class GuiChoose {
     }
 
     public static <T> List<T> noneOrMany(final String message, final Collection<T> choices) {
-        return GuiChoose.getChoices(message, 0, choices.size(), choices, null);
+        return GuiChoose.getChoices(message, 0, choices.size(), choices, null, null);
     }
 
     // returned Object will never be null
     public static <T> List<T> getChoices(final String message, final int min, final int max, final T[] choices) {
-        return getChoices(message, min, max, Arrays.asList(choices), null);
+        return getChoices(message, min, max, Arrays.asList(choices), null, null);
     }
     
     public static <T> List<T> getChoices(final String message, final int min, final int max, final Collection<T> choices) {
-        return getChoices(message, min, max, choices, null);
+        return getChoices(message, min, max, choices, null, null);
     }
 
-    public static <T> List<T> getChoices(final String message, final int min, final int max, final Collection<T> choices,final T selected) {
+    public static <T> List<T> getChoices(final String message, final int min, final int max, final Collection<T> choices, final T selected, final Function<T, String> display) {
         if (null == choices || choices.isEmpty()) {
             if (0 == min) {
                 return new ArrayList<T>();
@@ -113,7 +115,7 @@ public class GuiChoose {
         Callable<List<T>> showChoice = new Callable<List<T>>() {
             @Override
             public List<T> call() {
-                ListChooser<T> c = new ListChooser<T>(message, min, max, choices);
+                ListChooser<T> c = new ListChooser<T>(message, min, max, choices, display);
                 final JList<T> list = c.getJList();
                 list.addListSelectionListener(new ListSelectionListener() {
                     @Override

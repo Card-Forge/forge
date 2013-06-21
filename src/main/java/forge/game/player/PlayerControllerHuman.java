@@ -11,16 +11,21 @@ import javax.swing.JOptionPane;
 import org.apache.commons.lang.math.IntRange;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.apache.commons.lang3.tuple.Pair;
 
+import com.google.common.base.Function;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 import forge.Card;
 import forge.GameEntity;
+import forge.ITargetable;
 import forge.Singletons;
 import forge.card.cost.Cost;
 import forge.card.mana.Mana;
 import forge.card.replacement.ReplacementEffect;
 import forge.card.spellability.SpellAbility;
+import forge.card.spellability.SpellAbilityStackInstance;
 import forge.card.spellability.TargetSelection;
 import forge.card.spellability.TargetChoices;
 import forge.deck.CardPool;
@@ -440,7 +445,7 @@ public class PlayerControllerHuman extends PlayerController {
      * @see forge.game.player.PlayerController#chooseTargets(forge.card.spellability.SpellAbility, forge.card.spellability.SpellAbilityStackInstance)
      */
     @Override
-    public TargetChoices chooseTargets(SpellAbility ability) {
+    public TargetChoices chooseNewTargetsFor(SpellAbility ability) {
         if (ability.getTargetRestrictions() == null) {
             return null;
         }
@@ -622,5 +627,22 @@ public class PlayerControllerHuman extends PlayerController {
     @Override
     public String chooseFilpResult(Card source, Player flipper, String[] results, boolean call) {
         return GuiChoose.one(source.getName() + " - Choose a result", results);
+    }
+
+
+    @Override
+    public Pair<SpellAbilityStackInstance, ITargetable> chooseTarget(SpellAbility saSpellskite, List<Pair<SpellAbilityStackInstance, ITargetable>> allTargets) {
+        if( allTargets.size() < 2)
+            return Iterables.getFirst(allTargets, null);
+        
+        final Function<Pair<SpellAbilityStackInstance, ITargetable>, String> fnToString = new Function<Pair<SpellAbilityStackInstance, ITargetable>, String>() {
+            @Override
+            public String apply(Pair<SpellAbilityStackInstance, ITargetable> targ) {
+                return targ.getRight().toString() + " - " + targ.getLeft().getStackDescription();
+            }
+        };
+        
+        List<Pair<SpellAbilityStackInstance, ITargetable>> chosen = GuiChoose.getChoices(saSpellskite.getSourceCard().getName(), 1, 1, allTargets, null, fnToString);
+        return Iterables.getFirst(chosen, null);
     }
 }

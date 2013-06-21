@@ -107,7 +107,7 @@ public class TargetSelection {
             return this.chooseCardFromStack(mandatory);
         } else {
             List<Card> validTargets = this.getValidCardsToTarget();
-            if (zone.size() == 1 && zone.get(0) == ZoneType.Battlefield) {
+            if (zone.size() == 1 && (zone.get(0) == ZoneType.Battlefield || zone.get(0) == ZoneType.Hand)) {
                 InputSelectTargets inp = new InputSelectTargets(validTargets, ability, mandatory);
                 Singletons.getControl().getInputQueue().setInputAndWait(inp);
                 choiceResult = !inp.hasCancelled();

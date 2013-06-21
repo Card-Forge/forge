@@ -18,6 +18,7 @@
 
 package forge.gui;
 
+import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -29,16 +30,19 @@ import java.util.List;
 import javax.swing.AbstractAction;
 import javax.swing.AbstractListModel;
 import javax.swing.Action;
+import javax.swing.DefaultListCellRenderer;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
+import javax.swing.ListCellRenderer;
 import javax.swing.ListSelectionModel;
 import javax.swing.WindowConstants;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 
 import forge.FThreads;
@@ -84,7 +88,7 @@ public class ListChooser<T> {
     private JOptionPane optionPane;
     private Action ok, cancel;
 
-    public ListChooser(final String title, final int minChoices, final int maxChoices, final Collection<T> list) {
+    public ListChooser(final String title, final int minChoices, final int maxChoices, final Collection<T> list, final Function<T, String> display) {
         FThreads.assertExecutedByEdt(true);
         this.title = title;
         this.minChoices = minChoices;
@@ -104,6 +108,9 @@ public class ListChooser<T> {
         if (maxChoices == 1) {
             this.jList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         }
+        
+        if( null != display )
+            this.jList.setCellRenderer(new TransformedCellRenderer(display));
 
         this.optionPane = new JOptionPane(new JScrollPane(this.jList), JOptionPane.QUESTION_MESSAGE,
                 JOptionPane.DEFAULT_OPTION, null, options, options[0]);
@@ -295,5 +302,31 @@ public class ListChooser<T> {
                 ListChooser.this.commit();
             }
         }
+    }
+    
+    private class TransformedCellRenderer implements ListCellRenderer<T> {
+        public final Function<T, String> transformer;
+        public final DefaultListCellRenderer defRenderer;
+        
+        /**
+         * TODO: Write javadoc for Constructor.
+         */
+        public TransformedCellRenderer(final Function<T, String> t1) {
+            transformer = t1;
+            defRenderer = new DefaultListCellRenderer();
+        }
+
+        /* (non-Javadoc)
+         * @see javax.swing.ListCellRenderer#getListCellRendererComponent(javax.swing.JList, java.lang.Object, int, boolean, boolean)
+         */
+        @Override
+        public Component getListCellRendererComponent(JList<? extends T> list, T value, int index, boolean isSelected,
+                boolean cellHasFocus) {
+            // TODO Auto-generated method stub
+            return defRenderer.getListCellRendererComponent(list, transformer.apply(value), index, isSelected, cellHasFocus);
+        }
+        
+
+
     }
 }
