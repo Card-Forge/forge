@@ -1019,20 +1019,19 @@ public abstract class SpellAbility implements ISpellAbility, ITargetable {
      *            a GameEntity
      * @return a boolean.
      */
-    public final boolean canTarget(final GameEntity entity) {
-        if (this.getTargetRestrictions() == null) {
-            if (entity.canBeTargetedBy(this)) {
-                return true;
-            }
-            return false;
-        }
-        if (entity.isValid(this.getTargetRestrictions().getValidTgts(), this.getActivatingPlayer(), this.getSourceCard())
-                && (!this.getTargetRestrictions().isUniqueTargets() || !this.getUniqueTargets().contains(entity))
-                && entity.canBeTargetedBy(this)) {
-            return true;
+    public final boolean canTarget(final ITargetable entity) {
+        // Restriction related to this ability
+        if (this.getTargetRestrictions() != null) {
+            if (this.getTargetRestrictions().isUniqueTargets() && this.getUniqueTargets().contains(entity))
+                return false;
+
+            String[] validTgt = this.getTargetRestrictions().getValidTgts();
+            if (entity instanceof GameEntity && !((GameEntity)entity).isValid(validTgt, this.getActivatingPlayer(), this.getSourceCard()))
+               return false;
         }
 
-        return false;
+        // Restrictions coming from target
+        return entity.canBeTargetedBy(this);
     }
 
     // is this a wrapping ability (used by trigger abilities)
@@ -1297,13 +1296,7 @@ public abstract class SpellAbility implements ISpellAbility, ITargetable {
     public void setTemporary(boolean temporary) {
         this.temporary = temporary; // TODO: Add 0 to parameter's name.
     }
-
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    //
-    // THE CODE BELOW IS RELATED TO TARGETING. It shall await extraction to other class from here
-    //
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+    
     @Override
     public boolean canBeTargetedBy(SpellAbility sa) {
         return sa.canTargetSpellAbility(this);
@@ -1320,7 +1313,12 @@ public abstract class SpellAbility implements ISpellAbility, ITargetable {
     public TargetRestrictions getTargetRestrictions() {
         return targetRestricions;
     }
-
+    
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //
+    // THE CODE BELOW IS RELATED TO TARGETING. It might be extracted to other class from here
+    //
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     public void setTargetRestrictions(final TargetRestrictions tgt) {
         targetRestricions = tgt;

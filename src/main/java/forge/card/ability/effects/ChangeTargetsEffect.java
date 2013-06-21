@@ -6,6 +6,8 @@ import java.util.List;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 
+import com.google.common.collect.Iterables;
+
 import forge.Card;
 import forge.ITargetable;
 import forge.card.ability.SpellAbilityEffect;
@@ -38,13 +40,13 @@ public class ChangeTargetsEffect extends SpellAbilityEffect {
             }
 
             boolean preserveNumber = sa.hasParam("PreserveNumber"); // Redirect is not supposed to change number of targets 
-            boolean isSpellskite = sa.hasParam("SpellSkite"); // The only card known to replace targets with self is Spellskite
+            boolean changeOneTarget = sa.hasParam("ChangeSingleTarget"); // The only card known to replace targets with self is Spellskite
 
             SpellAbilityStackInstance changingTgtSI = si;
             Player chooser = sa.getActivatingPlayer();
 
-            if( isSpellskite ) {
-                Card srcCard = sa.getSourceCard();
+            if( changeOneTarget ) {
+                ITargetable newTarget = Iterables.getFirst(getDefinedCardsOrTargeted(sa), null);
                 // 1. choose a target of target spell
                 List<Pair<SpellAbilityStackInstance, ITargetable>> allTargets = new ArrayList<>();
                 while(changingTgtSI != null) {
@@ -69,8 +71,8 @@ public class ChangeTargetsEffect extends SpellAbilityEffect {
                 newTargetBlock.remove(oldTarget);
                 replaceIn.updateTarget(newTargetBlock);
                 // 3. test if replacing is correct.
-                if(replaceIn.getSpellAbility().canTarget(srcCard)) {
-                    newTargetBlock.add(srcCard);
+                if(replaceIn.getSpellAbility().canTarget(newTarget)) {
+                    newTargetBlock.add(newTarget);
                     replaceIn.updateTarget(newTargetBlock);
                 } else
                     replaceIn.updateTarget(oldTargetBlock);
