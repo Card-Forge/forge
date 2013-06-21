@@ -2,7 +2,7 @@ Name:Spire Tracer
 ManaCost:G
 Types:Creature Elf Scott
 PT:1/1
-K:CARDNAME can't be blocked except by creatures with flying or reach.
+K:CantBeBlockedBy Creature.withoutFlying+withoutReach
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spire_tracer.jpg
 Oracle:Spire Tracer can't be blocked except by creatures with flying or reach.
 SetInfo:GTC Common

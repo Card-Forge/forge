@@ -3,7 +3,7 @@ ManaCost:U U
 Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ U U | ValidTgts$ Creature | AILogic$ Pump
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ CARDNAME can't be blocked except by Walls. | Description$ Enchanted creature can't be blocked except by Walls.
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ CantBeBlockedBy Creature.nonWall | Description$ Enchanted creature can't be blocked except by Walls.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/invisibility.jpg
 Oracle:Enchant creature\nEnchanted creature can't be blocked except by Walls.
 SetInfo:8ED Uncommon

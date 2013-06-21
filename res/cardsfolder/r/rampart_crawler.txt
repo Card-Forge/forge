@@ -2,7 +2,7 @@ Name:Rampart Crawler
 ManaCost:B
 Types:Creature Lizard Mercenary
 PT:1/1
-K:CARDNAME can't be blocked by Walls.
+K:CantBeBlockedBy Creature.Wall
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rampart_crawler.jpg
 Oracle:Rampart Crawler can't be blocked by Walls.
 SetInfo:MMQ Common

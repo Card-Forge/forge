@@ -3,7 +3,7 @@ ManaCost:1 G
 Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ 1 G | ValidTgts$ Creature | AILogic$ Pump
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ CARDNAME can't be blocked except by creatures with flying or reach. | Description$ Enchanted creature can't be blocked except by creatures with flying or reach.
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ CantBeBlockedBy Creature.wihoutFlying+withoutReach | Description$ Enchanted creature can't be blocked except by creatures with flying or reach.
 S:Mode$ CantTarget | ValidCard$ Card.EnchantedBy | Activator$ Opponent | Description$ Enchanted creature can't be the target of spells or abilities your opponents control.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/canopy_cover.jpg
 Oracle:Enchant creature\nEnchanted creature can't be blocked except by creatures with flying or reach.\nEnchanted creature can't be the target of spells or abilities your opponents control.

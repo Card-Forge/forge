@@ -1,7 +1,6 @@
 Name:Flow of Maggots
 ManaCost:2 B
 Types:Creature Insect
-Text:CARDNAME can't be blocked by non-Wall creatures.
 PT:2/2
 K:Cumulative upkeep:1
 K:CantBeBlockedBy Creature.nonWall
