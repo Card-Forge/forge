@@ -1,6 +1,8 @@
 package forge.card.ability.ai;
 
 
+import java.util.List;
+
 import forge.card.ability.SpellAbilityAi;
 import forge.card.spellability.SpellAbility;
 import forge.game.player.Player;
@@ -33,4 +35,10 @@ public class CanPlayAsDrawbackAi extends SpellAbilityAi {
         return false;
     }
 
+    
+    @Override
+    public SpellAbility chooseSingleSpellAbility(Player player, SpellAbility sa, List<SpellAbility> spells) {
+        // This might be called from CopySpellAbilityEffect - to hide warning (for having no overload) use this simple overload
+        return spells.get(0);
+    }
 }

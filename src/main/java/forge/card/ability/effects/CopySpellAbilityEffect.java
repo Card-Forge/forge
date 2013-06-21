@@ -14,7 +14,6 @@ import forge.card.ability.SpellAbilityEffect;
 import forge.card.cardfactory.CardFactory;
 import forge.card.spellability.SpellAbility;
 import forge.game.player.Player;
-import forge.gui.GuiChoose;
 import forge.util.Lang;
 
 public class CopySpellAbilityEffect extends SpellAbilityEffect {
@@ -74,13 +73,11 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
         
         if (sa.hasParam("CopyMultipleSpells")) {
             final int spellCount = Integer.parseInt(sa.getParam("CopyMultipleSpells"));
-            ArrayList<SpellAbility> chosenSAs = new ArrayList<SpellAbility>();
 
             for (int multi = 0; multi < spellCount && !tgtSpells.isEmpty(); multi++) {
                 String prompt = "Select " + Lang.getOrdinal(multi) + " spell to copy to stack";
                 SpellAbility chosen = controller.getController().chooseSingleSpellForEffect(tgtSpells, sa, prompt);
                 copies.add(CardFactory.copySpellAbilityAndSrcCard(card, chosen.getSourceCard(), chosen, true));
-                chosenSAs.add(chosen);
                 tgtSpells.remove(chosen);
             }
         }
