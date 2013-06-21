@@ -109,7 +109,7 @@ public class HumanPlaySpellAbility {
             if( tgt != null && tgt.doesTarget()) {
                 clearTargets(beingTargeted);
                 final TargetSelection select = new TargetSelection(beingTargeted);
-                if (!select.chooseTargets() ) {
+                if (!select.chooseTargets(null) ) {
                     return false;
                 }
             }

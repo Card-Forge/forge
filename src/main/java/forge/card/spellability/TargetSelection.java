@@ -65,14 +65,15 @@ public class TargetSelection {
      * </p>
      */
 
-    public final boolean chooseTargets() {
+    public final boolean chooseTargets(Integer numTargets) {
         TargetRestrictions tgt = getTgt();
         final boolean canTarget = tgt != null && tgt.doesTarget();
         if( !canTarget )
             throw new RuntimeException("TargetSelection.chooseTargets called for ability that does not target - " + ability);
         
-        final int minTargets = tgt.getMinTargets(ability.getSourceCard(), ability);
-        final int maxTargets = tgt.getMaxTargets(ability.getSourceCard(), ability);
+        // Number of targets is explicitly set only if spell is being redirected (ex. Swerve or Redirect) 
+        final int minTargets = numTargets != null ? numTargets.intValue() : tgt.getMinTargets(ability.getSourceCard(), ability);
+        final int maxTargets = numTargets != null ? numTargets.intValue() : tgt.getMaxTargets(ability.getSourceCard(), ability);
         final int numTargeted = ability.getTargets().getNumTargeted();
 
         boolean hasEnoughTargets = minTargets == 0 || numTargeted >= minTargets;
@@ -81,7 +82,6 @@ public class TargetSelection {
         // if not enough targets chosen, cancel Ability
         if (this.bTargetingDone && !hasEnoughTargets)
             return false;
-        
 
         if (this.bTargetingDone && hasEnoughTargets || hasAllTargets || tgt.isDividedAsYouChoose() && tgt.getStillToDivide() == 0) {
             return true;
@@ -118,7 +118,7 @@ public class TargetSelection {
             }
         }
         // some inputs choose cards one-by-one and need to be called again 
-        return choiceResult && chooseTargets();
+        return choiceResult && chooseTargets(numTargets);
     }
 
     

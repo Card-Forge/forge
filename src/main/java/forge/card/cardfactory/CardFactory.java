@@ -28,7 +28,6 @@ import forge.CardColor;
 import forge.CardUtil;
 import forge.Command;
 import forge.CounterType;
-import forge.ITargetable;
 import forge.ImageCache;
 import forge.card.CardCharacteristics;
 import forge.card.CardDb;

@@ -454,7 +454,7 @@ public class PlayerControllerHuman extends PlayerController {
         TargetChoices oldTarget = ability.getTargets();
         TargetSelection select = new TargetSelection(ability);
         ability.resetTargets();
-        if (select.chooseTargets()) {
+        if (select.chooseTargets(oldTarget.getNumTargeted())) {
             return ability.getTargets();
         } else {
             // Return old target, since we had to reset them above

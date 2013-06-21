@@ -1,9 +1,9 @@
 Name:Seeds of Strength
 ManaCost:G W
 Types:Instant
-A:SP$ Pump | Cost$ G W | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ 1 | NumDef$ 1 | SubAbility$ DBPump1 | SpellDescription$ Target creature gets +1/+1 until end of turn. Target creature gets +1/+1 until end of turn. Target creature gets +1/+1 until end of turn.
-SVar:DBPump1:DB$Pump | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ 1 | NumDef$ 1 | SubAbility$ DBPump2
-SVar:DBPump2:DB$Pump | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ 1 | NumDef$ 1
+A:SP$ Pump | Cost$ G W | ValidTgts$ Creature | TgtPrompt$ Select target creature (1) | NumAtt$ 1 | NumDef$ 1 | SubAbility$ DBPump1 | SpellDescription$ Target creature gets +1/+1 until end of turn. Target creature gets +1/+1 until end of turn. Target creature gets +1/+1 until end of turn.
+SVar:DBPump1:DB$Pump | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature (2) | NumAtt$ 1 | NumDef$ 1 | SubAbility$ DBPump2
+SVar:DBPump2:DB$Pump | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature (3)| NumAtt$ 1 | NumDef$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/seeds_of_strength.jpg
 Oracle:Target creature gets +1/+1 until end of turn.\nTarget creature gets +1/+1 until end of turn.\nTarget creature gets +1/+1 until end of turn.
 SetInfo:RAV Common
