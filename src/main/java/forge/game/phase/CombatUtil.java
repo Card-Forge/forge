@@ -689,9 +689,6 @@ public class CombatUtil {
         if (attacker.hasKeyword("CARDNAME can't be blocked by green creatures.") && blocker.isGreen()) {
             return false;
         }
-        if (attacker.hasKeyword("CARDNAME can't be blocked by red creatures.") && blocker.isRed()) {
-            return false;
-        }
         if (attacker.hasKeyword("CARDNAME can't be blocked by white creatures.") && blocker.isWhite()) {
             return false;
         }
