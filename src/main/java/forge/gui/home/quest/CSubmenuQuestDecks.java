@@ -51,7 +51,7 @@ public enum CSubmenuQuestDecks implements ICDoc {
                 if (!SSubmenuQuestUtil.checkActiveQuest("Create a Deck.")) {
                     return;
                 }
-                Singletons.getControl().changeState(FControl.Screens.DECK_EDITOR_QUEST);
+                Singletons.getControl().changeStateAutoFixLayout(FControl.Screens.DECK_EDITOR_QUEST, "deck editor");
                 CDeckEditorUI.SINGLETON_INSTANCE.setCurrentEditorController(new CEditorQuest(Singletons.getModel().getQuest()));
             }
         });

@@ -45,10 +45,12 @@ import forge.deck.DeckBase;
 import forge.deck.DeckSection;
 import forge.game.GameType;
 import forge.gui.deckeditor.CDeckEditorUI;
+import forge.gui.deckeditor.controllers.ACEditorBase;
 import forge.gui.deckeditor.controllers.CEditorConstructed;
 import forge.gui.deckeditor.controllers.CEditorLimited;
 import forge.gui.deckeditor.controllers.CEditorQuest;
 import forge.gui.framework.ILocalRepaint;
+import forge.item.InventoryItem;
 
 /**
  * Creates deck list for selected decks for quick deleting, editing, and basic
@@ -420,35 +422,35 @@ public class DeckLister extends JPanel implements ILocalRepaint {
         }
     }
     private <T extends DeckBase> void editDeck(final Deck d0) {
+        
+        ACEditorBase<? extends InventoryItem, ? extends DeckBase> editorCtrl = null;
+        FControl.Screens newState = null;
+        
         switch (this.gametype) {
             case Quest:
-                final CEditorQuest qEditor = new CEditorQuest(Singletons.getModel().getQuest());
-                Singletons.getControl().changeState(FControl.Screens.DECK_EDITOR_QUEST);
-                CDeckEditorUI.SINGLETON_INSTANCE.setCurrentEditorController(qEditor);
-                qEditor.getDeckController().load(d0.getName());
+                editorCtrl = new CEditorQuest(Singletons.getModel().getQuest());
+                newState = FControl.Screens.DECK_EDITOR_QUEST;
                 break;
             case Constructed:
-                Singletons.getControl().changeState(FControl.Screens.DECK_EDITOR_CONSTRUCTED);
-                final CEditorConstructed cEditor = new CEditorConstructed();
-                CDeckEditorUI.SINGLETON_INSTANCE.setCurrentEditorController(cEditor);
-                cEditor.getDeckController().load(d0.getName());
+                newState = FControl.Screens.DECK_EDITOR_CONSTRUCTED;
+                editorCtrl = new CEditorConstructed();
                 break;
             case Sealed:
-                final CEditorLimited sEditor = new CEditorLimited(Singletons.getModel().getDecks().getSealed());
-                Singletons.getControl().changeState(FControl.Screens.DECK_EDITOR_LIMITED);
-                CDeckEditorUI.SINGLETON_INSTANCE.setCurrentEditorController(sEditor);
-                sEditor.getDeckController().load(d0.getName());
+                editorCtrl = new CEditorLimited(Singletons.getModel().getDecks().getSealed());
+                newState = FControl.Screens.DECK_EDITOR_LIMITED;
                 break;
             case Draft:
-                final CEditorLimited dEditor = new CEditorLimited(Singletons.getModel().getDecks().getDraft());
-                Singletons.getControl().changeState(FControl.Screens.DECK_EDITOR_LIMITED);
-                CDeckEditorUI.SINGLETON_INSTANCE.setCurrentEditorController(dEditor);
-                dEditor.getDeckController().load(d0.getName());
+                editorCtrl = new CEditorLimited(Singletons.getModel().getDecks().getDraft());
+                newState = FControl.Screens.DECK_EDITOR_LIMITED;
                 break;
-                
+
             default:
-                break;
+                return;
         }
+        
+        Singletons.getControl().changeStateAutoFixLayout(newState, "deck editor");
+        CDeckEditorUI.SINGLETON_INSTANCE.setCurrentEditorController(editorCtrl);
+        editorCtrl.getDeckController().load(d0.getName());
     }
 
     private void deleteDeck(final RowPanel r0) {

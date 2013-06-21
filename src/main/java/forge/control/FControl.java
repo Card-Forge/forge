@@ -263,6 +263,18 @@ public enum FControl {
                 throw new RuntimeException("unhandled screen: " + screen);
         }
     }
+    
+    public void changeStateAutoFixLayout(Screens newState, String stateName)  {
+        try {
+            changeState(newState);
+        } catch (InvalidLayoutFileException ex) {
+            GuiDialog.message("Your " + stateName + " layout file could not be read. It will be deleted after you press OK.\nThe game will proceed with default layout.");
+            File fLayout = new File(SLayoutIO.getFilePreferred(newState));
+            fLayout.delete();
+            // try again
+            changeState(newState);
+        }
+    }
 
     /** 
      * Returns the int reflecting the current state of the top level frame
@@ -409,15 +421,7 @@ public enum FControl {
     
         Singletons.getModel().getPreferences().actuateMatchPreferences();
         
-        try {
-            Singletons.getControl().changeState(Screens.MATCH_SCREEN);
-        } catch (InvalidLayoutFileException ex) {
-            GuiDialog.message("Your match layout file could not be read. It will be deleted after you press OK.\nThe game will proceed with default layout.");
-            File fLayout = new File(SLayoutIO.getFilePreferred(Screens.MATCH_SCREEN));
-            fLayout.delete();
-            // try again
-            Singletons.getControl().changeState(Screens.MATCH_SCREEN);
-        }
+        changeStateAutoFixLayout(Screens.MATCH_SCREEN, "match");
         SDisplayUtil.showTab(EDocID.REPORT_LOG.getDoc());
     
         CMessage.SINGLETON_INSTANCE.getInputControl().setGame(game);
