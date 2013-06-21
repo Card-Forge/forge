@@ -4541,6 +4541,7 @@ res/cardsfolder/g/goretusk_firebeast.txt svneol=native#text/plain
 res/cardsfolder/g/gorger_wurm.txt svneol=native#text/plain
 res/cardsfolder/g/gorgon_flail.txt svneol=native#text/plain
 res/cardsfolder/g/gorgon_recluse.txt svneol=native#text/plain
+res/cardsfolder/g/gorilla_berserkers.txt -text
 res/cardsfolder/g/gorilla_chieftain.txt svneol=native#text/plain
 res/cardsfolder/g/gorilla_pack.txt svneol=native#text/plain
 res/cardsfolder/g/gorilla_shaman.txt svneol=native#text/plain
@@ -7885,6 +7886,7 @@ res/cardsfolder/p/path_of_angers_flame.txt svneol=native#text/plain
 res/cardsfolder/p/path_of_peace.txt svneol=native#text/plain
 res/cardsfolder/p/path_to_exile.txt svneol=native#text/plain
 res/cardsfolder/p/pathbreaker_wurm.txt -text
+res/cardsfolder/p/pathrazer_of_ulamog.txt -text
 res/cardsfolder/p/patriarchs_bidding.txt svneol=native#text/plain
 res/cardsfolder/p/patriarchs_desire.txt -text svneol=unset#text/plain
 res/cardsfolder/p/patricians_scorn.txt -text svneol=unset#text/plain
