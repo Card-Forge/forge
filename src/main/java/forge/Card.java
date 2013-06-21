@@ -77,6 +77,7 @@ import forge.game.player.Player;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.util.Expressions;
+import forge.util.Lang;
 import forge.util.TextUtil;
 
 /**
@@ -2123,17 +2124,29 @@ public class Card extends GameEntity implements Comparable<Card> {
                 continue;
             } else if (keyword.startsWith("CantBeBlockedBy")) {
                 String expression = keyword.split(" ", 2)[1];
-                boolean hasNon = expression.contains("non");
+                boolean hasNon = expression.contains("non") || expression.contains("without");
                 sbLong.append(this.getName()).append(" cannot be blocked ");
                 if( hasNon ) sbLong.append("except ");
                 sbLong.append("by ");
                 String[] parts = TextUtil.split(expression, '.');
+                List<String> partsAfterCreatures = new ArrayList<String>();
                 for(String part : parts) {
                     if( part.equalsIgnoreCase("creature"))
                         continue;
-                    sbLong.append(part.toLowerCase()).append(" ");
+                    if(part.startsWith("with"))
+                    {
+                        int cutIdx = part.startsWith("without") ? 7 : 4;
+                        partsAfterCreatures.add(StringUtils.capitalize(part.substring(cutIdx)));
+                    }
+                    else
+                        sbLong.append(part.toLowerCase()).append(" ");
+                    
                 }
-                sbLong.append("creatures");
+                sbLong.append("creatures"); 
+                if( !partsAfterCreatures.isEmpty() ) {
+                    sbLong.append(" with ");
+                    sbLong.append(Lang.joinHomogenous(partsAfterCreatures, null, hasNon ? "or" : "and"));
+                }
             }
             
             else {

@@ -36,8 +36,11 @@ public class Lang {
         return has1 ? (has2 ? s1 + " and " + s2 : s1) : (has2 ? s2 : "");
     }
     
-    public static <T> String joinHomogenous(Collection<T> objects) { return joinHomogenous(objects, null); }
+    public static <T> String joinHomogenous(Collection<T> objects) { return joinHomogenous(objects, null, "and"); }
     public static <T> String joinHomogenous(Collection<T> objects, Function<T, String> accessor) {
+        return joinHomogenous(objects, accessor, "and");
+    }
+    public static <T> String joinHomogenous(Collection<T> objects, Function<T, String> accessor, String lastUnion) {
         int remaining = objects.size();
         StringBuilder sb = new StringBuilder();
         for(T obj : objects) {
@@ -47,10 +50,11 @@ public class Lang {
             else 
                 sb.append(obj);
             if( remaining > 1 ) sb.append(", ");
-            if( remaining == 1 ) sb.append(" and ");
+            if( remaining == 1 ) sb.append(" ").append(lastUnion).append(" ");
         }
         return sb.toString();
     }
+    
     
     public static <T> String joinVerb(List<T> subjects, String verb) {
         // English is simple - just add (s) for multiple objects. 

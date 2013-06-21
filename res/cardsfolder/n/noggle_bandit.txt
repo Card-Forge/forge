@@ -1,7 +1,6 @@
 Name:Noggle Bandit
 ManaCost:1 UR UR
 Types:Creature Noggle Rogue
-Text:CARDNAME can't be blocked except by creatures with defender.
 PT:2/2
 K:CantBeBlockedBy Creature.withoutDefender
 SVar:Picture:http://www.wizards.com/global/images/magic/general/noggle_bandit.jpg
