@@ -40,13 +40,12 @@ public class ChangeTargetsEffect extends SpellAbilityEffect {
             }
 
             boolean preserveNumber = sa.hasParam("PreserveNumber"); // Redirect is not supposed to change number of targets 
-            boolean changeOneTarget = sa.hasParam("ChangeSingleTarget"); // The only card known to replace targets with self is Spellskite
+            boolean changesOneTarget = sa.hasParam("ChangeSingleTarget"); // The only card known to replace targets with self is Spellskite
 
             SpellAbilityStackInstance changingTgtSI = si;
             Player chooser = sa.getActivatingPlayer();
 
-            if( changeOneTarget ) {
-                ITargetable newTarget = Iterables.getFirst(getDefinedCardsOrTargeted(sa), null);
+            if( changesOneTarget ) {
                 // 1. choose a target of target spell
                 List<Pair<SpellAbilityStackInstance, ITargetable>> allTargets = new ArrayList<>();
                 while(changingTgtSI != null) {
@@ -63,14 +62,15 @@ public class ChangeTargetsEffect extends SpellAbilityEffect {
                 }
                 
                 Pair<SpellAbilityStackInstance, ITargetable> chosenTarget = chooser.getController().chooseTarget(sa, allTargets);
-                // 2. replace with spellskite
+                // 2. prepare new target choices
                 SpellAbilityStackInstance replaceIn = chosenTarget.getKey();
                 ITargetable oldTarget = chosenTarget.getValue();
                 TargetChoices oldTargetBlock = replaceIn.getTargetChoices();
                 TargetChoices newTargetBlock = oldTargetBlock.clone();
                 newTargetBlock.remove(oldTarget);
                 replaceIn.updateTarget(newTargetBlock);
-                // 3. test if replacing is correct.
+                // 3. test if updated choices would be correct.
+                ITargetable newTarget = Iterables.getFirst(getDefinedCardsOrTargeted(sa), null);
                 if(replaceIn.getSpellAbility().canTarget(newTarget)) {
                     newTargetBlock.add(newTarget);
                     replaceIn.updateTarget(newTargetBlock);
