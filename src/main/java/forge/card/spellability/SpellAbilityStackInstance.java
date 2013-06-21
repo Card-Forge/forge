@@ -108,8 +108,7 @@ public class SpellAbilityStackInstance {
         // Targeting info -- 29/06/11 Moved to after taking care of SubAbilities
         // because otherwise AF_DealDamage SubAbilities that use Defined$
         // Targeted breaks (since it's parents target is reset)
-        final TargetRestrictions target = sa.getTargetRestrictions();
-        if (target != null) {
+        if (sa.usesTargeting()) {
             this.tc = ability.getTargets();
             this.ability.resetTargets();
         }

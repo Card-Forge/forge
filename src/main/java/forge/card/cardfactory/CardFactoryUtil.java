@@ -2774,65 +2774,44 @@ public class CardFactoryUtil {
         sbHaunter.append("Destination$ Graveyard | ValidCard$ Card.Self | ");
         sbHaunter.append("Static$ True | Secondary$ True | TriggerDescription$ Blank");
 
-        final Trigger haunterDies = forge.card.trigger.TriggerHandler
-                .parseTrigger(sbHaunter.toString(), card, true);
+        final Trigger haunterDies = TriggerHandler.parseTrigger(sbHaunter.toString(), card, true);
 
         final Ability haunterDiesWork = new Ability(card, ManaCost.ZERO) {
             @Override
             public void resolve() {
-                this.getTargetCard().addHauntedBy(card);
+                this.getTargets().getFirstTargetedCard().addHauntedBy(card);
                 card.getGame().getAction().exile(card);
             }
         };
         haunterDiesWork.setDescription(hauntDescription);
+        haunterDiesWork.setTargetRestrictions(new TargetRestrictions(null, new String[]{"Creature"}, "1", "1")); // not null to make stack preserve targets set
 
         final Ability haunterDiesSetup = new Ability(card, ManaCost.ZERO) {
             @Override
             public void resolve() {
                 final Game game = card.getGame();
                 this.setActivatingPlayer(card.getController());
-                final List<Card> creats = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), Presets.CREATURES);
-                for (int i = 0; i < creats.size(); i++) {
-                    if (!creats.get(i).canBeTargetedBy(this)) {
-                        creats.remove(i);
-                        i--;
-                    }
-                }
+                List<Card> allCreatures = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), Presets.CREATURES);
+                final List<Card> creats = CardLists.getTargetableCards(allCreatures, haunterDiesWork);
                 if (creats.isEmpty()) {
                     return;
                 }
 
-                // need to do it this way because I don't know quite how to
-                // make TriggerHandler respect BeforePayMana.
+                final Card toHaunt; 
                 if (card.getController().isHuman()) {
-                    final InputSelectCards target = new InputSelectCards(1, 1) {
-                        private static final long serialVersionUID = 1981791992623774490L;
-                        @Override
-                        protected boolean isValidChoice(Card c) {
-                            Zone zone = game.getZoneOf(c);
-                            if (!zone.is(ZoneType.Battlefield) || !c.isCreature()) {
-                                return false;
-                            }
-                            return c.canBeTargetedBy(haunterDiesWork);
-                        }
-                    };
+                    final InputSelectCards target = new InputSelectCardsFromList(1, 1, creats);
                     target.setMessage("Choose target creature to haunt.");
-                    
                     Singletons.getControl().getInputQueue().setInputAndWait(target);
-                    if (!target.hasCancelled()) {
-                        haunterDiesWork.setTargetCard(target.getSelected().get(0));
-                        game.getStack().add(haunterDiesWork);
-                    }
+                    toHaunt = target.getSelected().get(0);
                 } else {
                     // AI choosing what to haunt
                     final List<Card> oppCreats = CardLists.filterControlledBy(creats, card.getController().getOpponent());
-                    if (!oppCreats.isEmpty()) {
-                        haunterDiesWork.setTargetCard(ComputerUtilCard.getWorstCreatureAI(oppCreats));
-                    } else {
-                        haunterDiesWork.setTargetCard(ComputerUtilCard.getWorstCreatureAI(creats));
-                    }
-                    game.getStack().add(haunterDiesWork);
+                    List<Card> chooseFrom = oppCreats.isEmpty() ? creats : oppCreats;
+                    toHaunt = ComputerUtilCard.getWorstCreatureAI(chooseFrom);
                 }
+                haunterDiesWork.setTargetCard(toHaunt);
+                haunterDiesWork.setActivatingPlayer(card.getController());
+                game.getStack().add(haunterDiesWork);
             }
         };
 

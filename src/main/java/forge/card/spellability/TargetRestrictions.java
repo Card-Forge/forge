@@ -22,7 +22,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
-import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
 
 import forge.Card;
@@ -111,10 +110,6 @@ public class TargetRestrictions {
         this.relatedProperty = target.getRelatedProperty();
         this.singleTarget = target.isSingleTarget();
         this.randomTarget = target.isRandomTarget();
-    }
-
-    public TargetRestrictions() {
-        this(null, ArrayUtils.EMPTY_STRING_ARRAY, "1", "1");
     }
 
     /**
