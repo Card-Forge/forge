@@ -122,4 +122,9 @@ public abstract class SpellAbilityAi extends SaTargetRountines {
         System.err.println("Warning: default (ie. inherited from base class) implementation of chooseSinglePlayer is used for " + this.getClass().getName() + ". Consider declaring an overloaded method");
         return options.get(0);
     }
+
+    public SpellAbility chooseSingleSpellAbility(Player player, SpellAbility sa, List<SpellAbility> spells) {
+        System.err.println("Warning: default (ie. inherited from base class) implementation of chooseSingleSpellAbility is used for " + this.getClass().getName() + ". Consider declaring an overloaded method");
+        return spells.get(0);
+    }
 }

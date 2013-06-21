@@ -360,7 +360,8 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
                     } while( hasPaid );
 
                     for (int i = 0; i < magnitude; i++) {
-                        CardFactory.copySpellontoStack(sp.getSourceCard(), sp.getSourceCard(), sp, false, null);
+                        SpellAbility copy = CardFactory.copySpellAbilityAndSrcCard(sp.getSourceCard(), sp.getSourceCard(), sp, false);
+                        activating.getController().playSpellAbilityForFree(copy, true);
                     }
                 }
 

@@ -94,22 +94,6 @@ public class PlayerControllerAi extends PlayerController {
         return brains;
     }
 
-    /* (non-Javadoc)
-     * @see forge.game.player.PlayerController#mayPlaySpellAbilityForFree(forge.card.spellability.SpellAbility)
-     */
-    @Override
-    public void playSpellAbilityForFree(SpellAbility copySA) {
-        if (copySA instanceof Spell) {
-            Spell spell = (Spell) copySA;
-            if (spell.canPlayFromEffectAI(true, true)) {
-                ComputerUtil.playStackFree(player, copySA);
-            }
-        } else {
-            copySA.canPlayAI();
-            ComputerUtil.playStackFree(player, copySA);
-        }
-    }
-
     @Override
     public Deck sideboard(Deck deck, GameType gameType) {
         // AI does not know how to sideboard
@@ -156,6 +140,15 @@ public class PlayerControllerAi extends PlayerController {
         return api.getAi().chooseSinglePlayer(player, sa, options);
     }
 
+    @Override
+    public SpellAbility chooseSingleSpellForEffect(java.util.List<SpellAbility> spells, SpellAbility sa, String title) {
+        ApiType api = sa.getApi();
+        if ( null == api ) {
+            throw new InvalidParameterException("SA is not api-based, this is not supported yet");
+        }
+        return api.getAi().chooseSingleSpellAbility(player, sa, spells);
+    }
+    
     
     @Override
     public boolean confirmAction(SpellAbility sa, PlayerActionConfirmMode mode, String message) {
@@ -233,6 +226,25 @@ public class PlayerControllerAi extends PlayerController {
     @Override
     public Card chooseCardToDredge(List<Card> dredgers) {
         return getAi().chooseCardToDredge(dredgers);
+    }
+
+    /* (non-Javadoc)
+     * @see forge.game.player.PlayerController#mayPlaySpellAbilityForFree(forge.card.spellability.SpellAbility)
+     */
+    @Override
+    public void playSpellAbilityForFree(SpellAbility copySA, boolean mayChooseNewTargets) {
+        // Ai is known to set targets in doTrigger, so if it cannot choose new targets, we won't call canPlays
+        if( mayChooseNewTargets ) {
+            if (copySA instanceof Spell) {
+                Spell spell = (Spell) copySA;
+                if (!spell.canPlayFromEffectAI(true, true)) {
+                    return; // is this legal at all?
+                }
+            } else {
+                copySA.canPlayAI();
+            }
+        }
+        ComputerUtil.playSpellAbilityForFree(player, copySA);
     }
 
     @Override

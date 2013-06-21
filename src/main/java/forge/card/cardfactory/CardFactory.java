@@ -138,8 +138,7 @@ public class CardFactory {
      * @param bCopyDetails
      *            a boolean.
      */
-    public final static void copySpellontoStack(final Card source, final Card original, final SpellAbility sa,
-            final boolean bCopyDetails, final ITargetable definedTarget) {
+    public final static SpellAbility copySpellAbilityAndSrcCard(final Card source, final Card original, final SpellAbility sa, final boolean bCopyDetails) {
         //Player originalController = original.getController();
         Player controller = sa.getActivatingPlayer();
         final Card c = copyCard(original);
@@ -204,10 +203,7 @@ public class CardFactory {
             }
             copySA.setPaidHash(sa.getPaidHash());
         }
-
-        controller.getController().playSpellAbilityForFree(copySA);
-
-        //c.addController(originalController);
+        return copySA;
     }
 
     /**

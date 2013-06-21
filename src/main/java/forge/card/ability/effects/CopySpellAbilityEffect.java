@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import com.google.common.collect.Iterables;
+
 import forge.Card;
 import forge.CardLists;
 import forge.ITargetable;
@@ -13,6 +15,7 @@ import forge.card.cardfactory.CardFactory;
 import forge.card.spellability.SpellAbility;
 import forge.game.player.Player;
 import forge.gui.GuiChoose;
+import forge.util.Lang;
 
 public class CopySpellAbilityEffect extends SpellAbilityEffect {
 
@@ -66,48 +69,23 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
             return;
         }
 
+        boolean mayChoseNewTargets = true;
+        List<SpellAbility> copies = new ArrayList<SpellAbility>();
+        
         if (sa.hasParam("CopyMultipleSpells")) {
             final int spellCount = Integer.parseInt(sa.getParam("CopyMultipleSpells"));
             ArrayList<SpellAbility> chosenSAs = new ArrayList<SpellAbility>();
-            SpellAbility chosenSAtmp = null;
-            for (int multi = 0; multi < spellCount; multi++) {
-                if (tgtSpells.size() == 1) {
-                    chosenSAs.addAll(tgtSpells);
-                } else if (sa.getActivatingPlayer().isHuman()) {
-                    String num = "";
-                    if (multi == 1 - 1) {
-                        num = "first";
-                    }
-                    else if (multi == 2 - 1) {
-                        num = "second";
-                    }
-                    else if (multi == 3 - 1) {
-                        num = "third";
-                    } else {
-                        num = Integer.toString(multi - 1) + "th";
-                    }
-                    chosenSAtmp = GuiChoose.one("Select " + num + " spell to copy to stack", tgtSpells);
-                    chosenSAs.add(chosenSAtmp);
-                    tgtSpells.remove(chosenSAtmp);
-                } else {
-                    chosenSAs.add(tgtSpells.get(multi));
-                }
-            }
 
-            for (final SpellAbility chosenSAcopy : chosenSAs) {
-                chosenSAcopy.setActivatingPlayer(controller);
-                for (int i = 0; i < amount; i++) {
-                    CardFactory.copySpellontoStack(card, chosenSAcopy.getSourceCard(), chosenSAcopy, true, null);
-                }
+            for (int multi = 0; multi < spellCount && !tgtSpells.isEmpty(); multi++) {
+                String prompt = "Select " + Lang.getOrdinal(multi) + " spell to copy to stack";
+                SpellAbility chosen = controller.getController().chooseSingleSpellForEffect(tgtSpells, sa, prompt);
+                copies.add(CardFactory.copySpellAbilityAndSrcCard(card, chosen.getSourceCard(), chosen, true));
+                chosenSAs.add(chosen);
+                tgtSpells.remove(chosen);
             }
         }
         else if (sa.hasParam("CopyForEachCanTarget")) {
-            SpellAbility chosenSA = null;
-            if (tgtSpells.size() == 1 || sa.getActivatingPlayer().isComputer()) {
-                chosenSA = tgtSpells.get(0);
-            } else {
-                chosenSA = GuiChoose.one("Select a spell to copy", tgtSpells);
-            }
+            SpellAbility chosenSA = controller.getController().chooseSingleSpellForEffect(tgtSpells, sa, "Select a spell to copy");
             chosenSA.setActivatingPlayer(controller);
             List<ITargetable> candidates = chosenSA.getTargetRestrictions().getAllCandidates(chosenSA, true);
             if (sa.hasParam("CanTargetPlayer")) {
@@ -115,8 +93,13 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
                 // Remove targeted players because getAllCandidates include all the valid players
                 for(Player p : chosenSA.getTargets().getTargetPlayers())
                     candidates.remove(p);
+                
+                mayChoseNewTargets = false;
                 for (ITargetable o : candidates) {
-                    CardFactory.copySpellontoStack(card, chosenSA.getSourceCard(), chosenSA, true, o);
+                    SpellAbility copy = CardFactory.copySpellAbilityAndSrcCard(card, chosenSA.getSourceCard(), chosenSA, true);
+                    copy.resetTargets();
+                    copy.getTargets().add(o);
+                    copies.add(copy);
                 }
             } else {// Precursor Golem, Ink-Treader Nephilim
                 final String type = sa.getParam("CopyForEachCanTarget");
@@ -126,27 +109,28 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
                         valid.add((Card) o);
                     }
                 }
-                valid = CardLists.getValidCards(valid, type, chosenSA.getActivatingPlayer(),
-                        chosenSA.getSourceCard());
+                valid = CardLists.getValidCards(valid, type, chosenSA.getActivatingPlayer(), chosenSA.getSourceCard());
+                Card originalTarget = Iterables.getFirst(getTargetCards(chosenSA), null);
+                valid.remove(originalTarget);
+                mayChoseNewTargets = false;
                 for (Card c : valid) {
-                    CardFactory.copySpellontoStack(card, chosenSA.getSourceCard(), chosenSA, true, c);
+                    SpellAbility copy = CardFactory.copySpellAbilityAndSrcCard(card, chosenSA.getSourceCard(), chosenSA, true);
+                    copy.resetTargets();
+                    copy.getTargets().add(c);
+                    copies.add(copy);
                 }
             }
         }
         else {
-            SpellAbility chosenSA = null;
-            if (tgtSpells.size() == 1) {
-                chosenSA = tgtSpells.get(0);
-            } else if (sa.getActivatingPlayer().isHuman()) {
-                chosenSA = GuiChoose.one("Select a spell to copy", tgtSpells);
-            } else {
-                chosenSA = tgtSpells.get(0);
-            }
-
+            SpellAbility chosenSA = controller.getController().chooseSingleSpellForEffect(tgtSpells, sa, "Select a spell to copy");
             chosenSA.setActivatingPlayer(controller);
             for (int i = 0; i < amount; i++) {
-                CardFactory.copySpellontoStack(card, chosenSA.getSourceCard(), chosenSA, true, null);
+                copies.add(CardFactory.copySpellAbilityAndSrcCard(card, chosenSA.getSourceCard(), chosenSA, true));
             }
+        }
+        
+        for(SpellAbility copySA : copies) {
+            controller.getController().playSpellAbilityForFree(copySA, mayChoseNewTargets);
         }
     } // end resolve
 

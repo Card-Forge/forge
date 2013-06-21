@@ -94,7 +94,7 @@ public abstract class PlayerController {
      */
     //public abstract void playFromSuspend(Card c);
     public abstract boolean playCascade(Card cascadedCard, Card sourceCard);
-    public abstract void playSpellAbilityForFree(SpellAbility copySA);
+    public abstract void playSpellAbilityForFree(SpellAbility copySA, boolean mayChoseNewTargets);
 
     public abstract Deck sideboard(final Deck deck, GameType gameType);
 
@@ -112,6 +112,8 @@ public abstract class PlayerController {
     public Card chooseSingleCardForEffect(List<Card> sourceList, SpellAbility sa, String title) { return chooseSingleCardForEffect(sourceList, sa, title, false); }
     public abstract Card chooseSingleCardForEffect(List<Card> sourceList, SpellAbility sa, String title, boolean isOptional);
     public abstract Player chooseSinglePlayerForEffect(List<Player> options, SpellAbility sa, String title);
+    public abstract SpellAbility chooseSingleSpellForEffect(List<SpellAbility> spells, SpellAbility sa, String title);
+
     public abstract boolean confirmAction(SpellAbility sa, PlayerActionConfirmMode mode, String message);
     public abstract boolean getWillPlayOnFirstTurn(boolean isFirstGame);
     public abstract boolean confirmStaticApplication(Card hostCard, GameEntity affected, String logic, String message);

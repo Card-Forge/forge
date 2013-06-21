@@ -184,7 +184,7 @@ public class HumanPlay {
     
         if (sa != null) {
             sa.setActivatingPlayer(player);
-            playSaWithoutPayingManaCost(player.getGame(), sa);
+            playSaWithoutPayingManaCost(player.getGame(), sa, true);
         }
     }
 
@@ -196,7 +196,7 @@ public class HumanPlay {
      * @param sa
      *            a {@link forge.card.spellability.SpellAbility} object.
      */
-    public static final void playSaWithoutPayingManaCost(final Game game, final SpellAbility sa) {
+    public static final void playSaWithoutPayingManaCost(final Game game, final SpellAbility sa, boolean mayChooseNewTargets) {
         FThreads.assertExecutedByEdt(false);
         final Card source = sa.getSourceCard();
         
@@ -209,7 +209,7 @@ public class HumanPlay {
             final CostPayment payment = new CostPayment(sa.getPayCosts(), sa);
     
             final HumanPlaySpellAbility req = new HumanPlaySpellAbility(sa, payment);
-            req.fillRequirements(false, true, false);
+            req.fillRequirements(!mayChooseNewTargets, true, false);
         } else {
             if (sa.isSpell()) {
                 final Card c = sa.getSourceCard();

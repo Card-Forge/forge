@@ -116,8 +116,8 @@ public class PlayerControllerHuman extends PlayerController {
      * @see forge.game.player.PlayerController#mayPlaySpellAbilityForFree(forge.card.spellability.SpellAbility)
      */
     @Override
-    public void playSpellAbilityForFree(SpellAbility copySA) {
-        HumanPlay.playSaWithoutPayingManaCost(player.getGame(), copySA);
+    public void playSpellAbilityForFree(SpellAbility copySA, boolean mayChoseNewTargets) {
+        HumanPlay.playSaWithoutPayingManaCost(player.getGame(), copySA, mayChoseNewTargets);
     }
 
     /* (non-Javadoc)
@@ -278,22 +278,24 @@ public class PlayerControllerHuman extends PlayerController {
 
     @Override
     public int chooseNumber(SpellAbility sa, String title, int min, int max) {
-        final String[] choices = new String[max + 1];
+        final Integer[] choices = new Integer[max + 1];
         for (int i = min; i <= max; i++) {
-            choices[i] = Integer.toString(i);
+            choices[i] = Integer.valueOf(i);
         }
-        return Integer.parseInt(GuiChoose.one(title, choices));
+        return GuiChoose.one(title, choices).intValue();
     }
 
     @Override
     public Player chooseSinglePlayerForEffect(List<Player> options, SpellAbility sa, String title) {
         // Human is supposed to read the message and understand from it what to choose
-        if (options.size() > 1)
-            return GuiChoose.one(title, options);
-        else 
-            return options.get(0);
+        return options.size() < 2 ? options.get(0) : GuiChoose.one(title, options);
     }
 
+    @Override
+    public SpellAbility chooseSingleSpellForEffect(java.util.List<SpellAbility> spells, SpellAbility sa, String title) {
+        // Human is supposed to read the message and understand from it what to choose
+        return spells.size() < 2 ? spells.get(0) : GuiChoose.one(title, spells);
+    }
 
     /* (non-Javadoc)
      * @see forge.game.player.PlayerController#confirmAction(forge.card.spellability.SpellAbility, java.lang.String, java.lang.String)

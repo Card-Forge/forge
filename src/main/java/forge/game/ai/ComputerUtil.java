@@ -264,7 +264,7 @@ public class ComputerUtil {
      * @param sa
      *            a {@link forge.card.spellability.SpellAbility} object.
      */
-    public static final void playStackFree(final Player ai, final SpellAbility sa) {
+    public static final void playSpellAbilityForFree(final Player ai, final SpellAbility sa) {
         sa.setActivatingPlayer(ai);
 
         final Card source = sa.getSourceCard();
