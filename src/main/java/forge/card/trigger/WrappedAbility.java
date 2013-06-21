@@ -329,6 +329,11 @@ public class WrappedAbility extends Ability implements ISpellAbility {
         return sa.isOptionalTrigger();
     }
 
+    @Override
+    public boolean usesTargeting() {
+        return sa.usesTargeting();
+    }
+
     // //////////////////////////////////////
     // THIS ONE IS ALL THAT MATTERS
     // //////////////////////////////////////
