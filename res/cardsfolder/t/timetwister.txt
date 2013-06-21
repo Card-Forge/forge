@@ -1,10 +1,8 @@
 Name:Timetwister
 ManaCost:2 U
 Types:Sorcery
-A:SP$ ChangeZoneAll | Cost$ 2 U |  ChangeType$ Card | Origin$ Hand | Destination$ Library | Shuffle$ True  | SubAbility$ DBChangeAll | SpellDescription$ Each player shuffles his or her graveyard and hand into his or her library, then draws seven cards.
-SVar:DBChangeAll:DB$ChangeZoneAll | ChangeType$ Card | Origin$ Graveyard | Destination$ Library | SubAbility$ DBDraw | Shuffle$ True
-SVar:DBDraw:DB$Draw | NumCards$ 7 | Defined$ Each | SubAbility$ DBChange
-SVar:DBChange:DB$ChangeZone | Origin$ Stack | Destination$ Graveyard
+A:SP$ ChangeZoneAll | Cost$ 2 U |  ChangeType$ Card | Origin$ Hand,Graveyard | Destination$ Library | Shuffle$ True  | SubAbility$ DBDraw | UseAllOriginZones$ True | SpellDescription$ Each player shuffles his or her graveyard and hand into his or her library, then draws seven cards.
+SVar:DBDraw:DB$ Draw | NumCards$ 7 | Defined$ Each
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/timetwister.jpg
 Oracle:Each player shuffles his or her hand and graveyard into his or her library, then draws seven cards. (Then put Timetwister into its owner's graveyard.)

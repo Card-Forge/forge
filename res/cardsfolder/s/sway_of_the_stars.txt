@@ -1,11 +1,9 @@
 Name:Sway of the Stars
 ManaCost:8 U U
 Types:Sorcery
-A:SP$ ChangeZoneAll | Cost$ 8 U U |  ChangeType$ Card | Origin$ Hand | Destination$ Library | SubAbility$ DBChangeAll | SpellDescription$ Each player shuffles his or her hand, graveyard, and permanents he or she owns into his or her library, then draws seven cards. Each player's life total becomes 7.
-SVar:DBChangeAll:DB$ChangeZoneAll | ChangeType$ Card | Origin$ Graveyard | Destination$ Library | SubAbility$ DBChangeAll2
-SVar:DBChangeAll2:DB$ChangeZoneAll | ChangeType$ Permanent | Origin$ Battlefield | Destination$ Library | Shuffle$ True | SubAbility$ DBDraw
-SVar:DBDraw:DB$Draw | NumCards$ 7 | Defined$ Each | SubAbility$ DBSetLife
-SVar:DBSetLife:DB$SetLife | Defined$ Each | LifeAmount$ 7
+A:SP$ ChangeZoneAll | Cost$ 8 U U |  ChangeType$ Card | Origin$ Hand,Graveyard,Battlefield | Destination$ Library | SubAbility$ DBDraw | UseAllOriginZones$ True | SpellDescription$ Each player shuffles his or her hand, graveyard, and permanents he or she owns into his or her library, then draws seven cards. Each player's life total becomes 7.
+SVar:DBDraw:DB$ Draw | NumCards$ 7 | Defined$ Each | SubAbility$ DBSetLife
+SVar:DBSetLife:DB$ SetLife | Defined$ Each | LifeAmount$ 7
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sway_of_the_stars.jpg
 Oracle:Each player shuffles his or her hand, graveyard, and permanents he or she owns into his or her library, then draws seven cards. Each player's life total becomes 7.
