@@ -1,0 +1,10 @@
+Name:Phyrexian Colossus
+ManaCost:7
+Types:Artifact Creature Golem
+PT:8/8
+K:CARDNAME doesn't untap during your untap step.
+A:AB$ Untap | Cost$ PayLife<8> | SpellDescription$ Untap CARDNAME.
+K:CantBeBlockedByAmount LT3
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/phyrexian_colossus.jpg
+Oracle:Phyrexian Colossus doesn't untap during your untap step.\nPay 8 life: Untap Phyrexian Colossus.\nPhyrexian Colossus can't be blocked except by three or more creatures.
