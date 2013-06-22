@@ -11,6 +11,7 @@ import forge.Card;
  *
  */
 public enum ReplacementType {
+    Counter(ReplaceCounter.class),
     DamageDone(ReplaceDamage.class),
     Destroy(ReplaceDestroy.class),
     Discard(ReplaceDiscard.class),

@@ -4759,6 +4759,7 @@ res/cardsfolder/g/guided_strike.txt svneol=native#text/plain
 res/cardsfolder/g/guiding_spirit.txt -text
 res/cardsfolder/g/guild_feud.txt -text
 res/cardsfolder/g/guildscorn_ward.txt -text
+res/cardsfolder/g/guile.txt -text
 res/cardsfolder/g/guiltfeeder.txt svneol=native#text/plain
 res/cardsfolder/g/guilty_conscience.txt svneol=native#text/plain
 res/cardsfolder/g/guise_of_fire.txt -text
@@ -14302,6 +14303,7 @@ src/main/java/forge/card/mana/ManaCostShard.java -text
 src/main/java/forge/card/mana/ManaPool.java svneol=native#text/plain
 src/main/java/forge/card/mana/package-info.java svneol=native#text/plain
 src/main/java/forge/card/package-info.java svneol=native#text/plain
+src/main/java/forge/card/replacement/ReplaceCounter.java -text
 src/main/java/forge/card/replacement/ReplaceDamage.java -text
 src/main/java/forge/card/replacement/ReplaceDestroy.java -text
 src/main/java/forge/card/replacement/ReplaceDiscard.java -text
