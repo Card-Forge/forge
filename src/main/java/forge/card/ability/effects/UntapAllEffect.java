@@ -38,7 +38,7 @@ public class UntapAllEffect extends SpellAbilityEffect {
             valid = sa.getParam("ValidCards");
         }
 
-        if (!sa.usesTargeting()) {
+        if (!sa.usesTargeting() && !sa.hasParam("Defined")) {
             list = sa.getActivatingPlayer().getGame().getCardsIn(ZoneType.Battlefield);
         } else {
             list = new ArrayList<Card>();
