@@ -6,4 +6,3 @@ K:Flying
 A:AB$ Regenerate | Cost$ G | SpellDescription$ Regenerate CARDNAME.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/yavimaya_gnats.jpg
 Oracle:Flying\n{G}: Regenerate Yavimaya Gnats.
-SetInfo:ICE Uncommon

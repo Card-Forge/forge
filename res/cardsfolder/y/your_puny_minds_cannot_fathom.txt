@@ -7,4 +7,3 @@ SVar:Unfathomable:DB$ Effect | Name$ Unfathomable Mind Effect | StaticAbilities$
 SVar:STHandSize:Mode$ Continuous | EffectZone$ Command | Affected$ You | SetMaxHandSize$ Unlimited | Description$ You have no maximum hand size.
 SVar:Picture:http://www.cardforge.org/fpics/lq_schemes/your_puny_minds_cannot_fathom.jpg
 Oracle:When you set this scheme in motion, draw four cards. You have no maximum hand size until your next turn.
-SetInfo:ARC Common

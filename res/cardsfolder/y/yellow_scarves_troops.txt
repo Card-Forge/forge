@@ -5,4 +5,3 @@ PT:2/2
 K:CARDNAME can't block.
 SVar:Picture:http://resources.wizards.com/magic/cards/pk/en-us/card10542.jpg
 Oracle:Yellow Scarves Troops can't block.
-SetInfo:PTK Common

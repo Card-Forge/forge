@@ -5,4 +5,3 @@ A:SP$ DealDamage | Cost$ 2 R | ValidTgts$ Creature,Player | TgtPrompt$ Select ta
 SVar:DB:DB$Pump | KW$ HIDDEN If CARDNAME would be put into a graveyard, exile it instead. | Defined$ Targeted
 SVar:Picture:http://www.wizards.com/global/images/magic/general/yamabushis_flame.jpg
 Oracle:Yamabushi's Flame deals 3 damage to target creature or player. If a creature dealt damage this way would die this turn, exile it instead.
-SetInfo:CHK Common

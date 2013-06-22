@@ -6,4 +6,3 @@ T:Mode$ Attacks | ValidCard$ Card.Self | Alone$ True | Execute$ TrigPump | Trigg
 SVar:TrigPump:AB$Pump | Cost$ 0 | Defined$ Self | KW$ HIDDEN Unblockable | UntilEndOfCombat$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/yuan_shaos_infantry.jpg
 Oracle:Whenever Yuan Shao's Infantry attacks alone, Yuan Shao's Infantry is unblockable this combat.
-SetInfo:PTK Uncommon

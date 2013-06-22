@@ -7,8 +7,3 @@ SVar:X:Count$Valid Enchantment
 SVar:BuffedBy:Enchantment
 SVar:Picture:http://www.wizards.com/global/images/magic/general/yavimaya_enchantress.jpg
 Oracle:Yavimaya Enchantress gets +1/+1 for each enchantment on the battlefield.
-SetInfo:8ED Uncommon
-SetInfo:7ED Uncommon
-SetInfo:UDS Uncommon
-SetInfo:9ED Uncommon
-SetInfo:10E Uncommon

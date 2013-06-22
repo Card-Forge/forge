@@ -5,4 +5,3 @@ PT:5/5
 K:Cycling:2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/yoked_plowbeast.jpg
 Oracle:Cycling {2} ({2}, Discard this card: Draw a card.)
-SetInfo:ALA Common

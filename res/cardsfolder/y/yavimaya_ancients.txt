@@ -5,4 +5,3 @@ PT:2/7
 A:AB$ Pump | Cost$ G | NumAtt$ +1 | NumDef$ -2 | SpellDescription$ CARDNAME gets +1/-2 until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/yavimaya_ancients.jpg
 Oracle:{G}: Yavimaya Ancients gets +1/-2 until end of turn.
-SetInfo:ALL Common x2

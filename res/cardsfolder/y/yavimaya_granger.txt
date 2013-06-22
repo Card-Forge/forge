@@ -7,4 +7,3 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creatu
 SVar:TrigChange:AB$ChangeZone | Cost$ 0 | Origin$ Library | Destination$ Battlefield | Tapped$ True | ChangeType$ Land.Basic | ChangeNum$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/yavimaya_granger.jpg
 Oracle:Echo {2}{G} (At the beginning of your upkeep, if this came under your control since the beginning of your last upkeep, sacrifice it unless you pay its echo cost.)\nWhen Yavimaya Granger enters the battlefield, you may search your library for a basic land card, put that card onto the battlefield tapped, then shuffle your library.
-SetInfo:ULG Common

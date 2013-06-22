@@ -5,4 +5,3 @@ A:SP$ Pump | Cost$ 2 W | ValidTgts$ Creature.DefenderCtrl | TgtPrompt$ Select ta
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/yare.jpg
 Oracle:Target creature defending player controls gets +3/+0 until end of turn. That creature can block up to two additional creatures this turn.
-SetInfo:MIR Rare

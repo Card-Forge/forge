@@ -7,5 +7,3 @@ T:Mode$ ChangesZone | Origin$ Battlefield | ValidCard$ Creature | Destination$ G
 SVar:TrigDestroy:AB$Destroy | Cost$ 0 | Defined$ Enchanted
 SVar:Picture:http://www.wizards.com/global/images/magic/general/yoke_of_the_damned.jpg
 Oracle:Enchant creature\nWhen a creature dies, destroy enchanted creature.
-SetInfo:DDJ Common
-SetInfo:CFX Common

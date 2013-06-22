@@ -10,4 +10,3 @@ SVar:NonStackingEffect:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/yawgmoths_agenda.jpg
 Oracle:You can't cast more than one spell each turn.\nYou may play cards from your graveyard.\nIf a card would be put into your graveyard from anywhere, exile it instead.
-SetInfo:INV Rare

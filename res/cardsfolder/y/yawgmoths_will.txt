@@ -8,4 +8,3 @@ SVar:Exile:AB$ ChangeZone | Cost$ 0 | Hidden$ True | Origin$ All | Destination$ 
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/yawgmoths_will.jpg
 Oracle:Until end of turn, you may play cards from your graveyard.\nIf a card would be put into your graveyard from anywhere this turn, exile that card instead.
-SetInfo:USG Rare

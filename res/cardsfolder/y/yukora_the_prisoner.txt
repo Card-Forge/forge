@@ -6,4 +6,3 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.S
 SVar:TrigSac:AB$ SacrificeAll | Cost$ 0 | ValidCards$ Creature.nonOgre+YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/yukora_the_prisoner.jpg
 Oracle:When Yukora, the Prisoner leaves the battlefield, sacrifice all non-Ogre creatures you control.
-SetInfo:BOK Rare

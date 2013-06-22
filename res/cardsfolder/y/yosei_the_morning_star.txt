@@ -8,4 +8,3 @@ SVar:TrigPump:DB$ Pump | ValidTgts$ Player | IsCurse$ True | KW$ Skip your next 
 SVar:TrigTap:DB$ Tap | TargetMin$ 0 | TargetMax$ 5 | TargetsWithDefinedController$ Targeted | ValidTgts$ Permanent
 SVar:Picture:http://www.wizards.com/global/images/magic/general/yosei_the_morning_star.jpg
 Oracle:Flying\nWhen Yosei, the Morning Star dies, target player skips his or her next untap step. Tap up to five target permanents that player controls.
-SetInfo:CHK Rare

@@ -6,4 +6,3 @@ A:AB$ Draw | Cost$ PayLife<1> | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/yawgmoths_bargain.jpg
 Oracle:Skip your draw step.\nPay 1 life: Draw a card.
-SetInfo:UDS Rare
