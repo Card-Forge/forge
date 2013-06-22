@@ -6,4 +6,3 @@ SVar:DBSacLand:DB$ Sacrifice | Defined$ Targeted | SacValid$ Land | Amount$ 1 | 
 SVar:DBDmg:DB$ DealDamage | NumDmg$ 2 | Defined$ Targeted
 SVar:Picture:http://www.wizards.com/global/images/magic/general/structural_collapse.jpg
 Oracle:Target player sacrifices an artifact and a land. Structural Collapse deals 2 damage to that player.
-SetInfo:GTC Common

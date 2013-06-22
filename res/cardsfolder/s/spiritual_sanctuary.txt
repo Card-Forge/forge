@@ -7,4 +7,3 @@ SVar:TrigGainLifeYou:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ 1
 SVar:TrigGainLifeOpp:AB$GainLife | Cost$ 0 | Defined$ Opponent | LifeAmount$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spiritual_sanctuary.jpg
 Oracle:At the beginning of each player's upkeep, if that player controls a Plains, he or she gains 1 life.
-SetInfo:LEG Rare

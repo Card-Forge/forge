@@ -8,4 +8,3 @@ SVar:TrigChange:AB$ChangeZone | Origin$ Battlefield | Destination$ Hand | Cost$ 
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/silver_drake.jpg
 Oracle:Flying\nWhen Silver Drake enters the battlefield, return a white or blue creature you control to its owner's hand.
-SetInfo:PLS Common

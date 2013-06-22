@@ -6,4 +6,3 @@ SVar:TrigGainLife:DB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ 2 | SubAbil
 SVar:DBDraw:DB$ Draw | NumCards$ 1 | OptionalDecider$ You
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spiritual_focus.jpg
 Oracle:Whenever a spell or ability an opponent controls causes you to discard a card, you gain 2 life and you may draw a card.
-SetInfo:MMQ Rare

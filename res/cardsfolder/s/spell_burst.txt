@@ -7,4 +7,3 @@ K:Buyback 3
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spell_burst.jpg
 Oracle:Buyback {3} (You may pay an additional {3} as you cast this spell. If you do, put this card into your hand as it resolves.)\nCounter target spell with converted mana cost X.
-SetInfo:TSP Uncommon

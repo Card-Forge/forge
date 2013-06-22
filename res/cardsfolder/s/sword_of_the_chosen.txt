@@ -5,4 +5,3 @@ A:AB$ Pump | Cost$ T | ValidTgts$ Creature.Legendary | NumAtt$ +2 | NumDef$ +2 |
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sword_of_the_chosen.jpg
 Oracle:{T}: Target legendary creature gets +2/+2 until end of turn.
-SetInfo:STH Rare

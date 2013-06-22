@@ -4,10 +4,3 @@ Types:Creature Cat
 PT:2/1
 SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83246.jpg
 Oracle:
-SetInfo:8ED Rare
-SetInfo:2ED Rare
-SetInfo:9ED Rare
-SetInfo:LEB Rare
-SetInfo:LEA Rare
-SetInfo:4ED Rare
-SetInfo:3ED Rare

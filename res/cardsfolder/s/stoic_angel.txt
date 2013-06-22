@@ -7,4 +7,3 @@ K:Flying
 K:Vigilance
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stoic_angel.jpg
 Oracle:Flying, vigilance\nPlayers can't untap more than one creature during their untap steps.
-SetInfo:ALA Rare

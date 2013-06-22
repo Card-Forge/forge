@@ -6,4 +6,3 @@ S:Mode$ Continuous | EffectZone$ All | Affected$ Card.Self | CharacteristicDefin
 A:AB$ Regenerate | Cost$ 1 B | SpellDescription$ Regenerate CARDNAME.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skeletal_changeling.jpg
 Oracle:Changeling (This card is every creature type at all times.)\n{1}{B}: Regenerate Skeletal Changeling.
-SetInfo:LRW Common

@@ -13,4 +13,3 @@ SVar:X:ReplaceCount$DamageAmount
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sivvis_valor.jpg
 Oracle:If you control a Plains, you may tap an untapped creature you control rather than pay Sivvi's Valor's mana cost.\nAll damage that would be dealt to target creature this turn is dealt to you instead.
-SetInfo:NMS Rare

@@ -5,5 +5,3 @@ T:Mode$ SpellCast | ValidCard$ Enchantment | ValidActivatingPlayer$ You | Execut
 SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Angel | TokenTypes$ Creature,Angel | TokenOwner$ You | TokenColors$ White | TokenPower$ 4 | TokenToughness$ 4 | TokenKeywords$ Flying
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sigil_of_the_empty_throne.jpg
 Oracle:Whenever you cast an enchantment spell, put a 4/4 white Angel creature token with flying onto the battlefield.
-SetInfo:PC2 Rare
-SetInfo:CFX Rare

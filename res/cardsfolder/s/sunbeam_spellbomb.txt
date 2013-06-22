@@ -6,4 +6,3 @@ A:AB$ GainLife | Cost$ W Sac<1/CARDNAME> | LifeAmount$ 5 | SpellDescription$ You
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sunbeam_spellbomb.jpg
 Oracle:{W}, Sacrifice Sunbeam Spellbomb: You gain 5 life.\n{1}, Sacrifice Sunbeam Spellbomb: Draw a card.
-SetInfo:MRD Common

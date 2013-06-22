@@ -7,4 +7,3 @@ SVar:ShowstopperTrigDamage:AB$ DealDamage | Cost$ 0 | ValidTgts$ Creature.OppCtr
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/showstopper.jpg
 Oracle:Until end of turn, creatures you control gain "When this creature dies, it deals 2 damage to target creature an opponent controls."
-SetInfo:DGM Uncommon

@@ -5,4 +5,3 @@ A:AB$ Destroy | Cost$ T Sac<1/CARDNAME> Sac<2/Land> | ValidTgts$ Creature.attack
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sandstone_deadfall.jpg
 Oracle:{T}, Sacrifice two lands and Sandstone Deadfall: Destroy target attacking creature.
-SetInfo:ODY Uncommon

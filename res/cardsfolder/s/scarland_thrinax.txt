@@ -5,4 +5,3 @@ PT:2/2
 A:AB$ PutCounter | Cost$ Sac<1/Creature> | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on CARDNAME.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scarland_thrinax.jpg
 Oracle:Sacrifice a creature: Put a +1/+1 counter on Scarland Thrinax.
-SetInfo:CFX Uncommon

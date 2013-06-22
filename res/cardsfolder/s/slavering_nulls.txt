@@ -6,5 +6,3 @@ T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | IsPresent$ S
 SVar:TrigDiscard:AB$ Discard | Cost$ 0 | Defined$ TriggeredTarget | NumCards$ 1 | Mode$ TgtChoose
 SVar:Picture:http://www.wizards.com/global/images/magic/general/slavering_nulls.jpg
 Oracle:Whenever Slavering Nulls deals combat damage to a player, if you control a Swamp, you may have that player discard a card.
-SetInfo:DDH Uncommon
-SetInfo:WWK Uncommon

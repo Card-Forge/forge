@@ -12,5 +12,3 @@ SVar:TrigReset:AB$ StoreSVar | Cost$ 0 | SVar$ SoulbrightNum | Type$ Number | Ex
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soulbright_flamekin.jpg
 Oracle:{2}: Target creature gains trample until end of turn. If this is the third time this ability has resolved this turn, you may add {R}{R}{R}{R}{R}{R}{R}{R} to your mana pool.
-SetInfo:DD2 Common
-SetInfo:LRW Common

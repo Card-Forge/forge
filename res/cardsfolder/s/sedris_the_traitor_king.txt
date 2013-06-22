@@ -9,4 +9,3 @@ SVar:TrueDeath:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | Execute$ 
 SVar:Unavailable:DB$ ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Exile
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sedris_the_traitor_king.jpg
 Oracle:Each creature card in your graveyard has unearth {2}{B}. ({2}{B}: Return the card to the battlefield. The creature gains haste. Exile it at the beginning of the next end step or if it would leave the battlefield. Unearth only as a sorcery.)
-SetInfo:ALA Mythic

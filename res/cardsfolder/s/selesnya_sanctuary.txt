@@ -8,7 +8,3 @@ SVar:TrigReturn:AB$ChangeZone | Origin$ Battlefield | Destination$ Hand | Cost$ 
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/selesnya_sanctuary.jpg
 Oracle:Selesnya Sanctuary enters the battlefield tapped.\nWhen Selesnya Sanctuary enters the battlefield, return a land you control to its owner's hand.\n{T}: Add {G}{W} to your mana pool.
-SetInfo:RAV Common
-SetInfo:PC2 Common
-SetInfo:COM Common
-SetInfo:DDG Common

@@ -7,4 +7,3 @@ SVar:STPrevent:Mode$ PreventDamage | EffectZone$ Command | Target$ You | Source$
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scarecrow.jpg
 Oracle:{6}, {T}: Prevent all damage that would be dealt to you this turn by creatures with flying.
-SetInfo:DRK Uncommon

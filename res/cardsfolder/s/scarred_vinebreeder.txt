@@ -6,4 +6,3 @@ A:AB$ Pump | Cost$ 2 B ExileFromGrave<1/Elf> | NumAtt$ +3 | NumDef$ +3 | SpellDe
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scarred_vinebreeder.jpg
 Oracle:{2}{B}, Exile an Elf card from your graveyard: Scarred Vinebreeder gets +3/+3 until end of turn.
-SetInfo:LRW Common

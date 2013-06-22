@@ -9,4 +9,3 @@ SVar:X:Count$Valid Land.sharesNameWith Imprinted
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/strata_scythe.jpg
 Oracle:Imprint - When Strata Scythe enters the battlefield, search your library for a land card, exile it, then shuffle your library.\nEquipped creature gets +1/+1 for each land on the battlefield with the same name as the exiled card.\nEquip {3}
-SetInfo:SOM Rare

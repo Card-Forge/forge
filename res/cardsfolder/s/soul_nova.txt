@@ -5,4 +5,3 @@ A:SP$ ChangeZone | Cost$ 3 W W | ValidTgts$ Creature.attacking | TgtPrompt$ Sele
 SVar:DBChangeZoneAll:DB$ ChangeZoneAll | ChangeType$ Targeted.Equipment+Attached | Origin$ Battlefield | Destination$ Exile
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soul_nova.jpg
 Oracle:Exile target attacking creature and all Equipment attached to it.
-SetInfo:MRD Uncommon

@@ -4,8 +4,3 @@ Types:Sorcery
 A:SP$ GainLife | Cost$ 1 W | LifeAmount$ 4 | SpellDescription$ You gain 4 life.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sacred_nectar.jpg
 Oracle:You gain 4 life.
-SetInfo:8ED Common
-SetInfo:S99 Common
-SetInfo:7ED Common
-SetInfo:POR Common
-SetInfo:9ED Common

@@ -10,4 +10,3 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$ValidLibrary Creature.YouOwn,Artifact.YouOwn
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skyship_weatherlight.jpg
 Oracle:When Skyship Weatherlight enters the battlefield, search your library for any number of artifact and/or creature cards and exile them. Then shuffle your library.\n{4}, {T}: Choose a card at random that was exiled with Skyship Weatherlight. Put that card into its owner's hand.
-SetInfo:PLS Rare x2

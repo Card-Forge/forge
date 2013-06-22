@@ -8,4 +8,3 @@ A:AB$ Untap | Cost$ T | Defined$ Enchanted | SpellDescription$ Untap enchanted c
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/second_wind.jpg
 Oracle:Enchant creature\n{T}: Tap enchanted creature.\n{T}: Untap enchanted creature.
-SetInfo:FUT Uncommon

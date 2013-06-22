@@ -7,4 +7,3 @@ K:Soulshift 4
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scuttling_death.jpg
 Oracle:Sacrifice Scuttling Death: Target creature gets -1/-1 until end of turn.\nSoulshift 4 (When this creature dies, you may return target Spirit card with converted mana cost 4 or less from your graveyard to your hand.)
-SetInfo:CHK Common

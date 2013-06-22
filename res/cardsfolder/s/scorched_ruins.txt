@@ -11,4 +11,3 @@ SVar:X:Remembered$Amount
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scorched_ruins.jpg
 Oracle:If Scorched Ruins would enter the battlefield, sacrifice two untapped lands instead. If you do, put Scorched Ruins onto the battlefield. If you don't, put it into its owner's graveyard.\n{T}: Add {4} to your mana pool.
-SetInfo:WTH Rare

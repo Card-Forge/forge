@@ -6,5 +6,3 @@ A:SP$ DamageAll | Cost$ X X R R | ValidCards$ Creature.withoutFlying+YouDontCtrl
 SVar:X:Count$xPaid
 SVar:Picture:http://www.wizards.com/global/images/magic/general/street_spasm.jpg
 Oracle:Street Spasm deals X damage to target creature without flying you don't control.\nOverload {X}{X}{R}{R} (You may cast this spell for its overload cost. If you do, change its text by replacing all instances of "target" with "each.".)
-SetInfo:DDJ Uncommon
-SetInfo:RTR Uncommon

@@ -5,4 +5,3 @@ S:Mode$ PreventDamage | Target$ You | Source$ Artifact | Amount$ 1 | Description
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sphere_of_purity.jpg
 Oracle:If an artifact would deal damage to you, prevent 1 of that damage.
-SetInfo:MRD Common

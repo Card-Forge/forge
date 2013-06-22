@@ -8,4 +8,3 @@ SVar:TrigDealDamage:AB$ DealDamage | Cost$ 0 | Defined$ TriggeredTargetControlle
 SVar:X:TriggerCount$DamageAmount
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spiteful_shadows.jpg
 Oracle:Enchant creature\nWhenever enchanted creature is dealt damage, it deals that much damage to its controller.
-SetInfo:DKA Common

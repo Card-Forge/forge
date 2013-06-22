@@ -6,4 +6,3 @@ T:Mode$ Blocks | ValidCard$ Creature | ValidBlocked$ Card.Self | TriggerZones$ B
 SVar:RogueDamage:AB$ DealDamage | Cost$ 0 | Defined$ TriggeredBlocker | NumDmg$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/somberwald_vigilante.jpg
 Oracle:Whenever Somberwald Vigilante becomes blocked by a creature, Somberwald Vigilante deals 1 damage to that creature.
-SetInfo:AVR Common

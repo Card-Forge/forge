@@ -5,6 +5,3 @@ A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add U to your mana pool.
 K:CARDNAME enters the battlefield tapped.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sky_diamond.jpg
 Oracle:Sky Diamond enters the battlefield tapped.\n{T}: Add {U} to your mana pool.
-SetInfo:7ED Uncommon
-SetInfo:MIR Uncommon
-SetInfo:6ED Uncommon

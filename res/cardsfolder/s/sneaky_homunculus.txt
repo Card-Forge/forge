@@ -6,5 +6,3 @@ K:CantBeBlockedBy Creature.powerGE2
 K:CantBlock Creature.powerGE2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sneaky_homunculus.jpg
 Oracle:Sneaky Homunculus can't block or be blocked by creatures with power 2 or greater.
-SetInfo:8ED Common
-SetInfo:NMS Common

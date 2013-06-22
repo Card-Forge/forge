@@ -8,4 +8,3 @@ A:AB$ ChangeZone | Cost$ R R R | Origin$ Graveyard | Destination$ Hand | Activat
 SVar:OppDamaged:Count$OppDamageThisTurn
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skarrgan_firebird.jpg
 Oracle:Bloodthirst 3 (If an opponent was dealt damage this turn, this creature enters the battlefield with three +1/+1 counters on it.)\nFlying\n{R}{R}{R}: Return Skarrgan Firebird from your graveyard to your hand. Activate this ability only if an opponent was dealt damage this turn.
-SetInfo:GPT Rare

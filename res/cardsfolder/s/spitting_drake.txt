@@ -6,5 +6,3 @@ K:Flying
 A:AB$ Pump | Cost$ R | NumAtt$ +1 | ActivationLimit$ 1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn. Activate this ability only once each turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spitting_drake.jpg
 Oracle:Flying\n{R}: Spitting Drake gets +1/+0 until end of turn. Activate this ability only once each turn.
-SetInfo:VIS Uncommon
-SetInfo:6ED Uncommon

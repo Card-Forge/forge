@@ -7,4 +7,3 @@ A:AB$ Counter | Cost$ 1 U Sac<1/CARDNAME> | TargetType$ Spell | TgtPrompt$ Selec
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soulsworn_jury.jpg
 Oracle:Defender (This creature can't attack.)\n{1}{U}, Sacrifice Soulsworn Jury: Counter target creature spell.
-SetInfo:DIS Common

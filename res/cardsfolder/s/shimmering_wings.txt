@@ -7,6 +7,3 @@ S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Flying | Descr
 A:AB$ ChangeZone | Cost$ U | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return CARDNAME to its owner's hand.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shimmering_wings.jpg
 Oracle:Enchant creature (Target a creature as you cast this. This card enters the battlefield attached to that creature.)\nEnchanted creature has flying. (It can't be blocked except by creatures with flying or reach.)\n{U}: Return Shimmering Wings to its owner's hand.
-SetInfo:TMP Common
-SetInfo:10E Common
-SetInfo:INV Common

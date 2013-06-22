@@ -7,4 +7,3 @@ SVar:X:Targeted$CardPower
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/souls_grace.jpg
 Oracle:You gain life equal to target creature's power.
-SetInfo:ALA Common

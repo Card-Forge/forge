@@ -6,5 +6,3 @@ A:AB$ Destroy | Cost$ T Sac<1/Creature> | ValidTgts$ Creature.nonBlack | TgtProm
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stronghold_assassin.jpg
 Oracle:{T}, Sacrifice a creature: Destroy target nonblack creature.
-SetInfo:7ED Rare
-SetInfo:STH Rare

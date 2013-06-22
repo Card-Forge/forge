@@ -5,4 +5,3 @@ PT:4/2
 K:Wither
 SVar:Picture:http://www.wizards.com/global/images/magic/general/smoldering_butcher.jpg
 Oracle:Wither (This deals damage to creatures in the form of -1/-1 counters.)
-SetInfo:EVE Common

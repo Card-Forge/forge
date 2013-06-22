@@ -5,4 +5,3 @@ A:SP$ Draw | Cost$ 1 UB AddCounter<1/M1M1/Creature.YouCtrl/a creature you contro
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scarscale_ritual.jpg
 Oracle:As an additional cost to cast Scarscale Ritual, put a -1/-1 counter on a creature you control.\nDraw two cards.
-SetInfo:SHM Common

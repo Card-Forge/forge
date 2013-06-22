@@ -6,4 +6,3 @@ K:Flying
 A:AB$ Regenerate | ValidTgts$ Creature | TgtPrompt$ Select target creature | Cost$ WB WB WB | SpellDescription$ Regenerate target creature.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/suture_spirit.jpg
 Oracle:Flying\n{W/B}{W/B}{W/B}: Regenerate target creature.
-SetInfo:EVE Uncommon

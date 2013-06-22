@@ -6,6 +6,3 @@ T:Mode$ Blocks | ValidCard$ Creature | ValidBlocked$ Card.Self | Execute$ TrigDe
 SVar:TrigDestroyBlocker:AB$Destroy | Cost$ 0 | Defined$ TriggeredBlocker
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sylvan_basilisk.jpg
 Oracle:Whenever Sylvan Basilisk becomes blocked by a creature, destroy that creature.
-SetInfo:PO2 Rare
-SetInfo:S99 Rare
-SetInfo:10E Uncommon

@@ -10,4 +10,3 @@ SVar:Animate:DB$ Animate | Defined$ Self | Colors$ ChosenColor | OverwriteColors
 SVar:HasCombatEffect:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spiritmonger.jpg
 Oracle:Whenever Spiritmonger deals damage to a creature, put a +1/+1 counter on Spiritmonger.\n{B}: Regenerate Spiritmonger.\n{G}: Spiritmonger becomes the color of your choice until end of turn.
-SetInfo:APC Rare

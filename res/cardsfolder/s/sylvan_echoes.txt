@@ -6,4 +6,3 @@ SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sylvan_echoes.jpg
 Oracle:Whenever you clash and win, you may draw a card. (This ability triggers after the clash ends.)
-SetInfo:LRW Uncommon

@@ -6,4 +6,3 @@ T:Mode$ AttackerBlocked | ValidCard$ Card.Self | Execute$ TrigReturn | TriggerDe
 SVar:TrigReturn:AB$ChangeZone | Cost$ 0 | Defined$ Self | Origin$ Battlefield | Destination$ Hand
 SVar:Picture:http://www.wizards.com/global/images/magic/general/saprazzan_raider.jpg
 Oracle:When Saprazzan Raider becomes blocked, return it to its owner's hand.
-SetInfo:MMQ Common

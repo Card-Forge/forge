@@ -8,4 +8,3 @@ SVar:TrigDamage:AB$DealDamage | Cost$ 0 | Defined$ TriggeredCardOwner | NumDmg$ 
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spiteful_visions.jpg
 Oracle:At the beginning of each player's draw step, that player draws an additional card.\nWhenever a player draws a card, Spiteful Visions deals 1 damage to that player.
-SetInfo:SHM Rare

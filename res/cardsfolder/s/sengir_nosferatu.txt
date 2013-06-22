@@ -8,4 +8,3 @@ SVar:ABReturn:AB$ChangeZone | Cost$ 1 B Sac<1/CARDNAME> | ChangeType$ Card.named
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sengir_nosferatu.jpg
 Oracle:Flying\n{1}{B}, Exile Sengir Nosferatu: Put a 1/2 black Bat creature token with flying onto the battlefield. It has "{1}{B}, Sacrifice this creature: Return an exiled card named Sengir Nosferatu to the battlefield under its owner's control."
-SetInfo:TSP Rare

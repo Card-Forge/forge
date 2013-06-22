@@ -9,4 +9,3 @@ SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shocker.jpg
 Oracle:Whenever Shocker deals damage to a player, that player discards all the cards in his or her hand, then draws that many cards.
-SetInfo:TMP Rare

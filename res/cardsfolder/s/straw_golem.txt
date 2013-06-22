@@ -7,4 +7,3 @@ SVar:TrigSacrifice:AB$ Sacrifice | Cost$ 0 | Defined$ Self
 SVar:AntiBuffedBy:Creature
 SVar:Picture:http://www.wizards.com/global/images/magic/general/straw_golem.jpg
 Oracle:When an opponent casts a creature spell, sacrifice Straw Golem.
-SetInfo:WTH Uncommon

@@ -9,4 +9,3 @@ SVar:X:Sacrificed$CardCounters.CHARGE
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shrine_of_limitless_power.jpg
 Oracle:At the beginning of your upkeep or whenever you cast a black spell, put a charge counter on Shrine of Limitless Power.\n{4}, {T}, Sacrifice Shrine of Limitless Power: Target player discards a card for each charge counter on Shrine of Limitless Power.
-SetInfo:NPH Uncommon

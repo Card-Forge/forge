@@ -8,5 +8,3 @@ SVar:TrigLoseLife:AB$LoseLife | Cost$ 0 | Defined$ TriggeredActivator | LifeAmou
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soot_imp.jpg
 Oracle:Flying\nWhenever a player casts a nonblack spell, that player loses 1 life.
-SetInfo:DDC Uncommon
-SetInfo:EVE Uncommon

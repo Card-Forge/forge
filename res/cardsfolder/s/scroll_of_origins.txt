@@ -6,4 +6,3 @@ SVar:X:Count$InYourHand
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scroll_of_origins.jpg
 Oracle:{2}, {T}: Draw a card if you have seven or more cards in hand.
-SetInfo:SOK Rare

@@ -5,6 +5,3 @@ PT:1/1
 K:Flying
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sea_eagle.jpg
 Oracle:Flying
-SetInfo:8ED Common
-SetInfo:S99 Common
-SetInfo:S00 Common

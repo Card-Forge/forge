@@ -7,4 +7,3 @@ A:AB$ Pump | Cost$ B PayLife<1> | Defined$ Enchanted | NumAtt$ +2 | NumDef$ +2 |
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soul_kiss.jpg
 Oracle:Enchant creature\n{B}, Pay 1 life: Enchanted creature gets +2/+2 until end of turn. Activate this ability no more than three times each turn.
-SetInfo:ICE Common

@@ -7,5 +7,3 @@ T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage
 SVar:TrigCopy:DB$CopyPermanent | Defined$ Self | NumCopies$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spawnwrithe.jpg
 Oracle:Trample\nWhenever Spawnwrithe deals combat damage to a player, put a token that's a copy of Spawnwrithe onto the battlefield.
-SetInfo:COM Rare
-SetInfo:SHM Rare

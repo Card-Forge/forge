@@ -6,7 +6,3 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigGainLife:AB$GainLife | Cost$ 0 | LifeAmount$ 4
 SVar:Picture:http://www.wizards.com/global/images/magic/general/staunch_defenders.jpg
 Oracle:When Staunch Defenders enters the battlefield, you gain 4 life.
-SetInfo:8ED Uncommon
-SetInfo:7ED Uncommon
-SetInfo:TMP Uncommon
-SetInfo:6ED Uncommon

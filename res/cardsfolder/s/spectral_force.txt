@@ -7,4 +7,3 @@ T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ St
 SVar:StayTapped:DB$Pump | KW$ HIDDEN This card doesn't untap during your next untap step. | Defined$ Self | Permanent$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spectral_force.jpg
 Oracle:Trample\nWhenever Spectral Force attacks, if defending player controls no black permanents, it doesn't untap during your next untap step.
-SetInfo:TSP Rare

@@ -8,4 +8,3 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/suppress.jpg
 Oracle:Target player exiles all cards from his or her hand face down. At the beginning of the end step of that player's next turn, that player returns those cards to his or her hand.
-SetInfo:APC Uncommon

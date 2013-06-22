@@ -6,4 +6,3 @@ S:Mode$ ReduceCost | ValidCard$ Giant | Type$ Spell | Activator$ You | Amount$ 2
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stinkdrinker_daredevil.jpg
 Oracle:Giant spells you cast cost {2} less to cast.
-SetInfo:LRW Common

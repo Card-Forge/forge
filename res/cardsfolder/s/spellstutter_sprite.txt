@@ -9,4 +9,3 @@ SVar:TrigCounter:DB$ Counter | Cost$ 0 | TargetType$ Spell | ValidTgts$ Card.cmc
 SVar:X:Count$Valid Faerie.YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spellstutter_sprite.jpg
 Oracle:Flash\nFlying\nWhen Spellstutter Sprite enters the battlefield, counter target spell with converted mana cost X or less, where X is the number of Faeries you control.
-SetInfo:LRW Common

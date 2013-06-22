@@ -6,13 +6,3 @@ K:Flying
 K:Whenever a creature dealt damage by CARDNAME this turn is put into a graveyard, put a +1/+1 counter on CARDNAME.
 SVar:Picture:http://resources.wizards.com/magic/cards/tor/en-us/card35086.jpg
 Oracle:Flying\nWhenever a creature dealt damage by Sengir Vampire this turn dies, put a +1/+1 counter on Sengir Vampire.
-SetInfo:2ED Uncommon
-SetInfo:TOR Rare
-SetInfo:9ED Rare
-SetInfo:10E Rare
-SetInfo:DDK Uncommon
-SetInfo:LEB Uncommon
-SetInfo:M12 Uncommon
-SetInfo:LEA Uncommon
-SetInfo:4ED Uncommon
-SetInfo:3ED Uncommon

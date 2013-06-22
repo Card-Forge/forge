@@ -10,4 +10,3 @@ SVar:BuffedBy:Ally
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/seascape_aerialist.jpg
 Oracle:Whenever Seascape Aerialist or another Ally enters the battlefield under your control, you may have Ally creatures you control gain flying until end of turn.
-SetInfo:ZEN Uncommon

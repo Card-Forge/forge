@@ -4,5 +4,3 @@ Types:Sorcery
 A:SP$ DealDamage | Cost$ 2 R | Defined$ Player.Opponent | NumDmg$ 3 | SpellDescription$ CARDNAME deals 3 damage to each opponent.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sizzle.jpg
 Oracle:Sizzle deals 3 damage to each opponent.
-SetInfo:MMQ Common
-SetInfo:8ED Common

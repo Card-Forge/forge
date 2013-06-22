@@ -7,5 +7,3 @@ S:Mode$ Continuous | Affected$ Creature.EnchantedBy+White | AddPower$ 1 | AddTou
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy+Blue | AddPower$ 1 | AddToughness$ 1 | AddHiddenKeyword$ Unblockable | Description$ As long as enchanted creature is blue, it gets +1/+1 and is unblockable.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/steel_of_the_godhead.jpg
 Oracle:Enchant creature\nAs long as enchanted creature is white, it gets +1/+1 and has lifelink. (Damage dealt by the creature also causes its controller to gain that much life.)\nAs long as enchanted creature is blue, it gets +1/+1 and is unblockable.
-SetInfo:DDI Common
-SetInfo:SHM Common

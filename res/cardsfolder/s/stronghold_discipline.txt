@@ -8,5 +8,3 @@ SVar:Y:Count$TypeYouCtrl.Creature
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stronghold_discipline.jpg
 Oracle:Each player loses 1 life for each creature he or she controls.
-SetInfo:NMS Common
-SetInfo:10E Uncommon

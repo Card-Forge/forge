@@ -6,4 +6,3 @@ S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Double Strike | Condition
 SVar:BuffedBy:Artifact
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spiraling_duelist.jpg
 Oracle:Metalcraft - Spiraling Duelist has double strike as long as you control three or more artifacts.
-SetInfo:MBS Uncommon

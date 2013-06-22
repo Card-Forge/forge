@@ -7,4 +7,3 @@ SVar:RemRandomDeck:True
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spurred_wolverine.jpg
 Oracle:Tap two untapped Beasts you control: Target creature gains first strike until end of turn.
-SetInfo:ONS Common

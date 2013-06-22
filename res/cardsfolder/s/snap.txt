@@ -5,4 +5,3 @@ A:SP$ ChangeZone | Cost$ 1 U | ValidTgts$ Creature | TgtPrompt$ Select target cr
 SVar:DBUntap:DB$ Untap | UntapUpTo$ True | UntapType$ Land | Amount$ 2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/snap.jpg
 Oracle:Return target creature to its owner's hand. Untap up to two lands.
-SetInfo:ULG Common

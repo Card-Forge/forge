@@ -8,5 +8,3 @@ A:AB$ DamageAll | Cost$ Sac<1/CARDNAME> | ValidCards$ Creature.withoutFlying | N
 SVar:DiscardMe:1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shard_phoenix.jpg
 Oracle:Flying (This creature can't be blocked except by creatures with flying or reach.)\nSacrifice Shard Phoenix: Shard Phoenix deals 2 damage to each creature without flying.\n{R}{R}{R}: Return Shard Phoenix from your graveyard to your hand. Activate this ability only during your upkeep.
-SetInfo:9ED Rare
-SetInfo:STH Rare

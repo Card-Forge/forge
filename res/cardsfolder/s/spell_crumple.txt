@@ -5,4 +5,3 @@ A:SP$ Counter | Cost$ 1 U U | TargetType$ Spell | TgtPrompt$ Select target spell
 SVar:DBChange:DB$ChangeZone | Origin$ Stack | Destination$ Library | LibraryPosition$ -1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spell_crumple.jpg
 Oracle:Counter target spell. If that spell is countered this way, put it on the bottom of its owner's library instead of into that player's graveyard. Put Spell Crumple on the bottom of its owner's library.
-SetInfo:COM Uncommon

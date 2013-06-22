@@ -11,4 +11,3 @@ SVar:X:Count$CardCounters.SOOT
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/smokestack.jpg
 Oracle:At the beginning of your upkeep, you may put a soot counter on Smokestack.\nAt the beginning of each player's upkeep, that player sacrifices a permanent for each soot counter on Smokestack.
-SetInfo:USG Rare

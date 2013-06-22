@@ -7,4 +7,3 @@ SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterNum$ 1 | Co
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/segmented_wurm.jpg
 Oracle:Whenever Segmented Wurm becomes the target of a spell or ability, put a -1/-1 counter on it.
-SetInfo:TMP Uncommon

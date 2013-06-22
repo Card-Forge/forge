@@ -8,5 +8,3 @@ SVar:SacMe:2
 SVar:DiscardMe:2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/squee_goblin_nabob.jpg
 Oracle:At the beginning of your upkeep, you may return Squee, Goblin Nabob from your graveyard to your hand.
-SetInfo:MMQ Rare
-SetInfo:10E Rare

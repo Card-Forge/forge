@@ -7,6 +7,3 @@ SVar:TrigBounce:AB$ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Han
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/storm_cauldron.jpg
 Oracle:Each player may play an additional land during each of his or her turns.\nWhenever a land is tapped for mana, return it to its owner's hand.
-SetInfo:7ED Rare
-SetInfo:ALL Rare
-SetInfo:6ED Rare

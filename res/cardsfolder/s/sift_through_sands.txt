@@ -10,4 +10,3 @@ SVar:Peer:Count$ThisTurnCast_Card.YouCtrl+namedPeer Through Depths/LimitMax.1
 SVar:Reach:Count$ThisTurnCast_Card.YouCtrl+namedReach Through Mists/LimitMax.1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sift_through_sands.jpg
 Oracle:Draw two cards, then discard a card.\nIf you've cast a spell named Peer Through Depths and a spell named Reach Through Mists this turn, you may search your library for a card named The Unspeakable, put it onto the battlefield, then shuffle your library.
-SetInfo:CHK Common

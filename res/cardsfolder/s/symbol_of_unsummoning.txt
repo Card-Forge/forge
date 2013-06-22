@@ -5,4 +5,3 @@ A:SP$ ChangeZone | Cost$ 2 U | ValidTgts$ Creature | TgtPrompt$ Select target cr
 SVar:DBDraw:DB$Draw | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/symbol_of_unsummoning.jpg
 Oracle:Return target creature to its owner's hand.\nDraw a card.
-SetInfo:POR Common

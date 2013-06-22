@@ -7,4 +7,3 @@ T:Mode$ DamageDone | ValidSource$ Snake.YouCtrl | ValidTarget$ Player | CombatDa
 SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/seshiro_the_anointed.jpg
 Oracle:Other Snake creatures you control get +2/+2.\nWhenever a Snake you control deals combat damage to a player, you may draw a card.
-SetInfo:CHK Rare

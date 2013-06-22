@@ -9,4 +9,3 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.S
 SVar:TrigGainLife:DB$GainLife | Defined$ Remembered | LifeAmount$ 3
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soul_scourge.jpg
 Oracle:Flying\nWhen Soul Scourge enters the battlefield, target player loses 3 life.\nWhen Soul Scourge leaves the battlefield, that player gains 3 life.
-SetInfo:TOR Common

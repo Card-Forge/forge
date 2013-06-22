@@ -4,23 +4,3 @@ Types:Sorcery
 A:SP$ Destroy | Cost$ 2 R | ValidTgts$ Land | TgtPrompt$ Select target land | SpellDescription$ Destroy target land.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stone_rain.jpg
 Oracle:Destroy target land.
-SetInfo:PO2 Common
-SetInfo:2ED Common
-SetInfo:7ED Common
-SetInfo:TMP Common
-SetInfo:6ED Common
-SetInfo:5ED Common
-SetInfo:S99 Common
-SetInfo:MMQ Common
-SetInfo:8ED Common
-SetInfo:CHK Common
-SetInfo:MIR Common
-SetInfo:S00 Common
-SetInfo:9ED Common
-SetInfo:LEB Common
-SetInfo:LEA Common
-SetInfo:ICE Common
-SetInfo:PTK Common
-SetInfo:4ED Common
-SetInfo:POR Common
-SetInfo:3ED Common

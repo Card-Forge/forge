@@ -6,6 +6,3 @@ SVar:TrigChangeZoneYou:AB$ ChangeZone | Cost$ 0 | Origin$ Battlefield | Destinat
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sunken_hope.jpg
 Oracle:At the beginning of each player's upkeep, that player returns a creature he or she controls to its owner's hand.
-SetInfo:PC2 Rare
-SetInfo:PLS Rare
-SetInfo:10E Rare

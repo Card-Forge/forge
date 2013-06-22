@@ -7,4 +7,3 @@ T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage
 SVar:TrigMill:AB$Mill | Cost$ 0 | Defined$ TriggeredTarget | NumCards$ 2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shriekgeist.jpg
 Oracle:Flying\nWhenever Shriekgeist deals combat damage to a player, that player puts the top two cards of his or her library into his or her graveyard.
-SetInfo:DKA Common

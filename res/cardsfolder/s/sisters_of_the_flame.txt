@@ -5,5 +5,3 @@ PT:2/2
 A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add R to your mana pool.
 SVar:Picture:http://resources.wizards.com/magic/cards/dk/en-us/card1800.jpg
 Oracle:{T}: Add {R} to your mana pool.
-SetInfo:4ED Common
-SetInfo:DRK Uncommon

@@ -8,4 +8,3 @@ SVar:TrigChange:AB$ChangeZone | Origin$ Battlefield | Destination$ Hand | Cost$ 
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shivan_wurm.jpg
 Oracle:Trample\nWhen Shivan Wurm enters the battlefield, return a red or green creature you control to its owner's hand.
-SetInfo:PLS Rare

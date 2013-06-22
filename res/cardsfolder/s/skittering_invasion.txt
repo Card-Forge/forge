@@ -6,4 +6,3 @@ A:SP$ Token | Cost$ 7 | TokenAmount$ 5 | TokenName$ Eldrazi Spawn | TokenTypes$ 
 SVar:ABMana:AB$Mana | Cost$ Sac<1/CARDNAME> | Produced$ 1 | Amount$ 1 | SpellDescription$ Add 1 to your mana pool.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skittering_invasion.jpg
 Oracle:Put five 0/1 colorless Eldrazi Spawn creature tokens onto the battlefield. They have "Sacrifice this creature: Add {1} to your mana pool."
-SetInfo:ROE Uncommon

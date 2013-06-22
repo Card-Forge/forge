@@ -7,4 +7,3 @@ A:AB$ Pump | Cost$ B | KW$ Flying | SpellDescription$ CARDNAME gains flying unti
 A:AB$ Pump | Cost$ B B | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stromgald_crusader.jpg
 Oracle:Protection from white\n{B}: Stromgald Crusader gains flying until end of turn.\n{B}{B}: Stromgald Crusader gets +1/+0 until end of turn.
-SetInfo:CSP Uncommon

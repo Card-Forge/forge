@@ -6,4 +6,3 @@ SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Reflection | Tok
 A:AB$ Destroy | Cost$ 0 | ValidTgts$ Reflection | TgtPrompt$ Select target Reflection | SpellDescription$ Destroy target Reflection.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spirit_mirror.jpg
 Oracle:At the beginning of your upkeep, if there are no Reflection tokens on the battlefield, put a 2/2 white Reflection creature token onto the battlefield./n{0}: Destroy target Reflection.
-SetInfo:TMP Rare

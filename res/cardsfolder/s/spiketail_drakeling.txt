@@ -7,4 +7,3 @@ A:AB$ Counter | Cost$ Sac<1/CARDNAME> | TargetType$ Spell | TgtPrompt$ Select ta
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spiketail_drakeling.jpg
 Oracle:Flying\nSacrifice Spiketail Drakeling: Counter target spell unless its controller pays {2}.
-SetInfo:TSP Common

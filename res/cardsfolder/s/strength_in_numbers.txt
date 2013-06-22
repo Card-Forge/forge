@@ -5,4 +5,3 @@ A:SP$ Pump | Cost$ 1 G | ValidTgts$ Creature | TgtPrompt$ Select target creature
 SVar:X:Count$Valid Creature.attacking
 SVar:Picture:http://www.wizards.com/global/images/magic/general/strength_in_numbers.jpg
 Oracle:Until end of turn, target creature gains trample and gets +X/+X, where X is the number of attacking creatures.
-SetInfo:TSP Common

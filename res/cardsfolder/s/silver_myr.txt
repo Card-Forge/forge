@@ -5,7 +5,3 @@ PT:1/1
 A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add U to your mana pool.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/silver_myr.jpg
 Oracle:{T}: Add {U} to your mana pool.
-SetInfo:MRD Common
-SetInfo:SOM Common
-SetInfo:DDF Common
-SetInfo:HOP Common

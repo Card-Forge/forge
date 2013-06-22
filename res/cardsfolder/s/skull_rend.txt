@@ -5,4 +5,3 @@ A:SP$ DealDamage | Cost$ 3 B R | Defined$ Player.Opponent | NumDmg$ 2 | SubAbili
 SVar:DBDiscard:DB$ Discard | Defined$ Player.Opponent | NumCards$ 2 | Mode$ Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skull_rend.jpg
 Oracle:Skull Rend deals 2 damage to each opponent. Those players each discard two cards at random.
-SetInfo:RTR Common

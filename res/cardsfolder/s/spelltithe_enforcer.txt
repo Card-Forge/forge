@@ -7,4 +7,3 @@ SVar:TrigSac:DB$ Sacrifice | Defined$ TriggeredCardController | SacValid$ Perman
 SVar:AI_SpellsNeedExtraMana:1 Opponent
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spelltithe_enforcer.jpg
 Oracle:Whenever an opponent casts a spell, that player sacrifices a permanent unless he or she pays {1}.
-SetInfo:GPT Rare

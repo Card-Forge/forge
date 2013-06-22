@@ -7,4 +7,3 @@ A:AB$ Counter | Cost$ 3 Return<1/Land> | TargetType$ Spell | TgtPrompt$ Select t
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soratami_savant.jpg
 Oracle:Flying\n{3}, Return a land you control to its owner's hand: Counter target spell unless its controller pays {3}.
-SetInfo:CHK Uncommon

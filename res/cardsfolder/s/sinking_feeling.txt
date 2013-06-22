@@ -8,4 +8,3 @@ S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddAbility$ Untap | Descri
 SVar:Untap:AB$ Untap | Cost$ 1 AddCounter<1/M1M1> | SpellDescription$ Untap CARDNAME.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sinking_feeling.jpg
 Oracle:Enchant creature\nEnchanted creature doesn't untap during its controller's untap step.\nEnchanted creature has "{1}, Put a -1/-1 counter on this creature: Untap this creature."
-SetInfo:SHM Common

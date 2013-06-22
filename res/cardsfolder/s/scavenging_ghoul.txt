@@ -8,8 +8,3 @@ SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ CORPS
 SVar:X:Count$ThisTurnEntered_Graveyard_from_Battlefield_Creature
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scavenging_ghoul.jpg
 Oracle:At the beginning of each end step, put a corpse counter on Scavenging Ghoul for each creature that died this turn.\nRemove a corpse counter from Scavenging Ghoul: Regenerate Scavenging Ghoul.
-SetInfo:2ED Uncommon
-SetInfo:LEB Uncommon
-SetInfo:LEA Uncommon
-SetInfo:4ED Uncommon
-SetInfo:3ED Uncommon

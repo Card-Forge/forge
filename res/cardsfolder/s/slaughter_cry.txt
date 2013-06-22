@@ -4,5 +4,3 @@ Types:Instant
 A:SP$ Pump | Cost$ 2 R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +3 | KW$ First Strike | SpellDescription$ Target creature gets +3/+0 and gains first strike until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/slaughter_cry.jpg
 Oracle:Target creature gets +3/+0 and gains first strike until end of turn. (It deals combat damage before creatures without first strike.)
-SetInfo:M12 Common
-SetInfo:ZEN Common

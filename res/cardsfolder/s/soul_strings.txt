@@ -6,4 +6,3 @@ SVar:X:Count$xPaid
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soul_strings.jpg
 Oracle:Return two target creature cards from your graveyard to your hand unless any player pays {X}.
-SetInfo:PCY Common

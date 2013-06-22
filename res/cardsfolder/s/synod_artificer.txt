@@ -10,4 +10,3 @@ SVar:MaxTgts:Count$Valid Artifact.nonCreature
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/synod_artificer.jpg
 Oracle:{X}, {T}: Tap X target noncreature artifacts.\n{X}, {T}: Untap X target noncreature artifacts.
-SetInfo:DST Rare

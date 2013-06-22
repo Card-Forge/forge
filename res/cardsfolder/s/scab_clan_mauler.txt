@@ -6,4 +6,3 @@ K:Bloodthirst 2
 K:Trample
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scab_clan_mauler.jpg
 Oracle:Bloodthirst 2 (If an opponent was dealt damage this turn, this creature enters the battlefield with two +1/+1 counters on it.)\nTrample
-SetInfo:GPT Common

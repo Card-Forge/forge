@@ -7,4 +7,3 @@ T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage
 SVar:TrigMill:AB$ Mill | Cost$ 0 | Defined$ TriggeredTarget | NumCards$ 4
 SVar:Picture:http://www.wizards.com/global/images/magic/general/screeching_silcaw.jpg
 Oracle:Flying\nMetalcraft - Whenever Screeching Silcaw deals combat damage to a player, if you control three or more artifacts, that player puts the top four cards of his or her library into his or her graveyard.
-SetInfo:SOM Common

@@ -7,4 +7,3 @@ SVar:DBCopy:DB$ CopyPermanent | Defined$ Remembered | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sundering_growth.jpg
 Oracle:Destroy target artifact or enchantment, then populate. (Put a token onto the battlefield that's a copy of a creature token you control.)
-SetInfo:RTR Common

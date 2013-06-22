@@ -7,4 +7,3 @@ A:AB$ Regenerate | Cost$ PayLife<2> | Defined$ Enchanted | SpellDescription$ Reg
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soul_channeling.jpg
 Oracle:Enchant creature\nPay 2 life: Regenerate enchanted creature.
-SetInfo:MMQ Common

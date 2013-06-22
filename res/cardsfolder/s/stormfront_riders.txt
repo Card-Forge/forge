@@ -11,5 +11,3 @@ SVar:TrigChangeZone:AB$ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stormfront_riders.jpg
 Oracle:Flying\nWhen Stormfront Riders enters the battlefield, return two creatures you control to their owner's hand.\nWhenever Stormfront Riders or another creature is returned to your hand from the battlefield, put a 1/1 white Soldier creature token onto the battlefield.
-SetInfo:PLC Uncommon
-SetInfo:DDF Uncommon

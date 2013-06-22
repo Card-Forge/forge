@@ -10,4 +10,3 @@ T:Mode$ SpellAbilityCast | TargetsValid$ Card.AttachedBy | TriggerZones$ Battlef
 SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Defined$ Self
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sleeping_potion.jpg
 Oracle:Enchant creature\nWhen Sleeping Potion enters the battlefield, tap enchanted creature.\nEnchanted creature doesn't untap during its controller's untap step.\nWhen enchanted creature becomes the target of a spell or ability, sacrifice Sleeping Potion.
-SetInfo:PLS Common

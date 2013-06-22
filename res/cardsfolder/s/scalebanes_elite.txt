@@ -5,4 +5,3 @@ PT:4/4
 K:Protection from black
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scalebanes_elite.jpg
 Oracle:Protection from black
-SetInfo:VIS Uncommon

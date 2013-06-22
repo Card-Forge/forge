@@ -6,4 +6,3 @@ SVar:NonStackingEffect:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/statecraft.jpg
 Oracle:Prevent all combat damage that would be dealt to and dealt by creatures you control.
-SetInfo:MMQ Rare

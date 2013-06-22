@@ -7,4 +7,3 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creatu
 SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soul_of_the_harvest.jpg
 Oracle:Trample\nWhenever another nontoken creature enters the battlefield under your control, you may draw a card.
-SetInfo:AVR Rare

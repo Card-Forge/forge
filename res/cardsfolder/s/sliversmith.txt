@@ -6,4 +6,3 @@ A:AB$ Token | Cost$ 1 T Discard<1/Card> | TokenAmount$ 1 | TokenName$ Metallic S
 SVar:RemAIDeck:True
 SVar:Picture:http://resources.wizards.com/magic/cards/fut/en-us/card130329.jpg
 Oracle:{1}, {T}, Discard a card: Put a 1/1 colorless Sliver artifact creature token named Metallic Sliver onto the battlefield.
-SetInfo:FUT Uncommon

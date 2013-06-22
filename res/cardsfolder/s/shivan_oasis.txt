@@ -6,7 +6,3 @@ A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add R to your mana pool.
 A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add G to your mana pool.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shivan_oasis.jpg
 Oracle:Shivan Oasis enters the battlefield tapped.\n{T}: Add {R} or {G} to your mana pool.
-SetInfo:8ED Uncommon
-SetInfo:DDE Uncommon
-SetInfo:HOP Uncommon
-SetInfo:INV Uncommon

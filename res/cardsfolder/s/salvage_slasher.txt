@@ -6,4 +6,3 @@ S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | Description$ CARDNAME g
 SVar:X:Count$TypeInYourYard.Artifact
 SVar:Picture:http://www.wizards.com/global/images/magic/general/salvage_slasher.jpg
 Oracle:Salvage Slasher gets +1/+0 for each artifact card in your graveyard.
-SetInfo:CFX Common

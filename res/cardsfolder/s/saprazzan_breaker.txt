@@ -8,4 +8,3 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/saprazzan_breaker.jpg
 Oracle:{U}: Put the top card of your library into your graveyard. If that card is a land card, Saprazzan Breaker is unblockable this turn.
-SetInfo:MMQ Uncommon

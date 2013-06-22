@@ -12,4 +12,3 @@ SVar:NumInYard:TargetedPlayer$CardsInGraveyard
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/slaughter_games.jpg
 Oracle:Slaughter Games can't be countered by spells or abilities.\nName a nonland card. Search target opponent's graveyard, hand, and library for any number of cards with that name and exile them. Then that player shuffles his or her library.
-SetInfo:RTR Rare

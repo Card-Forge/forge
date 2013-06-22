@@ -8,4 +8,3 @@ SVar:TrigChangeZone:AB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ H
 SVar:SacMe:2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shivan_phoenix.jpg
 Oracle:Flying\nWhen Shivan Phoenix dies, return Shivan Phoenix to its owner's hand.
-SetInfo:ULG Rare

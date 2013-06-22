@@ -5,4 +5,3 @@ A:SP$ Token | Cost$ X G | TokenImage$ G X X Ooze | TokenAmount$ 1 | TokenName$ O
 SVar:X:Count$xPaid
 SVar:Picture:http://www.wizards.com/global/images/magic/general/slime_molding.jpg
 Oracle:Put an X/X green Ooze creature token onto the battlefield.
-SetInfo:RTR Uncommon

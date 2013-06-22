@@ -7,4 +7,3 @@ SVar:TrigPump:AB$Pump | Cost$ 0 | Defined$ Self | NumAtt$ 2 | NumDef$ 2
 SVar:BuffedBy:Arcane,Spirit
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scaled_hulk.jpg
 Oracle:Whenever you cast a Spirit or Arcane spell, Scaled Hulk gets +2/+2 until end of turn.
-SetInfo:BOK Common

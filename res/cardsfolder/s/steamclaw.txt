@@ -6,4 +6,3 @@ A:AB$ ChangeZone | Cost$ 1 Sac<1/CARDNAME> | Origin$ Graveyard | Destination$ Ex
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/steamclaw.jpg
 Oracle:{3}, {T}: Exile target card from a graveyard.\n{1}, Sacrifice Steamclaw: Exile target card from a graveyard.
-SetInfo:ODY Uncommon

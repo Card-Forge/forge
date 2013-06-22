@@ -6,4 +6,3 @@ K:Reach
 K:CARDNAME can block an additional creature.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/selesnya_sagittars.jpg
 Oracle:Reach (This creature can block creatures with flying.)\nSelesnya Sagittars can block an additional creature.
-SetInfo:RAV Uncommon

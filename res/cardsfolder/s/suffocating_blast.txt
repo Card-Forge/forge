@@ -5,4 +5,3 @@ A:SP$ Counter | Cost$ 1 U U R | Types$ Spell | TgtPrompt$ Select target spell | 
 SVar:DBDamage:DB$DealDamage | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 3
 SVar:Picture:http://www.wizards.com/global/images/magic/general/suffocating_blast.jpg
 Oracle:Counter target spell and Suffocating Blast deals 3 damage to target creature.
-SetInfo:APC Rare

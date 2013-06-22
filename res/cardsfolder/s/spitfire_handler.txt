@@ -8,4 +8,3 @@ A:AB$ Pump | Cost$ R | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until 
 SVar:X:Count$CardPower
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spitfire_handler.jpg
 Oracle:Spitfire Handler can't block creatures with power greater than Spitfire Handler's power.\n{R}: Spitfire Handler gets +1/+0 until end of turn.
-SetInfo:ONS Uncommon

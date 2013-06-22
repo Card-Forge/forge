@@ -7,4 +7,3 @@ A:AB$ Mana | Cost$ T | Produced$ Chosen | SpellDescription$ Add one mana of the 
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sol_grail.jpg
 Oracle:As Sol Grail enters the battlefield, choose a color.\n{T}: Add one mana of the chosen color to your mana pool.
-SetInfo:ALL Uncommon

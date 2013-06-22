@@ -8,4 +8,3 @@ SVar:TrigUntap:AB$Untap | Cost$ 0 | Defined$ Self
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stone_seeder_hierophant.jpg
 Oracle:Whenever a land enters the battlefield under your control, untap Stone-Seeder Hierophant.\n{T}: Untap target land.
-SetInfo:RAV Common

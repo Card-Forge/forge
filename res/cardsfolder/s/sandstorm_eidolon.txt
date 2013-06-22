@@ -8,4 +8,3 @@ SVar:TrigReturn:AB$ ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Hand
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sandstorm_eidolon.jpg
 Oracle:{R}, Sacrifice Sandstorm Eidolon: Target creature can't block this turn.\nWhenever you cast a multicolored spell, you may return Sandstorm Eidolon from your graveyard to your hand.
-SetInfo:DIS Common

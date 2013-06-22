@@ -9,5 +9,3 @@ SVar:TrigDamage:DB$ DealDamage | Defined$ You | NumDmg$ 2
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sleeper_agent.jpg
 Oracle:When Sleeper Agent enters the battlefield, target opponent gains control of it.\nAt the beginning of your upkeep, Sleeper Agent deals 2 damage to you.
-SetInfo:10E Rare
-SetInfo:USG Rare

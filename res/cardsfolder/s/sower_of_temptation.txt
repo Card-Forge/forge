@@ -8,4 +8,3 @@ SVar:TrigChange:AB$ GainControl | Cost$ 0 | TgtPrompt$ Choose target creature | 
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sower_of_temptation.jpg
 Oracle:Flying\nWhen Sower of Temptation enters the battlefield, gain control of target creature for as long as Sower of Temptation remains on the battlefield.
-SetInfo:LRW Rare

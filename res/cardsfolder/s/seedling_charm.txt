@@ -7,4 +7,3 @@ A:SP$ Pump | Cost$ G | ValidTgts$ Creature | TgtPrompt$ Select target creature |
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/seedling_charm.jpg
 Oracle:Choose one - Return target Aura attached to a creature to its owner's hand; or regenerate target green creature; or target creature gains trample until end of turn.
-SetInfo:MIR Common

@@ -7,5 +7,3 @@ SVar:PlayMain1:TRUE
 SVar:NeedsToPlay:Creature.Blue+YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sunken_city.jpg
 Oracle:At the beginning of your upkeep, sacrifice Sunken City unless you pay {U}{U}.\nBlue creatures get +1/+1.
-SetInfo:4ED Common
-SetInfo:DRK Common

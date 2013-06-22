@@ -11,4 +11,3 @@ SVar:ChoseRed:DB$ Token | TokenAmount$ 1 | TokenName$ Goblin | TokenTypes$ Creat
 SVar:ChoseGreen:DB$ Token | TokenAmount$ 1 | TokenName$ Saproling | TokenTypes$ Creature,Saproling | TokenOwner$ You | TokenColors$ green | TokenPower$ 1 | TokenToughness$ 1 | ConditionChosenColor$ green
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sarpadian_empires_vol_vii.jpg
 Oracle:As Sarpadian Empires, Vol. VII enters the battlefield, choose white Citizen, blue Camarid, black Thrull, red Goblin, or green Saproling.\n{3}, {T}: Put a 1/1 creature token of the chosen color and type onto the battlefield.
-SetInfo:TSP Rare

@@ -6,4 +6,3 @@ A:AB$ Pump | Cost$ 2 | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target cr
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soratami_cloud_chariot.jpg
 Oracle:{2}: Target creature you control gains flying until end of turn.\n{2}: Prevent all combat damage that would be dealt to and dealt by target creature you control this turn.
-SetInfo:SOK Uncommon

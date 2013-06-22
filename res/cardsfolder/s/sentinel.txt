@@ -8,5 +8,3 @@ SVar:X:Targeted$CardPower/Plus.1
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sentinel.jpg
 Oracle:{0}: Sentinel's toughness becomes 1 plus the power of target creature blocking or blocked by Sentinel. (This effect lasts indefinitely.)
-SetInfo:CHR Rare
-SetInfo:LEG Rare

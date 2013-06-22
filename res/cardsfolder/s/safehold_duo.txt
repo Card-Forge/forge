@@ -9,4 +9,3 @@ SVar:TrigPumpKW:AB$Pump | Cost$ 0 | KW$ Vigilance | Defined$ Self
 SVar:BuffedBy:Card.Green,Card.White
 SVar:Picture:http://www.wizards.com/global/images/magic/general/safehold_duo.jpg
 Oracle:Whenever you cast a green spell, Safehold Duo gets +1/+1 until end of turn.\nWhenever you cast a white spell, Safehold Duo gains vigilance until end of turn.
-SetInfo:SHM Common

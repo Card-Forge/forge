@@ -5,4 +5,3 @@ A:SP$ DealDamage | Cost$ R | ValidTgts$ Creature | TgtPrompt$ Select target crea
 SVar:DBDamage:DB$DealDamage | ValidTgts$ Player | TgtPrompt$ Select target player | NumDmg$ 1 | SpellDescription$ and 1 damage to target player.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shower_of_sparks.jpg
 Oracle:Shower of Sparks deals 1 damage to target creature and 1 damage to target player.
-SetInfo:USG Common

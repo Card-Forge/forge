@@ -7,4 +7,3 @@ SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ TriggeredSourceController | NumCards$
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/synapse_sliver.jpg
 Oracle:Whenever a Sliver deals combat damage to a player, its controller may draw a card.
-SetInfo:LGN Rare

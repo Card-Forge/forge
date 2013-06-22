@@ -11,4 +11,3 @@ SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spellweaver_helix.jpg
 Oracle:Imprint - When Spellweaver Helix enters the battlefield, you may exile two target sorcery cards from a single graveyard.\nWhenever a player casts a card, if it has the same name as one of the cards exiled with Spellweaver Helix, you may copy the other. If you do, you may cast the copy without paying its mana cost.
-SetInfo:MRD Rare

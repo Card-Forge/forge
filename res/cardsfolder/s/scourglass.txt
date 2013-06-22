@@ -5,4 +5,3 @@ A:AB$ DestroyAll | Cost$ T Sac<1/CARDNAME> | ValidCards$ Permanent.nonArtifact+n
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scourglass.jpg
 Oracle:{T}, Sacrifice Scourglass: Destroy all permanents except for artifacts and lands. Activate this ability only during your upkeep.
-SetInfo:ALA Rare

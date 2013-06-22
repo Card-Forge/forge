@@ -4,6 +4,3 @@ Types:Sorcery
 A:SP$ Destroy | Cost$ B B | ValidTgts$ Land | TgtPrompt$ Select target land | SpellDescription$ Destroy target land.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sinkhole.jpg
 Oracle:Destroy target land.
-SetInfo:LEB Common
-SetInfo:LEA Common
-SetInfo:2ED Common

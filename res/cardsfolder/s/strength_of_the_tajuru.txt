@@ -7,4 +7,3 @@ SVar:X:Count$xPaid
 SVar:TargetsNum:Count$TimesKicked/Plus.1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stength_of_the_tajuru.jpg
 Oracle:Multikicker {1} (You may pay an additional {1} any number of times as you cast this spell.)\nChoose target creature, then choose another target creature for each time Strength of the Tajuru was kicked. Put X +1/+1 counters on each of them.
-SetInfo:WWK Rare

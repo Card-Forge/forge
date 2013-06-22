@@ -6,4 +6,3 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigAddMana:AB$Mana | Cost$ 0 | Produced$1 | Amount$ 4
 SVar:Picture:http://www.wizards.com/global/images/magic/general/su_chi.jpg
 Oracle:When Su-Chi dies, add {4} to your mana pool.
-SetInfo:ATQ Uncommon

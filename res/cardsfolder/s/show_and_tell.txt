@@ -6,4 +6,3 @@ SVar:NeedsToPlayVar:Y GE1
 SVar:Y:Count$ValidHand Permanent.YouCtrl+cmcGE4
 SVar:Picture:http://www.wizards.com/global/images/magic/general/show_and_tell.jpg
 Oracle:Each player may put an artifact, creature, enchantment, or land card from his or her hand onto the battlefield.
-SetInfo:USG Rare

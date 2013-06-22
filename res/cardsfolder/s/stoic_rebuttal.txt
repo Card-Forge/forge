@@ -5,4 +5,3 @@ A:SP$ Counter | Cost$ 1 U U | TargetType$ Spell | TgtPrompt$ Select target spell
 A:SP$ Counter | Cost$ U U | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | Activation$ Metalcraft | CostDesc$ Metalcraft - | SpellDescription$ CARDNAME costs 1 less to cast if you control 3 or more artifacts.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stoic_rebuttal.jpg
 Oracle:Metalcraft - Stoic Rebuttal costs {1} less to cast if you control three or more artifacts.\nCounter target spell.
-SetInfo:SOM Common

@@ -6,4 +6,3 @@ K:Shadow
 A:AB$ Pump | Cost$ 1 W | ActivationZone$ Hand | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Shadow | ActivationLimit$ 1 | PlayerTurn$ True | ActivationPhases$ Upkeep | PrecostDesc$ Forecast - | SpellDescription$ Target creature gains shadow until end of turn. (Activate this ability only during your upkeep and only once each turn.)
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spirit_en_dal.jpg
 Oracle:Shadow (This creature can block or be blocked by only creatures with shadow.)\nForecast - {1}{W}, Reveal Spirit en-Dal from your hand: Target creature gains shadow until end of turn. (Activate this ability only during your upkeep and only once each turn.)
-SetInfo:FUT Uncommon

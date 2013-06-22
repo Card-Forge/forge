@@ -7,4 +7,3 @@ S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ 
 SVar:X:Count$Valid Creature.YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soulsurge_elemental.jpg
 Oracle:First strike\nSoulsurge Elemental's power is equal to the number of creatures you control.
-SetInfo:ROE Uncommon

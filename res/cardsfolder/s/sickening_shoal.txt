@@ -8,4 +8,3 @@ SVar:Y:Exiled$CardManaCost
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sickening_shoal.jpg
 Oracle:You may exile a black card with converted mana cost X from your hand rather than pay Sickening Shoal's mana cost.\nTarget creature gets -X/-X until end of turn.
-SetInfo:BOK Rare

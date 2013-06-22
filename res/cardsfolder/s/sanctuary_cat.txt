@@ -4,4 +4,3 @@ Types:Creature Cat
 PT:1/2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sanctuary_cat.jpg
 Oracle:
-SetInfo:DKA Common

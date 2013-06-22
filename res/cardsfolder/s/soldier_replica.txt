@@ -6,4 +6,3 @@ A:AB$ DealDamage | Cost$ 1 W Sac<1/CARDNAME> | ValidTgts$ Creature.attacking,Cre
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soldier_replica.jpg
 Oracle:{1}{W}, Sacrifice Soldier Replica: Soldier Replica deals 3 damage to target attacking or blocking creature.
-SetInfo:MRD Common

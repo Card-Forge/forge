@@ -6,4 +6,3 @@ SVar:NonStackingEffect:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spirit_of_resistance.jpg
 Oracle:As long as you control a permanent of each color, prevent all damage that would be dealt to you.
-SetInfo:INV Rare

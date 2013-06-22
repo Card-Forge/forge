@@ -5,4 +5,3 @@ A:SP$ Sacrifice | Cost$ G | SacValid$ Enchantment | Defined$ Each | SpellDescrip
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/simplify.jpg
 Oracle:Each player sacrifices an enchantment.
-SetInfo:ODY Common

@@ -7,4 +7,3 @@ S:Mode$ Continuous | Affected$ Land.AttachedBy | AddAbility$ Token | Description
 SVar:Token:AB$Token | Cost$ T | TokenAmount$ 1 | TokenName$ Squirrel | TokenTypes$ Creature,Squirrel | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1 | TokenOwner$ You | SpellDescription$ Put a 1/1 green Squirrel creature token onto the battlefield.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/squirrel_nest.jpg
 Oracle:Enchant land\nEnchanted land has "{T}: Put a 1/1 green Squirrel creature token onto the battlefield."
-SetInfo:ODY Uncommon

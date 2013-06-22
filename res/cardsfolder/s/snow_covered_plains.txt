@@ -3,5 +3,3 @@ ManaCost:no cost
 Types:Basic Snow Land Plains
 SVar:Picture:http://www.wizards.com/global/images/magic/general/snow_covered_plains.jpg
 Oracle:W
-SetInfo:ICE Land
-SetInfo:CSP Common

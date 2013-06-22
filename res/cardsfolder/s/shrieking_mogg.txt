@@ -8,4 +8,3 @@ SVar:TrigTapAll:AB$TapAll | Cost$ 0 | ValidCards$ Creature.Other
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shrieking_mogg.jpg
 Oracle:Haste\nWhen Shrieking Mogg enters the battlefield, tap all other creatures.
-SetInfo:NMS Rare

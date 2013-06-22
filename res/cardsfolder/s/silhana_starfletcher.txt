@@ -8,4 +8,3 @@ SVar:ChooseColor:DB$ ChooseColor | Defined$ You | SpellDescription$ As CARDNAME 
 A:AB$ Mana | Cost$ T | Produced$ Chosen | SpellDescription$ Add one mana of the chosen color to your mana pool.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/silhana_starfletcher.jpg
 Oracle:Reach (This creature can block creatures with flying.)\nAs Silhana Starfletcher enters the battlefield, choose a color.\n{T}: Add one mana of the chosen color to your mana pool.
-SetInfo:GPT Common

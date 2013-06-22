@@ -5,4 +5,3 @@ A:SP$ DealDamage | Cost$ 4 B B | ValidTgts$ Opponent | NumDmg$ 5 | SubAbility$ D
 SVar:DBGainLife:DB$GainLife | LifeAmount$ 5
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stolen_grain.jpg
 Oracle:Stolen Grain deals 5 damage to target opponent. You gain 5 life.
-SetInfo:PTK Uncommon

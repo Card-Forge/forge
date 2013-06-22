@@ -6,4 +6,3 @@ K:Swampwalk
 K:Forestwalk
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stalker_hag.jpg
 Oracle:Swampwalk, forestwalk
-SetInfo:EVE Uncommon

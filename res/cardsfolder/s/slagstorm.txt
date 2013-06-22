@@ -5,4 +5,3 @@ A:SP$ DamageAll | Cost$ 1 R R | NumDmg$ 3 | ValidCards$ Creature | ValidDescript
 A:SP$ DamageAll | Cost$ 1 R R | NumDmg$ 3 | ValidPlayers$ Each | ValidDescription$ each player. | SpellDescription$ or CARDNAME deals 3 damage to each player.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/slagstorm.jpg
 Oracle:Choose one - Slagstorm deals 3 damage to each creature; or Slagstorm deals 3 damage to each player.
-SetInfo:MBS Rare

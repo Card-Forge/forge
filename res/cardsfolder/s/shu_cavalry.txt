@@ -5,4 +5,3 @@ PT:2/2
 K:Horsemanship
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shu_cavalry.jpg
 Oracle:Horsemanship (This creature can't be blocked except by creatures with horsemanship.)
-SetInfo:PTK Common

@@ -8,4 +8,3 @@ SVar:TrigPump:AB$ Pump | Cost$ 0 | Defined$ Self | NumAtt$ X | References$ X
 SVar:X:Count$Valid Creature.Beast+Other+attacking/Times.3
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shaleskin_bruiser.jpg
 Oracle:Trample\nWhenever Shaleskin Bruiser attacks, it gets +3/+0 until end of turn for each other attacking Beast.
-SetInfo:ONS Uncommon

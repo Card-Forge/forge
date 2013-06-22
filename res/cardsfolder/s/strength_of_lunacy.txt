@@ -7,4 +7,3 @@ S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddToughness
 K:Madness:B
 SVar:Picture:http://www.wizards.com/global/images/magic/general/strength_of_lunacy.jpg
 Oracle:Enchant creature\nEnchanted creature gets +2/+1 and has protection from white.\nMadness {B} (If you discard this card, you may cast it for its madness cost instead of putting it into your graveyard.)
-SetInfo:TOR Uncommon

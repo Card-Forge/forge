@@ -9,4 +9,3 @@ SVar:WarningGiven:DB$ ChangeZone | Defined$ Self | Origin$ Battlefield | Destina
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scouts_warning.jpg
 Oracle:The next creature card you play this turn can be played as though it had flash.\nDraw a card.
-SetInfo:FUT Rare

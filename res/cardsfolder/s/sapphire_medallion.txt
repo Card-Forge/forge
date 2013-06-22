@@ -6,4 +6,3 @@ SVar:RemRandomDeck:True
 DeckNeeds:Color$Blue
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sapphire_medallion.jpg
 Oracle:Blue spells you cast cost {1} less to cast.
-SetInfo:TMP Rare

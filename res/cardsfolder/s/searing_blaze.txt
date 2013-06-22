@@ -6,5 +6,3 @@ SVar:SearingDamage:DB$ DealDamage | ValidTgts$ Creature.TargetedPlayerCtrl | Tgt
 SVar:SearingX:Count$Landfall.3.1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/searing_blaze.jpg
 Oracle:Searing Blaze deals 1 damage to target player and 1 damage to target creature that player controls.\nLandfall - If you had a land enter the battlefield under your control this turn, Searing Blaze deals 3 damage to that player and 3 damage to that creature instead.
-SetInfo:DDI Common
-SetInfo:WWK Common

@@ -7,4 +7,3 @@ SVar:X:Targeted$CardPower
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/souls_fire.jpg
 Oracle:Target creature you control on the battlefield deals damage equal to its power to target creature or player.
-SetInfo:ALA Common

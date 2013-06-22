@@ -6,4 +6,3 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigChangeZone:AB$ChangeZone | Cost$ 0 | Origin$ Hand | Destination$ Library | LibraryPosition$ 0 | Mandatory$ True | ChangeType$ Card | ChangeNum$ 1 | DefinedPlayer$ Each
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sadistic_augermage.jpg
 Oracle:When Sadistic Augermage dies, each player puts a card from his or her hand on top of his or her library.
-SetInfo:RAV Common

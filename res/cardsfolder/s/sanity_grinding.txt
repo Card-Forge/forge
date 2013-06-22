@@ -7,4 +7,3 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$ChromaSource.U
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sanity_grinding.jpg
 Oracle:Chroma - Reveal the top ten cards of your library. For each blue mana symbol in the mana costs of the revealed cards, target opponent puts the top card of his or her library into his or her graveyard. Then put the cards you revealed this way on the bottom of your library in any order.
-SetInfo:EVE Rare

@@ -8,4 +8,3 @@ SVar:DBScentOfIvyCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scent_of_ivy.jpg
 Oracle:Reveal any number of green cards in your hand. Target creature gets +X/+X until end of turn, where X is the number of cards revealed this way.
-SetInfo:UDS Common

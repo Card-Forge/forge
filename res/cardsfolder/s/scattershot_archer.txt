@@ -6,4 +6,3 @@ A:AB$ DamageAll | Cost$ T | ValidCards$ Creature.withFlying | NumDmg$ 1 | ValidD
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scattershot_archer.jpg
 Oracle:{T}: Scattershot Archer deals 1 damage to each creature with flying.
-SetInfo:CFX Common

@@ -5,4 +5,3 @@ K:Flashback 3 B
 A:SP$ Discard | Cost$ B | ValidTgts$ Player | NumCards$ 1 | Mode$ TgtChoose | SpellDescription$ Target player discards a card.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skull_fracture.jpg
 Oracle:Target player discards a card.\nFlashback {3}{B} (You may cast this card from your graveyard for its flashback cost. Then exile it.)
-SetInfo:ODY Uncommon

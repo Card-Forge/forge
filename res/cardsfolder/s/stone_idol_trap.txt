@@ -8,4 +8,3 @@ S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone
 SVar:X:Count$Valid Creature.attacking
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stone_idol_trap.jpg
 Oracle:Stone Idol Trap costs {1} less to cast for each attacking creature.\nPut a 6/12 colorless Construct artifact creature token with trample onto the battlefield. Exile it at the beginning of your next end step.
-SetInfo:WWK Rare

@@ -6,5 +6,3 @@ K:Protection from red
 K:Shadow
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soltari_priest.jpg
 Oracle:Protection from red\nShadow (This creature can block or be blocked by only creatures with shadow.)
-SetInfo:TMP Uncommon
-SetInfo:TSB Special

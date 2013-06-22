@@ -5,4 +5,3 @@ A:SP$ PutCounter | Cost$ 3 G G | ValidTgts$ Creature |TgtPrompt$ Select target c
 SVar:DBPutTwo:DB$ PutCounter | Cost$ 0 | ValidTgts$ Creature |TgtPrompt$ Select another target creature | TargetUnique$ True | CounterType$ P1P1 | CounterNum$ 2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stand_together.jpg
 Oracle:Put two +1/+1 counters on target creature and two +1/+1 counters on another target creature.
-SetInfo:DST Uncommon

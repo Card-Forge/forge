@@ -6,18 +6,3 @@ K:Flying
 K:Vigilance
 SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83254.jpg
 Oracle:Flying\nVigilance (Attacking doesn't cause this creature to tap.)
-SetInfo:8ED Rare
-SetInfo:2ED Uncommon
-SetInfo:7ED Rare
-SetInfo:M10 Uncommon
-SetInfo:COM Uncommon
-SetInfo:9ED Rare
-SetInfo:10E Rare
-SetInfo:M11 Uncommon
-SetInfo:LEB Uncommon
-SetInfo:M13 Uncommon
-SetInfo:M12 Uncommon
-SetInfo:LEA Uncommon
-SetInfo:DDC Rare
-SetInfo:4ED Uncommon
-SetInfo:3ED Uncommon

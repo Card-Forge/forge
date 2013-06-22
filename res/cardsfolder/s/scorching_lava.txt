@@ -6,4 +6,3 @@ A:SP$ DealDamage | Cost$ 1 R | ValidTgts$ Creature,Player | TgtPrompt$ Select ta
 SVar:KickingLava:DB$Pump | KW$ HIDDEN CARDNAME can't be regenerated. & HIDDEN If CARDNAME would be put into a graveyard, exile it instead. | Defined$ Targeted | Condition$ Kicked | ConditionDescription$ If Scorching Lava was kicked,
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scorching_lava.jpg
 Oracle:Kicker {R} (You may pay an additional {R} as you cast this spell.)\nScorching Lava deals 2 damage to target creature or player. If Scorching Lava was kicked, that creature can't be regenerated this turn and if it would die this turn, exile it instead.
-SetInfo:INV Common

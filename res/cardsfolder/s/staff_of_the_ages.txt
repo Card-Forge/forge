@@ -6,4 +6,3 @@ SVar:NonStackingEffect:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/staff_of_the_ages.jpg
 Oracle:Creatures with landwalk abilities can be blocked as though they didn't have those abilities.
-SetInfo:ICE Rare

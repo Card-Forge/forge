@@ -5,6 +5,3 @@ A:SP$ Destroy | Cost$ W | ValidTgts$ Creature.blocked | TgtPrompt$ Select target
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/smite.jpg
 Oracle:Destroy target blocked creature.
-SetInfo:GTC Common
-SetInfo:ROE Common
-SetInfo:STH Common

@@ -5,4 +5,3 @@ A:AB$ ManaReflected | Cost$ Sac<1/Land> | ColorOrType$ Type | Valid$ Defined.Sac
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/squandered_resources.jpg
 Oracle:Sacrifice a land: Add to your mana pool one mana of any type the sacrificed land could produce.
-SetInfo:VIS Rare

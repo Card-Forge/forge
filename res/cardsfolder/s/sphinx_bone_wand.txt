@@ -8,5 +8,3 @@ SVar:X:Count$CardCounters.CHARGE
 SVar:BuffedBy:Instant,Sorcery
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sphinx_bone_wand.jpg
 Oracle:Whenever you cast an instant or sorcery spell, you may put a charge counter on Sphinx-Bone Wand. If you do, Sphinx-Bone Wand deals damage equal to the number of charge counters on it to target creature or player.
-SetInfo:DDJ Rare
-SetInfo:ROE Rare

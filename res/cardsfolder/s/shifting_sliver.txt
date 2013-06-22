@@ -5,4 +5,3 @@ PT:2/2
 S:Mode$ Continuous | Affected$ Creature.Sliver | AddHiddenKeyword$ CantBeBlockedBy Creature.nonSliver | Description$ Slivers can't be blocked except by Slivers.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shifting_sliver.jpg
 Oracle:Slivers can't be blocked except by Slivers.
-SetInfo:LGN Uncommon

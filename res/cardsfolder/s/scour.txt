@@ -6,5 +6,3 @@ SVar:DBChangeZoneAll:DB$ChangeZoneAll | ChangeType$ Remembered.sameName | Define
 SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scour.jpg
 Oracle:Exile target enchantment. Search its controller's graveyard, hand, and library for all cards with the same name as that enchantment and exile them. Then that player shuffles his or her library.
-SetInfo:BOK Uncommon
-SetInfo:UDS Uncommon

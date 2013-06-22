@@ -8,4 +8,3 @@ K:ETBReplacement:Other:DBTap
 SVar:DBTap:AB$ Tap | Cost$ 0 | ETB$ True | Defined$ Self | UnlessCost$ Reveal<1/Faerie> | UnlessPayer$ You | StackDescription$ enters the battlefield tapped.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/secluded_glen.jpg
 Oracle:As Secluded Glen enters the battlefield, you may reveal a Faerie card from your hand. If you don't, Secluded Glen enters the battlefield tapped.\n{T}: Add {U} or {B} to your mana pool.
-SetInfo:LRW Rare

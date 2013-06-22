@@ -6,5 +6,3 @@ SVar:DBShuffle:DB$ChangeZone | Origin$ Hand | Destination$ Library | Shuffle$ Tr
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/see_beyond.jpg
 Oracle:Draw two cards, then shuffle a card from your hand into your library.
-SetInfo:PC2 Common
-SetInfo:ROE Common

@@ -6,4 +6,3 @@ A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add W to your mana pool.
 K:CARDNAME enters the battlefield tapped unless you control two or fewer other lands.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/seachrome_coast.jpg
 Oracle:Seachrome Coast enters the battlefield tapped unless you control two or fewer other lands.\n{T}: Add {W} or {U} to your mana pool.
-SetInfo:SOM Rare

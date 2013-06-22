@@ -8,4 +8,3 @@ SVar:TrigLoseLife:AB$ LoseLife | Cost$ 0 | Defined$ Player.Opponent | LifeAmount
 SVar:DBGainLife:DB$ GainLife | Cost$ 0 | Defined$ You | LifeAmount$ 3 | ConditionPresent$ Card.Self+untapped | ConditionCompare$ EQ1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sphinx_sovereign.jpg
 Oracle:Flying\nAt the beginning of your end step, you gain 3 life if Sphinx Sovereign is untapped. Otherwise, each opponent loses 3 life.
-SetInfo:ALA Mythic

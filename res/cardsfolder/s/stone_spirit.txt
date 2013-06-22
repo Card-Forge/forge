@@ -5,5 +5,3 @@ PT:4/3
 K:CantBeBlockedBy Creature.withFlying
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stone_spirit.jpg
 Oracle:Stone Spirit can't be blocked by creatures with flying.
-SetInfo:ICE Uncommon
-SetInfo:5ED Uncommon

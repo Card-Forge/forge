@@ -9,4 +9,3 @@ SVar:Y:Count$CardCounters.CHARGE
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sigil_of_distinction.jpg
 Oracle:Sigil of Distinction enters the battlefield with X charge counters on it.\nEquipped creature gets +1/+1 for each charge counter on Sigil of Distinction.\nEquip-Remove a charge counter from Sigil of Distinction.
-SetInfo:ALA Rare

@@ -6,4 +6,3 @@ A:AB$ Pump | Cost$ 7 B | ValidTgts$ Creature | TgtPrompt$ Select target creature
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/smokespew_invoker.jpg
 Oracle:{7}{B}: Target creature gets -3/-3 until end of turn.
-SetInfo:LGN Common

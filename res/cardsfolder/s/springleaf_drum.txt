@@ -5,4 +5,3 @@ A:AB$ Mana | Cost$ T tapXType<1/Creature> | Produced$ Any | SpellDescription$ Ad
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/springleaf_drum.jpg
 Oracle:{T}, Tap an untapped creature you control: Add one mana of any color to your mana pool.
-SetInfo:LRW Common

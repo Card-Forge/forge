@@ -6,7 +6,3 @@ A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add W to your mana pool.
 K:Cycling:W
 SVar:Picture:http://www.wizards.com/global/images/magic/general/secluded_steppe.jpg
 Oracle:Secluded Steppe enters the battlefield tapped.\n{T}: Add {W} to your mana pool.\nCycling {W} ({W}, Discard this card: Draw a card.)
-SetInfo:DDC Common
-SetInfo:ONS Common
-SetInfo:ARC Common
-SetInfo:COM Common

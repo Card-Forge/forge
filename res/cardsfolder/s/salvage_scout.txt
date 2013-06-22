@@ -6,4 +6,3 @@ A:AB$ ChangeZone | Cost$ W Sac<1/CARDNAME> | TgtPrompt$ Choose target artifact c
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/salvage_scout.jpg
 Oracle:{W}, Sacrifice Salvage Scout: Return target artifact card from your graveyard to your hand.
-SetInfo:SOM Common

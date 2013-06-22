@@ -7,4 +7,3 @@ K:Hexproof
 S:Mode$ Continuous | Affected$ You | AddKeyword$ Spells and abilities your opponents control can't cause you to sacrifice permanents. | Description$ Spells and abilities your opponents control can't cause you to sacrifice permanents.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sigarda_host_of_herons.jpg
 Oracle:Flying, hexproof\nSpells and abilities your opponents control can't cause you to sacrifice permanents.
-SetInfo:AVR Mythic

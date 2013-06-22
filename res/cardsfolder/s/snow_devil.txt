@@ -8,4 +8,3 @@ S:Mode$ Continuous | Affected$ Creature.YouCtrl+blocking | AddKeyword$ First Str
 SVar:X:Count$Valid Land.Snow+YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/snow_devil.jpg
 Oracle:Enchant creature\nEnchanted creature has flying.\nEnchanted creature has first strike as long as it's blocking and you control a snow land.
-SetInfo:ICE Common

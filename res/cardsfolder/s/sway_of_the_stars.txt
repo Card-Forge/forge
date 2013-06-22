@@ -7,4 +7,3 @@ SVar:DBSetLife:DB$ SetLife | Defined$ Each | LifeAmount$ 7
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sway_of_the_stars.jpg
 Oracle:Each player shuffles his or her hand, graveyard, and permanents he or she owns into his or her library, then draws seven cards. Each player's life total becomes 7.
-SetInfo:BOK Rare

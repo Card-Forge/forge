@@ -6,4 +6,3 @@ A:AB$ ChangeZone | Cost$ 1 Sac<1/CARDNAME> | Origin$ Graveyard | Destination$ Ex
 SVar:DBDraw:DB$Draw | NumCards$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scrabbling_claws.jpg
 Oracle:{T}: Target player exiles a card from his or her graveyard.\n{1}, Sacrifice Scrabbling Claws: Exile target card from a graveyard. Draw a card.
-SetInfo:MRD Uncommon

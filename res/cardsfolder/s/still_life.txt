@@ -5,4 +5,3 @@ A:AB$ Animate | Cost$ G G | Defined$ Self | Power$ 4 | Toughness$ 3 | Types$ Cre
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/still_life.jpg
 Oracle:{G}{G}: Still Life becomes a 4/3 Centaur creature until end of turn. It's still an enchantment.
-SetInfo:ODY Uncommon

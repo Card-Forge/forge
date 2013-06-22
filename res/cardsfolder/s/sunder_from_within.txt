@@ -4,4 +4,3 @@ Types:Sorcery Arcane
 A:SP$ Destroy | Cost$ 2 R R | ValidTgts$ Artifact,Land | TgtPrompt$ Select target artifact or land | SpellDescription$ Destroy target artifact or land.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sunder_from_within.jpg
 Oracle:Destroy target artifact or land.
-SetInfo:SOK Uncommon

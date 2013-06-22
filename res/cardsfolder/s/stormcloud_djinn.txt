@@ -8,4 +8,3 @@ A:AB$ Pump | Cost$ R R | NumAtt$ +2 | SubAbility$ DBDealDamage | SpellDescriptio
 SVar:DBDealDamage:DB$DealDamage | Defined$ You | NumDmg$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stormcloud_djinn.jpg
 Oracle:Flying\nStormcloud Djinn can block only creatures with flying.\n{R}{R}: Stormcloud Djinn gets +2/+0 until end of turn and deals 1 damage to you.
-SetInfo:TSP Uncommon

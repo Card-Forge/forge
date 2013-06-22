@@ -6,4 +6,3 @@ SVar:NonStackingEffect:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stony_silence.jpg
 Oracle:Activated abilities of artifacts can't be activated.
-SetInfo:ISD Rare

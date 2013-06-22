@@ -9,4 +9,3 @@ SVar:TrigReturn:AB$ChangeZoneAll | Cost$ 0 | ChangeType$ Artifact,Enchantment | 
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/saprazzan_bailiff.jpg
 Oracle:When Saprazzan Bailiff enters the battlefield, exile all artifact and enchantment cards from all graveyards.\nWhen Saprazzan Bailiff leaves the battlefield, return all artifact and enchantment cards from all graveyards to their owners' hands.
-SetInfo:MMQ Rare

@@ -5,5 +5,3 @@ A:SP$ ChangeTargets | Cost$ 1 R R | TargetType$ Spell | ValidTgts$ Card | Target
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shunt.jpg
 Oracle:Change the target of target spell with a single target.
-SetInfo:DST Rare
-SetInfo:10E Rare

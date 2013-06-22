@@ -7,4 +7,3 @@ A:AB$ ChangeZone | Cost$ Sac<1/Land> | Origin$ Battlefield | Destination$ Hand |
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stormwatch_eagle.jpg
 Oracle:Flying\nSacrifice a land: Return Stormwatch Eagle to its owner's hand.
-SetInfo:PCY Common

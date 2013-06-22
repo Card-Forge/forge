@@ -6,4 +6,3 @@ SVar:ShovingMatch:AB$ Tap | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select ta
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shoving_match.jpg
 Oracle:Until end of turn, all creatures gain "{T}: Tap target creature."
-SetInfo:MMQ Uncommon

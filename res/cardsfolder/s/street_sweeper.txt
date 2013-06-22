@@ -7,4 +7,3 @@ SVar:TrigDestroyAll:DB$ DestroyAll | ValidCards$ Card.Aura+AttachedTo Targeted |
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/street_sweeper.jpg
 Oracle:Whenever Street Sweeper attacks, destroy all Auras attached to target land.
-SetInfo:RTR Uncommon

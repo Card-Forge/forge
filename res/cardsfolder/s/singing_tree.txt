@@ -6,4 +6,3 @@ A:AB$ Animate | Cost$ T | ValidTgts$ Creature.attacking | TgtPrompt$ Select targ
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/singing_tree.jpg
 Oracle:{T}: Target attacking creature's power becomes 0 until end of turn.
-SetInfo:ARN Rare

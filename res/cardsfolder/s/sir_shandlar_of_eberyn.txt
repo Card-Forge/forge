@@ -4,4 +4,3 @@ Types:Legendary Creature Human Knight
 PT:4/7
 SVar:Picture:http://resources.wizards.com/magic/cards/le/en-us/card1683.jpg
 Oracle:
-SetInfo:LEG Uncommon

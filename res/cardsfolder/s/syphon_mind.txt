@@ -7,6 +7,3 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
 SVar:Picture:http://www.wizards.com/global/images/magic/general/syphon_mind.jpg
 Oracle:Each other player discards a card. You draw a card for each card discarded this way.
-SetInfo:ONS Common
-SetInfo:COM Common
-SetInfo:HOP Common

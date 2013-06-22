@@ -5,7 +5,3 @@ A:SP$ Effect | Cost$ 2 W | Name$ Safe Passage Effect | StaticAbilities$ STPreven
 SVar:STPrevent:Mode$ PreventDamage | EffectZone$ Command | Target$ You,Creature.YouCtrl | Description$ Prevent all damage that would be dealt to you and creatures you control this turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/safe_passage.jpg
 Oracle:Prevent all damage that would be dealt to you and creatures you control this turn.
-SetInfo:M11 Common
-SetInfo:M10 Common
-SetInfo:DDI Common
-SetInfo:M13 Common

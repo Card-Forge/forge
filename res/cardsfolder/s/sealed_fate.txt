@@ -6,4 +6,3 @@ SVar:X:Count$xPaid
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sealed_fate.jpg
 Oracle:Look at the top X cards of target opponent's library. Exile one of those cards and put the rest back on top of that player's library in any order.
-SetInfo:MIR Uncommon

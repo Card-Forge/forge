@@ -6,4 +6,3 @@ SVar:DBMana:DB$ Mana | Produced$ Any | Defined$ ChosenPlayer
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spectral_searchlight.jpg
 Oracle:{T}: Choose a player. That player adds one mana of any color he or she chooses to his or her mana pool.
-SetInfo:RAV Uncommon

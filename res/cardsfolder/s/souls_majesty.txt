@@ -6,4 +6,3 @@ SVar:DBDraw:DB$ Draw | NumCards$ X
 SVar:X:Targeted$CardPower
 SVar:Picture:http://www.wizards.com/global/images/magic/general/souls_majesty.jpg
 Oracle:Draw cards equal to the power of target creature you control.
-SetInfo:CFX Rare

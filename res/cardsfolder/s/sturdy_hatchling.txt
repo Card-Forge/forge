@@ -11,4 +11,3 @@ SVar:TrigRemoveCounter:AB$ RemoveCounter | Cost$ 0 | Defined$ Self | CounterType
 SVar:BuffedBy:Card.Blue,Card.Green
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sturdy_hatchling.jpg
 Oracle:Sturdy Hatchling enters the battlefield with four -1/-1 counters on it.\n{G/U}: Sturdy Hatchling gains shroud until end of turn.\nWhenever you cast a green spell, remove a -1/-1 counter from Sturdy Hatchling.\nWhenever you cast a blue spell, remove a -1/-1 counter from Sturdy Hatchling.
-SetInfo:EVE Uncommon

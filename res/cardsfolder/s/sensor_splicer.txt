@@ -7,4 +7,3 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Golem | TokenTypes$ Artifact,Creature,Golem | TokenOwner$ You | TokenColors$ Colorless | TokenPower$ 3 | TokenToughness$ 3
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sensor_splicer.jpg
 Oracle:When Sensor Splicer enters the battlefield, put a 3/3 colorless Golem artifact creature token onto the battlefield.\nGolem creatures you control have vigilance.
-SetInfo:NPH Common

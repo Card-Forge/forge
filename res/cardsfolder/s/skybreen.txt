@@ -8,4 +8,3 @@ SVar:RolledChaos:AB$ LoseLife | Cost$ 0 | ValidTgts$ Player | LifeAmount$ Y | Re
 SVar:Y:TargetedPlayer$CardsInHand
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skybreen.jpg
 Oracle:Players play with the top card of their libraries revealed.\nSpells that share a card type with the top card of a library can't be cast.\nWhenever you roll {C}, target player loses life equal to the number of cards in his or her hand.
-SetInfo:HOP Common

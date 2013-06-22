@@ -4,5 +4,3 @@ Types:Instant
 A:SP$ Pump | Cost$ G | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -5 | IsCurse$ True | SpellDescription$ Target creature gets -5/-0 until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shrink.jpg
 Oracle:Target creature gets -5/-0 until end of turn.
-SetInfo:5ED Common
-SetInfo:HML Common x2

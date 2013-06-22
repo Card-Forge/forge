@@ -8,4 +8,3 @@ A:AB$ PutCounter | Cost$ T | IsCurse$ True | ValidTgts$ Creature | TgtPrompt$ Se
 SVar:NeedsToPlay:Island.YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skeleton_ship.jpg
 Oracle:When you control no Islands, sacrifice Skeleton Ship.\n{T}: Put a -1/-1 counter on target creature.
-SetInfo:ICE Rare

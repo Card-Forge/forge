@@ -6,4 +6,3 @@ T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ Tri
 SVar:TrigDamage:AB$ DealDamage | Cost$ 0 | ValidTgts$ Creature.DefenderCtrl | TgtPrompt$ Select target creature | NumDmg$ 1 | OptionalDecider$ You
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spark_mage.jpg
 Oracle:Whenever Spark Mage deals combat damage to a player, you may have Spark Mage deal 1 damage to target creature that player controls.
-SetInfo:ODY Uncommon

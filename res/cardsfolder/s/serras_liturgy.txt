@@ -7,4 +7,3 @@ SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ VERSE
 SVar:X:Count$CardCounters.VERSE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/serras_liturgy.jpg
 Oracle:At the beginning of your upkeep, you may put a verse counter on Serra's Liturgy.\n{W}, Sacrifice Serra's Liturgy: Destroy up to X target artifacts and/or enchantments, where X is the number of verse counters on Serra's Liturgy.
-SetInfo:USG Rare

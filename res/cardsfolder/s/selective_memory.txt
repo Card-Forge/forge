@@ -6,4 +6,3 @@ SVar:XFetch:Count$InYourLibrary
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/selective_memory.jpg
 Oracle:Search your library for any number of nonland cards and exile them. Then shuffle your library.
-SetInfo:WWK Rare

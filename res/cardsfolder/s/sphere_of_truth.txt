@@ -5,4 +5,3 @@ S:Mode$ PreventDamage | Target$ You | Source$ Card.White | Amount$ 2 | Descripti
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sphere_of_truth.jpg
 Oracle:If a white source would deal damage to you, prevent 2 of that damage.
-SetInfo:ODY Uncommon

@@ -11,4 +11,3 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/screeching_griffin.jpg
 Oracle:Flying\n{R}: Target creature can't block Screeching Griffin this turn.
-SetInfo:RAV Common

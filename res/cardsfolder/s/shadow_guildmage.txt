@@ -7,5 +7,3 @@ A:AB$ DealDamage | Cost$ R T | ValidTgts$ Creature,Player | TgtPrompt$ Select ta
 SVar:DBDealDamage:DB$DealDamage | Defined$ You | NumDmg$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shadow_guildmage.jpg
 Oracle:{U}, {T}: Put target creature you control on top of its owner's library.\n{R}, {T}: Shadow Guildmage deals 1 damage to target creature or player and 1 damage to you.
-SetInfo:TSB Special
-SetInfo:MIR Common

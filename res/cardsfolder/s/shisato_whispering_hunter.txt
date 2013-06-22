@@ -10,4 +10,3 @@ SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shisato_whispering_hunter.jpg
 Oracle:At the beginning of your upkeep, sacrifice a Snake.\nWhenever Shisato, Whispering Hunter deals combat damage to a player, that player skips his or her next untap step.
-SetInfo:CHK Rare

@@ -13,4 +13,3 @@ SVar:RemRandomDeck:True
 DeckNeeds:Color$Black
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sedge_sliver.jpg
 Oracle:All Sliver creatures have "This creature gets +1/+1 as long as you control a Swamp."\nAll Slivers have "{B}: Regenerate this permanent."
-SetInfo:TSP Rare

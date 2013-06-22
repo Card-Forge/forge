@@ -7,4 +7,3 @@ S:Mode$ Continuous | Affected$ Card.Shaman+YouCtrl | AddAbility$ Mana | Descript
 SVar:Mana:AB$Mana | Cost$ T | Produced$ G | Amount$ 2 | SpellDescription$ Add G G to your mana pool.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sachi_daughter_of_seshiro.jpg
 Oracle:Other Snake creatures you control get +0/+1.\nShamans you control have "{T}: Add {G}{G} to your mana pool."
-SetInfo:CHK Uncommon

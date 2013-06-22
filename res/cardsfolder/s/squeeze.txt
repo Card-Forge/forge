@@ -5,4 +5,3 @@ S:Mode$ RaiseCost | ValidCard$ Sorcery | Type$ Spell | Amount$ 3 | Description$ 
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/squeeze.jpg
 Oracle:Sorcery spells cost {3} more to cast.
-SetInfo:MMQ Rare

@@ -4,6 +4,3 @@ Types:Creature Elephant
 PT:3/5
 SVar:Picture:http://www.wizards.com/global/images/magic/general/siege_mastodon.jpg
 Oracle:
-SetInfo:M11 Common
-SetInfo:M10 Common
-SetInfo:M12 Common

@@ -6,4 +6,3 @@ K:First Strike
 K:Exalted
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sigiled_paladin.jpg
 Oracle:First strike\nExalted (Whenever a creature you control attacks alone, that creature gets +1/+1 until end of turn.)
-SetInfo:ALA Uncommon

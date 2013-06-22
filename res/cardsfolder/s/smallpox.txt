@@ -8,5 +8,3 @@ SVar:DBSacLand:DB$Sacrifice | SacValid$ Land | Defined$ Each
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/smallpox.jpg
 Oracle:Each player loses 1 life, discards a card, sacrifices a creature, then sacrifices a land.
-SetInfo:M12 Uncommon
-SetInfo:TSP Uncommon

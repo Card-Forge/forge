@@ -4,4 +4,3 @@ Types:Instant
 A:SP$ ChangeTargets | Cost$ U R | TargetType$ Spell | ValidTgts$ Card | TargetsSingleTarget$ True | SpellDescription$ Change the target of target spell with a single target.
 SVar:RemAIDeck:True
 Oracle:Change the target of target spell with a single target.
-SetInfo:ALA Uncommon

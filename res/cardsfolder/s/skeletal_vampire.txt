@@ -10,5 +10,3 @@ A:AB$ Regenerate | Cost$ Sac<1/Bat> | SpellDescription$ Regenerate CARDNAME.
 SVar:Sac:SVar:SacMe:1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skeletal_vampire.jpg
 Oracle:Flying\nWhen Skeletal Vampire enters the battlefield, put two 1/1 black Bat creature tokens with flying onto the battlefield.\n{3}{B}{B}, Sacrifice a Bat: Put two 1/1 black Bat creature tokens with flying onto the battlefield.\nSacrifice a Bat: Regenerate Skeletal Vampire.
-SetInfo:GPT Rare
-SetInfo:DDD Rare

@@ -7,5 +7,3 @@ SVar:X:Count$Valid Creature.YouCtrl
 SVar:BuffedBy:Creature
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scion_of_the_wild.jpg
 Oracle:Scion of the Wild's power and toughness are each equal to the number of creatures you control.
-SetInfo:RAV Rare
-SetInfo:10E Rare

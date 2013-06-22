@@ -6,9 +6,3 @@ K:At the beginning of your upkeep, sacrifice CARDNAME unless you pay U
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stasis.jpg
 Oracle:Players skip their untap steps.\nAt the beginning of your upkeep, sacrifice Stasis unless you pay {U}.
-SetInfo:2ED Rare
-SetInfo:LEB Rare
-SetInfo:LEA Rare
-SetInfo:5ED Rare
-SetInfo:4ED Rare
-SetInfo:3ED Rare

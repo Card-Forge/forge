@@ -10,5 +10,3 @@ K:Protection from red
 K:Protection from green
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sphinx_of_the_steel_wind.jpg
 Oracle:Flying, first strike, vigilance, lifelink, protection from red and from green
-SetInfo:ARB Mythic
-SetInfo:PD3 Mythic

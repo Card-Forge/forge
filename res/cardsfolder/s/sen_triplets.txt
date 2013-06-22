@@ -10,4 +10,3 @@ SVar:STHandRevealed:Mode$ Continuous | Affected$ Player.IsRemembered | AddKeywor
 SVar:STCanPlay:Mode$ Continuous | EffectZone$ Command | Affected$ Card.RememberedPlayerCtrl | AffectedZone$ Hand | AddHiddenKeyword$ May be played by your opponent | Description$ You may play cards from that player's hand this turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sen_triplets.jpg
 Oracle:At the beginning of your upkeep, choose target opponent. This turn, that player can't cast spells or activate abilities and plays with his or her hand revealed. You may play cards from that player's hand this turn.
-SetInfo:ARB Mythic

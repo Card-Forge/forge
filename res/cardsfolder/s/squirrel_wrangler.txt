@@ -7,4 +7,3 @@ A:AB$ PumpAll | Cost$ 1 G Sac<1/Land> | ValidCards$ Creature.Squirrel | NumAtt$ 
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/squirrel_wrangler.jpg
 Oracle:{1}{G}, Sacrifice a land: Put two 1/1 green Squirrel creature tokens onto the battlefield.\n{1}{G}, Sacrifice a land: Squirrel creatures get +1/+1 until end of turn.
-SetInfo:PCY Rare

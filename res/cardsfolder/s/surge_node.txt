@@ -6,4 +6,3 @@ A:AB$ PutCounter | Cost$ 1 T SubCounter<1/CHARGE> | ValidTgts$ Artifact | TgtPro
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/surge_node.jpg
 Oracle:Surge Node enters the battlefield with six charge counters on it.\n{1}, {T}, Remove a charge counter from Surge Node: Put a charge counter on target artifact.
-SetInfo:NPH Uncommon

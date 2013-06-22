@@ -5,4 +5,3 @@ A:SP$ DealDamage | Cost$ 3 B B | ValidTgts$ Creature.nonBlack | TgtPrompt$ Selec
 SVar:DBGainLife:DB$GainLife | LifeAmount$ 3
 SVar:Picture:http://serv4.tcgimages.eu/img/cards/Portal/soul_shred.jpg
 Oracle:Soul Shred deals 3 damage to target nonblack creature. You gain 3 life.
-SetInfo:POR Common

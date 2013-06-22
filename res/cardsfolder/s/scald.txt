@@ -6,4 +6,3 @@ SVar:TrigDealDamage:AB$DealDamage | Cost$ 0 | Defined$ TriggeredCardController |
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scald.jpg
 Oracle:Whenever a player taps an Island for mana, Scald deals 1 damage to that player.
-SetInfo:USG Uncommon

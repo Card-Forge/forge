@@ -7,4 +7,3 @@ K:Trample
 SVar:FullCost:5 U ExileFromGrave<2/Creature>
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skaab_goliath.jpg
 Oracle:As an additional cost to cast Skaab Goliath, exile two creature cards from your graveyard.\nTrample
-SetInfo:ISD Uncommon

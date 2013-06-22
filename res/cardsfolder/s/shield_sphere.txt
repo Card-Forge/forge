@@ -7,4 +7,3 @@ T:Mode$ Blocks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ Tri
 SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ M0M1 | CounterNum$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shield_sphere.jpg
 Oracle:Defender\nWhenever Shield Sphere blocks, put a -0/-1 counter on it.
-SetInfo:ALL Uncommon

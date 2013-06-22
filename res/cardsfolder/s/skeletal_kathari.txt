@@ -7,4 +7,3 @@ A:AB$ Regenerate | Cost$ B Sac<1/Creature> | SpellDescription$ Regenerate CARDNA
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skeletal_kathari.jpg
 Oracle:Flying\n{B}, Sacrifice a creature: Regenerate Skeletal Kathari.
-SetInfo:ALA Common

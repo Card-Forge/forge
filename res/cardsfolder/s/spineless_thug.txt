@@ -5,8 +5,3 @@ PT:2/2
 K:CARDNAME can't block.
 SVar:Picture:http://resources.wizards.com/magic/cards/10e/en/card129743.jpg
 Oracle:Spineless Thug can't block.
-SetInfo:8ED Common
-SetInfo:7ED Common
-SetInfo:10E Common
-SetInfo:NMS Common
-SetInfo:9ED Common

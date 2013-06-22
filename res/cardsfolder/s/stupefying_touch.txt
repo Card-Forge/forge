@@ -8,4 +8,3 @@ SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 1
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ CARDNAME's activated abilities can't be activated. | Description$ Enchanted creature's activated abilities can't be activated.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stupefying_touch.jpg
 Oracle:Enchant creature\nWhen Stupefying Touch enters the battlefield, draw a card.\nEnchanted creature's activated abilities can't be activated.
-SetInfo:TOR Uncommon

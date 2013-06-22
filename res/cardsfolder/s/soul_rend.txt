@@ -7,4 +7,3 @@ SVar:DrawSlowtrip:DB$Draw | NumCards$ 1 | Defined$ You
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soul_rend.jpg
 Oracle:Destroy target creature if it's white. A creature destroyed this way can't be regenerated.\nDraw a card at the beginning of the next turn's upkeep.
-SetInfo:MIR Uncommon

@@ -18,5 +18,3 @@ PT:3/3
 S:Mode$Continuous | Affected$ Creature.YouCtrl | AddKeyword$ Flying | Description$ Creatures you control have flying.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tobita_master_of_winds.jpg
 Oracle:Creatures you control have flying.
-
-SetInfo:CHK Uncommon

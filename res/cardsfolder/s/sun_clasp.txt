@@ -7,4 +7,3 @@ S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 1 | AddToughness
 A:AB$ ChangeZone | Cost$ W | Origin$ Battlefield | Destination$ Hand | Defined$ Enchanted | SpellDescription$ Return enchanted creature to its owner's hand.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sun_clasp.jpg
 Oracle:Enchant creature\nEnchanted creature gets +1/+3.\n{W}: Return enchanted creature to its owner's hand.
-SetInfo:VIS Common

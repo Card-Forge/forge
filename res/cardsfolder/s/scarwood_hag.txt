@@ -6,4 +6,3 @@ A:AB$ Pump | Cost$ G G G G T | ValidTgts$ Creature | TgtPrompt$ Select target cr
 A:AB$ Debuff | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | Keywords$ Forestwalk | SpellDescription$ Target creature loses forestwalk until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scarwood_hag.jpg
 Oracle:{G}{G}{G}{G}, {T}: Target creature gains forestwalk until end of turn.\n{T}: Target creature loses forestwalk until end of turn.
-SetInfo:DRK Uncommon

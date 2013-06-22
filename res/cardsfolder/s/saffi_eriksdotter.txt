@@ -8,4 +8,3 @@ SVar:TrigBounceMe:AB$ ChangeZone | Cost$ 0 | Defined$ Remembered | Origin$ Grave
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/saffi_eriksdotter.jpg
 Oracle:Sacrifice Saffi Eriksdotter: When target creature is put into your graveyard from the battlefield this turn, return that card to the battlefield.
-SetInfo:TSP Rare

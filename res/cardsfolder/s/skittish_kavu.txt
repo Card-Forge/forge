@@ -9,4 +9,3 @@ SVar:AntiBuffedBy:Creature.White,Creature.Blue
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skittish_kavu.jpg
 Oracle:Skittish Kavu gets +1/+1 as long as no opponent controls a white or blue creature.
-SetInfo:INV Uncommon

@@ -7,4 +7,3 @@ PT:3/3
 S:Mode$ Continuous | Affected$ Creature.Other+Rigger++YouCtrl | AddKeyword$ Haste | AddPower$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/steamflogger_boss.jpg
 Oracle:Other Rigger creatures you control get +1/+0 and have haste.\nIf a Rigger you control would assemble a Contraption, it assembles two Contraptions instead.
-SetInfo:FUT Rare

@@ -6,4 +6,3 @@ S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ 
 SVar:X:Count$Valid Swamp.YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sima_yi_wei_field_marshal.jpg
 Oracle:Sima Yi, Wei Field Marshal's power is equal to the number of Swamps you control.
-SetInfo:PTK Rare

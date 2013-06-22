@@ -7,4 +7,3 @@ SVar:X:Count$Valid Plains.YouCtrl
 SVar:BuffedBy:Plains
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sejiri_merfolk.jpg
 Oracle:As long as you control a Plains, Sejiri Merfolk has first strike and lifelink. (Damage dealt by a creature with lifelink also causes its controller to gain that much life.)
-SetInfo:WWK Uncommon

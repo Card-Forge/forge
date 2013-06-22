@@ -8,4 +8,3 @@ SVar:RemRandomDeck:True
 DeckNeeds:Color$Green|White
 SVar:Picture:http://www.wizards.com/global/images/magic/general/selesnya_keyrune.jpg
 Oracle:{T}: Add {G} or {W} to your mana pool.\n{G}{W}: Selesnya Keyrune becomes a 3/3 green and white Wolf artifact creature until end of turn.
-SetInfo:RTR Uncommon

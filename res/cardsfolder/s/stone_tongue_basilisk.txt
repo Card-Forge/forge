@@ -8,4 +8,3 @@ SVar:DelTrig:Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Player | Execute$ Tri
 SVar:TrigDestroy:AB$Destroy | Cost$ 0 | Defined$ TriggeredTarget
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stone_tongue_basilisk.jpg
 Oracle:Whenever Stone-Tongue Basilisk deals combat damage to a creature, destroy that creature at end of combat.\nThreshold - As long as seven or more cards are in your graveyard, all creatures able to block Stone-Tongue Basilisk do so.
-SetInfo:ODY Rare

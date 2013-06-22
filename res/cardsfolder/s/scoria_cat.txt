@@ -7,4 +7,3 @@ SVar:X:Count$Valid Land.YouCtrl+untapped
 SVar:BuffedBy:Card.nonLand
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scoria_cat.jpg
 Oracle:Scoria Cat gets +3/+3 as long as you control no untapped lands.
-SetInfo:PCY Uncommon

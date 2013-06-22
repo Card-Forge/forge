@@ -6,4 +6,3 @@ A:AB$ Destroy | Cost$ T | ValidTgts$ Creature.Blue | TgtPrompt$ Select target bl
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spinal_villain.jpg
 Oracle:{T}: Destroy target blue creature.
-SetInfo:LEG Rare

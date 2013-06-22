@@ -7,4 +7,3 @@ S:Mode$ Continuous | Affected$ Creature.EnchantedBy+untapped | AddKeyword$ Shrou
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spectral_cloak.jpg
 Oracle:Enchant creature\nEnchanted creature has shroud as long as it's untapped. (It can't be the target of spells or abilities.)
-SetInfo:LEG Uncommon

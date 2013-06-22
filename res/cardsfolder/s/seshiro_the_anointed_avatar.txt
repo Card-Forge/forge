@@ -12,4 +12,3 @@ S:Mode$ Continuous | EffectZone$ Command | Affected$ Creature.YouOwn | AffectedZ
 S:Mode$ Continuous | EffectZone$ Command | Affected$ Creature.YouOwn | AffectedZone$ Command | AddType$ ChosenType
 SVar:Picture:http://www.cardforge.org/fpics/vgd-lq/seshiro_the_anointed_avatar.jpg
 Oracle:Hand +0, life -1\nAt the beginning of the game, choose a creature type. Creatures you control, creature spells you control, and creature cards you own in any zone other than the battlefield or the stack have the chosen type in addition to their other types.
-SetInfo:VAN Special

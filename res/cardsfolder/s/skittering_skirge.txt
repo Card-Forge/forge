@@ -8,4 +8,3 @@ SVar:TrigSacrifice:AB$Sacrifice | Cost$ 0
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skittering_skirge.jpg
 Oracle:Flying\nWhen you cast a creature spell, sacrifice Skittering Skirge.
-SetInfo:USG Common

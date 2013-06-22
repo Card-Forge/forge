@@ -4,4 +4,3 @@ Types:Artifact Creature Golem
 PT:4/4
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stone_golem.jpg
 Oracle:
-SetInfo:M11 Uncommon

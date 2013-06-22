@@ -6,4 +6,3 @@ T:Mode$ AttackerBlocked | ValidCard$ Card.Self | Execute$ TrigGain | TriggerDesc
 SVar:TrigGain:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sacred_prey.jpg
 Oracle:Whenever Sacred Prey becomes blocked, you gain 1 life.
-SetInfo:MMQ Common

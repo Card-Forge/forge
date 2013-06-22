@@ -9,4 +9,3 @@ SVar:TrigDealDamage:AB$DealDamage | Cost$ 0 | ValidTgts$ Player | TgtPrompt$ Sel
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sparkcaster.jpg
 Oracle:When Sparkcaster enters the battlefield, return a red or green creature you control to its owner's hand.\nWhen Sparkcaster enters the battlefield, it deals 1 damage to target player.
-SetInfo:PLS Uncommon

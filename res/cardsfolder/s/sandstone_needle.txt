@@ -8,4 +8,3 @@ SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://wizards.com/global/images/magic/general/sandstone_needle.jpg
 Oracle:Sandstone Needle enters the battlefield tapped with two depletion counters on it.\n{T}, Remove a depletion counter from Sandstone Needle: Add {R}{R} to your mana pool. If there are no depletion counters on Sandstone Needle, sacrifice it.
-SetInfo:MMQ Common

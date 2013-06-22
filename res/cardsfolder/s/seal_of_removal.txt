@@ -5,4 +5,3 @@ A:AB$ ChangeZone | Cost$ Sac<1/CARDNAME> | ValidTgts$ Creature | TgtPrompt$ Sele
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/seal_of_removal.jpg
 Oracle:Sacrifice Seal of Removal: Return target creature to its owner's hand.
-SetInfo:NMS Common

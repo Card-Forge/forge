@@ -5,4 +5,3 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigReturn:AB$ChangeZone | Cost$ 1 W | Defined$ TriggeredCard | Origin$ Graveyard | Destination$ Hand
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sigil_of_the_new_dawn.jpg
 Oracle:Whenever a creature is put into your graveyard from the battlefield, you may pay {1}{W}. If you do, return that card to your hand.
-SetInfo:ONS Rare

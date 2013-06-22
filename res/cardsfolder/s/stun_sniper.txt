@@ -6,4 +6,3 @@ A:AB$ DealDamage | Cost$ 1 T | ValidTgts$ Creature | TgtPrompt$ Select target cr
 SVar:DBTap:DB$Tap | Defined$ Targeted
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stun_sniper.jpg
 Oracle:{1}, {T}: Stun Sniper deals 1 damage to target creature. Tap that creature.
-SetInfo:ARB Uncommon

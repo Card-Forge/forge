@@ -8,4 +8,3 @@ SVar:ShapesharerCopy:DB$ Clone | ValidTgts$ Creature | TgtPrompt$ Choose target 
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shapesharer.jpg
 Oracle:Changeling (This card is every creature type at all times.)\n{2}{U}: Target Shapeshifter becomes a copy of target creature until your next turn.
-SetInfo:LRW Rare

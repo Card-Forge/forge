@@ -9,6 +9,3 @@ SVar:DBDestroy:DB$ DestroyAll | ValidCards$ Card.ChosenCard | SpellDescription$ 
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sundering_titan.jpg
 Oracle:When Sundering Titan enters the battlefield or leaves the battlefield, choose a land of each basic land type, then destroy those lands.
-SetInfo:DST Rare
-SetInfo:ARC Rare
-SetInfo:V10 Mythic

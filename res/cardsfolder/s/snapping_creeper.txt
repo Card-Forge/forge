@@ -6,4 +6,3 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.Y
 SVar:TrigPump:AB$Pump | Cost$ 0 | Defined$ Self | KW$ Vigilance
 SVar:Picture:http://www.wizards.com/global/images/magic/general/Snapping_Creeper.jpg
 Oracle:Landfall - Whenever a land enters the battlefield under your control, Snapping Creeper gains vigilance until end of turn.
-SetInfo:WWK Common

@@ -6,7 +6,3 @@ A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add W to your mana pool.
 A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add G to your mana pool.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sunpetal_grove.jpg
 Oracle:Sunpetal Grove enters the battlefield tapped unless you control a Forest or a Plains.\n{T}: Add {G} or {W} to your mana pool.
-SetInfo:M11 Rare
-SetInfo:M10 Rare
-SetInfo:M13 Rare
-SetInfo:M12 Rare

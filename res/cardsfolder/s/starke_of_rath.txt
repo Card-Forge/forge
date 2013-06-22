@@ -8,4 +8,3 @@ SVar:RemCombat:DB$ RemoveFromCombat | Defined$ Targeted
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/starke_of_rath.jpg
 Oracle:{T}: Destroy target artifact or creature. That permanent's controller gains control of Starke of Rath. (This effect lasts indefinitely.)
-SetInfo:TMP Rare

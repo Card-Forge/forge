@@ -5,4 +5,3 @@ PT:2/1
 K:Wither
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sickle_ripper.jpg
 Oracle:Wither (This deals damage to creatures in the form of -1/-1 counters.)
-SetInfo:SHM Common

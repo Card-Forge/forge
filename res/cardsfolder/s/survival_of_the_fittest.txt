@@ -5,4 +5,3 @@ A:AB$ ChangeZone | Cost$ G Discard<1/Creature> | Origin$ Library | Destination$ 
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/survival_of_the_fittest.jpg
 Oracle:{G}, Discard a creature card: Search your library for a creature card, reveal that card, and put it into your hand. Then shuffle your library.
-SetInfo:EXO Rare

@@ -7,4 +7,3 @@ SVar:TrigPutCounterAll:AB$ PutCounterAll | Cost$ 0 | ValidCards$ Creature | Coun
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soul_snuffers.jpg
 Oracle:When Soul Snuffers enters the battlefield, put a -1/-1 counter on each creature.
-SetInfo:EVE Uncommon

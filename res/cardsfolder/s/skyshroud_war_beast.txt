@@ -10,4 +10,3 @@ SVar:X:Count$Valid Land.nonBasic+ChosenCtrl
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skyshroud_war_beast.jpg
 Oracle:Trample\nAs Skyshroud War Beast enters the battlefield, choose an opponent.\nSkyshroud War Beast's power and toughness are each equal to the number of nonbasic lands the chosen player controls.
-SetInfo:EXO Rare

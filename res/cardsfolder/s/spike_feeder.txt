@@ -7,6 +7,3 @@ A:AB$ PutCounter | Cost$ 2 SubCounter<1/P1P1> | ValidTgts$ Creature | CounterTyp
 A:AB$ GainLife | Cost$ SubCounter<1/P1P1> | LifeAmount$ 2 | SpellDescription$ You gain 2 life.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spike_feeder.jpg
 Oracle:Spike Feeder enters the battlefield with two +1/+1 counters on it.\n{2}, Remove a +1/+1 counter from Spike Feeder: Put a +1/+1 counter on target creature.\nRemove a +1/+1 counter from Spike Feeder: You gain 2 life.
-SetInfo:COM Uncommon
-SetInfo:TSB Special
-SetInfo:STH Uncommon

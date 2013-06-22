@@ -6,5 +6,3 @@ SVar:X:Count$BlackTypeOppCtrl.Creature/Times.3
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/starlight.jpg
 Oracle:You gain 3 life for each black creature target opponent controls.
-SetInfo:7ED Uncommon
-SetInfo:POR Uncommon

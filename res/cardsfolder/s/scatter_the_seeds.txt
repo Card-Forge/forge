@@ -5,4 +5,3 @@ K:Convoke
 A:SP$ Token | Cost$ 3 G G | TokenAmount$ 3 | TokenName$ Saproling | TokenTypes$ Creature,Saproling | TokenOwner$ You | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1 | SpellDescription$ Put three 1/1 green Saproling creature tokens onto the battlefield.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scatter_the_seeds.jpg
 Oracle:Convoke (Each creature you tap while casting this spell reduces its cost by {1} or by one mana of that creature's color.)\nPut three 1/1 green Saproling creature tokens onto the battlefield.
-SetInfo:RAV Common

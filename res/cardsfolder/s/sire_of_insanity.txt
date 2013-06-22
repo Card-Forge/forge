@@ -6,4 +6,3 @@ T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | Execute$ TrigDi
 SVar:TrigDiscard:AB$ Discard | Cost$ 0 | Defined$ Player | Mode$ Hand
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sire_of_insanity.jpg
 Oracle:At the beginning of each end step, each player discards his or her hand.
-SetInfo:DGM Rare

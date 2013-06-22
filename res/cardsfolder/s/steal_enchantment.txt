@@ -7,4 +7,3 @@ S:Mode$ Continuous | Affected$ Card.EnchantedBy | GainControl$ You | Description
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/steal_enchantment.jpg
 Oracle:Enchant enchantment\nYou control enchanted enchantment.
-SetInfo:TMP Uncommon

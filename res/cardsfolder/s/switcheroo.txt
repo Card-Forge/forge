@@ -4,4 +4,3 @@ Types:Sorcery
 A:SP$ ExchangeControl | Cost$ 4 U | ValidTgts$ Creature | TgtPrompt$ Select target creature | TargetMin$ 2 | TargetMax$ 2 | SpellDescription$ Exchange control of two target creatures.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/switcheroo.jpg
 Oracle:Exchange control of two target creatures.
-SetInfo:M13 Uncommon

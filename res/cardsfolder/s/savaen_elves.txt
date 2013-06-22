@@ -5,4 +5,3 @@ PT:1/1
 A:AB$ Destroy | Cost$ G G T | ValidTgts$ Aura.AttachedTo Land | TgtPrompt$ Select target Aura attached to a land | SpellDescription$ Destroy target Aura attached to a land.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/savaen_elves.jpg
 Oracle:{G}{G}, {T}: Destroy target Aura attached to a land.
-SetInfo:DRK Common

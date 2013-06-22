@@ -5,4 +5,3 @@ PT:1/2
 A:AB$ Pump | Cost$ T | NumAtt$ -2 | IsCurse$ True | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Target creature gets -2/-0 until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/saltfield_recluse.jpg
 Oracle:{T}: Target creature gets -2/-0 until end of turn.
-SetInfo:PLC Common

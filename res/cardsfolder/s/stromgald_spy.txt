@@ -9,4 +9,3 @@ SVar:STRevealHand:Mode$ Continuous | EffectZone$ Command | Affected$ Player.IsRe
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stromgald_spy.jpg
 Oracle:Whenever Stromgald Spy attacks and isn't blocked, you may have defending player play with his or her hand revealed for as long as Stromgald Spy remains on the battlefield. If you do, Stromgald Spy assigns no combat damage this turn.
-SetInfo:ALL Uncommon

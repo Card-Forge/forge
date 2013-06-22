@@ -8,4 +8,3 @@ SVar:TrigGainControl:DB$ GainControl | ValidTgts$ Opponent | AllValid$ Permanent
 SVar:RemAIDeck:True
 SVar:Picture:http://resources.wizards.com/magic/cards/gpt/en-us/card96835.jpg
 Oracle:Flying\nWhen Sky Swallower enters the battlefield, target opponent gains control of all other permanents you control.
-SetInfo:GPT Rare

@@ -5,4 +5,3 @@ A:AB$ Mana | Cost$ 1 T | Produced$ W G | SpellDescription$ Add W G to your mana 
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sungrass_prairie.jpg
 Oracle:{1}, {T}: Add {G}{W} to your mana pool.
-SetInfo:ODY Rare

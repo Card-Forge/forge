@@ -5,9 +5,3 @@ S:Mode$ Continuous | Affected$ You | SetMaxHandSize$ Unlimited | Description$ Yo
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spellbook.jpg
 Oracle:You have no maximum hand size.
-SetInfo:8ED Uncommon
-SetInfo:7ED Uncommon
-SetInfo:9ED Uncommon
-SetInfo:10E Uncommon
-SetInfo:M10 Uncommon
-SetInfo:EXO Uncommon

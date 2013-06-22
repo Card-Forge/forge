@@ -6,4 +6,3 @@ T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | IsPresent$
 SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/Shoreline_Salvager.jpg
 Oracle:Whenever Shoreline Salvager deals combat damage to a player, if you control an Island, you may draw a card.
-SetInfo:WWK Uncommon

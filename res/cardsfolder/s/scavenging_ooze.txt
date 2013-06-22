@@ -8,4 +8,3 @@ SVar:DBGainLife:DB$GainLife | Defined$ You | LifeAmount$ 1 | ConditionDefined$ T
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scavenging_ooze.jpg
 Oracle:{G}: Exile target card from a graveyard. If it was a creature card, put a +1/+1 counter on Scavenging Ooze and you gain 1 life.
-SetInfo:COM Rare

@@ -6,4 +6,3 @@ SVar:X:Targeted$CardManaCost
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/surge_of_strength.jpg
 Oracle:As an additional cost to cast Surge of Strength, discard a red or green card.\nTarget creature gains trample and gets +X/+0 until end of turn, where X is that creature's converted mana cost.
-SetInfo:ALL Uncommon

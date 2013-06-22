@@ -7,4 +7,3 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigGainLife:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ 3
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sylvok_lifestaff.jpg
 Oracle:Equipped creature gets +1/+0.\nWhenever equipped creature dies, you gain 3 life.\nEquip {1}
-SetInfo:SOM Common

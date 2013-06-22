@@ -7,4 +7,3 @@ SVar:RemRandomDeck:True
 DeckNeeds:Type$Wizard
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sages_dousing.jpg
 Oracle:Counter target spell unless its controller pays {3}. If you control a Wizard, draw a card.
-SetInfo:MOR Uncommon

@@ -6,7 +6,3 @@ SVar:DBDraw:DB$Draw | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/slay.jpg
 Oracle:Destroy target green creature. It can't be regenerated.\nDraw a card.
-SetInfo:8ED Uncommon
-SetInfo:PLS Uncommon
-SetInfo:9ED Uncommon
-SetInfo:DDE Uncommon

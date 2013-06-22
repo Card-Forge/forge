@@ -6,4 +6,3 @@ A:AB$ ChangeZone | Cost$ 1 Sac<1/CARDNAME> | Origin$ Library | Destination$ Libr
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sterling_grove.jpg
 Oracle:Other enchantments you control have shroud. (They can't be the targets of spells or abilities.)\n{1}, Sacrifice Sterling Grove: Search your library for an enchantment card and reveal that card. Shuffle your library, then put the card on top of it.
-SetInfo:INV Uncommon

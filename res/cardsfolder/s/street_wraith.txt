@@ -6,4 +6,3 @@ K:Swampwalk
 K:Cycling:PayLife<2>
 SVar:Picture:http://www.wizards.com/global/images/magic/general/street_wraith.jpg
 Oracle:Swampwalk\nCycling-Pay 2 life. (Pay 2 life, Discard this card: Draw a card.)
-SetInfo:FUT Uncommon

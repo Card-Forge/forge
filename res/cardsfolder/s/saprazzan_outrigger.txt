@@ -9,4 +9,3 @@ SVar:TrigChange:AB$ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Lib
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/saprazzan_outrigger.jpg
 Oracle:When Saprazzan Outrigger attacks or blocks, put it on top of its owner's library at end of combat.
-SetInfo:MMQ Common

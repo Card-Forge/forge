@@ -6,4 +6,3 @@ A:AB$ ChangeZone | Cost$ 1 G T Discard<1/Card> | Origin$ Library | Destination$ 
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/silverglade_pathfinder.jpg
 Oracle:{1}{G}, {T}, Discard a card: Search your library for a basic land card and put that card onto the battlefield tapped. Then shuffle your library.
-SetInfo:MMQ Uncommon

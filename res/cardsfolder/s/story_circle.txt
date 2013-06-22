@@ -10,7 +10,3 @@ SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/story_circle.jpg
 Oracle:As Story Circle enters the battlefield, choose a color.\n{W}: The next time a source of your choice of the chosen color would deal damage to you this turn, prevent that damage.
-SetInfo:MMQ Uncommon
-SetInfo:8ED Rare
-SetInfo:9ED Rare
-SetInfo:10E Rare

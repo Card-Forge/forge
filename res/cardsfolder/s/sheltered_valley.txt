@@ -11,4 +11,3 @@ SVar:NeedsToPlayVar:OnlyOne EQ0
 SVar:OnlyOne:Count$Valid Permanent.YouCtrl+namedSheltered Valley
 SVar:Picture:http://wizards.com/global/images/magic/general/sheltered_valley.jpg
 Oracle:If Sheltered Valley would enter the battlefield, instead sacrifice each other permanent named Sheltered Valley you control, then put Sheltered Valley onto the battlefield.\nAt the beginning of your upkeep, if you control three or fewer lands, you gain 1 life.\n{T}: Add {1} to your mana pool.
-SetInfo:ALL Rare

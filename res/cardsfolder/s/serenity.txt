@@ -7,5 +7,3 @@ SVar:NeedsToPlay:Artifact.YouDontCtrl,Enchantment.YouDontCtrl
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/serenity.jpg
 Oracle:At the beginning of your upkeep, destroy all artifacts and enchantments. They can't be regenerated.
-SetInfo:WTH Rare
-SetInfo:6ED Rare

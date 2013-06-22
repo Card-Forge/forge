@@ -9,4 +9,3 @@ SVar:X:Count$Valid Swamp.RememberedPlayerCtrl
 SVar:RemRandomDeck:True
 SVar:Picture:http://resources.wizards.com/magic/cards/tor/en-us/card35082.jpg
 Oracle:{T}: Each player loses 1 life for each Swamp he or she controls.
-SetInfo:TOR Uncommon

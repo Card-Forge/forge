@@ -9,4 +9,3 @@ SVar:TrigChangeZone:AB$ ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ 
 SVar:SacMe:2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sluggishness.jpg
 Oracle:Enchant creature\nEnchanted creature can't block.\nWhen Sluggishness is put into a graveyard from the battlefield, return Sluggishness to its owner's hand.
-SetInfo:ULG Common

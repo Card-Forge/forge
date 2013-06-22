@@ -5,5 +5,3 @@ A:SP$ Counter | Cost$ X U | References$ X | TargetType$ Spell | TgtPrompt$ Selec
 SVar:X:Count$xPaid
 SVar:Picture:http://www.wizards.com/global/images/magic/general/syncopate.jpg
 Oracle:Counter target spell unless its controller pays {X}. If that spell is countered this way, exile it instead of putting it into its owner's graveyard.
-SetInfo:ODY Common
-SetInfo:RTR Uncommon

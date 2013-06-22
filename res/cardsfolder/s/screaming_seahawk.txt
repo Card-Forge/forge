@@ -7,4 +7,3 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigChange:AB$ChangeZone | Cost$ 0 | Origin$ Library | Destination$ Hand | ChangeType$ Card.namedScreaming Seahawk | ChangeNum$ 1 | ShuffleNonMandatory$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/screaming_seahawk.jpg
 Oracle:Flying\nWhen Screaming Seahawk enters the battlefield, you may search your library for a card named Screaming Seahawk, reveal it, and put it into your hand. If you do, shuffle your library.
-SetInfo:ONS Common

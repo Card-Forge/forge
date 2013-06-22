@@ -4,7 +4,3 @@ Types:Creature Wurm
 PT:7/6
 SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83272.jpg
 Oracle:
-SetInfo:6ED Common
-SetInfo:9ED Common
-SetInfo:5ED Common
-SetInfo:ICE Common

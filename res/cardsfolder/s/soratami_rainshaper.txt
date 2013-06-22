@@ -7,4 +7,3 @@ A:AB$ Pump | Cost$ 3 Return<1/Land> | ValidTgts$ Creature.YouCtrl | TgtPrompt$ S
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soratami_rainshaper.jpg
 Oracle:Flying\n{3}, Return a land you control to its owner's hand: Target creature you control gains shroud until end of turn. (It can't be the target of spells or abilities.)
-SetInfo:CHK Common

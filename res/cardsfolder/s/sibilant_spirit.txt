@@ -7,6 +7,3 @@ T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDraw | OptionalDecider$ Op
 SVar:TrigDraw:AB$ Draw | Cost$ 0 | Defined$ DefendingPlayer | NumCards$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sibilant_spirit.jpg
 Oracle:Flying\nWhenever Sibilant Spirit attacks, defending player may draw a card.
-SetInfo:ICE Rare
-SetInfo:5ED Rare
-SetInfo:6ED Rare

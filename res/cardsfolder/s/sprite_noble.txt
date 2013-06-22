@@ -8,4 +8,3 @@ A:AB$ PumpAll | Cost$ T | ValidCards$ Creature.withFlying+Other+YouCtrl | NumAtt
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sprite_noble.jpg
 Oracle:Flying\nOther creatures you control with flying get +0/+1.\n{T}: Other creatures you control with flying get +1/+0 until end of turn.
-SetInfo:TSP Rare

@@ -10,4 +10,3 @@ T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ Player.Chosen | Exe
 SVar:TrigMill:AB$ Mill | Cost$ 0 | Defined$ TriggeredPlayer | NumCards$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sewer_nemesis.jpg
 Oracle:As Sewer Nemesis enters the battlefield, choose a player.\nSewer Nemesis's power and toughness are each equal to the number of cards in the chosen player's graveyard.\nWhenever the chosen player casts a spell, that player puts the top card of his or her library into his or her graveyard.
-SetInfo:COM Rare

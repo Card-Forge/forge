@@ -8,4 +8,3 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigChange:AB$ ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Battlefield
 SVar:Picture:http://www.wizards.com/global/images/magic/general/screams_from_within.jpg
 Oracle:Enchant creature\nEnchanted creature gets -1/-1.\nWhen enchanted creature dies, return Screams from Within from your graveyard to the battlefield.
-SetInfo:DST Uncommon

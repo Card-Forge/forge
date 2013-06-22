@@ -22,4 +22,3 @@ S:Mode$ Continuous | Affected$ Card.EnchantedBy | GainControl$ You | Description
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ghastly_haunting.jpg
 Oracle:Enchant creature\nYou control enchanted creature.
-SetInfo:DKA Uncommon

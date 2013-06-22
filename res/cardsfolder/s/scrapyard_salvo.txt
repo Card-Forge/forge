@@ -6,4 +6,3 @@ SVar:X:Count$TypeInYourYard.Artifact
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scrapyard_salvo.jpg
 Oracle:Scrapyard Salvo deals damage to target player equal to the number of artifact cards in your graveyard.
-SetInfo:NPH Common

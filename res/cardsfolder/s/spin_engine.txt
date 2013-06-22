@@ -10,4 +10,3 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spin_engine.jpg
 Oracle:{R}: Target creature can't block Spin Engine this turn.
-SetInfo:MBS Common

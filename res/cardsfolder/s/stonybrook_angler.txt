@@ -6,4 +6,3 @@ A:AB$ TapOrUntap | Cost$ 1 U T | ValidTgts$ Creature | TgtPrompt$ Select target 
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stonybrook_angler.jpg
 Oracle:{1}{U}, {T}: You may tap or untap target creature.
-SetInfo:LRW Common

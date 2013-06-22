@@ -4,9 +4,3 @@ Types:Artifact
 A:AB$ Mana | Cost$ T | Produced$ 1 | Amount$ 2 | SpellDescription$ Add 2 to your mana pool.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sol_ring.jpg
 Oracle:{T}: Add {2} to your mana pool.
-SetInfo:2ED Uncommon
-SetInfo:LEB Uncommon
-SetInfo:V10 Mythic
-SetInfo:COM Uncommon
-SetInfo:LEA Uncommon
-SetInfo:3ED Uncommon

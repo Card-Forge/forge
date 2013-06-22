@@ -5,4 +5,3 @@ A:SP$ Draw | Cost$ U | Defined$ You | NumCards$ 1 | SubAbility$ DBScry | SpellDe
 SVar:DBScry:DB$Scry | ScryNum$ 2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/serum_visions.jpg
 Oracle:Draw a card.\nScry 2. (To scry 2, look at the top two cards of your library, then put any number of them on the bottom of your library and the rest on top in any order.)
-SetInfo:5DN Common

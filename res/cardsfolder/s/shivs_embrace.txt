@@ -7,6 +7,3 @@ S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddToughness
 A:AB$ Pump | Cost$ R | Defined$ Enchanted | NumAtt$ +1 | SpellDescription$ Enchanted creature gets +1/+0 until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shivs_embrace.jpg
 Oracle:Enchant creature\nEnchanted creature gets +2/+2 and has flying.\n{R}: Enchanted creature gets +1/+0 until end of turn.
-SetInfo:M11 Uncommon
-SetInfo:DDG Uncommon
-SetInfo:USG Uncommon

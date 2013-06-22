@@ -5,5 +5,3 @@ A:SP$ Destroy | Cost$ 1 B B | ValidTgts$ Creature.powerLE2 | TgtPrompt$ Select t
 K:Cycling:2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/swat.jpg
 Oracle:Destroy target creature with power 2 or less.\nCycling {2} ({2}, Discard this card: Draw a card.)
-SetInfo:ONS Common
-SetInfo:ULG Common

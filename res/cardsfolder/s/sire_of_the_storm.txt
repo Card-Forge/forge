@@ -8,4 +8,3 @@ SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 1
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sire_of_the_storm.jpg
 Oracle:Flying\nWhenever you cast a Spirit or Arcane spell, you may draw a card.
-SetInfo:CHK Uncommon

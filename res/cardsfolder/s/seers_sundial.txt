@@ -5,4 +5,3 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.Y
 SVar:TrigDraw:AB$Draw | Cost$ 2 | Defined$ You | NumCards$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/seers_sundial.jpg
 Oracle:Landfall - Whenever a land enters the battlefield under your control, you may pay {2}. If you do, draw a card.
-SetInfo:WWK Rare

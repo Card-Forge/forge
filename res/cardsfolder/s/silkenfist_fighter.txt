@@ -6,4 +6,3 @@ T:Mode$ AttackerBlocked | ValidCard$ Card.Self | Execute$ TrigUntap | TriggerDes
 SVar:TrigUntap:AB$Untap | Cost$ 0 | Defined$ Self
 SVar:Picture:http://www.wizards.com/global/images/magic/general/silkenfist_fighter.jpg
 Oracle:Whenever Silkenfist Fighter becomes blocked, untap it.
-SetInfo:NMS Common

@@ -6,4 +6,3 @@ T:Mode$ AttackerBlocked | ValidCard$ Card.Self | Execute$ TrigDiscard | TriggerD
 SVar:TrigDiscard:AB$Discard | Cost$ 0 | Defined$ DefendingPlayer | NumCards$ 1 | Mode$ TgtChoose
 SVar:Picture:http://www.wizards.com/global/images/magic/general/slate_street_ruffian.jpg
 Oracle:Whenever Slate Street Ruffian becomes blocked, defending player discards a card.
-SetInfo:GTC Common

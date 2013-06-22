@@ -6,5 +6,3 @@ K:ETBReplacement:Other:DBTap
 SVar:DBTap:AB$ Tap | Cost$ 0 | ETB$ True | Defined$ Self | UnlessCost$ PayLife<2> | UnlessPayer$ You | UnlessAI$ Shockland | StackDescription$ enters the battlefield tapped.
 SVar:Picture:http://resources.wizards.com/magic/cards/gpt/en-us/card96923.jpg
 Oracle:({T}: Add {U} or {R} to your mana pool.)\nAs Steam Vents enters the battlefield, you may pay 2 life. If you don't, Steam Vents enters the battlefield tapped.
-SetInfo:GPT Rare
-SetInfo:RTR Rare

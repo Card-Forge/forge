@@ -6,4 +6,3 @@ A:SP$ DealDamage | Cost$ ExileFromHand<2/Card.Black> | ValidTgts$ Creature,Playe
 SVar:DBGainLife:DB$GainLife | Cost$ 0 | LifeAmount$ 4
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soul_spike.jpg
 Oracle:You may exile two black cards from your hand rather than pay Soul Spike's mana cost.\nSoul Spike deals 4 damage to target creature or player and you gain 4 life.
-SetInfo:CSP Rare

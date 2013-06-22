@@ -5,4 +5,3 @@ A:AB$ Pump | Cost$ 0 Sac<1/CARDNAME> | ValidTgts$ Creature | TgtPrompt$ Select t
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/seal_of_strength.jpg
 Oracle:Sacrifice Seal of Strength: Target creature gets +3/+3 until end of turn.
-SetInfo:NMS Common

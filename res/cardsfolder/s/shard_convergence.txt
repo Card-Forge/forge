@@ -9,4 +9,3 @@ SVar:RemRandomDeck:True
 DeckNeeds:Color$White|Blue|Black|Red
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shard_convergence.jpg
 Oracle:Search your library for a Plains card, an Island card, a Swamp card, and a Mountain card. Reveal those cards and put them into your hand. Then shuffle your library.
-SetInfo:CFX Uncommon

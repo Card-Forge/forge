@@ -6,4 +6,3 @@ S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddToughness$ X | Descr
 SVar:X:Count$Valid Squirrel.Other
 SVar:Picture:http://www.wizards.com/global/images/magic/general/squirrel_mob.jpg
 Oracle:Squirrel Mob gets +1/+1 for each other Squirrel on the battlefield.
-SetInfo:ODY Rare

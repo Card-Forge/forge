@@ -6,4 +6,3 @@ S:Mode$ Continuous | Affected$ Card.Self | AddHiddenKeyword$ Unblockable | Check
 SVar:X:Count$Valid Artifact.YouDontCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scrapdiver_serpent.jpg
 Oracle:Scrapdiver Serpent is unblockable as long as defending player controls an artifact.
-SetInfo:SOM Common

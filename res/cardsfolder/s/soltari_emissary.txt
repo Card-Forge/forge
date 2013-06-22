@@ -5,4 +5,3 @@ PT:2/1
 A:AB$ Pump | Cost$ W | KW$ Shadow | SpellDescription$ CARDNAME gains shadow until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soltari_emissary.jpg
 Oracle:{W}: Soltari Emissary gains shadow until end of turn. (This creature can block or be blocked by only creatures with shadow.)
-SetInfo:TMP Rare

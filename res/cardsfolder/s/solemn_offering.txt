@@ -5,5 +5,3 @@ A:SP$ Destroy | Cost$ 2 W | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select 
 SVar:DBGainLife:DB$GainLife | Defined$ You | LifeAmount$ 4
 SVar:Picture:http://www.wizards.com/global/images/magic/general/solemn_offering.jpg
 Oracle:Destroy target artifact or enchantment. You gain 4 life.
-SetInfo:M11 Common
-SetInfo:M10 Common

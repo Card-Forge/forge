@@ -6,4 +6,3 @@ A:AB$ Mana | Cost$ Sac<1/CARDNAME> | Produced$ B | SpellDescription$ Add B to yo
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skull_of_ramos.jpg
 Oracle:{T}: Add {B} to your mana pool.\nSacrifice Skull of Ramos: Add {B} to your mana pool.
-SetInfo:MMQ Rare

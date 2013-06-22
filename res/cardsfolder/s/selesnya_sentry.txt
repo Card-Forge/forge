@@ -5,4 +5,3 @@ PT:3/2
 A:AB$ Regenerate | Cost$ 5 G | SpellDescription$ Regenerate CARDNAME.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/selesnya_sentry.jpg
 Oracle:{5}{G}: Regenerate Selesnya Sentry.
-SetInfo:RTR Common

@@ -8,4 +8,3 @@ A:AB$ Regenerate | Cost$ B | SpellDescription$ Regenerate CARDNAME.
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spined_fluke.jpg
 Oracle:When Spined Fluke enters the battlefield, sacrifice a creature.\n{B}: Regenerate Spined Fluke.
-SetInfo:USG Uncommon

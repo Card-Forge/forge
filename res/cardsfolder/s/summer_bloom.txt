@@ -8,8 +8,3 @@ SVar:HandInLand:Count$InYourHand.Land
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/summer_bloom.jpg
 Oracle:You may play up to three additional lands this turn.
-SetInfo:VIS Uncommon
-SetInfo:S99 Rare
-SetInfo:POR Rare
-SetInfo:9ED Uncommon
-SetInfo:6ED Uncommon

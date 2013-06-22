@@ -6,4 +6,3 @@ A:AB$ Counter | Cost$ U U T Discard<1/Card> | TargetType$ Spell | TgtPrompt$ Sel
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stronghold_biologist.jpg
 Oracle:{U}{U}, {T}, Discard a card: Counter target creature spell.
-SetInfo:NMS Uncommon

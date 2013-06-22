@@ -6,4 +6,3 @@ SVar:DBChange:DB$ChangeZone | Origin$ Stack | Destination$ Exile
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sins_of_the_past.jpg
 Oracle:Until end of turn, you may cast target instant or sorcery card from your graveyard without paying its mana cost. If that card would be put into your graveyard this turn, exile it instead. Exile Sins of the Past.
-SetInfo:RAV Rare

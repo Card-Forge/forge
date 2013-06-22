@@ -7,4 +7,3 @@ SVar:TrigExile:AB$ ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Exile
 SVar:HierophantChange:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Creature.Other+YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sylvan_hierophant.jpg
 Oracle:When Sylvan Hierophant dies, exile Sylvan Hierophant, then return another target creature card from your graveyard to your hand.
-SetInfo:WTH Uncommon

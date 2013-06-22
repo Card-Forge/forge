@@ -8,4 +8,3 @@ SVar:TrigEffect:AB$Effect | Cost$ 0 | Name$ Stigma Lasher Effect | StaticAbiliti
 SVar:CantGainLife:Mode$ Continuous | EffectZone$ Command | Affected$ Player.isRemembered | AddKeyword$ You can't gain life. | Description$ The damaged player can't gain life for the rest of the game.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stigma_lasher.jpg
 Oracle:Wither (This deals damage to creatures in the form of -1/-1 counters.)\nWhenever Stigma Lasher deals damage to a player, that player can't gain life for the rest of the game.
-SetInfo:EVE Rare

@@ -6,5 +6,3 @@ K:CantBeBlockedBy Creature.withoutFlying
 K:Hexproof
 SVar:Picture:http://www.wizards.com/global/images/magic/general/silhana_ledgewalker.jpg
 Oracle:Hexproof (This creature can't be the target of spells or abilities your opponents control.)\nSilhana Ledgewalker can't be blocked except by creatures with flying.
-SetInfo:GPT Common
-SetInfo:PC2 Common

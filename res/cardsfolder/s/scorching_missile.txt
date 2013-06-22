@@ -5,4 +5,3 @@ K:Flashback 9 R
 A:SP$ DealDamage | Cost$ 3 R | ValidTgts$ Player | TgtPrompt$ Select target player | NumDmg$ 4 | SpellDescription$ CARDNAME deals 4 damage to target player.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scorching_missile.jpg
 Oracle:Scorching Missile deals 4 damage to target player.\nFlashback {9}{R} (You may cast this card from your graveyard for its flashback cost. Then exile it.)
-SetInfo:ODY Common

@@ -6,4 +6,3 @@ K:Flash
 K:Flying
 SVar:Picture:http://resources.wizards.com/magic/cards/lrw/en/card139426.jpg
 Oracle:Flash\nFlying
-SetInfo:LRW Common

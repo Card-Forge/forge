@@ -5,6 +5,3 @@ A:AB$ DealDamage | Cost$ 1 T Sac<1/Creature> | ValidTgts$ Creature,Player | TgtP
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skull_catapult.jpg
 Oracle:{1}, {T}, Sacrifice a creature: Skull Catapult deals 2 damage to target creature or player.
-SetInfo:ICE Uncommon
-SetInfo:5ED Uncommon
-SetInfo:6ED Uncommon

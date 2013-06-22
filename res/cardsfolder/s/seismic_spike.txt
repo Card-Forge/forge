@@ -5,4 +5,3 @@ A:SP$ Destroy | Cost$ 2 R R | ValidTgts$ Land | TgtPrompt$ Select target land | 
 SVar:DBMana:DB$Mana | Produced$ R | Amount$ 2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/seismic_spike.jpg
 Oracle:Destroy target land. Add {R}{R} to your mana pool.
-SetInfo:RAV Common

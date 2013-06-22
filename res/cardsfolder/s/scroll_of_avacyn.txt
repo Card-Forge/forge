@@ -6,4 +6,3 @@ SVar:BlessedLife:DB$GainLife | Cost$ 0 | Defined$ You | ConditionPresent$ Angel.
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scroll_of_avacyn.jpg
 Oracle:{1}, Sacrifice Scroll of Avacyn: Draw a card. If you control an Angel, you gain 5 life.
-SetInfo:AVR Common

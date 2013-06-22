@@ -5,5 +5,3 @@ PT:2/2
 K:Vigilance
 SVar:Picture:http://resources.wizards.com/magic/cards/10e/en/card132111.jpg
 Oracle:Vigilance (Attacking doesn't cause this creature to tap.)
-SetInfo:MMQ Common
-SetInfo:10E Common

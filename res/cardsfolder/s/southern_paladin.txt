@@ -6,5 +6,3 @@ A:AB$ Destroy | Cost$ W W T | ValidTgts$ Permanent.Red | TgtPrompt$ Select targe
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/southern_paladin.jpg
 Oracle:{W}{W}, {T}: Destroy target red permanent.
-SetInfo:7ED Rare
-SetInfo:WTH Rare

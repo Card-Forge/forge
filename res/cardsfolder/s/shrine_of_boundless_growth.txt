@@ -9,4 +9,3 @@ SVar:X:Count$CardCounters.CHARGE
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shrine_of_boundless_growth.jpg
 Oracle:At the beginning of your upkeep or whenever you cast a green spell, put a charge counter on Shrine of Boundless Growth.\n{T}, Sacrifice Shrine of Boundless Growth: Add {1} to your mana pool for each charge counter on Shrine of Boundless Growth.
-SetInfo:NPH Uncommon

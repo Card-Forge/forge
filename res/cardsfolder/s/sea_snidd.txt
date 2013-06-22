@@ -7,4 +7,3 @@ SVar:DBAnimate:DB$ Animate | ValidTgts$ Land | TgtPrompt$ Select target land | T
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sea_snidd.jpg
 Oracle:{T}: Target land becomes the basic land type of your choice until end of turn.
-SetInfo:PLS Common

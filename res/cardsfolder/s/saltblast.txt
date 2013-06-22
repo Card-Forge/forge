@@ -4,5 +4,3 @@ Types:Sorcery
 A:SP$ Destroy | Cost$ 3 W W | ValidTgts$ Permanent.nonWhite | TgtPrompt$ Select target nonwhite permanent | SpellDescription$ Destroy target nonwhite permanent.
 SVar:Picture:http://resources.wizards.com/magic/cards/plc/en-us/card122435.jpg
 Oracle:Destroy target nonwhite permanent.
-SetInfo:PLC Uncommon
-SetInfo:DDF Uncommon

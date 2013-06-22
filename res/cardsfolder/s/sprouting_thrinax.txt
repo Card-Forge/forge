@@ -6,4 +6,3 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ 3 | TokenName$ Saproling | TokenTypes$ Creature,Saproling | TokenOwner$ TriggeredCardController | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sprouting_thrinax.jpg
 Oracle:When Sprouting Thrinax dies, put three 1/1 green Saproling creature tokens onto the battlefield.
-SetInfo:ALA Uncommon

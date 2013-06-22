@@ -6,5 +6,3 @@ K:Flying
 K:Protection from red
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sea_sprite.jpg
 Oracle:Flying, protection from red
-SetInfo:5ED Uncommon
-SetInfo:HML Uncommon

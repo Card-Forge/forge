@@ -6,4 +6,3 @@ SVar:DBDraw:DB$Draw | NumCards$ 1
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/snakeform.jpg
 Oracle:Target creature loses all abilities and becomes a 1/1 green Snake until end of turn.\nDraw a card.
-SetInfo:EVE Common

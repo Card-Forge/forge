@@ -7,4 +7,3 @@ A:AB$ Draw | Cost$ G W T Sac<1/CARDNAME> | NumCards$ 1 | SpellDescription$ Draw 
 DeckNeeds:Color$Green|White
 SVar:Picture:http://www.wizards.com/global/images/magic/general/selesnya_cluestone.jpg
 Oracle:{T}: Add {G} or {W} to your mana pool.\n{G}{W}, {T}, Sacrifice Selesnya Cluestone: Draw a card.
-SetInfo:DGM Common

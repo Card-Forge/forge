@@ -7,4 +7,3 @@ A:AB$ PutCounter | Cost$ 1 B G ExileFromGrave<1/CARDNAME> | ActivationZone$ Grav
 SVar:X:Count$CardPower
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sluiceway_scorpion.jpg
 Oracle:Deathtouch (Any amount of damage this deals to a creature is enough to destroy it.)\nScavenge {1}{B}{G} ({1}{B}{G}, Exile this card from your graveyard: Put a number of +1/+1 counters equal to this card's power on target creature. Scavenge only as a sorcery.)
-SetInfo:RTR Common

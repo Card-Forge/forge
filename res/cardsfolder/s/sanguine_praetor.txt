@@ -7,4 +7,3 @@ SVar:X:Sacrificed$CardManaCost
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sanguine_praetor.jpg
 Oracle:{B}, Sacrifice a creature: Destroy each creature with the same converted mana cost as the sacrificed creature.
-SetInfo:GPT Rare

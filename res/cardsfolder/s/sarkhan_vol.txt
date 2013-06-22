@@ -8,4 +8,3 @@ A:AB$ Token | Cost$ SubCounter<6/LOYALTY> | Planeswalker$ True | Ultimate$ True 
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sarkhan_vol.jpg
 Oracle:[+1] Creatures you control get +1/+1 and gain haste until end of turn.\n[-2] Gain control of target creature until end of turn. Untap that creature. It gains haste until end of turn.\n[-6] Put five 4/4 red Dragon creature tokens with flying onto the battlefield.
-SetInfo:ALA Mythic

@@ -5,5 +5,3 @@ A:SP$ Effect | Cost$ W | Name$ Silence Effect | StaticAbilities$ STCantBeCast | 
 SVar:STCantBeCast:Mode$ CantBeCast | EffectZone$ Command | ValidCard$ Card | Caster$ Opponent | Description$ Your opponents can't cast spells.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/silence.jpg
 Oracle:Your opponents can't cast spells this turn. (Spells cast before this resolves are unaffected.)
-SetInfo:M11 Rare
-SetInfo:M10 Rare

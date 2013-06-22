@@ -10,4 +10,3 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skirk_alarmist.jpg
 Oracle:Haste\n{T}: Turn target face-down creature you control face up. At the beginning of the next end step, sacrifice it.
-SetInfo:LGN Rare

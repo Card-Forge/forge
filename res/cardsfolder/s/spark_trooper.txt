@@ -9,4 +9,3 @@ K:At the beginning of the end step, sacrifice CARDNAME.
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spark_trooper.jpg
 Oracle:Trample, lifelink, haste\nAt the beginning of the end step, sacrifice Spark Trooper.
-SetInfo:GTC Rare

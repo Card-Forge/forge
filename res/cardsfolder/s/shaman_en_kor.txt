@@ -24,4 +24,3 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shaman_en_kor.jpg
 Oracle:{0}: The next 1 damage that would be dealt to Shaman en-Kor this turn is dealt to target creature you control instead.\n{1}{W}: The next time a source of your choice would deal damage to target creature this turn, that damage is dealt to Shaman en-Kor instead.
-SetInfo:STH Rare

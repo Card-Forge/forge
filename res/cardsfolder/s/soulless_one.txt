@@ -8,5 +8,3 @@ SVar:Y:Count$TypeInAllYards.Zombie
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soulless_one.jpg
 Oracle:Soulless One's power and toughness are each equal to the number of Zombies on the battlefield plus the number of Zombie cards in all graveyards.
-SetInfo:ONS Uncommon
-SetInfo:HOP Uncommon

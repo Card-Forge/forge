@@ -7,4 +7,3 @@ SVar:PumpHexproof:DB$ PumpAll | ValidCards$ Permanent.YouCtrl | KW$ Hexproof | S
 SVar:ReturnCard:DB$ ChangeZone | ValidTgts$ Creature | TgtPrompt$ Select target creature. | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target creature to its owner's hand.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/simic_charm.jpg
 Oracle:Choose one — Target creature gets +3/+3 until end of turn; or permanents you control gain hexproof until end of turn; or return target creature to its owner's hand.
-SetInfo:GTC Uncommon

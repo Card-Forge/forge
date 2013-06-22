@@ -8,4 +8,3 @@ SVar:RemRandomDeck:True
 SVar:BuffedBy:Beast
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skirk_outrider.jpg
 Oracle:As long as you control a Beast, Skirk Outrider gets +2/+2 and has trample.
-SetInfo:LGN Common

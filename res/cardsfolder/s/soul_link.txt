@@ -9,4 +9,3 @@ SVar:TrigGain:AB$ GainLife | Cost$ 0 | Defined$ You | LifeAmount$ X | References
 SVar:X:TriggerCount$DamageAmount
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soul_link.jpg
 Oracle:Enchant creature\nWhenever enchanted creature deals damage, you gain that much life.\nWhenever enchanted creature is dealt damage, you gain that much life.
-SetInfo:APC Common

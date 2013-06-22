@@ -5,6 +5,3 @@ PT:1/1
 A:AB$ ChangeZone | Cost$ Sac<1/CARDNAME> | Origin$ Library | Destination$ Battlefield | Tapped$ True | ChangeType$ Land.Basic | ChangeNum$ 1 | SpellDescription$ Search your library for a basic land card and put it onto the battlefield tapped. Then shuffle your library.
 SVar:Picture:http://resources.wizards.com/magic/cards/chk/en-us/card50510.jpg
 Oracle:Sacrifice Sakura-Tribe Elder: Search your library for a basic land card, put that card onto the battlefield tapped, then shuffle your library.
-SetInfo:CHK Common
-SetInfo:COM Common
-SetInfo:ARC Common

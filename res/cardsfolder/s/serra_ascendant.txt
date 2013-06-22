@@ -8,4 +8,3 @@ SVar:X:Count$YourLifeTotal
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/serra_ascendant.jpg
 Oracle:Lifelink (Damage dealt by this creature also causes you to gain that much life.)\nAs long as you have 30 or more life, Serra Ascendant gets +5/+5 and has flying.
-SetInfo:M11 Rare

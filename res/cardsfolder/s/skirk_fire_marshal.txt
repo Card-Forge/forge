@@ -7,5 +7,3 @@ K:Protection from red
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skirk_fire_marshal.jpg
 Oracle:Protection from red\nTap five untapped Goblins you control: Skirk Fire Marshal deals 10 damage to each creature and each player.
-SetInfo:ONS Rare
-SetInfo:EVG Rare

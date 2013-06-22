@@ -5,4 +5,3 @@ S:Mode$ PreventDamage | Target$ You | Source$ Card.Blue | Amount$ 2 | Descriptio
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sphere_of_reason.jpg
 Oracle:If a blue source would deal damage to you, prevent 2 of that damage.
-SetInfo:ODY Uncommon

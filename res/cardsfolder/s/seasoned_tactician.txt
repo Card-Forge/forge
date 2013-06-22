@@ -9,4 +9,3 @@ SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/seasoned_tactician.jpg
 Oracle:{3}, Exile the top four cards of your library: The next time a source of your choice would deal damage to you this turn, prevent that damage.
-SetInfo:ALL Uncommon

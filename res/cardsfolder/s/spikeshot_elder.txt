@@ -6,4 +6,3 @@ A:AB$ DealDamage | Cost$ 1 R R | ValidTgts$ Creature,Player | TgtPrompt$ Select 
 SVar:X:Count$CardPower
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spikeshot_elder.jpg
 Oracle:{1}{R}{R}: Spikeshot Elder deals damage equal to its power to target creature or player.
-SetInfo:SOM Rare

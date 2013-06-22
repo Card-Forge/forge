@@ -10,5 +10,3 @@ SVar:MirrorStrikeCombatDmg:AB$ DealDamage | Cost$ 0 | CombatDamage$ True | Defin
 SVar:MirroredX:ReplaceCount$DamageAmount
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shimian_night_stalker.jpg
 Oracle:{B}, {T}: All damage that would be dealt to you this turn by target attacking creature is dealt to Shimian Night Stalker instead.
-SetInfo:CHR Uncommon
-SetInfo:LEG Uncommon

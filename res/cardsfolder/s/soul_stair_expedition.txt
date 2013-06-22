@@ -6,4 +6,3 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.Y
 SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ QUEST | CounterNum$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/Soul_Stair_Expedition.jpg
 Oracle:Landfall - Whenever a land enters the battlefield under your control, you may put a quest counter on Soul Stair Expedition.\nRemove three quest counters from Soul Stair Expedition and sacrifice it: Return up to two target creature cards from your graveyard to your hand.
-SetInfo:ZEN Common

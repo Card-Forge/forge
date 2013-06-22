@@ -8,4 +8,3 @@ SVar:TrigBounce:AB$ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Han
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skull_collector.jpg
 Oracle:At the beginning of your upkeep, return a black creature you control to its owner's hand.\n{1}{B}: Regenerate Skull Collector.
-SetInfo:SOK Uncommon

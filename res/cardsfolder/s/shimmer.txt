@@ -7,4 +7,3 @@ S:Mode$ Continuous | Affected$ Land.ChosenType | AddKeyword$ Phasing | Descripti
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shimmer.jpg
 Oracle:As Shimmer enters the battlefield, choose a land type.\nEach land of the chosen type has phasing. (It phases in or out before its controller untaps during each of his or her untap steps. While it's phased out, it's treated as though it doesn't exist.)
-SetInfo:MIR Rare

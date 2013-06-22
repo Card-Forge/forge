@@ -6,5 +6,3 @@ S:Mode$ CantBeCast | ValidCard$ Creature | Caster$ You | Description$ You can't 
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/steel_golem.jpg
 Oracle:You can't cast creature spells.
-SetInfo:WTH Uncommon
-SetInfo:10E Uncommon

@@ -5,4 +5,3 @@ S:Mode$ RaiseCost | ValidCard$ Card | Type$ NonManaAbility | Amount$ 2 | Descrip
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/suppression_field.jpg
 Oracle:Activated abilities cost {2} more to activate unless they're mana abilities.
-SetInfo:RAV Uncommon

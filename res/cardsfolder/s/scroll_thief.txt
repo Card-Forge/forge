@@ -6,6 +6,3 @@ T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | CombatDama
 SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scroll_thief.jpg
 Oracle:Whenever Scroll Thief deals combat damage to a player, draw a card.
-SetInfo:M11 Common
-SetInfo:DDI Common
-SetInfo:M13 Common

@@ -5,4 +5,3 @@ PT:2/2
 SVar:AltCost:Cost$ GainLife<5/Player.Other/*> | IsPresent$ Forest.YouCtrl | Description$ If you control a Forest, rather than pay Skyshroud Cutter's mana cost, you may have each other player gain 5 life.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skyshroud_cutter.jpg
 Oracle:If you control a Forest, rather than pay Skyshroud Cutter's mana cost, you may have each other player gain 5 life.
-SetInfo:NMS Common

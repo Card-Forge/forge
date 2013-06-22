@@ -10,4 +10,3 @@ SVar:X:Count$Valid Card.Self+counters_GE2_LEVEL+counters_LE6_LEVEL
 SVar:Y:Count$Valid Card.Self+counters_GE7_LEVEL
 SVar:Picture:http://www.wizards.com/global/images/magic/general/student_of_warfare.jpg
 Oracle:Level up {W} ({W}: Put a level counter on this. Level up only as a sorcery.)\nLEVEL 2-6\n3/3\nFirst strike\nLEVEL 7+\n4/4\nDouble strike
-SetInfo:ROE Rare

@@ -7,4 +7,3 @@ SVar:Return:DB$ChangeZone | Origin$ Battlefield | Destination$ Hand
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/snow_hound.jpg
 Oracle:{1}, {T}: Return Snow Hound and target green or blue creature you control to their owner's hand.
-SetInfo:ICE Uncommon

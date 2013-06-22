@@ -6,4 +6,3 @@ K:Flash
 S:Mode$ Continuous | Affected$ Artifact.YouCtrl | AffectedZone$ Exile,Graveyard,Hand,Library | AddHiddenKeyword$ Flash | Description$ You may cast artifact cards as though they had flash.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shimmer_myr.jpg
 Oracle:Flash\nYou may cast artifact cards as though they had flash.
-SetInfo:MBS Rare

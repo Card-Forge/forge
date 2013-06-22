@@ -6,5 +6,3 @@ A:AB$ Mana | Cost$ T | Produced$ Combo Any | Amount$ 2 | RestrictValid$ Card.Ele
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/smokebraider.jpg
 Oracle:{T}: Add two mana in any combination of colors to your mana pool. Spend this mana only to cast Elemental spells or activate abilities of Elementals.
-SetInfo:HOP Common
-SetInfo:LRW Common

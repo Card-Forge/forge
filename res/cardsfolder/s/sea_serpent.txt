@@ -8,9 +8,3 @@ SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Defined$ Self
 SVar:NeedsToPlay:Island.YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sea_serpent.jpg
 Oracle:Sea Serpent can't attack unless defending player controls an Island.\nWhen you control no Islands, sacrifice Sea Serpent.
-SetInfo:2ED Common
-SetInfo:LEB Common
-SetInfo:LEA Common
-SetInfo:5ED Common
-SetInfo:4ED Common
-SetInfo:3ED Common

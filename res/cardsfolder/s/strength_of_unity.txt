@@ -9,4 +9,3 @@ SVar:BuffedBy:Plains,Island,Swamp,Mountain,Forest
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/strength_of_unity.jpg
 Oracle:Enchant creature\nDomain - Enchanted creature gets +1/+1 for each basic land type among lands you control.
-SetInfo:INV Common

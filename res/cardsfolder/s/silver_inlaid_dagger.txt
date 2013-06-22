@@ -6,4 +6,3 @@ S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 2 | Description$ 
 S:Mode$ Continuous | Affected$ Human.EquippedBy | AddPower$ 1 | Description$ As long as equipped creature is a Human, it gets an additional +1/+0.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/silver_inlaid_dagger.jpg
 Oracle:Equipped creature gets +2/+0.\nAs long as equipped creature is a Human, it gets an additional +1/+0.\nEquip {2}
-SetInfo:ISD Uncommon

@@ -7,4 +7,3 @@ T:Mode$ Attacks | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ TrigBou
 SVar:TrigBounce:AB$ ChangeZone | Cost$ 0 | ValidTgts$ Creature.DefenderCtrl+toughnessLE2 | TgtPrompt$ Choose creature you don't control with toughness 2 or less | Origin$ Battlefield | Destination$ Hand
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skymark_roc.jpg
 Oracle:Flying\nWhenever Skymark Roc attacks, you may return target creature defending player controls with toughness 2 or less to its owner's hand.
-SetInfo:RTR Uncommon

@@ -6,4 +6,3 @@ S:Mode$ Continuous | Affected$ Creature.Sliver | AddKeyword$ Reach | Description
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spinneret_sliver.jpg
 Oracle:All Sliver creatures have reach. (They can block creatures with flying.)
-SetInfo:TSP Common

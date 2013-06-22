@@ -5,4 +5,3 @@ A:SP$ DamageAll | Cost$ 3 R | NumDmg$ X | References$ X | ValidCards$ Creature.w
 SVar:X:Count$Threshold.5.0
 SVar:Picture:http://www.wizards.com/global/images/magic/general/swirling_sandstorm.jpg
 Oracle:Threshold - Swirling Sandstorm deals 5 damage to each creature without flying if seven or more cards are in your graveyard.
-SetInfo:JUD Common

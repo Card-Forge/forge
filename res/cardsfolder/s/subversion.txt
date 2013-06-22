@@ -8,4 +8,3 @@ SVar:AFLifeLost:Number$0
 #AFLifeLost will be set by LoseLife
 SVar:Picture:http://www.wizards.com/global/images/magic/general/subversion.jpg
 Oracle:At the beginning of your upkeep, each opponent loses 1 life. You gain life equal to the life lost this way.
-SetInfo:ULG Rare

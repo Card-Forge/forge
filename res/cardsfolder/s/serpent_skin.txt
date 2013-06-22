@@ -8,4 +8,3 @@ S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 1 | AddToughness
 A:AB$ Regenerate | Cost$ G | Defined$ Enchanted | SpellDescription$ Regenerate enchanted creature.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/serpent_skin.jpg
 Oracle:Flash\nEnchant creature\nEnchanted creature gets +1/+1.\n{G}: Regenerate enchanted creature.
-SetInfo:CHK Common

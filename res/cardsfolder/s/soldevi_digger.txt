@@ -5,4 +5,3 @@ A:AB$ ChangeZone | Cost$ 2 | Origin$ Graveyard | Destination$ Library | LibraryP
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soldevi_digger.jpg
 Oracle:{2}: Put the top card of your graveyard on the bottom of your library.
-SetInfo:ALL Rare

@@ -8,4 +8,3 @@ SVar:TrigDiscard:AB$Discard | Cost$ 0 | Defined$ You | NumCards$ 1 | Mode$ Rando
 SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spellgorger_barbarian.jpg
 Oracle:When Spellgorger Barbarian enters the battlefield, discard a card at random.\nWhen Spellgorger Barbarian leaves the battlefield, draw a card.
-SetInfo:JUD Common

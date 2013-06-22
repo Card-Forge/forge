@@ -8,7 +8,3 @@ K:Defender
 K:CantBlock Creature.powerLE2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sunweb.jpg
 Oracle:Defender (This creature can't attack.)\nFlying\nSunweb can't block creatures with power 2 or less.
-SetInfo:8ED Rare
-SetInfo:7ED Rare
-SetInfo:MIR Rare
-SetInfo:6ED Rare

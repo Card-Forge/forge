@@ -6,4 +6,3 @@ A:AB$ Pump | Cost$ Sac<1/Elemental> | NumAtt$ +2 | KW$ First Strike | SpellDescr
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/seething_pathblazer.jpg
 Oracle:Sacrifice an Elemental: Seething Pathblazer gets +2/+0 and gains first strike until end of turn.
-SetInfo:MOR Common

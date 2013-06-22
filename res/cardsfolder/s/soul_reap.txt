@@ -6,4 +6,3 @@ SVar:DBLoseLife:DB$ LoseLife | Defined$ TargetedController | LifeAmount$ 3 | Con
 SVar:X:Count$ThisTurnCast_Card.Black+Other+YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soul_reap.jpg
 Oracle:Destroy target nongreen creature. Its controller loses 3 life if you've cast another black spell this turn.
-SetInfo:EVE Common

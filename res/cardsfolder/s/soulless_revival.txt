@@ -5,4 +5,3 @@ A:SP$ ChangeZone | Cost$ 1 B | Origin$ Graveyard | Destination$ Hand | TgtPrompt
 K:Splice onto Arcane 1 B
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soulless_revival.jpg
 Oracle:Return target creature card from your graveyard to your hand.\nSplice onto Arcane {1}{B} (As you cast an Arcane spell, you may reveal this card from your hand and pay its splice cost. If you do, add this card's effects to that spell.)
-SetInfo:CHK Common

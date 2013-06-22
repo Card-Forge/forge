@@ -5,4 +5,3 @@ A:SP$ DealDamage | Cost$ R | ValidTgts$ Creature | TgtPrompt$ Select target crea
 SVar:DBColor:DB$Animate | Colors$ Black | OverwriteColors$ True | Defined$ Targeted
 SVar:Picture:http://www.wizards.com/global/images/magic/general/singe.jpg
 Oracle:Singe deals 1 damage to target creature. That creature becomes black until end of turn.
-SetInfo:PLS Common

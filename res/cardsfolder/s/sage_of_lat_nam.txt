@@ -6,5 +6,3 @@ A:AB$ Draw | Cost$ T Sac<1/Artifact> | NumCards$ 1 | SpellDescription$ Draw a ca
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sage_of_lat_nam.jpg
 Oracle:{T}, Sacrifice an artifact: Draw a card.
-SetInfo:ATQ Common
-SetInfo:8ED Rare

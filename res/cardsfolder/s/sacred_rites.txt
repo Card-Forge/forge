@@ -8,4 +8,3 @@ SVar:X:Remembered$Amount
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sacred_rites.jpg
 Oracle:Discard any number of cards. Creatures you control get +0/+1 until end of turn for each card discarded this way.
-SetInfo:ODY Common

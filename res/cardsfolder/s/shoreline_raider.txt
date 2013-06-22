@@ -5,4 +5,3 @@ PT:2/2
 K:Protection:Kavu:Protection from Kavu
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shoreline_raider.jpg
 Oracle:Protection from Kavu
-SetInfo:INV Common

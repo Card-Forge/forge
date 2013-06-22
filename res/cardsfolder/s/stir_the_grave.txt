@@ -6,4 +6,3 @@ SVar:X:Targeted$CardManaCost
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stir_the_grave.jpg
 Oracle:Return target creature card with converted mana cost X or less from your graveyard to the battlefield.
-SetInfo:BOK Common

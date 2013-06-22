@@ -6,4 +6,3 @@ A:AB$ Discard | Cost$ Sac<1/CARDNAME> | ValidTgts$ Player | TgtPrompt$ Select ta
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/seers_vision.jpg
 Oracle:Your opponents play with their hands revealed.\nSacrifice Seer's Vision: Look at target player's hand and choose a card from it. That player discards that card. Activate this ability only any time you could cast a sorcery.
-SetInfo:INV Uncommon

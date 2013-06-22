@@ -9,4 +9,3 @@ SVar:Multikicked:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum
 SVar:XKicked:Count$TimesKicked
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skitter_of_lizards.jpg
 Oracle:Multikicker {1}{R} (You may pay an additional {1}{R} any number of times as you cast this spell.)\nHaste\nSkitter of Lizards enters the battlefield with a +1/+1 counter on it for each time it was kicked.
-SetInfo:WWK Common

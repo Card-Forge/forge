@@ -6,4 +6,3 @@ SVar:DBDraw:DB$Draw | NumCards$ X | References$ X
 SVar:X:Count$xPaid
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sphinxs_revelation.jpg
 Oracle:You gain X life and draw X cards.
-SetInfo:RTR Mythic

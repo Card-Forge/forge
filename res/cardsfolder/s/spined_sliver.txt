@@ -8,6 +8,3 @@ SVar:X:TriggerCount$NumBlockers
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spined_sliver.jpg
 Oracle:Whenever a Sliver becomes blocked, that Sliver gets +1/+1 until end of turn for each creature blocking it.
-SetInfo:H09 Uncommon
-SetInfo:TSB Special
-SetInfo:STH Uncommon

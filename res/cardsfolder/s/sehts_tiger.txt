@@ -8,4 +8,3 @@ SVar:TrigChoose:AB$ ChooseColor | Cost$ 0 | Defined$ You | AILogic$ MostProminen
 SVar:SehtsProtection:DB$ ProtectionAll | ValidPlayers$ You | Gains$ ChosenColor
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sehts_tiger.jpg
 Oracle:Flash (You may cast this spell any time you could cast an instant.)\nWhen Seht's Tiger enters the battlefield, you gain protection from the color of your choice until end of turn. (You can't be targeted, dealt damage, or enchanted by anything of the chosen color.)
-SetInfo:FUT Rare

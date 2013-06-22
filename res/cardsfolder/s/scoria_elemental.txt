@@ -4,4 +4,3 @@ Types:Creature Elemental
 PT:6/1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scoria_elemental.jpg
 Oracle:
-SetInfo:SOM Common

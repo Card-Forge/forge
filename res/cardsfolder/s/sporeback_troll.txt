@@ -7,4 +7,3 @@ A:AB$ Regenerate | Cost$ 1 G | ValidTgts$ Creature.counters_GE1_P1P1 | TgtPrompt
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sporeback_troll.jpg
 Oracle:Graft 2 (This creature enters the battlefield with two +1/+1 counters on it. Whenever another creature enters the battlefield, you may move a +1/+1 counter from this creature onto it.)\n{1}{G}: Regenerate target creature with a +1/+1 counter on it.
-SetInfo:DIS Common

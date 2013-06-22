@@ -7,4 +7,3 @@ S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddToughness
 K:Ripple:4
 SVar:Picture:http://www.wizards.com/global/images/magic/general/surging_might.jpg
 Oracle:Enchant creature\nEnchanted creature gets +2/+2.\nRipple 4 (When you cast this spell, you may reveal the top four cards of your library. You may cast any revealed cards with the same name as this spell without paying their mana costs. Put the rest on the bottom of your library.)
-SetInfo:CSP Common

@@ -5,4 +5,3 @@ A:SP$ FlipACoin | Cost$ 1 U R | WinSubAbility$ DBAddTurn | SpellDescription$ Fli
 SVar:DBAddTurn:DB$AddTurn | Defined$ You | NumTurns$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stitch_in_time.jpg
 Oracle:Flip a coin. If you win the flip, take an extra turn after this one.
-SetInfo:GPT Rare

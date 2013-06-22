@@ -5,4 +5,3 @@ A:SP$ DealDamage | Cost$ 4 B B B | ValidTgts$ Player | TgtPrompt$ Select target 
 SVar:DBGainLife:DB$GainLife | Defined$ You | LifeAmount$ 10
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sorins_vengeance.jpg
 Oracle:Sorin's Vengeance deals 10 damage to target player and you gain 10 life.
-SetInfo:M12 Rare

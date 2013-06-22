@@ -6,4 +6,3 @@ SVar:TrigLoseLife:AB$ LoseLife | Cost$ 0 | Defined$ TriggeredPlayer | LifeAmount
 SVar:CardsInHand:Count$ValidHand Card.ActivePlayerCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shrieking_affliction.jpg
 Oracle:At the beginning of each opponent's upkeep, if that player has one or fewer cards in hand, he or she loses 3 life.
-SetInfo:RTR Uncommon

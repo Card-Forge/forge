@@ -5,4 +5,3 @@ A:SP$ DestroyAll | Cost$ W | ValidCards$ Card.AttachedTo Targeted | ValidTgts$ C
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/strip_bare.jpg
 Oracle:Destroy all Auras and Equipment attached to target creature.
-SetInfo:SHM Common

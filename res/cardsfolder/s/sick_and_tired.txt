@@ -4,4 +4,3 @@ Types:Instant
 A:SP$ Pump | Cost$ 2 B | TargetMin$ 2 | TargetMax$ 2 | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -1 | NumDef$ -1 | SpellDescription$ Two target creatures each get -1/-1 until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sick_and_tired.jpg
 Oracle:Two target creatures each get -1/-1 until end of turn.
-SetInfo:ULG Common

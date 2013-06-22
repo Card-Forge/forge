@@ -8,4 +8,3 @@ SVar:RemRandomDeck:True
 DeckNeeds:Color$Green
 SVar:Picture:http://www.wizards.com/global/images/magic/general/seed_spark.jpg
 Oracle:Destroy target artifact or enchantment. If {G} was spent to cast Seed Spark, put two 1/1 green Saproling creature tokens onto the battlefield.
-SetInfo:RAV Uncommon

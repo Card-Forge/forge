@@ -8,4 +8,3 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sirocco.jpg
 Oracle:Target player reveals his or her hand. For each blue instant card revealed this way, that player discards that card unless he or she pays 4 life.
-SetInfo:MIR Uncommon

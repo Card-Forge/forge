@@ -7,4 +7,3 @@ SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/seedtime.jpg
 Oracle:Cast Seedtime only during your turn.\nTake an extra turn after this one if an opponent cast a blue spell this turn.
-SetInfo:JUD Rare

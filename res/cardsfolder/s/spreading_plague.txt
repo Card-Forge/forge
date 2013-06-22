@@ -6,4 +6,3 @@ SVar:TrigDestroy:AB$ DestroyAll | Cost$ 0 | ValidCards$ Triggered.SharesColorWit
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spreading_plague.jpg
 Oracle:Whenever a creature enters the battlefield, destroy all other creatures that share a color with it. They can't be regenerated.
-SetInfo:INV Rare

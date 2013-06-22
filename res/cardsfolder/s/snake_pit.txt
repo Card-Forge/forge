@@ -5,4 +5,3 @@ T:Mode$ SpellCast | ValidCard$ Card.Blue,Card.Black | ValidActivatingPlayer$ Opp
 SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Snake | TokenTypes$ Creature,Snake | TokenOwner$ You | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/snake_pit.jpg
 Oracle:Whenever an opponent casts a blue or black spell, you may put a 1/1 green Snake creature token onto the battlefield.
-SetInfo:MMQ Uncommon

@@ -11,5 +11,3 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.I
 SVar:TrigSac:AB$ Sacrifice | Cost$ 0 | Defined$ Self  | SubAbility$ DBCleanup
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stangg.jpg
 Oracle:When Stangg enters the battlefield, put a legendary 3/4 red and green Human Warrior creature token named Stangg Twin onto the battlefield. When Stangg leaves the battlefield, exile that token. When that token leaves the battlefield, sacrifice Stangg.
-SetInfo:CHR Rare
-SetInfo:LEG Rare

@@ -8,4 +8,3 @@ A:AB$ DealDamage | Cost$ 3 T Sac<1/CARDNAME> | ValidTgts$ Creature,Player | TgtP
 SVar:X:Count$CardCounters.CHARGE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shrine_of_burning_rage.jpg
 Oracle:At the beginning of your upkeep or whenever you cast a red spell, put a charge counter on Shrine of Burning Rage.\n{3}, {T}, Sacrifice Shrine of Burning Rage: Shrine of Burning Rage deals damage equal to the number of charge counters on it to target creature or player.
-SetInfo:NPH Uncommon

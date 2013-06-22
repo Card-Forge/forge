@@ -11,4 +11,3 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/slithery_stalker.jpg
 Oracle:Swampwalk\nWhen Slithery Stalker enters the battlefield, exile target green or white creature an opponent controls.\nWhen Slithery Stalker leaves the battlefield, return the exiled card to the battlefield under its owner's control.
-SetInfo:TOR Uncommon

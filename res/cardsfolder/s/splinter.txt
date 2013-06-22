@@ -6,5 +6,3 @@ SVar:DBChangeZoneAll:DB$ ChangeZoneAll | ChangeType$ Remembered.sameName | Origi
 SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/splinter.jpg
 Oracle:Exile target artifact. Search its controller's graveyard, hand, and library for all cards with the same name as that artifact and exile them. Then that player shuffles his or her library.
-SetInfo:BOK Uncommon
-SetInfo:UDS Uncommon

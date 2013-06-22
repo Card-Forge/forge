@@ -9,4 +9,3 @@ SVar:BuffedBy:Zombie
 SVar:SacMe:5
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sarcomancy.jpg
 Oracle:When Sarcomancy enters the battlefield, put a 2/2 black Zombie creature token onto the battlefield.\nAt the beginning of your upkeep, if there are no Zombies on the battlefield, Sarcomancy deals 1 damage to you.
-SetInfo:TMP Rare

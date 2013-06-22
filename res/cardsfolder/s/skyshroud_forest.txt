@@ -8,4 +8,3 @@ K:CARDNAME enters the battlefield tapped.
 SVar:DBPain:DB$DealDamage | NumDmg$ 1 | Defined$ You
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skyshroud_forest.jpg
 Oracle:Skyshroud Forest enters the battlefield tapped.\n{T}: Add {1} to your mana pool.\n{T}: Add {G} or {U} to your mana pool. Skyshroud Forest deals 1 damage to you.
-SetInfo:TMP Rare

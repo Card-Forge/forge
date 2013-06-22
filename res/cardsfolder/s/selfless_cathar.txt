@@ -6,4 +6,3 @@ A:AB$ PumpAll | Cost$ 1 W Sac<1/CARDNAME> | ValidCards$ Creature.YouCtrl | NumAt
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/selfless_cathar.jpg
 Oracle:{1}{W}, Sacrifice Selfless Cathar: Creatures you control get +1/+1 until end of turn.
-SetInfo:ISD Common

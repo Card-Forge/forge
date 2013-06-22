@@ -9,4 +9,3 @@ SVar:TrigCleanup:Mode$ ChangesZone | ValidCard$ Card.IsRemembered | Origin$ Exil
 SVar:DBCleanup:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spelljack.jpg
 Oracle:Counter target spell. If that spell is countered this way, exile it instead of putting it into its owner's graveyard. You may play it without paying its mana cost for as long as it remains exiled. (If it has X in its mana cost, X is 0.)
-SetInfo:JUD Rare

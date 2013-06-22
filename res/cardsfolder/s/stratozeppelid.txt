@@ -6,4 +6,3 @@ K:Flying
 K:CARDNAME can block only creatures with flying.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stratozeppelid.jpg
 Oracle:Flying\nStratozeppelid can block only creatures with flying.
-SetInfo:GPT Uncommon

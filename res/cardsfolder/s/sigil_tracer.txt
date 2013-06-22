@@ -6,4 +6,3 @@ A:AB$CopySpellAbility | Cost$ 1 U tapXType<2/Wizard> | ValidTgts$ Instant,Sorcer
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sigil_tracer.jpg
 Oracle:{1}{U}, Tap two untapped Wizards you control: Copy target instant or sorcery spell. You may choose new targets for the copy.
-SetInfo:MOR Rare

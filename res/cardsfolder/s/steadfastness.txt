@@ -5,5 +5,3 @@ A:SP$ PumpAll | Cost$ 1 W | ValidCards$ Creature.YouCtrl | NumDef$ +3 | SpellDes
 SVar:RemAIDeck:True
 SVar:Picture:http://serv3.tcgimages.eu/img/cards/Portal/steadfastness.jpg
 Oracle:Creatures you control get +0/+3 until end of turn.
-SetInfo:S99 Common
-SetInfo:POR Common

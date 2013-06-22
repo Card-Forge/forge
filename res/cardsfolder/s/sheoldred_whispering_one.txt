@@ -9,4 +9,3 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Opponent | TriggerZones$ Battlefiel
 SVar:TrigSac:AB$ Sacrifice | Cost$ 0 | SacValid$ Creature | Defined$ TriggeredPlayer
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sheoldred_whispering_one.jpg
 Oracle:Swampwalk\nAt the beginning of your upkeep, return target creature card from your graveyard to the battlefield.\nAt the beginning of each opponent's upkeep, that player sacrifices a creature.
-SetInfo:NPH Mythic

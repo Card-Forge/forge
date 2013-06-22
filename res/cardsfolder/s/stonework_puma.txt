@@ -4,4 +4,3 @@ Types:Artifact Creature Cat Ally
 PT:2/2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stonework_puma.jpg
 Oracle:
-SetInfo:ZEN Common

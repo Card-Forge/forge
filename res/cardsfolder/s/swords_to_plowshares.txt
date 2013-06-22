@@ -6,10 +6,3 @@ SVar:DBGainLife:DB$ GainLife | Defined$ TargetedController | LifeAmount$ X | Ref
 SVar:X:Targeted$CardPower
 SVar:Picture:http://resources.wizards.com/magic/cards/br/en-us/card21172.jpg
 Oracle:Exile target creature. Its controller gains life equal to its power.
-SetInfo:2ED Uncommon
-SetInfo:LEB Uncommon
-SetInfo:LEA Uncommon
-SetInfo:ICE Uncommon
-SetInfo:4ED Uncommon
-SetInfo:DDF Uncommon
-SetInfo:3ED Uncommon

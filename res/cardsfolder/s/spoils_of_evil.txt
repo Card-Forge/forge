@@ -7,4 +7,3 @@ SVar:X:Count$ValidGraveyard Creature.OppOwn,Artifact.OppOwn
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spoils_of_evil.jpg
 Oracle:For each artifact or creature card in target opponent's graveyard, add {1} to your mana pool and you gain 1 life.
-SetInfo:ICE Rare

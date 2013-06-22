@@ -8,4 +8,3 @@ SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://wizards.com/global/images/magic/general/saprazzan_skerry.jpg
 Oracle:Saprazzan Skerry enters the battlefield tapped with two depletion counters on it.\n{T}, Remove a depletion counter from Saprazzan Skerry: Add {U}{U} to your mana pool. If there are no depletion counters on Saprazzan Skerry, sacrifice it.
-SetInfo:MMQ Common

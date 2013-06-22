@@ -4,4 +4,3 @@ Types:Instant
 A:SP$ Counter | Cost$ U | TargetType$ Spell | TgtPrompt$ Select target spell with CMC 2 | ValidTgts$ Card.cmcEQ2 | SpellDescription$ Counter target spell with converted mana cost 2.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spell_snare.jpg
 Oracle:Counter target spell with converted mana cost 2.
-SetInfo:DIS Uncommon

@@ -5,4 +5,3 @@ PT:2/1
 A:AB$ GainLife | Cost$ W ExileFromGrave<1/Creature> | LifeAmount$ 1 | SpellDescription$ You gain 1 life.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soul_shepherd.jpg
 Oracle:{W}, Exile a creature card from your graveyard: You gain 1 life.
-SetInfo:WTH Common

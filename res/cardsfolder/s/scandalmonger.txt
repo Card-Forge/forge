@@ -6,4 +6,3 @@ A:AB$ Discard | Cost$ 2 | ValidTgts$ Player | NumCards$ 1 | Mode$ TgtChoose | So
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scandalmonger.jpg
 Oracle:{2}: Target player discards a card. Any player may activate this ability but only any time he or she could cast a sorcery.
-SetInfo:MMQ Uncommon

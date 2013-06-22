@@ -7,4 +7,3 @@ SVar:TrigAnimate:AB$Animate | Cost$ 0 | Defined$ Self | Power$ 5 | Toughness$ 3 
 SVar:BuffedBy:Card.Blue+Green
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shorecrasher_mimic.jpg
 Oracle:Whenever you cast a spell that's both green and blue, Shorecrasher Mimic becomes 5/3 and gains trample until end of turn.
-SetInfo:EVE Common

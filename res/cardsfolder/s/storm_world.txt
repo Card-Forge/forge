@@ -10,4 +10,3 @@ SVar:Y:Count$InOppHand/NMinus.4
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/storm_world.jpg
 Oracle:At the beginning of each player's upkeep, Storm World deals X damage to that player, where X is 4 minus the number of cards in his or her hand.
-SetInfo:LEG Rare

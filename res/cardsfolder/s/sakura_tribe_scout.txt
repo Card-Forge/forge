@@ -5,4 +5,3 @@ PT:1/1
 A:AB$ ChangeZone | Cost$ T | Origin$ Hand | Destination$ Battlefield | ChangeType$ Land | ChangeNum$ 1 | SpellDescription$ You may put a land card from your hand onto the battlefield.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sakura_tribe_scout.jpg
 Oracle:{T}: You may put a land card from your hand onto the battlefield.
-SetInfo:SOK Common

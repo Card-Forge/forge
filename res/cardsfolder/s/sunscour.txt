@@ -6,4 +6,3 @@ A:SP$ DestroyAll | Cost$ ExileFromHand<2/Card.White> | ValidCards$ Creature | Co
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sunscour.jpg
 Oracle:You may exile two white cards from your hand rather than pay Sunscour's mana cost.\nDestroy all creatures.
-SetInfo:CSP Rare

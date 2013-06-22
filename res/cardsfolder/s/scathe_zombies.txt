@@ -4,16 +4,3 @@ Types:Creature Zombie
 PT:2/2
 SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83247.jpg
 Oracle:
-SetInfo:8ED Common
-SetInfo:2ED Common
-SetInfo:7ED Common
-SetInfo:6ED Common
-SetInfo:S00 Common
-SetInfo:S99 Common
-SetInfo:9ED Common
-SetInfo:10E Common
-SetInfo:LEB Common
-SetInfo:LEA Common
-SetInfo:5ED Common
-SetInfo:4ED Common
-SetInfo:3ED Common

@@ -6,4 +6,3 @@ SVar:DBDraw:DB$Draw | NumCards$ 1
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shelter.jpg
 Oracle:Target creature you control gains protection from the color of your choice until end of turn.\nDraw a card.
-SetInfo:ODY Common

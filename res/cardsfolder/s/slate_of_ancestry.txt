@@ -6,6 +6,3 @@ SVar:X:Count$TypeYouCtrl.Creature
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/slate_of_ancestry.jpg
 Oracle:{4}, {T}, Discard your hand: Draw a card for each creature you control.
-SetInfo:ONS Rare
-SetInfo:9ED Rare
-SetInfo:EVG Rare

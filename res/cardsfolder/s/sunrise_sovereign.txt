@@ -7,4 +7,3 @@ SVar:PlayMain1:TRUE
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sunrise_sovereign.jpg
 Oracle:Other Giant creatures you control get +2/+2 and have trample.
-SetInfo:LRW Rare

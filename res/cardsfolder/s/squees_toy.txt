@@ -4,4 +4,3 @@ Types:Artifact
 A:AB$ PreventDamage | Cost$ T | ValidTgts$ Creature | Amount$ 1 | TgtPrompt$ Select target creature | SpellDescription$ Prevent the next 1 damage that would be dealt to target creature this turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/squees_toy.jpg
 Oracle:{T}: Prevent the next 1 damage that would be dealt to target creature this turn.
-SetInfo:TMP Common

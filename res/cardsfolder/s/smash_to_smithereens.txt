@@ -5,4 +5,3 @@ A:SP$ Destroy | Cost$ 1 R | ValidTgts$ Artifact | TgtPrompt$ Select target artif
 SVar:DBDealDamage:DB$DealDamage | Defined$ TargetedController | NumDmg$ 3
 SVar:Picture:http://www.wizards.com/global/images/magic/general/smash_to_smithereens.jpg
 Oracle:Destroy target artifact. Smash to Smithereens deals 3 damage to that artifact's controller.
-SetInfo:SHM Common

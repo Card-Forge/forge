@@ -7,4 +7,3 @@ SVar:TrigUntap:AB$Untap | Cost$ 0 | Defined$ Self
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/salvaging_station.jpg
 Oracle:{T}: Return target noncreature artifact card with converted mana cost 1 or less from your graveyard to the battlefield.\nWhenever a creature dies, you may untap Salvaging Station.
-SetInfo:5DN Rare

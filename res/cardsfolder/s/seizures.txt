@@ -7,4 +7,3 @@ T:Mode$ Taps | ValidCard$ Card.AttachedBy | TriggerZones$ Battlefield | Execute$
 SVar:TrigDamage:AB$ DealDamage | Cost$ 0 | Defined$ TriggeredCardController | NumDmg$ 3 | UnlessCost$ 3 | UnlessPayer$ TriggeredCardController
 SVar:Picture:http://www.wizards.com/global/images/magic/general/seizures.jpg
 Oracle:Enchant creature\nWhenever enchanted creature becomes tapped, Seizures deals 3 damage to that creature's controller unless that player pays {3}.
-SetInfo:ICE Common

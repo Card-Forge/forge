@@ -5,7 +5,3 @@ A:SP$ Dig | Cost$ U | DigNum$ 2 | SpellDescription$ Look at the top two cards of
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sleight_of_hand.jpg
 Oracle:Look at the top two cards of your library. Put one of them into your hand and the other on the bottom of your library.
-SetInfo:PO2 Common
-SetInfo:S99 Common
-SetInfo:7ED Common
-SetInfo:9ED Common

@@ -6,6 +6,3 @@ A:AB$ Mana | Cost$ Sac<1/Goblin> | Produced$ R | SpellDescription$ Add R to your
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skirk_prospector.jpg
 Oracle:Sacrifice a Goblin: Add {R} to your mana pool.
-SetInfo:ONS Common
-SetInfo:DDG Common
-SetInfo:EVG Common

@@ -7,4 +7,3 @@ SVar:RemRandomDeck:True
 DeckHints:Name$Throne of Empires|Crown of Empires
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scepter_of_empires.jpg
 Oracle:{T}: Scepter of Empires deals 1 damage to target player. It deals 3 damage to that player instead if you control artifacts named Crown of Empires and Throne of Empires.
-SetInfo:M12 Uncommon

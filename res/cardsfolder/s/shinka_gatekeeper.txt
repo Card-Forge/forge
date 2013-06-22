@@ -7,4 +7,3 @@ SVar:TrigDamage:AB$DealDamage | Cost$ 0 | NumDmg$ X | Defined$ You | References$
 SVar:X:TriggerCount$DamageAmount
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shinka_gatekeeper.jpg
 Oracle:Whenever Shinka Gatekeeper is dealt damage, it deals that much damage to you.
-SetInfo:BOK Common

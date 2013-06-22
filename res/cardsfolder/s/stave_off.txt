@@ -6,4 +6,3 @@ A:SP$ Protection | Cost$ W | ValidTgts$ Creature | TgtPrompt$ Select target crea
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stave_off.jpg
 Oracle:Target creature gains protection from the color of your choice until end of turn. (It can't be blocked, targeted, dealt damage, or enchanted by anything of that color.)
-SetInfo:M12 Common

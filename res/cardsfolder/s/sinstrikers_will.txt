@@ -8,4 +8,3 @@ SVar:TapDmg:AB$DealDamage | Cost$ T | ValidTgts$ Creature.attacking,Creature.blo
 SVar:SinstrikerCount:Count$CardPower
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sinstrikers_will.jpg
 Oracle:Enchant creature\nEnchanted creature has "{T}: This creature deals damage equal to its power to target attacking or blocking creature."
-SetInfo:GPT Uncommon

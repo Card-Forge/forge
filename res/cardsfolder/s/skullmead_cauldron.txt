@@ -6,4 +6,3 @@ A:AB$ GainLife | Cost$ T Discard<1/Card>| LifeAmount$ 3 | SpellDescription$ You 
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skullmead_cauldron.jpg
 Oracle:{T}: You gain 1 life.\n{T}, Discard a card: You gain 3 life.
-SetInfo:DIS Uncommon

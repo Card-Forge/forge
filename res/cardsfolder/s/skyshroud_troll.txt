@@ -5,4 +5,3 @@ PT:3/3
 A:AB$ Regenerate | Cost$ 1 G | SpellDescription$ Regenerate CARDNAME.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skyshroud_troll.jpg
 Oracle:{1}{G}: Regenerate Skyshroud Troll.
-SetInfo:TMP Common

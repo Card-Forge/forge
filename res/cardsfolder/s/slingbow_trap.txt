@@ -6,4 +6,3 @@ A:SP$ Destroy | Cost$ 3 G | ValidTgts$ Creature.attacking+withFlying | TgtPrompt
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/Slingbow_Trap.jpg
 Oracle:If a black creature with flying is attacking, you may pay {G} rather than pay Slingbow Trap's mana cost.\nDestroy target attacking creature with flying.
-SetInfo:WWK Uncommon

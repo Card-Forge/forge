@@ -6,4 +6,3 @@ A:AB$ LoseLife | Cost$ B R | Defined$ Each | LifeAmount$ 1 | SpellDescription$ E
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spiteflame_witch.jpg
 Oracle:{B}{R}: Each player loses 1 life.
-SetInfo:SHM Uncommon

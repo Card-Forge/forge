@@ -6,4 +6,3 @@ K:Haste
 A:AB$ Pump | Cost$ R Discard<1/CARDNAME> | ValidTgts$ Creature | TgtPrompt$ Select target creature | PrecostDesc$ Channel - | KW$ Haste | ActivationZone$ Hand | SpellDescription$ Target creature gains haste until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shinen_of_furys_fire.jpg
 Oracle:Haste\nChannel - {R}, Discard Shinen of Fury's Fire: Target creature gains haste until end of turn.
-SetInfo:SOK Common

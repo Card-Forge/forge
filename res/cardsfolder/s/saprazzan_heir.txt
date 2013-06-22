@@ -6,4 +6,3 @@ T:Mode$ AttackerBlocked | ValidCard$ Card.Self | OptionalDecider$ You | Execute$
 SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 3
 SVar:Picture:http://www.wizards.com/global/images/magic/general/saprazzan_heir.jpg
 Oracle:Whenever Saprazzan Heir becomes blocked, you may draw three cards.
-SetInfo:MMQ Rare

@@ -7,7 +7,3 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ 3 | TokenName$ Goblin | TokenTypes$ Creature,Goblin | TokenOwner$ You | TokenColors$ Red | TokenPower$ 1 | TokenToughness$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/siege_gang_commander.jpg
 Oracle:When Siege-Gang Commander enters the battlefield, put three 1/1 red Goblin creature tokens onto the battlefield.\n{1}{R}, Sacrifice a Goblin: Siege-Gang Commander deals 2 damage to target creature or player.
-SetInfo:M10 Rare
-SetInfo:SCG Rare
-SetInfo:EVG Rare
-SetInfo:10E Rare

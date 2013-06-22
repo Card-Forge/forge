@@ -9,4 +9,3 @@ SVar:TrigGainLife:AB$ GainLife | Cost$ 0 | LifeAmount$ 2
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/savra_queen_of_the_golgari.jpg
 Oracle:Whenever you sacrifice a black creature, you may pay 2 life. If you do, each other player sacrifices a creature.\nWhenever you sacrifice a green creature, you may gain 2 life.
-SetInfo:RAV Rare

@@ -8,4 +8,3 @@ SVar:X:Count$Valid Mountain.OppCtrl
 SVar:Y:Count$Valid Island.YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/saprazzan_legate.jpg
 Oracle:Flying\nIf an opponent controls a Mountain and you control an Island, you may cast Saprazzan Legate without paying its mana cost.
-SetInfo:MMQ Uncommon

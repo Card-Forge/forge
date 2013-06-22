@@ -5,5 +5,3 @@ PT:1/1
 A:AB$ PutCounterAll | Cost$ T | ValidCards$ Artifact.Creature+YouCtrl | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on each artifact creature you control.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/steel_overseer.jpg
 Oracle:{T}: Put a +1/+1 counter on each artifact creature you control.
-SetInfo:M11 Rare
-SetInfo:DDF Rare

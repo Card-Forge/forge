@@ -5,4 +5,3 @@ PT:2/2
 K:Forestwalk
 SVar:Picture:http://www.wizards.com/global/images/magic/general/somberwald_dryad.jpg
 Oracle:Forestwalk (This creature is unblockable as long as defending player controls a Forest.)
-SetInfo:DKA Common

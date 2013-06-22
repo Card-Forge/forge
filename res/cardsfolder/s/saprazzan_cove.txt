@@ -9,4 +9,3 @@ SVar:X:XChoice
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/saprazzan_cove.jpg
 Oracle:Saprazzan Cove enters the battlefield tapped.\n{T}: Put a storage counter on Saprazzan Cove.\n{T}, Remove any number of storage counters from Saprazzan Cove: Add {U} to your mana pool for each storage counter removed this way.
-SetInfo:MMQ Uncommon

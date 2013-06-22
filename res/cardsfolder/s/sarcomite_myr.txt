@@ -7,5 +7,3 @@ A:AB$ Draw | Cost$ 2 Sac<1/CARDNAME> | NumCards$ 1 | SpellDescription$ Draw a ca
 SVar:RemAIDeck:True
 SVar:Picture:http://resources.wizards.com/magic/cards/fut/en-us/card136212.jpg
 Oracle:{2}: Sarcomite Myr gains flying until end of turn.\n{2}, Sacrifice Sarcomite Myr: Draw a card.
-SetInfo:FUT Common
-SetInfo:HOP Common

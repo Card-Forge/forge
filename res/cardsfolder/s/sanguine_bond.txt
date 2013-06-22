@@ -7,4 +7,3 @@ SVar:X:TriggerCount$LifeAmount
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sanguine_bond.jpg
 Oracle:Whenever you gain life, target opponent loses that much life.
-SetInfo:M10 Rare

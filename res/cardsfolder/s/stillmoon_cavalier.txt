@@ -9,4 +9,3 @@ A:AB$ Pump | Cost$ WB | KW$ First Strike | SpellDescription$ CARDNAME gains firs
 A:AB$ Pump | Cost$ WB WB | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stillmoon_cavalier.jpg
 Oracle:Protection from white and from black\n{W/B}: Stillmoon Cavalier gains flying until end of turn.\n{W/B}: Stillmoon Cavalier gains first strike until end of turn.\n{W/B}{W/B}: Stillmoon Cavalier gets +1/+0 until end of turn.
-SetInfo:EVE Rare

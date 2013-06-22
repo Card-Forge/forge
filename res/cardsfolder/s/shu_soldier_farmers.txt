@@ -6,4 +6,3 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigGainLife:AB$GainLife | Cost$ 0 | LifeAmount$ 4
 SVar:Picture:http://serv2.tcgimages.eu/img/cards/Portal_Three_Kingdoms/shu_soldier_farmers.jpg
 Oracle:When Shu Soldier-Farmers enters the battlefield, you gain 4 life.
-SetInfo:PTK Uncommon

@@ -6,4 +6,3 @@ SVar:TrigDamage:AB$DealDamage | Cost$ 0 | Defined$ TriggeredActivator | NumDmg$ 
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spellshock.jpg
 Oracle:Whenever a player casts a spell, Spellshock deals 2 damage to that player.
-SetInfo:EXO Uncommon

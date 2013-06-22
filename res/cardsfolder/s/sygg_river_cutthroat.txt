@@ -7,4 +7,3 @@ SVar:TrigDraw:AB$ Draw | Cost$ 0 | Defined$ You | NumCards$ 1
 SVar:X:PlayerCountOpponents$HighestLifeLostThisTurn
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sygg_river_cutthroat.jpg
 Oracle:At the beginning of each end step, if an opponent lost 3 or more life this turn, you may draw a card. (Damage causes loss of life.)
-SetInfo:SHM Rare

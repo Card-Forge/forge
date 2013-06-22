@@ -6,4 +6,3 @@ A:SP$ Attach | Cost$ 3 B | ValidTgts$ Creature | AITgts$ Card.powerGE1 | AILogic
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Poisonous 3 | Description$ Enchanted creature has poisonous 3. (Whenever it deals combat damage to a player, that player gets three poison counters. A player with ten or more poison counters loses the game.)
 SVar:Picture:http://www.wizards.com/global/images/magic/general/snake_cult_initiation.jpg
 Oracle:Enchant creature\nEnchanted creature has poisonous 3. (Whenever it deals combat damage to a player, that player gets three poison counters. A player with ten or more poison counters loses the game.)
-SetInfo:FUT Uncommon

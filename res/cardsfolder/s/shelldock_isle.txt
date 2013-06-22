@@ -11,4 +11,3 @@ SVar:X:Count$LowestLibrary
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shelldock_isle.jpg
 Oracle:Hideaway (This land enters the battlefield tapped. When it does, look at the top four cards of your library, exile one face down, then put the rest on the bottom of your library.)\n{T}: Add {U} to your mana pool.\n{U}, {T}: You may play the exiled card without paying its mana cost if a library has twenty or fewer cards in it.
-SetInfo:LRW Rare

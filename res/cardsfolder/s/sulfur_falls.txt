@@ -6,4 +6,3 @@ A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add U to your mana pool.
 A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add R to your mana pool.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sulfur_falls.jpg
 Oracle:Sulfur Falls enters the battlefield tapped unless you control an Island or a Mountain.\n{T}: Add {U} or {R} to your mana pool.
-SetInfo:ISD Rare

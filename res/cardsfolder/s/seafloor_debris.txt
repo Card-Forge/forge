@@ -7,4 +7,3 @@ K:CARDNAME enters the battlefield tapped.
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/seafloor_debris.jpg
 Oracle:Seafloor Debris enters the battlefield tapped.\n{T}: Add {U} to your mana pool.\n{T}, Sacrifice Seafloor Debris: Add one mana of any color to your mana pool.
-SetInfo:ODY Common

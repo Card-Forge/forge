@@ -6,6 +6,3 @@ SVar:TrigGainLife:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ 1
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sanctimony.jpg
 Oracle:Whenever an opponent taps a Mountain for mana, you may gain 1 life.
-SetInfo:8ED Uncommon
-SetInfo:7ED Uncommon
-SetInfo:UDS Uncommon

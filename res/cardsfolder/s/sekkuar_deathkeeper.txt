@@ -6,4 +6,3 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Graveborn | TokenTypes$ Creature,Graveborn | TokenOwner$ You | TokenColors$ Black,Red | TokenPower$ 3 | TokenToughness$ 1 | TokenKeywords$ Haste
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sekkuar_deathkeeper.jpg
 Oracle:Whenever another nontoken creature you control dies, put a 3/1 black and red Graveborn creature token with haste onto the battlefield.
-SetInfo:CSP Rare

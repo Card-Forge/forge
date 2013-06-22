@@ -7,11 +7,3 @@ SVar:X:Count$CardPower
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stone_giant.jpg
 Oracle:{T}: Target creature you control with toughness less than Stone Giant's power gains flying until end of turn. Destroy that creature at the beginning of the next end step.
-SetInfo:2ED Uncommon
-SetInfo:LEB Uncommon
-SetInfo:DDI Uncommon
-SetInfo:LEA Uncommon
-SetInfo:5ED Uncommon
-SetInfo:4ED Uncommon
-SetInfo:3ED Uncommon
-SetInfo:M10 Uncommon

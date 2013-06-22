@@ -6,4 +6,3 @@ SVar:RemRandomDeck:True
 DeckNeeds:Type$Equipment
 SVar:Picture:http://www.wizards.com/global/images/magic/general/steelshapers_gift.jpg
 Oracle:Search your library for an Equipment card, reveal that card, and put it into your hand. Then shuffle your library.
-SetInfo:5DN Uncommon

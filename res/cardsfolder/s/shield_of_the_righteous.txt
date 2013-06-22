@@ -7,4 +7,3 @@ T:Mode$ AttackerBlocked | ValidBlocker$ Card.EquippedBy | Execute$ TrigPump | Tr
 SVar:TrigPump:AB$ Pump | Cost$ 0 | Defined$ TriggeredAttacker | KW$ HIDDEN This card doesn't untap during your next untap step. | Permanent$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shield_of_the_righteous.jpg
 Oracle:Equipped creature gets +0/+2 and has vigilance.\nWhenever equipped creature blocks a creature, that creature doesn't untap during its controller's next untap step.\nEquip {2}
-SetInfo:ARB Uncommon

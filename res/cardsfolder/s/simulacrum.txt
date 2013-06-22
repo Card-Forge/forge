@@ -7,8 +7,3 @@ SVar:X:Count$YourDamageThisTurn
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/simulacrum.jpg
 Oracle:You gain life equal to the damage dealt to you this turn. Simulacrum deals damage to target creature you control equal to the damage dealt to you this turn.
-SetInfo:LEB Uncommon
-SetInfo:4ED Uncommon
-SetInfo:LEA Uncommon
-SetInfo:3ED Uncommon
-SetInfo:2ED Uncommon

@@ -5,4 +5,3 @@ A:SP$ Counter | Cost$ U | TargetType$ Spell | TgtPrompt$ Select target Artifact 
 A:SP$ ChangeZone | Cost$ U | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | Origin$ Battlefield | Destination$ Hand | SpellDescription$ or return target artifact to its owner's hand.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/steel_sabotage.jpg
 Oracle:Choose one - Counter target artifact spell; or return target artifact to its owner's hand.
-SetInfo:MBS Common

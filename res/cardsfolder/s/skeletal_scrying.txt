@@ -7,4 +7,3 @@ SVar:X:Count$xPaid
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skeletal_scrying.jpg
 Oracle:As an additional cost to cast Skeletal Scrying, exile X cards from your graveyard.\nYou draw X cards and you lose X life.
-SetInfo:ODY Uncommon

@@ -5,4 +5,3 @@ A:SP$ ChangeZone | Cost$ 1 U | ValidTgts$ Creature | TgtPrompt$ Select target cr
 A:SP$ ChangeZone | Cost$ ExileFromHand<1/Card.Blue> | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Hand | CostDesc$ You may exile a blue card from your hand | SpellDescription$ rather than pay CARDNAME's mana cost.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/snapback.jpg
 Oracle:You may exile a blue card from your hand rather than pay Snapback's mana cost.\nReturn target creature to its owner's hand.
-SetInfo:TSP Common

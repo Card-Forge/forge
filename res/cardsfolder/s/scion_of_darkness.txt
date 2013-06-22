@@ -8,5 +8,3 @@ T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ Tri
 SVar:TrigGainControl:AB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | ValidTgts$ Creature.DefenderCtrl | TgtPrompt$ Select target creature in opponent's graveyard
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scion_of_darkness.jpg
 Oracle:Trample\nWhenever Scion of Darkness deals combat damage to a player, you may put target creature card from that player's graveyard onto the battlefield under your control.\nCycling {3} ({3}, Discard this card: Draw a card.)
-SetInfo:ARC Rare
-SetInfo:LGN Rare

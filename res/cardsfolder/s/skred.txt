@@ -6,4 +6,3 @@ SVar:X:Count$TypeYouCtrl.Snow
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skred.jpg
 Oracle:Skred deals damage to target creature equal to the number of snow permanents you control.
-SetInfo:CSP Common

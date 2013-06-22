@@ -8,4 +8,3 @@ SVar:DBExchange:DB$ ExchangeControl | Defined$ ParentTarget | ValidTgts$ Creatur
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spawnbroker.jpg
 Oracle:When Spawnbroker enters the battlefield, you may exchange control of target creature you control and target creature with power less than or equal to that creature's power an opponent controls.
-SetInfo:RAV Rare

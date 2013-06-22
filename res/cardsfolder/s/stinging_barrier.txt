@@ -6,4 +6,3 @@ K:Defender
 A:AB$ DealDamage | Cost$ U T | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target creature or player.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stinging_barrier.jpg
 Oracle:Defender (This creature can't attack.)\n{U}, {T}: Stinging Barrier deals 1 damage to target creature or player.
-SetInfo:MMQ Common

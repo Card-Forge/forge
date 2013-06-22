@@ -7,4 +7,3 @@ S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddToughness$ 2 | Descript
 A:AB$ Pump | Cost$ R | Defined$ Enchanted | NumAtt$ +1 | SpellDescription$ Enchanted creature gets +1/+0 until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stonehands.jpg
 Oracle:Enchant creature\nEnchanted creature gets +0/+2.\n{R}: Enchanted creature gets +1/+0 until end of turn.
-SetInfo:ICE Common

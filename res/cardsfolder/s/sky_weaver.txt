@@ -7,5 +7,3 @@ SVar:RemRandomDeck:True
 DeckNeeds:Color$White|Black
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sky_weaver.jpg
 Oracle:{2}: Target white or black creature gains flying until end of turn. (It can't be blocked except by creatures with flying or reach.)
-SetInfo:10E Uncommon
-SetInfo:INV Uncommon

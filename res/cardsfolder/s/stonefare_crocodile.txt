@@ -5,4 +5,3 @@ PT:3/2
 A:AB$ Pump | Cost$ 2 B | KW$ Lifelink | SpellDescription$ CARDNAME gets lifelink until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stonefare_crocodile.jpg
 Oracle:{2}{B}: Stonefare Crocodile gains lifelink until end of turn. (Damage dealt by this creature also causes you to gain that much life.)
-SetInfo:RTR Common

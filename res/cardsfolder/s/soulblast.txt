@@ -6,5 +6,3 @@ SVar:X:Sacrificed$CardPower
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soulblast.jpg
 Oracle:As an additional cost to cast Soulblast, sacrifice all creatures you control.\nSoulblast deals damage to target creature or player equal to the total power of the sacrificed creatures.
-SetInfo:CHK Rare
-SetInfo:10E Rare

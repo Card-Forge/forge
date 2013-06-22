@@ -13,4 +13,3 @@ SVar:Y:Remembered$Amount
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/suffer_the_past.jpg
 Oracle:Exile X target cards from target player's graveyard. For each card exiled this way, that player loses 1 life and you gain 1 life.
-SetInfo:ROE Uncommon

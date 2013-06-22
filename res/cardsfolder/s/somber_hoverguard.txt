@@ -7,4 +7,3 @@ S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone
 SVar:X:Count$Valid Artifact.YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/somber_hoverguard.jpg
 Oracle:Affinity for artifacts (This spell costs {1} less to cast for each artifact you control.)\nFlying
-SetInfo:MRD Common

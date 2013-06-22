@@ -5,5 +5,3 @@ PT:2/2
 A:AB$ DealDamage | Cost$ Sac<1/CARDNAME> | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to target creature or player.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shock_troops.jpg
 Oracle:Sacrifice Shock Troops: Shock Troops deals 2 damage to target creature or player.
-SetInfo:MMQ Common
-SetInfo:8ED Common

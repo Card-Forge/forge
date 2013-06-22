@@ -7,7 +7,3 @@ A:AB$ Regenerate | Cost$ B | SpellDescription$ Regenerate CARDNAME.
 SVar:X:Count$Valid Swamp.YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sedge_troll.jpg
 Oracle:Sedge Troll gets +1/+1 as long as you control a Swamp.\n{B}: Regenerate Sedge Troll.
-SetInfo:LEB Rare
-SetInfo:LEA Rare
-SetInfo:3ED Rare
-SetInfo:2ED Rare

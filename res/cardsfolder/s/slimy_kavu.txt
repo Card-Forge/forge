@@ -6,4 +6,3 @@ A:AB$ Animate | Cost$ T | ValidTgts$ Land | TgtPrompt$ Select target land | Type
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/slimy_kavu.jpg
 Oracle:{T}: Target land becomes a Swamp until end of turn.
-SetInfo:INV Common

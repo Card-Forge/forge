@@ -5,4 +5,3 @@ PT:4/4
 A:AB$ Mana | Cost$ T | Produced$ 1 | Amount$ 2 | SpellDescription$ Add 2 to your mana pool.
 SVar:Picture:http://resources.wizards.com/magic/cards/le/en-us/card1687.jpg
 Oracle:{T}: Add {2} to your mana pool.
-SetInfo:LEG Uncommon

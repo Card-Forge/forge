@@ -11,4 +11,3 @@ SVar:TrigChange2:AB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Exil
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stonecloaker.jpg
 Oracle:Flash (You may cast this spell any time you could cast an instant.)\nFlying\nWhen Stonecloaker enters the battlefield, return a creature you control to its owner's hand.\nWhen Stonecloaker enters the battlefield, exile target card from a graveyard.
-SetInfo:PLC Uncommon

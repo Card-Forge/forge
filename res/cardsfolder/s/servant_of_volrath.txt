@@ -6,4 +6,3 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.S
 SVar:TrigSacrifice:AB$Sacrifice | Cost$ 0 | SacValid$ Creature
 SVar:Picture:http://www.wizards.com/global/images/magic/general/servant_of_volrath.jpg
 Oracle:When Servant of Volrath leaves the battlefield, sacrifice a creature.
-SetInfo:TMP Common

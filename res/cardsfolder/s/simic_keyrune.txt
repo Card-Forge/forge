@@ -8,4 +8,3 @@ SVar:RemRandomDeck:True
 DeckNeeds:Color$Green|Blue
 SVar:Picture:http://www.wizards.com/global/images/magic/general/simic_keyrune.jpg
 Oracle:{T}: Add {G} or {U} to your mana pool.\n{G}{U}: Simic Keyrune becomes a 2/3 green and blue Crab artifact creature with hexproof until end of turn. (It can't be the target of spells or abilities your opponents control.)
-SetInfo:GTC Uncommon

@@ -6,4 +6,3 @@ SVar:DBDraw:DB$Draw | NumCards$ 1 | ConditionPresent$ Kithkin.YouCtrl | Conditio
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/surge_of_thoughtweft.jpg
 Oracle:Creatures you control get +1/+1 until end of turn. If you control a Kithkin, draw a card.
-SetInfo:LRW Common

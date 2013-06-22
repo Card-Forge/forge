@@ -11,4 +11,3 @@ SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sisters_of_stone_death.jpg
 Oracle:{G}: Target creature blocks Sisters of Stone Death this turn if able.\n{B}{G}: Exile target creature blocking or blocked by Sisters of Stone Death.\n{2}{B}: Put a creature card exiled with Sisters of Stone Death onto the battlefield under your control.
-SetInfo:RAV Rare

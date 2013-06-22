@@ -17,4 +17,3 @@ SVar:Y:ReplaceCount$DamageAmount
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spirit_en_kor.jpg
 Oracle:Flying\n{0}: The next 1 damage that would be dealt to Spirit en-Kor this turn is dealt to target creature you control instead.
-SetInfo:STH Common

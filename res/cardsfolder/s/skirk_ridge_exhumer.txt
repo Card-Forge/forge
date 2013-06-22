@@ -7,4 +7,3 @@ SVar:TriggerJunior:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Gravey
 SVar:TrigTokenPump:AB$Pump | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -1 | NumDef$ -1 | IsCurse$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skirk_ridge_exhumer.jpg
 Oracle:{B}, {T}, Discard a card: Put a 1/1 black Zombie Goblin creature token named Festering Goblin onto the battlefield. It has "When Festering Goblin dies, target creature gets -1/-1 until end of turn."
-SetInfo:FUT Uncommon

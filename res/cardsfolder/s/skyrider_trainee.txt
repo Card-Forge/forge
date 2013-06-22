@@ -6,4 +6,3 @@ S:Mode$ Continuous | Affected$ Card.Self+enchanted | AddKeyword$ Flying | Descri
 SVar:EnchantMe:Once
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skyrider_trainee.jpg
 Oracle:Skyrider Trainee has flying as long as it's enchanted.
-SetInfo:GPT Common

@@ -6,9 +6,3 @@ SVar:X:TargetedPlayer$CardsInHand
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sudden_impact.jpg
 Oracle:Sudden Impact deals damage equal to the number of cards in target player's hand to that player.
-SetInfo:8ED Uncommon
-SetInfo:7ED Uncommon
-SetInfo:PD2 Uncommon
-SetInfo:9ED Uncommon
-SetInfo:10E Uncommon
-SetInfo:TMP Uncommon

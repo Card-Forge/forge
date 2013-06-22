@@ -6,4 +6,3 @@ A:AB$ Mana | Cost$ T | Produced$ 1 | Amount$ 2 | RestrictValid$ Activated.Artifa
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soldevi_machinist.jpg
 Oracle:{T}: Add {2} to your mana pool. Spend this mana only to activate abilities of artifacts.
-SetInfo:ICE Uncommon

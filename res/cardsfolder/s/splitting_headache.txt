@@ -7,4 +7,3 @@ SVar:FocusDiscard:DB$ Discard | ValidTgts$ Player | NumCards$ 1 | Mode$ RevealYo
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/splitting_headache.jpg
 Oracle:Choose one - Target player discards two cards; or target player reveals his or her hand, you choose a card from it, then that player discards that card.
-SetInfo:SHM Common

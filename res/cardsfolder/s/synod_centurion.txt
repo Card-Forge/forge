@@ -7,6 +7,3 @@ SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Defined$ Self
 SVar:NeedsToPlay:Artifact.YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/synod_centurion.jpg
 Oracle:When you control no other artifacts, sacrifice Synod Centurion.
-SetInfo:ARC Uncommon
-SetInfo:5DN Uncommon
-SetInfo:DDF Uncommon

@@ -5,6 +5,3 @@ A:SP$ Draw | Cost$ 3 U | NumCards$ 3 | SpellDescription$ Draw three cards, then 
 SVar:DBDiscard:DB$Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sift.jpg
 Oracle:Draw three cards, then discard a card.
-SetInfo:10E Common
-SetInfo:9ED Common
-SetInfo:STH Common

@@ -10,4 +10,3 @@ A:AB$ ChangeZone | Cost$ Sac<8/Spirit> | Defined$ Self | ActivationZone$ Graveya
 SVar:SekkiX:ReplaceCount$DamageAmount
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sekki_seasons_guide.jpg
 Oracle:Sekki, Seasons' Guide enters the battlefield with eight +1/+1 counters on it.\nIf damage would be dealt to Sekki, prevent that damage, remove that many +1/+1 counters from Sekki, and put that many 1/1 colorless Spirit creature tokens onto the battlefield.\nSacrifice eight Spirits: Return Sekki from your graveyard to the battlefield.
-SetInfo:SOK Rare

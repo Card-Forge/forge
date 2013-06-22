@@ -5,4 +5,3 @@ PT:2/2
 A:AB$ ChangeZone | Cost$ 1 W Sac<1/CARDNAME> | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target enchantment.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/silverchase_fox.jpg
 Oracle:{1}{W}, Sacrifice Silverchase Fox: Exile target enchantment.
-SetInfo:ISD Common

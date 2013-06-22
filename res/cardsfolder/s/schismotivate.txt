@@ -5,4 +5,3 @@ A:SP$ Pump | Cost$ 1 U R | ValidTgts$ Creature | TgtPrompt$ Select target creatu
 SVar:DBPumpNeg:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select another creature to get -4/+0 | TargetUnique$ True | NumAtt$ -4 | IsCurse$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/schismotivate.jpg
 Oracle:Target creature gets +4/+0 until end of turn. Another target creature gets -4/-0 until end of turn.
-SetInfo:GPT Uncommon

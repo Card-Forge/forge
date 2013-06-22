@@ -8,4 +8,3 @@ SVar:TrigDiscard:AB$Discard | Cost$ 0 | Defined$ Each | NumCards$ 1 | Mode$ TgtC
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stronghold_rats.jpg
 Oracle:Shadow (This creature can block or be blocked by only creatures with shadow.)\nWhenever Stronghold Rats deals combat damage to a player, each player discards a card.
-SetInfo:FUT Uncommon

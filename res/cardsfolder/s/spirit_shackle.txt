@@ -7,5 +7,3 @@ T:Mode$ Taps | ValidCard$ Card.AttachedBy | TriggerZones$ Battlefield | Execute$
 SVar:TrigPutCounter:AB$ PutCounter | Cost$ 0 | Defined$ TriggeredCard | CounterType$ M0M2 | CounterNum$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spirit_shackle.jpg
 Oracle:Enchant creature\nWhenever enchanted creature becomes tapped, put a -0/-2 counter on it.
-SetInfo:LEG Common
-SetInfo:4ED Uncommon

@@ -7,8 +7,3 @@ SVar:RemRandomDeck:True
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sunglasses_of_urza.jpg
 Oracle:You may spend white mana as though it were red mana.
-SetInfo:LEB Rare
-SetInfo:4ED Rare
-SetInfo:LEA Rare
-SetInfo:3ED Rare
-SetInfo:2ED Rare

@@ -4,4 +4,3 @@ Types:Instant
 A:SP$ Pump | Cost$ 1 B | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Fear | SpellDescription$ Target creature gains fear until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shriek_of_dread.jpg
 Oracle:Target creature gains fear until end of turn. (It can't be blocked except by artifact creatures and/or black creatures.)
-SetInfo:PLS Common

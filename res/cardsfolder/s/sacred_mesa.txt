@@ -7,5 +7,3 @@ A:AB$ Token | Cost$ 1 W | TokenImage$ W 1 1 Pegasus Flying | TokenAmount$ 1 | To
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sacred_mesa.jpg
 Oracle:At the beginning of your upkeep, sacrifice Sacred Mesa unless you sacrifice a Pegasus.\n{1}{W}: Put a 1/1 white Pegasus creature token with flying onto the battlefield.
-SetInfo:TSB Special
-SetInfo:MIR Rare

@@ -7,4 +7,3 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigDiscard:AB$Discard | Cost$ 0 | NumCards$ 1 | Defined$ Each | Mode$ TgtChoose
 SVar:Picture:http://www.wizards.com/global/images/magic/general/serum_raker.jpg
 Oracle:Flying\nWhen Serum Raker dies, each player discards a card.
-SetInfo:MBS Common

@@ -4,4 +4,3 @@ Types:Sorcery
 A:SP$ Discard | Cost$ 1 B | ValidTgts$ Player | NumCards$ 1 | Mode$ Random | SpellDescription$ Target player discards a card at random.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/specters_wail.jpg
 Oracle:Target player discards a card at random.
-SetInfo:MMQ Common

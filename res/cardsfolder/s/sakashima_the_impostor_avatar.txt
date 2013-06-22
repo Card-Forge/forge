@@ -7,4 +7,3 @@ SVar:DBClone:DB$ Clone | CloneTarget$ Remembered | ValidTgts$ Creature | TgtProm
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Picture:http://www.cardforge.org/fpics/vgd-lq/sakashima_the_impostor_avatar.jpg
 Oracle:Hand +0, life +1\n{2}: Choose a creature you control. It becomes a copy of target creature except for its name.
-SetInfo:VAN Special

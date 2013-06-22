@@ -5,13 +5,3 @@ A:SP$ GainLife | Cost$ X G | ValidTgts$ Player | TgtPrompt$ Select target player
 SVar:X:Count$xPaid
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stream_of_life.jpg
 Oracle:Target player gains X life.
-SetInfo:8ED Uncommon
-SetInfo:2ED Common
-SetInfo:7ED Common
-SetInfo:6ED Common
-SetInfo:9ED Uncommon
-SetInfo:LEB Common
-SetInfo:LEA Common
-SetInfo:5ED Common
-SetInfo:4ED Common
-SetInfo:3ED Common

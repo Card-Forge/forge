@@ -8,4 +8,3 @@ SVar:TrigDestroy:DB$ Destroy | Defined$ Remembered | SpellDescription$ Destroy t
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/silent_assassin.jpg
 Oracle:{3}{B}: Destroy target blocking creature at end of combat.
-SetInfo:MMQ Rare

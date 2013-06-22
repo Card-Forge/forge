@@ -8,4 +8,3 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigChange:AB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | Defined$ TriggeredCard | Cost$ 0
 SVar:Picture:http://www.wizards.com/global/images/magic/general/squees_embrace.jpg
 Oracle:Enchant creature\nEnchanted creature gets +2/+2.\nWhen enchanted creature dies, return that card to its owner's hand.
-SetInfo:APC Common

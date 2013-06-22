@@ -10,4 +10,3 @@ SVar:X:Remembered$Amount
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soratami_seer.jpg
 Oracle:Flying\n{4}, Return two lands you control to their owner's hand: Discard all the cards in your hand, then draw that many cards.
-SetInfo:CHK Uncommon

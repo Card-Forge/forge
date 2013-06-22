@@ -8,4 +8,3 @@ SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ X | References$ X | TokenName$ 
 SVar:X:Count$RegeneratedThisTurn
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spiny_starfish.jpg
 Oracle:{U}: Regenerate Spiny Starfish.\nAt the beginning of each end step, if Spiny Starfish regenerated this turn, put a 0/1 blue Starfish creature token onto the battlefield for each time it regenerated this turn.
-SetInfo:ALL Uncommon

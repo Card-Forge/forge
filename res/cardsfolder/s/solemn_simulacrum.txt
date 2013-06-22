@@ -9,6 +9,3 @@ SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ TriggeredCardController | NumCards$ 1
 SVar:SacMe:1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/solemn_simulacrum.jpg
 Oracle:When Solemn Simulacrum enters the battlefield, you may search your library for a basic land card, put that card onto the battlefield tapped, then shuffle your library.\nWhen Solemn Simulacrum dies, you may draw a card.
-SetInfo:MRD Rare
-SetInfo:M12 Rare
-SetInfo:COM Rare

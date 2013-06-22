@@ -8,5 +8,3 @@ T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ Tri
 SVar:TrigDiscard:AB$ Discard | Cost$ 0 | Defined$ TriggeredTarget | NumCards$ 2 | Mode$ TgtChoose
 SVar:Picture:http://www.wizards.com/global/images/magic/general/silent_specter.jpg
 Oracle:Flying\nWhenever Silent Specter deals combat damage to a player, that player discards two cards.\nMorph {3}{B}{B} (You may cast this face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)
-SetInfo:MBP Rare
-SetInfo:ONS Rare

@@ -5,5 +5,3 @@ A:SP$ Pump | Cost$ W G | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target 
 SVar:DBPumpAll:DB$PumpAll | Cost$ 0 | ValidCards$ Targeted.Other+YouCtrl+Creature | NumAtt$ +1 | NumDef$ +1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sigil_blessing.jpg
 Oracle:Until end of turn, target creature you control gets +3/+3 and other creatures you control get +1/+1.
-SetInfo:DDG Common
-SetInfo:ALA Common

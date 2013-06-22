@@ -4,4 +4,3 @@ Types:Artifact
 A:AB$ Draw | Cost$ 3 U T | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scepter_of_insight.jpg
 Oracle:{3}{U}, {T}: Draw a card.
-SetInfo:CFX Rare

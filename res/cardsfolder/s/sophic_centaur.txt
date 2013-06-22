@@ -7,4 +7,3 @@ SVar:X:Count$CardsInYourHand/Times.2
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sophic_centaur.jpg
 Oracle:{2}{G}{G}, {T}, Discard a card: You gain 2 life for each card in your hand.
-SetInfo:PLC Uncommon

@@ -7,4 +7,3 @@ SVar:TrigReturn:DB$ChangeZoneAll | Origin$ Exile | Destination$ Battlefield | Ch
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sudden_disappearance.jpg
 Oracle:Exile all nonland permanents target player controls. Return the exiled cards to the battlefield under their owner's control at the beginning of the next end step.
-SetInfo:DKA Rare

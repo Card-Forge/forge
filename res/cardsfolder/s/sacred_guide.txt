@@ -6,4 +6,3 @@ A:AB$ DigUntil | Cost$ 1 W Sac<1/CARDNAME>  | Valid$ Card.White | ValidDescripti
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sacred_guide.jpg
 Oracle:{1}{W}, Sacrifice Sacred Guide: Reveal cards from the top of your library until you reveal a white card. Put that card into your hand and exile all other cards revealed this way.
-SetInfo:TMP Rare

@@ -6,4 +6,3 @@ SVar:DBChangeZone:DB$ ChangeZone | TargetMin$ 0 | TargetMax$ 4 | TargetsWithDefi
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stream_of_consciousness.jpg
 Oracle:Target player shuffles up to four target cards from his or her graveyard into his or her library.
-SetInfo:BOK Uncommon

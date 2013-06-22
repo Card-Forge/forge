@@ -9,5 +9,3 @@ A:AB$ GainControl | Cost$ T | ValidTgts$ Creature.ControllerControlsIsland | Tgt
 SVar:NeedsToPlay:Island.YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/seasinger.jpg
 Oracle:When you control no Islands, sacrifice Seasinger.\nYou may choose not to untap Seasinger during your untap step.\n{T}: Gain control of target creature whose controller controls an Island for as long as you control Seasinger and Seasinger remains tapped.
-SetInfo:5ED Uncommon
-SetInfo:FEM Uncommon

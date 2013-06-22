@@ -6,4 +6,3 @@ SVar:DBPump:DB$ Pump | Defined$ Remembered | KW$ May be played by your opponent 
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stolen_goods.jpg
 Oracle:Target opponent exiles cards from the top of his or her library until he or she exiles a nonland card. Until end of turn, you may cast that card without paying its mana cost.
-SetInfo:AVR Rare

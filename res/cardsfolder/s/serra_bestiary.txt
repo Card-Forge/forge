@@ -8,5 +8,3 @@ S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ CARDNAME
 S:Mode$ CantBeActivated | ValidCard$ Card.EnchantedBy | TapAbility$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/serra_bestiary.jpg
 Oracle:Enchant creature\nAt the beginning of your upkeep, sacrifice Serra Bestiary unless you pay {W}{W}.\nEnchanted creature can't attack or block, and its activated abilities with {T} in their costs can't be activated.
-SetInfo:5ED Uncommon
-SetInfo:HML Common

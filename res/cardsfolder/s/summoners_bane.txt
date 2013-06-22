@@ -5,4 +5,3 @@ A:SP$ Counter | Cost$ 2 U U | TargetType$ Spell | TgtPrompt$ Select target creat
 SVar:DBToken:DB$Token | TokenAmount$ 1 | TokenName$ Illusion | TokenTypes$ Creature,Illusion | TokenOwner$ You | TokenColors$ Blue | TokenPower$ 2 | TokenToughness$ 2 | TokenImage$ U 2 2 Illusion
 SVar:Picture:http://www.wizards.com/global/images/magic/general/summoners_bane.jpg
 Oracle:Counter target creature spell. Put a 2/2 blue Illusion creature token onto the battlefield.
-SetInfo:ZEN Uncommon

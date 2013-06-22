@@ -7,4 +7,3 @@ SVar:TrigChangeZone:AB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ H
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/strongarm_thug.jpg
 Oracle:When Strongarm Thug enters the battlefield, you may return target Mercenary card from your graveyard to your hand.
-SetInfo:MMQ Uncommon

@@ -6,4 +6,3 @@ A:SP$ LoseLife | Cost$ 1 B B Discard<1/Land> | ActivationZone$ Graveyard | CostD
 SVar:DBGainLife:DB$GainLife | Defined$ You | LifeAmount$ 2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/syphon_life.jpg
 Oracle:Target player loses 2 life and you gain 2 life.\nRetrace (You may cast this card from your graveyard by discarding a land card in addition to paying its other costs.)
-SetInfo:EVE Uncommon

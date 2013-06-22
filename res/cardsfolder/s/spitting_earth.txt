@@ -5,12 +5,3 @@ A:SP$ DealDamage | Cost$ 1 R | ValidTgts$ Creature | TgtPrompt$ Select target cr
 SVar:X:Count$TypeYouCtrl.Mountain
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spitting_earth.jpg
 Oracle:Spitting Earth deals damage to target creature equal to the number of Mountains you control.
-SetInfo:PO2 Common
-SetInfo:S99 Uncommon
-SetInfo:7ED Common
-SetInfo:6ED Common
-SetInfo:MIR Common
-SetInfo:10E Common
-SetInfo:EVG Common
-SetInfo:DDG Common
-SetInfo:POR Common

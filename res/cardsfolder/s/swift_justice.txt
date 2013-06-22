@@ -4,4 +4,3 @@ Types:Instant
 A:SP$ Pump | Cost$ W | ValidTgts$ Creature | AILogic$ Pump | NumAtt$ +1 | KW$ First Strike & Lifelink | SpellDescription$ Until end of turn, target creature gets +1/+0 and gains first strike and lifelink.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/swift_justice.jpg
 Oracle:Until end of turn, target creature gets +1/+0 and gains first strike and lifelink.
-SetInfo:RTR Common

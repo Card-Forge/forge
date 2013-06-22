@@ -5,5 +5,3 @@ A:SP$ Token | Cost$ 8 W W | TokenAmount$ X | References$ X | TokenName$ Pegasus 
 SVar:X:Count$YourLifeTotal
 SVar:Picture:http://resources.wizards.com/magic/cards/gpt/en-us/card96968.jpg
 Oracle:Put X 1/1 white Pegasus creature tokens with flying onto the battlefield, where X is your life total.
-SetInfo:GPT Rare
-SetInfo:COM Rare

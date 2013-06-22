@@ -5,6 +5,3 @@ PT:2/4
 S:Mode$ Continuous | Affected$ Permanent.YouCtrl | AddHiddenKeyword$ CARDNAME untaps during each other player's untap step. | Description$ Untap all permanents you control during each other player's untap step.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/seedborn_muse.jpg
 Oracle:Untap all permanents you control during each other player's untap step.
-SetInfo:LGN Rare
-SetInfo:9ED Rare
-SetInfo:10E Rare

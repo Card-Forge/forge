@@ -9,5 +9,3 @@ T:Mode$ DamageDone | ValidSource$ Creature.AttachedBy | ValidTarget$ Opponent | 
 SVar:TrigReturnOpp:AB$ ChangeZone | Cost$ 0 | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature your opponent controls | IsCurse$ True | Origin$ Battlefield | Destination$ Hand
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sigil_of_sleep.jpg
 Oracle:Enchant creature\nWhenever enchanted creature deals damage to a player, return target creature that player controls to its owner's hand.
-SetInfo:DDI Common
-SetInfo:UDS Common

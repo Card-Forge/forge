@@ -6,4 +6,3 @@ S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Flying | Condition$ Metal
 SVar:BuffedBy:Artifact
 SVar:Picture:http://www.wizards.com/global/images/magic/general/snapsail_glider.jpg
 Oracle:Metalcraft - Snapsail Glider has flying as long as you control three or more artifacts.
-SetInfo:SOM Common

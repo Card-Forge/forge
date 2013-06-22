@@ -8,5 +8,3 @@ SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soldevi_sage.jpg
 Oracle:{T}, Sacrifice two lands: Draw three cards, then discard one of them.
-SetInfo:ALL Common x2
-SetInfo:6ED Uncommon

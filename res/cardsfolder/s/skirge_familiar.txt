@@ -7,4 +7,3 @@ A:AB$ Mana | Cost$ Discard<1/Card> | Produced$ B | SpellDescription$ Add B to yo
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skirge_familiar.jpg
 Oracle:Flying\nDiscard a card: Add {B} to your mana pool.
-SetInfo:USG Uncommon

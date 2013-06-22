@@ -7,5 +7,3 @@ SVar:X:Count$InYourHand
 SVar:RemAIDeck:True
 SVar:Picture:http://serv1.tcgimages.eu/img/cards/Portal_Second_Age/sylvan_yeti.jpg
 Oracle:Sylvan Yeti's power is equal to the number of cards in your hand.
-SetInfo:PO2 Rare
-SetInfo:S99 Rare

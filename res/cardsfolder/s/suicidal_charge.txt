@@ -5,4 +5,3 @@ A:AB$ PumpAll | Cost$ Sac<1/CARDNAME> | ValidCards$ Creature.OppCtrl | NumAtt$ -
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/suicidal_charge.jpg
 Oracle:Sacrifice Suicidal Charge: Creatures your opponents control get -1/-1 until end of turn. Those creatures attack this turn if able.
-SetInfo:CFX Common

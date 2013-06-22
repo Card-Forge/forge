@@ -5,7 +5,3 @@ PT:1/4
 K:Vigilance
 SVar:Picture:http://www.wizards.com/global/images/magic/general/standing_troops.jpg
 Oracle:Vigilance
-SetInfo:8ED Common
-SetInfo:7ED Common
-SetInfo:EXO Common
-SetInfo:6ED Common

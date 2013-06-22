@@ -7,4 +7,3 @@ T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$
 SVar:TrigPump:AB$Pump | Cost$ 0 | Defined$ Self | NumAtt$ 1 | NumDef$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soltari_trooper.jpg
 Oracle:Shadow (This creature can block or be blocked by only creatures with shadow.)\nWhenever Soltari Trooper attacks, it gets +1/+1 until end of turn.
-SetInfo:TMP Common

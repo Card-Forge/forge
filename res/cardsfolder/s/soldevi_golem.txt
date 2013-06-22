@@ -9,4 +9,3 @@ SVar:DBUntap:DB$ Untap | Defined$ Self
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soldevi_golem.jpg
 Oracle:Soldevi Golem doesn't untap during your untap step.\nAt the beginning of your upkeep, you may untap target tapped creature an opponent controls. If you do, untap Soldevi Golem.
-SetInfo:ICE Rare

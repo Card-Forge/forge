@@ -4,5 +4,3 @@ Types:Creature Ape
 PT:5/5
 SVar:Picture:http://resources.wizards.com/magic/cards/8ed/en-us/card49056.jpg
 Oracle:
-SetInfo:8ED Uncommon
-SetInfo:S99 Uncommon

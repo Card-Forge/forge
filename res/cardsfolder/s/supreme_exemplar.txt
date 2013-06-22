@@ -7,4 +7,3 @@ K:Champion:Elemental
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/supreme_exemplar.jpg
 Oracle:Flying\nChampion an Elemental (When this enters the battlefield, sacrifice it unless you exile another Elemental you control. When this leaves the battlefield, that card returns to the battlefield.)
-SetInfo:MOR Rare

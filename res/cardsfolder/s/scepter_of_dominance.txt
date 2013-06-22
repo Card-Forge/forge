@@ -4,4 +4,3 @@ Types:Artifact
 A:AB$ Tap | Cost$ W T | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | SpellDescription$ Tap target permanent.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scepter_of_dominance.jpg
 Oracle:{W}, {T}: Tap target permanent.
-SetInfo:CFX Rare

@@ -7,4 +7,3 @@ SVar:TrigBounce:AB$ChangeZone | Cost$ 1 U | ValidTgts$ Permanent | TgtPrompt$ Se
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/surgespanner.jpg
 Oracle:Whenever Surgespanner becomes tapped, you may pay {1}{U}. If you do, return target permanent to its owner's hand.
-SetInfo:LRW Rare

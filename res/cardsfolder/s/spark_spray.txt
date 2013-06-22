@@ -5,4 +5,3 @@ A:SP$ DealDamage | Cost$ R | ValidTgts$ Creature,Player | TgtPrompt$ Select targ
 K:Cycling:R
 SVar:Picture:http://resources.wizards.com/magic/cards/scg/en-us/card44484.jpg
 Oracle:Spark Spray deals 1 damage to target creature or player.\nCycling {R} ({R}, Discard this card: Draw a card.)
-SetInfo:SCG Common

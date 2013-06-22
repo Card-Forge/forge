@@ -6,4 +6,3 @@ K:Flying
 K:CARDNAME can block only creatures with flying.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scrapskin_drake.jpg
 Oracle:Flying\nScrapskin Drake can block only creatures with flying.
-SetInfo:AVR Common

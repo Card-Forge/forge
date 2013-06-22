@@ -9,4 +9,3 @@ SVar:TrigSpell:AB$ Play | Cost$ 0 | Defined$ Imprinted | WithoutManaCost$ True |
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spellbinder.jpg
 Oracle:Imprint - When Spellbinder enters the battlefield, you may exile an instant card from your hand.\nWhenever equipped creature deals combat damage to a player, you may copy the exiled card. If you do, you may cast the copy without paying its mana cost.\nEquip {4}
-SetInfo:DST Rare

@@ -6,5 +6,3 @@ A:AB$ ManaReflected | Cost$ T | ColorOrType$ Color | Valid$ Basic.YouCtrl | Refl
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/star_compass.jpg
 Oracle:Star Compass enters the battlefield tapped.\n{T}: Add to your mana pool one mana of any color that a basic land you control could produce.
-SetInfo:8ED Uncommon
-SetInfo:PLS Uncommon

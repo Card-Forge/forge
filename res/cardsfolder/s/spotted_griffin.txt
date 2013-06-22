@@ -5,4 +5,3 @@ PT:2/3
 K:Flying
 SVar:Picture:http://resources.wizards.com/magic/cards/po/en-us/card4396.jpg
 Oracle:Flying
-SetInfo:POR Common

@@ -7,4 +7,3 @@ A:AB$ DamageAll | Cost$ 5 R | NumDmg$ 6 | ValidCards$ Creature.withFlying+Other 
 K:Flying
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scourge_of_kher_ridges.jpg
 Oracle:Flying\n{1}{R}: Scourge of Kher Ridges deals 2 damage to each creature without flying.\n{5}{R}: Scourge of Kher Ridges deals 6 damage to each other creature with flying.
-SetInfo:FUT Rare

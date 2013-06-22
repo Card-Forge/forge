@@ -13,4 +13,3 @@ T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChao
 SVar:RolledChaos:AB$ ChangeZone | Cost$ 0 | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | Origin$ Battlefield | Destination $ Library | LibraryPosition$ 0
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sea_of_sand.jpg
 Oracle:Players reveal each card they draw.\nWhenever a player draws a land card, that player gains 3 life.\nWhenever a player draws a nonland card, that player loses 3 life.\nWhenever you roll {C}, put target permanent on top of its owner's library.
-SetInfo:HOP Common

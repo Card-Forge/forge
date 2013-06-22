@@ -6,4 +6,3 @@ SVar:AltCost:Cost$ Sac<3/Artifact> | Description$ You may sacrifice three artifa
 A:AB$ ChangeZone | Cost$ ExileFromGrave<3/Artifact> | Origin$ Graveyard | Destination$ Hand | Defined$ Self | ActivationZone$ Graveyard | SpellDescription$ Return CARDNAME from your graveyard to your hand.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/salvage_titan.jpg
 Oracle:You may sacrifice three artifacts rather than pay Salvage Titan's mana cost.\nExile three artifact cards from your graveyard: Return Salvage Titan from your graveyard to your hand.
-SetInfo:ALA Rare

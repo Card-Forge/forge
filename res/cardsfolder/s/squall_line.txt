@@ -6,4 +6,3 @@ SVar:X:Count$xPaid
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/squall_line.jpg
 Oracle:Squall Line deals X damage to each creature with flying and each player.
-SetInfo:TSP Rare

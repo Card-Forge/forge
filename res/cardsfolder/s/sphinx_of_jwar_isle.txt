@@ -6,4 +6,3 @@ K:Flying
 K:Shroud
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sphinx_of_jwar_isle.jpg
 Oracle:Flying, shroud\nYou may look at the top card of your library. (You may do this at any time.)
-SetInfo:ZEN Rare

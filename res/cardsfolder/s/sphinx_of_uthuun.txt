@@ -11,6 +11,3 @@ SVar:DBGrave:DB$ ChangeZone | Defined$ Remembered | Origin$ Library | Destinatio
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sphinx_of_uthuun.jpg
 Oracle:Flying\nWhen Sphinx of Uthuun enters the battlefield, reveal the top five cards of your library. An opponent separates those cards into two piles. Put one pile into your hand and the other into your graveyard.
-SetInfo:DDI Rare
-SetInfo:M12 Rare
-SetInfo:M13 Rare

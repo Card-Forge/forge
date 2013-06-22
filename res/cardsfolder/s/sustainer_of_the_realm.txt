@@ -7,6 +7,3 @@ T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ 
 SVar:TrigPump:AB$Pump | Cost$ 0 | Defined$ Self | NumDef$ 2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sustainer_of_the_realm.jpg
 Oracle:Flying\nWhenever Sustainer of the Realm blocks, it gets +0/+2 until end of turn.
-SetInfo:DDC Uncommon
-SetInfo:ULG Uncommon
-SetInfo:7ED Uncommon

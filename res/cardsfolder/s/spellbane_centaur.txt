@@ -5,4 +5,3 @@ PT:3/2
 S:Mode$ CantTarget | ValidCard$ Creature.YouCtrl | ValidSource$ Card.Blue | Description$ Creatures you control can't be the targets of blue spells or abilities from blue sources.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spellbane_centaur.jpg
 Oracle:Creatures you control can't be the targets of blue spells or abilities from blue sources.
-SetInfo:ODY Rare

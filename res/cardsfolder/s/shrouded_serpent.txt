@@ -7,4 +7,3 @@ SVar:TrigPump:AB$ Pump | Cost$ 0 | Defined$ Self | KW$ HIDDEN Unblockable | Unle
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shrouded_serpent.jpg
 Oracle:Whenever Shrouded Serpent attacks, defending player may pay {4}. If he or she doesn't, Shrouded Serpent is unblockable this turn.
-SetInfo:PCY Rare

@@ -12,4 +12,3 @@ S:Mode$ PreventDamage | Target$ You | Description$ Prevent all damage that would
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/solitary_confinement.jpg
 Oracle:At the beginning of your upkeep, sacrifice Solitary Confinement unless you discard a card.\nSkip your draw step.\nYou have shroud. (You can't be the target of spells or abilities.)\nPrevent all damage that would be dealt to you.
-SetInfo:JUD Rare

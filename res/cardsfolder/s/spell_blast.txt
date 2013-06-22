@@ -6,11 +6,3 @@ SVar:X:Targeted$CardManaCost
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spell_blast.jpg
 Oracle:Counter target spell with converted mana cost X.
-SetInfo:2ED Common
-SetInfo:TMP Common
-SetInfo:6ED Common
-SetInfo:LEB Common
-SetInfo:LEA Common
-SetInfo:5ED Common
-SetInfo:4ED Common
-SetInfo:3ED Common

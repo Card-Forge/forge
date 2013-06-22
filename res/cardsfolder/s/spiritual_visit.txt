@@ -5,4 +5,3 @@ A:SP$ Token | Cost$ W | TokenAmount$ 1 | TokenName$ Spirit | TokenTypes$ Creatur
 K:Splice onto Arcane W
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spiritual_visit.jpg
 Oracle:Put a 1/1 colorless Spirit creature token onto the battlefield.\nSplice onto Arcane {W} (As you cast an Arcane spell, you may reveal this card from your hand and pay its splice cost. If you do, add this card's effects to that spell.)
-SetInfo:SOK Common

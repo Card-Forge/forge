@@ -7,4 +7,3 @@ SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scrying_sheets.jpg
 Oracle:{T}: Add {1} to your mana pool.\n{1}{S}, {T}: Look at the top card of your library. If that card is snow, you may reveal it and put it into your hand. ({S} can be paid with one mana from a snow permanent.)
-SetInfo:CSP Rare

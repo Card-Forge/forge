@@ -6,4 +6,3 @@ K:Flying
 K:Trample
 SVar:Picture:http://resources.wizards.com/magic/cards/ia/en-us/card2534.jpg
 Oracle:Flying, trample
-SetInfo:ICE Uncommon

@@ -6,4 +6,3 @@ SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Defined$ Self | SubAbility$ DBAddTurn
 SVar:DBAddTurn:DB$AddTurn | Defined$ You | NumTurns$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/second_chance.jpg
 Oracle:At the beginning of your upkeep, if you have 5 or less life, sacrifice Second Chance and take an extra turn after this one.
-SetInfo:ULG Rare

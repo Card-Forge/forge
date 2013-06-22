@@ -7,5 +7,3 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.Y
 SVar:TrigGain:AB$GainLife | Cost$ 0 | LifeAmount$ 3
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shattered_angel.jpg
 Oracle:Flying\nWhenever a land enters the battlefield under an opponent's control, you may gain 3 life.
-SetInfo:COM Uncommon
-SetInfo:NPH Uncommon

@@ -6,5 +6,3 @@ A:AB$ Untap | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature 
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/seeker_of_skybreak.jpg
 Oracle:{T}: Untap target creature.
-SetInfo:7ED Common
-SetInfo:TMP Common

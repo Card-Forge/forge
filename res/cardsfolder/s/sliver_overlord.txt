@@ -6,5 +6,3 @@ A:AB$ ChangeZone | Cost$ 3 | Origin$ Library | Destination$ Hand | ChangeType$ S
 A:AB$ GainControl | Cost$ 3 | ValidTgts$ Creature.Sliver | TgtPrompt$ Select target Sliver | SpellDescription$ Gain control of target Sliver. (This effect lasts indefinitely.)
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sliver_overlord.jpg
 Oracle:{3}: Search your library for a Sliver card, reveal that card, and put it into your hand. Then shuffle your library.\n{3}: Gain control of target Sliver. (This effect lasts indefinitely.)
-SetInfo:SCG Rare
-SetInfo:H09 Mythic

@@ -7,4 +7,3 @@ T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChao
 SVar:RolledChaos:AB$ Token | Cost$ 0 | TokenOwner$ You | TokenAmount$ 1 | TokenName$ Dragon | TokenTypes$ Creature,Dragon | TokenColors$ Red | TokenPower$ 5 | TokenToughness$ 5 | TokenKeywords$ Flying
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shiv.jpg
 Oracle:All creatures have "{R}: This creature gets +1/+0 until end of turn."\nWhenever you roll {C}, put a 5/5 red Dragon creature token with flying onto the battlefield.
-SetInfo:HOP Common

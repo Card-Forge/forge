@@ -9,4 +9,3 @@ SVar:ShiftX:Remembered$Amount
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scapeshift.jpg
 Oracle:Sacrifice any number of lands. Search your library for that many land cards, put them onto the battlefield tapped, then shuffle your library.
-SetInfo:MOR Rare

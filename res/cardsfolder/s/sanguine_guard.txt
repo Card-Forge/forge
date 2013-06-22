@@ -6,5 +6,3 @@ K:First Strike
 A:AB$ Regenerate | Cost$ 1 B | SpellDescription$ Regenerate CARDNAME.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sanguine_guard.jpg
 Oracle:First strike\n{1}{B}: Regenerate Sanguine Guard.
-SetInfo:DDE Uncommon
-SetInfo:USG Uncommon

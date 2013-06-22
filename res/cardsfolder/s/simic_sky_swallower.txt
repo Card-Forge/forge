@@ -7,5 +7,3 @@ K:Trample
 K:Shroud
 SVar:Picture:http://resources.wizards.com/magic/cards/dis/en-us/card111204.jpg
 Oracle:Flying, trample\nShroud (This creature can't be the target of spells or abilities.)
-SetInfo:COM Rare
-SetInfo:DIS Rare

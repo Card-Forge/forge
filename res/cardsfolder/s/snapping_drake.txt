@@ -5,8 +5,3 @@ PT:3/2
 K:Flying
 SVar:Picture:http://resources.wizards.com/magic/cards/rav/en-us/card87986.jpg
 Oracle:Flying
-SetInfo:S99 Common
-SetInfo:10E Common
-SetInfo:RAV Common
-SetInfo:M10 Common
-SetInfo:POR Common

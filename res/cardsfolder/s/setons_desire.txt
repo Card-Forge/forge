@@ -7,4 +7,3 @@ S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddToughness
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ All creatures able to block CARDNAME do so. | Condition$ Threshold | Description$ Threshold - As long as seven or more cards are in your graveyard, all creatures able to block enchanted creature do so.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/setons_desire.jpg
 Oracle:Enchant creature\nEnchanted creature gets +2/+2.\nThreshold - As long as seven or more cards are in your graveyard, all creatures able to block enchanted creature do so.
-SetInfo:ODY Common

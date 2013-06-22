@@ -9,4 +9,3 @@ SVar:X:Remembered$Valid Creature
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/song_of_blood.jpg
 Oracle:Put the top four cards of your library into your graveyard.\nWhenever a creature attacks this turn, it gets +1/+0 until end of turn for each creature card put into your graveyard this way.
-SetInfo:VIS Common

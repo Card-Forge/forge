@@ -6,4 +6,3 @@ SVar:DBChangeZoneAll:DB$ChangeZoneAll | ChangeType$ Creature | Origin$ Graveyard
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soulquake.jpg
 Oracle:Return all creatures on the battlefield and all creature cards in graveyards to their owners' hands.
-SetInfo:ARB Rare

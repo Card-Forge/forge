@@ -6,5 +6,3 @@ K:CARDNAME can't attack unless defending player controls an Island.
 K:Cycling:1 U
 SVar:Picture:http://www.wizards.com/global/images/magic/general/slipstream_eel.jpg
 Oracle:Slipstream Eel can't attack unless defending player controls an Island.\nCycling {1}{U} ({1}{U}, Discard this card: Draw a card.)
-SetInfo:ONS Common
-SetInfo:COM Common

@@ -11,4 +11,3 @@ SVar:DBSomnophoreAnimate:DB$ Animate | Defined$ Targeted | HiddenKeywords$ CARDN
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/somnophore.jpg
 Oracle:Flying\nWhenever Somnophore deals damage to a player, tap target creature that player controls. That creature doesn't untap during its controller's untap step for as long as Somnophore remains on the battlefield.
-SetInfo:USG Rare

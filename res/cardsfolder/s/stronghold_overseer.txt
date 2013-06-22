@@ -8,4 +8,3 @@ A:AB$ PumpAll | Cost$ B B | ValidCards$ Creature.withShadow | NumAtt$ +1 | SubAb
 SVar:DBPumpAll:DB$PumpAll | ValidCards$ Creature.withoutShadow | NumAtt$ -1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stronghold_overseer.jpg
 Oracle:Flying\nShadow (This creature can block or be blocked by only creatures with shadow.)\n{B}{B}: Creatures with shadow get +1/+0 until end of turn and creatures without shadow get -1/-0 until end of turn.
-SetInfo:TSP Rare

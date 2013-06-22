@@ -6,5 +6,3 @@ A:AB$ DamageAll | Cost$ 2 | NumDmg$ 1 | ValidCards$ Creature.withFlying | ValidP
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/squallmonger.jpg
 Oracle:{2}: Squallmonger deals 1 damage to each creature with flying and each player. Any player may activate this ability.
-SetInfo:MMQ Uncommon
-SetInfo:COM Uncommon

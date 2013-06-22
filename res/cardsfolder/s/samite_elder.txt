@@ -6,4 +6,3 @@ A:AB$ ProtectionAll | Cost$ T | ValidCards$ Creature.YouCtrl | ValidTgts$ Perman
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/samite_elder.jpg
 Oracle:{T}: Creatures you control gain protection from the colors of target permanent you control until end of turn.
-SetInfo:PLS Rare

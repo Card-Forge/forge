@@ -6,4 +6,3 @@ A:SP$ DamageAll | Cost$ X R R | ValidCards$ Creature | NumDmg$ X | References$ X
 SVar:X:Count$xPaid
 SVar:Picture:http://www.wizards.com/global/images/magic/general/starstorm.jpg
 Oracle:Starstorm deals X damage to each creature.\nCycling {3} ({3}, Discard this card: Draw a card.)
-SetInfo:ONS Rare

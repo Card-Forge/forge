@@ -7,4 +7,3 @@ S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddHiddenKeyword$ CARDNAME's a
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ CARDNAME can't attack or block.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stasis_cocoon.jpg
 Oracle:Enchant artifact\nEnchanted artifact's activated abilities can't be activated. If enchanted artifact is a creature, it can't attack or block.
-SetInfo:5DN Common

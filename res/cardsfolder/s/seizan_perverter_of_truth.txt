@@ -7,4 +7,3 @@ SVar:TrigDrain:AB$LoseLife | Cost$ 0 | Defined$ TriggeredPlayer | LifeAmount$ 2 
 SVar:DBDraw:DB$Draw | Defined$ TriggeredPlayer | NumCards$ 2
 SVar:Picture:http://resources.wizards.com/magic/cards/chk/en-us/card78965.jpg
 Oracle:At the beginning of each player's upkeep, that player loses 2 life and draws two cards.
-SetInfo:CHK Rare

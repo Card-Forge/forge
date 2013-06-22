@@ -7,5 +7,3 @@ SVar:X:Count$xPaid
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skyscribing.jpg
 Oracle:Each player draws X cards.\nForecast - {2}{U}, Reveal Skyscribing from your hand: Each player draws a card. (Activate this ability only during your upkeep and only once each turn.)
-SetInfo:COM Uncommon
-SetInfo:DIS Uncommon

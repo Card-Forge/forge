@@ -8,4 +8,3 @@ SVar:RemRandomDeck:True
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shared_triumph.jpg
 Oracle:As Shared Triumph enters the battlefield, choose a creature type.\nCreatures of the chosen type get +1/+1.
-SetInfo:ONS Rare

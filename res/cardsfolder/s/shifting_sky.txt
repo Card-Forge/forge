@@ -8,5 +8,3 @@ SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shifting_sky.jpg
 Oracle:As Shifting Sky enters the battlefield, choose a color.\nAll nonland permanents are the chosen color.
-SetInfo:8ED Rare
-SetInfo:PLS Uncommon

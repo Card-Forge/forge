@@ -8,4 +8,3 @@ SVar:TrigDamage:AB$DealDamage | Cost$ 0 | ValidTgts$ Player | TgtPrompt$ Select 
 SVar:X:TriggeredCard$CardPower
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stalking_vengeance.jpg
 Oracle:Haste\nWhenever another creature you control dies, it deals damage equal to its power to target player.
-SetInfo:DIS Rare

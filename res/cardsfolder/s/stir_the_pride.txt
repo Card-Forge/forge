@@ -11,4 +11,3 @@ SVar:X:TriggerCount$DamageAmount
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stir_the_pride.jpg
 Oracle:Choose one - Creatures you control get +2/+2 until end of turn; or until end of turn, creatures you control gain "Whenever this creature deals damage, you gain that much life."\nEntwine {1}{W} (Choose both if you pay the entwine cost.)
-SetInfo:DST Uncommon

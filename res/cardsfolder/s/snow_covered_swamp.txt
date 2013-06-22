@@ -3,5 +3,3 @@ ManaCost:no cost
 Types:Basic Snow Land Swamp
 SVar:Picture:http://www.wizards.com/global/images/magic/general/snow_covered_swamp.jpg
 Oracle:B
-SetInfo:ICE Land
-SetInfo:CSP Common

@@ -7,4 +7,3 @@ A:AB$ Protection | Cost$ 1 W | ValidTgts$ Merfolk.YouCtrl | TgtPrompt$ Select ta
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sygg_river_guide.jpg
 Oracle:Islandwalk\n{1}{W}: Target Merfolk you control gains protection from the color of your choice until end of turn.
-SetInfo:LRW Rare

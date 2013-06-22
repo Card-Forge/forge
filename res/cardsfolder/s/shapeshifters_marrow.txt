@@ -7,4 +7,3 @@ SVar:DBCopy:DB$ Clone | Defined$ Remembered | ConditionDefined$ Remembered | Con
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shapeshifters_marrow.jpg
 Oracle:At the beginning of each opponent's upkeep, that player reveals the top card of his or her library. If it's a creature card, the player puts the card into his or her graveyard and Shapeshifter's Marrow becomes a copy of that card. (If it does, it loses this ability.)
-SetInfo:FUT Rare

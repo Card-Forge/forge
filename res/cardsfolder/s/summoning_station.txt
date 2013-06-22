@@ -7,4 +7,3 @@ SVar:TrigUntap:AB$Untap | Cost$ 0 | Defined$ Self
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/summoning_station.jpg
 Oracle:{T}: Put a 2/2 colorless Pincher creature token onto the battlefield.\nWhenever an artifact is put into a graveyard from the battlefield, you may untap Summoning Station.
-SetInfo:5DN Rare

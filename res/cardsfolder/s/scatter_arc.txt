@@ -5,4 +5,3 @@ A:SP$ Counter | Cost$ 3 U | TargetType$ Spell | ValidTgts$ Card.nonCreature | Tg
 SVar:DBDraw:DB$ Draw | NumCards$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scatter_arc.jpg
 Oracle:Counter target noncreature spell.\nDraw a card.
-SetInfo:GTC Common

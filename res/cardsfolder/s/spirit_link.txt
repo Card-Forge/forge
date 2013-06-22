@@ -8,11 +8,3 @@ SVar:TrigGain:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ X | References$
 SVar:X:TriggerCount$DamageAmount
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spirit_link.jpg
 Oracle:Enchant creature (Target a creature as you cast this. This card enters the battlefield attached to that creature.)\nWhenever enchanted creature deals damage, you gain that much life.
-SetInfo:8ED Uncommon
-SetInfo:7ED Uncommon
-SetInfo:LEG Uncommon
-SetInfo:6ED Uncommon
-SetInfo:9ED Uncommon
-SetInfo:10E Uncommon
-SetInfo:5ED Uncommon
-SetInfo:4ED Uncommon
