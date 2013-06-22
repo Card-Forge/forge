@@ -7,4 +7,3 @@ SVar:KWPump:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield |
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dauntless_escort.jpg
 Oracle:Sacrifice Dauntless Escort: Creatures you control are indestructible this turn.
-SetInfo:ARB Rare

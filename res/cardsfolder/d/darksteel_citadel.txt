@@ -5,5 +5,3 @@ A:AB$ Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add 1 to your mana pool.
 K:Indestructible
 SVar:Picture:http://www.wizards.com/global/images/magic/general/darksteel_citadel.jpg
 Oracle:Darksteel Citadel is indestructible. ("Destroy" effects and lethal damage don't destroy it.)\n{T}: Add {1} to your mana pool.
-SetInfo:DST Common
-SetInfo:DDF Common

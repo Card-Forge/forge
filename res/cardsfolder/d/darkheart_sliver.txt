@@ -7,4 +7,3 @@ SVar:GainLife:AB$GainLife | Cost$ Sac<1/CARDNAME> | LifeAmount$ 3 | Defined$ You
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/darkheart_sliver.jpg
 Oracle:All Slivers have "Sacrifice this permanent: You gain 3 life."
-SetInfo:PLC Uncommon

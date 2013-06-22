@@ -9,4 +9,3 @@ SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ 4 | TokenName$ Squirrel | Token
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deranged_hermit.jpg
 Oracle:Echo {3}{G}{G} (At the beginning of your upkeep, if this came under your control since the beginning of your last upkeep, sacrifice it unless you pay its echo cost.)\nWhen Deranged Hermit enters the battlefield, put four 1/1 green Squirrel creature tokens onto the battlefield.\nSquirrel creatures get +1/+1.
-SetInfo:ULG Rare

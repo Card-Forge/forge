@@ -6,4 +6,3 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigDiscard:AB$ Discard | Cost$ B | ValidTgts$ Player | NumCards$ 1 | Mode$ TgtChoose | SpellDescription$ Target player discards a card.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/drainpipe_vermin.jpg
 Oracle:When Drainpipe Vermin dies, you may pay {B}. If you do, target player discards a card.
-SetInfo:RTR Common

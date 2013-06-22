@@ -5,4 +5,3 @@ A:SP$ Destroy | Cost$ 4 B | ValidTgts$ Land | TgtPrompt$ Select target land | Su
 SVar:DBDiscard:DB$Discard | Defined$ TargetedController | NumCards$ 1 | Mode$ TgtChoose
 SVar:Picture:http://www.wizards.com/global/images/magic/general/desecrated_earth.jpg
 Oracle:Destroy target land. Its controller discards a card.
-SetInfo:ZEN Common

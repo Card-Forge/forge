@@ -7,4 +7,3 @@ SVar:X:XChoice
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/devastating_dreams.jpg
 Oracle:As an additional cost to cast Devastating Dreams, discard X cards at random.\nEach player sacrifices X lands. Devastating Dreams deals X damage to each creature.
-SetInfo:TOR Rare

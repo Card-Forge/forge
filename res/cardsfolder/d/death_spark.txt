@@ -6,4 +6,3 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Graveyard | IsP
 SVar:TrigReturn:AB$ChangeZone | Cost$ 1 | Defined$ Self | Origin$ Graveyard | Destination$ Hand
 SVar:Picture:http://www.wizards.com/global/images/magic/general/death_spark.jpg
 Oracle:Death Spark deals 1 damage to target creature or player.\nAt the beginning of your upkeep, if Death Spark is in your graveyard with a creature card directly above it, you may pay {1}. If you do, return Death Spark to your hand.
-SetInfo:ALL Uncommon

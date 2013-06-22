@@ -6,4 +6,3 @@ S:Mode$ CantBeCast | ValidCard$ Card | Condition$ PlayerTurn | Caster$ Opponent 
 S:Mode$ CantBeCast | ValidCard$ Card | Condition$ NotPlayerTurn | Caster$ You
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dosan_the_falling_leaf.jpg
 Oracle:Players can cast spells only during their own turns.
-SetInfo:CHK Rare

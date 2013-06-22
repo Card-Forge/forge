@@ -10,4 +10,3 @@ SVar:TrigDestroyAll:AB$DestroyAll | Cost$ 0 | ValidCards$ Land | SpellDescriptio
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/decree_of_annihilation.jpg
 Oracle:Exile all artifacts, creatures, and lands from the battlefield, all cards from all graveyards, and all cards from all hands.\nCycling {5}{R}{R} ({5}{R}{R}, Discard this card: Draw a card.)\nWhen you cycle Decree of Annihilation, destroy all lands.
-SetInfo:SCG Rare

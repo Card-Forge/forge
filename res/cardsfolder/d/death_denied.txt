@@ -8,4 +8,3 @@ SVar:MaxTgts:Count$TypeInYourYard.Creature
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/death_denied.jpg
 Oracle:Return X target creature cards from your graveyard to your hand.
-SetInfo:SOK Common

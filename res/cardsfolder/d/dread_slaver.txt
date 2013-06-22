@@ -8,4 +8,3 @@ SVar:DBAnimate:DB$ Animate | Defined$ Remembered | Types$ Zombie | Colors$ Black
 SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dread_slaver.jpg
 Oracle:Whenever a creature dealt damage by Dread Slaver this turn dies, return it to the battlefield under your control. That creature is a black Zombie in addition to its other colors and types.
-SetInfo:AVR Rare

@@ -5,4 +5,3 @@ PT:2/2
 A:AB$ ChangeZone | Cost$ T tapXType<2/Human> | IsCurse$ True | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target artifact or enchantment.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/devout_chaplain.jpg
 Oracle:{T}, Tap two untapped Humans you control: Exile target artifact or enchantment.
-SetInfo:AVR Uncommon

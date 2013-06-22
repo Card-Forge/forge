@@ -6,4 +6,3 @@ A:AB$ DealDamage | Cost$ Sac<1/CARDNAME> | ValidTgts$ Creature.attacking,Creatur
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/duergar_assailant.jpg
 Oracle:Sacrifice Duergar Assailant: Duergar Assailant deals 1 damage to target attacking or blocking creature.
-SetInfo:EVE Common

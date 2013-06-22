@@ -5,4 +5,3 @@ PT:5/5
 K:CARDNAME can't attack unless defending player controls an Island.
 SVar:Picture:http://serv2.tcgimages.eu/img/cards/Portal/deep_sea_serpent.jpg
 Oracle:Deep-Sea Serpent can't attack unless defending player controls an Island.
-SetInfo:POR Uncommon

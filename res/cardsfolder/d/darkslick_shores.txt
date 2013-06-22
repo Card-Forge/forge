@@ -7,4 +7,3 @@ A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add U to your mana pool.
 K:CARDNAME enters the battlefield tapped unless you control two or fewer other lands.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/darkslick_shores.jpg
 Oracle:Darkslick Shores enters the battlefield tapped unless you control two or fewer other lands.\n{T}: Add {U} or {B} to your mana pool.
-SetInfo:SOM Rare

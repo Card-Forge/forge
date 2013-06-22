@@ -11,7 +11,3 @@ SVar:DBSacLand:DB$ Destroy | Sacrifice$ True| Defined$ ChosenCard | SubAbility$ 
 SVar:PlayMain1:FALSE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/demonic_hordes.jpg
 Oracle:{T}: Destroy target land.\nAt the beginning of your upkeep, unless you pay {B}{B}{B}, tap Demonic Hordes and sacrifice a land of an opponent's choice.
-SetInfo:LEB Rare
-SetInfo:LEA Rare
-SetInfo:3ED Rare
-SetInfo:2ED Rare

@@ -4,5 +4,3 @@ Types:Instant
 A:SP$ TapAll | Cost$ 2 U | ValidCards$ Creature.withoutFlying | SpellDescription$ Tap all creatures without flying.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deluge.jpg
 Oracle:Tap all creatures without flying.
-SetInfo:ODY Uncommon
-SetInfo:10E Uncommon

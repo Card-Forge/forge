@@ -5,4 +5,3 @@ K:Flashback 5 U U
 A:SP$ ChangeZone | Cost$ 3 U | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target permanent to its owner's hand.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dematerialize.jpg
 Oracle:Return target permanent to its owner's hand.\nFlashback {5}{U}{U} (You may cast this card from your graveyard for its flashback cost. Then exile it.)
-SetInfo:ODY Common

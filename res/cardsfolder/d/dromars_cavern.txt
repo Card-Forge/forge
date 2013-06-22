@@ -9,4 +9,3 @@ SVar:TrigSacUnless:DB$ Sacrifice | Defined$ Self | UnlessCost$ Return<1/Land.non
 SVar:NeedsToPlay:Land.nonLair+YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dromars_cavern.jpg
 Oracle:When Dromar's Cavern enters the battlefield, sacrifice it unless you return a non-Lair land you control to its owner's hand.\n{T}: Add {W}, {U}, or {B} to your mana pool.
-SetInfo:PLS Uncommon

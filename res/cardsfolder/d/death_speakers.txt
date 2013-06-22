@@ -5,5 +5,3 @@ PT:1/1
 K:Protection from black
 SVar:Picture:http://www.wizards.com/global/images/magic/general/death_speakers.jpg
 Oracle:Protection from black
-SetInfo:5ED Common
-SetInfo:HML Uncommon

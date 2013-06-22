@@ -10,4 +10,3 @@ SVar:TrigDraw:AB$ Draw | Cost$ 0 | NumCards$ X | References$ X
 SVar:X:TriggeredCard$CardCounters.M1M1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dusk_urchins.jpg
 Oracle:Whenever Dusk Urchins attacks or blocks, put a -1/-1 counter on it.\nWhen Dusk Urchins dies, draw a card for each -1/-1 counter on it.
-SetInfo:SHM Rare

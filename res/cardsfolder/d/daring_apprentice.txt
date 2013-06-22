@@ -5,8 +5,3 @@ PT:1/1
 A:AB$ Counter | Cost$ T Sac<1/CARDNAME> | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | Destination$ Graveyard | SpellDescription$ Counter target spell.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/daring_apprentice.jpg
 Oracle:{T}, Sacrifice Daring Apprentice: Counter target spell.
-SetInfo:8ED Rare
-SetInfo:7ED Rare
-SetInfo:MIR Rare
-SetInfo:6ED Rare
-SetInfo:9ED Rare

@@ -6,4 +6,3 @@ A:AB$ Mana | Cost$ 1 Sac<1/CARDNAME> | Produced$ B R G | SpellDescription$ Add B
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/darigaazs_attendant.jpg
 Oracle:{1}, Sacrifice Darigaaz's Attendant: Add {B}{R}{G} to your mana pool.
-SetInfo:INV Uncommon

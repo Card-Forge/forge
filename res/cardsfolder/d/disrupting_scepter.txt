@@ -4,13 +4,3 @@ Types:Artifact
 A:AB$ Discard | Cost$ 3 T | ValidTgts$ Player | NumCards$ 1 | Mode$ TgtChoose | PlayerTurn$ True | SpellDescription$ Target player discards a card. Activate this ability only during your turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/disrupting_scepter.jpg
 Oracle:{3}, {T}: Target player discards a card. Activate this ability only during your turn.
-SetInfo:8ED Rare
-SetInfo:2ED Rare
-SetInfo:7ED Rare
-SetInfo:6ED Rare
-SetInfo:9ED Rare
-SetInfo:LEB Rare
-SetInfo:LEA Rare
-SetInfo:5ED Rare
-SetInfo:4ED Rare
-SetInfo:3ED Rare

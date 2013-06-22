@@ -8,4 +8,3 @@ SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/drafnas_restoration.jpg
 Oracle:Return any number of target artifact cards from target player's graveyard to the top of his or her library in any order.
-SetInfo:ATQ Common

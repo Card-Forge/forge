@@ -7,4 +7,3 @@ SVar:X:Count$xPaid
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/demonspine_whip.jpg
 Oracle:{X}: Equipped creature gets +X/+0 until end of turn.\nEquip {1}
-SetInfo:ARB Uncommon

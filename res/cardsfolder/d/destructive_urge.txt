@@ -7,4 +7,3 @@ T:Mode$ DamageDone | ValidSource$ Card.AttachedBy | ValidTarget$ Player | Execut
 SVar:TrigSacrifice:AB$Sacrifice | Cost$ 0 | Defined$ TriggeredTarget | SacValid$ Land | ChangeNum$ 1 | SpellDescription$ Sacrifice a land.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/destructive_urge.jpg
 Oracle:Enchant creature\nWhenever enchanted creature deals combat damage to a player, that player sacrifices a land.
-SetInfo:USG Uncommon

@@ -6,5 +6,3 @@ K:Flying
 K:CARDNAME can't block.
 SVar:Picture:http://resources.wizards.com/magic/cards/gpt/en-us/card96949.jpg
 Oracle:Flying\nDaggerclaw Imp can't block.
-SetInfo:GPT Uncommon
-SetInfo:DDC Uncommon

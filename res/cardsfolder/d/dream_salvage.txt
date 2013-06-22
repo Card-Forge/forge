@@ -7,4 +7,3 @@ SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dream_salvage.jpg
 Oracle:Draw cards equal to the number of cards target opponent discarded this turn.
-SetInfo:SHM Uncommon

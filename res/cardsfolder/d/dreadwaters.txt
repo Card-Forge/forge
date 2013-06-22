@@ -5,4 +5,3 @@ A:SP$ Mill | Cost$ 3 U | NumCards$ X | ValidTgts$ Player | TgtPrompt$ Choose a p
 SVar:X:Count$Valid Land.YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dreadwaters.jpg
 Oracle:Target player puts the top X cards of his or her library into his or her graveyard, where X is the number of lands you control.
-SetInfo:AVR Common

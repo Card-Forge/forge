@@ -9,4 +9,3 @@ SVar:DelifX:Count$CardPower
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/delifs_cone.jpg
 Oracle:{T}, Sacrifice Delif's Cone: This turn, when target creature you control attacks and isn't blocked, you may gain life equal to its power. If you do, it assigns no combat damage this turn.
-SetInfo:FEM Common

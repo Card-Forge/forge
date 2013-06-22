@@ -6,4 +6,3 @@ SVar:TrigDamage:AB$DealDamage | Cost$ 0 | Defined$ TriggeredCardController | Num
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dingus_staff.jpg
 Oracle:Whenever a creature dies, Dingus Staff deals 2 damage to that creature's controller.
-SetInfo:WTH Uncommon

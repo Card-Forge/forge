@@ -7,5 +7,3 @@ SVar:TrigGainLife:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ 10
 SVar:TrigLoseLife:AB$LoseLife | Cost$ 0 | Defined$ You | LifeAmount$ 10
 SVar:Picture:http://www.wizards.com/global/images/magic/general/delusions_of_mediocrity.jpg
 Oracle:When Delusions of Mediocrity enters the battlefield, you gain 10 life.\nWhen Delusions of Mediocrity leaves the battlefield, you lose 10 life.
-SetInfo:ULG Rare
-SetInfo:7ED Rare

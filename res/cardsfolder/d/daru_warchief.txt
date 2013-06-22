@@ -7,4 +7,3 @@ S:Mode$ Continuous | Affected$ Creature.Soldier+YouCtrl | AddPower$ 1 | AddTough
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/daru_warchief.jpg
 Oracle:Soldier spells you cast cost {1} less to cast.\nSoldier creatures you control get +1/+2.
-SetInfo:SCG Uncommon

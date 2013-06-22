@@ -4,4 +4,3 @@ Types:Artifact
 A:AB$ Regenerate | Cost$ 2 T Discard<1/Random> | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Regenerate target creature.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/draconian_cylix.jpg
 Oracle:{2}, {T}, Discard a card at random: Regenerate target creature.
-SetInfo:FEM Rare

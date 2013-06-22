@@ -5,4 +5,3 @@ PT:1/1
 A:AB$ GainLife | Cost$ W Sac<1/CARDNAME> | LifeAmount$ 3 | SpellDescription$ You gain 3 life.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dedicated_martyr.jpg
 Oracle:{W}, Sacrifice Dedicated Martyr: You gain 3 life.
-SetInfo:ODY Common

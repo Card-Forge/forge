@@ -4,4 +4,3 @@ Types:Sorcery
 A:SP$ Destroy | Cost$ B R | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker | SpellDescription$ Destroy target creature or planeswalker.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dreadbore.jpg
 Oracle:Destroy target creature or planeswalker.
-SetInfo:RTR Rare

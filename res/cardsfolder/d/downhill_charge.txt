@@ -6,5 +6,3 @@ SVar:AltCost:Cost$ Sac<1/Mountain> | Description$ You may sacrifice a Mountain r
 SVar:X:Count$TypeYouCtrl.Mountain
 SVar:Picture:http://www.wizards.com/global/images/magic/general/downhill_charge.jpg
 Oracle:You may sacrifice a Mountain rather than pay Downhill Charge's mana cost.\nTarget creature gets +X/+0 until end of turn, where X is the number of Mountains you control.
-SetInfo:DDI Common
-SetInfo:NMS Common

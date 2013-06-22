@@ -7,4 +7,3 @@ A:AB$ Counter | Cost$ U | TargetType$ Spell | TgtPrompt$ Select target spell wit
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/declaration_of_naught.jpg
 Oracle:As Declaration of Naught enters the battlefield, name a card.\n{U}: Counter target spell with the chosen name.
-SetInfo:MOR Rare

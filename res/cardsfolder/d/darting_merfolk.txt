@@ -5,4 +5,3 @@ PT:1/1
 A:AB$ ChangeZone | Cost$ U | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return CARDNAME to its owner's hand.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/darting_merfolk.jpg
 Oracle:{U}: Return Darting Merfolk to its owner's hand.
-SetInfo:MMQ Common

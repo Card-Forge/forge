@@ -9,4 +9,3 @@ SVar:X:Count$xPaid
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/death_cloud.jpg
 Oracle:Each player loses X life, then discards X cards, then sacrifices X creatures, then sacrifices X lands.
-SetInfo:DST Rare

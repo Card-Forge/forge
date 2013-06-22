@@ -8,4 +8,3 @@ SVar:NeedsToPlayVar:Y LE12
 SVar:Y:Count$YourLifeTotal
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deaths_shadow.jpg
 Oracle:Death's Shadow gets -X/-X, where X is your life total.
-SetInfo:WWK Rare

@@ -4,5 +4,3 @@ Types:Sorcery
 A:SP$ ChangeZone | Cost$ 2 U | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Choose target sorcery card in your graveyard | ValidTgts$ Sorcery.YouCtrl | SpellDescription$ Return target sorcery card from your graveyard to your hand.
 SVar:Picture:http://serv3.tcgimages.eu/img/cards/Portal/deja_vu.jpg
 Oracle:Return target sorcery card from your graveyard to your hand.
-SetInfo:PO2 Common
-SetInfo:POR Common

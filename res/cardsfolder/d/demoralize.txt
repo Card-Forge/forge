@@ -8,4 +8,3 @@ SVar:KWPump2:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield 
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/demoralize.jpg
 Oracle:Each creature can't be blocked this turn except by two or more creatures.\nThreshold - If seven or more cards are in your graveyard, creatures can't block this turn.
-SetInfo:ODY Common

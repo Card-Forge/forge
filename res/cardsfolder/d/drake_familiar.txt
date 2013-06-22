@@ -11,4 +11,3 @@ SVar:X:Remembered$Amount
 SVar:NeedsToPlay:Enchantment
 SVar:Picture:http://www.wizards.com/global/images/magic/general/drake_familiar.jpg
 Oracle:Flying\nWhen Drake Familiar enters the battlefield, sacrifice it unless you return an enchantment to its owner's hand.
-SetInfo:RAV Common

@@ -6,4 +6,3 @@ SVar:STPrevent:Mode$ PreventDamage | EffectZone$ Command | Target$ Creature.YouC
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/divine_light.jpg
 Oracle:Prevent all damage that would be dealt this turn to creatures you control.
-SetInfo:APC Common

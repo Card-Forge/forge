@@ -7,4 +7,3 @@ T:Mode$ ChangesZone | ValidCard$ Card.AttachedBy | Origin$ Battlefield | Destina
 SVar:TrigDiscard:AB$ Discard | Cost$ 0 | ValidTgts$ Player | TgtPrompt$ Select target player | NumCards$ 2 | Mode$ TgtChoose
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dying_wail.jpg
 Oracle:Enchant creature\nWhen enchanted creature dies, target player discards two cards.
-SetInfo:UDS Common

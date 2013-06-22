@@ -5,4 +5,3 @@ A:SP$ ChangeZone | Cost$ 1 B Sac<1/Creature> | Origin$ Library | Destination$ Ha
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/diabolic_intent.jpg
 Oracle:As an additional cost to cast Diabolic Intent, sacrifice a creature.\nSearch your library for a card and put that card into your hand. Then shuffle your library.
-SetInfo:PLS Rare

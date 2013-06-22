@@ -5,4 +5,3 @@ PT:1/2
 A:AB$ Pump | Cost$ 1 R | ValidTgts$ Creature.Dwarf | NumAtt$ +1 | SpellDescription$ Target Dwarf creature gets +1/+0 until end of turn. | TgtPrompt$ Select target Dwarf creature.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dwarven_lieutenant.jpg
 Oracle:{1}{R}: Target Dwarf creature gets +1/+0 until end of turn.
-SetInfo:FEM Uncommon

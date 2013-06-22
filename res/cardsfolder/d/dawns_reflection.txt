@@ -8,4 +8,3 @@ SVar:TrigMana:AB$ Mana | Cost$ 0 | Produced$ Combo Any | Amount$ 2
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dawns_reflection.jpg
 Oracle:Enchant land\nWhenever enchanted land is tapped for mana, its controller adds two mana in any combination of colors to his or her mana pool. (In addition to the mana the land produces.)
-SetInfo:5DN Common

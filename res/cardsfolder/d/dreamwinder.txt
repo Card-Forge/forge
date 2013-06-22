@@ -7,4 +7,3 @@ A:AB$ Animate | Cost$ U Sac<1/Island> | ValidTgts$ Land | TgtPrompt$ Select targ
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dreamwinder.jpg
 Oracle:Dreamwinder can't attack unless defending player controls an Island.\n{U}, Sacrifice an Island: Target land becomes an Island until end of turn.
-SetInfo:ODY Common

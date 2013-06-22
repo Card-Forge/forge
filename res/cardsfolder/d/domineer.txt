@@ -6,4 +6,3 @@ A:SP$ Attach | Cost$ 1 U U | ValidTgts$ Creature.Artifact | AILogic$ GainControl
 S:Mode$ Continuous | Affected$ Card.EnchantedBy | GainControl$ You | Description$ You control enchanted artifact creature.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/domineer.jpg
 Oracle:Enchant artifact creature\nYou control enchanted artifact creature.
-SetInfo:MRD Uncommon

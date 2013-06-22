@@ -6,4 +6,3 @@ K:Flying
 A:AB$ Pump | Cost$ B | NumAtt$ +2 | NumDef$ -1 | SpellDescription$ CARDNAME gets +2/-1 until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/darklit_gargoyle.jpg
 Oracle:Flying\n{B}: Darklit Gargoyle gets +2/-1 until end of turn.
-SetInfo:CFX Common

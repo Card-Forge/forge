@@ -6,4 +6,3 @@ R:Event$ Moved | ActiveZones$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:Exile:AB$ ChangeZone | Cost$ 0 | Hidden$ True | Origin$ All | Destination$ Exile | Defined$ ReplacedCard
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dryad_militant.jpg
 Oracle:If an instant or sorcery card would be put into a graveyard from anywhere, exile it instead.
-SetInfo:RTR Uncommon

@@ -6,4 +6,3 @@ K:First Strike
 K:Shroud
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deft_duelist.jpg
 Oracle:First strike\nShroud (This creature can't be the target of spells or abilities.)
-SetInfo:ALA Common

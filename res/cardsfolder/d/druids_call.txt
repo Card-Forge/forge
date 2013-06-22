@@ -8,4 +8,3 @@ SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ X | TokenName$ Squirrel | Token
 SVar:X:TriggerCount$DamageAmount
 SVar:Picture:http://www.wizards.com/global/images/magic/general/druids_call.jpg
 Oracle:Enchant creature\nWhenever enchanted creature is dealt damage, its controller puts that many 1/1 green Squirrel creature tokens onto the battlefield.
-SetInfo:ODY Uncommon

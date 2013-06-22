@@ -5,4 +5,3 @@ PT:2/1
 K:Fear
 SVar:Picture:http://resources.wizards.com/magic/cards/mrd/en-us/card48570.jpg
 Oracle:Fear (This creature can't be blocked except by artifact creatures and/or black creatures.)
-SetInfo:MRD Common

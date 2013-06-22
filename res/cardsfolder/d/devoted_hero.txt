@@ -4,5 +4,3 @@ Types:Creature Elf Soldier
 PT:1/2
 SVar:Picture:http://resources.wizards.com/magic/cards/p3/en-us/card21057.jpg
 Oracle:
-SetInfo:S99 Common
-SetInfo:POR Common

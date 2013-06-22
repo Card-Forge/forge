@@ -7,5 +7,3 @@ SVar:RemRandomDeck:True
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/distorting_lens.jpg
 Oracle:{T}: Target permanent becomes the color of your choice until end of turn.
-SetInfo:MMQ Rare
-SetInfo:8ED Rare

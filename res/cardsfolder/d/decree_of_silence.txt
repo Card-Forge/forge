@@ -12,4 +12,3 @@ SVar:DecreeX:Count$Valid Card.Self+counters_GE3_DEPLETION
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/decree_of_silence.jpg
 Oracle:Whenever an opponent casts a spell, counter that spell and put a depletion counter on Decree of Silence. If there are three or more depletion counters on Decree of Silence, sacrifice it.\nCycling {4}{U}{U} ({4}{U}{U}, Discard this card: Draw a card.)\nWhen you cycle Decree of Silence, you may counter target spell.
-SetInfo:SCG Rare

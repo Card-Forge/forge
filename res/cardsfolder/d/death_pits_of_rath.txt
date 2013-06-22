@@ -5,6 +5,3 @@ S:Mode$ Continuous | Affected$ Creature | AddHiddenKeyword$ When CARDNAME is dea
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/death_pits_of_rath.jpg
 Oracle:Whenever a creature is dealt damage, destroy it. It can't be regenerated.
-SetInfo:8ED Rare
-SetInfo:TMP Rare
-SetInfo:9ED Rare

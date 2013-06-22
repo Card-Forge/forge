@@ -7,5 +7,3 @@ K:Indestructible
 K:If CARDNAME would be put into a graveyard from anywhere, reveal CARDNAME and shuffle it into its owner's library instead.
 SVar:Picture:http://resources.wizards.com/magic/cards/dst/en-us/card48158.jpg
 Oracle:Trample\nDarksteel Colossus is indestructible.\nIf Darksteel Colossus would be put into a graveyard from anywhere, reveal Darksteel Colossus and shuffle it into its owner's library instead.
-SetInfo:M10 Mythic
-SetInfo:DST Rare

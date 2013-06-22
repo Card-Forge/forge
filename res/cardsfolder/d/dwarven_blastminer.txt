@@ -6,4 +6,3 @@ K:Morph:R
 A:AB$ Destroy | Cost$ 2 R T | ValidTgts$ Land.nonBasic | TgtPrompt$ Select target nonbasic land | SpellDescription$ Destroy target nonbasic land.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dwarven_blastminer.jpg
 Oracle:{2}{R}, {T}: Destroy target nonbasic land.\nMorph {R} (You may cast this face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)
-SetInfo:ONS Uncommon

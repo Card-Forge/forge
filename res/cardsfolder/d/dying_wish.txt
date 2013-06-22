@@ -9,4 +9,3 @@ SVar:DBGainLife:DB$ GainLife | Cost$ 0 | Defined$ You | LifeAmount$ X | Referenc
 SVar:X:TriggeredCard$CardPower
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dying_wish.jpg
 Oracle:Enchant creature you control\nWhen enchanted creature dies, target player loses X life and you gain X life, where X is its power.
-SetInfo:GTC Uncommon

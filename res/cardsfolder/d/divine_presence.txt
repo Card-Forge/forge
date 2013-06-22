@@ -10,4 +10,3 @@ SVar:PlayMain1:TRUE
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/divine_presence.jpg
 Oracle:If a source would deal 4 or more damage to a creature or player, that source deals 3 damage to that creature or player instead.
-SetInfo:INV Rare

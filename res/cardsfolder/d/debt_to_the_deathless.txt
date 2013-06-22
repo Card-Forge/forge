@@ -8,4 +8,3 @@ SVar:X:Count$xPaid
 SVar:Y:SVar$X/Twice
 SVar:Picture:http://www.wizards.com/global/images/magic/general/debt_to_the_deathless.jpg
 Oracle:Each opponent loses two times X life. You gain life equal to the life lost this way.
-SetInfo:DGM Uncommon

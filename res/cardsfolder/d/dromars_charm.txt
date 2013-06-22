@@ -7,4 +7,3 @@ SVar:DBCounter:DB$ Counter | TargetType$ Spell | ValidTgts$ Card | TgtPrompt$ Co
 SVar:DBPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -2 | NumDef$ -2 | IsCurse$ True | SpellDescription$ Target creature gets -2/-2 until end of turn
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dromars_charm.jpg
 Oracle:Choose one - You gain 5 life; or counter target spell; or target creature gets -2/-2 until end of turn.
-SetInfo:PLS Uncommon

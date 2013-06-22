@@ -9,4 +9,3 @@ SVar:TrigReturn:AB$ ChangeZone | Cost$ 1 | Defined$ TriggeredCard | Origin$ Grav
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/decaying_soil.jpg
 Oracle:At the beginning of your upkeep, exile a card from your graveyard.\nThreshold - As long as seven or more cards are in your graveyard, Decaying Soil has "Whenever a nontoken creature is put into your graveyard from the battlefield, you may pay {1}. If you do, return that card to your hand."
-SetInfo:ODY Rare

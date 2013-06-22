@@ -6,4 +6,3 @@ SVar:DBDraw:DB$Draw | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dredge.jpg
 Oracle:Sacrifice a creature or land.\nDraw a card.
-SetInfo:INV Uncommon

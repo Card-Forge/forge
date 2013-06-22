@@ -9,4 +9,3 @@ K:At the beginning of your upkeep, sacrifice CARDNAME unless you pay R R R R
 A:AB$ Pump | Cost$ R | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dragon_tyrant.jpg
 Oracle:Flying, trample\nDouble strike (This creature deals both first-strike and regular combat damage.)\nAt the beginning of your upkeep, sacrifice Dragon Tyrant unless you pay {R}{R}{R}{R}.\n{R}: Dragon Tyrant gets +1/+0 until end of turn.
-SetInfo:SCG Rare

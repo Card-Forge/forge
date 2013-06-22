@@ -7,4 +7,3 @@ S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ -1 | AddToughnes
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/defensive_stance.jpg
 Oracle:Enchant creature\nEnchanted creature gets -1/+1.
-SetInfo:NPH Common

@@ -7,5 +7,3 @@ SVar:TrigSac:AB$ SacrificeAll | Cost$ 0 | ValidCards$ Creature.YouCtrl
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/death_pit_offering.jpg
 Oracle:When Death Pit Offering enters the battlefield, sacrifice all creatures you control.\nCreatures you control get +2/+2.
-SetInfo:8ED Rare
-SetInfo:NMS Rare

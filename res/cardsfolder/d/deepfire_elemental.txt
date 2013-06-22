@@ -8,4 +8,3 @@ SVar:X:Targeted$CardManaCost
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deepfire_elemental.jpg
 Oracle:{X}{X}{1}: Destroy target artifact or creature with converted mana cost X.
-SetInfo:CSP Uncommon

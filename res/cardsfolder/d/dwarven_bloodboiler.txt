@@ -6,4 +6,3 @@ A:AB$ Pump | Cost$ tapXType<1/Dwarf> | ValidTgts$ Creature | TgtPrompt$ Select t
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dwarven_bloodboiler.jpg
 Oracle:Tap an untapped Dwarf you control: Target creature gets +2/+0 until end of turn.
-SetInfo:JUD Rare

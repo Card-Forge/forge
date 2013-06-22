@@ -6,4 +6,3 @@ A:AB$ Destroy | Cost$ 2 B T Sac<1/Zombie> | ValidTgts$ Creature.nonZombie | TgtP
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deathmark_prelate.jpg
 Oracle:{2}{B}, {T}, Sacrifice a Zombie: Destroy target non-Zombie creature. It can't be regenerated. Activate this ability only any time you could cast a sorcery.
-SetInfo:LGN Uncommon

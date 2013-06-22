@@ -6,4 +6,3 @@ S:Mode$ Continuous | Affected$ Creature.Blue+YouCtrl | AddKeyword$ Unblockable |
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deepchannel_mentor.jpg
 Oracle:Blue creatures you control are unblockable.
-SetInfo:SHM Uncommon

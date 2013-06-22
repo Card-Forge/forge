@@ -4,5 +4,3 @@ Types:Instant
 A:SP$ Pump | Cost$ 1 RW | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Double Strike | SpellDescription$ Target creature gains double strike until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/double_cleave.jpg
 Oracle:Target creature gains double strike until end of turn. (It deals both first-strike and regular combat damage.)
-SetInfo:EVE Common
-SetInfo:HOP Common

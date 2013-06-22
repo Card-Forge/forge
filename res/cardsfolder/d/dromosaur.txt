@@ -7,4 +7,3 @@ T:Mode$ AttackerBlocked | ValidCard$ Card.Self | Execute$ TrigBlockedPump | Seco
 SVar:TrigBlockedPump:AB$Pump | Cost$ 0 | NumAtt$ +2 | NumDef$ -2 | Defined$ Self
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dromosaur.jpg
 Oracle:Whenever Dromosaur blocks or becomes blocked, it gets +2/-2 until end of turn.
-SetInfo:USG Common

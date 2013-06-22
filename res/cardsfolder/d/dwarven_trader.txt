@@ -4,4 +4,3 @@ Types:Creature Dwarf
 PT:1/1
 SVar:Picture:http://resources.wizards.com/magic/cards/hm/en-us/card3001.jpg
 Oracle:
-SetInfo:HML Common x2

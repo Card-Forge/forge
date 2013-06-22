@@ -5,4 +5,3 @@ A:SP$ Destroy | Cost$ 4 B B | ValidTgts$ Creature.nonBlack | TgtPrompt$ Select t
 K:Madness:B
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dark_withering.jpg
 Oracle:Destroy target nonblack creature.\nMadness {B} (If you discard this card, you may cast it for its madness cost instead of putting it into your graveyard.)
-SetInfo:TSP Common

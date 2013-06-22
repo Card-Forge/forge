@@ -5,5 +5,3 @@ A:SP$ Destroy | Cost$ 4 B B | ValidTgts$ Creature.nonBlack | TgtPrompt$ Select t
 SVar:DBGainLife:DB$GainLife | LifeAmount$ 3
 SVar:Picture:http://serv2.tcgimages.eu/img/cards/Portal_Second_Age/dark_offering.jpg
 Oracle:Destroy target nonblack creature. You gain 3 life.
-SetInfo:PO2 Uncommon
-SetInfo:S99 Uncommon

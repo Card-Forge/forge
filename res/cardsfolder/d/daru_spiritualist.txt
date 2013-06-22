@@ -6,4 +6,3 @@ T:Mode$ BecomesTarget | ValidTarget$ Cleric.Creature+YouCtrl | TriggerZones$ Bat
 SVar:TrigPump:AB$Pump | Cost$ 0 | Defined$ TriggeredTarget | NumDef$ 2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/daru_spiritualist.jpg
 Oracle:Whenever a Cleric creature you control becomes the target of a spell or ability, it gets +0/+2 until end of turn.
-SetInfo:SCG Common

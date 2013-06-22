@@ -6,4 +6,3 @@ SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Library | Destinati
 SVar:DBExile:DB$ ChangeZone | Defined$ Remembered | Origin$ Library | Destination$ Exile
 SVar:Picture:http://www.wizards.com/global/images/magic/general/death_or_glory.jpg
 Oracle:Separate all creature cards in your graveyard into two piles. Exile the pile of an opponent's choice and return the other to the battlefield.
-SetInfo:INV Rare

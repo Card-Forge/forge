@@ -6,4 +6,3 @@ SVar:NonStackingEffect:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/didgeridoo.jpg
 Oracle:{3}: You may put a Minotaur permanent card from your hand onto the battlefield.
-SetInfo:HML Rare

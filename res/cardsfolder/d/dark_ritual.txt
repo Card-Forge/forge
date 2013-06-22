@@ -5,17 +5,3 @@ A:SP$ Mana | Cost$ B | Produced$ B | Amount$ 3 | SpellDescription$ Add B B B to 
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dark_ritual.jpg
 Oracle:Add {B}{B}{B} to your mana pool.
-SetInfo:2ED Common
-SetInfo:TMP Common
-SetInfo:HOP Common
-SetInfo:5ED Common
-SetInfo:USG Common
-SetInfo:MMQ Common
-SetInfo:MIR Common
-SetInfo:LEB Common
-SetInfo:LEA Common
-SetInfo:DDE Common
-SetInfo:ICE Common
-SetInfo:4ED Common
-SetInfo:DDC Common
-SetInfo:3ED Common

@@ -6,4 +6,3 @@ SVar:DBSearch:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | Chan
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/doubling_chant.jpg
 Oracle:For each creature you control, you may search your library for a creature card with the same name as that creature. Put those cards onto the battlefield, then shuffle your library.
-SetInfo:M12 Rare

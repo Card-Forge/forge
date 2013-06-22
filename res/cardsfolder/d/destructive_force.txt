@@ -6,4 +6,3 @@ SVar:DBDamage:DB$ DamageAll | NumDmg$ 5 | ValidCards$ Creature
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/destructive_force.jpg
 Oracle:Each player sacrifices five lands. Destructive Force deals 5 damage to each creature.
-SetInfo:M11 Rare

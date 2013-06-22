@@ -8,4 +8,3 @@ SVar:TrigBounce:AB$ ChangeZone | Cost$ 0 | ValidTgts$ Permanent | Origin$ Battle
 SVar:DBDiscard:DB$ Discard | Defined$ TargetedOwner | NumCards$ 1 | Mode$ TgtChoose
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dinrova_horror.jpg
 Oracle:When Dinrova Horror enters the battlefield, return target permanent to its owner's hand, then that player discards a card.
-SetInfo:GTC Uncommon

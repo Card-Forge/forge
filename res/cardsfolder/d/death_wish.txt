@@ -8,4 +8,3 @@ SVar:X:Count$YourLifeTotal/HalfUp
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/death_wish.jpg
 Oracle:You may choose a card you own from outside the game and put it into your hand. You lose half your life, rounded up. Exile Death Wish.
-SetInfo:JUD Rare

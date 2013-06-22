@@ -11,4 +11,3 @@ A:AB$ Regenerate | Cost$ 2 SubCounter<1/CUBE> | ValidTgts$ Creature | TgtPrompt$
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/delifs_cube.jpg
 Oracle:{2}, {T}: This turn, when target creature you control attacks and isn't blocked, it assigns no combat damage this turn and you put a cube counter on Delif's Cube.\n{2}, Remove a cube counter from Delif's Cube: Regenerate target creature.
-SetInfo:FEM Rare

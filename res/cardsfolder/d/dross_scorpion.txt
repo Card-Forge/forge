@@ -7,4 +7,3 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigUntap:AB$Untap | Cost$ 0 | ValidTgts$ Artifact | TgtPrompt$ Choose target artifact.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dross_scorpion.jpg
 Oracle:Whenever Dross Scorpion or another artifact creature dies, you may untap target artifact.
-SetInfo:MRD Common

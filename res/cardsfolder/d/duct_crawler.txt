@@ -10,5 +10,3 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/duct_crawler.jpg
 Oracle:{1}{R}: Target creature can't block Duct Crawler this turn.
-SetInfo:10E Common
-SetInfo:STH Common

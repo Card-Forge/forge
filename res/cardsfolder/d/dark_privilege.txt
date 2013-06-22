@@ -8,4 +8,3 @@ A:AB$ Regenerate | Cost$ Sac<1/Creature> | Defined$ Enchanted | SpellDescription
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dark_privilege.jpg
 Oracle:Enchant creature\nEnchanted creature gets +1/+1.\nSacrifice a creature: Regenerate enchanted creature.
-SetInfo:VIS Common

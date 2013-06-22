@@ -5,7 +5,3 @@ PT:2/1
 K:Flying
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dusk_imp.jpg
 Oracle:Flying
-SetInfo:8ED Common
-SetInfo:DDC Common
-SetInfo:ODY Common
-SetInfo:10E Common

@@ -9,4 +9,3 @@ SVar:TrigWinGame:AB$WinsGame | Cost$ 0 | Defined$ You
 SVar:X:Number$20
 SVar:Picture:http://www.wizards.com/global/images/magic/general/darksteel_reactor.jpg
 Oracle:Darksteel Reactor is indestructible. ("Destroy" effects and lethal damage don't destroy it.)\nAt the beginning of your upkeep, you may put a charge counter on Darksteel Reactor.\nWhen Darksteel Reactor has twenty or more charge counters on it, you win the game.
-SetInfo:DST Rare

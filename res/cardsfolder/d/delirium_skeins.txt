@@ -6,4 +6,3 @@ SVar:DeliriumDiscard:DB$ Discard | Mode$ TgtChoose | Defined$ Remembered | NumCa
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/delirium_skeins.jpg
 Oracle:Each player discards three cards.
-SetInfo:DIS Common

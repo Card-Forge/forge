@@ -6,4 +6,3 @@ A:SP$ Attach | Cost$ 2 B | ValidTgts$ Creature | AILogic$ Curse
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ CARDNAME can't attack. & Prevent all combat damage that would be dealt by CARDNAME. | Description$ Enchanted creature can't attack. Prevent all combat damage that would be dealt by enchanted creature.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/demonic_torment.jpg
 Oracle:Enchant creature\nEnchanted creature can't attack.\nPrevent all combat damage that would be dealt by enchanted creature.
-SetInfo:LEG Uncommon

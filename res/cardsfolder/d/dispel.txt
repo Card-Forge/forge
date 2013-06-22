@@ -4,5 +4,3 @@ Types:Instant
 A:SP$ Counter | Cost$ U | TargetType$ Spell | ValidTgts$ Instant | TgtPrompt$ Select target Instant Spell | SpellDescription$ Counter target instant spell.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dispel.jpg
 Oracle:Counter target instant spell.
-SetInfo:WWK Common
-SetInfo:RTR Common

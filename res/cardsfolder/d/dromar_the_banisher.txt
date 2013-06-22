@@ -9,4 +9,3 @@ SVar:DBRevealDiscard:DB$ ChangeZoneAll | ChangeType$ Creature.ChosenColor | Orig
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dromar_the_banisher.jpg
 Oracle:Flying\nWhenever Dromar, the Banisher deals combat damage to a player, you may pay {2}{U}. If you do, choose a color, then return all creatures of that color to their owners' hands.
-SetInfo:INV Rare

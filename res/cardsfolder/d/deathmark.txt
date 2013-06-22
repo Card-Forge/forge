@@ -4,8 +4,3 @@ Types:Sorcery
 A:SP$ Destroy | Cost$ B | ValidTgts$ Creature.Green,Creature.White | TgtPrompt$ Select target green or white creature | SpellDescription$ Destroy target green or white creature.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deathmark.jpg
 Oracle:Destroy target green or white creature.
-SetInfo:M11 Uncommon
-SetInfo:M10 Uncommon
-SetInfo:M12 Uncommon
-SetInfo:CSP Uncommon
-SetInfo:10E Uncommon

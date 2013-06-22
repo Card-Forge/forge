@@ -6,4 +6,3 @@ SVar:TrigSac:AB$ Sacrifice | Cost$ 0 | SacValid$ Land.nonBasic | Defined$ Trigge
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/destructive_flow.jpg
 Oracle:At the beginning of each player's upkeep, that player sacrifices a nonbasic land.
-SetInfo:PLS Rare

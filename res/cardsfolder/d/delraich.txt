@@ -6,4 +6,3 @@ K:Trample
 SVar:AltCost:Cost$ Sac<3/Creature.Black> | Description$ You may sacrifice three black creatures rather than pay Delraich's mana cost.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/delraich.jpg
 Oracle:Trample\nYou may sacrifice three black creatures rather than pay Delraich's mana cost.
-SetInfo:MMQ Rare

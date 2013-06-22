@@ -4,4 +4,3 @@ Types:Sorcery
 A:SP$ DestroyAll | Cost$ 2 B B | ValidCards$ Creature | NoRegen$ True | SpellDescription$ Destroy all creatures. They can't be regenerated.
 SVar:Picture:http://resources.wizards.com/magic/cards/plc/en-us/card122423.jpg
 Oracle:Destroy all creatures. They can't be regenerated.
-SetInfo:PLC Rare

@@ -7,4 +7,3 @@ K:Desertwalk
 K:PreventAllDamageBy Desert
 SVar:Picture:http://www.wizards.com/global/images/magic/general/desert_nomads.jpg
 Oracle:Desertwalk\nPrevent all damage that would be dealt to Desert Nomads by Deserts.
-SetInfo:ARN Common

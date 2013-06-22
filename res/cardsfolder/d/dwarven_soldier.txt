@@ -7,5 +7,3 @@ T:Mode$ Blocks | ValidCard$ Card.Self | ValidBlocked$ Orc | Execute$ TrigPump | 
 SVar:TrigPump:AB$Pump | Cost$ 0 | Defined$ Self | NumDef$ 2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dwarven_soldier.jpg
 Oracle:Whenever Dwarven Soldier blocks or becomes blocked by one or more Orcs, Dwarven Soldier gets +0/+2 until end of turn.
-SetInfo:5ED Common
-SetInfo:FEM Common x3

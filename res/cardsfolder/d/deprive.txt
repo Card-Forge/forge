@@ -5,4 +5,3 @@ A:SP$ Counter | Cost$ U U Return<1/Land> | TargetType$ Spell | TgtPrompt$ Select
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deprive.jpg
 Oracle:As an additional cost to cast Deprive, return a land you control to its owner's hand.\nCounter target spell.
-SetInfo:ROE Common

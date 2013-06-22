@@ -8,4 +8,3 @@ SVar:RemRandomDeck:True
 SVar:AntiBuffedBy:Artifact
 SVar:Picture:http://www.wizards.com/global/images/magic/general/drooling_ogre.jpg
 Oracle:Whenever a player casts an artifact spell, that player gains control of Drooling Ogre. (This effect lasts indefinitely.)
-SetInfo:DST Common

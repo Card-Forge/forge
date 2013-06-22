@@ -6,4 +6,3 @@ A:AB$ Pump | Cost$ W T | KW$ Protection:Spell.Instant,Spell.Sorcery:Protection f
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/devoted_caretaker.jpg
 Oracle:{W}, {T}: Target permanent you control gains protection from instant spells and from sorcery spells until end of turn.
-SetInfo:ODY Rare

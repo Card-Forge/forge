@@ -9,4 +9,3 @@ SVar:TrigLose:AB$ LoseLife | Cost$ 0 | Defined$ TriggeredCardController | LifeAm
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/decomposition.jpg
 Oracle:Enchant black creature\nEnchanted creature has "Cumulative upkeep-Pay 1 life." (At the beginning of its controller's upkeep, that player puts an age counter on it, then sacrifices it unless he or she pays its upkeep cost for each age counter on it.)\nWhen enchanted creature dies, its controller loses 2 life.
-SetInfo:MIR Uncommon

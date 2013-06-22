@@ -5,4 +5,3 @@ T:Mode$ DamageDone | ValidSource$ Permanent | ValidTarget$ You | TriggerZones$ B
 SVar:TrigChange:AB$ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Hand | Defined$ TriggeredSource
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dissipation_field.jpg
 Oracle:Whenever a permanent deals damage to you, return it to its owner's hand.
-SetInfo:SOM Rare

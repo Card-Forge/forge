@@ -10,4 +10,3 @@ SVar:TrigChangeZone:AB$ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dust_elemental.jpg
 Oracle:Flash (You may cast this spell any time you could cast an instant.)\nFlying; fear (This creature can't be blocked except by artifact creatures and/or black creatures.)\nWhen Dust Elemental enters the battlefield, return three creatures you control to their owner's hand.
-SetInfo:PLC Rare

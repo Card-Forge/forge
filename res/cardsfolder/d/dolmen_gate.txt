@@ -5,4 +5,3 @@ S:Mode$ PreventDamage | Target$ Creature.attacking+YouCtrl | CombatDamage$ True 
 SVar:NonStackingEffect:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dolmen_gate.jpg
 Oracle:Prevent all combat damage that would be dealt to attacking creatures you control.
-SetInfo:LRW Rare

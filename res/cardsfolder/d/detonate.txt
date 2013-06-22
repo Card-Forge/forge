@@ -6,7 +6,3 @@ SVar:DBDamage:DB$DealDamage | Defined$ TargetedController | NumDmg$ X | Referenc
 SVar:X:Targeted$CardManaCost
 SVar:Picture:http://www.wizards.com/global/images/magic/general/detonate.jpg
 Oracle:Destroy target artifact with converted mana cost X. It can't be regenerated. Detonate deals X damage to that artifact's controller.
-SetInfo:ATQ Uncommon
-SetInfo:5ED Uncommon
-SetInfo:4ED Uncommon
-SetInfo:MRD Uncommon

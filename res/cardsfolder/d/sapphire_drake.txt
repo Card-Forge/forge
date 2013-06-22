@@ -6,4 +6,3 @@ K:Flying
 S:Mode$ Continuous | Affected$ Creature.YouCtrl+counters_GE1_P1P1 | AddKeyword$ Flying | Description$ Each creature you control with a +1/+1 counter on it has flying.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sapphire_drake.jpg
 Oracle:Flying\nEach creature you control with a +1/+1 counter on it has flying.
-SetInfo:GTC Uncommon

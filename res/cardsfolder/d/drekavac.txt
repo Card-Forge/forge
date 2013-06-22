@@ -9,4 +9,3 @@ SVar:NeedsToPlayVar:Y GE1
 SVar:Y:Count$ValidHand Card.nonCreature+YouCtrl
 SVar:Picture:http://resources.wizards.com/magic/cards/dis/en-us/card111258.jpg
 Oracle:When Drekavac enters the battlefield, sacrifice it unless you discard a noncreature card.
-SetInfo:DIS Uncommon

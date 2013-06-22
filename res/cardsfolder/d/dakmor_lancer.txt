@@ -6,5 +6,3 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigDestroy:DB$Destroy | ValidTgts$ Creature.nonBlack | TgtPrompt$ Select target nonblack creature.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dakmor_lancer.jpg
 Oracle:When Dakmor Lancer enters the battlefield, destroy target nonblack creature.
-SetInfo:S99 Rare
-SetInfo:7ED Uncommon

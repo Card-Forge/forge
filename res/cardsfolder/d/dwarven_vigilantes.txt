@@ -8,4 +8,3 @@ SVar:DBNoCombatDamage:DB$Pump | Defined$ Self | KW$ HIDDEN CARDNAME assigns no c
 SVar:X:Count$CardPower
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dwarven_vigilantes.jpg
 Oracle:Whenever Dwarven Vigilantes attacks and isn't blocked, you may have it deal damage equal to its power to target creature. If you do, Dwarven Vigilantes assigns no combat damage this turn.
-SetInfo:VIS Common

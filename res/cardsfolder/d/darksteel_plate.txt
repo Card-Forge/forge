@@ -6,4 +6,3 @@ K:Equip 2
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddHiddenKeyword$ Indestructible | Description$ Equipped creature is indestructible.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/darksteel_plate.jpg
 Oracle:Darksteel Plate is indestructible.\nEquipped creature is indestructible.\nEquip {2}
-SetInfo:MBS Rare

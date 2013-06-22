@@ -6,5 +6,3 @@ SVar:NonStackingEffect:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/darkest_hour.jpg
 Oracle:All creatures are black.
-SetInfo:7ED Rare
-SetInfo:USG Rare

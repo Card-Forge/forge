@@ -7,4 +7,3 @@ T:Mode$ AttackerUnblocked | ValidCard$ Card.Self | OptionalDecider$ You | Execut
 SVar:TrigDiscard:AB$Discard | Cost$ Sac<1/CARDNAME> | Defined$ DefendingPlayer | NumCards$ 3 | Mode$ TgtChoose
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dauthi_mindripper.jpg
 Oracle:Shadow (This creature can block or be blocked by only creatures with shadow.)\nWhenever Dauthi Mindripper attacks and isn't blocked, you may sacrifice it. If you do, defending player discards three cards.
-SetInfo:TMP Uncommon

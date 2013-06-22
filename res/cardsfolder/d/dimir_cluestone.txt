@@ -7,4 +7,3 @@ A:AB$ Draw | Cost$ U B T Sac<1/CARDNAME> | NumCards$ 1 | SpellDescription$ Draw 
 DeckNeeds:Color$Blue|Black
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dimir_cluestone.jpg
 Oracle:{T}: Add {U} or {B} to your mana pool.\n{U}{B}, {T}, Sacrifice Dimir Cluestone: Draw a card.
-SetInfo:DGM Common

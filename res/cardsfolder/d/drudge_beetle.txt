@@ -6,4 +6,3 @@ A:AB$ PutCounter | Cost$ 5 G ExileFromGrave<1/CARDNAME> | ActivationZone$ Gravey
 SVar:X:Count$CardPower
 SVar:Picture:http://www.wizards.com/global/images/magic/general/drudge_beetle.jpg
 Oracle:Scavenge {5}{G} ({5}{G}, Exile this card from your graveyard: Put a number of +1/+1 counters equal to this card's power on target creature. Scavenge only as a sorcery.)
-SetInfo:RTR Common

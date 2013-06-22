@@ -6,6 +6,3 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigChangeZoneAll:AB$ChangeZoneAll | Cost$ 0 | Origin$ Battlefield | Destination$ Hand | ChangeType$ Creature.Other+YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/denizen_of_the_deep.jpg
 Oracle:When Denizen of the Deep enters the battlefield, return each other creature you control to its owner's hand.
-SetInfo:PO2 Rare
-SetInfo:S99 Rare
-SetInfo:10E Rare

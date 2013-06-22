@@ -8,4 +8,3 @@ SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ TriggeredCardController | NumCards$ 1
 SVar:BuffedBy:Sliver
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dormant_sliver.jpg
 Oracle:All Sliver creatures have defender.\nAll Slivers have "When this permanent enters the battlefield, draw a card."
-SetInfo:PLC Uncommon

@@ -4,9 +4,3 @@ Types:Instant
 A:SP$ Destroy | Cost$ W | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment | SpellDescription$ Destroy target enchantment.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/demystify.jpg
 Oracle:Destroy target enchantment.
-SetInfo:8ED Common
-SetInfo:ROE Common
-SetInfo:9ED Common
-SetInfo:M12 Common
-SetInfo:ONS Common
-SetInfo:10E Common

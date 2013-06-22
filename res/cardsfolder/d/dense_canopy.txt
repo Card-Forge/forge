@@ -7,4 +7,3 @@ SVar:PlayMain1:TRUE
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dense_canopy.jpg
 Oracle:Creatures with flying can block only creatures with flying.
-SetInfo:SOK Uncommon

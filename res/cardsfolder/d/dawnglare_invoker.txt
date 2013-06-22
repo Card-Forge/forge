@@ -7,4 +7,3 @@ A:AB$ TapAll | Cost$ 8 | ValidTgts$ Player | TgtPrompt$ Select target player | V
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dawnglare_invoker.jpg
 Oracle:Flying\n{8}: Tap all creatures target player controls.
-SetInfo:ROE Common

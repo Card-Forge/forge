@@ -6,4 +6,3 @@ K:Flash
 A:AB$ Regenerate | Cost$ B | SpellDescription$ Regenerate CARDNAME.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/drudge_reavers.jpg
 Oracle:Flash (You may cast this spell any time you could cast an instant.)\n{B}: Regenerate Drudge Reavers.
-SetInfo:TSP Common

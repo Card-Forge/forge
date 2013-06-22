@@ -6,4 +6,3 @@ T:Mode$ AttackerBlocked | ValidCard$ Card.Self | OptionalDecider$ You | Execute$
 SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/drelnoch.jpg
 Oracle:Whenever Drelnoch becomes blocked, you may draw two cards.
-SetInfo:CSP Common

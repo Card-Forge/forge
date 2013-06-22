@@ -9,5 +9,3 @@ SVar:DB:DB$Draw | Defined$ You | NumCards$ X
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dregs_of_sorrow.jpg
 Oracle:Destroy X target nonblack creatures. Draw X cards.
-SetInfo:7ED Rare
-SetInfo:TMP Rare

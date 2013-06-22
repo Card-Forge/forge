@@ -6,4 +6,3 @@ SVar:TrigCounter:DB$ Counter | Cost$ 0 | UnlessCost$ PayLife<5> | Defined$ Trigg
 A:SP$ Counter | Cost$ B B | TargetType$ Spell | ValidTgts$ Card | SpellDescription$ Counter target spell.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dash_hopes.jpg
 Oracle:When you cast Dash Hopes, any player may pay 5 life. If a player does, counter Dash Hopes.\nCounter target spell.
-SetInfo:PLC Common

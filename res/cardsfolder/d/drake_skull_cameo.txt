@@ -7,4 +7,3 @@ SVar:RemRandomDeck:True
 DeckNeeds:Color$Blue|Black
 SVar:Picture:http://www.wizards.com/global/images/magic/general/drake_skull_cameo.jpg
 Oracle:{T}: Add {U} or {B} to your mana pool.
-SetInfo:INV Uncommon

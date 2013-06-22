@@ -6,4 +6,3 @@ A:AB$ Mana | Cost$ Sac<1/Prism.token/Prism token> | Produced$ Any | SpellDescrip
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/diamond_kaleidoscope.jpg
 Oracle:{3}, {T}: Put a 0/1 colorless Prism artifact creature token onto the battlefield.\nSacrifice a Prism token: Add one mana of any color to your mana pool.
-SetInfo:VIS Rare

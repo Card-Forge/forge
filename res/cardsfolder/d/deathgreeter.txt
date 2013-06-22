@@ -6,5 +6,3 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigGainLife:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deathgreeter.jpg
 Oracle:Whenever another creature dies, you may gain 1 life.
-SetInfo:DDD Common
-SetInfo:ALA Common

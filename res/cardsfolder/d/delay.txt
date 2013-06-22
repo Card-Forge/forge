@@ -7,4 +7,3 @@ SVar:DBPump:DB$ PumpAll | ValidCards$ Card.IsRemembered+withoutSuspend | PumpZon
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/delay.jpg
 Oracle:Counter target spell. If the spell is countered this way, exile it with three time counters on it instead of putting it into its owner's graveyard. If it doesn't have suspend, it gains suspend. (At the beginning of its owner's upkeep, remove a counter from that card. When the last is removed, the player plays it without paying its mana cost. If it's a creature, it has haste.)
-SetInfo:FUT Uncommon

@@ -7,4 +7,3 @@ A:AB$ ChangeZone | Cost$ U | Defined$ Enchanted | Origin$ Battlefield | Destinat
 SVar:DBBounce:DB$ ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Hand
 SVar:Picture:http://www.wizards.com/global/images/magic/general/disappear.jpg
 Oracle:Enchant creature\n{U}: Return enchanted creature and Disappear to their owners' hands.
-SetInfo:UDS Uncommon

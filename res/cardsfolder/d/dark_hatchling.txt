@@ -7,6 +7,3 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigDestroy:DB$Destroy | ValidTgts$ Creature.nonBlack | NoRegen$ True | TgtPrompt$ Select target nonblack creature.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dark_hatchling.jpg
 Oracle:Flying\nWhen Dark Hatchling enters the battlefield, destroy target nonblack creature. It can't be regenerated.
-SetInfo:PC2 Rare
-SetInfo:COM Rare
-SetInfo:USG Rare

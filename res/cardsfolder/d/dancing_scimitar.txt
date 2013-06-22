@@ -5,9 +5,3 @@ PT:1/5
 K:Flying
 SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card84114.jpg
 Oracle:Flying (This creature can't be blocked except by creatures with flying or reach.)
-SetInfo:6ED Rare
-SetInfo:9ED Uncommon
-SetInfo:ARN Rare
-SetInfo:5ED Rare
-SetInfo:4ED Rare
-SetInfo:3ED Rare

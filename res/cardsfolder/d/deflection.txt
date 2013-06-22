@@ -5,8 +5,3 @@ A:SP$ ChangeTargets | Cost$ 3 U | TargetType$ Spell | ValidTgts$ Card | TargetsS
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deflection.jpg
 Oracle:Change the target of target spell with a single target.
-SetInfo:ICE Rare
-SetInfo:5ED Rare
-SetInfo:7ED Rare
-SetInfo:8ED Rare
-SetInfo:6ED Rare

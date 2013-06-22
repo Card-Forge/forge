@@ -6,4 +6,3 @@ A:SP$ PumpAll | Cost$ Sac<1/Creature> | ValidCards$ Creature.YouCtrl | NumAtt$ +
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dark_triumph.jpg
 Oracle:If you control a Swamp, you may sacrifice a creature rather than pay Dark Triumph's mana cost.\nCreatures you control get +2/+0 until end of turn.
-SetInfo:NMS Uncommon

@@ -9,4 +9,3 @@ SVar:Y:PlayerCountOpponents$HighestCardsInHand
 SVar:TrigReturn:AB$ ChangeZone | Cost$ 0 | Defined$ Self | Origin$ Graveyard | Destination$ Hand
 SVar:Picture:http://www.wizards.com/global/images/magic/general/death_of_a_thousand_stings.jpg
 Oracle:Target player loses 1 life and you gain 1 life.\nAt the beginning of your upkeep, if you have more cards in hand than each opponent, you may return Death of a Thousand Stings from your graveyard to your hand.
-SetInfo:SOK Common

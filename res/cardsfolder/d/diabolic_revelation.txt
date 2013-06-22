@@ -6,4 +6,3 @@ SVar:X:Count$xPaid
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/diabolic_revelation.jpg
 Oracle:Search your library for up to X cards and put those cards into your hand. Then shuffle your library.
-SetInfo:M13 Rare

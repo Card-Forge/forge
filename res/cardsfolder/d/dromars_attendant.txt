@@ -6,4 +6,3 @@ A:AB$ Mana | Cost$ 1 Sac<1/CARDNAME> | Produced$ W U B | SpellDescription$ Add W
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dromars_attendant.jpg
 Oracle:{1}, Sacrifice Dromar's Attendant: Add {W}{U}{B} to your mana pool.
-SetInfo:INV Uncommon

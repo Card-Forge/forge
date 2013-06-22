@@ -7,4 +7,3 @@ SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ X | TokenName$ Soldier | TokenT
 SVar:X:TriggerCount$DamageAmount
 SVar:Picture:http://www.wizards.com/global/images/magic/general/darien_king_of_kjeldor.jpg
 Oracle:Whenever you're dealt damage, you may put that many 1/1 white Soldier creature tokens onto the battlefield.
-SetInfo:CSP Rare

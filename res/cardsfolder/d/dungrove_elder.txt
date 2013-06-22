@@ -8,4 +8,3 @@ SVar:X:Count$Valid Forest.YouCtrl
 SVar:BuffedBy:Forest
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dungrove_elder.jpg
 Oracle:Hexproof (This creature can't be the target of spells or abilities your opponents control.)\nDungrove Elder's power and toughness are each equal to the number of Forests you control.
-SetInfo:M12 Rare

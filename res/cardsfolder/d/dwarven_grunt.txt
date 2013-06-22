@@ -5,4 +5,3 @@ PT:1/1
 K:Mountainwalk
 SVar:Picture:http://resources.wizards.com/magic/cards/od/en-us/card29760.jpg
 Oracle:Mountainwalk
-SetInfo:ODY Common

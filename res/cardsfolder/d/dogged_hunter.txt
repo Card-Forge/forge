@@ -5,4 +5,3 @@ PT:1/1
 A:AB$ Destroy | Cost$ T | ValidTgts$ Creature.token | TgtPrompt$ Select target creature token | SpellDescription$ Destroy target creature token.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dogged_hunter.jpg
 Oracle:{T}: Destroy target creature token.
-SetInfo:ODY Rare

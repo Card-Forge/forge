@@ -4,10 +4,3 @@ Types:Sorcery
 A:SP$ Discard | Cost$ B | ValidTgts$ Opponent | Mode$ RevealYouChoose | DiscardValid$ Card.nonCreature+nonLand | NumCards$ 1 | SpellDescription$ Target opponent reveals his or her hand. You choose a noncreature, nonland card from it. That player discards that card.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/duress.jpg
 Oracle:Target opponent reveals his or her hand. You choose a noncreature, nonland card from it. That player discards that card.
-SetInfo:7ED Common
-SetInfo:USG Common
-SetInfo:PD3 Common
-SetInfo:M11 Common
-SetInfo:M10 Common
-SetInfo:M13 Common
-SetInfo:DDC Common

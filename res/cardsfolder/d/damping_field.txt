@@ -6,4 +6,3 @@ SVar:NonStackingEffect:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/damping_field.jpg
 Oracle:Players can't untap more than one artifact during their untap steps.
-SetInfo:ATQ Uncommon

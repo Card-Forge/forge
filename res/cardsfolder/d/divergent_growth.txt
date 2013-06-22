@@ -6,4 +6,3 @@ SVar:ABMana:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana 
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/divergent_growth.jpg
 Oracle:Until end of turn, lands you control gain "{T}: Add one mana of any color to your mana pool."
-SetInfo:SCG Common

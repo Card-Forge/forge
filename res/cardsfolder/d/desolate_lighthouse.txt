@@ -8,4 +8,3 @@ SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/desolate_lighthouse.jpg
 Oracle:{T}: Add {1} to your mana pool.\n{1}{U}{R}, {T}: Draw a card, then discard a card.
-SetInfo:AVR Rare

@@ -7,4 +7,3 @@ SVar:MaxTgts:Count$Valid Permanent.nonLand
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/distorting_wake.jpg
 Oracle:Return X target nonland permanents to their owners' hands.
-SetInfo:INV Rare

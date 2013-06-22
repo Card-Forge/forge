@@ -5,5 +5,3 @@ PT:0/5
 S:Mode$ Continuous | GlobalRule$ Each creature assigns combat damage equal to its toughness rather than its power. | Description$ Each creature assigns combat damage equal to its toughness rather than its power.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/doran_the_siege_tower.jpg
 Oracle:Each creature assigns combat damage equal to its toughness rather than its power.
-SetInfo:V11 Mythic
-SetInfo:LRW Rare

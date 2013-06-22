@@ -12,4 +12,3 @@ SVar:BreachCleanup:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destinatio
 SVar:BreachX:Count$ValidExile Card.IsRemembered
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dimensional_breach.jpg
 Oracle:Exile all permanents. For as long as any of those cards remain exiled, at the beginning of each player's upkeep, that player returns one of the exiled cards he or she owns to the battlefield.
-SetInfo:SCG Rare

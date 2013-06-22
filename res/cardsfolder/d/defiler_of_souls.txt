@@ -7,4 +7,3 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | TriggerZones$ Battlefield 
 SVar:TrigSac:AB$ Sacrifice | Cost$ 0 | SacValid$ Creature.MonoColor | Defined$ TriggeredPlayer | SacMessage$ monocolored creature
 SVar:Picture:http://www.wizards.com/global/images/magic/general/defiler_of_souls.jpg
 Oracle:Flying\nAt the beginning of each player's upkeep, that player sacrifices a monocolored creature.
-SetInfo:ARB Mythic

@@ -8,4 +8,3 @@ SVar:DBUntap:DB$ Untap | Cost$ 0 | ValidTgts$ Permanent | TgtPrompt$ Select targ
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dreams_grip.jpg
 Oracle:Choose one - Tap target permanent; or untap target permanent.\nEntwine {1} (Choose both if you pay the entwine cost.)
-SetInfo:MRD Common

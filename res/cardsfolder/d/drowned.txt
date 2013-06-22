@@ -7,4 +7,3 @@ SVar:RemRandomDeck:True
 DeckNeeds:Color$Black
 SVar:Picture:http://www.wizards.com/global/images/magic/general/drowned.jpg
 Oracle:{B}: Regenerate Drowned.
-SetInfo:DRK Common

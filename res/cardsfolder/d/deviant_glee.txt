@@ -7,4 +7,3 @@ S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddPower$ 2 | AddToughness$ 1 
 SVar:DeviantGleeTrample:AB$ Pump | Cost$ R | Defined$ Self | KW$ Trample | SpellDescription$ This creature gains trample until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deviant_glee.jpg
 Oracle:Enchant creature\nEnchanted creature gets +2/+1 and has "{R}: This creature gains trample until end of turn."
-SetInfo:RTR Common

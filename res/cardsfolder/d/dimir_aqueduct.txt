@@ -8,6 +8,3 @@ SVar:TrigReturn:AB$ChangeZone | Origin$ Battlefield | Destination$ Hand | Cost$ 
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dimir_aqueduct.jpg
 Oracle:Dimir Aqueduct enters the battlefield tapped.\nWhen Dimir Aqueduct enters the battlefield, return a land you control to its owner's hand.\n{T}: Add {U}{B} to your mana pool.
-SetInfo:RAV Common
-SetInfo:PC2 Common
-SetInfo:COM Common

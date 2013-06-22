@@ -5,5 +5,3 @@ A:SP$ Counter | Cost$ U | TargetType$ Spell | ValidTgts$ Instant,Sorcery  | TgtP
 SVar:DBDraw:DB$Draw | NumCards$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/disrupt.jpg
 Oracle:Counter target instant or sorcery spell unless its controller pays {1}.\nDraw a card.
-SetInfo:WTH Common
-SetInfo:INV Uncommon

@@ -6,5 +6,3 @@ K:Shadow
 K:CARDNAME attacks each turn if able.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dauthi_slayer.jpg
 Oracle:Shadow (This creature can block or be blocked by only creatures with shadow.)\nDauthi Slayer attacks each turn if able.
-SetInfo:TMP Common
-SetInfo:TSB Special

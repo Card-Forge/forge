@@ -6,4 +6,3 @@ K:Flying
 K:Lifelink
 SVar:Picture:http://www.wizards.com/global/images/magic/general/daggerdrome_imp.jpg
 Oracle:Flying\nLifelink (Damage dealt by this creature also causes you to gain that much life.)
-SetInfo:RTR Common

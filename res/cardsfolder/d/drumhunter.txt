@@ -7,4 +7,3 @@ A:AB$ Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add 1 to your mana pool.
 SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/drumhunter.jpg
 Oracle:At the beginning of your end step, if you control a creature with power 5 or greater, you may draw a card.\n{T}: Add {1} to your mana pool.
-SetInfo:ALA Uncommon

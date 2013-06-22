@@ -8,4 +8,3 @@ SVar:X:Count$CardPower
 SVar:Y:Targeted$CardPower
 SVar:Picture:http://www.wizards.com/global/images/magic/general/durkwood_tracker.jpg
 Oracle:{1}{G}, {T}: If Durkwood Tracker is on the battlefield, it deals damage equal to its power to target attacking creature. That creature deals damage equal to its power to Durkwood Tracker.
-SetInfo:TSP Uncommon

@@ -7,4 +7,3 @@ A:AB$ Pump | Cost$ 3 | NumAtt$ 1 | SpellDescription$ CARDNAME gets +1/+0 until e
 SVar:TrigRegen:AB$Regenerate | Cost$ 0 | Defined$ Self
 SVar:Picture:http://www.wizards.com/global/images/magic/general/duskworker.jpg
 Oracle:Whenever Duskworker becomes blocked, regenerate it.\n{3}: Duskworker gets +1/+0 until end of turn.
-SetInfo:MRD Uncommon

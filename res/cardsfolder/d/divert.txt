@@ -5,4 +5,3 @@ A:SP$ ChangeTargets | Cost$ U | TargetType$ Spell | ValidTgts$ Card | TargetsSin
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/divert.jpg
 Oracle:Change the target of target spell with a single target unless that spell's controller pays {2}.
-SetInfo:ODY Rare

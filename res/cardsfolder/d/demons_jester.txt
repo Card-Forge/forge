@@ -7,5 +7,3 @@ S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 2 | AddToughness$ 1 | Condi
 SVar:BuffedBy:Card
 SVar:Picture:http://www.wizards.com/global/images/magic/general/demons_jester.jpg
 Oracle:Flying\nHellbent - Demon's Jester gets +2/+1 as long as you have no cards in hand.
-SetInfo:DDC Common
-SetInfo:DIS Common

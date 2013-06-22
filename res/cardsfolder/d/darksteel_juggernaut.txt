@@ -9,4 +9,3 @@ SVar:X:Count$Valid Artifact.YouCtrl
 SVar:BuffedBy:Artifact
 SVar:Picture:http://www.wizards.com/global/images/magic/general/darksteel_juggernaut.jpg
 Oracle:Darksteel Juggernaut's power and toughness are each equal to the number of artifacts you control.\nDarksteel Juggernaut is indestructible and attacks each turn if able.
-SetInfo:SOM Rare

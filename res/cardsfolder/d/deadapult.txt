@@ -6,4 +6,3 @@ SVar:NonStackingEffect:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deadapult.jpg
 Oracle:{R}, Sacrifice a Zombie: Deadapult deals 2 damage to target creature or player.
-SetInfo:PLS Rare

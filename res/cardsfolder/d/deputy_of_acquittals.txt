@@ -7,4 +7,3 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigChangeZone:AB$ ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Hand | ValidTgts$ Creature.YouCtrl+Other | TgtPrompt$ Select another creature you control.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deputy_of_acquittals.jpg
 Oracle:Flash (You may cast this spell any time you could cast an instant.)\nWhen Deputy of Acquittals enters the battlefield, you may return another target creature you control to its owner's hand.
-SetInfo:DGM Common

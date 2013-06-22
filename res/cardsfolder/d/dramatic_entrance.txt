@@ -5,4 +5,3 @@ A:SP$ ChangeZone | Cost$ 3 G G | Origin$ Hand | Destination$ Battlefield | Chang
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dramatic_entrance.jpg
 Oracle:You may put a green creature card from your hand onto the battlefield.
-SetInfo:SHM Rare

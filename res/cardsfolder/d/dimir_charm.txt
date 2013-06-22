@@ -8,4 +8,3 @@ SVar:DBDig:DB$ Dig | DigNum$ 3 | ValidTgts$ Player | TgtPrompt$ Select target pl
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dimir_charm.jpg
 Oracle:Choose one — Counter target sorcery spell; or destroy target creature with power 2 or less; or look at the top three cards of target player's library, then put one back and the rest into that player's graveyard.
-SetInfo:GTC Uncommon

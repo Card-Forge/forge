@@ -10,4 +10,3 @@ SVar:X:Count$InYourHand
 SVar:Difference:Number$7/Minus.X
 SVar:Picture:http://www.wizards.com/global/images/magic/general/damia_sage_of_stone.jpg
 Oracle:Deathtouch\nSkip your draw step.\nAt the beginning of your upkeep, if you have fewer than seven cards in hand, draw cards equal to the difference.
-SetInfo:COM Mythic

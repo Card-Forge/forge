@@ -6,4 +6,3 @@ K:Flash
 K:Protection from red
 SVar:Picture:http://www.wizards.com/global/images/magic/general/defender_of_law.jpg
 Oracle:Flash\nProtection from red
-SetInfo:ULG Common

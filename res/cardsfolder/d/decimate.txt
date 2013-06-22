@@ -7,4 +7,3 @@ SVar:DestroyEnch:DB$ Destroy | Cost$ 0 | ValidTgts$ Enchantment | SubAbility$ De
 SVar:DestroyLand:DB$ Destroy | Cost$ 0 | ValidTgts$ Land | TgtPrompt$ Select target land
 SVar:Picture:http://www.wizards.com/global/images/magic/general/decimate.jpg
 Oracle:Destroy target artifact, target creature, target enchantment, and target land.
-SetInfo:ODY Rare

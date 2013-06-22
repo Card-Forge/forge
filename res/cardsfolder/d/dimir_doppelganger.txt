@@ -9,4 +9,3 @@ SVar:DDAbility:AB$ ChangeZone | Cost$ 1 U B | Origin$ Graveyard | Destination$ E
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dimir_doppelganger.jpg
 Oracle:{1}{U}{B}: Exile target creature card from a graveyard. Dimir Doppelganger becomes a copy of that card and gains this ability.
-SetInfo:RAV Rare

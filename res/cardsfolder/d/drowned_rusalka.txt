@@ -7,4 +7,3 @@ SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 1
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/drowned_rusalka.jpg
 Oracle:{U}, Sacrifice a creature: Discard a card, then draw a card.
-SetInfo:GPT Uncommon

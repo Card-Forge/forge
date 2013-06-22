@@ -17,5 +17,3 @@ SVar:F:Count$ManaPool:colorless
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/doubling_cube.jpg
 Oracle:{3}, {T}: Double the amount of each type of mana in your mana pool.
-SetInfo:5DN Rare
-SetInfo:10E Rare

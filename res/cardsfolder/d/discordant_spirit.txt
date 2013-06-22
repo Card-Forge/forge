@@ -9,4 +9,3 @@ SVar:GhostClear:AB$ RemoveCounter | Cost$ 0 | CounterType$ P1P1 | CounterNum$ Al
 SVar:X:Count$YourDamageThisTurn
 SVar:Picture:http://www.wizards.com/global/images/magic/general/discordant_spirit.jpg
 Oracle:At the beginning of each end step, if it's an opponent's turn, put a +1/+1 counter on Discordant Spirit for each 1 damage dealt to you this turn.\nAt the beginning of your end step, remove all +1/+1 counters from Discordant Spirit.
-SetInfo:MIR Rare

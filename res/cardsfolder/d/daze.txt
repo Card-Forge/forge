@@ -6,5 +6,3 @@ A:SP$ Counter | Cost$ Return<1/Island> | TargetType$ Spell | TgtPrompt$ Select t
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/daze.jpg
 Oracle:You may return an Island you control to its owner's hand rather than pay Daze's mana cost.\nCounter target spell unless its controller pays {1}.
-SetInfo:DD2 Common
-SetInfo:NMS Common

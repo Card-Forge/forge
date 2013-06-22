@@ -6,4 +6,3 @@ A:AB$ LoseLife | Cost$ Sac<1/CARDNAME> | ValidTgts$ Player | TgtPrompt$ Select a
 SVar:DB1:DB$GainLife | LifeAmount$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/death_cultist.jpg
 Oracle:Sacrifice Death Cultist: Target player loses 1 life and you gain 1 life.
-SetInfo:ROE Common

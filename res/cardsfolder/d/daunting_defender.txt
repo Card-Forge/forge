@@ -5,4 +5,3 @@ S:Mode$ PreventDamage | Target$ Creature.Cleric+YouCtrl | Amount$ 1 | Descriptio
 PT:3/3
 SVar:Picture:http://www.wizards.com/global/images/magic/general/daunting_defender.jpg
 Oracle:If a source would deal damage to a Cleric creature you control, prevent 1 of that damage.
-SetInfo:ONS Common

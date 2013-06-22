@@ -7,4 +7,3 @@ SVar:Y:Count$MaxCMCYouCtrl
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dispersal_shield.jpg
 Oracle:Counter target spell if its converted mana cost is less than or equal to the highest converted mana cost among permanents you control.
-SetInfo:SCG Common

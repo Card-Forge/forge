@@ -7,4 +7,3 @@ SVar:TrigDestroy:AB$ DestroyAll | Cost$ 0 | ValidCards$ Creature.OppCtrl | SubAb
 SVar:DBTapAll:DB$TapAll | ValidCards$ Creature.YouCtrl+Other
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dread_cacodemon.jpg
 Oracle:When Dread Cacodemon enters the battlefield, if you cast it from your hand, destroy all creatures your opponents control, then tap all other creatures you control.
-SetInfo:COM Rare

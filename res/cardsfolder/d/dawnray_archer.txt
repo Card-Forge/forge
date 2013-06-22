@@ -8,4 +8,3 @@ SVar:RemRandomDeck:True
 DeckNeeds:Color$white
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dawnray_archer.jpg
 Oracle:Exalted (Whenever a creature you control attacks alone, that creature gets +1/+1 until end of turn.)\n{W}, {T}: Dawnray Archer deals 1 damage to target attacking or blocking creature.
-SetInfo:ALA Uncommon

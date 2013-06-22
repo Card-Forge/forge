@@ -7,4 +7,3 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigChangeZone:DB$ChangeZone | Cost$ 0 | ValidTgts$ Permanent.Black | TgtPrompt$ Select target black permanent | Origin$ Battlefield | Destination$ Exile
 SVar:Picture:http://www.wizards.com/global/images/magic/general/devout_lightcaster.jpg
 Oracle:Protection from black\nWhen Devout Lightcaster enters the battlefield, exile target black permanent.
-SetInfo:ZEN Rare

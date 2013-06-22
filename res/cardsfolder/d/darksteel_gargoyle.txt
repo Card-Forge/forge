@@ -6,4 +6,3 @@ K:Flying
 K:Indestructible
 SVar:Picture:http://resources.wizards.com/magic/cards/dst/en-us/card46136.jpg
 Oracle:Flying\nDarksteel Gargoyle is indestructible. ("Destroy" effects and lethal damage don't destroy it.)
-SetInfo:DST Uncommon

@@ -6,4 +6,3 @@ K:Equip 2
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 2 | Description$ Equipped creature gets +2/+0.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/darksteel_axe.jpg
 Oracle:Darksteel Axe is indestructible. (Effects that say "destroy" don't destroy it.)\nEquipped creature gets +2/+0.\nEquip {2}
-SetInfo:SOM Uncommon

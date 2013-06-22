@@ -6,4 +6,3 @@ T:Mode$ SpellCast | ValidCard$ Card.Blue | TriggerZones$ Battlefield | Execute$ 
 SVar:TrigMill:AB$Mill | Cost$ 1 | ValidTgts$ Player | TgtPrompt$ Select target player | NumCards$ 2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/drowner_initiate.jpg
 Oracle:Whenever a player casts a blue spell, you may pay {1}. If you do, target player puts the top two cards of his or her library into his or her graveyard.
-SetInfo:SHM Common

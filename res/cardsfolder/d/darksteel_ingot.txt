@@ -5,5 +5,3 @@ A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any col
 K:Indestructible
 SVar:Picture:http://www.wizards.com/global/images/magic/general/darksteel_ingot.jpg
 Oracle:Darksteel Ingot is indestructible. ("Destroy" effects and lethal damage don't destroy it.)\n{T}: Add one mana of any color to your mana pool.
-SetInfo:DST Common
-SetInfo:COM Common

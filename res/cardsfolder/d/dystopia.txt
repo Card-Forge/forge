@@ -7,4 +7,3 @@ SVar:TrigSac:AB$ Sacrifice | Cost$ 0 | SacValid$ Permanent.Green,Permanent.White
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dystopia.jpg
 Oracle:Cumulative upkeep-Pay 1 life. (At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.)\nAt the beginning of each player's upkeep, that player sacrifices a green or white permanent.
-SetInfo:ALL Rare

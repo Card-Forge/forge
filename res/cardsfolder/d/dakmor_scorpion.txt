@@ -4,5 +4,3 @@ Types:Creature Scorpion
 PT:2/1
 SVar:Picture:http://resources.wizards.com/magic/cards/p3/en-us/card20383.jpg
 Oracle:
-SetInfo:PO2 Common
-SetInfo:S99 Common

@@ -5,4 +5,3 @@ K:Indestructible
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/darksteel_relic.jpg
 Oracle:Darksteel Relic is indestructible. (Effects that say "destroy" don't destroy it.)
-SetInfo:NPH Uncommon

@@ -4,5 +4,3 @@ Types:Instant
 A:SP$ Fog | Cost$ B | SpellDescription$ Prevent all combat damage that would be dealt this turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/darkness.jpg
 Oracle:Prevent all combat damage that would be dealt this turn.
-SetInfo:LEG Common
-SetInfo:TSB Special

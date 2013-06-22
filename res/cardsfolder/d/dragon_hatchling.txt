@@ -6,4 +6,3 @@ K:Flying
 A:AB$ Pump | Cost$ R | NumAtt$ +1 | NumDef$ +0 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dragon_hatchling.jpg
 Oracle:Flying\n{R}: Dragon Hatchling gets +1/+0 until end of turn.
-SetInfo:M13 Common

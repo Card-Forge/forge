@@ -8,4 +8,3 @@ A:AB$ Attach | Cost$ 1 W | ValidTgts$ Creature | TgtPrompt$ Select target creatu
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/detainment_spell.jpg
 Oracle:Enchant creature\nEnchanted creature's activated abilities can't be activated.\n{1}{W}: Attach Detainment Spell to target creature.
-SetInfo:TSP Common

@@ -7,5 +7,3 @@ SVar:TrigDrawDiscard:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 1 | SubAbility
 SVar:DBDiscard:DB$Discard | Defined$ TriggeredTarget | NumCards$ 1 | Mode$ TgtChoose
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dimir_cutpurse.jpg
 Oracle:Whenever Dimir Cutpurse deals combat damage to a player, that player discards a card and you draw a card.
-SetInfo:RAV Rare
-SetInfo:DDH Rare

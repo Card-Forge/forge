@@ -6,4 +6,3 @@ S:Mode$ Continuous | Affected$ Goblin | AddType$ Zombie | SetColor$ Black | Desc
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dralnus_crusade.jpg
 Oracle:Goblin creatures get +1/+1.\nAll Goblins are black and are Zombies in addition to their other creature types.
-SetInfo:PLS Rare

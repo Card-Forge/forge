@@ -5,4 +5,3 @@ PT:2/1
 K:Nonbasic landwalk
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dryad_sophisticate.jpg
 Oracle:Nonbasic landwalk
-SetInfo:GPT Uncommon

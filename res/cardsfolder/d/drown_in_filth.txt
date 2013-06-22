@@ -7,4 +7,3 @@ SVar:X:Count$ValidGraveyard Land.YouOwn
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/drown_in_filth.jpg
 Oracle:Choose target creature. Put the top four cards of your library into your graveyard, then that creature gets -1/-1 until end of turn for each land card in your graveyard.
-SetInfo:DGM Common

@@ -6,4 +6,3 @@ SVar:X:Sacrificed$CardToughness
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/diamond_valley.jpg
 Oracle:{T}, Sacrifice a creature: You gain life equal to the sacrificed creature's toughness.
-SetInfo:ARN Uncommon

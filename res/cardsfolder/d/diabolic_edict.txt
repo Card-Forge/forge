@@ -4,4 +4,3 @@ Types:Instant
 A:SP$ Sacrifice | Cost$ 1 B | ValidTgts$ Player | SacValid$ Creature | SacMessage$ Creature | SpellDescription$ Target player sacrifices a creature.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/diabolic_edict.jpg
 Oracle:Target player sacrifices a creature.
-SetInfo:TMP Common

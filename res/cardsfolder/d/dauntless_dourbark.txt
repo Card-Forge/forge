@@ -11,4 +11,3 @@ SVar:BuffedBy:Forest
 SVar:BuffedBy:Treefolk
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dauntless_dourbark.jpg
 Oracle:Dauntless Dourbark's power and toughness are each equal to the number of Forests you control plus the number of Treefolk you control.\nDauntless Dourbark has trample as long as you control another Treefolk.
-SetInfo:LRW Rare

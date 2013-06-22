@@ -8,4 +8,3 @@ SVar:TrigPumpAll:AB$PumpAll | Cost$ 0 | ValidCards$ Creature | NumAtt$ -1 | NumD
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deaths_head_buzzard.jpg
 Oracle:Flying\nWhen Death's-Head Buzzard dies, all creatures get -1/-1 until end of turn.
-SetInfo:SCG Common

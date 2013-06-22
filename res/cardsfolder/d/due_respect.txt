@@ -6,4 +6,3 @@ SVar:STETBTapped:Mode$ ETBTapped | EffectZone$ Command | ValidCard$ Permanent | 
 SVar:DBDraw:DB$Draw | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/due_respect.jpg
 Oracle:Permanents enter the battlefield tapped this turn.\nDraw a card.
-SetInfo:NPH Uncommon

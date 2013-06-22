@@ -12,4 +12,3 @@ ManaCost:2 G
 Types:Sorcery
 A:SP$ ChangeZone | Cost$ 2 G | TgtPrompt$ Select target card in your graveyard | ValidTgts$ Card.YouCtrl | Origin$ Graveyard | Destination$ Hand | SpellDescription$ Return target card from your graveyard to your hand.
 Oracle:Return target card from your graveyard to your hand.\nFuse (You may cast one or both halves of this card from your hand.)
-SetInfo:DGM Uncommon

@@ -8,4 +8,3 @@ K:Soulshift 1
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deathknell_kami.jpg
 Oracle:Flying\n{2}: Deathknell Kami gets +1/+1 until end of turn. Sacrifice it at the beginning of the next end step.\nSoulshift 1 (When this creature dies, you may return target Spirit card with converted mana cost 1 or less from your graveyard to your hand.)
-SetInfo:SOK Common

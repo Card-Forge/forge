@@ -6,4 +6,3 @@ SVar:DBDraw:DB$Draw | NumCards$ 7 | SubAbility$ DBDiscard
 SVar:DBDiscard:DB$Discard | NumCards$ 3 | Mode$ Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/drastic_revelation.jpg
 Oracle:Discard your hand. Draw seven cards, then discard three cards at random.
-SetInfo:ARB Uncommon

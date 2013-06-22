@@ -6,5 +6,3 @@ K:Flying
 K:Vigilance
 SVar:Picture:http://resources.wizards.com/magic/cards/8ed/en-us/card45176.jpg
 Oracle:Flying, vigilance
-SetInfo:PCY Common
-SetInfo:8ED Common

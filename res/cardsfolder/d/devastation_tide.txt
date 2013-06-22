@@ -6,4 +6,3 @@ A:SP$ ChangeZoneAll | Cost$ 3 U U | ChangeType$ Permanent.nonLand | Origin$ Batt
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/devastation_tide.jpg
 Oracle:Return all nonland permanents to their owners' hands.\nMiracle {1}{U} (You may cast this card for its miracle cost when you draw it if it's the first card you drew this turn.)
-SetInfo:AVR Rare

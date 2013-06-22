@@ -5,4 +5,3 @@ A:SP$ ChangeZone | Cost$ W U | ValidTgts$ Creature | TgtPrompt$ Select target cr
 SVar:DBGainLife:DB$ GainLife | LifeAmount$ 2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dramatic_rescue.jpg
 Oracle:Return target creature to its owner's hand. You gain 2 life.
-SetInfo:RTR Common

@@ -5,4 +5,3 @@ PT:5/5
 K:Suspend:5:G
 SVar:Picture:http://www.wizards.com/global/images/magic/general/durkwood_baloth.jpg
 Oracle:Suspend 5-{G} (Rather than cast this card from your hand, you may pay {G} and exile it with five time counters on it. At the beginning of your upkeep, remove a time counter. When the last is removed, cast it without paying its mana cost. It has haste.)
-SetInfo:TSP Common

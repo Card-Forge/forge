@@ -6,4 +6,3 @@ K:Flying
 K:Trample
 SVar:Picture:http://www.wizards.com/global/images/magic/general/drakewing_krasis.jpg
 Oracle:Flying, trample
-SetInfo:GTC Common

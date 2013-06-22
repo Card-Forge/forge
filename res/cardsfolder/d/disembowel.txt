@@ -6,4 +6,3 @@ SVar:X:Targeted$CardManaCost
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/disembowel.jpg
 Oracle:Destroy target creature with converted mana cost X.
-SetInfo:RAV Common

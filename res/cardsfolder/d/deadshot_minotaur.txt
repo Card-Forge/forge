@@ -7,4 +7,3 @@ SVar:TrigDealDamage:DB$ DealDamage | Cost$ 0 | ValidTgts$ Creature.withFlying | 
 K:Cycling:RG
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deadshot_minotaur.jpg
 Oracle:When Deadshot Minotaur enters the battlefield, it deals 3 damage to target creature with flying.\nCycling {R/G} ({R/G}, Discard this card: Draw a card.)
-SetInfo:ARB Common

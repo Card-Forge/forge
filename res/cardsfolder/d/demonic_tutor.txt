@@ -5,8 +5,3 @@ A:SP$ ChangeZone | Cost$ 1 B | Origin$ Library | Destination$ Hand | ChangeType$
 SVar:RemAIDeck:True
 SVar:Picture:http://resources.wizards.com/magic/cards/3e/en-us/card1155.jpg
 Oracle:Search your library for a card and put that card into your hand. Then shuffle your library.
-SetInfo:2ED Uncommon
-SetInfo:LEB Uncommon
-SetInfo:LEA Uncommon
-SetInfo:DDC Uncommon
-SetInfo:3ED Uncommon

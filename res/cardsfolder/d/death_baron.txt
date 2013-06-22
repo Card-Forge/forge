@@ -6,5 +6,3 @@ S:Mode$ Continuous | Affected$ Creature.Zombie+Other+YouCtrl,Creature.Skeleton+Y
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/death_baron.jpg
 Oracle:Skeleton creatures you control and other Zombie creatures you control get +1/+1 and have deathtouch.
-SetInfo:HOP Rare
-SetInfo:ALA Rare

@@ -12,5 +12,3 @@ SVar:DisorderX:SVar$AlreadyDestroyed/Plus.StillInPlay
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/disorder.jpg
 Oracle:Disorder deals 2 damage to each white creature and each player who controls a white creature.
-SetInfo:7ED Uncommon
-SetInfo:USG Uncommon

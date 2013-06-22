@@ -7,4 +7,3 @@ SVar:TrigToken:AB$Token | Cost$ 0 | TokenOwner$ You | TokenPower$ 1 | TokenTough
 SVar:X:Count$ThisTurnEntered_Graveyard_from_Battlefield_Card.Zubera
 SVar:Picture:http://resources.wizards.com/magic/cards/chk/en-us/card80511.jpg
 Oracle:When Dripping-Tongue Zubera dies, put a 1/1 colorless Spirit creature token onto the battlefield for each Zubera that died this turn.
-SetInfo:CHK Common

@@ -6,4 +6,3 @@ SVar:NonStackingEffect:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dream_halls.jpg
 Oracle:Rather than pay the mana cost for a spell, its controller may discard a card that shares a color with that spell.
-SetInfo:STH Rare

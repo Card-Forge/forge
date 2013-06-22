@@ -6,4 +6,3 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigGainLife:AB$GainLife | Cost$ 0 | LifeAmount$ 1
 SVar:Picture:http://serv3.tcgimages.eu/img/cards/Starter_1999/devout_monk.jpg
 Oracle:When Devout Monk enters the battlefield, you gain 1 life.
-SetInfo:S99 Common

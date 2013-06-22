@@ -7,4 +7,3 @@ S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ 
 SVar:X:Count$Valid Creature.withShadow
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dauthi_warlord.jpg
 Oracle:Shadow (This creature can block or be blocked by only creatures with shadow.)\nDauthi Warlord's power is equal to the number of creatures with shadow on the battlefield.
-SetInfo:EXO Uncommon

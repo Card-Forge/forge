@@ -8,4 +8,3 @@ SVar:Y:Count$Valid Artifact.YouCtrl
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dispatch.jpg
 Oracle:Tap target creature.\nMetalcraft - If you control three or more artifacts, exile that creature.
-SetInfo:NPH Uncommon

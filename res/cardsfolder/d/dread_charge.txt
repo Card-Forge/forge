@@ -5,4 +5,3 @@ A:SP$ PumpAll | Cost$ 3 B | ValidCards$ Creature.Black+YouCtrl | KW$ CantBeBlock
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dread_charge.jpg
 Oracle:Until end of turn, black creatures you control can be blocked only by black creatures.
-SetInfo:POR Rare

@@ -4,8 +4,3 @@ Types:Creature Boar
 PT:4/4
 SVar:Picture:http://resources.wizards.com/magic/cards/5e/en-us/card3972.jpg
 Oracle:
-SetInfo:5ED Common
-SetInfo:S99 Common
-SetInfo:LEG Common
-SetInfo:S00 Common
-SetInfo:4ED Common

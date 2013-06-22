@@ -11,4 +11,3 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:RememberedLKI$CardCounters.ALL
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dismantle.jpg
 Oracle:Destroy target artifact. If that artifact had counters on it, put that many +1/+1 counters or charge counters on an artifact you control.
-SetInfo:DST Uncommon

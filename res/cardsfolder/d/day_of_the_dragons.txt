@@ -10,4 +10,3 @@ SVar:DBReturn:DB$ChangeZoneAll | Origin$ Exile | Destination$ Battlefield | Chan
 SVar:X:Remembered$Amount
 SVar:Picture:http://www.wizards.com/global/images/magic/general/day_of_the_dragons.jpg
 Oracle:When Day of the Dragons enters the battlefield, exile all creatures you control. Then put that many 5/5 red Dragon creature tokens with flying onto the battlefield.\nWhen Day of the Dragons leaves the battlefield, sacrifice all Dragons you control. Then return the exiled cards to the battlefield under your control.
-SetInfo:SCG Rare

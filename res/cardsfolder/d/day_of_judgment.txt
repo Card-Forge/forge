@@ -4,6 +4,3 @@ Types:Sorcery
 A:SP$ DestroyAll | Cost$ 2 W W | ValidCards$ Creature | SpellDescription$ Destroy all creatures.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/day_of_judgment.jpg
 Oracle:Destroy all creatures.
-SetInfo:M11 Rare
-SetInfo:M12 Rare
-SetInfo:ZEN Rare

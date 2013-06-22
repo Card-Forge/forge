@@ -7,4 +7,3 @@ A:AB$ Untap | Cost$ AddCounter<1/M1M1> | SpellDescription$ Untap CARDNAME.
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/devoted_druid.jpg
 Oracle:{T}: Add {G} to your mana pool.\nPut a -1/-1 counter on Devoted Druid: Untap Devoted Druid.
-SetInfo:SHM Common

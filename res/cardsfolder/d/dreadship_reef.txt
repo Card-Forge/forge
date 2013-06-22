@@ -8,5 +8,3 @@ SVar:X:XChoice
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dreadship_reef.jpg
 Oracle:{T}: Add {1} to your mana pool.\n{1}, {T}: Put a storage counter on Dreadship Reef.\n{1}, Remove X storage counters from Dreadship Reef: Add X mana in any combination of {U} and/or {B} to your mana pool.
-SetInfo:COM Uncommon
-SetInfo:TSP Uncommon

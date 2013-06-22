@@ -7,4 +7,3 @@ SVar:TrigChange:AB$ChangeZone | Origin$ Battlefield | Destination$ Hand | Cost$ 
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dream_stalker.jpg
 Oracle:When Dream Stalker enters the battlefield, return a permanent you control to its owner's hand.
-SetInfo:TSP Common

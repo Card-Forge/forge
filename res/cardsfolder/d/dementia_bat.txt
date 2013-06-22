@@ -6,4 +6,3 @@ K:Flying
 A:AB$ Discard | Cost$ Sac<1/CARDNAME> 4 B | ValidTgts$ Player | NumCards$ 2 | Mode$ TgtChoose | SpellDescription$ Target player discards two cards.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dementia_bat.jpg
 Oracle:Flying\n{4}{B}, Sacrifice Dementia Bat: Target player discards two cards.
-SetInfo:NPH Common

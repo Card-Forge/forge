@@ -7,5 +7,3 @@ A:SP$ Pump | Cost$ B R G | ValidTgts$ Creature | NumAtt$ +3 | NumDef$ +3 | TgtPr
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/darigaazs_charm.jpg
 Oracle:Choose one - Return target creature card from your graveyard to your hand; or Darigaaz's Charm deals 3 damage to target creature or player; or target creature gets +3/+3 until end of turn.
-SetInfo:PLS Uncommon
-SetInfo:DDE Uncommon

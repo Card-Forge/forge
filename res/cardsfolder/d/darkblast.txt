@@ -5,4 +5,3 @@ A:SP$ Pump | Cost$ B | ValidTgts$ Creature | TgtPrompt$ Select target creature |
 K:Dredge 3
 SVar:Picture:http://www.wizards.com/global/images/magic/general/darkblast.jpg
 Oracle:Target creature gets -1/-1 until end of turn.\nDredge 3 (If you would draw a card, instead you may put exactly three cards from the top of your library into your graveyard. If you do, return this card from your graveyard to your hand. Otherwise, draw a card.)
-SetInfo:RAV Uncommon

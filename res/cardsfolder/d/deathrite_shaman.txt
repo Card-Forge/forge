@@ -10,4 +10,3 @@ A:AB$ ChangeZone | Cost$ G T | Origin$ Graveyard | Destination$ Exile | ValidTgt
 SVar:DBGainLife:DB$ GainLife | Cost$ 0 | Defined$ You | LifeAmount$ 2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deathrite_shaman.jpg
 Oracle:{T}: Exile target land card from a graveyard. Add one mana of any color to your mana pool.\n{B}, {T}: Exile target instant or sorcery card from a graveyard. Each opponent loses 2 life.\n{G}, {T}: Exile target creature card from a graveyard. You gain 2 life.
-SetInfo:RTR Rare

@@ -8,4 +8,3 @@ SVar:X:Count$Valid Forest.OppCtrl
 SVar:Y:Count$Valid Swamp.YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deepwood_legate.jpg
 Oracle:If an opponent controls a Forest and you control a Swamp, you may cast Deepwood Legate without paying its mana cost.\n{B}: Deepwood Legate gets +1/+1 until end of turn.
-SetInfo:MMQ Uncommon

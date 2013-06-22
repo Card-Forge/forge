@@ -7,5 +7,3 @@ SVar:X:Count$Valid Land.YouCtrl
 SVar:BuffedBy:Land
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dakkon_blackblade.jpg
 Oracle:Dakkon Blackblade's power and toughness are each equal to the number of lands you control.
-SetInfo:CHR Rare
-SetInfo:LEG Rare

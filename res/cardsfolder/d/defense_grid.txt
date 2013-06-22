@@ -6,6 +6,3 @@ S:Mode$ RaiseCost | Activator$ Opponent | Type$ Spell | Amount$ 3 | Condition$ P
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/defense_grid.jpg
 Oracle:Each spell costs {3} more to cast except during its controller's turn.
-SetInfo:8ED Rare
-SetInfo:ULG Rare
-SetInfo:9ED Rare

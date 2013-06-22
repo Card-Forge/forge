@@ -6,4 +6,3 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigChange:AB$ ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Battlefield | TgtPrompt$ Choose target creature card with converted mana cost 2 or less in your graveyard | ValidTgts$ Creature.YouCtrl+cmcLE2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/driver_of_the_dead.jpg
 Oracle:When Driver of the Dead dies, return target creature card with converted mana cost 2 or less from your graveyard to the battlefield.
-SetInfo:AVR Common

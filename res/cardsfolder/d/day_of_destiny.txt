@@ -6,4 +6,3 @@ SVar:RemRandomDeck:True
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/day_of_destiny.jpg
 Oracle:Legendary creatures you control get +2/+2.
-SetInfo:BOK Rare

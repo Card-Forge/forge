@@ -8,4 +8,3 @@ SVar:DBPump:DB$Pump | NumAtt$ +X | Defined$ Self | References$ X
 SVar:X:Count$xPaid
 SVar:Picture:http://www.wizards.com/global/images/magic/general/drana_kalastria_bloodchief.jpg
 Oracle:Flying\n{X}{B}{B}: Target creature gets -0/-X until end of turn and Drana, Kalastria Bloodchief gets +X/+0 until end of turn.
-SetInfo:ROE Rare

@@ -6,4 +6,3 @@ K:Shadow
 A:AB$ Pump | Cost$ 1 B | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dauthi_mercenary.jpg
 Oracle:Shadow (This creature can block or be blocked by only creatures with shadow.)\n{1}{B}: Dauthi Mercenary gets +1/+0 until end of turn.
-SetInfo:TMP Uncommon

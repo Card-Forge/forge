@@ -6,5 +6,3 @@ K:Flying
 A:AB$ Destroy | Cost$ Sac<1/CARDNAME> | ValidTgts$ Creature.Black | TgtPrompt$ Select target black creature | SpellDescription$ Destroy target black creature.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/daraja_griffin.jpg
 Oracle:Flying\nSacrifice Daraja Griffin: Destroy target black creature.
-SetInfo:VIS Uncommon
-SetInfo:6ED Uncommon

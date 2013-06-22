@@ -7,4 +7,3 @@ SVar:DBDamage:DB$ DealDamage | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select
 SVar:X:Targeted$CardPower
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deadshot.jpg
 Oracle:Tap target creature. It deals damage equal to its power to another target creature.
-SetInfo:TMP Rare

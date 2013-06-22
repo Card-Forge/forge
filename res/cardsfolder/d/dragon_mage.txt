@@ -8,4 +8,3 @@ SVar:TrigDiscardDraw:AB$ChangeZoneAll | Cost$ 0 | ChangeType$ Card | Origin$ Han
 SVar:DBDraw:DB$Draw | Defined$ Each | NumCards$ 7
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dragon_mage.jpg
 Oracle:Flying\nWhenever Dragon Mage deals combat damage to a player, each player discards his or her hand and draws seven cards.
-SetInfo:SCG Rare

@@ -6,4 +6,3 @@ T:Mode$ AttackerBlocked | ValidCard$ Card.Self | Execute$ TrigGain | TriggerDesc
 SVar:TrigGain:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ 2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deepwood_tantiv.jpg
 Oracle:Whenever Deepwood Tantiv becomes blocked, you gain 2 life.
-SetInfo:MMQ Uncommon

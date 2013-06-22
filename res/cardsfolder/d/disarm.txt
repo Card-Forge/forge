@@ -5,4 +5,3 @@ A:SP$ UnattachAll | Cost$ U | ValidTgts$ Creature | TgtPrompt$ Select target cre
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/disarm.jpg
 Oracle:Unattach all Equipment from target creature.
-SetInfo:MRD Common

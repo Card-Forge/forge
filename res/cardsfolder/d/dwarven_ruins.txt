@@ -7,6 +7,3 @@ A:AB$ Mana | Cost$ T Sac<1/CARDNAME> | Produced$ R | Amount$ 2 | SpellDescriptio
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dwarven_ruins.jpg
 Oracle:Dwarven Ruins enters the battlefield tapped.\n{T}: Add {R} to your mana pool.\n{T}, Sacrifice Dwarven Ruins: Add {R}{R} to your mana pool.
-SetInfo:5ED Uncommon
-SetInfo:FEM Uncommon
-SetInfo:6ED Uncommon

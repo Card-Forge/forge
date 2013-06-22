@@ -9,4 +9,3 @@ SVar:DBGreen:DB$PumpAll | ValidCards$ Creature.YouCtrl | KW$ Protection from gre
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dominarias_judgment.jpg
 Oracle:Until end of turn, creatures you control gain protection from white if you control a Plains, from blue if you control an Island, from black if you control a Swamp, from red if you control a Mountain, and from green if you control a Forest.
-SetInfo:PLS Rare

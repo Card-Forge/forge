@@ -8,4 +8,3 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creatu
 SVar:TrigReturn:AB$ChangeZone | Cost$ 0 | Defined$ Self | Origin$ Graveyard | Destination$ Battlefield | AttachedTo$ TriggeredCard
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dragon_fangs.jpg
 Oracle:Enchant creature\nEnchanted creature gets +1/+1 and has trample.\nWhen a creature with converted mana cost 6 or greater enters the battlefield, you may return Dragon Fangs from your graveyard to the battlefield attached to that creature.
-SetInfo:SCG Common

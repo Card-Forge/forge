@@ -7,4 +7,3 @@ A:AB$ Pump | Cost$ 1 W | KW$ HIDDEN Prevent all combat damage that would be deal
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deftblade_elite.jpg
 Oracle:Provoke (When this attacks, you may have target creature defending player controls untap and block it if able.)\n{1}{W}: Prevent all combat damage that would be dealt to and dealt by Deftblade Elite this turn.
-SetInfo:LGN Common

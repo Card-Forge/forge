@@ -7,4 +7,3 @@ S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Shroud | Descr
 K:Shroud
 SVar:Picture:http://www.wizards.com/global/images/magic/general/diplomatic_immunity.jpg
 Oracle:Enchant creature\nShroud (This permanent can't be the target of spells or abilities.)\nEnchanted creature has shroud.
-SetInfo:MMQ Common

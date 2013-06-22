@@ -5,4 +5,3 @@ PT:2/2
 A:AB$ Pump | Cost$ R | KW$ First Strike | SpellDescription$ CARDNAME gains first strike until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/disciple_of_the_old_ways.jpg
 Oracle:{R}: Disciple of the Old Ways gains first strike until end of turn.
-SetInfo:GTC Common

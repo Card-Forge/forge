@@ -12,4 +12,3 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.I
 SVar:TrigForget:DB$ Pump | ForgetObjects$ TriggeredCard
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dual_nature.jpg
 Oracle:Whenever a nontoken creature enters the battlefield, its controller puts a token that's a copy of that creature onto the battlefield.\nWhenever a nontoken creature leaves the battlefield, exile all tokens with the same name as that creature.\nWhen Dual Nature leaves the battlefield, exile all tokens put onto the battlefield with Dual Nature.
-SetInfo:PCY Rare

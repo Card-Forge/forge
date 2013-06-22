@@ -5,4 +5,3 @@ A:SP$ Destroy | Cost$ 3 B | ValidTgts$ Land | TgtPrompt$ Select target land | Su
 SVar:DBDrain:DB$LoseLife | Defined$ TargetedController | LifeAmount$ 2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/despoil.jpg
 Oracle:Destroy target land. Its controller loses 2 life.
-SetInfo:PCY Common

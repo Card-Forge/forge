@@ -7,4 +7,3 @@ A:AB$ DealDamage | Cost$ T Sac<1/CARDNAME> | ValidTgts$ Creature.attacking,Creat
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dive_bomber.jpg
 Oracle:Flying\n{T}, Sacrifice Dive Bomber: Dive Bomber deals 2 damage to target attacking or blocking creature.
-SetInfo:ONS Common

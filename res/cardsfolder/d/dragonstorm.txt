@@ -6,6 +6,3 @@ K:Storm
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dragonstorm.jpg
 Oracle:Search your library for a Dragon permanent card and put it onto the battlefield. Then shuffle your library.\nStorm (When you cast this spell, copy it for each spell cast before it this turn.)
-SetInfo:SCG Rare
-SetInfo:DRB Rare
-SetInfo:TSB Special

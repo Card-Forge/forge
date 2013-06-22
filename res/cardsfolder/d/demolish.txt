@@ -4,10 +4,3 @@ Types:Sorcery
 A:SP$ Destroy | Cost$ 3 R | ValidTgts$ Artifact,Land | TgtPrompt$ Select target artifact or land | SpellDescription$ Destroy target artifact or land.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/demolish.jpg
 Oracle:Destroy target artifact or land.
-SetInfo:8ED Uncommon
-SetInfo:ODY Uncommon
-SetInfo:ZEN Common
-SetInfo:9ED Uncommon
-SetInfo:AVR Common
-SetInfo:10E Common
-SetInfo:M11 Common

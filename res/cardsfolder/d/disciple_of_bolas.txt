@@ -12,4 +12,3 @@ SVar:NeedsToPlay:Creature.YouCtrl
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/disciple_of_bolas.jpg
 Oracle:When Disciple of Bolas enters the battlefield, sacrifice another creature. You gain X life and draw X cards, where X is that creature's power.
-SetInfo:M13 Rare

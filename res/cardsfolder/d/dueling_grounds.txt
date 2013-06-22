@@ -7,4 +7,3 @@ SVar:NonStackingEffect:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dueling_grounds.jpg
 Oracle:No more than one creature can attack each turn.\nNo more than one creature can block each turn.
-SetInfo:INV Rare

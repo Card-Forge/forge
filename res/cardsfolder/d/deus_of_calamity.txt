@@ -7,4 +7,3 @@ T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | DamageAmou
 SVar:TrigDestroy:AB$Destroy | Cost$ 0 | ValidTgts$ Land.YouDontCtrl | TgtPrompt$ Select target land opponent controls.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deus_of_calamity.jpg
 Oracle:Trample\nWhenever Deus of Calamity deals 6 or more damage to an opponent, destroy target land that player controls.
-SetInfo:SHM Rare

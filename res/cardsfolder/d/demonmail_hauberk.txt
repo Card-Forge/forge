@@ -5,4 +5,3 @@ K:Equip Sac<1/Creature>
 S:Mode$ Continuous | Affected$ Card.EquippedBy | AddPower$ 4 | AddToughness$ 2 | Description$ Equipped creature gets +4/+2.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/demonmail_hauberk.jpg
 Oracle:Equipped creature gets +4/+2.\nEquip-Sacrifice a creature.
-SetInfo:ISD Uncommon

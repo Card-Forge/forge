@@ -9,4 +9,3 @@ SVar:DeathrendersCall:DB$ ChangeZone | Cost$ 0 | Origin$ Hand | Destination$ Bat
 SVar:DeathrenderAttach:DB$ Attach | Defined$ Remembered
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deathrender.jpg
 Oracle:Equipped creature gets +2/+2.\nWhenever equipped creature dies, you may put a creature card from your hand onto the battlefield and attach Deathrender to it.\nEquip {2}
-SetInfo:LRW Rare

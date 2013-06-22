@@ -8,6 +8,3 @@ SVar:X:TriggeredPlayer$CardsInHand
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dreamborn_muse.jpg
 Oracle:At the beginning of each player's upkeep, that player puts the top X cards of his or her library into his or her graveyard, where X is the number of cards in his or her hand.
-SetInfo:COM Rare
-SetInfo:LGN Rare
-SetInfo:10E Rare

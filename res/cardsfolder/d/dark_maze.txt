@@ -7,5 +7,3 @@ A:AB$ Pump | Cost$ 0 | KW$ HIDDEN CARDNAME can attack as though it didn't have d
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dark_maze.jpg
 Oracle:Defender (This creature can't attack.)\n{0}: Dark Maze can attack this turn as though it didn't have defender.  Exile it at the beginning of the next end step.
-SetInfo:5ED Common
-SetInfo:HML Common x2

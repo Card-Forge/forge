@@ -6,4 +6,3 @@ A:SP$ Attach | Cost$ G | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Forestwalk | Description$ Enchanted creature has forestwalk. (It's unblockable as long as defending player controls a Forest.)
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dryads_favor.jpg
 Oracle:Enchant creature\nEnchanted creature has forestwalk. (It's unblockable as long as defending player controls a Forest.)
-SetInfo:M11 Common

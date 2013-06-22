@@ -5,6 +5,3 @@ A:SP$ Draw | Cost$ 2 U | NumCards$ 3 | SubAbility$ ChangeZoneDB | SpellDescripti
 SVar:ChangeZoneDB:DB$ChangeZone | Origin$ Hand | Destination$ Library | ChangeNum$ 2 | Mandatory$ True | DestinationAlternative$ Library | LibraryPositionAlternative$ -1 | AlternativeDestinationMessage$ Would you like to put the cards on the top of your library (and not on the bottom)?
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dream_cache.jpg
 Oracle:Draw three cards, then put two cards from your hand both on top of your library or both on the bottom of your library.
-SetInfo:TMP Common
-SetInfo:MIR Common
-SetInfo:6ED Common

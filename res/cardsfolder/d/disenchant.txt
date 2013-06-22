@@ -4,18 +4,3 @@ Types:Instant
 A:SP$ Destroy | Cost$ 1 W | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | SpellDescription$ Destroy target artifact or enchantment.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/disenchant.jpg
 Oracle:Destroy target artifact or enchantment.
-SetInfo:S00 Common
-SetInfo:2ED Common
-SetInfo:7ED Common
-SetInfo:TMP Common
-SetInfo:6ED Common
-SetInfo:5ED Common
-SetInfo:USG Common
-SetInfo:MMQ Common
-SetInfo:TSB Special
-SetInfo:MIR Common
-SetInfo:LEB Common
-SetInfo:LEA Common
-SetInfo:ICE Common
-SetInfo:4ED Common
-SetInfo:3ED Common

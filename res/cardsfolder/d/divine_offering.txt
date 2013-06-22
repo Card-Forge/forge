@@ -6,8 +6,3 @@ SVar:DBGainLife:DB$GainLife | Defined$ You | LifeAmount$ X | References$ X
 SVar:X:Targeted$CardManaCost
 SVar:Picture:http://www.wizards.com/global/images/magic/general/divine_offering.jpg
 Oracle:Destroy target artifact. You gain life equal to its converted mana cost.
-SetInfo:CHR Common
-SetInfo:MIR Common
-SetInfo:LEG Common
-SetInfo:5ED Common
-SetInfo:MBS Common
