@@ -7,4 +7,3 @@ SVar:DBCandlesDraw:DB$ Draw | NumCards$ 1 | ConditionDefined$ Remembered | Condi
 SVar:DBCandlesCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/candles_of_leng.jpg
 Oracle:{4}, {T}: Reveal the top card of your library. If it has the same name as a card in your graveyard, put it into your graveyard. Otherwise, draw a card.
-SetInfo:TSP Rare

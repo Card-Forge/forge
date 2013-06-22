@@ -4,4 +4,3 @@ Types:Creature Elemental
 PT:5/2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cobblebrute.jpg
 Oracle:
-SetInfo:RTR Common

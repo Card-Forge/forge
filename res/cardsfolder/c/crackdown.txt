@@ -7,4 +7,3 @@ SVar:NonStackingEffect:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crackdown.jpg
 Oracle:Nonwhite creatures with power 3 or greater don't untap during their controllers' untap steps.
-SetInfo:MMQ Rare

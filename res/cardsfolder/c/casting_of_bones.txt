@@ -9,4 +9,3 @@ SVar:DBDiscard:DB$Discard | Defined$ You | Mode$ TgtChoose | DiscardValid$ Card.
 SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/casting_of_bones.jpg
 Oracle:Enchant creature\nWhen enchanted creature dies, draw three cards, then discard one of them.
-SetInfo:ALL Common x2

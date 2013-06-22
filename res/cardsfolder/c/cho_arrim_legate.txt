@@ -8,4 +8,3 @@ SVar:X:Count$Valid Swamp.OppCtrl
 SVar:Y:Count$Valid Plains.YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cho_arrim_legate.jpg
 Oracle:Protection from black\nIf an opponent controls a Swamp and you control a Plains, you may cast Cho-Arrim Legate without paying its mana cost.
-SetInfo:MMQ Uncommon

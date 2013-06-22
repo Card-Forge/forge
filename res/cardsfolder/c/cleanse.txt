@@ -5,4 +5,3 @@ A:SP$ DestroyAll | Cost$ 2 W W | ValidCards$ Creature.Black | SpellDescription$ 
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cleanse.jpg
 Oracle:Destroy all black creatures.
-SetInfo:LEG Rare

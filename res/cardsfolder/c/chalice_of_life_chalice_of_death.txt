@@ -17,4 +17,3 @@ Types:Artifact
 A:AB$ LoseLife | Cost$ T | ValidTgts$ Player | TgtPrompt$Target a player to lose 5 life | LifeAmount$ 5 | SpellDescription$ Target player loses 5 life.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chalice_of_death.jpg
 Oracle:{T}: Target player loses 5 life.
-SetInfo:DKA Uncommon

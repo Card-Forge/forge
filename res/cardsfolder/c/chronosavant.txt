@@ -6,4 +6,3 @@ A:AB$ ChangeZone | Cost$ 1 W | Origin$ Graveyard | Destination$ Battlefield | Ta
 SVar:SkipTurn:DB$AddTurn | Defined$ Opponent | NumTurns$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chronosavant.jpg
 Oracle:{1}{W}: Return Chronosavant from your graveyard to the battlefield tapped. You skip your next turn.
-SetInfo:TSP Rare

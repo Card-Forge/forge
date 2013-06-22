@@ -5,4 +5,3 @@ A:SP$ Dig | Cost$ 2 G | DigNum$ 5 | Defined$ Each | Reveal$ True | ChangeNum$ Al
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/clear_the_land.jpg
 Oracle:Each player reveals the top five cards of his or her library, puts all land cards revealed this way onto the battlefield tapped, and exiles the rest.
-SetInfo:MMQ Rare

@@ -8,5 +8,3 @@ SVar:RemAIDeck:True
 SVar:SacMe:1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chromatic_star.jpg
 Oracle:{1}, {T}, Sacrifice Chromatic Star: Add one mana of any color to your mana pool.\nWhen Chromatic Star is put into a graveyard from the battlefield, draw a card.
-SetInfo:TSP Common
-SetInfo:10E Uncommon

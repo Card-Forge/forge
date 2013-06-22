@@ -8,4 +8,3 @@ SVar:TrigWin:AB$ WinsGame | Cost$ 0 | Defined$ You
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chance_encounter.jpg
 Oracle:Whenever you win a coin flip, put a luck counter on Chance Encounter.\nAt the beginning of your upkeep, if Chance Encounter has ten or more luck counters on it, you win the game.
-SetInfo:ODY Rare

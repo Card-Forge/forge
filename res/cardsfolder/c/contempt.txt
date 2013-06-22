@@ -9,4 +9,3 @@ SVar:BounceCritter:DB$ ChangeZone | Defined$ Enchanted | Origin$ Battlefield | D
 SVar:BounceSelf:DB$ ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Hand
 SVar:Picture:http://www.wizards.com/global/images/magic/general/contempt.jpg
 Oracle:Enchant creature\nWhenever enchanted creature attacks, return it and Contempt to their owners' hands at end of combat.
-SetInfo:STH Common

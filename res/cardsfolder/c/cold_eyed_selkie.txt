@@ -8,4 +8,3 @@ SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ X | References$ X
 SVar:X:TriggerCount$DamageAmount
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cold_eyed_selkie.jpg
 Oracle:Islandwalk\nWhenever Cold-Eyed Selkie deals combat damage to a player, you may draw that many cards.
-SetInfo:EVE Rare

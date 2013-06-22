@@ -6,5 +6,3 @@ SVar:TrigDraw:AB$ Draw | Cost$ 0 | Defined$ You | NumCards$ 1
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/compost.jpg
 Oracle:Whenever a black card is put into an opponent's graveyard from anywhere, you may draw a card.
-SetInfo:7ED Uncommon
-SetInfo:UDS Uncommon

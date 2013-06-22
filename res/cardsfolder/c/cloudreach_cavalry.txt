@@ -7,4 +7,3 @@ SVar:X:Count$Valid Bird.YouCtrl
 SVar:BuffedBy:Bird
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cloudreach_cavalry.jpg
 Oracle:As long as you control a Bird, Cloudreach Cavalry gets +2/+2 and has flying.
-SetInfo:LGN Uncommon

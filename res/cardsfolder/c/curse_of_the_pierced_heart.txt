@@ -7,4 +7,3 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player.EnchantedBy | TriggerZones$ 
 SVar:TrigDamage:AB$ DealDamage | Cost$ 0 | Defined$ Player.EnchantedBy | NumDmg$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/curse_of_the_pierced_heart.jpg
 Oracle:Enchant player\nAt the beginning of enchanted player's upkeep, Curse of the Pierced Heart deals 1 damage to that player.
-SetInfo:ISD Common

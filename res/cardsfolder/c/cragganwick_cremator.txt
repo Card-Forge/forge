@@ -9,4 +9,3 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$CardPower
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cragganwick_cremator.jpg
 Oracle:When Cragganwick Cremator enters the battlefield, discard a card at random. If you discard a creature card this way, Cragganwick Cremator deals damage equal to that card's power to target player.
-SetInfo:SHM Rare

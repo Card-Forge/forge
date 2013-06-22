@@ -7,4 +7,3 @@ S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ CARDNAME
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/controlled_instincts.jpg
 Oracle:Enchant red or green creature\nEnchanted creature doesn't untap during its controller's untap step.
-SetInfo:CFX Uncommon

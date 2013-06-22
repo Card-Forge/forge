@@ -6,4 +6,3 @@ A:SP$ Attach | Cost$ 1 U | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ Unblockable | Description$ Enchanted creature is unblockable.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cloak_of_mists.jpg
 Oracle:Enchant creature\nEnchanted creature is unblockable.
-SetInfo:USG Common

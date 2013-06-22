@@ -8,4 +8,3 @@ SVar:X:Remembered$CardPower
 SVar:BuffedBy:Giant
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crush_underfoot.jpg
 Oracle:Choose a Giant creature you control. It deals damage equal to its power to target creature.
-SetInfo:LRW Uncommon

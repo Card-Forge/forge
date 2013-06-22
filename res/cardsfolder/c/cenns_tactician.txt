@@ -6,4 +6,3 @@ A:AB$ PutCounter | Cost$ W T | ValidTgts$ Creature.Soldier | TgtPrompt$ Select t
 S:Mode$ Continuous | Affected$ Creature.YouCtrl+counters_GE1_P1P1 | AddHiddenKeyword$ CARDNAME can block an additional creature. | Description$ Each creature you control with a +1/+1 counter on it can block an additional creature.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cenns_tactician.jpg
 Oracle:{W}, {T}: Put a +1/+1 counter on target Soldier creature.\nEach creature you control with a +1/+1 counter on it can block an additional creature.
-SetInfo:MOR Uncommon

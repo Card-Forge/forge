@@ -6,5 +6,3 @@ SVar:NonStackingEffect:True
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/claws_of_gix.jpg
 Oracle:{1}, Sacrifice a permanent: You gain 1 life.
-SetInfo:TSB Special
-SetInfo:USG Uncommon

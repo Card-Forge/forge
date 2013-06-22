@@ -7,4 +7,3 @@ A:AB$ Pump | Cost$ 1 Discard<1/Random> | NumAtt$ +2 | SpellDescription$ CARDNAME
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/canyon_drake.jpg
 Oracle:Flying\n{1}, Discard a card at random: Canyon Drake gets +2/+0 until end of turn.
-SetInfo:TMP Rare

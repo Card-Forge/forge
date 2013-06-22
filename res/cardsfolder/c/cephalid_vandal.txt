@@ -9,4 +9,3 @@ SVar:X:Count$CardCounters.SHRED
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cephalid_vandal.jpg
 Oracle:At the beginning of your upkeep, put a shred counter on Cephalid Vandal. Then put the top card of your library into your graveyard for each shred counter on Cephalid Vandal.
-SetInfo:TOR Rare

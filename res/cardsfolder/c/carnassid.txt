@@ -6,4 +6,3 @@ K:Trample
 A:AB$ Regenerate | Cost$ 1 G | SpellDescription$ Regenerate CARDNAME.
 SVar:Picture:http://resources.wizards.com/magic/cards/st/en-us/card5217.jpg
 Oracle:Trample\n{1}{G}: Regenerate Carnassid.
-SetInfo:STH Rare

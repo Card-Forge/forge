@@ -6,6 +6,3 @@ SVar:DBGainLife:DB$GainLife | Defined$ You | LifeAmount$ X | References$ X
 SVar:X:Targeted$CardPower
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chastise.jpg
 Oracle:Destroy target attacking creature. You gain life equal to its power.
-SetInfo:8ED Uncommon
-SetInfo:9ED Uncommon
-SetInfo:JUD Uncommon

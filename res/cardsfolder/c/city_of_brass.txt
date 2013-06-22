@@ -6,9 +6,3 @@ T:Mode$ Taps | ValidCard$ Card.Self | Execute$ TrigDamage | TriggerZones$ Battle
 SVar:TrigDamage:AB$DealDamage | Cost$ 0 | Defined$ You | NumDmg$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/city_of_brass.jpg
 Oracle:Whenever City of Brass becomes tapped, it deals 1 damage to you.\n{T}: Add one mana of any color to your mana pool.
-SetInfo:8ED Rare
-SetInfo:7ED Rare
-SetInfo:CHR Rare
-SetInfo:6ED Rare
-SetInfo:ARN Uncommon
-SetInfo:5ED Rare

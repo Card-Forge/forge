@@ -7,4 +7,3 @@ SVar:DBToken:DB$ Token | TokenImage$ C 1 1 Shapeshifter | TokenColors$ Colorless
 SVar:Changeling:Mode$ Continuous | EffectZone$ All | Affected$ Card.Self | CharacteristicDefining$ True | AddType$ AllCreatureTypes | Description$ Changeling (This card is every creature type at all times.)
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crib_swap.jpg
 Oracle:Changeling (This card is every creature type at all times.)\nExile target creature. Its controller puts a 1/1 colorless Shapeshifter creature token with changeling onto the battlefield.
-SetInfo:LRW Uncommon

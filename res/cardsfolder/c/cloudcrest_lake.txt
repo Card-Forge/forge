@@ -7,4 +7,3 @@ A:AB$ Mana | Cost$ T | Produced$ U | SubAbility$ DBStayTapped | SpellDescription
 SVar:DBStayTapped:DB$Pump | KW$ HIDDEN This card doesn't untap during your next untap step. | Defined$ Self | Permanent$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cloudcrest_lake.jpg
 Oracle:{T}: Add {1} to your mana pool.\n{T}: Add {W} or {U} to your mana pool. Cloudcrest Lake doesn't untap during your next untap step.
-SetInfo:CHK Uncommon

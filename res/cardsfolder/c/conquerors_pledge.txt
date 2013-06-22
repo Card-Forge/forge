@@ -6,4 +6,3 @@ A:SP$ Token | Cost$ 2 W W W | TokenAmount$ WasKicked | References$ WasKicked | T
 SVar:WasKicked:Count$Kicked.12.6
 SVar:Picture:http://www.wizards.com/global/images/magic/general/conquerors_pledge.jpg
 Oracle:Kicker {6} (You may pay an additional {6} as you cast this spell.)\nPut six 1/1 white Kor Soldier creature tokens onto the battlefield. If Conqueror's Pledge was kicked, put twelve of those tokens onto the battlefield instead.
-SetInfo:ZEN Rare

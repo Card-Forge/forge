@@ -7,4 +7,3 @@ T:Mode$ TapsForMana | ValidCard$ Swamp.YouCtrl | Execute$ TrigMana | TriggerZone
 SVar:TrigMana:AB$Mana | Cost$ 0 | Produced$ B | Amount$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crypt_ghast.jpg
 Oracle:Extort (Whenever you cast a spell, you may pay {W/B}. If you do, each opponent loses 1 life and you gain that much life.)\nWhenever you tap a Swamp for mana, add {B} to your mana pool (in addition to the mana the land produces).
-SetInfo:GTC Rare

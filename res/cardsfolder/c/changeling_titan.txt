@@ -7,4 +7,3 @@ K:Champion:Creature
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/changeling_titan.jpg
 Oracle:Changeling (This card is every creature type at all times.)\nChampion a creature (When this enters the battlefield, sacrifice it unless you exile another creature you control. When this leaves the battlefield, that card returns to the battlefield.)
-SetInfo:LRW Uncommon

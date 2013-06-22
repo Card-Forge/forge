@@ -6,4 +6,3 @@ SVar:STPrevent:Mode$ PreventDamage | EffectZone$ Command | Source$ Creature | Ta
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chameleon_blur.jpg
 Oracle:Prevent all damage that creatures would deal to players this turn.
-SetInfo:TSP Common

@@ -10,4 +10,3 @@ SVar:NonStackingEffect:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/circle_of_protection_shadow.jpg
 Oracle:{1}: The next time a creature of your choice with shadow would deal damage to you this turn, prevent that damage.
-SetInfo:TMP Common

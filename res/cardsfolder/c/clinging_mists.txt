@@ -7,4 +7,3 @@ SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.attacking | KW$ HIDDEN This ca
 SVar:FatefulHour:Count$YourLifeTotal
 SVar:Picture:http://www.wizards.com/global/images/magic/general/clinging_mists.jpg
 Oracle:Prevent all combat damage that would be dealt this turn.\nFateful hour - If you have 5 or less life, tap all attacking creatures. Those creatures don't untap during their controller's next untap step.
-SetInfo:DKA Common

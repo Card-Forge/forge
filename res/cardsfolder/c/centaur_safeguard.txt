@@ -6,4 +6,3 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigGainLife:AB$GainLife | Cost$ 0 | Defined$ TriggeredCardController | LifeAmount$ 3
 SVar:Picture:http://www.wizards.com/global/images/magic/general/centaur_safeguard.jpg
 Oracle:({G/W} can be paid with either {G} or {W}.)\nWhen Centaur Safeguard dies, you may gain 3 life.
-SetInfo:RAV Common

@@ -7,5 +7,3 @@ SVar:TrigDig:AB$ Dig | Cost$ 0 | Defined$ DefendingPlayer | DigNum$ 1 | AnyNumbe
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/coral_fighters.jpg
 Oracle:Whenever Coral Fighters attacks and isn't blocked, look at the top card of defending player's library. You may put that card on the bottom of that player's library.
-SetInfo:DDI Uncommon
-SetInfo:MIR Uncommon

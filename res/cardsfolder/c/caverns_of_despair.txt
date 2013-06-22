@@ -7,4 +7,3 @@ SVar:NonStackingEffect:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/caverns_of_despair.jpg
 Oracle:No more than two creatures can attack each combat.\nNo more than two creatures can block each combat.
-SetInfo:LEG Rare

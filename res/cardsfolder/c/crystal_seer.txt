@@ -8,4 +8,3 @@ SVar:TrigRearrange:AB$ RearrangeTopOfLibrary | Cost$ 0 | Defined$ You | NumCards
 Svar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crystal_seer.jpg
 Oracle:When Crystal Seer enters the battlefield, look at the top four cards of your library, then put them back in any order.\n{4}{U}: Return Crystal Seer to its owner's hand.
-SetInfo:GPT Common

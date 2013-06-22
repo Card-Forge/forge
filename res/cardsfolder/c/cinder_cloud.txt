@@ -7,4 +7,3 @@ SVar:Y:Remembered$Valid Creature.White
 SVar:Z:Remembered$CardPower
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cinder_cloud.jpg
 Oracle:Destroy target creature. If a white creature dies this way, Cinder Cloud deals damage to that creature's controller equal to the creature's power.
-SetInfo:MIR Uncommon

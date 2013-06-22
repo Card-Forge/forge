@@ -7,4 +7,3 @@ T:Mode$ Taps | ValidCard$ Card.AttachedBy | TriggerZones$ Battlefield | Execute$
 SVar:TrigMill:AB$ Mill | Cost$ 0 | Defined$ TriggeredCardController | NumCards$ 3
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chronic_flooding.jpg
 Oracle:Enchant land\nWhenever enchanted land becomes tapped, its controller puts the top three cards of his or her library into his or her graveyard.
-SetInfo:RTR Common

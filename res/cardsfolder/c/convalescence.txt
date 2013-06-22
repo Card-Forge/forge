@@ -5,4 +5,3 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | L
 SVar:TrigGainLife:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/convalescence.jpg
 Oracle:At the beginning of your upkeep, if you have 10 or less life, you gain 1 life.
-SetInfo:EXO Rare

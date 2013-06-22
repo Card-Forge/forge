@@ -7,4 +7,3 @@ S:Mode$ Continuous | Affected$ Land.AttachedBy | AddAbility$ LoseLife | Descript
 SVar:LoseLife:AB$LoseLife | Cost$ T | ValidTgts$ Player | LifeAmount$ 3 | TgtPrompt$ Target a player to lose life | SpellDescription$ Target player loses 3 life.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/caustic_tar.jpg
 Oracle:Enchant land\nEnchanted land has "{T}: Target player loses 3 life."
-SetInfo:ODY Uncommon

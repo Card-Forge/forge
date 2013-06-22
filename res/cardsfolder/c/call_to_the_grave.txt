@@ -9,5 +9,3 @@ SVar:RemRandomDeck:True
 DeckHints:Type$Zombie
 SVar:Picture:http://www.wizards.com/global/images/magic/general/call_to_the_grave.jpg
 Oracle:At the beginning of each player's upkeep, that player sacrifices a non-Zombie creature.\nAt the beginning of the end step, if no creatures are on the battlefield, sacrifice Call to the Grave.
-SetInfo:SCG Rare
-SetInfo:M12 Rare

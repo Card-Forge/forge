@@ -6,4 +6,3 @@ SVar:DBDamage:DB$ DealDamage | Defined$ Targeted | NumDmg$ X | References$ X
 SVar:X:Count$Valid Forest.YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crash_landing.jpg
 Oracle:Target creature with flying loses flying until end of turn. Crash Landing deals damage to that creature equal to the number of Forests you control.
-SetInfo:GPT Uncommon

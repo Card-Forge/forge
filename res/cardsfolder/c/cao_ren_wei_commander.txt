@@ -7,4 +7,3 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigLoseLife:DB$ LoseLife | Cost$ 0 | LifeAmount$ 3
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cao_ren_wei_commander.jpg
 Oracle:Horsemanship (This creature can't be blocked except by creatures with horsemanship.)\nWhen Cao Ren, Wei Commander enters the battlefield, you lose 3 life.
-SetInfo:PTK Rare

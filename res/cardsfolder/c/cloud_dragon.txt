@@ -6,4 +6,3 @@ K:Flying
 K:CARDNAME can block only creatures with flying.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cloud_dragon.jpg
 Oracle:Flying\nCloud Dragon can block only creatures with flying.
-SetInfo:POR Rare

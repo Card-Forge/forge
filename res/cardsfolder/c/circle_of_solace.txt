@@ -12,4 +12,3 @@ SVar:NonStackingEffect:True
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/circle_of_solace.jpg
 Oracle:As Circle of Solace enters the battlefield, choose a creature type.\n{1}{W}: The next time a creature of the chosen type would deal damage to you this turn, prevent that damage.
-SetInfo:ONS Rare

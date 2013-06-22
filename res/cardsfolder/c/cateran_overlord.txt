@@ -7,4 +7,3 @@ A:AB$ Regenerate | Cost$ Sac<1/Creature> | SpellDescription$ Regenerate CARDNAME
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cateran_overlord.jpg
 Oracle:Sacrifice a creature: Regenerate Cateran Overlord.\n{6}, {T}: Search your library for a Mercenary permanent card with converted mana cost 6 or less and put it onto the battlefield. Then shuffle your library.
-SetInfo:MMQ Rare

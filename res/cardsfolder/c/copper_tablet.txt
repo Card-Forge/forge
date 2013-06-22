@@ -6,6 +6,3 @@ SVar:TrigDamage:AB$ DealDamage | Cost$ 0 | Defined$ TriggeredPlayer | NumDmg$ 1
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/copper_tablet.jpg
 Oracle:At the beginning of each player's upkeep, Copper Tablet deals 1 damage to that player.
-SetInfo:LEB Uncommon
-SetInfo:LEA Uncommon
-SetInfo:2ED Uncommon

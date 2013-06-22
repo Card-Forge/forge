@@ -10,5 +10,3 @@ SVar:DelTrig:Mode$ Phase | Phase$ EndCombat | Execute$ TrigRemoveCounter | Trigg
 SVar:TrigRemoveCounter:AB$RemoveCounter | Cost$ 0 | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/clockwork_condor.jpg
 Oracle:Flying\nClockwork Condor enters the battlefield with three +1/+1 counters on it.\nWhenever Clockwork Condor attacks or blocks, remove a +1/+1 counter from it at end of combat.
-SetInfo:MRD Common
-SetInfo:DDF Common

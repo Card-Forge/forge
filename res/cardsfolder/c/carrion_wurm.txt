@@ -8,4 +8,3 @@ SVar:TrigNoCombatDamage:AB$ Pump | Cost$ 0 | Defined$ Self | KW$ HIDDEN CARDNAME
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/carrion_wurm.jpg
 Oracle:Whenever Carrion Wurm attacks or blocks, any player may exile three cards from his or her graveyard. If a player does, Carrion Wurm assigns no combat damage this turn.
-SetInfo:TOR Uncommon

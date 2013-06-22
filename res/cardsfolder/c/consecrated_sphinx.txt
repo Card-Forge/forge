@@ -7,4 +7,3 @@ T:Mode$ Drawn | ValidCard$ Card.OppOwn | TriggerZones$ Battlefield | Execute$ Tr
 SVar:TrigDraw:AB$Draw | Cost$ 0 | NumCards$ 2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/consecrated_sphinx.jpg
 Oracle:Flying\nWhenever an opponent draws a card, you may draw two cards.
-SetInfo:MBS Mythic

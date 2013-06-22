@@ -9,4 +9,3 @@ SVar:X:Count$Valid Creature.YouCtrl
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/craterhoof_behemoth.jpg
 Oracle:Haste\nWhen Craterhoof Behemoth enters the battlefield, creatures you control gain trample and get +X/+X until end of turn, where X is the number of creatures you control.
-SetInfo:AVR Mythic

@@ -5,4 +5,3 @@ A:SP$ DealDamage | Cost$ 2 R | ValidTgts$ Creature,Player | TgtPrompt$ Select ta
 SVar:DBDealDamage:DB$DealDamage | Defined$ You | NumDmg$ 2
 SVar:Picture:http://resources.wizards.com/magic/cards/rav/en-us/card87942.jpg
 Oracle:Char deals 4 damage to target creature or player and 2 damage to you.
-SetInfo:RAV Rare

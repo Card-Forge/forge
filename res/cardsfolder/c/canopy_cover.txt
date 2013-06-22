@@ -7,4 +7,3 @@ S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ CantBeBlockedB
 S:Mode$ CantTarget | ValidCard$ Card.EnchantedBy | Activator$ Opponent | Description$ Enchanted creature can't be the target of spells or abilities your opponents control.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/canopy_cover.jpg
 Oracle:Enchant creature\nEnchanted creature can't be blocked except by creatures with flying or reach.\nEnchanted creature can't be the target of spells or abilities your opponents control.
-SetInfo:WWK Uncommon

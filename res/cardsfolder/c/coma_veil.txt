@@ -7,4 +7,3 @@ S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddHiddenKeyword$ CARDNAME doe
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/coma_veil.jpg
 Oracle:Enchant artifact or creature\nEnchanted permanent doesn't untap during its controller's untap step.
-SetInfo:ALA Common

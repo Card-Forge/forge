@@ -6,4 +6,3 @@ A:SP$ Discard | Cost$ 1 U B | ValidTgts$ Player | NumCards$ 2 | Mode$ TgtChoose 
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/consult_the_necrosages.jpg
 Oracle:Choose one - Target player draws two cards; or target player discards two cards.
-SetInfo:RAV Common

@@ -6,4 +6,3 @@ SVar:DBChangeZoneAll:DB$ ChangeZoneAll | ChangeType$ Remembered.sameName | Defin
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/counterbore.jpg
 Oracle:Counter target spell. Search its controller's graveyard, hand, and library for all cards with the same name as that spell and exile them. Then that player shuffles his or her library.
-SetInfo:SHM Rare

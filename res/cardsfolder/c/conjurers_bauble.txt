@@ -5,4 +5,3 @@ A:AB$ ChangeZone | Cost$ T Sac<1/CARDNAME> | Origin$ Graveyard | Destination$ Li
 SVar:DBDraw:DB$Draw | Defined$ You | NumCards$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/conjurers_bauble.jpg
 Oracle:{T}, Sacrifice Conjurer's Bauble: Put up to one target card from your graveyard on the bottom of your library. Draw a card.
-SetInfo:5DN Common

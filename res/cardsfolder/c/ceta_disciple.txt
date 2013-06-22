@@ -7,4 +7,3 @@ A:AB$ Mana | Cost$ G T | Produced$ Any | SpellDescription$ Add one mana of any c
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ceta_disciple.jpg
 Oracle:{R}, {T}: Target creature gets +2/+0 until end of turn.\n{G}, {T}: Add one mana of any color to your mana pool.
-SetInfo:APC Common

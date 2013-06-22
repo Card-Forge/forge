@@ -7,4 +7,3 @@ T:Mode$ Phase | Phase$ Upkeep | TriggerZones$ Battlefield | Execute$ TrigTap | T
 SVar:TrigTap:AB$Tap | Cost$ 0 | Defined$ Enchanted
 SVar:Picture:http://www.wizards.com/global/images/magic/general/curse_of_chains.jpg
 Oracle:Enchant creature\nAt the beginning of each upkeep, tap enchanted creature.
-SetInfo:SHM Common

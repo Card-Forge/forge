@@ -7,4 +7,3 @@ S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 1 | AddToughness
 A:AB$ DestroyAll | Cost$ Sac<1/CARDNAME> | ValidCards$ Creature.nonWall+blockingRemembered | SpellDescription$ Destroy all non-Wall creatures blocking enchanted creature.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/coils_of_the_medusa.jpg
 Oracle:Enchant creature\nEnchanted creature gets +1/-1.\nSacrifice Coils of the Medusa: Destroy all non-Wall creatures blocking enchanted creature.
-SetInfo:WTH Common

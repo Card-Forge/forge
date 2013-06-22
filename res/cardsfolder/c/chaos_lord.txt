@@ -10,4 +10,3 @@ S:Mode$ Continuous | Affected$ Card.Self+notEnteredBattlefieldThisTurn | AddHidd
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chaos_lord.jpg
 Oracle:First strike\nAt the beginning of your upkeep, target opponent gains control of Chaos Lord if the number of permanents is even.\nChaos Lord can attack as though it had haste unless it entered the battlefield this turn.
-SetInfo:ICE Rare

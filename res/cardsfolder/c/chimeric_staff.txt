@@ -6,5 +6,3 @@ SVar:X:Count$xPaid
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chimeric_staff.jpg
 Oracle:{X}: Chimeric Staff becomes an X/X Construct artifact creature until end of turn.
-SetInfo:10E Rare
-SetInfo:USG Rare

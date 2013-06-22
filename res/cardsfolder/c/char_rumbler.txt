@@ -6,4 +6,3 @@ K:Double Strike
 A:AB$ Pump | Cost$ R | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/char_rumbler.jpg
 Oracle:Double strike\n{R}: Char-Rumbler gets +1/+0 until end of turn.
-SetInfo:FUT Uncommon

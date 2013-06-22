@@ -6,4 +6,3 @@ T:Mode$ Phase | Phase$ Upkeep | TriggerZones$ Battlefield | Execute$ TrigGainLif
 SVar:TrigGainLife:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ 3
 SVar:Picture:http://www.wizards.com/global/images/magic/general/celestial_force.jpg
 Oracle:At the beginning of each upkeep, you gain 3 life.
-SetInfo:COM Rare

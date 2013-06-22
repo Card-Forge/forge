@@ -6,4 +6,3 @@ PT:4/4
 S:Mode$ PreventDamage | Target$ Card.Self | MaxDamage$ 3 | Description$ If a source would deal 3 or less damage to Callous Giant, prevent that damage.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/callous_giant.jpg
 Oracle:If a source would deal 3 or less damage to Callous Giant, prevent that damage.
-SetInfo:INV Rare

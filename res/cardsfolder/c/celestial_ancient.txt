@@ -8,5 +8,3 @@ SVar:TrigCounters:AB$ PutCounterAll | Cost$ 0 | ValidCards$ Creature.YouCtrl | C
 SVar:BuffedBy:Enchantment
 SVar:Picture:http://www.wizards.com/global/images/magic/general/celestial_ancient.jpg
 Oracle:Flying\nWhenever you cast an enchantment spell, put a +1/+1 counter on each creature you control.
-SetInfo:PC2 Rare
-SetInfo:DIS Rare

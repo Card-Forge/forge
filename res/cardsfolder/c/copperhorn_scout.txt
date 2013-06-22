@@ -6,4 +6,3 @@ T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigUntapAll | TriggerDescript
 SVar:TrigUntapAll:AB$ UntapAll | Cost$ 0 | ValidCards$ Creature.Other+YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/copperhorn_scout.jpg
 Oracle:Whenever Copperhorn Scout attacks, untap each other creature you control.
-SetInfo:SOM Common

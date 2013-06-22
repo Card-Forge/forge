@@ -6,4 +6,3 @@ S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ 
 SVar:X:Count$Valid Forest
 SVar:Picture:http://www.wizards.com/global/images/magic/general/coiling_woodworm.jpg
 Oracle:Coiling Woodworm's power is equal to the number of Forests on the battlefield.
-SetInfo:NMS Uncommon

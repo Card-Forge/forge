@@ -6,4 +6,3 @@ SVar:ChooseCT:DB$ ChooseType | Defined$ You | Type$ Creature | SpellDescription$
 S:Mode$ Continuous | Affected$ Creature.ChosenType | AddKeyword$ Fear | Description$ Creatures of the chosen type have fear. (They can't be blocked except by artifact creatures and/or black creatures.)
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cover_of_darkness.jpg
 Oracle:As Cover of Darkness enters the battlefield, choose a creature type.\nCreatures of the chosen type have fear. (They can't be blocked except by artifact creatures and/or black creatures.)
-SetInfo:ONS Rare

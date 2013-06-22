@@ -6,4 +6,3 @@ K:Cycling:2
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/constricting_tendrils.jpg
 Oracle:Target creature gets -3/-0 until end of turn.\nCycling {2} ({2}, Discard this card: Draw a card.)
-SetInfo:CFX Common

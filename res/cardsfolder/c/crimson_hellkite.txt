@@ -7,6 +7,3 @@ K:Flying
 SVar:X:Count$xPaid
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crimson_hellkite.jpg
 Oracle:Flying\n{X}, {T}: Crimson Hellkite deals X damage to target creature. Spend only red mana this way.
-SetInfo:7ED Rare
-SetInfo:MIR Rare
-SetInfo:6ED Rare

@@ -7,4 +7,3 @@ SVar:BounceAll:DB$ ChangeZoneAll | Origin$ Battlefield | Destination$ Hand | Cha
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/curfew.jpg
 Oracle:Each player returns a creature he or she controls to its owner's hand.
-SetInfo:USG Common

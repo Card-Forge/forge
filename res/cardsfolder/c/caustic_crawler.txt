@@ -6,4 +6,3 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.Y
 SVar:TrigPump:AB$Pump | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -1 | NumDef$ -1 | IsCurse$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/Caustic_Crawler.jpg
 Oracle:Landfall - Whenever a land enters the battlefield under your control, you may have target creature get -1/-1 until end of turn.
-SetInfo:WWK Uncommon

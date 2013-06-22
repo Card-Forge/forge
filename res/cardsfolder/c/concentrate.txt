@@ -4,6 +4,3 @@ Types:Sorcery
 A:SP$ Draw | Cost$ 2 U U | NumCards$ 3 | SpellDescription$ Draw three cards.
 SVar:Picture:http://resources.wizards.com/magic/cards/8ed/en-us/card45262.jpg
 Oracle:Draw three cards.
-SetInfo:8ED Uncommon
-SetInfo:PC2 Uncommon
-SetInfo:ODY Uncommon

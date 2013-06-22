@@ -5,4 +5,3 @@ A:SP$ DealDamage | Cost$ 4 R | ValidTgts$ Player | NumDmg$ 4 | SubAbility$ DmgAl
 SVar:DmgAll:DB$ DamageAll | Cost$ 0 | NumDmg$ 1 | ValidCards$ Creature.TargetedPlayerCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chandras_fury.jpg
 Oracle:Chandra's Fury deals 4 damage to target player and 1 damage to each creature that player controls.
-SetInfo:M13 Common

@@ -5,5 +5,3 @@ A:SP$ DamageAll | Cost$ 2 R R | NumDmg$ X | ValidCards$ Creature | ValidDescript
 SVar:X:Count$TypeOnBattlefield.Creature
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chain_reaction.jpg
 Oracle:Chain Reaction deals X damage to each creature, where X is the number of creatures on the battlefield.
-SetInfo:COM Rare
-SetInfo:WWK Rare

@@ -6,6 +6,3 @@ K:Flying
 K:CARDNAME can block only creatures with flying.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cloud_elemental.jpg
 Oracle:Flying\nCloud Elemental can block only creatures with flying.
-SetInfo:VIS Common
-SetInfo:M11 Common
-SetInfo:10E Common

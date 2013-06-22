@@ -6,4 +6,3 @@ K:Flying
 K:Haste
 SVar:Picture:http://resources.wizards.com/magic/cards/uz/en-us/card5555.jpg
 Oracle:Flying, haste
-SetInfo:USG Uncommon

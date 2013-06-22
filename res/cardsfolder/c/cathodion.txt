@@ -6,5 +6,3 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigAddMana:AB$Mana | Cost$ 0 | Produced$ 1 | Amount$ 3
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cathodion.jpg
 Oracle:When Cathodion dies, add {3} to your mana pool.
-SetInfo:MRD Uncommon
-SetInfo:USG Uncommon

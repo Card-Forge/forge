@@ -6,4 +6,3 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigDiscard:AB$ Discard | Cost$ 0 | ValidTgts$ Opponent | TgtPrompt$ Select an opponent | NumCards$ 1 | Mode$ TgtChoose
 SVar:Picture:http://www.wizards.com/global/images/magic/general/corrupt_court_official.jpg
 Oracle:When Corrupt Court Official enters the battlefield, target opponent discards a card.
-SetInfo:PTK Uncommon

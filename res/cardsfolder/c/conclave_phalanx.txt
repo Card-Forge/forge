@@ -8,5 +8,3 @@ SVar:TrigGainLife:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ X | Referen
 SVar:X:Count$Valid Creature.YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/conclave_phalanx.jpg
 Oracle:Convoke (Each creature you tap while casting this spell reduces its cost by {1} or by one mana of that creature's color.)\nWhen Conclave Phalanx enters the battlefield, you gain 1 life for each creature you control.
-SetInfo:RAV Uncommon
-SetInfo:DDF Uncommon

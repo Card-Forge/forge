@@ -6,4 +6,3 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | OptionalDec
 SVar:TrigChange:AB$ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Creature.Other+YouCtrl | Cost$ 2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/carrion_thrash.jpg
 Oracle:When Carrion Thrash dies, you may pay {2}. If you do, return another target creature card from your graveyard to your hand.
-SetInfo:ALA Common

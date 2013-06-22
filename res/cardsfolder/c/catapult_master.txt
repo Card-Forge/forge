@@ -6,5 +6,3 @@ A:AB$ ChangeZone | Cost$ tapXType<5/Soldier> | ValidTgts$ Creature | TgtPrompt$ 
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/catapult_master.jpg
 Oracle:Tap five untapped Soldiers you control: Exile target creature.
-SetInfo:ONS Rare
-SetInfo:DDF Rare

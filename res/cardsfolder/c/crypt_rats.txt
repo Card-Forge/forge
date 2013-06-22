@@ -6,5 +6,3 @@ A:AB$ DamageAll | Cost$ X | XColor$ B | NumDmg$ X | ValidCards$ Creature | Valid
 SVar:X:Count$xPaid
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crypt_rats.jpg
 Oracle:{X}: Crypt Rats deals X damage to each creature and each player. Spend only black mana this way.
-SetInfo:VIS Common
-SetInfo:7ED Uncommon

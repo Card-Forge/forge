@@ -4,4 +4,3 @@ Types:Sorcery Arcane
 A:SP$ DestroyAll | Cost$ 2 W | ValidCards$ Enchantment | SpellDescription$ Destroy all enchantments.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cleanfall.jpg
 Oracle:Destroy all enchantments.
-SetInfo:CHK Uncommon

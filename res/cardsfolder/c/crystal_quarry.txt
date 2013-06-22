@@ -6,4 +6,3 @@ A:AB$ Mana | Cost$ 5 T | Produced$ W U B R G | SpellDescription$ Add W U B R G t
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crystal_quarry.jpg
 Oracle:{T}: Add {1} to your mana pool.\n{5}, {T}: Add {W}{U}{B}{R}{G} to your mana pool.
-SetInfo:ODY Rare

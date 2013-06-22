@@ -6,5 +6,3 @@ SVar:TrigDraw:AB$ Draw | Cost$ 0 | NumCards$ 1
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/coastal_piracy.jpg
 Oracle:Whenever a creature you control deals combat damage to an opponent, you may draw a card.
-SetInfo:MMQ Uncommon
-SetInfo:8ED Rare

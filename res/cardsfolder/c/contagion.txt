@@ -6,4 +6,3 @@ SVar:AltCost:Cost$ PayLife<1> ExileFromHand<1/Card.Black> | Description$ You may
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/contagion.jpg
 Oracle:You may pay 1 life and exile a black card from your hand rather than pay Contagion's mana cost.\nDistribute two -2/-1 counters among one or two target creatures.
-SetInfo:ALL Uncommon

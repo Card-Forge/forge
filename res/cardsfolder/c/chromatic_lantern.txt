@@ -6,4 +6,3 @@ SVar:AnyMana:AB$ Mana | Cost$ T | Produced$ Any | Amount$ 1 | SpellDescription$ 
 A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color to your mana pool.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chromatic_lantern.jpg
 Oracle:Lands you control have "{T}: Add one mana of any color to your mana pool."\n{T}: Add one mana of any color to your mana pool.
-SetInfo:RTR Rare

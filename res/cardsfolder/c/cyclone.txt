@@ -8,5 +8,3 @@ SVar:DBDamageAll:DB$ DamageAll | NumDmg$ X |  ValidCards$ Creature | ValidPlayer
 SVar:X:Count$CardCounters.WIND
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cyclone.jpg
 Oracle:At the beginning of your upkeep, put a wind counter on Cyclone, then sacrifice Cyclone unless you pay {G} for each wind counter on it. If you pay, Cyclone deals damage equal to the number of wind counters on it to each creature and each player.
-SetInfo:CHR Rare
-SetInfo:ARN Uncommon

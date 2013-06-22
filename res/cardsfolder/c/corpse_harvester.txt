@@ -7,5 +7,3 @@ SVar:DBSwamp:DB$ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ S
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/corpse_harvester.jpg
 Oracle:{1}{B}, {T}, Sacrifice a creature: Search your library for a Zombie card and a Swamp card, reveal them, and put them into your hand. Then shuffle your library.
-SetInfo:LGN Uncommon
-SetInfo:HOP Uncommon

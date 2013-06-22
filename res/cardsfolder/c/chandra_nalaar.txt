@@ -8,7 +8,3 @@ A:AB$ DamageAll | Cost$ SubCounter<8/LOYALTY> | ValidTgts$ Player | TgtPrompt$ S
 SVar:X:XChoice
 SVar:Picture:http://resources.wizards.com/magic/cards/lrw/en/card140176.jpg
 Oracle:[+1] Chandra Nalaar deals 1 damage to target player.\n-X: Chandra Nalaar deals X damage to target creature.\n[-8] Chandra Nalaar deals 10 damage to target player and each creature he or she controls.
-SetInfo:M11 Mythic
-SetInfo:DD2 Mythic
-SetInfo:LRW Rare
-SetInfo:M10 Mythic

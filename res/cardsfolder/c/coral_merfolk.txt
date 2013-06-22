@@ -4,7 +4,3 @@ Types:Creature Merfolk
 PT:2/1
 SVar:Picture:http://resources.wizards.com/magic/cards/uz/en-us/card5613.jpg
 Oracle:
-SetInfo:M10 Common
-SetInfo:7ED Common
-SetInfo:M12 Common
-SetInfo:USG Common

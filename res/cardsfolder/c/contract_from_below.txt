@@ -9,7 +9,3 @@ SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/contract_from_below.jpg
 Oracle:Remove Contract from Below from your deck before playing if you're not playing for ante.\nDiscard your hand, add the top card of your library to the ante, then draw seven cards.
-SetInfo:LEB Rare
-SetInfo:LEA Rare
-SetInfo:3ED Rare
-SetInfo:2ED Rare

@@ -6,4 +6,3 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigLoseLife:AB$LoseLife | Cost$ 0 | LifeAmount$ 4 | Defined$ Each
 SVar:Picture:http://www.wizards.com/global/images/magic/general/caustic_hound.jpg
 Oracle:When Caustic Hound dies, each player loses 4 life.
-SetInfo:MBS Common

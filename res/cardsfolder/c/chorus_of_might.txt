@@ -5,4 +5,3 @@ A:SP$ Pump | Cost$ 3 G | ValidTgts$ Creature | TgtPrompt$ Select target creature
 SVar:X:Count$Valid Creature.YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chorus_of_might.jpg
 Oracle:Until end of turn, target creature gets +1/+1 for each creature you control and gains trample.
-SetInfo:RTR Common

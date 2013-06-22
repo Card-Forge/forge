@@ -5,4 +5,3 @@ PT:1/2
 A:AB$ Pump | Cost$ R | Defined$ Self | IsPresent$ Card.Self+blocked | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn. Activate this ability only if CARDNAME is blocked.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cinder_crawler.jpg
 Oracle:{R}: Cinder Crawler gets +1/+0 until end of turn. Activate this ability only if Cinder Crawler is blocked.
-SetInfo:EXO Common

@@ -8,6 +8,3 @@ SVar:DBToken:DB$Token | TokenAmount$ 1 | TokenName$ Zombie | TokenTypes$ Creatur
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cemetery_reaper.jpg
 Oracle:Other Zombie creatures you control get +1/+1.\n{2}{B}, {T}: Exile target creature card from a graveyard. Put a 2/2 black Zombie creature token onto the battlefield.
-SetInfo:M10 Rare
-SetInfo:M12 Rare
-SetInfo:ARC Rare

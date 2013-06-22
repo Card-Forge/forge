@@ -7,4 +7,3 @@ S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddToughness
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cagemail.jpg
 Oracle:Enchant creature\nEnchanted creature gets +2/+2 and can't attack.
-SetInfo:JUD Common

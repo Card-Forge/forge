@@ -7,7 +7,3 @@ S:Mode$ Continuous | Affected$ Land.EnchantedBy | AddHiddenKeyword$ CARDNAME can
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/consecrate_land.jpg
 Oracle:Enchant land\nEnchanted land is indestructible and can't be enchanted by other Auras.
-SetInfo:LEB Uncommon
-SetInfo:TSB Special
-SetInfo:LEA Uncommon
-SetInfo:2ED Uncommon

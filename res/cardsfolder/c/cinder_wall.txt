@@ -8,6 +8,3 @@ SVar:DelTrig:Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Player | Execute$ Tri
 SVar:TrigDestroy:AB$Destroy | Cost$ 0 | Defined$ Self
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cinder_wall.jpg
 Oracle:Defender (This creature can't attack.)\nWhen Cinder Wall blocks, destroy it at end of combat.
-SetInfo:8ED Common
-SetInfo:WTH Common
-SetInfo:DDG Common

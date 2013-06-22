@@ -10,5 +10,3 @@ SVar:X:Count$Valid Card.Self+counters_GE1_LEVEL+counters_LE4_LEVEL
 SVar:Y:Count$Valid Card.Self+counters_GE5_LEVEL
 SVar:Picture:http://www.wizards.com/global/images/magic/general/caravan_escort.jpg
 Oracle:Level up {2} ({2}: Put a level counter on this. Level up only as a sorcery.)\nLEVEL 1-4\n2/2\nLEVEL 5+\n5/5\nFirst strike
-SetInfo:DDG Common
-SetInfo:ROE Common

@@ -5,4 +5,3 @@ A:SP$ Counter | Cost$ 2 U U | TargetType$ Spell | TgtPrompt$ Select target spell
 K:Recover:2 U U
 SVar:Picture:http://www.wizards.com/global/images/magic/general/controvert.jpg
 Oracle:Counter target spell.\nRecover {2}{U}{U} (When a creature is put into your graveyard from the battlefield, you may pay {2}{U}{U}. If you do, return this card from your graveyard to your hand. Otherwise, exile this card.)
-SetInfo:CSP Uncommon

@@ -5,4 +5,3 @@ A:SP$ ChangeZone | Cost$ 1 U | ValidTgts$ Creature | TgtPrompt$ Select target cr
 K:Splice onto Arcane 3 U
 SVar:Picture:http://www.wizards.com/global/images/magic/general/consuming_vortex.jpg
 Oracle:Return target creature to its owner's hand.\nSplice onto Arcane {3}{U} (As you cast an Arcane spell, you may reveal this card from your hand and pay its splice cost. If you do, add this card's effects to that spell.)
-SetInfo:CHK Common

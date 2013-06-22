@@ -8,4 +8,3 @@ A:AB$ PumpAll | Cost$ Sac<1/CARDNAME> | ValidCards$ Creature.sharesCreatureTypeW
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crown_of_ascension.jpg
 Oracle:Enchant creature\nEnchanted creature has flying.\nSacrifice Crown of Ascension: Enchanted creature and other creatures that share a creature type with it gain flying until end of turn.
-SetInfo:ONS Common

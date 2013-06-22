@@ -7,4 +7,3 @@ T:Mode$ Cycled | ValidCard$ Card.Self | Execute$ TrigTap | OptionalDecider$ You 
 SVar:TrigTap:AB$Tap | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature
 SVar:Picture:http://www.wizards.com/global/images/magic/general/choking_tethers.jpg
 Oracle:Tap up to four target creatures.\nCycling {1}{U} ({1}{U}, Discard this card: Draw a card.)\nWhen you cycle Choking Tethers, you may tap target creature.
-SetInfo:ONS Common

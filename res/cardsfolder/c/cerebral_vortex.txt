@@ -7,4 +7,3 @@ SVar:X:TargetedPlayer$CardsDrawn
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cerebral_vortex.jpg
 Oracle:Target player draws two cards, then Cerebral Vortex deals damage to that player equal to the number of cards he or she has drawn this turn.
-SetInfo:GPT Rare

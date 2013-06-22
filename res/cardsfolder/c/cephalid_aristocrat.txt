@@ -7,4 +7,3 @@ SVar:TrigMill:AB$Mill | Cost$ 0 | NumCards$ 2 | Defined$ You
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cephalid_aristocrat.jpg
 Oracle:Whenever Cephalid Aristocrat becomes the target of a spell or ability, put the top two cards of your library into your graveyard.
-SetInfo:TOR Common

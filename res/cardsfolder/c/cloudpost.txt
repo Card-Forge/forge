@@ -7,4 +7,3 @@ SVar:X:Count$Valid Locus
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cloudpost.jpg
 Oracle:Cloudpost enters the battlefield tapped.\n{T}: Add {1} to your mana pool for each Locus on the battlefield.
-SetInfo:MRD Common

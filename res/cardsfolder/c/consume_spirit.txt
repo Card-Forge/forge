@@ -7,10 +7,3 @@ SVar:X:Count$xPaid
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/consume_spirit.jpg
 Oracle:Spend only black mana on X.\nConsume Spirit deals X damage to target creature or player and you gain X life.
-SetInfo:M10 Uncommon
-SetInfo:9ED Uncommon
-SetInfo:10E Uncommon
-SetInfo:DDC Uncommon
-SetInfo:M12 Uncommon
-SetInfo:HOP Uncommon
-SetInfo:MRD Common

@@ -5,4 +5,3 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | E
 SVar:TrigDestroy:AB$Destroy | Cost$ 0 | ValidTgts$ Creature.counters_GE1_M1M1 | TgtPrompt$ Select target creature with a -1/-1 counter on it.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crumbling_ashes.jpg
 Oracle:At the beginning of your upkeep, destroy target creature with a -1/-1 counter on it.
-SetInfo:EVE Uncommon

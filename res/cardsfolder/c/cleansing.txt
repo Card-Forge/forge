@@ -6,4 +6,3 @@ SVar:DBSac:DB$ Destroy | UnlessCost$ PayLife<1> | UnlessPayer$ Player | UnlessAI
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cleansing.jpg
 Oracle:For each land, destroy that land unless any player pays 1 life.
-SetInfo:DRK Rare

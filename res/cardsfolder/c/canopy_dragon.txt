@@ -7,4 +7,3 @@ A:AB$Pump | Cost$ 1 G | Defined$ Self | KW$ Flying | SubAbility$ DBDebuff | Spel
 SVar:DBDebuff:DB$Debuff | Defined$ Self | Keywords$ Trample
 SVar:Picture:http://www.wizards.com/global/images/magic/general/canopy_dragon.jpg
 Oracle:Trample\n{1}{G}: Canopy Dragon gains flying and loses trample until end of turn.
-SetInfo:MIR Rare

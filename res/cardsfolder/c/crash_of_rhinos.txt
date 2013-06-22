@@ -5,4 +5,3 @@ PT:8/4
 K:Trample
 SVar:Picture:http://resources.wizards.com/magic/cards/mi/en-us/card3379.jpg
 Oracle:Trample
-SetInfo:MIR Common

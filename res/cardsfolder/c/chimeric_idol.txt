@@ -6,4 +6,3 @@ SVar:DBAnimate:DB$ Animate | Defined$ Self | Power$ 3 | Toughness$ 3 | Types$ Cr
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chimeric_idol.jpg
 Oracle:{0}: Tap all lands you control. Chimeric Idol becomes a 3/3 Turtle artifact creature until end of turn.
-SetInfo:PCY Uncommon

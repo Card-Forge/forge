@@ -6,4 +6,3 @@ SVar:DBChangeZone:DB$ ChangeZone | Defined$ Targeted | Origin$ Battlefield | Des
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/consign_to_dream.jpg
 Oracle:Return target permanent to its owner's hand. If that permanent is red or green, put it on top of its owner's library instead.
-SetInfo:SHM Common

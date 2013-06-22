@@ -4,7 +4,3 @@ Types:Creature Minotaur Warrior
 PT:3/3
 SVar:Picture:http://www.wizards.com/global/images/magic/general/canyon_minotaur.jpg
 Oracle:
-SetInfo:M11 Common
-SetInfo:M10 Common
-SetInfo:M13 Common
-SetInfo:CFX Common

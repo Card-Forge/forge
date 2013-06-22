@@ -7,6 +7,3 @@ A:AB$ Pump | Cost$ 1 R R T | ValidTgts$ Creature | TgtPrompt$ Select target crea
 SVar:TrigPump:AB$Pump | Cost$ 0 | Defined$ Self | NumAtt$ 1 | NumDef$ -2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cave_people.jpg
 Oracle:Whenever Cave People attacks, it gets +1/-2 until end of turn.\n{1}{R}{R}, {T}: Target creature gains mountainwalk until end of turn.
-SetInfo:5ED Uncommon
-SetInfo:4ED Uncommon
-SetInfo:DRK Uncommon

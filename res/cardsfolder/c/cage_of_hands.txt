@@ -7,5 +7,3 @@ S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ CARDNAME
 A:AB$ ChangeZone | Cost$ 1 W | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return CARDNAME to its owner's hand.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cage_of_hands.jpg
 Oracle:Enchant creature\nEnchanted creature can't attack or block.\n{1}{W}: Return Cage of Hands to its owner's hand.
-SetInfo:PC2 Common
-SetInfo:CHK Common

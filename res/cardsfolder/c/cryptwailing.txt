@@ -5,4 +5,3 @@ A:AB$ Discard | Cost$ 1 ExileFromGrave<2/Creature> | ValidTgts$ Player | NumCard
 SVar:NonStackingEffect:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cryptwailing.jpg
 Oracle:{1}, Exile two creature cards from your graveyard: Target player discards a card. Activate this ability only any time you could cast a sorcery.
-SetInfo:GPT Uncommon

@@ -6,4 +6,3 @@ S:Mode$ Continuous | EffectZone$ All | Affected$ Card.Self | CharacteristicDefin
 K:Vigilance
 SVar:Picture:http://www.wizards.com/global/images/magic/general/changeling_sentinel.jpg
 Oracle:Changeling (This card is every creature type at all times.)\nVigilance
-SetInfo:MOR Common

@@ -5,4 +5,3 @@ PT:1/1
 A:AB$ Pump | Cost$ Sac<1/CARDNAME> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ Target creature gets +1/+1 until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/child_of_thorns.jpg
 Oracle:Sacrifice Child of Thorns: Target creature gets +1/+1 until end of turn.
-SetInfo:BOK Common

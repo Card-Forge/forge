@@ -6,5 +6,3 @@ A:AB$ ChangeZone | Cost$ Sac<1/CARDNAME> | Origin$ Graveyard | Destination$ Exil
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crypt_creeper.jpg
 Oracle:Sacrifice Crypt Creeper: Exile target card from a graveyard.
-SetInfo:ODY Common
-SetInfo:AVR Common

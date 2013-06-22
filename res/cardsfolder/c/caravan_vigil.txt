@@ -6,4 +6,3 @@ SVar:DBChangeZone:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | 
 SVar:Morbid:Count$ThisTurnEntered_Graveyard_from_Battlefield_Creature
 SVar:Picture:http://www.wizards.com/global/images/magic/general/caravan_vigil.jpg
 Oracle:Search your library for a basic land card, reveal it, put it into your hand, then shuffle your library.\nMorbid - You may put that card onto the battlefield instead of putting it into your hand if a creature died this turn.
-SetInfo:ISD Common

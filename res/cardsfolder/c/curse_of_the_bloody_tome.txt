@@ -7,4 +7,3 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player.EnchantedBy | TriggerZones$ 
 SVar:TrigMill:AB$ Mill | Cost$ 0 | Defined$ Player.EnchantedBy | NumCards$ 2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/curse_of_the_bloody_tome.jpg
 Oracle:Enchant player\nAt the beginning of enchanted player's upkeep, that player puts the top two cards of his or her library into his or her graveyard.
-SetInfo:ISD Common

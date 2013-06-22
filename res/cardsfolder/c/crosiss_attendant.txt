@@ -6,4 +6,3 @@ A:AB$ Mana | Cost$ 1 Sac<1/CARDNAME> | Produced$ U B R | SpellDescription$ Add U
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crosiss_attendant.jpg
 Oracle:{1}, Sacrifice Crosis's Attendant: Add {U}{B}{R} to your mana pool.
-SetInfo:INV Uncommon

@@ -6,5 +6,3 @@ A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add W to your mana pool.
 A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add U to your mana pool.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/coastal_tower.jpg
 Oracle:Coastal Tower enters the battlefield tapped.\n{T}: Add {W} or {U} to your mana pool.
-SetInfo:8ED Uncommon
-SetInfo:INV Uncommon

@@ -6,6 +6,3 @@ SVar:TrigReturn:AB$ChangeZone | Cost$ 0 | Defined$ TriggeredTarget | Origin$ Bat
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cowardice.jpg
 Oracle:Whenever a creature becomes the target of a spell or ability, return that creature to its owner's hand. (It won't be affected by the spell or ability.)
-SetInfo:MMQ Rare
-SetInfo:8ED Rare
-SetInfo:9ED Rare

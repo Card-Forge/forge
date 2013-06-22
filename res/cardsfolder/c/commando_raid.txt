@@ -7,4 +7,3 @@ SVar:Damage:AB$ DealDamage | Cost$ 0 | ValidTgts$ Creature.DefenderCtrl | TgtPro
 SVar:CommandoRaidX:Count$CardPower
 SVar:Picture:http://www.wizards.com/global/images/magic/general/commando_raid.jpg
 Oracle:Until end of turn, target creature you control gains "When this creature deals combat damage to a player, you may have it deal damage equal to its power to target creature that player controls."
-SetInfo:ONS Uncommon

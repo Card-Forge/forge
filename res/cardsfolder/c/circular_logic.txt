@@ -7,4 +7,3 @@ SVar:X:Count$InYourYard
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/circular_logic.jpg
 Oracle:Counter target spell unless its controller pays {1} for each card in your graveyard.\nMadness {U} (If you discard this card, you may cast it for its madness cost instead of putting it into your graveyard.)
-SetInfo:TOR Uncommon

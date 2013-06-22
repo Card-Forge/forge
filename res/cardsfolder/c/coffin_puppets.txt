@@ -6,4 +6,3 @@ A:AB$ ChangeZone | Cost$ Sac<2/Land> | Origin$ Graveyard | Destination$ Battlefi
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/coffin_puppets.jpg
 Oracle:Sacrifice two lands: Return Coffin Puppets from your graveyard to the battlefield. Activate this ability only during your upkeep and only if you control a Swamp.
-SetInfo:PCY Rare

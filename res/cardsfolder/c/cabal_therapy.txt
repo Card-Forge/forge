@@ -7,5 +7,3 @@ SVar:DBDiscard:DB$ Discard | ValidTgts$ Player | TgtPrompt$ Select target player
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cabal_therapy.jpg
 Oracle:Name a nonland card. Target player reveals his or her hand and discards all cards with that name.\nFlashback-Sacrifice a creature. (You may cast this card from your graveyard for its flashback cost. Then exile it.)
-SetInfo:PD3 Uncommon
-SetInfo:JUD Uncommon

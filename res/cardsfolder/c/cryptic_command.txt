@@ -10,4 +10,3 @@ SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 1 | SpellDescription$ Draw a car
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cryptic_command.jpg
 Oracle:Choose two - Counter target spell; or return target permanent to its owner's hand; or tap all creatures your opponents control; or draw a card.
-SetInfo:LRW Rare

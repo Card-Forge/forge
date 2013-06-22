@@ -6,4 +6,3 @@ S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddAbility$ Mana | Description
 SVar:Mana:AB$Mana | Cost$ T | Produced$ G | Amount$ 1 | SpellDescription$ Add G to your mana pool.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/citanul_hierophants.jpg
 Oracle:Creatures you control have "{T}: Add {G} to your mana pool."
-SetInfo:USG Rare

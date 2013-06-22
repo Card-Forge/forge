@@ -4,4 +4,3 @@ Types:Sorcery
 A:SP$ AddTurn | Cost$ 3 U U | NumTurns$ 1 | SpellDescription$ Take an extra turn after this one.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/capture_of_jingzhou.jpg
 Oracle:Take an extra turn after this one.
-SetInfo:PTK Rare

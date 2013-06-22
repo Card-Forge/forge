@@ -9,4 +9,3 @@ SVar:Y:Count$CardCounters.CHARGE
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chalice_of_the_void.jpg
 Oracle:Chalice of the Void enters the battlefield with X charge counters on it.\nWhenever a player casts a spell with converted mana cost equal to the number of charge counters on Chalice of the Void, counter that spell.
-SetInfo:MRD Rare

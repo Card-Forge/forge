@@ -11,4 +11,3 @@ SVar:DBCleanup:DB$ Cleanup | ClearImprinted$ True
 SVar:SacMe:5
 SVar:Picture:http://www.wizards.com/global/images/magic/general/clone_shell.jpg
 Oracle:Imprint - When Clone Shell enters the battlefield, look at the top four cards of your library, exile one face down, then put the rest on the bottom of your library in any order.\nWhen Clone Shell dies, turn the exiled card face up. If it's a creature card, put it onto the battlefield under your control.
-SetInfo:SOM Uncommon

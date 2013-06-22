@@ -6,6 +6,3 @@ A:AB$ Mana | Cost$ T Sac<1/CARDNAME> | Produced$ 1 | Amount$ 2 | SpellDescriptio
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crystal_vein.jpg
 Oracle:{T}: Add {1} to your mana pool.\n{T}, Sacrifice Crystal Vein: Add {2} to your mana pool.
-SetInfo:PD3 Uncommon
-SetInfo:MIR Uncommon
-SetInfo:6ED Uncommon

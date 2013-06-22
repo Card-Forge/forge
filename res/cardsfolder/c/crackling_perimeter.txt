@@ -7,4 +7,3 @@ SVar:RemRandomDeck:True
 DeckNeeds:Type$Gate
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crackling_perimeter.jpg
 Oracle:Tap an untapped Gate you control: Crackling Perimeter deals 1 damage to each opponent.
-SetInfo:GTC Uncommon

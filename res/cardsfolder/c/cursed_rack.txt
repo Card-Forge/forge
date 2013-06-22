@@ -7,5 +7,3 @@ S:Mode$ Continuous | Affected$ Player.Chosen | SetMaxHandSize$ 4 | Description$ 
 SVar:NonStackingEffect:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cursed_rack.jpg
 Oracle:As Cursed Rack enters the battlefield, choose an opponent.\nThe chosen player's maximum hand size is four.
-SetInfo:ATQ Uncommon
-SetInfo:4ED Uncommon

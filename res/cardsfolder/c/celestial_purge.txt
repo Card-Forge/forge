@@ -4,7 +4,3 @@ Types:Instant
 A:SP$ ChangeZone | Cost$ 1 W | ValidTgts$ Permanent.Black,Permanent.Red | TgtPrompt$ Select target black or red permanent | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target black or red permanent.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/celestial_purge.jpg
 Oracle:Exile target black or red permanent.
-SetInfo:M11 Uncommon
-SetInfo:M10 Uncommon
-SetInfo:M12 Uncommon
-SetInfo:CFX Uncommon

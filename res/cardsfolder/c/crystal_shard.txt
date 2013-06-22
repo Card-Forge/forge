@@ -6,4 +6,3 @@ A:AB$ ChangeZone | Cost$ U T | ValidTgts$ Creature | TgtPrompt$ Select target cr
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crystal_shard.jpg
 Oracle:{3}, {T} or {U}, {T}: Return target creature to its owner's hand unless its controller pays {1}.
-SetInfo:MRD Uncommon

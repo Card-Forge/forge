@@ -21,4 +21,3 @@ A:AB$ GainControl | Cost$ SubCounter<1/KI> | ValidTgts$ Creature | TgtPrompt$ Se
 SVar:Picture:http://www.marc-fowler-design.com/cardforge/flippedcards/BOK/azamuki_treachery_incarnate.jpg
 # This link may be a temporary solution and could change in the near future.
 Oracle:Remove a ki counter from Azamuki, Treachery Incarnate: Gain control of target creature until end of turn.
-SetInfo:BOK Uncommon

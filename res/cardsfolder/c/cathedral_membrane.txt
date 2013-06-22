@@ -10,4 +10,3 @@ SVar:TrigRem:DB$ Cleanup | ClearRemembered$ True | SubAbility$ DBRem
 SVar:DBRem:DB$ Pump | RememberObjects$ Valid Creature.blockedBySource
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cathedral_membrane.jpg
 Oracle:({P/W} can be paid with either {W} or 2 life.)\nDefender\nWhen Cathedral Membrane dies during combat, it deals 6 damage to each creature it blocked this combat.
-SetInfo:NPH Uncommon

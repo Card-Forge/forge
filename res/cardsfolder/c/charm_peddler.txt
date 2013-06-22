@@ -9,4 +9,3 @@ SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/charm_peddler.jpg
 Oracle:{W}, {T}, Discard a card: The next time a source of your choice would deal damage to target creature this turn, prevent that damage.
-SetInfo:MMQ Common

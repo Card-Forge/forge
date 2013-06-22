@@ -6,5 +6,3 @@ K:Vigilance
 K:Haste
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cerodon_yearling.jpg
 Oracle:Vigilance, haste
-SetInfo:ARB Common
-SetInfo:HOP Common

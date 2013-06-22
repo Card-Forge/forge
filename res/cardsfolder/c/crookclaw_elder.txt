@@ -7,4 +7,3 @@ A:AB$ Draw | Cost$ tapXType<2/Bird> | NumCards$ 1 | SpellDescription$ Draw a car
 A:AB$ Pump | Cost$ tapXType<2/Wizard> | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Flying | SpellDescription$ Target creature gains flying until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crookclaw_elder.jpg
 Oracle:Flying\nTap two untapped Birds you control: Draw a card.\nTap two untapped Wizards you control: Target creature gains flying until end of turn.
-SetInfo:LGN Uncommon

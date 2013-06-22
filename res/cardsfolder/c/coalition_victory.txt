@@ -8,5 +8,3 @@ SVar:X:SVar$Y/Plus.Z
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/coalition_victory.jpg
 Oracle:You win the game if you control a land of each basic land type and a creature of each color.
-SetInfo:TSB Special
-SetInfo:INV Rare

@@ -7,4 +7,3 @@ A:AB$ Pump | Cost$ Sac<1/Creature.Other/another creature> | KW$ Deathtouch | Spe
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/corpse_blockade.jpg
 Oracle:Defender\nSacrifice another creature: Corpse Blockade gains deathtouch until end of turn.
-SetInfo:GTC Common

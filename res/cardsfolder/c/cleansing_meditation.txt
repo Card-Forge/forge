@@ -8,4 +8,3 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$ValidGraveyard Card.YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cleansing_meditation.jpg
 Oracle:Destroy all enchantments.\nThreshold - If seven or more cards are in your graveyard, instead destroy all enchantments, then return all cards in your graveyard destroyed this way to the battlefield.
-SetInfo:TOR Uncommon

@@ -5,4 +5,3 @@ A:SP$ Fog | Cost$ 1 G | SpellDescription$ Prevent all combat damage that would b
 K:Buyback Sac<1/Land>
 SVar:Picture:http://www.wizards.com/global/images/magic/general/constant_mists.jpg
 Oracle:Buyback-Sacrifice a land. (You may sacrifice a land in addition to any other costs as you cast this spell. If you do, put this card into your hand as it resolves.)\nPrevent all combat damage that would be dealt this turn.
-SetInfo:STH Uncommon

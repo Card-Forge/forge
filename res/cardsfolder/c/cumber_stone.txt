@@ -5,4 +5,3 @@ S:Mode$ Continuous | Affected$ Creature.OppCtrl | AddPower$ -1 | Description$ Cr
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cumber_stone.jpg
 Oracle:Creatures your opponents control get -1/-0.
-SetInfo:CFX Uncommon

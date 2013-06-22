@@ -6,4 +6,3 @@ A:AB$ Mana | Cost$ 3 Sac<1/CARDNAME> | Produced$ R | Amount$ 3 | SpellDescriptio
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/coal_golem.jpg
 Oracle:{3}, Sacrifice Coal Golem: Add {R}{R}{R} to your mana pool.
-SetInfo:DRK Uncommon

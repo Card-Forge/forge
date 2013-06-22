@@ -5,11 +5,3 @@ S:Mode$ Continuous | Affected$ Creature.White | AddPower$ 1 | AddToughness$ 1 | 
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crusade.jpg
 Oracle:White creatures get +1/+1.
-SetInfo:2ED Rare
-SetInfo:6ED Rare
-SetInfo:LEB Rare
-SetInfo:LEA Rare
-SetInfo:5ED Rare
-SetInfo:4ED Rare
-SetInfo:DDF Rare
-SetInfo:3ED Rare

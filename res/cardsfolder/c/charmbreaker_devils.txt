@@ -9,4 +9,3 @@ SVar:TrigPump:AB$Pump | Cost$ 0 | NumAtt$ +4 | NumDef$ +0 | Defined$ Self
 SVar:BuffedBy:Instant,Sorcery
 SVar:Picture:http://www.wizards.com/global/images/magic/general/charmbreaker_devils.jpg
 Oracle:At the beginning of your upkeep, return an instant or sorcery card at random from your graveyard to your hand.\nWhenever you cast an instant or sorcery spell, Charmbreaker Devils gets +4/+0 until end of turn.
-SetInfo:ISD Rare

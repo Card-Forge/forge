@@ -7,4 +7,3 @@ T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | OptionalDe
 SVar:TrigChange:AB$ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Card.YouCtrl | Cost$ 0
 SVar:Picture:http://www.wizards.com/global/images/magic/general/charnelhoard_wurm.jpg
 Oracle:Trample\nWhenever Charnelhoard Wurm deals damage to an opponent, you may return target card from your graveyard to your hand.
-SetInfo:CFX Rare

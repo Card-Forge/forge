@@ -7,4 +7,3 @@ A:AB$ Pump | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature |
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/courtly_provocateur.jpg
 Oracle:{T}: Target creature attacks this turn if able.\n{T}: Target creature blocks this turn if able.
-SetInfo:M13 Uncommon

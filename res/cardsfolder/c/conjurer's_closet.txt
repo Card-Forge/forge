@@ -8,4 +8,3 @@ SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/conjurers_closet.jpg
 Oracle:At the beginning of your end step, you may exile target creature you control, then return that card to the battlefield under your control.
-SetInfo:AVR Rare

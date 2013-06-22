@@ -7,4 +7,3 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigDestroyAll:AB$DestroyAll | Cost$ 0 | ValidCards$ Permanent.nonLand | NoRegen$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/child_of_alara.jpg
 Oracle:Trample\nWhen Child of Alara dies, destroy all nonland permanents. They can't be regenerated.
-SetInfo:CFX Mythic

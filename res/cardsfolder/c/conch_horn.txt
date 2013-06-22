@@ -6,4 +6,3 @@ SVar:DBTop:DB$ChangeZone | Origin$ Hand | Destination$ Library | ChangeType$ Car
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/conch_horn.jpg
 Oracle:{1}, {T}, Sacrifice Conch Horn: Draw two cards, then put a card from your hand on top of your library.
-SetInfo:FEM Rare

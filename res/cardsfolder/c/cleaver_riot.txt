@@ -4,4 +4,3 @@ Types:Sorcery
 A:SP$ PumpAll | Cost$ 4 R | ValidCards$ Creature.YouCtrl | KW$ Double Strike | SpellDescription$ Creatures you control gain double strike until end of turn. (They deal both first-strike and regular combat damage.)
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cleaver_riot.jpg
 Oracle:Creatures you control gain double strike until end of turn. (They deal both first-strike and regular combat damage.)
-SetInfo:M13 Uncommon

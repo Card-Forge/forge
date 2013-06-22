@@ -4,12 +4,3 @@ Types:Instant
 A:SP$ Counter | Cost$ 1 U U | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | SpellDescription$ Counter target spell.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cancel.jpg
 Oracle:Counter target spell.
-SetInfo:PC2 Common
-SetInfo:ZEN Common
-SetInfo:ALA Common
-SetInfo:M11 Common
-SetInfo:M10 Common
-SetInfo:M12 Common
-SetInfo:RTR Common
-SetInfo:10E Common
-SetInfo:TSP Common

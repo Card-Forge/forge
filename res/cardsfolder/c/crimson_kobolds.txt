@@ -5,4 +5,3 @@ PT:0/1
 Colors:red
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crimson_kobolds.jpg
 Oracle:Crimson Kobolds is red.
-SetInfo:LEG Common

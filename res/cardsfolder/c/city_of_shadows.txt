@@ -7,4 +7,3 @@ SVar:X:Count$CardCounters.STORAGE
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/city_of_shadows.jpg
 Oracle:{T}, Exile a creature you control: Put a storage counter on City of Shadows.\n{T}: Add {X} to your mana pool, where X is the number of storage counters on City of Shadows.
-SetInfo:DRK Rare

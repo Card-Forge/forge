@@ -24,5 +24,3 @@ SVar:TrigTap:AB$ Tap | Cost$ 0 | Defined$ Self | SubAbility$ DBTransform2
 SVar:DBTransform2:DB$ SetState | Cost$ 0 | Defined$ Self | Mode$ Transform
 SVar:Picture:http://www.wizards.com/global/images/magic/general/homicidal_brute.jpg
 Oracle:At the beginning of your end step, if Homicidal Brute didn't attack this turn, tap Homicidal Brute, then transform it.
-
-SetInfo:ISD Uncommon

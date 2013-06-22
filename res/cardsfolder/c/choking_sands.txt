@@ -5,4 +5,3 @@ A:SP$ Destroy | Cost$ 1 B B | ValidTgts$ Land.nonSwamp | TgtPrompt$ Select targe
 SVar:DBDamage:DB$ DealDamage | Defined$ TargetedController | NumDmg$ 2 | ConditionDefined$ Targeted | ConditionPresent$ Land.Basic | ConditionCompare$ EQ0 | ConditionDescription$ If that land is nonbasic,
 SVar:Picture:http://www.wizards.com/global/images/magic/general/choking_sands.jpg
 Oracle:Destroy target non-Swamp land. If that land was nonbasic, Choking Sands deals 2 damage to the land's controller.
-SetInfo:MIR Common

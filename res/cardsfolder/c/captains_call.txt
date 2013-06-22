@@ -4,4 +4,3 @@ Types:Sorcery
 A:SP$ Token | Cost$ 3 W | TokenAmount$ 3 | TokenName$ Soldier | TokenTypes$ Creature,Soldier | TokenOwner$ You | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | SpellDescription$ Put three 1/1 white Soldier creature tokens onto the battlefield.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/captains_call.jpg
 Oracle:Put three 1/1 white Soldier creature tokens onto the battlefield.
-SetInfo:M13 Common

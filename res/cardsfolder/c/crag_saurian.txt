@@ -7,4 +7,3 @@ SVar:Traitor:AB$ GainControl | Cost$ 0 | Defined$ Self | NewController$ Triggere
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crag_saurian.jpg
 Oracle:Whenever a source deals damage to Crag Saurian, that source's controller gains control of Crag Saurian.
-SetInfo:MMQ Rare

@@ -6,4 +6,3 @@ K:Flying
 K:Protection from green
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cerulean_wyvern.jpg
 Oracle:Flying, protection from green
-SetInfo:MIR Uncommon

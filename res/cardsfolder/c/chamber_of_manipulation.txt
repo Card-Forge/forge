@@ -8,4 +8,3 @@ SVar:ChamberofManipulationTap:AB$ GainControl | Cost$ T Discard<1/Card> | ValidT
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chamber_of_manipulation.jpg
 Oracle:Enchant land\nEnchanted land has "{T}, Discard a card: Gain control of target creature until end of turn."
-SetInfo:ODY Uncommon

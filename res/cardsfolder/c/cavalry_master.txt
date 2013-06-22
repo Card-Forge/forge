@@ -7,4 +7,3 @@ S:Mode$ Continuous | Affected$ Creature.Other+withFlanking+YouCtrl | AddKeyword$
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cavalry_master.jpg
 Oracle:Flanking (Whenever a creature without flanking blocks this creature, the blocking creature gets -1/-1 until end of turn.)\nOther creatures you control with flanking have flanking. (Each instance of flanking triggers separately.)
-SetInfo:TSP Uncommon

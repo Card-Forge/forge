@@ -5,4 +5,3 @@ A:SP$ DealDamage | Cost$ 2 R | ValidTgts$ Creature,Player | TgtPrompt$ Select ta
 SVar:DB:DB$Pump | KW$ HIDDEN CARDNAME can't be regenerated. & HIDDEN If CARDNAME would be put into a graveyard, exile it instead. | Defined$ Targeted
 SVar:Picture:http://www.wizards.com/global/images/magic/general/carbonize.jpg
 Oracle:Carbonize deals 3 damage to target creature or player. That creature can't be regenerated this turn. If the creature would die this turn, exile it instead.
-SetInfo:SCG Uncommon

@@ -5,4 +5,3 @@ A:SP$ ChangeZone | Cost$ 3 U | Origin$ Battlefield | Destination$ Hand | ValidTg
 SVar:spBounce:DB$ChangeZone | Origin$ Battlefield | Destination$ Hand | ValidTgts$ Land | TgtPrompt$ Select target land
 SVar:Picture:http://www.wizards.com/global/images/magic/general/churning_eddy.jpg
 Oracle:Return target creature and target land to their owners' hands.
-SetInfo:TOR Common

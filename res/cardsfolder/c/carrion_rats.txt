@@ -8,4 +8,3 @@ SVar:TrigNoCombatDamage:AB$ Pump | Cost$ 0 | Defined$ Self | KW$ HIDDEN CARDNAME
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/carrion_rats.jpg
 Oracle:Whenever Carrion Rats attacks or blocks, any player may exile a card from his or her graveyard. If a player does, Carrion Rats assigns no combat damage this turn.
-SetInfo:TOR Common

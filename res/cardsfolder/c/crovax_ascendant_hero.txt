@@ -8,4 +8,3 @@ A:AB$ ChangeZone | Cost$ PayLife<2> | Origin$ Battlefield | Destination$ Hand | 
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crovax_ascendant_hero.jpg
 Oracle:Other white creatures get +1/+1.\nNonwhite creatures get -1/-1.\nPay 2 life: Return Crovax, Ascendant Hero to its owner's hand.
-SetInfo:PLC Rare

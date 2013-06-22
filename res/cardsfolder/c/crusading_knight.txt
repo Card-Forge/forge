@@ -8,4 +8,3 @@ SVar:X:Count$Valid Swamp.OppCtrl
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crusading_knight.jpg
 Oracle:Protection from black\nCrusading Knight gets +1/+1 for each Swamp your opponents control.
-SetInfo:INV Rare

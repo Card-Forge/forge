@@ -5,4 +5,3 @@ A:SP$ Destroy | Cost$ 2 G | ValidTgts$ Creature.withFlying | TgtPrompt$ Select t
 A:SP$ Destroy | Cost$ 2 G | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | SpellDescription$  or destroy target artifact.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crushing_vines.jpg
 Oracle:Choose one - Destroy target creature with flying; or destroy target artifact.
-SetInfo:DKA Common

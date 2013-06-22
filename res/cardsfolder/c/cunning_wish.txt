@@ -6,4 +6,3 @@ SVar:DBChange:DB$ ChangeZone | Origin$ Stack | Destination$ Exile
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cunning_wish.jpg
 Oracle:You may choose an instant card you own from outside the game, reveal that card, and put it into your hand. Exile Cunning Wish.
-SetInfo:JUD Rare

@@ -7,4 +7,3 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigDraw:DB$ Draw | Cost$ 0 | Defined$ You | NumCards$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/carven_caryatid.jpg
 Oracle:Defender (This creature can't attack.)\nWhen Carven Caryatid enters the battlefield, draw a card.
-SetInfo:RAV Uncommon

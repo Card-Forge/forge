@@ -21,5 +21,3 @@ A:AB$ Counter | Cost$ SubCounter<1/KI> | TargetType$ Spell | ValidTgts$ Card | T
 SVar:Picture:http://www.marc-fowler-design.com/cardforge/flippedcards/BOK/jaraku_the_interloper.jpg
 # This link may be a temporary solution and could change in the near future.
 Oracle:Remove a ki counter from Jaraku the Interloper: Counter target spell unless its controller pays {2}.
-
-SetInfo:BOK Uncommon

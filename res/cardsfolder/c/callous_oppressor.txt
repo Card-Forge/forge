@@ -10,4 +10,3 @@ A:AB$ GainControl | Cost$ T | ValidTgts$ Creature.IsNotChosenType | TgtPrompt$ S
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/callous_oppressor.jpg
 Oracle:You may choose not to untap Callous Oppressor during your untap step.\nAs Callous Oppressor enters the battlefield, an opponent chooses a creature type.\n{T}: Gain control of target creature that isn't of the chosen type for as long as Callous Oppressor remains tapped.
-SetInfo:ONS Rare

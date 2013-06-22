@@ -6,4 +6,3 @@ K:Flying
 K:First Strike
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cloud_crusader.jpg
 Oracle:Flying\nFirst strike (This creature deals combat damage before creatures without first strike.)
-SetInfo:M11 Common

@@ -11,4 +11,3 @@ SVar:DBCoralCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/coral_net.jpg
 Oracle:Enchant green or white creature\nEnchanted creature has "At the beginning of your upkeep, sacrifice this creature unless you discard a card."
-SetInfo:TOR Common

@@ -7,4 +7,3 @@ SVar:TrigAnimate:AB$ Animate | Cost$ 0 | ValidTgts$ Land | TgtPrompt$ Select tar
 SVar:DBExile:DB$ChangeZone | Defined$ Self | Origin$ Graveyard | Destination$ Exile
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cyclopean_giant.jpg
 Oracle:When Cyclopean Giant dies, target land becomes a Swamp. Exile Cyclopean Giant.
-SetInfo:TSP Common

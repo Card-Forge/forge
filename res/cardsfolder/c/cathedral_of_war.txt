@@ -6,4 +6,3 @@ K:Exalted
 A:AB$ Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add 1 to your mana pool.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cathedral_of_war.jpg
 Oracle:Cathedral of War enters the battlefield tapped.\nExalted (Whenever a creature you control attacks alone, that creature gets +1/+1 until end of turn.)\n{T}: Add {1} to your mana pool.
-SetInfo:M13 Rare

@@ -7,4 +7,3 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player.EnchantedBy | TriggerZones$ 
 SVar:TrigExile:AB$ ChangeZone | Cost$ 0 | DefinedPlayer$ Player.EnchantedBy | Origin$ Graveyard | Destination$ Exile | ChangeType$ Card | ChangeNum$ 2 | Hidden$ True | Mandatory$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/curse_of_oblivion.jpg
 Oracle:Enchant player\nAt the beginning of enchanted player's upkeep, that player exiles two cards from his or her graveyard.
-SetInfo:ISD Common

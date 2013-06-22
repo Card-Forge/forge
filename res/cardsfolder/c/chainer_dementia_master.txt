@@ -10,4 +10,3 @@ SVar:TrigExile:AB$ ChangeZoneAll | Cost$ 0 | Origin$ Battlefield | Destination$ 
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chainer_dementia_master.jpg
 Oracle:Nightmare creatures get +1/+1.\n{B}{B}{B}, Pay 3 life: Put target creature card from a graveyard onto the battlefield under your control. That creature is black and is a Nightmare in addition to its other creature types.\nWhen Chainer, Dementia Master leaves the battlefield, exile all Nightmares.
-SetInfo:TOR Rare

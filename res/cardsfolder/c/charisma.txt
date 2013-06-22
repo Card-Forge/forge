@@ -7,4 +7,3 @@ T:Mode$ DamageDone | ValidSource$ Card.AttachedBy | ValidTarget$ Creature | Trig
 SVar:CharismaticControl:AB$GainControl | Cost$ 0 | Defined$ TriggeredTarget | LoseControl$ LeavesPlay
 SVar:Picture:http://www.wizards.com/global/images/magic/general/charisma.jpg
 Oracle:Enchant creature\nWhenever enchanted creature deals damage to a creature, gain control of the other creature for as long as Charisma remains on the battlefield.
-SetInfo:MMQ Rare

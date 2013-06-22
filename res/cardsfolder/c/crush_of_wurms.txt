@@ -5,4 +5,3 @@ K:Flashback 9 G G G
 A:SP$ Token | Cost$ 6 G G G | TokenAmount$ 3 | TokenName$ Wurm | TokenColors$ Green | TokenTypes$ Creature,Wurm | TokenOwner$ You | TokenPower$ 6 | TokenToughness$ 6 | SpellDescription$ Put three 6/6 green Wurm creature tokens onto the battlefield.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crush_of_wurms.jpg
 Oracle:Put three 6/6 green Wurm creature tokens onto the battlefield.\nFlashback {9}{G}{G}{G} (You may cast this card from your graveyard for its flashback cost. Then exile it.)
-SetInfo:JUD Rare

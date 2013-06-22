@@ -6,4 +6,3 @@ A:AB$ GainLife | Cost$ Sac<1/CARDNAME> | LifeAmount$ X | References$ X | SpellDe
 SVar:X:Count$LifeYouLostThisTurn
 SVar:Picture:http://www.wizards.com/global/images/magic/general/children_of_korlis.jpg
 Oracle:Sacrifice Children of Korlis: You gain life equal to the life you've lost this turn. (Damage causes loss of life.)
-SetInfo:TSP Common

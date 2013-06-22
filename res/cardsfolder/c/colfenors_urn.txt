@@ -9,4 +9,3 @@ SVar:DBSacSelf:DB$Sacrifice | Cost$ 0 | Defined$ Self
 SVar:X:Remembered$Amount
 SVar:Picture:http://www.wizards.com/global/images/magic/general/colfenors_urn.jpg
 Oracle:Whenever a creature with toughness 4 or greater is put into your graveyard from the battlefield, you may exile it.\nAt the beginning of the end step, if three or more cards have been exiled with Colfenor's Urn, sacrifice it. If you do, return those cards to the battlefield under their owner's control.
-SetInfo:LRW Rare

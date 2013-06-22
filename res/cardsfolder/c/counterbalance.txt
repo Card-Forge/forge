@@ -7,4 +7,3 @@ SVar:DBCounter:DB$Counter | Cost$ 0 | Defined$ TriggeredSpellAbility | Condition
 SVar:X:Count$TopOfLibraryCMC
 SVar:Picture:http://www.wizards.com/global/images/magic/general/counterbalance.jpg
 Oracle:Whenever an opponent casts a spell, you may reveal the top card of your library. If you do, counter that spell if it has the same converted mana cost as the revealed card.
-SetInfo:CSP Uncommon

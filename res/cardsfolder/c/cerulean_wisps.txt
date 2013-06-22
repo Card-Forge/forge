@@ -7,4 +7,3 @@ SVar:DBUntap:DB$Untap | Defined$ Targeted
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cerulean_wisps.jpg
 Oracle:Target creature becomes blue until end of turn. Untap that creature.\nDraw a card.
-SetInfo:SHM Common

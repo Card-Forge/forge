@@ -14,4 +14,3 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigChangeZone:DB$ Play | TgtZone$ Graveyard | WithoutManaCost$ True | ValidTgts$ Instant.OppOwn,Sorcery.OppOwn | TgtPrompt$ Choose target instant or sorcery card from an opponent's graveyard | Optional$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chancellor_of_the_spires.jpg
 Oracle:You may reveal this card from your opening hand. If you do, at the beginning of the first upkeep, each opponent puts the top seven cards of his or her library into his or her graveyard.\nFlying\nWhen Chancellor of the Spires enters the battlefield, you may cast target instant or sorcery card from an opponent's graveyard without paying its mana cost.
-SetInfo:NPH Rare

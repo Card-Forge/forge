@@ -9,7 +9,3 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:NonStackingEffect:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/circle_of_protection_artifacts.jpg
 Oracle:{2}: The next time an artifact source of your choice would deal damage to you this turn, prevent that damage.
-SetInfo:ATQ Uncommon
-SetInfo:5ED Uncommon
-SetInfo:4ED Uncommon
-SetInfo:5DN Uncommon

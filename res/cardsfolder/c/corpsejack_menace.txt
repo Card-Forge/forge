@@ -5,4 +5,3 @@ Text:If one or more +1/+1 counters would be placed on a creature you control, tw
 PT:4/4
 SVar:Picture:http://www.wizards.com/global/images/magic/general/corpsejack_menace.jpg
 Oracle:If one or more +1/+1 counters would be placed on a creature you control, twice that many +1/+1 counters are placed on it instead.
-SetInfo:RTR Rare

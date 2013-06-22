@@ -6,4 +6,3 @@ K:Trample
 A:AB$ Regenerate | Cost$ G Discard<1/Card> | SpellDescription$ Regenerate CARDNAME.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/centaur_veteran.jpg
 Oracle:Trample\n{G}, Discard a card: Regenerate Centaur Veteran.
-SetInfo:TOR Common

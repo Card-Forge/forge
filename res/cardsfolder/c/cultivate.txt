@@ -5,6 +5,3 @@ A:SP$ ChangeZone | Cost$ 2 G | Origin$ Library | Destination$ Battlefield | Tapp
 SVar:DBChangeZone:DB$ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Land.Basic | ChangeNum$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cultivate.jpg
 Oracle:Search your library for up to two basic land cards, reveal those cards, and put one onto the battlefield tapped and the other into your hand. Then shuffle your library.
-SetInfo:M11 Common
-SetInfo:PC2 Common
-SetInfo:COM Common

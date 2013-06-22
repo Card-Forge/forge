@@ -6,4 +6,3 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigDiscard:AB$ Discard | Cost$ 0 | Defined$ Player.Opponent | NumCards$ 1 | Mode$ TgtChoose
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cackling_fiend.jpg
 Oracle:When Cackling Fiend enters the battlefield, each opponent discards a card.
-SetInfo:USG Common

@@ -6,4 +6,3 @@ SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ CHARG
 A:AB$ Animate | Cost$ SubCounter<3/CHARGE> | Defined$ Self | Power$ 6 | Toughness$ 6 | Types$ Creature,Artifact,Construct | Keywords$ Trample | SpellDescription$ CARDNAME becomes a 6/6 Construct artifact creature with trample until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chimeric_egg.jpg
 Oracle:Whenever an opponent casts a nonartifact spell, put a charge counter on Chimeric Egg.\nRemove three charge counters from Chimeric Egg: Chimeric Egg becomes a 6/6 Construct artifact creature with trample until end of turn.
-SetInfo:DST Uncommon

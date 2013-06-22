@@ -6,4 +6,3 @@ S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 2 | AddToughness$
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/copper_carapace.jpg
 Oracle:Equipped creature gets +2/+2 and can't block.\nEquip {3} ({3}: Attach to target creature you control. Equip only as a sorcery.)
-SetInfo:MBS Common

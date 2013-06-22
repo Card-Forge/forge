@@ -7,4 +7,3 @@ A:AB$ Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add 1 to your mana pool.
 A:AB$ Mana | Cost$ T | Produced$ Any | RestrictValid$ Creature.ChosenType | AddsNoCounter$ True | SpellDescription$ Add one mana of any color to your mana pool. Spend this mana only to cast a creature spell of the chosen type, and that spell can't be countered.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cavern_of_souls.jpg
 Oracle:As Cavern of Souls enters the battlefield, choose a creature type.\n{T}: Add {1} to your mana pool.\n{T}: Add one mana of any color to your mana pool. Spend this mana only to cast a creature spell of the chosen type, and that spell can't be countered.
-SetInfo:AVR Rare

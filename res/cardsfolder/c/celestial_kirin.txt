@@ -10,4 +10,3 @@ SVar:RemRandomDeck:True
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/celestial_kirin.jpg
 Oracle:Flying\nWhenever you cast a Spirit or Arcane spell, destroy all permanents with that spell's converted mana cost.
-SetInfo:SOK Rare

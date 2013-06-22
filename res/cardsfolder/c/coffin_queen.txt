@@ -14,4 +14,3 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Creatu
 SVar:X:Remembered$Amount
 SVar:Picture:http://www.wizards.com/global/images/magic/general/coffin_queen.jpg
 Oracle:You may choose not to untap Coffin Queen during your untap step.\n{2}{B}, {T}: Put target creature card from a graveyard onto the battlefield under your control. When Coffin Queen becomes untapped or you lose control of Coffin Queen, exile that creature.
-SetInfo:TMP Rare

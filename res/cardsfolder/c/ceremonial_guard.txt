@@ -8,4 +8,3 @@ SVar:DelTrig:Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Player | Execute$ Tri
 SVar:TrigSacrifice:AB$Destroy | Cost$ 0 | Defined$ Self
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ceremonial_guard.jpg
 Oracle:When Ceremonial Guard attacks or blocks, destroy it at end of combat.
-SetInfo:MMQ Common

@@ -4,11 +4,3 @@ Types:Enchantment
 S:Mode$ Continuous | Affected$ Creature.untapped+YouCtrl | AddToughness$ 2 | Description$ Untapped creatures you control get +0/+2.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/castle.jpg
 Oracle:Untapped creatures you control get +0/+2.
-SetInfo:2ED Uncommon
-SetInfo:7ED Uncommon
-SetInfo:6ED Uncommon
-SetInfo:LEB Uncommon
-SetInfo:LEA Uncommon
-SetInfo:5ED Uncommon
-SetInfo:4ED Uncommon
-SetInfo:3ED Uncommon

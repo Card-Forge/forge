@@ -7,4 +7,3 @@ T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | Execute$ T
 SVar:TrigDiscard:AB$Discard | Cost$ 0 | Defined$ TriggeredTarget | NumCards$ 1 | Mode$ TgtChoose
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chilling_apparition.jpg
 Oracle:{B}: Regenerate Chilling Apparition.\nWhenever Chilling Apparition deals combat damage to a player, that player discards a card.
-SetInfo:PCY Uncommon

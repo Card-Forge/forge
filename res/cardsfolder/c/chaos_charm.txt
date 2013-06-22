@@ -6,4 +6,3 @@ A:SP$ DealDamage | Cost$ R | ValidTgts$ Creature | TgtPrompt$ Select target crea
 A:SP$ Pump | Cost$ R | ValidTgts$ Creature | KW$ Haste | TgtPrompt$ Select target creature | SpellDescription$ or target creature gains haste until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chaos_charm.jpg
 Oracle:Choose one - Destroy target Wall; or Chaos Charm deals 1 damage to target creature; or target creature gains haste until end of turn.
-SetInfo:MIR Common

@@ -7,5 +7,3 @@ SVar:NonStackingEffect:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/choke.jpg
 Oracle:Islands don't untap during their controllers' untap steps.
-SetInfo:8ED Uncommon
-SetInfo:TMP Uncommon

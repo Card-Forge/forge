@@ -14,4 +14,3 @@ Types:Sorcery
 A:SP$ DestroyAll | Cost$ X B G | ValidCards$ Artifact.cmcEQX,Creature.cmcEQX,Enchantment.cmcEQX | References$ X | SpellDescription$ Destroy each artifact, creature, and enchantment with converted mana cost X.
 SVar:X:Count$xPaid
 Oracle:Destroy each artifact, creature, and enchantment with converted mana cost X.
-SetInfo:DIS Rare

@@ -5,6 +5,3 @@ PT:3/1
 A:AB$ Regenerate | Cost$ 2 | SpellDescription$ Regenerate CARDNAME.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/clay_statue.jpg
 Oracle:{2}: Regenerate Clay Statue.
-SetInfo:ATQ Common
-SetInfo:5ED Common
-SetInfo:4ED Common

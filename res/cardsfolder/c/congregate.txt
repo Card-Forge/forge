@@ -5,6 +5,3 @@ A:SP$ GainLife | Cost$ 3 W | LifeAmount$ X | ValidTgts$ Player | TgtPrompt$ Choo
 SVar:X:Count$TypeOnBattlefield.Creature/Times.2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/congregate.jpg
 Oracle:Target player gains 2 life for each creature on the battlefield.
-SetInfo:COM Common
-SetInfo:HOP Common
-SetInfo:USG Common

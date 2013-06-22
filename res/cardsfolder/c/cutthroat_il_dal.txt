@@ -6,4 +6,3 @@ S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Shadow | Condition$ Hellb
 SVar:BuffedBy:Card
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cutthroat_il_dal.jpg
 Oracle:Hellbent - Cutthroat il-Dal has shadow as long as you have no cards in hand. (It can block or be blocked by only creatures with shadow.)
-SetInfo:FUT Common

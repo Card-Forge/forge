@@ -6,4 +6,3 @@ SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 3 | Defined$ Targeted | SubAbility$ D
 SVar:DBPoison:DB$ Poison | Num$ 3 | Defined$ Targeted
 SVar:Picture:http://www.wizards.com/global/images/magic/general/caress_of_phyrexia.jpg
 Oracle:Target player draws three cards, loses 3 life, and gets three poison counters.
-SetInfo:NPH Uncommon

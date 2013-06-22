@@ -7,5 +7,3 @@ SVar:TrigBounce:AB$ ChangeZone | Cost$ 0 | ValidTgts$ Permanent.DefenderCtrl | T
 SVar:X:TriggeredSource$CardPower
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cephalid_constable.jpg
 Oracle:Whenever Cephalid Constable deals combat damage to a player, return up to that many target permanents that player controls to their owners' hands.
-SetInfo:JUD Rare
-SetInfo:10E Rare

@@ -8,5 +8,3 @@ SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/conspiracy.jpg
 Oracle:As Conspiracy enters the battlefield, choose a creature type.\nCreature cards you own that aren't on the battlefield, creature spells you control, and creatures you control are the chosen type.
-SetInfo:MMQ Rare
-SetInfo:TSB Special

@@ -7,4 +7,3 @@ SVar:X:Count$xPaid
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cackling_witch.jpg
 Oracle:{X}{B}, {T}, Discard a card: Target creature gets +X/+0 until end of turn.
-SetInfo:MMQ Uncommon

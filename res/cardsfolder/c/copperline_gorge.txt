@@ -7,4 +7,3 @@ A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add G to your mana pool.
 K:CARDNAME enters the battlefield tapped unless you control two or fewer other lands.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/copperline_gorge.jpg
 Oracle:Copperline Gorge enters the battlefield tapped unless you control two or fewer other lands.\n{T}: Add {R} or {G} to your mana pool.
-SetInfo:SOM Rare

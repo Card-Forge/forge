@@ -6,4 +6,3 @@ A:SP$ Mill | Cost$ 2 U | NumCards$ 5 | Defined$ Each | SpellDescription$ Each pl
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chill_of_foreboding.jpg
 Oracle:Each player puts the top five cards of his or her library into his or her graveyard.\nFlashback {7}{U} (You may cast this card from your graveyard for its flashback cost. Then exile it.)
-SetInfo:DKA Uncommon

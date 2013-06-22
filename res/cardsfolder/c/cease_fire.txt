@@ -6,4 +6,3 @@ SVar:STCantBeCast:Mode$ CantBeCast | EffectZone$ Command | ValidCard$ Creature |
 SVar:DBDraw:DB$Draw | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cease_fire.jpg
 Oracle:Target player can't cast creature spells this turn.\nDraw a card.
-SetInfo:ODY Common

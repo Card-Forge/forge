@@ -9,4 +9,3 @@ SVar:RemAIDeck:True
 SVar:RemMultiplayer:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/curse_of_echoes.jpg
 Oracle:Enchant player\nWhenever enchanted player casts an instant or sorcery spell, each other player may copy that spell and may choose new targets for the copy he or she controls.
-SetInfo:DKA Rare

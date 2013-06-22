@@ -7,4 +7,3 @@ SVar:X:Count$Valid Creature.Green+Other+YouCtrl
 SVar:BuffedBy:Creature.Green
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crabapple_cohort.jpg
 Oracle:Crabapple Cohort gets +1/+1 as long as you control another green creature.
-SetInfo:SHM Common

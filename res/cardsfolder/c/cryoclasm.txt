@@ -5,5 +5,3 @@ A:SP$ Destroy | Cost$ 2 R | ValidTgts$ Plains,Island | TgtPrompt$ Choose target 
 SVar:DBDealDamage:DB$DealDamage | Defined$ TargetedController | NumDmg$ 3
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cryoclasm.jpg
 Oracle:Destroy target Plains or Island. Cryoclasm deals 3 damage to that land's controller.
-SetInfo:CSP Uncommon
-SetInfo:10E Uncommon

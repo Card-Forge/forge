@@ -7,4 +7,3 @@ SVar:DBChangeZone:DB$ ChangeZone | ValidTgts$ Creature | TgtPrompt$ Select targe
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/coastal_wizard.jpg
 Oracle:{T}: Return Coastal Wizard and another target creature to their owners' hands. Activate this ability only during your turn, before attackers are declared.
-SetInfo:PO2 Rare

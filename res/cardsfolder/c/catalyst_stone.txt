@@ -6,4 +6,3 @@ S:Mode$ RaiseCost | ValidCard$ Card | Type$ Flashback | Activator$ Opponent | Am
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/catalyst_stone.jpg
 Oracle:Flashback costs you pay cost up to {2} less.\nFlashback costs your opponents pay cost {2} more.
-SetInfo:ODY Rare

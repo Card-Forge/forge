@@ -6,4 +6,3 @@ K:Flying
 K:Protection from creatures
 SVar:Picture:http://www.wizards.com/global/images/magic/general/commander_eesha.jpg
 Oracle:Flying, protection from creatures
-SetInfo:JUD Rare

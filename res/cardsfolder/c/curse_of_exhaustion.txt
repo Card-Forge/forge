@@ -10,4 +10,3 @@ SVar:X:Count$ThisTurnCast_Card.EnchantedPlayerCtrl+YouCtrl
 SVar:Y:Count$ThisTurnCast_Card.EnchantedPlayerCtrl+YouDontCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/curse_of_exhaustion.jpg
 Oracle:Enchant player\nEnchanted player can't cast more than one spell each turn.
-SetInfo:DKA Uncommon

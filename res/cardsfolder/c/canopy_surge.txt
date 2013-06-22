@@ -6,4 +6,3 @@ A:SP$ DamageAll | Cost$ 1 G | ValidCards$ Creature.withFlying | ValidPlayers$ Ea
 SVar:X:Count$Kicked.4.1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/canopy_surge.jpg
 Oracle:Kicker {2} (You may pay an additional {2} as you cast this spell.)\nCanopy Surge deals 1 damage to each creature with flying and each player. If Canopy Surge was kicked, it deals 4 damage to each creature with flying and each player instead.
-SetInfo:INV Uncommon

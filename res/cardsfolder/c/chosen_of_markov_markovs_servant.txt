@@ -16,4 +16,3 @@ Types:Creature Vampire
 PT:4/4
 SVar:Picture:http://www.wizards.com/global/images/magic/general/markovs_servant.jpg
 Oracle:
-SetInfo:DKA Common

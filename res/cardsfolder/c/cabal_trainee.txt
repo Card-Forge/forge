@@ -5,4 +5,3 @@ PT:1/1
 A:AB$ Pump | Cost$ Sac<1/CARDNAME> | NumAtt$ -2 | IsCurse$ True | TgtPrompt$ Select target creature | ValidTgts$ Creature | SpellDescription$ Target creature gets -2/-0 until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cabal_trainee.jpg
 Oracle:Sacrifice Cabal Trainee: Target creature gets -2/-0 until end of turn.
-SetInfo:JUD Common

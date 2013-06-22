@@ -5,5 +5,3 @@ PT:4/1
 K:CARDNAME can't block.
 SVar:Picture:http://resources.wizards.com/magic/cards/st/en-us/card5130.jpg
 Oracle:Craven Giant can't block.
-SetInfo:POR Common
-SetInfo:STH Common

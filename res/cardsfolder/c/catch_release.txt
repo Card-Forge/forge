@@ -21,4 +21,3 @@ SVar:DBChoosePW:DB$ ChooseCard | Defined$ Player.IsRemembered | Choices$ Planesw
 SVar:DBsac:DB$ SacrificeAll | Defined$ Remembered | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 Oracle:Each player sacrifices an artifact, a creature, an enchantment, a land, and a planeswalker.\nFuse (You may cast one or both halves of this card from your hand.)
-SetInfo:DGM Rare

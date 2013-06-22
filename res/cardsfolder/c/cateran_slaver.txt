@@ -7,4 +7,3 @@ A:AB$ ChangeZone | Cost$ 5 T | Origin$ Library | Destination$ Battlefield | Chan
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cateran_slaver.jpg
 Oracle:Swampwalk\n{5}, {T}: Search your library for a Mercenary permanent card with converted mana cost 5 or less and put it onto the battlefield. Then shuffle your library.
-SetInfo:MMQ Rare

@@ -7,4 +7,3 @@ SVar:FightForTheCliffs:DB$ Fight | Defined$ ParentTarget | ValidTgts$ Creature.O
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/contested_cliffs.jpg
 Oracle:{T}: Add {1} to your mana pool.\n{R}{G}, {T}: Choose target Beast creature you control and target creature an opponent controls. Those creatures fight each other. (Each deals damage equal to its power to the other.)
-SetInfo:ONS Rare

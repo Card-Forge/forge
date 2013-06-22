@@ -8,4 +8,3 @@ SVar:PlayMain1:TRUE
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chaosphere.jpg
 Oracle:Creatures with flying can block only creatures with flying.\nCreatures without flying have reach. (They can block creatures with flying.)
-SetInfo:MIR Rare

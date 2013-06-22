@@ -5,4 +5,3 @@ PT:2/3
 A:AB$ Tap | Cost$ U U | ValidTgts$ Creature.withoutFlying | TgtPrompt$ Select target creature without flying | SpellDescription$ Tap target creature without flying.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cephalid_retainer.jpg
 Oracle:{U}{U}: Tap target creature without flying.
-SetInfo:ODY Rare

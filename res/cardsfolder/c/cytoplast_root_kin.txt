@@ -9,4 +9,3 @@ A:AB$ MoveCounter | Cost$ 2 | Defined$ Self | ValidTgts$ Creature.YouCtrl | TgtP
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cytoplast_root_kin.jpg
 Oracle:Graft 4 (This creature enters the battlefield with four +1/+1 counters on it. Whenever another creature enters the battlefield, you may move a +1/+1 counter from this creature onto it.)\nWhen Cytoplast Root-Kin enters the battlefield, put a +1/+1 counter on each other creature you control that has a +1/+1 counter on it.\n{2}: Move a +1/+1 counter from target creature you control onto Cytoplast Root-Kin.
-SetInfo:DIS Rare

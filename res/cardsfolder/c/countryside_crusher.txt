@@ -8,4 +8,3 @@ SVar:TrigReveal:AB$DigUntil | Cost$ 0 | DigNum$ 1 | Valid$ Card.nonLand | ValidD
 SVar:TrigAddCounter:AB$PutCounter | Cost$ 0 | CounterType$ P1P1 | CounterNum$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/countryside_crusher.jpg
 Oracle:At the beginning of your upkeep, reveal the top card of your library. If it's a land card, put it into your graveyard and repeat this process.\nWhenever a land card is put into your graveyard from anywhere, put a +1/+1 counter on Countryside Crusher.
-SetInfo:MOR Rare

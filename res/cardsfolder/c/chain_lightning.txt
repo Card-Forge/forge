@@ -6,5 +6,3 @@ SVar:DBCopy1:DB$ CopySpellAbility | Defined$ Parent | Controller$ TargetedContro
 SVar:DBCopy2:DB$ CopySpellAbility | Defined$ Parent | Controller$ Targeted | UnlessPayer$ Targeted | UnlessCost$ R R | UnlessSwitched$ True | ConditionDefined$ Targeted | ConditionPresent$ Creature | ConditionCompare$ EQ0 | StackDescription$ None
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chain_lightning.jpg
 Oracle:Chain Lightning deals 3 damage to target creature or player. Then that player or that creature's controller may pay {R}{R}. If the player does, he or she may copy this spell and may choose a new target for that copy.
-SetInfo:LEG Common
-SetInfo:PD2 Common

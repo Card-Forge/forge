@@ -9,4 +9,3 @@ SVar:TrigChange:DB$ChangeZone | Origin$ Battlefield | Destination$ Hand | Cost$ 
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cavern_harpy.jpg
 Oracle:Flying\nWhen Cavern Harpy enters the battlefield, return a blue or black creature you control to its owner's hand.\nPay 1 life: Return Cavern Harpy to its owner's hand.
-SetInfo:PLS Common

@@ -5,4 +5,3 @@ PT:2/2
 A:AB$ Discard | Cost$ 2 B T | ValidTgts$ Player | NumCards$ 1 | Mode$ TgtChoose | SorcerySpeed$ True | SpellDescription$ Target player discards a card. Activate this ability only any time you could cast a sorcery.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cat_burglar.jpg
 Oracle:{2}{B}, {T}: Target player discards a card. Activate this ability only any time you could cast a sorcery.
-SetInfo:EXO Common

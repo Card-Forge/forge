@@ -6,4 +6,3 @@ T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | Execute$ TrigPhase | Tri
 SVar:TrigPhase:DB$ Phases | Defined$ Self
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crystal_golem.jpg
 Oracle:At the beginning of your end step, Crystal Golem phases out. (While it's phased out, it's treated as though it doesn't exist. It phases in before you untap during your next untap step.)
-SetInfo:MIR Uncommon

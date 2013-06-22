@@ -10,5 +10,3 @@ SVar:PlayMain1:TRUE
 DeckHints:Type$Soldier
 SVar:Picture:http://www.wizards.com/global/images/magic/general/captain_of_the_watch.jpg
 Oracle:Vigilance (Attacking doesn't cause this creature to tap.)\nOther Soldier creatures you control get +1/+1 and have vigilance.\nWhen Captain of the Watch enters the battlefield, put three 1/1 white Soldier creature tokens onto the battlefield.
-SetInfo:M10 Rare
-SetInfo:M13 Rare

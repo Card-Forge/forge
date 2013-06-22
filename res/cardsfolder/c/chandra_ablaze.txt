@@ -14,4 +14,3 @@ SVar:ChandraZ:SVar$ChandraX/Plus.ChandraY
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chandra_ablaze.jpg
 Oracle:[+1] Discard a card. If a red card is discarded this way, Chandra Ablaze deals 4 damage to target creature or player.\n[-2] Each player discards his or her hand, then draws three cards.\n[-7] Cast any number of red instant and/or sorcery cards from your graveyard without paying their mana costs.
-SetInfo:ZEN Mythic

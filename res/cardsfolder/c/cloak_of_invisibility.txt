@@ -6,4 +6,3 @@ A:SP$ Attach | Cost$ U | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Permanent.EnchantedBy | AddKeyword$ Phasing & CantBeBlockedBy Creature.Wall | Description$ Enchanted creature has phasing and can't be blocked except by Walls.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cloak_of_invisibility.jpg
 Oracle:Enchant creature\nEnchanted creature has phasing and can't be blocked except by Walls. (It phases in or out before its controller untaps during each of his or her untap steps. While it's phased out, it's treated as though it doesn't exist.)
-SetInfo:MIR Common

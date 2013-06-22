@@ -16,4 +16,3 @@ SVar:AFLifeLost:Number$0
 #AFLifeLost will be set by LoseLife
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chancellor_of_the_dross.jpg
 Oracle:You may reveal this card from your opening hand. If you do, at the beginning of the first upkeep, each opponent loses 3 life, then you gain life equal to the life lost this way.\nFlying, lifelink
-SetInfo:NPH Rare

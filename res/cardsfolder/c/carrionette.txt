@@ -7,4 +7,3 @@ SVar:ExileME:DB$ChangeZone | Origin$ Graveyard | Destination$ Exile | Defined$ S
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/carrionette.jpg
 Oracle:{2}{B}{B}: Exile Carrionette and target creature unless that creature's controller pays {2}. Activate this ability only if Carrionette is in your graveyard.
-SetInfo:TMP Rare

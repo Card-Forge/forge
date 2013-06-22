@@ -4,6 +4,3 @@ Types:Sorcery
 A:SP$Draw | Cost$ 2 U | NumCards$ 2 | SpellDescription$ Draw two cards.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/counsel_of_the_soratami.jpg
 Oracle:Draw two cards.
-SetInfo:CHK Common
-SetInfo:9ED Common
-SetInfo:10E Common

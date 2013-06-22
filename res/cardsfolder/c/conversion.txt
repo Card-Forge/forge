@@ -6,8 +6,3 @@ S:Mode$ Continuous | Affected$ Mountain | AddType$ Plains | RemoveSubTypes$ True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/conversion.jpg
 Oracle:At the beginning of your upkeep, sacrifice Conversion unless you pay {W}{W}.\nAll Mountains are Plains.
-SetInfo:2ED Uncommon
-SetInfo:LEB Uncommon
-SetInfo:LEA Uncommon
-SetInfo:4ED Uncommon
-SetInfo:3ED Uncommon

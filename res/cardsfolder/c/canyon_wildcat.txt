@@ -5,6 +5,3 @@ PT:2/1
 K:Mountainwalk
 SVar:Picture:http://resources.wizards.com/magic/cards/8ed/en-us/card45353.jpg
 Oracle:Mountainwalk
-SetInfo:8ED Common
-SetInfo:TMP Common
-SetInfo:DDH Common

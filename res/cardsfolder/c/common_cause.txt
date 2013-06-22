@@ -7,4 +7,3 @@ SVar:Y:Count$Valid Creature.nonArtifact
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/common_cause.jpg
 Oracle:Nonartifact creatures get +2/+2 as long as they all share a color.
-SetInfo:MMQ Rare

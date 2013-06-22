@@ -5,4 +5,3 @@ A:SP$ ChangeZone | Cost$ 2 B | Origin$ Library | Destination$ Library | LibraryP
 SVar:DBLoseLife:DB$LoseLife | LifeAmount$ 2
 SVar:Picture:http://serv2.tcgimages.eu/img/cards/Portal/cruel_tutor.jpg
 Oracle:Search your library for a card, then shuffle your library and put that card on top of it. You lose 2 life.
-SetInfo:POR Rare

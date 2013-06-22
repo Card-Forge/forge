@@ -8,5 +8,3 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crown_of_the_ages.jpg
 Oracle:{4}, {T}: Attach target Aura attached to a creature to another creature.
-SetInfo:ICE Rare
-SetInfo:5ED Rare

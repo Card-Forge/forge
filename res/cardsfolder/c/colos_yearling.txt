@@ -6,4 +6,3 @@ K:Mountainwalk
 A:AB$ Pump | Cost$ R | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/colos_yearling.jpg
 Oracle:Mountainwalk\n{R}: Colos Yearling gets +1/+0 until end of turn.
-SetInfo:UDS Common

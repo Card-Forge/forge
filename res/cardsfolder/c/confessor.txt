@@ -6,4 +6,3 @@ T:Mode$ Discarded | TriggerZones$ Battlefield | Execute$ TrigGainLife | Optional
 SVar:TrigGainLife:AB$GainLife | Cost$ 0 | LifeAmount$ 1 | Defined$ You
 SVar:Picture:http://www.wizards.com/global/images/magic/general/confessor.jpg
 Oracle:Whenever a player discards a card, you may gain 1 life.
-SetInfo:ODY Common

@@ -9,4 +9,3 @@ SVar:CemeteryPucaDiesTrig:Mode$ ChangesZone | Origin$ Battlefield | Destination$
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cemetery_puca.jpg
 Oracle:Whenever a creature dies, you may pay {1}. If you do, Cemetery Puca becomes a copy of that creature and gains this ability.
-SetInfo:SHM Rare

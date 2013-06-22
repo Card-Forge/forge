@@ -6,4 +6,3 @@ K:Trample
 S:Mode$ Continuous | Affected$ Creature.counters_GE1_P1P1 | AddKeyword$ Trample | Description$ Each creature with a +1/+1 counter on it has trample.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crowned_ceratok.jpg
 Oracle:Trample\nEach creature you control with a +1/+1 counter on it has trample.
-SetInfo:GTC Uncommon

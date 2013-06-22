@@ -5,4 +5,3 @@ A:SP$ PumpAll | Cost$ G | ValidCards$ Creature.YouCtrl | KW$ Reach | SpellDescri
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crossbow_ambush.jpg
 Oracle:Creatures you control gain reach until end of turn. (They can block creatures with flying.)
-SetInfo:STH Common

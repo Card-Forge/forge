@@ -5,4 +5,3 @@ A:SP$ NameCard | Cost$ 3 B | Defined$ You | ValidCards$ Card.nonLand | ValidDesc
 SVar:Exile:DB$ ChangeZoneAll | Origin$ Graveyard,Hand,Library | Destination$ Exile | ValidTgts$ Player | TgtPrompt$ Select target player | ChangeType$ Card.NamedCard | Search$ True | Shuffle$ True
 SVar:Picture:http://resources.wizards.com/magic/cards/chk/en-us/card80281.jpg
 Oracle:Name a nonland card. Search target player's graveyard, hand, and library for all cards with that name and exile them. Then that player shuffles his or her library.
-SetInfo:CHK Rare

@@ -7,5 +7,3 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigChangeZone:AB$ ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Land.YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cartographer.jpg
 Oracle:When Cartographer enters the battlefield, you may return target land card from your graveyard to your hand.
-SetInfo:ODY Common
-SetInfo:EXO Uncommon

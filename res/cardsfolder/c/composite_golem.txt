@@ -6,5 +6,3 @@ A:AB$ Mana | Cost$ Sac<1/CARDNAME> | Produced$ W U B R G | SpellDescription$ Add
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/composite_golem.jpg
 Oracle:Sacrifice Composite Golem: Add {W}{U}{B}{R}{G} to your mana pool.
-SetInfo:5DN Uncommon
-SetInfo:10E Uncommon

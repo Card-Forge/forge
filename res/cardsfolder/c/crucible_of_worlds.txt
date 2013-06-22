@@ -5,5 +5,3 @@ S:Mode$ Continuous | Affected$ Land.YouOwn | AddHiddenKeyword$ May be played | A
 SVar:NonStackingEffect:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crucible_of_worlds.jpg
 Oracle:You may play land cards from your graveyard.
-SetInfo:5DN Rare
-SetInfo:10E Rare

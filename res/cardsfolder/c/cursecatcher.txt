@@ -6,4 +6,3 @@ A:AB$ Counter | Cost$ Sac<1/CARDNAME> | TargetType$ Spell | ValidTgts$ Instant,S
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cursecatcher.jpg
 Oracle:Sacrifice Cursecatcher: Counter target instant or sorcery spell unless its controller pays {1}.
-SetInfo:SHM Uncommon

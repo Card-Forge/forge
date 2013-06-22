@@ -6,5 +6,3 @@ K:Flying
 K:CARDNAME can block only creatures with flying.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cloud_spirit.jpg
 Oracle:Flying\nCloud Spirit can block only creatures with flying.
-SetInfo:POR Uncommon
-SetInfo:STH Common

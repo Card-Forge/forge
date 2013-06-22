@@ -12,4 +12,3 @@ SVar:CurseY:Remembered$Amount
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/curse_of_the_cabal.jpg
 Oracle:Target player sacrifices half the permanents he or she controls, rounded down.\nSuspend 2-{2}{B}{B} (Rather than cast this card from your hand, you may pay {2}{B}{B} and exile it with two time counters on it. At the beginning of your upkeep, remove a time counter. When the last is removed, cast it without paying its mana cost.)\nAt the beginning of each player's upkeep, if Curse of the Cabal is suspended, that player may sacrifice a permanent. If he or she does, put two time counters on Curse of the Cabal.
-SetInfo:TSP Rare

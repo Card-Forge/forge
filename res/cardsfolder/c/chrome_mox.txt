@@ -7,4 +7,3 @@ A:AB$ ManaReflected | Cost$ T | Valid$ Defined.Imprinted | ColorOrType$ Color | 
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chrome_mox.jpg
 Oracle:Imprint - When Chrome Mox enters the battlefield, you may exile a nonartifact, nonland card from your hand.\n{T}: Add one mana of any of the exiled card's colors to your mana pool.
-SetInfo:MRD Rare

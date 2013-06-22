@@ -6,4 +6,3 @@ K:Reach
 K:Exalted
 SVar:Picture:http://www.wizards.com/global/images/magic/general/court_archers.jpg
 Oracle:Reach (This can block creatures with flying.)\nExalted (Whenever a creature you control attacks alone, that creature gets +1/+1 until end of turn.)
-SetInfo:ALA Common

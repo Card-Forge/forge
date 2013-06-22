@@ -6,4 +6,3 @@ SVar:X:Sacrificed$CardPower
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/carrion.jpg
 Oracle:As an additional cost to cast Carrion, sacrifice a creature.\nPut X 0/1 black Insect creature tokens onto the battlefield, where X is the sacrificed creature's power.
-SetInfo:MIR Rare

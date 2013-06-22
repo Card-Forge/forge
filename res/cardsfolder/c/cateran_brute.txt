@@ -6,4 +6,3 @@ A:AB$ ChangeZone | Cost$ 2 T | Origin$ Library | Destination$ Battlefield | Chan
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cateran_brute.jpg
 Oracle:{2}, {T}: Search your library for a Mercenary permanent card with converted mana cost 2 or less and put it onto the battlefield. Then shuffle your library.
-SetInfo:MMQ Common

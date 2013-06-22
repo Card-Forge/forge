@@ -7,5 +7,3 @@ SVar:X:Count$xPaid
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/condescend.jpg
 Oracle:Counter target spell unless its controller pays {X}.\nScry 2. (To scry 2, look at the top two cards of your library, then put any number of them on the bottom of your library and the rest on top in any order.)
-SetInfo:DD2 Common
-SetInfo:5DN Common

@@ -5,4 +5,3 @@ A:AB$ Animate | Cost$ 2 T | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select targ
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chariot_of_the_sun.jpg
 Oracle:{2}, {T}: Until end of turn, target creature you control gains flying and its toughness becomes 1.
-SetInfo:MIR Uncommon

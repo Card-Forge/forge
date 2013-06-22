@@ -7,4 +7,3 @@ SVar:DBDiscard:DB$Discard | Defined$ You | Mode$ TgtChoose | NumCards$ 1
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/customs_depot.jpg
 Oracle:Whenever you cast a creature spell, you may pay {1}. If you do, draw a card, then discard a card.
-SetInfo:MMQ Uncommon

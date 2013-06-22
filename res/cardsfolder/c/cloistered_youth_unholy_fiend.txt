@@ -19,5 +19,3 @@ T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefiel
 SVar:TrigLoseLife:AB$LoseLife | Cost$ 0 | Defined$ You | LifeAmount$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/unholy_fiend.jpg
 Oracle:Creature - Horror\n3/3\nAt the beginning of your end step, you lose 1 life.
-
-SetInfo:ISD Uncommon

@@ -5,4 +5,3 @@ A:SP$ Sacrifice | Cost$ R | SacValid$ Permanent | Defined$ Each | SpellDescripti
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crack_the_earth.jpg
 Oracle:Each player sacrifices a permanent.
-SetInfo:BOK Common

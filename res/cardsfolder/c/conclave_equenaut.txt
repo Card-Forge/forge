@@ -6,5 +6,3 @@ K:Flying
 K:Convoke
 SVar:Picture:http://www.wizards.com/global/images/magic/general/conclave_equenaut.jpg
 Oracle:Convoke (Each creature you tap while casting this spell reduces its cost by {1} or by one mana of that creature's color.)\nFlying
-SetInfo:RAV Common
-SetInfo:DDF Common

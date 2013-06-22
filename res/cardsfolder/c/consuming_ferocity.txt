@@ -13,4 +13,3 @@ SVar:X:Enchanted$CardPower
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/consuming_ferocity.jpg
 Oracle:Enchant non-Wall creature\nEnchanted creature gets +1/+0.\nAt the beginning of your upkeep, put a +1/+0 counter on enchanted creature. If that creature has three or more +1/+0 counters on it, it deals damage equal to its power to its controller, then destroy that creature and it can't be regenerated.
-SetInfo:MIR Uncommon

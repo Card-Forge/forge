@@ -7,4 +7,3 @@ SVar:Regen:AB$Regenerate | Cost$ T | ValidTgts$ Sliver | TgtPrompt$ Select a tar
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crypt_sliver.jpg
 Oracle:All Slivers have "{T}: Regenerate target Sliver."
-SetInfo:LGN Common

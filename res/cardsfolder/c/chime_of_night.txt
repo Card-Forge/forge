@@ -7,4 +7,3 @@ T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ 
 SVar:TrigDestroy:AB$Destroy | Cost$ 0 | ValidTgts$ Creature.nonBlack | TgtPrompt$ Select target nonblack creature
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chime_of_night.jpg
 Oracle:Enchant creature\nWhen Chime of Night is put into a graveyard from the battlefield, destroy target nonblack creature.
-SetInfo:UDS Common

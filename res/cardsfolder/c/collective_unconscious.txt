@@ -5,5 +5,3 @@ A:SP$ Draw | Cost$ 4 G G | NumCards$ X | References$ X | SpellDescription$ Draw 
 SVar:X:Count$TypeYouCtrl.Creature
 SVar:Picture:http://www.wizards.com/global/images/magic/general/collective_unconscious.jpg
 Oracle:Draw a card for each creature you control.
-SetInfo:MMQ Rare
-SetInfo:8ED Rare

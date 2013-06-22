@@ -6,5 +6,3 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigChange:AB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Exile | Defined$ Self
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cyclopean_mummy.jpg
 Oracle:When Cyclopean Mummy dies, exile it.
-SetInfo:LEG Common
-SetInfo:4ED Common

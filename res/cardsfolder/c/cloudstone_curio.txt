@@ -6,4 +6,3 @@ SVar:TrigBounce:AB$ ChangeZone | Cost$ 0 | DefinedPlayer$ TriggeredCardControlle
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cloudstone_curio.jpg
 Oracle:Whenever a nonartifact permanent enters the battlefield under your control, you may return another permanent you control that shares a card type with it to its owner's hand.
-SetInfo:RAV Rare

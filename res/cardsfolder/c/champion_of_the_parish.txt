@@ -7,4 +7,3 @@ SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | CounterType$ P1P1 | CounterNum$ 1
 SVar:BuffedBy:Human
 SVar:Picture:http://www.wizards.com/global/images/magic/general/champion_of_the_parish.jpg
 Oracle:Whenever another Human enters the battlefield under your control, put a +1/+1 counter on Champion of the Parish.
-SetInfo:ISD Rare

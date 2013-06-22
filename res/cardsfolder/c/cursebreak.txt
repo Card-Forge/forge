@@ -5,4 +5,3 @@ A:SP$ Destroy | Cost$ 1 W | ValidTgts$ Enchantment | TgtPrompt$ Select target en
 SVar:DBGainLife:DB$GainLife | Defined$ You | LifeAmount$ 2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cursebreak.jpg
 Oracle:Destroy target enchantment. You gain 2 life.
-SetInfo:AVR Common

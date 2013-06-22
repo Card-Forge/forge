@@ -7,4 +7,3 @@ SVar:TrigBounce:AB$ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Han
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/complex_automaton.jpg
 Oracle:At the beginning of your upkeep, if you control seven or more permanents, return Complex Automaton to its owner's hand.
-SetInfo:NMS Rare

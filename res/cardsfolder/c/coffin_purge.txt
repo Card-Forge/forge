@@ -6,4 +6,3 @@ A:SP$ ChangeZone | Cost$ B | Origin$ Graveyard | Destination$ Exile | TgtPrompt$
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/coffin_purge.jpg
 Oracle:Exile target card from a graveyard.\nFlashback {B} (You may cast this card from your graveyard for its flashback cost. Then exile it.)
-SetInfo:ODY Common

@@ -6,4 +6,3 @@ T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPumpAll | TriggerDescripti
 SVar:TrigPumpAll:AB$PumpAll | Cost$ 0 | ValidCards$ Creature.attacking | KW$ First Strike
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chieftain_en_dal.jpg
 Oracle:Whenever Chieftain en-Dal attacks, attacking creatures gain first strike until end of turn.
-SetInfo:NMS Uncommon

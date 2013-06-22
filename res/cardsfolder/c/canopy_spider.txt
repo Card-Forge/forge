@@ -5,7 +5,3 @@ PT:1/3
 K:Reach
 SVar:Picture:http://resources.wizards.com/magic/cards/10e/en/card135185.jpg
 Oracle:Reach (This creature can block creatures with flying.)
-SetInfo:8ED Common
-SetInfo:7ED Common
-SetInfo:TMP Common
-SetInfo:10E Common

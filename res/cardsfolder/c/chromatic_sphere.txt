@@ -6,5 +6,3 @@ SVar:DBDraw:DB$Draw | NumCards$ 1
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chromatic_sphere.jpg
 Oracle:{1}, {T}, Sacrifice Chromatic Sphere: Add one mana of any color to your mana pool. Draw a card.
-SetInfo:MRD Common
-SetInfo:INV Uncommon

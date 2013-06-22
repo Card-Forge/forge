@@ -5,4 +5,3 @@ T:Mode$ AttackerBlocked | ValidCard$ Card.YouCtrl | TriggerZones$ Battlefield | 
 SVar:TrigDealDamage:AB$DealDamage | Cost$ 0 | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/close_quarters.jpg
 Oracle:Whenever a creature you control becomes blocked, Close Quarters deals 1 damage to target creature or player.
-SetInfo:MMQ Uncommon

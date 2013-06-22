@@ -5,6 +5,3 @@ PT:0/1
 A:AB$ Pump | Cost$ 1 | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ CARDNAME gets +1/+1 until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/carrion_ants.jpg
 Oracle:{1}: Carrion Ants gets +1/+1 until end of turn.
-SetInfo:5ED Uncommon
-SetInfo:LEG Rare
-SetInfo:4ED Uncommon

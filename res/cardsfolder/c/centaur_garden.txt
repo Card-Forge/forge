@@ -7,4 +7,3 @@ SVar:DBPain:DB$ DealDamage | NumDmg$ 1 | Defined$ You
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/centaur_garden.jpg
 Oracle:{T}: Add {G} to your mana pool. Centaur Garden deals 1 damage to you.\nThreshold - {G}, {T}, Sacrifice Centaur Garden: Target creature gets +3/+3 until end of turn. Activate this ability only if seven or more cards are in your graveyard.
-SetInfo:ODY Uncommon

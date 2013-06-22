@@ -5,6 +5,3 @@ PT:1/1
 A:AB$ Pump | Cost$ T | ValidTgts$ Creature.powerLE2 | KW$ HIDDEN Unblockable | SpellDescription$ Target creature with power 2 or less is unblockable this turn. | TgtPrompt$ Select target creature with power 2 or less.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crafty_pathmage.jpg
 Oracle:{T}: Target creature with power 2 or less is unblockable this turn.
-SetInfo:ONS Common
-SetInfo:9ED Common
-SetInfo:10E Common

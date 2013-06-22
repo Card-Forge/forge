@@ -6,4 +6,3 @@ SVar:X:Count$Threshold.5.3
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cabal_ritual.jpg
 Oracle:Add {B}{B}{B} to your mana pool.\nThreshold - Add {B}{B}{B}{B}{B} to your mana pool instead if seven or more cards are in your graveyard.
-SetInfo:TOR Common

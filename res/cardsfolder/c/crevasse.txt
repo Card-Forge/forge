@@ -6,4 +6,3 @@ SVar:NonStackingEffect:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crevasse.jpg
 Oracle:Creatures with mountainwalk can be blocked as though they didn't have mountainwalk.
-SetInfo:LEG Uncommon

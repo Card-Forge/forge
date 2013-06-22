@@ -9,4 +9,3 @@ SVar:NeedsToPlay:Artifact.YouCtrl
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/covetous_dragon.jpg
 Oracle:Flying\nWhen you control no artifacts, sacrifice Covetous Dragon.
-SetInfo:UDS Rare

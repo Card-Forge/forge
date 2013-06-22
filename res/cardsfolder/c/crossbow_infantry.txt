@@ -5,7 +5,3 @@ PT:1/1
 A:AB$ DealDamage | Cost$ T | ValidTgts$ Creature.attacking,Creature.blocking | TgtPrompt$ Select target attacking or blocking creature | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target attacking or blocking creature.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crossbow_infantry.jpg
 Oracle:{T}: Crossbow Infantry deals 1 damage to target attacking or blocking creature.
-SetInfo:MMQ Common
-SetInfo:8ED Common
-SetInfo:7ED Common
-SetInfo:9ED Common

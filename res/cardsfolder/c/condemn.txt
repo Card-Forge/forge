@@ -6,6 +6,3 @@ SVar:DBGainLife:DB$GainLife | Defined$ TargetedController | LifeAmount$ X | Refe
 SVar:X:Targeted$CardToughness
 SVar:Picture:http://www.wizards.com/global/images/magic/general/condemn.jpg
 Oracle:Put target attacking creature on the bottom of its owner's library. Its controller gains life equal to its toughness.
-SetInfo:M11 Uncommon
-SetInfo:10E Uncommon
-SetInfo:DIS Uncommon

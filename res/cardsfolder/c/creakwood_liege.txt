@@ -9,4 +9,3 @@ SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Worm | TokenType
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/creakwood_liege.jpg
 Oracle:Other black creatures you control get +1/+1.\nOther green creatures you control get +1/+1.\nAt the beginning of your upkeep, you may put a 1/1 black and green Worm creature token onto the battlefield.
-SetInfo:EVE Rare

@@ -6,4 +6,3 @@ A:SP$ Debuff | Cost$ G | ValidTgts$ Creature | TgtPrompt$ Select target creature
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/canopy_claws.jpg
 Oracle:Target creature loses flying until end of turn.\nFlashback {G} (You may cast this card from your graveyard for its flashback cost. Then exile it.)
-SetInfo:JUD Common

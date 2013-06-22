@@ -6,5 +6,3 @@ K:Vigilance
 A:AB$ Regenerate | Cost$ G | SpellDescription$ Regenerate CARDNAME.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/charging_troll.jpg
 Oracle:Vigilance\n{G}: Regenerate Charging Troll.
-SetInfo:DDE Uncommon
-SetInfo:INV Uncommon

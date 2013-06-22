@@ -8,4 +8,3 @@ SVar:TrigChangeZone:AB$ChangeZone | Cost$ 0 | Origin$ Hand | Destination$ Librar
 SVar:SacMe:1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chimney_imp.jpg
 Oracle:Flying\nWhen Chimney Imp dies, target opponent puts a card from his or her hand on top of his or her library.
-SetInfo:MRD Common

@@ -5,4 +5,3 @@ PT:3/2
 K:Unblockable
 SVar:Picture:http://resources.wizards.com/magic/cards/lgn/en-us/card30659.jpg
 Oracle:Covert Operative is unblockable.
-SetInfo:LGN Common

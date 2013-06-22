@@ -7,4 +7,3 @@ T:Mode$ DamageDone | ValidSource$ Card | CombatDamage$ False | ValidTarget$ Oppo
 SVar:TrigPump:AB$Pump | Cost$ 0 | NumAtt$ +3 | NumDef$ +0 | Defined$ Self
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chandras_spitfire.jpg
 Oracle:Flying\nWhenever an opponent is dealt noncombat damage, Chandra's Spitfire gets +3/+0 until end of turn.
-SetInfo:M11 Uncommon

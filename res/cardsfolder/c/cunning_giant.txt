@@ -10,4 +10,3 @@ SVar:CunningX:ReplaceCount$DamageAmount
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cunning_giant.jpg
 Oracle:If Cunning Giant is unblocked, you may have it assign its combat damage to a creature defending player controls.
-SetInfo:PO2 Rare

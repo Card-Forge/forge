@@ -11,4 +11,3 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cataclysm.jpg
 Oracle:Each player chooses from the permanents he or she controls an artifact, a creature, an enchantment, and a land, then sacrifices the rest.
-SetInfo:EXO Rare

@@ -7,4 +7,3 @@ S:Mode$ Continuous | Affected$ Elemental.YouCtrl | AddHiddenKeyword$ CantBeBlock
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/caterwauling_boggart.jpg
 Oracle:Each Goblin you control can't be blocked except by two or more creatures.\nEach Elemental you control can't be blocked except by two or more creatures.
-SetInfo:LRW Common

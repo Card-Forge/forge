@@ -7,4 +7,3 @@ SVar:ChooseCT:DB$ ChooseType | Defined$ You | Type$ Card | ValidTypes$ Artifact,
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cloud_key.jpg
 Oracle:As Cloud Key enters the battlefield, choose artifact, creature, enchantment, instant, or sorcery.\nSpells you cast of the chosen type cost {1} less to cast.
-SetInfo:FUT Rare

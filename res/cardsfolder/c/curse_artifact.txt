@@ -10,4 +10,3 @@ SVar:DBCurseArtifactCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/curse_artifact.jpg
 Oracle:Enchant artifact\nAt the beginning of the upkeep of enchanted artifact's controller, Curse Artifact deals 2 damage to that player unless he or she sacrifices that artifact.
-SetInfo:DRK Uncommon

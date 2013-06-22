@@ -9,4 +9,3 @@ SVar:CryptoplasmUpkeepTrig:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Trig
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cryptoplasm.jpg
 Oracle:At the beginning of your upkeep, you may have Cryptoplasm become a copy of another target creature. If you do, Cryptoplasm gains this ability.
-SetInfo:MBS Rare

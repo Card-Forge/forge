@@ -7,5 +7,3 @@ SVar:TargetsNum:Count$TimesKicked/Plus.1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/comet_storm.jpg
 SVar:X:Count$xPaid
 Oracle:Multikicker {1} (You may pay an additional {1} any number of times as you cast this spell.)\nChoose target creature or player, then choose another target creature or player for each time Comet Storm was kicked. Comet Storm deals X damage to each of them.
-SetInfo:COM Mythic
-SetInfo:WWK Mythic

@@ -7,4 +7,3 @@ SVar:ChaoticStrikePump:DB$ Pump | Cost$ 0 | Defined$ Targeted | NumAtt$ 1 | NumD
 SVar:ChaoticStrikeDraw:DB$ Draw | NumCards$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chaotic_strike.jpg
 Oracle:Cast Chaotic Strike only during combat after blockers are declared.\nFlip a coin. If you win the flip, target creature gets +1/+1 until end of turn.\nDraw a card.
-SetInfo:INV Uncommon

@@ -11,4 +11,3 @@ SVar:TrigSac:AB$ Sacrifice | Cost$ 0 | Defined$ Self
 SVar:ManaNeededToAvoidNegativeEffect:red
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crypt_champion.jpg
 Oracle:Double strike\nWhen Crypt Champion enters the battlefield, each player puts a creature card with converted mana cost 3 or less from his or her graveyard onto the battlefield.\nWhen Crypt Champion enters the battlefield, sacrifice it unless {R} was spent to cast it.
-SetInfo:DIS Uncommon

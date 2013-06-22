@@ -6,5 +6,3 @@ S:Mode$ Continuous | Affected$ Sliver | AddKeyword$ Shroud | Description$ All Sl
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crystalline_sliver.jpg
 Oracle:All Slivers have shroud. (They can't be the targets of spells or abilities.)
-SetInfo:H09 Uncommon
-SetInfo:STH Uncommon

@@ -5,4 +5,3 @@ A:SP$ ChangeZone | Cost$ B | Origin$ Library | Destination$ Hand | ChangeType$ M
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cateran_summons.jpg
 Oracle:Search your library for a Mercenary card, reveal that card, and put it into your hand. Then shuffle your library.
-SetInfo:MMQ Uncommon

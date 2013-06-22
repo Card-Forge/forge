@@ -5,4 +5,3 @@ PT:1/1
 A:AB$ Mill | Cost$ T | NumCards$ 1 | ValidTgts$ Player | TgtPrompt$ Choose a player | SpellDescription$ Target player puts the top card of his or her library into his or her graveyard.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cathartic_adept.jpg
 Oracle:{T}: Target player puts the top card of his or her library into his or her graveyard.
-SetInfo:ALA Common

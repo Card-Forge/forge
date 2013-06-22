@@ -7,4 +7,3 @@ SVar:ShapeTgt:DB$ Clone | Defined$ Remembered | CloneTarget$ ParentTarget | Dura
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cytoshape.jpg
 Oracle:Choose a nonlegendary creature on the battlefield. Target creature becomes a copy of that creature until end of turn.
-SetInfo:DIS Rare

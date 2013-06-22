@@ -5,4 +5,3 @@ A:AB$ Scry | Cost$ 1 T | ScryNum$ 2 |SpellDescription$ Scry 2. (To scry 2, look 
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crystal_ball.jpg
 Oracle:{1}, {T}: Scry 2. (To scry 2, look at the top two cards of your library, then put any number of them on the bottom of your library and the rest on top in any order.)
-SetInfo:M11 Uncommon

@@ -6,8 +6,3 @@ SVar:RemRandomDeck:True
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chaoslace.jpg
 Oracle:Target spell or permanent becomes red. (Its mana symbols remain unchanged.)
-SetInfo:LEB Rare
-SetInfo:4ED Rare
-SetInfo:LEA Rare
-SetInfo:3ED Rare
-SetInfo:2ED Rare

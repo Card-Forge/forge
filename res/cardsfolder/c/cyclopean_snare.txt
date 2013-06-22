@@ -5,4 +5,3 @@ A:AB$ Tap | Cost$ 3 T | ValidTgts$ Creature | TgtPrompt$ Select target creature 
 SVar:DBBounce:DB$ChangeZone | Origin$ Battlefield | Destination$ Hand
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cyclopean_snare.jpg
 Oracle:{3}, {T}: Tap target creature, then return Cyclopean Snare to its owner's hand.
-SetInfo:RAV Uncommon

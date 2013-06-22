@@ -6,5 +6,3 @@ SVar:X:Count$xPaid
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/citanul_flute.jpg
 Oracle:{X}, {T}: Search your library for a creature card with converted mana cost X or less, reveal it, and put it into your hand. Then shuffle your library.
-SetInfo:10E Rare
-SetInfo:USG Rare

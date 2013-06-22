@@ -4,4 +4,3 @@ Types:Instant
 A:SP$ Destroy | Cost$ 3 B | ValidTgts$ Creature.nonSnow | TgtPrompt$ Select target nonsnow creature | SpellDescription$ Destroy target nonsnow creature.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chill_to_the_bone.jpg
 Oracle:Destroy target nonsnow creature.
-SetInfo:CSP Common

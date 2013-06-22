@@ -10,15 +10,3 @@ SVar:NonStackingEffect:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/circle_of_protection_red.jpg
 Oracle:{1}: The next time a red source of your choice would deal damage to you this turn, prevent that damage.
-SetInfo:8ED Uncommon
-SetInfo:2ED Common
-SetInfo:7ED Common
-SetInfo:TMP Common
-SetInfo:6ED Common
-SetInfo:5ED Common
-SetInfo:9ED Uncommon
-SetInfo:LEB Common
-SetInfo:LEA Common
-SetInfo:ICE Common
-SetInfo:4ED Common
-SetInfo:3ED Common

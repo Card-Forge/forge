@@ -4,12 +4,3 @@ Types:Sorcery
 A:SP$ Discard | Cost$ 2 B | ValidTgts$ Opponent | Mode$ RevealYouChoose | NumCards$ 1 | SpellDescription$ Target opponent reveals his or her hand. You choose a card from it. That player discards that card.
 SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83034.jpg
 Oracle:Target opponent reveals his or her hand. You choose a card from it. That player discards that card.
-SetInfo:PO2 Uncommon
-SetInfo:S99 Uncommon
-SetInfo:6ED Common
-SetInfo:S00 Common
-SetInfo:VIS Common
-SetInfo:9ED Common
-SetInfo:8ED Common
-SetInfo:PTK Uncommon
-SetInfo:TMP Common

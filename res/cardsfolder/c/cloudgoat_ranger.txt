@@ -7,4 +7,3 @@ SVar:TrigToken:AB$ Token | Cost$ 0 | TokenAmount$ 3 | TokenName$ Kithkin Soldier
 A:AB$ Pump | Cost$ tapXType<3/Kithkin> | NumAtt$ +2 | KW$ Flying | SpellDescription$ CARDNAME gets +2/+0 and gains flying until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cloudgoat_ranger.jpg
 Oracle:When Cloudgoat Ranger enters the battlefield, put three 1/1 white Kithkin Soldier creature tokens onto the battlefield.\nTap three untapped Kithkin you control: Cloudgoat Ranger gets +2/+0 and gains flying until end of turn.
-SetInfo:LRW Uncommon

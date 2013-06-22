@@ -6,5 +6,3 @@ A:SP$ DealDamage | Cost$ 1 R | ValidTgts$ Creature.White,Creature.Blue | NumDmg$
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/combust.jpg
 Oracle:Combust can't be countered by spells or abilities.\nCombust deals 5 damage to target white or blue creature. The damage can't be prevented.
-SetInfo:M11 Uncommon
-SetInfo:M12 Uncommon

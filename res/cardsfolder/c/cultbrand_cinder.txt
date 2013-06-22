@@ -7,4 +7,3 @@ SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature | TgtPrompt$ Select tar
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cultbrand_cinder.jpg
 Oracle:When Cultbrand Cinder enters the battlefield, put a -1/-1 counter on target creature.
-SetInfo:SHM Common

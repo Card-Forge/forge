@@ -7,4 +7,3 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creatu
 SVar:TrigAttach:DB$ Attach | Cost$ 0 | Defined$ TriggeredCard
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cloak_and_dagger.jpg
 Oracle:Equipped creature gets +2/+0 and has shroud. (It can't be the target of spells or abilities.)\nWhenever a Rogue creature enters the battlefield, you may attach Cloak and Dagger to it.\nEquip {3}
-SetInfo:MOR Uncommon

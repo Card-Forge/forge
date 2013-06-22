@@ -11,4 +11,3 @@ SVar:DelTrig:Mode$ Phase | Phase$ EndCombat | Execute$ TrigRemoveCounter | Trigg
 SVar:TrigRemoveCounter:AB$RemoveCounter | Cost$ 0 | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/clockwork_vorrac.jpg
 Oracle:Trample\nClockwork Vorrac enters the battlefield with four +1/+1 counters on it.\nWhenever Clockwork Vorrac attacks or blocks, remove a +1/+1 counter from it at end of combat.\n{T}: Put a +1/+1 counter on Clockwork Vorrac.
-SetInfo:MRD Uncommon

@@ -10,4 +10,3 @@ SVar:DelayedTrig:Mode$ Phase | Phase$ Cleanup | ValidPlayer$ Player | Execute$ T
 SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Defined$ Self
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cunning.jpg
 Oracle:Enchant creature\nEnchanted creature gets +3/+3.\nWhen enchanted creature attacks or blocks, sacrifice Cunning at the beginning of the next cleanup step.
-SetInfo:EXO Common

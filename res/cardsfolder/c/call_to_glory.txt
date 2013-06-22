@@ -6,4 +6,3 @@ SVar:DBPumpYourSamurai:DB$ PumpAll | ValidCards$ Creature.Samurai+YouCtrl | NumA
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/call_to_glory.jpg
 Oracle:Untap all creatures you control. Samurai creatures you control get +1/+1 until end of turn.
-SetInfo:CHK Common

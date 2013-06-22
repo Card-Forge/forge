@@ -11,4 +11,3 @@ SVar:X:Count$ThisTurnCast_Card.YouOwn
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/colfenors_plans.jpg
 Oracle:When Colfenor's Plans enters the battlefield, exile the top seven cards of your library face down.\nYou may look at and play cards exiled with Colfenor's Plans.\nSkip your draw step.\nYou can't cast more than one spell each turn.
-SetInfo:LRW Rare

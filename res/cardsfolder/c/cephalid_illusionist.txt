@@ -8,4 +8,3 @@ SVar:TrigMill:AB$Mill | Cost$ 0 | NumCards$ 3 | Defined$ You
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cephalid_illusionist.jpg
 Oracle:Whenever Cephalid Illusionist becomes the target of a spell or ability, put the top three cards of your library into your graveyard.\n{2}{U}, {T}: Prevent all combat damage that would be dealt to and dealt by target creature you control this turn.
-SetInfo:TOR Uncommon

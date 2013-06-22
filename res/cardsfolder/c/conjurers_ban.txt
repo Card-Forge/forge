@@ -8,4 +8,3 @@ SVar:STCantPlayLand:Mode$ CantPlayLand | EffectZone$ Command | ValidCard$ Land.I
 SVar:DBDraw:DB$ Draw | NumCards$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/conjurers_ban.jpg
 Oracle:Name a card. Until your next turn, the named card can't be played.\nDraw a card.
-SetInfo:GPT Uncommon

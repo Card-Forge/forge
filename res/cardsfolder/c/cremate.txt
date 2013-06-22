@@ -5,6 +5,3 @@ A:SP$ ChangeZone | Cost$ B | Origin$ Graveyard | Destination$ Exile | TgtPrompt$
 SVar:DBDraw:DB$Draw | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cremate.jpg
 Oracle:Exile target card from a graveyard.\nDraw a card.
-SetInfo:GPT Common
-SetInfo:RTR Common
-SetInfo:INV Uncommon

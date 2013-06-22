@@ -8,4 +8,3 @@ SVar:DBMustBlock:DB$ MustBlock | Defined$ ChosenCard | SpellDescription$ Target 
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crashing_boars.jpg
 Oracle:Whenever Crashing Boars attacks, defending player chooses an untapped creature he or she controls. That creature blocks Crashing Boars this turn if able.
-SetInfo:EXO Uncommon

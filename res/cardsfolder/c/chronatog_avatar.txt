@@ -8,4 +8,3 @@ SVar:DBSkipTurn:DB$ AddTurn | NumTurns$ 1 | Defined$ Opponent
 SVar:RemAIDeck:True
 SVar:Picture:http://www.cardforge.org/fpics/vgd-lq/chronatog_avatar.jpg
 Oracle:Hand -1, life +1\nYou have no maximum hand size.\n{0}: Draw three cards. You skip your next turn. Activate this ability only once each turn.
-SetInfo:VAN Special

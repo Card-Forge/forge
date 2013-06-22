@@ -10,4 +10,3 @@ SVar:CoRNonDmg:DB$DealDamage | ValidTgts$ Creature.Spirit | TgtPrompt$ Select ta
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/clash_of_realities.jpg
 Oracle:All Spirits have "When this permanent enters the battlefield, you may have it deal 3 damage to target non-Spirit creature."\nNon-Spirit creatures have "When this creature enters the battlefield, you may have it deal 3 damage to target Spirit creature."
-SetInfo:BOK Rare

@@ -6,4 +6,3 @@ SVar:DBKillLand:DB$ DestroyAll | ValidCards$ Land | ChoiceDescription$ Destroy a
 SVar:DBKillCreatures:DB$ DestroyAll | ValidCards$ Creature | NoRegen$ True | ChoiceDescription$ Destroy all creatures. They can't be regenerated.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/catastrophe.jpg
 Oracle:Destroy all lands or all creatures. Creatures destroyed this way can't be regenerated.
-SetInfo:USG Rare
