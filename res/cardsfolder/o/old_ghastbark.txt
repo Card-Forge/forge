@@ -4,4 +4,3 @@ Types:Creature Treefolk Warrior
 PT:3/6
 SVar:Picture:http://www.wizards.com/global/images/magic/general/old_ghastbark.jpg
 Oracle:
-SetInfo:SHM Common

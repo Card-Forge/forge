@@ -2,11 +2,8 @@ Name:Orim's Thunder
 ManaCost:2 W
 Types:Instant
 K:Kicker R
-A:SP$ Destroy | Cost$ 2 W | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | RememberTargets$ True | ForgetOtherTargets$ True | SubAbility$ DBDamage | SpellDescription$ Destroy target artifact or enchantment. 
+A:SP$ Destroy | Cost$ 2 W | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | RememberTargets$ True | ForgetOtherTargets$ True | SubAbility$ DBDamage | SpellDescription$ Destroy target artifact or enchantment.
 SVar:DBDamage:DB$DealDamage | Condition$ Kicked | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ X | References$ X | SpellDescription$ If CARDNAME was kicked, it deals damage equal to that permanent's converted mana cost to target creature.
 SVar:X:Remembered$CardManaCost
 SVar:Picture:http://www.wizards.com/global/images/magic/general/orims_thunder.jpg
 Oracle:Kicker {R} (You may pay an additional {R} as you cast this spell.)\nDestroy target artifact or enchantment. If Orim's Thunder was kicked, it deals damage equal to that permanent's converted mana cost to target creature.
-SetInfo:APC Common
-SetInfo:COM Common
-SetInfo:HOP Common

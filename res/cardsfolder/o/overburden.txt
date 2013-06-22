@@ -8,4 +8,3 @@ SVar:TrigBounceOpp:AB$ ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/overburden.jpg
 Oracle:Whenever a player puts a nontoken creature onto the battlefield, that player returns a land he or she controls to its owner's hand.
-SetInfo:PCY Rare

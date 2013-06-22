@@ -7,4 +7,3 @@ SVar:DBDestroy:DB$ Destroy | Defined$ Remembered | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ouphe_vandals.jpg
 Oracle:{G}, Sacrifice Ouphe Vandals: Counter target activated ability from an artifact source and destroy that artifact if it's on the battlefield. (Mana abilities can't be targeted.)
-SetInfo:5DN Uncommon

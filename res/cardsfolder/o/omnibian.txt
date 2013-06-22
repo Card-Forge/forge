@@ -6,4 +6,3 @@ A:AB$ Animate | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creatur
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/omnibian.jpg
 Oracle:{T}: Target creature becomes a 3/3 Frog until end of turn.
-SetInfo:DIS Rare

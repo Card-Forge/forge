@@ -18,4 +18,3 @@ PT:3/3
 A:AB$Pump | Cost$ G Sac<1/Creature> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ 3 | NumDef$ 3 | SpellDescription$ Target creature gets +3/+3 until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shidako_broodmistress.jpg
 Oracle:{G}, Sacrifice a creature: Target creature gets +3/+3 until end of turn.
-SetInfo:CHK Uncommon

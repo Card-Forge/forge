@@ -6,4 +6,3 @@ K:Haunt:TrigDestroy:Destroy target creature that was dealt damage this turn.
 SVar:TrigDestroy:AB$ Destroy | Cost$ 0 | ValidTgts$ Creature.wasDealtDamageThisTurn | TgtPrompt$ Select target creature that was dealt damage this turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/orzhov_euthanist.jpg
 Oracle:Haunt (When this creature dies, exile it haunting target creature.)\nWhen Orzhov Euthanist enters the battlefield or the creature it haunts dies, destroy target creature that was dealt damage this turn.
-SetInfo:GPT Common

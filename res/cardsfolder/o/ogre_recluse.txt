@@ -8,4 +8,3 @@ SVar:AntiBuffedBy:Card
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ogre_recluse.jpg
 Oracle:Whenever a player casts a spell, tap Ogre Recluse.
-SetInfo:BOK Uncommon

@@ -7,4 +7,3 @@ SVar:TrigGainLife:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ Life | Refe
 SVar:Life:TriggeredCard$CardToughness
 SVar:Picture:http://www.wizards.com/global/images/magic/general/orchard_warden.jpg
 Oracle:Whenever another Treefolk creature enters the battlefield under your control, you may gain life equal to that creature's toughness.
-SetInfo:MOR Uncommon

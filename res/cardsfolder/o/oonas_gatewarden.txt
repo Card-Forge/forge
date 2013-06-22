@@ -7,4 +7,3 @@ K:Defender
 K:Wither
 SVar:Picture:http://www.wizards.com/global/images/magic/general/oonas_gatewarden.jpg
 Oracle:Defender, flying\nWither (This deals damage to creatures in the form of -1/-1 counters.)
-SetInfo:SHM Common

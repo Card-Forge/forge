@@ -8,4 +8,3 @@ SVar:X:Count$Valid Gate.YouCtrl
 DeckHints:Type$Gate
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ogre_jailbreaker.jpg
 Oracle:Defender\nOgre Jailbreaker can attack as though it didn't have defender as long as you control a Gate.
-SetInfo:RTR Common

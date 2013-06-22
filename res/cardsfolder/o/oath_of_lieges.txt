@@ -5,4 +5,3 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | Execute$ LiegesSearch | Tr
 SVar:LiegesSearch:DB$ ChangeZone | ValidTgts$ Opponent.withMoreLandsThanYou | TgtPrompt$ Choose target opponent who controls more land than you | DefinedPlayer$ TriggeredPlayer | Chooser$ TriggeredPlayer | Origin$ Library | Destination$ Battlefield | ChangeType$ Land.Basic | ChangeNum$ 1 | Optional$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/oath_of_lieges.jpg
 Oracle:At the beginning of each player's upkeep, that player chooses target player who controls more lands than he or she does and is his or her opponent. The first player may search his or her library for a basic land card, put that card onto the battlefield, then shuffle his or her library.
-SetInfo:EXO Rare

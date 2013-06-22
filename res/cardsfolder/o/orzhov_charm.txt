@@ -12,4 +12,3 @@ SVar:DBZombify:DB$ ChangeZone | ValidTgts$ Creature.cmcLE1+YouOwn | TgtPrompt$ S
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/orzhov_charm.jpg
 Oracle:Choose one — Return target creature you control and all Auras you control attached to it to their owner's hand; or destroy target creature and you lose life equal to its toughness; or return target creature card with converted mana cost 1 or less from your graveyard to the battlefield.
-SetInfo:GTC Uncommon

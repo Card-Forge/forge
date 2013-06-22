@@ -14,4 +14,3 @@ SVar:DBOmenPlayOpp:DB$ Play | ValidZone$ Exile | Controller$ TriggeredPlayer | V
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/omen_machine.jpg
 Oracle:Players can't draw cards.\nAt the beginning of each player's draw step, that player exiles the top card of his or her library. If it's a land card, the player puts it onto the battlefield. Otherwise, the player casts it without paying its mana cost if able.
-SetInfo:NPH Rare

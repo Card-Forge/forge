@@ -6,5 +6,3 @@ SVar:TrigDiscard:AB$Discard | Cost$ 0 | Defined$ TriggeredActivator | NumCards$ 
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/oppression.jpg
 Oracle:Whenever a player casts a spell, that player discards a card.
-SetInfo:7ED Rare
-SetInfo:USG Rare

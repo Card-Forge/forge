@@ -5,4 +5,3 @@ PT:2/1
 A:AB$ Pump | Cost$ 1 B | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | KW$ Deathtouch | SpellDescription$ Target creature you control gains deathtouch until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/onyx_mage.jpg
 Oracle:{1}{B}: Target creature you control gains deathtouch until end of turn. (Any amount of damage it deals to a creature is enough to destroy it.)
-SetInfo:M12 Uncommon

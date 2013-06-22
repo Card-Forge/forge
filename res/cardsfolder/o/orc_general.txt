@@ -6,4 +6,3 @@ A:AB$ PumpAll | Cost$ T Sac<1/Goblin.Other;Orc.Other/another Orc or Goblin> | Va
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/orc_general.jpg
 Oracle:{T}, Sacrifice another Orc or Goblin: Other Orc creatures get +1/+1 until end of turn.
-SetInfo:DRK Uncommon

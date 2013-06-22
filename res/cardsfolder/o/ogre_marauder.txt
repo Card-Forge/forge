@@ -11,4 +11,3 @@ SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ogre_marauder.jpg
 Oracle:Whenever Ogre Marauder attacks, it gains "Ogre Marauder is unblockable" until end of turn unless defending player sacrifices a creature.
-SetInfo:BOK Uncommon

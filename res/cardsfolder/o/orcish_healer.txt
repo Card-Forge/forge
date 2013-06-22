@@ -9,4 +9,3 @@ SVar:RemRandomDeck:True
 DeckNeeds:Color$Green|Black
 SVar:Picture:http://www.wizards.com/global/images/magic/general/orcish_healer.jpg
 Oracle:{R}{R}, {T}: Target creature can't be regenerated this turn.\n{B}{B}{R}, {T}: Regenerate target black or green creature.\n{R}{G}{G}, {T}: Regenerate target black or green creature.
-SetInfo:ICE Uncommon

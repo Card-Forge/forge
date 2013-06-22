@@ -6,4 +6,3 @@ T:Mode$ Attacks | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ TrigPum
 SVar:TrigPump:AB$Pump | Cost$ W | Defined$ Self | KW$ Flying
 SVar:Picture:http://www.wizards.com/global/images/magic/general/order_of_the_golden_cricket.jpg
 Oracle:Whenever Order of the Golden Cricket attacks, you may pay {W}. If you do, it gains flying until end of turn.
-SetInfo:MOR Common

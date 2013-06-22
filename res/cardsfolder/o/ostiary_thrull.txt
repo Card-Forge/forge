@@ -7,4 +7,3 @@ SVar:RemRandomDeck:True
 DeckNeeds:Color$white
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ostiary_thrull.jpg
 Oracle:{W}, {T}: Tap target creature.
-SetInfo:GPT Common

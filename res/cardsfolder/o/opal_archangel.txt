@@ -5,4 +5,3 @@ T:Mode$ SpellCast | ValidCard$ Creature | ValidActivatingPlayer$ Opponent | Trig
 SVar:TrigAnimate:AB$Animate | Cost$ 0 | Defined$ Self | Power$ 5 | Toughness$ 5  | Keywords$ Flying & Vigilance | Types$ Creature,Angel | OverwriteTypes$ True | Permanent$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/opal_archangel.jpg
 Oracle:When an opponent casts a creature spell, if Opal Archangel is an enchantment, Opal Archangel becomes a 5/5 Angel creature with flying and vigilance.
-SetInfo:USG Rare

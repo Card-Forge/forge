@@ -8,4 +8,3 @@ SVar:MaxTgts:Count$Valid Creature
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/outmaneuver.jpg
 Oracle:X target blocked creatures assign their combat damage this turn as though they weren't blocked.
-SetInfo:USG Uncommon

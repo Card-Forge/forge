@@ -13,6 +13,5 @@ ALTERNATE
 Name:Ends
 ManaCost:3 R W
 Types:Instant
-A:SP$ Sacrifice | Cost$ 3 R W | ValidTgts$ Player | TgtPrompt$ Select target player to make sacrifice | Amount$ 2 | SacValid$ Creature.attacking | SpellDescription$ Target player sacrifices two attacking creatures. 
+A:SP$ Sacrifice | Cost$ 3 R W | ValidTgts$ Player | TgtPrompt$ Select target player to make sacrifice | Amount$ 2 | SacValid$ Creature.attacking | SpellDescription$ Target player sacrifices two attacking creatures.
 Oracle:Target player sacrifices two attacking creatures.
-SetInfo:DIS Rare

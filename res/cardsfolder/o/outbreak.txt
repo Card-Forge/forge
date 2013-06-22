@@ -7,4 +7,3 @@ SVar:AltCost:Cost$ Discard<1/Swamp>
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/outbreak.jpg
 Oracle:You may discard a Swamp card rather than pay Outbreak's mana cost.\nChoose a creature type. All creatures of that type get -1/-1 until end of turn.
-SetInfo:PCY Uncommon

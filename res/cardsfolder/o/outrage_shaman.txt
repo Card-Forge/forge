@@ -8,4 +8,3 @@ SVar:X:Count$Chroma.R
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/outrage_shaman.jpg
 Oracle:Chroma - When Outrage Shaman enters the battlefield, it deals damage to target creature equal to the number of red mana symbols in the mana costs of permanents you control.
-SetInfo:EVE Uncommon

@@ -4,5 +4,3 @@ Types:Creature Human Monk
 PT:4/3
 SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card82943.jpg
 Oracle:
-SetInfo:CHK Common
-SetInfo:9ED Common

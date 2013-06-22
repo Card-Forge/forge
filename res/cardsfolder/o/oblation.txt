@@ -5,5 +5,3 @@ A:SP$ ChangeZone | Cost$ 2 W | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select 
 SVar:DBDraw:DB$ Draw | Defined$ TargetedOwner | NumCards$ 2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/oblation.jpg
 Oracle:The owner of target nonland permanent shuffles it into his or her library, then draws two cards.
-SetInfo:ONS Rare
-SetInfo:COM Rare

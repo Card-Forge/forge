@@ -4,4 +4,3 @@ Types:Instant
 A:SP$ Counter | Cost$ U | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | TargetValidTargeting$ Player | SpellDescription$ Counter target spell that targets a player.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/outwit.jpg
 Oracle:Counter target spell that targets a player.
-SetInfo:AVR Common

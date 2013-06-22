@@ -5,4 +5,3 @@ S:Mode$ Continuous | Affected$ Card.nonLand+YouOwn | AddHiddenKeyword$ May be pl
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/omniscience.jpg
 Oracle:You may cast nonland cards from your hand without paying their mana costs.
-SetInfo:M13 Mythic

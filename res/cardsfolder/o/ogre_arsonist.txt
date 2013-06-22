@@ -6,4 +6,3 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigDestroy:DB$Destroy | ValidTgts$ Land | TgtPrompt$ Select a land.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ogre_arsonist.jpg
 Oracle:When Ogre Arsonist enters the battlefield, destroy target land.
-SetInfo:PO2 Uncommon

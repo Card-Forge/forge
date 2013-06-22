@@ -8,4 +8,3 @@ SVar:RolledChaos:AB$ ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Exi
 SVar:OneEach:PlayerCountOpponents$Amount
 SVar:Picture:http://www.wizards.com/global/images/magic/general/orzhova.jpg
 Oracle:When you planeswalk away from Orzhova, each player returns all creature cards from his or her graveyard to the battlefield.\nWhenever you roll {C}, for each opponent, exile up to one target creature card from that player's graveyard.
-SetInfo:PC2 Common

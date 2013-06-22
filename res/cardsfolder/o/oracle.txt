@@ -7,4 +7,3 @@ SVar:Reconsider:DB$ RemoveFromCombat | Defined$ Targeted
 SVar:RemAIDeck:True
 SVar:Picture:http://www.cardforge.org/fpics/vgd-lq/oracle.jpg
 Oracle:Hand +1, life +9\n{0}: Untap target attacking creature you control and remove it from combat.
-SetInfo:VAN Special

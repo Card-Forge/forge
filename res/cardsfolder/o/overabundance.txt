@@ -7,4 +7,3 @@ SVar:DBMana:DB$ ManaReflected | ColorOrType$ Type | Valid$ Defined.Triggered | R
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/overabundance.jpg
 Oracle:Whenever a player taps a land for mana, that player adds one mana to his or her mana pool of any type that land produced, and Overabundance deals 1 damage to him or her.
-SetInfo:INV Rare

@@ -6,4 +6,3 @@ SVar:DBDrawCard:DB$ Draw | NumCards$ X | References$ X
 SVar:X:Remembered$Amount
 SVar:Picture:http://www.wizards.com/global/images/magic/general/overwhelming_forces.jpg
 Oracle:Destroy all creatures target opponent controls. Draw a card for each creature destroyed this way.
-SetInfo:PTK Rare

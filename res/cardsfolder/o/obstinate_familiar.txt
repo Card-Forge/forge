@@ -6,4 +6,3 @@ R:Event$ Draw | ActiveZones$ Battlefield | ValidPlayer$ You | Optional$ True | P
 SVar:AIHandling:Count$InYourLibrary
 SVar:Picture:http://www.wizards.com/global/images/magic/general/obstinate_familiar.jpg
 Oracle:If you would draw a card, you may skip that draw instead.
-SetInfo:ODY Rare

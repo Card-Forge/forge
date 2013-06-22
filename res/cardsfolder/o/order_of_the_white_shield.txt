@@ -7,5 +7,3 @@ A:AB$ Pump | Cost$ W | KW$ First Strike | SpellDescription$ CARDNAME gains first
 A:AB$ Pump | Cost$ W W | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/order_of_the_white_shield.jpg
 Oracle:Protection from black\n{W}: Order of the White Shield gains first strike until end of turn.\n{W}{W}: Order of the White Shield gets +1/+0 until end of turn.
-SetInfo:ICE Uncommon
-SetInfo:5ED Uncommon

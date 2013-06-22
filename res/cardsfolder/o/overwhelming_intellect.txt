@@ -6,5 +6,3 @@ SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ X | References$ X
 SVar:X:Targeted$CardManaCost
 SVar:Picture:http://www.wizards.com/global/images/magic/general/overwhelming_intellect.jpg
 Oracle:Counter target creature spell. Draw cards equal to that spell's converted mana cost.
-SetInfo:DDJ Uncommon
-SetInfo:SOK Uncommon

@@ -6,4 +6,3 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigDraw:AB$ Draw | Cost$ 0 | NumCards$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/opal_lake_gatekeepers.jpg
 Oracle:When Opal Lake Gatekeepers enters the battlefield, if you control two or more Gates, you may draw a card.
-SetInfo:DGM Common

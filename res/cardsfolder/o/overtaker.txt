@@ -6,5 +6,3 @@ A:AB$ GainControl | Cost$ 3 U T Discard<1/Card> | ValidTgts$ Creature | TgtPromp
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/overtaker.jpg
 Oracle:{3}{U}, {T}, Discard a card: Untap target creature and gain control of it until end of turn. That creature gains haste until end of turn.
-SetInfo:MMQ Rare
-SetInfo:MBP Rare

@@ -6,4 +6,3 @@ T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChao
 SVar:RolledChaos:AB$ PumpAll | Cost$ 0 | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | KW$ First Strike
 SVar:Picture:http://www.wizards.com/global/images/magic/general/onakke_catacomb.jpg
 Oracle:All creatures are black and have deathtouch.\nWhenever you roll {C}, creatures you control get +1/+0 and gain first strike until end of turn.
-SetInfo:PC2 Common

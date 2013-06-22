@@ -6,4 +6,3 @@ SVar:TrigGainLife:AB$ GainLife | Cost$ 0 | LifeAmount$ X | References$ X
 SVar:X:Count$Valid Creature.attacking
 SVar:Picture:http://www.wizards.com/global/images/magic/general/orims_prayer.jpg
 Oracle:Whenever one or more creatures attack you, you gain 1 life for each attacking creature.
-SetInfo:TMP Uncommon

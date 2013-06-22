@@ -9,5 +9,3 @@ SVar:DBDiscard:DB$Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/owl_familiar.jpg
 Oracle:Flying\nWhen Owl Familiar enters the battlefield, draw a card, then discard a card.
-SetInfo:S99 Uncommon
-SetInfo:POR Common

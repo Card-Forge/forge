@@ -7,4 +7,3 @@ K:Protection from black
 K:Protection from red
 SVar:Picture:http://www.wizards.com/global/images/magic/general/oversoul_of_dusk.jpg
 Oracle:Protection from blue, from black, and from red
-SetInfo:SHM Rare

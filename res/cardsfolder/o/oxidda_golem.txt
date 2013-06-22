@@ -9,5 +9,3 @@ SVar:RemRandomDeck:True
 DeckNeeds:Color$Red
 SVar:Picture:http://www.wizards.com/global/images/magic/general/oxidda_golem.jpg
 Oracle:Affinity for Mountains (This spell costs {1} less to cast for each Mountain you control.)\nHaste
-SetInfo:DD2 Common
-SetInfo:DST Common

@@ -6,4 +6,3 @@ T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChao
 SVar:RolledChaos:AB$ AddTurn | Cost$ 0 | NumTurns$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/otaria.jpg
 Oracle:Instant and sorcery cards in graveyards have flashback. The flashback cost is equal to the card's mana cost. (Its owner may cast the card from his or her graveyard for its mana cost. Then he or she exiles it.)\nWhenever you roll {C}, take an extra turn after this one.
-SetInfo:HOP Common

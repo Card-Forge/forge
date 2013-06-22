@@ -5,4 +5,3 @@ A:AB$ GainLife | Cost$ Sac<1/Land> | Defined$ You | LifeAmount$ 3 | SpellDescrip
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/overgrown_estate.jpg
 Oracle:Sacrifice a land: You gain 3 life.
-SetInfo:APC Rare

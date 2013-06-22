@@ -8,4 +8,3 @@ SVar:TrigAttach:DB$ Attach | Cost$ 0 | Defined$ TriggeredCard
 SVar:BuffedBy:Creature.Warrior
 SVar:Picture:http://www.wizards.com/global/images/magic/general/obsidian_battle_axe.jpg
 Oracle:Equipped creature gets +2/+1 and has haste.\nWhenever a Warrior creature enters the battlefield, you may attach Obsidian Battle-Axe to it.\nEquip {3}
-SetInfo:MOR Uncommon

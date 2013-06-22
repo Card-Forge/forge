@@ -6,4 +6,3 @@ A:SP$PumpAll | Cost$ 5 G G | ValidCards$ Creature.YouCtrl | NumAtt$ 3 | NumDef$ 
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/overwhelm.jpg
 Oracle:Convoke (Each creature you tap while casting this spell reduces its cost by {1} or by one mana of that creature's color.)\nCreatures you control get +3/+3 until end of turn.
-SetInfo:RAV Uncommon

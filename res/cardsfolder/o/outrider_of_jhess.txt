@@ -5,4 +5,3 @@ PT:2/2
 K:Exalted
 SVar:Picture:http://www.wizards.com/global/images/magic/general/outrider_of_jhess.jpg
 Oracle:Exalted (Whenever a creature you control attacks alone, that creature gets +1/+1 until end of turn.)
-SetInfo:ALA Common

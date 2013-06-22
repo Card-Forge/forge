@@ -7,4 +7,3 @@ SVar:TrigBattalionPump:AB$ Pump | Cost$ 0 | KW$ Double Strike
 SVar:BattalionTest:Count$Valid Creature.attacking+Other
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ordruun_veteran.jpg
 Oracle:Battalion - Whenever Ordruun Veteran and at least two other creatures attack, Ordruun Veteran gains double strike until end of turn. (It deals both first-strike and regular combat damage.)
-SetInfo:GTC Uncommon

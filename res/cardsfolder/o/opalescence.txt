@@ -7,4 +7,3 @@ SVar:PlayMain1:TRUE
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/opalescence.jpg
 Oracle:Each other non-Aura enchantment is a creature with power and toughness each equal to its converted mana cost. It's still an enchantment.
-SetInfo:UDS Rare

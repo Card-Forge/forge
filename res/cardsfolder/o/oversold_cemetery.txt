@@ -5,4 +5,3 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | OptionalDecider$ You | IsPres
 SVar:TrigReturn:AB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Hand | Hidden$ True | ChangeType$ Creature.YouOwn | ChangeNum$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/oversold_cemetery.jpg
 Oracle:At the beginning of your upkeep, if you have four or more creature cards in your graveyard, you may return target creature card from your graveyard to your hand.
-SetInfo:ONS Rare

@@ -8,5 +8,3 @@ A:AB$ Mana | Cost$ T | Produced$ W B | SpellDescription$ Add W B to your mana po
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/orzhov_basilica.jpg
 Oracle:Orzhov Basilica enters the battlefield tapped.\nWhen Orzhov Basilica enters the battlefield, return a land you control to its owner's hand.\n{T}: Add {W}{B} to your mana pool.
-SetInfo:GPT Common
-SetInfo:COM Common

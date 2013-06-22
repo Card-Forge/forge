@@ -7,4 +7,3 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | IsPresent$ Creature | Present
 SVar:TrigBounce:AB$ ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Hand | Mandatory$ True | Hidden$ True | ChangeType$ Creature.YouCtrl
 SVar:Picture:http://www.cardforge.org/fpics/vgd-lq/oni_of_wild_places_avatar.jpg
 Oracle:Hand +0, life -2\nCreatures you control have haste.\nAt the beginning of your upkeep, return a creature you control to its owner's hand.
-SetInfo:VAN Special

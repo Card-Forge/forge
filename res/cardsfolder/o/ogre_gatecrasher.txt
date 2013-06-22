@@ -6,4 +6,3 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigDestroy:DB$Destroy | ValidTgts$ Creature.withDefender | TgtPrompt$ Select target creature with defender.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ogre_gatecrasher.jpg
 Oracle:When Ogre Gatecrasher enters the battlefield, destroy target creature with defender.
-SetInfo:DIS Common

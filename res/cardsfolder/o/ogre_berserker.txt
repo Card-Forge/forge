@@ -5,4 +5,3 @@ PT:4/2
 K:Haste
 SVar:Picture:http://serv3.tcgimages.eu/img/cards/Portal_Second_Age/ogre_berserker.jpg
 Oracle:Haste
-SetInfo:PO2 Common

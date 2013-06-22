@@ -5,4 +5,3 @@ A:SP$ Pump | Cost$ W | ValidTgts$ Creature | TgtPrompt$ Select target creature |
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/off_balance.jpg
 Oracle:Target creature can't attack or block this turn.
-SetInfo:NMS Common

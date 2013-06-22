@@ -6,4 +6,3 @@ A:SP$ ChangeZone | Cost$ W | Origin$ Battlefield | Destination$ Library | ValidT
 SVar:DBGainLife:DB$GainLife | Defined$ TargetedController | LifeAmount$ 3
 SVar:Picture:http://www.wizards.com/global/images/magic/general/oust.jpg
 Oracle:Put target creature into its owner's library second from the top. Its controller gains 3 life.
-SetInfo:ROE Uncommon

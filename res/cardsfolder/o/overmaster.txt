@@ -9,4 +9,3 @@ SVar:DBCleanup:DB$ ChangeZone | Defined$ Self | Origin$ Battlefield | Destinatio
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/overmaster.jpg
 Oracle:The next instant or sorcery spell you cast this turn can't be countered by spells or abilities.\nDraw a card.
-SetInfo:TOR Rare

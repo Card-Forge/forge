@@ -8,5 +8,3 @@ SVar:DBPump:DB$Pump | Cost$ 0 | KW$ HIDDEN CARDNAME assigns no combat damage
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ophidian.jpg
 Oracle:Whenever Ophidian attacks and isn't blocked, you may draw a card. If you do, Ophidian assigns no combat damage this turn.
-SetInfo:DD2 Common
-SetInfo:WTH Common

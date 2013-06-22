@@ -7,4 +7,3 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ornate_kanzashi.jpg
 Oracle:{2}, {T}: Target opponent exiles the top card of his or her library. You may play that card this turn.
-SetInfo:BOK Rare

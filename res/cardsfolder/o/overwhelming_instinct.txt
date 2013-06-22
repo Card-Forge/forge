@@ -6,4 +6,3 @@ SVar:TrigDraw:AB$ Draw | Cost$ 0 | NumCards$ 1
 SVar:OverwhelmInstinct:Count$Valid Creature.attacking
 SVar:Picture:http://www.wizards.com/global/images/magic/general/overwhelming_instinct.jpg
 Oracle:Whenever you attack with three or more creatures, draw a card.
-SetInfo:ONS Uncommon

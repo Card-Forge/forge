@@ -8,4 +8,3 @@ SVar:ChooseColor:DB$ ChooseColor | Defined$ You | SpellDescription$ As CARDNAME 
 K:Protection:Card.ChosenColor:CARDNAME has protection from the chosen color.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/order_of_the_stars.jpg
 Oracle:Defender (This creature can't attack.)\nAs Order of the Stars enters the battlefield, choose a color.\nOrder of the Stars has protection from the chosen color.
-SetInfo:GPT Uncommon

@@ -7,4 +7,3 @@ SVar:X:Count$Kicked.5.2
 SVar:Y:Targeted$CardManaCost
 SVar:Picture:http://www.wizards.com/global/images/magic/general/overload.jpg
 Oracle:Kicker {2} (You may pay an additional {2} as you cast this spell.)\nDestroy target artifact if its converted mana cost is 2 or less. If Overload was kicked, destroy that artifact if its converted mana cost is 5 or less instead.
-SetInfo:INV Common

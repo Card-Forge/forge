@@ -5,5 +5,3 @@ PT:1/1
 A:AB$ Dig | Cost$ T | ValidTgts$ Player | TgtPrompt$ Select target player | DigNum$ 3 | NoMove$ True | SpellDescription$ Look at the top three cards of target player's library.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/orcish_spy.jpg
 Oracle:{T}: Look at the top three cards of target player's library.
-SetInfo:8ED Common
-SetInfo:FEM Common x3

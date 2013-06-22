@@ -14,4 +14,3 @@ SVar:RemAIDeck:True
 DeckHints:Type$Samurai
 SVar:Picture:http://www.wizards.com/global/images/magic/general/oathkeeper_takenos_daisho.jpg
 Oracle:Equipped creature gets +3/+1.\nWhenever equipped creature dies, return that card to the battlefield under your control if it's a Samurai card.\nWhen Oathkeeper, Takeno's Daisho is put into a graveyard from the battlefield, exile equipped creature.\nEquip {2}
-SetInfo:CHK Rare

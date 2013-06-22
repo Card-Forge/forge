@@ -6,4 +6,3 @@ T:Mode$ AttackerBlocked | ValidCard$ Card.Self | ValidBlocker$ Creature.Artifact
 SVar:TrigDestroy:AB$Destroy | Cost$ 0 | Defined$ TriggeredBlocker
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ogre_leadfoot.jpg
 Oracle:Whenever Ogre Leadfoot becomes blocked by an artifact creature, destroy that creature.
-SetInfo:MRD Common

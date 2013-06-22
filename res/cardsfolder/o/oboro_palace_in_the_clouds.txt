@@ -5,4 +5,3 @@ A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add U to your mana pool.
 A:AB$ ChangeZone | Cost$ 1 | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return CARDNAME to its owner's hand.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/oboro_palace_in_the_clouds.jpg
 Oracle:{T}: Add {U} to your mana pool.\n{1}: Return Oboro, Palace in the Clouds to its owner's hand.
-SetInfo:SOK Rare

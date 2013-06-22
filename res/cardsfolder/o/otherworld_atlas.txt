@@ -7,4 +7,3 @@ SVar:X:Count$CardCounters.CHARGE
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/otherworld_atlas.jpg
 Oracle:{T}: Put a charge counter on Otherworld Atlas.\n{T}: Each player draws a card for each charge counter on Otherworld Atlas.
-SetInfo:AVR Rare

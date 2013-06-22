@@ -4,10 +4,3 @@ Types:Sorcery
 A:SP$ PumpAll | Cost$ 2 G G G | ValidCards$ Creature.YouCtrl | NumAtt$ +3 | NumDef$ +3 | KW$ Trample | SpellDescription$ Creatures you control get +3/+3 and gain trample until end of turn.
 SVar:Picture:http://resources.wizards.com/magic/cards/10e/en/card130506.jpg
 Oracle:Creatures you control get +3/+3 and gain trample until end of turn.
-SetInfo:PC2 Uncommon
-SetInfo:ODY Uncommon
-SetInfo:10E Uncommon
-SetInfo:M10 Uncommon
-SetInfo:M12 Uncommon
-SetInfo:TMP Uncommon
-SetInfo:DDD Uncommon

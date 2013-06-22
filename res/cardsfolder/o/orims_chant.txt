@@ -8,4 +8,3 @@ SVar:CantBeCast:Mode$ CantBeCast | EffectZone$ Command | ValidCard$ Card | Caste
 SVar:CantAttack:Mode$ Continuous | EffectZone$ Command | Affected$ Creature | AffectedZone$ Battlefield | AddHiddenKeyword$ CARDNAME can't attack. | Description$ Creatures can't attack this turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/orims_chant.jpg
 Oracle:Kicker {W} (You may pay an additional {W} as you cast this spell.)\nTarget player can't cast spells this turn.\nIf Orim's Chant was kicked, creatures can't attack this turn.
-SetInfo:PLS Rare

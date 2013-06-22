@@ -8,4 +8,3 @@ T:Mode$ DamageDone | ValidSource$ Card.AttachedBy | ValidTarget$ Opponent | Exec
 SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ophidian_eye.jpg
 Oracle:Flash (You may cast this spell any time you could cast an instant.)\nEnchant creature\nWhenever enchanted creature deals damage to an opponent, you may draw a card.
-SetInfo:TSP Common

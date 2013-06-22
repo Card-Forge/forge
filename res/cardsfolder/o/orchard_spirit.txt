@@ -5,4 +5,3 @@ PT:2/2
 K:CantBeBlockedBy Creature.withoutFlying+withoutReach
 SVar:Picture:http://www.wizards.com/global/images/magic/general/orchard_spirit.jpg
 Oracle:Orchard Spirit can't be blocked except by creatures with flying or reach.
-SetInfo:ISD Common

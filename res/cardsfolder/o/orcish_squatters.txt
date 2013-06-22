@@ -7,5 +7,3 @@ SVar:TrigGainControl:AB$ GainControl | Cost$ 0 | ValidTgts$ Land.DefenderCtrl | 
 SVar:DBPump:DB$ Pump | Defined$ Self | KW$ HIDDEN CARDNAME assigns no combat damage
 SVar:Picture:http://www.wizards.com/global/images/magic/general/orcish_squatters.jpg
 Oracle:Whenever Orcish Squatters attacks and isn't blocked, you may gain control of target land defending player controls for as long as you control Orcish Squatters. If you do, Orcish Squatters assigns no combat damage this turn.
-SetInfo:ICE Rare
-SetInfo:5ED Rare

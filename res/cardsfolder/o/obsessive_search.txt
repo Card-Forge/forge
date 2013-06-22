@@ -5,4 +5,3 @@ A:SP$ Draw | Cost$ U | NumCards$ 1 | SpellDescription$ Draw a card.
 K:Madness:U
 SVar:Picture:http://www.wizards.com/global/images/magic/general/obsessive_search.jpg
 Oracle:Draw a card.\nMadness {U} (If you discard this card, you may cast it for its madness cost instead of putting it into your graveyard.)
-SetInfo:TOR Common

@@ -7,14 +7,3 @@ SVar:DBDealDamage:DB$DealDamage | Defined$ You | NumDmg$ 3
 SVar:RemAIDeck:True
 SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83193.jpg
 Oracle:{T}: Orcish Artillery deals 2 damage to target creature or player and 3 damage to you.
-SetInfo:8ED Uncommon
-SetInfo:2ED Uncommon
-SetInfo:7ED Uncommon
-SetInfo:6ED Uncommon
-SetInfo:9ED Uncommon
-SetInfo:10E Uncommon
-SetInfo:LEB Uncommon
-SetInfo:LEA Uncommon
-SetInfo:5ED Uncommon
-SetInfo:4ED Uncommon
-SetInfo:3ED Uncommon

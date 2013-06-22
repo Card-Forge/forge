@@ -17,4 +17,3 @@ A:AB$ PreventDamage | Cost$ 1 W | Defined$ Self | Amount$ 1 | SpellDescription$ 
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/opal_eye_kondas_yojimbo.jpg
 Oracle:Defender (This creature can't attack.)\nBushido 1 (When this blocks or becomes blocked, it gets +1/+1 until end of turn.)\n{T}: The next time a source of your choice would deal damage this turn, that damage is dealt to Opal-Eye, Konda's Yojimbo instead.\n{1}{W}: Prevent the next 1 damage that would be dealt to Opal-Eye this turn.
-SetInfo:BOK Rare

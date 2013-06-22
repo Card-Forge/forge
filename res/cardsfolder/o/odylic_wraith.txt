@@ -7,4 +7,3 @@ T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player  | Execute$ Tr
 SVar:TrigDiscard:AB$Discard | Cost$ 0 | Defined$ TriggeredTarget | NumCards$ 1 | Mode$ TgtChoose
 SVar:Picture:http://www.wizards.com/global/images/magic/general/odylic_wraith.jpg
 Oracle:Swampwalk\nWhenever Odylic Wraith deals damage to a player, that player discards a card.
-SetInfo:WTH Uncommon

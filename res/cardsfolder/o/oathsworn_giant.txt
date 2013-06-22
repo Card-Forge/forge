@@ -7,4 +7,3 @@ S:Mode$ Continuous | Affected$ Creature.Other+YouCtrl | AddToughness$ 2 | AddKey
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/oathsworn_giant.jpg
 Oracle:Vigilance\nOther creatures you control get +0/+2 and have vigilance.
-SetInfo:RAV Uncommon

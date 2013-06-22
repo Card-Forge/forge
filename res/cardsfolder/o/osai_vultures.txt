@@ -9,5 +9,3 @@ A:AB$ Pump | Cost$ SubCounter<2/CARRION> | NumAtt$ 1 | NumDef$ 1 | Defined$ Self
 SVar:X:Count$ThisTurnEntered_Graveyard_from_Battlefield_Creature
 SVar:Picture:http://www.wizards.com/global/images/magic/general/osai_vultures.jpg
 Oracle:Flying\nAt the beginning of each end step, if a creature died this turn, put a carrion counter on Osai Vultures.\nRemove two carrion counters from Osai Vultures: Osai Vultures gets +1/+1 until end of turn.
-SetInfo:LEG Common
-SetInfo:4ED Uncommon

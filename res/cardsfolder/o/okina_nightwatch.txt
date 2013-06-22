@@ -7,4 +7,3 @@ SVar:X:Count$InYourHand
 SVar:Y:PlayerCountOpponents$HighestCardsInHand
 SVar:Picture:http://www.wizards.com/global/images/magic/general/okina_nightwatch.jpg
 Oracle:As long as you have more cards in hand than each opponent, Okina Nightwatch gets +3/+3.
-SetInfo:SOK Common

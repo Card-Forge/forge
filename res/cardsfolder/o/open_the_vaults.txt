@@ -5,4 +5,3 @@ A:SP$ ChangeZoneAll | Cost$ 4 W W | ChangeType$ Artifact,Enchantment | Origin$ G
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/open_the_vaults.jpg
 Oracle:Return all artifact and enchantment cards from all graveyards to the battlefield under their owners' control. (Auras with nothing to enchant remain in graveyards.)
-SetInfo:M10 Rare

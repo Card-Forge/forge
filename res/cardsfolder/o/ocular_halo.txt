@@ -8,4 +8,3 @@ A:AB$ Pump | Cost$ W | Defined$ Enchanted | KW$ Vigilance | SpellDescription$ En
 SVar:Draw:AB$Draw | Cost$ T | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ocular_halo.jpg
 Oracle:Enchant creature\nEnchanted creature has "{T}: Draw a card."\n{W}: Enchanted creature gains vigilance until end of turn.
-SetInfo:DIS Common

@@ -5,4 +5,3 @@ PT:1/1
 A:AB$ Regenerate | Cost$ 1 BG | SpellDescription$ Regenerate CARDNAME.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/odious_trow.jpg
 Oracle:{1}{B/G}: Regenerate Odious Trow.
-SetInfo:EVE Common

@@ -6,4 +6,3 @@ SVar:NonStackingEffect:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/orb_of_dreams.jpg
 Oracle:Permanents enter the battlefield tapped.
-SetInfo:BOK Rare

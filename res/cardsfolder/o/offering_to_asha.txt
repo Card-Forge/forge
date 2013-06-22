@@ -5,4 +5,3 @@ A:SP$ Counter | Cost$ 2 W U | TargetType$ Spell | TgtPrompt$ Select target spell
 SVar:DBGainLife:DB$GainLife | LifeAmount$ 4
 SVar:Picture:http://www.wizards.com/global/images/magic/general/offering_to_asha.jpg
 Oracle:Counter target spell unless its controller pays {4}. You gain 4 life.
-SetInfo:ARB Common

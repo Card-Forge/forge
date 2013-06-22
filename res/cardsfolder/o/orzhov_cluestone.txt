@@ -7,4 +7,3 @@ A:AB$ Draw | Cost$ W B T Sac<1/CARDNAME> | NumCards$ 1 | SpellDescription$ Draw 
 DeckNeeds:Color$White|Black
 SVar:Picture:http://www.wizards.com/global/images/magic/general/orzhov_cluestone.jpg
 Oracle:{T}: Add {W} or {B} to your mana pool.\n{W}{B}, {T}, Sacrifice Orzhov Cluestone: Draw a card.
-SetInfo:DGM Common

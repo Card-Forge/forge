@@ -4,4 +4,3 @@ Types:Enchantment
 Text:At the beginning of each player's upkeep, that player chooses target player whose graveyard has fewer creature cards in it than his or her graveyard does and is his or her opponent. The first player may return a creature card from his or her graveyard to his or her hand.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/oath_of_ghouls.jpg
 Oracle:At the beginning of each player's upkeep, that player chooses target player whose graveyard has fewer creature cards in it than his or her graveyard does and is his or her opponent. The first player may return a creature card from his or her graveyard to his or her hand.
-SetInfo:EXO Rare
