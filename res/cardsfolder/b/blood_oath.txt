@@ -10,4 +10,3 @@ SVar:Y:Remembered$Valid Card.ChosenType
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blood_oath.jpg
 Oracle:Choose a card type. Target opponent reveals his or her hand. Blood Oath deals 3 damage to that player for each card of the chosen type revealed this way. (Artifact, creature, enchantment, instant, land, planeswalker, sorcery, and tribal are card types.)
-SetInfo:MMQ Rare

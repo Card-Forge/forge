@@ -7,4 +7,3 @@ SVar:X:Count$Valid Permanent.MultiColor+Other+YouCtrl
 SVar:BuffedBy:Permanent.MultiColor
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bant_sureblade.jpg
 Oracle:As long as you control another multicolored permanent, Bant Sureblade gets +1/+1 and has first strike.
-SetInfo:ARB Common

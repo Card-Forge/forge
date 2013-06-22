@@ -6,5 +6,3 @@ A:AB$ Mana | Cost$ B T Discard<1/Card> | Produced$ B | Amount$ 3 | SpellDescript
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bog_witch.jpg
 Oracle:{B}, {T}, Discard a card: Add {B}{B}{B} to your mana pool.
-SetInfo:MMQ Common
-SetInfo:ARC Common

@@ -6,4 +6,3 @@ A:AB$ Pump | Cost$ R T Discard<1/Card> | ValidTgts$ Creature | TgtPrompt$ Select
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bola_warrior.jpg
 Oracle:{R}, {T}, Discard a card: Target creature can't block this turn.
-SetInfo:NMS Common

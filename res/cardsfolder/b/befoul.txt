@@ -4,6 +4,3 @@ Types:Sorcery
 A:SP$ Destroy | Cost$ 2 B B | ValidTgts$ Land,Creature.nonBlack | TgtPrompt$ Select target land or nonblack creature | NoRegen$ True | SpellDescription$ Destroy target land or nonblack creature. It can't be regenerated.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/befoul.jpg
 Oracle:Destroy target land or nonblack creature. It can't be regenerated.
-SetInfo:7ED Uncommon
-SetInfo:CHK Common
-SetInfo:USG Common

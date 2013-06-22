@@ -8,6 +8,3 @@ K:Flash
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bogardan_rager.jpg
 Oracle:Flash (You may cast this spell any time you could cast an instant.)\nWhen Bogardan Rager enters the battlefield, target creature gets +4/+0 until end of turn.
-SetInfo:DDG Common
-SetInfo:HOP Common
-SetInfo:TSP Common

@@ -7,4 +7,3 @@ A:AB$ RemoveCounter | Cost$ U B | CounterType$ BLOOD | CounterNum$ 1 | SpellDesc
 SVar:X:Count$CardCounters.BLOOD
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bloodletter_quill.jpg
 Oracle:{2}, {T}, Put a blood counter on Bloodletter Quill: Draw a card, then lose 1 life for each blood counter on Bloodletter Quill.\n{U}{B}: Remove a blood counter from Bloodletter Quill.
-SetInfo:RAV Rare

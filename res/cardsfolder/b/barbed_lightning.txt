@@ -8,4 +8,3 @@ SVar:DBDamage:DB$DealDamage| ValidTgts$ Player | TgtPrompt$ Select target player
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/barbed_lightning.jpg
 Oracle:Choose one - Barbed Lightning deals 3 damage to target creature; or Barbed Lightning deals 3 damage to target player.\nEntwine {2} (Choose both if you pay the entwine cost.)
-SetInfo:DST Common

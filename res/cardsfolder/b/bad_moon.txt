@@ -5,11 +5,3 @@ S:Mode$ Continuous | Affected$ Creature.Black | AddPower$ 1 | AddToughness$ 1 | 
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bad_moon.jpg
 Oracle:Black creatures get +1/+1.
-SetInfo:2ED Rare
-SetInfo:TSB Special
-SetInfo:LEB Rare
-SetInfo:LEA Rare
-SetInfo:5ED Rare
-SetInfo:4ED Rare
-SetInfo:3ED Rare
-SetInfo:DDD Rare

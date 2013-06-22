@@ -7,5 +7,3 @@ A:AB$ DealDamage | Cost$ R T Sac<1/Creature.Other/creature other than Brion Stou
 SVar:X:Sacrificed$CardPower
 SVar:Picture:http://www.wizards.com/global/images/magic/general/brion_stoutarm.jpg
 Oracle:Lifelink\n{R}, {T}, Sacrifice a creature other than Brion Stoutarm: Brion Stoutarm deals damage equal to the sacrificed creature's power to target player.
-SetInfo:COM Rare
-SetInfo:LRW Rare

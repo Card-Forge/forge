@@ -5,4 +5,3 @@ A:SP$ SetState | Cost$ 1 R | ValidTgts$ Creature.faceDown+OppCtrl | TgtPrompt$ S
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/break_open.jpg
 Oracle:Turn target face-down creature an opponent controls face up.
-SetInfo:ONS Common

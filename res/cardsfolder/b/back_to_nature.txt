@@ -4,4 +4,3 @@ Types:Instant
 A:SP$ DestroyAll | Cost$ 1 G | ValidCards$ Enchantment | SpellDescription$ Destroy all enchantments.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/back_to_nature.jpg
 Oracle:Destroy all enchantments.
-SetInfo:M11 Uncommon

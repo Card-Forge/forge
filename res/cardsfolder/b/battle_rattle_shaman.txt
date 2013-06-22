@@ -6,4 +6,3 @@ T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefiel
 SVar:TrigPump:AB$ Pump | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ 2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/battle_rattle_shaman.jpg
 Oracle:At the beginning of combat on your turn, you may have target creature get +2/+0 until end of turn.
-SetInfo:ROE Common

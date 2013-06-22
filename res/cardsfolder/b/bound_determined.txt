@@ -20,5 +20,3 @@ A:SP$ Effect | Cost$ U G | StaticAbilities$ STCantbeCountered | SubAbility$ DBDr
 SVar:STCantbeCountered:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Stack | Affected$ Card.YouCtrl | AddHiddenKeyword$ CARDNAME can't be countered. | Description$ Other spells you control can't be countered by spells or abilities this turn.
 SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 1
 Oracle:Other spells you control can't be countered by spells or abilities this turn.\nDraw a card.
-
-SetInfo:DIS Rare

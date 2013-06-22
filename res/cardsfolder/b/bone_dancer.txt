@@ -7,4 +7,3 @@ SVar:DBChangeZone:DB$ChangeZoneAll | Cost$ 0 | Origin$ Graveyard | Destination$ 
 SVar:DBNoCombatDamage:DB$Pump | Defined$ Self | KW$ HIDDEN CARDNAME assigns no combat damage
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bone_dancer.jpg
 Oracle:Whenever Bone Dancer attacks and isn't blocked, you may put the top creature card of defending player's graveyard onto the battlefield under your control. If you do, Bone Dancer assigns no combat damage this turn.
-SetInfo:WTH Rare

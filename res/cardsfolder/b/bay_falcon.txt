@@ -6,4 +6,3 @@ K:Flying
 K:Vigilance
 SVar:Picture:http://resources.wizards.com/magic/cards/mi/en-us/card3325.jpg
 Oracle:Flying, vigilance
-SetInfo:MIR Common

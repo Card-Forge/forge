@@ -7,4 +7,3 @@ SVar:DBShuffle:DB$ChangeZone | Origin$ Stack | Destination$ Library | Shuffle$ T
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/black_suns_zenith.jpg
 Oracle:Put X -1/-1 counters on each creature. Shuffle Black Sun's Zenith into its owner's library.
-SetInfo:MBS Rare

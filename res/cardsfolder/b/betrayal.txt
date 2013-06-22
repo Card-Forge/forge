@@ -7,4 +7,3 @@ T:Mode$ Taps | ValidCard$ Card.AttachedBy | TriggerZones$ Battlefield | Execute$
 SVar:TrigDraw:AB$ Draw | Cost$ 0 | Defined$ You | NumCards$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/betrayal.jpg
 Oracle:Enchant creature an opponent controls\nWhenever enchanted creature becomes tapped, you draw a card.
-SetInfo:VIS Common

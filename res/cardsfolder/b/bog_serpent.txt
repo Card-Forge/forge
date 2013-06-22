@@ -8,4 +8,3 @@ SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Defined$ Self
 SVar:NeedsToPlay:Swamp.YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bog_serpent.jpg
 Oracle:Bog Serpent can't attack unless defending player controls a Swamp.\nWhen you control no Swamps, sacrifice Bog Serpent.
-SetInfo:PLC Common

@@ -6,4 +6,3 @@ T:Mode$ DamageDone | ValidSource$ Instant.YouCtrl,Sorcery.YouCtrl | TriggerZones
 SVar:TrigToken:AB$ Token | Cost$ 0 | TokenAmount$ 2 | TokenName$ Soldier | TokenTypes$ Creature,Soldier | TokenOwner$ You | TokenColors$ Red,White | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Haste
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blaze_commando.jpg
 Oracle:Whenever an instant or sorcery spell you control deals damage, put two 1/1 red and white Soldier creature tokens with haste onto the battlefield.
-SetInfo:DGM Uncommon

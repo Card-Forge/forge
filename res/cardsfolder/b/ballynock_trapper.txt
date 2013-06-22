@@ -7,4 +7,3 @@ T:Mode$ SpellCast | ValidCard$ Card.White | ValidActivatingPlayer$ You | Trigger
 SVar:TrigUntap:AB$Untap | Cost$ 0 | Defined$ Self
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ballynock_trapper.jpg
 Oracle:{T}: Tap target creature.\nWhenever you cast a white spell, you may untap Ballynock Trapper.
-SetInfo:EVE Common

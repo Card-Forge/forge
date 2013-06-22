@@ -5,7 +5,3 @@ A:SP$ TapAll | Cost$ 2 W | ValidCards$ Creature.nonWhite | SpellDescription$ Tap
 SVar:RemRandomDeck:True
 SVar:Picture:http://resources.wizards.com/magic/cards/p3/en-us/card20388.jpg
 Oracle:Tap all nonwhite creatures.
-SetInfo:S99 Rare
-SetInfo:MIR Uncommon
-SetInfo:POR Rare
-SetInfo:INV Uncommon

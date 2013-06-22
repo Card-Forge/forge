@@ -5,6 +5,3 @@ A:SP$ GainLife | Cost$ 4 G | LifeAmount$ X | References$ X | SpellDescription$ Y
 SVar:X:Count$TypeYouCtrl.Land
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bountiful_harvest.jpg
 Oracle:You gain 1 life for each land you control.
-SetInfo:M10 Common
-SetInfo:M13 Common
-SetInfo:M12 Common

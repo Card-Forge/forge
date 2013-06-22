@@ -8,4 +8,3 @@ SVar:DBChange:DB$ ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Battle
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/betrayal_of_flesh.jpg
 Oracle:Choose one - Destroy target creature; or return target creature card from your graveyard to the battlefield.\nEntwine-Sacrifice three lands. (Choose both if you pay the entwine cost.)
-SetInfo:MRD Uncommon

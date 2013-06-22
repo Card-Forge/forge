@@ -10,5 +10,3 @@ SVar:HalfXUp:Count$xPaid/HalfUp
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/banshee.jpg
 Oracle:{X}, {T}: Banshee deals half X damage, rounded down, to target creature or player, and half X damage, rounded up, to you.
-SetInfo:CHR Uncommon
-SetInfo:DRK Uncommon

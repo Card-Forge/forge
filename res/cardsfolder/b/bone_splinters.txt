@@ -5,5 +5,3 @@ A:SP$ Destroy | Cost$ B Sac<1/Creature> | ValidTgts$ Creature | TgtPrompt$ Selec
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bone_splinters.jpg
 Oracle:As an additional cost to cast Bone Splinters, sacrifice a creature.\nDestroy target creature.
-SetInfo:AVR Common
-SetInfo:ALA Common

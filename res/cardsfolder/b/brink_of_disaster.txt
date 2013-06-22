@@ -7,5 +7,3 @@ T:Mode$ Taps | ValidCard$ Card.AttachedBy | Execute$ TrigDestroy | TriggerDescri
 SVar:TrigDestroy:AB$ Destroy | Cost$ 0 | Defined$ TriggeredCard
 SVar:Picture:http://www.wizards.com/global/images/magic/general/brink_of_disaster.jpg
 Oracle:Enchant creature or land\nWhen enchanted permanent becomes tapped, destroy it.
-SetInfo:M12 Common
-SetInfo:WWK Common

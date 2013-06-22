@@ -4,4 +4,3 @@ Types:Creature Bear
 PT:2/2
 SVar:Picture:http://resources.wizards.com/magic/cards/p2/en-us/card6613.jpg
 Oracle:
-SetInfo:PO2 Common

@@ -12,4 +12,3 @@ SVar:X:Count$Valid Card.Self+counters_GE1_LEVEL+counters_LE2_LEVEL
 SVar:Y:Count$Valid Card.Self+counters_GE3_LEVEL
 SVar:Picture:http://www.wizards.com/global/images/magic/general/brimstone_mage.jpg
 Oracle:Level up {3}{R} ({3}{R}: Put a level counter on this. Level up only as a sorcery.)\nLEVEL 1-2\n2/3\n{T}: Brimstone Mage deals 1 damage to target creature or player.\nLEVEL 3+\n2/4\n{T}: Brimstone Mage deals 3 damage to target creature or player.
-SetInfo:ROE Uncommon

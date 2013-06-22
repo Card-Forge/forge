@@ -15,4 +15,3 @@ SVar:DBChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield 
 SVar:DBPump:DB$ Pump | Defined$ Remembered | KW$ Haste | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 Oracle:Put a creature card from a graveyard onto the battlefield under your control. It gains haste until end of turn.\nFuse (You may cast one or both halves of this card from your hand.)
-SetInfo:DGM Rare

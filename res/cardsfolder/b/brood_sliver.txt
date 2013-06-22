@@ -7,5 +7,3 @@ SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ 1 | TokenImage$ c 1 1 sliver | 
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/brood_sliver.jpg
 Oracle:Whenever a Sliver deals combat damage to a player, its controller may put a 1/1 colorless Sliver creature token onto the battlefield.
-SetInfo:H09 Rare
-SetInfo:LGN Rare

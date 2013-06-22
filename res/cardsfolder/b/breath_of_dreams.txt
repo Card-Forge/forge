@@ -6,4 +6,3 @@ S:Mode$ Continuous | Affected$ Creature.Green | AddKeyword$ Cumulative upkeep:1 
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/breath_of_dreams.jpg
 Oracle:Cumulative upkeep {U} (At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.)\nGreen creatures have "Cumulative upkeep {1}."
-SetInfo:ICE Uncommon

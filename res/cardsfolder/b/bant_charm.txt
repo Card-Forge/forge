@@ -6,4 +6,3 @@ A:SP$ ChangeZone | Cost$ G W U | ValidTgts$ Creature | TgtPrompt$ Select target 
 A:SP$ Counter | Cost$ G W U | TargetType$ Spell | ValidTgts$ Instant | SpellDescription$ or counter target instant spell.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bant_charm.jpg
 Oracle:Choose one - Destroy target artifact; or put target creature on the bottom of its owner's library; or counter target instant spell.
-SetInfo:ALA Uncommon

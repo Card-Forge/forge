@@ -5,4 +5,3 @@ A:SP$ Draw | Cost$ 2 U | Defined$ You | ValidTgts$ Opponent | NumCards$ X | Refe
 SVar:X:Count$Valid Creature.tapped+TargetedPlayerCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/borrowing_100000_arrows.jpg
 Oracle:Draw a card for each tapped creature target opponent controls.
-SetInfo:PTK Uncommon

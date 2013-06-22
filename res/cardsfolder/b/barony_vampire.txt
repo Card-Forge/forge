@@ -4,4 +4,3 @@ Types:Creature Vampire
 PT:3/2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/barony_vampire.jpg
 Oracle:
-SetInfo:M11 Common

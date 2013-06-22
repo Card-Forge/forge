@@ -7,4 +7,3 @@ SVar:TrigCounter:DB$ Counter | Cost$ 0 | UnlessCost$ Sac<1/Creature> | Defined$ 
 K:Madness:1 B
 SVar:Picture:http://www.wizards.com/global/images/magic/general/brain_gorgers.jpg
 Oracle:When you cast Brain Gorgers, any player may sacrifice a creature. If a player does, counter Brain Gorgers.\nMadness {1}{B} (If you discard this card, you may cast it for its madness cost instead of putting it into your graveyard.)
-SetInfo:PLC Common

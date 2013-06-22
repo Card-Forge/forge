@@ -9,4 +9,3 @@ SVar:DBBounce:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | Hidden$
 SVar:DBDiscard:DB$ Discard | Defined$ TriggeredTarget | NumCards$ 1 | Mode$ TgtChoose | SpellDescription$ That player discards a card.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blizzard_specter.jpg
 Oracle:Flying\nWhenever Blizzard Specter deals combat damage to a player, choose one - That player returns a permanent he or she controls to its owner's hand; or that player discards a card.
-SetInfo:CSP Uncommon

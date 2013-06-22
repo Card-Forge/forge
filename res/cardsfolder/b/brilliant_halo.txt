@@ -9,4 +9,3 @@ SVar:TrigChangeZone:AB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ H
 SVar:SacMe:2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/brilliant_halo.jpg
 Oracle:Enchant creature\nEnchanted creature gets +1/+2.\nWhen Brilliant Halo is put into a graveyard from the battlefield, return Brilliant Halo to its owner's hand.
-SetInfo:USG Common

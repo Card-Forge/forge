@@ -7,4 +7,3 @@ A:AB$Tap | Cost$ 1 | Defined$ Enchanted | SpellDescription$ Tap enchanted creatu
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/burden_of_guilt.jpg
 Oracle:Enchant creature\n{1}: Tap enchanted creature.
-SetInfo:DKA Common

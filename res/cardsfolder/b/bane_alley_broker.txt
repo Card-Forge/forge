@@ -13,4 +13,3 @@ SVar:DBForget:DB$ Pump | ForgetObjects$ TriggeredCard
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | Static$ True | ValidCard$ Card.Self | Execute$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 Oracle:{T}: Draw a card, then exile a card from your hand face down.\nYou may look at cards exiled with Bane Alley Broker.\n{U}{B}, {T}: Return a card exiled with Bane Alley Broker to its owner's hand.
-SetInfo:GTC Uncommon

@@ -7,4 +7,3 @@ A:AB$ Destroy | Cost$ 2 R Sac<1/CARDNAME> | ValidTgts$ Scarecrow,Plains | TgtPro
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/boggart_arsonists.jpg
 Oracle:Plainswalk\n{2}{R}, Sacrifice Boggart Arsonists: Destroy target Scarecrow or Plains.
-SetInfo:SHM Common

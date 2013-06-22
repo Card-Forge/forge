@@ -8,4 +8,3 @@ A:AB$ Pump | Cost$ S | KW$ First Strike | SpellDescription$ CARDNAME gains first
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/boreal_griffin.jpg
 Oracle:Flying\n{S}: Boreal Griffin gains first strike until end of turn. ({S} can be paid with one mana from a snow permanent.)
-SetInfo:CSP Common

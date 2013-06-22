@@ -9,5 +9,3 @@ K:Protection from Demons
 K:Protection from Dragons
 SVar:Picture:http://www.wizards.com/global/images/magic/general/baneslayer_angel.jpg
 Oracle:Flying, first strike, lifelink, protection from Demons and from Dragons
-SetInfo:M11 Mythic
-SetInfo:M10 Mythic

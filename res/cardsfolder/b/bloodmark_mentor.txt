@@ -6,5 +6,3 @@ S:Mode$ Continuous | Affected$ Creature.Red+YouCtrl | AddKeyword$ First Strike |
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bloodmark_mentor.jpg
 Oracle:Red creatures you control have first strike.
-SetInfo:DDG Uncommon
-SetInfo:SHM Uncommon

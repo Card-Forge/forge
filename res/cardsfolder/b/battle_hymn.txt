@@ -6,4 +6,3 @@ SVar:X:Count$Valid Creature.YouCtrl
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/battle_hymn.jpg
 Oracle:Add {R} to your mana pool for each creature you control.
-SetInfo:AVR Common

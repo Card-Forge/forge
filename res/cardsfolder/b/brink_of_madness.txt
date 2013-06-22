@@ -6,4 +6,3 @@ SVar:TrigSacDiscard:AB$ Sacrifice | Cost$ 0 | Defined$ Self | SubAbility$ DBDisc
 SVar:DBDiscard:DB$ Discard | ValidTgts$ Opponent | TgtPrompt$ Select target opponent to discard their hand | Mode$ Hand
 SVar:Picture:http://www.wizards.com/global/images/magic/general/brink_of_madness.jpg
 Oracle:At the beginning of your upkeep, if you have no cards in hand, sacrifice Brink of Madness and target opponent discards his or her hand.
-SetInfo:ULG Rare

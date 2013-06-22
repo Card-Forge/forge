@@ -9,4 +9,3 @@ SVar:X:TriggerCount$DamageAmount
 SVar:MustBeBlocked:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/balefire_dragon.jpg
 Oracle:Flying\nWhenever Balefire Dragon deals combat damage to a player, it deals that much damage to each creature that player controls.
-SetInfo:ISD Mythic

@@ -7,4 +7,3 @@ A:AB$ Pump | Cost$ tapXType<1/Creature> | NumAtt$ +1 | NumDef$ +1 | SpellDescrip
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bramblesnap.jpg
 Oracle:Trample\nTap an untapped creature you control: Bramblesnap gets +1/+1 until end of turn.
-SetInfo:ROE Uncommon

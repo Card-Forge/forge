@@ -4,4 +4,3 @@ Types:Enchantment
 S:Mode$ Continuous | Affected$ Creature.untapped+YouCtrl | AddToughness$ 2 | Description$ Untapped creatures you control get +0/+2.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/builders_blessing.jpg
 Oracle:Untapped creatures you control get +0/+2.
-SetInfo:AVR Uncommon

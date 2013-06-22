@@ -6,4 +6,3 @@ S:Mode$ Continuous | Affected$ Creature.Sliver | AddPower$ 1 | Description$ All 
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blade_sliver.jpg
 Oracle:All Sliver creatures get +1/+0.
-SetInfo:LGN Uncommon

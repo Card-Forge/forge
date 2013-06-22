@@ -6,7 +6,3 @@ A:SP$ ChangeZone | Cost$ 3 B B | Origin$ Graveyard | Destination$ Battlefield | 
 SVar:DBShuffle:DB$ChangeZone | Origin$ Stack | Destination$ Library | Shuffle$ True
 SVar:Picture:http://resources.wizards.com/magic/cards/5dn/en-us/card51611.jpg
 Oracle:Put target artifact or creature card from a graveyard onto the battlefield under your control. Shuffle Beacon of Unrest into its owner's library.
-SetInfo:ARC Rare
-SetInfo:5DN Rare
-SetInfo:HOP Rare
-SetInfo:10E Rare

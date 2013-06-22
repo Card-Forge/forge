@@ -7,4 +7,3 @@ SVar:BoneShamanStatic:Mode$ Continuous | Affected$ Creature.DamagedBy | AddHidde
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bone_shaman.jpg
 Oracle:{B}: Until end of turn, Bone Shaman gains "Creatures dealt damage by Bone Shaman this turn can't be regenerated this turn."
-SetInfo:ICE Common

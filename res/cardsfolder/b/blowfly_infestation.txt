@@ -6,4 +6,3 @@ SVar:TrigPutCounter:DB$PutCounter | ValidTgts$ Creature | TgtPrompt$ Select targ
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blowfly_infestation.jpg
 Oracle:Whenever a creature dies, if it had a -1/-1 counter on it, put a -1/-1 counter on target creature.
-SetInfo:SHM Uncommon

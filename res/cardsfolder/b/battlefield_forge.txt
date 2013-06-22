@@ -7,6 +7,3 @@ A:AB$ Mana | Cost$ T | Produced$ R | SubAbility$ DBPain | SpellDescription$ Add 
 SVar:DBPain:DB$DealDamage | NumDmg$ 1 | Defined$ You
 SVar:Picture:http://www.wizards.com/global/images/magic/general/battlefield_forge.jpg
 Oracle:{T}: Add {1} to your mana pool.\n{T}: Add {R} or {W} to your mana pool. Battlefield Forge deals 1 damage to you.
-SetInfo:APC Rare
-SetInfo:9ED Rare
-SetInfo:10E Rare

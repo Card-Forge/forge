@@ -5,4 +5,3 @@ S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddKeyword$ CantBeBlockedBy Cr
 SVar:NonStackingEffect:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bower_passage.jpg
 Oracle:Creatures with flying can't block creatures you control.
-SetInfo:AVR Uncommon

@@ -7,5 +7,3 @@ A:AB$ Discard | Cost$ Sac<1/CARDNAME> | ValidTgts$ Player | TgtPrompt$ Select ta
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/brain_weevil.jpg
 Oracle:Intimidate (This creature can't be blocked except by artifact creatures and/or creatures that share a color with it.)\nSacrifice Brain Weevil: Target player discards two cards. Activate this ability only any time you could cast a sorcery.
-SetInfo:DDJ Common
-SetInfo:ISD Common

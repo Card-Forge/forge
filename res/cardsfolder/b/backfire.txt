@@ -8,5 +8,3 @@ SVar:TrigDealDamage:AB$ DealDamage | Cost$ 0 | Defined$ TriggeredSourceControlle
 SVar:X:TriggerCount$DamageAmount
 SVar:Picture:http://www.wizards.com/global/images/magic/general/backfire.jpg
 Oracle:Enchant creature\nWhenever enchanted creature deals damage to you, Backfire deals that much damage to that creature's controller.
-SetInfo:LEG Uncommon
-SetInfo:4ED Uncommon

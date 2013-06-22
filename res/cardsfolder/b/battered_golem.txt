@@ -7,4 +7,3 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Artifa
 SVar:TrigUntap:AB$Untap | Cost$ 0 | Defined$ Self
 SVar:Picture:http://www.wizards.com/global/images/magic/general/battered_golem.jpg
 Oracle:Battered Golem doesn't untap during your untap step.\nWhenever an artifact enters the battlefield, you may untap Battered Golem.
-SetInfo:5DN Common

@@ -6,4 +6,3 @@ K:Flying
 K:Swampwalk
 SVar:Picture:http://resources.wizards.com/magic/cards/te/en-us/card4749.jpg
 Oracle:Flying, swampwalk
-SetInfo:TMP Common

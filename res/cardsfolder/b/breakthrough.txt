@@ -9,4 +9,3 @@ SVar:BreakthroughZ:SVar$BreakthroughY/Minus.X
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/breakthrough.jpg
 Oracle:Draw four cards, then choose X cards in your hand and discard the rest.
-SetInfo:TOR Uncommon

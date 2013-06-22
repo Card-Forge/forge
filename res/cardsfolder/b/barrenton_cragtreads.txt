@@ -5,4 +5,3 @@ PT:3/3
 K:CantBeBlockedBy Creature.Red
 SVar:Picture:http://www.wizards.com/global/images/magic/general/barrenton_cragtreads.jpg
 Oracle:Barrenton Cragtreads can't be blocked by red creatures.
-SetInfo:SHM Common

@@ -8,4 +8,3 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | O
 SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Beast | TokenTypes$ Creature,Beast | TokenOwner$ You | TokenColors$ Green | TokenPower$ 3 | TokenToughness$ 3
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bringer_of_the_green_dawn.jpg
 Oracle:You may pay {W}{U}{B}{R}{G} rather than pay Bringer of the Green Dawn's mana cost.\nTrample\nAt the beginning of your upkeep, you may put a 3/3 green Beast creature token onto the battlefield.
-SetInfo:5DN Rare

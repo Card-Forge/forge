@@ -6,4 +6,3 @@ SVar:TrigWin:AB$WinsGame | Cost$ 0 | Defined$ You
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/barren_glory.jpg
 Oracle:At the beginning of your upkeep, if you control no permanents other than Barren Glory and have no cards in hand, you win the game.
-SetInfo:FUT Rare

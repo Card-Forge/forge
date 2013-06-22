@@ -6,4 +6,3 @@ A:AB$ Pump | Cost$ W | KW$ Vigilance | SpellDescription$ CARDNAME gains vigilanc
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bladed_sentinel.jpg
 Oracle:{W}: Bladed Sentinel gains vigilance until end of turn.
-SetInfo:MBS Common

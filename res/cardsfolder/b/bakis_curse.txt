@@ -8,4 +8,3 @@ SVar:RemRandomDeck:True
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bakis_curse.jpg
 Oracle:Baki's Curse deals 2 damage to each creature for each Aura attached to that creature.
-SetInfo:HML Rare

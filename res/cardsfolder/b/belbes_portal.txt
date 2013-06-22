@@ -6,4 +6,3 @@ SVar:ChooseCT:DB$ ChooseType | Defined$ You | Type$ Creature | SpellDescription$
 A:AB$ ChangeZone | Cost$ 3 T | Origin$ Hand | Destination$ Battlefield | ChangeType$ Creature.ChosenType | ChangeNum$ 1 | SpellDescription$ You may put a creature card of the chosen type from your hand onto the battlefield.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/belbes_portal.jpg
 Oracle:As Belbe's Portal enters the battlefield, choose a creature type.\n{3}, {T}: You may put a creature card of the chosen type from your hand onto the battlefield.
-SetInfo:NMS Rare

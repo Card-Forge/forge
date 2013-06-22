@@ -7,6 +7,3 @@ T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage
 SVar:TrigPump:AB$Pump | Cost$ 0 | Defined$ TriggeredTarget | KW$ Skip your next combat phase. | Permanent$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blinding_angel.jpg
 Oracle:Flying (This creature can't be blocked except by creatures with flying or reach.)\nWhenever Blinding Angel deals combat damage to a player, that player skips his or her next combat phase.
-SetInfo:8ED Rare
-SetInfo:NMS Rare
-SetInfo:9ED Rare

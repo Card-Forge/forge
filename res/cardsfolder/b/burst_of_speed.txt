@@ -5,4 +5,3 @@ A:SP$ PumpAll | Cost$ R | ValidCards$ Creature.YouCtrl | KW$ Haste | SpellDescri
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/burst_of_speed.jpg
 Oracle:Creatures you control gain haste until end of turn. (They can attack and {T} even if they just came under your control.)
-SetInfo:M10 Common

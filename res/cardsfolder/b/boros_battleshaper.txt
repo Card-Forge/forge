@@ -8,4 +8,3 @@ SVar:DBCantAttackBlock:DB$ Pump | ValidTgts$ Creature | TargetMin$ 0 | TargetMax
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/boros_battleshaper.jpg
 Oracle:At the beginning of each combat, up to one target creature attacks or blocks this combat if able and up to one target creature can't attack or block this combat.
-SetInfo:DGM Rare

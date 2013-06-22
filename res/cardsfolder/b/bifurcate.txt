@@ -7,4 +7,3 @@ SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bifurcate.jpg
 Oracle:Search your library for a permanent card with the same name as target nontoken creature and put that card onto the battlefield. Then shuffle your library.
-SetInfo:MMQ Rare

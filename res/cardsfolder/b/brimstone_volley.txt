@@ -5,4 +5,3 @@ A:SP$ DealDamage | Cost$ 2 R | ValidTgts$ Creature,Player | TgtPrompt$ Select ta
 SVar:X:Count$Morbid.5.3
 SVar:Picture:http://www.wizards.com/global/images/magic/general/brimstone_volley.jpg
 Oracle:Brimstone Volley deals 3 damage to target creature or player.\nMorbid - Brimstone Volley deals 5 damage to that creature or player instead if a creature died this turn.
-SetInfo:ISD Common

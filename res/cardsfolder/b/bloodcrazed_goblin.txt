@@ -6,4 +6,3 @@ S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ CARDNAME can't attack. | 
 SVar:X:Count$OppDamageThisTurn
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bloodcrazed_goblin.jpg
 Oracle:Bloodcrazed Goblin can't attack unless an opponent has been dealt damage this turn.
-SetInfo:M11 Common

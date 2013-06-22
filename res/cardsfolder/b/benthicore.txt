@@ -8,4 +8,3 @@ A:AB$ Untap | Cost$ tapXType<2/Merfolk> | SubAbility$ GainShroud | SpellDescript
 SVar:GainShroud:DB$Pump | KW$ Shroud | SpellDescription$ CARDNAME gains shroud until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/benthicore.jpg
 Oracle:When Benthicore enters the battlefield, put two 1/1 blue Merfolk Wizard creature tokens onto the battlefield.\nTap two untapped Merfolk you control: Untap Benthicore. It gains shroud until end of turn. (It can't be the target of spells or abilities.)
-SetInfo:LRW Uncommon

@@ -7,8 +7,3 @@ SVar:X:Count$Valid Creature
 SVar:BuffedBy:Creature
 SVar:Picture:http://www.wizards.com/global/images/magic/general/beast_of_burden.jpg
 Oracle:Beast of Burden's power and toughness are each equal to the number of creatures on the battlefield.
-SetInfo:8ED Rare
-SetInfo:MBP Rare
-SetInfo:ULG Rare
-SetInfo:7ED Rare
-SetInfo:9ED Rare

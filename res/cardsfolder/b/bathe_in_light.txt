@@ -5,5 +5,3 @@ A:SP$Protection | Cost$ 1 W | ValidTgts$ Creature | TgtPrompt$ Choose target cre
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bathe_in_light.jpg
 Oracle:Radiance - Choose a color. Target creature and each other creature that shares a color with it gain protection from the chosen color until end of turn.
-SetInfo:RAV Uncommon
-SetInfo:COM Uncommon

@@ -9,4 +9,3 @@ SVar:RemRandomDeck:True
 DeckNeeds:Color$Black
 SVar:Picture:http://www.wizards.com/global/images/magic/general/barbarian_outcast.jpg
 Oracle:When you control no Swamps, sacrifice Barbarian Outcast.
-SetInfo:TOR Common

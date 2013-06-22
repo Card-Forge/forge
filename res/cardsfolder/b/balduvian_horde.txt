@@ -11,5 +11,3 @@ SVar:NeedsToPlayVar:Y GE2
 SVar:Y:Count$InYourHand
 SVar:Picture:http://www.wizards.com/global/images/magic/general/balduvian_horde.jpg
 Oracle:When Balduvian Horde enters the battlefield, sacrifice it unless you discard a card at random.
-SetInfo:ALL Rare
-SetInfo:6ED Rare

@@ -5,4 +5,3 @@ A:SP$ Counter | Cost$ 2 U U | TargetType$ Spell | TgtPrompt$ Select target Creat
 SVar:DBDraw:DB$Draw | NumCards$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bone_to_ash.jpg
 Oracle:Counter target creature spell.\nDraw a card.
-SetInfo:DKA Common

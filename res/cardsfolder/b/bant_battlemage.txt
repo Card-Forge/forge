@@ -6,4 +6,3 @@ A:AB$ Pump | Cost$ G T | ValidTgts$ Creature | TgtPrompt$ Select target creature
 A:AB$ Pump | Cost$ U T | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Flying | SpellDescription$ Target creature gains flying until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bant_battlemage.jpg
 Oracle:{G}, {T}: Target creature gains trample until end of turn.\n{U}, {T}: Target creature gains flying until end of turn.
-SetInfo:ALA Uncommon

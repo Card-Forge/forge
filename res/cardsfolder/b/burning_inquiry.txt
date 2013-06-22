@@ -5,4 +5,3 @@ A:SP$ Draw | Cost$ R | Defined$ Each | NumCards$ 3 | SubAbility$ DBDiscard3 | Sp
 SVar:DBDiscard3:DB$Discard | Defined$ Each | Mode$ Random | NumCards$ 3
 SVar:Picture:http://www.wizards.com/global/images/magic/general/burning_inquiry.jpg
 Oracle:Each player draws three cards, then discards three cards at random.
-SetInfo:M10 Common

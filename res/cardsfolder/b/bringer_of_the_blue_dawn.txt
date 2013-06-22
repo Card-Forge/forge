@@ -8,4 +8,3 @@ SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 2
 SVar:AltCost:Cost$ W U B R G | Description$ You may pay W U B R G rather than pay CARDNAME's mana cost.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bringer_of_the_blue_dawn.jpg
 Oracle:You may pay {W}{U}{B}{R}{G} rather than pay Bringer of the Blue Dawn's mana cost.\nTrample\nAt the beginning of your upkeep, you may draw two cards.
-SetInfo:5DN Rare

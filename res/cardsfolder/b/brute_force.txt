@@ -4,4 +4,3 @@ Types:Instant
 A:SP$ Pump | Cost$ R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +3 | NumDef$ +3 | SpellDescription$ Target creature gets +3/+3 until end of turn.
 SVar:Picture:http://resources.wizards.com/magic/cards/plc/en-us/card122373.jpg
 Oracle:Target creature gets +3/+3 until end of turn.
-SetInfo:PLC Common

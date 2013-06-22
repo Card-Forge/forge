@@ -5,12 +5,3 @@ A:SP$ DealDamage | Cost$ X R | ValidTgts$ Creature,Player | TgtPrompt$ Select ta
 SVar:X:Count$xPaid
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blaze.jpg
 Oracle:Blaze deals X damage to target creature or player.
-SetInfo:PO2 Uncommon
-SetInfo:8ED Uncommon
-SetInfo:7ED Uncommon
-SetInfo:6ED Uncommon
-SetInfo:9ED Uncommon
-SetInfo:10E Uncommon
-SetInfo:HOP Uncommon
-SetInfo:PTK Uncommon
-SetInfo:POR Uncommon x2

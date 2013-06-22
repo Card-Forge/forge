@@ -6,5 +6,3 @@ SVar:DBShuffle:DB$ChangeZone | Origin$ Stack | Destination$ Library | Shuffle$ T
 SVar:X:TargetedPlayer$LifeTotal
 SVar:Picture:http://www.wizards.com/global/images/magic/general/beacon_of_immortality.jpg
 Oracle:Double target player's life total. Shuffle Beacon of Immortality into its owner's library.
-SetInfo:5DN Rare
-SetInfo:10E Rare

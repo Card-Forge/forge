@@ -5,6 +5,3 @@ A:AB$ Pump | Cost$ 3 | ValidTgts$ Creature | TgtPrompt$ Select target creature |
 SVar:NonStackingEffect:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/barls_cage.jpg
 Oracle:{3}: Target creature doesn't untap during its controller's next untap step.
-SetInfo:5ED Rare
-SetInfo:CHR Rare
-SetInfo:DRK Rare

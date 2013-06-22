@@ -14,4 +14,3 @@ SVar:Contributions:Number$0
 SVar:Blazed:TriggerCount$DamageAmount
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blazing_effigy.jpg
 Oracle:When Blazing Effigy dies, it deals X damage to target creature, where X is 3 plus the amount of damage dealt to Blazing Effigy this turn by other sources named Blazing Effigy.
-SetInfo:LEG Common

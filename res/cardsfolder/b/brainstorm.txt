@@ -6,8 +6,3 @@ SVar:ChangeZoneDB:DB$ChangeZone | Origin$ Hand | Destination$ Library | ChangeNu
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/brainstorm.jpg
 Oracle:Draw three cards, then put two cards from your hand on top of your library in any order.
-SetInfo:DDJ Common
-SetInfo:MMQ Common
-SetInfo:COM Common
-SetInfo:5ED Common
-SetInfo:ICE Common

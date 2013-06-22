@@ -7,4 +7,3 @@ K:Soulshift 3
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/burr_grafter.jpg
 Oracle:Sacrifice Burr Grafter: Target creature gets +2/+2 until end of turn.\nSoulshift 3 (When this creature dies, you may return target Spirit card with converted mana cost 3 or less from your graveyard to your hand.)
-SetInfo:CHK Common

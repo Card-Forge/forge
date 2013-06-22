@@ -10,4 +10,3 @@ SVar:PlayMain1:TRUE
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blind_fury.jpg
 Oracle:Cast Blind Fury only before the combat damage step.\nAll creatures lose trample until end of turn. If a creature would deal combat damage to a creature this turn, it deals double that damage to that creature instead.
-SetInfo:MIR Uncommon

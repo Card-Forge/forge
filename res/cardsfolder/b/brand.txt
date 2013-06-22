@@ -6,4 +6,3 @@ K:Cycling:2
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/brand.jpg
 Oracle:Gain control of all permanents you own. (This effect lasts indefinitely.)\nCycling {2} ({2}, Discard this card: Draw a card.)
-SetInfo:USG Rare

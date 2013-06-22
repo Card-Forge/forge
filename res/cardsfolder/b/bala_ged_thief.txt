@@ -9,4 +9,3 @@ SVar:X:Count$TypeYouCtrl.Ally
 SVar:BuffedBy:Ally
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bala_ged_thief.jpg
 Oracle:Whenever Bala Ged Thief or another Ally enters the battlefield under your control, target player reveals a number of cards from his or her hand equal to the number of Allies you control. You choose one of them. That player discards that card.
-SetInfo:ZEN Rare

@@ -7,4 +7,3 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigChange:AB$ ChangeZone | Optional$ True  | Cost$ 0 | Origin$ Library | Destination$ Battlefield | ChangeType$ Creature | DefinedPlayer$ Player.Opponent | ChangeNum$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/boldwyr_heavyweights.jpg
 Oracle:Trample\nWhen Boldwyr Heavyweights enters the battlefield, each opponent may search his or her library for a creature card and put it onto the battlefield. Then each player who searched his or her library this way shuffles it.
-SetInfo:MOR Rare

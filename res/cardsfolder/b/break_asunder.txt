@@ -5,4 +5,3 @@ A:SP$ Destroy | Cost$ 2 G G | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Selec
 K:Cycling:2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/break_asunder.jpg
 Oracle:Destroy target artifact or enchantment.\nCycling {2} ({2}, Discard this card: Draw a card.)
-SetInfo:SCG Common

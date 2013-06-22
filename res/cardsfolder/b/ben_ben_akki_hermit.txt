@@ -6,4 +6,3 @@ A:AB$ DealDamage | Cost$ T | ValidTgts$ Creature.attacking | TgtPrompt$ Select t
 SVar:X:Count$Valid Mountain.untapped+YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ben_ben_akki_hermit.jpg
 Oracle:{T}: Ben-Ben, Akki Hermit deals damage to target attacking creature equal to the number of untapped Mountains you control.
-SetInfo:CHK Rare

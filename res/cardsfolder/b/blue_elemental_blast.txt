@@ -6,8 +6,3 @@ A:SP$ Destroy | Cost$ U | ValidTgts$ Permanent.Red | TgtPrompt$ Select target re
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blue_elemental_blast.jpg
 Oracle:Choose one - Counter target red spell; or destroy target red permanent.
-SetInfo:2ED Common
-SetInfo:LEB Common
-SetInfo:LEA Common
-SetInfo:4ED Common
-SetInfo:3ED Common

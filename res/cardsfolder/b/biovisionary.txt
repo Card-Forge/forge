@@ -6,4 +6,3 @@ T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | IsPresent$ Crea
 SVar:TrigWinGame:AB$WinsGame | Cost$ 0 | Defined$ You
 SVar:Picture:http://www.wizards.com/global/images/magic/general/biovisionary.jpg
 Oracle:At the beginning of the end step, if you control four or more creatures named Biovisionary, you win the game.
-SetInfo:GTC Rare

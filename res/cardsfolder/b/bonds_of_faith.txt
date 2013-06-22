@@ -8,4 +8,3 @@ S:Mode$ Continuous | Affected$ Creature.EnchantedBy+nonHuman | AddHiddenKeyword$
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bonds_of_faith.jpg
 Oracle:Enchant creature\nEnchanted creature gets +2/+2 as long as it's a Human. Otherwise, it can't attack or block.
-SetInfo:ISD Common

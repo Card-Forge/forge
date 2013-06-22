@@ -8,4 +8,3 @@ SVar:Y:Count$DamageDoneThisTurn
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/brightflame.jpg
 Oracle:Radiance - Brightflame deals X damage to target creature and each other creature that shares a color with it. You gain life equal to the damage dealt this way.
-SetInfo:RAV Rare

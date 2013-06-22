@@ -6,4 +6,3 @@ A:SP$ DealDamage | Cost$ R | ValidTgts$ Creature,Player | TgtPrompt$ Select targ
 SVar:WasKicked:Count$Kicked.4.2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/burst_lightning.jpg
 Oracle:Kicker {4} (You may pay an additional {4} as you cast this spell.)\nBurst Lightning deals 2 damage to target creature or player. If Burst Lightning was kicked, it deals 4 damage to that creature or player instead.
-SetInfo:ZEN Common

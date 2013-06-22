@@ -7,4 +7,3 @@ SVar:BalshanDig:AB$ Dig | Cost$ 0 | Defined$ TriggeredTarget | DigNum$ 2 | Chang
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/balshan_beguiler.jpg
 Oracle:Whenever Balshan Beguiler deals combat damage to a player, that player reveals the top two cards of his or her library. You choose one of those cards and put it into his or her graveyard.
-SetInfo:ODY Uncommon

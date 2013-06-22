@@ -5,4 +5,3 @@ A:SP$ Counter | Cost$ 1 G | TgtPrompt$ Select target Activated Ability | ValidTg
 SVar:DBDraw:DB$Draw | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bind.jpg
 Oracle:Counter target activated ability. (Mana abilities can't be targeted.)\nDraw a card.
-SetInfo:INV Rare

@@ -5,4 +5,3 @@ A:SP$ GainLife | Cost$ G | LifeAmount$ X | References$ X | SpellDescription$ You
 SVar:X:Count$TypeInYourYard.Creature
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blossoming_wreath.jpg
 Oracle:You gain life equal to the number of creature cards in your graveyard.
-SetInfo:WTH Common

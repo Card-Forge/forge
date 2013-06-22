@@ -6,4 +6,3 @@ A:AB$ PreventDamage | Cost$ T | ValidTgts$ Creature | Amount$ X | TgtPrompt$ Sel
 SVar:X:Count$TypeOnBattlefield.Cleric
 SVar:Picture:http://www.wizards.com/global/images/magic/general/battlefield_medic.jpg
 Oracle:{T}: Prevent the next X damage that would be dealt to target creature this turn, where X is the number of Clerics on the battlefield.
-SetInfo:ONS Common

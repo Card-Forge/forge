@@ -9,4 +9,3 @@ SVar:TrigPump:AB$Pump | Cost$ 0 | Defined$ TriggeredAttacker | NumAtt$ +X | NumD
 SVar:X:TriggerCount$NumBlockers
 SVar:Picture:http://www.wizards.com/global/images/magic/general/beastmasters_magemark.jpg
 Oracle:Enchant creature\nCreatures you control that are enchanted get +1/+1.\nWhenever a creature you control that's enchanted becomes blocked, it gets +1/+1 until end of turn for each creature blocking it.
-SetInfo:GPT Common

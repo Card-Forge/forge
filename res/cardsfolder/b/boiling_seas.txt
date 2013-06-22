@@ -5,5 +5,3 @@ A:SP$ DestroyAll | Cost$ 3 R | ValidCards$ Island | SpellDescription$ Destroy al
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/boiling_seas.jpg
 Oracle:Destroy all Islands.
-SetInfo:POR Uncommon
-SetInfo:9ED Uncommon

@@ -6,4 +6,3 @@ K:Flying
 A:AB$ Pump | Cost$ BR | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blistering_dieflyn.jpg
 Oracle:Flying\n{B/R}: Blistering Dieflyn gets +1/+0 until end of turn.
-SetInfo:SHM Common

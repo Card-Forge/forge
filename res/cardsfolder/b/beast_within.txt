@@ -6,5 +6,3 @@ SVar:DBToken:DB$Token | TokenAmount$ 1 | TokenName$ Beast | TokenTypes$ Creature
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/beast_within.jpg
 Oracle:Destroy target permanent. Its controller puts a 3/3 green Beast creature token onto the battlefield.
-SetInfo:PC2 Uncommon
-SetInfo:NPH Uncommon

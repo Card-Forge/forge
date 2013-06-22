@@ -7,4 +7,3 @@ SVar:TrigPump:DB$Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature 
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blister_beetle.jpg
 Oracle:When Blister Beetle enters the battlefield, target creature gets -1/-1 until end of turn.
-SetInfo:ALA Common

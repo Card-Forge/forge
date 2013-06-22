@@ -5,4 +5,3 @@ PT:2/2
 A:AB$ Pump | Cost$ U | KW$ HIDDEN Unblockable | SpellDescription$ CARDNAME is unblockable this turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blockade_runner.jpg
 Oracle:{U}: Blockade Runner is unblockable this turn.
-SetInfo:MMQ Common

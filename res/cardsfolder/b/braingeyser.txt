@@ -5,7 +5,3 @@ A:SP$ Draw | Cost$ X U U | NumCards$ X | ValidTgts$ Player | TgtPrompt$ Choose a
 SVar:X:Count$xPaid
 SVar:Picture:http://www.wizards.com/global/images/magic/general/braingeyser.jpg
 Oracle:Target player draws X cards.
-SetInfo:LEB Rare
-SetInfo:LEA Rare
-SetInfo:3ED Rare
-SetInfo:2ED Rare

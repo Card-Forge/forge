@@ -7,4 +7,3 @@ SVar:TrigGainControl:DB$ GainControl | AllValid$ Permanent.nonToken+YouOwn | New
 SVar:DBGainControl:DB$ GainControl | AllValid$ Permanent.nonToken+YouDontOwn | NewController$ Opponent
 SVar:Picture:http://www.wizards.com/global/images/magic/general/brooding_saurian.jpg
 Oracle:At the beginning of each end step, each player gains control of all nontoken permanents he or she owns.
-SetInfo:CSP Rare

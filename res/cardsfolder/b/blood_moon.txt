@@ -6,7 +6,3 @@ SVar:NonStackingEffect:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blood_moon.jpg
 Oracle:Nonbasic lands are Mountains.
-SetInfo:8ED Rare
-SetInfo:CHR Rare
-SetInfo:DRK Rare
-SetInfo:9ED Rare

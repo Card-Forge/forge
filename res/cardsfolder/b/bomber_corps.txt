@@ -7,4 +7,3 @@ SVar:TrigDmg:AB$ DealDamage | Cost$ 0 | ValidTgts$ Creature,Player | TgtPrompt$ 
 SVar:BattalionTest:Count$Valid Creature.attacking+Other
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bomber_corps.jpg
 Oracle:Battalion - Whenever Bomber Corps and at least two other creatures attack, Bomber Corps deals 1 damage to target creature or player.
-SetInfo:GTC Common

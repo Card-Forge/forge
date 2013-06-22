@@ -8,4 +8,3 @@ SVar:X:Count$Valid Creature.White+Other+YouCtrl
 SVar:BuffedBy:Creature.White
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ballynock_cohort.jpg
 Oracle:First strike\nBallynock Cohort gets +1/+1 as long as you control another white creature.
-SetInfo:SHM Common

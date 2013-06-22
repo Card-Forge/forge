@@ -6,5 +6,3 @@ A:AB$ Pump | Cost$ T Sac<1/Swamp> | ValidTgts$ Creature | TgtPrompt$ Select targ
 A:AB$ Pump | Cost$ T Sac<1/Creature> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | NumDef$ +2 | SpellDescription$ Target creature gets +2/+2 until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blighted_shaman.jpg
 Oracle:{T}, Sacrifice a Swamp: Target creature gets +1/+1 until end of turn.\n{T}, Sacrifice a creature: Target creature gets +2/+2 until end of turn.
-SetInfo:MIR Uncommon
-SetInfo:6ED Uncommon

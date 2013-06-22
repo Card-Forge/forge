@@ -7,9 +7,3 @@ S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Mountainwalk |
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/burrowing.jpg
 Oracle:Enchant creature\nEnchanted creature has mountainwalk.
-SetInfo:2ED Uncommon
-SetInfo:6ED Uncommon
-SetInfo:LEB Uncommon
-SetInfo:LEA Uncommon
-SetInfo:4ED Uncommon
-SetInfo:3ED Uncommon

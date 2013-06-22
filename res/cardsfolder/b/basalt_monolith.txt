@@ -7,7 +7,3 @@ A:AB$ Mana | Cost$ T | Produced$ 1 | Amount$ 3 | SpellDescription$ Add 3 to your
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/basalt_monolith.jpg
 Oracle:Basalt Monolith doesn't untap during your untap step.\n{T}: Add {3} to your mana pool.\n{3}: Untap Basalt Monolith.
-SetInfo:LEB Uncommon
-SetInfo:LEA Uncommon
-SetInfo:3ED Uncommon
-SetInfo:2ED Uncommon

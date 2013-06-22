@@ -7,4 +7,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/balancing_act.jp
 SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
 Oracle:Each player chooses a number of permanents he or she controls equal to the number of permanents controlled by the player who controls the fewest, then sacrifices the rest. Each player discards cards the same way.
-SetInfo:ODY Rare

@@ -4,4 +4,3 @@ Types:Sorcery
 A:SP$ SetLife | Cost$ 7 W W | ValidTgts$ Player | TgtPrompt$ Select target player | LifeAmount$ 20 | SpellDescription$ Target player's life total becomes 20.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blessed_wind.jpg
 Oracle:Target player's life total becomes 20.
-SetInfo:PCY Rare

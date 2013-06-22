@@ -5,6 +5,3 @@ A:AB$ Mana | Cost$ T Sac<1/CARDNAME> | Produced$ Any | Amount$ 3 | SpellDescript
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/black_lotus.jpg
 Oracle:{T}, Sacrifice Black Lotus: Add three mana of any one color to your mana pool.
-SetInfo:LEB Rare
-SetInfo:LEA Rare
-SetInfo:2ED Rare

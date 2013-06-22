@@ -6,4 +6,3 @@ SVar:TrigDraw:AB$ Draw | Cost$ 0 | NumCards$ 1
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bred_for_the_hunt.jpg
 Oracle:Whenever a creature you control with a +1/+1 counter on it deals combat damage to a player, you may draw a card.
-SetInfo:DGM Uncommon

@@ -7,5 +7,3 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigExile:AB$ChangeZoneAll | Cost$ 0 | ValidTgts$ Player | TgtPrompt$ Select target player | Origin$ Graveyard | Destination$ Exile | ChangeType$ Card | IsCurse$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bojuka_bog.jpg
 Oracle:Bojuka Bog enters the battlefield tapped.\nWhen Bojuka Bog enters the battlefield, exile all cards from target player's graveyard.\n{T}: Add {B} to your mana pool.
-SetInfo:COM Common
-SetInfo:WWK Common

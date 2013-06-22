@@ -4,4 +4,3 @@ Types:Sorcery
 A:SP$ Draw | Cost$ 4 U | NumCards$ 3 | SpellDescription$ Draw three cards.
 SVar:Picture:http://serv3.tcgimages.eu/img/cards/Portal_Three_Kingdoms/brilliant_plan.jpg
 Oracle:Draw three cards.
-SetInfo:PTK Uncommon

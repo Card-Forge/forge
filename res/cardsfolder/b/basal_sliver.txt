@@ -7,4 +7,3 @@ SVar:Mana:AB$Mana | Cost$ Sac<1/CARDNAME> | Produced$ B | Amount$ 2 | SpellDescr
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/basal_sliver.jpg
 Oracle:All Slivers have "Sacrifice this permanent: Add {B}{B} to your mana pool."
-SetInfo:TSP Common

@@ -5,6 +5,3 @@ PT:1/1
 A:AB$ Pump | Cost$ Sac<1/Creature> | NumAtt$ +2 | NumDef$ +2 | SpellDescription$ CARDNAME gets +2/+2 until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bloodthrone_vampire.jpg
 Oracle:Sacrifice a creature: Bloodthrone Vampire gets +2/+2 until end of turn.
-SetInfo:M11 Common
-SetInfo:M13 Common
-SetInfo:ROE Common

@@ -7,4 +7,3 @@ A:AB$ ChangeZoneAll | Cost$ B B B Exile<1/CARDNAME> | ChangeType$ Creature.Black
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/balthor_the_defiled.jpg
 Oracle:Minion creatures get +1/+1.\n{B}{B}{B}, Exile Balthor the Defiled: Each player returns all black and all red creature cards from his or her graveyard to the battlefield.
-SetInfo:JUD Rare

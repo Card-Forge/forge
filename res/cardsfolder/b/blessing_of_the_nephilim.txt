@@ -10,4 +10,3 @@ S:Mode$ Continuous | Affected$ Creature.EnchantedBy+Red | AddPower$ 1 | AddTough
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy+Green | AddPower$ 1 | AddToughness$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blessing_of_the_nephilim.jpg
 Oracle:Enchant creature\nEnchanted creature gets +1/+1 for each of its colors.
-SetInfo:DIS Uncommon

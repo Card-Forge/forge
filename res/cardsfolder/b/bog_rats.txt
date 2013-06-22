@@ -5,7 +5,3 @@ PT:1/1
 K:CantBeBlockedBy Creature.Wall
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bog_rats.jpg
 Oracle:Bog Rats can't be blocked by Walls.
-SetInfo:5ED Common
-SetInfo:CHR Common
-SetInfo:DRK Common
-SetInfo:6ED Common

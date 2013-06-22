@@ -8,4 +8,3 @@ K:Indestructible
 K:If CARDNAME would be put into a graveyard from anywhere, reveal CARDNAME and shuffle it into its owner's library instead.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blightsteel_colossus.jpg
 Oracle:Trample, infect\nBlightsteel Colossus is indestructible.\nIf Blightsteel Colossus would be put into a graveyard from anywhere, reveal Blightsteel Colossus and shuffle it into its owner's library instead.
-SetInfo:MBS Mythic

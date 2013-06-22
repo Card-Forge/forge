@@ -7,4 +7,3 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigDraw:AB$Draw | Cost$ 0 | NumCards$ 2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bequeathal.jpg
 Oracle:Enchant creature\nWhen enchanted creature dies, you draw two cards.
-SetInfo:EXO Common

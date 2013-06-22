@@ -6,4 +6,3 @@ SVar:TrigReturn:AB$ ChangeZoneAll | Cost$ 0 | ChangeType$ Triggered.sameName | O
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bloodbond_march.jpg
 Oracle:Whenever a player casts a creature spell, each player returns all cards with the same name as that spell from his or her graveyard to the battlefield.
-SetInfo:RAV Rare

@@ -8,5 +8,3 @@ SVar:X:Count$Valid Creature.YouCtrl+Other
 SVar:BuffedBy:Creature
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bronze_horse.jpg
 Oracle:Trample\nAs long as you control another creature, prevent all damage that would be dealt to Bronze Horse by spells that target it.
-SetInfo:CHR Rare
-SetInfo:LEG Rare

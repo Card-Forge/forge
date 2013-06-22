@@ -7,4 +7,3 @@ SVar:ChooseCreature:DB$ ChooseCard | Cost$ 0 | Defined$ You | Amount$ 1 | Choice
 SVar:DBCopy:DB$ Clone | Defined$ Remembered
 SVar:Picture:http://www.wizards.com/global/images/magic/general/body_double.jpg
 Oracle:You may have Body Double enter the battlefield as a copy of any creature card in a graveyard.
-SetInfo:PLC Rare

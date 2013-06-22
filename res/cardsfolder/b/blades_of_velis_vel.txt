@@ -6,4 +6,3 @@ A:SP$ Pump | Cost$ 1 R | TargetMin$ 0 | TargetMax$ 2 | NumAtt$ +2 | ValidTgts$ C
 SVar:DBAnimate:DB$ Animate | Cost$ 0 | Defined$ Targeted | Types$ AllCreatureTypes
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blades_of_velis_vel.jpg
 Oracle:Changeling (This card is every creature type at all times.)\nUp to two target creatures each get +2/+0 and gain all creature types until end of turn.
-SetInfo:LRW Common

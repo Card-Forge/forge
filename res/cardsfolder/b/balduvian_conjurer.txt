@@ -7,4 +7,3 @@ SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/balduvian_conjurer.jpg
 Oracle:{T}: Target snow land becomes a 2/2 creature until end of turn. It's still a land.
-SetInfo:ICE Uncommon

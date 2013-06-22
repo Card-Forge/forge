@@ -8,7 +8,3 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:Dmg1:AB$ DealDamage | Cost$ 0 | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature to distribute damage to | NumDmg$ 5 | TargetMin$ 1 | TargetMax$ 5 | DividedAsYouChoose$ 5
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bogardan_hellkite.jpg
 Oracle:Flash (You may cast this spell any time you could cast an instant.)\nFlying\nWhen Bogardan Hellkite enters the battlefield, it deals 5 damage divided as you choose among any number of target creatures and/or players.
-SetInfo:M10 Mythic
-SetInfo:DRB Rare
-SetInfo:DDG Mythic
-SetInfo:TSP Rare

@@ -6,4 +6,3 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigDestroy:DB$ Destroy | Cost$ 0 | ValidTgts$ Artifact | TgtPrompt$ Select target artifact.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/batterhorn.jpg
 Oracle:When Batterhorn enters the battlefield, you may destroy target artifact.
-SetInfo:RTR Common

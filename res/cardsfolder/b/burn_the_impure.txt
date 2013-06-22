@@ -6,4 +6,3 @@ SVar:DBDamage:DB$ DealDamage | Defined$ TargetedController | NumDmg$ 3 | Conditi
 SVar:X:Targeted$Valid Creature.withInfect
 SVar:Picture:http://www.wizards.com/global/images/magic/general/burn_the_impure.jpg
 Oracle:Burn the Impure deals 3 damage to target creature. If that creature has infect, Burn the Impure deals 3 damage to that creature's controller.
-SetInfo:MBS Common

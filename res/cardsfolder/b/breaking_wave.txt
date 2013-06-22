@@ -8,4 +8,3 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/breaking_wave.jpg
 Oracle:You may cast Breaking Wave any time you could cast an instant if you pay {2} more to cast it.\nSimultaneously untap all tapped creatures and tap all untapped creatures.
-SetInfo:INV Rare

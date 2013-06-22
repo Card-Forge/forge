@@ -6,4 +6,3 @@ A:AB$ ChangeZone | Cost$ 2 Sac<1/Permanent> | ValidTgts$ Creature | TgtPrompt$ S
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/barrin_master_wizard.jpg
 Oracle:{2}, Sacrifice a permanent: Return target creature to its owner's hand.
-SetInfo:USG Rare

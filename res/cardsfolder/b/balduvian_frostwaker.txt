@@ -6,4 +6,3 @@ A:AB$ Animate | Cost$ T | ValidTgts$ Land.Snow | TgtPrompt$ Select target snow l
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/balduvian_frostwaker.jpg
 Oracle:{U}, {T}: Target snow land becomes a 2/2 blue Elemental creature with flying. It's still a land.
-SetInfo:CSP Uncommon

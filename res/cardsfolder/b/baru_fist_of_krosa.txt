@@ -9,4 +9,3 @@ SVar:TrigPump:AB$PumpAll | Cost$ 0 | ValidCards$ Creature.Green+YouCtrl | NumAtt
 SVar:BuffedBy:Forest
 SVar:Picture:http://resources.wizards.com/magic/cards/fut/en-us/card136155.jpg
 Oracle:Whenever a Forest enters the battlefield, green creatures you control get +1/+1 and gain trample until end of turn.\nGrandeur - Discard another card named Baru, Fist of Krosa: Put an X/X green Wurm creature token onto the battlefield, where X is the number of lands you control.
-SetInfo:FUT Rare

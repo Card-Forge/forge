@@ -6,4 +6,3 @@ S:Mode$ ReduceCost | ValidCard$ Elemental,Warrior | Type$ Spell | Activator$ You
 A:AB$ PutCounter | Cost$ 1 R Discard<1/CARDNAME> | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | ActivationZone$ Hand | CounterNum$ 1 | PrecostDesc$ Reinforce 1 - | SpellDescription$ Put a +1/+1 counter on target creature.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/brighthearth_banneret.jpg
 Oracle:Elemental spells and Warrior spells you cast cost {1} less to cast.\nReinforce 1-{1}{R} ({1}{R}, Discard this card: Put a +1/+1 counter on target creature.)
-SetInfo:MOR Common

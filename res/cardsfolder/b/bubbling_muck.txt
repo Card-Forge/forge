@@ -7,4 +7,3 @@ SVar:TrigMana:AB$ Mana | Cost$ 0 | Produced$ B | Amount$ 1 | Defined$ TriggeredP
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bubbling_muck.jpg
 Oracle:Until end of turn, whenever a player taps a Swamp for mana, that player adds {B} to his or her mana pool (in addition to the mana the land produces).
-SetInfo:UDS Common

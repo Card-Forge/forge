@@ -6,4 +6,3 @@ SVar:X:Count$xPaid
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/belbes_armor.jpg
 Oracle:{X}, {T}: Target creature gets -X/+X until end of turn.
-SetInfo:NMS Uncommon

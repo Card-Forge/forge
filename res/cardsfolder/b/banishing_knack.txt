@@ -6,4 +6,3 @@ SVar:ABChangeZone:AB$ ChangeZone | Cost$ T | ValidTgts$ Permanent.nonLand | TgtP
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/banishing_knack.jpg
 Oracle:Until end of turn, target creature gains "{T}: Return target nonland permanent to its owner's hand."
-SetInfo:EVE Common

@@ -9,5 +9,3 @@ SVar:DBRemove:DB$ ChangeZone | ValidTgts$ Permanent.nonCreature | IsCurse$ True 
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/brutalizer_exarch.jpg
 Oracle:When Brutalizer Exarch enters the battlefield, choose one - Search your library for a creature card, reveal it, then shuffle your library and put that card on top of it; or put target noncreature permanent on the bottom of its owner's library.
-SetInfo:PC2 Uncommon
-SetInfo:NPH Uncommon

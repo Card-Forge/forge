@@ -8,4 +8,3 @@ SVar:DBDmg:DB$DealDamage | Defined$ You | NumDmg$ 7 | CheckSVar$ X | SVarCompare
 SVar:X:Remembered$Amount
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bronze_bombshell.jpg
 Oracle:When a player other than Bronze Bombshell's owner controls it, that player sacrifices it. If the player does, Bronze Bombshell deals 7 damage to him or her.
-SetInfo:DIS Rare

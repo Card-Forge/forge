@@ -6,4 +6,3 @@ A:AB$ Pump | Cost$ 1 W T | ValidTgts$ Creature.blocked | TgtPrompt$ Select targe
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/benalish_missionary.jpg
 Oracle:{1}{W}, {T}: Prevent all combat damage that would be dealt by target blocked creature this turn.
-SetInfo:WTH Common

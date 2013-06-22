@@ -9,5 +9,3 @@ SVar:X:TriggerCount$DamageAmount
 SVar:HasCombatEffect:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/belltower_sphinx.jpg
 Oracle:Flying\nWhenever a source deals damage to Belltower Sphinx, that source's controller puts that many cards from the top of his or her library into his or her graveyard.
-SetInfo:RAV Uncommon
-SetInfo:M12 Uncommon

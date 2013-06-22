@@ -5,4 +5,3 @@ A:SP$ DealDamage | Cost$ 1 R | ValidTgts$ Creature.attacking,Creature.blocking |
 K:Flashback 3 W
 SVar:Picture:http://www.wizards.com/global/images/magic/general/burning_oil.jpg
 Oracle:Burning Oil deals 3 damage to target attacking or blocking creature.\nFlashback {3}{W} (You may cast this card from your graveyard for its flashback cost. Then exile it.)
-SetInfo:DKA Uncommon

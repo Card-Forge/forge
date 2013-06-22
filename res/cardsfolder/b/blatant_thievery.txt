@@ -5,4 +5,3 @@ A:SP$ GainControl | Cost$ 4 U U U | ValidTgts$ Permanent.OppCtrl | TgtPrompt$ Se
 SVar:OneEach:PlayerCountOpponents$Amount
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blatant_thievery.jpg
 Oracle:For each opponent, gain control of target permanent that player controls. (This effect lasts indefinitely.)
-SetInfo:ONS Rare

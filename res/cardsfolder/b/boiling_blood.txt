@@ -6,4 +6,3 @@ SVar:DBDraw:DB$ Draw | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/boiling_blood.jpg
 Oracle:Target creature attacks this turn if able.\nDraw a card.
-SetInfo:WTH Common

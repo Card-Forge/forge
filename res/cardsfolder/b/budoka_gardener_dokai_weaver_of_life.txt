@@ -21,4 +21,3 @@ A:AB$Token | Cost$ 4 G G T | TokenAmount$ 1 | TokenName$ Elemental | TokenColors
 SVar:X:Count$Valid Land.YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dokai_weaver_of_life.jpg
 Oracle:{4}{G}{G}, {T}: Put an X/X green Elemental creature token onto the battlefield, where X is the number of lands you control.
-SetInfo:CHK Rare

@@ -6,4 +6,3 @@ S:Mode$ Continuous | Affected$ Creature.Sliver | AddPower$ 2 | Description$ All 
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bonesplitter_sliver.jpg
 Oracle:All Sliver creatures get +2/+0.
-SetInfo:TSP Common

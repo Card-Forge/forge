@@ -6,4 +6,3 @@ A:AB$ Shuffle | Cost$ R Sac<1/CARDNAME> | ValidTgts$ Player | TgtPrompt$ Select 
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/boggart_forager.jpg
 Oracle:{R}, Sacrifice Boggart Forager: Target player shuffles his or her library.
-SetInfo:LRW Common

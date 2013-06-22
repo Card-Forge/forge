@@ -5,4 +5,3 @@ PT:3/3
 K:First Strike
 SVar:Picture:http://www.wizards.com/global/images/magic/general/battle_hurda.jpg
 Oracle:First strike
-SetInfo:WWK Common

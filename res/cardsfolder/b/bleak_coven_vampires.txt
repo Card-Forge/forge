@@ -7,4 +7,3 @@ SVar:TrigDrain:AB$ LoseLife | Cost$ 0 | ValidTgts$ Player | TgtPrompt$ Select a 
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 4
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bleak_coven_vampires.jpg
 Oracle:Metalcraft - When Bleak Coven Vampires enters the battlefield, if you control three or more artifacts, target player loses 4 life and you gain 4 life.
-SetInfo:SOM Common

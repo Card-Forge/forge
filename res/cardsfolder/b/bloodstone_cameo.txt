@@ -7,4 +7,3 @@ SVar:RemRandomDeck:True
 DeckNeeds:Color$Black|Red
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bloodstone_cameo.jpg
 Oracle:{T}: Add {B} or {R} to your mana pool.
-SetInfo:INV Uncommon

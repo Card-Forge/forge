@@ -8,4 +8,3 @@ SVar:X:Count$xPaid
 Var:PayX:5
 SVar:Picture:http://www.wizards.com/global/images/magic/general/banefire.jpg
 Oracle:Banefire deals X damage to target creature or player.\nIf X is 5 or more, Banefire can't be countered by spells or abilities and the damage can't be prevented.
-SetInfo:CFX Rare

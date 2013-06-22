@@ -7,4 +7,3 @@ A:AB$ ChangeZone | ActivationZone$ Command | Cost$ 3 | Origin$ Hand | Destinatio
 A:AB$ ChangeZone | ActivationZone$ Command | Cost$ 4 | Origin$ Hand | Destination$ Battlefield | ChangeType$ Creature | DefinedPlayer$ Player | ChangeNum$ 1 | SorcerySpeed$ True | SpellDescription$ Each player may put a creature card from his or her hand onto the battlefield. Activate this ability only any time you could cast a sorcery.
 SVar:Picture:http://www.cardforge.org/fpics/vgd-lq/braids_conjurer_adept_avatar.jpg
 Oracle:Hand +0, life +3\n{2}: Each player may put a land card from his or her hand onto the battlefield tapped.\n{3}: Each player may put a noncreature artifact card from his or her hand onto the battlefield.\n{4}: Each player may put a creature card from his or her hand onto the battlefield. Activate this ability only any time you could cast a sorcery.
-SetInfo:VAN Special

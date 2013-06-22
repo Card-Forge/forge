@@ -6,4 +6,3 @@ S:Mode$ Continuous | Affected$ Creature.Eldrazi+Spawn+YouCtrl | AddPower$ 2 | Ad
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/broodwarden.jpg
 Oracle:Eldrazi Spawn creatures you control get +2/+1.
-SetInfo:ROE Uncommon

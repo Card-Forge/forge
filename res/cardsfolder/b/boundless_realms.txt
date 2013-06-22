@@ -5,4 +5,3 @@ A:SP$ ChangeZone | Cost$ 6 G | Origin$ Library | Destination$ Battlefield | Chan
 SVar:X:Count$Valid Land.YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/boundless_realms.jpg
 Oracle:Search your library for up to X basic land cards, where X is the number of lands you control, and put them onto the battlefield tapped. Then shuffle your library.
-SetInfo:M13 Rare

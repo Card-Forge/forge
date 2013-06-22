@@ -8,4 +8,3 @@ SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blinkmoth_infusion.jpg
 Oracle:Affinity for artifacts (This spell costs {1} less to cast for each artifact you control.)\nUntap all artifacts.
-SetInfo:5DN Rare

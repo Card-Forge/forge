@@ -8,4 +8,3 @@ SVar:X:Sacrificed$CardPower
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bloodfire_infusion.jpg
 Oracle:Enchant creature you control\n{R}, Sacrifice enchanted creature: Bloodfire Infusion deals damage equal to the sacrificed creature's power to each creature.
-SetInfo:APC Common

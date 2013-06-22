@@ -8,4 +8,3 @@ SVar:TrigLoseLife:AB$LoseLife | Cost$ 0 | ValidTgts$ Player | TgtPrompt$ Choose 
 SVar:DBGainLife:DB$GainLife | Defined$ You | LifeAmount$ 2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bloodhunter_bat.jpg
 Oracle:Flying\nWhen Bloodhunter Bat enters the battlefield, target player loses 2 life and you gain 2 life.
-SetInfo:M13 Common

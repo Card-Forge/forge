@@ -7,4 +7,3 @@ SVar:TrigChangeZone:AB$ ChangeZone | Cost$ 0 | Origin$ Hand | Destination$ Battl
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/braids_conjurer_adept.jpg
 Oracle:At the beginning of each player's upkeep, that player may put an artifact, creature, or land card from his or her hand onto the battlefield.
-SetInfo:PLC Rare

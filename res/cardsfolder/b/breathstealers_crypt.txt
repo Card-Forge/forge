@@ -8,4 +8,3 @@ SVar:DBDiscard:DB$ Discard | Defined$ ReplacedPlayer | Mode$ Defined | DefinedCa
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/breathstealers_crypt.jpg
 Oracle:If a player would draw a card, instead he or she draws a card and reveals it. If it's a creature card, that player discards it unless he or she pays 3 life.
-SetInfo:VIS Rare

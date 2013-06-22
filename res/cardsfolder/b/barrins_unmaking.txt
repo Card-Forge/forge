@@ -5,4 +5,3 @@ A:SP$ ChangeZone | Cost$ 1 U | ValidTgts$ Permanent | TgtPrompt$ Select target p
 SVar:X:Targeted$Valid Card.SharesColorWith MostProminentColor
 SVar:Picture:http://www.wizards.com/global/images/magic/general/barrins_unmaking.jpg
 Oracle:Return target permanent to its owner's hand if that permanent shares a color with the most common color among all permanents or a color tied for most common.
-SetInfo:INV Common

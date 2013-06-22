@@ -8,4 +8,3 @@ SVar:X:Count$Valid Creature.YouCtrl
 SVar:BuffedBy:Creature
 SVar:Picture:http://www.wizards.com/global/images/magic/general/battle_squadron.jpg
 Oracle:Flying\nBattle Squadron's power and toughness are each equal to the number of creatures you control.
-SetInfo:MMQ Rare

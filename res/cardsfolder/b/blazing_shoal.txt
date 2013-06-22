@@ -8,4 +8,3 @@ SVar:Y:Exiled$CardManaCost
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blazing_shoal.jpg
 Oracle:You may exile a red card with converted mana cost X from your hand rather than pay Blazing Shoal's mana cost.\nTarget creature gets +X/+0 until end of turn.
-SetInfo:BOK Rare

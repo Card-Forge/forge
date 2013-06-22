@@ -6,4 +6,3 @@ SVar:DBDamage:DB$DealDamage | Cost$ 0 | Defined$ TargetedController | DamageSour
 SVar:X:Targeted$CardPower
 SVar:Picture:http://www.wizards.com/global/images/magic/general/backlash.jpg
 Oracle:Tap target untapped creature. That creature deals damage equal to its power to its controller.
-SetInfo:INV Uncommon

@@ -6,5 +6,3 @@ K:Vigilance
 K:Haste
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bull_cerodon.jpg
 Oracle:Vigilance, haste
-SetInfo:HOP Uncommon
-SetInfo:ALA Uncommon

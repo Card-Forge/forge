@@ -7,4 +7,3 @@ SVar:BrassSquireAttach:DB$ Attach | Object$ ParentTarget | ValidTgts$ Creature.Y
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/brass_squire.jpg
 Oracle:{T}: Attach target Equipment you control to target creature you control.
-SetInfo:MBS Uncommon

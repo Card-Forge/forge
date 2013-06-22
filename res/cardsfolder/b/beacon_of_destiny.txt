@@ -15,4 +15,3 @@ SVar:X:ReplaceCount$DamageAmount
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/beacon_of_destiny.jpg
 Oracle:{T}: The next time a source of your choice would deal damage to you this turn, that damage is dealt to Beacon of Destiny instead.
-SetInfo:LGN Rare

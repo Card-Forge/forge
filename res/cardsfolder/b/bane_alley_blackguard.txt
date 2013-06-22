@@ -4,4 +4,3 @@ Types:Creature Human Rogue
 PT:1/3
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bane_alley_blackguard.jpg
 Oracle:
-SetInfo:DGM Common

@@ -6,4 +6,3 @@ A:AB$ ChangeZone | ActivationZone$ Command | Cost$ Sac<1/Permanent> | ValidTgts$
 SVar:RemAIDeck:True
 SVar:Picture:http://www.cardforge.org/fpics/vgd-lq/barrin.jpg
 Oracle:Hand +0, life +6\nSacrifice a permanent: Return target creature to its owner's hand.
-SetInfo:VAN Special

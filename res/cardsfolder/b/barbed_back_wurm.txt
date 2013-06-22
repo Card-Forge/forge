@@ -5,4 +5,3 @@ PT:4/3
 A:AB$ Pump | Cost$ B | ValidTgts$ Creature.Green+blockingSource | TgtPrompt$ Select target green creature blocking Barbed-Back Wurm | NumAtt$ -1 | NumDef$ -1 | IsCurse$ True | SpellDescription$ Target green creature blocking CARDNAME gets -1/-1 until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/barbed_back_wurm.jpg
 Oracle:{B}: Target green creature blocking Barbed-Back Wurm gets -1/-1 until end of turn.
-SetInfo:MIR Uncommon

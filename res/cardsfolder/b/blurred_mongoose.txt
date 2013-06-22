@@ -6,4 +6,3 @@ K:CARDNAME can't be countered.
 K:Shroud
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blurred_mongoose.jpg
 Oracle:Blurred Mongoose can't be countered.\nShroud (This permanent can't be the target of spells or abilities.)
-SetInfo:INV Rare

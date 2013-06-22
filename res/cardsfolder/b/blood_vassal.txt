@@ -6,4 +6,3 @@ A:AB$ Mana | Cost$ Sac<1/CARDNAME> | Produced$ B | Amount$ 2 | SpellDescription$
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blood_vassal.jpg
 Oracle:Sacrifice Blood Vassal: Add {B}{B} to your mana pool.
-SetInfo:USG Common

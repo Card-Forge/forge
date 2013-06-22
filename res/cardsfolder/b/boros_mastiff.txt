@@ -7,4 +7,3 @@ SVar:TrigBattalionPump:AB$ Pump | Cost$ 0 | KW$ Lifelink
 SVar:BattalionTest:Count$Valid Creature.attacking+Other
 SVar:Picture:http://www.wizards.com/global/images/magic/general/boros_mastiff.jpg
 Oracle:Battalion - Whenever Boros Mastiff and at least two other creatures attack, Boros Mastiff gains lifelink until end of turn. (Damage dealt by a creature with lifelink also causes its controller to gain that much life.)
-SetInfo:DGM Common

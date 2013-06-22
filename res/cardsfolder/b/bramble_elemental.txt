@@ -7,5 +7,3 @@ SVar:TrigToken:AB$ Token | Cost$ 0 | TokenAmount$ 2 | TokenOwner$ TriggeredTarge
 SVar:EnchantMe:Multiple
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bramble_elemental.jpg
 Oracle:Whenever an Aura becomes attached to Bramble Elemental, put two 1/1 green Saproling creature tokens onto the battlefield.
-SetInfo:RAV Common
-SetInfo:PC2 Common

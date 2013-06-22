@@ -9,4 +9,3 @@ SVar:RemRandomDeck:True
 SVar:BuffedBy:Giant
 SVar:Picture:http://www.wizards.com/global/images/magic/general/borderland_behemoth.jpg
 Oracle:Trample\nBorderland Behemoth gets +4/+4 for each other Giant you control.
-SetInfo:MOR Rare

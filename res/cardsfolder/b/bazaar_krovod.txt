@@ -7,4 +7,3 @@ SVar:TrigPump:DB$Pump | ValidTgts$ Creature.attacking+Other | TgtPrompt$ Select 
 SVar:DBUntap:DB$Untap | Defined$ Targeted
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bazaar_krovod.jpg
 Oracle:Whenever Bazaar Krovod attacks, another target attacking creature gets +0/+2 until end of turn. Untap that creature.
-SetInfo:RTR Uncommon

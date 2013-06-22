@@ -8,4 +8,3 @@ SVar:X:Count$Valid Creature.Other+Blue+YouCtrl
 SVar:BuffedBy:Creature.Blue
 SVar:Picture:http://www.wizards.com/global/images/magic/general/briarberry_cohort.jpg
 Oracle:Flying\nBriarberry Cohort gets +1/+1 as long as you control another blue creature.
-SetInfo:SHM Common

@@ -6,5 +6,3 @@ SVar:DBSetLife:DB$ SetLife | Defined$ Player.IsRemembered | LifeAmount$ X | Refe
 SVar:X:Count$Valid Creature.RememberedPlayerCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/biorhythm.jpg
 Oracle:Each player's life total becomes the number of creatures he or she controls.
-SetInfo:ONS Rare
-SetInfo:9ED Rare

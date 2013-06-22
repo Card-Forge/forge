@@ -7,5 +7,3 @@ SVar:TrigPump:AB$Pump | Cost$ 0 | Defined$ Self | NumAtt$ 4 | NumDef$ 4 | KW$ Tr
 SVar:BuffedBy:Land
 SVar:Picture:http://www.wizards.com/global/images/magic/general/baloth_woodcrasher.jpg
 Oracle:Landfall - Whenever a land enters the battlefield under your control, Baloth Woodcrasher gets +4/+4 and gains trample until end of turn.
-SetInfo:COM Uncommon
-SetInfo:ZEN Uncommon

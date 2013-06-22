@@ -7,4 +7,3 @@ T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | CombatDama
 SVar:TrigCounters:AB$PutCounterAll | Cost$ 0 | ValidCards$ Creature.YouCtrl | CounterType$ P1P1 | CounterNum$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/borborygmos.jpg
 Oracle:Trample\nWhenever Borborygmos deals combat damage to a player, put a +1/+1 counter on each creature you control.
-SetInfo:GPT Rare

@@ -6,6 +6,3 @@ SVar:DBPump:DB$Pump | NumAtt$ +4 | NumDef$ -4 | Defined$ Targeted | ConditionDef
 SVar:X:Targeted$CardToughness/Minus.1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blood_lust.jpg
 Oracle:If target creature has toughness 5 or greater, it gets +4/-4 until end of turn. Otherwise, it gets +4/-X until end of turn, where X is its toughness minus 1.
-SetInfo:5ED Common
-SetInfo:LEG Uncommon
-SetInfo:4ED Common

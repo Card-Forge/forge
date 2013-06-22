@@ -9,4 +9,3 @@ SVar:BuffedBy:Instant,Sorcery
 DeckHints:Type$Instant|Sorcery
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blistercoil_weird.jpg
 Oracle:Whenever you cast an instant or sorcery spell, Blistercoil Weird gets +1/+1 until end of turn. Untap it.
-SetInfo:RTR Uncommon

@@ -8,8 +8,3 @@ SVar:X:Count$TypeYouCtrl.Forest
 SVar:BuffedBy:Forest
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blanchwood_armor.jpg
 Oracle:Enchant creature (Target a creature as you cast this. This card enters the battlefield attached to that creature.)\nEnchanted creature gets +1/+1 for each Forest you control.
-SetInfo:8ED Uncommon
-SetInfo:7ED Uncommon
-SetInfo:10E Uncommon
-SetInfo:9ED Uncommon
-SetInfo:USG Uncommon

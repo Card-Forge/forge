@@ -8,4 +8,3 @@ SVar:BuffedBy:Giant
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blind_spot_giant.jpg
 Oracle:Blind-Spot Giant can't attack or block unless you control another Giant.
-SetInfo:LRW Common

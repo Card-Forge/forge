@@ -5,4 +5,3 @@ T:Mode$ Attacks | ValidCard$ Creature.YouDontCtrl | Attacked$ You,Planeswalker.Y
 SVar:TrigLoseLife:AB$ LoseLife | Cost$ 0 | Defined$ TriggeredAttackerController | LifeAmount$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blood_reckoning.jpg
 Oracle:Whenever a creature attacks you or a planeswalker you control, that creature's controller loses 1 life.
-SetInfo:M13 Uncommon

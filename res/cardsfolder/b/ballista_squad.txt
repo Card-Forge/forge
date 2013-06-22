@@ -6,6 +6,3 @@ A:AB$ DealDamage | Cost$ X W T | ValidTgts$ Creature.attacking,Creature.blocking
 SVar:X:Count$xPaid
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ballista_squad.jpg
 Oracle:{X}{W}, {T}: Ballista Squad deals X damage to target attacking or blocking creature.
-SetInfo:MMQ Uncommon
-SetInfo:9ED Uncommon
-SetInfo:10E Uncommon

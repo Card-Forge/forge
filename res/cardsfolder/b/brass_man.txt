@@ -7,6 +7,3 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | OptionalDecider$ You | Execut
 SVar:TrigUntap:AB$Untap | Cost$ 1 | Defined$ Self
 SVar:Picture:http://www.wizards.com/global/images/magic/general/brass_man.jpg
 Oracle:Brass Man doesn't untap during your untap step.\nAt the beginning of your upkeep, you may pay {1}. If you do, untap Brass Man.
-SetInfo:4ED Uncommon
-SetInfo:3ED Uncommon
-SetInfo:ARN Uncommon

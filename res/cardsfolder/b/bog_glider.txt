@@ -7,4 +7,3 @@ A:AB$ ChangeZone | Cost$ T Sac<1/Land> | Origin$ Library | Destination$ Battlefi
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bog_glider.jpg
 Oracle:Flying\n{T}, Sacrifice a land: Search your library for a Mercenary permanent card with converted mana cost 2 or less and put it onto the battlefield. Then shuffle your library.
-SetInfo:PCY Common

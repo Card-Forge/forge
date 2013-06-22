@@ -4,4 +4,3 @@ Types:Artifact
 A:AB$ ChangeZone | Cost$ 4 T Exile<1/CARDNAME> | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target creature.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/brittle_effigy.jpg
 Oracle:{4}, {T}, Exile Brittle Effigy: Exile target creature.
-SetInfo:M11 Rare

@@ -5,7 +5,3 @@ A:SP$ DestroyAll | Cost$ 3 R | ValidCards$ Island | SpellDescription$ Destroy al
 SVar:RemRandomDeck:True
 SVar:Picture:http://resources.wizards.com/magic/cards/7e/en-us/card25675.jpg
 Oracle:Destroy all Islands.
-SetInfo:8ED Uncommon
-SetInfo:7ED Uncommon
-SetInfo:TMP Uncommon
-SetInfo:6ED Uncommon

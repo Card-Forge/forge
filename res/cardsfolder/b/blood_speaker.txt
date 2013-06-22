@@ -10,4 +10,3 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Demon.
 SVar:TrigReturn:AB$ ChangeZone | Cost$ 0 | Defined$ Self | Origin$ Graveyard | Destination$ Hand
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blood_speaker.jpg
 Oracle:At the beginning of your upkeep, you may sacrifice Blood Speaker. If you do, search your library for a Demon card, reveal that card, and put it into your hand. Then shuffle your library.\nWhenever a Demon enters the battlefield under your control, return Blood Speaker from your graveyard to your hand.
-SetInfo:CHK Uncommon

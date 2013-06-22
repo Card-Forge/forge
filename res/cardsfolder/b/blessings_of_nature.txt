@@ -6,4 +6,3 @@ A:SP$ PutCounter | Cost$ 4 G | ValidTgts$ Creature | TgtPrompt$ Select target cr
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blessings_of_nature.jpg
 Oracle:Distribute four +1/+1 counters among any number of target creatures.\nMiracle {G} (You may cast this card for its miracle cost when you draw it if it's the first card you drew this turn.)
-SetInfo:AVR Uncommon

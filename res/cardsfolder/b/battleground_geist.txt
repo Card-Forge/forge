@@ -7,4 +7,3 @@ S:Mode$ Continuous | Affected$ Creature.Spirit+Other+YouCtrl | AddPower$ 1 | Add
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/battleground_geist.jpg
 Oracle:Flying\nOther Spirit creatures you control get +1/+0.
-SetInfo:ISD Uncommon

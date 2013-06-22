@@ -7,4 +7,3 @@ SVar:TrigCounter:AB$ Counter | Cost$ 0 | Defined$ TriggeredSpellAbility | Unless
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blood_funnel.jpg
 Oracle:Noncreature spells you cast cost {2} less to cast.\nWhenever you cast a noncreature spell, counter that spell unless you sacrifice a creature.
-SetInfo:RAV Rare

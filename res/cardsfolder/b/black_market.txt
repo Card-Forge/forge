@@ -8,4 +8,3 @@ SVar:TrigGetMana:AB$ Mana | Cost$ 0 | Produced$ B | Amount$ X | References$ X | 
 SVar:X:Count$CardCounters.CHARGE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/black_market.jpg
 Oracle:Whenever a creature dies, put a charge counter on Black Market.\nAt the beginning of your precombat main phase, add {B} to your mana pool for each charge counter on Black Market.
-SetInfo:MMQ Rare

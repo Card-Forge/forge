@@ -7,4 +7,3 @@ SVar:DrawSlowtrip:DB$Draw | NumCards$ 1 | Defined$ You
 SVar:X:Count$xPaid
 SVar:Picture:http://www.wizards.com/global/images/magic/general/balduvian_rage.jpg
 Oracle:Target attacking creature gets +X/+0 until end of turn.\nDraw a card at the beginning of the next turn's upkeep.
-SetInfo:CSP Uncommon

@@ -7,4 +7,3 @@ A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add R to your mana pool.
 K:CARDNAME enters the battlefield tapped unless you control two or fewer other lands.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blackcleave_cliffs.jpg
 Oracle:Blackcleave Cliffs enters the battlefield tapped unless you control two or fewer other lands.\n{T}: Add {B} or {R} to your mana pool.
-SetInfo:SOM Rare

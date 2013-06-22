@@ -5,5 +5,3 @@ PT:4/4
 K:CARDNAME attacks each turn if able.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/berserkers_of_blood_ridge.jpg
 Oracle:Berserkers of Blood Ridge attacks each turn if able.
-SetInfo:M11 Common
-SetInfo:M10 Common

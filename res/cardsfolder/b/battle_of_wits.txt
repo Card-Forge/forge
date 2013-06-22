@@ -6,6 +6,3 @@ SVar:TrigWinGame:AB$WinsGame | Cost$ 0 | Defined$ You
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/battle_of_wits.jpg
 Oracle:At the beginning of your upkeep, if you have 200 or more cards in your library, you win the game.
-SetInfo:M13 Rare
-SetInfo:ODY Rare
-SetInfo:9ED Rare

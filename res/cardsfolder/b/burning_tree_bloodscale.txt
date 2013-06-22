@@ -12,4 +12,3 @@ A:AB$ MustBlock | Cost$ 2 G | ValidTgts$ Creature | TgtPrompt$ Select target cre
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/burning_tree_bloodscale.jpg
 Oracle:Bloodthirst 1 (If an opponent was dealt damage this turn, this creature enters the battlefield with a +1/+1 counter on it.)\n{2}{R}: Target creature can't block Burning-Tree Bloodscale this turn.\n{2}{G}: Target creature blocks Burning-Tree Bloodscale this turn if able.
-SetInfo:GPT Common

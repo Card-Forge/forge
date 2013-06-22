@@ -6,4 +6,3 @@ SVar:NonStackingEffect:True
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blood_rites.jpg
 Oracle:{1}{R}, Sacrifice a creature: Blood Rites deals 2 damage to target creature or player.
-SetInfo:CHK Uncommon

@@ -5,4 +5,3 @@ PT:1/1
 K:Protection from creatures
 SVar:Picture:http://www.wizards.com/global/images/magic/general/beloved_chaplain.jpg
 Oracle:Protection from creatures
-SetInfo:ODY Uncommon

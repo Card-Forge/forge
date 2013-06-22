@@ -9,4 +9,3 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/brain_pry.jpg
 Oracle:Name a nonland card. Target player reveals his or her hand. That player discards a card with that name. If he or she can't, you draw a card.
-SetInfo:DIS Uncommon

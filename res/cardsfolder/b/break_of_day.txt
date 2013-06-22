@@ -6,4 +6,3 @@ SVar:FatefulHourPump:DB$ PumpAll | ValidCards$ Creature.YouCtrl | KW$ HIDDEN Ind
 SVar:FatefulHour:Count$YourLifeTotal
 SVar:Picture:http://www.wizards.com/global/images/magic/general/break_of_day.jpg
 Oracle:Creatures you control get +1/+1 until end of turn.\nFateful hour - If you have 5 or less life, those creatures also are indestructible this turn. (Lethal damage and effects that say "destroy" don't destroy them.)
-SetInfo:DKA Common

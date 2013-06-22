@@ -9,4 +9,3 @@ SVar:X:Count$Valid Dragon.YouCtrl
 SVar:BuffedBy:Dragon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bladewings_thrall.jpg
 Oracle:Bladewing's Thrall has flying as long as you control a Dragon.\nWhen a Dragon enters the battlefield, you may return Bladewing's Thrall from your graveyard to the battlefield.
-SetInfo:SCG Uncommon

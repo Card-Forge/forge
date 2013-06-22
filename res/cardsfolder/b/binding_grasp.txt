@@ -9,5 +9,3 @@ S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddToughness$ 1 | Descript
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/binding_grasp.jpg
 Oracle:Enchant creature\nAt the beginning of your upkeep, sacrifice Binding Grasp unless you pay {1}{U}.\nYou control enchanted creature.\nEnchanted creature gets +0/+1.
-SetInfo:ICE Uncommon
-SetInfo:5ED Uncommon

@@ -8,4 +8,3 @@ SVar:DBPump:DB$Pump | KW$ First Strike | Defined$ Targeted | Permanent$ True
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/brass_talon_chimera.jpg
 Oracle:First strike\nSacrifice Brass-Talon Chimera: Put a +2/+2 counter on target Chimera creature. It gains first strike. (This effect lasts indefinitely.)
-SetInfo:VIS Uncommon

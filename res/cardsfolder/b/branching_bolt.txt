@@ -8,6 +8,3 @@ SVar:DBDamage:DB$DealDamage | Cost$ 0 | ValidTgts$ Creature.withoutFlying | TgtP
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/branching_bolt.jpg
 Oracle:Choose one or both - Branching Bolt deals 3 damage to target creature with flying; and/or Branching Bolt deals 3 damage to target creature without flying.
-SetInfo:ARC Common
-SetInfo:HOP Common
-SetInfo:ALA Common

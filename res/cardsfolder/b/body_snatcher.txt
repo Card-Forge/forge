@@ -11,4 +11,3 @@ SVar:NeedsToPlayVar:Y GE2
 SVar:Y:Count$TypeInYourHand.Creature
 SVar:Picture:http://www.wizards.com/global/images/magic/general/body_snatcher.jpg
 Oracle:When Body Snatcher enters the battlefield, exile it unless you discard a creature card.\nWhen Body Snatcher dies, exile Body Snatcher and return target creature card from your graveyard to the battlefield.
-SetInfo:UDS Rare

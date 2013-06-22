@@ -7,4 +7,3 @@ SVar:BrawlX:Count$CardPower
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/brawl.jpg
 Oracle:Until end of turn, all creatures gain "{T}: This creature deals damage equal to its power to target creature."
-SetInfo:MMQ Rare

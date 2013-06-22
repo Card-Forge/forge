@@ -5,6 +5,3 @@ A:AB$ Mana | Cost$ 1 T | Produced$ W R | SpellDescription$ Add W R to your mana 
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/boros_signet.jpg
 Oracle:{1}, {T}: Add {R}{W} to your mana pool.
-SetInfo:RAV Common
-SetInfo:COM Common
-SetInfo:HOP Common

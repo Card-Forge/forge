@@ -7,4 +7,3 @@ A:AB$ Pump | Cost$ T | ValidTgts$ Creature.powerGE5 | TgtPrompt$ Select target c
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bloodthorn_taunter.jpg
 Oracle:Haste\n{T}: Target creature with power 5 or greater gains haste until end of turn.
-SetInfo:ALA Common

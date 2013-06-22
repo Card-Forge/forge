@@ -9,4 +9,3 @@ SVar:X:SVar$A/Minus.B
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bulwark.jpg
 Oracle:At the beginning of your upkeep, Bulwark deals X damage to target opponent, where X is the number of cards in your hand minus the number of cards in that player's hand.
-SetInfo:USG Rare

@@ -7,4 +7,3 @@ S:Mode$ CantBeCast | ValidCard$ Creature | Caster$ EnchantedController | Descrip
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/brand_of_ill_omen.jpg
 Oracle:Enchant creature\nCumulative upkeep {R} (At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.)\nEnchanted creature's controller can't cast creature spells.
-SetInfo:ICE Rare

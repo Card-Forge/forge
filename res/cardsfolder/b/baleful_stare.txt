@@ -8,6 +8,3 @@ SVar:Y:Count$RedInOppHand
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/baleful_stare.jpg
 Oracle:Target opponent reveals his or her hand. You draw a card for each Mountain and red card in it.
-SetInfo:7ED Uncommon
-SetInfo:POR Uncommon
-SetInfo:9ED Uncommon

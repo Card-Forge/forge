@@ -8,5 +8,3 @@ SVar:TrigDealDamage:AB$DealDamage | Cost$ 0 | Defined$ TriggeredTargetController
 SVar:DBDealDamage:DB$DealDamage | Defined$ You | NumDmg$ 3
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bellowing_fiend.jpg
 Oracle:Flying\nWhenever Bellowing Fiend deals damage to a creature, Bellowing Fiend deals 3 damage to that creature's controller and 3 damage to you.
-SetInfo:7ED Rare
-SetInfo:TMP Rare

@@ -10,4 +10,3 @@ SVar:DBForgetRemembered:DB$ Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bazaar_trader.jpg
 Oracle:{T}: Target player gains control of target artifact, creature, or land you control.
-SetInfo:WWK Rare

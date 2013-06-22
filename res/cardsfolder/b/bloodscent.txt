@@ -5,4 +5,3 @@ A:SP$ Pump | Cost$ 3 G | ValidTgts$ Creature | TgtPrompt$ Select target creature
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bloodscent.jpg
 Oracle:All creatures able to block target creature this turn do so.
-SetInfo:MRD Uncommon

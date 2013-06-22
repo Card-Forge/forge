@@ -8,4 +8,3 @@ SVar:RolledChaos:AB$ ChangeZone | Cost$ 0 | ValidTgts$ Creature.nonToken+YouCtrl
 SVar:RestorationReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | GainControl$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bloodhill_bastion.jpg
 Oracle:Whenever a creature enters the battlefield, it gains double strike and haste until end of turn.\nWhenever you roll {C}, exile target nontoken creature you control, then return it to the battlefield under your control.
-SetInfo:PC2 Common

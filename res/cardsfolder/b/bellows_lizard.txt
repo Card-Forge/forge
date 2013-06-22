@@ -5,4 +5,3 @@ PT:1/1
 A:AB$ Pump | Cost$ 1 R | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bellows_lizard.jpg
 Oracle:{1}{R}: Bellows Lizard gets +1/+0 until end of turn.
-SetInfo:RTR Common

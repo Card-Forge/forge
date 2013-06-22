@@ -5,4 +5,3 @@ PT:1/1
 K:First Strike
 SVar:Picture:http://www.wizards.com/global/images/magic/general/boros_recruit.jpg
 Oracle:({R/W} can be paid with either {R} or {W}.)\nFirst strike
-SetInfo:RAV Common

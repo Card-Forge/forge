@@ -6,5 +6,3 @@ PT:3/2
 K:CantBlock Creature.powerGE2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/brassclaw_orcs.jpg
 Oracle:Brassclaw Orcs can't block creatures with power 2 or greater.
-SetInfo:5ED Common
-SetInfo:FEM Common x4

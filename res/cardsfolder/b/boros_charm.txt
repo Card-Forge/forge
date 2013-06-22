@@ -8,4 +8,3 @@ SVar:KWPump:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield |
 SVar:PumpDouble:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Double Strike | SpellDescription$ Target creature gains double strike until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/boros_charm.jpg
 Oracle:Choose one — Boros Charm deals 4 damage to target player; or permanents you control are indestructible this turn; or target creature gains double strike until end of turn.
-SetInfo:GTC Uncommon

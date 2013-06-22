@@ -5,7 +5,3 @@ PT:2/2
 K:Swampwalk
 SVar:Picture:http://resources.wizards.com/magic/cards/uz/en-us/card5597.jpg
 Oracle:Swampwalk (This creature is unblockable as long as defending player controls a Swamp.)
-SetInfo:M11 Common
-SetInfo:S99 Common
-SetInfo:POR Common
-SetInfo:USG Common

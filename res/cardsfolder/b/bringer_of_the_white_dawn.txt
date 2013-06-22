@@ -8,4 +8,3 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | O
 SVar:TrigChange:AB$ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Artifact.YouCtrl | Cost$ 0
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bringer_of_the_white_dawn.jpg
 Oracle:You may pay {W}{U}{B}{R}{G} rather than pay Bringer of the White Dawn's mana cost.\nTrample\nAt the beginning of your upkeep, you may return target artifact card from your graveyard to the battlefield.
-SetInfo:5DN Rare

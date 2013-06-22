@@ -5,4 +5,3 @@ K:Equip 2
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddKeyword$ Flying & First Strike | Description$ Equipped creature has flying and first strike.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bladed_pinions.jpg
 Oracle:Equipped creature has flying and first strike.\nEquip {2}
-SetInfo:SOM Common

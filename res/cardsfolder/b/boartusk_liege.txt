@@ -8,4 +8,3 @@ S:Mode$ Continuous | Affected$ Creature.Green+Other+YouCtrl | AddPower$ 1 | AddT
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/boartusk_liege.jpg
 Oracle:Trample\nOther red creatures you control get +1/+1.\nOther green creatures you control get +1/+1.
-SetInfo:SHM Rare

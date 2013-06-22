@@ -7,5 +7,3 @@ SVar:TrigAnimate:AB$Animate | Cost$ 0 | Defined$ Self | Power$ 4 | Toughness$ 2 
 SVar:BuffedBy:Card.Red+White
 SVar:Picture:http://www.wizards.com/global/images/magic/general/battlegate_mimic.jpg
 Oracle:Whenever you cast a spell that's both red and white, Battlegate Mimic becomes 4/2 and gains first strike until end of turn.
-SetInfo:EVE Common
-SetInfo:HOP Common

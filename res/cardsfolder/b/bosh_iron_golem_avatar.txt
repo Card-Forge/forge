@@ -7,4 +7,3 @@ SVar:X:Count$xPaid
 SVar:Picture:http://www.cardforge.org/fpics/vgd-lq/bosh_iron_golem_avatar.jpg
 SVar:RemAIDeck:True
 Oracle:Hand +0, life -2\n{X}, Sacrifice an artifact with converted mana cost X: Bosh, Iron Golem Avatar deals X damage to target creature or player.
-SetInfo:VAN Special

@@ -6,5 +6,3 @@ SVar:DBWolfToken:DB$Token | TokenAmount$ 1 | TokenName$ Wolf | TokenTypes$ Creat
 SVar:DBElephantToken:DB$Token | TokenAmount$ 1 | TokenName$ Elephant | TokenTypes$ Creature,Elephant | TokenOwner$ You | TokenColors$ Green | TokenPower$ 3 | TokenToughness$ 3 | SpellDescription$ and a 3/3 green Elephant creature token onto the battlefield.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bestial_menace.jpg
 Oracle:Put a 1/1 green Snake creature token, a 2/2 green Wolf creature token, and a 3/3 green Elephant creature token onto the battlefield.
-SetInfo:COM Uncommon
-SetInfo:WWK Uncommon

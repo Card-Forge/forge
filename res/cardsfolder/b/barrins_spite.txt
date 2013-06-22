@@ -8,4 +8,3 @@ SVar:DBBounce:DB$ ChangeZone | Defined$ Remembered | Origin$ Battlefield | Desti
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/barrins_spite.jpg
 Oracle:Choose two target creatures controlled by the same player. Their controller chooses and sacrifices one of them. Return the other to its owner's hand.
-SetInfo:INV Rare

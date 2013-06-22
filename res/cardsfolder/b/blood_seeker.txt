@@ -6,5 +6,3 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creatu
 SVar:TrigDrain:AB$LoseLife | Cost$ 0 | Defined$ TriggeredCardController | LifeAmount$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blood_seeker.jpg
 Oracle:Whenever a creature enters the battlefield under an opponent's control, you may have that player lose 1 life.
-SetInfo:M12 Common
-SetInfo:ZEN Common

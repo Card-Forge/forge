@@ -6,4 +6,3 @@ A:AB$ LoseLife | Cost$ Sac<1/CARDNAME> | ValidTgts$ Player | TgtPrompt$ Select a
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bile_urchin.jpg
 Oracle:Sacrifice Bile Urchin: Target player loses 1 life.
-SetInfo:BOK Common

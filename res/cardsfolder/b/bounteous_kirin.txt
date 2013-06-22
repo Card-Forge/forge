@@ -8,4 +8,3 @@ SVar:TrigGainLife:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ X | Referen
 SVar:X:TriggeredCard$CardManaCost
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bounteous_kirin.jpg
 Oracle:Flying\nWhenever you cast a Spirit or Arcane spell, you may gain life equal to that spell's converted mana cost.
-SetInfo:SOK Rare

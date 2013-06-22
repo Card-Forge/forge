@@ -7,4 +7,3 @@ SVar:X:Count$Valid Faerie.YouCtrl
 SVar:BuffedBy:Faerie
 SVar:Picture:http://www.wizards.com/global/images/magic/general/boggart_sprite_chaser.jpg
 Oracle:As long as you control a Faerie, Boggart Sprite-Chaser gets +1/+1 and has flying.
-SetInfo:LRW Common

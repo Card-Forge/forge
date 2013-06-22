@@ -6,5 +6,3 @@ S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ 
 SVar:X:Count$TypeInYourYard.Creature
 SVar:Picture:http://www.wizards.com/global/images/magic/general/boneyard_wurm.jpg
 Oracle:Boneyard Wurm's power and toughness are each equal to the number of creature cards in your graveyard.
-SetInfo:DDJ Uncommon
-SetInfo:ISD Uncommon

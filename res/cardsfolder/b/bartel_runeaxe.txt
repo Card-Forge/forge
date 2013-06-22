@@ -6,4 +6,3 @@ K:Vigilance
 K:CARDNAME can't be the target of Aura spells.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bartel_runeaxe.jpg
 Oracle:Vigilance\nBartel Runeaxe can't be the target of Aura spells.
-SetInfo:LEG Rare

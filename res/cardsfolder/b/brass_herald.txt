@@ -11,5 +11,3 @@ SVar:TrigDig:DB$ Dig | DigNum$ 4 | Reveal$ True | ChangeNum$ All | ChangeValid$ 
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/brass_herald.jpg
 Oracle:As Brass Herald enters the battlefield, choose a creature type.\nWhen Brass Herald enters the battlefield, reveal the top four cards of your library. Put all creature cards of the chosen type revealed this way into your hand and the rest on the bottom of your library in any order.\nCreatures of the chosen type get +1/+1.
-SetInfo:8ED Rare
-SetInfo:APC Uncommon

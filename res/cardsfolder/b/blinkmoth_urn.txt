@@ -7,4 +7,3 @@ SVar:X:Count$Valid Artifact.ActivePlayerCtrl
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blinkmoth_urn.jpg
 Oracle:At the beginning of each player's precombat main phase, if Blinkmoth Urn is untapped, that player adds {1} to his or her mana pool for each artifact he or she controls.
-SetInfo:MRD Rare

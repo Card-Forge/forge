@@ -6,6 +6,3 @@ T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ 
 SVar:TrigDamage:AB$DealDamage | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bogardan_firefiend.jpg
 Oracle:When Bogardan Firefiend dies, it deals 2 damage to target creature.
-SetInfo:WTH Common
-SetInfo:HOP Common
-SetInfo:10E Common

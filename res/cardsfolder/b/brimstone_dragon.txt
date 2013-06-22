@@ -6,4 +6,3 @@ K:Flying
 K:Haste
 SVar:Picture:http://resources.wizards.com/magic/cards/p2/en-us/card6605.jpg
 Oracle:Flying, haste
-SetInfo:PO2 Rare

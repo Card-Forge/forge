@@ -6,4 +6,3 @@ A:AB$ Mana | Cost$ T Sac<1/CARDNAME> | Produced$ B | Amount$ 2 | SpellDescriptio
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/basal_thrull.jpg
 Oracle:{T}, Sacrifice Basal Thrull: Add {B}{B} to your mana pool.
-SetInfo:FEM Common x4

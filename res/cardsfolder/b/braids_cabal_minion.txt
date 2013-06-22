@@ -7,4 +7,3 @@ SVar:TrigSac:AB$ Sacrifice | Cost$ 0 | SacValid$ Creature,Artifact,Land | Define
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/braids_cabal_minion.jpg
 Oracle:At the beginning of each player's upkeep, that player sacrifices an artifact, creature, or land.
-SetInfo:ODY Rare

@@ -6,4 +6,3 @@ A:AB$ LoseLife | Cost$ 8 | ValidTgts$ Player | TgtPrompt$ Select a player | Life
 SVar:DBGainLife:DB$GainLife | Defined$ You | LifeAmount$ 3
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bloodrite_invoker.jpg
 Oracle:{8}: Target player loses 3 life and you gain 3 life.
-SetInfo:ROE Common

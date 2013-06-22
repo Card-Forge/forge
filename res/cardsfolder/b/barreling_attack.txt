@@ -8,4 +8,3 @@ SVar:ABBarrelingPump:AB$ Pump | Cost$ 0 | Defined$ Self | NumAtt$ +BarrelingX | 
 SVar:BarrelingX:TriggerCount$NumBlockers
 SVar:Picture:http://www.wizards.com/global/images/magic/general/barreling_attack.jpg
 Oracle:Target creature gains trample until end of turn. When that creature becomes blocked this turn, it gets +1/+1 until end of turn for each creature blocking it.
-SetInfo:MIR Rare

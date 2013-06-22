@@ -7,4 +7,3 @@ SVar:TrigLose:AB$ LoseLife | Cost$ 0 | Defined$ TriggeredCardController | LifeAm
 SVar:X:TriggeredCard$CardToughness
 SVar:Picture:http://www.wizards.com/global/images/magic/general/banewasp_affliction.jpg
 Oracle:Enchant creature\nWhen enchanted creature dies, that creature's controller loses life equal to its toughness.
-SetInfo:ALA Common

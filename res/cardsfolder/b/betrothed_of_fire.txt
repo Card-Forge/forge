@@ -8,4 +8,3 @@ A:AB$ PumpAll | Cost$ Sac<1/Card.AttachedBy/enchanted creature> | ValidCards$ Cr
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/betrothed_of_fire.jpg
 Oracle:Enchant creature\nSacrifice an untapped creature: Enchanted creature gets +2/+0 until end of turn.\nSacrifice enchanted creature: Creatures you control get +2/+0 until end of turn.
-SetInfo:WTH Common

@@ -7,4 +7,3 @@ SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Boar | TokenType
 SVar:SacMe:4
 SVar:Picture:http://www.wizards.com/global/images/magic/general/brindle_shoat.jpg
 Oracle:When Brindle Shoat dies, put a 3/3 green Boar creature token onto the battlefield.
-SetInfo:PC2 Uncommon

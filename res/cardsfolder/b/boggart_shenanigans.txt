@@ -6,5 +6,3 @@ SVar:TrigDamage:AB$DealDamage | Cost$ 0 | ValidTgts$ Player | TgtPrompt$ Select 
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/boggart_shenanigans.jpg
 Oracle:Whenever another Goblin you control dies, you may have Boggart Shenanigans deal 1 damage to target player.
-SetInfo:LRW Uncommon
-SetInfo:EVG Uncommon

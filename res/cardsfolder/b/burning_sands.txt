@@ -6,4 +6,3 @@ SVar:TrigSac:AB$Sacrifice | Cost$ 0 | SacValid$ Land | Defined$ TriggeredCardCon
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/burning_sands.jpg
 Oracle:Whenever a creature dies, that creature's controller sacrifices a land.
-SetInfo:ODY Rare

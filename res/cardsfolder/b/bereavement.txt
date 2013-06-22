@@ -6,5 +6,3 @@ SVar:BereavementDiscard:AB$ Discard | Cost$ 0 | Defined$ TriggeredCardController
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bereavement.jpg
 Oracle:Whenever a green creature dies, its controller discards a card.
-SetInfo:7ED Uncommon
-SetInfo:USG Uncommon

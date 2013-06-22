@@ -7,4 +7,3 @@ SVar:DBDamage:DB$ DamageAll | NumDmg$ 4 | ValidCards$ Creature
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/burning_of_xinye.jpg
 Oracle:Choose four lands you control and destroy those lands. Then target opponent chooses four lands he or she controls. Destroy those lands. Then Burning of Xinye deals 4 damage to each creature.
-SetInfo:PTK Rare

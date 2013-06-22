@@ -6,4 +6,3 @@ A:AB$ Tap | Cost$ PW T | ValidTgts$ Creature | TgtPrompt$ Select target creature
 DeckNeeds:Color$white
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blinding_souleater.jpg
 Oracle:{W/P}, {T}: Tap target creature. ({W/P} can be paid with either {W} or 2 life.)
-SetInfo:NPH Common

@@ -5,5 +5,3 @@ A:SP$ DealDamage | Cost$ 1 B R | ValidTgts$ Player | NumDmg$ 3 | SubAbility$ DBD
 SVar:DBDiscard:DB$Discard | Defined$ Targeted | NumCards$ 2 | Mode$ TgtChoose
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blightning.jpg
 Oracle:Blightning deals 3 damage to target player. That player discards two cards.
-SetInfo:DDK Common
-SetInfo:ALA Common

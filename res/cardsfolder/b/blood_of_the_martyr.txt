@@ -10,5 +10,3 @@ SVar:X:ReplaceCount$DamageAmount
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blood_of_the_martyr.jpg
 Oracle:Until end of turn, if damage would be dealt to any creature, you may have that damage dealt to you instead.
-SetInfo:CHR Uncommon
-SetInfo:DRK Uncommon

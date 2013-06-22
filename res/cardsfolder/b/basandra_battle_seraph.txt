@@ -7,4 +7,3 @@ S:Mode$ CantBeCast | ValidCard$ Card | Phases$ BeginCombat->EndCombat | Descript
 A:AB$ Pump | Cost$ R | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ HIDDEN CARDNAME attacks each turn if able. | IsCurse$ True | SpellDescription$ Target creature attacks this turn if able.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/basandra_battle_seraph.jpg
 Oracle:Flying\nPlayers can't cast spells during combat.\n{R}: Target creature attacks this turn if able.
-SetInfo:COM Rare

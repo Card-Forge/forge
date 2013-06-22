@@ -6,4 +6,3 @@ T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$
 SVar:TrigPump:AB$Pump | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDef$ +3
 SVar:Picture:http://www.wizards.com/global/images/magic/general/burrenton_shield_bearers.jpg
 Oracle:Whenever Burrenton Shield-Bearers attacks, target creature gets +0/+3 until end of turn.
-SetInfo:MOR Common

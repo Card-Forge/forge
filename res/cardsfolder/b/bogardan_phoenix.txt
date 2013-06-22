@@ -10,4 +10,3 @@ SVar:DBPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ DEATH | CounterN
 SVar:X:TriggeredCard$CardCounters.DEATH
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bogardan_phoenix.jpg
 Oracle:Flying\nWhen Bogardan Phoenix dies, exile it if it had a death counter on it. Otherwise, return it to the battlefield under your control and put a death counter on it.
-SetInfo:VIS Rare

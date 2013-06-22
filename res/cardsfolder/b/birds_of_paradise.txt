@@ -6,17 +6,3 @@ A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any col
 K:Flying
 SVar:Picture:http://resources.wizards.com/magic/cards/rav/en-us/card83688.jpg
 Oracle:Flying\n{T}: Add one mana of any color to your mana pool.
-SetInfo:8ED Rare
-SetInfo:2ED Rare
-SetInfo:7ED Rare
-SetInfo:6ED Rare
-SetInfo:M10 Rare
-SetInfo:10E Rare
-SetInfo:RAV Rare
-SetInfo:LEB Rare
-SetInfo:M12 Rare
-SetInfo:LEA Rare
-SetInfo:M11 Rare
-SetInfo:5ED Rare
-SetInfo:4ED Rare
-SetInfo:3ED Rare

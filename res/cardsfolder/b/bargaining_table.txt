@@ -6,4 +6,3 @@ A:AB$ Draw| Cost$ X T | NumCards$ 1 | References$ X | SpellDescription$ Draw a c
 SVar:X:Count$InOppHand
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bargaining_table.jpg
 Oracle:{X}, {T}: Draw a card. X is the number of cards in an opponent's hand.
-SetInfo:MMQ Rare

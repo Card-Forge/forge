@@ -6,4 +6,3 @@ SVar:X:Count$xPaid
 SVar:DBShuffle:DB$ChangeZone | Origin$ Stack | Destination$ Library | Shuffle$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blue_suns_zenith.jpg
 Oracle:Target player draws X cards. Shuffle Blue Sun's Zenith into its owner's library.
-SetInfo:MBS Rare

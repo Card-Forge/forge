@@ -6,4 +6,3 @@ SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Faerie Rogue | T
 SVar:DB:DB$LoseLife | LifeAmount$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bitterblossom.jpg
 Oracle:At the beginning of your upkeep, you lose 1 life and put a 1/1 black Faerie Rogue creature token with flying onto the battlefield.
-SetInfo:MOR Rare

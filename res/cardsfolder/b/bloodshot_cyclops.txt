@@ -7,6 +7,3 @@ SVar:X:Sacrificed$CardPower
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bloodshot_cyclops.jpg
 Oracle:{T}, Sacrifice a creature: Bloodshot Cyclops deals damage equal to the sacrificed creature's power to target creature or player.
-SetInfo:8ED Rare
-SetInfo:7ED Rare
-SetInfo:UDS Rare

@@ -5,5 +5,3 @@ PT:1/2
 A:AB$ Tap | Cost$ W T | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Tap target creature.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blinding_mage.jpg
 Oracle:{W}, {T}: Tap target creature.
-SetInfo:M11 Common
-SetInfo:M10 Common

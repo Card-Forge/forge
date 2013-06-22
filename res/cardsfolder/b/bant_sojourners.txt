@@ -8,4 +8,3 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigToken:AB$ Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Soldier | TokenTypes$ Creature,Soldier | TokenOwner$ You | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bant_sojourners.jpg
 Oracle:When you cycle Bant Sojourners or it dies, you may put a 1/1 white Soldier creature token onto the battlefield.\nCycling {2}{W} ({2}{W}, Discard this card: Draw a card.)
-SetInfo:ARB Common

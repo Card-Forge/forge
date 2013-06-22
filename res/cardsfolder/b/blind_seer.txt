@@ -7,4 +7,3 @@ SVar:Animate:DB$ Animate | ValidTgts$ Card | TgtPrompt$ Select target spell or p
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blind_seer.jpg
 Oracle:{1}{U}: Target spell or permanent becomes the color of your choice until end of turn.
-SetInfo:INV Rare

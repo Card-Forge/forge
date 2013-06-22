@@ -9,4 +9,3 @@ SVar:X:Count$TargetedLifeTotal/HalfUp
 SVar:AFLifeLost:Count$TargetedLifeTotal/HalfUp
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blood_tribute.jpg
 Oracle:Kicker-Tap an untapped Vampire you control. (You may tap a Vampire you control in addition to any other costs as you cast this spell.)\nTarget opponent loses half his or her life, rounded up. If Blood Tribute was kicked, you gain life equal to the life lost this way.
-SetInfo:ZEN Rare
