@@ -6,8 +6,3 @@ SVar:NonStackingEffect:True
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/levitation.jpg
 Oracle:Creatures you control have flying.
-SetInfo:M10 Uncommon
-SetInfo:ULG Uncommon
-SetInfo:M12 Uncommon
-SetInfo:7ED Uncommon
-SetInfo:9ED Uncommon

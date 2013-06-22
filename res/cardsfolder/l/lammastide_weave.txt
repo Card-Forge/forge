@@ -12,4 +12,3 @@ SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lammastide_weave.jpg
 Oracle:Name a card, then target player puts the top card of his or her library into his or her graveyard. If that card is the named card, you gain life equal to its converted mana cost.\nDraw a card.
-SetInfo:LRW Uncommon

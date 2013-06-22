@@ -7,4 +7,3 @@ SVar:TrigPumpAll:AB$PumpAll | Cost$ 0 | ValidCards$ Creature.YouCtrl | NumAtt$ +
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/leonin_armorguard.jpg
 Oracle:When Leonin Armorguard enters the battlefield, creatures you control get +1/+1 until end of turn.
-SetInfo:ARB Common

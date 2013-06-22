@@ -8,4 +8,3 @@ T:Mode$ DamageDone | ValidSource$ Card.AttachedBy | ValidTarget$ Player | Combat
 SVar:TrigDestroy:AB$Destroy | Cost$ 0 | ValidTgts$ Artifact.DefenderCtrl | TgtPrompt$ Select target artifact
 SVar:Picture:http://www.wizards.com/global/images/magic/general/latullas_orders.jpg
 Oracle:Flash\nEnchant creature\nWhenever enchanted creature deals combat damage to defending player, you may destroy target artifact that player controls.
-SetInfo:PCY Common

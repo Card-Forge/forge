@@ -6,4 +6,3 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigGainLife:AB$GainLife | Cost$ 0 | LifeAmount$ 4
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lone_missionary.jpg
 Oracle:When Lone Missionary enters the battlefield, you gain 4 life.
-SetInfo:ROE Common

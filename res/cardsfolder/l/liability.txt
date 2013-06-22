@@ -6,4 +6,3 @@ SVar:TrigLoseLife:AB$LoseLife | Cost$ 0 | Defined$ TriggeredCardOwner | LifeAmou
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/liability.jpg
 Oracle:Whenever a nontoken permanent is put into a player's graveyard from the battlefield, that player loses 1 life.
-SetInfo:MMQ Rare

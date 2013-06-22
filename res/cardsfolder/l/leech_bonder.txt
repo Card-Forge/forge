@@ -8,4 +8,3 @@ SVar:DBMove:DB$ MoveCounter | Source$ ParentTarget | ValidTgts$ Creature | TgtPr
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/leech_bonder.jpg
 Oracle:Leech Bonder enters the battlefield with two -1/-1 counters on it.\n{U}, {Q}: Move a counter from target creature onto another target creature. ({Q} is the untap symbol.)
-SetInfo:SHM Uncommon

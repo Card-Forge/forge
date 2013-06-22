@@ -9,4 +9,3 @@ SVar:NonStackingEffect:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/leyline_of_lifeforce.jpg
 Oracle:If Leyline of Lifeforce is in your opening hand, you may begin the game with it on the battlefield.\nCreature spells can't be countered.
-SetInfo:GPT Rare

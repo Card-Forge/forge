@@ -6,4 +6,3 @@ S:Mode$ Continuous | Affected$ Card.Self+equipped | AddPower$ 1 | AddToughness$ 
 SVar:EquipMe:Once
 SVar:Picture:http://www.wizards.com/global/images/magic/general/leonin_den_guard.jpg
 Oracle:As long as Leonin Den-Guard is equipped, it gets +1/+1 and has vigilance.
-SetInfo:MRD Common

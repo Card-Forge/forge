@@ -6,4 +6,3 @@ A:AB$ Pump | Cost$ W B T | ValidTgts$ Creature | TgtPrompt$ Select target creatu
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lady_evangela.jpg
 Oracle:{W}{B}, {T}: Prevent all combat damage that would be dealt by target creature this turn.
-SetInfo:LEG Rare

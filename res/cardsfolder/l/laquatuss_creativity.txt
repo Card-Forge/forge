@@ -9,4 +9,3 @@ SVar:Y:Remembered$Amount
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/laquatuss_creativity.jpg
 Oracle:Target player draws cards equal to the number of cards in his or her hand, then discards that many cards.
-SetInfo:ODY Uncommon

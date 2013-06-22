@@ -7,4 +7,3 @@ SVar:TrigDealDamage:AB$DealDamage | Cost$ 0 | Defined$ Opponent | NumDmg$ 5 | Su
 SVar:DBSacrifice:DB$ Sacrifice | Defined$ Self
 SVar:Picture:http://www.wizards.com/global/images/magic/general/longhorn_firebeast.jpg
 Oracle:When Longhorn Firebeast enters the battlefield, any opponent may have it deal 5 damage to him or her. If a player does, sacrifice Longhorn Firebeast.
-SetInfo:TOR Common

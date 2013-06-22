@@ -21,4 +21,3 @@ PT:2/1
 K:CARDNAME can't block.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/unhallowed_cathar.jpg
 Oracle:Unhallowed Cathar can't block.
-SetInfo:DKA Common

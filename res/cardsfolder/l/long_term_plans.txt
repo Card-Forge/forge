@@ -5,4 +5,3 @@ A:SP$ ChangeZone | Cost$ 2 U | Origin$ Library | Destination$ Library | LibraryP
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/long_term_plans.jpg
 Oracle:Search your library for a card, shuffle your library, then put that card third from the top.
-SetInfo:SCG Uncommon

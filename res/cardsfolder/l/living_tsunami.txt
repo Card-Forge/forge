@@ -10,4 +10,3 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
 SVar:Picture:http://www.wizards.com/global/images/magic/general/living_tsunami.jpg
 Oracle:Flying\nAt the beginning of your upkeep, sacrifice Living Tsunami unless you return a land you control to its owner's hand.
-SetInfo:ZEN Uncommon

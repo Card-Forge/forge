@@ -6,4 +6,3 @@ SVar:X:Count$YourLifeTotal/HalfUp
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lurking_evil.jpg
 Oracle:Pay half your life, rounded up: Lurking Evil becomes a 4/4 Horror creature with flying.
-SetInfo:USG Rare

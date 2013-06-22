@@ -6,4 +6,3 @@ A:AB$ Draw | Cost$ 1 Sac<1/CARDNAME> | NumCards$ 1 | SpellDescription$ Draw a ca
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lifespark_spellbomb.jpg
 Oracle:{G}, Sacrifice Lifespark Spellbomb: Until end of turn, target land becomes a 3/3 creature that's still a land.\n{1}, Sacrifice Lifespark Spellbomb: Draw a card.
-SetInfo:MRD Common

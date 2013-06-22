@@ -8,4 +8,3 @@ SVar:DBNoCombatDamage:DB$ Pump | Defined$ Self | KW$ HIDDEN CARDNAME assigns no 
 SVar:X:Count$CardPower
 SVar:Picture:http://www.wizards.com/global/images/magic/general/laccolith_whelp.jpg
 Oracle:Whenever Laccolith Whelp becomes blocked, you may have it deal damage equal to its power to target creature. If you do, Laccolith Whelp assigns no combat damage this turn.
-SetInfo:NMS Common

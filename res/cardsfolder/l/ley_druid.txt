@@ -6,10 +6,3 @@ A:AB$ Untap | Cost$ T | ValidTgts$ Land | TgtPrompt$ Select target land | SpellD
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ley_druid.jpg
 Oracle:{T}: Untap target land.
-SetInfo:2ED Uncommon
-SetInfo:9ED Uncommon
-SetInfo:LEB Uncommon
-SetInfo:LEA Uncommon
-SetInfo:5ED Common
-SetInfo:4ED Uncommon
-SetInfo:3ED Uncommon

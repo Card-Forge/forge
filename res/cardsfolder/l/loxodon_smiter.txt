@@ -8,4 +8,3 @@ SVar:SurpriseETB:DB$ ChangeZone | DefinedPlayer$ ReplacedPlayer | Defined$ Repla
 SVar:DiscardMeByOpp:2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/loxodon_smiter.jpg
 Oracle:Loxodon Smiter can't be countered.\nIf a spell or ability an opponent controls causes you to discard Loxodon Smiter, put it onto the battlefield instead of putting it into your graveyard.
-SetInfo:RTR Rare

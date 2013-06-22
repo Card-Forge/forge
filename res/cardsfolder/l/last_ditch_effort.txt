@@ -9,4 +9,3 @@ SVar:DmgX:Remembered$Amount
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/last_ditch_effort.jpg
 Oracle:Sacrifice any number of creatures. Last-Ditch Effort deals that much damage to target creature or player.
-SetInfo:ULG Uncommon

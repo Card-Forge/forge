@@ -8,4 +8,3 @@ K:etbCounter:P1P1:5:CheckSVar$ WasKicked:If CARDNAME was kicked, it enters the b
 SVar:WasKicked:Count$Kicked.1.0
 SVar:Picture:http://www.wizards.com/global/images/magic/general/llanowar_elite.jpg
 Oracle:Kicker {8} (You may pay an additional {8} as you cast this spell.)\nTrample\nIf Llanowar Elite was kicked, it enters the battlefield with five +1/+1 counters on it.
-SetInfo:INV Common

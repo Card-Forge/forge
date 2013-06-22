@@ -5,4 +5,3 @@ A:SP$ Counter | Cost$ 2 U U | TargetType$ Spell | TgtPrompt$ Select target spell
 SVar:DBReveal:DB$RevealHand | Defined$ TargetedController
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lay_bare.jpg
 Oracle:Counter target spell. Look at its controller's hand.
-SetInfo:ROE Common

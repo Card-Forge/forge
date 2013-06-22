@@ -8,4 +8,3 @@ T:Mode$ SpellCast | ValidCard$ Card.MultiColor | ValidActivatingPlayer$ You | Tr
 SVar:TrigUntap:AB$ Untap | Cost$ 0 | Defined$ Self
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lobber_crew.jpg
 Oracle:Defender\n{T}: Lobber Crew deals 1 damage to each opponent.\nWhenever you cast a multicolored spell, untap Lobber Crew.
-SetInfo:RTR Common

@@ -9,4 +9,3 @@ SVar:ABPump:AB$Pump | Cost$ X | Defined$ Self | NumAtt$ +X | References$ X | Spe
 SVar:X:Count$xPaid
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lavaclaw_reaches.jpg
 Oracle:Lavaclaw Reaches enters the battlefield tapped.\n{T}: Add {B} or {R} to your mana pool.\n{1}{B}{R}: Until end of turn, Lavaclaw Reaches becomes a 2/2 black and red Elemental creature with "{X}: This creature gets +X/+0 until end of turn." It's still a land.
-SetInfo:WWK Rare

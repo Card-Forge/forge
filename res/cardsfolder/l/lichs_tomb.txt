@@ -8,4 +8,3 @@ SVar:X:TriggerCount$LifeAmount
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lichs_tomb.jpg
 Oracle:You don't lose the game for having 0 or less life.\nWhenever you lose life, sacrifice a permanent for each 1 life you lost. (Damage causes loss of life.)
-SetInfo:DST Rare

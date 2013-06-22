@@ -9,4 +9,3 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/leaf_crowned_elder.jpg
 Oracle:Kinship - At the beginning of your upkeep, you may look at the top card of your library. If it shares a creature type with Leaf-Crowned Elder, you may reveal it. If you do, you may play that card without paying its mana cost.
-SetInfo:MOR Rare

@@ -7,4 +7,3 @@ SVar:RemRandomDeck:True
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/long_forgotten_gohei.jpg
 Oracle:Arcane spells you cast cost {1} less to cast.\nSpirit creatures you control get +1/+1.
-SetInfo:CHK Rare

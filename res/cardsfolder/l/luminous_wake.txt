@@ -8,4 +8,3 @@ T:Mode$ Blocks | ValidCard$ Card.AttachedBy | TriggerZones$ Battlefield | Execut
 SVar:TrigGainLife:AB$GainLife | Cost$ 0 | LifeAmount$ 4 | Defined$ You
 SVar:Picture:http://www.wizards.com/global/images/magic/general/luminous_wake.jpg
 Oracle:Enchant creature\nWhenever enchanted creature attacks or blocks, you gain 4 life.
-SetInfo:ROE Uncommon

@@ -7,4 +7,3 @@ SVar:TrigExileYourLibrary:AB$ChangeZoneAll | Cost$ 0 | ChangeType$ Card.YouOwn |
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/leveler.jpg
 Oracle:When Leveler enters the battlefield, exile all cards from your library.
-SetInfo:MRD Rare

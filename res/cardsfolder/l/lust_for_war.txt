@@ -7,4 +7,3 @@ T:Mode$ Taps | ValidCard$ Card.AttachedBy | TriggerZones$ Battlefield | Execute$
 SVar:TrigDamage:AB$ DealDamage | Cost$ 0 | Defined$ TriggeredCardController | NumDmg$ 3
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lust_for_war.jpg
 Oracle:Enchant creature\nWhenever enchanted creature becomes tapped, Lust for War deals 3 damage to that creature's controller.\nEnchanted creature attacks each turn if able.
-SetInfo:ROE Uncommon

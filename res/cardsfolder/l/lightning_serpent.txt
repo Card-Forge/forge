@@ -9,4 +9,3 @@ SVar:X:Count$xPaid
 K:At the beginning of the end step, sacrifice CARDNAME.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lightning_serpent.jpg
 Oracle:Trample, haste\nLightning Serpent enters the battlefield with X +1/+0 counters on it.\nAt the beginning of the end step, sacrifice Lightning Serpent.
-SetInfo:CSP Rare

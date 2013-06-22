@@ -6,12 +6,3 @@ S:Mode$ Continuous | Affected$ Creature.Merfolk+Other | AddPower$ 1 | AddToughne
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lord_of_atlantis.jpg
 Oracle:Other Merfolk creatures get +1/+1 and have islandwalk.
-SetInfo:2ED Rare
-SetInfo:7ED Rare
-SetInfo:6ED Rare
-SetInfo:TSB Special
-SetInfo:LEB Rare
-SetInfo:LEA Rare
-SetInfo:5ED Rare
-SetInfo:4ED Rare
-SetInfo:3ED Rare

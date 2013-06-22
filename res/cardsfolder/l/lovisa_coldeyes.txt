@@ -6,4 +6,3 @@ S:Mode$ Continuous | Affected$ Creature.Warrior,Creature.Berserker,Creature.Barb
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lovisa_coldeyes.jpg
 Oracle:Warrior, Berserker, and/or other Barbarian creatures get +2/+2 and have haste.
-SetInfo:CSP Rare

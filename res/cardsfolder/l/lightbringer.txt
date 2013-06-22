@@ -6,4 +6,3 @@ A:AB$ ChangeZone | Cost$ T Sac<1/CARDNAME> | ValidTgts$ Creature.Black | TgtProm
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lightbringer.jpg
 Oracle:{T}, Sacrifice Lightbringer: Exile target black creature.
-SetInfo:NMS Common

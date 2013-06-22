@@ -6,4 +6,3 @@ S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ 
 SVar:X:Count$InAllYards
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lord_of_extinction.jpg
 Oracle:Lord of Extinction's power and toughness are each equal to the number of cards in all graveyards.
-SetInfo:ARB Mythic

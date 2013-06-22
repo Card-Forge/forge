@@ -7,5 +7,3 @@ K:Vigilance
 K:Haste
 SVar:Picture:http://resources.wizards.com/magic/cards/tsb/en-us/card109746.jpg
 Oracle:Flying, vigilance, haste
-SetInfo:APC Rare
-SetInfo:TSB Special

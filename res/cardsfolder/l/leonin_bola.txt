@@ -7,4 +7,3 @@ K:Equip 1
 SVar:NonStackingAttachEffect:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/leonin_bola.jpg
 Oracle:Equipped creature has "{T}, Unattach Leonin Bola: Tap target creature."\nEquip {1} ({1}: Attach to target creature you control. Equip only as a sorcery. This card enters the battlefield unattached and stays on the battlefield if the creature leaves.)
-SetInfo:DST Common

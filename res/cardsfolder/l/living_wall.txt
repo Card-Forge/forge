@@ -6,7 +6,3 @@ K:Defender
 A:AB$ Regenerate | Cost$ 1 | SpellDescription$ Regenerate CARDNAME.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/living_wall.jpg
 Oracle:Defender (This creature can't attack.)\n{1}: Regenerate Living Wall.
-SetInfo:LEB Uncommon
-SetInfo:LEA Uncommon
-SetInfo:3ED Uncommon
-SetInfo:2ED Uncommon

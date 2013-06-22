@@ -5,4 +5,3 @@ PT:2/3
 S:Mode$ ETBTapped | ValidCard$ Artifact.OppCtrl,Creature.OppCtrl,Land.OppCtrl | Description$ Artifacts, creatures, and lands your opponents control enter the battlefield tapped.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/loxodon_gatekeeper.jpg
 Oracle:Artifacts, creatures, and lands your opponents control enter the battlefield tapped.
-SetInfo:RAV Rare

@@ -5,4 +5,3 @@ A:SP$ Counter | Cost$ 2 U U | TargetType$ Spell | TgtPrompt$ Select target spell
 K:CARDNAME can't be countered.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/last_word.jpg
 Oracle:Last Word can't be countered by spells or abilities.\nCounter target spell.
-SetInfo:DST Rare

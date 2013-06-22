@@ -5,5 +5,3 @@ A:SP$ Destroy | Cost$ 3 R | ValidTgts$ Land | TgtPrompt$ Select target land | Sp
 K:Cycling:2
 SVar:Picture:http://resources.wizards.com/magic/cards/uz/en-us/card5817.jpg
 Oracle:Destroy target land.\nCycling {2} ({2}, Discard this card: Draw a card.)
-SetInfo:ONS Common
-SetInfo:USG Common

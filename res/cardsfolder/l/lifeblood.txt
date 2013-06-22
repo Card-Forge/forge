@@ -6,4 +6,3 @@ SVar:TrigGainLife:AB$GainLife | Cost$ 0 | LifeAmount$ 1 | Defined$ You
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lifeblood.jpg
 Oracle:Whenever a Mountain an opponent controls becomes tapped, you gain 1 life.
-SetInfo:LEG Rare

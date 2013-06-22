@@ -7,4 +7,3 @@ A:AB$ Pump | Cost$ Sac<1/Land> | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ Lit
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lithatog.jpg
 Oracle:Sacrifice an artifact: Lithatog gets +1/+1 until end of turn.\nSacrifice a land: Lithatog gets +1/+1 until end of turn.
-SetInfo:ODY Uncommon

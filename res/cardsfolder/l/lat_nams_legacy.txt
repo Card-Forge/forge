@@ -7,4 +7,3 @@ SVar:DrawSlowtrip:DB$Draw | NumCards$ 2 | Defined$ You
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lat_nams_legacy.jpg
 Oracle:Shuffle a card from your hand into your library. If you do, draw two cards at the beginning of the next turn's upkeep.
-SetInfo:ALL Common x2

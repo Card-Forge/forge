@@ -6,4 +6,3 @@ K:First Strike
 K:Legendary landwalk
 SVar:Picture:http://www.wizards.com/global/images/magic/general/livonya_silone.jpg
 Oracle:First strike, legendary landwalk
-SetInfo:LEG Rare

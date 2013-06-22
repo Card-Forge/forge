@@ -8,4 +8,3 @@ SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 1 | SubAbility$ DBDis
 SVar:DBDiscard:DB$Discard | Defined$ You | Mode$ TgtChoose | NumCards$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/looter_il_kor.jpg
 Oracle:Shadow (This creature can block or be blocked by only creatures with shadow.)\nWhenever Looter il-Kor deals damage to an opponent, draw a card, then discard a card.
-SetInfo:TSP Common

@@ -6,4 +6,3 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Artifa
 SVar:TrigGainLife:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/leonin_elder.jpg
 Oracle:Whenever an artifact enters the battlefield, you may gain 1 life.
-SetInfo:MRD Common

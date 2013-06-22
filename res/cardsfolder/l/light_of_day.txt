@@ -6,5 +6,3 @@ SVar:NonStackingEffect:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/light_of_day.jpg
 Oracle:Black creatures can't attack or block.
-SetInfo:TMP Uncommon
-SetInfo:6ED Uncommon

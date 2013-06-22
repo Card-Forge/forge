@@ -4,4 +4,3 @@ Types:Creature Lizard
 PT:3/3
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lagac_lizard.jpg
 Oracle:
-SetInfo:ROE Common

@@ -7,4 +7,3 @@ S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddType$ Mountain & Forest & P
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lush_growth.jpg
 Oracle:Enchant land\nEnchanted land is a Mountain, Forest, and Plains.
-SetInfo:ALA Common

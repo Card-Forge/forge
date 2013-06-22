@@ -4,4 +4,3 @@ Types:Legendary Creature Demon
 PT:7/4
 SVar:Picture:http://resources.wizards.com/magic/cards/le/en-us/card1667.jpg
 Oracle:
-SetInfo:LEG Uncommon

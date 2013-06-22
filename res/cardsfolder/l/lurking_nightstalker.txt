@@ -6,4 +6,3 @@ T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$
 SVar:TrigPump:AB$Pump | Cost$ 0 | Defined$ Self | NumAtt$ 2
 SVar:Picture:http://serv4.tcgimages.eu/img/cards/Portal_Second_Age/lurking_nightstalker.jpg
 Oracle:Whenever Lurking Nightstalker attacks, it gets +2/+0 until end of turn.
-SetInfo:PO2 Common

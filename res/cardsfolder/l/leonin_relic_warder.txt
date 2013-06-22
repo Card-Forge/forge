@@ -9,4 +9,3 @@ SVar:TrigReturn:AB$ChangeZone | Cost$ 0 | Defined$ Remembered | Origin$ Exile | 
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/leonin_relic_warder.jpg
 Oracle:When Leonin Relic-Warder enters the battlefield, you may exile target artifact or enchantment.\nWhen Leonin Relic-Warder leaves the battlefield, return the exiled card to the battlefield under its owner's control.
-SetInfo:MBS Uncommon

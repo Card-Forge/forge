@@ -6,4 +6,3 @@ PT:2/3
 S:Mode$ CantTarget | ValidCard$ Card.Self+notAttackedThisTurn+notBlockedThisTurn | Spell$ True | Description$ CARDNAME can't be the target of spells unless it attacked or blocked this turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lurker.jpg
 Oracle:Lurker can't be the target of spells unless it attacked or blocked this turn.
-SetInfo:DRK Rare

@@ -7,4 +7,3 @@ A:AB$ ChangeZone | Cost$ 1 W Sac<1/CARDNAME> | ValidTgts$ Creature.attacking | T
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lieutenant_kirtar.jpg
 Oracle:Flying\n{1}{W}, Sacrifice Lieutenant Kirtar: Exile target attacking creature.
-SetInfo:ODY Rare

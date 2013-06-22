@@ -6,4 +6,3 @@ A:AB$ UntapAll | Cost$ T Sac<1/CARDNAME> | ValidCards$ Forest | SpellDescription
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/llanowar_druid.jpg
 Oracle:{T}, Sacrifice Llanowar Druid: Untap all Forests.
-SetInfo:WTH Common

@@ -6,4 +6,3 @@ T:Mode$ AttackerBlocked | ValidCard$ Card.Self | Execute$ TrigFog | TriggerDescr
 SVar:TrigFog:AB$ Fog | Cost$ 0 | SpellDescription$ Prevent all combat damage that would be dealt this turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/leery_fogbeast.jpg
 Oracle:Whenever Leery Fogbeast becomes blocked, prevent all combat damage that would be dealt this turn.
-SetInfo:ONS Common

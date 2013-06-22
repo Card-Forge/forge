@@ -6,4 +6,3 @@ A:AB$ Pump | Cost$ W | Defined$ Self | NumDef$ 1 | SpellDescription$ CARDNAME ge
 A:AB$ Pump | Cost$ 2 | Defined$ Self | KW$ HIDDEN CARDNAME can block an additional creature. | SpellDescription$ CARDNAME can block an additional creature this turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/luminous_guardian.jpg
 Oracle:{W}: Luminous Guardian gets +0/+1 until end of turn.\n{2}: Luminous Guardian can block an additional creature this turn.
-SetInfo:ODY Uncommon

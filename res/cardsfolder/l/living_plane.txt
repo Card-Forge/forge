@@ -6,4 +6,3 @@ SVar:NonStackingEffect:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/living_plane.jpg
 Oracle:All lands are 1/1 creatures that are still lands.
-SetInfo:LEG Rare

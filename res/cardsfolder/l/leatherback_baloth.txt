@@ -4,4 +4,3 @@ Types:Creature Beast
 PT:4/5
 SVar:Picture:http://www.wizards.com/global/images/magic/general/leatherback_baloth.jpg
 Oracle:
-SetInfo:WWK Uncommon

@@ -10,4 +10,3 @@ SVar:DBEnchant:DB$ ChangeZone | Cost$ 0 | DefinedPlayer$ Remembered | ChangeType
 SVar:DBLand:DB$ ChangeZone | Cost$ 0 | DefinedPlayer$ Remembered | ChangeType$ Land | Origin$ Battlefield | Destination$ Hand | Chooser$ Remembered | Mandatory$ True | Hidden$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/linessa_zephyr_mage.jpg
 Oracle:{X}{U}{U}, {T}: Return target creature with converted mana cost X to its owner's hand.\nGrandeur - Discard another card named Linessa, Zephyr Mage: Target player returns a creature he or she controls to its owner's hand, then repeats this process for an artifact, an enchantment, and a land.
-SetInfo:FUT Rare

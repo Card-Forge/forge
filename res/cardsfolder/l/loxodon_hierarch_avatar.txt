@@ -5,4 +5,3 @@ HandLifeModifier:+0/+12
 A:AB$ Regenerate | ActivationZone$ Command | Cost$ Sac<1/Permanent> | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | SpellDescription$ Regenerate target creature you control.
 SVar:Picture:http://www.cardforge.org/fpics/vgd-lq/loxodon_hierarch_avatar.jpg
 Oracle:Hand +0, life +12\nSacrifice a permanent: Regenerate target creature you control.
-SetInfo:VAN Special

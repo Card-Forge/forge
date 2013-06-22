@@ -6,4 +6,3 @@ SVar:DBGainLife:DB$GainLife | LifeAmount$ 1 | SubAbility$ DBDraw
 SVar:DBDraw:DB$Draw | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/last_caress.jpg
 Oracle:Target player loses 1 life and you gain 1 life.\nDraw a card.
-SetInfo:APC Common

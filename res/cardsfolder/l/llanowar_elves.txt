@@ -5,18 +5,3 @@ PT:1/1
 A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add G to your mana pool.
 SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83515.jpg
 Oracle:{T}: Add {G} to your mana pool.
-SetInfo:2ED Common
-SetInfo:7ED Common
-SetInfo:6ED Common
-SetInfo:S00 Common
-SetInfo:M10 Common
-SetInfo:EVG Common
-SetInfo:9ED Common
-SetInfo:10E Common
-SetInfo:M11 Common
-SetInfo:LEB Common
-SetInfo:M12 Common
-SetInfo:LEA Common
-SetInfo:5ED Common
-SetInfo:4ED Common
-SetInfo:3ED Common

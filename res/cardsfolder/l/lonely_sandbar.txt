@@ -6,6 +6,3 @@ A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add U to your mana pool.
 K:Cycling:U
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lonely_sandbar.jpg
 Oracle:Lonely Sandbar enters the battlefield tapped.\n{T}: Add {U} to your mana pool.\nCycling {U} ({U}, Discard this card: Draw a card.)
-SetInfo:ONS Common
-SetInfo:COM Common
-SetInfo:DDJ Common

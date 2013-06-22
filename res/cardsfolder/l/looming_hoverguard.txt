@@ -7,4 +7,3 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigChangeZone:DB$ChangeZone | Cost$ 0 | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 0
 SVar:Picture:http://www.wizards.com/global/images/magic/general/looming_hoverguard.jpg
 Oracle:Flying\nWhen Looming Hoverguard enters the battlefield, put target artifact on top of its owner's library.
-SetInfo:MRD Uncommon

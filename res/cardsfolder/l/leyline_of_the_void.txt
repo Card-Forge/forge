@@ -10,5 +10,3 @@ SVar:NonStackingEffect:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/leyline_of_the_void.jpg
 Oracle:If Leyline of the Void is in your opening hand, you may begin the game with it on the battlefield.\nIf a card would be put into an opponent's graveyard from anywhere, exile it instead.
-SetInfo:GPT Rare
-SetInfo:M11 Rare

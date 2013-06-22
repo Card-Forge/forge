@@ -9,4 +9,3 @@ SVar:DmgX:Remembered$Amount
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/landslide.jpg
 Oracle:Sacrifice any number of Mountains. Landslide deals that much damage to target player.
-SetInfo:UDS Uncommon

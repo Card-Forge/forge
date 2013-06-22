@@ -7,4 +7,3 @@ A:AB$Pump | Cost$ T | Defined$ Self | NumAtt$ -2 | NumDef$ 2 | SubAbility$ DBDeb
 SVar:DBDebuff:DB$Debuff | Defined$ Self | Keywords$ Flying
 SVar:Picture:http://www.wizards.com/global/images/magic/general/leering_gargoyle.jpg
 Oracle:Flying\n{T}: Leering Gargoyle gets -2/+2 and loses flying until end of turn.
-SetInfo:MIR Rare

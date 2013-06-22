@@ -5,4 +5,3 @@ PT:1/1
 A:AB$ Pump | Cost$ UB | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ CARDNAME gets +1/+1 until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/loch_korrigan.jpg
 Oracle:{U/B}: Loch Korrigan gets +1/+1 until end of turn.
-SetInfo:SHM Common

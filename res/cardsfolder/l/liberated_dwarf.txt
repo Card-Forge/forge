@@ -6,4 +6,3 @@ A:AB$ Pump | Cost$ R Sac<1/CARDNAME> | ValidTgts$ Creature.Green | TgtPrompt$ Se
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/liberated_dwarf.jpg
 Oracle:{R}, Sacrifice Liberated Dwarf: Target green creature gets +1/+0 and gains first strike until end of turn.
-SetInfo:JUD Common

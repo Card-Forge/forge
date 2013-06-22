@@ -8,4 +8,3 @@ SVar:Detain:AB$ PumpAll | Cost$ 0 | KW$ HIDDEN CARDNAME can't attack or block. &
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lavinia_of_the_tenth.jpg
 Oracle:Protection from red\nWhen Lavinia of the Tenth enters the battlefield, detain each nonland permanent your opponents control with converted mana cost 4 or less. (Until your next turn, those permanents can't attack or block and their activated abilities can't be activated.)
-SetInfo:DGM Rare

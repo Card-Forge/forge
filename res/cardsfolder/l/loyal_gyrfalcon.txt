@@ -9,4 +9,3 @@ SVar:TrigDebuff:AB$ Debuff | Cost$ 0 | Defined$ Self | Keywords$ Defender
 SVar:BuffedBy:Card.White
 SVar:Picture:http://www.wizards.com/global/images/magic/general/loyal_gyrfalcon.jpg
 Oracle:Defender, flying\nWhenever you cast a white spell, Loyal Gyrfalcon loses defender until end of turn.
-SetInfo:EVE Uncommon

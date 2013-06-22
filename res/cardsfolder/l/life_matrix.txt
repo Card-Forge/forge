@@ -7,4 +7,3 @@ SVar:Regen:AB$ Regenerate | Cost$ SubCounter<1/MATRIX> | SpellDescription$ Regen
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/life_matrix.jpg
 Oracle:{4}, {T}: Put a matrix counter on target creature and that creature gains "Remove a matrix counter from this creature: Regenerate this creature." Activate this ability only during your upkeep.
-SetInfo:LEG Rare

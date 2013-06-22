@@ -7,4 +7,3 @@ SVar:X:TargetedPlayer$PoisonCounters
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/leeches.jpg
 Oracle:Target player loses all poison counters. Leeches deals that much damage to that player.
-SetInfo:HML Rare

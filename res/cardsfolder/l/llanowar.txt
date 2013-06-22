@@ -7,4 +7,3 @@ T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChao
 SVar:RolledChaos:AB$ UntapAll | Cost$ 0 | ValidCards$ Creature.YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/llanowar.jpg
 Oracle:All creatures have "{T}: Add {G}{G} to your mana pool."\nWhenever you roll {C}, untap all creatures you control.
-SetInfo:HOP Common

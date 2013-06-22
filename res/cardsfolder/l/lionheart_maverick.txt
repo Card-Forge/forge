@@ -6,5 +6,3 @@ K:Vigilance
 A:AB$ Pump | Cost$ 4 W | NumAtt$ +1 | NumDef$ +2 | SpellDescription$ CARDNAME gets +1/+2 until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lionheart_maverick.jpg
 Oracle:Vigilance\n{4}{W}: Lionheart Maverick gets +1/+2 until end of turn.
-SetInfo:GPT Common
-SetInfo:DDG Common

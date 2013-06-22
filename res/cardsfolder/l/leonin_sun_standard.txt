@@ -6,4 +6,3 @@ SVar:RemRandomDeck:True
 DeckNeeds:Color$white
 SVar:Picture:http://www.wizards.com/global/images/magic/general/leonin_sun_standard.jpg
 Oracle:{1}{W}: Creatures you control get +1/+1 until end of turn.
-SetInfo:MRD Rare

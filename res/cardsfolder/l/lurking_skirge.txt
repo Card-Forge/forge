@@ -5,4 +5,3 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | TriggerZone
 SVar:TrigAnimate:AB$ Animate | Cost$ 0 | Defined$ Self | Power$ 3 | Toughness$ 2 | Types$ Creature,Imp | Keywords$ Flying | OverwriteTypes$ True | Permanent$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lurking_skirge.jpg
 Oracle:When a creature is put into an opponent's graveyard from the battlefield, if Lurking Skirge is an enchantment, Lurking Skirge becomes a 3/2 Imp creature with flying.
-SetInfo:ULG Rare

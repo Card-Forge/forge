@@ -6,4 +6,3 @@ SVar:TrigDamage:AB$ DealDamage | Cost$ 0 | Defined$ TriggeredAttackers | NumDmg$
 SVar:X:Count$Valid Creature.attacking
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lightmine_field.jpg
 Oracle:Whenever one or more creatures attack, Lightmine Field deals damage to each of those creatures equal to the number of attacking creatures.
-SetInfo:ROE Rare

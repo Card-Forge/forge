@@ -6,4 +6,3 @@ K:Haste
 K:Horsemanship
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lu_bu_master_at_arms.jpg
 Oracle:Haste; horsemanship (This creature can't be blocked except by creatures with horsemanship.)
-SetInfo:PTK Rare

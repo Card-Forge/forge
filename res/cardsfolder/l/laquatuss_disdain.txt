@@ -6,4 +6,3 @@ SVar:DBDraw:DB$Draw | NumCards$ 1
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/laquatuss_disdain.jpg
 Oracle:Counter target spell cast from a graveyard.\nDraw a card.
-SetInfo:JUD Uncommon

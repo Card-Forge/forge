@@ -6,7 +6,3 @@ A:SP$ Attach | Cost$ W | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ First Strike | Description$ Enchanted creature has first strike.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lance.jpg
 Oracle:Enchant creature\nEnchanted creature has first strike.
-SetInfo:LEB Uncommon
-SetInfo:LEA Uncommon
-SetInfo:3ED Uncommon
-SetInfo:2ED Uncommon

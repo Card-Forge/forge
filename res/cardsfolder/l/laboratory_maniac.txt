@@ -6,4 +6,3 @@ R:Event$ Draw | ActiveZones$ Battlefield | ValidPlayer$ You | IsPresent$ Card.Yo
 SVar:Win:AB$WinsGame | Cost$ 0 | Defined$ You
 SVar:Picture:http://www.wizards.com/global/images/magic/general/laboratory_maniac.jpg
 Oracle:If you would draw a card while your library has no cards in it, you win the game instead.
-SetInfo:ISD Rare

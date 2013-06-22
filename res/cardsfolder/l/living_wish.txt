@@ -6,4 +6,3 @@ SVar:DBChange:DB$ ChangeZone | Origin$ Stack | Destination$ Exile
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/living_wish.jpg
 Oracle:You may choose a creature or land card you own from outside the game, reveal that card, and put it into your hand. Exile Living Wish.
-SetInfo:JUD Rare

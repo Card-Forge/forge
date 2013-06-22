@@ -4,4 +4,3 @@ Types:Instant
 A:SP$ Tap | Cost$ 1 W | TargetMin$ 0 | TargetMax$ 2 | TgtPrompt$ Choose target creature | ValidTgts$ Creature | SpellDescription$ Tap up to two target creatures.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lead_astray.jpg
 Oracle:Tap up to two target creatures.
-SetInfo:JUD Common

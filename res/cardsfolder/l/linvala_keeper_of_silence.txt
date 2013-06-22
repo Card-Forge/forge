@@ -7,4 +7,3 @@ S:Mode$ Continuous | Affected$ Creature.OppCtrl | AddHiddenKeyword$ CARDNAME's a
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/linvala_keeper_of_silence.jpg
 Oracle:Flying\nActivated abilities of creatures your opponents control can't be activated.
-SetInfo:ROE Mythic

@@ -5,4 +5,3 @@ T:Mode$ SetInMotion | ValidCard$ Card.Self | Execute$ DarkEffect | TriggerZones$
 SVar:DarkEffect:AB$ Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Dragon | TokenTypes$ Creature,Dragon | TokenOwner$ You | TokenColors$ Red | TokenPower$ 5 | TokenToughness$ 5 | TokenKeywords$ Flying
 SVar:Picture:http://www.cardforge.org/fpics/lq_schemes/look_skyward_and_despair.jpg
 Oracle:When you set this scheme in motion, put a 5/5 red Dragon creature token with flying onto the battlefield.
-SetInfo:ARC Common

@@ -6,4 +6,3 @@ A:AB$ Mana | Cost$ T Sac<1/CARDNAME> | Produced$ Any | Amount$ 3 | SpellDescript
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lotus_bloom.jpg
 Oracle:Suspend 3-{0} (Rather than cast this card from your hand, pay {0} and exile it with three time counters on it. At the beginning of your upkeep, remove a time counter. When the last is removed, cast it without paying its mana cost.)\n{T}, Sacrifice Lotus Bloom: Add three mana of any one color to your mana pool.
-SetInfo:TSP Rare

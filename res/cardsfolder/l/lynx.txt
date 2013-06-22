@@ -5,5 +5,3 @@ PT:2/1
 K:Forestwalk
 SVar:Picture:http://resources.wizards.com/magic/cards/p3/en-us/card21053.jpg
 Oracle:Forestwalk
-SetInfo:PO2 Common
-SetInfo:S99 Uncommon

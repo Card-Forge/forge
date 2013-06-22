@@ -6,4 +6,3 @@ A:SP$ Counter | Announce$ X | Cost$ X U U | TargetType$ Spell | ValidTgts$ Card 
 SVar:X:Count$xPaid
 SVar:Picture:http://www.wizards.com/global/images/magic/general/logic_knot.jpg
 Oracle:Delve (You may exile any number of cards from your graveyard as you cast this spell. It costs {1} less to cast for each card exiled this way.)\nCounter target spell unless its controller pays {X}.
-SetInfo:FUT Common

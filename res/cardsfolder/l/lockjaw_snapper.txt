@@ -7,4 +7,3 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigPutCounters:AB$ PutCounterAll | Cost$ 0 | ValidCards$ Creature.counters_GE1_M1M1 | CounterType$ M1M1 | CounterNum$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lockjaw_snapper.jpg
 Oracle:Wither (This deals damage to creatures in the form of -1/-1 counters.)\nWhen Lockjaw Snapper dies, put a -1/-1 counter on each creature with a -1/-1 counter on it.
-SetInfo:SHM Uncommon

@@ -6,4 +6,3 @@ SVar:AffectedX:Count$ValidGraveyard Card.sharesNameWith+YouCtrl
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/locket_of_yesterdays.jpg
 Oracle:Spells you cast cost {1} less to cast for each card with the same name as that spell in your graveyard.
-SetInfo:TSP Uncommon

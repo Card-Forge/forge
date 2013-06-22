@@ -6,5 +6,3 @@ A:SP$ Attach | Cost$ 2 G G | ValidTgts$ Land | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Card.EnchantedBy | SetPower$ 5 | SetToughness$ 6 | SetColor$ Green | AddType$ Creature & Treefolk | Description$ Enchanted land is a 5/6 green Treefolk creature that's still a land.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/living_terrain.jpg
 Oracle:Enchant land\nEnchanted land is a 5/6 green Treefolk creature that's still a land.
-SetInfo:PCY Uncommon
-SetInfo:8ED Uncommon

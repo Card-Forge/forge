@@ -6,4 +6,3 @@ A:AB$ PutCounter | Cost$ B | ConditionDefined$ Self | ConditionPresent$ Creature
 SVar:DBPump:DB$ Pump | NumAtt$ -1 | Defined$ Self | ConditionDefined$ Self | ConditionPresent$ Creature.powerGE1 | ConditionCompare$ EQ1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lesser_werewolf.jpg
 Oracle:{B}: If Lesser Werewolf's power is 1 or more, it gets -1/-0 until end of turn and put a -0/-1 counter on target creature blocking or blocked by Lesser Werewolf. Activate this ability only during the declare blockers step.
-SetInfo:LEG Uncommon

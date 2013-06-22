@@ -6,5 +6,3 @@ K:If CARDNAME would be put into a graveyard from anywhere, reveal CARDNAME and s
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/legacy_weapon.jpg
 Oracle:{W}{U}{B}{R}{G}: Exile target permanent.\nIf Legacy Weapon would be put into a graveyard from anywhere, reveal Legacy Weapon and shuffle it into its owner's library instead.
-SetInfo:APC Rare
-SetInfo:10E Rare

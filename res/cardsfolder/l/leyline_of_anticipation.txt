@@ -8,4 +8,3 @@ S:Mode$ Continuous | Affected$ You | AddKeyword$ You may cast nonland cards as t
 SVar:NonStackingEffect:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/leyline_of_anticipation.jpg
 Oracle:If Leyline of Anticipation is in your opening hand, you may begin the game with it on the battlefield.\nYou may cast nonland cards as though they had flash. (You may cast them any time you could cast an instant.)
-SetInfo:M11 Rare

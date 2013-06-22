@@ -7,4 +7,3 @@ SVar:TrigTap:AB$ Tap | Cost$ 8 | ValidTgts$ Permanent | TargetMin$ 0 | TargetMax
 SVar:DBPump:DB$ Pump | Defined$ Targeted | Permanent$ True | KW$ HIDDEN This card doesn't untap during your next untap step.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lorthos_the_tidemaker.jpg
 Oracle:Whenever Lorthos, the Tidemaker attacks, you may pay {8}. If you do, tap up to eight target permanents. Those permanents don't untap during their controllers' next untap steps.
-SetInfo:ZEN Mythic

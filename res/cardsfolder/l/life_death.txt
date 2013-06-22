@@ -15,5 +15,3 @@ A:SP$ ChangeZone | Cost$ 1 B | Origin$ Graveyard | Destination$ Battlefield | Va
 SVar:DBLoseLifeYou:DB$ LoseLife | Defined$ You | LifeAmount$ X | References$ X
 SVar:X:Targeted$CardManaCost
 Oracle:Return target creature card from your graveyard to the battlefield. You lose life equal to its converted mana cost.
-SetInfo:APC Uncommon
-SetInfo:DDJ Uncommon

@@ -7,5 +7,3 @@ SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/luminesce.jpg
 Oracle:Prevent all damage that black sources and red sources would deal this turn.
-SetInfo:CSP Uncommon
-SetInfo:10E Uncommon

@@ -6,4 +6,3 @@ T:Mode$ Attacks | ValidCard$ Card.Self | Alone$ True | Execute$ TrigPump | Trigg
 SVar:TrigPump:AB$Pump | Cost$ 0 | Defined$ Self | NumAtt$ +1 | NumDef$ +1 | KW$ Trample
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lunk_errant.jpg
 Oracle:Whenever Lunk Errant attacks alone, it gets +1/+1 and gains trample until end of turn.
-SetInfo:MOR Common

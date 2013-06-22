@@ -8,4 +8,3 @@ SVar:DBChangeZone:DB$ ChangeZone | TargetMin$ 0 | TargetMax$ X | TargetsWithDefi
 SVar:X:Count$InAllYards
 SVar:Picture:http://www.wizards.com/global/images/magic/general/loaming_shaman.jpg
 Oracle:When Loaming Shaman enters the battlefield, target player shuffles any number of target cards from his or her graveyard into his or her library.
-SetInfo:DIS Rare

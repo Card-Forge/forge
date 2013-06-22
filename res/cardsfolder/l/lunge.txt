@@ -5,4 +5,3 @@ A:SP$ DealDamage | Cost$ 2 R | ValidTgts$ Creature | TgtPrompt$ Select target cr
 SVar:DB1:DB$DealDamage | NumDmg$ 2 | ValidTgts$ Player | TgtPrompt$ Select target player
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lunge.jpg
 Oracle:Lunge deals 2 damage to target creature and 2 damage to target player.
-SetInfo:MMQ Common

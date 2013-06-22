@@ -6,4 +6,3 @@ K:First Strike
 A:AB$ Regenerate | Cost$ 1 B | SpellDescription$ Regenerate CARDNAME.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lim_duls_high_guard.jpg
 Oracle:First strike\n{1}{B}: Regenerate Lim-Dul's High Guard.
-SetInfo:ALL Common x2

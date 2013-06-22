@@ -6,5 +6,3 @@ T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ St
 SVar:StayTapped:DB$Pump | KW$ HIDDEN This card doesn't untap during your next untap step. | Defined$ Self | Permanent$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lead_golem.jpg
 Oracle:Whenever Lead Golem attacks, it doesn't untap during its controller's next untap step.
-SetInfo:MIR Uncommon
-SetInfo:6ED Uncommon

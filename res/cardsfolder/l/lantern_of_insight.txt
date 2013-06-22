@@ -6,4 +6,3 @@ A:AB$ Shuffle | Cost$ T Sac<1/CARDNAME> | ValidTgts$ Player | TgtPrompt$ Select 
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lantern_of_insight.jpg
 Oracle:Each player plays with the top card of his or her library revealed.\n{T}, Sacrifice Lantern of Insight: Target player shuffles his or her library.
-SetInfo:5DN Uncommon

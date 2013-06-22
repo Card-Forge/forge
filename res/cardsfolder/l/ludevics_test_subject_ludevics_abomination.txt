@@ -25,4 +25,3 @@ SVar:X:Count$Valid Card.Self+counters_GE5_HATCHLING
 SVar:All:Count$CardCounters.HATCHLING
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ludevics_abomination.jpg
 Oracle:Trample
-SetInfo:ISD Rare

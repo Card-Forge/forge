@@ -7,4 +7,3 @@ SVar:DrawSlowtrip:DB$Draw | NumCards$ 1 | Defined$ You
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lodestone_bauble.jpg
 Oracle:{1}, {T}, Sacrifice Lodestone Bauble: Put up to four target basic land cards from a player's graveyard on top of his or her library in any order. That player draws a card at the beginning of the next turn's upkeep.
-SetInfo:ALL Rare

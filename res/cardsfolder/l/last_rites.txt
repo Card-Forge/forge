@@ -8,5 +8,3 @@ SVar:X:Remembered$Amount
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/last_rites.jpg
 Oracle:Discard any number of cards. Target player reveals his or her hand, then you choose a nonland card from it for each card discarded this way. That player discards those cards.
-SetInfo:ODY Common
-SetInfo:PD3 Common

@@ -5,4 +5,3 @@ PT:3/1
 K:Unblockable
 SVar:Picture:http://www.wizards.com/global/images/magic/general/latch_seeker.jpg
 Oracle:Latch Seeker is unblockable.
-SetInfo:AVR Uncommon

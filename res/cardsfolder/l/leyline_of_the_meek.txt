@@ -9,4 +9,3 @@ SVar:PlayMain1:TRUE
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/leyline_of_the_meek.jpg
 Oracle:If Leyline of the Meek is in your opening hand, you may begin the game with it on the battlefield.\nCreature tokens get +1/+1.
-SetInfo:GPT Rare

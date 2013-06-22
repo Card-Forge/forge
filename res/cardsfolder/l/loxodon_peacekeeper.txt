@@ -9,4 +9,3 @@ SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/loxodon_peacekeeper.jpg
 Oracle:At the beginning of your upkeep, the player with the lowest life total gains control of Loxodon Peacekeeper. If two or more players are tied for lowest life total, you choose one of them, and that player gains control of Loxodon Peacekeeper.
-SetInfo:MRD Rare

@@ -6,4 +6,3 @@ K:Flying
 A:AB$ Regenerate | Cost$ 2 G | SpellDescription$ Regenerate CARDNAME.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/living_airship.jpg
 Oracle:Flying\n{2}{G}: Regenerate Living Airship.
-SetInfo:APC Common

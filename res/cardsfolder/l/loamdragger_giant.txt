@@ -4,4 +4,3 @@ Types:Creature Giant Warrior
 PT:7/6
 SVar:Picture:http://www.wizards.com/global/images/magic/general/loamdragger_giant.jpg
 Oracle:
-SetInfo:SHM Common

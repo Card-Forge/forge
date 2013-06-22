@@ -6,4 +6,3 @@ A:AB$ ChangeZone | Cost$ T Sac<1/CARDNAME> | ValidTgts$ Creature.Red | TgtPrompt
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lawbringer.jpg
 Oracle:{T}, Sacrifice Lawbringer: Exile target red creature.
-SetInfo:NMS Common

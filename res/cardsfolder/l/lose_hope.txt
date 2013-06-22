@@ -5,4 +5,3 @@ A:SP$ Pump | Cost$ B | ValidTgts$ Creature | TgtPrompt$ Select target creature |
 SVar:DBScry:DB$Scry | ScryNum$ 2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lose_hope.jpg
 Oracle:Target creature gets -1/-1 until end of turn.\nScry 2. (To scry 2, look at the top two cards of your library, then put any number of them on the bottom of your library and the rest on top in any order.)
-SetInfo:5DN Common

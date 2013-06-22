@@ -7,4 +7,3 @@ SVar:TrigPut:AB$ PutCounter | Cost$ 0 | Defined$ Self | CounterType$ QUEST | Cou
 SVar:X:Count$LifeYouLostThisTurn
 SVar:Picture:http://www.wizards.com/global/images/magic/general/luminarch_ascension.jpg
 Oracle:At the beginning of each opponent's end step, if you didn't lose life this turn, you may put a quest counter on Luminarch Ascension. (Damage causes loss of life.)\n{1}{W}: Put a 4/4 white Angel creature token with flying onto the battlefield. Activate this ability only if Luminarch Ascension has four or more quest counters on it.
-SetInfo:ZEN Rare

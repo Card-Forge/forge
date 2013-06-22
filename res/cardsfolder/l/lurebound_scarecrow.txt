@@ -10,4 +10,3 @@ SVar:X:Count$Valid Permanent.YouCtrl+ChosenColor
 SVar:NeedsToPlay:Permanent.nonColorless+YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lurebound_scarecrow.jpg
 Oracle:As Lurebound Scarecrow enters the battlefield, choose a color.\nWhen you control no permanents of the chosen color, sacrifice Lurebound Scarecrow.
-SetInfo:SHM Uncommon

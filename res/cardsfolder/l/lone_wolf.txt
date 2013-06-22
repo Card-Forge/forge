@@ -5,9 +5,3 @@ PT:2/2
 K:You may have CARDNAME assign its combat damage as though it weren't blocked.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lone_wolf.jpg
 Oracle:You may have Lone Wolf assign its combat damage as though it weren't blocked.
-SetInfo:PO2 Uncommon
-SetInfo:8ED Common
-SetInfo:ULG Uncommon
-SetInfo:S99 Common
-SetInfo:7ED Common
-SetInfo:PTK Uncommon

@@ -5,4 +5,3 @@ A:SP$ Counter | Cost$ 3 U U | TargetType$ Spell | TgtPrompt$ Select target spell
 SVar:DBReturn:DB$ ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Hand | TgtPrompt$ Select target permanent | ValidTgts$ Permanent
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lost_in_the_mist.jpg
 Oracle:Counter target spell. Return target permanent to its owner's hand.
-SetInfo:ISD Common

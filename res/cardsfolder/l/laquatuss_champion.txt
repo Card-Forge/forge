@@ -9,5 +9,3 @@ SVar:TrigGainLife:DB$GainLife | Defined$ Remembered | LifeAmount$ 6
 A:AB$ Regenerate | Cost$ B | SpellDescription$ Regenerate CARDNAME.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/laquatuss_champion.jpg
 Oracle:When Laquatus's Champion enters the battlefield, target player loses 6 life.\nWhen Laquatus's Champion leaves the battlefield, that player gains 6 life.\n{B}: Regenerate Laquatus's Champion.
-SetInfo:TOR Rare
-SetInfo:MBP Rare

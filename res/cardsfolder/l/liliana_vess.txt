@@ -7,7 +7,3 @@ A:AB$ ChangeZone | Cost$ SubCounter<2/LOYALTY> | Planeswalker$ True | Origin$ Li
 A:AB$ ChangeZoneAll | Cost$ SubCounter<8/LOYALTY> | Planeswalker$ True | Ultimate$ True | ChangeType$ Creature | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | SpellDescription$ Put all creature cards in all graveyards onto the battlefield under your control.
 SVar:Picture:http://resources.wizards.com/magic/cards/lrw/en/card140212.jpg
 Oracle:[+1] Target player discards a card.\n[-2] Search your library for a card, then shuffle your library and put that card on top of it.\n[-8] Put all creature cards from all graveyards onto the battlefield under your control.
-SetInfo:M11 Mythic
-SetInfo:M10 Mythic
-SetInfo:LRW Rare
-SetInfo:DDD Mythic

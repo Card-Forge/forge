@@ -7,5 +7,3 @@ S:Mode$ Continuous | Affected$ Card.EnchantedBy | SetPower$ 0 | SetToughness$ 4 
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lignify.jpg
 Oracle:Enchant creature\nEnchanted creature is a 0/4 Treefolk with no abilities.
-SetInfo:LRW Common
-SetInfo:DDD Common

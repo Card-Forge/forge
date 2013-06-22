@@ -6,4 +6,3 @@ K:Flying
 A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color to your mana pool.
 SVar:Picture:http://resources.wizards.com/magic/cards/in/en-us/card23233.jpg
 Oracle:Flying\n{T}: Add one mana of any color to your mana pool.
-SetInfo:INV Rare

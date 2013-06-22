@@ -6,4 +6,3 @@ A:AB$ ChangeZone | Cost$ T Sac<3/Spirit> | Origin$ Library | Destination$ Battle
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lifespinner.jpg
 Oracle:{T}, Sacrifice three Spirits: Search your library for a legendary Spirit permanent card and put it onto the battlefield. Then shuffle your library.
-SetInfo:BOK Uncommon

@@ -5,7 +5,3 @@ PT:2/1
 K:Swampwalk
 SVar:Picture:http://resources.wizards.com/magic/cards/6e/en-us/card20178.jpg
 Oracle:Swampwalk
-SetInfo:5ED Common
-SetInfo:LEG Common
-SetInfo:6ED Common
-SetInfo:4ED Common

@@ -9,4 +9,3 @@ SVar:LazavTrig:Mode$ ChangesZone | Origin$ Any | Destination$ Graveyard | ValidC
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lazav_dimir_mastermind.jpg
 Oracle:Hexproof\nWhenever a creature card is put into an opponent's graveyard from anywhere, you may have Lazav, Dimir Mastermind become a copy of that card except its name is still Lazav, Dimir Mastermind, it's legendary in addition to its other types, and it gains hexproof and this ability.
-SetInfo:GTC Mythic

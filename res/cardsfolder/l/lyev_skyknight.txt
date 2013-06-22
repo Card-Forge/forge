@@ -8,4 +8,3 @@ SVar:Detain:DB$ Pump | KW$ HIDDEN CARDNAME can't attack or block. & HIDDEN CARDN
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lyev_skyknight.jpg
 Oracle:Flying\nWhen Lyev Skyknight enters the battlefield, detain target nonland permanent an opponent controls. (Until your next turn, that permanent can't attack or block and its activated abilities can't be activated.)
-SetInfo:RTR Uncommon

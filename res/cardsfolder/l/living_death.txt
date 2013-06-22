@@ -8,6 +8,3 @@ SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/living_death.jpg
 Oracle:Each player exiles all creature cards from his or her graveyard, then sacrifices all creatures he or she controls, then puts all cards he or she exiled this way onto the battlefield.
-SetInfo:TMP Rare
-SetInfo:COM Rare
-SetInfo:DDE Rare

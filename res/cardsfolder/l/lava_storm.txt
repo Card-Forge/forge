@@ -5,4 +5,3 @@ A:SP$ DamageAll | Cost$ 3 R R | ValidCards$ Creature.attacking | NumDmg$ 2 | Val
 A:SP$ DamageAll | Cost$ 3 R R | ValidCards$ Creature.blocking | NumDmg$ 2 | ValidDescription$ each blocking creature | SpellDescription$ or CARDNAME deals 2 damage to each blocking creature.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lava_storm.jpg
 Oracle:Lava Storm deals 2 damage to each attacking creature or Lava Storm deals 2 damage to each blocking creature.
-SetInfo:WTH Common

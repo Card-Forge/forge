@@ -10,4 +10,3 @@ SVar:TrigSacOpp:AB$Sacrifice | Cost$ 0 | SacValid$ Land | ChangeNum$ 1 | Defined
 SVar:Targeting:Counter
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lava_runner.jpg
 Oracle:Haste\nWhenever Lava Runner becomes the target of a spell or ability, that spell or ability's controller sacrifices a land.
-SetInfo:MMQ Rare

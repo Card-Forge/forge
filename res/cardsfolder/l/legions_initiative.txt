@@ -10,4 +10,3 @@ SVar:DBPump:DB$ PumpAll | ValidCards$ Card.IsRemembered | KW$ Haste | SubAbility
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/legions_initiative.jpg
 Oracle:Red creatures you control get +1/+0.\nWhite creatures you control get +0/+1.\n{R}{W}, Exile Legion's Initiative: Exile all creatures you control. At the beginning of the next combat, return those cards to the battlefield under their owner's control and those creatures gain haste until end of turn.
-SetInfo:DGM Mythic

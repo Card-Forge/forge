@@ -10,9 +10,3 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | E
 SVar:TrigGainLife:AB$GainLife | Cost$ SubCounter<1/VITALITY> | Defined$ You | LifeAmount$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/living_artifact.jpg
 Oracle:Enchant artifact\nWhenever you're dealt damage, put that many vitality counters on Living Artifact.\nAt the beginning of your upkeep, you may remove a vitality counter from Living Artifact. If you do, you gain 1 life.
-SetInfo:2ED Rare
-SetInfo:LEB Rare
-SetInfo:LEA Rare
-SetInfo:5ED Rare
-SetInfo:4ED Rare
-SetInfo:3ED Rare

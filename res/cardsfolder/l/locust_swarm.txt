@@ -7,4 +7,3 @@ A:AB$ Regenerate | Cost$ G | SpellDescription$ Regenerate CARDNAME.
 A:AB$ Untap | Cost$ G | ActivationLimit$ 1 | SpellDescription$ Untap CARDNAME. Activate this ability only once each turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/locust_swarm.jpg
 Oracle:Flying\n{G}: Regenerate Locust Swarm.\n{G}: Untap Locust Swarm. Activate this ability only once each turn.
-SetInfo:MIR Uncommon

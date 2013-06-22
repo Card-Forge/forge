@@ -7,4 +7,3 @@ S:Mode$ Continuous | Affected$ Creature.withForestwalk | AddHiddenKeyword$ May b
 K:First Strike
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lord_magnus.jpg
 Oracle:First strike\nCreatures with plainswalk can be blocked as though they didn't have plainswalk.\nCreatures with forestwalk can be blocked as though they didn't have forestwalk.
-SetInfo:LEG Uncommon

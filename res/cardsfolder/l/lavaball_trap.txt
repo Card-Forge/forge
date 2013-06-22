@@ -7,4 +7,3 @@ SVar:DBDamageAll:DB$DamageAll | ValidCards$ Creature | NumDmg$ 4 | ValidDescript
 SVar:LandsEntered:Count$ThisTurnEntered_Battlefield_Land.YouDontCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lavaball_trap.jpg
 Oracle:If an opponent had two or more lands enter the battlefield under his or her control this turn, you may pay {3}{R}{R} rather than pay Lavaball Trap's mana cost.\nDestroy two target lands. Lavaball Trap deals 4 damage to each creature.
-SetInfo:ZEN Rare

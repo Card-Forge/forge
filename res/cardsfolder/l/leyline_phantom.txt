@@ -6,4 +6,3 @@ T:Mode$ DamageDone | ValidSource$ Card.Self | Execute$ TrigBounce | CombatDamage
 SVar:TrigBounce:AB$ ChangeZone | Cost$ 0 | Defined$ Self | Origin$ Battlefield | Destination$ Hand
 SVar:Picture:http://www.wizards.com/global/images/magic/general/leyline_phantom.jpg
 Oracle:When Leyline Phantom deals combat damage, return it to its owner's hand. (Return it only if it survived combat.)
-SetInfo:GTC Common

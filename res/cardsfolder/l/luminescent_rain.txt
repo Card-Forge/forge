@@ -7,4 +7,3 @@ SVar:X:Count$Valid Permanent.ChosenType+YouCtrl/Times.2
 SVar:NeedsToPlay:Creature
 SVar:Picture:http://www.wizards.com/global/images/magic/general/luminescent_rain.jpg
 Oracle:Choose a creature type. You gain 2 life for each permanent you control of that type.
-SetInfo:MOR Common

@@ -6,4 +6,3 @@ SVar:X:Count$TypeInYourHand.Land
 A:SP$ ChangeZone | Cost$ 1 G | Origin$ Library | Destination$ Hand | ChangeType$ Forest | ChangeNum$ 1 | SpellDescription$ Search your library for a Forest card, reveal that card, and put it into your hand. Then shuffle your library.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/land_grant.jpg
 Oracle:If you have no land cards in hand, you may reveal your hand rather than pay Land Grant's mana cost.\nSearch your library for a Forest card, reveal that card, and put it into your hand. Then shuffle your library.
-SetInfo:MMQ Common

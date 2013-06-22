@@ -7,4 +7,3 @@ SVar:DBDamage:DB$ DealDamage | Defined$ Targeted | NumDmg$ 6 | NoPrevention$ Tru
 SVar:X:Count$InYourYard
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lightning_surge.jpg
 Oracle:Lightning Surge deals 4 damage to target creature or player.\nThreshold - If seven or more cards are in your graveyard, instead Lightning Surge deals 6 damage to that creature or player and the damage can't be prevented.\nFlashback {5}{R}{R} (You may cast this card from your graveyard for its flashback cost. Then exile it.)
-SetInfo:JUD Rare

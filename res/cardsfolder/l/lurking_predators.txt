@@ -8,4 +8,3 @@ SVar:X:Remembered$Amount
 SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lurking_predators.jpg
 Oracle:Whenever an opponent casts a spell, reveal the top card of your library. If it's a creature card, put it onto the battlefield. Otherwise, you may put that card on the bottom of your library.
-SetInfo:M10 Rare

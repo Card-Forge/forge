@@ -7,4 +7,3 @@ T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | TriggerZon
 SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lu_xun_scholar_general.jpg
 Oracle:Horsemanship (This creature can't be blocked except by creatures with horsemanship.)\nWhenever Lu Xun, Scholar General deals damage to an opponent, you may draw a card.
-SetInfo:PTK Rare

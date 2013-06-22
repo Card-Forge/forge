@@ -6,17 +6,3 @@ A:SP$ Attach | Cost$ 1 G G | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ All creatures able to block CARDNAME do so. | Description$ All creatures able to block enchanted creature do so.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lure.jpg
 Oracle:Enchant creature\nAll creatures able to block enchanted creature do so.
-SetInfo:8ED Uncommon
-SetInfo:2ED Uncommon
-SetInfo:7ED Uncommon
-SetInfo:6ED Uncommon
-SetInfo:5ED Uncommon
-SetInfo:MMQ Uncommon
-SetInfo:CHK Uncommon
-SetInfo:10E Uncommon
-SetInfo:LEB Uncommon
-SetInfo:M12 Uncommon
-SetInfo:LEA Uncommon
-SetInfo:ICE Uncommon
-SetInfo:4ED Uncommon
-SetInfo:3ED Uncommon

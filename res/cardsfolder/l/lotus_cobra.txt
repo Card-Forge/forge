@@ -7,4 +7,3 @@ SVar:TrigMana:AB$ Mana | Cost$ 0 | Produced$ Any | AILogic$ MostProminentInCompu
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lotus_cobra.jpg
 Oracle:Landfall - Whenever a land enters the battlefield under your control, you may add one mana of any color to your mana pool.
-SetInfo:ZEN Mythic

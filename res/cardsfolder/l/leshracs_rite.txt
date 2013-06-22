@@ -6,7 +6,3 @@ A:SP$ Attach | Cost$ B | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Swampwalk | Description$ Enchanted creature has swampwalk.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/leshracs_rite.jpg
 Oracle:Enchant creature\nEnchanted creature has swampwalk.
-SetInfo:ICE Uncommon
-SetInfo:5ED Uncommon
-SetInfo:7ED Uncommon
-SetInfo:6ED Uncommon

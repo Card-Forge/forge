@@ -6,4 +6,3 @@ T:Mode$ SpellCast | ValidCard$ Spirit,Arcane | ValidActivatingPlayer$ You | Trig
 SVar:TrigLand:AB$ChangeZone | Cost$ 0 | Origin$ Hand | Destination$ Battlefield | ChangeType$ Land | ChangeNum$ 1 | Tapped$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/loam_dweller.jpg
 Oracle:Whenever you cast a Spirit or Arcane spell, you may put a land card from your hand onto the battlefield tapped.
-SetInfo:BOK Uncommon

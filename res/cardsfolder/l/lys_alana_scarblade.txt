@@ -6,4 +6,3 @@ A:AB$ Pump | Cost$ T Discard<1/Card.Elf/Elf> | ValidTgts$ Creature | TgtPrompt$ 
 SVar:X:Count$Valid Elf.YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lys_alana_scarblade.jpg
 Oracle:{T}, Discard an Elf card: Target creature gets -X/-X until end of turn, where X is the number of Elves you control.
-SetInfo:LRW Uncommon

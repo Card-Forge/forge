@@ -5,4 +5,3 @@ A:SP$ Destroy | Cost$ 1 W | ValidTgts$ Enchantment | TgtPrompt$ Select target en
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/leave_no_trace.jpg
 Oracle:Radiance - Destroy target enchantment and each other enchantment that shares a color with it.
-SetInfo:RAV Common

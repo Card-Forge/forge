@@ -5,4 +5,3 @@ HandLifeModifier:+2/-4
 S:Mode$ Continuous | EffectZone$ Command | Affected$ Creature.YouCtrl | AddKeyword$ Shadow | Description$ Creatures you control have shadow. (They can block and be blocked only by creatures with shadow.)
 SVar:Picture:http://www.cardforge.org/fpics/vgd-lq/lyna.jpg
 Oracle:Hand +2, life -4\nCreatures you control have shadow. (They can block and be blocked only by creatures with shadow.)
-SetInfo:VAN Special

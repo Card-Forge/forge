@@ -7,7 +7,3 @@ SVar:X:Count$TypeInAllYards.Creature
 SVar:Y:Count$TypeInAllYards.Creature/Plus.1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lhurgoyf.jpg
 Oracle:Lhurgoyf's power is equal to the number of creature cards in all graveyards and its toughness is equal to that number plus 1.
-SetInfo:ICE Rare
-SetInfo:5ED Rare
-SetInfo:8ED Rare
-SetInfo:COM Rare

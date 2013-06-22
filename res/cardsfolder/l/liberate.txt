@@ -7,4 +7,3 @@ SVar:TrigReturn:DB$ChangeZone | Origin$ Exile | Destination$ Battlefield | Defin
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/liberate.jpg
 Oracle:Exile target creature you control. Return that card to the battlefield under its owner's control at the beginning of the next end step.
-SetInfo:INV Uncommon
