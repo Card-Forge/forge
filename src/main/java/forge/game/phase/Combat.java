@@ -822,7 +822,7 @@ public class Combat {
         for(GameEntity defender : defenderMap.keySet()) {
             if ((defender instanceof Player && priority.equals(defender)) ||
                     (defender instanceof Card && priority.equals(((Card)defender).getController()))) {
-                List<Card> attackers = defenderMap.get(priority);
+                List<Card> attackers = defenderMap.get(defender);
                 if (attackers != null && !attackers.isEmpty())
                     return true;
             }
