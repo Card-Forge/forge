@@ -126,11 +126,10 @@ public class PumpAllEffect extends SpellAbilityEffect {
         }
 
         list = new ArrayList<Card>();
-        if (tgtPlayers.isEmpty()) {
+        if (!sa.usesTargeting()) {
             for (final ZoneType zone : affectedZones) {
                 list.addAll(game.getCardsIn(zone));
             }
-
         } else {
             for (final ZoneType zone : affectedZones) {
                 for (final Player p : tgtPlayers) {
