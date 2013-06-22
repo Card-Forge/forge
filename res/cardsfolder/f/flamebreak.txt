@@ -4,4 +4,3 @@ Types:Sorcery
 A:SP$ DamageAll | Cost$ R R R | ValidCards$ Creature.withoutFlying | ValidPlayers$ Each | NumDmg$ 3 | NoRegen$ True | SpellDescription$ CARDNAME deals 3 damage to each creature without flying and each player. Creatures dealt damage this way can't be regenerated this turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flamebreak.jpg
 Oracle:Flamebreak deals 3 damage to each creature without flying and each player. Creatures dealt damage this way can't be regenerated this turn.
-SetInfo:DST Rare

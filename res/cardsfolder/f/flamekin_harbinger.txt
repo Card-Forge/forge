@@ -7,5 +7,3 @@ SVar:TrigChange:AB$ChangeZone | Cost$ 0 | Origin$ Library | Destination$ Library
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flamekin_harbinger.jpg
 Oracle:When Flamekin Harbinger enters the battlefield, you may search your library for an Elemental card, reveal it, then shuffle your library and put that card on top of it.
-SetInfo:HOP Uncommon
-SetInfo:LRW Uncommon

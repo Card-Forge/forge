@@ -7,4 +7,3 @@ SVar:TrigLoseLife:AB$LoseLife | Cost$ 0 | Defined$ You | LifeAmount$ X | Referen
 SVar:X:TriggerCount$DamageAmount
 SVar:Picture:http://www.wizards.com/global/images/magic/general/filthy_cur.jpg
 Oracle:Whenever Filthy Cur is dealt damage, you lose that much life.
-SetInfo:ODY Common

@@ -9,5 +9,3 @@ A:AB$ ChangeZone | Cost$ 6 R R W W | Origin$ Graveyard | Destination$ Battlefiel
 SVar:TrigGainLife:AB$ GainLife | Cost$ 0 | Defined$ You | LifeAmount$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/firemane_angel.jpg
 Oracle:Flying, first strike\nAt the beginning of your upkeep, if Firemane Angel is in your graveyard or on the battlefield, you may gain 1 life.\n{6}{R}{R}{W}{W}: Return Firemane Angel from your graveyard to the battlefield. Activate this ability only during your upkeep.
-SetInfo:RAV Rare
-SetInfo:DDH Rare

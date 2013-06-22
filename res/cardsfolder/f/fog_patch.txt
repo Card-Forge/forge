@@ -7,4 +7,3 @@ SVar:DBBecomeBlocked:DB$ BecomesBlocked | Defined$ Remembered
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fog_patch.jpg
 Oracle:Cast Fog Patch only during the declare blockers step.\nAttacking creatures become blocked. (This spell works on unblockable creatures.)
-SetInfo:NMS Common

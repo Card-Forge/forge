@@ -6,4 +6,3 @@ A:AB$ PutCounter | ActivationZone$ Command | Announce$ X | Cost$ X | CounterType
 SVar:X:Count$xPaid
 SVar:Picture:http://www.cardforge.org/fpics/vgd-lq/figure_of_destiny_avatar.jpg
 Oracle:{X}: Put a +1/+1 counter on target creature with fewer than X +1/+1 counters on it.
-SetInfo:VAN Special

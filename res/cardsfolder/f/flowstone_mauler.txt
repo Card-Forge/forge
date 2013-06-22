@@ -6,4 +6,3 @@ K:Trample
 A:AB$ Pump | Cost$ R | NumAtt$ +1 | NumDef$ -1 | SpellDescription$ CARDNAME gets +1/-1 until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flowstone_mauler.jpg
 Oracle:Trample\n{R}: Flowstone Mauler gets +1/-1 until end of turn.
-SetInfo:STH Rare

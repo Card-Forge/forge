@@ -7,4 +7,3 @@ SVar:PlayMain1:TRUE
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/falter.jpg
 Oracle:Creatures without flying can't block this turn.
-SetInfo:USG Common

@@ -5,4 +5,3 @@ T:Mode$ Attacks | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | Exec
 SVar:TrigPump:AB$Pump | Cost$ 0 | Defined$ TriggeredAttacker | NumAtt$ +2 | NumDef$ +2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fervent_charge.jpg
 Oracle:Whenever a creature you control attacks, it gets +2/+2 until end of turn.
-SetInfo:APC Rare

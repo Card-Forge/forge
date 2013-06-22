@@ -10,4 +10,3 @@ SVar:TrigReturn:AB$ChangeZone | Cost$ 0 | Defined$ Remembered | Origin$ Exile | 
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/faceless_devourer.jpg
 Oracle:Shadow (This creature can block or be blocked by only creatures with shadow.)\nWhen Faceless Devourer enters the battlefield, exile another target creature with shadow.\nWhen Faceless Devourer leaves the battlefield, return the exiled card to the battlefield under its owner's control.
-SetInfo:TSP Uncommon

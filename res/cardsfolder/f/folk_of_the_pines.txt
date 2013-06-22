@@ -5,4 +5,3 @@ PT:2/5
 A:AB$ Pump | Cost$ 1 G | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/folk_of_the_pines.jpg
 Oracle:{1}{G}: Folk of the Pines gets +1/+0 until end of turn.
-SetInfo:ICE Common

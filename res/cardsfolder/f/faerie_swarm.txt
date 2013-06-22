@@ -8,4 +8,3 @@ SVar:X:Count$Valid Permanent.Blue+YouCtrl
 SVar:BuffedBy:Permanent.Blue
 SVar:Picture:http://www.wizards.com/global/images/magic/general/faerie_swarm.jpg
 Oracle:Flying\nFaerie Swarm's power and toughness are each equal to the number of blue permanents you control.
-SetInfo:SHM Uncommon

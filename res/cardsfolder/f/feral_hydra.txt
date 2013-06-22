@@ -7,5 +7,3 @@ SVar:X:Count$xPaid
 A:AB$ PutCounter | Cost$ 3 | CounterType$ P1P1 | CounterNum$ 1 | AnyPlayer$ True | SpellDescription$ Put a +1/+1 counter on CARDNAME. Any player may activate this ability.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/feral_hydra.jpg
 Oracle:Feral Hydra enters the battlefield with X +1/+1 counters on it.\n{3}: Put a +1/+1 counter on Feral Hydra. Any player may activate this ability.
-SetInfo:ARC Rare
-SetInfo:ALA Rare

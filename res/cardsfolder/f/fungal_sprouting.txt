@@ -5,4 +5,3 @@ A:SP$ Token | Cost$ 3 G | TokenAmount$ X | TokenName$ Saproling | TokenTypes$ Cr
 SVar:X:Count$GreatestPowerYouControl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fungal_sprouting.jpg
 Oracle:Put X 1/1 green Saproling creature tokens onto the battlefield, where X is the greatest power among creatures you control.
-SetInfo:M13 Uncommon

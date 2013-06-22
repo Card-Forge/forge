@@ -5,4 +5,3 @@ T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ You | TriggerZones$
 SVar:TrigLoseLife:AB$ LoseLife | Cost$ 0 | Defined$ Player.Opponent | LifeAmount$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/faerie_tauntings.jpg
 Oracle:Whenever you cast a spell during an opponent's turn, you may have each opponent lose 1 life.
-SetInfo:LRW Uncommon

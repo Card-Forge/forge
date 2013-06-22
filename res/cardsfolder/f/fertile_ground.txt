@@ -8,9 +8,3 @@ SVar:TrigMana:AB$Mana | Cost$ 0 | Produced$ Any | Amount$ 1 | Defined$ Triggered
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fertile_ground.jpg
 Oracle:Enchant land\nWhenever enchanted land is tapped for mana, its controller adds one mana of any color to his or her mana pool (in addition to the mana the land produces).
-SetInfo:8ED Common
-SetInfo:LRW Common
-SetInfo:USG Common
-SetInfo:HOP Common
-SetInfo:INV Common
-SetInfo:DDE Common

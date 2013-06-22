@@ -6,7 +6,3 @@ SVar:RemRandomDeck:True
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/feldons_cane.jpg
 Oracle:{T}, Exile Feldon's Cane: Shuffle your graveyard into your library.
-SetInfo:ATQ Uncommon
-SetInfo:5ED Uncommon
-SetInfo:CHR Common
-SetInfo:TSB Special

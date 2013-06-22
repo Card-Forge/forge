@@ -8,4 +8,3 @@ A:AB$ PumpAll | Cost$ T | ValidCards$ Creature.Faerie+Other+YouCtrl | NumAtt$ +1
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/faerie_noble.jpg
 Oracle:Flying\nOther Faerie creatures you control get +0/+1.\n{T}: Other Faerie creatures you control get +1/+0 until end of turn.
-SetInfo:HML Rare

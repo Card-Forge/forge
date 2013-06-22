@@ -4,4 +4,3 @@ Types:Sorcery
 A:SP$ DamageAll | Cost$ 3 B B | NumDmg$ 3 | ValidCards$ Creature | ValidPlayers$ Each | ValidDescription$ each creature and each player. | SpellDescription$ CARDNAME deals 3 damage to each creature and each player.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/famine.jpg
 Oracle:Famine deals 3 damage to each creature and each player.
-SetInfo:PTK Uncommon

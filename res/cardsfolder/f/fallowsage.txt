@@ -6,4 +6,3 @@ T:Mode$ Taps | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ TrigDraw |
 SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fallowsage.jpg
 Oracle:Whenever Fallowsage becomes tapped, you may draw a card.
-SetInfo:LRW Uncommon

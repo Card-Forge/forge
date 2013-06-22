@@ -6,5 +6,3 @@ S:Mode$ Continuous | EffectZone$ All | Affected$ Card.Self | CharacteristicDefin
 A:AB$ Pump | Cost$ R | NumAtt$ +1 | ActivationLimit$ 2 | SpellDescription$ CARDNAME gets +1/+0 until end of turn. Activate this ability no more than twice each turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fire_belly_changeling.jpg
 Oracle:Changeling (This card is every creature type at all times.)\n{R}: Fire-Belly Changeling gets +1/+0 until end of turn. Activate this ability no more than twice each turn.
-SetInfo:DDG Common
-SetInfo:LRW Common

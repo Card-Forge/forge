@@ -5,6 +5,3 @@ S:Mode$ RaiseCost | ValidCard$ Creature | Type$ Spell | Amount$ 2 | Description$
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ferozs_ban.jpg
 Oracle:Creature spells cost {2} more to cast.
-SetInfo:5ED Rare
-SetInfo:7ED Rare
-SetInfo:HML Rare

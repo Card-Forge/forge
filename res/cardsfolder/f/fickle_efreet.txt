@@ -9,4 +9,3 @@ SVar:TrigFlip:AB$ FlipACoin | Cost$ 0 | LoseSubAbility$ DBGiveControl
 SVar:DBGiveControl:DB$ GainControl | Cost$ 0 | Defined$ Self | NewController$ Opponent | Permanent$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fickle_efreet.jpg
 Oracle:Whenever Fickle Efreet attacks or blocks, flip a coin at end of combat. If you lose the flip, an opponent gains control of Fickle Efreet.
-SetInfo:PCY Rare

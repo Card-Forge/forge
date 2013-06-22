@@ -5,4 +5,3 @@ PT:4/4
 K:Trample
 SVar:Picture:http://resources.wizards.com/magic/cards/mrd/en-us/card46115.jpg
 Oracle:Trample
-SetInfo:MRD Common

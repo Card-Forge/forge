@@ -4,8 +4,3 @@ Types:Artifact
 A:AB$ GainLife | Cost$ 2 T | LifeAmount$ 1 | SpellDescription$ You gain 1 life.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fountain_of_youth.jpg
 Oracle:{2}, {T}: You gain 1 life.
-SetInfo:5ED Uncommon
-SetInfo:10E Uncommon
-SetInfo:CHR Common
-SetInfo:DRK Uncommon
-SetInfo:6ED Uncommon

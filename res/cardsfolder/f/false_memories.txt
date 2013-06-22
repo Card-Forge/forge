@@ -7,4 +7,3 @@ SVar:TrigExile:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | ChangeT
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/false_memories.jpg
 Oracle:Put the top seven cards of your library into your graveyard. At the beginning of the next end step, exile seven cards from your graveyard.
-SetInfo:TOR Rare

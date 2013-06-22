@@ -7,5 +7,3 @@ SVar:DmgTwice:AB$DealDamage | Cost$ 0 | Defined$ ReplacedTarget | DamageSource$ 
 SVar:X:ReplaceCount$DamageAmount/Twice
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fire_servant.jpg
 Oracle:If a red instant or sorcery spell you control would deal damage, it deals double that damage instead.
-SetInfo:M11 Uncommon
-SetInfo:PD2 Uncommon

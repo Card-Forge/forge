@@ -7,4 +7,3 @@ K:etbCounter:P1P1:2:CheckSVar$ Morbid:Morbid - CARDNAME enters the battlefield w
 SVar:Morbid:Count$Morbid.1.0
 SVar:Picture:http://www.wizards.com/global/images/magic/general/festerhide_boar.jpg
 Oracle:Trample\nMorbid - Festerhide Boar enters the battlefield with two +1/+1 counters on it if a creature died this turn.
-SetInfo:ISD Common

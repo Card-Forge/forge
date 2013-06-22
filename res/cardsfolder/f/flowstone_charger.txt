@@ -6,4 +6,3 @@ T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$
 SVar:TrigPump:AB$Pump | Cost$ 0 | Defined$ Self | NumAtt$ +3 | NumDef$ -3
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flowstone_charger.jpg
 Oracle:Whenever Flowstone Charger attacks, it gets +3/-3 until end of turn.
-SetInfo:APC Uncommon

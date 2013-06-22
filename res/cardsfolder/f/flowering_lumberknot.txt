@@ -6,4 +6,3 @@ S:Mode$ Continuous | Affected$ Creature.Self+NotPaired | AddHiddenKeyword$ CARDN
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flowering_lumberknot.jpg
 Oracle:Flowering Lumberknot can't attack or block unless it's paired with a creature with soulbond.
-SetInfo:AVR Common

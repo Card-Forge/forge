@@ -5,4 +5,3 @@ A:SP$ Token | Cost$ 3 R R R | TokenAmount$ 3 | TokenName$ Elemental | TokenTypes
 SVar:PlayMain1:TRUE
 SVar:Picture:http://resources.wizards.com/magic/cards/sok/en-us/card84373.jpg
 Oracle:Put three 3/1 red Elemental creature tokens with haste onto the battlefield. Exile them at the beginning of the next end step.
-SetInfo:SOK Uncommon

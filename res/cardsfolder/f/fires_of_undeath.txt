@@ -5,4 +5,3 @@ A:SP$ DealDamage | Cost$ 2 R | ValidTgts$ Creature,Player | TgtPrompt$ Select ta
 K:Flashback 5 B
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fires_of_undeath.jpg
 Oracle:Fires of Undeath deals 2 damage to target creature or player.\nFlashback {5}{B} (You may cast this card from your graveyard for its flashback cost. Then exile it.)
-SetInfo:DKA Common

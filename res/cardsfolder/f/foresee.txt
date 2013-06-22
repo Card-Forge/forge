@@ -5,5 +5,3 @@ A:SP$ Scry | Cost$ 3 U | ScryNum$ 4 | SpellDescription$ Scry 4, then draw two ca
 SVar:DBDraw:DB$Draw | NumCards$ 2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/foresee.jpg
 Oracle:Scry 4, then draw two cards. (To scry 4, look at the top four cards of your library, then put any number of them on the bottom of your library and the rest on top in any order.)
-SetInfo:M11 Common
-SetInfo:FUT Common

@@ -5,6 +5,3 @@ A:AB$ Tap | Cost$ U U | ValidTgts$ Creature.withoutFlying | TgtPrompt$ Select ta
 SVar:NonStackingEffect:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flood.jpg
 Oracle:{U}{U}: Tap target creature without flying.
-SetInfo:5ED Common
-SetInfo:4ED Common
-SetInfo:DRK Uncommon

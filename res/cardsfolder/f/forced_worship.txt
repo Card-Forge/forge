@@ -7,4 +7,3 @@ S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ CARDNAME
 A:AB$ ChangeZone | Cost$ 2 W | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return CARDNAME to its owner's hand.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/forced_worship.jpg
 Oracle:Enchant creature\nEnchanted creature can't attack.\n{2}{W}: Return Forced Worship to its owner's hand.
-SetInfo:NPH Common

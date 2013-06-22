@@ -6,4 +6,3 @@ SVar:X:Count$xPaid
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fault_line.jpg
 Oracle:Fault Line deals X damage to each creature without flying and each player.
-SetInfo:USG Rare

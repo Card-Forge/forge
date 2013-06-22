@@ -8,4 +8,3 @@ SVar:TrigCanNotBlock:AB$ Pump | Cost$ 0 | ValidTgts$ Creature | KW$ HIDDEN CARDN
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fervent_cathar.jpg
 Oracle:Haste\nWhen Fervent Cathar enters the battlefield, target creature can't block this turn.
-SetInfo:AVR Common

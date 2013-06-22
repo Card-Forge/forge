@@ -10,6 +10,3 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:NonStackingEffect:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/forcefield.jpg
 Oracle:{1}: The next time an unblocked creature of your choice would deal combat damage to you this turn, prevent all but 1 of that damage.
-SetInfo:LEB Rare
-SetInfo:LEA Rare
-SetInfo:2ED Rare

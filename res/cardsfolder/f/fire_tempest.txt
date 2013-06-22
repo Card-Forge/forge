@@ -4,5 +4,3 @@ Types:Sorcery
 A:SP$ DamageAll | Cost$ 5 R R | NumDmg$ 6 | ValidCards$ Creature | ValidPlayers$ Each | ValidDescription$ each creature and each player. | SpellDescription$ CARDNAME deals 6 damage to each creature and each player.
 SVar:Picture:http://serv1.tcgimages.eu/img/cards/Portal/fire_tempest.jpg
 Oracle:Fire Tempest deals 6 damage to each creature and each player.
-SetInfo:S99 Rare
-SetInfo:POR Rare

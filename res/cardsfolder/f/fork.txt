@@ -5,7 +5,3 @@ A:SP$ CopySpellAbility | Cost$ R R | ValidTgts$ Instant,Sorcery | CopyIsColor$ R
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fork.jpg
 Oracle:Copy target instant or sorcery spell, except that the copy is red. You may choose new targets for the copy.
-SetInfo:LEB Rare
-SetInfo:LEA Rare
-SetInfo:3ED Rare
-SetInfo:2ED Rare

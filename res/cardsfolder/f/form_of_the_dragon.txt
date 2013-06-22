@@ -8,6 +8,3 @@ T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ Player | TriggerZones$ Battlef
 SVar:TrigLife:AB$SetLife | Cost$ 0 | Defined$ You | LifeAmount$ 5
 SVar:Picture:http://www.wizards.com/global/images/magic/general/form_of_the_dragon.jpg
 Oracle:At the beginning of your upkeep, Form of the Dragon deals 5 damage to target creature or player.\nAt the beginning of each end step, your life total becomes 5.\nCreatures without flying can't attack you.
-SetInfo:SCG Rare
-SetInfo:DRB Rare
-SetInfo:9ED Rare

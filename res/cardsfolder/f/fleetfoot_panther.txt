@@ -8,5 +8,3 @@ SVar:TrigChange:AB$ChangeZone | Origin$ Battlefield | Destination$ Hand | Cost$ 
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fleetfoot_panther.jpg
 Oracle:Flash\nWhen Fleetfoot Panther enters the battlefield, return a green or white creature you control to its owner's hand.
-SetInfo:PLS Uncommon
-SetInfo:DDH Uncommon

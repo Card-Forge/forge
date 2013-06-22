@@ -8,7 +8,3 @@ SVar:TriggerGainLife:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ T
 SVar:TrigGainLife:AB$GainLife | Cost$ W W | Defined$ You | LifeAmount$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/farmstead.jpg
 Oracle:Enchant land\nEnchanted land has "At the beginning of your upkeep, you may pay {W}{W}. If you do, you gain 1 life."
-SetInfo:LEB Rare
-SetInfo:LEA Rare
-SetInfo:3ED Rare
-SetInfo:2ED Rare

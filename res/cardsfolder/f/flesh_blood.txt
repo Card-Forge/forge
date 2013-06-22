@@ -19,4 +19,3 @@ SVar:DBCleanup2:DB$ Cleanup | ClearImprinted$ True
 SVar:Y:Imprinted$CardPower
 SVar:RemAIDeck:True
 Oracle:Target creature you control deals damage equal to its power to target creature or player.\nFuse (You may cast one or both halves of this card from your hand.)
-SetInfo:DGM Rare

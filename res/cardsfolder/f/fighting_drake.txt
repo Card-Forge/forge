@@ -5,6 +5,3 @@ PT:2/4
 K:Flying
 SVar:Picture:http://resources.wizards.com/magic/cards/te/en-us/card4700.jpg
 Oracle:Flying
-SetInfo:8ED Uncommon
-SetInfo:7ED Uncommon
-SetInfo:TMP Uncommon

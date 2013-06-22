@@ -6,5 +6,3 @@ SVar:PreventHealing:DB$ Effect | Name$ Blood Hand Effect | ReplacementEffects$ G
 SVar:GainLifeEvent:Event$ GainLife | ValidPlayer$ Player.IsRemembered | Prevent$ True | Description$ If the targeted player would gain life this turn, that player gains no life instead.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flames_of_the_blood_hand.jpg
 Oracle:Flames of the Blood Hand deals 4 damage to target player. The damage can't be prevented. If that player would gain life this turn, that player gains no life instead.
-SetInfo:BOK Uncommon
-SetInfo:PD2 Uncommon

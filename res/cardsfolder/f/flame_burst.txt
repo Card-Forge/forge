@@ -6,4 +6,3 @@ SVar:X:Count$NamedInAllYards.Flame Burst/Plus.Y
 SVar:Y:Count$NamedInAllYards.Pardic Firecat/Plus.2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flame_burst.jpg
 Oracle:Flame Burst deals X damage to target creature or player, where X is 2 plus the number of cards named Flame Burst in all graveyards.
-SetInfo:ODY Common

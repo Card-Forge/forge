@@ -6,4 +6,3 @@ K:Defender
 A:AB$ Pump | Cost$ R | NumAtt$ +1 | NumDef$ -1 | SpellDescription$ CARDNAME gets +1/-1 until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flowstone_wall.jpg
 Oracle:Defender (This creature can't attack.)\n{R}: Flowstone Wall gets +1/-1 until end of turn.
-SetInfo:NMS Common

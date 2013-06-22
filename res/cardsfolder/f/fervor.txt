@@ -7,7 +7,3 @@ SVar:NonStackingEffect:True
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fervor.jpg
 Oracle:Creatures you control have haste.
-SetInfo:7ED Rare
-SetInfo:WTH Rare
-SetInfo:M13 Rare
-SetInfo:6ED Rare

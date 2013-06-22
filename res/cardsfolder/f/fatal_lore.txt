@@ -8,4 +8,3 @@ SVar:ChooserDraws:DB$ Draw | NumCards$ 3 | Defined$ ChosenPlayer
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fatal_lore.jpg
 Oracle:An opponent chooses one - You draw three cards; or you destroy up to two target creatures that opponent controls and that player draws up to three cards. Those creatures can't be regenerated.
-SetInfo:ALL Rare

@@ -7,4 +7,3 @@ A:AB$ Mana | Cost$ G T | Produced$ R | SpellDescription$ Add R to your mana pool
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fire_sprites.jpg
 Oracle:Flying\n{G}, {T}: Add {R} to your mana pool.
-SetInfo:LEG Common

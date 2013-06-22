@@ -9,4 +9,3 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigChangeZone:AB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Hand
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fools_demise.jpg
 Oracle:Enchant creature\nWhen enchanted creature dies, return that card to the battlefield under your control.\nWhen Fool's Demise is put into a graveyard from the battlefield, return Fool's Demise to its owner's hand.
-SetInfo:TSP Uncommon

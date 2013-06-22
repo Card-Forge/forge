@@ -5,4 +5,3 @@ A:SP$ Pump | Cost$ 1 U | ValidTgts$ Player | TgtPrompt$ Select target player | K
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fatigue.jpg
 Oracle:Target player skips his or her next draw step.
-SetInfo:UDS Common

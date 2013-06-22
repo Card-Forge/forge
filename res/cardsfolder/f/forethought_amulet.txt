@@ -7,4 +7,3 @@ K:At the beginning of your upkeep, sacrifice CARDNAME unless you pay 3
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/forethought_amulet.jpg
 Oracle:At the beginning of your upkeep, sacrifice Forethought Amulet unless you pay {3}.\nIf an instant or sorcery source would deal 3 or more damage to you, it deals 2 damage to you instead.
-SetInfo:LEG Rare

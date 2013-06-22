@@ -5,4 +5,3 @@ K:Flashback 1 U
 A:SP$ Tap | Cost$ 1 W | ValidTgts$ Creature | TgtPrompt$ Select up to two target creatures | TargetMin$ 0 | TargetMax$ 2 | SpellDescription$ Tap up to two target creatures.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/feeling_of_dread.jpg
 Oracle:Tap up to two target creatures.\nFlashback {1}{U} (You may cast this card from your graveyard for its flashback cost. Then exile it.)
-SetInfo:ISD Common

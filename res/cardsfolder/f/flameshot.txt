@@ -6,4 +6,3 @@ SVar:AltCost:Cost$ Discard<1/Mountain>
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flameshot.jpg
 Oracle:You may discard a Mountain card rather than pay Flameshot's mana cost.\nFlameshot deals 3 damage divided as you choose among one, two, or three target creatures.
-SetInfo:PCY Uncommon

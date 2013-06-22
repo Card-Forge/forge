@@ -6,6 +6,3 @@ SVar:X:Count$xPaid
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flowstone_slide.jpg
 Oracle:All creatures get +X/-X until end of turn.
-SetInfo:10E Rare
-SetInfo:NMS Rare
-SetInfo:9ED Rare

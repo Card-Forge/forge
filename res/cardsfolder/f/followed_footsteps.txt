@@ -7,4 +7,3 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigCopy | TriggerZo
 SVar:TrigCopy:AB$ CopyPermanent | Cost$ 0 | Defined$ Enchanted | SpellDescription$ At the beginning of your upkeep, put a token that's a copy of enchanted creature onto the battlefield.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/followed_footsteps.jpg
 Oracle:Enchant creature\nAt the beginning of your upkeep, put a token that's a copy of enchanted creature onto the battlefield.
-SetInfo:RAV Rare

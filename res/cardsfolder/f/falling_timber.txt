@@ -6,4 +6,3 @@ A:SP$ Pump | Cost$ 2 G | ValidTgts$ Creature | TgtPrompt$ Select target creature
 SVar:X:Count$Kicked.2.1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/falling_timber.jpg
 Oracle:Kicker-Sacrifice a land. (You may sacrifice a land in addition to any other costs as you cast this spell.)\nPrevent all combat damage target creature would deal this turn. If Falling Timber was kicked, prevent all combat damage another target creature would deal this turn.
-SetInfo:PLS Common

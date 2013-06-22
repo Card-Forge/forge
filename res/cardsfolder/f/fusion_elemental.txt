@@ -4,5 +4,3 @@ Types:Creature Elemental
 PT:8/8
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fusion_elemental.jpg
 Oracle:
-SetInfo:PC2 Uncommon
-SetInfo:CFX Uncommon

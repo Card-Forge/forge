@@ -4,10 +4,3 @@ Types:Artifact
 A:AB$ Pump | Cost$ 2 T | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Flying | SpellDescription$ Target creature gains flying until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flying_carpet.jpg
 Oracle:{2}, {T}: Target creature gains flying until end of turn.
-SetInfo:8ED Rare
-SetInfo:7ED Rare
-SetInfo:6ED Rare
-SetInfo:ARN Uncommon
-SetInfo:5ED Rare
-SetInfo:4ED Rare
-SetInfo:3ED Rare

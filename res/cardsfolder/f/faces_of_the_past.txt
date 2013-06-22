@@ -6,4 +6,3 @@ SVar:TrigTaporUntapAll:AB$ TaporUntapAll | Cost$ 0 | ValidCards$ TriggeredCard.s
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/faces_of_the_past.jpg
 Oracle:Whenever a creature dies, tap all untapped creatures that share a creature type with it or untap all tapped creatures that share a creature type with it.
-SetInfo:SCG Rare

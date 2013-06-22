@@ -6,7 +6,3 @@ K:Flying
 A:AB$ ChangeZone | Cost$ 1 U | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return CARDNAME to its owner's hand.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fleeting_image.jpg
 Oracle:Flying (This creature can't be blocked except by creatures with flying or reach.)\n{1}{U}: Return Fleeting Image to its owner's hand.
-SetInfo:8ED Rare
-SetInfo:ULG Rare
-SetInfo:7ED Rare
-SetInfo:9ED Rare

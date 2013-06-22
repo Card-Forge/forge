@@ -5,5 +5,3 @@ A:SP$ Pump | Cost$ W | ValidTgts$ Player | TgtPrompt$ Select target player | KW$
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/false_peace.jpg
 Oracle:Target player skips all combat phases of his or her next turn.
-SetInfo:S99 Uncommon
-SetInfo:POR Common

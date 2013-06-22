@@ -6,4 +6,3 @@ K:Buyback 3
 SVar:X:Count$xPaid
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fanning_the_flames.jpg
 Oracle:Buyback {3} (You may pay an additional {3} as you cast this spell. If you do, put this card into your hand as it resolves.)\nFanning the Flames deals X damage to target creature or player.
-SetInfo:STH Uncommon

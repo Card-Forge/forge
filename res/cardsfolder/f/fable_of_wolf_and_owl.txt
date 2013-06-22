@@ -8,4 +8,3 @@ SVar:TrigBird:AB$Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Bird | TokenTypes
 SVar:BuffedBy:Card.Green,Card.Blue
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fable_of_wolf_and_owl.jpg
 Oracle:Whenever you cast a green spell, you may put a 2/2 green Wolf creature token onto the battlefield.\nWhenever you cast a blue spell, you may put a 1/1 blue Bird creature token with flying onto the battlefield.
-SetInfo:EVE Rare

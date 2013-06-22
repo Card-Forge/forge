@@ -12,5 +12,3 @@ SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/forbidden_crypt.jpg
 Oracle:If you would draw a card, return a card from your graveyard to your hand instead. If you can't, you lose the game.\nIf a card would be put into your graveyard from anywhere, exile that card instead.
-SetInfo:MIR Rare
-SetInfo:6ED Rare

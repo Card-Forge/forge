@@ -6,5 +6,3 @@ SVar:X:Count$TypeYouCtrl.Island
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flow_of_ideas.jpg
 Oracle:Draw a card for each Island you control.
-SetInfo:RAV Uncommon
-SetInfo:SHM Uncommon

@@ -6,4 +6,3 @@ K:Flying
 A:AB$ Regenerate | Cost$ B | SpellDescription$ Regenerate CARDNAME.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fog_of_gnats.jpg
 Oracle:Flying\n{B}: Regenerate Fog of Gnats.
-SetInfo:ULG Common

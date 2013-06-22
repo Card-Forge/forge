@@ -9,4 +9,3 @@ SVar:TrigChangeZone:AB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ H
 SVar:SacMe:2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fiery_mantle.jpg
 Oracle:Enchant creature\n{R}: Enchanted creature gets +1/+0 until end of turn.\nWhen Fiery Mantle is put into a graveyard from the battlefield, return Fiery Mantle to its owner's hand.
-SetInfo:USG Common

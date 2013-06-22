@@ -10,4 +10,3 @@ SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fate_transfer.jpg
 Oracle:Move all counters from target creature onto another target creature.
-SetInfo:SHM Common

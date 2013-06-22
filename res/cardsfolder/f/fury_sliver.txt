@@ -6,5 +6,3 @@ S:Mode$ Continuous | Affected$ Creature.Sliver | AddKeyword$ Double Strike | Des
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fury_sliver.jpg
 Oracle:All Sliver creatures have double strike.
-SetInfo:H09 Uncommon
-SetInfo:TSP Uncommon

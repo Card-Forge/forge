@@ -11,4 +11,3 @@ SVar:X:ReplaceCount$DamageAmount
 SVar:All:Count$CardCounters.DEPLETION
 SVar:Picture:http://www.wizards.com/global/images/magic/general/force_bubble.jpg
 Oracle:If damage would be dealt to you, put that many depletion counters on Force Bubble instead.\nWhen there are four or more depletion counters on Force Bubble, sacrifice it.\nAt the beginning of each end step, remove all depletion counters from Force Bubble.
-SetInfo:SCG Rare

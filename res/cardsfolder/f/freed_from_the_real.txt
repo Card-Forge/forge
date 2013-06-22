@@ -8,4 +8,3 @@ A:AB$ Untap | Cost$ U | Defined$ Enchanted | SpellDescription$ Untap enchanted c
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/freed_from_the_real.jpg
 Oracle:Enchant creature\n{U}: Tap enchanted creature.\n{U}: Untap enchanted creature.
-SetInfo:SOK Common

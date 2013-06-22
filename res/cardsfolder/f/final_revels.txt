@@ -6,4 +6,3 @@ A:SP$ PumpAll | Cost$ 4 B | ValidCards$ Creature | NumDef$ -2 | PrecostDesc$ or 
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/final_revels.jpg
 Oracle:Choose one - All creatures get +2/+0 until end of turn; or all creatures get -0/-2 until end of turn.
-SetInfo:LRW Uncommon

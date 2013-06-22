@@ -9,4 +9,3 @@ SVar:RemRandomDeck:True
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fatal_mutation.jpg
 Oracle:Enchant creature\nWhen enchanted creature is turned face up, destroy it. It can't be regenerated.
-SetInfo:SCG Uncommon

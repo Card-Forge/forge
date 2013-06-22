@@ -4,4 +4,3 @@ Types:Creature Ogre Warrior
 PT:5/3
 SVar:Picture:http://resources.wizards.com/magic/cards/bok/en-us/card74589.jpg
 Oracle:
-SetInfo:BOK Common

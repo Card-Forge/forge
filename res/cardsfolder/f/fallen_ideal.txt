@@ -10,4 +10,3 @@ SVar:TrigChangeZone:AB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ H
 SVar:SacMe:2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fallen_ideal.jpg
 Oracle:Enchant creature\nEnchanted creature has flying and "Sacrifice a creature: This creature gets +2/+1 until end of turn."\nWhen Fallen Ideal is put into a graveyard from the battlefield, return Fallen Ideal to its owner's hand.
-SetInfo:TSP Uncommon

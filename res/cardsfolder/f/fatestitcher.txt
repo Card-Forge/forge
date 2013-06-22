@@ -7,4 +7,3 @@ A:AB$ TapOrUntap | Cost$ T | ValidTgts$ Permanent.Other | TgtPrompt$ Select anot
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fatestitcher.jpg
 Oracle:{T}: You may tap or untap another target permanent.\nUnearth {U} ({U}: Return this card from your graveyard to the battlefield. It gains haste. Exile it at the beginning of the next end step or if it would leave the battlefield. Unearth only as a sorcery.)
-SetInfo:ALA Uncommon

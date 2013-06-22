@@ -7,4 +7,3 @@ SVar:DBDraw:DB$Draw | Defined$ You | NumCards$ 1
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/festival_of_the_guildpact.jpg
 Oracle:Prevent the next X damage that would be dealt to you this turn.\nDraw a card.
-SetInfo:RAV Uncommon

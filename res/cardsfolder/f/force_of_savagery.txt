@@ -7,4 +7,3 @@ A:SP$ PermanentCreature | Cost$ 2 G | AILogic$ ZeroToughness
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/force_of_savagery.jpg
 Oracle:Trample
-SetInfo:FUT Rare

@@ -5,4 +5,3 @@ PT:2/2
 A:AB$ Pump | Cost$ R Sac<1/Artifact> | NumAtt$ +3 | SpellDescription$ CARDNAME gets +3/+0 until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ferrovore.jpg
 Oracle:{R}, Sacrifice an artifact: Ferrovore gets +3/+0 until end of turn.
-SetInfo:SOM Common

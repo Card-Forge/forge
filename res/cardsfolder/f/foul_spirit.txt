@@ -7,4 +7,3 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigSac:AB$Sacrifice | Cost$ 0 | SacValid$ Land | ChangeNum$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/foul_spirit.jpg
 Oracle:Flying\nWhen Foul Spirit enters the battlefield, sacrifice a land.
-SetInfo:PO2 Uncommon

@@ -6,4 +6,3 @@ SVar:Token:DB$ Token | ConditionLifeTotal$ You | ConditionLifeAmount$ GEX | Toke
 SVar:X:Count$OppLifeTotal
 SVar:Picture:http://www.wizards.com/global/images/magic/general/feudkillers_verdict.jpg
 Oracle:You gain 10 life. Then if you have more life than an opponent, put a 5/5 white Giant Warrior creature token onto the battlefield.
-SetInfo:MOR Rare

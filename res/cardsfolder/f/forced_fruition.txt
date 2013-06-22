@@ -6,4 +6,3 @@ SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ TriggeredActivator | NumCards$ 7
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/Forced_Fruition.jpg
 Oracle:Whenever an opponent casts a spell, that player draws seven cards.
-SetInfo:LRW Rare

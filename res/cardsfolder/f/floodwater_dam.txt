@@ -8,4 +8,3 @@ SVar:MaxTgts:Count$Valid Land
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/floodwater_dam.jpg
 Oracle:{X}{X}{1}, {T}: Tap X target lands.
-SetInfo:ALL Rare

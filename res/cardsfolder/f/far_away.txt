@@ -14,4 +14,3 @@ ManaCost:2 B
 Types:Instant
 A:SP$ Sacrifice | Cost$ 2 B | ValidTgts$ Opponent | SacValid$ Creature | SacMessage$ Creature | SpellDescription$ Target opponent sacrifices a creature.
 Oracle:Target player sacrifices a creature.\nFuse (You may cast one or both halves of this card from your hand.)
-SetInfo:DGM Uncommon

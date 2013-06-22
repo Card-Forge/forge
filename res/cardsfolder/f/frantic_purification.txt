@@ -5,4 +5,3 @@ A:SP$ Destroy | Cost$ 2 W | ValidTgts$ Enchantment | TgtPrompt$ Select target en
 K:Madness:W
 SVar:Picture:http://www.wizards.com/global/images/magic/general/frantic_purification.jpg
 Oracle:Destroy target enchantment.\nMadness {W} (If you discard this card, you may cast it for its madness cost instead of putting it into your graveyard.)
-SetInfo:TOR Common

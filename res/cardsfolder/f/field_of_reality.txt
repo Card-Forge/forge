@@ -8,4 +8,3 @@ A:AB$ ChangeZone | Cost$ 1 U | Origin$ Battlefield | Destination$ Hand | SpellDe
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/field_of_reality.jpg
 Oracle:Enchant creature\nEnchanted creature can't be blocked by Spirits.\n{1}{U}: Return Field of Reality to its owner's hand.
-SetInfo:CHK Common

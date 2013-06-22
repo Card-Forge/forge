@@ -7,6 +7,3 @@ K:Flying
 K:Prevent all combat damage that would be dealt to and dealt by CARDNAME.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fog_bank.jpg
 Oracle:Defender, flying\nPrevent all combat damage that would be dealt to and dealt by Fog Bank.
-SetInfo:M13 Uncommon
-SetInfo:COM Uncommon
-SetInfo:USG Uncommon

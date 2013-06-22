@@ -6,9 +6,3 @@ K:Flying
 A:AB$ Pump | Cost$ R | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
 SVar:Picture:http://resources.wizards.com/magic/cards/5dn/en-us/card73578.jpg
 Oracle:Flying\n{R}: Furnace Whelp gets +1/+0 until end of turn.
-SetInfo:DD2 Uncommon
-SetInfo:COM Uncommon
-SetInfo:10E Uncommon
-SetInfo:M13 Uncommon
-SetInfo:ARC Uncommon
-SetInfo:5DN Uncommon

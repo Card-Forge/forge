@@ -4,5 +4,3 @@ Types:Instant
 A:SP$ Counter | Cost$ 1 U | TargetType$ Spell | TgtPrompt$ Select target Instant spell | ValidTgts$ Instant | SpellDescription$ Counter target instant spell.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flash_counter.jpg
 Oracle:Counter target instant spell.
-SetInfo:8ED Common
-SetInfo:LEG Common

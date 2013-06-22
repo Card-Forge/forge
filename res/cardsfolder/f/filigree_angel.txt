@@ -8,4 +8,3 @@ SVar:TrigGainLife:AB$GainLife | Cost$ 0 | LifeAmount$ X | References$ X
 SVar:X:Count$Valid Artifact.YouCtrl/Times.3
 SVar:Picture:http://www.wizards.com/global/images/magic/general/filigree_angel.jpg
 Oracle:Flying\nWhen Filigree Angel enters the battlefield, you gain 3 life for each artifact you control.
-SetInfo:ARB Rare

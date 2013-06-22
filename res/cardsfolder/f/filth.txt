@@ -7,4 +7,3 @@ S:Mode$ Continuous | Affected$ Creature.YouCtrl | EffectZone$ Graveyard | AddKey
 SVar:X:Count$Valid Swamp.YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/filth.jpg
 Oracle:Swampwalk\nAs long as Filth is in your graveyard and you control a Swamp, creatures you control have swampwalk.
-SetInfo:JUD Uncommon

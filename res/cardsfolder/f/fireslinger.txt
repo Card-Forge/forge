@@ -6,5 +6,3 @@ A:AB$ DealDamage | Cost$ T | ValidTgts$ Creature,Player | TgtPrompt$ Select targ
 SVar:DBDealDamage:DB$DealDamage | Defined$ You | NumDmg$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fireslinger.jpg
 Oracle:{T}: Fireslinger deals 1 damage to target creature or player and 1 damage to you.
-SetInfo:DD2 Common
-SetInfo:TMP Common

@@ -7,6 +7,3 @@ SVar:DBHand:DB$ ChangeZone | Defined$ Remembered | Origin$ Library | Destination
 SVar:DBGrave:DB$ ChangeZone | Defined$ Remembered | Origin$ Library | Destination$ Graveyard
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fact_or_fiction.jpg
 Oracle:Reveal the top five cards of your library. An opponent separates those cards into two piles. Put one pile into your hand and the other into your graveyard.
-SetInfo:DD2 Uncommon
-SetInfo:COM Uncommon
-SetInfo:INV Uncommon

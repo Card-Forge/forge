@@ -10,4 +10,3 @@ SVar:TrigDamage:AB$ DealDamage | Cost$ 0 | Defined$ EnchantedController | NumDmg
 SVar:X:Count$CardCounters.INFECTION
 SVar:Picture:http://www.wizards.com/global/images/magic/general/festering_wound.jpg
 Oracle:Enchant creature\nAt the beginning of your upkeep, you may put an infection counter on Festering Wound.\nAt the beginning of the upkeep of enchanted creature's controller, Festering Wound deals X damage to that player, where X is the number of infection counters on Festering Wound.
-SetInfo:UDS Uncommon

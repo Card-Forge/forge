@@ -7,4 +7,3 @@ SVar:DBUntap:DB$ Untap | UntapUpTo$ True | UntapType$ Land | Amount$ 3
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/frantic_search.jpg
 Oracle:Draw two cards, then discard two cards. Untap up to three lands.
-SetInfo:ULG Common

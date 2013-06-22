@@ -10,4 +10,3 @@ A:AB$ ChangeZone | Cost$ W | Origin$ Battlefield | Destination$ Hand | SpellDesc
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flickering_ward.jpg
 Oracle:Enchant creature\nAs Flickering Ward enters the battlefield, choose a color.\nEnchanted creature has protection from the chosen color. This effect doesn't remove Flickering Ward.\n{W}: Return Flickering Ward to its owner's hand.
-SetInfo:TMP Uncommon

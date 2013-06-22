@@ -9,4 +9,3 @@ SVar:RemRandomDeck:True
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/false_cure.jpg
 Oracle:Until end of turn, whenever a player gains life, that player loses 2 life for each 1 life he or she gained.
-SetInfo:ONS Rare

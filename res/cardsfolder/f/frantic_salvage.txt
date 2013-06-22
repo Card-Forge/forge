@@ -8,4 +8,3 @@ SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/frantic_salvage.jpg
 Oracle:Put any number of target artifact cards from your graveyard on top of your library.\nDraw a card.
-SetInfo:MBS Common

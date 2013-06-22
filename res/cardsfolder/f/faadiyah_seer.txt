@@ -7,4 +7,3 @@ SVar:DBDiscard:DB$ Discard | Mode$ Defined | Defined$ You | DefinedCards$ Rememb
 SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/faadiyah_seer.jpg
 Oracle:{T}: Draw a card and reveal it. If it isn't a land card, discard it.
-SetInfo:PLC Common

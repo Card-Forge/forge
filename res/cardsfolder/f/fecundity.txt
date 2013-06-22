@@ -6,5 +6,3 @@ SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ TriggeredCardController | NumCards$ 1
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fecundity.jpg
 Oracle:Whenever a creature dies, that creature's controller may draw a card.
-SetInfo:8ED Uncommon
-SetInfo:USG Uncommon

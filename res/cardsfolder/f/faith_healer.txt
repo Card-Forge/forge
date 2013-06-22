@@ -7,4 +7,3 @@ SVar:X:Sacrificed$CardManaCost
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/faith_healer.jpg
 Oracle:Sacrifice an enchantment: You gain life equal to the sacrificed enchantment's converted mana cost.
-SetInfo:USG Rare

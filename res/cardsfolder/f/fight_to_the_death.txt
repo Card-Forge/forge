@@ -4,4 +4,3 @@ Types:Instant
 A:SP$ DestroyAll | Cost$ R W | ValidCards$ Creature.blocked,Creature.blocking | SpellDescription$ Destroy all blocking creatures and all blocked creatures.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fight_to_the_death.jpg
 Oracle:Destroy all blocking creatures and all blocked creatures.
-SetInfo:ARB Rare

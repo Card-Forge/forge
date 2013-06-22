@@ -10,16 +10,3 @@ SVar:Maxcreature:Count$Valid Creature
 SVar:IncreaseCost:TargetedObjects$Amount/Minus.1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fireball.jpg
 Oracle:Fireball deals X damage divided evenly, rounded down, among any number of target creatures and/or players.\nFireball costs {1} more to cast for each target beyond the first.
-SetInfo:2ED Common
-SetInfo:M12 Uncommon
-SetInfo:M10 Uncommon
-SetInfo:DD2 Uncommon
-SetInfo:DST Uncommon
-SetInfo:PD2 Uncommon
-SetInfo:M11 Uncommon
-SetInfo:LEB Common
-SetInfo:ARC Uncommon
-SetInfo:LEA Common
-SetInfo:5ED Common
-SetInfo:4ED Common
-SetInfo:3ED Common

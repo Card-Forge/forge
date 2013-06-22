@@ -4,4 +4,3 @@ Types:Creature Insect
 PT:6/4
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flameborn_viron.jpg
 Oracle:
-SetInfo:NPH Common

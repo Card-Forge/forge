@@ -6,4 +6,3 @@ A:AB$ ChangeZone | Cost$ 1 B Sac<1/CARDNAME> | TargetMin$ 0 | TargetMax$ 2 | Tar
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/famished_ghoul.jpg
 Oracle:{1}{B}, Sacrifice Famished Ghoul: Exile up to two target cards from a single graveyard.
-SetInfo:ODY Uncommon

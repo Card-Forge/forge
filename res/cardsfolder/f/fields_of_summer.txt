@@ -7,4 +7,3 @@ T:Mode$ PlanarDice | Result$ Chaos | OptionalDecider$ You | TriggerZones$ Comman
 SVar:RolledChaos:AB$ GainLife | Cost$ 0 | LifeAmount$ 10 | Defined$ You
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fields_of_summer.jpg
 Oracle:Whenever a player casts a spell, that player may gain 2 life.\nWhenever you roll {C}, you may gain 10 life.
-SetInfo:HOP Common

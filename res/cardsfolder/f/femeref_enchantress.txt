@@ -6,4 +6,3 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/femeref_enchantress.jpg
 Oracle:Whenever an enchantment is put into a graveyard from the battlefield, draw a card.
-SetInfo:VIS Rare

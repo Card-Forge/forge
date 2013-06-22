@@ -5,6 +5,3 @@ A:SP$ ChangeZone | Cost$ 2 U | Origin$ Library | Destination$ Hand | ChangeType$
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fabricate.jpg
 Oracle:Search your library for an artifact card, reveal it, and put it into your hand. Then shuffle your library.
-SetInfo:MRD Uncommon
-SetInfo:M10 Uncommon
-SetInfo:HOP Uncommon

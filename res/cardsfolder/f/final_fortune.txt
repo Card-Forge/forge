@@ -5,6 +5,3 @@ A:SP$ AddTurn | Cost$ R R | NumTurns$ 1 | LoseAtEndStep$ True | SpellDescription
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/final_fortune.jpg
 Oracle:Take an extra turn after this one. At the beginning of that turn's end step, you lose the game.
-SetInfo:7ED Rare
-SetInfo:MIR Rare
-SetInfo:6ED Rare

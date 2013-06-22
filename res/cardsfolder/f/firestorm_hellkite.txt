@@ -7,4 +7,3 @@ K:Trample
 K:Cumulative upkeep:U R
 SVar:Picture:http://www.wizards.com/global/images/magic/general/firestorm_hellkite.jpg
 Oracle:Flying, trample\nCumulative upkeep {U}{R} (At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.)
-SetInfo:VIS Rare

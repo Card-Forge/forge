@@ -6,5 +6,3 @@ A:SP$ Draw | Cost$ R | NumCards$ 2 | SpellDescription$ Draw two cards, then disc
 SVar:DBDiscard:DB$Discard | Defined$ You | NumCards$ 2 | Mode$ TgtChoose
 SVar:Picture:http://www.wizards.com/global/images/magic/general/faithless_looting.jpg
 Oracle:Draw two cards, then discard two cards.\nFlashback {2}{R} (You may cast this card from your graveyard for its flashback cost. Then exile it.)
-SetInfo:DDK Common
-SetInfo:DKA Common

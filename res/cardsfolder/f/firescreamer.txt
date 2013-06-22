@@ -7,4 +7,3 @@ SVar:RemRandomDeck:True
 DeckNeeds:Color$Red
 SVar:Picture:http://www.wizards.com/global/images/magic/general/firescreamer.jpg
 Oracle:{R}: Firescreamer gets +1/+0 until end of turn.
-SetInfo:INV Common

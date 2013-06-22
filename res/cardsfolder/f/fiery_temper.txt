@@ -5,5 +5,3 @@ A:SP$ DealDamage | Cost$ 1 R R | ValidTgts$ Creature,Player | TgtPrompt$ Select 
 K:Madness:R
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fiery_temper.jpg
 Oracle:Fiery Temper deals 3 damage to target creature or player.\nMadness {R} (If you discard this card, you may cast it for its madness cost instead of putting it into your graveyard.)
-SetInfo:TOR Common
-SetInfo:TSB Special

@@ -6,4 +6,3 @@ SVar:NonStackingEffect:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/favor_of_the_mighty.jpg
 Oracle:Each creature with the highest converted mana cost has protection from all colors.
-SetInfo:LRW Rare

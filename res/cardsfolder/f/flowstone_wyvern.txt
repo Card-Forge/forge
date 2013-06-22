@@ -6,4 +6,3 @@ K:Flying
 A:AB$ Pump | Cost$ R | NumAtt$ +2 | NumDef$ -2 | SpellDescription$ CARDNAME gets +2/-2 until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flowstone_wyvern.jpg
 Oracle:Flying\n{R}: Flowstone Wyvern gets +2/-2 until end of turn.
-SetInfo:TMP Rare

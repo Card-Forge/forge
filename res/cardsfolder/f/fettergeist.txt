@@ -9,4 +9,3 @@ SVar:X:Count$Valid Creature.Other+YouCtrl
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fettergeist.jpg
 Oracle:Flying\nAt the beginning of your upkeep, sacrifice Fettergeist unless you pay {1} for each other creature you control.
-SetInfo:AVR Uncommon

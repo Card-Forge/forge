@@ -7,7 +7,3 @@ SVar:TrigDealDamage:DB$DealDamage | ValidTgts$ Creature | TgtPrompt$ Select targ
 SVar:PlayMain1:TRUE
 SVar:Picture:http://resources.wizards.com/magic/cards/ps/en-us/card26262.jpg
 Oracle:When Flametongue Kavu enters the battlefield, it deals 4 damage to target creature.
-SetInfo:PLS Uncommon
-SetInfo:COM Uncommon
-SetInfo:HOP Uncommon
-SetInfo:DD2 Uncommon

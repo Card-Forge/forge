@@ -6,4 +6,3 @@ SVar:DBMustBlock:DB$ MustBlock | DefinedAttacker$ ParentTarget | ValidTgts$ Crea
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/feral_contest.jpg
 Oracle:Put a +1/+1 counter on target creature you control. Another target creature blocks it this turn if able.
-SetInfo:WWK Common

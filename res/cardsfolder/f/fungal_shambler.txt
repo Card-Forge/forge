@@ -8,5 +8,3 @@ SVar:TrigDrawDiscard:AB$ Draw | Cost$ 0 | Defined$ You | NumCards$ 1 | SubAbilit
 SVar:DBDiscard:DB$ Discard | Defined$ TriggeredTarget | NumCards$ 1 | Mode$ TgtChoose
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fungal_shambler.jpg
 Oracle:Trample\nWhenever Fungal Shambler deals damage to an opponent, you draw a card and that opponent discards a card.
-SetInfo:MBP Rare
-SetInfo:APC Rare

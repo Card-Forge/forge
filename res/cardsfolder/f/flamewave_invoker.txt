@@ -5,7 +5,3 @@ PT:2/2
 A:AB$ DealDamage | Cost$ 7 R | ValidTgts$ Player | TgtPrompt$ Select target player | NumDmg$ 5 | SpellDescription$ CARDNAME deals 5 damage to target player.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flamewave_invoker.jpg
 Oracle:{7}{R}: Flamewave Invoker deals 5 damage to target player.
-SetInfo:DD2 Uncommon
-SetInfo:EVG Uncommon
-SetInfo:LGN Common
-SetInfo:10E Uncommon

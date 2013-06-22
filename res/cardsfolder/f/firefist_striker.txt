@@ -7,4 +7,3 @@ SVar:TrigPump:AB$ Pump | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select targe
 SVar:BattalionTest:Count$Valid Creature.attacking+Other
 SVar:Picture:http://www.wizards.com/global/images/magic/general/firefist_striker.jpg
 Oracle:Battalion - Whenever Firefist Striker and at least two other creatures attack, target creature can't block this turn.
-SetInfo:GTC Uncommon

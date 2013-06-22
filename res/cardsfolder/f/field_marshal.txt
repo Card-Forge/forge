@@ -6,5 +6,3 @@ S:Mode$ Continuous | Affected$ Creature.Soldier+Other | AddPower$ 1 | AddToughne
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/field_marshal.jpg
 Oracle:Other Soldier creatures get +1/+1 and have first strike. (They deal combat damage before creatures without first strike.)
-SetInfo:CSP Rare
-SetInfo:10E Rare

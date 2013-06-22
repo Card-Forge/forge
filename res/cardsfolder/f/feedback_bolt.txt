@@ -6,4 +6,3 @@ SVar:X:Count$TypeYouCtrl.Artifact
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/feedback_bolt.jpg
 Oracle:Feedback Bolt deals damage to target player equal to the number of artifacts you control.
-SetInfo:5DN Uncommon

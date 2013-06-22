@@ -6,4 +6,3 @@ A:AB$ DealDamage | Cost$ T | ValidTgts$ Creature,Player | TgtPrompt$ Select targ
 S:Mode$ Continuous | Affected$ Creature.DamagedBy | AddHiddenKeyword$ If CARDNAME would be put into a graveyard, exile it instead. | Description$ If a creature dealt damage by CARDNAME this turn would die, exile it instead.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/frostwielder.jpg
 Oracle:{T}: Frostwielder deals 1 damage to target creature or player.\nIf a creature dealt damage by Frostwielder this turn would die, exile it instead.
-SetInfo:CHK Common

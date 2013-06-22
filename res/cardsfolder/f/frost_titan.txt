@@ -12,5 +12,3 @@ SVar:TrigCounter:AB$ Counter | Cost$ 0 | Defined$ TriggeredSourceSA | UnlessCost
 SVar:HasAttackEffect:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/frost_titan.jpg
 Oracle:Whenever Frost Titan becomes the target of a spell or ability an opponent controls, counter that spell or ability unless its controller pays {2}.\nWhenever Frost Titan enters the battlefield or attacks, tap target permanent. It doesn't untap during its controller's next untap step.
-SetInfo:M11 Mythic
-SetInfo:M12 Mythic

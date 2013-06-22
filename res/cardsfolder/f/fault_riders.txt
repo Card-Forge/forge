@@ -6,4 +6,3 @@ A:AB$ Pump | Cost$ Sac<1/Land> | NumAtt$ +2 | KW$ First Strike | ActivationLimit
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fault_riders.jpg
 Oracle:Sacrifice a land: Fault Riders gets +2/+0 and gains first strike until end of turn. Activate this ability only once each turn.
-SetInfo:PCY Common

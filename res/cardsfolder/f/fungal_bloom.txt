@@ -6,4 +6,3 @@ SVar:NonStackingEffect:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fungal_bloom.jpg
 Oracle:{G}{G}: Put a spore counter on target Fungus.
-SetInfo:FEM Rare

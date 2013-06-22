@@ -5,4 +5,3 @@ PT:1/1
 A:AB$ Pump | Cost$ B Sac<1/Goblin> | NumAtt$ +2 | NumDef$ +2 | SpellDescription$ CARDNAME gets +2/+2 until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/facevaulter.jpg
 Oracle:{B}, Sacrifice a Goblin: Facevaulter gets +2/+2 until end of turn.
-SetInfo:LRW Common

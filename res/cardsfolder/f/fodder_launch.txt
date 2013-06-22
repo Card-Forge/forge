@@ -6,4 +6,3 @@ SVar:DBDealDamage:DB$DealDamage | Defined$ TargetedController | NumDmg$ 5
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fodder_launch.jpg
 Oracle:As an additional cost to cast Fodder Launch, sacrifice a Goblin.\nTarget creature gets -5/-5 until end of turn. Fodder Launch deals 5 damage to that creature's controller.
-SetInfo:LRW Uncommon

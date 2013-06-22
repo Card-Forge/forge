@@ -5,4 +5,3 @@ PT:2/3
 A:AB$ Untap | Cost$ 2 U | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | SpellDescription$ Untap target artifact.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/filigree_sages.jpg
 Oracle:{2}{U}: Untap target artifact.
-SetInfo:ALA Uncommon

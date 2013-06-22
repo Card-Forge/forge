@@ -7,4 +7,3 @@ A:AB$ ChangeZone | Cost$ 1 R R R | Origin$ Graveyard | Destination$ Hand | Activ
 SVar:DiscardMe:1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/firewing_phoenix.jpg
 Oracle:Flying\n{1}{R}{R}{R}: Return Firewing Phoenix from your graveyard to your hand.
-SetInfo:M13 Rare

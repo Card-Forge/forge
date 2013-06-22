@@ -9,4 +9,3 @@ SVar:TrigLoseLife:AB$ LoseLife | Cost$ 0 | ValidTgts$ Player | TgtPrompt$ Choose
 SVar:DBGainLife:DB$ GainLife | Cost$ 0 | Defined$ You | LifeAmount$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/falkenrath_noble.jpg
 Oracle:Flying\nWhenever Falkenrath Noble or another creature dies, target player loses 1 life and you gain 1 life.
-SetInfo:ISD Uncommon

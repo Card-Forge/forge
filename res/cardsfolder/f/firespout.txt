@@ -6,5 +6,3 @@ SVar:GPaid:DB$ DamageAll | ValidCards$ Creature.withFlying | NumDmg$ 3 | Conditi
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/firespout.jpg
 Oracle:Firespout deals 3 damage to each creature without flying if {R} was spent to cast Firespout and 3 damage to each creature with flying if {G} was spent to cast it. (Do both if {R}{G} was spent.)
-SetInfo:COM Uncommon
-SetInfo:SHM Uncommon

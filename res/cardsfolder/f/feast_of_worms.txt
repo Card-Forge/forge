@@ -6,4 +6,3 @@ SVar:DBSacrifice:DB$ Sacrifice | Defined$ TargetedController | SacValid$ Land | 
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/feast_of_worms.jpg
 Oracle:Destroy target land. If that land was legendary, its controller sacrifices another land.
-SetInfo:CHK Uncommon

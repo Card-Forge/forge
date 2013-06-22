@@ -6,4 +6,3 @@ SVar:AltCost:Cost$ PayLife<1> ExileFromHand<1/Card.Blue> | Description$ You may 
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/force_of_will.jpg
 Oracle:You may pay 1 life and exile a blue card from your hand rather than pay Force of Will's mana cost.\nCounter target spell.
-SetInfo:ALL Uncommon

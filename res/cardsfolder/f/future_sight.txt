@@ -6,4 +6,3 @@ S:Mode$ Continuous | Affected$ Card.TopLibrary+YouCtrl | AffectedZone$ Library |
 SVar:NonStackingEffect:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/future_sight.jpg
 Oracle:Play with the top card of your library revealed.\nYou may play the top card of your library.
-SetInfo:ONS Rare

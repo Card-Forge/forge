@@ -5,4 +5,3 @@ A:SP$ DealDamage | Cost$ 1 R | ValidTgts$ Player | TgtPrompt$ Select target play
 K:Cycling:2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flame_jet.jpg
 Oracle:Flame Jet deals 3 damage to target player.\nCycling {2} ({2}, Discard this card: Draw a card.)
-SetInfo:UDS Common

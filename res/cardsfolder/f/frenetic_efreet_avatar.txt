@@ -8,4 +8,3 @@ SVar:TrigFlip:AB$ FlipACoin | Cost$ 0 | Defined$ You | WinSubAbility$ DBAddTurn
 SVar:DBAddTurn:DB$ AddTurn | NumTurns$ 1
 SVar:Picture:http://www.cardforge.org/fpics/vgd-lq/frenetic_efreet_avatar.jpg
 Oracle:Hand -1, life -3\nEach permanent you control has phasing. (It phases in or out before you untap during each of your untap steps. While it's phased out, it's treated as though it doesn't exist.)\nAt the beginning of your end step, flip a coin. If you win the flip, take an extra turn after this one.
-SetInfo:VAN Special

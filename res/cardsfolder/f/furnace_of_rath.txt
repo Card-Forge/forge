@@ -10,8 +10,3 @@ SVar:PlayMain1:TRUE
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/furnace_of_rath.jpg
 Oracle:If a source would deal damage to a creature or player, it deals double that damage to that creature or player instead.
-SetInfo:8ED Rare
-SetInfo:TMP Rare
-SetInfo:9ED Rare
-SetInfo:HOP Rare
-SetInfo:10E Rare

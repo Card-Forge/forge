@@ -7,4 +7,3 @@ SVar:DBPreventDmg:DB$ Pump | Defined$ Remembered | KW$ HIDDEN Prevent all combat
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fighting_chance.jpg
 Oracle:For each blocking creature, flip a coin. If you win the flip, prevent all combat damage that would be dealt by that creature this turn.
-SetInfo:EXO Rare

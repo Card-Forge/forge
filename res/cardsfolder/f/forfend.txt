@@ -6,4 +6,3 @@ SVar:STPrevent:Mode$ PreventDamage | EffectZone$ Command | Target$ Creature | De
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/forfend.jpg
 Oracle:Prevent all damage that would be dealt to creatures this turn.
-SetInfo:MOR Common

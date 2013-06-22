@@ -8,5 +8,3 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ 2 | TokenName$ Saproling | TokenTypes$ Creature,Saproling | TokenOwner$ You | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fists_of_ironwood.jpg
 Oracle:Enchant creature\nWhen Fists of Ironwood enters the battlefield, put two 1/1 green Saproling creature tokens onto the battlefield.\nEnchanted creature has trample.
-SetInfo:RAV Common
-SetInfo:COM Common

@@ -5,4 +5,3 @@ PT:2/1
 A:AB$ ChangeZone | Cost$ G T | Origin$ Hand | Destination$ Battlefield | ChangeType$ Land.Basic | ChangeNum$ 1 | SpellDescription$ You may put a basic land card from your hand onto the battlefield.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/firebrand_ranger.jpg
 Oracle:{G}, {T}: You may put a basic land card from your hand onto the battlefield.
-SetInfo:INV Uncommon

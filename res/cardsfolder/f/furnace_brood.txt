@@ -6,4 +6,3 @@ A:AB$ Pump | Cost$ R | ValidTgts$ Creature | TgtPrompt$ Select target creature |
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/furnace_brood.jpg
 Oracle:{R}: Target creature can't be regenerated this turn.
-SetInfo:EXO Common

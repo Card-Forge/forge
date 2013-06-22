@@ -6,4 +6,3 @@ SVar:X:Count$Valid Creature.attacking
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flurry_of_wings.jpg
 Oracle:Put X 1/1 white Bird Soldier creature tokens with flying onto the battlefield, where X is the number of attacking creatures.
-SetInfo:ARB Uncommon

@@ -8,4 +8,3 @@ SVar:FleshReaverX:TriggerCount$DamageAmount
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flesh_reaver.jpg
 Oracle:Whenever Flesh Reaver deals damage to a creature or opponent, Flesh Reaver deals that much damage to you.
-SetInfo:USG Uncommon

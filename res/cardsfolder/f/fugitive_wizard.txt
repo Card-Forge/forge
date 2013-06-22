@@ -4,7 +4,3 @@ Types:Creature Human Wizard
 PT:1/1
 SVar:Picture:http://resources.wizards.com/magic/cards/10e/en/card134762.jpg
 Oracle:
-SetInfo:8ED Common
-SetInfo:LGN Common
-SetInfo:9ED Common
-SetInfo:10E Common

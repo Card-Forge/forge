@@ -6,4 +6,3 @@ SVar:RemAIDeck:True
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flowstone_surge.jpg
 Oracle:Creatures you control get +1/-1.
-SetInfo:NMS Uncommon

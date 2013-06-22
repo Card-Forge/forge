@@ -7,4 +7,3 @@ SVar:MaxTgts:Count$Valid Creature/Plus.2
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/firestorm.jpg
 Oracle:As an additional cost to cast Firestorm, discard X cards.\nFirestorm deals X damage to each of X target creatures and/or players.
-SetInfo:WTH Rare

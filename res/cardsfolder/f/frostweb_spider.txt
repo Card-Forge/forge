@@ -8,4 +8,3 @@ SVar:DelayedTrig:Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Player | Execute$
 SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
 SVar:Picture:http://resources.wizards.com/magic/cards/csp/en-us/card121197.jpg
 Oracle:Reach (This creature can block creatures with flying.)\nWhenever Frostweb Spider blocks a creature with flying, put a +1/+1 counter on Frostweb Spider at end of combat.
-SetInfo:CSP Common

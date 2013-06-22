@@ -4,5 +4,3 @@ Types:Instant
 A:SP$ Destroy | Cost$ 3 R R | ValidTgts$ Creature,Land | TgtPrompt$ Select target creature or land | NoRegen$ True | SpellDescription$ Destroy target creature or land. It can't be regenerated.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fissure.jpg
 Oracle:Destroy target creature or land. It can't be regenerated.
-SetInfo:4ED Common
-SetInfo:DRK Common

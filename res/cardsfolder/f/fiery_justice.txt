@@ -6,5 +6,3 @@ SVar:Justice:DB$ GainLife | ValidTgts$ Opponent | TgtPrompt$ Select target oppon
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fiery_justice.jpg
 Oracle:Fiery Justice deals 5 damage divided as you choose among any number of target creatures and/or players. Target opponent gains 5 life.
-SetInfo:ICE Rare
-SetInfo:TSB Special

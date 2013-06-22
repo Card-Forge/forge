@@ -6,4 +6,3 @@ SVar:FindCMC2:DB$ ChangeZone | Cost$ 0 | ChangeType$ Instant.cmcEQ2 | ChangeNum$
 SVar:FindCMC1:DB$ ChangeZone | Cost$ 0 | ChangeType$ Instant.cmcEQ1 | ChangeNum$ 1 | Origin$ Library | Destination$ Hand | Shuffle$ True | StackDescription$ Then shuffle your library.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fireminds_foresight.jpg
 Oracle:Search your library for an instant card with converted mana cost 3, reveal it, and put it into your hand. Then repeat this process for instant cards with converted mana costs 2 and 1. Then shuffle your library.
-SetInfo:RTR Rare

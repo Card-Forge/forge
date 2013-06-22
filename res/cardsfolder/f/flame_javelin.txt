@@ -4,6 +4,3 @@ Types:Instant
 A:SP$ DealDamage | Cost$ 2/R 2/R 2/R | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ 4 | SpellDescription$ CARDNAME deals 4 damage to target creature or player.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flame_javelin.jpg
 Oracle:({2/R} can be paid with any two mana or with {R}. This card's converted mana cost is 6.)\nFlame Javelin deals 4 damage to target creature or player.
-SetInfo:DDK Uncommon
-SetInfo:DD2 Uncommon
-SetInfo:SHM Uncommon

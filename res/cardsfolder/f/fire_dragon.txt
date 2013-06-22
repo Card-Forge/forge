@@ -9,4 +9,3 @@ SVar:X:Count$TypeYouCtrl.Mountain
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fire_dragon.jpg
 Oracle:Flying\nWhen Fire Dragon enters the battlefield, it deals damage equal to the number of Mountains you control to target creature.
-SetInfo:POR Rare

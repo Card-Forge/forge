@@ -8,4 +8,3 @@ SVar:TrigChangePT:AB$ Pump | Cost$ 0 | KW$ HIDDEN CARDNAME's power and toughness
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fluxcharger.jpg
 Oracle:Flying\nWhenever you cast an instant or sorcery spell, you may switch Fluxcharger's power and toughness until end of turn.
-SetInfo:DGM Uncommon

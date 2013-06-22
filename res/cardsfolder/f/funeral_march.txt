@@ -7,5 +7,3 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.A
 SVar:TrigSac:AB$ Sacrifice | Cost$ 0 | SacValid$ Creature | Defined$ TriggeredCardController
 SVar:Picture:http://www.wizards.com/global/images/magic/general/funeral_march.jpg
 Oracle:Enchant creature\nWhen enchanted creature leaves the battlefield, its controller sacrifices a creature.
-SetInfo:5ED Common
-SetInfo:HML Common

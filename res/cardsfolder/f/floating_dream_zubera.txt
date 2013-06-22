@@ -7,4 +7,3 @@ SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ X | References$ X
 SVar:X:Count$ThisTurnEntered_Graveyard_from_Battlefield_Card.Zubera
 SVar:Picture:http://resources.wizards.com/magic/cards/chk/en-us/card80507.jpg
 Oracle:When Floating-Dream Zubera dies, draw a card for each Zubera that died this turn.
-SetInfo:CHK Common

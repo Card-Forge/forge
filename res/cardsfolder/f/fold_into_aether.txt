@@ -6,4 +6,3 @@ SVar:DBChangeZone:DB$ ChangeZone | ChangeType$ Creature | Origin$ Hand | Destina
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fold_into_aether.jpg
 Oracle:Counter target spell. If that spell is countered this way, its controller may put a creature card from his or her hand onto the battlefield.
-SetInfo:5DN Uncommon

@@ -7,5 +7,3 @@ A:SP$ Pump | Cost$ B | ValidTgts$ Creature | TgtPrompt$ Select target creature |
 SVar:RemAIDeck:True
 SVar:Picture:http://resources.wizards.com/magic/cards/tsb/en-us/card108895.jpg
 Oracle:Choose one - Target player discards a card; or target creature gets +2/-1 until end of turn; or target creature gains swampwalk until end of turn.
-SetInfo:VIS Common
-SetInfo:TSB Special

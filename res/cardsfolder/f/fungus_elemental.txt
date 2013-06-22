@@ -6,4 +6,3 @@ A:AB$ PutCounter | Cost$ G Sac<1/Forest> | Defined$ Self | CounterType$ P2P2 | C
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fungus_elemental.jpg
 Oracle:{G}, Sacrifice a Forest: Put a +2/+2 counter on Fungus Elemental. Activate this ability only if Fungus Elemental entered the battlefield this turn.
-SetInfo:WTH Rare

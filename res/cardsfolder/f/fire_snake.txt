@@ -6,4 +6,3 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigDestroy:AB$Destroy | Cost$ 0 | ValidTgts$ Land | TgtPrompt$ Select target land
 SVar:Picture:http://serv2.tcgimages.eu/img/cards/Portal/fire_snake.jpg
 Oracle:When Fire Snake dies, destroy target land.
-SetInfo:POR Common

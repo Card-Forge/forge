@@ -6,4 +6,3 @@ T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$
 SVar:TrigPump:AB$PumpAll | Cost$ 0 | ValidCards$ Creature.attacking | KW$ Trample
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fangren_pathcutter.jpg
 Oracle:Whenever Fangren Pathcutter attacks, attacking creatures gain trample until end of turn.
-SetInfo:5DN Uncommon

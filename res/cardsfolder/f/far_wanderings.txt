@@ -5,4 +5,3 @@ A:SP$ ChangeZone | Cost$ 2 G | Origin$ Library | Destination$ Battlefield | Chan
 SVar:X:Count$Threshold.3.1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/far_wanderings.jpg
 Oracle:Search your library for a basic land card and put that card onto the battlefield tapped. Then shuffle your library.\nThreshold - If seven or more cards are in your graveyard, instead search your library for three basic land cards and put them onto the battlefield tapped. Then shuffle your library.
-SetInfo:TOR Common

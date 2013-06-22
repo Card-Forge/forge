@@ -8,4 +8,3 @@ A:AB$ Animate | Cost$ U | ValidTgts$ Creature | TgtPrompt$ Select target creatur
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fylamarid.jpg
 Oracle:Flying\nFylamarid can't be blocked by blue creatures.\n{U}: Target creature becomes blue until end of turn.
-SetInfo:TMP Uncommon

@@ -7,4 +7,3 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flicker.jpg
 Oracle:Exile target nontoken permanent, then return it to the battlefield under its owner's control.
-SetInfo:UDS Rare

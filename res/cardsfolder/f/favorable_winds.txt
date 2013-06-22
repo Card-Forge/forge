@@ -5,4 +5,3 @@ S:Mode$ Continuous | Affected$ Creature.withFlying+YouCtrl | AddPower$ 1 | AddTo
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/favorable_winds.jpg
 Oracle:Creatures you control with flying get +1/+1.
-SetInfo:AVR Uncommon

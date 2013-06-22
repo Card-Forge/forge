@@ -7,4 +7,3 @@ T:Mode$ Blocks | ValidCard$ Card.AttachedBy | TriggerZones$ Battlefield | Execut
 SVar:TrigGainLife:AB$GainLife | Cost$ 0 | LifeAmount$ 3 | Defined$ You
 SVar:Picture:http://www.wizards.com/global/images/magic/general/favor_of_the_woods.jpg
 Oracle:Enchant creature\nWhenever enchanted creature blocks, you gain 3 life.
-SetInfo:DKA Common

@@ -8,4 +8,3 @@ T:Mode$Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Li
 SVar:TrigWin:AB$WinsGame | Cost$ 0 | Defined$ You
 SVar:Picture:http://www.wizards.com/global/images/magic/general/felidar_sovereign.jpg
 Oracle:Vigilance, lifelink\nAt the beginning of your upkeep, if you have 40 or more life, you win the game.
-SetInfo:ZEN Mythic

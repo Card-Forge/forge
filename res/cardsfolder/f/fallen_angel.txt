@@ -6,11 +6,3 @@ K:Flying
 A:AB$ Pump | Cost$ Sac<1/Creature> | NumAtt$ +2 | NumDef$ +1 | SpellDescription$ CARDNAME gets +2/+1 until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fallen_angel.jpg
 Oracle:Flying\nSacrifice a creature: Fallen Angel gets +2/+1 until end of turn.
-SetInfo:8ED Rare
-SetInfo:7ED Rare
-SetInfo:CHR Uncommon
-SetInfo:6ED Rare
-SetInfo:COM Rare
-SetInfo:DDC Rare
-SetInfo:LEG Uncommon
-SetInfo:5ED Uncommon

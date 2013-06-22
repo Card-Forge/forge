@@ -7,4 +7,3 @@ SVar:TrigPump:AB$Pump | Cost$ 0 | Defined$ Self | KW$ Flying
 SVar:BuffedBy:Land
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fledgling_griffin.jpg
 Oracle:Landfall - Whenever a land enters the battlefield under your control, Fledgling Griffin gains flying until end of turn.
-SetInfo:WWK Common

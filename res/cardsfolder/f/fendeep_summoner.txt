@@ -6,4 +6,3 @@ A:AB$ Animate | Cost$ T | ValidTgts$ Swamp | TargetMin$ 0 | TargetMax$ 2 | TgtPr
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fendeep_summoner.jpg
 Oracle:{T}: Up to two target Swamps each become 3/5 Treefolk Warrior creatures in addition to their other types until end of turn.
-SetInfo:MOR Rare

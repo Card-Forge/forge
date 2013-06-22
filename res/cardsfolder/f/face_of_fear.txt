@@ -6,4 +6,3 @@ A:AB$ Pump | Cost$ 2 B Discard<1/Card> | KW$ Fear | SpellDescription$ CARDNAME g
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/face_of_fear.jpg
 Oracle:{2}{B}, Discard a card: Face of Fear gains fear until end of turn. (It can't be blocked except by artifact creatures and/or black creatures.)
-SetInfo:ODY Uncommon

@@ -5,5 +5,3 @@ A:AB$ DealDamage | Cost$ 4 T Sac<1/Creature> | ValidTgts$ Creature | TgtPrompt$ 
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fodder_cannon.jpg
 Oracle:{4}, {T}, Sacrifice a creature: Fodder Cannon deals 4 damage to target creature.
-SetInfo:8ED Uncommon
-SetInfo:UDS Uncommon

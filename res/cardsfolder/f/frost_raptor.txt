@@ -6,4 +6,3 @@ K:Flying
 A:AB$ Pump | Cost$ S S | KW$ Shroud | SpellDescription$ CARDNAME gains shroud until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/frost_raptor.jpg
 Oracle:Flying\n{S}{S}: Frost Raptor gains shroud until end of turn. ({S} can be paid with one mana from a snow permanent.)
-SetInfo:CSP Common

@@ -6,4 +6,3 @@ SVar:NeedsToPlayVar:AIHand LE4
 SVar:AIHand:Count$InYourHand
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fathom_trawl.jpg
 Oracle:Reveal cards from the top of your library until you reveal three nonland cards. Put the nonland cards revealed this way into your hand, then put the rest of the revealed cards on the bottom of your library in any order.
-SetInfo:LRW Rare

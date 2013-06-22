@@ -7,4 +7,3 @@ SVar:TrigCounters:AB$PutCounterAll | Cost$ 0 | ValidCards$ Creature.attacking | 
 SVar:HasAttackEffect:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fangren_firstborn.jpg
 Oracle:Whenever Fangren Firstborn attacks, put a +1/+1 counter on each attacking creature.
-SetInfo:DST Rare

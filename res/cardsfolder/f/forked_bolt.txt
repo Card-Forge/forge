@@ -4,4 +4,3 @@ Types:Sorcery
 A:SP$ DealDamage | Cost$ R | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player to distribute damage to | NumDmg$ 2 | TargetMin$ 1 | TargetMax$ 2 | DividedAsYouChoose$ 2 | SpellDescription$ CARDNAME deals 2 damage divided as you choose among one or two target creatures and/or players.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/forked_bolt.jpg
 Oracle:Forked Bolt deals 2 damage divided as you choose among one or two target creatures and/or players.
-SetInfo:ROE Uncommon

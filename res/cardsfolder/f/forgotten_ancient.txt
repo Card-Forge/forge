@@ -16,6 +16,3 @@ SVar:Y:Count$ChosenNumber
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/forgotten_ancient.jpg
 Oracle:Whenever a player casts a spell, you may put a +1/+1 counter on Forgotten Ancient.\nAt the beginning of your upkeep, you may move any number of +1/+1 counters from Forgotten Ancient onto other creatures.
-SetInfo:SCG Rare
-SetInfo:ARC Rare
-SetInfo:HOP Rare

@@ -5,5 +5,3 @@ PT:1/2
 A:AB$ Pump | Cost$ G Sac<1/Forest> | NumAtt$ +2 | NumDef$ +2 | SpellDescription$ CARDNAME gets +2/+2 until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/foratog.jpg
 Oracle:{G}, Sacrifice a Forest: Foratog gets +2/+2 until end of turn.
-SetInfo:8ED Uncommon
-SetInfo:MIR Uncommon

@@ -8,4 +8,3 @@ SVar:NeedsToPlayVar:Y GE1
 SVar:Y:Count$TypeInYourHand.Land
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fallow_wurm.jpg
 Oracle:When Fallow Wurm enters the battlefield, sacrifice it unless you discard a land card.
-SetInfo:WTH Uncommon

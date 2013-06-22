@@ -7,5 +7,3 @@ SVar:TrigPump:AB$Pump | Cost$ 0 | NumAtt$ +1 | Defined$ TriggeredAttacker
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/frenzy_sliver.jpg
 Oracle:All Sliver creatures have frenzy 1. (Whenever a Sliver attacks and isn't blocked, it gets +1/+0 until end of turn.)
-SetInfo:FUT Common
-SetInfo:H09 Common

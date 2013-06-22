@@ -5,4 +5,3 @@ S:Mode$ ReduceCost | ValidCard$ Card | Type$ Cycling | Activator$ You | Amount$ 
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fluctuator.jpg
 Oracle:Cycling abilities you activate cost you up to {2} less to activate.
-SetInfo:USG Rare

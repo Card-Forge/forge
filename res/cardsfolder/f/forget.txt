@@ -6,6 +6,3 @@ SVar:DBDraw:DB$ Draw | Cost$ 0 | Defined$ Targeted | NumCards$ X | References$ X
 SVar:X:Remembered$Amount
 SVar:Picture:http://www.wizards.com/global/images/magic/general/forget.jpg
 Oracle:Target player discards two cards, then draws as many cards as he or she discarded this way.
-SetInfo:5ED Rare
-SetInfo:6ED Rare
-SetInfo:HML Rare

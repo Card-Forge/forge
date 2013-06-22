@@ -7,4 +7,3 @@ SVar:TrigPumpCurse:DB$Pump| ValidTgts$ Creature | TgtPrompt$ Select target creat
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/farbog_boneflinger.jpg
 Oracle:When Farbog Boneflinger enters the battlefield, target creature gets -2/-2 until end of turn.
-SetInfo:DKA Uncommon

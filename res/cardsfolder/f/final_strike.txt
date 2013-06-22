@@ -6,4 +6,3 @@ SVar:X:Sacrificed$CardPower
 SVar:RemAIDeck:True
 SVar:Picture:http://serv3.tcgimages.eu/img/cards/Portal/final_strike.jpg
 Oracle:As an additional cost to cast Final Strike, sacrifice a creature.\nFinal Strike deals damage to target opponent equal to the sacrificed creature's power.
-SetInfo:POR Rare

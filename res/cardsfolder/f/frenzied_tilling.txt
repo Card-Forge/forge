@@ -5,5 +5,3 @@ A:SP$ Destroy | Cost$ 3 R G | ValidTgts$ Land | TgtPrompt$ Select target land | 
 SVar:DBSearch:DB$ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Land.Basic | ChangeNum$ 1 | Tapped$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/frenzied_tilling.jpg
 Oracle:Destroy target land. Search your library for a basic land card and put that card onto the battlefield tapped. Then shuffle your library.
-SetInfo:GTC Uncommon
-SetInfo:INV Common

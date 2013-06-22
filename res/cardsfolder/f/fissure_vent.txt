@@ -6,4 +6,3 @@ SVar:DestroyArtifact:DB$ Destroy | ValidTgts$ Artifact | TgtPrompt$ Select targe
 SVar:DestroyLand:DB$ Destroy | ValidTgts$ Land.nonBasic | TgtPrompt$ Select target nonbasic land | SpellDescription$ Destroy target nonbasic land;
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fissure_vent.jpg
 Oracle:Choose one or both - Destroy target artifact; and/or destroy target nonbasic land.
-SetInfo:ROE Common

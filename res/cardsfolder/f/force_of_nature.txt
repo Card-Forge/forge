@@ -6,10 +6,3 @@ K:Trample
 K:At the beginning of your upkeep, CARDNAME deals 8 damage to you unless you pay G G G G
 SVar:Picture:http://www.wizards.com/global/images/magic/general/force_of_nature.jpg
 Oracle:Trample (If this creature would assign enough damage to its blockers to destroy them, you may have it assign the rest of its damage to defending player or planeswalker.)\nAt the beginning of your upkeep, Force of Nature deals 8 damage to you unless you pay {G}{G}{G}{G}.
-SetInfo:2ED Rare
-SetInfo:9ED Rare
-SetInfo:LEB Rare
-SetInfo:LEA Rare
-SetInfo:5ED Rare
-SetInfo:4ED Rare
-SetInfo:3ED Rare

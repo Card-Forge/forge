@@ -6,5 +6,3 @@ A:SP$ Destroy | Cost$ 3 B | ValidTgts$ Creature.nonBlack+nonArtifact | TgtPrompt
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/feast_or_famine.jpg
 Oracle:Choose one - Put a 2/2 black Zombie creature token onto the battlefield; or destroy target nonartifact, nonblack creature and it can't be regenerated.
-SetInfo:ALL Common x2
-SetInfo:DDJ Common

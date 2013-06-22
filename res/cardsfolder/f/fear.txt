@@ -6,15 +6,3 @@ A:SP$ Attach | Cost$ B B | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Fear | Description$ Enchanted creature has fear. (It can't be blocked except by artifact creatures and/or black creatures.)
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fear.jpg
 Oracle:Enchant creature (Target a creature as you cast this. This card enters the battlefield attached to that creature.)\nEnchanted creature has fear. (It can't be blocked except by artifact creatures and/or black creatures.)
-SetInfo:8ED Common
-SetInfo:2ED Common
-SetInfo:7ED Common
-SetInfo:6ED Common
-SetInfo:5ED Common
-SetInfo:9ED Common
-SetInfo:10E Common
-SetInfo:LEB Common
-SetInfo:LEA Common
-SetInfo:ICE Common
-SetInfo:4ED Common
-SetInfo:3ED Common

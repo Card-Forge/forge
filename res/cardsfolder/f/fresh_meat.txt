@@ -6,4 +6,3 @@ SVar:X:Count$ThisTurnEntered_Graveyard_from_Battlefield_Creature.YouCtrl
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fresh_meat.jpg
 Oracle:Put a 3/3 green Beast creature token onto the battlefield for each creature put into your graveyard from the battlefield this turn.
-SetInfo:NPH Rare

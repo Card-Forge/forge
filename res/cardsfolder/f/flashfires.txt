@@ -5,13 +5,3 @@ A:SP$ DestroyAll | Cost$ 3 R | ValidCards$ Plains | SpellDescription$ Destroy al
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flashfires.jpg
 Oracle:Destroy all Plains.
-SetInfo:8ED Uncommon
-SetInfo:2ED Uncommon
-SetInfo:6ED Uncommon
-SetInfo:9ED Uncommon
-SetInfo:LEB Uncommon
-SetInfo:LEA Uncommon
-SetInfo:5ED Uncommon
-SetInfo:4ED Uncommon
-SetInfo:POR Uncommon
-SetInfo:3ED Uncommon

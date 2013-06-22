@@ -7,4 +7,3 @@ SVar:KWPump:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield |
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/festival.jpg
 Oracle:Cast Festival only during an opponent's upkeep.\nCreatures can't attack this turn.
-SetInfo:DRK Common

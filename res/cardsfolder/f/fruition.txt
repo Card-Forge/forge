@@ -5,4 +5,3 @@ A:SP$ GainLife | Cost$ G | LifeAmount$ X | References$ X | SpellDescription$ You
 SVar:X:Count$TypeOnBattlefield.Forest
 SVar:Picture:http://serv4.tcgimages.eu/img/cards/Portal/fruition.jpg
 Oracle:You gain 1 life for each Forest on the battlefield.
-SetInfo:POR Common

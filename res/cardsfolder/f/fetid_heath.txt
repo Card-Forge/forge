@@ -8,4 +8,3 @@ A:AB$ Mana | Cost$ WB T | Produced$ B | Amount$ 2 | SpellDescription$ Add B B to
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fetid_heath.jpg
 Oracle:{T}: Add {1} to your mana pool.\n{W/B}, {T}: Add {W}{W}, {W}{B}, or {B}{B} to your mana pool.
-SetInfo:EVE Rare

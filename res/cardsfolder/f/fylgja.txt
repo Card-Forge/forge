@@ -8,4 +8,3 @@ A:AB$ PreventDamage | Cost$ SubCounter<1/HEALING> | Defined$ Enchanted | Amount$
 A:AB$ PutCounter | Cost$ 2 W | CounterType$ HEALING | CounterNum$ 1 | SpellDescription$ Put a healing counter on CARDNAME.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fylgja.jpg
 Oracle:Enchant creature\nFylgja enters the battlefield with four healing counters on it.\nRemove a healing counter from Fylgja: Prevent the next 1 damage that would be dealt to enchanted creature this turn.\n{2}{W}: Put a healing counter on Fylgja.
-SetInfo:ICE Common

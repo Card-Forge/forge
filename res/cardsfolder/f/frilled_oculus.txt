@@ -5,4 +5,3 @@ PT:1/3
 A:AB$ Pump | Cost$ 1 G | NumAtt$ +2 | NumDef$ +2 | ActivationLimit$ 1 | SpellDescription$ CARDNAME gets +2/+2 until end of turn. Activate this ability only once each turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/frilled_oculus.jpg
 Oracle:{1}{G}: Frilled Oculus gets +2/+2 until end of turn. Activate this ability only once each turn.
-SetInfo:GTC Common

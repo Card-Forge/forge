@@ -8,4 +8,3 @@ SVar:X:Sacrificed$Valid Human
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/falkenrath_torturer.jpg
 Oracle:Sacrifice a creature: Falkenrath Torturer gains flying until end of turn. If the sacrificed creature was a Human, put a +1/+1 counter on Falkenrath Torturer.
-SetInfo:DKA Common
