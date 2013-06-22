@@ -19,7 +19,7 @@ public class LifeGainEffect extends SpellAbilityEffect {
         final StringBuilder sb = new StringBuilder();
         final int amount = AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("LifeAmount"), sa);
 
-        for (final Player player : getTargetPlayers(sa)) {
+        for (final Player player : getDefinedPlayersOrTargeted(sa)) {
             sb.append(player).append(" ");
         }
 
@@ -36,7 +36,7 @@ public class LifeGainEffect extends SpellAbilityEffect {
         final int lifeAmount = AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("LifeAmount"), sa);
 
         final TargetRestrictions tgt = sa.getTargetRestrictions();
-        List<Player> tgtPlayers = getTargetPlayers(sa);
+        List<Player> tgtPlayers = getDefinedPlayersOrTargeted(sa);
         if( tgtPlayers.isEmpty() ) {
             tgtPlayers.add(sa.getActivatingPlayer());
         }
