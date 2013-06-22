@@ -8,4 +8,3 @@ SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/xenograft.jpg
 Oracle:As Xenograft enters the battlefield, choose a creature type.\nEach creature you control is the chosen type in addition to its other types.
-SetInfo:NPH Rare

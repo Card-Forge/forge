@@ -17,4 +17,3 @@ SVar:Z:Count$Valid Creature.YouCtrl
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/xathrid_demon.jpg
 Oracle:Flying, trample\nAt the beginning of your upkeep, sacrifice a creature other than Xathrid Demon, then each opponent loses life equal to the sacrificed creature's power. If you can't sacrifice a creature, tap Xathrid Demon and you lose 7 life.
-SetInfo:M10 Mythic

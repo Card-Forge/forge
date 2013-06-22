@@ -7,6 +7,3 @@ SVar:X:Targeted$CardManaCost
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/xenic_poltergeist.jpg
 Oracle:{T}: Until your next upkeep, target noncreature artifact becomes an artifact creature with power and toughness each equal to its converted mana cost.
-SetInfo:ATQ Uncommon
-SetInfo:5ED Rare
-SetInfo:4ED Rare

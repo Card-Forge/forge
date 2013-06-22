@@ -11,4 +11,3 @@ SVar:RemRandomDeck:True
 SVar:HasAttackEffect:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/xantid_swarm.jpg
 Oracle:Flying\nWhenever Xantid Swarm attacks, defending player can't cast spells this turn.
-SetInfo:SCG Rare
