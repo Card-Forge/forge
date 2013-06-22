@@ -4,6 +4,3 @@ Types:Instant
 A:SP$ ChangeZone | Cost$ WB WB WB | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target creature.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/unmake.jpg
 Oracle:Exile target creature.
-SetInfo:DDK Common
-SetInfo:ARC Common
-SetInfo:EVE Common

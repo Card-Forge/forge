@@ -5,4 +5,3 @@ PT:5/4
 K:Cumulative upkeep:G
 SVar:Picture:http://www.wizards.com/global/images/magic/general/uktabi_efreet.jpg
 Oracle:Cumulative upkeep {G} (At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.)
-SetInfo:WTH Common

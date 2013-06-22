@@ -8,6 +8,3 @@ A:AB$ Regenerate | Cost$ G Sac<1/Forest> | SpellDescription$ Regenerate CARDNAME
 SVar:BuffedBy:Forest
 SVar:Picture:http://www.wizards.com/global/images/magic/general/uktabi_wildcats.jpg
 Oracle:Uktabi Wildcats's power and toughness are each equal to the number of Forests you control.\n{G}, Sacrifice a Forest: Regenerate Uktabi Wildcats.
-SetInfo:7ED Rare
-SetInfo:MIR Rare
-SetInfo:6ED Rare

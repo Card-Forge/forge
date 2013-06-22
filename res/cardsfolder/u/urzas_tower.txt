@@ -5,8 +5,3 @@ A:AB$ Mana | Cost$ T | Produced$ 1 | Bonus$ UrzaLands | BonusProduced$ 2 | Spell
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/urzas_tower.jpg
 Oracle:{T}: Add {1} to your mana pool. If you control an Urza's Mine and an Urza's Power-Plant, add {3} to your mana pool instead.
-SetInfo:8ED Uncommon
-SetInfo:CHR Uncommon x4
-SetInfo:9ED Uncommon
-SetInfo:ATQ Uncommon x4
-SetInfo:5ED Common

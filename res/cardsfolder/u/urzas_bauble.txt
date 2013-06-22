@@ -7,5 +7,3 @@ SVar:DrawSlowtrip:DB$Draw | NumCards$ 1 | Defined$ You
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/urzas_bauble.jpg
 Oracle:{T}, Sacrifice Urza's Bauble: Look at a card at random in target player's hand. You draw a card at the beginning of the next turn's upkeep.
-SetInfo:ICE Uncommon
-SetInfo:5ED Uncommon

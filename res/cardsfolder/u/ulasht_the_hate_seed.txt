@@ -10,4 +10,3 @@ SVar:B:Count$Valid Creature.YouCtrl+Green+Other
 SVar:NeedsToPlay:Creature.Red+YouCtrl,Creature.Green+YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ulasht_the_hate_seed.jpg
 Oracle:Ulasht, the Hate Seed enters the battlefield with a +1/+1 counter on it for each other red creature you control and a +1/+1 counter on it for each other green creature you control.\n{1}, Remove a +1/+1 counter from Ulasht: Choose one - Ulasht deals 1 damage to target creature; or put a 1/1 green Saproling creature token onto the battlefield.
-SetInfo:GPT Rare

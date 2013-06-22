@@ -6,4 +6,3 @@ SVar:TrigDraw:AB$Draw | Cost$ 2 | Defined$ TriggeredActivator | NumCards$ 1
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/unifying_theory.jpg
 Oracle:Whenever a player casts a spell, that player may pay {2}. If the player does, he or she draws a card.
-SetInfo:ODY Rare

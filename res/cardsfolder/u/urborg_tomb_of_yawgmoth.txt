@@ -5,5 +5,3 @@ S:Mode$ Continuous | Affected$ Land | AddType$ Swamp | Description$ Each land is
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/urborg_tomb_of_yawgmoth.jpg
 Oracle:Each land is a Swamp in addition to its other land types.
-SetInfo:V12 Mythic
-SetInfo:PLC Rare

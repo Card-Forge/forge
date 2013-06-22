@@ -7,4 +7,3 @@ SVar:TrigChange:AB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Libra
 SVar:RemAIDeck:True
 SVar:Picture:http://resources.wizards.com/magic/cards/po/en-us/card4242.jpg
 Oracle:When Undying Beast dies, put it on top of its owner's library.
-SetInfo:POR Common

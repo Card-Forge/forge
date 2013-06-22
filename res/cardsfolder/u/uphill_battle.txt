@@ -5,4 +5,3 @@ S:Mode$ ETBTapped | ValidCard$ Creature.YouDontCtrl | Description$ Creatures pla
 SVar:NonStackingEffect:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/uphill_battle.jpg
 Oracle:Creatures played by your opponents enter the battlefield tapped.
-SetInfo:MMQ Uncommon

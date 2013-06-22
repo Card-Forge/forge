@@ -8,4 +8,3 @@ K:etbCounter:P1P1:1:CheckSVar$ WasKicked:If CARDNAME was kicked, it enters the b
 SVar:WasKicked:Count$Kicked.1.0
 SVar:Picture:http://www.wizards.com/global/images/magic/general/urborg_skeleton.jpg
 Oracle:Kicker {3} (You may pay an additional {3} as you cast this spell.)\n{B}: Regenerate Urborg Skeleton.\nIf Urborg Skeleton was kicked, it enters the battlefield with a +1/+1 counter on it.
-SetInfo:INV Common

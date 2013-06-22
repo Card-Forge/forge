@@ -8,4 +8,3 @@ SVar:TrigDamage:AB$ DealDamage | Cost$ 0 | Defined$ EnchantedController | NumDmg
 SVar:X:Enchanted$CardPower
 SVar:Picture:http://www.wizards.com/global/images/magic/general/unnatural_hunger.jpg
 Oracle:Enchant creature\nAt the beginning of the upkeep of enchanted creature's controller, Unnatural Hunger deals damage to that player equal to that creature's power unless he or she sacrifices another creature.
-SetInfo:MMQ Rare

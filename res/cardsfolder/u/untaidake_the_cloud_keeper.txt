@@ -6,4 +6,3 @@ A:AB$ Mana | Cost$ T PayLife<2> | Produced$ 1 | Amount$ 2 | RestrictValid$ Card.
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/untaidake_the_cloud_keeper.jpg
 Oracle:Untaidake, the Cloud Keeper enters the battlefield tapped.\n{T}, Pay 2 life: Add {2} to your mana pool. Spend this mana only to cast legendary spells.
-SetInfo:CHK Rare

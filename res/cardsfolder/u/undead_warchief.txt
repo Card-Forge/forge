@@ -8,6 +8,3 @@ SVar:PlayMain1:TRUE
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/undead_warchief.jpg
 Oracle:Zombie spells you cast cost {1} less to cast.\nZombie creatures you control get +2/+1.
-SetInfo:SCG Uncommon
-SetInfo:TSB Special
-SetInfo:HOP Uncommon

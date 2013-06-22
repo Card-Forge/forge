@@ -6,5 +6,3 @@ SVar:NonStackingEffect:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/upwelling.jpg
 Oracle:Mana pools don't empty as steps and phases end.
-SetInfo:SCG Rare
-SetInfo:10E Rare

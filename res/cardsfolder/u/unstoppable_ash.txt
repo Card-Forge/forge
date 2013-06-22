@@ -9,4 +9,3 @@ SVar:TrigPump:AB$Pump | Cost$ 0 | Defined$ TriggeredAttacker | NumDef$ +5
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/unstoppable_ash.jpg
 Oracle:Trample\nChampion a Treefolk or Warrior (When this enters the battlefield, sacrifice it unless you exile another Treefolk or Warrior you control. When this leaves the battlefield, that card returns to the battlefield.)\nWhenever a creature you control becomes blocked, it gets +0/+5 until end of turn.
-SetInfo:MOR Rare

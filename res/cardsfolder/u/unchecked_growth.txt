@@ -6,4 +6,3 @@ SVar:DBTrample:DB$ Pump | Defined$ Targeted | KW$ Trample | ConditionDefined$ Ta
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/unchecked_growth.jpg
 Oracle:Target creature gets +4/+4 until end of turn. If it's a Spirit, it gains trample until end of turn.
-SetInfo:BOK Uncommon

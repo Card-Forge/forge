@@ -7,4 +7,3 @@ S:Mode$ ReduceCost | ValidCard$ Creature.ChosenType | Type$ Spell | Activator$ Y
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/urzas_incubator.jpg
 Oracle:As Urza's Incubator enters the battlefield, choose a creature type.\nCreature spells of the chosen type cost {2} less to cast.
-SetInfo:UDS Rare

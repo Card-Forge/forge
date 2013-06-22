@@ -6,4 +6,3 @@ S:Mode$ Continuous | Affected$ Creature.withSwampwalk | AddHiddenKeyword$ May be
 K:First Strike
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ur_drago.jpg
 Oracle:First strike\nCreatures with swampwalk can be blocked as though they didn't have swampwalk.
-SetInfo:LEG Rare

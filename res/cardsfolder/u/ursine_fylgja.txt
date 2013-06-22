@@ -7,4 +7,3 @@ A:AB$ PreventDamage | Cost$ SubCounter<1/HEALING> | Defined$ Self | Amount$ 1 | 
 A:AB$ PutCounter | Cost$ 2 W | CounterType$ HEALING | CounterNum$ 1 | SpellDescription$ Put a healing counter on CARDNAME.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ursine_fylgja.jpg
 Oracle:Ursine Fylgja enters the battlefield with four healing counters on it.\nRemove a healing counter from Ursine Fylgja: Prevent the next 1 damage that would be dealt to Ursine Fylgja this turn.\n{2}{W}: Put a healing counter on Ursine Fylgja.
-SetInfo:CSP Uncommon

@@ -5,4 +5,3 @@ A:SP$ Discard | Cost$ 2 B | ValidTgts$ Player | NumCards$ 1 | Mode$ TgtChoose | 
 SVar:DBDraw:DB$Draw | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/unhinge.jpg
 Oracle:Target player discards a card.\nDraw a card.
-SetInfo:TOR Common

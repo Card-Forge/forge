@@ -8,4 +8,3 @@ SVar:USCopy:AB$ Clone | Cost$ 0 | Defined$ TriggeredCard | AddTriggers$ USTrig |
 SVar:USTrig:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Other | TriggerZones$ Battlefield | Execute$ USCopy | TriggerDescription$ Whenever another creature enters the battlefield, CARDNAME becomes a copy of that creature and gains this ability.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/unstable_shapeshifter.jpg
 Oracle:Whenever another creature enters the battlefield, Unstable Shapeshifter becomes a copy of that creature and gains this ability.
-SetInfo:TMP Rare

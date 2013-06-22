@@ -6,4 +6,3 @@ SVar:DBDiscard:DB$Discard | NumCards$ 3 | Mode$ TgtChoose | Defined$ Each | SubA
 SVar:DBLose:DB$LoseLife | LifeAmount$ 4 | Defined$ Each
 SVar:Picture:http://www.wizards.com/global/images/magic/general/urzas_guilt.jpg
 Oracle:Each player draws two cards, then discards three cards, then loses 4 life.
-SetInfo:PLS Rare

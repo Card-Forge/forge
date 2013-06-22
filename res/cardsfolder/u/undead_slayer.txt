@@ -5,4 +5,3 @@ PT:2/2
 A:AB$ ChangeZone | Cost$ W T | ValidTgts$ Creature.Skeleton,Creature.Vampire,Creature.Zombie | Origin$ Battlefield | Destination$ Exile | TgtPrompt$ Select target Skeleton, Vampire or Zombie creature. | SpellDescription$ Exile target Skeleton, Vampire or Zombie.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/undead_slayer.jpg
 Oracle:{W}, {T}: Exile target Skeleton, Vampire, or Zombie.
-SetInfo:M10 Uncommon

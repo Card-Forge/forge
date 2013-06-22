@@ -7,4 +7,3 @@ A:AB$ Destroy | Cost$ B T | ValidTgts$ Creature.powerLTX | References$ X  | TgtP
 SVar:X:Count$CardPower
 SVar:Picture:http://www.wizards.com/global/images/magic/general/unliving_psychopath.jpg
 Oracle:{B}: Unliving Psychopath gets +1/-1 until end of turn.\n{B}, {T}: Destroy target creature with power less than Unliving Psychopath's power.
-SetInfo:DIS Rare

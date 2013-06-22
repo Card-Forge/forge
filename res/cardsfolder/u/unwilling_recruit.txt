@@ -7,4 +7,3 @@ SVar:X:Count$xPaid
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/unwilling_recruit.jpg
 Oracle:Gain control of target creature until end of turn. Untap that creature. It gets +X/+0 and gains haste until end of turn.
-SetInfo:EVE Uncommon

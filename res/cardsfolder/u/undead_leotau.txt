@@ -6,4 +6,3 @@ A:AB$ Pump | Cost$ R | NumAtt$ +1 | NumDef$ -1 | SpellDescription$ CARDNAME gets
 K:Unearth:2 B
 SVar:Picture:http://www.wizards.com/global/images/magic/general/undead_leotau.jpg
 Oracle:{R}: Undead Leotau gets +1/-1 until end of turn.\nUnearth {2}{B} ({2}{B}: Return this card from your graveyard to the battlefield. It gains haste. Exile it at the beginning of the next end step or if it would leave the battlefield. Unearth only as a sorcery.)
-SetInfo:ALA Common

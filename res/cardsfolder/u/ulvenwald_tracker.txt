@@ -7,4 +7,3 @@ SVar:TrackerFight:DB$ Fight | Defined$ ParentTarget | ValidTgts$ Creature | Targ
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ulvenwald_tracker.jpg
 Oracle:{1}{G}, {T}: Target creature you control fights another target creature. (Each deals damage equal to its power to the other.)
-SetInfo:AVR Rare

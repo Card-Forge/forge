@@ -7,4 +7,3 @@ S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddAbility$ UCDraw | Descripti
 SVar:UCDraw:AB$ Draw | Cost$ T PayLife<1> | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/underworld_connections.jpg
 Oracle:Enchant land\nEnchanted land has "{T}, Pay 1 life: Draw a card."
-SetInfo:RTR Rare

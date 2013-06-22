@@ -6,4 +6,3 @@ SVar:DBAnimate:DB$ Animate | ValidTgts$ Creature | TgtPrompt$ Select target crea
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/unnatural_selection.jpg
 Oracle:{1}: Choose a creature type other than Wall. Target creature becomes that type until end of turn.
-SetInfo:APC Rare

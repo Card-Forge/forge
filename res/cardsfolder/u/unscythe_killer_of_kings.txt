@@ -10,4 +10,3 @@ SVar:UnscytheDBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:UnscytheX:Remembered$Amount
 SVar:Picture:http://www.wizards.com/global/images/magic/general/unscythe_killer_of_kings.jpg
 Oracle:Equipped creature gets +3/+3 and has first strike.\nWhenever a creature dealt damage by equipped creature this turn dies, you may exile that card. If you do, put a 2/2 black Zombie creature token onto the battlefield.\nEquip {2}
-SetInfo:ARB Rare

@@ -6,4 +6,3 @@ S:Mode$ Continuous | Affected$ Aura.AttachedTo Permanent.YouCtrl | AddKeyword$ T
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/umbra_mystic.jpg
 Oracle:Auras attached to permanents you control have totem armor. (If an enchanted permanent you control would be destroyed, instead remove all damage from it and destroy an Aura attached to it.)
-SetInfo:ROE Rare

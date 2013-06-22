@@ -7,4 +7,3 @@ SVar:Y:Count$Valid Creature.TargetedControllerCtrl
 SVar:NeedsToPlayVar:YourPeerGroup GTY
 SVar:Picture:http://www.wizards.com/global/images/magic/general/unified_will.jpg
 Oracle:Counter target spell if you control more creatures than that spell's controller.
-SetInfo:ROE Uncommon

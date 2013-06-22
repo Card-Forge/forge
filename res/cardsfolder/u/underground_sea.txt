@@ -3,7 +3,3 @@ ManaCost:no cost
 Types:Land Island Swamp
 SVar:Picture:http://www.wizards.com/global/images/magic/general/underground_sea.jpg
 Oracle:({T}: Add {U} or {B} to your mana pool.)
-SetInfo:2ED Rare
-SetInfo:LEB Rare
-SetInfo:LEA Rare
-SetInfo:3ED Rare

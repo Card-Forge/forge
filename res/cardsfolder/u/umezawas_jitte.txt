@@ -10,4 +10,3 @@ SVar:JitteLife:DB$ GainLife | LifeAmount$ 2 | SpellDescription$ or you gain 2 li
 SVar:TrigPutCounter:AB$ PutCounter | Cost$ 0 | CounterType$ CHARGE | CounterNum$ 2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/umezawas_jitte.jpg
 Oracle:Whenever equipped creature deals combat damage, put two charge counters on Umezawa's Jitte.\nRemove a charge counter from Umezawa's Jitte: Choose one -  Equipped creature gets +2/+2 until end of turn; or target creature gets -1/-1 until end of turn; or you gain 2 life.\nEquip {2}
-SetInfo:BOK Rare

@@ -5,5 +5,3 @@ A:AB$ Untap | Cost$ T | ValidTgts$ Permanent.Other | TgtPrompt$ Select another t
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/unbender_tine.jpg
 Oracle:{T}: Untap another target permanent.
-SetInfo:ARB Uncommon
-SetInfo:ARC Uncommon

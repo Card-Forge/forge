@@ -8,4 +8,3 @@ SVar:DBDamage:DB$ DealDamage | ValidTgts$ Player | TgtPrompt$ Select another tar
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/unstable_footing.jpg
 Oracle:Kicker {3}{R} (You may pay an additional {3}{R} as you cast this spell.)\nDamage can't be prevented this turn. If Unstable Footing was kicked, it deals 5 damage to target player.
-SetInfo:ZEN Uncommon

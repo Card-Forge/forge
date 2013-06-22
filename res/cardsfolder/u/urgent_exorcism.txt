@@ -4,4 +4,3 @@ Types:Instant
 A:SP$ Destroy | Cost$ 1 W | ValidTgts$ Spirit,Enchantment | TgtPrompt$ Select target Spirit or enchantment. | SpellDescription$ Destroy target Spirit or enchantment.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/urgent_exorcism.jpg
 Oracle:Destroy target Spirit or enchantment.
-SetInfo:ISD Common

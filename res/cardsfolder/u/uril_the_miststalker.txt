@@ -8,4 +8,3 @@ SVar:X:Count$Valid Aura.Attached/Times.2
 SVar:EnchantMe:Multiple
 SVar:Picture:http://www.wizards.com/global/images/magic/general/uril_the_miststalker.jpg
 Oracle:Hexproof (This creature can't be the target of spells or abilities your opponents control.)\nUril, the Miststalker gets +2/+2 for each Aura attached to it.
-SetInfo:ARB Mythic

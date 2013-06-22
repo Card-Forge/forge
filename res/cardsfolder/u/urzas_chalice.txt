@@ -6,4 +6,3 @@ SVar:TrigGainLife:AB$GainLife | Cost$ 1 | Defined$ You | LifeAmount$ 1
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/urzas_chalice.jpg
 Oracle:Whenever a player casts an artifact spell, you may pay {1}. If you do, you gain 1 life.
-SetInfo:ATQ Common

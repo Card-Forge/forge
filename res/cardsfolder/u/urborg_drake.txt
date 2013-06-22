@@ -6,4 +6,3 @@ K:Flying
 K:CARDNAME attacks each turn if able.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/urborg_drake.jpg
 Oracle:Flying\nUrborg Drake attacks each turn if able.
-SetInfo:INV Uncommon

@@ -5,4 +5,3 @@ S:Mode$ Continuous | Affected$ Artifact.YouCtrl | AddHiddenKeyword$ CARDNAME unt
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/unwinding_clock.jpg
 Oracle:Untap all artifacts you control during each other player's untap step.
-SetInfo:NPH Rare

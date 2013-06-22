@@ -6,4 +6,3 @@ A:SP$ Attach | Cost$ 1 G W | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddToughness$ 2 | AddKeyword$ Trample & Lifelink | Description$ Enchanted creature gets +2/+2 and has trample and lifelink.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/unflinching_courage.jpg
 Oracle:Enchant creature\nEnchanted creature gets +2/+2 and has trample and lifelink.
-SetInfo:DGM Uncommon

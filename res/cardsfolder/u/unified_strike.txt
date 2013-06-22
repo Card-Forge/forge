@@ -7,4 +7,3 @@ SVar:X:Targeted$Valid Creature.powerLEY
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/unified_strike.jpg
 Oracle:Exile target attacking creature if its power is less than or equal to the number of Soldiers on the battlefield.
-SetInfo:ONS Common

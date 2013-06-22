@@ -10,5 +10,3 @@ T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigDestroy  | TriggerDescri
 SVar:TrigDestroy:AB$Destroy | Cost$ 0 | ValidTgts$ Permanent | TgtPrompt$ Select target permanent
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ulamog_the_infinite_gyre.jpg
 Oracle:When you cast Ulamog, the Infinite Gyre, destroy target permanent.\nAnnihilator 4 (Whenever this creature attacks, defending player sacrifices four permanents.)\nUlamog is indestructible.\nWhen Ulamog is put into a graveyard from anywhere, its owner shuffles his or her graveyard into his or her library.
-SetInfo:V11 Mythic
-SetInfo:ROE Mythic

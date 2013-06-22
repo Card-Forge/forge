@@ -5,5 +5,3 @@ A:SP$ Counter | Cost$ U U B | TargetType$ Spell | TgtPrompt$ Select target spell
 SVar:DBDrain:DB$LoseLife | Defined$ TargetedController | LifeAmount$ 3
 SVar:Picture:http://www.wizards.com/global/images/magic/general/undermine.jpg
 Oracle:Counter target spell. Its controller loses 3 life.
-SetInfo:DDH Rare
-SetInfo:INV Rare

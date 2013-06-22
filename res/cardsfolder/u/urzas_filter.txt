@@ -4,4 +4,3 @@ Types:Artifact
 S:Mode$ ReduceCost | ValidCard$ Card.MultiColor | Type$ Spell | Amount$ 2 | Description$ Multicolored spells cost up to 2 less to cast.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/urzas_filter.jpg
 Oracle:Multicolored spells cost up to {2} less to cast.
-SetInfo:INV Rare
