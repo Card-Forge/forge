@@ -10,7 +10,7 @@ SVar:DBChoice:DB$ GenericChoice | Choices$ DBCheckHand,DBNoChange | Defined$ Pla
 SVar:DBCheckHand:DB$ StoreSVar | SVar$ NumPlayerGiveup | Type$ CountSVar | Expression$ NumPlayerGiveup/Plus.1 | ConditionCheckSVar$ CheckHand | ConditionSVarCompare$ EQ0 | SubAbility$ DBChoose | ChoiceDescription$ Choose an artifact, creature, enchantment, or land card from your hand onto the battlefield
 SVar:DBChoose:DB$ ChooseCard | Defined$ Player.IsRemembered | Choices$ Artifact.IsNotRemembered+RememberedPlayerCtrl,Creature.IsNotRemembered+RememberedPlayerCtrl,Enchantment.IsNotRemembered+RememberedPlayerCtrl,Land.IsNotRemembered+RememberedPlayerCtrl | ChoiceZone$ Hand | Amount$ 1 | RememberChosen$ True | Mandatory$ True | ConditionCheckSVar$ CheckHand | ConditionSVarCompare$ GE1
 SVar:DBNoChange:DB$ StoreSVar | SVar$ NumPlayerGiveup | Type$ CountSVar | Expression$ NumPlayerGiveup/Plus.1 | ChoiceDescription$ Do not put an artifact, creature, enchantment, or land card from your hand onto the battlefield
-SVar:DBChangeZoneAll:DB$ ChangeZoneAll | Origin$ Hand | Destination$ Battlefield | ChangeType$ Card.IsRemembered | SubAbility$ FinalReset
+SVar:DBChangeZoneAll:DB$ ChangeZoneAll | Origin$ Hand | Defined$ Each | Destination$ Battlefield | ChangeType$ Card.IsRemembered | SubAbility$ FinalReset
 SVar:FinalReset:DB$ StoreSVar | SVar$ NumPlayerGiveup | Type$ Number | Expression$ 0 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:NumPlayerGiveup:Number$0
