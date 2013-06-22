@@ -10,5 +10,3 @@ SVar:AFLifeLost:Number$0
 #AFLifeLost will be set by LoseLife
 SVar:Picture:http://resources.wizards.com/magic/cards/chk/en-us/card50445.jpg
 Oracle:Flying\nWhen Kokusho, the Evening Star dies, each opponent loses 5 life. You gain life equal to the life lost this way.
-SetInfo:DRB Rare
-SetInfo:CHK Rare

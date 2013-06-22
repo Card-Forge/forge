@@ -7,4 +7,3 @@ S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ CARDNAME
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ CARDNAME can't block. | Condition$ Threshold | Description$ Threshold - Enchanted creature can't block as long as seven or more cards are in your graveyard.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kirtars_desire.jpg
 Oracle:Enchant creature\nEnchanted creature can't attack.\nThreshold - Enchanted creature can't block as long as seven or more cards are in your graveyard.
-SetInfo:ODY Common

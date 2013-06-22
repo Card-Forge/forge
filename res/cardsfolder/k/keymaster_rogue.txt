@@ -8,4 +8,3 @@ SVar:TrigChange:AB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | Cost$
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/keymaster_rogue.jpg
 Oracle:Keymaster Rogue is unblockable.\nWhen Keymaster Rogue enters the battlefield, return a creature you control to its owner's hand.
-SetInfo:GTC Common

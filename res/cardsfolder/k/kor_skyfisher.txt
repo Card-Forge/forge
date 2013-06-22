@@ -8,5 +8,3 @@ SVar:TrigChange:AB$ChangeZone | Origin$ Battlefield | Destination$ Hand | Cost$ 
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kor_skyfisher.jpg
 Oracle:Flying\nWhen Kor Skyfisher enters the battlefield, return a permanent you control to its owner's hand.
-SetInfo:ZEN Common
-SetInfo:DDF Common

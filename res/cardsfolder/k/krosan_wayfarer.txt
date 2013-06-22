@@ -6,4 +6,3 @@ A:AB$ ChangeZone | Cost$ Sac<1/CARDNAME> | Origin$ Hand | Destination$ Battlefie
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/krosan_wayfarer.jpg
 Oracle:Sacrifice Krosan Wayfarer: You may put a land card from your hand onto the battlefield.
-SetInfo:JUD Common

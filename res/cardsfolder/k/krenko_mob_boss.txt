@@ -7,4 +7,3 @@ SVar:X:Count$TypeYouCtrl.Goblin
 DeckHints:Type$Goblin
 SVar:Picture:http://www.wizards.com/global/images/magic/general/krenko_mob_boss.jpg
 Oracle:{T}: Put X 1/1 red Goblin creature tokens onto the battlefield, where X is the number of Goblins you control.
-SetInfo:M13 Rare

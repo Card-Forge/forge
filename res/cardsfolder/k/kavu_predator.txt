@@ -8,4 +8,3 @@ SVar:TrigPut:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ P1P1 | Count
 SVar:X:TriggerCount$LifeAmount
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kavu_predator.jpg
 Oracle:Trample\nWhenever an opponent gains life, put that many +1/+1 counters on Kavu Predator.
-SetInfo:PLC Uncommon

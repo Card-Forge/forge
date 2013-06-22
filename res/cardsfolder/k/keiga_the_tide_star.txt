@@ -7,4 +7,3 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigGainControl:AB$GainControl | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature
 SVar:Picture:http://resources.wizards.com/magic/cards/chk/en-us/card75286.jpg
 Oracle:Flying\nWhen Keiga, the Tide Star dies, gain control of target creature.
-SetInfo:CHK Rare

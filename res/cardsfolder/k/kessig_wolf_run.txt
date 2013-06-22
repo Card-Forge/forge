@@ -7,4 +7,3 @@ SVar:X:Count$xPaid
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kessig_wolf_run.jpg
 Oracle:{T}: Add {1} to your mana pool.\n{X}{R}{G}, {T}: Target creature gets +X/+0 and gains trample until end of turn.
-SetInfo:ISD Rare

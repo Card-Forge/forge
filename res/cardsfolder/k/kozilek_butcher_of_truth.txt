@@ -9,4 +9,3 @@ T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigDraw  | TriggerDescripti
 SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 4
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kozilek_butcher_of_truth.jpg
 Oracle:When you cast Kozilek, Butcher of Truth, draw four cards.\nAnnihilator 4 (Whenever this creature attacks, defending player sacrifices four permanents.)\nWhen Kozilek is put into a graveyard from anywhere, its owner shuffles his or her graveyard into his or her library.
-SetInfo:ROE Mythic

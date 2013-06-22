@@ -6,4 +6,3 @@ S:Mode$ Continuous | Affected$ Artifact | AddKeyword$ At the beginning of your u
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kataki_wars_wage.jpg
 Oracle:All artifacts have "At the beginning of your upkeep, sacrifice this artifact unless you pay {1}."
-SetInfo:SOK Rare

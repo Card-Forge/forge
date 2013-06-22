@@ -7,4 +7,3 @@ SVar:RolledChaos:AB$ AnimateAll | Cost$ 0 | ValidCards$ Creature.YouCtrl | Types
 SVar:DBPump:DB$ PumpAll | ValidCards$ Creature.YouCtrl | KW$ Trample | NumAtt$ 2 | NumDef$ 2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kessig.jpg
 Oracle:Prevent all combat damage that would be dealt by non-Werewolf creatures.\nWhenever you roll {C}, each creature you control gets +2/+2, gains trample, and becomes a Werewolf in addition to its other types until end of turn.
-SetInfo:PC2 Common

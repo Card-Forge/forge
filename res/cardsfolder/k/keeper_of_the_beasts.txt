@@ -7,4 +7,3 @@ SVar:X:Count$Valid Creature.YouCtrl
 SVar:Y:Count$Valid Creature.YouDontCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/keeper_of_the_beasts.jpg
 Oracle:{G}, {T}: Choose target opponent who controlled more creatures than you did as you activated this ability. Put a 2/2 green Beast creature token onto the battlefield.
-SetInfo:EXO Uncommon

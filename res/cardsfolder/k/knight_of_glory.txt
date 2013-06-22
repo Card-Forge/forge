@@ -6,4 +6,3 @@ K:Exalted
 K:Protection from black
 SVar:Picture:http://www.wizards.com/global/images/magic/general/knight_of_glory.jpg
 Oracle:Protection from black (This creature can't be blocked, targeted, dealt damage, or enchanted by anything black.)\nExalted (Whenever a creature you control attacks alone, that creature gets +1/+1 until end of turn.)
-SetInfo:M13 Uncommon

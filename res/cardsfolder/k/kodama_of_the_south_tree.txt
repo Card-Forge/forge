@@ -7,4 +7,3 @@ SVar:TrigPump:AB$PumpAll | Cost$ 0 | ValidCards$ Creature.YouCtrl+Other | NumAtt
 SVar:BuffedBy:Arcane,Spirit
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kodama_of_the_south_tree.jpg
 Oracle:Whenever you cast a Spirit or Arcane spell, each other creature you control gets +1/+1 and gains trample until end of turn.
-SetInfo:CHK Rare

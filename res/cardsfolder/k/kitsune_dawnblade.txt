@@ -8,4 +8,3 @@ SVar:TrigTap:AB$Tap | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target c
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kitsune_dawnblade.jpg
 Oracle:Bushido 1 (When this blocks or becomes blocked, it gets +1/+1 until end of turn.)\nWhen Kitsune Dawnblade enters the battlefield, you may tap target creature.
-SetInfo:SOK Common

@@ -6,4 +6,3 @@ A:AB$ Pump | Cost$ 1 W T | KW$ HIDDEN Prevent all combat damage that would be de
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kor_haven.jpg
 Oracle:{T}: Add {1} to your mana pool.\n{1}{W}, {T}: Prevent all combat damage that would be dealt by target attacking creature this turn.
-SetInfo:NMS Rare

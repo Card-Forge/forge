@@ -5,4 +5,3 @@ A:SP$ DealDamage | Cost$ 4 B B | ValidTgts$ Opponent | NumDmg$ 4 | SubAbility$ D
 SVar:DBGainLife:DB$GainLife | LifeAmount$ 4
 SVar:Picture:http://serv2.tcgimages.eu/img/cards/Portal_Second_Age/kiss_of_death.jpg
 Oracle:Kiss of Death deals 4 damage to target opponent. You gain 4 life.
-SetInfo:PO2 Uncommon

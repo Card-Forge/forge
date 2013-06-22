@@ -8,8 +8,3 @@ SVar:RoyalGuardIntercept:AB$DealDamage | Cost$ 0 | CombatDamage$ True | Defined$
 SVar:InterceptedX:ReplaceCount$DamageAmount
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kjeldoran_royal_guard.jpg
 Oracle:{T}: All combat damage that would be dealt to you by unblocked creatures this turn is dealt to Kjeldoran Royal Guard instead.
-SetInfo:ICE Rare
-SetInfo:5ED Rare
-SetInfo:7ED Rare
-SetInfo:6ED Rare
-SetInfo:10E Rare

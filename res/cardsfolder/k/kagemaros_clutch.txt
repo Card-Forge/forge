@@ -8,4 +8,3 @@ SVar:X:Count$InYourHand/Times.-1
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kagemaros_clutch.jpg
 Oracle:Enchant creature\nEnchanted creature gets -X/-X, where X is the number of cards in your hand.
-SetInfo:SOK Common

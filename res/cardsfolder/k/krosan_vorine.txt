@@ -6,4 +6,3 @@ K:Provoke
 K:CantBeBlockedByAmount GT1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/krosan_vorine.jpg
 Oracle:Provoke (When this attacks, you may have target creature defending player controls untap and block it if able.)\nKrosan Vorine can't be blocked by more than one creature.
-SetInfo:LGN Common

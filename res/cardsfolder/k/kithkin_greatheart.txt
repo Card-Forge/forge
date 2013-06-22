@@ -7,4 +7,3 @@ SVar:X:Count$Valid Giant.YouCtrl
 SVar:BuffedBy:Giant
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kithkin_greatheart.jpg
 Oracle:As long as you control a Giant, Kithkin Greatheart gets +1/+1 and has first strike.
-SetInfo:LRW Common

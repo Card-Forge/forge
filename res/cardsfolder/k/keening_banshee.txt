@@ -8,5 +8,3 @@ K:Flying
 SVar:PlayMain1:TRUE
 SVar:Picture:http://resources.wizards.com/magic/cards/rav/en-us/card83599.jpg
 Oracle:Flying\nWhen Keening Banshee enters the battlefield, target creature gets -2/-2 until end of turn.
-SetInfo:RAV Uncommon
-SetInfo:DDD Uncommon

@@ -4,4 +4,3 @@ Types:Creature Human Rogue
 PT:2/1
 SVar:Picture:http://resources.wizards.com/magic/cards/csp/en-us/card121226.jpg
 Oracle:
-SetInfo:CSP Common

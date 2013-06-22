@@ -8,4 +8,3 @@ SVar:TrigSacUnless:DB$ Sacrifice | Defined$ Self | UnlessCost$ Return<1/Plains.u
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/karoo.jpg
 Oracle:Karoo enters the battlefield tapped.\nWhen Karoo enters the battlefield, sacrifice it unless you return an untapped Plains you control to its owner's hand.\n{T}: Add {1}{W} to your mana pool.
-SetInfo:VIS Uncommon

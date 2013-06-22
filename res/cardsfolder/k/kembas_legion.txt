@@ -8,4 +8,3 @@ SVar:X:Count$Valid Equipment.Attached
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kembas_legion.jpg
 SVar:EquipMe:Multiple
 Oracle:Vigilance\nKemba's Legion can block an additional creature for each Equipment attached to Kemba's Legion.
-SetInfo:MBS Uncommon

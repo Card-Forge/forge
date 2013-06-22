@@ -6,4 +6,3 @@ A:AB$ Destroy | Cost$ Sac<1/CARDNAME> | ValidTgts$ Enchantment | TgtPrompt$ Sele
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/keening_apparition.jpg
 Oracle:Sacrifice Keening Apparition: Destroy target enchantment.
-SetInfo:RTR Common

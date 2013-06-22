@@ -6,4 +6,3 @@ T:Mode$ PlanarDice | Result$ Chaos | OptionalDecider$ You | TriggerZones$ Comman
 SVar:RolledChaos:AB$ Mana | Cost$ 0 | Produced$ W U B R G
 SVar:Picture:http://www.wizards.com/global/images/magic/general/krosa.jpg
 Oracle:All creatures get +2/+2.\nWhenever you roll {C}, you may add {W}{U}{B}{R}{G} to your mana pool.
-SetInfo:HOP Common

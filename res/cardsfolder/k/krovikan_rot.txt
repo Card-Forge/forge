@@ -5,4 +5,3 @@ A:SP$ Destroy | Cost$ 2 B | ValidTgts$ Creature.powerLE2 | TgtPrompt$ Select tar
 K:Recover:1 B B
 SVar:Picture:http://www.wizards.com/global/images/magic/general/krovikan_rot.jpg
 Oracle:Destroy target creature with power 2 or less.\nRecover {1}{B}{B} (When a creature is put into your graveyard from the battlefield, you may pay {1}{B}{B}. If you do, return this card from your graveyard to your hand. Otherwise, exile this card.)
-SetInfo:CSP Uncommon

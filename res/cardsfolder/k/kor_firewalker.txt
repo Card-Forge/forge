@@ -7,4 +7,3 @@ T:Mode$ SpellCast | ValidCard$ Card.Red | OptionalDecider$ You | TriggerZones$ B
 SVar:TrigGainLife:AB$GainLife | Cost$ 0 | LifeAmount$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kor_firewalker.jpg
 Oracle:Protection from red\nWhenever a player casts a red spell, you may gain 1 life.
-SetInfo:WWK Uncommon

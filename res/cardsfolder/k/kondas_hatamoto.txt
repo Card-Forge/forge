@@ -8,4 +8,3 @@ SVar:X:Count$Valid Samurai.Legendary+YouCtrl
 SVar:BuffedBy:Samurai.Legendary
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kondas_hatamoto.jpg
 Oracle:Bushido 1 (When this blocks or becomes blocked, it gets +1/+1 until end of turn.)\nAs long as you control a legendary Samurai, Konda's Hatamoto gets +1/+2 and has vigilance. (Attacking doesn't cause this creature to tap.)
-SetInfo:CHK Uncommon

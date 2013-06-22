@@ -7,5 +7,3 @@ SVar:TrigPump:AB$Pump | Cost$ 0 | NumAtt$ +3 | NumDef$ +0 | Defined$ Self
 SVar:BuffedBy:Instant,Sorcery
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kiln_fiend.jpg
 Oracle:Whenever you cast an instant or sorcery spell, Kiln Fiend gets +3/+0 until end of turn.
-SetInfo:DDJ Common
-SetInfo:ROE Common

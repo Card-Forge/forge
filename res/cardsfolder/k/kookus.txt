@@ -10,4 +10,3 @@ SVar:DBMustAttack:DB$Pump | KW$ HIDDEN CARDNAME attacks each turn if able. | Def
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kookus.jpg
 Oracle:Trample\nAt the beginning of your upkeep, if you don't control a creature named Keeper of Kookus, Kookus deals 3 damage to you and attacks this turn if able.\n{R}: Kookus gets +1/+0 until end of turn.
-SetInfo:VIS Rare

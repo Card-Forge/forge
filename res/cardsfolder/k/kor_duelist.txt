@@ -6,4 +6,3 @@ S:Mode$ Continuous | Affected$ Card.Self+equipped | AddKeyword$ Double Strike | 
 SVar:EquipMe:Once
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kor_duelist.jpg
 Oracle:As long as Kor Duelist is equipped, it has double strike. (It deals both first-strike and regular combat damage.)
-SetInfo:ZEN Uncommon

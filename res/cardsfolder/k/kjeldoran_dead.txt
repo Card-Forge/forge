@@ -8,6 +8,3 @@ A:AB$ Regenerate | Cost$ B | SpellDescription$ Regenerate CARDNAME.
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kjeldoran_dead.jpg
 Oracle:When Kjeldoran Dead enters the battlefield, sacrifice a creature.\n{B}: Regenerate Kjeldoran Dead.
-SetInfo:ICE Common
-SetInfo:5ED Common
-SetInfo:6ED Common

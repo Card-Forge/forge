@@ -8,4 +8,3 @@ SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ TriggeredCardController | NumCards$ 1
 SVar:SacMe:1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kingfisher.jpg
 Oracle:Flying\nWhen Kingfisher dies, draw a card.
-SetInfo:UDS Common

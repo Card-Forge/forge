@@ -11,4 +11,3 @@ S:Mode$ Continuous | Affected$ Creature.MultiColor+Other+YouCtrl+Green | AddPowe
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/knight_of_new_alara.jpg
 Oracle:Each other multicolored creature you control gets +1/+1 for each of its colors.
-SetInfo:ARB Rare

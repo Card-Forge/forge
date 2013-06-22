@@ -6,4 +6,3 @@ S:Mode$ Continuous | Affected$ Card.Self+equipped | AddPower$ 1 | AddToughness$ 
 SVar:EquipMe:Once
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kitesail_apprentice.jpg
 Oracle:As long as Kitesail Apprentice is equipped, it gets +1/+1 and has flying.
-SetInfo:WWK Common

@@ -8,4 +8,3 @@ SVar:TrigDiscard:AB$Discard | Cost$ 0 | ValidTgts$ Player | TgtPrompt$ Select a 
 SVar:TrigReturn:AB$ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Hand | Defined$ Self
 SVar:Picture:http://resources.wizards.com/magic/cards/sok/en-us/card84705.jpg
 Oracle:When Kemuri-Onna enters the battlefield, target player discards a card.\nWhenever you cast a Spirit or Arcane spell, you may return Kemuri-Onna to its owner's hand.
-SetInfo:SOK Uncommon

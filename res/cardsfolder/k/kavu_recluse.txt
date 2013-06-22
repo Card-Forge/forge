@@ -6,4 +6,3 @@ A:AB$Animate | Cost$ T | ValidTgts$ Land | TgtPrompt$ Select target land | Types
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kavu_recluse.jpg
 Oracle:{T}: Target land becomes a Forest until end of turn.
-SetInfo:PLS Common

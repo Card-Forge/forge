@@ -8,4 +8,3 @@ SVar:X:Count$YourLifeTotal
 SVar:Y:Count$OppLifeTotal
 SVar:Picture:http://www.wizards.com/global/images/magic/general/keeper_of_the_light.jpg
 Oracle:{W}, {T}: Choose target opponent who had more life than you did as you activated this ability. You gain 3 life.
-SetInfo:EXO Uncommon

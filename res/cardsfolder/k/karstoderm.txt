@@ -7,4 +7,3 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Artifa
 SVar:TrigRemoveCounter:AB$RemoveCounter | Cost$ 0 | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/karstoderm.jpg
 Oracle:Karstoderm enters the battlefield with five +1/+1 counters on it.\nWhenever an artifact enters the battlefield, remove a +1/+1 counter from Karstoderm.
-SetInfo:DST Uncommon

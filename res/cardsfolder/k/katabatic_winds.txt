@@ -7,4 +7,3 @@ S:Mode$ CantBeActivated | ValidCard$ Creature.withFlying | TapAbility$ True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/katabatic_winds.jpg
 Oracle:Phasing (This phases in or out before you untap during each of your untap steps. While it's phased out, it's treated as though it doesn't exist.)\nCreatures with flying can't attack or block, and their activated abilities with {T} in their costs can't be activated.
-SetInfo:VIS Rare

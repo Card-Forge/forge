@@ -6,4 +6,3 @@ A:AB$ Pump | Cost$ R Sac<1/Artifact> | ValidTgts$ Creature | TgtPrompt$ Select t
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/krark_clan_ogre.jpg
 Oracle:{R}, Sacrifice an artifact: Target creature can't block this turn.
-SetInfo:5DN Common

@@ -24,5 +24,3 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/autumn_tail_kitsune_sage.jpg
 Oracle:{1}: Attach target Aura attached to a creature to another creature.
-
-SetInfo:CHK Rare

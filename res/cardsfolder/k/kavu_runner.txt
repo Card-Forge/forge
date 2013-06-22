@@ -8,4 +8,3 @@ SVar:Y:Count$Valid Creature.Blue+OppCtrl
 SVar:AntiBuffedBy:Creature.White,Creature.Blue
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kavu_runner.jpg
 Oracle:Kavu Runner has haste as long as no opponent controls a white or blue creature.
-SetInfo:INV Uncommon

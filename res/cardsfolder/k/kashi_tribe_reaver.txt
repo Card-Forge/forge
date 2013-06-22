@@ -9,4 +9,3 @@ A:AB$ Regenerate | Cost$ 1 G | SpellDescription$ Regenerate CARDNAME.
 SVar:HasCombatEffect:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kashi_tribe_reaver.jpg
 Oracle:Whenever Kashi-Tribe Reaver deals combat damage to a creature, tap that creature and it doesn't untap during its controller's next untap step.\n{1}{G}: Regenerate Kashi-Tribe Reaver.
-SetInfo:CHK Uncommon

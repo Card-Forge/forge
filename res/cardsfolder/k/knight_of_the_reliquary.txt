@@ -7,5 +7,3 @@ S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddToughness$ X | Descr
 SVar:X:Count$TypeInYourYard.Land
 SVar:Picture:http://www.wizards.com/global/images/magic/general/knight_of_the_reliquary.jpg
 Oracle:Knight of the Reliquary gets +1/+1 for each land card in your graveyard.\n{T}, Sacrifice a Forest or Plains: Search your library for a land card, put it onto the battlefield, then shuffle your library.
-SetInfo:DDG Mythic
-SetInfo:CFX Rare

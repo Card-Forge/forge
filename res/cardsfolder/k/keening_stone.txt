@@ -5,4 +5,3 @@ A:AB$ Mill | Cost$ 5 T | ValidTgts$ Player | TgtPrompt$ Select target player | N
 SVar:X:TargetedPlayer$CardsInGraveyard
 SVar:Picture:http://www.wizards.com/global/images/magic/general/keening_stone.jpg
 Oracle:{5}, {T}: Target player puts the top X cards of his or her library into his or her graveyard, where X is the number of cards in that player's graveyard.
-SetInfo:ROE Rare

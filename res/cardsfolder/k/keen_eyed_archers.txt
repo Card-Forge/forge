@@ -5,4 +5,3 @@ PT:2/2
 K:Reach
 SVar:Picture:http://serv3.tcgimages.eu/img/cards/Portal/keen_eyed_archers.jpg
 Oracle:Reach (This creature can block creatures with flying.)
-SetInfo:POR Common

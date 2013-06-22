@@ -9,4 +9,3 @@ SVar:TrigReturnThis:AB$ChangeZone | Cost$ 0 | Defined$ Self | Origin$ Battlefiel
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kiri_onna.jpg
 Oracle:When Kiri-Onna enters the battlefield, return target creature to its owner's hand.\nWhenever you cast a Spirit or Arcane spell, you may return Kiri-Onna to its owner's hand.
-SetInfo:SOK Uncommon

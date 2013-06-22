@@ -6,4 +6,3 @@ A:AB$ Protection | Cost$ R | Defined$ Self | Gains$ red | SpellDescription$ CARD
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/keeper_of_kookus.jpg
 Oracle:{R}: Keeper of Kookus gains protection from red until end of turn.
-SetInfo:VIS Common

@@ -6,4 +6,3 @@ A:AB$ Pump | Cost$ 1 W | TgtPrompt$ Choose target green creature | ValidTgts$ Cr
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kelsinko_ranger.jpg
 Oracle:{1}{W}: Target green creature gains first strike until end of turn.
-SetInfo:ICE Common

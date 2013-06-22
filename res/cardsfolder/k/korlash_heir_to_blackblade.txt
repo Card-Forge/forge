@@ -9,4 +9,3 @@ A:AB$ ChangeZone | Cost$ Discard<1/Card.namedKorlash, Heir to Blackblade> | Orig
 SVar:BuffedBy:Swamp
 SVar:Picture:http://resources.wizards.com/magic/cards/fut/en-us/card136208.jpg
 Oracle:Korlash, Heir to Blackblade's power and toughness are each equal to the number of Swamps you control.\n{1}{B}: Regenerate Korlash.\nGrandeur - Discard another card named Korlash, Heir to Blackblade: Search your library for up to two Swamp cards, put them onto the battlefield tapped, then shuffle your library.
-SetInfo:FUT Rare

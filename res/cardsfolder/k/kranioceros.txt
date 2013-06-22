@@ -5,4 +5,3 @@ PT:5/2
 A:AB$ Pump | Cost$ 1 W | NumDef$ +3 | SpellDescription$ CARDNAME gets +0/+3 until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kranioceros.jpg
 Oracle:{1}{W}: Kranioceros gets +0/+3 until end of turn.
-SetInfo:CFX Common

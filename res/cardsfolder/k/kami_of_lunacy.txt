@@ -6,4 +6,3 @@ K:Flying
 K:Soulshift 5
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kami_of_lunacy.jpg
 Oracle:Flying\nSoulshift 5 (When this creature dies, you may return target Spirit card with converted mana cost 5 or less from your graveyard to your hand.)
-SetInfo:CHK Uncommon

@@ -9,4 +9,3 @@ SVar:DBSacrificeAll:DB$ SacrificeAll | ValidCards$ Land.IsNotRemembered | SubAbi
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/keldon_firebombers.jpg
 Oracle:When Keldon Firebombers enters the battlefield, each player sacrifices all lands he or she controls except for three.
-SetInfo:PCY Rare

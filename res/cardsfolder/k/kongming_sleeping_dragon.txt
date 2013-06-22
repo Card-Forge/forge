@@ -6,4 +6,3 @@ S:Mode$ Continuous | Affected$ Creature.Other+YouCtrl | AddPower$ 1 | AddToughne
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kongming_sleeping_dragon.jpg
 Oracle:Other creatures you control get +1/+1.
-SetInfo:PTK Rare

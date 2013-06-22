@@ -20,5 +20,3 @@ SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Defined$ TriggeredPlayer | SacValid$ Creat
 SVar:Picture:http://www.marc-fowler-design.com/cardforge/flippedcards/SOK/kuons_essence.jpg
 # This link may be a temporary solution and could change in the near future.
 Oracle:At the beginning of each player's upkeep, that player sacrifices a creature.
-
-SetInfo:SOK Rare

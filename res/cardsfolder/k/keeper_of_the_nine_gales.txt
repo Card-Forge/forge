@@ -7,4 +7,3 @@ A:AB$ ChangeZone | Cost$ T tapXType<2/Bird> | ValidTgts$ Permanent | TgtPrompt$ 
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/keeper_of_the_nine_gales.jpg
 Oracle:Flying\n{T}, Tap two untapped Birds you control: Return target permanent to its owner's hand.
-SetInfo:LGN Rare

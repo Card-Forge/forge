@@ -6,4 +6,3 @@ A:AB$ Destroy | Cost$ T | ValidTgts$ Djinn,Efreet | TgtPrompt$ Select target Dji
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/king_suleiman.jpg
 Oracle:{T}: Destroy target Djinn or Efreet.
-SetInfo:ARN Rare

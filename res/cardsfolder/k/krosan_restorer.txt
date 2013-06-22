@@ -7,4 +7,3 @@ A:AB$ Untap | Cost$ T | ValidTgts$ Land | TgtPrompt$ Choose target land | Target
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/krosan_restorer.jpg
 Oracle:{T}: Untap target land.\nThreshold - {T}: Untap up to three target lands. Activate this ability only if seven or more cards are in your graveyard.
-SetInfo:TOR Common

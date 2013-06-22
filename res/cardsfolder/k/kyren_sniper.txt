@@ -6,4 +6,3 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | OptionalDecider$ You | Execut
 SVar:TrigDealDamage:AB$DealDamage | Cost$ 0 | ValidTgts$ Player | TgtPrompt$ Select target player | NumDmg$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kyren_sniper.jpg
 Oracle:At the beginning of your upkeep, you may have Kyren Sniper deal 1 damage to target player.
-SetInfo:MMQ Common

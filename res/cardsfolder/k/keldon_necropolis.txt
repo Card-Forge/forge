@@ -6,4 +6,3 @@ A:AB$ DealDamage | Cost$ 4 R T Sac<1/Creature> | ValidTgts$ Creature,Player | Tg
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/keldon_necropolis.jpg
 Oracle:{T}: Add {1} to your mana pool.\n{4}{R}, {T}, Sacrifice a creature: Keldon Necropolis deals 2 damage to target creature or player.
-SetInfo:INV Rare

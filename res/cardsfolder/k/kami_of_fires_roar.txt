@@ -7,4 +7,3 @@ SVar:TrigCurse:AB$ Pump | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select targ
 SVar:BuffedBy:Spirit,Arcane
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kami_of_fires_roar.jpg
 Oracle:Whenever you cast a Spirit or Arcane spell, target creature can't block this turn.
-SetInfo:CHK Common

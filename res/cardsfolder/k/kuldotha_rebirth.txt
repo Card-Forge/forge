@@ -5,4 +5,3 @@ A:SP$ Token | Cost$ R Sac<1/Artifact> | TokenAmount$ 3 | TokenOwner$ You | Token
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kuldotha_rebirth.jpg
 Oracle:As an additional cost to cast Kuldotha Rebirth, sacrifice an artifact.\nPut three 1/1 red Goblin creature tokens onto the battlefield.
-SetInfo:SOM Common

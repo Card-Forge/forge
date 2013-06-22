@@ -5,4 +5,3 @@ T:Mode$ Destroyed | ValidCauser$ Player.Opponent | ValidCard$ Permanent.nonCreat
 SVar:TrigDestroy:AB$ Destroy | Cost$ 0 | ValidTgts$ Permanent | TargetsWithDefinedController$ TriggeredCauser
 SVar:Picture:http://www.wizards.com/global/images/magic/general/karmic_justice.jpg
 Oracle:Whenever a spell or ability an opponent controls destroys a noncreature permanent you control, you may destroy target permanent that opponent controls.
-SetInfo:ODY Rare

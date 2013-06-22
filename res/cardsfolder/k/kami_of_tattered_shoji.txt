@@ -7,4 +7,3 @@ SVar:TrigPump:AB$ Pump | Cost$ 0 | Defined$ Self | KW$ Flying
 SVar:BuffedBy:Arcane,Spirit
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kami_of_tattered_shoji.jpg
 Oracle:Whenever you cast a Spirit or Arcane spell, Kami of Tattered Shoji gains flying until end of turn.
-SetInfo:BOK Common

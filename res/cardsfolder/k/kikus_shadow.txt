@@ -6,4 +6,3 @@ SVar:X:Targeted$CardPower
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kikus_shadow.jpg
 Oracle:Target creature deals damage to itself equal to its power.
-SetInfo:SOK Uncommon

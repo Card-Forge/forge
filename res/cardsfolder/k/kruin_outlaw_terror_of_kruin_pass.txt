@@ -22,4 +22,3 @@ T:Mode$Phase | Phase$ Upkeep | WerewolfUntransformCondition$ True | TriggerZones
 SVar:TrigTransform:AB$SetState | Cost$ 0 | Defined$ Self | Mode$ Transform
 SVar:Picture:http://www.wizards.com/global/images/magic/general/terror_of_kruin_pass.jpg
 Oracle:Double Strike\nEach Werewolf you control can't be blocked except by two or more creatures.\nAt the beginning of each upkeep, if a player cast two or more spells last turn, transform Terror of Kruin Pass.
-SetInfo:ISD Rare

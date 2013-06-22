@@ -9,4 +9,3 @@ SVar:DBKnowledgePlaySpell:DB$ Play | ValidZone$ Exile | Valid$ Card.IsImprinted+
 SVar:DBKnowledgeCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/knowledge_pool.jpg
 Oracle:Imprint - When Knowledge Pool enters the battlefield, each player exiles the top three cards of his or her library.\nWhenever a player casts a spell from his or her hand, that player exiles it. If the player does, he or she may cast another nonland card exiled with Knowledge Pool without paying that card's mana cost.
-SetInfo:MBS Rare

@@ -7,4 +7,3 @@ A:AB$ ChooseColor | Cost$ G | Defined$ You | SubAbility$ Animate | SpellDescript
 SVar:Animate:DB$ Animate | Defined$ Self | Colors$ ChosenColor | OverwriteColors$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kavu_chameleon.jpg
 Oracle:Kavu Chameleon can't be countered.\n{G}: Kavu Chameleon becomes the color of your choice until end of turn.
-SetInfo:INV Uncommon

@@ -6,4 +6,3 @@ A:AB$ DamageAll | Cost$ Sac<1/Artifact> | ValidCards$ Creature.withoutFlying | N
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/krark_clan_shaman.jpg
 Oracle:Sacrifice an artifact: Krark-Clan Shaman deals 1 damage to each creature without flying.
-SetInfo:MRD Common

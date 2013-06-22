@@ -5,4 +5,3 @@ PT:3/1
 A:AB$ Pump | Cost$ 1 R | Defined$ Self | KW$ First Strike | SpellDescription$ Kessig Wolf gains first strike until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kessig_wolf.jpg
 Oracle:{1}{R}: Kessig Wolf gains first strike until end of turn.
-SetInfo:ISD Common

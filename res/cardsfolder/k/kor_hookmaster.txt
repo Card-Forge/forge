@@ -8,5 +8,3 @@ SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ HIDDEN This card doesn't untap du
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kor_hookmaster.jpg
 Oracle:When Kor Hookmaster enters the battlefield, tap target creature an opponent controls. That creature doesn't untap during its controller's next untap step.
-SetInfo:ZEN Common
-SetInfo:DDF Common

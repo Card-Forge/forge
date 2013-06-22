@@ -7,4 +7,3 @@ SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ 2 | TokenName$ Soldier | TokenT
 A:AB$ Fog | Cost$ W Sac<1/Soldier> | SpellDescription$ Prevent all combat damage that would be dealt this turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/knight_captain_of_eos.jpg
 Oracle:When Knight-Captain of Eos enters the battlefield, put two 1/1 white Soldier creature tokens onto the battlefield.\n{W}, Sacrifice a Soldier: Prevent all combat damage that would be dealt this turn.
-SetInfo:ALA Rare

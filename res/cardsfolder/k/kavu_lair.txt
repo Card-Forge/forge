@@ -6,4 +6,3 @@ SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ TriggeredCardController | NumCards$ 1
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kavu_lair.jpg
 Oracle:Whenever a creature with power 4 or greater enters the battlefield, its controller draws a card.
-SetInfo:INV Rare

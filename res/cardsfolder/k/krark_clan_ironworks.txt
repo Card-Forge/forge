@@ -5,4 +5,3 @@ A:AB$ Mana | Cost$ Sac<1/Artifact>  | Produced$ 1 | Amount$ 2 | SpellDescription
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/krark_clan_ironworks.jpg
 Oracle:Sacrifice an artifact: Add {2} to your mana pool.
-SetInfo:5DN Uncommon

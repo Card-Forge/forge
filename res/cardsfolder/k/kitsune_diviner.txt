@@ -6,4 +6,3 @@ A:AB$ Tap | Cost$ T | ValidTgts$ Spirit | TgtPrompt$ Select target Spirit | Spel
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kitsune_diviner.jpg
 Oracle:{T}: Tap target Spirit.
-SetInfo:CHK Common

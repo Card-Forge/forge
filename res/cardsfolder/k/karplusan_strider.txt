@@ -6,5 +6,3 @@ K:CARDNAME can't be the target of blue spells.
 K:CARDNAME can't be the target of black spells.
 SVar:Picture:http://resources.wizards.com/magic/cards/csp/en-us/card121214.jpg
 Oracle:Karplusan Strider can't be the target of blue or black spells.
-SetInfo:CSP Uncommon
-SetInfo:10E Uncommon

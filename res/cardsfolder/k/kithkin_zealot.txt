@@ -7,4 +7,3 @@ SVar:ZealotGained:AB$ GainLife | Cost$ 0 | LifeAmount$ KithkinZealot | Defined$ 
 SVar:KithkinZealot:Count$Valid Permanent.Black+TargetedPlayerCtrl,Permanent.Red+TargetedPlayerCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kithkin_zealot.jpg
 Oracle:When Kithkin Zealot enters the battlefield, you gain 1 life for each black and/or red permanent target opponent controls.
-SetInfo:EVE Common

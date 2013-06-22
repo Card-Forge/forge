@@ -9,4 +9,3 @@ SVar:PlayMain1:TRUE
 SVar:BuffedBy:Ally
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kazuul_warlord.jpg
 Oracle:Whenever Kazuul Warlord or another Ally enters the battlefield under your control, you may put a +1/+1 counter on each Ally creature you control.
-SetInfo:ZEN Rare

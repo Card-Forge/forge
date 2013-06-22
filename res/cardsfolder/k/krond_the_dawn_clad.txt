@@ -9,4 +9,3 @@ SVar:TrigExile:AB$ ChangeZone | Cost$ 0 | ValidTgts$ Permanent | TgtPrompt$ Sele
 SVar:EnchantMe:Once
 SVar:Picture:http://www.wizards.com/global/images/magic/general/krond_the_dawn_clad.jpg
 Oracle:Flying, vigilance\nWhenever Krond the Dawn-Clad attacks, if it's enchanted, exile target permanent.
-SetInfo:PC2 Mythic

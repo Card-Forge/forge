@@ -9,4 +9,3 @@ SVar:DBExchange:DB$ ExchangeControl | Defined$ Remembered | BothDefined$ True | 
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Picture:http://www.cardforge.org/fpics/vgd-lq/karona_false_god_avatar.jpg
 Oracle:Hand -1, life +8\nAt the beginning of your upkeep, exchange control of a permanent you control chosen at random and a permanent target opponent controls chosen at random.
-SetInfo:VAN Special

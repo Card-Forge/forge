@@ -7,5 +7,3 @@ S:Mode$ Continuous | Affected$ Creature.Knight+Other+YouCtrl | AddPower$ 1 | Add
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/knight_exemplar.jpg
 Oracle:First strike (This creature deals combat damage before creatures without first strike.)\nOther Knight creatures you control get +1/+1 and are indestructible. (Lethal damage and effects that say "destroy" don't destroy them.)
-SetInfo:M11 Rare
-SetInfo:DDG Rare

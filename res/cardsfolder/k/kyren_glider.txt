@@ -6,4 +6,3 @@ K:Flying
 K:CARDNAME can't block.
 SVar:Picture:http://resources.wizards.com/magic/cards/mm/en-us/card19604.jpg
 Oracle:Flying\nKyren Glider can't block.
-SetInfo:MMQ Common

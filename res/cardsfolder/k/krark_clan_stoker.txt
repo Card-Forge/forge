@@ -6,4 +6,3 @@ A:AB$ Mana | Cost$ T Sac<1/Artifact> | Produced$ R | Amount$ 2 | SpellDescriptio
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/krark_clan_stoker.jpg
 Oracle:{T}, Sacrifice an artifact: Add {R}{R} to your mana pool.
-SetInfo:DST Common

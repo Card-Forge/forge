@@ -6,4 +6,3 @@ S:Mode$ Continuous | Affected$ Creature.Kobold+Other+YouCtrl | AddToughness$ 1 |
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kobold_drill_sergeant.jpg
 Oracle:Other Kobold creatures you control get +0/+1 and have trample.
-SetInfo:LEG Uncommon

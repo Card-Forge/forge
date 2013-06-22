@@ -6,4 +6,3 @@ K:Trample
 K:Shroud
 SVar:Picture:http://resources.wizards.com/magic/cards/chk/en-us/card50488.jpg
 Oracle:Trample; shroud (This permanent can't be the target of spells or abilities.)
-SetInfo:CHK Rare

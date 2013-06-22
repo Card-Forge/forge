@@ -6,4 +6,3 @@ A:AB$ Destroy | Cost$ R Sac<2/Artifact> | ValidTgts$ Artifact | TgtPrompt$ Selec
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/krark_clan_engineers.jpg
 Oracle:{R}, Sacrifice two artifacts: Destroy target artifact.
-SetInfo:5DN Uncommon

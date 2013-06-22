@@ -5,4 +5,3 @@ A:SP$ PumpAll | Cost$ 1 W | ValidCards$ Creature.YouCtrl | NumAtt$ +X | NumDef$ 
 SVar:X:Count$NamedInAllYards.Kjeldoran War Cry/Plus.1
 SVar:Picture:http://resources.wizards.com/magic/cards/csp/en-us/card121148.jpg
 Oracle:Creatures you control get +X/+X until end of turn, where X is 1 plus the number of cards named Kjeldoran War Cry in all graveyards.
-SetInfo:CSP Common

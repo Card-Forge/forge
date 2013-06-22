@@ -6,4 +6,3 @@ K:Bushido 1
 A:AB$ Regenerate | Cost$ 1 B | SpellDescription$ Regenerate CARDNAME.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kuros_taken.jpg
 Oracle:Bushido 1 (When this blocks or becomes blocked, it gets +1/+1 until end of turn.)\n{1}{B}: Regenerate Kuro's Taken.
-SetInfo:SOK Common

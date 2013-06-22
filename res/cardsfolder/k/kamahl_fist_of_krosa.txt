@@ -7,5 +7,3 @@ A:AB$ PumpAll | Cost$ 2 G G G | ValidCards$ Creature.YouCtrl | NumAtt$ +3 | NumD
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kamahl_fist_of_krosa.jpg
 Oracle:{G}: Target land becomes a 1/1 creature until end of turn. It's still a land.\n{2}{G}{G}{G}: Creatures you control get +3/+3 and gain trample until end of turn.
-SetInfo:ONS Rare
-SetInfo:ARC Rare

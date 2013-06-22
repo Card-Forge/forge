@@ -10,4 +10,3 @@ SVar:Maxplayer:PlayerCountPlayers$Amount
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kaboom!.jpg
 Oracle:Choose any number of target players. For each of those players, reveal cards from the top of your library until you reveal a nonland card. Kaboom deals damage equal to that card's converted mana cost to that player, then you put the revealed cards on the bottom of your library in any order.
-SetInfo:ONS Rare

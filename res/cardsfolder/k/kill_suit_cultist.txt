@@ -12,4 +12,3 @@ SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kill_suit_cultist.jpg
 Oracle:Kill-Suit Cultist attacks each turn if able.\n{B}, Sacrifice Kill-Suit Cultist: The next time damage would be dealt to target creature this turn, destroy that creature instead.
-SetInfo:DIS Common

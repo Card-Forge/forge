@@ -7,4 +7,3 @@ SVar:TrigPump:DB$ Pump | Cost$ 0 | KW$ HIDDEN CARDNAME assigns no combat damage 
 SVar:DBLose:DB$ LoseLife | Defined$ DefendingPlayer | LifeAmount$ 2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/keeper_of_tresserhorn.jpg
 Oracle:Whenever Keeper of Tresserhorn attacks and isn't blocked, it assigns no combat damage this turn and defending player loses 2 life.
-SetInfo:ALL Rare

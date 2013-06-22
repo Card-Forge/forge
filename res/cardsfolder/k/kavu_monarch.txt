@@ -9,4 +9,3 @@ SVar:PlayMain1:TRUE
 SVar:BuffedBy:Kavu
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kavu_monarch.jpg
 Oracle:Kavu creatures have trample.\nWhenever another Kavu enters the battlefield, put a +1/+1 counter on Kavu Monarch.
-SetInfo:INV Rare

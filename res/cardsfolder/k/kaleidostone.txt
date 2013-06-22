@@ -7,4 +7,3 @@ A:AB$ Mana | Cost$ 5 T Sac<1/CARDNAME> | Produced$ W U B R G | SpellDescription$
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kaleidostone.jpg
 Oracle:When Kaleidostone enters the battlefield, draw a card.\n{5}, {T}, Sacrifice Kaleidostone: Add {W}{U}{B}{R}{G} to your mana pool.
-SetInfo:CFX Common

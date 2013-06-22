@@ -7,4 +7,3 @@ SVar:TrigMana:AB$ ManaReflected | Cost$ 0 | ColorOrType$ Type | Valid$ Defined.T
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/keeper_of_progenitus.jpg
 Oracle:Whenever a player taps a Mountain, Forest, or Plains for mana, that player adds one mana to his or her mana pool of any type that land produced.
-SetInfo:ALA Rare

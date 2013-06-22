@@ -6,4 +6,3 @@ A:AB$ ChangeZone | Cost$ Sac<1/CARDNAME> | ValidTgts$ Creature.YouCtrl | TgtProm
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kami_of_twisted_reflection.jpg
 Oracle:Sacrifice Kami of Twisted Reflection: Return target creature you control to its owner's hand.
-SetInfo:CHK Common

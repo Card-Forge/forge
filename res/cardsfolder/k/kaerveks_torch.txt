@@ -6,4 +6,3 @@ S:Mode$ RaiseCost | ValidSpellTarget$ Card.Self | Activator$ Player | Type$ Spel
 SVar:X:Count$xPaid
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kaerveks_torch.jpg
 Oracle:As long as Kaervek's Torch is on the stack, spells that target it cost {2} more to cast.\nKaervek's Torch deals X damage to target creature or player.
-SetInfo:MIR Common

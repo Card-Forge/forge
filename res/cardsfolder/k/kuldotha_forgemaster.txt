@@ -6,4 +6,3 @@ A:AB$ ChangeZone | Cost$ T Sac<3/Artifact> | Origin$ Library | Destination$ Batt
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kuldotha_forgemaster.jpg
 Oracle:{T}, Sacrifice three artifacts: Search your library for an artifact card and put it onto the battlefield. Then shuffle your library.
-SetInfo:SOM Rare

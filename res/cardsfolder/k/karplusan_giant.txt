@@ -6,4 +6,3 @@ A:AB$ Pump | Cost$ tapXType<1/Land.Snow/snow land> | NumAtt$ +1 | NumDef$ +1 | C
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/karplusan_giant.jpg
 Oracle:Tap an untapped snow land you control: Karplusan Giant gets +1/+1 until end of turn.
-SetInfo:ICE Uncommon

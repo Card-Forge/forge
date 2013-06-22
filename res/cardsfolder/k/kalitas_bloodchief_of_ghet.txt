@@ -9,4 +9,3 @@ SVar:dX:Targeted$CardPower
 SVar:dY:Targeted$CardToughness
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kalitas_bloodchief_of_ghet.jpg
 Oracle:{B}{B}{B}, {T}: Destroy target creature. If that creature dies this way, put a black Vampire creature token onto the battlefield. Its power is equal to that creature's power and its toughness is equal to that creature's toughness.
-SetInfo:ZEN Mythic

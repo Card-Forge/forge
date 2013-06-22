@@ -6,4 +6,3 @@ A:AB$ Destroy | Cost$ Sac<1/CARDNAME> | ValidTgts$ Enchantment | TgtPrompt$ Sele
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kami_of_ancient_law.jpg
 Oracle:Sacrifice Kami of Ancient Law: Destroy target enchantment.
-SetInfo:CHK Common

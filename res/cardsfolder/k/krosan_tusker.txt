@@ -7,7 +7,3 @@ T:Mode$ Cycled | ValidCard$ Card.Self | Execute$ TrigChangeZone | OptionalDecide
 SVar:TrigChangeZone:AB$ChangeZone | Cost$ 0 | Origin$ Library | Destination$ Hand | ChangeType$ Land.Basic | ChangeNum$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/krosan_tusker.jpg
 Oracle:Cycling {2}{G} ({2}{G}, Discard this card: Draw a card.)\nWhen you cycle Krosan Tusker, you may search your library for a basic land card, reveal that card, put it into your hand, then shuffle your library.
-SetInfo:ONS Common
-SetInfo:ARC Common
-SetInfo:COM Common
-SetInfo:DDD Common

@@ -7,4 +7,3 @@ SVar:TrigToken:AB$ Token | Cost$ 0 | TokenImage$ G X X Ooze | TokenAmount$ 1 | T
 SVar:X:TriggeredDevoured$CardPower
 SVar:Picture:http://www.cardforge.org/fpics/vgd-lq/kresh_the_bloodbraided_avatar.jpg
 Oracle:Hand +1, life -3\nWhenever a creature you control is devoured, put an X/X green Ooze creature token onto the battlefield, where X is the devoured creature's power.
-SetInfo:VAN Special

@@ -7,4 +7,3 @@ K:Bushido 5
 K:Indestructible
 SVar:Picture:http://www.wizards.com/global/images/magic/general/konda_lord_of_eiganjo.jpg
 Oracle:Vigilance (Attacking doesn't cause this creature to tap.)\nBushido 5 (When this blocks or becomes blocked, it gets +5/+5 until end of turn.)\nKonda, Lord of Eiganjo is indestructible.
-SetInfo:CHK Rare

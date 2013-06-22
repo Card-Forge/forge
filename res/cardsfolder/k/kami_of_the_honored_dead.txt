@@ -10,4 +10,3 @@ SVar:X:TriggerCount$DamageAmount
 SVar:HasCombatEffect:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kami_of_the_honored_dead.jpg
 Oracle:Flying\nWhenever Kami of the Honored Dead is dealt damage, you gain that much life.\nSoulshift 6 (When this creature dies, you may return target Spirit card with converted mana cost 6 or less from your graveyard to your hand.)
-SetInfo:BOK Uncommon

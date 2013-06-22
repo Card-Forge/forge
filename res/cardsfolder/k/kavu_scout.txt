@@ -8,4 +8,3 @@ SVar:BuffedBy:Plains,Island,Swamp,Mountain,Forest
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kavu_scout.jpg
 Oracle:Domain - Kavu Scout gets +1/+0 for each basic land type among lands you control.
-SetInfo:INV Common

@@ -7,5 +7,3 @@ SVar:TrigPump:AB$ Pump | Cost$ 0 | Defined$ Self | NumAtt$ X | NumDef$ X | Refer
 SVar:X:Count$Valid Creature.untapped+YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/knotvine_paladin.jpg
 Oracle:Whenever Knotvine Paladin attacks, it gets +1/+1 until end of turn for each untapped creature you control.
-SetInfo:ARB Rare
-SetInfo:DDG Rare

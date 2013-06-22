@@ -8,4 +8,3 @@ SVar:X:Count$CardCounters.AGE
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kjeldoran_javelineer.jpg
 Oracle:Cumulative upkeep {1} (At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.)\n{T}: Kjeldoran Javelineer deals damage equal to the number of age counters on it to target attacking or blocking creature.
-SetInfo:CSP Common

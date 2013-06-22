@@ -6,4 +6,3 @@ T:Mode$ Phase | Phase$ EndCombat | TriggerZones$ Battlefield | ValidPlayer$ Play
 SVar:TrigDestroy:AB$ DestroyAll | Cost$ 0 | ValidCards$ Creature.blockingSource,Creature.blockedBySource
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kjeldoran_frostbeast.jpg
 Oracle:At end of combat, destroy all creatures blocking or blocked by Kjeldoran Frostbeast.
-SetInfo:ICE Uncommon

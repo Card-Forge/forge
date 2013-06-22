@@ -7,4 +7,3 @@ SVar:X:Targeted$CardPower
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kiku_nights_flower.jpg
 Oracle:{2}{B}{B}, {T}: Target creature deals damage to itself equal to its power.
-SetInfo:CHK Rare

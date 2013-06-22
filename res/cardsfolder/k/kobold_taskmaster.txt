@@ -6,5 +6,3 @@ S:Mode$ Continuous | Affected$ Creature.Kobold+Other+YouCtrl | AddPower$ 1 | Des
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kobold_taskmaster.jpg
 Oracle:Other Kobold creatures you control get +1/+0.
-SetInfo:LEG Uncommon
-SetInfo:TSB Special

@@ -9,5 +9,3 @@ SVar:TrigKicker:AB$Pump | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select targ
 SVar:PlayMain1:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/Kor_Aeronaut.jpg
 Oracle:Kicker {1}{W} (You may pay an additional {1}{W} as you cast this spell.)\nFlying\nWhen Kor Aeronaut enters the battlefield, if it was kicked, target creature gains flying until end of turn.
-SetInfo:ZEN Uncommon
-SetInfo:DDF Uncommon

@@ -6,4 +6,3 @@ A:AB$ Mana | Cost$ 1 T | Produced$ W R G | SpellDescription$ Add W R G to your m
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/knotvine_mystic.jpg
 Oracle:{1}, {T}: Add {R}{G}{W} to your mana pool.
-SetInfo:CFX Uncommon

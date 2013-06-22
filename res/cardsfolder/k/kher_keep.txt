@@ -5,4 +5,3 @@ A:AB$ Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add 1 to your mana pool.
 A:AB$ Token | Cost$ 1 R T | TokenAmount$ 1 | TokenName$ Kobolds of Kher Keep | TokenTypes$ Creature,Kobold | TokenOwner$ You | TokenColors$ Red | TokenPower$ 0 | TokenToughness$ 1 | SpellDescription$ Put a 0/1 red Kobold creature token named Kobolds of Kher Keep onto the battlefield.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kher_keep.jpg
 Oracle:{T}: Add {1} to your mana pool.\n{1}{R}, {T}: Put a 0/1 red Kobold creature token named Kobolds of Kher Keep onto the battlefield.
-SetInfo:TSP Rare

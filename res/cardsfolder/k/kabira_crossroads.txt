@@ -7,5 +7,3 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigGainLife:AB$GainLife | Cost$ 0 | LifeAmount$ 2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kabira_crossroads.jpg
 Oracle:Kabira Crossroads enters the battlefield tapped.\nWhen Kabira Crossroads enters the battlefield, you gain 2 life.\n{T}: Add {W} to your mana pool.
-SetInfo:ZEN Common
-SetInfo:DDF Common

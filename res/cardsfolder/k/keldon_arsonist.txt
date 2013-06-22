@@ -5,4 +5,3 @@ PT:1/1
 A:AB$ Destroy | Cost$ T Sac<2/Land> | ValidTgts$ Land | SpellDescription$ Destroy target land.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/keldon_arsonist.jpg
 Oracle:{1}, Sacrifice two lands: Destroy target land.
-SetInfo:PCY Uncommon

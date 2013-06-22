@@ -8,4 +8,3 @@ SVar:X:Count$TypeInYourYard.Creature
 SVar:HasAttackEffect:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kessig_cagebreakers.jpg
 Oracle:Whenever Kessig Cagebreakers attacks, put a 2/2 green Wolf creature token onto the battlefield tapped and attacking for each creature card in your graveyard.
-SetInfo:ISD Rare

@@ -7,4 +7,3 @@ SVar:DBDamage:DB$ DealDamage | Defined$ Player.IsRemembered | NumDmg$ X | Refere
 SVar:X:PlayerCountRemembered$CardsInHand
 SVar:Picture:http://www.cardforge.org/fpics/lq_schemes/know_naught_but_fire.jpg
 Oracle:When you set this scheme in motion, it deals damage to each opponent equal to the number of cards in that player's hand.
-SetInfo:ARC Common

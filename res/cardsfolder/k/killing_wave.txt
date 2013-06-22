@@ -7,4 +7,3 @@ SVar:X:Count$xPaid
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/killing_wave.jpg
 Oracle:For each creature, its controller sacrifices it unless he or she pays X life.
-SetInfo:AVR Rare

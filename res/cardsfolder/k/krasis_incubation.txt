@@ -11,4 +11,3 @@ A:AB$ PutCounter | Cost$ 1 G U Return<1/CARDNAME> | Defined$ Remembered | Counte
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/krasis_incubation.jpg
 Oracle:Enchant creature\nEnchanted creature can't attack or block, and its activated abilities can't be activated.\n{1}{G}{U}, Return Krasis Incubation to its owner's hand: Put two +1/+1 counters on enchanted creature.
-SetInfo:DGM Uncommon

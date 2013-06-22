@@ -5,7 +5,3 @@ S:Mode$ ETBTapped | ValidCard$ Artifact.YouDontCtrl,Creature.YouDontCtrl,Land.Yo
 SVar:NonStackingEffect:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kismet.jpg
 Oracle:Artifacts, creatures, and lands played by your opponents enter the battlefield tapped.
-SetInfo:5ED Uncommon
-SetInfo:LEG Uncommon
-SetInfo:6ED Uncommon
-SetInfo:4ED Uncommon

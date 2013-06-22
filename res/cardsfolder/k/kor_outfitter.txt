@@ -8,4 +8,3 @@ SVar:KorOutfitting:DB$ Attach | Object$ ParentTarget | ValidTgts$ Creature.YouCt
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kor_outfitter.jpg
 Oracle:When Kor Outfitter enters the battlefield, you may attach target Equipment you control to target creature you control.
-SetInfo:ZEN Common

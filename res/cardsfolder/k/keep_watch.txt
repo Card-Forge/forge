@@ -6,5 +6,3 @@ SVar:X:Count$Valid Creature.attacking
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/keep_watch.jpg
 Oracle:Draw a card for each attacking creature.
-SetInfo:HOP Common
-SetInfo:JUD Common

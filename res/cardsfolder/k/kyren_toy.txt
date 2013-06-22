@@ -8,4 +8,3 @@ SVar:X:XChoice
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kyren_toy.jpg
 Oracle:{1}, {T}: Put a charge counter on Kyren Toy.\n{T}, Remove X charge counters from Kyren Toy: Add {X}{1} to your mana pool.
-SetInfo:MMQ Rare

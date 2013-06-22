@@ -6,4 +6,3 @@ T:Mode$ Attacks | ValidCard$ Creature.OppCtrl | Attacked$ You,Planeswalker.YouCt
 SVar:TrigToken:AB$ Token | Cost$ 0 | TokenOwner$ You | TokenAmount$ 1 | TokenName$ Ogre | TokenColors$ Red | TokenTypes$ Creature,Ogre | TokenPower$ 3 | TokenToughness$ 3 | UnlessCost$ 3 | UnlessPayer$ TriggeredAttackerController
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kazuul_tyrant_of_the_cliffs.jpg
 Oracle:Whenever a creature an opponent controls attacks, if you're the defending player, put a 3/3 red Ogre creature token onto the battlefield unless that creature's controller pays {3}.
-SetInfo:WWK Rare

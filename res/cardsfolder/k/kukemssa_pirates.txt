@@ -7,4 +7,3 @@ SVar:TrigGainControl:AB$ GainControl | Cost$ 0 | ValidTgts$ Artifact.DefenderCtr
 SVar:DBNoCombatDamage:DB$ Pump | Defined$ Self | KW$ HIDDEN CARDNAME assigns no combat damage
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kukemssa_pirates.jpg
 Oracle:Whenever Kukemssa Pirates attacks and isn't blocked, you may gain control of target artifact defending player controls. If you do, Kukemssa Pirates assigns no combat damage this turn.
-SetInfo:MIR Rare

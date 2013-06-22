@@ -6,4 +6,3 @@ A:AB$ PreventDamageAll | Cost$ T | ValidCards$ Creature | ValidPlayers$ Player |
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kitsune_palliator.jpg
 Oracle:{T}: Prevent the next 1 damage that would be dealt to each creature and each player this turn.
-SetInfo:BOK Uncommon

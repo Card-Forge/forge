@@ -7,4 +7,3 @@ SVar:DBChangeZone:DB$ ChangeZone | TargetMin$ 0 | TargetMax$ 2 | TargetsWithDefi
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/krosan_reclamation.jpg
 Oracle:Target player shuffles up to two target cards from his or her graveyard into his or her library.\nFlashback {1}{G} (You may cast this card from your graveyard for its flashback cost. Then exile it.)
-SetInfo:JUD Uncommon

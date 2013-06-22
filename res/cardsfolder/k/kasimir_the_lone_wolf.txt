@@ -4,4 +4,3 @@ Types:Legendary Creature Human Warrior
 PT:5/3
 SVar:Picture:http://resources.wizards.com/magic/cards/le/en-us/card1663.jpg
 Oracle:
-SetInfo:LEG Uncommon

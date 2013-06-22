@@ -5,5 +5,3 @@ A:SP$ ChangeZone | Cost$ 2 G | Origin$ Library | Destination$ Battlefield | Tapp
 SVar:DBChangeZone:DB$ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Land.Basic | ChangeNum$ 1
 SVar:Picture:http://resources.wizards.com/magic/cards/chk/en-us/card50299.jpg
 Oracle:Search your library for two basic land cards, reveal those cards, and put one onto the battlefield tapped and the other into your hand. Then shuffle your library.
-SetInfo:CHK Common
-SetInfo:COM Common

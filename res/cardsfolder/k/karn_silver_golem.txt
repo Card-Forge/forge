@@ -10,5 +10,3 @@ SVar:X:Targeted$CardManaCost
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/karn_silver_golem.jpg
 Oracle:Whenever Karn, Silver Golem blocks or becomes blocked, it gets -4/+4 until end of turn.\n{1}: Target noncreature artifact becomes an artifact creature with power and toughness each equal to its converted mana cost until end of turn.
-SetInfo:V10 Mythic
-SetInfo:USG Rare

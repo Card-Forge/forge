@@ -6,8 +6,3 @@ SVar:NonStackingEffect:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kormus_bell.jpg
 Oracle:All Swamps are 1/1 black creatures that are still lands.
-SetInfo:2ED Rare
-SetInfo:LEB Rare
-SetInfo:LEA Rare
-SetInfo:4ED Rare
-SetInfo:3ED Rare

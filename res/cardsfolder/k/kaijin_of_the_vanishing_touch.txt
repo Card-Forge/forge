@@ -9,4 +9,3 @@ SVar:TrigBounce:AB$ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Han
 SVar:HasCombatEffect:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kaijin_of_the_vanishing_touch.jpg
 Oracle:Defender (This creature can't attack.)\nWhenever Kaijin of the Vanishing Touch blocks a creature, return that creature to its owner's hand at end of combat. (Return it only if it's on the battlefield.)
-SetInfo:BOK Uncommon

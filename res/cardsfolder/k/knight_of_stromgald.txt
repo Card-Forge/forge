@@ -7,5 +7,3 @@ A:AB$ Pump | Cost$ B | KW$ First Strike | SpellDescription$ CARDNAME gains first
 A:AB$ Pump | Cost$ B B | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/knight_of_stromgald.jpg
 Oracle:Protection from white\n{B}: Knight of Stromgald gains first strike until end of turn.\n{B}{B}: Knight of Stromgald gets +1/+0 until end of turn.
-SetInfo:ICE Uncommon
-SetInfo:5ED Uncommon

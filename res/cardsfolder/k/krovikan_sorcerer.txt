@@ -9,5 +9,3 @@ SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/krovikan_sorcerer.jpg
 Oracle:{T}, Discard a nonblack card: Draw a card.\n{T}, Discard a black card: Draw two cards, then discard one of them.
-SetInfo:ICE Common
-SetInfo:5ED Common

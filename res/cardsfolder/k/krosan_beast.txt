@@ -5,4 +5,3 @@ PT:1/1
 S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 7 | AddToughness$ 7 | Condition$ Threshold | Description$ Threshold - CARDNAME gets +7/+7 as long as seven or more cards are in your graveyard.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/krosan_beast.jpg
 Oracle:Threshold - Krosan Beast gets +7/+7 as long as seven or more cards are in your graveyard.
-SetInfo:ODY Rare

@@ -5,4 +5,3 @@ A:SP$ DealDamage | Cost$ 5 R R | NumDmg$ 4 | ValidTgts$ Creature | TgtPrompt$ Se
 SVar:DBDamage:DB$ DealDamage | NumDmg$ 4 | Condition$ Threshold | Defined$ TargetedController
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kamahls_sledge.jpg
 Oracle:Kamahl's Sledge deals 4 damage to target creature.\nThreshold - If seven or more cards are in your graveyard, instead Kamahl's Sledge deals 4 damage to that creature and 4 damage to that creature's controller.
-SetInfo:TOR Common
