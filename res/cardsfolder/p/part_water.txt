@@ -9,4 +9,3 @@ SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/part_water.jpg
 Oracle:X target creatures gain islandwalk until end of turn.
-SetInfo:LEG Uncommon

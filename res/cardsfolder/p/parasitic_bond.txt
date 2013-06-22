@@ -7,4 +7,3 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ EnchantedController | TriggerZones$
 SVar:TrigDamage:AB$ DealDamage | Cost$ 0 | Defined$ EnchantedController | NumDmg$ 2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/parasitic_bond.jpg
 Oracle:Enchant creature\nAt the beginning of the upkeep of enchanted creature's controller, Parasitic Bond deals 2 damage to that player.
-SetInfo:USG Uncommon

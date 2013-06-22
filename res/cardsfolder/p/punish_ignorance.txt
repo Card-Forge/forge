@@ -6,4 +6,3 @@ SVar:DBDrain:DB$LoseLife | Defined$ TargetedController | LifeAmount$ 3 | SubAbil
 SVar:DBGain:DB$GainLife | Defined$ You | LifeAmount$ 3
 SVar:Picture:http://www.wizards.com/global/images/magic/general/punish_ignorance.jpg
 Oracle:Counter target spell. Its controller loses 3 life and you gain 3 life.
-SetInfo:ALA Rare

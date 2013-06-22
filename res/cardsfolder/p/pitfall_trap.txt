@@ -5,4 +5,3 @@ A:SP$ Destroy | Cost$ W | ValidTgts$ Creature.attacking+withoutFlying | IsPresen
 A:SP$ Destroy | Cost$ 2 W | ValidTgts$ Creature.attacking+withoutFlying | TgtPrompt$ Select target attacking creature without flying | SpellDescription$ Destroy target attacking creature without flying.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pitfall_trap.jpg
 Oracle:If exactly one creature is attacking, you may pay {W} rather than pay Pitfall Trap's mana cost.\nDestroy target attacking creature without flying.
-SetInfo:ZEN Uncommon

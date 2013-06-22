@@ -8,4 +8,3 @@ A:AB$ Draw | Cost$ 2 Sac<1/CARDNAME> | NumCards$ 1 | SpellDescription$ Draw a ca
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/plague_dogs.jpg
 Oracle:When Plague Dogs dies, all creatures get -1/-1 until end of turn.\n{2}, Sacrifice Plague Dogs: Draw a card.
-SetInfo:UDS Uncommon

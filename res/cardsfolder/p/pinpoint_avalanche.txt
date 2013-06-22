@@ -4,4 +4,3 @@ Types:Instant
 A:SP$ DealDamage | Cost$ 3 R R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 4 | NoPrevention$ True | SpellDescription$ CARDNAME deals 4 damage to target creature. The damage can't be prevented.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pinpoint_avalanche.jpg
 Oracle:Pinpoint Avalanche deals 4 damage to target creature. The damage can't be prevented.
-SetInfo:ONS Common

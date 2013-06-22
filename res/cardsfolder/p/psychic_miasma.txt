@@ -8,4 +8,3 @@ SVar:DBChangeZone:DB$ ChangeZone | Defined$ Self | Origin$ Stack | Destination$ 
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | SubAbility$ DBDiscard
 SVar:Picture:http://www.wizards.com/global/images/magic/general/psychic_miasma.jpg
 Oracle:Target player discards a card. If a land card is discarded this way, return Psychic Miasma to its owner's hand.
-SetInfo:SOM Common

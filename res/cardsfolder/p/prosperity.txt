@@ -6,6 +6,3 @@ SVar:X:Count$xPaid
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/prosperity.jpg
 Oracle:Each player draws X cards.
-SetInfo:VIS Uncommon
-SetInfo:POR Rare
-SetInfo:6ED Uncommon

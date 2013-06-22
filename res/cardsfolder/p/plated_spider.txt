@@ -5,4 +5,3 @@ PT:4/4
 K:Reach
 SVar:Picture:http://resources.wizards.com/magic/cards/cg/en-us/card19239.jpg
 Oracle:Reach (This creature can block creatures with flying.)
-SetInfo:UDS Common

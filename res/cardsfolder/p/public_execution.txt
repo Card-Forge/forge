@@ -7,4 +7,3 @@ SVar:WeakenOther:DB$ PumpAll | ValidCards$ Creature.RememberedPlayerCtrl+IsNotRe
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/public_execution.jpg
 Oracle:Destroy target creature an opponent controls. Each other creature that player controls gets -2/-0 until end of turn.
-SetInfo:M13 Uncommon

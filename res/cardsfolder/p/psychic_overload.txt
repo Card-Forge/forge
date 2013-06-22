@@ -10,4 +10,3 @@ SVar:Untap:AB$Untap | Cost$ Discard<2/Artifact> | Defined$ Self | SpellDescripti
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/psychic_overload.jpg
 Oracle:Enchant permanent\nWhen Psychic Overload enters the battlefield, tap enchanted permanent.\nEnchanted permanent doesn't untap during its controller's untap step.\nEnchanted permanent has "Discard two artifact cards: Untap this permanent."
-SetInfo:DST Uncommon

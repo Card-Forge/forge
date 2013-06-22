@@ -8,4 +8,3 @@ SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Defined$ Self
 SVar:Targeting:Dies
 SVar:Picture:http://www.wizards.com/global/images/magic/general/phantasmal_dragon.jpg
 Oracle:Flying\nWhen Phantasmal Dragon becomes the target of a spell or ability, sacrifice it.
-SetInfo:M12 Uncommon

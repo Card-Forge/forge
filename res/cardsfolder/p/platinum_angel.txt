@@ -7,7 +7,3 @@ S:Mode$ Continuous | Affected$ You | AddKeyword$ You can't lose the game. | Desc
 S:Mode$ Continuous | Affected$ Opponent | AddKeyword$ You can't win the game. | Description$ Opponents can't win the game.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/platinum_angel.jpg
 Oracle:Flying\nYou can't lose the game and your opponents can't win the game.
-SetInfo:MRD Rare
-SetInfo:M10 Mythic
-SetInfo:M11 Mythic
-SetInfo:10E Rare

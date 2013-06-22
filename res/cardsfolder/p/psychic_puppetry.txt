@@ -6,4 +6,3 @@ K:Splice onto Arcane U
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/psychic_puppetry.jpg
 Oracle:You may tap or untap target permanent.\nSplice onto Arcane {U} (As you cast an Arcane spell, you may reveal this card from your hand and pay its splice cost. If you do, add this card's effects to that spell.)
-SetInfo:CHK Common

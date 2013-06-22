@@ -6,4 +6,3 @@ A:AB$ ChangeZone | Cost$ 5 W | ActivationZone$ Hand | Origin$ Graveyard | Destin
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/proclamation_of_rebirth.jpg
 Oracle:Return up to three target creature cards with converted mana cost 1 or less from your graveyard to the battlefield.\nForecast - {5}{W}, Reveal Proclamation of Rebirth from your hand: Return target creature card with converted mana cost 1 or less from your graveyard to the battlefield. (Activate this ability only during your upkeep and only once each turn.)
-SetInfo:DIS Rare

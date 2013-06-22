@@ -7,4 +7,3 @@ A:AB$ Regenerate | Cost$ Sac<1/CARDNAME> | ValidTgts$ Artifact | TgtPrompt$ Sele
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pteron_ghost.jpg
 Oracle:Flying\nSacrifice Pteron Ghost: Regenerate target artifact.
-SetInfo:DST Common

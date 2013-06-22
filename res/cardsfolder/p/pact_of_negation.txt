@@ -8,4 +8,3 @@ SVar:TrigLoseGame:AB$LosesGame | Cost$ 0 | UnlessCost$ 3 U U | UnlessPayer$ You 
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pact_of_negation.jpg
 Oracle:Pact of Negation is blue.\nCounter target spell.\nAt the beginning of your next upkeep, pay {3}{U}{U}. If you don't, you lose the game.
-SetInfo:FUT Rare

@@ -8,4 +8,3 @@ SVar:TrigGainLife:AB$ GainLife | Cost$ 0 | LifeAmount$ 1
 A:AB$ Mana | Cost$ T | Produced$ Chosen | SpellDescription$ Add one mana of the chosen color to your mana pool.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/paradise_plume.jpg
 Oracle:As Paradise Plume enters the battlefield, choose a color.\nWhenever a player casts a spell of the chosen color, you may gain 1 life.\n{T}: Add one mana of the chosen color to your mana pool.
-SetInfo:TSP Uncommon

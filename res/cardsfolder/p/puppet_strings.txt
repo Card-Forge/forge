@@ -5,5 +5,3 @@ A:AB$ TapOrUntap | Cost$ 2 T | ValidTgts$ Creature | TgtPrompt$ Select target cr
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/puppet_strings.jpg
 Oracle:{2}, {T}: You may tap or untap target creature.
-SetInfo:TMP Uncommon
-SetInfo:DDE Uncommon

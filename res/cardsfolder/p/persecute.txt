@@ -5,7 +5,3 @@ A:SP$ ChooseColor | Cost$ 2 B B | Defined$ You | AILogic$ MostProminentInHumanDe
 SVar:DBRevealDiscard:DB$ Discard | Mode$ RevealDiscardAll | DiscardValid$ Card.ChosenColor | ValidTgts$ Player | TgtPrompt$ Select target player
 SVar:Picture:http://www.wizards.com/global/images/magic/general/persecute.jpg
 Oracle:Choose a color. Target player reveals his or her hand and discards all cards of that color.
-SetInfo:8ED Rare
-SetInfo:7ED Rare
-SetInfo:9ED Rare
-SetInfo:USG Rare

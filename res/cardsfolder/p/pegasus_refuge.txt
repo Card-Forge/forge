@@ -5,4 +5,3 @@ A:AB$ Token | Cost$ 2 Discard<1/Card> | TokenImage$ W 1 1 Pegasus Flying | Token
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pegasus_refuge.jpg
 Oracle:{2}, Discard a card: Put a 1/1 white Pegasus creature token with flying onto the battlefield.
-SetInfo:TMP Rare

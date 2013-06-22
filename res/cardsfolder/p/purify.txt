@@ -4,5 +4,3 @@ Types:Sorcery
 A:SP$ DestroyAll | Cost$ 3 W W | ValidCards$ Artifact,Enchantment | SpellDescription$ Destroy all artifacts and enchantments.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/purify.jpg
 Oracle:Destroy all artifacts and enchantments.
-SetInfo:ULG Rare
-SetInfo:7ED Rare

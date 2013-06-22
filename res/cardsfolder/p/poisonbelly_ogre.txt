@@ -6,4 +6,3 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creatu
 SVar:TrigLoseLife:AB$LoseLife | Cost$ 0 | Defined$ TriggeredCardController | LifeAmount$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/poisonbelly_ogre.jpg
 Oracle:Whenever another creature enters the battlefield, its controller loses 1 life.
-SetInfo:GPT Common

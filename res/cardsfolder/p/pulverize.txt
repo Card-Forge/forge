@@ -5,4 +5,3 @@ A:SP$ DestroyAll | Cost$ 4 R R | ValidCards$ Artifact | SpellDescription$ Destro
 SVar:AltCost:Cost$ Sac<2/Mountain> | Description$ You may sacrifice two Mountains rather than pay Pulverize's mana cost.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pulverize.jpg
 Oracle:You may sacrifice two Mountains rather than pay Pulverize's mana cost.\nDestroy all artifacts.
-SetInfo:MMQ Rare

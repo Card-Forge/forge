@@ -5,7 +5,3 @@ A:AB$ Draw | Cost$ 2 T Sac<1/Creature> | NumCards$ 1 | SpellDescription$ Draw a 
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/phyrexian_vault.jpg
 Oracle:{2}, {T}, Sacrifice a creature: Draw a card.
-SetInfo:MIR Uncommon
-SetInfo:6ED Uncommon
-SetInfo:DDE Uncommon
-SetInfo:10E Uncommon

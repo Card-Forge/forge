@@ -6,4 +6,3 @@ SVar:DBToken:DB$Token | TokenAmount$ 1 | TokenName$ Ape | TokenTypes$ Creature,A
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pongify.jpg
 Oracle:Destroy target creature. It can't be regenerated. That creature's controller puts a 3/3 green Ape creature token onto the battlefield.
-SetInfo:PLC Uncommon

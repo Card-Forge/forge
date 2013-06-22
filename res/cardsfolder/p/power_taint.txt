@@ -9,4 +9,3 @@ K:Cycling:2
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/power_taint.jpg
 Oracle:Enchant enchantment\nAt the beginning of the upkeep of enchanted enchantment's controller, that player loses 2 life unless he or she pays {2}.\nCycling {2} ({2}, Discard this card: Draw a card.)
-SetInfo:USG Common

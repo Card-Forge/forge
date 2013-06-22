@@ -6,4 +6,3 @@ SVar:TrigGain:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ X | References$
 SVar:X:TriggeredCard$CardToughness
 SVar:Picture:http://www.wizards.com/global/images/magic/general/proper_burial.jpg
 Oracle:Whenever a creature you control dies, you gain life equal to that creature's toughness.
-SetInfo:DIS Rare

@@ -7,4 +7,3 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | E
 SVar:TrigSac:AB$ Sacrifice | Cost$ 0 | Defined$ You | SacValid$ Homunculus
 SVar:Picture:http://www.wizards.com/global/images/magic/general/puppet_conjurer.jpg
 Oracle:{U}, {T}: Put a 0/1 blue Homunculus artifact creature token onto the battlefield.\nAt the beginning of your upkeep, sacrifice a Homunculus.
-SetInfo:ALA Uncommon

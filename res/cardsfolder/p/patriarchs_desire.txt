@@ -9,4 +9,3 @@ SVar:Y:Count$Threshold.4.2/Negative
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/patriarchs_desire.jpg
 Oracle:Enchant creature\nEnchanted creature gets +2/-2.\nThreshold - Enchanted creature gets an additional +2/-2 as long as seven or more cards are in your graveyard.
-SetInfo:ODY Common

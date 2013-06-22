@@ -7,4 +7,3 @@ K:Soulshift 6
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pus_kami.jpg
 Oracle:{B}, Sacrifice Pus Kami: Destroy target nonblack creature.\nSoulshift 6 (When this creature dies, you may return target Spirit card with converted mana cost 6 or less from your graveyard to your hand.)
-SetInfo:BOK Uncommon

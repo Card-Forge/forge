@@ -9,4 +9,3 @@ SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/portcullis.jpg
 Oracle:Whenever a creature enters the battlefield, if there are two or more other creatures on the battlefield, exile that creature. Return that card to the battlefield under its owner's control when Portcullis leaves the battlefield.
-SetInfo:STH Rare

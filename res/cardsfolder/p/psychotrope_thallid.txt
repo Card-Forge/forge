@@ -8,4 +8,3 @@ A:AB$ Token | Cost$ SubCounter<3/SPORE> | TokenAmount$ 1 | TokenName$ Saproling 
 A:AB$ Draw | Cost$ 1 Sac<1/Saproling> | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/psychotrope_thallid.jpg
 Oracle:At the beginning of your upkeep, put a spore counter on Psychotrope Thallid.\nRemove three spore counters from Psychotrope Thallid: Put a 1/1 green Saproling creature token onto the battlefield.\n{1}, Sacrifice a Saproling: Draw a card.
-SetInfo:PLC Uncommon

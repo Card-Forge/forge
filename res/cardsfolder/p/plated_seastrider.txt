@@ -4,4 +4,3 @@ Types:Creature Beast
 PT:1/4
 SVar:Picture:http://www.wizards.com/global/images/magic/general/plated_seastrider.jpg
 Oracle:
-SetInfo:SOM Common

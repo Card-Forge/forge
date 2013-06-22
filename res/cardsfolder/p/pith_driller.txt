@@ -6,4 +6,3 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ M1M1 | CounterNum$ 1 | IsCurse$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pith_driller.jpg
 Oracle:({B/P} can be paid with either {B} or 2 life.)\nWhen Pith Driller enters the battlefield, put a -1/-1 counter on target creature.
-SetInfo:NPH Common

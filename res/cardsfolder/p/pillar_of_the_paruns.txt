@@ -5,4 +5,3 @@ A:AB$ Mana | Cost$ T | Produced$ Any | RestrictValid$ Card.MultiColor | SpellDes
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pillar_of_the_paruns.jpg
 Oracle:{T}: Add one mana of any color to your mana pool. Spend this mana only to cast a multicolored spell.
-SetInfo:DIS Rare

@@ -6,4 +6,3 @@ A:AB$ Mana | Cost$ T Sac<1/Creature> | Produced$ B | Amount$ 2 | SpellDescriptio
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/phyrexian_tower.jpg
 Oracle:{T}: Add {1} to your mana pool.\n{T}, Sacrifice a creature: Add {B}{B} to your mana pool.
-SetInfo:USG Rare

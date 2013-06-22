@@ -7,6 +7,3 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Spider | TokenTypes$ Creature,Spider | TokenOwner$ TriggeredCardController | TokenColors$ Black | TokenPower$ 2 | TokenToughness$ 4 | TokenKeywords$ Reach
 SVar:Picture:http://www.wizards.com/global/images/magic/general/penumbra_spider.jpg
 Oracle:Reach\nWhen Penumbra Spider dies, put a 2/4 black Spider creature token with reach onto the battlefield.
-SetInfo:PC2 Common
-SetInfo:COM Common
-SetInfo:TSP Common

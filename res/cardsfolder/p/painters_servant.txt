@@ -7,4 +7,3 @@ SVar:ChooseColor:DB$ ChooseColor | Defined$ You | SpellDescription$ As CARDNAME 
 S:Mode$ Continuous| Affected$ Card | AddColor$ ChosenColor | AffectedZone$ Battlefield,Hand,Library,Graveyard,Exile,Stack | Description$ All cards that aren't on the battlefield, spells, and permanents are the chosen color in addition to their other colors.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/painters_servant.jpg
 Oracle:As Painter's Servant enters the battlefield, choose a color.\nAll cards that aren't on the battlefield, spells, and permanents are the chosen color in addition to their other colors.
-SetInfo:SHM Rare

@@ -5,7 +5,3 @@ A:SP$ ChangeZone | Cost$ W | Origin$ Battlefield | Destination$ Exile | ValidTgt
 SVar:DBChange:DB$ ChangeZone | Optional$ True | Origin$ Library | Destination$ Battlefield | Tapped$ True | ChangeType$ Land.Basic | ChangeNum$ 1 | DefinedPlayer$ TargetedController
 SVar:Picture:http://www.wizards.com/global/images/magic/general/path_to_exile.jpg
 Oracle:Exile target creature. Its controller may search his or her library for a basic land card, put that card onto the battlefield tapped, then shuffle his or her library.
-SetInfo:DDI Uncommon
-SetInfo:ARC Uncommon
-SetInfo:COM Uncommon
-SetInfo:CFX Uncommon

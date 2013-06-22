@@ -6,5 +6,3 @@ K:Haste
 A:AB$ Pump | Cost$ R | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pyre_charger.jpg
 Oracle:Haste\n{R}: Pyre Charger gets +1/+0 until end of turn.
-SetInfo:DD2 Uncommon
-SetInfo:SHM Uncommon

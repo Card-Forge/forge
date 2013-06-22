@@ -6,4 +6,3 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigGainLife:AB$GainLife | Cost$ 0 | LifeAmount$ 3
 SVar:Picture:http://www.wizards.com/global/images/magic/general/peace_strider.jpg
 Oracle:When Peace Strider enters the battlefield, you gain 3 life.
-SetInfo:MBS Uncommon

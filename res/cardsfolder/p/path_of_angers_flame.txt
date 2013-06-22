@@ -4,4 +4,3 @@ Types:Instant Arcane
 A:SP$ PumpAll | Cost$ 2 R | ValidCards$ Creature.YouCtrl | NumAtt$ +2 | SpellDescription$ Creatures you control get +2/+0 until end of turn.
 SVar:Picture:http://resources.wizards.com/magic/cards/sok/en-us/card74179.jpg
 Oracle:Creatures you control get +2/+0 until end of turn.
-SetInfo:SOK Common

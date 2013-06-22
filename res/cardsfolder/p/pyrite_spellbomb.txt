@@ -6,4 +6,3 @@ A:AB$ DealDamage | Cost$ R Sac<1/CARDNAME> | ValidTgts$ Creature,Player | TgtPro
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pyrite_spellbomb.jpg
 Oracle:{R}, Sacrifice Pyrite Spellbomb: Pyrite Spellbomb deals 2 damage to target creature or player.\n{1}, Sacrifice Pyrite Spellbomb: Draw a card.
-SetInfo:MRD Common

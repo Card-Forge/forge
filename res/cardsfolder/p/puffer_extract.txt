@@ -6,4 +6,3 @@ SVar:X:Count$xPaid
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/puffer_extract.jpg
 Oracle:{X}, {T}: Target creature you control gets +X/+X until end of turn. Destroy it at the beginning of the next end step.
-SetInfo:MMQ Uncommon

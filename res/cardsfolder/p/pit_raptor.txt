@@ -7,4 +7,3 @@ K:Flying
 K:First Strike
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pit_raptor.jpg
 Oracle:Flying, first strike\nAt the beginning of your upkeep, sacrifice Pit Raptor unless you pay {2}{B}{B}.
-SetInfo:PCY Uncommon

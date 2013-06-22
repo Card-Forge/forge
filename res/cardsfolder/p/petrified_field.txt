@@ -6,4 +6,3 @@ A:AB$ ChangeZone | Cost$ T Sac<1/CARDNAME> | Origin$ Graveyard | Destination$ Ha
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/petrified_field.jpg
 Oracle:{T}: Add {1} to your mana pool.\n{T}, Sacrifice Petrified Field: Return target land card from your graveyard to your hand.
-SetInfo:ODY Rare

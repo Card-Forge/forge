@@ -5,5 +5,3 @@ A:SP$ PumpAll | Cost$ 2 W | ValidCards$ Creature.blocking | NumDef$ +3 | SpellDe
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/piety.jpg
 Oracle:Blocking creatures get +0/+3 until end of turn.
-SetInfo:4ED Common
-SetInfo:ARN Common x2

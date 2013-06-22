@@ -6,4 +6,3 @@ S:Mode$ Continuous | CheckSVar$ UnlifeCondition | SVarCompare$ LE0 | References$
 SVar:UnlifeCondition:Count$YourLifeTotal
 SVar:Picture:http://www.wizards.com/global/images/magic/general/phyrexian_unlife.jpg
 Oracle:You don't lose the game for having 0 or less life.\nAs long as you have 0 or less life, all damage is dealt to you as though its source had infect. (Damage is dealt to you in the form of poison counters.)
-SetInfo:NPH Rare

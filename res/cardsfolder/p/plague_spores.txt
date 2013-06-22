@@ -5,4 +5,3 @@ A:SP$ Destroy | Cost$ 4 B R | ValidTgts$ Creature.nonBlack | TgtPrompt$ Select n
 SVar:DestroyLand:DB$ Destroy | Cost$ 0 | ValidTgts$ Land | NoRegen$ True | TgtPrompt$ Select target land
 SVar:Picture:http://www.wizards.com/global/images/magic/general/plague_spores.jpg
 Oracle:Destroy target nonblack creature and target land. They can't be regenerated.
-SetInfo:INV Common

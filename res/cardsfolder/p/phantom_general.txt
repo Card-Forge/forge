@@ -5,5 +5,3 @@ PT:2/3
 S:Mode$ Continuous | Affected$ Creature.token+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Creature tokens you control get +1/+1.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/phantom_general.jpg
 Oracle:Creature tokens you control get +1/+1.
-SetInfo:DDK Uncommon
-SetInfo:RTR Uncommon

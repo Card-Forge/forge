@@ -5,12 +5,3 @@ PT:2/2
 K:Unblockable
 SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83200.jpg
 Oracle:Phantom Warrior is unblockable.
-SetInfo:8ED Uncommon
-SetInfo:S99 Rare
-SetInfo:7ED Uncommon
-SetInfo:6ED Uncommon
-SetInfo:WTH Uncommon
-SetInfo:9ED Uncommon
-SetInfo:10E Uncommon
-SetInfo:M10 Uncommon
-SetInfo:POR Rare

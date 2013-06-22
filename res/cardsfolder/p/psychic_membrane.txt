@@ -7,4 +7,3 @@ T:Mode$ Blocks | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ TrigDraw
 SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/psychic_membrane.jpg
 Oracle:Defender (This creature can't attack.)\nWhenever Psychic Membrane blocks, you may draw a card.
-SetInfo:MRD Uncommon

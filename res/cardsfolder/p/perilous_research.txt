@@ -6,5 +6,3 @@ SVar:DBSac:DB$Sacrifice | SacValid$ Permanent
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/perilous_research.jpg
 Oracle:Draw two cards, then sacrifice a permanent.
-SetInfo:COM Uncommon
-SetInfo:CSP Uncommon

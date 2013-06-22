@@ -7,4 +7,3 @@ SVar:DBPump:DB$Pump | Defined$ Targeted | KW$ HIDDEN This card doesn't untap dur
 SVar:GreenCreats:Count$ThisTurnEntered_Battlefield_Creature.Green+YouDontCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/permafrost_trap.jpg
 Oracle:If an opponent had a green creature enter the battlefield under his or her control this turn, you may pay {U} rather than pay Permafrost Trap's mana cost.\nTap up to two target creatures. Those creatures don't untap during their controller's next untap step.
-SetInfo:WWK Uncommon

@@ -6,4 +6,3 @@ SVar:DBDig:DB$ Dig | DigNum$ 1 | ChangeNum$ All | ChangeValid$ Card | Destinatio
 SVar:DBChangeZone:DB$ ChangeZone | Origin$ Exile | Destination$ Battlefield | Defined$ Remembered | ConditionDefined$ Remembered | ConditionPresent$ Permanent | ConditionCompare$ EQ1 | Optional$ True | RememberChanged$ True | ForgetOtherRemembered$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/primal_surge.jpg
 Oracle:Exile the top card of your library. If it's a permanent card, you may put it onto the battlefield. If you do, repeat this process.
-SetInfo:AVR Mythic

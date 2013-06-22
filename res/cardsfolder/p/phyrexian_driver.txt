@@ -6,4 +6,3 @@ T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefi
 SVar:TrigPump:AB$PumpAll | Cost$ 0 | ValidCards$ Creature.Mercenary+Other | NumAtt$ +1 | NumDef$ +1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/phyrexian_driver.jpg
 Oracle:When Phyrexian Driver enters the battlefield, other Mercenary creatures get +1/+1 until end of turn.
-SetInfo:NMS Common

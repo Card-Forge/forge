@@ -8,4 +8,3 @@ SVar:RemRandomDeck:True
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/psychic_trance.jpg
 Oracle:Until end of turn, Wizards you control gain "{T}: Counter target spell."
-SetInfo:ONS Rare

@@ -7,4 +7,3 @@ SVar:DBDraw:DB$Draw | NumCards$ 1
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/provoke.jpg
 Oracle:Untap target creature you don't control. That creature blocks this turn if able.\nDraw a card.
-SetInfo:STH Common

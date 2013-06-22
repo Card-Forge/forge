@@ -6,4 +6,3 @@ T:Mode$ SpellCast | ValidCard$ Creature | ValidActivatingPlayer$ You | Execute$ 
 SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/primordial_sage.jpg
 Oracle:Whenever you cast a creature spell, you may draw a card.
-SetInfo:RAV Rare

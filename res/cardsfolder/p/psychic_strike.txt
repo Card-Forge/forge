@@ -5,4 +5,3 @@ A:SP$ Counter | Cost$ 1 U B | TargetType$ Spell | TgtPrompt$ Select target spell
 SVar:DBMill:DB$ Mill | NumCards$ 2 | Defined$ TargetedController
 SVar:Picture:http://www.wizards.com/global/images/magic/general/psychic_strike.jpg
 Oracle:Counter target spell. Its controller puts the top two cards of his or her library into his or her graveyard.
-SetInfo:GTC Common

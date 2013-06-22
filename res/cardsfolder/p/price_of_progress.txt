@@ -7,5 +7,3 @@ SVar:X:Count$Valid Land.nonBasic+RememberedPlayerCtrl/Times.2
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/price_of_progress.jpg
 Oracle:Price of Progress deals damage to each player equal to twice the number of nonbasic lands that player controls.
-SetInfo:EXO Uncommon
-SetInfo:PD2 Uncommon

@@ -14,5 +14,3 @@ DeckHints:Type$Artifact
 SVar:NeedsToPlay:Artifact.YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/phylactery_lich.jpg
 Oracle:As Phylactery Lich enters the battlefield, put a phylactery counter on an artifact you control.\nPhylactery Lich is indestructible.\nWhen you control no permanents with phylactery counters on them, sacrifice Phylactery Lich.
-SetInfo:M11 Rare
-SetInfo:M13 Rare

@@ -6,4 +6,3 @@ SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X | References$ X
 SVar:X:Remembered$Amount
 SVar:Picture:http://www.wizards.com/global/images/magic/general/paraselene.jpg
 Oracle:Destroy all enchantments. You gain 1 life for each enchantment destroyed this way.
-SetInfo:ISD Uncommon

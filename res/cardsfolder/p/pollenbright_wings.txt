@@ -9,5 +9,3 @@ SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ X | References$ X | TokenName$ 
 SVar:X:TriggerCount$DamageAmount
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pollenbright_wings.jpg
 Oracle:Enchant creature\nEnchanted creature has flying.\nWhenever enchanted creature deals combat damage to a player, put that many 1/1 green Saproling creature tokens onto the battlefield.
-SetInfo:RAV Uncommon
-SetInfo:PC2 Uncommon

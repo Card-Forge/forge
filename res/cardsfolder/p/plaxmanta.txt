@@ -11,4 +11,3 @@ SVar:ManaNeededToAvoidNegativeEffect:green
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/plaxmanta.jpg
 Oracle:Flash\nWhen Plaxmanta enters the battlefield, creatures you control gain shroud until end of turn. (They can't be the targets of spells or abilities.)\nWhen Plaxmanta enters the battlefield, sacrifice it unless {G} was spent to cast it.
-SetInfo:DIS Uncommon

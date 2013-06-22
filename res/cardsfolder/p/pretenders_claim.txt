@@ -7,4 +7,3 @@ T:Mode$ AttackerBlocked | ValidCard$ Card.AttachedBy | Execute$ TrigTapAll | Tri
 SVar:TrigTapAll:AB$TapAll | Cost$ 0 | ValidCards$ Land.DefenderCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pretenders_claim.jpg
 Oracle:Enchant creature\nWhenever enchanted creature becomes blocked, tap all lands defending player controls.
-SetInfo:MMQ Uncommon

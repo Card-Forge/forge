@@ -4,4 +4,3 @@ Types:Instant
 A:SP$ Destroy | Cost$ 1 W | TargetMin$ 2 | TargetMax$ 2 | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment | SpellDescription$ Destroy two target enchantments.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/peace_and_quiet.jpg
 Oracle:Destroy two target enchantments.
-SetInfo:ULG Uncommon

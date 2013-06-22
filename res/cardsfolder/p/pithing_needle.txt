@@ -7,7 +7,3 @@ S:Mode$ CantBeActivated | ValidCard$ Card.NamedCard | NonMana$ True | Descriptio
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pithing_needle.jpg
 Oracle:As Pithing Needle enters the battlefield, name a card.\nActivated abilities of sources with the chosen name can't be activated unless they're mana abilities.
-SetInfo:M10 Rare
-SetInfo:SOK Rare
-SetInfo:RTR Rare
-SetInfo:10E Rare

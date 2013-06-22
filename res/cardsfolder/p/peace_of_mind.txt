@@ -5,5 +5,3 @@ A:AB$ GainLife | Cost$ W Discard<1/Card> | LifeAmount$ 3 | SpellDescription$ You
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/peace_of_mind.jpg
 Oracle:{W}, Discard a card: You gain 3 life.
-SetInfo:EXO Uncommon
-SetInfo:9ED Uncommon

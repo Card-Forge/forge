@@ -6,4 +6,3 @@ SVar:Disaster:AB$ DestroyAll |  Cost$ 0 | ValidCards$ Creature | SubAbility$ PWA
 SVar:PWAway:DB$ Planeswalk | Cost$ 0
 SVar:Picture:http://www.wizards.com/global/images/magic/general/planewide_disaster.jpg
 Oracle:When you encounter Planewide Disaster, destroy all creatures. (Then planeswalk away from this phenomenon.)
-SetInfo:PC2 Common

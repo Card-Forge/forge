@@ -8,5 +8,3 @@ SVar:NeedsToPlayVar:Y GE3
 SVar:Y:Count$Valid Forest.YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/primeval_force.jpg
 Oracle:When Primeval Force enters the battlefield, sacrifice it unless you sacrifice three Forests.
-SetInfo:8ED Rare
-SetInfo:POR Rare

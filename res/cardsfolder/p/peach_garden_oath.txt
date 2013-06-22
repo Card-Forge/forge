@@ -5,5 +5,3 @@ A:SP$ GainLife | Cost$ W | LifeAmount$ X | References$ X | SpellDescription$ You
 SVar:X:Count$TypeYouCtrl.Creature/Times.2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/peach_garden_oath.jpg
 Oracle:You gain 2 life for each creature you control.
-SetInfo:8ED Uncommon
-SetInfo:PTK Uncommon

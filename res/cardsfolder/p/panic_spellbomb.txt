@@ -7,4 +7,3 @@ SVar:TrigDraw:AB$Draw | Cost$ R | NumCards$ 1
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/panic_spellbomb.jpg
 Oracle:{T}, Sacrifice Panic Spellbomb: Target creature can't block this turn.\nWhen Panic Spellbomb is put into a graveyard from the battlefield, you may pay {R}. If you do, draw a card.
-SetInfo:SOM Common

@@ -7,5 +7,3 @@ SVar:X:Count$Valid Land.nonBasic+ActivePlayerCtrl
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/primal_order.jpg
 Oracle:At the beginning of each player's upkeep, Primal Order deals damage to that player equal to the number of nonbasic lands he or she controls.
-SetInfo:5ED Rare
-SetInfo:HML Rare

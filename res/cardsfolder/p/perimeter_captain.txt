@@ -7,4 +7,3 @@ T:Mode$ Blocks | ValidCard$ Creature.YouCtrl+withDefender | TriggerZones$ Battle
 SVar:TrigGainLife:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ 2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/perimeter_captain.jpg
 Oracle:Defender\nWhenever a creature you control with defender blocks, you may gain 2 life.
-SetInfo:WWK Uncommon

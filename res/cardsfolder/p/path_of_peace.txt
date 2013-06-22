@@ -5,7 +5,3 @@ A:SP$ Destroy | Cost$ 3 W | ValidTgts$ Creature | TgtPrompt$ Select target creat
 SVar:DBGainLife:DB$GainLife | Defined$ TargetedOwner | LifeAmount$ 4
 SVar:Picture:http://www.wizards.com/global/images/magic/general/path_of_peace.jpg
 Oracle:Destroy target creature. Its owner gains 4 life.
-SetInfo:PO2 Common
-SetInfo:S99 Common
-SetInfo:POR Common
-SetInfo:USG Common

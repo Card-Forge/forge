@@ -8,4 +8,3 @@ SVar:TriggerTheSleepless:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execut
 SVar:PilloryLoseLife:AB$ LoseLife | Cost$ 0 | Defined$ You | LifeAmount$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pillory_of_the_sleepless.jpg
 Oracle:Enchant creature\nEnchanted creature can't attack or block.\nEnchanted creature has "At the beginning of your upkeep, you lose 1 life."
-SetInfo:GPT Common

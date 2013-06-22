@@ -7,4 +7,3 @@ SVar:STCantPlayLand:Mode$ CantPlayLand | EffectZone$ Command | Player$ Player.Is
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pardic_miner.jpg
 Oracle:Sacrifice Pardic Miner: Target player can't play lands this turn.
-SetInfo:ODY Rare

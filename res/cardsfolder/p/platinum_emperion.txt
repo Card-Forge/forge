@@ -5,4 +5,3 @@ PT:8/8
 S:Mode$ Continuous | Affected$ You | AddKeyword$ Your life total can't change. | Description$ Your life total can't change. (You can't gain or lose life. You can't pay any amount of life except 0.)
 SVar:Picture:http://www.wizards.com/global/images/magic/general/platinum_emperion.jpg
 Oracle:Your life total can't change. (You can't gain or lose life. You can't pay any amount of life except 0.)
-SetInfo:SOM Mythic

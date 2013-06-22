@@ -8,4 +8,3 @@ SVar:TrigReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destinati
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/parallax_nexus.jpg
 Oracle:Fading 5 (This enchantment enters the battlefield with five fade counters on it. At the beginning of your upkeep, remove a fade counter from it. If you can't, sacrifice it.)\nRemove a fade counter from Parallax Nexus: Target opponent exiles a card from his or her hand. Activate this ability only any time you could cast a sorcery.\nWhen Parallax Nexus leaves the battlefield, each player returns to his or her hand all cards he or she owns exiled with Parallax Nexus.
-SetInfo:NMS Rare

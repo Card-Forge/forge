@@ -9,4 +9,3 @@ SVar:TrigDealDamage:AB$ DealDamage | Cost$ 0 | ValidTgts$ Creature,Player | TgtP
 SVar:X:Count$CardCounters.P1P1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/preyseizer_dragon.jpg
 Oracle:Flying\nDevour 2 (As this enters the battlefield, you may sacrifice any number of creatures. This creature enters the battlefield with twice that many +1/+1 counters on it.)\nWhenever Preyseizer Dragon attacks, it deals damage to target creature or player equal to the number of +1/+1 counters on Preyseizer Dragon.
-SetInfo:PC2 Rare

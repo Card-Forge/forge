@@ -6,4 +6,3 @@ T:Mode$ Drawn | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | Number
 SVar:TrigDraw:AB$Draw | Cost$ 0 | NumCards$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/primitive_etchings.jpg
 Oracle:Reveal the first card you draw each turn. Whenever you reveal a creature card this way, draw a card.
-SetInfo:SCG Rare

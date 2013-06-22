@@ -5,7 +5,3 @@ A:SP$ DealDamage | Cost$ 2 U | ValidTgts$ Creature,Player | TgtPrompt$ Select ta
 SVar:DBDealDamage:DB$DealDamage | Defined$ You | NumDmg$ 2
 SVar:Picture:http://resources.wizards.com/magic/cards/tsb/en-us/card108812.jpg
 Oracle:Psionic Blast deals 4 damage to target creature or player and 2 damage to you.
-SetInfo:LEB Uncommon
-SetInfo:TSB Special
-SetInfo:LEA Uncommon
-SetInfo:2ED Uncommon

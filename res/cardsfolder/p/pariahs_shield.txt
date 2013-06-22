@@ -9,4 +9,3 @@ SVar:DmgEquippedCombat:AB$DealDamage | Cost$ 0 | CombatDamage$ True | Defined$ E
 SVar:X:ReplaceCount$DamageAmount
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pariahs_shield.jpg
 Oracle:All damage that would be dealt to you is dealt to equipped creature instead.\nEquip {3}
-SetInfo:RAV Rare

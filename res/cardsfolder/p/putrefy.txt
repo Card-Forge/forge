@@ -4,6 +4,3 @@ Types:Instant
 A:SP$ Destroy | Cost$ 1 B G | ValidTgts$ Artifact,Creature | TgtPrompt$ Select target artifact or creature | NoRegen$ True | SpellDescription$ Destroy target artifact or creature. It can't be regenerated.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/putrefy.jpg
 Oracle:Destroy target artifact or creature. It can't be regenerated.
-SetInfo:RAV Uncommon
-SetInfo:DDJ Uncommon
-SetInfo:DGM Uncommon

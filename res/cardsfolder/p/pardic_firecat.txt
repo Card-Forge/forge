@@ -6,4 +6,3 @@ PT:2/3
 K:Haste
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pardic_firecat.jpg
 Oracle:Haste\nIf Pardic Firecat is in a graveyard, effects from spells named Flame Burst count it as a card named Flame Burst.
-SetInfo:ODY Common

@@ -6,4 +6,3 @@ SVar:DBPump:DB$ Pump | Defined$ Remembered | KW$ Your opponent may look at this 
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/praetors_grasp.jpg
 Oracle:Search target opponent's library for a card and exile it face down. Then that player shuffles his or her library. You may look at and play that card for as long as it remains exiled.
-SetInfo:NPH Rare

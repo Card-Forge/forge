@@ -5,4 +5,3 @@ A:AB$ ChangeZone | Cost$ 1 Sac<1/Creature> | Origin$ Library | Destination$ Batt
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/perilous_forays.jpg
 Oracle:{1}, Sacrifice a creature: Search your library for a land card with a basic land type and put it onto the battlefield tapped. Then shuffle your library.
-SetInfo:RAV Uncommon

@@ -9,5 +9,3 @@ SVar:LifePaidOnETB:Number$0
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/phyrexian_processor.jpg
 Oracle:As Phyrexian Processor enters the battlefield, pay any amount of life.\n{4}, {T}: Put an X/X black Minion creature token onto the battlefield, where X is the life paid as Phyrexian Processor entered the battlefield.
-SetInfo:DDE Rare
-SetInfo:USG Rare

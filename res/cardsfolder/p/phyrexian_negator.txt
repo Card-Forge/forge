@@ -9,5 +9,3 @@ SVar:X:TriggerCount$DamageAmount
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/phyrexian_negator.jpg
 Oracle:Trample\nWhenever Phyrexian Negator is dealt damage, sacrifice that many permanents.
-SetInfo:UDS Rare
-SetInfo:DDE Mythic

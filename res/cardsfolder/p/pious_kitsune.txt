@@ -11,4 +11,3 @@ A:AB$ GainLife | Cost$ T SubCounter<1/DEVOTION> | LifeAmount$ 1 | SpellDescripti
 DeckHints:Name$Eight-and-a-Half-Tails
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pious_kitsune.jpg
 Oracle:At the beginning of your upkeep, put a devotion counter on Pious Kitsune. Then if a creature named Eight-and-a-Half-Tails is on the battlefield, you gain 1 life for each devotion counter on Pious Kitsune.\n{T}, Remove a devotion counter from Pious Kitsune: You gain 1 life.
-SetInfo:CHK Common

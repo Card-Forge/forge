@@ -6,5 +6,3 @@ K:Flying
 K:First Strike
 SVar:Picture:http://www.wizards.com/global/images/magic/general/plover_knights.jpg
 Oracle:Flying, first strike
-SetInfo:DDG Common
-SetInfo:LRW Common

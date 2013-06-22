@@ -7,4 +7,3 @@ SVar:ArrestEach:DB$ ChooseCard | Amount$ 1 | Choices$ Creature.RememberedPlayerC
 SVar:DBAttach:DB$ CopyPermanent | NumCopies$ 1 | ValidSupportedCopy$ Card.namedArrest | DefinedName$ Arrest | AttachedTo$ ChosenCard | ConditionDefined$ ChosenCard | ConditionPresent$ Creature | ConditionCompare$ GE1
 SVar:Picture:http://www.cardforge.org/fpics/vgd-lq/peacekeeper_avatar.jpg
 Oracle:Hand +0, life +9\n{3}: For each opponent who controls a creature, put a token onto the battlefield that's a copy of a card named Arrest and attach it to a creature that player controls chosen at random.
-SetInfo:VAN Special

@@ -8,5 +8,3 @@ SVar:DBChangeAll:DB$ ChangeZoneAll | ValidTgts$ Player | TgtPrompt$ Select targe
 SVar:DBSearch:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Creature | ChangeNum$ 1 | SpellDescription$ Search your library for a creature card, reveal it, put it into your hand, then shuffle your library.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/primal_command.jpg
 Oracle:Choose two - Target player gains 7 life; or put target noncreature permanent on top of its owner's library; or target player shuffles his or her graveyard into his or her library; or search your library for a creature card, reveal it, put it into your hand, then shuffle your library.
-SetInfo:ARC Rare
-SetInfo:LRW Rare

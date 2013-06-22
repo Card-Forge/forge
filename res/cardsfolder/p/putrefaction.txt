@@ -6,4 +6,3 @@ SVar:TrigDiscard:AB$Discard | Cost$ 0 | Defined$ TriggeredActivator | NumCards$ 
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/putrefaction.jpg
 Oracle:Whenever a player casts a green or white spell, that player discards a card.
-SetInfo:MMQ Uncommon

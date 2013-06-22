@@ -5,4 +5,3 @@ A:AB$ Mana | Cost$ Sac<1/Creature> | Produced$ Any | SpellDescription$ Add one m
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/phyrexian_altar.jpg
 Oracle:Sacrifice a creature: Add one mana of any color to your mana pool.
-SetInfo:INV Rare

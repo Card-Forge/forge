@@ -5,4 +5,3 @@ PT:5/4
 A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add U to your mana pool.
 SVar:Picture:http://resources.wizards.com/magic/cards/le/en-us/card1675.jpg
 Oracle:{T}: Add {U} to your mana pool.
-SetInfo:LEG Uncommon

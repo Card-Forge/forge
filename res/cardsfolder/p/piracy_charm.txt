@@ -7,4 +7,3 @@ A:SP$ Discard | Cost$ U | ValidTgts$ Player | TgtPrompt$ Choose a player | NumCa
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/piracy_charm.jpg
 Oracle:Choose one - Target creature gains islandwalk until end of turn; or target creature gets +2/-1 until end of turn; or target player discards a card.
-SetInfo:PLC Common

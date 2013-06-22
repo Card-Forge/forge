@@ -7,6 +7,3 @@ SVar:TrigDraw:DB$ Draw | Cost$ 0 | Defined$ You | NumCards$ 2 | SubAbility$ DBLo
 SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 2
 SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card84393.jpg
 Oracle:When Phyrexian Gargantua enters the battlefield, you draw two cards and you lose 2 life.
-SetInfo:APC Uncommon
-SetInfo:9ED Uncommon
-SetInfo:DDE Uncommon

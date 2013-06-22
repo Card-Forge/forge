@@ -7,4 +7,3 @@ S:Mode$ Continuous | Affected$ Creature | AddHiddenKeyword$ CARDNAME can't attac
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/peacekeeper.jpg
 Oracle:At the beginning of your upkeep, sacrifice Peacekeeper unless you pay {1}{W}.\nCreatures can't attack.
-SetInfo:WTH Rare

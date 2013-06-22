@@ -8,4 +8,3 @@ A:AB$ Untap | Cost$ 1 S | SpellDescription$ Untap CARDNAME.
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/phyrexian_ironfoot.jpg
 Oracle:Phyrexian Ironfoot doesn't untap during your untap step.\n{1}{S}: Untap Phyrexian Ironfoot. ({S} can be paid with one mana from a snow permanent.)
-SetInfo:CSP Uncommon

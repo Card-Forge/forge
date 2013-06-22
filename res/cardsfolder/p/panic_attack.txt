@@ -5,7 +5,3 @@ A:SP$ Pump | Cost$ 2 R | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ 3 | KW$
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/panic_attack.jpg
 Oracle:Up to three target creatures can't block this turn.
-SetInfo:PCY Common
-SetInfo:8ED Common
-SetInfo:9ED Common
-SetInfo:M10 Common

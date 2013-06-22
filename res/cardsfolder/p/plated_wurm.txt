@@ -4,4 +4,3 @@ Types:Creature Wurm
 PT:4/5
 SVar:Picture:http://resources.wizards.com/magic/cards/p2/en-us/card6617.jpg
 Oracle:
-SetInfo:PO2 Common

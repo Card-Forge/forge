@@ -7,5 +7,3 @@ S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Flying | Descr
 A:AB$ ChangeZone | Cost$ Sac<1/CARDNAME> | Origin$ Battlefield | Destination$ Hand | Defined$ Enchanted | SpellDescription$ Return enchanted creature to owner's hand.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/phantom_wings.jpg
 Oracle:Enchant creature\nEnchanted creature has flying.\nSacrifice Phantom Wings: Return enchanted creature to its owner's hand.
-SetInfo:BOK Common
-SetInfo:WTH Common

@@ -14,6 +14,3 @@ SVar:PrimordialPaid:Number$0
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/primordial_ooze.jpg
 Oracle:Primordial Ooze attacks each turn if able.\nAt the beginning of your upkeep, put a +1/+1 counter on Primordial Ooze. Then you may pay {X}, where X is the number of +1/+1 counters on it. If you don't, tap Primordial Ooze and it deals X damage to you.
-SetInfo:5ED Uncommon
-SetInfo:CHR Uncommon
-SetInfo:LEG Uncommon

@@ -5,4 +5,3 @@ A:SP$ ChangeZone | Cost$ U | Origin$ Library | Destination$ Library | LibraryPos
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/personal_tutor.jpg
 Oracle:Search your library for a sorcery card and reveal that card. Shuffle your library, then put the card on top of it.
-SetInfo:POR Uncommon

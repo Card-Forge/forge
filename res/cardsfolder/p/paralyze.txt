@@ -10,9 +10,3 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ EnchantedController | TriggerZones$
 SVar:TrigUntap:AB$ Untap | Cost$ 0 | Defined$ Enchanted | UnlessCost$ 4 | UnlessPayer$ EnchantedController | UnlessSwitched$ True | UnlessAI$ Paralyze
 SVar:Picture:http://www.wizards.com/global/images/magic/general/paralyze.jpg
 Oracle:Enchant creature\nWhen Paralyze enters the battlefield, tap enchanted creature.\nEnchanted creature doesn't untap during its controller's untap step.\nAt the beginning of the upkeep of enchanted creature's controller, that player may pay {4}. If he or she does, untap the creature.
-SetInfo:2ED Common
-SetInfo:LEB Common
-SetInfo:LEA Common
-SetInfo:5ED Common
-SetInfo:4ED Common
-SetInfo:3ED Common

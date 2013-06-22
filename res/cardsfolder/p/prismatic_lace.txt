@@ -6,4 +6,3 @@ SVar:Animate:DB$ Animate | ValidTgts$ Permanent | TgtPrompt$ Select target perma
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/prismatic_lace.jpg
 Oracle:Target permanent becomes the color or colors of your choice. (This effect lasts indefinitely.)
-SetInfo:MIR Rare

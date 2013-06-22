@@ -7,4 +7,3 @@ T:Mode$ Blocks | ValidCard$ Creature | ValidBlocked$ Card.Self | TriggerZones$ B
 SVar:TrigBlockedPump:AB$Pump | Cost$ 0 | Defined$ Self | NumAtt$ +1 | NumDef$ +1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pygmy_troll.jpg
 Oracle:Whenever Pygmy Troll becomes blocked by a creature, Pygmy Troll gets +1/+1 until end of turn.\n{G}: Regenerate Pygmy Troll.
-SetInfo:EXO Common

@@ -7,4 +7,3 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Wurm | TokenTypes$ Creature,Wurm | TokenOwner$ TriggeredCardController | TokenColors$ Black | TokenPower$ 6 | TokenToughness$ 6 | TokenKeywords$ Trample
 SVar:Picture:http://www.wizards.com/global/images/magic/general/penumbra_wurm.jpg
 Oracle:Trample\nWhen Penumbra Wurm dies, put a 6/6 black Wurm creature token with trample onto the battlefield.
-SetInfo:APC Rare

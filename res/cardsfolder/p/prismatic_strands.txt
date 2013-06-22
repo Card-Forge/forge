@@ -8,4 +8,3 @@ SVar:STPrevent:Mode$ PreventDamage | EffectZone$ Command | Target$ Creature,Play
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/prismatic_strands.jpg
 Oracle:Prevent all damage that sources of the color of your choice would deal this turn.\nFlashback-Tap an untapped white creature you control. (You may cast this card from your graveyard for its flashback cost. Then exile it.)
-SetInfo:JUD Common

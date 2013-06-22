@@ -7,4 +7,3 @@ SVar:RPreventNextFromSource:Event$ DamageDone | ValidSource$ Card.IsRemembered |
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pay_no_heed.jpg
 Oracle:Prevent all damage a source of your choice would deal this turn.
-SetInfo:TOR Common

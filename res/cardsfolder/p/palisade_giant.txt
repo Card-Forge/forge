@@ -9,4 +9,3 @@ SVar:DmgMeCombat:AB$ DealDamage | Cost$ 0 | CombatDamage$ True | Defined$ Self |
 SVar:X:ReplaceCount$DamageAmount
 SVar:Picture:http://www.wizards.com/global/images/magic/general/palisade_giant.jpg
 Oracle:All damage that would be dealt to you or another permanent you control is dealt to Palisade Giant instead.
-SetInfo:RTR Rare

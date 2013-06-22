@@ -5,4 +5,3 @@ T:Mode$ SetInMotion | ValidCard$ Card.Self | Execute$ DarkEffect | TriggerZones$
 SVar:DarkEffect:AB$ ChangeZone | Cost$ 0 | Origin$ Library | Destination$ Battlefield | ChangeType$ Planeswalker.YouOwn | ChangeNum$ 1
 SVar:Picture:http://www.cardforge.org/fpics/lq_schemes/perhaps_youve_met_my_cohort.jpg
 Oracle:When you set this scheme in motion, search your library for a planeswalker card, put it onto the battlefield, then shuffle your library.
-SetInfo:ARC Common

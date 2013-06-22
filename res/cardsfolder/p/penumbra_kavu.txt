@@ -7,4 +7,3 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Kavu | TokenTypes$ Creature,Kavu | TokenOwner$ TriggeredCardController | TokenColors$ Black | TokenPower$ 3 | TokenToughness$ 3
 SVar:Picture:http://resources.wizards.com/magic/cards/ap/en-us/card25956.jpg
 Oracle:When Penumbra Kavu dies, put a 3/3 black Kavu creature token onto the battlefield.
-SetInfo:APC Uncommon

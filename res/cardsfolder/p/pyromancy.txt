@@ -6,4 +6,3 @@ SVar:X:Discarded$CardManaCost
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pyromancy.jpg
 Oracle:{3}, Discard a card at random: Pyromancy deals damage to target creature or player equal to the converted mana cost of the discarded card.
-SetInfo:ULG Rare

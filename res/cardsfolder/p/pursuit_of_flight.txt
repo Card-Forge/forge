@@ -7,4 +7,3 @@ S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddPower$ 2 | AddToughness$ 2 
 SVar:POFPump:AB$ Pump | Cost$ U | Defined$ Self | KW$ Flying | SpellDescription$ This creature gains flying until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pursuit_of_flight.jpg
 Oracle:Enchant creature\nEnchanted creature gets +2/+2 and has "{U}: This creature gains flying until end of turn."
-SetInfo:RTR Common

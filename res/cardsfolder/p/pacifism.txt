@@ -6,17 +6,3 @@ A:SP$ Attach | Cost$ 1 W | ValidTgts$ Creature | AILogic$ Curse
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ CARDNAME can't attack or block. | Description$ Enchanted creature can't attack or block.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pacifism.jpg
 Oracle:Enchant creature\nEnchanted creature can't attack or block.
-SetInfo:8ED Common
-SetInfo:7ED Common
-SetInfo:6ED Common
-SetInfo:USG Common
-SetInfo:MIR Common
-SetInfo:9ED Common
-SetInfo:10E Common
-SetInfo:M11 Common
-SetInfo:M10 Common
-SetInfo:M13 Common
-SetInfo:M12 Common
-SetInfo:DDC Common
-SetInfo:ONS Common
-SetInfo:TMP Common

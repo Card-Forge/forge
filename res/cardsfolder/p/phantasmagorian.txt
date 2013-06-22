@@ -7,4 +7,3 @@ SVar:TrigCounter:DB$ Counter | Cost$ 0 | UnlessCost$ Discard<3/Card> | Defined$ 
 A:AB$ ChangeZone | Cost$ Discard<3/Card> | Origin$ Graveyard | Destination$ Hand | ActivationZone$ Graveyard | SpellDescription$ Return CARDNAME from your graveyard to your hand.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/phantasmagorian.jpg
 Oracle:When you cast Phantasmagorian, any player may discard three cards. If a player does, counter Phantasmagorian.\nDiscard three cards: Return Phantasmagorian from your graveyard to your hand.
-SetInfo:PLC Uncommon

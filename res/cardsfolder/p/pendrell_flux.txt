@@ -8,4 +8,3 @@ SVar:TrigPhase:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigPen
 SVar:TrigPendrellFlux:DB$ Sacrifice | Defined$ Self | UnlessCost$ CardManaCost | UnlessPayer$ You
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pendrell_flux.jpg
 Oracle:Enchant creature\nEnchanted creature has "At the beginning of your upkeep, sacrifice this creature unless you pay its mana cost."
-SetInfo:USG Common

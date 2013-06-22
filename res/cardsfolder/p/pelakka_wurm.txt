@@ -9,4 +9,3 @@ SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ TriggeredCardController | NumCards$ 1
 SVar:TrigGainLife:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ 7
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pelakka_wurm.jpg
 Oracle:Trample\nWhen Pelakka Wurm enters the battlefield, you gain 7 life.\nWhen Pelakka Wurm dies, draw a card.
-SetInfo:ROE Uncommon

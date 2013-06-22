@@ -6,4 +6,3 @@ SVar:DBBounce:DB$ChangeZone | Origin$ Stack | Destination$ Hand | ConditionPrese
 SVar:X:Count$Valid Creature.YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pulse_of_the_tangle.jpg
 Oracle:Put a 3/3 green Beast creature token onto the battlefield. Then if an opponent controls more creatures than you, return Pulse of the Tangle to its owner's hand.
-SetInfo:DST Rare

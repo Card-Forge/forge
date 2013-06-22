@@ -9,4 +9,3 @@ SVar:PounceAdvantage:AB$ PutCounter | Cost$ 0 | Defined$ Self | CounterType$ P1P
 SVar:PounceAmbush:DB$ Pump | Defined$ Self | KW$ Haste | Permanent$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pouncing_kavu.jpg
 Oracle:Kicker {2}{R} (You may pay an additional {2}{R} as you cast this spell.)\nFirst strike\nIf Pouncing Kavu was kicked, it enters the battlefield with two +1/+1 counters on it and with haste.
-SetInfo:INV Common

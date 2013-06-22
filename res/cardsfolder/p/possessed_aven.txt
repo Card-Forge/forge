@@ -7,4 +7,3 @@ S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddToughness$ 1 | SetCo
 SVar:Destroy:AB$ Destroy | Cost$ 2 B T | ValidTgts$ Creature.Blue | TgtPrompt$ Select target blue creature | SpellDescription$ Destroy target blue creature.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/possessed_aven.jpg
 Oracle:Flying\nThreshold - As long as seven or more cards are in your graveyard, Possessed Aven gets +1/+1, is black, and has "{2}{B}, {T}: Destroy target blue creature."
-SetInfo:TOR Rare

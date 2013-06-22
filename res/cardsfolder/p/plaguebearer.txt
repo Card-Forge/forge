@@ -7,4 +7,3 @@ A:AB$ Destroy | Cost$ X X B | ValidTgts$ Creature.nonBlack | TgtPrompt$ Select t
 SVar:X:Targeted$CardManaCost
 SVar:Picture:http://www.wizards.com/global/images/magic/general/plaguebearer.jpg
 Oracle:{X}{X}{B}: Destroy target nonblack creature with converted mana cost X.
-SetInfo:EXO Rare

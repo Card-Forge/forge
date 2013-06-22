@@ -10,4 +10,3 @@ SVar:PyrrhicCleanup:DB$ ChangeZone | Origin$ Command | Destination$ Exile | Defi
 SVar:DBChangeZoneAll:DB$ ChangeZoneAll | Origin$ Graveyard | Destination$ Battlefield | ChangeType$ Creature
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pyrrhic_revival.jpg
 Oracle:Each player returns each creature card from his or her graveyard to the battlefield with an additional -1/-1 counter on it.
-SetInfo:EVE Rare

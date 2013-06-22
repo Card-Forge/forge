@@ -5,4 +5,3 @@ A:SP$ ChangeZoneAll | Cost$ 1 W | ChangeType$ Land.Basic | Origin$ Graveyard | D
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/planar_birth.jpg
 Oracle:Return all basic land cards from all graveyards to the battlefield tapped under their owners' control.
-SetInfo:USG Rare

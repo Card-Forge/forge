@@ -6,5 +6,3 @@ SVar:DBBounce:DB$ ChangeZone | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Sele
 SVar:RemAIDeck:True
 SVar:Picture:http://resources.wizards.com/magic/cards/rav/en-us/card87951.jpg
 Oracle:Return target creature you control and target creature you don't control to their owners' hands.
-SetInfo:RAV Common
-SetInfo:AVR Common

@@ -9,4 +9,3 @@ SVar:NeedsToPlayVar:SpiralYet GE6
 SVar:SpiralYet:Count$InYourYard
 SVar:Picture:http://www.wizards.com/global/images/magic/general/psychic_spiral.jpg
 Oracle:Shuffle all cards from your graveyard into your library. Target player puts that many cards from the top of his or her library into his or her graveyard.
-SetInfo:RTR Uncommon

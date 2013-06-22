@@ -7,14 +7,3 @@ SVar:ManaLose:DB$ DrainMana | Defined$ TargetedController
 SVar:X:Count$xPaid
 SVar:Picture:http://www.wizards.com/global/images/magic/general/power_sink.jpg
 Oracle:Counter target spell unless its controller pays {X}. If he or she doesn't, that player taps all lands with mana abilities he or she controls and empties his or her mana pool.
-SetInfo:2ED Common
-SetInfo:TMP Common
-SetInfo:6ED Uncommon
-SetInfo:5ED Uncommon
-SetInfo:USG Common
-SetInfo:MIR Common
-SetInfo:LEB Common
-SetInfo:LEA Common
-SetInfo:ICE Common
-SetInfo:4ED Common
-SetInfo:3ED Common

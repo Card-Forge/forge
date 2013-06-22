@@ -7,4 +7,3 @@ A:AB$ Pump | Cost$ ExileFromGrave<2/card> | NumAtt$ +1 | NumDef$ +1 | SpellDescr
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/psychatog.jpg
 Oracle:Discard a card: Psychatog gets +1/+1 until end of turn.\nExile two cards from your graveyard: Psychatog gets +1/+1 until end of turn.
-SetInfo:ODY Uncommon

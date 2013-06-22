@@ -11,4 +11,3 @@ SVar:PontiffExtortGainLife:DB$ GainLife | Defined$ You | LifeAmount$ AFLifeLost
 SVar:AFLifeLost:Number$0
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pontiff_of_blight.jpg
 Oracle:Extort (Whenever you cast a spell, you may pay {W/B}. If you do, each opponent loses 1 life and you gain that much life.)\nOther creatures you control have extort. (If a creature has multiple instances of extort, each triggers separately.)
-SetInfo:DGM Rare

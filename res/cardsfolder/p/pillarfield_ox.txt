@@ -4,5 +4,3 @@ Types:Creature Ox
 PT:2/4
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pillarfield_ox.jpg
 Oracle:
-SetInfo:M13 Common
-SetInfo:ZEN Common

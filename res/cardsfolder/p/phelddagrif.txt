@@ -11,4 +11,3 @@ SVar:DBDraw:DB$Draw | NumCards$ 1 | ValidTgts$ Opponent | TgtPrompt$ Select targ
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/phelddagrif.jpg
 Oracle:{G}: Phelddagrif gains trample until end of turn. Target opponent puts a 1/1 green Hippo creature token onto the battlefield.\n{W}: Phelddagrif gains flying until end of turn. Target opponent gains 2 life.\n{U}: Return Phelddagrif to its owner's hand. Target opponent may draw a card.
-SetInfo:ALL Rare

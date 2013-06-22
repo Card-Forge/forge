@@ -7,4 +7,3 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$CardManaCost
 SVar:Picture:http://www.wizards.com/global/images/magic/general/planeswalkers_mirth.jpg
 Oracle:{3}{W}: Target opponent reveals a card at random from his or her hand. You gain life equal to that card's converted mana cost.
-SetInfo:PLS Rare

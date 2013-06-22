@@ -8,4 +8,3 @@ SVar:TrigDestroyBlocker:AB$Destroy | Cost$ 0 | Defined$ TriggeredBlocker | NoReg
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/phyrexian_slayer.jpg
 Oracle:Flying\nWhenever Phyrexian Slayer becomes blocked by a white creature, destroy that creature. It can't be regenerated.
-SetInfo:INV Common

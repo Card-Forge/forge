@@ -8,4 +8,3 @@ SVar:X:Count$Valid Creature.Black+OppCtrl
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pygmy_kavu.jpg
 Oracle:When Pygmy Kavu enters the battlefield, draw a card for each black creature your opponents control.
-SetInfo:PLS Common

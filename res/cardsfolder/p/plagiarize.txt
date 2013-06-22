@@ -7,6 +7,3 @@ SVar:ABDraw:AB$ Draw | Cost$ 0 | Defined$ You | NumCards$ 1 | SpellDescription$ 
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/plagiarize.jpg
 Oracle:Until end of turn, if target player would draw a card, instead that player skips that draw and you draw a card.
-SetInfo:TOR Rare
-SetInfo:9ED Rare
-SetInfo:10E Rare

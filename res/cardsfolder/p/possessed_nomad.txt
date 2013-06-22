@@ -7,4 +7,3 @@ S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddToughness$ 1 | SetCo
 SVar:Destroy:AB$ Destroy | Cost$ 2 B T | ValidTgts$ Creature.White | TgtPrompt$ Select target white creature | SpellDescription$ Destroy target white creature.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/possessed_nomad.jpg
 Oracle:Vigilance\nThreshold - As long as seven or more cards are in your graveyard, Possessed Nomad gets +1/+1, is black, and has "{2}{B}, {T}: Destroy target white creature."
-SetInfo:TOR Rare

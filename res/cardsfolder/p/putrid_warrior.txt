@@ -9,4 +9,3 @@ SVar:SVar2:DB$ GainLife | Defined$ Each | LifeAmount$ 1 | ChoiceDescription$ Eac
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/putrid_warrior.jpg
 Oracle:Whenever Putrid Warrior deals damage, choose one - Each player loses 1 life; or each player gains 1 life.
-SetInfo:APC Common

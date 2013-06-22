@@ -9,4 +9,3 @@ SVar:RemRandomDeck:True
 SVar:NeedsToPlay:Ogre.YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/painwracker_oni.jpg
 Oracle:Fear (This creature can't be blocked except by artifact creatures and/or black creatures.)\nAt the beginning of your upkeep, sacrifice a creature if you don't control an Ogre.
-SetInfo:CHK Uncommon

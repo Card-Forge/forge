@@ -6,4 +6,3 @@ A:AB$ Pump | Cost$ Discard<1/Random> | NumAtt$ +1 | KW$ First Strike | SpellDesc
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pardic_lancer.jpg
 Oracle:Discard a card at random: Pardic Lancer gets +1/+0 and gains first strike until end of turn.
-SetInfo:TOR Common

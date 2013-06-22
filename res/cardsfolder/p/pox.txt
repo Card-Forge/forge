@@ -20,5 +20,3 @@ SVar:H:Count$Valid Land.YouDontCtrl/ThirdUp
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pox.jpg
 Oracle:Each player loses a third of his or her life, then discards a third of the cards in his or her hand, then sacrifices a third of the creatures he or she controls, then sacrifices a third of the lands he or she controls. Round up each time.
-SetInfo:ICE Rare
-SetInfo:5ED Rare

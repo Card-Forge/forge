@@ -6,4 +6,3 @@ A:AB$ Counter | Cost$ tapXType<1/Wizard> | TargetType$ Spell | TgtPrompt$ Select
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/patron_wizard.jpg
 Oracle:Tap an untapped Wizard you control: Counter target spell unless its controller pays {1}.
-SetInfo:ODY Rare

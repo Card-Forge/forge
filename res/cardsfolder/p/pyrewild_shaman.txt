@@ -7,4 +7,3 @@ T:Mode$ CombatDamageDoneOnce | ValidSource$ Creature.YouCtrl | TriggerZones$ Gra
 SVar:TrigChange:AB$ ChangeZone | Cost$ 3 | Origin$ Graveyard | Destination$ Hand
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pyrewild_shaman.jpg
 Oracle:Bloodrush - {1}{R}, Discard Pyrewild Shaman: Target attacking creature gets +3/+1 until end of turn.\nWhenever one or more creatures you control deal combat damage to a player, if Pyrewild Shaman is in your graveyard, you may pay {3}. If you do, return Pyrewild Shaman to your hand.
-SetInfo:DGM Rare

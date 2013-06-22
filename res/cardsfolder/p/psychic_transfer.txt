@@ -7,6 +7,3 @@ SVar:Z:Count$LowestLifeTotal
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/psychic_transfer.jpg
 Oracle:If the difference between your life total and target player's life total is 5 or less, exchange life totals with that player.
-SetInfo:S99 Rare
-SetInfo:MIR Rare
-SetInfo:6ED Rare

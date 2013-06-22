@@ -5,4 +5,3 @@ PT:2/2
 A:AB$ Pump | Cost$ WU | NumDef$ +1 | SpellDescription$ CARDNAME gets +0/+1 until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/parapet_watchers.jpg
 Oracle:{W/U}: Parapet Watchers gets +0/+1 until end of turn.
-SetInfo:SHM Common

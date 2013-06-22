@@ -5,4 +5,3 @@ S:Mode$ Continuous | Affected$ Creature | AddKeyword$ At the beginning of your u
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pendrell_mists.jpg
 Oracle:All creatures have "At the beginning of your upkeep, sacrifice this creature unless you pay {1}."
-SetInfo:WTH Rare

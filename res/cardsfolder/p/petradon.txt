@@ -10,4 +10,3 @@ SVar:TrigReturn:AB$ChangeZone | Cost$ 0 | Defined$ Remembered | Origin$ Exile | 
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/petradon.jpg
 Oracle:When Petradon enters the battlefield, exile two target lands.\nWhen Petradon leaves the battlefield, return the exiled cards to the battlefield under their owners' control.\n{R}: Petradon gets +1/+0 until end of turn.
-SetInfo:TOR Rare

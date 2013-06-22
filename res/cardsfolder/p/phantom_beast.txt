@@ -7,4 +7,3 @@ SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Defined$ Self
 SVar:Targeting:Dies
 SVar:Picture:http://www.wizards.com/global/images/magic/general/phantom_beast.jpg
 Oracle:When Phantom Beast becomes the target of a spell or ability, sacrifice it.
-SetInfo:M11 Common

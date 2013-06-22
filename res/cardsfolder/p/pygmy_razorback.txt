@@ -5,4 +5,3 @@ PT:2/1
 K:Trample
 SVar:Picture:http://resources.wizards.com/magic/cards/pr/en-us/card24663.jpg
 Oracle:Trample
-SetInfo:PCY Common

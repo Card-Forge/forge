@@ -7,4 +7,3 @@ SVar:DBClone:DB$ CopyPermanent | Defined$ Remembered | Controller$ RememberedCon
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/parallel_evolution.jpg
 Oracle:For each creature token on the battlefield, its controller puts a token that's a copy of that creature onto the battlefield.\nFlashback {4}{G}{G}{G} (You may cast this card from your graveyard for its flashback cost. Then exile it.)
-SetInfo:TOR Rare

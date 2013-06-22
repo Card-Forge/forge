@@ -8,4 +8,3 @@ SVar:TrigExile:AB$ ChangeZone | Cost$ 0 | ValidTgts$ Land | TgtPrompt$ Choose ta
 SVar:TrigReturn:AB$ ChangeZone | Cost$ 0 | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield
 SVar:Picture:http://www.wizards.com/global/images/magic/general/petravark.jpg
 Oracle:When Petravark enters the battlefield, exile target land.\nWhen Petravark leaves the battlefield, return the exiled card to the battlefield under its owner's control.
-SetInfo:TOR Common

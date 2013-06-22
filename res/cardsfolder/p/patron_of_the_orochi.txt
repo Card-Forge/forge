@@ -7,4 +7,3 @@ A:AB$ UntapAll | Cost$ T | ValidCards$ Forest,Creature.Green | ActivationLimit$ 
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/patron_of_the_orochi.jpg
 Oracle:Snake offering (You may cast this card any time you could cast an instant by sacrificing a Snake and paying the difference in mana costs between this and the sacrificed Snake. Mana cost includes color.)\n{T}: Untap all Forests and all green creatures. Activate this ability only once each turn.
-SetInfo:BOK Rare

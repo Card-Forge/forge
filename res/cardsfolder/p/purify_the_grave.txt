@@ -6,4 +6,3 @@ A:SP$ ChangeZone | Cost$ W | ValidTgts$ Card | TgtPrompt$ Select card to exile |
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/purify_the_grave.jpg
 Oracle:Exile target card from a graveyard.\nFlashback {W} (You may cast this card from your graveyard for its flashback cost. Then exile it.)
-SetInfo:ISD Uncommon

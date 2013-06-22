@@ -8,4 +8,3 @@ SVar:OppSac:DB$ Sacrifice | SacValid$ Permanent | Defined$ Opponent | UnlessCost
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/possessed_portal.jpg
 Oracle:If a player would draw a card, that player skips that draw instead.\nAt the beginning of each end step, each player sacrifices a permanent unless he or she discards a card.
-SetInfo:5DN Rare

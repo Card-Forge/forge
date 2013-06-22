@@ -6,4 +6,3 @@ SVar:DBShuffle:DB$ChangeZoneAll | ChangeType$ Card.YouOwn | Origin$ Graveyard | 
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/paradigm_shift.jpg
 Oracle:Exile all cards from your library. Then shuffle your graveyard into your library.
-SetInfo:WTH Rare

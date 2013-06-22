@@ -7,5 +7,3 @@ SVar:DB1:DB$DealDamage | NumDmg$ 3 | Defined$ Self
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/psionic_entity.jpg
 Oracle:{T}: Psionic Entity deals 2 damage to target creature or player and 3 damage to itself.
-SetInfo:LEG Rare
-SetInfo:4ED Rare

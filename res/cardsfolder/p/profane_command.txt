@@ -11,6 +11,3 @@ SVar:X:Count$xPaid
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/profane_command.jpg
 Oracle:Choose two - Target player loses X life; or return target creature card with converted mana cost X or less from your graveyard to the battlefield; or target creature gets -X/-X until end of turn; or up to X target creatures gain fear until end of turn. (They can't be blocked except by artifact creatures and/or black creatures.)
-SetInfo:DDH Rare
-SetInfo:HOP Rare
-SetInfo:LRW Rare

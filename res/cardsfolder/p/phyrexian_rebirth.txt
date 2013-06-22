@@ -6,4 +6,3 @@ SVar:DBToken:DB$Token | TokenAmount$ 1 | TokenName$ Horror | TokenTypes$ Artifac
 SVar:X:Remembered$Amount
 SVar:Picture:http://www.wizards.com/global/images/magic/general/phyrexian_rebirth.jpg
 Oracle:Destroy all creatures, then put an X/X colorless Horror artifact creature token onto the battlefield, where X is the number of creatures destroyed this way.
-SetInfo:MBS Rare

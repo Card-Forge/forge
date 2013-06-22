@@ -7,4 +7,3 @@ SVar:Counter:AB$ PutCounter | Cost$ 0 | Defined$ Self | CounterNum$ 1 | CounterT
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pursuit_of_knowledge.jpg
 Oracle:If you would draw a card, you may put a study counter on Pursuit of Knowledge instead.\nRemove three study counters from Pursuit of Knowledge, Sacrifice Pursuit of Knowledge: Draw seven cards.
-SetInfo:STH Rare

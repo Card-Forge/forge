@@ -12,4 +12,3 @@ ManaCost:1 U
 Types:Instant
 A:SP$ Pump | Cost$ 1 U | ValidTgts$ Creature | TgtPrompt$ Select target creature to get -6/-0 | NumAtt$ -6 | IsCurse$ True | SpellDescription$ Target creature gets -6/-0 until end of turn.
 Oracle:TTarget creature gets -6/-0 until end of turn.\nFuse (You may cast one or both halves of this card from your hand.)
-SetInfo:DGM Uncommon

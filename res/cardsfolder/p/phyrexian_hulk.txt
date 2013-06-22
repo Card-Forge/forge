@@ -4,10 +4,3 @@ Types:Artifact Creature Golem
 PT:5/4
 SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83203.jpg
 Oracle:
-SetInfo:8ED Uncommon
-SetInfo:7ED Uncommon
-SetInfo:NPH Common
-SetInfo:9ED Uncommon
-SetInfo:M13 Uncommon
-SetInfo:TMP Uncommon
-SetInfo:DDE Uncommon

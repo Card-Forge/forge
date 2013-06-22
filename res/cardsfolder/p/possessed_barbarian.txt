@@ -7,4 +7,3 @@ S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddToughness$ 1 | SetCo
 SVar:Destroy:AB$ Destroy | Cost$ 2 B T | ValidTgts$ Creature.Red | TgtPrompt$ Select target red creature | SpellDescription$ Destroy target red creature.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/possessed_barbarian.jpg
 Oracle:First strike\nThreshold - As long as seven or more cards are in your graveyard, Possessed Barbarian gets +1/+1, is black, and has "{2}{B}, {T}: Destroy target red creature."
-SetInfo:TOR Rare

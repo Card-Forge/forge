@@ -6,4 +6,3 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigDestroy:AB$Destroy | Cost$ 0 | ValidTgts$ Land | TgtPrompt$ Select target land
 SVar:Picture:http://www.wizards.com/global/images/magic/general/polluted_dead.jpg
 Oracle:When Polluted Dead dies, destroy target land.
-SetInfo:AVR Common

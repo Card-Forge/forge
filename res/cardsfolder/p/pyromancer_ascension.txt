@@ -8,4 +8,3 @@ SVar:TrigCopySpell:AB$CopySpellAbility | Cost$ 0 | Defined$ TriggeredSpellAbilit
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pyromancer_ascension.jpg
 Oracle:Whenever you cast an instant or sorcery spell that has the same name as a card in your graveyard, you may put a quest counter on Pyromancer Ascension.\nWhenever you cast an instant or sorcery spell while Pyromancer Ascension has two or more quest counters on it, you may copy that spell. You may choose new targets for the copy.
-SetInfo:ZEN Rare

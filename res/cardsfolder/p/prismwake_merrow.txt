@@ -9,4 +9,3 @@ SVar:Animate:DB$ Animate | ValidTgts$ Permanent | TgtPrompt$ Select target perma
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/prismwake_merrow.jpg
 Oracle:Flash\nWhen Prismwake Merrow enters the battlefield, target permanent becomes the color or colors of your choice until end of turn.
-SetInfo:SHM Common

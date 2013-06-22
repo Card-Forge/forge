@@ -6,7 +6,3 @@ A:AB$ TapOrUntap | Cost$ U T | ValidTgts$ Creature | TgtPrompt$ Select target cr
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/puppeteer.jpg
 Oracle:{U}, {T}: You may tap or untap target creature.
-SetInfo:8ED Uncommon
-SetInfo:ODY Uncommon
-SetInfo:9ED Uncommon
-SetInfo:10E Uncommon

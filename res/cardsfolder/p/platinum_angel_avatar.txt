@@ -10,4 +10,3 @@ SVar:AvatarEX:Count$Valid Enchantment.YouCtrl
 SVar:AvatarLX:Count$Valid Land.YouCtrl
 SVar:Picture:http://www.cardforge.org/fpics/vgd-lq/platinum_angel_avatar.jpg
 Oracle:Hand -1, life -2\nIf you control an artifact, a creature, an enchantment, and a land, you can't lose the game and your opponents can't win the game.
-SetInfo:VAN Special x2

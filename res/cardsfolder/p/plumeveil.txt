@@ -7,5 +7,3 @@ K:Defender
 K:Flying
 SVar:Picture:http://www.wizards.com/global/images/magic/general/plumeveil.jpg
 Oracle:Flash (You may cast this spell any time you could cast an instant.)\nDefender, flying
-SetInfo:COM Uncommon
-SetInfo:SHM Uncommon

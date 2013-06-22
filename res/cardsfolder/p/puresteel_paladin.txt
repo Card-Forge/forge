@@ -8,4 +8,3 @@ S:Mode$ Continuous | Affected$ Equipment.YouCtrl | AddAbility$ ABAttach | Condit
 SVar:ABAttach:AB$ Attach | Cost$ 0 | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | Equip$ True | SorcerySpeed$ True | PrecostDesc$ Equip - | SpellDescription$ Attach CARDNAME to target creature you control.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/puresteel_paladin.jpg
 Oracle:Whenever an Equipment enters the battlefield under your control, you may draw a card.\nMetalcraft - Equipment you control have equip {0} as long as you control three or more artifacts.
-SetInfo:NPH Rare

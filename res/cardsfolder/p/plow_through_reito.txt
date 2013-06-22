@@ -8,4 +8,3 @@ SVar:Y:Remembered$Amount
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/plow_through_reito.jpg
 Oracle:Sweep - Return any number of Plains you control to their owner's hand. Target creature gets +1/+1 until end of turn for each Plains returned this way.
-SetInfo:SOK Common

@@ -5,9 +5,3 @@ PT:3/3
 K:Flying
 SVar:Picture:http://resources.wizards.com/magic/cards/5e/en-us/card3929.jpg
 Oracle:Flying
-SetInfo:2ED Uncommon
-SetInfo:LEB Uncommon
-SetInfo:LEA Uncommon
-SetInfo:5ED Uncommon
-SetInfo:4ED Uncommon
-SetInfo:3ED Uncommon

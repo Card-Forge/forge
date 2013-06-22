@@ -5,4 +5,3 @@ PT:2/2
 K:Islandwalk
 SVar:Picture:http://resources.wizards.com/magic/cards/ia/en-us/card2580.jpg
 Oracle:Islandwalk
-SetInfo:ICE Rare

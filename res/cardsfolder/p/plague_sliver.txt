@@ -7,4 +7,3 @@ SVar:TrigPhase:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigDam
 SVar:TrigDamage:AB$ DealDamage | Cost$ 0 | NumDmg$ 1 | Defined$ You
 SVar:Picture:http://www.wizards.com/global/images/magic/general/plague_sliver.jpg
 Oracle:All Slivers have "At the beginning of your upkeep, this permanent deals 1 damage to you."
-SetInfo:TSP Rare

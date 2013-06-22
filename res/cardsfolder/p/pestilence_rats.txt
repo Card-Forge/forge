@@ -8,4 +8,3 @@ SVar:BuffedBy:Rat
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pestilence_rats.jpg
 Oracle:Pestilence Rats's power is equal to the number of other Rats on the battlefield. (For example, as long as there are two other Rats on the battlefield, Pestilence Rats's power and toughness are 2/3.)
-SetInfo:ICE Common

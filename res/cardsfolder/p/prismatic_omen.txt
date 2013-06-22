@@ -6,4 +6,3 @@ SVar:NonStackingEffect:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/prismatic_omen.jpg
 Oracle:Lands you control are every basic land type in addition to their other types.
-SetInfo:SHM Rare

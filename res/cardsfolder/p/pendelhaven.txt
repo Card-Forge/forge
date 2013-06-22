@@ -6,5 +6,3 @@ A:AB$ Pump | Cost$ T | NumAtt$ +1 | NumDef$ +2 | ValidTgts$ Creature.powerEQ1+to
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pendelhaven.jpg
 Oracle:{T}: Add {G} to your mana pool.\n{T}: Target 1/1 creature gets +1/+2 until end of turn.
-SetInfo:LEG Uncommon
-SetInfo:TSB Special

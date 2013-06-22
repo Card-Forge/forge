@@ -6,4 +6,3 @@ A:AB$ Mana | Cost$ T | Produced$ G | Amount$ X | References$ X | SpellDescriptio
 SVar:X:Count$Valid Elf
 SVar:Picture:http://www.wizards.com/global/images/magic/general/priest_of_titania.jpg
 Oracle:{T}: Add {G} to your mana pool for each Elf on the battlefield.
-SetInfo:USG Common

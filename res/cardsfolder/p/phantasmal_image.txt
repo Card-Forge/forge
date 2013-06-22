@@ -11,4 +11,3 @@ SVar:PhantasmalImageSac:AB$Sacrifice | Cost$ 0 | Defined$ Self
 SVar:Targeting:Dies
 SVar:Picture:http://www.wizards.com/global/images/magic/general/phantasmal_image.jpg
 Oracle:You may have Phantasmal Image enter the battlefield as a copy of any creature on the battlefield, except it's an Illusion in addition to its other types and it gains "When this creature becomes the target of a spell or ability, sacrifice it."
-SetInfo:M12 Rare

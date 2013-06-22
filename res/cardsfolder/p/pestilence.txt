@@ -7,11 +7,3 @@ A:AB$ DamageAll | Cost$ B | NumDmg$ 1 | ValidCards$ Creature | ValidPlayers$ Eac
 SVar:NeedsToPlay:Creature
 SVar:Picture:http://resources.wizards.com/magic/cards/uz/en-us/card5619.jpg
 Oracle:At the beginning of the end step, if no creatures are on the battlefield, sacrifice Pestilence.\n{B}: Pestilence deals 1 damage to each creature and each player.
-SetInfo:2ED Common
-SetInfo:6ED Uncommon
-SetInfo:USG Common
-SetInfo:LEB Common
-SetInfo:LEA Common
-SetInfo:5ED Common
-SetInfo:4ED Common
-SetInfo:3ED Common

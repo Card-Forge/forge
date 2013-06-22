@@ -8,6 +8,3 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creatu
 SVar:TrigAttach:DB$ Attach | Cost$ 0 | Defined$ TriggeredCard
 SVar:Picture:http://www.wizards.com/global/images/magic/general/prison_term.jpg
 Oracle:Enchant creature\nEnchanted creature can't attack or block, and its activated abilities can't be activated.\nWhenever a creature enters the battlefield under an opponent's control, you may attach Prison Term to that creature.
-SetInfo:COM Uncommon
-SetInfo:SHM Uncommon
-SetInfo:HOP Uncommon

@@ -5,4 +5,3 @@ PT:4/2
 A:AB$ Regenerate | Cost$ 1 B | SpellDescription$ Regenerate CARDNAME.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pewter_golem.jpg
 Oracle:{1}{B}: Regenerate Pewter Golem.
-SetInfo:MRD Common

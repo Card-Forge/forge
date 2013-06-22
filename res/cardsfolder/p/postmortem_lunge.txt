@@ -7,4 +7,3 @@ SVar:X:Targeted$CardManaCost
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/postmortem_lunge.jpg
 Oracle:({B/P} can be paid with either {B} or 2 life.)\nReturn target creature card with converted mana cost X from your graveyard to the battlefield. It gains haste. Exile it at the beginning of the next end step.
-SetInfo:NPH Uncommon

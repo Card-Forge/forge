@@ -7,4 +7,3 @@ SVar:X:Count$Valid Permanent.ChosenType+YouCtrl
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/packs_disdain.jpg
 Oracle:Choose a creature type. Target creature gets -1/-1 until end of turn for each permanent of the chosen type you control.
-SetInfo:MOR Common

@@ -7,4 +7,3 @@ SVar:AddMana:DB$ Mana | Cost$ 0 | Produced$ Combo Any | Amount$ X | References$ 
 SVar:X:Remembered$CardManaCost
 SVar:Picture:http://www.wizards.com/global/images/magic/general/plasm_capture.jpg
 Oracle:Counter target spell. At the beginning of your next precombat main phase, add X mana in any combination of colors to your mana pool, where X is that spell's converted mana cost.
-SetInfo:DGM Rare

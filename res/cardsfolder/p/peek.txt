@@ -6,5 +6,3 @@ SVar:DBDraw:DB$Draw | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/peek.jpg
 Oracle:Look at target player's hand.\nDraw a card.
-SetInfo:ODY Common
-SetInfo:10E Common

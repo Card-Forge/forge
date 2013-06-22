@@ -6,9 +6,3 @@ K:At the beginning of your upkeep, sacrifice CARDNAME unless you pay U
 K:Flying
 SVar:Picture:http://www.wizards.com/global/images/magic/general/phantasmal_forces.jpg
 Oracle:Flying\nAt the beginning of your upkeep, sacrifice Phantasmal Forces unless you pay {U}.
-SetInfo:2ED Uncommon
-SetInfo:LEB Uncommon
-SetInfo:LEA Uncommon
-SetInfo:5ED Uncommon
-SetInfo:4ED Uncommon
-SetInfo:3ED Uncommon

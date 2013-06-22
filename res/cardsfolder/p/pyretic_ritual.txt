@@ -5,4 +5,3 @@ A:SP$ Mana | Cost$ 1 R | Produced$ R | Amount$ 3 | SpellDescription$ Add R R R t
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pyretic_ritual.jpg
 Oracle:Add {R}{R}{R} to your mana pool.
-SetInfo:M11 Common

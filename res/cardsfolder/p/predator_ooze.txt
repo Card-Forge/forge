@@ -9,4 +9,3 @@ SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ P1P1 
 SVar:HasAttackEffect:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/predator_ooze.jpg
 Oracle:Predator Ooze is indestructible.\nWhenever Predator Ooze attacks, put a +1/+1 counter on it.\nWhenever a creature dealt damage by Predator Ooze this turn dies, put a +1/+1 counter on Predator Ooze.
-SetInfo:DKA Rare

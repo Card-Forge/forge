@@ -6,6 +6,3 @@ T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ Tri
 SVar:TrigPoison:AB$ Poison | Cost$ 0 | Defined$ TriggeredTarget | Num$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pit_scorpion.jpg
 Oracle:Whenever Pit Scorpion deals damage to a player, that player gets a poison counter. (A player with ten or more poison counters loses the game.)
-SetInfo:5ED Common
-SetInfo:LEG Common
-SetInfo:4ED Common

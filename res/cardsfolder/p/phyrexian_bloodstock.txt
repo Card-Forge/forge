@@ -7,4 +7,3 @@ SVar:TrigDestroy:AB$Destroy | Cost$ 0 | ValidTgts$ Creature.White | NoRegen$ Tru
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/phyrexian_bloodstock.jpg
 Oracle:When Phyrexian Bloodstock leaves the battlefield, destroy target white creature. It can't be regenerated.
-SetInfo:PLS Common

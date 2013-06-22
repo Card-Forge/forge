@@ -8,4 +8,3 @@ SVar:TrigLoseGame:AB$ LosesGame | Cost$ 0 | UnlessCost$ 4 R | UnlessPayer$ You |
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pact_of_the_titan.jpg
 Oracle:Pact of the Titan is red.\nPut a 4/4 red Giant creature token onto the battlefield.\nAt the beginning of your next upkeep, pay {4}{R}. If you don't, you lose the game.
-SetInfo:FUT Rare

@@ -7,4 +7,3 @@ K:Trample
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/phyrexian_dreadnought.jpg
 Oracle:Trample\nWhen Phyrexian Dreadnought enters the battlefield, sacrifice it unless you sacrifice any number of creatures with total power 12 or greater.
-SetInfo:MIR Rare

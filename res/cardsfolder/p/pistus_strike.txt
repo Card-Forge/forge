@@ -5,4 +5,3 @@ A:SP$ Destroy | Cost$ 2 G | ValidTgts$ Creature.withFlying | TgtPrompt$ Select t
 SVar:DBPoison:DB$Poison | Cost$ 0 | Defined$ TargetedController | Num$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pistus_strike.jpg
 Oracle:Destroy target creature with flying. Its controller gets a poison counter.
-SetInfo:MBS Common

@@ -7,4 +7,3 @@ SVar:TrigBounce:AB$ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Han
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pangosaur.jpg
 Oracle:Whenever a player plays a land, return Pangosaur to its owner's hand.
-SetInfo:MMQ Rare

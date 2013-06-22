@@ -8,4 +8,3 @@ T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ You | TriggerZones$
 SVar:TrigUntap:AB$Untap | Cost$ 0 | Defined$ Self
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pristine_angel.jpg
 Oracle:Flying\nAs long as Pristine Angel is untapped, it has protection from artifacts and from all colors.\nWhenever you cast a spell, you may untap Pristine Angel.
-SetInfo:DST Rare

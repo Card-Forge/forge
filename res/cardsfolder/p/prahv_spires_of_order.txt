@@ -8,4 +8,3 @@ SVar:RPreventNextFromSource:Event$ DamageDone | ValidSource$ Card.IsRemembered |
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/prahv_spires_of_order.jpg
 Oracle:{T}: Add {1} to your mana pool.\n{4}{W}{U}, {T}: Prevent all damage a source of your choice would deal this turn.
-SetInfo:DIS Uncommon

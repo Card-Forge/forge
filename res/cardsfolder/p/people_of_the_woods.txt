@@ -7,4 +7,3 @@ SVar:X:Count$Valid Forest.YouCtrl
 SVar:BuffedBy:Forest
 SVar:Picture:http://www.wizards.com/global/images/magic/general/people_of_the_woods.jpg
 Oracle:People of the Woods's toughness is equal to the number of Forests you control.
-SetInfo:DRK Uncommon

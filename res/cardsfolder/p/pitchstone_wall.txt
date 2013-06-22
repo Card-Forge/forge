@@ -8,4 +8,3 @@ SVar:TrigChange:AB$ChangeZone | Cost$ Sac<1/CARDNAME> | Defined$ TriggeredCard |
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pitchstone_wall.jpg
 Oracle:Defender (This creature can't attack.)\nWhenever you discard a card, you may sacrifice Pitchstone Wall. If you do, return the discarded card from your graveyard to your hand.
-SetInfo:TOR Uncommon

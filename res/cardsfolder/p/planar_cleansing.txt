@@ -4,5 +4,3 @@ Types:Sorcery
 A:SP$ DestroyAll | Cost$ 3 W W W | ValidCards$ Permanent.nonLand | SpellDescription$ Destroy all nonland permanents.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/planar_cleansing.jpg
 Oracle:Destroy all nonland permanents.
-SetInfo:M10 Rare
-SetInfo:M13 Rare

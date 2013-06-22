@@ -8,4 +8,3 @@ SVar:X:Imprinted$CardManaCost
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/prototype_portal.jpg
 Oracle:Imprint - When Prototype Portal enters the battlefield, you may exile an artifact card from your hand.\n{X}, {T}: Put a token that's a copy of the exiled card onto the battlefield. X is the converted mana cost of that card.
-SetInfo:SOM Rare

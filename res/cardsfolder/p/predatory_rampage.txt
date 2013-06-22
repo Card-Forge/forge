@@ -6,4 +6,3 @@ SVar:OppBlock:DB$ Effect | Name$ Predatory Rampage Effect | StaticAbilities$ KWP
 SVar:KWPump:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected$ Creature.OppCtrl | AddHiddenKeyword$ CARDNAME blocks each turn if able. | Description$ Each creature your opponents control blocks this turn if able.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/predatory_rampage.jpg
 Oracle:Creatures you control get +3/+3 until end of turn. Each creature your opponents control blocks this turn if able.
-SetInfo:M13 Rare

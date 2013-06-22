@@ -5,8 +5,3 @@ Text:At the beginning of each player's upkeep, Power Surge deals X damage to tha
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/power_surge.jpg
 Oracle:At the beginning of each player's upkeep, Power Surge deals X damage to that player, where X is the number of untapped lands he or she controlled at the beginning of this turn.
-SetInfo:LEB Rare
-SetInfo:4ED Rare
-SetInfo:LEA Rare
-SetInfo:3ED Rare
-SetInfo:2ED Rare

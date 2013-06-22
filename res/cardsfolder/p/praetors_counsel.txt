@@ -7,4 +7,3 @@ SVar:DBEffect:DB$ Effect | Name$ Praetor's Counsel Effect | StaticAbilities$ STH
 SVar:STHandSize:Mode$ Continuous | EffectZone$ Command | Affected$ You | SetMaxHandSize$ Unlimited | Description$ You have no maximum hand size.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/praetors_counsel.jpg
 Oracle:Return all cards from your graveyard to your hand. Exile Praetor's Counsel. You have no maximum hand size for the rest of the game.
-SetInfo:MBS Mythic

@@ -8,4 +8,3 @@ SVar:PatronLife:AB$ GainLife | Cost$ 0 | LifeAmount$ 1
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/patron_of_the_kitsune.jpg
 Oracle:Fox offering (You may cast this card any time you could cast an instant by sacrificing a Fox and paying the difference in mana costs between this and the sacrificed Fox. Mana cost includes color.)\nWhenever a creature attacks, you may gain 1 life.
-SetInfo:BOK Rare

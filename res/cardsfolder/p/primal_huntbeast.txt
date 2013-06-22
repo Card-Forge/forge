@@ -5,4 +5,3 @@ PT:3/3
 K:Hexproof
 SVar:Picture:http://www.wizards.com/global/images/magic/general/primal_huntbeast.jpg
 Oracle:Hexproof (This creature can't be the target of spells or abilities your opponents control.)
-SetInfo:M13 Common

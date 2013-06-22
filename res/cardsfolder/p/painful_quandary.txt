@@ -5,4 +5,3 @@ T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ Opponent | TriggerZ
 SVar:TrigLoseLife:AB$LoseLife | Cost$ 0 | Defined$ TriggeredActivator | LifeAmount$ 5 | UnlessCost$ Discard<1/Card> | UnlessPayer$ TriggeredCardController
 SVar:Picture:http://www.wizards.com/global/images/magic/general/painful_quandary.jpg
 Oracle:Whenever an opponent casts a spell, that player loses 5 life unless he or she discards a card.
-SetInfo:SOM Rare

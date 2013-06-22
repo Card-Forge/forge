@@ -6,4 +6,3 @@ K:Infect
 A:AB$ Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add 1 to your mana pool.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/plague_myr.jpg
 Oracle:Infect (This creature deals damage to creatures in the form of -1/-1 counters and to players in the form of poison counters.)\n{T}: Add {1} to your mana pool.
-SetInfo:MBS Uncommon

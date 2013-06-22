@@ -9,4 +9,3 @@ SVar:DBChangeZone:DB$ ChangeZoneAll | Origin$ Exile | ChangeType$ Card.IsRemembe
 SVar:DBPossibilityCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/possibility_storm.jpg
 Oracle:Whenever a player casts a spell from his or her hand, that player exiles it, then exiles cards from the top of his or her library until he or she exiles a card that shares a card type with it. That player may cast that card without paying its mana cost. Then he or she puts all cards exiled with Possibility Storm on the bottom of his or her library in a random order.
-SetInfo:DGM Rare

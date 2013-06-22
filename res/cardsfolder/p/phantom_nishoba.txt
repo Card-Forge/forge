@@ -11,4 +11,3 @@ K:If damage would be dealt to CARDNAME, prevent that damage. Remove a +1/+1 coun
 SVar:HasCombatEffect:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/phantom_nishoba.jpg
 Oracle:Trample\nPhantom Nishoba enters the battlefield with seven +1/+1 counters on it.\nWhenever Phantom Nishoba deals damage, you gain that much life.\nIf damage would be dealt to Phantom Nishoba, prevent that damage. Remove a +1/+1 counter from Phantom Nishoba.
-SetInfo:JUD Rare

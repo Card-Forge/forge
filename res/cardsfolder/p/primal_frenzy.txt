@@ -6,4 +6,3 @@ A:SP$ Attach | Cost$ G | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Trample | Description$ Enchanted creature has trample.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/primal_frenzy.jpg
 Oracle:Enchant creature\nEnchanted creature has trample.
-SetInfo:ODY Common

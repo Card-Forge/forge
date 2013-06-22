@@ -5,4 +5,3 @@ A:SP$ DealDamage | Cost$ 1 R | ValidTgts$ Creature | TgtPrompt$ Select target cr
 SVar:DB1:DB$ PutCounter | Defined$ Targeted | CounterType$ M1M1 | CounterNum$ 1 | IsCurse$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/puncture_bolt.jpg
 Oracle:Puncture Bolt deals 1 damage to target creature. Put a -1/-1 counter on that creature.
-SetInfo:SHM Common

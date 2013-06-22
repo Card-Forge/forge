@@ -7,5 +7,3 @@ A:AB$ Pump | Cost$ T Sac<1/CARDNAME> | ValidTgts$ Creature | TgtPrompt$ Select t
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/phyrexian_debaser.jpg
 Oracle:Flying\n{T}, Sacrifice Phyrexian Debaser: Target creature gets -2/-2 until end of turn.
-SetInfo:ULG Common
-SetInfo:DDE Common

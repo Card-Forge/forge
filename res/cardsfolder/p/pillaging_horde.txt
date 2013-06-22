@@ -11,4 +11,3 @@ SVar:NeedsToPlayVar:Y GE2
 SVar:Y:Count$InYourHand
 SVar:Picture:http://serv3.tcgimages.eu/img/cards/Portal/pillaging_horde.jpg
 Oracle:When Pillaging Horde enters the battlefield, sacrifice it unless you discard a card at random.
-SetInfo:POR Rare

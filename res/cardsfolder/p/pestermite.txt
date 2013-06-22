@@ -8,4 +8,3 @@ T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefi
 SVar:TrigTapOrUntap:AB$TapOrUntap | Cost$ 0 | ValidTgts$ Permanent | TgtPrompt$ Select target permanent
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pestermite.jpg
 Oracle:Flash\nFlying\nWhen Pestermite enters the battlefield, you may tap or untap target permanent.
-SetInfo:LRW Common

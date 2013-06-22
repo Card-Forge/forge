@@ -6,4 +6,3 @@ SVar:TrigReturn:DB$ ChangeZone | ConditionLifeTotal$ You | ConditionLifeAmount$ 
 SVar:X:Count$OppLifeTotal
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pulse_of_the_fields.jpg
 Oracle:You gain 4 life. Then if an opponent has more life than you, return Pulse of the Fields to its owner's hand.
-SetInfo:DST Rare

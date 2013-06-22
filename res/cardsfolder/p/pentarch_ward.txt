@@ -10,4 +10,3 @@ A:SP$ Attach | Cost$ 2 W | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Protection:Card.ChosenColor:Protection from ChosenColor | Description$ Enchanted creature has protection from the chosen color. This effect doesn't remove CARDNAME.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pentarch_ward.jpg
 Oracle:Enchant creature\nAs Pentarch Ward enters the battlefield, choose a color.\nWhen Pentarch Ward enters the battlefield, draw a card.\nEnchanted creature has protection from the chosen color. This effect doesn't remove Pentarch Ward.
-SetInfo:TSP Common

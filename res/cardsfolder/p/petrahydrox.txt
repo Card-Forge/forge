@@ -7,4 +7,3 @@ SVar:TrigChange:DB$ChangeZone | Origin$ Battlefield | Destination$ Hand
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/petrahydrox.jpg
 Oracle:({U/R} can be paid with either {U} or {R}.)\nWhen Petrahydrox becomes the target of a spell or ability, return Petrahydrox to its owner's hand.
-SetInfo:GPT Common

@@ -10,5 +10,3 @@ SVar:TrigDamage:Mode$ DamageDone | ValidSource$ Creature.IsRemembered | Execute$
 SVar:HasCombatEffect:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/paladin_of_prahv.jpg
 Oracle:Whenever Paladin of Prahv deals damage, you gain that much life.\nForecast - {1}{W}, Reveal Paladin of Prahv from your hand: Whenever target creature deals damage this turn, you gain that much life. (Activate this ability only during your upkeep and only once each turn.)
-SetInfo:DDG Uncommon
-SetInfo:DIS Uncommon

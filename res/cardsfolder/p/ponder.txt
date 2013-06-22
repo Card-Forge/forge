@@ -6,6 +6,3 @@ SVar:DBDraw:DB$Draw | Defined$ You | NumCards$ 1
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ponder.jpg
 Oracle:Look at the top three cards of your library, then put them back in any order. You may shuffle your library.\nDraw a card.
-SetInfo:M10 Common
-SetInfo:M12 Common
-SetInfo:LRW Common

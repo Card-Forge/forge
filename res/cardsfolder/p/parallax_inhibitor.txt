@@ -5,4 +5,3 @@ A:AB$ PutCounterAll | Cost$ 1 T Sac<1/CARDNAME> | ValidCards$ Permanent.withFadi
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/parallax_inhibitor.jpg
 Oracle:{1}, {T}, Sacrifice Parallax Inhibitor: Put a fade counter on each permanent with fading you control.
-SetInfo:NMS Rare

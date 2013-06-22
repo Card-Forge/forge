@@ -5,4 +5,3 @@ PT:5/3
 A:AB$ Pump | Cost$ B R | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pavel_maliki.jpg
 Oracle:{B}{R}: Pavel Maliki gets +1/+0 until end of turn.
-SetInfo:LEG Uncommon

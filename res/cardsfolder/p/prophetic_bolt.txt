@@ -5,6 +5,3 @@ A:SP$ DealDamage | Cost$ 3 U R | ValidTgts$ Creature,Player | TgtPrompt$ Select 
 SVar:DBDig:DB$Dig | DigNum$ 4
 SVar:Picture:http://www.wizards.com/global/images/magic/general/prophetic_bolt.jpg
 Oracle:Prophetic Bolt deals 4 damage to target creature or player. Look at the top four cards of your library. Put one of those cards into your hand and the rest on the bottom of your library in any order.
-SetInfo:APC Rare
-SetInfo:COM Rare
-SetInfo:DDJ Rare

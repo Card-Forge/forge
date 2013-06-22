@@ -6,4 +6,3 @@ A:SP$ ChangeZone | Cost$ 2 G | Origin$ Library | Destination$ Battlefield | Chan
 SVar:X:Count$Kicked.2.1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/primal_growth.jpg
 Oracle:Kicker-Sacrifice a creature. (You may sacrifice a creature in addition to any other costs as you cast this spell.)\nSearch your library for a basic land card, put that card onto the battlefield, then shuffle your library. If Primal Growth was kicked, instead search your library for two basic land cards, put them onto the battlefield, then shuffle your library.
-SetInfo:PLS Common

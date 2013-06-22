@@ -5,4 +5,3 @@ A:SP$ ExchangeControl | Cost$ 2 U | ValidTgts$ Land | TgtPrompt$ Select target l
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/political_trickery.jpg
 Oracle:Exchange control of target land you control and target land an opponent controls. (This effect lasts indefinitely.)
-SetInfo:MIR Rare

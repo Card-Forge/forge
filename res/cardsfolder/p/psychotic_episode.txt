@@ -10,4 +10,3 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/psychotic_episode.jpg
 Oracle:Target player reveals his or her hand and the top card of his or her library. You choose a card revealed this way. That player puts the chosen card on the bottom of his or her library.\nMadness {1}{B} (If you discard this card, you may cast it for its madness cost instead of putting it into your graveyard.)
-SetInfo:TSP Common

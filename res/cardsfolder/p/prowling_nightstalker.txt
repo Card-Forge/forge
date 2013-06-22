@@ -5,4 +5,3 @@ PT:2/2
 K:CantBeBlockedBy Creature.nonBlack
 SVar:Picture:http://www.wizards.com/global/images/magic/general/prowling_nightstalker.jpg
 Oracle:Prowling Nightstalker can't be blocked except by black creatures.
-SetInfo:PO2 Common

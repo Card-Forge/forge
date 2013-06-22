@@ -8,4 +8,3 @@ SVar:AddUpkeep:AB$ AddPhase | Cost$ 0 | ExtraPhase$ Upkeep
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/paradox_haze.jpg
 Oracle:Enchant player\nAt the beginning of enchanted player's first upkeep each turn, that player gets an additional upkeep step after this step.
-SetInfo:TSP Uncommon

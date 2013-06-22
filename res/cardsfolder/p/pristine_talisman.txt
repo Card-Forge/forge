@@ -5,4 +5,3 @@ A:AB$ Mana | Cost$ T | Produced$ 1 | SubAbility$ DBGainLife | SpellDescription$ 
 SVar:DBGainLife:DB$GainLife | LifeAmount$ 1 | Defined$ You
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pristine_talisman.jpg
 Oracle:{T}: Add {1} to your mana pool. You gain 1 life.
-SetInfo:NPH Common

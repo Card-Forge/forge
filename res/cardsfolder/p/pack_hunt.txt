@@ -7,4 +7,3 @@ SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pack_hunt.jpg
 Oracle:Search your library for up to three cards with the same name as target creature, reveal them, and put them into your hand. Then shuffle your library.
-SetInfo:NMS Rare

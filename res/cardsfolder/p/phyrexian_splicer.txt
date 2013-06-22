@@ -12,4 +12,3 @@ SVar:DBGainTrpl:DB$Pump | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select targ
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/phyrexian_splicer.jpg
 Oracle:{2}, {T}: Choose one - flying; first strike; shadow; or trample. Target creature with that ability loses it until end of turn and another target creature gains it until end of turn.
-SetInfo:TMP Uncommon

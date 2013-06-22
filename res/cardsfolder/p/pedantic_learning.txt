@@ -6,4 +6,3 @@ SVar:TrigDraw:AB$ Draw | Cost$ 1 | NumCards$ 1
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pedantic_learning.jpg
 Oracle:Whenever a land card is put into your graveyard from your library, you may pay {1}. If you do, draw a card.
-SetInfo:ODY Rare

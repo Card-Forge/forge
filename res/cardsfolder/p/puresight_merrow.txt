@@ -6,4 +6,3 @@ A:AB$ Dig | Cost$ WU Untap | DigNum$ 1 | DestinationZone$ Exile | DestinationZon
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/puresight_merrow.jpg
 Oracle:{W/U}, {Q}: Look at the top card of your library. You may exile that card. ({Q} is the untap symbol.)
-SetInfo:SHM Uncommon
