@@ -4,5 +4,3 @@ Types:Artifact
 A:AB$ Pump | Cost$ 4 T | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ CantBeBlockedBy Creature.nonWall | SpellDescription$ Target creature can't be blocked this turn except by Walls.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jovens_tools.jpg
 Oracle:{4}, {T}: Target creature can't be blocked this turn except by Walls.
-SetInfo:5ED Uncommon
-SetInfo:HML Uncommon

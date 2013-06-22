@@ -6,4 +6,3 @@ A:AB$ Token | Cost$ 1 G T | TokenAmount$ 1 | TokenName$ Wood | TokenTypes$ Creat
 A:AB$ Mana | Cost$ Sac<1/Permanent.token+namedWood/token named Wood> | Produced$ R | SpellDescription$ Add R to your mana pool.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jungle_patrol.jpg
 Oracle:{1}{G}, {T}:  Put a 0/1 green Wall creature token with defender named Wood onto the battlefield.\nSacrifice a token named Wood: Add {R} to your mana pool.
-SetInfo:MIR Rare

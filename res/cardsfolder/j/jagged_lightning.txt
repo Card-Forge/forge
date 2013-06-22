@@ -4,6 +4,3 @@ Types:Sorcery
 A:SP$ DealDamage | Cost$ 3 R R | TargetMin$ 2 | TargetMax$ 2 | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 3 | SpellDescription$ CARDNAME deals 3 damage to each of two target creatures.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jagged_lightning.jpg
 Oracle:Jagged Lightning deals 3 damage to each of two target creatures.
-SetInfo:PO2 Uncommon
-SetInfo:S99 Uncommon
-SetInfo:USG Uncommon

@@ -8,6 +8,3 @@ SVar:TrigReturn:DB$ChangeZone | Cost$ 0 | Defined$ Remembered | Origin$ Exile | 
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/journey_to_nowhere.jpg
 Oracle:When Journey to Nowhere enters the battlefield, exile target creature.\nWhen Journey to Nowhere leaves the battlefield, return the exiled card to the battlefield under its owner's control.
-SetInfo:COM Common
-SetInfo:ZEN Common
-SetInfo:DDF Common

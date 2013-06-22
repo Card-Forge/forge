@@ -8,4 +8,3 @@ SVar:TrigSacUnless:DB$ Sacrifice | Defined$ Self | UnlessCost$ Return<1/Forest.u
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jungle_basin.jpg
 Oracle:Jungle Basin enters the battlefield tapped.\nWhen Jungle Basin enters the battlefield, sacrifice it unless you return an untapped Forest you control to its owner's hand.\n{T}: Add {1}{G} to your mana pool.
-SetInfo:VIS Uncommon

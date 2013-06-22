@@ -14,10 +14,3 @@ SVar:X:ReplaceCount$DamageAmount
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jade_monolith.jpg
 Oracle:{1}: The next time a source of your choice would deal damage to target creature this turn, that source deals that damage to you instead.
-SetInfo:2ED Rare
-SetInfo:6ED Rare
-SetInfo:LEB Rare
-SetInfo:LEA Rare
-SetInfo:5ED Rare
-SetInfo:4ED Rare
-SetInfo:3ED Rare

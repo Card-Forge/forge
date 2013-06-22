@@ -7,4 +7,3 @@ S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 4 | AddToughness$ 4 | Check
 SVar:X:Count$InOppYard
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jaces_phantasm.jpg
 Oracle:Flying\nJace's Phantasm gets +4/+4 as long as an opponent has ten or more cards in his or her graveyard.
-SetInfo:M13 Uncommon

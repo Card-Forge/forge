@@ -5,7 +5,3 @@ A:AB$ Animate | Cost$ 2 | Defined$ Self | Power$ 3 | Toughness$ 6 | Types$ Creat
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jade_statue.jpg
 Oracle:{2}: Jade Statue becomes a 3/6 Golem artifact creature until end of combat. Activate this ability only during combat.
-SetInfo:LEB Uncommon
-SetInfo:LEA Uncommon
-SetInfo:9ED Rare
-SetInfo:2ED Uncommon

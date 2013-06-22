@@ -7,4 +7,3 @@ SVar:TrigUntap:AB$UntapAll | Cost$ 0 | ValidCards$ Creature.DefenderCtrl
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jangling_automaton.jpg
 Oracle:Whenever Jangling Automaton attacks, untap all creatures defending player controls.
-SetInfo:WTH Common

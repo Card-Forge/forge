@@ -6,4 +6,3 @@ SVar:RemRandomDeck:True
 DeckNeeds:Color$Black
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jet_medallion.jpg
 Oracle:Black spells you cast cost {1} less to cast.
-SetInfo:TMP Rare

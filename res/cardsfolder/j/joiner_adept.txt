@@ -6,5 +6,3 @@ S:Mode$ Continuous | Affected$ Land.YouCtrl | AddAbility$ AnyMana | Description$
 SVar:AnyMana:AB$Mana | Cost$ T | Produced$ Any | Amount$ 1 | SpellDescription$ Add one mana of any color to your mana pool.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/joiner_adept.jpg
 Oracle:Lands you control have "{T}: Add one mana of any color to your mana pool."
-SetInfo:5DN Rare
-SetInfo:10E Rare

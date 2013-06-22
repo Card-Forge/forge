@@ -6,8 +6,3 @@ SVar:DBDiscard:DB$Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jalum_tome.jpg
 Oracle:{2}, {T}: Draw a card, then discard a card.
-SetInfo:ATQ Uncommon
-SetInfo:5ED Rare
-SetInfo:7ED Rare
-SetInfo:CHR Rare
-SetInfo:6ED Rare

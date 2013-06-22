@@ -6,4 +6,3 @@ A:SP$ Token | Cost$ 3 W | TokenAmount$ 2 | TokenName$ Soldier Ally | TokenTypes$
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/join_the_ranks.jpg
 Oracle:Put two 1/1 white Soldier Ally creature tokens onto the battlefield.
-SetInfo:WWK Common

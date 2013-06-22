@@ -8,4 +8,3 @@ SVar:SacMe:4
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jinxed_ring.jpg
 Oracle:Whenever a nontoken permanent is put into your graveyard from the battlefield, Jinxed Ring deals 1 damage to you.\nSacrifice a creature: Target opponent gains control of Jinxed Ring. (This effect lasts indefinitely.)
-SetInfo:STH Rare

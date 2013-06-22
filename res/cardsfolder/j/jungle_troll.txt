@@ -6,4 +6,3 @@ A:AB$ Regenerate | Cost$ R | SpellDescription$ Regenerate CARDNAME.
 A:AB$ Regenerate | Cost$ G | SpellDescription$ Regenerate CARDNAME.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jungle_troll.jpg
 Oracle:{R}: Regenerate Jungle Troll.\n{G}: Regenerate Jungle Troll.
-SetInfo:MIR Uncommon

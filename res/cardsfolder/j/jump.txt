@@ -4,9 +4,3 @@ Types:Instant
 A:SP$ Pump | Cost$ U | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Flying | SpellDescription$ Target creature gains flying until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jump.jpg
 Oracle:Target creature gains flying until end of turn.
-SetInfo:2ED Common
-SetInfo:M10 Common
-SetInfo:LEB Common
-SetInfo:LEA Common
-SetInfo:4ED Common
-SetInfo:3ED Common

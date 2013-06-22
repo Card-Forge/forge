@@ -9,4 +9,3 @@ SVar:DBJasmineCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jasmine_seer.jpg
 Oracle:{2}{W}, {T}: Reveal any number of white cards in your hand. You gain 2 life for each card revealed this way.
-SetInfo:UDS Uncommon

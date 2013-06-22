@@ -6,4 +6,3 @@ S:Mode$ Continuous | Affected$ Creature.Green+YouCtrl | AddToughness$ 2 | Descri
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jacques_le_vert.jpg
 Oracle:Green creatures you control get +0/+2.
-SetInfo:LEG Rare

@@ -6,4 +6,3 @@ A:AB$ Untap | Cost$ T | ValidTgts$ Land | TgtPrompt$ Select target land | SpellD
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/juniper_order_druid.jpg
 Oracle:{T}: Untap target land.
-SetInfo:ICE Common

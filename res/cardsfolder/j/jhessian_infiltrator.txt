@@ -5,4 +5,3 @@ PT:2/2
 K:Unblockable
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jhessian_infiltrator.jpg
 Oracle:Jhessian Infiltrator is unblockable.
-SetInfo:ALA Uncommon

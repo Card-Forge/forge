@@ -4,4 +4,3 @@ Types:Instant
 A:SP$ Draw | Cost$ 3 U U | NumCards$ 3 | SpellDescription$ Draw three cards.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jaces_ingenuity.jpg
 Oracle:Draw three cards.
-SetInfo:M11 Uncommon

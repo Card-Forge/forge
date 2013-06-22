@@ -13,4 +13,3 @@ SVar:SacMe:4
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jinxed_choker.jpg
 Oracle:At the beginning of your end step, target opponent gains control of Jinxed Choker and puts a charge counter on it.\nAt the beginning of your upkeep, Jinxed Choker deals damage to you equal to the number of charge counters on it.\n{3}: Put a charge counter on Jinxed Choker or remove one from it.
-SetInfo:MRD Rare

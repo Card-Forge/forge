@@ -9,4 +9,3 @@ SVar:RemRandomDeck:True
 DeckNeeds:Color$Green
 SVar:Picture:http://www.wizards.com/global/images/magic/general/juniper_order_advocate.jpg
 Oracle:As long as Juniper Order Advocate is untapped, green creatures you control get +1/+1.
-SetInfo:ALL Uncommon

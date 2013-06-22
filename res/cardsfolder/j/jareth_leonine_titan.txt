@@ -7,4 +7,3 @@ A:AB$ Protection | Cost$ W | Gains$ Choice | Choices$ AnyColor | SpellDescriptio
 SVar:TrigPump:AB$Pump | Cost$ 0 | Defined$ Self | NumAtt$ 7 | NumDef$ 7
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jareth_leonine_titan.jpg
 Oracle:Whenever Jareth, Leonine Titan blocks, it gets +7/+7 until end of turn.\n{W}: Jareth gains protection from the color of your choice until end of turn.
-SetInfo:ONS Rare

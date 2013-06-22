@@ -6,4 +6,3 @@ SVar:X:Count$NumTypeWhiteOppCtrl.Creature/Twice
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jovial_evil.jpg
 Oracle:Jovial Evil deals X damage to target opponent, where X is twice the number of white creatures that player controls.
-SetInfo:LEG Rare

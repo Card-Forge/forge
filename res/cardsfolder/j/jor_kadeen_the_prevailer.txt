@@ -8,4 +8,3 @@ SVar:BuffedBy:Artifact
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jor_kadeen_the_prevailer.jpg
 Oracle:First strike\nMetalcraft - Creatures you control get +3/+0 as long as you control three or more artifacts.
-SetInfo:NPH Rare

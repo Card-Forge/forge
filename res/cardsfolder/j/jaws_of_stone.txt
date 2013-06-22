@@ -8,6 +8,3 @@ SVar:OrigMountains:Count$Valid Mountain.YouCtrl
 SVar:Min:SVar$OrigMountains/LimitMax.1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jaws_of_stone.jpg
 Oracle:Jaws of Stone deals X damage divided as you choose among any number of target creatures and/or players, where X is the number of Mountains you control as you cast Jaws of Stone.
-SetInfo:DDI Uncommon
-SetInfo:DDG Uncommon
-SetInfo:SHM Uncommon

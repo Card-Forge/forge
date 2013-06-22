@@ -7,7 +7,3 @@ A:AB$ Draw | Cost$ SubCounter<1/LOYALTY> | ValidTgts$ Player | Planeswalker$ Tru
 A:AB$ Mill | Cost$ SubCounter<10/LOYALTY> | NumCards$ 20 | ValidTgts$ Player | Planeswalker$ True | Ultimate$ True | SpellDescription$ Target player puts the top twenty cards of his or her library into his or her graveyard.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jace_beleren.jpg
 Oracle:[+2] Each player draws a card.\n[-1] Target player draws a card.\n[-10] Target player puts the top twenty cards of his or her library into his or her graveyard.
-SetInfo:M11 Mythic
-SetInfo:DD2 Mythic
-SetInfo:LRW Rare
-SetInfo:M10 Mythic

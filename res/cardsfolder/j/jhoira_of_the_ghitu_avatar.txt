@@ -6,4 +6,3 @@ A:AB$ Play | Cost$ 3 Discard<1/Card> | ActivationZone$ Command | AnySupportedCar
 A:AB$ Play | Cost$ 3 Discard<1/Card> | ActivationZone$ Command | AnySupportedCard$ Sorcery | RandomCopied$ True | RandomNum$ 3 | ChoiceNum$ 1 | CopyCard$ True | WithoutManaCost$ True | SorcerySpeed$ True | SpellDescription$ Copy three sorcery cards chosen at random. You may cast one of the copies without paying its mana cost. Activate this ability only any time you could cast a sorcery.
 SVar:Picture:http://www.cardforge.org/fpics/vgd-lq/jhoira_of_the_ghitu_avatar.jpg
 Oracle:Hand +1, life +0\n{3}, Discard a card: Copy three instant cards chosen at random. You may cast one of the copies without paying its mana cost.\n{3}, Discard a card: Copy three sorcery cards chosen at random. You may cast one of the copies without paying its mana cost. Activate this ability only any time you could cast a sorcery.
-SetInfo:VAN Special

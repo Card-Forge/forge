@@ -8,5 +8,3 @@ SVar:X:SVar$Y/Twice
 SVar:Y:TriggerCount$NumBlockers/Minus.1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/johtull_wurm.jpg
 Oracle:Whenever Johtull Wurm becomes blocked, it gets -2/-1 until end of turn for each creature blocking it beyond the first.
-SetInfo:ICE Uncommon
-SetInfo:5ED Uncommon

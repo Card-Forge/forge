@@ -13,4 +13,3 @@ SVar:NeedsToPlayVar:Y GE5
 SVar:Y:Count$Valid Land.YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jokulmorder.jpg
 Oracle:Trample\nJokulmorder enters the battlefield tapped.\nWhen Jokulmorder enters the battlefield, sacrifice it unless you sacrifice five lands.\nJokulmorder doesn't untap during your untap step.\nWhenever you play an Island, you may untap Jokulmorder.
-SetInfo:CSP Rare

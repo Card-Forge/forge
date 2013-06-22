@@ -9,5 +9,3 @@ SVar:X:TriggerCount$DamageAmount
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/justice.jpg
 Oracle:At the beginning of your upkeep, sacrifice Justice unless you pay {W}{W}.\nWhenever a red creature or spell deals damage, Justice deals that much damage to that creature's or spell's controller.
-SetInfo:ICE Uncommon
-SetInfo:5ED Uncommon

@@ -7,5 +7,3 @@ SVar:TrigDamage:AB$DealDamage | Cost$ 0 | NumDmg$ X | Defined$ You | References$
 SVar:X:TriggerCount$DamageAmount
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jackal_pup.jpg
 Oracle:Whenever Jackal Pup is dealt damage, it deals that much damage to you.
-SetInfo:TMP Uncommon
-SetInfo:PD2 Uncommon

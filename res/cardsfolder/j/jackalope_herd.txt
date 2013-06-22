@@ -7,4 +7,3 @@ SVar:TrigReturn:AB$ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Han
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jackalope_herd.jpg
 Oracle:When you cast a spell, return Jackalope Herd to its owner's hand.
-SetInfo:EXO Common

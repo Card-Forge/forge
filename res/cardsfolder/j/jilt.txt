@@ -6,4 +6,3 @@ A:SP$ ChangeZone | Cost$ 1 U | ValidTgts$ Creature |TgtPrompt$ Select target cre
 SVar:DBDamage:DB$ DealDamage | Condition$ Kicked | ValidTgts$ Creature | TgtPrompt$ Select another target creature | TargetUnique$ True | NumDmg$ 2 | SpellDescription$ If CARDNAME was kicked, it deals 2 damage to another target creature.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jilt.jpg
 Oracle:Kicker {1}{R} (You may pay an additional {1}{R} as you cast this spell.)\nReturn target creature to its owner's hand. If Jilt was kicked, it deals 2 damage to another target creature.
-SetInfo:APC Common

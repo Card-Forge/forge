@@ -5,8 +5,3 @@ A:AB$ Untap | Cost$ 3 T | ValidTgts$ Creature | TgtPrompt$ Select target creatur
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jandors_saddlebags.jpg
 Oracle:{3}, {T}: Untap target creature.
-SetInfo:5ED Rare
-SetInfo:7ED Rare
-SetInfo:4ED Rare
-SetInfo:3ED Rare
-SetInfo:ARN Rare

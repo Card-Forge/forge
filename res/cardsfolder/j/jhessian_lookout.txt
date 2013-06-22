@@ -4,4 +4,3 @@ Types:Creature Human Scout
 PT:2/1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jhessian_lookout.jpg
 Oracle:
-SetInfo:ALA Common

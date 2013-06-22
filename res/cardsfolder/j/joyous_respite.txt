@@ -5,4 +5,3 @@ A:SP$ GainLife | Cost$ 3 G | LifeAmount$ X | References$ X | SpellDescription$ Y
 SVar:X:Count$TypeYouCtrl.Land
 SVar:Picture:http://www.wizards.com/global/images/magic/general/joyous_respite.jpg
 Oracle:You gain 1 life for each land you control.
-SetInfo:CHK Common

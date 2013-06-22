@@ -6,12 +6,3 @@ K:CARDNAME attacks each turn if able.
 K:CantBeBlockedBy Creature.Wall
 SVar:Picture:http://www.wizards.com/global/images/magic/general/juggernaut.jpg
 Oracle:Juggernaut attacks each turn if able.\nJuggernaut can't be blocked by Walls.
-SetInfo:2ED Uncommon
-SetInfo:DST Uncommon
-SetInfo:10E Uncommon
-SetInfo:M11 Uncommon
-SetInfo:LEB Uncommon
-SetInfo:ARC Uncommon
-SetInfo:LEA Uncommon
-SetInfo:DDF Uncommon
-SetInfo:3ED Uncommon

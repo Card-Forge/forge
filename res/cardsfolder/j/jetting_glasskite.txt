@@ -8,4 +8,3 @@ SVar:GlasskiteCounter:AB$ Counter | Cost$ 0 | Defined$ TriggeredSourceSA
 SVar:Targeting:Counter
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jetting_glasskite.jpg
 Oracle:Flying\nWhenever Jetting Glasskite becomes the target of a spell or ability for the first time in a turn, counter that spell or ability.
-SetInfo:BOK Uncommon

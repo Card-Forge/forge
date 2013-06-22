@@ -8,4 +8,3 @@ T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefiel
 SVar:TrigDraw:AB$ Draw | Cost$ 0 | Defined$ You | NumCards$ 7
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jin_gitaxias_core_augur.jpg
 Oracle:Flash\nAt the beginning of your end step, draw seven cards.\nEach opponent's maximum hand size is reduced by seven.
-SetInfo:NPH Mythic

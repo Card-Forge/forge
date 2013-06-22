@@ -5,7 +5,3 @@ A:AB$ ChangeZone | Cost$ 2 T Sac<1/CARDNAME> | ValidTgts$ Player | Chooser$ You 
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jesters_cap.jpg
 Oracle:{2}, {T}, Sacrifice Jester's Cap: Search target player's library for three cards and exile them. Then that player shuffles his or her library.
-SetInfo:ICE Rare
-SetInfo:5ED Rare
-SetInfo:V10 Mythic
-SetInfo:9ED Rare

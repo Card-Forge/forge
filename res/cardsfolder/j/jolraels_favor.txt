@@ -8,4 +8,3 @@ A:AB$ Regenerate | Cost$ 1 G | Defined$ Enchanted | SpellDescription$ Regenerate
 #TODO - check rarity on this
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jolraels_favor.jpg
 Oracle:Flash\nEnchant creature\n{1}{G}: Regenerate enchanted creature.
-SetInfo:PCY Common

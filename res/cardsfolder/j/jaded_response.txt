@@ -5,4 +5,3 @@ A:SP$ Counter | Cost$ 1 U | TargetType$ Spell | ValidTgts$ Card | AITgts$ Card.S
 SVar:X:Targeted$Valid Card.SharesColorWith Creature.YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jaded_response.jpg
 Oracle:Counter target spell if it shares a color with a creature you control.
-SetInfo:APC Common

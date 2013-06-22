@@ -8,4 +8,3 @@ SVar:DrawSlowtrip:DB$Draw | NumCards$ 1 | Defined$ You
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jinx.jpg
 Oracle:Target land becomes the basic land type of your choice until end of turn.\nDraw a card at the beginning of the next turn's upkeep.
-SetInfo:HML Common

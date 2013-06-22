@@ -13,4 +13,3 @@ SVar:X:Count$RememberedSize
 SVar:HandSizeTest:Count$CardsInOppHand/Minus.X
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jaces_archivist.jpg
 Oracle:{U}, {T}: Each player discards his or her hand, then draws cards equal to the greatest number of cards a player discarded this way.
-SetInfo:M12 Rare

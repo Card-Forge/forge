@@ -5,6 +5,3 @@ A:SP$ DestroyAll | Cost$ 4 R R | ValidCards$ Artifact,Creature,Land | NoRegen$ T
 SVar:RemRandomDeck:True
 SVar:Picture:http://resources.wizards.com/magic/cards/6e/en-us/card14653.jpg
 Oracle:Destroy all artifacts, creatures, and lands. They can't be regenerated.
-SetInfo:ICE Rare
-SetInfo:5ED Rare
-SetInfo:6ED Rare

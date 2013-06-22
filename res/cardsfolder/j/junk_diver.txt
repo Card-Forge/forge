@@ -8,4 +8,3 @@ SVar:TrigChange:AB$ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgt
 SVar:SacMe:1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/junk_diver.jpg
 Oracle:Flying\nWhen Junk Diver dies, return another target artifact card from your graveyard to your hand.
-SetInfo:UDS Rare

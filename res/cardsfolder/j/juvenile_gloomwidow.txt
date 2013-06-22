@@ -6,4 +6,3 @@ K:Reach
 K:Wither
 SVar:Picture:http://www.wizards.com/global/images/magic/general/juvenile_gloomwidow.jpg
 Oracle:Reach (This can block creatures with flying.)\nWither (This deals damage to creatures in the form of -1/-1 counters.)
-SetInfo:SHM Common

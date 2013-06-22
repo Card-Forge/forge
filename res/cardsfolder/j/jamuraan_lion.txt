@@ -6,4 +6,3 @@ A:AB$ Pump | Cost$ W T | ValidTgts$ Creature | TgtPrompt$ Select target creature
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jamuraan_lion.jpg
 Oracle:{W}, {T}: Target creature can't block this turn.
-SetInfo:VIS Common

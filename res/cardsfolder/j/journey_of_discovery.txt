@@ -9,4 +9,3 @@ SVar:JourneyOfDis:Mode$ Continuous | Affected$ You | AddKeyword$ AdjustLandPlays
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/journey_of_discovery.jpg
 Oracle:Choose one - Search your library for up to two basic land cards, reveal them, put them into your hand, then shuffle your library; or you may play up to two additional lands this turn.\nEntwine {2}{G} (Choose both if you pay the entwine cost.)
-SetInfo:MRD Common

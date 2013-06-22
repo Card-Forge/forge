@@ -6,4 +6,3 @@ K:Reach
 K:Cycling:2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jungle_weaver.jpg
 Oracle:Reach (This can block creatures with flying.)\nCycling {2} ({2}, Discard this card: Draw a card.)
-SetInfo:ALA Common

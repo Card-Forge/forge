@@ -7,4 +7,3 @@ T:Mode$ SpellCast | ValidCard$ Card.ChosenColor | TriggerZones$ Battlefield | Ex
 SVar:TrigGainLife:AB$GainLife | Cost$ 2 | Defined$ You | LifeAmount$ 2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jeweled_torque.jpg
 Oracle:As Jeweled Torque enters the battlefield, choose a color.\nWhenever a player casts a spell of the chosen color, you may pay {2}. If you do, you gain 2 life.
-SetInfo:MMQ Uncommon

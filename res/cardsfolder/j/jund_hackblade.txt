@@ -8,4 +8,3 @@ SVar:PlayMain1:TRUE
 SVar:BuffedBy:Permanent.MultiColor
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jund_hackblade.jpg
 Oracle:As long as you control another multicolored permanent, Jund Hackblade gets +1/+1 and has haste.
-SetInfo:ARB Common

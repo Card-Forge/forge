@@ -8,5 +8,3 @@ SVar:SacMe:4
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jinxed_idol.jpg
 Oracle:At the beginning of your upkeep, Jinxed Idol deals 2 damage to you.\nSacrifice a creature: Target opponent gains control of Jinxed Idol.
-SetInfo:M11 Rare
-SetInfo:TMP Rare

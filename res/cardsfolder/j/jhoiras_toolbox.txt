@@ -5,4 +5,3 @@ PT:1/1
 A:AB$ Regenerate | Cost$ 2 | ValidTgts$ Creature.Artifact | TgtPrompt$ Select target artifact creature. | SpellDescription$ Regenerate target artifact creature.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jhoiras_toolbox.jpg
 Oracle:{2}: Regenerate target artifact creature.
-SetInfo:ULG Uncommon
