@@ -40,7 +40,7 @@ public class TapAllEffect extends SpellAbilityEffect {
 
         final List<Player> tgtPlayers = getTargetPlayers(sa);
 
-        if ((tgtPlayers == null) || tgtPlayers.isEmpty()) {
+        if (!sa.usesTargeting()) {
             cards = game.getCardsIn(ZoneType.Battlefield);
         } else {
             cards = new ArrayList<Card>();

@@ -49,7 +49,7 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
         List<Player> tgtPlayers = getTargetPlayers(sa);
         final Game game = sa.getActivatingPlayer().getGame();
 
-        if ((tgtPlayers == null) || tgtPlayers.isEmpty() || sa.hasParam("UseAllOriginZones")) {
+        if (!sa.usesTargeting() || sa.hasParam("UseAllOriginZones")) {
             cards = game.getCardsIn(origin);
         } else if (origin.contains(ZoneType.Library) && sa.hasParam("Search")) {
             // Search library using changezoneall effect need a param "Search"
