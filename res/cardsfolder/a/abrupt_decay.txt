@@ -5,4 +5,3 @@ K:CARDNAME can't be countered.
 A:SP$ Destroy | Cost$ B G | ValidTgts$ Permanent.nonLand+cmcLE3 | TgtPrompt$ Select target nonland permanent with converted mana cost 3 or less | SpellDescription$ Destroy target nonland permanent with converted mana cost 3 or less.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/abrupt_decay.jpg
 Oracle:Abrupt Decay can't be countered by spells or abilities.\nDestroy target nonland permanent with converted mana cost 3 or less.
-SetInfo:RTR Rare

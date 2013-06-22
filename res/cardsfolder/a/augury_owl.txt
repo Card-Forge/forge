@@ -7,6 +7,3 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigScry:AB$Scry | Cost$ 0 | ScryNum$ 3
 SVar:Picture:http://www.wizards.com/global/images/magic/general/augury_owl.jpg
 Oracle:Flying\nWhen Augury Owl enters the battlefield, scry 3. (To scry 3, look at the top three cards of your library, then put any number of them on the bottom of your library and the rest on top in any order.)
-SetInfo:M11 Common
-SetInfo:PC2 Common
-SetInfo:DDI Common

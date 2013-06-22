@@ -6,4 +6,3 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigPump:AB$Pump | Cost$ 0 | Defined$ Self | NumAtt$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/akki_raider.jpg
 Oracle:Whenever a land is put into a graveyard from the battlefield, Akki Raider gets +1/+0 until end of turn.
-SetInfo:BOK Uncommon

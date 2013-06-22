@@ -8,7 +8,3 @@ SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 1
 SVar:SacMe:1
 SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card82998.jpg
 Oracle:Flying (This creature can't be blocked except by creatures with flying or reach.)\nWhen Aven Fisher dies, you may draw a card.
-SetInfo:8ED Common
-SetInfo:ODY Common
-SetInfo:9ED Common
-SetInfo:10E Common

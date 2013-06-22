@@ -7,4 +7,3 @@ SVar:DBDraw:DB$ Draw | NumCards$ 1
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aura_finesse.jpg
 Oracle:Attach target Aura you control to target creature.\nDraw a card.
-SetInfo:ROE Common

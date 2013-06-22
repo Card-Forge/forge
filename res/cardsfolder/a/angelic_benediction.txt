@@ -6,6 +6,3 @@ T:Mode$ Attacks | ValidCard$ Creature.YouCtrl | Alone$ True | TriggerZones$ Batt
 SVar:TrigTap:AB$Tap | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature
 SVar:Picture:http://www.wizards.com/global/images/magic/general/angelic_benediction.jpg
 Oracle:Exalted (Whenever a creature you control attacks alone, that creature gets +1/+1 until end of turn.)\nWhenever a creature you control attacks alone, you may tap target creature.
-SetInfo:DDC Uncommon
-SetInfo:M13 Uncommon
-SetInfo:ALA Uncommon

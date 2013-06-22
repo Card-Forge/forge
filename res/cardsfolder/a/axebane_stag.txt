@@ -4,4 +4,3 @@ Types:Creature Elk
 PT:6/7
 SVar:Picture:http://www.wizards.com/global/images/magic/general/axebane_stag.jpg
 Oracle:
-SetInfo:RTR Common

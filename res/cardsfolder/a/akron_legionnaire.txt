@@ -5,6 +5,3 @@ PT:8/4
 S:Mode$ Continuous | Affected$ Creature.YouCtrl+nonArtifact+notnamedAkron Legionnaire | AddHiddenKeyword$ CARDNAME can't attack. | Description$ Except for creatures named CARDNAME and artifact creatures, creatures you control can't attack.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/akron_legionnaire.jpg
 Oracle:Except for creatures named Akron Legionnaire and artifact creatures, creatures you control can't attack.
-SetInfo:5ED Rare
-SetInfo:CHR Rare
-SetInfo:LEG Rare

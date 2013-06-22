@@ -8,6 +8,3 @@ SVar:X:Count$Valid Mountain.YouCtrl
 SVar:DiscardMe:2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/anger.jpg
 Oracle:Haste\nAs long as Anger is in your graveyard and you control a Mountain, creatures you control have haste.
-SetInfo:DDI Uncommon
-SetInfo:COM Uncommon
-SetInfo:JUD Uncommon

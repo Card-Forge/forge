@@ -6,4 +6,3 @@ S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 2 | AddToughness$ 2 | AddKe
 SVar:BuffedBy:Artifact
 SVar:Picture:http://www.wizards.com/global/images/magic/general/auriok_sunchaser.jpg
 Oracle:Metalcraft - As long as you control three or more artifacts, Auriok Sunchaser gets +2/+2 and has flying.
-SetInfo:SOM Common

@@ -4,4 +4,3 @@ Types:Sorcery
 A:SP$ ChangeZone | Cost$ B | Origin$ Hand | Destination$ Exile | ValidTgts$ Opponent | DefinedPlayer$ Targeted | Chooser$ You | ChangeType$ Card.cmcGE4 | ChangeNum$ 1 | IsCurse$ True | Mandatory$ True | StackDescription$ SpellDescription | SpellDescription$ Target opponent reveals his or her hand. You choose a card from it with converted mana cost 4 or greater and exile that card.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/appetite_for_brains.jpg
 Oracle:Target opponent reveals his or her hand. You choose a card from it with converted mana cost 4 or greater and exile that card.
-SetInfo:AVR Uncommon

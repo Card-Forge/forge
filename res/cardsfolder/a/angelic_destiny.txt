@@ -8,4 +8,3 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigChangeZone:AB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Hand
 SVar:Picture:http://www.wizards.com/global/images/magic/general/angelic_destiny.jpg
 Oracle:Enchant creature\nEnchanted creature gets +4/+4, has flying and first strike, and is an Angel in addition to its other types.\nWhen enchanted creature dies, return Angelic Destiny to its owner's hand.
-SetInfo:M12 Mythic

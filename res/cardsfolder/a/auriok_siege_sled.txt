@@ -11,4 +11,3 @@ A:AB$ MustBlock | Cost$ 1 | ValidTgts$ Creature.Artifact | TgtPrompt$ Select tar
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/auriok_siege_sled.jpg
 Oracle:{1}: Target artifact creature blocks Auriok Siege Sled this turn if able.\n{1}: Target artifact creature can't block Auriok Siege Sled this turn.
-SetInfo:DST Uncommon

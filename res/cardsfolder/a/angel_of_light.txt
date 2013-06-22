@@ -6,4 +6,3 @@ K:Flying
 K:Vigilance
 SVar:Picture:http://resources.wizards.com/magic/cards/p3/en-us/card20391.jpg
 Oracle:Flying, vigilance
-SetInfo:S99 Uncommon

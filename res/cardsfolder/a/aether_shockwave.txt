@@ -6,4 +6,3 @@ A:SP$ TapAll | Cost$ 3 W | ValidCards$ Creature.nonSpirit | PrecostDesc$ or | Sp
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aether_shockwave.jpg
 Oracle:Choose one - Tap all Spirits; or tap all non-Spirit creatures.
-SetInfo:SOK Uncommon

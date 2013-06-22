@@ -6,4 +6,3 @@ K:Flying
 K:Hexproof
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ascended_lawmage.jpg
 Oracle:Flying, hexproof
-SetInfo:DGM Uncommon

@@ -7,5 +7,3 @@ SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ CHARG
 SVar:X:Count$CardCounters.CHARGE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aether_vial.jpg
 Oracle:At the beginning of your upkeep, you may put a charge counter on AEther Vial.\n{T}: You may put a creature card with converted mana cost equal to the number of charge counters on AEther Vial from your hand onto the battlefield.
-SetInfo:DST Uncommon
-SetInfo:V10 Mythic

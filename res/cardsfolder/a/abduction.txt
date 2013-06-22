@@ -11,5 +11,3 @@ SVar:TrigReturnOwner:AB$ ChangeZone | Cost$ 0 | Defined$ TriggeredCard | Origin$
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/abduction.jpg
 Oracle:Enchant creature\nWhen Abduction enters the battlefield, untap enchanted creature.\nYou control enchanted creature.\nWhen enchanted creature dies, return that card to the battlefield under its owner's control.
-SetInfo:WTH Uncommon
-SetInfo:6ED Uncommon

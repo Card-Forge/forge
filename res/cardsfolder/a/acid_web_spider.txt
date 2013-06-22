@@ -8,4 +8,3 @@ SVar:TrigDestroy:DB$Destroy | Cost$ 0 | ValidTgts$ Equipment | TgtPrompt$ Choose
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/acid_web_spider.jpg
 Oracle:Reach\nWhen Acid Web Spider enters the battlefield, you may destroy target Equipment.
-SetInfo:SOM Uncommon

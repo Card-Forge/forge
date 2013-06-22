@@ -6,4 +6,3 @@ A:AB$ Regenerate | Cost$ 1 G | ValidTgts$ Creature | TgtPrompt$ Select target cr
 SVar:NonStackingEffect:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/asceticism.jpg
 Oracle:Creatures you control have hexproof. (They can't be the targets of spells or abilities your opponents control.)\n{1}{G}: Regenerate target creature.
-SetInfo:SOM Rare

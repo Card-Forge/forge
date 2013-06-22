@@ -12,4 +12,3 @@ ManaCost:3 G
 Types:Sorcery
 A:SP$ Pump | Cost$ 3 G | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ HIDDEN All creatures able to block CARDNAME do so. | SpellDescription$ All creatures able to block target creature this turn do so this turn.
 Oracle:All creatures able to block target creature this turn do so.\nFuse (You may cast one or both halves of this card from your hand.)
-SetInfo:DGM Uncommon

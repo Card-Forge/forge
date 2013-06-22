@@ -8,5 +8,3 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigDestroy:DB$Destroy | ValidTgts$ Land | TgtPrompt$ Select a land.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/avalanche_riders.jpg
 Oracle:Haste\nEcho {3}{R} (At the beginning of your upkeep, if this came under your control since the beginning of your last upkeep, sacrifice it unless you pay its echo cost.)\nWhen Avalanche Riders enters the battlefield, destroy target land.
-SetInfo:ULG Uncommon
-SetInfo:TSB Special

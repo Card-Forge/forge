@@ -5,4 +5,3 @@ A:SP$ Destroy | Cost$ 3 B B | ValidTgts$ Creature.nonBlack | TgtPrompt$ Select t
 SVar:DBDraw:DB$Draw | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/annihilate.jpg
 Oracle:Destroy target nonblack creature. It can't be regenerated.\nDraw a card.
-SetInfo:INV Uncommon

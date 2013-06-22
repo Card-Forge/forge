@@ -6,5 +6,3 @@ SVar:TrigGainLife:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ X | Referen
 SVar:X:TriggeredCard$CardToughness
 SVar:Picture:http://www.wizards.com/global/images/magic/general/angelic_chorus.jpg
 Oracle:Whenever a creature enters the battlefield under your control, you gain life equal to its toughness.
-SetInfo:10E Rare
-SetInfo:USG Rare

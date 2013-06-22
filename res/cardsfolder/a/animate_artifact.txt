@@ -7,8 +7,3 @@ S:Mode$ Continuous | Affected$ Card.AttachedBy+nonCreature | SetPower$ AffectedX
 SVar:AffectedX:Count$CardManaCost
 SVar:Picture:http://www.wizards.com/global/images/magic/general/animate_artifact.jpg
 Oracle:Enchant artifact\nAs long as enchanted artifact isn't a creature, it's an artifact creature with power and toughness each equal to its converted mana cost.
-SetInfo:2ED Uncommon
-SetInfo:LEB Uncommon
-SetInfo:LEA Uncommon
-SetInfo:4ED Uncommon
-SetInfo:3ED Uncommon

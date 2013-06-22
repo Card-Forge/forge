@@ -10,4 +10,3 @@ SVar:DBMove:DB$ MoveCounter | Cost$ 0 | Source$ Targeted | Defined$ Self | Count
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/arcbound_fiend.jpg
 Oracle:Fear (This creature can't be blocked except by artifact creatures and/or black creatures.)\nAt the beginning of your upkeep, you may move a +1/+1 counter from target creature onto Arcbound Fiend.\nModular 3 (This enters the battlefield with three +1/+1 counters on it. When it dies, you may put its +1/+1 counters on target artifact creature.)
-SetInfo:DST Uncommon

@@ -8,4 +8,3 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creatu
 SVar:TrigGainLife:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/auriok_champion.jpg
 Oracle:Protection from black and from red\nWhenever another creature enters the battlefield, you may gain 1 life.
-SetInfo:5DN Rare

@@ -10,5 +10,3 @@ SVar:TrigBounce:AB$ ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Ha
 SVar:HasCombatEffect:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aether_membrane.jpg
 Oracle:Defender; reach (This creature can block creatures with flying.)\nWhenever AEther Membrane blocks a creature, return that creature to its owner's hand at end of combat.
-SetInfo:DDI Uncommon
-SetInfo:PLC Uncommon

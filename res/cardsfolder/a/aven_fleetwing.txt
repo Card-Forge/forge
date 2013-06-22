@@ -6,4 +6,3 @@ K:Flying
 K:Hexproof
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aven_fleetwing.jpg
 Oracle:Flying\nHexproof (This creature can't be the target of spells or abilities your opponents control.)
-SetInfo:M12 Common

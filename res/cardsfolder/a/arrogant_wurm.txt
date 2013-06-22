@@ -6,4 +6,3 @@ K:Trample
 K:Madness:2 G
 SVar:Picture:http://www.wizards.com/global/images/magic/general/arrogant_wurm.jpg
 Oracle:Trample\nMadness {2}{G} (If you discard this card, you may cast it for its madness cost instead of putting it into your graveyard.)
-SetInfo:TOR Uncommon

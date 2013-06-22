@@ -9,4 +9,3 @@ SVar:TrigLoseLife:AB$LoseLife | Cost$ 0 | Defined$ TriggeredActivator | LifeAmou
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ashenmoor_liege.jpg
 Oracle:Other black creatures you control get +1/+1.\nOther red creatures you control get +1/+1.\nWhenever Ashenmoor Liege becomes the target of a spell or ability an opponent controls, that player loses 4 life.
-SetInfo:SHM Rare

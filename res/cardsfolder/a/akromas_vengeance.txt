@@ -5,6 +5,3 @@ A:SP$ DestroyAll | Cost$ 4 W W | ValidCards$ Artifact,Creature,Enchantment | Spe
 K:Cycling:3
 SVar:Picture:http://www.wizards.com/global/images/magic/general/akromas_vengeance.jpg
 Oracle:Destroy all artifacts, creatures, and enchantments.\nCycling {3} ({3}, Discard this card: Draw a card.)
-SetInfo:ONS Rare
-SetInfo:COM Rare
-SetInfo:HOP Rare

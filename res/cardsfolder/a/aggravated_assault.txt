@@ -5,4 +5,3 @@ A:AB$ UntapAll | Cost$ 3 R R | ValidCards$ Creature.YouCtrl | SubAbility$ DBAddC
 SVar:DBAddCombat:DB$ AddPhase | ExtraPhase$ BeginCombat | FollowedBy$ ThisPhase | ConditionPhases$ Main1,Main2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aggravated_assault.jpg
 Oracle:{3}{R}{R}: Untap all creatures you control. After this main phase, there is an additional combat phase followed by an additional main phase. Activate this ability only any time you could cast a sorcery.
-SetInfo:ONS Rare

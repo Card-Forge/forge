@@ -5,4 +5,3 @@ A:AB$DestroyAll | Cost$ 2 T Sac<1/CARDNAME> | ValidCards$ Permanent.nonToken+set
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/apocalypse_chime.jpg
 Oracle:{2}, {T}, Sacrifice Apocalypse Chime: Destroy all nontoken permanents from the Homelands expansion. They can't be regenerated.
-SetInfo:HML Rare

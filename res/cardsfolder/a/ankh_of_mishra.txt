@@ -6,10 +6,3 @@ SVar:TrigDamage:AB$DealDamage | Cost$ 0 | Defined$ TriggeredCardController | Num
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ankh_of_mishra.jpg
 Oracle:Whenever a land enters the battlefield, Ankh of Mishra deals 2 damage to that land's controller.
-SetInfo:2ED Rare
-SetInfo:6ED Rare
-SetInfo:LEB Rare
-SetInfo:LEA Rare
-SetInfo:5ED Rare
-SetInfo:4ED Rare
-SetInfo:3ED Rare

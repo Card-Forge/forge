@@ -6,4 +6,3 @@ SVar:DBRevealDiscard:DB$ Discard | Mode$ RevealYouChoose | NumCards$ 1 | Discard
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/addle.jpg
 Oracle:Choose a color. Target player reveals his or her hand and you choose a card of that color from it. That player discards that card.
-SetInfo:INV Uncommon

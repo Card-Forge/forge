@@ -4,8 +4,3 @@ Types:Sorcery
 A:SP$ Destroy | Cost$ 2 B | ValidTgts$ Creature.tapped | TgtPrompt$ Select target tapped creature | SpellDescription$ Destroy target tapped creature.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/assassinate.jpg
 Oracle:Destroy target tapped creature.
-SetInfo:M11 Common
-SetInfo:M10 Common
-SetInfo:PC2 Common
-SetInfo:TSP Common
-SetInfo:10E Common

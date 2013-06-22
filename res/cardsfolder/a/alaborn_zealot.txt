@@ -7,4 +7,3 @@ SVar:TrigDestroy:AB$Destroy | Cost$ 0 | Defined$ TriggeredAttacker | SubAbility$
 SVar:DestroySelf:DB$Destroy | Cost$ 0 | Defined$ Self
 SVar:Picture:http://serv2.tcgimages.eu/img/cards/Portal_Second_Age/alaborn_zealot.jpg
 Oracle:When Alaborn Zealot blocks a creature, destroy that creature and Alaborn Zealot.
-SetInfo:PO2 Uncommon

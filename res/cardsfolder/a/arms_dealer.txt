@@ -6,5 +6,3 @@ A:AB$ DealDamage | Cost$ 1 R Sac<1/Goblin> | ValidTgts$ Creature | TgtPrompt$ Se
 DeckHints:Type$Goblin
 SVar:Picture:http://www.wizards.com/global/images/magic/general/arms_dealer.jpg
 Oracle:{1}{R}, Sacrifice a Goblin: Arms Dealer deals 4 damage to target creature.
-SetInfo:MMQ Uncommon
-SetInfo:M13 Uncommon

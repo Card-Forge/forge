@@ -5,5 +5,3 @@ A:SP$ Pump | Cost$ 2 B | ValidTgts$ Creature | TgtPrompt$ Select target creature
 SVar:DBDraw:DB$Draw | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/afflict.jpg
 Oracle:Target creature gets -1/-1 until end of turn.\nDraw a card.
-SetInfo:ODY Common
-SetInfo:10E Common

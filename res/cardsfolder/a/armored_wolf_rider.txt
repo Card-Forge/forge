@@ -4,4 +4,3 @@ Types:Creature Elf Knight
 PT:4/6
 SVar:Picture:http://www.wizards.com/global/images/magic/general/armored_wolf_rider.jpg
 Oracle:
-SetInfo:DGM Common

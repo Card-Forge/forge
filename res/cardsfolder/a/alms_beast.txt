@@ -5,4 +5,3 @@ PT:6/6
 S:Mode$ Continuous | Affected$ Creature.blockedBySource,Creature.blockingSource | AddKeyword$ Lifelink | Description$ Creatures blocking or blocked by CARDNAME have lifelink.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/alms_beast.jpg
 Oracle:Creatures blocking or blocked by Alms Beast have lifelink.
-SetInfo:GTC Rare

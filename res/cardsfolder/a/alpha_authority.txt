@@ -6,4 +6,3 @@ A:SP$ Attach | Cost$ 1 G | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Hexproof & CantBeBlockedByAmount GT1 | Description$ Enchanted creature has hexproof and can't be blocked by more than one creature.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/alpha_authority.jpg
 Oracle:Enchant creature\nEnchanted creature has hexproof and can't be blocked by more than one creature.
-SetInfo:GTC Uncommon

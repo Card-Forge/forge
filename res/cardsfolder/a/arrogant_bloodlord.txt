@@ -8,4 +8,3 @@ SVar:DelTrig:Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Player | Execute$ Tri
 SVar:TrigDestroy:AB$ Destroy | Cost$ 0 | Defined$ Self
 SVar:Picture:http://www.wizards.com/global/images/magic/general/arrogant_bloodlord.jpg
 Oracle:Whenever Arrogant Bloodlord blocks or becomes blocked by a creature with power 1 or less, destroy Arrogant Bloodlord at end of combat.
-SetInfo:ROE Uncommon

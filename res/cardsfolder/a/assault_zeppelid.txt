@@ -6,4 +6,3 @@ K:Flying
 K:Trample
 SVar:Picture:http://resources.wizards.com/magic/cards/dis/en-us/card97107.jpg
 Oracle:Flying, trample
-SetInfo:DIS Common

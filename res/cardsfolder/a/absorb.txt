@@ -5,4 +5,3 @@ A:SP$ Counter | Cost$ W U U | TargetType$ Spell | TgtPrompt$ Select target spell
 SVar:DBGainLife:DB$GainLife | LifeAmount$ 3
 SVar:Picture:http://resources.wizards.com/magic/cards/in/en-us/card23155.jpg
 Oracle:Counter target spell. You gain 3 life.
-SetInfo:INV Rare

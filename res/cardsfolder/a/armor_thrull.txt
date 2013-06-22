@@ -6,4 +6,3 @@ A:AB$ PutCounter | Cost$ T Sac<1/CARDNAME> | ValidTgts$ Creature | TgtPrompt$ Se
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/armor_thrull.jpg
 Oracle:{T}, Sacrifice Armor Thrull: Put a +1/+2 counter on target creature.
-SetInfo:FEM Common x4

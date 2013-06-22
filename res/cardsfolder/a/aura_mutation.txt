@@ -7,4 +7,3 @@ SVar:TrigToken:DB$Token | Cost$ 0 | TokenAmount$ X | TokenName$ Saproling | Toke
 SVar:X:Targeted$CardManaCost
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aura_mutation.jpg
 Oracle:Destroy target enchantment. Put X 1/1 green Saproling creature tokens onto the battlefield, where X is that enchantment's converted mana cost.
-SetInfo:INV Rare

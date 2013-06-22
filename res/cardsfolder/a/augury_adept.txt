@@ -9,4 +9,3 @@ SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
 SVar:X:Remembered$CardManaCost
 SVar:Picture:http://www.wizards.com/global/images/magic/general/augury_adept.jpg
 Oracle:Whenever Augury Adept deals combat damage to a player, reveal the top card of your library and put that card into your hand. You gain life equal to its converted mana cost.
-SetInfo:SHM Rare

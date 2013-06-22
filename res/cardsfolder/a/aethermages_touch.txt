@@ -5,4 +5,3 @@ A:SP$ Dig | Cost$ 2 W U | DigNum$ 4 | Reveal$ True | ChangeNum$ 1 | Optional$ Tr
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aethermages_touch.jpg
 Oracle:Reveal the top four cards of your library. You may put a creature card from among them onto the battlefield. It has "At the beginning of your end step, return this creature to its owner's hand." Then put the rest of the cards revealed this way on the bottom of your library in any order.
-SetInfo:DIS Rare

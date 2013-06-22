@@ -7,4 +7,3 @@ A:AB$ Animate | Cost$ W | ValidTgts$ Permanent | TgtPrompt$ Select target perman
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aurora_griffin.jpg
 Oracle:Flying\n{W}: Target permanent becomes white until end of turn.
-SetInfo:PLS Common

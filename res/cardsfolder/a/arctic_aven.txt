@@ -8,4 +8,3 @@ A:AB$ Pump | Cost$ W | KW$ Lifelink | SpellDescription$ CARDNAME gets lifelink u
 SVar:X:Count$Valid Plains.YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/arctic_aven.jpg
 Oracle:Flying\nArctic Aven gets +1/+1 as long as you control a Plains.\n{W}: Arctic Aven gains lifelink until end of turn. (Damage dealt by this creature also causes you to gain that much life.)
-SetInfo:M13 Uncommon

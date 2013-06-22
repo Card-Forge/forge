@@ -6,4 +6,3 @@ A:AB$ Draw | Cost$ Sac<1/CARDNAME> | NumCards$ 1 | SpellDescription$ Draw a card
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/alchemists_apprentice.jpg
 Oracle:Sacrifice Alchemist's Apprentice: Draw a card.
-SetInfo:AVR Common

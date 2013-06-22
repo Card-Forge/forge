@@ -4,6 +4,3 @@ Types:Instant
 A:SP$ Draw | Cost$ U | NumCards$ 3 | ValidTgts$ Player | TgtPrompt$ Select target player | SpellDescription$ Target player draws three cards.
 SVar:Picture:http://resources.wizards.com/magic/cards/2u/en-us/card692.jpg
 Oracle:Target player draws three cards.
-SetInfo:LEB Rare
-SetInfo:LEA Rare
-SetInfo:2ED Rare

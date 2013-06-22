@@ -5,5 +5,3 @@ PT:1/1
 A:AB$ Tap | Cost$ R | ValidTgts$ Wall | TgtPrompt$ Select target wall | SpellDescription$ Tap target wall.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ali_baba.jpg
 Oracle:{R}: Tap target Wall.
-SetInfo:4ED Uncommon
-SetInfo:ARN Uncommon

@@ -7,5 +7,3 @@ S:Mode$ CantTarget | ValidCard$ Creature.EnchantedBy | Spell$ True | Description
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ CARDNAME can't be enchanted.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/anti_magic_aura.jpg
 Oracle:Enchant creature\nEnchanted creature can't be the target of spells and can't be enchanted. This effect doesn't remove Anti-Magic Aura.
-SetInfo:5ED Uncommon
-SetInfo:LEG Common

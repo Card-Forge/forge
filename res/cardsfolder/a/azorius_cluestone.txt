@@ -7,4 +7,3 @@ A:AB$ Draw | Cost$ W U T Sac<1/CARDNAME> | NumCards$ 1 | SpellDescription$ Draw 
 DeckNeeds:Color$White|Blue
 SVar:Picture:http://www.wizards.com/global/images/magic/general/azorius_cluestone.jpg
 Oracle:{T}: Add {W} or {U} to your mana pool.\n{W}{U}, {T}, Sacrifice Azorius Cluestone: Draw a card.
-SetInfo:DGM Common

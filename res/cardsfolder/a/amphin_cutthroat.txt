@@ -4,4 +4,3 @@ Types:Creature Salamander Rogue
 PT:2/4
 SVar:Picture:http://www.wizards.com/global/images/magic/general/amphin_cutthroat.jpg
 Oracle:
-SetInfo:M12 Common

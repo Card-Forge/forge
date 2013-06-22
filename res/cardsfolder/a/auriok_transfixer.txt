@@ -6,4 +6,3 @@ A:AB$ Tap | Cost$ W T | ValidTgts$ Artifact | TgtPrompt$ Select target artifact 
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/auriok_transfixer.jpg
 Oracle:{W}, {T}: Tap target artifact.
-SetInfo:MRD Common

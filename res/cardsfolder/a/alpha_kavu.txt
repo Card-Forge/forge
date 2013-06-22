@@ -6,4 +6,3 @@ A:AB$ Pump | Cost$ 1 G | NumAtt$ -1 | NumDef$ +1 | ValidTgts$ Creature.Kavu | Tg
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/alpha_kavu.jpg
 Oracle:{1}{G}: Target Kavu creature gets -1/+1 until end of turn.
-SetInfo:PLS Uncommon

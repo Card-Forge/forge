@@ -5,4 +5,3 @@ PT:2/4
 A:AB$ ChangeZone | Cost$ 1 W | TgtPrompt$ Choose target artifact card with converted mana cost 1 or less in your graveyard | ValidTgts$ Artifact.cmcLE1+YouCtrl | Origin$ Graveyard | Destination$ Hand | SpellDescription$ Return target artifact card with converted mana cost 1 or less from your graveyard to your hand.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/auriok_salvagers.jpg
 Oracle:{1}{W}: Return target artifact card with converted mana cost 1 or less from your graveyard to your hand.
-SetInfo:5DN Uncommon

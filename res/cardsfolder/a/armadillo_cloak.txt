@@ -9,6 +9,3 @@ SVar:TrigGain:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ X | References$
 SVar:X:TriggerCount$DamageAmount
 SVar:Picture:http://www.wizards.com/global/images/magic/general/armadillo_cloak.jpg
 Oracle:Enchant creature\nEnchanted creature gets +2/+2 and has trample.\nWhenever enchanted creature deals damage, you gain that much life.
-SetInfo:ARC Common
-SetInfo:DDE Common
-SetInfo:INV Common

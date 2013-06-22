@@ -6,5 +6,3 @@ K:Flying
 K:Vigilance
 SVar:Picture:http://serv1.tcgimages.eu/img/cards/Portal_Second_Age/armored_griffin.jpg
 Oracle:Flying, vigilance
-SetInfo:PO2 Uncommon
-SetInfo:PC2 Uncommon

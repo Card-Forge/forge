@@ -5,5 +5,3 @@ A:AB$ Destroy | Cost$ B Sac<1/Creature> | ValidTgts$ Creature.nonBlack | TgtProm
 SVar:NonStackingEffect:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/attrition.jpg
 Oracle:{B}, Sacrifice a creature: Destroy target nonblack creature.
-SetInfo:COM Rare
-SetInfo:UDS Rare

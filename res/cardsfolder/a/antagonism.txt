@@ -9,4 +9,3 @@ SVar:NeedsToPlayVar:Check GE1
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/antagonism.jpg
 Oracle:At the beginning of each player's end step, Antagonism deals 2 damage to that player unless one of his or her opponents was dealt damage this turn.
-SetInfo:USG Rare

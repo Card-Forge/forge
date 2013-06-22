@@ -5,4 +5,3 @@ PT:0/2
 K:Flying
 SVar:Picture:http://resources.wizards.com/magic/cards/lgn/en-us/card44325.jpg
 Oracle:Flying
-SetInfo:LGN Common

@@ -4,4 +4,3 @@ Types:Artifact
 A:AB$ Destroy | Cost$ 3 T Sac<1/CARDNAME> | ValidTgts$ Land | TgtPrompt$ Select target land | SpellDescription$ Destroy target land.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ark_of_blight.jpg
 Oracle:{3}, {T}, Sacrifice Ark of Blight: Destroy target land.
-SetInfo:SCG Uncommon

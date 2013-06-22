@@ -9,4 +9,3 @@ SVar:OutOfSight:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | Val
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 SVar:Picture:http://www.wizards.com/global/images/magic/general/awe_strike.jpg
 Oracle:The next time target creature would deal damage this turn, prevent that damage. You gain life equal to the damage prevented this way.
-SetInfo:MRD Common

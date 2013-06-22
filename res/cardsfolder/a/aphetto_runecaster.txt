@@ -6,4 +6,3 @@ T:Mode$ TurnFaceUp | ValidCard$ Permanent | Execute$ TrigDraw | OptionalDecider$
 SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aphetto_runecaster.jpg
 Oracle:Whenever a permanent is turned face up, you may draw a card.
-SetInfo:SCG Uncommon

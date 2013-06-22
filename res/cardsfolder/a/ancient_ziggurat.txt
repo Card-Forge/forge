@@ -4,5 +4,3 @@ Types:Land
 A:AB$ Mana | Cost$ T | Produced$ Any | RestrictValid$ Creature | SpellDescription$ Add one mana of any color to your mana pool.  Spend this mana only to cast a creature spell.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ancient_ziggurat.jpg
 Oracle:{T}: Add one mana of any color to your mana pool. Spend this mana only to cast a creature spell.
-SetInfo:H09 Uncommon
-SetInfo:CFX Uncommon

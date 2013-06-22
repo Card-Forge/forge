@@ -5,4 +5,3 @@ PT:0/0
 K:Modular 3
 SVar:Picture:http://www.wizards.com/global/images/magic/general/arcbound_bruiser.jpg
 Oracle:Modular 3 (This enters the battlefield with three +1/+1 counters on it. When it dies, you may put its +1/+1 counters on target artifact creature.)
-SetInfo:DST Common

@@ -8,4 +8,3 @@ K:Indestructible
 S:Mode$ Continuous | Affected$ Permanent.Other+YouCtrl | AddHiddenKeyword$ Indestructible | Description$ CARDNAME and other permanents you control are indestructible.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/avacyn_angel_of_hope.jpg
 Oracle:Flying, vigilance\nAvacyn, Angel of Hope and other permanents you control are indestructible.
-SetInfo:AVR Mythic

@@ -4,4 +4,3 @@ Types:Instant
 A:SP$ Counter | Cost$ R | TargetType$ Spell | ValidTgts$ Artifact | SpellDescription$ Counter target artifact spell.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/artifact_blast.jpg
 Oracle:Counter target artifact spell.
-SetInfo:ATQ Common

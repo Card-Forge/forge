@@ -5,4 +5,3 @@ S:Mode$ Continuous | Affected$ You | AddKeyword$ AdjustLandPlays:2 | Description
 PT:1/2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/azusa_lost_but_seeking.jpg
 Oracle:You may play two additional lands on each of your turns.
-SetInfo:CHK Rare

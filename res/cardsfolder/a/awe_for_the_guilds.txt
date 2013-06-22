@@ -7,4 +7,3 @@ SVar:PlayMain1:TRUE
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/awe_for_the_guilds.jpg
 Oracle:Monocolored creatures can't block this turn.
-SetInfo:DGM Common

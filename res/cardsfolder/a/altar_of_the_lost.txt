@@ -6,4 +6,3 @@ A:AB$ Mana | Cost$ T | Produced$ Combo Any | Amount$ 2 | RestrictValid$ Card.was
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/altar_of_the_lost.jpg
 Oracle:Altar of the Lost enters the battlefield tapped.\n{T}: Add two mana in any combination of colors to your mana pool. Spend this mana only to cast spells with flashback from a graveyard.
-SetInfo:DKA Uncommon

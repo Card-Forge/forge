@@ -10,4 +10,3 @@ SVar:TrigPutCounterAll:AB$PutCounterAll | Cost$ 0 | ValidCards$ Creature.Plant+Y
 SVar:BuffedBy:Land
 SVar:Picture:http://www.wizards.com/global/images/magic/general/avenger_of_zendikar.jpg
 Oracle:When Avenger of Zendikar enters the battlefield, put a 0/1 green Plant creature token onto the battlefield for each land you control.\nLandfall - Whenever a land enters the battlefield under your control, you may put a +1/+1 counter on each Plant creature you control.
-SetInfo:WWK Mythic

@@ -5,4 +5,3 @@ PT:1/1
 A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add W to your mana pool.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/avacyns_pilgrim.jpg
 Oracle:{T}: Add {W} to your mana pool.
-SetInfo:ISD Common

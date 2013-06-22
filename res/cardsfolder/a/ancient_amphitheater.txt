@@ -8,4 +8,3 @@ K:ETBReplacement:Other:DBTap
 SVar:DBTap:AB$ Tap | Cost$ 0 | ETB$ True | Defined$ Self | UnlessCost$ Reveal<1/Giant> | UnlessPayer$ You | StackDescription$ enters the battlefield tapped.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ancient_amphitheater.jpg
 Oracle:As Ancient Amphitheater enters the battlefield, you may reveal a Giant card from your hand. If you don't, Ancient Amphitheater enters the battlefield tapped.\n{T}: Add {R} or {W} to your mana pool.
-SetInfo:LRW Rare

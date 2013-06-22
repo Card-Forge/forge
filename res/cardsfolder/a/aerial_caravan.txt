@@ -8,4 +8,3 @@ SVar:DBPump:DB$ Pump | Defined$ Remembered | KW$ May be played | PumpZone$ Exile
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aerial_caravan.jpg
 Oracle:Flying\n{1}{U}{U}: Exile the top card of your library. Until end of turn, you may play that card. (Reveal the card as you exile it.)
-SetInfo:MMQ Rare

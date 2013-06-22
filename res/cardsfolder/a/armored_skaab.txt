@@ -6,4 +6,3 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigMill:AB$Mill | Cost$ 0 | NumCards$ 4 | Defined$ You
 SVar:Picture:http://www.wizards.com/global/images/magic/general/armored_skaab.jpg
 Oracle:When Armored Skaab enters the battlefield, put the top four cards of your library into your graveyard.
-SetInfo:ISD Common

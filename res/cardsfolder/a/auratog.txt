@@ -5,5 +5,3 @@ PT:1/2
 A:AB$ Pump | Cost$ Sac<1/Enchantment> | NumAtt$ 2 | NumDef$ 2 | SpellDescription$ CARDNAME gets +2/+2 until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/auratog.jpg
 Oracle:Sacrifice an enchantment: Auratog gets +2/+2 until end of turn.
-SetInfo:TMP Rare
-SetInfo:TSB Special

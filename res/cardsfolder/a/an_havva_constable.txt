@@ -6,5 +6,3 @@ S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetToughne
 SVar:X:Count$Valid Creature.Green/Plus.1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/an_havva_constable.jpg
 Oracle:An-Havva Constable's toughness is equal to 1 plus the number of green creatures on the battlefield.
-SetInfo:5ED Rare
-SetInfo:HML Rare

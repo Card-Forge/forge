@@ -9,5 +9,3 @@ SVar:NeedsToPlayVar:Y GE3
 SVar:Y:Count$InYourHand
 SVar:Picture:http://www.wizards.com/global/images/magic/general/avatar_of_discord.jpg
 Oracle:({B/R} can be paid with either {B} or {R}.)\nFlying\nWhen Avatar of Discord enters the battlefield, sacrifice it unless you discard two cards.
-SetInfo:ARC Rare
-SetInfo:DIS Rare

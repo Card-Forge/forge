@@ -6,6 +6,3 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigChangeZone:AB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Enchantment.YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/auramancer.jpg
 Oracle:When Auramancer enters the battlefield, you may return target enchantment card from your graveyard to your hand.
-SetInfo:PC2 Common
-SetInfo:M12 Common
-SetInfo:ODY Common

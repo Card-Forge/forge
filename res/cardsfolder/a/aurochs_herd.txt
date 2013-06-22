@@ -10,4 +10,3 @@ SVar:TrigPump:AB$ Pump | Cost$ 0 | Defined$ Self | NumAtt$ X | References$ X
 SVar:X:Count$Valid Aurochs.attacking+Other
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aurochs_herd.jpg
 Oracle:Trample\nWhen Aurochs Herd enters the battlefield, you may search your library for an Aurochs card, reveal it, and put it into your hand. If you do, shuffle your library.\nWhenever Aurochs Herd attacks, it gets +1/+0 until end of turn for each other attacking Aurochs.
-SetInfo:CSP Common

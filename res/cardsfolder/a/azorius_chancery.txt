@@ -8,6 +8,3 @@ SVar:TrigReturn:DB$ChangeZone | Origin$ Battlefield | Destination$ Hand | Cost$ 
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/azorius_chancery.jpg
 Oracle:Azorius Chancery enters the battlefield tapped.\nWhen Azorius Chancery enters the battlefield, return a land you control to its owner's hand.\n{T}: Add {W}{U} to your mana pool.
-SetInfo:DDI Common
-SetInfo:COM Common
-SetInfo:DIS Common

@@ -6,4 +6,3 @@ SVar:STPrevent:Mode$ PreventDamage | EffectZone$ Command | Target$ You | Source$
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/al_abaras_carpet.jpg
 Oracle:{5}, {T}: Prevent all damage that would be dealt to you this turn by attacking creatures without flying.
-SetInfo:LEG Rare

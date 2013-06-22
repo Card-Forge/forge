@@ -7,4 +7,3 @@ SVar:DBToken:DB$ Token | TokenAmount$ X | TokenName$ Soldier | TokenTypes$ Creat
 SVar:X:Count$CardCounters.MUSTER
 SVar:Picture:http://www.wizards.com/global/images/magic/general/assemble_the_legion.jpg
 Oracle:At the beginning of your upkeep, put a muster counter on Assemble the Legion. Then put a 1/1 red and white Soldier creature token with haste onto the battlefield for each muster counter on Assemble the Legion.
-SetInfo:GTC Rare

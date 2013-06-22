@@ -7,5 +7,3 @@ SVar:Pump:AB$Pump | Cost$ 2 | NumDef$ +1 | SpellDescription$ CARDNAME gets +0/+1
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/armor_sliver.jpg
 Oracle:All Sliver creatures have "{2}: This creature gets +0/+1 until end of turn."
-SetInfo:H09 Uncommon
-SetInfo:TMP Uncommon

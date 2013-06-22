@@ -6,5 +6,3 @@ K:First Strike
 A:AB$ PumpAll | Cost$ R T | ValidCards$ Creature.attacking | KW$ First Strike | SpellDescription$ Attacking creatures gain first strike until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/akki_coalflinger.jpg
 Oracle:First strike\n{R}, {T}: Attacking creatures gain first strike until end of turn.
-SetInfo:CHK Uncommon
-SetInfo:EVG Uncommon

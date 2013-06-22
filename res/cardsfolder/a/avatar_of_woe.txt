@@ -8,8 +8,3 @@ S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 6 | EffectZone
 SVar:X:Count$TypeInAllYards.Creature
 SVar:Picture:http://www.wizards.com/global/images/magic/general/avatar_of_woe.jpg
 Oracle:If there are ten or more creature cards total in all graveyards, Avatar of Woe costs {6} less to cast.\nFear (This creature can't be blocked except by artifact creatures and/or black creatures.)\n{T}: Destroy target creature. It can't be regenerated.
-SetInfo:PCY Rare
-SetInfo:PD3 Rare
-SetInfo:ARC Rare
-SetInfo:TSB Special
-SetInfo:COM Rare

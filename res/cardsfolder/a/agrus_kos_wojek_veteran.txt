@@ -7,4 +7,3 @@ SVar:TrigPump:AB$PumpAll | Cost$ 0 | ValidCards$ Creature.attacking+Red | NumAtt
 SVar:DBPump:DB$PumpAll | ValidCards$ Creature.attacking+White | NumDef$ 2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/agrus_kos_wojek_veteran.jpg
 Oracle:Whenever Agrus Kos, Wojek Veteran attacks, attacking red creatures get +2/+0 and attacking white creatures get +0/+2 until end of turn.
-SetInfo:RAV Rare

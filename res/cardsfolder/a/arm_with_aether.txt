@@ -6,4 +6,3 @@ SVar:Trig:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | Ex
 SVar:Eff:AB$ ChangeZone | Cost$ 0 | ValidTgts$ Creature.DefenderCtrl | TgtPrompt$ Select target creature you don't control. | Origin$ Battlefield | Destination$ Hand
 SVar:Picture:http://www.wizards.com/global/images/magic/general/arm_with_aether.jpg
 Oracle:Until end of turn, creatures you control gain "Whenever this creature deals damage to an opponent, you may return target creature that player controls to its owner's hand."
-SetInfo:NPH Uncommon

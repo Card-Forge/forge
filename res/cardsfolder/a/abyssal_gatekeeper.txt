@@ -6,5 +6,3 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigSac:AB$ Sacrifice | Cost$ 0 | SacValid$ Creature | Defined$ Each
 SVar:Picture:http://www.wizards.com/global/images/magic/general/abyssal_gatekeeper.jpg
 Oracle:When Abyssal Gatekeeper dies, each player sacrifices a creature.
-SetInfo:DDC Common
-SetInfo:WTH Common

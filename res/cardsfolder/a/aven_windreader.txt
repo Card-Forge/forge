@@ -7,6 +7,3 @@ A:AB$ Dig | Cost$ 1 U | DigNum$ 1 | ValidTgts$ Player | TgtPrompt$ Select target
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aven_windreader.jpg
 Oracle:Flying (This creature can't be blocked except by creatures with flying or reach.)\n{1}{U}: Target player reveals the top card of his or her library.
-SetInfo:ODY Common
-SetInfo:9ED Common
-SetInfo:10E Common

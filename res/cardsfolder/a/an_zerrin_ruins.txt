@@ -7,4 +7,3 @@ S:Mode$ Continuous | Affected$ Creature.ChosenType | AddHiddenKeyword$ CARDNAME 
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/an_zerrin_ruins.jpg
 Oracle:As An-Zerrin Ruins enters the battlefield, choose a creature type.\nCreatures of the chosen type don't untap during their controllers' untap steps.
-SetInfo:HML Rare

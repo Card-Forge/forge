@@ -7,4 +7,3 @@ SVar:DrawCard:DB$ Draw | Cost$ 0 | Defined$ You | NumCards$ 1 | SpellDescription
 SVar:ReturnCard:DB$ ChangeZone | ValidTgts$ Creature.attacking,Creature.blocking | TgtPrompt$ Select target attacking or blocking creature. | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 0 | SpellDescription$ Put target attacking or blocking creature on top of its owner's library.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/azorius_charm.jpg
 Oracle:Choose one - Creatures you control gain lifelink until end of turn; or draw a card; or put target attacking or blocking creature on top of its owner's library.
-SetInfo:RTR Uncommon

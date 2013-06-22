@@ -4,5 +4,3 @@ Types:Instant
 A:SP$ Counter | Cost$ G | TargetType$ Spell | ValidTgts$ Instant,Aura | TargetValidTargeting$ Permanent.YouCtrl | SpellDescription$ Counter target instant or Aura spell that targets a permanent you control.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/avoid_fate.jpg
 Oracle:Counter target instant or Aura spell that targets a permanent you control.
-SetInfo:LEG Common
-SetInfo:TSB Special

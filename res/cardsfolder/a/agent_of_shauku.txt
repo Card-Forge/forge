@@ -6,4 +6,3 @@ A:AB$ Pump | Cost$ 1 B Sac<1/Land> | ValidTgts$ Creature | TgtPrompt$ Select tar
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/agent_of_shauku.jpg
 Oracle:{1}{B}, Sacrifice a land: Target creature gets +2/+0 until end of turn.
-SetInfo:PCY Common

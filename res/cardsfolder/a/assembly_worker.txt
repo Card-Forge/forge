@@ -5,5 +5,3 @@ PT:2/2
 A:AB$ Pump | Cost$ T | ValidTgts$ Creature.Assembly-Worker | TgtPrompt$ Select target Assembly-Worker creature | NumAtt$ 1 | NumDef$ 1 | SpellDescription$ Target Assembly-Worker creature gets +1/+1 until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/assembly_worker.jpg
 Oracle:{T}: Target Assembly-Worker creature gets +1/+1 until end of turn.
-SetInfo:DDF Uncommon
-SetInfo:TSP Uncommon

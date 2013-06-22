@@ -6,4 +6,3 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigMana:AB$Mana | Cost$ 0 | Produced$ R | Amount$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/akki_rockspeaker.jpg
 Oracle:When Akki Rockspeaker enters the battlefield, add {R} to your mana pool.
-SetInfo:CHK Common

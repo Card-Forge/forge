@@ -6,5 +6,3 @@ A:AB$ Draw | Cost$ T | NumCards$ 3 | SpellDescription$ Draw three cards.
 A:AB$ ChangeZone | Cost$ 2 U U | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return CARDNAME to its owner's hand.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/arcanis_the_omnipotent.jpg
 Oracle:{T}: Draw three cards.\n{2}{U}{U}: Return Arcanis the Omnipotent to its owner's hand.
-SetInfo:ONS Rare
-SetInfo:10E Rare

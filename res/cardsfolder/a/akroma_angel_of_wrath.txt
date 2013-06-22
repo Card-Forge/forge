@@ -11,6 +11,3 @@ K:Protection from red
 K:Protection from black
 SVar:Picture:http://resources.wizards.com/magic/cards/tsb/en-us/card106645.jpg
 Oracle:Flying, first strike, vigilance, trample, haste, protection from black and from red
-SetInfo:DDC Mythic
-SetInfo:TSB Special
-SetInfo:LGN Rare

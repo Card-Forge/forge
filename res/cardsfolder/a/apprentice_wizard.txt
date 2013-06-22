@@ -6,5 +6,3 @@ A:AB$ Mana | Cost$ U T | Produced$ 1 | Amount$ 3 | SpellDescription$ Add 3 to yo
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/apprentice_wizard.jpg
 Oracle:{U}, {T}: Add {3} to your mana pool.
-SetInfo:4ED Common
-SetInfo:DRK Rare

@@ -7,4 +7,3 @@ SVar:TrigSac:AB$ Sacrifice | Cost$ 0 | Defined$ TriggeredTarget | SacValid$ Perm
 SVar:MustBeBlocked:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/akki_underminer.jpg
 Oracle:Whenever Akki Underminer deals combat damage to a player, that player sacrifices a permanent.
-SetInfo:CHK Uncommon

@@ -5,4 +5,3 @@ A:AB$ Dig | Cost$ 3 T | ValidTgts$ Player | TgtPrompt$ Select target player | Di
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ashnods_cylix.jpg
 Oracle:{3}, {T}: Target player looks at the top three cards of his or her library, puts one of them back on top of his or her library, then exiles the rest.
-SetInfo:ALL Rare

@@ -6,4 +6,3 @@ S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 2 | AddToughness$ 1 | AddKe
 SVar:X:Count$InYourHand
 SVar:Picture:http://www.wizards.com/global/images/magic/general/akki_underling.jpg
 Oracle:As long as you have seven or more cards in hand, Akki Underling gets +2/+1 and has first strike.
-SetInfo:SOK Common

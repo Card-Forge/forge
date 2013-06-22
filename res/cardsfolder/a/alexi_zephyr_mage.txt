@@ -9,4 +9,3 @@ SVar:MaxTgts:Count$Valid Creature
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/alexi_zephyr_mage.jpg
 Oracle:{X}{U}, {T}, Discard two cards: Return X target creatures to their owners' hands.
-SetInfo:PCY Rare

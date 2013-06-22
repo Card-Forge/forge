@@ -9,4 +9,3 @@ SVar:RemRandomDeck:True
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aquitects_will.jpg
 Oracle:Put a flood counter on target land. That land is an Island in addition to its other types for as long as it has a flood counter on it. If you control a Merfolk, draw a card.
-SetInfo:LRW Common

@@ -6,4 +6,3 @@ SVar:TrigUntapAll:AB$UntapAll | Cost$ 0 | ValidCards$ Creature,Land | SpellDescr
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/awakening.jpg
 Oracle:At the beginning of each upkeep, untap all creatures and lands.
-SetInfo:STH Rare

@@ -8,5 +8,3 @@ SVar:TrigLife:AB$SetLife | Cost$ 0 | Defined$ Each | LifeAmount$ X | References$
 SVar:X:Count$HighestLifeTotal
 SVar:Picture:http://www.wizards.com/global/images/magic/general/arbiter_of_knollridge.jpg
 Oracle:Vigilance\nWhen Arbiter of Knollridge enters the battlefield, each player's life total becomes the highest life total among all players.
-SetInfo:COM Rare
-SetInfo:LRW Rare

@@ -7,9 +7,3 @@ T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ Tri
 SVar:TrigDiscard:AB$Discard | Cost$ 0 | Defined$ TriggeredTarget | NumCards$ 1 | Mode$ TgtChoose
 SVar:Picture:http://www.wizards.com/global/images/magic/general/abyssal_specter.jpg
 Oracle:Flying\nWhenever Abyssal Specter deals damage to a player, that player discards a card.
-SetInfo:8ED Uncommon
-SetInfo:7ED Uncommon
-SetInfo:6ED Uncommon
-SetInfo:5ED Uncommon
-SetInfo:ICE Uncommon
-SetInfo:DDC Uncommon

@@ -5,4 +5,3 @@ A:AB$ Destroy | Cost$ Sac<1/Land> | ValidTgts$ Enchantment | TgtPrompt$ Select t
 SVar:NonStackingEffect:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aura_fracture.jpg
 Oracle:Sacrifice a land: Destroy target enchantment.
-SetInfo:PCY Common

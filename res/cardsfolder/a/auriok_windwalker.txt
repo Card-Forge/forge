@@ -8,4 +8,3 @@ SVar:WindwalkerAttach:DB$ Attach | Object$ ParentTarget | ValidTgts$ Creature.Yo
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/auriok_windwalker.jpg
 Oracle:Flying\n{T}: Attach target Equipment you control to target creature you control.
-SetInfo:5DN Rare

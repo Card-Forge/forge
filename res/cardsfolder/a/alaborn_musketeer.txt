@@ -5,4 +5,3 @@ PT:2/1
 K:Reach
 SVar:Picture:http://resources.wizards.com/magic/cards/p2/en-us/card6499.jpg
 Oracle:Reach (This creature can block creatures with flying.)
-SetInfo:PO2 Common

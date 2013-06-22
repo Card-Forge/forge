@@ -8,4 +8,3 @@ SVar:Detain:DB$ Pump | TargetMin$ 0 | TargetMax$ 2 | KW$ HIDDEN CARDNAME can't a
 SVar:HasAttackEffect:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/archon_of_the_triumvirate.jpg
 Oracle:Flying\nWhenever Archon of the Triumvirate attacks, detain up to two target nonland permanents your opponents control. (Until your next turn, those permanents can't attack or block and their activated abilities can't be activated.)
-SetInfo:RTR Rare

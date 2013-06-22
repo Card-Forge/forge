@@ -6,4 +6,3 @@ SVar:DBGainLife:DB$ GainLife | ValidTgts$ Opponent | TgtPrompt$ Select target op
 SVar:NonStackingEffect:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/armistice.jpg
 Oracle:{3}{W}{W}: You draw a card and target opponent gains 3 life.
-SetInfo:MMQ Rare

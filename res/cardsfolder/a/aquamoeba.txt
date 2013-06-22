@@ -6,4 +6,3 @@ A:AB$ Pump | Cost$ Discard<1/Card> | KW$ HIDDEN CARDNAME's power and toughness a
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aquamoeba.jpg
 Oracle:Discard a card: Switch Aquamoeba's power and toughness until end of turn.
-SetInfo:TOR Common

@@ -8,4 +8,3 @@ SVar:TrigGrave:AB$GainLife | Cost$ 0 | Defined$ TriggeredCardController | LifeAm
 SVar:TrigGainLife:AB$GainLife | Cost$ 1 | LifeAmount$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/auspicious_ancestor.jpg
 Oracle:When Auspicious Ancestor dies, you gain 3 life.\nWhenever a player casts a white spell, you may pay {1}. If you do, you gain 1 life.
-SetInfo:MIR Rare

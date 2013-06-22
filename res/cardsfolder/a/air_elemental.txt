@@ -5,18 +5,3 @@ PT:4/4
 K:Flying
 SVar:Picture:http://www.wizards.com/global/images/magic/general/air_elemental.jpg
 Oracle:Flying
-SetInfo:PO2 Uncommon
-SetInfo:2ED Uncommon
-SetInfo:7ED Uncommon
-SetInfo:6ED Uncommon
-SetInfo:S99 Uncommon
-SetInfo:DD2 Uncommon
-SetInfo:8ED Uncommon
-SetInfo:9ED Uncommon
-SetInfo:10E Uncommon
-SetInfo:LEB Uncommon
-SetInfo:LEA Uncommon
-SetInfo:5ED Uncommon
-SetInfo:4ED Uncommon
-SetInfo:3ED Uncommon
-SetInfo:M10 Uncommon

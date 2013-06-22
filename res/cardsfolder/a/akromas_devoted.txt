@@ -5,4 +5,3 @@ PT:2/4
 S:Mode$ Continuous | Affected$ Creature.Cleric | AddKeyword$ Vigilance | Description$ Cleric creatures have vigilance.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/akromas_devoted.jpg
 Oracle:Cleric creatures have vigilance.
-SetInfo:LGN Uncommon

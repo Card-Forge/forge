@@ -5,8 +5,3 @@ PT:2/4
 K:Flying
 SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83084.jpg
 Oracle:Flying
-SetInfo:CHR Uncommon
-SetInfo:9ED Uncommon
-SetInfo:M11 Common
-SetInfo:LEG Uncommon
-SetInfo:5ED Uncommon

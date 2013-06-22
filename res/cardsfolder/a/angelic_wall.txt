@@ -6,7 +6,3 @@ K:Flying
 K:Defender
 SVar:Picture:http://resources.wizards.com/magic/cards/10e/en/card129671.jpg
 Oracle:Defender, flying (This creature can't attack, and it can block creatures with flying.)
-SetInfo:PO2 Common
-SetInfo:ODY Common
-SetInfo:AVR Common
-SetInfo:10E Common

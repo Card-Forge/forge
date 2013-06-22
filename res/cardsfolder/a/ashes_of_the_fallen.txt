@@ -8,4 +8,3 @@ SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ashes_of_the_fallen.jpg
 Oracle:As Ashes of the Fallen enters the battlefield, choose a creature type.\nEach creature card in your graveyard has the chosen creature type in addition to its other types.
-SetInfo:SOK Rare

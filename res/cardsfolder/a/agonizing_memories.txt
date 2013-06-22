@@ -4,7 +4,3 @@ Types:Sorcery
 A:SP$ ChangeZone | Cost$ 2 B B | ValidTgts$ Player | TgtPrompt$ Select target player | Origin$ Hand | Destination$ Library | ChangeType$ Card | ChangeNum$ 2 | LibraryPosition$ 0 | IsCurse$ True | SpellDescription$ Look at target player's hand and choose two cards from it. Put them on top of that player's library in any order.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/agonizing_memories.jpg
 Oracle:Look at target player's hand and choose two cards from it. Put them on top of that player's library in any order.
-SetInfo:7ED Uncommon
-SetInfo:WTH Uncommon
-SetInfo:6ED Uncommon
-SetInfo:10E Uncommon

@@ -9,4 +9,3 @@ SVar:RemRandomDeck:True
 DeckNeeds:Type$Enchantment
 SVar:Picture:http://www.wizards.com/global/images/magic/general/argothian_enchantress.jpg
 Oracle:Shroud (This permanent can't be the target of spells or abilities.)\nWhenever you cast an enchantment spell, draw a card.
-SetInfo:USG Rare

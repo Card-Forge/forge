@@ -24,4 +24,3 @@ SVar:DmgPlus1Combat:AB$DealDamage | Cost$ 0 | CombatDamage$ True | Defined$ Repl
 SVar:X:ReplaceCount$DamageAmount/Plus.1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tok_tok_volcano_born.jpg
 Oracle:Protection from red\nIf a red source would deal damage to a player, it deals that much damage plus 1 to that player instead.
-SetInfo:CHK Rare

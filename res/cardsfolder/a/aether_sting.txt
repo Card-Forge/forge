@@ -5,4 +5,3 @@ T:Mode$ SpellCast | ValidCard$ Creature | ValidActivatingPlayer$ Opponent | Trig
 SVar:TrigDealDamage:AB$DealDamage | Cost$ 0 | Defined$ TriggeredActivator | NumDmg$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aether_sting.jpg
 Oracle:Whenever an opponent casts a creature spell, AEther Sting deals 1 damage to that player.
-SetInfo:UDS Uncommon

@@ -8,4 +8,3 @@ SVar:DBSkipTurn:DB$ Pump | Defined$ You | KW$ Skip your next untap step. | Perma
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/avizoa.jpg
 Oracle:Flying\n{0}: Avizoa gets +2/+2 until end of turn. You skip your next untap step. Activate this ability only once each turn.
-SetInfo:WTH Rare

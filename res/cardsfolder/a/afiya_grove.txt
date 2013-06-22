@@ -9,4 +9,3 @@ SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Defined$ Self
 SVar:NeedsToPlay:Creature.YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/afiya_grove.jpg
 Oracle:Afiya Grove enters the battlefield with three +1/+1 counters on it.\nAt the beginning of your upkeep, move a +1/+1 counter from Afiya Grove onto target creature.\nWhen Afiya Grove has no +1/+1 counters on it, sacrifice it.
-SetInfo:MIR Rare

@@ -7,6 +7,3 @@ T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigReturn | OptionalDecider
 SVar:TrigReturn:AB$ChangeZone | Cost$ 0 | ValidTgts$ Creature.YouOwn | TgtPrompt$ Select target creature in your graveyard | Origin$ Graveyard | Destination$ Battlefield
 SVar:Picture:http://www.wizards.com/global/images/magic/general/artisan_of_kozilek.jpg
 Oracle:When you cast Artisan of Kozilek, you may return target creature card from your graveyard to the battlefield.\nAnnihilator 2 (Whenever this creature attacks, defending player sacrifices two permanents.)
-SetInfo:ARC Uncommon
-SetInfo:COM Uncommon
-SetInfo:ROE Uncommon

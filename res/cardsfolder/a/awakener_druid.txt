@@ -7,5 +7,3 @@ SVar:TrigAnimate:AB$ Animate | Cost$ 0 | ValidTgts$ Forest | TgtPrompt$ Select t
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/awakener_druid.jpg
 Oracle:When Awakener Druid enters the battlefield, target Forest becomes a 4/5 green Treefolk creature for as long as Awakener Druid remains on the battlefield. It's still a land.
-SetInfo:M11 Uncommon
-SetInfo:M10 Uncommon

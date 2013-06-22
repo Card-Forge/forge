@@ -6,4 +6,3 @@ SVar:DBAttack:DB$ Pump | Defined$ Remembered | KW$ HIDDEN CARDNAME attacks each 
 SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aggravate.jpg
 Oracle:Aggravate deals 1 damage to each creature target player controls. Each creature dealt damage this way attacks this turn if able.
-SetInfo:AVR Uncommon

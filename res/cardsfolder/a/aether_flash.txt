@@ -6,6 +6,3 @@ SVar:TrigDealDamage:AB$DealDamage | Cost$ 0 | Defined$ TriggeredCard | NumDmg$ 2
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aether_flash.jpg
 Oracle:Whenever a creature enters the battlefield, AEther Flash deals 2 damage to it.
-SetInfo:7ED Uncommon
-SetInfo:WTH Uncommon
-SetInfo:6ED Uncommon

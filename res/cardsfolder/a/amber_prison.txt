@@ -10,5 +10,3 @@ SVar:TrigClearRemember:DB$Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/amber_prison.jpg
 Oracle:You may choose not to untap Amber Prison during your untap step.\n{4}, {T}: Tap target artifact, creature, or land. That permanent doesn't untap during its controller's untap step for as long as Amber Prison remains tapped.
-SetInfo:MIR Rare
-SetInfo:6ED Rare

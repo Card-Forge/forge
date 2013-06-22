@@ -7,4 +7,3 @@ SVar:X:Count$InOppHand
 SVar:AntiBuffedBy:Card
 SVar:Picture:http://www.wizards.com/global/images/magic/general/adamaro_first_to_desire.jpg
 Oracle:Adamaro, First to Desire's power and toughness are each equal to the number of cards in the hand of the opponent with the most cards in hand.
-SetInfo:SOK Rare

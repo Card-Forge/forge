@@ -6,4 +6,3 @@ A:AB$ DealDamage | Cost$ 2 W T | ValidTgts$ Creature.attacking,Creature.blocking
 SVar:DBStayTapped:DB$Pump | KW$ HIDDEN This card doesn't untap during your next untap step. | Defined$ Self | Permanent$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/arbalest_elite.jpg
 Oracle:{2}{W}, {T}: Arbalest Elite deals 3 damage to target attacking or blocking creature. Arbalest Elite doesn't untap during your next untap step.
-SetInfo:M12 Uncommon

@@ -6,4 +6,3 @@ S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ CantBeBlockedBy Creature.
 SVar:X:Count$Valid Land.Snow+DefenderCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/arctic_foxes.jpg
 Oracle:Creatures with power 2 or greater can't block Arctic Foxes as long as defending player controls a snow land.
-SetInfo:ICE Common

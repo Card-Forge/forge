@@ -5,4 +5,3 @@ PT:2/2
 A:AB$ Fog | Cost$ W U G T | PlayerTurn$ True | ActivationPhases$ Upkeep->Declare Blockers | SpellDescription$ Prevent all combat damage that would be dealt this turn. Activate this ability only before the combat damage step.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/angus_mackenzie.jpg
 Oracle:{G}{W}{U}, {T}: Prevent all combat damage that would be dealt this turn. Activate this ability only before the combat damage step.
-SetInfo:LEG Rare

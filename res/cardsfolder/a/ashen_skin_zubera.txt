@@ -7,4 +7,3 @@ SVar:TrigDiscard:AB$Discard | Cost$ 0 | ValidTgts$ Opponent | NumCards$ X | Mode
 SVar:X:Count$ThisTurnEntered_Graveyard_from_Battlefield_Card.Zubera
 SVar:Picture:http://resources.wizards.com/magic/cards/chk/en-us/card80509.jpg
 Oracle:When Ashen-Skin Zubera dies, target opponent discards a card for each Zubera that died this turn.
-SetInfo:CHK Common

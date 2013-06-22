@@ -9,5 +9,3 @@ SVar:NonStackingEffect:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/arena_of_the_ancients.jpg
 Oracle:Legendary creatures don't untap during their controllers' untap steps.\nWhen Arena of the Ancients enters the battlefield, tap all legendary creatures.
-SetInfo:CHR Rare
-SetInfo:LEG Rare

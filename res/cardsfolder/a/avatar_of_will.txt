@@ -7,4 +7,3 @@ S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 6 | EffectZone
 SVar:X:Count$InOppHand
 SVar:Picture:http://www.wizards.com/global/images/magic/general/avatar_of_will.jpg
 Oracle:If an opponent has no cards in hand, Avatar of Will costs {6} less to cast.\nFlying
-SetInfo:PCY Rare

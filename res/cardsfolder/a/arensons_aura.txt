@@ -7,5 +7,3 @@ SVar:NonStackingEffect:True
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/arensons_aura.jpg
 Oracle:{W}, Sacrifice an enchantment: Destroy target enchantment.\n{3}{U}{U}: Counter target enchantment spell.
-SetInfo:ICE Common
-SetInfo:5ED Uncommon

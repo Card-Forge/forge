@@ -6,7 +6,3 @@ A:SP$ Attach | Cost$ 2 W | ValidTgts$ Creature | AILogic$ Curse
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ CARDNAME can't attack or block. & CARDNAME's activated abilities can't be activated. | Description$ Enchanted creature can't attack or block and its activated abilities can't be activated.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/arrest.jpg
 Oracle:Enchant creature\nEnchanted creature can't attack or block, and its activated abilities can't be activated.
-SetInfo:MMQ Uncommon
-SetInfo:MRD Common
-SetInfo:SOM Common
-SetInfo:RTR Uncommon

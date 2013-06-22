@@ -6,4 +6,3 @@ A:AB$ Pump | Cost$ Sac<1/Land> | NumAtt$ 2 | ActivationLimit$ 1 | SpellDescripti
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/akki_avalanchers.jpg
 Oracle:Sacrifice a land: Akki Avalanchers gets +2/+0 until end of turn. Activate this ability only once each turn.
-SetInfo:CHK Common

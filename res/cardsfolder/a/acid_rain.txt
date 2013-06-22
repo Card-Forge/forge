@@ -5,4 +5,3 @@ A:SP$ DestroyAll | Cost$ 3 U | ValidCards$ Forest | SpellDescription$ Destroy al
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/acid_rain.jpg
 Oracle:Destroy all Forests.
-SetInfo:LEG Rare

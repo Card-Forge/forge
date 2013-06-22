@@ -6,4 +6,3 @@ T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | OptionalDe
 SVar:TrigDig:AB$DigUntil | Cost$ 0 | Valid$ Land | ValidDescription$ land | FoundDestination$ Battlefield | RevealedDestination$ Graveyard
 SVar:Picture:http://www.wizards.com/global/images/magic/general/avenging_druid.jpg
 Oracle:Whenever Avenging Druid deals damage to an opponent, you may reveal cards from the top of your library until you reveal a land card. If you do, put that card onto the battlefield and put all other cards revealed this way into your graveyard.
-SetInfo:EXO Common

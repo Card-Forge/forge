@@ -7,4 +7,3 @@ SVar:SquirrelTokenPlayer:DB$ Token | TokenAmount$ 1 | TokenName$ Squirrel | Toke
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/acorn_catapult.jpg
 Oracle:{1}, {T}: Acorn Catapult deals 1 damage to target creature or player. That creature's controller or that player puts a 1/1 green Squirrel creature token onto the battlefield.
-SetInfo:COM Rare

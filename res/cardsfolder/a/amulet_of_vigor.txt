@@ -5,4 +5,3 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Perman
 SVar:TrigUntap:AB$Untap | Cost$ 0 | Defined$ TriggeredCard
 SVar:Picture:http://www.wizards.com/global/images/magic/general/amulet_of_vigor.jpg
 Oracle:Whenever a permanent enters the battlefield tapped and under your control, untap it.
-SetInfo:WWK Rare

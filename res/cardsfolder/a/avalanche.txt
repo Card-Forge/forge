@@ -9,4 +9,3 @@ SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/avalanche.jpg
 Oracle:Destroy X target snow lands.
-SetInfo:ICE Uncommon

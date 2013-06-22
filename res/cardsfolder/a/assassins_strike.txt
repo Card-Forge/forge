@@ -5,4 +5,3 @@ A:SP$ Destroy | Cost$ 4 B B | ValidTgts$ Creature | TgtPrompt$ Select target cre
 SVar:DBDiscard:DB$Discard | Defined$ TargetedController | NumCards$ 1 | Mode$ TgtChoose
 SVar:Picture:http://www.wizards.com/global/images/magic/general/assassins_strike.jpg
 Oracle:Destroy target creature. Its controller discards a card.
-SetInfo:RTR Uncommon

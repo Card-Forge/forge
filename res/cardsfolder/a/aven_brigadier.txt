@@ -8,4 +8,3 @@ S:Mode$ Continuous | Affected$ Creature.Soldier+Other | AddPower$ 1 | AddToughne
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aven_brigadier.jpg
 Oracle:Flying\nOther Bird creatures get +1/+1.\nOther Soldier creatures get +1/+1.
-SetInfo:ONS Rare

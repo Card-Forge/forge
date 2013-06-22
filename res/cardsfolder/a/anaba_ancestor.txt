@@ -6,4 +6,3 @@ A:AB$ Pump | Cost$ T | NumAtt$ 1 | NumDef$ 1 | ValidTgts$ Creature.Minotaur+Othe
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/anaba_ancestor.jpg
 Oracle:{T}: Another target Minotaur creature gets +1/+1 until end of turn.
-SetInfo:HML Rare

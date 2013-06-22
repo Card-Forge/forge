@@ -6,4 +6,3 @@ SVar:RemRandomDeck:True
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/arcums_sleigh.jpg
 Oracle:{2}, {T}: Target creature gains vigilance until end of turn. Activate this ability only during combat and only if defending player controls a snow land.
-SetInfo:ICE Uncommon

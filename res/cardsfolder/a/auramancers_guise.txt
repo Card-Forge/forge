@@ -8,4 +8,3 @@ SVar:X:Count$Valid Aura.AttachedTo Creature.EnchantedBy/Times.2
 SVar:EnchantMe:Multiple
 SVar:Picture:http://www.wizards.com/global/images/magic/general/auramancers_guise.jpg
 Oracle:Enchant creature\nEnchanted creature gets +2/+2 for each Aura attached to it and has vigilance.
-SetInfo:PLC Uncommon

@@ -9,4 +9,3 @@ S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddAbility$ AbundantGrowthTap 
 SVar:AbundantGrowthTap:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color to your mana pool.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/abundant_growth.jpg
 Oracle:Enchant land\nWhen Abundant Growth enters the battlefield, draw a card.\nEnchanted land has "{T}: Add one mana of any color to your mana pool."
-SetInfo:AVR Common

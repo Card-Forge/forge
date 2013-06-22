@@ -5,4 +5,3 @@ A:SP$ PumpAll | Cost$ 3 R | ValidCards$ Creature.blocking | KW$ First Strike | S
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ambush.jpg
 Oracle:Blocking creatures gain first strike until end of turn.
-SetInfo:HML Common

@@ -8,4 +8,3 @@ A:AB$ Mana | Cost$ 2 T | Produced$ G | SpellDescription$ Add G to your mana pool
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aysen_abbey.jpg
 Oracle:{T}: Add {1} to your mana pool.\n{1}, {T}: Add {W} to your mana pool.\n{2}, {T}: Add {G} or {U} to your mana pool.
-SetInfo:HML Uncommon

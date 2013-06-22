@@ -6,4 +6,3 @@ SVar:TrigSac:AB$Sacrifice | Cost$ 0 | UnlessCost$ 1 | UnlessPayer$ TriggeredActi
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aether_barrier.jpg
 Oracle:Whenever a player casts a creature spell, that player sacrifices a permanent unless he or she pays {1}.
-SetInfo:NMS Rare

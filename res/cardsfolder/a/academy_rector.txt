@@ -10,4 +10,3 @@ SVar:RemRandomDeck:True
 DeckNeeds:Type$Enchantment
 SVar:Picture:http://www.wizards.com/global/images/magic/general/academy_rector.jpg
 Oracle:When Academy Rector dies, you may exile it. If you do, search your library for an enchantment card, put that card onto the battlefield, then shuffle your library.
-SetInfo:UDS Rare

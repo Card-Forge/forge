@@ -6,5 +6,3 @@ SVar:X:TargetedPlayer$DomainPlayer
 SVar:RemRandomDeck:True
 SVar:Picture:http://resources.wizards.com/magic/cards/ps/en-us/card26383.jpg
 Oracle:Domain - Target player draws a card for each basic land type among lands he or she controls.
-SetInfo:PLS Uncommon
-SetInfo:DDE Uncommon

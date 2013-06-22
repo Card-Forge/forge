@@ -7,4 +7,3 @@ SVar:TrigToken:DB$Token | Cost$ 0 | TokenAmount$ X | TokenName$ Saproling | Toke
 SVar:X:Targeted$CardManaCost
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aether_mutation.jpg
 Oracle:Return target creature to its owner's hand. Put X 1/1 green Saproling creature tokens onto the battlefield, where X is that creature's converted mana cost.
-SetInfo:APC Uncommon

@@ -6,4 +6,3 @@ K:Flying
 K:Vigilance
 SVar:Picture:http://www.wizards.com/global/images/magic/general/abbey_griffin.jpg
 Oracle:Flying, vigilance
-SetInfo:ISD Common

@@ -7,10 +7,3 @@ S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddHiddenKeyword$ CARDNAME can
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/animate_wall.jpg
 Oracle:Enchant Wall\nEnchanted Wall can attack as though it didn't have defender.
-SetInfo:2ED Rare
-SetInfo:6ED Rare
-SetInfo:LEB Rare
-SetInfo:LEA Rare
-SetInfo:5ED Rare
-SetInfo:4ED Rare
-SetInfo:3ED Rare

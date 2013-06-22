@@ -9,5 +9,3 @@ SVar:X:Count$ThisTurnCast_Card.YouDontCtrl
 SVar:RemMultiplayer:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/angelic_arbiter.jpg
 Oracle:Flying\nEach opponent who cast a spell this turn can't attack with creatures.\nEach opponent who attacked with a creature this turn can't cast spells.
-SetInfo:M11 Rare
-SetInfo:COM Rare

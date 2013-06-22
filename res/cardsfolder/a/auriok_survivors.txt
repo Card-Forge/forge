@@ -7,4 +7,3 @@ SVar:TrigChangeZone:AB$ ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ 
 SVar:DBAttach:DB$ Attach | Object$ Targeted | Defined$ Self | Optional$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/auriok_survivors.jpg
 Oracle:When Auriok Survivors enters the battlefield, you may return target Equipment card from your graveyard to the battlefield. If you do, you may attach it to Auriok Survivors.
-SetInfo:NPH Uncommon

@@ -8,4 +8,3 @@ SVar:DBDiscard:DB$Discard | Defined$ TriggeredPlayer | NumCards$ 1 | Mode$ TgtCh
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/anvil_of_bogardan.jpg
 Oracle:Players have no maximum hand size.\nAt the beginning of each player's draw step, that player draws an additional card, then discards a card.
-SetInfo:VIS Rare

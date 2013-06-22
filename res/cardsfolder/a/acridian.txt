@@ -5,4 +5,3 @@ PT:2/4
 K:Echo:1 G
 SVar:Picture:http://www.wizards.com/global/images/magic/general/acridian.jpg
 Oracle:Echo {1}{G} (At the beginning of your upkeep, if this came under your control since the beginning of your last upkeep, sacrifice it unless you pay its echo cost.)
-SetInfo:USG Common

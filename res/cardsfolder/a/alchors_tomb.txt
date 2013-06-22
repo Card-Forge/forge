@@ -7,4 +7,3 @@ SVar:RemRandomDeck:True
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/alchors_tomb.jpg
 Oracle:{2}, {T}: Target permanent you control becomes the color of your choice. (This effect lasts indefinitely.)
-SetInfo:LEG Rare

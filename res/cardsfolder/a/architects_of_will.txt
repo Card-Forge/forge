@@ -8,5 +8,3 @@ SVar:TrigRearrange:AB$RearrangeTopOfLibrary | Cost$ 0 | ValidTgts$ Player | TgtP
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/architects_of_will.jpg
 Oracle:When Architects of Will enters the battlefield, look at the top three cards of target player's library, then put them back in any order.\nCycling {U/B} ({U/B}, Discard this card: Draw a card.)
-SetInfo:ARB Common
-SetInfo:ARC Common

@@ -6,5 +6,3 @@ SVar:ChooseNewHost:DB$ ChooseCard | Defined$ You | Amount$ 1 | Choices$ Permanen
 SVar:ReEnchant:DB$ Attach | Object$ ParentTarget | Defined$ Remembered
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aura_graft.jpg
 Oracle:Gain control of target Aura that's attached to a permanent. Attach it to another permanent it can enchant.
-SetInfo:ODY Uncommon
-SetInfo:10E Uncommon

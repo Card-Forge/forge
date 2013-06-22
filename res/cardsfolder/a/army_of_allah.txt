@@ -4,4 +4,3 @@ Types:Instant
 A:SP$ PumpAll | Cost$ 1 W W | ValidCards$ Creature.attacking | NumAtt$ 2 | SpellDescription$ Attacking creatures get +2/+0 until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/army_of_allah.jpg
 Oracle:Attacking creatures get +2/+0 until end of turn.
-SetInfo:ARN Common x2

@@ -8,4 +8,3 @@ SVar:RPreventNextFromSource:Event$ DamageDone | ValidSource$ Card.IsRemembered |
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/auriok_replica.jpg
 Oracle:{W}, Sacrifice Auriok Replica: Prevent all damage a source of your choice would deal to you this turn.
-SetInfo:SOM Common

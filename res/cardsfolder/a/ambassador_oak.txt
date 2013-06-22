@@ -6,4 +6,3 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Elf Warrior | TokenTypes$ Creature,Elf,Warrior | TokenOwner$ You | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ambassador_oak.jpg
 Oracle:When Ambassador Oak enters the battlefield, put a 1/1 green Elf Warrior creature token onto the battlefield.
-SetInfo:MOR Common

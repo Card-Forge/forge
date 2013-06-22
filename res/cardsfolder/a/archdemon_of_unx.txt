@@ -10,4 +10,3 @@ SVar:MakeToken:DB$Token | TokenImage$ B 2 2 Zombie | TokenName$ Zombie | TokenCo
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/archdemon_of_unx.jpg
 Oracle:Flying, trample\nAt the beginning of your upkeep, sacrifice a non-Zombie creature, then put a 2/2 black Zombie creature token onto the battlefield.
-SetInfo:ALA Rare

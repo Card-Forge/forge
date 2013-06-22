@@ -6,4 +6,3 @@ A:AB$ Tap | Cost$ tapXType<2/Wizard> | ValidTgts$ Permanent | TgtPrompt$ Select 
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aphetto_grifter.jpg
 Oracle:Tap two untapped Wizards you control: Tap target permanent.
-SetInfo:ONS Uncommon

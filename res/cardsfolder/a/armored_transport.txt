@@ -6,4 +6,3 @@ PT:2/1
 K:PreventAllDamageBy Creature.blockingSource
 SVar:Picture:http://www.wizards.com/global/images/magic/general/armored_transport.jpg
 Oracle:Prevent all combat damage that would be dealt to Armored Transport by creatures blocking it.
-SetInfo:GTC Common

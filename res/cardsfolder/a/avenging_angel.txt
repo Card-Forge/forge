@@ -7,4 +7,3 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigChange:AB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Library | LibraryPosition$ 0
 SVar:Picture:http://www.wizards.com/global/images/magic/general/avenging_angel.jpg
 Oracle:Flying\nWhen Avenging Angel dies, you may put it on top of its owner's library.
-SetInfo:TMP Rare

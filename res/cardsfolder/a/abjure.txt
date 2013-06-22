@@ -5,4 +5,3 @@ A:SP$ Counter | Cost$ U Sac<1/Permanent.Blue/blue permanent> | TargetType$ Spell
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/abjure.jpg
 Oracle:As an additional cost to cast Abjure, sacrifice a blue permanent.\nCounter target spell.
-SetInfo:WTH Common

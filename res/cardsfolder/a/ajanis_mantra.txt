@@ -5,5 +5,3 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | E
 SVar:TrigGainLife:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ajanis_mantra.jpg
 Oracle:At the beginning of your upkeep, you may gain 1 life.
-SetInfo:M11 Common
-SetInfo:DDH Common

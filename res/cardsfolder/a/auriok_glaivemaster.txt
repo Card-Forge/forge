@@ -6,4 +6,3 @@ S:Mode$ Continuous | Affected$ Card.Self+equipped | AddPower$ 1 | AddToughness$ 
 SVar:EquipMe:Once
 SVar:Picture:http://www.wizards.com/global/images/magic/general/auriok_glaivemaster.jpg
 Oracle:As long as Auriok Glaivemaster is equipped, it gets +1/+1 and has first strike.
-SetInfo:DST Common

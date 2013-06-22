@@ -6,6 +6,3 @@ A:AB$ Pump | Cost$ T | ValidTgts$ Creature.OppCtrl | KW$ HIDDEN CARDNAME attacks
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/alluring_siren.jpg
 Oracle:{T}: Target creature an opponent controls attacks you this turn if able.
-SetInfo:M11 Uncommon
-SetInfo:M10 Uncommon
-SetInfo:M12 Uncommon

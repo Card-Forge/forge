@@ -9,5 +9,3 @@ SVar:NonStackingEffect:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/arcane_laboratory.jpg
 Oracle:Each player can't cast more than one spell each turn.
-SetInfo:7ED Uncommon
-SetInfo:USG Uncommon

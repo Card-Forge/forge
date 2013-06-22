@@ -9,4 +9,3 @@ S:Mode$ Continuous | Affected$ Opponent | AddKeyword$ You can't lose the game. |
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/abyssal_persecutor.jpg
 Oracle:Flying, trample\nYou can't win the game and your opponents can't lose the game.
-SetInfo:WWK Mythic

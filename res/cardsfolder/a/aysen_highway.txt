@@ -6,4 +6,3 @@ SVar:NonStackingEffect:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aysen_highway.jpg
 Oracle:White creatures have plainswalk.
-SetInfo:HML Rare

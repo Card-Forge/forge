@@ -6,5 +6,3 @@ SVar:NonStackingEffect:True
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/akromas_memorial.jpg
 Oracle:Creatures you control have flying, first strike, vigilance, trample, haste, and protection from black and from red.
-SetInfo:FUT Rare
-SetInfo:M13 Mythic

@@ -9,9 +9,3 @@ SVar:Y:Count$Valid Forest.YouCtrl/HalfUp
 SVar:BuffedBy:Forest
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aspect_of_wolf.jpg
 Oracle:Enchant creature\nEnchanted creature gets +X/+Y, where X is half the number of Forests you control, rounded down, and Y is half the number of Forests you control, rounded up.
-SetInfo:2ED Rare
-SetInfo:LEB Rare
-SetInfo:LEA Rare
-SetInfo:5ED Rare
-SetInfo:4ED Rare
-SetInfo:3ED Rare

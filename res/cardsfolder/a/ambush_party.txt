@@ -6,5 +6,3 @@ K:First Strike
 K:Haste
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ambush_party.jpg
 Oracle:First strike, haste
-SetInfo:5ED Common
-SetInfo:HML Common x2

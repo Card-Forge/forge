@@ -5,4 +5,3 @@ PT:8/8
 S:Mode$ Continuous | Affected$ Creature | AddKeyword$ Double Strike | AddHiddenKeyword$ CARDNAME attacks each turn if able. | Description$ All creatures have double strike and attack each turn if able.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/avatar_of_slaughter.jpg
 Oracle:All creatures have double strike and attack each turn if able.
-SetInfo:COM Rare

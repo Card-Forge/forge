@@ -5,4 +5,3 @@ PT:3/3
 A:AB$ Pump | Cost$ 1 | NumDef$ +1 | SpellDescription$ CARDNAME gets +0/+1 until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/adarkar_sentinel.jpg
 Oracle:{1}: Adarkar Sentinel gets +0/+1 until end of turn.
-SetInfo:ICE Uncommon

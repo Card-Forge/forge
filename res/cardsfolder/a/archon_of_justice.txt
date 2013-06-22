@@ -7,5 +7,3 @@ PT:4/4
 K:Flying
 SVar:Picture:http://www.wizards.com/global/images/magic/general/archon_of_justice.jpg
 Oracle:Flying\nWhen Archon of Justice dies, exile target permanent.
-SetInfo:M12 Rare
-SetInfo:EVE Rare

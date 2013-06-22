@@ -7,4 +7,3 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigGainControl:DB$ GainControl | AllValid$ Enchantment | NewController$ You
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aura_thief.jpg
 Oracle:Flying\nWhen Aura Thief dies, you gain control of all enchantments. (You don't get to move Auras.)
-SetInfo:UDS Rare

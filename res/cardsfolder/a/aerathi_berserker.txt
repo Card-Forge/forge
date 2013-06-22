@@ -5,4 +5,3 @@ PT:2/4
 K:Rampage 3
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aerathi_berserker.jpg
 Oracle:Rampage 3 (Whenever this creature becomes blocked, it gets +3/+3 until end of turn for each creature blocking it beyond the first.)
-SetInfo:LEG Uncommon

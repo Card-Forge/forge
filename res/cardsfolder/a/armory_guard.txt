@@ -7,4 +7,3 @@ SVar:X:Count$Valid Gate.YouCtrl
 DeckHints:Type$Gate
 SVar:Picture:http://www.wizards.com/global/images/magic/general/armory_guard.jpg
 Oracle:Armory Guard has vigilance as long as you control a Gate.
-SetInfo:RTR Common

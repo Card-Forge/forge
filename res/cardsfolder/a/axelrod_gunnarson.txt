@@ -8,5 +8,3 @@ SVar:TrigDealDamage:AB$DealDamage | Cost$ 0 | ValidTgts$ Player | TgtPrompt$ Sel
 SVar:DBGainLife:DB$GainLife | Defined$ You | LifeAmount$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/axelrod_gunnarson.jpg
 Oracle:Trample\nWhenever a creature dealt damage by Axelrod Gunnarson this turn dies, you gain 1 life and Axelrod deals 1 damage to target player.
-SetInfo:CHR Rare
-SetInfo:LEG Rare

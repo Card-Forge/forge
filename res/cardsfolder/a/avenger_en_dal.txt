@@ -8,4 +8,3 @@ SVar:X:Targeted$CardToughness
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/avenger_en_dal.jpg
 Oracle:{2}{W}, {T}, Discard a card: Exile target attacking creature. Its controller gains life equal to its toughness.
-SetInfo:NMS Rare

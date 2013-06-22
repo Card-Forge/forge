@@ -7,4 +7,3 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | OptionalDec
 SVar:TrigChange:AB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Library | Shuffle$ True | Defined$ Self
 SVar:Picture:http://www.wizards.com/global/images/magic/general/angel_of_fury.jpg
 Oracle:Flying\nWhen Angel of Fury is put into your graveyard from the battlefield, you may shuffle it into your library.
-SetInfo:PO2 Rare

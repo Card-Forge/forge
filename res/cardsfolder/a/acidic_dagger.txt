@@ -10,4 +10,3 @@ SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/acidic_dagger.jpg
 Oracle:{4}, {T}: Whenever target creature deals combat damage to a non-Wall creature this turn, destroy that non-Wall creature. When the targeted creature leaves the battlefield this turn, sacrifice Acidic Dagger. Activate this ability only before blockers are declared.
-SetInfo:MIR Rare

@@ -6,4 +6,3 @@ SVar:TrigDealDamage:AB$DealDamage | Cost$ 0 | DamageSource$ TriggeredCard | Vali
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aether_charge.jpg
 Oracle:Whenever a Beast enters the battlefield under your control, you may have it deal 4 damage to target opponent.
-SetInfo:ONS Uncommon

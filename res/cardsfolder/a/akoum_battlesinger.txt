@@ -9,4 +9,3 @@ SVar:TrigPumpAll:AB$PumpAll | Cost$ 0 | ValidCards$ Creature.Ally+YouCtrl | NumA
 SVar:BuffedBy:Ally
 SVar:Picture:http://www.wizards.com/global/images/magic/general/Akoum_Battlesinger.jpg
 Oracle:Haste\nWhenever Akoum Battlesinger or another Ally enters the battlefield under your control, you may have Ally creatures you control get +1/+0 until end of turn.
-SetInfo:WWK Common

@@ -8,4 +8,3 @@ S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 6 | AddToughness$
 SVar:AE:SVar:HasAttackEffect:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/argentum_armor.jpg
 Oracle:Equipped creature gets +6/+6.\nWhenever equipped creature attacks, destroy target permanent.\nEquip {6}
-SetInfo:SOM Rare

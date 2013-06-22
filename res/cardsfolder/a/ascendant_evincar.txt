@@ -8,6 +8,3 @@ S:Mode$ Continuous | Affected$ Creature.nonBlack | AddPower$ -1 | AddToughness$ 
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ascendant_evincar.jpg
 Oracle:Flying (This creature can't be blocked except by creatures with flying or reach.)\nOther black creatures get +1/+1.\nNonblack creatures get -1/-1.
-SetInfo:NMS Rare
-SetInfo:HOP Rare
-SetInfo:10E Rare

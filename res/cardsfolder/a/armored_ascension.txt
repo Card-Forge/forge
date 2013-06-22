@@ -8,6 +8,3 @@ SVar:X:Count$TypeYouCtrl.Plains
 SVar:BuffedBy:Plains
 SVar:Picture:http://www.wizards.com/global/images/magic/general/armored_ascension.jpg
 Oracle:Enchant creature\nEnchanted creature gets +1/+1 for each Plains you control and has flying.
-SetInfo:M11 Uncommon
-SetInfo:M10 Uncommon
-SetInfo:SHM Uncommon

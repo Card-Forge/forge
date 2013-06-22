@@ -7,4 +7,3 @@ SVar:ChooseColor:DB$ ChooseColor | Defined$ You | SpellDescription$ As CARDNAME 
 S:Mode$ Continuous| Affected$ Card.Self | SetColor$ ChosenColor | Description$ CARDNAME is the chosen color. (It's still an artifact.)
 SVar:Picture:http://www.wizards.com/global/images/magic/general/alloy_golem.jpg
 Oracle:As Alloy Golem enters the battlefield, choose a color.\nAlloy Golem is the chosen color. (It's still an artifact.)
-SetInfo:INV Uncommon

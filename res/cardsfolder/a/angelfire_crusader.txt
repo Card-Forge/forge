@@ -5,4 +5,3 @@ PT:2/3
 A:AB$ Pump | Cost$ R | NumAtt$ 1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
 SVar:Picture:http://resources.wizards.com/magic/cards/ap/en-us/card21253.jpg
 Oracle:{R}: Angelfire Crusader gets +1/+0 until end of turn.
-SetInfo:APC Common

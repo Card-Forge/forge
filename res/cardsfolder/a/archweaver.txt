@@ -6,4 +6,3 @@ K:Reach
 K:Trample
 SVar:Picture:http://www.wizards.com/global/images/magic/general/archweaver.jpg
 Oracle:Reach, trample
-SetInfo:RTR Uncommon

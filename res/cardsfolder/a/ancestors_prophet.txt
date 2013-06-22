@@ -6,4 +6,3 @@ A:AB$ GainLife | Cost$ tapXType<5/Cleric> | LifeAmount$ 10 | SpellDescription$ Y
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ancestors_prophet.jpg
 Oracle:Tap five untapped Clerics you control: You gain 10 life.
-SetInfo:ONS Rare

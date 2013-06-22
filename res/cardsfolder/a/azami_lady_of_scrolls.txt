@@ -6,4 +6,3 @@ A:AB$ Draw | Cost$ tapXType<1/Wizard> | NumCards$ 1 | SpellDescription$ Draw a c
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/azami_lady_of_scrolls.jpg
 Oracle:Tap an untapped Wizard you control: Draw a card.
-SetInfo:CHK Rare

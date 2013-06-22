@@ -6,5 +6,3 @@ A:AB$ Untap | Cost$ T | ValidTgts$ Forest | TgtPrompt$ Select target forest | Sp
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/arbor_elf.jpg
 Oracle:{T}: Untap target Forest.
-SetInfo:M13 Common
-SetInfo:WWK Common

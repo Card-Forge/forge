@@ -4,4 +4,3 @@ Types:Tribal Sorcery Eldrazi
 A:SP$ SacrificeAll | Cost$ 7 | ValidCards$ Permanent.nonColorless | SpellDescription$ Each player sacrifices all colored permanents he or she controls.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/all_is_dust.jpg
 Oracle:Each player sacrifices all colored permanents he or she controls.
-SetInfo:ROE Mythic

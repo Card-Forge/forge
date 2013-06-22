@@ -12,4 +12,3 @@ SVar:RemRandomDeck:True
 DeckNeeds:Color$Blue
 SVar:Picture:http://www.wizards.com/global/images/magic/general/azorius_herald.jpg
 Oracle:Azorius Herald is unblockable.\nWhen Azorius Herald enters the battlefield, you gain 4 life.\nWhen Azorius Herald enters the battlefield, sacrifice it unless {U} was spent to cast it.
-SetInfo:DIS Uncommon

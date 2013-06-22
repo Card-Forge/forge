@@ -10,4 +10,3 @@ SVar:DBExile:DB$ChangeZone | Origin$ Stack | Destination$ Exile
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/all_suns_dawn.jpg
 Oracle:For each color, return up to one target card of that color from your graveyard to your hand. Exile All Suns' Dawn.
-SetInfo:5DN Rare

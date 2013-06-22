@@ -5,4 +5,3 @@ PT:2/2
 A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color to your mana pool.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/alloy_myr.jpg
 Oracle:{T}: Add one mana of any color to your mana pool.
-SetInfo:NPH Uncommon

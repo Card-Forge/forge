@@ -6,5 +6,3 @@ SVar:TrigDestroy:AB$Destroy | Cost$ 0 | ValidTgts$ Artifact,Enchantment | TgtPro
 SVar:BuffedBy:Creature
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aura_shards.jpg
 Oracle:Whenever a creature enters the battlefield under your control, you may destroy target artifact or enchantment.
-SetInfo:COM Uncommon
-SetInfo:INV Uncommon

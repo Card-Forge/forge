@@ -6,4 +6,3 @@ PT:3/5
 K:PreventAllDamageBy Artifact
 SVar:Picture:http://www.wizards.com/global/images/magic/general/argothian_treefolk.jpg
 Oracle:Prevent all damage that would be dealt to Argothian Treefolk by artifacts.
-SetInfo:ATQ Common

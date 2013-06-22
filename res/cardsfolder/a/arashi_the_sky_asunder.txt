@@ -7,4 +7,3 @@ A:AB$ DamageAll | PrecostDesc$ Channel - | Cost$ X G G Discard<1/CARDNAME> | Act
 SVar:X:Count$xPaid
 SVar:Picture:http://resources.wizards.com/magic/cards/sok/en-us/card87333.jpg
 Oracle:{X}{G}, {T}: Arashi, the Sky Asunder deals X damage to target creature with flying.\nChannel - {X}{G}{G}, Discard Arashi: Arashi deals X damage to each creature with flying.
-SetInfo:SOK Rare

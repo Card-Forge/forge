@@ -6,4 +6,3 @@ SVar:DBShuffle:DB$ChangeZoneAll | ChangeType$ Card.YouOwn | Origin$ Graveyard | 
 SVar:X:Count$InYourYard/Times.2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/archangels_light.jpg
 Oracle:You gain 2 life for each card in your graveyard, then shuffle your graveyard into your library.
-SetInfo:DKA Mythic

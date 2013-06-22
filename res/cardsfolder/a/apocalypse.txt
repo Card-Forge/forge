@@ -6,4 +6,3 @@ SVar:DBDiscard:DB$Discard | Mode$ Hand
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/apocalypse.jpg
 Oracle:Exile all permanents. You discard your hand.
-SetInfo:TMP Rare

@@ -10,4 +10,3 @@ SVar:DmgTimes2Combat:AB$ DealDamage | Cost$ 0 | CombatDamage$ True | Defined$ Re
 SVar:MoltenX:ReplaceCount$DamageAmount/Twice
 SVar:Picture:http://www.cardforge.org/fpics/lq_schemes/approach_my_molten_realm.jpg
 Oracle:When you set this scheme in motion, until your next turn, if a source would deal damage, it deals double that damage instead.
-SetInfo:ARC Common

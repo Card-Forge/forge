@@ -8,4 +8,3 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigChange:AB$ChangeZone | Cost$ 0 | Origin$ Library | Destination$ Hand | ChangeType$ Card.namedAvarax | ChangeNum$ 1 | ShuffleNonMandatory$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/avarax.jpg
 Oracle:Haste\nWhen Avarax enters the battlefield, you may search your library for a card named Avarax, reveal it, and put it into your hand. If you do, shuffle your library.\n{1}{R}: Avarax gets +1/+0 until end of turn.
-SetInfo:ONS Uncommon

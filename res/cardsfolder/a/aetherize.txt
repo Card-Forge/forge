@@ -4,4 +4,3 @@ Types:Instant
 A:SP$ ChangeZoneAll | Cost$ 3 U | ChangeType$ Creature.attacking | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return all attacking creatures to their owners' hands.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aetherize.jpg
 Oracle:Return all attacking creatures to their owner's hand.
-SetInfo:GTC Uncommon

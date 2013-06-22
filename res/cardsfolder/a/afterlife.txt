@@ -5,6 +5,3 @@ A:SP$ Destroy | Cost$ 2 W | ValidTgts$ Creature | TgtPrompt$ Select target creat
 SVar:DBToken:DB$Token | TokenAmount$ 1 | TokenName$ Spirit | TokenTypes$ Creature,Spirit | TokenOwner$ TargetedController | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Flying
 SVar:Picture:http://www.wizards.com/global/images/magic/general/afterlife.jpg
 Oracle:Destroy target creature. It can't be regenerated. Its controller puts a 1/1 white Spirit creature token with flying onto the battlefield.
-SetInfo:MMQ Uncommon
-SetInfo:COM Uncommon
-SetInfo:MIR Uncommon

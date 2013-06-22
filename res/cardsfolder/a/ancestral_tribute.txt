@@ -6,4 +6,3 @@ A:SP$ GainLife | Cost$ 5 W W | LifeAmount$ X | References$ X | SpellDescription$
 SVar:X:Count$InYourYard/Times.2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ancestral_tribute.jpg
 Oracle:You gain 2 life for each card in your graveyard.\nFlashback {9}{W}{W}{W} (You may cast this card from your graveyard for its flashback cost. Then exile it.)
-SetInfo:ODY Rare

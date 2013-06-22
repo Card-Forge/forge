@@ -9,4 +9,3 @@ SVar:TrigGain:AB$GainLife | Cost$ 0 | Defined$ TriggeredCardController | LifeAmo
 SVar:X:TriggeredCard$CardCounters.AGE/Times.2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/arctic_nishoba.jpg
 Oracle:Trample\nCumulative upkeep {G} or {W} (At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.)\nWhen Arctic Nishoba dies, you gain 2 life for each age counter on it.
-SetInfo:CSP Uncommon

@@ -9,4 +9,3 @@ SVar:TrigDamage:AB$ DealDamage | Cost$ 0 | Defined$ TriggeredCardController | Nu
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/artifact_possession.jpg
 Oracle:Enchant artifact\nWhenever enchanted artifact becomes tapped or a player activates an ability of enchanted artifact without {T} in its activation cost, Artifact Possession deals 2 damage to that artifact's controller.
-SetInfo:ATQ Common

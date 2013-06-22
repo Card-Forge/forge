@@ -7,4 +7,3 @@ SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aether_snap.jpg
 Oracle:Remove all counters from all permanents and exile all tokens.
-SetInfo:DST Rare

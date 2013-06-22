@@ -5,4 +5,3 @@ A:SP$ Destroy | Cost$ 2 R R | ValidTgts$ Artifact,Creature,Land | TgtPrompt$ Sel
 SVar:DBPain:DB$DealDamage | NumDmg$ 3 | Defined$ You
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aftershock.jpg
 Oracle:Destroy target artifact, creature, or land. Aftershock deals 3 damage to you.
-SetInfo:TMP Common

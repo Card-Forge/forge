@@ -5,4 +5,3 @@ PT:0/1
 S:Mode$ Continuous | Affected$ You | AddKeyword$ Damage that would reduce your life total to less than 1 reduces it to 1 instead. | Description$ Damage that would reduce your life total to less than 1 reduces it to 1 instead.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ali_from_cairo.jpg
 Oracle:Damage that would reduce your life total to less than 1 reduces it to 1 instead.
-SetInfo:ARN Rare

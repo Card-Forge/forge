@@ -6,4 +6,3 @@ A:SP$ Protection | Cost$ 1 PW | ValidTgts$ Creature.YouCtrl,Artifact.YouCtrl | T
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/apostles_blessing.jpg
 Oracle:({W/P} can be paid with either {W} or 2 life.)\nTarget artifact or creature you control gains protection from artifacts or from the color of your choice until end of turn.
-SetInfo:NPH Common

@@ -5,4 +5,3 @@ A:SP$ DestroyAll | Cost$ 2 R R | ValidCards$ Permanent.White | SpellDescription$
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/anarchy.jpg
 Oracle:Destroy all white permanents.
-SetInfo:ICE Uncommon

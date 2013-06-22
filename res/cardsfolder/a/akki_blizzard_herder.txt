@@ -6,4 +6,3 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigSac:AB$ Sacrifice | Cost$ 0 | SacValid$ Land | Defined$ Each
 SVar:Picture:http://www.wizards.com/global/images/magic/general/akki_blizzard_herder.jpg
 Oracle:When Akki Blizzard-Herder dies, each player sacrifices a land.
-SetInfo:BOK Common

@@ -13,4 +13,3 @@ SVar:Y:Number$ChosenNumber/Plus.1
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ashlings_prerogative.jpg
 Oracle:As Ashling's Prerogative enters the battlefield, choose odd or even. (Zero is even.)\nEach creature with converted mana cost of the chosen value has haste.\nEach creature without converted mana cost of the chosen value enters the battlefield tapped.
-SetInfo:LRW Rare

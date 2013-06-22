@@ -10,5 +10,3 @@ SVar:AngelicSalvation:DB$ PreventDamage | ValidTgts$ Creature,Player | TgtPrompt
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/angel_of_salvation.jpg
 Oracle:Flash, convoke (Each creature you tap while casting this spell reduces its cost by {1} or by one mana of that creature's color.)\nFlying\nWhen Angel of Salvation enters the battlefield, prevent the next 5 damage that would be dealt this turn to any number of target creatures and/or players, divided as you choose.
-SetInfo:FUT Rare
-SetInfo:DDF Rare

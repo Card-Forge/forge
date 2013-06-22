@@ -5,4 +5,3 @@ PT:1/1
 A:AB$ ChangeZone | Cost$ W W T | TgtPrompt$ Choose target artifact card in your graveyard | ValidTgts$ Artifact.YouCtrl | Origin$ Graveyard | Destination$ Hand | SpellDescription$ Return target artifact card from your graveyard to your hand.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/argivian_archaeologist.jpg
 Oracle:{W}{W}, {T}: Return target artifact card from your graveyard to your hand.
-SetInfo:ATQ Rare

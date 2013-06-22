@@ -8,5 +8,3 @@ SVar:DigNonland:DB$ DigUntil | Valid$ Card.nonLand | ValidDescription$ nonland |
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/abundance.jpg
 Oracle:If you would draw a card, you may instead choose land or nonland and reveal cards from the top of your library until you reveal a card of the chosen kind. Put that card into your hand and put all other cards revealed this way on the bottom of your library in any order.
-SetInfo:10E Rare
-SetInfo:USG Rare
