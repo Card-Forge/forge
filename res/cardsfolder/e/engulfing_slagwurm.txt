@@ -12,4 +12,3 @@ SVar:X:TriggeredAttacker$CardToughness
 SVar:Y:TriggeredBlocker$CardToughness
 SVar:Picture:http://www.wizards.com/global/images/magic/general/engulfing_slagwurm.jpg
 Oracle:Whenever Engulfing Slagwurm blocks or becomes blocked by a creature, destroy that creature. You gain life equal to that creature's toughness.
-SetInfo:SOM Rare

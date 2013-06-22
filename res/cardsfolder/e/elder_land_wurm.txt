@@ -8,5 +8,3 @@ T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ TrigDebuff | TriggerDescription
 SVar:TrigDebuff:AB$Debuff | Cost$ 0 | Keywords$ Defender | Defined$ TriggeredBlocker | Permanent$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elder_land_wurm.jpg
 Oracle:Defender, trample\nWhen Elder Land Wurm blocks, it loses defender.
-SetInfo:LEG Rare
-SetInfo:4ED Rare

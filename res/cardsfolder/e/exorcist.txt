@@ -5,4 +5,3 @@ PT:1/1
 A:AB$ Destroy | Cost$ 1 W T | ValidTgts$ Creature.Black | TgtPrompt$ Select target black creature | SpellDescription$ Destroy target black creature.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/exorcist.jpg
 Oracle:{1}{W}, {T}: Destroy target black creature.
-SetInfo:DRK Rare

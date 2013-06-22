@@ -6,5 +6,3 @@ K:Haste
 A:AB$ Regenerate | Cost$ R R R | SpellDescription$ Regenerate CARDNAME.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/eron_the_relentless.jpg
 Oracle:Haste\n{R}{R}{R}: Regenerate Eron the Relentless.
-SetInfo:TSB Special
-SetInfo:HML Uncommon

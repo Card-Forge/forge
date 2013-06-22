@@ -7,4 +7,3 @@ SVar:DBPump:DB$Pump | Cost$ 0 | Defined$ Targeted | KW$ HIDDEN Prevent all comba
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elvish_scout.jpg
 Oracle:{G}, {T}: Untap target attacking creature you control. Prevent all combat damage that would be dealt to and dealt by it this turn.
-SetInfo:FEM Common x3

@@ -6,4 +6,3 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigGainLife:AB$GainLife | Cost$ 0 | Defined$ TriggeredCardController | LifeAmount$ 4
 SVar:Picture:http://www.wizards.com/global/images/magic/general/enatu_golem.jpg
 Oracle:When Enatu Golem dies, you gain 4 life.
-SetInfo:ROE Uncommon

@@ -5,4 +5,3 @@ A:AB$ ChangeZone | Cost$ 1 T | ValidTgts$ Creature | TgtPrompt$ Select target cr
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/erratic_portal.jpg
 Oracle:{1}, {T}: Return target creature to its owner's hand unless its controller pays {1}.
-SetInfo:EXO Rare

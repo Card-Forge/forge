@@ -5,4 +5,3 @@ A:SP$ DestroyAll | Cost$ 1 G G | ValidCards$ Enchantment | SpellDescription$ Des
 A:SP$ DestroyAll | Cost$ 1 G G | ValidCards$ Enchantment.nonWhite | SpellDescription$ or all nonwhite enchantments.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/essence_filter.jpg
 Oracle:Destroy all enchantments or all nonwhite enchantments.
-SetInfo:ICE Common

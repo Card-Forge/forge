@@ -8,6 +8,3 @@ SVar:X:TriggerCount$DamageAmount
 SVar:HasCombatEffect:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/el_hajjaj.jpg
 Oracle:Whenever El-Hajjaj deals damage, you gain that much life.
-SetInfo:4ED Rare
-SetInfo:3ED Rare
-SetInfo:ARN Rare

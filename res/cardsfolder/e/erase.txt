@@ -4,5 +4,3 @@ Types:Instant
 A:SP$ ChangeZone | Cost$ W | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target enchantment.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/erase.jpg
 Oracle:Exile target enchantment.
-SetInfo:ULG Common
-SetInfo:M13 Common

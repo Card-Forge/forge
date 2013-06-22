@@ -6,4 +6,3 @@ SVar:TrigDamage:AB$DealDamage | Cost$ 2 R | ValidTgts$ Creature,Player | TgtProm
 SVar:Damage:TriggeredCard$CardPower
 SVar:Picture:http://www.wizards.com/global/images/magic/general/electropotence.jpg
 Oracle:Whenever a creature enters the battlefield under your control, you may pay {2}{R}. If you do, that creature deals damage equal to its power to target creature or player.
-SetInfo:ZEN Rare

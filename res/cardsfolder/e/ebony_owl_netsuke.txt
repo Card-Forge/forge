@@ -6,4 +6,3 @@ SVar:TrigDamageOpp:AB$ DealDamage | Cost$ 0 | Defined$ TriggeredPlayer | NumDmg$
 SVar:TrigCount:Count$ValidHand Card.ActivePlayerCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ebony_owl_netsuke.jpg
 Oracle:At the beginning of each opponent's upkeep, if that player has seven or more cards in hand, Ebony Owl Netsuke deals 4 damage to him or her.
-SetInfo:SOK Uncommon

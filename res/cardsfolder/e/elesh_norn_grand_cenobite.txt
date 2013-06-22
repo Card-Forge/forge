@@ -8,4 +8,3 @@ S:Mode$ Continuous | Affected$ Creature.OppCtrl | AddPower$ -2 | AddToughness$ -
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elesh_norn_grand_cenobite.jpg
 Oracle:Vigilance\nOther creatures you control get +2/+2.\nCreatures your opponents control get -2/-2.
-SetInfo:NPH Mythic

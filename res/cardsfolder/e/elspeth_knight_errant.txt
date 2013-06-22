@@ -9,5 +9,3 @@ SVar:STIndestructible:Mode$ Continuous | EffectZone$ Command | Affected$ Artifac
 SVar:Indestructible:Artifacts, creatures, enchantments, and lands you control are indestructible.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elspeth_knight_errant.jpg
 Oracle:[+1] Put a 1/1 white Soldier creature token onto the battlefield.\n[+1] Target creature gets +3/+3 and gains flying until end of turn.\n[-8] You get an emblem with "Artifacts, creatures, enchantments, and lands you control are indestructible."
-SetInfo:DDF Mythic
-SetInfo:ALA Mythic

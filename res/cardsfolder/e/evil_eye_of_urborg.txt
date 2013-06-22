@@ -7,4 +7,3 @@ T:Mode$ Blocks | ValidCard$ Creature | ValidBlocked$ Card.Self | Execute$ TrigDe
 SVar:TrigDestroyBlocker:AB$Destroy | Cost$ 0 | Defined$ TriggeredBlocker
 SVar:Picture:http://www.wizards.com/global/images/magic/general/evil_eye_of_urborg.jpg
 Oracle:Non-Eye creatures you control can't attack.\nWhenever Evil Eye of Urborg becomes blocked by a creature, destroy that creature.
-SetInfo:TSP Uncommon

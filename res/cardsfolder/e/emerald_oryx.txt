@@ -5,4 +5,3 @@ PT:2/3
 K:Forestwalk
 SVar:Picture:http://www.wizards.com/global/images/magic/general/emerald_oryx.jpg
 Oracle:Forestwalk (This creature is unblockable as long as defending player controls a Forest.)
-SetInfo:M10 Common

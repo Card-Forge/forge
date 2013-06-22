@@ -7,4 +7,3 @@ A:AB$PutCounter | Cost$ T | CounterType$ P1P1 | CounterNum$ 1 | ValidTgts$ Creat
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/experiment_kraj.jpg
 Oracle:Experiment Kraj has all activated abilities of each other creature with a +1/+1 counter on it.\n{T}: Put a +1/+1 counter on target creature.
-SetInfo:DIS Rare

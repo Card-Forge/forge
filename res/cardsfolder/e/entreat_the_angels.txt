@@ -6,4 +6,3 @@ K:Miracle:X W W
 SVar:X:Count$xPaid
 SVar:Picture:http://www.wizards.com/global/images/magic/general/entreat_the_angels.jpg
 Oracle:Put X 4/4 white Angel creature tokens with flying onto the battlefield.\nMiracle {X}{W}{W} (You may cast this card for its miracle cost when you draw it if it's the first card you drew this turn.)
-SetInfo:AVR Mythic

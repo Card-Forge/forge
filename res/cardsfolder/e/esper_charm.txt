@@ -7,4 +7,3 @@ A:SP$ Discard | Cost$ W U B | ValidTgts$ Player | NumCards$ 2 | Mode$ TgtChoose 
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/esper_charm.jpg
 Oracle:Choose one - Destroy target enchantment; or draw two cards; or target player discards two cards.
-SetInfo:ALA Uncommon

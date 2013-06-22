@@ -6,4 +6,3 @@ SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 1
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/enchantresss_presence.jpg
 Oracle:Whenever you cast an enchantment spell, draw a card.
-SetInfo:ONS Rare

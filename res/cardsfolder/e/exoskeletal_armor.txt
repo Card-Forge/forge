@@ -7,4 +7,3 @@ S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ X | AddToughness
 SVar:X:Count$TypeInAllYards.Creature
 SVar:Picture:http://www.wizards.com/global/images/magic/general/exoskeletal_armor.jpg
 Oracle:Enchant creature\nEnchanted creature gets +X/+X, where X is the number of creature cards in all graveyards.
-SetInfo:JUD Uncommon

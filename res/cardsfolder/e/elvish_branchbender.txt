@@ -7,4 +7,3 @@ SVar:X:Count$Valid Elf.YouCtrl
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elvish_branchbender.jpg
 Oracle:{T}: Until end of turn, target Forest becomes an X/X Treefolk creature in addition to its other types, where X is the number of Elves you control.
-SetInfo:LRW Common

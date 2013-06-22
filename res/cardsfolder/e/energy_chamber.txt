@@ -8,5 +8,3 @@ SVar:CounterCharge:DB$ PutCounter | ValidTgts$ Artifact.nonCreature | TgtPrompt$
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/energy_chamber.jpg
 Oracle:At the beginning of your upkeep, choose one - Put a +1/+1 counter on target artifact creature; or put a charge counter on target noncreature artifact.
-SetInfo:5DN Uncommon
-SetInfo:DDF Uncommon

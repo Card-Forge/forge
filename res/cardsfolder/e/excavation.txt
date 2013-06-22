@@ -6,4 +6,3 @@ SVar:NonStackingEffect:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/excavation.jpg
 Oracle:{1}, Sacrifice a land: Draw a card. Any player may activate this ability.
-SetInfo:PCY Uncommon

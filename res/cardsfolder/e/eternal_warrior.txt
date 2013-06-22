@@ -6,6 +6,3 @@ A:SP$ Attach | Cost$ R | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Vigilance | Description$ Enchanted creature has vigilance.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/eternal_warrior.jpg
 Oracle:Enchant creature\nEnchanted creature has vigilance.
-SetInfo:5ED Common
-SetInfo:LEG Uncommon
-SetInfo:4ED Common

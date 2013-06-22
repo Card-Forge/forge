@@ -8,4 +8,3 @@ SVar:BuffedBy:Arcane,Spirit
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/earthshaker.jpg
 Oracle:Whenever you cast a Spirit or Arcane spell, Earthshaker deals 2 damage to each creature without flying.
-SetInfo:CHK Uncommon

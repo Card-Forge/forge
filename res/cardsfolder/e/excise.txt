@@ -6,4 +6,3 @@ SVar:X:Count$xPaid
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/excise.jpg
 Oracle:Exile target attacking creature unless its controller pays {X}.
-SetInfo:PCY Common

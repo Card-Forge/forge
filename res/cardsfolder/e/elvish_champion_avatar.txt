@@ -7,4 +7,3 @@ SVar:TrigToken:AB$ Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Elf | TokenType
 SVar:DBMana:AB$ Mana | Cost$ T | Cost$ T | Produced$ G | SpellDescription$ Add G to your mana pool.
 SVar:Picture:http://www.cardforge.org/fpics/vgd-lq/elvish_champion_avatar.jpg
 Oracle:Hand +0, life -5\nYou begin the game with a 1/1 green Elf creature token on the battlefield. It has "{T}: Add {G} to your mana pool."
-SetInfo:VAN Special

@@ -6,6 +6,3 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | E
 SVar:TrigPump:AB$ Pump | Cost$ 0 | ValidTgts$ Creature.nonWall+OppCtrl | TgtPrompt$ Select target non-Wall creature an opponent controls | KW$ Forestwalk | UntilYourNextUpkeep$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/erhnam_djinn.jpg
 Oracle:At the beginning of your upkeep, target non-Wall creature an opponent controls gains forestwalk until your next upkeep.
-SetInfo:CHR Uncommon
-SetInfo:JUD Rare
-SetInfo:ARN Rare

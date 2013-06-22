@@ -8,4 +8,3 @@ S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddToughness$ X | Descr
 SVar:X:Count$CardCounters.AGE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/earthen_goo.jpg
 Oracle:Trample\nCumulative upkeep {R} or {G} (At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.)\nEarthen Goo gets +1/+1 for each age counter on it.
-SetInfo:CSP Uncommon

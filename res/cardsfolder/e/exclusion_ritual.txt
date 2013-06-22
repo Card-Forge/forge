@@ -6,4 +6,3 @@ SVar:TrigExile:DB$ ChangeZone | Cost$ 0 | Imprint$ True | ValidTgts$ Permanent.n
 S:Mode$ CantBeCast | ValidCard$ Card.sharesNameWith Imprinted | Description$ Players can't cast spells with the same name as the exiled card.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/exclusion_ritual.jpg
 Oracle:Imprint - When Exclusion Ritual enters the battlefield, exile target nonland permanent.\nPlayers can't cast spells with the same name as the exiled card.
-SetInfo:NPH Uncommon

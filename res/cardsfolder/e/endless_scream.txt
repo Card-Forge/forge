@@ -9,4 +9,3 @@ S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ Y | References$ 
 SVar:Y:Count$CardCounters.SCREAM
 SVar:Picture:http://www.wizards.com/global/images/magic/general/endless_scream.jpg
 Oracle:Enchant creature\nEndless Scream enters the battlefield with X scream counters on it.\nEnchanted creature gets +1/+0 for each scream counter on Endless Scream.
-SetInfo:TMP Common

@@ -5,4 +5,3 @@ A:SP$ Destroy | Cost$ 2 G | ValidTgts$ Creature.withFlying | TgtPrompt$ Select t
 SVar:ChompEquip:DB$ DestroyAll | ValidCards$ Targeted.Equipment+Attached
 SVar:Picture:http://www.wizards.com/global/images/magic/general/eaten_by_spiders.jpg
 Oracle:Destroy target creature with flying and all Equipment attached to that creature.
-SetInfo:AVR Uncommon

@@ -8,4 +8,3 @@ SVar:TrigLife:AB$SetLife | Cost$ 0 | Defined$ You | LifeAmount$ Y | References$ 
 SVar:Y:Count$CardCounters.CHARGE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/eternity_vessel.jpg
 Oracle:Eternity Vessel enters the battlefield with X charge counters on it, where X is your life total.\nLandfall - Whenever a land enters the battlefield under your control, you may have your life total become the number of charge counters on Eternity Vessel.
-SetInfo:ZEN Mythic

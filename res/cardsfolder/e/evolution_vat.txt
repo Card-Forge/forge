@@ -9,4 +9,3 @@ SVar:EvolutionVatX:Count$CardCounters.P1P1
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/evolution_vat.jpg
 Oracle:{3}, {T}: Tap target creature and put a +1/+1 counter on it. Until end of turn, that creature gains "{2}{G}{U}: Double the number of +1/+1 counters on this creature."
-SetInfo:DIS Rare

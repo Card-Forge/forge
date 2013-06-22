@@ -8,5 +8,3 @@ SVar:TrigEffect:DB$ Effect | Name$ Ethersworn Shieldmage Effect | StaticAbilitie
 SVar:STPrevent:Mode$ PreventDamage | EffectZone$ Command | Target$ Creature.Artifact | Description$ Prevent all damage that would be dealt to artifact creatures this turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ethersworn_shieldmage.jpg
 Oracle:Flash\nWhen Ethersworn Shieldmage enters the battlefield, prevent all damage that would be dealt to artifact creatures this turn.
-SetInfo:ARB Common
-SetInfo:ARC Common

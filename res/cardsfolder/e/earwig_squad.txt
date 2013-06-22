@@ -7,4 +7,3 @@ T:Mode$ ChangesZone | Origin$ Stack | Destination$ Battlefield | ValidCard$ Card
 SVar:TrigExile:AB$ ChangeZone | Cost$ 0 | ValidTgts$ Opponent | DefinedPlayer$ Targeted | Chooser$ You | ChangeType$ Card | ChangeNum$ 3 | Origin$ Library | Destination$ Exile
 SVar:Picture:http://www.wizards.com/global/images/magic/general/earwig_squad.jpg
 Oracle:Prowl {2}{B} (You may cast this for its prowl cost if you dealt combat damage to a player this turn with a Goblin or Rogue.)\nWhen Earwig Squad enters the battlefield, if its prowl cost was paid, search target opponent's library for three cards and exile them. Then that player shuffles his or her library.
-SetInfo:MOR Rare

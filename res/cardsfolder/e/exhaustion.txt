@@ -4,9 +4,3 @@ Types:Sorcery
 A:SP$ PumpAll | Cost$ 2 U | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | ValidCards$ Creature.OppCtrl,Land.OppCtrl | KW$ HIDDEN This card doesn't untap during your next untap step. | Permanent$ True | IsCurse$ True | SpellDescription$ Creatures and lands target opponent controls don't untap during his or her next untap step.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/exhaustion.jpg
 Oracle:Creatures and lands target opponent controls don't untap during his or her next untap step.
-SetInfo:PO2 Rare
-SetInfo:S99 Uncommon
-SetInfo:USG Uncommon
-SetInfo:9ED Uncommon
-SetInfo:PTK Rare
-SetInfo:POR Rare

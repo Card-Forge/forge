@@ -6,4 +6,3 @@ A:SP$ChangeZone | Cost$ 5 W W | Origin$ Library | Destination$ Battlefield | Cha
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/enduring_ideal.jpg
 Oracle:Search your library for an enchantment card and put it onto the battlefield. Then shuffle your library.\nEpic (For the rest of the game, you can't cast spells. At the beginning of each of your upkeeps, copy this spell except for its epic ability.)
-SetInfo:SOK Rare

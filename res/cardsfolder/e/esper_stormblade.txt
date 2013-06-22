@@ -7,4 +7,3 @@ SVar:X:Count$Valid Permanent.YouCtrl+MultiColor+Other
 SVar:BuffedBy:Permanent.MultiColor
 SVar:Picture:http://www.wizards.com/global/images/magic/general/esper_stormblade.jpg
 Oracle:As long as you control another multicolored permanent, Esper Stormblade gets +1/+1 and has flying.
-SetInfo:ARB Common

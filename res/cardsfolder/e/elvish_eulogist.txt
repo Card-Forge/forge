@@ -6,5 +6,3 @@ A:AB$ GainLife | Cost$ Sac<1/CARDNAME>| LifeAmount$ X | References$ X | SpellDes
 SVar:X:Count$TypeInYourYard.Elf
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elvish_eulogist.jpg
 Oracle:Sacrifice Elvish Eulogist: You gain 1 life for each Elf card in your graveyard.
-SetInfo:LRW Common
-SetInfo:EVG Common

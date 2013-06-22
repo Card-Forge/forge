@@ -5,4 +5,3 @@ A:AB$ Destroy | Cost$ 1 B T Sac<1/CARDNAME> | ValidTgts$ Creature.nonBlack | Tgt
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/executioners_capsule.jpg
 Oracle:{1}{B}, {T}, Sacrifice Executioner's Capsule: Destroy target nonblack creature.
-SetInfo:ALA Common

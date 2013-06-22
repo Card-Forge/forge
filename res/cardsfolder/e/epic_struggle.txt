@@ -6,4 +6,3 @@ SVar:TrigWinsLife:AB$WinsGame | Cost$ 0 | Defined$ You
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/epic_struggle.jpg
 Oracle:At the beginning of your upkeep, if you control twenty or more creatures, you win the game.
-SetInfo:JUD Rare

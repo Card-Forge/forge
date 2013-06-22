@@ -8,5 +8,3 @@ T:Mode$ ChangesZone | ValidCard$ Card.AttachedBy | Origin$ Battlefield | Destina
 SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Elephant | TokenTypes$ Creature,Elephant | TokenOwner$ You | TokenColors$ Green | TokenPower$ 3 | TokenToughness$ 3
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elephant_guide.jpg
 Oracle:Enchant creature\nEnchanted creature gets +3/+3.\nWhen enchanted creature dies, put a 3/3 green Elephant creature token onto the battlefield.
-SetInfo:JUD Uncommon
-SetInfo:DDD Uncommon

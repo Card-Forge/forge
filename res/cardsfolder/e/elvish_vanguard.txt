@@ -8,4 +8,3 @@ SVar:BuffedBy:Elf
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elvish_vanguard.jpg
 Oracle:Whenever another Elf enters the battlefield, put a +1/+1 counter on Elvish Vanguard.
-SetInfo:ONS Rare

@@ -8,4 +8,3 @@ SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.cardforge.org/fpics/vgd-lq/eladamri_lord_of_leaves_avatar.jpg
 Oracle:Hand -1, life +2\nAt the beginning of each player's precombat main phase, that player adds {G}{G} to his or her mana pool.
-SetInfo:VAN Special

@@ -6,4 +6,3 @@ SVar:DBChoose:DB$ ChooseCard | Cost$ 0 | Defined$ You | Amount$ 1 | Choices$ Cre
 SVar:DBCopy:DB$ CopyPermanent | Defined$ ChosenCard
 SVar:Picture:http://www.wizards.com/global/images/magic/general/eyes_in_the_skies.jpg
 Oracle:Put a 1/1 white Bird creature token with flying onto the battlefield, then populate. (Put a token onto the battlefield that's a copy of a creature token you control.)
-SetInfo:RTR Common

@@ -5,5 +5,3 @@ A:SP$ DealDamage | Cost$ 1 U R | ValidTgts$ Creature,Player | TgtPrompt$ Select 
 SVar:DBDraw:DB$ Draw | Cost$ 0 | NumCards$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/electrolyze.jpg
 Oracle:Electrolyze deals 2 damage divided as you choose among one or two target creatures and/or players.\nDraw a card.
-SetInfo:GPT Uncommon
-SetInfo:COM Uncommon

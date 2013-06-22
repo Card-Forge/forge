@@ -6,4 +6,3 @@ SVar:TrigLifeGain:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ X | Referen
 SVar:X:TriggerCount$LifeAmount
 SVar:Picture:http://www.wizards.com/global/images/magic/general/exquisite_blood.jpg
 Oracle:Whenever an opponent loses life, you gain that much life.
-SetInfo:AVR Rare

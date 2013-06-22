@@ -13,4 +13,3 @@ SVar:Y:Count$Valid Card.Self+counters_GE4_LEVEL
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/echo_mage.jpg
 Oracle:Level up {1}{U} ({1}{U}: Put a level counter on this. Level up only as a sorcery.)\nLEVEL 2-3\n2/4\n{U}{U}, {T}: Copy target instant or sorcery spell. You may choose new targets for the copy.\nLEVEL 4+\n2/5\n{U}{U}, {T}: Copy target instant or sorcery spell twice. You may choose new targets for the copies.
-SetInfo:ROE Rare

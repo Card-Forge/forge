@@ -7,4 +7,3 @@ SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/echoing_calm.jpg
 Oracle:Destroy target enchantment and all other enchantments with the same name as that enchantment.
-SetInfo:DST Common

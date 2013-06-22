@@ -5,4 +5,3 @@ A:SP$ ChangeZoneAll | Cost$ 3 B | ChangeType$ Creature | Origin$ Graveyard | Des
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/empty_the_catacombs.jpg
 Oracle:Each player returns all creature cards from his or her graveyard to his or her hand.
-SetInfo:RAV Rare

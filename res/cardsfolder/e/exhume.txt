@@ -5,5 +5,3 @@ A:SP$ ChangeZone | Cost$ 1 B | Origin$ Graveyard | Destination$ Battlefield | Ch
 SVar:DBChangeZoneOpp:DB$ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ChangeType$ Creature.YouDontCtrl | DefinedPlayer$ Opponent | ChangeNum$ 1 | Hidden$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/exhume.jpg
 Oracle:Each player puts a creature card from his or her graveyard onto the battlefield.
-SetInfo:PD3 Common
-SetInfo:USG Common

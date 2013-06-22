@@ -5,11 +5,3 @@ PT:2/1
 K:First Strike
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elvish_archers.jpg
 Oracle:First strike
-SetInfo:2ED Rare
-SetInfo:7ED Rare
-SetInfo:6ED Rare
-SetInfo:LEB Rare
-SetInfo:LEA Rare
-SetInfo:5ED Rare
-SetInfo:4ED Rare
-SetInfo:3ED Rare

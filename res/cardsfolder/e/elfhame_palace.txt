@@ -6,6 +6,3 @@ A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add W to your mana pool.
 A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add G to your mana pool.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elfhame_palace.jpg
 Oracle:Elfhame Palace enters the battlefield tapped.\n{T}: Add {G} or {W} to your mana pool.
-SetInfo:8ED Uncommon
-SetInfo:DDE Uncommon
-SetInfo:INV Uncommon

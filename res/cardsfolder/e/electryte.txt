@@ -8,4 +8,3 @@ SVar:X:Count$CardPower
 SVar:MustBeBlocked:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/electryte.jpg
 Oracle:Whenever Electryte deals combat damage to defending player, it deals damage equal to its power to each blocking creature.
-SetInfo:USG Rare

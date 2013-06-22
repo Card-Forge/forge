@@ -9,7 +9,3 @@ DeckHints:Type$Elf
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elvish_archdruid.jpg
 Oracle:Other Elf creatures you control get +1/+1.\n{T}: Add {G} to your mana pool for each Elf you control.
-SetInfo:M11 Rare
-SetInfo:M10 Rare
-SetInfo:M13 Rare
-SetInfo:M12 Rare

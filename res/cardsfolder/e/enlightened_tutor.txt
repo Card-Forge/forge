@@ -5,5 +5,3 @@ A:SP$ ChangeZone | Cost$ W | Origin$ Library | Destination$ Library | LibraryPos
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/enlightened_tutor.jpg
 Oracle:Search your library for an artifact or enchantment card and reveal that card. Shuffle your library, then put the card on top of it.
-SetInfo:MIR Uncommon
-SetInfo:6ED Uncommon

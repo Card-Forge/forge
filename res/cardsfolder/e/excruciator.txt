@@ -5,4 +5,3 @@ PT:7/7
 K:Damage that would be dealt by CARDNAME can't be prevented.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/excruciator.jpg
 Oracle:Damage that would be dealt by Excruciator can't be prevented.
-SetInfo:RAV Rare

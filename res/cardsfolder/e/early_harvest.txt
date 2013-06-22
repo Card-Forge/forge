@@ -5,7 +5,3 @@ A:SP$ UntapAll | Cost$ 1 G G | ValidTgts$ Player | TgtPrompt$ Select target play
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/early_harvest.jpg
 Oracle:Target player untaps all basic lands he or she controls.
-SetInfo:7ED Rare
-SetInfo:MIR Rare
-SetInfo:6ED Rare
-SetInfo:9ED Rare

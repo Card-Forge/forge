@@ -5,4 +5,3 @@ PT:1/1
 A:AB$ Tap | Cost$ T | ValidTgts$ Creature.toughnessLE2 | TgtPrompt$ Select target creature with toughness 2 or less | SpellDescription$ Tap target creature with toughness 2 or less.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/errant_doomsayers.jpg
 Oracle:{T}: Tap target creature with toughness 2 or less.
-SetInfo:TSP Common

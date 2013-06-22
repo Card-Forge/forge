@@ -22,5 +22,3 @@ SVar:NumOppCast:Count$ThisTurnCast_Card.YouDontCtrl
 SVar:Picture:http://www.marc-fowler-design.com/cardforge/flippedcards/SOK/erayos_essence.jpg
 # This link may be a temporary solution and could change in the near future.
 Oracle:Whenever an opponent casts a spell for the first time in a turn, counter that spell.
-
-SetInfo:SOK Rare

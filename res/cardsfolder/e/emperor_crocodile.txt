@@ -7,6 +7,3 @@ SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Defined$ Self
 SVar:NeedsToPlay:Creature.YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/emperor_crocodile.jpg
 Oracle:When you control no other creatures, sacrifice Emperor Crocodile.
-SetInfo:8ED Rare
-SetInfo:UDS Rare
-SetInfo:9ED Rare

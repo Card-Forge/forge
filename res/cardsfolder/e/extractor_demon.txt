@@ -8,6 +8,3 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Creatu
 SVar:TrigMill:AB$Mill | Cost$ 0 | NumCards$ 2 | ValidTgts$ Player | TgtPrompt$ Choose a player
 SVar:Picture:http://www.wizards.com/global/images/magic/general/extractor_demon.jpg
 Oracle:Flying\nWhenever another creature leaves the battlefield, you may have target player put the top two cards of his or her library into his or her graveyard.\nUnearth {2}{B} ({2}{B}: Return this card from your graveyard to the battlefield. It gains haste. Exile it at the beginning of the next end step or if it would leave the battlefield. Unearth only as a sorcery.)
-SetInfo:ARC Rare
-SetInfo:COM Rare
-SetInfo:CFX Rare

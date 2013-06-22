@@ -6,5 +6,3 @@ K:Cycling:Sac<1/Land>
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/edge_of_autumn.jpg
 Oracle:If you control four or fewer lands, search your library for a basic land card, put it onto the battlefield tapped, then shuffle your library.\nCycling-Sacrifice a land. (Sacrifice a land, Discard this card: Draw a card.)
-SetInfo:FUT Common
-SetInfo:DDG Common

@@ -7,4 +7,3 @@ SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Defined$ Self
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/endangered_armodon.jpg
 Oracle:When you control a creature with toughness 2 or less, sacrifice Endangered Armodon.
-SetInfo:STH Common

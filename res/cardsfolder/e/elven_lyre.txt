@@ -4,4 +4,3 @@ Types:Artifact
 A:AB$ Pump | Cost$ 1 T Sac<1/CARDNAME> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | NumDef$ +2 | SpellDescription$ Target creature gets +2/+2 until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elven_lyre.jpg
 Oracle:{1}, {T}, Sacrifice Elven Lyre: Target creature gets +2/+2 until end of turn.
-SetInfo:FEM Rare

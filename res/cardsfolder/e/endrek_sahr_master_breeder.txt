@@ -9,4 +9,3 @@ SVar:X:TriggeredCard$CardManaCost
 SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Defined$ Self
 SVar:Picture:http://www.wizards.com/global/images/magic/general/endrek_sahr_master_breeder.jpg
 Oracle:Whenever you cast a creature spell, put X 1/1 black Thrull creature tokens onto the battlefield, where X is that spell's converted mana cost.\nWhen you control seven or more Thrulls, sacrifice Endrek Sahr, Master Breeder.
-SetInfo:TSP Rare

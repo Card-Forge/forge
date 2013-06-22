@@ -5,4 +5,3 @@ A:SP$ Pump | Cost$ W | ValidTgts$ Opponent | TgtPrompt$ Select target opponent |
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/empty_city_ruse.jpg
 Oracle:Target opponent skips all combat phases of his or her next turn.
-SetInfo:PTK Uncommon

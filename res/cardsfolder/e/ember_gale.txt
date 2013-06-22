@@ -7,4 +7,3 @@ SVar:CantBlock:Mode$ Continuous | EffectZone$ Command | Affected$ Creature.Remem
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ember_gale.jpg
 Oracle:Creatures target player controls can't block this turn. Ember Gale deals 1 damage to each white and/or blue creature that player controls.
-SetInfo:SHM Common

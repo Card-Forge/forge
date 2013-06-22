@@ -8,4 +8,3 @@ T:Mode$ AttackerBlocked | ValidCard$ Card.Self | Execute$ TrigPump | Secondary$ 
 SVar:TrigPump:AB$Pump | Cost$ 0 | Defined$ Self | NumAtt$ +5
 SVar:Picture:http://www.wizards.com/global/images/magic/general/escaped_null.jpg
 Oracle:Lifelink\nWhenever Escaped Null blocks or becomes blocked, it gets +5/+0 until end of turn.
-SetInfo:ROE Uncommon

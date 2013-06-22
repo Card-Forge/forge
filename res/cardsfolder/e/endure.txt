@@ -6,4 +6,3 @@ SVar:STPrevent:Mode$ PreventDamage | EffectZone$ Command | Target$ You,Permanent
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/endure.jpg
 Oracle:Prevent all damage that would be dealt to you and permanents you control this turn.
-SetInfo:EVE Uncommon

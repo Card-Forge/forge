@@ -6,6 +6,3 @@ A:AB$ Mana | Cost$ T | Produced$ B | SubAbility$ DBPain | SpellDescription$ Add 
 SVar:DBPain:DB$DealDamage | NumDmg$ 1 | Defined$ You
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elves_of_deep_shadow.jpg
 Oracle:{T}: Add {B} to your mana pool. Elves of Deep Shadow deals 1 damage to you.
-SetInfo:RAV Common
-SetInfo:DDJ Common
-SetInfo:DRK Uncommon

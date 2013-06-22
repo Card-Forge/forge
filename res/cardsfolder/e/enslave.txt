@@ -9,6 +9,3 @@ SVar:TrigDamage:AB$DealDamage | Cost$ 0 | Defined$ EnchantedOwner | DamageSource
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/enslave.jpg
 Oracle:Enchant creature\nYou control enchanted creature.\nAt the beginning of your upkeep, enchanted creature deals 1 damage to its owner.
-SetInfo:PLC Uncommon
-SetInfo:NPH Uncommon
-SetInfo:DDD Uncommon

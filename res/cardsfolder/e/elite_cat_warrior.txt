@@ -5,4 +5,3 @@ PT:2/3
 K:Forestwalk
 SVar:Picture:http://resources.wizards.com/magic/cards/po/en-us/card4293.jpg
 Oracle:Forestwalk
-SetInfo:POR Common x2

@@ -5,6 +5,3 @@ A:SP$ DealDamage | Cost$ 4 B | ValidTgts$ Creature,Player | TgtPrompt$ Select ta
 SVar:DBGainLife:DB$GainLife | Defined$ You | LifeAmount$ 3
 SVar:Picture:http://www.wizards.com/global/images/magic/general/essence_drain.jpg
 Oracle:Essence Drain deals 3 damage to target creature or player and you gain 3 life.
-SetInfo:DST Common
-SetInfo:M13 Common
-SetInfo:10E Common

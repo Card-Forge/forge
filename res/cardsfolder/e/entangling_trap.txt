@@ -9,4 +9,3 @@ SVar:TrigTapL:AB$ Tap | Cost$ 0 | ValidTgts$ Creature.OppCtrl
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/entangling_trap.jpg
 Oracle:Whenever you clash, tap target creature an opponent controls. If you won, that creature doesn't untap during its controller's next untap step. (This ability triggers after the clash ends.)
-SetInfo:LRW Uncommon

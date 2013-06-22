@@ -8,5 +8,3 @@ SVar:TrigBounce:AB$ChangeZone | Cost$ 0 | ChangeType$ Artifact.YouCtrl | ChangeN
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/esperzoa.jpg
 Oracle:Flying\nAt the beginning of your upkeep, return an artifact you control to its owner's hand.
-SetInfo:DDF Uncommon
-SetInfo:CFX Uncommon

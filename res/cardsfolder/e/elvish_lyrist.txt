@@ -5,6 +5,3 @@ PT:1/1
 A:AB$ Destroy | Cost$ G T Sac<1/CARDNAME> | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment | SpellDescription$ Destroy target enchantment.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elvish_lyrist.jpg
 Oracle:{G}, {T}, Sacrifice Elvish Lyrist: Destroy target enchantment.
-SetInfo:8ED Uncommon
-SetInfo:7ED Uncommon
-SetInfo:USG Common

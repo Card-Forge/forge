@@ -5,9 +5,3 @@ PT:3/3
 K:CantBeBlockedBy Creature.withoutFlying+nonWall
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elven_riders.jpg
 Oracle:Elven Riders can't be blocked except by Walls and/or creatures with flying.
-SetInfo:LEG Rare
-SetInfo:6ED Uncommon
-SetInfo:10E Uncommon
-SetInfo:5ED Uncommon
-SetInfo:ONS Uncommon
-SetInfo:4ED Uncommon

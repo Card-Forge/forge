@@ -10,4 +10,3 @@ SVar:DBDraw:DB$ Draw | NumCards$ 1
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/equal_treatment.jpg
 Oracle:If any source would deal 1 or more damage to a creature or player this turn, it deals 2 damage to that creature or player instead.\nDraw a card.
-SetInfo:TOR Uncommon

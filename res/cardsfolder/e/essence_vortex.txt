@@ -5,4 +5,3 @@ A:SP$ Destroy | Cost$ 1 U B | ValidTgts$ Creature | NoRegen$ True | UnlessCost$ 
 SVar:X:Targeted$CardToughness
 SVar:Picture:http://www.wizards.com/global/images/magic/general/essence_vortex.jpg
 Oracle:Destroy target creature unless its controller pays life equal to its toughness. A creature destroyed this way can't be regenerated.
-SetInfo:ICE Uncommon

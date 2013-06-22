@@ -5,5 +5,3 @@ PT:3/4
 K:CARDNAME can't attack or block alone.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ember_beast.jpg
 Oracle:Ember Beast can't attack or block alone.
-SetInfo:GTC Common
-SetInfo:ODY Common

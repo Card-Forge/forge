@@ -6,4 +6,3 @@ K:CARDNAME can't attack unless defending player controls an Island.
 K:Flying
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ethereal_whiskergill.jpg
 Oracle:Flying\nEthereal Whiskergill can't attack unless defending player controls an Island.
-SetInfo:LRW Uncommon

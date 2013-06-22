@@ -6,4 +6,3 @@ A:AB$ Counter | Cost$ U T Sac<1/Creature;Enchantment/creature or enchantment> | 
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ertai_the_corrupted.jpg
 Oracle:{U}, {T}, Sacrifice a creature or enchantment: Counter target spell.
-SetInfo:PLS Rare x2

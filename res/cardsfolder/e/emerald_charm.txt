@@ -7,4 +7,3 @@ A:SP$ Debuff | Cost$ G | ValidTgts$ Creature | TgtPrompt$ Select target creature
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/emerald_charm.jpg
 Oracle:Choose one - Untap target permanent; or destroy target non-Aura enchantment; or target creature loses flying until end of turn.
-SetInfo:VIS Common

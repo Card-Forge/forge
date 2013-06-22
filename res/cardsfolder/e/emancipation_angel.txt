@@ -8,4 +8,3 @@ SVar:TrigChange:AB$ChangeZone | Origin$ Battlefield | Destination$ Hand | Cost$ 
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/emancipation_angel.jpg
 Oracle:Flying\nWhen Emancipation Angel enters the battlefield, return a permanent you control to its owner's hand.
-SetInfo:AVR Uncommon

@@ -9,7 +9,3 @@ SVar:DBLoseFlying:DB$ Animate | Defined$ Self | staticAbilities$ LoseFlyingStati
 SVar:LoseFlyingStatic:Mode$ Continuous | Affected$ Card.EnchantedBy | RemoveKeyword$ Flying | Description$ Enchanted creature loses flying.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/earthbind.jpg
 Oracle:Enchant creature\nWhen Earthbind enters the battlefield, if enchanted creature has flying, Earthbind deals 2 damage to that creature and Earthbind gains "Enchanted creature loses flying."
-SetInfo:LEB Common
-SetInfo:LEA Common
-SetInfo:3ED Common
-SetInfo:2ED Common

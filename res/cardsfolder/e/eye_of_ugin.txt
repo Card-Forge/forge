@@ -6,4 +6,3 @@ A:AB$ ChangeZone | Cost$ 7 T | Origin$ Library | Destination$ Hand | ChangeType$
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/eye_of_ugin.jpg
 Oracle:Colorless Eldrazi spells you cast cost {2} less to cast.\n{7}, {T}: Search your library for a colorless creature card, reveal it, and put it into your hand. Then shuffle your library.
-SetInfo:WWK Mythic

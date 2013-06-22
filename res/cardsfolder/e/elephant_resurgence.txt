@@ -9,4 +9,3 @@ SVar:Y:Count$TypeInOppYard.Creature
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elephant_resurgence.jpg
 Oracle:Each player puts a green Elephant creature token onto the battlefield. Those creatures have "This creature's power and toughness are each equal to the number of creature cards in its controller's graveyard."
-SetInfo:PCY Rare

@@ -4,4 +4,3 @@ Types:Tribal Instant Elf
 A:SP$ Destroy | Cost$ 2 B | ValidTgts$ Creature.nonElf | TgtPrompt$ Select target non-Elf creature | SpellDescription$ Destroy target non-Elf creature.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/eyeblights_ending.jpg
 Oracle:Destroy target non-Elf creature.
-SetInfo:LRW Common

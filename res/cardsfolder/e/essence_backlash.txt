@@ -6,4 +6,3 @@ SVar:DBDamage:DB$ DealDamage | Cost$ 0 | NumDmg$ Backlash | Defined$ TargetedCon
 SVar:Backlash:Targeted$CardPower
 SVar:Picture:http://www.wizards.com/global/images/magic/general/essence_backlash.jpg
 Oracle:Counter target creature spell. Essence Backlash deals damage equal to that spell's power to its controller.
-SetInfo:RTR Common

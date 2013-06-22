@@ -6,4 +6,3 @@ SVar:RemRandomDeck:True
 DeckNeeds:Color$green
 SVar:Picture:http://www.wizards.com/global/images/magic/general/emerald_medallion.jpg
 Oracle:Green spells you cast cost {1} less to cast.
-SetInfo:TMP Rare

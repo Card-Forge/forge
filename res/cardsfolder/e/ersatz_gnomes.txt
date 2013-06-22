@@ -9,4 +9,3 @@ SVar:RemRandomDeck:True
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ersatz_gnomes.jpg
 Oracle:{T}: Target spell becomes colorless.\n{T}: Target permanent becomes colorless until end of turn.
-SetInfo:MIR Uncommon

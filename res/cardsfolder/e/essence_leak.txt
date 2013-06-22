@@ -9,4 +9,3 @@ SVar:TrigEssenceLeak:DB$ Sacrifice | Defined$ Self | UnlessCost$ CardManaCost | 
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/essence_leak.jpg
 Oracle:Enchant permanent\nAs long as enchanted permanent is red or green, it has "At the beginning of your upkeep, sacrifice this permanent unless you pay its mana cost."
-SetInfo:INV Uncommon

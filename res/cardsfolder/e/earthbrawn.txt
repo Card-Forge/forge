@@ -7,4 +7,3 @@ A:AB$ PutCounter | Cost$ 1 G Discard<1/CARDNAME> | ValidTgts$ Creature | TgtProm
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/earthbrawn.jpg
 Oracle:Target creature gets +3/+3 until end of turn.\nReinforce 1-{1}{G} ({1}{G}, Discard this card: Put a +1/+1 counter on target creature.)
-SetInfo:MOR Common

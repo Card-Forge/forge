@@ -4,5 +4,3 @@ Types:Instant
 A:SP$ Counter | Cost$ 1 U | TargetType$ Spell | TgtPrompt$ Select target Creature spell | ValidTgts$ Creature | SpellDescription$ Counter target creature spell.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/essence_scatter.jpg
 Oracle:Counter target creature spell.
-SetInfo:M10 Common
-SetInfo:M13 Common

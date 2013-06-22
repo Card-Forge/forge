@@ -6,4 +6,3 @@ A:AB$ Pump | Cost$ 3 G | NumAtt$ +X | NumDef$ +X | ValidTgts$ Creature | TgtProm
 SVar:X:Count$Valid Creature.YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elder_of_laurels.jpg
 Oracle:{3}{G}: Target creature gets +X/+X until end of turn, where X is the number of creatures you control.
-SetInfo:ISD Rare

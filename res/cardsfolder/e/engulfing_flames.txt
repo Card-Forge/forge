@@ -6,4 +6,3 @@ A:SP$ DealDamage | Cost$ R | ValidTgts$ Creature | TgtPrompt$ Select target crea
 SVar:DB:DB$Pump | KW$ HIDDEN CARDNAME can't be regenerated. | Defined$ Targeted
 SVar:Picture:http://www.wizards.com/global/images/magic/general/engulfing_flames.jpg
 Oracle:Engulfing Flames deals 1 damage to target creature. It can't be regenerated this turn.\nFlashback {3}{R} (You may cast this card from your graveyard for its flashback cost. Then exile it.)
-SetInfo:ODY Uncommon

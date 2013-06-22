@@ -5,8 +5,3 @@ S:Mode$ Continuous | Affected$ Artifact | AddKeyword$ At the beginning of your u
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/energy_flux.jpg
 Oracle:All artifacts have "At the beginning of your upkeep, sacrifice this artifact unless you pay {2}."
-SetInfo:MMQ Uncommon
-SetInfo:ATQ Uncommon
-SetInfo:5ED Uncommon
-SetInfo:4ED Uncommon
-SetInfo:3ED Uncommon

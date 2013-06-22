@@ -4,6 +4,3 @@ Types:Sorcery
 A:SP$ ChangeZone | Cost$ 2 G G | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Choose target card in your graveyard | ValidTgts$ Card.YouCtrl | SpellDescription$ Return target card from your graveyard to your hand.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elven_cache.jpg
 Oracle:Return target card from your graveyard to your hand.
-SetInfo:VIS Common
-SetInfo:POR Common
-SetInfo:6ED Common

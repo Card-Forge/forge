@@ -7,4 +7,3 @@ S:Mode$ Continuous | Affected$ Creature.EnchantedBy+White | AddPower$ 1 | AddTou
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy+Black | AddPower$ 2 | AddToughness$ 1 | Description$ As long as enchanted creature is black, it gets +2/+1.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/edge_of_the_divinity.jpg
 Oracle:Enchant creature\nAs long as enchanted creature is white, it gets +1/+2.\nAs long as enchanted creature is black, it gets +2/+1.
-SetInfo:EVE Common

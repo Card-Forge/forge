@@ -6,5 +6,3 @@ A:AB$ PreventDamage | Cost$ PayLife<1> | Defined$ Self | Amount$ 1 | SpellDescri
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ethereal_champion.jpg
 Oracle:Pay 1 life: Prevent the next 1 damage that would be dealt to Ethereal Champion this turn.
-SetInfo:MIR Rare
-SetInfo:6ED Rare

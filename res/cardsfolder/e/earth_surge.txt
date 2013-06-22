@@ -6,4 +6,3 @@ SVar:RemRandomDeck:True
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/earth_surge.jpg
 Oracle:Each land gets +2/+2 as long as it's a creature.
-SetInfo:GPT Rare

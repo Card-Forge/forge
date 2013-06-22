@@ -6,5 +6,3 @@ SVar:DBSearch:DB$ChangeZoneAll | Origin$ Graveyard,Hand,Library | Defined$ Targe
 SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/eradicate.jpg
 Oracle:Exile target nonblack creature. Search its controller's graveyard, hand, and library for all cards with the same name as that creature and exile them. Then that player shuffles his or her library.
-SetInfo:BOK Uncommon
-SetInfo:UDS Uncommon

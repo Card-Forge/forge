@@ -7,4 +7,3 @@ A:AB$ Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add 1 to your mana pool.
 SVar:TrigDamage:AB$DealDamage | Cost$ 0 | ValidTgts$ Player | TgtPrompt$ Select target player | NumDmg$ 2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/exuberant_firestoker.jpg
 Oracle:At the beginning of your end step, if you control a creature with power 5 or greater, you may have Exuberant Firestoker deal 2 damage to target player.\n{T}: Add {1} to your mana pool.
-SetInfo:ALA Uncommon

@@ -11,4 +11,3 @@ SVar:DBElderSpawnCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elder_spawn.jpg
 Oracle:At the beginning of your upkeep, unless you sacrifice an Island, sacrifice Elder Spawn and it deals 6 damage to you.\nElder Spawn can't be blocked by red creatures.
-SetInfo:LEG Rare

@@ -8,4 +8,3 @@ SVar:RemAIDeck:True
 DeckHints:Name$Pious Kitsune
 SVar:Picture:http://www.wizards.com/global/images/magic/general/eight_and_a_half_tails.jpg
 Oracle:{1}{W}: Target permanent you control gains protection from white until end of turn.\n{1}: Target spell or permanent becomes white until end of turn.
-SetInfo:CHK Rare

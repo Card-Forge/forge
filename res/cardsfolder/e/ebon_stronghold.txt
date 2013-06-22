@@ -7,7 +7,3 @@ A:AB$ Mana | Cost$ T Sac<1/CARDNAME> | Produced$ B | Amount$ 2 | SpellDescriptio
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ebon_stronghold.jpg
 Oracle:Ebon Stronghold enters the battlefield tapped.\n{T}: Add {B} to your mana pool.\n{T}, Sacrifice Ebon Stronghold: Add {B}{B} to your mana pool.
-SetInfo:6ED Uncommon
-SetInfo:PD3 Uncommon
-SetInfo:FEM Uncommon
-SetInfo:5ED Uncommon

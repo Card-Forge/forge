@@ -7,4 +7,3 @@ SVar:MatureEvil:DB$ Token | Cost$ 0 | TokenAmount$ 7 | TokenName$ Elemental | To
 SVar:X:Count$NumTypeYouCtrl.Land
 SVar:Picture:http://www.cardforge.org/fpics/lq_schemes/evil_comes_to_fruition.jpg
 Oracle:When you set this scheme in motion, put seven 0/1 green Plant creature tokens onto the battlefield. If you control ten or more lands, put seven 3/3 green Elemental creature tokens onto the battlefield instead.
-SetInfo:ARC Common

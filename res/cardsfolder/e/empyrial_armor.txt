@@ -7,4 +7,3 @@ S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ X | AddToughness
 SVar:X:Count$InYourHand
 SVar:Picture:http://www.wizards.com/global/images/magic/general/empyrial_armor.jpg
 Oracle:Enchant creature\nEnchanted creature gets +1/+1 for each card in your hand.
-SetInfo:WTH Common

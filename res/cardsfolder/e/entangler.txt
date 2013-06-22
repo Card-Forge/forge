@@ -6,4 +6,3 @@ A:SP$ Attach | Cost$ 2 W W | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ CARDNAME can block any number of creatures. | Description$ Enchanted creature can block any number of creatures.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/entangler.jpg
 Oracle:Enchant creature\nEnchanted creature can block any number of creatures.
-SetInfo:PCY Uncommon

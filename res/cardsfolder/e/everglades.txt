@@ -8,4 +8,3 @@ SVar:TrigSacUnless:DB$ Sacrifice | Defined$ Self | UnlessCost$ Return<1/Swamp.un
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/everglades.jpg
 Oracle:Everglades enters the battlefield tapped.\nWhen Everglades enters the battlefield, sacrifice it unless you return an untapped Swamp you control to its owner's hand.\n{T}: Add {1}{B} to your mana pool.
-SetInfo:VIS Uncommon

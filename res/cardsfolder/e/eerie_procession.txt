@@ -5,4 +5,3 @@ A:SP$ ChangeZone | Cost$ 2 U | Origin$ Library | Destination$ Hand | ChangeType$
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/eerie_procession.jpg
 Oracle:Search your library for an Arcane card, reveal that card, and put it into your hand. Then shuffle your library.
-SetInfo:CHK Uncommon

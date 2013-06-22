@@ -9,4 +9,3 @@ SVar:TrigPumpFirstStrike:AB$Pump | Cost$ 0 | KW$ First Strike | Defined$ Self
 SVar:BuffedBy:Card.Black,Card.Red
 SVar:Picture:http://www.wizards.com/global/images/magic/general/emberstrike_duo.jpg
 Oracle:Whenever you cast a black spell, Emberstrike Duo gets +1/+1 until end of turn.\nWhenever you cast a red spell, Emberstrike Duo gains first strike until end of turn.
-SetInfo:SHM Common

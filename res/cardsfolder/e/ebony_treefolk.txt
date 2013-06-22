@@ -5,4 +5,3 @@ PT:3/3
 A:AB$ Pump | Cost$ B G | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ CARDNAME gets +1/+1 until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ebony_treefolk.jpg
 Oracle:{B}{G}: Ebony Treefolk gets +1/+1 until end of turn.
-SetInfo:APC Uncommon

@@ -5,9 +5,3 @@ A:AB$ ChangeZone | Cost$ G T | Origin$ Hand | Destination$ Battlefield | ChangeT
 PT:1/1
 SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83072.jpg
 Oracle:{G}, {T}: You may put a creature card from your hand onto the battlefield.
-SetInfo:8ED Rare
-SetInfo:7ED Rare
-SetInfo:UDS Rare
-SetInfo:9ED Rare
-SetInfo:10E Rare
-SetInfo:M10 Rare

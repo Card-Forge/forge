@@ -5,4 +5,3 @@ A:SP$ Effect | Cost$ W | Name$ Ethereal Haze Effect | StaticAbilities$ STPrevent
 SVar:STPrevent:Mode$ PreventDamage | EffectZone$ Command | Source$ Creature | Description$ Prevent all damage that would be dealt by creatures this turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ethereal_haze.jpg
 Oracle:Prevent all damage that would be dealt by creatures this turn.
-SetInfo:CHK Common

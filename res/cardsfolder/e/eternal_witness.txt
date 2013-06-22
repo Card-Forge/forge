@@ -6,6 +6,3 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigChangeZone:AB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Card.YouCtrl
 SVar:Picture:http://resources.wizards.com/magic/cards/5dn/en-us/card51628.jpg
 Oracle:When Eternal Witness enters the battlefield, you may return target card from your graveyard to your hand.
-SetInfo:DDJ Uncommon
-SetInfo:COM Uncommon
-SetInfo:5DN Uncommon

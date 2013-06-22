@@ -6,5 +6,3 @@ T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescrip
 SVar:TrigDealDamage:AB$DealDamage | Cost$ 0 | ValidTgts$ Creature.attacking | TgtPrompt$ Choose target attacking creature. | NumDmg$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elite_javelineer.jpg
 Oracle:Whenever Elite Javelineer blocks, it deals 1 damage to target attacking creature.
-SetInfo:8ED Uncommon
-SetInfo:TMP Common

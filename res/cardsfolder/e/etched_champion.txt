@@ -6,4 +6,3 @@ S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Protection from white & P
 SVar:BuffedBy:Artifact
 SVar:Picture:http://www.wizards.com/global/images/magic/general/etched_champion.jpg
 Oracle:Metalcraft - Etched Champion has protection from all colors as long as you control three or more artifacts.
-SetInfo:SOM Rare

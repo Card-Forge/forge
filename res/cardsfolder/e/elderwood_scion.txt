@@ -9,4 +9,3 @@ S:Mode$ RaiseCost | ValidTarget$ Card.Self | Activator$ Opponent | Type$ Spell |
 SVar:EnchantMe:Multiple
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elderwood_scion.jpg
 Oracle:Trample, lifelink\nSpells you cast that target Elderwood Scion cost {2} less to cast.\nSpells your opponents cast that target Elderwood Scion cost {2} more to cast.
-SetInfo:PC2 Rare

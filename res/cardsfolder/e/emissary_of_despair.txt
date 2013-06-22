@@ -8,4 +8,3 @@ SVar:TrigLoseLife:AB$LoseLife | Cost$ 0 | Defined$ TriggeredTarget | LifeAmount$
 SVar:X:Count$Valid Artifact.DefenderCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/emissary_of_despair.jpg
 Oracle:Flying\nWhenever Emissary of Despair deals combat damage to a player, that player loses 1 life for each artifact he or she controls.
-SetInfo:DST Uncommon

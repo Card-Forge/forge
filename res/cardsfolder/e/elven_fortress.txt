@@ -5,4 +5,3 @@ A:AB$ Pump | Cost$ 1 G | ValidTgts$ Creature.blocking | NumDef$ +1 | SpellDescri
 SVar:NonStackingEffect:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elven_fortress.jpg
 Oracle:{1}{G}: Target blocking creature gets +0/+1 until end of turn.
-SetInfo:FEM Common x4

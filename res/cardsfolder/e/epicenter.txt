@@ -6,4 +6,3 @@ SVar:DBWasteLand:DB$ SacrificeAll | Condition$ Threshold | ValidCards$ Land
 SVar:X:Count$InYourYard
 SVar:Picture:http://www.wizards.com/global/images/magic/general/epicenter.jpg
 Oracle:Target player sacrifices a land.\nThreshold - Each player sacrifices all lands he or she controls instead if seven or more cards are in your graveyard.
-SetInfo:ODY Rare

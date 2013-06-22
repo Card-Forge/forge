@@ -9,4 +9,3 @@ SVar:X:Count$TypeInYourLibrary.Plains
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/endless_horizons.jpg
 Oracle:When Endless Horizons enters the battlefield, search your library for any number of Plains cards and exile them. Then shuffle your library.\nAt the beginning of your upkeep, you may put a card you own exiled with Endless Horizons into your hand.
-SetInfo:EVE Rare

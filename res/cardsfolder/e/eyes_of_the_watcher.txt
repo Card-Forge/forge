@@ -6,4 +6,3 @@ SVar:TrigScry:AB$Scry | Cost$ 1 | ScryNum$ 2
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/eyes_of_the_watcher.jpg
 Oracle:Whenever you cast an instant or sorcery spell, you may pay {1}. If you do, scry 2. (To scry 2, look at the top two cards of your library, then put any number of them on the bottom of your library and the rest on top in any order.)
-SetInfo:5DN Uncommon

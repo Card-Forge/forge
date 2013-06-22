@@ -6,4 +6,3 @@ A:AB$ ChangeZone | Cost$ 1 U R | Origin$ Battlefield | Destination$ Hand | Spell
 K:Cascade
 SVar:Picture:http://www.wizards.com/global/images/magic/general/etherium_horn_sorcerer.jpg
 Oracle:{1}{U}{R}: Return Etherium-Horn Sorcerer to its owner's hand.\nCascade (When you cast this spell, exile cards from the top of your library until you exile a nonland card that costs less. You may cast it without paying its mana cost. Put the exiled cards on the bottom in a random order.)
-SetInfo:PC2 Rare

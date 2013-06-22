@@ -8,5 +8,3 @@ SVar:X:Count$Domain/Negative
 SVar:BuffedBy:Plains,Island,Swamp,Mountain,Forest
 SVar:Picture:http://www.wizards.com/global/images/magic/general/exotic_curse.jpg
 Oracle:Enchant creature\nDomain - Enchanted creature gets -1/-1 for each basic land type among lands you control.
-SetInfo:DDE Common
-SetInfo:INV Common

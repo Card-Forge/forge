@@ -9,4 +9,3 @@ SVar:Y:Count$ThisTurnCast_Card.nonArtifact+YouDontCtrl
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ethersworn_canonist.jpg
 Oracle:Each player who has cast a nonartifact spell this turn can't cast additional nonartifact spells.
-SetInfo:ALA Rare

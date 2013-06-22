@@ -7,4 +7,3 @@ S:Mode$ Continuous | Affected$ Card.Elf+Other | AddKeyword$ Shroud | Description
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/eladamri_lord_of_leaves.jpg
 Oracle:Other Elf creatures have forestwalk.\nOther Elves have shroud. (They can't be the targets of spells or abilities.)
-SetInfo:TMP Rare

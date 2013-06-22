@@ -9,5 +9,3 @@ SVar:PlayMain1:TRUE
 SVar:HasCombatEffect:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/essence_sliver.jpg
 Oracle:Whenever a Sliver deals damage, its controller gains that much life.
-SetInfo:TSB Special
-SetInfo:LGN Rare

@@ -9,4 +9,3 @@ SVar:EbonyFear:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creatur
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ebony_charm.jpg
 Oracle:Choose one - Target opponent loses 1 life and you gain 1 life; or exile up to three target cards from a single graveyard; or target creature gains fear until end of turn. (It can't be blocked except by artifact creatures and/or black creatures.)
-SetInfo:MIR Common

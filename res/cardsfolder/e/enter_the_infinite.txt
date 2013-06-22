@@ -8,4 +8,3 @@ SVar:STHandSize:Mode$ Continuous | EffectZone$ Command | Affected$ You | SetMaxH
 SVar:X:Count$InYourLibrary
 SVar:Picture:http://www.wizards.com/global/images/magic/general/enter_the_infinite.jpg
 Oracle:Draw cards equal to the number of cards in your library, then put a card from your hand on top of your library. You have no maximum hand size until your next turn.
-SetInfo:GTC Mythic

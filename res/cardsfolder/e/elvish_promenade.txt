@@ -6,5 +6,3 @@ SVar:X:Count$Valid Elf.YouCtrl
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elvish_promenade.jpg
 Oracle:Put a 1/1 green Elf Warrior creature token onto the battlefield for each Elf you control.
-SetInfo:LRW Uncommon
-SetInfo:EVG Uncommon

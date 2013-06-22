@@ -8,4 +8,3 @@ SVar:X:Remembered$CardManaCost
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/erratic_mutation.jpg
 Oracle:Choose target creature. Reveal cards from the top of your library until you reveal a nonland card. That creature gets +X/-X until end of turn, where X is that card's converted mana cost. Put all cards revealed this way on the bottom of your library in any order.
-SetInfo:PLC Common

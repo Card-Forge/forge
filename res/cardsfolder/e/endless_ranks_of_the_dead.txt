@@ -7,4 +7,3 @@ SVar:X:Count$Valid Creature.zombie+YouCtrl/HalfDown
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/endless_ranks_of_the_dead.jpg
 Oracle:At the beginning of your upkeep, put X 2/2 black Zombie creature tokens onto the battlefield, where X is half the number of Zombies you control, rounded down.
-SetInfo:ISD Rare

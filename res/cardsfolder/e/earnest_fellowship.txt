@@ -12,4 +12,3 @@ SVar:PlayMain1:TRUE
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/earnest_fellowship.jpg
 Oracle:Each creature has protection from its colors.
-SetInfo:ODY Rare

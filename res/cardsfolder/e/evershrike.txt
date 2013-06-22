@@ -13,4 +13,3 @@ SVar:X:Count$xPaid
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/evershrike.jpg
 Oracle:Flying\nEvershrike gets +2/+2 for each Aura attached to it.\n{X}{W/B}{W/B}: Return Evershrike from your graveyard to the battlefield. You may put an Aura card with converted mana cost X or less from your hand onto the battlefield attached to it. If you don't, exile Evershrike.
-SetInfo:EVE Rare

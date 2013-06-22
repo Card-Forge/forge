@@ -6,4 +6,3 @@ SVar:MoveToBottom:AB$ ChangeZoneAll | Cost$ X | ChangeType$ Permanent.nonLand+cm
 SVar:X:Count$xPaid
 SVar:Picture:http://www.cardforge.org/fpics/lq_schemes/every_last_vestige_shall_rot.jpg
 Oracle:When you set this scheme in motion, you may pay {X}. If you do, put each nonland permanent target player controls with converted mana cost X or less on the bottom of its owner's library.
-SetInfo:ARC Common

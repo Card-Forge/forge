@@ -11,4 +11,3 @@ SVar:X:TriggerCount$DamageAmount
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/emberwilde_caliph.jpg
 Oracle:Flying, trample\nEmberwilde Caliph attacks each turn if able.\nWhenever Emberwilde Caliph deals damage, you lose that much life.
-SetInfo:MIR Rare

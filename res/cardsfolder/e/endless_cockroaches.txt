@@ -7,4 +7,3 @@ SVar:TrigChangeZone:AB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ H
 SVar:SacMe:2
 SVar:Picture:http://resources.wizards.com/magic/cards/po/en-us/card4220.jpg
 Oracle:When Endless Cockroaches dies, return it to its owner's hand.
-SetInfo:POR Rare

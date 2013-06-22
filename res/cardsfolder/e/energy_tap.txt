@@ -7,5 +7,3 @@ SVar:X:Targeted$CardManaCost
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/energy_tap.jpg
 Oracle:Tap target untapped creature you control. If you do, add {X} to your mana pool, where X is that creature's converted mana cost.
-SetInfo:LEG Common
-SetInfo:4ED Common

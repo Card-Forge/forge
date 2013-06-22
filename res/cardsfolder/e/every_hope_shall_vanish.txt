@@ -5,4 +5,3 @@ T:Mode$ SetInMotion | ValidCard$ Card.Self | Execute$ DiscardHope | TriggerZones
 SVar:DiscardHope:AB$ Discard | Cost$ 0 | Defined$ Player.Opponent | Mode$ RevealYouChoose | DiscardValid$ Card.nonLand | NumCards$ 1
 SVar:Picture:http://www.cardforge.org/fpics/lq_schemes/every_hope_shall_vanish.jpg
 Oracle:When you set this scheme in motion, each opponent reveals his or her hand. Choose a nonland card from each of those hands. Those players discard those cards.
-SetInfo:ARC Common

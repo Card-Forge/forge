@@ -6,4 +6,3 @@ A:SP$ PumpAll | Cost$ 2 U | ValidTgts$ Player | TgtPrompt$ Select target player 
 SVar:DBAnimateAll:DB$ AnimateAll | Cost$ 0 | Defined$ Targeted | RemoveCreatureTypes$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ego_erasure.jpg
 Oracle:Changeling (This card is every creature type at all times.)\nCreatures target player controls get -2/-0 and lose all creature types until end of turn.
-SetInfo:LRW Uncommon

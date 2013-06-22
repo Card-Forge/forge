@@ -8,4 +8,3 @@ SVar:TrigReturn:AB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Hand 
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/enigma_eidolon.jpg
 Oracle:{U}, Sacrifice Enigma Eidolon: Target player puts the top three cards of his or her library into his or her graveyard.\nWhenever you cast a multicolored spell, you may return Enigma Eidolon from your graveyard to your hand.
-SetInfo:DIS Common

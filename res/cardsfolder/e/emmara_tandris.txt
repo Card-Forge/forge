@@ -6,4 +6,3 @@ S:Mode$ PreventDamage | Target$ Creature.token+YouCtrl | Description$ Prevent al
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/emmara_tandris.jpg
 Oracle:Prevent all damage that would be dealt to creature tokens you control.
-SetInfo:DGM Rare

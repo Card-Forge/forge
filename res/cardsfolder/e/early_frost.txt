@@ -5,4 +5,3 @@ A:SP$ Tap | Cost$ 1 U | TargetMin$ 0 | TargetMax$ 3 | TgtPrompt$ Choose target l
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/early_frost.jpg
 Oracle:Tap up to three target lands.
-SetInfo:5DN Common

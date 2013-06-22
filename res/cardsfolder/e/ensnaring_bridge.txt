@@ -7,6 +7,3 @@ SVar:NonStackingEffect:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ensnaring_bridge.jpg
 Oracle:Creatures with power greater than the number of cards in your hand can't attack.
-SetInfo:8ED Rare
-SetInfo:7ED Rare
-SetInfo:STH Rare

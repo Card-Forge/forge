@@ -7,8 +7,3 @@ SVar:PlayMain1:TRUE
 SVar:BuffedBy:Elf
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elvish_champion.jpg
 Oracle:Other Elf creatures get +1/+1 and have forestwalk. (They're unblockable as long as defending player controls a Forest.)
-SetInfo:8ED Rare
-SetInfo:7ED Rare
-SetInfo:10E Rare
-SetInfo:9ED Rare
-SetInfo:INV Rare

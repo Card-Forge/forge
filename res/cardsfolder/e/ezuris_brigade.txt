@@ -6,4 +6,3 @@ S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 4 | AddToughness$ 4 | AddKe
 SVar:BuffedBy:Artifact
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ezuris_brigade.jpg
 Oracle:Metalcraft - As long as you control three or more artifacts, Ezuri's Brigade gets +4/+4 and has trample.
-SetInfo:SOM Rare

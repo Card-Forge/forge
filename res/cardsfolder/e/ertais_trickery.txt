@@ -6,4 +6,3 @@ SVar:ConditionKicked:Targeted$Valid Card.kicked
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ertais_trickery.jpg
 Oracle:Counter target spell if it was kicked.
-SetInfo:PLS Uncommon

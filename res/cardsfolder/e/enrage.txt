@@ -6,6 +6,3 @@ SVar:X:Count$xPaid
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/enrage.jpg
 Oracle:Target creature gets +X/+0 until end of turn.
-SetInfo:8ED Uncommon
-SetInfo:SCG Uncommon
-SetInfo:9ED Uncommon

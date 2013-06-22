@@ -6,4 +6,3 @@ SVar:NonStackingEffect:True
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/earthcraft.jpg
 Oracle:Tap an untapped creature you control: Untap target basic land.
-SetInfo:TMP Rare

@@ -6,5 +6,3 @@ SVar:TrigBounce:AB$ChangeZone | Cost$ 1 | ValidTgts$ Creature | TgtPrompt$ Selec
 SVar:BuffedBy:Creature
 SVar:Picture:http://www.wizards.com/global/images/magic/general/equilibrium.jpg
 Oracle:Whenever you cast a creature spell, you may pay {1}. If you do, return target creature to its owner's hand.
-SetInfo:7ED Rare
-SetInfo:EXO Rare

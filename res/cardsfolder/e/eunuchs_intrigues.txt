@@ -6,4 +6,3 @@ SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.IsNotRemembered | KW$ HIDDEN C
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/eunuchs_intrigues.jpg
 Oracle:Target opponent chooses a creature he or she controls. Other creatures he or she controls can't block this turn.
-SetInfo:PTK Uncommon

@@ -8,7 +8,3 @@ SVar:ErgAttacked:Count$Valid Creature.Self+notFirstTurnControlled
 SVar:MustAttack:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/erg_raiders.jpg
 Oracle:At the beginning of your end step, if Erg Raiders didn't attack this turn, Erg Raiders deals 2 damage to you unless it came under your control this turn.
-SetInfo:5ED Common
-SetInfo:4ED Common
-SetInfo:3ED Common
-SetInfo:ARN Common x2

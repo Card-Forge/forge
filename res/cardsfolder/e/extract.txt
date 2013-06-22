@@ -5,4 +5,3 @@ A:SP$ ChangeZone | Cost$ U | Origin$ Library | Destination$ Exile | ValidTgts$ P
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/extract.jpg
 Oracle:Search target player's library for a card and exile it. Then that player shuffles his or her library.
-SetInfo:ODY Rare

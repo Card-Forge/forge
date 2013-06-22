@@ -6,4 +6,3 @@ A:SP$ Attach | Cost$ 8 | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 10 | AddToughness$ 10 | AddKeyword$ Trample & Annihilator 2 | Description$ Enchanted creature gets +10/+10 and has trample and annihilator 2. (Whenever it attacks, defending player sacrifices two permanents.)
 SVar:Picture:http://www.wizards.com/global/images/magic/general/eldrazi_conscription.jpg
 Oracle:Enchant creature\nEnchanted creature gets +10/+10 and has trample and annihilator 2. (Whenever it attacks, defending player sacrifices two permanents.)
-SetInfo:ROE Rare

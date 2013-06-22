@@ -17,4 +17,3 @@ SVar:DmgDone:ReplaceCount$DamageAmount
 SVar:DmgResult:Count$YourLifeTotal/Minus.DmgDone
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elderscale_wurm.jpg
 Oracle:Trample\nWhen Elderscale Wurm enters the battlefield, if your life total is less than 7, your life total becomes 7.\nAs long as you have 7 or more life, damage that would reduce your life total to less than 7 reduces it to 7 instead.
-SetInfo:M13 Mythic

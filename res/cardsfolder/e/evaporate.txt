@@ -5,4 +5,3 @@ A:SP$ DamageAll | Cost$ 2 R | NumDmg$ 1 | ValidCards$ Creature.White,Creature.Bl
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/evaporate.jpg
 Oracle:Evaporate deals 1 damage to each white and/or blue creature.
-SetInfo:HML Uncommon

@@ -6,5 +6,3 @@ SVar:DBGainLife:DB$GainLife | Defined$ You | LifeAmount$ X | References$ X
 SVar:X:Targeted$CardToughness
 SVar:Picture:http://www.wizards.com/global/images/magic/general/exile.jpg
 Oracle:Exile target nonwhite attacking creature. You gain life equal to its toughness.
-SetInfo:ALL Rare
-SetInfo:6ED Rare

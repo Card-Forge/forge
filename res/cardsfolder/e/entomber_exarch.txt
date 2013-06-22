@@ -8,4 +8,3 @@ SVar:DBSearch:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts
 SVar:DBRemove:DB$ Discard | ValidTgts$ Opponent | NumCards$ 1 | Mode$ RevealYouChoose | DiscardValid$ Card.nonCreature | SpellDescription$ Target opponent reveals his or her hand, you choose a noncreature card from it, then that player discards that card.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/entomber_exarch.jpg
 Oracle:When Entomber Exarch enters the battlefield, choose one - Return target creature card from your graveyard to your hand; or target opponent reveals his or her hand, you choose a noncreature card from it, then that player discards that card.
-SetInfo:NPH Uncommon

@@ -6,4 +6,3 @@ SVar:Exploration:Mode$ Continuous | Affected$ You | AddKeyword$ AdjustLandPlays:
 SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/explore.jpg
 Oracle:You may play an additional land this turn.\nDraw a card.
-SetInfo:WWK Common

@@ -5,4 +5,3 @@ A:SP$ Counter | Cost$ 2 U | TargetType$ Spell | TgtPrompt$ Select target Creatur
 SVar:DBDraw:DB$Draw | NumCards$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/exclude.jpg
 Oracle:Counter target creature spell.\nDraw a card.
-SetInfo:INV Common

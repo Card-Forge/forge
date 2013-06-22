@@ -5,4 +5,3 @@ PT:2/2
 A:AB$ Pump | Cost$ 2 | KW$ Mountainwalk | SpellDescription$ Enslaved Scout gains mountainwalk until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/enslaved_scout.jpg
 Oracle:{2}: Enslaved Scout gains mountainwalk until end of turn.
-SetInfo:ALL Common x2

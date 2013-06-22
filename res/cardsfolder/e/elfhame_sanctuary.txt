@@ -8,4 +8,3 @@ SVar:SkipDraw:Mode$ Continuous | Affected$ You | AddKeyword$ Skip your draw step
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elfhame_sanctuary.jpg
 Oracle:At the beginning of your upkeep, you may search your library for a basic land card, reveal that card, and put it into your hand. If you do, you skip your draw step this turn and shuffle your library.
-SetInfo:INV Uncommon

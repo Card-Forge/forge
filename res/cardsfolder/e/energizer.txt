@@ -5,4 +5,3 @@ PT:2/2
 A:AB$ PutCounter | Cost$ 2 T | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on CARDNAME.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/energizer.jpg
 Oracle:{2}, {T}: Put a +1/+1 counter on Energizer.
-SetInfo:TMP Rare

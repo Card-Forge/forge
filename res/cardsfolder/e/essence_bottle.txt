@@ -7,4 +7,3 @@ SVar:X:SVar$CostCountersRemoved/Twice
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/essence_bottle.jpg
 Oracle:{3}, {T}: Put an elixir counter on Essence Bottle.\n{T}, Remove all elixir counters from Essence Bottle: You gain 2 life for each elixir counter removed this way.
-SetInfo:TMP Uncommon

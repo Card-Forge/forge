@@ -6,4 +6,3 @@ SVar:NonStackingEffect:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/enchanted_evening.jpg
 Oracle:All permanents are enchantments in addition to their other types.
-SetInfo:SHM Rare

@@ -4,8 +4,3 @@ Types:Instant
 A:SP$ ChangeZoneAll | Cost$ 3 U U | ChangeType$ Creature | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return all creatures to their owners' hands.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/evacuation.jpg
 Oracle:Return all creatures to their owners' hands.
-SetInfo:8ED Rare
-SetInfo:7ED Rare
-SetInfo:10E Rare
-SetInfo:9ED Rare
-SetInfo:STH Rare
