@@ -122,7 +122,7 @@ public class AnimateAllEffect extends AnimateEffectBase {
         List<Card> list;
         List<Player> tgtPlayers = getTargetPlayers(sa);
         
-        if ((tgtPlayers == null) || tgtPlayers.isEmpty()) {
+        if (!sa.usesTargeting() && !sa.hasParam("Defined")) {
             list = game.getCardsIn(ZoneType.Battlefield);
         } else {
             list = new ArrayList<Card>(tgtPlayers.get(0).getCardsIn(ZoneType.Battlefield));

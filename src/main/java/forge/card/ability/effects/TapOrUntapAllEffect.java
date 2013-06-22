@@ -55,7 +55,7 @@ public class TapOrUntapAllEffect extends SpellAbilityEffect {
             validCards = AbilityUtils.filterListByType(validCards, sa.getParam("ValidCards"), sa);
         }
         
-        if (!targetedPlayers.isEmpty()) {
+        if (sa.usesTargeting() || sa.hasParam("Defined")) {
             validCards = CardLists.filterControlledBy(validCards, targetedPlayers);
         }
 
