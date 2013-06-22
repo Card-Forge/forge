@@ -9,4 +9,3 @@ SVar:DBAttach:DB$ Attach | Cost$ 0 | Defined$ Remembered | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nim_deathmantle.jpg
 Oracle:Equipped creature gets +2/+2, has intimidate, and is a black Zombie.\nWhenever a nontoken creature is put into your graveyard from the battlefield, you may pay {4}. If you do, return that card to the battlefield and attach Nim Deathmantle to it.\nEquip {4}
-SetInfo:SOM Rare

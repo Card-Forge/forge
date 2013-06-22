@@ -5,4 +5,3 @@ PT:2/2
 K:CantBeBlockedBy Creature.withoutDefender
 SVar:Picture:http://www.wizards.com/global/images/magic/general/noggle_bandit.jpg
 Oracle:Noggle Bandit can't be blocked except by creatures with defender.
-SetInfo:EVE Common

@@ -7,4 +7,3 @@ S:Mode$ Continuous | Affected$ Creature.attacking+YouCtrl | AddPower$ 2 | Descri
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nobilis_of_war.jpg
 Oracle:Flying\nAttacking creatures you control get +2/+0.
-SetInfo:EVE Rare

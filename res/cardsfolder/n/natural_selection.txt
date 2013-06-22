@@ -5,6 +5,3 @@ A:SP$ RearrangeTopOfLibrary | Cost$ G | ValidTgts$ Player | TgtPrompt$ Choose ta
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/natural_selection.jpg
 Oracle:Look at the top three cards of target player's library, then put them back in any order. You may have that player shuffle his or her library.
-SetInfo:LEB Rare
-SetInfo:LEA Rare
-SetInfo:2ED Rare

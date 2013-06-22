@@ -7,5 +7,3 @@ SVar:TrigShrink:AB$Pump | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select targ
 SVar:HasAttackEffect:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nefashu.jpg
 Oracle:Whenever Nefashu attacks, up to five target creatures each get -1/-1 until end of turn.
-SetInfo:SCG Rare
-SetInfo:HOP Rare

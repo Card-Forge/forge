@@ -6,9 +6,3 @@ A:AB$ Destroy | Cost$ W W T | ValidTgts$ Permanent.Black | TgtPrompt$ Select tar
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/northern_paladin.jpg
 Oracle:{W}{W}, {T}: Destroy target black permanent.
-SetInfo:2ED Rare
-SetInfo:7ED Rare
-SetInfo:LEB Rare
-SetInfo:LEA Rare
-SetInfo:4ED Rare
-SetInfo:3ED Rare

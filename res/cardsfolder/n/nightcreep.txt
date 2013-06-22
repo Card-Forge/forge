@@ -6,4 +6,3 @@ SVar:AnimateSwamp:DB$AnimateAll | ValidCards$ Land | Types$ Swamp | OverwriteTyp
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nightcreep.jpg
 Oracle:Until end of turn, all creatures become black and all lands become Swamps.
-SetInfo:DIS Uncommon

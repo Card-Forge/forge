@@ -8,5 +8,3 @@ SVar:DBTapAll:DB$ TapAll | ValidCards$ Creature | ValidTgts$ Player | TgtPrompt$
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/naya_charm.jpg
 Oracle:Choose one - Naya Charm deals 3 damage to target creature; or return target card from a graveyard to its owner's hand; or tap all creatures target player controls.
-SetInfo:DDH Uncommon
-SetInfo:ALA Uncommon

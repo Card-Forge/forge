@@ -7,4 +7,3 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | IsPresent$ Creature.Attach
 SVar:TrigTap:AB$Tap | Cost$ 0 | Defined$ Enchanted
 SVar:Picture:http://www.wizards.com/global/images/magic/general/narcolepsy.jpg
 Oracle:Enchant creature\nAt the beginning of each upkeep, if enchanted creature is untapped, tap it.
-SetInfo:ROE Common

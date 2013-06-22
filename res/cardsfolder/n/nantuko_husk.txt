@@ -6,7 +6,3 @@ A:AB$ Pump | Cost$ Sac<1/Creature> | NumAtt$ +2 | NumDef$ +2 | SpellDescription$
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nantuko_husk.jpg
 Oracle:Sacrifice a creature: Nantuko Husk gets +2/+2 until end of turn.
-SetInfo:ONS Common
-SetInfo:COM Uncommon
-SetInfo:9ED Uncommon
-SetInfo:10E Uncommon

@@ -5,4 +5,3 @@ PT:3/6
 K:Reach
 SVar:Picture:http://resources.wizards.com/magic/cards/lgn/en-us/card42039.jpg
 Oracle:Reach (This creature can block creatures with flying.)
-SetInfo:LGN Common

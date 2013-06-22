@@ -6,4 +6,3 @@ K:Flying
 K:Protection from black
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nightwind_glider.jpg
 Oracle:Flying, protection from black
-SetInfo:MMQ Common

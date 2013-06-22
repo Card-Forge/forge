@@ -5,4 +5,3 @@ A:AB$ Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add 1 to your mana pool.
 A:AB$ PutCounterAll | Cost$ G U T | CounterType$ P1P1 | CounterNum$ 1 | ValidCards$ Creature.enteredBattlefieldThisTurn | SpellDescription$ Put a +1/+1 counter on each creature that entered the battlefield this turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/novijen_heart_of_progress.jpg
 Oracle:{T}: Add {1} to your mana pool.\n{G}{U}, {T}: Put a +1/+1 counter on each creature that entered the battlefield this turn.
-SetInfo:DIS Uncommon

@@ -6,4 +6,3 @@ A:AB$ Mana | Cost$ T | Produced$ 1 G | SpellDescription$ Add 1 G to your mana po
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nantuko_elder.jpg
 Oracle:{T}: Add {1}{G} to your mana pool.
-SetInfo:ODY Uncommon

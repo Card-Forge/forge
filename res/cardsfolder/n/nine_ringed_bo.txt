@@ -6,4 +6,3 @@ SVar:DB:DB$Pump | KW$ HIDDEN If CARDNAME would be put into a graveyard, exile it
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nine_ringed_bo.jpg
 Oracle:{T}: Nine-Ringed Bo deals 1 damage to target Spirit creature. If that creature would die this turn, exile it instead.
-SetInfo:CHK Uncommon

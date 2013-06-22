@@ -9,4 +9,3 @@ SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 1
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/null_profusion.jpg
 Oracle:Skip your draw step.\nWhenever you play a card, draw a card.\nYour maximum hand size is two.
-SetInfo:PLC Rare

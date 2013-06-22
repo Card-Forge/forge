@@ -8,15 +8,3 @@ SVar:X:Count$Valid Swamp.YouCtrl
 SVar:BuffedBy:Swamp
 SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83186.jpg
 Oracle:Flying\nNightmare's power and toughness are each equal to the number of Swamps you control.
-SetInfo:8ED Rare
-SetInfo:2ED Rare
-SetInfo:7ED Rare
-SetInfo:6ED Rare
-SetInfo:M10 Rare
-SetInfo:9ED Rare
-SetInfo:10E Rare
-SetInfo:LEB Rare
-SetInfo:LEA Rare
-SetInfo:5ED Rare
-SetInfo:4ED Rare
-SetInfo:3ED Rare

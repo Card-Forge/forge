@@ -8,4 +8,3 @@ T:Mode$ Discarded | ValidCard$ Card.OppOwn | TriggerZones$ Battlefield | Execute
 SVar:TrigToken:AB$ Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Elf Warrior | TokenTypes$ Creature,Elf,Warrior | TokenOwner$ You | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nath_of_the_gilt_leaf.jpg
 Oracle:At the beginning of your upkeep, you may have target opponent discard a card at random.\nWhenever an opponent discards a card, you may put a 1/1 green Elf Warrior creature token onto the battlefield.
-SetInfo:LRW Rare

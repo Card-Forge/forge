@@ -7,4 +7,3 @@ SVar:DBPain:DB$ DealDamage | NumDmg$ 1 | Defined$ You
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nomad_stadium.jpg
 Oracle:{T}: Add {W} to your mana pool. Nomad Stadium deals 1 damage to you.\nThreshold - {W}, {T}, Sacrifice Nomad Stadium: You gain 4 life. Activate this ability only if seven or more cards are in your graveyard.
-SetInfo:ODY Uncommon

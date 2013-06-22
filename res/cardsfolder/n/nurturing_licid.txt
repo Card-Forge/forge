@@ -24,4 +24,3 @@ A:AB$ SetState | Cost$ G | Defined$ Self | NewState$ Original | SpellDescription
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nurturing_licid.jpg
 Oracle:{G}, {T}: Nurturing Licid loses this ability and becomes an Aura enchantment with enchant creature. Attach it to target creature. You may pay {G} to end this effect./n{G}: Regenerate enchanted creature.
-SetInfo:TMP Uncommon

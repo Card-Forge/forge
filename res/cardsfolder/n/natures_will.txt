@@ -9,4 +9,3 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/natures_will.jpg
 Oracle:Whenever one or more creatures you control deal combat damage to a player, tap all lands that player controls and untap all lands you control.
-SetInfo:CHK Rare

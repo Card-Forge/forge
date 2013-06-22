@@ -14,4 +14,3 @@ SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/noxious_vapors.jpg
 Oracle:Each player reveals his or her hand and chooses one card of each color from it, then discards all other nonland cards.
-SetInfo:PLS Uncommon

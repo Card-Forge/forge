@@ -10,4 +10,3 @@ SVar:X:SVar$Y/Plus.Z
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/necra_sanctuary.jpg
 Oracle:At the beginning of your upkeep, if you control a green or white permanent, target player loses 1 life. If you control a green permanent and a white permanent, that player loses 3 life instead.
-SetInfo:APC Uncommon

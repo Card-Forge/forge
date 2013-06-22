@@ -5,4 +5,3 @@ PT:1/1
 K:Protection:Elf:Protection from Elves
 SVar:Picture:http://www.wizards.com/global/images/magic/general/naths_buffoon.jpg
 Oracle:Protection from Elves
-SetInfo:LRW Common

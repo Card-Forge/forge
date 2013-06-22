@@ -11,4 +11,3 @@ SVar:TrigLoseLifeBlock:AB$LoseLife | Cost$ 0 | LifeAmount$ 3 | Defined$ Triggere
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nettling_curse.jpg
 Oracle:Enchant creature\nWhenever enchanted creature attacks or blocks, its controller loses 3 life.\n{1}{R}: Enchanted creature attacks this turn if able.
-SetInfo:DIS Common

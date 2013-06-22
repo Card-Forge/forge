@@ -7,4 +7,3 @@ SVar:TrigZombie:AB$Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Zombie | TokenT
 SVar:HasCombatEffect:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nested_ghoul.jpg
 Oracle:Whenever a source deals damage to Nested Ghoul, put a 2/2 black Zombie creature token onto the battlefield.
-SetInfo:MBS Uncommon

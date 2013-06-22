@@ -5,4 +5,3 @@ A:AB$ ChangeZone | Cost$ T | Origin$ Hand | Destination$ Battlefield | ChangeTyp
 PT:1/1
 SVar:Picture:http://serv2.tcgimages.eu/img/cards/Portal_Second_Age/norwood_priestess.jpg
 Oracle:{T}: You may put a green creature card from your hand onto the battlefield. Activate this ability only during your turn, before attackers are declared.
-SetInfo:PO2 Rare

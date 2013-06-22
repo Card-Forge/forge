@@ -6,5 +6,3 @@ A:SP$ ChangeZone | Cost$ B B | ValidTgts$ Creature.attacking | TgtPrompt$ Select
 SVar:NemesisToken:DB$ CopyPermanent | Defined$ Targeted | AtEOT$ Exile
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nemesis_trap.jpg
 Oracle:If a white creature is attacking, you may pay {B}{B} rather than pay Nemesis Trap's mana cost.\nExile target attacking creature. Put a token that's a copy of that creature onto the battlefield. Exile it at the beginning of the next end step.
-SetInfo:COM Uncommon
-SetInfo:WWK Uncommon

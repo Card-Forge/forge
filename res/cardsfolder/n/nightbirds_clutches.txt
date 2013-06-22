@@ -6,4 +6,3 @@ A:SP$ Pump | Cost$ 1 R | ValidTgts$ Creature | KW$ HIDDEN CARDNAME can't block. 
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nightbirds_clutches.jpg
 Oracle:Up to two target creatures can't block this turn.\nFlashback {3}{R} (You may cast this card from your graveyard for its flashback cost. Then exile it.)
-SetInfo:ISD Common

@@ -4,4 +4,3 @@ Types:Creature Horror
 PT:4/2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nether_horror.jpg
 Oracle:
-SetInfo:M11 Common

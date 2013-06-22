@@ -11,6 +11,3 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/necropotence.jpg
 Oracle:Skip your draw step.\nWhenever you discard a card, exile that card from your graveyard.\nPay 1 life: Exile the top card of your library face down. Put that card into your hand at the beginning of your next end step.
-SetInfo:ICE Rare
-SetInfo:5ED Rare
-SetInfo:V09 Mythic

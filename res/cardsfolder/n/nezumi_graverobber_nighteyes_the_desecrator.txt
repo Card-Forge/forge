@@ -19,5 +19,3 @@ PT:4/2
 A:AB$ ChangeZone | Cost$ 4 B | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | ValidTgts$ Creature | TgtPrompt$ Select target creature. | SpellDescription$ Put target creature card from a graveyard onto the battlefield under your control.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nighteyes_the_desecrator.jpg
 Oracle:{4}{B}: Put target creature card from a graveyard onto the battlefield under your control.
-SetInfo:CHK Uncommon
-SetInfo:COM Uncommon

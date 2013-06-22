@@ -5,5 +5,3 @@ A:SP$ PumpAll | Cost$ 2 G | ValidCards$ Creature.Green+YouCtrl | KW$ Forestwalk 
 SVar:RemRandomDeck:True
 SVar:Picture:http://serv3.tcgimages.eu/img/cards/Portal/natures_cloak.jpg
 Oracle:Green creatures you control gain forestwalk until end of turn.
-SetInfo:S99 Rare
-SetInfo:POR Rare

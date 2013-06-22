@@ -5,4 +5,3 @@ A:AB$ Token | Cost$ 1 ExileSameGrave<2/Creature> | TokenAmount$ 1 | TokenName$ S
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/night_soil.jpg
 Oracle:{1}, Exile two creature cards from a single graveyard: Put a 1/1 green Saproling creature token onto the battlefield.
-SetInfo:FEM Common x3

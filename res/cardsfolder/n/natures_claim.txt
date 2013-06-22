@@ -5,4 +5,3 @@ A:SP$ Destroy | Cost$ G | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select ta
 SVar:DBGainLife:DB$GainLife | Defined$ TargetedController | LifeAmount$ 4
 SVar:Picture:http://www.wizards.com/global/images/magic/general/natures_claim.jpg
 Oracle:Destroy target artifact or enchantment. Its controller gains 4 life.
-SetInfo:WWK Common

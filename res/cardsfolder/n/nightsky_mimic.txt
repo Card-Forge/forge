@@ -7,4 +7,3 @@ SVar:TrigAnimate:AB$Animate | Cost$ 0 | Defined$ Self | Power$ 4 | Toughness$ 4 
 SVar:BuffedBy:Card.Black+White
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nightsky_mimic.jpg
 Oracle:Whenever you cast a spell that's both white and black, Nightsky Mimic becomes 4/4 and gains flying until end of turn.
-SetInfo:EVE Common

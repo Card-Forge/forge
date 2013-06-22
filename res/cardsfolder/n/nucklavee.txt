@@ -8,5 +8,3 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigChangeZoneBlue:AB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Instant.Blue+YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nucklavee.jpg
 Oracle:When Nucklavee enters the battlefield, you may return target red sorcery card from your graveyard to your hand.\nWhen Nucklavee enters the battlefield, you may return target blue instant card from your graveyard to your hand.
-SetInfo:COM Uncommon
-SetInfo:EVE Uncommon

@@ -6,4 +6,3 @@ T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDestroyAll | TriggerDescri
 SVar:TrigDestroyAll:AB$DestroyAll | Cost$ 0 | ValidCards$ Creature.Other
 SVar:Picture:http://www.wizards.com/global/images/magic/general/novablast_wurm.jpg
 Oracle:Whenever Novablast Wurm attacks, destroy all other creatures.
-SetInfo:WWK Mythic

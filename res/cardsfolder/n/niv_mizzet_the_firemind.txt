@@ -8,6 +8,3 @@ T:Mode$ Drawn | ValidCard$ Card.YouCtrl | TriggerZones$ Battlefield | Execute$ T
 SVar:TrigDealDamage:AB$DealDamage | Cost$ 0 | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/niv_mizzet_the_firemind.jpg
 Oracle:Flying\nWhenever you draw a card, Niv-Mizzet, the Firemind deals 1 damage to target creature or player.\n{T}: Draw a card.
-SetInfo:GPT Rare
-SetInfo:DDJ Mythic
-SetInfo:DRB Rare

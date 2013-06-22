@@ -5,4 +5,3 @@ T:Mode$ Blocks | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | Execu
 SVar:TrigGainLife:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ 2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/noble_stand.jpg
 Oracle:Whenever a creature you control blocks, you gain 2 life.
-SetInfo:NMS Uncommon

@@ -6,4 +6,3 @@ A:AB$ PutCounter | Cost$ ExileFromStack<1/Spell.Instant+YouCtrl;Spell.Sorcery+Yo
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nivmagus_elemental.jpg
 Oracle:Exile an instant or sorcery spell you control: Put two +1/+1 counters on Nivmagus Elemental. (That spell won't resolve.)
-SetInfo:RTR Rare

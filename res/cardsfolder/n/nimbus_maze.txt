@@ -6,4 +6,3 @@ A:AB$ Mana | Cost$ T | Produced$ W | IsPresent$ Island.YouCtrl | SpellDescriptio
 A:AB$ Mana | Cost$ T | Produced$ U | IsPresent$ Plains.YouCtrl | SpellDescription$ Add U to your mana pool. Activate this ability only if you control a Plains.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nimbus_maze.jpg
 Oracle:{T}: Add {1} to your mana pool.\n{T}: Add {W} to your mana pool. Activate this ability only if you control an Island.\n{T}: Add {U} to your mana pool. Activate this ability only if you control a Plains.
-SetInfo:FUT Rare

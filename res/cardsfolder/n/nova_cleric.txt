@@ -6,4 +6,3 @@ A:AB$ DestroyAll | Cost$ 2 W T Sac<1/CARDNAME> | ValidCards$ Enchantment | Spell
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nova_cleric.jpg
 Oracle:{2}{W}, {T}, Sacrifice Nova Cleric: Destroy all enchantments.
-SetInfo:ONS Uncommon

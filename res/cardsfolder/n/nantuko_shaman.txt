@@ -7,4 +7,3 @@ T:Mode$ ChangesZone | ValidCard$ Card.Self | IsPresent$ Land.tapped+YouCtrl | Pr
 SVar:TrigDraw:AB$Draw | Cost$ 0 | NumCards$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nantuko_shaman.jpg
 Oracle:When Nantuko Shaman enters the battlefield, if you control no tapped lands, draw a card.\nSuspend 1-{2}{G}{G} (Rather than cast this card from your hand, you may pay {2}{G}{G} and exile it with a time counter on it. At the beginning of your upkeep, remove a time counter. When the last is removed, cast it without paying its mana cost. It has haste.)
-SetInfo:TSP Common

@@ -7,4 +7,3 @@ SVar:TrigMill:AB$ Mill | Cost$ 0 | Defined$ DefendingPlayer | NumCards$ 10
 SVar:HasAttackEffect:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nemesis_of_reason.jpg
 Oracle:Whenever Nemesis of Reason attacks, defending player puts the top ten cards of his or her library into his or her graveyard.
-SetInfo:ARB Rare

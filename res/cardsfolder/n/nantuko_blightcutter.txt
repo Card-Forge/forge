@@ -7,4 +7,3 @@ S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddToughness$ X | Refer
 SVar:X:Count$Valid Permanent.Black+OppCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nantuko_blightcutter.jpg
 Oracle:Protection from black\nThreshold - Nantuko Blightcutter gets +1/+1 for each black permanent your opponents control as long as seven or more cards are in your graveyard.
-SetInfo:TOR Rare

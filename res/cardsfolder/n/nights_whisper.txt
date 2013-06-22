@@ -5,4 +5,3 @@ A:SP$ Draw | Cost$ 1 B | NumCards$ 2 | SubAbility$ DBLoseLife | SpellDescription
 SVar:DBLoseLife:DB$LoseLife | LifeAmount$ 2
 SVar:Picture:http://resources.wizards.com/magic/cards/5dn/en-us/card51178.jpg
 Oracle:You draw two cards and you lose 2 life.
-SetInfo:5DN Uncommon

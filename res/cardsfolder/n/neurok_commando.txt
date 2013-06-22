@@ -7,4 +7,3 @@ T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | CombatDama
 SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/neurok_commando.jpg
 Oracle:Shroud\nWhenever Neurok Commando deals combat damage to a player, you may draw a card.
-SetInfo:MBS Uncommon

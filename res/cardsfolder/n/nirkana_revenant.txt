@@ -7,4 +7,3 @@ T:Mode$ TapsForMana | ValidCard$ Swamp.YouCtrl | Execute$ TrigMana | TriggerZone
 SVar:TrigMana:AB$Mana | Cost$ 0 | Produced$ B | Amount$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nirkana_revenant.jpg
 Oracle:Whenever you tap a Swamp for mana, add {B} to your mana pool (in addition to the mana the land produces).\n{B}: Nirkana Revenant gets +1/+1 until end of turn.
-SetInfo:ROE Mythic

@@ -8,4 +8,3 @@ SVar:TrigPump:AB$ Pump | Cost$ 0 | KW$ HIDDEN CARDNAME can attack as though it d
 SVar:BuffedBy:Instant,Sorcery
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nivix_cyclops.jpg
 Oracle:Defender\nWhenever you cast an instant or sorcery spell, Nivix Cyclops gets +3/+0 until end of turn and can attack this turn as though it didn't have defender.
-SetInfo:DGM Common

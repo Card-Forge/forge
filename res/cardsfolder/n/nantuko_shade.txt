@@ -5,5 +5,3 @@ PT:2/1
 A:AB$ Pump | Cost$ B | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ CARDNAME gets +1/+1 until end of turn.
 SVar:Picture:http://resources.wizards.com/magic/cards/tor/en-us/card35053.jpg
 Oracle:{B}: Nantuko Shade gets +1/+1 until end of turn.
-SetInfo:TOR Rare
-SetInfo:M11 Rare

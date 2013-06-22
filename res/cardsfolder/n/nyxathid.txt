@@ -10,4 +10,3 @@ SVar:NeedsToPlayVar:Z LE5
 SVar:Z:Count$InOppHand
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nyxathid.jpg
 Oracle:As Nyxathid enters the battlefield, choose an opponent.\nNyxathid gets -1/-1 for each card in the chosen player's hand.
-SetInfo:CFX Rare

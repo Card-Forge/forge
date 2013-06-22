@@ -7,4 +7,3 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigLoseLife:DB$LoseLife | Defined$ You | LifeAmount$ 3
 SVar:Picture:http://www.wizards.com/global/images/magic/general/necrogen_scudder.jpg
 Oracle:Flying\nWhen Necrogen Scudder enters the battlefield, you lose 3 life.
-SetInfo:SOM Uncommon

@@ -4,15 +4,3 @@ Types:Instant
 A:SP$ Destroy | Cost$ 1 G | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | SpellDescription$ Destroy target artifact or enchantment.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/naturalize.jpg
 Oracle:Destroy target artifact or enchantment.
-SetInfo:8ED Common
-SetInfo:ROE Common
-SetInfo:GTC Common
-SetInfo:9ED Common
-SetInfo:ALA Common
-SetInfo:M11 Common
-SetInfo:M10 Common
-SetInfo:M13 Common
-SetInfo:M12 Common
-SetInfo:ONS Common
-SetInfo:10E Common
-SetInfo:ISD Common

@@ -7,4 +7,3 @@ K:Champion:Elemental
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nova_chaser.jpg
 Oracle:Trample\nChampion an Elemental (When this enters the battlefield, sacrifice it unless you exile another Elemental you control. When this leaves the battlefield, that card returns to the battlefield.)
-SetInfo:LRW Rare

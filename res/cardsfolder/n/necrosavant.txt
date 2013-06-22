@@ -6,5 +6,3 @@ A:AB$ ChangeZone | Cost$3 B B Sac<1/Creature> | Origin$ Graveyard | Destination$
 SVar:DiscardMe:1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/necrosavant.jpg
 Oracle:{3}{B}{B}, Sacrifice a creature: Return Necrosavant from your graveyard to the battlefield. Activate this ability only during your upkeep.
-SetInfo:VIS Rare
-SetInfo:6ED Rare

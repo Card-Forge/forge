@@ -7,4 +7,3 @@ A:AB$ Tap | Cost$ W W T | ValidTgts$ Creature | TgtPrompt$ Select target creatur
 SVar:X:Count$InYourYard
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nomad_decoy.jpg
 Oracle:{W}, {T}: Tap target creature.\nThreshold - {W}{W}, {T}: Tap two target creatures. Activate this ability only if seven or more cards are in your graveyard.
-SetInfo:ODY Uncommon

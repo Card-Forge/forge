@@ -7,4 +7,3 @@ A:AB$ TapOrUntap | Cost$ U T | ValidTgts$ Creature | TgtPrompt$ Select target cr
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/niblis_of_the_breath.jpg
 Oracle:Flying\n{U}, {T}: You may tap or untap target creature.
-SetInfo:DKA Uncommon

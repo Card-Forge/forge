@@ -7,4 +7,3 @@ SVar:RemRandomDeck:True
 SVar:AI_SpellsNeedExtraMana:3
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nether_void.jpg
 Oracle:Whenever a player casts a spell, counter it unless its controller pays {3}.
-SetInfo:LEG Rare

@@ -7,4 +7,3 @@ T:Mode$ SpellCast | ValidCard$ Card.Green | ValidActivatingPlayer$ You | Trigger
 SVar:TrigUntap:AB$Untap | Cost$ 0 | Defined$ Self
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nettle_sentinel.jpg
 Oracle:Nettle Sentinel doesn't untap during your untap step.\nWhenever you cast a green spell, you may untap Nettle Sentinel.
-SetInfo:EVE Common

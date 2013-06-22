@@ -10,4 +10,3 @@ SVar:SacMe:1
 SVar:DiscardMe:1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nether_traitor.jpg
 Oracle:Haste\nShadow (This creature can block or be blocked by only creatures with shadow.)\nWhenever another creature is put into your graveyard from the battlefield, you may pay {B}. If you do, return Nether Traitor from your graveyard to the battlefield.
-SetInfo:TSP Rare

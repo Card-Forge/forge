@@ -8,4 +8,3 @@ SVar:X:Targeted$Amount
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nostalgic_dreams.jpg
 Oracle:As an additional cost to cast Nostalgic Dreams, discard X cards.\nReturn X target cards from your graveyard to your hand. Exile Nostalgic Dreams.
-SetInfo:TOR Rare

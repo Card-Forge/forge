@@ -9,4 +9,3 @@ SVar:TrigSac:AB$ Sacrifice | Cost$ 0 | Defined$ DefendingPlayer | SacValid$ Crea
 SVar:HasAttackEffect:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nefarox_overlord_of_grixis.jpg
 Oracle:Flying\nExalted (Whenever a creature you control attacks alone, that creature gets +1/+1 until end of turn.)\nWhenever Nefarox, Overlord of Grixis attacks alone, defending player sacrifices a creature.
-SetInfo:M13 Rare

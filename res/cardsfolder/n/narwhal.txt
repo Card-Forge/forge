@@ -6,4 +6,3 @@ K:First Strike
 K:Protection from red
 SVar:Picture:http://www.wizards.com/global/images/magic/general/narwhal.jpg
 Oracle:First strike, protection from red
-SetInfo:HML Rare

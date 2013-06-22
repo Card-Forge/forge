@@ -6,4 +6,3 @@ A:AB$ Discard | Cost$ B Sac<1/Creature> | ValidTgts$ Player | SorcerySpeed$ True
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nezumi_bone_reader.jpg
 Oracle:{B}, Sacrifice a creature: Target player discards a card. Activate this ability only any time you could cast a sorcery.
-SetInfo:CHK Uncommon

@@ -6,4 +6,3 @@ K:Flying
 K:CARDNAME can't block.
 SVar:Picture:http://resources.wizards.com/magic/cards/lrw/en/card139456.jpg
 Oracle:Flying\nNightshade Stinger can't block.
-SetInfo:LRW Common

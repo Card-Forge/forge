@@ -6,4 +6,3 @@ SVar:TrigDiscard:AB$Discard | Cost$ 0 | Defined$ TriggeredPlayer | NumCards$ 1 |
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/necrogen_mists.jpg
 Oracle:At the beginning of each player's upkeep, that player discards a card.
-SetInfo:MRD Rare

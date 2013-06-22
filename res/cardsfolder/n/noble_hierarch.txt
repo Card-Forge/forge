@@ -8,4 +8,3 @@ A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add G to your mana pool.
 K:Exalted
 SVar:Picture:http://www.wizards.com/global/images/magic/general/noble_hierarch.jpg
 Oracle:Exalted (Whenever a creature you control attacks alone, that creature gets +1/+1 until end of turn.)\n{T}: Add {G}, {W}, or {U} to your mana pool.
-SetInfo:CFX Rare

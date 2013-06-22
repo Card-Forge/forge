@@ -5,10 +5,3 @@ K:CARDNAME enters the battlefield tapped.
 A:AB$ DestroyAll | Cost$ 1 T | ValidCards$ Artifact,Creature,Enchantment | SpellDescription$ Destroy all artifacts, creatures, and enchantments.
 SVar:Picture:http://resources.wizards.com/magic/cards/5e/en-us/card3803.jpg
 Oracle:Nevinyrral's Disk enters the battlefield tapped.\n{1}, {T}: Destroy all artifacts, creatures, and enchantments.
-SetInfo:2ED Rare
-SetInfo:V10 Mythic
-SetInfo:LEB Rare
-SetInfo:LEA Rare
-SetInfo:5ED Rare
-SetInfo:4ED Rare
-SetInfo:3ED Rare

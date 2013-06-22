@@ -5,4 +5,3 @@ A:SP$ DestroyAll | Cost$ 2 B | ValidCards$ Creature.Green | SpellDescription$ De
 SVar:RemRandomDeck:True
 SVar:Picture:http://serv4.tcgimages.eu/img/cards/Portal/natures_ruin.jpg
 Oracle:Destroy all green creatures.
-SetInfo:POR Uncommon

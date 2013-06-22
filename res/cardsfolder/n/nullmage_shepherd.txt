@@ -6,4 +6,3 @@ A:AB$ Destroy | Cost$ tapXType<4/Creature> | ValidTgts$ Artifact,Enchantment | T
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nullmage_shepherd.jpg
 Oracle:Tap four untapped creatures you control: Destroy target artifact or enchantment.
-SetInfo:RAV Uncommon

@@ -8,4 +8,3 @@ SVar:Y:Exiled$CardManaCost
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nourishing_shoal.jpg
 Oracle:You may exile a green card with converted mana cost X from your hand rather than pay Nourishing Shoal's mana cost.\nYou gain X life.
-SetInfo:BOK Rare

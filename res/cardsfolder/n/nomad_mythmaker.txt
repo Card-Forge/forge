@@ -5,5 +5,3 @@ PT:2/2
 A:AB$ ChangeZone | Cost$ W T | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Aura | GainControl$ True | AttachedTo$ Creature.CanBeEnchantedBySource+YouCtrl | SpellDescription$ Put target Aura card from a graveyard onto the battlefield under your control attached to a creature you control.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nomad_mythmaker.jpg
 Oracle:{W}, {T}: Put target Aura card from a graveyard onto the battlefield under your control attached to a creature you control.
-SetInfo:JUD Rare
-SetInfo:10E Rare

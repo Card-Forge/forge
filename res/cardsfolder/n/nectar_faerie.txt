@@ -7,4 +7,3 @@ A:AB$ Pump | Cost$ B T | ValidTgts$ Faerie,Elf | TgtPrompt$ Select target Faerie
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nectar_faerie.jpg
 Oracle:Flying\n{B}, {T}: Target Faerie or Elf gains lifelink until end of turn. (Damage dealt by the creature also causes its controller to gain that much life.)
-SetInfo:LRW Uncommon

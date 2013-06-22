@@ -7,4 +7,3 @@ T:Mode$ ChangesZone | Origin$ Library | Destination$ Graveyard | ValidCard$ Card
 SVar:TrigChange:AB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Battlefield | Defined$ Self
 SVar:Picture:http://www.wizards.com/global/images/magic/general/narcomoeba.jpg
 Oracle:Flying\nWhen Narcomoeba is put into your graveyard from your library, you may put it onto the battlefield.
-SetInfo:FUT Uncommon

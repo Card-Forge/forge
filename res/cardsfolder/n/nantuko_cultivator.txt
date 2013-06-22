@@ -12,4 +12,3 @@ SVar:NantukoY:Remembered$Amount
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nantuko_cultivator.jpg
 Oracle:When Nantuko Cultivator enters the battlefield, you may discard any number of land cards. Put that many +1/+1 counters on Nantuko Cultivator and draw that many cards.
-SetInfo:TOR Rare

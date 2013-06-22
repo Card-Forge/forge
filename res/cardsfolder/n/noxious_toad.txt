@@ -7,4 +7,3 @@ SVar:TrigDiscard:AB$ Discard | Cost$ 0 | Defined$ Player.Opponent | NumCards$ 1 
 SVar:SacMe:1
 SVar:Picture:http://serv2.tcgimages.eu/img/cards/Portal/noxious_toad.jpg
 Oracle:When Noxious Toad dies, each opponent discards a card.
-SetInfo:POR Uncommon

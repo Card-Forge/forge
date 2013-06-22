@@ -4,5 +4,3 @@ Types:Enchantment
 A:AB$ ChangeZone | Cost$ Sac<1/CARDNAME> | Origin$ Graveyard | Destination$ Hand | Defined$ ThisTurnEntered_Graveyard_from_Battlefield_Card.Creature+YouCtrl | SpellDescription$ Return to your hand all creature cards in your graveyard that were put there from the battlefield this turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/no_rest_for_the_wicked.jpg
 Oracle:Sacrifice No Rest for the Wicked: Return to your hand all creature cards in your graveyard that were put there from the battlefield this turn.
-SetInfo:10E Uncommon
-SetInfo:USG Uncommon

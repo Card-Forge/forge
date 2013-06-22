@@ -6,6 +6,3 @@ SVar:DBDraw:DB$ Draw | Defined$ Remembered | NumCards$ X | References$ X
 SVar:X:Count$ValidGraveyard Creature.RememberedPlayerCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/natures_resurgence.jpg
 Oracle:Each player draws a card for each creature card in his or her graveyard.
-SetInfo:7ED Rare
-SetInfo:WTH Rare
-SetInfo:6ED Rare

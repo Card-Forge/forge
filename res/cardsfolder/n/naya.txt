@@ -7,4 +7,3 @@ SVar:RolledChaos:AB$ Pump | Cost$ 0 | ValidTgts$ Creature.Red+YouCtrl,Creature.G
 SVar:Y:Count$Valid Land.YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/naya.jpg
 Oracle:You may play any number of additional lands on each of your turns.\nWhenever you roll {C}, target red, green, or white creature you control gets +1/+1 until end of turn for each land you control.
-SetInfo:HOP Common

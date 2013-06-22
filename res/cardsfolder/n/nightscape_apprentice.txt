@@ -7,4 +7,3 @@ A:AB$ Pump | Cost$ R T | ValidTgts$ Creature | TgtPrompt$ Select target creature
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nightscape_apprentice.jpg
 Oracle:{U}, {T}: Put target creature you control on top of its owner's library.\n{R}, {T}: Target creature gains first strike until end of turn.
-SetInfo:INV Common

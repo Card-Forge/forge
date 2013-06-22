@@ -6,4 +6,3 @@ S:Mode$ ReduceCost | EffectZone$ Command | ValidCard$ Creature | Type$ Spell | A
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.cardforge.org/fpics/vgd-lq/nekrataal_avatar.jpg
 Oracle:Hand -1, life -4\nCreature spells you cast cost {B} less to cast. This effect reduces only the amount of colored mana you pay.
-SetInfo:VAN Special

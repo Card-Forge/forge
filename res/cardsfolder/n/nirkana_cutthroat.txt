@@ -10,4 +10,3 @@ SVar:X:Count$Valid Card.Self+counters_GE1_LEVEL+counters_LE2_LEVEL
 SVar:Y:Count$Valid Card.Self+counters_GE3_LEVEL
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nirkana_cutthroat.jpg
 Oracle:Level up {2}{B} ({2}{B}: Put a level counter on this. Level up only as a sorcery.)\nLEVEL 1-2\n4/3\nDeathtouch\nLEVEL 3+\n5/4\nFirst strike, deathtouch
-SetInfo:ROE Uncommon

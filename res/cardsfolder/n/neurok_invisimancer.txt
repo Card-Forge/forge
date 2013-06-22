@@ -8,5 +8,3 @@ SVar:TrigPump:AB$Pump | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/neurok_invisimancer.jpg
 Oracle:Neurok Invisimancer is unblockable.\nWhen Neurok Invisimancer enters the battlefield, target creature is unblockable this turn.
-SetInfo:DDI Common
-SetInfo:SOM Common

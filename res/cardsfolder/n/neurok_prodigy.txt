@@ -6,4 +6,3 @@ K:Flying
 A:AB$ ChangeZone | Cost$ Discard<1/Artifact> | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return CARDNAME to its owner's hand.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/neurok_prodigy.jpg
 Oracle:Flying\nDiscard an artifact card: Return Neurok Prodigy to its owner's hand.
-SetInfo:DST Common

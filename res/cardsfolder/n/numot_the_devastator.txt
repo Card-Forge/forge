@@ -7,5 +7,3 @@ T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage
 SVar:TrigDestroy:AB$ Destroy | Cost$ 2 R | TargetMin$ 0 | TargetMax$ 2 | ValidTgts$ Land | TgtPrompt$ Select target land
 SVar:Picture:http://www.wizards.com/global/images/magic/general/numot_the_devastator.jpg
 Oracle:Flying\nWhenever Numot, the Devastator deals combat damage to a player, you may pay {2}{R}. If you do, destroy up to two target lands.
-SetInfo:COM Rare
-SetInfo:PLC Rare

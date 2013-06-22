@@ -12,4 +12,3 @@ SVar:Turns:Count$TotalTurns
 SVar:Picture:http://www.cardforge.org/fpics/vgd-lq/necropotence_avatar.jpg
 SVar:RemAIDeck:True
 Oracle:Hand +0, life +4\nSkip your draw step.\nAt the beginning of your end step, if it's not the first turn of the game, put a death counter on Necropotence Avatar. You draw X cards and you lose X life, where X is the number of death counters on Necropotence Avatar.
-SetInfo:VAN Special

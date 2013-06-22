@@ -6,4 +6,3 @@ S:Mode$ Continuous | Affected$ Card.Self | AddHiddenKeyword$ Unblockable | Check
 SVar:X:Count$Valid Artifact.YouDontCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/neurok_spy.jpg
 Oracle:Neurok Spy is unblockable as long as defending player controls an artifact.
-SetInfo:MRD Common

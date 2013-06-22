@@ -10,4 +10,3 @@ SVar:RemRandomDeck:True
 SVar:BuffedBy:Artifact
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nim_shrieker.jpg
 Oracle:Flying\nNim Shrieker gets +1/+0 for each artifact you control.
-SetInfo:MRD Common

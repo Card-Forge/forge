@@ -5,5 +5,3 @@ A:SP$ ChangeZone | Cost$ 2 W | Origin$ Battlefield | Destination$ Hand | ValidTg
 SVar:DBGainLife:DB$GainLife | LifeAmount$ 4
 SVar:Picture:http://www.wizards.com/global/images/magic/general/Narrow_Escape.jpg
 Oracle:Return target permanent you control to its owner's hand. You gain 4 life.
-SetInfo:ZEN Common
-SetInfo:DDE Common

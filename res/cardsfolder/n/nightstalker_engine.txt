@@ -6,4 +6,3 @@ S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ 
 SVar:X:Count$TypeInYourYard.Creature
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nightstalker_engine.jpg
 Oracle:Nightstalker Engine's power is equal to the number of creature cards in your graveyard.
-SetInfo:PO2 Rare

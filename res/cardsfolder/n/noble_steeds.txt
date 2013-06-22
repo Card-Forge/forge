@@ -4,4 +4,3 @@ Types:Enchantment
 A:AB$ Pump | Cost$ 1 W | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ First Strike | SpellDescription$ Target creature gains first strike until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/noble_steeds.jpg
 Oracle:{1}{W}: Target creature gains first strike until end of turn.
-SetInfo:ALL Common x2

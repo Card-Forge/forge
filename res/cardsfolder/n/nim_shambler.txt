@@ -9,4 +9,3 @@ SVar:BuffedBy:Artifact
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nim_shambler.jpg
 Oracle:Nim Shambler gets +1/+0 for each artifact you control.\nSacrifice a creature: Regenerate Nim Shambler.
-SetInfo:MRD Uncommon

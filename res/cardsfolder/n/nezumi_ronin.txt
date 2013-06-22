@@ -5,4 +5,3 @@ PT:3/1
 K:Bushido 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nezumi_ronin.jpg
 Oracle:Bushido 1 (When this blocks or becomes blocked, it gets +1/+1 until end of turn.)
-SetInfo:CHK Common

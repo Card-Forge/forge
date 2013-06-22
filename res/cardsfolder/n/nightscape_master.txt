@@ -8,4 +8,3 @@ SVar:RemRandomDeck:True
 DeckNeeds:Color$Red|Blue
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nightscape_master.jpg
 Oracle:{U}{U}, {T}: Return target creature to its owner's hand.\n{R}{R}, {T}: Nightscape Master deals 2 damage to target creature.
-SetInfo:INV Rare

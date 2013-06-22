@@ -7,4 +7,3 @@ SVar:DBGainLife:DB$GainLife | Defined$ You | LifeAmount$ 1
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nihilistic_glee.jpg
 Oracle:{2}{B}, Discard a card: Target opponent loses 1 life and you gain 1 life.\nHellbent - {1}, Pay 2 life: Draw a card. Activate this ability only if you have no cards in hand.
-SetInfo:DIS Rare

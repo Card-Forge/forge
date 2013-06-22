@@ -9,4 +9,3 @@ SVar:TrigDiscard:AB$ Discard | Cost$ 0 | Defined$ TriggeredTarget | NumCards$ X 
 SVar:X:TriggerCount$DamageAmount
 SVar:Picture:http://www.wizards.com/global/images/magic/general/needle_specter.jpg
 Oracle:Flying\nWither (This deals damage to creatures in the form of -1/-1 counters.)\nWhenever Needle Specter deals combat damage to a player, that player discards that many cards.
-SetInfo:EVE Rare

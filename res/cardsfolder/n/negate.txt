@@ -4,8 +4,3 @@ Types:Instant
 A:SP$ Counter | Cost$ 1 U | TargetType$ Spell | TgtPrompt$ Select target nonCreature Spell | ValidTgts$ Card.nonCreature | SpellDescription$ Counter target noncreature spell.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/negate.jpg
 Oracle:Counter target noncreature spell.
-SetInfo:M11 Common
-SetInfo:MOR Common
-SetInfo:M13 Common
-SetInfo:M12 Common
-SetInfo:M10 Common

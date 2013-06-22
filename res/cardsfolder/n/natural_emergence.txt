@@ -7,4 +7,3 @@ S:Mode$ Continuous | Affected$ Land.YouCtrl | SetPower$ 2 | SetToughness$ 2 | Ad
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/natural_emergence.jpg
 Oracle:When Natural Emergence enters the battlefield, return a red or green enchantment you control to its owner's hand.\nLands you control are 2/2 creatures with first strike. They're still lands.
-SetInfo:PLS Rare

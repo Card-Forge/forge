@@ -7,4 +7,3 @@ S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddToughness$ 1 | Condi
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nantuko_calmer.jpg
 Oracle:{G}, {T}, Sacrifice Nantuko Calmer: Destroy target enchantment.\nThreshold - Nantuko Calmer gets +1/+1 as long as seven or more cards are in your graveyard.
-SetInfo:TOR Common

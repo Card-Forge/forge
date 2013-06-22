@@ -5,4 +5,3 @@ A:SP$ Pump | Cost$ B | ValidTgts$ Creature | TgtPrompt$ Select target creature |
 SVar:DBDraw:DB$Draw | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nighthaze.jpg
 Oracle:Target creature gains swampwalk until end of turn.\nDraw a card.
-SetInfo:ROE Common

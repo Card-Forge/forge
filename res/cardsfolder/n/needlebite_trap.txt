@@ -7,4 +7,3 @@ A:SP$ LoseLife | Cost$ 5 B B | ValidTgts$ Player | TgtPrompt$ Select target play
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 5
 SVar:Picture:http://www.wizards.com/global/images/magic/general/needlebite_trap.jpg
 Oracle:If an opponent gained life this turn, you may pay {B} rather than pay Needlebite Trap's mana cost.\nTarget player loses 5 life and you gain 5 life.
-SetInfo:ZEN Uncommon

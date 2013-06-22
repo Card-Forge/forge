@@ -6,4 +6,3 @@ A:AB$ Destroy | Cost$ Sac<1/CARDNAME> | ValidTgts$ Ninja | TgtPrompt$ Select tar
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nezumi_shadow_watcher.jpg
 Oracle:Sacrifice Nezumi Shadow-Watcher: Destroy target Ninja.
-SetInfo:BOK Uncommon

@@ -6,4 +6,3 @@ A:AB$ Destroy | Cost$ T Sac<1/CARDNAME> | ValidTgts$ Creature.faceDown | TgtProm
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nosy_goblin.jpg
 Oracle:{T}, Sacrifice Nosy Goblin: Destroy target face-down creature.
-SetInfo:ONS Common

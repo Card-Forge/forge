@@ -7,4 +7,3 @@ K:etbCounter:P1P1:X
 SVar:X:Count$xPaid
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nimbus_swimmer.jpg
 Oracle:Flying\nNimbus Swimmer enters the battlefield with X +1/+1 counters on it.
-SetInfo:GTC Uncommon

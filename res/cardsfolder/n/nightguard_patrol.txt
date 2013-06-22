@@ -6,4 +6,3 @@ K:First Strike
 K:Vigilance
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nightguard_patrol.jpg
 Oracle:First strike, vigilance
-SetInfo:RAV Common

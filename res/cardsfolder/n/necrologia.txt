@@ -8,5 +8,3 @@ SVar:X:XChoice
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/necrologia.jpg
 Oracle:Cast Necrologia only during your end step.\nAs an additional cost to cast Necrologia, pay X life.\nDraw X cards.
-SetInfo:7ED Uncommon
-SetInfo:EXO Uncommon

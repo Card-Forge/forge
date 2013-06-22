@@ -10,4 +10,3 @@ SVar:BuffedBy:Artifact
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nim_devourer.jpg
 Oracle:Nim Devourer gets +1/+0 for each artifact you control.\n{B}{B}: Return Nim Devourer from your graveyard to the battlefield, then sacrifice a creature. Activate this ability only during your upkeep.
-SetInfo:MRD Rare

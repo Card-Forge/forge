@@ -5,4 +5,3 @@ S:Mode$ Continuous | Affected$ Creature | AddPower$ -1 | AddToughness$ -1 | Desc
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/night_of_souls_betrayal.jpg
 Oracle:All creatures get -1/-1.
-SetInfo:CHK Rare

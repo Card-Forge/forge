@@ -5,4 +5,3 @@ PT:3/3
 K:CantBeBlockedByAmount GT1
 SVar:Picture:http://resources.wizards.com/magic/cards/p2/en-us/card6615.jpg
 Oracle:Norwood Riders can't be blocked by more than one creature.
-SetInfo:PO2 Common
