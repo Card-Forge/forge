@@ -5,5 +5,3 @@ A:SP$ UntapAll | Cost$ G | ValidCards$ Creature.YouCtrl | SpellDescription$ Unta
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vitalize.jpg
 Oracle:Untap all creatures you control.
-SetInfo:WTH Common
-SetInfo:6ED Common

@@ -6,4 +6,3 @@ A:AB$ Pump | Cost$ 1 B Discard<1/Creature> | NumAtt$ +X | NumDef$ +X | SpellDesc
 SVar:X:Discarded$CardManaCost
 SVar:Picture:http://www.wizards.com/global/images/magic/general/volrath_the_fallen.jpg
 Oracle:{1}{B}, Discard a creature card: Volrath the Fallen gets +X/+X until end of turn, where X is the discarded card's converted mana cost.
-SetInfo:NMS Rare

@@ -8,6 +8,3 @@ SVar:ChooseColor:DB$ ChooseColor | Defined$ You | SpellDescription$ As CARDNAME 
 K:Protection:Card.ChosenColor:CARDNAME has protection from the chosen color.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/voice_of_all.jpg
 Oracle:Flying\nAs Voice of All enters the battlefield, choose a color.\nVoice of All has protection from the chosen color.
-SetInfo:PLS Uncommon
-SetInfo:COM Rare
-SetInfo:10E Rare

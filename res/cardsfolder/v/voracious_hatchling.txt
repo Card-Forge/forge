@@ -10,4 +10,3 @@ SVar:TrigRemoveCounter:AB$ RemoveCounter | Cost$ 0 | Defined$ Self | CounterType
 SVar:BuffedBy:Card.White,Card.Black
 SVar:Picture:http://www.wizards.com/global/images/magic/general/Voracious_Hatchling.jpg
 Oracle:Lifelink\nVoracious Hatchling enters the battlefield with four -1/-1 counters on it.\nWhenever you cast a white spell, remove a -1/-1 counter from Voracious Hatchling.\nWhenever you cast a black spell, remove a -1/-1 counter from Voracious Hatchling.
-SetInfo:EVE Uncommon

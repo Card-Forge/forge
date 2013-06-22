@@ -5,4 +5,3 @@ A:SP$ DestroyAll | Cost$ 2 B | ValidCards$ Creature.White | SpellDescription$ De
 SVar:RemRandomDeck:True
 SVar:Picture:http://serv2.tcgimages.eu/img/cards/Portal/virtues_ruin.jpg
 Oracle:Destroy all white creatures.
-SetInfo:POR Uncommon

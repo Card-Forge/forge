@@ -11,6 +11,3 @@ SVar:TrigDestroyBlocked:AB$Destroy | Cost$ 0 | Defined$ TriggeredAttacker
 SVar:TrigDestroyBlocker:AB$Destroy | Cost$ 0 | Defined$ TriggeredBlocker
 SVar:Picture:http://www.wizards.com/global/images/magic/general/venom.jpg
 Oracle:Enchant creature\nWhenever enchanted creature blocks or becomes blocked by a non-Wall creature, destroy the other creature at end of combat.
-SetInfo:5ED Common
-SetInfo:4ED Common
-SetInfo:DRK Common

@@ -4,4 +4,3 @@ Types:Sorcery
 A:SP$ Destroy | Cost$ B B R R R G G | TargetMin$ 3 | TargetMax$ 3 | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | SpellDescription$ Destroy three target permanents.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/violent_ultimatum.jpg
 Oracle:Destroy three target permanents.
-SetInfo:ALA Rare

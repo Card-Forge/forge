@@ -7,4 +7,3 @@ SVar:TrigGainLife:AB$GainLife | Cost$ 0 | LifeAmount$ X | References$ X
 SVar:X:Count$InYourHand
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vensers_journal.jpg
 Oracle:You have no maximum hand size.\nAt the beginning of your upkeep, you gain 1 life for each card in your hand.
-SetInfo:SOM Rare

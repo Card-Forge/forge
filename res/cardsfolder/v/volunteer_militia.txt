@@ -4,5 +4,3 @@ Types:Creature Human Soldier
 PT:1/2
 SVar:Picture:http://resources.wizards.com/magic/cards/pk/en-us/card10483.jpg
 Oracle:
-SetInfo:PO2 Common
-SetInfo:PTK Common

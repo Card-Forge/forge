@@ -6,4 +6,3 @@ SVar:TrigSearch:AB$ ChangeZone | Optional$ True  | Cost$ 0 | DefinedPlayer$ Trig
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/verdant_succession.jpg
 Oracle:Whenever a green nontoken creature dies, that creature's controller may search his or her library for a card with the same name as that creature and put it onto the battlefield. If that player does, he or she shuffles his or her library.
-SetInfo:ODY Rare

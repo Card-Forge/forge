@@ -6,4 +6,3 @@ A:AB$ ChangeZone | Cost$ 2 U T | ValidTgts$ Creature | TgtPrompt$ Select target 
 SVar:SelfBounce:DB$ ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 0 | Shuffle$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/void_stalker.jpg
 Oracle:{2}{U}, {T}: Put Void Stalker and target creature on top of their owners' libraries, then those players shuffle their libraries.
-SetInfo:M13 Rare

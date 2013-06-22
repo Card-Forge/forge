@@ -7,4 +7,3 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigUntap:AB$ UntapAll | Cost$ 0 | ValidCards$ Creature.YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/village_bell_ringer.jpg
 Oracle:Flash (You may cast this spell any time you could cast an instant.)\nWhen Village Bell-Ringer enters the battlefield, untap all creatures you control.
-SetInfo:ISD Common

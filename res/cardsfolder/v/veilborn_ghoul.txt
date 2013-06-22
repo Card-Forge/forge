@@ -8,4 +8,3 @@ SVar:TrigChange:AB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Hand
 SVar:DiscardMe:3
 SVar:Picture:http://www.wizards.com/global/images/magic/general/veilborn_ghoul.jpg
 Oracle:Veilborn Ghoul can't block.\nWhenever a Swamp enters the battlefield under your control, you may return Veilborn Ghoul from your graveyard to your hand.
-SetInfo:M13 Uncommon

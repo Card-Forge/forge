@@ -4,4 +4,3 @@ Types:Instant
 A:SP$ Destroy | Cost$ 2 G | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | SpellDescription$ Destroy target artifact.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/verdigris.jpg
 Oracle:Destroy target artifact.
-SetInfo:TMP Uncommon

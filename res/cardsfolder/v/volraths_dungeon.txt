@@ -6,4 +6,3 @@ A:AB$ ChangeZone | Cost$ Discard<1/Card> | ValidTgts$ Player | TgtPrompt$ Select
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/volraths_dungeon.jpg
 Oracle:Pay 5 life: Destroy Volrath's Dungeon. Any player may activate this ability but only during his or her turn.\nDiscard a card: Target player puts a card from his or her hand on top of his or her library. Activate this ability only any time you could cast a sorcery.
-SetInfo:EXO Rare

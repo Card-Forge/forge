@@ -8,4 +8,3 @@ SVar:BuffedBy:Card
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/veilstone_amulet.jpg
 Oracle:Whenever you cast a spell, creatures you control can't be the targets of spells or abilities your opponents control this turn.
-SetInfo:FUT Rare

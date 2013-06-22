@@ -8,4 +8,3 @@ A:AB$ Token | Cost$ SubCounter<3/SPORE> | TokenAmount$ 1 | TokenName$ Saproling 
 A:AB$ Pump | Cost$ Sac<1/Saproling> | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Haste | SpellDescription$ Target creature gains haste until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vitaspore_thallid.jpg
 Oracle:At the beginning of your upkeep, put a spore counter on Vitaspore Thallid.\nRemove three spore counters from Vitaspore Thallid: Put a 1/1 green Saproling creature token onto the battlefield.\nSacrifice a Saproling: Target creature gains haste until end of turn.
-SetInfo:PLC Common

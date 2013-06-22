@@ -8,4 +8,3 @@ SVar:TrigGainLife:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ 6
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/viridian_harvest.jpg
 Oracle:Enchant artifact\nWhen enchanted artifact is put into a graveyard, you gain 6 life.
-SetInfo:NPH Common

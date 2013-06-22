@@ -11,5 +11,3 @@ SVar:X:Count$CardCounters.PIN
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/voodoo_doll.jpg
 Oracle:At the beginning of your upkeep, put a pin counter on Voodoo Doll.\nAt the beginning of your end step, if Voodoo Doll is untapped, destroy Voodoo Doll and it deals damage to you equal to the number of pin counters on it.\n{X}{X}, {T}: Voodoo Doll deals damage equal to the number of pin counters on it to target creature or player. X is the number of pin counters on Voodoo Doll.
-SetInfo:CHR Rare
-SetInfo:LEG Rare

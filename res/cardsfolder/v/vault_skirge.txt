@@ -6,4 +6,3 @@ K:Flying
 K:Lifelink
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vault_skirge.jpg
 Oracle:({B/P} can be paid with either {B} or 2 life.)\nFlying\nLifelink (Damage dealt by this creature also causes you to gain that much life.)
-SetInfo:NPH Common

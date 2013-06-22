@@ -5,4 +5,3 @@ PT:4/3
 A:AB$ Pump | Cost$ U B | NumAtt$ -2 | KW$ HIDDEN Unblockable | SpellDescription$ CARDNAME gets -2/-0 until end of turn and is unblockable this turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vectis_agents.jpg
 Oracle:{U}{B}: Vectis Agents gets -2/-0 until end of turn and is unblockable this turn.
-SetInfo:CFX Common

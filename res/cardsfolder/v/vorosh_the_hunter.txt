@@ -7,5 +7,3 @@ T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | CombatDama
 SVar:TrigPutCounter:AB$PutCounter | Cost$ 2 G | Defined$ Self | CounterType$ P1P1 | CounterNum$ 6
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vorosh_the_hunter.jpg
 Oracle:Flying\nWhenever Vorosh, the Hunter deals combat damage to a player, you may pay {2}{G}. If you do, put six +1/+1 counters on Vorosh.
-SetInfo:COM Rare
-SetInfo:PLC Rare

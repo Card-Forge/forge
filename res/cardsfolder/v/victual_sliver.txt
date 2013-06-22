@@ -7,5 +7,3 @@ SVar:GainLife:AB$GainLife | Cost$ 2 Sac<1/CARDNAME> | LifeAmount$ 4 | Defined$ Y
 SVar:BuffedBy:Sliver
 SVar:Picture:http://www.wizards.com/global/images/magic/general/victual_sliver.jpg
 Oracle:All Slivers have "{2}, Sacrifice this permanent: You gain 4 life."
-SetInfo:H09 Uncommon
-SetInfo:STH Uncommon

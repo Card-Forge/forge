@@ -7,4 +7,3 @@ SVar:TrigDraw:AB$Draw | Cost$ 0 | NumCards$ 1 | SubAbility$ DBDiscard
 SVar:DBDiscard:DB$Discard | Defined$ You | Mode$ TgtChoose | NumCards$ 1
 SVar:Picture:http://resources.wizards.com/magic/cards/in/en-us/card26296.jpg
 Oracle:When Vodalian Merchant enters the battlefield, draw a card, then discard a card.
-SetInfo:INV Common

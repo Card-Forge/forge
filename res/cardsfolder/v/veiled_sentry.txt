@@ -6,4 +6,3 @@ SVar:TrigAnimate:AB$ Animate | Cost$ 0 | Defined$ Self | Power$ X | Toughness$ X
 SVar:X:TriggeredCard$CardManaCost
 SVar:Picture:http://www.wizards.com/global/images/magic/general/veiled_sentry.jpg
 Oracle:When an opponent casts a spell, if Veiled Sentry is an enchantment, Veiled Sentry becomes an Illusion creature with power and toughness each equal to that spell's converted mana cost.
-SetInfo:USG Uncommon

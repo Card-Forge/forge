@@ -7,5 +7,3 @@ SVar:TrigLoseLife:AB$LoseLife | Cost$ 0 | Defined$ You | LifeAmount$ 1 | Conditi
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vampire_lacerator.jpg
 Oracle:At the beginning of your upkeep, you lose 1 life unless an opponent has 10 or less life.
-SetInfo:DDK Common
-SetInfo:ZEN Common

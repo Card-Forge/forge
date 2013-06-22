@@ -5,4 +5,3 @@ PT:1/2
 A:AB$ Pump | Cost$ R | NumAtt$ +1 | NumDef$ -1 | SpellDescription$ CARDNAME gets +1/-1 until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/viashino_slasher.jpg
 Oracle:{R}: Viashino Slasher gets +1/-1 until end of turn.
-SetInfo:RAV Common

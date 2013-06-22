@@ -8,4 +8,3 @@ SVar:Regen:AB$Regenerate | Cost$ B | SpellDescription$ Regenerate CARDNAME.
 SVar:X:Count$Valid Demon.YouCtrl
 SVar:Picture:http://resources.wizards.com/magic/cards/chk/en-us/card80520.jpg
 Oracle:Villainous Ogre can't block.\nAs long as you control a Demon, Villainous Ogre has "{B}: Regenerate Villainous Ogre."
-SetInfo:CHK Common

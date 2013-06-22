@@ -6,4 +6,3 @@ S:Mode$ Continuous | Affected$ Creature.Soldier+YouCtrl+Other | AddPower$ 1 | De
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/veteran_swordsmith.jpg
 Oracle:Other Soldier creatures you control get +1/+0.
-SetInfo:M10 Common

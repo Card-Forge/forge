@@ -8,4 +8,3 @@ SVar:TrigAttachAll:AB$ RepeatEach | Cost$ 0 | RepeatSubAbility$ DBAttach | Repea
 SVar:DBAttach:DB$ Attach | Object$ Remembered | Defined$ TriggeredCard
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vulshok_battlemaster.jpg
 Oracle:Haste\nWhen Vulshok Battlemaster enters the battlefield, attach all Equipment on the battlefield to it. (Control of the Equipment doesn't change.)
-SetInfo:MRD Rare

@@ -8,4 +8,3 @@ SVar:DBMana:DB$ Mana | Produced$ G | Amount$ 3 | Defined$ ChosenPlayer
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/valleymaker.jpg
 Oracle:{T}, Sacrifice a Mountain: Valleymaker deals 3 damage to target creature.\n{T}, Sacrifice a Forest: Choose a player. That player adds {G}{G}{G} to his or her mana pool.
-SetInfo:SHM Rare

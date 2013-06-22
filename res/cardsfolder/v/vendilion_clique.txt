@@ -10,4 +10,3 @@ SVar:DBDraw:DB$ Draw | Defined$ Targeted | NumCards$ 1 | SubAbility$ DBCleanup |
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vendilion_clique.jpg
 Oracle:Flash\nFlying\nWhen Vendilion Clique enters the battlefield, look at target player's hand. You may choose a nonland card from it. If you do, that player reveals the chosen card, puts it on the bottom of his or her library, then draws a card.
-SetInfo:MOR Rare

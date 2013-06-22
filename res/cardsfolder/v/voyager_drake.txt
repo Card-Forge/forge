@@ -9,4 +9,3 @@ SVar:TrigFlying:AB$Pump | Cost$ 0 | ValidTgts$ Creature | TargetMin$ 0 | TargetM
 SVar:X:Count$TimesKicked
 SVar:Picture:http://www.wizards.com/global/images/magic/general/Voyager_Drake.jpg
 Oracle:Multikicker {U} (You may pay an additional {U} any number of times as you cast this spell.)\nFlying\nWhen Voyager Drake enters the battlefield, up to X target creatures gain flying until end of turn, where X is the number of times Voyager Drake was kicked.
-SetInfo:WWK Uncommon

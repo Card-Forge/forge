@@ -12,4 +12,3 @@ SVar:TrigFlipDamage:AB$ FlipACoin | Cost$ 0 | LoseSubAbility$ DBDamage
 SVar:DBDamage:DB$ DamageAll | ValidCards$ Creature | ValidPlayers$ Each | NumDmg$ 4 | ValidDescription$ each creature and each player.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/volatile_rig.jpg
 Oracle:Trample\nVolatile Rig attacks each turn if able.\nWhenever Volatile Rig is dealt damage, flip a coin. If you lose the flip, sacrifice Volatile Rig.\nWhen Volatile Rig dies, flip a coin. If you lose the flip, it deals 4 damage to each creature and each player.
-SetInfo:RTR Rare

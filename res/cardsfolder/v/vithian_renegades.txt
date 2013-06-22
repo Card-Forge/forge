@@ -6,4 +6,3 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigDestroy:DB$Destroy | ValidTgts$ Artifact | TgtPrompt$ Select target artifact.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vithian_renegades.jpg
 Oracle:When Vithian Renegades enters the battlefield, destroy target artifact.
-SetInfo:ARB Uncommon

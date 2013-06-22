@@ -7,4 +7,3 @@ SVar:X:TargetedPlayer$CardsInHand
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vicious_shadows.jpg
 Oracle:Whenever a creature dies, you may have Vicious Shadows deal damage to target player equal to the number of cards in that player's hand.
-SetInfo:ALA Rare

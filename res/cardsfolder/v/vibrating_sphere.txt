@@ -6,4 +6,3 @@ S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddToughness$ -2 | Condition$ 
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vibrating_sphere.jpg
 Oracle:As long as it's your turn, creatures you control get +2/+0.\nAs long as it's not your turn, creatures you control get -0/-2.
-SetInfo:ICE Rare

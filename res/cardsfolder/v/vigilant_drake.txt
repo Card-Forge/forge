@@ -6,5 +6,3 @@ K:Flying
 A:AB$ Untap | Cost$ 2 U | SpellDescription$ Untap CARDNAME.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vigilant_drake.jpg
 Oracle:Flying\n{2}{U}: Untap Vigilant Drake.
-SetInfo:ULG Common
-SetInfo:7ED Common

@@ -6,4 +6,3 @@ SVar:Permanent:DB$ChangeZone | ValidTgts$ Permanent.nonLand | TgtPrompt$ Choose 
 SVar:Suspended:DB$ChangeZone | ValidTgts$ Card.suspended | TgtPrompt$ Choose target suspended card. | Origin$ Exile | Destination$ Hand | SpellDescription$ Target suspended card
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vensers_diffusion.jpg
 Oracle:Return target nonland permanent or suspended card to its owner's hand.
-SetInfo:FUT Common

@@ -7,5 +7,3 @@ SVar:ExchangePlots:AB$ ExchangeControl | Cost$ 0 | ValidTgts$ Land | TgtPrompt$ 
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vedalken_plotter.jpg
 Oracle:When Vedalken Plotter enters the battlefield, exchange control of target land you control and target land an opponent controls.
-SetInfo:GPT Uncommon
-SetInfo:COM Uncommon

@@ -6,4 +6,3 @@ A:AB$ Pump | Cost$ 0 | KW$ CantBeBlockedBy Creature.nonWall & HIDDEN At the begi
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/varchilds_crusader.jpg
 Oracle:{0}: Varchild's Crusader can't be blocked this turn except by Walls. Sacrifice Varchild's Crusader at the beginning of the next end step.
-SetInfo:ALL Common x2

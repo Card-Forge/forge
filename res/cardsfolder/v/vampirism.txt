@@ -12,4 +12,3 @@ SVar:X:Count$Valid Creature.YouCtrl
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vampirism.jpg
 Oracle:Enchant creature\nWhen Vampirism enters the battlefield, draw a card at the beginning of the next turn's upkeep.\nEnchanted creature gets +1/+1 for each other creature you control.\nOther creatures you control get -1/-1.
-SetInfo:VIS Uncommon

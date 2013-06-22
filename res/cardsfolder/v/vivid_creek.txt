@@ -7,7 +7,3 @@ A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add U to your mana pool.
 A:AB$ Mana | Cost$ T SubCounter<1/CHARGE> | Produced$ Any | SpellDescription$ Add one mana of any color to your mana pool.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vivid_creek.jpg
 Oracle:Vivid Creek enters the battlefield tapped with two charge counters on it.\n{T}: Add {U} to your mana pool.\n{T}, Remove a charge counter from Vivid Creek: Add one mana of any color to your mana pool.
-SetInfo:PC2 Uncommon
-SetInfo:H09 Uncommon
-SetInfo:COM Uncommon
-SetInfo:LRW Uncommon

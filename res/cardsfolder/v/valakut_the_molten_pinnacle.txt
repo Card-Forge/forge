@@ -7,4 +7,3 @@ SVar:TrigDamage:AB$DealDamage | Cost$ 0 | ValidTgts$ Creature,Player | TgtPrompt
 A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add R to your mana pool.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/valakut_the_molten_pinnacle.jpg
 Oracle:Valakut, the Molten Pinnacle enters the battlefield tapped.\nWhenever a Mountain enters the battlefield under your control, if you control at least five other Mountains, you may have Valakut, the Molten Pinnacle deal 3 damage to target creature or player.\n{T}: Add {R} to your mana pool.
-SetInfo:ZEN Rare

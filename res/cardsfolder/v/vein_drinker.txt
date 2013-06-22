@@ -10,4 +10,3 @@ SVar:X:Count$CardPower
 SVar:Y:Targeted$CardPower
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vein_drinker.jpg
 Oracle:Flying\n{R}, {T}: Vein Drinker deals damage equal to its power to target creature. That creature deals damage equal to its power to Vein Drinker.\nWhenever a creature dealt damage by Vein Drinker this turn dies, put a +1/+1 counter on Vein Drinker.
-SetInfo:ALA Rare

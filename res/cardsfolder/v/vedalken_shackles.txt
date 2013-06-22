@@ -8,4 +8,3 @@ SVar:RemRandomDeck:True
 DeckNeeds:Color$Blue
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vedalken_shackles.jpg
 Oracle:You may choose not to untap Vedalken Shackles during your untap step.\n{2}, {T}: Gain control of target creature with power less than or equal to the number of Islands you control for as long as Vedalken Shackles remains tapped.
-SetInfo:5DN Rare

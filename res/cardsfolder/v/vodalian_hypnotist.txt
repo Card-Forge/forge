@@ -7,4 +7,3 @@ SVar:RemRandomDeck:True
 DeckNeeds:Color$Black
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vodalian_hypnotist.jpg
 Oracle:{2}{B}, {T}: Target player discards a card. Activate this ability only any time you could cast a sorcery.
-SetInfo:INV Uncommon

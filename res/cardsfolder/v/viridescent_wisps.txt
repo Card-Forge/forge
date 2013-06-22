@@ -6,4 +6,3 @@ SVar:DBDraw:DB$Draw | SubAbility$ DBGreen | NumCards$ 1
 SVar:DBGreen:DB$Animate | Colors$ Green | OverwriteColors$ True | Defined$ Targeted
 SVar:Picture:http://www.wizards.com/global/images/magic/general/viridescent_wisps.jpg
 Oracle:Target creature becomes green and gets +1/+0 until end of turn.\nDraw a card.
-SetInfo:SHM Common

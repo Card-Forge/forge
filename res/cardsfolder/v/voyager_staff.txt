@@ -7,4 +7,3 @@ SVar:TrigReturn:AB$ChangeZone | Cost$ 0 | Origin$ Exile | Destination$ Battlefie
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/voyager_staff.jpg
 Oracle:{2}, Sacrifice Voyager Staff: Exile target creature. Return the exiled card to the battlefield under its owner's control at the beginning of the next end step.
-SetInfo:RAV Uncommon

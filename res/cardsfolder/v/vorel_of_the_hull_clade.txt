@@ -7,4 +7,3 @@ SVar:DoubleCounters:DB$ PutCounter | Defined$ Targeted | CounterType$ RepeatSVar
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vorel_of_the_hull_clade.jpg
 Oracle:{G}{U}, {T}: For each counter on target artifact, creature, or land, put another of those counters on that permanent.
-SetInfo:DGM Rare

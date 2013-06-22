@@ -5,4 +5,3 @@ A:SP$ DealDamage | Cost$ 1 R R R | ValidTgts$ Creature,Player | TgtPrompt$ Selec
 K:Madness:1 R R
 SVar:Picture:http://www.wizards.com/global/images/magic/general/violent_eruption.jpg
 Oracle:Violent Eruption deals 4 damage divided as you choose among any number of target creatures and/or players.\nMadness {1}{R}{R} (If you discard this card, you may cast it for its madness cost instead of putting it into your graveyard.)
-SetInfo:TOR Uncommon

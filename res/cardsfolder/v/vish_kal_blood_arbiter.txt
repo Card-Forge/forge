@@ -11,4 +11,3 @@ SVar:X:SVar$CostCountersRemoved
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vish_kal_blood_arbiter.jpg
 Oracle:Flying, lifelink\nSacrifice a creature: Put X +1/+1 counters on Vish Kal, Blood Arbiter, where X is the sacrificed creature's power.\nRemove all +1/+1 counters from Vish Kal: Target creature gets -1/-1 until end of turn for each +1/+1 counter removed this way.
-SetInfo:COM Rare

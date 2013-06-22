@@ -5,4 +5,3 @@ A:SP$ DealDamage | Cost$ 2 B | ValidTgts$ Opponent | NumDmg$ 2 | SubAbility$ DBG
 SVar:DBGainLife:DB$GainLife | LifeAmount$ 2
 SVar:Picture:http://resources.wizards.com/magic/cards/po/en-us/card4244.jpg
 Oracle:Vampiric Touch deals 2 damage to target opponent and you gain 2 life.
-SetInfo:POR Common

@@ -5,4 +5,3 @@ T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ Opponent | TriggerZ
 SVar:TrigAnimate:AB$Animate | Cost$ 0 | Defined$ Self | Power$ 1 | Toughness$ 1 | Keywords$ Flying | Types$ Creature,Bird | OverwriteTypes$ True | Permanent$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/veil_of_birds.jpg
 Oracle:When an opponent casts a spell, if Veil of Birds is an enchantment, Veil of Birds becomes a 1/1 Bird creature with flying.
-SetInfo:USG Common

@@ -6,5 +6,3 @@ A:AB$ Token | Cost$ tapXType<5/Elf> | TokenOwner$ You | TokenAmount$ 1 | TokenNa
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/voice_of_the_woods.jpg
 Oracle:Tap five untapped Elves you control: Put a 7/7 green Elemental creature token with trample onto the battlefield.
-SetInfo:ONS Rare
-SetInfo:EVG Rare

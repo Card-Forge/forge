@@ -5,4 +5,3 @@ A:SP$ PutCounter | Cost$ B | ValidTgts$ Creature | TgtPrompt$ Select target crea
 SVar:DB:DB$Pump | KW$ HIDDEN If CARDNAME is put into a graveyard this turn, its controller gets a poison counter. | Defined$ Targeted
 SVar:Picture:http://www.wizards.com/global/images/magic/general/virulent_wound.jpg
 Oracle:Put a -1/-1 counter on target creature. When that creature dies this turn, its controller gets a poison counter.
-SetInfo:MBS Common

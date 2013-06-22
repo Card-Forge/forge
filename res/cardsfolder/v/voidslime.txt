@@ -4,4 +4,3 @@ Types:Instant
 A:SP$ Counter | Cost$ G U U | TargetType$ Spell,Activated,Triggered | TgtPrompt$ Select target spell or ability | ValidTgts$ Card | SpellDescription$ Counter target spell, activated ability, or triggered ability.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/voidslime.jpg
 Oracle:Counter target spell, activated ability, or triggered ability. (Mana abilities can't be targeted.)
-SetInfo:DIS Rare

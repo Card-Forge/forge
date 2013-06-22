@@ -7,4 +7,3 @@ SVar:DBDamage:DB$DealDamage | Defined$ TargetedController | NumDmg$ X
 SVar:X:Targeted$CardManaCost
 SVar:Picture:http://www.wizards.com/global/images/magic/general/viashino_heretic.jpg
 Oracle:{1}{R}, {T}: Destroy target artifact. Viashino Heretic deals damage to that artifact's controller equal to the artifact's converted mana cost.
-SetInfo:ULG Uncommon

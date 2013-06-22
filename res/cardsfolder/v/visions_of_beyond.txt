@@ -5,4 +5,3 @@ A:SP$ Draw | Cost$ U | NumCards$ X | References$ X | SpellDescription$ Draw a ca
 SVar:X:Count$GraveyardWithGE20Cards.3.1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/visions_of_beyond.jpg
 Oracle:Draw a card. If a graveyard has twenty or more cards in it, draw three cards instead.
-SetInfo:M12 Rare

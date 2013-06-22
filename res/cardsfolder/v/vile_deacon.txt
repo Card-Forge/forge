@@ -7,4 +7,3 @@ SVar:TrigPump:AB$ Pump | Cost$ 0 | Defined$ Self | NumAtt$ X | NumDef$ X | Refer
 SVar:X:Count$Valid Cleric
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vile_deacon.jpg
 Oracle:Whenever Vile Deacon attacks, it gets +X/+X until end of turn, where X is the number of Clerics on the battlefield.
-SetInfo:LGN Common

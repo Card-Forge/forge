@@ -7,4 +7,3 @@ S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 3 | AddToughness$ 3 | Check
 SVar:X:Count$Valid Creature.OppCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vexing_beetle.jpg
 Oracle:Vexing Beetle can't be countered.\nVexing Beetle gets +3/+3 as long as no opponent controls a creature.
-SetInfo:LGN Rare

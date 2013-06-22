@@ -7,4 +7,3 @@ S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 1 | AddToughness
 A:AB$ ChangeZone | Cost$ 1 U | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return CARDNAME to its owner's hand.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/viscerid_armor.jpg
 Oracle:Enchant creature\nEnchanted creature gets +1/+1.\n{1}{U}: Return Viscerid Armor to its owner's hand.
-SetInfo:ALL Common x2

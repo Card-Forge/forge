@@ -5,4 +5,3 @@ S:Mode$ Continuous | Affected$ You | AddKeyword$ You may cast nonland cards as t
 SVar:NonStackingEffect:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vedalken_orrery.jpg
 Oracle:You may cast nonland cards as though they had flash.
-SetInfo:5DN Rare

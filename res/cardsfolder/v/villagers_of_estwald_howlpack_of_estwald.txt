@@ -19,4 +19,3 @@ T:Mode$Phase | Phase$ Upkeep | WerewolfUntransformCondition$ True | TriggerZones
 SVar:TrigTransform:AB$SetState | Cost$ 0 | Defined$ Self | Mode$ Transform
 SVar:Picture:http://www.wizards.com/global/images/magic/general/howlpack_of_estwald.jpg
 Oracle:At the beginning of each upkeep, if a player cast two or more spells last turn, transform Howlpack of Estwald.
-SetInfo:ISD Common

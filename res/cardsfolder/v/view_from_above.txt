@@ -5,4 +5,3 @@ A:SP$ Pump | Cost$ 1 U | ValidTgts$ Creature | TgtPrompt$ Select target creature
 SVar:DBBounce:DB$ChangeZone | Origin$ Stack | Destination$ Hand | ConditionPresent$ Permanent.White+YouCtrl | ConditionCompare$ GE1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/view_from_above.jpg
 Oracle:Target creature gains flying until end of turn. If you control a white permanent, return View from Above to its owner's hand.
-SetInfo:CFX Uncommon

@@ -9,4 +9,3 @@ SVar:TrigSubCounter:AB$RemoveCounter | Cost$ 0 | Defined$ Self | CounterType$ DE
 SVar:AddCounter:DB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ DEPLETION | CounterNum$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/veldt.jpg
 Oracle:Veldt doesn't untap during your untap step if it has a depletion counter on it.\nAt the beginning of your upkeep, remove a depletion counter from Veldt.\n{T}: Add {G} or {W} to your mana pool. Put a depletion counter on Veldt.
-SetInfo:ICE Rare

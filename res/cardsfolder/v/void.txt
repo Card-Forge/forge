@@ -8,5 +8,3 @@ SVar:X:Number$ChosenNumber
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/void.jpg
 Oracle:Choose a number. Destroy all artifacts and creatures with converted mana cost equal to that number. Then target player reveals his or her hand and discards all nonland cards with converted mana cost equal to the number.
-SetInfo:TSB Special
-SetInfo:INV Rare

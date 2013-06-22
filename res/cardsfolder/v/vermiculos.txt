@@ -8,4 +8,3 @@ SVar:BuffedBy:Artifact
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vermiculos.jpg
 Oracle:Whenever an artifact enters the battlefield, Vermiculos gets +4/+4 until end of turn.
-SetInfo:MRD Rare

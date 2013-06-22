@@ -6,5 +6,3 @@ S:Mode$ Continuous | Affected$ Creature.Sliver | AddKeyword$ Poisonous 1 | Descr
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/virulent_sliver.jpg
 Oracle:All Sliver creatures have poisonous 1. (Whenever a Sliver deals combat damage to a player, that player gets a poison counter. A player with ten or more poison counters loses the game.)
-SetInfo:FUT Common
-SetInfo:H09 Common

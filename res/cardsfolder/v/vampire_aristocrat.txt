@@ -5,4 +5,3 @@ PT:2/2
 A:AB$ Pump | Cost$ Sac<1/Creature> | NumAtt$ +2 | NumDef$ +2 | SpellDescription$ CARDNAME gets +2/+2 until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vampire_aristocrat.jpg
 Oracle:Sacrifice a creature: Vampire Aristocrat gets +2/+2 until end of turn.
-SetInfo:M10 Common

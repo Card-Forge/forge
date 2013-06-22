@@ -12,4 +12,3 @@ SVar:Assassination:DB$ LosesGame | Defined$ TriggeredTarget
 SVar:MustBeBlocked:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vraska_the_unseen.jpg
 Oracle:[+1] Until your next turn, whenever a creature deals combat damage to Vraska the Unseen, destroy that creature.\n[-3] Destroy target nonland permanent.\n[-7] Put three 1/1 black Assassin creature tokens onto the battlefield with "Whenever this creature deals combat damage to a player, that player loses the game."
-SetInfo:RTR Mythic

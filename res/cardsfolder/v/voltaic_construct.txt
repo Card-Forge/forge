@@ -6,4 +6,3 @@ A:AB$ Untap | Cost$ 2 | ValidTgts$ Creature.Artifact | TgtPrompt$ Select target 
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/voltaic_construct.jpg
 Oracle:{2}: Untap target artifact creature.
-SetInfo:DST Uncommon

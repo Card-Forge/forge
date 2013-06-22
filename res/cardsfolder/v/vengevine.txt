@@ -8,4 +8,3 @@ SVar:TrigReturn:AB$ChangeZone | Cost$ 0 | Defined$ Self | Origin$ Graveyard | De
 SVar:X:Count$ThisTurnCast_Creature.YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vengevine.jpg
 Oracle:Haste\nWhenever you cast a spell, if it's the second creature spell you cast this turn, you may return Vengevine from your graveyard to the battlefield.
-SetInfo:ROE Mythic

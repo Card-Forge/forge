@@ -5,4 +5,3 @@ PT:0/2
 A:AB$ Tap | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | UnlessCost$ PayLife<2> | UnlessPayer$ TargetedController | SpellDescription$ Tap target creature unless its controller pays 2 life.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vectis_dominator.jpg
 Oracle:{T}: Tap target creature unless its controller pays 2 life.
-SetInfo:ARB Common

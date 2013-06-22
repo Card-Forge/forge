@@ -5,4 +5,3 @@ A:SP$ Pump | Cost$ W | ValidTgts$ Creature | TgtPrompt$ Select target creature |
 SVar:DBUntap:DB$Untap | Defined$ Targeted
 SVar:Picture:http://www.wizards.com/global/images/magic/general/veterans_reflexes.jpg
 Oracle:Target creature gets +1/+1 until end of turn. Untap that creature.
-SetInfo:WWK Common

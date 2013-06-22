@@ -8,4 +8,3 @@ A:AB$ Pump | Cost$ RG | ValidTgts$ Card.inZoneStack | TgtZone$ Stack,Battlefield
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vexing_shusher.jpg
 Oracle:Vexing Shusher can't be countered.\n{R/G}: Target spell can't be countered by spells or abilities.
-SetInfo:SHM Rare

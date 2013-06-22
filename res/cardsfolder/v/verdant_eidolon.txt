@@ -8,4 +8,3 @@ SVar:TrigReturn:AB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Hand 
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/verdant_eidolon.jpg
 Oracle:{G}, Sacrifice Verdant Eidolon: Add three mana of any one color to your mana pool.\nWhenever you cast a multicolored spell, you may return Verdant Eidolon from your graveyard to your hand.
-SetInfo:DIS Common

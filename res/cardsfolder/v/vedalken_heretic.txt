@@ -6,4 +6,3 @@ T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | OptionalDe
 SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vedalken_heretic.jpg
 Oracle:Whenever Vedalken Heretic deals damage to an opponent, you may draw a card.
-SetInfo:ARB Rare

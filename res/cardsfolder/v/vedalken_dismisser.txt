@@ -6,4 +6,3 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigChangeZone:DB$ChangeZone | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 0
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vedalken_dismisser.jpg
 Oracle:When Vedalken Dismisser enters the battlefield, put target creature on top of its owner's library.
-SetInfo:RAV Common

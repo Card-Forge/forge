@@ -7,4 +7,3 @@ SVar:X:Count$Valid Land.YouCtrl+untapped
 SVar:BuffedBy:Card.nonLand
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vintara_snapper.jpg
 Oracle:Vintara Snapper has shroud as long as you control no untapped lands. (It can't be the target of spells or abilities.)
-SetInfo:PCY Uncommon

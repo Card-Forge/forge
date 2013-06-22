@@ -8,4 +8,3 @@ SVar:RemRandomDeck:True
 DeckNeeds:Type$Artifact
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vedalken_archmage.jpg
 Oracle:Whenever you cast an artifact spell, draw a card.
-SetInfo:MRD Rare

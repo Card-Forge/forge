@@ -7,4 +7,3 @@ SVar:X:Count$Valid Artifact.OppCtrl
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/viridian_lorebearers.jpg
 Oracle:{3}{G}, {T}: Target creature gets +X/+X until end of turn, where X is the number of artifacts your opponents control.
-SetInfo:5DN Uncommon

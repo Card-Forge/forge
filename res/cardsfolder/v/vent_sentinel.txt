@@ -7,4 +7,3 @@ A:AB$ DealDamage | Cost$ 1 R T | ValidTgts$ Player | TgtPrompt$ Select target pl
 SVar:X:Count$Valid Creature.withDefender+YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vent_sentinel.jpg
 Oracle:Defender\n{1}{R}, {T}: Vent Sentinel deals damage to target player equal to the number of creatures with defender you control.
-SetInfo:ROE Common

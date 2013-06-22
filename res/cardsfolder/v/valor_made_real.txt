@@ -5,4 +5,3 @@ A:SP$ Pump | Cost$ W | ValidTgts$ Creature | TgtPrompt$ Select target creature |
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/valor_made_real.jpg
 Oracle:Target creature can block any number of creatures this turn.
-SetInfo:DIS Common

@@ -7,4 +7,3 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigPump:DB$ Pump | Cost$ 0 | NumAtt$ +2 | NumDef$ +2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/viashino_firstblade.jpg
 Oracle:Haste\nWhen Viashino Firstblade enters the battlefield, it gets +2/+2 until end of turn.
-SetInfo:DGM Common

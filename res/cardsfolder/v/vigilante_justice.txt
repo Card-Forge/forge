@@ -6,4 +6,3 @@ SVar:AndJusticeForAll:DB$ DealDamage | ValidTgts$ Creature,Player | TgtPrompt$ S
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vigilante_justice.jpg
 Oracle:Whenever a Human enters the battlefield under your control, Vigilante Justice deals 1 damage to target creature or player.
-SetInfo:AVR Uncommon

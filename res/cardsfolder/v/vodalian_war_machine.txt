@@ -14,4 +14,3 @@ T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ 
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vodalian_war_machine.jpg
 Oracle:Defender (This creature can't attack.)\nTap an untapped Merfolk you control: Vodalian War Machine can attack this turn as though it didn't have defender.\nTap an untapped Merfolk you control: Vodalian War Machine gets +2/+1 until end of turn.\nWhen Vodalian War Machine dies, destroy all Merfolk tapped this turn to pay for its abilities.
-SetInfo:FEM Rare

@@ -8,5 +8,3 @@ SVar:X:Count$Valid Plains.YouCtrl
 SVar:DiscardMe:2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/valor.jpg
 Oracle:First strike\nAs long as Valor is in your graveyard and you control a Plains, creatures you control have first strike.
-SetInfo:TSB Special
-SetInfo:JUD Uncommon

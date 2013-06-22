@@ -5,4 +5,3 @@ A:SP$ Destroy | Cost$ R | ValidTgts$ Artifact.YouDontCtrl | TgtPrompt$ Select ta
 A:SP$ DestroyAll | Cost$ 4 R | ValidCards$ Artifact.YouDontCtrl | PrecostDesc$ Overload | CostDesc$ 4 R | NonBasicSpell$ True | StackDescription$ Overload (Destroy each artifact you don't control.) | SpellDescription$ (You may cast this spell for its overload cost. If you do, change its text by replacing all instances of "target" with "each.".)
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vandalblast.jpg
 Oracle:Destroy target artifact you don't control.\nOverload {4}{R} (You may cast this spell for its overload cost. If you do, change its text by replacing all instances of "target" with "each.".)
-SetInfo:RTR Uncommon

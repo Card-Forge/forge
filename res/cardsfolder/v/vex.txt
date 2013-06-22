@@ -6,4 +6,3 @@ SVar:DBDraw:DB$Draw | Defined$ TargetedController | NumCards$ 1 | OptionalDecide
 #believe it or not, the OptionalDecider thing works.  I wouldn't have believed it if I wouldn't have tested it myself.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vex.jpg
 Oracle:Counter target spell. That spell's controller may draw a card.
-SetInfo:DST Common

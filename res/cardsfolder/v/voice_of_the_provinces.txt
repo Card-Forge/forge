@@ -7,4 +7,3 @@ T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefi
 SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Human | TokenTypes$ Creature,Human | TokenOwner$ You | TokenPower$ 1 | TokenToughness$ 1 | TokenColors$ White | TokenImage$ w 1 1 human avr
 SVar:Picture:http://www.wizards.com/global/images/magic/general/voice_of_the_provinces.jpg
 Oracle:Flying\nWhen Voice of the Provinces enters the battlefield, put a 1/1 white Human creature token onto the battlefield.
-SetInfo:AVR Common

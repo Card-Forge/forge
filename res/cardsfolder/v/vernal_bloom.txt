@@ -6,6 +6,3 @@ SVar:TrigMana:AB$ Mana | Cost$ 0 | Produced$ G | Amount$ 1 | Defined$ TriggeredP
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vernal_bloom.jpg
 Oracle:Whenever a Forest is tapped for mana, its controller adds {G} to his or her mana pool (in addition to the mana the land produces).
-SetInfo:8ED Rare
-SetInfo:7ED Rare
-SetInfo:USG Rare

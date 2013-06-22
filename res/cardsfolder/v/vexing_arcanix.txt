@@ -8,5 +8,3 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vexing_arcanix.jpg
 Oracle:{3}, {T}: Target player names a card, then reveals the top card of his or her library. If it's the named card, the player puts it into his or her hand. Otherwise, the player puts it into his or her graveyard and Vexing Arcanix deals 2 damage to him or her.
-SetInfo:ICE Rare
-SetInfo:8ED Rare

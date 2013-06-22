@@ -11,4 +11,3 @@ SVar:BouncePermanent:DB$ChangeZone | ValidTgts$ Permanent | TgtPrompt$ Select ta
 SVar:X:Count$SpellsOnStack
 SVar:Picture:http://www.wizards.com/global/images/magic/general/venser_shaper_savant.jpg
 Oracle:Flash (You may cast this spell any time you could cast an instant.)\nWhen Venser, Shaper Savant enters the battlefield, return target spell or permanent to its owner's hand.
-SetInfo:FUT Rare

@@ -7,4 +7,3 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
 SVar:Picture:http://www.wizards.com/global/images/magic/general/victimize.jpg
 Oracle:Choose two target creature cards in your graveyard. Sacrifice a creature. If you do, return the chosen cards to the battlefield tapped.
-SetInfo:USG Uncommon

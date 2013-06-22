@@ -6,5 +6,3 @@ SVar:DBLoseLife:DB$LoseLife | LifeAmount$ 2
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vampiric_tutor.jpg
 Oracle:Search your library for a card, then shuffle your library and put that card on top of it. You lose 2 life.
-SetInfo:VIS Rare
-SetInfo:6ED Rare

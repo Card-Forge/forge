@@ -6,4 +6,3 @@ SVar:DBGain3:DB$GainLife | LifeAmount$ 3 | Defined$ You
 SVar:X:Count$xPaid
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vitalizing_cascade.jpg
 Oracle:You gain X plus 3 life.
-SetInfo:MIR Uncommon

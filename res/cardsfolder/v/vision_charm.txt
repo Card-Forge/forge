@@ -12,4 +12,3 @@ SVar:PhaseArtifact:DB$ Phases | ValidTgts$ Artifact | TgtPrompt$ Choose a artifa
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vision_charm.jpg
 Oracle:Choose one - Target player puts the top four cards of his or her library into his or her graveyard; or choose a land type and a basic land type, and each land of the first chosen type becomes the second chosen type until end of turn; or target artifact phases out. (While it's phased out, it's treated as though it doesn't exist. It phases in before its controller untaps during his or her next untap step.)
-SetInfo:VIS Common

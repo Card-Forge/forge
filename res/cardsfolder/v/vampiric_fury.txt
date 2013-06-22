@@ -5,4 +5,3 @@ A:SP$ PumpAll | Cost$ 1 R | NumAtt$ +2 | NumDef$ +0 | KW$ First Strike | ValidCa
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vampiric_fury.jpg
 Oracle:Vampire creatures you control get +2/+0 and gain first strike until end of turn.
-SetInfo:ISD Common

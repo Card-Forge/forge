@@ -6,5 +6,3 @@ SVar:DBLoseLife:DB$LoseLife | Defined$ You | LifeAmount$ X
 SVar:X:Targeted$CardToughness
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vendetta.jpg
 Oracle:Destroy target nonblack creature. It can't be regenerated. You lose life equal to that creature's toughness.
-SetInfo:MMQ Common
-SetInfo:ROE Common

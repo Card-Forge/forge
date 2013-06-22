@@ -5,4 +5,3 @@ A:SP$ Destroy | Cost$ 4 R | ValidTgts$ Artifact,Land | TgtPrompt$ Select target 
 SVar:DBDrain:DB$LoseLife | Defined$ TargetedController | LifeAmount$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/victorious_destruction.jpg
 Oracle:Destroy target artifact or land. Its controller loses 1 life.
-SetInfo:NPH Common

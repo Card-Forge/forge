@@ -7,5 +7,3 @@ SVar:TrigDestroy:AB$ DestroyAll | Cost$ 0 | ValidCards$ Creature.blockedRemember
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/venomous_breath.jpg
 Oracle:Choose target creature. At end of combat, destroy all creatures that blocked or were blocked by it this turn.
-SetInfo:ICE Uncommon
-SetInfo:MMQ Uncommon

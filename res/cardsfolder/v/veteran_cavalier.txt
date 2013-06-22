@@ -5,5 +5,3 @@ PT:2/2
 K:Vigilance
 SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card84622.jpg
 Oracle:Vigilance (Attacking doesn't cause this creature to tap.)
-SetInfo:S99 Uncommon
-SetInfo:9ED Common

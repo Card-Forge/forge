@@ -7,4 +7,3 @@ SVar:TrigPump:AB$Pump | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vulshok_heartstoker.jpg
 Oracle:When Vulshok Heartstoker enters the battlefield, target creature gets +2/+0 until end of turn.
-SetInfo:SOM Common

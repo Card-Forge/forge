@@ -9,4 +9,3 @@ SVar:RemRandomDeck:True
 SVar:NeedsToPlay:Creature.YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vindictive_mob.jpg
 Oracle:When Vindictive Mob enters the battlefield, sacrifice a creature.\nVindictive Mob can't be blocked by Saprolings.
-SetInfo:RAV Uncommon

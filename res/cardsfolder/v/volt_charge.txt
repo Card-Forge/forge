@@ -5,4 +5,3 @@ A:SP$ DealDamage | Cost$ 2 R | ValidTgts$ Creature,Player | TgtPrompt$ Select ta
 SVar:DBProliferate:DB$Proliferate
 SVar:Picture:http://www.wizards.com/global/images/magic/general/volt_charge.jpg
 Oracle:Volt Charge deals 3 damage to target creature or player. Proliferate. (You choose any number of permanents and/or players with counters on them, then give each another counter of a kind already there.)
-SetInfo:NPH Common

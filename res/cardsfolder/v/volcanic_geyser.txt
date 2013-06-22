@@ -5,6 +5,3 @@ A:SP$ DealDamage | Cost$ X R R | ValidTgts$ Creature,Player | TgtPrompt$ Select 
 SVar:X:Count$xPaid
 SVar:Picture:http://www.wizards.com/global/images/magic/general/volcanic_geyser.jpg
 Oracle:Volcanic Geyser deals X damage to target creature or player.
-SetInfo:M13 Uncommon
-SetInfo:MIR Uncommon
-SetInfo:6ED Uncommon

@@ -6,4 +6,3 @@ S:Mode$ Continuous | Affected$ Creature.Sliver | AddKeyword$ Whenever a creature
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vampiric_sliver.jpg
 Oracle:All Sliver creatures have "Whenever a creature dealt damage by this creature this turn dies, put a +1/+1 counter on this creature."
-SetInfo:TSP Uncommon

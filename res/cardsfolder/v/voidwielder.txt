@@ -6,4 +6,3 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigChangeZone:DB$ ChangeZone | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Hand
 SVar:Picture:http://www.wizards.com/global/images/magic/general/voidwielder.jpg
 Oracle:When Voidwielder enters the battlefield, you may return target creature to its owner's hand.
-SetInfo:RTR Common

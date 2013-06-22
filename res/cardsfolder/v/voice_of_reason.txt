@@ -6,4 +6,3 @@ K:Flying
 K:Protection from blue
 SVar:Picture:http://www.wizards.com/global/images/magic/general/voice_of_reason.jpg
 Oracle:Flying, protection from blue
-SetInfo:UDS Uncommon

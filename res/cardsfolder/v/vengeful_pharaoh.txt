@@ -9,4 +9,3 @@ SVar:DBReturn:DB$ChangeZone | Defined$ Self | Origin$ Graveyard | Destination$ L
 SVar:DiscardMe:4
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vengeful_pharaoh.jpg
 Oracle:Deathtouch (Any amount of damage this deals to a creature is enough to destroy it.)\nWhenever combat damage is dealt to you or a planeswalker you control, if Vengeful Pharaoh is in your graveyard, destroy target attacking creature, then put Vengeful Pharaoh on top of your library.
-SetInfo:M12 Rare

@@ -8,4 +8,3 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigChangeZone | Tri
 SVar:TrigChangeZone:AB$ Sacrifice | Cost$ 0 | Defined$ Self | UnlessCost$ Return<1/Land> | UnlessPayer$ You
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vapor_snare.jpg
 Oracle:Enchant creature\nYou control enchanted creature.\nAt the beginning of your upkeep, sacrifice Vapor Snare unless you return a land you control to its owner's hand.
-SetInfo:WWK Uncommon

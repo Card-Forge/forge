@@ -7,4 +7,3 @@ T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Creature | CombatDama
 SVar:TrigDestroy:AB$Destroy | Cost$ 0 | Defined$ TriggeredTarget
 SVar:Picture:http://www.wizards.com/global/images/magic/general/voracious_cobra.jpg
 Oracle:First strike\nWhenever Voracious Cobra deals combat damage to a creature, destroy that creature.
-SetInfo:INV Uncommon

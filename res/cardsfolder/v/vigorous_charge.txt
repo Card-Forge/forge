@@ -12,4 +12,3 @@ SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vigorous_charge.jpg
 Oracle:Kicker {W} (You may pay an additional {W} as you cast this spell.)\nTarget creature gains trample until end of turn. Whenever that creature deals combat damage this turn, if Vigorous Charge was kicked, you gain life equal to that damage.
-SetInfo:INV Common

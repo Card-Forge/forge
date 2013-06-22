@@ -8,4 +8,3 @@ SVar:X:Count$Valid Land.YouDontCtrl+untapped
 SVar:Y:Count$Valid Land.YouCtrl+untapped
 SVar:Picture:http://www.wizards.com/global/images/magic/general/veteran_brawlers.jpg
 Oracle:Veteran Brawlers can't attack if defending player controls an untapped land.\nVeteran Brawlers can't block if you control an untapped land.
-SetInfo:PCY Rare

@@ -5,4 +5,3 @@ A:SP$ DealDamage | Cost$ 5 B B | ValidTgts$ Creature,Player | TgtPrompt$ Select 
 SVar:DBGainLife:DB$GainLife | Defined$ You | LifeAmount$ 4
 SVar:Picture:http://resources.wizards.com/magic/cards/po/en-us/card4243.jpg
 Oracle:Vampiric Feast deals 4 damage to target creature or player and you gain 4 life.
-SetInfo:POR Uncommon

@@ -10,4 +10,3 @@ S:Mode$ CantBeActivated | ValidCard$ Card.NamedCard | Description$ Activated abi
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/voidstone_gargoyle.jpg
 Oracle:Flying\nAs Voidstone Gargoyle enters the battlefield, name a nonland card.\nThe named card can't be cast.\nActivated abilities of sources with the chosen name can't be activated.
-SetInfo:PLC Rare

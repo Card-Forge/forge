@@ -5,6 +5,3 @@ A:AB$ Untap | Cost$ 1 T | ValidTgts$ Artifact | TgtPrompt$ Select target artifac
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/voltaic_key.jpg
 Oracle:{1}, {T}: Untap target artifact.
-SetInfo:M11 Uncommon
-SetInfo:DDE Uncommon
-SetInfo:USG Uncommon

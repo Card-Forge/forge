@@ -8,4 +8,3 @@ A:AB$ Token | Cost$ 5 T | TokenAmount$ 1 | TokenName$ ChosenType | TokenTypes$ C
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/volraths_laboratory.jpg
 Oracle:As Volrath's Laboratory enters the battlefield, choose a color and a creature type./n{5}, {T}: Put a 2/2 creature token of the chosen color and type onto the battlefield
-SetInfo:STH Rare

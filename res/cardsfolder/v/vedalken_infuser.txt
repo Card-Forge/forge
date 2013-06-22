@@ -7,4 +7,3 @@ SVar:TrigCounter:AB$PutCounter | Cost$ 0 | CounterType$ CHARGE | CounterNum$ 1 |
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vedalken_infuser.jpg
 Oracle:At the beginning of your upkeep, you may put a charge counter on target artifact.
-SetInfo:MBS Uncommon

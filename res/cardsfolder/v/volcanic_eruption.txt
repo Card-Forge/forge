@@ -9,8 +9,3 @@ SVar:DB:DB$DamageAll | NumDmg$X | ValidCards$ Creature.withFlying | ValidPlayers
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/volcanic_eruption.jpg
 Oracle:Destroy X target Mountains. Volcanic Eruption deals damage to each creature and each player equal to the number of Mountains destroyed this way.
-SetInfo:LEB Rare
-SetInfo:4ED Rare
-SetInfo:LEA Rare
-SetInfo:3ED Rare
-SetInfo:2ED Rare

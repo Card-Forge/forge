@@ -7,4 +7,3 @@ SVar:TrigPump:AB$ Pump | Cost$ 0 | Defined$ Self | KW$ HIDDEN CARDNAME's power a
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/valakut_fireboar.jpg
 Oracle:Whenever Valakut Fireboar attacks, switch its power and toughness until end of turn.
-SetInfo:ROE Uncommon

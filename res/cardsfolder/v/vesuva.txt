@@ -8,5 +8,3 @@ SVar:NeedsToPlayVar:Y GE1
 SVar:Y:Count$Valid Land
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vesuva.jpg
 Oracle:You may have Vesuva enter the battlefield tapped as a copy of any land on the battlefield.
-SetInfo:V12 Mythic
-SetInfo:TSP Rare
