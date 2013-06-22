@@ -868,6 +868,7 @@ public final class GameActionUtil {
                         if ( newSA.canPlay() ) {
                             abilities.add(i, newSA);
                             i++;
+                            iUnKicked++;
                         }
                     }
                     if(sCosts.length == 2) { // case for both kickers - it's hardcoded since they never have more than 2 kickers
