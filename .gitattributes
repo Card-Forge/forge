@@ -4411,6 +4411,7 @@ res/cardsfolder/g/goblin_fire_fiend.txt -text
 res/cardsfolder/g/goblin_firebug.txt svneol=native#text/plain
 res/cardsfolder/g/goblin_fireslinger.txt svneol=native#text/plain
 res/cardsfolder/g/goblin_firestarter.txt svneol=native#text/plain
+res/cardsfolder/g/goblin_flectomancer.txt -text
 res/cardsfolder/g/goblin_flotilla.txt -text
 res/cardsfolder/g/goblin_furrier.txt -text
 res/cardsfolder/g/goblin_gardener.txt svneol=native#text/plain
@@ -12540,6 +12541,7 @@ res/cardsfolder/w/wild_nacatl.txt svneol=native#text/plain
 res/cardsfolder/w/wild_ox.txt svneol=native#text/plain
 res/cardsfolder/w/wild_pair.txt -text
 res/cardsfolder/w/wild_research.txt svneol=native#text/plain
+res/cardsfolder/w/wild_ricochet.txt -text
 res/cardsfolder/w/wild_swing.txt -text
 res/cardsfolder/w/wild_wurm.txt svneol=native#text/plain
 res/cardsfolder/w/wilderness_elemental.txt svneol=native#text/plain
