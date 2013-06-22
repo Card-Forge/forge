@@ -9,5 +9,3 @@ SVar:Destroy:DB$ Destroy | Defined$ Enchanted | IsCurse$ True | SpellDescription
 SVar:GainLife:DB$ GainLife | LifeAmount$ 2 | SpellDescription$ or you gain 2 life.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/quiet_disrepair.jpg
 Oracle:Enchant artifact or enchantment\nAt the beginning of your upkeep, choose one - Destroy enchanted permanent; or you gain 2 life.
-SetInfo:PC2 Common
-SetInfo:FUT Common

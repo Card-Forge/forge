@@ -7,4 +7,3 @@ SVar:TrigMana:AB$ Mana | Cost$ 0 | Produced$ Any | Amount$ 1
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/quirion_sentinel.jpg
 Oracle:When Quirion Sentinel enters the battlefield, add one mana of any color to your mana pool.
-SetInfo:INV Common

@@ -5,7 +5,3 @@ A:AB$ Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add 1 to your mana pool.
 A:AB$ Pump | Cost$ T Sac<1/CARDNAME> | NumAtt$ -1 | NumDef$ -2 | IsCurse$ True | ValidTgts$ Creature.attacking+withoutFlying | TgtPrompt$ Select target attacking creature without flying | SpellDescription$ Target attacking creature without flying gets -1/-2 until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/quicksand.jpg
 Oracle:{T}: Add {1} to your mana pool.\n{T}, Sacrifice Quicksand: Target attacking creature without flying gets -1/-2 until end of turn.
-SetInfo:VIS Uncommon
-SetInfo:9ED Uncommon
-SetInfo:WWK Common
-SetInfo:10E Uncommon

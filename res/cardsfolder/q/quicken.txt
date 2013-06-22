@@ -9,4 +9,3 @@ SVar:Quickened:DB$ ChangeZone | Defined$ Self | Origin$ Battlefield | Destinatio
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/quicken.jpg
 Oracle:The next sorcery card you cast this turn can be cast as though it had flash.\nDraw a card.
-SetInfo:GPT Rare

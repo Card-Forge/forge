@@ -7,4 +7,3 @@ SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 1
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/quickchange.jpg
 Oracle:Target creature becomes the color or colors of your choice until end of turn.\nDraw a card.
-SetInfo:RAV Common

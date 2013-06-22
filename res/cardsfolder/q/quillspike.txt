@@ -6,4 +6,3 @@ A:AB$ Pump | Cost$ BG SubCounter<1/M1M1/Creature/a creature you control> | NumAt
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/quillspike.jpg
 Oracle:{B/G}, Remove a -1/-1 counter from a creature you control: Quillspike gets +3/+3 until end of turn.
-SetInfo:EVE Uncommon

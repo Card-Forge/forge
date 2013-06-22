@@ -8,4 +8,3 @@ SVar:X:Count$Valid Swamp.YouCtrl/Negative
 SVar:BuffedBy:Swamp
 SVar:Picture:http://www.wizards.com/global/images/magic/general/quag_sickness.jpg
 Oracle:Enchant creature\nEnchanted creature gets -1/-1 for each Swamp you control.
-SetInfo:M11 Common

@@ -8,5 +8,3 @@ SVar:Damage:AB$DealDamage | Cost$ T | ValidTgts$ Player | TgtPrompt$ Select a pl
 SVar:QuicksilverDraw:DB$Draw | NumCards$ 1 | Defined$ You | SpellDescription$ Draw a card.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/quicksilver_dagger.jpg
 Oracle:Enchant creature\nEnchanted creature has "{T}: This creature deals 1 damage to target player. You draw a card."
-SetInfo:APC Common
-SetInfo:DDJ Common

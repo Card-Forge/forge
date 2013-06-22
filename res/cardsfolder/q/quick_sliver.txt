@@ -7,5 +7,3 @@ S:Mode$ Continuous | Affected$ Sliver | AddHiddenKeyword$ Flash | AffectedZone$ 
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/quick_sliver.jpg
 Oracle:Flash\nAny player may play Sliver cards as though they had flash.
-SetInfo:H09 Common
-SetInfo:LGN Common

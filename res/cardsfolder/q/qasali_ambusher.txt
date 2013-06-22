@@ -9,4 +9,3 @@ SVar:Y:Count$Valid Forest.YouCtrl
 SVar:Z:Count$Valid Plains.YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/qasali_ambusher.jpg
 Oracle:Reach\nIf a creature is attacking you and you control a Forest and a Plains, you may cast Qasali Ambusher without paying its mana cost and as though it had flash.
-SetInfo:ALA Uncommon

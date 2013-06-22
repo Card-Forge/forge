@@ -4,4 +4,3 @@ Types:Instant Arcane
 A:SP$ Destroy | Cost$ W | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment | SpellDescription$ Destroy target enchantment.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/quiet_purity.jpg
 Oracle:Destroy target enchantment.
-SetInfo:CHK Common

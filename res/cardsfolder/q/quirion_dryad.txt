@@ -9,6 +9,3 @@ SVar:RemRandomDeck:True
 DeckNeeds:Color$white|blue|black|red
 SVar:Picture:http://www.wizards.com/global/images/magic/general/quirion_dryad.jpg
 Oracle:Whenever you cast a white, blue, black, or red spell, put a +1/+1 counter on Quirion Dryad.
-SetInfo:PLS Rare
-SetInfo:M13 Rare
-SetInfo:10E Rare

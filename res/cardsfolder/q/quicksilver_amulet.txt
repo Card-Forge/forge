@@ -4,5 +4,3 @@ Types:Artifact
 A:AB$ ChangeZone | Cost$ 4 T | Origin$ Hand | Destination$ Battlefield | ChangeType$ Creature | ChangeNum$ 1 | SpellDescription$ You may put a creature card from your hand onto the battlefield.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/quicksilver_amulet.jpg
 Oracle:{4}, {T}: You may put a creature card from your hand onto the battlefield.
-SetInfo:ULG Rare
-SetInfo:M12 Rare

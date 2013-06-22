@@ -5,4 +5,3 @@ PT:1/2
 A:AB$ Animate | Cost$ G T | ValidTgts$ Land | TgtPrompt$ Select target land | Power$ 2 | Toughness$ 2 | Colors$ Green | Types$ Creature | Permanent$ True | SpellDescription$ Target land becomes a 2/2 green creature that's still a land. (This effect lasts indefinitely.)
 SVar:Picture:http://www.wizards.com/global/images/magic/general/quirion_druid.jpg
 Oracle:{G}, {T}: Target land becomes a 2/2 green creature that's still a land. (This effect lasts indefinitely.)
-SetInfo:VIS Rare

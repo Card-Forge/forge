@@ -7,4 +7,3 @@ SVar:Damage:AB$DealDamage | Cost$ T | ValidTgts$ Creature.attacking,Creature.blo
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/quilled_sliver.jpg
 Oracle:All Slivers have "{T}: This permanent deals 1 damage to target attacking or blocking creature."
-SetInfo:TSP Uncommon

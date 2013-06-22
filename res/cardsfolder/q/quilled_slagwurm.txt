@@ -4,4 +4,3 @@ Types:Creature Wurm
 PT:8/8
 SVar:Picture:http://www.wizards.com/global/images/magic/general/quilled_slagwurm.jpg
 Oracle:
-SetInfo:MBS Uncommon

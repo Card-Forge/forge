@@ -8,5 +8,3 @@ SVar:TrigLoseLifeOpp:AB$ LoseLife | Cost$ 0 | Defined$ TriggeredTarget | LifeAmo
 SVar:QuietusX:TriggeredTarget$LifeTotal/HalfUp
 SVar:Picture:http://www.wizards.com/global/images/magic/general/quietus_spike.jpg
 Oracle:Equipped creature has deathtouch.\nWhenever equipped creature deals combat damage to a player, that player loses half his or her life, rounded up.\nEquip {3}
-SetInfo:PC2 Rare
-SetInfo:ALA Rare
