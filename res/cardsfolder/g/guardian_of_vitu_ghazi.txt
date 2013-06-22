@@ -6,4 +6,3 @@ K:Convoke
 K:Vigilance
 SVar:Picture:http://www.wizards.com/global/images/magic/general/guardian_of_vitu_ghazi.jpg
 Oracle:Convoke (Each creature you tap while casting this spell reduces its cost by {1} or by one mana of that creature's color.)\nVigilance
-SetInfo:RAV Common

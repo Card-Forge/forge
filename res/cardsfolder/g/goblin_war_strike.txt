@@ -6,5 +6,3 @@ SVar:X:Count$TypeYouCtrl.Goblin
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_war_strike.jpg
 Oracle:Goblin War Strike deals damage equal to the number of Goblins you control to target player.
-SetInfo:PO2 Common
-SetInfo:SCG Common

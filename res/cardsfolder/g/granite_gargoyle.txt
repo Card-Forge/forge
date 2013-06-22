@@ -6,7 +6,3 @@ K:Flying
 A:AB$ Pump | Cost$ R | NumDef$ +1 | SpellDescription$ CARDNAME gets +0/+1 until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/granite_gargoyle.jpg
 Oracle:Flying\n{R}: Granite Gargoyle gets +0/+1 until end of turn.
-SetInfo:LEB Rare
-SetInfo:LEA Rare
-SetInfo:3ED Rare
-SetInfo:2ED Rare

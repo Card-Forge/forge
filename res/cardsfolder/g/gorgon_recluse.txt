@@ -11,4 +11,3 @@ SVar:TrigDestroyBlocker:AB$Destroy | Cost$ 0 | Defined$ TriggeredBlocker
 K:Madness:B B
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gorgon_recluse.jpg
 Oracle:Whenever Gorgon Recluse blocks or becomes blocked by a nonblack creature, destroy that creature at end of combat.\nMadness {B}{B} (If you discard this card, you may cast it for its madness cost instead of putting it into your graveyard.)
-SetInfo:TSP Common

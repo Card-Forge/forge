@@ -6,6 +6,3 @@ SVar:NonStackingEffect:True
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_war_drums.jpg
 Oracle:Each creature you control can't be blocked except by two or more creatures.
-SetInfo:5ED Common
-SetInfo:7ED Uncommon
-SetInfo:FEM Common x4

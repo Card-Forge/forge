@@ -5,4 +5,3 @@ A:SP$ Counter | Cost$ 1 U | TargetType$ Spell | ValidTgts$ Card | TgtPrompt$ Sel
 SVar:DBDraw:DB$Draw | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/grip_of_amnesia.jpg
 Oracle:Counter target spell unless its controller exiles all cards from his or her graveyard.\nDraw a card.
-SetInfo:JUD Common

@@ -6,6 +6,3 @@ SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_warrens.jpg
 Oracle:{2}{R}, Sacrifice two Goblins: Put three 1/1 red Goblin creature tokens onto the battlefield.
-SetInfo:5ED Rare
-SetInfo:FEM Rare
-SetInfo:6ED Rare

@@ -6,4 +6,3 @@ A:AB$ ChangeZone | Cost$ B T | Origin$ Graveyard | Destination$ Exile | TgtPromp
 SVar:DBGainLife:DB$GainLife | Defined$ You | LifeAmount$ 2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/grave_robbers.jpg
 Oracle:{B}, {T}: Exile target artifact card from a graveyard. You gain 2 life.
-SetInfo:DRK Rare

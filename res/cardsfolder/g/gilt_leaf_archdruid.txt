@@ -7,4 +7,3 @@ SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 1
 A:AB$ ChangeZoneAll | Cost$ tapXType<7/Druid> | Origin$ Battlefield | Destination$ Battlefield | ValidTgts$ Player | TgtPrompt$ Select target player | ChangeType$ Land | GainControl$ True | CostDesc$ Tap seven untapped Druids you control: | SpellDescription$ Gain control of all lands target player controls.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gilt_leaf_archdruid.jpg
 Oracle:Whenever you cast a Druid spell, you may draw a card.\nTap seven untapped Druids you control: Gain control of all lands target player controls.
-SetInfo:MOR Rare

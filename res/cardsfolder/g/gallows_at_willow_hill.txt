@@ -6,4 +6,3 @@ SVar:GhostToken:DB$Token | TokenAmount$ 1 | TokenName$ Spirit | TokenTypes$ Crea
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gallows_at_willow_hill.jpg
 Oracle:{3}, {T}, Tap three untapped Humans you control: Destroy target creature. Its controller puts a 1/1 white Spirit creature token with flying onto the battlefield.
-SetInfo:AVR Rare

@@ -9,5 +9,3 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/greater_realm_of_preservation.jpg
 Oracle:{1}{W}: The next time a black or red source of your choice would deal damage to you this turn, prevent that damage.
-SetInfo:5ED Uncommon
-SetInfo:LEG Uncommon

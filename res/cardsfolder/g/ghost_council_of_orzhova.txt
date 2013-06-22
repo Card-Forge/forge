@@ -10,4 +10,3 @@ SVar:DelTrig:DB$DelayedTrigger | Mode$ Phase | Phase$ End of Turn | Execute$ Tri
 SVar:TrigReturn:AB$ChangeZone | Cost$ 0 | Origin$ Exile | Destination$ Battlefield | Defined$ Self
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ghost_council_of_orzhova.jpg
 Oracle:When Ghost Council of Orzhova enters the battlefield, target opponent loses 1 life and you gain 1 life.\n{1}, Sacrifice a creature: Exile Ghost Council of Orzhova. Return it to the battlefield under its owner's control at the beginning of the next end step.
-SetInfo:GPT Rare

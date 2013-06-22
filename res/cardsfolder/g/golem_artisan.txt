@@ -8,4 +8,3 @@ A:AB$ Pump | Cost$ 2 | ValidTgts$ Creature.Artifact | KW$ Trample | SpellDescrip
 A:AB$ Pump | Cost$ 2 | ValidTgts$ Creature.Artifact | KW$ Haste | SpellDescription$ Target artifact creature gains haste until end of turn. | TgtPrompt$ Select target artifact creature.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/golem_artisan.jpg
 Oracle:{2}: Target artifact creature gets +1/+1 until end of turn.\n{2}: Target artifact creature gains your choice of flying, trample, or haste until end of turn.
-SetInfo:SOM Uncommon

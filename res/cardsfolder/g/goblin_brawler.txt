@@ -6,4 +6,3 @@ K:First Strike
 K:CARDNAME can't be equipped.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_brawler.jpg
 Oracle:First strike\nGoblin Brawler can't be equipped.
-SetInfo:5DN Common

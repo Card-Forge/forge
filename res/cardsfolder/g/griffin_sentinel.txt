@@ -6,5 +6,3 @@ K:Flying
 K:Vigilance
 SVar:Picture:http://www.wizards.com/global/images/magic/general/griffin_sentinel.jpg
 Oracle:Flying\nVigilance (Attacking doesn't cause this creature to tap.)
-SetInfo:M10 Common
-SetInfo:M12 Common

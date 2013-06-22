@@ -8,4 +8,3 @@ SVar:NeedsToPlay:Artifact.YouCtrl
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/glimmervoid.jpg
 Oracle:At the beginning of the end step, if you control no artifacts, sacrifice Glimmervoid.\n{T}: Add one mana of any color to your mana pool.
-SetInfo:MRD Rare

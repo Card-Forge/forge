@@ -5,5 +5,3 @@ A:SP$ Token | Cost$ X 1 R R | TokenAmount$ X | TokenName$ Goblin | TokenTypes$ C
 SVar:X:Count$xPaid
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_offensive.jpg
 Oracle:Put X 1/1 red Goblin creature tokens onto the battlefield.
-SetInfo:HOP Uncommon
-SetInfo:USG Uncommon

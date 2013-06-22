@@ -7,4 +7,3 @@ SVar:Exile:AB$ Dig | Cost$ 0 | DigNum$ X | ChangeNum$ All | ChangeValid$ Card | 
 SVar:X:ReplaceCount$DamageAmount
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gloom_surgeon.jpg
 Oracle:If combat damage would be dealt to Gloom Surgeon, prevent that damage and exile that many cards from the top of your library.
-SetInfo:AVR Rare

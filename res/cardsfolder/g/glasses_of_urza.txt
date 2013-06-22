@@ -5,10 +5,3 @@ A:AB$ RevealHand | Cost$ T | ValidTgts$ Player | TgtPrompt$ Select target player
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/glasses_of_urza.jpg
 Oracle:{T}: Look at target player's hand.
-SetInfo:2ED Uncommon
-SetInfo:6ED Uncommon
-SetInfo:LEB Uncommon
-SetInfo:LEA Uncommon
-SetInfo:5ED Uncommon
-SetInfo:4ED Uncommon
-SetInfo:3ED Uncommon

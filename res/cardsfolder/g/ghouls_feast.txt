@@ -5,5 +5,3 @@ A:SP$ Pump | Cost$ 1 B | ValidTgts$ Creature | TgtPrompt$ Select target creature
 SVar:X:Count$TypeInYourYard.Creature
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ghouls_feast.jpg
 Oracle:Target creature gets +X/+0 until end of turn, where X is the number of creature cards in your graveyard.
-SetInfo:MMQ Uncommon
-SetInfo:DDJ Uncommon

@@ -4,9 +4,3 @@ Types:Creature Goblin Warrior
 PT:2/1
 SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card82957.jpg
 Oracle:
-SetInfo:PO2 Common
-SetInfo:9ED Common
-SetInfo:10E Common
-SetInfo:M11 Common
-SetInfo:M10 Common
-SetInfo:M12 Common

@@ -7,4 +7,3 @@ T:Mode$ Cycled | ValidCard$ Card.Self | Execute$ TrigPumpAll | TriggerDescriptio
 SVar:TrigPumpAll:AB$ PumpAll | Cost$ 0 | ValidCards$ Creature.Soldier | NumAtt$ +1 | NumDef$ +1 | KW$ First Strike
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gempalm_avenger.jpg
 Oracle:Cycling {2}{W} ({2}{W}, Discard this card: Draw a card.)\nWhen you cycle Gempalm Avenger, Soldier creatures get +1/+1 and gain first strike until end of turn.
-SetInfo:LGN Common

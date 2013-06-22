@@ -5,4 +5,3 @@ PT:1/1
 A:AB$ DealDamage | Cost$ T | ValidTgts$ Player | TgtPrompt$ Select target player | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target player.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_fireslinger.jpg
 Oracle:{T}: Goblin Fireslinger deals 1 damage to target player.
-SetInfo:M12 Common

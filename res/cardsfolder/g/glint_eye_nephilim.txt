@@ -8,4 +8,3 @@ SVar:X:TriggerCount$DamageAmount
 A:AB$ Pump | Cost$ 1 Discard<1/Card> | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ CARDNAME gets +1/+1 until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/glint_eye_nephilim.jpg
 Oracle:Whenever Glint-Eye Nephilim deals combat damage to a player, draw that many cards.\n{1}, Discard a card: Glint-Eye Nephilim gets +1/+1 until end of turn.
-SetInfo:GPT Rare

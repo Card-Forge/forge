@@ -10,4 +10,3 @@ SVar:GBZombify:DB$ Animate | Defined$ Remembered | Types$ Zombie | Colors$ Black
 SVar:GBCleanup:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 SVar:Picture:http://www.wizards.com/global/images/magic/general/grave_betrayal.jpg
 Oracle:Whenever a creature you don't control dies, return it to the battlefield under your control with an additional +1/+1 counter on it at the beginning of the next end step. That creature is a black Zombie in addition to its other colors and types.
-SetInfo:RTR Rare

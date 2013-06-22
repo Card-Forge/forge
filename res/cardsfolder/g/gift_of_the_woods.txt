@@ -9,4 +9,3 @@ SVar:TrigPump:AB$Pump | Cost$ 0 | Defined$ Enchanted | NumDef$ +3 | SubAbility$ 
 SVar:DBGainLife:DB$GainLife | Cost$ 0 | LifeAmount$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gift_of_the_woods.jpg
 Oracle:Enchant creature\nWhenever enchanted creature blocks or becomes blocked, it gets +0/+3 until end of turn and you gain 1 life.
-SetInfo:ALL Common x2

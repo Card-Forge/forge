@@ -16,4 +16,3 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$RememberedSize
 SVar:RemAIDeck:True
 Oracle:Remove all +1/+1 counters from target creature you control. Draw that many cards.\nFuse (You may cast one or both halves of this card from your hand.)
-SetInfo:DGM Uncommon

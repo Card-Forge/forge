@@ -6,4 +6,3 @@ A:SP$ Attach | Cost$ 1 G | ValidTgts$ Creature | AITgts$ Creature.withFlying | A
 S:Mode$ Continuous | Affected$ Card.EnchantedBy | RemoveKeyword$ Flying | Description$ Enchanted creature loses flying.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/grounded.jpg
 Oracle:Enchant creature\nEnchanted creature loses flying.
-SetInfo:AVR Common

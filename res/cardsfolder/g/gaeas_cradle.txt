@@ -5,4 +5,3 @@ A:AB$ Mana | Cost$ T | Produced$ G | Amount$ X | References$ X | SpellDescriptio
 SVar:X:Count$Valid Creature.YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gaeas_cradle.jpg
 Oracle:{T}: Add {G} to your mana pool for each creature you control.
-SetInfo:USG Rare

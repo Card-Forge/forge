@@ -7,4 +7,3 @@ SVar:PlayMain1:TRUE
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gravitational_shift.jpg
 Oracle:Creatures with flying get +2/+0.\nCreatures without flying get -2/-0.
-SetInfo:ROE Rare

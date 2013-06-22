@@ -11,5 +11,3 @@ SVar:SVar4:DB$ Pump | Defined$ Self | KW$ Rampage 3 | UntilYourNextUpkeep$ True 
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gabriel_angelfire.jpg
 Oracle:At the beginning of your upkeep, choose flying, first strike, trample, or rampage 3. Gabriel Angelfire gains that ability until your next upkeep. (Whenever a creature with rampage 3 becomes blocked, it gets +3/+3 until end of turn for each creature blocking it beyond the first.)
-SetInfo:CHR Rare
-SetInfo:LEG Rare

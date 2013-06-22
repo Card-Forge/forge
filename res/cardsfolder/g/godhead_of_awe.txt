@@ -7,4 +7,3 @@ S:Mode$ Continuous | Affected$ Creature.Other | SetPower$ 1 | SetToughness$ 1 | 
 SVar:NonStackingEffect:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/godhead_of_awe.jpg
 Oracle:Flying\nOther creatures are 1/1.
-SetInfo:SHM Rare

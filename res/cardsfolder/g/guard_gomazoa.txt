@@ -7,6 +7,3 @@ K:Flying
 K:Prevent all combat damage that would be dealt to CARDNAME.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/guard_gomazoa.jpg
 Oracle:Defender, flying\nPrevent all combat damage that would be dealt to Guard Gomazoa.
-SetInfo:PC2 Uncommon
-SetInfo:COM Uncommon
-SetInfo:ROE Uncommon

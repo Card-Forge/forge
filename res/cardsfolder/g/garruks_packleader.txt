@@ -6,5 +6,3 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creatu
 SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/garruks_packleader.jpg
 Oracle:Whenever another creature with power 3 or greater enters the battlefield under your control, you may draw a card.
-SetInfo:M11 Uncommon
-SetInfo:M13 Uncommon

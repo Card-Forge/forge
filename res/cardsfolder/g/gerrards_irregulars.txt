@@ -6,4 +6,3 @@ K:Haste
 K:Trample
 SVar:Picture:http://resources.wizards.com/magic/cards/mm/en-us/card19842.jpg
 Oracle:Trample, haste
-SetInfo:MMQ Common

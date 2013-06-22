@@ -6,5 +6,3 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigDestroy:AB$Destroy | Cost$ 0 | ValidTgts$ Land | TgtPrompt$ Select target land
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_gardener.jpg
 Oracle:When Goblin Gardener dies, destroy target land.
-SetInfo:7ED Common
-SetInfo:UDS Common

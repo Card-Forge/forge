@@ -9,4 +9,3 @@ SVar:RemRandomDeck:True
 DeckNeeds:Color$white
 SVar:Picture:http://www.wizards.com/global/images/magic/general/glint_hawk_idol.jpg
 Oracle:Whenever another artifact enters the battlefield under your control, you may have Glint Hawk Idol become a 2/2 Bird artifact creature with flying until end of turn.\n{W}: Glint Hawk Idol becomes a 2/2 Bird artifact creature with flying until end of turn.
-SetInfo:SOM Common

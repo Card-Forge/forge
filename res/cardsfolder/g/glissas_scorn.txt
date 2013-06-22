@@ -5,4 +5,3 @@ A:SP$ Destroy | Cost$ 1 G | ValidTgts$ Artifact | TgtPrompt$ Select target artif
 SVar:DBDrain:DB$LoseLife | Defined$ TargetedController | LifeAmount$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/glissas_scorn.jpg
 Oracle:Destroy target artifact. Its controller loses 1 life.
-SetInfo:NPH Common

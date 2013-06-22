@@ -5,4 +5,3 @@ PT:3/3
 A:AB$ PutCounter | Cost$ G Sac<1/Creature.Other/creature other than CARDNAME> | CounterType$ P1P1 | CounterNum$1 | SpellDescription$ Put a +1/+1 counter on CARDNAME.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gobbling_ooze.jpg
 Oracle:{G}, Sacrifice another creature: Put a +1/+1 counter on Gobbling Ooze.
-SetInfo:RTR Uncommon

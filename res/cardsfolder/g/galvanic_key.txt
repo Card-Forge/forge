@@ -6,4 +6,3 @@ A:AB$ Untap | Cost$ 3 T | ValidTgts$ Artifact | TgtPrompt$ Select target artifac
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/galvanic_key.jpg
 Oracle:Flash\n{3}, {T}: Untap target artifact.
-SetInfo:MRD Common

@@ -5,4 +5,3 @@ A:SP$ Pump | Cost$ 1 U | ValidTgts$ Creature | KW$ HIDDEN Unblockable | AILogic$
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ghostform.jpg
 Oracle:Up to two target creatures are unblockable this turn.
-SetInfo:AVR Common

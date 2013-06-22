@@ -6,4 +6,3 @@ A:AB$ DealDamage | Cost$ Sac<1/CARDNAME> | ValidTgts$ Creature.withFlying | TgtP
 SVar:DBDebuff:DB$ Debuff | Defined$ Targeted | Keywords$ Flying
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_skycutter.jpg
 Oracle:Sacrifice Goblin Skycutter: Goblin Skycutter deals 2 damage to target creature with flying. That creature loses flying until end of turn.
-SetInfo:TSP Common

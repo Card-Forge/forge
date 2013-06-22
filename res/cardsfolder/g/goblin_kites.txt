@@ -8,4 +8,3 @@ SVar:DBSacrifice:DB$ Sacrifice | Cost$ 0 | Defined$ You | SacValid$ Creature.IsR
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_kites.jpg
 Oracle:{R}: Target creature you control with toughness 2 or less gains flying until end of turn. Flip a coin at the beginning of the next end step. If you lose the flip, sacrifice that creature.
-SetInfo:FEM Uncommon

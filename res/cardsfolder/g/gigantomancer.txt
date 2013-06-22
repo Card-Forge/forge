@@ -5,4 +5,3 @@ PT:1/1
 A:AB$ Animate | Cost$ 1 | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | Power$ 7 | Toughness$ 7 | SpellDescription$ Target creature you control becomes 7/7 until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gigantomancer.jpg
 Oracle:{1}: Target creature you control becomes 7/7 until end of turn.
-SetInfo:ROE Rare

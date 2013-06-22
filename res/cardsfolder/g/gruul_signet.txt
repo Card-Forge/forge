@@ -5,6 +5,3 @@ A:AB$ Mana | Cost$ 1 T | Produced$ R G | SpellDescription$ Add R G to your mana 
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gruul_signet.jpg
 Oracle:{1}, {T}: Add {R}{G} to your mana pool.
-SetInfo:GPT Common
-SetInfo:ARC Common
-SetInfo:COM Common

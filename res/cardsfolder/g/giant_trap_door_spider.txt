@@ -7,4 +7,3 @@ SVar:ExileME:DB$ChangeZone | Origin$ Battlefield | Destination$ Exile | Defined$
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/giant_trap_door_spider.jpg
 Oracle:{1}{R}{G}, {T}: Exile Giant Trap Door Spider and target creature without flying that's attacking you.
-SetInfo:ICE Uncommon

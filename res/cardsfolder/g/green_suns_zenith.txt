@@ -6,4 +6,3 @@ SVar:X:Count$xPaid
 SVar:DBShuffle:DB$ChangeZone | Origin$ Stack | Destination$ Library | Shuffle$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/green_suns_zenith.jpg
 Oracle:Search your library for a green creature card with converted mana cost X or less, put it onto the battlefield, then shuffle your library. Shuffle Green Sun's Zenith into its owner's library.
-SetInfo:MBS Rare

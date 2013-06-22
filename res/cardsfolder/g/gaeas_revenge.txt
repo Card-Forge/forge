@@ -8,4 +8,3 @@ K:Haste
 S:Mode$ CantTarget | ValidCard$ Card.Self | ValidSource$ Card.nonGreen | Description$ CARDNAME can't be the target of nongreen spells or abilities from nongreen sources.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gaeas_revenge.jpg
 Oracle:Gaea's Revenge can't be countered.\nHaste\nGaea's Revenge can't be the target of nongreen spells or abilities from nongreen sources.
-SetInfo:M11 Mythic

@@ -8,5 +8,3 @@ S:Mode$ Continuous | Affected$ Card.Self | AddHiddenKeyword$ CARDNAME can't atta
 SVar:X:Count$Valid Mountain.YouDontCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_rock_sled.jpg
 Oracle:Trample\nGoblin Rock Sled doesn't untap during your untap step if it attacked during your last turn.\nGoblin Rock Sled can't attack unless defending player controls a Mountain.
-SetInfo:4ED Common
-SetInfo:DRK Common

@@ -9,4 +9,3 @@ SVar:TrigDestroy:AB$DestroyAll | Cost$ 0 | ValidCards$ Creature.Goblin
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_pyromancer.jpg
 Oracle:When Goblin Pyromancer enters the battlefield, Goblin creatures get +3/+0 until end of turn.\nAt the beginning of the end step, destroy all Goblins.
-SetInfo:ONS Rare

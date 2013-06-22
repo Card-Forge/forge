@@ -8,6 +8,3 @@ SVar:PlayMain1:TRUE
 SVar:BuffedBy:Goblin
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_chieftain.jpg
 Oracle:Haste (This creature can attack and {T} as soon as it comes under your control.)\nOther Goblin creatures you control get +1/+1 and have haste.
-SetInfo:M11 Rare
-SetInfo:M10 Rare
-SetInfo:M12 Rare

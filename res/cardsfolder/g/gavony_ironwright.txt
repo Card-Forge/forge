@@ -6,4 +6,3 @@ S:Mode$ Continuous | Affected$ Creature.YouCtrl+Other | AddPower$ 1 | AddToughne
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gavony_ironwright.jpg
 Oracle:Fateful hour - As long as you have 5 or less life, other creatures you control get +1/+4.
-SetInfo:DKA Uncommon

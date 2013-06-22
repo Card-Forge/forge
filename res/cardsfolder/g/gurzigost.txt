@@ -10,4 +10,3 @@ A:AB$ Pump | Cost$ G G Discard<1/Card> | KW$ HIDDEN You may have CARDNAME assign
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gurzigost.jpg
 Oracle:At the beginning of your upkeep, sacrifice Gurzigost unless you put two cards from your graveyard on the bottom of your library.\n{G}{G}, Discard a card: You may have Gurzigost assign its combat damage this turn as though it weren't blocked.
-SetInfo:TOR Rare

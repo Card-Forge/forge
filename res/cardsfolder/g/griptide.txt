@@ -4,4 +4,3 @@ Types:Instant
 A:SP$ ChangeZone | Cost$ 3 U | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 0 | SpellDescription$ Put target creature on top of its owner's library.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/griptide.jpg
 Oracle:Put target creature on top of its owner's library.
-SetInfo:DKA Common

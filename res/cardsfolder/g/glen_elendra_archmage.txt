@@ -7,4 +7,3 @@ A:AB$ Counter | Cost$ U Sac<1/CARDNAME> | TargetType$ Spell | TgtPrompt$ Select 
 K:Persist
 SVar:Picture:http://www.wizards.com/global/images/magic/general/glen_elendra_archmage.jpg
 Oracle:Flying\n{U}, Sacrifice Glen Elendra Archmage: Counter target noncreature spell.\nPersist (When this creature dies, if it had no -1/-1 counters on it, return it to the battlefield under its owner's control with a -1/-1 counter on it.)
-SetInfo:EVE Rare

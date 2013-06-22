@@ -5,5 +5,3 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigToken:AB$ Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Saproling | TokenTypes$ Creature,Saproling | TokenOwner$ You | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/golgari_germination.jpg
 Oracle:Whenever a nontoken creature you control dies, put a 1/1 green Saproling creature token onto the battlefield.
-SetInfo:RAV Uncommon
-SetInfo:DDJ Uncommon

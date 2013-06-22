@@ -6,4 +6,3 @@ A:AB$ ChangeZone | Cost$tapXType<3/Cleric> | Origin$ Graveyard | Destination$ Ha
 Var:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gangrenous_goliath.jpg
 Oracle:Tap three untapped Clerics you control: Return Gangrenous Goliath from your graveyard to your hand.
-SetInfo:ONS Rare

@@ -8,5 +8,3 @@ SVar:X:Count$InYourLibrary.Goblin
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_recruiter.jpg
 Oracle:When Goblin Recruiter enters the battlefield, search your library for any number of Goblin cards and reveal those cards. Shuffle your library, then put them on top of it in any order.
-SetInfo:VIS Uncommon
-SetInfo:6ED Uncommon

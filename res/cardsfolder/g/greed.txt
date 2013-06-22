@@ -4,7 +4,3 @@ Types:Enchantment
 A:AB$ Draw | Cost$ B PayLife<2> | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/greed.jpg
 Oracle:{B}, Pay 2 life: Draw a card.
-SetInfo:7ED Rare
-SetInfo:LEG Rare
-SetInfo:6ED Rare
-SetInfo:4ED Rare

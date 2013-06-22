@@ -5,4 +5,3 @@ A:SP$ Destroy | Cost$ 3 G | ValidTgts$ Creature.withFlying | TgtPrompt$ Select t
 SVar:DBToken:DB$Token | ConditionDefined$ Targeted | ConditionPresent$ Card.Blue,Card.Black | ConditionCompare$ EQ1 | TokenAmount$ 1 | TokenName$ Spider | TokenTypes$ Creature,Spider | TokenOwner$ You | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 2 | TokenKeywords$ Reach | ConditionDescription$ If that creature was blue or black, put a 1/2 green Spider creature token with reach onto the battlefield.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gloomwidows_feast.jpg
 Oracle:Destroy target creature with flying. If that creature was blue or black, put a 1/2 green Spider creature token with reach onto the battlefield. (It can block creatures with flying.)
-SetInfo:SHM Common

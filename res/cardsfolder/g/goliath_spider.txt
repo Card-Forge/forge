@@ -5,4 +5,3 @@ PT:7/6
 K:Reach
 SVar:Picture:http://resources.wizards.com/magic/cards/rav/en-us/card88959.jpg
 Oracle:Reach (This creature can block creatures with flying.)
-SetInfo:RAV Uncommon

@@ -7,4 +7,3 @@ SVar:TrigPump:AB$Pump | Cost$ 0 | NumAtt$ +3 | NumDef$ +3 | Defined$ Self
 SVar:BuffedBy:Card.MultiColor
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gloryscale_viashino.jpg
 Oracle:Whenever you cast a multicolored spell, Gloryscale Viashino gets +3/+3 until end of turn.
-SetInfo:ARB Uncommon

@@ -6,4 +6,3 @@ A:AB$ ChangeZone | Cost$ T | Origin$ Hand | Destination$ Battlefield | ChangeTyp
 A:AB$ Protection | Cost$ R | ValidTgts$ Permanent.Goblin | TgtPrompt$ Select target Goblin | Gains$ white | SpellDescription$ Target Goblin gains protection from white until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_wizard.jpg
 Oracle:{T}: You may put a Goblin permanent card from your hand onto the battlefield.\n{R}: Target Goblin gains protection from white until end of turn.
-SetInfo:DRK Rare

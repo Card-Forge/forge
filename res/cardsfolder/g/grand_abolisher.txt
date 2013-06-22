@@ -6,4 +6,3 @@ S:Mode$ CantBeCast | ValidCard$ Card | Condition$ PlayerTurn | Caster$ Opponent 
 S:Mode$ CantBeActivated | ValidCard$ Artifact,Creature,Enchantment | Condition$ PlayerTurn | Activator$ Opponent
 SVar:Picture:http://www.wizards.com/global/images/magic/general/grand_abolisher.jpg
 Oracle:During your turn, your opponents can't cast spells or activate abilities of artifacts, creatures, or enchantments.
-SetInfo:M12 Rare

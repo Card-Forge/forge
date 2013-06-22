@@ -6,4 +6,3 @@ S:Mode$ Continuous | Affected$ Creature.enchanted+YouCtrl | AddKeyword$ Shroud |
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/greater_auramancy.jpg
 Oracle:Other enchantments you control have shroud.\nEnchanted creatures you control have shroud.
-SetInfo:SHM Rare

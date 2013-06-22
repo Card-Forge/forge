@@ -7,4 +7,3 @@ SVar:DoubleCounters:DB$ PutCounter | Defined$ Targeted | CounterType$ RepeatSVar
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gilder_bairn.jpg
 Oracle:{2}{G/U}, {Q}: For each counter on target permanent, put another of those counters on that permanent. ({Q} is the untap symbol.)
-SetInfo:EVE Uncommon

@@ -4,21 +4,3 @@ Types:Instant
 A:SP$ Pump | Cost$ G | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +3 | NumDef$ +3 | SpellDescription$ Target creature gets +3/+3 until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/giant_growth.jpg
 Oracle:Target creature gets +3/+3 until end of turn.
-SetInfo:EVG Common
-SetInfo:LEA Common
-SetInfo:5ED Common
-SetInfo:3ED Common
-SetInfo:7ED Common
-SetInfo:10E Common
-SetInfo:RTR Common
-SetInfo:8ED Common
-SetInfo:2ED Common
-SetInfo:S00 Common
-SetInfo:9ED Common
-SetInfo:LEB Common
-SetInfo:ICE Common
-SetInfo:4ED Common
-SetInfo:DDD Common
-SetInfo:6ED Common
-SetInfo:M11 Common
-SetInfo:M10 Common

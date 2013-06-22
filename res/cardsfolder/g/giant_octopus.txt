@@ -4,9 +4,3 @@ Types:Creature Octopus
 PT:3/3
 SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83104.jpg
 Oracle:
-SetInfo:8ED Common
-SetInfo:S99 Common
-SetInfo:7ED Common
-SetInfo:S00 Common
-SetInfo:9ED Common
-SetInfo:POR Common

@@ -5,4 +5,3 @@ PT:3/1
 K:Trample
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_deathraiders.jpg
 Oracle:Trample
-SetInfo:ALA Common

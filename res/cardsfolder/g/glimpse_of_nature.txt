@@ -8,4 +8,3 @@ SVar:RemRandomDeck:True
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/glimpse_of_nature.jpg
 Oracle:Whenever you cast a creature spell this turn, draw a card.
-SetInfo:CHK Rare

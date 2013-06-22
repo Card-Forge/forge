@@ -6,4 +6,3 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigDestroy:AB$Destroy | Cost$ 0 | ValidTgts$ Wall | TgtPrompt$ Select target wall
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_masons.jpg
 Oracle:When Goblin Masons dies, destroy target Wall.
-SetInfo:UDS Common

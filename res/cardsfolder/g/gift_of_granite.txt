@@ -7,4 +7,3 @@ A:SP$ Attach | Cost$ W | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddToughness$ 2 | Description$ Enchanted creature gets +0/+2.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gift_of_granite.jpg
 Oracle:Flash (You may cast this spell any time you could cast an instant.)\nEnchant creature\nEnchanted creature gets +0/+2.
-SetInfo:FUT Common

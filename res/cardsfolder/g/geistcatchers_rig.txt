@@ -6,4 +6,3 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigDamage:DB$ DealDamage | Cost$ 0 | ValidTgts$ Creature.withFlying | TgtPrompt$ Select target creature with flying | NumDmg$ 4
 SVar:Picture:http://www.wizards.com/global/images/magic/general/geistcatchers_rig.jpg
 Oracle:When Geistcatcher's Rig enters the battlefield, you may have it deal 4 damage to target creature with flying.
-SetInfo:ISD Uncommon

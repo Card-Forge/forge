@@ -9,5 +9,3 @@ SVar:TrigChange:AB$ ChangeZoneAll | Cost$ 0 | ChangeType$ Card.YouOwn | Origin$ 
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gaeas_blessing.jpg
 Oracle:Target player shuffles up to three target cards from his or her graveyard into his or her library.\nDraw a card.\nWhen Gaea's Blessing is put into your graveyard from your library, shuffle your graveyard into your library.
-SetInfo:WTH Uncommon
-SetInfo:TSB Special

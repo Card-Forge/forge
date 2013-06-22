@@ -6,4 +6,3 @@ SVar:DBDestroy:DB$ SacrificeAll | ValidCards$ Land.nonChosenCard | StackDescript
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/global_ruin.jpg
 Oracle:Each player chooses from the lands he or she controls a land of each basic land type, then sacrifices the rest.
-SetInfo:INV Rare

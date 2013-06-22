@@ -7,4 +7,3 @@ SVar:TrigChange:AB$ChangeZone | Cost$ Discard<1/Card> | Origin$ Graveyard | Dest
 K:Shroud
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gigapede.jpg
 Oracle:Shroud (This permanent can't be the target of spells or abilities.)\nAt the beginning of your upkeep, if Gigapede is in your graveyard, you may discard a card. If you do, return Gigapede to your hand.
-SetInfo:ONS Rare

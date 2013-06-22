@@ -5,4 +5,3 @@ A:SP$ Token | Cost$ X X G | TokenImage$ G X X Ooze | TokenAmount$ X | TokenName$
 SVar:X:Count$xPaid
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gelatinous_genesis.jpg
 Oracle:Put X X/X green Ooze creature tokens onto the battlefield.
-SetInfo:ROE Rare

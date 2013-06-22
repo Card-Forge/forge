@@ -8,4 +8,3 @@ SVar:DBGainCtrl:DB$ GainControl | AllValid$ Permanent.YouOwn | SpellDescription$
 SVar:DmgAll:DB$ DamageAll | NumDmg$ 3 | ValidCards$ Creature.withFlying | ValidDescription$ each creature with flying. | SpellDescription$ CARDNAME deals 3 damage to each creature with flying.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gruul_charm.jpg
 Oracle:Choose one — Creatures without flying can't block this turn; or gain control of all permanents you own; or Gruul Charm deals 3 damage to each creature with flying.
-SetInfo:GTC Uncommon

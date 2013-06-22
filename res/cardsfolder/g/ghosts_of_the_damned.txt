@@ -5,4 +5,3 @@ PT:0/2
 A:AB$ Pump | Cost$ T | ValidTgts$ Creature | NumAtt$ -1 | IsCurse$ True | TgtPrompt$ Select target creature | SpellDescription$ Target creature gets -1/-0 until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ghosts_of_the_damned.jpg
 Oracle:{T}: Target creature gets -1/-0 until end of turn.
-SetInfo:LEG Common

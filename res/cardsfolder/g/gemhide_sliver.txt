@@ -7,5 +7,3 @@ SVar:AnyMana:AB$Mana | Cost$ T | Produced$ Any | Amount$ 1 | SpellDescription$ A
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gemhide_sliver.jpg
 Oracle:All Slivers have "{T}: Add one mana of any color to your mana pool."
-SetInfo:H09 Common
-SetInfo:TSP Common

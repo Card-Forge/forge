@@ -7,4 +7,3 @@ K:Unearth:3 B
 SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Zombie | TokenTypes$ Creature,Zombie | TokenOwner$ You | TokenColors$ Black | TokenPower$ 2 | TokenToughness$ 2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/grixis_slavedriver.jpg
 Oracle:When Grixis Slavedriver leaves the battlefield, put a 2/2 black Zombie creature token onto the battlefield.\nUnearth {3}{B} ({3}{B}: Return this card from your graveyard to the battlefield. It gains haste. Exile it at the beginning of the next end step or if it would leave the battlefield. Unearth only as a sorcery.)
-SetInfo:CFX Uncommon

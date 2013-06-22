@@ -5,4 +5,3 @@ PT:2/2
 A:AB$ RearrangeTopOfLibrary | Cost$ G T | Defined$ You | NumCards$ 2 | SpellDescription$ Look at the top two cards of your library, then put them back in any order.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gilt_leaf_seer.jpg
 Oracle:{G}, {T}: Look at the top two cards of your library, then put them back in any order.
-SetInfo:LRW Common

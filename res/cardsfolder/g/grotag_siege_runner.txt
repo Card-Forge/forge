@@ -6,4 +6,3 @@ A:AB$ Destroy | Cost$ R Sac<1/CARDNAME> | ValidTgts$ Creature.withDefender | Tgt
 SVar:DBDealDamage:DB$DealDamage | NumDmg$ 2 | Defined$ TargetedController
 SVar:Picture:http://www.wizards.com/global/images/magic/general/grotag_siege_runner.jpg
 Oracle:{R}, Sacrifice Grotag Siege-Runner: Destroy target creature with defender. Grotag Siege-Runner deals 2 damage to that creature's controller.
-SetInfo:ROE Common

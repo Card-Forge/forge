@@ -5,4 +5,3 @@ A:SP$ Mana | Cost$ R R R R | Produced$ R | Amount$ 7 | RestrictValid$ Card.Artif
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/geosurge.jpg
 Oracle:Add {R}{R}{R}{R}{R}{R}{R} to your mana pool. Spend this mana only to cast artifact or creature spells.
-SetInfo:NPH Uncommon

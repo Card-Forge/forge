@@ -5,4 +5,3 @@ PT:2/1
 S:Mode$ RaiseCost | ValidCard$ Card.nonCreature | Type$ Spell | Amount$ 1 | Description$ Noncreature spells cost 1 more to cast.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/glowrider.jpg
 Oracle:Noncreature spells cost {1} more to cast.
-SetInfo:LGN Rare

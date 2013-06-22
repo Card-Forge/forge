@@ -6,4 +6,3 @@ S:Mode$ Continuous | EffectZone$ All | Affected$ Card.Self | CharacteristicDefin
 A:AB$ Pump | Cost$ 1 B | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ CARDNAME gets +1/+1 until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ghostly_changeling.jpg
 Oracle:Changeling (This card is every creature type at all times.)\n{1}{B}: Ghostly Changeling gets +1/+1 until end of turn.
-SetInfo:LRW Uncommon

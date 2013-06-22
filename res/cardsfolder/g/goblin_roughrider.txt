@@ -4,4 +4,3 @@ Types:Creature Goblin Knight
 PT:3/2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_roughrider.jpg
 Oracle:
-SetInfo:WWK Common

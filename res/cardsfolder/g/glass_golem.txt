@@ -4,4 +4,3 @@ Types:Artifact Creature Golem
 PT:6/2
 SVar:Picture:http://resources.wizards.com/magic/cards/rav/en-us/card83719.jpg
 Oracle:
-SetInfo:RAV Uncommon

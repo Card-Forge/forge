@@ -5,8 +5,3 @@ PT:2/2
 K:CARDNAME can't block.
 SVar:Picture:http://resources.wizards.com/magic/cards/p2/en-us/card6583.jpg
 Oracle:Goblin Raider can't block.
-SetInfo:PO2 Common
-SetInfo:8ED Common
-SetInfo:7ED Common
-SetInfo:9ED Common
-SetInfo:USG Common

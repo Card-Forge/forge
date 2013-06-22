@@ -6,4 +6,3 @@ S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 2 | AddToughness$ 2 | Condi
 SVar:BuffedBy:Artifact
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ghalmas_warden.jpg
 Oracle:Metalcraft - Ghalma's Warden gets +2/+2 as long as you control three or more artifacts.
-SetInfo:SOM Common

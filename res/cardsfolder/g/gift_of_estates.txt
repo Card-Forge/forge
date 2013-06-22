@@ -5,5 +5,3 @@ A:SP$ ChangeZone | Cost$ 1 W | ConditionPresent$ Land.YouCtrl | ConditionCompare
 SVar:X:Count$Valid Land.OppCtrl
 SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card84504.jpg
 Oracle:If an opponent controls more lands than you, search your library for up to three Plains cards, reveal them, and put them into your hand. Then shuffle your library.
-SetInfo:POR Rare
-SetInfo:9ED Uncommon

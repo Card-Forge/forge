@@ -7,4 +7,3 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creatu
 SVar:TrigProvoke:AB$ MustBlock | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature
 SVar:Picture:http://www.wizards.com/global/images/magic/general/giant_ambush_beetle.jpg
 Oracle:Haste\nWhen Giant Ambush Beetle enters the battlefield, you may have target creature block it this turn if able.
-SetInfo:ARB Uncommon

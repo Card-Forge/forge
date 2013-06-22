@@ -7,4 +7,3 @@ SVar:MaxTgts:Count$Valid Permanent.nonLand
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gridlock.jpg
 Oracle:Tap X target nonland permanents.
-SetInfo:GTC Uncommon

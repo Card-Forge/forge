@@ -7,5 +7,3 @@ A:AB$ Mana | Cost$ T SubCounter<1/MINING> | Produced$ Any | Deplete$ MINING | Sp
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gemstone_mine.jpg
 Oracle:Gemstone Mine enters the battlefield with three mining counters on it.\n{T}, Remove a mining counter from Gemstone Mine: Add one mana of any color to your mana pool. If there are no mining counters on Gemstone Mine, sacrifice it.
-SetInfo:WTH Uncommon
-SetInfo:TSB Special

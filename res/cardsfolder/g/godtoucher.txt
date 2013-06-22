@@ -7,4 +7,3 @@ SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/godtoucher.jpg
 Oracle:{1}{W}, {T}: Prevent all damage that would be dealt to target creature with power 5 or greater this turn.
-SetInfo:ALA Common

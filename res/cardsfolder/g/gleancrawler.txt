@@ -7,5 +7,3 @@ T:Mode$Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield
 SVar:TrigChangeZone:AB$ ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Hand | Defined$ ThisTurnEntered_Graveyard_from_Battlefield_Card.Creature+YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gleancrawler.jpg
 Oracle:({B/G} can be paid with either {B} or {G}.)\nTrample\nAt the beginning of your end step, return to your hand all creature cards in your graveyard that were put there from the battlefield this turn.
-SetInfo:RAV Rare
-SetInfo:DDJ Rare

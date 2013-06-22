@@ -4,4 +4,3 @@ Types:Enchantment
 A:AB$ Tap | Cost$ tapXType<1/Creature> | ValidTgts$ Artifact,Creature | TgtPrompt$ Select target artifact or creature | SpellDescription$ Tap target artifact or creature.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/glare_of_subdual.jpg
 Oracle:Tap an untapped creature you control: Tap target artifact or creature.
-SetInfo:RAV Rare

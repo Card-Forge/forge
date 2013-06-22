@@ -10,5 +10,3 @@ SVar:SacMe:1
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_cadets.jpg
 Oracle:Whenever Goblin Cadets blocks or becomes blocked, target opponent gains control of it. (This removes Goblin Cadets from combat.)
-SetInfo:COM Uncommon
-SetInfo:USG Uncommon

@@ -6,4 +6,3 @@ K:Provoke
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_grappler.jpg
 Oracle:Provoke (When this attacks, you may have target creature defending player controls untap and block it if able.)
-SetInfo:LGN Common

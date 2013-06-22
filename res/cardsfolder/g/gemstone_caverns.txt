@@ -3,7 +3,7 @@ ManaCost:no cost
 Types:Legendary Land
 K:MayEffectFromOpeningHand:FromOpeningHand:!PlayFirst
 Text:If CARDNAME is in your opening hand and you're not playing first, you may begin the game with CARDNAME on the battlefield with a luck counter on it. If you do, exile a card from your hand.
-SVar:FromOpeningHand:AB$ ChangeZone | Cost$ 0 | Defined$ Self | Origin$ Hand | Destination$ Battlefield | SubAbility$ LuckCounter | SpellDescription$ If CARDNAME is in your opening hand and you're not playing first, you may begin the game with CARDNAME on the battlefield with a luck counter on it. 
+SVar:FromOpeningHand:AB$ ChangeZone | Cost$ 0 | Defined$ Self | Origin$ Hand | Destination$ Battlefield | SubAbility$ LuckCounter | SpellDescription$ If CARDNAME is in your opening hand and you're not playing first, you may begin the game with CARDNAME on the battlefield with a luck counter on it.
 SVar:LuckCounter:DB$ PutCounter | CounterType$ LUCK | CounterNum$ 1 | Defined$ Self | SubAbility$ ExileFromHand
 SVar:ExileFromHand:DB$ ChangeZone | Origin$ Hand | Destination$ Exile | ChangeType$ Card | ChangeNum$ 1 | Mandatory$ True | SpellDescription$ If you do, exile a card from your hand.
 A:AB$ Mana | Cost$ T | Produced$ 1 | ConditionCheckSVar$ CheckCounter | ConditionSVarCompare$ EQ0 | SubAbility$ DBMana | SpellDescription$ Add 1 to your mana pool. If CARDNAME has a luck counter on it, instead add one mana of any color to your mana pool.
@@ -12,4 +12,3 @@ SVar:CheckCounter:Count$CardCounters.LUCK
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gemstone_caverns.jpg
 Oracle:If Gemstone Caverns is in your opening hand and you're not playing first, you may begin the game with Gemstone Caverns on the battlefield with a luck counter on it. If you do, exile a card from your hand.\n{T}: Add {1} to your mana pool. If Gemstone Caverns has a luck counter on it, instead add one mana of any color to your mana pool.
-SetInfo:TSP Rare

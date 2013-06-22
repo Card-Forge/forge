@@ -6,5 +6,3 @@ S:Mode$ Continuous | Affected$ Card.Self | AddHiddenKeyword$ CARDNAME can't atta
 SVar:X:Count$ThisTurnCast_Creature.YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_cohort.jpg
 Oracle:Goblin Cohort can't attack unless you've cast a creature spell this turn.
-SetInfo:BOK Common
-SetInfo:EVG Common

@@ -6,4 +6,3 @@ S:Mode$ Continuous | Affected$ Mountain | AddType$ Plains | RemoveSubTypes$ True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/glaciers.jpg
 Oracle:At the beginning of your upkeep, sacrifice Glaciers unless you pay {W}{U}.\nAll Mountains are Plains.
-SetInfo:ICE Rare

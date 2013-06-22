@@ -6,4 +6,3 @@ A:AB$ ChangeZone | Cost$ tapXType<5/Zombie> | TgtPrompt$ Choose target creature 
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gravespawn_sovereign.jpg
 Oracle:Tap five untapped Zombies you control: Put target creature card from a graveyard onto the battlefield under your control.
-SetInfo:ONS Rare

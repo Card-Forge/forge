@@ -7,5 +7,3 @@ SVar:DBChangeZone2:DB$ ChangeZone | Origin$ Library | Destination$ Hand | Change
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gifts_ungiven.jpg
 Oracle:Search your library for four cards with different names and reveal them. Target opponent chooses two of those cards. Put the chosen cards into your graveyard and the rest into your hand. Then shuffle your library.
-SetInfo:CHK Rare
-SetInfo:V09 Mythic

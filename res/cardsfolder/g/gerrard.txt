@@ -6,4 +6,3 @@ T:Mode$ Phase | Phase$ Draw | ValidPlayer$ You | TriggerZones$ Command | Execute
 SVar:TrigDraw:AB$ Draw | Cost$ 0 | NumCards$ 1 | Defined$ You
 SVar:Picture:http://www.cardforge.org/fpics/vgd-lq/gerrard.jpg
 Oracle:Hand -4, life +0\nAt the beginning of your draw step, draw an additional card.
-SetInfo:VAN Special

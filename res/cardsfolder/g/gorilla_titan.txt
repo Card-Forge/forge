@@ -7,4 +7,3 @@ S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 4 | AddToughness$ 4 | Check
 SVar:X:Count$InYourYard
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gorilla_titan.jpg
 Oracle:Trample\nGorilla Titan gets +4/+4 as long as there are no cards in your graveyard.
-SetInfo:ODY Uncommon

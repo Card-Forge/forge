@@ -10,4 +10,3 @@ SVar:X:Count$Valid Creature.YouCtrl
 SVar:BuffedBy:Creature
 SVar:Picture:http://www.wizards.com/global/images/magic/general/geist_honored_monk.jpg
 Oracle:Vigilance\nGeist-Honored Monk's power and toughness are each equal to the number of creatures you control.\nWhen Geist-Honored Monk enters the battlefield, put two 1/1 white Spirit creature tokens with flying onto the battlefield.
-SetInfo:ISD Rare

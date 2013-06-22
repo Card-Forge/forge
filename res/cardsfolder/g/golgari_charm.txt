@@ -7,4 +7,3 @@ SVar:DestroyEnch:DB$ Destroy | ValidTgts$ Enchantment | TgtPrompt$ Select target
 SVar:RegenAll:DB$ RegenerateAll | ValidCards$ Creature.YouCtrl | SpellDescription$ Regenerate each creature you control.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/golgari_charm.jpg
 Oracle:Choose one - All creatures get -1/-1 until end of turn; or destroy target enchantment; or regenerate each creature you control.
-SetInfo:RTR Uncommon

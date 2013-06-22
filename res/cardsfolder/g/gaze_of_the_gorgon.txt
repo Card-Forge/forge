@@ -7,4 +7,3 @@ SVar:DelGorgonTrig:Mode$ Phase | Phase$ EndCombat | TriggerZones$ Command | Vali
 SVar:TrigGorgonDestroy:AB$ DestroyAll | Cost$ 0 | ValidCards$ Creature.blockedRemembered,Creature.blockedByRemembered
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gaze_of_the_gorgon.jpg
 Oracle:({B/G} can be paid with either {B} or {G}.)\nRegenerate target creature. At end of combat, destroy all creatures that blocked or were blocked by that creature this turn.
-SetInfo:RAV Common

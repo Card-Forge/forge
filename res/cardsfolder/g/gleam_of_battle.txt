@@ -6,4 +6,3 @@ SVar:TrigPut:AB$ PutCounter | Cost$ 0 | Defined$ TriggeredAttacker | CounterType
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gleam_of_battle.jpg
 Oracle:Whenever a creature you control attacks, put a +1/+1 counter on it.
-SetInfo:DGM Uncommon

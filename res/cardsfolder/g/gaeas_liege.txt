@@ -13,9 +13,3 @@ SVar:BuffedBy:Forest
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gaeas_liege.jpg
 Oracle:As long as Gaea's Liege isn't attacking, its power and toughness are each equal to the number of Forests you control. As long as Gaea's Liege is attacking, its power and toughness are each equal to the number of Forests defending player controls.\n{T}: Target land becomes a Forest until Gaea's Liege leaves the battlefield.
-SetInfo:2ED Rare
-SetInfo:TSB Special
-SetInfo:LEB Rare
-SetInfo:LEA Rare
-SetInfo:4ED Rare
-SetInfo:3ED Rare

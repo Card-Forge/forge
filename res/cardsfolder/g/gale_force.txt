@@ -5,4 +5,3 @@ A:SP$ DamageAll | Cost$ 4 G | NumDmg$ 5 | ValidCards$ Creature.withFlying | Vali
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gale_force.jpg
 Oracle:Gale Force deals 5 damage to each creature with flying.
-SetInfo:CHK Uncommon

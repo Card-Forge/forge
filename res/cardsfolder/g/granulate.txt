@@ -4,4 +4,3 @@ Types:Sorcery
 A:SP$ DestroyAll | Cost$ 2 R R | ValidCards$ Artifact.nonLand+cmcLE4 | SpellDescription$ Destroy each nonland artifact with converted mana cost 4 or less.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/granulate.jpg
 Oracle:Destroy each nonland artifact with converted mana cost 4 or less.
-SetInfo:5DN Rare

@@ -6,5 +6,3 @@ T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ 
 SVar:TrigPump:AB$Pump | Cost$ 0 | Defined$ Self | NumAtt$ 2 | NumDef$ 2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/giant_badger.jpg
 Oracle:Whenever Giant Badger blocks, it gets +2/+2 until end of turn.
-SetInfo:8ED Common
-SetInfo:MBP Special

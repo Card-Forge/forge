@@ -8,4 +8,3 @@ SVar:TrigDamage:AB$DealDamage | Cost$ 0 | Defined$ TriggeredSource | NumDmg$ X |
 SVar:X:TriggerCount$DamageAmount
 SVar:Picture:http://www.wizards.com/global/images/magic/general/guilty_conscience.jpg
 Oracle:Enchant creature\nWhenever enchanted creature deals damage, Guilty Conscience deals that much damage to that creature.
-SetInfo:SCG Common

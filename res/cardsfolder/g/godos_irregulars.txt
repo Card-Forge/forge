@@ -5,4 +5,3 @@ PT:1/1
 A:AB$ DealDamage | Cost$ R | ValidTgts$ Creature.blockingSource | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target creature blocking it.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/godos_irregulars.jpg
 Oracle:{R}: Godo's Irregulars deals 1 damage to target creature blocking it.
-SetInfo:SOK Uncommon

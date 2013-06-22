@@ -5,4 +5,3 @@ A:SP$ Destroy | Cost$ B | ValidTgts$ Creature.nonBlack+toughnessLEX | TgtPrompt$
 SVar:X:Count$InYourYard
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ghastly_demise.jpg
 Oracle:Destroy target nonblack creature if its toughness is less than or equal to the number of cards in your graveyard.
-SetInfo:ODY Common

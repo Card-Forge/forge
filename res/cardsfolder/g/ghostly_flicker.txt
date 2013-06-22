@@ -7,4 +7,3 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ghostly_flicker.jpg
 Oracle:Exile two target artifacts, creatures, and/or lands you control, then return those cards to the battlefield under your control.
-SetInfo:AVR Common

@@ -9,4 +9,3 @@ K:ETBReplacement:Other:DBTap
 SVar:DBTap:AB$ Tap | Cost$ 0 | ETB$ True | Defined$ Self | UnlessCost$ Reveal<1/Elf> | UnlessPayer$ You | StackDescription$ enters the battlefield tapped.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gilt_leaf_palace.jpg
 Oracle:As Gilt-Leaf Palace enters the battlefield, you may reveal an Elf card from your hand. If you don't, Gilt-Leaf Palace enters the battlefield tapped.\n{T}: Add {B} or {G} to your mana pool.
-SetInfo:LRW Rare

@@ -9,4 +9,3 @@ SVar:TrigTapUnTap:AB$ TapOrUntap | Cost$ 0 | ValidTgts$ Permanent | TgtPrompt$ S
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ghostly_touch.jpg
 Oracle:Enchant creature\nEnchanted creature has "Whenever this creature attacks, you may tap or untap target permanent."
-SetInfo:AVR Uncommon

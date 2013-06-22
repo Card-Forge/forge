@@ -7,4 +7,3 @@ T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage
 SVar:TrigCopy:DB$ CopyPermanent | Defined$ Self | NumCopies$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/giant_adephage.jpg
 Oracle:Trample\nWhenever Giant Adephage deals combat damage to a player, put a token onto the battlefield that's a copy of Giant Adephage.
-SetInfo:GTC Mythic

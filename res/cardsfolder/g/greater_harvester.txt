@@ -9,4 +9,3 @@ SVar:TrigSacOpp:AB$ Sacrifice | Cost$ 0 | SacValid$ Permanent | Amount$ 2 | Defi
 SVar:MustBeBlocked:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/greater_harvester.jpg
 Oracle:At the beginning of your upkeep, sacrifice a permanent.\nWhenever Greater Harvester deals combat damage to a player, that player sacrifices two permanents.
-SetInfo:DST Rare

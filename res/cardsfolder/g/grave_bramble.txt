@@ -6,4 +6,3 @@ K:Defender
 K:Protection:Zombie:Protection from Zombies
 SVar:Picture:http://www.wizards.com/global/images/magic/general/grave_bramble.jpg
 Oracle:Defender, protection from Zombies
-SetInfo:ISD Common

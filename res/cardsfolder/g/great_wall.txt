@@ -6,4 +6,3 @@ SVar:NonStackingEffect:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/great_wall.jpg
 Oracle:Creatures with plainswalk can be blocked as though they didn't have plainswalk.
-SetInfo:LEG Uncommon

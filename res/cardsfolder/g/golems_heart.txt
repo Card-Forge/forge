@@ -5,4 +5,3 @@ T:Mode$ SpellCast | ValidCard$ Artifact | Execute$ TrigGainLife | TriggerZones$ 
 SVar:TrigGainLife:AB$GainLife | Cost$ 0 | LifeAmount$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/golems_heart.jpg
 Oracle:Whenever a player casts an artifact spell, you may gain 1 life.
-SetInfo:SOM Uncommon

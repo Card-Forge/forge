@@ -8,4 +8,3 @@ K:CARDNAME can't attack if defending player controls an untapped creature with p
 K:CantBlock Creature.powerGE3
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_mutant.jpg
 Oracle:Trample\nGoblin Mutant can't attack if defending player controls an untapped creature with power 3 or greater.\nGoblin Mutant can't block creatures with power 3 or greater.
-SetInfo:ICE Uncommon

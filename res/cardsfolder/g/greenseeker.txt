@@ -6,4 +6,3 @@ A:AB$ ChangeZone | Cost$ G T Discard<1/Card> | Origin$ Library | Destination$ Ha
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/greenseeker.jpg
 Oracle:{G}, {T}, Discard a card: Search your library for a basic land card, reveal it, and put it into your hand. Then shuffle your library.
-SetInfo:TSP Common

@@ -9,4 +9,3 @@ SVar:X:Remembered$CardToughness
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gore_vassal.jpg
 Oracle:Sacrifice Gore Vassal: Put a -1/-1 counter on target creature. Then if that creature's toughness is 1 or greater, regenerate it.
-SetInfo:MBS Uncommon

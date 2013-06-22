@@ -6,4 +6,3 @@ SVar:DBDraw:DB$Draw | NumCards$ 1 | ConditionPresent$ Giant.YouCtrl | ConditionC
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/giants_ire.jpg
 Oracle:Giant's Ire deals 4 damage to target player. If you control a Giant, draw a card.
-SetInfo:LRW Common

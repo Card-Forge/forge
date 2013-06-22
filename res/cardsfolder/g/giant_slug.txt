@@ -9,5 +9,3 @@ SVar:DBPump:DB$ Pump | Defined$ Remembered | KW$ ChosenTypewalk | DefinedChosenK
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 SVar:Picture:http://www.wizards.com/global/images/magic/general/giant_slug.jpg
 Oracle:{5}: At the beginning of your next upkeep, choose a basic land type. Giant Slug gains landwalk of the chosen type until the end of that turn.
-SetInfo:CHR Common
-SetInfo:LEG Common

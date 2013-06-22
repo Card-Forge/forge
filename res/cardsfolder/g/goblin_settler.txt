@@ -6,4 +6,3 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigDestroy:DB$Destroy | ValidTgts$ Land | TgtPrompt$ Select a land.
 SVar:Picture:http://serv2.tcgimages.eu/img/cards/Starter_1999/goblin_settler.jpg
 Oracle:When Goblin Settler enters the battlefield, destroy target land.
-SetInfo:S99 Uncommon

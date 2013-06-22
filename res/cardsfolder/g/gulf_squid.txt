@@ -7,4 +7,3 @@ SVar:TrigTapAll:AB$ TapAll | Cost$ 0 | ValidTgts$ Player | TgtPrompt$ Select tar
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gulf_squid.jpg
 Oracle:When Gulf Squid enters the battlefield, tap all lands target player controls.
-SetInfo:PCY Common

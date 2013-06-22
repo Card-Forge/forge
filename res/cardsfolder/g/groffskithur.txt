@@ -6,4 +6,3 @@ T:Mode$ AttackerBlocked | ValidCard$ Card.Self | TriggerZones$ Battlefield | Opt
 SVar:TrigReturn:AB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Hand | ValidCard$ Card.namedGroffskithur | ChangeNum$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/groffskithur.jpg
 Oracle:Whenever Groffskithur becomes blocked, you may return target card named Groffskithur from your graveyard to your hand.
-SetInfo:MRD Common

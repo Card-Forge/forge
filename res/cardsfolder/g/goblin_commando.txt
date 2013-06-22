@@ -7,4 +7,3 @@ SVar:TrigDealDamage:DB$DealDamage | ValidTgts$ Creature | TgtPrompt$ Select targ
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_commando.jpg
 Oracle:When Goblin Commando enters the battlefield, it deals 2 damage to target creature.
-SetInfo:S99 Uncommon

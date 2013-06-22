@@ -6,7 +6,3 @@ K:Flying
 K:CARDNAME can't block.
 SVar:Picture:http://resources.wizards.com/magic/cards/p2/en-us/card6584.jpg
 Oracle:Flying\nGoblin Glider can't block.
-SetInfo:PO2 Common
-SetInfo:S99 Uncommon
-SetInfo:7ED Uncommon
-SetInfo:8ED Uncommon

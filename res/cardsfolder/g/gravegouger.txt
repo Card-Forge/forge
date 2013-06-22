@@ -8,4 +8,3 @@ SVar:TrigExile:DB$ChangeZone | Cost$ 0 | TargetMin$ 0 | TargetMax$ 2 | TargetsFr
 SVar:TrigReturn:AB$ChangeZone | Cost$ 0 | Defined$ Remembered | Origin$ Exile | Destination$ Graveyard
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gravegouger.jpg
 Oracle:When Gravegouger enters the battlefield, exile up to two target cards from a single graveyard.\nWhen Gravegouger leaves the battlefield, return the exiled cards to their owner's graveyard.
-SetInfo:TOR Common

@@ -6,9 +6,3 @@ S:Mode$ RaiseCost | ValidCard$ Enchantment.White | Type$ Ability | Amount$ 3 | A
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gloom.jpg
 Oracle:White spells cost {3} more to cast.\nActivated abilities of white enchantments cost {3} more to activate.
-SetInfo:2ED Uncommon
-SetInfo:LEB Uncommon
-SetInfo:LEA Uncommon
-SetInfo:5ED Uncommon
-SetInfo:4ED Uncommon
-SetInfo:3ED Uncommon

@@ -5,4 +5,3 @@ PT:2/2
 K:AlternateAdditionalCost:Reveal<1/Kithkin>:3
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goldmeadow_stalwart.jpg
 Oracle:As an additional cost to cast Goldmeadow Stalwart, reveal a Kithkin card from your hand or pay {3}.
-SetInfo:LRW Uncommon

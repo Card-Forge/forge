@@ -10,4 +10,3 @@ SVar:X:ReplaceCount$DamageAmount/HalfDown
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ghosts_of_the_innocent.jpg
 SVar:RemAIDeck:True
 Oracle:If a source would deal damage to a creature or player, it deals half that damage, rounded down, to that creature or player instead.
-SetInfo:RAV Rare

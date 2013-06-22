@@ -9,4 +9,3 @@ SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/glyph_of_life.jpg
 Oracle:Until end of turn, whenever an attacking creature deals damage to target Wall creature, you gain that much life.
-SetInfo:LEG Common

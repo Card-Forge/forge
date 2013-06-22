@@ -7,4 +7,3 @@ SVar:ETBYourCtrl:AB$ ChangeZone | Cost$ 0 | Origin$ All | Destination$ Battlefie
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gather_specimens.jpg
 Oracle:If a creature would enter the battlefield under an opponent's control this turn, it enters the battlefield under your control instead.
-SetInfo:ALA Rare

@@ -6,4 +6,3 @@ SVar:X:Targeted$CardManaCost
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/great_defender.jpg
 Oracle:Target creature gets +0/+X until end of turn, where X is its converted mana cost.
-SetInfo:LEG Uncommon

@@ -6,4 +6,3 @@ A:AB$ ChooseColor | Cost$ 1 U | Defined$ You | OrColors$ True | SubAbility$ Anim
 SVar:Animate:DB$ Animate | ValidTgts$ Creature | TgtPrompt$ Select target creature | Colors$ ChosenColor | OverwriteColors$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/govern_the_guildless.jpg
 Oracle:Gain control of target monocolored creature.\nForecast - {1}{U}, Reveal Govern the Guildless from your hand: Target creature becomes the color or colors of your choice until end of turn. (Activate this ability only during your upkeep and only once each turn.)
-SetInfo:DIS Rare

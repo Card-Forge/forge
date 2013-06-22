@@ -7,4 +7,3 @@ SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ 3 | TokenName$ Kithkin Soldier 
 A:AB$ GainLife | Cost$ G Sac<1/Kithkin> | LifeAmount$ 1 | SpellDescription$ You gain 1 life.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/guardian_of_cloverdell.jpg
 Oracle:When Guardian of Cloverdell enters the battlefield, put three 1/1 white Kithkin Soldier creature tokens onto the battlefield.\n{G}, Sacrifice a Kithkin: You gain 1 life.
-SetInfo:LRW Uncommon

@@ -6,4 +6,3 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigChangeZone:AB$ChangeZone | ChangeType$ Zombie.YouCtrl | Cost$ 0 | Origin$ Graveyard | Destination$ Hand | Hidden$ True | AtRandom$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ghoulraiser.jpg
 Oracle:When Ghoulraiser enters the battlefield, return a Zombie card at random from your graveyard to your hand.
-SetInfo:ISD Common

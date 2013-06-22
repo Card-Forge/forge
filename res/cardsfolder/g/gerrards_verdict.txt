@@ -7,4 +7,3 @@ SVar:X:Remembered$Valid Land/Times.3
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gerrards_verdict.jpg
 Oracle:Target player discards two cards. You gain 3 life for each land card discarded this way.
-SetInfo:APC Uncommon

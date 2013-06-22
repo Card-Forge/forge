@@ -7,4 +7,3 @@ SVar:X:Count$xPaid
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/greel_mind_raker.jpg
 Oracle:{X}{B}, {T}, Discard two cards: Target player discards X cards at random.
-SetInfo:PCY Rare

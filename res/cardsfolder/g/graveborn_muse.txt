@@ -8,5 +8,3 @@ SVar:DBLoseLife:DB$LoseLife | Defined$ You | LifeAmount$ X | References$ X
 SVar:X:Count$Valid Zombie.YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/graveborn_muse.jpg
 Oracle:At the beginning of your upkeep, you draw X cards and you lose X life, where X is the number of Zombies you control.
-SetInfo:LGN Rare
-SetInfo:10E Rare

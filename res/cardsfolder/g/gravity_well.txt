@@ -5,4 +5,3 @@ T:Mode$ Attacks | ValidCard$ Creature.withFlying | Execute$ Debuff | TriggerZone
 SVar:Debuff:AB$Debuff | Cost$ 0 | Defined$ TriggeredAttacker | Keywords$ Flying
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gravity_well.jpg
 Oracle:Whenever a creature with flying attacks, it loses flying until end of turn.
-SetInfo:ROE Uncommon

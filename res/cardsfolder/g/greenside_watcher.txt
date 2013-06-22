@@ -6,4 +6,3 @@ A:AB$ Untap | Cost$ T | ValidTgts$ Gate | TgtPrompt$ Select target gate | SpellD
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/greenside_watcher.jpg
 Oracle:{T}: Untap target Gate.
-SetInfo:GTC Common

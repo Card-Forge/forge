@@ -6,4 +6,3 @@ T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefi
 SVar:TrigUntap:AB$ Untap | Cost$ 0 | UntapUpTo$ True | UntapType$ Land | Amount$ 7
 SVar:Picture:http://www.wizards.com/global/images/magic/general/great_whale.jpg
 Oracle:When Great Whale enters the battlefield, untap up to seven lands.
-SetInfo:USG Rare

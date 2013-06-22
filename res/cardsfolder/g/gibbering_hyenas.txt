@@ -6,4 +6,3 @@ PT:3/2
 K:CantBlock Creature.Black
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gibbering_hyenas.jpg
 Oracle:Gibbering Hyenas can't block black creatures.
-SetInfo:MIR Common

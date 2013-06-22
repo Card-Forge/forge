@@ -8,4 +8,3 @@ SVar:RemRandomDeck:True
 DeckNeeds:Color$blue|black|red
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gem_of_becoming.jpg
 Oracle:{3}, {T}, Sacrifice Gem of Becoming: Search your library for an Island card, a Swamp card, and a Mountain card. Reveal those cards and put them into your hand. Then shuffle your library.
-SetInfo:M13 Uncommon

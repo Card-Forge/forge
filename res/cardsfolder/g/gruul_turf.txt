@@ -8,7 +8,3 @@ SVar:TrigReturn:AB$ChangeZone | Origin$ Battlefield | Destination$ Hand | Cost$ 
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gruul_turf.jpg
 Oracle:Gruul Turf enters the battlefield tapped.\nWhen Gruul Turf enters the battlefield, return a land you control to its owner's hand.\n{T}: Add {R}{G} to your mana pool.
-SetInfo:GPT Common
-SetInfo:PC2 Common
-SetInfo:COM Common
-SetInfo:HOP Common

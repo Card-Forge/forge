@@ -5,7 +5,3 @@ PT:2/2
 K:Haste
 SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83109.jpg
 Oracle:Haste (This creature can attack the turn it comes under your control.)
-SetInfo:8ED Common
-SetInfo:S99 Common
-SetInfo:7ED Common
-SetInfo:9ED Common

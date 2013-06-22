@@ -7,4 +7,3 @@ S:Mode$ Continuous | Affected$ Creature.PairedWith,Creature.Self+Paired | AddAbi
 SVar:Untap:AB$Untap | Cost$ 2 U | Defined$ Self | SpellDescription$ Untap CARDNAME.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/galvanic_alchemist.jpg
 Oracle:Soulbond (You may pair this creature with another unpaired creature when either enters the battlefield. They remain paired for as long as you control both of them.)\nAs long as Galvanic Alchemist is paired with another creature, each of those creatures has "{2}{U}: Untap this creature."
-SetInfo:AVR Common

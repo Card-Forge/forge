@@ -6,4 +6,3 @@ K:First Strike
 K:Haste
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_berserker.jpg
 Oracle:First strike, haste
-SetInfo:UDS Uncommon

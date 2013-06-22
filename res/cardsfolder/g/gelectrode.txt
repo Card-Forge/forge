@@ -7,5 +7,3 @@ T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | Tr
 SVar:TrigUntap:AB$Untap | Cost$ 0 | Defined$ Self
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gelectrode.jpg
 Oracle:{T}: Gelectrode deals 1 damage to target creature or player.\nWhenever you cast an instant or sorcery spell, you may untap Gelectrode.
-SetInfo:GPT Uncommon
-SetInfo:DDJ Uncommon

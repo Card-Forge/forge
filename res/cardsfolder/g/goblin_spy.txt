@@ -5,4 +5,3 @@ PT:1/1
 K:Play with the top card of your library revealed.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_spy.jpg
 Oracle:Play with the top card of your library revealed.
-SetInfo:INV Uncommon

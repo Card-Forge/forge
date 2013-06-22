@@ -5,4 +5,3 @@ A:SP$ Destroy | Cost$ 3 B B | ValidTgts$ Creature | TgtPrompt$ Select target cre
 SVar:DBDiscard:DB$ Discard | Defined$ TargetedController | NumCards$ 1 | Mode$ TgtChoose | ConditionDefined$ Targeted | ConditionPresent$ Card.Green,Card.White | ConditionCompare$ EQ1 | ConditionDescription$ If that creature was green or white,
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gloomlance.jpg
 Oracle:Destroy target creature. If that creature was green or white, its controller discards a card.
-SetInfo:SHM Common

@@ -6,4 +6,3 @@ S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone
 SVar:X:Count$TypeInYourYard.Creature
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ghoultree.jpg
 Oracle:Ghoultree costs {1} less to cast for each creature card in your graveyard.
-SetInfo:DKA Rare

@@ -6,4 +6,3 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:GrinningDiscard:AB$ Discard | Cost$ 0 | ValidTgts$ Opponent | TgtPrompt$ Select an opponent to discard | NumCards$ 1 | Mode$ TgtChoose
 SVar:Picture:http://www.cardforge.org/fpics/vgd-lq/grinning_demon_avatar.jpg
 Oracle:Hand -1, life -2\nWhenever a nontoken creature you control dies, target opponent discards a card.
-SetInfo:VAN Special x2

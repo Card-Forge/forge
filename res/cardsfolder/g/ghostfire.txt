@@ -5,5 +5,3 @@ A:SP$ DealDamage | Cost$ 2 R | ValidTgts$ Creature,Player | TgtPrompt$ Select ta
 Colors:colorless
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ghostfire.jpg
 Oracle:Ghostfire is colorless.\nGhostfire deals 3 damage to target creature or player.
-SetInfo:FUT Common
-SetInfo:DDG Common

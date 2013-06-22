@@ -9,4 +9,3 @@ SVar:RemRandomDeck:True
 DeckNeeds:Color$Blue
 SVar:Picture:http://www.wizards.com/global/images/magic/general/glade_gnarr.jpg
 Oracle:Whenever a player casts a blue spell, Glade Gnarr gets +2/+2 until end of turn.
-SetInfo:APC Common

@@ -5,7 +5,3 @@ PT:2/3
 A:AB$ DealDamage | Cost$ T | ValidTgts$ Creature.withFlying | TgtPrompt$ Select target creature with flying | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target creature with flying.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/grapeshot_catapult.jpg
 Oracle:{T}: Grapeshot Catapult deals 1 damage to target creature with flying.
-SetInfo:ATQ Common
-SetInfo:5ED Common
-SetInfo:7ED Uncommon
-SetInfo:4ED Common

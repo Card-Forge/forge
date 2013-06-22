@@ -6,4 +6,3 @@ SVar:X:Count$xPaid
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gaze_of_granite.jpg
 Oracle:Destroy each nonland permanent with converted mana cost X or less.
-SetInfo:DGM Rare

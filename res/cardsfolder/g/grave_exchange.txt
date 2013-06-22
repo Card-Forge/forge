@@ -5,4 +5,3 @@ A:SP$ ChangeZone | Cost$ 4 B B | Origin$ Graveyard | Destination$ Hand | TgtProm
 SVar:DBSacrifice:DB$ Sacrifice | Cost$ 0 | ValidTgts$ Player | SacValid$ Creature | SacMessage$ Creature
 SVar:Picture:http://www.wizards.com/global/images/magic/general/grave_exchange.jpg
 Oracle:Return target creature card from your graveyard to your hand. Target player sacrifices a creature.
-SetInfo:AVR Common

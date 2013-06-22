@@ -8,5 +8,3 @@ S:Mode$ Continuous | Affected$ Creature.Black+Other+YouCtrl | AddPower$ 1 | AddT
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/glen_elendra_liege.jpg
 Oracle:Flying\nOther blue creatures you control get +1/+1.\nOther black creatures you control get +1/+1.
-SetInfo:PC2 Rare
-SetInfo:SHM Rare

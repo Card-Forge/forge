@@ -7,5 +7,3 @@ SVar:DBChange:DB$ChangeZone | Optional$ True  | Origin$ Library | Destination$ B
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ghost_quarter.jpg
 Oracle:{T}: Add {1} to your mana pool.\n{T}, Sacrifice Ghost Quarter: Destroy target land. Its controller may search his or her library for a basic land card, put it onto the battlefield, then shuffle his or her library.
-SetInfo:ISD Uncommon
-SetInfo:DIS Uncommon

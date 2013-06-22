@@ -9,4 +9,3 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:KickedGiant:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Card.namedGigantiform | ChangeNum$ 1 | ShuffleNonMandatory$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gigantiform.jpg
 Oracle:Kicker {4}\nEnchant creature\nEnchanted creature is 8/8 and has trample.\nWhen Gigantiform enters the battlefield, if it was kicked, you may search your library for a card named Gigantiform, put it onto the battlefield, then shuffle your library.
-SetInfo:ZEN Rare

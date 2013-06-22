@@ -9,4 +9,3 @@ SVar:TrigPutCounter:DB$PutCounter | Defined$ Self | CounterType$ P1P1 | CounterN
 SVar:BuffedBy:Ally
 SVar:Picture:http://www.wizards.com/global/images/magic/general/graypelt_hunter.jpg
 Oracle:Trample\nWhenever Graypelt Hunter or another Ally enters the battlefield under your control, you may put a +1/+1 counter on Graypelt Hunter.
-SetInfo:WWK Common

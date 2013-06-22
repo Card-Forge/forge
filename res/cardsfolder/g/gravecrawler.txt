@@ -9,4 +9,3 @@ SVar:SacMe:3
 SVar:DiscardMe:3
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gravecrawler.jpg
 Oracle:Gravecrawler can't block.\nYou may cast Gravecrawler from your graveyard as long as you control a Zombie.
-SetInfo:DKA Rare

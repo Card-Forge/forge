@@ -15,4 +15,3 @@ SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/grimoire_thief.jpg
 Oracle:Whenever Grimoire Thief becomes tapped, exile the top three cards of target opponent's library face down.\nYou may look at cards exiled with Grimoire Thief.\n{U}, Sacrifice Grimoire Thief: Turn all cards exiled with Grimoire Thief face up. Counter all spells with those names.
-SetInfo:MOR Rare

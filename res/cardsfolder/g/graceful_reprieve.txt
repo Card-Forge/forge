@@ -8,4 +8,3 @@ SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/graceful_reprieve.jpg
 Oracle:When target creature dies this turn, return that card to the battlefield under its owner's control.
-SetInfo:MOR Uncommon

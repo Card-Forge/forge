@@ -9,4 +9,3 @@ SVar:PlayMain1:TRUE
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_caves.jpg
 Oracle:Enchant land\nAs long as enchanted land is a basic Mountain, Goblin creatures get +0/+2.
-SetInfo:DRK Common

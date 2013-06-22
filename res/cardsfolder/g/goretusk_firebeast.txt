@@ -6,4 +6,3 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigDealDamage:DB$DealDamage | Cost$ 0 | ValidTgts$ Player | TgtPrompt$ Select target player | NumDmg$ 4
 SVar:Picture:http://resources.wizards.com/magic/cards/jud/en-us/card34917.jpg
 Oracle:When Goretusk Firebeast enters the battlefield, it deals 4 damage to target player.
-SetInfo:JUD Common

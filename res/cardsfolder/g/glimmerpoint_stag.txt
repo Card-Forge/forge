@@ -10,4 +10,3 @@ SVar:TrigBounce:AB$ChangeZone | Cost$ 0 | Origin$ Exile | Destination$ Battlefie
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/glimmerpoint_stag.jpg
 Oracle:Vigilance\nWhen Glimmerpoint Stag enters the battlefield, exile another target permanent. Return that card to the battlefield under its owner's control at the beginning of the next end step.
-SetInfo:SOM Uncommon

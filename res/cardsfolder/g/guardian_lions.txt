@@ -5,4 +5,3 @@ PT:1/6
 K:Vigilance
 SVar:Picture:http://www.wizards.com/global/images/magic/general/guardian_lions.jpg
 Oracle:Vigilance (Attacking doesn't cause this creature to tap.)
-SetInfo:M13 Common

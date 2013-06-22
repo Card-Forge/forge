@@ -7,4 +7,3 @@ SVar:DBPain:DB$DealDamage | NumDmg$ 1 | Defined$ You
 K:CARDNAME enters the battlefield tapped.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/grand_coliseum.jpg
 Oracle:Grand Coliseum enters the battlefield tapped.\n{T}: Add {1} to your mana pool.\n{T}: Add one mana of any color to your mana pool. Grand Coliseum deals 1 damage to you.
-SetInfo:ONS Rare

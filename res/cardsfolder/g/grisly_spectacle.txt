@@ -6,4 +6,3 @@ SVar:DBMill:DB$ Mill | NumCards$ X | Defined$ TargetedController | References$ X
 SVar:X:Targeted$CardPower
 SVar:Picture:http://www.wizards.com/global/images/magic/general/grisly_spectacle.jpg
 Oracle:Destroy target nonartifact creature. Its controller puts a number of cards equal to that creature's power from the top of his or her library into his or her graveyard.
-SetInfo:GTC Common

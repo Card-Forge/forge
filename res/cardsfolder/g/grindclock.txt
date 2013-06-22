@@ -6,4 +6,3 @@ A:AB$ Mill | Cost$ T | NumCards$ X | ValidTgts$ Player | TgtPrompt$ Choose a pla
 SVar:X:Count$CardCounters.CHARGE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/grindclock.jpg
 Oracle:{T}: Put a charge counter on Grindclock.\n{T}: Target player puts the top X cards of his or her library into his or her graveyard, where X is the number of charge counters on Grindclock.
-SetInfo:SOM Rare

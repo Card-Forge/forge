@@ -5,4 +5,3 @@ PT:2/1
 A:AB$ Regenerate | Cost$ Sac<1/Goblin> | Defined$ Self | SpellDescription$ Regenerate CARDNAME.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_turncoat.jpg
 Oracle:Sacrifice a Goblin: Regenerate Goblin Turncoat.
-SetInfo:LGN Common

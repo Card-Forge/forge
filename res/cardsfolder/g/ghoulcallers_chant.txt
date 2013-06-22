@@ -6,4 +6,3 @@ A:SP$ ChangeZone | Cost$ B | Origin$ Graveyard | Destination$ Hand | Mandatory$ 
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ghoulcallers_chant.jpg
 Oracle:Choose one - Return target creature card from your graveyard to your hand; or return two target Zombie cards from your graveyard to your hand.
-SetInfo:ISD Common

@@ -8,4 +8,3 @@ SVar:DBMill:DB$ Mill | NumCards$ X | Defined$ TargetedOwner | References$ X
 SVar:X:Targeted$CardManaCost
 SVar:Picture:http://www.wizards.com/global/images/magic/general/geth_lord_of_the_vault.jpg
 Oracle:Intimidate\n{X}{B}: Put target artifact or creature card with converted mana cost X from an opponent's graveyard onto the battlefield under your control tapped. Then that player puts the top X cards of his or her library into his or her graveyard.
-SetInfo:SOM Mythic

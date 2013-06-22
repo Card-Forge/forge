@@ -7,4 +7,3 @@ SVar:PlayMain1:TRUE
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gravity_sphere.jpg
 Oracle:All creatures lose flying.
-SetInfo:LEG Rare

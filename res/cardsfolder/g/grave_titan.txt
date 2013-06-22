@@ -9,5 +9,3 @@ SVar:TrigToken:AB$Token | Cost$ 0 | TokenImage$ B 2 2 Zombie | TokenName$ Zombie
 SVar:HasAttackEffect:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/grave_titan.jpg
 Oracle:Deathtouch\nWhenever Grave Titan enters the battlefield or attacks, put two 2/2 black Zombie creature tokens onto the battlefield.
-SetInfo:M11 Mythic
-SetInfo:M12 Mythic

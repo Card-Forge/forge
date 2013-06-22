@@ -8,5 +8,3 @@ A:AB$ Mana | Cost$ BR T | Produced$ R | Amount$ 2 | SpellDescription$ Add R R to
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/graven_cairns.jpg
 Oracle:{T}: Add {1} to your mana pool.\n{B/R}, {T}: Add {B}{B}, {B}{R}, or {R}{R} to your mana pool.
-SetInfo:FUT Rare
-SetInfo:SHM Rare

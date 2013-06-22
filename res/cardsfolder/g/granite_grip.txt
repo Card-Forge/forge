@@ -8,5 +8,3 @@ SVar:X:Count$Valid Mountain.YouCtrl/Times.1
 SVar:BuffedBy:Mountain
 SVar:Picture:http://www.wizards.com/global/images/magic/general/granite_grip.jpg
 Oracle:Enchant creature\nEnchanted creature gets +1/+0 for each Mountain you control.
-SetInfo:ULG Common
-SetInfo:7ED Common

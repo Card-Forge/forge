@@ -7,4 +7,3 @@ SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ CHARG
 SVar:X:Count$CardCounters.CHARGE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/golden_urn.jpg
 Oracle:At the beginning of your upkeep, you may put a charge counter on Golden Urn.\n{T}, Sacrifice Golden Urn: You gain life equal to the number of charge counters on Golden Urn.
-SetInfo:SOM Common

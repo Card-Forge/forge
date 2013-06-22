@@ -10,4 +10,3 @@ SVar:DBShuffle:DB$ Shuffle
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gaeas_balance.jpg
 Oracle:As an additional cost to cast Gaea's Balance, sacrifice five lands.\nSearch your library for a land card of each basic land type and put them onto the battlefield. Then shuffle your library.
-SetInfo:APC Uncommon

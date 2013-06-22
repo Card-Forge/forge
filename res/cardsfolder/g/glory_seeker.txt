@@ -4,8 +4,3 @@ Types:Creature Human Soldier
 PT:2/2
 SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83107.jpg
 Oracle:
-SetInfo:8ED Common
-SetInfo:ONS Common
-SetInfo:DDF Common
-SetInfo:9ED Common
-SetInfo:ROE Common

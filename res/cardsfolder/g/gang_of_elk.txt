@@ -7,5 +7,3 @@ SVar:TrigPump:AB$Pump | Cost$ 0 | Defined$ Self | NumAtt$ +X | NumDef$ +X | Refe
 SVar:X:TriggerCount$NumBlockers/Times.2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gang_of_elk.jpg
 Oracle:Whenever Gang of Elk becomes blocked, it gets +2/+2 until end of turn for each creature blocking it.
-SetInfo:ULG Uncommon
-SetInfo:7ED Uncommon

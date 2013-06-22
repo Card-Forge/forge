@@ -7,4 +7,3 @@ SVar:TrigPumpCurse:AB$ Pump | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select 
 SVar:BuffedBy:Card.Red
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_battle_jester.jpg
 Oracle:Whenever you cast a red spell, target creature can't block this turn.
-SetInfo:M13 Common

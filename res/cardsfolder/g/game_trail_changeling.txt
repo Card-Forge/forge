@@ -6,4 +6,3 @@ S:Mode$ Continuous | EffectZone$ All | Affected$ Card.Self | CharacteristicDefin
 K:Trample
 SVar:Picture:http://www.wizards.com/global/images/magic/general/game_trail_changeling.jpg
 Oracle:Changeling (This card is every creature type at all times.)\nTrample
-SetInfo:MOR Common

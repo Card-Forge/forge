@@ -6,5 +6,3 @@ A:AB$ DealDamage | Cost$ T Sac<1/CARDNAME> | ValidTgts$ Creature,Player | TgtPro
 SVar:X:Count$CardPower
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ghitu_fire_eater.jpg
 Oracle:{T}, Sacrifice Ghitu Fire-Eater: Ghitu Fire-Eater deals damage equal to its power to target creature or player.
-SetInfo:ULG Uncommon
-SetInfo:7ED Uncommon

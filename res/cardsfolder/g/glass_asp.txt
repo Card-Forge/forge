@@ -10,4 +10,3 @@ SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$
 SVar:PayUp:AB$ ChangeZone | Cost$ 2 | Defined$ Self | Origin$ Command | Destination$ Exile | Static$ True | ActivationZone$ Command | AILogic$ Always | SpellDescription$ Pay 2 to remove this effect.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/glass_asp.jpg
 Oracle:Whenever Glass Asp deals combat damage to a player, that player loses 2 life at the beginning of his or her next draw step unless he or she pays {2} before that step.
-SetInfo:TSP Common

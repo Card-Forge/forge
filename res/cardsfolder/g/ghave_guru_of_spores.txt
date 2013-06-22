@@ -8,4 +8,3 @@ A:AB$ PutCounter | Cost$ 1 Sac<1/Creature> | ValidTgts$ Creature | CounterType$ 
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ghave_guru_of_spores.jpg
 Oracle:Ghave, Guru of Spores enters the battlefield with five +1/+1 counters on it.\n{1}, Remove a +1/+1 counter from a creature you control: Put a 1/1 green Saproling creature token onto the battlefield.\n{1}, Sacrifice a creature: Put a +1/+1 counter on target creature.
-SetInfo:COM Mythic

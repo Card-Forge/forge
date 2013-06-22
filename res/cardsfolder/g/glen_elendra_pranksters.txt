@@ -8,4 +8,3 @@ SVar:TrigChangeZone:AB$ ChangeZone | Cost$ 0 | ValidTgts$ Creature.YouCtrl | Tgt
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/glen_elendra_pranksters.jpg
 Oracle:Flying\nWhenever you cast a spell during an opponent's turn, you may return target creature you control to its owner's hand.
-SetInfo:LRW Uncommon

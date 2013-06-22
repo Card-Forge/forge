@@ -6,4 +6,3 @@ SVar:DBToken:DB$Token | TokenAmount$ 1 | TokenName$ Eldrazi Spawn | TokenTypes$ 
 SVar:ABMana:AB$Mana | Cost$ Sac<1/CARDNAME> | Produced$ 1 | Amount$ 1 | SpellDescription$ Add 1 to your mana pool.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/growth_spasm.jpg
 Oracle:Search your library for a basic land card, put it onto the battlefield tapped, then shuffle your library. Put a 0/1 colorless Eldrazi Spawn creature token onto the battlefield. It has "Sacrifice this creature: Add {1} to your mana pool."
-SetInfo:ROE Common

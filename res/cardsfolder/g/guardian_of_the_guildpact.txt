@@ -5,4 +5,3 @@ PT:2/3
 K:Protection:Card.MonoColor:Protection from monocolored
 SVar:Picture:http://www.wizards.com/global/images/magic/general/guardian_of_the_guildpact.jpg
 Oracle:Protection from monocolored
-SetInfo:DIS Common

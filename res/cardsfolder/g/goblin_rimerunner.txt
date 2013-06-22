@@ -6,4 +6,3 @@ A:AB$ Pump | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature |
 A:AB$ Pump | Cost$ S | KW$ Haste | SpellDescription$ CARDNAME gains haste until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_rimerunner.jpg
 Oracle:{T}: Target creature can't block this turn.\n{S}: Goblin Rimerunner gains haste until end of turn. ({S} can be paid with one mana from a snow permanent.)
-SetInfo:CSP Common

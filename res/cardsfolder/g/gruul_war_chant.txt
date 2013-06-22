@@ -5,4 +5,3 @@ S:Mode$ Continuous | Affected$ Creature.YouCtrl+attacking | AddPower$ 1 | AddKey
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gruul_war_chant.jpg
 Oracle:Each attacking creature you control gets +1/+0 and can't be blocked except by two or more creatures.
-SetInfo:DGM Uncommon

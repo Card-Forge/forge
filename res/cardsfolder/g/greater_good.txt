@@ -7,5 +7,3 @@ SVar:X:Sacrificed$CardPower
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/greater_good.jpg
 Oracle:Sacrifice a creature: Draw cards equal to the sacrificed creature's power, then discard three cards.
-SetInfo:9ED Rare
-SetInfo:USG Rare

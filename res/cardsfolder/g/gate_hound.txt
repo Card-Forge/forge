@@ -7,4 +7,3 @@ SVar:X:Count$Valid Card.Self+enchanted
 SVar:EnchantMe:Once
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gate_hound.jpg
 Oracle:Creatures you control have vigilance as long as Gate Hound is enchanted.
-SetInfo:RAV Common

@@ -6,4 +6,3 @@ SVar:DBLoseLife:DB$LoseLife | LifeAmount$ 3
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/grim_tutor.jpg
 Oracle:Search your library for a card and put that card into your hand, then shuffle your library. You lose 3 life.
-SetInfo:S99 Rare

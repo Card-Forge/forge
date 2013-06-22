@@ -8,4 +8,3 @@ SVar:X:TriggerCount$DamageAmount
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/grollub.jpg
 Oracle:Whenever Grollub is dealt damage, each opponent gains that much life.
-SetInfo:EXO Common

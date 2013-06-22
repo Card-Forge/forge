@@ -7,5 +7,3 @@ T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefi
 SVar:TrigDig:AB$Dig | Cost$ 0 | DigNum$ 4 | Reveal$ True | ChangeNum$ All | ChangeValid$ Goblin
 SVar:Picture:http://resources.wizards.com/magic/cards/ap/en-us/card27664.jpg
 Oracle:Haste\nWhen Goblin Ringleader enters the battlefield, reveal the top four cards of your library. Put all Goblin cards revealed this way into your hand and the rest on the bottom of your library in any order.
-SetInfo:APC Uncommon
-SetInfo:EVG Uncommon

@@ -8,4 +8,3 @@ SVar:TrigAnimate:AB$ Animate | Cost$ 0 | ValidTgts$ Land | TgtPrompt$ Select tar
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/graceful_antelope.jpg
 Oracle:Plainswalk\nWhenever Graceful Antelope deals combat damage to a player, you may have target land become a Plains until Graceful Antelope leaves the battlefield.
-SetInfo:ODY Rare

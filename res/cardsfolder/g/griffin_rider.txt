@@ -9,4 +9,3 @@ SVar:RemRandomDeck:True
 DeckHints:Type$Griffin
 SVar:Picture:http://www.wizards.com/global/images/magic/general/griffin_rider.jpg
 Oracle:As long as you control a Griffin creature, Griffin Rider gets +3/+3 and has flying.
-SetInfo:M12 Common

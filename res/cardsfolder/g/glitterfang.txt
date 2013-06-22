@@ -7,4 +7,3 @@ T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | Execute$ TrigRe
 SVar:TrigReturn:AB$ChangeZone | Cost$ 0 | Defined$ Self | Origin$ Battlefield | Destination$ Hand
 SVar:Picture:http://www.wizards.com/global/images/magic/general/glitterfang.jpg
 Oracle:Haste\nAt the beginning of the end step, return Glitterfang to its owner's hand.
-SetInfo:SOK Common

@@ -6,4 +6,3 @@ A:SP$ DealDamage | Cost$ X R | ValidTgts$ Creature,Player | TgtPrompt$ Select ta
 SVar:X:Count$xPaid
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ghitu_fire.jpg
 Oracle:You may cast Ghitu Fire any time you could cast an instant if you pay {2} more to cast it.\nGhitu Fire deals X damage to target creature or player.
-SetInfo:INV Rare

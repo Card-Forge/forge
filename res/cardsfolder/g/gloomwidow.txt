@@ -6,5 +6,3 @@ K:Reach
 K:CARDNAME can block only creatures with flying.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gloomwidow.jpg
 Oracle:Reach\nGloomwidow can block only creatures with flying.
-SetInfo:SHM Uncommon
-SetInfo:AVR Uncommon

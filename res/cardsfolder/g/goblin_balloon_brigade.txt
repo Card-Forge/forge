@@ -5,10 +5,3 @@ PT:1/1
 A:AB$ Pump | Cost$ R | KW$ Flying | SpellDescription$ CARDNAME gains flying until end of turn.
 SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card84540.jpg
 Oracle:{R}: Goblin Balloon Brigade gains flying until end of turn.
-SetInfo:2ED Uncommon
-SetInfo:9ED Uncommon
-SetInfo:M11 Common
-SetInfo:LEB Uncommon
-SetInfo:LEA Uncommon
-SetInfo:4ED Uncommon
-SetInfo:3ED Uncommon

@@ -7,5 +7,3 @@ T:Mode$ Blocks | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ TrigGain
 SVar:TrigGainLife:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ 4
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goldenglow_moth.jpg
 Oracle:Flying\nWhenever Goldenglow Moth blocks, you may gain 4 life.
-SetInfo:M11 Common
-SetInfo:SHM Common

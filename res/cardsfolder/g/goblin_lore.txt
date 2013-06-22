@@ -5,6 +5,3 @@ A:SP$ Draw | Cost$ 1 R | NumCards$ 4 | SpellDescription$ Draw four cards, then d
 SVar:DBDiscard:DB$Discard | Defined$ You | NumCards$ 3 | Mode$ Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_lore.jpg
 Oracle:Draw four cards, then discard three cards at random.
-SetInfo:PO2 Uncommon
-SetInfo:S99 Uncommon
-SetInfo:10E Uncommon

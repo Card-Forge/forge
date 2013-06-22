@@ -6,4 +6,3 @@ A:AB$ Mana | Cost$ R Return<1/CARDNAME> | Produced$ 2 R | Amount$ 1 | SorcerySpe
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/grinning_ignus.jpg
 Oracle:{R}, Return Grinning Ignus to its owner's hand: Add {2}{R} to your mana pool. Activate this ability only any time you could cast a sorcery.
-SetInfo:FUT Common

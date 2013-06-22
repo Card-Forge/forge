@@ -7,4 +7,3 @@ SVar:Pump:AB$ Regenerate | Cost$ B | SpellDescription$ Regenerate CARDNAME.
 SVar:BuffedBy:Card
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gobhobbler_rats.jpg
 Oracle:Hellbent - As long as you have no cards in hand, Gobhobbler Rats gets +1/+0 and has "{B}: Regenerate Gobhobbler Rats."
-SetInfo:DIS Common

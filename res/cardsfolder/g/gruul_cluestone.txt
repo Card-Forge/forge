@@ -7,4 +7,3 @@ A:AB$ Draw | Cost$ R G T Sac<1/CARDNAME> | NumCards$ 1 | SpellDescription$ Draw 
 DeckNeeds:Color$Red|Green
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gruul_cluestone.jpg
 Oracle:{T}: Add {R} or {G} to your mana pool.\n{R}{G}, {T}, Sacrifice Gruul Cluestone: Draw a card.
-SetInfo:DGM Common

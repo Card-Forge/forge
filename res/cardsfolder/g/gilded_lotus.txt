@@ -5,5 +5,3 @@ A:AB$ Mana | Cost$ T | Produced$ Any | Amount$ 3 | SpellDescription$ Add three m
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gilded_lotus.jpg
 Oracle:{T}: Add three mana of any one color to your mana pool.
-SetInfo:MRD Rare
-SetInfo:M13 Rare

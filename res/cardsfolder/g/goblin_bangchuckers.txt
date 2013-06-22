@@ -8,4 +8,3 @@ SVar:DBDamageSelf:DB$DealDamage | Cost$ 0 | Defined$ Self | NumDmg$ 2
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_bangchuckers.jpg
 Oracle:{T}: Flip a coin. If you win the flip, Goblin Bangchuckers deals 2 damage to target creature or player. If you lose the flip, Goblin Bangchuckers deals 2 damage to itself.
-SetInfo:M12 Uncommon

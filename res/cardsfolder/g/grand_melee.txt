@@ -5,4 +5,3 @@ S:Mode$ Continuous | Affected$ Creature | AddHiddenKeyword$ CARDNAME blocks each
 SVar:NonStackingEffect:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/grand_melee.jpg
 Oracle:All creatures attack each turn if able.\nAll creatures block each turn if able.
-SetInfo:ONS Rare

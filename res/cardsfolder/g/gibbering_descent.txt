@@ -9,4 +9,3 @@ SVar:DBDiscard:DB$Discard | Defined$ TriggeredPlayer | NumCards$ 1 | Mode$ TgtCh
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gibbering_descent.jpg
 Oracle:At the beginning of each player's upkeep, that player loses 1 life and discards a card.\nHellbent - Skip your upkeep step if you have no cards in hand.\nMadness {2}{B}{B} (If you discard this card, you may cast it for its madness cost instead of putting it into your graveyard.)
-SetInfo:FUT Rare

@@ -8,6 +8,3 @@ SVar:RemRandomDeck:True
 DeckNeeds:Color$Red
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gauntlet_of_might.jpg
 Oracle:Red creatures get +1/+1.\nWhenever a Mountain is tapped for mana, its controller adds {R} to his or her mana pool (in addition to the mana the land produces).
-SetInfo:LEB Rare
-SetInfo:LEA Rare
-SetInfo:2ED Rare

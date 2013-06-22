@@ -4,8 +4,3 @@ Types:Creature Ogre
 PT:2/2
 SVar:Picture:http://resources.wizards.com/magic/cards/4e/en-us/card2283.jpg
 Oracle:
-SetInfo:LEB Common
-SetInfo:4ED Common
-SetInfo:LEA Common
-SetInfo:3ED Common
-SetInfo:2ED Common

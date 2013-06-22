@@ -8,4 +8,3 @@ SVar:X:Count$Valid Equipment.Attached/Times.2
 SVar:EquipMe:Multiple
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_gaveleer.jpg
 Oracle:Trample\nGoblin Gaveleer gets +2/+0 for each Equipment attached to it.
-SetInfo:SOM Common

@@ -7,4 +7,3 @@ S:Mode$ ReduceCost | ValidCard$ Card.Blue | Type$ Spell | Activator$ You | Amoun
 S:Mode$ RaiseCost | Activator$ Opponent | Type$ Spell | Amount$ 1 | Description$ Spells your opponents cast cost 1 more to cast.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/grand_arbiter_augustin_iv.jpg
 Oracle:White spells you cast cost {1} less to cast.\nBlue spells you cast cost {1} less to cast.\nSpells your opponents cast cost {1} more to cast.
-SetInfo:DIS Rare

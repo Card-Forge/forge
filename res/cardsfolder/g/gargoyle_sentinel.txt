@@ -9,4 +9,3 @@ SVar:Flight:DB$ Pump | Defined$ Self | KW$ Flying
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gargoyle_sentinel.jpg
 Oracle:Defender (This creature can't attack.)\n{3}: Until end of turn, Gargoyle Sentinel loses defender and gains flying.
-SetInfo:M11 Uncommon

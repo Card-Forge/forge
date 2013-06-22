@@ -7,4 +7,3 @@ SVar:TrigDestroyCreature:AB$Destroy | Cost$ Sac<1/CARDNAME> | ValidTgts$ Creatur
 SVar:DBDestroyLand:DB$Destroy | ValidTgts$ Land | TgtPrompt$ Select target land | Mandatory$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_grenadiers.jpg
 Oracle:Whenever Goblin Grenadiers attacks and isn't blocked, you may sacrifice it. If you do, destroy target creature and target land.
-SetInfo:WTH Uncommon

@@ -8,5 +8,3 @@ SVar:NonStackingEffect:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ground_seal.jpg
 Oracle:When Ground Seal enters the battlefield, draw a card.\nCards in graveyards can't be the targets of spells or abilities.
-SetInfo:M13 Rare
-SetInfo:ODY Rare

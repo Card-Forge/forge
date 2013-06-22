@@ -6,4 +6,3 @@ S:Mode$ CantBeCast | ValidCard$ Card.nonCreature+cmcGE4 | Description$ Noncreatu
 S:Mode$ CantBeCast | ValidCard$ Card.nonCreature+hasXCost | Description$ Noncreature spells with X in their mana costs can't be cast.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gaddock_teeg.jpg
 Oracle:Noncreature spells with converted mana cost 4 or greater can't be cast.\nNoncreature spells with {X} in their mana costs can't be cast.
-SetInfo:LRW Rare

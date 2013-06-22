@@ -5,4 +5,3 @@ A:SP$ DealDamage | Cost$ R G | ValidTgts$ Creature | TgtPrompt$ Select target cr
 SVar:X:Count$TypeYouCtrl.Land
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ground_assault.jpg
 Oracle:Ground Assault deals damage to target creature equal to the number of lands you control.
-SetInfo:GTC Uncommon

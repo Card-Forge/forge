@@ -10,4 +10,3 @@ SVar:Y:Targeted$CardManaCost
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/glissa_sunseeker.jpg
 Oracle:First strike\n{T}: Destroy target artifact if its converted mana cost is equal to the amount of mana in your mana pool.
-SetInfo:MRD Rare

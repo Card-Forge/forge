@@ -10,4 +10,3 @@ SVar:Blocks:Mode$ Blocks | ValidCard$ Card.Self | Execute$ PumpOthers | TriggerD
 SVar:PumpOthers:DB$PumpAll | ValidCards$ Creature.blockingSource,Creature.blockedBySource | KW$ First Strike
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_flotilla.jpg
 Oracle:Islandwalk\nAt the beginning of each combat, unless you pay R, whenever Goblin Flotilla blocks or becomes blocked by a creature this combat, that creature gains first strike until end of turn.
-SetInfo:FEM Rare
