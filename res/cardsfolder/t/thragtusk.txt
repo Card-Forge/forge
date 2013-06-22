@@ -8,4 +8,3 @@ SVar:Token:AB$ Token | Cost$ 0 | TokenOwner$ You | TokenName$ Beast | TokenColor
 SVar:Life:DB$ GainLife | Defined$ You | LifeAmount$ 5
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thragtusk.jpg
 Oracle:When Thragtusk enters the battlefield, you gain 5 life.\nWhen Thragtusk leaves the battlefield, put a 3/3 green Beast creature token onto the battlefield.
-SetInfo:M13 Rare

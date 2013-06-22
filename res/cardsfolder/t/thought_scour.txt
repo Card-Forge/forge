@@ -5,4 +5,3 @@ A:SP$ Mill | Cost$ U | NumCards$ 2 | ValidTgts$ Player | TgtPrompt$ Choose a pla
 SVar:DBDraw:DB$Draw | NumCards$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thought_scour.jpg
 Oracle:Target player puts the top two cards of his or her library into his or her graveyard.\nDraw a card.
-SetInfo:DKA Common

@@ -8,4 +8,3 @@ SVar:TrigBounce:AB$ ChangeZone | Cost$ 0 | ValidTgts$ Permanent | TgtPrompt$ Sel
 SVar:BuffedBy:Card
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tidespout_tyrant.jpg
 Oracle:Flying\nWhenever you cast a spell, return target permanent to its owner's hand.
-SetInfo:DIS Rare

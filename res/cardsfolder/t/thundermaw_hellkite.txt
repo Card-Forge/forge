@@ -9,4 +9,3 @@ SVar:ThunderDamage:AB$ DamageAll | Cost$ 0 | NumDmg$ 1 | ValidCards$ Creature.wi
 SVar:ThunderTap:DB$ TapAll | Cost$ 0 | ValidCards$ Creature.withFlying+OppCtrl | ValidDescription$ each creature with flying you don't control
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thundermaw_hellkite.jpg
 Oracle:Flying\nHaste (This creature can attack and {T} as soon as it comes under your control.)\nWhen Thundermaw Hellkite enters the battlefield, it deals 1 damage to each creature with flying your opponents control. Tap those creatures.
-SetInfo:M13 Mythic

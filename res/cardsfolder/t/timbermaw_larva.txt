@@ -7,4 +7,3 @@ SVar:TrigPump:AB$ Pump | Cost$ 0 | Defined$ Self | NumAtt$ X | NumDef$ X | Refer
 SVar:X:Count$Valid Forest.YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/timbermaw_larva.jpg
 Oracle:Whenever Timbermaw Larva attacks, it gets +1/+1 until end of turn for each Forest you control.
-SetInfo:ZEN Common

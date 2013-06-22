@@ -5,5 +5,3 @@ K:You may cast CARDNAME any time you could cast an instant if you pay 2 more to 
 A:SP$ ChangeZoneAll | Cost$ 4 B B | Origin$ Graveyard | Destination$ Battlefield | ChangeType$ Creature | SpellDescription$ Each player returns all creature cards from his or her graveyard to the battlefield.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/twilights_call.jpg
 Oracle:You may cast Twilight's Call any time you could cast an instant if you pay {2} more to cast it.\nEach player returns all creature cards from his or her graveyard to the battlefield.
-SetInfo:DDJ Rare
-SetInfo:INV Rare

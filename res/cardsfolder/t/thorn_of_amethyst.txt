@@ -5,4 +5,3 @@ S:Mode$ RaiseCost | ValidCard$ Card.nonCreature | Type$ Spell | Amount$ 1 | Desc
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thorn_of_amethyst.jpg
 Oracle:Noncreature spells cost {1} more to cast.
-SetInfo:LRW Rare

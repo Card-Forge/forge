@@ -5,4 +5,3 @@ A:SP$ DealDamage | Cost$ 4 R | ValidTgts$ Creature | TgtPrompt$ Select target cr
 SVar:X:Count$Threshold.5.3
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thermal_blast.jpg
 Oracle:Thermal Blast deals 3 damage to target creature.\nThreshold - Thermal Blast deals 5 damage to that creature instead if seven or more cards are in your graveyard.
-SetInfo:ODY Common

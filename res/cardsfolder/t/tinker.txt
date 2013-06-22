@@ -5,5 +5,3 @@ A:SP$ ChangeZone | Cost$ 2 U Sac<1/Artifact> | Origin$ Library | Destination$ Ba
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tinker.jpg
 Oracle:As an additional cost to cast Tinker, sacrifice an artifact.\nSearch your library for an artifact card and put that card onto the battlefield. Then shuffle your library.
-SetInfo:ULG Uncommon
-SetInfo:V09 Mythic

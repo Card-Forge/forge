@@ -6,6 +6,3 @@ A:SP$ Attach | Cost$ B | ValidTgts$ Creature | AILogic$ Curse
 A:AB$ PutCounter | Cost$ 1 B | Defined$ Enchanted | CounterType$ M1M1 | CounterNum$ 1 | IsCurse$ True | SpellDescription$ Put a -1/-1 counter on enchanted creature.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/torture.jpg
 Oracle:Enchant creature\n{1}{B}: Put a -1/-1 counter on enchanted creature.
-SetInfo:5ED Common
-SetInfo:SHM Common
-SetInfo:HML Common x2

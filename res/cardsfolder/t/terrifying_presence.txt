@@ -6,4 +6,3 @@ SVar:STPrevent:Mode$ PreventDamage | EffectZone$ Command | Source$ Creature.IsNo
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/terrifying_presence.jpg
 Oracle:Prevent all combat damage that would be dealt by creatures other than target creature this turn.
-SetInfo:AVR Common

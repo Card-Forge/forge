@@ -6,6 +6,3 @@ A:SP$ Attach | Cost$ 1 G | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 1 | AddToughness$ 1 | AddKeyword$ CantBeBlockedBy Creature.withoutFlying | Description$ Enchanted creature gets +1/+1 and can't be blocked except by creatures with flying.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/treetop_bracers.jpg
 Oracle:Enchant creature (Target a creature as you cast this. This card enters the battlefield attached to that creature.)\nEnchanted creature gets +1/+1 and can't be blocked except by creatures with flying.
-SetInfo:10E Common
-SetInfo:NMS Common
-SetInfo:9ED Common

@@ -6,4 +6,3 @@ SVar:DBPump:DB$Pump | Cost$ 0 | Defined$ Targeted | KW$ HIDDEN Prevent all comba
 SVar:DBPump2:DB$Pump | Cost$ 0 | Defined$ Targeted | KW$ HIDDEN This card doesn't untap during your next two untap steps. | Permanent$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/telekinesis.jpg
 Oracle:Tap target creature. Prevent all combat damage that would be dealt by that creature this turn. It doesn't untap during its controller's next two untap steps.
-SetInfo:LEG Rare

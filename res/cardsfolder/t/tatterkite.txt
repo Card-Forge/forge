@@ -6,4 +6,3 @@ K:Flying
 K:CARDNAME can't have counters placed on it.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tatterkite.jpg
 Oracle:Flying\nTatterkite can't have counters placed on it.
-SetInfo:SHM Uncommon

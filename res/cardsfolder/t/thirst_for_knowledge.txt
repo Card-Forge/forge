@@ -5,6 +5,3 @@ A:SP$ Draw | Cost$ 2 U | NumCards$ 3 | SpellDescription$ Draw three cards. Then 
 SVar:DBDiscard:DB$Discard | Defined$ You | NumCards$ 2 | Mode$ TgtChoose | UnlessType$ Artifact
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thirst_for_knowledge.jpg
 Oracle:Draw three cards. Then discard two cards unless you discard an artifact card.
-SetInfo:MRD Uncommon
-SetInfo:DDF Uncommon
-SetInfo:HOP Uncommon

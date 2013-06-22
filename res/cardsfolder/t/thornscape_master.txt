@@ -8,4 +8,3 @@ SVar:RemRandomDeck:True
 DeckNeeds:Color$Red
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thornscape_master.jpg
 Oracle:{R}{R}, {T}: Thornscape Master deals 2 damage to target creature.\n{W}{W}, {T}: Target creature gains protection from the color of your choice until end of turn.
-SetInfo:INV Rare

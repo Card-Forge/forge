@@ -6,4 +6,3 @@ SVar:X:Count$Valid Artifact.YouCtrl
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tolarian_academy.jpg
 Oracle:{T}: Add {U} to your mana pool for each artifact you control.
-SetInfo:USG Rare

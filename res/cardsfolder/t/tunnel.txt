@@ -5,8 +5,3 @@ A:SP$ Destroy | Cost$ R | ValidTgts$ Creature.Wall | TgtPrompt$ Select target Wa
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tunnel.jpg
 Oracle:Destroy target Wall. It can't be regenerated.
-SetInfo:LEB Uncommon
-SetInfo:4ED Uncommon
-SetInfo:LEA Uncommon
-SetInfo:3ED Uncommon
-SetInfo:2ED Uncommon

@@ -5,4 +5,3 @@ A:SP$ Protection | Cost$ 1 G | ValidTgts$ Creature | TgtPrompt$ Select target cr
 SVar:DBDraw:DB$Draw | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tel_jilad_defiance.jpg
 Oracle:Target creature gains protection from artifacts until end of turn.\nDraw a card.
-SetInfo:SOM Common

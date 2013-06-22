@@ -8,4 +8,3 @@ SVar:AffectedX:Count$CardCounters.SPORE
 SVar:BuffedBy:Fungus
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thelon_of_havenwood.jpg
 Oracle:Each Fungus creature gets +1/+1 for each spore counter on it.\n{B}{G}, Exile a Fungus card from a graveyard: Put a spore counter on each Fungus on the battlefield.
-SetInfo:TSP Rare

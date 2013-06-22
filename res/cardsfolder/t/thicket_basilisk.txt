@@ -10,10 +10,3 @@ SVar:TrigDestroyAttacker:AB$Destroy | Cost$ 0 | Defined$ TriggeredAttacker
 SVar:TrigDestroyBlocker:AB$Destroy | Cost$ 0 | Defined$ TriggeredBlocker
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thicket_basilisk.jpg
 Oracle:Whenever Thicket Basilisk blocks or becomes blocked by a non-Wall creature, destroy that creature at end of combat.
-SetInfo:2ED Uncommon
-SetInfo:6ED Uncommon
-SetInfo:LEB Uncommon
-SetInfo:LEA Uncommon
-SetInfo:5ED Uncommon
-SetInfo:4ED Uncommon
-SetInfo:3ED Uncommon

@@ -5,4 +5,3 @@ A:SP$ ChangeZoneAll | Cost$ B | ValidTgts$ Player | TgtPrompt$ Select target pla
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tombfire.jpg
 Oracle:Target player exiles all cards with flashback from his or her graveyard.
-SetInfo:ODY Rare

@@ -7,4 +7,3 @@ S:Mode$ CantBeCast | ValidCard$ Card.Self | CheckSVar$ X | SVarCompare$ EQ0 | Ef
 SVar:X:Count$ThisTurnCast_Card.Green+Other+YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/talaras_battalion.jpg
 Oracle:Trample\nCast Talara's Battalion only if you've cast another green spell this turn.
-SetInfo:EVE Rare

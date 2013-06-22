@@ -9,4 +9,3 @@ SVar:TrigPumpKW:AB$Pump | Cost$ 0 | KW$ Flying | Defined$ Self
 SVar:BuffedBy:Card.White,Card.Blue
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thistledown_duo.jpg
 Oracle:Whenever you cast a white spell, Thistledown Duo gets +1/+1 until end of turn.\nWhenever you cast a blue spell, Thistledown Duo gains flying until end of turn.
-SetInfo:SHM Common

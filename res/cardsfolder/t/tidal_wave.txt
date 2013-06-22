@@ -5,4 +5,3 @@ A:SP$ Token | Cost$ 2 U | TokenAmount$ 1 | TokenName$ Wall | TokenTypes$ Creatur
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tidal_wave.jpg
 Oracle:Put a 5/5 blue Wall creature token with defender onto the battlefield. Sacrifice it at the beginning of the next end step.
-SetInfo:MIR Uncommon

@@ -15,4 +15,3 @@ ManaCost:U B
 Types:Instant
 A:SP$ Counter | Cost$ U B | TargetType$ Spell | TgtPrompt$ Select target multicolored spell | ValidTgts$ Card.MultiColor | SpellDescription$ Counter target multicolored spell.
 Oracle:Counter target multicolored spell.
-SetInfo:DIS Uncommon

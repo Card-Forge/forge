@@ -6,4 +6,3 @@ A:AB$ MustBlock | Cost$ 1 G | ValidTgts$ Creature | TgtPrompt$ Select target cre
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/trumpeting_armodon.jpg
 Oracle:{1}{G}: Target creature blocks Trumpeting Armodon this turn if able.
-SetInfo:TMP Uncommon

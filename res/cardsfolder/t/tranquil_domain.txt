@@ -4,4 +4,3 @@ Types:Instant
 A:SP$ DestroyAll | Cost$ 1 G | ValidCards$ Enchantment.nonAura | SpellDescription$ Destroy all non-Aura enchantments.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tranquil_domain.jpg
 Oracle:Destroy all non-Aura enchantments.
-SetInfo:MIR Common

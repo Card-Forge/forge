@@ -5,4 +5,3 @@ PT:3/3
 A:AB$ Destroy | Cost$ 2 R T | ValidTgts$ Land.nonBasic | TgtPrompt$ Select target nonbasic land | SpellDescription$ Destroy target nonbasic land.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/trench_wurm.jpg
 Oracle:{2}{R}, {T}: Destroy target nonbasic land.
-SetInfo:INV Uncommon

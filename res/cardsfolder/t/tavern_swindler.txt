@@ -6,4 +6,3 @@ A:AB$ FlipACoin | Cost$ T PayLife<3> | WinSubAbility$ TSGainLife | AILogic$ Neve
 SVar:TSGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 6
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tavern_swindler.jpg
 Oracle:{T}, Pay 3 life: Flip a coin. If you win the flip, you gain 6 life.
-SetInfo:RTR Uncommon

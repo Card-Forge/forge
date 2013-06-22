@@ -6,4 +6,3 @@ PT:2/2
 K:Hexproof
 SVar:Picture:http://www.wizards.com/global/images/magic/general/taoist_hermit.jpg
 Oracle:Hexproof (This creature can't be the target of spells or abilities your opponents control.)
-SetInfo:PTK Uncommon

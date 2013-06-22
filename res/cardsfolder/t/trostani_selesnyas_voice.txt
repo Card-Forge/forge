@@ -10,4 +10,3 @@ SVar:DBCopy:DB$ CopyPermanent | Defined$ Remembered | NumCopies$ 1 | SubAbility$
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/trostani_selesnyas_voice.jpg
 Oracle:Whenever another creature enters the battlefield under your control, you gain life equal to that creature's toughness.\n{1}{G}{W}, {T}: Populate. (Put a token onto the battlefield that's a copy of a creature token you control.)
-SetInfo:RTR Mythic

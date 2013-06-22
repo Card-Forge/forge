@@ -4,5 +4,3 @@ Types:Artifact
 A:AB$ Mana | Cost$ T | Produced$ 1 | Amount$ 3 | SpellDescription$ Add 3 to your mana pool.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thran_dynamo.jpg
 Oracle:{T}: Add {3} to your mana pool.
-SetInfo:ARC Uncommon
-SetInfo:UDS Uncommon

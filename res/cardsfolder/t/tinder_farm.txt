@@ -7,4 +7,3 @@ A:AB$ Mana | Cost$T Sac<1/CARDNAME> | Produced$ R W | SpellDescription$ Add R W 
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tinder_farm.jpg
 Oracle:Tinder Farm enters the battlefield tapped.\n{T}: Add {G} to your mana pool.\n{T}, Sacrifice Tinder Farm: Add {R}{W} to your mana pool.
-SetInfo:INV Common

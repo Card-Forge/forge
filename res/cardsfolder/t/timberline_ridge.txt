@@ -10,4 +10,3 @@ SVar:AddCounter:DB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ DEPLETION
 SVar:X:Count$Valid Card.Self+counters_GE1_DEPLETION
 SVar:Picture:http://www.wizards.com/global/images/magic/general/timberline_ridge.jpg
 Oracle:Timberline Ridge doesn't untap during your untap step if it has a depletion counter on it.\nAt the beginning of your upkeep, remove a depletion counter from Timberline Ridge.\n{T}: Add {R} or {G} to your mana pool. Put a depletion counter on Timberline Ridge.
-SetInfo:ICE Rare

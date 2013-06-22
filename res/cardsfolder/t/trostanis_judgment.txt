@@ -7,4 +7,3 @@ SVar:DBCopy:DB$ CopyPermanent | Defined$ Remembered | NumCopies$ 1 | SubAbility$
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/trostanis_judgment.jpg
 Oracle:Exile target creature, then populate. (Put a token onto the battlefield that's a copy of a creature token you control.)
-SetInfo:RTR Common

@@ -7,4 +7,3 @@ T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | OptionalDeci
 SVar:TrigDestroy:AB$ Destroy | Cost$ 0 | ValidTgts$ Artifact.DefenderCtrl,Enchantment.DefenderCtrl | TgtPrompt$ Select target artifact or enchantment you don't control.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/trygon_predator.jpg
 Oracle:Flying\nWhenever Trygon Predator deals combat damage to a player, you may destroy target artifact or enchantment that player controls.
-SetInfo:DIS Uncommon

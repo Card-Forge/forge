@@ -5,8 +5,3 @@ A:SP$ Mill | Cost$ 3 U U | ValidTgts$ Player | TgtPrompt$ Select target player |
 SVar:X:TargetedPlayer$CardsInLibrary/HalfDown
 SVar:Picture:http://www.wizards.com/global/images/magic/general/traumatize.jpg
 Oracle:Target player puts the top half of his or her library, rounded down, into his or her graveyard.
-SetInfo:M11 Rare
-SetInfo:M10 Rare
-SetInfo:ODY Rare
-SetInfo:9ED Rare
-SetInfo:10E Rare

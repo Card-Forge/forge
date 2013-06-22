@@ -8,4 +8,3 @@ SVar:DBDraw:DB$ Draw | NumCards$ 2 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thran_tome.jpg
 Oracle:{5}, {T}: Reveal the top three cards of your library. Target opponent chooses one of those cards. Put that card into your graveyard, then draw two cards.
-SetInfo:WTH Rare

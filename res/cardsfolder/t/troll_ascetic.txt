@@ -6,6 +6,3 @@ A:AB$ Regenerate | Cost$ 1 G | SpellDescription$ Regenerate CARDNAME.
 K:Hexproof
 SVar:Picture:http://resources.wizards.com/magic/cards/mrd/en-us/card49828.jpg
 Oracle:Hexproof (This creature can't be the target of spells or abilities your opponents control.)\n{1}{G}: Regenerate Troll Ascetic.
-SetInfo:MRD Rare
-SetInfo:COM Rare
-SetInfo:10E Rare

@@ -5,5 +5,3 @@ PT:2/2
 S:Mode$ Continuous | Affected$ You | AddKeyword$ Shroud | Description$ You have shroud. (You can't be the target of spells or abilities.)
 SVar:Picture:http://www.wizards.com/global/images/magic/general/true_believer.jpg
 Oracle:You have shroud. (You can't be the target of spells or abilities.)
-SetInfo:ONS Rare
-SetInfo:10E Rare

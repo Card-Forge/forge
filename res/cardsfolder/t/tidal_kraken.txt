@@ -5,6 +5,3 @@ PT:6/6
 K:Unblockable
 SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83301.jpg
 Oracle:Tidal Kraken is unblockable.
-SetInfo:MMQ Rare
-SetInfo:8ED Rare
-SetInfo:9ED Rare

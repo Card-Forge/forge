@@ -10,4 +10,3 @@ SVar:RemRandomDeck:True
 DeckNeeds:Type$Enchantment
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tethered_griffin.jpg
 Oracle:Flying\nWhen you control no enchantments, sacrifice Tethered Griffin.
-SetInfo:UDS Rare

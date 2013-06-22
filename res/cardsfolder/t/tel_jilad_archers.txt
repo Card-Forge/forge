@@ -6,4 +6,3 @@ K:Reach
 K:Protection from artifacts
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tel_jilad_archers.jpg
 Oracle:Protection from artifacts; reach (This creature can block creatures with flying.)
-SetInfo:MRD Common

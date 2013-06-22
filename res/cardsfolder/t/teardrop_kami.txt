@@ -6,4 +6,3 @@ A:AB$ TapOrUntap | Cost$ Sac<1/CARDNAME> | ValidTgts$ Creature | TgtPrompt$ Sele
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/teardrop_kami.jpg
 Oracle:Sacrifice Teardrop Kami: You may tap or untap target creature.
-SetInfo:BOK Common

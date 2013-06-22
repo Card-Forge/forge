@@ -7,4 +7,3 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigPump:AB$ PumpAll | Cost$ 0 | ValidCards$ Creature.YouCtrl | KW$ Protection from black
 SVar:Picture:http://www.wizards.com/global/images/magic/general/terohs_vanguard.jpg
 Oracle:Flash\nThreshold - As long as seven or more cards are in your graveyard, Teroh's Vanguard has "When Teroh's Vanguard enters the battlefield, creatures you control gain protection from black until end of turn."
-SetInfo:TOR Uncommon

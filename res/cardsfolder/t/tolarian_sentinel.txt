@@ -6,4 +6,3 @@ K:Flying
 A:AB$ ChangeZone | Cost$ U T Discard<1/Card> | ValidTgts$ Permanent.YouCtrl | TgtPrompt$ Select target permanent | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target permanent you control to its owner's hand.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tolarian_sentinel.jpg
 Oracle:Flying\n{U}, {T}, Discard a card: Return target permanent you control to its owner's hand.
-SetInfo:TSP Common

@@ -4,4 +4,3 @@ Types:Legendary Artifact
 Text:Spells you cast have ripple 4.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thrumming_stone.jpg
 Oracle:Spells you cast have ripple 4. (Whenever you cast a spell, you may reveal the top four cards of your library. You may cast any revealed cards with the same name as the spell without paying their mana costs. Put the rest on the bottom of your library.)
-SetInfo:CSP Rare

@@ -7,4 +7,3 @@ T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ TrigLoseLife | Secondary$ True 
 SVar:TrigLoseLife:AB$LoseLife | Cost$ 0 | Defined$ You | LifeAmount$ 1 | ConditionPresent$ Demon.YouCtrl | ConditionCompare$ EQ0
 SVar:Picture:http://www.wizards.com/global/images/magic/general/takenuma_bleeder.jpg
 Oracle:Whenever Takenuma Bleeder attacks or blocks, you lose 1 life if you don't control a Demon.
-SetInfo:BOK Common

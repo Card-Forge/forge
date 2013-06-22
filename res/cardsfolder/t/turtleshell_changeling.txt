@@ -7,4 +7,3 @@ A:AB$ Pump | Cost$ 1 U | KW$ HIDDEN CARDNAME's power and toughness are switched 
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/turtleshell_changeling.jpg
 Oracle:Changeling (This card is every creature type at all times.)\n{1}{U}: Switch Turtleshell Changeling's power and toughness until end of turn.
-SetInfo:LRW Uncommon

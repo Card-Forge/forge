@@ -4,4 +4,3 @@ Types:Sorcery Arcane
 A:SP$ Discard | Cost$ 3 B B | ValidTgts$ Player | NumCards$ 3 | Mode$ TgtChoose | SpellDescription$ Target player discards three cards.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/three_tragedies.jpg
 Oracle:Target player discards three cards.
-SetInfo:BOK Uncommon

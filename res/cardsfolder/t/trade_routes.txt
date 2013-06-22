@@ -6,6 +6,3 @@ A:AB$ Draw | Cost$ 1 Discard<1/Land> | NumCards$ 1 | SpellDescription$ Draw a ca
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/trade_routes.jpg
 Oracle:{1}: Return target land you control to its owner's hand.\n{1}, Discard a land card: Draw a card.
-SetInfo:MMQ Rare
-SetInfo:8ED Rare
-SetInfo:9ED Rare

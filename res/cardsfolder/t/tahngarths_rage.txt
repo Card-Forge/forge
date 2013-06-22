@@ -8,4 +8,3 @@ S:Mode$ Continuous | Affected$ Creature.EnchantedBy+notattacking | AddPower$ -2 
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tahngarths_rage.jpg
 Oracle:Enchant creature\nEnchanted creature gets +3/+0 as long as it's attacking. Otherwise, it gets -2/-1.
-SetInfo:TMP Uncommon

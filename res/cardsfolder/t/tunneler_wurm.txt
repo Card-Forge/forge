@@ -5,4 +5,3 @@ PT:6/6
 A:AB$ Regenerate | Cost$ Discard<1/Card> | Defined$ Self | SpellDescription$ Regenerate CARDNAME.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tunneler_wurm.jpg
 Oracle:Discard a card: Regenerate Tunneler Wurm.
-SetInfo:JUD Uncommon

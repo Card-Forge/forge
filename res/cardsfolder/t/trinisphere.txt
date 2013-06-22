@@ -7,5 +7,3 @@ SVar:RemRandomDeck:True
 SVar:NonStackingEffect:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/trinisphere.jpg
 Oracle:As long as Trinisphere is untapped, each spell that would cost less than three mana to cast costs three mana to cast. (Additional mana in the cost may be paid with any color of mana or colorless mana. For example, a spell that would cost {1}{B} to cast costs {2}{B} to cast instead.)
-SetInfo:DST Rare
-SetInfo:V09 Mythic

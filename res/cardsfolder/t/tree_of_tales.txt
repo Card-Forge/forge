@@ -5,5 +5,3 @@ Text:(Tree of Tales isn't a spell.)
 A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add G to your mana pool.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tree_of_tales.jpg
 Oracle:(Tree of Tales isn't a spell.)\n{T}: Add {G} to your mana pool.
-SetInfo:MRD Common
-SetInfo:HOP Common

@@ -10,4 +10,3 @@ SVar:DBDestroy:DB$ DestroyAll | ValidCards$ Aura.AttachedTo Card.IsRemembered | 
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/treefolk_mystic.jpg
 Oracle:Whenever Treefolk Mystic blocks or becomes blocked by a creature, destroy all Auras attached to that creature.
-SetInfo:ULG Common

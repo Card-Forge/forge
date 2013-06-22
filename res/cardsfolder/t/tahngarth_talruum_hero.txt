@@ -9,4 +9,3 @@ SVar:X:Count$CardPower
 SVar:Y:Targeted$CardPower
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tahngarth_talruum_hero.jpg
 Oracle:Vigilance\n{1}{R}, {T}: Tahngarth, Talruum Hero deals damage equal to its power to target creature. That creature deals damage equal to its power to Tahngarth.
-SetInfo:PLS Rare x2

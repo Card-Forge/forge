@@ -4,4 +4,3 @@ Types:Artifact
 A:AB$ DealDamage | Cost$ 2 T | ValidTgts$ Player | TgtPrompt$ Select target player | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target player.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/telimtors_darts.jpg
 Oracle:{2}, {T}: Telim'Tor's Darts deals 1 damage to target player.
-SetInfo:MIR Uncommon

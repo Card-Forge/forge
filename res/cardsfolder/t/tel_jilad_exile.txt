@@ -5,4 +5,3 @@ PT:2/3
 A:AB$ Regenerate | Cost$ 1 G | SpellDescription$ Regenerate CARDNAME.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tel_jilad_exile.jpg
 Oracle:{1}{G}: Regenerate Tel-Jilad Exile.
-SetInfo:MRD Common

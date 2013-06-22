@@ -5,4 +5,3 @@ PT:5/4
 K:Morph:5 G
 SVar:Picture:http://www.wizards.com/global/images/magic/general/treespring_lorian.jpg
 Oracle:Morph {5}{G} (You may cast this face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)
-SetInfo:ONS Common

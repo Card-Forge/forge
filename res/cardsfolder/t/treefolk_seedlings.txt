@@ -6,5 +6,3 @@ S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetToughne
 SVar:X:Count$Valid Forest.YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/treefolk_seedlings.jpg
 Oracle:Treefolk Seedlings's toughness is equal to the number of Forests you control.
-SetInfo:7ED Uncommon
-SetInfo:USG Uncommon

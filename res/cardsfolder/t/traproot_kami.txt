@@ -8,4 +8,3 @@ S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetToughne
 SVar:X:Count$Valid Forest
 SVar:Picture:http://www.wizards.com/global/images/magic/general/traproot_kami.jpg
 Oracle:Defender; reach (This creature can block creatures with flying.)\nTraproot Kami's toughness is equal to the number of Forests on the battlefield.
-SetInfo:BOK Common

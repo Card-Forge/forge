@@ -12,4 +12,3 @@ ManaCost:1 R
 Types:Instant
 A:SP$ DealDamage | Cost$ 1 R | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to target creature or player.
 Oracle:Burn deals 2 damage to target creature or player.\nFuse (You may cast one or both halves of this card from your hand.)
-SetInfo:DGM Uncommon

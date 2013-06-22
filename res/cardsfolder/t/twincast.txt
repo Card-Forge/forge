@@ -5,6 +5,3 @@ A:SP$ CopySpellAbility | Cost$ U U | ValidTgts$ Instant,Sorcery | SpellDescripti
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/twincast.jpg
 Oracle:Copy target instant or sorcery spell. You may choose new targets for the copy.
-SetInfo:M10 Rare
-SetInfo:SOK Rare
-SetInfo:10E Rare

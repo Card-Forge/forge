@@ -8,4 +8,3 @@ S:Mode$ Continuous | Affected$ Creature.Blue+Other+YouCtrl | AddPower$ 1 | AddTo
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thistledown_liege.jpg
 Oracle:Flash\nOther white creatures you control get +1/+1.\nOther blue creatures you control get +1/+1.
-SetInfo:SHM Rare

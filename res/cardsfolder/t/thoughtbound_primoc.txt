@@ -9,4 +9,3 @@ SVar:RemRandomDeck:True
 DeckHints:Type$Wizard
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thoughtbound_primoc.jpg
 Oracle:Flying\nAt the beginning of your upkeep, if a player controls more Wizards than each other player, the player who controls the most Wizards gains control of Thoughtbound Primoc.
-SetInfo:ONS Uncommon

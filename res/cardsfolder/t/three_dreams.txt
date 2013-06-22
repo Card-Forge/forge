@@ -5,5 +5,3 @@ A:SP$ ChangeZone | Cost$ 4 W | Origin$ Library | Destination$ Hand | ChangeType$
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/three_dreams.jpg
 Oracle:Search your library for up to three Aura cards with different names, reveal them, and put them into your hand. Then shuffle your library.
-SetInfo:RAV Rare
-SetInfo:PC2 Rare

@@ -6,4 +6,3 @@ K:Enchant creature with converted mana cost 2 or less
 S:Mode$ Continuous | Affected$ Card.EnchantedBy | GainControl$ You | Description$ You control enchanted creature.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/threads_of_disloyalty.jpg
 Oracle:Enchant creature with converted mana cost 2 or less\nYou control enchanted creature.
-SetInfo:BOK Rare

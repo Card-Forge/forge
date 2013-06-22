@@ -7,4 +7,3 @@ S:Mode$ Continuous | Affected$ Land.hasNonManaActivatedAbility | AddHiddenKeywor
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tsabos_web.jpg
 Oracle:When Tsabo's Web enters the battlefield, draw a card.\nEach land with an activated ability that isn't a mana ability doesn't untap during its controller's untap step.
-SetInfo:INV Rare

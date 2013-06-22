@@ -7,5 +7,3 @@ SVar:DelTrigSlowtrip:DB$ DelayedTrigger | Mode$ Phase | Phase$ Upkeep | ValidPla
 SVar:DrawSlowtrip:DB$Draw | NumCards$ 1 | Defined$ You
 SVar:Picture:http://www.wizards.com/global/images/magic/general/touch_of_death.jpg
 Oracle:Touch of Death deals 1 damage to target player. You gain 1 life.\nDraw a card at the beginning of the next turn's upkeep.
-SetInfo:ICE Common
-SetInfo:5ED Common

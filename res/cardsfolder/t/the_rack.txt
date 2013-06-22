@@ -8,7 +8,3 @@ SVar:TrigDamage:AB$ DealDamage | Cost$ 0 | Defined$ ChosenPlayer | NumDmg$ X | R
 SVar:X:Count$InChosenHand/NMinus.3
 SVar:Picture:http://www.wizards.com/global/images/magic/general/the_rack.jpg
 Oracle:As The Rack enters the battlefield, choose an opponent.\nAt the beginning of the chosen player's upkeep, The Rack deals X damage to that player, where X is 3 minus the number of cards in his or her hand.
-SetInfo:ATQ Uncommon
-SetInfo:4ED Uncommon
-SetInfo:TSB Special
-SetInfo:3ED Uncommon

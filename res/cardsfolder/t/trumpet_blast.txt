@@ -4,6 +4,3 @@ Types:Instant
 A:SP$ PumpAll | Cost$ 2 R | ValidCards$ Creature.attacking | NumAtt$ 2 | SpellDescription$ Attacking creatures get +2/+0 until end of turn
 SVar:Picture:http://www.wizards.com/global/images/magic/general/trumpet_blast.jpg
 Oracle:Attacking creatures get +2/+0 until end of turn.
-SetInfo:M10 Common
-SetInfo:M13 Common
-SetInfo:UDS Common

@@ -4,4 +4,3 @@ Types:Artifact
 A:AB$ Mill | Cost$ 8 T | NumCards$ 8 | ValidTgts$ Player | TgtPrompt$ Choose a player | SpellDescription$ Target player puts the top eight cards of his or her library into his or her graveyard.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tower_of_murmurs.jpg
 Oracle:{8}, {T}: Target player puts the top eight cards of his or her library into his or her graveyard.
-SetInfo:MRD Rare

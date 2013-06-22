@@ -5,4 +5,3 @@ A:SP$ Animate | Cost$ 1 U | ValidTgts$ Creature | TgtPrompt$ Select target creat
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/turn_to_frog.jpg
 Oracle:Target creature loses all abilities and becomes a 1/1 blue Frog until end of turn.
-SetInfo:M12 Uncommon

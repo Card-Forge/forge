@@ -8,4 +8,3 @@ SVar:NeedsToPlay:Island.YouCtrl
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thing_from_the_deep.jpg
 Oracle:Whenever Thing from the Deep attacks, sacrifice it unless you sacrifice an Island.
-SetInfo:POR Rare

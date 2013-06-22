@@ -6,4 +6,3 @@ PT:3/3
 Colors:white,blue,black,red,green
 SVar:Picture:http://www.wizards.com/global/images/magic/general/transguild_courier.jpg
 Oracle:Transguild Courier is all colors (even if this card isn't on the battlefield).
-SetInfo:DIS Uncommon

@@ -7,4 +7,3 @@ A:AB$ DealDamage | Cost$ T | ValidTgts$ Spirit.attacking,Spirit.blocking | TgtPr
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/takenos_cavalry.jpg
 Oracle:Bushido 1 (When this blocks or becomes blocked, it gets +1/+1 until end of turn.)\n{T}: Takeno's Cavalry deals 1 damage to target attacking or blocking Spirit.
-SetInfo:BOK Common

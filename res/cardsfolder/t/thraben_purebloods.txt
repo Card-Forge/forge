@@ -4,4 +4,3 @@ Types:Creature Hound
 PT:3/5
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thraben_purebloods.jpg
 Oracle:
-SetInfo:ISD Common

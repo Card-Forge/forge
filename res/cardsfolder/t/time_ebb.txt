@@ -4,9 +4,3 @@ Types:Sorcery
 A:SP$ ChangeZone | Cost$ 2 U | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 0 | SpellDescription$ Put target creature on top of its owner's library.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/time_ebb.jpg
 Oracle:Put target creature on top of its owner's library.
-SetInfo:PO2 Common
-SetInfo:S99 Common
-SetInfo:S00 Common
-SetInfo:9ED Common
-SetInfo:TMP Common
-SetInfo:POR Common

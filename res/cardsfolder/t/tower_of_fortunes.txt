@@ -4,4 +4,3 @@ Types:Artifact
 A:AB$ Draw | Cost$ 8 T | NumCards$ 4 | SpellDescription$ Draw four cards.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tower_of_fortunes.jpg
 Oracle:{8}, {T}: Draw four cards.
-SetInfo:MRD Rare

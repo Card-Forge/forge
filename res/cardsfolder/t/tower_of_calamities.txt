@@ -4,4 +4,3 @@ Types:Artifact
 A:AB$ DealDamage | Cost$ 8 T | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 12 | SpellDescription$ CARDNAME deals 12 damage to target creature.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tower_of_calamities.jpg
 Oracle:{8}, {T}: Tower of Calamities deals 12 damage to target creature.
-SetInfo:SOM Rare

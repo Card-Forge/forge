@@ -5,4 +5,3 @@ A:SP$ Discard | Cost$ B | ValidTgts$ Player | NumCards$ 1 | DiscardValid$ Card.n
 SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 2
 SVar:Picture:http://resources.wizards.com/magic/cards/lrw/en/card145969.jpg
 Oracle:Target player reveals his or her hand. You choose a nonland card from it. That player discards that card. You lose 2 life.
-SetInfo:LRW Rare

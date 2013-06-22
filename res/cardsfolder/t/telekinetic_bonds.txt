@@ -7,4 +7,3 @@ SVar:RemRandomDeck:True
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/telekinetic_bonds.jpg
 Oracle:Whenever a player discards a card, you may pay {1}{U}. If you do, you may tap or untap target permanent.
-SetInfo:JUD Rare

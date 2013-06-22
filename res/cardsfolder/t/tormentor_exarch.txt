@@ -8,4 +8,3 @@ SVar:DBPump:DB$ Pump | ValidTgts$ Creature | NumAtt$ 2 | SpellDescription$ Targe
 SVar:DBCurse:DB$ Pump | ValidTgts$ Creature | NumDef$ -2 | SpellDescription$ Target creature gets -0/-2 until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tormentor_exarch.jpg
 Oracle:When Tormentor Exarch enters the battlefield, choose one - Target creature gets +2/+0 until end of turn; or target creature gets -0/-2 until end of turn.
-SetInfo:NPH Uncommon

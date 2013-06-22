@@ -5,4 +5,3 @@ PT:2/2
 A:AB$ Pump | Cost$ tapXType<1/Creature> | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ CARDNAME gets +1/+1 until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/topan_ascetic.jpg
 Oracle:Tap an untapped creature you control: Topan Ascetic gets +1/+1 until end of turn.
-SetInfo:ALA Uncommon

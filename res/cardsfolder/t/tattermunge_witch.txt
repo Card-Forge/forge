@@ -5,4 +5,3 @@ PT:2/1
 A:AB$ PumpAll | Cost$ R G | ValidCards$ Creature.blocked | NumAtt$ +1 | KW$ Trample | SpellDescription$ Each blocked creature gets +1/+0 and gains trample until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tattermunge_witch.jpg
 Oracle:{R}{G}: Each blocked creature gets +1/+0 and gains trample until end of turn.
-SetInfo:SHM Uncommon

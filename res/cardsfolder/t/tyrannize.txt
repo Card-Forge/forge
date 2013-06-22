@@ -4,4 +4,3 @@ Types:Sorcery
 A:SP$ Discard | Cost$ 3 BR BR | ValidTgts$ Player | TgtPrompt$ Select target player | Mode$ Hand | UnlessCost$ PayLife<7> | UnlessPayer$ Targeted | SpellDescription$ Target player discards his or her hand unless he or she pays 7 life.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tyrannize.jpg
 Oracle:Target player discards his or her hand unless he or she pays 7 life.
-SetInfo:SHM Rare

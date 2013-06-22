@@ -9,4 +9,3 @@ SVar:TrigDealDamage2:AB$ DealDamage | Cost$ 0 | Defined$ TriggeredSourceControll
 SVar:X:TriggerCount$DamageAmount
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tephraderm.jpg
 Oracle:Whenever a creature deals damage to Tephraderm, Tephraderm deals that much damage to that creature.\nWhenever a spell deals damage to Tephraderm, Tephraderm deals that much damage to that spell's controller.
-SetInfo:ONS Rare

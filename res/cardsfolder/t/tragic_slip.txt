@@ -5,4 +5,3 @@ A:SP$ Pump | Cost$ B | ValidTgts$ Creature | TgtPrompt$ Select target creature |
 SVar:X:Count$Morbid.13.1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tragic_slip.jpg
 Oracle:Target creature gets -1/-1 until end of turn.\nMorbid - That creature gets -13/-13 until end of turn instead if a creature died this turn.
-SetInfo:DKA Common

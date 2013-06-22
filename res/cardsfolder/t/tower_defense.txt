@@ -5,4 +5,3 @@ A:SP$ PumpAll | Cost$ 1 G | ValidCards$ Creature.YouCtrl | NumDef$ +5 | KW$ Reac
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tower_defense.jpg
 Oracle:Creatures you control get +0/+5 and gain reach until end of turn.
-SetInfo:GTC Uncommon

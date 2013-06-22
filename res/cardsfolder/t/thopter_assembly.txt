@@ -8,4 +8,3 @@ SVar:TrigChange:AB$ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Han
 SVar:DBToken:DB$Token | TokenAmount$ 5 | TokenName$ Thopter | TokenTypes$ Artifact,Creature,Thopter | TokenOwner$ You | TokenColors$ Colorless | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Flying
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thopter_assembly.jpg
 Oracle:Flying\nAt the beginning of your upkeep, if you control no Thopters other than Thopter Assembly, return Thopter Assembly to its owner's hand and put five 1/1 colorless Thopter artifact creature tokens with flying onto the battlefield.
-SetInfo:MBS Rare

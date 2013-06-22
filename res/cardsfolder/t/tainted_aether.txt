@@ -7,5 +7,3 @@ SVar:TrigSacrifice:AB$ Sacrifice | Cost$ 0 | SacValid$ Creature,Land | Defined$ 
 SVar:TrigSacrificeAI:AB$ Sacrifice | Cost$ 0 | SacValid$ Creature,Land | Defined$ Opponent
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tainted_aether.jpg
 Oracle:Whenever a creature enters the battlefield, its controller sacrifices a creature or land.
-SetInfo:7ED Rare
-SetInfo:USG Rare

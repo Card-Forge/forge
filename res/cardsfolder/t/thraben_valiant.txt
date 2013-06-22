@@ -5,4 +5,3 @@ PT:2/1
 K:Vigilance
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thraben_valiant.jpg
 Oracle:Vigilance
-SetInfo:AVR Common

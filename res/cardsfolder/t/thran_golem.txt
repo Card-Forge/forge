@@ -6,7 +6,3 @@ S:Mode$ Continuous | Affected$ Card.Self+enchanted | AddPower$ 2 | AddToughness$
 SVar:EnchantMe:Once
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thran_golem.jpg
 Oracle:As long as Thran Golem is enchanted, it gets +2/+2 and has flying, first strike, and trample.
-SetInfo:PC2 Uncommon
-SetInfo:M12 Uncommon
-SetInfo:UDS Rare
-SetInfo:9ED Rare

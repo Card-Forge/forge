@@ -10,4 +10,3 @@ SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True | SubAbility$ TsabosChoice
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tsabos_decree.jpg
 Oracle:Choose a creature type. Target player reveals his or her hand and discards all creature cards of that type. Then destroy all creatures of that type that player controls. They can't be regenerated.
-SetInfo:INV Rare

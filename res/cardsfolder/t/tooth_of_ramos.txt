@@ -6,4 +6,3 @@ A:AB$ Mana | Cost$ Sac<1/CARDNAME> | Produced$ W | SpellDescription$ Add W to yo
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tooth_of_ramos.jpg
 Oracle:{T}: Add {W} to your mana pool.\nSacrifice Tooth of Ramos: Add {W} to your mana pool.
-SetInfo:MMQ Rare

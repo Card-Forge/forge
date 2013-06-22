@@ -7,4 +7,3 @@ SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Defined$ Self
 SVar:NeedsToPlay:Creature.YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thran_quarry.jpg
 Oracle:At the beginning of the end step, if you control no creatures, sacrifice Thran Quarry.\n{T}: Add one mana of any color to your mana pool.
-SetInfo:USG Rare

@@ -6,4 +6,3 @@ A:AB$ Tap | Cost$ T SubCounter<1/CHARGE> | ValidTgts$ Creature,Artifact | TgtPro
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tumble_magnet.jpg
 Oracle:Tumble Magnet enters the battlefield with three charge counters on it.\n{T}, Remove a charge counter from Tumble Magnet: Tap target artifact or creature.
-SetInfo:SOM Common

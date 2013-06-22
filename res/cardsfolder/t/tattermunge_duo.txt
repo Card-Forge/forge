@@ -9,4 +9,3 @@ SVar:TrigPumpKW:AB$Pump | Cost$ 0 | KW$ Forestwalk | Defined$ Self
 SVar:BuffedBy:Card.Red,Card.Green
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tattermunge_duo.jpg
 Oracle:Whenever you cast a red spell, Tattermunge Duo gets +1/+1 until end of turn.\nWhenever you cast a green spell, Tattermunge Duo gains forestwalk until end of turn.
-SetInfo:SHM Common

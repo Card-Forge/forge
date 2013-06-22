@@ -9,5 +9,3 @@ SVar:DBToken:DB$ Token | ConditionCheckSVar$ InGrave | ConditionSVarCompare$ EQ1
 SVar:InGrave:Remembered$Valid Card.inZoneGraveyard
 SVar:Picture:http://www.wizards.com/global/images/magic/general/terastodon.jpg
 Oracle:When Terastodon enters the battlefield, you may destroy up to three target noncreature permanents. For each permanent put into a graveyard this way, its controller puts a 3/3 green Elephant creature token onto the battlefield.
-SetInfo:PD3 Rare
-SetInfo:WWK Rare

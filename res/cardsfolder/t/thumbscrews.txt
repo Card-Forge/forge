@@ -5,4 +5,3 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | IsPresent$ Card.YouCtrl | Pre
 SVar:TrigDealDamage:AB$DealDamage | Cost$ 0 | ValidTgts$ Opponent | NumDmg$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thumbscrews.jpg
 Oracle:At the beginning of your upkeep, if you have five or more cards in hand, Thumbscrews deals 1 damage to target opponent.
-SetInfo:TMP Rare

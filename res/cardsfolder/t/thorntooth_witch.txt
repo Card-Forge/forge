@@ -7,4 +7,3 @@ SVar:TrigPump:AB$Pump | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thorntooth_witch.jpg
 Oracle:Whenever you cast a Treefolk spell, you may have target creature get +3/-3 until end of turn.
-SetInfo:LRW Uncommon

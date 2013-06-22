@@ -8,4 +8,3 @@ K:CARDNAME enters the battlefield tapped.
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/terrarion.jpg
 Oracle:Terrarion enters the battlefield tapped.\n{2}, {T}, Sacrifice Terrarion: Add two mana in any combination of colors to your mana pool.\nWhen Terrarion is put into a graveyard from the battlefield, draw a card.
-SetInfo:RAV Common

@@ -7,4 +7,3 @@ SVar:X:Count$YourLifeTotal/HalfUp
 A:SP$ AddTurn | Cost$ B B B B | NumTurns$ 1 | SpellDescription$ Take an extra turn after this one.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/temporal_extortion.jpg
 Oracle:When you cast Temporal Extortion, any player may pay half his or her life, rounded up. If a player does, counter Temporal Extortion.\nTake an extra turn after this one.
-SetInfo:PLC Rare

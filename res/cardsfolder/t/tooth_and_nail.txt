@@ -7,4 +7,3 @@ A:SP$ ChangeZone | Cost$ 7 G G | Origin$ Library | Destination$ Hand | ChangeTyp
 SVar:ChangeZone:DB$ChangeZone | Origin$ Hand | Destination$ Battlefield | ChangeType$ Creature | ChangeNum$ 2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tooth_and_nail.jpg
 Oracle:Choose one - Search your library for up to two creature cards, reveal them, put them into your hand, then shuffle your library; or put up to two creature cards from your hand onto the battlefield.\nEntwine {2} (Choose both if you pay the entwine cost.)
-SetInfo:MRD Rare

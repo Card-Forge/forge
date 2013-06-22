@@ -5,4 +5,3 @@ A:SP$ DealDamage | Cost$ B | ValidTgts$ Player | TgtPrompt$ Select target player
 SVar:DBGainLife:DB$GainLife | Defined$ You | LifeAmount$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/taste_of_blood.jpg
 Oracle:Taste of Blood deals 1 damage to target player and you gain 1 life.
-SetInfo:M12 Common

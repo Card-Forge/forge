@@ -8,4 +8,3 @@ SVar:DamageTrigger:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Oppo
 SVar:TrigDraw:AB$Draw | Cost$ 0 | NumCards$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tandem_lookout.jpg
 Oracle:Soulbond (You may pair this creature with another unpaired creature when either enters the battlefield. They remain paired for as long as you control both of them.)\nAs long as Tandem Lookout is paired with another creature, each of those creatures has "Whenever this creature deals damage to an opponent, draw a card."
-SetInfo:AVR Uncommon

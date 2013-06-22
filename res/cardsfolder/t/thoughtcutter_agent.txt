@@ -6,4 +6,3 @@ A:AB$ LoseLife | Cost$ U B T | ValidTgts$ Player | TgtPrompt$ Select a player | 
 SVar:DBReveal:DB$RevealHand | Defined$ Targeted
 SVar:Picture:http://magic.tcgplayer.com/db/cards/16857.jpg
 Oracle:{U}{B}, {T}: Target player loses 1 life and reveals his or her hand.
-SetInfo:ALA Uncommon

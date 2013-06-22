@@ -6,4 +6,3 @@ T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChao
 SVar:RolledChaos:AB$ ChangeZone | Cost$ 0 | Origin$ Library | Destination$ Hand | ChangeType$ Instant,Sorcery | ChangeNum$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/trail_of_the_mage_rings.jpg
 Oracle:Instant and sorcery spells have rebound. (The spell's controller exiles the spell as it resolves if he or she cast it from his or her hand. At the beginning of that player's next upkeep, he or she may cast that card from exile without paying its mana cost.)\nWhenever you roll {C}, you may search your library for an instant or sorcery card, reveal it, put it into your hand, then shuffle your library.
-SetInfo:PC2 Common

@@ -7,4 +7,3 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.S
 SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thalakos_seer.jpg
 Oracle:Shadow (This creature can block or be blocked by only creatures with shadow.)\nWhen Thalakos Seer leaves the battlefield, draw a card.
-SetInfo:TMP Common

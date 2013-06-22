@@ -19,4 +19,3 @@ PT:5/4
 K:Trample
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thraben_militia.jpg
 Oracle:Trample
-SetInfo:ISD Common

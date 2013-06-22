@@ -6,12 +6,3 @@ SVar:TrigGainLife:AB$GainLife | Cost$ 1 | Defined$ You | LifeAmount$ 1
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/throne_of_bone.jpg
 Oracle:Whenever a player casts a black spell, you may pay {1}. If you do, you gain 1 life.
-SetInfo:8ED Uncommon
-SetInfo:2ED Uncommon
-SetInfo:7ED Uncommon
-SetInfo:6ED Uncommon
-SetInfo:LEB Uncommon
-SetInfo:LEA Uncommon
-SetInfo:5ED Uncommon
-SetInfo:4ED Uncommon
-SetInfo:3ED Uncommon

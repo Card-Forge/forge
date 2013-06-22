@@ -8,4 +8,3 @@ SVar:TrigBounce:AB$ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Han
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/trusted_advisor.jpg
 Oracle:Your maximum hand size is increased by two.\nAt the beginning of your upkeep, return a blue creature you control to its owner's hand.
-SetInfo:SOK Uncommon

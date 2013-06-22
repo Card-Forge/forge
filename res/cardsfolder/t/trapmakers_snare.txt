@@ -5,4 +5,3 @@ A:SP$ ChangeZone | Cost$ 1 U | Origin$ Library | Destination$ Hand | ChangeType$
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/trapmakers_snare.jpg
 Oracle:Search your library for a Trap card, reveal it, and put it into your hand. Then shuffle your library.
-SetInfo:ZEN Uncommon

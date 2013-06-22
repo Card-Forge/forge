@@ -6,4 +6,3 @@ SVar:X:Count$xPaid
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/testament_of_faith.jpg
 Oracle:{X}: Testament of Faith becomes an X/X Wall creature with defender until end of turn. It's still an enchantment.
-SetInfo:ODY Uncommon

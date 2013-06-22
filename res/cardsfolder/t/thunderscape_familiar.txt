@@ -8,4 +8,3 @@ SVar:RemRandomDeck:True
 DeckNeeds:Color$Green|Black
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thunderscape_familiar.jpg
 Oracle:First strike\nBlack spells and green spells you cast cost {1} less to cast.
-SetInfo:PLS Common

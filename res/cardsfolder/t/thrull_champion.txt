@@ -7,4 +7,3 @@ A:AB$ GainControl | Cost$ T | ValidTgts$ Thrull | TgtPrompt$ Select target Thrul
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thrull_champion.jpg
 Oracle:Thrull creatures get +1/+1.\n{T}: Gain control of target Thrull for as long as you control Thrull Champion.
-SetInfo:FEM Rare

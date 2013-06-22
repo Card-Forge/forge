@@ -7,4 +7,3 @@ A:AB$ Untap | Cost$ SubCounter<2/CURRENCY> | ValidTgts$ Land.Basic | TgtPrompt$ 
 SVar:TrigPutCounter:AB$ PutCounter | Cost$ 0 | Defined$ Self | CounterType$ CURRENCY | CounterNum$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/trade_caravan.jpg
 Oracle:At the beginning of your upkeep, put a currency counter on Trade Caravan.\nRemove two currency counters from Trade Caravan: Untap target basic land. Activate this ability only during an opponent's upkeep.
-SetInfo:HML Common x2

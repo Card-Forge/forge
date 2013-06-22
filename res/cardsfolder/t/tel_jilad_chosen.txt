@@ -5,4 +5,3 @@ PT:2/1
 K:Protection from artifacts
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tel_jilad_chosen.jpg
 Oracle:Protection from artifacts
-SetInfo:MRD Common

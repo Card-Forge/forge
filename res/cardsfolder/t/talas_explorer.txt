@@ -7,4 +7,3 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigPeek:AB$RevealHand | Cost$ 0 | ValidTgts$ Opponent | TgtPrompt$ Select target opponent
 SVar:Picture:http://www.wizards.com/global/images/magic/general/talas_explorer.jpg
 Oracle:Flying\nWhen Talas Explorer enters the battlefield, look at target opponent's hand.
-SetInfo:PO2 Common

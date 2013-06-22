@@ -5,4 +5,3 @@ A:SP$ DealDamage | Cost$ 2 R | ValidTgts$ Creature | TgtPrompt$ Select target cr
 SVar:AltCost:Cost$ Sac<1/Mountain>
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thunderclap.jpg
 Oracle:You may sacrifice a Mountain rather than pay Thunderclap's mana cost.\nThunderclap deals 3 damage to target creature.
-SetInfo:MMQ Common

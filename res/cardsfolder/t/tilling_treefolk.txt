@@ -6,4 +6,3 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigChangeZone:AB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Land.YouCtrl | TargetMin$ 0 | TargetMax$ 2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tilling_treefolk.jpg
 Oracle:When Tilling Treefolk enters the battlefield, you may return up to two target land cards from your graveyard to your hand.
-SetInfo:EVE Common

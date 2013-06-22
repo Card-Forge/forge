@@ -5,4 +5,3 @@ S:Mode$ Continuous | Affected$ Creature.Artifact+YouCtrl | AddPower$ 2 | AddToug
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tempered_steel.jpg
 Oracle:Artifact creatures you control get +2/+2.
-SetInfo:SOM Rare

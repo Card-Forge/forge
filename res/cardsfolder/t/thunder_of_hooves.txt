@@ -6,4 +6,3 @@ SVar:X:Count$TypeOnBattlefield.Beast
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thunder_of_hooves.jpg
 Oracle:Thunder of Hooves deals X damage to each creature without flying and each player, where X is the number of Beasts on the battlefield.
-SetInfo:ONS Uncommon

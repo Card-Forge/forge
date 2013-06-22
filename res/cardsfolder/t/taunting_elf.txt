@@ -5,5 +5,3 @@ PT:0/1
 K:All creatures able to block CARDNAME do so.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/taunting_elf.jpg
 Oracle:All creatures able to block Taunting Elf do so.
-SetInfo:ONS Common
-SetInfo:UDS Common

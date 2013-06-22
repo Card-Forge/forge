@@ -7,4 +7,3 @@ SVar:RemRandomDeck:True
 DeckNeeds:Color$Green|White
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tigereye_cameo.jpg
 Oracle:{T}: Add {G} or {W} to your mana pool.
-SetInfo:INV Uncommon

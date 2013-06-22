@@ -6,4 +6,3 @@ S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone
 SVar:X:Count$Valid Forest.YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tangle_golem.jpg
 Oracle:Affinity for Forests (This spell costs {1} less to cast for each Forest you control.)
-SetInfo:DST Common

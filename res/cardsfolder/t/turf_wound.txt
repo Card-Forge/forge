@@ -6,4 +6,3 @@ SVar:STCantPlayLand:Mode$ CantPlayLand | EffectZone$ Command | Player$ Player.Is
 SVar:DBDraw:DB$ Draw | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/turf_wound.jpg
 Oracle:Target player can't play land cards this turn.\nDraw a card.
-SetInfo:INV Common

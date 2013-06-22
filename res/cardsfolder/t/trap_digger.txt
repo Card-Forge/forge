@@ -6,4 +6,3 @@ A:AB$ PutCounter | Cost$ 2 W T | ValidTgts$ Land.YouCtrl | TgtPrompt$ Select tar
 A:AB$ DealDamage | Cost$ Sac<1/Land.counters_GE1_TRAP/land with a trap counter on it> | ValidTgts$ Creature.attacking+withoutFlying | TgtPrompt$ Select target attacking creature without flying | NumDmg$ 3 | SpellDescription$ CARDNAME deals 3 damage to target attacking creature without flying.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/trap_digger.jpg
 Oracle:{2}{W}, {T}: Put a trap counter on target land you control.\nSacrifice a land with a trap counter on it: Trap Digger deals 3 damage to target attacking creature without flying.
-SetInfo:SCG Rare

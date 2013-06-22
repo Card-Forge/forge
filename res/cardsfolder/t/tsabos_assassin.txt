@@ -6,4 +6,3 @@ A:AB$ Destroy | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creatur
 SVar:X:Targeted$Valid Creature.SharesColorWith MostProminentColor
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tsabos_assassin.jpg
 Oracle:{T}: Destroy target creature if it shares a color with the most common color among all permanents or a color tied for most common. A creature destroyed this way can't be regenerated.
-SetInfo:INV Rare

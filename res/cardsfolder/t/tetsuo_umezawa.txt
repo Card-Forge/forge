@@ -6,4 +6,3 @@ K:CARDNAME can't be the target of Aura spells.
 A:AB$ Destroy | Cost$ U B B R T | ValidTgts$ Creature.tapped,Creature.blocking | TgtPrompt$ Select target tapped or blocking creature | SpellDescription$ Destroy target tapped or blocking creature.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tetsuo_umezawa.jpg
 Oracle:Tetsuo Umezawa can't be the target of Aura spells.\n{U}{B}{B}{R}, {T}: Destroy target tapped or blocking creature.
-SetInfo:LEG Rare

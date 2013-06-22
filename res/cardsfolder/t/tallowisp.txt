@@ -7,4 +7,3 @@ SVar:TrigSearch:AB$ChangeZone | Cost$ 0 | Origin$ Library | Destination$ Hand | 
 SVar:BuffedBy:Arcane,Spirit
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tallowisp.jpg
 Oracle:Whenever you cast a Spirit or Arcane spell, you may search your library for an Aura card with enchant creature, reveal it, and put it into your hand. If you do, shuffle your library.
-SetInfo:BOK Uncommon

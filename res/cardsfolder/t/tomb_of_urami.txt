@@ -7,4 +7,3 @@ A:AB$ Token | Cost$ 2 B B T Sac<All/Land> | TokenAmount$ 1 | TokenController$ Yo
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tomb_of_urami.jpg
 Oracle:{T}: Add {B} to your mana pool. Tomb of Urami deals 1 damage to you if you don't control an Ogre.\n{2}{B}{B}, {T}, Sacrifice all lands you control: Put a legendary 5/5 black Demon Spirit creature token with flying named Urami onto the battlefield.
-SetInfo:SOK Rare

@@ -9,4 +9,3 @@ SVar:DBGain:DB$GainLife | Defined$ You | LifeAmount$ X | References$ X
 SVar:X:Count$Valid Artifact.YouCtrl/Times.2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tezzeret_agent_of_bolas.jpg
 Oracle:[+1] Look at the top five cards of your library. You may reveal an artifact card from among them and put it into your hand. Put the rest on the bottom of your library in any order.\n[-1] Target artifact becomes a 5/5 artifact creature.\n[-4] Target player loses X life and you gain X life, where X is twice the number of artifacts you control.
-SetInfo:MBS Mythic

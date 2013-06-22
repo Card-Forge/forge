@@ -8,4 +8,3 @@ SVar:DBUntap:DB$ Untap | UntapUpTo$ True | UntapType$ Land | Amount$ 6
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/time_spiral.jpg
 Oracle:Exile Time Spiral. Each player shuffles his or her graveyard and hand into his or her library, then draws seven cards. You untap up to six lands.
-SetInfo:USG Rare

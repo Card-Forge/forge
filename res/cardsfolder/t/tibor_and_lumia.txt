@@ -10,4 +10,3 @@ SVar:TrigTremor:AB$ DamageAll | Cost$ 0 | ValidCards$ Creature.withoutFlying | N
 SVar:BuffedBy:Card.Blue
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tibor_and_lumia.jpg
 Oracle:Whenever you cast a blue spell, target creature gains flying until end of turn.\nWhenever you cast a red spell, Tibor and Lumia deals 1 damage to each creature without flying.
-SetInfo:GPT Rare

@@ -5,4 +5,3 @@ A:AB$ Tap | Cost$ T | ValidTgts$ Artifact.YouDontCtrl | TgtPrompt$ Select target
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/touchstone.jpg
 Oracle:{T}: Tap target artifact you don't control.
-SetInfo:WTH Uncommon

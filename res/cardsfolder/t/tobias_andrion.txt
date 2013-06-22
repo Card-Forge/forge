@@ -4,5 +4,3 @@ Types:Legendary Creature Human Advisor
 PT:4/4
 SVar:Picture:http://resources.wizards.com/magic/cards/le/en-us/card1691.jpg
 Oracle:
-SetInfo:CHR Uncommon
-SetInfo:LEG Uncommon

@@ -4,4 +4,3 @@ Types:Sorcery
 A:SP$ ChangeZone | Cost$ 2 W | ValidTgts$ Creature.greatestPower | TgtPrompt$ Select target creature with the greatest power | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target creature with the greatest power. (If two or more creatures are tied for greatest power, target any one of them.)
 SVar:Picture:http://www.wizards.com/global/images/magic/general/topple.jpg
 Oracle:Exile target creature with the greatest power. (If two or more creatures are tied for greatest power, target any one of them.)
-SetInfo:NMS Common

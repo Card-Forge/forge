@@ -5,5 +5,3 @@ A:SP$ GainControl | Cost$ 3 R | ValidTgts$ Creature.powerLTX | References$ X | T
 SVar:X:Count$InYourYard
 SVar:Picture:http://www.wizards.com/global/images/magic/general/temporary_insanity.jpg
 Oracle:Untap target creature with power less than the number of cards in your graveyard and gain control of it until end of turn. That creature gains haste until end of turn.
-SetInfo:TOR Uncommon
-SetInfo:DDG Uncommon

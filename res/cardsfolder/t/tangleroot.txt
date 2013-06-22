@@ -6,4 +6,3 @@ SVar:TrigMana:AB$ Mana | Cost$ 0 | Produced$ G | Amount$ 1 | Defined$ TriggeredA
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tangleroot.jpg
 Oracle:Whenever a player casts a creature spell, that player adds {G} to his or her mana pool.
-SetInfo:MRD Rare

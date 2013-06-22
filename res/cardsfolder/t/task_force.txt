@@ -6,4 +6,3 @@ T:Mode$ SpellAbilityCast | TargetsValid$ Card.Self | TriggerZones$ Battlefield |
 SVar:TrigPump:AB$Pump | Cost$ 0 | Defined$ Self | NumDef$ 3
 SVar:Picture:http://www.wizards.com/global/images/magic/general/task_force.jpg
 Oracle:Whenever Task Force becomes the target of a spell or ability, it gets +0/+3 until end of turn.
-SetInfo:MMQ Common

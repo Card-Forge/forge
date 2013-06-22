@@ -8,6 +8,3 @@ A:AB$ AddTurn | Cost$ T | NumTurns$ 1 | SpellDescription$ Take an extra turn aft
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/time_vault.jpg
 Oracle:Time Vault enters the battlefield tapped.\nTime Vault doesn't untap during your untap step.\nIf you would begin your turn while Time Vault is tapped, you may skip that turn instead. If you do, untap Time Vault.\n{T}: Take an extra turn after this one.
-SetInfo:LEB Rare
-SetInfo:LEA Rare
-SetInfo:2ED Rare

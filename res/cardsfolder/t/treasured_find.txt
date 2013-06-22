@@ -5,4 +5,3 @@ A:SP$ ChangeZone | Cost$ B G | Origin$ Graveyard | Destination$ Hand | TgtPrompt
 SVar:DBChange:DB$ ChangeZone | Origin$ Stack | Destination$ Exile
 SVar:Picture:http://www.wizards.com/global/images/magic/general/treasured_find.jpg
 Oracle:Return target card from your graveyard to your hand. Exile Treasured Find.
-SetInfo:RTR Uncommon

@@ -6,4 +6,3 @@ T:Mode$ AttackerBlocked | ValidCard$ Card.Self | ValidBlocker$ Creature.Artifact
 SVar:TrigPump:AB$Pump | Cost$ 0 | Defined$ Self | NumAtt$ 3 | NumDef$ 3
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tel_jilad_wolf.jpg
 Oracle:Whenever Tel-Jilad Wolf becomes blocked by an artifact creature, Tel-Jilad Wolf gets +3/+3 until end of turn.
-SetInfo:DST Common

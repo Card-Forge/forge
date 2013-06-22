@@ -5,4 +5,3 @@ PT:5/4
 K:Trample
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thundering_tanadon.jpg
 Oracle:({G/P} can be paid with either {G} or 2 life.)\nTrample
-SetInfo:NPH Common

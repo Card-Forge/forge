@@ -7,5 +7,3 @@ S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 1 | AddToughness
 A:AB$ Regenerate | Cost$ Sac<1/CARDNAME> | Defined$ Enchanted | SpellDescription$ Regenerate enchanted creature.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thrull_retainer.jpg
 Oracle:Enchant creature\nEnchanted creature gets +1/+1.\nSacrifice Thrull Retainer: Regenerate enchanted creature.
-SetInfo:5ED Uncommon
-SetInfo:FEM Uncommon

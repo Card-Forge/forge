@@ -8,4 +8,3 @@ SVar:DBCentaurToken:DB$Token | TokenAmount$ 1 | TokenName$ Centaur | TokenTypes$
 SVar:DBRhinoToken:DB$Token | TokenAmount$ 1 | TokenName$ Rhino | TokenTypes$ Creature,Rhino | TokenOwner$ You | TokenColors$ Green | TokenPower$ 4 | TokenToughness$ 4 | TokenKeywords$ Trample | TokenImage$ g 4 4 rhino rtr
 SVar:Picture:http://www.wizards.com/global/images/magic/general/trostanis_summoner.jpg
 Oracle:When Trostani's Summoner enters the battlefield, put a 2/2 white Knight creature token with vigilance, a 3/3 green Centaur creature token, and a 4/4 green Rhino creature token with trample onto the battlefield.
-SetInfo:DGM Uncommon

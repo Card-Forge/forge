@@ -7,4 +7,3 @@ T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChao
 SVar:RolledChaos:AB$ ChangeZone | Cost$ 0 | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature to return to your hand | Origin$ Battlefield | Destination$ Hand
 SVar:Picture:http://www.wizards.com/global/images/magic/general/takenuma.jpg
 Oracle:Whenever a creature leaves the battlefield, its controller draws a card.\nWhenever you roll {C}, return target creature you control to its owner's hand.
-SetInfo:PC2 Common

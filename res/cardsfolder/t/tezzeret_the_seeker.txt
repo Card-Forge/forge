@@ -11,5 +11,3 @@ SVar:RemRandomDeck:True
 DeckNeeds:Type$Artifact
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tezzeret_the_seeker.jpg
 Oracle:[+1] Untap up to two target artifacts.\n-X: Search your library for an artifact card with converted mana cost X or less and put it onto the battlefield. Then shuffle your library.\n[-5] Artifacts you control become 5/5 artifact creatures until end of turn.
-SetInfo:DDF Mythic
-SetInfo:ALA Mythic

@@ -7,4 +7,3 @@ SVar:RemRandomDeck:True
 DeckHints:Name$Scepter of Empires|Crown of Empires
 SVar:Picture:http://www.wizards.com/global/images/magic/general/throne_of_empires.jpg
 Oracle:{1}, {T}: Put a 1/1 white Soldier creature token onto the battlefield. Put five of those tokens onto the battlefield instead if you control artifacts named Crown of Empires and Scepter of Empires.
-SetInfo:M12 Rare

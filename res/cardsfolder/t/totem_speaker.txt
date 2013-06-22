@@ -6,4 +6,3 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Beast 
 SVar:TrigGainLife:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ 3
 SVar:Picture:http://www.wizards.com/global/images/magic/general/totem_speaker.jpg
 Oracle:Whenever a Beast enters the battlefield, you may gain 3 life.
-SetInfo:LGN Uncommon

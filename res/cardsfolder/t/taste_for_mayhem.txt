@@ -8,4 +8,3 @@ S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | Condition$ H
 SVar:BuffedBy:Card
 SVar:Picture:http://www.wizards.com/global/images/magic/general/taste_for_mayhem.jpg
 Oracle:Enchant creature\nEnchanted creature gets +2/+0.\nHellbent - Enchanted creature gets an additional +2/+0 as long as you have no cards in hand.
-SetInfo:DIS Common

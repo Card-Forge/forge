@@ -5,4 +5,3 @@ PT:4/4
 K:Flying
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tower_gargoyle.jpg
 Oracle:Flying
-SetInfo:ALA Uncommon

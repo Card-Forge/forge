@@ -9,4 +9,3 @@ SVar:RemRandomDeck:True
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thran_turbine.jpg
 Oracle:At the beginning of your upkeep, you may add {1} or {2} to your mana pool. You can't spend this mana to cast spells.
-SetInfo:USG Uncommon

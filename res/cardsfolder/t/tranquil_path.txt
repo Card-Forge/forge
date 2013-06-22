@@ -5,4 +5,3 @@ A:SP$ DestroyAll | Cost$ 4 G | ValidCards$ Enchantment | SpellDescription$ Destr
 SVar:DBDraw:DB$Draw | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tranquil_path.jpg
 Oracle:Destroy all enchantments.\nDraw a card.
-SetInfo:APC Common

@@ -5,5 +5,3 @@ PT:2/1
 A:AB$ Destroy | Cost$ R Sac<1/CARDNAME> | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | SpellDescription$ Destroy target artifact.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/torch_fiend.jpg
 Oracle:{R}, Sacrifice Torch Fiend: Destroy target artifact.
-SetInfo:M13 Uncommon
-SetInfo:DKA Common

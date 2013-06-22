@@ -4,7 +4,3 @@ Types:Sorcery
 A:SP$ Tap | Cost$ 1 U | TargetMin$ 0 | TargetMax$ 3 | TgtPrompt$ Choose target creature without flying | ValidTgts$ Creature.withoutFlying | SpellDescription$ Tap up to three target creatures without flying.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tidal_surge.jpg
 Oracle:Tap up to three target creatures without flying.
-SetInfo:PO2 Common
-SetInfo:POR Common
-SetInfo:6ED Common
-SetInfo:STH Common

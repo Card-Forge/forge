@@ -10,4 +10,3 @@ SVar:X:TriggerCount$LifeAmount/Times.2
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/transcendence.jpg
 Oracle:You don't lose the game for having 0 or less life.\nWhen you have 20 or more life, you lose the game.\nWhenever you lose life, you gain 2 life for each 1 life you lost. (Damage dealt to you causes you to lose life.)
-SetInfo:TOR Rare

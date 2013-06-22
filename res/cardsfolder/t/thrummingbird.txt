@@ -7,4 +7,3 @@ T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage
 SVar:TrigProliferate:AB$Proliferate | Cost$ 0
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thrummingbird.jpg
 Oracle:Flying\nWhenever Thrummingbird deals combat damage to a player, proliferate. (You choose any number of permanents and/or players with counters on them, then give each another counter of a kind already there.)
-SetInfo:SOM Uncommon

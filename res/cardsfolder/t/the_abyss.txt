@@ -5,4 +5,3 @@ Text:At the beginning of each player's upkeep, destroy target nonartifact creatu
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/the_abyss.jpg
 Oracle:At the beginning of each player's upkeep, destroy target nonartifact creature that player controls of his or her choice. It can't be regenerated.
-SetInfo:LEG Rare

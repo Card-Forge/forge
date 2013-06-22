@@ -7,4 +7,3 @@ S:Mode$ Continuous | Affected$ Creature.YouCtrl+Other | AddPower$ 2 | AddToughne
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thraben_doomsayer.jpg
 Oracle:{T}: Put a 1/1 white Human creature token onto the battlefield.\nFateful hour - As long as you have 5 or less life, other creatures you control get +2/+2.
-SetInfo:DKA Rare

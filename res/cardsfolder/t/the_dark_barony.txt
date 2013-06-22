@@ -7,4 +7,3 @@ T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChao
 SVar:RolledChaos:AB$ Discard | Cost$ 0 | Mode$ TgtChoose | Defined$ Player.Opponent | NumCards$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/the_dark_barony.jpg
 Oracle:Whenever a nonblack card is put into a player's graveyard from anywhere, that player loses 1 life.\nWhenever you roll {C}, each opponent discards a card.
-SetInfo:HOP Common

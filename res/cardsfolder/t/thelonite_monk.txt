@@ -6,4 +6,3 @@ A:AB$ Animate | Cost$ T Sac<1/Creature.Green/green creature> | ValidTgts$ Land |
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thelonite_monk.jpg
 Oracle:{T}, Sacrifice a green creature: Target land becomes a Forest. (This effect lasts indefinitely.)
-SetInfo:FEM Rare

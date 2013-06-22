@@ -8,4 +8,3 @@ SVar:TrigDiscard:AB$Discard | Cost$ 0 | ValidTgts$ Player | NumCards$ X | Refere
 SVar:X:Count$Devoured Card
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tar_fiend.jpg
 Oracle:Devour 2 (As this enters the battlefield, you may sacrifice any number of creatures. This creature enters the battlefield with twice that many +1/+1 counters on it.)\nWhen Tar Fiend enters the battlefield, target player discards a card for each creature it devoured.
-SetInfo:ALA Rare

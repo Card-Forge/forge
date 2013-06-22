@@ -6,4 +6,3 @@ A:AB$ Mana | Cost$ 1 Sac<1/CARDNAME> | Produced$ G W U | SpellDescription$ Add G
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/trevas_attendant.jpg
 Oracle:{1}, Sacrifice Treva's Attendant: Add {G}{W}{U} to your mana pool.
-SetInfo:INV Uncommon

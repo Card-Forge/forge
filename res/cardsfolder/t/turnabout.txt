@@ -6,4 +6,3 @@ SVar:DBTapOrUntapAll:DB$ TapOrUntapAll | ValidTgts$ Player | ValidCards$ Card.Ch
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/turnabout.jpg
 Oracle:Choose artifact, creature, or land. Tap all untapped permanents of the chosen type target player controls, or untap all tapped permanents of that type that player controls.
-SetInfo:USG Uncommon

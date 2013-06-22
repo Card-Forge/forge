@@ -5,4 +5,3 @@ PT:1/1
 K:CantBeBlockedBy Creature.withoutFlying
 SVar:Picture:http://www.wizards.com/global/images/magic/general/treetop_scout.jpg
 Oracle:Treetop Scout can't be blocked except by creatures with flying.
-SetInfo:SCG Common

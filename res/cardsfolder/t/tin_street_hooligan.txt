@@ -9,4 +9,3 @@ SVar:RemRandomDeck:True
 DeckNeeds:Color$Green
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tin_street_hooligan.jpg
 Oracle:When Tin Street Hooligan enters the battlefield, if {G} was spent to cast Tin Street Hooligan, destroy target artifact.
-SetInfo:GPT Common

@@ -5,5 +5,3 @@ A:SP$ DealDamage | Cost$ 3 R R | ValidTgts$ Creature | TgtPrompt$ Select target 
 SVar:ChompEquip:DB$ DestroyAll | ValidCards$ Targeted.Equipment+Attached
 SVar:Picture:http://www.wizards.com/global/images/magic/general/turn_to_slag.jpg
 Oracle:Turn to Slag deals 5 damage to target creature. Destroy all Equipment attached to that creature.
-SetInfo:M13 Common
-SetInfo:SOM Common

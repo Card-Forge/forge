@@ -6,5 +6,3 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigSac:AB$GainLife | Cost$ 0 | Defined$ TriggeredCardController | LifeAmount$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tarpan.jpg
 Oracle:When Tarpan dies, you gain 1 life.
-SetInfo:ICE Common
-SetInfo:5ED Common

@@ -7,5 +7,3 @@ SVar:DBChange:DB$ ChangeZone | Origin$ Stack | Destination$ Exile
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/time_reversal.jpg
 Oracle:Each player shuffles his or her hand and graveyard into his or her library, then draws seven cards. Exile Time Reversal.
-SetInfo:M11 Mythic
-SetInfo:M12 Mythic

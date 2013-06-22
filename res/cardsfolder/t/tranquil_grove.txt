@@ -5,5 +5,3 @@ A:AB$ DestroyAll | Cost$ 1 G G | ValidCards$ Enchantment.Other | SpellDescriptio
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tranquil_grove.jpg
 Oracle:{1}{G}{G}: Destroy all other enchantments.
-SetInfo:WTH Rare
-SetInfo:6ED Rare

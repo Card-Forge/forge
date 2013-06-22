@@ -5,4 +5,3 @@ PT:4/4
 A:AB$ Pump | Cost$ W | KW$ Vigilance | SpellDescription$ CARDNAME gains vigilance until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/towering_thunderfist.jpg
 Oracle:{W}: Towering Thunderfist gains vigilance until end of turn.
-SetInfo:GTC Common

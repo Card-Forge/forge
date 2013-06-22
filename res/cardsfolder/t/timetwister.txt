@@ -6,6 +6,3 @@ SVar:DBDraw:DB$ Draw | NumCards$ 7 | Defined$ Each
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/timetwister.jpg
 Oracle:Each player shuffles his or her hand and graveyard into his or her library, then draws seven cards. (Then put Timetwister into its owner's graveyard.)
-SetInfo:LEB Rare
-SetInfo:LEA Rare
-SetInfo:2ED Rare

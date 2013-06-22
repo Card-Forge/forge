@@ -6,4 +6,3 @@ SVar:TrigLife:AB$SetLife | Cost$ 0 | Defined$ You | LifeAmount$ X
 SVar:X:Count$Valid Permanent.YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/touch_of_the_eternal.jpg
 Oracle:At the beginning of your upkeep, count the number of permanents you control. Your life total becomes that number.
-SetInfo:M13 Rare

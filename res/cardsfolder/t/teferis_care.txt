@@ -6,4 +6,3 @@ A:AB$ Counter | Cost$ 3 U U | TargetType$ Spell | TgtPrompt$ Select target Encha
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/teferis_care.jpg
 Oracle:{W}, Sacrifice an enchantment: Destroy target enchantment.\n{3}{U}{U}: Counter target enchantment spell.
-SetInfo:INV Uncommon

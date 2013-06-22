@@ -8,5 +8,3 @@ SVar:MaxTgts:Count$Valid Creature
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thrive.jpg
 Oracle:Put a +1/+1 counter on each of X target creatures.
-SetInfo:PCY Common
-SetInfo:DIS Common

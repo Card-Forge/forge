@@ -5,4 +5,3 @@ PT:2/1
 S:Mode$ Continuous | Affected$ You | AddKeyword$ Spells and abilities your opponents control can't cause you to sacrifice permanents. | Description$ Spells and abilities your opponents control can't cause you to sacrifice permanents.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tajuru_preserver.jpg
 Oracle:Spells and abilities your opponents control can't cause you to sacrifice permanents.
-SetInfo:ROE Rare

@@ -5,4 +5,3 @@ A:SP$ DealDamage | Cost$ 3 R | ValidTgts$ Creature | TgtPrompt$ Select target cr
 K:Splice onto Arcane Sac<2/Mountain>
 SVar:Picture:http://www.wizards.com/global/images/magic/general/torrent_of_stone.jpg
 Oracle:Torrent of Stone deals 4 damage to target creature.\nSplice onto Arcane-Sacrifice two Mountains. (As you cast an Arcane spell, you may reveal this card from your hand and pay its splice cost. If you do, add this card's effects to that spell.)
-SetInfo:BOK Common

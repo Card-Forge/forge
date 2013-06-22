@@ -4,7 +4,3 @@ Types:Instant
 A:SP$ DestroyAll | Cost$ 2 W | ValidCards$ Enchantment | SpellDescription$ Destroy all enchantments.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tempest_of_light.jpg
 Oracle:Destroy all enchantments.
-SetInfo:MRD Uncommon
-SetInfo:M10 Uncommon
-SetInfo:9ED Uncommon
-SetInfo:10E Uncommon

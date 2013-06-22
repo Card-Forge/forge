@@ -6,6 +6,3 @@ SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 1 | SpellDescription$ Draw a car
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/twitch.jpg
 Oracle:You may tap or untap target artifact, creature, or land.\nDraw a card.
-SetInfo:TMP Common
-SetInfo:WWK Common
-SetInfo:10E Common

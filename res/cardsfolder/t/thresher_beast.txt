@@ -6,4 +6,3 @@ T:Mode$ AttackerBlocked | ValidCard$ Card.Self | Execute$ TrigSac | TriggerDescr
 SVar:TrigSac:AB$ Sacrifice | Cost$ 0 | SacValid$ Land | Defined$ DefendingPlayer | ChangeNum$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thresher_beast.jpg
 Oracle:Whenever Thresher Beast becomes blocked, defending player sacrifices a land.
-SetInfo:PCY Common

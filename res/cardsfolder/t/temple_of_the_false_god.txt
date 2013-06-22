@@ -5,5 +5,3 @@ A:AB$ Mana | Cost$ T | Produced$ 2 | IsPresent$ Land.YouCtrl | PresentCompare$ G
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/temple_of_the_false_god.jpg
 Oracle:{T}: Add {2} to your mana pool. Activate this ability only if you control five or more lands.
-SetInfo:SCG Uncommon
-SetInfo:COM Uncommon

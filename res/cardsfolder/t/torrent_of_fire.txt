@@ -5,4 +5,3 @@ A:SP$ DealDamage | Cost$ 3 R R | ValidTgts$ Creature,Player | TgtPrompt$ Select 
 SVar:X:Count$MaxCMCYouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/torrent_of_fire.jpg
 Oracle:Torrent of Fire deals damage equal to the highest converted mana cost among permanents you control to target creature or player.
-SetInfo:SCG Common

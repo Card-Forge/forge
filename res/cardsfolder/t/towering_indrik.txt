@@ -5,4 +5,3 @@ PT:2/4
 K:Reach
 SVar:Picture:http://www.wizards.com/global/images/magic/general/towering_indrik.jpg
 Oracle:Reach (This creature can block creatures with flying.)
-SetInfo:RTR Common

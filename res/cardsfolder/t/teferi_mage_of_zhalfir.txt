@@ -7,5 +7,3 @@ S:Mode$ Continuous | Affected$ Creature.YouOwn | AffectedZone$ Hand,Graveyard,Ex
 S:Mode$ CantBeCast | ValidCard$ Card | OnlySorcerySpeed$ True | Caster$ Opponent | Description$ Each opponent can cast spells only any time he or she could cast a sorcery.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/teferi_mage_of_zhalfir.jpg
 Oracle:Flash (You may cast this spell any time you could cast an instant.)\nCreature cards you own that aren't on the battlefield have flash.\nEach opponent can cast spells only any time he or she could cast a sorcery.
-SetInfo:V11 Mythic
-SetInfo:TSP Rare

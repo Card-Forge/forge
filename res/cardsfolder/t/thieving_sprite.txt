@@ -8,4 +8,3 @@ SVar:DBDiscard:DB$ Discard | ValidTgts$ Player | NumCards$ 1 | RevealNumber$ X |
 SVar:X:Count$TypeYouCtrl.Faerie
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thieving_sprite.jpg
 Oracle:Flying\nWhen Thieving Sprite enters the battlefield, target player reveals X cards from his or her hand, where X is the number of Faeries you control. You choose one of those cards. That player discards that card.
-SetInfo:LRW Common

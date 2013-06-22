@@ -6,4 +6,3 @@ T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChao
 SVar:RolledChaos:AB$ UntapAll | Cost$ 0 | ValidCards$ Permanent.YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/the_eon_fog.jpg
 Oracle:Players skip their untap steps.\nWhenever you roll {C}, untap all permanents you control.
-SetInfo:HOP Common

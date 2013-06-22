@@ -5,4 +5,3 @@ A:SP$ GainControl | Cost$ 1 R R | ValidTgts$ Creature | TgtPrompt$ Select target
 SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ Haste & Trample
 SVar:Picture:http://www.wizards.com/global/images/magic/general/traitorous_blood.jpg
 Oracle:Gain control of target creature until end of turn. Untap it. It gains trample and haste until end of turn.
-SetInfo:ISD Common

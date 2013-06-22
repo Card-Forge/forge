@@ -5,4 +5,3 @@ T:Mode$ SetInMotion | Execute$ DarkEffect | TriggerZones$ Command | TriggerDescr
 SVar:DarkEffect:AB$ Destroy | Cost$ 0 | TargetMin$ 0 | TargetMax$ 3 | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent
 SVar:Picture:http://www.cardforge.org/fpics/lq_schemes/tooth_claw_and_tail.jpg
 Oracle:When you set this scheme in motion, destroy up to three target nonland permanents.
-SetInfo:ARC Common

@@ -6,8 +6,3 @@ A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add G to your mana pool.
 K:Cycling:G
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tranquil_thicket.jpg
 Oracle:Tranquil Thicket enters the battlefield tapped.\n{T}: Add {G} to your mana pool.\nCycling {G} ({G}, Discard this card: Draw a card.)
-SetInfo:ONS Common
-SetInfo:DDJ Common
-SetInfo:ARC Common
-SetInfo:COM Common
-SetInfo:EVG Common

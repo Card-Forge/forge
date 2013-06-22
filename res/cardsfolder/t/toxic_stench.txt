@@ -6,4 +6,3 @@ SVar:DBDestroy:DB$ Destroy | Defined$ Targeted | ConditionCheckSVar$ X | Conditi
 SVar:X:Count$InYourYard
 SVar:Picture:http://www.wizards.com/global/images/magic/general/toxic_stench.jpg
 Oracle:Target nonblack creature gets -1/-1 until end of turn.\nThreshold - If seven or more cards are in your graveyard, instead destroy that creature. It can't be regenerated.
-SetInfo:JUD Common

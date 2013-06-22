@@ -6,4 +6,3 @@ K:Trample
 K:CARDNAME can't be countered.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/terra_stomper.jpg
 Oracle:Terra Stomper can't be countered.\nTrample
-SetInfo:ZEN Rare

@@ -8,7 +8,3 @@ K:CantBeBlockedByAmount LT2
 K:CARDNAME can block an additional creature.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/two_headed_dragon.jpg
 Oracle:Flying\n{1}{R}: Two-Headed Dragon gets +2/+0 until end of turn.\nTwo-Headed Dragon can't be blocked except by two or more creatures.\nTwo-Headed Dragon can block an additional creature.
-SetInfo:MMQ Rare
-SetInfo:8ED Rare
-SetInfo:DRB Rare
-SetInfo:ARC Rare

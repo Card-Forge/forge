@@ -9,4 +9,3 @@ A:AB$ Pump | Cost$ 1 | NumAtt$ +1 | NumDef$ -1 | SpellDescription$ CARDNAME gets
 A:AB$ Pump | Cost$ 1 | NumAtt$ -1 | NumDef$ +1 | SpellDescription$ CARDNAME gets -1/+1 until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thornling.jpg
 Oracle:{G}: Thornling gains haste until end of turn.\n{G}: Thornling gains trample until end of turn.\n{G}: Thornling is indestructible this turn.\n{1}: Thornling gets +1/-1 until end of turn.\n{1}: Thornling gets -1/+1 until end of turn.
-SetInfo:CFX Mythic

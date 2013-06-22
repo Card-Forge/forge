@@ -6,4 +6,3 @@ SVar:X:Count$InYourHand
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thoughts_of_ruin.jpg
 Oracle:Each player sacrifices a land for each card in your hand.
-SetInfo:SOK Rare

@@ -7,4 +7,3 @@ SVar:RemRandomDeck:True
 DeckNeeds:Color$Green|Red
 SVar:Picture:http://www.wizards.com/global/images/magic/general/troll_horn_cameo.jpg
 Oracle:{T}: Add {R} or {G} to your mana pool.
-SetInfo:INV Uncommon

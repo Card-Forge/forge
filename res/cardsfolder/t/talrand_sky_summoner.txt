@@ -6,4 +6,3 @@ T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | Tr
 SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Drake | TokenTypes$ Creature,Drake | TokenColors$ Blue | TokenPower$ 2 | TokenToughness$ 2 | TokenOwner$ You | TokenKeywords$ Flying
 SVar:Picture:http://www.wizards.com/global/images/magic/general/talrand_sky_summoner.jpg
 Oracle:Whenever you cast an instant or sorcery spell, put a 2/2 blue Drake creature token with flying onto the battlefield.
-SetInfo:M13 Rare

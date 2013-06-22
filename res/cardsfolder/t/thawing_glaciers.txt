@@ -7,4 +7,3 @@ SVar:DBDelTrig:DB$DelayedTrigger | Mode$ Phase | Phase$ Cleanup | ValidPlayer$ P
 SVar:TrigBounce:DB$ChangeZone | Origin$ Battlefield | Destination$ Hand | Defined$ Self
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thawing_glaciers.jpg
 Oracle:Thawing Glaciers enters the battlefield tapped.\n{1}, {T}: Search your library for a basic land card, put that card onto the battlefield tapped, then shuffle your library. Return Thawing Glaciers to its owner's hand at the beginning of the next cleanup step.
-SetInfo:ALL Rare

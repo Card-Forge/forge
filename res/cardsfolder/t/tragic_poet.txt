@@ -6,4 +6,3 @@ A:AB$ ChangeZone | Cost$ T Sac<1/CARDNAME> | TgtPrompt$ Choose target enchantmen
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tragic_poet.jpg
 Oracle:{T}, Sacrifice Tragic Poet: Return target enchantment card from your graveyard to your hand.
-SetInfo:ULG Common

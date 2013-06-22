@@ -6,4 +6,3 @@ A:AB$ Pump | Cost$ Sac<1/Land> | NumDef$ 3 | SpellDescription$ CARDNAME gets +0/
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/trenching_steed.jpg
 Oracle:Sacrifice a land: Trenching Steed gets +0/+3 until end of turn.
-SetInfo:PCY Common

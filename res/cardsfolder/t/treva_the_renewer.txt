@@ -9,5 +9,3 @@ SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X
 SVar:X:Count$Valid Card.ChosenColor
 SVar:Picture:http://www.wizards.com/global/images/magic/general/treva_the_renewer.jpg
 Oracle:Flying\nWhenever Treva, the Renewer deals combat damage to a player, you may pay {2}{W}. If you do, choose a color, then you gain 1 life for each permanent of that color.
-SetInfo:DDE Rare
-SetInfo:INV Rare

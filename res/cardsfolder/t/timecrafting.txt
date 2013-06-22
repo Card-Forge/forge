@@ -9,4 +9,3 @@ SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/timecrafting.jpg
 Oracle:Choose one - Remove X time counters from target permanent or suspended card; or put X time counters on target permanent with a time counter on it or suspended card.
-SetInfo:PLC Uncommon

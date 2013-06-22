@@ -5,4 +5,3 @@ PT:1/1
 A:AB$ Pump | Cost$ Discard<1/Card> | Defined$ Self | KW$ HIDDEN Prevent all damage that would be dealt to CARDNAME. | SpellDescription$ Prevent all damage that would be dealt to CARDNAME this turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/trained_pronghorn.jpg
 Oracle:Discard a card: Prevent all damage that would be dealt to Trained Pronghorn this turn.
-SetInfo:JUD Common

@@ -9,4 +9,3 @@ SVar:EquipMe:Once
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/training_drone.jpg
 Oracle:Training Drone can't attack or block unless it's equipped.
-SetInfo:MBS Common

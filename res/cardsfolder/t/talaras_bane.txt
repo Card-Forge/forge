@@ -11,4 +11,3 @@ SVar:X:Imprinted$CardToughness
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/talaras_bane.jpg
 Oracle:Target opponent reveals his or her hand. You choose a green or white creature card from it. You gain life equal that creature card's toughness, then that player discards that card.
-SetInfo:EVE Common

@@ -8,4 +8,3 @@ SVar:TrigBattalionPump:AB$ Pump | Cost$ 0 | NumAtt$ +5 | NumDef$ +5
 SVar:BattalionTest:Count$Valid Creature.attacking+Other
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tajic_blade_of_the_legion.jpg
 Oracle:Tajic, Blade of the Legion is indestructible.\nBattalion - Whenever Tajic and at least two other creatures attack, Tajic gets +5/+5 until end of turn.
-SetInfo:DGM Rare

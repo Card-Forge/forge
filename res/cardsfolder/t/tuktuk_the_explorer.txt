@@ -8,4 +8,3 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ 1  | TokenName$ Tuktuk the Returned | TokenTypes$ Legendary,Artifact,Creature,Goblin,Golem | TokenOwner$ TriggeredCardController | TokenColors$ Colorless | TokenPower$ 5 | TokenToughness$ 5
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tuktuk_the_explorer.jpg
 Oracle:Haste\nWhen Tuktuk the Explorer dies, put a legendary 5/5 colorless Goblin Golem artifact creature token named Tuktuk the Returned onto the battlefield.
-SetInfo:ROE Rare

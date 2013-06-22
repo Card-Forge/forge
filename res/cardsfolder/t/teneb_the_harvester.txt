@@ -7,5 +7,3 @@ T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage
 SVar:TrigChange:AB$ChangeZone | Cost$ 2 B | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | ChangeNum$ 1 | TgtPrompt$ Select target creature card in a graveyard | ValidTgts$ Creature
 SVar:Picture:http://www.wizards.com/global/images/magic/general/teneb_the_harvester.jpg
 Oracle:Flying\nWhenever Teneb, the Harvester deals combat damage to a player, you may pay {2}{B}. If you do, put target creature card from a graveyard onto the battlefield under your control.
-SetInfo:COM Rare
-SetInfo:PLC Rare

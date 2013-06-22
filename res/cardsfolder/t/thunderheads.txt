@@ -6,5 +6,3 @@ A:SP$ Token | Cost$ 2 U | TokenName$ Weird | TokenOwner$ You | TokenPower$ 3 | T
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thunderheads.jpg
 Oracle:Replicate {2}{U} (When you cast this spell, copy it for each time you paid its replicate cost.)\nPut a 3/3 blue Weird creature token with defender and flying onto the battlefield. Exile it at the beginning of the next end step.
-SetInfo:GPT Uncommon
-SetInfo:DDJ Uncommon

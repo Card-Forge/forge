@@ -6,4 +6,3 @@ SVar:DBMana:DB$Mana | Produced$ G | Amount$ 1
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/turn_to_dust.jpg
 Oracle:Destroy target Equipment. Add {G} to your mana pool.
-SetInfo:MRD Common

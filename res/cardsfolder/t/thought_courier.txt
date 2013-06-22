@@ -7,5 +7,3 @@ SVar:DBDiscard:DB$Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose
 SVar:RemAIDeck:True
 SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card82980.jpg
 Oracle:{T}: Draw a card, then discard a card.
-SetInfo:5DN Common
-SetInfo:9ED Uncommon

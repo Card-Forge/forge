@@ -7,4 +7,3 @@ SVar:CheapParts:Mode$ ReduceCost | EffectZone$ Command | ValidCard$ Artifact | T
 SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 2
 SVar:Picture:http://www.cardforge.org/fpics/lq_schemes/the_pieces_are_coming_together.jpg
 Oracle:When you set this scheme in motion, draw two cards. Artifact spells you cast this turn cost {2} less to cast.
-SetInfo:ARC Common

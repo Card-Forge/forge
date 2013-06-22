@@ -5,4 +5,3 @@ A:SP$ Fog | Cost$ 1 G | SubAbility$ DBPumpAll | SpellDescription$ Prevent all co
 SVar:DBPumpAll:DB$PumpAll | ValidCards$ Creature.attacking | KW$ HIDDEN This card doesn't untap during your next untap step. | Permanent$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tangle.jpg
 Oracle:Prevent all combat damage that would be dealt this turn.\nEach attacking creature doesn't untap during its controller's next untap step.
-SetInfo:INV Uncommon

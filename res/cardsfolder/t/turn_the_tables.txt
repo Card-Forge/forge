@@ -7,4 +7,3 @@ SVar:TurnTheTables:AB$DealDamage | Cost$ 0 | CombatDamage$ True | Defined$ Remem
 SVar:ReturnedX:ReplaceCount$DamageAmount
 SVar:Picture:http://www.wizards.com/global/images/magic/general/turn_the_tables.jpg
 Oracle:All combat damage that would be dealt to you this turn is dealt to target attacking creature instead.
-SetInfo:DST Rare

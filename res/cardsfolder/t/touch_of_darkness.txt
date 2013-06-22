@@ -7,4 +7,3 @@ SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/touch_of_darkness.jpg
 Oracle:Any number of target creatures become black until end of turn.
-SetInfo:LEG Uncommon

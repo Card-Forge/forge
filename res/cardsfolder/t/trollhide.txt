@@ -7,4 +7,3 @@ S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddToughness
 SVar:ABRegen:AB$Regenerate | Cost$ 1 G | SpellDescription$ Regenerate this creature.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/trollhide.jpg
 Oracle:Enchant creature\nEnchanted creature gets +2/+2 and has "{1}{G}: Regenerate this creature." (The next time the creature would be destroyed this turn, it isn't. Instead tap it, remove all damage from it, and remove it from combat.)
-SetInfo:M12 Common

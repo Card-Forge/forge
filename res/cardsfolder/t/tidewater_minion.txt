@@ -8,4 +8,3 @@ A:AB$ Untap | Cost$ T | ValidTgts$ Permanent | TgtPrompt$ Select target permanen
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tidewater_minion.jpg
 Oracle:Defender (This creature can't attack.)\n{4}: Tidewater Minion loses defender until end of turn.\n{T}: Untap target permanent.
-SetInfo:RAV Common

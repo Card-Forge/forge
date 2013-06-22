@@ -7,4 +7,3 @@ K:Flying
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thought_eater.jpg
 Oracle:Flying\nYour maximum hand size is reduced by three.
-SetInfo:ODY Uncommon

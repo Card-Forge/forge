@@ -9,4 +9,3 @@ SVar:TrigReturn:AB$ChangeZone | Cost$ 0 | Origin$ Exile | Destination$ Battlefie
 SVar:DBCleanUp:DB$Cleanup | ClearRemembered$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tatsumasa_the_dragons_fang.jpg
 Oracle:Equipped creature gets +5/+5.\n{6}, Exile Tatsumasa, the Dragon's Fang: Put a 5/5 blue Dragon Spirit creature token with flying onto the battlefield. Return Tatsumasa to the battlefield under its owner's control when that token dies.\nEquip {3}
-SetInfo:CHK Rare

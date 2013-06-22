@@ -9,4 +9,3 @@ T:Mode$ SpellCast | ValidCard$ Card.Self | Conspire$ True | Execute$ Conspire | 
 SVar:Conspire:AB$ CopySpellAbility | Cost$ 0 | Defined$ TriggeredSpellAbility | Amount$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/traitors_roar.jpg
 Oracle:Tap target untapped creature. It deals damage equal to its power to its controller.\nConspire (As you cast this spell, you may tap two untapped creatures you control that share a color with it. When you do, copy it and you may choose a new target for the copy.)
-SetInfo:SHM Common

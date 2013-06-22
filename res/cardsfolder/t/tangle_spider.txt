@@ -6,5 +6,3 @@ K:Flash
 K:Reach
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tangle_spider.jpg
 Oracle:Flash (You may cast this spell any time you could cast an instant.)\nReach (This creature can block creatures with flying.)
-SetInfo:DST Common
-SetInfo:10E Uncommon

@@ -9,5 +9,3 @@ SVar:AntiBuffedBy:Creature
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/timid_drake.jpg
 Oracle:Flying\nWhen another creature enters the battlefield, return Timid Drake to its owner's hand.
-SetInfo:MMQ Uncommon
-SetInfo:WTH Uncommon

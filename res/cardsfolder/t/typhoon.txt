@@ -8,4 +8,3 @@ SVar:AIPlayForSub:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/typhoon.jpg
 Oracle:Typhoon deals damage to each opponent equal to the number of Islands that player controls.
-SetInfo:LEG Rare

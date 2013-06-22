@@ -7,4 +7,3 @@ SVar:TrigPhase:AB$Phases | Cost$ 0 | Defined$ TriggeredAttacker
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/teferis_veil.jpg
 Oracle:Whenever a creature you control attacks, it phases out at end of combat. (While it's phased out, it's treated as though it doesn't exist. It phases in before you untap during your next untap step.)
-SetInfo:WTH Uncommon

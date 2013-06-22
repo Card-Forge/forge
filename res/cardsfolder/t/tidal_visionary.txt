@@ -7,4 +7,3 @@ SVar:Animate:DB$ Animate | ValidTgts$ Creature | TgtPrompt$ Select target creatu
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tidal_visionary.jpg
 Oracle:{T}: Target creature becomes the color of your choice until end of turn.
-SetInfo:INV Common

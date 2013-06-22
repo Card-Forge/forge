@@ -7,4 +7,3 @@ T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefiel
 SVar:TrigTapAll:AB$TapAll | Cost$ 0 | ValidCards$ Land.YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/troublesome_spirit.jpg
 Oracle:Flying\nAt the beginning of your end step, tap all lands you control.
-SetInfo:PCY Rare

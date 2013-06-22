@@ -6,5 +6,3 @@ S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone
 SVar:X:Count$Valid Artifact.YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thoughtcast.jpg
 Oracle:Affinity for artifacts (This spell costs {1} less to cast for each artifact you control.)\nDraw two cards.
-SetInfo:MRD Common
-SetInfo:DDF Common

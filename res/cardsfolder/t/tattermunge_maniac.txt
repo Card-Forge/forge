@@ -5,4 +5,3 @@ PT:2/1
 K:CARDNAME attacks each turn if able.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tattermunge_maniac.jpg
 Oracle:Tattermunge Maniac attacks each turn if able.
-SetInfo:SHM Uncommon

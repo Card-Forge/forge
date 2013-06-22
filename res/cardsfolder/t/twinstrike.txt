@@ -6,4 +6,3 @@ SVar:DBDestroy:DB$ Destroy | Defined$ Targeted | ConditionCheckSVar$ X | Referen
 SVar:X:Count$InYourHand
 SVar:Picture:http://www.wizards.com/global/images/magic/general/twinstrike.jpg
 Oracle:Twinstrike deals 2 damage to each of two target creatures.\nHellbent - Destroy those creatures instead if you have no cards in hand.
-SetInfo:DIS Uncommon

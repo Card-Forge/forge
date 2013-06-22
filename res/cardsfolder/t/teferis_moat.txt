@@ -6,5 +6,3 @@ SVar:ChooseColor:DB$ ChooseColor | Defined$ You | SpellDescription$ As CARDNAME 
 S:Mode$ CantAttack | ValidCard$ Creature.withoutFlying+ChosenColor | Target$ You | Description$ Creatures of the chosen color without flying can't attack you.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/teferis_moat.jpg
 Oracle:As Teferi's Moat enters the battlefield, choose a color.\nCreatures of the chosen color without flying can't attack you.
-SetInfo:TSB Special
-SetInfo:INV Rare

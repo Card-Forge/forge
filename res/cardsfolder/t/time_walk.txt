@@ -4,6 +4,3 @@ Types:Sorcery
 A:SP$ AddTurn | Cost$ 1 U | NumTurns$ 1 | SpellDescription$ Take an extra turn after this one.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/time_walk.jpg
 Oracle:Take an extra turn after this one.
-SetInfo:LEB Rare
-SetInfo:LEA Rare
-SetInfo:2ED Rare

@@ -9,4 +9,3 @@ SVar:RemRandomDeck:True
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thrull_wizard.jpg
 Oracle:{1}{B}: Counter target black spell unless that spell's controller pays {B} or {3}
-SetInfo:FEM Uncommon

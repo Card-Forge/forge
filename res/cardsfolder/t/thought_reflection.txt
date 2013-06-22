@@ -5,4 +5,3 @@ R:Event$ Draw | ActiveZones$ Battlefield | ValidPlayer$ You | ReplaceWith$ DrawT
 SVar:DrawTwo:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thought_reflection.jpg
 Oracle:If you would draw a card, draw two cards instead.
-SetInfo:SHM Rare

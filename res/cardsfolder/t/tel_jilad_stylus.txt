@@ -6,4 +6,3 @@ SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tel_jilad_stylus.jpg
 Oracle:{T}: Put target permanent you own on the bottom of your library.
-SetInfo:MRD Uncommon

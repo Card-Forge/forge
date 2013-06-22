@@ -5,4 +5,3 @@ A:SP$ Counter | Cost$ 1 U | TargetType$ Spell,Activated,Triggered | ValidTgts$ C
 SVar:DB:DB$ Draw | NumCards$ 2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/teferis_response.jpg
 Oracle:Counter target spell or ability an opponent controls that targets a land you control. If a permanent's ability is countered this way, destroy that permanent.\nDraw two cards.
-SetInfo:INV Rare

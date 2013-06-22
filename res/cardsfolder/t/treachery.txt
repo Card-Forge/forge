@@ -9,4 +9,3 @@ SVar:TrigUntap:AB$ Untap | Cost$ 0 | UntapUpTo$ True | UntapType$ Land | Amount$
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/treachery.jpg
 Oracle:Enchant creature\nWhen Treachery enters the battlefield, untap up to five lands.\nYou control enchanted creature.
-SetInfo:UDS Rare

@@ -8,4 +8,3 @@ SVar:X:TriggerCount$DamageAmount
 Svar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tamanoa.jpg
 Oracle:Whenever a noncreature source you control deals damage, you gain that much life.
-SetInfo:CSP Rare

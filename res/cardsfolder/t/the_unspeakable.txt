@@ -8,4 +8,3 @@ T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage
 SVar:TrigReturn:AB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Arcane.YouCtrl
 SVar:Picture:http://resources.wizards.com/magic/cards/chk/en-us/card78693.jpg
 Oracle:Flying, trample\nWhenever The Unspeakable deals combat damage to a player, you may return target Arcane card from your graveyard to your hand.
-SetInfo:CHK Rare

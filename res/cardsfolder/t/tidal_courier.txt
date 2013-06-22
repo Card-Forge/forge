@@ -8,4 +8,3 @@ A:AB$ Pump | Cost$ 3 U | KW$ Flying | SpellDescription$ CARDNAME gains flying un
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tidal_courier.jpg
 Oracle:When Tidal Courier enters the battlefield, reveal the top four cards of your library. Put all Merfolk cards revealed this way into your hand and the rest on the bottom of your library in any order.\n{3}{U}: Tidal Courier gains flying until end of turn.
-SetInfo:APC Uncommon

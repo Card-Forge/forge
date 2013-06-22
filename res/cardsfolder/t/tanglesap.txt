@@ -5,4 +5,3 @@ A:SP$ Effect | Cost$ 1 G | Name$ Tanglesap Effect | StaticAbilities$ STPrevent |
 SVar:STPrevent:Mode$ PreventDamage | EffectZone$ Command | Source$ Creature.withoutTrample | CombatDamage$ True | Description$ Prevent all combat damage that would be dealt this turn by creatures without trample.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tanglesap.jpg
 Oracle:Prevent all combat damage that would be dealt this turn by creatures without trample.
-SetInfo:ZEN Common

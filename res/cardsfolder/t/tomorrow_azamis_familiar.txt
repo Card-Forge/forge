@@ -7,4 +7,3 @@ SVar:Dig:AB$Dig | Cost$ 0 | DigNum$ 3
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tomorrow_azamis_familiar.jpg
 Oracle:If you would draw a card, look at the top three cards of your library instead. Put one of those cards into your hand and the rest on the bottom of your library in any order.
-SetInfo:BOK Rare

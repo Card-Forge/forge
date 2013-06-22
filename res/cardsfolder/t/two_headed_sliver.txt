@@ -6,4 +6,3 @@ S:Mode$ Continuous | Affected$ Creature.Sliver | AddKeyword$ CantBeBlockedByAmou
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/two_headed_sliver.jpg
 Oracle:All Sliver creatures have "This creature can't be blocked except by two or more creatures."
-SetInfo:TSP Common

@@ -6,4 +6,3 @@ SVar:NonStackingEffect:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/torpor_orb.jpg
 Oracle:Creatures entering the battlefield don't cause abilities to trigger.
-SetInfo:NPH Rare

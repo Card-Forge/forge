@@ -7,4 +7,3 @@ S:Mode$ Continuous | Affected$ Creature.Treefolk+Other+YouCtrl,Forest.YouCtrl | 
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/timber_protector.jpg
 Oracle:Other Treefolk creatures you control get +1/+1.\nOther Treefolk and Forests you control are indestructible.
-SetInfo:LRW Rare

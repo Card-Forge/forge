@@ -5,4 +5,3 @@ A:AB$ ChangeZone | Cost$ B Discard<1/Creature> | TgtPrompt$ Choose target creatu
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tortured_existence.jpg
 Oracle:{B}, Discard a creature card: Return target creature card from your graveyard to your hand.
-SetInfo:STH Common

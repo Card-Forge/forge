@@ -5,4 +5,3 @@ A:AB$ Pump | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature |
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tower_of_coireall.jpg
 Oracle:{T}: Target creature can't be blocked by Walls this turn.
-SetInfo:DRK Uncommon

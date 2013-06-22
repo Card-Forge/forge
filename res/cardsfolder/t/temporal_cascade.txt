@@ -8,4 +8,3 @@ SVar:CascadeDraw:DB$ Draw | NumCards$ 7 | Defined$ Each
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/temporal_cascade.jpg
 Oracle:Choose one - Each player shuffles his or her hand and graveyard into his or her library; or each player draws seven cards.\nEntwine {2} (Choose both if you pay the entwine cost.)
-SetInfo:MRD Rare

@@ -5,4 +5,3 @@ A:AB$ Draw | Cost$ T | NumCards$ 1 | SubAbility$ DBDraw | SpellDescription$ Each
 SVar:DBDraw:DB$Draw | Defined$ Opponent | NumCards$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/temple_bell.jpg
 Oracle:{T}: Each player draws a card.
-SetInfo:M11 Rare

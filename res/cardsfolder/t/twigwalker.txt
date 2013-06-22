@@ -5,4 +5,3 @@ PT:2/2
 A:AB$ Pump | Cost$ 1 G Sac<1/CARDNAME> | TargetMin$ 0 | TargetMax$ 2 | NumAtt$ +2 | NumDef$ +2 | ValidTgts$ Creature | TgtPrompt$ Select target Creature | SpellDescription$ Up to two target creatures each get +2/+2 until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/twigwalker.jpg
 Oracle:{1}{G}, Sacrifice Twigwalker: Two target creatures each get +2/+2 until end of turn.
-SetInfo:ODY Uncommon

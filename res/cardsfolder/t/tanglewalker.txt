@@ -6,4 +6,3 @@ S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddHiddenKeyword$ Unblockable 
 SVar:X:Count$Valid Land.Artifact+YouDontCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tanglewalker.jpg
 Oracle:Each creature you control is unblockable as long as defending player controls an artifact land.
-SetInfo:DST Uncommon

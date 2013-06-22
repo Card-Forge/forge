@@ -9,4 +9,3 @@ SVar:SVar2:DB$ Animate | Defined$ Targeted | Types$ Island | OverwriteTypes$ Tru
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tundra_kavu.jpg
 Oracle:{T}: Target land becomes a Plains or an Island until end of turn.
-SetInfo:APC Common

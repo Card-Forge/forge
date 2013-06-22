@@ -10,4 +10,3 @@ SVar:TrigDraw:AB$ Draw | Cost$ 0 | NumCards$ 1
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ ChosenTypewalk | Description$ Enchanted creature has landwalk of the chosen type.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/travelers_cloak.jpg
 Oracle:Enchant creature\nAs Traveler's Cloak enters the battlefield, choose a land type.\nWhen Traveler's Cloak enters the battlefield, draw a card.\nEnchanted creature has landwalk of the chosen type.
-SetInfo:INV Common

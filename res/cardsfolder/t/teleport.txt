@@ -5,5 +5,3 @@ A:SP$ Pump | Cost$ U U U | ActivationPhases$ Declare Attackers | ValidTgts$ Crea
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/teleport.jpg
 Oracle:Cast Teleport only during the declare attackers step.\nTarget creature is unblockable this turn.
-SetInfo:CHR Rare
-SetInfo:LEG Rare

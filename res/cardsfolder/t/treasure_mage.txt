@@ -6,4 +6,3 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creatu
 SVar:TrigChange:AB$ChangeZone | Cost$ 0 | Origin$ Library | Destination$ Hand | ChangeType$ Artifact.cmcGE6 | ChangeNum$ 1 | ShuffleNonMandatory$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/treasure_mage.jpg
 Oracle:When Treasure Mage enters the battlefield, you may search your library for an artifact card with converted mana cost 6 or greater, reveal that card, and put it into your hand. If you do, shuffle your library.
-SetInfo:MBS Uncommon

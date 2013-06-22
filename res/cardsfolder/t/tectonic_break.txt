@@ -6,4 +6,3 @@ SVar:X:Count$xPaid
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tectonic_break.jpg
 Oracle:Each player sacrifices X lands.
-SetInfo:MMQ Rare

@@ -5,4 +5,3 @@ A:AB$ Play | Cost$ 1 T | Valid$ Card.nonLand+sharesNameWith ThisTurnCast | Valid
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/twinning_glass.jpg
 Oracle:{1}, {T}: You may cast a nonland card from your hand without paying its mana cost if it has the same name as a spell that was cast this turn.
-SetInfo:LRW Rare

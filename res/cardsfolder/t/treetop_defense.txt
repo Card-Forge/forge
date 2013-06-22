@@ -5,4 +5,3 @@ A:SP$ PumpAll | Cost$ G | ValidCards$ Creature.YouCtrl | KW$ Reach | OpponentTur
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/treetop_defense.jpg
 Oracle:Cast Treetop Defense only during the declare attackers step and only if you've been attacked this step.\nCreatures you control gain reach until end of turn. (They can block creatures with flying.)
-SetInfo:POR Rare

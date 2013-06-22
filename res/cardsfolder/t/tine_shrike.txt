@@ -6,4 +6,3 @@ K:Flying
 K:Infect
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tine_shrike.jpg
 Oracle:Flying\nInfect (This creature deals damage to creatures in the form of -1/-1 counters and to players in the form of poison counters.)
-SetInfo:MBS Common

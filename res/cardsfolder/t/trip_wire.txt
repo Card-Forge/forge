@@ -5,4 +5,3 @@ A:SP$ Destroy | Cost$ 2 G | ValidTgts$ Creature.withHorsemanship | TgtPrompt$ Se
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/trip_wire.jpg
 Oracle:Destroy target creature with horsemanship.
-SetInfo:PTK Uncommon

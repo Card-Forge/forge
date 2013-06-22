@@ -5,4 +5,3 @@ A:SP$ DestroyAll | Cost$ 1 W W | ValidCards$ Goblin | SpellDescription$ Destroy 
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tivadars_crusade.jpg
 Oracle:Destroy all Goblins.
-SetInfo:DRK Uncommon

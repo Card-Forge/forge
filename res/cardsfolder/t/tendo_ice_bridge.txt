@@ -6,4 +6,3 @@ A:AB$ Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add 1 to your mana pool.
 A:AB$ Mana | Cost$ T SubCounter<1/CHARGE> | Produced$ Any | SpellDescription$ Add one mana of any color to your mana pool.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tendo_ice_bridge.jpg
 Oracle:Tendo Ice Bridge enters the battlefield with a charge counter on it.\n{T}: Add {1} to your mana pool.\n{T}, Remove a charge counter from Tendo Ice Bridge: Add one mana of any color to your mana pool.
-SetInfo:BOK Rare

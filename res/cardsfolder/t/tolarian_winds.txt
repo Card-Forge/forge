@@ -8,5 +8,3 @@ SVar:X:Remembered$Amount
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tolarian_winds.jpg
 Oracle:Discard all the cards in your hand, then draw that many cards.
-SetInfo:7ED Common
-SetInfo:USG Common
