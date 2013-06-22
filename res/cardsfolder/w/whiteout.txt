@@ -6,4 +6,3 @@ A:AB$ ChangeZone | Cost$ Sac<1/Land.Snow/snow land> | ActivationZone$ Graveyard 
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/whiteout.jpg
 Oracle:All creatures lose flying until end of turn.\nSacrifice a snow land: Return Whiteout from your graveyard to your hand.
-SetInfo:ICE Uncommon

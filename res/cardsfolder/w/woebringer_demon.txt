@@ -12,4 +12,3 @@ SVar:NeedsToPlayVar:Y GE2
 SVar:Y:Count$Valid Creature.YouDontCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/woebringer_demon.jpg
 Oracle:Flying\nAt the beginning of each player's upkeep, that player sacrifices a creature. If the player can't, sacrifice Woebringer Demon.
-SetInfo:RAV Rare

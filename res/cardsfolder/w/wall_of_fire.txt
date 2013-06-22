@@ -6,14 +6,3 @@ K:Defender
 A:AB$ Pump | Cost$ R | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wall_of_fire.jpg
 Oracle:Defender (This creature can't attack.)\n{R}: Wall of Fire gets +1/+0 until end of turn.
-SetInfo:2ED Uncommon
-SetInfo:7ED Uncommon
-SetInfo:6ED Uncommon
-SetInfo:M10 Uncommon
-SetInfo:10E Uncommon
-SetInfo:LEB Uncommon
-SetInfo:M13 Common
-SetInfo:LEA Uncommon
-SetInfo:5ED Uncommon
-SetInfo:4ED Uncommon
-SetInfo:3ED Uncommon

@@ -10,4 +10,3 @@ SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/words_of_wind.jpg
 Oracle:{1}: The next time you would draw a card this turn, each player returns a permanent he or she controls to its owner's hand instead.
-SetInfo:ONS Rare

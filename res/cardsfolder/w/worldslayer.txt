@@ -7,5 +7,3 @@ SVar:TrigDestroyAll:AB$DestroyAll | Cost$ 0 | ValidCards$ Permanent.Other
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/worldslayer.jpg
 Oracle:Whenever equipped creature deals combat damage to a player, destroy all permanents other than Worldslayer.\nEquip {5} ({5}: Attach to target creature you control. Equip only as a sorcery.)
-SetInfo:MRD Rare
-SetInfo:M12 Rare

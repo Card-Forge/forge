@@ -6,4 +6,3 @@ A:AB$DealDamage | Cost$ T | ValidTgts$ Creature | Radiance$ True | PreCostDesc$ 
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wojek_embermage.jpg
 Oracle:Radiance - {T}: Wojek Embermage deals 1 damage to target creature and each other creature that shares a color with it.
-SetInfo:RAV Uncommon

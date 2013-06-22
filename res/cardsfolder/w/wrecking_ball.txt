@@ -4,5 +4,3 @@ Types:Instant
 A:SP$Destroy | Cost$ 2 B R | ValidTgts$ Creature,Land | TgtPrompt$ Select target creature or land | SpellDescription$ Destroy target creature or land.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wrecking_ball.jpg
 Oracle:Destroy target creature or land.
-SetInfo:COM Common
-SetInfo:DIS Common

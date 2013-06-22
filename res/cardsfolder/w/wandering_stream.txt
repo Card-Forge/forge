@@ -6,4 +6,3 @@ SVar:X:Count$Domain/Times.2
 SVar:RemRandomDeck:True
 SVar:Picture:http://resources.wizards.com/magic/cards/in/en-us/card23119.jpg
 Oracle:Domain - You gain 2 life for each basic land type among lands you control.
-SetInfo:INV Common

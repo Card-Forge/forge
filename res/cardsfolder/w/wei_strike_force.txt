@@ -5,4 +5,3 @@ PT:2/1
 K:Horsemanship
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wei_strike_force.jpg
 Oracle:Horsemanship (This creature can't be blocked except by creatures with horsemanship.)
-SetInfo:PTK Common

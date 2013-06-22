@@ -5,4 +5,3 @@ PT:6/6
 K:Echo:4 G
 SVar:Picture:http://www.wizards.com/global/images/magic/general/winding_wurm.jpg
 Oracle:Echo {4}{G} (At the beginning of your upkeep, if this came under your control since the beginning of your last upkeep, sacrifice it unless you pay its echo cost.)
-SetInfo:USG Common

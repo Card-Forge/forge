@@ -7,4 +7,3 @@ SVar:DBDraw:DB$Draw | Defined$ Each
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/winter_sky.jpg
 Oracle:Flip a coin. If you win the flip, Winter Sky deals 1 damage to each creature and each player. If you lose the flip, each player draws a card.
-SetInfo:HML Rare

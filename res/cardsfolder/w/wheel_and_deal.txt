@@ -6,4 +6,3 @@ SVar:DBDrawOpp:DB$Draw | Defined$ Targeted | NumCards$ 7 | SubAbility$ DBDraw
 SVar:DBDraw:DB$Draw | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wheel_and_deal.jpg
 Oracle:Any number of target opponents each discards his or her hand and draws seven cards.\nDraw a card.
-SetInfo:ONS Rare

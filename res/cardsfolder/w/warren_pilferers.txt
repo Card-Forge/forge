@@ -8,4 +8,3 @@ SVar:DBPump:DB$ Pump | Cost$ 0 | Defined$ Self | KW$ Haste | SubAbility$ DBClean
 SVar:DBCleanUp:DB$Cleanup | ClearRemembered$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/warren_pilferers.jpg
 Oracle:When Warren Pilferers enters the battlefield, return target creature card from your graveyard to your hand. If that card is a Goblin card, Warren Pilferers gains haste until end of turn.
-SetInfo:LRW Common

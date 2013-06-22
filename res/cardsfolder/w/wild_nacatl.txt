@@ -8,5 +8,3 @@ SVar:X:Count$Valid Mountain.YouCtrl
 SVar:Y:Count$Valid Plains.YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wild_nacatl.jpg
 Oracle:Wild Nacatl gets +1/+1 as long as you control a Mountain.\nWild Nacatl gets +1/+1 as long as you control a Plains.
-SetInfo:DDH Common
-SetInfo:ALA Common

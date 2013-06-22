@@ -8,4 +8,3 @@ S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddKeyword$ Unblockable | Chec
 SVar:X:Count$Valid Gate.YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/way_of_the_thief.jpg
 Oracle:Enchant creature\nEnchanted creature gets +2/+2.\nEnchanted creature is unblockable as long as you control a Gate.
-SetInfo:GTC Common

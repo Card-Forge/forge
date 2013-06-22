@@ -6,4 +6,3 @@ SVar:DBWash:DB$ ChangeZoneAll | ChangeType$ Permanent.ChosenColor | Origin$ Batt
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wash_out.jpg
 Oracle:Return all permanents of the color of your choice to their owners' hands.
-SetInfo:INV Uncommon

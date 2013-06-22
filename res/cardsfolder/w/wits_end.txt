@@ -4,5 +4,3 @@ Types:Sorcery
 A:SP$ Discard | Cost$ 5 B B | Mode$ Hand | ValidTgts$ Player | SpellDescription$ Target player discards his or her hand.
 SVar:Picture:http://resources.wizards.com/magic/cards/dis/en-us/card107562.jpg
 Oracle:Target player discards his or her hand.
-SetInfo:M13 Rare
-SetInfo:DIS Rare

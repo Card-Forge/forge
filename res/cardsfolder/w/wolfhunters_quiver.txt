@@ -8,4 +8,3 @@ SVar:DamageWerewolf:AB$DealDamage | Cost$ T | ValidTgts$ Creature.Werewolf | Tgt
 SVar:NonStackingAttachEffect:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wolfhunters_quiver.jpg
 Oracle:Equipped creature has "{T}: This creature deals 1 damage to target creature or player" and "{T}: This creature deals 3 damage to target Werewolf creature."\nEquip {5}
-SetInfo:DKA Uncommon

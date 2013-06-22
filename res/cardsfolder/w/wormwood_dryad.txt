@@ -7,4 +7,3 @@ A:AB$ Pump | Cost$ B | KW$ Swampwalk | SubAbility$ DBDealDamage | SpellDescripti
 SVar:DBDealDamage:DB$DealDamage | Defined$ You | NumDmg$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wormwood_dryad.jpg
 Oracle:{G}: Wormwood Dryad gains forestwalk until end of turn and deals 1 damage to you.\n{B}: Wormwood Dryad gains swampwalk until end of turn and deals 1 damage to you.
-SetInfo:TSP Common

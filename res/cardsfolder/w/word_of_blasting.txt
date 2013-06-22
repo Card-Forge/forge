@@ -7,6 +7,3 @@ SVar:X:Targeted$CardManaCost
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/word_of_blasting.jpg
 Oracle:Destroy target Wall. It can't be regenerated. Word of Blasting deals damage equal to that Wall's converted mana cost to the Wall's controller.
-SetInfo:ICE Uncommon
-SetInfo:5ED Uncommon
-SetInfo:MMQ Uncommon

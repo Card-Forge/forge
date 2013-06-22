@@ -10,4 +10,3 @@ SVar:SpongeTramp:DB$Animate | Defined$ Targeted | RemoveKeywords$ Trample | Choi
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/walking_sponge.jpg
 Oracle:{T}: Target creature loses your choice of flying, first strike, or trample until end of turn.
-SetInfo:ULG Uncommon

@@ -10,4 +10,3 @@ SVar:DiscardMeByOpp:2
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wilt_leaf_liege.jpg
 Oracle:Other green creatures you control get +1/+1.\nOther white creatures you control get +1/+1.\nIf a spell or ability an opponent controls causes you to discard Wilt-Leaf Liege, put it onto the battlefield instead of putting it into your graveyard.
-SetInfo:SHM Rare

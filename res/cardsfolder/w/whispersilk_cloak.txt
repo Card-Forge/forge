@@ -5,9 +5,3 @@ K:Equip 2
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddHiddenKeyword$ Unblockable | AddKeyword$ Shroud | Description$ Equipped creature is unblockable and has shroud.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/whispersilk_cloak.jpg
 Oracle:Equipped creature is unblockable and has shroud.\nEquip {2}
-SetInfo:PC2 Uncommon
-SetInfo:DST Common
-SetInfo:10E Uncommon
-SetInfo:M11 Uncommon
-SetInfo:M10 Uncommon
-SetInfo:DDE Uncommon

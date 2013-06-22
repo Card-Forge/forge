@@ -6,4 +6,3 @@ T:Mode$ Cycled | ValidCard$ Card | Execute$ TrigPump | TriggerZones$ Battlefield
 SVar:TrigPump:AB$Pump | Cost$ 0 | Defined$ Self | KW$ Flying & Shroud
 SVar:Picture:http://www.wizards.com/global/images/magic/general/warped_researcher.jpg
 Oracle:Whenever a player cycles a card, Warped Researcher gains flying and shroud until end of turn. (It can't be the target of spells or abilities.)
-SetInfo:LGN Uncommon

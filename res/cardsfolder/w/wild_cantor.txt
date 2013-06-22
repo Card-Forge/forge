@@ -5,4 +5,3 @@ PT:1/1
 A:AB$ Mana | Cost$ Sac<1/CARDNAME> | Produced$ Any | SpellDescription$ Add one mana of any color to your mana pool.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wild_cantor.jpg
 Oracle:({R/G} can be paid with either {R} or {G}.)\nSacrifice Wild Cantor: Add one mana of any color to your mana pool.
-SetInfo:GPT Common

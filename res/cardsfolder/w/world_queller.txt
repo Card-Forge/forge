@@ -8,4 +8,3 @@ SVar:TrigSac:DB$Sacrifice | Cost$ 0 | SacValid$ Permanent.ChosenType | Defined$ 
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/world_queller.jpg
 Oracle:At the beginning of your upkeep, you may choose a card type. If you do, each player sacrifices a permanent of that type.
-SetInfo:ZEN Rare

@@ -7,4 +7,3 @@ PT:1/1
 K:Double Strike
 SVar:Picture:http://www.wizards.com/global/images/magic/general/warren_instigator.jpg
 Oracle:Double strike\nWhenever Warren Instigator deals damage to an opponent, you may put a Goblin creature card from your hand onto the battlefield.
-SetInfo:ZEN Mythic

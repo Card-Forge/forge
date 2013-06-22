@@ -6,5 +6,3 @@ A:SP$ ChangeZone | Cost$ U | CheckSVar$ CreaturesEntered | SVarCompare$ GE2 | Or
 SVar:CreaturesEntered:Count$ThisTurnEntered_Battlefield_Creature.YouDontCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/whiplash_trap.jpg
 Oracle:If an opponent had two or more creatures enter the battlefield under his or her control this turn, you may pay {U} rather than pay Whiplash Trap's mana cost.\nReturn two target creatures to their owners' hands.
-SetInfo:ZEN Common
-SetInfo:HOP Common

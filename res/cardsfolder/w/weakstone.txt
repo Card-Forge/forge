@@ -5,4 +5,3 @@ S:Mode$ Continuous | Affected$ Creature.attacking | AddPower$ -1 | Description$ 
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/weakstone.jpg
 Oracle:Attacking creatures get -1/-0.
-SetInfo:ATQ Uncommon

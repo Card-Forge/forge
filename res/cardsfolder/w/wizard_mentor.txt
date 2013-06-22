@@ -7,4 +7,3 @@ SVar:DBChangeZone:DB$ChangeZone | Origin$ Battlefield | Destination$ Hand
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wizard_mentor.jpg
 Oracle:{T}: Return Wizard Mentor and target creature you control to their owner's hand.
-SetInfo:USG Common

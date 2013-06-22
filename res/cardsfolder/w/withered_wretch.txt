@@ -5,6 +5,3 @@ PT:2/2
 A:AB$ ChangeZone | Cost$ 1 | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ Choose target card in a graveyard | ValidTgts$ Card | SpellDescription$ Exile target card from a graveyard.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/withered_wretch.jpg
 Oracle:{1}: Exile target card from a graveyard.
-SetInfo:TSB Special
-SetInfo:LGN Uncommon
-SetInfo:HOP Uncommon

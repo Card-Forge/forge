@@ -8,4 +8,3 @@ SVar:DelayedTrig:Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Player | Execute$
 SVar:TrigBounce:AB$ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Hand | Defined$ TriggeredAttacker
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wall_of_tears.jpg
 Oracle:Defender (This creature can't attack.)\nWhenever Wall of Tears blocks a creature, return that creature to its owner's hand at end of combat.
-SetInfo:STH Uncommon

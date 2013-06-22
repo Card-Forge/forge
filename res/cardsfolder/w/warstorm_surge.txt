@@ -6,5 +6,3 @@ SVar:TrigDamage:AB$ DealDamage | Cost$ 0 | ValidTgts$ Creature,Player | TgtPromp
 SVar:X:TriggeredCard$CardPower
 SVar:Picture:http://www.wizards.com/global/images/magic/general/warstorm_surge.jpg
 Oracle:Whenever a creature enters the battlefield under your control, it deals damage equal to its power to target creature or player.
-SetInfo:PC2 Rare
-SetInfo:M12 Rare

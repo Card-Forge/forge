@@ -7,4 +7,3 @@ SVar:TrigBattalionPump:AB$ Pump | Cost$ 0 | KW$ First Strike
 SVar:BattalionTest:Count$Valid Creature.attacking+Other
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wojek_halberdiers.jpg
 Oracle:Battalion - Whenever Wojek Halberdiers and at least two other creatures attack, Wojek Halberdiers gains first strike until end of turn.
-SetInfo:GTC Common

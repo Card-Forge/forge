@@ -5,4 +5,3 @@ A:SP$ Pump | Cost$ G | ValidTgts$ Creature | TgtPrompt$ Select target creature |
 SVar:X:Count$TypeOnBattlefield.Elf
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wirewood_pride.jpg
 Oracle:Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
-SetInfo:ONS Common

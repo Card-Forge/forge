@@ -7,4 +7,3 @@ SVar:TrigDig:AB$Dig | Cost$ 0 | ValidTgts$ Player | DestinationZone$ Graveyard |
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wu_spy.jpg
 Oracle:When Wu Spy enters the battlefield, look at the top two cards of target player's library. Put one of them into his or her graveyard.
-SetInfo:PTK Uncommon

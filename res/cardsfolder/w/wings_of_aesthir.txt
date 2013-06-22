@@ -6,4 +6,3 @@ A:SP$ Attach | Cost$ W U | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 1 | AddKeyword$ Flying & First Strike | Description$ Enchanted creature gets +1/+0 and has flying and first strike.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wings_of_aesthir.jpg
 Oracle:Enchant creature\nEnchanted creature gets +1/+0 and has flying and first strike.
-SetInfo:ICE Uncommon

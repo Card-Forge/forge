@@ -7,4 +7,3 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigChange:AB$ChangeZone | Cost$ 0 | Origin$ Library | Destination$ Hand | ChangeType$ Card.namedWelkin Hawk | ChangeNum$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/welkin_hawk.jpg
 Oracle:Flying\nWhen Welkin Hawk dies, you may search your library for a card named Welkin Hawk, reveal that card, put it into your hand, then shuffle your library.
-SetInfo:EXO Common

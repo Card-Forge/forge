@@ -8,4 +8,3 @@ K:etbCounter:P1P1:2:CheckSVar$AltCostPaid:no desc
 SVar:AltCostPaid:Count$AltCost.1.0
 SVar:Picture:http://www.wizards.com/global/images/magic/general/worldheart_phoenix.jpg
 Oracle:Flying\nYou may cast Worldheart Phoenix from your graveyard by paying {W}{U}{B}{R}{G} rather than paying its mana cost. If you do, it enters the battlefield with two +1/+1 counters on it.
-SetInfo:CFX Rare

@@ -4,4 +4,3 @@ Types:Creature Spirit
 PT:1/1
 SVar:Picture:http://resources.wizards.com/magic/cards/chk/en-us/card50345.jpg
 Oracle:
-SetInfo:CHK Common

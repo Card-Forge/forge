@@ -6,4 +6,3 @@ A:SP$ Token | Cost$ 2 BG BG BG Discard<1/Land> | ActivationZone$ Graveyard | Cos
 SVar:X:Count$TypeInYourYard.Land
 SVar:Picture:http://magiccards.info/scans/en/eve/131.jpg
 Oracle:Put a 1/1 black and green Worm creature token onto the battlefield for each land card in your graveyard.\nRetrace (You may cast this card from your graveyard by discarding a land card in addition to paying its other costs.)
-SetInfo:EVE Rare

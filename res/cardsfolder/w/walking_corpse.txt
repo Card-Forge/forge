@@ -4,5 +4,3 @@ Types:Creature Zombie
 PT:2/2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/walking_corpse.jpg
 Oracle:
-SetInfo:M13 Common
-SetInfo:ISD Common

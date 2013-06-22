@@ -5,5 +5,3 @@ PT:3/3
 K:Swampwalk
 SVar:Picture:http://resources.wizards.com/magic/cards/p3/en-us/card20227.jpg
 Oracle:Swampwalk
-SetInfo:PO2 Uncommon
-SetInfo:S99 Uncommon

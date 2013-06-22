@@ -10,4 +10,3 @@ SVar:TrigGainControl2:AB$GainControl | Cost$ 0 | Defined$ Enchanted | LoseContro
 SVar:DBUntap:DB$Untap | Defined$ Enchanted
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wellspring.jpg
 Oracle:Enchant land\nWhen Wellspring enters the battlefield, gain control of enchanted land until end of turn.\nAt the beginning of your upkeep, untap enchanted land. You gain control of that land until end of turn.
-SetInfo:MIR Rare

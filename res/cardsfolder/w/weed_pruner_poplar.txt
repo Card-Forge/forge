@@ -6,4 +6,3 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | E
 SVar:TrigPump:DB$Pump | ValidTgts$ Creature.Other | TgtPrompt$ Select another target creature | NumAtt$ -1 | NumDef$ -1 | IsCurse$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/weed_pruner_poplar.jpg
 Oracle:At the beginning of your upkeep, target creature other than Weed-Pruner Poplar gets -1/-1 until end of turn.
-SetInfo:MOR Common

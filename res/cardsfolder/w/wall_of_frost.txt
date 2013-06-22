@@ -7,6 +7,3 @@ T:Mode$ AttackerBlocked | ValidBlocker$ Card.Self | Execute$ TrigPump | TriggerD
 SVar:TrigPump:AB$Pump | Cost$ 0 | Defined$ TriggeredAttacker | KW$ HIDDEN This card doesn't untap during your next untap step. | Permanent$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wall_of_frost.jpg
 Oracle:Defender\nWhenever Wall of Frost blocks a creature, that creature doesn't untap during its controller's next untap step.
-SetInfo:M11 Uncommon
-SetInfo:M10 Uncommon
-SetInfo:PC2 Uncommon

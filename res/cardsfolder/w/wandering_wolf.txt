@@ -5,4 +5,3 @@ PT:2/1
 K:Creatures with power less than CARDNAME's power can't block it.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wandering_wolf.jpg
 Oracle:Creatures with power less than Wandering Wolf's power can't block it.
-SetInfo:AVR Common

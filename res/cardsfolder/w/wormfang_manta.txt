@@ -10,4 +10,3 @@ SVar:TrigSkip:AB$AddTurn | Cost$ 0 | NumTurns$ 1 | Defined$ Opponent
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wormfang_manta.jpg
 Oracle:Flying\nWhen Wormfang Manta enters the battlefield, you skip your next turn.\nWhen Wormfang Manta leaves the battlefield, you take an extra turn after this one.
-SetInfo:JUD Rare

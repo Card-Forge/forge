@@ -6,6 +6,3 @@ PT:2/3
 K:Flying
 SVar:Picture:http://www.wizards.com/global/images/magic/general/windborn_muse.jpg
 Oracle:Flying\nCreatures can't attack you unless their controller pays {2} for each creature he or she controls that's attacking you.
-SetInfo:COM Rare
-SetInfo:LGN Rare
-SetInfo:10E Rare

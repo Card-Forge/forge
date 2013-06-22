@@ -5,5 +5,3 @@ A:SP$ Pump | Cost$ 2 G | ValidTgts$ Creature | TgtPrompt$ Select target creature
 SVar:DBDraw:DB$Draw | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:Picture:http://resources.wizards.com/magic/cards/gpt/en-us/card107097.jpg
 Oracle:Target creature gets +2/+2 and gains trample until end of turn.\nDraw a card.
-SetInfo:GPT Common
-SetInfo:EVG Common

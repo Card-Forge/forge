@@ -7,4 +7,3 @@ SVar:DBWakeofDestructionCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wake_of_destruction.jpg
 Oracle:Destroy target land and all other lands with the same name as that land.
-SetInfo:UDS Rare

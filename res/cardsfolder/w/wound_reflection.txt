@@ -7,4 +7,3 @@ SVar:TrigLoseLife:DB$ LoseLife | Defined$ Remembered | LifeAmount$ X | Reference
 SVar:X:PlayerCountRemembered$LifeLostThisTurn
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wound_reflection.jpg
 Oracle:At the beginning of each end step, each opponent loses life equal to the life he or she lost this turn. (Damage causes loss of life.)
-SetInfo:SHM Rare

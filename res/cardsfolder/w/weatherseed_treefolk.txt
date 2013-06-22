@@ -7,4 +7,3 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigChangeZone:AB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Hand
 SVar:Picture:http://www.wizards.com/global/images/magic/general/weatherseed_treefolk.jpg
 Oracle:Trample\nWhen Weatherseed Treefolk dies, return it to its owner's hand.
-SetInfo:ULG Rare

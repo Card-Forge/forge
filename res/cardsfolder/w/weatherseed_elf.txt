@@ -5,4 +5,3 @@ PT:1/1
 A:AB$ Pump | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Forestwalk | SpellDescription$ Target creature gains forestwalk until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/weatherseed_elf.jpg
 Oracle:{T}: Target creature gains forestwalk until end of turn.
-SetInfo:ULG Common

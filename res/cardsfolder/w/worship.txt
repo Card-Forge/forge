@@ -6,7 +6,3 @@ SVar:X:Count$Valid Creature.YouCtrl
 SVar:NonStackingEffect:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/worship.jpg
 Oracle:If you control a creature, damage that would reduce your life total to less than 1 reduces it to 1 instead.
-SetInfo:8ED Rare
-SetInfo:7ED Rare
-SetInfo:9ED Rare
-SetInfo:USG Rare

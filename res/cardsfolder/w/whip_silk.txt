@@ -7,4 +7,3 @@ S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Reach | Descri
 A:AB$ ChangeZone | Cost$ G | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return CARDNAME to its owner's hand.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/whip_silk.jpg
 Oracle:Enchant creature\nEnchanted creature has reach. (It can block creatures with flying.)\n{G}: Return Whip Silk to its owner's hand.
-SetInfo:INV Common

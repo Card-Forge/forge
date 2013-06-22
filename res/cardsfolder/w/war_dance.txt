@@ -7,4 +7,3 @@ SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ VERSE
 SVar:X:Count$CardCounters.VERSE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/war_dance.jpg
 Oracle:At the beginning of your upkeep, you may put a verse counter on War Dance.\nSacrifice War Dance: Target creature gets +X/+X until end of turn, where X is the number of verse counters on War Dance.
-SetInfo:USG Uncommon

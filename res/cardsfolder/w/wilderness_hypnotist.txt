@@ -6,4 +6,3 @@ A:AB$ Pump | Cost$ T | NumAtt$ -2 | ValidTgts$ Creature.Red,Creature.Green | Tgt
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wilderness_hypnotist.jpg
 Oracle:{T}: Target red or green creature gets -2/-0 until end of turn.
-SetInfo:EVE Common

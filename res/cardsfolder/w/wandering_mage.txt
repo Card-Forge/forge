@@ -7,4 +7,3 @@ A:AB$ PreventDamage | Cost$ U | ValidTgts$ Cleric,Wizard | TgtPrompt$ Select tar
 A:AB$ PreventDamage | Cost$ B AddCounter<1/M1M1/Creature.YouCtrl/a creature you control> | ValidTgts$ Player | Amount$ 2 | SpellDescription$ Prevent the next 2 damage that would be dealt to target player this turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wandering_mage.jpg
 Oracle:{W}, Pay 1 life: Prevent the next 2 damage that would be dealt to target creature this turn.\n{U}: Prevent the next 1 damage that would be dealt to target Cleric or Wizard creature this turn.\n{B}, Put a -1/-1 counter on a creature you control: Prevent the next 2 damage that would be dealt to target player this turn.
-SetInfo:ALL Rare

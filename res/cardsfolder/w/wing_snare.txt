@@ -4,6 +4,3 @@ Types:Sorcery
 A:SP$ Destroy | Cost$ 2 G | ValidTgts$ Creature.withFlying | TgtPrompt$ Select target creature with flying | SpellDescription$ Destroy target creature with flying.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wing_snare.jpg
 Oracle:Destroy target creature with flying.
-SetInfo:8ED Uncommon
-SetInfo:ULG Uncommon
-SetInfo:7ED Uncommon

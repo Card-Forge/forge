@@ -8,4 +8,3 @@ SVar:TrigExile:AB$ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Exil
 SVar:TrigReturn:AB$ChangeZone | Cost$ 0 | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wormfang_newt.jpg
 Oracle:When Wormfang Newt enters the battlefield, exile a land you control.\nWhen Wormfang Newt leaves the battlefield, return the exiled card to the battlefield under its owner's control.
-SetInfo:JUD Common

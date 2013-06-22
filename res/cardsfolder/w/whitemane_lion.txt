@@ -8,5 +8,3 @@ SVar:TrigChange:DB$ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Han
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/whitemane_lion.jpg
 Oracle:Flash (You may cast this spell any time you could cast an instant.)\nWhen Whitemane Lion enters the battlefield, return a creature you control to its owner's hand.
-SetInfo:DDI Common
-SetInfo:PLC Common

@@ -5,4 +5,3 @@ A:SP$ Draw | Cost$ 1 U | NumCards$ 2 | SubAbility$ DBDraw | SpellDescription$ Yo
 SVar:DBDraw:DB$ Draw | Defined$ Player.Other | NumCards$ 1
 SVar:Picture:http://resources.wizards.com/magic/cards/od/en-us/card31779.jpg
 Oracle:You draw two cards, then each other player draws a card.
-SetInfo:ODY Common

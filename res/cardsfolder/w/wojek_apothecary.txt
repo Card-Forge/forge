@@ -6,4 +6,3 @@ A:AB$PreventDamage | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Choose target cr
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wojek_apothecary.jpg
 Oracle:Radiance - {T}: Prevent the next 1 damage that would be dealt to target creature and each other creature that shares a color with it this turn.
-SetInfo:RAV Uncommon

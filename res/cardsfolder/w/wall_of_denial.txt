@@ -7,6 +7,3 @@ K:Flying
 K:Shroud
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wall_of_denial.jpg
 Oracle:Defender, flying\nShroud (This creature can't be the target of spells or abilities.)
-SetInfo:ARB Uncommon
-SetInfo:COM Uncommon
-SetInfo:DDI Uncommon

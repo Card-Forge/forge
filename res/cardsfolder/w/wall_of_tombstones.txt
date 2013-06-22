@@ -8,4 +8,3 @@ SVar:TrigTough:AB$Animate | Cost$ 0 | Toughness$ X | Permanent$ True | Reference
 SVar:X:Count$TypeInYourYard.Creature/Plus.1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wall_of_tombstones.jpg
 Oracle:Defender (This creature can't attack.)\nAt the beginning of your upkeep, Wall of Tombstones's toughness becomes 1 plus the number of creature cards in your graveyard. (This effect lasts indefinitely.)
-SetInfo:LEG Uncommon

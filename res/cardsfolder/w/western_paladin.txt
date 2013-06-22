@@ -6,6 +6,3 @@ A:AB$ Destroy | Cost$ B B T | ValidTgts$ Creature.White | TgtPrompt$ Select targ
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/western_paladin.jpg
 Oracle:{B}{B}, {T}: Destroy target white creature.
-SetInfo:8ED Rare
-SetInfo:7ED Rare
-SetInfo:USG Rare

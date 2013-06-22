@@ -6,4 +6,3 @@ A:AB$ Animate | Cost$ 1 B G T | ValidTgts$ Forest | TgtPrompt$ Select target For
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/woodwraith_corrupter.jpg
 Oracle:{1}{B}{G}, {T}: Target Forest becomes a 4/4 black and green Elemental Horror creature. It's still a land.
-SetInfo:RAV Rare

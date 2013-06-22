@@ -7,5 +7,3 @@ SVar:ChangeColor:DB$ ChooseColor | Defined$ You | SubAbility$ Animate
 SVar:Animate:DB$ Animate | Defined$ Self | Colors$ ChosenColor | OverwriteColors$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wild_mongrel.jpg
 Oracle:Discard a card: Wild Mongrel gets +1/+1 and becomes the color of your choice until end of turn.
-SetInfo:ODY Common
-SetInfo:DDD Common

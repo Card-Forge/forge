@@ -4,4 +4,3 @@ Types:Instant
 A:SP$ GainLife | Cost$ 1 W | LifeAmount$ 5 | SpellDescription$ You gain 5 life.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/whitesuns_passage.jpg
 Oracle:You gain 5 life.
-SetInfo:SOM Common

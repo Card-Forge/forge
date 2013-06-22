@@ -6,4 +6,3 @@ S:Mode$ Continuous | Affected$ Creature.Kithkin+Other+YouCtrl | AddPower$ 1 | Ad
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wizened_cenn.jpg
 Oracle:Other Kithkin creatures you control get +1/+1.
-SetInfo:LRW Uncommon

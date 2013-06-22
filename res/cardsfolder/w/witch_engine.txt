@@ -9,4 +9,3 @@ SVar:RemCombat:DB$ RemoveFromCombat | Defined$ Self
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/witch_engine.jpg
 Oracle:Swampwalk\n{T}: Add {B}{B}{B}{B} to your mana pool. Target opponent gains control of Witch Engine. (Activate this ability only any time you could cast an instant.)
-SetInfo:USG Rare

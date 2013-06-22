@@ -6,5 +6,3 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Beast 
 SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wirewood_savage.jpg
 Oracle:Whenever a Beast enters the battlefield, you may draw a card.
-SetInfo:ONS Common
-SetInfo:DDD Common

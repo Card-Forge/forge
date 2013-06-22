@@ -5,4 +5,3 @@ A:SP$ Pump | Cost$ 4 B Discard<1/Card> | NumAtt$ -5 | NumDef$ -5 | IsCurse$ True
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/waste_away.jpg
 Oracle:As an additional cost to cast Waste Away, discard a card.\nTarget creature gets -5/-5 until end of turn.
-SetInfo:TOR Common

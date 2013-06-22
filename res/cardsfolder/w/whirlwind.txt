@@ -4,5 +4,3 @@ Types:Sorcery
 A:SP$ DestroyAll | Cost$ 2 G G | ValidCards$ Creature.withFlying | SpellDescription$ Destroy all creatures with flying.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/whirlwind.jpg
 Oracle:Destroy all creatures with flying.
-SetInfo:S99 Rare
-SetInfo:USG Rare

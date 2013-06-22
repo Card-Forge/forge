@@ -6,7 +6,3 @@ SVar:DBEachDraw:DB$Draw | Defined$ Each | NumCards$ 7
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wheel_of_fortune.jpg
 Oracle:Each player discards his or her hand and draws seven cards.
-SetInfo:LEB Rare
-SetInfo:LEA Rare
-SetInfo:3ED Rare
-SetInfo:2ED Rare

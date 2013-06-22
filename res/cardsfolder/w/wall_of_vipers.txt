@@ -8,4 +8,3 @@ SVar:SnakeBite:DB$ Destroy | ValidTgts$ Creature.blockedBySource
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wall_of_vipers.jpg
 Oracle:Defender (This creature can't attack.)\n{3}: Destroy Wall of Vipers and target creature it's blocking. Any player may activate this ability.
-SetInfo:PCY Uncommon

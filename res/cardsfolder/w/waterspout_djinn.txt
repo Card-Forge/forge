@@ -11,5 +11,3 @@ SVar:X:Remembered$Amount
 SVar:NeedsToPlay:Island.YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/waterspout_djinn.jpg
 Oracle:Flying\nAt the beginning of your upkeep, sacrifice Waterspout Djinn unless you return an untapped Island you control to its owner's hand.
-SetInfo:VIS Uncommon
-SetInfo:DD2 Uncommon

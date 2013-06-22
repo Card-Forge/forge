@@ -6,4 +6,3 @@ A:AB$ ChangeZone | Cost$ U T Discard<1/Card> | ValidTgts$ Creature | TgtPrompt$ 
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/waterfront_bouncer.jpg
 Oracle:{U}, {T}, Discard a card: Return target creature to its owner's hand.
-SetInfo:MMQ Common

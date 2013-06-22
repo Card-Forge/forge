@@ -5,4 +5,3 @@ PT:7/6
 K:You may have CARDNAME assign its combat damage as though it weren't blocked.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wolf_pack.jpg
 Oracle:You may have Wolf Pack assign its combat damage as though it weren't blocked.
-SetInfo:PTK Rare

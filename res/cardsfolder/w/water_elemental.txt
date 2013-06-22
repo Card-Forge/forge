@@ -4,9 +4,3 @@ Types:Creature Elemental
 PT:5/4
 SVar:Picture:http://resources.wizards.com/magic/cards/p3/en-us/card21040.jpg
 Oracle:
-SetInfo:S99 Uncommon
-SetInfo:2ED Uncommon
-SetInfo:LEB Uncommon
-SetInfo:LEA Uncommon
-SetInfo:4ED Uncommon
-SetInfo:3ED Uncommon

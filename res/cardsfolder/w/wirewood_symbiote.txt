@@ -6,5 +6,3 @@ A:AB$ Untap | Cost$ Return<1/Elf> | ValidTgts$ Creature | TgtPrompt$ Select targ
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wirewood_symbiote.jpg
 Oracle:Return an Elf you control to its owner's hand: Untap target creature. Activate this ability only once each turn.
-SetInfo:SCG Uncommon
-SetInfo:EVG Uncommon

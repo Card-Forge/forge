@@ -6,5 +6,3 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigDestroy:AB$Destroy | Cost$ 0 | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment
 SVar:Picture:http://www.wizards.com/global/images/magic/general/war_priest_of_thune.jpg
 Oracle:When War Priest of Thune enters the battlefield, you may destroy target enchantment.
-SetInfo:M11 Uncommon
-SetInfo:M13 Uncommon

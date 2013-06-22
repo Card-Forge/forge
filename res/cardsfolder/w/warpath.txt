@@ -4,4 +4,3 @@ Types:Instant
 A:SP$ DamageAll | Cost$ 3 R | NumDmg$ 3 | ValidCards$ Creature.blocked,Creature.blocking | ValidDescription$ each blocked and blocking creature. | SpellDescription$ CARDNAME deals 3 damage to each blocked and blocking creature.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/warpath.jpg
 Oracle:Warpath deals 3 damage to each blocking creature and each blocked creature.
-SetInfo:MMQ Uncommon

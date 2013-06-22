@@ -6,4 +6,3 @@ K:Flying
 K:Protection from blue
 SVar:Picture:http://www.wizards.com/global/images/magic/general/windreaper_falcon.jpg
 Oracle:Flying, protection from blue
-SetInfo:MIR Uncommon

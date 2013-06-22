@@ -8,4 +8,3 @@ SVar:MaxTgts:Count$Valid Creature
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wave_of_indifference.jpg
 Oracle:X target creatures can't block this turn.
-SetInfo:ONS Common

@@ -6,4 +6,3 @@ SVar:DBAddCombat:DB$ AddPhase | ExtraPhase$ BeginCombat | FollowedBy$ ThisPhase 
 A:SP$ UntapAll | Cost$ 3 RW RW Discard<1/Land> | ActivationZone$ Graveyard | CostDesc$ Retrace | ValidCards$ Creature.YouCtrl | SubAbility$ DBAddCombat | SorcerySpeed$ True | SpellDescription$ (You may cast this card from your graveyard by discarding a land card in addition to paying its other costs.)
 SVar:Picture:http://www.wizards.com/global/images/magic/general/waves_of_aggression.jpg
 Oracle:Untap all creatures that attacked this turn. After this main phase, there is an additional combat phase followed by an additional main phase.\nRetrace (You may cast this card from your graveyard by discarding a land card in addition to paying its other costs.)
-SetInfo:EVE Rare

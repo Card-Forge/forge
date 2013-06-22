@@ -4,4 +4,3 @@ Types:Instant
 A:SP$RegenerateAll | Cost$ 1 G | ValidCards$ Creature.YouCtrl | SpellDescription$ Regenerate each creature you control.
 SVar:Picture:http://resources.wizards.com/magic/cards/fut/en-us/card130331.jpg
 Oracle:Regenerate each creature you control.
-SetInfo:FUT Common

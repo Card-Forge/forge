@@ -6,5 +6,3 @@ A:AB$ ChangeZone | Cost$ W T | Origin$ Library | Destination$ Hand | ChangeType$
 SVar:X:Count$Valid Land.YouCtrl
 SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83311.jpg
 Oracle:{W}, {T}: Search your library for a land card, reveal it, and put it into your hand. Then shuffle your library. Activate this ability only if an opponent controls more lands than you.
-SetInfo:ONS Rare
-SetInfo:9ED Rare

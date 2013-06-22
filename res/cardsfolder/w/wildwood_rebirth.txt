@@ -4,4 +4,3 @@ Types:Instant
 A:SP$ ChangeZone | Cost$ 1 G | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouOwn | SpellDescription$ Return target creature card from your graveyard to your hand.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wildwood_rebirth.jpg
 Oracle:Return target creature card from your graveyard to your hand.
-SetInfo:GTC Common

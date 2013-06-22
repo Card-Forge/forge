@@ -6,4 +6,3 @@ SVar:TrigGainLife:AB$GainLife | Cost$ 0 | LifeAmount$ 2
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/well_of_life.jpg
 Oracle:At the beginning of your end step, if you control no untapped lands, you gain 2 life.
-SetInfo:PCY Uncommon

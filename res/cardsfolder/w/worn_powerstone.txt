@@ -5,5 +5,3 @@ K:CARDNAME enters the battlefield tapped.
 A:AB$ Mana | Cost$ T | Produced$ 1 | Amount$ 2 | SpellDescription$ Add 2 to your mana pool.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/worn_powerstone.jpg
 Oracle:Worn Powerstone enters the battlefield tapped.\n{T}: Add {2} to your mana pool.
-SetInfo:DDE Uncommon
-SetInfo:USG Uncommon

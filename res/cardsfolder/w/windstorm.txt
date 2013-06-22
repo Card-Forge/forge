@@ -6,5 +6,3 @@ SVar:X:Count$xPaid
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/windstorm.jpg
 Oracle:Windstorm deals X damage to each creature with flying.
-SetInfo:M10 Uncommon
-SetInfo:DDD Uncommon

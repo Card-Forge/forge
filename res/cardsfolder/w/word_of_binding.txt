@@ -7,5 +7,3 @@ SVar:X:Targeted$Amount
 SVar:MaxTgts:Count$Valid Creature
 SVar:Picture:http://www.wizards.com/global/images/magic/general/word_of_binding.jpg
 Oracle:Tap X target creatures.
-SetInfo:4ED Common
-SetInfo:DRK Common

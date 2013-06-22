@@ -16,5 +16,3 @@ SVar:RemRandomDeck:True
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/whirlpool_warrior.jpg
 Oracle:When Whirlpool Warrior enters the battlefield, shuffle the cards from your hand into your library, then draw that many cards.\n{R}, Sacrifice Whirlpool Warrior: Each player shuffles the cards from his or her hand into his or her library, then draws that many cards.
-SetInfo:PC2 Rare
-SetInfo:APC Rare

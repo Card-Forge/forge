@@ -5,4 +5,3 @@ PT:0/6
 K:Defender
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wall_of_earth.jpg
 Oracle:Defender (This creature can't attack.)
-SetInfo:LEG Common

@@ -10,4 +10,3 @@ SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wormfang_behemoth.jpg
 Oracle:When Wormfang Behemoth enters the battlefield, exile all cards from your hand.\nWhen Wormfang Behemoth leaves the battlefield, return the exiled cards to their owner's hand.
-SetInfo:JUD Rare

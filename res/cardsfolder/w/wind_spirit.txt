@@ -6,6 +6,3 @@ K:Flying
 K:CantBeBlockedByAmount LT2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wind_spirit.jpg
 Oracle:Flying\nWind Spirit can't be blocked except by two or more creatures.
-SetInfo:ICE Uncommon
-SetInfo:5ED Uncommon
-SetInfo:6ED Uncommon

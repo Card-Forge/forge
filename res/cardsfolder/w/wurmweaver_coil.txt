@@ -7,4 +7,3 @@ S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 6 | AddToughness
 A:AB$ Token | Cost$ G G G Sac<1/CARDNAME> | TokenAmount$ 1 | TokenName$ Wurm | TokenColors$ Green | TokenTypes$ Creature,Wurm | TokenOwner$ You | TokenPower$ 6 | TokenToughness$ 6 | SpellDescription$ Put a 6/6 green Wurm creature token onto the battlefield.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wurmweaver_coil.jpg
 Oracle:Enchant green creature\nEnchanted creature gets +6/+6.\n{G}{G}{G}, Sacrifice Wurmweaver Coil: Put a 6/6 green Wurm creature token onto the battlefield.
-SetInfo:GPT Rare

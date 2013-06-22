@@ -7,4 +7,3 @@ S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ CARDNAME
 A:AB$ ChangeZone | Cost$ tapXType<2/Creature.sharesCreatureTypeWith/creatures that share a creature type> | Defined$ Enchanted | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile enchanted creature.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/weight_of_conscience.jpg
 Oracle:Enchant creature\nEnchanted creature can't attack.\nTap two untapped creatures you control that share a creature type: Exile enchanted creature.
-SetInfo:MOR Common

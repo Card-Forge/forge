@@ -7,4 +7,3 @@ A:AB$ Pump | Cost$ W | KW$ Flying | SpellDescription$ CARDNAME gains flying unti
 A:AB$ Pump | Cost$ W W | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
 SVar:Picture:http://resources.wizards.com/magic/cards/csp/en-us/card121216.jpg
 Oracle:Protection from black\n{W}: White Shield Crusader gains flying until end of turn.\n{W}{W}: White Shield Crusader gets +1/+0 until end of turn.
-SetInfo:CSP Uncommon

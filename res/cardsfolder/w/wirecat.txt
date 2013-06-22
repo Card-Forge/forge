@@ -6,4 +6,3 @@ S:Mode$ Continuous | Affected$ Card.Self | AddHiddenKeyword$ CARDNAME can't atta
 SVar:X:Count$Valid Enchantment
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wirecat.jpg
 Oracle:Wirecat can't attack or block if an enchantment is on the battlefield.
-SetInfo:USG Uncommon

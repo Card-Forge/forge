@@ -8,5 +8,3 @@ K:PreventAllDamageBy Creature.blockedBySource
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wall_of_vapor.jpg
 Oracle:Defender (This creature can't attack.)\nPrevent all damage that would be dealt to Wall of Vapor by creatures it's blocking.
-SetInfo:CHR Common
-SetInfo:LEG Common

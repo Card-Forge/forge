@@ -7,4 +7,3 @@ SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.ChosenType | IsCurse$ True | K
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/walking_desecration.jpg
 Oracle:{B}, {T}: Creatures of the creature type of your choice attack this turn if able.
-SetInfo:ONS Uncommon

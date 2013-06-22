@@ -7,4 +7,3 @@ S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Flying | CheckSVar$ X | S
 SVar:X:Count$TypeInYourYard.Artifact
 SVar:Picture:http://www.wizards.com/global/images/magic/general/windwright_mage.jpg
 Oracle:Lifelink (Damage dealt by this creature also causes you to gain that much life.)\nWindwright Mage has flying as long as an artifact card is in your graveyard.
-SetInfo:ALA Common

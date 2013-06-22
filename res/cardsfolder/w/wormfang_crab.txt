@@ -12,4 +12,3 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wormfang_crab.jpg
 Oracle:Wormfang Crab is unblockable.\nWhen Wormfang Crab enters the battlefield, an opponent chooses a permanent you control other than Wormfang Crab and exiles it.\nWhen Wormfang Crab leaves the battlefield, return the exiled card to the battlefield under its owner's control.
-SetInfo:JUD Uncommon

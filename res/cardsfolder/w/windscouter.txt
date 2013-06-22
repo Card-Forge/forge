@@ -9,4 +9,3 @@ SVar:DelTrig:Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Player | Execute$ Tri
 SVar:TrigBounce:AB$ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Hand | Defined$ Self
 SVar:Picture:http://www.wizards.com/global/images/magic/general/windscouter.jpg
 Oracle:Flying\nWhenever Windscouter attacks or blocks, return it to its owner's hand at end of combat. (Return it only if it's on the battlefield.)
-SetInfo:PCY Uncommon

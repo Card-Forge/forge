@@ -7,4 +7,3 @@ A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add W to your mana pool.
 SVar:AltCost:Cost$ 1 Return<1/Land.Basic> | Description$ You may pay 1 and return a basic land you control to its owner's hand rather than pay Wildfield Borderpost's mana cost.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wildfield_borderpost.jpg
 Oracle:You may pay {1} and return a basic land you control to its owner's hand rather than pay Wildfield Borderpost's mana cost.\nWildfield Borderpost enters the battlefield tapped.\n{T}: Add {G} or {W} to your mana pool.
-SetInfo:ARB Common

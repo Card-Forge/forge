@@ -6,9 +6,3 @@ K:Defender
 A:AB$ Regenerate | Cost$ G | SpellDescription$ Regenerate CARDNAME.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wall_of_brambles.jpg
 Oracle:Defender (This creature can't attack.)\n{G}: Regenerate Wall of Brambles.
-SetInfo:2ED Uncommon
-SetInfo:LEB Uncommon
-SetInfo:LEA Uncommon
-SetInfo:5ED Uncommon
-SetInfo:4ED Uncommon
-SetInfo:3ED Uncommon

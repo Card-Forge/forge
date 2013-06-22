@@ -9,4 +9,3 @@ SVar:RemRandomDeck:True
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/words_of_worship.jpg
 Oracle:{1}: The next time you would draw a card this turn, you gain 5 life instead.
-SetInfo:ONS Rare

@@ -5,5 +5,3 @@ A:SP$ PumpAll | Cost$ 1 W | ValidCards$ Creature.YouCtrl | NumAtt$ +2 | NumDef$ 
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/warriors_stand.jpg
 Oracle:Cast Warrior's Stand only during the declare attackers step and only if you've been attacked this step.\nCreatures you control get +2/+2 until end of turn.
-SetInfo:PO2 Uncommon
-SetInfo:PTK Uncommon

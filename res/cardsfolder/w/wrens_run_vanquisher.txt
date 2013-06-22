@@ -6,5 +6,3 @@ K:Deathtouch
 K:AlternateAdditionalCost:Reveal<1/Elf>:3
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wrens_run_vanquisher.jpg
 Oracle:As an additional cost to cast Wren's Run Vanquisher, reveal an Elf card from your hand or pay {3}.\nDeathtouch (Any amount of damage this deals to a creature is enough to destroy it.)
-SetInfo:LRW Uncommon
-SetInfo:EVG Uncommon

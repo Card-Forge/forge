@@ -6,4 +6,3 @@ S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddToughness$ 1 | Check
 SVar:X:Count$Valid Island.OppCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wu_admiral.jpg
 Oracle:Wu Admiral gets +1/+1 as long as an opponent controls an Island.
-SetInfo:PTK Uncommon

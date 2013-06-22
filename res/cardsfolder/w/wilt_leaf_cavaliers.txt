@@ -5,5 +5,3 @@ PT:3/4
 K:Vigilance
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wilt_leaf_cavaliers.jpg
 Oracle:Vigilance
-SetInfo:DDG Uncommon
-SetInfo:SHM Uncommon

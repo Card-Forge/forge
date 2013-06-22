@@ -7,4 +7,3 @@ SVar:X:Count$Valid Land.Snow+YouCtrl
 SVar:BuffedBy:Land.Snow
 SVar:Picture:http://www.wizards.com/global/images/magic/general/woolly_mammoths.jpg
 Oracle:Woolly Mammoths has trample as long as you control a snow land.
-SetInfo:ICE Common

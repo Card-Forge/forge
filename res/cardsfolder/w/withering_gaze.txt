@@ -8,5 +8,3 @@ SVar:Y:Count$GreenInOppHand
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/withering_gaze.jpg
 Oracle:Target opponent reveals his or her hand. You draw a card for each Forest and green card in it.
-SetInfo:POR Uncommon
-SetInfo:9ED Uncommon

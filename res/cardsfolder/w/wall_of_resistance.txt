@@ -9,4 +9,3 @@ SVar:DelTrig:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ Player | Execute$ T
 SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ P0P1 | CounterNum$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wall_of_resistance.jpg
 Oracle:Defender (This creature can't attack.)\nFlying\nAt the beginning of each end step, if Wall of Resistance was dealt damage this turn, put a +0/+1 counter on it.
-SetInfo:MIR Common

@@ -6,4 +6,3 @@ SVar:DBDiscard:DB$Discard | Defined$ Targeted | NumCards$ 4 | Mode$ TgtChoose
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wistful_thinking.jpg
 Oracle:Target player draws two cards, then discards four cards.
-SetInfo:PLC Common

@@ -7,4 +7,3 @@ A:AB$ Pump | Cost$ B B | KW$ Swampwalk | SubAbility$ DBDealDamage | SpellDescrip
 SVar:DBDealDamage:DB$DealDamage | Defined$ You | NumDmg$ 2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wormwood_treefolk.jpg
 Oracle:{G}{G}: Wormwood Treefolk gains forestwalk until end of turn and deals 2 damage to you.\n{B}{B}: Wormwood Treefolk gains swampwalk until end of turn and deals 2 damage to you.
-SetInfo:DRK Rare

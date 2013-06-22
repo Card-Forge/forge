@@ -7,4 +7,3 @@ S:Mode$ Continuous | Affected$ Creature.attackingYou | AddPower$ -1 | CheckSVar$
 SVar:X:Count$Valid Card.Self+untapped
 SVar:Picture:http://www.wizards.com/global/images/magic/general/watchdog.jpg
 Oracle:Watchdog blocks each turn if able.\nAs long as Watchdog is untapped, all creatures attacking you get -1/-0.
-SetInfo:TMP Uncommon

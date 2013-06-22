@@ -5,4 +5,3 @@ A:SP$ DealDamage | Cost$ 2 R W | ValidTgts$ Creature,Player | TgtPrompt$ Select 
 SVar:DBGainLife:DB$ GainLife | LifeAmount$ 4
 SVar:Picture:http://www.wizards.com/global/images/magic/general/warleaders_helix.jpg
 Oracle:Warleader's Helix deals 4 damage to target creature or player and you gain 4 life.
-SetInfo:DGM Uncommon

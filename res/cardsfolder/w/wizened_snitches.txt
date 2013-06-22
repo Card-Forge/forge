@@ -7,4 +7,3 @@ K:Players play with the top card of their libraries revealed.
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wizened_snitches.jpg
 Oracle:Flying\nPlayers play with the top card of their libraries revealed.
-SetInfo:RAV Uncommon

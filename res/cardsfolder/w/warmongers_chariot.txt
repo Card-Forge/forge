@@ -6,4 +6,3 @@ S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 2 | AddToughness$
 S:Mode$ Continuous | Affected$ Card.EquippedBy+withDefender | AddHiddenKeyword$ CARDNAME can attack as though it didn't have defender. | Description$ As long as equipped creature has defender, it can attack as though it didn't have defender.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/warmongers_chariot.jpg
 Oracle:Equipped creature gets +2/+2.\nAs long as equipped creature has defender, it can attack as though it didn't have defender.\nEquip {3}
-SetInfo:ROE Uncommon

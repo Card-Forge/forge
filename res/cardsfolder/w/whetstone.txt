@@ -5,4 +5,3 @@ A:AB$ Mill | Cost$ 3 | NumCards$ 2 | Defined$ Each | SpellDescription$ Each play
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/whetstone.jpg
 Oracle:{3}: Each player puts the top two cards of his or her library into his or her graveyard.
-SetInfo:USG Rare

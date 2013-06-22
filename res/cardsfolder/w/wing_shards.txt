@@ -5,4 +5,3 @@ A:SP$ Sacrifice | Cost$ 1 W W | ValidTgts$ Player | SacValid$ Creature.attacking
 K:Storm
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wing_shards.jpg
 Oracle:Target player sacrifices an attacking creature.\nStorm (When you cast this spell, copy it for each spell cast before it this turn.)
-SetInfo:SCG Uncommon

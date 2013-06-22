@@ -9,4 +9,3 @@ SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wave_of_reckoning.jpg
 Oracle:Each creature deals damage to itself equal to its power.
-SetInfo:MMQ Rare

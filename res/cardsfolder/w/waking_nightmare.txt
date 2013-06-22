@@ -4,4 +4,3 @@ Types:Sorcery Arcane
 A:SP$ Discard | Cost$ 2 B | ValidTgts$ Player | NumCards$ 2 | Mode$ TgtChoose | SpellDescription$ Target player discards two cards.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/waking_nightmare.jpg
 Oracle:Target player discards two cards.
-SetInfo:CHK Common

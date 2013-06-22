@@ -6,4 +6,3 @@ SVar:TrigDraw:AB$Draw | Cost$ 0 | NumCards$ 1
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/well_of_discovery.jpg
 Oracle:At the beginning of your end step, if you control no untapped lands, draw a card.
-SetInfo:PCY Rare

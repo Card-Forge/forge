@@ -4,4 +4,3 @@ Types:Creature Cat
 PT:3/3
 SVar:Picture:http://resources.wizards.com/magic/cards/mm/en-us/card19605.jpg
 Oracle:
-SetInfo:MMQ Common

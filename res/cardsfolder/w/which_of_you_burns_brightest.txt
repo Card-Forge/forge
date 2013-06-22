@@ -6,4 +6,3 @@ SVar:DarkEffect:AB$ DamageAll | Cost$ X | NumDmg$ X | ValidTgts$ Player | TgtPro
 SVar:X:Count$xPaid
 SVar:Picture:http://www.cardforge.org/fpics/lq_schemes/which_of_you_burns_brightest.jpg
 Oracle:When you set this scheme in motion, you may pay {X}. If you do, this scheme deals X damage to target opponent and each creature he or she controls.
-SetInfo:ARC Common

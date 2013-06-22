@@ -7,4 +7,3 @@ SVar:TrigAnimate:AB$Animate | Cost$ 0 | Defined$ Self | Power$ 4 | Toughness$ 5 
 SVar:BuffedBy:Card.Black+Green
 SVar:Picture:http://www.wizards.com/global/images/magic/general/woodlurker_mimic.jpg
 Oracle:Whenever you cast a spell that's both black and green, Woodlurker Mimic becomes 4/5 and gains wither until end of turn. (It deals damage to creatures in the form of -1/-1 counters.)
-SetInfo:EVE Common

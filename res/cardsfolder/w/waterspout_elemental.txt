@@ -10,4 +10,3 @@ SVar:DBSkipTurn:DB$AddTurn | NumTurns$ 1 | Defined$ Opponent
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/waterspout_elemental.jpg
 Oracle:Kicker {U} (You may pay an additional {U} as you cast this spell.)\nFlying\nWhen Waterspout Elemental enters the battlefield, if it was kicked, return all other creatures to their owners' hands and you skip your next turn.
-SetInfo:PLS Rare

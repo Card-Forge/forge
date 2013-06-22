@@ -8,4 +8,3 @@ SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ X | References$ X | TokenName$ 
 SVar:X:Count$TimesKicked
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wolfbriar_elemental.jpg
 Oracle:Multikicker {G} (You may pay an additional {G} any number of times as you cast this spell.)\nWhen Wolfbriar Elemental enters the battlefield, put a 2/2 green Wolf creature token onto the battlefield for each time it was kicked.
-SetInfo:WWK Rare

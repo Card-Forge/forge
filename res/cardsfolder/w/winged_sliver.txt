@@ -6,5 +6,3 @@ S:Mode$ Continuous | Affected$ Creature.Sliver | AddKeyword$ Flying | Descriptio
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/winged_sliver.jpg
 Oracle:All Sliver creatures have flying.
-SetInfo:H09 Common
-SetInfo:TMP Common

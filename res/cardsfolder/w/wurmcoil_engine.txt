@@ -9,4 +9,3 @@ SVar:TrigToken:AB$Token | Cost$ 0 | TokenImage$ C 3 3 Wurm Deathtouch | TokenCol
 SVar:DBToken:DB$Token | TokenImage$ C 3 3 Wurm Lifelink | TokenColors$ Colorless | TokenAmount$ 1 | TokenName$ Wurm | TokenTypes$ Artifact,Creature,Wurm | TokenPower$ 3 | TokenToughness$ 3 | TokenKeywords$ Lifelink
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wurmcoil_engine.jpg
 Oracle:Deathtouch, lifelink\nWhen Wurmcoil Engine dies, put a 3/3 colorless Wurm artifact creature token with deathtouch and a 3/3 colorless Wurm artifact creature token with lifelink onto the battlefield.
-SetInfo:SOM Mythic

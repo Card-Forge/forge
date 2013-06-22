@@ -10,5 +10,3 @@ A:AB$ ChangeZone | Cost$ U | Origin$ Battlefield | Destination$ Hand | SpellDesc
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/windreaver.jpg
 Oracle:Flying\n{W}: Windreaver gains vigilance until end of turn.\n{W}: Windreaver gets +0/+1 until end of turn.\n{U}: Switch Windreaver's power and toughness until end of turn.\n{U}: Return Windreaver to its owner's hand.
-SetInfo:DDI Rare
-SetInfo:DIS Rare

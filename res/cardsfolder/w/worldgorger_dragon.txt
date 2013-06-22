@@ -11,4 +11,3 @@ SVar:TrigReturn:AB$ChangeZoneAll | Cost$ 0 | ChangeType$ Card.IsRemembered | Ori
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/worldgorger_dragon.jpg
 Oracle:Flying, trample\nWhen Worldgorger Dragon enters the battlefield, exile all other permanents you control.\nWhen Worldgorger Dragon leaves the battlefield, return the exiled cards to the battlefield under their owners' control.
-SetInfo:JUD Rare

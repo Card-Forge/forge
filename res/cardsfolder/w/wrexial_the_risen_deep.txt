@@ -9,5 +9,3 @@ SVar:TrigPump:AB$ Pump | Cost$ 0 | TgtZone$ Graveyard | ValidTgts$ Instant.Defen
 SVar:TrigPlay:DB$ Play | Defined$ Targeted | WithoutManaCost$ True | Optional$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wrexial_the_risen_deep.jpg
 Oracle:Islandwalk, swampwalk\nWhenever Wrexial, the Risen Deep deals combat damage to a player, you may cast target instant or sorcery card from that player's graveyard without paying its mana cost. If that card would be put into a graveyard this turn, exile it instead.
-SetInfo:COM Mythic
-SetInfo:WWK Mythic

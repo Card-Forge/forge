@@ -6,4 +6,3 @@ A:SP$ Token | Cost$ X G | TokenAmount$ 1 | TokenName$ Wurm | TokenOwner$ You | T
 SVar:X:Count$xPaid
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wurmcalling.jpg
 Oracle:Buyback {2}{G} (You may pay an additional {2}{G} as you cast this spell. If you do, put this card into your hand as it resolves.)\nPut an X/X green Wurm creature token onto the battlefield.
-SetInfo:TSP Rare

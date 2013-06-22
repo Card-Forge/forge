@@ -7,4 +7,3 @@ SVar:TrigGain:AB$ GainControl | Cost$ 0 | Defined$ Self | NewController$ Player.
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wild_mammoth.jpg
 Oracle:At the beginning of your upkeep, if a player controls more creatures than each other player, the player who controls the most creatures gains control of Wild Mammoth.
-SetInfo:NMS Uncommon

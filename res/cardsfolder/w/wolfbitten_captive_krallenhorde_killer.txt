@@ -21,4 +21,3 @@ T:Mode$Phase | Phase$ Upkeep | WerewolfUntransformCondition$ True | TriggerZones
 SVar:TrigTransform:AB$SetState | Cost$ 0 | Defined$ Self | Mode$ Transform
 SVar:Picture:http://www.wizards.com/global/images/magic/general/krallenhorde_killer.jpg
 Oracle:{3}{G}: Krallenhorde Killer gets +4/+4 until end of turn. Activate this ability only once each turn.\nAt the beginning of each upkeep, if a player cast two or more spells last turn, transform Krallenhorde Killer.
-SetInfo:DKA Rare

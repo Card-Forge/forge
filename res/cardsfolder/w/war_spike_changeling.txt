@@ -6,4 +6,3 @@ S:Mode$ Continuous | EffectZone$ All | Affected$ Card.Self | CharacteristicDefin
 A:AB$ Pump | Cost$ R | KW$ First Strike | SpellDescription$ CARDNAME gains first strike until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/war_spike_changeling.jpg
 Oracle:Changeling (This card is every creature type at all times.)\n{R}: War-Spike Changeling gains first strike until end of turn.
-SetInfo:MOR Common

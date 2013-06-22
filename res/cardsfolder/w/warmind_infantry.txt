@@ -7,4 +7,3 @@ SVar:TrigBattalionPump:AB$ Pump | Cost$ 0 | NumAtt$ +2
 SVar:BattalionTest:Count$Valid Creature.attacking+Other
 SVar:Picture:http://www.wizards.com/global/images/magic/general/warmind_infantry.jpg
 Oracle:Battalion - Whenever Warmind Infantry and at least two other creatures attack, Warmind Infantry gets +2/+0 until end of turn.
-SetInfo:GTC Common

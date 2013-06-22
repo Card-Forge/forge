@@ -7,4 +7,3 @@ SVar:DBDestroy:DB$ Destroy | Defined$ ChosenCard | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wild_swing.jpg
 Oracle:Choose three target nonenchantment permanents. Destroy one of them at random.
-SetInfo:SHM Uncommon

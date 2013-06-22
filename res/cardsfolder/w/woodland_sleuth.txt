@@ -7,4 +7,3 @@ SVar:TrigChangeZone:AB$ChangeZone | ChangeType$ Creature.YouCtrl | Cost$ 0 | Ori
 SVar:Morbid:Count$ThisTurnEntered_Graveyard_from_Battlefield_Creature
 SVar:Picture:http://www.wizards.com/global/images/magic/general/woodland_sleuth.jpg
 Oracle:Morbid - When Woodland Sleuth enters the battlefield, if a creature died this turn, return a creature card at random from your graveyard to your hand.
-SetInfo:ISD Common

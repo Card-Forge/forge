@@ -5,4 +5,3 @@ PT:2/3
 A:AB$ Pump | Cost$ 1 W | KW$ HIDDEN Prevent all damage that would be dealt to CARDNAME. | ValidTgts$ Creature.Merfolk+tapped,Creature.Kithkin+tapped | TgtPrompt$ Select tapped Merfolk or Kithkin creature | SpellDescription$ Prevent all damage that would be dealt to target tapped Merfolk or Kithkin creature this turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wellgabber_apothecary.jpg
 Oracle:{1}{W}: Prevent all damage that would be dealt to target tapped Merfolk or Kithkin creature this turn.
-SetInfo:LRW Common

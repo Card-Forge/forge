@@ -6,8 +6,3 @@ K:Defender
 K:First Strike
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wall_of_spears.jpg
 Oracle:Defender (This creature can't attack.)\nFirst strike
-SetInfo:ATQ Uncommon
-SetInfo:5ED Common
-SetInfo:7ED Uncommon
-SetInfo:4ED Common
-SetInfo:8ED Uncommon

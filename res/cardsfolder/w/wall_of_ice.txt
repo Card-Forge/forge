@@ -5,8 +5,3 @@ PT:0/7
 K:Defender
 SVar:Picture:http://resources.wizards.com/magic/cards/4e/en-us/card2250.jpg
 Oracle:Defender (This creature can't attack.)
-SetInfo:LEB Uncommon
-SetInfo:4ED Uncommon
-SetInfo:LEA Uncommon
-SetInfo:3ED Uncommon
-SetInfo:2ED Uncommon

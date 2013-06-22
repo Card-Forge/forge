@@ -8,4 +8,3 @@ SVar:Reveal:AB$ ChangeZone | Cost$ 0 | Hidden$ True | Origin$ All | Destination$
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wheel_of_sun_and_moon.jpg
 Oracle:Enchant player\nIf a card would be put into enchanted player's graveyard from anywhere, instead that card is revealed and put on the bottom of that player's library.
-SetInfo:SHM Rare

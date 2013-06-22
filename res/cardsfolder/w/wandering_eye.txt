@@ -7,4 +7,3 @@ S:Mode$ Continuous | Affected$ Player | AddKeyword$ Play with your hand revealed
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wandering_eye.jpg
 Oracle:Flying\nPlayers play with their hands revealed.
-SetInfo:NMS Common

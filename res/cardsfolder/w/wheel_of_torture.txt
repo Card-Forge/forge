@@ -6,4 +6,3 @@ SVar:TrigDamage:AB$ DealDamage | Cost$ 0 | Defined$ TriggeredPlayer | NumDmg$ X 
 SVar:X:TriggeredPlayer$CardsInHand/NMinus.3
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wheel_of_torture.jpg
 Oracle:At the beginning of each opponent's upkeep, Wheel of Torture deals X damage to that player, where X is 3 minus the number of cards in his or her hand.
-SetInfo:ULG Rare

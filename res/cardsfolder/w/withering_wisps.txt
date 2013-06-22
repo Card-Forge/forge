@@ -9,4 +9,3 @@ SVar:NeedsToPlay:Creature
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/withering_wisps.jpg
 Oracle:At the beginning of the end step, if no creatures are on the battlefield, sacrifice Withering Wisps.\n{B}: Withering Wisps deals 1 damage to each creature and each player. Activate this ability no more times each turn than the number of snow Swamps you control.
-SetInfo:ICE Uncommon

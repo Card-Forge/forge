@@ -5,4 +5,3 @@ PT:2/2
 S:Mode$ Continuous | EffectZone$ All | Affected$ Card.Self | CharacteristicDefining$ True | AddType$ AllCreatureTypes | Description$ Changeling (This card is every creature type at all times.)
 SVar:Picture:http://www.wizards.com/global/images/magic/general/woodland_changeling.jpg
 Oracle:Changeling (This card is every creature type at all times.)
-SetInfo:LRW Common

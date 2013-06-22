@@ -6,4 +6,3 @@ A:AB$ Protection | Cost$ 2 G | ValidTgts$ Creature.Green | TgtPrompt$ Select tar
 PT:2/2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/willow_priestess.jpg
 Oracle:{T}: You may put a Faerie permanent card from your hand onto the battlefield.\n{2}{G}: Target green creature gains protection from black until end of turn.
-SetInfo:HML Rare

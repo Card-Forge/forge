@@ -8,4 +8,3 @@ SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenName$ Wolf | TokenTypes$ Creature
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wolf_skull_shaman.jpg
 Oracle:Kinship - At the beginning of your upkeep, you may look at the top card of your library. If it shares a creature type with Wolf-Skull Shaman, you may reveal it. If you do, put a 2/2 green Wolf creature token onto the battlefield.
-SetInfo:MOR Uncommon

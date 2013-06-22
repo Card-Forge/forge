@@ -4,5 +4,3 @@ Types:Creature Beast
 PT:5/4
 SVar:Picture:http://www.wizards.com/global/images/magic/general/woolly_thoctar.jpg
 Oracle:
-SetInfo:DDH Uncommon
-SetInfo:ALA Uncommon

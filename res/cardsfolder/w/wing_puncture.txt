@@ -8,4 +8,3 @@ SVar:X:Remembered$CardPower
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wing_puncture.jpg
 Oracle:Target creature you control deals damage equal to its power to target creature with flying.
-SetInfo:SOM Common

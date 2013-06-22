@@ -6,4 +6,3 @@ K:Defender
 K:Protection from black
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wall_of_light.jpg
 Oracle:Defender (This creature can't attack.)\nProtection from black
-SetInfo:LEG Uncommon

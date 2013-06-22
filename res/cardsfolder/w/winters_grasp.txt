@@ -4,5 +4,3 @@ Types:Sorcery
 A:SP$ Destroy | Cost$ 1 G G | ValidTgts$ Land | TgtPrompt$ Select target land | SpellDescription$ Destroy target land.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/winters_grasp.jpg
 Oracle:Destroy target land.
-SetInfo:TMP Uncommon
-SetInfo:POR Uncommon

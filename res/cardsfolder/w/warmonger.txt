@@ -6,4 +6,3 @@ A:AB$ DamageAll | Cost$ 2 | NumDmg$ 1 | ValidCards$ Creature.withoutFlying | Val
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/warmonger.jpg
 Oracle:{2}: Warmonger deals 1 damage to each creature without flying and each player. Any player may activate this ability.
-SetInfo:MMQ Uncommon

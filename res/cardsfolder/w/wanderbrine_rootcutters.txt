@@ -5,4 +5,3 @@ PT:3/3
 K:CantBeBlockedBy Creature.Green
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wanderbrine_rootcutters.jpg
 Oracle:Wanderbrine Rootcutters can't be blocked by green creatures.
-SetInfo:SHM Common

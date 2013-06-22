@@ -10,5 +10,3 @@ SVar:X:Count$AttackersDeclared
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/windbrisk_heights.jpg
 Oracle:Hideaway (This land enters the battlefield tapped. When it does, look at the top four cards of your library, exile one face down, then put the rest on the bottom of your library.)\n{T}: Add {W} to your mana pool.\n{W}, {T}: You may play the exiled card without paying its mana cost if you attacked with three or more creatures this turn.
-SetInfo:V12 Mythic
-SetInfo:LRW Rare

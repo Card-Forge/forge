@@ -5,4 +5,3 @@ A:SP$ Pump | Cost$ 2 G | ValidTgts$ Creature | TgtPrompt$ Select target creature
 K:Flashback 3 R
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wild_hunger.jpg
 Oracle:Target creature gets +3/+1 and gains trample until end of turn.\nFlashback {3}{R} (You may cast this card from your graveyard for its flashback cost. Then exile it.)
-SetInfo:DKA Common

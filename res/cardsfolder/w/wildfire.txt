@@ -6,7 +6,3 @@ SVar:DBDamage:DB$ DamageAll | NumDmg$ 4 | ValidCards$ Creature
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wildfire.jpg
 Oracle:Each player sacrifices four lands. Wildfire deals 4 damage to each creature.
-SetInfo:PO2 Rare
-SetInfo:7ED Rare
-SetInfo:9ED Rare
-SetInfo:USG Rare

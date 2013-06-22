@@ -11,4 +11,3 @@ SVar:WarElementalY:TriggerCount$DamageAmount
 SVar:NeedsToPlayVar:WarElementalX GE1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/war_elemental.jpg
 Oracle:When War Elemental enters the battlefield, sacrifice it unless an opponent was dealt damage this turn.\nWhenever an opponent is dealt damage, put that many +1/+1 counters on War Elemental.
-SetInfo:MRD Rare

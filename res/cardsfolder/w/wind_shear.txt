@@ -5,4 +5,3 @@ A:SP$ PumpAll | Cost$ 2 G | ValidCards$ Creature.withFlying+attacking | NumAtt$ 
 SVar:DBDebuff:DB$ DebuffAll | ValidCards$ Creature.withFlying+attacking | Keywords$ Flying
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wind_shear.jpg
 Oracle:Attacking creatures with flying get -2/-2 and lose flying until end of turn.
-SetInfo:VIS Uncommon
