@@ -8,4 +8,3 @@ SVar:X:Count$CardCounters.VERSE
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/recantation.jpg
 Oracle:At the beginning of your upkeep, you may put a verse counter on Recantation.\n{U}, Sacrifice Recantation: Return up to X target permanents to their owners' hands, where X is the number of verse counters on Recantation.
-SetInfo:USG Rare

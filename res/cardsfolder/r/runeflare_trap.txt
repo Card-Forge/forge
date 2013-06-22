@@ -7,4 +7,3 @@ SVar:X:TargetedPlayer$CardsInHand
 SVar:Y:Count$OppDrewThisTurn
 SVar:Picture:http://www.wizards.com/global/images/magic/general/runeflare_trap.jpg
 Oracle:If an opponent drew three or more cards this turn, you may pay {R} rather than pay Runeflare Trap's mana cost.\nRuneflare Trap deals damage to target player equal to the number of cards in that player's hand.
-SetInfo:ZEN Uncommon

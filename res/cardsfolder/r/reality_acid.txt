@@ -8,4 +8,3 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.S
 SVar:TrigSac:AB$ SacrificeAll | Cost$ 0 | ValidCards$ Triggered.EnchantedBy
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reality_acid.jpg
 Oracle:Enchant permanent\nVanishing 3 (This permanent enters the battlefield with three time counters on it. At the beginning of your upkeep, remove a time counter from it. When the last is removed, sacrifice it.)\nWhen Reality Acid leaves the battlefield, enchanted permanent's controller sacrifices it.
-SetInfo:PLC Common

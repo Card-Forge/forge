@@ -4,6 +4,3 @@ Types:Instant
 A:SP$ DamageAll | Cost$ W | NumDmg$ 1 | ValidCards$ Creature.attacking | ValidDescription$ each attacking creature. | SpellDescription$ CARDNAME deals 1 damage to each attacking creature.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rain_of_blades.jpg
 Oracle:Rain of Blades deals 1 damage to each attacking creature.
-SetInfo:8ED Uncommon
-SetInfo:SCG Uncommon
-SetInfo:M13 Uncommon

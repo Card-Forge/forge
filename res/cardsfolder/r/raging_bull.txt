@@ -4,4 +4,3 @@ Types:Creature Ox
 PT:2/2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/raging_bull.jpg
 Oracle:
-SetInfo:LEG Common

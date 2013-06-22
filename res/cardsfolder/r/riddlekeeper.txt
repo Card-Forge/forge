@@ -6,4 +6,3 @@ T:Mode$ Attacks | ValidCard$ Creature | Attacked$ You,Planeswalker.YouCtrl | Tri
 SVar:TrigMill:AB$ Mill | Cost$ 0 | NumCards$ 2 | Defined$ TriggeredAttackerController
 SVar:Picture:http://www.wizards.com/global/images/magic/general/riddlekeeper.jpg
 Oracle:Whenever a creature attacks you or a planeswalker you control, that creature's controller puts the top two cards of his or her library into his or her graveyard.
-SetInfo:COM Rare

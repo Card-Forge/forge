@@ -7,4 +7,3 @@ A:AB$ Phases | Cost$ U U | Defined$ Self | SpellDescription$ CARDNAME phases out
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rainbow_efreet.jpg
 Oracle:Flying\n{U}{U}: Rainbow Efreet phases out. (While it's phased out, it's treated as though it doesn't exist. It phases in before you untap during your next untap step.)
-SetInfo:VIS Rare

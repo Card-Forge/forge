@@ -7,4 +7,3 @@ SVar:TrigExile:AB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Exile 
 SVar:DBShuffle:DB$ChangeZoneAll | ChangeType$ Creature.YouCtrl | Origin$ Graveyard | Destination$ Library | Shuffle$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rooting_kavu.jpg
 Oracle:When Rooting Kavu dies, you may exile it. If you do, shuffle all creature cards from your graveyard into your library.
-SetInfo:INV Uncommon

@@ -7,4 +7,3 @@ A:AB$ Draw | Cost$ B R T Sac<1/CARDNAME> | NumCards$ 1 | SpellDescription$ Draw 
 DeckNeeds:Color$Black|Red
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rakdos_cluestone.jpg
 Oracle:{T}: Add {B} or {R} to your mana pool.\n{B}{R}, {T}, Sacrifice Rakdos Cluestone: Draw a card.
-SetInfo:DGM Common

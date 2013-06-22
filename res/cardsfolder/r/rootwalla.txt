@@ -5,6 +5,3 @@ PT:2/2
 A:AB$ Pump | Cost$ 1 G | NumAtt$ +2 | NumDef$ +2 | ActivationLimit$ 1 | SpellDescription$ CARDNAME gets +2/+2 until end of turn. Activate this ability only once each turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rootwalla.jpg
 Oracle:{1}{G}: Rootwalla gets +2/+2 until end of turn. Activate this ability only once each turn.
-SetInfo:TMP Common
-SetInfo:9ED Common
-SetInfo:10E Common

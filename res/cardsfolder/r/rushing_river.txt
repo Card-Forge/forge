@@ -6,4 +6,3 @@ A:SP$ ChangeZone | Cost$ 2 U | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select 
 SVar:X:Count$Kicked.2.1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rushing_river.jpg
 Oracle:Kicker-Sacrifice a land. (You may sacrifice a land in addition to any other costs as you cast this spell.)\nReturn target nonland permanent to its owner's hand. If Rushing River was kicked, return another target nonland permanent to its owner's hand.
-SetInfo:PLS Common

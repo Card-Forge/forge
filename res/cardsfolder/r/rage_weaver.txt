@@ -6,5 +6,3 @@ A:AB$ Pump | Cost$ 2 | ValidTgts$ Creature.Black,Creature.Green | KW$ Haste | Sp
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rage_weaver.jpg
 Oracle:{2}: Target black or green creature gains haste until end of turn. (It can attack and {T} this turn.)
-SetInfo:10E Uncommon
-SetInfo:INV Uncommon

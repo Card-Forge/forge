@@ -7,4 +7,3 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | O
 SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rushwood_elemental.jpg
 Oracle:Trample\nAt the beginning of your upkeep, you may put a +1/+1 counter on Rushwood Elemental.
-SetInfo:MMQ Rare

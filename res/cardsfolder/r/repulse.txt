@@ -5,6 +5,3 @@ A:SP$ ChangeZone | Cost$ 2 U | ValidTgts$ Creature | TgtPrompt$ Select target cr
 SVar:DBDraw:DB$Draw | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:Picture:http://resources.wizards.com/magic/cards/in/en-us/card22985.jpg
 Oracle:Return target creature to its owner's hand.\nDraw a card.
-SetInfo:DD2 Common
-SetInfo:COM Common
-SetInfo:INV Common

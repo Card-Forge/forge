@@ -8,4 +8,3 @@ SVar:TrigGainLife:AB$ GainLife | Cost$ 0 | LifeAmount$ 1
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/roots_of_life.jpg
 Oracle:As Roots of Life enters the battlefield, choose Island or Swamp.\nWhenever a land of the chosen type an opponent controls becomes tapped, you gain 1 life.
-SetInfo:MIR Uncommon

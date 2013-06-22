@@ -7,4 +7,3 @@ A:AB$ Pump | Cost$ 1 R SubCounter<1/TIME/Card.suspended/suspended card you own/E
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rift_elemental.jpg
 Oracle:{1}{R}, Remove a time counter from a permanent you control or suspended card you own: Rift Elemental gets +2/+0 until end of turn.
-SetInfo:FUT Common

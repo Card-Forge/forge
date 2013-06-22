@@ -4,7 +4,3 @@ Types:Sorcery
 A:SP$ Destroy | Cost$ 1 B B | ValidTgts$ Land | TgtPrompt$ Select target land | SpellDescription$ Destroy target land.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rain_of_tears.jpg
 Oracle:Destroy target land.
-SetInfo:MMQ Uncommon
-SetInfo:TMP Uncommon
-SetInfo:POR Uncommon
-SetInfo:10E Uncommon

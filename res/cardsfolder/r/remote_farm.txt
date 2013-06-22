@@ -9,4 +9,3 @@ SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://wizards.com/global/images/magic/general/remote_farm.jpg
 Oracle:Remote Farm enters the battlefield tapped with two depletion counters on it.\n{T}, Remove a depletion counter from Remote Farm: Add {W}{W} to your mana pool. If there are no depletion counters on Remote Farm, sacrifice it.
-SetInfo:MMQ Common

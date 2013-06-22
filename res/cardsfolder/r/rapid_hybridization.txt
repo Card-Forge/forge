@@ -6,4 +6,3 @@ SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenName$ Frog Lizard | TokenTypes$ C
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rapid_hybridization.jpg
 Oracle:Destroy target creature. It can't be regenerated. That creature's controller puts a 3/3 green Frog Lizard creature token onto the battlefield.
-SetInfo:GTC Uncommon

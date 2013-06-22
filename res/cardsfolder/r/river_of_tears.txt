@@ -7,4 +7,3 @@ SVar:X:Count$YourLandsPlayed
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/river_of_tears.jpg
 Oracle:{T}: Add {U} to your mana pool. If you played a land this turn, add {B} to your mana pool instead.
-SetInfo:FUT Rare

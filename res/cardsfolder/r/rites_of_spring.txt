@@ -8,4 +8,3 @@ SVar:X:Remembered$Amount
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rites_of_spring.jpg
 Oracle:Discard any number of cards. Search your library for that many basic land cards, reveal those cards, and put them into your hand. Then shuffle your library.
-SetInfo:ODY Common

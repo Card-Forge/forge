@@ -7,4 +7,3 @@ SVar:X:Count$TypeYouCtrl.Wizard
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/riptide_director.jpg
 Oracle:{2}{U}{U}, {T}: Draw a card for each Wizard you control.
-SetInfo:LGN Rare

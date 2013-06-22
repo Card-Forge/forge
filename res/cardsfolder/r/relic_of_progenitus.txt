@@ -7,5 +7,3 @@ SVar:DBDraw:DB$Draw | NumCards$ 1
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/relic_of_progenitus.jpg
 Oracle:{T}: Target player exiles a card from his or her graveyard.\n{1}, Exile Relic of Progenitus: Exile all cards from all graveyards. Draw a card.
-SetInfo:HOP Common
-SetInfo:ALA Common

@@ -7,6 +7,3 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigDamage:AB$DamageAll | Cost$ 0 | ValidCards$ Creature.withoutFlying | NumDmg$ 5 | ValidDescription$ each creature without flying.
 SVar:Picture:http://resources.wizards.com/magic/cards/chk/en-us/card79242.jpg
 Oracle:Flying\nWhen Ryusei, the Falling Star dies, it deals 5 damage to each creature without flying.
-SetInfo:MBP Rare
-SetInfo:CHK Rare
-SetInfo:ARC Rare

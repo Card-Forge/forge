@@ -8,4 +8,3 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | E
 SVar:TrigRemoveCounter:AB$RemoveCounter | Cost$ 0 | Defined$ Self | CounterType$ SHELL | CounterNum$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/roc_hatchling.jpg
 Oracle:Roc Hatchling enters the battlefield with four shell counters on it.\nAt the beginning of your upkeep, remove a shell counter from Roc Hatchling.\nAs long as Roc Hatchling has no shell counters on it, it gets +3/+2 and has flying.
-SetInfo:WTH Uncommon

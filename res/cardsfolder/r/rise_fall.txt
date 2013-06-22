@@ -16,6 +16,3 @@ A:SP$ Reveal | Cost$ B R | ValidTgts$ Player | IsCurse$ True | Random$ True | Nu
 SVar:DBDiscard:DB$ Discard | Mode$ Defined | Defined$ Targeted | DefinedCards$ ValidHand Card.nonLand+IsRemembered | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 Oracle:Target player reveals two cards at random from his or her hand, then discards each nonland card revealed this way.
-
-SetInfo:DDH Uncommon
-SetInfo:DIS Uncommon

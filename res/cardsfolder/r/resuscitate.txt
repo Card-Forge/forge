@@ -6,4 +6,3 @@ SVar:ABRegen:AB$Regenerate | Cost$ 1 | SpellDescription$ Regenerate this creatur
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/resuscitate.jpg
 Oracle:Until end of turn, creatures you control gain "{1}: Regenerate this creature."
-SetInfo:EXO Uncommon

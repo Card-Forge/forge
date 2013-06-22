@@ -9,4 +9,3 @@ SVar:RestorationExile:AB$ ChangeZone | Cost$ 0 | ValidTgts$ Creature.nonAngel+Yo
 SVar:RestorationReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | GainControl$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/restoration_angel.jpg
 Oracle:Flash\nFlying\nWhen Restoration Angel enters the battlefield, you may exile target non-Angel creature you control, then return that card to the battlefield under your control.
-SetInfo:AVR Rare

@@ -6,4 +6,3 @@ A:AB$ DealDamage | Cost$ 4 T Sac<1/Land> | ValidTgts$ Creature,Player | TgtPromp
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/raths_edge.jpg
 Oracle:{T}: Add {1} to your mana pool.\n{4}, {T}, Sacrifice a land: Rath's Edge deals 1 damage to target creature or player.
-SetInfo:NMS Rare

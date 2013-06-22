@@ -4,4 +4,3 @@ Types:Sorcery
 A:SP$ DestroyAll | Cost$ 3 W | ValidCards$ Land | SpellDescription$ Destroy all lands.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ravages_of_war.jpg
 Oracle:Destroy all lands.
-SetInfo:PTK Rare

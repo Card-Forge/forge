@@ -5,4 +5,3 @@ A:SP$ DestroyAll | Cost$ 3 G | ValidCards$ Enchantment | SpellDescription$ Destr
 A:SP$ DestroyAll | Cost$ GainLife<6/Player.Other/*> | ValidCards$ Enchantment | IsPresent$ Forest.YouCtrl | PrecostDesc$ If you control a Forest, rather than pay CARDNAME's mana cost, | CostDesc$ you may have each other player gain 6 life | SpellDescription$ .
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reverent_silence.jpg
 Oracle:If you control a Forest, rather than pay Reverent Silence's mana cost, you may have each other player gain 6 life.\nDestroy all enchantments.
-SetInfo:NMS Common

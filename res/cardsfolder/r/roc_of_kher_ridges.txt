@@ -5,7 +5,3 @@ PT:3/3
 K:Flying
 SVar:Picture:http://resources.wizards.com/magic/cards/3e/en-us/card1313.jpg
 Oracle:Flying
-SetInfo:LEB Rare
-SetInfo:LEA Rare
-SetInfo:3ED Rare
-SetInfo:2ED Rare

@@ -7,4 +7,3 @@ SVar:TrigDamage:AB$DealDamage | Cost$ 0 | Defined$ TriggeredCardController | Num
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/royal_decree.jpg
 Oracle:Cumulative upkeep {W} (At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.)\nWhenever a Swamp, Mountain, black permanent, or red permanent becomes tapped, Royal Decree deals 1 damage to that permanent's controller.
-SetInfo:ALL Rare

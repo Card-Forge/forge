@@ -6,4 +6,3 @@ A:SP$ Pump | Cost$ PayLife<2> | ValidTgts$ Creature | NumAtt$ +2 | TgtPrompt$ Se
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rouse.jpg
 Oracle:If you control a Swamp, you may pay 2 life rather than pay Rouse's mana cost.\nTarget creature gets +2/+0 until end of turn.
-SetInfo:MMQ Common

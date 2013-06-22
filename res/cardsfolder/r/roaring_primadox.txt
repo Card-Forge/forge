@@ -6,4 +6,3 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | E
 SVar:TrigBounce:DB$ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Hand | Hidden$ True | Mandatory$ True | ChangeType$ Creature.YouCtrl | ChangeNum$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/roaring_primadox.jpg
 Oracle:At the beginning of your upkeep, return a creature you control to its owner's hand.
-SetInfo:M13 Uncommon

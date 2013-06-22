@@ -8,4 +8,3 @@ SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ RevealOppChoose
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rakdos_augermage.jpg
 Oracle:First strike\n{T}: Reveal your hand and discard a card of target opponent's choice. Then that player reveals his or her hand and discards a card of your choice. Activate this ability only any time you could cast a sorcery.
-SetInfo:DIS Rare

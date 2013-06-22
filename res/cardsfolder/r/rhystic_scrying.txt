@@ -5,4 +5,3 @@ A:SP$ Draw | Cost$ 2 U U | Defined$ You | NumCards$ 3 | SubAbility$ DBDiscard | 
 SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 3 | Mode$ TgtChoose | UnlessPayer$ Player | UnlessCost$ 2 | UnlessSwitched$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rhystic_scrying.jpg
 Oracle:Draw three cards. Then, if any player pays {2}, discard three cards.
-SetInfo:PCY Uncommon

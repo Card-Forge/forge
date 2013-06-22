@@ -8,4 +8,3 @@ SVar:X:Remembered$Amount
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rofelloss_gift.jpg
 Oracle:Reveal any number of green cards in your hand. Return an enchantment card from your graveyard to your hand for each card revealed this way.
-SetInfo:UDS Common

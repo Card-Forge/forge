@@ -5,4 +5,3 @@ S:Mode$ CantAttackUnless | ValidCard$ Creature.Black | Target$ Player,Planeswalk
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reclamation.jpg
 Oracle:Black creatures can't attack unless their controller sacrifices a land for each black creature he or she controls that's attacking.
-SetInfo:ICE Rare

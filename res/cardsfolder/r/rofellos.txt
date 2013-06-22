@@ -6,4 +6,3 @@ T:Mode$ ChangesZone | TriggerZones$ Command | Origin$ Battlefield | Destination$
 SVar:TrigDraw:AB$ Draw | Cost$ 0 | NumCards$ 1 | Defined$ You
 SVar:Picture:http://www.cardforge.org/fpics/vgd-lq/rofellos.jpg
 Oracle:Hand -2, life +4\nWhenever a creature you control dies, draw a card.
-SetInfo:VAN Special

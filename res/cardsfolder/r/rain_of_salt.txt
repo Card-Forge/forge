@@ -4,5 +4,3 @@ Types:Sorcery
 A:SP$ Destroy | Cost$ 4 R R | TargetMin$ 2 | TargetMax$ 2 | ValidTgts$ Land | TgtPrompt$ Select target land | SpellDescription$ Destroy two target lands.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rain_of_salt.jpg
 Oracle:Destroy two target lands.
-SetInfo:POR Uncommon
-SetInfo:USG Uncommon

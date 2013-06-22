@@ -8,4 +8,3 @@ SVar:BuffedBy:Card.CostsPhyrexianMana
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rage_extractor.jpg
 Oracle:({R/P} can be paid with either {R} or 2 life.)\nWhenever you cast a spell with {P} in its mana cost, Rage Extractor deals damage equal to that spell's converted mana cost to target creature or player.
-SetInfo:NPH Uncommon

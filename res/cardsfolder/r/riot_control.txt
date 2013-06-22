@@ -8,4 +8,3 @@ SVar:X:Count$Valid Creature.OppCtrl
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/riot_control.jpg
 Oracle:You gain 1 life for each creature your opponents control. Prevent all damage that would be dealt to you this turn.
-SetInfo:DGM Common

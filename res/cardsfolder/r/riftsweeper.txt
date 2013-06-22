@@ -6,4 +6,3 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creatu
 SVar:TrigChange:DB$ ChangeZone | Cost$ 0 | Origin$ Exile | Destination$ Library | ValidTgts$ Card.faceUp | ChangeNum$ 1 | Shuffle$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/riftsweeper.jpg
 Oracle:When Riftsweeper enters the battlefield, choose target face-up exiled card. Its owner shuffles it into his or her library.
-SetInfo:FUT Uncommon

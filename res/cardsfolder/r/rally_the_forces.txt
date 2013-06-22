@@ -4,4 +4,3 @@ Types:Instant
 A:SP$ PumpAll | Cost$ 2 R | ValidCards$ Creature.attacking | NumAtt$ +1 | KW$ First Strike | SpellDescription$ Attacking creatures get +1/+0 and gain first strike until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rally_the_forces.jpg
 Oracle:Attacking creatures get +1/+0 and gain first strike until end of turn.
-SetInfo:MBS Common

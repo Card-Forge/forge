@@ -5,12 +5,3 @@ A:SP$ Pump | Cost$ W | ValidTgts$ Creature.blocking | NumAtt$ +7 | NumDef$ +7 | 
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/righteousness.jpg
 Oracle:Target blocking creature gets +7/+7 until end of turn.
-SetInfo:2ED Rare
-SetInfo:M10 Uncommon
-SetInfo:9ED Rare
-SetInfo:10E Rare
-SetInfo:LEB Rare
-SetInfo:LEA Rare
-SetInfo:5ED Rare
-SetInfo:4ED Rare
-SetInfo:3ED Rare

@@ -9,4 +9,3 @@ SVar:LifeX:Remembered$Amount.Twice
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/renounce.jpg
 Oracle:Sacrifice any number of permanents. You gain 2 life for each permanent sacrificed this way.
-SetInfo:MMQ Uncommon

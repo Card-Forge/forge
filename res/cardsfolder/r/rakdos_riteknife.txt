@@ -9,4 +9,3 @@ SVar:X:Count$CardCounters.BLOOD
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rakdos_riteknife.jpg
 Oracle:Equipped creature gets +1/+0 for each blood counter on Rakdos Riteknife and has "{T}, Sacrifice a creature: Put a blood counter on Rakdos Riteknife."\n{B}{R}, Sacrifice Rakdos Riteknife: Target player sacrifices a permanent for each blood counter on Rakdos Riteknife.\nEquip {2}
-SetInfo:DIS Rare

@@ -9,4 +9,3 @@ SVar:DonateTheVale:DB$ GainControl | Defined$ Self | NewController$ Player.Chose
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rainbow_vale.jpg
 Oracle:{T}: Add one mana of any color to your mana pool. An opponent gains control of Rainbow Vale at the beginning of the next end step.
-SetInfo:FEM Rare

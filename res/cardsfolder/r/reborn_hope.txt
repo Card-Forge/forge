@@ -5,4 +5,3 @@ A:SP$ ChangeZone | Cost$ G W | Origin$ Graveyard | Destination$ Hand | TgtPrompt
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reborn_hope.jpg
 Oracle:Return target multicolored card from your graveyard to your hand.
-SetInfo:ARB Uncommon

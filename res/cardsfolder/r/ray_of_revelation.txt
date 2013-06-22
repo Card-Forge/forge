@@ -5,5 +5,3 @@ K:Flashback G
 A:SP$ Destroy | Cost$ 1 W | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment. | SpellDescription$ Destroy target enchantment.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ray_of_revelation.jpg
 Oracle:Destroy target enchantment.\nFlashback {G} (You may cast this card from your graveyard for its flashback cost. Then exile it.)
-SetInfo:JUD Common
-SetInfo:DKA Common

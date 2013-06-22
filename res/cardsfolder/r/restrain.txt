@@ -5,4 +5,3 @@ A:SP$ Pump | Cost$ 2 W | ValidTgts$ Creature.attacking | TgtPrompt$ Select targe
 SVar:DBDraw:DB$Draw | NumCards$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/restrain.jpg
 Oracle:Prevent all combat damage that would be dealt by target attacking creature this turn.\nDraw a card.
-SetInfo:INV Common

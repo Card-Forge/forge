@@ -5,4 +5,3 @@ A:SP$ ChangeZone | Cost$ W | Origin$ Graveyard | Destination$ Library | LibraryP
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reinforcements.jpg
 Oracle:Put up to three target creature cards from your graveyard on top of your library.
-SetInfo:ALL Common x2

@@ -8,4 +8,3 @@ SVar:BuffedBy:Sliver
 SVar:AntiBuffedBy:Sliver
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reflex_sliver.jpg
 Oracle:All Sliver creatures have haste.
-SetInfo:PLC Common

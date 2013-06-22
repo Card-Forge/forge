@@ -5,4 +5,3 @@ A:SP$ Counter | Cost$ G | TargetType$ Activated | TgtPrompt$ Select target abili
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rust.jpg
 Oracle:Counter target activated ability from an artifact source. (Mana abilities can't be targeted.)
-SetInfo:LEG Common

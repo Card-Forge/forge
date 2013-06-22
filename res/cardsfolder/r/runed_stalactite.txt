@@ -5,4 +5,3 @@ S:Mode$ Continuous | Affected$ Card.EquippedBy | AddPower$ 1 | AddToughness$ 1 |
 K:Equip 2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/runed_stalactite.jpg
 Oracle:Equipped creature gets +1/+1 and is every creature type.\nEquip {2}
-SetInfo:LRW Common

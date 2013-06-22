@@ -13,4 +13,3 @@ SVar:Y:Count$Valid Permanent.nonDemon+YouDontCtrl/HalfUp
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rakdos_the_defiler.jpg
 Oracle:Flying, trample\nWhenever Rakdos the Defiler attacks, sacrifice half the non-Demon permanents you control, rounded up.\nWhenever Rakdos deals combat damage to a player, that player sacrifices half the non-Demon permanents he or she controls, rounded up.
-SetInfo:DIS Rare

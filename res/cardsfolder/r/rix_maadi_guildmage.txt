@@ -6,4 +6,3 @@ A:AB$ LoseLife | Cost$ B R | ValidTgts$ Player.LostLifeThisTurn | TgtPrompt$ Sel
 A:AB$ Pump | Cost$ B R | NumAtt$ -1 | NumDef$ -1 | ValidTgts$ Creature.blocking | TgtPrompt$ Select target blocking creature | IsCurse$ True | SpellDescription$ Target blocking creature gets -1/-1 until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rix_maadi_guildmage.jpg
 Oracle:{B}{R}: Target blocking creature gets -1/-1 until end of turn.\n{B}{R}: Target player who lost life this turn loses 1 life.
-SetInfo:RTR Uncommon

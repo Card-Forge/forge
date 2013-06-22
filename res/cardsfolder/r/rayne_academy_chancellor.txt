@@ -8,4 +8,3 @@ SVar:TrigAddDraw:DB$Draw | NumCards$ 1 | ConditionPresent$ Card.Self+enchanted |
 SVar:EnchantMe:Once
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rayne_academy_chancellor.jpg
 Oracle:Whenever you or a permanent you control becomes the target of a spell or ability an opponent controls, you may draw a card. You may draw an additional card if Rayne, Academy Chancellor is enchanted.
-SetInfo:UDS Rare

@@ -6,4 +6,3 @@ A:AB$ Regenerate | ValidTgts$ Creature | TgtPrompt$ Select target creature | Cos
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rushwood_herbalist.jpg
 Oracle:{G}, {T}, Discard a card: Regenerate target creature.
-SetInfo:MMQ Common

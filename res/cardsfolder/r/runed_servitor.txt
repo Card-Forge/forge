@@ -6,5 +6,3 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ Each | NumCards$ 1 | SpellDescription$ Each player draws a card.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/runed_servitor.jpg
 Oracle:When Runed Servitor dies, each player draws a card.
-SetInfo:ROE Uncommon
-SetInfo:DDF Uncommon

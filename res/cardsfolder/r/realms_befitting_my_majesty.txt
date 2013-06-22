@@ -5,4 +5,3 @@ T:Mode$ SetInMotion | ValidCard$ Card.Self | ValidCard$ Card.Self | Execute$ Get
 SVar:GetRealms:AB$ ChangeZone | Cost$ 0 | Origin$ Library | Destination$ Battlefield | Tapped$ True | ChangeType$ Land.Basic | ChangeNum$ 2
 SVar:Picture:http://www.cardforge.org/fpics/lq_schemes/realms_befitting_my_majesty.jpg
 Oracle:When you set this scheme in motion, search your library for up to two basic land cards, put them onto the battlefield tapped, then shuffle your library.
-SetInfo:ARC Common

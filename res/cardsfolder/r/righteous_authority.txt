@@ -9,4 +9,3 @@ T:Mode$ Phase | Phase$ Draw | ValidPlayer$ EnchantedController | TriggerZones$ B
 SVar:TrigDraw:AB$Draw | Cost$ 0 | NumCards$ 1 | Defined$ EnchantedController
 SVar:Picture:http://www.wizards.com/global/images/magic/general/righteous_authority.jpg
 Oracle:Enchant creature\nEnchanted creature gets +1/+1 for each card in its controller's hand.\nAt the beginning of the draw step of enchanted creature's controller, that player draws an additional card.
-SetInfo:RTR Rare

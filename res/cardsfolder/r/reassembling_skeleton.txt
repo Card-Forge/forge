@@ -7,8 +7,3 @@ SVar:SacMe:2
 SVar:DiscardMe:2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reassembling_skeleton.jpg
 Oracle:{1}{B}: Return Reassembling Skeleton from your graveyard to the battlefield tapped.
-SetInfo:M11 Uncommon
-SetInfo:DDJ Uncommon
-SetInfo:M12 Uncommon
-SetInfo:ARC Uncommon
-SetInfo:DDK Uncommon

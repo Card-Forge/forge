@@ -9,4 +9,3 @@ SVar:EquipMe:Once
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/raksha_golden_cub.jpg
 Oracle:Vigilance\nAs long as Raksha Golden Cub is equipped, Cat creatures you control get +2/+2 and have double strike.
-SetInfo:5DN Rare

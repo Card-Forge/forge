@@ -5,4 +5,3 @@ A:SP$ GainLife | Cost$ 1 W |  LifeAmount$ X | References$ X | ValidTgts$ Player 
 SVar:X:Count$Landfall.8.4
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rest_for_the_weary.jpg
 Oracle:Target player gains 4 life.\nLandfall - If you had a land enter the battlefield under your control this turn, that player gains 8 life instead.
-SetInfo:WWK Common

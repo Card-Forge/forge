@@ -5,5 +5,3 @@ A:SP$ Destroy | Cost$ 1 B B | TargetMin$ 2 | TargetMax$ 2 | ValidTgts$ Creature.
 SVar:DBLoseLife:DB$LoseLife | LifeAmount$ 5
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reckless_spite.jpg
 Oracle:Destroy two target nonblack creatures. You lose 5 life.
-SetInfo:TMP Uncommon
-SetInfo:INV Uncommon

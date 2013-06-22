@@ -9,5 +9,3 @@ SVar:DrawX:Remembered$Amount
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reprocess.jpg
 Oracle:Sacrifice any number of artifacts, creatures, and/or lands. Draw a card for each permanent sacrificed this way.
-SetInfo:7ED Rare
-SetInfo:USG Rare

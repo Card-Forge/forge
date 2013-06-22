@@ -9,5 +9,3 @@ SVar:BuffedBy:Goblin
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reckless_one.jpg
 Oracle:Haste\nReckless One's power and toughness are each equal to the number of Goblins on the battlefield.
-SetInfo:ONS Uncommon
-SetInfo:EVG Uncommon

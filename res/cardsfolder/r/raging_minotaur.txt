@@ -5,4 +5,3 @@ PT:3/3
 K:Haste
 SVar:Picture:http://resources.wizards.com/magic/cards/po/en-us/card4358.jpg
 Oracle:Haste
-SetInfo:POR Common

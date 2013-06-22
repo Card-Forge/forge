@@ -7,4 +7,3 @@ S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddToughness
 SVar:PumpA:AB$ Pump | Cost$ S | KW$ HIDDEN CantBeBlockedBy Creature.nonSnow | SpellDescription$ CARDNAME can't be blocked this turn except by snow creatures.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rime_transfusion.jpg
 Oracle:Enchant creature\nEnchanted creature gets +2/+1 and has "{S}: This creature can't be blocked this turn except by snow creatures." ({S} can be paid with one mana from a snow permanent.)
-SetInfo:CSP Uncommon

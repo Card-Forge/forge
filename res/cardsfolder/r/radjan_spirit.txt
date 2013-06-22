@@ -5,7 +5,3 @@ PT:3/2
 A:AB$ Debuff | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | Keywords$ Flying | SpellDescription$ Target creature loses flying until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/radjan_spirit.jpg
 Oracle:{T}: Target creature loses flying until end of turn.
-SetInfo:5ED Uncommon
-SetInfo:LEG Uncommon
-SetInfo:6ED Uncommon
-SetInfo:4ED Uncommon

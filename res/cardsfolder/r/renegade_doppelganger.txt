@@ -7,4 +7,3 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creatu
 SVar:RDCopy:AB$ Clone | Cost$ 0 | Defined$ TriggeredCard | Duration$ UntilEndOfTurn
 SVar:Picture:http://www.wizards.com/global/images/magic/general/renegade_doppelganger.jpg
 Oracle:Whenever another creature enters the battlefield under your control, you may have Renegade Doppelganger become a copy of that creature until end of turn. (If it does, it loses this ability for the rest of the turn.)
-SetInfo:ROE Rare

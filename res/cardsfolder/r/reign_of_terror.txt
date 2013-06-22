@@ -11,4 +11,3 @@ SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reign_of_terror.jpg
 Oracle:Destroy all green creatures or all white creatures. They can't be regenerated. You lose 2 life for each creature that died this way.
-SetInfo:MIR Uncommon

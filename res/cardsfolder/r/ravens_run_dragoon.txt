@@ -5,4 +5,3 @@ PT:3/3
 K:CantBeBlockedBy Creature.Black
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ravens_run_dragoon.jpg
 Oracle:Raven's Run Dragoon can't be blocked by black creatures.
-SetInfo:SHM Common

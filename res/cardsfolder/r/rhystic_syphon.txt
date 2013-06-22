@@ -8,4 +8,3 @@ SVar:DBReset:DB$ StoreSVar | SVar$ SyphonPaid | Type$ Number | Expression$ 0
 SVar:SyphonPaid:Number$0
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rhystic_syphon.jpg
 Oracle:Unless target player pays {3}, he or she loses 5 life and you gain 5 life.
-SetInfo:PCY Uncommon

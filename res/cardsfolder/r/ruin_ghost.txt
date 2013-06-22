@@ -7,4 +7,3 @@ SVar:DBReturn:DB$ ChangeZone | Cost$ 0 | Defined$ Remembered | Origin$ Exile | D
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ruin_ghost.jpg
 Oracle:{W}, {T}: Exile target land you control, then return it to the battlefield under your control.
-SetInfo:WWK Uncommon

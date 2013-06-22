@@ -9,4 +9,3 @@ SVar:RemRandomDeck:True
 DeckNeeds:Color$white
 SVar:Picture:http://www.wizards.com/global/images/magic/general/razor_golem.jpg
 Oracle:Affinity for Plains (This spell costs {1} less to cast for each Plains you control.)\nVigilance
-SetInfo:DST Common

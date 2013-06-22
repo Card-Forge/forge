@@ -6,5 +6,3 @@ SVar:NonStackingEffect:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/root_maze.jpg
 Oracle:Artifacts and lands enter the battlefield tapped.
-SetInfo:TMP Rare
-SetInfo:10E Rare

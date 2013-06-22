@@ -8,4 +8,3 @@ SVar:DBPump:DB$PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ 1 | NumDef$ 1
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/roar_of_the_kha.jpg
 Oracle:Choose one - Creatures you control get +1/+1 until end of turn; or untap all creatures you control.\nEntwine {1}{W} (Choose both if you pay the entwine cost.)
-SetInfo:MRD Uncommon

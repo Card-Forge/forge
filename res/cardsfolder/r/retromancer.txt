@@ -7,4 +7,3 @@ SVar:TrigDamage:AB$DealDamage | Cost$ 0 | Defined$ TriggeredCardController | Num
 SVar:Targeting:Counter
 SVar:Picture:http://www.wizards.com/global/images/magic/general/retromancer.jpg
 Oracle:Whenever Retromancer becomes the target of a spell or ability, Retromancer deals 3 damage to that spell or ability's controller.
-SetInfo:USG Common

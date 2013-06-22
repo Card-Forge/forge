@@ -8,4 +8,3 @@ A:AB$ ChangeZone | Cost$ 3 T | Origin$ Library | Destination$ Battlefield | Chan
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rathi_fiend.jpg
 Oracle:When Rathi Fiend enters the battlefield, each player loses 3 life.\n{3}, {T}: Search your library for a Mercenary permanent card with converted mana cost 3 or less and put it onto the battlefield. Then shuffle your library.
-SetInfo:NMS Uncommon

@@ -8,4 +8,3 @@ SVar:X:Targeted$CardPower
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rashida_scalebane.jpg
 Oracle:{T}: Destroy target attacking or blocking Dragon. It can't be regenerated. You gain life equal to its power.
-SetInfo:MIR Rare

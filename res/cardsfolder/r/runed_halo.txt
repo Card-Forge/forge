@@ -8,4 +8,3 @@ SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/runed_halo.jpg
 Oracle:As Runed Halo enters the battlefield, name a card.\nYou have protection from the chosen name. (You can't be targeted, dealt damage, or enchanted by anything with that name.)
-SetInfo:SHM Rare

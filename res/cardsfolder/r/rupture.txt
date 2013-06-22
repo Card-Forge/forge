@@ -8,4 +8,3 @@ SVar:X:Remembered$CardPower
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rupture.jpg
 Oracle:Sacrifice a creature. Rupture deals damage equal to that creature's power to each creature without flying and each player.
-SetInfo:NMS Uncommon

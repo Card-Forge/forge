@@ -9,4 +9,3 @@ SVar:X:TriggerCount$DamageAmount
 SVar:Y:TriggerCount$DamageAmount
 SVar:Picture:http://www.wizards.com/global/images/magic/general/repercussion.jpg
 Oracle:Whenever a creature is dealt damage, Repercussion deals that much damage to that creature's controller.
-SetInfo:UDS Rare

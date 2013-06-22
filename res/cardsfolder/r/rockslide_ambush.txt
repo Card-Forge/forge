@@ -5,4 +5,3 @@ A:SP$ DealDamage | Cost$ 1 R | ValidTgts$ Creature | TgtPrompt$ Select target cr
 SVar:X:Count$TypeYouCtrl.Mountain
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rockslide_ambush.jpg
 Oracle:Rockslide Ambush deals damage to target creature equal to the number of Mountains you control.
-SetInfo:PTK Uncommon

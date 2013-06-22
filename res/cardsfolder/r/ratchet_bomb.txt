@@ -6,4 +6,3 @@ A:AB$ DestroyAll | Cost$ T Sac<1/CARDNAME> | ValidCards$ Permanent.nonLand+cmcEQ
 SVar:X:Count$CardCounters.CHARGE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ratchet_bomb.jpg
 Oracle:{T}: Put a charge counter on Ratchet Bomb.\n{T}, Sacrifice Ratchet Bomb: Destroy each nonland permanent with converted mana cost equal to the number of charge counters on Ratchet Bomb.
-SetInfo:SOM Rare

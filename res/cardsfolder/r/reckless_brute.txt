@@ -6,4 +6,3 @@ K:Haste
 K:CARDNAME attacks each turn if able.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reckless_brute.jpg
 Oracle:Haste (This creature can attack and {T} as soon as it comes under your control.)\nReckless Brute attacks each turn if able.
-SetInfo:M13 Common

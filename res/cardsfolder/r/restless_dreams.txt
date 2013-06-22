@@ -7,4 +7,3 @@ SVar:MaxTgts:Count$TypeInYourYard.Creature
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/restless_dreams.jpg
 Oracle:As an additional cost to cast Restless Dreams, discard X cards.\nReturn X target creature cards from your graveyard to your hand.
-SetInfo:TOR Common

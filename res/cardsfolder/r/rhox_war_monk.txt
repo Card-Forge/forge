@@ -5,4 +5,3 @@ PT:3/4
 K:Lifelink
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rhox_war_monk.jpg
 Oracle:Lifelink
-SetInfo:ALA Uncommon

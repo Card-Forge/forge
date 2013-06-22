@@ -6,4 +6,3 @@ A:AB$ ChangeZone | Cost$ 1 U T | ValidTgts$ Creature.Wizard+YouCtrl | TgtPrompt$
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/riptide_laboratory.jpg
 Oracle:{T}: Add {1} to your mana pool.\n{1}{U}, {T}: Return target Wizard you control to its owner's hand.
-SetInfo:ONS Rare

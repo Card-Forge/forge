@@ -5,4 +5,3 @@ A:AB$ Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add 1 to your mana pool.
 A:AB$ Pump | Cost$ 4 T | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ HIDDEN Unblockable | SpellDescription$ Target creature is unblockable this turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rogues_passage.jpg
 Oracle:{T}: Add {1} to your mana pool.\n{4}, {T}: Target creature is unblockable this turn.
-SetInfo:RTR Uncommon

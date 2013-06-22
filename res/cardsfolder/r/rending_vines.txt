@@ -7,4 +7,3 @@ SVar:Y:Targeted$CardManaCost
 SVar:X:Count$InYourHand
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rending_vines.jpg
 Oracle:Destroy target artifact or enchantment if its converted mana cost is less than or equal to the number of cards in your hand.\nDraw a card.
-SetInfo:SOK Common

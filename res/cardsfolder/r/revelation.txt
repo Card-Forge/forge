@@ -7,5 +7,3 @@ SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/revelation.jpg
 Oracle:Players play with their hands revealed.
-SetInfo:CHR Rare
-SetInfo:LEG Rare

@@ -5,4 +5,3 @@ PT:4/2
 K:Haste
 SVar:Picture:http://www.wizards.com/global/images/magic/general/renegade_troops.jpg
 Oracle:Haste
-SetInfo:PTK Uncommon

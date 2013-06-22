@@ -6,4 +6,3 @@ SVar:UPaid:DB$ Counter | TargetType$ Spell | TgtPrompt$ Select target Creature s
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/repel_intruders.jpg
 Oracle:Put two 1/1 white Kithkin Soldier creature tokens onto the battlefield if {W} was spent to cast Repel Intruders. Counter up to one target creature spell if {U} was spent to cast Repel Intruders. (Do both if {W}{U} was spent.)
-SetInfo:SHM Uncommon

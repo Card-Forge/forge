@@ -8,4 +8,3 @@ SVar:TrigExile:AB$ChangeZone | Cost$ 0 | ValidTgts$ Creature.attacking | TgtProm
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/resounding_silence.jpg
 Oracle:Exile target attacking creature.\nCycling {5}{G}{W}{U} ({5}{G}{W}{U}, Discard this card: Draw a card.)\nWhen you cycle Resounding Silence, exile up to two target attacking creatures.
-SetInfo:ALA Common

@@ -4,5 +4,3 @@ Types:Instant
 A:SP$ Token | Cost$ 1 W | TokenAmount$ 2 | TokenName$ Soldier | TokenTypes$ Creature,Soldier | TokenOwner$ You | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | SpellDescription$ Put two 1/1 white Soldier creature tokens onto the battlefield.
 SVar:Picture:http://resources.wizards.com/magic/cards/mrd/en-us/card48103.jpg
 Oracle:Put two 1/1 white Soldier creature tokens onto the battlefield.
-SetInfo:MRD Common
-SetInfo:DDF Common

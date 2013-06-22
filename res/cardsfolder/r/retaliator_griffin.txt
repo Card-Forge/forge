@@ -9,4 +9,3 @@ SVar:X:TriggerCount$DamageAmount
 Svar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/retaliator_griffin.jpg
 Oracle:Flying\nWhenever a source an opponent controls deals damage to you, you may put that many +1/+1 counters on Retaliator Griffin.
-SetInfo:ARB Rare

@@ -6,4 +6,3 @@ SVar:DBDestroy:DB$DestroyAll | ValidCards$ Swamp.YouCtrl
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/return_of_the_nightstalkers.jpg
 Oracle:Return all Nightstalker permanent cards from your graveyard to the battlefield. Then destroy all Swamps you control.
-SetInfo:PO2 Rare

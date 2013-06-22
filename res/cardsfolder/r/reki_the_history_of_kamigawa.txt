@@ -6,4 +6,3 @@ T:Mode$ SpellCast | ValidCard$ Legendary | ValidActivatingPlayer$ You | Execute$
 SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reki_the_history_of_kamigawa.jpg
 Oracle:Whenever you cast a legendary spell, draw a card.
-SetInfo:SOK Rare

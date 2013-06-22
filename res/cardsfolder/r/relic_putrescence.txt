@@ -8,4 +8,3 @@ SVar:TrigPoison:AB$ Poison | Cost$ 0 | Defined$ TriggeredCardController | Num$ 1
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/relic_putrescence.jpg
 Oracle:Enchant artifact\nWhenever enchanted artifact becomes tapped, its controller gets a poison counter.
-SetInfo:SOM Common

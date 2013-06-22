@@ -5,4 +5,3 @@ A:SP$ ChangeZone | Cost$ 2 B | Origin$ Library | Destination$ Hand | ChangeType$
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rhystic_tutor.jpg
 Oracle:Unless any player pays {2}, search your library for a card, put that card into your hand, then shuffle your library.
-SetInfo:PCY Rare

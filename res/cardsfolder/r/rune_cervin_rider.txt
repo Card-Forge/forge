@@ -6,4 +6,3 @@ K:Flying
 A:AB$ Pump | Cost$ GW GW | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ CARDNAME gets +1/+1 until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rune_cervin_rider.jpg
 Oracle:Flying\n{G/W}{G/W}: Rune-Cervin Rider gets +1/+1 until end of turn.
-SetInfo:SHM Common

@@ -5,4 +5,3 @@ A:SP$ ChangeZoneAll | Cost$ 2 U | ChangeType$ Artifact | Origin$ Battlefield | D
 K:Cycling:2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rebuild.jpg
 Oracle:Return all artifacts to their owners' hands.\nCycling {2} ({2}, Discard this card: Draw a card.)
-SetInfo:ULG Uncommon

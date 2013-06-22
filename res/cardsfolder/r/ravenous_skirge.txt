@@ -7,4 +7,3 @@ T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$
 SVar:TrigPump:AB$Pump | Cost$ 0 | Defined$ Self | NumAtt$ 2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ravenous_skirge.jpg
 Oracle:Flying\nWhenever Ravenous Skirge attacks, it gets +2/+0 until end of turn.
-SetInfo:USG Common

@@ -6,4 +6,3 @@ K:Defender
 K:CARDNAME blocks each turn if able.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/razorgrass_screen.jpg
 Oracle:Defender (This creature can't attack.)\nRazorgrass Screen blocks each turn if able.
-SetInfo:5DN Common

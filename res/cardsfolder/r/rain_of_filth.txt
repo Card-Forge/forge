@@ -6,4 +6,3 @@ SVar:ABMana:AB$ Mana | Cost$ Sac<1/CARDNAME> | Produced$ B | SpellDescription$ A
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rain_of_filth.jpg
 Oracle:Until end of turn, lands you control gain "Sacrifice this land: Add {B} to your mana pool."
-SetInfo:USG Uncommon

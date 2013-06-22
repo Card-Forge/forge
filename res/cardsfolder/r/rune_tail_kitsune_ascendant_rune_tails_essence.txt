@@ -18,5 +18,3 @@ S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddHiddenKeyword$ Prevent all 
 SVar:Picture:http://www.marc-fowler-design.com/cardforge/flippedcards/SOK/rune_tails_essence.jpg
 # This link may be a temporary solution and could change in the near future.
 Oracle:Prevent all damage that would be dealt to creatures you control.
-
-SetInfo:SOK Rare

@@ -5,4 +5,3 @@ PT:3/3
 A:AB$ Animate | Cost$ 2 | Defined$ Card.Self | Colors$ Colorless | SpellDescription$ CARDNAME becomes colorless until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/raging_spirit.jpg
 Oracle:{2}: Raging Spirit becomes colorless until end of turn.
-SetInfo:MIR Common

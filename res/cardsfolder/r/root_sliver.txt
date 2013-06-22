@@ -6,4 +6,3 @@ K:CARDNAME can't be countered.
 S:Mode$ Continuous | Affected$ Sliver | AddHiddenKeyword$ CARDNAME can't be countered. | AffectedZone$ Stack | Description$ Sliver spells can't be countered by spells or abilities.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/root_sliver.jpg
 Oracle:Root Sliver can't be countered.\nSliver spells can't be countered by spells or abilities.
-SetInfo:LGN Uncommon

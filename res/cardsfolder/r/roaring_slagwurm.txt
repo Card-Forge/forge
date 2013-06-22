@@ -6,4 +6,3 @@ T:Mode$Attacks | ValidCard$ Card.Self | Execute$ TrigTapAll | TriggerDescription
 SVar:TrigTapAll:AB$TapAll | Cost$ 0 | ValidCards$ Artifact
 SVar:Picture:http://www.wizards.com/global/images/magic/general/roaring_slagwurm.jpg
 Oracle:Whenever Roaring Slagwurm attacks, tap all artifacts.
-SetInfo:DST Rare

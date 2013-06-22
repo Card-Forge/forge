@@ -8,4 +8,3 @@ SVar:TrigDiscard:AB$Discard | Cost$ 0 | ValidTgts$ Player | TgtPrompt$ Select ta
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/resounding_scream.jpg
 Oracle:Target player discards a card at random.\nCycling {5}{U}{B}{R} ({5}{U}{B}{R}, Discard this card: Draw a card.)\nWhen you cycle Resounding Scream, target player discards two cards at random.
-SetInfo:ALA Common

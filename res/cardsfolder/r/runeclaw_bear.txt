@@ -4,6 +4,3 @@ Types:Creature Bear
 PT:2/2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/runeclaw_bear.jpg
 Oracle:
-SetInfo:M11 Common
-SetInfo:M10 Common
-SetInfo:M12 Common

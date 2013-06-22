@@ -8,4 +8,3 @@ SVar:ProtectionChosen:Mode$ Continuous | EffectZone$ Command | Affected$ Creatur
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reverent_mantra.jpg
 Oracle:You may exile a white card from your hand rather than pay Reverent Mantra's mana cost.\nChoose a color. All creatures gain protection from the chosen color until end of turn.
-SetInfo:MMQ Rare

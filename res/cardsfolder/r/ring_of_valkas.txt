@@ -9,4 +9,3 @@ SVar:RemRandomDeck:True
 DeckNeeds:Color$Red
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ring_of_valkas.jpg
 Oracle:Equipped creature has haste. (It can attack and {T} no matter when it came under your control.)\nAt the beginning of your upkeep, put a +1/+1 counter on equipped creature if it's red.\nEquip {1} ({1}: Attach to target creature you control. Equip only as a sorcery.)
-SetInfo:M13 Uncommon

@@ -7,8 +7,3 @@ S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Protection fro
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/red_ward.jpg
 Oracle:Enchant creature\nEnchanted creature has protection from red. This effect doesn't remove Red Ward.
-SetInfo:LEB Uncommon
-SetInfo:4ED Uncommon
-SetInfo:LEA Uncommon
-SetInfo:3ED Uncommon
-SetInfo:2ED Uncommon

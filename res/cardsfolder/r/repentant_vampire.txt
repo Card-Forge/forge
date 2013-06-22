@@ -9,4 +9,3 @@ SVar:Destroy:AB$Destroy | Cost$ T | ValidTgts$ Creature.Black | TgtPrompt$ Selec
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/repentant_vampire.jpg
 Oracle:Flying\nWhenever a creature dealt damage by Repentant Vampire this turn dies, put a +1/+1 counter on Repentant Vampire.\nThreshold - As long as seven or more cards are in your graveyard, Repentant Vampire is white and has "{T}: Destroy target black creature."
-SetInfo:ODY Rare

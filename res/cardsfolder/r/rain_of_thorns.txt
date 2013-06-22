@@ -7,4 +7,3 @@ SVar:DestroyEnchantment:DB$ Destroy | ValidTgts$ Enchantment | TgtPrompt$ Select
 SVar:DestroyLand:DB$ Destroy | ValidTgts$ Land | TgtPrompt$ Select target land | SpellDescription$ Destroy target land;
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rain_of_thorns.jpg
 Oracle:Choose one or more - Destroy target artifact; destroy target enchantment; and/or destroy target land.
-SetInfo:AVR Uncommon

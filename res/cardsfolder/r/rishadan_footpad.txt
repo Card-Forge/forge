@@ -8,4 +8,3 @@ SVar:TrigSac:DB$ Sacrifice | Defined$ Remembered | SacValid$ Permanent | SacMess
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rishadan_footpad.jpg
 Oracle:When Rishadan Footpad enters the battlefield, each opponent sacrifices a permanent unless he or she pays {2}.
-SetInfo:MMQ Uncommon

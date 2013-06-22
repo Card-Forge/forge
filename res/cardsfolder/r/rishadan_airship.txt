@@ -6,4 +6,3 @@ K:Flying
 K:CARDNAME can block only creatures with flying.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rishadan_airship.jpg
 Oracle:Flying\nRishadan Airship can block only creatures with flying.
-SetInfo:MMQ Common

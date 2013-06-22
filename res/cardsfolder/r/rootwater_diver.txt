@@ -6,4 +6,3 @@ A:AB$ ChangeZone | Cost$ T Sac<1/CARDNAME> | TgtPrompt$ Choose target artifact c
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rootwater_diver.jpg
 Oracle:{T}, Sacrifice Rootwater Diver: Return target artifact card from your graveyard to your hand.
-SetInfo:TMP Uncommon

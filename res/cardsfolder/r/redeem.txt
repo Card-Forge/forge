@@ -5,5 +5,3 @@ A:SP$ Pump | Cost$ 1 W | TargetMin$ 0 | TargetMax$ 2 | TgtPrompt$ Select up to t
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/redeem.jpg
 Oracle:Prevent all damage that would be dealt this turn to up to two target creatures.
-SetInfo:8ED Common
-SetInfo:USG Uncommon

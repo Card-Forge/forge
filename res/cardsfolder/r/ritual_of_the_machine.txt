@@ -5,4 +5,3 @@ A:SP$ GainControl | Cost$ 2 B B Sac<1/Creature> | ValidTgts$ Creature.nonBlack+n
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ritual_of_the_machine.jpg
 Oracle:As an additional cost to cast Ritual of the Machine, sacrifice a creature.\nGain control of target nonartifact, nonblack creature.
-SetInfo:ALL Rare

@@ -6,4 +6,3 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigDestroy:AB$Destroy | Cost$ 0 | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reliquary_monk.jpg
 Oracle:When Reliquary Monk dies, destroy target artifact or enchantment.
-SetInfo:UDS Common

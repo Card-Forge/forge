@@ -5,4 +5,3 @@ PT:1/2
 K:Snow forestwalk
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rime_dryad.jpg
 Oracle:Snow forestwalk
-SetInfo:ICE Common

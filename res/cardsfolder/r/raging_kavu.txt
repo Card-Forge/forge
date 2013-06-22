@@ -6,5 +6,3 @@ K:Flash
 K:Haste
 SVar:Picture:http://www.wizards.com/global/images/magic/general/raging_kavu.jpg
 Oracle:Flash\nHaste
-SetInfo:MBP Rare
-SetInfo:INV Rare

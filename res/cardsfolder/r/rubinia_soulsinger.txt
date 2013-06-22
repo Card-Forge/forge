@@ -6,5 +6,3 @@ K:You may choose not to untap CARDNAME during your untap step.
 A:AB$ GainControl | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | LoseControl$ Untap,LeavesPlay,LoseControl | SpellDescription$ Gain control of target creature for as long as you control Rubinia and Rubinia remains tapped.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rubinia_soulsinger.jpg
 Oracle:You may choose not to untap Rubinia Soulsinger during your untap step.\n{T}: Gain control of target creature for as long as you control Rubinia and Rubinia remains tapped.
-SetInfo:CHR Rare
-SetInfo:LEG Rare

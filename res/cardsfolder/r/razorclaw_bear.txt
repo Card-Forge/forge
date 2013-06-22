@@ -6,4 +6,3 @@ T:Mode$ AttackerBlocked | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDesc
 SVar:TrigPump:AB$Pump | Cost$ 0 | Defined$ Self | NumAtt$ 2 | NumDef$ 2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/razorclaw_bear.jpg
 Oracle:Whenever Razorclaw Bear becomes blocked, it gets +2/+2 until end of turn.
-SetInfo:PO2 Rare

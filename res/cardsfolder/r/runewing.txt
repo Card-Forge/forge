@@ -8,4 +8,3 @@ SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ TriggeredCardController | NumCards$ 1
 SVar:SacMe:1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/runewing.jpg
 Oracle:Flying\nWhen Runewing dies, draw a card.
-SetInfo:RTR Common

@@ -7,4 +7,3 @@ SVar:NonStackingEffect:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/root_cage.jpg
 Oracle:Mercenaries don't untap during their controllers' untap steps.
-SetInfo:PCY Uncommon

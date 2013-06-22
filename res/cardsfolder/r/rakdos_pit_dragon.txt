@@ -8,5 +8,3 @@ S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Double Strike | Condition
 SVar:BuffedBy:Card
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rakdos_pit_dragon.jpg
 Oracle:{R}{R}: Rakdos Pit Dragon gains flying until end of turn.\n{R}: Rakdos Pit Dragon gets +1/+0 until end of turn.\nHellbent - Rakdos Pit Dragon has double strike as long as you have no cards in hand.
-SetInfo:DD2 Rare
-SetInfo:DIS Rare

@@ -5,7 +5,3 @@ A:SP$ Counter | Cost$ 2 U U | TargetType$ Spell | TgtPrompt$ Select target spell
 SVar:DBUntap:DB$ Untap | UntapUpTo$ True | UntapType$ Land | Amount$ 4
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rewind.jpg
 Oracle:Counter target spell. Untap up to four lands.
-SetInfo:8ED Uncommon
-SetInfo:M13 Uncommon
-SetInfo:9ED Uncommon
-SetInfo:USG Common

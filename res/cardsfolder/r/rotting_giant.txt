@@ -8,4 +8,3 @@ SVar:TrigSac:AB$ Sacrifice | Cost$ 0 | Defined$ Self | UnlessCost$ ExileFromGrav
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rotting_giant.jpg
 Oracle:Whenever Rotting Giant attacks or blocks, sacrifice it unless you exile a card from your graveyard.
-SetInfo:ODY Uncommon

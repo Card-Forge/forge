@@ -6,6 +6,3 @@ T:Mode$ Drawn | ValidCard$ Land.Basic+YouCtrl | TriggerZones$ Battlefield | Numb
 SVar:TrigDraw:AB$Draw | Cost$ 0 | NumCards$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rowen.jpg
 Oracle:Reveal the first card you draw each turn. Whenever you reveal a basic land card this way, draw a card.
-SetInfo:VIS Rare
-SetInfo:7ED Rare
-SetInfo:6ED Rare

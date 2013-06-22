@@ -6,5 +6,3 @@ T:Mode$ Phase | Phase$ Draw | ValidPlayer$ Player | TriggerZones$ Battlefield | 
 SVar:TrigDraw:AB$Draw | Cost$ 0 | NumCards$ 1 | Defined$ TriggeredPlayer
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rites_of_flourishing.jpg
 Oracle:At the beginning of each player's draw step, that player draws an additional card.\nEach player may play an additional land on each of his or her turns.
-SetInfo:FUT Rare
-SetInfo:M12 Rare

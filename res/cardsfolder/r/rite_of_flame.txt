@@ -6,4 +6,3 @@ SVar:X:Count$NamedInAllYards.Rite of Flame/Plus.2
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rite_of_flame.jpg
 Oracle:Add {R}{R} to your mana pool, then add {R} to your mana pool for each card named Rite of Flame in each graveyard.
-SetInfo:CSP Common

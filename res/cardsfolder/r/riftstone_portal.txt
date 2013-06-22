@@ -7,4 +7,3 @@ SVar:ManaG:AB$Mana | Cost$ T | Produced$ G | SpellDescription$ Add G to your man
 SVar:ManaW:AB$Mana | Cost$ T | Produced$ W | SpellDescription$ Add W to your mana pool.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/riftstone_portal.jpg
 Oracle:{T}: Add {1} to your mana pool.\nAs long as Riftstone Portal is in your graveyard, lands you control have "{T}: Add {G} or {W} to your mana pool."
-SetInfo:JUD Uncommon

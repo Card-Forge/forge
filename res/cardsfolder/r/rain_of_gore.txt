@@ -8,4 +8,3 @@ SVar:NonStackingEffect:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rain_of_gore.jpg
 Oracle:If a spell or ability would cause its controller to gain life, that player loses that much life instead.
-SetInfo:DIS Rare

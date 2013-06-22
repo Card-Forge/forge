@@ -6,4 +6,3 @@ SVar:X:Count$TypeYouCtrl.Spirit
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ribbons_of_the_reikai.jpg
 Oracle:Draw a card for each Spirit you control.
-SetInfo:BOK Common

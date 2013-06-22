@@ -7,4 +7,3 @@ SVar:STPrevent:Mode$ PreventDamage | EffectZone$ Command | Source$ Creature.Blue
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/radiant_kavu.jpg
 Oracle:{R}{G}{W}: Prevent all combat damage blue creatures and black creatures would deal this turn.
-SetInfo:PLS Rare

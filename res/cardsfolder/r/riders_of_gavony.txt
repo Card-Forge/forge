@@ -9,4 +9,3 @@ S:Mode$ Continuous | Affected$ Creature.Human+YouCtrl | AddKeyword$ Protection:C
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/riders_of_gavony.jpg
 Oracle:Vigilance\nAs Riders of Gavony enters the battlefield, choose a creature type.\nHuman creatures you control have protection from creatures of the chosen type.
-SetInfo:AVR Rare

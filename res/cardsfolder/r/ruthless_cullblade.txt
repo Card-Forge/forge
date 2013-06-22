@@ -6,4 +6,3 @@ S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 2 | AddToughness$ 1 | Check
 SVar:X:PlayerCountOpponents$LowestLifeTotal
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ruthless_cullblade.jpg
 Oracle:Ruthless Cullblade gets +2/+1 as long as an opponent has 10 or less life.
-SetInfo:WWK Common

@@ -8,4 +8,3 @@ SVar:DBDiscard:DB$Discard | Defined$ You | Mode$ TgtChoose | NumCards$ 1
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/riddlesmith.jpg
 Oracle:Whenever you cast an artifact spell, you may draw a card. If you do, discard a card.
-SetInfo:SOM Uncommon

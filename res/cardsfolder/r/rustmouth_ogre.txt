@@ -6,4 +6,3 @@ T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | Execute$ T
 SVar:TrigDestroy:AB$Destroy | Cost$ 0 | ValidTgts$ Artifact.DefenderCtrl | TgtPrompt$ Select an artifact your opponent controls.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rustmouth_ogre.jpg
 Oracle:Whenever Rustmouth Ogre deals combat damage to a player, you may destroy target artifact that player controls.
-SetInfo:MRD Uncommon

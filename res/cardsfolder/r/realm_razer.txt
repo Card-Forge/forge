@@ -10,4 +10,3 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/realm_razer.jpg
 Oracle:When Realm Razer enters the battlefield, exile all lands.\nWhen Realm Razer leaves the battlefield, return the exiled cards to the battlefield tapped under their owners' control.
-SetInfo:ALA Rare

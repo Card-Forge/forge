@@ -4,4 +4,3 @@ Types:Instant Arcane
 A:SP$ Destroy | Cost$ 2 B | ValidTgts$ Creature.nonSpirit | TgtPrompt$ Select target non-Spirit creature | SpellDescription$ Destroy target non-Spirit creature.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rend_flesh.jpg
 Oracle:Destroy target non-Spirit creature.
-SetInfo:CHK Common

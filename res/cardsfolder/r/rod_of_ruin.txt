@@ -4,16 +4,3 @@ Types:Artifact
 A:AB$ DealDamage | Cost$ 3 T | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target creature or player.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rod_of_ruin.jpg
 Oracle:{3}, {T}: Rod of Ruin deals 1 damage to target creature or player.
-SetInfo:8ED Uncommon
-SetInfo:2ED Uncommon
-SetInfo:7ED Uncommon
-SetInfo:6ED Uncommon
-SetInfo:S00 Uncommon
-SetInfo:M10 Uncommon
-SetInfo:9ED Uncommon
-SetInfo:10E Uncommon
-SetInfo:LEB Uncommon
-SetInfo:LEA Uncommon
-SetInfo:5ED Uncommon
-SetInfo:4ED Uncommon
-SetInfo:3ED Uncommon

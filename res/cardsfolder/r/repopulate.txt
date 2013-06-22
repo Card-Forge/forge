@@ -6,4 +6,3 @@ K:Cycling:2
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/repopulate.jpg
 Oracle:Shuffle all creature cards from target player's graveyard into that player's library.\nCycling {2} ({2}, Discard this card: Draw a card.)
-SetInfo:ULG Common

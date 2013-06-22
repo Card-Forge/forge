@@ -5,4 +5,3 @@ A:AB$ Tap | Cost$ U | ValidTgts$ Creature | TgtPrompt$ Select target creature | 
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rhystic_deluge.jpg
 Oracle:{U}: Tap target creature unless its controller pays {1}.
-SetInfo:PCY Common

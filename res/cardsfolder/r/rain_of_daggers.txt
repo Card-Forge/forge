@@ -7,4 +7,3 @@ SVar:X:Remembered$Amount.Twice
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rain_of_daggers.jpg
 Oracle:Destroy all creatures target opponent controls. You lose 2 life for each creature destroyed this way.
-SetInfo:PO2 Rare

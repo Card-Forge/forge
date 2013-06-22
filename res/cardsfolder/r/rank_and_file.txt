@@ -8,4 +8,3 @@ SVar:PlayMain1:TRUE
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rank_and_file.jpg
 Oracle:When Rank and File enters the battlefield, green creatures get -1/-1 until end of turn.
-SetInfo:ULG Uncommon

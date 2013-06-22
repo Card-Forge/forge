@@ -7,4 +7,3 @@ SVar:GainLife:AB$GainLife | Cost$ T | LifeAmount$ 1 | Defined$ You | SpellDescri
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/resplendent_mentor.jpg
 Oracle:White creatures you control have "{T}: You gain 1 life."
-SetInfo:SHM Uncommon

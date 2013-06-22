@@ -7,4 +7,3 @@ A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add W to your mana pool.
 K:CARDNAME enters the battlefield tapped unless you control two or fewer other lands.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/razorverge_thicket.jpg
 Oracle:Razorverge Thicket enters the battlefield tapped unless you control two or fewer other lands.\n{T}: Add {G} or {W} to your mana pool.
-SetInfo:SOM Rare

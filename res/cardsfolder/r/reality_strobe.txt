@@ -8,4 +8,3 @@ SVar:DBPutCounter:DB$PutCounter | Defined$ Remembered | CounterType$ TIME | Coun
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reality_strobe.jpg
 Oracle:Return target permanent to its owner's hand. Exile Reality Strobe with three time counters on it.\nSuspend 3-{2}{U} (Rather than cast this card from your hand, you may pay {2}{U} and exile it with three time counters on it. At the beginning of your upkeep, remove a time counter. When the last is removed, cast it without paying its mana cost.)
-SetInfo:FUT Uncommon

@@ -7,4 +7,3 @@ SVar:NonStackingEffect:True
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/righteous_war.jpg
 Oracle:White creatures you control have protection from black.\nBlack creatures you control have protection from white.
-SetInfo:VIS Rare

@@ -7,4 +7,3 @@ SVar:DBUntapAll:DB$ UntapAll | ValidCards$ Creature.ChosenType
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/riptide_chronologist.jpg
 Oracle:{U}, Sacrifice Riptide Chronologist: Untap all creatures of the creature type of your choice.
-SetInfo:ONS Uncommon

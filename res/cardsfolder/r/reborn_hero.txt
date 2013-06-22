@@ -8,4 +8,3 @@ SVar:TriggerBounce:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefiel
 SVar:TriggeredBounce:AB$ ChangeZone | Cost$ W W | ValidCard$ Card.Self | Origin$ Graveyard | Destination$ Battlefield
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reborn_hero.jpg
 Oracle:Vigilance\nThreshold - As long as seven or more cards are in your graveyard, Reborn Hero has "When Reborn Hero dies, you may pay {W}{W}. If you do, return Reborn Hero to the battlefield under your control."
-SetInfo:TOR Rare

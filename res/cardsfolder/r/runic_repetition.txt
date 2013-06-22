@@ -5,4 +5,3 @@ A:SP$ ChangeZone | Cost$ 2 U | Origin$ Exile | Destination$ Hand | TgtPrompt$ Se
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/runic_repetition.jpg
 Oracle:Return target exiled card with flashback you own to your hand.
-SetInfo:ISD Uncommon

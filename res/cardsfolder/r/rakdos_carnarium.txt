@@ -8,7 +8,3 @@ SVar:TrigReturn:AB$ChangeZone | Origin$ Battlefield | Destination$ Hand | Cost$ 
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rakdos_carnarium.jpg
 Oracle:Rakdos Carnarium enters the battlefield tapped.\nWhen Rakdos Carnarium enters the battlefield, return a land you control to its owner's hand.\n{T}: Add {B}{R} to your mana pool.
-SetInfo:DDK Common
-SetInfo:ARC Common
-SetInfo:COM Common
-SetInfo:DIS Common

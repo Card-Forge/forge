@@ -8,6 +8,3 @@ SVar:TrigDestroyAll:AB$DestroyAll | Cost$ 0 | ValidCards$ Creature.nonArtifact+n
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reiver_demon.jpg
 Oracle:Flying\nWhen Reiver Demon enters the battlefield, if you cast it from your hand, destroy all nonartifact, nonblack creatures. They can't be regenerated.
-SetInfo:MRD Rare
-SetInfo:DDC Rare
-SetInfo:COM Rare

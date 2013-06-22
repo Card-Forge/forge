@@ -9,4 +9,3 @@ SVar:TrigLoseLife:AB$ LoseLife | Cost$ 0 | Defined$ TriggeredCardController | Li
 SVar:X:TriggerCount$DamageAmount
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ragged_veins.jpg
 Oracle:Flash\nEnchant creature\nWhenever enchanted creature is dealt damage, its controller loses that much life.
-SetInfo:CHK Common

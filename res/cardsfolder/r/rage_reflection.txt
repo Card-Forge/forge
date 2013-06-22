@@ -6,4 +6,3 @@ SVar:NonStackingEffect:True
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rage_reflection.jpg
 Oracle:Creatures you control have double strike.
-SetInfo:SHM Rare

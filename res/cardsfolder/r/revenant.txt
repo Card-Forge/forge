@@ -8,6 +8,3 @@ SVar:X:Count$TypeInYourYard.Creature
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/revenant.jpg
 Oracle:Flying\nRevenant's power and toughness are each equal to the number of creature cards in your graveyard.
-SetInfo:MBP Rare
-SetInfo:7ED Rare
-SetInfo:STH Rare

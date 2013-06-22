@@ -10,4 +10,3 @@ SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/retraced_image.jpg
 Oracle:Reveal a card in your hand, then put that card onto the battlefield if it has the same name as a permanent.
-SetInfo:TOR Rare

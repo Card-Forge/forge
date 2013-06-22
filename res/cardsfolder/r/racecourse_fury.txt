@@ -8,4 +8,3 @@ SVar:RFPump:AB$ Pump | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target 
 SVar:NonStackingEffect:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/racecourse_fury.jpg
 Oracle:Enchant land\nEnchanted land has "{T}: Target creature gains haste until end of turn."
-SetInfo:RTR Uncommon

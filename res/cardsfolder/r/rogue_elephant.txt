@@ -7,4 +7,3 @@ SVar:TrigSacUnless:AB$ Sacrifice | Cost$ 0 | Defined$ Self | UnlessCost$ Sac<1/F
 SVar:NeedsToPlay:Forest.YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rogue_elephant.jpg
 Oracle:When Rogue Elephant enters the battlefield, sacrifice it unless you sacrifice a Forest.
-SetInfo:WTH Common

@@ -5,5 +5,3 @@ A:SP$ ChangeZone | Cost$ 2 W W | Origin$ Battlefield | Destination$ Exile | Vali
 SVar:X:Count$IfMainPhase.2.1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/return_to_dust.jpg
 Oracle:Exile target artifact or enchantment. If you cast this spell during your main phase, you may exile up to one other target artifact or enchantment.
-SetInfo:COM Uncommon
-SetInfo:TSP Uncommon

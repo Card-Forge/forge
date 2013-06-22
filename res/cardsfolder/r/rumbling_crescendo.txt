@@ -8,4 +8,3 @@ SVar:X:Count$CardCounters.VERSE
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rumbling_crescendo.jpg
 Oracle:At the beginning of your upkeep, you may put a verse counter on Rumbling Crescendo.\n{R}, Sacrifice Rumbling Crescendo: Destroy up to X target lands, where X is the number of verse counters on Rumbling Crescendo.
-SetInfo:USG Rare

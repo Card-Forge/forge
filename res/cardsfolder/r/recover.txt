@@ -5,5 +5,3 @@ A:SP$ ChangeZone | Cost$ 2 B | Origin$ Graveyard | Destination$ Hand | TgtPrompt
 SVar:DBDraw:DB$Draw | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/recover.jpg
 Oracle:Return target creature card from your graveyard to your hand.\nDraw a card.
-SetInfo:10E Common
-SetInfo:INV Common

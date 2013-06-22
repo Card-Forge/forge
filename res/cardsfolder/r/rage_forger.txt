@@ -8,4 +8,3 @@ T:Mode$ Attacks | ValidCard$ Creature.YouCtrl+counters_GE1_P1P1 | TriggerZones$ 
 SVar:TrigDamage:AB$DealDamage | Cost$ 0 | ValidTgts$ Player | TgtPrompt$ Select target player | TgtPrompt$ Select target player | NumDmg$ 1 | DamageSource$ TriggeredAttacker
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rage_forger.jpg
 Oracle:When Rage Forger enters the battlefield, put a +1/+1 counter on each other Shaman creature you control.\nWhenever a creature you control with a +1/+1 counter on it attacks, you may have that creature deal 1 damage to target player.
-SetInfo:MOR Uncommon

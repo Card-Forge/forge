@@ -8,4 +8,3 @@ SVar:TrigTokenL:AB$Token | Cost$ 1 | TokenOwner$ You | TokenAmount$ 1 | TokenNam
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rebellion_of_the_flamekin.jpg
 Oracle:Whenever you clash, you may pay {1}. If you do, put a 3/1 red Elemental Shaman creature token onto the battlefield. If you won, that token gains haste until end of turn. (This ability triggers after the clash ends.)
-SetInfo:LRW Uncommon

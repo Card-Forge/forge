@@ -10,4 +10,3 @@ SVar:X:Count$Compare RhysticPaid EQ1.2.4
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rhystic_lightning.jpg
 Oracle:Rhystic Lightning deals 4 damage to target creature or player unless that creature's controller or that player pays {2}. If he or she does, Rhystic Lightning deals 2 damage to the creature or player.
-SetInfo:PCY Common

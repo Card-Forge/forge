@@ -4,5 +4,3 @@ Types:Sorcery
 A:SP$ DestroyAll | Cost$ 3 R | ValidCards$ Land.nonBasic | SpellDescription$ Destroy all nonbasic lands.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ruination.jpg
 Oracle:Destroy all nonbasic lands.
-SetInfo:COM Rare
-SetInfo:STH Rare

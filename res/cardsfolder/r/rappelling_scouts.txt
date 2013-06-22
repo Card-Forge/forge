@@ -7,4 +7,3 @@ A:AB$ Protection | Cost$ 2 W | Gains$ Choice | Choices$ AnyColor | SpellDescript
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rappelling_scouts.jpg
 Oracle:Flying\n{2}{W}: Rappelling Scouts gains protection from the color of your choice until end of turn.
-SetInfo:MMQ Rare

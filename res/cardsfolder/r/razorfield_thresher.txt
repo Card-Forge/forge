@@ -4,4 +4,3 @@ Types:Artifact Creature Construct
 PT:6/4
 SVar:Picture:http://www.wizards.com/global/images/magic/general/razorfield_thresher.jpg
 Oracle:
-SetInfo:SOM Common

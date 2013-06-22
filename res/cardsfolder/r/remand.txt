@@ -5,4 +5,3 @@ A:SP$ Counter | Cost$ 1 U | TargetType$ Spell | TgtPrompt$ Select target spell |
 SVar:DBDraw:DB$Draw | NumCards$ 1
 SVar:Picture:http://resources.wizards.com/magic/cards/rav/en-us/card87919.jpg
 Oracle:Counter target spell. If that spell is countered this way, put it into its owner's hand instead of into that player's graveyard.\nDraw a card.
-SetInfo:RAV Uncommon

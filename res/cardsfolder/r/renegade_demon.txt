@@ -4,4 +4,3 @@ Types:Creature Demon
 PT:5/3
 SVar:Picture:http://www.wizards.com/global/images/magic/general/renegade_demon.jpg
 Oracle:
-SetInfo:AVR Common

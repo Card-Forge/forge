@@ -8,4 +8,3 @@ SVar:DBDestroyBlue:DB$Destroy | ValidTgts$ Creature.Blue | TgtPrompt$ Select tar
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reign_of_chaos.jpg
 Oracle:Choose one - Destroy target Plains and target white creature; or destroy target Island and target blue creature.
-SetInfo:MIR Uncommon

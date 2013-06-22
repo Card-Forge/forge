@@ -9,4 +9,3 @@ SVar:X:Count$Valid Creature.Other+withFlying
 SVar:BuffedBy:Creature.withFlying
 SVar:Picture:http://resources.wizards.com/magic/cards/gu/en-us/card12368.jpg
 Oracle:Flying, vigilance\nRadiant, Archangel gets +1/+1 for each other creature with flying on the battlefield.
-SetInfo:ULG Rare

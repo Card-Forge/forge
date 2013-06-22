@@ -8,4 +8,3 @@ SVar:RemRandomDeck:True
 DeckNeeds:Color$Black|Red
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rakdos_keyrune.jpg
 Oracle:{T}: Add {B} or {R} to your mana pool.\n{B}{R}: Rakdos Keyrune becomes a 3/1 black and red Devil artifact creature with first strike until end of turn.
-SetInfo:RTR Uncommon

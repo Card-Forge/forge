@@ -7,4 +7,3 @@ A:SP$ Destroy | Cost$ 4 G G | ValidTgts$ Land | TgtPrompt$ Select target land | 
 SVar:DBChange:DB$ChangeZone | Cost$ 0 | Origin$ Library | Destination$ Battlefield | ChangeType$ Land | ChangeNum$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reap_and_sow.jpg
 Oracle:Choose one - Destroy target land; or search your library for a land card, put that card onto the battlefield, then shuffle your library.\nEntwine {1}{G} (Choose both if you pay the entwine cost.)
-SetInfo:DST Common

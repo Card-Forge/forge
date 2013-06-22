@@ -4,4 +4,3 @@ Types:Creature Zombie Snake
 PT:5/1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rotting_fensnake.jpg
 Oracle:
-SetInfo:ISD Common

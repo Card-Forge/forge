@@ -5,4 +5,3 @@ T:Mode$ SetInMotion | ValidCard$ Card.Self | Execute$ GetSaps | TriggerZones$ Co
 SVar:GetSaps:DB$ Token | Cost$ 0 | TokenAmount$ 5 | TokenName$ Saproling | TokenTypes$ Creature,Saproling | TokenOwner$ You | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1
 SVar:Picture:http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=212602&type=card
 Oracle:When you set this scheme in motion, put five 1/1 green Saproling creature tokens onto the battlefield.
-SetInfo:ARC Common

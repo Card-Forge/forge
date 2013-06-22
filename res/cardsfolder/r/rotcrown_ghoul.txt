@@ -6,4 +6,3 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigMill:AB$ Mill | Cost$ 0 | NumCards$ 5 | ValidTgts$ Player | TgtPrompt$ Select target player
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rotcrown_ghoul.jpg
 Oracle:When Rotcrown Ghoul dies, target player puts the top five cards of his or her library into his or her graveyard.
-SetInfo:AVR Common

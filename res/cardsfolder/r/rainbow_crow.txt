@@ -8,4 +8,3 @@ SVar:Animate:DB$ Animate | Defined$ Self | Colors$ ChosenColor | OverwriteColors
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rainbow_crow.jpg
 Oracle:Flying\n{1}: Rainbow Crow becomes the color of your choice until end of turn.
-SetInfo:INV Uncommon

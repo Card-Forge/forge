@@ -4,6 +4,3 @@ Types:Sorcery
 A:SP$ ChangeZone | Cost$ 1 G | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Choose target green card in your graveyard | ValidTgts$ Card.Green+YouCtrl | SpellDescription$ Return target green card from your graveyard to your hand.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/revive.jpg
 Oracle:Return target green card from your graveyard to your hand.
-SetInfo:MMQ Uncommon
-SetInfo:8ED Uncommon
-SetInfo:M13 Uncommon

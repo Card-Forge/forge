@@ -7,4 +7,3 @@ A:AB$ Protection | Cost$ Discard<1/Card> | Defined$ Self | Gains$ Choice | Choic
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/resilient_wanderer.jpg
 Oracle:First strike\nDiscard a card: Resilient Wanderer gains protection from the color of your choice until end of turn.
-SetInfo:ODY Uncommon

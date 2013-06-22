@@ -9,4 +9,3 @@ SVar:DBTap:DB$ Tap | Defined$ Targeted
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rimescale_dragon.jpg
 Oracle:Flying\n{2}{S}: Tap target creature and put an ice counter on it. ({S} can be paid with one mana from a snow permanent.)\nCreatures with ice counters on them don't untap during their controllers' untap steps.
-SetInfo:CSP Rare

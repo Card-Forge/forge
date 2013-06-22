@@ -5,4 +5,3 @@ PT:4/5
 K:CARDNAME enters the battlefield tapped.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rotting_legion.jpg
 Oracle:Rotting Legion enters the battlefield tapped.
-SetInfo:M11 Common

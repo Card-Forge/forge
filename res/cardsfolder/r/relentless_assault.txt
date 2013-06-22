@@ -6,13 +6,3 @@ SVar:DBAddCombat:DB$ AddPhase | ExtraPhase$ BeginCombat | FollowedBy$ ThisPhase 
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/relentless_assault.jpg
 Oracle:Untap all creatures that attacked this turn. After this main phase, there is an additional combat phase followed by an additional main phase.
-SetInfo:PO2 Rare
-SetInfo:S99 Rare
-SetInfo:7ED Rare
-SetInfo:6ED Rare
-SetInfo:VIS Rare
-SetInfo:9ED Rare
-SetInfo:10E Rare
-SetInfo:HOP Rare
-SetInfo:8ED Rare
-SetInfo:PTK Rare

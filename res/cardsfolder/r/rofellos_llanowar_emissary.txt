@@ -6,4 +6,3 @@ A:AB$ Mana | Cost$ T | Produced$ G | Amount$ X | References$ X | SpellDescriptio
 SVar:X:Count$Valid Forest.YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rofellos_llanowar_emissary.jpg
 Oracle:{T}: Add {G} to your mana pool for each Forest you control.
-SetInfo:UDS Rare

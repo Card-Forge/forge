@@ -8,4 +8,3 @@ SVar:DBDestroy:DB$Destroy | ValidTgts$ Land | TgtPrompt$ Select target land
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rain_of_rust.jpg
 Oracle:Choose one - Destroy target artifact; or destroy target land.\nEntwine {3}{R} (Choose both if you pay the entwine cost.)
-SetInfo:5DN Common

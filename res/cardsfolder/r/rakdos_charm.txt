@@ -9,4 +9,3 @@ SVar:DBDamage:DB$ DealDamage | Defined$ RememberedController | DamageSource$ Rem
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rakdos_charm.jpg
 Oracle:Choose one - Exile all cards from target player's graveyard; or destroy target artifact; or each creature deals 1 damage to its controller.
-SetInfo:RTR Uncommon

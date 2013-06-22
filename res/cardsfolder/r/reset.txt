@@ -5,4 +5,3 @@ A:SP$ UntapAll | Cost$ U U | ValidCards$ Land.YouCtrl | OpponentTurn$ True | Act
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reset.jpg
 Oracle:Cast Reset only during an opponent's turn after his or her upkeep step.\nUntap all lands you control.
-SetInfo:LEG Uncommon

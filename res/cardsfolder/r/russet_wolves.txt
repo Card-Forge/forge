@@ -4,4 +4,3 @@ Types:Creature Wolf
 PT:3/3
 SVar:Picture:http://www.wizards.com/global/images/magic/general/russet_wolves.jpg
 Oracle:
-SetInfo:DKA Common

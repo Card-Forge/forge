@@ -6,4 +6,3 @@ A:AB$ Tap | Cost$ 1 T | ValidTgts$ Land | TgtPrompt$ Select target land | SpellD
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rishadan_port.jpg
 Oracle:{T}: Add {1} to your mana pool.\n{1}, {T}: Tap target land.
-SetInfo:MMQ Rare

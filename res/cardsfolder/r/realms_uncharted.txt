@@ -7,4 +7,3 @@ SVar:DBChangeZone2:DB$ ChangeZone | Origin$ Library | Destination$ Hand | Change
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/realms_uncharted.jpg
 Oracle:Search your library for four land cards with different names and reveal them. An opponent chooses two of those cards. Put the chosen cards into your graveyard and the rest into your hand. Then shuffle your library.
-SetInfo:ROE Rare

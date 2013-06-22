@@ -8,5 +8,3 @@ SVar:DBAnimate:DB$AnimateAll | ValidCards$ Land.YouCtrl | Power$ 2 | Toughness$ 
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rude_awakening.jpg
 Oracle:Choose one - Untap all lands you control; or until end of turn, lands you control become 2/2 creatures that are still lands.\nEntwine {2}{G} (Choose both if you pay the entwine cost.)
-SetInfo:5DN Rare
-SetInfo:DDD Rare

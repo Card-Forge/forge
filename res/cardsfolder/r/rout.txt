@@ -5,4 +5,3 @@ K:You may cast CARDNAME any time you could cast an instant if you pay 2 more to 
 A:SP$ DestroyAll | Cost$ 3 W W | ValidCards$ Creature | NoRegen$ True | SpellDescription$ Destroy all creatures. They can't be regenerated.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rout.jpg
 Oracle:You may cast Rout any time you could cast an instant if you pay {2} more to cast it.\nDestroy all creatures. They can't be regenerated.
-SetInfo:INV Rare

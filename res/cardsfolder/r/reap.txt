@@ -8,4 +8,3 @@ SVar:AIPlayForSub:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reap.jpg
 Oracle:Return up to X target cards from your graveyard to your hand, where X is the number of black permanents target opponent controls as you cast Reap.
-SetInfo:TMP Uncommon

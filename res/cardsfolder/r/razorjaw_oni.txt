@@ -6,5 +6,3 @@ S:Mode$ Continuous | Affected$ Creature.Black | AddHiddenKeyword$ CARDNAME can't
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/razorjaw_oni.jpg
 Oracle:Black creatures can't block.
-SetInfo:SOK Uncommon
-SetInfo:COM Uncommon

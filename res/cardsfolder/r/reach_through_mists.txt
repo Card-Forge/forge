@@ -4,4 +4,3 @@ Types:Instant Arcane
 A:SP$ Draw | Cost$ U | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reach_through_mists.jpg
 Oracle:Draw a card.
-SetInfo:CHK Common

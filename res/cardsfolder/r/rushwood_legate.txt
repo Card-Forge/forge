@@ -7,4 +7,3 @@ SVar:X:Count$Valid Island.OppCtrl
 SVar:Y:Count$Valid Forest.YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rushwood_legate.jpg
 Oracle:If an opponent controls an Island and you control a Forest, you may cast Rushwood Legate without paying its mana cost.
-SetInfo:MMQ Uncommon

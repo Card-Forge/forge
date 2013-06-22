@@ -9,4 +9,3 @@ SVar:RemRandomDeck:True
 DeckNeeds:Color$Black
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ring_of_xathrid.jpg
 Oracle:{2}: Regenerate equipped creature. (The next time that creature would be destroyed this turn, it isn't. Instead tap it, remove all damage from it, and remove it from combat.)\nAt the beginning of your upkeep, put a +1/+1 counter on equipped creature if it's black.\nEquip {1} ({1}: Attach to target creature you control. Equip only as a sorcery.)
-SetInfo:M13 Uncommon

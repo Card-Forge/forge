@@ -8,5 +8,3 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigChangeZone:DB$ChangeZone | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | Origin$ Battlefield | Destination$ Hand
 SVar:Picture:http://www.wizards.com/global/images/magic/general/riftwing_cloudskate.jpg
 Oracle:Flying\nWhen Riftwing Cloudskate enters the battlefield, return target permanent to its owner's hand.\nSuspend 3-{1}{U} (Rather than cast this card from your hand, you may pay {1}{U} and exile it with three time counters on it. At the beginning of your upkeep, remove a time counter. When the last is removed, cast it without paying its mana cost. It has haste.)
-SetInfo:DD2 Uncommon
-SetInfo:TSP Uncommon

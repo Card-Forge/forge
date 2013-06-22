@@ -6,4 +6,3 @@ SVar:NonStackingEffect:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rooftop_storm.jpg
 Oracle:You may pay {0} rather than pay the mana cost for Zombie creature spells you cast.
-SetInfo:ISD Rare

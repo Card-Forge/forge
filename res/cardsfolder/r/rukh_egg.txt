@@ -8,6 +8,3 @@ SVar:TrigToken:AB$ Token | Cost$ 0 | TokenOwner$ You | TokenName$ Bird | TokenTy
 SVar:SacMe:4
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rukh_egg.jpg
 Oracle:When Rukh Egg dies, put a 4/4 red Bird creature token with flying onto the battlefield at the beginning of the next end step.
-SetInfo:8ED Rare
-SetInfo:9ED Rare
-SetInfo:ARN Common x2

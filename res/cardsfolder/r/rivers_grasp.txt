@@ -6,4 +6,3 @@ SVar:BPaid:DB$ Discard | ValidTgts$ Player | NumCards$ 1 | Mode$ RevealYouChoose
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rivers_grasp.jpg
 Oracle:If {U} was spent to cast River's Grasp, return up to one target creature to its owner's hand. If {B} was spent to cast River's Grasp, target player reveals his or her hand, you choose a nonland card from it, then that player discards that card. (Do both if {U}{B} was spent.)
-SetInfo:SHM Uncommon

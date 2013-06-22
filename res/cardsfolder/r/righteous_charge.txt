@@ -4,6 +4,3 @@ Types:Sorcery
 A:SP$ PumpAll | Cost$ 1 W W | ValidCards$ Creature.YouCtrl | NumAtt$ +2 | NumDef$ +2 | SpellDescription$ Creatures you control get +2/+2 until end of turn.
 SVar:Picture:http://resources.wizards.com/magic/cards/p2/en-us/card6503.jpg
 Oracle:Creatures you control get +2/+2 until end of turn.
-SetInfo:PO2 Common
-SetInfo:S99 Uncommon
-SetInfo:GTC Uncommon

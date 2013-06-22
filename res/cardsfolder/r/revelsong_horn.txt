@@ -5,4 +5,3 @@ A:AB$ Pump | Cost$ 1 T tapXType<1/Creature> | ValidTgts$ Creature | TgtPrompt$ S
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/revelsong_horn.jpg
 Oracle:{1}, {T}, Tap an untapped creature you control: Target creature gets +1/+1 until end of turn.
-SetInfo:SHM Uncommon

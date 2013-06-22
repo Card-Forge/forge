@@ -6,4 +6,3 @@ SVar:DBMana:DB$ Mana | Cost$ 0 | Produced$ Chosen | UnlessCost$ 1 | UnlessPayer$
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rhystic_cave.jpg
 Oracle:{T}: Choose a color. Add one mana of that color to your mana pool unless any player pays {1}. Activate this ability only any time you could cast an instant.
-SetInfo:PCY Uncommon

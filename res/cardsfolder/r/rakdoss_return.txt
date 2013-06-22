@@ -6,4 +6,3 @@ SVar:DBDiscardOpp:DB$Discard | Defined$ Targeted | NumCards$ X | References$ X |
 SVar:X:Count$xPaid
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rakdoss_return.jpg
 Oracle:Rakdos's Return deals X damage to target opponent. That player discards X cards.
-SetInfo:RTR Mythic

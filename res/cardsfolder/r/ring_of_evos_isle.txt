@@ -9,4 +9,3 @@ SVar:RemRandomDeck:True
 DeckNeeds:Color$Blue
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ring_of_evos_isle.jpg
 Oracle:{2}: Equipped creature gains hexproof until end of turn. (It can't be the target of spells or abilities your opponents control.)\nAt the beginning of your upkeep, put a +1/+1 counter on equipped creature if it's blue.\nEquip {1} ({1}: Attach to target creature you control. Equip only as a sorcery.)
-SetInfo:M13 Uncommon

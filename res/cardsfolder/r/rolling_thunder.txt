@@ -8,5 +8,3 @@ SVar:X:Count$xPaid
 #X Will get overwritten by Announce
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rolling_thunder.jpg
 Oracle:Rolling Thunder deals X damage divided as you choose among any number of target creatures and/or players.
-SetInfo:TMP Common
-SetInfo:HOP Common

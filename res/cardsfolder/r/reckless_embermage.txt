@@ -6,6 +6,3 @@ A:AB$ DealDamage | Cost$ 1 R | ValidTgts$ Creature,Player | TgtPrompt$ Select ta
 SVar:DBDealDamage:DB$DealDamage | NumDmg$ 1 | Defined$ Self
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reckless_embermage.jpg
 Oracle:{1}{R}: Reckless Embermage deals 1 damage to target creature or player and 1 damage to itself.
-SetInfo:7ED Rare
-SetInfo:MIR Rare
-SetInfo:6ED Rare

@@ -7,4 +7,3 @@ SVar:TrigSacrifice:AB$Sacrifice | Cost$ 0
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reclusive_wight.jpg
 Oracle:At the beginning of your upkeep, if you control another nonland permanent, sacrifice Reclusive Wight.
-SetInfo:USG Uncommon

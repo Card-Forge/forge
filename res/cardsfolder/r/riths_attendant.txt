@@ -6,4 +6,3 @@ A:AB$ Mana | Cost$ 1 Sac<1/CARDNAME> | Produced $R G W | SpellDescription$ Add R
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/riths_attendant.jpg
 Oracle:{1}, Sacrifice Rith's Attendant: Add {R}{G}{W} to your mana pool.
-SetInfo:INV Uncommon

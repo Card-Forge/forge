@@ -7,6 +7,3 @@ SVar:PlayMain1:TRUE
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rolling_stones.jpg
 Oracle:Wall creatures can attack as though they didn't have defender.
-SetInfo:8ED Rare
-SetInfo:7ED Rare
-SetInfo:STH Rare

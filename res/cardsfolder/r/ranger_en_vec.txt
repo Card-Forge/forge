@@ -6,4 +6,3 @@ K:First Strike
 A:AB$ Regenerate | Cost$ G | SpellDescription$ Regenerate CARDNAME.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ranger_en_vec.jpg
 Oracle:First strike\n{G}: Regenerate Ranger en-Vec.
-SetInfo:TMP Uncommon

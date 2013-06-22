@@ -5,4 +5,3 @@ A:SP$ ChangeZoneAll | Cost$ 5 W W | ChangeType$ Artifact | Origin$ Graveyard | D
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/roar_of_reclamation.jpg
 Oracle:Each player returns all artifact cards from his or her graveyard to the battlefield.
-SetInfo:5DN Rare

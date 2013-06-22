@@ -6,7 +6,3 @@ K:Flying
 K:First Strike
 SVar:Picture:http://www.wizards.com/global/images/magic/general/razorfoot_griffin.jpg
 Oracle:Flying\nFirst strike (This creature deals combat damage before creatures without first strike.)
-SetInfo:8ED Common
-SetInfo:M10 Common
-SetInfo:7ED Common
-SetInfo:INV Common

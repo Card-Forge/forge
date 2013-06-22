@@ -5,5 +5,3 @@ A:AB$ Tap | Cost$ T | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | 
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/relic_barrier.jpg
 Oracle:{T}: Tap target artifact.
-SetInfo:LEG Uncommon
-SetInfo:5DN Uncommon

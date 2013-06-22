@@ -4,4 +4,3 @@ Types:Instant
 A:SP$ DestroyAll | Cost$ 2 W W | ValidCards$ Creature.dealtDamageToYouThisTurn | SpellDescription$ Destroy all creatures that dealt damage to you this turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/retaliate.jpg
 Oracle:Destroy all creatures that dealt damage to you this turn.
-SetInfo:5DN Rare

@@ -7,4 +7,3 @@ SVar:RemRandomDeck:True
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rimewind_taskmage.jpg
 Oracle:{1}, {T}: You may tap or untap target permanent. Activate this ability only if you control four or more snow permanents.
-SetInfo:CSP Common

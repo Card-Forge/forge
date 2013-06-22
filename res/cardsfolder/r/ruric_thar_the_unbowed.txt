@@ -11,4 +11,3 @@ SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ruric_thar_the_unbowed.jpg
 Oracle:Vigilance, reach\nRuric Thar, the Unbowed attacks each turn if able.\nWhenever a player casts a noncreature spell, Ruric Thar deals 6 damage to that player.
-SetInfo:DGM Rare

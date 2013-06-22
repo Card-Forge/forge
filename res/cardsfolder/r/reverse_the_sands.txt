@@ -6,4 +6,3 @@ SVar:Maxplayer:PlayerCountPlayers$Amount
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reverse_the_sands.jpg
 Oracle:Redistribute any number of players' life totals. (Each of those players gets one life total back.)
-SetInfo:CHK Rare

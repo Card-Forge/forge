@@ -6,4 +6,3 @@ K:Trample
 K:Madness:2 R
 SVar:Picture:http://resources.wizards.com/magic/cards/plc/en-us/card126818.jpg
 Oracle:Trample\nMadness {2}{R} (If you discard this card, you may cast it for its madness cost instead of putting it into your graveyard.)
-SetInfo:PLC Uncommon

@@ -5,4 +5,3 @@ PT:1/1
 A:AB$ Regenerate | Cost$ W | SpellDescription$ Regenerate CARDNAME.
 SVar:Picture:http://resources.wizards.com/magic/cards/plc/en-us/card122282.jpg
 Oracle:{W}: Regenerate Revered Dead.
-SetInfo:PLC Common

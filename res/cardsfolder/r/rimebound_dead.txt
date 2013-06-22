@@ -7,4 +7,3 @@ A:AB$ Regenerate | Cost$ S | SpellDescription$ Regenerate CARDNAME.
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rimebound_dead.jpg
 Oracle:{S}: Regenerate Rimebound Dead. ({S} can be paid with one mana from a snow permanent.)
-SetInfo:CSP Common

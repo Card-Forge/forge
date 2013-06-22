@@ -8,5 +8,3 @@ K:ETBReplacement:Other:DBTap
 SVar:DBTap:AB$ Tap | Cost$ 0 | ETB$ True | Defined$ Self | UnlessCost$ Reveal<1/Kithkin> | UnlessPayer$ You | StackDescription$ enters the battlefield tapped.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rustic_clachan.jpg
 Oracle:As Rustic Clachan enters the battlefield, you may reveal a Kithkin card from your hand. If you don't, Rustic Clachan enters the battlefield tapped.\n{T}: Add {W} to your mana pool.\nReinforce 1-{1}{W} ({1}{W}, Discard this card: Put a +1/+1 counter on target creature.)
-SetInfo:MOR Rare
-SetInfo:DDF Rare

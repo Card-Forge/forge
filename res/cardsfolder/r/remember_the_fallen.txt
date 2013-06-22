@@ -6,4 +6,3 @@ SVar:ChangeCreature:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | Tgt
 SVar:ChangeArtifact:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Select target artifact card in your graveyard | ValidTgts$ Artifact.YouCtrl | SpellDescription$ Return target artifact card from your graveyard to your hand.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/remember_the_fallen.jpg
 Oracle:Choose one or both - Return target creature card from your graveyard to your hand; and/or return target artifact card from your graveyard to your hand.
-SetInfo:NPH Common

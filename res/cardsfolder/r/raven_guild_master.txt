@@ -7,4 +7,3 @@ SVar:TrigMill:AB$ Mill | Cost$ 0 | Defined$ TriggeredTarget | NumCards$ 10 | Des
 K:Morph:2 U U
 SVar:Picture:http://www.wizards.com/global/images/magic/general/raven_guild_master.jpg
 Oracle:Whenever Raven Guild Master deals combat damage to a player, that player exiles the top ten cards of his or her library.\nMorph {2}{U}{U} (You may cast this face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)
-SetInfo:SCG Rare

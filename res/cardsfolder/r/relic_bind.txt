@@ -10,5 +10,3 @@ SVar:DBGain:DB$ GainLife | ValidTgts$ Player | TgtPrompt$ Select target player |
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/relic_bind.jpg
 Oracle:Enchant artifact an opponent controls\nWhenever enchanted artifact becomes tapped, choose one - Relic Bind deals 1 damage to target player; or target player gains 1 life.
-SetInfo:LEG Uncommon
-SetInfo:4ED Rare

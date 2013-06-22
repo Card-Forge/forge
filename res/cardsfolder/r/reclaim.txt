@@ -4,7 +4,3 @@ Types:Instant
 A:SP$ ChangeZone | Cost$ G | Origin$ Graveyard | Destination$ Library | LibraryPosition$ 0 | TgtPrompt$ Choose target card in your graveyard | ValidTgts$ Card.YouCtrl | SpellDescription$ Put target card from your graveyard on top of your library.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reclaim.jpg
 Oracle:Put target card from your graveyard on top of your library.
-SetInfo:7ED Common
-SetInfo:M12 Common
-SetInfo:EXO Common
-SetInfo:9ED Common

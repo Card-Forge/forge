@@ -6,4 +6,3 @@ K:Convoke
 A:AB$Pump | Cost$ tapXType<2/Creature> | Defined$ Self | NumAtt$ 2 | NumDef$ 2 | SpellDescription$ CARDNAME gets +2/+2 until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/root_kin_ally.jpg
 Oracle:Convoke (Each creature you tap while casting this spell reduces its cost by {1} or by one mana of that creature's color.)\nTap two untapped creatures you control: Root-Kin Ally gets +2/+2 until end of turn.
-SetInfo:RAV Uncommon

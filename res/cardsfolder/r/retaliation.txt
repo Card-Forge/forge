@@ -6,4 +6,3 @@ SVar:TrigBlocked:Mode$ AttackerBlocked | ValidCard$ Card.Self | Execute$ Retalia
 SVar:RetaliationTrigPump:AB$ Pump | Cost$ 0 | NumAtt$ 1 | NumDef$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/retaliation.jpg
 Oracle:Creatures you control have "Whenever this creature becomes blocked by a creature, this creature gets +1/+1 until end of turn."
-SetInfo:USG Uncommon

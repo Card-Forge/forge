@@ -5,4 +5,3 @@ PT:2/2
 A:AB$ Destroy | Cost$ Sac<1/CARDNAME> | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment | SpellDescription$ Destroy target enchantment.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ronom_unicorn.jpg
 Oracle:Sacrifice Ronom Unicorn: Destroy target enchantment.
-SetInfo:CSP Common

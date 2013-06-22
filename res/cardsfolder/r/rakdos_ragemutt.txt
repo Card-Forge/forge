@@ -6,4 +6,3 @@ K:Haste
 K:Lifelink
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rakdos_ragemutt.jpg
 Oracle:Lifelink, haste
-SetInfo:RTR Uncommon

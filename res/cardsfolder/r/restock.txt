@@ -5,4 +5,3 @@ A:SP$ ChangeZone | Cost$ 3 G G | Origin$ Graveyard | Destination$ Hand | TargetM
 SVar:DBChange:DB$ ChangeZone | Origin$ Stack | Destination$ Exile
 SVar:Picture:http://www.wizards.com/global/images/magic/general/restock.jpg
 Oracle:Return two target cards from your graveyard to your hand. Exile Restock.
-SetInfo:INV Rare

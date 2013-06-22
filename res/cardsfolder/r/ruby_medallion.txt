@@ -6,4 +6,3 @@ SVar:RemRandomDeck:True
 DeckNeeds:Color$Red
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ruby_medallion.jpg
 Oracle:Red spells you cast cost {1} less to cast.
-SetInfo:TMP Rare

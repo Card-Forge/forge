@@ -7,8 +7,3 @@ SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/red_elemental_blast.jpg
 Oracle:Choose one - Counter target blue spell; or destroy target blue permanent.
-SetInfo:2ED Common
-SetInfo:LEB Common
-SetInfo:LEA Common
-SetInfo:4ED Common
-SetInfo:3ED Common

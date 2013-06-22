@@ -5,4 +5,3 @@ A:SP$ TapAll | Cost$ U | ValidCards$ Creature.Blue | SpellDescription$ Tap all b
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/riptide.jpg
 Oracle:Tap all blue creatures.
-SetInfo:DRK Common

@@ -5,5 +5,3 @@ A:SP$ Destroy | Cost$ 4 G | ValidTgts$ Artifact,Enchantment | TargetMin$ 1 | Tar
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/Relic_Crush.jpg
 Oracle:Destroy target artifact or enchantment and up to one other target artifact or enchantment.
-SetInfo:COM Common
-SetInfo:ZEN Common

@@ -8,5 +8,3 @@ SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ 1  | TokenName$ Bird | TokenTyp
 SVar:SacMe:4
 SVar:Picture:http://www.wizards.com/global/images/magic/general/roc_egg.jpg
 Oracle:Defender (This creature can't attack.)\nWhen Roc Egg dies, put a 3/3 white Bird creature token with flying onto the battlefield.
-SetInfo:M11 Uncommon
-SetInfo:M12 Uncommon

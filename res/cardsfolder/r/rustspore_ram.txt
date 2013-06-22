@@ -6,4 +6,3 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigDestroy:DB$Destroy | ValidTgts$ Equipment | TgtPrompt$ Select target Equipment.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rustspore_ram.jpg
 Oracle:When Rustspore Ram enters the battlefield, destroy target Equipment.
-SetInfo:MRD Uncommon

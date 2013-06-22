@@ -7,4 +7,3 @@ SVar:TrigPump:AB$Pump | Cost$ 0 | Defined$ Self | NumAtt$ +X | NumDef$ +X | Refe
 SVar:X:TriggerCount$NumBlockers/Times.2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rabid_elephant.jpg
 Oracle:Whenever Rabid Elephant becomes blocked, it gets +2/+2 until end of turn for each creature blocking it.
-SetInfo:ODY Common

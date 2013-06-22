@@ -4,4 +4,3 @@ Types:Instant
 A:SP$ Regenerate | Cost$ 1 G | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Regenerate target creature.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/regenerate.jpg
 Oracle:Regenerate target creature. (The next time that creature would be destroyed this turn, it isn't. Instead tap it, remove all damage from it, and remove it from combat.)
-SetInfo:M10 Common

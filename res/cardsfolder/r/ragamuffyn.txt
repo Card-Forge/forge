@@ -6,4 +6,3 @@ A:AB$ Draw | Cost$ T Sac<1/Creature;Land/creature or land> | PrecostDesc$ Hellbe
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ragamuffyn.jpg
 Oracle:Hellbent - {T}, Sacrifice a creature or land: Draw a card. Activate this ability only if you have no cards in hand.
-SetInfo:DIS Uncommon

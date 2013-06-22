@@ -10,4 +10,3 @@ SVar:X:SVar$Y/Plus.Z
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/raka_sanctuary.jpg
 Oracle:At the beginning of your upkeep, if you control a white or blue permanent, Raka Sanctuary deals 1 damage to target creature. If you control a white permanent and a blue permanent, Raka Sanctuary deals 3 damage to that creature instead.
-SetInfo:APC Uncommon

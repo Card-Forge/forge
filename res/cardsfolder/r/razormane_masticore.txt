@@ -13,6 +13,3 @@ SVar:TrigDealDamage:AB$ DealDamage | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ 
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/razormane_masticore.jpg
 Oracle:First strike (This creature deals combat damage before creatures without first strike.)\nAt the beginning of your upkeep, sacrifice Razormane Masticore unless you discard a card.\nAt the beginning of your draw step, you may have Razormane Masticore deal 3 damage to target creature.
-SetInfo:5DN Rare
-SetInfo:DDF Rare
-SetInfo:10E Rare

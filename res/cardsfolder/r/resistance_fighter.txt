@@ -6,5 +6,3 @@ A:AB$ Pump | Cost$ Sac<1/CARDNAME> | KW$ HIDDEN Prevent all combat damage that w
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/resistance_fighter.jpg
 Oracle:Sacrifice Resistance Fighter: Prevent all combat damage target creature would deal this turn.
-SetInfo:VIS Common
-SetInfo:6ED Common

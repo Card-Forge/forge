@@ -6,6 +6,3 @@ SVar:DBLoseLifeYou:DB$LoseLife | Defined$ You | LifeAmount$ X | References$ X
 SVar:X:Targeted$CardManaCost
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reanimate.jpg
 Oracle:Put target creature card from a graveyard onto the battlefield under your control. You lose life equal to its converted mana cost.
-SetInfo:TMP Uncommon
-SetInfo:PD3 Uncommon
-SetInfo:ARC Uncommon

@@ -7,4 +7,3 @@ SVar:DrawLoselife:AB$ Draw | Cost$ 0 | NumCards$ 1 | SubAbility$ DBLoseLife
 SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 1
 SVar:Picture:http://www.cardforge.org/fpics/vgd-lq/royal_assassin_avatar.jpg
 Oracle:Hand -2, life +0\nAt the beginning of your upkeep, you draw a card and you lose 1 life.
-SetInfo:VAN Special x2

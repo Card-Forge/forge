@@ -11,5 +11,3 @@ SVar:PumpNogen:AB$ Pump | Cost$ 0 | KW$ HIDDEN CARDNAME can't be regenerated. & 
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/runesword.jpg
 Oracle:{3}, {T}: Target attacking creature gets +2/+0 until end of turn. When that creature leaves the battlefield this turn, sacrifice Runesword. If the creature deals damage to a creature this turn, the creature dealt damage can't be regenerated this turn. If a creature dealt damage by the targeted creature would die this turn, exile that creature instead.
-SetInfo:CHR Common
-SetInfo:DRK Uncommon

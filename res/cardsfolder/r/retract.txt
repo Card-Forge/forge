@@ -5,4 +5,3 @@ A:SP$ ChangeZoneAll | Cost$ U | ChangeType$ Artifact.YouCtrl | Origin$ Battlefie
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/retract.jpg
 Oracle:Return all artifacts you control to their owner's hand.
-SetInfo:DST Rare

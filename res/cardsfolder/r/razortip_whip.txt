@@ -4,4 +4,3 @@ Types:Artifact
 A:AB$ DealDamage | Cost$ 1 T | NumDmg$ 1 | ValidTgts$ Opponent | SpellDescription$ CARDNAME deals 1 damage to target opponent.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/razortip_whip.jpg
 Oracle:{1}, {T}: Razortip Whip deals 1 damage to target opponent.
-SetInfo:GTC Common

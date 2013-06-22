@@ -7,4 +7,3 @@ T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigMana | TriggerDescription$
 SVar:TrigMana:AB$ Mana | Cost$ 0 | Produced$ R | Amount$ 2 | SpellDescription$ Add R R to your mana pool.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/radha_heir_to_keld.jpg
 Oracle:Whenever Radha, Heir to Keld attacks, you may add {R}{R} to your mana pool.\n{T}: Add {G} to your mana pool.
-SetInfo:PLC Rare

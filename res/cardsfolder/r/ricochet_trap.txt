@@ -6,4 +6,3 @@ A:SP$ ChangeTargets | Cost$ R | TargetType$ Spell | ValidTgts$ Card | TargetsSin
 SVar:X:Count$ThisTurnCast_Card.Blue+OppCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ricochet_trap.jpg
 Oracle:If an opponent cast a blue spell this turn, you may pay {R} rather than pay Ricochet Trap's mana cost.\nChange the target of target spell with a single target.
-SetInfo:WWK Uncommon

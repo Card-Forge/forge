@@ -8,4 +8,3 @@ SVar:X:Count$Valid Creature.attacking+YouCtrl
 SVar:HasAttackEffect:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rubblebelt_raiders.jpg
 Oracle:Whenever Rubblebelt Raiders attacks, put a +1/+1 counter on it for each attacking creature you control.
-SetInfo:GTC Rare

@@ -8,4 +8,3 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:KWPump:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected$ Creature.YouCtrl | AddHiddenKeyword$ Indestructible | Description$ Creatures you control are indestructible this turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rootborn_defenses.jpg
 Oracle:Populate. Creatures you control are indestructible this turn. (To populate, put a token onto the battlefield that's a copy of a creature token you control. Damage and effects that say "destroy" don't destroy indestructible creatures.)
-SetInfo:RTR Common

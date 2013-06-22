@@ -5,5 +5,3 @@ PT:3/3
 K:Mountainwalk
 SVar:Picture:http://resources.wizards.com/magic/cards/10e/en/card129715.jpg
 Oracle:Mountainwalk (This creature is unblockable as long as defending player controls a Mountain.)
-SetInfo:MMQ Uncommon
-SetInfo:10E Common

@@ -5,6 +5,3 @@ T:Mode$ Attacks | ValidCard$ Creature | TriggerZones$ Battlefield | Execute$ Tri
 SVar:TrigGainLife:AB$GainLife | Cost$ 0 | LifeAmount$ 1 | SpellDescription$ You gain 1 life for each attacking creature.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/righteous_cause.jpg
 Oracle:Whenever a creature attacks, you gain 1 life.
-SetInfo:DDC Uncommon
-SetInfo:ONS Uncommon
-SetInfo:COM Uncommon

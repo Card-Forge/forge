@@ -6,13 +6,3 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigDiscard:AB$Discard | Cost$ 0 | ValidTgts$ Opponent | TgtPrompt$ Select an opponent | NumCards$ 1 | Mode$ TgtChoose
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ravenous_rats.jpg
 Oracle:When Ravenous Rats enters the battlefield, target opponent discards a card.
-SetInfo:PO2 Common
-SetInfo:S99 Uncommon
-SetInfo:UDS Common
-SetInfo:9ED Common
-SetInfo:10E Common
-SetInfo:DDJ Common
-SetInfo:M13 Common
-SetInfo:INV Common
-SetInfo:8ED Common
-SetInfo:DDD Common

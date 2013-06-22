@@ -5,8 +5,3 @@ A:SP$ ChangeZone | Cost$ 4 B | Origin$ Graveyard | Destination$ Battlefield | Ga
 SVar:Animate:DB$Animate | Defined$ Targeted | Types$ Zombie | Colors$ Black  | Permanent$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rise_from_the_grave.jpg
 Oracle:Put target creature card from a graveyard onto the battlefield under your control. That creature is a black Zombie in addition to its other colors and types.
-SetInfo:M11 Uncommon
-SetInfo:M10 Uncommon
-SetInfo:M13 Uncommon
-SetInfo:COM Uncommon
-SetInfo:DDD Uncommon

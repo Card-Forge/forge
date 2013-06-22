@@ -6,4 +6,3 @@ A:AB$ Regenerate | Cost$ U W G T | ValidTgts$ Creature | TgtPrompt$ Select targe
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ragnar.jpg
 Oracle:{G}{W}{U}, {T}: Regenerate target creature.
-SetInfo:LEG Rare
