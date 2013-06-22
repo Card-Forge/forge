@@ -7,4 +7,3 @@ SVar:X:Count$ThisTurnCast_Creature.YouCtrl
 SVar:BuffedBy:Creature
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mogg_conscripts.jpg
 Oracle:Mogg Conscripts can't attack unless you've cast a creature spell this turn.
-SetInfo:TMP Common

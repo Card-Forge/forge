@@ -5,5 +5,3 @@ A:AB$ Discard | Cost$ B Sac<1/Creature> | ValidTgts$ Opponent | SorcerySpeed$ Tr
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mind_slash.jpg
 Oracle:{B}, Sacrifice a creature: Target opponent reveals his or her hand. You choose a card from it. That player discards that card. Activate this ability only any time you could cast a sorcery.
-SetInfo:8ED Uncommon
-SetInfo:NMS Uncommon

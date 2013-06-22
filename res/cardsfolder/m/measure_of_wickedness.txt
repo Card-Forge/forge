@@ -11,4 +11,3 @@ SVar:RemAIDeck:True
 SVar:Sac:SVar:SacMe:3
 SVar:Picture:http://www.wizards.com/global/images/magic/general/measure_of_wickedness.jpg
 Oracle:At the beginning of your end step, sacrifice Measure of Wickedness and you lose 8 life.\nWhenever another card is put into your graveyard from anywhere, target opponent gains control of Measure of Wickedness.
-SetInfo:SOK Uncommon

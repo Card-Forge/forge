@@ -10,4 +10,3 @@ SVar:ChooserDraws:DB$ Draw | NumCards$ 3 | Defined$ ChosenPlayer
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/misfortune.jpg
 Oracle:An opponent chooses one - You put a +1/+1 counter on each creature you control and gain 4 life; or you put a -1/-1 counter on each creature that player controls and Misfortune deals 4 damage to him or her.
-SetInfo:ALL Rare

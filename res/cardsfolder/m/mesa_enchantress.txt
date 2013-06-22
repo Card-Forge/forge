@@ -8,6 +8,3 @@ SVar:RemRandomDeck:True
 DeckNeeds:Type$Enchantment
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mesa_enchantress.jpg
 Oracle:Whenever you cast an enchantment spell, you may draw a card.
-SetInfo:M10 Rare
-SetInfo:M12 Rare
-SetInfo:PLC Rare

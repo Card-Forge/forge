@@ -5,4 +5,3 @@ PT:1/1
 A:AB$ Destroy | Cost$ T | ValidTgts$ Aura.AttachedTo Creature.YouCtrl | TgtPrompt$ Select target Aura attached to a creature you control | SpellDescription$ Destroy target Aura attached to a creature you control.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/miracle_worker.jpg
 Oracle:{T}: Destroy target Aura attached to a creature you control.
-SetInfo:DRK Common

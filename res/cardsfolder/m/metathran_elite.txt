@@ -6,4 +6,3 @@ S:Mode$ Continuous | Affected$ Card.Self+enchanted | AddKeyword$ Unblockable | D
 SVar:EnchantMe:Once
 SVar:Picture:http://www.wizards.com/global/images/magic/general/metathran_elite.jpg
 Oracle:Metathran Elite is unblockable as long as it's enchanted.
-SetInfo:UDS Uncommon

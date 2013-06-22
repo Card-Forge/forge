@@ -6,4 +6,3 @@ SVar:DBChangeZone:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | 
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mask_of_the_mimic.jpg
 Oracle:As an additional cost to cast Mask of the Mimic, sacrifice a creature.\nSearch your library for a card with the same name as target nontoken creature and put that card onto the battlefield. Then shuffle your library.
-SetInfo:STH Uncommon

@@ -5,4 +5,3 @@ A:SP$ ChangeZoneAll | Cost$ 3 U | Defined$ Each | ChangeType$ Card | Origin$ Gra
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mnemonic_nexus.jpg
 Oracle:Each player shuffles his or her graveyard into his or her library.
-SetInfo:RAV Uncommon

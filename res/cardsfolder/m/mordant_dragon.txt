@@ -10,5 +10,3 @@ SVar:X:Count$CardPower
 SVar:MustBeBlocked:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mordant_dragon.jpg
 Oracle:Flying\n{1}{R}: Mordant Dragon gets +1/+0 until end of turn.\nWhenever Mordant Dragon deals combat damage to a player, you may have it deal that much damage to target creature that player controls.
-SetInfo:DDG Rare
-SetInfo:WWK Rare

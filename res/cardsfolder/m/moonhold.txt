@@ -7,4 +7,3 @@ SVar:STCantPlayLand:Mode$ CantPlayLand | EffectZone$ Command | Player$ You | Des
 SVar:STCantPlayCreats:Mode$ CantBeCast | ValidCard$ Creature | EffectZone$ Command | Caster$ You | Description$ You can't play creature cards this turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/moonhold.jpg
 Oracle:Target player can't play land cards this turn if {R} was spent to cast Moonhold and can't play creature cards this turn if {W} was spent to cast it. (Do both if {R}{W} was spent.)
-SetInfo:EVE Uncommon

@@ -5,4 +5,3 @@ A:SP$ ChangeZoneAll | Cost$ 2 R | ValidTgts$ Player | TgtPrompt$ Select target p
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mudhole.jpg
 Oracle:Target player exiles all land cards from his or her graveyard.
-SetInfo:ODY Rare

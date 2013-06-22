@@ -7,4 +7,3 @@ S:Mode$ Continuous | Affected$ Creature.MultiColor+YouCtrl | AddKeyword$ Flying 
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/maze_glider.jpg
 Oracle:Flying\nMulticolored creatures you control have flying.
-SetInfo:DGM Common

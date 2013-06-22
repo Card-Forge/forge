@@ -9,4 +9,3 @@ SVar:PlayMain1:TRUE
 SVar:BuffedBy:Sliver
 SVar:Picture:http://www.wizards.com/global/images/magic/general/magma_sliver.jpg
 Oracle:All Slivers have "{T}: Target Sliver creature gets +X/+0 until end of turn, where X is the number of Slivers on the battlefield."
-SetInfo:LGN Rare

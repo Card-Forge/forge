@@ -8,4 +8,3 @@ SVar:X:Count$Valid Creature.YouCtrl+Red+Other
 SVar:BuffedBy:Creature.Red
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mudbrawler_cohort.jpg
 Oracle:Haste\nMudbrawler Cohort gets +1/+1 as long as you control another red creature.
-SetInfo:SHM Common

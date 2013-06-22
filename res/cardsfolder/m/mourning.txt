@@ -8,4 +8,3 @@ A:AB$ ChangeZone | Cost$ B | Origin$ Battlefield | Destination$ Hand | SpellDesc
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mourning.jpg
 Oracle:Enchant creature\nEnchanted creature gets -2/-0.\n{B}: Return Mourning to its owner's hand.
-SetInfo:INV Common

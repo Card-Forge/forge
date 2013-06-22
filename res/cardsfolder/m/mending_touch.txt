@@ -4,4 +4,3 @@ Types:Instant
 A:SP$ Regenerate | Cost$ G | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Regenerate target creature.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mending_touch.jpg
 Oracle:Regenerate target creature.
-SetInfo:DGM Common

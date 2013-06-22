@@ -6,4 +6,3 @@ SVar:DBDisCard:DB$ Discard | Defined$ TargetedController | DiscardValid$ Card.sh
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/minamos_meddling.jpg
 Oracle:Counter target spell. That spell's controller reveals his or her hand, then discards each card with the same name as a card spliced onto that spell.
-SetInfo:BOK Common

@@ -5,4 +5,3 @@ A:SP$ Destroy | Cost$ 4 B | ValidTgts$ Land | TgtPrompt$ Select target land | Su
 SVar:DBGainLife:DB$ GainLife | Cost$ 0 | Defined$ You | LifeAmount$ 4
 SVar:Picture:http://www.wizards.com/global/images/magic/general/maw_of_the_mire.jpg
 Oracle:Destroy target land. You gain 4 life.
-SetInfo:ISD Common

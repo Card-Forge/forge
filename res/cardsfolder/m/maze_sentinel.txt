@@ -7,4 +7,3 @@ S:Mode$ Continuous | Affected$ Creature.MultiColor+YouCtrl | AddKeyword$ Vigilan
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/maze_sentinel.jpg
 Oracle:Vigilance\nMulticolored creatures you control have vigilance.
-SetInfo:DGM Common

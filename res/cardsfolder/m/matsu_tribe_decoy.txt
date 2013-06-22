@@ -9,4 +9,3 @@ SVar:DBPump:DB$ Pump | Defined$ TriggeredTarget | KW$ HIDDEN This card doesn't u
 SVar:HasCombatEffect:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/matsu_tribe_decoy.jpg
 Oracle:{2}{G}: Target creature blocks Matsu-Tribe Decoy this turn if able.\nWhenever Matsu-Tribe Decoy deals combat damage to a creature, tap that creature and it doesn't untap during its controller's next untap step.
-SetInfo:CHK Common

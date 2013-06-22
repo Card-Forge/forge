@@ -8,4 +8,3 @@ SVar:X:Count$InYourLibrary.Artifact
 SVar:Y:Remembered$Amount
 SVar:Picture:http://www.wizards.com/global/images/magic/general/myr_incubator.jpg
 Oracle:{6}, {T}, Sacrifice Myr Incubator: Search your library for any number of artifact cards, exile them, then put that many 1/1 colorless Myr artifact creature tokens onto the battlefield. Then shuffle your library.
-SetInfo:MRD Rare

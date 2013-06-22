@@ -5,4 +5,3 @@ A:AB$ ManaReflected | Cost$ T | ColorOrType$ Color | Valid$ Permanent.YouCtrl | 
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/meteor_crater.jpg
 Oracle:{T}: Choose a color of a permanent you control. Add one mana of that color to your mana pool.
-SetInfo:PLS Rare

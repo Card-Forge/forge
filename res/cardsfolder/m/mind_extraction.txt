@@ -6,4 +6,3 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mind_extraction.jpg
 Oracle:As an additional cost to cast Mind Extraction, sacrifice a creature.\nTarget player reveals his or her hand and discards all cards of each of the sacrificed creature's colors.
-SetInfo:APC Common

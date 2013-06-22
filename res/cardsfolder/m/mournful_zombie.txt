@@ -7,4 +7,3 @@ SVar:RemRandomDeck:True
 DeckNeeds:Color$white
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mournful_zombie.jpg
 Oracle:{W}, {T}: Target player gains 1 life.
-SetInfo:APC Common

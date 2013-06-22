@@ -5,4 +5,3 @@ A:SP$ Pump | Cost$ W | ValidTgts$ Player | TgtPrompt$ Select target player | KW$
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/moment_of_silence.jpg
 Oracle:Target player skips his or her next combat phase this turn.
-SetInfo:MMQ Common

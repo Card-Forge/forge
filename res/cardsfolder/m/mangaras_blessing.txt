@@ -9,4 +9,3 @@ SVar:TrigReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | Defined
 SVar:DiscardMeByOpp:3
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mangaras_blessing.jpg
 Oracle:You gain 5 life.\nWhen a spell or ability an opponent controls causes you to discard Mangara's Blessing, you gain 2 life, and you return Mangara's Blessing from your graveyard to your hand at the beginning of the next end step.
-SetInfo:MIR Uncommon

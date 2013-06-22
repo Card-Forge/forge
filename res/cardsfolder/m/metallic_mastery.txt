@@ -5,4 +5,3 @@ A:SP$ GainControl | Cost$ 2 R | ValidTgts$ Artifact | TgtPrompt$ Select target a
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/metallic_mastery.jpg
 Oracle:Gain control of target artifact until end of turn. Untap that artifact. It gains haste until end of turn.
-SetInfo:MBS Uncommon

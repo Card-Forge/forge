@@ -8,4 +8,3 @@ T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | Execute$ TrigBounce | Tr
 SVar:TrigBounce:AB$ChangeZone | Cost$ 0 | Defined$ Self | Origin$ Battlefield | Destination$ Hand
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mark_of_fury.jpg
 Oracle:Enchant creature\nEnchanted creature has haste.\nAt the beginning of the end step, return Mark of Fury to its owner's hand.
-SetInfo:UDS Common

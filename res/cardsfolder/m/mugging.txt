@@ -6,4 +6,3 @@ SVar:DBPumpCurse:DB$ Pump | Defined$ Targeted | IsCurse$ True | KW$ HIDDEN CARDN
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mugging.jpg
 Oracle:Mugging deals 2 damage to target creature. That creature can't block this turn.
-SetInfo:GTC Common

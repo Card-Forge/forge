@@ -9,4 +9,3 @@ SVar:X:Count$InYourHand
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/megatherium.jpg
 Oracle:Trample\nWhen Megatherium enters the battlefield, sacrifice it unless you pay {1} for each card in your hand.
-SetInfo:MMQ Rare

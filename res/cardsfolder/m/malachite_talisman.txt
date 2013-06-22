@@ -6,4 +6,3 @@ SVar:TrigUntap:AB$Untap | Cost$ 3 | ValidTgts$ Permanent | TgtPrompt$ Select tar
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/malachite_talisman.jpg
 Oracle:Whenever a player casts a green spell, you may pay {3}. If you do, untap target permanent.
-SetInfo:ICE Uncommon

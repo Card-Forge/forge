@@ -8,4 +8,3 @@ S:Mode$ Continuous | Affected$ Creature.Green+YouCtrl,Creature.Blue+YouCtrl | Ad
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/murkfiend_liege.jpg
 Oracle:Other green creatures you control get +1/+1.\nOther blue creatures you control get +1/+1.\nUntap all green and/or blue creatures you control during each other player's untap step.
-SetInfo:EVE Rare

@@ -8,4 +8,3 @@ SVar:TrigPutCounterAll:AB$ PutCounterAll | Cost$ 0 | ValidCards$ Creature.nonBla
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/midnight_banshee.jpg
 Oracle:Wither (This deals damage to creatures in the form of -1/-1 counters.)\nAt the beginning of your upkeep, put a -1/-1 counter on each nonblack creature.
-SetInfo:SHM Rare

@@ -6,4 +6,3 @@ S:Mode$ Continuous | Affected$ You | RaiseMaxHandSize$ 1 | Description$ Your max
 K:Defender
 SVar:Picture:http://www.wizards.com/global/images/magic/general/minamo_scrollkeeper.jpg
 Oracle:Defender (This creature can't attack.)\nYour maximum hand size is increased by one.
-SetInfo:SOK Common

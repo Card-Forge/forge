@@ -7,4 +7,3 @@ SVar:X:Count$OppPoisonCounters
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mycosynth_fiend.jpg
 Oracle:Mycosynth Fiend gets +1/+1 for each poison counter your opponents have.
-SetInfo:NPH Uncommon

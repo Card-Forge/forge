@@ -10,4 +10,3 @@ SVar:X:SVar$Y/Plus.Z
 SVar:MustAttack:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mad_dog.jpg
 Oracle:At the beginning of your end step, if Mad Dog didn't attack or come under your control this turn, sacrifice it.
-SetInfo:ODY Common

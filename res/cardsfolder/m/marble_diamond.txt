@@ -5,7 +5,3 @@ A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add W to your mana pool.
 K:CARDNAME enters the battlefield tapped.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/marble_diamond.jpg
 Oracle:Marble Diamond enters the battlefield tapped.\n{T}: Add {W} to your mana pool.
-SetInfo:DDC Uncommon
-SetInfo:7ED Uncommon
-SetInfo:MIR Uncommon
-SetInfo:6ED Uncommon

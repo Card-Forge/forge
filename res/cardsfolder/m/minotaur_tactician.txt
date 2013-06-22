@@ -11,4 +11,3 @@ SVar:BuffedBy:Creature.White,Creature.Blue
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/minotaur_tactician.jpg
 Oracle:Haste\nMinotaur Tactician gets +1/+1 as long as you control a white creature.\nMinotaur Tactician gets +1/+1 as long as you control a blue creature.
-SetInfo:APC Common

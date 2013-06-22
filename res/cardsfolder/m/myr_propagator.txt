@@ -5,4 +5,3 @@ PT:1/1
 A:AB$CopyPermanent | Cost$ 3 T | Defined$ Self | SpellDescription$ Put a token that's a copy of CARDNAME onto the battlefield.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/myr_propagator.jpg
 Oracle:{3}, {T}: Put a token that's a copy of Myr Propagator onto the battlefield.
-SetInfo:SOM Rare

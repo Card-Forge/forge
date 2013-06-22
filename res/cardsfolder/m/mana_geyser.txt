@@ -6,4 +6,3 @@ SVar:X:Count$Valid Land.tapped+OppCtrl
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mana_geyser.jpg
 Oracle:Add {R} to your mana pool for each tapped land your opponents control.
-SetInfo:5DN Common

@@ -5,4 +5,3 @@ PT:3/2
 K:Shroud
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mist_leopard.jpg
 Oracle:Shroud (This creature can't be the target of spells or abilities.)
-SetInfo:M10 Common

@@ -6,4 +6,3 @@ S:Mode$ Continuous | Affected$ Card.Self | EffectZone$ Battlefield | GainsAbilit
 A:AB$ ChangeZone | Cost$ T | ValidTgts$ Artifact | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ Select target artifact | RememberChanged$ True | PrecostDesc$ Imprint - | SpellDescription$ Exile target artifact card from a graveyard.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/myr_welder.jpg
 Oracle:Imprint - {T}: Exile target artifact card from a graveyard.\nMyr Welder has all activated abilities of all cards exiled with it.
-SetInfo:MBS Rare

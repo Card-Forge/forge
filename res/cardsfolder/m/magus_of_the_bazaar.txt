@@ -7,4 +7,3 @@ SVar:DBDiscard:DB$Discard | Defined$ You | NumCards$ 3 | Mode$ TgtChoose
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/magus_of_the_bazaar.jpg
 Oracle:{T}: Draw two cards, then discard three cards.
-SetInfo:PLC Rare

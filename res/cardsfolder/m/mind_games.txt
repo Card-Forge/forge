@@ -6,4 +6,3 @@ K:Buyback 2 U
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mind_games.jpg
 Oracle:Buyback {2}{U} (You may pay an additional {2}{U} as you cast this spell. If you do, put this card into your hand as it resolves.)\nTap target artifact, creature, or land.
-SetInfo:STH Common

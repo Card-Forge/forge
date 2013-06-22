@@ -7,4 +7,3 @@ SVar:X:Count$Valid Artifact.untapped+YouCtrl,Creature.untapped+YouCtrl,Land.unta
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/maraxus_of_keld.jpg
 Oracle:Maraxus of Keld's power and toughness are each equal to the number of untapped artifacts, creatures, and lands you control.
-SetInfo:WTH Rare

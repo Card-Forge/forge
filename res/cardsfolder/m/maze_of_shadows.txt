@@ -7,4 +7,3 @@ SVar:DBUntap:DB$Untap | Defined$ Targeted
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/maze_of_shadows.jpg
 Oracle:{T}: Add {1} to your mana pool.\n{T}: Untap target attacking creature with shadow. Prevent all combat damage that would be dealt to and dealt by that creature this turn.
-SetInfo:TMP Uncommon

@@ -8,4 +8,3 @@ SVar:TrigPump:AB$ Pump | Cost$ 0 | TargetMin$ 0 | TargetMax$ 2 | KW$ HIDDEN CARD
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/markov_warlord.jpg
 Oracle:Haste\nWhen Markov Warlord enters the battlefield, up to two target creatures can't block this turn.
-SetInfo:DKA Uncommon

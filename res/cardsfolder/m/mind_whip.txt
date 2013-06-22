@@ -11,4 +11,3 @@ SVar:DBReset:DB$ StoreSVar | SVar$ Paid | Type$ Number | Expression$ 1
 SVar:Paid:Number$1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mind_whip.jpg
 Oracle:Enchant creature\nAt the beginning of the upkeep of enchanted creature's controller, that player may pay {3}. If he or she doesn't, CARDNAME deals 2 damage to that player and you tap that creature.
-SetInfo:ICE Rare

@@ -6,6 +6,3 @@ T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ Opponent | TriggerZ
 SVar:TrigPump:AB$Pump | Cost$ 0 | Defined$ Self | NumAtt$ 2 | NumDef$ 2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mogg_sentry.jpg
 Oracle:Whenever an opponent casts a spell, Mogg Sentry gets +2/+2 until end of turn.
-SetInfo:8ED Rare
-SetInfo:PLS Rare
-SetInfo:9ED Rare

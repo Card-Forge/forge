@@ -5,4 +5,3 @@ A:SP$ ChangeZoneAll | Cost$ 1 W | ChangeType$ Card | Origin$ Graveyard | Destina
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/morningtide.jpg
 Oracle:Exile all cards from all graveyards.
-SetInfo:TOR Rare

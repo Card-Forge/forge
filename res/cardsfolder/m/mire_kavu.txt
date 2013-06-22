@@ -8,4 +8,3 @@ SVar:RemRandomDeck:True
 DeckNeeds:Color$Black
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mire_kavu.jpg
 Oracle:Mire Kavu gets +1/+1 as long as you control a Swamp.
-SetInfo:PLS Common

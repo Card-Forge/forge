@@ -5,5 +5,3 @@ A:SP$ DeclareCombatants | Cost$ 2 RW RW | DeclareAttackers$ True | DeclareBlocke
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/master_warcraft.jpg
 Oracle:Cast Master Warcraft only before attackers are declared.\nYou choose which creatures attack this turn.\nYou choose which creatures block this turn and how those creatures block.
-SetInfo:RAV Rare
-SetInfo:COM Rare

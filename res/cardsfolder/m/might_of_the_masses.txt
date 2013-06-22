@@ -5,4 +5,3 @@ A:SP$ Pump | Cost$ G | ValidTgts$ Creature | TgtPrompt$ Select target creature |
 SVar:X:Count$TypeYouCtrl.Creature
 SVar:Picture:http://www.wizards.com/global/images/magic/general/might_of_the_masses.jpg
 Oracle:Target creature gets +1/+1 until end of turn for each creature you control.
-SetInfo:ROE Common

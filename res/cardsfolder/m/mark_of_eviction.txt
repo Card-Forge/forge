@@ -7,4 +7,3 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | E
 SVar:TrigRem:AB$ ChangeZoneAll | Cost$ 0 | ChangeType$ Card.EnchantedBy,Aura.AttachedTo Card.EnchantedBy | Origin$ Battlefield | Destination$ Hand
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mark_of_eviction.jpg
 Oracle:Enchant creature\nAt the beginning of your upkeep, return enchanted creature and all Auras attached to that creature to their owners' hands.
-SetInfo:RAV Uncommon

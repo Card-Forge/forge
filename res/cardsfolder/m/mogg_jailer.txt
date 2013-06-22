@@ -5,4 +5,3 @@ PT:2/2
 K:CARDNAME can't attack if defending player controls an untapped creature with power 2 or less.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mogg_jailer.jpg
 Oracle:Mogg Jailer can't attack if defending player controls an untapped creature with power 2 or less.
-SetInfo:PLS Uncommon

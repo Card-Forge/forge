@@ -5,5 +5,3 @@ T:Mode$ SpellCast | ValidActivatingPlayer$ Opponent | TriggerZones$ Battlefield 
 SVar:TrigMill:AB$Mill | Cost$ 0 | Defined$ Opponent | NumCards$ 2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/memory_erosion.jpg
 Oracle:Whenever an opponent casts a spell, that player puts the top two cards of his or her library into his or her graveyard.
-SetInfo:COM Rare
-SetInfo:ALA Rare

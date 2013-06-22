@@ -11,4 +11,3 @@ SVar:NumInYard:TargetedPlayer$CardsInGraveyard
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/memoricide.jpg
 Oracle:Name a nonland card. Search target player's graveyard, hand, and library for any number of cards with that name and exile them. Then that player shuffles his or her library.
-SetInfo:SOM Rare

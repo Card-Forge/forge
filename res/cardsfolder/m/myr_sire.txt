@@ -7,4 +7,3 @@ SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Myr | TokenTypes
 SVar:SacMe:1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/myr_sire.jpg
 Oracle:When Myr Sire dies, put a 1/1 colorless Myr artifact creature token onto the battlefield.
-SetInfo:MBS Common

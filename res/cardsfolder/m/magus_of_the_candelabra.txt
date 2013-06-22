@@ -9,4 +9,3 @@ SVar:MaxTgts:Count$Valid Land
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/magus_of_the_candelabra.jpg
 Oracle:{X}, {T}: Untap X target lands.
-SetInfo:TSP Rare

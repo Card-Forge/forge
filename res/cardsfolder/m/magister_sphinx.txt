@@ -7,5 +7,3 @@ T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefi
 SVar:TrigLife:AB$SetLife | Cost$ 0 | ValidTgts$ Player | TgtPrompt$ Select target player | LifeAmount$ 10
 SVar:Picture:http://www.wizards.com/global/images/magic/general/magister_sphinx.jpg
 Oracle:Flying\nWhen Magister Sphinx enters the battlefield, target player's life total becomes 10.
-SetInfo:ARC Rare
-SetInfo:CFX Rare

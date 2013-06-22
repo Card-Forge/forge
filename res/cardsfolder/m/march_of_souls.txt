@@ -10,4 +10,3 @@ SVar:Y:Remembered$Amount
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/march_of_souls.jpg
 Oracle:Destroy all creatures. They can't be regenerated. For each creature destroyed this way, its controller puts a 1/1 white Spirit creature token with flying onto the battlefield.
-SetInfo:PLS Rare

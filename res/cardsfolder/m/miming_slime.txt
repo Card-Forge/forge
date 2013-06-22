@@ -6,4 +6,3 @@ SVar:X:Count$GreatestPowerYouControl
 SVar:NeedsToPlay:Creature.YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/miming_slime.jpg
 Oracle:Put an X/X green Ooze creature token onto the battlefield, where X is the greatest power among creatures you control.
-SetInfo:GTC Uncommon

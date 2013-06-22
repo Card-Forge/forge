@@ -6,4 +6,3 @@ SVar:XFetch:Count$TypeInYourLibrary.Land
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mana_severance.jpg
 Oracle:Search your library for any number of land cards and exile them. Then shuffle your library.
-SetInfo:TMP Rare

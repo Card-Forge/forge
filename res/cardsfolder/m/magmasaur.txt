@@ -14,4 +14,3 @@ SVar:Y:Count$CardCounters.P1P1
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/magmasaur.jpg
 Oracle:Magmasaur enters the battlefield with five +1/+1 counters on it.\nAt the beginning of your upkeep, you may remove a +1/+1 counter from Magmasaur. If you don't, sacrifice Magmasaur and it deals damage equal to the number of +1/+1 counters on it to each creature without flying and each player.
-SetInfo:TMP Rare

@@ -8,4 +8,3 @@ SVar:TrigChange:DB$ChangeZone | Origin$ Battlefield | Destination$ Hand
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mirozel.jpg
 Oracle:Flying\nWhen Mirozel becomes the target of a spell or ability, return Mirozel to its owner's hand.
-SetInfo:EXO Uncommon

@@ -9,5 +9,3 @@ S:Mode$ Continuous | Affected$ Creature.AttachedBy | AddSVar$ AE
 SVar:AE:SVar:HasAttackEffect:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mage_slayer.jpg
 Oracle:Whenever equipped creature attacks, it deals damage equal to its power to defending player.\nEquip {3}
-SetInfo:ARB Uncommon
-SetInfo:HOP Uncommon

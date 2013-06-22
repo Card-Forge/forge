@@ -6,4 +6,3 @@ SVar:TrigReturn:AB$ChangeZone | Cost$ 0 | Defined$ TriggeredCard | Origin$ Grave
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mortuary.jpg
 Oracle:Whenever a creature is put into your graveyard from the battlefield, put that card on top of your library.
-SetInfo:STH Rare

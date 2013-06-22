@@ -6,4 +6,3 @@ SVar:UntapMerfolk:AB$UntapAll | Cost$ 0 | ValidCards$ Merfolk.YouCtrl | SpellDes
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/merrow_commerce.jpg
 Oracle:At the beginning of your end step, untap all Merfolk you control.
-SetInfo:LRW Uncommon

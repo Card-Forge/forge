@@ -6,4 +6,3 @@ K:CARDNAME attacks each turn if able.
 K:Cycling:BR
 SVar:Picture:http://www.wizards.com/global/images/magic/general/monstrous_carabid.jpg
 Oracle:Monstrous Carabid attacks each turn if able.\nCycling {B/R} ({B/R}, Discard this card: Draw a card.)
-SetInfo:ARB Common

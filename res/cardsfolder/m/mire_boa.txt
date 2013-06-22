@@ -6,4 +6,3 @@ K:Swampwalk
 A:AB$ Regenerate | Cost$ G | SpellDescription$ Regenerate CARDNAME.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mire_boa.jpg
 Oracle:Swampwalk\n{G}: Regenerate Mire Boa.
-SetInfo:PLC Common

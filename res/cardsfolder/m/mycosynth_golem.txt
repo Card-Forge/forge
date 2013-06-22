@@ -7,4 +7,3 @@ S:Mode$ ReduceCost | ValidCard$ Artifact.Creature | Type$ Spell | Amount$ X | Ac
 SVar:X:Count$Valid Artifact.YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mycosynth_golem.jpg
 Oracle:Affinity for artifacts (This spell costs {1} less to cast for each artifact you control.)\nArtifact creature spells you cast have affinity for artifacts. (They cost {1} less to cast for each artifact you control.)
-SetInfo:5DN Rare

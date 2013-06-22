@@ -10,4 +10,3 @@ SVar:DBChangeZoneAll:DB$ ChangeZoneAll | ChangeType$ Card.IsRemembered | Origin$
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/minamo.jpg
 Oracle:Whenever a player casts a spell, that player may draw a card.\nWhenever you roll {C}, each player may return a blue card from his or her graveyard to his or her hand.
-SetInfo:HOP Common

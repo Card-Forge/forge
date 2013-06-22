@@ -8,4 +8,3 @@ SVar:TrigReturn:DB$ ChangeZone | Origin$ Exile | Destination$ Battlefield | Defi
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mystifying_maze.jpg
 Oracle:{T}: Add {1} to your mana pool.\n{4}, {T}: Exile target attacking creature an opponent controls. At the beginning of the next end step, return it to the battlefield tapped under its owner's control.
-SetInfo:M11 Rare

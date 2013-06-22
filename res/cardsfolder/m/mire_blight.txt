@@ -6,4 +6,3 @@ A:SP$ Attach | Cost$ B | ValidTgts$ Creature | AILogic$ Curse
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ When CARDNAME is dealt damage, destroy it. | Description$ When enchanted creature is dealt damage, destroy it.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mire_blight.jpg
 Oracle:Enchant creature\nWhen enchanted creature is dealt damage, destroy it.
-SetInfo:ZEN Common

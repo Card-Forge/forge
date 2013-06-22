@@ -6,4 +6,3 @@ SVar:DBToken:DB$Token | Cost$ 0 | TokenAmount$ X | References$ X | TokenName$ Sa
 SVar:X:Targeted$CardToughness
 SVar:Picture:http://www.wizards.com/global/images/magic/general/morbid_bloom.jpg
 Oracle:Exile target creature card from a graveyard, then put X 1/1 green Saproling creature tokens onto the battlefield, where X is the exiled card's toughness.
-SetInfo:ARB Uncommon

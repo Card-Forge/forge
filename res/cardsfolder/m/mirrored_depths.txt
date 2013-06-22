@@ -10,4 +10,3 @@ SVar:DBPlay:DB$ Play | Defined$ Remembered | WithoutManaCost$ True | Optional$ T
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mirrored_depths.jpg
 Oracle:Whenever a player casts a spell, that player flips a coin. If he or she loses the flip, counter that spell.\nWhenever you roll {C}, target player reveals the top card of his or her library. If it's a nonland card, you may cast it without paying its mana cost.
-SetInfo:HOP Common

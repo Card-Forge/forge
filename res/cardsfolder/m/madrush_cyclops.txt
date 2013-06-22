@@ -7,4 +7,3 @@ SVar:PlayMain1:TRUE
 SVar:BuffedBy:Creature
 SVar:Picture:http://www.wizards.com/global/images/magic/general/madrush_cyclops.jpg
 Oracle:Creatures you control have haste.
-SetInfo:ARB Rare

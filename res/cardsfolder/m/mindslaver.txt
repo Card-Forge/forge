@@ -5,5 +5,3 @@ A:AB$ ControlPlayer | Cost$ 4 T Sac<1/CARDNAME> | ValidTgts$ Player | TgtPrompt$
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mindslaver.jpg
 Oracle:{4}, {T}, Sacrifice Mindslaver: You control target player during that player's next turn. (You see all cards that player could see and make all decisions for the player.)
-SetInfo:MRD Rare
-SetInfo:SOM Mythic

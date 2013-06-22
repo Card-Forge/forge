@@ -6,4 +6,3 @@ SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 1
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/manamorphose.jpg
 Oracle:Add two mana in any combination of colors to your mana pool.\nDraw a card.
-SetInfo:SHM Common

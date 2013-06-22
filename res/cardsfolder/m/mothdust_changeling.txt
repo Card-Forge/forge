@@ -6,4 +6,3 @@ S:Mode$ Continuous | EffectZone$ All | Affected$ Card.Self | CharacteristicDefin
 A:AB$ Pump | Cost$ tapXType<1/Creature> | KW$ Flying | SpellDescription$ CARDNAME gains flying until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mothdust_changeling.jpg
 Oracle:Changeling (This card is every creature type at all times.)\nTap an untapped creature you control: Mothdust Changeling gains flying until end of turn.
-SetInfo:MOR Common

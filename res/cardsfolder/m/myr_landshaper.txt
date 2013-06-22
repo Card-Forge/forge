@@ -6,4 +6,3 @@ A:AB$ Animate | Cost$ T | ValidTgts$ Land | TgtPrompt$ Select target land | Type
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/myr_landshaper.jpg
 Oracle:{T}: Target land becomes an artifact in addition to its other types until end of turn.
-SetInfo:DST Common

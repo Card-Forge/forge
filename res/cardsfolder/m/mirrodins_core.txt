@@ -6,4 +6,3 @@ A:AB$PutCounter | Cost$ T | Defined$ Self | CounterType$ CHARGE | CounterNum$ 1 
 A:AB$Mana | Cost$ T SubCounter<1/CHARGE> | Produced$ Any | SpellDescription$ Add one mana of any color to your mana pool.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mirrodins_core.jpg
 Oracle:{T}: Add {1} to your mana pool.\n{T}: Put a charge counter on Mirrodin's Core.\n{T}, Remove a charge counter from Mirrodin's Core: Add one mana of any color to your mana pool.
-SetInfo:DST Uncommon

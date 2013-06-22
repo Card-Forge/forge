@@ -5,4 +5,3 @@ A:SP$ DealDamage | Cost$ 1 R | ValidTgts$ Player | TgtPrompt$ Select target play
 SVar:X:Count$TypeYouCtrl.Creature
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mob_justice.jpg
 Oracle:Mob Justice deals damage to target player equal to the number of creatures you control.
-SetInfo:STH Common

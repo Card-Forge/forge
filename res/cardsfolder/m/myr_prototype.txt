@@ -9,4 +9,3 @@ S:Mode$ CantBlockUnless | ValidCard$ Card.Self | Cost$ X
 SVar:X:Count$CardCounters.P1P1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/myr_prototype.jpg
 Oracle:At the beginning of your upkeep, put a +1/+1 counter on Myr Prototype.\nMyr Prototype can't attack or block unless you pay {1} for each +1/+1 counter on it.
-SetInfo:MRD Uncommon

@@ -5,5 +5,3 @@ A:SP$ DealDamage | Cost$ R | ValidTgts$ Creature | TgtPrompt$ Select target crea
 SVar:DB:DB$Pump | KW$ HIDDEN If CARDNAME would be put into a graveyard, exile it instead. | Defined$ Targeted
 SVar:Picture:http://www.wizards.com/global/images/magic/general/magma_spray.jpg
 Oracle:Magma Spray deals 2 damage to target creature. If that creature would die this turn, exile it instead.
-SetInfo:DDJ Common
-SetInfo:ALA Common

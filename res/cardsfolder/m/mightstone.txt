@@ -6,4 +6,3 @@ SVar:PlayMain1:TRUE
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mightstone.jpg
 Oracle:Attacking creatures get +1/+0.
-SetInfo:ATQ Uncommon

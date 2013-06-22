@@ -7,4 +7,3 @@ SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mossfire_egg.jpg
 Oracle:{2}, {T}, Sacrifice Mossfire Egg: Add {R}{G} to your mana pool. Draw a card.
-SetInfo:ODY Uncommon

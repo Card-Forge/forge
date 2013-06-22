@@ -5,4 +5,3 @@ PT:2/4
 K:Flying
 SVar:Picture:http://www.wizards.com/global/images/magic/general/makindi_griffin.jpg
 Oracle:Flying
-SetInfo:ROE Common

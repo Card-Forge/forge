@@ -7,4 +7,3 @@ SVar:MyPleasure:DB$ Play | Valid$ Card.nonCreature+nonLand+IsRemembered | Withou
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Picture:http://www.cardforge.org/fpics/lq_schemes/my_wish_is_your_command.jpg
 Oracle:When you set this scheme in motion, each opponent reveals his or her hand. You may choose a noncreature, nonland card revealed this way and cast it without paying its mana cost.
-SetInfo:ARC Common

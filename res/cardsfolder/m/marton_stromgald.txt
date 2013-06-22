@@ -10,4 +10,3 @@ SVar:TrigPumpBlock:AB$ PumpAll | Cost$ 0 | ValidCards$ Creature.blocking+Other |
 SVar:Y:Count$Valid Creature.blocking+Other
 SVar:Picture:http://www.wizards.com/global/images/magic/general/marton_stromgald.jpg
 Oracle:Whenever Marton Stromgald attacks, other attacking creatures get +1/+1 until end of turn for each attacking creature other than Marton Stromgald.\nWhenever Marton Stromgald blocks, other blocking creatures get +1/+1 until end of turn for each blocking creature other than Marton Stromgald.
-SetInfo:ICE Rare

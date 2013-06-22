@@ -6,4 +6,3 @@ T:Mode$ SpellAbilityCast | TargetsValid$ Card.Self | ValidControllingPlayer$ Opp
 SVar:TrigPutCounter:AB$ PutCounter | Cost$ 0 | Defined$ Self | CounterNum$ 1 | CounterType$ P1P1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mossdog.jpg
 Oracle:Whenever Mossdog becomes the target of a spell or ability an opponent controls, put a +1/+1 counter on Mossdog.
-SetInfo:NMS Common

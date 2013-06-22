@@ -5,4 +5,3 @@ A:AB$ Mana | Cost$ T | Produced$ 1 | Amount$ 3 | RestrictValid$ Artifact | Spell
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mishras_workshop.jpg
 Oracle:{T}: Add {3} to your mana pool. Spend this mana only to cast artifact spells.
-SetInfo:ATQ Rare

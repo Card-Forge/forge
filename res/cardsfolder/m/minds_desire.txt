@@ -8,4 +8,3 @@ SVar:DBPump:DB$ Pump | Defined$ Remembered | KW$ May be played without paying it
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/minds_desire.jpg
 Oracle:Shuffle your library. Then exile the top card of your library. Until end of turn, you may play that card without paying its mana cost. (If it has X in its mana cost, X is 0.)\nStorm (When you cast this spell, copy it for each spell cast before it this turn.)
-SetInfo:SCG Rare

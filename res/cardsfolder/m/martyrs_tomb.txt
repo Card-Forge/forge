@@ -5,4 +5,3 @@ A:AB$ PreventDamage | Cost$ PayLife<2> | ValidTgts$ Creature | Amount$ 1 | TgtPr
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/martyrs_tomb.jpg
 Oracle:Pay 2 life: Prevent the next 1 damage that would be dealt to target creature this turn.
-SetInfo:APC Uncommon

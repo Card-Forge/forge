@@ -11,4 +11,3 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | Static$ True | Va
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/muse_vessel.jpg
 Oracle:{3}, {T}: Target player exiles a card from his or her hand. Activate this ability only any time you could cast a sorcery.\n{1}: Choose a card exiled with Muse Vessel. You may play that card this turn.
-SetInfo:DIS Rare

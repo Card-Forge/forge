@@ -8,4 +8,3 @@ SVar:NeedsToPlayVar:Y GE2
 SVar:Y:Count$Valid Swamp.YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mold_demon.jpg
 Oracle:When Mold Demon enters the battlefield, sacrifice it unless you sacrifice two Swamps.
-SetInfo:LEG Rare

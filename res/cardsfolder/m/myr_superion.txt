@@ -7,4 +7,3 @@ SVar:FullCost:Mana<2\Creature>
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/myr_superion.jpg
 Oracle:Spend only mana produced by creatures to cast Myr Superion.
-SetInfo:NPH Rare

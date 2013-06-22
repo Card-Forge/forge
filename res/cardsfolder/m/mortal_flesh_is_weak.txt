@@ -6,4 +6,3 @@ SVar:ShowTheWeakness:AB$ SetLife | Cost$ 0 | Defined$ Player.Opponent | LifeAmou
 SVar:X:Count$LowestLifeTotal Opponent
 SVar:Picture:http://www.cardforge.org/fpics/lq_schemes/mortal_flesh_is_weak.jpg
 Oracle:When you set this scheme in motion, each opponent's life total becomes the lowest life total among your opponents.
-SetInfo:ARC Common

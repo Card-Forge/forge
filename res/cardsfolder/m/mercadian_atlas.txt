@@ -6,4 +6,3 @@ SVar:AtlasDraw:DB$ Draw | Defined$ You | NumCards$ 1
 SVar:X:Count$YourLandsPlayed
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mercadian_atlas.jpg
 Oracle:At the beginning of your end step, if you didn't play a land this turn, you may draw a card.
-SetInfo:MMQ Rare

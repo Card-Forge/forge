@@ -8,4 +8,3 @@ SVar:DBAnimate:DB$ Animate | ValidTgts$ Land | TgtPrompt$ Select target land | T
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/moonbow_illusionist.jpg
 Oracle:Flying\n{2}, Return a land you control to its owner's hand: Target land becomes the basic land type of your choice until end of turn.
-SetInfo:SOK Common

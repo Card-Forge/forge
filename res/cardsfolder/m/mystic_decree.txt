@@ -6,4 +6,3 @@ SVar:NonStackingEffect:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mystic_decree.jpg
 Oracle:All creatures lose flying and islandwalk.
-SetInfo:HML Rare

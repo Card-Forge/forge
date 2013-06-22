@@ -13,4 +13,3 @@ SVar:DBShuffle:DB$ Shuffle | Defined$ You
 SVar:RemAIDeck:True
 SVar:Picture:http://www.cardforge.org/fpics/vgd-lq/maralen_of_the_mornsong_avatar.jpg
 Oracle:Hand +0, life -3\nAt the beginning of the game, you may pay any amount of life.\nYou can't draw cards.\nAt the beginning of your draw step, look at the top X cards of your library, where X is the amount of life paid with Maralen of the Mornsong Avatar. Put one of them into your hand, then shuffle your library.
-SetInfo:VAN Special

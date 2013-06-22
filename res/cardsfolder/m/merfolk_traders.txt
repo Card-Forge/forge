@@ -7,4 +7,3 @@ SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 1 | SubAbility$ DBDis
 SVar:DBDiscard:DB$Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose
 SVar:Picture:http://www.wizards.com/global/images/magic/general/merfolk_traders.jpg
 Oracle:When Merfolk Traders enters the battlefield, draw a card, then discard a card.
-SetInfo:WTH Common

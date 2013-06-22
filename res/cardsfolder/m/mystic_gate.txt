@@ -8,4 +8,3 @@ A:AB$ Mana | Cost$ WU T | Produced$ U | Amount$2 | SpellDescription$ Add U U to 
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mystic_gate.jpg
 Oracle:{T}: Add {1} to your mana pool.\n{W/U}, {T}: Add {W}{W}, {W}{U}, or {U}{U} to your mana pool.
-SetInfo:SHM Rare

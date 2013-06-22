@@ -7,7 +7,3 @@ SVar:TrigChangeZone:DB$ChangeZone | ValidTgts$ Creature | TgtPrompt$ Select targ
 SVar:PlayMain1:TRUE
 SVar:Picture:http://resources.wizards.com/magic/cards/po/en-us/card4266.jpg
 Oracle:When Man-o'-War enters the battlefield, return target creature to its owner's hand.
-SetInfo:VIS Common
-SetInfo:DD2 Common
-SetInfo:POR Uncommon
-SetInfo:S99 Uncommon

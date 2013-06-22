@@ -8,4 +8,3 @@ SVar:TrigReveal:DB$ RevealHand | Defined$ TriggeredTarget | SubAbility$ TrigPlay
 SVar:TrigPlay:DB$ Play | Valid$ Card.nonLand+DefenderCtrl | ValidZone$ Hand | WithoutManaCost$ True | Optional$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mindleech_mass.jpg
 Oracle:Trample\nWhenever Mindleech Mass deals combat damage to a player, you may look at that player's hand. If you do, you may cast a nonland card in it without paying that card's mana cost.
-SetInfo:RAV Rare

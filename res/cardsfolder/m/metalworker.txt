@@ -10,4 +10,3 @@ SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/metalworker.jpg
 Oracle:{T}: Reveal any number of artifact cards in your hand. Add {2} to your mana pool for each card revealed this way.
-SetInfo:UDS Rare

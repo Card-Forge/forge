@@ -8,4 +8,3 @@ SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/moratorium_stone.jpg
 Oracle:{2}, {T}: Exile target card from a graveyard.\n{2}{W}{B}, {T}, Sacrifice Moratorium Stone: Exile target nonland card from a graveyard, all other cards from graveyards with the same name as that card, and all permanents with that name.
-SetInfo:GPT Rare

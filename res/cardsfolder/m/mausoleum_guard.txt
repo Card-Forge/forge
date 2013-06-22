@@ -7,5 +7,3 @@ SVar:TrigToken:AB$Token | Cost$ 0 | TokenImage$ W 1 1 Spirit | TokenAmount$ 2 | 
 SVar:SacMe:1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mausoleum_guard.jpg
 Oracle:When Mausoleum Guard dies, put two 1/1 white Spirit creature tokens with flying onto the battlefield.
-SetInfo:DDK Uncommon
-SetInfo:ISD Uncommon

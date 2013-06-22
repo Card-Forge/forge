@@ -5,6 +5,3 @@ PT:1/1
 K:Flying
 SVar:Picture:http://resources.wizards.com/magic/cards/p3/en-us/card20229.jpg
 Oracle:Flying
-SetInfo:S99 Uncommon
-SetInfo:POR Uncommon
-SetInfo:S00 Uncommon

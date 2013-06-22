@@ -9,4 +9,3 @@ SVar:BuffedBy:Card.Black
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mountain_titan.jpg
 Oracle:{1}{R}{R}: Until end of turn, whenever you cast a black spell, put a +1/+1 counter on Mountain Titan.
-SetInfo:ICE Rare

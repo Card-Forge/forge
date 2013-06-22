@@ -6,4 +6,3 @@ S:Mode$ Continuous | Affected$ Creature.withoutFlying | AddHiddenKeyword$ CARDNA
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/magus_of_the_moat.jpg
 Oracle:Creatures without flying can't attack.
-SetInfo:FUT Rare

@@ -6,4 +6,3 @@ SVar:MagneticTheft:DB$ Attach | Object$ ParentTarget | ValidTgts$ Creature | Tgt
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/magnetic_theft.jpg
 Oracle:Attach target Equipment to target creature. (Control of the Equipment doesn't change.)
-SetInfo:5DN Uncommon

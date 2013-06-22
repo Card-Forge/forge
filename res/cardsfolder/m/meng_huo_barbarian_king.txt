@@ -6,4 +6,3 @@ S:Mode$ Continuous | Affected$ Creature.Green+Other+YouCtrl | AddPower$ 1 | AddT
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/meng_huo_barbarian_king.jpg
 Oracle:Other green creatures you control get +1/+1.
-SetInfo:PTK Rare

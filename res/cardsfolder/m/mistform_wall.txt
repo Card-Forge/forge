@@ -8,4 +8,3 @@ SVar:DBAnimate:DB$ Animate | Types$ ChosenType | OverwriteTypes$ True | KeepSupe
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mistform_wall.jpg
 Oracle:Mistform Wall has defender as long as it's a Wall.\n{1}: Mistform Wall becomes the creature type of your choice until end of turn.
-SetInfo:ONS Common

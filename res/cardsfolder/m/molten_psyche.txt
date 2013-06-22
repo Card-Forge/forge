@@ -12,4 +12,3 @@ SVar:NeedsToPlayVar:Z LE2
 SVar:Z:Count$InYourHand
 SVar:Picture:http://www.wizards.com/global/images/magic/general/molten_psyche.jpg
 Oracle:Each player shuffles the cards from his or her hand into his or her library, then draws that many cards.\nMetalcraft - If you control three or more artifacts, Molten Psyche deals damage to each opponent equal to the number of cards that player has drawn this turn.
-SetInfo:SOM Rare

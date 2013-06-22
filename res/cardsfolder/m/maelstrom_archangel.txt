@@ -7,4 +7,3 @@ T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage
 SVar:TrigPlay:DB$ Play | Valid$ Card.nonLand+YouCtrl | ValidZone$ Hand | WithoutManaCost$ True | Optional$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/maelstrom_archangel.jpg
 Oracle:Flying\nWhenever Maelstrom Archangel deals combat damage to a player, you may cast a nonland card from your hand without paying its mana cost.
-SetInfo:CFX Mythic

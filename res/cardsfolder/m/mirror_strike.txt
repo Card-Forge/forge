@@ -8,4 +8,3 @@ SVar:MirroredX:ReplaceCount$DamageAmount
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mirror_strike.jpg
 Oracle:All combat damage that would be dealt to you this turn by target unblocked creature is dealt to its controller instead.
-SetInfo:PCY Uncommon

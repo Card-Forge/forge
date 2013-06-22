@@ -7,5 +7,3 @@ A:AB$ Protection | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target crea
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mother_of_runes.jpg
 Oracle:{T}: Target creature you control gains protection from the color of your choice until end of turn.
-SetInfo:ULG Uncommon
-SetInfo:COM Uncommon

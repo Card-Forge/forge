@@ -7,5 +7,3 @@ A:SP$ Attach | Cost$ 4 W | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 3 | AddToughness$ 3 | AddKeyword$ Vigilance | Description$ Enchanted creature gets +3/+3 and has vigilance.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mammoth_umbra.jpg
 Oracle:Enchant creature\nEnchanted creature gets +3/+3 and has vigilance.\nTotem armor (If enchanted creature would be destroyed, instead remove all damage from it and destroy this Aura.)
-SetInfo:PC2 Uncommon
-SetInfo:ROE Uncommon

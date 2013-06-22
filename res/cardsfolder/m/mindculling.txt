@@ -5,4 +5,3 @@ A:SP$ Discard | Cost$ 5 U | ValidTgts$ Opponent | NumCards$ 2 | Mode$ TgtChoose 
 SVar:DBDraw:DB$Draw | Defined$ You | NumCards$ 2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mindculling.jpg
 Oracle:You draw two cards and target opponent discards two cards.
-SetInfo:NPH Uncommon

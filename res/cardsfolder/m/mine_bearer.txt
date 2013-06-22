@@ -6,4 +6,3 @@ A:AB$ Destroy | Cost$ T Sac<1/CARDNAME> | ValidTgts$ Creature.attacking | TgtPro
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mine_bearer.jpg
 Oracle:{T}, Sacrifice Mine Bearer: Destroy target attacking creature.
-SetInfo:PCY Common

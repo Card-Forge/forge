@@ -11,4 +11,3 @@ SVar:DBCleanup:DB$ Cleanup | ClearChosenX$ True
 SVar:X:XChoice
 SVar:Picture:http://www.wizards.com/global/images/magic/general/myr_battlesphere.jpg
 Oracle:When Myr Battlesphere enters the battlefield, put four 1/1 colorless Myr artifact creature tokens onto the battlefield.\nWhenever Myr Battlesphere attacks, you may tap X untapped Myr you control. If you do, Myr Battlesphere gets +X/+0 until end of turn and deals X damage to defending player.
-SetInfo:SOM Rare

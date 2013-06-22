@@ -6,4 +6,3 @@ SVar:NonStackingEffect:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/moat.jpg
 Oracle:Creatures without flying can't attack.
-SetInfo:LEG Rare

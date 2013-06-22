@@ -8,4 +8,3 @@ SVar:HostileAct:AB$Pump | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select targ
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/malicious_intent.jpg
 Oracle:Enchant creature\nEnchanted creature has "{T}: Target creature can't block this turn."
-SetInfo:AVR Common

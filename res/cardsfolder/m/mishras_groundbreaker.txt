@@ -5,4 +5,3 @@ A:AB$ Animate | Cost$ T Sac<1/CARDNAME> | ValidTgts$ Land | TgtPrompt$ Select ta
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mishras_groundbreaker.jpg
 Oracle:{T}, Sacrifice Mishra's Groundbreaker: Target land becomes a 3/3 artifact creature that's still a land. (This effect lasts indefinitely.)
-SetInfo:ALL Uncommon

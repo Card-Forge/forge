@@ -7,4 +7,3 @@ SVar:DBCopy:DB$ Clone | Defined$ Remembered | CloneTarget$ Imprinted | Duration$
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mirrorweave.jpg
 Oracle:Each other creature becomes a copy of target nonlegendary creature until end of turn.
-SetInfo:SHM Rare

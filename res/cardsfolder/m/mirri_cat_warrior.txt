@@ -7,5 +7,3 @@ K:Forestwalk
 K:Vigilance
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mirri_cat_warrior.jpg
 Oracle:First strike, forestwalk, vigilance (This creature deals combat damage before creatures without first strike, it's unblockable as long as defending player controls a Forest, and attacking doesn't cause this creature to tap.)
-SetInfo:EXO Rare
-SetInfo:10E Rare

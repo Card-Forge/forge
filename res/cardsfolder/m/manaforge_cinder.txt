@@ -5,4 +5,3 @@ PT:1/1
 A:AB$ Mana | Cost$ 1 | Produced$ Combo B R | Amount$ 1 | ActivationLimit$ 3 | SpellDescription$ Add B or R to your mana pool. Activate this ability no more than three times each turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/manaforge_cinder.jpg
 Oracle:{1}: Add {B} or {R} to your mana pool. Activate this ability no more than three times each turn.
-SetInfo:SHM Common

@@ -5,6 +5,3 @@ T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | Tr
 SVar:TrigCopy:AB$CopySpellAbility | Cost$ 3 | Defined$ TriggeredSpellAbility
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mirari.jpg
 Oracle:Whenever you cast an instant or sorcery spell, you may pay {3}. If you do, copy that spell. You may choose new targets for the copy.
-SetInfo:V10 Mythic
-SetInfo:ODY Rare
-SetInfo:TSB Special

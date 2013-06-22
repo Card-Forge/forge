@@ -5,6 +5,3 @@ A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add U to your mana pool.
 SVar:PlayMain1:TRUE
 SVar:Picture:http://resources.wizards.com/magic/cards/2u/en-us/card633.jpg
 Oracle:{T}: Add {U} to your mana pool.
-SetInfo:LEB Rare
-SetInfo:LEA Rare
-SetInfo:2ED Rare

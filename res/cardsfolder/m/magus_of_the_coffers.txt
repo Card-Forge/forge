@@ -7,4 +7,3 @@ SVar:X:Count$Valid Swamp.YouCtrl
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/magus_of_the_coffers.jpg
 Oracle:{2}, {T}: Add {B} to your mana pool for each Swamp you control.
-SetInfo:PLC Rare

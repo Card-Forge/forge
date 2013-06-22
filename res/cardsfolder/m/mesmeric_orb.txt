@@ -6,4 +6,3 @@ SVar:TrigMill:AB$Mill | Cost$ 0 | Defined$ TriggeredCardController | NumCards$ 1
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mesmeric_orb.jpg
 Oracle:Whenever a permanent becomes untapped, that permanent's controller puts the top card of his or her library into his or her graveyard.
-SetInfo:MRD Rare

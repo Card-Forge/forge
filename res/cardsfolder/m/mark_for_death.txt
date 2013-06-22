@@ -8,4 +8,3 @@ SVar:KWPump:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield |
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mark_for_death.jpg
 Oracle:Target creature an opponent controls blocks this turn if able. Untap that creature. Other creatures that player controls can't block this turn.
-SetInfo:GTC Uncommon

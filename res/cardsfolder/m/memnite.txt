@@ -4,4 +4,3 @@ Types:Artifact Creature Construct
 PT:1/1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/memnite.jpg
 Oracle:
-SetInfo:SOM Uncommon

@@ -6,4 +6,3 @@ SVar:DBChange:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | ChangeT
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/metamorphose.jpg
 Oracle:Put target permanent an opponent controls on top of its owner's library. That opponent may put an artifact, creature, enchantment, or land card from his or her hand onto the battlefield.
-SetInfo:SCG Uncommon

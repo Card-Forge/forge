@@ -9,5 +9,3 @@ SVar:DBTap:AB$ Tap | Cost$ 0 | ETB$ True | Defined$ Self | UnlessCost$ Reveal<1/
 SVar:DBPain:DB$DealDamage | NumDmg$ 1 | Defined$ You
 SVar:Picture:http://www.wizards.com/global/images/magic/general/murmuring_bosk.jpg
 Oracle:({T}: Add {G} to your mana pool.)\nAs Murmuring Bosk enters the battlefield, you may reveal a Treefolk card from your hand. If you don't, Murmuring Bosk enters the battlefield tapped.\n{T}: Add {W} or {B} to your mana pool. Murmuring Bosk deals 1 damage to you.
-SetInfo:V12 Mythic
-SetInfo:MOR Rare

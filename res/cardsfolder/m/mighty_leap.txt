@@ -4,7 +4,3 @@ Types:Instant
 A:SP$ Pump | Cost$ 1 W | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | NumDef$ +2 | KW$ Flying | SpellDescription$ Target creature gets +2/+2 and gains flying until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mighty_leap.jpg
 Oracle:Target creature gets +2/+2 and gains flying until end of turn.
-SetInfo:M11 Common
-SetInfo:M12 Common
-SetInfo:DDG Common
-SetInfo:DDF Common

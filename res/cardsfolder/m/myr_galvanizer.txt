@@ -7,4 +7,3 @@ A:AB$ UntapAll | Cost$ 1 T | ValidCards$ Myr.Other+YouCtrl | SpellDescription$ U
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/myr_galvanizer.jpg
 Oracle:Other Myr creatures you control get +1/+1.\n{1}, {T}: Untap each other Myr you control.
-SetInfo:SOM Uncommon

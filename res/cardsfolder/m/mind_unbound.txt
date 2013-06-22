@@ -7,4 +7,3 @@ SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ X | References$ X
 SVar:X:Count$CardCounters.LORE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mind_unbound.jpg
 Oracle:At the beginning of your upkeep, put a lore counter on Mind Unbound, then draw a card for each lore counter on Mind Unbound.
-SetInfo:M12 Rare

@@ -5,4 +5,3 @@ A:SP$ ChangeZone | Cost$ B | Origin$ Graveyard | Destination$ Library | LibraryP
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/misinformation.jpg
 Oracle:Put up to three target cards from an opponent's graveyard on top of his or her library in any order.
-SetInfo:ALL Uncommon

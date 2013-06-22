@@ -4,4 +4,3 @@ Types:Instant
 A:SP$ Destroy | Cost$ 1 B B | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Destroy target creature.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/murder.jpg
 Oracle:Destroy target creature.
-SetInfo:M13 Common

@@ -8,4 +8,3 @@ SVar:X:TriggeredCard$CardManaCost
 SVar:BuffedBy:Card
 SVar:Picture:http://www.wizards.com/global/images/magic/general/manaplasm.jpg
 Oracle:Whenever you cast a spell, Manaplasm gets +X/+X until end of turn, where X is that spell's converted mana cost.
-SetInfo:ALA Rare

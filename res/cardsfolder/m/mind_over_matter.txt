@@ -6,4 +6,3 @@ SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mind_over_matter.jpg
 Oracle:Discard a card: You may tap or untap target artifact, creature, or land.
-SetInfo:EXO Rare

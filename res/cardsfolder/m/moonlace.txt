@@ -6,4 +6,3 @@ SVar:RemRandomDeck:True
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/moonlace.jpg
 Oracle:Target spell or permanent becomes colorless.
-SetInfo:TSP Rare

@@ -6,4 +6,3 @@ A:AB$ Mill | Cost$ Sac<1/CARDNAME> | Defined$ You | NumCards$ 3 | SpellDescripti
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/morgue_thrull.jpg
 Oracle:Sacrifice Morgue Thrull: Put the top three cards of your library into your graveyard.
-SetInfo:STH Common

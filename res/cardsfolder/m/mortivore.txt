@@ -7,7 +7,3 @@ SVar:X:Count$TypeInAllYards.Creature
 A:AB$ Regenerate | Cost$ B | SpellDescription$ Regenerate CARDNAME.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mortivore.jpg
 Oracle:Mortivore's power and toughness are each equal to the number of creature cards in all graveyards.\n{B}: Regenerate Mortivore.
-SetInfo:ODY Rare
-SetInfo:COM Rare
-SetInfo:9ED Rare
-SetInfo:10E Rare

@@ -5,4 +5,3 @@ PT:1/1
 K:Haste
 SVar:Picture:http://serv1.tcgimages.eu/img/cards/Portal_Three_Kingdoms/mountain_bandit.jpg
 Oracle:Haste
-SetInfo:PTK Common

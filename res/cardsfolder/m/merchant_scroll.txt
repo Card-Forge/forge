@@ -5,5 +5,3 @@ A:SP$ ChangeZone | Cost$ 1 U | Origin$ Library | Destination$ Hand | ChangeType$
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/merchant_scroll.jpg
 Oracle:Search your library for a blue instant card, reveal that card, and put it into your hand. Then shuffle your library.
-SetInfo:8ED Uncommon
-SetInfo:HML Common

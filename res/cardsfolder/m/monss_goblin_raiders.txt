@@ -4,11 +4,3 @@ Types:Creature Goblin
 PT:1/1
 SVar:Picture:http://resources.wizards.com/magic/cards/p4/en-us/card25491.jpg
 Oracle:
-SetInfo:2ED Common
-SetInfo:S00 Common
-SetInfo:S99 Rare
-SetInfo:LEB Common
-SetInfo:LEA Common
-SetInfo:5ED Common
-SetInfo:4ED Common
-SetInfo:3ED Common

@@ -5,4 +5,3 @@ PT:3/4
 A:AB$ Pump | Cost$ Sac<1/Artifact> | NumAtt$ +3 | NumDef$ +3 | KW$ Trample | SpellDescription$ CARDNAME gets +3/+3 and gains trample until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/megatog.jpg
 Oracle:Sacrifice an artifact: Megatog gets +3/+3 and gains trample until end of turn.
-SetInfo:MRD Rare

@@ -6,4 +6,3 @@ K:Flying
 S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddToughness$ 1 | AddKeyword$ Protection from black | Condition$ Threshold | Description$ Threshold - As long as seven or more cards are in your graveyard, CARDNAME gets +1/+1 and has protection from black.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mystic_familiar.jpg
 Oracle:Flying\nThreshold - As long as seven or more cards are in your graveyard, Mystic Familiar gets +1/+1 and has protection from black.
-SetInfo:TOR Common

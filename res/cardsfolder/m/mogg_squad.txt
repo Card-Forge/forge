@@ -8,4 +8,3 @@ SVar:AntiBuffedBy:Creature
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mogg_squad.jpg
 Oracle:Mogg Squad gets -1/-1 for each other creature on the battlefield.
-SetInfo:TMP Uncommon

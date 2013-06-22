@@ -7,4 +7,3 @@ S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ 
 SVar:X:Count$NumInAllHands
 SVar:Picture:http://www.wizards.com/global/images/magic/general/multani_maro_sorcerer.jpg
 Oracle:Shroud (This permanent can't be the target of spells or abilities.)\nMultani, Maro-Sorcerer's power and toughness are each equal to the total number of cards in all players' hands.
-SetInfo:ULG Rare

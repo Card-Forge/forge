@@ -6,6 +6,3 @@ T:Mode$ AttackerUnblocked | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDe
 SVar:TrigPump:AB$Pump | Cost$ 0 | NumAtt$ +2 | UntilEndOfCombat$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/murk_dwellers.jpg
 Oracle:Whenever Murk Dwellers attacks and isn't blocked, it gets +2/+0 until end of combat.
-SetInfo:5ED Common
-SetInfo:4ED Common
-SetInfo:DRK Common

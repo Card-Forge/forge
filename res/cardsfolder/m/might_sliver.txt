@@ -6,5 +6,3 @@ S:Mode$ Continuous | Affected$ Creature.Sliver | AddPower$ 2 | AddToughness$ 2 |
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/might_sliver.jpg
 Oracle:All Sliver creatures get +2/+2.
-SetInfo:H09 Uncommon
-SetInfo:TSP Uncommon

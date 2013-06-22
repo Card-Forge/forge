@@ -7,4 +7,3 @@ A:AB$ Regenerate | ValidTgts$ Creature.Goblin+Other | TgtPrompt$ Select another 
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mad_auntie.jpg
 Oracle:Other Goblin creatures you control get +1/+1.\n{T}: Regenerate another target Goblin.
-SetInfo:LRW Rare

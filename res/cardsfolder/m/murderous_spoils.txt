@@ -5,4 +5,3 @@ A:SP$ Destroy | Cost$ 5 B | ValidTgts$ Creature.nonBlack | TgtPrompt$ Select tar
 SVar:StealEquip:DB$ GainControl | AllValid$ Targeted.Equipment+Attached
 SVar:Picture:http://www.wizards.com/global/images/magic/general/murderous_spoils.jpg
 Oracle:Destroy target nonblack creature. It can't be regenerated. You gain control of all Equipment that was attached to it. (This effect lasts indefinitely.)
-SetInfo:DST Uncommon

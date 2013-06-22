@@ -6,4 +6,3 @@ T:Mode$ Sacrificed | ValidCard$ Creature | Execute$ TrigPutCounter | TriggerZone
 SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mortician_beetle.jpg
 Oracle:Whenever a player sacrifices a creature, you may put a +1/+1 counter on Mortician Beetle.
-SetInfo:ROE Rare

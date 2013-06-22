@@ -10,4 +10,3 @@ SVar:TrigPumpAttacker:AB$ Pump | Cost$ 0 | Defined$ TriggeredAttacker | KW$ Firs
 SVar:TrigPumpBlocker:AB$ Pump | Cost$ 0 | Defined$ TriggeredBlocker | KW$ First Strike
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mammoth_harness.jpg
 Oracle:Enchant creature\nEnchanted creature loses flying.\nWhenever enchanted creature blocks or becomes blocked by a creature, the other creature gains first strike until end of turn.
-SetInfo:HML Rare

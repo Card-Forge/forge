@@ -6,4 +6,3 @@ SVar:DestroyAll:DB$ DestroyAll | ValidCards$ Remembered.sameName+Other | SubAbil
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/maelstrom_pulse.jpg
 Oracle:Destroy target nonland permanent and all other permanents with the same name as that permanent.
-SetInfo:ARB Rare

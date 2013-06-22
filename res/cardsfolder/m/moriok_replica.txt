@@ -7,4 +7,3 @@ SVar:DBLoseLife:DB$LoseLife | LifeAmount$ 2
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/moriok_replica.jpg
 Oracle:{1}{B}, Sacrifice Moriok Replica: You draw two cards and lose 2 life.
-SetInfo:SOM Common

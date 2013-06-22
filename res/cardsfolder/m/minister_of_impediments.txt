@@ -5,4 +5,3 @@ PT:1/1
 A:AB$ Tap | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Tap target creature.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/minister_of_impediments.jpg
 Oracle:({W/U} can be paid with either {W} or {U}.)\n{T}: Tap target creature.
-SetInfo:DIS Common

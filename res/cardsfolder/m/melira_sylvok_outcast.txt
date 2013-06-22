@@ -10,4 +10,3 @@ SVar:Sac:SVar:SacMe:3
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/melira_sylvok_outcast.jpg
 Oracle:You can't get poison counters.\nCreatures you control can't have -1/-1 counters placed on them.\nCreatures your opponents control lose infect.
-SetInfo:NPH Rare

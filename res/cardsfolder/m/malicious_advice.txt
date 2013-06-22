@@ -9,4 +9,3 @@ SVar:MaxTgts:Count$Valid Artifact,Creature,Land
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/malicious_advice.jpg
 Oracle:Tap X target artifacts, creatures, and/or lands. You lose X life.
-SetInfo:PLS Common

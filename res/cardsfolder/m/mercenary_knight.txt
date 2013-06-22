@@ -8,4 +8,3 @@ SVar:NeedsToPlayVar:Y GE2
 SVar:Y:Count$TypeInYourHand.Creature
 SVar:Picture:http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=4228&type=card
 Oracle:When Mercenary Knight enters the battlefield, sacrifice it unless you discard a creature card.
-SetInfo:POR Rare

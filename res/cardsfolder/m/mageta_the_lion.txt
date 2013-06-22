@@ -6,4 +6,3 @@ A:AB$ DestroyAll | Cost$ 2 W W T Discard<2/Card> | ValidCards$ Creature.Other | 
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mageta_the_lion.jpg
 Oracle:{2}{W}{W}, {T}, Discard two cards: Destroy all creatures except for Mageta the Lion. Those creatures can't be regenerated.
-SetInfo:PCY Rare

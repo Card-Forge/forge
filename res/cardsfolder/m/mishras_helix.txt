@@ -8,4 +8,3 @@ SVar:MaxTgts:Count$Valid Land
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mishras_helix.jpg
 Oracle:{X}, {T}: Tap X target lands.
-SetInfo:USG Rare

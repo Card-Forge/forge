@@ -8,4 +8,3 @@ SVar:DBAnimate:DB$ Animate | Types$ ChosenType | OverwriteTypes$ True | KeepSupe
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mistform_warchief.jpg
 Oracle:Creature spells you cast that share a creature type with Mistform Warchief cost {1} less to cast.\n{T}: Mistform Warchief becomes the creature type of your choice until end of turn.
-SetInfo:SCG Uncommon

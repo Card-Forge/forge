@@ -7,5 +7,3 @@ T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefi
 SVar:TrigCounter:DB$ Counter | Cost$ 0 | TargetType$ Spell | ValidTgts$ Card | TgtPrompt$ Select target spell
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mystic_snake.jpg
 Oracle:Flash (You may cast this spell any time you could cast an instant.)\nWhen Mystic Snake enters the battlefield, counter target spell.
-SetInfo:APC Rare
-SetInfo:TSB Special

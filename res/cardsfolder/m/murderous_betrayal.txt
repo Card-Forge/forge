@@ -6,5 +6,3 @@ SVar:X:Count$YourLifeTotal/HalfUp
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/murderous_betrayal.jpg
 Oracle:{B}{B}, Pay half your life, rounded up: Destroy target nonblack creature. It can't be regenerated.
-SetInfo:8ED Rare
-SetInfo:NMS Rare

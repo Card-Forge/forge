@@ -7,4 +7,3 @@ SVar:TrigRemoveCounter:AB$ RemoveCounter | Cost$ 0 | ValidTgts$ Permanent | TgtP
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/medicine_runner.jpg
 Oracle:When Medicine Runner enters the battlefield, you may remove a counter from target permanent.
-SetInfo:SHM Common

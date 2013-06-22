@@ -11,4 +11,3 @@ SVar:Y:Remembered$Amount
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/martyrs_cry.jpg
 Oracle:Exile all white creatures. For each creature exiled this way, its controller draws a card.
-SetInfo:DRK Rare

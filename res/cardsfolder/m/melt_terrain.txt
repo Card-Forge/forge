@@ -5,4 +5,3 @@ A:SP$ Destroy | Cost$ 2 R R | ValidTgts$ Land | TgtPrompt$ Select target land | 
 SVar:DBDealDamage:DB$DealDamage | NumDmg$ 2 | Defined$ TargetedController
 SVar:Picture:http://www.wizards.com/global/images/magic/general/melt_terrain.jpg
 Oracle:Destroy target land. Melt Terrain deals 2 damage to that land's controller.
-SetInfo:SOM Common

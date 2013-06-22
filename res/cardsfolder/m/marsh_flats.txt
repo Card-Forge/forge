@@ -4,4 +4,3 @@ Types:Land
 A:AB$ ChangeZone | Cost$ T PayLife<1> Sac<1/CARDNAME> | Origin$ Library | Destination$ Battlefield | ChangeType$ Plains,Swamp | ChangeNum$ 1 | SpellDescription$ Search your library for a Plains or Swamp card and put it onto the battlefield. Then shuffle your library.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/marsh_flats.jpg
 Oracle:{T}, Pay 1 life, Sacrifice Marsh Flats: Search your library for a Plains or Swamp card and put it onto the battlefield. Then shuffle your library.
-SetInfo:ZEN Rare

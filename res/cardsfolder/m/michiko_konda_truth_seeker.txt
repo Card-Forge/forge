@@ -7,4 +7,3 @@ SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Defined$ TriggeredSourceController | SacVa
 Svar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/michiko_konda_truth_seeker.jpg
 Oracle:Whenever a source an opponent controls deals damage to you, that player sacrifices a permanent.
-SetInfo:SOK Rare

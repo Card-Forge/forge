@@ -6,4 +6,3 @@ S:Mode$ Continuous | Affected$ Card.EquippedBy | AddPower$ 2 | AddToughness$ 4 |
 S:Mode$ PreventDamage | Target$ Card.EquippedBy | CombatDamage$ False | Description$ Prevent all noncombat damage that would be dealt to equipped creature.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/magebane_armor.jpg
 Oracle:Equipped creature gets +2/+4 and loses flying.\nPrevent all noncombat damage that would be dealt to equipped creature.\nEquip {2} ({2}: Attach to target creature you control. Equip only as a sorcery.)
-SetInfo:M10 Rare

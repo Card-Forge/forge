@@ -6,5 +6,3 @@ K:Mountainwalk
 K:Protection from white
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mountain_yeti.jpg
 Oracle:Mountainwalk, protection from white
-SetInfo:CHR Common
-SetInfo:LEG Uncommon

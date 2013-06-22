@@ -5,4 +5,3 @@ PT:5/5
 K:Trample
 SVar:Picture:http://resources.wizards.com/magic/cards/chk/en-us/card76641.jpg
 Oracle:Trample
-SetInfo:CHK Common

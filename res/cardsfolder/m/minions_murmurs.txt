@@ -7,4 +7,3 @@ SVar:X:Count$TypeYouCtrl.Creature
 SVar:RemAIDeck:True
 SVar:Picture:http://resources.wizards.com/magic/cards/fut/en-us/card130316.jpg
 Oracle:You draw X cards and you lose X life, where X is the number of creatures you control.
-SetInfo:FUT Uncommon

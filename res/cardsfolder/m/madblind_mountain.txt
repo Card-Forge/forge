@@ -6,4 +6,3 @@ A:AB$ Shuffle | Cost$ R T | Defined$ You | IsPresent$ Permanent.Red+YouCtrl | Pr
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/madblind_mountain.jpg
 Oracle:({T}: Add {R} to your mana pool.)\nMadblind Mountain enters the battlefield tapped.\n{R}, {T}: Shuffle your library. Activate this ability only if you control two or more red permanents.
-SetInfo:SHM Uncommon

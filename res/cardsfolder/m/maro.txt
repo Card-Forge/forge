@@ -7,8 +7,3 @@ SVar:X:Count$InYourHand
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/maro.jpg
 Oracle:Maro's power and toughness are each equal to the number of cards in your hand.
-SetInfo:8ED Rare
-SetInfo:7ED Rare
-SetInfo:MIR Rare
-SetInfo:6ED Rare
-SetInfo:9ED Rare

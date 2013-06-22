@@ -7,4 +7,3 @@ SVar:Y:Count$Valid Mountain.YouCtrl
 A:SP$ Destroy | Cost$ 2 R | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | SpellDescription$ Destroy target artifact.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mogg_salvage.jpg
 Oracle:If an opponent controls an Island and you control a Mountain, you may cast Mogg Salvage without paying its mana cost.\nDestroy target artifact.
-SetInfo:NMS Uncommon

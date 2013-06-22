@@ -8,6 +8,3 @@ SVar:PlayMain1:TRUE
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/march_of_the_machines.jpg
 Oracle:Each noncreature artifact is an artifact creature with power and toughness each equal to its converted mana cost. (Equipment that's a creature can't equip a creature.)
-SetInfo:MRD Rare
-SetInfo:ARC Rare
-SetInfo:10E Rare

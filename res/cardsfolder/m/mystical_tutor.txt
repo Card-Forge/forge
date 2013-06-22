@@ -5,6 +5,3 @@ A:SP$ ChangeZone | Cost$ U | Origin$ Library | Destination$ Library | LibraryPos
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mystical_tutor.jpg
 Oracle:Search your library for an instant or sorcery card and reveal that card. Shuffle your library, then put the card on top of it.
-SetInfo:V09 Mythic
-SetInfo:MIR Uncommon
-SetInfo:6ED Uncommon

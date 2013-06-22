@@ -9,4 +9,3 @@ SVar:PreventFromSource:Mode$ PreventDamage | EffectZone$ Command | Source$ Card.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mourners_shield.jpg
 Oracle:Imprint - When Mourner's Shield enters the battlefield, you may exile target card from a graveyard.\n{2}, {T}: Prevent all damage that would be dealt this turn by a source of your choice that shares a color with the exiled card.
-SetInfo:MRD Uncommon

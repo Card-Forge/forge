@@ -4,15 +4,3 @@ Types:Sorcery
 A:SP$ Discard | Cost$ 2 B | ValidTgts$ Player | NumCards$ 2 | Mode$ TgtChoose | SpellDescription$ Target player discards two cards.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mind_rot.jpg
 Oracle:Target player discards two cards.
-SetInfo:PO2 Common
-SetInfo:S99 Common
-SetInfo:7ED Common
-SetInfo:9ED Common
-SetInfo:10E Common
-SetInfo:M11 Common
-SetInfo:M10 Common
-SetInfo:M13 Common
-SetInfo:M12 Common
-SetInfo:RTR Common
-SetInfo:8ED Common
-SetInfo:POR Common

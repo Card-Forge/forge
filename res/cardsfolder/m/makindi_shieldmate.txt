@@ -10,4 +10,3 @@ SVar:BuffedBy:Ally
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/makindi_shieldmate.jpg
 Oracle:Defender\nWhenever Makindi Shieldmate or another Ally enters the battlefield under your control, you may put a +1/+1 counter on Makindi Shieldmate.
-SetInfo:ZEN Common

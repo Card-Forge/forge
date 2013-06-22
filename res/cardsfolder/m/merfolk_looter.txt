@@ -6,8 +6,3 @@ A:AB$ Draw | Cost$ T | NumCards$ 1 | SpellDescription$ Draw a card, then discard
 SVar:DBDiscard:DB$Discard | Defined$ You | Mode$ TgtChoose | NumCards$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/merfolk_looter.jpg
 Oracle:{T}: Draw a card, then discard a card.
-SetInfo:M10 Common
-SetInfo:7ED Uncommon
-SetInfo:M12 Common
-SetInfo:EXO Common
-SetInfo:10E Common

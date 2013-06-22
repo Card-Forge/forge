@@ -4,4 +4,3 @@ Types:Creature Merfolk Soldier
 PT:1/3
 SVar:Picture:http://www.wizards.com/global/images/magic/general/maritime_guard.jpg
 Oracle:
-SetInfo:M11 Common

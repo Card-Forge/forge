@@ -7,4 +7,3 @@ SVar:DrawSlowtrip:DB$Draw | NumCards$ 1 | Defined$ You
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mishras_bauble.jpg
 Oracle:{T}, Sacrifice Mishra's Bauble: Look at the top card of target player's library. Draw a card at the beginning of the next turn's upkeep.
-SetInfo:CSP Uncommon

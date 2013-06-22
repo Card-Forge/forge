@@ -10,4 +10,3 @@ SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
 SVar:Picture:http://www.wizards.com/global/images/magic/general/murder_of_crows.jpg
 Oracle:Flying\nWhenever another creature dies, you may draw a card. If you do, discard a card.
-SetInfo:ISD Uncommon

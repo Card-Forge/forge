@@ -5,4 +5,3 @@ A:AB$ Regenerate | ValidTgts$ Creature | TgtPrompt$ Select target creature | Cos
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/medicine_bag.jpg
 Oracle:{1}, {T}, Discard a card: Regenerate target creature.
-SetInfo:EXO Uncommon

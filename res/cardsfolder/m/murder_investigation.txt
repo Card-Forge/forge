@@ -8,4 +8,3 @@ SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ X | References$ X | TokenName$ 
 SVar:X:TriggeredCard$CardPower
 SVar:Picture:http://www.wizards.com/global/images/magic/general/murder_investigation.jpg
 Oracle:Enchant creature you control\nWhen enchanted creature dies, put X 1/1 white Soldier creature tokens onto the battlefield, where X is its power.
-SetInfo:GTC Uncommon

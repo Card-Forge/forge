@@ -6,4 +6,3 @@ A:AB$ Untap | Cost$ U T | ValidTgts$ Permanent.Legendary | TgtPrompt$ Select tar
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/minamo_school_at_waters_edge.jpg
 Oracle:{T}: Add {U} to your mana pool.\n{U}, {T}: Untap target legendary permanent.
-SetInfo:CHK Rare

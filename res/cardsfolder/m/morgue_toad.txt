@@ -6,5 +6,3 @@ A:AB$ Mana | Cost$ Sac<1/CARDNAME> | Produced$ U R | SpellDescription$ Add U R t
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/morgue_toad.jpg
 Oracle:Sacrifice Morgue Toad: Add {U}{R} to your mana pool.
-SetInfo:PLS Common
-SetInfo:DDH Common

@@ -6,7 +6,3 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigDealDamage:AB$DealDamage | Cost$ 0 | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ 3
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mudbutton_torchrunner.jpg
 Oracle:When Mudbutton Torchrunner dies, it deals 3 damage to target creature or player.
-SetInfo:PC2 Common
-SetInfo:DDG Common
-SetInfo:LRW Common
-SetInfo:EVG Common

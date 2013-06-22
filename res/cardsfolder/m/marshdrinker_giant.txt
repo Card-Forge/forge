@@ -6,4 +6,3 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigDestroy:AB$ Destroy | Cost$ 0 | ValidTgts$ Land.Island+OppCtrl,Land.Swamp+OppCtrl | TgtPrompt$ Select target Island or Swamp an opponent controls
 SVar:Picture:http://www.wizards.com/global/images/magic/general/marshdrinker_giant.jpg
 Oracle:When Marshdrinker Giant enters the battlefield, destroy target Island or Swamp an opponent controls.
-SetInfo:EVE Uncommon

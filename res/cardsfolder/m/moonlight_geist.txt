@@ -7,4 +7,3 @@ A:AB$ Pump | Cost$ 3 W | Defined$ Self | KW$ HIDDEN Prevent all combat damage th
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/moonlight_geist.jpg
 Oracle:Flying\n{3}{W}: Prevent all combat damage that would be dealt to and dealt by Moonlight Geist this turn.
-SetInfo:AVR Common

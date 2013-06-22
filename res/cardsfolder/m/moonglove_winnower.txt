@@ -5,4 +5,3 @@ PT:2/3
 K:Deathtouch
 SVar:Picture:http://www.wizards.com/global/images/magic/general/moonglove_winnower.jpg
 Oracle:Deathtouch (Any amount of damage this deals to a creature is enough to destroy it.)
-SetInfo:LRW Common

@@ -8,4 +8,3 @@ SVar:X:Count$xPaid
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mirror_entity.jpg
 Oracle:Changeling (This card is every creature type at all times.)\n{X}: Creatures you control become X/X and gain all creature types until end of turn.
-SetInfo:LRW Rare

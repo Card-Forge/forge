@@ -7,4 +7,3 @@ SVar:TrigDamage:AB$ DealDamage | Cost$ 0 | ValidTgts$ Creature,Player | TgtPromp
 SVar:Damage:TriggeredCard$CardPower
 SVar:Picture:http://www.cardforge.org/fpics/vgd-lq/murderous_redcap_avatar.jpg
 Oracle:Hand +0, life -2\nWhenever a creature enters the battlefield under your control with a counter on it, you may have it deal damage equal to its power to target creature or player.
-SetInfo:VAN Special

@@ -5,4 +5,3 @@ PT:3/3
 K:CantBeBlockedBy Creature.Blue
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mudbrawler_raiders.jpg
 Oracle:Mudbrawler Raiders can't be blocked by blue creatures.
-SetInfo:SHM Common

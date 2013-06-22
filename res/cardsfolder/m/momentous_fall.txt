@@ -8,4 +8,3 @@ SVar:XToughness:Sacrificed$CardToughness
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/momentous_fall.jpg
 Oracle:As an additional cost to cast Momentous Fall, sacrifice a creature.\nYou draw cards equal to the sacrificed creature's power, then you gain life equal to its toughness.
-SetInfo:ROE Rare

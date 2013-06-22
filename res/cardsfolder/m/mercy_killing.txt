@@ -6,4 +6,3 @@ SVar:DBToken:DB$ Token | TokenAmount$ X | References$ X | TokenPower$ 1 | TokenT
 SVar:X:Targeted$CardPower
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mercy_killing.jpg
 Oracle:Target creature's controller sacrifices it, then puts X 1/1 green and white Elf Warrior creature tokens onto the battlefield, where X is that creature's power.
-SetInfo:SHM Uncommon

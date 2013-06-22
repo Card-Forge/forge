@@ -6,4 +6,3 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigDraw:AB$Draw | Cost$ 1 U | Defined$ You | NumCards$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/merfolk_seer.jpg
 Oracle:When Merfolk Seer dies, you may pay {1}{U}. If you do, draw a card.
-SetInfo:MIR Common

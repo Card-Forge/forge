@@ -9,4 +9,3 @@ SVar:TrigLoseLife:AB$LoseLife | Cost$ 0 | ValidTgts$ Player | TgtPrompt$ Select 
 SVar:MortisX:TriggeredCard$CardPower
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mortis_dogs.jpg
 Oracle:Whenever Mortis Dogs attacks, it gets +2/+0 until end of turn.\nWhen Mortis Dogs dies, target player loses life equal to its power.
-SetInfo:NPH Common

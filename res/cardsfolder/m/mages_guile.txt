@@ -6,4 +6,3 @@ K:Cycling:U
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mages_guile.jpg
 Oracle:Target creature gains shroud until end of turn. (It can't be the target of spells or abilities.)\nCycling {U} ({U}, Discard this card: Draw a card.)
-SetInfo:ONS Common

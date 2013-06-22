@@ -6,5 +6,3 @@ A:AB$ ChangeZone | Cost$ U T Return<1/Artifact> | Origin$ Hand | Destination$ Ba
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/master_transmuter.jpg
 Oracle:{U}, {T}, Return an artifact you control to its owner's hand: You may put an artifact card from your hand onto the battlefield.
-SetInfo:ARC Rare
-SetInfo:CFX Rare

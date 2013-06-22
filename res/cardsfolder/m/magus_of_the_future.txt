@@ -6,4 +6,3 @@ K:Play with the top card of your library revealed.
 S:Mode$ Continuous | Affected$ Card.TopLibrary+YouCtrl | AffectedZone$ Library | AddHiddenKeyword$ May be played | Description$ You may play the top card of your library.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/magus_of_the_future.jpg
 Oracle:Play with the top card of your library revealed.\nYou may play the top card of your library.
-SetInfo:FUT Rare

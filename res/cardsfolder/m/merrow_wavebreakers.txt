@@ -6,4 +6,3 @@ A:AB$ Pump | Cost$ 1 U Untap | KW$ Flying | SpellDescription$ CARDNAME gains fly
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/merrow_wavebreakers.jpg
 Oracle:{1}{U}, {Q}: Merrow Wavebreakers gains flying until end of turn. ({Q} is the untap symbol.)
-SetInfo:SHM Common

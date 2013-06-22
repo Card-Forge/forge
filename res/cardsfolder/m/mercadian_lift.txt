@@ -7,4 +7,3 @@ SVar:X:XChoice
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mercadian_lift.jpg
 Oracle:{1}, {T}: Put a winch counter on Mercadian Lift.\n{T}, Remove X winch counters from Mercadian Lift: You may put a creature card with converted mana cost X from your hand onto the battlefield.
-SetInfo:MMQ Rare

@@ -7,4 +7,3 @@ A:AB$ ChangeZoneAll | Cost$ 3 W W Sac<1/CARDNAME> | ChangeType$ Creature.Black |
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/major_teroh.jpg
 Oracle:Flying\n{3}{W}{W}, Sacrifice Major Teroh: Exile all black creatures.
-SetInfo:TOR Rare

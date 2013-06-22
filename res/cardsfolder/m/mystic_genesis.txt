@@ -6,4 +6,3 @@ SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenName$ Ooze | TokenTypes$ Creature
 SVar:X:Remembered$CardManaCost
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mystic_genesis.jpg
 Oracle:Counter target spell. Put an X/X green Ooze creature token onto the battlefield, where X is that spell's converted mana cost.
-SetInfo:GTC Rare

@@ -5,4 +5,3 @@ A:SP$ PumpAll | Cost$ 1 U | ValidTgts$ Player | IsCurse$ True | ValidCards$ Land
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mana_vapors.jpg
 Oracle:Lands target player controls don't untap during his or her next untap step.
-SetInfo:PCY Uncommon

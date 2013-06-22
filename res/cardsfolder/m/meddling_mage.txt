@@ -8,5 +8,3 @@ S:Mode$ CantBeCast | ValidCard$ Card.NamedCard | Description$ The named card can
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/meddling_mage.jpg
 Oracle:As Meddling Mage enters the battlefield, name a nonland card.\nThe named card can't be cast.
-SetInfo:PLS Rare
-SetInfo:ARB Rare

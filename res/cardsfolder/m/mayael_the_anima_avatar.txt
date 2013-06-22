@@ -9,4 +9,3 @@ SVar:X:Remembered$Amount
 SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
 SVar:Picture:http://www.cardforge.org/fpics/vgd-lq/mayael_the_anima_avatar.jpg
 Oracle:Hand +1, life +5\nAt the beginning of your upkeep, reveal the top card of your library. If it's a creature card with power 5 or greater, put it into your hand. Otherwise, you may put it on the bottom of your library.
-SetInfo:VAN Special

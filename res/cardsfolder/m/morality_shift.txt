@@ -7,4 +7,3 @@ SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/morality_shift.jpg
 Oracle:Exchange your graveyard and library. Then shuffle your library.
-SetInfo:JUD Rare

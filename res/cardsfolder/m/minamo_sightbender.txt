@@ -7,5 +7,3 @@ SVar:X:Count$xPaid
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/minamo_sightbender.jpg
 Oracle:{X}, {T}: Target creature with power X or less is unblockable this turn.
-SetInfo:DDI Uncommon
-SetInfo:BOK Uncommon

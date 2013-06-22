@@ -6,4 +6,3 @@ SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mana_maze.jpg
 Oracle:Players can't cast spells that share a color with the spell most recently cast this turn.
-SetInfo:INV Rare

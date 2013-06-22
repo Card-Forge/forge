@@ -4,4 +4,3 @@ Types:Creature Human Warrior
 PT:3/2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/moriok_reaver.jpg
 Oracle:
-SetInfo:SOM Common

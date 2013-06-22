@@ -8,4 +8,3 @@ SVar:DBAnimate:DB$ Animate | Types$ ChosenType | OverwriteTypes$ True | KeepSupe
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mistform_skyreaver.jpg
 Oracle:Flying\n{1}: Mistform Skyreaver becomes the creature type of your choice until end of turn.
-SetInfo:ONS Rare

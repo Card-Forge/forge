@@ -4,4 +4,3 @@ Types:Instant
 A:SP$ PumpAll | Cost$ G | ValidCards$ Creature | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ All creatures get +1/+1 until end of turn.
 SVar:Picture:http://resources.wizards.com/magic/cards/cg/en-us/card15819.jpg
 Oracle:All creatures get +1/+1 until end of turn.
-SetInfo:UDS Common

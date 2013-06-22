@@ -7,4 +7,3 @@ SVar:TrigMartyrsSacrifice:AB$ Sacrifice | Cost$ 0 | Amount$ 1 | SacValid$ Trigge
 SVar:DBMartyrsCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/martyrs_bond.jpg
 Oracle:Whenever Martyr's Bond or another nonland permanent you control is put into a graveyard from the battlefield, each opponent sacrifices a permanent that shares a card type with it.
-SetInfo:COM Rare

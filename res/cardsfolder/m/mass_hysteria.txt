@@ -8,4 +8,3 @@ SVar:BuffedBy:Creature
 SVar:AntiBuffedBy:Creature
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mass_hysteria.jpg
 Oracle:All creatures have haste.
-SetInfo:MRD Rare

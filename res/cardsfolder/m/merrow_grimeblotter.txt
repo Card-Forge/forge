@@ -6,4 +6,3 @@ A:AB$ Pump | Cost$ 1 UB Untap | ValidTgts$ Creature | TgtPrompt$ Select target c
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/merrow_grimeblotter.jpg
 Oracle:{1}{U/B}, {Q}: Target creature gets -2/-0 until end of turn. ({Q} is the untap symbol.)
-SetInfo:SHM Uncommon

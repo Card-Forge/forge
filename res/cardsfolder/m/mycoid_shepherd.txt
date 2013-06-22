@@ -7,4 +7,3 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigGainLife:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ 5
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mycoid_shepherd.jpg
 Oracle:Whenever Mycoid Shepherd or another creature you control with power 5 or greater dies, you may gain 5 life.
-SetInfo:ARB Rare

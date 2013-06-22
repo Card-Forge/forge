@@ -7,5 +7,3 @@ A:AB$ Pump | Cost$ T | ValidTgts$ Creature.Merfolk | TgtPrompt$ Select target Me
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/merfolk_sovereign.jpg
 Oracle:Other Merfolk creatures you control get +1/+1.\n{T}: Target Merfolk creature is unblockable this turn.
-SetInfo:M11 Rare
-SetInfo:M10 Rare

@@ -6,6 +6,3 @@ A:SP$ Attach | Cost$ 1 R | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddToughness$ 2 | AddHiddenKeyword$ CARDNAME can't block. | Description$ Enchanted creature gets +2/+2 and can't block.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/maniacal_rage.jpg
 Oracle:Enchant creature\nEnchanted creature gets +2/+2 and can't block.
-SetInfo:CFX Common
-SetInfo:EXO Common
-SetInfo:INV Common

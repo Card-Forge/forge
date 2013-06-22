@@ -12,4 +12,3 @@ A:AB$ Destroy | Cost$ T | ValidTgts$ Land,Creature | TgtPrompt$ Select target cr
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/minion_of_leshrac.jpg
 Oracle:Protection from black\nAt the beginning of your upkeep, Minion of Leshrac deals 5 damage to you unless you sacrifice a creature other than Minion of Leshrac. If Minion of Leshrac deals damage to you this way, tap it.\n{T}: Destroy target creature or land.
-SetInfo:ICE Rare

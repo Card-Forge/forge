@@ -5,4 +5,3 @@ S:Mode$ ReduceCost | ValidCard$ Card | Type$ Buyback | Activator$ Player | Amoun
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/memory_crystal.jpg
 Oracle:Buyback costs cost {2} less.
-SetInfo:EXO Rare

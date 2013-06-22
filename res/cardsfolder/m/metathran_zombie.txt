@@ -7,4 +7,3 @@ SVar:RemRandomDeck:True
 DeckNeeds:Color$Black
 SVar:Picture:http://www.wizards.com/global/images/magic/general/metathran_zombie.jpg
 Oracle:{B}: Regenerate Metathran Zombie.
-SetInfo:INV Common

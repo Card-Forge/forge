@@ -6,4 +6,3 @@ A:SP$ ChangeTargets | Cost$ 3 U U | TargetType$ Spell | ValidTgts$ Card | Target
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/misdirection.jpg
 Oracle:You may exile a blue card from your hand rather than pay Misdirection's mana cost.\nChange the target of target spell with a single target.
-SetInfo:MMQ Rare

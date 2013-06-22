@@ -8,4 +8,3 @@ A:AB$ Pump | Cost$ 2 U U | Defined$ Self | NumAtt$ +2 | NumDef$ +2 | KW$ Flying 
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mistform_stalker.jpg
 Oracle:{1}: Mistform Stalker becomes the creature type of your choice until end of turn.\n{2}{U}{U}: Mistform Stalker gets +2/+2 and gains flying until end of turn.
-SetInfo:ONS Uncommon

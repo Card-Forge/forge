@@ -5,4 +5,3 @@ A:AB$ Untap | Cost$ 1 T | ValidTgts$ Creature.hasActivatedAbilityWithTapCost | T
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/magewrights_stone.jpg
 Oracle:{1}, {T}: Untap target creature that has an activated ability with {T} in its cost.
-SetInfo:DIS Uncommon

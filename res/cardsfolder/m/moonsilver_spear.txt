@@ -7,4 +7,3 @@ T:Mode$ Attacks | ValidCard$ Card.AttachedBy | Execute$ TrigAngelToken | Trigger
 SVar:TrigAngelToken:AB$Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Angel | TokenTypes$ Creature,Angel | TokenOwner$ You | TokenColors$ White | TokenPower$ 4 | TokenToughness$ 4 | TokenKeywords$ Flying | TokenImage$ w 4 4 angel avr
 SVar:Picture:http://www.wizards.com/global/images/magic/general/moonsilver_spear.jpg
 Oracle:Equipped creature has first strike.\nWhenever equipped creature attacks, put a 4/4 white Angel creature token with flying onto the battlefield.\nEquip {4}
-SetInfo:AVR Rare

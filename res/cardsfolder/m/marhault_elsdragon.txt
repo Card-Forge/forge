@@ -5,5 +5,3 @@ PT:4/6
 K:Rampage 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/marhault_elsdragon.jpg
 Oracle:Rampage 1 (Whenever this creature becomes blocked, it gets +1/+1 until end of turn for each creature blocking it beyond the first.)
-SetInfo:CHR Uncommon
-SetInfo:LEG Uncommon

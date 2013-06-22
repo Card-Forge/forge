@@ -5,5 +5,3 @@ S:Mode$ Continuous | Affected$ Creature.Soldier | AddKeyword$ Vigilance | Descri
 A:AB$ Token | Cost$ 2 W | TokenAmount$ 1 | TokenName$ Soldier | TokenTypes$ Creature,Soldier | TokenOwner$ You | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | SpellDescription$ Put a 1/1 white Soldier creature token onto the battlefield.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mobilization.jpg
 Oracle:Soldier creatures have vigilance. (Attacking doesn't cause them to tap.)\n{2}{W}: Put a 1/1 white Soldier creature token onto the battlefield.
-SetInfo:ONS Rare
-SetInfo:10E Rare

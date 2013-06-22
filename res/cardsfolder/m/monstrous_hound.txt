@@ -7,5 +7,3 @@ SVar:X:Count$Valid Land.YouCtrl
 SVar:Y:Count$Valid Land.YouDontCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/monstrous_hound.jpg
 Oracle:Monstrous Hound can't attack unless you control more lands than defending player.\nMonstrous Hound can't block unless you control more lands than attacking player.
-SetInfo:MBP Rare
-SetInfo:EXO Rare

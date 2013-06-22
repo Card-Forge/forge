@@ -6,4 +6,3 @@ K:Flying
 A:AB$ Pump | Cost$ PR | Defined$ Self | NumAtt$ 1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/moltensteel_dragon.jpg
 Oracle:({R/P} can be paid with either {R} or 2 life.)\nFlying\n{R/P}: Moltensteel Dragon gets +1/+0 until end of turn.
-SetInfo:NPH Rare

@@ -6,4 +6,3 @@ SVar:DBDiscard:DB$Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/macabre_waltz.jpg
 Oracle:Return up to two target creature cards from your graveyard to your hand, then discard a card.
-SetInfo:DIS Common

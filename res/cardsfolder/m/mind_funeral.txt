@@ -4,4 +4,3 @@ Types:Sorcery
 A:SP$ DigUntil | Cost$ 1 U B | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | Amount$ 4 | Valid$ Land | ValidDescription$ land | RevealedDestination$ Graveyard | SpellDescription$ Target opponent reveals cards from the top of his or her library until four land cards are revealed. That player puts all cards revealed this way into his or her graveyard.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mind_funeral.jpg
 Oracle:Target opponent reveals cards from the top of his or her library until four land cards are revealed. That player puts all cards revealed this way into his or her graveyard.
-SetInfo:ARB Uncommon

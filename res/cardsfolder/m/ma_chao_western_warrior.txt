@@ -7,4 +7,3 @@ T:Mode$ Attacks | ValidCard$ Card.Self | Alone$ True | Execute$ TrigPump | Trigg
 SVar:TrigPump:AB$Pump | Cost$ 0 | Defined$ Self | KW$ HIDDEN Unblockable | UntilEndOfCombat$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ma_chao_western_warrior.jpg
 Oracle:Horsemanship (This creature can't be blocked except by creatures with horsemanship.)\nWhenever Ma Chao, Western Warrior attacks alone, it's unblockable this combat.
-SetInfo:PTK Rare

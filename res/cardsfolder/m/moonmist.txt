@@ -8,4 +8,3 @@ SVar:Curse:Mode$ PreventDamage | EffectZone$ Command | Source$ Creature.nonWerew
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/moonmist.jpg
 Oracle:Transform all Humans. Prevent all combat damage that would be dealt this turn by creatures other than Werewolves and Wolves. (Only double-faced cards can be transformed.)
-SetInfo:ISD Common

@@ -10,4 +10,3 @@ SVar:DBFlight:DB$ Pump | Defined$ Self | KW$ Flying
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/manor_gargoyle.jpg
 Oracle:Defender\nManor Gargoyle is indestructible as long as it has defender.\n{1}: Until end of turn, Manor Gargoyle loses defender and gains flying.
-SetInfo:ISD Rare

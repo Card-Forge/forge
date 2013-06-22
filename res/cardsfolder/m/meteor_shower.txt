@@ -11,4 +11,3 @@ SVar:X:Count$xPaid
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/meteor_shower.jpg
 Oracle:Meteor Shower deals X plus 1 damage divided as you choose among any number of target creatures and/or players.
-SetInfo:ICE Common

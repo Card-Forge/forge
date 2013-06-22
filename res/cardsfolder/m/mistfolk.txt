@@ -5,4 +5,3 @@ PT:1/2
 A:AB$ Counter | Cost$ U | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | TargetValidTargeting$ Card.Self | SpellDescription$ Counter target spell that targets CARDNAME.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mistfolk.jpg
 Oracle:{U}: Counter target spell that targets Mistfolk.
-SetInfo:ICE Common

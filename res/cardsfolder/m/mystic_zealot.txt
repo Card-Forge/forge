@@ -5,4 +5,3 @@ PT:2/4
 S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddToughness$ 1 | AddKeyword$ Flying | Condition$ Threshold | Description$ Threshold - As long as seven or more cards are in your graveyard, CARDNAME gets +1/+1 and has flying.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mystic_zealot.jpg
 Oracle:Threshold - As long as seven or more cards are in your graveyard, Mystic Zealot gets +1/+1 and has flying.
-SetInfo:ODY Common

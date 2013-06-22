@@ -7,4 +7,3 @@ SVar:TrigSac:AB$ Sacrifice | Cost$ 0 | SacValid$ Artifact | Defined$ TriggeredPl
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/molder_slug.jpg
 Oracle:At the beginning of each player's upkeep, that player sacrifices an artifact.
-SetInfo:MRD Rare

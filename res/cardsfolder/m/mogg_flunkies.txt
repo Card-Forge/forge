@@ -5,6 +5,3 @@ PT:3/3
 K:CARDNAME can't attack or block alone.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mogg_flunkies.jpg
 Oracle:Mogg Flunkies can't attack or block alone.
-SetInfo:M13 Common
-SetInfo:PD2 Common
-SetInfo:STH Common

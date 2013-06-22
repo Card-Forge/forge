@@ -5,4 +5,3 @@ A:SP$ PumpAll | Cost$ 2 U | ValidCards$ Creature.Artifact+YouCtrl | KW$ Flying |
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/magnetic_flux.jpg
 Oracle:Artifact creatures you control gain flying until end of turn.
-SetInfo:DST Common

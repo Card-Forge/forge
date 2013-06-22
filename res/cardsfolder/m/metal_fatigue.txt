@@ -5,4 +5,3 @@ A:SP$ TapAll | Cost$ 2 W | ValidCards$ Artifact | SpellDescription$ Tap all arti
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/metal_fatigue.jpg
 Oracle:Tap all artifacts.
-SetInfo:DST Common

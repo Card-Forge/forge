@@ -7,4 +7,3 @@ SVar:GeniusCards:DB$ Draw | Defined$ You | NumCards$ X
 SVar:X:Count$xPaid
 SVar:Picture:http://www.cardforge.org/fpics/lq_schemes/my_genius_knows_no_bounds.jpg
 Oracle:When you set this scheme in motion, you may pay {X}. If you do, you gain X life and draw X cards.
-SetInfo:ARC Common

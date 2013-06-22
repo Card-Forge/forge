@@ -4,4 +4,3 @@ Types:Enchantment
 A:AB$ Regenerate | ValidTgts$ Creature | TgtPrompt$ Select target creature | Cost$ Return<1/CARDNAME> | SpellDescription$ Regenerate target creature.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/molting_skin.jpg
 Oracle:Return Molting Skin to its owner's hand: Regenerate target creature.
-SetInfo:SOK Uncommon

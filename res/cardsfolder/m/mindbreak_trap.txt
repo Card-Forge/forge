@@ -8,4 +8,3 @@ SVar:MaxTgts:Count$SpellsOnStack
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mindbreak_trap.jpg
 Oracle:If an opponent cast three or more spells this turn, you may pay {0} rather than pay Mindbreak Trap's mana cost.\nExile any number of target spells.
-SetInfo:ZEN Mythic

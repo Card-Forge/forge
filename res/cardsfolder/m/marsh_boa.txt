@@ -5,4 +5,3 @@ PT:1/1
 K:Swampwalk
 SVar:Picture:http://resources.wizards.com/magic/cards/pr/en-us/card24664.jpg
 Oracle:Swampwalk
-SetInfo:PCY Common

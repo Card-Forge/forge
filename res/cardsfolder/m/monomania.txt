@@ -6,4 +6,3 @@ SVar:DBDiscard:DB$ Discard | Defined$ Targeted | Mode$ NotRemembered | SubAbilit
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/monomania.jpg
 Oracle:Target player chooses a card in his or her hand and discards the rest.
-SetInfo:M12 Rare

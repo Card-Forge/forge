@@ -7,5 +7,3 @@ SVar:TrigDamageAll:DB$DamageAll | ValidCards$ Creature | ValidPlayers$ Each | Nu
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/magma_giant.jpg
 Oracle:When Magma Giant enters the battlefield, it deals 2 damage to each creature and each player.
-SetInfo:PO2 Rare
-SetInfo:5DN Rare

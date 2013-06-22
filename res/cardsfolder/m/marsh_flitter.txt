@@ -9,4 +9,3 @@ A:AB$ Animate | Cost$ Sac<1/Goblin> | Defined$ Self | Power$ 3 | Toughness$ 3 | 
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/marsh_flitter.jpg
 Oracle:Flying\nWhen Marsh Flitter enters the battlefield, put two 1/1 black Goblin Rogue creature tokens onto the battlefield.\nSacrifice a Goblin: Marsh Flitter becomes 3/3 until end of turn.
-SetInfo:LRW Uncommon

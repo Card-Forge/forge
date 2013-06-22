@@ -6,4 +6,3 @@ A:AB$ ChangeZone | Cost$ 3 T | Origin$ Library | Destination$ Battlefield | Chan
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/moggcatcher.jpg
 Oracle:{3}, {T}: Search your library for a Goblin permanent card and put it onto the battlefield. Then shuffle your library.
-SetInfo:NMS Rare

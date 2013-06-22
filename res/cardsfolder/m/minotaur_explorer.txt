@@ -11,4 +11,3 @@ SVar:NeedsToPlayVar:Y GE2
 SVar:Y:Count$InYourHand
 SVar:Picture:http://resources.wizards.com/magic/cards/od/en-us/card31786.jpg
 Oracle:When Minotaur Explorer enters the battlefield, sacrifice it unless you discard a card at random.
-SetInfo:ODY Uncommon

@@ -6,4 +6,3 @@ SVar:TrigRearrange:AB$RearrangeTopOfLibrary | Cost$ 0 | Defined$ You | NumCards$
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mirris_guile.jpg
 Oracle:At the beginning of your upkeep, you may look at the top three cards of your library, then put them back in any order.
-SetInfo:TMP Rare

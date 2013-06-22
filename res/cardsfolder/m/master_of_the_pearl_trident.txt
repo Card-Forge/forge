@@ -7,4 +7,3 @@ SVar:PlayMain1:TRUE
 DeckHints:Type$Merfolk
 SVar:Picture:http://www.wizards.com/global/images/magic/general/master_of_the_pearl_trident.jpg
 Oracle:Other Merfolk creatures you control get +1/+1 and have islandwalk. (They are unblockable as long as defending player controls an Island.)
-SetInfo:M13 Rare

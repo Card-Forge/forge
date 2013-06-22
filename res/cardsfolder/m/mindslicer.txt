@@ -6,5 +6,3 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigDiscard:AB$ Discard | Cost$ 0 | Defined$ Player | Mode$ Hand
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mindslicer.jpg
 Oracle:When Mindslicer dies, each player discards his or her hand.
-SetInfo:ODY Rare
-SetInfo:9ED Rare

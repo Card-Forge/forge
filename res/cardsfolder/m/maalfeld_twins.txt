@@ -7,4 +7,3 @@ SVar:TrigToken:AB$ Token | Cost$ 0 | TokenImage$ B 2 2 Zombie |  TokenAmount$ 2 
 SVar:SacMe:4
 SVar:Picture:http://www.wizards.com/global/images/magic/general/maalfeld_twins.jpg
 Oracle:When Maalfeld Twins dies, put two 2/2 black Zombie creature tokens onto the battlefield.
-SetInfo:AVR Uncommon

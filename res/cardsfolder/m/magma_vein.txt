@@ -5,4 +5,3 @@ A:AB$ DamageAll | Cost$ R Sac<1/Land> | ValidCards$ Creature.withoutFlying | Num
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/magma_vein.jpg
 Oracle:{R}, Sacrifice a land: Magma Vein deals 1 damage to each creature without flying.
-SetInfo:ODY Uncommon

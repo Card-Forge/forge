@@ -6,4 +6,3 @@ A:AB$ Pump | Cost$ W Sac<1/Creature> | ValidTgts$ Creature | TgtPrompt$ Select t
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/martyred_rusalka.jpg
 Oracle:{W}, Sacrifice a creature: Target creature can't attack this turn.
-SetInfo:GPT Uncommon

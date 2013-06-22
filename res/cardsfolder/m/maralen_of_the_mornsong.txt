@@ -9,4 +9,3 @@ SVar:DBTutor:DB$ ChangeZone | DefinedPlayer$ TriggeredPlayer | Origin$ Library |
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/maralen_of_the_mornsong.jpg
 Oracle:Players can't draw cards.\nAt the beginning of each player's draw step, that player loses 3 life, searches his or her library for a card, puts it into his or her hand, then shuffles his or her library.
-SetInfo:MOR Rare

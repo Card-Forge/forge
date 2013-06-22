@@ -9,4 +9,3 @@ SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.cardforge.org/fpics/vgd-lq/morinfen_avatar.jpg
 Oracle:Hand +0, life +30\nAt the beginning of your upkeep, you lose 1 life for each permanent you control.
-SetInfo:VAN Special

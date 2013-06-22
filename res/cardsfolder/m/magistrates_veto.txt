@@ -6,4 +6,3 @@ SVar:NonStackingEffect:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/magistrates_veto.jpg
 Oracle:White creatures and blue creatures can't block.
-SetInfo:MMQ Uncommon

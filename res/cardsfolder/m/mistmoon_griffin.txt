@@ -8,4 +8,3 @@ SVar:TrigExileMe:AB$ ChangeZone | Cost$ 0 | Defined$ Self | Origin$ Graveyard | 
 SVar:DBReturnCreature:DB$ ChangeZoneAll | ChangeType$ Creature.YouOwn+TopGraveyardCreature | Origin$ Graveyard | Destination$ Battlefield
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mistmoon_griffin.jpg
 Oracle:Flying\nWhen Mistmoon Griffin dies, exile Mistmoon Griffin, then return the top creature card of your graveyard to the battlefield.
-SetInfo:WTH Uncommon

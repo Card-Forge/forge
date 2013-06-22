@@ -9,4 +9,3 @@ SVar:TrigDestroy:AB$Destroy | Cost$ 0 | Defined$ TriggeredSource
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mikaeus_the_unhallowed.jpg
 Oracle:Intimidate\nWhenever a Human deals damage to you, destroy it.\nOther non-Human creatures you control get +1/+1 and have undying. (When a creature with undying dies, if it had no +1/+1 counters on it, return it to the battlefield under its owner's control with a +1/+1 counter on it.)
-SetInfo:DKA Mythic

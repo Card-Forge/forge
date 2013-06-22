@@ -6,4 +6,3 @@ K:CARDNAME enters the battlefield tapped.
 A:AB$ DestroyAll | Cost$ 1 T | ValidCards$ Artifact,Creature,Enchantment | SpellDescription$ Destroy all artifacts, creatures, and enchantments.
 SVar:Picture:http://resources.wizards.com/magic/cards/tsp/en-us/card126298.jpg
 Oracle:Magus of the Disk enters the battlefield tapped.\n{1}, {T}: Destroy all artifacts, creatures, and enchantments.
-SetInfo:TSP Rare

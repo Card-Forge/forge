@@ -6,4 +6,3 @@ T:Mode$ Phase | Phase$ Upkeep | TriggerZones$ Battlefield | Execute$ TrigDamage 
 SVar:TrigDamage:AB$DealDamage | Cost$ 0 | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ 3
 SVar:Picture:http://www.wizards.com/global/images/magic/general/magmatic_force.jpg
 Oracle:At the beginning of each upkeep, Magmatic Force deals 3 damage to target creature or player.
-SetInfo:COM Rare

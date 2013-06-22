@@ -4,4 +4,3 @@ Types:Instant
 A:SP$ DamageAll | Cost$ PW | ValidCards$ Creature.attacking | ValidDescription$ each attacking creature. | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to each attacking creature.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/marrow_shards.jpg
 Oracle:({W/P} can be paid with either {W} or 2 life.)\nMarrow Shards deals 1 damage to each attacking creature.
-SetInfo:NPH Uncommon

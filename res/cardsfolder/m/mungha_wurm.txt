@@ -5,4 +5,3 @@ Text:You can't untap more than one land during your untap step.
 PT:6/5
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mungha_wurm.jpg
 Oracle:You can't untap more than one land during your untap step.
-SetInfo:PCY Rare

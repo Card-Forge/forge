@@ -6,4 +6,3 @@ A:AB$ ChangeZone | Cost$ 1 B Sac<1/CARDNAME> | Origin$ Graveyard | Destination$ 
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/Mortiphobia.jpg
 Oracle:{1}{B}, Discard a card: Exile target card from a graveyard.\n{1}{B}, Sacrifice Mortiphobia: Exile target card from a graveyard.
-SetInfo:TOR Uncommon

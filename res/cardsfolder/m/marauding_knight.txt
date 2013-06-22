@@ -8,4 +8,3 @@ SVar:X:Count$Valid Plains.OppCtrl
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/marauding_knight.jpg
 Oracle:Protection from white\nMarauding Knight gets +1/+1 for each Plains your opponents control.
-SetInfo:INV Rare

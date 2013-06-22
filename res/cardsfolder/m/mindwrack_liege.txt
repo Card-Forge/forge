@@ -8,4 +8,3 @@ A:AB$ ChangeZone | Cost$ UR UR UR UR | Origin$ Hand | Destination$ Battlefield |
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mindwrack_liege.jpg
 Oracle:Other blue creatures you control get +1/+1.\nOther red creatures you control get +1/+1.\n{U/R}{U/R}{U/R}{U/R}: You may put a blue or red creature card from your hand onto the battlefield.
-SetInfo:EVE Rare

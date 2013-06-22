@@ -9,5 +9,3 @@ SVar:TrigDamage:AB$ DamageAll | Cost$ 0 | ValidCards$ Creature | ValidPlayers$ E
 SVar:DiscardMe:2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/magma_phoenix.jpg
 Oracle:Flying\nWhen Magma Phoenix dies, it deals 3 damage to each creature and each player.\n{3}{R}{R}: Return Magma Phoenix from your graveyard to your hand.
-SetInfo:M11 Rare
-SetInfo:M10 Rare

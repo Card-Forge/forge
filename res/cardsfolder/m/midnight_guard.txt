@@ -6,4 +6,3 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creatu
 SVar:TrigUntap:DB$Untap | Cost$ 0 | Defined$ Self
 SVar:Picture:http://www.wizards.com/global/images/magic/general/midnight_guard.jpg
 Oracle:Whenever another creature enters the battlefield, untap Midnight Guard.
-SetInfo:DKA Common

@@ -5,4 +5,3 @@ A:SP$ Dig | Cost$ 1 U U | DigNum$ 7 | ChangeValid$ Permanent | ChangeNum$ 1 | Op
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mitotic_manipulation.jpg
 Oracle:Look at the top seven cards of your library. You may put one of those cards onto the battlefield if it has the same name as a permanent. Put the rest on the bottom of your library in any order.
-SetInfo:MBS Rare

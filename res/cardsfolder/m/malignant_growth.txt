@@ -11,4 +11,3 @@ SVar:X:Count$CardCounters.GROWTH
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/malignant_growth.jpg
 Oracle:Cumulative upkeep {1} (At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.)\nAt the beginning of your upkeep, put a growth counter on Malignant Growth.\nAt the beginning of each opponent's draw step, that player draws an additional card for each growth counter on Malignant Growth, then Malignant Growth deals damage to the player equal to the number of cards he or she drew this way.
-SetInfo:MIR Rare

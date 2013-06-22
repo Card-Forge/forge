@@ -5,4 +5,3 @@ A:SP$ Discard | Cost$ 1 B | ValidTgts$ Player | NumCards$ X | References$ X | Mo
 SVar:X:Count$NamedInAllYards.Mind Burst/Plus.1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mind_burst.jpg
 Oracle:Target player discards X cards, where X is one plus the number of cards named Mind Burst in all graveyards.
-SetInfo:ODY Common

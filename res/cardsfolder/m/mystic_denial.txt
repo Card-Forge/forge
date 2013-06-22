@@ -4,6 +4,3 @@ Types:Instant
 A:SP$ Counter | Cost$ 1 U U | TargetType$ Spell | TgtPrompt$ Select target Creatire or Sorcery spell | ValidTgts$ Creature,Sorcery | SpellDescription$ Counter target creature or sorcery spell.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mystic_denial.jpg
 Oracle:Counter target creature or sorcery spell.
-SetInfo:PO2 Uncommon
-SetInfo:PTK Uncommon
-SetInfo:POR Uncommon

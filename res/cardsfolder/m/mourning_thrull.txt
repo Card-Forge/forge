@@ -9,4 +9,3 @@ SVar:X:TriggerCount$DamageAmount
 SVar:HasCombatEffect:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mourning_thrull.jpg
 Oracle:({W/B} can be paid with either {W} or {B}.)\nFlying\nWhenever Mourning Thrull deals damage, you gain that much life.
-SetInfo:GPT Common

@@ -5,4 +5,3 @@ A:SP$ Draw | Cost$ 2 U | NumCards$ 4 | Defined$ You | SpellDescription$ Draw fou
 SVar:DBSkip:DB$AddTurn | Defined$ Opponent | NumTurns$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/meditate.jpg
 Oracle:Draw four cards. You skip your next turn.
-SetInfo:TMP Rare

@@ -5,6 +5,3 @@ A:SP$ PumpAll | Cost$ 2 B B | ValidCards$ Creature | NumAtt$ -X | NumDef$ -X | R
 SVar:X:Count$Valid Swamp.YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mutilate.jpg
 Oracle:All creatures get -1/-1 until end of turn for each Swamp you control.
-SetInfo:TOR Rare
-SetInfo:M13 Rare
-SetInfo:DDD Rare

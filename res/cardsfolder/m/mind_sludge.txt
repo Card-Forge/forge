@@ -5,6 +5,3 @@ A:SP$ Discard | Cost$ 4 B | ValidTgts$ Player | NumCards$ X | References$ X | Mo
 SVar:X:Count$TypeYouCtrl.Swamp
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mind_sludge.jpg
 Oracle:Target player discards a card for each Swamp you control.
-SetInfo:TOR Uncommon
-SetInfo:8ED Uncommon
-SetInfo:ZEN Uncommon

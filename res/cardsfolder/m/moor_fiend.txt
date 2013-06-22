@@ -5,4 +5,3 @@ PT:3/3
 K:Swampwalk
 SVar:Picture:http://resources.wizards.com/magic/cards/ia/en-us/card2477.jpg
 Oracle:Swampwalk
-SetInfo:ICE Common

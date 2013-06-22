@@ -7,4 +7,3 @@ SVar:X:Targeted$CardManaCost
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/molder.jpg
 Oracle:Destroy target artifact or enchantment with converted mana cost X. It can't be regenerated. You gain X life.
-SetInfo:TSP Common

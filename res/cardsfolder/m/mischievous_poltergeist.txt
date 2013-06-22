@@ -6,5 +6,3 @@ K:Flying
 A:AB$ Regenerate | Cost$ PayLife<1> | SpellDescription$ Regenerate CARDNAME.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mischievous_poltergeist.jpg
 Oracle:Flying\nPay 1 life: Regenerate Mischievous Poltergeist.
-SetInfo:WTH Uncommon
-SetInfo:6ED Uncommon

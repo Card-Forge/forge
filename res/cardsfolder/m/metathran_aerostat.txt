@@ -10,4 +10,3 @@ SVar:Cleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/metathran_aerostat.jpg
 Oracle:Flying\n{X}{U}: You may put a creature card with converted mana cost X from your hand onto the battlefield. If you do, return Metathran Aerostat to its owner's hand.
-SetInfo:INV Rare

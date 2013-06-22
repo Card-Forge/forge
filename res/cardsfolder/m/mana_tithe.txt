@@ -4,4 +4,3 @@ Types:Instant
 A:SP$ Counter | Cost$ W | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | UnlessCost$ 1 | SpellDescription$ Counter target spell unless its controller pays 1.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mana_tithe.jpg
 Oracle:Counter target spell unless its controller pays {1}.
-SetInfo:PLC Common

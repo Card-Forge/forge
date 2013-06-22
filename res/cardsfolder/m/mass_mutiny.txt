@@ -5,4 +5,3 @@ A:SP$ GainControl | Cost$ 3 R R | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Selec
 SVar:OneEach:PlayerCountOpponents$Amount
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mass_mutiny.jpg
 Oracle:For each opponent, gain control of up to one target creature that player controls until end of turn. Untap those creatures. They gain haste until end of turn.
-SetInfo:PC2 Rare

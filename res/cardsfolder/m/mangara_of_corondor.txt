@@ -7,4 +7,3 @@ SVar:DBChange:DB$ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Exile
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mangara_of_corondor.jpg
 Oracle:{T}: Exile Mangara of Corondor and target permanent.
-SetInfo:TSP Rare

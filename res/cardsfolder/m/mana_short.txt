@@ -6,10 +6,3 @@ SVar:DrainMana:DB$ DrainMana | Defined$ Targeted
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mana_short.jpg
 Oracle:Tap all lands target player controls and empty his or her mana pool.
-SetInfo:2ED Rare
-SetInfo:7ED Rare
-SetInfo:6ED Rare
-SetInfo:LEB Rare
-SetInfo:LEA Rare
-SetInfo:4ED Rare
-SetInfo:3ED Rare

@@ -8,4 +8,3 @@ SVar:X:Count$xPaid
 SVar:RemAIDeck:True
 SVar:Picture:http://www.cardforge.org/fpics/vgd-lq/mirror_entity_avatar.jpg
 Oracle:Hand +1, life -2\n{X}: Choose a creature type. Until end of turn, creatures you control of the chosen type become X/X and gain all creature types.
-SetInfo:VAN Special

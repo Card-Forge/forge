@@ -7,4 +7,3 @@ A:AB$ ChangeZone | Cost$ W T | ValidCard$ Card.Self | Origin$ Battlefield | Dest
 SVar:DBBounce:DB$ ChangeZone | ValidTgts$ Griffin.YouCtrl | TgtPrompt$ Select target Griffin from your graveyard | Origin$ Graveyard | Destination$ Hand
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mtenda_griffin.jpg
 Oracle:Flying\n{W}, {T}: Return Mtenda Griffin to its owner's hand and return target Griffin card from your graveyard to your hand. Activate this ability only during your upkeep.
-SetInfo:MIR Uncommon

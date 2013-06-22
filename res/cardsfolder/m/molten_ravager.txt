@@ -5,4 +5,3 @@ PT:0/4
 A:AB$ Pump | Cost$ R | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/molten_ravager.jpg
 Oracle:{R}: Molten Ravager gets +1/+0 until end of turn.
-SetInfo:ZEN Common

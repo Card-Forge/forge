@@ -6,4 +6,3 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigAddMana:AB$Mana | Cost$ 0 | Produced$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/myr_moonvessel.jpg
 Oracle:When Myr Moonvessel dies, add {1} to your mana pool.
-SetInfo:DST Common

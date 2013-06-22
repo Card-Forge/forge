@@ -7,4 +7,3 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigPump:AB$Pump | Cost$ 0 | Defined$ Self | NumAtt$ 2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/molder_beast.jpg
 Oracle:Trample\nWhenever an artifact is put into a graveyard from the battlefield, Molder Beast gets +2/+0 until end of turn.
-SetInfo:SOM Common
