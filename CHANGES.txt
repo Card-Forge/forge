@@ -68,6 +68,13 @@ Djinn Illuminatus
 Wall of Shards
 Restore Balance
 Spellskite
+Redirect
+Gorilla Berserkers
+Pathrazer of Ulamog
+Goblin Flectomancer
+Wild Ricochet
+Phyrexian Colossus
+Guile
 
 
 --------------------
