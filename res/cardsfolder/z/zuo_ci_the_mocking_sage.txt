@@ -6,4 +6,3 @@ K:CantBeBlockedBy Creature.withHorsemanship
 K:Hexproof
 SVar:Picture:http://www.wizards.com/global/images/magic/general/zuo_ci_the_mocking_sage.jpg
 Oracle:Hexproof (This creature can't be the target of spells or abilities your opponents control.)\nZuo Ci, the Mocking Sage can't be blocked by creatures with horsemanship.
-SetInfo:PTK Rare

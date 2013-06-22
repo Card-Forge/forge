@@ -5,4 +5,3 @@ PT:2/2
 A:AB$ Pump | Cost$ 2 B | NumAtt$ +2 | NumDef$ +2 | SpellDescription$ CARDNAME gets +2/+2 until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/zof_shade.jpg
 Oracle:{2}{B}: Zof Shade gets +2/+2 until end of turn.
-SetInfo:ROE Common

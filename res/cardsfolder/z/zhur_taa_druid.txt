@@ -7,4 +7,3 @@ T:Mode$ TapsForMana | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute
 SVar:TrigDmg:AB$ DealDamage | Cost$ 0 | NumDmg$ 1 | Defined$ Player.Opponent
 SVar:Picture:http://www.wizards.com/global/images/magic/general/zhur_taa_druid.jpg
 Oracle:{T}: Add {G} to your mana pool.\nWhenever you tap Zhur-Taa Druid for mana, it deals 1 damage to each opponent.
-SetInfo:DGM Common

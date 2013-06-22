@@ -7,4 +7,3 @@ SVar:TrigGainLife:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ 1 | Referen
 SVar:X:Count$Valid Permanent.nonLand+YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/zealots_en_dal.jpg
 Oracle:At the beginning of your upkeep, if all nonland permanents you control are white, you gain 1 life.
-SetInfo:EXO Uncommon

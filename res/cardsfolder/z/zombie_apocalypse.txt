@@ -6,4 +6,3 @@ SVar:DBDestroy:DB$DestroyAll | ValidCards$ Human
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/zombie_apocalypse.jpg
 Oracle:Return all Zombie creature cards from your graveyard to the battlefield tapped, then destroy all Humans.
-SetInfo:DKA Rare

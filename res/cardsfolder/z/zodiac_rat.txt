@@ -5,4 +5,3 @@ PT:1/1
 K:Swampwalk
 SVar:Picture:http://resources.wizards.com/magic/cards/pk/en-us/card10564.jpg
 Oracle:Swampwalk
-SetInfo:PTK Common

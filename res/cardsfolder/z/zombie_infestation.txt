@@ -5,7 +5,3 @@ A:AB$ Token | Cost$ Discard<2/Card> | TokenImage$ B 2 2 Zombie | TokenAmount$ 1 
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/zombie_infestation.jpg
 Oracle:Discard two cards: Put a 2/2 black Zombie creature token onto the battlefield.
-SetInfo:M12 Uncommon
-SetInfo:ODY Uncommon
-SetInfo:PD3 Uncommon
-SetInfo:ARC Uncommon

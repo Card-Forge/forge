@@ -6,4 +6,3 @@ T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | Execute$ T
 SVar:TrigDiscard:AB$Discard | Cost$ 0 | Defined$ TriggeredTarget | NumCards$ 1 | Mode$ TgtChoose
 SVar:Picture:http://www.wizards.com/global/images/magic/general/zhang_liao_hero_of_hefei.jpg
 Oracle:Whenever Zhang Liao, Hero of Hefei deals damage to an opponent, that opponent discards a card.
-SetInfo:PTK Rare

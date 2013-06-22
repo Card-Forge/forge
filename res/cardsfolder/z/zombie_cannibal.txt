@@ -6,4 +6,3 @@ T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage
 SVar:TrigExile:AB$ ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ Choose target card in your opponent's graveyard | ValidTgts$ Card.DefenderCtrl | SpellDescription$ Exile target card from your opponet's graveyard
 SVar:Picture:http://www.wizards.com/global/images/magic/general/zombie_cannibal.jpg
 Oracle:Whenever Zombie Cannibal deals combat damage to a player, you may exile target card from that player's graveyard.
-SetInfo:ODY Common

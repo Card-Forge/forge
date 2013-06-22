@@ -8,4 +8,3 @@ SVar:X:TriggerCount$DamageAmount
 SVar:HasCombatEffect:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/zebra_unicorn.jpg
 Oracle:Whenever Zebra Unicorn deals damage, you gain that much life.
-SetInfo:MIR Uncommon

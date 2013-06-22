@@ -7,4 +7,3 @@ S:Mode$ Continuous | Affected$ Griffin.Other | AddPower$ 1 | AddToughness$ 1 | D
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/zuberi_golden_feather.jpg
 Oracle:Flying\nOther Griffin creatures get +1/+1.
-SetInfo:MIR Rare

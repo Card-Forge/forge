@@ -4,6 +4,3 @@ Types:Creature Zombie Giant
 PT:4/3
 SVar:Picture:http://www.wizards.com/global/images/magic/general/zombie_goliath.jpg
 Oracle:
-SetInfo:M10 Common
-SetInfo:M13 Common
-SetInfo:M12 Common

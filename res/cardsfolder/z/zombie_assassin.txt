@@ -6,4 +6,3 @@ A:AB$ Destroy | Cost$ T ExileFromGrave<2/Card> Exile<1/CARDNAME> | CostDesc$ T, 
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/zombie_assassin.jpg
 Oracle:{T}, Exile two cards from your graveyard and Zombie Assassin: Destroy target nonblack creature. It can't be regenerated.
-SetInfo:ODY Common

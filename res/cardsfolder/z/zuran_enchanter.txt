@@ -7,4 +7,3 @@ SVar:RemRandomDeck:True
 DeckNeeds:Color$Black
 SVar:Picture:http://www.wizards.com/global/images/magic/general/zuran_enchanter.jpg
 Oracle:{2}{B}, {T}: Target player discards a card. Activate this ability only during your turn.
-SetInfo:ICE Common

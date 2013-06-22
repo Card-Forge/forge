@@ -8,4 +8,3 @@ A:AB$ Regenerate | Cost$ S | SpellDescription$ Regenerate CARDNAME.
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/zombie_musher.jpg
 Oracle:Snow landwalk\n{S}: Regenerate Zombie Musher. ({S} can be paid with one mana from a snow permanent.)
-SetInfo:CSP Common

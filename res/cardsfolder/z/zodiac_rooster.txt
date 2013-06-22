@@ -5,4 +5,3 @@ PT:2/1
 K:Plainswalk
 SVar:Picture:http://resources.wizards.com/magic/cards/pk/en-us/card10506.jpg
 Oracle:Plainswalk
-SetInfo:PTK Common

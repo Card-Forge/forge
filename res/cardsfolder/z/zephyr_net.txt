@@ -6,4 +6,3 @@ A:SP$ Attach | Cost$ 1 U | ValidTgts$ Creature | AILogic$ Curse
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Defender & Flying | Description$ Enchanted creature has defender and flying.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/zephyr_net.jpg
 Oracle:Enchant creature\nEnchanted creature has defender and flying.
-SetInfo:LRW Common

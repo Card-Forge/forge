@@ -14,4 +14,3 @@ SVar:X:Count$Valid Permanent.YouOwn+OwnerDoesntControl
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/zedruu_the_greathearted.jpg
 Oracle:At the beginning of your upkeep, you gain X life and draw X cards, where X is the number of permanents you own that your opponents control.\n{R}{W}{U}: Target opponent gains control of target permanent you control.
-SetInfo:COM Mythic

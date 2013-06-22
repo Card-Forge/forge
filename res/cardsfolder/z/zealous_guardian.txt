@@ -5,4 +5,3 @@ PT:1/1
 K:Flash
 SVar:Picture:http://www.wizards.com/global/images/magic/general/zealous_guardian.jpg
 Oracle:Flash
-SetInfo:SHM Common

@@ -6,4 +6,3 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigReturn:AB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Hand
 SVar:Picture:http://www.wizards.com/global/images/magic/general/zodiac_dragon.jpg
 Oracle:When Zodiac Dragon is put into your graveyard from the battlefield, you may return it to your hand.
-SetInfo:PTK Rare

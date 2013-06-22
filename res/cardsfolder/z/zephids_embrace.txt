@@ -6,4 +6,3 @@ A:SP$ Attach | Cost$ 2 U U | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddToughness$ 2 | AddKeyword$ Flying & Shroud | Description$ Enchanted creature gets +2/+2 and has flying and shroud. (It can't be the target of spells or abilities.)
 SVar:Picture:http://www.wizards.com/global/images/magic/general/zephids_embrace.jpg
 Oracle:Enchant creature\nEnchanted creature gets +2/+2 and has flying and shroud. (It can't be the target of spells or abilities.)
-SetInfo:USG Uncommon

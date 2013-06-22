@@ -16,5 +16,3 @@ SVar:Y:ReplaceCount$DamageAmount
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/zealous_inquisitor.jpg
 Oracle:{1}{W}: The next 1 damage that would be dealt to Zealous Inquisitor this turn is dealt to target creature instead.
-SetInfo:SCG Common
-SetInfo:9ED Uncommon

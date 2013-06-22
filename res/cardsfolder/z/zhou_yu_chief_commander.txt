@@ -5,4 +5,3 @@ PT:8/8
 K:CARDNAME can't attack unless defending player controls an Island.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/zhou_yu_chief_commander.jpg
 Oracle:Zhou Yu, Chief Commander can't attack unless defending player controls an Island.
-SetInfo:PTK Rare

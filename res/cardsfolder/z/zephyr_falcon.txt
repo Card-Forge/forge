@@ -6,6 +6,3 @@ K:Flying
 K:Vigilance
 SVar:Picture:http://resources.wizards.com/magic/cards/4e/en-us/card2199.jpg
 Oracle:Flying, vigilance
-SetInfo:5ED Common
-SetInfo:LEG Common
-SetInfo:4ED Common

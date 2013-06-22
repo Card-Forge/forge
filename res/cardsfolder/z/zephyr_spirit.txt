@@ -6,4 +6,3 @@ T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ TrigBounce | TriggerDescription
 SVar:TrigBounce:AB$ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Hand
 SVar:Picture:http://www.wizards.com/global/images/magic/general/zephyr_spirit.jpg
 Oracle:When Zephyr Spirit blocks, return it to its owner's hand.
-SetInfo:RAV Common

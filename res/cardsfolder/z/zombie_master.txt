@@ -8,10 +8,3 @@ SVar:Regenerate:AB$Regenerate | Cost$ B | SpellDescription$ Regenerate this perm
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/zombie_master.jpg
 Oracle:Other Zombie creatures have swampwalk.\nOther Zombies have "{B}: Regenerate this permanent."
-SetInfo:2ED Rare
-SetInfo:6ED Rare
-SetInfo:LEB Rare
-SetInfo:LEA Rare
-SetInfo:5ED Rare
-SetInfo:4ED Rare
-SetInfo:3ED Rare
