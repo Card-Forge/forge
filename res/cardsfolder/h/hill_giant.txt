@@ -4,14 +4,3 @@ Types:Creature Giant
 PT:3/3
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hill_giant.jpg
 Oracle:
-SetInfo:8ED Common
-SetInfo:2ED Common
-SetInfo:7ED Common
-SetInfo:9ED Common
-SetInfo:10E Common
-SetInfo:LEB Common
-SetInfo:LEA Common
-SetInfo:5ED Common
-SetInfo:4ED Common
-SetInfo:POR Common
-SetInfo:3ED Common

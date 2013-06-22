@@ -9,4 +9,3 @@ SVar:HazeFrogPrevent:Mode$ PreventDamage | EffectZone$ Command | Source$ Creatur
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/haze_frog.jpg
 Oracle:Flash (You may cast this spell any time you could cast an instant.)\nWhen Haze Frog enters the battlefield, prevent all combat damage that other creatures would deal this turn.
-SetInfo:ROE Common

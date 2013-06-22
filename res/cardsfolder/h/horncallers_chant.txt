@@ -7,4 +7,3 @@ SVar:DBCopy:DB$ CopyPermanent | Defined$ Remembered | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/horncallers_chant.jpg
 Oracle:Put a 4/4 green Rhino creature token with trample onto the battlefield, then populate. (Put a token onto the battlefield that's a copy of a creature token you control.)
-SetInfo:RTR Common

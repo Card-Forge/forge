@@ -7,4 +7,3 @@ T:Mode$ ChangesZone | ValidCard$ Creature.nonToken+Other | Origin$ Battlefield |
 SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/harvester_of_souls.jpg
 Oracle:Deathtouch\nWhenever another nontoken creature dies, you may draw a card.
-SetInfo:AVR Rare

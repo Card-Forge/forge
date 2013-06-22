@@ -12,4 +12,3 @@ SVar:TrigRemove:DB$ RemoveCounter | CounterType$ TIDE | CounterNum$ All
 SVar:All:Count$CardCounters.TIDE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/homarid.jpg
 Oracle:Homarid enters the battlefield with a tide counter on it.\nAt the beginning of your upkeep, put a tide counter on Homarid.\nAs long as there is exactly one tide counter on Homarid, it gets -1/-1.\nAs long as there are exactly three tide counters on Homarid, it gets +1/+1.\nWhenever there are four tide counters on Homarid, remove all tide counters from it.
-SetInfo:FEM Common x4

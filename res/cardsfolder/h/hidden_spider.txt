@@ -5,4 +5,3 @@ T:Mode$ SpellCast | ValidCard$ Creature.withFlying | ValidActivatingPlayer$ Oppo
 SVar:TrigAnimate:AB$Animate | Cost$ 0 | Defined$ Self | Power$ 3 | Toughness$ 5  | Keywords$ Reach | Types$ Creature,Spider | OverwriteTypes$ True | Permanent$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hidden_spider.jpg
 Oracle:When an opponent casts a creature spell with flying, if Hidden Spider is an enchantment, Hidden Spider becomes a 3/5 Spider creature with reach. (It can block creatures with flying.)
-SetInfo:USG Common

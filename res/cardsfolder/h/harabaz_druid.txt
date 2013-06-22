@@ -7,4 +7,3 @@ SVar:X:Count$Valid Ally.YouCtrl
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/harabaz_druid.jpg
 Oracle:{T}: Add X mana of any one color to your mana pool, where X is the number of Allies you control.
-SetInfo:WWK Rare

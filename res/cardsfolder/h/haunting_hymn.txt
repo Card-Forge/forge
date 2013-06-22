@@ -5,4 +5,3 @@ A:SP$ Discard | Cost$ 4 B B | ValidTgts$ Player | NumCards$ X | Mode$ TgtChoose 
 SVar:X:Count$IfMainPhase.4.2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/haunting_hymn.jpg
 Oracle:Target player discards two cards. If you cast this spell during your main phase, that player discards four cards instead.
-SetInfo:TSP Uncommon

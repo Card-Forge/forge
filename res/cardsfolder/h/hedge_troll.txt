@@ -7,4 +7,3 @@ SVar:X:Count$Valid Plains.YouCtrl
 A:AB$ Regenerate | Cost$ W | SpellDescription$ Regenerate CARDNAME.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hedge_troll.jpg
 Oracle:Hedge Troll gets +1/+1 as long as you control a Plains.\n{W}: Regenerate Hedge Troll.
-SetInfo:PLC Uncommon

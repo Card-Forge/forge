@@ -7,4 +7,3 @@ S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddAbility$ Pump | Description
 SVar:Pump:AB$ Pump | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | IsCurse$ True | KW$ HIDDEN CARDNAME can't block. | SpellDescription$ Target creature can't block this turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hostile_realm.jpg
 Oracle:Enchant land\nEnchanted land has "{T}: Target creature can't block this turn."
-SetInfo:MOR Common

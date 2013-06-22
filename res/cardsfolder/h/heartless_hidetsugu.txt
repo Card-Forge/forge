@@ -8,4 +8,3 @@ SVar:HeartlessX:PlayerCountRemembered$LifeTotal/HalfDown
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/heartless_hidetsugu.jpg
 Oracle:{T}: Heartless Hidetsugu deals damage to each player equal to half that player's life total, rounded down.
-SetInfo:BOK Rare

@@ -9,5 +9,3 @@ A:AB$ Pump | Cost$ R | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until 
 A:AB$ Regenerate | Cost$ B G | SpellDescription$ Regenerate CARDNAME.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hellkite_overlord.jpg
 Oracle:Flying, trample, haste\n{R}: Hellkite Overlord gets +1/+0 until end of turn.\n{B}{G}: Regenerate Hellkite Overlord.
-SetInfo:DRB Rare
-SetInfo:ALA Mythic

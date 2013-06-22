@@ -7,4 +7,3 @@ SVar:X:Count$Valid Land.YouDontCtrl+untapped
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hazy_homunculus.jpg
 Oracle:Hazy Homunculus is unblockable as long as defending player controls an untapped land.
-SetInfo:PCY Common

@@ -7,4 +7,3 @@ SVar:DBExile:DB$ChangeZone | ConditionDefined$ Targeted | ConditionPresent$ Crea
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/holy_justiciar.jpg
 Oracle:{2}{W}, {T}: Tap target creature. If that creature is a Zombie, exile it.
-SetInfo:AVR Uncommon

@@ -6,4 +6,3 @@ SVar:NonStackingEffect:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hannas_custody.jpg
 Oracle:All artifacts have shroud. (They can't be the targets of spells or abilities.)
-SetInfo:TMP Rare

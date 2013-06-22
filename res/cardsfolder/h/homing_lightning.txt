@@ -5,4 +5,3 @@ A:SP$ DealDamage | Cost$ 2 R R | ValidTgts$ Creature | TgtPrompt$ Select target 
 SVar:DamageSame:DB$ DamageAll | ValidCards$ Targeted.sameName+Other | ValidDescription$ each other creature with the same name as that creature. | NumDmg$ 4
 SVar:Picture:http://www.wizards.com/global/images/magic/general/homing_lightning.jpg
 Oracle:Homing Lightning deals 4 damage to target creature and each other creature with the same name as that creature.
-SetInfo:GTC Uncommon

@@ -8,4 +8,3 @@ SVar:TrigPumpAll:AB$PumpAll | Cost$ 0 | ValidCards$ Creature | NumAtt$ -5 | NumD
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/havoc_demon.jpg
 Oracle:Flying\nWhen Havoc Demon dies, all creatures get -5/-5 until end of turn.
-SetInfo:LGN Rare

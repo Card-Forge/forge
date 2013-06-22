@@ -5,4 +5,3 @@ PT:3/3
 K:Mountainwalk
 SVar:Picture:http://resources.wizards.com/magic/cards/lrw/en/card145971.jpg
 Oracle:Mountainwalk
-SetInfo:LRW Common

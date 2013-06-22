@@ -6,4 +6,3 @@ K:Flash
 K:Vigilance
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hussar_patrol.jpg
 Oracle:Flash (You may cast this spell any time you could cast an instant.)\nVigilance
-SetInfo:RTR Common

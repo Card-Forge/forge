@@ -6,4 +6,3 @@ T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigTap | TriggerZones$ Battle
 SVar:TrigTap:AB$ Tap | Cost$ W | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls
 SVar:Picture:http://www.wizards.com/global/images/magic/general/haazda_snare_squad.jpg
 Oracle:Whenever Haazda Snare Squad attacks, you may pay {W}. If you do, tap target creature an opponent controls.
-SetInfo:DGM Common

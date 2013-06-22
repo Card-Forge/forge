@@ -6,4 +6,3 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigBounce | Trigger
 SVar:TrigBounce:AB$ ChangeZone | Cost$ 0 | Origin$ Library | Destination$ Battlefield | AtRandom$ True | ChangeType$ Land
 SVar:Picture:http://www.cardforge.org/fpics/vgd-lq/hermit_druid_avatar.jpg
 Oracle:Hand -2, life -2\nAt the beginning of your upkeep, put a land card from your library chosen at random onto the battlefield.
-SetInfo:VAN Special

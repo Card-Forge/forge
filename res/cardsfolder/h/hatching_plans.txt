@@ -7,4 +7,3 @@ SVar:SacMe:5
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hatching_plans.jpg
 Oracle:When Hatching Plans is put into a graveyard from the battlefield, draw three cards.
-SetInfo:GPT Rare

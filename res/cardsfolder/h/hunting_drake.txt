@@ -8,4 +8,3 @@ SVar:TrigChangeZone:DB$ChangeZone | Cost$ 0 | ValidTgts$ Creature.Red,Creature.G
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hunting_drake.jpg
 Oracle:Flying\nWhen Hunting Drake enters the battlefield, put target red or green creature on top of its owner's library.
-SetInfo:PLS Common

@@ -9,4 +9,3 @@ SVar:HunterSliverTrigUntap:DB$ Untap | Defined$ Targeted
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hunter_sliver.jpg
 Oracle:All Sliver creatures have provoke. (When a Sliver attacks, its controller may have target creature defending player controls untap and block it if able.)
-SetInfo:LGN Common

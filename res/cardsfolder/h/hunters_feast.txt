@@ -5,4 +5,3 @@ A:SP$ GainLife | Cost$ 3 G | ValidTgts$ Player | TgtPrompt$ Select target player
 SVar:MaxTgt:PlayerCountPlayers$Amount
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hunters_feast.jpg
 Oracle:Any number of target players each gain 6 life.
-SetInfo:M11 Common

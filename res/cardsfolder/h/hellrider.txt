@@ -8,5 +8,3 @@ SVar:TrigDealDamage:AB$DealDamage | Cost$ 0 | Defined$ DefendingPlayer | NumDmg$
 SVar:HasAttackEffect:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hellrider.jpg
 Oracle:Haste\nWhenever a creature you control attacks, Hellrider deals 1 damage to defending player.
-SetInfo:DDK Rare
-SetInfo:DKA Rare

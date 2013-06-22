@@ -4,4 +4,3 @@ Types:Instant
 A:SP$ PumpAll | Cost$ 2 U | ValidCards$ Creature.OppCtrl | NumAtt$ -4 | NumDef$ 0 | IsCurse$ True | SpellDescription$ Creatures your opponents control get -4/-0 until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hysterical_blindness.jpg
 Oracle:Creatures your opponents control get -4/-0 until end of turn.
-SetInfo:ISD Common

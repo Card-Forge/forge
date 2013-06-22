@@ -7,4 +7,3 @@ SVar:DBLoseLife:DB$LoseLife | Defined$ You | LifeAmount$ 2 | SubAbility$ DBDraw
 SVar:DBClash:DB$Clash | WinSubAbility$ DBLoseLife
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hoarders_greed.jpg
 Oracle:You lose 2 life and draw two cards, then clash with an opponent. If you win, repeat this process. (Each clashing player reveals the top card of his or her library, then puts that card on the top or bottom. A player wins if his or her card had a higher converted mana cost.)
-SetInfo:LRW Uncommon

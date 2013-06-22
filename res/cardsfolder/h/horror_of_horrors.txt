@@ -5,5 +5,3 @@ A:AB$ Regenerate | ValidTgts$ Creature.Black | TgtPrompt$ Select target black cr
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/horror_of_horrors.jpg
 Oracle:Sacrifice a Swamp: Regenerate target black creature. (The next time that creature would be destroyed this turn, it isn't. Instead tap it, remove all damage from it, and remove it from combat.)
-SetInfo:LEG Uncommon
-SetInfo:9ED Uncommon

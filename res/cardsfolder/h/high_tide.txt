@@ -7,4 +7,3 @@ SVar:TrigMana:AB$ Mana | Cost$ 0 | Produced$ U | Amount$ 1 | Defined$ TriggeredP
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/high_tide.jpg
 Oracle:Until end of turn, whenever a player taps an Island for mana, that player adds {U} to his or her mana pool (in addition to the mana the land produces).
-SetInfo:FEM Common x3

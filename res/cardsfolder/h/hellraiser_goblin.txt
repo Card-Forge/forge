@@ -8,4 +8,3 @@ SVar:PlayMain1:TRUE
 SVar:BuffedBy:Creature
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hellraiser_goblin.jpg
 Oracle:Creatures you control have haste and attack each combat if able.
-SetInfo:GTC Uncommon

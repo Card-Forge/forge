@@ -4,8 +4,3 @@ Types:Instant
 A:SP$ ChangeZoneAll | Cost$ 1 U | ValidTgts$ Player | ChangeType$ Artifact.TargetedPlayerOwn | UseAllOriginZones$ True | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return all artifacts target player owns to his or her hand.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hurkyls_recall.jpg
 Oracle:Return all artifacts target player owns to his or her hand.
-SetInfo:ATQ Rare
-SetInfo:5ED Rare
-SetInfo:4ED Rare
-SetInfo:3ED Rare
-SetInfo:10E Rare

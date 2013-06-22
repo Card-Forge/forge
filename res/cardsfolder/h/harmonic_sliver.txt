@@ -9,4 +9,3 @@ SVar:HarmonicDestroy:DB$Destroy | Cost$ 0 | ValidTgts$ Artifact,Enchantment | Tg
 SVar:BuffedBy:Sliver
 SVar:Picture:http://www.wizards.com/global/images/magic/general/harmonic_sliver.jpg
 Oracle:All Slivers have "When this permanent enters the battlefield, destroy target artifact or enchantment."
-SetInfo:TSP Uncommon

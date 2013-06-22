@@ -6,4 +6,3 @@ SVar:TrigMana:AB$ ManaReflected | Cost$ 0 | ColorOrType$ Type | Valid$ Defined.T
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/heartbeat_of_spring.jpg
 Oracle:Whenever a player taps a land for mana, that player adds one mana to his or her mana pool of any type that land produced.
-SetInfo:CHK Rare

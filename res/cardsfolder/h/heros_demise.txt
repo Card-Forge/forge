@@ -4,4 +4,3 @@ Types:Instant
 A:SP$ Destroy | Cost$ 1 B | ValidTgts$ Creature.Legendary | TgtPrompt$ Select target legendary creature | SpellDescription$ Destroy target legendary creature.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/heros_demise.jpg
 Oracle:Destroy target legendary creature.
-SetInfo:BOK Rare

@@ -9,4 +9,3 @@ SVar:RemoveEff:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ E
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/horn_of_plenty.jpg
 Oracle:Whenever a player casts a spell, he or she may pay {1}. If that player does, he or she draws a card at the beginning of the next end step.
-SetInfo:MMQ Rare

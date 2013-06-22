@@ -7,4 +7,3 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigChangeZone:DB$ ChangeZone | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Hand | TargetMin$ 0 | TargetMax$ 2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hoverguard_sweepers.jpg
 Oracle:Flying\nWhen Hoverguard Sweepers enters the battlefield, you may return up to two target creatures to their owners' hands.
-SetInfo:5DN Rare

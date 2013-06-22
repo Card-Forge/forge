@@ -7,4 +7,3 @@ T:Mode$ DamageDone | ValidSource$ Creature.EquippedBy | ValidTarget$ Player | Co
 SVar:TrigDestroy:AB$ Destroy | Cost$ 0 | ValidTgts$ Equipment.DefenderCtrl | TgtPrompt$ Select target equipment defending player controls
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hammer_of_ruin.jpg
 Oracle:Equipped creature gets +2/+0.\nWhenever equipped creature deals combat damage to a player, you may destroy target Equipment that player controls.\nEquip {2}
-SetInfo:WWK Uncommon

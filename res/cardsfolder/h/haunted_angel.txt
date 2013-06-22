@@ -9,4 +9,3 @@ SVar:DBToken:DB$ Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Angel | TokenType
 SVar:RemRandomDeck:True
 SVar:Picture:http://resources.wizards.com/magic/cards/ap/en-us/card25910.jpg
 Oracle:Flying\nWhen Haunted Angel dies, exile Haunted Angel and each other player puts a 3/3 black Angel creature token with flying onto the battlefield.
-SetInfo:APC Uncommon

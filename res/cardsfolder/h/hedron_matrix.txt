@@ -6,4 +6,3 @@ S:Mode$ Continuous | Affected$ Card.EquippedBy | AddPower$ X | AddToughness$ X |
 SVar:X:Count$EquippedCardManaCost
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hedron_matrix.jpg
 Oracle:Equipped creature gets +X/+X, where X is its converted mana cost.\nEquip {4}
-SetInfo:ROE Rare

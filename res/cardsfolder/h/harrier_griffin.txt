@@ -7,4 +7,3 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | E
 SVar:TrigTap:AB$Tap | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature
 SVar:Picture:http://www.wizards.com/global/images/magic/general/harrier_griffin.jpg
 Oracle:Flying\nAt the beginning of your upkeep, tap target creature.
-SetInfo:GPT Uncommon

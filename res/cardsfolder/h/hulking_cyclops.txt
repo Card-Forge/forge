@@ -5,7 +5,3 @@ PT:5/5
 K:CARDNAME can't block.
 SVar:Picture:http://resources.wizards.com/magic/cards/vi/en-us/card3691.jpg
 Oracle:Hulking Cyclops can't block.
-SetInfo:VIS Uncommon
-SetInfo:8ED Uncommon
-SetInfo:POR Uncommon
-SetInfo:6ED Uncommon

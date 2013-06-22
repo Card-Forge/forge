@@ -9,4 +9,3 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.S
 SVar:TrigReturn:DB$ChangeZone | Cost$ 0 | Defined$ Remembered | Origin$ Exile | Destination$ Hand
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hoarding_dragon.jpg
 Oracle:Flying\nWhen Hoarding Dragon enters the battlefield, you may search your library for an artifact card, exile it, then shuffle your library.\nWhen Hoarding Dragon dies, you may put the exiled card into its owner's hand.
-SetInfo:M11 Rare

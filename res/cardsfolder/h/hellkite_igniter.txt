@@ -8,4 +8,3 @@ A:AB$ Pump | Cost$ 1 R | NumAtt$ +X | References$ X | SpellDescription$ CARDNAME
 SVar:X:Count$TypeYouCtrl.Artifact
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hellkite_igniter.jpg
 Oracle:Flying, haste\n{1}{R}: Hellkite Igniter gets +X/+0 until end of turn, where X is the number of artifacts you control.
-SetInfo:MBS Rare

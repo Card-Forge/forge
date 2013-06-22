@@ -10,4 +10,3 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$CardManaCost
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hellhole_rats.jpg
 Oracle:Haste\nWhen Hellhole Rats enters the battlefield, target player discards a card. Hellhole Rats deals damage to that player equal to that card's converted mana cost.
-SetInfo:DIS Uncommon

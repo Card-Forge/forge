@@ -7,4 +7,3 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigToken:AB$ Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Horror | TokenTypes$ Creature,Horror | ValidTgts$ Opponent | TokenOwner$ Targeted | TokenColors$ Black | TokenPower$ 4 | TokenToughness$ 4
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hunted_lammasu.jpg
 Oracle:Flying\nWhen Hunted Lammasu enters the battlefield, put a 4/4 black Horror creature token onto the battlefield under target opponent's control.
-SetInfo:RAV Rare

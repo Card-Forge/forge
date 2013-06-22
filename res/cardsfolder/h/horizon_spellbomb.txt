@@ -6,4 +6,3 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigDraw:AB$Draw | Cost$ G | NumCards$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/horizon_spellbomb.jpg
 Oracle:{2}, {T}, Sacrifice Horizon Spellbomb: Search your library for a basic land card, reveal it, and put it into your hand. Then shuffle your library.\nWhen Horizon Spellbomb is put into a graveyard from the battlefield, you may pay {G}. If you do, draw a card.
-SetInfo:SOM Common

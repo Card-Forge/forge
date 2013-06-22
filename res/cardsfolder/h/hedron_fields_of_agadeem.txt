@@ -6,4 +6,3 @@ T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChao
 SVar:RolledChaos:AB$ Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Eldrazi | TokenTypes$ Creature,Eldrazi | TokenOwner$ You | TokenColors$ Colorless | TokenPower$ 7 | TokenToughness$ 7 | TokenKeywords$ Annihilator 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hedron_fields_of_agadeem.jpg
 Oracle:Creatures with power 7 or greater can't attack or block.\nWhenever you roll {C}, put a 7/7 colorless Eldrazi creature token with annihilator 1 onto the battlefield. (Whenever it attacks, defending player sacrifices a permanent.)
-SetInfo:PC2 Common

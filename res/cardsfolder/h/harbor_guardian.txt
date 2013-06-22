@@ -7,4 +7,3 @@ T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDraw | OptionalDecider$ Op
 SVar:TrigDraw:AB$ Draw | Cost$ 0 | Defined$ DefendingPlayer | NumCards$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/harbor_guardian.jpg
 Oracle:Reach (This creature can block creatures with flying.)\nWhenever Harbor Guardian attacks, defending player may draw a card.
-SetInfo:MIR Uncommon

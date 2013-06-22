@@ -11,4 +11,3 @@ SVar:RemRandomDeck:True
 SVar:DiscardMe:5
 SVar:Picture:http://www.wizards.com/global/images/magic/general/haakon_stromgald_scourge.jpg
 Oracle:You may cast Haakon, Stromgald Scourge from your graveyard, but not from anywhere else.\nAs long as Haakon is on the battlefield, you may play Knight cards from your graveyard.\nWhen Haakon dies, you lose 2 life.
-SetInfo:CSP Rare

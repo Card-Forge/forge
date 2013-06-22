@@ -6,4 +6,3 @@ K:Flying
 K:CARDNAME can block only creatures with flying.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hoverguard_observer.jpg
 Oracle:Flying\nHoverguard Observer can block only creatures with flying.
-SetInfo:DST Uncommon

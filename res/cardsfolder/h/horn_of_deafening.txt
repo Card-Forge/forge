@@ -5,5 +5,3 @@ A:AB$ Pump | Cost$ 2 T | ValidTgts$ Creature | TgtPrompt$ Select target creature
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/horn_of_deafening.jpg
 Oracle:{2}, {T}: Prevent all combat damage that would be dealt by target creature this turn.
-SetInfo:CHR Rare
-SetInfo:LEG Rare

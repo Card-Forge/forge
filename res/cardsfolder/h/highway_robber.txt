@@ -7,6 +7,3 @@ SVar:TrigDrain:AB$LoseLife | Cost$ 0 | ValidTgts$ Opponent | LifeAmount$ 2 | Sub
 SVar:DBGainLife:DB$GainLife | Defined$ You | LifeAmount$ 2
 SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card84505.jpg
 Oracle:When Highway Robber enters the battlefield, target opponent loses 2 life and you gain 2 life.
-SetInfo:MMQ Common
-SetInfo:9ED Common
-SetInfo:10E Common

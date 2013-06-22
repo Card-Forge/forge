@@ -7,4 +7,3 @@ SVar:X:Remembered$Amount
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/honor_the_fallen.jpg
 Oracle:Exile all creature cards from all graveyards. You gain 1 life for each card exiled this way.
-SetInfo:MMQ Rare

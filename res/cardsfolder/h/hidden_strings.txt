@@ -8,4 +8,3 @@ SVar:IsEncoded:Number$0
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hidden_strings.jpg
 Oracle:You may tap or untap target permanent, then you may tap or untap another target permanent.\nCipher (Then you may exile this spell card encoded on a creature you control. Whenever that creature deals combat damage to a player, its controller may cast a copy of the encoded card without paying its mana cost.)
-SetInfo:DGM Common

@@ -6,4 +6,3 @@ SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ X | TokenName$ Spirit | TokenTy
 SVar:X:Count$TypeYouCtrl.Shrine
 SVar:Picture:http://www.wizards.com/global/images/magic/general/honden_of_lifes_web.jpg
 Oracle:At the beginning of your upkeep, put a 1/1 colorless Spirit creature token onto the battlefield for each Shrine you control.
-SetInfo:CHK Uncommon

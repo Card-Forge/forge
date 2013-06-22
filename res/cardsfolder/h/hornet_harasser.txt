@@ -6,4 +6,3 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigPump:AB$Pump | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -2 | NumDef$ -2 | IsCurse$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hornet_harasser.jpg
 Oracle:When Hornet Harasser dies, target creature gets -2/-2 until end of turn.
-SetInfo:LRW Common

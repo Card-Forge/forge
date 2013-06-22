@@ -7,5 +7,3 @@ SVar:DBPumpNoUntap:DB$Pump | Defined$ Self | KW$ HIDDEN This card doesn't untap 
 SVar:DBTap:DB$Tap | Defined$ Self
 SVar:Picture:http://www.wizards.com/global/images/magic/general/homarid_warrior.jpg
 Oracle:{U}: Homarid Warrior gains shroud until end of turn and doesn't untap during your next untap step. Tap Homarid Warrior. (A permanent with shroud can't be the target of spells or abilities.)
-SetInfo:5ED Common
-SetInfo:FEM Common x3

@@ -9,4 +9,3 @@ SVar:NeedsToPlayVar:Y GE6
 SVar:Y:Count$Valid Land.YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hammerheim_deadeye.jpg
 Oracle:Echo {5}{R} (At the beginning of your upkeep, if this came under your control since the beginning of your last upkeep, sacrifice it unless you pay its echo cost.)\nWhen Hammerheim Deadeye enters the battlefield, destroy target creature with flying.
-SetInfo:PLC Uncommon

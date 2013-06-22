@@ -6,5 +6,3 @@ K:Flying
 A:AB$ Pump | Cost$ 1 U U | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Flying | SpellDescription$ Target creature gains flying until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/harmattan_efreet.jpg
 Oracle:Flying\n{1}{U}{U}: Target creature gains flying until end of turn.
-SetInfo:MIR Uncommon
-SetInfo:6ED Uncommon

@@ -6,4 +6,3 @@ A:AB$ TapOrUntap | Cost$ T | ValidTgts$ Artifact.OppCtrl | TgtPrompt$ Select tar
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hyperion_blacksmith.jpg
 Oracle:{T}: You may tap or untap target artifact an opponent controls.
-SetInfo:LEG Uncommon

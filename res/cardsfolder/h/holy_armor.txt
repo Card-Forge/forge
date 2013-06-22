@@ -7,8 +7,3 @@ S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddToughness$ 2 | Descript
 A:AB$ Pump | Cost$ W | Defined$ Enchanted | NumDef$ +1 | SpellDescription$ Enchanted creature gets +0/+1 until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/holy_armor.jpg
 Oracle:Enchant creature\nEnchanted creature gets +0/+2.\n{W}: Enchanted creature gets +0/+1 until end of turn.
-SetInfo:LEB Common
-SetInfo:4ED Common
-SetInfo:LEA Common
-SetInfo:3ED Common
-SetInfo:2ED Common

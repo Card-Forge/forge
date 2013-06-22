@@ -9,4 +9,3 @@ S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ 
 SVar:X:Count$GreenTypeInChosenYard.Creature/Plus.1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/haunting_apparition.jpg
 Oracle:Flying\nAs Haunting Apparition enters the battlefield, choose an opponent.\nHaunting Apparition's power is equal to 1 plus the number of green creature cards in the chosen player's graveyard.
-SetInfo:MIR Uncommon

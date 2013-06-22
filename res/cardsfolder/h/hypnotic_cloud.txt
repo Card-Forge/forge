@@ -6,4 +6,3 @@ A:SP$ Discard | Cost$ 1 B | NumCards$ X | References$ X | ValidTgts$ Player | Tg
 SVar:X:Count$Kicked.3.1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hypnotic_cloud.jpg
 Oracle:Kicker {4} (You may pay an additional {4} as you cast this spell.)\nTarget player discards a card. If Hypnotic Cloud was kicked, that player discards three cards instead.
-SetInfo:INV Common

@@ -5,4 +5,3 @@ T:Mode$ LandPlayed | ValidCard$ Land.nonBasic+YouDontCtrl | TriggerZones$ Battle
 SVar:TrigAnimate:AB$Animate | Cost$ 0 | Defined$ Self | Power$ 3 | Toughness$ 3  | Types$ Creature,Beast | OverwriteTypes$ True | Permanent$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hidden_herd.jpg
 Oracle:When an opponent plays a nonbasic land, if Hidden Herd is an enchantment, Hidden Herd becomes a 3/3 Beast creature.
-SetInfo:USG Rare

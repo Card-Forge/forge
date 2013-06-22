@@ -5,7 +5,3 @@ A:SP$ Destroy | Cost$ 1 B B | ValidTgts$ Creature.nonBlack | TgtPrompt$ Select t
 SVar:DBDrain:DB$LoseLife | Defined$ TargetedController | LifeAmount$ 2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hideous_end.jpg
 Oracle:Destroy target nonblack creature. Its controller loses 2 life.
-SetInfo:ZEN Common
-SetInfo:DDE Common
-SetInfo:HOP Common
-SetInfo:DDD Common

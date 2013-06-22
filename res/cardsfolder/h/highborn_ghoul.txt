@@ -5,4 +5,3 @@ PT:2/1
 K:Intimidate
 SVar:Picture:http://www.wizards.com/global/images/magic/general/highborn_ghoul.jpg
 Oracle:Intimidate (This creature can't be blocked except by artifact creatures and/or creatures that share a color with it.)
-SetInfo:DKA Common

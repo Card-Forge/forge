@@ -5,4 +5,3 @@ A:SP$ Counter | Cost$ 1 U | TargetType$ Spell | TgtPrompt$ Select target Spirit 
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hisokas_defiance.jpg
 Oracle:Counter target Spirit or Arcane spell.
-SetInfo:CHK Common

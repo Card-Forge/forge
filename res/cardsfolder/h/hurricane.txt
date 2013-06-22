@@ -6,15 +6,3 @@ SVar:X:Count$xPaid
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hurricane.jpg
 Oracle:Hurricane deals X damage to each creature with flying and each player.
-SetInfo:PO2 Rare
-SetInfo:2ED Uncommon
-SetInfo:7ED Rare
-SetInfo:6ED Rare
-SetInfo:5ED Uncommon
-SetInfo:10E Rare
-SetInfo:LEB Uncommon
-SetInfo:LEA Uncommon
-SetInfo:ICE Uncommon
-SetInfo:4ED Uncommon
-SetInfo:POR Rare
-SetInfo:3ED Uncommon

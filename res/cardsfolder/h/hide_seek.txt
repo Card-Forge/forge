@@ -17,4 +17,3 @@ SVar:DBGainLife:DB$ GainLife | LifeAmount$ X | References$ X | SubAbility$ DBCle
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$CardManaCost
 Oracle:Search target opponent's library for a card and exile it. You gain life equal to its converted mana cost. Then that player shuffles his or her library.
-SetInfo:DIS Rare

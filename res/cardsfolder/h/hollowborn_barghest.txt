@@ -9,4 +9,3 @@ SVar:TrigLoseLife:AB$ LoseLife | Cost$ 0 | Defined$ TriggeredPlayer | LifeAmount
 SVar:TrigHand:Count$ValidHand Card.ActivePlayerCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hollowborn_barghest.jpg
 Oracle:At the beginning of your upkeep, if you have no cards in hand, each opponent loses 2 life.\nAt the beginning of each opponent's upkeep, if that player has no cards in hand, he or she loses 2 life.
-SetInfo:SHM Rare

@@ -8,4 +8,3 @@ SVar:X:Count$Valid Card.EnchantedBy+SharesColorWith MostProminentColor
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/heroic_defiance.jpg
 Oracle:Enchant creature\nEnchanted creature gets +3/+3 unless it shares a color with the most common color among all permanents or a color tied for most common.
-SetInfo:PLS Common

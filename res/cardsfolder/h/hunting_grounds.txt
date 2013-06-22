@@ -5,4 +5,3 @@ T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ Opponent | TriggerZ
 SVar:TrigChangeZone:AB$ ChangeZone | Cost$ 0 | ChangeType$ Creature | ChangeNum$ 1 | Origin$ Hand | Destination$ Battlefield
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hunting_grounds.jpg
 Oracle:Threshold - As long as seven or more cards are in your graveyard, Hunting Grounds has "Whenever an opponent casts a spell, you may put a creature card from your hand onto the battlefield."
-SetInfo:JUD Rare

@@ -7,4 +7,3 @@ SVar:TrigPutCounterAll:AB$ PutCounterAll | Cost$ 0 | ValidCards$ Creature | Coun
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/harbinger_of_night.jpg
 Oracle:At the beginning of your upkeep, put a -1/-1 counter on each creature.
-SetInfo:MIR Rare

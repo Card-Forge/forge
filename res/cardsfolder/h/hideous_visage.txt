@@ -4,4 +4,3 @@ Types:Sorcery
 A:SP$ PumpAll | Cost$ 2 B | ValidCards$ Creature.YouCtrl | KW$ Intimidate | SpellDescription$ Creatures you control gain intimidate until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hideous_visage.jpg
 Oracle:Creatures you control gain intimidate until end of turn. (Each of those creatures can't be blocked except by artifact creatures and/or creatures that share a color with it.)
-SetInfo:M12 Common

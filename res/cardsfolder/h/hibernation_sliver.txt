@@ -7,5 +7,3 @@ SVar:Bounce:AB$ChangeZone | Cost$ PayLife<2> | Defined$ Self | Origin$ Battlefie
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hibernation_sliver.jpg
 Oracle:All Slivers have "Pay 2 life: Return this permanent to its owner's hand."
-SetInfo:H09 Uncommon
-SetInfo:STH Uncommon

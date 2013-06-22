@@ -5,4 +5,3 @@ A:SP$ PumpAll | Cost$ 1 W W | ValidCards$ Creature.blocking | NumAtt$ +7 | NumDe
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hold_the_line.jpg
 Oracle:Blocking creatures get +7/+7 until end of turn.
-SetInfo:CHK Rare

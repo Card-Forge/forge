@@ -7,4 +7,3 @@ K:CARDNAME enters the battlefield tapped.
 SVar:FullCost:2 U ExileFromGrave<1/Creature>
 SVar:Picture:http://www.wizards.com/global/images/magic/general/headless_skaab.jpg
 Oracle:As an additional cost to cast Headless Skaab, exile a creature card from your graveyard.\nHeadless Skaab enters the battlefield tapped.
-SetInfo:DKA Common

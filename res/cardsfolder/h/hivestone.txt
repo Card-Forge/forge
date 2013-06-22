@@ -6,4 +6,3 @@ SVar:NonStackingEffect:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hivestone.jpg
 Oracle:Creatures you control are Slivers in addition to their other creature types.
-SetInfo:TSP Rare

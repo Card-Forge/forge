@@ -6,5 +6,3 @@ A:SP$ Token | Cost$ 6 G | TokenAmount$ X | TokenName$ Wolf | TokenTypes$ Creatur
 SVar:X:Count$TypeYouCtrl.Forest
 SVar:Picture:http://www.wizards.com/global/images/magic/general/howl_of_the_night_pack.jpg
 Oracle:Put a 2/2 green Wolf creature token onto the battlefield for each Forest you control.
-SetInfo:M10 Uncommon
-SetInfo:SHM Uncommon

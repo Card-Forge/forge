@@ -6,4 +6,3 @@ K:Flying
 K:Protection from red
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hazerider_drake.jpg
 Oracle:Flying, protection from red
-SetInfo:MIR Uncommon

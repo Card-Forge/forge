@@ -7,4 +7,3 @@ SVar:DBGainControl:DB$ GainControl | AllValid$ Creature.YouDontOwn | NewControll
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/homeward_path.jpg
 Oracle:{T}: Add {1} to your mana pool.\n{T}: Each player gains control of all creatures he or she owns.
-SetInfo:COM Rare

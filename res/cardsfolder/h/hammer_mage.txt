@@ -7,4 +7,3 @@ SVar:X:Count$xPaid
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hammer_mage.jpg
 Oracle:{X}{R}, {T}, Discard a card: Destroy all artifacts with converted mana cost X or less.
-SetInfo:MMQ Uncommon

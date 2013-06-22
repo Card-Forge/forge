@@ -10,4 +10,3 @@ SVar:TrigExile:AB$ ChangeZoneAll | Cost$ 0 | Origin$ Battlefield | Destination$ 
 SVar:X:Count$Valid Land.YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hazezon_tamar.jpg
 Oracle:When Hazezon Tamar enters the battlefield, put X 1/1 Sand Warrior creature tokens that are red, green, and white onto the battlefield at the beginning of your next upkeep, where X is the number of lands you control at that time.\nWhen Hazezon leaves the battlefield, exile all Sand Warriors.
-SetInfo:LEG Rare

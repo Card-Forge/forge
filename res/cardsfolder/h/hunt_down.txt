@@ -6,4 +6,3 @@ SVar:DBMustBlock:DB$ MustBlock | DefinedAttacker$ ParentTarget | ValidTgts$ Crea
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hunt_down.jpg
 Oracle:Target creature blocks target creature this turn if able.
-SetInfo:LRW Common

@@ -8,5 +8,3 @@ SVar:BuffedBy:Sliver
 SVar:AntiBuffedBy:Sliver
 SVar:Picture:http://www.wizards.com/global/images/magic/general/heart_sliver.jpg
 Oracle:All Sliver creatures have haste.
-SetInfo:H09 Common
-SetInfo:TMP Common

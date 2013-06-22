@@ -6,5 +6,3 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigDealDamage:AB$DealDamage | Cost$ 0 | ValidTgts$ Player | TgtPrompt$ Select target player | NumDmg$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hissing_iguanar.jpg
 Oracle:Whenever another creature dies, you may have Hissing Iguanar deal 1 damage to target player.
-SetInfo:PC2 Common
-SetInfo:ALA Common

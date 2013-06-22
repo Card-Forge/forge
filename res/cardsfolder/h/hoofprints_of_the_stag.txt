@@ -6,4 +6,3 @@ SVar:TrigPutCounter:AB$ PutCounter | Cost$ 0 | Defined$ Self | CounterType$ HOOF
 A:AB$ Token | Cost$ 2 W SubCounter<4/HOOFPRINT> | TokenAmount$ 1 | TokenName$ Elemental | TokenTypes$ Creature,Elemental | TokenOwner$ You | TokenColors$ White | TokenPower$ 4 | TokenToughness$ 4 | TokenKeywords$ Flying | PlayerTurn$ True | SpellDescription$ Put a 4/4 white Elemental creature token with flying onto the battlefield. Activate this ability only during your turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hoofprints_of_the_stag.jpg
 Oracle:Whenever you draw a card, you may put a hoofprint counter on Hoofprints of the Stag.\n{2}{W}, Remove four hoofprint counters from Hoofprints of the Stag: Put a 4/4 white Elemental creature token with flying onto the battlefield. Activate this ability only during your turn.
-SetInfo:LRW Rare

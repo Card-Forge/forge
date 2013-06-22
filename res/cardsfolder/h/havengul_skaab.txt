@@ -7,4 +7,3 @@ SVar:TrigChange:AB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | Cost$
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/havengul_skaab.jpg
 Oracle:Whenever Havengul Skaab attacks, return another creature you control to its owner's hand.
-SetInfo:AVR Common

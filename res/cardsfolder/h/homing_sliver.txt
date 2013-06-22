@@ -8,5 +8,3 @@ SVar:SliverCycling:AB$ ChangeZone | Cost$ 3 Discard<1/CARDNAME> | ActivationZone
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/homing_sliver.jpg
 Oracle:Each Sliver card in each player's hand has slivercycling {3}.\nSlivercycling {3} ({3}, Discard this card: Search your library for a Sliver card, reveal it, and put it into your hand. Then shuffle your library.)
-SetInfo:FUT Common
-SetInfo:H09 Common

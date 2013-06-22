@@ -6,4 +6,3 @@ SVar:TrigAnimate:AB$Animate | Cost$ 0 | Defined$ Self | Power$ 4 | Toughness$ 4 
 SVar:BuffedBy:Creature
 SVar:Picture:http://www.wizards.com/global/images/magic/general/halcyon_glaze.jpg
 Oracle:Whenever you cast a creature spell, Halcyon Glaze becomes a 4/4 Illusion creature with flying until end of turn. It's still an enchantment.
-SetInfo:RAV Uncommon

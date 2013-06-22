@@ -8,4 +8,3 @@ SVar:X:TriggerCount$DamageAmount
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hunters_insight.jpg
 Oracle:Choose target creature you control. Whenever that creature deals combat damage to a player or planeswalker this turn, draw that many cards.
-SetInfo:M12 Uncommon

@@ -8,4 +8,3 @@ SVar:X:TriggerCount$DamageAmount
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/harsh_justice.jpg
 Oracle:Cast Harsh Justice only during the declare attackers step and only if you've been attacked this step.\nThis turn, whenever an attacking creature deals combat damage to you, it deals that much damage to its controller.
-SetInfo:POR Rare

@@ -5,4 +5,3 @@ T:Mode$ Always | IsPresent$ Creature.powerGE4+OppCtrl | TriggerZones$ Battlefiel
 SVar:TrigLurkingJackalsAnimate:AB$ Animate | Cost$ 0 | Types$ Creature,Beast | Power$ 4 | Toughness$ 4 | OverwriteTypes$ True | Permanent$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hidden_predators.jpg
 Oracle:When an opponent controls a creature with power 4 or greater, if Hidden Predators is an enchantment, Hidden Predators becomes a 4/4 Beast creature.
-SetInfo:USG Rare

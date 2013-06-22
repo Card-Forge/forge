@@ -8,4 +8,3 @@ SVar:X:TriggerCount$DamageAmount
 SVar:HasCombatEffect:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/horned_cheetah.jpg
 Oracle:Whenever Horned Cheetah deals damage, you gain that much life.
-SetInfo:INV Uncommon

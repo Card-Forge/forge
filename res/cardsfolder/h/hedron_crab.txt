@@ -6,4 +6,3 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.Y
 SVar:TrigMill:AB$Mill | Cost$ 0 | NumCards$ 3 | ValidTgts$ Player | TgtPrompt$ Choose a player
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hedron_crab.jpg
 Oracle:Landfall - Whenever a land enters the battlefield under your control, target player puts the top three cards of his or her library into his or her graveyard.
-SetInfo:ZEN Uncommon

@@ -8,4 +8,3 @@ SVar:TrigDiscard:AB$Discard | Cost$ 0 | ValidTgts$ Player | TgtPrompt$ Select ta
 SVar:TrigChangeZone:AB$ChangeZone | Cost$  0 | Origin$ Graveyard | Destination$ Library | LibraryPosition$ 0 | TgtPrompt$ Select target card in your graveyard | ValidTgts$ Card.YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hag_hedge_mage.jpg
 Oracle:When Hag Hedge-Mage enters the battlefield, if you control two or more Swamps, you may have target player discard a card.\nWhen Hag Hedge-Mage enters the battlefield, if you control two or more Forests, you may put target card from your graveyard on top of your library.
-SetInfo:EVE Uncommon

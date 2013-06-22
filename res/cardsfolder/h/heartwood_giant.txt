@@ -5,4 +5,3 @@ PT:4/4
 A:AB$ DealDamage | Cost$ T Sac<1/Forest> | ValidTgts$ Player | TgtPrompt$ Select target player | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to target player.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/heartwood_giant.jpg
 Oracle:{T}, Sacrifice a Forest: Heartwood Giant deals 2 damage to target player.
-SetInfo:TMP Rare

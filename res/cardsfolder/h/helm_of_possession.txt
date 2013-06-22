@@ -6,4 +6,3 @@ A:AB$ GainControl | Cost$ 2 T Sac<1/Creature> | ValidTgts$ Creature | TgtPrompt$
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/helm_of_possession.jpg
 Oracle:You may choose not to untap Helm of Possession during your untap step.\n{2}, {T}, Sacrifice a creature: Gain control of target creature for as long as you control Helm of Possession and Helm of Possession remains tapped.
-SetInfo:TMP Rare

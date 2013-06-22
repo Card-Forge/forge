@@ -17,5 +17,3 @@ Types:Instant
 A:SP$ PumpAll | Cost$ 3 R G | ValidCards$ Creature.attacking+YouCtrl | NumAtt$ +Y | References$ Y | SpellDescription$ Attacking creatures you control get +1/+0 until end of turn for each other attacking creature.
 SVar:Y:Count$Valid Creature.attacking/Minus.1
 Oracle:Attacking creatures you control get +1/+0 until end of turn for each other attacking creature.
-
-SetInfo:DIS Uncommon

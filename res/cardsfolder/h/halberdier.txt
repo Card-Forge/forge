@@ -5,4 +5,3 @@ PT:3/1
 K:First Strike
 SVar:Picture:http://www.wizards.com/global/images/magic/general/halberdier.jpg
 Oracle:First strike
-SetInfo:ODY Common

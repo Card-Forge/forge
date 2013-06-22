@@ -6,4 +6,3 @@ A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add G to your mana pool.
 A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add U to your mana pool.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hinterland_harbor.jpg
 Oracle:Hinterland Harbor enters the battlefield tapped unless you control a Forest or an Island.\n{T}: Add {G} or {U} to your mana pool.
-SetInfo:ISD Rare

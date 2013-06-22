@@ -7,4 +7,3 @@ SVar:RemAIDeck:True
 SVar:RemMultiplayer:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hive_mind.jpg
 Oracle:Whenever a player casts an instant or sorcery spell, each other player copies that spell. Each of those players may choose new targets for his or her copy.
-SetInfo:M10 Rare

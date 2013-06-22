@@ -8,4 +8,3 @@ K:Haste
 A:AB$ Play | Cost$ W U B R G | TgtZone$ Graveyard | WithoutManaCost$ True | ValidTgts$ Elemental.YouCtrl | TgtPrompt$ Choose target Elemental card from your graveyard | Optional$ True | SpellDescription$ You may play target Elemental card from your graveyard without paying its mana cost.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/horde_of_notions.jpg
 Oracle:Vigilance, trample, haste\n{W}{U}{B}{R}{G}: You may play target Elemental card from your graveyard without paying its mana cost.
-SetInfo:LRW Rare

@@ -7,5 +7,3 @@ SVar:TrigDamage:AB$ DealDamage | Cost$ 0 | Defined$ TriggeredPlayer | NumDmg$ 2
 SVar:TrigHand:Count$ValidHand Card.ActivePlayerCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hellfire_mongrel.jpg
 Oracle:At the beginning of each opponent's upkeep, if that player has two or fewer cards in hand, Hellfire Mongrel deals 2 damage to him or her.
-SetInfo:DDH Uncommon
-SetInfo:ZEN Uncommon

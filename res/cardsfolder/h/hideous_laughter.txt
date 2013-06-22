@@ -5,4 +5,3 @@ A:SP$ PumpAll | Cost$ 2 B B | ValidCards$ Creature | NumAtt$ -2 | NumDef$ -2 | I
 K:Splice onto Arcane 3 B B
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hideous_laughter.jpg
 Oracle:All creatures get -2/-2 until end of turn.\nSplice onto Arcane {3}{B}{B} (As you cast an Arcane spell, you may reveal this card from your hand and pay its splice cost. If you do, add this card's effects to that spell.)
-SetInfo:CHK Uncommon

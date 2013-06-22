@@ -8,4 +8,3 @@ SVar:Y:Discarded$CardManaCost
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hisoka_minamo_sensei.jpg
 Oracle:{2}{U}, Discard a card: Counter target spell if it has the same converted mana cost as the discarded card.
-SetInfo:CHK Rare

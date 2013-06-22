@@ -6,4 +6,3 @@ SVar:NonStackingEffect:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/humility.jpg
 Oracle:All creatures lose all abilities and are 1/1.
-SetInfo:TMP Rare

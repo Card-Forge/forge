@@ -6,4 +6,3 @@ SVar:X:Count$TypeYouCtrl.Artifact
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hunger_of_the_nim.jpg
 Oracle:Target creature gets +1/+0 until end of turn for each artifact you control.
-SetInfo:DST Common

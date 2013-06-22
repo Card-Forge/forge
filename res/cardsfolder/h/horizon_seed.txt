@@ -9,4 +9,3 @@ SVar:RemRandomDeck:True
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/horizon_seed.jpg
 Oracle:Whenever you cast a Spirit or Arcane spell, regenerate target creature.
-SetInfo:CHK Uncommon

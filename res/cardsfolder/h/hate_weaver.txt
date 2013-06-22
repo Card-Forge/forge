@@ -6,5 +6,3 @@ A:AB$ Pump | Cost$ 2 | ValidTgts$ Creature.Blue,Creature.Red | NumAtt$ +1 | Spel
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hate_weaver.jpg
 Oracle:{2}: Target blue or red creature gets +1/+0 until end of turn.
-SetInfo:10E Uncommon
-SetInfo:INV Uncommon

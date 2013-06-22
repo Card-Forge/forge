@@ -6,4 +6,3 @@ A:AB$ ChangeZone | Cost$ Sac<1/CARDNAME> | Origin$ Graveyard | Destination$ Exil
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/heap_doll.jpg
 Oracle:Sacrifice Heap Doll: Exile target card from a graveyard.
-SetInfo:SHM Uncommon

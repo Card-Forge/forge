@@ -6,4 +6,3 @@ T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | OptionalDe
 SVar:TrigSearch:AB$ChangeZone | Cost$ 0 | Origin$ Library | Destination$ Hand | ChangeType$ Forest | ChangeNum$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hunting_cheetah.jpg
 Oracle:Whenever Hunting Cheetah deals damage to an opponent, you may search your library for a Forest card, reveal that card, put it into your hand, then shuffle your library.
-SetInfo:PTK Uncommon

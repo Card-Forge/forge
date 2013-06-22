@@ -5,4 +5,3 @@ T:Mode$ Attacks | ValidCard$ Creature | Attacked$ You | TriggerZones$ Battlefiel
 SVar:TrigLoseLife:AB$ LoseLife | Cost$ 0 | Defined$ TriggeredAttackerController | LifeAmount$ 1 | SpellDescription$ Whenever a creature attacks you, its controller loses 1 life.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hissing_miasma.jpg
 Oracle:Whenever a creature attacks you, its controller loses 1 life.
-SetInfo:GPT Uncommon

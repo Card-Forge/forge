@@ -7,4 +7,3 @@ SVar:TrigToken:AB$Token | Cost$ 0 | TokenImage$ R 3 1 Elemental Shaman | TokenNa
 A:AB$ Pump | Cost$ Sac<1/Elemental> | ValidTgts$ Creature.Giant | TgtPrompt$ Select target Giant creature | NumAtt$ +3 | NumDef$ +1 | SpellDescription$ Target Giant creature gets +3/+1 until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hearthcage_giant.jpg
 Oracle:When Hearthcage Giant enters the battlefield, put two 3/1 red Elemental Shaman creature tokens onto the battlefield.\nSacrifice an Elemental: Target Giant creature gets +3/+1 until end of turn.
-SetInfo:LRW Uncommon

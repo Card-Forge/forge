@@ -4,5 +4,3 @@ Types:Sorcery
 A:SP$ Destroy | Cost$ 4 B B | TargetMin$ 6 | TargetMax$ 6 | ValidTgts$ Creature | TgtPrompt$ Select target creatures | SpellDescription$ Destroy six target creatures.
 SVar:Picture:http://resources.wizards.com/magic/cards/rav/en-us/card89059.jpg
 Oracle:Destroy six target creatures.
-SetInfo:RAV Rare
-SetInfo:COM Rare

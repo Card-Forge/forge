@@ -8,4 +8,3 @@ SVar:DBPump:DB$ Pump | NumAtt$ X | References$ X
 SVar:X:Targeted$CardManaCost
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hoard_smelter_dragon.jpg
 Oracle:Flying\n{3}{R}: Destroy target artifact. Hoard-Smelter Dragon gets +X/+0 until end of turn, where X is that artifact's converted mana cost.
-SetInfo:SOM Rare

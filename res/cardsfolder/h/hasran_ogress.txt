@@ -7,5 +7,3 @@ SVar:TrigDamage:AB$DealDamage | Cost$ 0 | Defined$ You | NumDmg$ 3 | UnlessCost$
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hasran_ogress.jpg
 Oracle:Whenever Hasran Ogress attacks, it deals 3 damage to you unless you pay {2}.
-SetInfo:CHR Common
-SetInfo:ARN Common x2

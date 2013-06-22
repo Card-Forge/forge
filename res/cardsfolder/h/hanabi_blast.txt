@@ -6,4 +6,3 @@ SVar:DBBounce:DB$ ChangeZone | Origin$ Stack | Destination$ Hand | SubAbility$ D
 SVar:DBDiscard:DB$ Discard | Defined$ You | Mode$ Random | NumCards$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hanabi_blast.jpg
 Oracle:Hanabi Blast deals 2 damage to target creature or player. Return Hanabi Blast to its owner's hand, then discard a card at random.
-SetInfo:CHK Uncommon

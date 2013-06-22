@@ -6,4 +6,3 @@ SVar:TrigDiscard:AB$Discard | Cost$ 0 | ValidTgts$ Opponent | NumCards$ X | Mode
 SVar:X:Count$TypeYouCtrl.Shrine
 SVar:Picture:http://www.wizards.com/global/images/magic/general/honden_of_nights_reach.jpg
 Oracle:At the beginning of your upkeep, target opponent discards a card for each Shrine you control.
-SetInfo:CHK Uncommon

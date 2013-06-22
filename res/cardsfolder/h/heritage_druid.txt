@@ -6,4 +6,3 @@ A:AB$ Mana | Cost$ tapXType<3/Elf> | Produced$ G | Amount$ 3 | SpellDescription$
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/heritage_druid.jpg
 Oracle:Tap three untapped Elves you control: Add {G}{G}{G} to your mana pool.
-SetInfo:MOR Uncommon

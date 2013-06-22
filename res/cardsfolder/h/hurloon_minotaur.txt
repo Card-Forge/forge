@@ -4,9 +4,3 @@ Types:Creature Minotaur
 PT:2/3
 SVar:Picture:http://resources.wizards.com/magic/cards/5e/en-us/card4061.jpg
 Oracle:
-SetInfo:2ED Common
-SetInfo:LEB Common
-SetInfo:LEA Common
-SetInfo:5ED Common
-SetInfo:4ED Common
-SetInfo:3ED Common

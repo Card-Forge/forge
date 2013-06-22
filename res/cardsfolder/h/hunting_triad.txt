@@ -6,4 +6,3 @@ A:SP$ Token | Cost$ 3 G | TokenAmount$ 3 | TokenName$ Elf Warrior | TokenTypes$ 
 A:AB$ PutCounter | Cost$ 3 G Discard<1/CARDNAME> | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ 3 | ActivationZone$ Hand | PrecostDesc$ Reinforce 3 - | SpellDescription$ Put three +1/+1 counters on target creature.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hunting_triad.jpg
 Oracle:Put three 1/1 green Elf Warrior creature tokens onto the battlefield.\nReinforce 3-{3}{G} ({3}{G}, Discard this card: Put three +1/+1 counters on target creature.)
-SetInfo:MOR Uncommon

@@ -4,5 +4,3 @@ Types:Enchantment
 S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddHiddenKeyword$ CARDNAME can block an additional creature. | Description$ Each creature you control can block an additional creature.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/high_ground.jpg
 Oracle:Each creature you control can block an additional creature.
-SetInfo:EXO Uncommon
-SetInfo:10E Uncommon

@@ -11,4 +11,3 @@ SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hypnox.jpg
 Oracle:Flying\nWhen Hypnox enters the battlefield, if you cast it from your hand, exile all cards from target opponent's hand.\nWhen Hypnox leaves the battlefield, return the exiled cards to their owner's hand.
-SetInfo:TOR Rare

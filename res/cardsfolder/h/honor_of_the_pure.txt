@@ -5,6 +5,3 @@ S:Mode$ Continuous | Affected$ Creature.White+YouCtrl | AddPower$ 1 | AddToughne
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/honor_of_the_pure.jpg
 Oracle:White creatures you control get +1/+1.
-SetInfo:M11 Rare
-SetInfo:M10 Rare
-SetInfo:M12 Rare

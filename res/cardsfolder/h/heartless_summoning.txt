@@ -6,4 +6,3 @@ S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddPower$ -1 | AddToughness$ -
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/heartless_summoning.jpg
 Oracle:Creature spells you cast cost {2} less to cast.\nCreatures you control get -1/-1.
-SetInfo:ISD Rare

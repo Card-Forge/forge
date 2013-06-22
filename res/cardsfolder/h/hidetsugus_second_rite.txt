@@ -7,4 +7,3 @@ SVar:Y:Count$OppLifeTotal
 SVar:NeedsToPlayVar:Y EQ10
 SVar:Picture:http://resources.wizards.com/magic/cards/sok/en-us/card88818.jpg
 Oracle:If target player has exactly 10 life, Hidetsugu's Second Rite deals 10 damage to that player.
-SetInfo:SOK Rare

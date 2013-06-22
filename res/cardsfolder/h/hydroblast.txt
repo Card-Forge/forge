@@ -7,5 +7,3 @@ SVar:X:Targeted$Valid Card.Red
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hydroblast.jpg
 Oracle:Choose one - Counter target spell if it's red; or destroy target permanent if it's red.
-SetInfo:ICE Common
-SetInfo:5ED Uncommon

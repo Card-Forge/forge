@@ -6,5 +6,3 @@ A:SP$ Token | Cost$ 5 G G | TokenAmount$ 1 | TokenName$ Beast | TokenTypes$ Crea
 K:Storm
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hunting_pack.jpg
 Oracle:Put a 4/4 green Beast creature token onto the battlefield.\nStorm (When you cast this spell, copy it for each spell cast before it this turn.)
-SetInfo:SCG Uncommon
-SetInfo:COM Uncommon

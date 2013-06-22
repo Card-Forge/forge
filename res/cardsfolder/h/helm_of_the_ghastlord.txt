@@ -11,4 +11,3 @@ SVar:HelmTrigDraw:AB$ Draw | Cost$ 0 | NumCards$ 1
 SVar:HelmTrigDiscard:AB$ Discard | Cost$ 0 | Defined$ TriggeredTarget | NumCards$ 1 | Mode$ TgtChoose
 SVar:Picture:http://www.wizards.com/global/images/magic/general/helm_of_the_ghastlord.jpg
 Oracle:Enchant creature\nAs long as enchanted creature is blue, it gets +1/+1 and has "Whenever this creature deals damage to an opponent, draw a card."\nAs long as enchanted creature is black, it gets +1/+1 and has "Whenever this creature deals damage to an opponent, that player discards a card."
-SetInfo:SHM Common

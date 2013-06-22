@@ -5,4 +5,3 @@ A:SP$ Animate | Cost$ G U | ValidTgts$ Land | TgtPrompt$ Select target land | Po
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hydroform.jpg
 Oracle:Target land becomes a 3/3 Elemental creature with flying until end of turn. It's still a land.
-SetInfo:GTC Common

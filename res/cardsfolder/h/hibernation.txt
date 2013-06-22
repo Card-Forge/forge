@@ -5,6 +5,3 @@ A:SP$ ChangeZoneAll | Cost$ 2 U | ChangeType$ Permanent.Green | Origin$ Battlefi
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hibernation.jpg
 Oracle:Return all green permanents to their owners' hands.
-SetInfo:8ED Uncommon
-SetInfo:7ED Uncommon
-SetInfo:USG Uncommon

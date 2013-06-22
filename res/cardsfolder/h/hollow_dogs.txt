@@ -6,7 +6,3 @@ T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$
 SVar:TrigPump:AB$Pump | Cost$ 0 | Defined$ Self | NumAtt$ 2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hollow_dogs.jpg
 Oracle:Whenever Hollow Dogs attacks, it gets +2/+0 until end of turn.
-SetInfo:S99 Common
-SetInfo:7ED Common
-SetInfo:9ED Common
-SetInfo:USG Common

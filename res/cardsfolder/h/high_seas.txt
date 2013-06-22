@@ -5,4 +5,3 @@ S:Mode$ RaiseCost | ValidCard$ Creature.Red,Creature.Green | Type$ Spell | Amoun
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/high_seas.jpg
 Oracle:Red creature spells and green creature spells cost {1} more to cast.
-SetInfo:MMQ Uncommon

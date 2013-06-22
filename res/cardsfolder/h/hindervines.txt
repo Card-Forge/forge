@@ -5,4 +5,3 @@ A:SP$ Effect | Cost$ 2 G | Name$ Hindervines Effect | StaticAbilities$ STPrevent
 SVar:STPrevent:Mode$ PreventDamage | EffectZone$ Command | Source$ Creature.counters_EQ0_P1P1 | CombatDamage$ True | Description$ Prevent all combat damage that would be dealt by creatures with no +1/+1 counters.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hindervines.jpg
 Oracle:Prevent all combat damage that would be dealt this turn by creatures with no +1/+1 counters on them.
-SetInfo:GTC Uncommon

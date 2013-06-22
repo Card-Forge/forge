@@ -5,4 +5,3 @@ PT:4/3
 A:AB$Pump | Cost$ 0 | NumAtt$ -1 | KW$ Flying | SpellDescription$ Hyalopterous Lemure gets -1/-0 and gains flying until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hyalopterous_lemure.jpg
 Oracle:{0}: Hyalopterous Lemure gets -1/-0 and gains flying until end of turn.
-SetInfo:ICE Uncommon

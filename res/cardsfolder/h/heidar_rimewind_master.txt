@@ -6,4 +6,3 @@ A:AB$ ChangeZone | Cost$ 2 T | ValidTgts$ Permanent | TgtPrompt$ Select target P
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/heidar_rimewind_master.jpg
 Oracle:{2}, {T}: Return target permanent to its owner's hand. Activate this ability only if you control four or more snow permanents.
-SetInfo:CSP Rare

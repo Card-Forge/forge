@@ -7,4 +7,3 @@ SVar:TrigGainLife:AB$ GainLife | Cost$ 0 | Defined$ You | LifeAmount$ 5
 SVar:Morbid:Count$ThisTurnEntered_Graveyard_from_Battlefield_Creature
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hollowhenge_scavenger.jpg
 Oracle:Morbid - When Hollowhenge Scavenger enters the battlefield, if a creature died this turn, you gain 5 life.
-SetInfo:ISD Uncommon

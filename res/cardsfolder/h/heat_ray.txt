@@ -5,5 +5,3 @@ A:SP$ DealDamage | Cost$ X R | ValidTgts$ Creature | TgtPrompt$ Select target cr
 SVar:X:Count$xPaid
 SVar:Picture:http://www.wizards.com/global/images/magic/general/heat_ray.jpg
 Oracle:Heat Ray deals X damage to target creature.
-SetInfo:ROE Common
-SetInfo:USG Common

@@ -6,4 +6,3 @@ A:AB$ Mana | Cost$ Sac<1/CARDNAME> | Produced$ R | SpellDescription$ Add R to yo
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/heart_of_ramos.jpg
 Oracle:{T}: Add {R} to your mana pool.\nSacrifice Heart of Ramos: Add {R} to your mana pool.
-SetInfo:MMQ Rare

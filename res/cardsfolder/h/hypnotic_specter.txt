@@ -7,11 +7,3 @@ T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent  | Execute$ 
 SVar:TrigDiscard:AB$Discard | Cost$ 0 | Defined$ TriggeredTarget | NumCards$ 1 | Mode$ Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hypnotic_specter.jpg
 Oracle:Flying\nWhenever Hypnotic Specter deals damage to an opponent, that player discards a card at random.
-SetInfo:2ED Uncommon
-SetInfo:M10 Rare
-SetInfo:9ED Rare
-SetInfo:10E Rare
-SetInfo:LEB Uncommon
-SetInfo:LEA Uncommon
-SetInfo:4ED Uncommon
-SetInfo:3ED Uncommon

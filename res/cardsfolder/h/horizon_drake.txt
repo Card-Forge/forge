@@ -6,4 +6,3 @@ K:Flying
 K:Protection:Land:Protection from lands
 SVar:Picture:http://www.wizards.com/global/images/magic/general/horizon_drake.jpg
 Oracle:Flying, protection from lands
-SetInfo:WWK Uncommon

@@ -5,4 +5,3 @@ A:AB$ ChangeZone | Cost$ W W | ValidTgts$ Land.nonSnow+YouCtrl | TgtPrompt$ Targ
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hallowed_ground.jpg
 Oracle:{W}{W}: Return target nonsnow land you control to its owner's hand.
-SetInfo:ICE Uncommon

@@ -7,4 +7,3 @@ A:AB$ ChangeZone | Cost$ U U | Origin$ Graveyard | Destination$ Battlefield | Va
 A:AB$ DestroyAll | Cost$ U U T | ValidCards$ Card.Aura+AttachedTo Card.Self | SpellDescription$ Destroy all Auras attached to CARDNAME.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hakim_loreweaver.jpg
 Oracle:Flying\n{U}{U}: Return target Aura card from your graveyard to the battlefield attached to Hakim, Loreweaver. Activate this ability only during your upkeep and only if Hakim isn't enchanted.\n{U}{U}, {T}: Destroy all Auras attached to Hakim.
-SetInfo:MIR Rare

@@ -6,4 +6,3 @@ PT:1/2
 K:CantBlock Creature.Human
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hunted_ghoul.jpg
 Oracle:Hunted Ghoul can't block Humans.
-SetInfo:AVR Common

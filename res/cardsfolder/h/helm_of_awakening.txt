@@ -4,4 +4,3 @@ Types:Artifact
 S:Mode$ ReduceCost | ValidCard$ Card | Type$ Spell | Amount$ 1 | Description$ Spells cost 1 less to cast.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/helm_of_awakening.jpg
 Oracle:Spells cost {1} less to cast.
-SetInfo:VIS Uncommon

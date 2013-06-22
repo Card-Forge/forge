@@ -5,4 +5,3 @@ PT:3/4
 A:AB$ Pump | Cost$ U | KW$ Hexproof | SpellDescription$ CARDNAME gains hexproof until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/horror_of_the_dim.jpg
 Oracle:{U}: Horror of the Dim gains hexproof until end of turn. (It can't be the target of spells or abilities your opponents control.)
-SetInfo:GTC Common

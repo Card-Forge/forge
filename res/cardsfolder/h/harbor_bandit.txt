@@ -7,4 +7,3 @@ SVar:X:Count$Valid Island.YouCtrl
 A:AB$ Pump | Cost$ 1 U | KW$ HIDDEN Unblockable | SpellDescription$ CARDNAME is unblockable this turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/harbor_bandit.jpg
 Oracle:Harbor Bandit gets +1/+1 as long as you control an Island.\n{1}{U}: Harbor Bandit is unblockable this turn.
-SetInfo:M13 Uncommon

@@ -7,4 +7,3 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigDestroy:DB$Destroy | ValidTgts$ Angel | TgtPrompt$ Select target Angel
 SVar:Picture:http://www.wizards.com/global/images/magic/general/halo_hunter.jpg
 Oracle:Intimidate (This creature can't be blocked except by artifact creatures and/or creatures that share a color with it.)\nWhen Halo Hunter enters the battlefield, destroy target Angel.
-SetInfo:ZEN Rare

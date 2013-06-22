@@ -21,5 +21,3 @@ SVar:ABPump:AB$Pump | Cost$ R | Defined$ Self | NumAtt$ 1 | SpellDescription$ Th
 SVar:Picture:http://www.marc-fowler-design.com/cardforge/flippedcards/SOK/homuras_essence.jpg
 # This link may be a temporary solution and could change in the near future.
 Oracle:Creatures you control get +2/+2 and have flying and "{R}: This creature gets +1/+0 until end of turn."
-
-SetInfo:SOK Rare

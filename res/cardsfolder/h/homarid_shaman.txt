@@ -6,4 +6,3 @@ A:AB$ Tap | Cost$ U | ValidTgts$ Creature.Green | TgtPrompt$ Select target green
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/homarid_shaman.jpg
 Oracle:{U}: Tap target green creature.
-SetInfo:FEM Rare

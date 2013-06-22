@@ -10,4 +10,3 @@ SVar:X:Count$NumCounters.P1P1
 SVar:HasAttackEffect:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/herald_of_war.jpg
 Oracle:Flying\nWhenever Herald of War attacks, put a +1/+1 counter on it.\nAngel spells and Human spells you cast cost {1} less to cast for each +1/+1 counter on Herald of War.
-SetInfo:AVR Rare

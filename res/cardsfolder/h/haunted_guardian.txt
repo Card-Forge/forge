@@ -6,4 +6,3 @@ K:Defender
 K:First Strike
 SVar:Picture:http://www.wizards.com/global/images/magic/general/haunted_guardian.jpg
 Oracle:Defender, first strike
-SetInfo:AVR Uncommon

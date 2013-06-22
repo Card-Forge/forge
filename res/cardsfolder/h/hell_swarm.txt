@@ -5,4 +5,3 @@ A:SP$ PumpAll | Cost$ B | ValidCards$ Creature | NumAtt$ -1 | NumDef$ -0 | IsCur
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hell_swarm.jpg
 Oracle:All creatures get -1/-0 until end of turn.
-SetInfo:LEG Common

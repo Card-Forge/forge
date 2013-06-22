@@ -4,4 +4,3 @@ Types:Creature Zombie Knight
 PT:2/2
 SVar:Picture:http://resources.wizards.com/magic/cards/le/en-us/card1442.jpg
 Oracle:
-SetInfo:LEG Common

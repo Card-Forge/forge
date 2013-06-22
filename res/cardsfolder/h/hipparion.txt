@@ -5,5 +5,3 @@ PT:1/3
 S:Mode$ CantBlockUnless | ValidCard$ Card.Self | Attacker$ Creature.powerGE3 | Cost$ 1 | Description$ CARDNAME can't block creatures with power 3 or greater unless you pay 1.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hipparion.jpg
 Oracle:Hipparion can't block creatures with power 3 or greater unless you pay {1}.
-SetInfo:ICE Uncommon
-SetInfo:5ED Common

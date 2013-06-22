@@ -9,4 +9,3 @@ SVar:NeedsToPlayVar:Y LE2
 SVar:Y:Count$InYourHand
 SVar:Picture:http://www.wizards.com/global/images/magic/general/heightened_awareness.jpg
 Oracle:As Heightened Awareness enters the battlefield, discard your hand.\nAt the beginning of your draw step, draw an additional card.
-SetInfo:PCY Rare

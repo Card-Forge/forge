@@ -8,4 +8,3 @@ SVar:TrigUntap:AB$ Untap | Cost$ 0 | UntapUpTo$ True | UntapType$ Land | Amount$
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hokori_dust_drinker.jpg
 Oracle:Lands don't untap during their controllers' untap steps.\nAt the beginning of each player's upkeep, that player untaps a land he or she controls.
-SetInfo:BOK Rare

@@ -7,5 +7,3 @@ SVar:X:Remembered$Amount
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hellion_eruption.jpg
 Oracle:Sacrifice all creatures you control, then put that many 4/4 red Hellion creature tokens onto the battlefield.
-SetInfo:PC2 Rare
-SetInfo:ROE Rare

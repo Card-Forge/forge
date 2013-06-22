@@ -5,8 +5,3 @@ PT:1/1
 A:AB$ Pump | Cost$ W | NumDef$ +1 | SpellDescription$ CARDNAME gets +0/+1 until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/honor_guard.jpg
 Oracle:{W}: Honor Guard gets +0/+1 until end of turn.
-SetInfo:8ED Common
-SetInfo:7ED Common
-SetInfo:10E Common
-SetInfo:9ED Common
-SetInfo:STH Common

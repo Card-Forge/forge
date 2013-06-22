@@ -7,4 +7,3 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigRearrange:AB$RearrangeTopOfLibrary | Cost$ 0 | Defined$ You | NumCards$ 3
 SVar:Picture:http://www.wizards.com/global/images/magic/general/halimar_depths.jpg
 Oracle:Halimar Depths enters the battlefield tapped.\nWhen Halimar Depths enters the battlefield, look at the top three cards of your library, then put them back in any order.\n{T}: Add {U} to your mana pool.
-SetInfo:WWK Common

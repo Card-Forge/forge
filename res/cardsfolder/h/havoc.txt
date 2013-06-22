@@ -6,4 +6,3 @@ SVar:TrigLoseLife:AB$LoseLife | Cost$ 0 | Defined$ TriggeredActivator | LifeAmou
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/havoc.jpg
 Oracle:Whenever an opponent casts a white spell, he or she loses 2 life.
-SetInfo:TMP Uncommon

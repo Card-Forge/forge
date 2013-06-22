@@ -6,4 +6,3 @@ A:AB$ DigUntil | Cost$ G T | Valid$ Land.Basic | ValidDescription$ basic land | 
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hermit_druid.jpg
 Oracle:{G}, {T}: Reveal cards from the top of your library until you reveal a basic land card. Put that card into your hand and all other cards revealed this way into your graveyard.
-SetInfo:STH Rare

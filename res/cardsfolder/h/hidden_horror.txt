@@ -8,8 +8,3 @@ SVar:NeedsToPlayVar:Y GE2
 SVar:Y:Count$TypeInYourHand.Creature
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hidden_horror.jpg
 Oracle:When Hidden Horror enters the battlefield, sacrifice it unless you discard a creature card.
-SetInfo:PO2 Rare
-SetInfo:WTH Uncommon
-SetInfo:PD3 Uncommon
-SetInfo:6ED Uncommon
-SetInfo:10E Uncommon

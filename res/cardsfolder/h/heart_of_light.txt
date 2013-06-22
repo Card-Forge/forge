@@ -6,5 +6,3 @@ A:SP$ Attach | Cost$ 2 W | ValidTgts$ Creature | AILogic$ Curse
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ Prevent all damage that would be dealt to and dealt by CARDNAME. | Description$ Prevent all damage that would be dealt to and dealt by enchanted creature.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/heart_of_light.jpg
 Oracle:Enchant creature (Target a creature as you cast this. This card enters the battlefield attached to that creature.)\nPrevent all damage that would be dealt to and dealt by enchanted creature.
-SetInfo:BOK Common
-SetInfo:10E Common
