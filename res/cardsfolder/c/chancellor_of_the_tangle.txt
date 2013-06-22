@@ -6,7 +6,7 @@ PT:6/7
 K:MayEffectFromOpeningHand:ManaOnMain
 K:Vigilance
 K:Reach
-SVar:RevealCard:AB$ Reveal | Cost$ 0 | Defined$ Self | SubAbility$ ManaOnMain | SpellDescription$ You may reveal this card from your opening hand. If you do, at the beginning of your first main phase, add G to your mana pool.
+SVar:RevealCard:AB$ Reveal | Cost$ 0 | RevealDefined$ Self | SubAbility$ ManaOnMain | SpellDescription$ You may reveal this card from your opening hand. If you do, at the beginning of your first main phase, add G to your mana pool.
 SVar:ManaOnMain:DB$ Effect | Triggers$ TrigMana | SVars$ EffMana,RemoveMe | Duration$ Permanent | Name$ Chancellor of the Tangle effect
 SVar:TrigMana:Mode$ Phase | Phase$ Main1 | ValidPlayer$ You | Execute$ EffMana | TriggerDescription$ At the beginning of your first main phase, add G to your mana pool.
 SVar:EffMana:AB$ Mana | Cost$ 0 | Produced$ G | SubAbility$ RemoveMe
