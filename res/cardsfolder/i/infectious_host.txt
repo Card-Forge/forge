@@ -6,4 +6,3 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigLoseLife:AB$LoseLife | Cost$ 0 | ValidTgts$ Player | TgtPrompt$ Select a player | LifeAmount$ 2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/infectious_host.jpg
 Oracle:When Infectious Host dies, target player loses 2 life.
-SetInfo:RAV Common

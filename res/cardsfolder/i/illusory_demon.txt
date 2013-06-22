@@ -8,4 +8,3 @@ SVar:TrigSac:AB$Sacrifice | Cost$ 0 | SacValid$ Self
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/illusory_demon.jpg
 Oracle:Flying\nWhen you cast a spell, sacrifice Illusory Demon.
-SetInfo:ARB Uncommon

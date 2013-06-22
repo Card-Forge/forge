@@ -7,4 +7,3 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigChange:AB$ ChangeZone | Cost$ 0 | Origin$ Hand | Destination$ Battlefield | ChangeType$ Creature.Legendary | DefinedPlayer$ Player.Opponent | ChangeNum$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/iwamori_of_the_open_fist.jpg
 Oracle:Trample\nWhen Iwamori of the Open Fist enters the battlefield, each opponent may put a legendary creature card from his or her hand onto the battlefield.
-SetInfo:BOK Rare

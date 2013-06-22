@@ -7,4 +7,3 @@ SVar:AttackThisTurn:Mode$ Continuous | EffectZone$ Command | Affected$ Creature.
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/Instigator.jpg
 Oracle:{1}{B}{B}, {T}, Discard a card: Creatures target player controls attack this turn if able.
-SetInfo:MMQ Rare

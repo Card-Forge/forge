@@ -9,4 +9,3 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ignorant_bliss.jpg
 Oracle:Exile all cards from your hand face down. At the beginning of the next end step, return those cards to your hand, then draw a card.
-SetInfo:DIS Uncommon

@@ -5,4 +5,3 @@ A:SP$ PutCounter | Cost$ 3 B | ValidTgts$ Creature | TgtPrompt$ Select target cr
 SVar:DBDraw:DB$Draw | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/instill_infection.jpg
 Oracle:Put a -1/-1 counter on target creature.\nDraw a card.
-SetInfo:SOM Common

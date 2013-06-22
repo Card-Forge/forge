@@ -5,4 +5,3 @@ A:SP$ ChangeZoneAll | Cost$ X WB WB WB | Origin$ Graveyard | Destination$ Battle
 SVar:X:Count$xPaid
 SVar:Picture:http://www.wizards.com/global/images/magic/general/immortal_servitude.jpg
 Oracle:Return each creature card with converted mana cost X from your graveyard to the battlefield.
-SetInfo:GTC Rare

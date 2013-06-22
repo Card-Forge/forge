@@ -9,4 +9,3 @@ SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | KW$ First Strike
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/incite_war.jpg
 Oracle:Choose one - Creatures target player controls attack this turn if able; or creatures you control gain first strike until end of turn.\nEntwine {2} (Choose both if you pay the entwine cost.)
-SetInfo:MRD Common

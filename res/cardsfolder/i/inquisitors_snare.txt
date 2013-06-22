@@ -6,4 +6,3 @@ SVar:DBDestroy:DB$ Destroy | Defined$ Targeted | ConditionDefined$ Targeted | Co
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/inquisitors_snare.jpg
 Oracle:Prevent all damage target attacking or blocking creature would deal this turn. If that creature is black or red, destroy it.
-SetInfo:SHM Common

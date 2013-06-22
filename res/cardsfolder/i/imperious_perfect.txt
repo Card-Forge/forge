@@ -7,5 +7,3 @@ A:AB$ Token | Cost$ G T | TokenAmount$ 1 | TokenName$ Elf Warrior | TokenTypes$ 
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/imperious_perfect.jpg
 Oracle:Other Elf creatures you control get +1/+1.\n{G}, {T}: Put a 1/1 green Elf Warrior creature token onto the battlefield.
-SetInfo:LRW Uncommon
-SetInfo:EVG Uncommon

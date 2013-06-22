@@ -7,4 +7,3 @@ S:Mode$ CantBeCast | ValidCard$ Card.Self | EffectZone$ All | CheckSVar$ X | SVa
 SVar:X:Count$ThisTurnCast_Card.YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/illusory_angel.jpg
 Oracle:Flying\nCast Illusory Angel only if you've cast another spell this turn.
-SetInfo:PC2 Uncommon

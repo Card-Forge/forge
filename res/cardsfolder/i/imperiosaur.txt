@@ -6,4 +6,3 @@ PT:5/5
 K:FullCost:Mana<2 G G\Basic>
 SVar:Picture:http://resources.wizards.com/magic/cards/fut/en-us/card130634.jpg
 Oracle:Spend only mana produced by basic lands to cast Imperiosaur.
-SetInfo:FUT Uncommon

@@ -7,5 +7,3 @@ K:Trample
 K:Shroud
 SVar:Picture:http://www.wizards.com/global/images/magic/general/inkwell_leviathan.jpg
 Oracle:Islandwalk, trample, shroud
-SetInfo:PD3 Rare
-SetInfo:CFX Rare

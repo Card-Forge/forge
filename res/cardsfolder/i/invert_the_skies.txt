@@ -6,4 +6,3 @@ SVar:UPaid:DB$ PumpAll | ValidCards$ Creature.YouCtrl | KW$ Flying | ConditionMa
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/invert_the_skies.jpg
 Oracle:Creatures your opponents control lose flying until end of turn if {G} was spent to cast Invert the Skies, and creatures you control gain flying until end of turn if {U} was spent to cast it. (Do both if {G}{U} was spent.)
-SetInfo:EVE Uncommon

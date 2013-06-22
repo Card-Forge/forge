@@ -5,5 +5,3 @@ A:SP$ DealDamage | Cost$ 1 R | ValidTgts$ Creature.Blue,Creature.White | TgtProm
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ignite_disorder.jpg
 Oracle:Ignite Disorder deals 3 damage divided as you choose among one, two, or three target white and/or blue creatures.
-SetInfo:M10 Uncommon
-SetInfo:CFX Uncommon

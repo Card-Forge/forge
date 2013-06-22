@@ -6,6 +6,3 @@ SVar:DBPutTwo:DB$ PutCounter | Cost$ 0 | ValidTgts$ Creature |TgtPrompt$ Select 
 SVar:DBPutThree:DB$ PutCounter | Cost$ 0 | ValidTgts$ Creature |TgtPrompt$ Select a third target creature | TargetUnique$ True | CounterType$ M1M1 | IsCurse$ True | CounterNum$ 3
 SVar:Picture:http://www.wizards.com/global/images/magic/general/incremental_blight.jpg
 Oracle:Put a -1/-1 counter on target creature, two -1/-1 counters on another target creature, and three -1/-1 counters on a third target creature.
-SetInfo:ARC Uncommon
-SetInfo:SHM Uncommon
-SetInfo:HOP Uncommon

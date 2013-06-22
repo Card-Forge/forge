@@ -8,4 +8,3 @@ T:Mode$ SpellCast | ValidCard$ Artifact | ValidActivatingPlayer$ Opponent | Trig
 SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Insect | TokenTypes$ Creature,Insect | TokenOwner$ You | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/infested_roothold.jpg
 Oracle:Defender (This creature can't attack.)\nProtection from artifacts\nWhenever an opponent casts an artifact spell, you may put a 1/1 green Insect creature token onto the battlefield.
-SetInfo:DST Uncommon

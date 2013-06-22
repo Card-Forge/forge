@@ -8,4 +8,3 @@ S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddAbility$ Untap | Descri
 SVar:Untap:AB$Untap | Cost$ 1 Discard<1/Card> | Defined$ Self | SpellDescription$ Untap CARDNAME.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/immobilizing_ink.jpg
 Oracle:Enchant creature\nEnchanted creature doesn't untap during its controller's untap step.\nEnchanted creature has "{1}, Discard a card: Untap this creature."
-SetInfo:ODY Common

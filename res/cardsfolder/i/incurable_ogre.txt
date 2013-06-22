@@ -4,4 +4,3 @@ Types:Creature Ogre Mutant
 PT:5/1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/incurable_ogre.jpg
 Oracle:
-SetInfo:ALA Common

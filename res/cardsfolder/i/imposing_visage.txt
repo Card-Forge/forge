@@ -6,5 +6,3 @@ A:SP$ Attach | Cost$ R | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ CantBeBlockedByAmount LT2 | Description$ Enchanted creature can't be blocked except by two or more creatures.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/imposing_visage.jpg
 Oracle:Enchant creature\nEnchanted creature can't be blocked except by two or more creatures.
-SetInfo:ICE Common
-SetInfo:5ED Common

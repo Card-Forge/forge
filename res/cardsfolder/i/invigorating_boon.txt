@@ -6,4 +6,3 @@ SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ S
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/invigorating_boon.jpg
 Oracle:Whenever a player cycles a card, you may put a +1/+1 counter on target creature.
-SetInfo:ONS Uncommon

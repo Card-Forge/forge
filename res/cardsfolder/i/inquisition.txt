@@ -7,4 +7,3 @@ SVar:X:Remembered$Valid Card.White
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/inquisition.jpg
 Oracle:Target player reveals his or her hand. Inquisition deals damage to that player equal to the number of white cards in his or her hand.
-SetInfo:DRK Common

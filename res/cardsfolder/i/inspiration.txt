@@ -4,9 +4,3 @@ Types:Instant
 A:SP$ Draw | Cost$ 3 U | NumCards$ 2 | ValidTgts$ Player | TgtPrompt$ Choose a player | SpellDescription$ Target player draws two cards.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/inspiration.jpg
 Oracle:Target player draws two cards.
-SetInfo:8ED Common
-SetInfo:7ED Common
-SetInfo:6ED Common
-SetInfo:S00 Common
-SetInfo:VIS Common
-SetInfo:RTR Common

@@ -5,4 +5,3 @@ A:SP$ ChangeZone | Cost$ 1 G | Origin$ Library | Destination$ Battlefield | Chan
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/into_the_north.jpg
 Oracle:Search your library for a snow land card and put it onto the battlefield tapped. Then shuffle your library.
-SetInfo:CSP Common

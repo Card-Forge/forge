@@ -13,4 +13,3 @@ K:ETBReplacement:Copy:Reflections:Mandatory:Battlefield:Creature.nonToken+YouCtr
 SVar:Reflections:DB$ Clone | Defined$ Enchanted | CloneTarget$ ReplacedCard | SpellDescription$ Nontoken creatures you control enter the battlefield as a copy of enchanted creature.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/infinite_reflection.jpg
 Oracle:Enchant creature\nWhen Infinite Reflection enters the battlefield attached to a creature, each other nontoken creature you control becomes a copy of that creature.\nNontoken creatures you control enter the battlefield as a copy of enchanted creature.
-SetInfo:AVR Rare

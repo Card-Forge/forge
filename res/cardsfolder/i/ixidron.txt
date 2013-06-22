@@ -9,4 +9,3 @@ S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ 
 SVar:X:Count$Valid Creature.faceDown
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ixidron.jpg
 Oracle:As Ixidron enters the battlefield, turn all other nontoken creatures face down. (They're 2/2 creatures.)\nIxidron's power and toughness are each equal to the number of face-down creatures on the battlefield.
-SetInfo:TSP Rare

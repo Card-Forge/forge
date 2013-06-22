@@ -8,4 +8,3 @@ SVar:DBChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | Chang
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ill_gotten_gains.jpg
 Oracle:Exile Ill-Gotten Gains. Each player discards his or her hand, then returns up to three cards from his or her graveyard to his or her hand.
-SetInfo:USG Rare

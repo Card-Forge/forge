@@ -8,4 +8,3 @@ SVar:TrigDealDamageAttack:AB$DealDamage | Cost$ 0 | Defined$ TriggeredAttacker |
 SVar:TrigDealDamageBlock:AB$DealDamage | Cost$ 0 | Defined$ TriggeredBlocker | NumDmg$ 3
 SVar:Picture:http://www.wizards.com/global/images/magic/general/inferno_elemental.jpg
 Oracle:Whenever Inferno Elemental blocks or becomes blocked by a creature, Inferno Elemental deals 3 damage to that creature.
-SetInfo:M10 Uncommon

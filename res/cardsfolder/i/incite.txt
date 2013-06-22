@@ -6,4 +6,3 @@ SVar:DBPump:DB$ Pump | KW$ HIDDEN CARDNAME attacks each turn if able. | Defined$
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/incite.jpg
 Oracle:Target creature becomes red until end of turn and attacks this turn if able.
-SetInfo:M11 Common

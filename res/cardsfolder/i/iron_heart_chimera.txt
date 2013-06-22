@@ -8,4 +8,3 @@ SVar:DBPump:DB$Pump | KW$ Vigilance | Defined$ Targeted | Permanent$ True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/iron_heart_chimera.jpg
 Oracle:Vigilance\nSacrifice Iron-Heart Chimera: Put a +2/+2 counter on target Chimera creature. It gains vigilance. (This effect lasts indefinitely.)
-SetInfo:VIS Uncommon

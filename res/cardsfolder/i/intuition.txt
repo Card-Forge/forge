@@ -7,4 +7,3 @@ SVar:DBChangeZone2:DB$ ChangeZoneAll | Origin$ Library | Destination$ Graveyard 
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/intuition.jpg
 Oracle:Search your library for any three cards and reveal them. Target opponent chooses one. Put that card into your hand and the rest into your graveyard. Then shuffle your library.
-SetInfo:TMP Rare

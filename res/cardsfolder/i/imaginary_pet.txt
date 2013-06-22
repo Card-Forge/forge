@@ -8,5 +8,3 @@ SVar:NeedsToPlayVar:Y LE1
 SVar:Y:Count$CardsInYourHand
 SVar:Picture:http://www.wizards.com/global/images/magic/general/imaginary_pet.jpg
 Oracle:At the beginning of your upkeep, if you have a card in hand, return Imaginary Pet to its owner's hand.
-SetInfo:9ED Rare
-SetInfo:USG Rare

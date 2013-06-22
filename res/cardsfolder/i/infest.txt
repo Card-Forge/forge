@@ -4,6 +4,3 @@ Types:Sorcery
 A:SP$ PumpAll | Cost$ 1 B B | ValidCards$ Creature | NumAtt$ -2 | NumDef$ -2 | IsCurse$ True | SpellDescription$ All creatures get -2/-2 until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/infest.jpg
 Oracle:All creatures get -2/-2 until end of turn.
-SetInfo:ONS Uncommon
-SetInfo:ARC Uncommon
-SetInfo:ALA Uncommon

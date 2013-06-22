@@ -6,6 +6,3 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigChangeZone:AB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Instant.YouCtrl,Sorcery.YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/izzet_chronarch.jpg
 Oracle:When Izzet Chronarch enters the battlefield, return target instant or sorcery card from your graveyard to your hand.
-SetInfo:GPT Common
-SetInfo:DDJ Common
-SetInfo:COM Common

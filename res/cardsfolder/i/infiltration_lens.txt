@@ -6,4 +6,3 @@ T:Mode$ Blocks | ValidCard$ Creature | ValidBlocked$ Card.AttachedBy | OptionalD
 SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/infiltration_lens.jpg
 Oracle:Whenever equipped creature becomes blocked by a creature, you may draw two cards.\nEquip {1}
-SetInfo:SOM Uncommon

@@ -6,4 +6,3 @@ K:Hexproof
 K:Unblockable
 SVar:Picture:http://www.wizards.com/global/images/magic/general/invisible_stalker.jpg
 Oracle:Hexproof (This creature can't be the target of spells or abilities your opponents control.)\nInvisible Stalker is unblockable.
-SetInfo:ISD Uncommon

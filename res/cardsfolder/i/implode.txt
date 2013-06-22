@@ -5,4 +5,3 @@ A:SP$ Destroy | Cost$ 4 R | ValidTgts$ Land | TgtPrompt$ Select target land | Sp
 SVar:DBDraw:DB$Draw | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/implode.jpg
 Oracle:Destroy target land.\nDraw a card.
-SetInfo:PLS Uncommon

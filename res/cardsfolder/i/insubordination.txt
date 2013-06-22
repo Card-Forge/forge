@@ -8,4 +8,3 @@ SVar:TrigDamage:AB$ DealDamage | Cost$ 0 | Defined$ EnchantedController | NumDmg
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/insubordination.jpg
 Oracle:Enchant creature\nAt the beginning of the end step of enchanted creature's controller, Insubordination deals 2 damage to that player unless that creature attacked this turn.
-SetInfo:MMQ Common

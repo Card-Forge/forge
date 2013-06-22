@@ -5,4 +5,3 @@ A:SP$ Pump | Cost$ 1 U | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target 
 SVar:DBDraw:DB$ Draw | Cost$ 0 | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/inaction_injunction.jpg
 Oracle:Detain target creature an opponent controls. (Until your next turn, that creature can't attack or block and its activated abilities can't be activated.)\nDraw a card.
-SetInfo:RTR Common

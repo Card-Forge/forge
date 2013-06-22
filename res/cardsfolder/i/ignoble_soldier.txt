@@ -7,4 +7,3 @@ SVar:TrigNodamage:AB$ Pump | Cost$ 0 | KW$ HIDDEN Prevent all combat damage that
 SVar:MustBeBlocked:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ignoble_soldier.jpg
 Oracle:Whenever Ignoble Soldier becomes blocked, prevent all combat damage that would be dealt by it this turn.
-SetInfo:MMQ Uncommon

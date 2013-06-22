@@ -5,4 +5,3 @@ A:SP$ ChangeZoneAll | Cost$ 2 W W B B | Origin$ Hand | Destination$ Exile | Vali
 SVar:DBChangeZoneAll:DB$ChangeZoneAll | Defined$ Targeted | Origin$ Graveyard | Destination$ Exile | ChangeType$ Card
 SVar:Picture:http://www.wizards.com/global/images/magic/general/identity_crisis.jpg
 Oracle:Exile all cards from target player's hand and graveyard.
-SetInfo:ARB Rare

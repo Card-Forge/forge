@@ -6,4 +6,3 @@ K:CARDNAME can't block.
 K:Unblockable
 SVar:Picture:http://www.wizards.com/global/images/magic/general/inkfathom_infiltrator.jpg
 Oracle:Inkfathom Infiltrator can't block and is unblockable.
-SetInfo:SHM Uncommon

@@ -7,4 +7,3 @@ SVar:Abandon:AB$ Abandon | Cost$ 0
 SVar:X:Count$ThisTurnEntered_Graveyard_Card.YouOwn
 SVar:Picture:http://www.cardforge.org/fpics/lq_schemes/i_know_all_i_see_all.jpg
 Oracle:(An ongoing scheme remains face up until it's abandoned.)\nUntap all permanents you control during each opponent's untap step.\nAt the beginning of each end step, if three or more cards were put into your graveyard this turn from anywhere, abandon this scheme.
-SetInfo:ARC Common

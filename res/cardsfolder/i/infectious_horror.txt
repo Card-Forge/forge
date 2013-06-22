@@ -7,5 +7,3 @@ SVar:TrigLoseLife:AB$ LoseLife | Cost$ 0 | Defined$ Player.Opponent | LifeAmount
 SVar:HasAttackEffect:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/infectious_horror.jpg
 Oracle:Whenever Infectious Horror attacks, each opponent loses 2 life.
-SetInfo:ARC Common
-SetInfo:CFX Common

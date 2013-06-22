@@ -9,4 +9,3 @@ SVar:InstillTrigSac:DB$ Sacrifice | Defined$ Self | ConditionPresent$ Card.Self+
 SVar:MustAttack:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/instill_furor.jpg
 Oracle:Enchant creature\nEnchanted creature has "At the beginning of your end step, sacrifice this creature unless it attacked this turn."
-SetInfo:RAV Uncommon

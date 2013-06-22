@@ -9,4 +9,3 @@ SVar:TrigLoseLife:AB$LoseLife | Cost$ 0 | Defined$ TriggeredCardController | Lif
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/illusions_of_grandeur.jpg
 Oracle:Cumulative upkeep {2} (At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.)\nWhen Illusions of Grandeur enters the battlefield, you gain 20 life.\nWhen Illusions of Grandeur leaves the battlefield, you lose 20 life.
-SetInfo:ICE Rare

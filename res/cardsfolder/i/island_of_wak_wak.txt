@@ -5,4 +5,3 @@ A:AB$ Animate | Cost$ T | ValidTgts$ Creature.withFlying | TgtPrompt$ Select tar
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/island_of_wak_wak.jpg
 Oracle:{T}: The power of target creature with flying becomes 0 until end of turn.
-SetInfo:ARN Rare

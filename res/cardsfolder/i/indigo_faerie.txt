@@ -6,4 +6,3 @@ K:Flying
 A:AB$ Animate | Cost$ U | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | Colors$ Blue | SpellDescription$ Target permanent becomes blue in addition to its other colors until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/indigo_faerie.jpg
 Oracle:Flying\n{U}: Target permanent becomes blue in addition to its other colors until end of turn.
-SetInfo:EVE Uncommon

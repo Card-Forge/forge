@@ -8,4 +8,3 @@ SVar:X:Count$ThisTurnCast_Instant
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ichneumon_druid.jpg
 Oracle:Whenever an opponent casts an instant spell other than the first instant spell that player casts each turn, Ichneumon Druid deals 4 damage to him or her.
-SetInfo:LEG Uncommon

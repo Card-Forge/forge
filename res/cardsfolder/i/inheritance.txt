@@ -5,4 +5,3 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | TriggerZone
 SVar:TrigDraw:AB$Draw | Cost$ 3 | Defined$ You | NumCards$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/inheritance.jpg
 Oracle:Whenever a creature dies, you may pay {3}. If you do, draw a card.
-SetInfo:ALL Uncommon

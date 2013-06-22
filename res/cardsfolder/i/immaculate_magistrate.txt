@@ -6,4 +6,3 @@ A:AB$ PutCounter | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target crea
 SVar:X:Count$Valid Elf.YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/immaculate_magistrate.jpg
 Oracle:{T}: Put a +1/+1 counter on target creature for each Elf you control.
-SetInfo:LRW Rare

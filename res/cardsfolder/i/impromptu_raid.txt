@@ -6,4 +6,3 @@ SVar:DBPump:DB$ Pump | KW$ Haste & HIDDEN At the beginning of the end step, sacr
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/impromptu_raid.jpg
 Oracle:{2}{R/G}: Reveal the top card of your library. If it isn't a creature card, put it into your graveyard. Otherwise, put that card onto the battlefield. That creature gains haste. Sacrifice it at the beginning of the next end step.
-SetInfo:SHM Rare

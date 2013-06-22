@@ -7,4 +7,3 @@ SVar:DBAnimate:DB$ Animate | ValidTgts$ Creature | TgtPrompt$ Select target crea
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/imagecrafter.jpg
 Oracle:{T}: Choose a creature type other than Wall. Target creature becomes that type until end of turn.
-SetInfo:ONS Common

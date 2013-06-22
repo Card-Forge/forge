@@ -9,4 +9,3 @@ SVar:DBLose:DB$ LoseLife | LifeAmount$ 2 | ValidTgts$ Opponent | SpellDescriptio
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/inquisitor_exarch.jpg
 Oracle:When Inquisitor Exarch enters the battlefield, choose one - You gain 2 life; or target opponent loses 2 life.
-SetInfo:NPH Uncommon

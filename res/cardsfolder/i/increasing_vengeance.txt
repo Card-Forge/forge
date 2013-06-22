@@ -8,4 +8,3 @@ SVar:X:Count$wasCastFromGraveyard.1.0
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/increasing_vengeance.jpg
 Oracle:Copy target instant or sorcery spell you control. If Increasing Vengeance was cast from a graveyard, copy that spell twice instead. You may choose new targets for the copies.\nFlashback {3}{R}{R} (You may cast this card from your graveyard for its flashback cost. Then exile it.)
-SetInfo:DKA Rare

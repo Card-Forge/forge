@@ -8,4 +8,3 @@ A:AB$ Mana | Cost$ SubCounter<1/ICE> | Produced$ 1 | SpellDescription$ Add 1 to 
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/iceberg.jpg
 Oracle:Iceberg enters the battlefield with X ice counters on it.\n{3}: Put an ice counter on Iceberg.\nRemove an ice counter from Iceberg: Add {1} to your mana pool.
-SetInfo:ICE Uncommon

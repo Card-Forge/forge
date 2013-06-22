@@ -6,4 +6,3 @@ K:Flying
 K:Cumulative upkeep:U
 SVar:Picture:http://www.wizards.com/global/images/magic/general/illusionary_forces.jpg
 Oracle:Flying\nCumulative upkeep {U} (At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.)
-SetInfo:ICE Common

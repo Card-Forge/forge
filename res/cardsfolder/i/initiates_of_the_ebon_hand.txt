@@ -6,5 +6,3 @@ A:AB$ Mana | Cost$ 1 | Produced$ B | ActivationNumberSacrifice$ 4 | SpellDescrip
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/initiates_of_the_ebon_hand.jpg
 Oracle:{1}: Add {B} to your mana pool. If this ability has been activated four or more times this turn, sacrifice Initiates of the Ebon Hand at the beginning of the next end step.
-SetInfo:5ED Common
-SetInfo:FEM Common x3

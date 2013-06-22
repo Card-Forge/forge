@@ -6,4 +6,3 @@ S:Mode$ RaiseCost | ValidCard$ Enchantment.White,Enchantment.Green | Type$ Spell
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/irini_sengir.jpg
 Oracle:Green enchantment spells and white enchantment spells cost {2} more to cast.
-SetInfo:HML Uncommon

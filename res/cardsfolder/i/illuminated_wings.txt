@@ -8,4 +8,3 @@ A:AB$ Draw | Cost$ 2 Sac<1/CARDNAME> | Defined$ You | NumCards$ 1 | SpellDescrip
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/illuminated_wings.jpg
 Oracle:Enchant creature\nEnchanted creature has flying.\n{2}, Sacrifice Illuminated Wings: Draw a card.
-SetInfo:UDS Common

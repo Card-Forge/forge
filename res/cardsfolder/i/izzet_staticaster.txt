@@ -8,4 +8,3 @@ A:AB$ DealDamage | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target crea
 SVar:DamageSame:DB$ DamageAll | ValidCards$ Targeted.sameName+Other | ValidDescription$ each other creature with the same name as that creature. | NumDmg$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/izzet_staticaster.jpg
 Oracle:Flash (You may cast this spell any time you could cast an instant.)\nHaste\n{T}: Izzet Staticaster deals 1 damage to target creature and each other creature with the same name as that creature.
-SetInfo:RTR Uncommon

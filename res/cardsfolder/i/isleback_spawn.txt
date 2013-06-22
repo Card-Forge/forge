@@ -8,4 +8,3 @@ SVar:Y:Number$20
 SVar:X:Count$LowestLibrary
 SVar:Picture:http://www.wizards.com/global/images/magic/general/isleback_spawn.jpg
 Oracle:Shroud\nIsleback Spawn gets +4/+8 as long as a library has twenty or fewer cards in it.
-SetInfo:SHM Rare

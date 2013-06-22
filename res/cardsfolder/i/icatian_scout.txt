@@ -5,5 +5,3 @@ PT:1/1
 A:AB$ Pump | Cost$ 1 T | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ First Strike | SpellDescription$ Target creature gains first strike until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/icatian_scout.jpg
 Oracle:{1}, {T}: Target creature gains first strike until end of turn.
-SetInfo:5ED Common
-SetInfo:FEM Common x4

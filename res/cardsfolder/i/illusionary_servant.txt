@@ -8,4 +8,3 @@ SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Defined$ Self
 SVar:Targeting:Dies
 SVar:Picture:http://www.wizards.com/global/images/magic/general/illusionary_servant.jpg
 Oracle:Flying\nWhen Illusionary Servant becomes the target of a spell or ability, sacrifice it.
-SetInfo:M10 Common

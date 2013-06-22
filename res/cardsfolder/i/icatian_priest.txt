@@ -5,6 +5,3 @@ PT:1/1
 A:AB$ Pump | Cost$ 1 W W | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ Target creature gets +1/+1 until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/icatian_priest.jpg
 Oracle:{1}{W}{W}: Target creature gets +1/+1 until end of turn.
-SetInfo:DDC Uncommon
-SetInfo:FEM Uncommon
-SetInfo:10E Uncommon

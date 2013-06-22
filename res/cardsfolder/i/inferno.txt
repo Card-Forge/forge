@@ -4,9 +4,3 @@ Types:Instant
 A:SP$ DamageAll | Cost$ 5 R R | ValidCards$ Creature | ValidPlayers$ Each | NumDmg$ 6 | ValidDescription$ each creature and each player. | SpellDescription$ CARDNAME deals 6 damage to each creature and each player.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/inferno.jpg
 Oracle:Inferno deals 6 damage to each creature and each player.
-SetInfo:8ED Rare
-SetInfo:7ED Rare
-SetInfo:DRK Rare
-SetInfo:5ED Rare
-SetInfo:4ED Rare
-SetInfo:6ED Rare

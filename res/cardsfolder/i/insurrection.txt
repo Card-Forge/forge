@@ -5,6 +5,3 @@ A:SP$ UntapAll | Cost$ 5 R R R | ValidCards$ Creature | SubAbility$ DBGainContro
 SVar:DBGainControl:DB$ GainControl | AllValid$ Creature | AddKWs$ Haste | LoseControl$ EOT
 SVar:Picture:http://www.wizards.com/global/images/magic/general/insurrection.jpg
 Oracle:Untap all creatures and gain control of them until end of turn. They gain haste until end of turn.
-SetInfo:ONS Rare
-SetInfo:COM Rare
-SetInfo:HOP Rare

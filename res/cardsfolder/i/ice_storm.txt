@@ -4,6 +4,3 @@ Types:Sorcery
 A:SP$ Destroy | Cost$ 2 G | ValidTgts$ Land | TgtPrompt$ Select target land | SpellDescription$ Destroy target land.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ice_storm.jpg
 Oracle:Destroy target land.
-SetInfo:LEB Uncommon
-SetInfo:LEA Uncommon
-SetInfo:2ED Uncommon

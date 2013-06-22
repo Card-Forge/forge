@@ -6,5 +6,3 @@ SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 1
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/insight.jpg
 Oracle:Whenever an opponent casts a green spell, you draw a card.
-SetInfo:TMP Uncommon
-SetInfo:6ED Uncommon

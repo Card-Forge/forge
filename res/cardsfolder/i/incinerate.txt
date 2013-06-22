@@ -5,9 +5,3 @@ A:SP$ DealDamage | Cost$ 1 R | ValidTgts$ Creature,Player | TgtPrompt$ Select ta
 SVar:DB:DB$Pump | KW$ HIDDEN CARDNAME can't be regenerated. | Defined$ Targeted
 SVar:Picture:http://www.wizards.com/global/images/magic/general/incinerate.jpg
 Oracle:Incinerate deals 3 damage to target creature or player. A creature dealt damage this way can't be regenerated this turn.
-SetInfo:DD2 Common
-SetInfo:MIR Common
-SetInfo:10E Common
-SetInfo:5ED Common
-SetInfo:M12 Common
-SetInfo:ICE Common

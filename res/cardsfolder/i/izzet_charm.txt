@@ -9,5 +9,3 @@ SVar:DBDiscard:DB$Discard | Defined$ You | NumCards$ 2 | Mode$ TgtChoose
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/izzet_charm.jpg
 Oracle:Choose one - Counter target noncreature spell unless its controller pays {2}; or Izzet Charm deals 2 damage to target creature; or draw two cards, then discard two cards.
-SetInfo:DDJ Uncommon
-SetInfo:RTR Uncommon

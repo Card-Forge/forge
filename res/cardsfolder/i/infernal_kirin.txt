@@ -8,4 +8,3 @@ SVar:TrigDiscard:AB$Discard | Cost$ 0 | ValidTgts$ Player | Mode$ RevealDiscardA
 SVar:X:TriggeredCard$CardManaCost
 SVar:Picture:http://www.wizards.com/global/images/magic/general/infernal_kirin.jpg
 Oracle:Flying\nWhenever you cast a Spirit or Arcane spell, target player reveals his or her hand and discards all cards with that spell's converted mana cost.
-SetInfo:SOK Rare

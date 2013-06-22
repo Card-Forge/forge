@@ -6,6 +6,3 @@ SVar:DBLoseLife:DB$LoseLife | LifeAmount$ X | References$ X
 SVar:X:Count$YourLifeTotal/HalfUp
 SVar:Picture:http://www.wizards.com/global/images/magic/general/infernal_contract.jpg
 Oracle:Draw four cards. You lose half your life, rounded up.
-SetInfo:7ED Rare
-SetInfo:MIR Rare
-SetInfo:6ED Rare

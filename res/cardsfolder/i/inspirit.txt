@@ -5,5 +5,3 @@ A:SP$ Pump | Cost$ 2 W | ValidTgts$ Creature | TgtPrompt$ Select target creature
 SVar:DBUntap:DB$Untap | Defined$ Targeted
 SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card84552.jpg
 Oracle:Untap target creature. It gets +2/+4 until end of turn.
-SetInfo:ONS Uncommon
-SetInfo:9ED Uncommon

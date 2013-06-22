@@ -5,4 +5,3 @@ A:SP$Pump | Cost$ 2 R | ValidTgts$ Creature | Radiance$ True | KW$ CARDNAME can'
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/incite_hysteria.jpg
 Oracle:Radiance - Until end of turn, target creature and each other creature that shares a color with it gain "This creature can't block."
-SetInfo:RAV Common

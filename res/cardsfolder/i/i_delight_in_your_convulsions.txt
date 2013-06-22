@@ -7,4 +7,3 @@ SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ AFLifeLost | StackDesc
 SVar:AFLifeLost:Number$0
 SVar:Picture:http://www.cardforge.org/fpics/lq_schemes/i_delight_in_your_convulsions.jpg
 Oracle:When you set this scheme in motion, each opponent loses 3 life. You gain life equal to the life lost this way.
-SetInfo:ARC Common

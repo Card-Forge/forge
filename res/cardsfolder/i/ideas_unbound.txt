@@ -7,4 +7,3 @@ SVar:Discard:DB$ Discard | Defined$ You | NumCards$ 3 | Mode$ TgtChoose
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ideas_unbound.jpg
 Oracle:Draw three cards. Discard three cards at the beginning of the next end step.
-SetInfo:SOK Common

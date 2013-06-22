@@ -5,5 +5,3 @@ A:SP$ Sacrifice | Cost$ B | SacValid$ Creature | Defined$ Each | SpellDescriptio
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/innocent_blood.jpg
 Oracle:Each player sacrifices a creature.
-SetInfo:ODY Common
-SetInfo:HOP Common

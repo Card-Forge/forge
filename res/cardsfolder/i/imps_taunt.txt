@@ -6,4 +6,3 @@ A:SP$ Pump | Cost$ 1 B | ValidTgts$ Creature | KW$ HIDDEN CARDNAME attacks each 
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/imps_taunt.jpg
 Oracle:Buyback {3} (You may pay an additional {3} as you cast this spell. If you do, put this card into your hand as it resolves.)\nTarget creature attacks this turn if able.
-SetInfo:TMP Uncommon

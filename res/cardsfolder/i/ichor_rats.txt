@@ -7,4 +7,3 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigPoison:AB$Poison | Cost$ 0 | Defined$ Each | Num$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ichor_rats.jpg
 Oracle:Infect (This creature deals damage to creatures in the form of -1/-1 counters and to players in the form of poison counters.)\nWhen Ichor Rats enters the battlefield, each player gets a poison counter.
-SetInfo:SOM Uncommon

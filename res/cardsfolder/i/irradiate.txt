@@ -6,4 +6,3 @@ SVar:X:Count$NumTypeYouCtrl.Artifact
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/irradiate.jpg
 Oracle:Target creature gets -1/-1 until end of turn for each artifact you control.
-SetInfo:MRD Common

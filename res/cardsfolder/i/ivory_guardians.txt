@@ -8,6 +8,3 @@ SVar:X:Count$Valid Permanent.Red+nonToken+OppCtrl
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ivory_guardians.jpg
 Oracle:Protection from red\nCreatures named Ivory Guardians get +1/+1 as long as an opponent controls a nontoken red permanent.
-SetInfo:5ED Uncommon
-SetInfo:CHR Uncommon
-SetInfo:LEG Uncommon

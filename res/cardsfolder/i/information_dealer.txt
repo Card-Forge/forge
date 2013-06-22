@@ -6,4 +6,3 @@ A:AB$ RearrangeTopOfLibrary | Cost$ T | Defined$ You | NumCards$ X | References$
 SVar:X:Count$TypeYouCtrl.Wizard
 SVar:Picture:http://www.wizards.com/global/images/magic/general/information_dealer.jpg
 Oracle:{T}: Look at the top X cards of your library, where X is the number of Wizards on the battlefield, then put them back in any order.
-SetInfo:ONS Common

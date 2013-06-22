@@ -5,4 +5,3 @@ A:AB$ Draw | Cost$ 2 | NumCards$ 1 | ConditionCheckSVar$ X | ConditionSVarCompar
 SVar:X:Count$InYourHand
 SVar:Picture:http://www.wizards.com/global/images/magic/general/idle_thoughts.jpg
 Oracle:{2}: Draw a card if you have no cards in hand.
-SetInfo:EVE Uncommon

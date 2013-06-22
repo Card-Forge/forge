@@ -8,4 +8,3 @@ SVar:Detain:DB$ Pump | KW$ HIDDEN CARDNAME can't attack or block. & HIDDEN CARDN
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/isperias_skywatch.jpg
 Oracle:Flying\nWhen Isperia's Skywatch enters the battlefield, detain target creature an opponent controls. (Until your next turn, that creature can't attack or block and its activated abilities can't be activated.)
-SetInfo:RTR Common

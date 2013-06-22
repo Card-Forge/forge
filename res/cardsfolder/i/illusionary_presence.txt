@@ -8,4 +8,3 @@ SVar:TrigCL:AB$ ChooseType | Cost$ 0 | Defined$ You | Type$ Land | AILogic$ Chos
 SVar:DBPump:DB$ Pump | KW$ ChosenTypewalk | DefinedChosenKW$ Type
 SVar:Picture:http://www.wizards.com/global/images/magic/general/illusionary_presence.jpg
 Oracle:Cumulative upkeep {U} (At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.)\nAt the beginning of your upkeep, choose a land type. Illusionary Presence gains landwalk of the chosen type until end of turn.
-SetInfo:ICE Rare

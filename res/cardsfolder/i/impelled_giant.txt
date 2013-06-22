@@ -8,4 +8,3 @@ SVar:X:Tapped$CardPower
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/impelled_giant.jpg
 Oracle:Trample\nTap an untapped red creature you control other than Impelled Giant: Impelled Giant gets +X/+0 until end of turn, where X is the power of the creature tapped this way.
-SetInfo:EVE Uncommon

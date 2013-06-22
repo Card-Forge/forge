@@ -6,4 +6,3 @@ SVar:X:Count$TypeYouCtrl.Wizard/Twice
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ixidors_will.jpg
 Oracle:Counter target spell unless its controller pays {2} for each Wizard on the battlefield.
-SetInfo:ONS Common

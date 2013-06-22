@@ -7,4 +7,3 @@ T:Mode$ Attacks | ValidCard$ Creature | Attacked$ You,Planeswalker.YouCtrl | Tri
 SVar:TrigDraw:AB$ Draw | Cost$ 0 | Defined$ You | NumCards$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/isperia_supreme_judge.jpg
 Oracle:Flying\nWhenever a creature attacks you or a planeswalker you control, you may draw a card.
-SetInfo:RTR Mythic

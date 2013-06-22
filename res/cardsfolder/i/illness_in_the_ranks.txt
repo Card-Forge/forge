@@ -6,4 +6,3 @@ SVar:PlayMain1:TRUE
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/illness_in_the_ranks.jpg
 Oracle:Creature tokens get -1/-1.
-SetInfo:GTC Uncommon

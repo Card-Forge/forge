@@ -8,6 +8,3 @@ SVar:TrigReturn:AB$ChangeZone | Origin$ Battlefield | Destination$ Hand | Cost$ 
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/izzet_boilerworks.jpg
 Oracle:Izzet Boilerworks enters the battlefield tapped.\nWhen Izzet Boilerworks enters the battlefield, return a land you control to its owner's hand.\n{T}: Add {U}{R} to your mana pool.
-SetInfo:GPT Common
-SetInfo:DDJ Common
-SetInfo:COM Common

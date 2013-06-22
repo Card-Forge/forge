@@ -6,4 +6,3 @@ S:Mode$ PreventDamage | Target$ Creature.YouCtrl | Amount$ All | Description$ Pr
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/inner_sanctum.jpg
 Oracle:Cumulative upkeep-Pay 2 life. (At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.)\nPrevent all damage that would be dealt to creatures you control.
-SetInfo:WTH Rare

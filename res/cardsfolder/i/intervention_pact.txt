@@ -14,4 +14,3 @@ SVar:TrigLoseGame:AB$ LosesGame | Cost$ 0 | UnlessCost$ 1 W W | UnlessPayer$ You
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/intervention_pact.jpg
 Oracle:Instant\nThe next time a source of your choice would deal damage to you this turn, prevent that damage. You gain life equal to the damage prevented this way.\nAt the beginning of your next upkeep, pay {1}{W}{W}. If you don't, you lose the game.
-SetInfo:FUT Rare

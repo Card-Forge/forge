@@ -6,4 +6,3 @@ A:SP$ ChangeZone | Cost$ 4 B | Origin$ Library | Destination$ Hand | ChangeType$
 SVar:X:Count$wasCastFromGraveyard.2.1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/increasing_ambition.jpg
 Oracle:Search your library for a card and put that card into your hand. If Increasing Ambition was cast from a graveyard, instead search your library for two cards and put those cards into your hand. Then shuffle your library.\nFlashback {7}{B} (You may cast this card from your graveyard for its flashback cost. Then exile it.)
-SetInfo:DKA Rare

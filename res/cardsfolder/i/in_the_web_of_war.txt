@@ -5,4 +5,3 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creatu
 SVar:TrigPump:AB$Pump | Cost$ 0 | Defined$ TriggeredCard | NumAtt$ +2 | KW$ Haste
 SVar:Picture:http://www.wizards.com/global/images/magic/general/in_the_web_of_war.jpg
 Oracle:Whenever a creature enters the battlefield under your control, it gets +2/+0 and gains haste until end of turn.
-SetInfo:BOK Rare

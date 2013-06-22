@@ -4,4 +4,3 @@ Types:Creature Treefolk Warrior
 PT:2/10
 SVar:Picture:http://www.wizards.com/global/images/magic/general/indomitable_ancients.jpg
 Oracle:
-SetInfo:MOR Rare

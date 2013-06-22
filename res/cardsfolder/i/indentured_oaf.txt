@@ -5,4 +5,3 @@ PT:4/3
 S:Mode$ PreventDamage | Source$ Card.Self | Target$ Creature.Red | Description$ Prevent all damage that CARDNAME would deal to red creatures.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/indentured_oaf.jpg
 Oracle:Prevent all damage that Indentured Oaf would deal to red creatures.
-SetInfo:RAV Uncommon

@@ -4,4 +4,3 @@ Types:Instant
 A:SP$ Pump | Cost$ U | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ HIDDEN Unblockable | SpellDescription$ Target creature is unblockable this turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/infiltrate.jpg
 Oracle:Target creature is unblockable this turn.
-SetInfo:NMS Common

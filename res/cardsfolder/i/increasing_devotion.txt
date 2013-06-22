@@ -6,4 +6,3 @@ A:SP$Token | Cost$ 3 W W | TokenAmount$ X | TokenImage$ w 1 1 human dka | TokenN
 SVar:X:Count$wasCastFromGraveyard.10.5
 SVar:Picture:http://www.wizards.com/global/images/magic/general/increasing_devotion.jpg
 Oracle:Put five 1/1 white Human creature tokens onto the battlefield. If Increasing Devotion was cast from a graveyard, put ten of those tokens onto the battlefield instead.\nFlashback {7}{W}{W} (You may cast this card from your graveyard for its flashback cost. Then exile it.)
-SetInfo:DKA Rare

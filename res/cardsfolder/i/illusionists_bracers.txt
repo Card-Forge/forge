@@ -6,4 +6,3 @@ T:Mode$ AbilityCast | ValidCard$ Creature.EquippedBy | TriggerZones$ Battlefield
 SVar:TrigCopyAbility:AB$ CopySpellAbility | Cost$ 0 | Defined$ TriggeredSpellAbility
 SVar:Picture:http://www.wizards.com/global/images/magic/general/illusionists_bracers.jpg
 Oracle:Whenever an ability of equipped creature is activated, if it isn't a mana ability, copy that ability. You may choose new targets for the copy.\nEquip {3}
-SetInfo:GTC Rare

@@ -5,6 +5,3 @@ A:AB$ Mana | Cost$ 1 T | Produced$ U R | SpellDescription$ Add U R to your mana 
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/izzet_signet.jpg
 Oracle:{1}, {T}: Add {U}{R} to your mana pool.
-SetInfo:GPT Common
-SetInfo:DDJ Common
-SetInfo:COM Common

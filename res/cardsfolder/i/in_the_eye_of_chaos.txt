@@ -7,4 +7,3 @@ SVar:X:TriggeredCard$CardManaCost
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/in_the_eye_of_chaos.jpg
 Oracle:Whenever a player casts an instant spell, counter it unless that player pays {X}, where X is its converted mana cost.
-SetInfo:LEG Rare

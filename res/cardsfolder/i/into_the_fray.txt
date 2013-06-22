@@ -6,4 +6,3 @@ K:Splice onto Arcane R
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/into_the_fray.jpg
 Oracle:Target creature attacks this turn if able.\nSplice onto Arcane {R} (As you cast an Arcane spell, you may reveal this card from your hand and pay its splice cost. If you do, add this card's effects to that spell.)
-SetInfo:SOK Common

@@ -7,4 +7,3 @@ SVar:TrigPumpCurse:AB$Pump | Cost$ 1 | ValidTgts$ Creature | TgtPrompt$ Select t
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/intimidator_initiate.jpg
 Oracle:Whenever a player casts a red spell, you may pay {1}. If you do, target creature can't block this turn.
-SetInfo:SHM Common

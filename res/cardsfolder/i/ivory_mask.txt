@@ -5,6 +5,3 @@ S:Mode$ Continuous | Affected$ You | AddKeyword$ Shroud | Description$ You have 
 SVar:NonStackingEffect:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ivory_mask.jpg
 Oracle:You have shroud. (You can't be the target of spells or abilities.)
-SetInfo:MMQ Rare
-SetInfo:8ED Rare
-SetInfo:9ED Rare

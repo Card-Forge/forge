@@ -7,5 +7,3 @@ SVar:TrigUntapAll:AB$UntapAll | Cost$ 0 | ValidCards$ Creature | SpellDescriptio
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/intruder_alarm.jpg
 Oracle:Creatures don't untap during their controllers' untap steps.\nWhenever a creature enters the battlefield, untap all creatures.
-SetInfo:8ED Rare
-SetInfo:STH Rare

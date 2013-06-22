@@ -5,4 +5,3 @@ PT:5/5
 K:Protection from white
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ihsans_shade.jpg
 Oracle:Protection from white
-SetInfo:HML Uncommon

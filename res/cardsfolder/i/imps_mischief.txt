@@ -8,4 +8,3 @@ SVar:X:Remembered$CardManaCost
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/imps_mischief.jpg
 Oracle:Change the target of target spell with a single target. You lose life equal to that spell's converted mana cost.
-SetInfo:PLC Rare

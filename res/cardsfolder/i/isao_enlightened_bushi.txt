@@ -7,4 +7,3 @@ K:Bushido 2
 A:AB$ Regenerate | Cost$ 2 | ValidTgts$ Samurai | TgtPrompt$ Select target Samurai. | SpellDescription$ Regenerate target Samurai.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/isao_enlightened_bushi.jpg
 Oracle:Isao, Enlightened Bushi can't be countered.\nBushido 2 (When this blocks or becomes blocked, it gets +2/+2 until end of turn.)\n{2}: Regenerate target Samurai.
-SetInfo:BOK Rare

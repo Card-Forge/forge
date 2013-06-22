@@ -6,7 +6,3 @@ SVar:TrigGainLife:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ X | Referen
 SVar:X:Count$InYourHand/Minus.4
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ivory_tower.jpg
 Oracle:At the beginning of your upkeep, you gain X life, where X is the number of cards in your hand minus four.
-SetInfo:ATQ Uncommon
-SetInfo:V10 Mythic
-SetInfo:4ED Rare
-SetInfo:3ED Rare

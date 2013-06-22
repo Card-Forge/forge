@@ -6,4 +6,3 @@ SVar:PlayMain1:TRUE
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/intangible_virtue.jpg
 Oracle:Creature tokens you control get +1/+1 and have vigilance.
-SetInfo:ISD Uncommon

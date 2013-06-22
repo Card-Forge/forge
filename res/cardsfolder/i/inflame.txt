@@ -4,5 +4,3 @@ Types:Instant
 A:SP$ DamageAll | Cost$ R | NumDmg$ 2 | ValidCards$ Creature.wasDealtDamageThisTurn | ValidDescription$ each creature dealt damage this turn. | SpellDescription$ CARDNAME deals 2 damage to each creature dealt damage this turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/inflame.jpg
 Oracle:Inflame deals 2 damage to each creature dealt damage this turn.
-SetInfo:PCY Common
-SetInfo:DST Common

@@ -4,6 +4,3 @@ Types:Sorcery
 A:SP$ Token | Cost$ 5 W | TokenAmount$ 4 | TokenName$ Citizen | TokenTypes$ Creature,Citizen | TokenOwner$ You | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | SpellDescription$ Put four 1/1 white Citizen creature tokens onto the battlefield.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/icatian_town.jpg
 Oracle:Put four 1/1 white Citizen creature tokens onto the battlefield.
-SetInfo:5ED Rare
-SetInfo:FEM Rare
-SetInfo:6ED Rare

@@ -5,4 +5,3 @@ A:SP$ Dig | Cost$ 1 U | DigNum$ 4 | ChangeNum$ 1 | SpellDescription$ Look at the
 SVar:RemAIDeck:True
 SVar:Picture:http://resources.wizards.com/magic/cards/vi/en-us/card3641.jpg
 Oracle:Look at the top four cards of your library. Put one of them into your hand and the rest on the bottom of your library in any order.
-SetInfo:VIS Common
