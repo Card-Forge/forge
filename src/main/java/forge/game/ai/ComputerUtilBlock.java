@@ -568,7 +568,13 @@ public class ComputerUtilBlock {
 
         List<Card> currentAttackers = new ArrayList<Card>(ComputerUtilBlock.getAttackersLeft());
 
-        return makeChumpBlocks(ai, combat, currentAttackers);
+        Combat newCombat = makeChumpBlocks(ai, combat, currentAttackers);
+        
+        if (ComputerUtilCombat.lifeInDanger(ai, newCombat)) {
+            return makeMultiChumpBlocks(ai, newCombat);
+        }
+        
+        return newCombat;
     }
     
     private static Combat makeChumpBlocks(final Player ai, final Combat combat, List<Card> attackers) {
@@ -616,6 +622,52 @@ public class ComputerUtilBlock {
         }
         attackers.remove(0);
         return makeChumpBlocks(ai, combat, attackers);
+    }
+
+    /**
+     * <p>
+     * makeMultiChumpBlocks.
+     * </p>
+     * 
+     * Block creatures with "can't be blocked except by two or more creatures"
+     * 
+     * @param combat
+     *            a {@link forge.game.phase.Combat} object.
+     * @return a {@link forge.game.phase.Combat} object.
+     */
+    private static Combat makeMultiChumpBlocks(final Player ai, final Combat combat) {
+
+        List<Card> currentAttackers = new ArrayList<Card>(ComputerUtilBlock.getAttackersLeft());
+        
+        for (final Card attacker : currentAttackers) {
+
+            if (!attacker.hasStartOfKeyword("CantBeBlockedByAmount LT")) {
+                continue;
+            }
+            List<Card> possibleBlockers = ComputerUtilBlock.getPossibleBlockers(attacker, ComputerUtilBlock.getBlockersLeft(), combat, true);
+            if (!CombatUtil.canAttackerBeBlockedWithAmount(attacker, possibleBlockers.size())) {
+                continue;
+            }
+            List<Card> usedBlockers = new ArrayList<Card>();
+            for (Card blocker : possibleBlockers) {
+                if (CombatUtil.canBlock(attacker, blocker, combat)) {
+                    combat.addBlocker(attacker, blocker);
+                    usedBlockers.add(blocker);
+                    if (CombatUtil.canAttackerBeBlockedWithAmount(attacker, usedBlockers.size())) {
+                        break;
+                    }
+                }
+            }
+            if (CombatUtil.canAttackerBeBlockedWithAmount(attacker, usedBlockers.size())) {
+                ComputerUtilBlock.getAttackersLeft().remove(attacker);
+            } else {
+                for (Card blocker : usedBlockers) {
+                    combat.removeBlockAssignment(attacker, blocker);
+                }
+            }
+        }
+
+        return combat;
     }
 
     // Reinforce blockers blocking attackers with trample (should only be made
