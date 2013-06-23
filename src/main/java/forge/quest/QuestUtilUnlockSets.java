@@ -20,6 +20,7 @@ package forge.quest;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.EnumSet;
 import java.util.List;
 import java.util.Map;
 
@@ -27,6 +28,7 @@ import javax.swing.JOptionPane;
 
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
@@ -116,9 +118,12 @@ public class QuestUtilUnlockSets {
      * 
      * @return unmodifiable list, assorted sets that are not currently in the format.
      */
-    private static final List<CardEdition> emptyEditions = Collections.unmodifiableList(new ArrayList<CardEdition>());
+    private static final List<CardEdition> emptyEditions = ImmutableList.<CardEdition>of();
+    private static final EnumSet<CardEdition.Type> unlockableSetTypes =
+        EnumSet.of(CardEdition.Type.CORE, CardEdition.Type.EXPANSION, CardEdition.Type.REPRINT, CardEdition.Type.STARTER);
+
     private static List<CardEdition> getUnlockableEditions(final QuestController qData) {
-         if (qData.getFormat() == null || !qData.getFormat().canUnlockSets()) {
+        if (qData.getFormat() == null || !qData.getFormat().canUnlockSets()) {
             return emptyEditions;
         }
 
@@ -127,32 +132,28 @@ public class QuestUtilUnlockSets {
         }
         List<CardEdition> options = new ArrayList<CardEdition>();
 
-         // Sort current sets by index
-         List<CardEdition> allowedSets = Lists.newArrayList(Iterables.transform(qData.getFormat().getAllowedSetCodes(), Singletons.getModel().getEditions().FN_EDITION_BY_CODE));
-         Collections.sort(allowedSets);
-
-         // Sort unlockable sets by index
-         List<CardEdition> excludedSets = Lists.newArrayList(Iterables.transform(qData.getFormat().getLockedSets(), Singletons.getModel().getEditions().FN_EDITION_BY_CODE));
-         Collections.sort(excludedSets);
-
-         // get a number of sets between an excluded and any included set
-         List<ImmutablePair<CardEdition, Long>> excludedWithDistances = new ArrayList<ImmutablePair<CardEdition, Long>>();
-         for (CardEdition ex : excludedSets) {
-             switch (ex.getType()) {
-             case CORE: case EXPANSION: case REPRINT: case STARTER: break;
-             default:
-                 // don't add non-traditional sets
-                 continue;                 
-             }
-             long distance = Integer.MAX_VALUE;
-             for (CardEdition in : allowedSets) {
-                 long d = Math.abs(ex.getDate().getTime() - in.getDate().getTime());
-                 if (d < distance) {
-                     distance = d;
-                 }
-             }
-             excludedWithDistances.add(ImmutablePair.of(ex, distance));
-         }
+        // Sort current sets by date
+        List<CardEdition> allowedSets = Lists.newArrayList(Iterables.transform(qData.getFormat().getAllowedSetCodes(), Singletons.getModel().getEditions().FN_EDITION_BY_CODE));
+        Collections.sort(allowedSets);
+        
+        // Sort unlockable sets by date
+        List<CardEdition> excludedSets = Lists.newArrayList(Iterables.transform(qData.getFormat().getLockedSets(), Singletons.getModel().getEditions().FN_EDITION_BY_CODE));
+        Collections.sort(excludedSets);
+        
+        // get a number of sets between an excluded and any included set
+        List<ImmutablePair<CardEdition, Long>> excludedWithDistances = new ArrayList<ImmutablePair<CardEdition, Long>>();
+        for (CardEdition ex : excludedSets) {
+            if (!unlockableSetTypes.contains(ex.getType())) // don't add non-traditional sets
+                continue;
+            long distance = Integer.MAX_VALUE;
+            for (CardEdition in : allowedSets) {
+                long d = Math.abs(ex.getDate().getTime() - in.getDate().getTime());
+                if (d < distance) {
+                    distance = d;
+                }
+            }
+            excludedWithDistances.add(ImmutablePair.of(ex, distance));
+        }
 
          // sort by distance, then by code desc
          Collections.sort(excludedWithDistances, new Comparator<ImmutablePair<CardEdition, Long>>() {
