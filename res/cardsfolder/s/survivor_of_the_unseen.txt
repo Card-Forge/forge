@@ -4,7 +4,7 @@ Types:Creature Human Wizard
 PT:2/1
 K:Cumulative upkeep:2
 A:AB$ Draw | Cost$ T | NumCards$ 2 | SubAbility$ DBTop | SpellDescription$ Draw two cards, then put a card from your hand on top of your library.
-SVar:DBTop:DB$ChangeZone | Origin$ Hand | Destination$ Library | ChangeType$ Card | ChangeNum$ 1
+SVar:DBTop:DB$ ChangeZone | Origin$ Hand | Destination$ Library | ChangeType$ Card | ChangeNum$ 1 | Mandatory$ True
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/survivor_of_the_unseen.jpg
 Oracle:Cumulative upkeep {2} (At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.)\n{T}: Draw two cards, then put a card from your hand on top of your library.
