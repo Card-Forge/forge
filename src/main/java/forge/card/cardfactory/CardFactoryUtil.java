@@ -3231,55 +3231,21 @@ public class CardFactoryUtil {
 
                 final int m = Integer.parseInt(parse.substring(8));
 
-                card.addIntrinsicKeyword("etbCounter:P1P1:" + m + ":no Condition:"
-                        + "Modular " + m + " (This enters the battlefield with " + m + " +1/+1 counters on it. When it's put into a graveyard, you may put its +1/+1 counters on target artifact creature.)");
+                card.addIntrinsicKeyword("etbCounter:P1P1:" + m + ":no Condition: " +
+                        "Modular " + m + " (This enters the battlefield with " + m + " +1/+1 counters on it. When it's put into a graveyard, " +
+                        "you may put its +1/+1 counters on target artifact creature.)");
 
-                final SpellAbility ability = new Ability(card, ManaCost.ZERO) {
-                    @Override
-                    public void resolve() {
-                        final Card card2 = this.getTargetCard();
-                        card2.addCounter(CounterType.P1P1, this.getSourceCard().getCounters(CounterType.P1P1), true);
-                    } // resolve()
-                };
-
-                card.addDestroyCommand(new Command() {
-                    private static final long serialVersionUID = 304026662487997331L;
-
-                    @Override
-                    public void run() {
-                        final Player modularPlayer =  card.getController();
-                        final List<Card> choices = Lists.newArrayList();
-                        for(Card c : modularPlayer.getGame().getCardsIn(ZoneType.Battlefield)) {
-                            if( c.isCreature() && c.isArtifact() && c.canBeTargetedBy(ability))
-                                choices.add(c);
-                        }
-
-                        Card card2 = null;
-                        // Target as Modular is Destroyed
-                        if (modularPlayer.isComputer()) {
-                            final List<Card> aiChoices = CardLists.filterControlledBy(choices, modularPlayer);
-                            if (!aiChoices.isEmpty()) {
-                                card2 = ComputerUtilCard.getBestCreatureAI(aiChoices);
-                            }
-                        } else if (!choices.isEmpty()){
-                            InputSelectCards inp = new InputSelectCardsFromList(1, 1, choices);
-                            inp.setCancelAllowed(true);
-                            inp.setMessage("Select target artifact creature to give it +1/+1 counters from the dead " + card);
-                            Singletons.getControl().getInputQueue().setInputAndWait(inp);
-                            if( !inp.hasCancelled() ) {
-                                card2 = inp.getSelected().get(0);
-                            }
-                        }
-                        if ( null != card2 ) {
-                            ability.setTargetRestrictions(new TargetRestrictions("", "Artifact.Creature".split(" "), "1", "1"));
-                            ability.setTargetCard(card2);
-                            ability.setTrigger(true);
-                            String desc = String.format("Put %d +1/+1 counter/s from %s on %s", card.getCounters(CounterType.P1P1), card, card2);
-                            ability.setStackDescription(desc);
-                            modularPlayer.getGame().getStack().addSimultaneousStackEntry(ability);
-                        }
-                    }
-                });
+                final String abStr = "AB$ PutCounter | Cost$ 0 | References$ ModularX | ValidTgts$ Artifact.Creature | " +
+                        "TgtPrompt$ Select target artifact creature | CounterType$ P1P1 | CounterNum$ ModularX";
+                card.setSVar("ModularTrig", abStr);
+                card.setSVar("ModularX", "TriggeredCard$CardCounters.P1P1");
+                
+                String trigStr = "Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Graveyard" +
+                        " | OptionalDecider$ TriggeredCardController | TriggerController$ TriggeredCardController | Execute$ ModularTrig | " +
+                        "Secondary$ True | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, " +
+                        "you may put a +1/+1 counter on target artifact creature for each +1/+1 counter on CARDNAME";
+                    final Trigger myTrigger = TriggerHandler.parseTrigger(trigStr, card, true);
+                    card.addTrigger(myTrigger);
             }
         } // Modular
 
