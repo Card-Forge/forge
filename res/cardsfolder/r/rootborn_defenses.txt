@@ -3,8 +3,7 @@ ManaCost:2 W
 Types:Instant
 A:SP$ ChooseCard | Cost$ 2 W | Defined$ You | Amount$ 1 | Choices$ Creature.token+YouCtrl | SubAbility$ DBCopy | RememberChosen$ True | AILogic$ AtLeast1 | SpellDescription$ Populate. Creatures you control are indestructible this turn. (To populate, put a token onto the battlefield that's a copy of a creature token you control. Damage and effects that say "destroy" don't destroy indestructible creatures.)
 SVar:DBCopy:DB$ CopyPermanent | Defined$ Remembered | NumCopies$ 1 | SubAbility$ DBPumpAll
-SVar:DBPumpAll:DB$ Effect | Name$ Rootborn Defenses Effect | StaticAbilities$ KWPump | SubAbility$ DBCleanup
+SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | KW$ Indestructible | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:KWPump:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected$ Creature.YouCtrl | AddHiddenKeyword$ Indestructible | Description$ Creatures you control are indestructible this turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rootborn_defenses.jpg
 Oracle:Populate. Creatures you control are indestructible this turn. (To populate, put a token onto the battlefield that's a copy of a creature token you control. Damage and effects that say "destroy" don't destroy indestructible creatures.)

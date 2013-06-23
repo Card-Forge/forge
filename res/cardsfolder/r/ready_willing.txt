@@ -3,8 +3,7 @@ ManaCost:1 G W
 AlternateMode: Split
 Types:Instant
 K:Fuse
-A:SP$ Effect | Cost$ 1 G W | StaticAbilities$ STIndestructible | SubAbility$ DBUnTapAll | SpellDescription$ Creatures you conttrol are indestructible this turn. Untap each creature you control.
-SVar:STIndestructible:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected$ Creature.YouCtrl | AddHiddenKeyword$ Indestructible | Description$ Creatures you control are indestructible this turn.
+A:SP$ PumpAll | Cost$ 1 G W | ValidCards$ Creature.YouCtrl | KW$ Indestructible | SubAbility$ DBUnTapAll | SpellDescription$ Creatures you control gain indestructible until end of turn. Untap each creature you control.
 SVar:DBUnTapAll:DB$ UntapAll | ValidCards$ Creature.YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ready_willing.jpg
 Oracle:Creatures you control are indestructible this turn. Untap each creature you control.\nFuse (You may cast one or both halves of this card from your hand.)

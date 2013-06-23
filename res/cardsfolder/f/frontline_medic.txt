@@ -4,7 +4,7 @@ Types:Creature Human Cleric
 PT:3/3
 T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | CheckSVar$ BattalionTest | SVarCompare$ GE2 | Execute$ TrigBattalionEffect | TriggerDescription$ Battalion - Whenever CARDNAME and at least two other creatures attack, creatures you control are indestructible this turn.
 SVar:TrigBattalionEffect:AB$ Effect | Cost$ 0 | Name$ Frontline Medic Effect | StaticAbilities$ KWPump
-SVar:KWPump:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected$ Creature.YouCtrl | AddHiddenKeyword$ Indestructible | Description$ Creatures you control are indestructible this turn.
+SVar:KWPump:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected$ Creature.YouCtrl | AddKeyword$ Indestructible | Description$ Creatures you control are indestructible this turn.
 SVar:BattalionTest:Count$Valid Creature.attacking+Other
 A:AB$ Counter | Cost$ Sac<1/CARDNAME> | TargetType$ Spell | TgtPrompt$ Select target spell with X in its mana cost | ValidTgts$ Card.hasXCost | UnlessCost$ 3 | SpellDescription$ Counter target spell with X in its mana cost unless its controller pays 3.
 SVar:RemAIDeck:True

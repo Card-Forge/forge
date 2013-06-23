@@ -3,7 +3,7 @@ ManaCost:1 W W
 Types:Creature Human Knight
 PT:2/2
 K:First Strike
-S:Mode$ Continuous | Affected$ Creature.Knight+Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | AddHiddenKeyword$ Indestructible | Description$ Other Knight creatures you control get +1/+1 and are indestructible.
+S:Mode$ Continuous | Affected$ Creature.Knight+Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | AddKeyword$ Indestructible | Description$ Other Knight creatures you control get +1/+1 and are indestructible.
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/knight_exemplar.jpg
 Oracle:First strike (This creature deals combat damage before creatures without first strike.)\nOther Knight creatures you control get +1/+1 and are indestructible. (Lethal damage and effects that say "destroy" don't destroy them.)

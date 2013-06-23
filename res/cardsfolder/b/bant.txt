@@ -5,6 +5,6 @@ S:Mode$ Continuous | EffectZone$ Command | Affected$ Creature | AddKeyword$ Exal
 T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever you roll Chaos, put a divinity counter on target green, white, or blue creature. That creature is indestructible as long as it has a divinity counter on it.
 SVar:RolledChaos:AB$ PutCounter | Cost$ 0 | ValidTgts$ Creature.Green,Creature.White,Creature.Blue | CounterType$ DIVINITY | CounterNum$ 1 | SubAbility$ DivineCharacter
 SVar:DivineCharacter:DB$ Animate | Defined$ Targeted | staticAbilities$ IndestructibleAspect | Permanent$ True
-SVar:IndestructibleAspect:Mode$ Continuous | EffectZone$ Battlefield | Affected$ Card.Self+counters_GE1_DIVINITY | AddHiddenKeyword$ Indestructible
+SVar:IndestructibleAspect:Mode$ Continuous | EffectZone$ Battlefield | Affected$ Card.Self+counters_GE1_DIVINITY | AddKeyword$ Indestructible
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bant.jpg
 Oracle:All creatures have exalted. (Whenever a creature attacks alone, it gets +1/+1 until end of turn for each instance of exalted among permanents its controller controls.)\nWhenever you roll {C}, put a divinity counter on target green, white, or blue creature. That creature is indestructible as long as it has a divinity counter on it.

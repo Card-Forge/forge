@@ -1,7 +1,7 @@
 Name:Terra Eternal
 ManaCost:2 W
 Types:Enchantment
-S:Mode$ Continuous | Affected$ Land | AddHiddenKeyword$ Indestructible | Description$ All lands are indestructible.
+S:Mode$ Continuous | Affected$ Land | AddKeyword$ Indestructible | Description$ All lands are indestructible.
 SVar:NonStackingEffect:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/terra_eternal.jpg

@@ -3,6 +3,6 @@ ManaCost:no cost
 Types:Plane Innistrad
 S:Mode$ Continuous | EffectZone$ Command | Affected$ Creature | AddKeyword$ Vigilance | Description$ All creatures have vigilance.
 T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever you roll Chaos, creatures you control are indestructible this turn.
-SVar:RolledChaos:AB$ PumpAll | Cost$ 0 | ValidCards$ Creature.YouCtrl | KW$ HIDDEN Indestructible
+SVar:RolledChaos:AB$ PumpAll | Cost$ 0 | ValidCards$ Creature.YouCtrl | KW$ Indestructible
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gavony.jpg
 Oracle:All creatures have vigilance.\nWhenever you roll {C}, creatures you control are indestructible this turn.
