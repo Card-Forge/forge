@@ -123,8 +123,9 @@ public class InputAttack extends InputSyncronizedBase {
             combat.removeFromCombat(card);
             card.setUsedToPay(false);
             showCombat();
-            // When removing an attacker should I clear the attacking band?
-            this.activateBand(this.activeBand);
+            // When removing an attacker clear the attacking band
+            this.activateBand(null);
+            
             return;
         }
 

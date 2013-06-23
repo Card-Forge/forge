@@ -1,0 +1,8 @@
+Name:Shelkin Brownie
+ManaCost:1 G
+Types:Creature Ouphe
+PT:1/1
+A:AB$ Debuff | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | Keywords$ Bands with Other Creatures named Wolves of the Hunt & Bands with Other Legendary Creatures | SpellDescription$ Target creature loses all "bands with other" abilities until end of turn. | StackDescription$ SpellDescription
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/shelkin_brownie.jpg
+Oracle:{T}: Target creature loses all "bands with other" abilities until end of turn.

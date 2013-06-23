@@ -1,0 +1,7 @@
+Name:Cathedral of Serra
+ManaCost:no cost
+Types:Land
+S:Mode$ Continuous | Affected$ Creature.White+Legendary | AddKeyword$ Bands with Other Legendary Creatures | Description$ White legendary creatures you control have "bands with other legendary creatures." (Any legendary creatures can attack in a band as long as at least one has "bands with other legendary creatures." Bands are blocked as a group. If at least two legendary creatures you control, one of which has "bands with other legendary creatures," are blocking or being blocked by the same creature, you divide that creature's combat damage, not its controller, among any of the creatures it's being blocked by or is blocking.)
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/cathedral_of_serra.jpg
+Oracle:White legendary creatures you control have "bands with other legendary creatures." (Any legendary creatures can attack in a band as long as at least one has "bands with other legendary creatures." Bands are blocked as a group. If at least two legendary creatures you control, one of which has "bands with other legendary creatures," are blocking or being blocked by the same creature, you divide that creature's combat damage, not its controller, among any of the creatures it's being blocked by or is blocking.)

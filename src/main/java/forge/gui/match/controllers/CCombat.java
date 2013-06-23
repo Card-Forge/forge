@@ -88,11 +88,17 @@ public enum CCombat implements ICDoc {
             display.append(defender.getName()).append(" is attacked by:\n");
 
             // Associate Bands, Attackers Blockers
+            boolean previousBand = false;
             for(AttackingBand band : bands) {
+                // Space out band blocks from non-band blocks
+                if (previousBand) {
+                    display.append("\n");
+                }
+                
                 boolean isBand = band.getAttackers().size() > 1;
                 if (isBand) {
                     // Only print Band data if it's actually a band
-                    display.append(" BAND");
+                    display.append(" > BAND");
                     if (band.getBlocked()) {
                         display.append(" (blocked)");
                     }
@@ -114,6 +120,7 @@ public enum CCombat implements ICDoc {
                 for (final Card element : band.getBlockers()) {
                     display.append("     < ").append(combatantToString(element)).append("\n");
                 }
+                previousBand = isBand;
             }
         }
         return display.toString().trim();

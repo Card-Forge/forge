@@ -46,21 +46,50 @@ public class AttackingBand implements Comparable<AttackingBand> {
     
     public void calculateBlockedState() { this.blocked = !this.blockers.isEmpty(); }
 
-    public boolean canJoinBand(Card card) {
-        // If this card has banding it can definitely join
-        if (card.hasKeyword("Banding")) {
+    public static boolean isValidBand(List<Card> band, boolean shareDamage) {
+        if (band.isEmpty()) {
+            // An empty band is not a valid band
+            return false;
+        }
+        
+        int bandingCreatures = CardLists.getKeyword(band, "Banding").size();
+        int neededBandingCreatures = shareDamage ? 1 : band.size() - 1;
+        if (neededBandingCreatures <= bandingCreatures) {
+            // For starting a band, only one can be non-Banding
+            // For sharing damage, only one needs to be Banding
             return true;
         }
         
-        // If all of the cards in the Band have banding, it can definitely join
-        if (attackers.size() == CardLists.getKeyword(attackers, "Banding").size()) {
-            return true;
+        // Legends lands, Master of the Hunt, Old Fogey (just in case)
+        // Since Bands With Other is a dead keyword, no major reason to make this more generic
+        // But if someone is super motivated, feel free to do it. Just make sure you update Tolaria and Shelkie Brownie
+        String[] bandsWithString = { "Bands with Other Legendary Creatures", "Bands with Other Creatures named Wolves of the Hunt", 
+        "Bands with Other Dinosaurs" };
+        String[] validString = { "Legendary.Creature", "Creature.namedWolves of the Hunt", "Dinosaur" }; 
+        
+        Card source = band.get(0);
+        for(int i = 0; i < bandsWithString.length; i++) {
+            String keyword = bandsWithString[i];
+            String valid = validString[i];
+            
+            // Check if a bands with other keyword exists in band, and each creature in the band fits the valid quality
+            if (!CardLists.getKeyword(band, keyword).isEmpty() &&
+                    CardLists.getValidCards(band, valid, source.getController(), source).size() == band.size()) {
+                return true;
+            }
         }
-        
-        // TODO add checks for bands with other
-        //List<Card> bandsWithOther = CardLists.getKeyword(attackers, "Bands with Other");
-        
+
         return false;
+    }
+    
+    public boolean canJoinBand(Card card) {
+        // Trying to join an existing band, attackers should be non-empty and card should exist
+        List<Card> newBand = new ArrayList<Card>(attackers);
+        if (card != null) {
+            newBand.add(card);
+        }
+        
+        return isValidBand(newBand, false);
     }
     
     /* (non-Javadoc)

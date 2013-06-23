@@ -446,7 +446,7 @@ public class Combat {
         if (ordered) {
             list = this.attackerDamageAssignmentOrder.containsKey(card) ? this.attackerDamageAssignmentOrder.get(card) : null;
         } else {
-            list = this.getBandByAttacker(card) != null ? this.getBandByAttacker(card).getBlockers() : null;
+            list = this.attackerToBandMap.containsKey(card) ? this.getBandByAttacker(card).getBlockers() : null;
         }
 
         if (list == null) {
@@ -619,13 +619,8 @@ public class Combat {
                     Player attackingPlayer = this.getAttackingPlayer();
                     Player assigningPlayer = blocker.getController();
 
-                    List<Card> bandingAttackers = CardLists.getKeyword(attackers, "Banding");
-                    if (!bandingAttackers.isEmpty()) {
+                    if (AttackingBand.isValidBand(attackers, true)) {
                         assigningPlayer = attackingPlayer;
-                    } else {
-                        // TODO Get each bands with other creature
-                        // Check if any other valid creatures matches the bands with other
-                        // assigningPlayer = blockingBand.get(0).getController();
                     }
 
                     assignedDamage = true;
@@ -677,13 +672,8 @@ public class Combat {
                 if (defender instanceof Player && defender.hasKeyword("You assign combat damage of each creature attacking you.")) {
                     assigningPlayer = (Player)defender;
                 } else {
-                    List<Card> blockingBand = CardLists.getKeyword(blockers, "Banding");
-                    if (!blockingBand.isEmpty()) {
-                        assigningPlayer = blockingBand.get(0).getController();
-                    } else {
-                        // TODO Get each bands with other creature
-                        // Check if any other valid creatures matches the bands with other
-                        // assigningPlayer = blockingBand.get(0).getController();
+                    if (AttackingBand.isValidBand(blockers, true)) {
+                        assigningPlayer = blockers.get(0).getController();
                     }
                 }
 

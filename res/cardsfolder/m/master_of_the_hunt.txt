@@ -1,0 +1,7 @@
+Name:Master of the Hunt
+ManaCost:2 G G
+Types:Creature Human
+PT:2/2
+A:AB$ Token | Cost$ 2 G G | TokenAmount$ 1 | TokenTypes$ Creature,Wolf | TokenName$ Wolves of the Hunt | TokenOwner$ You | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Bands with Other Creatures named Wolves of the Hunt | SpellDescription$ Put a 1/1 green Wolf creature token named Wolves of the Hunt onto the battlefield. It has "bands with other creatures named Wolves of the Hunt."
+SVar:Picture:http://www.wizards.com/global/images/magic/general/master_of_the_hunt.jpg
+Oracle:{2}{G}{G}: Put a 1/1 green Wolf creature token named Wolves of the Hunt onto the battlefield. It has "bands with other creatures named Wolves of the Hunt." (Any creatures named Wolves of the Hunt can attack in a band as long as at least one has "bands with other creatures named Wolves of the Hunt." Bands are blocked as a group. If at least two creatures named Wolves of the Hunt you control, one of which has "bands with other creatures named Wolves of the Hunt," are blocking or being blocked by the same creature, you divide that creature's combat damage, not its controller, among any of the creatures it's being blocked by or is blocking.)

@@ -92,6 +92,7 @@ res/cardsfolder/a/adun_oakenshield.txt svneol=native#text/plain
 res/cardsfolder/a/advance_scout.txt svneol=native#text/plain
 res/cardsfolder/a/advanced_hoverguard.txt svneol=native#text/plain
 res/cardsfolder/a/advent_of_the_wurm.txt -text
+res/cardsfolder/a/adventurers_guildhouse.txt -text
 res/cardsfolder/a/adventuring_gear.txt svneol=native#text/plain
 res/cardsfolder/a/advice_from_the_fae.txt -text
 res/cardsfolder/a/aegis_angel.txt -text
@@ -1591,6 +1592,7 @@ res/cardsfolder/c/caterwauling_boggart.txt -text
 res/cardsfolder/c/cathars_crusade.txt -text
 res/cardsfolder/c/cathartic_adept.txt svneol=native#text/plain
 res/cardsfolder/c/cathedral_membrane.txt -text
+res/cardsfolder/c/cathedral_of_serra.txt -text
 res/cardsfolder/c/cathedral_of_war.txt -text
 res/cardsfolder/c/cathedral_sanctifier.txt -text
 res/cardsfolder/c/cathodion.txt svneol=native#text/plain
@@ -6674,6 +6676,7 @@ res/cardsfolder/m/master_healer.txt svneol=native#text/plain
 res/cardsfolder/m/master_of_arms.txt -text
 res/cardsfolder/m/master_of_cruelties.txt -text
 res/cardsfolder/m/master_of_etherium.txt svneol=native#text/plain
+res/cardsfolder/m/master_of_the_hunt.txt -text
 res/cardsfolder/m/master_of_the_pearl_trident.txt -text
 res/cardsfolder/m/master_of_the_veil.txt -text
 res/cardsfolder/m/master_of_the_wild_hunt.txt svneol=native#text/plain
@@ -7140,6 +7143,7 @@ res/cardsfolder/m/mothrider_samurai.txt svneol=native#text/plain
 res/cardsfolder/m/mountain.txt svneol=native#text/plain
 res/cardsfolder/m/mountain_bandit.txt svneol=native#text/plain
 res/cardsfolder/m/mountain_goat.txt svneol=native#text/plain
+res/cardsfolder/m/mountain_stronghold.txt -text
 res/cardsfolder/m/mountain_titan.txt -text svneol=unset#text/plain
 res/cardsfolder/m/mountain_valley.txt svneol=native#text/plain
 res/cardsfolder/m/mountain_yeti.txt svneol=native#text/plain
@@ -9485,6 +9489,7 @@ res/cardsfolder/s/sea_snidd.txt -text
 res/cardsfolder/s/sea_spirit.txt svneol=native#text/plain
 res/cardsfolder/s/sea_sprite.txt svneol=native#text/plain
 res/cardsfolder/s/seachrome_coast.txt svneol=native#text/plain
+res/cardsfolder/s/seafarers_quay.txt -text
 res/cardsfolder/s/seafloor_debris.txt svneol=native#text/plain
 res/cardsfolder/s/seahunter.txt svneol=native#text/plain
 res/cardsfolder/s/seal_of_cleansing.txt svneol=native#text/plain
@@ -9721,6 +9726,7 @@ res/cardsfolder/s/shatterskull_giant.txt svneol=native#text/plain
 res/cardsfolder/s/shatterstorm.txt svneol=native#text/plain
 res/cardsfolder/s/shauku_endbringer.txt svneol=native#text/plain
 res/cardsfolder/s/shaukus_minion.txt svneol=native#text/plain
+res/cardsfolder/s/shelkin_brownie.txt -text
 res/cardsfolder/s/shell_of_the_last_kappa.txt -text
 res/cardsfolder/s/shell_skulkin.txt svneol=native#text/plain
 res/cardsfolder/s/shelldock_isle.txt -text
@@ -11450,6 +11456,7 @@ res/cardsfolder/t/tobias_andrion.txt svneol=native#text/plain
 res/cardsfolder/t/toil_to_renown.txt svneol=native#text/plain
 res/cardsfolder/t/toil_trouble.txt -text
 res/cardsfolder/t/toils_of_night_and_day.txt svneol=native#text/plain
+res/cardsfolder/t/tolaria.txt -text
 res/cardsfolder/t/tolaria_west.txt svneol=native#text/plain
 res/cardsfolder/t/tolarian_academy.txt svneol=native#text/plain
 res/cardsfolder/t/tolarian_drake.txt -text
@@ -11805,6 +11812,7 @@ res/cardsfolder/u/unforge.txt -text
 res/cardsfolder/u/unfulfilled_desires.txt svneol=native#text/plain
 res/cardsfolder/u/unhallowed_pact.txt -text
 res/cardsfolder/u/unhinge.txt svneol=native#text/plain
+res/cardsfolder/u/unholy_citadel.txt -text
 res/cardsfolder/u/unholy_grotto.txt svneol=native#text/plain
 res/cardsfolder/u/unholy_strength.txt svneol=native#text/plain
 res/cardsfolder/u/unified_strike.txt -text
