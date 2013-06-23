@@ -55,7 +55,10 @@ public class DebuffEffect extends SpellAbilityEffect {
 
     @Override
     public void resolve(SpellAbility sa) {
-        final List<String> kws = sa.hasParam("Keywords") ? Arrays.asList(sa.getParam("Keywords").split(" & ")) : new ArrayList<String>();
+        final List<String> kws = new ArrayList<String>();
+        if (sa.hasParam("Keywords")) {
+            kws.addAll(Arrays.asList(("Keywords").split(" & ")));
+        }
         final Game game = sa.getActivatingPlayer().getGame();
         final long timestamp = game.getNextTimestamp();
 
