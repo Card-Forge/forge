@@ -1833,7 +1833,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         //Gaea's Touch
         int adjMaxForests = 0;
         int forestsPlayed = this.numBasicForestsPlayed;
-        if (land.isBasicLand() && land.isType("Forest")) 
+        if (land != null && land.isBasicLand() && land.isType("Forest")) 
             forestsPlayed++;
 
         for (String keyword : this.getKeywords()) {
