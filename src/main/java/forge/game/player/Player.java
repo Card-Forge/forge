@@ -109,11 +109,9 @@ public class Player extends GameEntity implements Comparable<Player> {
     /** The prowl. */
     private ArrayList<String> prowl = new ArrayList<String>();
 
-    /** The max lands to play. */
-    private final static int maxLandsToPlay = 1;
-
     /** The num lands played. */
     private int numLandsPlayed = 0;
+    private int numBasicForestsPlayed = 0;
 
     /** The max hand size. */
     private int maxHandSize = 7;
@@ -1751,6 +1749,9 @@ public class Player extends GameEntity implements Comparable<Player> {
             game.getAction().moveTo(this.getZone(ZoneType.Battlefield), land);
             CardFactoryUtil.playLandEffects(land);
             this.numLandsPlayed++;
+            if (land.isBasicLand() && land.isType("Forest")) {
+                this.numBasicForestsPlayed++;
+            }
 
             // check state effects for static animate (Living Lands, Conversion,
             // etc...)
@@ -1807,24 +1808,46 @@ public class Player extends GameEntity implements Comparable<Player> {
         if( land != null && land.getOwner() != this && !land.hasKeyword("May be played by your opponent"))
             return false;
 
+        // **** Check for land play limit per turn ****
         // Dev Mode
         if (this.getLobbyPlayer().getType() == PlayerType.HUMAN && Preferences.DEV_MODE &&
             Singletons.getModel().getPreferences().getPrefBoolean(FPref.DEV_UNLIMITED_LAND)) {
             return true;
         }
+        if (this.isCardInPlay("Fastbond") || this.isCardInCommand("Naya")) {
+            return true;
+        }
 
         // check for adjusted max lands play per turn
-        int adjMax = 0;
+        int adjMax = 1;
         for (String keyword : this.getKeywords()) {
             if (keyword.startsWith("AdjustLandPlays")) {
                 final String[] k = keyword.split(":");
                 adjMax += Integer.valueOf(k[1]);
             }
         }
-        final int adjCheck = Player.maxLandsToPlay + adjMax;
-        // System.out.println("Max lands for player " + this.getName() + ": " + adjCheck);
+        if (this.numLandsPlayed < adjMax) {
+            return true;
+        }
 
-        return this.numLandsPlayed < adjCheck || this.isCardInPlay("Fastbond") || this.isCardInCommand("Naya");
+        //Gaea's Touch
+        int adjMaxForests = 0;
+        int forestsPlayed = this.numBasicForestsPlayed;
+        if (land.isBasicLand() && land.isType("Forest")) 
+            forestsPlayed++;
+
+        for (String keyword : this.getKeywords()) {
+            if (keyword.startsWith("AdjustBasicForestPlays")) {
+                final String[] k = keyword.split(":");
+                adjMaxForests += Integer.valueOf(k[1]);
+            }
+        }
+        adjMaxForests = Math.min(adjMaxForests, forestsPlayed);
+        if (this.numLandsPlayed < adjMax + adjMaxForests) {
+            return true;
+        }
+
+        return false;
     }
 
     /**
@@ -2491,6 +2514,18 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     /**
      * <p>
+     * Setter for the field <code>numBasicForestsPlayed</code>.
+     * </p>
+     * 
+     * @param n
+     *            a int.
+     */
+    public final void setNumBasicForestsPlayed(final int n) {
+        this.numBasicForestsPlayed = n;
+    }
+    
+    /**
+     * <p>
      * Setter for the field <code>lifeGainedThisTurn</code>.
      * </p>
      * 
@@ -2728,6 +2763,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         resetNumDiscardedThisTurn();
         setAttackedWithCreatureThisTurn(false);
         setNumLandsPlayed(0);
+        setNumBasicForestsPlayed(0);
         clearAssignedDamage();
         resetAttackersDeclaredThisTurn();
     }

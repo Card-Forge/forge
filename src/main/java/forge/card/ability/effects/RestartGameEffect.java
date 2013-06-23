@@ -76,6 +76,7 @@ public class RestartGameEffect extends SpellAbilityEffect {
             player.setStartingLife(psc.getStartingLife());
             player.setPoisonCounters(0);
             player.setNumLandsPlayed(0);
+            player.setNumBasicForestsPlayed(0);
             GameNew.putCardsOnBattlefield(player, psc.getCardsOnBattlefield(player));
     
             PlayerZone library = player.getZone(ZoneType.Library);

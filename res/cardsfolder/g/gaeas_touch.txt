@@ -1,0 +1,7 @@
+Name:Gaea's Touch
+ManaCost:G G
+Types:Enchantment
+A:AB$ Mana | Cost$ Sac<1/CARDNAME> | Produced$ G G | SpellDescription$ Add G G to your mana pool.
+S:Mode$ Continuous | Affected$ You | AddKeyword$ AdjustBasicForestPlays:1 | Description$ You may play an additional land during your turn if that land is a basic Forest.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/gaeas_touch.jpg
+Oracle:You may play an additional land during your turn if that land is a basic Forest.\nSacrifice Gaea's Touch: Add {G}{G} to your mana pool.
