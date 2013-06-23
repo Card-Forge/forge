@@ -96,6 +96,8 @@ public class StaticAbilityPreventDamage {
             restDamage = restDamage - Integer.parseInt(params.get("Amount"));
         } else if (params.get("Amount").matches("HalfUp")) {
             restDamage = restDamage - (int) (Math.ceil(restDamage / 2.0));
+        } else if (params.get("Amount").matches("HalfDown")) {
+            restDamage = restDamage - (int) (Math.floor(restDamage / 2.0));
         } else {
             restDamage = restDamage - CardFactoryUtil.xCount(hostCard, hostCard.getSVar(params.get("Amount")));
         }

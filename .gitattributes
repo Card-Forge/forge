@@ -2377,6 +2377,7 @@ res/cardsfolder/d/dark_offering.txt svneol=native#text/plain
 res/cardsfolder/d/dark_privilege.txt svneol=native#text/plain
 res/cardsfolder/d/dark_revenant.txt -text
 res/cardsfolder/d/dark_ritual.txt svneol=native#text/plain
+res/cardsfolder/d/dark_sphere.txt -text
 res/cardsfolder/d/dark_supplicant.txt -text svneol=unset#text/plain
 res/cardsfolder/d/dark_suspicions.txt -text svneol=unset#text/plain
 res/cardsfolder/d/dark_temper.txt svneol=native#text/plain
