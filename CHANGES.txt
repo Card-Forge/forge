@@ -75,6 +75,16 @@ Goblin Flectomancer
 Wild Ricochet
 Phyrexian Colossus
 Guile
+Adventurers' Guildhouse
+Cathedral of Serra
+Master of the Hunt
+Mountain Stronghold
+Seafarer's Quay
+Shelkin Brownie
+Tolaria
+Unholy Citadel
+Gaea's Touch
+Dark Sphere
 
 
 --------------------
