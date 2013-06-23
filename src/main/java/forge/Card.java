@@ -69,6 +69,7 @@ import forge.card.trigger.ZCTrigger;
 import forge.game.Game;
 import forge.game.GameActionUtil;
 import forge.game.GlobalRuleChange;
+import forge.game.combat.AttackingBand;
 import forge.game.event.GameEventCardDamaged;
 import forge.game.event.GameEventCardDamaged.DamageType;
 import forge.game.event.GameEventCardEquipped;
@@ -6568,6 +6569,17 @@ public class Card extends GameEntity implements Comparable<Card> {
             }
         } else if (property.startsWith("unblocked")) {
             if (!getGame().getCombat().isUnblocked(this)) {
+                return false;
+            }
+        } else if (property.equals("attackersBandedWith")) {
+            if (this.equals(source)) {
+                // You don't band with yourself
+                return false;
+            }
+            
+            Combat combat = getGame().getCombat();
+            AttackingBand band = combat.getBandByAttacker(source);
+            if (band == null || !band.getAttackers().contains(this)) {
                 return false;
             }
         } else if (property.startsWith("kicked")) {

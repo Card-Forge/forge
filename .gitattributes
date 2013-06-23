@@ -1492,6 +1492,7 @@ res/cardsfolder/c/callow_jushi_jaraku_the_interloper.txt -text
 res/cardsfolder/c/calming_licid.txt -text
 res/cardsfolder/c/calming_verse.txt svneol=native#text/plain
 res/cardsfolder/c/caltrops.txt svneol=native#text/plain
+res/cardsfolder/c/camel.txt -text
 res/cardsfolder/c/cancel.txt svneol=native#text/plain
 res/cardsfolder/c/candelabra_of_tawnos.txt svneol=native#text/plain
 res/cardsfolder/c/candles_of_leng.txt -text svneol=unset#text/plain
@@ -5255,6 +5256,7 @@ res/cardsfolder/i/icatian_moneychanger.txt svneol=native#text/plain
 res/cardsfolder/i/icatian_phalanx.txt -text
 res/cardsfolder/i/icatian_priest.txt svneol=native#text/plain
 res/cardsfolder/i/icatian_scout.txt svneol=native#text/plain
+res/cardsfolder/i/icatian_skirmishers.txt -text
 res/cardsfolder/i/icatian_store.txt svneol=native#text/plain
 res/cardsfolder/i/icatian_town.txt svneol=native#text/plain
 res/cardsfolder/i/ice_cage.txt svneol=native#text/plain
@@ -11887,6 +11889,7 @@ res/cardsfolder/u/urzas_avenger.txt -text
 res/cardsfolder/u/urzas_bauble.txt -text
 res/cardsfolder/u/urzas_blueprints.txt svneol=native#text/plain
 res/cardsfolder/u/urzas_chalice.txt svneol=native#text/plain
+res/cardsfolder/u/urzas_engine.txt -text
 res/cardsfolder/u/urzas_factory.txt svneol=native#text/plain
 res/cardsfolder/u/urzas_filter.txt -text
 res/cardsfolder/u/urzas_guilt.txt svneol=native#text/plain
