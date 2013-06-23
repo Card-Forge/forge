@@ -3270,8 +3270,10 @@ public class CardFactoryUtil {
                                 card2 = inp.getSelected().get(0);
                             }
                         }
-                        ability.setTargetCard(card2);
                         if ( null != card2 ) {
+                            ability.setTargetRestrictions(new TargetRestrictions("", "Artifact.Creature".split(" "), "1", "1"));
+                            ability.setTargetCard(card2);
+                            ability.setTrigger(true);
                             String desc = String.format("Put %d +1/+1 counter/s from %s on %s", card.getCounters(CounterType.P1P1), card, card2);
                             ability.setStackDescription(desc);
                             modularPlayer.getGame().getStack().addSimultaneousStackEntry(ability);
