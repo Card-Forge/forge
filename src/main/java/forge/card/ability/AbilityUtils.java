@@ -1,7 +1,6 @@
 package forge.card.ability;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 
@@ -14,7 +13,6 @@ import com.google.common.collect.Iterables;
 import forge.Card;
 import forge.CardLists;
 import forge.CardUtil;
-import forge.Constant;
 import forge.CounterType;
 import forge.ITargetable;
 import forge.card.cardfactory.CardFactoryUtil;
@@ -994,30 +992,6 @@ public class AbilityUtils {
 
         return sas;
     }
-
-    public static ArrayList<String> getProtectionList(final SpellAbility sa) {
-        final ArrayList<String> gains = new ArrayList<String>();
-
-        final String gainStr = sa.getParam("Gains");
-        if (gainStr.equals("Choice")) {
-            String choices = sa.getParam("Choices");
-
-            // Replace AnyColor with the 5 colors
-            if (choices.contains("AnyColor")) {
-                gains.addAll(Constant.Color.ONLY_COLORS);
-                choices = choices.replaceAll("AnyColor,?", "");
-            }
-            // Add any remaining choices
-            if (choices.length() > 0) {
-                gains.addAll(Arrays.asList(choices.split(",")));
-            }
-        } else {
-            gains.addAll(Arrays.asList(gainStr.split(",")));
-        }
-        return gains;
-    }
-
-
 
 
     /////////////////////////////////////////////////////////////////////////////////////

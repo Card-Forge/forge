@@ -10,6 +10,7 @@ import forge.CardLists;
 import forge.Constant;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityAi;
+import forge.card.ability.effects.ProtectEffect;
 import forge.card.cost.Cost;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.TargetRestrictions;
@@ -37,7 +38,7 @@ public class ProtectAi extends SpellAbilityAi {
         return card.hasKeyword(protection);
     }
 
-    private static boolean hasProtectionFromAny(final Card card, final ArrayList<String> colors) {
+    private static boolean hasProtectionFromAny(final Card card, final Iterable<String> colors) {
         boolean protect = false;
         for (final String color : colors) {
             protect |= hasProtectionFrom(card, color);
@@ -45,16 +46,14 @@ public class ProtectAi extends SpellAbilityAi {
         return protect;
     }
 
-    private static boolean hasProtectionFromAll(final Card card, final ArrayList<String> colors) {
+    private static boolean hasProtectionFromAll(final Card card, final Iterable<String> colors) {
         boolean protect = true;
-        if (colors.isEmpty()) {
-            return false;
-        }
-
+        boolean isEmpty = true;
         for (final String color : colors) {
             protect &= hasProtectionFrom(card, color);
+            isEmpty = false;
         }
-        return protect;
+        return protect && !isEmpty;
     }
 
     /**
@@ -67,7 +66,7 @@ public class ProtectAi extends SpellAbilityAi {
      * @return a {@link forge.CardList} object.
      */
     private static List<Card> getProtectCreatures(final Player ai, final SpellAbility sa) {
-        final ArrayList<String> gains = AbilityUtils.getProtectionList(sa);
+        final List<String> gains = ProtectEffect.getProtectionList(sa);
         final Game game = ai.getGame();
         final Combat combat = game.getCombat();
         
@@ -269,14 +268,14 @@ public class ProtectAi extends SpellAbilityAi {
         pref = CardLists.filter(pref, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
-                return !hasProtectionFromAll(c, AbilityUtils.getProtectionList(sa));
+                return !hasProtectionFromAll(c, ProtectEffect.getProtectionList(sa));
             }
         });
         final List<Card> pref2 = CardLists.filterControlledBy(list, ai);
         pref = CardLists.filter(pref, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
-                return !hasProtectionFromAny(c, AbilityUtils.getProtectionList(sa));
+                return !hasProtectionFromAny(c, ProtectEffect.getProtectionList(sa));
             }
         });
         final List<Card> forced = CardLists.filterControlledBy(list, ai);

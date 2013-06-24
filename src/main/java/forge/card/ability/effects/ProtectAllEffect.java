@@ -16,7 +16,7 @@ import forge.game.Game;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
-import forge.gui.GuiDialog;
+import forge.util.Lang;
 
 public class ProtectAllEffect extends SpellAbilityEffect {
 
@@ -43,10 +43,11 @@ public class ProtectAllEffect extends SpellAbilityEffect {
         final Game game = sa.getActivatingPlayer().getGame();
 
         final boolean isChoice = sa.getParam("Gains").contains("Choice");
-        final ArrayList<String> choices = AbilityUtils.getProtectionList(sa);
-        final ArrayList<String> gains = new ArrayList<String>();
+        final List<String> choices = ProtectEffect.getProtectionList(sa);
+        final List<String> gains = new ArrayList<String>();
         if (isChoice) {
-            if (sa.getActivatingPlayer().isHuman()) {
+            Player choser = sa.getActivatingPlayer();
+            if (choser.isHuman()) {
                 final String choice = GuiChoose.one("Choose a protection", choices);
                 if (null == choice) {
                     return;
@@ -56,8 +57,8 @@ public class ProtectAllEffect extends SpellAbilityEffect {
                 // TODO - needs improvement
                 final String choice = choices.get(0);
                 gains.add(choice);
-                GuiDialog.message("Computer chooses " + gains, host.toString());
             }
+            game.getAction().nofityOfValue(sa, choser, Lang.joinHomogenous(gains), choser);
         } else {
             if (sa.getParam("Gains").equals("ChosenColor")) {
                 for (final String color : host.getChosenColor()) {

@@ -1,6 +1,7 @@
 package forge.card.ability.effects;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
@@ -8,7 +9,7 @@ import forge.Card;
 import forge.CardLists;
 import forge.CardUtil;
 import forge.Command;
-import forge.card.ability.AbilityUtils;
+import forge.Constant;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.TargetRestrictions;
@@ -16,7 +17,7 @@ import forge.game.Game;
 import forge.game.ai.ComputerUtilCard;
 import forge.game.player.Player;
 import forge.gui.GuiChoose;
-import forge.gui.GuiDialog;
+import forge.util.Lang;
 
 
 public class ProtectEffect extends SpellAbilityEffect {
@@ -27,7 +28,7 @@ public class ProtectEffect extends SpellAbilityEffect {
     @Override
     protected String getStackDescription(SpellAbility sa) {
 
-        final ArrayList<String> gains = AbilityUtils.getProtectionList(sa);
+        final List<String> gains = getProtectionList(sa);
         final boolean choose = (sa.hasParam("Choices")) ? true : false;
         final String joiner = choose ? "or" : "and";
 
@@ -100,35 +101,32 @@ public class ProtectEffect extends SpellAbilityEffect {
         final Game game = sa.getActivatingPlayer().getGame();
 
         final boolean isChoice = sa.getParam("Gains").contains("Choice");
-        final ArrayList<String> choices = AbilityUtils.getProtectionList(sa);
-        final ArrayList<String> gains = new ArrayList<String>();
-        if (isChoice) {
-
-            if (sa.getActivatingPlayer().isHuman()) {
+        final List<String> choices = getProtectionList(sa);
+        final List<String> gains = new ArrayList<String>();
+        if (isChoice && !choices.isEmpty())  {
+            Player choser = sa.getActivatingPlayer();
+            
+            if (choser.isHuman()) {
                 final String choice = GuiChoose.one("Choose a protection", choices);
-                if (null == choice) {
-                    return;
-                }
                 gains.add(choice);
             } else {
-                Player ai = sa.getActivatingPlayer();
                 String choice = choices.get(0);
                 final String logic = sa.getParam("AILogic");
                 if (logic == null || logic.equals("MostProminentHumanCreatures")) {
                     List<Card> list = new ArrayList<Card>();
-                    for (Player opp : ai.getOpponents()) {
+                    for (Player opp : choser.getOpponents()) {
                         list.addAll(opp.getCreaturesInPlay());
                     }
                     if (list.isEmpty()) {
-                        list = CardLists.filterControlledBy(game.getCardsInGame(), ai.getOpponents());
+                        list = CardLists.filterControlledBy(game.getCardsInGame(), choser.getOpponents());
                     }
                     if (!list.isEmpty()) {
                         choice = ComputerUtilCard.getMostProminentColor(list);
                     }
                 }
                 gains.add(choice);
-                GuiDialog.message("Computer chooses " + gains, host.toString());
             }
+            game.getAction().nofityOfValue(sa, choser, Lang.joinHomogenous(gains), choser);
         } else {
             if (sa.getParam("Gains").equals("ChosenColor")) {
                 for (final String color : host.getChosenColor()) {
@@ -220,4 +218,29 @@ public class ProtectEffect extends SpellAbilityEffect {
             }
         }
     } // protectResolve()
+    
+
+    public static List<String> getProtectionList(final SpellAbility sa) {
+        final ArrayList<String> gains = new ArrayList<String>();
+
+        final String gainStr = sa.getParam("Gains");
+        if (gainStr.equals("Choice")) {
+            String choices = sa.getParam("Choices");
+
+            // Replace AnyColor with the 5 colors
+            if (choices.contains("AnyColor")) {
+                gains.addAll(Constant.Color.ONLY_COLORS);
+                choices = choices.replaceAll("AnyColor,?", "");
+            }
+            // Add any remaining choices
+            if (choices.length() > 0) {
+                gains.addAll(Arrays.asList(choices.split(",")));
+            }
+        } else {
+            gains.addAll(Arrays.asList(gainStr.split(",")));
+        }
+        return gains;
+    }
+
+
 }

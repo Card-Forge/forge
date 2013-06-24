@@ -680,6 +680,9 @@ public class PlayerControllerHuman extends PlayerController {
                 return sa.hasParam("NoCall") 
                         ? String.format("%s flip comes up %s", Lang.getPossesive(flipper), value) 
                         : String.format("%s %s the flip", flipper, Lang.joinVerb(flipper, value));
+            case Protection:
+                String choser = StringUtils.capitalize(mayBeYou(target, player));
+                return String.format("%s %s protection from %s", choser, Lang.joinVerb(choser, "choose"), value);
             default:
                 return String.format("%s effect's value for %s is %s", sa.getSourceCard().getName(), mayBeYou(target, player), value);
         }

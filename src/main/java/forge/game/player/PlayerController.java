@@ -158,7 +158,4 @@ public abstract class PlayerController {
     public abstract boolean chooseBinary(SpellAbility sa, String question, boolean isCoin);
     public abstract boolean chooseFilpResult(SpellAbility sa, Player flipper, boolean[] results, boolean call);
 
-
-
-
 }
